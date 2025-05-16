@@ -1,6 +1,6 @@
 from src.a01_way_logic.way import (
     create_way,
-    get_default_fisc_tag as root_tag,
+    get_default_fisc_word as root_word,
     to_way,
 )
 from src.a03_group_logic.acct import acctunit_shop
@@ -334,12 +334,12 @@ def test_BudDelta_get_sorted_budatoms_ReturnsObj():
 
 def test_BudDelta_get_sorted_budatoms_ReturnsObj_IdeaUnitsSorted():
     # ESTABLISH
-    x_fisc_tag = root_tag()
-    root_way = to_way(x_fisc_tag)
+    x_fisc_word = root_word()
+    root_way = to_way(x_fisc_word)
     sports_str = "sports"
-    sports_way = create_way(x_fisc_tag, sports_str)
+    sports_way = create_way(x_fisc_word, sports_str)
     knee_str = "knee"
-    knee_way = create_way(x_fisc_tag, knee_str)
+    knee_way = create_way(x_fisc_word, knee_str)
     x_dimen = bud_ideaunit_str()
     sports_insert_ideaunit_budatom = budatom_shop(x_dimen, atom_insert())
     sports_insert_ideaunit_budatom.set_jkey(idea_way_str(), sports_way)
@@ -367,9 +367,9 @@ def test_BudDelta_get_sorted_budatoms_ReturnsObj_IdeaUnitsSorted():
 
 def test_BudDelta_get_sorted_budatoms_ReturnsObj_Way_Sorted():
     # ESTABLISH
-    x_fisc_tag = root_tag()
+    x_fisc_word = root_word()
     sports_str = "sports"
-    sports_way = create_way(x_fisc_tag, sports_str)
+    sports_way = create_way(x_fisc_word, sports_str)
     knee_str = "knee"
     knee_way = create_way(sports_way, knee_str)
     x_dimen = bud_idea_awardlink_str()

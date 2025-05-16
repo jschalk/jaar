@@ -3,25 +3,25 @@ from src.a01_way_logic.way import (
     to_way,
     get_default_fisc_way,
     create_way,
-    create_way_from_tags,
+    create_way_from_words,
     rebuild_way,
     is_sub_way,
-    get_all_way_tags,
-    get_terminus_tag,
+    get_all_way_words,
+    get_terminus_word,
     find_replace_way_key_dict,
     get_parent_way,
-    get_root_tag_from_way,
+    get_root_word_from_way,
     get_ancestor_ways,
     get_forefather_ways,
-    get_default_fisc_tag,
+    get_default_fisc_word,
     get_default_fisc_way as root_way,
     is_heir_way,
     default_bridge_if_None,
     replace_bridge,
-    validate_tagstr,
+    validate_wordstr,
     waystr_valid_dir_path,
     all_waystrs_between,
-    is_tagstr,
+    is_wordstr,
 )
 from pytest import raises as pytest_raises
 from dataclasses import dataclass
@@ -30,46 +30,46 @@ from platform import system as platform_system
 
 def test_to_way_ReturnsObj_WithDefault_bridge():
     # ESTABLISH
-    x_tag = "run"
+    x_word = "run"
     x_bridge = default_bridge_if_None()
 
     # WHEN / THEN
-    assert to_way(x_tag) == f"{x_bridge}{x_tag}"
-    assert to_way(f"{x_bridge}{x_tag}") == f"{x_bridge}{x_tag}"
-    assert to_way(f"{x_bridge}{x_bridge}{x_tag}") == f"{x_bridge}{x_bridge}{x_tag}"
+    assert to_way(x_word) == f"{x_bridge}{x_word}"
+    assert to_way(f"{x_bridge}{x_word}") == f"{x_bridge}{x_word}"
+    assert to_way(f"{x_bridge}{x_bridge}{x_word}") == f"{x_bridge}{x_bridge}{x_word}"
     assert to_way(x_bridge) == x_bridge
     assert to_way(None) == x_bridge
 
 
 def test_to_way_ReturnsObj_WithParameter_bridge():
     # ESTABLISH
-    x_tag = "run"
+    x_word = "run"
     slash_bridge = "/"
 
     # WHEN / THEN
-    assert to_way(x_tag, slash_bridge) == f"{slash_bridge}{x_tag}"
-    assert to_way(f"{slash_bridge}{x_tag}", slash_bridge) == f"{slash_bridge}{x_tag}"
+    assert to_way(x_word, slash_bridge) == f"{slash_bridge}{x_word}"
+    assert to_way(f"{slash_bridge}{x_word}", slash_bridge) == f"{slash_bridge}{x_word}"
     assert (
-        to_way(f"{slash_bridge}{slash_bridge}{x_tag}", slash_bridge)
-        == f"{slash_bridge}{slash_bridge}{x_tag}"
+        to_way(f"{slash_bridge}{slash_bridge}{x_word}", slash_bridge)
+        == f"{slash_bridge}{slash_bridge}{x_word}"
     )
     assert to_way(slash_bridge, slash_bridge) == slash_bridge
     assert to_way(None, slash_bridge) == slash_bridge
 
 
-def test_get_default_fisc_tag_ReturnsObj():
-    assert get_default_fisc_tag() == "ZZ"
+def test_get_default_fisc_word_ReturnsObj():
+    assert get_default_fisc_word() == "ZZ"
 
 
 def test_get_default_fisc_way_ReturnsObj():
     # ESTABLISH
     default_bridge = default_bridge_if_None()
-    default_root_tag = get_default_fisc_tag()
+    default_root_word = get_default_fisc_word()
     slash_bridge = "/"
 
     # WHEN / THEN
-    assert get_default_fisc_way() == to_way(default_root_tag)
-    assert get_default_fisc_way(slash_bridge) == to_way(default_root_tag, slash_bridge)
+    assert get_default_fisc_way() == to_way(default_root_word)
+    assert get_default_fisc_way(slash_bridge) == to_way(default_root_word, slash_bridge)
 
 
 def test_create_way_Scenario0_RaisesErrorIfBridgeNotAtPostionZeroOf_parent_way():
@@ -113,12 +113,12 @@ def test_create_way_ReturnsObj_Scenario4():
     rose_str = "rose"
     slash_bridge = "/"
     slash_bridge_rose_way = (
-        f"{slash_bridge}{get_default_fisc_tag()}{slash_bridge}{rose_str}"
+        f"{slash_bridge}{get_default_fisc_word()}{slash_bridge}{rose_str}"
     )
 
     # WHEN
     generated_rose_way = create_way(
-        get_default_fisc_tag(), rose_str, bridge=slash_bridge
+        get_default_fisc_word(), rose_str, bridge=slash_bridge
     )
     # THEN
     assert generated_rose_way == slash_bridge_rose_way
@@ -135,8 +135,8 @@ def test_way_create_way_ReturnsObj_Scenario5():
     roses_way = f"{root_way()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
 
     # WHEN / THEN
-    assert create_way(None, get_default_fisc_tag()) == root_way()
-    assert create_way("", get_default_fisc_tag()) == root_way()
+    assert create_way(None, get_default_fisc_word()) == root_way()
+    assert create_way("", get_default_fisc_word()) == root_way()
     assert create_way(root_way(), casa_str) == casa_way
     assert create_way(casa_way, bloomers_str) == bloomers_way
     assert create_way(bloomers_way, roses_str) == roses_way
@@ -180,7 +180,7 @@ def test_way_rebuild_way_ReturnsCorrectWayStr():
     assert rebuild_way(old_roses_way, "random_str", greenery_way) == old_roses_way
 
 
-def test_way_get_all_way_tags_ReturnsTagStrs():
+def test_way_get_all_way_words_ReturnsWordStrs():
     # ESTABLISH
     x_s = default_bridge_if_None()
     casa_str = "casa"
@@ -191,17 +191,17 @@ def test_way_get_all_way_tags_ReturnsTagStrs():
     roses_way = f"{root_way()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
 
     # WHEN / THENs
-    root_list = [get_default_fisc_tag()]
-    assert get_all_way_tags(way=root_way()) == root_list
-    casa_list = [get_default_fisc_tag(), casa_str]
-    assert get_all_way_tags(way=casa_way) == casa_list
-    bloomers_list = [get_default_fisc_tag(), casa_str, bloomers_str]
-    assert get_all_way_tags(way=bloomers_way) == bloomers_list
-    roses_list = [get_default_fisc_tag(), casa_str, bloomers_str, roses_str]
-    assert get_all_way_tags(way=roses_way) == roses_list
+    root_list = [get_default_fisc_word()]
+    assert get_all_way_words(way=root_way()) == root_list
+    casa_list = [get_default_fisc_word(), casa_str]
+    assert get_all_way_words(way=casa_way) == casa_list
+    bloomers_list = [get_default_fisc_word(), casa_str, bloomers_str]
+    assert get_all_way_words(way=bloomers_way) == bloomers_list
+    roses_list = [get_default_fisc_word(), casa_str, bloomers_str, roses_str]
+    assert get_all_way_words(way=roses_way) == roses_list
 
 
-def test_way_get_terminus_tag_ReturnsTagStr():
+def test_way_get_terminus_word_ReturnsWordStr():
     # ESTABLISH
     x_s = default_bridge_if_None()
     casa_str = "casa"
@@ -212,29 +212,29 @@ def test_way_get_terminus_tag_ReturnsTagStr():
     roses_way = f"{bloomers_way}{x_s}{roses_str}"
 
     # WHEN / THENs
-    assert get_terminus_tag(way=root_way()) == get_default_fisc_tag()
-    assert get_terminus_tag(way=casa_way) == casa_str
-    assert get_terminus_tag(way=bloomers_way) == bloomers_str
-    assert get_terminus_tag(way=roses_way) == roses_str
+    assert get_terminus_word(way=root_way()) == get_default_fisc_word()
+    assert get_terminus_word(way=casa_way) == casa_str
+    assert get_terminus_word(way=bloomers_way) == bloomers_str
+    assert get_terminus_word(way=roses_way) == roses_str
 
 
-def test_way_get_terminus_tag_ReturnsTagStrWhenNonDefaultbridge():
+def test_way_get_terminus_word_ReturnsWordStrWhenNonDefaultbridge():
     # ESTABLISH
     casa_str = "casa"
     bloomers_str = "bloomers"
     roses_str = "roses"
     slash_str = "/"
-    slash_casa_way = f"{slash_str}{get_default_fisc_tag()}{slash_str}{casa_str}"
+    slash_casa_way = f"{slash_str}{get_default_fisc_word()}{slash_str}{casa_str}"
     slash_bloomers_way = f"{slash_str}{slash_casa_way}{slash_str}{bloomers_str}"
     slash_roses_way = f"{slash_str}{slash_bloomers_way}{slash_str}{roses_str}"
 
     # WHEN / THENs
-    assert get_terminus_tag(slash_casa_way, slash_str) == casa_str
-    assert get_terminus_tag(slash_bloomers_way, slash_str) == bloomers_str
-    assert get_terminus_tag(slash_roses_way, slash_str) == roses_str
+    assert get_terminus_word(slash_casa_way, slash_str) == casa_str
+    assert get_terminus_word(slash_bloomers_way, slash_str) == bloomers_str
+    assert get_terminus_word(slash_roses_way, slash_str) == roses_str
 
 
-def test_way_get_root_tag_from_way_ReturnsTagStr():
+def test_way_get_root_word_from_way_ReturnsWordStr():
     # ESTABLISH
     casa_str = "casa"
     casa_way = create_way(root_way(), casa_str)
@@ -244,16 +244,16 @@ def test_way_get_root_tag_from_way_ReturnsTagStr():
     roses_way = create_way(casa_str, roses_str)
 
     # WHEN / THENs
-    assert get_root_tag_from_way(root_way()) == get_default_fisc_tag()
-    assert get_root_tag_from_way(casa_way) == get_default_fisc_tag()
-    assert get_root_tag_from_way(bloomers_way) == get_default_fisc_tag()
-    assert get_root_tag_from_way(roses_way) == casa_str
+    assert get_root_word_from_way(root_way()) == get_default_fisc_word()
+    assert get_root_word_from_way(casa_way) == get_default_fisc_word()
+    assert get_root_word_from_way(bloomers_way) == get_default_fisc_word()
+    assert get_root_word_from_way(roses_way) == casa_str
 
 
 def test_way_get_parent_way_ReturnsObj_Scenario0():
     # ESTABLISH
     x_s = default_bridge_if_None()
-    root_fisc_way = f"{x_s}{get_default_fisc_tag()}"
+    root_fisc_way = f"{x_s}{get_default_fisc_word()}"
     casa_str = "casa"
     casa_way = f"{root_fisc_way}{x_s}{casa_str}"
     bloomers_str = "bloomers"
@@ -271,7 +271,7 @@ def test_way_get_parent_way_ReturnsObj_Scenario0():
 def test_way_get_parent_way_ReturnsObj_Scenario1():
     # ESTABLISH
     x_s = "/"
-    root_fisc_way = f"{x_s}{get_default_fisc_tag()}"
+    root_fisc_way = f"{x_s}{get_default_fisc_word()}"
     casa_str = "casa"
     casa_way = f"{root_fisc_way}{x_s}{casa_str}"
     bloomers_str = "bloomers"
@@ -400,41 +400,41 @@ def test_way_get_forefather_ways_ReturnsAncestorWayStrsWithoutClean():
     assert x_ways == texas_forefather_ways
 
 
-def test_way_get_default_fisc_tag_ReturnsObj():
-    assert get_default_fisc_tag() == "ZZ"
+def test_way_get_default_fisc_word_ReturnsObj():
+    assert get_default_fisc_word() == "ZZ"
 
 
-def test_way_create_way_from_tags_ReturnsObj():
+def test_way_create_way_from_words_ReturnsObj():
     # ESTABLISH
     x_s = default_bridge_if_None()
-    root_list = get_all_way_tags(root_way())
+    root_list = get_all_way_words(root_way())
     casa_str = "casa"
     casa_way = f"{root_way()}{x_s}{casa_str}"
-    casa_list = get_all_way_tags(casa_way)
+    casa_list = get_all_way_words(casa_way)
     bloomers_str = "bloomers"
     bloomers_way = f"{root_way()}{x_s}{casa_str}{x_s}{bloomers_str}"
-    bloomers_list = get_all_way_tags(bloomers_way)
+    bloomers_list = get_all_way_words(bloomers_way)
     roses_str = "roses"
     roses_way = f"{root_way()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
-    roses_list = get_all_way_tags(roses_way)
+    roses_list = get_all_way_words(roses_way)
 
     # WHEN / THEN
-    assert root_way() == create_way_from_tags(root_list)
-    assert casa_way == create_way_from_tags(casa_list)
-    assert bloomers_way == create_way_from_tags(bloomers_list)
-    assert roses_way == create_way_from_tags(roses_list)
+    assert root_way() == create_way_from_words(root_list)
+    assert casa_way == create_way_from_words(casa_list)
+    assert bloomers_way == create_way_from_words(bloomers_list)
+    assert roses_way == create_way_from_words(roses_list)
 
 
-def test_is_tagstr_ReturnsObj():
+def test_is_wordstr_ReturnsObj():
     # ESTABLISH
     x_s = default_bridge_if_None()
 
     # WHEN / THEN
-    assert is_tagstr("", x_bridge=x_s) is False
-    assert is_tagstr("casa", x_bridge=x_s)
-    assert not is_tagstr(f"ZZ{x_s}casa", x_s)
-    assert not is_tagstr(WayStr(f"ZZ{x_s}casa"), x_s)
-    assert is_tagstr(WayStr("ZZ"), x_s)
+    assert is_wordstr("", x_bridge=x_s) is False
+    assert is_wordstr("casa", x_bridge=x_s)
+    assert not is_wordstr(f"ZZ{x_s}casa", x_s)
+    assert not is_wordstr(WayStr(f"ZZ{x_s}casa"), x_s)
+    assert is_wordstr(WayStr("ZZ"), x_s)
 
 
 def test_is_heir_way_CorrectlyIdentifiesHeirs():
@@ -461,11 +461,11 @@ def test_is_heir_way_CorrectlyIdentifiesHeirs():
 def test_replace_bridge_ReturnsNewObj():
     # ESTABLISH
     casa_str = "casa"
-    root_tag = get_default_fisc_tag()
-    gen_casa_way = create_way(root_tag, casa_str)
+    root_word = get_default_fisc_word()
+    gen_casa_way = create_way(root_word, casa_str)
     semicolon_bridge = default_bridge_if_None()
     semicolon_bridge_casa_way = (
-        f"{semicolon_bridge}{root_tag}{semicolon_bridge}{casa_str}"
+        f"{semicolon_bridge}{root_word}{semicolon_bridge}{casa_str}"
     )
     assert semicolon_bridge == ";"
     assert gen_casa_way == semicolon_bridge_casa_way
@@ -477,7 +477,7 @@ def test_replace_bridge_ReturnsNewObj():
     )
 
     # THEN
-    slash_bridge_casa_way = f"{slash_bridge}{root_tag}{slash_bridge}{casa_str}"
+    slash_bridge_casa_way = f"{slash_bridge}{root_word}{slash_bridge}{casa_str}"
     assert gen_casa_way == slash_bridge_casa_way
 
 
@@ -526,39 +526,39 @@ def test_replace_bridge_WhenNewbridgeIsFirstInWayStrRaisesError():
     )
 
 
-def test_validate_tagstr_RaisesErrorWhenNotTagStr():
+def test_validate_wordstr_RaisesErrorWhenNotWordStr():
     # ESTABLISH
     bob_str = "Bob, Tom"
     slash_str = "/"
-    assert bob_str == validate_tagstr(bob_str, x_bridge=slash_str)
+    assert bob_str == validate_wordstr(bob_str, x_bridge=slash_str)
 
     # WHEN
     comma_str = ","
     with pytest_raises(Exception) as excinfo:
-        bob_str == validate_tagstr(bob_str, x_bridge=comma_str)
+        bob_str == validate_wordstr(bob_str, x_bridge=comma_str)
     assert (
         str(excinfo.value)
-        == f"'{bob_str}' needs to be a TagStr. Cannot contain bridge: '{comma_str}'"
+        == f"'{bob_str}' needs to be a WordStr. Cannot contain bridge: '{comma_str}'"
     )
 
 
-def test_validate_tagstr_RaisesErrorWhenTagStr():
+def test_validate_wordstr_RaisesErrorWhenWordStr():
     # ESTABLISH
     slash_str = "/"
     bob_str = f"Bob{slash_str}Tom"
-    assert bob_str == validate_tagstr(
-        bob_str, x_bridge=slash_str, not_tagstr_required=True
+    assert bob_str == validate_wordstr(
+        bob_str, x_bridge=slash_str, not_wordstr_required=True
     )
 
     # WHEN
     comma_str = ","
     with pytest_raises(Exception) as excinfo:
-        bob_str == validate_tagstr(
-            bob_str, x_bridge=comma_str, not_tagstr_required=True
+        bob_str == validate_wordstr(
+            bob_str, x_bridge=comma_str, not_wordstr_required=True
         )
     assert (
         str(excinfo.value)
-        == f"'{bob_str}' needs to not be a TagStr. Must contain bridge: '{comma_str}'"
+        == f"'{bob_str}' needs to not be a WordStr. Must contain bridge: '{comma_str}'"
     )
 
 

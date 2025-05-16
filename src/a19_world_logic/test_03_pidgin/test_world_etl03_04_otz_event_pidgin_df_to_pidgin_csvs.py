@@ -5,7 +5,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_bridge_str,
     inx_way_str,
     otx_way_str,
-    unknown_word_str,
+    unknown_term_str,
 )
 from src.a17_creed_logic.creed_db_tool import sheet_exists, upsert_sheet, open_csv
 from src.a18_etl_toolbox.tran_path import (
@@ -42,7 +42,7 @@ def test_WorldUnit_otz_event_pidgins_to_otz_pidgin_csv_files_Scenario0_3Event_wa
         inx_way_str(),
         otx_bridge_str(),
         inx_bridge_str(),
-        unknown_word_str(),
+        unknown_term_str(),
     ]
     x_nan = float("nan")
     e3_way0 = [event3, bob_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]

@@ -4,24 +4,24 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_dict_from_json,
 )
 from src.a01_way_logic.way import default_bridge_if_None, OwnerName, EventInt
-from src.a16_pidgin_logic.pidgin_config import default_unknown_word_if_None
+from src.a16_pidgin_logic.pidgin_config import default_unknown_term_if_None
 from src.a16_pidgin_logic.map import (
     MapCore,
     LabelMap,
     NameMap,
-    TagMap,
+    WordMap,
     WayMap,
     labelmap_shop,
     namemap_shop,
-    tagmap_shop,
+    wordmap_shop,
     waymap_shop,
     get_namemap_from_dict,
     get_labelmap_from_dict,
-    get_tagmap_from_dict,
+    get_wordmap_from_dict,
     get_waymap_from_dict,
     inherit_namemap,
     inherit_labelmap,
-    inherit_tagmap,
+    inherit_wordmap,
     inherit_waymap,
 )
 from dataclasses import dataclass
@@ -43,9 +43,9 @@ class PidginUnit:
     face_name: OwnerName = None
     labelmap: LabelMap = None
     namemap: NameMap = None
-    tagmap: TagMap = None
+    wordmap: WordMap = None
     waymap: WayMap = None
-    unknown_word: str = None  # pidginunit heart
+    unknown_term: str = None  # pidginunit heart
     otx_bridge: str = None  # pidginunit heart
     inx_bridge: str = None  # pidginunit heart
 
@@ -73,8 +73,8 @@ class PidginUnit:
             return self.namemap
         elif x_class_type == "LabelStr":
             return self.labelmap
-        elif x_class_type == "TagStr":
-            return self.tagmap
+        elif x_class_type == "WordStr":
+            return self.wordmap
         elif x_class_type == "WayStr":
             return self.waymap
 
@@ -97,24 +97,24 @@ class PidginUnit:
     def del_namestr(self, otx_name: str):
         return self.namemap.del_otx2inx(otx_name)
 
-    def set_tagmap(self, x_tagmap: TagMap):
-        self._check_all_core_attrs_match(x_tagmap)
-        self.tagmap = x_tagmap
+    def set_wordmap(self, x_wordmap: WordMap):
+        self._check_all_core_attrs_match(x_wordmap)
+        self.wordmap = x_wordmap
 
-    def get_tagmap(self) -> TagMap:
-        return self.tagmap
+    def get_wordmap(self) -> WordMap:
+        return self.wordmap
 
-    def set_tag(self, otx_tag: str, inx_tag: str):
-        self.tagmap.set_otx2inx(otx_tag, inx_tag)
+    def set_word(self, otx_word: str, inx_word: str):
+        self.wordmap.set_otx2inx(otx_word, inx_word)
 
-    def tag_exists(self, otx_tag: str, inx_tag: str):
-        return self.tagmap.otx2inx_exists(otx_tag, inx_tag)
+    def word_exists(self, otx_word: str, inx_word: str):
+        return self.wordmap.otx2inx_exists(otx_word, inx_word)
 
-    def _get_inx_tag(self, otx_tag: str):
-        return self.tagmap._get_inx_value(otx_tag)
+    def _get_inx_word(self, otx_word: str):
+        return self.wordmap._get_inx_value(otx_word)
 
-    def del_tag(self, otx_tag: str):
-        return self.tagmap.del_otx2inx(otx_tag)
+    def del_word(self, otx_word: str):
+        return self.wordmap.del_otx2inx(otx_word)
 
     def set_waymap(self, x_waymap: WayMap):
         self._check_all_core_attrs_match(x_waymap)
@@ -139,7 +139,7 @@ class PidginUnit:
         self._check_attr_match("face_name", x_mapcore)
         self._check_attr_match("otx_bridge", x_mapcore)
         self._check_attr_match("inx_bridge", x_mapcore)
-        self._check_attr_match("unknown_word", x_mapcore)
+        self._check_attr_match("unknown_term", x_mapcore)
 
     def _check_attr_match(self, attr: str, mapcore):
         self_attr = getattr(self, attr)
@@ -152,70 +152,70 @@ class PidginUnit:
         return (
             self.namemap.is_valid()
             and self.labelmap.is_valid()
-            and self.tagmap.is_valid()
+            and self.wordmap.is_valid()
             and self.waymap.is_valid()
         )
 
     def set_otx2inx(self, x_class_type: str, x_otx: str, x_inx: str):
-        """class_type: NameStr, LabelStr, TagStr, WayStr"""
+        """class_type: NameStr, LabelStr, WordStr, WayStr"""
         if x_class_type == "NameStr":
             self.namemap.set_otx2inx(x_otx, x_inx)
         elif x_class_type == "LabelStr":
             self.labelmap.set_otx2inx(x_otx, x_inx)
-        elif x_class_type == "TagStr":
-            self.tagmap.set_otx2inx(x_otx, x_inx)
+        elif x_class_type == "WordStr":
+            self.wordmap.set_otx2inx(x_otx, x_inx)
         elif x_class_type == "WayStr":
             self.waymap.set_otx2inx(x_otx, x_inx)
 
     def _get_inx_value(self, x_class_type: str, x_otx: str) -> str:
-        """class_type: NameStr, LabelStr, TagStr, WayStr"""
+        """class_type: NameStr, LabelStr, WordStr, WayStr"""
         if x_class_type == "NameStr":
             return self.namemap._get_inx_value(x_otx)
         elif x_class_type == "LabelStr":
             return self.labelmap._get_inx_value(x_otx)
-        elif x_class_type == "TagStr":
-            return self.tagmap._get_inx_value(x_otx)
+        elif x_class_type == "WordStr":
+            return self.wordmap._get_inx_value(x_otx)
         elif x_class_type == "WayStr":
             return self.waymap._get_inx_value(x_otx)
 
     def otx2inx_exists(self, x_class_type: str, x_otx: str, x_inx: str) -> bool:
-        """class_type: NameStr, LabelStr, TagStr, WayStr"""
+        """class_type: NameStr, LabelStr, WordStr, WayStr"""
         if x_class_type == "NameStr":
             return self.namemap.otx2inx_exists(x_otx, x_inx)
         elif x_class_type == "LabelStr":
             return self.labelmap.otx2inx_exists(x_otx, x_inx)
-        elif x_class_type == "TagStr":
-            return self.tagmap.otx2inx_exists(x_otx, x_inx)
+        elif x_class_type == "WordStr":
+            return self.wordmap.otx2inx_exists(x_otx, x_inx)
         elif x_class_type == "WayStr":
             return self.waymap.otx2inx_exists(x_otx, x_inx)
 
     def del_otx2inx(self, x_class_type: str, x_otx: str):
-        """class_type: NameStr, LabelStr, TagStr, WayStr"""
+        """class_type: NameStr, LabelStr, WordStr, WayStr"""
         if x_class_type == "NameStr":
             self.namemap.del_otx2inx(x_otx)
         elif x_class_type == "LabelStr":
             self.labelmap.del_otx2inx(x_otx)
-        elif x_class_type == "TagStr":
-            self.tagmap.del_otx2inx(x_otx)
+        elif x_class_type == "WordStr":
+            self.wordmap.del_otx2inx(x_otx)
         elif x_class_type == "WayStr":
             self.waymap.del_otx2inx(x_otx)
 
-    def set_tag(self, x_otx: str, x_inx: str):
-        self.waymap.set_tag(x_otx, x_inx)
+    def set_word(self, x_otx: str, x_inx: str):
+        self.waymap.set_word(x_otx, x_inx)
 
-    def _get_inx_tag(self, x_otx: str) -> str:
-        return self.waymap._get_inx_tag(x_otx)
+    def _get_inx_word(self, x_otx: str) -> str:
+        return self.waymap._get_inx_word(x_otx)
 
-    def tag_exists(self, x_otx: str, x_inx: str) -> bool:
-        return self.waymap.tag_exists(x_otx, x_inx)
+    def word_exists(self, x_otx: str, x_inx: str) -> bool:
+        return self.waymap.word_exists(x_otx, x_inx)
 
-    def del_tag(self, x_otx: str):
-        self.waymap.del_tag(x_otx)
+    def del_word(self, x_otx: str):
+        self.waymap.del_word(x_otx)
 
     def get_dict(self) -> dict:
         x_namemap = _get_rid_of_pidgin_core_keys(self.namemap.get_dict())
         x_labelmap = _get_rid_of_pidgin_core_keys(self.labelmap.get_dict())
-        x_tagmap = _get_rid_of_pidgin_core_keys(self.tagmap.get_dict())
+        x_wordmap = _get_rid_of_pidgin_core_keys(self.wordmap.get_dict())
         x_waymap = _get_rid_of_pidgin_core_keys(self.waymap.get_dict())
 
         return {
@@ -223,9 +223,9 @@ class PidginUnit:
             "event_int": self.event_int,
             "otx_bridge": self.otx_bridge,
             "inx_bridge": self.inx_bridge,
-            "unknown_word": self.unknown_word,
+            "unknown_term": self.unknown_term,
             "namemap": x_namemap,
-            "tagmap": x_tagmap,
+            "wordmap": x_wordmap,
             "labelmap": x_labelmap,
             "waymap": x_waymap,
         }
@@ -239,9 +239,9 @@ def pidginunit_shop(
     event_int: EventInt = None,
     otx_bridge: str = None,
     inx_bridge: str = None,
-    unknown_word: str = None,
+    unknown_term: str = None,
 ) -> PidginUnit:
-    unknown_word = default_unknown_word_if_None(unknown_word)
+    unknown_term = default_unknown_term_if_None(unknown_term)
     otx_bridge = default_bridge_if_None(otx_bridge)
     inx_bridge = default_bridge_if_None(inx_bridge)
 
@@ -250,40 +250,40 @@ def pidginunit_shop(
         event_int=event_int,
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
-        unknown_word=unknown_word,
+        unknown_term=unknown_term,
     )
     x_labelmap = labelmap_shop(
         face_name=face_name,
         event_int=event_int,
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
-        unknown_word=unknown_word,
+        unknown_term=unknown_term,
     )
-    x_tagmap = tagmap_shop(
+    x_wordmap = wordmap_shop(
         face_name=face_name,
         event_int=event_int,
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
-        unknown_word=unknown_word,
+        unknown_term=unknown_term,
     )
     x_waymap = waymap_shop(
         face_name=face_name,
         event_int=event_int,
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
-        unknown_word=unknown_word,
-        x_tagmap=x_tagmap,
+        unknown_term=unknown_term,
+        x_wordmap=x_wordmap,
     )
 
     return PidginUnit(
         face_name=face_name,
         event_int=get_0_if_None(event_int),
-        unknown_word=unknown_word,
+        unknown_term=unknown_term,
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
         namemap=x_namemap,
         labelmap=x_labelmap,
-        tagmap=x_tagmap,
+        wordmap=x_wordmap,
         waymap=x_waymap,
     )
 
@@ -293,10 +293,10 @@ def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
     x_face_name = x_dict.get("face_name")
     x_otx_bridge = x_dict.get("otx_bridge")
     x_inx_bridge = x_dict.get("inx_bridge")
-    x_unknown_word = x_dict.get("unknown_word")
+    x_unknown_term = x_dict.get("unknown_term")
     namemap_dict = x_dict.get("namemap")
     labelmap_dict = x_dict.get("labelmap")
-    tagmap_dict = x_dict.get("tagmap")
+    wordmap_dict = x_dict.get("wordmap")
     waymap_dict = x_dict.get("waymap")
     namemap_dict = _add_pidgin_core_keys(
         namemap_dict,
@@ -304,7 +304,7 @@ def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
         x_face_name,
         x_otx_bridge,
         x_inx_bridge,
-        x_unknown_word,
+        x_unknown_term,
     )
     labelmap_dict = _add_pidgin_core_keys(
         labelmap_dict,
@@ -312,15 +312,15 @@ def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
         x_face_name,
         x_otx_bridge,
         x_inx_bridge,
-        x_unknown_word,
+        x_unknown_term,
     )
-    tagmap_dict = _add_pidgin_core_keys(
-        tagmap_dict,
+    wordmap_dict = _add_pidgin_core_keys(
+        wordmap_dict,
         x_event_int,
         x_face_name,
         x_otx_bridge,
         x_inx_bridge,
-        x_unknown_word,
+        x_unknown_term,
     )
     waymap_dict = _add_pidgin_core_keys(
         waymap_dict,
@@ -328,22 +328,22 @@ def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
         x_face_name,
         x_otx_bridge,
         x_inx_bridge,
-        x_unknown_word,
+        x_unknown_term,
     )
     x_namemap = get_namemap_from_dict(namemap_dict)
     x_labelmap = get_labelmap_from_dict(labelmap_dict)
-    x_tagmap = get_tagmap_from_dict(tagmap_dict)
+    x_wordmap = get_wordmap_from_dict(wordmap_dict)
     x_waymap = get_waymap_from_dict(waymap_dict)
-    x_waymap.tagmap = x_tagmap
+    x_waymap.wordmap = x_wordmap
     return PidginUnit(
         face_name=x_face_name,
         event_int=x_event_int,
         otx_bridge=x_otx_bridge,
         inx_bridge=x_inx_bridge,
-        unknown_word=x_unknown_word,
+        unknown_term=x_unknown_term,
         namemap=x_namemap,
         labelmap=x_labelmap,
-        tagmap=x_tagmap,
+        wordmap=x_wordmap,
         waymap=x_waymap,
     )
 
@@ -357,7 +357,7 @@ def _get_rid_of_pidgin_core_keys(map_dict: dict) -> dict:
     map_dict.pop("face_name")
     map_dict.pop("otx_bridge")
     map_dict.pop("inx_bridge")
-    map_dict.pop("unknown_word")
+    map_dict.pop("unknown_term")
     return map_dict
 
 
@@ -367,13 +367,13 @@ def _add_pidgin_core_keys(
     face_name: str,
     otx_bridge: str,
     inx_bridge: str,
-    unknown_word: str,
+    unknown_term: str,
 ) -> dict:
     map_dict["event_int"] = event_int
     map_dict["face_name"] = face_name
     map_dict["otx_bridge"] = otx_bridge
     map_dict["inx_bridge"] = inx_bridge
-    map_dict["unknown_word"] = unknown_word
+    map_dict["unknown_term"] = unknown_term
     return map_dict
 
 
@@ -386,14 +386,14 @@ def inherit_pidginunit(older: PidginUnit, newer: PidginUnit) -> PidginUnit:
         older.face_name != newer.face_name
         or older.otx_bridge != newer.otx_bridge
         or older.inx_bridge != newer.inx_bridge
-        or older.unknown_word != newer.unknown_word
+        or older.unknown_term != newer.unknown_term
     ):
         raise PidginCoreAttrConflictException("Core attributes in conflict")
     if older.event_int >= newer.event_int:
         raise PidginCoreAttrConflictException("older pidginunit is not older")
     newer.set_namemap(inherit_namemap(newer.namemap, older.namemap))
     newer.set_labelmap(inherit_labelmap(newer.labelmap, older.labelmap))
-    newer.set_tagmap(inherit_tagmap(newer.tagmap, older.tagmap))
+    newer.set_wordmap(inherit_wordmap(newer.wordmap, older.wordmap))
     newer.set_waymap(inherit_waymap(newer.waymap, older.waymap))
 
     return newer

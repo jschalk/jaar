@@ -37,11 +37,11 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     pidgin_label_str,
     pidgin_name_str,
     pidgin_way_str,
-    pidgin_tag_str,
+    pidgin_word_str,
     pidgin_core_str,
     otx_bridge_str,
     inx_bridge_str,
-    unknown_word_str,
+    unknown_term_str,
 )
 from src.a17_creed_logic._utils.str_a17 import creed_category_str, creed_number_str
 from src.a17_creed_logic.creed_config import (
@@ -134,7 +134,7 @@ def test_create_prime_tablename_ReturnsObj():
     fisweek_dimen = fisc_timeline_weekday_str()
     fisoffi_dimen = fisc_timeoffi_str()
     pidname_dimen = pidgin_name_str()
-    pidtagg_dimen = pidgin_tag_str()
+    pidword_dimen = pidgin_word_str()
     pidwayy_dimen = pidgin_way_str()
     pidlabe_dimen = pidgin_label_str()
     raw_str = "raw"
@@ -162,7 +162,7 @@ def test_create_prime_tablename_ReturnsObj():
     assert prime_tbl("fisweek", "s", agg_str) == f"{fisweek_dimen}_s_agg"
     assert prime_tbl("fisoffi", "s", agg_str) == f"{fisoffi_dimen}_s_agg"
     assert prime_tbl("pidname", "s", agg_str) == f"{pidname_dimen}_s_agg"
-    assert prime_tbl("pidtagg", "s", agg_str) == f"{pidtagg_dimen}_s_agg"
+    assert prime_tbl("pidword", "s", agg_str) == f"{pidword_dimen}_s_agg"
     assert prime_tbl("pidwayy", "s", agg_str) == f"{pidwayy_dimen}_s_agg"
     assert prime_tbl("pidlabe", "s", agg_str) == f"{pidlabe_dimen}_s_agg"
     assert prime_tbl("pidlabe", "v", agg_str) == f"{pidlabe_dimen}_v_agg"
@@ -183,7 +183,7 @@ def get_all_dimen_columns_set(x_dimen: str) -> set[str]:
             face_name_str(),
             otx_bridge_str(),
             inx_bridge_str(),
-            unknown_word_str(),
+            unknown_term_str(),
         }
     x_config = get_creed_config_dict().get(x_dimen)
     columns = set(x_config.get("jkeys").keys())
@@ -228,7 +228,7 @@ def create_pf_sound_vld_table_sqlstr(x_dimen):
     columns = get_all_dimen_columns_set(x_dimen)
     columns.remove(otx_bridge_str())
     columns.remove(inx_bridge_str())
-    columns.remove(unknown_word_str())
+    columns.remove(unknown_term_str())
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
 
@@ -607,7 +607,7 @@ GROUP BY event_int, face_name, otx_label
 HAVING MIN(inx_label) != MAX(inx_label)
     OR MIN(otx_bridge) != MAX(otx_bridge)
     OR MIN(inx_bridge) != MAX(inx_bridge)
-    OR MIN(unknown_word) != MAX(unknown_word)
+    OR MIN(unknown_term) != MAX(unknown_term)
 )
 UPDATE pidgin_label_s_raw
 SET error_message = 'Inconsistent data'
@@ -646,15 +646,15 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
         assert update_sqlstr == expected_update_sqlstr
 
         static_example_sqlstr = """WITH inconsistency_rows AS (
-SELECT fisc_tag, cumlative_minute
+SELECT fisc_word, cumlative_minute
 FROM fisc_timeline_hour_s_raw
-GROUP BY fisc_tag, cumlative_minute
-HAVING MIN(hour_tag) != MAX(hour_tag)
+GROUP BY fisc_word, cumlative_minute
+HAVING MIN(hour_word) != MAX(hour_word)
 )
 UPDATE fisc_timeline_hour_s_raw
 SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
-WHERE inconsistency_rows.fisc_tag = fisc_timeline_hour_s_raw.fisc_tag
+WHERE inconsistency_rows.fisc_word = fisc_timeline_hour_s_raw.fisc_word
     AND inconsistency_rows.cumlative_minute = fisc_timeline_hour_s_raw.cumlative_minute
 ;
 """
@@ -687,9 +687,9 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
         assert update_sqlstr == expected_update_sqlstr
 
         static_example_sqlstr = """WITH inconsistency_rows AS (
-SELECT event_int, face_name, fisc_tag, owner_name, idea_way, awardee_label
+SELECT event_int, face_name, fisc_word, owner_name, idea_way, awardee_label
 FROM bud_idea_awardlink_s_put_raw
-GROUP BY event_int, face_name, fisc_tag, owner_name, idea_way, awardee_label
+GROUP BY event_int, face_name, fisc_word, owner_name, idea_way, awardee_label
 HAVING MIN(give_force) != MAX(give_force)
     OR MIN(take_force) != MAX(take_force)
 )
@@ -698,7 +698,7 @@ SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.event_int = bud_idea_awardlink_s_put_raw.event_int
     AND inconsistency_rows.face_name = bud_idea_awardlink_s_put_raw.face_name
-    AND inconsistency_rows.fisc_tag = bud_idea_awardlink_s_put_raw.fisc_tag
+    AND inconsistency_rows.fisc_word = bud_idea_awardlink_s_put_raw.fisc_word
     AND inconsistency_rows.owner_name = bud_idea_awardlink_s_put_raw.owner_name
     AND inconsistency_rows.idea_way = bud_idea_awardlink_s_put_raw.idea_way
     AND inconsistency_rows.awardee_label = bud_idea_awardlink_s_put_raw.awardee_label
@@ -735,8 +735,8 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario0_PidginDimen():
         # print(expected_insert_sqlstr)
         assert update_sqlstrs[0] == expected_insert_sqlstr
 
-        static_example_sqlstr = """INSERT INTO pidgin_label_s_agg (event_int, face_name, otx_label, inx_label, otx_bridge, inx_bridge, unknown_word)
-SELECT event_int, face_name, otx_label, MAX(inx_label), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
+        static_example_sqlstr = """INSERT INTO pidgin_label_s_agg (event_int, face_name, otx_label, inx_label, otx_bridge, inx_bridge, unknown_term)
+SELECT event_int, face_name, otx_label, MAX(inx_label), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_term)
 FROM pidgin_label_s_raw
 WHERE error_message IS NULL
 GROUP BY event_int, face_name, otx_label
@@ -782,11 +782,11 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario1_FiscDimen():
         print(expected_insert_sqlstr)
         assert update_sqlstrs[0] == expected_insert_sqlstr
 
-        static_example_sqlstr = """INSERT INTO fisc_timeline_hour_s_agg (fisc_tag, cumlative_minute, hour_tag)
-SELECT fisc_tag, cumlative_minute, MAX(hour_tag)
+        static_example_sqlstr = """INSERT INTO fisc_timeline_hour_s_agg (fisc_word, cumlative_minute, hour_word)
+SELECT fisc_word, cumlative_minute, MAX(hour_word)
 FROM fisc_timeline_hour_s_raw
 WHERE error_message IS NULL
-GROUP BY fisc_tag, cumlative_minute
+GROUP BY fisc_word, cumlative_minute
 ;
 """
         print(update_sqlstrs[0])
@@ -820,11 +820,11 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario2_BudDimen():
         # print(put_expected_insert_sqlstr)
         assert update_sqlstrs[0] == put_expected_insert_sqlstr
 
-        static_example_put_sqlstr = """INSERT INTO bud_idea_awardlink_s_put_agg (event_int, face_name, fisc_tag, owner_name, idea_way, awardee_label, give_force, take_force)
-SELECT event_int, face_name, fisc_tag, owner_name, idea_way, awardee_label, MAX(give_force), MAX(take_force)
+        static_example_put_sqlstr = """INSERT INTO bud_idea_awardlink_s_put_agg (event_int, face_name, fisc_word, owner_name, idea_way, awardee_label, give_force, take_force)
+SELECT event_int, face_name, fisc_word, owner_name, idea_way, awardee_label, MAX(give_force), MAX(take_force)
 FROM bud_idea_awardlink_s_put_raw
 WHERE error_message IS NULL
-GROUP BY event_int, face_name, fisc_tag, owner_name, idea_way, awardee_label
+GROUP BY event_int, face_name, fisc_word, owner_name, idea_way, awardee_label
 ;
 """
         # print(update_sqlstrs[0])
@@ -845,10 +845,10 @@ GROUP BY event_int, face_name, fisc_tag, owner_name, idea_way, awardee_label
         print(del_expected_insert_sqlstr)
         assert update_sqlstrs[1] == del_expected_insert_sqlstr
 
-        static_example_del_sqlstr = """INSERT INTO bud_idea_awardlink_s_del_agg (event_int, face_name, fisc_tag, owner_name, idea_way, awardee_label_ERASE)
-SELECT event_int, face_name, fisc_tag, owner_name, idea_way, awardee_label_ERASE
+        static_example_del_sqlstr = """INSERT INTO bud_idea_awardlink_s_del_agg (event_int, face_name, fisc_word, owner_name, idea_way, awardee_label_ERASE)
+SELECT event_int, face_name, fisc_word, owner_name, idea_way, awardee_label_ERASE
 FROM bud_idea_awardlink_s_del_raw
-GROUP BY event_int, face_name, fisc_tag, owner_name, idea_way, awardee_label_ERASE
+GROUP BY event_int, face_name, fisc_word, owner_name, idea_way, awardee_label_ERASE
 ;
 """
         print(update_sqlstrs[1])
@@ -864,10 +864,10 @@ def test_create_insert_into_pidgin_core_raw_sqlstr_ReturnsObj():
     # THEN
     pidgin_s_agg_tablename = prime_tbl(dimen, "s", "agg")
     pidgin_core_s_raw_tablename = prime_tbl("PIDCORE", "s", "raw")
-    expected_sqlstr = f"""INSERT INTO {pidgin_core_s_raw_tablename} (source_dimen, face_name, otx_bridge, inx_bridge, unknown_word)
-SELECT '{pidgin_s_agg_tablename}', face_name, otx_bridge, inx_bridge, unknown_word
+    expected_sqlstr = f"""INSERT INTO {pidgin_core_s_raw_tablename} (source_dimen, face_name, otx_bridge, inx_bridge, unknown_term)
+SELECT '{pidgin_s_agg_tablename}', face_name, otx_bridge, inx_bridge, unknown_term
 FROM {pidgin_s_agg_tablename}
-GROUP BY face_name, otx_bridge, inx_bridge, unknown_word
+GROUP BY face_name, otx_bridge, inx_bridge, unknown_term
 ;
 """
     assert way_sqlstr == expected_sqlstr
@@ -887,12 +887,12 @@ def test_create_insert_into_pidgin_core_vld_sqlstr_ReturnsObj():
     pidcore_dimen = "PIDCORE"
     pidgin_core_s_agg_tablename = prime_tbl(pidcore_dimen, "s", "agg")
     pidgin_core_s_vld_tablename = prime_tbl(pidcore_dimen, "s", "vld")
-    expected_sqlstr = f"""INSERT INTO {pidgin_core_s_vld_tablename} (face_name, otx_bridge, inx_bridge, unknown_word)
+    expected_sqlstr = f"""INSERT INTO {pidgin_core_s_vld_tablename} (face_name, otx_bridge, inx_bridge, unknown_term)
 SELECT
   face_name
 , IFNULL(otx_bridge, '{default_bridge}')
 , IFNULL(inx_bridge, '{default_bridge}')
-, IFNULL(unknown_word, '{default_unknown_str}')
+, IFNULL(unknown_term, '{default_unknown_str}')
 FROM {pidgin_core_s_agg_tablename}
 ;
 """
@@ -921,24 +921,24 @@ GROUP BY event_int, face_name
     assert way_sqlstr == expected_way_sqlstr
 
 
-def test_create_insert_pidgin_sound_vld_table_sqlstr_ReturnsObj_pidgin_tag():
+def test_create_insert_pidgin_sound_vld_table_sqlstr_ReturnsObj_pidgin_word():
     # ESTABLISH
-    dimen = pidgin_tag_str()
+    dimen = pidgin_word_str()
     # WHEN
-    tag_sqlstr = create_insert_pidgin_sound_vld_table_sqlstr(dimen)
+    word_sqlstr = create_insert_pidgin_sound_vld_table_sqlstr(dimen)
 
     # THEN
-    pidgin_tag_s_agg_tablename = prime_tbl(dimen, "s", "agg")
-    pidgin_tag_s_vld_tablename = prime_tbl(dimen, "s", "vld")
-    expected_tag_sqlstr = f"""
-INSERT INTO {pidgin_tag_s_vld_tablename} (event_int, face_name, otx_tag, inx_tag)
-SELECT event_int, face_name, MAX(otx_tag), MAX(inx_tag)
-FROM {pidgin_tag_s_agg_tablename}
+    pidgin_word_s_agg_tablename = prime_tbl(dimen, "s", "agg")
+    pidgin_word_s_vld_tablename = prime_tbl(dimen, "s", "vld")
+    expected_word_sqlstr = f"""
+INSERT INTO {pidgin_word_s_vld_tablename} (event_int, face_name, otx_word, inx_word)
+SELECT event_int, face_name, MAX(otx_word), MAX(inx_word)
+FROM {pidgin_word_s_agg_tablename}
 WHERE error_message IS NULL
 GROUP BY event_int, face_name
 ;
 """
-    assert tag_sqlstr == expected_tag_sqlstr
+    assert word_sqlstr == expected_word_sqlstr
 
 
 def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_BudDimens():

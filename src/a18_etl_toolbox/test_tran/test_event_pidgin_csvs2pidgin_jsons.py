@@ -8,7 +8,7 @@ from src.a00_data_toolbox.file_toolbox import (
 from src.a01_way_logic.way import default_bridge_if_None
 from src.a06_bud_logic._utils.str_a06 import type_WayStr_str
 from src.a16_pidgin_logic._utils.str_a16 import pidgin_filename
-from src.a16_pidgin_logic.pidgin_config import default_unknown_word_if_None
+from src.a16_pidgin_logic.pidgin_config import default_unknown_term_if_None
 from src.a16_pidgin_logic.pidgin import get_pidginunit_from_json
 from src.a18_etl_toolbox.transformers import (
     etl_event_pidgin_csvs_to_pidgin_json,
@@ -35,7 +35,7 @@ def test_etl_event_pidgin_csvs_to_pidgin_json_Scenario0_1Event_way(
     event3 = 3
     event7 = 7
     event9 = 9
-    event3_way_csv = f"""event_int,face_name,otx_way,inx_way,otx_bridge,inx_bridge,unknown_word
+    event3_way_csv = f"""event_int,face_name,otx_way,inx_way,otx_bridge,inx_bridge,unknown_term
 {event3},"{bob_str}","{casa_otx}","{casa_inx}",,,
 {event3},"{bob_str}","{clean_otx}","{clean_inx}",,,
 """
@@ -55,7 +55,7 @@ def test_etl_event_pidgin_csvs_to_pidgin_json_Scenario0_1Event_way(
     assert json_pidginunit.event_int == event3
     assert json_pidginunit.otx_bridge == default_bridge_if_None()
     assert json_pidginunit.inx_bridge == default_bridge_if_None()
-    assert json_pidginunit.unknown_word == default_unknown_word_if_None()
+    assert json_pidginunit.unknown_term == default_unknown_term_if_None()
     assert json_pidginunit.otx2inx_exists(type_WayStr_str(), casa_otx, casa_inx)
     assert json_pidginunit.otx2inx_exists(type_WayStr_str(), clean_otx, clean_inx)
 
@@ -77,15 +77,15 @@ def test_etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons_Scenario0_1Event_way(
     event3 = 3
     event7 = 7
     event9 = 9
-    event3_way_csv = f"""event_int,face_name,otx_way,inx_way,otx_bridge,inx_bridge,unknown_word
+    event3_way_csv = f"""event_int,face_name,otx_way,inx_way,otx_bridge,inx_bridge,unknown_term
 {event3},"{bob_str}","{casa_otx}","{casa_inx}",,,
 {event3},"{bob_str}","{clean_otx}","{clean_inx}",,,
 """
-    event7_way_csv = f"""event_int,face_name,otx_way,inx_way,otx_bridge,inx_bridge,unknown_word
+    event7_way_csv = f"""event_int,face_name,otx_way,inx_way,otx_bridge,inx_bridge,unknown_term
 {event7},"{bob_str}","{casa_otx}","{casa_inx}",,,
 {event7},"{bob_str}","{clean_otx}","{clean_inx}",,,
 """
-    event9_way_csv = f"""event_int,face_name,otx_way,inx_way,otx_bridge,inx_bridge,unknown_word
+    event9_way_csv = f"""event_int,face_name,otx_way,inx_way,otx_bridge,inx_bridge,unknown_term
 {event9},"{zia_str}","{casa_otx}","{casa_inx}",,,
 {event9},"{zia_str}","{clean_otx}","{clean_inx}",,,
 """
@@ -119,7 +119,7 @@ def test_etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons_Scenario0_1Event_way(
     assert e3_json_pidginunit.event_int == event3
     assert e3_json_pidginunit.otx_bridge == default_bridge_if_None()
     assert e3_json_pidginunit.inx_bridge == default_bridge_if_None()
-    assert e3_json_pidginunit.unknown_word == default_unknown_word_if_None()
+    assert e3_json_pidginunit.unknown_term == default_unknown_term_if_None()
     assert e3_json_pidginunit.otx2inx_exists(type_WayStr_str(), casa_otx, casa_inx)
     assert e3_json_pidginunit.otx2inx_exists(type_WayStr_str(), clean_otx, clean_inx)
     e7_json_pidginunit = get_pidginunit_from_json(
@@ -129,7 +129,7 @@ def test_etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons_Scenario0_1Event_way(
     assert e7_json_pidginunit.event_int == event7
     assert e7_json_pidginunit.otx_bridge == default_bridge_if_None()
     assert e7_json_pidginunit.inx_bridge == default_bridge_if_None()
-    assert e7_json_pidginunit.unknown_word == default_unknown_word_if_None()
+    assert e7_json_pidginunit.unknown_term == default_unknown_term_if_None()
     assert e7_json_pidginunit.otx2inx_exists(type_WayStr_str(), casa_otx, casa_inx)
     assert e7_json_pidginunit.otx2inx_exists(type_WayStr_str(), clean_otx, clean_inx)
 

@@ -2,7 +2,7 @@ from src.a06_bud_logic._utils.str_a06 import type_NameStr_str
 from src.a16_pidgin_logic.pidgin import pidginunit_shop, inherit_pidginunit
 from src.a16_pidgin_logic._utils.example_pidgins import (
     get_clean_waymap,
-    get_clean_tagmap,
+    get_clean_wordmap,
     get_swim_labelmap,
     get_suita_namemap,
 )
@@ -47,11 +47,11 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario2_RaiseErrorWhenDiffer
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
-def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown_word():
+def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown_term():
     # ESTABLISH
     sue_str = "Sue"
-    x_unknown_word = "UnknownWord"
-    old_pidginunit = pidginunit_shop(sue_str, 0, unknown_word=x_unknown_word)
+    x_unknown_term = "UnknownTerm"
+    old_pidginunit = pidginunit_shop(sue_str, 0, unknown_term=x_unknown_term)
     new_pidginunit = pidginunit_shop(sue_str, 1)
 
     with pytest_raises(Exception) as excinfo:
@@ -89,7 +89,7 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario6_namemap_Inherited():
     old_pidginunit = pidginunit_shop(sue_str, 0)
     old_pidginunit.set_namemap(get_suita_namemap())
     old_pidginunit.set_labelmap(get_swim_labelmap())
-    old_pidginunit.set_tagmap(get_clean_tagmap())
+    old_pidginunit.set_wordmap(get_clean_wordmap())
     old_pidginunit.set_waymap(get_clean_waymap())
     new_pidginunit = pidginunit_shop(sue_str, event1)
     assert new_pidginunit.namemap != get_suita_namemap()
@@ -105,12 +105,12 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario6_namemap_Inherited():
     merged_groupbrigde = get_swim_labelmap()
     merged_groupbrigde.event_int = event1
     assert merged_pidginunit.labelmap == merged_groupbrigde
-    merged_tagbrigde = get_clean_tagmap()
-    merged_tagbrigde.event_int = event1
-    assert merged_pidginunit.tagmap == merged_tagbrigde
+    merged_wordbrigde = get_clean_wordmap()
+    merged_wordbrigde.event_int = event1
+    assert merged_pidginunit.wordmap == merged_wordbrigde
     merged_waybrigde = get_clean_waymap()
     merged_waybrigde.event_int = event1
-    merged_waybrigde.tagmap = merged_tagbrigde
+    merged_waybrigde.wordmap = merged_wordbrigde
     assert merged_pidginunit.waymap == merged_waybrigde
 
 

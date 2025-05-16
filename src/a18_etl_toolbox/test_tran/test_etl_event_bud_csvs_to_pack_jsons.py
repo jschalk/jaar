@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import open_file, save_file
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_word_str
 from src.a06_bud_logic._utils.str_a06 import (
     bud_acctunit_str,
     budunit_str,
@@ -40,7 +40,7 @@ def test_WorldUnit_event_bud_csvs_to_pack_json_CreatesFiles_Scenario0_IgnoresCSV
     a23_bob_e3_dir = create_owner_event_dir_path(
         fisc_mstr_dir, a23_str, bob_inx, event3
     )
-    e3_put_csv = f"""{event_int_str()},{face_name_str()},fisc_tag,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit
+    e3_put_csv = f"""{event_int_str()},{face_name_str()},fisc_word,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit
 {event3},{sue_inx},{a23_str},{bob_inx},,,,,,,,
 """
     save_file(a23_bob_e3_dir, put_agg_csv_filename, e3_put_csv)
@@ -89,10 +89,10 @@ def test_WorldUnit_event_bud_csvs_to_pack_json_CreatesFiles_Scenario1(
     a23_bob_e7_dir = create_owner_event_dir_path(
         fisc_mstr_dir, a23_str, bob_inx, event7
     )
-    e3_put_csv = f"""{event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
+    e3_put_csv = f"""{event_int_str()},{face_name_str()},{fisc_word_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
 {event3},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debtit_empty}
 """
-    e7_put_csv = f"""{event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
+    e7_put_csv = f"""{event_int_str()},{face_name_str()},{fisc_word_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
 {event7},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debtit_empty}
 {event7},{sue_inx},{a23_str},{bob_inx},{sue_inx},{credit88},{debtit_empty}
 """

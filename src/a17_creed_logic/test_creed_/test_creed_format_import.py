@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_word_str
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
@@ -32,8 +32,8 @@ def test_open_csv_ReturnsObjWhenFileExists(env_dir_setup_cleanup):
     sue_debtit_belief = 23
     bob_debtit_belief = 29
     yao_debtit_belief = 37
-    accord_fisc_tag = "accord56"
-    sue_budunit = budunit_shop(sue_str, accord_fisc_tag)
+    accord_fisc_word = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_fisc_word)
     sue_budunit.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
     sue_budunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
@@ -48,19 +48,19 @@ def test_open_csv_ReturnsObjWhenFileExists(env_dir_setup_cleanup):
     array_headers = list(acct_dataframe.columns)
     acct_creedref = get_creedref_obj(j1_creedname)
     assert array_headers == acct_creedref.get_headers_list()
-    assert acct_dataframe.loc[0, fisc_tag_str()] == accord_fisc_tag
+    assert acct_dataframe.loc[0, fisc_word_str()] == accord_fisc_word
     assert acct_dataframe.loc[0, owner_name_str()] == sue_budunit.owner_name
     assert acct_dataframe.loc[0, acct_name_str()] == bob_str
     assert acct_dataframe.loc[0, credit_belief_str()] == bob_credit_belief
     assert acct_dataframe.loc[0, debtit_belief_str()] == bob_debtit_belief
 
-    assert acct_dataframe.loc[1, fisc_tag_str()] == accord_fisc_tag
+    assert acct_dataframe.loc[1, fisc_word_str()] == accord_fisc_word
     assert acct_dataframe.loc[1, owner_name_str()] == sue_budunit.owner_name
     assert acct_dataframe.loc[1, acct_name_str()] == sue_str
     assert acct_dataframe.loc[1, credit_belief_str()] == sue_credit_belief
     assert acct_dataframe.loc[1, debtit_belief_str()] == sue_debtit_belief
 
-    assert acct_dataframe.loc[2, fisc_tag_str()] == accord_fisc_tag
+    assert acct_dataframe.loc[2, fisc_word_str()] == accord_fisc_word
     assert acct_dataframe.loc[2, owner_name_str()] == sue_budunit.owner_name
     assert acct_dataframe.loc[2, acct_name_str()] == yao_str
     assert acct_dataframe.loc[2, credit_belief_str()] == yao_credit_belief
@@ -94,8 +94,8 @@ def test_load_creed_csv_Arg_creed_format_00021_bud_acctunit_v0_0_0_csvTo_job(
     sue_debtit_belief = 23
     bob_debtit_belief = 29
     yao_debtit_belief = 37
-    accord_fisc_tag = "accord56"
-    sue_budunit = budunit_shop(sue_str, accord_fisc_tag)
+    accord_fisc_word = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_fisc_word)
     sue_budunit.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
     sue_budunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
@@ -105,19 +105,19 @@ def test_load_creed_csv_Arg_creed_format_00021_bud_acctunit_v0_0_0_csvTo_job(
     print(f"{csv_example_path}")
     save_creed_csv(j1_creedname, sue_budunit, creed_examples_dir(), name_filename)
     sue_hubunit = hubunit_shop(
-        creed_examples_dir(), accord_fisc_tag, owner_name=sue_str
+        creed_examples_dir(), accord_fisc_word, owner_name=sue_str
     )
     # Popen FiscUnit and confirm gut BudUnit does not exist
-    assert not gut_file_exists(creed_examples_dir(), accord_fisc_tag, sue_str)
+    assert not gut_file_exists(creed_examples_dir(), accord_fisc_word, sue_str)
 
     # WHEN
     load_creed_csv(sue_hubunit.fisc_mstr_dir, creed_examples_dir(), name_filename)
 
     # THEN
     # assert gut Budunit now exists
-    assert gut_file_exists(creed_examples_dir(), accord_fisc_tag, sue_str)
+    assert gut_file_exists(creed_examples_dir(), accord_fisc_word, sue_str)
     # assert gut Budunit acctunit now exists
-    sue_gut = open_gut_file(creed_examples_dir(), accord_fisc_tag, sue_str)
+    sue_gut = open_gut_file(creed_examples_dir(), accord_fisc_word, sue_str)
 
     assert sue_gut.acct_exists(sue_str)
     assert sue_gut.acct_exists(bob_str)
@@ -148,8 +148,8 @@ def test_load_creed_csv_csvTo_job(
     sue_debtit_belief = 23
     bob_debtit_belief = 29
     yao_debtit_belief = 37
-    accord_fisc_tag = "accord56"
-    sue_budunit = budunit_shop(sue_str, accord_fisc_tag)
+    accord_fisc_word = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_fisc_word)
     sue_budunit.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
     sue_budunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
@@ -159,19 +159,19 @@ def test_load_creed_csv_csvTo_job(
     print(f"{csv_example_path}")
     save_creed_csv(j1_creedname, sue_budunit, creed_examples_dir(), name_filename)
     sue_hubunit = hubunit_shop(
-        creed_examples_dir(), accord_fisc_tag, owner_name=sue_str
+        creed_examples_dir(), accord_fisc_word, owner_name=sue_str
     )
     # Popen FiscUnit and confirm gut BudUnit does not exist
-    assert not gut_file_exists(creed_examples_dir(), accord_fisc_tag, sue_str)
+    assert not gut_file_exists(creed_examples_dir(), accord_fisc_word, sue_str)
 
     # WHEN
     load_creed_csv(sue_hubunit.fisc_mstr_dir, creed_examples_dir(), name_filename)
 
     # THEN
     # assert gut Budunit now exists
-    assert gut_file_exists(creed_examples_dir(), accord_fisc_tag, sue_str)
+    assert gut_file_exists(creed_examples_dir(), accord_fisc_word, sue_str)
     # assert gut Budunit acctunit now exists
-    sue_gut = open_gut_file(creed_examples_dir(), accord_fisc_tag, sue_str)
+    sue_gut = open_gut_file(creed_examples_dir(), accord_fisc_word, sue_str)
     assert sue_gut.acct_exists(sue_str)
     assert sue_gut.acct_exists(bob_str)
     assert sue_gut.acct_exists(yao_str)

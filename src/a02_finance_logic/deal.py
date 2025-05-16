@@ -18,8 +18,8 @@ from src.a02_finance_logic.finance_config import (
 from src.a01_way_logic.way import (
     AcctName,
     OwnerName,
-    FiscTag,
-    get_default_fisc_tag,
+    FiscWord,
+    get_default_fisc_word,
 )
 from dataclasses import dataclass
 
@@ -51,7 +51,7 @@ def tranunit_shop(
 
 @dataclass
 class TranBook:
-    fisc_tag: FiscTag = None
+    fisc_word: FiscWord = None
     tranunits: dict[OwnerName, dict[AcctName, dict[TimeLinePoint, FundNum]]] = None
     _accts_net: dict[OwnerName, dict[AcctName, FundNum]] = None
 
@@ -163,16 +163,16 @@ class TranBook:
 
     def get_dict(
         self,
-    ) -> dict[FiscTag, dict[OwnerName, dict[AcctName, dict[TimeLinePoint, FundNum]]]]:
-        return {"fisc_tag": self.fisc_tag, "tranunits": self.tranunits}
+    ) -> dict[FiscWord, dict[OwnerName, dict[AcctName, dict[TimeLinePoint, FundNum]]]]:
+        return {"fisc_word": self.fisc_word, "tranunits": self.tranunits}
 
 
 def tranbook_shop(
-    x_fisc_tag: FiscTag,
+    x_fisc_word: FiscWord,
     x_tranunits: dict[OwnerName, dict[AcctName, dict[TimeLinePoint, FundNum]]] = None,
 ):
     return TranBook(
-        fisc_tag=x_fisc_tag,
+        fisc_word=x_fisc_word,
         tranunits=get_empty_dict_if_None(x_tranunits),
         _accts_net={},
     )
@@ -186,7 +186,7 @@ def get_tranbook_from_dict(x_dict: dict) -> TranBook:
             for x_tran_time, x_amount in x_tran_time_dict.items():
                 x_key_list = [x_owner_name, x_acct_name, int(x_tran_time)]
                 set_in_nested_dict(new_tranunits, x_key_list, x_amount)
-    return tranbook_shop(x_dict.get("fisc_tag"), new_tranunits)
+    return tranbook_shop(x_dict.get("fisc_word"), new_tranunits)
 
 
 @dataclass
@@ -300,8 +300,8 @@ class BrokerUnit:
     def get_deal_times(self) -> set[TimeLinePoint]:
         return set(self.deals.keys())
 
-    def get_tranbook(self, fisc_tag: FiscTag) -> TranBook:
-        x_tranbook = tranbook_shop(fisc_tag)
+    def get_tranbook(self, fisc_word: FiscWord) -> TranBook:
+        x_tranbook = tranbook_shop(fisc_word)
         for x_deal_time, x_deal in self.deals.items():
             for dst_acct_name, x_quota in x_deal._deal_acct_nets.items():
                 x_tranbook.add_tranunit(
@@ -349,13 +349,15 @@ def get_deals_from_dict(deals_dict: dict) -> dict[TimeLinePoint, DealUnit]:
 
 @dataclass
 class TimeConversion:
-    fisc_tag: str = None
+    fisc_word: str = None
     addin: str = None
 
 
-def timeconversion_shop(fisc_tag: FiscTag = None, addin: int = None) -> TimeConversion:
-    if fisc_tag is None:
-        fisc_tag = get_default_fisc_tag()
+def timeconversion_shop(
+    fisc_word: FiscWord = None, addin: int = None
+) -> TimeConversion:
+    if fisc_word is None:
+        fisc_word = get_default_fisc_word()
     if addin is None:
         addin = 0
-    return TimeConversion(fisc_tag=fisc_tag, addin=addin)
+    return TimeConversion(fisc_word=fisc_word, addin=addin)

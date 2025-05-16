@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.db_toolbox import get_table_columns, get_row_count
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_word_str
 from src.a06_bud_logic._utils.str_a06 import (
     bud_acctunit_str,
     face_name_str,
@@ -14,7 +14,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_bridge_str,
     inx_way_str,
     otx_way_str,
-    unknown_word_str,
+    unknown_term_str,
 )
 from src.a17_creed_logic._utils.str_a17 import creed_number_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
@@ -59,7 +59,7 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ExecutedSqlUpdat
 , {inx_way_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_word_str()}
+, {unknown_term_str()}
 , "error_message"
 )"""
         b117 = "br00117"
@@ -116,7 +116,7 @@ def test_set_sound_raw_tables_error_message_UpdatesTableCorrectly_Scenario0():
 , {inx_way_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_word_str()}
+, {unknown_term_str()}
 , "error_message"
 )"""
         b117 = "br00117"
@@ -169,7 +169,7 @@ def test_set_sound_raw_tables_error_message_UpdatesTableCorrectly_Scenario1_bud_
   {creed_number_str()}
 , {event_int_str()}
 , {face_name_str()}
-, {fisc_tag_str()}
+, {fisc_word_str()}
 , {owner_name_str()}
 , {acct_name_str()}_ERASE
 )"""
@@ -234,7 +234,7 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
 , {inx_way_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_word_str()}
+, {unknown_term_str()}
 , "error_message"
 )"""
         b117 = "br00117"
@@ -258,7 +258,7 @@ VALUES
   {creed_number_str()}
 , {event_int_str()}
 , {face_name_str()}
-, {fisc_tag_str()}
+, {fisc_word_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_belief_str()}
@@ -338,7 +338,7 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
   {creed_number_str()}
 , {event_int_str()}
 , {face_name_str()}
-, {fisc_tag_str()}
+, {fisc_word_str()}
 , {owner_name_str()}
 , {acct_name_str()}_ERASE
 )"""
@@ -401,7 +401,7 @@ def test_etl_sound_raw_tables_to_sound_agg_tables_PopulatesValidTable_Scenario0(
 , {inx_way_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_word_str()}
+, {unknown_term_str()}
 , "error_message"
 )"""
         b117 = "br00117"
@@ -426,7 +426,7 @@ VALUES
   {creed_number_str()}
 , {event_int_str()}
 , {face_name_str()}
-, {fisc_tag_str()}
+, {fisc_word_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_belief_str()}

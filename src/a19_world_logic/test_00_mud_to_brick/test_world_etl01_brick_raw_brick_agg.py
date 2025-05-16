@@ -1,7 +1,7 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a02_finance_logic._utils.strs_a02 import fisc_tag_str
+from src.a02_finance_logic._utils.strs_a02 import fisc_word_str
 from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str
-from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_tag_str
+from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_word_str
 from src.a17_creed_logic._utils.str_a17 import brick_agg_str, brick_raw_str
 from src.a17_creed_logic.creed_db_tool import (
     get_sheet_names,
@@ -35,9 +35,9 @@ def test_WorldUnit_brick_raw_db_to_brick_agg_df_CreatesOtxSheets_Scenario0_Group
     creed_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_tag_str(),
+        fisc_word_str(),
         cumlative_minute_str(),
-        hour_tag_str(),
+        hour_word_str(),
     ]
     accord23_str = "accord23"
     row1 = [event1, sue_str, accord23_str, minute_360, hour6am]
@@ -83,9 +83,9 @@ def test_WorldUnit_brick_raw_db_to_brick_agg_df_CreatesOtxSheets_Scenario1_Group
     creed_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_tag_str(),
+        fisc_word_str(),
         cumlative_minute_str(),
-        hour_tag_str(),
+        hour_word_str(),
     ]
     accord23_str = "accord23"
     row1 = [event3, sue_str, accord23_str, minute_360, hour6am]

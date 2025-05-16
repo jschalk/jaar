@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
-from src.a02_finance_logic._utils.strs_a02 import fisc_tag_str, owner_name_str
+from src.a02_finance_logic._utils.strs_a02 import fisc_word_str, owner_name_str
 from src.a06_bud_logic._utils.str_a06 import (
     bud_acctunit_str,
     face_name_str,
@@ -43,7 +43,7 @@ def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_PopulatesTable_Scenario0()
         insert_into_clause = f"""INSERT INTO {budaacct_s_agg_put_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {fisc_tag_str()}
+, {fisc_word_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_belief_str()}
@@ -70,7 +70,7 @@ VALUES
         assert get_row_count(cursor, budawar_v_raw_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}_otx
-, {fisc_tag_str()}_otx
+, {fisc_word_str()}_otx
 , {owner_name_str()}_otx
 , {acct_name_str()}_otx
 , {credit_belief_str()}
@@ -112,7 +112,7 @@ def test_etl_sound_agg_tables_to_voice_raw_tables_PopulatesTable_Scenario0():
         insert_into_clause = f"""INSERT INTO {budacct_s_agg_put_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {fisc_tag_str()}
+, {fisc_word_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_belief_str()}
@@ -138,7 +138,7 @@ VALUES
         assert get_row_count(cursor, budacct_v_raw_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}_otx
-, {fisc_tag_str()}_otx
+, {fisc_word_str()}_otx
 , {owner_name_str()}_otx
 , {acct_name_str()}_otx
 , {credit_belief_str()}

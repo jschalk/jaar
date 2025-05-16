@@ -1,6 +1,6 @@
 from src.a01_way_logic.way import (
     create_way,
-    get_default_fisc_tag as root_tag,
+    get_default_fisc_word as root_word,
 )
 from src.a12_hub_tools.hubunit import hubunit_shop
 from src.a13_bud_listen_logic._utils.example_listen_buds import (
@@ -18,7 +18,7 @@ def test_HubUnit_create_keep_dir_if_missing_CreatesDirectory(env_dir_setup_clean
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_way = create_way(root_tag(), nation_str)
+    nation_way = create_way(root_word(), nation_str)
     usa_str = "USA"
     usa_way = create_way(nation_way, usa_str)
     texas_str = "Texas"
@@ -38,7 +38,7 @@ def test_HubUnit_save_duty_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_way = create_way(root_tag(), nation_str)
+    nation_way = create_way(root_word(), nation_str)
     usa_str = "USA"
     usa_way = create_way(nation_way, usa_str)
     texas_str = "Texas"
@@ -61,7 +61,7 @@ def test_HubUnit_duty_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_way = create_way(root_tag(), nation_str)
+    nation_way = create_way(root_word(), nation_str)
     usa_str = "USA"
     usa_way = create_way(nation_way, usa_str)
     texas_str = "Texas"
@@ -84,7 +84,7 @@ def test_HubUnit_get_duty_bud_PopensFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_way = create_way(root_tag(), nation_str)
+    nation_way = create_way(root_word(), nation_str)
     usa_str = "USA"
     usa_way = create_way(nation_way, usa_str)
     texas_str = "Texas"
@@ -121,7 +121,7 @@ def test_HubUnit_save_plan_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_way = create_way(root_tag(), nation_str)
+    nation_way = create_way(root_word(), nation_str)
     usa_str = "USA"
     usa_way = create_way(nation_way, usa_str)
     texas_str = "Texas"
@@ -144,7 +144,7 @@ def test_HubUnit_plan_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_way = create_way(root_tag(), nation_str)
+    nation_way = create_way(root_word(), nation_str)
     usa_str = "USA"
     usa_way = create_way(nation_way, usa_str)
     texas_str = "Texas"
@@ -167,7 +167,7 @@ def test_HubUnit_get_plan_bud_PopensFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_way = create_way(root_tag(), nation_str)
+    nation_way = create_way(root_word(), nation_str)
     usa_str = "USA"
     usa_way = create_way(nation_way, usa_str)
     texas_str = "Texas"
@@ -187,7 +187,7 @@ def test_HubUnit_get_plan_bud_ReturnsNoneIfFileDoesNotExist(env_dir_setup_cleanu
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_way = create_way(root_tag(), nation_str)
+    nation_way = create_way(root_word(), nation_str)
     usa_str = "USA"
     usa_way = create_way(nation_way, usa_str)
     texas_str = "Texas"

@@ -1,10 +1,10 @@
 from src.a00_data_toolbox.file_toolbox import open_file
 from src.a00_data_toolbox.db_toolbox import get_row_count
-from src.a02_finance_logic._utils.strs_a02 import bridge_str, fisc_tag_str
+from src.a02_finance_logic._utils.strs_a02 import bridge_str, fisc_word_str
 from src.a07_calendar_logic._utils.str_a07 import (
     c400_number_str,
     monthday_distortion_str,
-    timeline_tag_str,
+    timeline_word_str,
     yr1_jan1_offset_str,
 )
 from src.a06_bud_logic._utils.str_a06 import fund_coin_str, penny_str, respect_bit_str
@@ -19,7 +19,7 @@ from sqlite3 import connect as sqlite3_connect
 from os.path import exists as os_path_exists
 
 
-def test_fisc_raw_tables2fisc_agg_tables_PassesOnly_fisc_tag():
+def test_fisc_raw_tables2fisc_agg_tables_PassesOnly_fisc_word():
     # ESTABLISH
     sue_inx = "Suzy"
     event3 = 3
@@ -33,7 +33,7 @@ def test_fisc_raw_tables2fisc_agg_tables_PassesOnly_fisc_tag():
 
         x_fisc = FiscPrimeObjsRef()
         insert_raw_sqlstr = f"""
-INSERT INTO {x_fisc.unit_raw_tablename} (creed_number, event_int, face_name, fisc_tag)
+INSERT INTO {x_fisc.unit_raw_tablename} (creed_number, event_int, face_name, fisc_word)
 VALUES
   ('{br00011_str}', {event3}, '{sue_inx}', '{accord23_str}')
 , ('{br00011_str}', {event3}, '{sue_inx}', '{accord23_str}')
@@ -53,7 +53,7 @@ VALUES
         cursor.execute(f"SELECT * FROM {x_fisc.unit_agg_tablename};")
         fiscunit_agg_rows = cursor.fetchall()
         expected_row0 = (
-            accord23_str,  # fisc_tag
+            accord23_str,  # fisc_word
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
@@ -62,11 +62,11 @@ VALUES
             None,  # c400_number
             None,  # yr1_jan1_offset
             None,  # monthday_distortion
-            None,  # timeline_tag
+            None,  # timeline_word
             None,  # job_listen_rotations
         )
         expected_row1 = (
-            accord45_str,  # fisc_tag
+            accord45_str,  # fisc_word
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
@@ -75,7 +75,7 @@ VALUES
             None,  # c400_number
             None,  # yr1_jan1_offset
             None,  # monthday_distortion
-            None,  # timeline_tag
+            None,  # timeline_word
             None,  # job_listen_rotations
         )
         print(f"{fiscunit_agg_rows[0]=}")
@@ -97,7 +97,7 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario0_fisunit_WithNo_error_message(
     a23_c400_number = 55
     a23_yr1_jan1_offset = 66
     a23_monthday_distortion = 77
-    a23_timeline_tag = "accord23_timeline"
+    a23_timeline_word = "accord23_timeline"
     a23_job_listen_rotations = 900
     x_objs = FiscPrimeObjsRef()
     x_cols = FiscPrimeColumnsRef()
@@ -109,11 +109,11 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario0_fisunit_WithNo_error_message(
         insert_raw_sqlstr = f"""
 INSERT INTO {raw_tablename} ({x_cols.unit_raw_csv_header})
 VALUES
-  ('br00333',{event3},'{sue_inx}','{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
-, ('br00333',{event7},'{sue_inx}','{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
-, ('br00333',{event7},'{sue_inx}','{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
-, ('br00555',{event7},'{sue_inx}','{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
-, ('br00666',{event7},'{sue_inx}','{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
+  ('br00333',{event3},'{sue_inx}','{accord23_str}','{a23_timeline_word}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
+, ('br00333',{event7},'{sue_inx}','{accord23_str}','{a23_timeline_word}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
+, ('br00333',{event7},'{sue_inx}','{accord45_str}','{a23_timeline_word}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
+, ('br00555',{event7},'{sue_inx}','{accord45_str}','{a23_timeline_word}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
+, ('br00666',{event7},'{sue_inx}','{accord45_str}','{a23_timeline_word}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
 ;
 """
         cursor.execute(insert_raw_sqlstr)
@@ -132,7 +132,7 @@ VALUES
         rows = cursor.fetchall()
         expected_agg_row0 = (
             accord23_str,
-            a23_timeline_tag,
+            a23_timeline_word,
             a23_c400_number,
             a23_yr1_jan1_offset,
             a23_monthday_distortion,
@@ -144,7 +144,7 @@ VALUES
         )
         expected_agg_row1 = (
             accord45_str,
-            a23_timeline_tag,
+            a23_timeline_word,
             a23_c400_number,
             a23_yr1_jan1_offset,
             a23_monthday_distortion,
@@ -173,7 +173,7 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario1_fisunit_With_error_message():
     a23_c400_number = 55
     a23_yr1_jan1_offset = 66
     a23_monthday_distortion = 77
-    a23_timeline_tag = "accord23_timeline"
+    a23_timeline_word = "accord23_timeline"
     a23_job_listen_rotations = 900
     x_objs = FiscPrimeObjsRef()
     x_cols = FiscPrimeColumnsRef()
@@ -185,11 +185,11 @@ def test_fisc_raw_tables2fisc_agg_tables_Scenario1_fisunit_With_error_message():
         insert_raw_sqlstr = f"""
 INSERT INTO {raw_tablename} ({x_cols.unit_raw_csv_header})
 VALUES
-  ('br00333',{event3},'{sue_inx}','{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
-, ('br00333',{event7},'{sue_inx}','{accord23_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
-, ('br00333',{event7},'{sue_inx}','{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}','Inconsistent data')
-, ('br00555',{event7},'{sue_inx}','{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}','Inconsistent data')
-, ('br00666',{event7},'{sue_inx}','{accord45_str}','{a23_timeline_tag}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}','Inconsistent data')
+  ('br00333',{event3},'{sue_inx}','{accord23_str}','{a23_timeline_word}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
+, ('br00333',{event7},'{sue_inx}','{accord23_str}','{a23_timeline_word}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}',NULL)
+, ('br00333',{event7},'{sue_inx}','{accord45_str}','{a23_timeline_word}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}','Inconsistent data')
+, ('br00555',{event7},'{sue_inx}','{accord45_str}','{a23_timeline_word}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}','Inconsistent data')
+, ('br00666',{event7},'{sue_inx}','{accord45_str}','{a23_timeline_word}',{a23_c400_number},{a23_yr1_jan1_offset},{a23_monthday_distortion},{a23_fund_coin},{a23_penny},{a23_respect_bit},'{a23_bridge}','{a23_job_listen_rotations}','Inconsistent data')
 ;
 """
         print(f"{insert_raw_sqlstr=}")
@@ -207,7 +207,7 @@ VALUES
         rows = cursor.fetchall()
         expected_agg_row0 = (
             accord23_str,
-            a23_timeline_tag,
+            a23_timeline_word,
             a23_c400_number,
             a23_yr1_jan1_offset,
             a23_monthday_distortion,
@@ -479,7 +479,7 @@ def test_etl_fisc_agg_tables_to_fisc_csvs_CreateFiles():
         fisc_mstr_dir = get_module_temp_dir()
         x_fisc = FiscPrimeObjsRef(fisc_mstr_dir)
         insert_agg_sqlstr = f"""
-INSERT INTO {x_fisc.unit_agg_tablename} ({fisc_tag_str()})
+INSERT INTO {x_fisc.unit_agg_tablename} ({fisc_word_str()})
 VALUES ('{accord23_str}'), ('{accord45_str}')
 ;
 """
@@ -503,7 +503,7 @@ VALUES ('{accord23_str}'), ('{accord45_str}')
         assert os_path_exists(x_fisc.week_agg_csv_path)
         unit_agg_csv_filename = x_fisc.unit_agg_csv_filename
         generated_fiscunit_csv = open_file(fisc_mstr_dir, unit_agg_csv_filename)
-        expected_fiscunit_csv_str = f"""{fisc_tag_str()},{timeline_tag_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{bridge_str()},job_listen_rotations
+        expected_fiscunit_csv_str = f"""{fisc_word_str()},{timeline_word_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{bridge_str()},job_listen_rotations
 {accord23_str},,,,,,,,,
 {accord45_str},,,,,,,,,
 """

@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_word_str
 from src.a06_bud_logic._utils.str_a06 import acct_name_str, face_name_str, event_int_str
 from src.a17_creed_logic.creed_db_tool import upsert_sheet, sheet_exists
 from src.a19_world_logic.world import worldunit_shop
@@ -23,7 +23,7 @@ def test_otz_inx_event_creeds_to_inz_faces_Scenario0(env_dir_setup_cleanup):
     br00011_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_tag_str(),
+        fisc_word_str(),
         owner_name_str(),
         acct_name_str(),
     ]
@@ -66,7 +66,7 @@ def test_otz_inx_event_creeds_to_inz_faces_Scenario1(env_dir_setup_cleanup):
     br00011_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_tag_str(),
+        fisc_word_str(),
         owner_name_str(),
         acct_name_str(),
     ]

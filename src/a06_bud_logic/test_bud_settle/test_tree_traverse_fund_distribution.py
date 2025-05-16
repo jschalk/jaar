@@ -354,7 +354,7 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
     assert sue_bud.idearoot._awardheirs.get(sue_str) is not None
     assert sue_bud.idearoot._awardheirs.get(sue_str).awardee_label == sue_str
     assert sue_bud.idearoot._awardlines != {}
-    root_way = to_way(sue_bud.idearoot.idea_tag)
+    root_way = to_way(sue_bud.idearoot.idea_word)
     root_idea = sue_bud.get_idea_obj(way=root_way)
     sue_awardline = sue_bud.idearoot._awardlines.get(sue_str)
     print(f"{sue_awardline._fund_give=} {root_idea._fund_ratio=} ")
@@ -429,7 +429,7 @@ def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsGroupUnit_fund_give_fund_t
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_str, give_force=10)
-    root_way = to_way(sue_bud.idearoot.idea_tag)
+    root_way = to_way(sue_bud.idearoot.idea_word)
     x_idearoot = sue_bud.get_idea_obj(root_way)
     x_idearoot.set_awardlink(awardlink=yao_awardlink)
     x_idearoot.set_awardlink(awardlink=zia_awardlink)
@@ -609,7 +609,7 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkAndEmptyAncestorsSetsGroupUnit_fu
     x_bud.settle_bud()
 
     # THEN
-    x_idearoot = x_bud.get_idea_obj(to_way(x_bud.fisc_tag))
+    x_idearoot = x_bud.get_idea_obj(to_way(x_bud.fisc_word))
     with pytest_raises(Exception) as excinfo:
         x_idearoot.awardlinks[yao_str]
     assert str(excinfo.value) == f"'{yao_str}'"
@@ -672,7 +672,7 @@ def test_BudUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkBudFund():
 
     # THEN
     print(f"{idea_dict.keys()=}")
-    idea_bob = idea_dict.get(to_way(sue_bud.fisc_tag))
+    idea_bob = idea_dict.get(to_way(sue_bud.fisc_word))
     assert len(idea_bob._awardheirs) == 3
 
     bheir_yao = idea_bob._awardheirs.get(yao_str)
@@ -720,7 +720,7 @@ def test_BudUnit_settle_bud_CorrectlySetsGroupLinkBudCredAndDebt():
     sue_awardlink = awardlink_shop(sue_str, 20, take_force=40)
     bob_awardlink = awardlink_shop(bob_str, 10, take_force=5)
     zia_awardlink = awardlink_shop(zia_str, 10, take_force=5)
-    root_way = to_way(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_word)
     yao_bud.edit_idea_attr(root_way, awardlink=sue_awardlink)
     yao_bud.edit_idea_attr(root_way, awardlink=bob_awardlink)
     yao_bud.edit_idea_attr(root_way, awardlink=zia_awardlink)
@@ -1067,7 +1067,7 @@ class GroupAgendaMetrics:
 
 
 @dataclass
-class AcctAgendaMetrics:
+class AccwordendaMetrics:
     sum_agenda_cred: float = 0
     sum_agenda_debt: float = 0
     sum_agenda_ratio_cred: float = 0
@@ -1114,12 +1114,12 @@ def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
     assert x_groupagendametrics.sum_membership_debt == 0
 
     # TEST bud_agenda_debt and bud_agenda_cred are empty
-    x_acctagendametrics = AcctAgendaMetrics()
-    x_acctagendametrics.set_sums(yao_bud)
-    assert x_acctagendametrics.sum_agenda_cred == 0
-    assert x_acctagendametrics.sum_agenda_debt == 0
-    assert x_acctagendametrics.sum_agenda_ratio_cred == 0
-    assert x_acctagendametrics.sum_agenda_ratio_debt == 0
+    x_accwordendametrics = AccwordendaMetrics()
+    x_accwordendametrics.set_sums(yao_bud)
+    assert x_accwordendametrics.sum_agenda_cred == 0
+    assert x_accwordendametrics.sum_agenda_debt == 0
+    assert x_accwordendametrics.sum_agenda_ratio_cred == 0
+    assert x_accwordendametrics.sum_agenda_ratio_debt == 0
 
     # WHEN
     agenda_dict = yao_bud.get_agenda_dict()
@@ -1164,18 +1164,18 @@ def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
 
     assert all_acctunits_have_legitimate_values(yao_bud)
 
-    x_acctagendametrics = AcctAgendaMetrics()
-    x_acctagendametrics.set_sums(yao_bud)
+    x_accwordendametrics = AccwordendaMetrics()
+    x_accwordendametrics.set_sums(yao_bud)
     assert are_equal(
-        x_acctagendametrics.sum_agenda_cred,
+        x_accwordendametrics.sum_agenda_cred,
         x_awardagendametrics.sum_bud_agenda_share,
     )
     assert are_equal(
-        x_acctagendametrics.sum_agenda_debt,
+        x_accwordendametrics.sum_agenda_debt,
         x_awardagendametrics.sum_bud_agenda_share,
     )
-    assert are_equal(x_acctagendametrics.sum_agenda_ratio_cred, 1)
-    assert are_equal(x_acctagendametrics.sum_agenda_ratio_debt, 1)
+    assert are_equal(x_accwordendametrics.sum_agenda_ratio_cred, 1)
+    assert are_equal(x_accwordendametrics.sum_agenda_ratio_debt, 1)
 
     # acctunit_fund_give_sum = 0.0
     # acctunit_fund_take_sum = 0.0
@@ -1291,7 +1291,7 @@ def test_BudUnit_settle_bud_CreatesGroupUnitWith_budunit_v001():
     assert len(db_idea.awardlinks) == 3
     # for idea_key in idea_dict:
     #     print(f"{idea_key=}")
-    #     if idea.idea_tag == "D&B":
-    #         print(f"{idea.idea_tag=} {idea.awardlinks=}")
+    #     if idea.idea_word == "D&B":
+    #         print(f"{idea.idea_word=} {idea.awardlinks=}")
     #         db_awardlink_len = len(idea.awardlinks)
     # assert db_awardlink_len == 3

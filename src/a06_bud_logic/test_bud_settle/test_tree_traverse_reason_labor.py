@@ -26,7 +26,7 @@ def test_bud_idearoot_laborunit_CorrectlySets_idea_laborheir():
     x_laborunit = laborunit_shop()
 
     yao_bud = budunit_shop("Yao")
-    root_way = to_way(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_word)
     yao_bud.edit_idea_attr(root_way, laborunit=x_laborunit)
     assert yao_bud.idearoot.laborunit == x_laborunit
     assert yao_bud.idearoot._laborheir is None
@@ -163,8 +163,8 @@ def test_BudUnit__get_filtered_awardlinks_idea_CorrectlyCleansIdea_Laborunit():
     casa_way = sue1_bud.make_l1_way(casa_str)
     swim_str = "swim"
     swim_way = sue1_bud.make_l1_way(swim_str)
-    sue1_bud.set_idea(ideaunit_shop(casa_str), parent_way=sue1_bud.fisc_tag)
-    sue1_bud.set_idea(ideaunit_shop(swim_str), parent_way=sue1_bud.fisc_tag)
+    sue1_bud.set_idea(ideaunit_shop(casa_str), parent_way=sue1_bud.fisc_word)
+    sue1_bud.set_idea(ideaunit_shop(swim_str), parent_way=sue1_bud.fisc_word)
     swim_laborunit = laborunit_shop()
     swim_laborunit.set_laborlink(labor_label=xia_str)
     swim_laborunit.set_laborlink(labor_label=zoa_str)
@@ -196,8 +196,8 @@ def test_BudUnit_set_idea_CorrectlyCleansIdea_awardlinks():
     casa_way = sue1_bud.make_l1_way(casa_str)
     swim_str = "swim"
     swim_way = sue1_bud.make_l1_way(swim_str)
-    sue1_bud.set_idea(ideaunit_shop(casa_str), parent_way=sue1_bud.fisc_tag)
-    sue1_bud.set_idea(ideaunit_shop(swim_str), parent_way=sue1_bud.fisc_tag)
+    sue1_bud.set_idea(ideaunit_shop(casa_str), parent_way=sue1_bud.fisc_word)
+    sue1_bud.set_idea(ideaunit_shop(swim_str), parent_way=sue1_bud.fisc_word)
     swim_laborunit = laborunit_shop()
     swim_laborunit.set_laborlink(labor_label=xia_str)
     swim_laborunit.set_laborlink(labor_label=zoa_str)

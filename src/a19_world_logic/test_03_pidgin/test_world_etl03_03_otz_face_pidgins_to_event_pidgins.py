@@ -7,11 +7,11 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_name_str,
     inx_label_str,
     otx_label_str,
-    inx_tag_str,
-    otx_tag_str,
+    inx_word_str,
+    otx_word_str,
     inx_way_str,
     otx_way_str,
-    unknown_word_str,
+    unknown_term_str,
 )
 from src.a17_creed_logic.creed_db_tool import sheet_exists, upsert_sheet
 from src.a18_etl_toolbox.tran_path import (
@@ -48,7 +48,7 @@ def test_WorldUnit_otz_face_pidgins_df_to_otz_event_pidgins_df_Scenario0_way_Two
         inx_way_str(),
         otx_bridge_str(),
         inx_bridge_str(),
-        unknown_word_str(),
+        unknown_term_str(),
     ]
     x_nan = float("nan")
     e1_way0 = [event7, sue_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]

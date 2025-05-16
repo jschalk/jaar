@@ -1,5 +1,5 @@
 from src.a01_way_logic.way import (
-    TagStr,
+    WordStr,
     NameStr,
     LabelStr,
     HealerName,
@@ -10,7 +10,7 @@ from src.a01_way_logic.way import (
     GroupLabel,
     default_bridge_if_None,
     WorldID,
-    TimeLineTag,
+    TimeLineWord,
     FaceName,
     get_default_face_name,
     EventInt,
@@ -55,7 +55,7 @@ def test_HealerName_exists():
     bob_healer_name = HealerName(bob_str)
     # THEN
     assert bob_healer_name == bob_str
-    doc_str = "A TagStr used to identify a Problem's Healer"
+    doc_str = "A WordStr used to identify a Problem's Healer"
     assert inspect_getdoc(bob_healer_name) == doc_str
 
 
@@ -66,7 +66,7 @@ def test_OwnerName_exists():
     bob_owner_name = OwnerName(bob_str)
     # THEN
     assert bob_owner_name == bob_str
-    doc_str = "A TagStr used to identify a BudUnit's owner_name"
+    doc_str = "A WordStr used to identify a BudUnit's owner_name"
     assert inspect_getdoc(bob_owner_name) == doc_str
 
 
@@ -98,11 +98,11 @@ def test_GroupLabel_exists():
     assert str(type(bikers_group_label)).find("src.a01_way_logic.way.GroupLabel") > 0
 
 
-def test_TagStr_exists():
+def test_WordStr_exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_way = TagStr(empty_str)
+    x_way = WordStr(empty_str)
     # THEN
     assert x_way == empty_str
     doc_str = (
@@ -128,23 +128,23 @@ def test_default_bridge_if_None_ReturnsObj():
     assert default_bridge_if_None(buzz_str) == buzz_str
 
 
-def test_TagStr_is_tag_ReturnsObj_Scenario0():
+def test_WordStr_is_word_ReturnsObj_Scenario0():
     # WHEN / THEN
-    assert TagStr("").is_tag() is False
-    assert TagStr("A").is_tag()
+    assert WordStr("").is_word() is False
+    assert WordStr("A").is_word()
 
     # WHEN / THEN
     x_s = default_bridge_if_None()
-    x_tagstr = TagStr(f"casa{x_s}kitchen")
-    assert x_tagstr.is_tag() is False
+    x_wordstr = WordStr(f"casa{x_s}kitchen")
+    assert x_wordstr.is_word() is False
 
 
-def test_TagStr_is_tag_ReturnsObj_Scenario1():
+def test_WordStr_is_word_ReturnsObj_Scenario1():
     # ESTABLISH / WHEN / THEN
     slash_str = "/"
-    x_tagstr = TagStr(f"casa{slash_str}kitchen")
-    assert x_tagstr.is_tag()
-    assert x_tagstr.is_tag(slash_str) is False
+    x_wordstr = WordStr(f"casa{slash_str}kitchen")
+    assert x_wordstr.is_word()
+    assert x_wordstr.is_word(slash_str) is False
 
 
 def test_WayStr_exists():
@@ -155,7 +155,7 @@ def test_WayStr_exists():
     # THEN
     assert x_way == empty_str
     doc_str = (
-        "A string representation of a tree path. TagStrs are seperated by way bridge"
+        "A string representation of a tree path. WordStrs are seperated by way bridge"
     )
     assert inspect_getdoc(x_way) == doc_str
 
@@ -167,19 +167,19 @@ def test_YawStr_exists():
     x_way = YawStr(empty_str)
     # THEN
     assert x_way == empty_str
-    doc_str = "YawStr is a WayStr in reverse direction. A string representation of a tree path. TagStrs are seperated by way bridge."
+    doc_str = "YawStr is a WayStr in reverse direction. A string representation of a tree path. WordStrs are seperated by way bridge."
     assert inspect_getdoc(x_way) == doc_str
 
 
-def test_TimeLineTag_exists():
+def test_TimeLineWord_exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_timelinetag = TimeLineTag(empty_str)
+    x_timelineword = TimeLineWord(empty_str)
     # THEN
-    assert x_timelinetag == empty_str
-    doc_str = "TimeLineTag is required for every TimeLineUnit. It is a TagStr that must not container the bridge."
-    assert inspect_getdoc(x_timelinetag) == doc_str
+    assert x_timelineword == empty_str
+    doc_str = "TimeLineWord is required for every TimeLineUnit. It is a WordStr that must not container the bridge."
+    assert inspect_getdoc(x_timelineword) == doc_str
 
 
 def test_WorldID_Exists():

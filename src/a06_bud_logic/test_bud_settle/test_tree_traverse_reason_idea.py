@@ -245,8 +245,8 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
     a4_bud = get_budunit_with_4_levels()
     casa_str = "casa"
     casa_way = a4_bud.make_l1_way(casa_str)
-    week_idea_tag = "weekdays"
-    week_way = a4_bud.make_l1_way(week_idea_tag)
+    week_idea_word = "weekdays"
+    week_way = a4_bud.make_l1_way(week_idea_word)
     wed_str = "Wednesday"
     wed_way = a4_bud.make_way(week_way, wed_str)
 
@@ -425,7 +425,7 @@ def test_BudUnit_ReasonUnits_set_premiseIdeaWithBeginCloseSetsPremisePopen_Pnigh
     time_way = sue_bud.make_l1_way(time)
     rus_war = "rus_war"
     rus_war_way = sue_bud.make_way(time_way, rus_war)
-    sue_bud.set_idea(ideaunit_shop(time, begin=100, close=2000), sue_bud.fisc_tag)
+    sue_bud.set_idea(ideaunit_shop(time, begin=100, close=2000), sue_bud.fisc_word)
     sue_bud.set_idea(ideaunit_shop(rus_war, begin=22, close=34), time_way)
 
     # WHEN
@@ -513,7 +513,7 @@ def test_BudUnit_edit_idea_attr_budIsAbleToEdit_rcontext_idea_active_requisite_A
 
     run_str = "run to casa"
     run_way = sue_bud.make_l1_way(run_str)
-    sue_bud.set_idea(ideaunit_shop(run_str), sue_bud.fisc_tag)
+    sue_bud.set_idea(ideaunit_shop(run_str), sue_bud.fisc_word)
     sue_bud.settle_bud()  # set tree metrics
     run_idea = sue_bud.get_idea_obj(run_way)
     assert len(run_idea.reasonunits) == 0
@@ -593,7 +593,7 @@ def test_BudUnit_ReasonUnits_IdeaUnit_active_InfluencesReasonUnitStatus():
     # 5.2. idea(...,casa).active = False
     run_str = "run to casa"
     run_way = sue_bud.make_l1_way(run_str)
-    sue_bud.set_idea(ideaunit_shop(run_str), sue_bud.fisc_tag)
+    sue_bud.set_idea(ideaunit_shop(run_str), sue_bud.fisc_word)
     sue_bud.edit_idea_attr(
         run_way,
         reason_rcontext=casa_way,

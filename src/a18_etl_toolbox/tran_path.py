@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a01_way_logic.way import OwnerName, TagStr, FaceName, EventInt
+from src.a01_way_logic.way import OwnerName, WordStr, FaceName, EventInt
 
 
 BRICK_PIDGIN_FILENAME = "pidgin.xlsx"

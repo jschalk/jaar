@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path, open_file
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_word_str
 from src.a06_bud_logic._utils.str_a06 import (
     bud_acctunit_str,
     face_name_str,
@@ -48,7 +48,7 @@ def test_WorldUnit_bud_tables_to_event_bud_csvs_CreatesFiles(
         cursor = bud_db_conn.cursor()
         create_bud_prime_tables(cursor)
         insert_raw_sqlstr = f"""
-INSERT INTO {put_agg_tablename} ({event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()})
+INSERT INTO {put_agg_tablename} ({event_int_str()},{face_name_str()},{fisc_word_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()})
 VALUES
   ({event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5})
 , ({event7},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5})
@@ -72,10 +72,10 @@ VALUES
         e7_put_csv = open_file(a23_e7_budacct_put_path)
         print(f"{e3_put_csv=}")
         print(f"{e7_put_csv=}")
-        expected_e3_put_csv = f"""event_int,{face_name_str()},fisc_tag,owner_name,acct_name,credit_belief,debtit_belief
+        expected_e3_put_csv = f"""event_int,{face_name_str()},fisc_word,owner_name,acct_name,credit_belief,debtit_belief
 3,Suzy,accord23,Bobby,Bobby,5.0,
 """
-        expected_e7_put_csv = """event_int,face_name,fisc_tag,owner_name,acct_name,credit_belief,debtit_belief
+        expected_e7_put_csv = """event_int,face_name,fisc_word,owner_name,acct_name,credit_belief,debtit_belief
 7,Suzy,accord23,Bobby,Bobby,5.0,
 7,Suzy,accord23,Bobby,Suzy,7.0,
 """
@@ -104,7 +104,7 @@ VALUES
 #         create_bud_prime_tables(cursor)
 #         raw_tablename = f"{bud_acctunit_str()}_del_raw"
 #         insert_raw_sqlstr = f"""
-# INSERT INTO {raw_tablename} ({creed_number_str()},{event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_delete_str},error_message)
+# INSERT INTO {raw_tablename} ({creed_number_str()},{event_int_str()},{face_name_str()},{fisc_word_str()},{owner_name_str()},{acct_name_delete_str},error_message)
 # VALUES
 #   ('br00051',{event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',NULL)
 # , ('br00051',{event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',NULL)
@@ -123,7 +123,7 @@ VALUES
 
 #         # THEN
 #         assert get_row_count(cursor, agg_tablename) == 2
-#         select_sqlstr = f"SELECT {event_int_str()}, {fisc_tag_str()}, {acct_name_delete_str} FROM {agg_tablename};"
+#         select_sqlstr = f"SELECT {event_int_str()}, {fisc_word_str()}, {acct_name_delete_str} FROM {agg_tablename};"
 #         cursor.execute(select_sqlstr)
 #         budunit_agg_rows = cursor.fetchall()
 #         assert budunit_agg_rows == [

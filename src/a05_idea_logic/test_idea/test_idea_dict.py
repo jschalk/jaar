@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import get_default_fisc_tag as root_tag, create_way
+from src.a01_way_logic.way import get_default_fisc_word as root_word, create_way
 from src.a05_idea_logic.healer import healerlink_shop
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_idea import (
@@ -64,11 +64,11 @@ def test_get_obj_from_idea_dict_ReturnsCorrect_HealerLink():
 def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     # ESTABLISH
     week_str = "weekdays"
-    week_way = create_way(root_tag(), week_str)
+    week_way = create_way(root_word(), week_str)
     wed_str = "Wednesday"
     wed_way = create_way(week_way, wed_str)
     states_str = "nation-state"
-    states_way = create_way(root_tag(), states_str)
+    states_way = create_way(root_word(), states_str)
     usa_str = "USA"
     usa_way = create_way(states_way, usa_str)
 
@@ -126,14 +126,14 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     sue_laborunit = laborunit_shop({sue_str: -1, yao_str: -1})
     yao_healerlink = healerlink_shop({yao_str})
     casa_str = "casa"
-    casa_way = create_way(root_tag(), casa_str)
+    casa_way = create_way(root_word(), casa_str)
     x_problem_bool = True
     casa_idea = ideaunit_shop(
         parent_way=casa_way,
         _kids=None,
         awardlinks=biker_and_flyer_awardlinks,
         mass=30,
-        idea_tag=casa_str,
+        idea_word=casa_str,
         _level=1,
         reasonunits=x1_reasonunits,
         _reasonheirs=x1_reasonheirs,
@@ -180,7 +180,7 @@ def test_IdeaUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_dict["healerlink"] == yao_healerlink.get_dict()
     assert casa_dict["originunit"] == casa_idea.get_originunit_dict()
     assert casa_dict["mass"] == casa_idea.mass
-    assert casa_dict["idea_tag"] == casa_idea.idea_tag
+    assert casa_dict["idea_word"] == casa_idea.idea_word
     assert casa_dict["_uid"] == casa_idea._uid
     assert casa_dict["begin"] == casa_idea.begin
     assert casa_dict["close"] == casa_idea.close
@@ -217,7 +217,7 @@ def test_IdeaUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     ignore_str = "ignore"
 
     a_str = "a"
-    a_way = create_way(root_tag(), a_str)
+    a_way = create_way(root_word(), a_str)
     casa_idea.set_factunit(factunit_shop(a_way, a_way))
 
     yao_str = "Yao"

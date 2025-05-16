@@ -38,7 +38,7 @@ from src.a07_calendar_logic._utils.calendar_examples import (
     get_thu,
     get_fri,
     get_sat,
-    creg_hour_tag,
+    creg_hour_word,
     cregtime_ideaunit,
     creg_weekday_ideaunits,
     creg_str,
@@ -368,30 +368,30 @@ def test_add_time_creg_ideaunit_ReturnsObjWith_hours():
     creg_way = sue_budunit.make_way(time_way, get_cregtime_str())
     day_way = sue_budunit.make_way(creg_way, day_str())
     hour_way = sue_budunit.make_way(day_way, hour_str())
-    hr_00_way = sue_budunit.make_way(day_way, creg_hour_tag(0))
-    hr_01_way = sue_budunit.make_way(day_way, creg_hour_tag(1))
-    hr_02_way = sue_budunit.make_way(day_way, creg_hour_tag(2))
-    hr_03_way = sue_budunit.make_way(day_way, creg_hour_tag(3))
-    hr_04_way = sue_budunit.make_way(day_way, creg_hour_tag(4))
-    hr_05_way = sue_budunit.make_way(day_way, creg_hour_tag(5))
-    hr_06_way = sue_budunit.make_way(day_way, creg_hour_tag(6))
-    hr_07_way = sue_budunit.make_way(day_way, creg_hour_tag(7))
-    hr_08_way = sue_budunit.make_way(day_way, creg_hour_tag(8))
-    hr_09_way = sue_budunit.make_way(day_way, creg_hour_tag(9))
-    hr_10_way = sue_budunit.make_way(day_way, creg_hour_tag(10))
-    hr_11_way = sue_budunit.make_way(day_way, creg_hour_tag(11))
-    hr_12_way = sue_budunit.make_way(day_way, creg_hour_tag(12))
-    hr_13_way = sue_budunit.make_way(day_way, creg_hour_tag(13))
-    hr_14_way = sue_budunit.make_way(day_way, creg_hour_tag(14))
-    hr_15_way = sue_budunit.make_way(day_way, creg_hour_tag(15))
-    hr_16_way = sue_budunit.make_way(day_way, creg_hour_tag(16))
-    hr_17_way = sue_budunit.make_way(day_way, creg_hour_tag(17))
-    hr_18_way = sue_budunit.make_way(day_way, creg_hour_tag(18))
-    hr_19_way = sue_budunit.make_way(day_way, creg_hour_tag(19))
-    hr_20_way = sue_budunit.make_way(day_way, creg_hour_tag(20))
-    hr_21_way = sue_budunit.make_way(day_way, creg_hour_tag(21))
-    hr_22_way = sue_budunit.make_way(day_way, creg_hour_tag(22))
-    hr_23_way = sue_budunit.make_way(day_way, creg_hour_tag(23))
+    hr_00_way = sue_budunit.make_way(day_way, creg_hour_word(0))
+    hr_01_way = sue_budunit.make_way(day_way, creg_hour_word(1))
+    hr_02_way = sue_budunit.make_way(day_way, creg_hour_word(2))
+    hr_03_way = sue_budunit.make_way(day_way, creg_hour_word(3))
+    hr_04_way = sue_budunit.make_way(day_way, creg_hour_word(4))
+    hr_05_way = sue_budunit.make_way(day_way, creg_hour_word(5))
+    hr_06_way = sue_budunit.make_way(day_way, creg_hour_word(6))
+    hr_07_way = sue_budunit.make_way(day_way, creg_hour_word(7))
+    hr_08_way = sue_budunit.make_way(day_way, creg_hour_word(8))
+    hr_09_way = sue_budunit.make_way(day_way, creg_hour_word(9))
+    hr_10_way = sue_budunit.make_way(day_way, creg_hour_word(10))
+    hr_11_way = sue_budunit.make_way(day_way, creg_hour_word(11))
+    hr_12_way = sue_budunit.make_way(day_way, creg_hour_word(12))
+    hr_13_way = sue_budunit.make_way(day_way, creg_hour_word(13))
+    hr_14_way = sue_budunit.make_way(day_way, creg_hour_word(14))
+    hr_15_way = sue_budunit.make_way(day_way, creg_hour_word(15))
+    hr_16_way = sue_budunit.make_way(day_way, creg_hour_word(16))
+    hr_17_way = sue_budunit.make_way(day_way, creg_hour_word(17))
+    hr_18_way = sue_budunit.make_way(day_way, creg_hour_word(18))
+    hr_19_way = sue_budunit.make_way(day_way, creg_hour_word(19))
+    hr_20_way = sue_budunit.make_way(day_way, creg_hour_word(20))
+    hr_21_way = sue_budunit.make_way(day_way, creg_hour_word(21))
+    hr_22_way = sue_budunit.make_way(day_way, creg_hour_word(22))
+    hr_23_way = sue_budunit.make_way(day_way, creg_hour_word(23))
 
     print(f"{day_way=}")
     print(f"{hr_00_way=}")
@@ -664,7 +664,7 @@ def test_BudUnit_create_agenda_idea_CorrectlyCreatesAllBudAttributes():
 
     print(f"{sweep_idea.get_idea_way()=}")
     assert sue_bud.get_idea_obj(sweep_way) is not None
-    assert sue_bud.get_idea_obj(sweep_way).idea_tag == sweep_str
+    assert sue_bud.get_idea_obj(sweep_way).idea_word == sweep_str
     assert sue_bud.get_idea_obj(sweep_way).pledge
     assert len(sue_bud.get_idea_obj(sweep_way).reasonunits) == 2
     assert sue_bud.get_idea_obj(clean_way) is not None
@@ -717,8 +717,8 @@ def test_IdeaCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
     # )
     # print(f"{laundry_reasonheir.rcontext=} {laundry_premise=}")
     # for x_ideaunit in sue_bud._idea_dict.values():
-    #     if x_ideaunit.idea_tag in [laundry_str]:
-    #         print(f"{x_ideaunit.idea_tag=} {x_ideaunit.begin=} {x_ideaunit.close=}")
+    #     if x_ideaunit.idea_word in [laundry_str]:
+    #         print(f"{x_ideaunit.idea_word=} {x_ideaunit.begin=} {x_ideaunit.close=}")
     #         print(f"{x_ideaunit._kids.keys()=}")
 
     # WHEN
@@ -739,8 +739,8 @@ def test_IdeaCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
     #     f"{laundry_idea._active=} {laundry_premise.pnigh=} {laundry_factheir.fnigh % 10080=}"
     # )
     # for x_ideaunit in sue_bud._idea_dict.values():
-    #     if x_ideaunit.idea_tag in [laundry_str]:
-    #         print(f"{x_ideaunit.idea_tag=} {x_ideaunit.begin=} {x_ideaunit.close=}")
+    #     if x_ideaunit.idea_word in [laundry_str]:
+    #         print(f"{x_ideaunit.idea_word=} {x_ideaunit.begin=} {x_ideaunit.close=}")
     #         print(f"{x_ideaunit._kids.keys()=}")
     #         creg_factheir = x_ideaunit._factheirs.get(cregtime_way)
     #         print(f"{creg_factheir.fopen % 10080=}")

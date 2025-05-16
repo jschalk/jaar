@@ -1,7 +1,7 @@
 from src.a02_finance_logic._utils.strs_a02 import (
     owner_name_str,
     deal_time_str,
-    fisc_tag_str,
+    fisc_word_str,
     world_id_str,
 )
 from src.a06_bud_logic._utils.str_a06 import event_int_str

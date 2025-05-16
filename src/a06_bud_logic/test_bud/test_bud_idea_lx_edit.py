@@ -1,5 +1,5 @@
 from src.a01_way_logic.way import (
-    get_default_fisc_tag as root_tag,
+    get_default_fisc_word as root_word,
     to_way,
     get_default_fisc_way,
 )
@@ -11,7 +11,7 @@ from src.a06_bud_logic._utils.example_buds import (
 from pytest import raises as pytest_raises
 
 
-def test_BudUnit_edit_idea_tag_FailsWhenIdeaDoesNotExist():
+def test_BudUnit_edit_idea_word_FailsWhenIdeaDoesNotExist():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
 
@@ -24,11 +24,11 @@ def test_BudUnit_edit_idea_tag_FailsWhenIdeaDoesNotExist():
     # WHEN / THEN
     no_idea_way = yao_bud.make_l1_way("bees")
     with pytest_raises(Exception) as excinfo:
-        yao_bud.edit_idea_tag(old_way=no_idea_way, new_idea_tag="birds")
+        yao_bud.edit_idea_word(old_way=no_idea_way, new_idea_word="birds")
     assert str(excinfo.value) == f"Idea old_way='{no_idea_way}' does not exist"
 
 
-def test_BudUnit_edit_idea_tag_RaisesErrorForLevel0IdeaWhen_fisc_tag_isNone():
+def test_BudUnit_edit_idea_word_RaisesErrorForLevel0IdeaWhen_fisc_word_isNone():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(owner_name=yao_str)
@@ -40,27 +40,27 @@ def test_BudUnit_edit_idea_tag_RaisesErrorForLevel0IdeaWhen_fisc_tag_isNone():
     yao_bud.set_l1_idea(ideaunit_shop(casa_str))
     yao_bud.set_idea(ideaunit_shop(swim_str), parent_way=casa_way)
     assert yao_bud.owner_name == yao_str
-    assert yao_bud.idearoot.idea_tag == yao_bud.fisc_tag
+    assert yao_bud.idearoot.idea_word == yao_bud.fisc_word
     casa_idea = yao_bud.get_idea_obj(casa_way)
-    assert casa_idea.parent_way == to_way(yao_bud.fisc_tag)
+    assert casa_idea.parent_way == to_way(yao_bud.fisc_word)
     swim_idea = yao_bud.get_idea_obj(swim_way)
-    root_way = to_way(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_word)
     assert swim_idea.parent_way == casa_way
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         moon_str = "moon"
-        yao_bud.edit_idea_tag(old_way=root_way, new_idea_tag=moon_str)
+        yao_bud.edit_idea_word(old_way=root_way, new_idea_word=moon_str)
     assert (
         str(excinfo.value)
-        == f"Cannot set idearoot to string different than '{yao_bud.fisc_tag}'"
+        == f"Cannot set idearoot to string different than '{yao_bud.fisc_word}'"
     )
 
-    assert yao_bud.idearoot.idea_tag != moon_str
-    assert yao_bud.idearoot.idea_tag == yao_bud.fisc_tag
+    assert yao_bud.idearoot.idea_word != moon_str
+    assert yao_bud.idearoot.idea_word == yao_bud.fisc_word
 
 
-def test_BudUnit_edit_idea_tag_RaisesErrorForLevel0When_fisc_tag_IsDifferent():
+def test_BudUnit_edit_idea_word_RaisesErrorForLevel0When_fisc_word_IsDifferent():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(owner_name=yao_str)
@@ -71,12 +71,12 @@ def test_BudUnit_edit_idea_tag_RaisesErrorForLevel0When_fisc_tag_IsDifferent():
     yao_bud.set_l1_idea(ideaunit_shop(casa_str))
     yao_bud.set_idea(ideaunit_shop(swim_str), parent_way=casa_way)
     sun_str = "sun"
-    yao_bud.fisc_tag = sun_str
-    yao_bud.idearoot.fisc_tag = sun_str
+    yao_bud.fisc_word = sun_str
+    yao_bud.idearoot.fisc_word = sun_str
     assert yao_bud.owner_name == yao_str
-    assert yao_bud.fisc_tag == sun_str
-    assert yao_bud.idearoot.fisc_tag == sun_str
-    assert yao_bud.idearoot.idea_tag == root_tag()
+    assert yao_bud.fisc_word == sun_str
+    assert yao_bud.idearoot.fisc_word == sun_str
+    assert yao_bud.idearoot.idea_word == root_word()
     casa_idea = yao_bud.get_idea_obj(casa_way)
     assert casa_idea.parent_way == get_default_fisc_way()
     swim_idea = yao_bud.get_idea_obj(swim_way)
@@ -86,7 +86,7 @@ def test_BudUnit_edit_idea_tag_RaisesErrorForLevel0When_fisc_tag_IsDifferent():
 
     with pytest_raises(Exception) as excinfo:
         moon_str = "moon"
-        yao_bud.edit_idea_tag(old_way=get_default_fisc_way(), new_idea_tag=moon_str)
+        yao_bud.edit_idea_word(old_way=get_default_fisc_way(), new_idea_word=moon_str)
     assert (
         str(excinfo.value)
         == f"Cannot set idearoot to string different than '{sun_str}'"
@@ -123,7 +123,7 @@ def test_BudUnit_find_replace_way_CorrectlyModifies_kids_Scenario1():
     # WHEN
     new_casa_str = "casita"
     new_casa_way = yao_bud.make_l1_way(new_casa_str)
-    yao_bud.edit_idea_tag(old_way=old_casa_way, new_idea_tag=new_casa_str)
+    yao_bud.edit_idea_word(old_way=old_casa_way, new_idea_word=new_casa_str)
 
     # THEN
     assert yao_bud.idearoot._kids.get(new_casa_str) is not None
@@ -141,7 +141,7 @@ def test_BudUnit_find_replace_way_CorrectlyModifies_kids_Scenario1():
     assert r_idea_red.parent_way == new_roses_way
 
 
-def test_bud_edit_idea_tag_Modifies_factunits():
+def test_bud_edit_idea_word_Modifies_factunits():
     # ESTABLISH bud with factunits that will be different
     yao_str = "Yao"
     yao_bud = budunit_shop(yao_str)
@@ -173,7 +173,7 @@ def test_bud_edit_idea_tag_Modifies_factunits():
     new_water_way = yao_bud.make_l1_way(new_water_str)
     yao_bud.set_l1_idea(ideaunit_shop(new_water_str))
     assert yao_bud.idearoot.factunits.get(new_water_way) is None
-    yao_bud.edit_idea_tag(old_way=old_water_way, new_idea_tag=new_water_str)
+    yao_bud.edit_idea_word(old_way=old_water_way, new_idea_word=new_water_str)
 
     # THEN
     assert yao_bud.idearoot.factunits.get(old_water_way) is None
@@ -191,7 +191,7 @@ def test_bud_edit_idea_tag_Modifies_factunits():
     assert x_factunit.fbranch == new_rain_way
 
 
-def test_bud_edit_idea_tag_ModifiesIdeaReasonUnitsScenario1():
+def test_bud_edit_idea_word_ModifiesIdeaReasonUnitsScenario1():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels_and_2reasons_2facts()
     old_weekday_str = "weekdays"
@@ -217,12 +217,12 @@ def test_bud_edit_idea_tag_ModifiesIdeaReasonUnitsScenario1():
     # WHEN
     # for key_x, x_reason in casa_idea.reasonunits.items():
     #     print(f"Before {key_x=} {x_reason.rcontext=}")
-    print(f"before {wednesday_idea.idea_tag=}")
+    print(f"before {wednesday_idea.idea_word=}")
     print(f"before {wednesday_idea.parent_way=}")
-    sue_bud.edit_idea_tag(old_way=old_weekday_way, new_idea_tag=new_weekday_str)
+    sue_bud.edit_idea_word(old_way=old_weekday_way, new_idea_word=new_weekday_str)
     # for key_x, x_reason in casa_idea.reasonunits.items():
     #     print(f"after {key_x=} {x_reason.rcontext=}")
-    print(f"after  {wednesday_idea.idea_tag=}")
+    print(f"after  {wednesday_idea.idea_word=}")
     print(f"after  {wednesday_idea.parent_way=}")
 
     # THEN
@@ -240,11 +240,11 @@ def test_bud_set_owner_name_CorrectlyModifiesBoth():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels_and_2reasons_2facts()
     assert sue_bud.owner_name == "Sue"
-    assert sue_bud.idearoot.idea_tag == sue_bud.fisc_tag
-    # mid_idea_tag1 = "Yao"
-    # sue_bud.edit_idea_tag(old_way=old_idea_tag, new_idea_tag=mid_idea_tag1)
-    # assert sue_bud.owner_name == old_idea_tag
-    # assert sue_bud.idearoot.idea_tag == mid_idea_tag1
+    assert sue_bud.idearoot.idea_word == sue_bud.fisc_word
+    # mid_idea_word1 = "Yao"
+    # sue_bud.edit_idea_word(old_way=old_idea_word, new_idea_word=mid_idea_word1)
+    # assert sue_bud.owner_name == old_idea_word
+    # assert sue_bud.idearoot.idea_word == mid_idea_word1
 
     # WHEN
     bob_str = "Bob"
@@ -252,10 +252,10 @@ def test_bud_set_owner_name_CorrectlyModifiesBoth():
 
     # THEN
     assert sue_bud.owner_name == bob_str
-    assert sue_bud.idearoot.idea_tag == sue_bud.fisc_tag
+    assert sue_bud.idearoot.idea_word == sue_bud.fisc_word
 
 
-def test_bud_edit_idea_tag_RaisesErrorIfbridgeIsInTag():
+def test_bud_edit_idea_word_RaisesErrorIfbridgeIsInWord():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels_and_2reasons_2facts()
     old_weekday_str = "weekdays"
@@ -264,8 +264,8 @@ def test_bud_edit_idea_tag_RaisesErrorIfbridgeIsInTag():
     # WHEN / THEN
     new_weekday_str = "days; of week"
     with pytest_raises(Exception) as excinfo:
-        sue_bud.edit_idea_tag(old_way=old_weekday_way, new_idea_tag=new_weekday_str)
+        sue_bud.edit_idea_word(old_way=old_weekday_way, new_idea_word=new_weekday_str)
     assert (
         str(excinfo.value)
-        == f"Cannot modify '{old_weekday_way}' because new_idea_tag {new_weekday_str} contains bridge {sue_bud.bridge}"
+        == f"Cannot modify '{old_weekday_way}' because new_idea_word {new_weekday_str} contains bridge {sue_bud.bridge}"
     )

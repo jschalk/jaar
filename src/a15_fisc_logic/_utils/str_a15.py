@@ -18,12 +18,12 @@ def amount_str() -> str:
     return "amount"
 
 
-def month_tag_str() -> str:
-    return "month_tag"
+def month_word_str() -> str:
+    return "month_word"
 
 
-def hour_tag_str() -> str:
-    return "hour_tag"
+def hour_word_str() -> str:
+    return "hour_word"
 
 
 def cumlative_minute_str() -> str:
@@ -34,8 +34,8 @@ def cumlative_day_str() -> str:
     return "cumlative_day"
 
 
-def weekday_tag_str() -> str:
-    return "weekday_tag"
+def weekday_word_str() -> str:
+    return "weekday_word"
 
 
 def weekday_order_str() -> str:

@@ -7,7 +7,7 @@
             "inx_bridge": {},
             "inx_label": {},
             "otx_bridge": {},
-            "unknown_word": {}
+            "unknown_term": {}
         }
     },
     "pidgin_name": {
@@ -18,18 +18,18 @@
             "inx_bridge": {},
             "inx_name": {},
             "otx_bridge": {},
-            "unknown_word": {}
+            "unknown_term": {}
         }
     },
-    "pidgin_tag": {
+    "pidgin_word": {
         "jkeys": {
-            "otx_tag": {}
+            "otx_word": {}
         },
         "jvalues": {
             "inx_bridge": {},
-            "inx_tag": {},
+            "inx_word": {},
             "otx_bridge": {},
-            "unknown_word": {}
+            "unknown_term": {}
         }
     },
     "pidgin_way": {
@@ -40,7 +40,7 @@
             "inx_bridge": {},
             "inx_way": {},
             "otx_bridge": {},
-            "unknown_word": {}
+            "unknown_term": {}
         }
     }
 }

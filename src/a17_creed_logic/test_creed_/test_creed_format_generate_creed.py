@@ -37,8 +37,8 @@ def test_make_buddelta_Arg_creed_format_00021_bud_acctunit_v0_0_0():
     sue_debtit_belief = 23
     bob_debtit_belief = 29
     yao_debtit_belief = 37
-    accord_fisc_tag = "accord56"
-    sue_budunit = budunit_shop(sue_str, accord_fisc_tag)
+    accord_fisc_word = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_fisc_word)
     sue_budunit.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
     sue_budunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
@@ -77,8 +77,8 @@ def test_make_buddelta_Arg_creed_format_00021_bud_acctunit_v0_0_0():
 #     sue_str = "Sue"
 #     bob_str = "Bob"
 #     yao_str = "Yao"
-#     accord_fisc_tag = "accord56"
-#     sue_budunit = budunit_shop(sue_str, accord_fisc_tag)
+#     accord_fisc_word = "accord56"
+#     sue_budunit = budunit_shop(sue_str, accord_fisc_word)
 #     sue_budunit.add_acctunit(sue_str)
 #     sue_budunit.add_acctunit(bob_str)
 #     sue_budunit.add_acctunit(yao_str)
@@ -147,8 +147,8 @@ def test_make_buddelta_Arg_creed_format_00013_ideaunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
-    accord_fisc_tag = "accord56"
-    sue_budunit = budunit_shop(sue_str, accord_fisc_tag)
+    accord_fisc_word = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_fisc_word)
     casa_str = "casa"
     casa_way = sue_budunit.make_l1_way(casa_str)
     casa_mass = 31
@@ -200,8 +200,8 @@ def test_make_buddelta_Arg_creed_format_00013_ideaunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
-    accord_fisc_tag = "accord56"
-    sue_budunit = budunit_shop(sue_str, accord_fisc_tag)
+    accord_fisc_word = "accord56"
+    sue_budunit = budunit_shop(sue_str, accord_fisc_word)
     casa_str = "casa"
     casa_way = sue_budunit.make_l1_way(casa_str)
     casa_mass = 31

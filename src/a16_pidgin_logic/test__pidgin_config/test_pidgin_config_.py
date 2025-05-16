@@ -16,16 +16,16 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_label_str,
     inx_name_str,
     otx_name_str,
-    inx_tag_str,
-    otx_tag_str,
+    inx_word_str,
+    otx_word_str,
     inx_way_str,
     otx_way_str,
-    unknown_word_str,
+    unknown_term_str,
     otx2inx_str,
     map_otx2inx_str,
     pidgin_name_str,
     pidgin_label_str,
-    pidgin_tag_str,
+    pidgin_word_str,
     pidgin_way_str,
     pidgin_core_str,
 )
@@ -36,8 +36,8 @@ from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_config_dict,
     get_pidgin_args_dimen_mapping,
     get_quick_pidgens_column_ref,
-    default_unknown_word,
-    default_unknown_word_if_None,
+    default_unknown_term,
+    default_unknown_term_if_None,
 )
 from os import getcwd as os_getcwd
 
@@ -51,15 +51,15 @@ def test_str_functions_ReturnsObj():
     assert otx_label_str() == "otx_label"
     assert inx_name_str() == "inx_name"
     assert otx_name_str() == "otx_name"
-    assert inx_tag_str() == "inx_tag"
-    assert otx_tag_str() == "otx_tag"
+    assert inx_word_str() == "inx_word"
+    assert otx_word_str() == "otx_word"
     assert inx_way_str() == "inx_way"
     assert otx_way_str() == "otx_way"
-    assert unknown_word_str() == "unknown_word"
+    assert unknown_term_str() == "unknown_term"
     assert otx2inx_str() == "otx2inx"
     assert pidgin_name_str() == "pidgin_name"
     assert pidgin_label_str() == "pidgin_label"
-    assert pidgin_tag_str() == "pidgin_tag"
+    assert pidgin_word_str() == "pidgin_word"
     assert pidgin_way_str() == "pidgin_way"
     assert pidgin_core_str() == "pidgin_core"
     assert map_otx2inx_str() == "map_otx2inx"
@@ -84,17 +84,17 @@ def test_get_pidgin_config_dict_ReturnsObj():
     pidgin_config_dimens = set(pidgin_config.keys())
     assert pidgin_name_str() in pidgin_config_dimens
     assert pidgin_label_str() in pidgin_config_dimens
-    assert pidgin_tag_str() in pidgin_config_dimens
+    assert pidgin_word_str() in pidgin_config_dimens
     assert pidgin_way_str() in pidgin_config_dimens
     assert len(pidgin_config) == 4
 
     _validate_pidgin_config(pidgin_config)
     pidgin_way_dict = pidgin_config.get(pidgin_way_str())
-    pidgin_tag_dict = pidgin_config.get(pidgin_tag_str())
+    pidgin_word_dict = pidgin_config.get(pidgin_word_str())
     assert len(pidgin_way_dict.get(jkeys_str())) == 1
-    assert len(pidgin_tag_dict.get(jkeys_str())) == 1
+    assert len(pidgin_word_dict.get(jkeys_str())) == 1
     assert len(pidgin_way_dict.get(jvalues_str())) == 4
-    assert len(pidgin_tag_dict.get(jvalues_str())) == 4
+    assert len(pidgin_word_dict.get(jvalues_str())) == 4
 
     # assert gen_jvalues == x_pidginunit_jvalues
     # assert len(pidginunit_dict.get(jvalues_str())) == 9
@@ -113,11 +113,11 @@ def _validate_pidgin_config(pidgin_config: dict):
         otx_label_str(),
         inx_name_str(),
         otx_name_str(),
-        inx_tag_str(),
-        otx_tag_str(),
+        inx_word_str(),
+        otx_word_str(),
         inx_way_str(),
         otx_way_str(),
-        unknown_word_str(),
+        unknown_term_str(),
     }
 
     # for every pidgin_format file there exists a unique pidgin_number with leading zeros to make 5 digits
@@ -147,7 +147,7 @@ def test_get_pidgin_dimens_ReturnsObj():
     # THEN
     assert pidgin_name_str() in pidgin_config_dimens
     assert pidgin_label_str() in pidgin_config_dimens
-    assert pidgin_tag_str() in pidgin_config_dimens
+    assert pidgin_word_str() in pidgin_config_dimens
     assert pidgin_way_str() in pidgin_config_dimens
     assert len(pidgin_config_dimens) == 4
 
@@ -190,18 +190,18 @@ def test_get_quick_pidgens_column_ref_ReturnsObj():
     assert get_quick_pidgens_column_ref() == all_pidgen_config_attrs
 
 
-def test_default_unknown_word_ReturnsObj():
+def test_default_unknown_term_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert default_unknown_word() == "UNKNOWN"
+    assert default_unknown_term() == "UNKNOWN"
 
 
-def test_default_unknown_word_if_None_ReturnsObj():
+def test_default_unknown_term_if_None_ReturnsObj():
     # ESTABLISH
     unknown33_str = "unknown33"
     x_nan = float("nan")
 
     # WHEN / THEN
-    assert default_unknown_word_if_None() == default_unknown_word()
-    assert default_unknown_word_if_None(None) == default_unknown_word()
-    assert default_unknown_word_if_None(unknown33_str) == unknown33_str
-    assert default_unknown_word_if_None(x_nan) == default_unknown_word()
+    assert default_unknown_term_if_None() == default_unknown_term()
+    assert default_unknown_term_if_None(None) == default_unknown_term()
+    assert default_unknown_term_if_None(unknown33_str) == unknown33_str
+    assert default_unknown_term_if_None(x_nan) == default_unknown_term()

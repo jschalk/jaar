@@ -225,7 +225,7 @@ def get_budunit_1Task_1CE0MinutesReason_1Fact() -> BudUnit:
 
 def get_budunit_x1_3levels_1reason_1facts() -> BudUnit:
     tiger_str = "tiger"
-    zia_bud = budunit_shop("Zia", fisc_tag=tiger_str)
+    zia_bud = budunit_shop("Zia", fisc_word=tiger_str)
     shave_str = "shave"
     shave_way = zia_bud.make_l1_way(shave_str)
     idea_kid_shave = ideaunit_shop(shave_str, mass=30, pledge=True)
@@ -396,7 +396,7 @@ def from_list_get_active(way: WayStr, idea_dict: dict, asse_bool: bool = None) -
 
     active = temp_idea._active
     print(
-        f"Set active: {idea.idea_tag=} {active} {active_true_count=} {active_false_count=}"
+        f"Set active: {idea.idea_word=} {active} {active_true_count=} {active_false_count=}"
     )
 
     return active

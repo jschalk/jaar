@@ -7,7 +7,7 @@ from src.a02_finance_logic.finance_config import (
 )
 from src.a06_bud_logic.bud import budunit_shop, BudUnit
 from src.a01_way_logic.way import (
-    get_default_fisc_tag as root_tag,
+    get_default_fisc_word as root_word,
     default_bridge_if_None,
 )
 from src.a05_idea_logic.origin import originunit_shop
@@ -20,7 +20,7 @@ def test_BudUnit_Exists():
 
     # THEN
     assert x_bud
-    assert x_bud.fisc_tag is None
+    assert x_bud.fisc_word is None
     assert x_bud.owner_name is None
     assert x_bud.tally is None
     assert x_bud.accts is None
@@ -54,7 +54,7 @@ def test_BudUnit_Exists():
 def test_budunit_shop_ReturnsObjectWithFilledFields():
     # ESTABLISH
     sue_str = "Sue"
-    iowa_fisc_tag = "Iowa"
+    iowa_fisc_word = "Iowa"
     slash_bridge = "/"
     x_fund_pool = 555
     x_fund_coin = 7
@@ -64,7 +64,7 @@ def test_budunit_shop_ReturnsObjectWithFilledFields():
     # WHEN
     x_bud = budunit_shop(
         owner_name=sue_str,
-        fisc_tag=iowa_fisc_tag,
+        fisc_word=iowa_fisc_word,
         bridge=slash_bridge,
         fund_pool=x_fund_pool,
         fund_coin=x_fund_coin,
@@ -75,7 +75,7 @@ def test_budunit_shop_ReturnsObjectWithFilledFields():
     # THEN
     assert x_bud
     assert x_bud.owner_name == sue_str
-    assert x_bud.fisc_tag == iowa_fisc_tag
+    assert x_bud.fisc_word == iowa_fisc_word
     assert x_bud.tally == 1
     assert x_bud.accts == {}
     assert x_bud.idearoot is not None
@@ -112,7 +112,7 @@ def test_budunit_shop_ReturnsObjectWithCorrectEmptyField():
 
     # THEN
     assert x_bud.owner_name == ""
-    assert x_bud.fisc_tag == root_tag()
+    assert x_bud.fisc_word == root_word()
     assert x_bud.bridge == default_bridge_if_None()
     assert x_bud.fund_pool == validate_fund_pool()
     assert x_bud.fund_coin == default_fund_coin_if_None()
@@ -123,7 +123,7 @@ def test_budunit_shop_ReturnsObjectWithCorrectEmptyField():
     assert x_bud.idearoot.root
     assert x_bud.idearoot._uid == 1
     assert x_bud.idearoot._level == 0
-    assert x_bud.idearoot.fisc_tag == x_bud.fisc_tag
+    assert x_bud.idearoot.fisc_word == x_bud.fisc_word
     assert x_bud.idearoot.bridge == x_bud.bridge
     assert x_bud.idearoot.parent_way == ""
 
@@ -175,10 +175,10 @@ def test_BudUnit_set_max_tree_traverse_CorrectlyRaisesError():
 
 def test_BudUnit_make_way_ReturnsObj():
     # ESTABLISH
-    x_fisc_tag = "accord45"
+    x_fisc_word = "accord45"
     slash_bridge = "/"
     sue_str = "Sue"
-    sue_bud = budunit_shop(sue_str, x_fisc_tag, bridge=slash_bridge)
+    sue_bud = budunit_shop(sue_str, x_fisc_word, bridge=slash_bridge)
     casa_str = "casa"
     v1_casa_way = sue_bud.make_l1_way(casa_str)
 

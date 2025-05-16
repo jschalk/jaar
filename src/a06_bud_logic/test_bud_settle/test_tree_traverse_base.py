@@ -164,7 +164,7 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_1():
     sue_bud.set_idea(email_idea, parent_way=casa_way)
 
     # test root status:
-    root_way = to_way(sue_bud.fisc_tag)
+    root_way = to_way(sue_bud.fisc_word)
     x_idearoot = sue_bud.get_idea_obj(root_way)
     assert x_idearoot._descendant_pledge_count is None
     assert x_idearoot._all_acct_cred is None
@@ -368,12 +368,12 @@ def test_BudUnit_get_idea_tree_ordered_way_list_ReturnsObj():
     assert sue_bud.get_idea_tree_ordered_way_list()
 
     # WHEN
-    ordered_tag_list = sue_bud.get_idea_tree_ordered_way_list()
+    ordered_word_list = sue_bud.get_idea_tree_ordered_way_list()
 
     # THEN
-    assert len(ordered_tag_list) == 17
+    assert len(ordered_word_list) == 17
     x_1st_way_in_ordered_list = sue_bud.get_idea_tree_ordered_way_list()[0]
-    root_way = to_way(sue_bud.fisc_tag)
+    root_way = to_way(sue_bud.fisc_word)
     assert x_1st_way_in_ordered_list == root_way
     x_8th_way_in_ordered_list = sue_bud.get_idea_tree_ordered_way_list()[9]
     assert x_8th_way_in_ordered_list == sue_bud.make_l1_way(week_str)
@@ -460,7 +460,7 @@ def test_BudUnit_settle_bud_WhenIdeaRootHas_massButAll_kidsHaveZero_massAddTo_of
     sue_budunit.settle_bud()
 
     # THEN
-    root_way = to_way(sue_budunit.fisc_tag)
+    root_way = to_way(sue_budunit.fisc_word)
     assert sue_budunit._offtrack_kids_mass_set == {root_way}
 
     # WHEN
@@ -520,7 +520,7 @@ def test_BudUnit_settle_bud_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     zia_debtit_belief = 5
     yao_bud.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
     yao_bud.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
-    root_way = to_way(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_word)
     x_idearoot = yao_bud.get_idea_obj(root_way)
     x_idearoot.set_awardlink(awardlink_shop(yao_str))
     x_idearoot.set_awardlink(awardlink_shop(zia_str))
@@ -654,7 +654,7 @@ def test_BudUnit_settle_bud_Sets_idearoot_factheir_With_range_factheirs():
     tue_way = yao_bud.make_way(week_way, tue_str)
     tue_addin = 100
     yao_bud.set_idea(ideaunit_shop(tue_str, addin=tue_addin), week_way)
-    root_way = to_way(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_word)
     yao_bud.edit_idea_attr(root_way, reason_rcontext=tue_way, reason_premise=tue_way)
 
     week_popen = 3

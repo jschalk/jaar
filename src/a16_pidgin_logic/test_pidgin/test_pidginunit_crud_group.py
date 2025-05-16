@@ -50,19 +50,19 @@ def test_PidginUnit_set_labelmap_RaisesErrorIf_labelmap_inx_bridge_IsNotSame():
     assert str(excinfo.value) == exception_str
 
 
-def test_PidginUnit_set_labelmap_RaisesErrorIf_labelmap_unknown_word_IsNotSame():
+def test_PidginUnit_set_labelmap_RaisesErrorIf_labelmap_unknown_term_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    casa_unknown_word = "Unknown_casa"
-    x_labelmap = labelmap_shop(unknown_word=casa_unknown_word, face_name=sue_str)
-    assert sue_pidginunit.unknown_word != x_labelmap.unknown_word
+    casa_unknown_term = "Unknown_casa"
+    x_labelmap = labelmap_shop(unknown_term=casa_unknown_term, face_name=sue_str)
+    assert sue_pidginunit.unknown_term != x_labelmap.unknown_term
     assert sue_pidginunit.labelmap != x_labelmap
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_pidginunit.set_labelmap(x_labelmap)
-    exception_str = f"set_mapcore Error: PidginUnit unknown_word is '{sue_pidginunit.unknown_word}', MapCore is '{casa_unknown_word}'."
+    exception_str = f"set_mapcore Error: PidginUnit unknown_term is '{sue_pidginunit.unknown_term}', MapCore is '{casa_unknown_term}'."
     assert str(excinfo.value) == exception_str
 
 
