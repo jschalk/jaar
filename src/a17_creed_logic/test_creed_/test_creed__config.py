@@ -6,7 +6,7 @@ from src.a02_finance_logic._utils.strs_a02 import (
     bridge_str,
     celldepth_str,
     owner_name_str,
-    fisc_tag_str,
+    fisc_word_str,
     world_id_str,
 )
 from src.a06_bud_logic._utils.str_a06 import (
@@ -62,7 +62,7 @@ from src.a06_bud_logic._utils.str_a06 import (
 from src.a07_calendar_logic._utils.str_a07 import (
     c400_number_str,
     monthday_distortion_str,
-    timeline_tag_str,
+    timeline_word_str,
     yr1_jan1_offset_str,
 )
 from src.a08_bud_atom_logic._utils.str_a08 import (
@@ -94,11 +94,11 @@ from src.a15_fisc_logic._utils.str_a15 import (
     fisc_timeline_weekday_str,
     fisc_timeoffi_str,
     amount_str,
-    month_tag_str,
-    hour_tag_str,
+    month_word_str,
+    hour_word_str,
     cumlative_minute_str,
     cumlative_day_str,
-    weekday_tag_str,
+    weekday_word_str,
     weekday_order_str,
     offi_time_str,
 )
@@ -112,8 +112,8 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_bridge_str,
     inx_bridge_str,
     unknown_term_str,
-    otx_tag_str,
-    inx_tag_str,
+    otx_word_str,
+    inx_word_str,
     otx_way_str,
     inx_way_str,
     otx_name_str,
@@ -123,7 +123,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     map_otx2inx_str,
     pidgin_name_str,
     pidgin_label_str,
-    pidgin_tag_str,
+    pidgin_word_str,
     pidgin_way_str,
 )
 from src.a16_pidgin_logic.pidgin_config import (
@@ -231,28 +231,28 @@ def test_get_creed_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[5] == "face_name"
     assert table_sorting_priority[6] == "face_name_otx"
     assert table_sorting_priority[7] == "face_name_inx"
-    assert table_sorting_priority[8] == "fisc_tag"
-    assert table_sorting_priority[9] == "fisc_tag_otx"
-    assert table_sorting_priority[10] == "fisc_tag_inx"
-    assert table_sorting_priority[11] == "timeline_tag"
-    assert table_sorting_priority[12] == "timeline_tag_otx"
-    assert table_sorting_priority[13] == "timeline_tag_inx"
+    assert table_sorting_priority[8] == "fisc_word"
+    assert table_sorting_priority[9] == "fisc_word_otx"
+    assert table_sorting_priority[10] == "fisc_word_inx"
+    assert table_sorting_priority[11] == "timeline_word"
+    assert table_sorting_priority[12] == "timeline_word_otx"
+    assert table_sorting_priority[13] == "timeline_word_inx"
     assert table_sorting_priority[14] == "offi_time"
     assert table_sorting_priority[15] == "c400_number"
     assert table_sorting_priority[16] == "yr1_jan1_offset"
     assert table_sorting_priority[17] == "monthday_distortion"
     assert table_sorting_priority[18] == "cumlative_day"
-    assert table_sorting_priority[19] == "month_tag"
-    assert table_sorting_priority[20] == "month_tag_otx"
-    assert table_sorting_priority[21] == "month_tag_inx"
+    assert table_sorting_priority[19] == "month_word"
+    assert table_sorting_priority[20] == "month_word_otx"
+    assert table_sorting_priority[21] == "month_word_inx"
     assert table_sorting_priority[22] == "cumlative_minute"
-    assert table_sorting_priority[23] == "hour_tag"
-    assert table_sorting_priority[24] == "hour_tag_otx"
-    assert table_sorting_priority[25] == "hour_tag_inx"
+    assert table_sorting_priority[23] == "hour_word"
+    assert table_sorting_priority[24] == "hour_word_otx"
+    assert table_sorting_priority[25] == "hour_word_inx"
     assert table_sorting_priority[26] == "weekday_order"
-    assert table_sorting_priority[27] == "weekday_tag"
-    assert table_sorting_priority[28] == "weekday_tag_otx"
-    assert table_sorting_priority[29] == "weekday_tag_inx"
+    assert table_sorting_priority[27] == "weekday_word"
+    assert table_sorting_priority[28] == "weekday_word_otx"
+    assert table_sorting_priority[29] == "weekday_word_inx"
     assert table_sorting_priority[30] == "owner_name"
     assert table_sorting_priority[31] == "owner_name_otx"
     assert table_sorting_priority[32] == "owner_name_inx"
@@ -350,8 +350,8 @@ def test_get_creed_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[124] == "penny"
     assert table_sorting_priority[125] == "respect_bit"
     assert table_sorting_priority[126] == "amount"
-    assert table_sorting_priority[127] == "otx_tag"
-    assert table_sorting_priority[128] == "inx_tag"
+    assert table_sorting_priority[127] == "otx_word"
+    assert table_sorting_priority[128] == "inx_word"
     assert table_sorting_priority[129] == "otx_way"
     assert table_sorting_priority[130] == "inx_way"
     assert table_sorting_priority[131] == "otx_name"
@@ -438,7 +438,7 @@ def test_get_creed_sqlite_types_ReturnsObj():
     assert sqlite_types.get(face_name_str()) == "TEXT"
     assert sqlite_types.get("pidgin_event_int") == "INTEGER"
     assert sqlite_types.get(event_int_str()) == "INTEGER"
-    assert sqlite_types.get(fisc_tag_str()) == "TEXT"
+    assert sqlite_types.get(fisc_word_str()) == "TEXT"
     assert sqlite_types.get(owner_name_str()) == "TEXT"
     assert sqlite_types.get(acct_name_str()) == "TEXT"
     assert sqlite_types.get(group_label_str()) == "TEXT"
@@ -484,11 +484,11 @@ def test_get_creed_sqlite_types_ReturnsObj():
     assert sqlite_types.get(pledge_str()) == "INTEGER"
     assert sqlite_types.get(respect_bit_str()) == "REAL"
     assert sqlite_types.get(amount_str()) == "REAL"
-    assert sqlite_types.get(month_tag_str()) == "TEXT"
-    assert sqlite_types.get(hour_tag_str()) == "TEXT"
+    assert sqlite_types.get(month_word_str()) == "TEXT"
+    assert sqlite_types.get(hour_word_str()) == "TEXT"
     assert sqlite_types.get(cumlative_minute_str()) == "INTEGER"
     assert sqlite_types.get(cumlative_day_str()) == "INTEGER"
-    assert sqlite_types.get(weekday_tag_str()) == "TEXT"
+    assert sqlite_types.get(weekday_word_str()) == "TEXT"
     assert sqlite_types.get(weekday_order_str()) == "INTEGER"
     assert sqlite_types.get(otx_bridge_str()) == "TEXT"
     assert sqlite_types.get(inx_bridge_str()) == "TEXT"
@@ -499,7 +499,7 @@ def test_get_creed_sqlite_types_ReturnsObj():
     assert sqlite_types.get(quota_str()) == "REAL"
     assert sqlite_types.get(celldepth_str()) == "INT"
     assert sqlite_types.get(monthday_distortion_str()) == "INTEGER"
-    assert sqlite_types.get(timeline_tag_str()) == "TEXT"
+    assert sqlite_types.get(timeline_word_str()) == "TEXT"
     assert sqlite_types.get("error_message") == "TEXT"
 
     # sourcery skip: no-loop-in-tests
@@ -559,7 +559,7 @@ def test_get_creed_config_dict_ReturnsObj():
     assert budunit_str() in creed_config_dimens
     assert pidgin_name_str() in creed_config_dimens
     assert pidgin_label_str() in creed_config_dimens
-    assert pidgin_tag_str() in creed_config_dimens
+    assert pidgin_word_str() in creed_config_dimens
     assert pidgin_way_str() in creed_config_dimens
     assert get_bud_dimens().issubset(creed_config_dimens)
     assert get_fisc_dimens().issubset(creed_config_dimens)
@@ -600,7 +600,7 @@ def _validate_creed_config(x_creed_config: dict):
             map_otx2inx_str(),
             pidgin_label_str(),
             pidgin_name_str(),
-            pidgin_tag_str(),
+            pidgin_word_str(),
             pidgin_way_str(),
         }:
             assert creed_dict.get(allowed_crud_str()) == insert_one_time_str()
@@ -663,9 +663,9 @@ def _validate_creed_config(x_creed_config: dict):
         assert face_name_str() in creed_jkeys_keys
         assert event_int_str() in creed_jkeys_keys
         if creed_dict.get(creed_category_str()) != "pidgin":
-            assert fisc_tag_str() in creed_jkeys_keys
+            assert fisc_word_str() in creed_jkeys_keys
         if creed_dict.get(creed_category_str()) == "bud":
-            creed_jkeys_keys.remove(fisc_tag_str())
+            creed_jkeys_keys.remove(fisc_word_str())
             creed_jkeys_keys.remove(owner_name_str())
         creed_jkeys_keys.remove(face_name_str())
         creed_jkeys_keys.remove(event_int_str())
@@ -673,8 +673,8 @@ def _validate_creed_config(x_creed_config: dict):
 
         sub_jvalues_keys = set(sub_dimen.get(jvalues_str()).keys())
         print(f"  {sub_jvalues_keys=}")
-        if fisc_tag_str() in sub_jvalues_keys:
-            sub_jvalues_keys.remove(fisc_tag_str())
+        if fisc_word_str() in sub_jvalues_keys:
+            sub_jvalues_keys.remove(fisc_word_str())
 
         creed_jvalues_dict = creed_dict.get(jvalues_str())
         creed_jvalues_keys = set(creed_jvalues_dict.keys())
@@ -682,7 +682,7 @@ def _validate_creed_config(x_creed_config: dict):
         # print(f"{creed_jvalues_keys=}")
         assert sub_jvalues_keys == creed_jvalues_keys
 
-        assert fisc_tag_str() not in creed_jvalues_keys
+        assert fisc_word_str() not in creed_jvalues_keys
 
         # sort_list = get_creed_elements_sort_order()
         # x_count = 0
@@ -847,7 +847,7 @@ def test_get_creed_config_dict_ReturnsObj_build_order():
     bo = build_order_str()
     # set_creed_config_json(pidgin_name_str(), 0)
     # set_creed_config_json(pidgin_label_str(), 1)
-    # set_creed_config_json(pidgin_tag_str(), 2)
+    # set_creed_config_json(pidgin_word_str(), 2)
     # set_creed_config_json(pidgin_way_str(), 3)
     # set_creed_config_json(fiscunit_str(), 5)
     # set_creed_config_json(fisc_timeline_hour_str(), 6)
@@ -871,7 +871,7 @@ def test_get_creed_config_dict_ReturnsObj_build_order():
     # THEN
     assert x_creed_config.get(pidgin_name_str()).get(bo) == 0
     assert x_creed_config.get(pidgin_label_str()).get(bo) == 1
-    assert x_creed_config.get(pidgin_tag_str()).get(bo) == 2
+    assert x_creed_config.get(pidgin_word_str()).get(bo) == 2
     assert x_creed_config.get(pidgin_way_str()).get(bo) == 3
     assert x_creed_config.get(fiscunit_str()).get(bo) == 5
     assert x_creed_config.get(fisc_timeline_hour_str()).get(bo) == 6
@@ -901,13 +901,13 @@ def test_get_quick_creeds_column_ref_ReturnsObj():
         event_int_str(),
         face_name_str(),
         c400_number_str(),
-        fisc_tag_str(),
+        fisc_word_str(),
         fund_coin_str(),
         monthday_distortion_str(),
         penny_str(),
         respect_bit_str(),
         bridge_str(),
-        timeline_tag_str(),
+        timeline_word_str(),
         yr1_jan1_offset_str(),
         "job_listen_rotations",
     }

@@ -9,7 +9,7 @@ from src.a06_bud_logic._utils.example_buds import (
 def test_BudUnit_set_ideatree_range_attrs_SetsInitialIdea_gogo_calc_stop_calc_UnitDoesNotErrorWithEmptyBudUnit():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_way = to_way(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_word)
     root_idea = yao_bud.get_idea_obj(root_way)
     assert not root_idea.begin
     assert not root_idea.close
@@ -26,10 +26,10 @@ def test_BudUnit_set_ideatree_range_attrs_SetsInitialIdea_gogo_calc_stop_calc_Un
     assert not root_idea._stop_calc
 
 
-def test_BudUnit_set_ideatree_range_attrs_SetsInitialIdea_gogo_calc_stop_calc_DoesNotErrorWhenNoMathTags():
+def test_BudUnit_set_ideatree_range_attrs_SetsInitialIdea_gogo_calc_stop_calc_DoesNotErrorWhenNoMathWords():
     # ESTABLISH
     yao_bud = get_budunit_with_4_levels_and_2reasons()
-    root_way = to_way(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_word)
     root_idea = yao_bud.get_idea_obj(root_way)
     assert not root_idea._gogo_calc
 
@@ -40,10 +40,10 @@ def test_BudUnit_set_ideatree_range_attrs_SetsInitialIdea_gogo_calc_stop_calc_Do
     assert not root_idea._gogo_calc
 
 
-def test_BudUnit_set_ideatree_range_attrs_SetsInitialIdea_gogo_calc_stop_calc_SimpleTag():
+def test_BudUnit_set_ideatree_range_attrs_SetsInitialIdea_gogo_calc_stop_calc_SimpleWord():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_way = to_way(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_word)
     time0_begin = 7
     time0_close = 31
     yao_bud.edit_idea_attr(root_way, begin=time0_begin, close=time0_close)
@@ -64,10 +64,10 @@ def test_BudUnit_set_ideatree_range_attrs_SetsInitialIdea_gogo_calc_stop_calc_Si
     assert root_idea._stop_calc == time0_close
 
 
-def test_BudUnit_set_ideatree_range_attrs_SetsInitialIdea_gogo_calc_stop_calc_TagWith_denom():
+def test_BudUnit_set_ideatree_range_attrs_SetsInitialIdea_gogo_calc_stop_calc_WordWith_denom():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_way = to_way(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_word)
     time0_begin = 6
     time0_close = 21
     time0_denom = 3
@@ -97,10 +97,10 @@ def test_BudUnit_set_ideatree_range_attrs_SetsInitialIdea_gogo_calc_stop_calc_Ta
     assert root_idea._stop_calc == 7
 
 
-def test_BudUnit_set_ideatree_range_attrs_SetsInitialIdea_gogo_calc_stop_calc_TagWith_denom_numor():
+def test_BudUnit_set_ideatree_range_attrs_SetsInitialIdea_gogo_calc_stop_calc_WordWith_denom_numor():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_way = to_way(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_word)
     time0_begin = 6
     time0_close = 18
     time0_numor = 7
@@ -133,10 +133,10 @@ def test_BudUnit_set_ideatree_range_attrs_SetsInitialIdea_gogo_calc_stop_calc_Ta
     assert root_idea._stop_calc == 42
 
 
-def test_BudUnit_set_ideatree_range_attrs_SetsInitialIdea_gogo_calc_stop_calc_TagWith_addin():
+def test_BudUnit_set_ideatree_range_attrs_SetsInitialIdea_gogo_calc_stop_calc_WordWith_addin():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_way = to_way(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_word)
     time0_begin = 6
     time0_close = 18
     time0_addin = 7
@@ -166,10 +166,10 @@ def test_BudUnit_set_ideatree_range_attrs_SetsInitialIdea_gogo_calc_stop_calc_Ta
     assert root_idea._stop_calc == 25
 
 
-def test_BudUnit_set_ideatree_range_attrs_SetsInitialIdea_gogo_calc_stop_calc_TagWith_denom_addin():
+def test_BudUnit_set_ideatree_range_attrs_SetsInitialIdea_gogo_calc_stop_calc_WordWith_denom_addin():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_way = to_way(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_word)
     time0_begin = 6
     time0_close = 18
     time0_denom = 3
@@ -205,7 +205,7 @@ def test_BudUnit_set_ideatree_range_attrs_SetsInitialIdea_gogo_calc_stop_calc_Ta
 def test_BudUnit_set_ideatree_range_attrs_SetsDescendentIdea_gogo_calc_stop_calc_Simple0():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_way = to_way(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_word)
     time0_str = "time0"
     time0_way = yao_bud.make_l1_way(time0_str)
     time0_begin = 7
@@ -242,7 +242,7 @@ def test_BudUnit_set_ideatree_range_attrs_SetsDescendentIdea_gogo_calc_stop_calc
     assert yao_bud._range_inheritors == {time1_way: time0_way}
 
 
-def test_BudUnit_set_ideatree_range_attrs_SetsDescendentIdea_gogo_calc_stop_calc_TagWith_denom():
+def test_BudUnit_set_ideatree_range_attrs_SetsDescendentIdea_gogo_calc_stop_calc_WordWith_denom():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_str = "time0"
@@ -257,7 +257,7 @@ def test_BudUnit_set_ideatree_range_attrs_SetsDescendentIdea_gogo_calc_stop_calc
     time1_way = yao_bud.make_way(time0_way, time1_str)
     yao_bud.set_idea(ideaunit_shop(time1_str, denom=time1_denom), time0_way)
     time1_idea = yao_bud.get_idea_obj(time1_way)
-    root_way = to_way(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_word)
     root_idea = yao_bud.get_idea_obj(root_way)
     yao_bud._set_idea_dict()
     assert not root_idea._gogo_calc
@@ -281,7 +281,7 @@ def test_BudUnit_set_ideatree_range_attrs_SetsDescendentIdea_gogo_calc_stop_calc
     assert time1_idea._stop_calc == 5
 
 
-def test_BudUnit_set_ideatree_range_attrs_SetsDescendentIdea_gogo_calc_stop_calc_TagWith_denom_numor():
+def test_BudUnit_set_ideatree_range_attrs_SetsDescendentIdea_gogo_calc_stop_calc_WordWith_denom_numor():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_str = "time0"
@@ -298,7 +298,7 @@ def test_BudUnit_set_ideatree_range_attrs_SetsDescendentIdea_gogo_calc_stop_calc
     temp_idea = ideaunit_shop(time1_str, numor=time1_numor, denom=time1_denom)
     yao_bud.set_idea(temp_idea, time0_way)
     time1_idea = yao_bud.get_idea_obj(time1_way)
-    root_way = to_way(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_word)
     root_idea = yao_bud.get_idea_obj(root_way)
     yao_bud._set_idea_dict()
     assert not root_idea._gogo_calc
@@ -322,7 +322,7 @@ def test_BudUnit_set_ideatree_range_attrs_SetsDescendentIdea_gogo_calc_stop_calc
     assert time1_idea._stop_calc == 15
 
 
-def test_BudUnit_set_ideatree_range_attrs_SetsDescendentIdea_gogo_calc_stop_calc_TagWith_addin():
+def test_BudUnit_set_ideatree_range_attrs_SetsDescendentIdea_gogo_calc_stop_calc_WordWith_addin():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_str = "time0"
@@ -338,7 +338,7 @@ def test_BudUnit_set_ideatree_range_attrs_SetsDescendentIdea_gogo_calc_stop_calc
     temp_idea = ideaunit_shop(time1_str, addin=time1_addin)
     yao_bud.set_idea(temp_idea, time0_way)
     time1_idea = yao_bud.get_idea_obj(time1_way)
-    root_way = to_way(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_word)
     root_idea = yao_bud.get_idea_obj(root_way)
     yao_bud._set_idea_dict()
     assert not root_idea._gogo_calc
@@ -363,7 +363,7 @@ def test_BudUnit_set_ideatree_range_attrs_SetsDescendentIdea_gogo_calc_stop_calc
     assert time1_idea._stop_calc == 12
 
 
-def test_BudUnit_set_ideatree_range_attrs_Sets2LevelsDescendentIdea_gogo_calc_stop_calc_TagWith_addin():
+def test_BudUnit_set_ideatree_range_attrs_Sets2LevelsDescendentIdea_gogo_calc_stop_calc_WordWith_addin():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_str = "time0"
@@ -382,7 +382,7 @@ def test_BudUnit_set_ideatree_range_attrs_Sets2LevelsDescendentIdea_gogo_calc_st
     x_time2_idea = ideaunit_shop(time2_str, addin=time2_addin)
     yao_bud.set_idea(x_time2_idea, time1_way)
     time2_idea = yao_bud.get_idea_obj(time2_way)
-    root_way = to_way(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_word)
     root_idea = yao_bud.get_idea_obj(root_way)
     yao_bud._set_idea_dict()
     assert not root_idea._gogo_calc
@@ -409,7 +409,7 @@ def test_BudUnit_set_ideatree_range_attrs_Sets2LevelsDescendentIdea_gogo_calc_st
     assert yao_bud._range_inheritors == {time1_way: time0_way, time2_way: time0_way}
 
 
-def test_BudUnit_set_ideatree_range_attrs_SetsDescendentIdea_gogo_calc_stop_calc_TagWith_denom_addin():
+def test_BudUnit_set_ideatree_range_attrs_SetsDescendentIdea_gogo_calc_stop_calc_WordWith_denom_addin():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
     time0_str = "time0"
@@ -426,7 +426,7 @@ def test_BudUnit_set_ideatree_range_attrs_SetsDescendentIdea_gogo_calc_stop_calc
     temp_idea = ideaunit_shop(time1_str, denom=time1_denom, addin=time1_addin)
     yao_bud.set_idea(temp_idea, time0_way)
     time1_idea = yao_bud.get_idea_obj(time1_way)
-    root_way = to_way(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_word)
     root_idea = yao_bud.get_idea_obj(root_way)
     yao_bud._set_idea_dict()
     assert not root_idea._gogo_calc

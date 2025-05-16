@@ -158,7 +158,7 @@ class RiverGrade:
 
     def get_dict(self) -> dict:
         return {
-            "fisc_tag": self.hubunit.fisc_tag,
+            "fisc_word": self.hubunit.fisc_word,
             "healer_name": self.hubunit.owner_name,
             "keep_way": self.hubunit.keep_way,
             "tax_bill_amount": self.tax_bill_amount,

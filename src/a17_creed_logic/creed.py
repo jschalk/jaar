@@ -6,7 +6,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_positional_dict,
     add_headers_to_csv,
 )
-from src.a01_way_logic.way import FiscTag, OwnerName
+from src.a01_way_logic.way import FiscWord, OwnerName
 from src.a06_bud_logic.bud import BudUnit
 from src.a07_calendar_logic.chrono import timelineunit_shop
 from src.a08_bud_atom_logic.atom import atom_insert, BudAtom, atomrow_shop
@@ -86,10 +86,10 @@ def create_creed_df(x_budunit: BudUnit, creed_name: str) -> DataFrame:
     x_buddelta = buddelta_shop()
     x_buddelta.add_all_budatoms(x_budunit)
     x_creedref = get_creedref_obj(creed_name)
-    x_fisc_tag = x_budunit.fisc_tag
+    x_fisc_word = x_budunit.fisc_word
     x_owner_name = x_budunit.owner_name
     sorted_budatoms = _get_sorted_atom_insert_budatoms(x_buddelta, x_creedref)
-    d2_list = _create_d2_list(sorted_budatoms, x_creedref, x_fisc_tag, x_owner_name)
+    d2_list = _create_d2_list(sorted_budatoms, x_creedref, x_fisc_word, x_owner_name)
     d2_list = _delta_all_pledge_values(d2_list, x_creedref)
     x_creed = _generate_creed_dataframe(d2_list, creed_name)
     sorting_columns = x_creedref.get_headers_list()
@@ -108,15 +108,15 @@ def _get_sorted_atom_insert_budatoms(
 def _create_d2_list(
     sorted_budatoms: list[BudAtom],
     x_creedref: CreedRef,
-    x_fisc_tag: FiscTag,
+    x_fisc_word: FiscWord,
     x_owner_name: OwnerName,
 ):
     d2_list = []
     for x_budatom in sorted_budatoms:
         d1_list = []
         for x_attribute in x_creedref.get_headers_list():
-            if x_attribute == "fisc_tag":
-                d1_list.append(x_fisc_tag)
+            if x_attribute == "fisc_word":
+                d1_list.append(x_fisc_word)
             elif x_attribute == "owner_name":
                 d1_list.append(x_owner_name)
             else:
@@ -193,14 +193,14 @@ def make_buddelta(x_csv: str) -> BudDelta:
 def _load_individual_creed_csv(
     complete_csv: str,
     fisc_mstr_dir: str,
-    x_fisc_tag: FiscTag,
+    x_fisc_word: FiscWord,
     x_owner_name: OwnerName,
 ):
-    x_hubunit = hubunit_shop(fisc_mstr_dir, x_fisc_tag, x_owner_name)
+    x_hubunit = hubunit_shop(fisc_mstr_dir, x_fisc_word, x_owner_name)
     x_hubunit.initialize_pack_gut_files()
     x_buddelta = make_buddelta(complete_csv)
     # x_buddelta = get_minimal_buddelta(x_buddelta, x_gut)
-    x_packunit = packunit_shop(x_owner_name, x_fisc_tag)
+    x_packunit = packunit_shop(x_owner_name, x_fisc_word)
     x_packunit.set_buddelta(x_buddelta)
     x_hubunit.save_pack_file(x_packunit)
     x_hubunit._create_gut_from_packs()
@@ -209,24 +209,24 @@ def _load_individual_creed_csv(
 def load_creed_csv(fisc_mstr_dir: str, x_file_dir: str, x_filename: str):
     x_csv = open_file(x_file_dir, x_filename)
     headers_list, headerless_csv = extract_csv_headers(x_csv)
-    nested_csv = fisc_tag_owner_name_nested_csv_dict(headerless_csv, delimiter=",")
-    for x_fisc_tag, fisc_dict in nested_csv.items():
+    nested_csv = fisc_word_owner_name_nested_csv_dict(headerless_csv, delimiter=",")
+    for x_fisc_word, fisc_dict in nested_csv.items():
         for x_owner_name, owner_csv in fisc_dict.items():
             complete_csv = add_headers_to_csv(headers_list, owner_csv)
             _load_individual_creed_csv(
-                complete_csv, fisc_mstr_dir, x_fisc_tag, x_owner_name
+                complete_csv, fisc_mstr_dir, x_fisc_word, x_owner_name
             )
 
 
-def get_csv_fisc_tag_owner_name_metrics(
+def get_csv_fisc_word_owner_name_metrics(
     headerless_csv: str, delimiter: str = None
-) -> dict[FiscTag, dict[OwnerName, int]]:
+) -> dict[FiscWord, dict[OwnerName, int]]:
     return get_csv_column1_column2_metrics(headerless_csv, delimiter)
 
 
-def fisc_tag_owner_name_nested_csv_dict(
+def fisc_word_owner_name_nested_csv_dict(
     headerless_csv: str, delimiter: str = None
-) -> dict[FiscTag, dict[OwnerName, str]]:
+) -> dict[FiscWord, dict[OwnerName, str]]:
     return create_l2nested_csv_dict(headerless_csv, delimiter)
 
 
@@ -241,26 +241,26 @@ def fisc_build_from_df(
     x_respect_bit: float,
     x_penny: float,
     x_fiscs_dir: str,
-) -> dict[FiscTag, FiscUnit]:
+) -> dict[FiscWord, FiscUnit]:
     fisc_hours_dict = _get_fisc_hours_dict(br00003_df)
     fisc_months_dict = _get_fisc_months_dict(br00004_df)
     fisc_weekdays_dict = _get_fisc_weekdays_dict(br00005_df)
 
     fiscunit_dict = {}
     for index, row in br00000_df.iterrows():
-        x_fisc_tag = row["fisc_tag"]
+        x_fisc_word = row["fisc_word"]
         x_timeline_config = {
             "c400_number": row["c400_number"],
-            "hours_config": fisc_hours_dict.get(x_fisc_tag),
-            "months_config": fisc_months_dict.get(x_fisc_tag),
+            "hours_config": fisc_hours_dict.get(x_fisc_word),
+            "months_config": fisc_months_dict.get(x_fisc_word),
             "monthday_distortion": row["monthday_distortion"],
-            "timeline_tag": row["timeline_tag"],
-            "weekdays_config": fisc_weekdays_dict.get(x_fisc_tag),
+            "timeline_word": row["timeline_word"],
+            "weekdays_config": fisc_weekdays_dict.get(x_fisc_word),
             "yr1_jan1_offset": row["yr1_jan1_offset"],
         }
         x_timeline = timelineunit_shop(x_timeline_config)
         x_fiscunit = fiscunit_shop(
-            fisc_tag=x_fisc_tag,
+            fisc_word=x_fisc_word,
             fisc_mstr_dir=x_fiscs_dir,
             timeline=x_timeline,
             # in_memory_journal=row["in_memory_journal"],
@@ -270,7 +270,7 @@ def fisc_build_from_df(
             penny=x_penny,
             job_listen_rotations=row["job_listen_rotations"],
         )
-        fiscunit_dict[x_fiscunit.fisc_tag] = x_fiscunit
+        fiscunit_dict[x_fiscunit.fisc_word] = x_fiscunit
         _add_dealunits_from_df(x_fiscunit, br00001_df)
         _add_cashpurchases_from_df(x_fiscunit, br00002_df)
     return fiscunit_dict
@@ -278,41 +278,41 @@ def fisc_build_from_df(
 
 def _get_fisc_hours_dict(br00003_df: DataFrame) -> dict[str, list[str, str]]:
     fisc_hours_dict = {}
-    for y_fisc_tag in br00003_df.fisc_tag.unique():
-        query_str = f"fisc_tag == '{y_fisc_tag}'"
+    for y_fisc_word in br00003_df.fisc_word.unique():
+        query_str = f"fisc_word == '{y_fisc_word}'"
         x_hours_list = [
-            [row["hour_tag"], row["cumlative_minute"]]
+            [row["hour_word"], row["cumlative_minute"]]
             for index, row in br00003_df.query(query_str).iterrows()
         ]
-        fisc_hours_dict[y_fisc_tag] = x_hours_list
+        fisc_hours_dict[y_fisc_word] = x_hours_list
     return fisc_hours_dict
 
 
 def _get_fisc_months_dict(br00004_df: DataFrame) -> dict[str, list[str, str]]:
     fisc_months_dict = {}
-    for y_fisc_tag in br00004_df.fisc_tag.unique():
-        query_str = f"fisc_tag == '{y_fisc_tag}'"
+    for y_fisc_word in br00004_df.fisc_word.unique():
+        query_str = f"fisc_word == '{y_fisc_word}'"
         x_months_list = [
-            [row["month_tag"], row["cumlative_day"]]
+            [row["month_word"], row["cumlative_day"]]
             for index, row in br00004_df.query(query_str).iterrows()
         ]
-        fisc_months_dict[y_fisc_tag] = x_months_list
+        fisc_months_dict[y_fisc_word] = x_months_list
     return fisc_months_dict
 
 
 def _get_fisc_weekdays_dict(br00005_df: DataFrame) -> dict[str, list[str, str]]:
     fisc_weekdays_dict = {}
-    for y_fisc_tag in br00005_df.fisc_tag.unique():
-        query_str = f"fisc_tag == '{y_fisc_tag}'"
+    for y_fisc_word in br00005_df.fisc_word.unique():
+        query_str = f"fisc_word == '{y_fisc_word}'"
         x_weekdays_list = [
-            row["weekday_tag"] for index, row in br00005_df.query(query_str).iterrows()
+            row["weekday_word"] for index, row in br00005_df.query(query_str).iterrows()
         ]
-        fisc_weekdays_dict[y_fisc_tag] = x_weekdays_list
+        fisc_weekdays_dict[y_fisc_word] = x_weekdays_list
     return fisc_weekdays_dict
 
 
 def _add_dealunits_from_df(x_fiscunit: FiscUnit, br00001_df: DataFrame):
-    query_str = f"fisc_tag == '{x_fiscunit.fisc_tag}'"
+    query_str = f"fisc_word == '{x_fiscunit.fisc_word}'"
     for index, row in br00001_df.query(query_str).iterrows():
         x_fiscunit.add_dealunit(
             owner_name=row["owner_name"],
@@ -324,7 +324,7 @@ def _add_dealunits_from_df(x_fiscunit: FiscUnit, br00001_df: DataFrame):
 
 
 def _add_cashpurchases_from_df(x_fiscunit: FiscUnit, br00002_df: DataFrame):
-    query_str = f"fisc_tag == '{x_fiscunit.fisc_tag}'"
+    query_str = f"fisc_word == '{x_fiscunit.fisc_word}'"
     for index, row in br00002_df.query(query_str).iterrows():
         x_fiscunit.add_cashpurchase(
             owner_name=row["owner_name"],
@@ -335,6 +335,6 @@ def _add_cashpurchases_from_df(x_fiscunit: FiscUnit, br00002_df: DataFrame):
 
 
 def _add_time_offi_units_from_df(x_fiscunit: FiscUnit, br00006_df: DataFrame):
-    query_str = f"fisc_tag == '{x_fiscunit.fisc_tag}'"
+    query_str = f"fisc_word == '{x_fiscunit.fisc_word}'"
     for index, row in br00006_df.query(query_str).iterrows():
         x_fiscunit.offi_times.add(row["offi_time"])

@@ -13,13 +13,13 @@ from src.a00_data_toolbox.dict_toolbox import (
 from src.a01_way_logic.way import (
     default_bridge_if_None,
     create_way,
-    get_all_way_tags,
-    create_way_from_tags,
-    get_terminus_tag,
+    get_all_way_words,
+    create_way_from_words,
+    get_terminus_word,
     get_parent_way,
-    is_tagstr,
+    is_wordstr,
     WayStr,
-    TagStr,
+    WordStr,
     FaceName,
     EventInt,
 )
@@ -32,7 +32,7 @@ class set_all_otx2inxException(Exception):
     pass
 
 
-class set_tag_Exception(Exception):
+class set_word_Exception(Exception):
     pass
 
 
@@ -227,33 +227,33 @@ def get_labelmap_from_json(x_json: str) -> LabelMap:
     return get_labelmap_from_dict(get_dict_from_json(x_json))
 
 
-class TagMap(MapCore):
-    def set_otx2inx(self, otx_tag: str, inx_tag: str):
-        self.otx2inx[otx_tag] = inx_tag
+class WordMap(MapCore):
+    def set_otx2inx(self, otx_word: str, inx_word: str):
+        self.otx2inx[otx_word] = inx_word
 
-    def _get_inx_value(self, otx_tag: str) -> str:
-        return self.otx2inx.get(otx_tag)
+    def _get_inx_value(self, otx_word: str) -> str:
+        return self.otx2inx.get(otx_word)
 
-    def otx2inx_exists(self, otx_tag: str, inx_tag: str) -> bool:
-        return self._get_inx_value(otx_tag) == inx_tag
+    def otx2inx_exists(self, otx_word: str, inx_word: str) -> bool:
+        return self._get_inx_value(otx_word) == inx_word
 
-    def otx_exists(self, otx_tag: str) -> bool:
-        return self._get_inx_value(otx_tag) != None
+    def otx_exists(self, otx_word: str) -> bool:
+        return self._get_inx_value(otx_word) != None
 
-    def del_otx2inx(self, otx_tag: str):
-        self.otx2inx.pop(otx_tag)
+    def del_otx2inx(self, otx_word: str):
+        self.otx2inx.pop(otx_word)
 
-    def reveal_inx(self, otx_tag: str, missing_add: bool = True) -> str:
-        if missing_add and self.otx_exists(otx_tag) is False:
-            inx_tag = copy_copy(otx_tag)
-            if self.inx_bridge in otx_tag:
+    def reveal_inx(self, otx_word: str, missing_add: bool = True) -> str:
+        if missing_add and self.otx_exists(otx_word) is False:
+            inx_word = copy_copy(otx_word)
+            if self.inx_bridge in otx_word:
                 return None
             otx_r_bridge = self.otx_bridge
             inx_r_bridge = self.inx_bridge
-            inx_tag = inx_tag.replace(otx_r_bridge, inx_r_bridge)
-            self.set_otx2inx(otx_tag, inx_tag)
+            inx_word = inx_word.replace(otx_r_bridge, inx_r_bridge)
+            self.set_otx2inx(otx_word, inx_word)
 
-        return self._get_inx_value(otx_tag)
+        return self._get_inx_value(otx_word)
 
     def _is_inx_bridge_inclusion_correct(self) -> bool:
         return not str_in_dict_values(self.inx_bridge, self.otx2inx)
@@ -268,19 +268,19 @@ class TagMap(MapCore):
         )
 
 
-def tagmap_shop(
+def wordmap_shop(
     face_name: FaceName = None,
     event_int: EventInt = None,
     otx_bridge: str = None,
     inx_bridge: str = None,
     otx2inx: dict = None,
     unknown_term: str = None,
-) -> TagMap:
+) -> WordMap:
     unknown_term = default_unknown_term_if_None(unknown_term)
     otx_bridge = default_bridge_if_None(otx_bridge)
     inx_bridge = default_bridge_if_None(inx_bridge)
 
-    return TagMap(
+    return WordMap(
         face_name=face_name,
         event_int=get_0_if_None(event_int),
         otx_bridge=otx_bridge,
@@ -290,8 +290,8 @@ def tagmap_shop(
     )
 
 
-def get_tagmap_from_dict(x_dict: dict) -> TagMap:
-    return tagmap_shop(
+def get_wordmap_from_dict(x_dict: dict) -> WordMap:
+    return wordmap_shop(
         face_name=x_dict.get("face_name"),
         event_int=x_dict.get("event_int"),
         otx_bridge=x_dict.get("otx_bridge"),
@@ -301,8 +301,8 @@ def get_tagmap_from_dict(x_dict: dict) -> TagMap:
     )
 
 
-def get_tagmap_from_json(x_json: str) -> TagMap:
-    return get_tagmap_from_dict(get_dict_from_json(x_json))
+def get_wordmap_from_json(x_json: str) -> WordMap:
+    return get_wordmap_from_dict(get_dict_from_json(x_json))
 
 
 @dataclass
@@ -313,7 +313,7 @@ class WayMap:
     unknown_term: str = None
     otx_bridge: str = None
     inx_bridge: str = None
-    tagmap: TagMap = None
+    wordmap: WordMap = None
 
     def set_all_otx2inx(
         self, x_otx2inx: dict, raise_exception_if_invalid: bool = False
@@ -342,18 +342,18 @@ class WayMap:
         otx_parent_way = get_parent_way(otx_way, self.otx_bridge)
         if self.otx_exists(otx_parent_way) is False and otx_parent_way != "":
             return None
-        otx_terminus = get_terminus_tag(otx_way, self.otx_bridge)
-        otx_terminus = self._get_tagmap_tagstr(otx_terminus)
+        otx_terminus = get_terminus_word(otx_way, self.otx_bridge)
+        otx_terminus = self._get_wordmap_wordstr(otx_terminus)
         if otx_parent_way == "":
             inx_parent_way = ""
         else:
             inx_parent_way = self._get_inx_value(otx_parent_way)
         return create_way(inx_parent_way, otx_terminus, self.inx_bridge)
 
-    def _get_tagmap_tagstr(self, x_tagStr: TagStr) -> TagStr:
-        if self.otx_tag_exists(x_tagStr):
-            return self.tagmap.reveal_inx(x_tagStr)
-        return x_tagStr
+    def _get_wordmap_wordstr(self, x_wordStr: WordStr) -> WordStr:
+        if self.otx_word_exists(x_wordStr):
+            return self.wordmap.reveal_inx(x_wordStr)
+        return x_wordStr
 
     def otx2inx_exists(self, otx_way: str, inx_way: str) -> bool:
         return self._get_inx_value(otx_way) == inx_way
@@ -364,37 +364,37 @@ class WayMap:
     def del_otx2inx(self, otx_way: str):
         self.otx2inx.pop(otx_way)
 
-    def set_tag(self, otx_tag: TagStr, inx_tag: TagStr):
-        if self.otx_bridge in otx_tag:
-            exception_str = f"tag cannot have otx_tag '{otx_tag}'. It must be not have bridge {self.otx_bridge}."
-            raise set_tag_Exception(exception_str)
-        if self.inx_bridge in inx_tag:
-            exception_str = f"tag cannot have inx_tag '{inx_tag}'. It must be not have bridge {self.inx_bridge}."
-            raise set_tag_Exception(exception_str)
+    def set_word(self, otx_word: WordStr, inx_word: WordStr):
+        if self.otx_bridge in otx_word:
+            exception_str = f"word cannot have otx_word '{otx_word}'. It must be not have bridge {self.otx_bridge}."
+            raise set_word_Exception(exception_str)
+        if self.inx_bridge in inx_word:
+            exception_str = f"word cannot have inx_word '{inx_word}'. It must be not have bridge {self.inx_bridge}."
+            raise set_word_Exception(exception_str)
 
-        self.tagmap.set_otx2inx(otx_tag, inx_tag)
-        self._set_new_tag_to_otx_inx(otx_tag, inx_tag)
+        self.wordmap.set_otx2inx(otx_word, inx_word)
+        self._set_new_word_to_otx_inx(otx_word, inx_word)
 
-    def _set_new_tag_to_otx_inx(self, otx_tag, inx_tag):
+    def _set_new_word_to_otx_inx(self, otx_word, inx_word):
         for otx_way, inx_way in self.otx2inx.items():
-            otx_tagstrs = get_all_way_tags(otx_way, self.otx_bridge)
-            inx_tagstrs = get_all_way_tags(inx_way, self.inx_bridge)
-            for x_count, otx_tagstr in enumerate(otx_tagstrs):
-                if otx_tagstr == otx_tag:
-                    inx_tagstrs[x_count] = inx_tag
-            self.set_otx2inx(otx_way, create_way_from_tags(inx_tagstrs))
+            otx_wordstrs = get_all_way_words(otx_way, self.otx_bridge)
+            inx_wordstrs = get_all_way_words(inx_way, self.inx_bridge)
+            for x_count, otx_wordstr in enumerate(otx_wordstrs):
+                if otx_wordstr == otx_word:
+                    inx_wordstrs[x_count] = inx_word
+            self.set_otx2inx(otx_way, create_way_from_words(inx_wordstrs))
 
-    def _get_inx_tag(self, otx_tag: TagStr) -> TagStr:
-        return self.tagmap.otx2inx.get(otx_tag)
+    def _get_inx_word(self, otx_word: WordStr) -> WordStr:
+        return self.wordmap.otx2inx.get(otx_word)
 
-    def tag_exists(self, otx_tag: TagStr, inx_tag: TagStr) -> bool:
-        return self.tagmap.otx2inx_exists(otx_tag, inx_tag)
+    def word_exists(self, otx_word: WordStr, inx_word: WordStr) -> bool:
+        return self.wordmap.otx2inx_exists(otx_word, inx_word)
 
-    def otx_tag_exists(self, otx_tag: TagStr) -> bool:
-        return self.tagmap.otx_exists(otx_tag)
+    def otx_word_exists(self, otx_word: WordStr) -> bool:
+        return self.wordmap.otx_exists(otx_word)
 
-    def del_tag(self, otx_tag: TagStr) -> bool:
-        self.tagmap.del_otx2inx(otx_tag)
+    def del_word(self, otx_word: WordStr) -> bool:
+        self.wordmap.del_otx2inx(otx_word)
 
     def _unknown_term_in_otx2inx(self) -> bool:
         return str_in_dict(self.unknown_term, self.otx2inx)
@@ -429,7 +429,7 @@ def waymap_shop(
     event_int: EventInt = None,
     otx_bridge: str = None,
     inx_bridge: str = None,
-    x_tagmap: TagMap = None,
+    x_wordmap: WordMap = None,
     otx2inx: dict = None,
     unknown_term: str = None,
 ) -> WayMap:
@@ -437,8 +437,8 @@ def waymap_shop(
     otx_bridge = default_bridge_if_None(otx_bridge)
     inx_bridge = default_bridge_if_None(inx_bridge)
 
-    if x_tagmap is None:
-        x_tagmap = tagmap_shop(
+    if x_wordmap is None:
+        x_wordmap = wordmap_shop(
             otx_bridge=otx_bridge,
             inx_bridge=inx_bridge,
             unknown_term=unknown_term,
@@ -451,7 +451,7 @@ def waymap_shop(
         unknown_term=unknown_term,
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
-        tagmap=x_tagmap,
+        wordmap=x_wordmap,
         face_name=face_name,
         event_int=get_0_if_None(event_int),
     )
@@ -504,7 +504,7 @@ def inherit_labelmap(new: LabelMap, old: LabelMap) -> LabelMap:
     return _inherit_mapunit(new, old)
 
 
-def inherit_tagmap(new: TagMap, old: TagMap) -> TagMap:
+def inherit_wordmap(new: WordMap, old: WordMap) -> WordMap:
     return _inherit_mapunit(new, old)
 
 

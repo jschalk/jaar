@@ -1,7 +1,7 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a02_finance_logic._utils.strs_a02 import fisc_tag_str
+from src.a02_finance_logic._utils.strs_a02 import fisc_word_str
 from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str
-from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_tag_str
+from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_word_str
 from src.a17_creed_logic.creed_db_tool import upsert_sheet
 from src.a18_etl_toolbox.creed_collector import (
     get_all_excel_creedsheets,
@@ -120,8 +120,8 @@ def test_get_all_creed_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
         event_int_str(),
         face_name_str(),
         cumlative_minute_str(),
-        fisc_tag_str(),
-        hour_tag_str(),
+        fisc_word_str(),
+        hour_word_str(),
     ]
     row1 = [event1, sue_str, minute_360, accord23_str, hour6am]
     row2 = [event1, sue_str, minute_420, accord23_str, hour7am]
@@ -159,8 +159,8 @@ def test_get_all_creed_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
         event_int_str(),
         face_name_str(),
         cumlative_minute_str(),
-        fisc_tag_str(),
-        hour_tag_str(),
+        fisc_word_str(),
+        hour_word_str(),
     ]
     row1 = [event1, sue_str, minute_360, accord23_str, hour6am]
     row2 = [event1, sue_str, minute_420, accord23_str, hour7am]
@@ -168,7 +168,7 @@ def test_get_all_creed_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
         event_int_str(),
         face_name_str(),
         cumlative_minute_str(),
-        fisc_tag_str(),
+        fisc_word_str(),
     ]
     incom_row1 = [event1, sue_str, minute_360, accord23_str]
     incom_row2 = [event1, sue_str, minute_420, accord23_str]

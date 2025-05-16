@@ -8,7 +8,7 @@ from src.a06_bud_logic._utils.example_buds import get_budunit_with_4_levels
 def test_BudUnit_set_idea_dict_Scenario0():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_way = to_way(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_word)
     root_idea = yao_bud.get_idea_obj(root_way)
     assert not root_idea.begin
     assert not root_idea.close
@@ -34,9 +34,9 @@ def test_BudUnit_set_idea_dict_Scenario1():
     yao_bud = budunit_shop("Yao")
     time0_begin = 7
     time0_close = 31
-    root_way = to_way(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_word)
     yao_bud.edit_idea_attr(root_way, begin=time0_begin, close=time0_close)
-    root_way = to_way(yao_bud.fisc_tag)
+    root_way = to_way(yao_bud.fisc_word)
     root_idea = yao_bud.get_idea_obj(root_way)
     assert root_idea.begin == time0_begin
     assert root_idea.close == time0_close
@@ -56,7 +56,7 @@ def test_BudUnit_set_idea_dict_Scenario1():
 def test_BudUnit_set_idea_dict_Clears_gogo_calc_stop_calc():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    root_way = to_way(sue_bud.fisc_tag)
+    root_way = to_way(sue_bud.fisc_word)
     root_idea = sue_bud.get_idea_obj(root_way)
     states_str = "nation-state"
     states_way = sue_bud.make_l1_way(states_str)

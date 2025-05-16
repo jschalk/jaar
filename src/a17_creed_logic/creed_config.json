@@ -7,7 +7,7 @@
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "fisc_tag": {},
+      "fisc_word": {},
       "group_label": {},
       "owner_name": {}
     },
@@ -24,7 +24,7 @@
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "fisc_tag": {},
+      "fisc_word": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -40,7 +40,7 @@
       "awardee_label": {},
       "event_int": {},
       "face_name": {},
-      "fisc_tag": {},
+      "fisc_word": {},
       "idea_way": {},
       "owner_name": {}
     },
@@ -57,7 +57,7 @@
       "event_int": {},
       "face_name": {},
       "fcontext": {},
-      "fisc_tag": {},
+      "fisc_word": {},
       "idea_way": {},
       "owner_name": {}
     },
@@ -74,7 +74,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_tag": {},
+      "fisc_word": {},
       "healer_name": {},
       "idea_way": {},
       "owner_name": {}
@@ -88,7 +88,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_tag": {},
+      "fisc_word": {},
       "idea_way": {},
       "owner_name": {},
       "pbranch": {},
@@ -107,7 +107,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_tag": {},
+      "fisc_word": {},
       "idea_way": {},
       "owner_name": {},
       "rcontext": {}
@@ -123,7 +123,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_tag": {},
+      "fisc_word": {},
       "idea_way": {},
       "owner_name": {},
       "labor_label": {}
@@ -137,7 +137,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_tag": {},
+      "fisc_word": {},
       "idea_way": {},
       "owner_name": {}
     },
@@ -162,7 +162,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_tag": {},
+      "fisc_word": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -184,7 +184,7 @@
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "fisc_tag": {},
+      "fisc_word": {},
       "owner_name": {},
       "tran_time": {}
     },
@@ -200,7 +200,7 @@
       "deal_time": {},
       "event_int": {},
       "face_name": {},
-      "fisc_tag": {},
+      "fisc_word": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -216,10 +216,10 @@
       "cumlative_minute": {},
       "event_int": {},
       "face_name": {},
-      "fisc_tag": {}
+      "fisc_word": {}
     },
     "jvalues": {
-      "hour_tag": {}
+      "hour_word": {}
     }
   },
   "fisc_timeline_month": {
@@ -230,10 +230,10 @@
       "cumlative_day": {},
       "event_int": {},
       "face_name": {},
-      "fisc_tag": {}
+      "fisc_word": {}
     },
     "jvalues": {
-      "month_tag": {}
+      "month_word": {}
     }
   },
   "fisc_timeline_weekday": {
@@ -243,11 +243,11 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_tag": {},
+      "fisc_word": {},
       "weekday_order": {}
     },
     "jvalues": {
-      "weekday_tag": {}
+      "weekday_word": {}
     }
   },
   "fisc_timeoffi": {
@@ -257,7 +257,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_tag": {},
+      "fisc_word": {},
       "offi_time": {}
     },
     "jvalues": {}
@@ -269,7 +269,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_tag": {}
+      "fisc_word": {}
     },
     "jvalues": {
       "bridge": {},
@@ -279,7 +279,7 @@
       "monthday_distortion": {},
       "penny": {},
       "respect_bit": {},
-      "timeline_tag": {},
+      "timeline_word": {},
       "yr1_jan1_offset": {}
     }
   },
@@ -315,18 +315,18 @@
       "unknown_term": {}
     }
   },
-  "pidgin_tag": {
+  "pidgin_word": {
     "allowed_crud": "INSERT_ONE_TIME",
     "build_order": 2,
     "creed_category": "pidgin",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "otx_tag": {}
+      "otx_word": {}
     },
     "jvalues": {
       "inx_bridge": {},
-      "inx_tag": {},
+      "inx_word": {},
       "otx_bridge": {},
       "unknown_term": {}
     }

@@ -17,7 +17,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     group_label_str,
     labor_label_str,
     healer_name_str,
-    idea_tag_str,
+    idea_word_str,
     idea_way_str,
     rcontext_str,
     fcontext_str,
@@ -79,7 +79,7 @@ def test_sift_atom_ReturnsObj_BudAtom_DELETE_bud_acct_membership():
 def test_sift_atom_ReturnsObj_BudAtom_DELETE_bud_ideaunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    root_way = to_way(sue_bud.fisc_tag)
+    root_way = to_way(sue_bud.fisc_word)
     casa_str = "casa"
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
@@ -120,7 +120,7 @@ def test_sift_atom_ReturnsObj_BudAtom_DELETE_bud_ideaunit():
 def test_sift_atom_SetsBudDeltaBudAtom_bud_ideaunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    root_way = to_way(sue_bud.fisc_tag)
+    root_way = to_way(sue_bud.fisc_word)
     casa_str = "casa"
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"

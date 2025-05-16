@@ -1,10 +1,10 @@
-from src.a01_way_logic.way import FiscTag
+from src.a01_way_logic.way import FiscWord
 from src.a06_bud_logic._utils.str_a06 import (
     bud_acctunit_str,
     bud_ideaunit_str,
     acct_name_str,
     parent_way_str,
-    idea_tag_str,
+    idea_word_str,
 )
 from src.a08_bud_atom_logic.atom import (
     BudAtom,
@@ -16,14 +16,14 @@ from src.a08_bud_atom_logic.atom import (
 from src.a09_pack_logic.delta import BudDelta, buddelta_shop
 
 
-def get_atom_example_ideaunit_sports(fisc_tag: FiscTag = None) -> BudAtom:
-    if not fisc_tag:
-        fisc_tag = "accord23"
+def get_atom_example_ideaunit_sports(fisc_word: FiscWord = None) -> BudAtom:
+    if not fisc_word:
+        fisc_word = "accord23"
     sports_str = "sports"
     x_dimen = bud_ideaunit_str()
     insert_ideaunit_budatom = budatom_shop(x_dimen, atom_insert())
-    insert_ideaunit_budatom.set_jkey(idea_tag_str(), sports_str)
-    insert_ideaunit_budatom.set_jkey(parent_way_str(), fisc_tag)
+    insert_ideaunit_budatom.set_jkey(idea_word_str(), sports_str)
+    insert_ideaunit_budatom.set_jkey(parent_way_str(), fisc_word)
     return insert_ideaunit_budatom
 
 

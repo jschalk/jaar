@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
 from src.a01_way_logic.way import create_way
-from src.a02_finance_logic._utils.strs_a02 import fisc_tag_str, owner_name_str
+from src.a02_finance_logic._utils.strs_a02 import fisc_word_str, owner_name_str
 from src.a06_bud_logic._utils.str_a06 import (
     bud_acctunit_str,
     bud_idea_awardlink_str,
@@ -16,7 +16,7 @@ from src.a06_bud_logic._utils.str_a06 import (
 )
 from src.a15_fisc_logic._utils.str_a15 import (
     fisc_timeline_hour_str,
-    hour_tag_str,
+    hour_word_str,
     cumlative_minute_str,
 )
 from src.a16_pidgin_logic.pidgin import (
@@ -24,15 +24,15 @@ from src.a16_pidgin_logic.pidgin import (
     default_unknown_term_if_None,
 )
 from src.a16_pidgin_logic._utils.str_a16 import (
-    pidgin_tag_str,
+    pidgin_word_str,
     pidgin_way_str,
     pidgin_name_str,
     pidgin_label_str,
     pidgin_core_str,
     inx_bridge_str,
     otx_bridge_str,
-    inx_tag_str,
-    otx_tag_str,
+    inx_word_str,
+    otx_word_str,
     inx_way_str,
     otx_way_str,
     inx_name_str,
@@ -44,19 +44,19 @@ from src.a16_pidgin_logic._utils.str_a16 import (
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
     create_sound_and_voice_tables,
-    CREATE_PIDTAGG_SOUND_AGG_SQLSTR,
+    CREATE_PIDWORD_SOUND_AGG_SQLSTR,
     CREATE_PIDWAYY_SOUND_AGG_SQLSTR,
     CREATE_PIDNAME_SOUND_VLD_SQLSTR,
     CREATE_PIDLABE_SOUND_VLD_SQLSTR,
-    CREATE_PIDTAGG_SOUND_VLD_SQLSTR,
-    CREATE_PIDTAGG_SOUND_VLD_SQLSTR,
+    CREATE_PIDWORD_SOUND_VLD_SQLSTR,
+    CREATE_PIDWORD_SOUND_VLD_SQLSTR,
     CREATE_PIDWAYY_SOUND_AGG_SQLSTR,
     CREATE_PIDCORE_SOUND_RAW_SQLSTR,
     CREATE_PIDCORE_SOUND_AGG_SQLSTR,
     CREATE_PIDCORE_SOUND_VLD_SQLSTR,
     create_insert_into_pidgin_core_raw_sqlstr,
     create_update_pidgin_sound_agg_inconsist_sqlstr,
-    create_update_pidtagg_sound_agg_bridge_error_sqlstr,
+    create_update_pidword_sound_agg_bridge_error_sqlstr,
     create_update_pidwayy_sound_agg_bridge_error_sqlstr,
     create_update_pidname_sound_agg_bridge_error_sqlstr,
     create_update_pidlabe_sound_agg_bridge_error_sqlstr,
@@ -65,7 +65,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     update_voice_raw_inx_name_col_sqlstr,
     create_pidname_face_otx_event_sqlstr,
     create_pidlabe_face_otx_event_sqlstr,
-    create_pidtagg_face_otx_event_sqlstr,
+    create_pidword_face_otx_event_sqlstr,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -176,7 +176,7 @@ GROUP BY
         ]
 
 
-def test_create_pidtagg_face_otx_event_sqlstr_ReturnsObj_Scenario0_TagStr():
+def test_create_pidword_face_otx_event_sqlstr_ReturnsObj_Scenario0_WordStr():
     # ESTABLISH
     bob_otx = "Bob"
     yao_otx = "Yao"
@@ -204,7 +204,7 @@ def test_create_pidtagg_face_otx_event_sqlstr_ReturnsObj_Scenario0_TagStr():
         fishour_v_raw_tablename = prime_tbl(fishour_dimen, "v", "raw")
         print(f"{get_table_columns(cursor, fishour_v_raw_tablename)=}")
         insert_sqlstr = f"""INSERT INTO {fishour_v_raw_tablename}
-        ({event_int_str()}, {face_name_str()}_otx, {hour_tag_str()}_otx, {hour_tag_str()}_inx)
+        ({event_int_str()}, {face_name_str()}_otx, {hour_word_str()}_otx, {hour_word_str()}_inx)
         VALUES
           ({event0}, '{bob_otx}', '{hr8_otx}', NULL)
         , ({event1}, '{bob_otx}', '{hr8_otx}', NULL)
@@ -216,11 +216,11 @@ def test_create_pidtagg_face_otx_event_sqlstr_ReturnsObj_Scenario0_TagStr():
         """
         cursor.execute(insert_sqlstr)
 
-        pidtagg_dimen = pidgin_tag_str()
-        pidtagg_s_vld_tablename = prime_tbl(pidtagg_dimen, "s", "vld")
-        # print(f"{pidtagg_s_vld_tablename=}")
-        insert_pidtagg_sqlstr = f"""INSERT INTO {pidtagg_s_vld_tablename}
-        ({event_int_str()}, {face_name_str()}, {otx_tag_str()}, {inx_tag_str()})
+        pidword_dimen = pidgin_word_str()
+        pidword_s_vld_tablename = prime_tbl(pidword_dimen, "s", "vld")
+        # print(f"{pidword_s_vld_tablename=}")
+        insert_pidword_sqlstr = f"""INSERT INTO {pidword_s_vld_tablename}
+        ({event_int_str()}, {face_name_str()}, {otx_word_str()}, {inx_word_str()})
         VALUES
           ({event1}, '{bob_otx}', '{hr8_otx}', '{hr8_inx1}')
         , ({event2}, '{yao_otx}', '{hr2_otx}', '{hr2_inx}')
@@ -229,41 +229,41 @@ def test_create_pidtagg_face_otx_event_sqlstr_ReturnsObj_Scenario0_TagStr():
         , ({event8}, '{zia_otx}', '{hr7_otx}', '{hr7_inx}')
         ;
         """
-        cursor.execute(insert_pidtagg_sqlstr)
+        cursor.execute(insert_pidword_sqlstr)
 
         face_name_inx_count_sql = f"SELECT COUNT(*) FROM {fishour_v_raw_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 0
 
         # WHEN
-        pidname_face_otx_event_sqlstr = create_pidtagg_face_otx_event_sqlstr(
-            fishour_v_raw_tablename, hour_tag_str()
+        pidname_face_otx_event_sqlstr = create_pidword_face_otx_event_sqlstr(
+            fishour_v_raw_tablename, hour_word_str()
         )
         cursor.execute(pidname_face_otx_event_sqlstr)
 
         # THEN
-        static_select_pidtagg_sqlstr = """
+        static_select_pidword_sqlstr = """
 SELECT 
   raw_dim.rowid raw_rowid
 , raw_dim.event_int
 , raw_dim.face_name_otx
-, raw_dim.hour_tag_otx
+, raw_dim.hour_word_otx
 , MAX(pid.event_int) pidgin_event_int
 FROM fisc_timeline_hour_v_raw raw_dim
-LEFT JOIN pidgin_tag_s_vld pid ON pid.face_name = raw_dim.face_name_otx
-    AND pid.otx_tag = raw_dim.hour_tag_otx
+LEFT JOIN pidgin_word_s_vld pid ON pid.face_name = raw_dim.face_name_otx
+    AND pid.otx_word = raw_dim.hour_word_otx
     AND raw_dim.event_int >= pid.event_int
 GROUP BY 
   raw_dim.rowid
 , raw_dim.event_int
 , raw_dim.face_name_otx
-, raw_dim.hour_tag_otx
+, raw_dim.hour_word_otx
 """
 
         print(pidname_face_otx_event_sqlstr)
         print("")
-        # print(static_select_pidtagg_sqlstr)
-        assert static_select_pidtagg_sqlstr == pidname_face_otx_event_sqlstr
-        cursor.execute(static_select_pidtagg_sqlstr)
+        # print(static_select_pidword_sqlstr)
+        assert static_select_pidword_sqlstr == pidname_face_otx_event_sqlstr
+        cursor.execute(static_select_pidword_sqlstr)
         rows = cursor.fetchall()
         print(rows)
         # event5 does not link to event7 pidgin record's
@@ -769,8 +769,8 @@ def test_update_voice_raw_inx_name_col_sqlstr_UpdatesTable_Scenario3_Different_e
 #   {event_int_str()}
 # , {face_name_str()}_otx
 # , {face_name_str()}_inx
-# , {fisc_tag_str()}_otx
-# , {fisc_tag_str()}_inx
+# , {fisc_word_str()}_otx
+# , {fisc_word_str()}_inx
 # , {owner_name_str()}_otx
 # , {owner_name_str()}_inx
 # , {idea_way_str()}_otx
@@ -790,13 +790,13 @@ def test_update_voice_raw_inx_name_col_sqlstr_UpdatesTable_Scenario3_Different_e
 # """
 #         cursor.execute(f"{insert_into_clause} {values_clause}")
 #         face_name_inx_count_sql = f"SELECT COUNT(*) FROM {budawar_v_raw_put_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
-#         fisc_tag_inx_count_sql = f"SELECT COUNT(*) FROM {budawar_v_raw_put_tablename} WHERE {fisc_tag_str()}_inx IS NOT NULL"
+#         fisc_word_inx_count_sql = f"SELECT COUNT(*) FROM {budawar_v_raw_put_tablename} WHERE {fisc_word_str()}_inx IS NOT NULL"
 #         owner_name_inx_count_sql = f"SELECT COUNT(*) FROM {budawar_v_raw_put_tablename} WHERE {owner_name_str()}_inx IS NOT NULL"
 #         idea_way_inx_count_sql = f"SELECT COUNT(*) FROM {budawar_v_raw_put_tablename} WHERE {idea_way_str()}_inx IS NOT NULL"
 #         awardee_label_inx_count_sql = f"SELECT COUNT(*) FROM {budawar_v_raw_put_tablename} WHERE {awardee_label_str()}_inx IS NOT NULL"
 #         assert cursor.execute(face_name_inx_count_sql).fetchone() == (0,)
 #         assert cursor.execute(owner_name_inx_count_sql).fetchone() == (0,)
-#         assert cursor.execute(fisc_tag_inx_count_sql).fetchone() == (0,)
+#         assert cursor.execute(fisc_word_inx_count_sql).fetchone() == (0,)
 #         assert cursor.execute(idea_way_inx_count_sql).fetchone() == (0,)
 #         assert cursor.execute(awardee_label_inx_count_sql).fetchone() == (0,)
 
@@ -811,7 +811,7 @@ def test_update_voice_raw_inx_name_col_sqlstr_UpdatesTable_Scenario3_Different_e
 #         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 4
 #         assert cursor.execute(owner_name_inx_count_sql).fetchone()[0] == 0
 #         assert cursor.execute(awardee_label_inx_count_sql).fetchone()[0] == 0
-#         assert cursor.execute(fisc_tag_inx_count_sql).fetchone()[0] == 0
+#         assert cursor.execute(fisc_word_inx_count_sql).fetchone()[0] == 0
 #         assert cursor.execute(idea_way_inx_count_sql).fetchone()[0] == 0
 #         select_face_name_only_sqlstr = f"""SELECT {event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx FROM {budawar_v_raw_put_tablename}"""
 #         cursor.execute(select_face_name_only_sqlstr)

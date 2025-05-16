@@ -8,26 +8,26 @@ from src.a16_pidgin_logic.pidgin_config import default_unknown_term_if_None
 from src.a16_pidgin_logic.map import (
     labelmap_shop,
     namemap_shop,
-    tagmap_shop,
+    wordmap_shop,
     waymap_shop,
     LabelMap,
     NameMap,
-    TagMap,
+    WordMap,
     WayMap,
 )
 from src.a16_pidgin_logic.pidgin import PidginUnit, pidginunit_shop
 from pandas import DataFrame
 
 
-def get_clean_tagmap() -> TagMap:
+def get_clean_wordmap() -> WordMap:
     clean_otx = "clean"
     clean_inx = "propre"
     casa_otx = "casa1"
     casa_inx = "casa2"
-    tagmap = tagmap_shop(face_name="Sue")
-    tagmap.set_otx2inx(clean_otx, clean_inx)
-    tagmap.set_otx2inx(casa_otx, casa_inx)
-    return tagmap
+    wordmap = wordmap_shop(face_name="Sue")
+    wordmap.set_otx2inx(clean_otx, clean_inx)
+    wordmap.set_otx2inx(casa_otx, casa_inx)
+    return wordmap
 
 
 def get_clean_waymap() -> WayMap:
@@ -38,7 +38,7 @@ def get_clean_waymap() -> WayMap:
     bridge = default_bridge_if_None()
     clean_otx_way = f"{otx_accord45_str}{bridge}{clean_otx_str}"
     way_mapunit = waymap_shop(face_name="Sue")
-    way_mapunit.set_tag(clean_otx_str, clean_inx_str)
+    way_mapunit.set_word(clean_otx_str, clean_inx_str)
     way_mapunit.set_otx2inx(otx_accord45_str, inx_accord87_str)
     way_mapunit.reveal_inx(clean_otx_way)
     return way_mapunit
@@ -97,10 +97,10 @@ def get_suita_namemap() -> NameMap:
 #     clean_inx = "propre"
 #     casa_otx = f"casa{default_bridge_if_None()}"
 #     casa_inx = "casa"
-#     tagmap = mapunit_shop(type_TagStr_str(), face_name="Sue")
-#     tagmap.set_otx2inx(clean_str, clean_inx)
-#     tagmap.set_otx2inx(casa_otx, casa_inx)
-#     return tagmap
+#     wordmap = mapunit_shop(type_WordStr_str(), face_name="Sue")
+#     wordmap.set_otx2inx(clean_str, clean_inx)
+#     wordmap.set_otx2inx(casa_otx, casa_inx)
+#     return wordmap
 
 
 def get_slash_waymap() -> WayMap:
@@ -119,7 +119,7 @@ def get_slash_waymap() -> WayMap:
         unknown_term=x_unknown_term,
         face_name="Sue",
     )
-    way_mapunit.set_tag(clean_otx_str, clean_inx_str)
+    way_mapunit.set_word(clean_otx_str, clean_inx_str)
     way_mapunit.set_otx2inx(otx_accord45_str, inx_accord87_str)
     way_mapunit.reveal_inx(clean_otx_way)
     return way_mapunit
@@ -171,9 +171,9 @@ def get_sue_pidginunit() -> PidginUnit:
     sue_pidginunit = pidginunit_shop("Sue")
     sue_pidginunit.set_namemap(get_suita_namemap())
     sue_pidginunit.set_labelmap(get_swim_labelmap())
-    sue_pidginunit.set_tagmap(get_clean_tagmap())
+    sue_pidginunit.set_wordmap(get_clean_wordmap())
     sue_pidginunit.set_waymap(get_clean_waymap())
-    sue_pidginunit.waymap.tagmap = get_clean_tagmap()
+    sue_pidginunit.waymap.wordmap = get_clean_wordmap()
     return sue_pidginunit
 
 
@@ -229,7 +229,7 @@ def get_casa_maison_pidginunit_set_by_otx2inx() -> PidginUnit:
     return sue_pidginunit
 
 
-def get_casa_maison_pidginunit_set_by_tag() -> PidginUnit:
+def get_casa_maison_pidginunit_set_by_word() -> PidginUnit:
     otx_accord45_str = "accord45"
     inx_accord87_str = "accord87"
     casa_otx_str = "casa"
@@ -245,9 +245,9 @@ def get_casa_maison_pidginunit_set_by_tag() -> PidginUnit:
     sweep_inx_way = create_way(clean_inx_way, sweep_str)
 
     sue_pidginunit = pidginunit_shop("Sue", 7)
-    sue_pidginunit.set_tag(otx_accord45_str, inx_accord87_str)
-    sue_pidginunit.set_tag(casa_otx_str, casa_inx_str)
-    sue_pidginunit.set_tag(clean_otx_str, clean_inx_str)
+    sue_pidginunit.set_word(otx_accord45_str, inx_accord87_str)
+    sue_pidginunit.set_word(casa_otx_str, casa_inx_str)
+    sue_pidginunit.set_word(clean_otx_str, clean_inx_str)
     return sue_pidginunit
 
 
@@ -315,7 +315,7 @@ def get_casa_maison_way_otx2inx_dt() -> DataFrame:
     return inx_dt
 
 
-def get_casa_maison_tag_dt() -> DataFrame:
+def get_casa_maison_word_dt() -> DataFrame:
     inx_accord87_str = "accord87"
     casa_inx_str = "maison"
     clean_inx_str = "propre"
@@ -335,8 +335,8 @@ def get_casa_maison_tag_dt() -> DataFrame:
             "otx_bridge",
             "inx_bridge",
             "unknown_term",
-            "otx_tag",
-            "inx_tag",
+            "otx_word",
+            "inx_word",
         ]
     )
     inx_dt.loc[0] = ["Sue", e7, x_rd, x_rd, uw, otx_accord45_str, inx_accord87_str]
@@ -379,7 +379,7 @@ def get_invalid_waymap() -> WayMap:
     return waymap
 
 
-def get_slash_tagmap() -> TagMap:
+def get_slash_wordmap() -> WordMap:
     otx_accord45_str = "accord45"
     inx_accord87_str = "accord87"
     clean_otx_str = "clean"
@@ -387,17 +387,17 @@ def get_slash_tagmap() -> TagMap:
     x_unknown_term = "UnknownTerm"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
-    x_tagmap = tagmap_shop(
+    x_wordmap = wordmap_shop(
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
         unknown_term=x_unknown_term,
         face_name="Sue",
         event_int=7,
     )
-    x_tagmap.set_otx2inx(otx_accord45_str, inx_accord87_str)
-    x_tagmap.set_otx2inx(clean_otx_str, clean_inx_str)
-    x_tagmap.reveal_inx("running")
-    return x_tagmap
+    x_wordmap.set_otx2inx(otx_accord45_str, inx_accord87_str)
+    x_wordmap.set_otx2inx(clean_otx_str, clean_inx_str)
+    x_wordmap.reveal_inx("running")
+    return x_wordmap
 
 
 def get_slash_waymap() -> WayMap:
@@ -418,9 +418,9 @@ def get_slash_waymap() -> WayMap:
         unknown_term=x_unknown_term,
         face_name="Sue",
         event_int=7,
-        x_tagmap=get_slash_tagmap(),
+        x_wordmap=get_slash_wordmap(),
     )
-    x_waymap.set_tag(clean_otx_str, clean_inx_str)
+    x_waymap.set_word(clean_otx_str, clean_inx_str)
     x_waymap.set_otx2inx(otx_accord45_way, inx_accord87_way)
     x_waymap.reveal_inx(clean_otx_way)
     return x_waymap

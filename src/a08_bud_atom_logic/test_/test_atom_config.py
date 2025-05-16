@@ -44,7 +44,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     labor_label_str,
     type_NameStr_str,
     type_LabelStr_str,
-    type_TagStr_str,
+    type_WordStr_str,
     type_WayStr_str,
 )
 from src.a08_bud_atom_logic._utils.str_a08 import (
@@ -583,7 +583,7 @@ def test_get_allowed_class_types_ReturnsObj():
         "int",
         type_NameStr_str(),
         type_LabelStr_str(),
-        type_TagStr_str(),
+        type_WordStr_str(),
         type_WayStr_str(),
         "float",
         "bool",

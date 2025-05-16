@@ -22,7 +22,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     group_label_str,
     healer_name_str,
     parent_way_str,
-    idea_tag_str,
+    idea_word_str,
     idea_way_str,
     rcontext_str,
     fcontext_str,
@@ -58,8 +58,8 @@ def test_sift_atom_ReturnsNoneIfGivenBudAtomIsUPDATE():
     casa_way = sue_bud.make_l1_way(casa_str)
     sue_bud.add_idea(casa_way)
     casa_atom = budatom_shop(bud_ideaunit_str(), atom_update())
-    casa_atom.set_arg(parent_way_str(), sue_bud.fisc_tag)
-    casa_atom.set_arg(idea_tag_str(), casa_str)
+    casa_atom.set_arg(parent_way_str(), sue_bud.fisc_word)
+    casa_atom.set_arg(idea_word_str(), casa_str)
     casa_atom.set_arg(mass_str(), 8)
     # THEN
     new_casa_atom = sift_budatom(sue_bud, casa_atom)

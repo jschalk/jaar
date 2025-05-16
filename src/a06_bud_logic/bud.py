@@ -12,21 +12,21 @@ from src.a01_way_logic.way import (
     is_sub_way,
     all_waystrs_between,
     rebuild_way,
-    get_terminus_tag,
-    get_root_tag_from_way,
+    get_terminus_word,
+    get_root_word_from_way,
     get_ancestor_ways,
-    get_default_fisc_tag,
-    get_all_way_tags,
+    get_default_fisc_word,
+    get_all_way_words,
     get_forefather_ways,
     create_way,
     default_bridge_if_None,
-    TagStr,
+    WordStr,
     WayStr,
     is_string_in_way,
     OwnerName,
     AcctName,
     HealerName,
-    FiscTag,
+    FiscWord,
     waystr_valid_dir_path,
 )
 from src.a02_finance_logic.allot import allot_scale
@@ -82,7 +82,7 @@ class InvalidBudException(Exception):
     pass
 
 
-class InvalidTagException(Exception):
+class InvalidWordException(Exception):
     pass
 
 
@@ -120,7 +120,7 @@ class _gogo_calc_stop_calc_Exception(Exception):
 
 @dataclass
 class BudUnit:
-    fisc_tag: FiscTag = None
+    fisc_word: FiscWord = None
     owner_name: OwnerName = None
     accts: dict[AcctName, AcctUnit] = None
     idearoot: IdeaUnit = None
@@ -187,23 +187,23 @@ class BudUnit:
     def make_way(
         self,
         parent_way: WayStr = None,
-        terminus_tag: TagStr = None,
+        terminus_word: WordStr = None,
     ) -> WayStr:
         return create_way(
             parent_way=parent_way,
-            terminus_tag=terminus_tag,
+            terminus_word=terminus_word,
             bridge=self.bridge,
         )
 
-    def make_l1_way(self, l1_tag: TagStr):
-        return self.make_way(self.fisc_tag, l1_tag)
+    def make_l1_way(self, l1_word: WordStr):
+        return self.make_way(self.fisc_word, l1_word)
 
     def set_bridge(self, new_bridge: str):
         self.settle_bud()
         if self.bridge != new_bridge:
             for x_idea_way in self._idea_dict.keys():
                 if is_string_in_way(new_bridge, x_idea_way):
-                    exception_str = f"Cannot modify bridge to '{new_bridge}' because it exists an idea idea_tag '{x_idea_way}'"
+                    exception_str = f"Cannot modify bridge to '{new_bridge}' because it exists an idea idea_word '{x_idea_way}'"
                     raise NewBridgeException(exception_str)
 
             # modify all way attributes in ideaunits
@@ -211,13 +211,13 @@ class BudUnit:
             for x_idea in self._idea_dict.values():
                 x_idea.set_bridge(self.bridge)
 
-    def set_fisc_tag(self, fisc_tag: str):
-        old_fisc_tag = copy_deepcopy(self.fisc_tag)
+    def set_fisc_word(self, fisc_word: str):
+        old_fisc_word = copy_deepcopy(self.fisc_word)
         self.settle_bud()
         for idea_obj in self._idea_dict.values():
-            idea_obj.fisc_tag = fisc_tag
-        self.fisc_tag = fisc_tag
-        self.edit_idea_tag(old_way=to_way(old_fisc_tag), new_idea_tag=self.fisc_tag)
+            idea_obj.fisc_word = fisc_word
+        self.fisc_word = fisc_word
+        self.edit_idea_word(old_way=to_way(old_fisc_word), new_idea_word=self.fisc_word)
         self.settle_bud()
 
     def set_max_tree_traverse(self, x_int: int):
@@ -236,7 +236,7 @@ class BudUnit:
             to_evaluate_hx_dict[x_way] = "to_evaluate"
         evaluated_ways = set()
 
-        # while ways_to_evaluate != [] and count_x <= tree_metrics.tag_count:
+        # while ways_to_evaluate != [] and count_x <= tree_metrics.word_count:
         # Why count_x? because count_x might be wrong attr to measure
         # nice to avoid infinite loops from programming errors though...
         while to_evaluate_list != []:
@@ -411,7 +411,7 @@ class BudUnit:
         return all_group_labels.difference(x_acctunit_group_labels)
 
     def _is_idea_rangeroot(self, idea_way: WayStr) -> bool:
-        if self.fisc_tag == idea_way:
+        if self.fisc_word == idea_way:
             raise InvalidBudException(
                 "its difficult to foresee a scenario where idearoot is rangeroot"
             )
@@ -442,7 +442,7 @@ class BudUnit:
             self._create_ideakid_if_empty(way=fbranch)
 
         fact_fcontext_idea = self.get_idea_obj(fcontext)
-        x_idearoot = self.get_idea_obj(to_way(self.fisc_tag))
+        x_idearoot = self.get_idea_obj(to_way(self.fisc_word))
         x_fopen = None
         if fnigh is not None and fopen is None:
             x_fopen = x_idearoot.factunits.get(fcontext).fopen
@@ -504,7 +504,7 @@ class BudUnit:
     def get_tree_metrics(self) -> TreeMetrics:
         self.settle_bud()
         tree_metrics = treemetrics_shop()
-        tree_metrics.evaluate_tag(
+        tree_metrics.evaluate_word(
             level=self.idearoot._level,
             reasons=self.idearoot.reasonunits,
             awardlinks=self.idearoot.awardlinks,
@@ -524,7 +524,7 @@ class BudUnit:
 
     def _eval_tree_metrics(self, parent_idea, idea_kid, tree_metrics, x_idea_list):
         idea_kid._level = parent_idea._level + 1
-        tree_metrics.evaluate_tag(
+        tree_metrics.evaluate_word(
             level=idea_kid._level,
             reasons=idea_kid.reasonunits,
             awardlinks=idea_kid.awardlinks,
@@ -577,9 +577,9 @@ class BudUnit:
     def add_idea(
         self, idea_way: WayStr, mass: float = None, pledge: bool = None
     ) -> IdeaUnit:
-        x_idea_tag = get_terminus_tag(idea_way, self.bridge)
+        x_idea_word = get_terminus_word(idea_way, self.bridge)
         x_parent_way = get_parent_way(idea_way, self.bridge)
-        x_ideaunit = ideaunit_shop(x_idea_tag, mass=mass)
+        x_ideaunit = ideaunit_shop(x_idea_word, mass=mass)
         if pledge:
             x_ideaunit.pledge = True
         self.set_idea(x_ideaunit, x_parent_way)
@@ -596,7 +596,7 @@ class BudUnit:
     ):
         self.set_idea(
             idea_kid=idea_kid,
-            parent_way=self.fisc_tag,
+            parent_way=self.fisc_word,
             create_missing_ideas=create_missing_ideas,
             get_rid_of_missing_awardlinks_awardee_labels=get_rid_of_missing_awardlinks_awardee_labels,
             adoptees=adoptees,
@@ -615,18 +615,18 @@ class BudUnit:
         create_missing_ancestors: bool = True,
     ):
         parent_way = to_way(parent_way, self.bridge)
-        if TagStr(idea_kid.idea_tag).is_tag(self.bridge) is False:
-            x_str = f"set_idea failed because '{idea_kid.idea_tag}' is not a TagStr."
+        if WordStr(idea_kid.idea_word).is_word(self.bridge) is False:
+            x_str = f"set_idea failed because '{idea_kid.idea_word}' is not a WordStr."
             raise InvalidBudException(x_str)
 
-        x_root_tag = get_root_tag_from_way(parent_way, self.bridge)
-        if self.idearoot.idea_tag != x_root_tag:
-            exception_str = f"set_idea failed because parent_way '{parent_way}' has an invalid root tag. Should be {self.idearoot.idea_tag}."
+        x_root_word = get_root_word_from_way(parent_way, self.bridge)
+        if self.idearoot.idea_word != x_root_word:
+            exception_str = f"set_idea failed because parent_way '{parent_way}' has an invalid root word. Should be {self.idearoot.idea_word}."
             raise InvalidBudException(exception_str)
 
         idea_kid.bridge = self.bridge
-        if idea_kid.fisc_tag != self.fisc_tag:
-            idea_kid.fisc_tag = self.fisc_tag
+        if idea_kid.fisc_word != self.fisc_word:
+            idea_kid.fisc_word = self.fisc_word
         if idea_kid.fund_coin != self.fund_coin:
             idea_kid.fund_coin = self.fund_coin
         if not get_rid_of_missing_awardlinks_awardee_labels:
@@ -642,14 +642,14 @@ class BudUnit:
             parent_way_idea
         parent_way_idea.add_kid(idea_kid)
 
-        kid_way = self.make_way(parent_way, idea_kid.idea_tag)
+        kid_way = self.make_way(parent_way, idea_kid.idea_word)
         if adoptees is not None:
             mass_sum = 0
-            for adoptee_idea_tag in adoptees:
-                adoptee_way = self.make_way(parent_way, adoptee_idea_tag)
+            for adoptee_idea_word in adoptees:
+                adoptee_way = self.make_way(parent_way, adoptee_idea_word)
                 adoptee_idea = self.get_idea_obj(adoptee_way)
                 mass_sum += adoptee_idea.mass
-                new_adoptee_parent_way = self.make_way(kid_way, adoptee_idea_tag)
+                new_adoptee_parent_way = self.make_way(kid_way, adoptee_idea_word)
                 self.set_idea(adoptee_idea, new_adoptee_parent_way)
                 self.edit_idea_attr(new_adoptee_parent_way, mass=adoptee_idea.mass)
                 self.del_idea_obj(adoptee_way)
@@ -701,7 +701,7 @@ class BudUnit:
             if not del_children:
                 self._shift_idea_kids(x_way=way)
             parent_idea = self.get_idea_obj(parent_way)
-            parent_idea.del_kid(get_terminus_tag(way, self.bridge))
+            parent_idea.del_kid(get_terminus_word(way, self.bridge))
         self.settle_bud()
 
     def _shift_idea_kids(self, x_way: WayStr):
@@ -713,35 +713,35 @@ class BudUnit:
     def set_owner_name(self, new_owner_name):
         self.owner_name = new_owner_name
 
-    def edit_idea_tag(self, old_way: WayStr, new_idea_tag: TagStr):
-        if self.bridge in new_idea_tag:
-            exception_str = f"Cannot modify '{old_way}' because new_idea_tag {new_idea_tag} contains bridge {self.bridge}"
-            raise InvalidTagException(exception_str)
+    def edit_idea_word(self, old_way: WayStr, new_idea_word: WordStr):
+        if self.bridge in new_idea_word:
+            exception_str = f"Cannot modify '{old_way}' because new_idea_word {new_idea_word} contains bridge {self.bridge}"
+            raise InvalidWordException(exception_str)
         if self.idea_exists(old_way) is False:
             raise InvalidBudException(f"Idea {old_way=} does not exist")
 
         parent_way = get_parent_way(way=old_way)
         new_way = (
-            self.make_way(new_idea_tag)
+            self.make_way(new_idea_word)
             if parent_way == ""
-            else self.make_way(parent_way, new_idea_tag)
+            else self.make_way(parent_way, new_idea_word)
         )
         if old_way != new_way:
             if parent_way == "":
-                self.idearoot.set_idea_tag(new_idea_tag)
+                self.idearoot.set_idea_word(new_idea_word)
             else:
-                self._non_root_idea_tag_edit(old_way, new_idea_tag, parent_way)
+                self._non_root_idea_word_edit(old_way, new_idea_word, parent_way)
             self._idearoot_find_replace_way(old_way=old_way, new_way=new_way)
 
-    def _non_root_idea_tag_edit(
-        self, old_way: WayStr, new_idea_tag: TagStr, parent_way: WayStr
+    def _non_root_idea_word_edit(
+        self, old_way: WayStr, new_idea_word: WordStr, parent_way: WayStr
     ):
         x_idea = self.get_idea_obj(old_way)
-        x_idea.set_idea_tag(new_idea_tag)
+        x_idea.set_idea_word(new_idea_word)
         x_idea.parent_way = parent_way
         idea_parent = self.get_idea_obj(get_parent_way(old_way))
-        idea_parent._kids.pop(get_terminus_tag(old_way, self.bridge))
-        idea_parent._kids[x_idea.idea_tag] = x_idea
+        idea_parent._kids.pop(get_terminus_word(old_way, self.bridge))
+        idea_parent._kids[x_idea.idea_word] = x_idea
 
     def _idearoot_find_replace_way(self, old_way: WayStr, new_way: WayStr):
         self.idearoot.find_replace_way(old_way=old_way, new_way=new_way)
@@ -994,22 +994,22 @@ class BudUnit:
     def idea_exists(self, way: WayStr) -> bool:
         if way in {"", None}:
             return False
-        root_way_idea_tag = get_root_tag_from_way(way, self.bridge)
-        if root_way_idea_tag != self.idearoot.idea_tag:
+        root_way_idea_word = get_root_word_from_way(way, self.bridge)
+        if root_way_idea_word != self.idearoot.idea_word:
             return False
 
-        tags = get_all_way_tags(way, bridge=self.bridge)
-        root_way_idea_tag = tags.pop(0)
-        if tags == []:
+        words = get_all_way_words(way, bridge=self.bridge)
+        root_way_idea_word = words.pop(0)
+        if words == []:
             return True
 
-        idea_tag = tags.pop(0)
-        x_idea = self.idearoot.get_kid(idea_tag)
+        idea_word = words.pop(0)
+        x_idea = self.idearoot.get_kid(idea_word)
         if x_idea is None:
             return False
-        while tags != []:
-            idea_tag = tags.pop(0)
-            x_idea = x_idea.get_kid(idea_tag)
+        while words != []:
+            idea_word = words.pop(0)
+            x_idea = x_idea.get_kid(idea_word)
             if x_idea is None:
                 return False
         return True
@@ -1019,15 +1019,15 @@ class BudUnit:
             raise InvalidBudException("get_idea_obj received way=None")
         if self.idea_exists(way) is False and not if_missing_create:
             raise InvalidBudException(f"get_idea_obj failed. no idea at '{way}'")
-        tagstrs = get_all_way_tags(way, bridge=self.bridge)
-        if len(tagstrs) == 1:
+        wordstrs = get_all_way_words(way, bridge=self.bridge)
+        if len(wordstrs) == 1:
             return self.idearoot
 
-        tagstrs.pop(0)
-        idea_tag = tagstrs.pop(0)
-        x_idea = self.idearoot.get_kid(idea_tag, if_missing_create)
-        while tagstrs != []:
-            x_idea = x_idea.get_kid(tagstrs.pop(0), if_missing_create)
+        wordstrs.pop(0)
+        idea_word = wordstrs.pop(0)
+        x_idea = self.idearoot.get_kid(idea_word, if_missing_create)
+        while wordstrs != []:
+            x_idea = x_idea.get_kid(wordstrs.pop(0), if_missing_create)
 
         return x_idea
 
@@ -1044,7 +1044,7 @@ class BudUnit:
         return [self.get_idea_obj(x_idea_way) for x_idea_way in idea_ways]
 
     def _set_idea_dict(self):
-        idea_list = [self.get_idea_obj(to_way(self.fisc_tag, self.bridge))]
+        idea_list = [self.get_idea_obj(to_way(self.fisc_word, self.bridge))]
         while idea_list != []:
             x_idea = idea_list.pop()
             x_idea.clear_gogo_calc_stop_calc()
@@ -1268,10 +1268,10 @@ class BudUnit:
             for x_idea in parent_idea._kids.values():
                 if fund_onset is None:
                     fund_onset = parent_idea._fund_onset
-                    fund_cease = fund_onset + alloted_fund_num.get(x_idea.idea_tag)
+                    fund_cease = fund_onset + alloted_fund_num.get(x_idea.idea_word)
                 else:
                     fund_onset = fund_cease
-                    fund_cease += alloted_fund_num.get(x_idea.idea_tag)
+                    fund_cease += alloted_fund_num.get(x_idea.idea_word)
                 x_idea.set_fund_attr(fund_onset, fund_cease, self.fund_pool)
                 cache_idea_list.append(x_idea)
 
@@ -1335,16 +1335,16 @@ class BudUnit:
         self, no_range_descendants: bool = False
     ) -> list[WayStr]:
         idea_list = list(self.get_idea_dict().values())
-        tag_dict = {
+        word_dict = {
             idea.get_idea_way().lower(): idea.get_idea_way() for idea in idea_list
         }
-        tag_lowercase_ordered_list = sorted(list(tag_dict))
-        tag_orginalcase_ordered_list = [
-            tag_dict[tag_l] for tag_l in tag_lowercase_ordered_list
+        word_lowercase_ordered_list = sorted(list(word_dict))
+        word_orginalcase_ordered_list = [
+            word_dict[word_l] for word_l in word_lowercase_ordered_list
         ]
 
         list_x = []
-        for way in tag_orginalcase_ordered_list:
+        for way in word_orginalcase_ordered_list:
             if not no_range_descendants:
                 list_x.append(way)
             else:
@@ -1385,7 +1385,7 @@ class BudUnit:
             "respect_bit": self.respect_bit,
             "penny": self.penny,
             "owner_name": self.owner_name,
-            "fisc_tag": self.fisc_tag,
+            "fisc_word": self.fisc_word,
             "max_tree_traverse": self.max_tree_traverse,
             "bridge": self.bridge,
             "idearoot": self.idearoot.get_dict(),
@@ -1420,7 +1420,7 @@ class BudUnit:
 
 def budunit_shop(
     owner_name: OwnerName = None,
-    fisc_tag: FiscTag = None,
+    fisc_word: FiscWord = None,
     bridge: str = None,
     fund_pool: FundNum = None,
     fund_coin: FundCoin = None,
@@ -1429,11 +1429,11 @@ def budunit_shop(
     tally: float = None,
 ) -> BudUnit:
     owner_name = "" if owner_name is None else owner_name
-    fisc_tag = get_default_fisc_tag() if fisc_tag is None else fisc_tag
+    fisc_word = get_default_fisc_word() if fisc_word is None else fisc_word
     x_bud = BudUnit(
         owner_name=owner_name,
         tally=get_1_if_None(tally),
-        fisc_tag=fisc_tag,
+        fisc_word=fisc_word,
         accts=get_empty_dict_if_None(),
         _groupunits={},
         bridge=default_bridge_if_None(bridge),
@@ -1457,7 +1457,7 @@ def budunit_shop(
         root=True,
         _uid=1,
         _level=0,
-        fisc_tag=x_bud.fisc_tag,
+        fisc_word=x_bud.fisc_word,
         bridge=x_bud.bridge,
         fund_coin=x_bud.fund_coin,
         parent_way="",
@@ -1477,8 +1477,8 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.set_owner_name(obj_from_bud_dict(bud_dict, "owner_name"))
     x_bud.tally = obj_from_bud_dict(bud_dict, "tally")
     x_bud.set_max_tree_traverse(obj_from_bud_dict(bud_dict, "max_tree_traverse"))
-    x_bud.fisc_tag = obj_from_bud_dict(bud_dict, "fisc_tag")
-    x_bud.idearoot.idea_tag = obj_from_bud_dict(bud_dict, "fisc_tag")
+    x_bud.fisc_word = obj_from_bud_dict(bud_dict, "fisc_word")
+    x_bud.idearoot.idea_word = obj_from_bud_dict(bud_dict, "fisc_word")
     bud_bridge = obj_from_bud_dict(bud_dict, "bridge")
     x_bud.bridge = default_bridge_if_None(bud_bridge)
     x_bud.fund_pool = validate_fund_pool(obj_from_bud_dict(bud_dict, "fund_pool"))
@@ -1505,7 +1505,7 @@ def create_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
     idearoot_dict = bud_dict.get("idearoot")
     x_bud.idearoot = ideaunit_shop(
         root=True,
-        idea_tag=x_bud.fisc_tag,
+        idea_word=x_bud.fisc_word,
         parent_way="",
         _level=0,
         _uid=get_obj_from_idea_dict(idearoot_dict, "_uid"),
@@ -1525,7 +1525,7 @@ def create_idearoot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         awardlinks=get_obj_from_idea_dict(idearoot_dict, "awardlinks"),
         _is_expanded=get_obj_from_idea_dict(idearoot_dict, "_is_expanded"),
         bridge=x_bud.bridge,
-        fisc_tag=x_bud.fisc_tag,
+        fisc_word=x_bud.fisc_word,
         fund_coin=default_fund_coin_if_None(x_bud.fund_coin),
     )
     create_idearoot_kids_from_dict(x_bud, idearoot_dict)
@@ -1536,7 +1536,7 @@ def create_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
     parent_way_str = "parent_way"
     # for every kid dict, set parent_way in dict, add to to_evaluate_list
     for x_dict in get_obj_from_idea_dict(idearoot_dict, "_kids").values():
-        x_dict[parent_way_str] = x_bud.fisc_tag
+        x_dict[parent_way_str] = x_bud.fisc_word
         to_evaluate_idea_dicts.append(x_dict)
 
     while to_evaluate_idea_dicts != []:
@@ -1544,11 +1544,11 @@ def create_idearoot_kids_from_dict(x_bud: BudUnit, idearoot_dict: dict):
         # for every kid dict, set parent_way in dict, add to to_evaluate_list
         for kid_dict in get_obj_from_idea_dict(idea_dict, "_kids").values():
             parent_way = get_obj_from_idea_dict(idea_dict, parent_way_str)
-            kid_idea_tag = get_obj_from_idea_dict(idea_dict, "idea_tag")
-            kid_dict[parent_way_str] = x_bud.make_way(parent_way, kid_idea_tag)
+            kid_idea_word = get_obj_from_idea_dict(idea_dict, "idea_word")
+            kid_dict[parent_way_str] = x_bud.make_way(parent_way, kid_idea_word)
             to_evaluate_idea_dicts.append(kid_dict)
         x_ideakid = ideaunit_shop(
-            idea_tag=get_obj_from_idea_dict(idea_dict, "idea_tag"),
+            idea_word=get_obj_from_idea_dict(idea_dict, "idea_word"),
             mass=get_obj_from_idea_dict(idea_dict, "mass"),
             _uid=get_obj_from_idea_dict(idea_dict, "_uid"),
             begin=get_obj_from_idea_dict(idea_dict, "begin"),

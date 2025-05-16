@@ -27,7 +27,7 @@ from src.a17_creed_logic._utils.creed_df_examples import (
 
 
 # ESTABLISH a dataframe, build a fisc unit
-def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTag(
+def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscWord(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -64,7 +64,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTag(
     assert x_fiscunits.get(accord23_str) != None
     creg_timelineunit = timelineunit_shop(get_default_timeline_config_dict())
     expected_accord23_fiscunit = fiscunit_shop(
-        fisc_tag=accord23_str,
+        fisc_word=accord23_str,
         fisc_mstr_dir=x_fiscs_dir,
         fund_coin=x_fund_coin,
         penny=x_penny,
@@ -90,7 +90,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTag(
     assert gen_fiscunit.fund_coin == x_fund_coin
     assert gen_fiscunit.respect_bit == x_respect_bit
     assert gen_fiscunit.penny == x_penny
-    assert gen_fiscunit.fisc_tag == accord23_str
+    assert gen_fiscunit.fisc_word == accord23_str
     assert gen_fiscunit.fisc_mstr_dir == x_fiscs_dir
     assert gen_fiscunit.timeline == expected_accord23_fiscunit.timeline
     assert gen_fiscunit.brokerunits == expected_accord23_fiscunit.brokerunits
@@ -103,7 +103,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscTag(
 
 
 # ESTABLISH a dataframe, build a fisc unit
-def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscTags(
+def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscWords(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -137,7 +137,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscTags(
     # THEN
     creg_timelineunit = timelineunit_shop(get_default_timeline_config_dict())
     accord23_fiscunit = fiscunit_shop(
-        fisc_tag=accord23_str,
+        fisc_word=accord23_str,
         fisc_mstr_dir=x_fiscs_dir,
         fund_coin=x_fund_coin,
         penny=x_penny,
@@ -147,7 +147,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscTags(
     )
     five_timelineunit = timelineunit_shop(get_five_config())
     jeffy45_fiscunit = fiscunit_shop(
-        fisc_tag="jeffy45",
+        fisc_word="jeffy45",
         fisc_mstr_dir=x_fiscs_dir,
         fund_coin=x_fund_coin,
         penny=x_penny,
@@ -161,7 +161,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscTags(
     assert creg_fiscunit.fund_coin == x_fund_coin
     assert creg_fiscunit.respect_bit == x_respect_bit
     assert creg_fiscunit.penny == x_penny
-    assert creg_fiscunit.fisc_tag == accord23_str
+    assert creg_fiscunit.fisc_word == accord23_str
     assert creg_fiscunit.fisc_mstr_dir == x_fiscs_dir
     assert creg_fiscunit.timeline == accord23_fiscunit.timeline
     assert len(creg_fiscunit.brokerunits) == 3
@@ -172,7 +172,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscTags(
     assert five_fiscunit.fund_coin == x_fund_coin
     assert five_fiscunit.respect_bit == x_respect_bit
     assert five_fiscunit.penny == x_penny
-    assert five_fiscunit.fisc_tag == "jeffy45"
+    assert five_fiscunit.fisc_word == "jeffy45"
     assert five_fiscunit.fisc_mstr_dir == x_fiscs_dir
     assert len(five_fiscunit.brokerunits) == 2
     assert len(five_fiscunit.cashbook.tranunits) == 1

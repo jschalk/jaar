@@ -53,7 +53,7 @@ def get_allowed_class_types() -> set[str]:
         "float",
         "LabelStr",
         "int",
-        "TagStr",
+        "WordStr",
         "WayStr",
         "TimeLinePoint",
     }

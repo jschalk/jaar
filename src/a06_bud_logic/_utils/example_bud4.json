@@ -561,7 +561,7 @@
     }
   },
   "bridge": ";",
-  "fisc_tag": "A",
+  "fisc_word": "A",
   "fund_coin": 1,
   "fund_pool": 1000000000.0,
   "idearoot": {
@@ -571,17 +571,17 @@
         "_kids": {
           "interesting": {
             "_uid": 262,
-            "idea_tag": "interesting",
+            "idea_word": "interesting",
             "mass": 1
           },
           "not interesting": {
             "_uid": 263,
-            "idea_tag": "not interesting",
+            "idea_word": "not interesting",
             "mass": 1
           }
         },
         "_uid": 261,
-        "idea_tag": "Aaron Donald objects effected by him",
+        "idea_word": "Aaron Donald objects effected by him",
         "mass": 1
       },
       "ACME": {
@@ -594,7 +594,7 @@
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 116,
-                    "idea_tag": "Accomplish Fall 2021 traaining",
+                    "idea_word": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -612,14 +612,14 @@
                   }
                 },
                 "_uid": 106,
-                "idea_tag": "Abuse Deterrence and Reporting guildlines",
+                "idea_word": "Abuse Deterrence and Reporting guildlines",
                 "mass": 1
               },
               "Know ACME Staff  and Safety #2 guildlines": {
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 115,
-                    "idea_tag": "Accomplish Fall 2021 traaining",
+                    "idea_word": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
@@ -636,14 +636,14 @@
                   }
                 },
                 "_uid": 105,
-                "idea_tag": "Know ACME Staff  and Safety #2 guildlines",
+                "idea_word": "Know ACME Staff  and Safety #2 guildlines",
                 "mass": 1
               },
               "Know Adult Sexual Misconduct guildlines": {
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 118,
-                    "idea_tag": "Accomplish Fall 2021 traaining",
+                    "idea_word": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -661,12 +661,12 @@
                   }
                 },
                 "_uid": 108,
-                "idea_tag": "Know Adult Sexual Misconduct guildlines",
+                "idea_word": "Know Adult Sexual Misconduct guildlines",
                 "mass": 1
               },
               "Know Employee Intruction manuel.": {
                 "_uid": 123,
-                "idea_tag": "Know Employee Intruction manuel.",
+                "idea_word": "Know Employee Intruction manuel.",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -686,7 +686,7 @@
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 119,
-                    "idea_tag": "Accomplish Fall 2021 traaining",
+                    "idea_word": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -704,14 +704,14 @@
                   }
                 },
                 "_uid": 109,
-                "idea_tag": "Know Identifying and Supporting Houseless Youth guildlines",
+                "idea_word": "Know Identifying and Supporting Houseless Youth guildlines",
                 "mass": 1
               },
               "Know Information Security Awareness guildlines": {
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 121,
-                    "idea_tag": "Accomplish Fall 2021 traaining",
+                    "idea_word": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -729,14 +729,14 @@
                   }
                 },
                 "_uid": 111,
-                "idea_tag": "Know Information Security Awareness guildlines",
+                "idea_word": "Know Information Security Awareness guildlines",
                 "mass": 1
               },
               "Know Interbody retaliation guildlines": {
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 117,
-                    "idea_tag": "Accomplish Fall 2021 traaining",
+                    "idea_word": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
@@ -753,14 +753,14 @@
                   }
                 },
                 "_uid": 107,
-                "idea_tag": "Know Interbody retaliation guildlines",
+                "idea_word": "Know Interbody retaliation guildlines",
                 "mass": 1
               },
               "know OSHA COVID-19 Rick Reduction guildlines": {
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 120,
-                    "idea_tag": "Accomplish Fall 2021 traaining",
+                    "idea_word": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -778,14 +778,14 @@
                   }
                 },
                 "_uid": 110,
-                "idea_tag": "know OSHA COVID-19 Rick Reduction guildlines",
+                "idea_word": "know OSHA COVID-19 Rick Reduction guildlines",
                 "mass": 1
               },
               "Rick Management and Hazard Analysis": {
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 122,
-                    "idea_tag": "Accomplish Fall 2021 traaining",
+                    "idea_word": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
@@ -802,12 +802,12 @@
                   }
                 },
                 "_uid": 112,
-                "idea_tag": "Rick Management and Hazard Analysis",
+                "idea_word": "Rick Management and Hazard Analysis",
                 "mass": 1
               }
             },
             "_uid": 102,
-            "idea_tag": "ACME Employee Responsiblities",
+            "idea_word": "ACME Employee Responsiblities",
             "mass": 1
           },
           "IT DEPT": {
@@ -819,7 +819,7 @@
                     "_kids": {
                       "check emails": {
                         "_uid": 138,
-                        "idea_tag": "check emails",
+                        "idea_word": "check emails",
                         "mass": 1,
                         "pledge": true,
                         "reasonunits": {
@@ -840,27 +840,27 @@
                         "_kids": {
                           "MECHANISM1": {
                             "_uid": 170,
-                            "idea_tag": "MECHANISM1",
+                            "idea_word": "MECHANISM1",
                             "mass": 1
                           },
                           "MECHANISM2": {
                             "_uid": 171,
-                            "idea_tag": "MECHANISM2",
+                            "idea_word": "MECHANISM2",
                             "mass": 1
                           },
                           "MECHANISM3": {
                             "_uid": 172,
-                            "idea_tag": "MECHANISM3",
+                            "idea_word": "MECHANISM3",
                             "mass": 1
                           },
                           "MECHANISM4": {
                             "_uid": 173,
-                            "idea_tag": "MECHANISM4",
+                            "idea_word": "MECHANISM4",
                             "mass": 1
                           }
                         },
                         "_uid": 139,
-                        "idea_tag": "check mechanisms",
+                        "idea_word": "check mechanisms",
                         "mass": 1,
                         "pledge": true,
                         "reasonunits": {
@@ -879,7 +879,7 @@
                       }
                     },
                     "_uid": 137,
-                    "idea_tag": "check ETLs ran correctly",
+                    "idea_word": "check ETLs ran correctly",
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
@@ -897,7 +897,7 @@
                   },
                   "dress to slightly impress": {
                     "_uid": 158,
-                    "idea_tag": "dress to slightly impress",
+                    "idea_word": "dress to slightly impress",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -916,7 +916,7 @@
                   },
                   "go to employment": {
                     "_uid": 231,
-                    "idea_tag": "go to employment",
+                    "idea_word": "go to employment",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -935,7 +935,7 @@
                   }
                 },
                 "_uid": 136,
-                "idea_tag": "IT DEPT off-hours responsiblities",
+                "idea_word": "IT DEPT off-hours responsiblities",
                 "mass": 1,
                 "reasonunits": {
                   "A;time;gregtime": {
@@ -955,7 +955,7 @@
                 "_kids": {
                   "Add to Azure DevOps": {
                     "_uid": 156,
-                    "idea_tag": "Add to Azure DevOps",
+                    "idea_word": "Add to Azure DevOps",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -974,7 +974,7 @@
                   },
                   "consider management perspective": {
                     "_uid": 155,
-                    "idea_tag": "consider management perspective",
+                    "idea_word": "consider management perspective",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -995,7 +995,7 @@
                     "_kids": {
                       "Datawarehouse Expertise acquisition": {
                         "_uid": 142,
-                        "idea_tag": "Datawarehouse Expertise acquisition",
+                        "idea_word": "Datawarehouse Expertise acquisition",
                         "mass": 1,
                         "pledge": true,
                         "reasonunits": {
@@ -1016,27 +1016,27 @@
                         "_kids": {
                           "MECHANISM1": {
                             "_uid": 175,
-                            "idea_tag": "MECHANISM1",
+                            "idea_word": "MECHANISM1",
                             "mass": 1
                           },
                           "MECHANISM2": {
                             "_uid": 176,
-                            "idea_tag": "MECHANISM2",
+                            "idea_word": "MECHANISM2",
                             "mass": 1
                           },
                           "MECHANISM4D": {
                             "_uid": 177,
-                            "idea_tag": "MECHANISM4D",
+                            "idea_word": "MECHANISM4D",
                             "mass": 1
                           },
                           "MECHANISM4DD": {
                             "_uid": 174,
-                            "idea_tag": "MECHANISM4DD",
+                            "idea_word": "MECHANISM4DD",
                             "mass": 1
                           }
                         },
                         "_uid": 157,
-                        "idea_tag": "dev quantification script \"T2R8\"",
+                        "idea_word": "dev quantification script \"T2R8\"",
                         "mass": 1,
                         "pledge": true,
                         "reasonunits": {
@@ -1055,7 +1055,7 @@
                       },
                       "go to daily meeting ": {
                         "_uid": 232,
-                        "idea_tag": "go to daily meeting ",
+                        "idea_word": "go to daily meeting ",
                         "mass": 1,
                         "pledge": true,
                         "reasonunits": {
@@ -1074,12 +1074,12 @@
                       }
                     },
                     "_uid": 135,
-                    "idea_tag": "Datawarehouse",
+                    "idea_word": "Datawarehouse",
                     "mass": 1
                   },
                   "IT DEPT general": {
                     "_uid": 141,
-                    "idea_tag": "IT DEPT general",
+                    "idea_word": "IT DEPT general",
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
@@ -1097,7 +1097,7 @@
                   },
                   "Keep track of Chatroom conversations": {
                     "_uid": 151,
-                    "idea_tag": "Keep track of Chatroom conversations",
+                    "idea_word": "Keep track of Chatroom conversations",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -1118,7 +1118,7 @@
                     "_kids": {
                       "check for access": {
                         "_uid": 143,
-                        "idea_tag": "check for access",
+                        "idea_word": "check for access",
                         "mass": 1,
                         "reasonunits": {
                           "A;time;gregtime": {
@@ -1136,7 +1136,7 @@
                       }
                     },
                     "_uid": 140,
-                    "idea_tag": "SQLIte",
+                    "idea_word": "SQLIte",
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
@@ -1154,7 +1154,7 @@
                   }
                 },
                 "_uid": 133,
-                "idea_tag": "IT DEPT regular hours responsiblities",
+                "idea_word": "IT DEPT regular hours responsiblities",
                 "mass": 1,
                 "morph": false,
                 "pledge": true,
@@ -1174,7 +1174,7 @@
               }
             },
             "_uid": 101,
-            "idea_tag": "IT DEPT",
+            "idea_word": "IT DEPT",
             "mass": 1,
             "reasonunits": {
               "A;time;gregtime": {
@@ -1192,7 +1192,7 @@
           }
         },
         "_uid": 100,
-        "idea_tag": "ACME",
+        "idea_word": "ACME",
         "mass": 1
       },
       "Asset management": {
@@ -1208,7 +1208,7 @@
                         "_kids": {
                           "be reponsible for rent": {
                             "_uid": 209,
-                            "idea_tag": "be reponsible for rent",
+                            "idea_word": "be reponsible for rent",
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States": {
@@ -1225,7 +1225,7 @@
                             "_kids": {
                               "maybe watch a video": {
                                 "_uid": 218,
-                                "idea_tag": "maybe watch a video",
+                                "idea_word": "maybe watch a video",
                                 "mass": 1,
                                 "reasonunits": {
                                   "A;Interweb": {
@@ -1240,7 +1240,7 @@
                               }
                             },
                             "_uid": 214,
-                            "idea_tag": "enjoy silent time",
+                            "idea_word": "enjoy silent time",
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States": {
@@ -1255,7 +1255,7 @@
                           },
                           "flat": {
                             "_uid": 211,
-                            "idea_tag": "flat",
+                            "idea_word": "flat",
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States": {
@@ -1270,7 +1270,7 @@
                           },
                           "gym time": {
                             "_uid": 215,
-                            "idea_tag": "gym time",
+                            "idea_word": "gym time",
                             "mass": 1,
                             "reasonunits": {
                               "A;Moods": {
@@ -1285,7 +1285,7 @@
                           }
                         },
                         "_uid": 208,
-                        "idea_tag": "flats",
+                        "idea_word": "flats",
                         "mass": 1,
                         "reasonunits": {
                           "A;Nation-States": {
@@ -1302,7 +1302,7 @@
                         "_kids": {
                           "browsing": {
                             "_uid": 217,
-                            "idea_tag": "browsing",
+                            "idea_word": "browsing",
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States": {
@@ -1317,7 +1317,7 @@
                           },
                           "picnic": {
                             "_uid": 216,
-                            "idea_tag": "picnic",
+                            "idea_word": "picnic",
                             "mass": 1,
                             "reasonunits": {
                               "A;Seasons": {
@@ -1332,7 +1332,7 @@
                           },
                           "street soccer": {
                             "_uid": 213,
-                            "idea_tag": "street soccer",
+                            "idea_word": "street soccer",
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States": {
@@ -1347,7 +1347,7 @@
                           },
                           "swimming": {
                             "_uid": 212,
-                            "idea_tag": "swimming",
+                            "idea_word": "swimming",
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States": {
@@ -1362,7 +1362,7 @@
                           }
                         },
                         "_uid": 210,
-                        "idea_tag": "Local college",
+                        "idea_word": "Local college",
                         "mass": 1,
                         "reasonunits": {
                           "A;Nation-States": {
@@ -1377,7 +1377,7 @@
                       }
                     },
                     "_uid": 207,
-                    "idea_tag": "downtown",
+                    "idea_word": "downtown",
                     "mass": 1,
                     "reasonunits": {
                       "A;Nation-States": {
@@ -1392,7 +1392,7 @@
                   }
                 },
                 "_uid": 206,
-                "idea_tag": "portland sovereignty",
+                "idea_word": "portland sovereignty",
                 "mass": 1,
                 "reasonunits": {
                   "A;Nation-States": {
@@ -1407,7 +1407,7 @@
               },
               "texas sovereignty": {
                 "_uid": 205,
-                "idea_tag": "texas sovereignty",
+                "idea_word": "texas sovereignty",
                 "mass": 1,
                 "reasonunits": {
                   "A;Nation-States": {
@@ -1422,7 +1422,7 @@
               }
             },
             "_uid": 204,
-            "idea_tag": "American sovereignty",
+            "idea_word": "American sovereignty",
             "mass": 1,
             "reasonunits": {
               "A;Nation-States": {
@@ -1437,7 +1437,7 @@
           },
           "French sovereignty": {
             "_uid": 203,
-            "idea_tag": "French sovereignty",
+            "idea_word": "French sovereignty",
             "mass": 1,
             "reasonunits": {
               "A;Nation-States": {
@@ -1452,7 +1452,7 @@
           }
         },
         "_uid": 199,
-        "idea_tag": "Asset management",
+        "idea_word": "Asset management",
         "mass": 1
       },
       "Better Stuff Proposal": {
@@ -1461,7 +1461,7 @@
           "decrease carbon footprint": {
             "_kids": {
               "never fly a private G5": {
-                "idea_tag": "never fly a private G5",
+                "idea_word": "never fly a private G5",
                 "mass": 1,
                 "morph": false,
                 "pledge": true,
@@ -1479,12 +1479,12 @@
                 }
               }
             },
-            "idea_tag": "decrease carbon footprint",
+            "idea_word": "decrease carbon footprint",
             "mass": 1,
             "morph": false
           }
         },
-        "idea_tag": "Better Stuff Proposal",
+        "idea_word": "Better Stuff Proposal",
         "mass": 1,
         "morph": false
       },
@@ -1492,17 +1492,17 @@
         "_kids": {
           "Aint me Babe": {
             "_uid": 270,
-            "idea_tag": "Aint me Babe",
+            "idea_word": "Aint me Babe",
             "mass": 1
           },
           "tangled up in blue": {
             "_uid": 271,
-            "idea_tag": "tangled up in blue",
+            "idea_word": "tangled up in blue",
             "mass": 1
           }
         },
         "_uid": 269,
-        "idea_tag": "Bob Dylan Root",
+        "idea_word": "Bob Dylan Root",
         "mass": 1
       },
       "casa": {
@@ -1517,7 +1517,7 @@
                 "take_force": 1
               }
             },
-            "idea_tag": "call Crazy pete to say hi",
+            "idea_word": "call Crazy pete to say hi",
             "mass": 30,
             "morph": false,
             "pledge": true,
@@ -1537,7 +1537,7 @@
           },
           "check up on old family friends": {
             "_uid": 222,
-            "idea_tag": "check up on old family friends",
+            "idea_word": "check up on old family friends",
             "mass": 1,
             "reasonunits": {
               "A;Moods": {
@@ -1561,7 +1561,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "check cat water",
+                "idea_word": "check cat water",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -1580,7 +1580,7 @@
               },
               "check humidifer": {
                 "_uid": 159,
-                "idea_tag": "check humidifer",
+                "idea_word": "check humidifer",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -1606,7 +1606,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "clean baby seats",
+                "idea_word": "clean baby seats",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -1632,7 +1632,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "clean bathroom",
+                "idea_word": "clean bathroom",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -1658,7 +1658,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "clean cat poo",
+                "idea_word": "clean cat poo",
                 "mass": 1,
                 "morph": false,
                 "pledge": true,
@@ -1685,7 +1685,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "clean humidifiers",
+                "idea_word": "clean humidifiers",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -1711,7 +1711,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "clean sheets couch blankets",
+                "idea_word": "clean sheets couch blankets",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -1737,7 +1737,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "clean table",
+                "idea_word": "clean table",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -1763,7 +1763,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "deep clean play mat",
+                "idea_word": "deep clean play mat",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -1789,7 +1789,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "empty roomba",
+                "idea_word": "empty roomba",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -1815,7 +1815,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "empty roomba Friday",
+                "idea_word": "empty roomba Friday",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -1835,17 +1835,17 @@
               "laundry basket status": {
                 "_kids": {
                   "full": {
-                    "idea_tag": "full",
+                    "idea_word": "full",
                     "mass": 1,
                     "morph": false
                   },
                   "not full": {
-                    "idea_tag": "not full",
+                    "idea_word": "not full",
                     "mass": 1,
                     "morph": false
                   }
                 },
-                "idea_tag": "laundry basket status",
+                "idea_word": "laundry basket status",
                 "mass": 1,
                 "morph": false
               },
@@ -1858,7 +1858,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "laundry monday",
+                "idea_word": "laundry monday",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -1892,7 +1892,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "laundry saturday",
+                "idea_word": "laundry saturday",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -1918,7 +1918,7 @@
                 }
               },
               "laundry thursday": {
-                "idea_tag": "laundry thursday",
+                "idea_word": "laundry thursday",
                 "mass": 1,
                 "morph": false,
                 "pledge": true,
@@ -1953,7 +1953,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "laundry wednesday",
+                "idea_word": "laundry wednesday",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -1980,7 +1980,7 @@
               },
               "morning cookery clean-up": {
                 "_uid": 150,
-                "idea_tag": "morning cookery clean-up",
+                "idea_word": "morning cookery clean-up",
                 "mass": 1,
                 "reasonunits": {
                   "A;time;gregtime": {
@@ -2005,7 +2005,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "prepare_bed clean bedroom",
+                "idea_word": "prepare_bed clean bedroom",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2031,7 +2031,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "roomba bedroom",
+                "idea_word": "roomba bedroom",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2057,7 +2057,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "roomba bedroom Friday",
+                "idea_word": "roomba bedroom Friday",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2083,7 +2083,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "roomba living area",
+                "idea_word": "roomba living area",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2109,7 +2109,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "roomba living area thur",
+                "idea_word": "roomba living area thur",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2135,7 +2135,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "roomba maintenance",
+                "idea_word": "roomba maintenance",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2161,7 +2161,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "wipe down play mat2",
+                "idea_word": "wipe down play mat2",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2180,7 +2180,7 @@
               }
             },
             "_uid": 146,
-            "idea_tag": "cleaning",
+            "idea_word": "cleaning",
             "mass": 1,
             "reasonunits": {
               "A;Nation-States": {
@@ -2205,7 +2205,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "5 push-ups",
+                "idea_word": "5 push-ups",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2231,7 +2231,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "check protein for week is adequate",
+                "idea_word": "check protein for week is adequate",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2257,7 +2257,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "clean ears",
+                "idea_word": "clean ears",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2283,7 +2283,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "clip body nails",
+                "idea_word": "clip body nails",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2309,7 +2309,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "cook veggies every morning",
+                "idea_word": "cook veggies every morning",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2335,7 +2335,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "flossing teeth",
+                "idea_word": "flossing teeth",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2363,7 +2363,7 @@
                         "take_force": 1
                       }
                     },
-                    "idea_tag": "bike or stuff",
+                    "idea_word": "bike or stuff",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -2384,12 +2384,12 @@
                     "_kids": {
                       "bi and triceps exercises": {
                         "_uid": 130,
-                        "idea_tag": "bi and triceps exercises",
+                        "idea_word": "bi and triceps exercises",
                         "mass": 1
                       },
                       "chest  exercises": {
                         "_uid": 129,
-                        "idea_tag": "chest  exercises",
+                        "idea_word": "chest  exercises",
                         "mass": 1
                       }
                     },
@@ -2401,7 +2401,7 @@
                         "take_force": 1
                       }
                     },
-                    "idea_tag": "chest and arms (mon)",
+                    "idea_word": "chest and arms (mon)",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -2420,7 +2420,7 @@
                   },
                   "core and squats": {
                     "_uid": 179,
-                    "idea_tag": "core and squats",
+                    "idea_word": "core and squats",
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
@@ -2445,7 +2445,7 @@
                         "take_force": 1
                       }
                     },
-                    "idea_tag": "core lower back",
+                    "idea_word": "core lower back",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -2471,7 +2471,7 @@
                         "take_force": 1
                       }
                     },
-                    "idea_tag": "rest",
+                    "idea_word": "rest",
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime": {
@@ -2491,14 +2491,14 @@
                     "_kids": {
                       "shoulder exercises": {
                         "_uid": 131,
-                        "idea_tag": "shoulder exercises",
+                        "idea_word": "shoulder exercises",
                         "mass": 1,
                         "morph": false,
                         "pledge": true
                       },
                       "upper back exercises": {
                         "_uid": 132,
-                        "idea_tag": "upper back exercises",
+                        "idea_word": "upper back exercises",
                         "mass": 1,
                         "morph": false,
                         "pledge": true
@@ -2512,7 +2512,7 @@
                         "take_force": 1
                       }
                     },
-                    "idea_tag": "shoulders and upper back",
+                    "idea_word": "shoulders and upper back",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -2538,7 +2538,7 @@
                         "take_force": 1
                       }
                     },
-                    "idea_tag": "squats hamstrings and calves",
+                    "idea_word": "squats hamstrings and calves",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -2557,7 +2557,7 @@
                   }
                 },
                 "_uid": 81,
-                "idea_tag": "mass traaining",
+                "idea_word": "mass traaining",
                 "mass": 1
               },
               "morning multivitamin": {
@@ -2569,7 +2569,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "morning multivitamin",
+                "idea_word": "morning multivitamin",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2588,7 +2588,7 @@
               },
               "evening multivitamin": {
                 "_uid": 230,
-                "idea_tag": "evening multivitamin",
+                "idea_word": "evening multivitamin",
                 "mass": 1,
                 "reasonunits": {
                   "A;time;gregtime": {
@@ -2613,7 +2613,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "shampooing",
+                "idea_word": "shampooing",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2639,7 +2639,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "straight back for 45 secs",
+                "idea_word": "straight back for 45 secs",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2660,7 +2660,7 @@
                 "_is_expanded": false,
                 "_kids": {
                   "back": {
-                    "idea_tag": "back",
+                    "idea_word": "back",
                     "mass": 30,
                     "morph": false,
                     "pledge": true,
@@ -2679,7 +2679,7 @@
                     }
                   },
                   "legs": {
-                    "idea_tag": "legs",
+                    "idea_word": "legs",
                     "mass": 30,
                     "morph": false,
                     "pledge": true,
@@ -2698,13 +2698,13 @@
                     }
                   },
                   "waist": {
-                    "idea_tag": "waist",
+                    "idea_word": "waist",
                     "mass": 30,
                     "morph": false,
                     "pledge": true
                   }
                 },
-                "idea_tag": "stretch",
+                "idea_word": "stretch",
                 "mass": 30,
                 "morph": false,
                 "pledge": true,
@@ -2731,7 +2731,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "trim beard",
+                "idea_word": "trim beard",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2750,7 +2750,7 @@
               }
             },
             "_uid": 147,
-            "idea_tag": "exercise",
+            "idea_word": "exercise",
             "mass": 1
           },
           "Financial Ops": {
@@ -2765,7 +2765,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "be reponsible for rent",
+                "idea_word": "be reponsible for rent",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2790,7 +2790,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "be responsible for expenses card",
+                "idea_word": "be responsible for expenses card",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2815,7 +2815,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "be responsible for utilities",
+                "idea_word": "be responsible for utilities",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2840,7 +2840,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "set aside a little bucks for fun the week",
+                "idea_word": "set aside a little bucks for fun the week",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -2858,7 +2858,7 @@
               }
             },
             "_uid": 148,
-            "idea_tag": "Financial Ops",
+            "idea_word": "Financial Ops",
             "mass": 1
           },
           "Housing": {
@@ -2866,36 +2866,36 @@
             "_kids": {
               "Bike Garage": {
                 "_uid": 185,
-                "idea_tag": "Bike Garage",
+                "idea_word": "Bike Garage",
                 "mass": 1
               },
               "Bike Gym": {
                 "_uid": 184,
-                "idea_tag": "Bike Gym",
+                "idea_word": "Bike Gym",
                 "mass": 1
               },
               "Flat": {
                 "_kids": {
                   "bathroom #2": {
                     "_uid": 196,
-                    "idea_tag": "bathroom #2",
+                    "idea_word": "bathroom #2",
                     "mass": 1
                   },
                   "bedroom #1": {
                     "_kids": {
                       "big bathroom": {
                         "_uid": 195,
-                        "idea_tag": "big bathroom",
+                        "idea_word": "big bathroom",
                         "mass": 1
                       },
                       "closet": {
                         "_uid": 194,
-                        "idea_tag": "closet",
+                        "idea_word": "closet",
                         "mass": 1
                       }
                     },
                     "_uid": 191,
-                    "idea_tag": "bedroom #1",
+                    "idea_word": "bedroom #1",
                     "mass": 1
                   },
                   "bedroom #2": {
@@ -2911,62 +2911,62 @@
                                 "take_force": 1
                               }
                             },
-                            "idea_tag": "heater maintenance",
+                            "idea_word": "heater maintenance",
                             "mass": 1
                           }
                         },
                         "_uid": 197,
-                        "idea_tag": "bed area",
+                        "idea_word": "bed area",
                         "mass": 1
                       },
                       "closet": {
                         "_uid": 193,
-                        "idea_tag": "closet",
+                        "idea_word": "closet",
                         "mass": 1
                       }
                     },
                     "_uid": 192,
-                    "idea_tag": "bedroom #2",
+                    "idea_word": "bedroom #2",
                     "mass": 1
                   },
                   "cookery": {
                     "_uid": 189,
-                    "idea_tag": "cookery",
+                    "idea_word": "cookery",
                     "mass": 1
                   },
                   "dining area": {
                     "_uid": 190,
-                    "idea_tag": "dining area",
+                    "idea_word": "dining area",
                     "mass": 1
                   },
                   "maintenance": {
                     "_uid": 187,
-                    "idea_tag": "maintenance",
+                    "idea_word": "maintenance",
                     "mass": 1
                   },
                   "nursery": {
                     "_uid": 188,
-                    "idea_tag": "nursery",
+                    "idea_word": "nursery",
                     "mass": 1
                   }
                 },
                 "_uid": 181,
-                "idea_tag": "Flat",
+                "idea_word": "Flat",
                 "mass": 1
               },
               "Lifting Gym": {
                 "_uid": 183,
-                "idea_tag": "Lifting Gym",
+                "idea_word": "Lifting Gym",
                 "mass": 1
               },
               "Playing in nurserys": {
                 "_uid": 186,
-                "idea_tag": "Playing in nurserys",
+                "idea_word": "Playing in nurserys",
                 "mass": 1
               },
               "Pool": {
                 "_uid": 182,
-                "idea_tag": "Pool",
+                "idea_word": "Pool",
                 "mass": 1
               }
             },
@@ -2978,12 +2978,12 @@
                 "take_force": 1
               }
             },
-            "idea_tag": "Housing",
+            "idea_word": "Housing",
             "mass": 1
           },
           "keep up with friends": {
             "_uid": 220,
-            "idea_tag": "keep up with friends",
+            "idea_word": "keep up with friends",
             "mass": 1,
             "reasonunits": {
               "A;Interweb": {
@@ -3008,7 +3008,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "clip oldest nails",
+                "idea_word": "clip oldest nails",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3042,7 +3042,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "get rid of toy get new toy",
+                "idea_word": "get rid of toy get new toy",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3069,7 +3069,7 @@
               }
             },
             "_uid": 144,
-            "idea_tag": "responsible for kids",
+            "idea_word": "responsible for kids",
             "mass": 1,
             "reasonunits": {
               "A;Nation-States": {
@@ -3083,7 +3083,7 @@
             }
           },
           "say double hi to birds": {
-            "idea_tag": "say double hi to birds",
+            "idea_word": "say double hi to birds",
             "mass": 25,
             "morph": false,
             "pledge": true,
@@ -3110,7 +3110,7 @@
                 "take_force": 1
               }
             },
-            "idea_tag": "say hi to birds",
+            "idea_word": "say hi to birds",
             "mass": 1,
             "pledge": true,
             "reasonunits": {
@@ -3129,7 +3129,7 @@
           }
         },
         "_uid": 2,
-        "idea_tag": "casa",
+        "idea_word": "casa",
         "mass": 20,
         "morph": false
       },
@@ -3147,7 +3147,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "Ask Aaron monthly what I can do",
+                "idea_word": "Ask Aaron monthly what I can do",
                 "mass": 1,
                 "reasonunits": {
                   "A;Aaron Donald objects effected by him": {
@@ -3169,7 +3169,7 @@
                 "take_force": 1
               }
             },
-            "idea_tag": "bens friends be desperate for of housing support",
+            "idea_word": "bens friends be desperate for of housing support",
             "mass": 1,
             "reasonunits": {
               "A;Aaron Donald objects effected by him": {
@@ -3186,7 +3186,7 @@
             "_kids": {
               "test program": {
                 "_uid": 178,
-                "idea_tag": "test program",
+                "idea_word": "test program",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3220,7 +3220,7 @@
                 "take_force": 1
               }
             },
-            "idea_tag": "develop D&B software",
+            "idea_word": "develop D&B software",
             "mass": 1,
             "reasonunits": {
               "A;Aaron Donald objects effected by him": {
@@ -3244,7 +3244,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "donate to influential people that are pro-Climate Death",
+                "idea_word": "donate to influential people that are pro-Climate Death",
                 "mass": 1,
                 "pledge": true,
                 "reasonunits": {
@@ -3271,7 +3271,7 @@
               }
             },
             "_uid": 167,
-            "idea_tag": "donate to pro-climate committees",
+            "idea_word": "donate to pro-climate committees",
             "mass": 1,
             "reasonunits": {
               "A;Aaron Donald objects effected by him": {
@@ -3286,7 +3286,7 @@
           },
           "late_evening_go_to_sleep": {
             "_uid": 149,
-            "idea_tag": "late_evening_go_to_sleep",
+            "idea_word": "late_evening_go_to_sleep",
             "mass": 1,
             "pledge": true,
             "reasonunits": {
@@ -3316,7 +3316,7 @@
               "Ernesto Chavez": {
                 "_kids": {
                   "available for phone call": {
-                    "idea_tag": "available for phone call",
+                    "idea_word": "available for phone call",
                     "mass": 4,
                     "morph": false,
                     "pledge": true,
@@ -3335,7 +3335,7 @@
                     }
                   }
                 },
-                "idea_tag": "Ernesto Chavez",
+                "idea_word": "Ernesto Chavez",
                 "mass": 4,
                 "morph": false,
                 "reasonunits": {
@@ -3355,7 +3355,7 @@
                         "take_force": 1
                       }
                     },
-                    "idea_tag": "be available for phone call",
+                    "idea_word": "be available for phone call",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -3394,7 +3394,7 @@
                         "take_force": 1
                       }
                     },
-                    "idea_tag": "call Aaron and discuss methodology",
+                    "idea_word": "call Aaron and discuss methodology",
                     "mass": 1,
                     "pledge": true,
                     "reasonunits": {
@@ -3428,7 +3428,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "sympathetic receptive to Aaron",
+                "idea_word": "sympathetic receptive to Aaron",
                 "mass": 1,
                 "reasonunits": {
                   "A;Aaron Donald objects effected by him": {
@@ -3443,7 +3443,7 @@
               }
             },
             "_uid": 161,
-            "idea_tag": "sympathetic receptive",
+            "idea_word": "sympathetic receptive",
             "mass": 1,
             "reasonunits": {
               "A;Aaron Donald objects effected by him": {
@@ -3467,7 +3467,7 @@
                     "take_force": 1
                   }
                 },
-                "idea_tag": "write letters about Climate Death to congressman",
+                "idea_word": "write letters about Climate Death to congressman",
                 "mass": 1,
                 "reasonunits": {
                   "A;Aaron Donald objects effected by him": {
@@ -3493,7 +3493,7 @@
               }
             },
             "_uid": 165,
-            "idea_tag": "write letters to reps",
+            "idea_word": "write letters to reps",
             "mass": 1,
             "reasonunits": {
               "A;Aaron Donald objects effected by him": {
@@ -3525,7 +3525,7 @@
             "take_force": 1
           }
         },
-        "idea_tag": "D&B",
+        "idea_word": "D&B",
         "mass": 1,
         "reasonunits": {
           "A;Aaron Donald objects effected by him": {
@@ -3545,66 +3545,66 @@
             "_kids": {
               "PSU Ultimate": {
                 "_uid": 254,
-                "idea_tag": "PSU Ultimate",
+                "idea_word": "PSU Ultimate",
                 "mass": 1
               }
             },
             "_uid": 253,
-            "idea_tag": "AOL AIM",
+            "idea_word": "AOL AIM",
             "mass": 1
           },
           "Faaceboook": {
             "_uid": 251,
-            "idea_tag": "Faaceboook",
+            "idea_word": "Faaceboook",
             "mass": 1
           },
           "Github": {
             "_uid": 252,
-            "idea_tag": "Github",
+            "idea_word": "Github",
             "mass": 1
           },
           "YahooVideo": {
             "_uid": 255,
-            "idea_tag": "YahooVideo",
+            "idea_word": "YahooVideo",
             "mass": 1
           }
         },
         "_uid": 250,
-        "idea_tag": "Interweb",
+        "idea_word": "Interweb",
         "mass": 1
       },
       "Moods": {
         "_kids": {
           "Bllod Meridan by Cormac": {
             "_uid": 265,
-            "idea_tag": "Bllod Meridan by Cormac",
+            "idea_word": "Bllod Meridan by Cormac",
             "mass": 1
           },
           "Happy": {
             "_kids": {
               "Happy - angerish": {
                 "_uid": 267,
-                "idea_tag": "Happy - angerish",
+                "idea_word": "Happy - angerish",
                 "mass": 1
               }
             },
             "_uid": 266,
-            "idea_tag": "Happy",
+            "idea_word": "Happy",
             "mass": 1
           },
           "hungry": {
             "_uid": 268,
-            "idea_tag": "hungry",
+            "idea_word": "hungry",
             "mass": 1
           },
           "I will waste time": {
-            "idea_tag": "I will waste time",
+            "idea_word": "I will waste time",
             "mass": 1,
             "morph": false
           }
         },
         "_uid": 264,
-        "idea_tag": "Moods",
+        "idea_word": "Moods",
         "mass": 1
       },
       "Nation-States": {
@@ -3612,7 +3612,7 @@
         "_kids": {
           "France2": {
             "_uid": 235,
-            "idea_tag": "France2",
+            "idea_word": "France2",
             "mass": 1
           },
           "USA": {
@@ -3625,79 +3625,79 @@
                         "_kids": {
                           "10th floor gaarden": {
                             "_uid": 246,
-                            "idea_tag": "10th floor gaarden",
+                            "idea_word": "10th floor gaarden",
                             "mass": 1
                           },
                           "Apt 450": {
                             "_uid": 247,
-                            "idea_tag": "Apt 450",
+                            "idea_word": "Apt 450",
                             "mass": 1
                           },
                           "Gym": {
                             "_uid": 248,
-                            "idea_tag": "Gym",
+                            "idea_word": "Gym",
                             "mass": 1
                           },
                           "workspace": {
                             "_uid": 249,
-                            "idea_tag": "workspace",
+                            "idea_word": "workspace",
                             "mass": 1
                           }
                         },
                         "_uid": 245,
-                        "idea_tag": "Flats",
+                        "idea_word": "Flats",
                         "mass": 1
                       },
                       "PSU": {
                         "_kids": {
                           "library": {
                             "_uid": 244,
-                            "idea_tag": "library",
+                            "idea_word": "library",
                             "mass": 1
                           },
                           "Park Squares": {
                             "_uid": 241,
-                            "idea_tag": "Park Squares",
+                            "idea_word": "Park Squares",
                             "mass": 1
                           },
                           "Pool": {
                             "_uid": 242,
-                            "idea_tag": "Pool",
+                            "idea_word": "Pool",
                             "mass": 1
                           },
                           "Stott Field": {
                             "_uid": 243,
-                            "idea_tag": "Stott Field",
+                            "idea_word": "Stott Field",
                             "mass": 1
                           }
                         },
                         "_uid": 240,
-                        "idea_tag": "PSU",
+                        "idea_word": "PSU",
                         "mass": 1
                       }
                     },
                     "_uid": 239,
-                    "idea_tag": "Downtown",
+                    "idea_word": "Downtown",
                     "mass": 1
                   }
                 },
                 "_uid": 237,
-                "idea_tag": "Portland OR",
+                "idea_word": "Portland OR",
                 "mass": 1
               },
               "Texas": {
                 "_uid": 238,
-                "idea_tag": "Texas",
+                "idea_word": "Texas",
                 "mass": 1
               }
             },
             "_uid": 236,
-            "idea_tag": "USA",
+            "idea_word": "USA",
             "mass": 1
           }
         },
         "_uid": 234,
-        "idea_tag": "Nation-States",
+        "idea_word": "Nation-States",
         "mass": 1
       },
       "No Movie playing": {
@@ -3705,17 +3705,17 @@
         "_kids": {
           "Big Lewbwski": {
             "_uid": 273,
-            "idea_tag": "Big Lewbwski",
+            "idea_word": "Big Lewbwski",
             "mass": 1
           },
           "Star Wars eps IV": {
             "_uid": 274,
-            "idea_tag": "Star Wars eps IV",
+            "idea_word": "Star Wars eps IV",
             "mass": 1
           }
         },
         "_uid": 272,
-        "idea_tag": "No Movie playing",
+        "idea_word": "No Movie playing",
         "mass": 1
       },
       "Seasons": {
@@ -3723,12 +3723,12 @@
         "_kids": {
           "Summer": {
             "_uid": 276,
-            "idea_tag": "Summer",
+            "idea_word": "Summer",
             "mass": 1
           }
         },
         "_uid": 275,
-        "idea_tag": "Seasons",
+        "idea_word": "Seasons",
         "mass": 1
       },
       "time": {
@@ -3740,7 +3740,7 @@
                 "_is_expanded": false,
                 "denom": 7,
                 "gogo_want": 0.0,
-                "idea_tag": "400 year segment",
+                "idea_word": "400 year segment",
                 "mass": 1,
                 "morph": true,
                 "numor": 1,
@@ -3750,7 +3750,7 @@
                 "_is_expanded": false,
                 "denom": 210379680,
                 "gogo_want": 0.0,
-                "idea_tag": "400 year segments",
+                "idea_word": "400 year segments",
                 "mass": 1,
                 "morph": false,
                 "numor": 1,
@@ -3760,7 +3760,7 @@
                 "_is_expanded": false,
                 "denom": 1022679.0,
                 "gogo_want": 0.0,
-                "idea_tag": "day",
+                "idea_word": "day",
                 "mass": 1,
                 "morph": true,
                 "numor": 1,
@@ -3770,7 +3770,7 @@
                 "_is_expanded": false,
                 "denom": 1440,
                 "gogo_want": 0.0,
-                "idea_tag": "days",
+                "idea_word": "days",
                 "mass": 1,
                 "morph": false,
                 "numor": 1,
@@ -3780,7 +3780,7 @@
                 "_is_expanded": false,
                 "denom": 146097.0,
                 "gogo_want": 0.0,
-                "idea_tag": "week",
+                "idea_word": "week",
                 "mass": 1,
                 "morph": true,
                 "numor": 1,
@@ -3790,7 +3790,7 @@
                 "_is_expanded": false,
                 "denom": 10080,
                 "gogo_want": 0.0,
-                "idea_tag": "weeks",
+                "idea_word": "weeks",
                 "mass": 1,
                 "morph": false,
                 "numor": 1,
@@ -3802,28 +3802,28 @@
                     "_kids": {
                       "2023 Feb 9am": {
                         "gogo_want": 1064041020.0,
-                        "idea_tag": "2023 Feb 9am",
+                        "idea_word": "2023 Feb 9am",
                         "mass": 1,
                         "morph": false,
                         "stop_want": 1064041020.0
                       }
                     },
                     "gogo_want": 0.0,
-                    "idea_tag": "monthly 1st business day",
+                    "idea_word": "monthly 1st business day",
                     "mass": 1,
                     "morph": false,
                     "stop_want": 1472657760.0
                   },
                   "Sept 4th 2023 9am": {
                     "gogo_want": 1064350680.0,
-                    "idea_tag": "Sept 4th 2023 9am",
+                    "idea_word": "Sept 4th 2023 9am",
                     "mass": 1,
                     "morph": false,
                     "stop_want": 1064350680.0
                   }
                 },
                 "gogo_want": 0.0,
-                "idea_tag": "x2",
+                "idea_word": "x2",
                 "mass": 1,
                 "morph": false,
                 "stop_want": 1472657760.0
@@ -3831,7 +3831,7 @@
             },
             "begin": 0,
             "close": 1472657760,
-            "idea_tag": "gregtime",
+            "idea_word": "gregtime",
             "mass": 1
           },
           "tech": {
@@ -3842,91 +3842,91 @@
                   "1-Jan": {
                     "_is_expanded": false,
                     "gogo_want": 0,
-                    "idea_tag": "1-Jan",
+                    "idea_word": "1-Jan",
                     "mass": 1,
                     "stop_want": 44640
                   },
                   "10-Oct": {
                     "_is_expanded": false,
                     "gogo_want": 393120,
-                    "idea_tag": "10-Oct",
+                    "idea_word": "10-Oct",
                     "mass": 1,
                     "stop_want": 437760
                   },
                   "11-Nov": {
                     "_is_expanded": false,
                     "gogo_want": 437760,
-                    "idea_tag": "11-Nov",
+                    "idea_word": "11-Nov",
                     "mass": 1,
                     "stop_want": 480960
                   },
                   "12-Dec": {
                     "_is_expanded": false,
                     "gogo_want": 480960,
-                    "idea_tag": "12-Dec",
+                    "idea_word": "12-Dec",
                     "mass": 1,
                     "stop_want": 525600
                   },
                   "2-Feb28": {
                     "_is_expanded": false,
                     "gogo_want": 44640,
-                    "idea_tag": "2-Feb28",
+                    "idea_word": "2-Feb28",
                     "mass": 1,
                     "stop_want": 84960
                   },
                   "3-Mar": {
                     "_is_expanded": false,
                     "gogo_want": 84960,
-                    "idea_tag": "3-Mar",
+                    "idea_word": "3-Mar",
                     "mass": 1,
                     "stop_want": 129600
                   },
                   "4-Apr": {
                     "_is_expanded": false,
                     "gogo_want": 129600,
-                    "idea_tag": "4-Apr",
+                    "idea_word": "4-Apr",
                     "mass": 1,
                     "stop_want": 172800
                   },
                   "5-May": {
                     "_is_expanded": false,
                     "gogo_want": 172800,
-                    "idea_tag": "5-May",
+                    "idea_word": "5-May",
                     "mass": 1,
                     "stop_want": 217440
                   },
                   "6-Jun": {
                     "_is_expanded": false,
                     "gogo_want": 217440,
-                    "idea_tag": "6-Jun",
+                    "idea_word": "6-Jun",
                     "mass": 1,
                     "stop_want": 260640
                   },
                   "7-Jul": {
                     "_is_expanded": false,
                     "gogo_want": 260640,
-                    "idea_tag": "7-Jul",
+                    "idea_word": "7-Jul",
                     "mass": 1,
                     "stop_want": 305280
                   },
                   "8-Aug": {
                     "_is_expanded": false,
                     "gogo_want": 305280,
-                    "idea_tag": "8-Aug",
+                    "idea_word": "8-Aug",
                     "mass": 1,
                     "stop_want": 349920
                   },
                   "9-Sep": {
                     "_is_expanded": false,
                     "gogo_want": 349920,
-                    "idea_tag": "9-Sep",
+                    "idea_word": "9-Sep",
                     "mass": 1,
                     "stop_want": 393120
                   }
                 },
                 "begin": 0,
                 "close": 525600,
-                "idea_tag": "365 year",
+                "idea_word": "365 year",
                 "mass": 1
               },
               "366 year": {
@@ -3935,91 +3935,91 @@
                   "1-Jan": {
                     "_is_expanded": false,
                     "gogo_want": 0,
-                    "idea_tag": "1-Jan",
+                    "idea_word": "1-Jan",
                     "mass": 1,
                     "stop_want": 44640
                   },
                   "10-Oct": {
                     "_is_expanded": false,
                     "gogo_want": 394560,
-                    "idea_tag": "10-Oct",
+                    "idea_word": "10-Oct",
                     "mass": 1,
                     "stop_want": 439200
                   },
                   "11-Nov": {
                     "_is_expanded": false,
                     "gogo_want": 439200,
-                    "idea_tag": "11-Nov",
+                    "idea_word": "11-Nov",
                     "mass": 1,
                     "stop_want": 482400
                   },
                   "12-Dec": {
                     "_is_expanded": false,
                     "gogo_want": 482400,
-                    "idea_tag": "12-Dec",
+                    "idea_word": "12-Dec",
                     "mass": 1,
                     "stop_want": 527040
                   },
                   "2-Feb29": {
                     "_is_expanded": false,
                     "gogo_want": 44640,
-                    "idea_tag": "2-Feb29",
+                    "idea_word": "2-Feb29",
                     "mass": 1,
                     "stop_want": 86400
                   },
                   "3-Mar": {
                     "_is_expanded": false,
                     "gogo_want": 86400,
-                    "idea_tag": "3-Mar",
+                    "idea_word": "3-Mar",
                     "mass": 1,
                     "stop_want": 131040
                   },
                   "4-Apr": {
                     "_is_expanded": false,
                     "gogo_want": 131040,
-                    "idea_tag": "4-Apr",
+                    "idea_word": "4-Apr",
                     "mass": 1,
                     "stop_want": 174240
                   },
                   "5-May": {
                     "_is_expanded": false,
                     "gogo_want": 174240,
-                    "idea_tag": "5-May",
+                    "idea_word": "5-May",
                     "mass": 1,
                     "stop_want": 218880
                   },
                   "6-Jun": {
                     "_is_expanded": false,
                     "gogo_want": 218880,
-                    "idea_tag": "6-Jun",
+                    "idea_word": "6-Jun",
                     "mass": 1,
                     "stop_want": 262080
                   },
                   "7-Jul": {
                     "_is_expanded": false,
                     "gogo_want": 262080,
-                    "idea_tag": "7-Jul",
+                    "idea_word": "7-Jul",
                     "mass": 1,
                     "stop_want": 306720
                   },
                   "8-Aug": {
                     "_is_expanded": false,
                     "gogo_want": 306720,
-                    "idea_tag": "8-Aug",
+                    "idea_word": "8-Aug",
                     "mass": 1,
                     "stop_want": 351360
                   },
                   "9-Sep": {
                     "_is_expanded": false,
                     "gogo_want": 351360,
-                    "idea_tag": "9-Sep",
+                    "idea_word": "9-Sep",
                     "mass": 1,
                     "stop_want": 394560
                   }
                 },
                 "begin": 0,
                 "close": 527040,
-                "idea_tag": "366 year",
+                "idea_word": "366 year",
                 "mass": 1
               },
               "400 year segment": {
@@ -4032,7 +4032,7 @@
                         "_is_expanded": false,
                         "denom": 25,
                         "gogo_want": 0.0,
-                        "idea_tag": "4year with leap",
+                        "idea_word": "4year with leap",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -4040,7 +4040,7 @@
                       }
                     },
                     "gogo_want": 0,
-                    "idea_tag": "0-100-25 leap years",
+                    "idea_word": "0-100-25 leap years",
                     "mass": 1,
                     "stop_want": 52596000
                   },
@@ -4051,7 +4051,7 @@
                         "_is_expanded": false,
                         "denom": 1,
                         "gogo_want": 52596000.0,
-                        "idea_tag": "4year wo leap",
+                        "idea_word": "4year wo leap",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -4059,7 +4059,7 @@
                       }
                     },
                     "gogo_want": 52596000,
-                    "idea_tag": "100-104-0 leap years",
+                    "idea_word": "100-104-0 leap years",
                     "mass": 1,
                     "stop_want": 54698400
                   },
@@ -4070,7 +4070,7 @@
                         "_is_expanded": false,
                         "denom": 24,
                         "gogo_want": 2279100.0,
-                        "idea_tag": "4year with leap",
+                        "idea_word": "4year with leap",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -4078,7 +4078,7 @@
                       }
                     },
                     "gogo_want": 54698400,
-                    "idea_tag": "104-200-24 leap years",
+                    "idea_word": "104-200-24 leap years",
                     "mass": 1,
                     "stop_want": 105190560
                   },
@@ -4089,7 +4089,7 @@
                         "_is_expanded": false,
                         "denom": 1,
                         "gogo_want": 105190560.0,
-                        "idea_tag": "4year wo leap",
+                        "idea_word": "4year wo leap",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -4097,7 +4097,7 @@
                       }
                     },
                     "gogo_want": 105190560,
-                    "idea_tag": "200-204-0 leap years",
+                    "idea_word": "200-204-0 leap years",
                     "mass": 1,
                     "stop_want": 107292960
                   },
@@ -4108,7 +4108,7 @@
                         "_is_expanded": false,
                         "denom": 24,
                         "gogo_want": 4470540.0,
-                        "idea_tag": "4year with leap",
+                        "idea_word": "4year with leap",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -4116,7 +4116,7 @@
                       }
                     },
                     "gogo_want": 107292960,
-                    "idea_tag": "204-300-24 leap years",
+                    "idea_word": "204-300-24 leap years",
                     "mass": 1,
                     "stop_want": 157785120
                   },
@@ -4127,7 +4127,7 @@
                         "_is_expanded": false,
                         "denom": 1,
                         "gogo_want": 157785120.0,
-                        "idea_tag": "4year wo leap",
+                        "idea_word": "4year wo leap",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -4135,7 +4135,7 @@
                       }
                     },
                     "gogo_want": 157785120,
-                    "idea_tag": "300-304-0 leap years",
+                    "idea_word": "300-304-0 leap years",
                     "mass": 1,
                     "stop_want": 159887520
                   },
@@ -4146,7 +4146,7 @@
                         "_is_expanded": false,
                         "denom": 24,
                         "gogo_want": 6661980.0,
-                        "idea_tag": "4year with leap",
+                        "idea_word": "4year with leap",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -4154,14 +4154,14 @@
                       }
                     },
                     "gogo_want": 159887520,
-                    "idea_tag": "304-400-24 leap years",
+                    "idea_word": "304-400-24 leap years",
                     "mass": 1,
                     "stop_want": 210379680
                   }
                 },
                 "begin": 0.0,
                 "close": 210379680.0,
-                "idea_tag": "400 year segment",
+                "idea_word": "400 year segment",
                 "mass": 1
               },
               "4year with leap": {
@@ -4170,35 +4170,35 @@
                   "1-year": {
                     "_is_expanded": false,
                     "gogo_want": 0,
-                    "idea_tag": "1-year",
+                    "idea_word": "1-year",
                     "mass": 1,
                     "stop_want": 527040
                   },
                   "2-year": {
                     "_is_expanded": false,
                     "gogo_want": 527040,
-                    "idea_tag": "2-year",
+                    "idea_word": "2-year",
                     "mass": 1,
                     "stop_want": 1052640
                   },
                   "3-year": {
                     "_is_expanded": false,
                     "gogo_want": 1052640,
-                    "idea_tag": "3-year",
+                    "idea_word": "3-year",
                     "mass": 1,
                     "stop_want": 1578240
                   },
                   "4-year": {
                     "_is_expanded": false,
                     "gogo_want": 1578240,
-                    "idea_tag": "4-year",
+                    "idea_word": "4-year",
                     "mass": 1,
                     "stop_want": 2103840
                   }
                 },
                 "begin": 0.0,
                 "close": 2103840.0,
-                "idea_tag": "4year with leap",
+                "idea_word": "4year with leap",
                 "mass": 1
               },
               "4year wo leap": {
@@ -4207,35 +4207,35 @@
                   "1-year": {
                     "_is_expanded": false,
                     "gogo_want": 0,
-                    "idea_tag": "1-year",
+                    "idea_word": "1-year",
                     "mass": 1,
                     "stop_want": 525600
                   },
                   "2-year": {
                     "_is_expanded": false,
                     "gogo_want": 525600,
-                    "idea_tag": "2-year",
+                    "idea_word": "2-year",
                     "mass": 1,
                     "stop_want": 1051200
                   },
                   "3-year": {
                     "_is_expanded": false,
                     "gogo_want": 1051200,
-                    "idea_tag": "3-year",
+                    "idea_word": "3-year",
                     "mass": 1,
                     "stop_want": 1576800
                   },
                   "4-year": {
                     "_is_expanded": false,
                     "gogo_want": 1576800,
-                    "idea_tag": "4-year",
+                    "idea_word": "4-year",
                     "mass": 1,
                     "stop_want": 2102400
                   }
                 },
                 "begin": 0,
                 "close": 2102400,
-                "idea_tag": "4year wo leap",
+                "idea_word": "4year wo leap",
                 "mass": 1
               },
               "day": {
@@ -4244,175 +4244,175 @@
                   "0-12am": {
                     "_is_expanded": false,
                     "gogo_want": 0,
-                    "idea_tag": "0-12am",
+                    "idea_word": "0-12am",
                     "mass": 1,
                     "stop_want": 60
                   },
                   "1-1am": {
                     "_is_expanded": false,
                     "gogo_want": 60,
-                    "idea_tag": "1-1am",
+                    "idea_word": "1-1am",
                     "mass": 1,
                     "stop_want": 120
                   },
                   "10-10am": {
                     "_is_expanded": false,
                     "gogo_want": 600,
-                    "idea_tag": "10-10am",
+                    "idea_word": "10-10am",
                     "mass": 1,
                     "stop_want": 660
                   },
                   "11-11am": {
                     "_is_expanded": false,
                     "gogo_want": 660,
-                    "idea_tag": "11-11am",
+                    "idea_word": "11-11am",
                     "mass": 1,
                     "stop_want": 720
                   },
                   "12-12pm": {
                     "_is_expanded": false,
                     "gogo_want": 720,
-                    "idea_tag": "12-12pm",
+                    "idea_word": "12-12pm",
                     "mass": 1,
                     "stop_want": 780
                   },
                   "13-1pm": {
                     "_is_expanded": false,
                     "gogo_want": 780,
-                    "idea_tag": "13-1pm",
+                    "idea_word": "13-1pm",
                     "mass": 1,
                     "stop_want": 840
                   },
                   "14-2pm": {
                     "_is_expanded": false,
                     "gogo_want": 840,
-                    "idea_tag": "14-2pm",
+                    "idea_word": "14-2pm",
                     "mass": 1,
                     "stop_want": 900
                   },
                   "15-3pm": {
                     "_is_expanded": false,
                     "gogo_want": 900,
-                    "idea_tag": "15-3pm",
+                    "idea_word": "15-3pm",
                     "mass": 1,
                     "stop_want": 960
                   },
                   "16-4pm": {
                     "_is_expanded": false,
                     "gogo_want": 960,
-                    "idea_tag": "16-4pm",
+                    "idea_word": "16-4pm",
                     "mass": 1,
                     "stop_want": 1020
                   },
                   "17-5pm": {
                     "_is_expanded": false,
                     "gogo_want": 1020,
-                    "idea_tag": "17-5pm",
+                    "idea_word": "17-5pm",
                     "mass": 1,
                     "stop_want": 1080
                   },
                   "18-6pm": {
                     "_is_expanded": false,
                     "gogo_want": 1080,
-                    "idea_tag": "18-6pm",
+                    "idea_word": "18-6pm",
                     "mass": 1,
                     "stop_want": 1140
                   },
                   "19-7pm": {
                     "_is_expanded": false,
                     "gogo_want": 1140,
-                    "idea_tag": "19-7pm",
+                    "idea_word": "19-7pm",
                     "mass": 1,
                     "stop_want": 1200
                   },
                   "2-2am": {
                     "_is_expanded": false,
                     "gogo_want": 120,
-                    "idea_tag": "2-2am",
+                    "idea_word": "2-2am",
                     "mass": 1,
                     "stop_want": 180
                   },
                   "20-8pm": {
                     "_is_expanded": false,
                     "gogo_want": 1200,
-                    "idea_tag": "20-8pm",
+                    "idea_word": "20-8pm",
                     "mass": 1,
                     "stop_want": 1260
                   },
                   "21-9pm": {
                     "_is_expanded": false,
                     "gogo_want": 1260,
-                    "idea_tag": "21-9pm",
+                    "idea_word": "21-9pm",
                     "mass": 1,
                     "stop_want": 1320
                   },
                   "22-10pm": {
                     "_is_expanded": false,
                     "gogo_want": 1320,
-                    "idea_tag": "22-10pm",
+                    "idea_word": "22-10pm",
                     "mass": 1,
                     "stop_want": 1380
                   },
                   "23-11pm": {
                     "_is_expanded": false,
                     "gogo_want": 1380,
-                    "idea_tag": "23-11pm",
+                    "idea_word": "23-11pm",
                     "mass": 1,
                     "stop_want": 1440
                   },
                   "3-3am": {
                     "_is_expanded": false,
                     "gogo_want": 180,
-                    "idea_tag": "3-3am",
+                    "idea_word": "3-3am",
                     "mass": 1,
                     "stop_want": 240
                   },
                   "4-4am": {
                     "_is_expanded": false,
                     "gogo_want": 240,
-                    "idea_tag": "4-4am",
+                    "idea_word": "4-4am",
                     "mass": 1,
                     "stop_want": 300
                   },
                   "5-5am": {
                     "_is_expanded": false,
                     "gogo_want": 300,
-                    "idea_tag": "5-5am",
+                    "idea_word": "5-5am",
                     "mass": 1,
                     "stop_want": 360
                   },
                   "6-6am": {
                     "_is_expanded": false,
                     "gogo_want": 360,
-                    "idea_tag": "6-6am",
+                    "idea_word": "6-6am",
                     "mass": 1,
                     "stop_want": 420
                   },
                   "7-7am": {
                     "_is_expanded": false,
                     "gogo_want": 420,
-                    "idea_tag": "7-7am",
+                    "idea_word": "7-7am",
                     "mass": 1,
                     "stop_want": 480
                   },
                   "8-8am": {
                     "_is_expanded": false,
                     "gogo_want": 480,
-                    "idea_tag": "8-8am",
+                    "idea_word": "8-8am",
                     "mass": 1,
                     "stop_want": 540
                   },
                   "9-9am": {
                     "_is_expanded": false,
                     "gogo_want": 540,
-                    "idea_tag": "9-9am",
+                    "idea_word": "9-9am",
                     "mass": 1,
                     "stop_want": 600
                   }
                 },
                 "begin": 0,
                 "close": 1440,
-                "idea_tag": "day",
+                "idea_word": "day",
                 "mass": 1
               },
               "hour": {
@@ -4421,427 +4421,427 @@
                   "0-:00": {
                     "_is_expanded": false,
                     "gogo_want": 0,
-                    "idea_tag": "0-:00",
+                    "idea_word": "0-:00",
                     "mass": 1,
                     "stop_want": 1
                   },
                   "1-:01": {
                     "_is_expanded": false,
                     "gogo_want": 1,
-                    "idea_tag": "1-:01",
+                    "idea_word": "1-:01",
                     "mass": 1,
                     "stop_want": 2
                   },
                   "10-:10": {
                     "_is_expanded": false,
                     "gogo_want": 10,
-                    "idea_tag": "10-:10",
+                    "idea_word": "10-:10",
                     "mass": 1,
                     "stop_want": 11
                   },
                   "11-:11": {
                     "_is_expanded": false,
                     "gogo_want": 11,
-                    "idea_tag": "11-:11",
+                    "idea_word": "11-:11",
                     "mass": 1,
                     "stop_want": 12
                   },
                   "12-:12": {
                     "_is_expanded": false,
                     "gogo_want": 12,
-                    "idea_tag": "12-:12",
+                    "idea_word": "12-:12",
                     "mass": 1,
                     "stop_want": 13
                   },
                   "13-:13": {
                     "_is_expanded": false,
                     "gogo_want": 13,
-                    "idea_tag": "13-:13",
+                    "idea_word": "13-:13",
                     "mass": 1,
                     "stop_want": 14
                   },
                   "14-:14": {
                     "_is_expanded": false,
                     "gogo_want": 14,
-                    "idea_tag": "14-:14",
+                    "idea_word": "14-:14",
                     "mass": 1,
                     "stop_want": 15
                   },
                   "15-:15": {
                     "_is_expanded": false,
                     "gogo_want": 15,
-                    "idea_tag": "15-:15",
+                    "idea_word": "15-:15",
                     "mass": 1,
                     "stop_want": 16
                   },
                   "16-:16": {
                     "_is_expanded": false,
                     "gogo_want": 16,
-                    "idea_tag": "16-:16",
+                    "idea_word": "16-:16",
                     "mass": 1,
                     "stop_want": 17
                   },
                   "17-:17": {
                     "_is_expanded": false,
                     "gogo_want": 17,
-                    "idea_tag": "17-:17",
+                    "idea_word": "17-:17",
                     "mass": 1,
                     "stop_want": 18
                   },
                   "18-:18": {
                     "_is_expanded": false,
                     "gogo_want": 18,
-                    "idea_tag": "18-:18",
+                    "idea_word": "18-:18",
                     "mass": 1,
                     "stop_want": 19
                   },
                   "19-:19": {
                     "_is_expanded": false,
                     "gogo_want": 19,
-                    "idea_tag": "19-:19",
+                    "idea_word": "19-:19",
                     "mass": 1,
                     "stop_want": 20
                   },
                   "2-:02": {
                     "_is_expanded": false,
                     "gogo_want": 2,
-                    "idea_tag": "2-:02",
+                    "idea_word": "2-:02",
                     "mass": 1,
                     "stop_want": 3
                   },
                   "20-:20": {
                     "_is_expanded": false,
                     "gogo_want": 20,
-                    "idea_tag": "20-:20",
+                    "idea_word": "20-:20",
                     "mass": 1,
                     "stop_want": 21
                   },
                   "21-:21": {
                     "_is_expanded": false,
                     "gogo_want": 21,
-                    "idea_tag": "21-:21",
+                    "idea_word": "21-:21",
                     "mass": 1,
                     "stop_want": 22
                   },
                   "22-:22": {
                     "_is_expanded": false,
                     "gogo_want": 22,
-                    "idea_tag": "22-:22",
+                    "idea_word": "22-:22",
                     "mass": 1,
                     "stop_want": 23
                   },
                   "23-:23": {
                     "_is_expanded": false,
                     "gogo_want": 23,
-                    "idea_tag": "23-:23",
+                    "idea_word": "23-:23",
                     "mass": 1,
                     "stop_want": 24
                   },
                   "24-:24": {
                     "_is_expanded": false,
                     "gogo_want": 24,
-                    "idea_tag": "24-:24",
+                    "idea_word": "24-:24",
                     "mass": 1,
                     "stop_want": 25
                   },
                   "25-:25": {
                     "_is_expanded": false,
                     "gogo_want": 25,
-                    "idea_tag": "25-:25",
+                    "idea_word": "25-:25",
                     "mass": 1,
                     "stop_want": 26
                   },
                   "26-:26": {
                     "_is_expanded": false,
                     "gogo_want": 26,
-                    "idea_tag": "26-:26",
+                    "idea_word": "26-:26",
                     "mass": 1,
                     "stop_want": 27
                   },
                   "27-:27": {
                     "_is_expanded": false,
                     "gogo_want": 27,
-                    "idea_tag": "27-:27",
+                    "idea_word": "27-:27",
                     "mass": 1,
                     "stop_want": 28
                   },
                   "28-:28": {
                     "_is_expanded": false,
                     "gogo_want": 28,
-                    "idea_tag": "28-:28",
+                    "idea_word": "28-:28",
                     "mass": 1,
                     "stop_want": 29
                   },
                   "29-:29": {
                     "_is_expanded": false,
                     "gogo_want": 29,
-                    "idea_tag": "29-:29",
+                    "idea_word": "29-:29",
                     "mass": 1,
                     "stop_want": 30
                   },
                   "3-:03": {
                     "_is_expanded": false,
                     "gogo_want": 3,
-                    "idea_tag": "3-:03",
+                    "idea_word": "3-:03",
                     "mass": 1,
                     "stop_want": 4
                   },
                   "30-:30": {
                     "_is_expanded": false,
                     "gogo_want": 30,
-                    "idea_tag": "30-:30",
+                    "idea_word": "30-:30",
                     "mass": 1,
                     "stop_want": 31
                   },
                   "31-:31": {
                     "_is_expanded": false,
                     "gogo_want": 31,
-                    "idea_tag": "31-:31",
+                    "idea_word": "31-:31",
                     "mass": 1,
                     "stop_want": 32
                   },
                   "32-:32": {
                     "_is_expanded": false,
                     "gogo_want": 32,
-                    "idea_tag": "32-:32",
+                    "idea_word": "32-:32",
                     "mass": 1,
                     "stop_want": 33
                   },
                   "33-:33": {
                     "_is_expanded": false,
                     "gogo_want": 33,
-                    "idea_tag": "33-:33",
+                    "idea_word": "33-:33",
                     "mass": 1,
                     "stop_want": 34
                   },
                   "34-:34": {
                     "_is_expanded": false,
                     "gogo_want": 34,
-                    "idea_tag": "34-:34",
+                    "idea_word": "34-:34",
                     "mass": 1,
                     "stop_want": 35
                   },
                   "35-:35": {
                     "_is_expanded": false,
                     "gogo_want": 35,
-                    "idea_tag": "35-:35",
+                    "idea_word": "35-:35",
                     "mass": 1,
                     "stop_want": 36
                   },
                   "36-:36": {
                     "_is_expanded": false,
                     "gogo_want": 36,
-                    "idea_tag": "36-:36",
+                    "idea_word": "36-:36",
                     "mass": 1,
                     "stop_want": 37
                   },
                   "37-:37": {
                     "_is_expanded": false,
                     "gogo_want": 37,
-                    "idea_tag": "37-:37",
+                    "idea_word": "37-:37",
                     "mass": 1,
                     "stop_want": 38
                   },
                   "38-:38": {
                     "_is_expanded": false,
                     "gogo_want": 38,
-                    "idea_tag": "38-:38",
+                    "idea_word": "38-:38",
                     "mass": 1,
                     "stop_want": 39
                   },
                   "39-:39": {
                     "_is_expanded": false,
                     "gogo_want": 39,
-                    "idea_tag": "39-:39",
+                    "idea_word": "39-:39",
                     "mass": 1,
                     "stop_want": 40
                   },
                   "4-:04": {
                     "_is_expanded": false,
                     "gogo_want": 4,
-                    "idea_tag": "4-:04",
+                    "idea_word": "4-:04",
                     "mass": 1,
                     "stop_want": 5
                   },
                   "40-:40": {
                     "_is_expanded": false,
                     "gogo_want": 40,
-                    "idea_tag": "40-:40",
+                    "idea_word": "40-:40",
                     "mass": 1,
                     "stop_want": 41
                   },
                   "41-:41": {
                     "_is_expanded": false,
                     "gogo_want": 41,
-                    "idea_tag": "41-:41",
+                    "idea_word": "41-:41",
                     "mass": 1,
                     "stop_want": 42
                   },
                   "42-:42": {
                     "_is_expanded": false,
                     "gogo_want": 42,
-                    "idea_tag": "42-:42",
+                    "idea_word": "42-:42",
                     "mass": 1,
                     "stop_want": 43
                   },
                   "43-:43": {
                     "_is_expanded": false,
                     "gogo_want": 43,
-                    "idea_tag": "43-:43",
+                    "idea_word": "43-:43",
                     "mass": 1,
                     "stop_want": 44
                   },
                   "44-:44": {
                     "_is_expanded": false,
                     "gogo_want": 44,
-                    "idea_tag": "44-:44",
+                    "idea_word": "44-:44",
                     "mass": 1,
                     "stop_want": 45
                   },
                   "45-:45": {
                     "_is_expanded": false,
                     "gogo_want": 45,
-                    "idea_tag": "45-:45",
+                    "idea_word": "45-:45",
                     "mass": 1,
                     "stop_want": 46
                   },
                   "46-:46": {
                     "_is_expanded": false,
                     "gogo_want": 46,
-                    "idea_tag": "46-:46",
+                    "idea_word": "46-:46",
                     "mass": 1,
                     "stop_want": 47
                   },
                   "47-:47": {
                     "_is_expanded": false,
                     "gogo_want": 47,
-                    "idea_tag": "47-:47",
+                    "idea_word": "47-:47",
                     "mass": 1,
                     "stop_want": 48
                   },
                   "48-:48": {
                     "_is_expanded": false,
                     "gogo_want": 48,
-                    "idea_tag": "48-:48",
+                    "idea_word": "48-:48",
                     "mass": 1,
                     "stop_want": 49
                   },
                   "49-:49": {
                     "_is_expanded": false,
                     "gogo_want": 49,
-                    "idea_tag": "49-:49",
+                    "idea_word": "49-:49",
                     "mass": 1,
                     "stop_want": 50
                   },
                   "5-:05": {
                     "_is_expanded": false,
                     "gogo_want": 5,
-                    "idea_tag": "5-:05",
+                    "idea_word": "5-:05",
                     "mass": 1,
                     "stop_want": 6
                   },
                   "50-:50": {
                     "_is_expanded": false,
                     "gogo_want": 50,
-                    "idea_tag": "50-:50",
+                    "idea_word": "50-:50",
                     "mass": 1,
                     "stop_want": 51
                   },
                   "51-:51": {
                     "_is_expanded": false,
                     "gogo_want": 51,
-                    "idea_tag": "51-:51",
+                    "idea_word": "51-:51",
                     "mass": 1,
                     "stop_want": 52
                   },
                   "52-:52": {
                     "_is_expanded": false,
                     "gogo_want": 52,
-                    "idea_tag": "52-:52",
+                    "idea_word": "52-:52",
                     "mass": 1,
                     "stop_want": 53
                   },
                   "53-:53": {
                     "_is_expanded": false,
                     "gogo_want": 53,
-                    "idea_tag": "53-:53",
+                    "idea_word": "53-:53",
                     "mass": 1,
                     "stop_want": 54
                   },
                   "54-:54": {
                     "_is_expanded": false,
                     "gogo_want": 54,
-                    "idea_tag": "54-:54",
+                    "idea_word": "54-:54",
                     "mass": 1,
                     "stop_want": 55
                   },
                   "55-:55": {
                     "_is_expanded": false,
                     "gogo_want": 55,
-                    "idea_tag": "55-:55",
+                    "idea_word": "55-:55",
                     "mass": 1,
                     "stop_want": 56
                   },
                   "56-:56": {
                     "_is_expanded": false,
                     "gogo_want": 56,
-                    "idea_tag": "56-:56",
+                    "idea_word": "56-:56",
                     "mass": 1,
                     "stop_want": 57
                   },
                   "57-:57": {
                     "_is_expanded": false,
                     "gogo_want": 57,
-                    "idea_tag": "57-:57",
+                    "idea_word": "57-:57",
                     "mass": 1,
                     "stop_want": 58
                   },
                   "58-:58": {
                     "_is_expanded": false,
                     "gogo_want": 58,
-                    "idea_tag": "58-:58",
+                    "idea_word": "58-:58",
                     "mass": 1,
                     "stop_want": 59
                   },
                   "59-59": {
                     "_is_expanded": false,
                     "gogo_want": 59,
-                    "idea_tag": "59-59",
+                    "idea_word": "59-59",
                     "mass": 1,
                     "stop_want": 60
                   },
                   "6-:06": {
                     "_is_expanded": false,
                     "gogo_want": 6,
-                    "idea_tag": "6-:06",
+                    "idea_word": "6-:06",
                     "mass": 1,
                     "stop_want": 7
                   },
                   "7-:07": {
                     "_is_expanded": false,
                     "gogo_want": 7,
-                    "idea_tag": "7-:07",
+                    "idea_word": "7-:07",
                     "mass": 1,
                     "stop_want": 8
                   },
                   "8-:08": {
                     "_is_expanded": false,
                     "gogo_want": 8,
-                    "idea_tag": "8-:08",
+                    "idea_word": "8-:08",
                     "mass": 1,
                     "stop_want": 9
                   },
                   "9-:09": {
                     "_is_expanded": false,
                     "gogo_want": 9,
-                    "idea_tag": "9-:09",
+                    "idea_word": "9-:09",
                     "mass": 1,
                     "stop_want": 10
                   }
                 },
                 "begin": 0,
                 "close": 60,
-                "idea_tag": "hour",
+                "idea_word": "hour",
                 "mass": 1
               },
               "month": {
@@ -4854,7 +4854,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "idea_tag": "days",
+                        "idea_word": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -4863,7 +4863,7 @@
                     },
                     "begin": 0,
                     "close": 43200,
-                    "idea_tag": "Apr",
+                    "idea_word": "Apr",
                     "mass": 1
                   },
                   "Aug": {
@@ -4873,7 +4873,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "idea_tag": "days",
+                        "idea_word": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -4882,7 +4882,7 @@
                     },
                     "begin": 0,
                     "close": 44640,
-                    "idea_tag": "Aug",
+                    "idea_word": "Aug",
                     "mass": 1
                   },
                   "Dec": {
@@ -4892,7 +4892,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "idea_tag": "days",
+                        "idea_word": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -4901,7 +4901,7 @@
                     },
                     "begin": 0,
                     "close": 44640,
-                    "idea_tag": "Dec",
+                    "idea_word": "Dec",
                     "mass": 1
                   },
                   "Feb28": {
@@ -4911,7 +4911,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "idea_tag": "days",
+                        "idea_word": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -4920,7 +4920,7 @@
                     },
                     "begin": 0,
                     "close": 40320,
-                    "idea_tag": "Feb28",
+                    "idea_word": "Feb28",
                     "mass": 1
                   },
                   "Feb29": {
@@ -4930,7 +4930,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "idea_tag": "days",
+                        "idea_word": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -4939,7 +4939,7 @@
                     },
                     "begin": 0,
                     "close": 41760,
-                    "idea_tag": "Feb29",
+                    "idea_word": "Feb29",
                     "mass": 1
                   },
                   "Jan": {
@@ -4949,7 +4949,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "idea_tag": "days",
+                        "idea_word": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -4958,7 +4958,7 @@
                     },
                     "begin": 0,
                     "close": 44640,
-                    "idea_tag": "Jan",
+                    "idea_word": "Jan",
                     "mass": 1
                   },
                   "Jul": {
@@ -4968,7 +4968,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "idea_tag": "days",
+                        "idea_word": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -4977,7 +4977,7 @@
                     },
                     "begin": 0,
                     "close": 44640,
-                    "idea_tag": "Jul",
+                    "idea_word": "Jul",
                     "mass": 1
                   },
                   "Jun": {
@@ -4987,7 +4987,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "idea_tag": "days",
+                        "idea_word": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -4996,7 +4996,7 @@
                     },
                     "begin": 0,
                     "close": 43200,
-                    "idea_tag": "Jun",
+                    "idea_word": "Jun",
                     "mass": 1
                   },
                   "Mar": {
@@ -5006,7 +5006,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "idea_tag": "days",
+                        "idea_word": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -5015,7 +5015,7 @@
                     },
                     "begin": 0,
                     "close": 44640,
-                    "idea_tag": "Mar",
+                    "idea_word": "Mar",
                     "mass": 1
                   },
                   "May": {
@@ -5025,7 +5025,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "idea_tag": "days",
+                        "idea_word": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -5034,7 +5034,7 @@
                     },
                     "begin": 0,
                     "close": 44640,
-                    "idea_tag": "May",
+                    "idea_word": "May",
                     "mass": 1
                   },
                   "Nov": {
@@ -5044,7 +5044,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "idea_tag": "days",
+                        "idea_word": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -5053,7 +5053,7 @@
                     },
                     "begin": 0,
                     "close": 43200,
-                    "idea_tag": "Nov",
+                    "idea_word": "Nov",
                     "mass": 1
                   },
                   "Oct": {
@@ -5063,7 +5063,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "idea_tag": "days",
+                        "idea_word": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -5072,7 +5072,7 @@
                     },
                     "begin": 0,
                     "close": 44640,
-                    "idea_tag": "Oct",
+                    "idea_word": "Oct",
                     "mass": 1
                   },
                   "Sep": {
@@ -5082,7 +5082,7 @@
                         "_is_expanded": false,
                         "denom": 1440,
                         "gogo_want": 0.0,
-                        "idea_tag": "days",
+                        "idea_word": "days",
                         "mass": 1,
                         "morph": true,
                         "numor": 1,
@@ -5091,11 +5091,11 @@
                     },
                     "begin": 0,
                     "close": 43200,
-                    "idea_tag": "Sep",
+                    "idea_word": "Sep",
                     "mass": 1
                   }
                 },
-                "idea_tag": "month",
+                "idea_word": "month",
                 "mass": 1
               },
               "week": {
@@ -5104,64 +5104,64 @@
                   "Friday": {
                     "_is_expanded": false,
                     "gogo_want": 8640,
-                    "idea_tag": "Friday",
+                    "idea_word": "Friday",
                     "mass": 1,
                     "stop_want": 10080
                   },
                   "Monday": {
                     "_is_expanded": false,
                     "gogo_want": 2880,
-                    "idea_tag": "Monday",
+                    "idea_word": "Monday",
                     "mass": 1,
                     "stop_want": 4320
                   },
                   "Saturday": {
                     "_is_expanded": false,
                     "gogo_want": 0,
-                    "idea_tag": "Saturday",
+                    "idea_word": "Saturday",
                     "mass": 1,
                     "stop_want": 1440
                   },
                   "Sunday": {
                     "_is_expanded": false,
                     "gogo_want": 1440,
-                    "idea_tag": "Sunday",
+                    "idea_word": "Sunday",
                     "mass": 1,
                     "stop_want": 2880
                   },
                   "Thursday": {
                     "_is_expanded": false,
                     "gogo_want": 7200,
-                    "idea_tag": "Thursday",
+                    "idea_word": "Thursday",
                     "mass": 1,
                     "stop_want": 8640
                   },
                   "Tuesday": {
                     "_is_expanded": false,
                     "gogo_want": 4320,
-                    "idea_tag": "Tuesday",
+                    "idea_word": "Tuesday",
                     "mass": 1,
                     "stop_want": 5760
                   },
                   "Wednesday": {
                     "_is_expanded": false,
                     "gogo_want": 5760,
-                    "idea_tag": "Wednesday",
+                    "idea_word": "Wednesday",
                     "mass": 1,
                     "stop_want": 7200
                   }
                 },
                 "begin": 0.0,
                 "close": 10080.0,
-                "idea_tag": "week",
+                "idea_word": "week",
                 "mass": 1
               }
             },
-            "idea_tag": "tech",
+            "idea_word": "tech",
             "mass": 1
           }
         },
-        "idea_tag": "time",
+        "idea_word": "time",
         "mass": 1
       },
       "Tired Status": {
@@ -5169,17 +5169,17 @@
         "_kids": {
           "Not tired": {
             "_uid": 278,
-            "idea_tag": "Not tired",
+            "idea_word": "Not tired",
             "mass": 1
           },
           "Tired": {
             "_uid": 279,
-            "idea_tag": "Tired",
+            "idea_word": "Tired",
             "mass": 1
           }
         },
         "_uid": 277,
-        "idea_tag": "Tired Status",
+        "idea_word": "Tired Status",
         "mass": 1
       },
       "Ultimate Frisbee": {
@@ -5187,7 +5187,7 @@
         "_kids": {
           "check on m33": {
             "_uid": 221,
-            "idea_tag": "check on m33",
+            "idea_word": "check on m33",
             "mass": 1,
             "reasonunits": {
               "A;Moods": {
@@ -5202,7 +5202,7 @@
           },
           "contemplate the disc": {
             "_uid": 229,
-            "idea_tag": "contemplate the disc",
+            "idea_word": "contemplate the disc",
             "mass": 1,
             "reasonunits": {
               "A;No Movie playing": {
@@ -5219,7 +5219,7 @@
             "_kids": {
               "check for mini ultimate at park": {
                 "_uid": 219,
-                "idea_tag": "check for mini ultimate at park",
+                "idea_word": "check for mini ultimate at park",
                 "mass": 1,
                 "reasonunits": {
                   "A;Moods": {
@@ -5234,7 +5234,7 @@
               }
             },
             "_uid": 201,
-            "idea_tag": "playing ultimate",
+            "idea_word": "playing ultimate",
             "mass": 1,
             "reasonunits": {
               "A;Moods": {
@@ -5249,7 +5249,7 @@
           },
           "relaxing": {
             "_uid": 202,
-            "idea_tag": "relaxing",
+            "idea_word": "relaxing",
             "mass": 1,
             "reasonunits": {
               "A;No Movie playing": {
@@ -5264,7 +5264,7 @@
           }
         },
         "_uid": 200,
-        "idea_tag": "Ultimate Frisbee",
+        "idea_word": "Ultimate Frisbee",
         "mass": 1,
         "reasonunits": {
           "A;Moods": {
@@ -5284,7 +5284,7 @@
             "_kids": {
               "bike around": {
                 "_uid": 227,
-                "idea_tag": "bike around",
+                "idea_word": "bike around",
                 "mass": 1,
                 "reasonunits": {
                   "A;WaterExistence": {
@@ -5299,7 +5299,7 @@
               },
               "Go climbing at east Circuit": {
                 "_uid": 226,
-                "idea_tag": "Go climbing at east Circuit",
+                "idea_word": "Go climbing at east Circuit",
                 "mass": 1,
                 "reasonunits": {
                   "A;WaterExistence": {
@@ -5314,7 +5314,7 @@
               },
               "trout": {
                 "_uid": 228,
-                "idea_tag": "trout",
+                "idea_word": "trout",
                 "mass": 1,
                 "reasonunits": {
                   "A;WaterExistence": {
@@ -5329,7 +5329,7 @@
               }
             },
             "_uid": 225,
-            "idea_tag": "Swimming in Williamette watershed",
+            "idea_word": "Swimming in Williamette watershed",
             "mass": 1,
             "reasonunits": {
               "A;WaterExistence": {
@@ -5344,7 +5344,7 @@
           }
         },
         "_uid": 223,
-        "idea_tag": "Water Living",
+        "idea_word": "Water Living",
         "mass": 1
       },
       "WaterExistence": {
@@ -5356,27 +5356,27 @@
                 "_kids": {
                   "flat": {
                     "_uid": 260,
-                    "idea_tag": "flat",
+                    "idea_word": "flat",
                     "mass": 1
                   }
                 },
                 "_uid": 258,
-                "idea_tag": "East Side of Watershed",
+                "idea_word": "East Side of Watershed",
                 "mass": 1
               },
               "West side of Watershed": {
                 "_uid": 259,
-                "idea_tag": "West side of Watershed",
+                "idea_word": "West side of Watershed",
                 "mass": 1
               }
             },
             "_uid": 257,
-            "idea_tag": "Williamette WaterShed",
+            "idea_word": "Williamette WaterShed",
             "mass": 1
           }
         },
         "_uid": 256,
-        "idea_tag": "WaterExistence",
+        "idea_word": "WaterExistence",
         "mass": 1
       }
     },
@@ -5421,7 +5421,7 @@
         "fbranch": ";A;WaterExistence"
       }
     },
-    "idea_tag": "A",
+    "idea_word": "A",
     "mass": 1
   },
   "max_tree_traverse": 20,

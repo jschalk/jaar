@@ -496,7 +496,7 @@ def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
     # WHEN
     cellunit_add_json_file(
         fisc_mstr_dir=fisc_mstr_dir,
-        fisc_tag=a23_str,
+        fisc_word=a23_str,
         time_owner_name=sue_str,
         deal_time=time7,
         quota=quota500,

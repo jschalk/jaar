@@ -65,8 +65,8 @@ class FiscPrimeObjsRef:
 class FiscPrimeColumnsRef:
     def __init__(self):
         self.unit_agg_columns = [
-            "fisc_tag",
-            "timeline_tag",
+            "fisc_word",
+            "timeline_word",
             "c400_number",
             "yr1_jan1_offset",
             "monthday_distortion",
@@ -77,33 +77,33 @@ class FiscPrimeColumnsRef:
             "job_listen_rotations",
         ]
         self.deal_agg_columns = [
-            "fisc_tag",
+            "fisc_word",
             "owner_name",
             "deal_time",
             "quota",
             "celldepth",
         ]
         self.cash_agg_columns = [
-            "fisc_tag",
+            "fisc_word",
             "owner_name",
             "acct_name",
             "tran_time",
             "amount",
         ]
-        self.hour_agg_columns = ["fisc_tag", "cumlative_minute", "hour_tag"]
-        self.mont_agg_columns = ["fisc_tag", "cumlative_day", "month_tag"]
-        self.week_agg_columns = ["fisc_tag", "weekday_order", "weekday_tag"]
-        self.offi_agg_columns = ["fisc_tag", "offi_time"]
+        self.hour_agg_columns = ["fisc_word", "cumlative_minute", "hour_word"]
+        self.mont_agg_columns = ["fisc_word", "cumlative_day", "month_word"]
+        self.week_agg_columns = ["fisc_word", "weekday_order", "weekday_word"]
+        self.offi_agg_columns = ["fisc_word", "offi_time"]
 
         _front_cols = ["creed_number", "event_int", "face_name"]
         _back_cols = ["error_message"]
-        self.unit_agg_csv_header = "fisc_tag,timeline_tag,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,bridge,job_listen_rotations"
-        self.deal_agg_csv_header = "fisc_tag,owner_name,deal_time,quota,celldepth"
-        self.cash_agg_csv_header = "fisc_tag,owner_name,acct_name,tran_time,amount"
-        self.hour_agg_csv_header = "fisc_tag,cumlative_minute,hour_tag"
-        self.mont_agg_csv_header = "fisc_tag,cumlative_day,month_tag"
-        self.week_agg_csv_header = "fisc_tag,weekday_order,weekday_tag"
-        self.offi_agg_csv_header = "fisc_tag,offi_time"
+        self.unit_agg_csv_header = "fisc_word,timeline_word,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,bridge,job_listen_rotations"
+        self.deal_agg_csv_header = "fisc_word,owner_name,deal_time,quota,celldepth"
+        self.cash_agg_csv_header = "fisc_word,owner_name,acct_name,tran_time,amount"
+        self.hour_agg_csv_header = "fisc_word,cumlative_minute,hour_word"
+        self.mont_agg_csv_header = "fisc_word,cumlative_day,month_word"
+        self.week_agg_csv_header = "fisc_word,weekday_order,weekday_word"
+        self.offi_agg_csv_header = "fisc_word,offi_time"
         self.unit_raw_columns = [*_front_cols, *self.unit_agg_columns, *_back_cols]
         self.deal_raw_columns = [*_front_cols, *self.deal_agg_columns, *_back_cols]
         self.cash_raw_columns = [*_front_cols, *self.cash_agg_columns, *_back_cols]
@@ -111,14 +111,14 @@ class FiscPrimeColumnsRef:
         self.mont_raw_columns = [*_front_cols, *self.mont_agg_columns, *_back_cols]
         self.week_raw_columns = [*_front_cols, *self.week_agg_columns, *_back_cols]
         self.offi_raw_columns = [*_front_cols, *self.offi_agg_columns, *_back_cols]
-        self.unit_raw_csv_header = """creed_number,event_int,face_name,fisc_tag,timeline_tag,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,bridge,job_listen_rotations,error_message"""
-        self.deal_raw_csv_header = """creed_number,event_int,face_name,fisc_tag,owner_name,deal_time,quota,celldepth,error_message"""
-        self.cash_raw_csv_header = """creed_number,event_int,face_name,fisc_tag,owner_name,acct_name,tran_time,amount,error_message"""
-        self.hour_raw_csv_header = """creed_number,event_int,face_name,fisc_tag,cumlative_minute,hour_tag,error_message"""
-        self.mont_raw_csv_header = """creed_number,event_int,face_name,fisc_tag,cumlative_day,month_tag,error_message"""
-        self.week_raw_csv_header = """creed_number,event_int,face_name,fisc_tag,weekday_order,weekday_tag,error_message"""
+        self.unit_raw_csv_header = """creed_number,event_int,face_name,fisc_word,timeline_word,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,bridge,job_listen_rotations,error_message"""
+        self.deal_raw_csv_header = """creed_number,event_int,face_name,fisc_word,owner_name,deal_time,quota,celldepth,error_message"""
+        self.cash_raw_csv_header = """creed_number,event_int,face_name,fisc_word,owner_name,acct_name,tran_time,amount,error_message"""
+        self.hour_raw_csv_header = """creed_number,event_int,face_name,fisc_word,cumlative_minute,hour_word,error_message"""
+        self.mont_raw_csv_header = """creed_number,event_int,face_name,fisc_word,cumlative_day,month_word,error_message"""
+        self.week_raw_csv_header = """creed_number,event_int,face_name,fisc_word,weekday_order,weekday_word,error_message"""
         self.offi_raw_csv_header = (
-            """creed_number,event_int,face_name,fisc_tag,offi_time,error_message"""
+            """creed_number,event_int,face_name,fisc_word,offi_time,error_message"""
         )
         self.unit_agg_empty_csv = f"{self.unit_agg_csv_header}\n"
         self.deal_agg_empty_csv = f"{self.deal_agg_csv_header}\n"
@@ -171,7 +171,7 @@ class FiscPrimeColumnsRef:
 #     else:
 #         x_weekday_list = None
 #     timeline_config = timeline_config_shop(
-#         timeline_tag=if_nan_return_None(fisc_attrs.get("timeline_tag")),
+#         timeline_word=if_nan_return_None(fisc_attrs.get("timeline_word")),
 #         c400_number=if_nan_return_None(fisc_attrs.get("c400_number")),
 #         hour_length=None,
 #         month_length=None,

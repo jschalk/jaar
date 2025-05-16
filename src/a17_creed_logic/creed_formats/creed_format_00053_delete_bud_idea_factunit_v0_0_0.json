@@ -9,7 +9,7 @@
         "fcontext_ERASE": {
             "otx_key": true
         },
-        "fisc_tag": {
+        "fisc_word": {
             "otx_key": true
         },
         "idea_way": {

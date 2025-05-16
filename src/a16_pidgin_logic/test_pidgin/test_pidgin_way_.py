@@ -8,7 +8,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     unknown_term_str,
 )
 from src.a16_pidgin_logic.map import (
-    tagmap_shop,
+    wordmap_shop,
     WayMap,
     waymap_shop,
     get_waymap_from_dict,
@@ -38,7 +38,7 @@ def test_WayMap_Exists():
     assert not x_waymap.unknown_term
     assert not x_waymap.otx_bridge
     assert not x_waymap.inx_bridge
-    assert not x_waymap.tagmap
+    assert not x_waymap.wordmap
 
 
 def test_waymap_shop_ReturnsObj_scenario0():
@@ -69,7 +69,7 @@ def test_waymap_shop_ReturnsObj_scenario0():
     assert e7_waymap.unknown_term == x_unknown_term
     assert e7_waymap.otx_bridge == slash_otx_bridge
     assert e7_waymap.inx_bridge == colon_inx_bridge
-    assert e7_waymap.tagmap == tagmap_shop(
+    assert e7_waymap.wordmap == wordmap_shop(
         face_name=bob_str,
         event_int=event7,
         unknown_term=x_unknown_term,
@@ -89,7 +89,7 @@ def test_waymap_shop_ReturnsObj_Scenario2():
     assert x_waymap.inx_bridge == default_bridge_if_None()
     assert x_waymap.face_name is None
     assert x_waymap.event_int == 0
-    assert x_waymap.tagmap == tagmap_shop(
+    assert x_waymap.wordmap == wordmap_shop(
         event_int=0,
         unknown_term=default_unknown_term_if_None(),
         otx_bridge=default_bridge_if_None(),
@@ -297,140 +297,140 @@ def test_WayMap_unknown_term_in_otx2inx_ReturnsObj():
     assert x_waymap._unknown_term_in_otx2inx()
 
 
-def test_WayMap_set_tag_SetsAttr():
+def test_WayMap_set_word_SetsAttr():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     x_waymap = waymap_shop(None)
-    assert x_waymap.tagmap.otx2inx == {}
+    assert x_waymap.wordmap.otx2inx == {}
 
     # WHEN
-    x_waymap.set_tag(xio_str, sue_str)
+    x_waymap.set_word(xio_str, sue_str)
 
     # THEN
-    assert x_waymap.tagmap.otx2inx == {xio_str: sue_str}
+    assert x_waymap.wordmap.otx2inx == {xio_str: sue_str}
 
 
-def test_WayMap_set_tag_RaisesExceptionWhen_bridge_In_otx_tag():
+def test_WayMap_set_word_RaisesExceptionWhen_bridge_In_otx_word():
     # ESTABLISH
     x_waymap = waymap_shop(None)
     sue_otx = f"Sue{x_waymap.otx_bridge}"
     sue_inx = "Sue"
-    assert x_waymap.tagmap.otx2inx == {}
+    assert x_waymap.wordmap.otx2inx == {}
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        x_waymap.set_tag(sue_otx, sue_inx)
-    exception_str = f"tag cannot have otx_tag '{sue_otx}'. It must be not have bridge {x_waymap.otx_bridge}."
+        x_waymap.set_word(sue_otx, sue_inx)
+    exception_str = f"word cannot have otx_word '{sue_otx}'. It must be not have bridge {x_waymap.otx_bridge}."
     assert str(excinfo.value) == exception_str
 
 
-def test_WayMap_set_tag_RaisesExceptionWhen_bridge_In_inx_tag():
+def test_WayMap_set_word_RaisesExceptionWhen_bridge_In_inx_word():
     # ESTABLISH
     x_waymap = waymap_shop(None)
     sue_inx = f"Sue{x_waymap.otx_bridge}"
     sue_otx = "Sue"
-    assert x_waymap.tagmap.otx2inx == {}
+    assert x_waymap.wordmap.otx2inx == {}
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        x_waymap.set_tag(sue_otx, sue_inx)
-    exception_str = f"tag cannot have inx_tag '{sue_inx}'. It must be not have bridge {x_waymap.inx_bridge}."
+        x_waymap.set_word(sue_otx, sue_inx)
+    exception_str = f"word cannot have inx_word '{sue_inx}'. It must be not have bridge {x_waymap.inx_bridge}."
     assert str(excinfo.value) == exception_str
 
 
-def test_WayMap_get_inx_tag_ReturnsObj():
+def test_WayMap_get_inx_word_ReturnsObj():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     x_waymap = waymap_shop(None)
-    assert x_waymap._get_inx_tag(xio_str) != sue_str
+    assert x_waymap._get_inx_word(xio_str) != sue_str
 
     # WHEN
-    x_waymap.set_tag(xio_str, sue_str)
+    x_waymap.set_word(xio_str, sue_str)
 
     # THEN
-    assert x_waymap._get_inx_tag(xio_str) == sue_str
+    assert x_waymap._get_inx_word(xio_str) == sue_str
 
 
-def test_WayPidgin_tag_exists_ReturnsObj():
-    # ESTABLISH
-    xio_str = "Xio"
-    sue_str = "Sue"
-    bob_str = "Bob"
-    zia_str = "Zia"
-    x_waymap = waymap_shop(None)
-    assert x_waymap.tag_exists(xio_str, sue_str) is False
-    assert x_waymap.tag_exists(xio_str, zia_str) is False
-    assert x_waymap.tag_exists(xio_str, bob_str) is False
-    assert x_waymap.tag_exists(zia_str, zia_str) is False
-
-    # WHEN
-    x_waymap.set_tag(xio_str, sue_str)
-
-    # THEN
-    assert x_waymap.tag_exists(xio_str, sue_str)
-    assert x_waymap.tag_exists(xio_str, zia_str) is False
-    assert x_waymap.tag_exists(xio_str, bob_str) is False
-    assert x_waymap.tag_exists(zia_str, zia_str) is False
-
-    # WHEN
-    x_waymap.set_tag(zia_str, zia_str)
-
-    # THEN
-    assert x_waymap.tag_exists(xio_str, sue_str)
-    assert x_waymap.tag_exists(xio_str, zia_str) is False
-    assert x_waymap.tag_exists(xio_str, bob_str) is False
-    assert x_waymap.tag_exists(zia_str, zia_str)
-
-
-def test_WayMap_otx_tag_exists_ReturnsObj():
+def test_WayPidgin_word_exists_ReturnsObj():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     bob_str = "Bob"
     zia_str = "Zia"
     x_waymap = waymap_shop(None)
-    assert x_waymap.otx_tag_exists(xio_str) is False
-    assert x_waymap.otx_tag_exists(sue_str) is False
-    assert x_waymap.otx_tag_exists(bob_str) is False
-    assert x_waymap.otx_tag_exists(zia_str) is False
+    assert x_waymap.word_exists(xio_str, sue_str) is False
+    assert x_waymap.word_exists(xio_str, zia_str) is False
+    assert x_waymap.word_exists(xio_str, bob_str) is False
+    assert x_waymap.word_exists(zia_str, zia_str) is False
 
     # WHEN
-    x_waymap.set_tag(xio_str, sue_str)
+    x_waymap.set_word(xio_str, sue_str)
 
     # THEN
-    assert x_waymap.otx_tag_exists(xio_str)
-    assert x_waymap.otx_tag_exists(sue_str) is False
-    assert x_waymap.otx_tag_exists(bob_str) is False
-    assert x_waymap.otx_tag_exists(zia_str) is False
+    assert x_waymap.word_exists(xio_str, sue_str)
+    assert x_waymap.word_exists(xio_str, zia_str) is False
+    assert x_waymap.word_exists(xio_str, bob_str) is False
+    assert x_waymap.word_exists(zia_str, zia_str) is False
 
     # WHEN
-    x_waymap.set_tag(zia_str, zia_str)
+    x_waymap.set_word(zia_str, zia_str)
 
     # THEN
-    assert x_waymap.otx_tag_exists(xio_str)
-    assert x_waymap.otx_tag_exists(sue_str) is False
-    assert x_waymap.otx_tag_exists(bob_str) is False
-    assert x_waymap.otx_tag_exists(zia_str)
+    assert x_waymap.word_exists(xio_str, sue_str)
+    assert x_waymap.word_exists(xio_str, zia_str) is False
+    assert x_waymap.word_exists(xio_str, bob_str) is False
+    assert x_waymap.word_exists(zia_str, zia_str)
 
 
-def test_WayMap_del_tag_SetsAttr():
+def test_WayMap_otx_word_exists_ReturnsObj():
+    # ESTABLISH
+    xio_str = "Xio"
+    sue_str = "Sue"
+    bob_str = "Bob"
+    zia_str = "Zia"
+    x_waymap = waymap_shop(None)
+    assert x_waymap.otx_word_exists(xio_str) is False
+    assert x_waymap.otx_word_exists(sue_str) is False
+    assert x_waymap.otx_word_exists(bob_str) is False
+    assert x_waymap.otx_word_exists(zia_str) is False
+
+    # WHEN
+    x_waymap.set_word(xio_str, sue_str)
+
+    # THEN
+    assert x_waymap.otx_word_exists(xio_str)
+    assert x_waymap.otx_word_exists(sue_str) is False
+    assert x_waymap.otx_word_exists(bob_str) is False
+    assert x_waymap.otx_word_exists(zia_str) is False
+
+    # WHEN
+    x_waymap.set_word(zia_str, zia_str)
+
+    # THEN
+    assert x_waymap.otx_word_exists(xio_str)
+    assert x_waymap.otx_word_exists(sue_str) is False
+    assert x_waymap.otx_word_exists(bob_str) is False
+    assert x_waymap.otx_word_exists(zia_str)
+
+
+def test_WayMap_del_word_SetsAttr():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     x_waymap = waymap_shop(None)
-    x_waymap.set_tag(xio_str, sue_str)
-    assert x_waymap.tag_exists(xio_str, sue_str)
+    x_waymap.set_word(xio_str, sue_str)
+    assert x_waymap.word_exists(xio_str, sue_str)
 
     # WHEN
-    x_waymap.del_tag(xio_str)
+    x_waymap.del_word(xio_str)
 
     # THEN
-    assert x_waymap.tag_exists(xio_str, sue_str) is False
+    assert x_waymap.word_exists(xio_str, sue_str) is False
 
 
-def test_WayMap_set_tag_Edits_otx2inx():
+def test_WayMap_set_word_Edits_otx2inx():
     # ESTABLISH
     otx_accord45_str = to_way("accord45")
     inx_accord87_str = to_way("accord87")
@@ -457,7 +457,7 @@ def test_WayMap_set_tag_Edits_otx2inx():
 
     # WHEN
     menage_inx_str = "menage"
-    x_waymap.set_tag(clean_otx_str, menage_inx_str)
+    x_waymap.set_word(clean_otx_str, menage_inx_str)
 
     # THEN
     menage_inx_way = create_way(casa_inx_way, menage_inx_str)
@@ -518,7 +518,7 @@ def test_get_waymap_from_dict_ReturnsObj():
     slash_otx_bridge = "/"
     x_waymap = waymap_shop(sue_str, event7, otx_bridge=slash_otx_bridge)
     x_waymap.set_otx2inx(clean_otx, clean_inx)
-    x_waymap.set_tag("bob", "bobito")
+    x_waymap.set_word("bob", "bobito")
 
     # WHEN
     gen_waymap = get_waymap_from_dict(x_waymap.get_dict())
@@ -527,9 +527,9 @@ def test_get_waymap_from_dict_ReturnsObj():
     assert gen_waymap.face_name == x_waymap.face_name
     assert gen_waymap.event_int == x_waymap.event_int
     assert gen_waymap.event_int == event7
-    assert gen_waymap.tagmap.face_name == x_waymap.tagmap.face_name
-    assert gen_waymap.tagmap.otx2inx != x_waymap.tagmap.otx2inx
-    assert gen_waymap.tagmap != x_waymap.tagmap
+    assert gen_waymap.wordmap.face_name == x_waymap.wordmap.face_name
+    assert gen_waymap.wordmap.otx2inx != x_waymap.wordmap.otx2inx
+    assert gen_waymap.wordmap != x_waymap.wordmap
     assert gen_waymap.otx2inx == x_waymap.otx2inx
     assert gen_waymap.otx_bridge == x_waymap.otx_bridge
     assert gen_waymap.inx_bridge == x_waymap.inx_bridge
@@ -543,7 +543,7 @@ def test_get_waymap_from_json_ReturnsObj():
     slash_otx_bridge = "/"
     x_waymap = waymap_shop(slash_otx_bridge)
     x_waymap.set_otx2inx(clean_otx, clean_inx)
-    x_waymap.set_tag("bob", "bobito")
+    x_waymap.set_word("bob", "bobito")
 
     # WHEN
     x_waymap = get_waymap_from_json(x_waymap.get_json())
@@ -579,11 +579,11 @@ def test_WayMap_all_otx_parent_ways_exist_ReturnsObj_WayStr():
     assert x_waymap.all_otx_parent_ways_exist()
 
 
-def test_WayMap_is_valid_ReturnsObj_Scenario0_idea_tag_str():
+def test_WayMap_is_valid_ReturnsObj_Scenario0_idea_word_str():
     # ESTABLISH
     x_otx_bridge = "/"
     x_inx_bridge = ":"
-    tagstr_waymap = waymap_shop(otx_bridge=x_otx_bridge, inx_bridge=x_inx_bridge)
+    wordstr_waymap = waymap_shop(otx_bridge=x_otx_bridge, inx_bridge=x_inx_bridge)
 
     clean_str = "clean"
     clean_inx = to_way("propre", x_inx_bridge)
@@ -591,17 +591,17 @@ def test_WayMap_is_valid_ReturnsObj_Scenario0_idea_tag_str():
     mop_otx = create_way(casa_otx, "mop", x_otx_bridge)
     mop_inx = "mop"
     casa_inx = "casa"
-    assert tagstr_waymap.is_valid()
+    assert wordstr_waymap.is_valid()
 
     # WHEN
-    tagstr_waymap.set_otx2inx(clean_str, clean_inx)
+    wordstr_waymap.set_otx2inx(clean_str, clean_inx)
     # THEN
-    assert tagstr_waymap.is_valid()
+    assert wordstr_waymap.is_valid()
 
     # WHEN
-    tagstr_waymap.set_otx2inx(mop_otx, mop_inx)
+    wordstr_waymap.set_otx2inx(mop_otx, mop_inx)
     # THEN
-    assert tagstr_waymap.is_valid() is False
+    assert wordstr_waymap.is_valid() is False
 
 
 def test_WayMap_is_valid_ReturnsObj_Scenario1_way_str():

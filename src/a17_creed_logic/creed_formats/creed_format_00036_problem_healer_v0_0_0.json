@@ -6,13 +6,13 @@
         "face_name": {
             "otx_key": true
         },
-        "fisc_tag": {
+        "fisc_word": {
             "otx_key": true
         },
         "healer_name": {
             "otx_key": true
         },
-        "idea_tag": {
+        "idea_word": {
             "otx_key": true
         },
         "idea_way": {

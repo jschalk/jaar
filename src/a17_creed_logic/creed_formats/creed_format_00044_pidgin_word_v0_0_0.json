@@ -9,13 +9,13 @@
         "inx_bridge": {
             "otx_key": false
         },
-        "inx_tag": {
+        "inx_word": {
             "otx_key": false
         },
         "otx_bridge": {
             "otx_key": false
         },
-        "otx_tag": {
+        "otx_word": {
             "otx_key": true
         },
         "unknown_term": {
@@ -24,6 +24,6 @@
     },
     "creed_number": "br00044",
     "dimens": [
-        "pidgin_tag"
+        "pidgin_word"
     ]
 }

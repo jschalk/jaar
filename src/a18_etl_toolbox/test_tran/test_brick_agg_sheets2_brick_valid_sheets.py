@@ -1,7 +1,7 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a02_finance_logic._utils.strs_a02 import fisc_tag_str
+from src.a02_finance_logic._utils.strs_a02 import fisc_word_str
 from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str
-from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_tag_str
+from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_word_str
 from src.a17_creed_logic._utils.str_a17 import brick_valid_str, brick_agg_str
 from src.a17_creed_logic.creed_db_tool import sheet_exists, upsert_sheet
 from src.a18_etl_toolbox.transformers import (
@@ -33,8 +33,8 @@ def test_etl_brick_agg_non_pidgin_creeds_to_brick_valid_CreatesSheets_Scenario0(
     br00003_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_tag_str(),
-        hour_tag_str(),
+        fisc_word_str(),
+        hour_word_str(),
         cumlative_minute_str(),
     ]
     accord23_str = "accord23"

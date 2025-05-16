@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import WayStr, create_way, get_default_fisc_tag
+from src.a01_way_logic.way import WayStr, create_way, get_default_fisc_word
 from src.a05_idea_logic.idea import ideaunit_shop
 from src.a04_reason_logic.reason_idea import factunit_shop, FactUnit
 from src.a06_bud_logic.bud import budunit_shop, BudUnit

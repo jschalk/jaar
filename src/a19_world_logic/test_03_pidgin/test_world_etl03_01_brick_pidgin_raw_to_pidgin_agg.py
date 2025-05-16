@@ -64,29 +64,29 @@ def test_WorldUnit_pidgin_raw_to_name_agg_Scenario0_CreatesFileWithAllDimens(
     t6am_otx = "T6am"
     t6am_inx = "T600"
     event7 = 7
-    tag_raw_str = "tag_raw"
-    tag_agg_str = "tag_agg"
-    tag_raw_columns = PidginPrimeColumns().pidgin_tag_raw_columns
+    word_raw_str = "word_raw"
+    word_agg_str = "word_agg"
+    word_raw_columns = PidginPrimeColumns().pidgin_word_raw_columns
     bx = "br00xxx"
-    e1_tag0 = [bx, event7, sue_str, t3am_otx, t3am_inx, None, None, None]
-    e1_tag1 = [bx, event7, sue_str, t6am_otx, t6am_inx, None, None, None]
-    e1_tag_rows = [e1_tag0, e1_tag1]
-    raw_tag_df = DataFrame(e1_tag_rows, columns=tag_raw_columns)
+    e1_word0 = [bx, event7, sue_str, t3am_otx, t3am_inx, None, None, None]
+    e1_word1 = [bx, event7, sue_str, t6am_otx, t6am_inx, None, None, None]
+    e1_word_rows = [e1_word0, e1_word1]
+    raw_word_df = DataFrame(e1_word_rows, columns=word_raw_columns)
 
     pidgin_path = create_brick_pidgin_path(fizz_world._brick_dir)
     upsert_sheet(pidgin_path, name_raw_str, raw_name_df)
     upsert_sheet(pidgin_path, label_raw_str, raw_label_df)
     upsert_sheet(pidgin_path, way_raw_str, raw_way_df)
-    upsert_sheet(pidgin_path, tag_raw_str, raw_tag_df)
+    upsert_sheet(pidgin_path, word_raw_str, raw_word_df)
     assert os_path_exists(pidgin_path)
     assert sheet_exists(pidgin_path, name_raw_str)
     assert sheet_exists(pidgin_path, label_raw_str)
     assert sheet_exists(pidgin_path, way_raw_str)
-    assert sheet_exists(pidgin_path, tag_raw_str)
+    assert sheet_exists(pidgin_path, word_raw_str)
     assert sheet_exists(pidgin_path, name_agg_str) is False
     assert sheet_exists(pidgin_path, label_agg_str) is False
     assert sheet_exists(pidgin_path, way_agg_str) is False
-    assert sheet_exists(pidgin_path, tag_agg_str) is False
+    assert sheet_exists(pidgin_path, word_agg_str) is False
 
     # WHEN
     fizz_world.brick_pidgin_raw_df_to_pidgin_agg_df()
@@ -96,11 +96,11 @@ def test_WorldUnit_pidgin_raw_to_name_agg_Scenario0_CreatesFileWithAllDimens(
     assert sheet_exists(pidgin_path, name_agg_str)
     assert sheet_exists(pidgin_path, label_agg_str)
     assert sheet_exists(pidgin_path, way_agg_str)
-    assert sheet_exists(pidgin_path, tag_agg_str)
+    assert sheet_exists(pidgin_path, word_agg_str)
     gen_name_agg_df = pandas_read_excel(pidgin_path, sheet_name=name_agg_str)
     gen_label_agg_df = pandas_read_excel(pidgin_path, sheet_name=label_agg_str)
     gen_way_agg_df = pandas_read_excel(pidgin_path, sheet_name=way_agg_str)
-    gen_tag_agg_df = pandas_read_excel(pidgin_path, sheet_name=tag_agg_str)
+    gen_word_agg_df = pandas_read_excel(pidgin_path, sheet_name=word_agg_str)
 
     name_agg_columns = PidginPrimeColumns().pidgin_name_agg_columns
     assert list(gen_name_agg_df.columns) == name_agg_columns
@@ -126,15 +126,15 @@ def test_WorldUnit_pidgin_raw_to_name_agg_Scenario0_CreatesFileWithAllDimens(
     e1_way1 = [event7, sue_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
     e1_way_rows = [e1_way0, e1_way1]
     e1_way_agg_df = DataFrame(e1_way_rows, columns=way_agg_columns)
-    tag_agg_columns = PidginPrimeColumns().pidgin_tag_agg_columns
-    assert list(gen_tag_agg_df.columns) == tag_agg_columns
-    assert len(gen_tag_agg_df) == 2
-    e1_tag0 = [event7, sue_str, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
-    e1_tag1 = [event7, sue_str, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]
-    e1_tag_rows = [e1_tag0, e1_tag1]
-    e1_tag_agg_df = DataFrame(e1_tag_rows, columns=tag_agg_columns)
+    word_agg_columns = PidginPrimeColumns().pidgin_word_agg_columns
+    assert list(gen_word_agg_df.columns) == word_agg_columns
+    assert len(gen_word_agg_df) == 2
+    e1_word0 = [event7, sue_str, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
+    e1_word1 = [event7, sue_str, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]
+    e1_word_rows = [e1_word0, e1_word1]
+    e1_word_agg_df = DataFrame(e1_word_rows, columns=word_agg_columns)
 
     pandas_testing_assert_frame_equal(gen_name_agg_df, e1_name_agg_df)
     pandas_testing_assert_frame_equal(gen_label_agg_df, e1_label_agg_df)
     pandas_testing_assert_frame_equal(gen_way_agg_df, e1_way_agg_df)
-    pandas_testing_assert_frame_equal(gen_tag_agg_df, e1_tag_agg_df)
+    pandas_testing_assert_frame_equal(gen_word_agg_df, e1_word_agg_df)

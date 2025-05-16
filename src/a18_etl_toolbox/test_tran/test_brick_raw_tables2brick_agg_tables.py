@@ -4,9 +4,9 @@ from src.a00_data_toolbox.db_toolbox import (
     get_row_count,
     get_table_columns,
 )
-from src.a02_finance_logic._utils.strs_a02 import fisc_tag_str
+from src.a02_finance_logic._utils.strs_a02 import fisc_word_str
 from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str
-from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_tag_str
+from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_word_str
 from src.a17_creed_logic._utils.str_a17 import brick_raw_str, brick_agg_str
 from src.a17_creed_logic.creed_db_tool import sheet_exists, create_creed_sorted_table
 from src.a18_etl_toolbox.transformers import (
@@ -34,9 +34,9 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario0_Gr
     raw_br00003_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_tag_str(),
+        fisc_word_str(),
         cumlative_minute_str(),
-        hour_tag_str(),
+        hour_word_str(),
     ]
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -44,9 +44,9 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario0_Gr
         insert_into_clause = f"""INSERT INTO {raw_br00003_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {fisc_tag_str()}
+, {fisc_word_str()}
 , {cumlative_minute_str()}
-, {hour_tag_str()}
+, {hour_word_str()}
 )"""
         values_clause = f"""
 VALUES     
@@ -109,9 +109,9 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario1_Gr
     raw_br00003_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_tag_str(),
+        fisc_word_str(),
         cumlative_minute_str(),
-        hour_tag_str(),
+        hour_word_str(),
     ]
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -119,9 +119,9 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario1_Gr
         insert_into_clause = f"""INSERT INTO {raw_br00003_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {fisc_tag_str()}
+, {fisc_word_str()}
 , {cumlative_minute_str()}
-, {hour_tag_str()}
+, {hour_word_str()}
 )"""
         values_clause = f"""
 VALUES     
@@ -181,9 +181,9 @@ def test_etl_brick_agg_tables_to_brick_agg_dfs_PopulatesAggTable_Scenario0_Group
     agg_br00003_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_tag_str(),
+        fisc_word_str(),
         cumlative_minute_str(),
-        hour_tag_str(),
+        hour_word_str(),
     ]
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -191,9 +191,9 @@ def test_etl_brick_agg_tables_to_brick_agg_dfs_PopulatesAggTable_Scenario0_Group
         insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {fisc_tag_str()}
+, {fisc_word_str()}
 , {cumlative_minute_str()}
-, {hour_tag_str()}
+, {hour_word_str()}
 )"""
         values_clause = f"""
 VALUES     

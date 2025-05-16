@@ -6,8 +6,8 @@ from src.a00_data_toolbox.file_toolbox import (
 )
 from src.a02_finance_logic.allot import allot_nested_scale
 from src.a02_finance_logic.finance_config import TimeLinePoint
-from src.a02_finance_logic.deal import FiscTag
-from src.a01_way_logic.way import TagStr, OwnerName
+from src.a02_finance_logic.deal import FiscWord
+from src.a01_way_logic.way import WordStr, OwnerName
 from src.a02_finance_logic.finance_config import FundNum
 from src.a04_reason_logic.reason_idea import get_dict_from_factunits
 from src.a11_deal_cell_logic.cell import CellUnit, cellunit_shop
@@ -38,40 +38,40 @@ from copy import copy as copy_copy
 from dataclasses import dataclass
 
 
-def create_fisc_owners_cell_trees(fisc_mstr_dir, fisc_tag):
+def create_fisc_owners_cell_trees(fisc_mstr_dir, fisc_word):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    fisc_dir = create_path(fiscs_dir, fisc_tag)
+    fisc_dir = create_path(fiscs_dir, fisc_word)
     owners_dir = create_path(fisc_dir, "owners")
     for owner_name in get_level1_dirs(owners_dir):
         owner_dir = create_path(owners_dir, owner_name)
         deals_dir = create_path(owner_dir, "deals")
         for deal_time in get_level1_dirs(deals_dir):
-            create_cell_tree(fisc_mstr_dir, fisc_tag, owner_name, deal_time)
+            create_cell_tree(fisc_mstr_dir, fisc_word, owner_name, deal_time)
 
 
-def create_cell_tree(fisc_mstr_dir, fisc_tag, deal_owner_name, deal_time):
+def create_cell_tree(fisc_mstr_dir, fisc_word, deal_owner_name, deal_time):
     root_cell_json_path = create_cell_json_path(
-        fisc_mstr_dir, fisc_tag, deal_owner_name, deal_time
+        fisc_mstr_dir, fisc_word, deal_owner_name, deal_time
     )
     if os_path_exists(root_cell_json_path):
-        _exists_create_cell_tree(fisc_mstr_dir, fisc_tag, deal_owner_name, deal_time)
+        _exists_create_cell_tree(fisc_mstr_dir, fisc_word, deal_owner_name, deal_time)
 
 
-def _exists_create_cell_tree(fisc_mstr_dir, fisc_tag, deal_owner_name, deal_time):
+def _exists_create_cell_tree(fisc_mstr_dir, fisc_word, deal_owner_name, deal_time):
     root_cell_dir = create_cell_dir_path(
-        fisc_mstr_dir, fisc_tag, deal_owner_name, deal_time, []
+        fisc_mstr_dir, fisc_word, deal_owner_name, deal_time, []
     )
     cells_to_evaluate = [cellunit_get_from_dir(root_cell_dir)]
-    owner_events_sets = collect_owner_event_dir_sets(fisc_mstr_dir, fisc_tag)
+    owner_events_sets = collect_owner_event_dir_sets(fisc_mstr_dir, fisc_word)
     while cells_to_evaluate != []:
         parent_cell = cells_to_evaluate.pop()
         cell_owner_name = parent_cell.get_cell_owner_name()
         e_int = parent_cell.event_int
-        budevent = get_budevent_obj(fisc_mstr_dir, fisc_tag, cell_owner_name, e_int)
+        budevent = get_budevent_obj(fisc_mstr_dir, fisc_word, cell_owner_name, e_int)
         parent_cell.eval_budevent(budevent)
         parent_cell_dir = create_cell_dir_path(
             fisc_mstr_dir,
-            fisc_tag,
+            fisc_word,
             deal_owner_name,
             deal_time,
             parent_cell.ancestors,
@@ -100,9 +100,9 @@ def _exists_create_cell_tree(fisc_mstr_dir, fisc_tag, deal_owner_name, deal_time
                         cells_to_evaluate.append(child_cellunit)
 
 
-def load_cells_budevent(fisc_mstr_dir: str, fisc_tag: TagStr):
+def load_cells_budevent(fisc_mstr_dir: str, fisc_word: WordStr):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    fisc_dir = create_path(fiscs_dir, fisc_tag)
+    fisc_dir = create_path(fiscs_dir, fisc_word)
     owners_dir = create_path(fisc_dir, "owners")
     for owner_name in get_level1_dirs(owners_dir):
         owner_dir = create_path(owners_dir, owner_name)
@@ -111,21 +111,21 @@ def load_cells_budevent(fisc_mstr_dir: str, fisc_tag: TagStr):
             deal_time_dir = create_path(deals_dir, deal_time)
             for dirpath, dirnames, filenames in os_walk(deal_time_dir):
                 if CELLNODE_FILENAME in set(filenames):
-                    _load_cell_budevent(fisc_mstr_dir, fisc_tag, dirpath)
+                    _load_cell_budevent(fisc_mstr_dir, fisc_word, dirpath)
 
 
-def _load_cell_budevent(fisc_mstr_dir, fisc_tag, dirpath):
+def _load_cell_budevent(fisc_mstr_dir, fisc_word, dirpath):
     x_cellunit = cellunit_get_from_dir(dirpath)
     cell_owner_name = x_cellunit.get_cell_owner_name()
     event_int = x_cellunit.event_int
-    budevent = get_budevent_obj(fisc_mstr_dir, fisc_tag, cell_owner_name, event_int)
+    budevent = get_budevent_obj(fisc_mstr_dir, fisc_word, cell_owner_name, event_int)
     x_cellunit.eval_budevent(budevent)
     cellunit_save_to_dir(dirpath, x_cellunit)
 
 
-def set_cell_trees_found_facts(fisc_mstr_dir: str, fisc_tag: TagStr):
+def set_cell_trees_found_facts(fisc_mstr_dir: str, fisc_word: WordStr):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    fisc_dir = create_path(fiscs_dir, fisc_tag)
+    fisc_dir = create_path(fiscs_dir, fisc_word)
     owners_dir = create_path(fisc_dir, "owners")
     for owner_name in get_level1_dirs(owners_dir):
         owner_dir = create_path(owners_dir, owner_name)
@@ -161,9 +161,9 @@ def _set_cell_found_facts(deal_time_dir: str, cell_dirs: list[str]):
         cellunit_save_to_dir(output_dir, output_cell)
 
 
-def set_cell_trees_decrees(fisc_mstr_dir: str, fisc_tag: str):
+def set_cell_trees_decrees(fisc_mstr_dir: str, fisc_word: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    fisc_dir = create_path(fiscs_dir, fisc_tag)
+    fisc_dir = create_path(fiscs_dir, fisc_word)
     owners_dir = create_path(fisc_dir, "owners")
     for owner_name in get_level1_dirs(owners_dir):
         owner_dir = create_path(owners_dir, owner_name)
@@ -171,7 +171,7 @@ def set_cell_trees_decrees(fisc_mstr_dir: str, fisc_tag: str):
         for deal_time in get_level1_dirs(deals_dir):
             deal_time_dir = create_path(deals_dir, deal_time)
             set_cell_tree_decrees(
-                fisc_mstr_dir, fisc_tag, owner_name, deal_time, deal_time_dir
+                fisc_mstr_dir, fisc_word, owner_name, deal_time, deal_time_dir
             )
 
 
@@ -194,7 +194,7 @@ class DecreeUnit:
 
 def set_cell_tree_decrees(
     mstr_dir: str,
-    fisc_tag: FiscTag,
+    fisc_word: FiscWord,
     owner_name: OwnerName,
     deal_time: TimeLinePoint,
     deal_time_dir: str,
@@ -210,7 +210,7 @@ def set_cell_tree_decrees(
     # grab acct_agenda_fund_agenda_give ledger
     # add nodes to to_evalute_cellnodes based on acct_agenda_fund_give owners
     root_cell = cellunit_get_from_dir(deal_time_dir)
-    root_cell_dir = create_cell_dir_path(mstr_dir, fisc_tag, owner_name, deal_time, [])
+    root_cell_dir = create_cell_dir_path(mstr_dir, fisc_word, owner_name, deal_time, [])
     root_decree = DecreeUnit(
         parent_cell_dir=None,
         cell_dir=root_cell_dir,
@@ -226,7 +226,7 @@ def set_cell_tree_decrees(
         x_decree = to_evaluate_decreeunits.pop()
         if x_cell := cellunit_get_from_dir(
             x_decree.cell_dir
-        ) or generate_cell_from_decree(x_decree, mstr_dir, fisc_tag, owner_name):
+        ) or generate_cell_from_decree(x_decree, mstr_dir, fisc_word, owner_name):
             x_cell.mandate = x_decree.cell_mandate
             parent_cell_dir = x_decree.parent_cell_dir
             _set_cell_boss_facts(x_cell, parent_cell_dir, x_decree.root_cell_bool)
@@ -238,7 +238,7 @@ def set_cell_tree_decrees(
                     x_cell=x_cell,
                     x_decree=x_decree,
                     mstr_dir=mstr_dir,
-                    fisc_tag=fisc_tag,
+                    fisc_word=fisc_word,
                     owner_name=owner_name,
                     deal_time=deal_time,
                 )
@@ -249,14 +249,14 @@ def _add_child_decrees(
     x_cell: CellUnit,
     x_decree: DecreeUnit,
     mstr_dir,
-    fisc_tag: str,
+    fisc_word: str,
     owner_name: str,
     deal_time: int,
 ):
     for child_owner_name, child_mandate in x_cell._acct_mandate_ledger.items():
         child_cell_ancestors = x_decree.get_child_cell_ancestors(child_owner_name)
         child_dir = create_cell_dir_path(
-            mstr_dir, fisc_tag, owner_name, deal_time, child_cell_ancestors
+            mstr_dir, fisc_word, owner_name, deal_time, child_cell_ancestors
         )
         child_decreeunit = DecreeUnit(
             parent_cell_dir=x_decree.cell_dir,
@@ -279,17 +279,17 @@ def _set_cell_boss_facts(cell: CellUnit, parent_cell_dir: str, root_cell_bool: b
 
 
 def generate_cell_from_decree(
-    x_decree: DecreeUnit, mstr_dir: str, fisc_tag: str, owner_name: OwnerName
+    x_decree: DecreeUnit, mstr_dir: str, fisc_word: str, owner_name: OwnerName
 ) -> CellUnit:
     cell_owner_name = x_decree.cell_owner_name
     owners_downhill_events_ints = get_owners_downhill_event_ints(
-        owner_events_sets=collect_owner_event_dir_sets(mstr_dir, fisc_tag),
+        owner_events_sets=collect_owner_event_dir_sets(mstr_dir, fisc_word),
         downhill_owners={cell_owner_name},
         ref_event_int=x_decree.event_int,
     )
     if downhill_event_int := owners_downhill_events_ints.get(cell_owner_name):
         budevent_path = create_budevent_path(
-            mstr_dir, fisc_tag, cell_owner_name, downhill_event_int
+            mstr_dir, fisc_word, cell_owner_name, downhill_event_int
         )
         budevent = open_bud_file(budevent_path)
         x_cell = cellunit_shop(
@@ -305,9 +305,9 @@ def generate_cell_from_decree(
         return x_cell
 
 
-def set_cell_tree_cell_mandates(fisc_mstr_dir: str, fisc_tag: str):
+def set_cell_tree_cell_mandates(fisc_mstr_dir: str, fisc_word: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    fisc_dir = create_path(fiscs_dir, fisc_tag)
+    fisc_dir = create_path(fiscs_dir, fisc_word)
     owners_dir = create_path(fisc_dir, "owners")
     for owner_name in get_level1_dirs(owners_dir):
         owner_dir = create_path(owners_dir, owner_name)
@@ -319,14 +319,14 @@ def set_cell_tree_cell_mandates(fisc_mstr_dir: str, fisc_tag: str):
                     create_cell_acct_mandate_ledger_json(dirpath)
 
 
-def create_deal_mandate_ledgers(fisc_mstr_dir: str, fisc_tag: str):
-    fisc_json_path = create_fisc_json_path(fisc_mstr_dir, fisc_tag)
+def create_deal_mandate_ledgers(fisc_mstr_dir: str, fisc_word: str):
+    fisc_json_path = create_fisc_json_path(fisc_mstr_dir, fisc_word)
     fiscunit = fiscunit_get_from_dict(open_json(fisc_json_path))
     for brokerunit in fiscunit.brokerunits.values():
         for dealunit in brokerunit.deals.values():
             deal_root_dir = create_deal_dir_path(
                 fisc_mstr_dir,
-                fisc_tag,
+                fisc_word,
                 owner_name=brokerunit.owner_name,
                 deal_time=dealunit.deal_time,
             )

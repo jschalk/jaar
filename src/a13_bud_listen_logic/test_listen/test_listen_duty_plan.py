@@ -1,8 +1,8 @@
 from src.a01_way_logic.way import (
     WayStr,
     create_way,
-    get_default_fisc_tag,
-    TagStr,
+    get_default_fisc_word,
+    WordStr,
 )
 from src.a05_idea_logic.idea import ideaunit_shop
 from src.a06_bud_logic.bud import BudUnit, budunit_shop
@@ -65,7 +65,7 @@ def run_str() -> str:
 
 
 def casa_way() -> WayStr:
-    return create_way(get_default_fisc_tag(), casa_str())
+    return create_way(get_default_fisc_word(), casa_str())
 
 
 def cook_way() -> WayStr:
@@ -108,7 +108,7 @@ def get_example_yao_bud() -> BudUnit:
     yao_str = "Yao"
     zia_str = "Zia"
     bob_str = "Bob"
-    yao_speaker = budunit_shop(yao_str, get_default_fisc_tag())
+    yao_speaker = budunit_shop(yao_str, get_default_fisc_word())
     yao_speaker.set_idea(ideaunit_shop(run_str()), casa_way())
     yao_speaker.add_acctunit(yao_str, debtit_belief=10)
     yao_speaker.add_acctunit(zia_str, debtit_belief=30)
@@ -166,34 +166,34 @@ def get_example_yao_plan3_speaker() -> BudUnit:
 
 
 def get_usa_way() -> WayStr:
-    return create_way(get_default_fisc_tag(), "USA")
+    return create_way(get_default_fisc_word(), "USA")
 
 
-def get_iowa_str() -> TagStr:
+def get_iowa_str() -> WordStr:
     return "Iowa"
 
 
-def get_ohio_str() -> TagStr:
+def get_ohio_str() -> WordStr:
     return "Ohio"
 
 
-def get_utah_str() -> TagStr:
+def get_utah_str() -> WordStr:
     return "Utah"
 
 
-def get_swim_str() -> TagStr:
+def get_swim_str() -> WordStr:
     return "swim"
 
 
-def get_location_str() -> TagStr:
+def get_location_str() -> WordStr:
     return "location"
 
 
-def get_in_mer_str() -> TagStr:
+def get_in_mer_str() -> WordStr:
     return "in_mer"
 
 
-def get_on_land_str() -> TagStr:
+def get_on_land_str() -> WordStr:
     return "on_land"
 
 
@@ -210,11 +210,11 @@ def get_utah_way() -> WayStr:
 
 
 def get_swim_way() -> WayStr:
-    return create_way(get_default_fisc_tag(), get_swim_str())
+    return create_way(get_default_fisc_word(), get_swim_str())
 
 
 def get_location_way() -> WayStr:
-    return create_way(get_default_fisc_tag(), get_location_str())
+    return create_way(get_default_fisc_word(), get_location_str())
 
 
 def get_in_mer_way() -> WayStr:
@@ -229,7 +229,7 @@ def get_yao_ohio_hubunit() -> HubUnit:
     yao_bud = get_example_yao_bud()
     return hubunit_shop(
         fisc_mstr_dir=env_dir(),
-        fisc_tag=yao_bud.fisc_tag,
+        fisc_word=yao_bud.fisc_word,
         owner_name=yao_bud.owner_name,
         keep_way=get_ohio_way(),
         # pipeline_gut_job_str(),
@@ -240,7 +240,7 @@ def get_yao_iowa_hubunit() -> HubUnit:
     yao_bud = get_example_yao_bud()
     return hubunit_shop(
         fisc_mstr_dir=env_dir(),
-        fisc_tag=yao_bud.fisc_tag,
+        fisc_word=yao_bud.fisc_word,
         owner_name=yao_bud.owner_name,
         keep_way=get_iowa_way(),
         # pipeline_gut_job_str(),
@@ -251,7 +251,7 @@ def get_zia_utah_hubunit() -> HubUnit:
     yao_bud = get_example_yao_bud()
     return hubunit_shop(
         fisc_mstr_dir=env_dir(),
-        fisc_tag=yao_bud.fisc_tag,
+        fisc_word=yao_bud.fisc_word,
         owner_name="Zia",
         keep_way=get_utah_way(),
         # pipeline_gut_job_str(),
@@ -285,7 +285,7 @@ def test_listen_to_owner_plans_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItself
     # yao_plan2 with 2 tasks, one is equal fact that makes task active
     # yao_plan3 with 1 new task, fact stays with it
     fisc_mstr_dir = env_dir()
-    fisc_tag = get_default_fisc_tag()
+    fisc_word = get_default_fisc_word()
     yao_gut0 = get_example_yao_gut_with_3_healers()
     yao_gut0.set_l1_idea(ideaunit_shop(get_location_str()))
     yao_gut0.set_idea(ideaunit_shop(get_in_mer_str()), get_location_way())
@@ -310,8 +310,8 @@ def test_listen_to_owner_plans_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItself
     yao_ohio_hubunit = get_yao_ohio_hubunit()
     zia_utah_hubunit = get_zia_utah_hubunit()
     # delete_dir(yao_iowa_hubunit.owners_dir())
-    assert gut_file_exists(fisc_mstr_dir, fisc_tag, yao_str) is False
-    assert job_file_exists(fisc_mstr_dir, fisc_tag, yao_str) is False
+    assert gut_file_exists(fisc_mstr_dir, fisc_word, yao_str) is False
+    assert job_file_exists(fisc_mstr_dir, fisc_word, yao_str) is False
     assert yao_iowa_hubunit.plan_file_exists(yao_str) is False
     assert yao_ohio_hubunit.plan_file_exists(yao_str) is False
     assert zia_utah_hubunit.plan_file_exists(yao_str) is False
@@ -320,17 +320,17 @@ def test_listen_to_owner_plans_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItself
     # yao_iowa_hubunit.save_plan_bud(yao_plan1)
     # yao_ohio_hubunit.save_plan_bud(yao_plan2)
     # zia_utah_hubunit.save_plan_bud(yao_plan3)
-    assert gut_file_exists(fisc_mstr_dir, fisc_tag, yao_str)
+    assert gut_file_exists(fisc_mstr_dir, fisc_word, yao_str)
     assert yao_iowa_hubunit.plan_file_exists(yao_str) is False
     assert yao_ohio_hubunit.plan_file_exists(yao_str) is False
     assert zia_utah_hubunit.plan_file_exists(yao_str) is False
 
     # WHEN
-    assert job_file_exists(fisc_mstr_dir, fisc_tag, yao_str) is False
+    assert job_file_exists(fisc_mstr_dir, fisc_word, yao_str) is False
     listen_to_owner_plans(yao_iowa_hubunit)
-    assert job_file_exists(fisc_mstr_dir, fisc_tag, yao_str)
+    assert job_file_exists(fisc_mstr_dir, fisc_word, yao_str)
 
-    yao_job = open_job_file(fisc_mstr_dir, fisc_tag, yao_str)
+    yao_job = open_job_file(fisc_mstr_dir, fisc_word, yao_str)
     yao_job.settle_bud()
     assert yao_job.accts.keys() == yao_gut0.accts.keys()
     assert yao_job.get_acct(yao_str)._irrational_debtit_belief == 0

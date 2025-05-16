@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.file_toolbox import create_path, save_file
 from src.a00_data_toolbox.db_toolbox import db_table_exists
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_word_str
 from src.a06_bud_logic._utils.str_a06 import face_name_str, acct_name_str, event_int_str
 from src.a18_etl_toolbox.fisc_etl_tool import FiscPrimeObjsRef
 from src.a19_world_logic.world import worldunit_shop
@@ -27,7 +27,7 @@ def test_WorldUnit_creed_raw_to_fisc_prime_tables_PopulatesFiscAggTables(
     sue_inz_dir = create_path(fizz_world._syntax_inz_dir, sue_inx)
     br00011_str = "br00011"
     br00011_csv_filename = f"{br00011_str}.csv"
-    br00011_csv_str = f"""{event_int_str()},{face_name_str()},{fisc_tag_str()},{owner_name_str()},{acct_name_str()}
+    br00011_csv_str = f"""{event_int_str()},{face_name_str()},{fisc_word_str()},{owner_name_str()},{acct_name_str()}
 {event3},{sue_inx},{accord23_str},{bob_inx},{bob_inx}
 {event3},{sue_inx},{accord23_str},{yao_inx},{bob_inx}
 {event3},{sue_inx},{accord45_str},{yao_inx},{yao_inx}
@@ -53,7 +53,7 @@ def test_WorldUnit_creed_raw_to_fisc_prime_tables_PopulatesFiscAggTables(
         cursor.execute(f"SELECT * FROM {fisc_objs.unit_agg_tablename};")
         fiscunit_agg_rows = cursor.fetchall()
         expected_row1 = (
-            accord23_str,  # fisc_tag
+            accord23_str,  # fisc_word
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
@@ -62,11 +62,11 @@ def test_WorldUnit_creed_raw_to_fisc_prime_tables_PopulatesFiscAggTables(
             None,  # c400_number
             None,  # yr1_jan1_offset
             None,  # monthday_distortion
-            None,  # timeline_tag
+            None,  # timeline_word
             None,  # job_listen_rotations
         )
         expected_row2 = (
-            accord45_str,  # fisc_tag
+            accord45_str,  # fisc_word
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
@@ -75,7 +75,7 @@ def test_WorldUnit_creed_raw_to_fisc_prime_tables_PopulatesFiscAggTables(
             None,  # c400_number
             None,  # yr1_jan1_offset
             None,  # monthday_distortion
-            None,  # timeline_tag
+            None,  # timeline_word
             None,  # job_listen_rotations
         )
         assert fiscunit_agg_rows == [expected_row1, expected_row2]
@@ -112,13 +112,13 @@ def test_WorldUnit_creed_raw_to_fisc_prime_tables_PopulatesTable_fisc_event_time
     br00002_str = "br00002"
     br00001_csv_filename = f"{br00001_str}.csv"
     br00002_csv_filename = f"{br00002_str}.csv"
-    br00001_csv_str = f"""{event_int_str()},{face_name_str()},fisc_tag,owner_name,deal_time,quota,celldepth
+    br00001_csv_str = f"""{event_int_str()},{face_name_str()},fisc_word,owner_name,deal_time,quota,celldepth
 {event3},{sue_inx},{accord23_str},{bob_inx},{timepoint800},{quota_t8},{x_celldepth}
 {event3},{sue_inx},{accord23_str},{yao_inx},{timepoint800},{quota_t8},{x_celldepth}
 {event3},{sue_inx},{accord45_str},{yao_inx},{timepoint800},{quota_t8},{x_celldepth}
 {event7},{sue_inx},{accord45_str},{yao_inx},{timepoint900},{quota_t9},{x_celldepth}
 """
-    br00002_csv_str = f"""{event_int_str()},{face_name_str()},fisc_tag,owner_name,acct_name,tran_time,amount
+    br00002_csv_str = f"""{event_int_str()},{face_name_str()},fisc_word,owner_name,acct_name,tran_time,amount
 {event2},{sue_inx},{accord23_str},{bob_inx},{sue_inx},{timepoint22},{amount_t22}
 {event2},{sue_inx},{accord23_str},{yao_inx},{sue_inx},{timepoint22},{amount_t22}
 {event2},{sue_inx},{accord45_str},{yao_inx},{sue_inx},{timepoint22},{amount_t22}
@@ -142,13 +142,13 @@ def test_WorldUnit_creed_raw_to_fisc_prime_tables_PopulatesTable_fisc_event_time
         # cursor.execute(f"SELECT * FROM {fiscunit_raw_tablename};")
         # fiscunit_raw_rows = cursor.fetchall()
         # assert len(fiscunit_raw_rows) == 4
-        event_time_select_sql = f"""SELECT fisc_tag, event_int, agg_time, error_message 
+        event_time_select_sql = f"""SELECT fisc_word, event_int, agg_time, error_message 
 FROM {event_time_tablename}
 ;
 """
         cursor.execute(event_time_select_sql)
         fiscunit_agg_rows = cursor.fetchall()
-        # fisc_tag, owner_name
+        # fisc_word, owner_name
         expected_row0 = (accord23_str, event2, timepoint22, "sorted")
         expected_row1 = (accord23_str, event3, timepoint800, "sorted")
         expected_row2 = (accord45_str, event2, timepoint22, "sorted")

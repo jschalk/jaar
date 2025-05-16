@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path, open_file
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_tag_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_word_str
 from src.a06_bud_logic._utils.str_a06 import acct_name_str, face_name_str, event_int_str
 from src.a17_creed_logic.creed_db_tool import upsert_sheet
 from src.a18_etl_toolbox.transformers import etl_inz_face_creeds_to_csv_files
@@ -21,7 +21,7 @@ def test_etl_inz_face_creeds_to_csv_files_Scenario0(env_dir_setup_cleanup):
     br00011_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_tag_str(),
+        fisc_word_str(),
         owner_name_str(),
         acct_name_str(),
     ]
@@ -47,6 +47,6 @@ def test_etl_inz_face_creeds_to_csv_files_Scenario0(env_dir_setup_cleanup):
 
     # THEN
     assert os_path_exists(br00011_csv_path)
-    expected_csv = """event_int,face_name,fisc_tag,owner_name,acct_name\n3,Suzy,accord23,Bob,Bob\n3,Suzy,accord23,Yao,Bob\n3,Suzy,accord23,Yao,Yao\n7,Suzy,accord23,Yao,Yao\n"""
+    expected_csv = """event_int,face_name,fisc_word,owner_name,acct_name\n3,Suzy,accord23,Bob,Bob\n3,Suzy,accord23,Yao,Bob\n3,Suzy,accord23,Yao,Yao\n7,Suzy,accord23,Yao,Yao\n"""
     print(f"{expected_csv=}")
     assert open_file(br00011_csv_path) == expected_csv

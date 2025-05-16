@@ -1,7 +1,7 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a02_finance_logic._utils.strs_a02 import fisc_tag_str
+from src.a02_finance_logic._utils.strs_a02 import fisc_word_str
 from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str
-from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_tag_str
+from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_word_str
 from src.a16_pidgin_logic._utils.str_a16 import (
     inx_bridge_str,
     inx_name_str,
@@ -39,8 +39,8 @@ def test_etl_brick_creeds_to_otz_face_creeds_CreatesFaceCreedSheets_Scenario0_Si
     creed_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_tag_str(),
-        hour_tag_str(),
+        fisc_word_str(),
+        hour_word_str(),
         cumlative_minute_str(),
     ]
     accord23_str = "accord23"
@@ -92,8 +92,8 @@ def test_etl_brick_creeds_to_otz_face_creeds_CreatesFaceCreedSheets_Scenario1_Mu
     creed_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_tag_str(),
-        hour_tag_str(),
+        fisc_word_str(),
+        hour_word_str(),
         cumlative_minute_str(),
     ]
     accord23_str = "accord23"
@@ -149,8 +149,8 @@ def test_etl_brick_creeds_to_otz_face_creeds_Scenario2_PidginDimenCreedsAreNotLo
     br00003_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_tag_str(),
-        hour_tag_str(),
+        fisc_word_str(),
+        hour_word_str(),
         cumlative_minute_str(),
     ]
     accord23_str = "accord23"

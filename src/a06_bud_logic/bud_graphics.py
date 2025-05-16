@@ -69,7 +69,7 @@ def _add_individual_trace(
             x=[kid_idea._level - 1, kid_idea._level],
             y=[parent_y, source_y],
             marker_size=_get_dot_diameter(kid_idea._fund_ratio),
-            name=kid_idea.idea_tag,
+            name=kid_idea.idea_word,
             marker_color=_get_color_for_ideaunit_trace(kid_idea, mode=mode),
         )
     )
@@ -77,7 +77,7 @@ def _add_individual_trace(
         dict(
             x=kid_idea._level,
             y=source_y + (_get_dot_diameter(kid_idea._fund_ratio) / 150) + 0.002,
-            text=kid_idea.idea_tag,
+            text=kid_idea.idea_word,
             showarrow=False,
         )
     )
@@ -108,13 +108,13 @@ def _create_ideaunit_traces(
 
 
 def _update_layout_fig(x_fig: plotly_Figure, mode: str, x_bud: BudUnit):
-    fig_tag = "Tree with lines Layout"
+    fig_word = "Tree with lines Layout"
     if mode == "Task":
-        fig_tag = "Idea Tree with task ideas in Red."
-    fig_tag += f" (Ideas: {len(x_bud._idea_dict)})"
-    fig_tag += f" (_sum_healerlink_share: {x_bud._sum_healerlink_share})"
-    fig_tag += f" (_keeps_justified: {x_bud._keeps_justified})"
-    x_fig.update_layout(title_text=fig_tag, font_size=12)
+        fig_word = "Idea Tree with task ideas in Red."
+    fig_word += f" (Ideas: {len(x_bud._idea_dict)})"
+    fig_word += f" (_sum_healerlink_share: {x_bud._sum_healerlink_share})"
+    fig_word += f" (_keeps_justified: {x_bud._keeps_justified})"
+    x_fig.update_layout(title_text=fig_word, font_size=12)
 
 
 def display_ideatree(
@@ -184,10 +184,10 @@ def get_bud_accts_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_tag = f"OwnerName '{x_bud.owner_name}' bud accts metrics"
+    fig_word = f"OwnerName '{x_bud.owner_name}' bud accts metrics"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
-    fig.update_layout(plot_bgcolor="white", title=fig_tag, title_font_size=20)
+    fig.update_layout(plot_bgcolor="white", title=fig_word, title_font_size=20)
 
     return fig
 
@@ -196,7 +196,7 @@ def get_bud_agenda_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
     column_header_list = [
         "owner_name",
         "fund_ratio",
-        "idea_tag",
+        "idea_word",
         "parent_way",
     ]
     df = get_bud_agenda_dataframe(x_bud)
@@ -209,7 +209,7 @@ def get_bud_agenda_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
             values=[
                 df.owner_name,
                 df.fund_ratio,
-                df.idea_tag,
+                df.idea_word,
                 df.parent_way,
             ],
             fill_color="lavender",
@@ -218,10 +218,10 @@ def get_bud_agenda_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_tag = f"OwnerName '{x_bud.owner_name}' bud agenda"
+    fig_word = f"OwnerName '{x_bud.owner_name}' bud agenda"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
-    fig.update_layout(plot_bgcolor="white", title=fig_tag, title_font_size=20)
+    fig.update_layout(plot_bgcolor="white", title=fig_word, title_font_size=20)
 
     return fig
 
@@ -503,7 +503,7 @@ def fund_graph0(
     green_str = "Green"
     blue_str = "blue"
     blue_str = "blue"
-    d_sue1_tag = "How fund is distributed."
+    d_sue1_word = "How fund is distributed."
     laborunit_str = "      AwardHeirs"
     add_rect_arrow(fig, 0.6, -0.1, 0.1, -0.1, "Purple")
     add_rect_arrow(fig, 0.6, -0.8, 0.1, -0.1, "Purple")
@@ -522,7 +522,7 @@ def fund_graph0(
     add_rect_arrow(fig, 4, -1.1, 3.1, -1.1, blue_str)
     add_simp_rect(fig, 4, -3.2, 5, -2.8, laborunit_str)
     add_rect_arrow(fig, 4, -2.9, 3.1, -2.9, green_str)
-    add_keep__rect(fig, -0.5, -4.5, 10, 2.3, d_sue1_tag, "", "", "")
+    add_keep__rect(fig, -0.5, -4.5, 10, 2.3, d_sue1_word, "", "", "")
     d_sue1_p0 = "Fund Source is IdeaRoot. Each Idea fund range calculated by mass "
     d_sue1_p1 = "IdeaRoot Fund ranges: Black arrows. Sum of childless Idea's funds equal idearoot's fund "
     d_sue1_p2 = "Regular Fund: Green arrows, all fund_coins end up at AcctUnits"

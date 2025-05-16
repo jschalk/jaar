@@ -241,7 +241,7 @@ def test_FiscUnit_set_all_tranbook_SetsAttr():
     sue_x40000_deal.set_deal_acct_net(bob_str, bob_deal_net)
     sue_x70000_deal.set_deal_acct_net(zia_str, zia_deal_net)
 
-    assert x_fisc._all_tranbook == tranbook_shop(x_fisc.fisc_tag)
+    assert x_fisc._all_tranbook == tranbook_shop(x_fisc.fisc_word)
     assert x_fisc.cashpurchase_exists(sue_str, bob_str, t55_t)
     assert x_fisc.cashpurchase_exists(yao_str, bob_str, t66_t)
     assert x_fisc.cashpurchase_exists(yao_str, sue_str, t77_t)

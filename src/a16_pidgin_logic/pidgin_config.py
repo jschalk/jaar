@@ -85,7 +85,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "denom": "int",
         "face_name": "NameStr",
         "fcontext": "WayStr",
-        "fisc_tag": "TagStr",
+        "fisc_word": "WordStr",
         "fbranch": "WayStr",
         "fnigh": "float",
         "fopen": "float",
@@ -95,11 +95,11 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "gogo_want": "float",
         "group_label": "LabelStr",
         "healer_name": "NameStr",
-        "hour_tag": "TagStr",
+        "hour_word": "WordStr",
         "idea_way": "WayStr",
         "mass": "int",
         "max_tree_traverse": "int",
-        "month_tag": "TagStr",
+        "month_word": "WordStr",
         "monthday_distortion": "int",
         "morph": "bool",
         "numor": "int",
@@ -123,8 +123,8 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "labor_label": "LabelStr",
         "tran_time": "TimeLinePoint",
         "deal_time": "TimeLinePoint",
-        "timeline_tag": "TagStr",
-        "weekday_tag": "TagStr",
+        "timeline_word": "WordStr",
+        "weekday_word": "WordStr",
         "weekday_order": "int",
         "bridge": "str",
         "yr1_jan1_offset": "int",
@@ -148,9 +148,9 @@ def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
             "otx_bridge",
             "unknown_term",
         },
-        "pidgin_tag": {
-            "inx_tag",
-            "otx_tag",
+        "pidgin_word": {
+            "inx_word",
+            "otx_word",
             "inx_bridge",
             "otx_bridge",
             "unknown_term",
@@ -166,7 +166,7 @@ def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
 
 
 def pidginable_class_types() -> set:
-    return {"NameStr", "LabelStr", "TagStr", "WayStr"}
+    return {"NameStr", "LabelStr", "WordStr", "WayStr"}
 
 
 def get_pidginable_args() -> set:
@@ -175,19 +175,19 @@ def get_pidginable_args() -> set:
         "awardee_label",
         "face_name",
         "fcontext",
-        "fisc_tag",
+        "fisc_word",
         "fbranch",
         "group_label",
         "healer_name",
-        "hour_tag",
+        "hour_word",
         "idea_way",
-        "month_tag",
+        "month_word",
         "owner_name",
         "pbranch",
         "rcontext",
         "labor_label",
-        "timeline_tag",
-        "weekday_tag",
+        "timeline_word",
+        "weekday_word",
     }
 
 
@@ -223,13 +223,13 @@ def get_pidgin_LabelStr_args() -> set[str]:
     }
 
 
-def get_pidgin_TagStr_args() -> set[str]:
+def get_pidgin_WordStr_args() -> set[str]:
     return {
-        "fisc_tag",
-        "hour_tag",
-        "month_tag",
-        "timeline_tag",
-        "weekday_tag",
+        "fisc_word",
+        "hour_word",
+        "month_word",
+        "timeline_word",
+        "weekday_word",
     }
 
 

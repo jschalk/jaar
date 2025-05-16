@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import create_way_from_tags
+from src.a01_way_logic.way import create_way_from_words
 from src.a03_group_logic.group import awardlink_shop
 from src.a03_group_logic.acct import acctunit_shop
 from src.a05_idea_logic.idea import ideaunit_shop
@@ -14,7 +14,7 @@ def test_BudUnit_get_tree_metrics_exists():
     zia_bud_tree_metrics = zia_bud.get_tree_metrics()
 
     # THEN
-    assert zia_bud_tree_metrics.tag_count is not None
+    assert zia_bud_tree_metrics.word_count is not None
     assert zia_bud_tree_metrics.reason_rcontexts is not None
     assert zia_bud_tree_metrics.level_count is not None
     assert zia_bud_tree_metrics.awardlinks_metrics is not None
@@ -98,9 +98,9 @@ def test_BudUnit_get_tree_metrics_Returns_pledge_IdeaWayStr():
     yao_tree_metrics = yao_bud.get_tree_metrics()
 
     # WHEN / THEN
-    traain_way = create_way_from_tags(
+    traain_way = create_way_from_words(
         [
-            yao_bud.fisc_tag,
+            yao_bud.fisc_word,
             "ACME",
             "ACME Employee Responsiblities",
             "Know Abuse Deterrence and Reporting guildlines",
