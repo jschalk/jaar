@@ -805,9 +805,65 @@ GROUP BY
 """
 
 
+def create_pidlabe_face_otx_event_sqlstr(table: str, column: str) -> str:
+    return f"""
+SELECT 
+  raw_dim.rowid raw_rowid
+, raw_dim.event_int
+, raw_dim.face_name_otx
+, raw_dim.{column}_otx
+, MAX(pid.event_int) pidgin_event_int
+FROM {table} raw_dim
+LEFT JOIN pidgin_label_s_vld pid ON pid.face_name = raw_dim.face_name_otx
+    AND pid.otx_label = raw_dim.{column}_otx
+    AND raw_dim.event_int >= pid.event_int
+GROUP BY 
+  raw_dim.rowid
+, raw_dim.event_int
+, raw_dim.face_name_otx
+, raw_dim.{column}_otx
+"""
+
+
+def create_pidtagg_face_otx_event_sqlstr(table: str, column: str) -> str:
+    return f"""
+SELECT 
+  raw_dim.rowid raw_rowid
+, raw_dim.event_int
+, raw_dim.face_name_otx
+, raw_dim.{column}_otx
+, MAX(pid.event_int) pidgin_event_int
+FROM {table} raw_dim
+LEFT JOIN pidgin_tag_s_vld pid ON pid.face_name = raw_dim.face_name_otx
+    AND pid.otx_tag = raw_dim.{column}_otx
+    AND raw_dim.event_int >= pid.event_int
+GROUP BY 
+  raw_dim.rowid
+, raw_dim.event_int
+, raw_dim.face_name_otx
+, raw_dim.{column}_otx
+"""
+
+
 def update_voice_raw_inx_name_col_sqlstr(table: str, column: str) -> str:
     return f"""
-WITH pidname_face_otx_event AS ({create_pidname_face_otx_event_sqlstr(table, column)}),
+WITH pidname_face_otx_event AS (
+    SELECT 
+    raw_dim.rowid raw_rowid
+    , raw_dim.event_int
+    , raw_dim.face_name_otx
+    , raw_dim.{column}_otx
+    , MAX(pid.event_int) pidgin_event_int
+    FROM {table} raw_dim
+    LEFT JOIN pidgin_name_s_vld pid ON pid.face_name = raw_dim.face_name_otx
+        AND pid.otx_name = raw_dim.{column}_otx
+        AND raw_dim.event_int >= pid.event_int
+    GROUP BY 
+    raw_dim.rowid
+    , raw_dim.event_int
+    , raw_dim.face_name_otx
+    , raw_dim.{column}_otx
+),
 pidname_inx_names AS (
     SELECT pid_foe.raw_rowid, pid_vld.inx_name
     FROM pidname_face_otx_event pid_foe
@@ -824,22 +880,6 @@ SET {column}_inx = (
 )
 ;
 """
-    # WHERE dim_v_raw.{column}_otx = mapped_names.otx_name
-    #     AND dim_v_raw.event_int = mapped_names.event_int
-
-
-# WITH mapped_names AS (
-#     SELECT pid.otx_name, pid.inx_name
-#     FROM {table} raw_dim
-#     JOIN pidgin_name_s_vld pid ON pid.otx_name = raw_dim.{column}_otx
-# )
-# UPDATE {table}
-# SET {table}.{column}_inx = (
-#     SELECT inx_name
-#     FROM mapped_names
-#     WHERE {table}.{column}_otx = mapped_names.otx_name
-# )
-# return f"""UPDATE {table} SET {column}_inx = {column}_otx"""
 
 
 PIDLABE_INCONSISTENCY_SQLSTR = """SELECT otx_label
