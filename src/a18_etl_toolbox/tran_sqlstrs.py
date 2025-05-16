@@ -785,21 +785,47 @@ def get_insert_into_voice_raw_sqlstrs() -> dict[str, str]:
     }
 
 
+def create_pidname_face_otx_event_sqlstr(table: str, column: str) -> str:
+    return f"""
+SELECT 
+  raw_dim.rowid raw_rowid
+, raw_dim.event_int
+, raw_dim.face_name_otx
+, raw_dim.{column}_otx
+, MAX(pid.event_int) pidgin_event_int
+FROM {table} raw_dim
+LEFT JOIN pidgin_name_s_vld pid ON pid.face_name = raw_dim.face_name_otx
+    AND pid.otx_name = raw_dim.{column}_otx
+    AND raw_dim.event_int >= pid.event_int
+GROUP BY 
+  raw_dim.rowid
+, raw_dim.event_int
+, raw_dim.face_name_otx
+, raw_dim.{column}_otx
+"""
+
+
 def update_voice_raw_inx_name_col_sqlstr(table: str, column: str) -> str:
     return f"""
-WITH mapped_names AS (
-    SELECT raw_dim.{column}_otx as otx_name, pid.inx_name
-    FROM {table} raw_dim
-    LEFT JOIN pidgin_name_s_vld pid ON pid.otx_name = raw_dim.{column}_otx
+WITH pidname_face_otx_event AS ({create_pidname_face_otx_event_sqlstr(table, column)}),
+pidname_inx_names AS (
+    SELECT pid_foe.raw_rowid, pid_vld.inx_name
+    FROM pidname_face_otx_event pid_foe
+    LEFT JOIN pidgin_name_s_vld pid_vld
+        ON pid_vld.face_name = pid_foe.face_name_otx
+        AND pid_vld.otx_name = pid_foe.{column}_otx
+        AND pid_vld.event_int = pid_foe.pidgin_event_int
 )
-UPDATE {table}
+UPDATE {table} as dim_v_raw
 SET {column}_inx = (
-    SELECT IFNULL(inx_name, otx_name)
-    FROM mapped_names
-    WHERE {table}.{column}_otx = mapped_names.otx_name
+    SELECT IFNULL(pidname_inx_names.inx_name, dim_v_raw.{column}_otx)
+    FROM pidname_inx_names
+    WHERE dim_v_raw.rowid = pidname_inx_names.raw_rowid
 )
 ;
 """
+    # WHERE dim_v_raw.{column}_otx = mapped_names.otx_name
+    #     AND dim_v_raw.event_int = mapped_names.event_int
 
 
 # WITH mapped_names AS (
