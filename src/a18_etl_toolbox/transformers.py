@@ -53,7 +53,7 @@ from src.a16_pidgin_logic.pidgin import (
     get_pidginunit_from_json,
     inherit_pidginunit,
     default_bridge_if_None,
-    default_unknown_word_if_None,
+    default_unknown_term_if_None,
 )
 from src.a16_pidgin_logic.pidgin_config import get_quick_pidgens_column_ref
 from src.a17_creed_logic.creed_config import (
@@ -515,7 +515,7 @@ def insert_pidgin_sound_agg_into_pidgin_core_raw_table(cursor: sqlite3_Cursor):
 
 def insert_pidgin_core_agg_to_pidgin_core_vld_table(cursor: sqlite3_Cursor):
     bridge = default_bridge_if_None()
-    unknown = default_unknown_word_if_None()
+    unknown = default_unknown_term_if_None()
     insert_sqlstr = create_insert_into_pidgin_core_vld_sqlstr(bridge, unknown)
     cursor.execute(insert_sqlstr)
 
@@ -532,8 +532,8 @@ def insert_pidgin_core_raw_to_pidgin_core_agg_table(cursor: sqlite3_Cursor):
     pidgin_core_s_raw_tablename = create_prime_tablename("pidcore", "s", "raw")
     pidgin_core_s_agg_tablename = create_prime_tablename("pidcore", "s", "agg")
     sqlstr = f"""
-INSERT INTO {pidgin_core_s_agg_tablename} (face_name, otx_bridge, inx_bridge, unknown_word)
-SELECT face_name, MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
+INSERT INTO {pidgin_core_s_agg_tablename} (face_name, otx_bridge, inx_bridge, unknown_term)
+SELECT face_name, MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_term)
 FROM {pidgin_core_s_raw_tablename}
 WHERE error_message IS NULL
 GROUP BY face_name
@@ -702,9 +702,9 @@ class BrickAggToPidginRawTransformer:
                 inx_bridge = None
                 if "inx_bridge" not in df_missing_cols:
                     inx_bridge = x_row["inx_bridge"]
-                unknown_word = None
-                if "unknown_word" not in df_missing_cols:
-                    unknown_word = x_row["unknown_word"]
+                unknown_term = None
+                if "unknown_term" not in df_missing_cols:
+                    unknown_term = x_row["unknown_term"]
                 df_len = len(raw_df.index)
                 raw_df.loc[df_len] = [
                     creed_number,
@@ -714,7 +714,7 @@ class BrickAggToPidginRawTransformer:
                     self.get_inx_obj(x_row, df_missing_cols),
                     otx_bridge,
                     inx_bridge,
-                    unknown_word,
+                    unknown_term,
                 ]
 
     def get_inx_obj(self, x_row, missing_col: set[str]) -> str:
@@ -801,7 +801,7 @@ class PidginRawToAggTransformer:
                 face_name=x_row["face_name"],
                 otx_bridge=x_row["otx_bridge"],
                 inx_bridge=x_row["inx_bridge"],
-                unknown_word=x_row["unknown_word"],
+                unknown_term=x_row["unknown_term"],
             )
             x_pidginheartbook.eval_pidginheartrow(x_pidginheartrow)
         return x_pidginheartbook

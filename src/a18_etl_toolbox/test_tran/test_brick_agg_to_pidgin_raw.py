@@ -17,7 +17,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_way_str,
     inx_label_str,
     otx_label_str,
-    unknown_word_str,
+    unknown_term_str,
 )
 from src.a17_creed_logic._utils.str_a17 import (
     creed_number_str,
@@ -96,7 +96,7 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
         inx_name_str(),
         otx_bridge_str(),
         inx_bridge_str(),
-        unknown_word_str(),
+        unknown_term_str(),
     ]
     sue0 = [event1, sue_str, m_str, bob_str, yao_str, yao_str, yao_inx]
     sue1 = [event1, sue_str, m_str, bob_str, bob_str, bob_str, bob_inx]
@@ -129,7 +129,7 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
         inx_label_str(),
         otx_bridge_str(),
         inx_bridge_str(),
-        unknown_word_str(),
+        unknown_term_str(),
     ]
     sue0 = [event1, sue_str, m_str, bob_str, yao_str, yao_str, yao_inx]
     sue1 = [event1, sue_str, m_str, bob_str, bob_str, bob_str, bob_inx]
@@ -161,7 +161,7 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
         inx_tag_str(),
         otx_bridge_str(),
         inx_bridge_str(),
-        unknown_word_str(),
+        unknown_term_str(),
     ]
     sue0 = [event1, sue_str, m_str, bob_str, yao_str, yao_str, yao_inx]
     sue1 = [event1, sue_str, m_str, bob_str, bob_str, bob_str, bob_inx]
@@ -193,7 +193,7 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
         inx_way_str(),
         otx_bridge_str(),
         inx_bridge_str(),
-        unknown_word_str(),
+        unknown_term_str(),
     ]
     sue0 = [event1, sue_str, m_str, bob_str, yao_str, yao_str, yao_inx]
     sue1 = [event1, sue_str, m_str, bob_str, bob_str, bob_str, bob_inx]
@@ -265,7 +265,7 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
         inx_tag_str(),
         otx_bridge_str(),
         inx_bridge_str(),
-        unknown_word_str(),
+        unknown_term_str(),
     ]
     assert list(gen_tag_df.columns) == tag_file_columns
     assert len(gen_tag_df) == 2
@@ -288,7 +288,7 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
         inx_way_str(),
         otx_bridge_str(),
         inx_bridge_str(),
-        unknown_word_str(),
+        unknown_term_str(),
     ]
     assert list(gen_way_df.columns) == way_file_columns
     assert len(gen_way_df) == 2
@@ -323,7 +323,7 @@ def create_brick_valid_table(cursor, creed_number: str):
             inx_name_str(),
             otx_bridge_str(),
             inx_bridge_str(),
-            unknown_word_str(),
+            unknown_term_str(),
         ]
     elif creed_number == "br00115":
         x_columns = [
@@ -343,7 +343,7 @@ def create_brick_valid_table(cursor, creed_number: str):
             inx_label_str(),
             otx_bridge_str(),
             inx_bridge_str(),
-            unknown_word_str(),
+            unknown_term_str(),
         ]
     elif creed_number == "br00116":
         x_columns = [
@@ -363,7 +363,7 @@ def create_brick_valid_table(cursor, creed_number: str):
             inx_tag_str(),
             otx_bridge_str(),
             inx_bridge_str(),
-            unknown_word_str(),
+            unknown_term_str(),
         ]
     elif creed_number == "br00117":
         x_columns = [
@@ -383,7 +383,7 @@ def create_brick_valid_table(cursor, creed_number: str):
             inx_way_str(),
             otx_bridge_str(),
             inx_bridge_str(),
-            unknown_word_str(),
+            unknown_term_str(),
         ]
     agg_tablename = f"{brick_valid_str()}_{creed_number}"
     create_creed_sorted_table(cursor, agg_tablename, x_columns)
@@ -414,7 +414,7 @@ INSERT INTO {agg_tablename} (
 , {inx_label_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_word_str()}
+, {unknown_term_str()}
 )"""
         values_clause = f"""
 VALUES     
@@ -432,7 +432,7 @@ INSERT INTO {agg_tablename} (
 , {inx_name_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_word_str()}
+, {unknown_term_str()}
 )"""
         values_clause = f"""
 VALUES     
@@ -450,7 +450,7 @@ INSERT INTO {agg_tablename} (
 , {inx_tag_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_word_str()}
+, {unknown_term_str()}
 )"""
         values_clause = f"""
 VALUES     
@@ -468,7 +468,7 @@ INSERT INTO {agg_tablename} (
 , {inx_way_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_word_str()}
+, {unknown_term_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -738,10 +738,10 @@ def populate_pidgin_raw_tables(cursor: sqlite_Cursor):
     br00117_str = "br00117"
     br00045_str = "br00045"
 
-    raw_nam_insert_into_clause = f"""INSERT INTO {raw_nam_table} ({creed_number_str()},{event_int_str()},{face_name_str()},{otx_name_str()},{inx_name_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
-    raw_lab_insert_into_clause = f"""INSERT INTO {raw_lab_table} ({creed_number_str()},{event_int_str()},{face_name_str()},{otx_label_str()},{inx_label_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
-    raw_tag_insert_into_clause = f"""INSERT INTO {raw_tag_table} ({creed_number_str()},{event_int_str()},{face_name_str()},{otx_tag_str()},{inx_tag_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
-    raw_roa_insert_into_clause = f"""INSERT INTO {raw_roa_table} ({creed_number_str()},{event_int_str()},{face_name_str()},{otx_way_str()},{inx_way_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_word_str()})"""
+    raw_nam_insert_into_clause = f"""INSERT INTO {raw_nam_table} ({creed_number_str()},{event_int_str()},{face_name_str()},{otx_name_str()},{inx_name_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_term_str()})"""
+    raw_lab_insert_into_clause = f"""INSERT INTO {raw_lab_table} ({creed_number_str()},{event_int_str()},{face_name_str()},{otx_label_str()},{inx_label_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_term_str()})"""
+    raw_tag_insert_into_clause = f"""INSERT INTO {raw_tag_table} ({creed_number_str()},{event_int_str()},{face_name_str()},{otx_tag_str()},{inx_tag_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_term_str()})"""
+    raw_roa_insert_into_clause = f"""INSERT INTO {raw_roa_table} ({creed_number_str()},{event_int_str()},{face_name_str()},{otx_way_str()},{inx_way_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_term_str()})"""
     raw_nam_values_clause = f"""
 VALUES     
   ('{br00042_str}', {event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')

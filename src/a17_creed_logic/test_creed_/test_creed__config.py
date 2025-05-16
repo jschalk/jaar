@@ -111,7 +111,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     pidginunit_str,
     otx_bridge_str,
     inx_bridge_str,
-    unknown_word_str,
+    unknown_term_str,
     otx_tag_str,
     inx_tag_str,
     otx_way_str,
@@ -361,7 +361,7 @@ def test_get_creed_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[135] == "otx_bridge"
     assert table_sorting_priority[136] == "inx_bridge"
     assert table_sorting_priority[137] == "bridge"
-    assert table_sorting_priority[138] == "unknown_word"
+    assert table_sorting_priority[138] == "unknown_term"
     assert table_sorting_priority[139] == "quota"
     assert table_sorting_priority[140] == "celldepth"
     assert table_sorting_priority[141] == "job_listen_rotations"
@@ -492,7 +492,7 @@ def test_get_creed_sqlite_types_ReturnsObj():
     assert sqlite_types.get(weekday_order_str()) == "INTEGER"
     assert sqlite_types.get(otx_bridge_str()) == "TEXT"
     assert sqlite_types.get(inx_bridge_str()) == "TEXT"
-    assert sqlite_types.get(unknown_word_str()) == "TEXT"
+    assert sqlite_types.get(unknown_term_str()) == "TEXT"
     assert sqlite_types.get(bridge_str()) == "TEXT"
     assert sqlite_types.get(c400_number_str()) == "INTEGER"
     assert sqlite_types.get(yr1_jan1_offset_str()) == "INTEGER"

@@ -23,7 +23,7 @@ from src.a01_way_logic.way import (
     FaceName,
     EventInt,
 )
-from src.a16_pidgin_logic.pidgin_config import default_unknown_word_if_None
+from src.a16_pidgin_logic.pidgin_config import default_unknown_term_if_None
 from dataclasses import dataclass
 from copy import copy as copy_copy
 
@@ -41,19 +41,19 @@ class MapCore:
     face_name: FaceName = None
     event_int: EventInt = None
     otx2inx: dict = None
-    unknown_word: str = None
+    unknown_term: str = None
     otx_bridge: str = None
     inx_bridge: str = None
 
-    def _unknown_word_in_otx2inx(self) -> bool:
-        return str_in_dict(self.unknown_word, self.otx2inx)
+    def _unknown_term_in_otx2inx(self) -> bool:
+        return str_in_dict(self.unknown_term, self.otx2inx)
 
     def set_all_otx2inx(
         self, x_otx2inx: dict, raise_exception_if_invalid: bool = False
     ):
-        if raise_exception_if_invalid and str_in_dict(self.unknown_word, x_otx2inx):
-            error_dict = get_str_in_sub_dict(self.unknown_word, x_otx2inx)
-            exception_str = f"otx2inx cannot have unknown_word '{self.unknown_word}' in any str. Affected keys include {list(error_dict.keys())}."
+        if raise_exception_if_invalid and str_in_dict(self.unknown_term, x_otx2inx):
+            error_dict = get_str_in_sub_dict(self.unknown_term, x_otx2inx)
+            exception_str = f"otx2inx cannot have unknown_term '{self.unknown_term}' in any str. Affected keys include {list(error_dict.keys())}."
             raise set_all_otx2inxException(exception_str)
         self.otx2inx = x_otx2inx
 
@@ -63,7 +63,7 @@ class MapCore:
             "event_int": self.event_int,
             "otx_bridge": self.otx_bridge,
             "inx_bridge": self.inx_bridge,
-            "unknown_word": self.unknown_word,
+            "unknown_term": self.unknown_term,
             "otx2inx": self.otx2inx,
         }
 
@@ -118,9 +118,9 @@ def namemap_shop(
     otx_bridge: str = None,
     inx_bridge: str = None,
     otx2inx: dict = None,
-    unknown_word: str = None,
+    unknown_term: str = None,
 ) -> NameMap:
-    unknown_word = default_unknown_word_if_None(unknown_word)
+    unknown_term = default_unknown_term_if_None(unknown_term)
     otx_bridge = default_bridge_if_None(otx_bridge)
     inx_bridge = default_bridge_if_None(inx_bridge)
 
@@ -129,7 +129,7 @@ def namemap_shop(
         event_int=get_0_if_None(event_int),
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
-        unknown_word=unknown_word,
+        unknown_term=unknown_term,
         otx2inx=get_empty_dict_if_None(otx2inx),
     )
 
@@ -141,7 +141,7 @@ def get_namemap_from_dict(x_dict: dict) -> NameMap:
         otx_bridge=x_dict.get("otx_bridge"),
         inx_bridge=x_dict.get("inx_bridge"),
         otx2inx=x_dict.get("otx2inx"),
-        unknown_word=x_dict.get("unknown_word"),
+        unknown_term=x_dict.get("unknown_term"),
     )
 
 
@@ -196,9 +196,9 @@ def labelmap_shop(
     otx_bridge: str = None,
     inx_bridge: str = None,
     otx2inx: dict = None,
-    unknown_word: str = None,
+    unknown_term: str = None,
 ) -> LabelMap:
-    unknown_word = default_unknown_word_if_None(unknown_word)
+    unknown_term = default_unknown_term_if_None(unknown_term)
     otx_bridge = default_bridge_if_None(otx_bridge)
     inx_bridge = default_bridge_if_None(inx_bridge)
 
@@ -207,7 +207,7 @@ def labelmap_shop(
         event_int=get_0_if_None(event_int),
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
-        unknown_word=unknown_word,
+        unknown_term=unknown_term,
         otx2inx=get_empty_dict_if_None(otx2inx),
     )
 
@@ -219,7 +219,7 @@ def get_labelmap_from_dict(x_dict: dict) -> LabelMap:
         otx_bridge=x_dict.get("otx_bridge"),
         inx_bridge=x_dict.get("inx_bridge"),
         otx2inx=x_dict.get("otx2inx"),
-        unknown_word=x_dict.get("unknown_word"),
+        unknown_term=x_dict.get("unknown_term"),
     )
 
 
@@ -274,9 +274,9 @@ def tagmap_shop(
     otx_bridge: str = None,
     inx_bridge: str = None,
     otx2inx: dict = None,
-    unknown_word: str = None,
+    unknown_term: str = None,
 ) -> TagMap:
-    unknown_word = default_unknown_word_if_None(unknown_word)
+    unknown_term = default_unknown_term_if_None(unknown_term)
     otx_bridge = default_bridge_if_None(otx_bridge)
     inx_bridge = default_bridge_if_None(inx_bridge)
 
@@ -285,7 +285,7 @@ def tagmap_shop(
         event_int=get_0_if_None(event_int),
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
-        unknown_word=unknown_word,
+        unknown_term=unknown_term,
         otx2inx=get_empty_dict_if_None(otx2inx),
     )
 
@@ -297,7 +297,7 @@ def get_tagmap_from_dict(x_dict: dict) -> TagMap:
         otx_bridge=x_dict.get("otx_bridge"),
         inx_bridge=x_dict.get("inx_bridge"),
         otx2inx=x_dict.get("otx2inx"),
-        unknown_word=x_dict.get("unknown_word"),
+        unknown_term=x_dict.get("unknown_term"),
     )
 
 
@@ -310,7 +310,7 @@ class WayMap:
     face_name: FaceName = None
     event_int: EventInt = None
     otx2inx: dict = None
-    unknown_word: str = None
+    unknown_term: str = None
     otx_bridge: str = None
     inx_bridge: str = None
     tagmap: TagMap = None
@@ -318,9 +318,9 @@ class WayMap:
     def set_all_otx2inx(
         self, x_otx2inx: dict, raise_exception_if_invalid: bool = False
     ):
-        if raise_exception_if_invalid and str_in_dict(self.unknown_word, x_otx2inx):
-            error_dict = get_str_in_sub_dict(self.unknown_word, x_otx2inx)
-            exception_str = f"otx2inx cannot have unknown_word '{self.unknown_word}' in any str. Affected keys include {list(error_dict.keys())}."
+        if raise_exception_if_invalid and str_in_dict(self.unknown_term, x_otx2inx):
+            error_dict = get_str_in_sub_dict(self.unknown_term, x_otx2inx)
+            exception_str = f"otx2inx cannot have unknown_term '{self.unknown_term}' in any str. Affected keys include {list(error_dict.keys())}."
             raise set_all_otx2inxException(exception_str)
         self.otx2inx = x_otx2inx
 
@@ -396,8 +396,8 @@ class WayMap:
     def del_tag(self, otx_tag: TagStr) -> bool:
         self.tagmap.del_otx2inx(otx_tag)
 
-    def _unknown_word_in_otx2inx(self) -> bool:
-        return str_in_dict(self.unknown_word, self.otx2inx)
+    def _unknown_term_in_otx2inx(self) -> bool:
+        return str_in_dict(self.unknown_term, self.otx2inx)
 
     def all_otx_parent_ways_exist(self) -> bool:
         for x_way in self.otx2inx.keys():
@@ -416,7 +416,7 @@ class WayMap:
             "event_int": self.event_int,
             "otx_bridge": self.otx_bridge,
             "inx_bridge": self.inx_bridge,
-            "unknown_word": self.unknown_word,
+            "unknown_term": self.unknown_term,
             "otx2inx": self.otx2inx,
         }
 
@@ -431,9 +431,9 @@ def waymap_shop(
     inx_bridge: str = None,
     x_tagmap: TagMap = None,
     otx2inx: dict = None,
-    unknown_word: str = None,
+    unknown_term: str = None,
 ) -> WayMap:
-    unknown_word = default_unknown_word_if_None(unknown_word)
+    unknown_term = default_unknown_term_if_None(unknown_term)
     otx_bridge = default_bridge_if_None(otx_bridge)
     inx_bridge = default_bridge_if_None(inx_bridge)
 
@@ -441,14 +441,14 @@ def waymap_shop(
         x_tagmap = tagmap_shop(
             otx_bridge=otx_bridge,
             inx_bridge=inx_bridge,
-            unknown_word=unknown_word,
+            unknown_term=unknown_term,
             face_name=face_name,
             event_int=event_int,
         )
 
     return WayMap(
         otx2inx=get_empty_dict_if_None(otx2inx),
-        unknown_word=unknown_word,
+        unknown_term=unknown_term,
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
         tagmap=x_tagmap,
@@ -464,7 +464,7 @@ def get_waymap_from_dict(x_dict: dict) -> WayMap:
         otx_bridge=x_dict.get("otx_bridge"),
         inx_bridge=x_dict.get("inx_bridge"),
         otx2inx=x_dict.get("otx2inx"),
-        unknown_word=x_dict.get("unknown_word"),
+        unknown_term=x_dict.get("unknown_term"),
     )
 
 
@@ -481,7 +481,7 @@ def _check_core_attributes(new_obj, old_obj):
         old_obj.face_name != new_obj.face_name
         or old_obj.otx_bridge != new_obj.otx_bridge
         or old_obj.inx_bridge != new_obj.inx_bridge
-        or old_obj.unknown_word != new_obj.unknown_word
+        or old_obj.unknown_term != new_obj.unknown_term
     ):
         raise MapCoreAttrConflictException("Core attributes in conflict")
     if old_obj.event_int >= new_obj.event_int:

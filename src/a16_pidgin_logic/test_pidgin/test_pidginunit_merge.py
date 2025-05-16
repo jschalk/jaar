@@ -47,11 +47,11 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario2_RaiseErrorWhenDiffer
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
-def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown_word():
+def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown_term():
     # ESTABLISH
     sue_str = "Sue"
-    x_unknown_word = "UnknownWord"
-    old_pidginunit = pidginunit_shop(sue_str, 0, unknown_word=x_unknown_word)
+    x_unknown_term = "UnknownTerm"
+    old_pidginunit = pidginunit_shop(sue_str, 0, unknown_term=x_unknown_term)
     new_pidginunit = pidginunit_shop(sue_str, 1)
 
     with pytest_raises(Exception) as excinfo:

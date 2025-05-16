@@ -11,7 +11,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_tag_str,
     inx_way_str,
     otx_way_str,
-    unknown_word_str,
+    unknown_term_str,
 )
 from src.a17_creed_logic.creed_db_tool import sheet_exists, upsert_sheet
 from src.a18_etl_toolbox.tran_path import (
@@ -74,7 +74,7 @@ def test_WorldUnit_brick_pidgin_agg_df_to_otz_face_pidgin_agg_df_Scenario1_AllMa
         inx_way_str(),
         otx_bridge_str(),
         inx_bridge_str(),
-        unknown_word_str(),
+        unknown_term_str(),
     ]
     e1_way0 = [event7, sue_str, casa_otx, casa_inx, x_nan, x_nan, x_nan]
     e1_way1 = [event7, sue_str, clean_otx, clean_inx, x_nan, x_nan, x_nan]
@@ -94,7 +94,7 @@ def test_WorldUnit_brick_pidgin_agg_df_to_otz_face_pidgin_agg_df_Scenario1_AllMa
         inx_tag_str(),
         otx_bridge_str(),
         inx_bridge_str(),
-        unknown_word_str(),
+        unknown_term_str(),
     ]
     e1_tag0 = [event7, sue_str, t3am_otx, t3am_inx, x_nan, x_nan, x_nan]
     e1_tag1 = [event7, sue_str, t6am_otx, t6am_inx, x_nan, x_nan, x_nan]

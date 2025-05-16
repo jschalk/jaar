@@ -12,7 +12,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_way_str,
     inx_label_str,
     otx_label_str,
-    unknown_word_str,
+    unknown_term_str,
 )
 from src.a17_creed_logic._utils.str_a17 import brick_agg_str
 from src.a17_creed_logic.creed_db_tool import (
@@ -83,7 +83,7 @@ def test_WorldUnit_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(
         inx_name_str(),
         otx_bridge_str(),
         inx_bridge_str(),
-        unknown_word_str(),
+        unknown_term_str(),
     ]
     sue0 = [event1, sue_str, m_str, bob_str, yao_str, yao_str, yao_inx]
     sue1 = [event1, sue_str, m_str, bob_str, bob_str, bob_str, bob_inx]
@@ -116,7 +116,7 @@ def test_WorldUnit_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(
         inx_label_str(),
         otx_bridge_str(),
         inx_bridge_str(),
-        unknown_word_str(),
+        unknown_term_str(),
     ]
     sue0 = [event1, sue_str, m_str, bob_str, yao_str, yao_str, yao_inx]
     sue1 = [event1, sue_str, m_str, bob_str, bob_str, bob_str, bob_inx]
@@ -148,7 +148,7 @@ def test_WorldUnit_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(
         inx_tag_str(),
         otx_bridge_str(),
         inx_bridge_str(),
-        unknown_word_str(),
+        unknown_term_str(),
     ]
     sue0 = [event1, sue_str, m_str, bob_str, yao_str, yao_str, yao_inx]
     sue1 = [event1, sue_str, m_str, bob_str, bob_str, bob_str, bob_inx]
@@ -180,7 +180,7 @@ def test_WorldUnit_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(
         inx_way_str(),
         otx_bridge_str(),
         inx_bridge_str(),
-        unknown_word_str(),
+        unknown_term_str(),
     ]
     sue0 = [event1, sue_str, m_str, bob_str, yao_str, yao_str, yao_inx]
     sue1 = [event1, sue_str, m_str, bob_str, bob_str, bob_str, bob_inx]
@@ -252,7 +252,7 @@ def test_WorldUnit_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(
         inx_tag_str(),
         otx_bridge_str(),
         inx_bridge_str(),
-        unknown_word_str(),
+        unknown_term_str(),
     ]
     assert list(gen_tag_df.columns) == tag_file_columns
     assert len(gen_tag_df) == 2
@@ -275,7 +275,7 @@ def test_WorldUnit_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(
         inx_way_str(),
         otx_bridge_str(),
         inx_bridge_str(),
-        unknown_word_str(),
+        unknown_term_str(),
     ]
     assert list(gen_way_df.columns) == way_file_columns
     assert len(gen_way_df) == 2

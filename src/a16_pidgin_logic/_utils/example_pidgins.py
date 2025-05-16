@@ -4,7 +4,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     rcontext_str,
     type_WayStr_str,
 )
-from src.a16_pidgin_logic.pidgin_config import default_unknown_word_if_None
+from src.a16_pidgin_logic.pidgin_config import default_unknown_term_if_None
 from src.a16_pidgin_logic.map import (
     labelmap_shop,
     namemap_shop,
@@ -108,7 +108,7 @@ def get_slash_waymap() -> WayMap:
     inx_accord87_str = "accord87"
     clean_otx_str = "clean"
     clean_inx_str = "prop"
-    x_unknown_word = "UnknownWord"
+    x_unknown_term = "UnknownTerm"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
     clean_otx_way = f"{otx_accord45_str}{slash_otx_bridge}{clean_otx_str}"
@@ -116,7 +116,7 @@ def get_slash_waymap() -> WayMap:
     way_mapunit = waymap_shop(
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
-        unknown_word=x_unknown_word,
+        unknown_term=x_unknown_term,
         face_name="Sue",
     )
     way_mapunit.set_tag(clean_otx_str, clean_inx_str)
@@ -126,7 +126,7 @@ def get_slash_waymap() -> WayMap:
 
 
 def get_slash_labelmap() -> LabelMap:
-    x_unknown_word = "UnknownWord"
+    x_unknown_term = "UnknownTerm"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
     swim_otx = f"swim{slash_otx_bridge}"
@@ -136,7 +136,7 @@ def get_slash_labelmap() -> LabelMap:
     x_labelmap = labelmap_shop(
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
-        unknown_word=x_unknown_word,
+        unknown_term=x_unknown_term,
         face_name="Sue",
     )
     x_labelmap.set_otx2inx(swim_otx, swim_inx)
@@ -145,7 +145,7 @@ def get_slash_labelmap() -> LabelMap:
 
 
 def get_slash_namemap() -> NameMap:
-    x_unknown_word = "UnknownWord"
+    x_unknown_term = "UnknownTerm"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
     xio_otx = "Xio"
@@ -158,7 +158,7 @@ def get_slash_namemap() -> NameMap:
     acct_name_mapunit = namemap_shop(
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
-        unknown_word=x_unknown_word,
+        unknown_term=x_unknown_term,
         face_name="Sue",
     )
     acct_name_mapunit.set_otx2inx(xio_otx, xio_inx)
@@ -295,7 +295,7 @@ def get_casa_maison_way_otx2inx_dt() -> DataFrame:
     sweep_otx_way = create_way(clean_otx_way, "sweep")
     x_rd = default_bridge_if_None()
     e7 = 7
-    uw = default_unknown_word_if_None()
+    uw = default_unknown_term_if_None()
 
     inx_dt = DataFrame(
         columns=[
@@ -303,7 +303,7 @@ def get_casa_maison_way_otx2inx_dt() -> DataFrame:
             "event_int",
             "otx_bridge",
             "inx_bridge",
-            "unknown_word",
+            "unknown_term",
             "otx_way",
             "inx_way",
         ]
@@ -325,7 +325,7 @@ def get_casa_maison_tag_dt() -> DataFrame:
     clean_otx_str = "clean"
     sweep_otx_str = "sweep"
     x_rd = default_bridge_if_None()
-    uw = default_unknown_word_if_None()
+    uw = default_unknown_term_if_None()
     e7 = 7
 
     inx_dt = DataFrame(
@@ -334,7 +334,7 @@ def get_casa_maison_tag_dt() -> DataFrame:
             "event_int",
             "otx_bridge",
             "inx_bridge",
-            "unknown_word",
+            "unknown_term",
             "otx_tag",
             "inx_tag",
         ]
@@ -384,13 +384,13 @@ def get_slash_tagmap() -> TagMap:
     inx_accord87_str = "accord87"
     clean_otx_str = "clean"
     clean_inx_str = "prop"
-    x_unknown_word = "UnknownWord"
+    x_unknown_term = "UnknownTerm"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
     x_tagmap = tagmap_shop(
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
-        unknown_word=x_unknown_word,
+        unknown_term=x_unknown_term,
         face_name="Sue",
         event_int=7,
     )
@@ -409,13 +409,13 @@ def get_slash_waymap() -> WayMap:
     inx_accord87_way = to_way(inx_accord87_str, colon_inx_bridge)
     clean_otx_str = "clean"
     clean_inx_str = "prop"
-    x_unknown_word = "UnknownWord"
+    x_unknown_term = "UnknownTerm"
     clean_otx_way = create_way(otx_accord45_way, clean_otx_str, slash_otx_bridge)
     clean_inx_way = create_way(inx_accord87_way, clean_otx_str, colon_inx_bridge)
     x_waymap = waymap_shop(
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
-        unknown_word=x_unknown_word,
+        unknown_term=x_unknown_term,
         face_name="Sue",
         event_int=7,
         x_tagmap=get_slash_tagmap(),
@@ -427,7 +427,7 @@ def get_slash_waymap() -> WayMap:
 
 
 def get_slash_labelmap() -> LabelMap:
-    x_unknown_word = "UnknownWord"
+    x_unknown_term = "UnknownTerm"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
     swim_otx = f"swim{slash_otx_bridge}"
@@ -437,7 +437,7 @@ def get_slash_labelmap() -> LabelMap:
     x_labelmap = labelmap_shop(
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
-        unknown_word=x_unknown_word,
+        unknown_term=x_unknown_term,
         face_name="Sue",
         event_int=7,
     )
@@ -447,7 +447,7 @@ def get_slash_labelmap() -> LabelMap:
 
 
 def get_slash_namemap() -> NameMap:
-    x_unknown_word = "UnknownWord"
+    x_unknown_term = "UnknownTerm"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
     xio_otx = "Xio"
@@ -460,7 +460,7 @@ def get_slash_namemap() -> NameMap:
     x_namemap = namemap_shop(
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
-        unknown_word=x_unknown_word,
+        unknown_term=x_unknown_term,
         face_name="Sue",
         event_int=7,
     )
@@ -483,7 +483,7 @@ def get_pidgin_core_attrs_are_none_namemap() -> NameMap:
         event_int=7,
         otx_bridge=x_nan,
         inx_bridge=x_nan,
-        unknown_word=x_nan,
+        unknown_term=x_nan,
     )
     x_namemap.set_otx2inx(xio_otx, xio_inx)
     x_namemap.set_otx2inx(sue_otx, sue_inx)

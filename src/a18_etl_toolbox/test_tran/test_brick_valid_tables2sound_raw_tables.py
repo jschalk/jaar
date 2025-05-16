@@ -6,7 +6,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_bridge_str,
     inx_way_str,
     otx_way_str,
-    unknown_word_str,
+    unknown_term_str,
 )
 from src.a17_creed_logic.creed_db_tool import create_creed_sorted_table
 from src.a17_creed_logic._utils.str_a17 import brick_valid_str
@@ -74,7 +74,7 @@ VALUES
             inx_way_str(),
             otx_bridge_str(),
             inx_bridge_str(),
-            unknown_word_str(),
+            unknown_term_str(),
         ]
         create_creed_sorted_table(cursor, br00045_valid_tablename, br00045_columns)
         insert_into_clause = f"""INSERT INTO {br00045_valid_tablename} (
@@ -84,7 +84,7 @@ VALUES
 , {inx_way_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_word_str()}
+, {unknown_term_str()}
 )"""
         values_clause = f"""
 VALUES

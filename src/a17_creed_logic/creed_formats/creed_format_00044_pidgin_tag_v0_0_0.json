@@ -18,7 +18,7 @@
         "otx_tag": {
             "otx_key": true
         },
-        "unknown_word": {
+        "unknown_term": {
             "otx_key": false
         }
     },

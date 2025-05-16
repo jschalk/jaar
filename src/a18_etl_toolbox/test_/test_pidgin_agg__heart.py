@@ -14,11 +14,11 @@ def test_PidginHeartRow_Exists():
     x_event_int = 55
     x_otx_bridge = ";"
     x_inx_bridge = ";"
-    x_unknown_word = "unknown33"
+    x_unknown_term = "unknown33"
 
     # WHEN
     sue55_pidginheartrow = PidginHeartRow(
-        sue_str, x_event_int, x_otx_bridge, x_inx_bridge, x_unknown_word
+        sue_str, x_event_int, x_otx_bridge, x_inx_bridge, x_unknown_term
     )
 
     # THEN
@@ -27,7 +27,7 @@ def test_PidginHeartRow_Exists():
     assert sue55_pidginheartrow.event_int == x_event_int
     assert sue55_pidginheartrow.otx_bridge == x_otx_bridge
     assert sue55_pidginheartrow.inx_bridge == x_inx_bridge
-    assert sue55_pidginheartrow.unknown_word == x_unknown_word
+    assert sue55_pidginheartrow.unknown_term == x_unknown_term
 
 
 def test_PidginHeartUnit_Exists():
@@ -40,7 +40,7 @@ def test_PidginHeartUnit_Exists():
     assert x_pidginheartunit.event_int is None
     assert x_pidginheartunit.otx_bridges is None
     assert x_pidginheartunit.inx_bridges is None
-    assert x_pidginheartunit.unknown_words is None
+    assert x_pidginheartunit.unknown_terms is None
 
 
 def test_pidginheartunit_shop_ReturnsObj_WithNoValues():
@@ -57,7 +57,7 @@ def test_pidginheartunit_shop_ReturnsObj_WithNoValues():
     assert x_pidginheartunit.event_int == x_event_int
     assert x_pidginheartunit.otx_bridges == set()
     assert x_pidginheartunit.inx_bridges == set()
-    assert x_pidginheartunit.unknown_words == set()
+    assert x_pidginheartunit.unknown_terms == set()
 
 
 def test_pidginheartunit_shop_ReturnsObj_WithCoreValues():
@@ -66,7 +66,7 @@ def test_pidginheartunit_shop_ReturnsObj_WithCoreValues():
     x_event_int = 55
     x_otx_bridge_set = {";"}
     x_inx_bridge_set = {";"}
-    x_unknown_word_set = {"unknown33"}
+    x_unknown_term_set = {"unknown33"}
 
     # WHEN
     x_pidginheartunit = pidginheartunit_shop(
@@ -74,7 +74,7 @@ def test_pidginheartunit_shop_ReturnsObj_WithCoreValues():
         x_event_int,
         x_otx_bridge_set,
         x_inx_bridge_set,
-        x_unknown_word_set,
+        x_unknown_term_set,
     )
 
     # THEN
@@ -84,7 +84,7 @@ def test_pidginheartunit_shop_ReturnsObj_WithCoreValues():
     assert x_pidginheartunit.otx_bridges == x_otx_bridge_set
     assert x_pidginheartunit.inx_bridges == x_inx_bridge_set
     assert ";" in x_pidginheartunit.inx_bridges
-    assert x_pidginheartunit.unknown_words == x_unknown_word_set
+    assert x_pidginheartunit.unknown_terms == x_unknown_term_set
 
 
 def test_PidginHeartUnit_add_otx_bridge_ChangesAttr_Scenario0_AddToEmptySet():
@@ -97,7 +97,7 @@ def test_PidginHeartUnit_add_otx_bridge_ChangesAttr_Scenario0_AddToEmptySet():
     print(f"{colon_str=}")
     assert colon_str not in x_pidginheartunit.otx_bridges
     assert colon_str not in x_pidginheartunit.inx_bridges
-    assert colon_str not in x_pidginheartunit.unknown_words
+    assert colon_str not in x_pidginheartunit.unknown_terms
 
     # WHEN
     x_pidginheartunit.add_otx_bridge(colon_str)
@@ -105,7 +105,7 @@ def test_PidginHeartUnit_add_otx_bridge_ChangesAttr_Scenario0_AddToEmptySet():
     # THEN
     assert colon_str in x_pidginheartunit.otx_bridges
     assert colon_str not in x_pidginheartunit.inx_bridges
-    assert colon_str not in x_pidginheartunit.unknown_words
+    assert colon_str not in x_pidginheartunit.unknown_terms
 
 
 def test_PidginHeartUnit_add_otx_bridge_ChangesAttr_Scenario1_AddNoneToEmptySet():
@@ -115,7 +115,7 @@ def test_PidginHeartUnit_add_otx_bridge_ChangesAttr_Scenario1_AddNoneToEmptySet(
     x_pidginheartunit = pidginheartunit_shop(x_face_name, x_event_int)
     assert None not in x_pidginheartunit.otx_bridges
     assert None not in x_pidginheartunit.inx_bridges
-    assert None not in x_pidginheartunit.unknown_words
+    assert None not in x_pidginheartunit.unknown_terms
 
     # WHEN
     x_pidginheartunit.add_otx_bridge(None)
@@ -123,7 +123,7 @@ def test_PidginHeartUnit_add_otx_bridge_ChangesAttr_Scenario1_AddNoneToEmptySet(
     # THEN
     assert None in x_pidginheartunit.otx_bridges
     assert None not in x_pidginheartunit.inx_bridges
-    assert None not in x_pidginheartunit.unknown_words
+    assert None not in x_pidginheartunit.unknown_terms
 
 
 def test_PidginHeartUnit_add_otx_bridge_ChangesAttr_Scenario2_SetWithNoneChangesWhenNonNoneElementAdded():
@@ -175,7 +175,7 @@ def test_PidginHeartUnit_add_inx_bridge_ChangesAttr_Scenario0_AddToEmptySet():
     colon_str = ":"
     assert colon_str not in x_pidginheartunit.otx_bridges
     assert colon_str not in x_pidginheartunit.inx_bridges
-    assert colon_str not in x_pidginheartunit.unknown_words
+    assert colon_str not in x_pidginheartunit.unknown_terms
 
     # WHEN
     x_pidginheartunit.add_inx_bridge(colon_str)
@@ -183,7 +183,7 @@ def test_PidginHeartUnit_add_inx_bridge_ChangesAttr_Scenario0_AddToEmptySet():
     # THEN
     assert colon_str not in x_pidginheartunit.otx_bridges
     assert colon_str in x_pidginheartunit.inx_bridges
-    assert colon_str not in x_pidginheartunit.unknown_words
+    assert colon_str not in x_pidginheartunit.unknown_terms
 
 
 def test_PidginHeartUnit_add_inx_bridge_ChangesAttr_Scenario1_AddNoneToEmptySet():
@@ -193,7 +193,7 @@ def test_PidginHeartUnit_add_inx_bridge_ChangesAttr_Scenario1_AddNoneToEmptySet(
     x_pidginheartunit = pidginheartunit_shop(x_face_name, x_event_int)
     assert None not in x_pidginheartunit.otx_bridges
     assert None not in x_pidginheartunit.inx_bridges
-    assert None not in x_pidginheartunit.unknown_words
+    assert None not in x_pidginheartunit.unknown_terms
 
     # WHEN
     x_pidginheartunit.add_inx_bridge(None)
@@ -201,7 +201,7 @@ def test_PidginHeartUnit_add_inx_bridge_ChangesAttr_Scenario1_AddNoneToEmptySet(
     # THEN
     assert None not in x_pidginheartunit.otx_bridges
     assert None in x_pidginheartunit.inx_bridges
-    assert None not in x_pidginheartunit.unknown_words
+    assert None not in x_pidginheartunit.unknown_terms
 
 
 def test_PidginHeartUnit_add_inx_bridge_ChangesAttr_Scenario2_SetWithNoneChangesWhenNonNoneElementAdded():
@@ -245,7 +245,7 @@ def test_PidginHeartUnit_add_inx_bridge_ChangesAttr_Scenario3_NumpyType():
     assert len(x_pidginheartunit.inx_bridges) == 1
 
 
-def test_PidginHeartUnit_add_unknown_word_ChangesAttr_Scenario0_AddToEmptySet():
+def test_PidginHeartUnit_add_unknown_term_ChangesAttr_Scenario0_AddToEmptySet():
     # ESTABLISH
     x_face_name = "Sue"
     x_event_int = 55
@@ -253,74 +253,74 @@ def test_PidginHeartUnit_add_unknown_word_ChangesAttr_Scenario0_AddToEmptySet():
     colon_str = ":"
     assert colon_str not in x_pidginheartunit.otx_bridges
     assert colon_str not in x_pidginheartunit.inx_bridges
-    assert colon_str not in x_pidginheartunit.unknown_words
+    assert colon_str not in x_pidginheartunit.unknown_terms
 
     # WHEN
-    x_pidginheartunit.add_unknown_word(colon_str)
+    x_pidginheartunit.add_unknown_term(colon_str)
 
     # THEN
     assert colon_str not in x_pidginheartunit.otx_bridges
     assert colon_str not in x_pidginheartunit.inx_bridges
-    assert colon_str in x_pidginheartunit.unknown_words
+    assert colon_str in x_pidginheartunit.unknown_terms
 
 
-def test_PidginHeartUnit_add_unknown_word_ChangesAttr_Scenario1_AddNoneToEmptySet():
+def test_PidginHeartUnit_add_unknown_term_ChangesAttr_Scenario1_AddNoneToEmptySet():
     # ESTABLISH
     x_face_name = "Sue"
     x_event_int = 55
     x_pidginheartunit = pidginheartunit_shop(x_face_name, x_event_int)
     assert None not in x_pidginheartunit.otx_bridges
     assert None not in x_pidginheartunit.inx_bridges
-    assert None not in x_pidginheartunit.unknown_words
+    assert None not in x_pidginheartunit.unknown_terms
 
     # WHEN
-    x_pidginheartunit.add_unknown_word(None)
+    x_pidginheartunit.add_unknown_term(None)
 
     # THEN
     assert None not in x_pidginheartunit.otx_bridges
     assert None not in x_pidginheartunit.inx_bridges
-    assert None in x_pidginheartunit.unknown_words
+    assert None in x_pidginheartunit.unknown_terms
 
 
-def test_PidginHeartUnit_add_unknown_word_ChangesAttr_Scenario2_SetWithNoneChangesWhenNonNoneElementAdded():
+def test_PidginHeartUnit_add_unknown_term_ChangesAttr_Scenario2_SetWithNoneChangesWhenNonNoneElementAdded():
     # ESTABLISH
     x_face_name = "Sue"
     x_event_int = 55
     x_pidginheartunit = pidginheartunit_shop(x_face_name, x_event_int)
-    x_pidginheartunit.add_unknown_word(None)
-    assert None in x_pidginheartunit.unknown_words
+    x_pidginheartunit.add_unknown_term(None)
+    assert None in x_pidginheartunit.unknown_terms
 
     # WHEN / THEN
-    x_pidginheartunit.add_unknown_word(None)
-    assert None in x_pidginheartunit.unknown_words
+    x_pidginheartunit.add_unknown_term(None)
+    assert None in x_pidginheartunit.unknown_terms
 
     # WHEN / THEN
     colon_str = ":"
-    x_pidginheartunit.add_unknown_word(colon_str)
-    assert colon_str in x_pidginheartunit.unknown_words
-    assert None not in x_pidginheartunit.unknown_words
+    x_pidginheartunit.add_unknown_term(colon_str)
+    assert colon_str in x_pidginheartunit.unknown_terms
+    assert None not in x_pidginheartunit.unknown_terms
 
     # WHEN / THEN
-    x_pidginheartunit.add_unknown_word(None)
-    assert colon_str in x_pidginheartunit.unknown_words
-    assert None not in x_pidginheartunit.unknown_words
+    x_pidginheartunit.add_unknown_term(None)
+    assert colon_str in x_pidginheartunit.unknown_terms
+    assert None not in x_pidginheartunit.unknown_terms
 
 
-def test_PidginHeartUnit_add_unknown_word_ChangesAttr_Scenario3_NumpyType():
+def test_PidginHeartUnit_add_unknown_term_ChangesAttr_Scenario3_NumpyType():
     # ESTABLISH
     x_face_name = "Sue"
     x_event_int = 55
     x_pidginheartunit = pidginheartunit_shop(x_face_name, x_event_int)
 
     # WHEN / THEN
-    x_pidginheartunit.add_unknown_word(float("nan"))
-    assert None in x_pidginheartunit.unknown_words
-    assert len(x_pidginheartunit.unknown_words) == 1
+    x_pidginheartunit.add_unknown_term(float("nan"))
+    assert None in x_pidginheartunit.unknown_terms
+    assert len(x_pidginheartunit.unknown_terms) == 1
 
     # WHEN / THEN
-    x_pidginheartunit.add_unknown_word(float("nan"))
-    assert None in x_pidginheartunit.unknown_words
-    assert len(x_pidginheartunit.unknown_words) == 1
+    x_pidginheartunit.add_unknown_term(float("nan"))
+    assert None in x_pidginheartunit.unknown_terms
+    assert len(x_pidginheartunit.unknown_terms) == 1
 
 
 def test_create_pidginheartunit_ReturnsObj():
@@ -329,11 +329,11 @@ def test_create_pidginheartunit_ReturnsObj():
     x_event_int = 55
     x_otx_bridge = ";"
     x_inx_bridge = ";"
-    x_unknown_word = "unknown33"
+    x_unknown_term = "unknown33"
 
     # WHEN
     x_pidginheartunit = create_pidginheartunit(
-        x_face_name, x_event_int, x_otx_bridge, x_inx_bridge, x_unknown_word
+        x_face_name, x_event_int, x_otx_bridge, x_inx_bridge, x_unknown_term
     )
 
     # THEN
@@ -341,13 +341,13 @@ def test_create_pidginheartunit_ReturnsObj():
     x_event_int = x_event_int
     x_otx_bridge_set = {x_otx_bridge}
     x_inx_bridge_set = {x_inx_bridge}
-    x_unknown_word_set = {x_unknown_word}
+    x_unknown_term_set = {x_unknown_term}
     assert x_pidginheartunit
     assert x_pidginheartunit.face_name == x_face_name
     assert x_pidginheartunit.event_int == x_event_int
     assert x_pidginheartunit.otx_bridges == x_otx_bridge_set
     assert x_pidginheartunit.inx_bridges == x_inx_bridge_set
-    assert x_pidginheartunit.unknown_words == x_unknown_word_set
+    assert x_pidginheartunit.unknown_terms == x_unknown_term_set
 
 
 def test_PidginHeartUnit_is_valid_ReturnsObj():
@@ -411,7 +411,7 @@ def test_PidginHeartUnit_get_valid_pidginheartrow_ReturnsObj_Scenario1():
     assert s55_pidginheartrow.event_int == e55
     assert s55_pidginheartrow.otx_bridge == ";"
     assert s55_pidginheartrow.inx_bridge == ":"
-    assert s55_pidginheartrow.unknown_word == uk33
+    assert s55_pidginheartrow.unknown_term == uk33
 
 
 def test_PidginHeartUnit_get_valid_pidginheartrow_ReturnsObj_Scenario2():
@@ -429,7 +429,7 @@ def test_PidginHeartUnit_get_valid_pidginheartrow_ReturnsObj_Scenario2():
     assert s55_pidginheartrow.event_int == e55
     assert s55_pidginheartrow.otx_bridge is None
     assert s55_pidginheartrow.inx_bridge is None
-    assert s55_pidginheartrow.unknown_word is None
+    assert s55_pidginheartrow.unknown_term is None
 
 
 def test_PidginHeartUnit_get_valid_pidginheartrow_ReturnsObj_Scenario3():
@@ -517,9 +517,9 @@ def test_PidginHeartBook_eval_pidginheartrow_SetsAttr_Scenario0_EmptyDict():
     x_event_int = 55
     x_otx_bridge = ";"
     x_inx_bridge = ";"
-    x_unknown_word = "unknown33"
+    x_unknown_term = "unknown33"
     sue55_pidginheartrow = PidginHeartRow(
-        sue_str, x_event_int, x_otx_bridge, x_inx_bridge, x_unknown_word
+        sue_str, x_event_int, x_otx_bridge, x_inx_bridge, x_unknown_term
     )
     x_pidginheartbook = pidginheartbook_shop()
     assert x_pidginheartbook.pidginheartunit_exists(x_event_int) is False
@@ -534,7 +534,7 @@ def test_PidginHeartBook_eval_pidginheartrow_SetsAttr_Scenario0_EmptyDict():
     assert x_pidginheartunit.event_int == x_event_int
     assert x_otx_bridge in x_pidginheartunit.otx_bridges
     assert x_inx_bridge in x_pidginheartunit.inx_bridges
-    assert x_unknown_word in x_pidginheartunit.unknown_words
+    assert x_unknown_term in x_pidginheartunit.unknown_terms
 
 
 def test_PidginHeartBook_eval_pidginheartrow_SetsAttr_Scenario0_EmptyDict():
@@ -543,9 +543,9 @@ def test_PidginHeartBook_eval_pidginheartrow_SetsAttr_Scenario0_EmptyDict():
     x_event_int = 55
     x_otx_bridge = ";"
     x_inx_bridge = ";"
-    x_unknown_word = "unknown33"
+    x_unknown_term = "unknown33"
     sue55_pidginheartrow = PidginHeartRow(
-        sue_str, x_event_int, x_otx_bridge, x_inx_bridge, x_unknown_word
+        sue_str, x_event_int, x_otx_bridge, x_inx_bridge, x_unknown_term
     )
     x_pidginheartbook = pidginheartbook_shop()
     assert x_pidginheartbook.pidginheartunit_exists(x_event_int) is False
@@ -560,7 +560,7 @@ def test_PidginHeartBook_eval_pidginheartrow_SetsAttr_Scenario0_EmptyDict():
     assert x_pidginheartunit.event_int == x_event_int
     assert x_otx_bridge in x_pidginheartunit.otx_bridges
     assert x_inx_bridge in x_pidginheartunit.inx_bridges
-    assert x_unknown_word in x_pidginheartunit.unknown_words
+    assert x_unknown_term in x_pidginheartunit.unknown_terms
 
 
 def test_PidginHeartBook_eval_pidginheartrow_SetsAttr_Scenario1_MultipleRowsAtSameEvent():
@@ -593,7 +593,7 @@ def test_PidginHeartBook_eval_pidginheartrow_SetsAttr_Scenario1_MultipleRowsAtSa
     assert gen_pidginheartunit.event_int == x_event_int
     assert gen_pidginheartunit.otx_bridges == {colon_str, slash_str}
     assert gen_pidginheartunit.inx_bridges == {comma_str, semic_str}
-    assert gen_pidginheartunit.unknown_words == {x_unk33, x_unk44}
+    assert gen_pidginheartunit.unknown_terms == {x_unk33, x_unk44}
 
 
 def test_PidginHeartBook_eval_pidginheartrow_SetsAttr_Scenario2_NoneElementIsChangedCorrectly():
@@ -619,7 +619,7 @@ def test_PidginHeartBook_eval_pidginheartrow_SetsAttr_Scenario2_NoneElementIsCha
     assert gen_pidginheartunit.event_int == x_event_int
     assert gen_pidginheartunit.otx_bridges == {colon_str, slash_str}
     assert gen_pidginheartunit.inx_bridges == {None}
-    assert gen_pidginheartunit.unknown_words == {x_unk44}
+    assert gen_pidginheartunit.unknown_terms == {x_unk44}
 
 
 def test_PidginHeartBook_add_pidginheartrow_SetsAttr_Scenario2_NoneElementIsChangedCorrectly():
@@ -641,7 +641,7 @@ def test_PidginHeartBook_add_pidginheartrow_SetsAttr_Scenario2_NoneElementIsChan
     assert gen_pidginheartunit.event_int == x_event_int
     assert gen_pidginheartunit.otx_bridges == {colon_str}
     assert gen_pidginheartunit.inx_bridges == {None}
-    assert gen_pidginheartunit.unknown_words == {uk44}
+    assert gen_pidginheartunit.unknown_terms == {uk44}
 
 
 def test_PidginHeartBook_event_int_is_valid_ReturnsObj_Scenario0_Empty():

@@ -19,7 +19,7 @@
 # #     "event_int": 0,
 # #     "otx_bridge": ";",
 # #     "inx_bridge": ";",
-# #     "unknown_word": "UNKNOWN",
+# #     "unknown_term": "UNKNOWN",
 # #     "namemap": {
 # #         "otx2inx": {},
 # #     },

@@ -41,7 +41,7 @@ from src.a16_pidgin_logic.map import (
 )
 from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_args_class_types,
-    default_unknown_word_if_None,
+    default_unknown_term_if_None,
     pidginable_class_types,
     get_pidginable_args,
     find_set_otx_inx_args,
@@ -384,7 +384,7 @@ def test_PidginUnit_Exists():
     assert not x_pidginunit.namemap
     assert not x_pidginunit.tagmap
     assert not x_pidginunit.waymap
-    assert not x_pidginunit.unknown_word
+    assert not x_pidginunit.unknown_term
     assert not x_pidginunit.otx_bridge
     assert not x_pidginunit.inx_bridge
     assert not x_pidginunit.face_name
@@ -400,7 +400,7 @@ def test_pidginunit_shop_ReturnsObj_scenario0():
     # THEN
     assert sue_pidginunit.face_name == sue_str
     assert sue_pidginunit.event_int == 0
-    assert sue_pidginunit.unknown_word == default_unknown_word_if_None()
+    assert sue_pidginunit.unknown_term == default_unknown_term_if_None()
     assert sue_pidginunit.otx_bridge == default_bridge_if_None()
     assert sue_pidginunit.inx_bridge == default_bridge_if_None()
     assert sue_pidginunit.labelmap == labelmap_shop(face_name=sue_str)
@@ -408,19 +408,19 @@ def test_pidginunit_shop_ReturnsObj_scenario0():
     assert sue_pidginunit.tagmap == tagmap_shop(face_name=sue_str)
     assert sue_pidginunit.waymap == waymap_shop(face_name=sue_str)
     assert sue_pidginunit.namemap.event_int == 0
-    assert sue_pidginunit.namemap.unknown_word == default_unknown_word_if_None()
+    assert sue_pidginunit.namemap.unknown_term == default_unknown_term_if_None()
     assert sue_pidginunit.namemap.otx_bridge == default_bridge_if_None()
     assert sue_pidginunit.namemap.inx_bridge == default_bridge_if_None()
     assert sue_pidginunit.labelmap.event_int == 0
-    assert sue_pidginunit.labelmap.unknown_word == default_unknown_word_if_None()
+    assert sue_pidginunit.labelmap.unknown_term == default_unknown_term_if_None()
     assert sue_pidginunit.labelmap.otx_bridge == default_bridge_if_None()
     assert sue_pidginunit.labelmap.inx_bridge == default_bridge_if_None()
     assert sue_pidginunit.tagmap.event_int == 0
-    assert sue_pidginunit.tagmap.unknown_word == default_unknown_word_if_None()
+    assert sue_pidginunit.tagmap.unknown_term == default_unknown_term_if_None()
     assert sue_pidginunit.tagmap.otx_bridge == default_bridge_if_None()
     assert sue_pidginunit.tagmap.inx_bridge == default_bridge_if_None()
     assert sue_pidginunit.waymap.event_int == 0
-    assert sue_pidginunit.waymap.unknown_word == default_unknown_word_if_None()
+    assert sue_pidginunit.waymap.unknown_term == default_unknown_term_if_None()
     assert sue_pidginunit.waymap.otx_bridge == default_bridge_if_None()
     assert sue_pidginunit.waymap.inx_bridge == default_bridge_if_None()
 
@@ -429,7 +429,7 @@ def test_pidginunit_shop_ReturnsObj_scenario1():
     # ESTABLISH
     sue_str = "Sue"
     five_event_int = 5
-    y_uk = "UnknownWord"
+    y_uk = "UnknownTerm"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
 
@@ -440,7 +440,7 @@ def test_pidginunit_shop_ReturnsObj_scenario1():
 
     # THEN
     assert sue_pidginunit.event_int == five_event_int
-    assert sue_pidginunit.unknown_word == y_uk
+    assert sue_pidginunit.unknown_term == y_uk
     assert sue_pidginunit.otx_bridge == slash_otx_bridge
     assert sue_pidginunit.inx_bridge == colon_inx_bridge
 
@@ -459,22 +459,22 @@ def test_pidginunit_shop_ReturnsObj_scenario1():
 
     assert sue_pidginunit.namemap.face_name == sue_str
     assert sue_pidginunit.namemap.event_int == five_event_int
-    assert sue_pidginunit.namemap.unknown_word == y_uk
+    assert sue_pidginunit.namemap.unknown_term == y_uk
     assert sue_pidginunit.namemap.otx_bridge == slash_otx_bridge
     assert sue_pidginunit.namemap.inx_bridge == colon_inx_bridge
     assert sue_pidginunit.labelmap.face_name == sue_str
     assert sue_pidginunit.labelmap.event_int == five_event_int
-    assert sue_pidginunit.labelmap.unknown_word == y_uk
+    assert sue_pidginunit.labelmap.unknown_term == y_uk
     assert sue_pidginunit.labelmap.otx_bridge == slash_otx_bridge
     assert sue_pidginunit.labelmap.inx_bridge == colon_inx_bridge
     assert sue_pidginunit.tagmap.face_name == sue_str
     assert sue_pidginunit.tagmap.event_int == five_event_int
-    assert sue_pidginunit.tagmap.unknown_word == y_uk
+    assert sue_pidginunit.tagmap.unknown_term == y_uk
     assert sue_pidginunit.tagmap.otx_bridge == slash_otx_bridge
     assert sue_pidginunit.tagmap.inx_bridge == colon_inx_bridge
     assert sue_pidginunit.waymap.face_name == sue_str
     assert sue_pidginunit.waymap.event_int == five_event_int
-    assert sue_pidginunit.waymap.unknown_word == y_uk
+    assert sue_pidginunit.waymap.unknown_term == y_uk
     assert sue_pidginunit.waymap.otx_bridge == slash_otx_bridge
     assert sue_pidginunit.waymap.inx_bridge == colon_inx_bridge
 
@@ -492,7 +492,7 @@ def test_pidginunit_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_
     x_pidginunit = pidginunit_shop(
         face_name=bob_str,
         event_int=event7,
-        unknown_word=x_nan,
+        unknown_term=x_nan,
         otx_bridge=x_nan,
         inx_bridge=x_nan,
     )
@@ -500,7 +500,7 @@ def test_pidginunit_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_
     # THEN
     assert x_pidginunit.face_name == bob_str
     assert x_pidginunit.event_int == event7
-    assert x_pidginunit.unknown_word == default_unknown_word_if_None()
+    assert x_pidginunit.unknown_term == default_unknown_term_if_None()
     assert x_pidginunit.otx_bridge == default_bridge_if_None()
     assert x_pidginunit.inx_bridge == default_bridge_if_None()
 
@@ -567,19 +567,19 @@ def test_PidginUnit_set_mapunit_RaisesErrorIf_mapunit_inx_bridge_IsNotSame():
     assert str(excinfo.value) == exception_str
 
 
-def test_PidginUnit_set_mapunit_RaisesErrorIf_mapunit_unknown_word_IsNotSame():
+def test_PidginUnit_set_mapunit_RaisesErrorIf_mapunit_unknown_term_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    casa_unknown_word = "Unknown_casa"
-    namemap = namemap_shop(unknown_word=casa_unknown_word, face_name=sue_str)
-    assert sue_pidginunit.unknown_word != namemap.unknown_word
+    casa_unknown_term = "Unknown_casa"
+    namemap = namemap_shop(unknown_term=casa_unknown_term, face_name=sue_str)
+    assert sue_pidginunit.unknown_term != namemap.unknown_term
     assert sue_pidginunit.namemap != namemap
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_pidginunit.set_namemap(namemap)
-    exception_str = f"set_mapcore Error: PidginUnit unknown_word is '{sue_pidginunit.unknown_word}', MapCore is '{casa_unknown_word}'."
+    exception_str = f"set_mapcore Error: PidginUnit unknown_term is '{sue_pidginunit.unknown_term}', MapCore is '{casa_unknown_term}'."
     assert str(excinfo.value) == exception_str
 
 

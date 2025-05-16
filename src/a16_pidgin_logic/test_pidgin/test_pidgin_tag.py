@@ -3,10 +3,10 @@ from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str
 from src.a16_pidgin_logic._utils.str_a16 import (
     otx_bridge_str,
     inx_bridge_str,
-    unknown_word_str,
+    unknown_term_str,
     otx2inx_str,
 )
-from src.a16_pidgin_logic.pidgin_config import default_unknown_word_if_None
+from src.a16_pidgin_logic.pidgin_config import default_unknown_term_if_None
 from src.a16_pidgin_logic.map import (
     TagMap,
     tagmap_shop,
@@ -25,7 +25,7 @@ def test_TagMap_Exists():
     assert not x_tagmap.face_name
     assert not x_tagmap.event_int
     assert not x_tagmap.otx2inx
-    assert not x_tagmap.unknown_word
+    assert not x_tagmap.unknown_term
     assert not x_tagmap.otx_bridge
     assert not x_tagmap.inx_bridge
 
@@ -38,7 +38,7 @@ def test_tagmap_shop_ReturnsObj_scenario0_WithoutParameters():
     assert not x_tagmap.face_name
     assert x_tagmap.event_int == 0
     assert x_tagmap.otx2inx == {}
-    assert x_tagmap.unknown_word == default_unknown_word_if_None()
+    assert x_tagmap.unknown_term == default_unknown_term_if_None()
     assert x_tagmap.otx_bridge == default_bridge_if_None()
     assert x_tagmap.inx_bridge == default_bridge_if_None()
 
@@ -50,7 +50,7 @@ def test_tagmap_shop_ReturnsObj_scenario1_WithParameters():
     bob_str = "Bob"
     event7 = 7
     otx2inx = {xio_str: sue_str}
-    x_unknown_word = "UnknownTagId"
+    x_unknown_term = "UnknownTagId"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
 
@@ -59,7 +59,7 @@ def test_tagmap_shop_ReturnsObj_scenario1_WithParameters():
         face_name=bob_str,
         event_int=event7,
         otx2inx=otx2inx,
-        unknown_word=x_unknown_word,
+        unknown_term=x_unknown_term,
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
     )
@@ -68,7 +68,7 @@ def test_tagmap_shop_ReturnsObj_scenario1_WithParameters():
     assert x_tagmap.face_name == bob_str
     assert x_tagmap.event_int == event7
     assert x_tagmap.otx2inx == otx2inx
-    assert x_tagmap.unknown_word == x_unknown_word
+    assert x_tagmap.unknown_term == x_unknown_term
     assert x_tagmap.otx_bridge == slash_otx_bridge
     assert x_tagmap.inx_bridge == colon_inx_bridge
 
@@ -87,7 +87,7 @@ def test_tagmap_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_floa
         face_name=bob_str,
         event_int=event7,
         otx2inx=otx2inx,
-        unknown_word=x_nan,
+        unknown_term=x_nan,
         otx_bridge=x_nan,
         inx_bridge=x_nan,
     )
@@ -96,7 +96,7 @@ def test_tagmap_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_floa
     assert x_tagmap.face_name == bob_str
     assert x_tagmap.event_int == event7
     assert x_tagmap.otx2inx == otx2inx
-    assert x_tagmap.unknown_word == default_unknown_word_if_None()
+    assert x_tagmap.unknown_term == default_unknown_term_if_None()
     assert x_tagmap.otx_bridge == default_bridge_if_None()
     assert x_tagmap.inx_bridge == default_bridge_if_None()
 
@@ -117,20 +117,20 @@ def test_TagMap_set_all_otx2inx_SetsAttr():
     assert x_tagmap.otx2inx == x_otx2inx
 
 
-def test_TagMap_set_all_otx2inx_RaisesErrorIf_unknown_word_IsKeyIn_otx2inx():
+def test_TagMap_set_all_otx2inx_RaisesErrorIf_unknown_term_IsKeyIn_otx2inx():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     zia_str = "Zia"
-    x_unknown_word = "UnknownTagId"
-    x_tagmap = tagmap_shop(None, unknown_word=x_unknown_word)
-    x_otx2inx = {xio_str: sue_str, x_unknown_word: zia_str}
+    x_unknown_term = "UnknownTagId"
+    x_tagmap = tagmap_shop(None, unknown_term=x_unknown_term)
+    x_otx2inx = {xio_str: sue_str, x_unknown_term: zia_str}
     assert x_tagmap.otx2inx != x_otx2inx
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         x_tagmap.set_all_otx2inx(x_otx2inx, True)
-    exception_str = f"otx2inx cannot have unknown_word '{x_unknown_word}' in any str. Affected keys include ['{x_unknown_word}']."
+    exception_str = f"otx2inx cannot have unknown_term '{x_unknown_term}' in any str. Affected keys include ['{x_unknown_term}']."
     assert str(excinfo.value) == exception_str
 
 
@@ -139,9 +139,9 @@ def test_TagMap_set_all_otx2inx_DoesNotRaiseErrorIfParameterSetToTrue():
     xio_str = "Xio"
     sue_str = "Sue"
     zia_str = "Zia"
-    x_unknown_word = "UnknownTagId"
+    x_unknown_term = "UnknownTagId"
     x_tagmap = tagmap_shop(None)
-    x_otx2inx = {xio_str: sue_str, x_unknown_word: zia_str}
+    x_otx2inx = {xio_str: sue_str, x_unknown_term: zia_str}
     assert x_tagmap.otx2inx != x_otx2inx
 
     # WHEN
@@ -256,21 +256,21 @@ def test_TagMap_del_otx2inx_SetsAttr():
     assert x_tagmap.otx2inx_exists(xio_str, sue_str) is False
 
 
-def test_TagMap_unknown_word_in_otx2inx_ReturnsObj():
+def test_TagMap_unknown_term_in_otx2inx_ReturnsObj():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     zia_str = "Zia"
-    x_unknown_word = "UnknownTagId"
-    x_tagmap = tagmap_shop(None, unknown_word=x_unknown_word)
+    x_unknown_term = "UnknownTagId"
+    x_tagmap = tagmap_shop(None, unknown_term=x_unknown_term)
     x_tagmap.set_otx2inx(xio_str, sue_str)
-    assert x_tagmap._unknown_word_in_otx2inx() is False
+    assert x_tagmap._unknown_term_in_otx2inx() is False
 
     # WHEN
-    x_tagmap.set_otx2inx(zia_str, x_unknown_word)
+    x_tagmap.set_otx2inx(zia_str, x_unknown_term)
 
     # THEN
-    assert x_tagmap._unknown_word_in_otx2inx()
+    assert x_tagmap._unknown_term_in_otx2inx()
 
 
 def test_TagMap_reveal_inx_ReturnsObjAndSetsAttr_tag():
@@ -315,7 +315,7 @@ def test_TagMap_get_dict_ReturnsObj():
     x1_way_map_dict = {
         otx_bridge_str(): x_tagmap.otx_bridge,
         inx_bridge_str(): x_tagmap.inx_bridge,
-        unknown_word_str(): x_tagmap.unknown_word,
+        unknown_term_str(): x_tagmap.unknown_term,
         otx2inx_str(): {},
         face_name_str(): x_tagmap.face_name,
         event_int_str(): x_tagmap.event_int,
@@ -329,7 +329,7 @@ def test_TagMap_get_dict_ReturnsObj():
     x2_way_map_dict = {
         otx_bridge_str(): x_tagmap.otx_bridge,
         inx_bridge_str(): x_tagmap.inx_bridge,
-        unknown_word_str(): x_tagmap.unknown_word,
+        unknown_term_str(): x_tagmap.unknown_term,
         otx2inx_str(): {clean_otx: clean_inx},
         face_name_str(): sue_str,
         event_int_str(): event7,
@@ -352,7 +352,7 @@ def test_TagMap_get_json_ReturnsObj():
   "{inx_bridge_str()}": "{x_tagmap.inx_bridge}",
   "{otx2inx_str()}": {{}},
   "{otx_bridge_str()}": "{x_tagmap.otx_bridge}",
-  "{unknown_word_str()}": "{x_tagmap.unknown_word}"
+  "{unknown_term_str()}": "{x_tagmap.unknown_term}"
 }}"""
     print(f"           {x1_way_map_json=}")
     print(f"{x_tagmap.get_json()=}")
@@ -371,7 +371,7 @@ def test_TagMap_get_json_ReturnsObj():
     "{clean_otx}": "{clean_inx}"
   }},
   "{otx_bridge_str()}": "{x_tagmap.otx_bridge}",
-  "{unknown_word_str()}": "{x_tagmap.unknown_word}"
+  "{unknown_term_str()}": "{x_tagmap.unknown_term}"
 }}"""
     print(f"           {x2_way_map_json=}")
     print(f"{x_tagmap.get_json()=}")
@@ -520,11 +520,11 @@ def test_inherit_tagmap_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_bridge(
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
-def test_inherit_tagmap_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown_word():
+def test_inherit_tagmap_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown_term():
     # ESTABLISH
     sue_str = "Sue"
-    x_unknown_word = "UnknownWord"
-    old_tagmap = tagmap_shop(sue_str, 0, unknown_word=x_unknown_word)
+    x_unknown_term = "UnknownTerm"
+    old_tagmap = tagmap_shop(sue_str, 0, unknown_term=x_unknown_term)
     new_tagmap = tagmap_shop(sue_str, 1)
 
     with pytest_raises(Exception) as excinfo:

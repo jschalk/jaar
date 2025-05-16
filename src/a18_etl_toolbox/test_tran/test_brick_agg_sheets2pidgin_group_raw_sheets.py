@@ -6,7 +6,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_bridge_str,
     inx_label_str,
     otx_label_str,
-    unknown_word_str,
+    unknown_term_str,
 )
 from src.a17_creed_logic._utils.str_a17 import brick_agg_str
 from src.a17_creed_logic.creed_db_tool import get_sheet_names, upsert_sheet
@@ -109,7 +109,7 @@ def test_etl_brick_agg_dfs_to_pidgin_label_raw_CreatesFile_Scenario1_MultipleCre
         inx_label_str(),
         otx_bridge_str(),
         inx_bridge_str(),
-        unknown_word_str(),
+        unknown_term_str(),
     ]
     sue0 = [event1, sue_str, m_str, bob_str, yao_str, yao_str, yao_inx]
     sue1 = [event1, sue_str, m_str, bob_str, bob_str, bob_str, bob_inx]
@@ -187,7 +187,7 @@ def test_etl_brick_agg_dfs_to_pidgin_label_raw_CreatesFile_Scenario2_WorldUnit_e
         inx_label_str(),
         otx_bridge_str(),
         inx_bridge_str(),
-        unknown_word_str(),
+        unknown_term_str(),
     ]
     sue0 = [event1, sue_str, m_str, bob_str, yao_str, yao_str, yao_inx]
     sue1 = [event1, sue_str, m_str, bob_str, bob_str, bob_str, bob_inx]

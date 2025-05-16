@@ -7,7 +7,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     inx_name_str,
     otx_bridge_str,
     otx_name_str,
-    unknown_word_str,
+    unknown_term_str,
 )
 from src.a17_creed_logic._utils.str_a17 import brick_valid_str
 from src.a17_creed_logic.creed_db_tool import (
@@ -165,7 +165,7 @@ def test_etl_brick_creeds_to_otz_face_creeds_Scenario2_PidginDimenCreedsAreNotLo
         inx_name_str(),
         otx_bridge_str(),
         otx_name_str(),
-        unknown_word_str(),
+        unknown_term_str(),
     ]
     sue43_0 = [event3, sue_str, ":", "Bob", ":", "Bobby", "Unknown"]
     sue43_1 = [event3, sue_str, ":", "Bob", ":", "Bobby", "Unknown"]

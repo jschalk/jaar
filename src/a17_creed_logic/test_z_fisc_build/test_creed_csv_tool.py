@@ -83,10 +83,10 @@ def test_create_init_stance_creed_csv_strs_ReturnsObj_Scenario0_EmptyFiscUnit(
         "br00027": "fisc_tag,owner_name,idea_way,rcontext,rcontext_idea_active_requisite\n",
         "br00028": "fisc_tag,owner_name,idea_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool\n",
         "br00029": "fisc_tag,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit\n",
-        "br00042": "otx_label,inx_label,otx_bridge,inx_bridge,unknown_word\n",
-        "br00043": "otx_name,inx_name,otx_bridge,inx_bridge,unknown_word\n",
-        "br00044": "otx_tag,inx_tag,otx_bridge,inx_bridge,unknown_word\n",
-        "br00045": "otx_way,inx_way,otx_bridge,inx_bridge,unknown_word\n",
+        "br00042": "otx_label,inx_label,otx_bridge,inx_bridge,unknown_term\n",
+        "br00043": "otx_name,inx_name,otx_bridge,inx_bridge,unknown_term\n",
+        "br00044": "otx_tag,inx_tag,otx_bridge,inx_bridge,unknown_term\n",
+        "br00045": "otx_way,inx_way,otx_bridge,inx_bridge,unknown_term\n",
     }
     expected_br00000_csv = expected_stance_csv_strs.get("br00000")
     expected_br00001_csv = expected_stance_csv_strs.get("br00001")
@@ -635,9 +635,9 @@ def test_add_to_br00042_csv_ReturnsObj():
     event7 = 7
     bob_otx_bridge = ";"
     bob_inx_bridge = "/"
-    bob_unknown_word = "UNKNOWN"
+    bob_unknown_term = "UNKNOWN"
     bob7_pidginunit = pidginunit_shop(
-        bob_str, event7, bob_otx_bridge, bob_inx_bridge, bob_unknown_word
+        bob_str, event7, bob_otx_bridge, bob_inx_bridge, bob_unknown_term
     )
     run_otx = "run"
     run_inx = "cours"
@@ -649,7 +649,7 @@ def test_add_to_br00042_csv_ReturnsObj():
     x_csv = add_to_br00042_csv(csv_header, bob7_pidginunit, csv_delimiter)
 
     # THEN
-    run_row = f"{bob_str},{event7},{run_otx},{bob_otx_bridge},{run_inx},{bob_inx_bridge},{bob_unknown_word}\n"
+    run_row = f"{bob_str},{event7},{run_otx},{bob_otx_bridge},{run_inx},{bob_inx_bridge},{bob_unknown_term}\n"
     assert x_csv == f"{csv_header}{run_row}"
 
 
@@ -661,9 +661,9 @@ def test_add_to_br00043_csv_ReturnsObj():
     event7 = 7
     bob_otx_bridge = ";"
     bob_inx_bridge = "/"
-    bob_unknown_word = "UNKNOWN"
+    bob_unknown_term = "UNKNOWN"
     bob7_pidginunit = pidginunit_shop(
-        bob_str, event7, bob_otx_bridge, bob_inx_bridge, bob_unknown_word
+        bob_str, event7, bob_otx_bridge, bob_inx_bridge, bob_unknown_term
     )
     yao_otx = "Yao"
     yao_inx = "YaoMing"
@@ -675,7 +675,7 @@ def test_add_to_br00043_csv_ReturnsObj():
     x_csv = add_to_br00043_csv(csv_header, bob7_pidginunit, csv_delimiter)
 
     # THEN
-    bob_row = f"{bob_str},{event7},{yao_otx},{bob_otx_bridge},{yao_inx},{bob_inx_bridge},{bob_unknown_word}\n"
+    bob_row = f"{bob_str},{event7},{yao_otx},{bob_otx_bridge},{yao_inx},{bob_inx_bridge},{bob_unknown_term}\n"
     assert x_csv == f"{csv_header}{bob_row}"
 
 
@@ -687,9 +687,9 @@ def test_add_to_br00044_csv_ReturnsObj():
     event7 = 7
     bob_otx_bridge = ";"
     bob_inx_bridge = "/"
-    bob_unknown_word = "UNKNOWN"
+    bob_unknown_term = "UNKNOWN"
     bob7_pidginunit = pidginunit_shop(
-        bob_str, event7, bob_otx_bridge, bob_inx_bridge, bob_unknown_word
+        bob_str, event7, bob_otx_bridge, bob_inx_bridge, bob_unknown_term
     )
     clean_otx = "clean"
     clean_inx = "prope"
@@ -701,7 +701,7 @@ def test_add_to_br00044_csv_ReturnsObj():
     x_csv = add_to_br00044_csv(csv_header, bob7_pidginunit, csv_delimiter)
 
     # THEN
-    bob_row = f"{bob_str},{event7},{clean_otx},{bob_otx_bridge},{clean_inx},{bob_inx_bridge},{bob_unknown_word}\n"
+    bob_row = f"{bob_str},{event7},{clean_otx},{bob_otx_bridge},{clean_inx},{bob_inx_bridge},{bob_unknown_term}\n"
     assert x_csv == f"{csv_header}{bob_row}"
 
 
@@ -713,9 +713,9 @@ def test_add_to_br00045_csv_ReturnsObj():
     event7 = 7
     bob_otx_bridge = ";"
     bob_inx_bridge = "/"
-    bob_unknown_word = "UNKNOWN"
+    bob_unknown_term = "UNKNOWN"
     bob7_pidginunit = pidginunit_shop(
-        bob_str, event7, bob_otx_bridge, bob_inx_bridge, bob_unknown_word
+        bob_str, event7, bob_otx_bridge, bob_inx_bridge, bob_unknown_term
     )
     clean_otx = "clean"
     clean_inx = "prope"
@@ -727,7 +727,7 @@ def test_add_to_br00045_csv_ReturnsObj():
     x_csv = add_to_br00045_csv(csv_header, bob7_pidginunit, csv_delimiter)
 
     # THEN
-    bob_row = f"{bob_str},{event7},{clean_otx},{bob_otx_bridge},{clean_inx},{bob_inx_bridge},{bob_unknown_word}\n"
+    bob_row = f"{bob_str},{event7},{clean_otx},{bob_otx_bridge},{clean_inx},{bob_inx_bridge},{bob_unknown_term}\n"
     assert x_csv == f"{csv_header}{bob_row}"
 
 
@@ -739,9 +739,9 @@ def test_add_pidginunit_to_stance_csv_strs_ReturnsObj():
     event7 = 7
     bob_otx_bridge = ";"
     bob_inx_bridge = "/"
-    bob_unknown_word = "UNKNOWN"
+    bob_unknown_term = "UNKNOWN"
     bob7_pidginunit = pidginunit_shop(
-        bob_str, event7, bob_otx_bridge, bob_inx_bridge, bob_unknown_word
+        bob_str, event7, bob_otx_bridge, bob_inx_bridge, bob_unknown_term
     )
     clean_otx = "clean"
     clean_inx = "prope"

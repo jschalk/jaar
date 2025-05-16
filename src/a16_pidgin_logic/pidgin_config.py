@@ -22,16 +22,16 @@ def get_pidgin_dimens() -> set[str]:
     return set(get_pidgin_config_dict().keys())
 
 
-def default_unknown_word() -> str:
+def default_unknown_term() -> str:
     return "UNKNOWN"
 
 
-def default_unknown_word_if_None(unknown_word: any = None) -> str:
-    if unknown_word != unknown_word:
-        unknown_word = None
-    if unknown_word is None:
-        unknown_word = default_unknown_word()
-    return unknown_word
+def default_unknown_term_if_None(unknown_term: any = None) -> str:
+    if unknown_term != unknown_term:
+        unknown_term = None
+    if unknown_term is None:
+        unknown_term = default_unknown_term()
+    return unknown_term
 
 
 def get_pidgin_config_jkeys(x_dimen: str) -> dict:
@@ -139,28 +139,28 @@ def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
             "otx_label",
             "inx_bridge",
             "otx_bridge",
-            "unknown_word",
+            "unknown_term",
         },
         "pidgin_name": {
             "inx_name",
             "otx_name",
             "inx_bridge",
             "otx_bridge",
-            "unknown_word",
+            "unknown_term",
         },
         "pidgin_tag": {
             "inx_tag",
             "otx_tag",
             "inx_bridge",
             "otx_bridge",
-            "unknown_word",
+            "unknown_term",
         },
         "pidgin_way": {
             "inx_way",
             "otx_way",
             "inx_bridge",
             "otx_bridge",
-            "unknown_word",
+            "unknown_term",
         },
     }
 

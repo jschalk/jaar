@@ -13,7 +13,7 @@ from src.a06_bud_logic._utils.str_a06 import (
 from src.a16_pidgin_logic._utils.str_a16 import (
     otx_bridge_str,
     inx_bridge_str,
-    unknown_word_str,
+    unknown_term_str,
 )
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
 from src.a16_pidgin_logic._utils.env_a16 import (
@@ -65,7 +65,7 @@ def test_get_pidgin_name_dt_columns_ReturnsObj():
         face_name_str(),
         otx_bridge_str(),
         inx_bridge_str(),
-        unknown_word_str(),
+        unknown_term_str(),
         "otx_name",
         "inx_name",
     ]
@@ -82,7 +82,7 @@ def test_get_pidgin_label_dt_columns_ReturnsObj():
         face_name_str(),
         otx_bridge_str(),
         inx_bridge_str(),
-        unknown_word_str(),
+        unknown_term_str(),
         "otx_label",
         "inx_label",
     ]
@@ -99,7 +99,7 @@ def test_get_pidgin_tag_dt_columns_ReturnsObj():
         face_name_str(),
         otx_bridge_str(),
         inx_bridge_str(),
-        unknown_word_str(),
+        unknown_term_str(),
         "otx_tag",
         "inx_tag",
     ]
@@ -116,7 +116,7 @@ def test_get_pidgin_way_dt_columns_ReturnsObj():
         face_name_str(),
         otx_bridge_str(),
         inx_bridge_str(),
-        unknown_word_str(),
+        unknown_term_str(),
         "otx_way",
         "inx_way",
     ]
@@ -377,14 +377,14 @@ def test_create_dir_valid_empty_pidginunit_Sets_otx_bridge_inx_bridge(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    x_unknown_word = "UnknownWord"
+    x_unknown_term = "UnknownTerm"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
     sue_pidginunit = pidginunit_shop(
         face_name=sue_str,
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
-        unknown_word=x_unknown_word,
+        unknown_term=x_unknown_term,
     )
     sue_pidginunit.set_namemap(get_slash_namemap())
     map_dir = get_example_face_dir()
@@ -394,11 +394,11 @@ def test_create_dir_valid_empty_pidginunit_Sets_otx_bridge_inx_bridge(
     gen_pidginunit = create_dir_valid_empty_pidginunit(map_dir)
 
     # # THEN
-    assert gen_pidginunit.unknown_word == x_unknown_word
+    assert gen_pidginunit.unknown_term == x_unknown_term
     assert gen_pidginunit.otx_bridge == slash_otx_bridge
     assert gen_pidginunit.inx_bridge == colon_inx_bridge
     gen_mapunit = gen_pidginunit.get_mapunit(type_NameStr_str())
-    assert gen_mapunit.unknown_word == x_unknown_word
+    assert gen_mapunit.unknown_term == x_unknown_term
     assert gen_mapunit.otx_bridge == slash_otx_bridge
     assert gen_mapunit.inx_bridge == colon_inx_bridge
 
@@ -408,7 +408,7 @@ def test_create_dir_valid_empty_pidginunit_Returns_event_int(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    x_unknown_word = "UnknownWord"
+    x_unknown_term = "UnknownTerm"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
     event7 = 7
@@ -417,7 +417,7 @@ def test_create_dir_valid_empty_pidginunit_Returns_event_int(
         event_int=event7,
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
-        unknown_word=x_unknown_word,
+        unknown_term=x_unknown_term,
     )
     sue_pidginunit.set_namemap(get_slash_namemap())
     map_dir = get_example_face_dir()
@@ -429,11 +429,11 @@ def test_create_dir_valid_empty_pidginunit_Returns_event_int(
     # THEN
     assert gen_pidginunit.face_name == sue_str
     assert gen_pidginunit.event_int == event7
-    assert gen_pidginunit.unknown_word == x_unknown_word
+    assert gen_pidginunit.unknown_term == x_unknown_term
     assert gen_pidginunit.otx_bridge == slash_otx_bridge
     assert gen_pidginunit.inx_bridge == colon_inx_bridge
     gen_mapunit = gen_pidginunit.get_mapunit(type_NameStr_str())
-    assert gen_mapunit.unknown_word == x_unknown_word
+    assert gen_mapunit.unknown_term == x_unknown_term
     assert gen_mapunit.otx_bridge == slash_otx_bridge
     assert gen_mapunit.inx_bridge == colon_inx_bridge
 

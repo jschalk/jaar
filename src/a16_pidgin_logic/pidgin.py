@@ -4,7 +4,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_dict_from_json,
 )
 from src.a01_way_logic.way import default_bridge_if_None, OwnerName, EventInt
-from src.a16_pidgin_logic.pidgin_config import default_unknown_word_if_None
+from src.a16_pidgin_logic.pidgin_config import default_unknown_term_if_None
 from src.a16_pidgin_logic.map import (
     MapCore,
     LabelMap,
@@ -45,7 +45,7 @@ class PidginUnit:
     namemap: NameMap = None
     tagmap: TagMap = None
     waymap: WayMap = None
-    unknown_word: str = None  # pidginunit heart
+    unknown_term: str = None  # pidginunit heart
     otx_bridge: str = None  # pidginunit heart
     inx_bridge: str = None  # pidginunit heart
 
@@ -139,7 +139,7 @@ class PidginUnit:
         self._check_attr_match("face_name", x_mapcore)
         self._check_attr_match("otx_bridge", x_mapcore)
         self._check_attr_match("inx_bridge", x_mapcore)
-        self._check_attr_match("unknown_word", x_mapcore)
+        self._check_attr_match("unknown_term", x_mapcore)
 
     def _check_attr_match(self, attr: str, mapcore):
         self_attr = getattr(self, attr)
@@ -223,7 +223,7 @@ class PidginUnit:
             "event_int": self.event_int,
             "otx_bridge": self.otx_bridge,
             "inx_bridge": self.inx_bridge,
-            "unknown_word": self.unknown_word,
+            "unknown_term": self.unknown_term,
             "namemap": x_namemap,
             "tagmap": x_tagmap,
             "labelmap": x_labelmap,
@@ -239,9 +239,9 @@ def pidginunit_shop(
     event_int: EventInt = None,
     otx_bridge: str = None,
     inx_bridge: str = None,
-    unknown_word: str = None,
+    unknown_term: str = None,
 ) -> PidginUnit:
-    unknown_word = default_unknown_word_if_None(unknown_word)
+    unknown_term = default_unknown_term_if_None(unknown_term)
     otx_bridge = default_bridge_if_None(otx_bridge)
     inx_bridge = default_bridge_if_None(inx_bridge)
 
@@ -250,35 +250,35 @@ def pidginunit_shop(
         event_int=event_int,
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
-        unknown_word=unknown_word,
+        unknown_term=unknown_term,
     )
     x_labelmap = labelmap_shop(
         face_name=face_name,
         event_int=event_int,
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
-        unknown_word=unknown_word,
+        unknown_term=unknown_term,
     )
     x_tagmap = tagmap_shop(
         face_name=face_name,
         event_int=event_int,
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
-        unknown_word=unknown_word,
+        unknown_term=unknown_term,
     )
     x_waymap = waymap_shop(
         face_name=face_name,
         event_int=event_int,
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
-        unknown_word=unknown_word,
+        unknown_term=unknown_term,
         x_tagmap=x_tagmap,
     )
 
     return PidginUnit(
         face_name=face_name,
         event_int=get_0_if_None(event_int),
-        unknown_word=unknown_word,
+        unknown_term=unknown_term,
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
         namemap=x_namemap,
@@ -293,7 +293,7 @@ def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
     x_face_name = x_dict.get("face_name")
     x_otx_bridge = x_dict.get("otx_bridge")
     x_inx_bridge = x_dict.get("inx_bridge")
-    x_unknown_word = x_dict.get("unknown_word")
+    x_unknown_term = x_dict.get("unknown_term")
     namemap_dict = x_dict.get("namemap")
     labelmap_dict = x_dict.get("labelmap")
     tagmap_dict = x_dict.get("tagmap")
@@ -304,7 +304,7 @@ def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
         x_face_name,
         x_otx_bridge,
         x_inx_bridge,
-        x_unknown_word,
+        x_unknown_term,
     )
     labelmap_dict = _add_pidgin_core_keys(
         labelmap_dict,
@@ -312,7 +312,7 @@ def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
         x_face_name,
         x_otx_bridge,
         x_inx_bridge,
-        x_unknown_word,
+        x_unknown_term,
     )
     tagmap_dict = _add_pidgin_core_keys(
         tagmap_dict,
@@ -320,7 +320,7 @@ def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
         x_face_name,
         x_otx_bridge,
         x_inx_bridge,
-        x_unknown_word,
+        x_unknown_term,
     )
     waymap_dict = _add_pidgin_core_keys(
         waymap_dict,
@@ -328,7 +328,7 @@ def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
         x_face_name,
         x_otx_bridge,
         x_inx_bridge,
-        x_unknown_word,
+        x_unknown_term,
     )
     x_namemap = get_namemap_from_dict(namemap_dict)
     x_labelmap = get_labelmap_from_dict(labelmap_dict)
@@ -340,7 +340,7 @@ def get_pidginunit_from_dict(x_dict: dict) -> PidginUnit:
         event_int=x_event_int,
         otx_bridge=x_otx_bridge,
         inx_bridge=x_inx_bridge,
-        unknown_word=x_unknown_word,
+        unknown_term=x_unknown_term,
         namemap=x_namemap,
         labelmap=x_labelmap,
         tagmap=x_tagmap,
@@ -357,7 +357,7 @@ def _get_rid_of_pidgin_core_keys(map_dict: dict) -> dict:
     map_dict.pop("face_name")
     map_dict.pop("otx_bridge")
     map_dict.pop("inx_bridge")
-    map_dict.pop("unknown_word")
+    map_dict.pop("unknown_term")
     return map_dict
 
 
@@ -367,13 +367,13 @@ def _add_pidgin_core_keys(
     face_name: str,
     otx_bridge: str,
     inx_bridge: str,
-    unknown_word: str,
+    unknown_term: str,
 ) -> dict:
     map_dict["event_int"] = event_int
     map_dict["face_name"] = face_name
     map_dict["otx_bridge"] = otx_bridge
     map_dict["inx_bridge"] = inx_bridge
-    map_dict["unknown_word"] = unknown_word
+    map_dict["unknown_term"] = unknown_term
     return map_dict
 
 
@@ -386,7 +386,7 @@ def inherit_pidginunit(older: PidginUnit, newer: PidginUnit) -> PidginUnit:
         older.face_name != newer.face_name
         or older.otx_bridge != newer.otx_bridge
         or older.inx_bridge != newer.inx_bridge
-        or older.unknown_word != newer.unknown_word
+        or older.unknown_term != newer.unknown_term
     ):
         raise PidginCoreAttrConflictException("Core attributes in conflict")
     if older.event_int >= newer.event_int:

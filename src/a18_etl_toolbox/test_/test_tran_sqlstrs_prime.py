@@ -41,7 +41,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     pidgin_core_str,
     otx_bridge_str,
     inx_bridge_str,
-    unknown_word_str,
+    unknown_term_str,
 )
 from src.a17_creed_logic._utils.str_a17 import creed_category_str, creed_number_str
 from src.a17_creed_logic.creed_config import (
@@ -183,7 +183,7 @@ def get_all_dimen_columns_set(x_dimen: str) -> set[str]:
             face_name_str(),
             otx_bridge_str(),
             inx_bridge_str(),
-            unknown_word_str(),
+            unknown_term_str(),
         }
     x_config = get_creed_config_dict().get(x_dimen)
     columns = set(x_config.get("jkeys").keys())
@@ -228,7 +228,7 @@ def create_pf_sound_vld_table_sqlstr(x_dimen):
     columns = get_all_dimen_columns_set(x_dimen)
     columns.remove(otx_bridge_str())
     columns.remove(inx_bridge_str())
-    columns.remove(unknown_word_str())
+    columns.remove(unknown_term_str())
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
 
@@ -607,7 +607,7 @@ GROUP BY event_int, face_name, otx_label
 HAVING MIN(inx_label) != MAX(inx_label)
     OR MIN(otx_bridge) != MAX(otx_bridge)
     OR MIN(inx_bridge) != MAX(inx_bridge)
-    OR MIN(unknown_word) != MAX(unknown_word)
+    OR MIN(unknown_term) != MAX(unknown_term)
 )
 UPDATE pidgin_label_s_raw
 SET error_message = 'Inconsistent data'
@@ -735,8 +735,8 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario0_PidginDimen():
         # print(expected_insert_sqlstr)
         assert update_sqlstrs[0] == expected_insert_sqlstr
 
-        static_example_sqlstr = """INSERT INTO pidgin_label_s_agg (event_int, face_name, otx_label, inx_label, otx_bridge, inx_bridge, unknown_word)
-SELECT event_int, face_name, otx_label, MAX(inx_label), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_word)
+        static_example_sqlstr = """INSERT INTO pidgin_label_s_agg (event_int, face_name, otx_label, inx_label, otx_bridge, inx_bridge, unknown_term)
+SELECT event_int, face_name, otx_label, MAX(inx_label), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_term)
 FROM pidgin_label_s_raw
 WHERE error_message IS NULL
 GROUP BY event_int, face_name, otx_label
@@ -864,10 +864,10 @@ def test_create_insert_into_pidgin_core_raw_sqlstr_ReturnsObj():
     # THEN
     pidgin_s_agg_tablename = prime_tbl(dimen, "s", "agg")
     pidgin_core_s_raw_tablename = prime_tbl("PIDCORE", "s", "raw")
-    expected_sqlstr = f"""INSERT INTO {pidgin_core_s_raw_tablename} (source_dimen, face_name, otx_bridge, inx_bridge, unknown_word)
-SELECT '{pidgin_s_agg_tablename}', face_name, otx_bridge, inx_bridge, unknown_word
+    expected_sqlstr = f"""INSERT INTO {pidgin_core_s_raw_tablename} (source_dimen, face_name, otx_bridge, inx_bridge, unknown_term)
+SELECT '{pidgin_s_agg_tablename}', face_name, otx_bridge, inx_bridge, unknown_term
 FROM {pidgin_s_agg_tablename}
-GROUP BY face_name, otx_bridge, inx_bridge, unknown_word
+GROUP BY face_name, otx_bridge, inx_bridge, unknown_term
 ;
 """
     assert way_sqlstr == expected_sqlstr
@@ -887,12 +887,12 @@ def test_create_insert_into_pidgin_core_vld_sqlstr_ReturnsObj():
     pidcore_dimen = "PIDCORE"
     pidgin_core_s_agg_tablename = prime_tbl(pidcore_dimen, "s", "agg")
     pidgin_core_s_vld_tablename = prime_tbl(pidcore_dimen, "s", "vld")
-    expected_sqlstr = f"""INSERT INTO {pidgin_core_s_vld_tablename} (face_name, otx_bridge, inx_bridge, unknown_word)
+    expected_sqlstr = f"""INSERT INTO {pidgin_core_s_vld_tablename} (face_name, otx_bridge, inx_bridge, unknown_term)
 SELECT
   face_name
 , IFNULL(otx_bridge, '{default_bridge}')
 , IFNULL(inx_bridge, '{default_bridge}')
-, IFNULL(unknown_word, '{default_unknown_str}')
+, IFNULL(unknown_term, '{default_unknown_str}')
 FROM {pidgin_core_s_agg_tablename}
 ;
 """

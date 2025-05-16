@@ -21,7 +21,7 @@ from src.a15_fisc_logic._utils.str_a15 import (
 )
 from src.a16_pidgin_logic.pidgin import (
     default_bridge_if_None,
-    default_unknown_word_if_None,
+    default_unknown_term_if_None,
 )
 from src.a16_pidgin_logic._utils.str_a16 import (
     pidgin_tag_str,
@@ -39,7 +39,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_name_str,
     inx_label_str,
     otx_label_str,
-    unknown_word_str,
+    unknown_term_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,

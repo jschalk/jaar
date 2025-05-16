@@ -18,7 +18,7 @@ def get_pidgin_name_dt_columns() -> list[str]:
         "face_name",
         "otx_bridge",
         "inx_bridge",
-        "unknown_word",
+        "unknown_term",
         "otx_name",
         "inx_name",
     ]
@@ -30,7 +30,7 @@ def get_pidgin_label_dt_columns() -> list[str]:
         "face_name",
         "otx_bridge",
         "inx_bridge",
-        "unknown_word",
+        "unknown_term",
         "otx_label",
         "inx_label",
     ]
@@ -42,7 +42,7 @@ def get_pidgin_tag_dt_columns() -> list[str]:
         "face_name",
         "otx_bridge",
         "inx_bridge",
-        "unknown_word",
+        "unknown_term",
         "otx_tag",
         "inx_tag",
     ]
@@ -54,7 +54,7 @@ def get_pidgin_way_dt_columns() -> list[str]:
         "face_name",
         "otx_bridge",
         "inx_bridge",
-        "unknown_word",
+        "unknown_term",
         "otx_way",
         "inx_way",
     ]
@@ -67,7 +67,7 @@ def create_pidgin_name_dt(x_map: NameMap) -> DataFrame:
             "face_name": x_map.face_name,
             "otx_bridge": x_map.otx_bridge,
             "inx_bridge": x_map.inx_bridge,
-            "unknown_word": x_map.unknown_word,
+            "unknown_term": x_map.unknown_term,
             "otx_name": otx_value,
             "inx_name": inx_value,
         }
@@ -83,7 +83,7 @@ def create_pidgin_label_dt(x_map: LabelMap) -> DataFrame:
             "face_name": x_map.face_name,
             "otx_bridge": x_map.otx_bridge,
             "inx_bridge": x_map.inx_bridge,
-            "unknown_word": x_map.unknown_word,
+            "unknown_term": x_map.unknown_term,
             "otx_label": otx_value,
             "inx_label": inx_value,
         }
@@ -99,7 +99,7 @@ def create_pidgin_tag_dt(x_map: TagMap) -> DataFrame:
             "face_name": x_map.face_name,
             "otx_bridge": x_map.otx_bridge,
             "inx_bridge": x_map.inx_bridge,
-            "unknown_word": x_map.unknown_word,
+            "unknown_term": x_map.unknown_term,
             "otx_tag": otx_value,
             "inx_tag": inx_value,
         }
@@ -115,7 +115,7 @@ def create_pidgin_way_dt(x_map: WayMap) -> DataFrame:
             "face_name": x_map.face_name,
             "otx_bridge": x_map.otx_bridge,
             "inx_bridge": x_map.inx_bridge,
-            "unknown_word": x_map.unknown_word,
+            "unknown_term": x_map.unknown_term,
             "otx_way": otx_value,
             "inx_way": inx_value,
         }
@@ -202,14 +202,14 @@ def _load_waymap_from_csv(x_dir, x_waymap: WayMap) -> WayMap:
 def create_dir_valid_empty_pidginunit(x_dir: str) -> PidginUnit:
     face_name_set = set()
     event_int_set = set()
-    unknown_word_set = set()
+    unknown_term_set = set()
     otx_bridge_set = set()
     inx_bridge_set = set()
     for x_filename in get_dir_file_strs(x_dir).keys():
         x_dt = open_csv(x_dir, x_filename)
         face_name_set.update(x_dt.face_name.unique())
         event_int_set.update(x_dt.event_int.unique())
-        unknown_word_set.update(x_dt.unknown_word.unique())
+        unknown_term_set.update(x_dt.unknown_term.unique())
         otx_bridge_set.update(x_dt.otx_bridge.unique())
         inx_bridge_set.update(x_dt.inx_bridge.unique())
 
@@ -217,8 +217,8 @@ def create_dir_valid_empty_pidginunit(x_dir: str) -> PidginUnit:
         face_name = face_name_set.pop()
     if len(event_int_set) == 1:
         event_int = event_int_set.pop()
-    if len(unknown_word_set) == 1:
-        unknown_word = unknown_word_set.pop()
+    if len(unknown_term_set) == 1:
+        unknown_term = unknown_term_set.pop()
     if len(otx_bridge_set) == 1:
         otx_bridge = otx_bridge_set.pop()
     if len(inx_bridge_set) == 1:
@@ -229,7 +229,7 @@ def create_dir_valid_empty_pidginunit(x_dir: str) -> PidginUnit:
         event_int=event_int,
         otx_bridge=otx_bridge,
         inx_bridge=inx_bridge,
-        unknown_word=unknown_word,
+        unknown_term=unknown_term,
     )
 
 
