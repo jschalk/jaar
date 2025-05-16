@@ -30,7 +30,7 @@ ALL_DIMEN_ABBV7 = {
     "BUDHEAL",
     "BUDPREM",
     "BUDREAS",
-    "BUDLABOR",
+    "BUDLABO",
     "BUDIDEA",
     "BUDUNIT",
     "PIDLABE",
@@ -56,7 +56,7 @@ def get_dimen_abbv7(dimen: str) -> str:
         "bud_idea_healerlink": "BUDHEAL",
         "bud_idea_reason_premiseunit": "BUDPREM",
         "bud_idea_reasonunit": "BUDREAS",
-        "bud_idea_laborlink": "BUDLABOR",
+        "bud_idea_laborlink": "BUDLABO",
         "bud_ideaunit": "BUDIDEA",
         "budunit": "BUDUNIT",
         "pidgin_label": "PIDLABE",
@@ -85,7 +85,7 @@ def create_prime_tablename(
         "BUDHEAL": "bud_idea_healerlink",
         "BUDPREM": "bud_idea_reason_premiseunit",
         "BUDREAS": "bud_idea_reasonunit",
-        "BUDLABOR": "bud_idea_laborlink",
+        "BUDLABO": "bud_idea_laborlink",
         "BUDIDEA": "bud_ideaunit",
         "BUDUNIT": "budunit",
         "PIDLABE": "pidgin_label",
@@ -723,70 +723,163 @@ GROUP BY event_int, face_name
 """
 
 
-def get_insert_into_voice_raw_sqlstrs(cursor: sqlite3_Connection, dimen: str) -> str:
-    if dimen[:3].lower() == "bud":
-        s_agg_tablename = create_prime_tablename(dimen, "s", "agg", "put")
-        v_raw_tablename = create_prime_tablename(dimen, "v", "raw", "put")
-    else:
-        s_raw_tablename = create_prime_tablename(dimen, "s", "raw")
-        v_agg_tablename = create_prime_tablename(dimen, "v", "agg")
+INSERT_FISCASH_VOICE_RAW_SQLSTR = "INSERT INTO fisc_cashbook_v_raw (event_int, face_name_otx, fisc_tag_otx, owner_name_otx, acct_name_otx, tran_time, amount) SELECT event_int, face_name, fisc_tag, owner_name, acct_name, tran_time, amount FROM fisc_cashbook_s_agg "
+INSERT_FISDEAL_VOICE_RAW_SQLSTR = "INSERT INTO fisc_dealunit_v_raw (event_int, face_name_otx, fisc_tag_otx, owner_name_otx, deal_time, quota, celldepth) SELECT event_int, face_name, fisc_tag, owner_name, deal_time, quota, celldepth FROM fisc_dealunit_s_agg "
+INSERT_FISHOUR_VOICE_RAW_SQLSTR = "INSERT INTO fisc_timeline_hour_v_raw (event_int, face_name_otx, fisc_tag_otx, cumlative_minute, hour_tag_otx) SELECT event_int, face_name, fisc_tag, cumlative_minute, hour_tag FROM fisc_timeline_hour_s_agg "
+INSERT_FISMONT_VOICE_RAW_SQLSTR = "INSERT INTO fisc_timeline_month_v_raw (event_int, face_name_otx, fisc_tag_otx, cumlative_day, month_tag_otx) SELECT event_int, face_name, fisc_tag, cumlative_day, month_tag FROM fisc_timeline_month_s_agg "
+INSERT_FISWEEK_VOICE_RAW_SQLSTR = "INSERT INTO fisc_timeline_weekday_v_raw (event_int, face_name_otx, fisc_tag_otx, weekday_order, weekday_tag_otx) SELECT event_int, face_name, fisc_tag, weekday_order, weekday_tag FROM fisc_timeline_weekday_s_agg "
+INSERT_FISOFFI_VOICE_RAW_SQLSTR = "INSERT INTO fisc_timeoffi_v_raw (event_int, face_name_otx, fisc_tag_otx, offi_time) SELECT event_int, face_name, fisc_tag, offi_time FROM fisc_timeoffi_s_agg "
+INSERT_FISUNIT_VOICE_RAW_SQLSTR = "INSERT INTO fiscunit_v_raw (event_int, face_name_otx, fisc_tag_otx, timeline_tag_otx, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations) SELECT event_int, face_name, fisc_tag, timeline_tag, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations FROM fiscunit_s_agg "
 
-    _columns = set(get_table_columns(cursor, s_agg_tablename))
-    pigin = find_set_otx_inx_args()
-    valid_columns = set(get_table_columns(cursor, brick_valid_table))
-    common_cols = lab_columns.intersection(valid_columns)
-    common_cols = get_default_sorted_list(common_cols)
-    select_str = create_select_query(cursor, brick_valid_table, common_cols)
-    select_str = select_str.replace("SELECT", f"SELECT '{creed_number}',")
-    common_cols.append("creed_number")
-    common_cols = get_default_sorted_list(common_cols)
-    x_dict = {common_col: None for common_col in common_cols}
-    insert_clause_str = create_insert_into_clause_str(cursor, raw_tablename, x_dict)
-    insert_select_sqlstr = f"{insert_clause_str}\n{select_str};"
-    cursor.execute(insert_select_sqlstr)
+INSERT_BUDMEMB_VOICE_PUT_RAW_SQLSTR = "INSERT INTO bud_acct_membership_v_put_raw (event_int, face_name_otx, fisc_tag_otx, owner_name_otx, acct_name_otx, group_label_otx, credit_vote, debtit_vote) SELECT event_int, face_name, fisc_tag, owner_name, acct_name, group_label, credit_vote, debtit_vote FROM bud_acct_membership_s_put_agg "
+INSERT_BUDMEMB_VOICE_DEL_RAW_SQLSTR = "INSERT INTO bud_acct_membership_v_del_raw (event_int, face_name_otx, fisc_tag_otx, owner_name_otx, acct_name_otx, group_label_ERASE_otx) SELECT event_int, face_name, fisc_tag, owner_name, acct_name, group_label_ERASE FROM bud_acct_membership_s_del_agg "
+INSERT_BUDACCT_VOICE_PUT_RAW_SQLSTR = "INSERT INTO bud_acctunit_v_put_raw (event_int, face_name_otx, fisc_tag_otx, owner_name_otx, acct_name_otx, credit_belief, debtit_belief) SELECT event_int, face_name, fisc_tag, owner_name, acct_name, credit_belief, debtit_belief FROM bud_acctunit_s_put_agg "
+INSERT_BUDACCT_VOICE_DEL_RAW_SQLSTR = "INSERT INTO bud_acctunit_v_del_raw (event_int, face_name_otx, fisc_tag_otx, owner_name_otx, acct_name_ERASE_otx) SELECT event_int, face_name, fisc_tag, owner_name, acct_name_ERASE FROM bud_acctunit_s_del_agg "
+INSERT_BUDAWAR_VOICE_PUT_RAW_SQLSTR = "INSERT INTO bud_idea_awardlink_v_put_raw (event_int, face_name_otx, fisc_tag_otx, owner_name_otx, idea_way_otx, awardee_label_otx, give_force, take_force) SELECT event_int, face_name, fisc_tag, owner_name, idea_way, awardee_label, give_force, take_force FROM bud_idea_awardlink_s_put_agg "
+INSERT_BUDAWAR_VOICE_DEL_RAW_SQLSTR = "INSERT INTO bud_idea_awardlink_v_del_raw (event_int, face_name_otx, fisc_tag_otx, owner_name_otx, idea_way_otx, awardee_label_ERASE_otx) SELECT event_int, face_name, fisc_tag, owner_name, idea_way, awardee_label_ERASE FROM bud_idea_awardlink_s_del_agg "
+INSERT_BUDFACT_VOICE_PUT_RAW_SQLSTR = "INSERT INTO bud_idea_factunit_v_put_raw (event_int, face_name_otx, fisc_tag_otx, owner_name_otx, idea_way_otx, fcontext_otx, fbranch_otx, fopen, fnigh) SELECT event_int, face_name, fisc_tag, owner_name, idea_way, fcontext, fbranch, fopen, fnigh FROM bud_idea_factunit_s_put_agg "
+INSERT_BUDFACT_VOICE_DEL_RAW_SQLSTR = "INSERT INTO bud_idea_factunit_v_del_raw (event_int, face_name_otx, fisc_tag_otx, owner_name_otx, idea_way_otx, fcontext_ERASE_otx) SELECT event_int, face_name, fisc_tag, owner_name, idea_way, fcontext_ERASE FROM bud_idea_factunit_s_del_agg "
+INSERT_BUDHEAL_VOICE_PUT_RAW_SQLSTR = "INSERT INTO bud_idea_healerlink_v_put_raw (event_int, face_name_otx, fisc_tag_otx, owner_name_otx, idea_way_otx, healer_name_otx) SELECT event_int, face_name, fisc_tag, owner_name, idea_way, healer_name FROM bud_idea_healerlink_s_put_agg "
+INSERT_BUDHEAL_VOICE_DEL_RAW_SQLSTR = "INSERT INTO bud_idea_healerlink_v_del_raw (event_int, face_name_otx, fisc_tag_otx, owner_name_otx, idea_way_otx, healer_name_ERASE_otx) SELECT event_int, face_name, fisc_tag, owner_name, idea_way, healer_name_ERASE FROM bud_idea_healerlink_s_del_agg "
+INSERT_BUDPREM_VOICE_PUT_RAW_SQLSTR = "INSERT INTO bud_idea_reason_premiseunit_v_put_raw (event_int, face_name_otx, fisc_tag_otx, owner_name_otx, idea_way_otx, rcontext_otx, pbranch_otx, pnigh, popen, pdivisor) SELECT event_int, face_name, fisc_tag, owner_name, idea_way, rcontext, pbranch, pnigh, popen, pdivisor FROM bud_idea_reason_premiseunit_s_put_agg "
+INSERT_BUDPREM_VOICE_DEL_RAW_SQLSTR = "INSERT INTO bud_idea_reason_premiseunit_v_del_raw (event_int, face_name_otx, fisc_tag_otx, owner_name_otx, idea_way_otx, rcontext_otx, pbranch_ERASE_otx) SELECT event_int, face_name, fisc_tag, owner_name, idea_way, rcontext, pbranch_ERASE FROM bud_idea_reason_premiseunit_s_del_agg "
+INSERT_BUDREAS_VOICE_PUT_RAW_SQLSTR = "INSERT INTO bud_idea_reasonunit_v_put_raw (event_int, face_name_otx, fisc_tag_otx, owner_name_otx, idea_way_otx, rcontext_otx, rcontext_idea_active_requisite) SELECT event_int, face_name, fisc_tag, owner_name, idea_way, rcontext, rcontext_idea_active_requisite FROM bud_idea_reasonunit_s_put_agg "
+INSERT_BUDREAS_VOICE_DEL_RAW_SQLSTR = "INSERT INTO bud_idea_reasonunit_v_del_raw (event_int, face_name_otx, fisc_tag_otx, owner_name_otx, idea_way_otx, rcontext_ERASE_otx) SELECT event_int, face_name, fisc_tag, owner_name, idea_way, rcontext_ERASE FROM bud_idea_reasonunit_s_del_agg "
+INSERT_BUDLABO_VOICE_PUT_RAW_SQLSTR = "INSERT INTO bud_idea_laborlink_v_put_raw (event_int, face_name_otx, fisc_tag_otx, owner_name_otx, idea_way_otx, labor_label_otx) SELECT event_int, face_name, fisc_tag, owner_name, idea_way, labor_label FROM bud_idea_laborlink_s_put_agg "
+INSERT_BUDLABO_VOICE_DEL_RAW_SQLSTR = "INSERT INTO bud_idea_laborlink_v_del_raw (event_int, face_name_otx, fisc_tag_otx, owner_name_otx, idea_way_otx, labor_label_ERASE_otx) SELECT event_int, face_name, fisc_tag, owner_name, idea_way, labor_label_ERASE FROM bud_idea_laborlink_s_del_agg "
+INSERT_BUDIDEA_VOICE_PUT_RAW_SQLSTR = "INSERT INTO bud_ideaunit_v_put_raw (event_int, face_name_otx, fisc_tag_otx, owner_name_otx, idea_way_otx, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool) SELECT event_int, face_name, fisc_tag, owner_name, idea_way, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool FROM bud_ideaunit_s_put_agg "
+INSERT_BUDIDEA_VOICE_DEL_RAW_SQLSTR = "INSERT INTO bud_ideaunit_v_del_raw (event_int, face_name_otx, fisc_tag_otx, owner_name_otx, idea_way_ERASE_otx) SELECT event_int, face_name, fisc_tag, owner_name, idea_way_ERASE FROM bud_ideaunit_s_del_agg "
+INSERT_BUDUNIT_VOICE_PUT_RAW_SQLSTR = "INSERT INTO budunit_v_put_raw (event_int, face_name_otx, fisc_tag_otx, owner_name_otx, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_coin, penny, respect_bit) SELECT event_int, face_name, fisc_tag, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_coin, penny, respect_bit FROM budunit_s_put_agg "
+INSERT_BUDUNIT_VOICE_DEL_RAW_SQLSTR = "INSERT INTO budunit_v_del_raw (event_int, face_name_otx, fisc_tag_otx, owner_name_ERASE_otx) SELECT event_int, face_name, fisc_tag, owner_name_ERASE FROM budunit_s_del_agg "
 
-    return ""
-    # dimen_config = get_creed_config_dict().get(dimen)
-    # dimen_focus_columns = set(dimen_config.get("jkeys").keys())
 
-    # if dimen[:4].lower() == "fisc":
-    #     exclude_cols = {"creed_number", "event_int", "face_name", "error_message"}
-    #     dimen_focus_columns = set(dimen_config.get("jkeys").keys())
-    #     dimen_focus_columns.remove("event_int")
-    #     dimen_focus_columns.remove("face_name")
-    #     dimen_focus_columns = get_default_sorted_list(dimen_focus_columns)
-    # else:
-    #     exclude_cols = {"creed_number", "error_message"}
+def get_insert_into_voice_raw_sqlstrs() -> dict[str, str]:
+    return {
+        "fisc_cashbook_v_raw": INSERT_FISCASH_VOICE_RAW_SQLSTR,
+        "fisc_dealunit_v_raw": INSERT_FISDEAL_VOICE_RAW_SQLSTR,
+        "fisc_timeline_hour_v_raw": INSERT_FISHOUR_VOICE_RAW_SQLSTR,
+        "fisc_timeline_month_v_raw": INSERT_FISMONT_VOICE_RAW_SQLSTR,
+        "fisc_timeline_weekday_v_raw": INSERT_FISWEEK_VOICE_RAW_SQLSTR,
+        "fisc_timeoffi_v_raw": INSERT_FISOFFI_VOICE_RAW_SQLSTR,
+        "fiscunit_v_raw": INSERT_FISUNIT_VOICE_RAW_SQLSTR,
+        "bud_acct_membership_v_put_raw": INSERT_BUDMEMB_VOICE_PUT_RAW_SQLSTR,
+        "bud_acct_membership_v_del_raw": INSERT_BUDMEMB_VOICE_DEL_RAW_SQLSTR,
+        "bud_acctunit_v_put_raw": INSERT_BUDACCT_VOICE_PUT_RAW_SQLSTR,
+        "bud_acctunit_v_del_raw": INSERT_BUDACCT_VOICE_DEL_RAW_SQLSTR,
+        "bud_idea_awardlink_v_put_raw": INSERT_BUDAWAR_VOICE_PUT_RAW_SQLSTR,
+        "bud_idea_awardlink_v_del_raw": INSERT_BUDAWAR_VOICE_DEL_RAW_SQLSTR,
+        "bud_idea_factunit_v_put_raw": INSERT_BUDFACT_VOICE_PUT_RAW_SQLSTR,
+        "bud_idea_factunit_v_del_raw": INSERT_BUDFACT_VOICE_DEL_RAW_SQLSTR,
+        "bud_idea_healerlink_v_put_raw": INSERT_BUDHEAL_VOICE_PUT_RAW_SQLSTR,
+        "bud_idea_healerlink_v_del_raw": INSERT_BUDHEAL_VOICE_DEL_RAW_SQLSTR,
+        "bud_idea_reason_premiseunit_v_put_raw": INSERT_BUDPREM_VOICE_PUT_RAW_SQLSTR,
+        "bud_idea_reason_premiseunit_v_del_raw": INSERT_BUDPREM_VOICE_DEL_RAW_SQLSTR,
+        "bud_idea_reasonunit_v_put_raw": INSERT_BUDREAS_VOICE_PUT_RAW_SQLSTR,
+        "bud_idea_reasonunit_v_del_raw": INSERT_BUDREAS_VOICE_DEL_RAW_SQLSTR,
+        "bud_idea_laborlink_v_put_raw": INSERT_BUDLABO_VOICE_PUT_RAW_SQLSTR,
+        "bud_idea_laborlink_v_del_raw": INSERT_BUDLABO_VOICE_DEL_RAW_SQLSTR,
+        "bud_ideaunit_v_put_raw": INSERT_BUDIDEA_VOICE_PUT_RAW_SQLSTR,
+        "bud_ideaunit_v_del_raw": INSERT_BUDIDEA_VOICE_DEL_RAW_SQLSTR,
+        "budunit_v_put_raw": INSERT_BUDUNIT_VOICE_PUT_RAW_SQLSTR,
+        "budunit_v_del_raw": INSERT_BUDUNIT_VOICE_DEL_RAW_SQLSTR,
+    }
 
-    # if dimen[:3].lower() == "bud":
-    #     agg_tablename = create_prime_tablename(dimen, "s", "agg", "put")
-    #     raw_tablename = create_prime_tablename(dimen, "s", "raw", "put")
-    # else:
-    #     raw_tablename = create_prime_tablename(dimen, "s", "raw")
-    #     agg_tablename = create_prime_tablename(dimen, "s", "agg")
 
-    # pidgin_fisc_bud_put_sqlstr = create_table2table_agg_insert_query(
-    #     conn_or_cursor,
-    #     src_table=raw_tablename,
-    #     dst_table=agg_tablename,
-    #     focus_cols=dimen_focus_columns,
-    #     exclude_cols=exclude_cols,
-    # )
-    # sqlstrs = [pidgin_fisc_bud_put_sqlstr]
-    # if dimen[:3].lower() == "bud":
-    #     del_raw_tablename = create_prime_tablename(dimen, "s", "raw", "del")
-    #     del_agg_tablename = create_prime_tablename(dimen, "s", "agg", "del")
-    #     bud_del_sqlstr = create_table2table_agg_insert_query(
-    #         conn_or_cursor,
-    #         src_table=del_raw_tablename,
-    #         dst_table=del_agg_tablename,
-    #         focus_cols=None,
-    #         exclude_cols=exclude_cols,
-    #         where_block="",
-    #     )
-    #     sqlstrs.append(bud_del_sqlstr)
+def create_pidname_face_otx_event_sqlstr(table: str, column: str) -> str:
+    return f"""
+SELECT 
+  raw_dim.rowid raw_rowid
+, raw_dim.event_int
+, raw_dim.face_name_otx
+, raw_dim.{column}_otx
+, MAX(pid.event_int) pidgin_event_int
+FROM {table} raw_dim
+LEFT JOIN pidgin_name_s_vld pid ON pid.face_name = raw_dim.face_name_otx
+    AND pid.otx_name = raw_dim.{column}_otx
+    AND raw_dim.event_int >= pid.event_int
+GROUP BY 
+  raw_dim.rowid
+, raw_dim.event_int
+, raw_dim.face_name_otx
+, raw_dim.{column}_otx
+"""
 
-    # return sqlstrs
+
+def create_pidlabe_face_otx_event_sqlstr(table: str, column: str) -> str:
+    return f"""
+SELECT 
+  raw_dim.rowid raw_rowid
+, raw_dim.event_int
+, raw_dim.face_name_otx
+, raw_dim.{column}_otx
+, MAX(pid.event_int) pidgin_event_int
+FROM {table} raw_dim
+LEFT JOIN pidgin_label_s_vld pid ON pid.face_name = raw_dim.face_name_otx
+    AND pid.otx_label = raw_dim.{column}_otx
+    AND raw_dim.event_int >= pid.event_int
+GROUP BY 
+  raw_dim.rowid
+, raw_dim.event_int
+, raw_dim.face_name_otx
+, raw_dim.{column}_otx
+"""
+
+
+def create_pidtagg_face_otx_event_sqlstr(table: str, column: str) -> str:
+    return f"""
+SELECT 
+  raw_dim.rowid raw_rowid
+, raw_dim.event_int
+, raw_dim.face_name_otx
+, raw_dim.{column}_otx
+, MAX(pid.event_int) pidgin_event_int
+FROM {table} raw_dim
+LEFT JOIN pidgin_tag_s_vld pid ON pid.face_name = raw_dim.face_name_otx
+    AND pid.otx_tag = raw_dim.{column}_otx
+    AND raw_dim.event_int >= pid.event_int
+GROUP BY 
+  raw_dim.rowid
+, raw_dim.event_int
+, raw_dim.face_name_otx
+, raw_dim.{column}_otx
+"""
+
+
+def update_voice_raw_inx_name_col_sqlstr(table: str, column: str) -> str:
+    return f"""
+WITH pidname_face_otx_event AS (
+    SELECT 
+    raw_dim.rowid raw_rowid
+    , raw_dim.event_int
+    , raw_dim.face_name_otx
+    , raw_dim.{column}_otx
+    , MAX(pid.event_int) pidgin_event_int
+    FROM {table} raw_dim
+    LEFT JOIN pidgin_name_s_vld pid ON pid.face_name = raw_dim.face_name_otx
+        AND pid.otx_name = raw_dim.{column}_otx
+        AND raw_dim.event_int >= pid.event_int
+    GROUP BY 
+    raw_dim.rowid
+    , raw_dim.event_int
+    , raw_dim.face_name_otx
+    , raw_dim.{column}_otx
+),
+pidname_inx_names AS (
+    SELECT pid_foe.raw_rowid, pid_vld.inx_name
+    FROM pidname_face_otx_event pid_foe
+    LEFT JOIN pidgin_name_s_vld pid_vld
+        ON pid_vld.face_name = pid_foe.face_name_otx
+        AND pid_vld.otx_name = pid_foe.{column}_otx
+        AND pid_vld.event_int = pid_foe.pidgin_event_int
+)
+UPDATE {table} as dim_v_raw
+SET {column}_inx = (
+    SELECT IFNULL(pidname_inx_names.inx_name, dim_v_raw.{column}_otx)
+    FROM pidname_inx_names
+    WHERE dim_v_raw.rowid = pidname_inx_names.raw_rowid
+)
+;
+"""
 
 
 PIDLABE_INCONSISTENCY_SQLSTR = """SELECT otx_label

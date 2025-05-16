@@ -119,8 +119,8 @@ def abbv(tablename: str) -> str:
         f"{bud_idea_reason_premiseunit_str()}_put_raw": "BUDPREM_PUT_RAW",
         f"{bud_idea_reasonunit_str()}_put_agg": "BUDREAS_PUT_AGG",
         f"{bud_idea_reasonunit_str()}_put_raw": "BUDREAS_PUT_RAW",
-        f"{bud_idea_laborlink_str()}_put_agg": "BUDLABOR_PUT_AGG",
-        f"{bud_idea_laborlink_str()}_put_raw": "BUDLABOR_PUT_RAW",
+        f"{bud_idea_laborlink_str()}_put_agg": "BUDLABO_PUT_AGG",
+        f"{bud_idea_laborlink_str()}_put_raw": "BUDLABO_PUT_RAW",
         f"{bud_ideaunit_str()}_put_agg": "BUDIDEA_PUT_AGG",
         f"{bud_ideaunit_str()}_put_raw": "BUDIDEA_PUT_RAW",
         f"{budunit_str()}_put_agg": "BUDUNIT_PUT_AGG",
@@ -139,8 +139,8 @@ def abbv(tablename: str) -> str:
         f"{bud_idea_reason_premiseunit_str()}_del_raw": "BUDPREM_DEL_RAW",
         f"{bud_idea_reasonunit_str()}_del_agg": "BUDREAS_DEL_AGG",
         f"{bud_idea_reasonunit_str()}_del_raw": "BUDREAS_DEL_RAW",
-        f"{bud_idea_laborlink_str()}_del_agg": "BUDLABOR_DEL_AGG",
-        f"{bud_idea_laborlink_str()}_del_raw": "BUDLABOR_DEL_RAW",
+        f"{bud_idea_laborlink_str()}_del_agg": "BUDLABO_DEL_AGG",
+        f"{bud_idea_laborlink_str()}_del_raw": "BUDLABO_DEL_RAW",
         f"{bud_ideaunit_str()}_del_agg": "BUDIDEA_DEL_AGG",
         f"{bud_ideaunit_str()}_del_raw": "BUDIDEA_DEL_RAW",
         f"{budunit_str()}_del_agg": "BUDUNIT_DEL_AGG",
@@ -192,7 +192,7 @@ def test_create_prime_tablename_ReturnsObj():
     budawar_s_agg_table = create_prime_tablename("budawar", "s", agg_str, put_str)
     budreas_s_agg_table = create_prime_tablename("budreas", "s", agg_str, put_str)
     budprem_s_agg_table = create_prime_tablename("budprem", "s", agg_str, put_str)
-    budlabor_s_agg_table = create_prime_tablename("budlabor", "s", agg_str, put_str)
+    budlabor_s_agg_table = create_prime_tablename("BUDLABO", "s", agg_str, put_str)
     budheal_s_agg_table = create_prime_tablename("budheal", "s", agg_str, put_str)
     budfact_s_agg_table = create_prime_tablename("budfact", "s", agg_str, put_str)
     budfact_s_del_table = create_prime_tablename("budfact", "s", agg_str, del_str)

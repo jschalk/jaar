@@ -5,7 +5,7 @@ from src.a00_data_toolbox.db_toolbox import (
     create_update_inconsistency_error_query,
     create_table2table_agg_insert_query,
     create_insert_into_clause_str as get_insert_sql,
-    create_select_query,
+    create_select_query as get_select_sql,
 )
 from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,
@@ -80,8 +80,8 @@ BUD_PRIME_TABLENAMES = {
     f"{bud_idea_reason_premiseunit_str()}_sound_put_raw": "BUDPREM_PUT_RAW",
     f"{bud_idea_reasonunit_str()}_sound_put_agg": "BUDREAS_PUT_AGG",
     f"{bud_idea_reasonunit_str()}_sound_put_raw": "BUDREAS_PUT_RAW",
-    f"{bud_idea_laborlink_str()}_sound_put_agg": "BUDLABOR_PUT_AGG",
-    f"{bud_idea_laborlink_str()}_sound_put_raw": "BUDLABOR_PUT_RAW",
+    f"{bud_idea_laborlink_str()}_sound_put_agg": "BUDLABO_PUT_AGG",
+    f"{bud_idea_laborlink_str()}_sound_put_raw": "BUDLABO_PUT_RAW",
     f"{bud_ideaunit_str()}_sound_put_agg": "BUDIDEA_PUT_AGG",
     f"{bud_ideaunit_str()}_sound_put_raw": "BUDIDEA_PUT_RAW",
     f"{budunit_str()}_sound_put_agg": "BUDUNIT_PUT_AGG",
@@ -100,8 +100,8 @@ BUD_PRIME_TABLENAMES = {
     f"{bud_idea_reason_premiseunit_str()}_sound_del_raw": "BUDPREM_DEL_RAW",
     f"{bud_idea_reasonunit_str()}_sound_del_agg": "BUDREAS_DEL_AGG",
     f"{bud_idea_reasonunit_str()}_sound_del_raw": "BUDREAS_DEL_RAW",
-    f"{bud_idea_laborlink_str()}_sound_del_agg": "BUDLABOR_DEL_AGG",
-    f"{bud_idea_laborlink_str()}_sound_del_raw": "BUDLABOR_DEL_RAW",
+    f"{bud_idea_laborlink_str()}_sound_del_agg": "BUDLABO_DEL_AGG",
+    f"{bud_idea_laborlink_str()}_sound_del_raw": "BUDLABO_DEL_RAW",
     f"{bud_ideaunit_str()}_sound_del_agg": "BUDIDEA_DEL_AGG",
     f"{bud_ideaunit_str()}_sound_del_raw": "BUDIDEA_DEL_RAW",
     f"{budunit_str()}_sound_del_agg": "BUDUNIT_DEL_AGG",
@@ -150,7 +150,7 @@ def test_create_prime_tablename_ReturnsObj():
     assert prime_tbl("budawar", "s", agg_str, put_str) == f"{budawar_dimen}_s_put_agg"
     assert prime_tbl("budreas", "s", agg_str, put_str) == f"{budreas_dimen}_s_put_agg"
     assert prime_tbl("budprem", "s", agg_str, put_str) == f"{budprem_dimen}_s_put_agg"
-    assert prime_tbl("budlabor", "s", agg_str, put_str) == f"{budlabor_dimen}_s_put_agg"
+    assert prime_tbl("BUDLABO", "s", agg_str, put_str) == f"{budlabor_dimen}_s_put_agg"
     assert prime_tbl("budheal", "s", agg_str, put_str) == f"{budheal_dimen}_s_put_agg"
     assert prime_tbl("budfact", "s", agg_str, put_str) == f"{budfact_dimen}_s_put_agg"
     assert prime_tbl("budfact", "s", agg_str, del_str) == f"{budfact_dimen}_s_del_agg"
@@ -941,51 +941,103 @@ GROUP BY event_int, face_name
     assert tag_sqlstr == expected_tag_sqlstr
 
 
-# TODO
-# def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj():
-#     # ESTABLISH
-#     creed_config = get_creed_config_dict()
-#     bud_dimens_config = {
-#         x_dimen: dimen_config
-#         for x_dimen, dimen_config in creed_config.items()
-#         if dimen_config.get(creed_category_str()) == "bud"
-#     }
+def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_BudDimens():
+    # sourcery skip: no-loop-in-tests
+    # ESTABLISH
+    creed_config = get_creed_config_dict()
+    bud_dimens_config = {
+        x_dimen: dimen_config
+        for x_dimen, dimen_config in creed_config.items()
+        if dimen_config.get(creed_category_str()) == "bud"
+    }
 
-#     with sqlite3_connect(":memory:") as conn:
-#         cursor = conn.cursor()
-#         create_sound_and_voice_tables(cursor)
+    # WHEN
+    insert_v_raw_sqlstrs = get_insert_into_voice_raw_sqlstrs()
 
-#         for bud_dimen, creed_config in bud_dimens_config.items():
-#             print(f"{bud_dimen=}")
-#             s_put_agg_tablename = prime_tbl(bud_dimen, "s", "agg", "put")
-#             s_del_agg_tablename = prime_tbl(bud_dimen, "s", "agg", "del")
-#             v_put_raw_tablename = prime_tbl(bud_dimen, "v", "raw", "put")
-#             v_del_raw_tablename = prime_tbl(bud_dimen, "v", "raw", "del")
-#             s_put_agg_cols = get_table_columns(cursor, s_put_agg_tablename)
-#             s_del_agg_cols = get_table_columns(cursor, s_del_agg_tablename)
-#             v_put_raw_cols = get_table_columns(cursor, v_put_raw_tablename)
-#             v_del_raw_cols = get_table_columns(cursor, v_del_raw_tablename)
-#             v_put_vals = dict(find_set_otx_inx_args(v_put_raw_cols))
-#             v_del_vals = dict(find_set_otx_inx_args(v_del_raw_cols))
-#             v_put_raw_insert_sql = get_insert_sql(
-#                 cursor, v_put_raw_tablename, v_put_vals
-#             )
-#             v_del_raw_insert_sql = get_insert_sql(
-#                 cursor, v_del_raw_tablename, v_del_vals
-#             )
-#             print(f"{v_put_raw_insert_sql=}")
-#             print(f"{v_del_raw_insert_sql=}")
-#             # create_select_query(cursor=)
+    # THEN
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_sound_and_voice_tables(cursor)
 
-#     #         static_example_sqlstr = f"""
-#     # INSERT INTO {voice_raw_tablename} (event_int, face_name_otx, fisc_tag_otx, cumlative_minute, hour_tag_otx)
-#     # SELECT event_int, face_name_otx, fisc_tag_otx, cumlative_minute
-#     # FROM {sound_agg_tablename}
-#     # ;
-#     # """
-#     #         print(insert_sqlstr)
-#     #         print(" static exmaple below")
-#     #         print(static_example_sqlstr)
-#     #         assert insert_sqlstr == static_example_sqlstr
-#     #         assert 1 == 2
-#     assert 1 == 2
+        for bud_dimen in bud_dimens_config:
+            # print(f"{bud_dimen=}")
+            s_put_agg_tablename = prime_tbl(bud_dimen, "s", "agg", "put")
+            s_del_agg_tablename = prime_tbl(bud_dimen, "s", "agg", "del")
+            v_put_raw_tablename = prime_tbl(bud_dimen, "v", "raw", "put")
+            v_del_raw_tablename = prime_tbl(bud_dimen, "v", "raw", "del")
+            s_put_cols = get_table_columns(cursor, s_put_agg_tablename)
+            s_del_cols = get_table_columns(cursor, s_del_agg_tablename)
+            # s_put_cols = set(s_put_cols).remove("error_message")
+            # s_del_cols = set(s_del_cols).remove("error_message")
+            v_put_raw_cols = get_table_columns(cursor, v_put_raw_tablename)
+            v_del_raw_cols = get_table_columns(cursor, v_del_raw_tablename)
+            v_put_cols = find_set_otx_inx_args(v_put_raw_cols)
+            v_del_cols = find_set_otx_inx_args(v_del_raw_cols)
+            v_put_cols.remove("pidgin_event_int")
+            v_del_cols.remove("pidgin_event_int")
+            v_put_cols = {col for col in v_put_cols if col[-3:] != "inx"}
+            v_del_cols = {col for col in v_del_cols if col[-3:] != "inx"}
+            v_put_raw_tbl = v_put_raw_tablename
+            v_del_raw_tbl = v_del_raw_tablename
+            s_put_agg_tbl = s_put_agg_tablename
+            s_del_agg_tbl = s_del_agg_tablename
+            v_put_raw_insert_sql = get_insert_sql(cursor, v_put_raw_tbl, v_put_cols)
+            v_del_raw_insert_sql = get_insert_sql(cursor, v_del_raw_tbl, v_del_cols)
+            s_put_agg_select_sql = get_select_sql(
+                cursor, s_put_agg_tbl, s_put_cols, flat_bool=True
+            )
+            s_del_agg_select_sql = get_select_sql(
+                cursor, s_del_agg_tbl, s_del_cols, flat_bool=True
+            )
+            v_put_raw_insert_select = f"{v_put_raw_insert_sql} {s_put_agg_select_sql}"
+            v_del_raw_insert_select = f"{v_del_raw_insert_sql} {s_del_agg_select_sql}"
+            # create_select_query(cursor=)
+            abbv7 = get_dimen_abbv7(bud_dimen)
+            put_sqlstr_ref = f"INSERT_{abbv7.upper()}_VOICE_PUT_RAW_SQLSTR"
+            del_sqlstr_ref = f"INSERT_{abbv7.upper()}_VOICE_DEL_RAW_SQLSTR"
+            print(f'{put_sqlstr_ref}= "{v_put_raw_insert_select}"')
+            print(f'{del_sqlstr_ref}= "{v_del_raw_insert_select}"')
+            # print(f"{v_put_raw_tablename}: {put_sqlstr_ref},")
+            # print(f"{v_del_raw_tablename}: {del_sqlstr_ref},")
+            assert insert_v_raw_sqlstrs.get(v_put_raw_tbl) == v_put_raw_insert_select
+            assert insert_v_raw_sqlstrs.get(v_del_raw_tbl) == v_del_raw_insert_select
+
+
+def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_FiscDimens():
+    # sourcery skip: no-loop-in-tests
+    # ESTABLISH
+    creed_config = get_creed_config_dict()
+    fisc_dimens_config = {
+        x_dimen: dimen_config
+        for x_dimen, dimen_config in creed_config.items()
+        if dimen_config.get(creed_category_str()) == "fisc"
+    }
+
+    # WHEN
+    insert_v_raw_sqlstrs = get_insert_into_voice_raw_sqlstrs()
+
+    # THEN
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_sound_and_voice_tables(cursor)
+
+        for fisc_dimen in fisc_dimens_config:
+            # print(f"{fisc_dimen=}")
+            s_agg_tablename = prime_tbl(fisc_dimen, "s", "agg")
+            v_raw_tablename = prime_tbl(fisc_dimen, "v", "raw")
+            s_cols = get_table_columns(cursor, s_agg_tablename)
+            v_raw_cols = get_table_columns(cursor, v_raw_tablename)
+            v_raw_cols.remove("error_message")
+            v_cols = find_set_otx_inx_args(v_raw_cols)
+            v_cols = {col for col in v_cols if col[-3:] != "inx"}
+            v_raw_tbl = v_raw_tablename
+            s_agg_tbl = s_agg_tablename
+            v_raw_insert_sql = get_insert_sql(cursor, v_raw_tbl, v_cols)
+            s_agg_select_sql = get_select_sql(cursor, s_agg_tbl, s_cols, flat_bool=True)
+            v_raw_insert_select = f"{v_raw_insert_sql} {s_agg_select_sql}"
+            # create_select_query(cursor=)
+            abbv7 = get_dimen_abbv7(fisc_dimen)
+            sqlstr_ref = f"INSERT_{abbv7.upper()}_VOICE_RAW_SQLSTR"
+            print(f'{sqlstr_ref}= "{v_raw_insert_select}"')
+            # print(f""""{v_raw_tablename}": {sqlstr_ref},""")
+            assert insert_v_raw_sqlstrs.get(v_raw_tbl) == v_raw_insert_select
