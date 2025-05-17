@@ -11,14 +11,18 @@ def test_get_way_from_yaw_ReturnsObj_default_bridge():
     # ESTABLISH
     x_s = default_bridge_if_None()
     casa_str = "casa"
-    casa_way = f"{x_s}{root_word()}{x_s}{casa_str}"
-    casa_yaw = f"{x_s}{casa_str}{x_s}{root_word()}"
+    casa_way = f"{x_s}{root_word()}{x_s}{casa_str}{x_s}"
+    casa_yaw = f"{x_s}{casa_str}{x_s}{root_word()}{x_s}"
     bloomers_str = "bloomers"
-    bloomers_way = f"{x_s}{root_word()}{x_s}{casa_str}{x_s}{bloomers_str}"
-    bloomers_yaw = f"{x_s}{bloomers_str}{x_s}{casa_str}{x_s}{root_word()}"
+    bloomers_way = f"{x_s}{root_word()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}"
+    bloomers_yaw = f"{x_s}{bloomers_str}{x_s}{casa_str}{x_s}{root_word()}{x_s}"
     roses_str = "roses"
-    roses_way = f"{x_s}{root_word()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
-    roses_yaw = f"{x_s}{roses_str}{x_s}{bloomers_str}{x_s}{casa_str}{x_s}{root_word()}"
+    roses_way = (
+        f"{x_s}{root_word()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}{x_s}"
+    )
+    roses_yaw = (
+        f"{x_s}{roses_str}{x_s}{bloomers_str}{x_s}{casa_str}{x_s}{root_word()}{x_s}"
+    )
 
     # WHEN / THEN
     assert get_way_from_yaw("") == ""
@@ -32,16 +36,20 @@ def test_get_way_from_yaw_ReturnsObj_default_bridge():
 def test_get_way_from_yaw_ReturnsObj_Not_default_bridge():
     # ESTABLISH
     x_s = "/"
-    root_fisc_way = f"{x_s}{root_word()}"
+    root_fisc_way = f"{x_s}{root_word()}{x_s}"
     casa_str = "casa"
-    casa_way = f"{root_fisc_way}{x_s}{casa_str}"
-    casa_yaw = f"{x_s}{casa_str}{x_s}{root_word()}"
+    casa_way = f"{root_fisc_way}{casa_str}{x_s}"
+    casa_yaw = f"{x_s}{casa_str}{x_s}{root_word()}{x_s}"
     bloomers_str = "bloomers"
-    bloomers_way = f"{root_fisc_way}{x_s}{casa_str}{x_s}{bloomers_str}"
-    bloomers_yaw = f"{x_s}{bloomers_str}{x_s}{casa_str}{x_s}{root_word()}"
+    bloomers_way = f"{root_fisc_way}{casa_str}{x_s}{bloomers_str}{x_s}"
+    bloomers_yaw = f"{x_s}{bloomers_str}{x_s}{casa_str}{x_s}{root_word()}{x_s}"
     roses_str = "roses"
-    roses_way = f"{x_s}{root_word()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
-    roses_yaw = f"{x_s}{roses_str}{x_s}{bloomers_str}{x_s}{casa_str}{x_s}{root_word()}"
+    roses_way = (
+        f"{x_s}{root_word()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}{x_s}"
+    )
+    roses_yaw = (
+        f"{x_s}{roses_str}{x_s}{bloomers_str}{x_s}{casa_str}{x_s}{root_word()}{x_s}"
+    )
 
     # WHEN / THEN
     assert get_way_from_yaw("", x_s) == ""
@@ -54,16 +62,18 @@ def test_get_way_from_yaw_ReturnsObj_Not_default_bridge():
 def test_get_yaw_from_way_ReturnsObj_Not_default_bridge():
     # ESTABLISH
     x_s = "/"
-    root_fisc_way = f"{x_s}{root_word()}"
+    root_fisc_way = f"{x_s}{root_word()}{x_s}"
     casa_str = "casa"
-    casa_way = f"{root_fisc_way}{x_s}{casa_str}"
-    casa_yaw = f"{x_s}{casa_str}{x_s}{root_word()}"
+    casa_way = f"{root_fisc_way}{casa_str}{x_s}"
+    casa_yaw = f"{x_s}{casa_str}{x_s}{root_word()}{x_s}"
     bloomers_str = "bloomers"
-    bloomers_way = f"{root_fisc_way}{x_s}{casa_str}{x_s}{bloomers_str}"
-    bloomers_yaw = f"{x_s}{bloomers_str}{x_s}{casa_str}{x_s}{root_word()}"
+    bloomers_way = f"{root_fisc_way}{casa_str}{x_s}{bloomers_str}{x_s}"
+    bloomers_yaw = f"{x_s}{bloomers_str}{x_s}{casa_str}{x_s}{root_word()}{x_s}"
     roses_str = "roses"
-    roses_way = f"{root_fisc_way}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
-    roses_yaw = f"{x_s}{roses_str}{x_s}{bloomers_str}{x_s}{casa_str}{x_s}{root_word()}"
+    roses_way = f"{root_fisc_way}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}{x_s}"
+    roses_yaw = (
+        f"{x_s}{roses_str}{x_s}{bloomers_str}{x_s}{casa_str}{x_s}{root_word()}{x_s}"
+    )
 
     # WHEN / THEN
     assert get_yaw_from_way("", x_s) == ""

@@ -33,13 +33,17 @@ def get_clean_wordmap() -> WordMap:
 def get_clean_waymap() -> WayMap:
     otx_accord45_str = "accord45"
     inx_accord87_str = "accord87"
+    otx_accord45_way = to_way(otx_accord45_str)
+    inx_accord87_way = to_way(inx_accord87_str)
     clean_otx_str = "clean"
     clean_inx_str = "prop"
     bridge = default_bridge_if_None()
-    clean_otx_way = f"{otx_accord45_str}{bridge}{clean_otx_str}"
+    clean_otx_way = create_way(otx_accord45_str, clean_otx_str, bridge)
+    # clean_otx_way = f"{bridge}{otx_accord45_str}{bridge}{clean_otx_str}{bridge}"
     way_mapunit = waymap_shop(face_name="Sue")
     way_mapunit.set_word(clean_otx_str, clean_inx_str)
-    way_mapunit.set_otx2inx(otx_accord45_str, inx_accord87_str)
+    way_mapunit.set_otx2inx(otx_accord45_way, inx_accord87_way)
+    print(f"{way_mapunit.otx2inx.keys()=}")
     way_mapunit.reveal_inx(clean_otx_way)
     return way_mapunit
 

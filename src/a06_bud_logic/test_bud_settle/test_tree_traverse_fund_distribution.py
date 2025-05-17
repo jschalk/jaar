@@ -1130,6 +1130,7 @@ def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
     #         print(f"{x_membership.group_label=}")
 
     # THEN
+    print(f"{yao_bud.get_reason_rcontexts()=}")
     assert len(agenda_dict) == 63
     x_awardagendametrics = AwardAgendaMetrics()
     x_awardagendametrics.set_sums(agenda_dict=agenda_dict)
