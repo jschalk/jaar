@@ -827,7 +827,7 @@ GROUP BY
 
 def create_pidword_face_otx_event_sqlstr(table: str, column: str) -> str:
     return f"""
-SELECT 
+SELECT
   raw_dim.rowid raw_rowid
 , raw_dim.event_int
 , raw_dim.face_name_otx
@@ -837,7 +837,27 @@ FROM {table} raw_dim
 LEFT JOIN pidgin_word_s_vld pid ON pid.face_name = raw_dim.face_name_otx
     AND pid.otx_word = raw_dim.{column}_otx
     AND raw_dim.event_int >= pid.event_int
-GROUP BY 
+GROUP BY
+  raw_dim.rowid
+, raw_dim.event_int
+, raw_dim.face_name_otx
+, raw_dim.{column}_otx
+"""
+
+
+def create_pidwayy_face_otx_event_sqlstr(table: str, column: str) -> str:
+    return f"""
+SELECT
+  raw_dim.rowid raw_rowid
+, raw_dim.event_int
+, raw_dim.face_name_otx
+, raw_dim.{column}_otx
+, MAX(pid.event_int) pidgin_event_int
+FROM {table} raw_dim
+LEFT JOIN pidgin_word_s_vld pid ON pid.face_name = raw_dim.face_name_otx
+    AND pid.otx_word = raw_dim.{column}_otx
+    AND raw_dim.event_int >= pid.event_int
+GROUP BY
   raw_dim.rowid
 , raw_dim.event_int
 , raw_dim.face_name_otx

@@ -47,6 +47,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_pidname_face_otx_event_sqlstr,
     create_pidlabe_face_otx_event_sqlstr,
     create_pidword_face_otx_event_sqlstr,
+    create_pidwayy_face_otx_event_sqlstr,
 )
 from sqlite3 import connect as sqlite3_connect
 
@@ -222,7 +223,7 @@ def test_create_pidword_face_otx_event_sqlstr_ReturnsObj_Scenario0_WordStr():
 
         # THEN
         static_select_pidword_sqlstr = """
-SELECT 
+SELECT
   raw_dim.rowid raw_rowid
 , raw_dim.event_int
 , raw_dim.face_name_otx
@@ -232,7 +233,7 @@ FROM fisc_timeline_hour_v_raw raw_dim
 LEFT JOIN pidgin_word_s_vld pid ON pid.face_name = raw_dim.face_name_otx
     AND pid.otx_word = raw_dim.hour_word_otx
     AND raw_dim.event_int >= pid.event_int
-GROUP BY 
+GROUP BY
   raw_dim.rowid
 , raw_dim.event_int
 , raw_dim.face_name_otx
@@ -257,106 +258,108 @@ GROUP BY
         ]
 
 
-# # TODO reactivate thie test changed to wayunit
-# def test_create_pidword_face_otx_event_sqlstr_ReturnsObj_Scenario0_WordStr():
-#     # ESTABLISH
-#     bob_otx = "Bob"
-#     yao_otx = "Yao"
-#     zia_otx = "Zia"
-#     hr7_otx = "hr7"
-#     hr7_inx = "Casita"
-#     bob_hr7_inx = ";bob_hr7Inx"
-#     hr8_otx = "hr8ts"
-#     hr8_inx1 = "hr8_v1"
-#     hr8_inx7 = "hr8_v7"
-#     hr2_otx = "hr2_v1"
-#     hr2_inx = "hr2_v2"
-#     event0 = 0
-#     event1 = 1
-#     event2 = 2
-#     event5 = 5
-#     event7 = 7
-#     event8 = 8
-#     event9 = 9
+def test_create_pidwayy_face_otx_event_sqlstr_ReturnsObj_Scenario0_WayStr():
+    # ESTABLISH
+    bob_otx = "Bob"
+    yao_otx = "Yao"
+    zia_otx = "Zia"
+    casa_way_otx = create_way("casa")
+    clean_way_otx = create_way(casa_way_otx, "clean")
+    dirty_way_otx = create_way(casa_way_otx, "dirty")
+    casa_way_inx = create_way("casita")
+    clean_way_inx1 = create_way(casa_way_inx, "clean1")
+    clean_way_inx7 = create_way(casa_way_inx, "clean7")
+    dirty_way_inx = create_way(casa_way_inx, "dirty")
+    sport_way_otx = create_way("sport")
+    bball_way_otx = create_way(sport_way_otx, "bball")
+    sport_way_inx = create_way("sport")
+    bball_way_inx = create_way(sport_way_otx, "basketball")
+    event0 = 0
+    event1 = 1
+    event2 = 2
+    event5 = 5
+    event7 = 7
+    event8 = 8
+    event9 = 9
 
-#     with sqlite3_connect(":memory:") as db_conn:
-#         cursor = db_conn.cursor()
-#         create_sound_and_voice_tables(cursor)
-#         fishour_dimen = fisc_timeline_hour_str()
-#         fishour_v_raw_tablename = prime_tbl(fishour_dimen, "v", "raw")
-#         print(f"{get_table_columns(cursor, fishour_v_raw_tablename)=}")
-#         insert_sqlstr = f"""INSERT INTO {fishour_v_raw_tablename}
-#         ({event_int_str()}, {face_name_str()}_otx, {hour_word_str()}_otx, {hour_word_str()}_inx)
-#         VALUES
-#           ({event0}, '{bob_otx}', '{hr8_otx}', NULL)
-#         , ({event1}, '{bob_otx}', '{hr8_otx}', NULL)
-#         , ({event2}, '{yao_otx}', '{hr2_otx}', NULL)
-#         , ({event5}, '{bob_otx}', '{hr8_otx}', NULL)
-#         , ({event7}, '{bob_otx}', '{hr8_otx}', NULL)
-#         , ({event9}, '{bob_otx}', '{hr8_otx}', NULL)
-#         ;
-#         """
-#         cursor.execute(insert_sqlstr)
+    with sqlite3_connect(":memory:") as db_conn:
+        cursor = db_conn.cursor()
+        create_sound_and_voice_tables(cursor)
+        budawar_put_dimen = bud_idea_awardlink_str()
+        budawar_put_v_raw_tablename = prime_tbl(budawar_put_dimen, "v", "raw", "put")
+        print(f"{get_table_columns(cursor, budawar_put_v_raw_tablename)=}")
+        insert_sqlstr = f"""INSERT INTO {budawar_put_v_raw_tablename}
+        ({event_int_str()}, {face_name_str()}_otx, {idea_way_str()}_otx, {idea_way_str()}_inx)
+        VALUES
+          ({event0}, '{bob_otx}', '{clean_way_otx}', NULL)
+        , ({event1}, '{bob_otx}', '{clean_way_otx}', NULL)
+        , ({event2}, '{yao_otx}', '{bball_way_otx}', NULL)
+        , ({event5}, '{bob_otx}', '{clean_way_otx}', NULL)
+        , ({event7}, '{bob_otx}', '{clean_way_otx}', NULL)
+        , ({event9}, '{bob_otx}', '{clean_way_otx}', NULL)
+        ;
+        """
+        cursor.execute(insert_sqlstr)
 
-#         pidword_dimen = pidgin_word_str()
-#         pidword_s_vld_tablename = prime_tbl(pidword_dimen, "s", "vld")
-#         # print(f"{pidword_s_vld_tablename=}")
-#         insert_pidword_sqlstr = f"""INSERT INTO {pidword_s_vld_tablename}
-#         ({event_int_str()}, {face_name_str()}, {otx_word_str()}, {inx_word_str()})
-#         VALUES
-#           ({event1}, '{bob_otx}', '{hr8_otx}', '{hr8_inx1}')
-#         , ({event2}, '{yao_otx}', '{hr2_otx}', '{hr2_inx}')
-#         , ({event7}, '{bob_otx}', '{hr8_otx}', '{hr8_inx7}')
-#         , ({event7}, '{bob_otx}', '{hr7_otx}', '{bob_hr7_inx}')
-#         , ({event8}, '{zia_otx}', '{hr7_otx}', '{hr7_inx}')
-#         ;
-#         """
-#         cursor.execute(insert_pidword_sqlstr)
+        pidwayy_dimen = pidgin_word_str()
+        pidwayy_s_vld_tablename = prime_tbl(pidwayy_dimen, "s", "vld")
+        # print(f"{pidwayy_s_vld_tablename=}")
+        insert_pidwayy_sqlstr = f"""INSERT INTO {pidwayy_s_vld_tablename}
+        ({event_int_str()}, {face_name_str()}, {otx_word_str()}, {inx_word_str()})
+        VALUES
+          ({event1}, '{bob_otx}', '{clean_way_otx}', '{clean_way_inx1}')
+        , ({event2}, '{yao_otx}', '{bball_way_otx}', '{bball_way_inx}')
+        , ({event7}, '{bob_otx}', '{bball_way_otx}', '{bball_way_inx}')
+        , ({event7}, '{bob_otx}', '{clean_way_otx}', '{clean_way_inx7}')
+        , ({event8}, '{zia_otx}', '{dirty_way_otx}', '{dirty_way_inx}')
+        ;
+        """
+        cursor.execute(insert_pidwayy_sqlstr)
 
-#         face_name_inx_count_sql = f"SELECT COUNT(*) FROM {fishour_v_raw_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
-#         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 0
+        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {budawar_put_v_raw_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
+        assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 0
 
-#         # WHEN
-#         pidname_face_otx_event_sqlstr = create_pidword_face_otx_event_sqlstr(
-#             fishour_v_raw_tablename, hour_word_str()
-#         )
-#         cursor.execute(pidname_face_otx_event_sqlstr)
+        # WHEN
+        pidname_face_otx_event_sqlstr = create_pidwayy_face_otx_event_sqlstr(
+            budawar_put_v_raw_tablename, idea_way_str()
+        )
+        cursor.execute(pidname_face_otx_event_sqlstr)
 
-#         # THEN
-#         static_select_pidword_sqlstr = """
-# SELECT
-#   raw_dim.rowid raw_rowid
-# , raw_dim.event_int
-# , raw_dim.face_name_otx
-# , raw_dim.hour_word_otx
-# , MAX(pid.event_int) pidgin_event_int
-# FROM fisc_timeline_hour_v_raw raw_dim
-# LEFT JOIN pidgin_word_s_vld pid ON pid.face_name = raw_dim.face_name_otx
-#     AND pid.otx_word = raw_dim.hour_word_otx
-#     AND raw_dim.event_int >= pid.event_int
-# GROUP BY
-#   raw_dim.rowid
-# , raw_dim.event_int
-# , raw_dim.face_name_otx
-# , raw_dim.hour_word_otx
-# """
+        # THEN
+        static_select_pidwayy_sqlstr = """
+SELECT
+  raw_dim.rowid raw_rowid
+, raw_dim.event_int
+, raw_dim.face_name_otx
+, raw_dim.idea_way_otx
+, MAX(pid.event_int) pidgin_event_int
+FROM bud_idea_awardlink_v_put_raw raw_dim
+LEFT JOIN pidgin_word_s_vld pid ON pid.face_name = raw_dim.face_name_otx
+    AND pid.otx_word = raw_dim.idea_way_otx
+    AND raw_dim.event_int >= pid.event_int
+GROUP BY
+  raw_dim.rowid
+, raw_dim.event_int
+, raw_dim.face_name_otx
+, raw_dim.idea_way_otx
+"""
 
-#         print(pidname_face_otx_event_sqlstr)
-#         print("")
-#         # print(static_select_pidword_sqlstr)
-#         assert static_select_pidword_sqlstr == pidname_face_otx_event_sqlstr
-#         cursor.execute(static_select_pidword_sqlstr)
-#         rows = cursor.fetchall()
-#         print(rows)
-#         # event5 does not link to event7 pidgin record's
-#         assert rows == [
-#             (1, event0, bob_otx, hr8_otx, None),
-#             (2, event1, bob_otx, hr8_otx, event1),
-#             (3, event2, yao_otx, hr2_otx, event2),
-#             (4, event5, bob_otx, hr8_otx, event1),
-#             (5, event7, bob_otx, hr8_otx, event7),
-#             (6, event9, bob_otx, hr8_otx, event7),
-#         ]
+        print(pidname_face_otx_event_sqlstr)
+        print("")
+        # print(static_select_pidwayy_sqlstr)
+        assert static_select_pidwayy_sqlstr == pidname_face_otx_event_sqlstr
+        cursor.execute(static_select_pidwayy_sqlstr)
+        rows = cursor.fetchall()
+        print(rows)
+        # event5 does not link to event7 pidgin record's
+        assert rows == [
+            (1, event0, bob_otx, clean_way_otx, None),
+            (2, event1, bob_otx, clean_way_otx, event1),
+            (3, event2, yao_otx, bball_way_otx, event2),
+            (4, event5, bob_otx, clean_way_otx, event1),
+            (5, event7, bob_otx, clean_way_otx, event7),
+            (6, event9, bob_otx, clean_way_otx, event7),
+        ]
 
 
 def test_create_pidname_face_otx_event_sqlstr_ReturnsObj_Scenario20_NameStr():
