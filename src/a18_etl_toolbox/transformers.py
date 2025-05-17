@@ -55,7 +55,10 @@ from src.a16_pidgin_logic.pidgin import (
     default_bridge_if_None,
     default_unknown_term_if_None,
 )
-from src.a16_pidgin_logic.pidgin_config import get_quick_pidgens_column_ref
+from src.a16_pidgin_logic.pidgin_config import (
+    get_quick_pidgens_column_ref,
+    get_pidgin_args_class_types,
+)
 from src.a17_creed_logic.creed_config import (
     get_creed_numbers,
     get_creed_format_filename,
@@ -96,6 +99,8 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_update_pidlabe_sound_agg_bridge_error_sqlstr,
     create_insert_pidgin_sound_vld_table_sqlstr,
     get_insert_into_voice_raw_sqlstrs,
+    create_update_voice_raw_existing_inx_col_sqlstr,
+    create_update_voice_raw_empty_inx_col_sqlstr,
     get_bud_prime_create_table_sqlstrs,
     create_pidgin_prime_tables,
     create_fisc_prime_tables,
@@ -571,6 +576,49 @@ def etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor: sqlite3_Curso
 def etl_sound_agg_tables_to_voice_raw_tables(cursor: sqlite3_Cursor):
     for sqlstr in get_insert_into_voice_raw_sqlstrs().values():
         cursor.execute(sqlstr)
+    set_all_voice_raw_inx_columns(cursor)
+
+
+def set_all_voice_raw_inx_columns(cursor: sqlite3_Cursor):
+    pidgin_args = get_pidgin_args_class_types()
+    # get list of all voice_raw tables
+    for voice_raw_tablename in get_insert_into_voice_raw_sqlstrs().keys():
+        for columnname in get_table_columns(cursor, voice_raw_tablename):
+            if columnname[-3:] in {"otx"}:
+                column_without_otx = columnname[:-4]
+                x_arg = columnname[:-4]
+                if x_arg[-5:] == "ERASE":
+                    x_arg = x_arg[:-6]
+                arg_class_type = pidgin_args.get(x_arg)
+                set_voice_raw_inx_column(
+                    cursor, voice_raw_tablename, column_without_otx, arg_class_type
+                )
+
+
+def set_voice_raw_inx_column(
+    cursor: sqlite3_Cursor,
+    voice_raw_tablename: str,
+    column_without_otx: str,
+    arg_class_type: dict[str, str],
+):
+    if arg_class_type in {"NameStr", "LabelStr", "WordStr", "WayStr"}:
+        pidgin_type_abbv = ""
+        if arg_class_type == "NameStr":
+            pidgin_type_abbv = "name"
+        elif arg_class_type == "LabelStr":
+            pidgin_type_abbv = "label"
+        elif arg_class_type == "WordStr":
+            pidgin_type_abbv = "word"
+        elif arg_class_type == "WayStr":
+            pidgin_type_abbv = "way"
+        update_calc_inx_sqlstr = create_update_voice_raw_existing_inx_col_sqlstr(
+            pidgin_type_abbv, voice_raw_tablename, column_without_otx
+        )
+        cursor.execute(update_calc_inx_sqlstr)
+        update_empty_inx_sqlstr = create_update_voice_raw_empty_inx_col_sqlstr(
+            voice_raw_tablename, column_without_otx
+        )
+        cursor.execute(update_empty_inx_sqlstr)
 
 
 def etl_brick_valid_table_into_prime_table(
