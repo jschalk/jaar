@@ -102,7 +102,8 @@ def to_way(word: WordStr, bridge: str = None):
     x_bridge = default_bridge_if_None(bridge)
     if word is None:
         return x_bridge
-    return word if word.find(x_bridge) == 0 else f"{x_bridge}{word}"
+    word = word if word.find(x_bridge) == 0 else f"{x_bridge}{word}"
+    return word if word.endswith(x_bridge) else f"{word}{x_bridge}"
 
 
 def get_default_fisc_way(bridge: str = None) -> str:
@@ -149,11 +150,12 @@ def create_way(
         return WayStr(parent_way)
     if terminus_word.is_word(bridge) is False:
         raise bridge_in_word_Exception(f"bridge '{bridge}' is in {terminus_word}")
-
     if parent_way in {"", None}:
-        x_way = terminus_word
+        x_way = to_way(terminus_word, bridge)
+    elif parent_way.endswith(bridge):
+        x_way = f"{parent_way}{terminus_word}{bridge}"
     else:
-        x_way = f"{parent_way}{bridge}{terminus_word}"
+        x_way = f"{parent_way}{bridge}{terminus_word}{bridge}"
     return to_way(x_way, bridge)
 
 
@@ -172,7 +174,7 @@ def is_sub_way(ref_way: WayStr, sub_way: WayStr) -> bool:
 
 
 def is_heir_way(src: WayStr, heir: WayStr, bridge: str = None) -> bool:
-    return src == heir or heir.find(f"{src}{default_bridge_if_None(bridge)}") == 0
+    return src == heir or heir.find(src) == 0
 
 
 def find_replace_way_key_dict(dict_x: dict, old_way: WayStr, new_way: WayStr) -> dict:
@@ -194,11 +196,15 @@ def find_replace_way_key_dict(dict_x: dict, old_way: WayStr, new_way: WayStr) ->
 
 
 def get_all_way_words(way: WayStr, bridge: str = None) -> list[WordStr]:
-    return way.split(default_bridge_if_None(bridge))[1:]
+    return way.split(default_bridge_if_None(bridge))[1:-1]
 
 
 def get_terminus_word(way: WayStr, bridge: str = None) -> WordStr:
-    return get_all_way_words(way=way, bridge=bridge)[-1]
+    bridge = default_bridge_if_None(bridge)
+    if way in ["", bridge]:
+        return ""
+    all_way_words = get_all_way_words(way=way, bridge=bridge)
+    return all_way_words[0] if len(all_way_words) == 1 else all_way_words[-1]
 
 
 def get_parent_way(

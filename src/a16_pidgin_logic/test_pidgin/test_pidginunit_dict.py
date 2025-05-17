@@ -104,7 +104,7 @@ def test_PidginUnit_get_json_ReturnsObj():
 
     # THEN
     # print(f"{sue_json=}")
-    assert sue_json.find("wordmap") == 423
+    assert sue_json.find("wordmap") == 439
     assert sue_json.find(otx_bridge_str()) == 269
 
 

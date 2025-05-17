@@ -404,6 +404,7 @@ class WayMap:
             print(f"{x_way=}")
             parent_way = get_parent_way(x_way, self.otx_bridge)
             if parent_way and self.otx_exists(parent_way) is False:
+                print("false")
                 return False
         return True
 

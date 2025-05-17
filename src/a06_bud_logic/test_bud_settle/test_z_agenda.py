@@ -382,6 +382,7 @@ def test_budunit_get_from_json_CorrectlyLoadsPledgeFromJSON():
 def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
     # ESTABLISH
     yao_bud = budunit_v002()
+    print(f"{yao_bud.get_reason_rcontexts()=}")
 
     assert len(yao_bud.get_agenda_dict()) == 44
     time_way = yao_bud.make_l1_way("time")

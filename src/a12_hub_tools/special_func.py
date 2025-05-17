@@ -16,7 +16,11 @@ def create_pledge(
     x_laborlink: LabelStr = None,
     reason_premise: WayStr = None,
 ):
-    if pledge_way is not None and get_terminus_word(pledge_way) != "":
+    if (
+        pledge_way is not None
+        and pledge_way != ""
+        and get_terminus_word(pledge_way) != ""
+    ):
         x_idea = x_bud.get_idea_obj(pledge_way, if_missing_create=True)
         x_idea.pledge = True
         x_idea.laborunit.set_laborlink(x_laborlink)

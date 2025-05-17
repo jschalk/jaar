@@ -34,9 +34,10 @@ def test_to_way_ReturnsObj_WithDefault_bridge():
     x_bridge = default_bridge_if_None()
 
     # WHEN / THEN
-    assert to_way(x_word) == f"{x_bridge}{x_word}"
-    assert to_way(f"{x_bridge}{x_word}") == f"{x_bridge}{x_word}"
-    assert to_way(f"{x_bridge}{x_bridge}{x_word}") == f"{x_bridge}{x_bridge}{x_word}"
+    assert to_way(x_word) == f"{x_bridge}{x_word}{x_bridge}"
+    assert to_way(f"{x_bridge}{x_word}") == f"{x_bridge}{x_word}{x_bridge}"
+    two_bridge_in_front_one_back = f"{x_bridge}{x_bridge}{x_word}{x_bridge}"
+    assert to_way(f"{x_bridge}{x_bridge}{x_word}") == two_bridge_in_front_one_back
     assert to_way(x_bridge) == x_bridge
     assert to_way(None) == x_bridge
 
@@ -44,17 +45,17 @@ def test_to_way_ReturnsObj_WithDefault_bridge():
 def test_to_way_ReturnsObj_WithParameter_bridge():
     # ESTABLISH
     x_word = "run"
-    slash_bridge = "/"
+    s_bridge = "/"
 
     # WHEN / THEN
-    assert to_way(x_word, slash_bridge) == f"{slash_bridge}{x_word}"
-    assert to_way(f"{slash_bridge}{x_word}", slash_bridge) == f"{slash_bridge}{x_word}"
+    assert to_way(x_word, s_bridge) == f"{s_bridge}{x_word}{s_bridge}"
+    assert to_way(f"{s_bridge}{x_word}", s_bridge) == f"{s_bridge}{x_word}{s_bridge}"
     assert (
-        to_way(f"{slash_bridge}{slash_bridge}{x_word}", slash_bridge)
-        == f"{slash_bridge}{slash_bridge}{x_word}"
+        to_way(f"{s_bridge}{s_bridge}{x_word}", s_bridge)
+        == f"{s_bridge}{s_bridge}{x_word}{s_bridge}"
     )
-    assert to_way(slash_bridge, slash_bridge) == slash_bridge
-    assert to_way(None, slash_bridge) == slash_bridge
+    assert to_way(s_bridge, s_bridge) == s_bridge
+    assert to_way(None, s_bridge) == s_bridge
 
 
 def test_get_default_fisc_word_ReturnsObj():
@@ -102,7 +103,8 @@ def test_create_way_ReturnsObj_Scenario3():
     rose_str = "rose"
     semicolon_bridge = ";"
     assert semicolon_bridge == default_bridge_if_None()
-    semicolon_bridge_rose_way = f"{root_way()}{semicolon_bridge}{rose_str}"
+    semicolon_bridge_rose_way = f"{root_way()}{rose_str}{semicolon_bridge}"
+    print(f"{semicolon_bridge_rose_way=}")
 
     # WHEN / THEN
     assert create_way(root_way(), rose_str) == semicolon_bridge_rose_way
@@ -113,7 +115,7 @@ def test_create_way_ReturnsObj_Scenario4():
     rose_str = "rose"
     slash_bridge = "/"
     slash_bridge_rose_way = (
-        f"{slash_bridge}{get_default_fisc_word()}{slash_bridge}{rose_str}"
+        f"{slash_bridge}{get_default_fisc_word()}{slash_bridge}{rose_str}{slash_bridge}"
     )
 
     # WHEN
@@ -128,11 +130,11 @@ def test_way_create_way_ReturnsObj_Scenario5():
     # ESTABLISH
     x_s = default_bridge_if_None()
     casa_str = "casa"
-    casa_way = f"{root_way()}{x_s}{casa_str}"
+    casa_way = f"{root_way()}{casa_str}{x_s}"
     bloomers_str = "bloomers"
-    bloomers_way = f"{root_way()}{x_s}{casa_str}{x_s}{bloomers_str}"
+    bloomers_way = f"{root_way()}{casa_str}{x_s}{bloomers_str}{x_s}"
     roses_str = "roses"
-    roses_way = f"{root_way()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
+    roses_way = f"{root_way()}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}{x_s}"
 
     # WHEN / THEN
     assert create_way(None, get_default_fisc_word()) == root_way()
@@ -184,11 +186,11 @@ def test_way_get_all_way_words_ReturnsWordStrs():
     # ESTABLISH
     x_s = default_bridge_if_None()
     casa_str = "casa"
-    casa_way = f"{root_way()}{x_s}{casa_str}"
+    casa_way = f"{root_way()}{casa_str}{x_s}"
     bloomers_str = "bloomers"
-    bloomers_way = f"{root_way()}{x_s}{casa_str}{x_s}{bloomers_str}"
+    bloomers_way = f"{root_way()}{casa_str}{x_s}{bloomers_str}{x_s}"
     roses_str = "roses"
-    roses_way = f"{root_way()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
+    roses_way = f"{root_way()}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}{x_s}"
 
     # WHEN / THENs
     root_list = [get_default_fisc_word()]
@@ -205,17 +207,18 @@ def test_way_get_terminus_word_ReturnsWordStr():
     # ESTABLISH
     x_s = default_bridge_if_None()
     casa_str = "casa"
-    casa_way = f"{root_way()}{x_s}{casa_str}"
+    casa_way = f"{root_way()}{x_s}{casa_str}{x_s}"
     bloomers_str = "bloomers"
-    bloomers_way = f"{casa_way}{x_s}{bloomers_str}"
+    bloomers_way = f"{casa_way}{x_s}{bloomers_str}{x_s}"
     roses_str = "roses"
-    roses_way = f"{bloomers_way}{x_s}{roses_str}"
+    roses_way = f"{bloomers_way}{x_s}{roses_str}{x_s}"
 
     # WHEN / THENs
     assert get_terminus_word(way=root_way()) == get_default_fisc_word()
     assert get_terminus_word(way=casa_way) == casa_str
     assert get_terminus_word(way=bloomers_way) == bloomers_str
     assert get_terminus_word(way=roses_way) == roses_str
+    assert get_terminus_word(way="") == ""
 
 
 def test_way_get_terminus_word_ReturnsWordStrWhenNonDefaultbridge():
@@ -224,9 +227,11 @@ def test_way_get_terminus_word_ReturnsWordStrWhenNonDefaultbridge():
     bloomers_str = "bloomers"
     roses_str = "roses"
     slash_str = "/"
-    slash_casa_way = f"{slash_str}{get_default_fisc_word()}{slash_str}{casa_str}"
-    slash_bloomers_way = f"{slash_str}{slash_casa_way}{slash_str}{bloomers_str}"
-    slash_roses_way = f"{slash_str}{slash_bloomers_way}{slash_str}{roses_str}"
+    slash_casa_way = (
+        f"{slash_str}{get_default_fisc_word()}{slash_str}{casa_str}{slash_str}"
+    )
+    slash_bloomers_way = f"{slash_casa_way}{bloomers_str}{slash_str}"
+    slash_roses_way = f"{slash_bloomers_way}{roses_str}{slash_str}"
 
     # WHEN / THENs
     assert get_terminus_word(slash_casa_way, slash_str) == casa_str
@@ -253,13 +258,13 @@ def test_way_get_root_word_from_way_ReturnsWordStr():
 def test_way_get_parent_way_ReturnsObj_Scenario0():
     # ESTABLISH
     x_s = default_bridge_if_None()
-    root_fisc_way = f"{x_s}{get_default_fisc_word()}"
+    root_fisc_way = f"{x_s}{get_default_fisc_word()}{x_s}"
     casa_str = "casa"
-    casa_way = f"{root_fisc_way}{x_s}{casa_str}"
+    casa_way = f"{root_fisc_way}{casa_str}{x_s}"
     bloomers_str = "bloomers"
-    bloomers_way = f"{casa_way}{x_s}{bloomers_str}"
+    bloomers_way = f"{casa_way}{bloomers_str}{x_s}"
     roses_str = "roses"
-    roses_way = f"{bloomers_way}{x_s}{roses_str}"
+    roses_way = f"{bloomers_way}{roses_str}{x_s}"
 
     # WHEN / THENs
     assert get_parent_way(root_way(), x_s) == ""
@@ -271,13 +276,13 @@ def test_way_get_parent_way_ReturnsObj_Scenario0():
 def test_way_get_parent_way_ReturnsObj_Scenario1():
     # ESTABLISH
     x_s = "/"
-    root_fisc_way = f"{x_s}{get_default_fisc_word()}"
+    root_fisc_way = f"{x_s}{get_default_fisc_word()}{x_s}"
     casa_str = "casa"
-    casa_way = f"{root_fisc_way}{x_s}{casa_str}"
+    casa_way = f"{root_fisc_way}{casa_str}{x_s}"
     bloomers_str = "bloomers"
-    bloomers_way = f"{casa_way}{x_s}{bloomers_str}"
+    bloomers_way = f"{casa_way}{bloomers_str}{x_s}"
     roses_str = "roses"
-    roses_way = f"{bloomers_way}{x_s}{roses_str}"
+    roses_way = f"{bloomers_way}{roses_str}{x_s}"
 
     # WHEN / THENs
     assert get_parent_way(root_fisc_way, x_s) == ""
@@ -322,11 +327,11 @@ def test_way_get_ancestor_ways_ReturnsObj_Scenario0_default_bridge():
     # ESTABLISH
     x_s = default_bridge_if_None()
     nation_str = "nation-state"
-    nation_way = f"{root_way()}{x_s}{nation_str}"
+    nation_way = f"{root_way()}{nation_str}{x_s}"
     usa_str = "USA"
-    usa_way = f"{nation_way}{x_s}{usa_str}"
+    usa_way = f"{nation_way}{usa_str}{x_s}"
     texas_str = "Texas"
-    texas_way = f"{usa_way}{x_s}{texas_str}"
+    texas_way = f"{usa_way}{texas_str}{x_s}"
 
     # WHEN
     texas_anc_ways = get_ancestor_ways(way=texas_way)
@@ -352,13 +357,13 @@ def test_way_get_ancestor_ways_ReturnsObj_Scenario0_default_bridge():
 def test_way_get_ancestor_ways_ReturnsObj_Scenario1_nondefault_bridge():
     # ESTABLISH
     x_s = "/"
-    root_fisc_way = f"{x_s}accord23"
+    root_fisc_way = f"{x_s}accord23{x_s}"
     nation_str = "nation-state"
-    nation_way = f"{root_fisc_way}{x_s}{nation_str}"
+    nation_way = f"{root_fisc_way}{nation_str}{x_s}"
     usa_str = "USA"
-    usa_way = f"{nation_way}{x_s}{usa_str}"
+    usa_way = f"{nation_way}{usa_str}{x_s}"
     texas_str = "Texas"
-    texas_way = f"{usa_way}{x_s}{texas_str}"
+    texas_way = f"{usa_way}{texas_str}{x_s}"
 
     # WHEN
     texas_anc_ways = get_ancestor_ways(way=texas_way, bridge=x_s)
@@ -380,11 +385,11 @@ def test_way_get_forefather_ways_ReturnsAncestorWayStrsWithoutClean():
     # ESTABLISH
     x_s = default_bridge_if_None()
     nation_str = "nation-state"
-    nation_way = f"{root_way()}{x_s}{nation_str}"
+    nation_way = f"{root_way()}{nation_str}{x_s}"
     usa_str = "USA"
-    usa_way = f"{nation_way}{x_s}{usa_str}"
+    usa_way = f"{nation_way}{usa_str}{x_s}"
     texas_str = "Texas"
-    texas_way = f"{usa_way}{x_s}{texas_str}"
+    texas_way = f"{usa_way}{texas_str}{x_s}"
 
     # WHEN
     x_ways = get_forefather_ways(way=texas_way)
@@ -409,13 +414,13 @@ def test_way_create_way_from_words_ReturnsObj():
     x_s = default_bridge_if_None()
     root_list = get_all_way_words(root_way())
     casa_str = "casa"
-    casa_way = f"{root_way()}{x_s}{casa_str}"
+    casa_way = f"{root_way()}{casa_str}{x_s}"
     casa_list = get_all_way_words(casa_way)
     bloomers_str = "bloomers"
-    bloomers_way = f"{root_way()}{x_s}{casa_str}{x_s}{bloomers_str}"
+    bloomers_way = f"{root_way()}{casa_str}{x_s}{bloomers_str}{x_s}"
     bloomers_list = get_all_way_words(bloomers_way)
     roses_str = "roses"
-    roses_way = f"{root_way()}{x_s}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}"
+    roses_way = f"{root_way()}{casa_str}{x_s}{bloomers_str}{x_s}{roses_str}{x_s}"
     roses_list = get_all_way_words(roses_way)
 
     # WHEN / THEN
@@ -441,9 +446,9 @@ def test_is_heir_way_CorrectlyIdentifiesHeirs():
     # ESTABLISH
     x_s = default_bridge_if_None()
     usa_str = "USA"
-    usa_way = f"{root_way()}{x_s}Nation-States{x_s}{usa_str}"
+    usa_way = f"{root_way()}Nation-States{x_s}{usa_str}{x_s}"
     texas_str = "Texas"
-    texas_way = f"{usa_way}{x_s}{texas_str}"
+    texas_way = f"{usa_way}{texas_str}{x_s}"
     # earth_str = "earth"
     # earth_way = f"{earth_str}"
     # sea_str = "sea"
@@ -454,8 +459,12 @@ def test_is_heir_way_CorrectlyIdentifiesHeirs():
     # WHEN / THEN
     assert is_heir_way(src=usa_way, heir=usa_way)
     assert is_heir_way(src=usa_way, heir=texas_way)
-    assert is_heir_way(f"earth{x_s}sea", f"earth{x_s}seaside{x_s}beach") is False
-    assert is_heir_way(src=f"earth{x_s}sea", heir=f"earth{x_s}seaside") is False
+    assert (
+        is_heir_way(f"earth{x_s}sea{x_s}", f"earth{x_s}seaside{x_s}beach{x_s}") is False
+    )
+    assert (
+        is_heir_way(src=f"earth{x_s}sea{x_s}", heir=f"earth{x_s}seaside{x_s}") is False
+    )
 
 
 def test_replace_bridge_ReturnsNewObj():
@@ -465,7 +474,7 @@ def test_replace_bridge_ReturnsNewObj():
     gen_casa_way = create_way(root_word, casa_str)
     semicolon_bridge = default_bridge_if_None()
     semicolon_bridge_casa_way = (
-        f"{semicolon_bridge}{root_word}{semicolon_bridge}{casa_str}"
+        f"{semicolon_bridge}{root_word}{semicolon_bridge}{casa_str}{semicolon_bridge}"
     )
     assert semicolon_bridge == ";"
     assert gen_casa_way == semicolon_bridge_casa_way
@@ -477,7 +486,9 @@ def test_replace_bridge_ReturnsNewObj():
     )
 
     # THEN
-    slash_bridge_casa_way = f"{slash_bridge}{root_word}{slash_bridge}{casa_str}"
+    slash_bridge_casa_way = (
+        f"{slash_bridge}{root_word}{slash_bridge}{casa_str}{slash_bridge}"
+    )
     assert gen_casa_way == slash_bridge_casa_way
 
 
@@ -486,7 +497,7 @@ def test_replace_bridge_CorrectlyRaisesError():
     cooker_str = "cooker/cleaner"
     gen_cooker_way = create_way(root_way(), cooker_str)
     semicolon_bridge = default_bridge_if_None()
-    semicolon_bridge_cooker_way = f"{root_way()}{semicolon_bridge}{cooker_str}"
+    semicolon_bridge_cooker_way = f"{root_way()}{cooker_str}{semicolon_bridge}"
     assert semicolon_bridge == ";"
     assert gen_cooker_way == semicolon_bridge_cooker_way
 
@@ -566,10 +577,10 @@ def test_waystr_valid_dir_path_ReturnsObj_simple_bridge():
     # ESTABLISH
     comma_str = ","
     # WHEN / THEN
-    assert waystr_valid_dir_path(",run", bridge=comma_str)
-    assert waystr_valid_dir_path(",run,sport", bridge=comma_str)
+    assert waystr_valid_dir_path(",run,", bridge=comma_str)
+    assert waystr_valid_dir_path(",run,sport,", bridge=comma_str)
     print(f"{platform_system()=}")
-    sport_question_valid_bool = waystr_valid_dir_path("run,sport?", comma_str)
+    sport_question_valid_bool = waystr_valid_dir_path("run,sport?,", comma_str)
     assert (
         platform_system() == "Windows" and sport_question_valid_bool is False
     ) or platform_system() == "Linux"
@@ -585,7 +596,7 @@ def test_waystr_valid_dir_path_ReturnsObj_complicated_bridge():
     print(f"{sport_way=}")
     run_way = create_way(sport_way, run_str, bridge=question_str)
     lap_way = create_way(run_way, lap_str, bridge=question_str)
-    assert lap_way == f"{sport_way}?{run_str}?{lap_str}"
+    assert lap_way == f"{sport_way}{run_str}?{lap_str}?"
 
     assert waystr_valid_dir_path(sport_way, bridge=question_str)
     assert waystr_valid_dir_path(run_way, bridge=question_str)
@@ -605,7 +616,7 @@ def test_waystr_valid_dir_path_ReturnsObjWhereSlashNotbridgeEdgeCases():
     sport_way = create_way(sport_str, bridge=question_str)
     run_way = create_way(sport_way, run_str, bridge=question_str)
     lap_way = create_way(run_way, lap_str, bridge=question_str)
-    assert lap_way == f"{sport_way}?{run_str}?{lap_str}"
+    assert lap_way == f"{sport_way}{run_str}?{lap_str}?"
 
     assert waystr_valid_dir_path(sport_way, bridge=question_str)
     assert waystr_valid_dir_path(run_way, bridge=question_str) is False

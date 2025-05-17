@@ -16,7 +16,7 @@ def test_WayMap_reveal_inx_ReturnsObjAndSetsAttr_way_Scenario0():
     gen_inx_way = way_waymap.reveal_inx(otx_accord45_way)
 
     # THEN
-    assert gen_inx_way[1:] == otx_accord45_way[1:]
+    assert gen_inx_way[1:-1] == otx_accord45_way[1:-1]
     assert way_waymap.otx_exists(otx_accord45_way)
     inx_accord45_way = to_way(a45_str, inx_r_bridge)
     assert way_waymap.otx2inx_exists(otx_accord45_way, inx_accord45_way)
@@ -29,7 +29,7 @@ def test_WayMap_reveal_inx_ReturnsObjAndSetsAttr_way_Scenario1():
     otx_accord45_way = to_way("accord45", otx_r_bridge)
     inx_accord87_way = to_way("accord87", inx_r_bridge)
     clean_otx_str = "clean"
-    clean_otx_way = f"{otx_accord45_way}{otx_r_bridge}{clean_otx_str}"
+    clean_otx_way = f"{otx_accord45_way}{clean_otx_str}{otx_r_bridge}"
     way_waymap = waymap_shop(otx_bridge=otx_r_bridge, inx_bridge=inx_r_bridge)
     assert way_waymap.otx_exists(otx_accord45_way) is False
     assert way_waymap.otx_exists(clean_otx_way) is False
@@ -54,7 +54,7 @@ def test_WayMap_reveal_inx_ReturnsObjAndSetsAttr_way_Scenario1():
     # THEN
     assert way_waymap.otx_exists(clean_otx_way)
     assert way_waymap.otx2inx_exists(clean_otx_way, gen_inx_way)
-    assert gen_inx_way == f"{inx_accord87_way}{inx_r_bridge}{clean_otx_str}"
+    assert gen_inx_way == f"{inx_accord87_way}{clean_otx_str}{inx_r_bridge}"
 
 
 def test_WayMap_reveal_inx_ReturnsObjAndSetsAttr_way_Scenario2_With_word():
@@ -65,7 +65,7 @@ def test_WayMap_reveal_inx_ReturnsObjAndSetsAttr_way_Scenario2_With_word():
     inx_accord87_way = to_way("accord87", inx_r_bridge)
     clean_otx_str = "clean"
     clean_inx_str = "prop"
-    clean_otx_way = f"{otx_accord45_way}{otx_r_bridge}{clean_otx_str}"
+    clean_otx_way = f"{otx_accord45_way}{clean_otx_str}{otx_r_bridge}"
     way_waymap = waymap_shop(otx_bridge=otx_r_bridge, inx_bridge=inx_r_bridge)
     way_waymap.set_word(clean_otx_str, clean_inx_str)
     assert way_waymap.otx_exists(otx_accord45_way) is False
@@ -92,7 +92,7 @@ def test_WayMap_reveal_inx_ReturnsObjAndSetsAttr_way_Scenario2_With_word():
     assert way_waymap.otx2inx_exists(otx_accord45_way, inx_accord87_way)
     assert way_waymap.otx_exists(clean_otx_way)
     assert way_waymap.otx2inx_exists(clean_otx_way, gen_inx_way)
-    assert gen_inx_way == f"{inx_accord87_way}{inx_r_bridge}{clean_inx_str}"
+    assert gen_inx_way == f"{inx_accord87_way}{clean_inx_str}{inx_r_bridge}"
 
 
 def test_WayMap_reveal_inx_AddsMissingObjsTo_otx2inx_WayStr():
