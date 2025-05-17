@@ -122,7 +122,7 @@ def test_create_pidlabe_face_otx_event_sqlstr_ReturnsObj_Scenario0_LabelStr():
 
         # THEN
         static_select_pidlabe_sqlstr = """
-SELECT 
+SELECT
   raw_dim.rowid raw_rowid
 , raw_dim.event_int
 , raw_dim.face_name_otx
@@ -132,7 +132,7 @@ FROM bud_idea_awardlink_v_put_raw raw_dim
 LEFT JOIN pidgin_label_s_vld pid ON pid.face_name = raw_dim.face_name_otx
     AND pid.otx_label = raw_dim.awardee_label_otx
     AND raw_dim.event_int >= pid.event_int
-GROUP BY 
+GROUP BY
   raw_dim.rowid
 , raw_dim.event_int
 , raw_dim.face_name_otx
@@ -301,11 +301,11 @@ def test_create_pidwayy_face_otx_event_sqlstr_ReturnsObj_Scenario0_WayStr():
         """
         cursor.execute(insert_sqlstr)
 
-        pidwayy_dimen = pidgin_word_str()
+        pidwayy_dimen = pidgin_way_str()
         pidwayy_s_vld_tablename = prime_tbl(pidwayy_dimen, "s", "vld")
         # print(f"{pidwayy_s_vld_tablename=}")
         insert_pidwayy_sqlstr = f"""INSERT INTO {pidwayy_s_vld_tablename}
-        ({event_int_str()}, {face_name_str()}, {otx_word_str()}, {inx_word_str()})
+        ({event_int_str()}, {face_name_str()}, {otx_way_str()}, {inx_way_str()})
         VALUES
           ({event1}, '{bob_otx}', '{clean_way_otx}', '{clean_way_inx1}')
         , ({event2}, '{yao_otx}', '{bball_way_otx}', '{bball_way_inx}')
@@ -334,8 +334,8 @@ SELECT
 , raw_dim.idea_way_otx
 , MAX(pid.event_int) pidgin_event_int
 FROM bud_idea_awardlink_v_put_raw raw_dim
-LEFT JOIN pidgin_word_s_vld pid ON pid.face_name = raw_dim.face_name_otx
-    AND pid.otx_word = raw_dim.idea_way_otx
+LEFT JOIN pidgin_way_s_vld pid ON pid.face_name = raw_dim.face_name_otx
+    AND pid.otx_way = raw_dim.idea_way_otx
     AND raw_dim.event_int >= pid.event_int
 GROUP BY
   raw_dim.rowid
@@ -362,7 +362,7 @@ GROUP BY
         ]
 
 
-def test_create_pidname_face_otx_event_sqlstr_ReturnsObj_Scenario20_NameStr():
+def test_create_pidname_face_otx_event_sqlstr_ReturnsObj_Scenario2_NameStr():
     # ESTABLISH
     sue_otx = "Sue"
     sue_inx = "Suzy"
@@ -425,7 +425,7 @@ def test_create_pidname_face_otx_event_sqlstr_ReturnsObj_Scenario20_NameStr():
 
         # THEN
         select_pidname_face_otx_event_sqlstr = """
-SELECT 
+SELECT
   raw_dim.rowid raw_rowid
 , raw_dim.event_int
 , raw_dim.face_name_otx
@@ -435,7 +435,7 @@ FROM bud_idea_awardlink_v_put_raw raw_dim
 LEFT JOIN pidgin_name_s_vld pid ON pid.face_name = raw_dim.face_name_otx
     AND pid.otx_name = raw_dim.face_name_otx
     AND raw_dim.event_int >= pid.event_int
-GROUP BY 
+GROUP BY
   raw_dim.rowid
 , raw_dim.event_int
 , raw_dim.face_name_otx
@@ -525,7 +525,7 @@ def test_create_pidname_face_otx_event_sqlstr_ReturnsObj_Scenario1_SelectsMostRe
 
         # THEN
         select_pidname_face_otx_event_sqlstr = """
-SELECT 
+SELECT
   raw_dim.rowid raw_rowid
 , raw_dim.event_int
 , raw_dim.face_name_otx
@@ -535,7 +535,7 @@ FROM bud_idea_awardlink_v_put_raw raw_dim
 LEFT JOIN pidgin_name_s_vld pid ON pid.face_name = raw_dim.face_name_otx
     AND pid.otx_name = raw_dim.owner_name_otx
     AND raw_dim.event_int >= pid.event_int
-GROUP BY 
+GROUP BY
   raw_dim.rowid
 , raw_dim.event_int
 , raw_dim.face_name_otx

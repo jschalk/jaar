@@ -785,84 +785,42 @@ def get_insert_into_voice_raw_sqlstrs() -> dict[str, str]:
     }
 
 
-def create_pidname_face_otx_event_sqlstr(table: str, column: str) -> str:
+def create_pidgin_face_otx_event_sqlstr(
+    pidgin_dimen: str, table: str, column: str
+) -> str:
     return f"""
-SELECT 
+SELECT
   raw_dim.rowid raw_rowid
 , raw_dim.event_int
 , raw_dim.face_name_otx
 , raw_dim.{column}_otx
 , MAX(pid.event_int) pidgin_event_int
 FROM {table} raw_dim
-LEFT JOIN pidgin_name_s_vld pid ON pid.face_name = raw_dim.face_name_otx
-    AND pid.otx_name = raw_dim.{column}_otx
+LEFT JOIN pidgin_{pidgin_dimen}_s_vld pid ON pid.face_name = raw_dim.face_name_otx
+    AND pid.otx_{pidgin_dimen} = raw_dim.{column}_otx
     AND raw_dim.event_int >= pid.event_int
-GROUP BY 
+GROUP BY
   raw_dim.rowid
 , raw_dim.event_int
 , raw_dim.face_name_otx
 , raw_dim.{column}_otx
 """
+
+
+def create_pidname_face_otx_event_sqlstr(table: str, column: str) -> str:
+    return create_pidgin_face_otx_event_sqlstr("name", table, column)
 
 
 def create_pidlabe_face_otx_event_sqlstr(table: str, column: str) -> str:
-    return f"""
-SELECT 
-  raw_dim.rowid raw_rowid
-, raw_dim.event_int
-, raw_dim.face_name_otx
-, raw_dim.{column}_otx
-, MAX(pid.event_int) pidgin_event_int
-FROM {table} raw_dim
-LEFT JOIN pidgin_label_s_vld pid ON pid.face_name = raw_dim.face_name_otx
-    AND pid.otx_label = raw_dim.{column}_otx
-    AND raw_dim.event_int >= pid.event_int
-GROUP BY 
-  raw_dim.rowid
-, raw_dim.event_int
-, raw_dim.face_name_otx
-, raw_dim.{column}_otx
-"""
+    return create_pidgin_face_otx_event_sqlstr("label", table, column)
 
 
 def create_pidword_face_otx_event_sqlstr(table: str, column: str) -> str:
-    return f"""
-SELECT
-  raw_dim.rowid raw_rowid
-, raw_dim.event_int
-, raw_dim.face_name_otx
-, raw_dim.{column}_otx
-, MAX(pid.event_int) pidgin_event_int
-FROM {table} raw_dim
-LEFT JOIN pidgin_word_s_vld pid ON pid.face_name = raw_dim.face_name_otx
-    AND pid.otx_word = raw_dim.{column}_otx
-    AND raw_dim.event_int >= pid.event_int
-GROUP BY
-  raw_dim.rowid
-, raw_dim.event_int
-, raw_dim.face_name_otx
-, raw_dim.{column}_otx
-"""
+    return create_pidgin_face_otx_event_sqlstr("word", table, column)
 
 
 def create_pidwayy_face_otx_event_sqlstr(table: str, column: str) -> str:
-    return f"""
-SELECT
-  raw_dim.rowid raw_rowid
-, raw_dim.event_int
-, raw_dim.face_name_otx
-, raw_dim.{column}_otx
-, MAX(pid.event_int) pidgin_event_int
-FROM {table} raw_dim
-LEFT JOIN pidgin_word_s_vld pid ON pid.face_name = raw_dim.face_name_otx
-    AND pid.otx_word = raw_dim.{column}_otx
-    AND raw_dim.event_int >= pid.event_int
-GROUP BY
-  raw_dim.rowid
-, raw_dim.event_int
-, raw_dim.face_name_otx
-, raw_dim.{column}_otx
-"""
+    return create_pidgin_face_otx_event_sqlstr("way", table, column)
 
 
 def update_voice_raw_inx_name_col_sqlstr(table: str, column: str) -> str:
