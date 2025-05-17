@@ -823,9 +823,11 @@ def create_pidwayy_face_otx_event_sqlstr(table: str, column: str) -> str:
     return create_pidgin_face_otx_event_sqlstr("way", table, column)
 
 
-def update_voice_raw_inx_name_col_sqlstr(table: str, column: str) -> str:
+def create_update_voice_raw_existing_inx_col_sqlstr(
+    pidgin_dimen: str, table: str, column: str
+) -> str:
     return f"""
-WITH pidname_face_otx_event AS (
+WITH pid_face_otx_event AS (
     SELECT 
     raw_dim.rowid raw_rowid
     , raw_dim.event_int
@@ -833,8 +835,8 @@ WITH pidname_face_otx_event AS (
     , raw_dim.{column}_otx
     , MAX(pid.event_int) pidgin_event_int
     FROM {table} raw_dim
-    LEFT JOIN pidgin_name_s_vld pid ON pid.face_name = raw_dim.face_name_otx
-        AND pid.otx_name = raw_dim.{column}_otx
+    LEFT JOIN pidgin_{pidgin_dimen}_s_vld pid ON pid.face_name = raw_dim.face_name_otx
+        AND pid.otx_{pidgin_dimen} = raw_dim.{column}_otx
         AND raw_dim.event_int >= pid.event_int
     GROUP BY 
     raw_dim.rowid
@@ -842,19 +844,19 @@ WITH pidname_face_otx_event AS (
     , raw_dim.face_name_otx
     , raw_dim.{column}_otx
 ),
-pidname_inx_names AS (
-    SELECT pid_foe.raw_rowid, pid_vld.inx_name
-    FROM pidname_face_otx_event pid_foe
-    LEFT JOIN pidgin_name_s_vld pid_vld
+pid_inx_strs AS (
+    SELECT pid_foe.raw_rowid, pid_vld.inx_{pidgin_dimen}
+    FROM pid_face_otx_event pid_foe
+    LEFT JOIN pidgin_{pidgin_dimen}_s_vld pid_vld
         ON pid_vld.face_name = pid_foe.face_name_otx
-        AND pid_vld.otx_name = pid_foe.{column}_otx
+        AND pid_vld.otx_{pidgin_dimen} = pid_foe.{column}_otx
         AND pid_vld.event_int = pid_foe.pidgin_event_int
 )
 UPDATE {table} as dim_v_raw
 SET {column}_inx = (
-    SELECT IFNULL(pidname_inx_names.inx_name, dim_v_raw.{column}_otx)
-    FROM pidname_inx_names
-    WHERE dim_v_raw.rowid = pidname_inx_names.raw_rowid
+    SELECT IFNULL(pid_inx_strs.inx_{pidgin_dimen}, dim_v_raw.{column}_otx)
+    FROM pid_inx_strs
+    WHERE dim_v_raw.rowid = pid_inx_strs.raw_rowid
 )
 ;
 """

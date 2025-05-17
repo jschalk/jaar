@@ -43,7 +43,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
     create_sound_and_voice_tables,
-    update_voice_raw_inx_name_col_sqlstr,
+    create_update_voice_raw_existing_inx_col_sqlstr,
     create_pidname_face_otx_event_sqlstr,
     create_pidlabe_face_otx_event_sqlstr,
     create_pidword_face_otx_event_sqlstr,
@@ -560,7 +560,7 @@ GROUP BY
         ]
 
 
-def test_update_voice_raw_inx_name_col_sqlstr_UpdatesTable_Scenario0_EmptyPidginTables():
+def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario0_EmptyPidginTables():
     # ESTABLISH
     bob_otx = "Bob"
     bob_inx = "Bobby"
@@ -595,8 +595,8 @@ VALUES
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 0
 
         # WHEN
-        update_sqlstr = update_voice_raw_inx_name_col_sqlstr(
-            budawar_v_raw_put_tablename, face_name_str()
+        update_sqlstr = create_update_voice_raw_existing_inx_col_sqlstr(
+            "name", budawar_v_raw_put_tablename, face_name_str()
         )
         print(update_sqlstr)
         cursor.execute(update_sqlstr)
@@ -615,7 +615,7 @@ VALUES
         ]
 
 
-def test_update_voice_raw_inx_name_col_sqlstr_UpdatesTable_Scenario1_FullPidginTables():
+def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario1_FullPidginTables():
     # ESTABLISH
     bob_otx = "Bob"
     bob_inx = "Bobby"
@@ -660,8 +660,8 @@ def test_update_voice_raw_inx_name_col_sqlstr_UpdatesTable_Scenario1_FullPidginT
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 0
 
         # WHEN
-        update_sqlstr = update_voice_raw_inx_name_col_sqlstr(
-            budawar_v_raw_put_tablename, face_name_str()
+        update_sqlstr = create_update_voice_raw_existing_inx_col_sqlstr(
+            "name", budawar_v_raw_put_tablename, face_name_str()
         )
         print(update_sqlstr)
         cursor.execute(update_sqlstr)
@@ -680,7 +680,7 @@ def test_update_voice_raw_inx_name_col_sqlstr_UpdatesTable_Scenario1_FullPidginT
         ]
 
 
-def test_update_voice_raw_inx_name_col_sqlstr_UpdatesTable_Scenario2_PartialPidginTables():
+def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario2_PartialPidginTables():
     # ESTABLISH
     bob_otx = "Bob"
     bob_inx = "Bobby"
@@ -722,8 +722,8 @@ def test_update_voice_raw_inx_name_col_sqlstr_UpdatesTable_Scenario2_PartialPidg
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 0
 
         # WHEN
-        update_sqlstr = update_voice_raw_inx_name_col_sqlstr(
-            budawar_v_raw_put_tablename, face_name_str()
+        update_sqlstr = create_update_voice_raw_existing_inx_col_sqlstr(
+            "name", budawar_v_raw_put_tablename, face_name_str()
         )
         print(update_sqlstr)
         cursor.execute(update_sqlstr)
@@ -741,7 +741,7 @@ def test_update_voice_raw_inx_name_col_sqlstr_UpdatesTable_Scenario2_PartialPidg
         ]
 
 
-def test_update_voice_raw_inx_name_col_sqlstr_UpdatesTable_Scenario3_Different_event_int_PidginMappings():
+def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario3_Different_event_int_PidginMappings():
     # ESTABLISH
     sue_otx = "Sue"
     sue_inx = "Suzy"
@@ -797,8 +797,8 @@ def test_update_voice_raw_inx_name_col_sqlstr_UpdatesTable_Scenario3_Different_e
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 0
 
         # WHEN
-        update_sqlstr = update_voice_raw_inx_name_col_sqlstr(
-            budawar_v_raw_put_tablename, face_name_str()
+        update_sqlstr = create_update_voice_raw_existing_inx_col_sqlstr(
+            "name", budawar_v_raw_put_tablename, face_name_str()
         )
         print(update_sqlstr)
         cursor.execute(update_sqlstr)
@@ -819,7 +819,7 @@ def test_update_voice_raw_inx_name_col_sqlstr_UpdatesTable_Scenario3_Different_e
         ]
 
 
-# def test_update_voice_raw_inx_name_col_sqlstr_UpdatesTable_Scenario11_():
+# def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario11_():
 #     # ESTABLISH
 #     a23_str = "accord23"
 #     bob_otx = "Bob"
@@ -883,7 +883,7 @@ def test_update_voice_raw_inx_name_col_sqlstr_UpdatesTable_Scenario3_Different_e
 #         assert cursor.execute(awardee_label_inx_count_sql).fetchone() == (0,)
 
 #         # WHEN
-#         update_sqlstr = update_voice_raw_inx_name_col_sqlstr(
+#         update_sqlstr = create_update_voice_raw_existing_inx_col_sqlstr(
 #             budawar_v_raw_put_tablename, face_name_str()
 #         )
 #         print(update_sqlstr)
