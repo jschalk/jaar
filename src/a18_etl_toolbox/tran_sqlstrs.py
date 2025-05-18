@@ -873,192 +873,165 @@ WHERE {column_prefix}_inx IS NULL
 FISCASH_VOICE_AGG_INSERT_SQLSTR = """
 INSERT INTO fisc_cashbook_v_agg (fisc_label, owner_name, acct_name, tran_time, amount)
 SELECT fisc_label_inx, owner_name_inx, acct_name_inx, tran_time, amount
-WHERE error_message IS NULL
 FROM fisc_cashbook_v_raw
 GROUP BY fisc_label_inx, owner_name_inx, acct_name_inx, tran_time, amount
 """
 FISDEAL_VOICE_AGG_INSERT_SQLSTR = """
 INSERT INTO fisc_dealunit_v_agg (fisc_label, owner_name, deal_time, quota, celldepth)
 SELECT fisc_label_inx, owner_name_inx, deal_time, quota, celldepth
-WHERE error_message IS NULL
 FROM fisc_dealunit_v_raw
 GROUP BY fisc_label_inx, owner_name_inx, deal_time, quota, celldepth
 """
 FISHOUR_VOICE_AGG_INSERT_SQLSTR = """
 INSERT INTO fisc_timeline_hour_v_agg (fisc_label, cumlative_minute, hour_label)
 SELECT fisc_label_inx, cumlative_minute, hour_label_inx
-WHERE error_message IS NULL
 FROM fisc_timeline_hour_v_raw
 GROUP BY fisc_label_inx, cumlative_minute, hour_label_inx
 """
 FISMONT_VOICE_AGG_INSERT_SQLSTR = """
 INSERT INTO fisc_timeline_month_v_agg (fisc_label, cumlative_day, month_label)
 SELECT fisc_label_inx, cumlative_day, month_label_inx
-WHERE error_message IS NULL
 FROM fisc_timeline_month_v_raw
 GROUP BY fisc_label_inx, cumlative_day, month_label_inx
 """
 FISWEEK_VOICE_AGG_INSERT_SQLSTR = """
 INSERT INTO fisc_timeline_weekday_v_agg (fisc_label, weekday_order, weekday_label)
 SELECT fisc_label_inx, weekday_order, weekday_label_inx
-WHERE error_message IS NULL
 FROM fisc_timeline_weekday_v_raw
 GROUP BY fisc_label_inx, weekday_order, weekday_label_inx
 """
 FISOFFI_VOICE_AGG_INSERT_SQLSTR = """
 INSERT INTO fisc_timeoffi_v_agg (fisc_label, offi_time)
 SELECT fisc_label_inx, offi_time
-WHERE error_message IS NULL
 FROM fisc_timeoffi_v_raw
 GROUP BY fisc_label_inx, offi_time
 """
 FISUNIT_VOICE_AGG_INSERT_SQLSTR = """
 INSERT INTO fiscunit_v_agg (fisc_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations)
 SELECT fisc_label_inx, timeline_label_inx, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations
-WHERE error_message IS NULL
 FROM fiscunit_v_raw
 GROUP BY fisc_label_inx, timeline_label_inx, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations
 """
 
 INSERT_BUDMEMB_VOICE_AGG_PUT_SQLSTR = """
 INSERT INTO bud_acct_membership_v_put_agg (event_int, face_name, fisc_label, owner_name, acct_name, group_title, credit_vote, debtit_vote)
-SELECT pidgin_event_int, fisc_label_inx, owner_name_inx, acct_name_inx, group_title_inx, credit_vote, debtit_vote
-WHERE error_message IS NULL
+SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, acct_name_inx, group_title_inx, credit_vote, debtit_vote
 FROM bud_acct_membership_v_put_raw
-GROUP BY pidgin_event_int, fisc_label_inx, owner_name_inx, acct_name_inx, group_title_inx, credit_vote, debtit_vote
+GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, acct_name_inx, group_title_inx, credit_vote, debtit_vote
 """
 INSERT_BUDMEMB_VOICE_AGG_DEL_SQLSTR = """
 INSERT INTO bud_acct_membership_v_del_agg (event_int, face_name, fisc_label, owner_name, acct_name, group_title_ERASE)
-SELECT pidgin_event_int, fisc_label_inx, owner_name_inx, acct_name_inx, group_title_ERASE_inx
-WHERE error_message IS NULL
+SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, acct_name_inx, group_title_ERASE_inx
 FROM bud_acct_membership_v_del_raw
-GROUP BY pidgin_event_int, fisc_label_inx, owner_name_inx, acct_name_inx, group_title_ERASE_inx
+GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, acct_name_inx, group_title_ERASE_inx
 """
 INSERT_BUDACCT_VOICE_AGG_PUT_SQLSTR = """
 INSERT INTO bud_acctunit_v_put_agg (event_int, face_name, fisc_label, owner_name, acct_name, credit_belief, debtit_belief)
-SELECT pidgin_event_int, fisc_label_inx, owner_name_inx, acct_name_inx, credit_belief, debtit_belief
-WHERE error_message IS NULL
+SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, acct_name_inx, credit_belief, debtit_belief
 FROM bud_acctunit_v_put_raw
-GROUP BY pidgin_event_int, fisc_label_inx, owner_name_inx, acct_name_inx, credit_belief, debtit_belief
+GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, acct_name_inx, credit_belief, debtit_belief
 """
 INSERT_BUDACCT_VOICE_AGG_DEL_SQLSTR = """
 INSERT INTO bud_acctunit_v_del_agg (event_int, face_name, fisc_label, owner_name, acct_name_ERASE)
-SELECT pidgin_event_int, fisc_label_inx, owner_name_inx, acct_name_ERASE_inx
-WHERE error_message IS NULL
+SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, acct_name_ERASE_inx
 FROM bud_acctunit_v_del_raw
-GROUP BY pidgin_event_int, fisc_label_inx, owner_name_inx, acct_name_ERASE_inx
+GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, acct_name_ERASE_inx
 """
 INSERT_BUDAWAR_VOICE_AGG_PUT_SQLSTR = """
 INSERT INTO bud_concept_awardlink_v_put_agg (event_int, face_name, fisc_label, owner_name, concept_way, awardee_title, give_force, take_force)
-SELECT pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, awardee_title_inx, give_force, take_force
-WHERE error_message IS NULL
+SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, awardee_title_inx, give_force, take_force
 FROM bud_concept_awardlink_v_put_raw
-GROUP BY pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, awardee_title_inx, give_force, take_force
+GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, awardee_title_inx, give_force, take_force
 """
 INSERT_BUDAWAR_VOICE_AGG_DEL_SQLSTR = """
 INSERT INTO bud_concept_awardlink_v_del_agg (event_int, face_name, fisc_label, owner_name, concept_way, awardee_title_ERASE)
-SELECT pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, awardee_title_ERASE_inx
-WHERE error_message IS NULL
+SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, awardee_title_ERASE_inx
 FROM bud_concept_awardlink_v_del_raw
-GROUP BY pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, awardee_title_ERASE_inx
+GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, awardee_title_ERASE_inx
 """
 INSERT_BUDFACT_VOICE_AGG_PUT_SQLSTR = """
 INSERT INTO bud_concept_factunit_v_put_agg (event_int, face_name, fisc_label, owner_name, concept_way, fcontext, fbranch, fopen, fnigh)
-SELECT pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, fcontext_inx, fbranch_inx, fopen, fnigh
-WHERE error_message IS NULL
+SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, fcontext_inx, fbranch_inx, fopen, fnigh
 FROM bud_concept_factunit_v_put_raw
-GROUP BY pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, fcontext_inx, fbranch_inx, fopen, fnigh
+GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, fcontext_inx, fbranch_inx, fopen, fnigh
 """
 INSERT_BUDFACT_VOICE_AGG_DEL_SQLSTR = """
 INSERT INTO bud_concept_factunit_v_del_agg (event_int, face_name, fisc_label, owner_name, concept_way, fcontext_ERASE)
-SELECT pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, fcontext_ERASE_inx
-WHERE error_message IS NULL
+SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, fcontext_ERASE_inx
 FROM bud_concept_factunit_v_del_raw
-GROUP BY pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, fcontext_ERASE_inx
+GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, fcontext_ERASE_inx
 """
 INSERT_BUDHEAL_VOICE_AGG_PUT_SQLSTR = """
 INSERT INTO bud_concept_healerlink_v_put_agg (event_int, face_name, fisc_label, owner_name, concept_way, healer_name)
-SELECT pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, healer_name_inx
-WHERE error_message IS NULL
+SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, healer_name_inx
 FROM bud_concept_healerlink_v_put_raw
-GROUP BY pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, healer_name_inx
+GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, healer_name_inx
 """
 INSERT_BUDHEAL_VOICE_AGG_DEL_SQLSTR = """
 INSERT INTO bud_concept_healerlink_v_del_agg (event_int, face_name, fisc_label, owner_name, concept_way, healer_name_ERASE)
-SELECT pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, healer_name_ERASE_inx
-WHERE error_message IS NULL
+SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, healer_name_ERASE_inx
 FROM bud_concept_healerlink_v_del_raw
-GROUP BY pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, healer_name_ERASE_inx
+GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, healer_name_ERASE_inx
 """
 INSERT_BUDPREM_VOICE_AGG_PUT_SQLSTR = """
 INSERT INTO bud_concept_reason_premiseunit_v_put_agg (event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pbranch, pnigh, popen, pdivisor)
-SELECT pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, pbranch_inx, pnigh, popen, pdivisor
-WHERE error_message IS NULL
+SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, pbranch_inx, pnigh, popen, pdivisor
 FROM bud_concept_reason_premiseunit_v_put_raw
-GROUP BY pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, pbranch_inx, pnigh, popen, pdivisor
+GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, pbranch_inx, pnigh, popen, pdivisor
 """
 INSERT_BUDPREM_VOICE_AGG_DEL_SQLSTR = """
 INSERT INTO bud_concept_reason_premiseunit_v_del_agg (event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pbranch_ERASE)
-SELECT pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, pbranch_ERASE_inx
-WHERE error_message IS NULL
+SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, pbranch_ERASE_inx
 FROM bud_concept_reason_premiseunit_v_del_raw
-GROUP BY pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, pbranch_ERASE_inx
+GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, pbranch_ERASE_inx
 """
 INSERT_BUDREAS_VOICE_AGG_PUT_SQLSTR = """
 INSERT INTO bud_concept_reasonunit_v_put_agg (event_int, face_name, fisc_label, owner_name, concept_way, rcontext, rcontext_concept_active_requisite)
-SELECT pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, rcontext_concept_active_requisite
-WHERE error_message IS NULL
+SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, rcontext_concept_active_requisite
 FROM bud_concept_reasonunit_v_put_raw
-GROUP BY pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, rcontext_concept_active_requisite
+GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, rcontext_concept_active_requisite
 """
 INSERT_BUDREAS_VOICE_AGG_DEL_SQLSTR = """
 INSERT INTO bud_concept_reasonunit_v_del_agg (event_int, face_name, fisc_label, owner_name, concept_way, rcontext_ERASE)
-SELECT pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_ERASE_inx
-WHERE error_message IS NULL
+SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_ERASE_inx
 FROM bud_concept_reasonunit_v_del_raw
-GROUP BY pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_ERASE_inx
+GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_ERASE_inx
 """
 INSERT_BUDLABO_VOICE_AGG_PUT_SQLSTR = """
 INSERT INTO bud_concept_laborlink_v_put_agg (event_int, face_name, fisc_label, owner_name, concept_way, labor_title)
-SELECT pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, labor_title_inx
-WHERE error_message IS NULL
+SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, labor_title_inx
 FROM bud_concept_laborlink_v_put_raw
-GROUP BY pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, labor_title_inx
+GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, labor_title_inx
 """
 INSERT_BUDLABO_VOICE_AGG_DEL_SQLSTR = """
 INSERT INTO bud_concept_laborlink_v_del_agg (event_int, face_name, fisc_label, owner_name, concept_way, labor_title_ERASE)
-SELECT pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, labor_title_ERASE_inx
-WHERE error_message IS NULL
+SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, labor_title_ERASE_inx
 FROM bud_concept_laborlink_v_del_raw
-GROUP BY pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, labor_title_ERASE_inx
+GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, labor_title_ERASE_inx
 """
 INSERT_BUDCONC_VOICE_AGG_PUT_SQLSTR = """
 INSERT INTO bud_conceptunit_v_put_agg (event_int, face_name, fisc_label, owner_name, concept_way, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool)
-SELECT pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool
-WHERE error_message IS NULL
+SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool
 FROM bud_conceptunit_v_put_raw
-GROUP BY pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_inx, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool
+GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool
 """
 INSERT_BUDCONC_VOICE_AGG_DEL_SQLSTR = """
 INSERT INTO bud_conceptunit_v_del_agg (event_int, face_name, fisc_label, owner_name, concept_way_ERASE)
-SELECT pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_ERASE_inx
-WHERE error_message IS NULL
+SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_ERASE_inx
 FROM bud_conceptunit_v_del_raw
-GROUP BY pidgin_event_int, fisc_label_inx, owner_name_inx, concept_way_ERASE_inx
+GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_ERASE_inx
 """
 INSERT_BUDUNIT_VOICE_AGG_PUT_SQLSTR = """
 INSERT INTO budunit_v_put_agg (event_int, face_name, fisc_label, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_coin, penny, respect_bit)
-SELECT pidgin_event_int, fisc_label_inx, owner_name_inx, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_coin, penny, respect_bit
-WHERE error_message IS NULL
+SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_coin, penny, respect_bit
 FROM budunit_v_put_raw
-GROUP BY pidgin_event_int, fisc_label_inx, owner_name_inx, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_coin, penny, respect_bit
+GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_coin, penny, respect_bit
 """
 INSERT_BUDUNIT_VOICE_AGG_DEL_SQLSTR = """
 INSERT INTO budunit_v_del_agg (event_int, face_name, fisc_label, owner_name_ERASE)
-SELECT pidgin_event_int, fisc_label_inx, owner_name_ERASE_inx
-WHERE error_message IS NULL
+SELECT event_int, face_name_inx, fisc_label_inx, owner_name_ERASE_inx
 FROM budunit_v_del_raw
-GROUP BY pidgin_event_int, fisc_label_inx, owner_name_ERASE_inx
+GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_ERASE_inx
 """
 
 
