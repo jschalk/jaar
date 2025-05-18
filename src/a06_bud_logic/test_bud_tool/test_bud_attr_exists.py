@@ -98,7 +98,7 @@ def test_bud_ideaunit_exists_ReturnsObj():
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
     sweep_way = sue_bud.make_way(clean_way, "sweep")
-    root_way = to_way(sue_bud.fisc_word)
+    root_way = to_way(sue_bud.fisc_label)
     root_jkeys = {idea_way_str(): root_way}
     casa_jkeys = {idea_way_str(): casa_way}
     clean_jkeys = {idea_way_str(): clean_way}
@@ -138,9 +138,9 @@ def test_bud_idea_awardlink_exists_ReturnsObj():
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
-    root_way = to_way(sue_bud.fisc_word)
+    root_way = to_way(sue_bud.fisc_label)
     swim_str = "Swim"
-    root_way = to_way(sue_bud.fisc_word)
+    root_way = to_way(sue_bud.fisc_label)
     root_jkeys = {idea_way_str(): root_way, awardee_title_str(): swim_str}
     casa_jkeys = {idea_way_str(): casa_way, awardee_title_str(): swim_str}
     clean_jkeys = {idea_way_str(): clean_way, awardee_title_str(): swim_str}
@@ -168,7 +168,7 @@ def test_bud_idea_reasonunit_exists_ReturnsObj():
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
-    root_way = to_way(sue_bud.fisc_word)
+    root_way = to_way(sue_bud.fisc_label)
     week_str = "week"
     week_way = sue_bud.make_l1_way(week_str)
     root_jkeys = {idea_way_str(): root_way, rcontext_str(): week_way}
@@ -199,7 +199,7 @@ def test_bud_idea_reason_premiseunit_exists_ReturnsObj():
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
-    root_way = to_way(sue_bud.fisc_word)
+    root_way = to_way(sue_bud.fisc_label)
     week_str = "week"
     week_way = sue_bud.make_l1_way(week_str)
     thur_way = sue_bud.make_way(week_way, "thur")
@@ -254,7 +254,7 @@ def test_bud_idea_laborlink_exists_ReturnsObj():
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
-    root_way = to_way(sue_bud.fisc_word)
+    root_way = to_way(sue_bud.fisc_label)
     swim_str = "Swim"
     root_jkeys = {idea_way_str(): root_way, labor_title_str(): swim_str}
     casa_jkeys = {idea_way_str(): casa_way, labor_title_str(): swim_str}
@@ -284,7 +284,7 @@ def test_bud_idea_healerlink_exists_ReturnsObj():
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
-    root_way = to_way(sue_bud.fisc_word)
+    root_way = to_way(sue_bud.fisc_label)
     swim_str = "Swim"
     root_jkeys = {idea_way_str(): root_way, healer_name_str(): swim_str}
     casa_jkeys = {idea_way_str(): casa_way, healer_name_str(): swim_str}
@@ -313,7 +313,7 @@ def test_bud_idea_factunit_exists_ReturnsObj():
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
-    root_way = to_way(sue_bud.fisc_word)
+    root_way = to_way(sue_bud.fisc_label)
     week_str = "week"
     week_way = sue_bud.make_l1_way(week_str)
     root_jkeys = {idea_way_str(): root_way, fcontext_str(): week_way}
@@ -399,7 +399,7 @@ def test_bud_attr_exists_ReturnsObj_bud_ideaunit():
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
     sweep_way = sue_bud.make_way(clean_way, "sweep")
-    x_parent_way = to_way(sue_bud.fisc_word)
+    x_parent_way = to_way(sue_bud.fisc_label)
     root_jkeys = {idea_way_str(): x_parent_way}
     casa_jkeys = {idea_way_str(): casa_way}
     clean_jkeys = {idea_way_str(): clean_way}
@@ -440,7 +440,7 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_awardlink():
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
-    root_way = to_way(sue_bud.fisc_word)
+    root_way = to_way(sue_bud.fisc_label)
     swim_str = "Swim"
     x_dimen = bud_idea_awardlink_str()
     root_jkeys = {idea_way_str(): root_way, awardee_title_str(): swim_str}
@@ -470,7 +470,7 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_reasonunit():
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
-    root_way = to_way(sue_bud.fisc_word)
+    root_way = to_way(sue_bud.fisc_label)
     week_str = "week"
     week_way = sue_bud.make_l1_way(week_str)
     x_dimen = bud_idea_reasonunit_str()
@@ -501,7 +501,7 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_reason_premiseunit():
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
-    root_way = to_way(sue_bud.fisc_word)
+    root_way = to_way(sue_bud.fisc_label)
     week_str = "week"
     week_way = sue_bud.make_l1_way(week_str)
     thur_way = sue_bud.make_way(week_way, "thur")
@@ -555,7 +555,7 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_laborlink():
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
-    root_way = to_way(sue_bud.fisc_word)
+    root_way = to_way(sue_bud.fisc_label)
     swim_str = "Swim"
     x_dimen = bud_idea_laborlink_str()
     root_jkeys = {idea_way_str(): root_way, labor_title_str(): swim_str}
@@ -586,7 +586,7 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_healerlink():
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
-    root_way = to_way(sue_bud.fisc_word)
+    root_way = to_way(sue_bud.fisc_label)
     swim_str = "Swim"
     x_dimen = bud_idea_healerlink_str()
     root_jkeys = {idea_way_str(): root_way, healer_name_str(): swim_str}
@@ -616,7 +616,7 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_factunit():
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
-    root_way = to_way(sue_bud.fisc_word)
+    root_way = to_way(sue_bud.fisc_label)
     week_str = "week"
     week_way = sue_bud.make_l1_way(week_str)
     x_dimen = bud_idea_factunit_str()

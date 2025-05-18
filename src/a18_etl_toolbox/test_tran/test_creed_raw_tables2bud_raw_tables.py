@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.file_toolbox import create_path, save_file
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_word_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_label_str
 from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,
     bud_acctunit_str,
@@ -74,7 +74,7 @@ def test_etl_creed_raw_to_bud_prime_tables_Bud_dimen_creed_PopulatesFiscRawTable
     sue_inz_dir = create_path(x_syntax_inz_dir, sue_inx)
     br00011_str = "br00011"
     br00011_csv_filename = f"{br00011_str}.csv"
-    br00011_csv_str = f"""{event_int_str()},{face_name_str()},{fisc_word_str()},{owner_name_str()},{acct_name_str()}
+    br00011_csv_str = f"""{event_int_str()},{face_name_str()},{fisc_label_str()},{owner_name_str()},{acct_name_str()}
 {event3},{sue_inx},{accord23_str},{bob_inx},{bob_inx}
 {event3},{sue_inx},{accord23_str},{yao_inx},{bob_inx}
 {event3},{sue_inx},{accord23_str},{yao_inx},{yao_inx}
@@ -107,7 +107,7 @@ def test_etl_creed_raw_to_bud_prime_tables_Bud_dimen_creed_PopulatesFiscRawTable
             br00011_str,
             event3,
             sue_inx,
-            accord23_str,  # fisc_word,
+            accord23_str,  # fisc_label,
             bob_inx,  # owner_name,
             None,  # credor_respect,
             None,  # debtor_respect,
@@ -123,7 +123,7 @@ def test_etl_creed_raw_to_bud_prime_tables_Bud_dimen_creed_PopulatesFiscRawTable
             br00011_str,
             event3,
             sue_inx,
-            accord23_str,  # fisc_word,
+            accord23_str,  # fisc_label,
             yao_inx,  # owner_name,
             None,  # credor_respect,
             None,  # debtor_respect,
@@ -139,7 +139,7 @@ def test_etl_creed_raw_to_bud_prime_tables_Bud_dimen_creed_PopulatesFiscRawTable
             br00011_str,
             event7,
             sue_inx,
-            accord23_str,  # fisc_word,
+            accord23_str,  # fisc_label,
             yao_inx,  # owner_name,
             None,  # credor_respect,
             None,  # debtor_respect,
@@ -173,7 +173,7 @@ def test_etl_creed_raw_to_bud_prime_tables_Sets_error_message(env_dir_setup_clea
         x_tablename = f"{bud_acctunit_str()}_put_raw"
         assert db_table_exists(cursor, x_tablename)
         insert_raw_sqlstr = f"""
-INSERT INTO {x_tablename} ({creed_number_str()},{event_int_str()},{face_name_str()},{fisc_word_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()})
+INSERT INTO {x_tablename} ({creed_number_str()},{event_int_str()},{face_name_str()},{fisc_label_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()})
 VALUES
   ('br00021',{event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5},NULL)
 , ('br00021',{event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',NULL,NULL)
@@ -184,7 +184,7 @@ VALUES
 """
         print(f"{insert_raw_sqlstr=}")
         cursor.execute(insert_raw_sqlstr)
-        select_sqlstr = f"SELECT {event_int_str()}, {fisc_word_str()}, {credit_belief_str()}, error_message FROM {x_tablename};"
+        select_sqlstr = f"SELECT {event_int_str()}, {fisc_label_str()}, {credit_belief_str()}, error_message FROM {x_tablename};"
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         print(f"{rows=}")

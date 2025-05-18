@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_word_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_label_str
 from src.a06_bud_logic._utils.str_a06 import face_name_str, acct_name_str, event_int_str
 from src.a16_pidgin_logic._utils.str_a16 import (
     inx_bridge_str,
@@ -37,7 +37,7 @@ def test_etl_brick_agg_dfs_to_pidgin_way_raw_CreatesFile_Scenario0_SingleCreed(
     br00117_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_word_str(),
+        fisc_label_str(),
         owner_name_str(),
         acct_name_str(),
         otx_way_str(),
@@ -94,7 +94,7 @@ def test_etl_brick_agg_dfs_to_pidgin_way_raw_CreatesFile_Scenario1_MultipleCreed
     br00117_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_word_str(),
+        fisc_label_str(),
         owner_name_str(),
         acct_name_str(),
         otx_way_str(),
@@ -172,7 +172,7 @@ def test_etl_brick_agg_dfs_to_pidgin_way_raw_CreatesFile_Scenario2_WorldUnit_eve
     br00117_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_word_str(),
+        fisc_label_str(),
         owner_name_str(),
         acct_name_str(),
         otx_way_str(),

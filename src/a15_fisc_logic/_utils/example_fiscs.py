@@ -216,7 +216,7 @@ def get_bob_mop_without_reason_budunit_example() -> BudUnit:
 
 
 def get_bob_mop_with_reason_budunit_example() -> BudUnit:
-    """owner_name: bob, fisc_word: accord23"""
+    """owner_name: bob, fisc_label: accord23"""
     bob_bud = get_bob_mop_without_reason_budunit_example()
     casa_str = "casa"
     floor_str = "floor status"

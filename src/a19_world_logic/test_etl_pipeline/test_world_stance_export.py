@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path, set_dir
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_word_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_label_str
 from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str, acct_name_str
 from src.a17_creed_logic.creed_db_tool import upsert_sheet, get_sheet_names
 from src.a18_etl_toolbox.tran_path import (
@@ -46,7 +46,7 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
     br00011_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_word_str(),
+        fisc_label_str(),
         owner_name_str(),
         acct_name_str(),
     ]
@@ -78,7 +78,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeCreedsForOtherWorld
     br00011_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_word_str(),
+        fisc_label_str(),
         owner_name_str(),
         acct_name_str(),
     ]
@@ -134,13 +134,13 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeCreedsForOtherWorld
 #         face_name_str(),
 #         event_int_str(),
 #         cumlative_minute_str(),
-#         fisc_word_str(),
-#         hour_word_str(),
+#         fisc_label_str(),
+#         hour_label_str(),
 #     ]
 #     br00001_columns = [
 #         face_name_str(),
 #         event_int_str(),
-#         fisc_word_str(),
+#         fisc_label_str(),
 #         owner_name_str(),
 #         deal_time(),
 #         quota_str(),
@@ -167,7 +167,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeCreedsForOtherWorld
 #     br00011_columns = [
 #         face_name_str(),
 #         event_int_str(),
-#         fisc_word_str(),
+#         fisc_label_str(),
 #         owner_name_str(),
 #         acct_name_str(),
 #     ]

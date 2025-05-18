@@ -12,7 +12,7 @@
         "fcontext": {
             "otx_key": true
         },
-        "fisc_word": {
+        "fisc_label": {
             "otx_key": true
         },
         "fnigh": {

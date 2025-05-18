@@ -92,7 +92,7 @@ def test_membership_shop_ReturnsObjAttr_acct_name():
     assert swim_membership.acct_name == yao_str
 
 
-# def test_MemberShip_set_group_title_RaisesErrorIf_group_title_IsNotAcctNameAndIsWordStr():
+# def test_MemberShip_set_group_title_RaisesErrorIf_group_title_IsNotAcctNameAndIsLabelStr():
 #     # ESTABLISH
 #     slash_str = "/"
 #     # bob_str = f"Bob{slash_str}Texas"
@@ -105,7 +105,7 @@ def test_membership_shop_ReturnsObjAttr_acct_name():
 #         membership_shop(swim_str, acct_name=bob_str, bridge=slash_str)
 #     assert (
 #         str(excinfo.value)
-#         == f"'{swim_str}' needs to not be a WordStr. Must contain bridge: '{slash_str}'"
+#         == f"'{swim_str}' needs to not be a LabelStr. Must contain bridge: '{slash_str}'"
 #     )
 
 

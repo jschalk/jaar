@@ -24,7 +24,7 @@ def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
     # for x_arg in sorted(x_args):
     #     print(f"{x_arg=}")
     x_world_id = "music23"
-    x_fisc_word = "accord23"
+    x_fisc_label = "accord23"
     x_owner_name = "Sue"
     x__keeps_buildable = True
     x__keeps_justified = False
@@ -42,7 +42,7 @@ def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
     x_tally = 6
     values_dict = {
         "world_id": x_world_id,
-        "fisc_word": x_fisc_word,
+        "fisc_label": x_fisc_label,
         "owner_name": x_owner_name,
         "_keeps_buildable": x__keeps_buildable,
         "_keeps_justified": x__keeps_justified,
@@ -92,7 +92,7 @@ def test_create_budidea_metrics_insert_sqlstr_ReturnsObj():
     #     # b1_str = "}"
     #     # print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
     x_world_id = "music23"
-    x_fisc_word = "accord23"
+    x_fisc_label = "accord23"
     x_owner_name = "Sue"
     x__active = 1
     x__all_acct_cred = 2
@@ -122,7 +122,7 @@ def test_create_budidea_metrics_insert_sqlstr_ReturnsObj():
     x_stop_want = 27
     values_dict = {
         "world_id": x_world_id,
-        "fisc_word": x_fisc_word,
+        "fisc_label": x_fisc_label,
         "owner_name": x_owner_name,
         "_active": x__active,
         "_all_acct_cred": x__all_acct_cred,
@@ -193,7 +193,7 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
     #     b1_str = "}"
     #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
     x_world_id = "music23"
-    x_fisc_word = "accord23"
+    x_fisc_label = "accord23"
     x_owner_name = "Sue"
     x_way = 1
     x_rcontext = 2
@@ -203,7 +203,7 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
     x__rcontext_idea_active_value = 6
     values_dict = {
         "world_id": x_world_id,
-        "fisc_word": x_fisc_word,
+        "fisc_label": x_fisc_label,
         "owner_name": x_owner_name,
         "idea_way": x_way,
         "rcontext": x_rcontext,
@@ -257,7 +257,7 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
     x_world_id = "music23"
-    x_fisc_word = "accord23"
+    x_fisc_label = "accord23"
     x_owner_name = "Sue"
     x_way = 1
     x_rcontext = 2
@@ -269,7 +269,7 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
     x__status = 8
     values_dict = {
         "world_id": x_world_id,
-        "fisc_word": x_fisc_word,
+        "fisc_label": x_fisc_label,
         "owner_name": x_owner_name,
         "idea_way": x_way,
         "rcontext": x_rcontext,
@@ -325,7 +325,7 @@ def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
     x_world_id = "music23"
-    x_fisc_word = "accord23"
+    x_fisc_label = "accord23"
     x_owner_name = "Sue"
     x_way = 1
     x_awardee_title = 2
@@ -335,7 +335,7 @@ def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
     x__fund_take = 6
     values_dict = {
         "world_id": x_world_id,
-        "fisc_word": x_fisc_word,
+        "fisc_label": x_fisc_label,
         "owner_name": x_owner_name,
         "idea_way": x_way,
         "awardee_title": x_awardee_title,
@@ -389,7 +389,7 @@ def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
     x_world_id = "music23"
-    x_fisc_word = "accord23"
+    x_fisc_label = "accord23"
     x_owner_name = "Sue"
     x_way = 1
     x_fcontext = 2
@@ -398,7 +398,7 @@ def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
     x_fnigh = 5
     values_dict = {
         "world_id": x_world_id,
-        "fisc_word": x_fisc_word,
+        "fisc_label": x_fisc_label,
         "owner_name": x_owner_name,
         "idea_way": x_way,
         "fcontext": x_fcontext,
@@ -451,13 +451,13 @@ def test_create_budheal_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
     x_world_id = "music23"
-    x_fisc_word = "accord23"
+    x_fisc_label = "accord23"
     x_owner_name = "Sue"
     x_way = 1
     x_healer_name = 2
     values_dict = {
         "world_id": x_world_id,
-        "fisc_word": x_fisc_word,
+        "fisc_label": x_fisc_label,
         "owner_name": x_owner_name,
         "idea_way": x_way,
         "healer_name": x_healer_name,
@@ -507,14 +507,14 @@ def test_create_budlabor_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
     x_world_id = "music23"
-    x_fisc_word = "accord23"
+    x_fisc_label = "accord23"
     x_owner_name = "Sue"
     x_way = 1
     x_labor_title = 2
     x__owner_name_labor = 3
     values_dict = {
         "world_id": x_world_id,
-        "fisc_word": x_fisc_word,
+        "fisc_label": x_fisc_label,
         "owner_name": x_owner_name,
         "idea_way": x_way,
         "labor_title": x_labor_title,
@@ -565,7 +565,7 @@ def test_create_budacct_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
     x_world_id = "music23"
-    x_fisc_word = "accord23"
+    x_fisc_label = "accord23"
     x_owner_name = "Sue"
     x_acct_name = 1
     x_credit_belief = 2
@@ -582,7 +582,7 @@ def test_create_budacct_metrics_insert_sqlstr_ReturnsObj():
     x__irrational_debtit_belief = 13
     values_dict = {
         "world_id": x_world_id,
-        "fisc_word": x_fisc_word,
+        "fisc_label": x_fisc_label,
         "owner_name": x_owner_name,
         "acct_name": x_acct_name,
         "credit_belief": x_credit_belief,
@@ -643,7 +643,7 @@ def test_create_budmemb_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
     x_world_id = "music23"
-    x_fisc_word = "accord23"
+    x_fisc_label = "accord23"
     x_owner_name = "Sue"
     x_acct_name = 1
     x_group_title = 2
@@ -659,7 +659,7 @@ def test_create_budmemb_metrics_insert_sqlstr_ReturnsObj():
     x__fund_agenda_ratio_take = 12
     values_dict = {
         "world_id": x_world_id,
-        "fisc_word": x_fisc_word,
+        "fisc_label": x_fisc_label,
         "owner_name": x_owner_name,
         "acct_name": x_acct_name,
         "group_title": x_group_title,
@@ -719,7 +719,7 @@ def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
     x_world_id = "music23"
-    x_fisc_word = "accord23"
+    x_fisc_label = "accord23"
     x_owner_name = "Sue"
     x_group_title = 1
     x__credor_pool = 2
@@ -732,7 +732,7 @@ def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
     x_bridge = 9
     values_dict = {
         "world_id": x_world_id,
-        "fisc_word": x_fisc_word,
+        "fisc_label": x_fisc_label,
         "owner_name": x_owner_name,
         "group_title": x_group_title,
         "_credor_pool": x__credor_pool,

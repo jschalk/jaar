@@ -3,7 +3,7 @@ from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.a02_finance_logic._utils.strs_a02 import (
     deal_time_str,
     owner_name_str,
-    fisc_word_str,
+    fisc_label_str,
 )
 from src.a06_bud_logic._utils.str_a06 import face_name_str, acct_name_str, event_int_str
 from src.a17_creed_logic.creed_db_tool import get_pragma_table_fetchall
@@ -95,7 +95,7 @@ def test_WorldUnit_creed_raw_to_fisc_prime_tables_Bud_dimen_creed_PopulatesFiscR
     sue_inz_dir = create_path(fizz_world._syntax_inz_dir, sue_inx)
     br00011_str = "br00011"
     br00011_csv_filename = f"{br00011_str}.csv"
-    br00011_csv_str = f"""{event_int_str()},{face_name_str()},{fisc_word_str()},{owner_name_str()},{acct_name_str()}
+    br00011_csv_str = f"""{event_int_str()},{face_name_str()},{fisc_label_str()},{owner_name_str()},{acct_name_str()}
 {event3},{sue_inx},{accord23_str},{bob_inx},{bob_inx}
 {event3},{sue_inx},{accord23_str},{yao_inx},{bob_inx}
 {event3},{sue_inx},{accord23_str},{yao_inx},{yao_inx}
@@ -119,7 +119,7 @@ def test_WorldUnit_creed_raw_to_fisc_prime_tables_Bud_dimen_creed_PopulatesFiscR
             br00011_str,
             event3,
             sue_inx,
-            accord23_str,  # fisc_word
+            accord23_str,  # fisc_label
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
@@ -128,7 +128,7 @@ def test_WorldUnit_creed_raw_to_fisc_prime_tables_Bud_dimen_creed_PopulatesFiscR
             None,  # c400_number
             None,  # yr1_jan1_offset
             None,  # monthday_distortion
-            None,  # timeline_word
+            None,  # timeline_label
             None,  # job_listen_rotations
             None,  # note
         )
@@ -136,7 +136,7 @@ def test_WorldUnit_creed_raw_to_fisc_prime_tables_Bud_dimen_creed_PopulatesFiscR
             br00011_str,
             event7,
             sue_inx,
-            accord23_str,  # fisc_word
+            accord23_str,  # fisc_label
             None,  # fund_coin
             None,  # penny
             None,  # respect_bit
@@ -145,7 +145,7 @@ def test_WorldUnit_creed_raw_to_fisc_prime_tables_Bud_dimen_creed_PopulatesFiscR
             None,  # c400_number
             None,  # yr1_jan1_offset
             None,  # monthday_distortion
-            None,  # timeline_word
+            None,  # timeline_label
             None,  # job_listen_rotations
             None,  # note
         )
@@ -188,7 +188,7 @@ VALUES
         print(f"{insert_raw_sqlstr=}")
         cursor.execute(insert_raw_sqlstr)
         assert get_row_count(cursor, x_tablename) == 5
-        select_sqlstr = f"SELECT {event_int_str()}, {fisc_word_str()}, {deal_time_str()}, error_message FROM {x_tablename};"
+        select_sqlstr = f"SELECT {event_int_str()}, {fisc_label_str()}, {deal_time_str()}, error_message FROM {x_tablename};"
         # # select_sqlstr = f"SELECT {event_int_str()} FROM {x_tablename};"
         cursor.execute(select_sqlstr)
         # print(f"{select_sqlstr=}")

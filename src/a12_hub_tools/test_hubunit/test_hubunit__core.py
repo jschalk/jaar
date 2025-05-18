@@ -1,9 +1,9 @@
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a01_way_logic.way import (
     default_bridge_if_None,
-    create_way_from_words,
+    create_way_from_labels,
     create_way,
-    get_default_fisc_word as root_word,
+    get_default_fisc_label as root_label,
 )
 from src.a02_finance_logic.finance_config import (
     default_respect_bit_if_None,
@@ -26,7 +26,7 @@ def test_HubUnit_Exists():
 
     # THEN
     assert not x_hubunit.fisc_mstr_dir
-    assert not x_hubunit.fisc_word
+    assert not x_hubunit.fisc_label
     assert not x_hubunit.owner_name
     assert not x_hubunit.keep_way
     assert not x_hubunit.bridge
@@ -57,7 +57,7 @@ def test_HubUnit_RaisesError_keep_way_DoesNotExist():
 def test_hubunit_shop_ReturnsObj():
     # ESTABLISH
     x_fisc_mstr_dir = "src/a15_fisc_logic/_utils"
-    x_fisc_word = "accord45"
+    x_fisc_label = "accord45"
     sue_str = "Sue"
     x_bridge = "/"
     x_fund_pool = 13000
@@ -69,7 +69,7 @@ def test_hubunit_shop_ReturnsObj():
     # WHEN
     x_hubunit = hubunit_shop(
         fisc_mstr_dir=x_fisc_mstr_dir,
-        fisc_word=x_fisc_word,
+        fisc_label=x_fisc_label,
         owner_name=sue_str,
         keep_way=None,
         bridge=x_bridge,
@@ -82,7 +82,7 @@ def test_hubunit_shop_ReturnsObj():
 
     # THEN
     assert x_hubunit.fisc_mstr_dir == x_fisc_mstr_dir
-    assert x_hubunit.fisc_word == x_fisc_word
+    assert x_hubunit.fisc_label == x_fisc_label
     assert x_hubunit.owner_name == sue_str
     assert x_hubunit.bridge == x_bridge
     assert x_hubunit.fund_pool == x_fund_pool
@@ -90,7 +90,7 @@ def test_hubunit_shop_ReturnsObj():
     assert x_hubunit.respect_bit == x_respect_bit
     assert x_hubunit.penny == x_penny
     assert x_hubunit.keep_point_magnitude == x_money_magnitude
-    sue_dir = create_owner_dir_path(x_fisc_mstr_dir, x_fisc_word, sue_str)
+    sue_dir = create_owner_dir_path(x_fisc_mstr_dir, x_fisc_label, sue_str)
     assert x_hubunit._keeps_dir == create_path(sue_dir, "keeps")
     assert x_hubunit._atoms_dir == create_path(sue_dir, "atoms")
     assert x_hubunit._packs_dir == create_path(sue_dir, "packs")
@@ -100,7 +100,7 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation-state"
-    nation_way = create_way(root_word(), nation_str)
+    nation_way = create_way(root_label(), nation_str)
     usa_str = "USA"
     usa_way = create_way(nation_way, usa_str)
     texas_str = "Texas"
@@ -117,7 +117,7 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     x_grades_path = create_path(sue_hubunit.keep_dir(), "grades")
 
     assert sue_hubunit.fisc_mstr_dir == fisc_mstr_dir
-    assert sue_hubunit.fisc_word == accord23_str
+    assert sue_hubunit.fisc_label == accord23_str
     assert sue_hubunit.owner_name == sue_str
     assert sue_hubunit.bridge == default_bridge_if_None()
     assert sue_hubunit.fund_pool == validate_fund_pool()
@@ -155,7 +155,7 @@ def test_hubunit_shop_RaisesErrorIf_owner_name_Contains_bridge():
         hubunit_shop(None, None, owner_name=bob_str, bridge=slash_str)
     assert (
         str(excinfo.value)
-        == f"'{bob_str}' needs to be a WordStr. Cannot contain bridge: '{slash_str}'"
+        == f"'{bob_str}' needs to be a LabelStr. Cannot contain bridge: '{slash_str}'"
     )
 
 
@@ -163,16 +163,16 @@ def test_get_keep_path_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     peru_str = "peru"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_word=peru_str, owner_name=sue_str)
+    sue_hubunit = hubunit_shop(env_dir(), fisc_label=peru_str, owner_name=sue_str)
     texas_str = "texas"
     dallas_str = "dallas"
     elpaso_str = "el paso"
     kern_str = "kern"
     idearoot = "idearoot"
-    texas_way = create_way_from_words([peru_str, texas_str])
-    dallas_way = create_way_from_words([peru_str, texas_str, dallas_str])
-    elpaso_way = create_way_from_words([peru_str, texas_str, elpaso_str])
-    kern_way = create_way_from_words([peru_str, texas_str, elpaso_str, kern_str])
+    texas_way = create_way_from_labels([peru_str, texas_str])
+    dallas_way = create_way_from_labels([peru_str, texas_str, dallas_str])
+    elpaso_way = create_way_from_labels([peru_str, texas_str, elpaso_str])
+    kern_way = create_way_from_labels([peru_str, texas_str, elpaso_str, kern_str])
 
     # WHEN
     texas_path = get_keep_path(sue_hubunit, texas_way)
@@ -190,9 +190,9 @@ def test_get_keep_path_ReturnsObj():
     assert kern_path == create_path(elpaso_path, kern_str)
 
     # WHEN / THEN
-    diff_root_texas_way = create_way_from_words([peru_str, texas_str])
-    diff_root_dallas_way = create_way_from_words([peru_str, texas_str, dallas_str])
-    diff_root_elpaso_way = create_way_from_words([peru_str, texas_str, elpaso_str])
+    diff_root_texas_way = create_way_from_labels([peru_str, texas_str])
+    diff_root_dallas_way = create_way_from_labels([peru_str, texas_str, dallas_str])
+    diff_root_elpaso_way = create_way_from_labels([peru_str, texas_str, elpaso_str])
     assert texas_path == get_keep_path(sue_hubunit, diff_root_texas_way)
     assert dallas_path == get_keep_path(sue_hubunit, diff_root_dallas_way)
     assert elpaso_path == get_keep_path(sue_hubunit, diff_root_elpaso_way)

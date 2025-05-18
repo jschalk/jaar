@@ -30,12 +30,12 @@ def otx_name_str() -> str:
     return "otx_name"
 
 
-def inx_word_str() -> str:
-    return "inx_word"
+def inx_label_str() -> str:
+    return "inx_label"
 
 
-def otx_word_str() -> str:
-    return "otx_word"
+def otx_label_str() -> str:
+    return "otx_label"
 
 
 def inx_way_str() -> str:
@@ -66,8 +66,8 @@ def pidgin_title_str() -> str:
     return "pidgin_title"
 
 
-def pidgin_word_str() -> str:
-    return "pidgin_word"
+def pidgin_label_str() -> str:
+    return "pidgin_label"
 
 
 def pidgin_way_str() -> str:

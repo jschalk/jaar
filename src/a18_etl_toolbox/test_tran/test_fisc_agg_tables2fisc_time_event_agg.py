@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.db_toolbox import get_row_count, db_table_exists
-from src.a02_finance_logic._utils.strs_a02 import deal_time_str, fisc_word_str
+from src.a02_finance_logic._utils.strs_a02 import deal_time_str, fisc_label_str
 from src.a06_bud_logic._utils.str_a06 import event_int_str
 from src.a18_etl_toolbox.fisc_etl_tool import FiscPrimeObjsRef
 from src.a18_etl_toolbox.transformers import (
@@ -25,7 +25,7 @@ def test_fisc_agg_tables2fisc_event_time_agg_SetsTableAttr():
 
         x_fisc = FiscPrimeObjsRef()
         insert_raw_sqlstr = f"""
-INSERT INTO {x_fisc.deal_raw_tablename} ({event_int_str()}, {fisc_word_str()}, {deal_time_str()})
+INSERT INTO {x_fisc.deal_raw_tablename} ({event_int_str()}, {fisc_label_str()}, {deal_time_str()})
 VALUES
   ({event3}, '{accord23_str}', {timepoint55})
 , ({event3}, '{accord23_str}', {timepoint55})
@@ -36,7 +36,7 @@ VALUES
         cursor.execute(insert_raw_sqlstr)
         assert get_row_count(cursor, x_fisc.deal_raw_tablename) == 4
         insert_raw_sqlstr = f"""
-INSERT INTO {x_fisc.deal_raw_tablename} ({event_int_str()}, {fisc_word_str()}, {deal_time_str()})
+INSERT INTO {x_fisc.deal_raw_tablename} ({event_int_str()}, {fisc_label_str()}, {deal_time_str()})
 VALUES
   ({event3}, '{accord55_str}', {timepoint55})
 , ({event3}, '{accord55_str}', {timepoint55})
@@ -96,7 +96,7 @@ def test_fisc_agg_tables2fisc_event_time_agg_SetsTableAttr():
 
         x_fisc = FiscPrimeObjsRef()
         insert_raw_sqlstr = f"""
-INSERT INTO {x_fisc.deal_raw_tablename} ({event_int_str()}, {fisc_word_str()}, {deal_time_str()})
+INSERT INTO {x_fisc.deal_raw_tablename} ({event_int_str()}, {fisc_label_str()}, {deal_time_str()})
 VALUES
   ({event3}, '{accord23_str}', {timepoint66})
 , ({event7}, '{accord23_str}', {timepoint55})
@@ -117,7 +117,7 @@ VALUES
         cursor.execute(
             f"""
 SELECT 
-  {fisc_word_str()}
+  {fisc_label_str()}
 , {event_int_str()}
 , agg_time
 , error_message 

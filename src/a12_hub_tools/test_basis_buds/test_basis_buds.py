@@ -40,7 +40,7 @@ def test_create_empty_bud_from_bud_ReturnsObj():
     # THEN
     assert yao_empty_plan.owner_name != yao_gut.owner_name
     assert yao_empty_plan.owner_name == zia_str
-    assert yao_empty_plan.fisc_word == yao_gut.fisc_word
+    assert yao_empty_plan.fisc_label == yao_gut.fisc_label
     assert yao_empty_plan.last_pack_id is None
     assert yao_empty_plan.get_acctunits_dict() == {}
     assert yao_empty_plan.bridge == yao_gut.bridge
@@ -83,7 +83,7 @@ def test_create_listen_basis_ReturnsObj():
 
     # THEN
     assert yao_basis_plan.owner_name == yao_duty.owner_name
-    assert yao_basis_plan.fisc_word == yao_duty.fisc_word
+    assert yao_basis_plan.fisc_label == yao_duty.fisc_label
     assert yao_basis_plan.last_pack_id == yao_duty.last_pack_id
     assert yao_basis_plan.get_acctunits_dict() == yao_duty.get_acctunits_dict()
     assert yao_basis_plan.bridge == yao_duty.bridge
@@ -135,8 +135,8 @@ def test_get_default_job_ReturnsObj():
     default_job.settle_bud()
     assert default_job.owner_name == sue_budunit.owner_name
     assert default_job.owner_name == sue_str
-    assert default_job.fisc_word == sue_budunit.fisc_word
-    assert default_job.fisc_word == blue_str
+    assert default_job.fisc_label == sue_budunit.fisc_label
+    assert default_job.fisc_label == blue_str
     assert default_job.bridge == slash_str
     assert default_job.fund_pool == sue_acct_pool
     assert default_job.fund_coin == x_fund_coin

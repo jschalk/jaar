@@ -81,10 +81,10 @@ def test_BudUnit_get_idea_ranged_kids_ReturnsSomeChildrenScenario1():
 
     # THEN
     # for idea_x in week_idea._kids.values():
-    #     print(f"{idea_x.idea_word=} {idea_x._gogo_calc=} {idea_x._stop_calc=} ")
+    #     print(f"{idea_x.idea_label=} {idea_x._gogo_calc=} {idea_x._stop_calc=} ")
     # print("")
     # for idea_x in ranged_ideas.values():
-    #     print(f"{idea_x.idea_word=} {idea_x._gogo_calc=} {idea_x._stop_calc=} ")
+    #     print(f"{idea_x.idea_label=} {idea_x._gogo_calc=} {idea_x._stop_calc=} ")
     assert len(ranged_ideas) == 3
 
 

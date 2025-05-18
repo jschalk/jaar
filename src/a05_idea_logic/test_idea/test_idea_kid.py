@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import get_default_fisc_word as root_word, create_way
+from src.a01_way_logic.way import get_default_fisc_label as root_label, create_way
 from src.a05_idea_logic.idea import ideaunit_shop
 from pytest import raises as pytest_raises
 
@@ -51,7 +51,7 @@ def test_get_kids_in_range_EmptyParametersReturnsAll_kids():
 def test_IdeaUnit_get_descendants_ReturnsNoWayStrs():
     # ESTABLISH
     nation_str = "nation-state"
-    nation_idea = ideaunit_shop(nation_str, parent_way=root_word())
+    nation_idea = ideaunit_shop(nation_str, parent_way=root_label())
 
     # WHEN
     nation_descendants = nation_idea.get_descendant_ways_from_kids()
@@ -63,8 +63,8 @@ def test_IdeaUnit_get_descendants_ReturnsNoWayStrs():
 def test_IdeaUnit_get_descendants_Returns3DescendantsWayStrs():
     # ESTABLISH
     nation_str = "nation-state"
-    nation_way = create_way(root_word(), nation_str)
-    nation_idea = ideaunit_shop(nation_str, parent_way=root_word())
+    nation_way = create_way(root_label(), nation_str)
+    nation_idea = ideaunit_shop(nation_str, parent_way=root_label())
 
     usa_str = "USA"
     usa_way = create_way(nation_way, usa_str)
@@ -94,8 +94,8 @@ def test_IdeaUnit_get_descendants_Returns3DescendantsWayStrs():
 def test_IdeaUnit_get_descendants_ErrorRaisedIfInfiniteLoop():
     # ESTABLISH
     nation_str = "nation-state"
-    nation_way = create_way(root_word(), nation_str)
-    nation_idea = ideaunit_shop(nation_str, parent_way=root_word())
+    nation_way = create_way(root_label(), nation_str)
+    nation_idea = ideaunit_shop(nation_str, parent_way=root_label())
     nation_idea.add_kid(nation_idea)
     max_count = 1000
 
@@ -111,8 +111,8 @@ def test_IdeaUnit_get_descendants_ErrorRaisedIfInfiniteLoop():
 def test_IdeaUnit_clear_kids_CorrectlySetsAttr():
     # ESTABLISH
     nation_str = "nation-state"
-    nation_way = create_way(root_word(), nation_str)
-    nation_idea = ideaunit_shop(nation_str, parent_way=root_word())
+    nation_way = create_way(root_label(), nation_str)
+    nation_idea = ideaunit_shop(nation_str, parent_way=root_label())
     nation_idea.add_kid(ideaunit_shop("USA", parent_way=nation_way))
     nation_idea.add_kid(ideaunit_shop("France", parent_way=nation_way))
     assert len(nation_idea._kids) == 2
@@ -127,8 +127,8 @@ def test_IdeaUnit_clear_kids_CorrectlySetsAttr():
 def test_IdeaUnit_get_kid_ReturnsObj():
     # ESTABLISH
     nation_str = "nation-state"
-    nation_way = create_way(root_word(), nation_str)
-    nation_idea = ideaunit_shop(nation_str, parent_way=root_word())
+    nation_way = create_way(root_label(), nation_str)
+    nation_idea = ideaunit_shop(nation_str, parent_way=root_label())
 
     usa_str = "USA"
     usa_way = create_way(nation_way, usa_str)
@@ -143,14 +143,14 @@ def test_IdeaUnit_get_kid_ReturnsObj():
     france_idea = nation_idea.get_kid(france_str)
 
     # THEN
-    assert france_idea.idea_word == france_str
+    assert france_idea.idea_label == france_str
 
 
 def test_IdeaUnit_del_kid_CorrectModifiesAttr():
     # ESTABLISH
     nation_str = "nation-state"
-    nation_way = create_way(root_word(), nation_str)
-    nation_idea = ideaunit_shop(nation_str, parent_way=root_word())
+    nation_way = create_way(root_label(), nation_str)
+    nation_idea = ideaunit_shop(nation_str, parent_way=root_label())
 
     usa_str = "USA"
     usa_way = create_way(nation_way, usa_str)
@@ -171,8 +171,8 @@ def test_IdeaUnit_del_kid_CorrectModifiesAttr():
 def test_IdeaUnit_get_kids_mass_sum_ReturnsObj_Scenario0():
     # ESTABLISH
     nation_str = "nation-state"
-    nation_way = create_way(root_word(), nation_str)
-    nation_idea = ideaunit_shop(nation_str, parent_way=root_word())
+    nation_way = create_way(root_label(), nation_str)
+    nation_idea = ideaunit_shop(nation_str, parent_way=root_label())
     usa_str = "USA"
     usa_idea = ideaunit_shop(usa_str, parent_way=nation_way)
     nation_idea.add_kid(usa_idea)
@@ -187,8 +187,8 @@ def test_IdeaUnit_get_kids_mass_sum_ReturnsObj_Scenario0():
 def test_IdeaUnit_get_kids_mass_sum_ReturnsObj_Scenario1():
     # ESTABLISH
     nation_str = "nation-state"
-    nation_way = create_way(root_word(), nation_str)
-    nation_idea = ideaunit_shop(nation_str, parent_way=root_word())
+    nation_way = create_way(root_label(), nation_str)
+    nation_idea = ideaunit_shop(nation_str, parent_way=root_label())
     usa_str = "USA"
     usa_idea = ideaunit_shop(usa_str, mass=0, parent_way=nation_way)
     nation_idea.add_kid(usa_idea)

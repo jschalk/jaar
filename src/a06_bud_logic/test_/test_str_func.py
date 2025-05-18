@@ -34,7 +34,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     labor_title_str,
     type_NameStr_str,
     type_TitleStr_str,
-    type_WordStr_str,
+    type_LabelStr_str,
     type_WayStr_str,
 )
 
@@ -74,5 +74,5 @@ def test_str_functions_ReturnsObj():
     assert labor_title_str() == "labor_title"
     assert type_NameStr_str() == "NameStr"
     assert type_TitleStr_str() == "TitleStr"
-    assert type_WordStr_str() == "WordStr"
+    assert type_LabelStr_str() == "LabelStr"
     assert type_WayStr_str() == "WayStr"

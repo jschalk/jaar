@@ -13,11 +13,11 @@ from src.a16_pidgin_logic.pidgin import (
 )
 from src.a16_pidgin_logic._utils.example_pidgins import (
     get_clean_waymap,
-    get_clean_wordmap,
+    get_clean_labelmap,
     get_swim_titlemap,
     get_slash_namemap,
     get_slash_titlemap,
-    get_slash_wordmap,
+    get_slash_labelmap,
     get_slash_waymap,
     get_suita_namemap,
 )
@@ -50,11 +50,11 @@ def test_PidginUnit_get_dict_ReturnsObj_Scenario0():
     assert sue_dict.get(unknown_term_str()) == default_unknown_term_if_None()
     sue_namemap = sue_pidginunit.namemap.get_dict()
     sue_titlemap = sue_pidginunit.titlemap.get_dict()
-    sue_wordmap = sue_pidginunit.wordmap.get_dict()
+    sue_labelmap = sue_pidginunit.labelmap.get_dict()
     sue_waymap = sue_pidginunit.waymap.get_dict()
     assert sue_dict.get("namemap") == _get_rid_of_pidgin_core_keys(sue_namemap)
     assert sue_dict.get("titlemap") == _get_rid_of_pidgin_core_keys(sue_titlemap)
-    assert sue_dict.get("wordmap") == _get_rid_of_pidgin_core_keys(sue_wordmap)
+    assert sue_dict.get("labelmap") == _get_rid_of_pidgin_core_keys(sue_labelmap)
     assert sue_dict.get("waymap") == _get_rid_of_pidgin_core_keys(sue_waymap)
 
 
@@ -69,7 +69,7 @@ def test_PidginUnit_get_dict_ReturnsObj_Scenario1():
     )
     sue_pidginunit.set_namemap(get_slash_namemap())
     sue_pidginunit.set_titlemap(get_slash_titlemap())
-    sue_pidginunit.set_wordmap(get_slash_wordmap())
+    sue_pidginunit.set_labelmap(get_slash_labelmap())
     sue_pidginunit.set_waymap(get_slash_waymap())
 
     # WHEN
@@ -82,11 +82,11 @@ def test_PidginUnit_get_dict_ReturnsObj_Scenario1():
     assert sue_dict.get(unknown_term_str()) == x_unknown_term
     sue_namemap = sue_pidginunit.namemap.get_dict()
     sue_titlemap = sue_pidginunit.titlemap.get_dict()
-    sue_wordmap = sue_pidginunit.wordmap.get_dict()
+    sue_labelmap = sue_pidginunit.labelmap.get_dict()
     sue_waymap = sue_pidginunit.waymap.get_dict()
     assert sue_dict.get("namemap") == _get_rid_of_pidgin_core_keys(sue_namemap)
     assert sue_dict.get("titlemap") == _get_rid_of_pidgin_core_keys(sue_titlemap)
-    assert sue_dict.get("wordmap") == _get_rid_of_pidgin_core_keys(sue_wordmap)
+    assert sue_dict.get("labelmap") == _get_rid_of_pidgin_core_keys(sue_labelmap)
     assert sue_dict.get("waymap") == _get_rid_of_pidgin_core_keys(sue_waymap)
 
 
@@ -96,7 +96,7 @@ def test_PidginUnit_get_json_ReturnsObj():
     sue_pidginunit = pidginunit_shop(sue_str)
     sue_pidginunit.set_titlemap(get_swim_titlemap())
     sue_pidginunit.set_namemap(get_suita_namemap())
-    sue_pidginunit.set_wordmap(get_clean_wordmap())
+    sue_pidginunit.set_labelmap(get_clean_labelmap())
     sue_pidginunit.set_waymap(get_clean_waymap())
 
     # WHEN
@@ -104,8 +104,8 @@ def test_PidginUnit_get_json_ReturnsObj():
 
     # THEN
     # print(f"{sue_json=}")
-    assert sue_json.find("wordmap") == 439
-    assert sue_json.find(otx_bridge_str()) == 176
+    assert sue_json.find("labelmap") == 66
+    assert sue_json.find(otx_bridge_str()) == 268
 
 
 def test_get_pidginunit_from_dict_ReturnsObj():
@@ -123,7 +123,7 @@ def test_get_pidginunit_from_dict_ReturnsObj():
         x_unknown_term,
     )
     sue_pidginunit.set_namemap(get_slash_namemap())
-    sue_pidginunit.set_wordmap(get_slash_wordmap())
+    sue_pidginunit.set_labelmap(get_slash_labelmap())
     sue_pidginunit.set_waymap(get_slash_waymap())
     sue_pidginunit.set_titlemap(get_slash_titlemap())
 

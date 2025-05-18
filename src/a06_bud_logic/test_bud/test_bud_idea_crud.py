@@ -11,14 +11,14 @@ from pytest import raises as pytest_raises
 def test_BudUnit_set_idea_RaisesErrorWhen_parent_way_IsInvalid():
     # ESTABLISH
     zia_bud = budunit_shop("Zia")
-    invalid_rootword_swim_way = create_way("swimming")
-    assert invalid_rootword_swim_way != zia_bud.fisc_word
+    invalid_rootlabel_swim_way = create_way("swimming")
+    assert invalid_rootlabel_swim_way != zia_bud.fisc_label
     casa_str = "casa"
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        zia_bud.set_idea(ideaunit_shop(casa_str), parent_way=invalid_rootword_swim_way)
-    exception_str = f"set_idea failed because parent_way '{invalid_rootword_swim_way}' has an invalid root word. Should be {zia_bud.fisc_word}."
+        zia_bud.set_idea(ideaunit_shop(casa_str), parent_way=invalid_rootlabel_swim_way)
+    exception_str = f"set_idea failed because parent_way '{invalid_rootlabel_swim_way}' has an invalid root label. Should be {zia_bud.fisc_label}."
     assert str(excinfo.value) == exception_str
 
 
@@ -39,7 +39,7 @@ def test_BudUnit_set_idea_RaisesErrorWhen_parent_way_IdeaDoesNotExist():
     assert str(excinfo.value) == exception_str
 
 
-def test_BudUnit_set_idea_RaisesErrorWhen_idea_word_IsNotWord():
+def test_BudUnit_set_idea_RaisesErrorWhen_idea_label_IsNotLabel():
     # ESTABLISH
     zia_bud = budunit_shop("Zia")
     swim_way = zia_bud.make_l1_way("swimming")
@@ -51,7 +51,7 @@ def test_BudUnit_set_idea_RaisesErrorWhen_idea_word_IsNotWord():
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         zia_bud.set_idea(ideaunit_shop(run_way), parent_way=swim_way)
-    exception_str = f"set_idea failed because '{run_way}' is not a WordStr."
+    exception_str = f"set_idea failed because '{run_way}' is not a LabelStr."
     assert str(excinfo.value) == exception_str
 
 
@@ -62,7 +62,7 @@ def test_BudUnit_set_idea_CorrectlySetsAttr():
     assert not zia_bud.idearoot._kids.get(casa_str)
 
     # WHEN
-    zia_bud.set_idea(ideaunit_shop(casa_str), parent_way=to_way(zia_bud.fisc_word))
+    zia_bud.set_idea(ideaunit_shop(casa_str), parent_way=to_way(zia_bud.fisc_label))
 
     # THEN
     print(f"{zia_bud.idearoot._kids.keys()=}")
@@ -77,7 +77,7 @@ def test_BudUnit_idea_exists_ReturnsObj():
     assert zia_bud.idea_exists(casa_way) is False
 
     # WHEN
-    zia_bud.set_idea(ideaunit_shop(casa_str), parent_way=to_way(zia_bud.fisc_word))
+    zia_bud.set_idea(ideaunit_shop(casa_str), parent_way=to_way(zia_bud.fisc_label))
 
     # THEN
     assert zia_bud.idea_exists(casa_way)
@@ -143,7 +143,7 @@ def test_BudUnit_add_idea_ReturnsObj():
     casa_ideaunit = bob_budunit.add_idea(casa_way, mass=casa_mass)
 
     # THEN
-    assert casa_ideaunit.idea_word == "casa"
+    assert casa_ideaunit.idea_label == "casa"
     assert casa_ideaunit.mass == casa_mass
 
 
@@ -196,7 +196,7 @@ def test_BudUnit_set_idea_CanCreateMissingIdeaUnits():
 def test_BudUnit_del_idea_obj_Level0CannotBeDeleted():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    root_way = to_way(sue_bud.fisc_word)
+    root_way = to_way(sue_bud.fisc_label)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -246,7 +246,7 @@ def test_BudUnit_del_idea_obj_Level1CanBeDeleted_ChildrenInherited():
     new_sunday_way = sue_bud.make_l1_way(sun_str)
     assert sue_bud.get_idea_obj(new_sunday_way)
     new_sunday_idea = sue_bud.get_idea_obj(new_sunday_way)
-    assert new_sunday_idea.parent_way == to_way(sue_bud.fisc_word)
+    assert new_sunday_idea.parent_way == to_way(sue_bud.fisc_label)
 
 
 def test_BudUnit_del_idea_obj_LevelNCanBeDeleted_ChildrenInherited():
@@ -487,7 +487,7 @@ def test_BudUnit_set_idea_MustReorderKidsDictToBeAlphabetical():
     idea_list = list(bob_bud.idearoot._kids.values())
 
     # THEN
-    assert idea_list[0].idea_word == casa_str
+    assert idea_list[0].idea_label == casa_str
 
 
 def test_BudUnit_set_idea_adoptee_RaisesErrorIfAdopteeIdeaDoesNotHaveCorrectParent():
@@ -684,7 +684,7 @@ def test_BudUnit_edit_idea_attr_DeletesIdeaUnit_awardlinks():
 
     # THEN
     swim_idea = yao_bud.get_idea_obj(swim_way)
-    print(f"{swim_idea.idea_word=}")
+    print(f"{swim_idea.idea_label=}")
     print(f"{swim_idea.awardlinks=}")
     print(f"{swim_idea._awardheirs=}")
 
@@ -792,7 +792,7 @@ def test_BudUnit_get_idea_obj_ReturnsIdea():
 
     # THEN
     assert brazil_idea is not None
-    assert brazil_idea.idea_word == brazil_str
+    assert brazil_idea.idea_label == brazil_str
 
     # WHEN
     week_str = "weekdays"
@@ -801,14 +801,14 @@ def test_BudUnit_get_idea_obj_ReturnsIdea():
 
     # THEN
     assert week_idea is not None
-    assert week_idea.idea_word == week_str
+    assert week_idea.idea_label == week_str
 
     # WHEN
-    root_idea = sue_bud.get_idea_obj(to_way(sue_bud.fisc_word))
+    root_idea = sue_bud.get_idea_obj(to_way(sue_bud.fisc_label))
 
     # THEN
     assert root_idea is not None
-    assert root_idea.idea_word == sue_bud.fisc_word
+    assert root_idea.idea_label == sue_bud.fisc_label
 
     # WHEN / THEN
     bobdylan_str = "bobdylan"
@@ -846,7 +846,7 @@ def test_BudUnit_idea_exists_ReturnsCorrectBool():
     # WHEN / THEN
     assert sue_bud.idea_exists("") is False
     assert sue_bud.idea_exists(None) is False
-    assert sue_bud.idea_exists(to_way(sue_bud.fisc_word))
+    assert sue_bud.idea_exists(to_way(sue_bud.fisc_label))
     assert sue_bud.idea_exists(cat_way)
     assert sue_bud.idea_exists(week_way)
     assert sue_bud.idea_exists(casa_way)
@@ -891,8 +891,8 @@ def test_BudUnit_set_offtrack_fund_ReturnsObj():
     casa_idea = ideaunit_shop(casa_str, _fund_onset=70, _fund_cease=170)
     week_idea = ideaunit_shop(week_str, _fund_onset=70, _fund_cease=75)
     wed_idea = ideaunit_shop(wed_str, _fund_onset=72, _fund_cease=75)
-    casa_idea.parent_way = bob_budunit.fisc_word
-    week_idea.parent_way = bob_budunit.fisc_word
+    casa_idea.parent_way = bob_budunit.fisc_label
+    week_idea.parent_way = bob_budunit.fisc_label
     wed_idea.parent_way = week_way
     bob_budunit.set_l1_idea(casa_idea)
     bob_budunit.set_l1_idea(week_idea)
@@ -948,8 +948,8 @@ def test_BudUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     casa_idea = ideaunit_shop(casa_str, _fund_onset=70, _fund_cease=170)
     week_idea = ideaunit_shop(week_str, _fund_onset=70, _fund_cease=75)
     wed_idea = ideaunit_shop(wed_str, _fund_onset=72, _fund_cease=75)
-    casa_idea.parent_way = bob_budunit.fisc_word
-    week_idea.parent_way = bob_budunit.fisc_word
+    casa_idea.parent_way = bob_budunit.fisc_label
+    week_idea.parent_way = bob_budunit.fisc_label
     wed_idea.parent_way = week_way
     bob_budunit.set_l1_idea(casa_idea)
     bob_budunit.set_l1_idea(week_idea)

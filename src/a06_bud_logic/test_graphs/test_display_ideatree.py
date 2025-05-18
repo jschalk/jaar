@@ -16,30 +16,30 @@ from src.a06_bud_logic._utils.example_buds import (
 
 
 def test_display_ideatree_Scenario0(graphics_bool):
-    # a_bud = get_1word_bud()
-    # a_bud = get_2word_bud()
-    # a_bud = get_3word_bud()
-    # a_bud = get_5wordHG_bud()
-    # a_bud = get_7wordJRoot_bud()
+    # a_bud = get_1label_bud()
+    # a_bud = get_2label_bud()
+    # a_bud = get_3label_bud()
+    # a_bud = get_5labelHG_bud()
+    # a_bud = get_7labelJRoot_bud()
     a_bud = get_budunit_with_4_levels()
     # a_bud = budunit_v001()
     a_bud.settle_bud()
-    print(f"Bud {a_bud.fisc_word}: Words ({len(a_bud._idea_dict)})")
+    print(f"Bud {a_bud.fisc_label}: Labels ({len(a_bud._idea_dict)})")
 
     # WHEN / THEN
     x_fig = display_ideatree(a_bud, graphics_bool)
 
 
 def test_display_ideatree_Scenario1_shows_Tasks(graphics_bool):
-    # a_bud = get_1word_bud()
-    # a_bud = get_2word_bud()
-    # a_bud = get_3word_bud()
-    # a_bud = get_5wordHG_bud()
-    # a_bud = get_7wordJRoot_bud()
+    # a_bud = get_1label_bud()
+    # a_bud = get_2label_bud()
+    # a_bud = get_3label_bud()
+    # a_bud = get_5labelHG_bud()
+    # a_bud = get_7labelJRoot_bud()
     a_bud = get_budunit_laundry_example1()
     # a_bud = budunit_v001()
     a_bud.settle_bud()
-    print(f"Bud {a_bud.fisc_word}: Words ({len(a_bud._idea_dict)})")
+    print(f"Bud {a_bud.fisc_label}: Labels ({len(a_bud._idea_dict)})")
 
     # WHEN / THEN
     display_ideatree(a_bud, mode="Task", graphics_bool=graphics_bool)

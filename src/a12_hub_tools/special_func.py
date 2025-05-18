@@ -1,6 +1,6 @@
 from src.a01_way_logic.way import (
     WayStr,
-    get_terminus_word,
+    get_terminus_label,
     get_parent_way,
     TitleStr,
 )
@@ -19,7 +19,7 @@ def create_pledge(
     if (
         pledge_way is not None
         and pledge_way != ""
-        and get_terminus_word(pledge_way) != ""
+        and get_terminus_label(pledge_way) != ""
     ):
         x_idea = x_bud.get_idea_obj(pledge_way, if_missing_create=True)
         x_idea.pledge = True
@@ -43,7 +43,7 @@ def add_gut_pledge(
 ):
     gut_bud = open_gut_file(
         x_hubunit.fisc_mstr_dir,
-        x_hubunit.fisc_word,
+        x_hubunit.fisc_label,
         x_hubunit.owner_name,
     )
     old_gut_bud = copy_deepcopy(gut_bud)
@@ -64,7 +64,7 @@ def create_fact(x_bud: BudUnit, fact_fbranch: WayStr):
 def add_gut_fact(x_hubunit: HubUnit, fact_fbranch: WayStr):
     gut_bud = open_gut_file(
         x_hubunit.fisc_mstr_dir,
-        x_hubunit.fisc_word,
+        x_hubunit.fisc_label,
         x_hubunit.owner_name,
     )
     old_gut_bud = copy_deepcopy(gut_bud)

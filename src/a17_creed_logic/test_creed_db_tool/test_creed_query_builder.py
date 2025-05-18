@@ -1,4 +1,4 @@
-from src.a02_finance_logic._utils.strs_a02 import fisc_word_str, owner_name_str
+from src.a02_finance_logic._utils.strs_a02 import fisc_label_str, owner_name_str
 from src.a06_bud_logic._utils.str_a06 import (
     event_int_str,
     face_name_str,
@@ -25,7 +25,7 @@ def test_get_creed_into_dimen_raw_query_ReturnsObj_Scenario0_bud_idea_laborlink(
         creed_cols = [
             event_int_str(),
             face_name_str(),
-            fisc_word_str(),
+            fisc_label_str(),
             idea_way_str(),
             labor_title_str(),
             owner_name_str(),
@@ -55,12 +55,12 @@ def test_get_creed_into_dimen_raw_query_ReturnsObj_Scenario0_bud_idea_laborlink(
 
         # THEN
         columns_str = (
-            "event_int, face_name, fisc_word, owner_name, idea_way, labor_title"
+            "event_int, face_name, fisc_label, owner_name, idea_way, labor_title"
         )
         expected_sqlstr = f"""INSERT INTO {budlabor_cat}_raw (creed_number, {columns_str})
 SELECT '{creed_number}' as creed_number, {columns_str}
 FROM {creed_number}_raw
-WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND fisc_word IS NOT NULL AND owner_name IS NOT NULL AND idea_way IS NOT NULL AND labor_title IS NOT NULL
+WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND fisc_label IS NOT NULL AND owner_name IS NOT NULL AND idea_way IS NOT NULL AND labor_title IS NOT NULL
 GROUP BY {columns_str}
 ;
 """
@@ -77,7 +77,7 @@ def test_get_creed_into_dimen_raw_query_ReturnsObj_Scenario1_bud_acctunit():
         creed_cols = [
             event_int_str(),
             face_name_str(),
-            fisc_word_str(),
+            fisc_label_str(),
             idea_way_str(),
             labor_title_str(),
             owner_name_str(),
@@ -105,11 +105,11 @@ def test_get_creed_into_dimen_raw_query_ReturnsObj_Scenario1_bud_acctunit():
         )
 
         # THEN
-        columns_str = "event_int, face_name, fisc_word, owner_name, acct_name, credit_belief, debtit_belief"
+        columns_str = "event_int, face_name, fisc_label, owner_name, acct_name, credit_belief, debtit_belief"
         expected_sqlstr = f"""INSERT INTO {budacct_cat}_raw (creed_number, {columns_str})
 SELECT '{creed_number}' as creed_number, {columns_str}
 FROM {creed_number}_raw
-WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND fisc_word IS NOT NULL AND owner_name IS NOT NULL AND acct_name IS NOT NULL
+WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND fisc_label IS NOT NULL AND owner_name IS NOT NULL AND acct_name IS NOT NULL
 GROUP BY {columns_str}
 ;
 """
@@ -127,7 +127,7 @@ def test_get_creed_into_dimen_raw_query_ReturnsObj_Scenario2_bud_acctunit():
         creed_cols = [
             event_int_str(),
             face_name_str(),
-            fisc_word_str(),
+            fisc_label_str(),
             idea_way_str(),
             labor_title_str(),
             owner_name_str(),
@@ -155,12 +155,12 @@ def test_get_creed_into_dimen_raw_query_ReturnsObj_Scenario2_bud_acctunit():
 
         # THEN
         columns_str = (
-            "event_int, face_name, fisc_word, owner_name, acct_name, credit_belief"
+            "event_int, face_name, fisc_label, owner_name, acct_name, credit_belief"
         )
         expected_sqlstr = f"""INSERT INTO {budacct_cat}_raw (creed_number, {columns_str})
 SELECT '{creed_number}' as creed_number, {columns_str}
 FROM {creed_number}_raw
-WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND fisc_word IS NOT NULL AND owner_name IS NOT NULL AND acct_name IS NOT NULL
+WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND fisc_label IS NOT NULL AND owner_name IS NOT NULL AND acct_name IS NOT NULL
 GROUP BY {columns_str}
 ;
 """

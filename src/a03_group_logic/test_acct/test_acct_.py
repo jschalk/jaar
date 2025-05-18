@@ -54,7 +54,7 @@ def test_AcctUnit_set_namestr_RaisesErrorIfParameterContains_bridge():
         acctunit_shop(acct_name=texas_str, bridge=slash_str)
     assert (
         str(excinfo.value)
-        == f"'{texas_str}' needs to be a WordStr. Cannot contain bridge: '{slash_str}'"
+        == f"'{texas_str}' needs to be a LabelStr. Cannot contain bridge: '{slash_str}'"
     )
 
 

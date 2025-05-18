@@ -4,44 +4,44 @@ from src.a04_reason_logic.reason_idea import (
     premiseunit_shop,
     factunit_shop,
 )
-from src.a01_way_logic.way import get_default_fisc_word as root_word, create_way
+from src.a01_way_logic.way import get_default_fisc_label as root_label, create_way
 
 
 def test_IdeaUnit_find_replace_way_CorrectlyModifies_parent_way():
     # ESTABLISH Idea with _parent_way that will be different
     old_casa_str = "casa1"
-    old_casa_way = create_way(root_word(), old_casa_str)
+    old_casa_way = create_way(root_label(), old_casa_str)
     bloomers_str = "bloomers"
     old_bloomers_way = create_way(old_casa_way, bloomers_str)
     roses_str = "roses"
     old_roses_way = create_way(old_bloomers_way, roses_str)
     x_idea = ideaunit_shop(roses_str, parent_way=old_bloomers_way)
     assert create_way(x_idea.parent_way) == old_bloomers_way
-    assert create_way(x_idea.parent_way, x_idea.idea_word) == old_roses_way
+    assert create_way(x_idea.parent_way, x_idea.idea_label) == old_roses_way
 
     # WHEN
     new_casa = "casa2"
-    new_casa_way = create_way(root_word(), new_casa)
+    new_casa_way = create_way(root_label(), new_casa)
     x_idea.find_replace_way(old_way=old_casa_way, new_way=new_casa_way)
 
     # THEN
     new_bloomers_way = create_way(new_casa_way, bloomers_str)
     new_roses_way = create_way(new_bloomers_way, roses_str)
     assert create_way(x_idea.parent_way) == new_bloomers_way
-    assert create_way(x_idea.parent_way, x_idea.idea_word) == new_roses_way
+    assert create_way(x_idea.parent_way, x_idea.idea_label) == new_roses_way
 
 
 def test_IdeaUnit_find_replace_way_CorrectlyModifies_reasonunits():
     # ESTABLISH Idea with reason that will be different
     casa_str = "casa1"
-    casa_way = create_way(root_word(), casa_str)
+    casa_way = create_way(root_label(), casa_str)
     bloomers_str = "bloomers"
     bloomers_way = create_way(casa_way, bloomers_str)
     roses_str = "roses"
     roses_way = create_way(bloomers_way, roses_str)
     # reason ways
     old_water_str = "water"
-    old_water_way = create_way(root_word(), old_water_str)
+    old_water_way = create_way(root_label(), old_water_str)
     rain_str = "rain"
     old_rain_way = create_way(old_water_way, rain_str)
     # create reasonunit
@@ -60,7 +60,7 @@ def test_IdeaUnit_find_replace_way_CorrectlyModifies_reasonunits():
 
     # WHEN
     new_water_str = "h2o"
-    new_water_way = create_way(root_word(), new_water_str)
+    new_water_way = create_way(root_label(), new_water_str)
     assert x_idea.reasonunits.get(new_water_way) is None
     x_idea.find_replace_way(old_way=old_water_way, new_way=new_water_way)
 
@@ -89,7 +89,7 @@ def test_IdeaUnit_find_replace_way_CorrectlyModifies_factunits():
     # ESTABLISH Idea with factunit that will be different
     roses_str = "roses"
     old_water_str = "water"
-    old_water_way = create_way(root_word(), old_water_str)
+    old_water_way = create_way(root_label(), old_water_str)
     rain_str = "rain"
     old_rain_way = create_way(old_water_way, rain_str)
 
@@ -103,7 +103,7 @@ def test_IdeaUnit_find_replace_way_CorrectlyModifies_factunits():
 
     # WHEN
     new_water_str = "h2o"
-    new_water_way = create_way(root_word(), new_water_str)
+    new_water_way = create_way(root_label(), new_water_str)
     assert x_idea.factunits.get(new_water_way) is None
     x_idea.find_replace_way(old_way=old_water_way, new_way=new_water_way)
 

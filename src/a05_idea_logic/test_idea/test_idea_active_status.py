@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import get_default_fisc_word as root_word, create_way
+from src.a01_way_logic.way import get_default_fisc_label as root_label, create_way
 from src.a03_group_logic.group import awardheir_shop, awardlink_shop
 from src.a04_reason_logic.reason_idea import (
     reasonunit_shop,
@@ -29,7 +29,7 @@ def test_IdeaUnit_clear_all_acct_cred_debt_ClearsCorrectly():
 def test_IdeaUnit_get_fund_share_ReturnsObj():
     # ESTABLISH
     texas_str = "texas"
-    texas_idea = ideaunit_shop(texas_str, root_word())
+    texas_idea = ideaunit_shop(texas_str, root_label())
 
     # WHEN / THEN
     assert texas_idea.get_fund_share() == 0
@@ -207,18 +207,18 @@ def test_IdeaUnit_set_range_factheirs_SetsAttrNoParameters():
 def test_IdeaUnit_set_range_factheirs_SetsAttrNewFactHeir():
     # ESTABLISH
     week_str = "week"
-    week_way = create_way(root_word(), week_str)
+    week_way = create_way(root_label(), week_str)
     week_popen = 3
     week_pnigh = 7
     week_addin = 10
-    week_idea = ideaunit_shop(week_str, parent_way=root_word(), addin=week_addin)
+    week_idea = ideaunit_shop(week_str, parent_way=root_label(), addin=week_addin)
     week_factheir = factheir_shop(week_way, week_way, week_popen, week_pnigh)
     tue_str = "Tue"
     tue_way = create_way(week_way, tue_str)
     tue_addin = 100
     tue_idea = ideaunit_shop(tue_str, parent_way=week_way, addin=tue_addin)
     ball_str = "ball"
-    ball_way = create_way(root_word(), ball_str)
+    ball_way = create_way(root_label(), ball_str)
     ball_idea = ideaunit_shop(ball_str)
     ball_idea._set_factheir(week_factheir)
     tue_reasonheirs = {tue_way: reasonheir_shop(tue_way, None, False)}

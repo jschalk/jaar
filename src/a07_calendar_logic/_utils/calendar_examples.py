@@ -13,7 +13,7 @@ from src.a07_calendar_logic._utils.str_a07 import (
     hours_config_str,
     weekdays_config_str,
     months_config_str,
-    timeline_word_str,
+    timeline_label_str,
     yr1_jan1_offset_str,
     c400_number_str,
     creg_str,
@@ -36,8 +36,8 @@ def get_squirt_config() -> dict:
     return get_example_timeline_config("squirt")
 
 
-def get_example_timeline_config(timeline_word: str) -> dict:
-    x_filename = f"timeline_config_{timeline_word}.json"
+def get_example_timeline_config(timeline_label: str) -> dict:
+    x_filename = f"timeline_config_{timeline_label}.json"
     return open_json(get_module_examples_dir(), x_filename)
 
 
@@ -87,10 +87,10 @@ def creg_weekday_ideaunits() -> dict[str, IdeaUnit]:
 
 
 def get_cregtime_str() -> str:
-    return get_creg_config().get(timeline_word_str())
+    return get_creg_config().get(timeline_label_str())
 
 
-def creg_hour_word(x_int: int) -> str:
+def creg_hour_label(x_int: int) -> str:
     return creg_hours_list()[x_int][0]
 
 

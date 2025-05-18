@@ -2,14 +2,14 @@ from src.a00_data_toolbox.file_toolbox import create_path, count_dirs_files, sav
 from src.a00_data_toolbox.db_toolbox import get_row_count, db_table_exists
 from src.a02_finance_logic._utils.strs_a02 import (
     owner_name_str,
-    fisc_word_str,
+    fisc_label_str,
     deal_time_str,
     quota_str,
     celldepth_str,
 )
 from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str, acct_name_str
 from src.a12_hub_tools.hub_path import create_fisc_ote1_csv_path
-from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_word_str
+from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_label_str
 from src.a16_pidgin_logic._utils.str_a16 import otx_name_str, inx_name_str
 from src.a17_creed_logic._utils.str_a17 import brick_agg_str, brick_raw_str
 from src.a17_creed_logic.creed_db_tool import upsert_sheet, sheet_exists
@@ -68,7 +68,7 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
     br00113_columns = [
         face_name_str(),
         event_int_str(),
-        fisc_word_str(),
+        fisc_label_str(),
         owner_name_str(),
         acct_name_str(),
         otx_name_str(),
@@ -179,13 +179,13 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
 #         event_int_str(),
 #         face_name_str(),
 #         cumlative_minute_str(),
-#         fisc_word_str(),
-#         hour_word_str(),
+#         fisc_label_str(),
+#         hour_label_str(),
 #     ]
 #     br00001_columns = [
 #         event_int_str(),
 #         face_name_str(),
-#         fisc_word_str(),
+#         fisc_label_str(),
 #         owner_name_str(),
 #         deal_time_str(),
 #         quota_str(),
@@ -212,7 +212,7 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
 #     br00011_columns = [
 #         event_int_str(),
 #         face_name_str(),
-#         fisc_word_str(),
+#         fisc_label_str(),
 #         owner_name_str(),
 #         acct_name_str(),
 #     ]
@@ -265,7 +265,7 @@ def test_WorldUnit_mud_to_stances_Senario4_WhenNoFiscCreeds_ote1_IsStillCreated(
     br00011_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_word_str(),
+        fisc_label_str(),
         owner_name_str(),
         acct_name_str(),
     ]
@@ -301,8 +301,8 @@ def test_WorldUnit_mud_to_stances_Senario4_WhenNoFiscCreeds_ote1_IsStillCreated(
 #         face_name_str(),
 #         event_int_str(),
 #         cumlative_minute_str(),
-#         fisc_word_str(),
-#         hour_word_str(),
+#         fisc_label_str(),
+#         hour_label_str(),
 #     ]
 #     accord23_str = "accord23"
 #     row1 = [event1, sue_str,  minute_360, accord23_str, hour6am]
@@ -317,7 +317,7 @@ def test_WorldUnit_mud_to_stances_Senario4_WhenNoFiscCreeds_ote1_IsStillCreated(
 #     br00011_columns = [
 #         face_name_str(),
 #         event_int_str(),
-#         "fisc_word",
+#         "fisc_label",
 #         "owner_name",
 #         "acct_name",
 #     ]

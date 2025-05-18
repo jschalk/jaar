@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.dict_toolbox import get_1_if_None
 from src.a00_data_toolbox.file_toolbox import open_json, create_path
-from src.a01_way_logic.way import WayStr, TimeLineWord
+from src.a01_way_logic.way import WayStr, TimeLineLabel
 from src.a05_idea_logic.idea import (
     ideaunit_shop,
     IdeaUnit,
@@ -143,13 +143,13 @@ def create_week_ideaunits(x_weekdays_list) -> dict[str, IdeaUnit]:
     }
 
 
-def new_timeline_ideaunit(timeline_word: TimeLineWord, c400_number: int) -> IdeaUnit:
+def new_timeline_ideaunit(timeline_label: TimeLineLabel, c400_number: int) -> IdeaUnit:
     timeline_length = c400_number * get_c400_constants().c400_leap_length
-    return ideaunit_shop(timeline_word, begin=0, close=timeline_length)
+    return ideaunit_shop(timeline_label, begin=0, close=timeline_length)
 
 
 def add_newtimeline_ideaunit(x_budunit: BudUnit, timeline_config: dict):
-    x_idea_word = timeline_config.get("timeline_word")
+    x_idea_label = timeline_config.get("timeline_label")
     x_c400_number = timeline_config.get("c400_number")
     x_months = timeline_config.get("months_config")
     x_mday = timeline_config.get("monthday_distortion")
@@ -158,12 +158,12 @@ def add_newtimeline_ideaunit(x_budunit: BudUnit, timeline_config: dict):
     x_yr1_jan1_offset = timeline_config.get("yr1_jan1_offset")
 
     time_way = x_budunit.make_l1_way("time")
-    new_way = x_budunit.make_way(time_way, x_idea_word)
+    new_way = x_budunit.make_way(time_way, x_idea_label)
     day_way = x_budunit.make_way(new_way, "day")
     week_way = x_budunit.make_way(new_way, "week")
     year_way = get_year_way(x_budunit, new_way)
 
-    add_stan_ideaunits(x_budunit, time_way, x_idea_word, x_c400_number)
+    add_stan_ideaunits(x_budunit, time_way, x_idea_label, x_c400_number)
     add_ideaunits(x_budunit, day_way, create_hour_ideaunits(x_hours_list))
     add_ideaunits(x_budunit, new_way, create_week_ideaunits(x_wkdays_list))
     add_ideaunits(x_budunit, week_way, create_weekday_ideaunits(x_wkdays_list))
@@ -183,11 +183,11 @@ def add_ideaunits(
 def add_stan_ideaunits(
     x_budunit: BudUnit,
     time_way: WayStr,
-    timeline_word: TimeLineWord,
+    timeline_label: TimeLineLabel,
     timeline_c400_number: int,
 ):
     time_way = x_budunit.make_l1_way("time")
-    new_way = x_budunit.make_way(time_way, timeline_word)
+    new_way = x_budunit.make_way(time_way, timeline_label)
     c400_leap_way = x_budunit.make_way(new_way, "c400_leap")
     c400_clean_way = x_budunit.make_way(c400_leap_way, "c400_clean")
     c100_way = x_budunit.make_way(c400_clean_way, "c100")
@@ -196,7 +196,7 @@ def add_stan_ideaunits(
 
     if not x_budunit.idea_exists(time_way):
         x_budunit.set_l1_idea(ideaunit_shop("time"))
-    timeline_ideaunit = new_timeline_ideaunit(timeline_word, timeline_c400_number)
+    timeline_ideaunit = new_timeline_ideaunit(timeline_label, timeline_c400_number)
     x_budunit.set_idea(timeline_ideaunit, time_way)
     x_budunit.set_idea(stan_c400_leap_ideaunit(), new_way)
     x_budunit.set_idea(stan_c400_clean_ideaunit(), c400_leap_way)
@@ -243,7 +243,7 @@ def validate_timeline_config(config_dict: dict) -> bool:
         "weekdays_config",
         "months_config",
         "monthday_distortion",
-        "timeline_word",
+        "timeline_label",
         "c400_number",
         "yr1_jan1_offset",
     ]
@@ -331,7 +331,7 @@ def get_default_weekdays_config() -> list[list[str, int]]:
 
 
 def timeline_config_shop(
-    timeline_word: TimeLineWord = None,
+    timeline_label: TimeLineLabel = None,
     c400_number: int = None,
     hour_length: int = None,
     month_length: int = None,
@@ -340,8 +340,8 @@ def timeline_config_shop(
     monthday_distortion: int = None,
     yr1_jan1_offset: int = None,
 ) -> dict:
-    if timeline_word is None:
-        timeline_word = "creg"
+    if timeline_label is None:
+        timeline_label = "creg"
     if c400_number is None:
         c400_number = 7
     if yr1_jan1_offset is None:
@@ -366,7 +366,7 @@ def timeline_config_shop(
         "hours_config": hour_config,
         "weekdays_config": weekday_list,
         "months_config": month_config,
-        "timeline_word": timeline_word,
+        "timeline_label": timeline_label,
         "c400_number": c400_number,
         "monthday_distortion": get_1_if_None(monthday_distortion),
         "yr1_jan1_offset": yr1_jan1_offset,
@@ -533,7 +533,7 @@ class TimeLineUnit:
     hours_config: list[list[str, int]] = None
     months_config: list[list[str, int]] = None
     monthday_distortion: int = None
-    timeline_word: TimeLineWord = None
+    timeline_label: TimeLineLabel = None
     weekdays_config: list[str] = None
     yr1_jan1_offset: int = None
 
@@ -543,7 +543,7 @@ class TimeLineUnit:
             "hours_config": self.hours_config,
             "months_config": self.months_config,
             "monthday_distortion": self.monthday_distortion,
-            "timeline_word": self.timeline_word,
+            "timeline_label": self.timeline_label,
             "weekdays_config": self.weekdays_config,
             "yr1_jan1_offset": self.yr1_jan1_offset,
         }
@@ -571,7 +571,7 @@ def timelineunit_shop(timeline_config: dict = None) -> TimeLineUnit:
         hours_config=timeline_config.get("hours_config"),
         months_config=timeline_config.get("months_config"),
         monthday_distortion=timeline_config.get("monthday_distortion"),
-        timeline_word=timeline_config.get("timeline_word"),
+        timeline_label=timeline_config.get("timeline_label"),
         weekdays_config=timeline_config.get("weekdays_config"),
         yr1_jan1_offset=timeline_config.get("yr1_jan1_offset"),
     )

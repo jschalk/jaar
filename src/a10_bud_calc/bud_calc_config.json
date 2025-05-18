@@ -6,8 +6,8 @@
                 "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
-            "fisc_word": {
-                "class_type": "WordStr",
+            "fisc_label": {
+                "class_type": "LabelStr",
                 "sqlite_datatype": "TEXT"
             },
             "group_title": {
@@ -75,8 +75,8 @@
                 "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
-            "fisc_word": {
-                "class_type": "WordStr",
+            "fisc_label": {
+                "class_type": "LabelStr",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {
@@ -144,8 +144,8 @@
     "bud_groupunit": {
         "abbreviation": "budgrou",
         "jkeys": {
-            "fisc_word": {
-                "class_type": "WordStr",
+            "fisc_label": {
+                "class_type": "LabelStr",
                 "sqlite_datatype": "TEXT"
             },
             "group_title": {
@@ -205,8 +205,8 @@
                 "class_type": "TitleStr",
                 "sqlite_datatype": "TEXT"
             },
-            "fisc_word": {
-                "class_type": "WordStr",
+            "fisc_label": {
+                "class_type": "LabelStr",
                 "sqlite_datatype": "TEXT"
             },
             "idea_way": {
@@ -250,8 +250,8 @@
                 "class_type": "WayStr",
                 "sqlite_datatype": "TEXT"
             },
-            "fisc_word": {
-                "class_type": "WordStr",
+            "fisc_label": {
+                "class_type": "LabelStr",
                 "sqlite_datatype": "TEXT"
             },
             "idea_way": {
@@ -286,8 +286,8 @@
     "bud_idea_healerlink": {
         "abbreviation": "budheal",
         "jkeys": {
-            "fisc_word": {
-                "class_type": "WordStr",
+            "fisc_label": {
+                "class_type": "LabelStr",
                 "sqlite_datatype": "TEXT"
             },
             "healer_name": {
@@ -313,8 +313,8 @@
     "bud_idea_reason_premiseunit": {
         "abbreviation": "budprem",
         "jkeys": {
-            "fisc_word": {
-                "class_type": "WordStr",
+            "fisc_label": {
+                "class_type": "LabelStr",
                 "sqlite_datatype": "TEXT"
             },
             "idea_way": {
@@ -366,8 +366,8 @@
     "bud_idea_reasonunit": {
         "abbreviation": "budreas",
         "jkeys": {
-            "fisc_word": {
-                "class_type": "WordStr",
+            "fisc_label": {
+                "class_type": "LabelStr",
                 "sqlite_datatype": "TEXT"
             },
             "idea_way": {
@@ -411,8 +411,8 @@
     "bud_idea_laborlink": {
         "abbreviation": "budlabo",
         "jkeys": {
-            "fisc_word": {
-                "class_type": "WordStr",
+            "fisc_label": {
+                "class_type": "LabelStr",
                 "sqlite_datatype": "TEXT"
             },
             "idea_way": {
@@ -443,8 +443,8 @@
     "bud_ideaunit": {
         "abbreviation": "budidea",
         "jkeys": {
-            "fisc_word": {
-                "class_type": "WordStr",
+            "fisc_label": {
+                "class_type": "LabelStr",
                 "sqlite_datatype": "TEXT"
             },
             "idea_way": {
@@ -568,8 +568,8 @@
     "budunit": {
         "abbreviation": "budunit",
         "jkeys": {
-            "fisc_word": {
-                "class_type": "WordStr",
+            "fisc_label": {
+                "class_type": "LabelStr",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {

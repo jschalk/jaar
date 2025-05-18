@@ -120,7 +120,7 @@ class BudDelta:
         return get_from_nested_dict(self.budatoms, x_keylist)
 
     def add_all_budatoms(self, after_bud: BudUnit):
-        before_bud = budunit_shop(after_bud.owner_name, after_bud.fisc_word)
+        before_bud = budunit_shop(after_bud.owner_name, after_bud.fisc_label)
         self.add_all_different_budatoms(before_bud, after_bud)
 
     def add_all_different_budatoms(self, before_bud: BudUnit, after_bud: BudUnit):

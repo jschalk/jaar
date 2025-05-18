@@ -126,10 +126,10 @@ def test_AtomRow_set_class_types_SetsAttr():
     x_atomrow = atomrow_shop({}, atom_insert())
     x_atomrow.close = "4"
     x_parent_way = "fizz_buzz"
-    x_idea_word = "buzzziy"
+    x_idea_label = "buzzziy"
     x_morph_str = "True"
     x_morph_bool = True
-    x_way = create_way(x_parent_way, x_idea_word)
+    x_way = create_way(x_parent_way, x_idea_label)
     x_atomrow.idea_way = x_way
     x_atomrow.morph = x_morph_str
     four_int = 4

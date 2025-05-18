@@ -6,13 +6,13 @@
         "face_name": {
             "otx_key": true
         },
-        "fisc_word": {
+        "fisc_label": {
             "otx_key": true
         },
         "weekday_order": {
             "otx_key": true
         },
-        "weekday_word": {
+        "weekday_label": {
             "otx_key": false
         }
     },

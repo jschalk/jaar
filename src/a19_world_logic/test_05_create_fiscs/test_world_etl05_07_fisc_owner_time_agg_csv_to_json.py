@@ -2,7 +2,7 @@ from src.a00_data_toolbox.file_toolbox import open_json, save_file
 from src.a02_finance_logic._utils.strs_a02 import (
     deal_time_str,
     owner_name_str,
-    fisc_word_str,
+    fisc_label_str,
 )
 from src.a06_bud_logic._utils.str_a06 import event_int_str
 from src.a12_hub_tools.hub_path import (
@@ -33,10 +33,10 @@ def test_WorldUnit_fisc_ote1_agg_csvs2jsons_CreatesFile_Scenaro0(
     fisc_mstr_dir = fizz_world._fisc_mstr_dir
     a23_event_time_p = create_fisc_ote1_csv_path(fisc_mstr_dir, accord23_str)
     a45_event_time_p = create_fisc_ote1_csv_path(fisc_mstr_dir, accord45_str)
-    a23_event_time_csv = f"""{fisc_word_str()},{owner_name_str()},{event_int_str()},{deal_time_str()},error_message
+    a23_event_time_csv = f"""{fisc_label_str()},{owner_name_str()},{event_int_str()},{deal_time_str()},error_message
 {accord23_str},{bob_str},{event3},{timepoint55},
 """
-    a45_event_time_csv = f"""{fisc_word_str()},{owner_name_str()},{event_int_str()},{deal_time_str()},error_message
+    a45_event_time_csv = f"""{fisc_label_str()},{owner_name_str()},{event_int_str()},{deal_time_str()},error_message
 {accord45_str},{sue_str},{event3},{timepoint55},
 {accord45_str},{sue_str},{event7},{timepoint66},
 """

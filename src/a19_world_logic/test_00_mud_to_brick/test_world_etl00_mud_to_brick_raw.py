@@ -4,9 +4,9 @@ from src.a00_data_toolbox.db_toolbox import (
     get_row_count,
     get_table_columns,
 )
-from src.a02_finance_logic._utils.strs_a02 import fisc_word_str
+from src.a02_finance_logic._utils.strs_a02 import fisc_label_str
 from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str
-from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_word_str
+from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_label_str
 from src.a17_creed_logic._utils.str_a17 import brick_raw_str
 from src.a17_creed_logic.creed_db_tool import upsert_sheet
 from src.a19_world_logic.world import worldunit_shop
@@ -39,8 +39,8 @@ def test_WorldUnit_mud_dfs_to_brick_raw_tables_CreatesBrickFiles(
         event_int_str(),
         face_name_str(),
         cumlative_minute_str(),
-        fisc_word_str(),
-        hour_word_str(),
+        fisc_label_str(),
+        hour_label_str(),
     ]
     a23_str = "accord23"
     row1 = [event1, sue_str, minute_360, a23_str, hour6am]
@@ -50,7 +50,7 @@ def test_WorldUnit_mud_dfs_to_brick_raw_tables_CreatesBrickFiles(
         event_int_str(),
         face_name_str(),
         cumlative_minute_str(),
-        fisc_word_str(),
+        fisc_label_str(),
     ]
     incom_row1 = [event1, sue_str, minute_360, a23_str]
     incom_row2 = [event1, sue_str, minute_420, a23_str]

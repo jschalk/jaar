@@ -51,7 +51,7 @@ def test_BudUnit_get_dict_ReturnsObj_Scenario1_large_json():
     assert bud_dict is not None
     assert str(type(bud_dict)) == "<class 'dict'>"
     assert bud_dict["owner_name"] == yao_bud.owner_name
-    assert bud_dict["fisc_word"] == yao_bud.fisc_word
+    assert bud_dict["fisc_label"] == yao_bud.fisc_label
     assert bud_dict["tally"] == yao_bud.tally
     assert bud_dict["tally"] == bud_tally
     assert bud_dict["fund_pool"] == yao_fund_pool
@@ -68,8 +68,8 @@ def test_BudUnit_get_dict_ReturnsObj_Scenario1_large_json():
     x_idearoot = yao_bud.idearoot
     idearoot_dict = bud_dict["idearoot"]
     _kids = "_kids"
-    assert x_idearoot.idea_word == yao_bud.fisc_word
-    assert idearoot_dict["idea_word"] == x_idearoot.idea_word
+    assert x_idearoot.idea_label == yao_bud.fisc_label
+    assert idearoot_dict["idea_label"] == x_idearoot.idea_label
     assert idearoot_dict["mass"] == x_idearoot.mass
     assert len(idearoot_dict[_kids]) == len(x_idearoot._kids)
 
@@ -90,7 +90,7 @@ def test_BudUnit_get_dict_ReturnsObj_Scenario2_idearoot_laborunit():
     sue_bud = budunit_shop("Sue")
     x_laborunit = laborunit_shop()
     x_laborunit.set_laborlink(labor_title=run_str)
-    root_way = to_way(sue_bud.fisc_word)
+    root_way = to_way(sue_bud.fisc_label)
     sue_bud.edit_idea_attr(root_way, laborunit=x_laborunit)
     root_idea = sue_bud.get_idea_obj(root_way)
     x_gogo_want = 5
@@ -119,7 +119,7 @@ def test_BudUnit_get_dict_ReturnsObj_Scenario3_With_idearoot_healerlink():
     yao_acctunit.add_membership(run_str)
     run_healerlink = healerlink_shop()
     run_healerlink.set_healer_name(x_healer_name=run_str)
-    root_way = to_way(sue_bud.fisc_word)
+    root_way = to_way(sue_bud.fisc_label)
     sue_bud.edit_idea_attr(root_way, healerlink=run_healerlink)
 
     # WHEN
@@ -177,7 +177,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     yao_acctunit = zia_bud.get_acct(yao_str)
     yao_acctunit.add_membership(run_str)
     run_healerlink = healerlink_shop({run_str})
-    root_way = to_way(zia_bud.fisc_word)
+    root_way = to_way(zia_bud.fisc_label)
     zia_bud.edit_idea_attr(root_way, healerlink=run_healerlink)
     zia_bud.edit_idea_attr(root_way, problem_bool=True)
 
@@ -192,7 +192,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     bud_dict = get_dict_from_json(x_json)
 
     assert bud_dict["owner_name"] == zia_bud.owner_name
-    assert bud_dict["fisc_word"] == zia_bud.fisc_word
+    assert bud_dict["fisc_label"] == zia_bud.fisc_label
     assert bud_dict["tally"] == zia_bud.tally
     assert bud_dict["fund_pool"] == zia_bud.fund_pool
     assert bud_dict["fund_coin"] == zia_bud.fund_coin
@@ -248,7 +248,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     # THEN
     _kids = "_kids"
     assert bud_dict["owner_name"] == yao_bud.owner_name
-    assert bud_dict["fisc_word"] == yao_bud.fisc_word
+    assert bud_dict["fisc_label"] == yao_bud.fisc_label
     assert bud_dict["tally"] == yao_bud.tally
     assert bud_dict["max_tree_traverse"] == 2
     assert bud_dict["max_tree_traverse"] == yao_bud.max_tree_traverse
@@ -292,8 +292,8 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     # ESTABLISH
     zia_bud = get_budunit_x1_3levels_1reason_1facts()
     zia_bud.set_max_tree_traverse(23)
-    tiger_fisc_word = "tiger"
-    zia_bud.set_fisc_word(tiger_fisc_word)
+    tiger_fisc_label = "tiger"
+    zia_bud.set_fisc_label(tiger_fisc_label)
     zia_fund_pool = 80000
     zia_bud.fund_pool = zia_fund_pool
     zia_fund_coin = 8
@@ -315,7 +315,7 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     shave_idea_y1._originunit.set_originhold(acct_name="Sue", importance=4.3)
     shave_idea_y1.problem_bool = True
     # print(f"{shave_way=}")
-    # print(f"{json_shave_idea.idea_word=} {json_shave_idea.parent_way=}")
+    # print(f"{json_shave_idea.idea_label=} {json_shave_idea.parent_way=}")
 
     sue_str = "Sue"
     zia_bud.add_acctunit(acct_name=sue_str, credit_belief=199, debtit_belief=199)
@@ -328,7 +328,7 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     xio_acctunit.add_membership(run_str)
     run_laborunit = laborunit_shop()
     run_laborunit.set_laborlink(labor_title=run_str)
-    root_way = to_way(zia_bud.fisc_word)
+    root_way = to_way(zia_bud.fisc_label)
     zia_bud.edit_idea_attr(root_way, laborunit=run_laborunit)
     xio_laborunit = laborunit_shop()
     xio_laborunit.set_laborlink(labor_title=xio_str)
@@ -358,7 +358,7 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     assert str(type(json_bud)).find(".bud.BudUnit'>") > 0
     assert json_bud.owner_name is not None
     assert json_bud.owner_name == zia_bud.owner_name
-    assert json_bud.fisc_word == zia_bud.fisc_word
+    assert json_bud.fisc_label == zia_bud.fisc_label
     assert json_bud.fund_pool == zia_fund_pool
     assert json_bud.fund_pool == zia_bud.fund_pool
     assert json_bud.fund_coin == zia_fund_coin
@@ -424,7 +424,7 @@ def test_budunit_get_from_json_ReturnsCorrectIdeaRoot():
     # ESTABLISH
     zia_bud = get_budunit_x1_3levels_1reason_1facts()
     zia_bud.set_max_tree_traverse(23)
-    # root_idea = zia_bud.get_idea_obj(zia_bud.get_idea_obj(zia_bud.fisc_word))
+    # root_idea = zia_bud.get_idea_obj(zia_bud.get_idea_obj(zia_bud.fisc_label))
     root_idea = zia_bud.idearoot
     zia_gogo_want = 75
     zia_stop_want = 77
@@ -437,7 +437,7 @@ def test_budunit_get_from_json_ReturnsCorrectIdeaRoot():
     json_bud = budunit_get_from_json(x_bud_json=x_json)
 
     # THEN
-    json_idearoot = json_bud.get_idea_obj(to_way(zia_bud.fisc_word))
+    json_idearoot = json_bud.get_idea_obj(to_way(zia_bud.fisc_label))
     assert json_idearoot.gogo_want == zia_gogo_want
     assert json_idearoot.stop_want == zia_stop_want
 
@@ -499,7 +499,7 @@ def test_budunit_get_from_json_ReturnsObj_Scenario7_idearoot_bridge_IsCorrectlyS
     slash_str = "/"
     run_str = "runners"
     sue_bud = budunit_shop("Sue", bridge=slash_str)
-    root_way = to_way(sue_bud.fisc_word, slash_str)
+    root_way = to_way(sue_bud.fisc_label, slash_str)
     day_hour_str = "day_hour"
     day_hour_way = sue_bud.make_l1_way(day_hour_str)
     sue_bud.add_idea(day_hour_way)
@@ -559,7 +559,7 @@ def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
     assert ccn_dict_of_obj.get(x3_bud.owner_name) is not None
 
     ccn2_bud = ccn_dict_of_obj.get(x2_bud.owner_name)
-    assert ccn2_bud.idearoot.idea_word == x2_bud.idearoot.idea_word
+    assert ccn2_bud.idearoot.idea_label == x2_bud.idearoot.idea_label
     assert ccn2_bud.idearoot.parent_way == x2_bud.idearoot.parent_way
     assert ccn2_bud.idearoot.fund_coin == x2_bud.idearoot.fund_coin
     shave_way = ccn2_bud.make_l1_way("shave")

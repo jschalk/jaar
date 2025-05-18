@@ -9,13 +9,13 @@
         "face_name": {
             "otx_key": true
         },
-        "fisc_word": {
+        "fisc_label": {
             "otx_key": true
         },
-        "inx_word": {
+        "inx_label": {
             "otx_key": false
         },
-        "otx_word": {
+        "otx_label": {
             "otx_key": true
         },
         "owner_name": {
@@ -24,7 +24,7 @@
     },
     "creed_number": "br00116",
     "dimens": [
-        "pidgin_word",
+        "pidgin_label",
         "bud_acctunit",
         "budunit",
         "fiscunit"

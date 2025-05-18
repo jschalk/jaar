@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import save_json
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_word_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_label_str
 from src.a06_bud_logic._utils.str_a06 import (
     bud_ideaunit_str,
     idea_way_str,
@@ -20,7 +20,7 @@ def create_dimens_creed_format_dict() -> dict:
     for creed_dimen, dimen_dict in get_creed_config_dict().items():
         if dimen_dict.get("creed_category") == "bud":
             creed_filename = f"creed_format_{x_count:05}_{creed_dimen}_v0_0_0.json"
-            attributes_set = {fisc_word_str(), owner_name_str()}
+            attributes_set = {fisc_label_str(), owner_name_str()}
             args_dict = get_atom_config_args(creed_dimen)
             attributes_set.update(set(args_dict.keys()))
 
@@ -43,7 +43,7 @@ def test_create_dimens_creed_format_dict_ReturnObj(rebuild_bool):
     assert bud_ideaunit_dict.get(dimens_str()) == [bud_ideaunit_str()]
     assert bud_ideaunit_dict.get(attributes_str())
     bud_ideaunit_attributes = bud_ideaunit_dict.get(attributes_str())
-    assert fisc_word_str() in bud_ideaunit_attributes
+    assert fisc_label_str() in bud_ideaunit_attributes
     assert owner_name_str() in bud_ideaunit_attributes
     assert idea_way_str() in bud_ideaunit_attributes
     assert gogo_want_str() in bud_ideaunit_attributes

@@ -9,7 +9,7 @@ from src.a00_data_toolbox.db_toolbox import (
     create_select_query,
 )
 from src.a02_finance_logic._utils.strs_a02 import (
-    fisc_word_str,
+    fisc_label_str,
     owner_name_str,
     deal_time_str,
     tran_time_str,
@@ -31,7 +31,7 @@ from src.a06_bud_logic._utils.str_a06 import (
 from src.a07_calendar_logic._utils.str_a07 import (
     c400_number_str,
     monthday_distortion_str,
-    timeline_word_str,
+    timeline_label_str,
     yr1_jan1_offset_str,
 )
 from src.a08_bud_atom_logic.atom_config import get_bud_dimens, get_delete_key_name
@@ -50,7 +50,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     pidgin_title_str,
     pidgin_name_str,
     pidgin_way_str,
-    pidgin_word_str,
+    pidgin_label_str,
     pidgin_core_str,
 )
 from src.a17_creed_logic._utils.str_a17 import creed_category_str, creed_number_str
@@ -90,8 +90,8 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     get_fisc_insert_agg_from_raw_sqlstrs,
     get_pidgin_insert_agg_from_raw_sqlstrs,
     FISUNIT_AGG_INSERT_SQLSTR,
-    get_creed_swordeble_put_dimens,
-    CREED_SWORDEBLE_DEL_DIMENS,
+    get_creed_slabeleble_put_dimens,
+    CREED_SLABELEBLE_DEL_DIMENS,
     CREATE_FISC_EVENT_TIME_AGG_SQLSTR,
     INSERT_FISC_EVENT_TIME_AGG_SQLSTR,
     UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR,
@@ -174,7 +174,7 @@ def test_create_prime_tablename_ReturnsObj():
     fisweek_dimen = fisc_timeline_weekday_str()
     fisoffi_dimen = fisc_timeoffi_str()
     pidname_dimen = pidgin_name_str()
-    pidword_dimen = pidgin_word_str()
+    pidlabe_dimen = pidgin_label_str()
     pidwayy_dimen = pidgin_way_str()
     pidtitl_dimen = pidgin_title_str()
     pidcore_dimen = pidgin_core_str()
@@ -204,7 +204,7 @@ def test_create_prime_tablename_ReturnsObj():
     fisweek_s_agg_table = create_prime_tablename("fisweek", "s", agg_str)
     fisoffi_s_agg_table = create_prime_tablename("fisoffi", "s", agg_str)
     pidname_s_agg_table = create_prime_tablename("pidname", "s", agg_str)
-    pidword_s_agg_table = create_prime_tablename("pidword", "s", agg_str)
+    pidlabe_s_agg_table = create_prime_tablename("pidlabe", "s", agg_str)
     pidwayy_s_agg_table = create_prime_tablename("pidwayy", "s", agg_str)
     pidtitl_s_agg_table = create_prime_tablename("pidtitl", "s", agg_str)
     pidtitl_v_agg_table = create_prime_tablename("pidtitl", "v", agg_str)
@@ -233,7 +233,7 @@ def test_create_prime_tablename_ReturnsObj():
     assert fisweek_s_agg_table == f"{fisweek_dimen}_s_agg"
     assert fisoffi_s_agg_table == f"{fisoffi_dimen}_s_agg"
     assert pidname_s_agg_table == f"{pidname_dimen}_s_agg"
-    assert pidword_s_agg_table == f"{pidword_dimen}_s_agg"
+    assert pidlabe_s_agg_table == f"{pidlabe_dimen}_s_agg"
     assert pidwayy_s_agg_table == f"{pidwayy_dimen}_s_agg"
     assert pidtitl_s_agg_table == f"{pidtitl_dimen}_s_agg"
     assert pidtitl_v_agg_table == f"{pidtitl_dimen}_v_agg"
@@ -856,17 +856,17 @@ def test_get_fisc_insert_agg_from_raw_sqlstrs_ReturnsObj():
             cursor,
             src_table=f"{fiscunit_str()}_raw",
             dst_table=f"{fiscunit_str()}_agg",
-            focus_cols=[fisc_word_str()],
+            focus_cols=[fisc_label_str()],
             exclude_cols=x_exclude_cols,
         )
         assert FISUNIT_AGG_INSERT_SQLSTR == generated_fiscunit_sqlstr
-        columns_header = f"""{fisc_word_str()}, {timeline_word_str()}, {c400_number_str()}, {yr1_jan1_offset_str()}, {monthday_distortion_str()}, fund_coin, penny, respect_bit, bridge, job_listen_rotations"""
+        columns_header = f"""{fisc_label_str()}, {timeline_label_str()}, {c400_number_str()}, {yr1_jan1_offset_str()}, {monthday_distortion_str()}, fund_coin, penny, respect_bit, bridge, job_listen_rotations"""
         tablename = "fiscunit"
         expected_fiscunit_sqlstr = f"""INSERT INTO {tablename}_agg ({columns_header})
-SELECT {fisc_word_str()}, MAX({timeline_word_str()}), MAX({c400_number_str()}), MAX({yr1_jan1_offset_str()}), MAX({monthday_distortion_str()}), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(bridge), MAX(job_listen_rotations)
+SELECT {fisc_label_str()}, MAX({timeline_label_str()}), MAX({c400_number_str()}), MAX({yr1_jan1_offset_str()}), MAX({monthday_distortion_str()}), MAX(fund_coin), MAX(penny), MAX(respect_bit), MAX(bridge), MAX(job_listen_rotations)
 FROM {tablename}_raw
 WHERE error_message IS NULL
-GROUP BY {fisc_word_str()}
+GROUP BY {fisc_label_str()}
 ;
 """
         assert FISUNIT_AGG_INSERT_SQLSTR == expected_fiscunit_sqlstr
@@ -1019,7 +1019,7 @@ def test_get_bud_insert_del_agg_from_raw_sqlstrs_ReturnsObj():
             assert x_sqlstr == expected_table2table_agg_insert_sqlstr
 
 
-def test_get_creed_swordeble_put_dimens_HasAll_creed_numbersForAll_dimens():
+def test_get_creed_slabeleble_put_dimens_HasAll_creed_numbersForAll_dimens():
     # sourcery skip: extract-method, no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH / WHEN
     # THEN
@@ -1039,25 +1039,25 @@ def test_get_creed_swordeble_put_dimens_HasAll_creed_numbersForAll_dimens():
         creed_raw2dimen_count = 0
         creed_dimen_combo_checked_count = 0
         sorted_creed_numbers = sorted(get_creed_numbers())
-        expected_creed_swordable_dimens = {i_num: [] for i_num in sorted_creed_numbers}
+        expected_creed_slabelable_dimens = {i_num: [] for i_num in sorted_creed_numbers}
         for x_dimen in sorted(creed_config):
             dimen_config = creed_config.get(x_dimen)
             dimen_key_columns = set(dimen_config.get("jkeys").keys())
             dimen_value_columns = set(dimen_config.get("jvalues").keys())
             for creed_number in sorted_creed_numbers:
                 src_columns = get_table_columns(cursor, f"{creed_number}_raw")
-                expected_swordable = dimen_key_columns.issubset(src_columns)
+                expected_slabelable = dimen_key_columns.issubset(src_columns)
                 if creed_number == "br00036":
                     print(f"{x_dimen} {creed_number} checking... {src_columns}")
                 src_tablename = f"{creed_number}_raw"
                 gen_stablable = required_columns_exist(
                     cursor, src_tablename, dimen_key_columns
                 )
-                assert expected_swordable == gen_stablable
+                assert expected_slabelable == gen_stablable
 
                 creed_dimen_combo_checked_count += 1
                 if required_columns_exist(cursor, src_tablename, dimen_key_columns):
-                    expected_creed_swordable_dimens.get(creed_number).append(x_dimen)
+                    expected_creed_slabelable_dimens.get(creed_number).append(x_dimen)
                     creed_raw2dimen_count += 1
                     src_cols_set = set(src_columns)
                     existing_value_col = src_cols_set.intersection(dimen_value_columns)
@@ -1076,14 +1076,14 @@ def test_get_creed_swordeble_put_dimens_HasAll_creed_numbersForAll_dimens():
                     # check sqlstr is correct?
                     assert generated_sqlstr != ""
 
-    creed_swordeble_dimen_list = sorted(list(expected_creed_swordable_dimens))
-    print(f"{expected_creed_swordable_dimens=}")
+    creed_slabeleble_dimen_list = sorted(list(expected_creed_slabelable_dimens))
+    print(f"{expected_creed_slabelable_dimens=}")
     assert creed_dimen_combo_checked_count == 680
     assert creed_raw2dimen_count == 109
-    assert get_creed_swordeble_put_dimens() == expected_creed_swordable_dimens
+    assert get_creed_slabeleble_put_dimens() == expected_creed_slabelable_dimens
 
 
-def test_CREED_SWORDEBLE_DEL_DIMENS_HasAll_creed_numbersForAll_dimens():
+def test_CREED_SLABELEBLE_DEL_DIMENS_HasAll_creed_numbersForAll_dimens():
     # sourcery skip: extract-method, no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH / WHEN
     # THEN
@@ -1103,7 +1103,7 @@ def test_CREED_SWORDEBLE_DEL_DIMENS_HasAll_creed_numbersForAll_dimens():
         creed_raw2dimen_count = 0
         creed_dimen_combo_checked_count = 0
         sorted_creed_numbers = sorted(get_creed_numbers())
-        x_creed_swordable_dimens = {i_num: [] for i_num in sorted_creed_numbers}
+        x_creed_slabelable_dimens = {i_num: [] for i_num in sorted_creed_numbers}
         for x_dimen in sorted(creed_config):
             dimen_config = creed_config.get(x_dimen)
             dimen_key_columns = set(dimen_config.get("jkeys").keys())
@@ -1112,16 +1112,16 @@ def test_CREED_SWORDEBLE_DEL_DIMENS_HasAll_creed_numbersForAll_dimens():
             dimen_key_columns = set(dimen_key_columns)
             for creed_number in sorted_creed_numbers:
                 src_columns = get_table_columns(cursor, f"{creed_number}_raw")
-                expected_swordable = dimen_key_columns.issubset(src_columns)
+                expected_slabelable = dimen_key_columns.issubset(src_columns)
                 src_tablename = f"{creed_number}_raw"
                 gen_stablable = required_columns_exist(
                     cursor, src_tablename, dimen_key_columns
                 )
-                assert expected_swordable == gen_stablable
+                assert expected_slabelable == gen_stablable
 
                 creed_dimen_combo_checked_count += 1
                 if required_columns_exist(cursor, src_tablename, dimen_key_columns):
-                    x_creed_swordable_dimens.get(creed_number).append(x_dimen)
+                    x_creed_slabelable_dimens.get(creed_number).append(x_dimen)
                     creed_raw2dimen_count += 1
                     src_cols_set = set(src_columns)
                     # print(
@@ -1138,23 +1138,23 @@ def test_CREED_SWORDEBLE_DEL_DIMENS_HasAll_creed_numbersForAll_dimens():
                     )
                     # check sqlstr is correct?
                     assert generated_sqlstr != ""
-    expected_creed_swordable_dimens = {
-        x_creed_number: swordable_dimens
-        for x_creed_number, swordable_dimens in x_creed_swordable_dimens.items()
-        if swordable_dimens != []
+    expected_creed_slabelable_dimens = {
+        x_creed_number: slabelable_dimens
+        for x_creed_number, slabelable_dimens in x_creed_slabelable_dimens.items()
+        if slabelable_dimens != []
     }
-    creed_swordeble_dimen_list = sorted(list(expected_creed_swordable_dimens))
-    print(f"{expected_creed_swordable_dimens=}")
+    creed_slabeleble_dimen_list = sorted(list(expected_creed_slabelable_dimens))
+    print(f"{expected_creed_slabelable_dimens=}")
     assert creed_dimen_combo_checked_count == 680
     assert creed_raw2dimen_count == 10
-    assert CREED_SWORDEBLE_DEL_DIMENS == expected_creed_swordable_dimens
+    assert CREED_SLABELEBLE_DEL_DIMENS == expected_creed_slabelable_dimens
 
 
 def test_CREATE_FISC_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_create_table_sqlstr = f"""
 CREATE TABLE IF NOT EXISTS fisc_event_time_agg (
-  {fisc_word_str()} TEXT
+  {fisc_label_str()} TEXT
 , {event_int_str()} INTEGER
 , agg_time INTEGER
 , error_message TEXT
@@ -1168,18 +1168,18 @@ CREATE TABLE IF NOT EXISTS fisc_event_time_agg (
 def test_INSERT_FISC_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_INSERT_sqlstr = f"""
-INSERT INTO fisc_event_time_agg ({fisc_word_str()}, {event_int_str()}, agg_time)
-SELECT {fisc_word_str()}, {event_int_str()}, agg_time
+INSERT INTO fisc_event_time_agg ({fisc_label_str()}, {event_int_str()}, agg_time)
+SELECT {fisc_label_str()}, {event_int_str()}, agg_time
 FROM (
-    SELECT {fisc_word_str()}, {event_int_str()}, {tran_time_str()} as agg_time
+    SELECT {fisc_label_str()}, {event_int_str()}, {tran_time_str()} as agg_time
     FROM fisc_cashbook_raw
-    GROUP BY {fisc_word_str()}, {event_int_str()}, {tran_time_str()}
+    GROUP BY {fisc_label_str()}, {event_int_str()}, {tran_time_str()}
     UNION 
-    SELECT {fisc_word_str()}, {event_int_str()}, {deal_time_str()} as agg_time
+    SELECT {fisc_label_str()}, {event_int_str()}, {deal_time_str()} as agg_time
     FROM fisc_dealunit_raw
-    GROUP BY {fisc_word_str()}, {event_int_str()}, {deal_time_str()}
+    GROUP BY {fisc_label_str()}, {event_int_str()}, {deal_time_str()}
 )
-ORDER BY {fisc_word_str()}, {event_int_str()}, agg_time
+ORDER BY {fisc_label_str()}, {event_int_str()}, agg_time
 ;
 """
     # WHEN / THEN
@@ -1190,8 +1190,8 @@ def test_UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_UPDATE_sqlstr = f"""
 WITH EventTimeOrdered AS (
-    SELECT {fisc_word_str()}, {event_int_str()}, agg_time,
-           LAG(agg_time) OVER (PARTITION BY {fisc_word_str()} ORDER BY {event_int_str()}) AS prev_agg_time
+    SELECT {fisc_label_str()}, {event_int_str()}, agg_time,
+           LAG(agg_time) OVER (PARTITION BY {fisc_label_str()} ORDER BY {event_int_str()}) AS prev_agg_time
     FROM fisc_event_time_agg
 )
 UPDATE fisc_event_time_agg
@@ -1202,7 +1202,7 @@ SET error_message = CASE
        END 
 FROM EventTimeOrdered
 WHERE EventTimeOrdered.{event_int_str()} = fisc_event_time_agg.{event_int_str()}
-    AND EventTimeOrdered.{fisc_word_str()} = fisc_event_time_agg.{fisc_word_str()}
+    AND EventTimeOrdered.{fisc_label_str()} = fisc_event_time_agg.{fisc_label_str()}
     AND EventTimeOrdered.agg_time = fisc_event_time_agg.agg_time
 ;
 """
@@ -1214,7 +1214,7 @@ def test_CREATE_FISC_OTE1_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_create_table_sqlstr = f"""
 CREATE TABLE IF NOT EXISTS fisc_ote1_agg (
-  {fisc_word_str()} TEXT
+  {fisc_label_str()} TEXT
 , {owner_name_str()} TEXT
 , {event_int_str()} INTEGER
 , {deal_time_str()} INTEGER
@@ -1229,14 +1229,14 @@ CREATE TABLE IF NOT EXISTS fisc_ote1_agg (
 def test_INSERT_FISC_OTE1_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_INSERT_sqlstr = f"""
-INSERT INTO fisc_ote1_agg ({fisc_word_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()})
-SELECT {fisc_word_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
+INSERT INTO fisc_ote1_agg ({fisc_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()})
+SELECT {fisc_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
 FROM (
-    SELECT {fisc_word_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
+    SELECT {fisc_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
     FROM fisc_dealunit_raw
-    GROUP BY {fisc_word_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
+    GROUP BY {fisc_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
 )
-ORDER BY {fisc_word_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
+ORDER BY {fisc_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
 ;
 """
     # WHEN / THEN
@@ -1262,7 +1262,7 @@ def test_get_fisc_fu1_select_sqlstrs_ReturnsObj():
     a23_str = "accord23"
 
     # WHEN
-    fu1_select_sqlstrs = get_fisc_fu1_select_sqlstrs(fisc_word=a23_str)
+    fu1_select_sqlstrs = get_fisc_fu1_select_sqlstrs(fisc_label=a23_str)
 
     # THEN
     gen_fiscash_sqlstr = fu1_select_sqlstrs.get(fisc_cashbook_str())
@@ -1282,7 +1282,7 @@ def test_get_fisc_fu1_select_sqlstrs_ReturnsObj():
         fisweek_agg = f"{fisc_timeline_weekday_str()}_agg"
         fisoffi_agg = f"{fisc_timeoffi_str()}_agg"
         fiscunit_agg = f"{fiscunit_str()}_agg"
-        where_dict = {fisc_word_str(): a23_str}
+        where_dict = {fisc_label_str(): a23_str}
         fiscash_sql = create_select_query(cursor, fiscash_agg, [], where_dict, True)
         fisdeal_sql = create_select_query(cursor, fisdeal_agg, [], where_dict, True)
         fishour_sql = create_select_query(cursor, fishour_agg, [], where_dict, True)

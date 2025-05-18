@@ -79,7 +79,7 @@ def test_sift_atom_ReturnsObj_BudAtom_INSERT_bud_acct_membership():
 def test_sift_atom_ReturnsObj_BudAtom_INSERT_bud_ideaunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    root_way = to_way(sue_bud.fisc_word)
+    root_way = to_way(sue_bud.fisc_label)
     casa_str = "casa"
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"

@@ -7,7 +7,7 @@ from src.a04_reason_logic.reason_idea import (
     get_factunit_from_tuple,
 )
 from src.a01_way_logic.way import (
-    get_default_fisc_word as root_word,
+    get_default_fisc_label as root_label,
     create_way,
     get_default_fisc_way,
 )
@@ -27,7 +27,7 @@ def test_FactUnit_exists():
 def test_FactUnit_exists():
     # ESTABLISH
     weekday_str = "weekdays"
-    weekday_way = create_way(root_word(), weekday_str)
+    weekday_way = create_way(root_label(), weekday_str)
     sunday_str = "Sunday"
     sunday_way = create_way(weekday_way, sunday_str)
 
@@ -48,7 +48,7 @@ def test_FactUnit_exists():
 def test_FactUnit_set_range_null_SetsAttrCorrectly_1():
     # ESTABLISH
     weekday_str = "weekdays"
-    weekday_way = create_way(root_word(), weekday_str)
+    weekday_way = create_way(root_label(), weekday_str)
     weekday_fact = factunit_shop(weekday_way, weekday_way, fopen=1.0, fnigh=5.0)
     assert weekday_fact.fopen == 1.0
     assert weekday_fact.fnigh == 5.0
@@ -64,9 +64,9 @@ def test_FactUnit_set_range_null_SetsAttrCorrectly_1():
 def test_FactUnit_set_fbranch_to_fcontext_SetsAttr_1():
     # ESTABLISH
     floor_str = "floor"
-    floor_way = create_way(root_word(), floor_str)
+    floor_way = create_way(root_label(), floor_str)
     dirty_str = "dirty"
-    dirty_way = create_way(root_word(), dirty_str)
+    dirty_way = create_way(root_label(), dirty_str)
     floor_fact = factunit_shop(floor_way, dirty_way)
     assert floor_fact.fcontext == floor_way
     assert floor_fact.fbranch == dirty_way
@@ -82,9 +82,9 @@ def test_FactUnit_set_fbranch_to_fcontext_SetsAttr_1():
 def test_FactUnit_set_fbranch_to_fcontext_SetsAttr_2():
     # ESTABLISH
     floor_str = "floor"
-    floor_way = create_way(root_word(), floor_str)
+    floor_way = create_way(root_label(), floor_str)
     dirty_str = "dirty"
-    dirty_way = create_way(root_word(), dirty_str)
+    dirty_way = create_way(root_label(), dirty_str)
     floor_fact = factunit_shop(floor_way, dirty_way, 1, 6)
     assert floor_fact.fopen is not None
     assert floor_fact.fnigh is not None
@@ -100,7 +100,7 @@ def test_FactUnit_set_fbranch_to_fcontext_SetsAttr_2():
 def test_FactUnit_set_attr_SetsAttrCorrectly_2():
     # ESTABLISH
     weekday_str = "weekdays"
-    weekday_way = create_way(root_word(), weekday_str)
+    weekday_way = create_way(root_label(), weekday_str)
     weekday_fact = factunit_shop(weekday_way, weekday_way, fopen=1.0, fnigh=5.0)
 
     # WHEN
@@ -124,7 +124,7 @@ def test_FactUnit_set_attr_SetsAttrCorrectly_2():
 def test_FactUnit_get_dict_ReturnsDict():
     # ESTABLISH
     weekday_str = "weekdays"
-    weekday_way = create_way(root_word(), weekday_str)
+    weekday_way = create_way(root_label(), weekday_str)
     sunday_str = "Sunday"
     sunday_way = create_way(weekday_way, sunday_str)
     x_fopen = 35
@@ -154,7 +154,7 @@ def test_FactUnit_get_dict_ReturnsDict():
 def test_FactUnit_get_dict_ReturnsPartialDict():
     # ESTABLISH
     weekday_str = "weekdays"
-    weekday_way = create_way(root_word(), weekday_str)
+    weekday_way = create_way(root_label(), weekday_str)
     sunday_str = "Sunday"
     sunday_way = create_way(weekday_way, sunday_str)
     sunday_fact = factunit_shop(fcontext=weekday_way, fbranch=sunday_way)
@@ -175,7 +175,7 @@ def test_FactUnit_get_dict_ReturnsPartialDict():
 def test_FactUnit_find_replace_way_SetsAttrCorrectly():
     # ESTABLISH
     weekday_str = "weekday"
-    old_weekday_way = create_way(root_word(), weekday_str)
+    old_weekday_way = create_way(root_label(), weekday_str)
     sunday_str = "Sunday"
     old_sunday_way = create_way(old_weekday_way, sunday_str)
     sunday_fact = factunit_shop(fcontext=old_weekday_way, fbranch=old_sunday_way)
@@ -198,7 +198,7 @@ def test_FactUnit_find_replace_way_SetsAttrCorrectly():
 def test_FactUnit_get_tuple_ReturnsObj_Scenario0_rcontext_fbranch_only():
     # ESTABLISH
     weekday_str = "weekday"
-    weekday_way = create_way(root_word(), weekday_str)
+    weekday_way = create_way(root_label(), weekday_str)
     sunday_str = "Sunday"
     sunday_way = create_way(weekday_way, sunday_str)
     sunday_fact = factunit_shop(fcontext=weekday_way, fbranch=sunday_way)
@@ -214,7 +214,7 @@ def test_FactUnit_get_tuple_ReturnsObj_Scenario0_rcontext_fbranch_only():
 def test_FactUnit_get_tuple_ReturnsObj_Scenario1_ValuesIn_fopen_fnigh():
     # ESTABLISH
     weekday_str = "weekday"
-    weekday_way = create_way(root_word(), weekday_str)
+    weekday_way = create_way(root_label(), weekday_str)
     sunday_str = "Sunday"
     sunday_way = create_way(weekday_way, sunday_str)
     sun_fopen = 6
@@ -232,7 +232,7 @@ def test_FactUnit_get_tuple_ReturnsObj_Scenario1_ValuesIn_fopen_fnigh():
 def test_get_factunit_from_tuple_ReturnsObj_Scenario0_rcontext_fbranch_only():
     # ESTABLISH
     weekday_str = "weekday"
-    weekday_way = create_way(root_word(), weekday_str)
+    weekday_way = create_way(root_label(), weekday_str)
     sunday_str = "Sunday"
     sunday_way = create_way(weekday_way, sunday_str)
     sunday_fact = factunit_shop(fcontext=weekday_way, fbranch=sunday_way)
@@ -249,7 +249,7 @@ def test_get_factunit_from_tuple_ReturnsObj_Scenario0_rcontext_fbranch_only():
 def test_get_factunit_from_tuple_ReturnsObj_Scenario1_ValuesIn_fopen_fnigh():
     # ESTABLISH
     weekday_str = "weekday"
-    weekday_way = create_way(root_word(), weekday_str)
+    weekday_way = create_way(root_label(), weekday_str)
     sunday_str = "Sunday"
     sunday_way = create_way(weekday_way, sunday_str)
     sun_fopen = 6
@@ -268,7 +268,7 @@ def test_get_factunit_from_tuple_ReturnsObj_Scenario1_ValuesIn_fopen_fnigh():
 def test_FactHeir_IsModifiedByFactUnit():
     # ESTABLISH
     ced_min_str = "ced_minute"
-    min_way = create_way(root_word(), ced_min_str)
+    min_way = create_way(root_label(), ced_min_str)
     ced_factheir = factheir_shop(min_way, min_way, 10.0, 30.0)
     ced_factunit = factunit_shop(min_way, min_way, 20.0, 30.0)
     assert ced_factheir.fopen == 10
@@ -314,7 +314,7 @@ def test_FactHeir_IsModifiedByFactUnit():
 def test_FactHeir_is_range_Returns_is_range_Status():
     # ESTABLISH
     ced_min_str = "ced_minute"
-    min_way = create_way(root_word(), ced_min_str)
+    min_way = create_way(root_label(), ced_min_str)
 
     # WHEN
     x_factheir = factheir_shop(fcontext=min_way, fbranch=min_way)
@@ -328,7 +328,7 @@ def test_FactHeir_is_range_Returns_is_range_Status():
 def test_factheir_is_range_Returns_is_range_Status():
     # ESTABLISH
     ced_min_str = "ced_minute"
-    min_way = create_way(root_word(), ced_min_str)
+    min_way = create_way(root_label(), ced_min_str)
 
     # WHEN
     x_factheir = factheir_shop(fcontext=min_way, fbranch=min_way)
@@ -346,7 +346,7 @@ def test_factheir_is_range_Returns_is_range_Status():
 def test_FactCore_get_obj_key_SetsAttrCorrectly():
     # ESTABLISH
     ced_min_str = "ced_minute"
-    min_way = create_way(root_word(), ced_min_str)
+    min_way = create_way(root_label(), ced_min_str)
     secs_str = "secs"
     secs_way = create_way(min_way, secs_str)
 
@@ -360,7 +360,7 @@ def test_FactCore_get_obj_key_SetsAttrCorrectly():
 def test_factunits_get_from_dict_CorrectlyBuildsObj():
     # ESTABLISH
     weekday_str = "weekdays"
-    weekday_way = create_way(root_word(), weekday_str)
+    weekday_way = create_way(root_label(), weekday_str)
     sunday_str = "Sunday"
     sunday_way = create_way(weekday_way, sunday_str)
     static_dict = {
@@ -384,7 +384,7 @@ def test_factunits_get_from_dict_CorrectlyBuildsObj():
 def test_factunits_get_from_dict_CorrectlyBuildsObjFromIncompleteDict():
     # ESTABLISH
     weekday_str = "weekdays"
-    weekday_way = create_way(root_word(), weekday_str)
+    weekday_way = create_way(root_label(), weekday_str)
     sunday_str = "Sunday"
     sunday_way = create_way(weekday_way, sunday_str)
     static_dict = {

@@ -29,7 +29,7 @@ def get_bud_agenda_dataframe(x_bud: BudUnit, rcontext: WayStr = None) -> DataFra
             columns=[
                 "owner_name",
                 "fund_ratio",
-                "idea_word",
+                "idea_label",
                 "parent_way",
                 "begin",
                 "close",
@@ -44,7 +44,7 @@ def get_bud_agenda_dataframe(x_bud: BudUnit, rcontext: WayStr = None) -> DataFra
         idea_dict = {
             "owner_name": x_bud.owner_name,
             "fund_ratio": x_idea._fund_ratio,
-            "idea_word": x_idea.idea_word,
+            "idea_label": x_idea.idea_label,
             "parent_way": x_idea.parent_way,
             "begin": x_idea.begin,
             "close": x_idea.close,

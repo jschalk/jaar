@@ -21,13 +21,13 @@
             "unknown_term": {}
         }
     },
-    "pidgin_word": {
+    "pidgin_label": {
         "jkeys": {
-            "otx_word": {}
+            "otx_label": {}
         },
         "jvalues": {
             "inx_bridge": {},
-            "inx_word": {},
+            "inx_label": {},
             "otx_bridge": {},
             "unknown_term": {}
         }

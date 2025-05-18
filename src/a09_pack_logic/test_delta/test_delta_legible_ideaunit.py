@@ -22,9 +22,9 @@ def test_create_legible_list_ReturnsObj_ideaunit_INSERT():
     sue_bud = budunit_shop("Sue")
     dimen = bud_ideaunit_str()
     _problem_bool_str = "problem_bool"
-    clean_word = "clean fridge"
+    clean_label = "clean fridge"
     casa_way = sue_bud.make_l1_way("casa")
-    clean_way = sue_bud.make_way(casa_way, clean_word)
+    clean_way = sue_bud.make_way(casa_way, clean_label)
     addin_value = 7
     begin_value = 13
     close_value = 17
@@ -63,9 +63,9 @@ def test_create_legible_list_ReturnsObj_ideaunit_UPDATE():
     sue_bud = budunit_shop("Sue")
     dimen = bud_ideaunit_str()
     _problem_bool_str = "problem_bool"
-    clean_word = "clean fridge"
+    clean_label = "clean fridge"
     casa_way = sue_bud.make_l1_way("casa")
-    clean_way = sue_bud.make_way(casa_way, clean_word)
+    clean_way = sue_bud.make_way(casa_way, clean_label)
     addin_value = 7
     begin_value = 13
     close_value = 17
@@ -103,9 +103,9 @@ def test_create_legible_list_ReturnsObj_ideaunit_DELETE():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     dimen = bud_ideaunit_str()
-    clean_word = "clean fridge"
+    clean_label = "clean fridge"
     casa_way = sue_bud.make_l1_way("casa")
-    clean_way = sue_bud.make_way(casa_way, clean_word)
+    clean_way = sue_bud.make_way(casa_way, clean_label)
     clean_budatom = budatom_shop(dimen, atom_delete())
     clean_budatom.set_arg(idea_way_str(), clean_way)
 

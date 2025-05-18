@@ -9,10 +9,10 @@
         "face_name": {
             "otx_key": true
         },
-        "fisc_word": {
+        "fisc_label": {
             "otx_key": true
         },
-        "hour_word": {
+        "hour_label": {
             "otx_key": false
         }
     },

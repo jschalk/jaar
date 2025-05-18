@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import get_terminus_word, get_parent_way
+from src.a01_way_logic.way import get_terminus_label, get_parent_way
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_idea import factunit_shop
 from src.a05_idea_logic.idea import ideaunit_shop

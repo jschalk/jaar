@@ -1,4 +1,4 @@
-from src.a02_finance_logic._utils.strs_a02 import fisc_word_str
+from src.a02_finance_logic._utils.strs_a02 import fisc_label_str
 from src.a14_keep_logic._utils.example_credorledgers import example_yao_hubunit
 from src.a14_keep_logic.rivercycle import RiverGrade, rivergrade_shop
 
@@ -173,7 +173,7 @@ def test_RiverGrade_get_dict_ReturnsObj():
     rivergrade_dict = x_rivergrade.get_dict()
 
     # THEN
-    assert rivergrade_dict.get(fisc_word_str()) == yao_hubunit.fisc_word
+    assert rivergrade_dict.get(fisc_label_str()) == yao_hubunit.fisc_label
     assert rivergrade_dict.get("healer_name") == yao_hubunit.owner_name
     assert rivergrade_dict.get("keep_way") == yao_hubunit.keep_way
     assert rivergrade_dict.get("tax_bill_amount") == x_tax_bill_amount
@@ -214,7 +214,7 @@ def test_RiverGrade_get_json_ReturnsObj():
   "debtor_count": 101,
   "debtor_rank_num": null,
   "debtor_rank_percent": null,
-  "fisc_word": "ex_keep04",
+  "fisc_label": "ex_keep04",
   "grant_amount": null,
   "healer_name": "Yao",
   "keep_way": null,

@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.db_toolbox import get_row_count
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_word_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_label_str
 from src.a06_bud_logic._utils.str_a06 import (
     bud_acctunit_str,
     face_name_str,
@@ -19,7 +19,7 @@ from src.a19_world_logic._utils.env_a19 import (
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_WorldUnit_creed_raw_to_bud_prime_tables_PopulatesBudPuwordTables(
+def test_WorldUnit_creed_raw_to_bud_prime_tables_PopulatesBudPulabelTables(
     env_dir_setup_cleanup,
 ):
 
@@ -41,7 +41,7 @@ def test_WorldUnit_creed_raw_to_bud_prime_tables_PopulatesBudPuwordTables(
         create_bud_prime_tables(cursor)
         raw_tablename = f"{bud_acctunit_str()}_put_raw"
         insert_raw_sqlstr = f"""
-INSERT INTO {raw_tablename} ({creed_number_str()},{event_int_str()},{face_name_str()},{fisc_word_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()},error_message)
+INSERT INTO {raw_tablename} ({creed_number_str()},{event_int_str()},{face_name_str()},{fisc_label_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()},error_message)
 VALUES
   ('br00021',{event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5},NULL,NULL)
 , ('br00021',{event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',NULL,NULL,NULL)
@@ -60,7 +60,7 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, agg_tablename) == 2
-        select_sqlstr = f"SELECT {event_int_str()}, {fisc_word_str()}, {credit_belief_str()} FROM {agg_tablename};"
+        select_sqlstr = f"SELECT {event_int_str()}, {fisc_label_str()}, {credit_belief_str()} FROM {agg_tablename};"
         cursor.execute(select_sqlstr)
         budunit_agg_rows = cursor.fetchall()
         assert budunit_agg_rows == [
@@ -90,7 +90,7 @@ def test_WorldUnit_creed_raw_to_bud_prime_tables_PopulatesBudDelAggTables(
         create_bud_prime_tables(cursor)
         raw_tablename = f"{bud_acctunit_str()}_del_raw"
         insert_raw_sqlstr = f"""
-INSERT INTO {raw_tablename} ({creed_number_str()},{event_int_str()},{face_name_str()},{fisc_word_str()},{owner_name_str()},{acct_name_delete_str},error_message)
+INSERT INTO {raw_tablename} ({creed_number_str()},{event_int_str()},{face_name_str()},{fisc_label_str()},{owner_name_str()},{acct_name_delete_str},error_message)
 VALUES
   ('br00051',{event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',NULL)
 , ('br00051',{event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',NULL)
@@ -109,7 +109,7 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, agg_tablename) == 2
-        select_sqlstr = f"SELECT {event_int_str()}, {fisc_word_str()}, {acct_name_delete_str} FROM {agg_tablename};"
+        select_sqlstr = f"SELECT {event_int_str()}, {fisc_label_str()}, {acct_name_delete_str} FROM {agg_tablename};"
         cursor.execute(select_sqlstr)
         budunit_agg_rows = cursor.fetchall()
         assert budunit_agg_rows == [

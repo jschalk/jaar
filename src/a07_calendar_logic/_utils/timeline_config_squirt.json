@@ -51,7 +51,7 @@
         ["a_claw", 365]
     ],
     "monthday_distortion": 0,
-    "timeline_word": "squirt",
+    "timeline_label": "squirt",
     "weekdays_config": [
         "Oneday",
         "Twoday",

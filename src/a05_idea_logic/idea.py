@@ -7,14 +7,14 @@ from src.a00_data_toolbox.dict_toolbox import (
 )
 from src.a01_way_logic.way import (
     WayStr,
-    WordStr,
+    LabelStr,
     is_sub_way,
-    get_default_fisc_word as root_word,
+    get_default_fisc_label as root_label,
     all_waystrs_between,
     create_way,
     default_bridge_if_None,
     replace_bridge,
-    FiscWord,
+    FiscLabel,
     AcctName,
     GroupTitle,
     WayStr,
@@ -84,7 +84,7 @@ class IdeaGetDescendantsException(Exception):
     pass
 
 
-class Idea_root_WordNotEmptyException(Exception):
+class Idea_root_LabelNotEmptyException(Exception):
     pass
 
 
@@ -208,12 +208,12 @@ def ideaattrholder_shop(
 
 @dataclass
 class IdeaUnit:
-    idea_word: WordStr = None
+    idea_label: LabelStr = None
     mass: int = None
     parent_way: WayStr = None
     root: bool = None
     _kids: dict[WayStr,] = None
-    fisc_word: FiscWord = None
+    fisc_label: FiscLabel = None
     _uid: int = None  # Calculated field?
     awardlinks: dict[GroupTitle, AwardLink] = None
     reasonunits: dict[WayStr, ReasonUnit] = None
@@ -361,7 +361,7 @@ class IdeaUnit:
 
     def get_kids_in_range(
         self, x_gogo: float = None, x_stop: float = None
-    ) -> dict[WordStr,]:
+    ) -> dict[LabelStr,]:
         if x_gogo is None and x_stop is None:
             x_gogo = self.gogo_want
             x_gogo = self.stop_want
@@ -378,17 +378,17 @@ class IdeaUnit:
             both_in_range = x_gogo <= x_idea._gogo_calc and x_stop >= x_idea._stop_calc
 
             if x_gogo_in_range or x_stop_in_range or both_in_range:
-                x_dict[x_idea.idea_word] = x_idea
+                x_dict[x_idea.idea_label] = x_idea
         return x_dict
 
-    def get_obj_key(self) -> WordStr:
-        return self.idea_word
+    def get_obj_key(self) -> LabelStr:
+        return self.idea_label
 
     def get_idea_way(self) -> WayStr:
         if self.parent_way in (None, ""):
-            return create_way(self.idea_word, bridge=self.bridge)
+            return create_way(self.idea_label, bridge=self.bridge)
         else:
-            return create_way(self.parent_way, self.idea_word, bridge=self.bridge)
+            return create_way(self.parent_way, self.idea_label, bridge=self.bridge)
 
     def clear_descendant_pledge_count(self):
         self._descendant_pledge_count = None
@@ -491,21 +491,21 @@ class IdeaUnit:
     def clear_awardlines(self):
         self._awardlines = {}
 
-    def set_idea_word(self, idea_word: str):
+    def set_idea_label(self, idea_label: str):
         if (
             self.root
-            and idea_word is not None
-            and idea_word != self.fisc_word
-            and self.fisc_word is not None
+            and idea_label is not None
+            and idea_label != self.fisc_label
+            and self.fisc_label is not None
         ):
-            raise Idea_root_WordNotEmptyException(
-                f"Cannot set idearoot to string different than '{self.fisc_word}'"
+            raise Idea_root_LabelNotEmptyException(
+                f"Cannot set idearoot to string different than '{self.fisc_label}'"
             )
-        elif self.root and self.fisc_word is None:
-            self.idea_word = root_word()
-        # elif idea_word is not None:
+        elif self.root and self.fisc_label is None:
+            self.idea_label = root_label()
+        # elif idea_label is not None:
         else:
-            self.idea_word = idea_word
+            self.idea_label = idea_label
 
     def set_bridge(self, new_bridge: str):
         old_bridge = deepcopy(self.bridge)
@@ -717,22 +717,22 @@ class IdeaUnit:
         reason_unit.del_premise(premise=premise)
 
     def add_kid(self, idea_kid):
-        self._kids[idea_kid.idea_word] = idea_kid
+        self._kids[idea_kid.idea_label] = idea_kid
         self._kids = dict(sorted(self._kids.items()))
 
-    def get_kid(self, idea_kid_idea_word: WordStr, if_missing_create=False):
+    def get_kid(self, idea_kid_idea_label: LabelStr, if_missing_create=False):
         if if_missing_create is False:
-            return self._kids.get(idea_kid_idea_word)
+            return self._kids.get(idea_kid_idea_label)
         try:
-            return self._kids[idea_kid_idea_word]
+            return self._kids[idea_kid_idea_label]
         except Exception:
             KeyError
-            self.add_kid(ideaunit_shop(idea_kid_idea_word))
-            return_idea = self._kids.get(idea_kid_idea_word)
+            self.add_kid(ideaunit_shop(idea_kid_idea_label))
+            return_idea = self._kids.get(idea_kid_idea_label)
         return return_idea
 
-    def del_kid(self, idea_kid_idea_word: WordStr):
-        self._kids.pop(idea_kid_idea_word)
+    def del_kid(self, idea_kid_idea_label: LabelStr):
+        self._kids.pop(idea_kid_idea_label)
 
     def clear_kids(self):
         self._kids = {}
@@ -900,8 +900,8 @@ class IdeaUnit:
     def get_dict(self) -> dict[str, str]:
         x_dict = {"mass": self.mass}
 
-        if self.idea_word is not None:
-            x_dict["idea_word"] = self.idea_word
+        if self.idea_label is not None:
+            x_dict["idea_label"] = self.idea_label
         if self._uid is not None:
             x_dict["_uid"] = self._uid
         if self._kids not in [{}, None]:
@@ -976,7 +976,7 @@ class IdeaUnit:
 
 
 def ideaunit_shop(
-    idea_word: WordStr = None,
+    idea_label: LabelStr = None,
     _uid: int = None,  # Calculated field?
     parent_way: WayStr = None,
     _kids: dict = None,
@@ -1002,7 +1002,7 @@ def ideaunit_shop(
     pledge: bool = None,
     _originunit: OriginUnit = None,
     root: bool = None,
-    fisc_word: FiscWord = None,
+    fisc_label: FiscLabel = None,
     problem_bool: bool = None,
     # Calculated fields
     _level: int = None,
@@ -1020,11 +1020,11 @@ def ideaunit_shop(
     bridge: str = None,
     _healerlink_ratio: float = None,
 ) -> IdeaUnit:
-    fisc_word = root_word() if fisc_word is None else fisc_word
+    fisc_label = root_label() if fisc_label is None else fisc_label
     x_healerlink = healerlink_shop() if healerlink is None else healerlink
 
     x_ideakid = IdeaUnit(
-        idea_word=None,
+        idea_label=None,
         _uid=_uid,
         parent_way=parent_way,
         _kids=get_empty_dict_if_None(_kids),
@@ -1051,7 +1051,7 @@ def ideaunit_shop(
         problem_bool=get_False_if_None(problem_bool),
         _originunit=_originunit,
         root=get_False_if_None(root),
-        fisc_word=fisc_word,
+        fisc_label=fisc_label,
         # Calculated fields
         _level=_level,
         _fund_ratio=_fund_ratio,
@@ -1069,9 +1069,9 @@ def ideaunit_shop(
         _healerlink_ratio=get_0_if_None(_healerlink_ratio),
     )
     if x_ideakid.root:
-        x_ideakid.set_idea_word(idea_word=fisc_word)
+        x_ideakid.set_idea_label(idea_label=fisc_label)
     else:
-        x_ideakid.set_idea_word(idea_word=idea_word)
+        x_ideakid.set_idea_label(idea_label=idea_label)
     x_ideakid.set_laborunit_empty_if_None()
     x_ideakid.set_originunit_empty_if_None()
     return x_ideakid

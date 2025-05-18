@@ -1,32 +1,32 @@
 from src.a00_data_toolbox.dict_toolbox import set_in_nested_dict
-from src.a02_finance_logic.deal import FiscWord
+from src.a02_finance_logic.deal import FiscLabel
 from src.a18_etl_toolbox.tran_sqlstrs import get_fisc_fu1_select_sqlstrs
 from sqlite3 import Cursor as sqlite3_Cursor
 
 
-def get_fisc_dict_from_db(cursor: sqlite3_Cursor, fisc_word: FiscWord) -> dict:
+def get_fisc_dict_from_db(cursor: sqlite3_Cursor, fisc_label: FiscLabel) -> dict:
     """Fetches a FiscUnit's data from multiple tables and returns it as a dictionary."""
 
-    fu1_sqlstrs = get_fisc_fu1_select_sqlstrs(fisc_word)
+    fu1_sqlstrs = get_fisc_fu1_select_sqlstrs(fisc_label)
     cursor.execute(fu1_sqlstrs.get("fiscunit"))
     fiscunit_row = cursor.fetchone()
     if not fiscunit_row:
         return None  # fiscunit not found
 
-    timeline_word = fiscunit_row[1]
+    timeline_label = fiscunit_row[1]
     c400_number = fiscunit_row[2]
     yr1_jan1_offset = fiscunit_row[3]
     monthday_distortion = fiscunit_row[4]
 
-    fisc_dict: dict[str, any] = {"fisc_word": fiscunit_row[0], "timeline": {}}
+    fisc_dict: dict[str, any] = {"fisc_label": fiscunit_row[0], "timeline": {}}
     if (
-        timeline_word is not None
+        timeline_label is not None
         and c400_number is not None
         and yr1_jan1_offset is not None
         and monthday_distortion is not None
     ):
-        if timeline_word:
-            fisc_dict["timeline"]["timeline_word"] = timeline_word
+        if timeline_label:
+            fisc_dict["timeline"]["timeline_label"] = timeline_label
         if c400_number:
             fisc_dict["timeline"]["c400_number"] = c400_number
         if yr1_jan1_offset:
@@ -44,7 +44,7 @@ def get_fisc_dict_from_db(cursor: sqlite3_Cursor, fisc_word: FiscWord) -> dict:
         fisc_dict["bridge"] = bridge
 
     cursor.execute(fu1_sqlstrs.get("fisc_cashbook"))
-    _set_fisc_dict_fiscash(cursor, fisc_dict, fisc_word)
+    _set_fisc_dict_fiscash(cursor, fisc_dict, fisc_label)
 
     cursor.execute(fu1_sqlstrs.get("fisc_dealunit"))
     _set_fisc_dict_fisdeal(cursor, fisc_dict)
@@ -63,24 +63,24 @@ def get_fisc_dict_from_db(cursor: sqlite3_Cursor, fisc_word: FiscWord) -> dict:
     return fisc_dict
 
 
-def _set_fisc_dict_fiscash(cursor: sqlite3_Cursor, fisc_dict: dict, x_fisc_word: str):
+def _set_fisc_dict_fiscash(cursor: sqlite3_Cursor, fisc_dict: dict, x_fisc_label: str):
     tranunits_dict = {}
     for fiscash_row in cursor.fetchall():
-        row_fisc_word = fiscash_row[0]
+        row_fisc_label = fiscash_row[0]
         row_owner_name = fiscash_row[1]
         row_acct_name = fiscash_row[2]
         row_tran_time = fiscash_row[3]
         row_amount = fiscash_row[4]
         keylist = [row_owner_name, row_acct_name, row_tran_time]
         set_in_nested_dict(tranunits_dict, keylist, row_amount)
-    cashbook_dict = {"fisc_word": x_fisc_word, "tranunits": tranunits_dict}
+    cashbook_dict = {"fisc_label": x_fisc_label, "tranunits": tranunits_dict}
     fisc_dict["cashbook"] = cashbook_dict
 
 
 def _set_fisc_dict_fisdeal(cursor: sqlite3_Cursor, fisc_dict: dict):
     brokerunits_dict = {}
     for fiscash_row in cursor.fetchall():
-        row_fisc_word = fiscash_row[0]
+        row_fisc_label = fiscash_row[0]
         row_owner_name = fiscash_row[1]
         row_deal_time = fiscash_row[2]
         row_quota = fiscash_row[3]
@@ -100,10 +100,10 @@ def _set_fisc_dict_fisdeal(cursor: sqlite3_Cursor, fisc_dict: dict):
 def _set_fisc_dict_fishour(cursor: sqlite3_Cursor, fisc_dict: dict):
     hours_config_list = []
     for fiscash_row in cursor.fetchall():
-        row_fisc_word = fiscash_row[0]
+        row_fisc_label = fiscash_row[0]
         row_cumlative_minute = fiscash_row[1]
-        row_hour_word = fiscash_row[2]
-        hours_config_list.append([row_hour_word, row_cumlative_minute])
+        row_hour_label = fiscash_row[2]
+        hours_config_list.append([row_hour_label, row_cumlative_minute])
     if hours_config_list:
         fisc_dict["timeline"]["hours_config"] = hours_config_list
 
@@ -111,10 +111,10 @@ def _set_fisc_dict_fishour(cursor: sqlite3_Cursor, fisc_dict: dict):
 def _set_fisc_dict_fismont(cursor: sqlite3_Cursor, fisc_dict: dict):
     months_config_list = []
     for fiscash_row in cursor.fetchall():
-        row_fisc_word = fiscash_row[0]
+        row_fisc_label = fiscash_row[0]
         row_cumlative_day = fiscash_row[1]
-        row_month_word = fiscash_row[2]
-        months_config_list.append([row_month_word, row_cumlative_day])
+        row_month_label = fiscash_row[2]
+        months_config_list.append([row_month_label, row_cumlative_day])
     if months_config_list:
         fisc_dict["timeline"]["months_config"] = months_config_list
 
@@ -122,10 +122,10 @@ def _set_fisc_dict_fismont(cursor: sqlite3_Cursor, fisc_dict: dict):
 def _set_fisc_dict_fisweek(cursor: sqlite3_Cursor, fisc_dict: dict):
     weekday_dict = {}
     for fiscash_row in cursor.fetchall():
-        row_fisc_word = fiscash_row[0]
+        row_fisc_label = fiscash_row[0]
         row_weekday_order = fiscash_row[1]
-        row_weekday_word = fiscash_row[2]
-        weekday_dict[row_weekday_order] = row_weekday_word
+        row_weekday_label = fiscash_row[2]
+        weekday_dict[row_weekday_order] = row_weekday_label
     weekday_config_list = [weekday_dict[key] for key in sorted(weekday_dict.keys())]
     if weekday_dict:
         fisc_dict["timeline"]["weekdays_config"] = weekday_config_list
@@ -134,7 +134,7 @@ def _set_fisc_dict_fisweek(cursor: sqlite3_Cursor, fisc_dict: dict):
 def _set_fisc_dict_timeoffi(cursor: sqlite3_Cursor, fisc_dict: dict):
     offi_times_set = set()
     for fiscash_row in cursor.fetchall():
-        row_fisc_word = fiscash_row[0]
+        row_fisc_label = fiscash_row[0]
         row_offi_time = fiscash_row[1]
         offi_times_set.add(row_offi_time)
     fisc_dict["offi_times"] = list(offi_times_set)

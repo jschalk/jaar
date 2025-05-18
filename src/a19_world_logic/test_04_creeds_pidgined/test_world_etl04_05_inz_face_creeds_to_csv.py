@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path, open_file
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_word_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_label_str
 from src.a06_bud_logic._utils.str_a06 import acct_name_str, face_name_str, event_int_str
 from src.a17_creed_logic.creed_db_tool import upsert_sheet
 from src.a19_world_logic.world import worldunit_shop
@@ -22,7 +22,7 @@ def test_WorldUnit_inz_face_creeds_to_csv_files_Scenario0(env_dir_setup_cleanup)
     br00011_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_word_str(),
+        fisc_label_str(),
         owner_name_str(),
         acct_name_str(),
     ]
@@ -48,7 +48,7 @@ def test_WorldUnit_inz_face_creeds_to_csv_files_Scenario0(env_dir_setup_cleanup)
 
     # THEN
     assert os_path_exists(br00011_csv_path)
-    expected_csv = """event_int,face_name,fisc_word,owner_name,acct_name
+    expected_csv = """event_int,face_name,fisc_label,owner_name,acct_name
 3,Suzy,accord23,Bob,Bob
 3,Suzy,accord23,Yao,Bob
 3,Suzy,accord23,Yao,Yao

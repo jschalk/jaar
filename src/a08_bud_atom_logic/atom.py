@@ -9,12 +9,12 @@ from src.a00_data_toolbox.db_toolbox import (
 )
 from src.a01_way_logic.way import (
     create_way,
-    WordStr,
+    LabelStr,
     WayStr,
     TitleStr,
     AcctName,
-    is_wordstr,
-    get_terminus_word,
+    is_labelstr,
+    get_terminus_label,
     get_parent_way,
 )
 from src.a03_group_logic.acct import acctunit_shop
@@ -266,11 +266,11 @@ def _modify_bud_ideaunit_update(x_bud: BudUnit, x_atom: BudAtom):
 
 def _modify_bud_ideaunit_insert(x_bud: BudUnit, x_atom: BudAtom):
     idea_way = x_atom.get_value("idea_way")
-    idea_word = get_terminus_word(idea_way)
+    idea_label = get_terminus_label(idea_way)
     idea_parent_way = get_parent_way(idea_way)
     x_bud.set_idea(
         idea_kid=ideaunit_shop(
-            idea_word=idea_word,
+            idea_label=idea_label,
             addin=x_atom.get_value("addin"),
             begin=x_atom.get_value("begin"),
             close=x_atom.get_value("close"),
@@ -675,8 +675,8 @@ class AtomRow:
                     self.__dict__[x_arg] = TitleStr(x_value)
                 elif class_type == "WayStr":
                     self.__dict__[x_arg] = WayStr(x_value)
-                elif class_type == "WordStr":
-                    self.__dict__[x_arg] = WordStr(x_value)
+                elif class_type == "LabelStr":
+                    self.__dict__[x_arg] = LabelStr(x_value)
                 elif class_type == "str":
                     self.__dict__[x_arg] = str(x_value)
                 elif class_type == "bool":

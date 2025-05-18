@@ -1,6 +1,6 @@
 from src.a02_finance_logic.finance_config import default_fund_coin_if_None
 from src.a01_way_logic.way import (
-    get_default_fisc_word as root_word,
+    get_default_fisc_label as root_label,
     create_way,
     default_bridge_if_None,
 )
@@ -16,7 +16,7 @@ def test_IdeaUnit_Exists():
     assert x_ideaunit
     assert x_ideaunit._kids is None
     assert x_ideaunit.mass is None
-    assert x_ideaunit.idea_word is None
+    assert x_ideaunit.idea_label is None
     assert x_ideaunit._uid is None
     assert x_ideaunit.reasonunits is None
     assert x_ideaunit._reasonheirs is None  # calculated field
@@ -55,7 +55,7 @@ def test_IdeaUnit_Exists():
     assert x_ideaunit._fund_onset is None
     assert x_ideaunit._fund_cease is None
     assert x_ideaunit.root is None
-    assert x_ideaunit.fisc_word is None
+    assert x_ideaunit.fisc_label is None
     assert x_ideaunit._healerlink_ratio is None
 
 
@@ -67,8 +67,8 @@ def test_ideaunit_shop_WithNoParametersReturnsObj():
     assert x_ideaunit
     assert x_ideaunit._kids == {}
     assert x_ideaunit.mass == 1
-    assert x_ideaunit.idea_word is None
-    assert x_ideaunit.fisc_word == root_word()
+    assert x_ideaunit.idea_label is None
+    assert x_ideaunit.fisc_label == root_label()
     assert x_ideaunit._uid is None
     assert x_ideaunit.begin is None
     assert x_ideaunit.close is None
@@ -158,7 +158,7 @@ def test_ideaunit_shop_ReturnsObjWith_awardlinks():
 
     # WHEN
     sport_str = "sport"
-    sport_idea = ideaunit_shop(idea_word=sport_str, awardlinks=x_awardlinks)
+    sport_idea = ideaunit_shop(idea_label=sport_str, awardlinks=x_awardlinks)
 
     # THEN
     assert sport_idea.awardlinks == x_awardlinks
@@ -183,11 +183,11 @@ def test_ideaunit_shop_ReturnsObjWithParameters():
 def test_IdeaUnit_get_obj_key_ReturnsObj():
     # ESTABLISH
     round_str = "round_stuff"
-    round_way = create_way(root_word(), round_str)
+    round_way = create_way(root_label(), round_str)
     ball_str = "ball"
 
     # WHEN
-    ball_idea = ideaunit_shop(idea_word=ball_str, parent_way=round_way)
+    ball_idea = ideaunit_shop(idea_label=ball_str, parent_way=round_way)
 
     # THEN
     assert ball_idea.get_obj_key() == ball_str
@@ -197,7 +197,7 @@ def test_IdeaUnit_get_way_ReturnsObj():
     # ESTABLISH
     round_str = "round_stuff"
     slash_str = "/"
-    round_way = create_way(root_word(), round_str, bridge=slash_str)
+    round_way = create_way(root_label(), round_str, bridge=slash_str)
     ball_str = "ball"
 
     # WHEN
@@ -212,13 +212,13 @@ def test_IdeaUnit_set_parent_way_SetsAttr():
     # ESTABLISH
     round_str = "round_stuff"
     slash_str = "/"
-    round_way = create_way(root_word(), round_str, bridge=slash_str)
+    round_way = create_way(root_label(), round_str, bridge=slash_str)
     ball_str = "ball"
     ball_idea = ideaunit_shop(ball_str, parent_way=round_way, bridge=slash_str)
     assert ball_idea.parent_way == round_way
 
     # WHEN
-    sports_way = create_way(root_word(), "sports", bridge=slash_str)
+    sports_way = create_way(root_label(), "sports", bridge=slash_str)
     ball_idea.set_parent_way(parent_way=sports_way)
 
     # THEN

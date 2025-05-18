@@ -166,7 +166,7 @@ def move_otx_csvs_to_pidgin_inx(face_dir: str):
 def _get_pidgen_creed_format_filenames() -> set[str]:
     creed_numbers = set(get_creed_dimen_ref().get("pidgin_name"))
     creed_numbers.update(set(get_creed_dimen_ref().get("pidgin_title")))
-    creed_numbers.update(set(get_creed_dimen_ref().get("pidgin_word")))
+    creed_numbers.update(set(get_creed_dimen_ref().get("pidgin_label")))
     creed_numbers.update(set(get_creed_dimen_ref().get("pidgin_way")))
     return {f"{creed_number}.xlsx" for creed_number in creed_numbers}
 

@@ -1,6 +1,6 @@
 from src.a02_finance_logic.finance_config import default_fund_coin_if_None
 from src.a01_way_logic.way import (
-    get_default_fisc_word as root_word,
+    get_default_fisc_label as root_label,
     create_way,
     default_bridge_if_None,
 )
@@ -31,7 +31,7 @@ def test_GroupUnit_exists():
 def test_groupunit_shop_ReturnsObj():
     # ESTABLISH
     swim_str = ";swimmers"
-    nation_way = create_way(root_word(), "nation-states")
+    nation_way = create_way(root_label(), "nation-states")
     usa_way = create_way(nation_way, "USA")
 
     # WHEN
@@ -79,7 +79,7 @@ def test_groupunit_shop_ReturnsObj_bridge():
 #         groupunit_shop(bob_str, _acct_mirror=True, bridge=slash_str)
 #     assert (
 #         str(excinfo.value)
-#         == f"'{bob_str}' needs to be a WordStr. Cannot contain bridge: '{slash_str}'"
+#         == f"'{bob_str}' needs to be a LabelStr. Cannot contain bridge: '{slash_str}'"
 #     )
 
 

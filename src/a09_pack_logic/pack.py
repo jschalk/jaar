@@ -9,8 +9,8 @@ from src.a00_data_toolbox.dict_toolbox import get_json_from_dict, get_dict_from_
 from src.a01_way_logic.way import (
     FaceName,
     OwnerName,
-    FiscWord,
-    get_default_fisc_word,
+    FiscLabel,
+    get_default_fisc_label,
 )
 from src.a06_bud_logic.bud import BudUnit
 from src.a08_bud_atom_logic.atom import BudAtom, get_from_json as budatom_get_from_json
@@ -38,7 +38,7 @@ def get_init_pack_id_if_None(x_pack_id: int = None) -> int:
 @dataclass
 class PackUnit:
     face_name: FaceName = None
-    fisc_word: FiscWord = None
+    fisc_label: FiscLabel = None
     owner_name: OwnerName = None
     _pack_id: int = None
     _buddelta: BudDelta = None
@@ -69,7 +69,7 @@ class PackUnit:
     def get_step_dict(self) -> dict[str, any]:
         return {
             "face_name": self.face_name,
-            "fisc_word": self.fisc_word,
+            "fisc_label": self.fisc_label,
             "owner_name": self.owner_name,
             "event_int": self.event_int,
             "delta": self._buddelta.get_ordered_budatoms(self._delta_start),
@@ -150,11 +150,11 @@ class PackUnit:
 
     def get_edited_bud(self, before_bud: BudUnit) -> BudUnit:
         if (
-            self.fisc_word != before_bud.fisc_word
+            self.fisc_label != before_bud.fisc_label
             or self.owner_name != before_bud.owner_name
         ):
             raise pack_bud_conflict_Exception(
-                f"pack bud conflict {self.fisc_word} != {before_bud.fisc_word} or {self.owner_name} != {before_bud.owner_name}"
+                f"pack bud conflict {self.fisc_label} != {before_bud.fisc_label} or {self.owner_name} != {before_bud.owner_name}"
             )
         return self._buddelta.get_edited_bud(before_bud)
 
@@ -165,7 +165,7 @@ class PackUnit:
 def packunit_shop(
     owner_name: OwnerName,
     face_name: FaceName = None,
-    fisc_word: FiscWord = None,
+    fisc_label: FiscLabel = None,
     _pack_id: int = None,
     _buddelta: BudDelta = None,
     _delta_start: int = None,
@@ -174,11 +174,11 @@ def packunit_shop(
     event_int: int = None,
 ) -> PackUnit:
     _buddelta = buddelta_shop() if _buddelta is None else _buddelta
-    fisc_word = get_default_fisc_word() if fisc_word is None else fisc_word
+    fisc_label = get_default_fisc_label() if fisc_label is None else fisc_label
     x_packunit = PackUnit(
         face_name=face_name,
         owner_name=owner_name,
-        fisc_word=fisc_word,
+        fisc_label=fisc_label,
         _pack_id=get_init_pack_id_if_None(_pack_id),
         _buddelta=_buddelta,
         _packs_dir=_packs_dir,
@@ -197,13 +197,13 @@ def create_packunit_from_files(
     pack_filename = get_json_filename(pack_id)
     pack_dict = open_json(packs_dir, pack_filename)
     x_owner_name = pack_dict.get("owner_name")
-    x_fisc_word = pack_dict.get("fisc_word")
+    x_fisc_label = pack_dict.get("fisc_label")
     x_face_name = pack_dict.get("face_name")
     delta_atom_numbers_list = pack_dict.get("delta_atom_numbers")
     x_packunit = packunit_shop(
         face_name=x_face_name,
         owner_name=x_owner_name,
-        fisc_word=x_fisc_word,
+        fisc_label=x_fisc_label,
         _pack_id=pack_id,
         _atoms_dir=atoms_dir,
     )
@@ -220,7 +220,7 @@ def get_packunit_from_json(x_json: str) -> PackUnit:
     x_packunit = packunit_shop(
         face_name=pack_dict.get("face_name"),
         owner_name=pack_dict.get("owner_name"),
-        fisc_word=pack_dict.get("fisc_word"),
+        fisc_label=pack_dict.get("fisc_label"),
         _pack_id=pack_dict.get("pack_id"),
         _atoms_dir=pack_dict.get("atoms_dir"),
         event_int=x_event_int,

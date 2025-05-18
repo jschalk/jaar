@@ -15,7 +15,7 @@ def get_fisc_guts_accts_dataframe(x_fisc: FiscUnit) -> DataFrame:
     gut_dfs = []
     for x_hubunit in owner_hubunits.values():
         gut_bud = open_gut_file(
-            x_hubunit.fisc_mstr_dir, x_hubunit.fisc_word, x_hubunit.owner_name
+            x_hubunit.fisc_mstr_dir, x_hubunit.fisc_label, x_hubunit.owner_name
         )
         gut_bud.settle_bud()
         df = get_bud_acctunits_dataframe(gut_bud)
@@ -58,10 +58,10 @@ def get_fisc_guts_accts_plotly_fig(x_fisc: FiscUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_word = f"fisc '{x_fisc.fisc_word}', gut accts metrics"
+    fig_label = f"fisc '{x_fisc.fisc_label}', gut accts metrics"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
-    fig.update_layout(plot_bgcolor="white", title=fig_word, title_font_size=20)
+    fig.update_layout(plot_bgcolor="white", title=fig_label, title_font_size=20)
 
     return fig
 
@@ -73,7 +73,7 @@ def get_fisc_jobs_accts_dataframe(x_fisc: FiscUnit) -> DataFrame:
     job_dfs = []
     for x_hubunit in owner_hubunits.values():
         job = open_job_file(
-            x_hubunit.fisc_mstr_dir, x_hubunit.fisc_word, x_hubunit.owner_name
+            x_hubunit.fisc_mstr_dir, x_hubunit.fisc_label, x_hubunit.owner_name
         )
         job.settle_bud()
         job_df = get_bud_acctunits_dataframe(job)
@@ -116,10 +116,10 @@ def get_fisc_jobs_accts_plotly_fig(x_fisc: FiscUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_word = f"fisc '{x_fisc.fisc_word}', job accts metrics"
+    fig_label = f"fisc '{x_fisc.fisc_label}', job accts metrics"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
-    fig.update_layout(plot_bgcolor="white", title=fig_word, title_font_size=20)
+    fig.update_layout(plot_bgcolor="white", title=fig_label, title_font_size=20)
     return fig
 
 
@@ -130,7 +130,7 @@ def get_fisc_guts_agenda_dataframe(x_fisc: FiscUnit) -> DataFrame:
     gut_dfs = []
     for x_hubunit in owner_hubunits.values():
         gut_bud = open_gut_file(
-            x_hubunit.fisc_mstr_dir, x_hubunit.fisc_word, x_hubunit.owner_name
+            x_hubunit.fisc_mstr_dir, x_hubunit.fisc_label, x_hubunit.owner_name
         )
         gut_bud.settle_bud()
         df = get_bud_agenda_dataframe(gut_bud)
@@ -142,7 +142,7 @@ def get_fisc_guts_agenda_plotly_fig(x_fisc: FiscUnit) -> plotly_Figure:
     column_header_list = [
         "owner_name",
         "fund_ratio",
-        "idea_word",
+        "idea_label",
         "parent_way",
         "begin",
         "close",
@@ -161,7 +161,7 @@ def get_fisc_guts_agenda_plotly_fig(x_fisc: FiscUnit) -> plotly_Figure:
             values=[
                 df.owner_name,
                 df.fund_ratio,
-                df.idea_word,
+                df.idea_label,
                 df.parent_way,
                 df.begin,
                 df.close,
@@ -176,10 +176,10 @@ def get_fisc_guts_agenda_plotly_fig(x_fisc: FiscUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_word = f"fisc '{x_fisc.fisc_word}', gut agenda metrics"
+    fig_label = f"fisc '{x_fisc.fisc_label}', gut agenda metrics"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
-    fig.update_layout(plot_bgcolor="white", title=fig_word, title_font_size=20)
+    fig.update_layout(plot_bgcolor="white", title=fig_label, title_font_size=20)
     return fig
 
 
@@ -188,7 +188,7 @@ def get_fisc_jobs_agenda_dataframe(x_fisc: FiscUnit) -> DataFrame:
     job_dfs = []
     for x_owner_name in x_fisc._get_owner_folder_names():
 
-        job = open_job_file(x_fisc.fisc_mstr_dir, x_fisc.fisc_word, x_owner_name)
+        job = open_job_file(x_fisc.fisc_mstr_dir, x_fisc.fisc_label, x_owner_name)
         job.settle_bud()
         job_df = get_bud_agenda_dataframe(job)
         job_dfs.append(job_df)
@@ -199,7 +199,7 @@ def get_fisc_jobs_agenda_plotly_fig(x_fisc: FiscUnit) -> plotly_Figure:
     column_header_list = [
         "owner_name",
         "fund_ratio",
-        "idea_word",
+        "idea_label",
         "parent_way",
         "begin",
         "close",
@@ -218,7 +218,7 @@ def get_fisc_jobs_agenda_plotly_fig(x_fisc: FiscUnit) -> plotly_Figure:
             values=[
                 df.owner_name,
                 df.fund_ratio,
-                df.idea_word,
+                df.idea_label,
                 df.parent_way,
                 df.begin,
                 df.close,
@@ -233,8 +233,8 @@ def get_fisc_jobs_agenda_plotly_fig(x_fisc: FiscUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_word = f"fisc '{x_fisc.fisc_word}', job agenda metrics"
+    fig_label = f"fisc '{x_fisc.fisc_label}', job agenda metrics"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
-    fig.update_layout(plot_bgcolor="white", title=fig_word, title_font_size=20)
+    fig.update_layout(plot_bgcolor="white", title=fig_label, title_font_size=20)
     return fig

@@ -55,8 +55,8 @@ def type_WayStr_str() -> str:
     return "WayStr"
 
 
-def type_WordStr_str() -> str:
-    return "WordStr"
+def type_LabelStr_str() -> str:
+    return "LabelStr"
 
 
 def face_name_str() -> str:
@@ -143,8 +143,8 @@ def parent_way_str() -> str:
     return "parent_way"
 
 
-def idea_word_str() -> str:
-    return "idea_word"
+def idea_label_str() -> str:
+    return "idea_label"
 
 
 def mass_str() -> str:

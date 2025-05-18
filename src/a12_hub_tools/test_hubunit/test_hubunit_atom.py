@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import get_dir_file_strs, create_path
-from src.a01_way_logic.way import get_default_fisc_word as fisc_word
+from src.a01_way_logic.way import get_default_fisc_label as fisc_label
 from src.a12_hub_tools.hubunit import hubunit_shop
 from src.a13_bud_listen_logic._utils.example_listen_atoms import (
     get_atom_example_factunit_knee,
@@ -17,7 +17,7 @@ from os.path import exists as os_path_exists
 def test_HubUnit_atom_filename_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_word(), yao_str)
+    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_label(), yao_str)
     one_int = 1
 
     # WHEN
@@ -30,7 +30,7 @@ def test_HubUnit_atom_filename_ReturnsObj():
 def test_HubUnit_atom_file_path_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_word(), yao_str)
+    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_label(), yao_str)
     one_int = 1
 
     # WHEN
@@ -45,7 +45,7 @@ def test_HubUnit_atom_file_path_ReturnsObj():
 def test_HubUnit_save_valid_atom_file_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_word(), yao_str)
+    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_label(), yao_str)
     one_int = 1
     assert os_path_exists(yao_hubunit.atom_file_path(one_int)) is False
 
@@ -61,7 +61,7 @@ def test_HubUnit_save_valid_atom_file_CorrectlySavesFile(env_dir_setup_cleanup):
 def test_HubUnit_atom_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_word(), yao_str)
+    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_label(), yao_str)
     four_int = 4
     assert os_path_exists(yao_hubunit.atom_file_path(four_int)) is False
     assert yao_hubunit.atom_file_exists(four_int) is False
@@ -77,7 +77,7 @@ def test_HubUnit_atom_file_exists_ReturnsObj(env_dir_setup_cleanup):
 def test_HubUnit_delete_atom_file_CorrectlyDeletesFile(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_word(), yao_str)
+    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_label(), yao_str)
     ten_int = 10
     yao_hubunit._save_valid_atom_file(get_atom_example_factunit_knee(), ten_int)
     assert yao_hubunit.atom_file_exists(ten_int)
@@ -92,7 +92,7 @@ def test_HubUnit_delete_atom_file_CorrectlyDeletesFile(env_dir_setup_cleanup):
 def test_HubUnit_get_max_atom_file_number_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_word(), yao_str)
+    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_label(), yao_str)
     ten_int = 10
     yao_hubunit._save_valid_atom_file(get_atom_example_factunit_knee(), ten_int)
     assert yao_hubunit.atom_file_exists(ten_int)
@@ -106,7 +106,7 @@ def test_HubUnit_get_max_atom_file_number_ReturnsObjWhenDirIsEmpty(
 ):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_word(), yao_str)
+    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_label(), yao_str)
 
     # WHEN / THEN
     assert yao_hubunit.get_max_atom_file_number() is None
@@ -115,7 +115,7 @@ def test_HubUnit_get_max_atom_file_number_ReturnsObjWhenDirIsEmpty(
 def test_HubUnit_get_next_atom_file_number_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_word(), yao_str)
+    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_label(), yao_str)
     # WHEN / THEN
     assert yao_hubunit._get_next_atom_file_number() == 0
 
@@ -130,7 +130,7 @@ def test_HubUnit_get_next_atom_file_number_ReturnsObj(env_dir_setup_cleanup):
 def test_HubUnit_save_atom_file_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_word(), yao_str)
+    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_label(), yao_str)
     ten_int = 10
     yao_hubunit._save_valid_atom_file(get_atom_example_factunit_knee(), ten_int)
     assert yao_hubunit.get_max_atom_file_number() == ten_int
@@ -154,14 +154,14 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsFileWithZeroAtoms(
 ):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_word(), yao_str)
+    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_label(), yao_str)
 
     # WHEN
     yao_bud = yao_hubunit._get_bud_from_atom_files()
 
     # THEN
     assert yao_bud.owner_name == yao_str
-    assert yao_bud.fisc_word == yao_hubunit.fisc_word
+    assert yao_bud.fisc_label == yao_hubunit.fisc_label
     assert yao_bud.bridge == yao_hubunit.bridge
     assert yao_bud.fund_pool == yao_hubunit.fund_pool
     assert yao_bud.fund_coin == yao_hubunit.fund_coin
@@ -173,10 +173,10 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_SimpleIdea(
 ):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_word(), yao_str)
+    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_label(), yao_str)
 
     # save atom files
-    sports_atom = get_atom_example_ideaunit_sports(yao_hubunit.fisc_word)
+    sports_atom = get_atom_example_ideaunit_sports(yao_hubunit.fisc_label)
     yao_hubunit.save_atom_file(sports_atom)
 
     # WHEN
@@ -184,7 +184,7 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_SimpleIdea(
 
     # THEN
     assert yao_bud.owner_name == yao_str
-    assert yao_bud.fisc_word == yao_hubunit.fisc_word
+    assert yao_bud.fisc_label == yao_hubunit.fisc_label
     assert yao_bud.bridge == yao_hubunit.bridge
     sports_str = "sports"
     sports_way = yao_bud.make_l1_way(sports_str)
@@ -197,14 +197,14 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_WithFactUnit(
 ):
     # ESTABLISH
     yao_str = "Yao"
-    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_word(), yao_str)
+    yao_hubunit = hubunit_shop(fisc_mstr_dir(), fisc_label(), yao_str)
 
     # save atom files
-    x_fisc_word = yao_hubunit.fisc_word
-    yao_hubunit.save_atom_file(get_atom_example_ideaunit_sports(x_fisc_word))
-    yao_hubunit.save_atom_file(get_atom_example_ideaunit_ball(x_fisc_word))
-    yao_hubunit.save_atom_file(get_atom_example_ideaunit_knee(x_fisc_word))
-    yao_hubunit.save_atom_file(get_atom_example_factunit_knee(x_fisc_word))
+    x_fisc_label = yao_hubunit.fisc_label
+    yao_hubunit.save_atom_file(get_atom_example_ideaunit_sports(x_fisc_label))
+    yao_hubunit.save_atom_file(get_atom_example_ideaunit_ball(x_fisc_label))
+    yao_hubunit.save_atom_file(get_atom_example_ideaunit_knee(x_fisc_label))
+    yao_hubunit.save_atom_file(get_atom_example_factunit_knee(x_fisc_label))
     print(f"{get_dir_file_strs(yao_hubunit._atoms_dir).keys()=}")
 
     # WHEN
@@ -212,7 +212,7 @@ def test_HubUnit_get_bud_from_atom_files_ReturnsCorrectFile_WithFactUnit(
 
     # THEN
     assert yao_bud.owner_name == yao_str
-    assert yao_bud.fisc_word == yao_hubunit.fisc_word
+    assert yao_bud.fisc_label == yao_hubunit.fisc_label
     assert yao_bud.bridge == yao_hubunit.bridge
     sports_str = "sports"
     sports_way = yao_bud.make_l1_way(sports_str)

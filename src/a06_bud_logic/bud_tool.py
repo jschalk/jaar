@@ -1,7 +1,7 @@
 from src.a00_data_toolbox.dict_toolbox import create_csv
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import FundNum, get_net, RespectNum
-from src.a01_way_logic.way import AcctName, FiscWord, WayStr
+from src.a01_way_logic.way import AcctName, FiscLabel, WayStr
 from src.a03_group_logic.acct import AcctUnit
 from src.a03_group_logic.group import MemberShip, AwardLink
 from src.a05_idea_logic.idea import IdeaUnit

@@ -491,8 +491,8 @@ def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_1atom(
     sue_hubunit.save_pack_file(sue_1budatoms_packunit())
     save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
     gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
-    print(f"{gut_bud.fisc_word=}")
-    print(f"{sue_hubunit.fisc_word=}")
+    print(f"{gut_bud.fisc_label=}")
+    print(f"{sue_hubunit.fisc_label=}")
     sports_str = "sports"
     sports_way = gut_bud.make_l1_way(sports_str)
     knee_str = "knee"
@@ -516,7 +516,7 @@ def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_2atoms(
     sue_hubunit.save_pack_file(sue_2budatoms_packunit())
     save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
     gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
-    print(f"{gut_bud.fisc_word=}")
+    print(f"{gut_bud.fisc_label=}")
     sports_str = "sports"
     sports_way = gut_bud.make_l1_way(sports_str)
     knee_str = "knee"

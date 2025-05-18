@@ -1,11 +1,11 @@
 from src.a00_data_toolbox.file_toolbox import create_path, save_file
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_word_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_label_str
 from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     face_name_str,
     event_int_str,
     type_NameStr_str,
-    type_WordStr_str,
+    type_LabelStr_str,
 )
 from src.a16_pidgin_logic._utils.str_a16 import pidgin_filename
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
@@ -33,7 +33,7 @@ def test_etl_otz_event_creeds_to_brick_events_Scenario0_NoPidginUnit(
     br00011_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_word_str(),
+        fisc_label_str(),
         owner_name_str(),
         acct_name_str(),
     ]
@@ -83,7 +83,7 @@ def test_etl_otz_event_creeds_to_brick_events_Scenario1_MultpleFaceNames_Creates
     br00011_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_word_str(),
+        fisc_label_str(),
         owner_name_str(),
         acct_name_str(),
     ]
@@ -137,7 +137,7 @@ def test_etl_otz_event_creeds_to_brick_events_Scenario1_MultpleFaceNames_Creates
     e9_pidginunit.set_otx2inx(type_NameStr_str(), zia_otx, zia_inx)
     e9_pidginunit.set_otx2inx(type_NameStr_str(), bob_otx, bob2_inx)
     e9_pidginunit.set_otx2inx(type_NameStr_str(), yao_otx, yao2_inx)
-    e9_pidginunit.set_otx2inx(type_WordStr_str(), accord55_inx, accord55_otx)
+    e9_pidginunit.set_otx2inx(type_LabelStr_str(), accord55_inx, accord55_otx)
     save_file(otz_e3_dir, pidgin_filename(), e3_pidginunit.get_json())
     save_file(otz_e7_dir, pidgin_filename(), e7_pidginunit.get_json())
     save_file(otz_e9_dir, pidgin_filename(), e9_pidginunit.get_json())

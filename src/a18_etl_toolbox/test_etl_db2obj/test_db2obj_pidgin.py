@@ -3,7 +3,7 @@
 #     pidgin_title_str,
 #     pidgin_name_str,
 #     pidgin_way_str,
-#     pidgin_word_str,
+#     pidgin_label_str,
 #     pidgin_core_str,
 # )
 # from src.a18_etl_toolbox.tran_sqlstrs import (
@@ -23,7 +23,7 @@
 # #     "namemap": {
 # #         "otx2inx": {},
 # #     },
-# #     "wordmap": {
+# #     "labelmap": {
 # #         "otx2inx": {},
 # #     },
 # #     "titlemap": {
@@ -38,7 +38,7 @@
 # def test_get_pidgin_dict_from_db_ReturnsObj_With_pidginunit_Attrs_Scenario0():
 #     # ESTABLISH
 #     a23_str = "accord23"
-#     a23_timeline_word = "timeline88"
+#     a23_timeline_label = "timeline88"
 #     a23_c400_number = 3
 #     a23_yr1_jan1_offset = 7
 #     a23_monthday_distortion = 9
@@ -51,8 +51,8 @@
 #         cursor = conn.cursor()
 #         create_sound_and_voice_tables(cursor)
 #         pidginunit_insert_sqlstr = f"""INSERT INTO pidginunit_agg (
-#   pidgin_word
-# , timeline_word
+#   pidgin_label
+# , timeline_label
 # , c400_number
 # , yr1_jan1_offset
 # , monthday_distortion
@@ -63,7 +63,7 @@
 # )
 # VALUES (
 # '{a23_str}'
-# , '{a23_timeline_word}'
+# , '{a23_timeline_label}'
 # , {a23_c400_number}
 # , {a23_yr1_jan1_offset}
 # , {a23_monthday_distortion}
@@ -80,10 +80,10 @@
 
 #     # THEN
 #     assert a23_dict
-#     assert a23_dict.get("pidgin_word") == a23_str
+#     assert a23_dict.get("pidgin_label") == a23_str
 #     print(f"{a23_dict=}")
 #     a23_timeline_dict = a23_dict.get("timeline")
-#     assert a23_timeline_dict.get("timeline_word") == a23_timeline_word
+#     assert a23_timeline_dict.get("timeline_label") == a23_timeline_label
 #     assert a23_timeline_dict.get("c400_number") == a23_c400_number
 #     assert a23_timeline_dict.get("yr1_jan1_offset") == a23_yr1_jan1_offset
 #     assert a23_timeline_dict.get("monthday_distortion") == a23_monthday_distortion
@@ -100,7 +100,7 @@
 #         cursor = conn.cursor()
 #         create_sound_and_voice_tables(cursor)
 #         pidginunit_insert_sqlstr = (
-#             f"INSERT INTO pidginunit_agg (pidgin_word) VALUES ('{a23_str}');"
+#             f"INSERT INTO pidginunit_agg (pidgin_label) VALUES ('{a23_str}');"
 #         )
 #         cursor.execute(pidginunit_insert_sqlstr)
 
@@ -109,14 +109,14 @@
 
 #     # THEN
 #     assert a23_dict
-#     assert a23_dict.get("pidgin_word") == a23_str
+#     assert a23_dict.get("pidgin_label") == a23_str
 #     assert "timeline" in set(a23_dict.keys())
 #     assert a23_dict.get("fund_coin") is None
 #     assert a23_dict.get("penny") is None
 #     assert a23_dict.get("respect_bit") is None
 #     assert a23_dict.get("bridge") is None
 #     assert set(a23_dict.keys()) == {
-#         pidgin_word_str(),
+#         pidgin_label_str(),
 #         "offi_times",
 #         timeline_str(),
 #         cashbook_str(),
@@ -135,10 +135,10 @@
 #         cursor = conn.cursor()
 #         create_sound_and_voice_tables(cursor)
 #         pidginunit_insert_sqlstr = (
-#             f"INSERT INTO pidginunit_agg (pidgin_word) VALUES ('{a23_str}');"
+#             f"INSERT INTO pidginunit_agg (pidgin_label) VALUES ('{a23_str}');"
 #         )
 #         cursor.execute(pidginunit_insert_sqlstr)
-#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_cashbook_agg (pidgin_word, owner_name, acct_name, tran_time, amount)
+#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_cashbook_agg (pidgin_label, owner_name, acct_name, tran_time, amount)
 # VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
 # ;
 # """
@@ -150,7 +150,7 @@
 #     # THEN
 #     a23_cashbook_dict = a23_dict.get("cashbook")
 #     assert a23_cashbook_dict
-#     assert a23_cashbook_dict.get("pidgin_word") == a23_str
+#     assert a23_cashbook_dict.get("pidgin_label") == a23_str
 #     a23_tranunits_dict = a23_cashbook_dict.get("tranunits")
 #     assert a23_tranunits_dict
 #     a23_trans_bob_dict = a23_tranunits_dict.get(bob_str)
@@ -173,10 +173,10 @@
 #         cursor = conn.cursor()
 #         create_sound_and_voice_tables(cursor)
 #         pidginunit_insert_sqlstr = (
-#             f"INSERT INTO pidginunit_agg (pidgin_word) VALUES ('{a23_str}');"
+#             f"INSERT INTO pidginunit_agg (pidgin_label) VALUES ('{a23_str}');"
 #         )
 #         cursor.execute(pidginunit_insert_sqlstr)
-#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_cashbook_agg (pidgin_word, owner_name, acct_name, tran_time, amount)
+#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_cashbook_agg (pidgin_label, owner_name, acct_name, tran_time, amount)
 # VALUES
 #   ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {a23_bob_sue_tp55_amount})
 # , ('{a45_str}', '{bob_str}', '{sue_str}', {tp55}, {a45_bob_sue_tp55_amount})
@@ -190,7 +190,7 @@
 #     # THEN
 #     a23_cashbook_dict = a23_dict.get("cashbook")
 #     assert a23_cashbook_dict
-#     assert a23_cashbook_dict.get("pidgin_word") == a23_str
+#     assert a23_cashbook_dict.get("pidgin_label") == a23_str
 #     a23_tranunits_dict = a23_cashbook_dict.get("tranunits")
 #     assert a23_tranunits_dict
 #     a23_trans_bob_dict = a23_tranunits_dict.get(bob_str)
@@ -211,10 +211,10 @@
 #         cursor = conn.cursor()
 #         create_sound_and_voice_tables(cursor)
 #         pidginunit_insert_sqlstr = (
-#             f"INSERT INTO pidginunit_agg (pidgin_word) VALUES ('{a23_str}');"
+#             f"INSERT INTO pidginunit_agg (pidgin_label) VALUES ('{a23_str}');"
 #         )
 #         cursor.execute(pidginunit_insert_sqlstr)
-#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_dealunit_agg (pidgin_word, owner_name, deal_time, quota, celldepth)
+#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_dealunit_agg (pidgin_label, owner_name, deal_time, quota, celldepth)
 # VALUES ('{a23_str}', '{bob_str}', {tp55}, {bob_tp55_quota}, {bob_tp55_celldepth})
 # ;
 # """
@@ -246,19 +246,19 @@
 #     a23_str = "accord23"
 #     hour3_min = 300
 #     hour4_min = 400
-#     hour3_word = "3xm"
-#     hour4_word = "4xm"
+#     hour3_label = "3xm"
+#     hour4_label = "4xm"
 #     with sqlite3_connect(":memory:") as conn:
 #         cursor = conn.cursor()
 #         create_sound_and_voice_tables(cursor)
 #         pidginunit_insert_sqlstr = (
-#             f"INSERT INTO pidginunit_agg (pidgin_word) VALUES ('{a23_str}');"
+#             f"INSERT INTO pidginunit_agg (pidgin_label) VALUES ('{a23_str}');"
 #         )
 #         cursor.execute(pidginunit_insert_sqlstr)
-#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_timeline_hour_agg (pidgin_word, cumlative_minute, hour_word)
+#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_timeline_hour_agg (pidgin_label, cumlative_minute, hour_label)
 # VALUES
-#   ('{a23_str}', {hour3_min}, '{hour3_word}')
-# , ('{a23_str}', {hour4_min}, '{hour4_word}')
+#   ('{a23_str}', {hour3_min}, '{hour3_label}')
+# , ('{a23_str}', {hour4_min}, '{hour4_label}')
 # ;
 # """
 #         cursor.execute(pidginash_insert_sqlstr)
@@ -272,7 +272,7 @@
 #     assert a23_timeline_dict
 #     a23_hours_config_dict = a23_timeline_dict.get("hours_config")
 #     print(f"{a23_hours_config_dict=}")
-#     assert a23_hours_config_dict == [[hour3_word, hour3_min], [hour4_word, hour4_min]]
+#     assert a23_hours_config_dict == [[hour3_label, hour3_min], [hour4_label, hour4_min]]
 
 
 # def test_get_pidgin_dict_from_db_ReturnsObj_With_fismont_Attrs_Scenario0():
@@ -280,19 +280,19 @@
 #     a23_str = "accord23"
 #     day111_min = 111
 #     day222_min = 222
-#     month111_word = "jan111"
-#     month222_word = "feb222"
+#     month111_label = "jan111"
+#     month222_label = "feb222"
 #     with sqlite3_connect(":memory:") as conn:
 #         cursor = conn.cursor()
 #         create_sound_and_voice_tables(cursor)
 #         pidginunit_insert_sqlstr = (
-#             f"INSERT INTO pidginunit_agg (pidgin_word) VALUES ('{a23_str}');"
+#             f"INSERT INTO pidginunit_agg (pidgin_label) VALUES ('{a23_str}');"
 #         )
 #         cursor.execute(pidginunit_insert_sqlstr)
-#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_timeline_month_agg (pidgin_word, cumlative_day, month_word)
+#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_timeline_month_agg (pidgin_label, cumlative_day, month_label)
 # VALUES
-#   ('{a23_str}', {day111_min}, '{month111_word}')
-# , ('{a23_str}', {day222_min}, '{month222_word}')
+#   ('{a23_str}', {day111_min}, '{month111_label}')
+# , ('{a23_str}', {day222_min}, '{month222_label}')
 # ;
 # """
 #         cursor.execute(pidginash_insert_sqlstr)
@@ -305,8 +305,8 @@
 #     assert a23_timeline_dict
 #     a23_months_config_dict = a23_timeline_dict.get("months_config")
 #     assert a23_months_config_dict == [
-#         [month111_word, day111_min],
-#         [month222_word, day222_min],
+#         [month111_label, day111_min],
+#         [month222_label, day222_min],
 #     ]
 
 
@@ -315,19 +315,19 @@
 #     a23_str = "accord23"
 #     ana_order = 1
 #     bee_order = 2
-#     ana_word = "ana_weekday"
-#     bee_word = "bee_weekday"
+#     ana_label = "ana_weekday"
+#     bee_label = "bee_weekday"
 #     with sqlite3_connect(":memory:") as conn:
 #         cursor = conn.cursor()
 #         create_sound_and_voice_tables(cursor)
 #         pidginunit_insert_sqlstr = (
-#             f"INSERT INTO pidginunit_agg (pidgin_word) VALUES ('{a23_str}');"
+#             f"INSERT INTO pidginunit_agg (pidgin_label) VALUES ('{a23_str}');"
 #         )
 #         cursor.execute(pidginunit_insert_sqlstr)
-#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_timeline_weekday_agg (pidgin_word, weekday_order, weekday_word)
+#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_timeline_weekday_agg (pidgin_label, weekday_order, weekday_label)
 # VALUES
-#   ('{a23_str}', {ana_order}, '{ana_word}')
-# , ('{a23_str}', {bee_order}, '{bee_word}')
+#   ('{a23_str}', {ana_order}, '{ana_label}')
+# , ('{a23_str}', {bee_order}, '{bee_label}')
 # ;
 # """
 #         cursor.execute(pidginash_insert_sqlstr)
@@ -339,7 +339,7 @@
 #     a23_timeline_dict = a23_dict.get("timeline")
 #     assert a23_timeline_dict
 #     a23_weekdays_config_dict = a23_timeline_dict.get("weekdays_config")
-#     assert a23_weekdays_config_dict == [ana_word, bee_word]
+#     assert a23_weekdays_config_dict == [ana_label, bee_label]
 
 
 # def test_get_pidgin_dict_from_db_ReturnsObj_With_fisoffi_Attrs_Scenario0():
@@ -352,10 +352,10 @@
 #         cursor = conn.cursor()
 #         create_sound_and_voice_tables(cursor)
 #         pidginunit_insert_sqlstr = (
-#             f"INSERT INTO pidginunit_agg (pidgin_word) VALUES ('{a23_str}');"
+#             f"INSERT INTO pidginunit_agg (pidgin_label) VALUES ('{a23_str}');"
 #         )
 #         cursor.execute(pidginunit_insert_sqlstr)
-#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_timeoffi_agg (pidgin_word, offi_time)
+#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_timeoffi_agg (pidgin_label, offi_time)
 # VALUES
 #   ('{a23_str}', {offi_time5})
 # , ('{a23_str}', {offi_time7})
@@ -375,7 +375,7 @@
 # def test_get_pidgin_dict_from_db_ReturnsObj_IsCorrectlyFormatted_Scenario0_pidginunit():
 #     # ESTABLISH
 #     a23_str = "accord23"
-#     a23_timeline_word = "timeline88"
+#     a23_timeline_label = "timeline88"
 #     a23_c400_number = 3
 #     a23_yr1_jan1_offset = 7
 #     a23_monthday_distortion = 9
@@ -388,8 +388,8 @@
 #         cursor = conn.cursor()
 #         create_sound_and_voice_tables(cursor)
 #         pidginunit_insert_sqlstr = f"""INSERT INTO pidginunit_agg (
-#   pidgin_word
-# , timeline_word
+#   pidgin_label
+# , timeline_label
 # , c400_number
 # , yr1_jan1_offset
 # , monthday_distortion
@@ -400,7 +400,7 @@
 # )
 # VALUES (
 # '{a23_str}'
-# , '{a23_timeline_word}'
+# , '{a23_timeline_label}'
 # , {a23_c400_number}
 # , {a23_yr1_jan1_offset}
 # , {a23_monthday_distortion}
@@ -416,8 +416,8 @@
 #     # WHEN
 #     a23_pidginunit = pidginunit_get_from_dict(a23_dict)
 
-#     assert a23_pidginunit.pidgin_word == a23_str
-#     assert a23_pidginunit.timeline.timeline_word == a23_timeline_word
+#     assert a23_pidginunit.pidgin_label == a23_str
+#     assert a23_pidginunit.timeline.timeline_label == a23_timeline_label
 #     assert a23_pidginunit.timeline.c400_number == a23_c400_number
 #     assert a23_pidginunit.timeline.yr1_jan1_offset == a23_yr1_jan1_offset
 #     assert a23_pidginunit.timeline.monthday_distortion == a23_monthday_distortion
@@ -438,10 +438,10 @@
 #         cursor = conn.cursor()
 #         create_sound_and_voice_tables(cursor)
 #         pidginunit_insert_sqlstr = (
-#             f"INSERT INTO pidginunit_agg (pidgin_word) VALUES ('{a23_str}');"
+#             f"INSERT INTO pidginunit_agg (pidgin_label) VALUES ('{a23_str}');"
 #         )
 #         cursor.execute(pidginunit_insert_sqlstr)
-#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_cashbook_agg (pidgin_word, owner_name, acct_name, tran_time, amount)
+#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_cashbook_agg (pidgin_label, owner_name, acct_name, tran_time, amount)
 # VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
 # ;
 # """
@@ -452,7 +452,7 @@
 #     a23_pidginunit = pidginunit_get_from_dict(a23_dict)
 
 #     # THEN
-#     assert a23_pidginunit.pidgin_word == a23_str
+#     assert a23_pidginunit.pidgin_label == a23_str
 #     assert a23_pidginunit.cashbook.tranunits.get(bob_str)
 #     bob_tranunit = a23_pidginunit.cashbook.tranunits.get(bob_str)
 #     assert bob_tranunit == {sue_str: {tp55: bob_sue_tp55_amount}}
@@ -469,10 +469,10 @@
 #         cursor = conn.cursor()
 #         create_sound_and_voice_tables(cursor)
 #         pidginunit_insert_sqlstr = (
-#             f"INSERT INTO pidginunit_agg (pidgin_word) VALUES ('{a23_str}');"
+#             f"INSERT INTO pidginunit_agg (pidgin_label) VALUES ('{a23_str}');"
 #         )
 #         cursor.execute(pidginunit_insert_sqlstr)
-#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_dealunit_agg (pidgin_word, owner_name, deal_time, quota, celldepth)
+#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_dealunit_agg (pidgin_label, owner_name, deal_time, quota, celldepth)
 # VALUES ('{a23_str}', '{bob_str}', {tp55}, {bob_tp55_quota}, {bob_tp55_celldepth})
 # ;
 # """
@@ -497,19 +497,19 @@
 #     a23_str = "accord23"
 #     hour3_min = 300
 #     hour4_min = 400
-#     hour3_word = "3xm"
-#     hour4_word = "4xm"
+#     hour3_label = "3xm"
+#     hour4_label = "4xm"
 #     with sqlite3_connect(":memory:") as conn:
 #         cursor = conn.cursor()
 #         create_sound_and_voice_tables(cursor)
 #         pidginunit_insert_sqlstr = (
-#             f"INSERT INTO pidginunit_agg (pidgin_word) VALUES ('{a23_str}');"
+#             f"INSERT INTO pidginunit_agg (pidgin_label) VALUES ('{a23_str}');"
 #         )
 #         cursor.execute(pidginunit_insert_sqlstr)
-#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_timeline_hour_agg (pidgin_word, cumlative_minute, hour_word)
+#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_timeline_hour_agg (pidgin_label, cumlative_minute, hour_label)
 # VALUES
-#   ('{a23_str}', {hour3_min}, '{hour3_word}')
-# , ('{a23_str}', {hour4_min}, '{hour4_word}')
+#   ('{a23_str}', {hour3_min}, '{hour3_label}')
+# , ('{a23_str}', {hour4_min}, '{hour4_label}')
 # ;
 # """
 #         cursor.execute(pidginash_insert_sqlstr)
@@ -520,8 +520,8 @@
 
 #     # THEN
 #     a23_pidginunit.timeline.hours_config == [
-#         [hour3_word, hour3_min],
-#         [hour4_word, hour4_min],
+#         [hour3_label, hour3_min],
+#         [hour4_label, hour4_min],
 #     ]
 
 
@@ -530,19 +530,19 @@
 #     a23_str = "accord23"
 #     day111_min = 111
 #     day222_min = 222
-#     month111_word = "jan111"
-#     month222_word = "feb222"
+#     month111_label = "jan111"
+#     month222_label = "feb222"
 #     with sqlite3_connect(":memory:") as conn:
 #         cursor = conn.cursor()
 #         create_sound_and_voice_tables(cursor)
 #         pidginunit_insert_sqlstr = (
-#             f"INSERT INTO pidginunit_agg (pidgin_word) VALUES ('{a23_str}');"
+#             f"INSERT INTO pidginunit_agg (pidgin_label) VALUES ('{a23_str}');"
 #         )
 #         cursor.execute(pidginunit_insert_sqlstr)
-#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_timeline_month_agg (pidgin_word, cumlative_day, month_word)
+#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_timeline_month_agg (pidgin_label, cumlative_day, month_label)
 # VALUES
-#   ('{a23_str}', {day111_min}, '{month111_word}')
-# , ('{a23_str}', {day222_min}, '{month222_word}')
+#   ('{a23_str}', {day111_min}, '{month111_label}')
+# , ('{a23_str}', {day222_min}, '{month222_label}')
 # ;
 # """
 #         cursor.execute(pidginash_insert_sqlstr)
@@ -553,8 +553,8 @@
 
 #     # THEN
 #     assert a23_pidginunit.timeline.months_config == [
-#         [month111_word, day111_min],
-#         [month222_word, day222_min],
+#         [month111_label, day111_min],
+#         [month222_label, day222_min],
 #     ]
 
 
@@ -563,19 +563,19 @@
 #     a23_str = "accord23"
 #     ana_order = 1
 #     bee_order = 2
-#     ana_word = "ana_weekday"
-#     bee_word = "bee_weekday"
+#     ana_label = "ana_weekday"
+#     bee_label = "bee_weekday"
 #     with sqlite3_connect(":memory:") as conn:
 #         cursor = conn.cursor()
 #         create_sound_and_voice_tables(cursor)
 #         pidginunit_insert_sqlstr = (
-#             f"INSERT INTO pidginunit_agg (pidgin_word) VALUES ('{a23_str}');"
+#             f"INSERT INTO pidginunit_agg (pidgin_label) VALUES ('{a23_str}');"
 #         )
 #         cursor.execute(pidginunit_insert_sqlstr)
-#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_timeline_weekday_agg (pidgin_word, weekday_order, weekday_word)
+#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_timeline_weekday_agg (pidgin_label, weekday_order, weekday_label)
 # VALUES
-#   ('{a23_str}', {ana_order}, '{ana_word}')
-# , ('{a23_str}', {bee_order}, '{bee_word}')
+#   ('{a23_str}', {ana_order}, '{ana_label}')
+# , ('{a23_str}', {bee_order}, '{bee_label}')
 # ;
 # """
 #         cursor.execute(pidginash_insert_sqlstr)
@@ -585,7 +585,7 @@
 #     a23_pidginunit = pidginunit_get_from_dict(a23_dict)
 
 #     # THEN
-#     assert a23_pidginunit.timeline.weekdays_config == [ana_word, bee_word]
+#     assert a23_pidginunit.timeline.weekdays_config == [ana_label, bee_label]
 
 
 # def test_get_pidgin_dict_from_db_ReturnsObj_With_fishour_Attrs_Scenario5_fisweek():
@@ -598,10 +598,10 @@
 #         cursor = conn.cursor()
 #         create_sound_and_voice_tables(cursor)
 #         pidginunit_insert_sqlstr = (
-#             f"INSERT INTO pidginunit_agg (pidgin_word) VALUES ('{a23_str}');"
+#             f"INSERT INTO pidginunit_agg (pidgin_label) VALUES ('{a23_str}');"
 #         )
 #         cursor.execute(pidginunit_insert_sqlstr)
-#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_timeoffi_agg (pidgin_word, offi_time)
+#         pidginash_insert_sqlstr = f"""INSERT INTO pidgin_timeoffi_agg (pidgin_label, offi_time)
 # VALUES
 #   ('{a23_str}', {offi_time5})
 # , ('{a23_str}', {offi_time7})
