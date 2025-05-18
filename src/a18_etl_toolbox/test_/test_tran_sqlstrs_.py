@@ -90,8 +90,8 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     get_fisc_insert_agg_from_raw_sqlstrs,
     get_pidgin_insert_agg_from_raw_sqlstrs,
     FISUNIT_AGG_INSERT_SQLSTR,
-    get_idea_slabeleble_put_dimens,
-    IDEA_SLABELEBLE_DEL_DIMENS,
+    get_idea_stageble_put_dimens,
+    IDEA_STAGEBLE_DEL_DIMENS,
     CREATE_FISC_EVENT_TIME_AGG_SQLSTR,
     INSERT_FISC_EVENT_TIME_AGG_SQLSTR,
     UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR,
@@ -1019,7 +1019,7 @@ def test_get_bud_insert_del_agg_from_raw_sqlstrs_ReturnsObj():
             assert x_sqlstr == expected_table2table_agg_insert_sqlstr
 
 
-def test_get_idea_slabeleble_put_dimens_HasAll_idea_numbersForAll_dimens():
+def test_get_idea_stageble_put_dimens_HasAll_idea_numbersForAll_dimens():
     # sourcery skip: extract-method, no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH / WHEN
     # THEN
@@ -1076,14 +1076,14 @@ def test_get_idea_slabeleble_put_dimens_HasAll_idea_numbersForAll_dimens():
                     # check sqlstr is correct?
                     assert generated_sqlstr != ""
 
-    idea_slabeleble_dimen_list = sorted(list(expected_idea_slabelable_dimens))
+    idea_stageble_dimen_list = sorted(list(expected_idea_slabelable_dimens))
     print(f"{expected_idea_slabelable_dimens=}")
     assert idea_dimen_combo_checked_count == 680
     assert idea_raw2dimen_count == 109
-    assert get_idea_slabeleble_put_dimens() == expected_idea_slabelable_dimens
+    assert get_idea_stageble_put_dimens() == expected_idea_slabelable_dimens
 
 
-def test_IDEA_SLABELEBLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
+def test_IDEA_STAGEBLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
     # sourcery skip: extract-method, no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH / WHEN
     # THEN
@@ -1143,11 +1143,11 @@ def test_IDEA_SLABELEBLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
         for x_idea_number, slabelable_dimens in x_idea_slabelable_dimens.items()
         if slabelable_dimens != []
     }
-    idea_slabeleble_dimen_list = sorted(list(expected_idea_slabelable_dimens))
+    idea_stageble_dimen_list = sorted(list(expected_idea_slabelable_dimens))
     print(f"{expected_idea_slabelable_dimens=}")
     assert idea_dimen_combo_checked_count == 680
     assert idea_raw2dimen_count == 10
-    assert IDEA_SLABELEBLE_DEL_DIMENS == expected_idea_slabelable_dimens
+    assert IDEA_STAGEBLE_DEL_DIMENS == expected_idea_slabelable_dimens
 
 
 def test_CREATE_FISC_EVENT_TIME_AGG_SQLSTR_Exists():

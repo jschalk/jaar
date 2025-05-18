@@ -1749,7 +1749,7 @@ def get_bud_insert_del_agg_from_raw_sqlstrs() -> dict[str, str]:
     }
 
 
-def get_idea_slabeleble_put_dimens() -> dict[str, list[str]]:
+def get_idea_stageble_put_dimens() -> dict[str, list[str]]:
     return {
         "br00000": ["fiscunit"],
         "br00001": ["budunit", "fisc_dealunit", "fiscunit"],
@@ -1800,7 +1800,7 @@ def get_idea_slabeleble_put_dimens() -> dict[str, list[str]]:
     }
 
 
-IDEA_SLABELEBLE_DEL_DIMENS = {
+IDEA_STAGEBLE_DEL_DIMENS = {
     "br00050": ["bud_acct_membership"],
     "br00051": ["bud_acctunit"],
     "br00052": ["bud_concept_awardlink"],
