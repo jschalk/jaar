@@ -523,7 +523,7 @@ def test_update_all_face_name_event_int_columns_Scenario0_UpdatesValidSheet(
     for _ in range(5):
         ws1.append([event3, yao_str, "value4"])
 
-    ws2 = workbook.create_sheet(title=invalidsheet_str)
+    ws2 = workbook.create_sheet(invalidsheet_str)
     ws2.append(["wrong", "headers", "data"])
     for _ in range(5):
         ws2.append([event3, yao_str, "value3"])

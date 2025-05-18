@@ -157,8 +157,8 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
         assert get_row_count(cursor, budunit_voice_put_raw) == 1
         assert get_row_count(cursor, budacct_voice_put_raw) == 1
         # assert get_row_count(cursor, fisunit_voice_agg) == 1
-        # assert get_row_count(cursor, budunit_voice_agg) == 1
-        # assert get_row_count(cursor, budacct_voice_agg) == 1
+        # assert get_row_count(cursor, budunit_voice_put_agg) == 1
+        # assert get_row_count(cursor, budacct_voice_put_agg) == 1
 
 
 # def test_WorldUnit_mud_to_stances_Scenario3_CreatesFiles(env_dir_setup_cleanup):
