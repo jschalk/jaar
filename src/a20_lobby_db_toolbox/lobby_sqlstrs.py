@@ -19,7 +19,7 @@ CREATE_JOB_BUDHEAL_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_concept_healerlink
 CREATE_JOB_BUDPREM_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_job (world_id TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pbranch TEXT, pnigh REAL, popen REAL, pdivisor INTEGER, _task INTEGER, _status INTEGER)"""
 CREATE_JOB_BUDREAS_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_concept_reasonunit_job (world_id TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, rcontext_concept_active_requisite INTEGER, _task INTEGER, _status INTEGER, _rcontext_concept_active_value INTEGER)"""
 CREATE_JOB_BUDLABOR_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_concept_laborlink_job (world_id TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, labor_title TEXT, _owner_name_labor INTEGER)"""
-CREATE_JOB_BUDCONCEPT_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_conceptunit_job (world_id TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER, fund_coin REAL, _active INTEGER, _task INTEGER, _fund_onset REAL, _fund_cease REAL, _fund_ratio REAL, _gogo_calc REAL, _stop_calc REAL, _level INTEGER, _range_evaluated INTEGER, _descendant_pledge_count INTEGER, _healerlink_ratio REAL, _all_acct_cred INTEGER, _all_acct_debt INTEGER)"""
+CREATE_JOB_BUDCONC_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_conceptunit_job (world_id TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER, fund_coin REAL, _active INTEGER, _task INTEGER, _fund_onset REAL, _fund_cease REAL, _fund_ratio REAL, _gogo_calc REAL, _stop_calc REAL, _level INTEGER, _range_evaluated INTEGER, _descendant_pledge_count INTEGER, _healerlink_ratio REAL, _all_acct_cred INTEGER, _all_acct_debt INTEGER)"""
 CREATE_JOB_BUDUNIT_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_job (world_id TEXT, fisc_label TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, _rational INTEGER, _keeps_justified INTEGER, _offtrack_fund REAL, _sum_healerlink_share REAL, _keeps_buildable INTEGER, _tree_traverse_count INTEGER)"""
 
 
@@ -34,7 +34,7 @@ def get_job_create_table_sqlstrs() -> dict[str, str]:
         "bud_concept_reason_premiseunit_job": CREATE_JOB_BUDPREM_SQLSTR,
         "bud_concept_reasonunit_job": CREATE_JOB_BUDREAS_SQLSTR,
         "bud_concept_laborlink_job": CREATE_JOB_BUDLABOR_SQLSTR,
-        "bud_conceptunit_job": CREATE_JOB_BUDCONCEPT_SQLSTR,
+        "bud_conceptunit_job": CREATE_JOB_BUDCONC_SQLSTR,
         "budunit_job": CREATE_JOB_BUDUNIT_SQLSTR,
     }
 
@@ -303,7 +303,7 @@ VALUES (
 """
 
 
-def create_budconcept_metrics_insert_sqlstr(values_dict: dict[str,]):
+def create_budconc_metrics_insert_sqlstr(values_dict: dict[str,]):
     world_id = values_dict.get("world_id")
     fisc_label = values_dict.get("fisc_label")
     owner_name = values_dict.get("owner_name")

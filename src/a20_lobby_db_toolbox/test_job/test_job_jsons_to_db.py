@@ -45,7 +45,7 @@ from src.a20_lobby_db_toolbox.lobby_tranformers import (
     insert_job_budprem,
     insert_job_budreas,
     insert_job_budlabor,
-    insert_job_budconcept,
+    insert_job_budconc,
     insert_job_budunit,
     insert_job_obj,
 )
@@ -146,7 +146,7 @@ def test_insert_job_budunit_CreatesTableRowsFor_budunit_job():
         assert rows == expected_data
 
 
-def test_insert_job_budconcept_CreatesTableRowsFor_budconcept_job():
+def test_insert_job_budconc_CreatesTableRowsFor_budconc_job():
     # sourcery skip: extract-method
     # ESTABLISH
     # x_args = get_bud_calc_dimen_args("bud_conceptunit")
@@ -255,7 +255,7 @@ def test_insert_job_budconcept_CreatesTableRowsFor_budconcept_job():
         x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_label, x_owner_name)
 
         # WHEN
-        insert_job_budconcept(cursor, x_objkeysholder, x_concept)
+        insert_job_budconc(cursor, x_objkeysholder, x_concept)
 
         # THEN
         clean_way = create_way(casa_way, "clean")
@@ -938,10 +938,10 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         budprem_job_table = "bud_concept_reason_premiseunit_job"
         budreas_job_table = "bud_concept_reasonunit_job"
         budlabor_job_table = "bud_concept_laborlink_job"
-        budconcept_job_table = "bud_conceptunit_job"
+        budconc_job_table = "bud_conceptunit_job"
         budunit_job_table = "budunit_job"
         assert get_row_count(cursor, budunit_job_table) == 0
-        assert get_row_count(cursor, budconcept_job_table) == 0
+        assert get_row_count(cursor, budconc_job_table) == 0
         assert get_row_count(cursor, budacct_job_table) == 0
         assert get_row_count(cursor, budmemb_job_table) == 0
         assert get_row_count(cursor, budgrou_job_table) == 0
@@ -957,7 +957,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
 
         # THEN
         assert get_row_count(cursor, budunit_job_table) == 1
-        assert get_row_count(cursor, budconcept_job_table) == 5
+        assert get_row_count(cursor, budconc_job_table) == 5
         assert get_row_count(cursor, budacct_job_table) == 2
         assert get_row_count(cursor, budmemb_job_table) == 3
         assert get_row_count(cursor, budgrou_job_table) == 3
@@ -1015,10 +1015,10 @@ def test_etl_fisc_jobs_json_to_db_SetsDB_Scenario0(
         budprem_job_table = f"{bud_concept_reason_premiseunit_str()}_job"
         budreas_job_table = f"{bud_concept_reasonunit_str()}_job"
         budlabor_job_table = f"{bud_concept_laborlink_str()}_job"
-        budconcept_job_table = f"{bud_conceptunit_str()}_job"
+        budconc_job_table = f"{bud_conceptunit_str()}_job"
         budunit_job_table = f"{budunit_str()}_job"
         assert get_row_count(cursor, budunit_job_table) == 0
-        assert get_row_count(cursor, budconcept_job_table) == 0
+        assert get_row_count(cursor, budconc_job_table) == 0
         assert get_row_count(cursor, budacct_job_table) == 0
         assert get_row_count(cursor, budmemb_job_table) == 0
         assert get_row_count(cursor, budgrou_job_table) == 0
@@ -1034,7 +1034,7 @@ def test_etl_fisc_jobs_json_to_db_SetsDB_Scenario0(
 
         # THEN
         assert get_row_count(cursor, budunit_job_table) == 1
-        assert get_row_count(cursor, budconcept_job_table) == 5
+        assert get_row_count(cursor, budconc_job_table) == 5
         assert get_row_count(cursor, budacct_job_table) == 2
         assert get_row_count(cursor, budmemb_job_table) == 3
         assert get_row_count(cursor, budgrou_job_table) == 3
@@ -1079,10 +1079,10 @@ def test_etl_fiscs_jobs_json_to_db_SetsDB_Scenario0_TwoBudsInDifferentFiscUnits(
         cursor = conn.cursor()
         create_job_tables(cursor)
         budacct_job_table = f"{bud_acctunit_str()}_job"
-        budconcept_job_table = f"{bud_conceptunit_str()}_job"
+        budconc_job_table = f"{bud_conceptunit_str()}_job"
         budunit_job_table = f"{budunit_str()}_job"
         assert get_row_count(cursor, budunit_job_table) == 0
-        assert get_row_count(cursor, budconcept_job_table) == 0
+        assert get_row_count(cursor, budconc_job_table) == 0
         assert get_row_count(cursor, budacct_job_table) == 0
 
         # WHEN
@@ -1091,5 +1091,5 @@ def test_etl_fiscs_jobs_json_to_db_SetsDB_Scenario0_TwoBudsInDifferentFiscUnits(
 
         # THEN
         assert get_row_count(cursor, budunit_job_table) == 2
-        assert get_row_count(cursor, budconcept_job_table) == 5
+        assert get_row_count(cursor, budconc_job_table) == 5
         assert get_row_count(cursor, budacct_job_table) == 3

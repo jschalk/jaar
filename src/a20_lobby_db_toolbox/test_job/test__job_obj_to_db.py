@@ -11,7 +11,7 @@ from src.a20_lobby_db_toolbox.lobby_tranformers import (
     create_budprem_metrics_insert_sqlstr,
     create_budreas_metrics_insert_sqlstr,
     create_budlabor_metrics_insert_sqlstr,
-    create_budconcept_metrics_insert_sqlstr,
+    create_budconc_metrics_insert_sqlstr,
     create_budunit_metrics_insert_sqlstr,
 )
 from sqlite3 import connect as sqlite3_connect
@@ -78,7 +78,7 @@ def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_budconcept_metrics_insert_sqlstr_ReturnsObj():
+def test_create_budconc_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
     x_args = get_bud_calc_dimen_args("bud_conceptunit")
@@ -155,7 +155,7 @@ def test_create_budconcept_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_budconcept_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_budconc_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr

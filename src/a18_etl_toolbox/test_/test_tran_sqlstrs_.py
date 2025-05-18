@@ -121,8 +121,8 @@ def abbv(tablename: str) -> str:
         f"{bud_concept_reasonunit_str()}_put_raw": "BUDREAS_PUT_RAW",
         f"{bud_concept_laborlink_str()}_put_agg": "BUDLABO_PUT_AGG",
         f"{bud_concept_laborlink_str()}_put_raw": "BUDLABO_PUT_RAW",
-        f"{bud_conceptunit_str()}_put_agg": "BUDCONCEPT_PUT_AGG",
-        f"{bud_conceptunit_str()}_put_raw": "BUDCONCEPT_PUT_RAW",
+        f"{bud_conceptunit_str()}_put_agg": "BUDCONC_PUT_AGG",
+        f"{bud_conceptunit_str()}_put_raw": "BUDCONC_PUT_RAW",
         f"{budunit_str()}_put_agg": "BUDUNIT_PUT_AGG",
         f"{budunit_str()}_put_raw": "BUDUNIT_PUT_RAW",
         f"{bud_acct_membership_str()}_del_agg": "BUDMEMB_DEL_AGG",
@@ -141,8 +141,8 @@ def abbv(tablename: str) -> str:
         f"{bud_concept_reasonunit_str()}_del_raw": "BUDREAS_DEL_RAW",
         f"{bud_concept_laborlink_str()}_del_agg": "BUDLABO_DEL_AGG",
         f"{bud_concept_laborlink_str()}_del_raw": "BUDLABO_DEL_RAW",
-        f"{bud_conceptunit_str()}_del_agg": "BUDCONCEPT_DEL_AGG",
-        f"{bud_conceptunit_str()}_del_raw": "BUDCONCEPT_DEL_RAW",
+        f"{bud_conceptunit_str()}_del_agg": "BUDCONC_DEL_AGG",
+        f"{bud_conceptunit_str()}_del_raw": "BUDCONC_DEL_RAW",
         f"{budunit_str()}_del_agg": "BUDUNIT_DEL_AGG",
         f"{budunit_str()}_del_raw": "BUDUNIT_DEL_RAW",
     }
@@ -159,7 +159,7 @@ def test_create_prime_tablename_ReturnsObj():
     budunit_dimen = budunit_str()
     budacct_dimen = bud_acctunit_str()
     budmemb_dimen = bud_acct_membership_str()
-    budconcept_dimen = bud_conceptunit_str()
+    budconc_dimen = bud_conceptunit_str()
     budawar_dimen = bud_concept_awardlink_str()
     budreas_dimen = bud_concept_reasonunit_str()
     budprem_dimen = bud_concept_reason_premiseunit_str()
@@ -188,7 +188,7 @@ def test_create_prime_tablename_ReturnsObj():
     budunit_s_agg_table = create_prime_tablename("budunit", "s", agg_str, put_str)
     budacct_s_agg_table = create_prime_tablename("budacct", "s", agg_str, put_str)
     budmemb_s_agg_table = create_prime_tablename("budmemb", "s", agg_str, put_str)
-    budconcept_s_agg_table = create_prime_tablename("budconcept", "s", agg_str, put_str)
+    budconc_s_agg_table = create_prime_tablename("budconc", "s", agg_str, put_str)
     budawar_s_agg_table = create_prime_tablename("budawar", "s", agg_str, put_str)
     budreas_s_agg_table = create_prime_tablename("budreas", "s", agg_str, put_str)
     budprem_s_agg_table = create_prime_tablename("budprem", "s", agg_str, put_str)
@@ -217,7 +217,7 @@ def test_create_prime_tablename_ReturnsObj():
     assert budunit_s_agg_table == f"{budunit_dimen}_s_put_agg"
     assert budacct_s_agg_table == f"{budacct_dimen}_s_put_agg"
     assert budmemb_s_agg_table == f"{budmemb_dimen}_s_put_agg"
-    assert budconcept_s_agg_table == f"{budconcept_dimen}_s_put_agg"
+    assert budconc_s_agg_table == f"{budconc_dimen}_s_put_agg"
     assert budawar_s_agg_table == f"{budawar_dimen}_s_put_agg"
     assert budreas_s_agg_table == f"{budreas_dimen}_s_put_agg"
     assert budprem_s_agg_table == f"{budprem_dimen}_s_put_agg"
@@ -422,8 +422,8 @@ def test_create_bud_prime_tables_CreatesFiscRawTables():
         budreas_pud_raw_table = f"{bud_concept_reasonunit_str()}_put_raw"
         budlabor_pud_agg_table = f"{bud_concept_laborlink_str()}_put_agg"
         budlabor_pud_raw_table = f"{bud_concept_laborlink_str()}_put_raw"
-        budconcept_pud_agg_table = f"{bud_conceptunit_str()}_put_agg"
-        budconcept_pud_raw_table = f"{bud_conceptunit_str()}_put_raw"
+        budconc_pud_agg_table = f"{bud_conceptunit_str()}_put_agg"
+        budconc_pud_raw_table = f"{bud_conceptunit_str()}_put_raw"
         budunit_pud_agg_table = f"{budunit_str()}_put_agg"
         budunit_pud_raw_table = f"{budunit_str()}_put_raw"
 
@@ -443,8 +443,8 @@ def test_create_bud_prime_tables_CreatesFiscRawTables():
         assert db_table_exists(cursor, budreas_pud_raw_table) is False
         assert db_table_exists(cursor, budlabor_pud_agg_table) is False
         assert db_table_exists(cursor, budlabor_pud_raw_table) is False
-        assert db_table_exists(cursor, budconcept_pud_agg_table) is False
-        assert db_table_exists(cursor, budconcept_pud_raw_table) is False
+        assert db_table_exists(cursor, budconc_pud_agg_table) is False
+        assert db_table_exists(cursor, budconc_pud_raw_table) is False
         assert db_table_exists(cursor, budunit_pud_agg_table) is False
         assert db_table_exists(cursor, budunit_pud_raw_table) is False
 
@@ -476,8 +476,8 @@ def test_create_bud_prime_tables_CreatesFiscRawTables():
         assert db_table_exists(cursor, budreas_pud_raw_table)
         assert db_table_exists(cursor, budlabor_pud_agg_table)
         assert db_table_exists(cursor, budlabor_pud_raw_table)
-        assert db_table_exists(cursor, budconcept_pud_agg_table)
-        assert db_table_exists(cursor, budconcept_pud_raw_table)
+        assert db_table_exists(cursor, budconc_pud_agg_table)
+        assert db_table_exists(cursor, budconc_pud_raw_table)
         assert db_table_exists(cursor, budunit_pud_agg_table)
         assert db_table_exists(cursor, budunit_pud_raw_table)
 

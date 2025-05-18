@@ -72,7 +72,7 @@ def test_create_job_tables_CreatesTables():
         budprem_job_table = f"{bud_concept_reason_premiseunit_str()}_job"
         budares_job_table = f"{bud_concept_reasonunit_str()}_job"
         budlabor_job_table = f"{bud_concept_laborlink_str()}_job"
-        budconcept_job_table = f"{bud_conceptunit_str()}_job"
+        budconc_job_table = f"{bud_conceptunit_str()}_job"
         budunit_job_table = f"{budunit_str()}_job"
 
         assert db_table_exists(cursor, budmemb_job_table) is False
@@ -84,7 +84,7 @@ def test_create_job_tables_CreatesTables():
         assert db_table_exists(cursor, budprem_job_table) is False
         assert db_table_exists(cursor, budares_job_table) is False
         assert db_table_exists(cursor, budlabor_job_table) is False
-        assert db_table_exists(cursor, budconcept_job_table) is False
+        assert db_table_exists(cursor, budconc_job_table) is False
         assert db_table_exists(cursor, budunit_job_table) is False
 
         # WHEN
@@ -106,7 +106,7 @@ def test_create_job_tables_CreatesTables():
         assert db_table_exists(cursor, budprem_job_table)
         assert db_table_exists(cursor, budares_job_table)
         assert db_table_exists(cursor, budlabor_job_table)
-        assert db_table_exists(cursor, budconcept_job_table)
+        assert db_table_exists(cursor, budconc_job_table)
         assert db_table_exists(cursor, budunit_job_table)
         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
         assert cursor.fetchone()[0] == 11

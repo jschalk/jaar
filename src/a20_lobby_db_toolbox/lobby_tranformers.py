@@ -20,7 +20,7 @@ from src.a20_lobby_db_toolbox.lobby_sqlstrs import (
     create_budprem_metrics_insert_sqlstr,
     create_budreas_metrics_insert_sqlstr,
     create_budlabor_metrics_insert_sqlstr,
-    create_budconcept_metrics_insert_sqlstr,
+    create_budconc_metrics_insert_sqlstr,
     create_budunit_metrics_insert_sqlstr,
 )
 from sqlite3 import Connection as sqlite3_Connection, Cursor as sqlite3_Cursor
@@ -170,14 +170,14 @@ def insert_job_budlabor(
         cursor.execute(insert_sqlstr)
 
 
-def insert_job_budconcept(
+def insert_job_budconc(
     cursor: sqlite3_Cursor, x_objkeysholder: ObjKeysHolder, x_concept: ConceptUnit
 ):
     x_dict = copy_deepcopy(x_concept.__dict__)
     x_dict["concept_way"] = x_concept.get_concept_way()
     x_dict["world_id"] = x_objkeysholder.world_id
     x_dict["owner_name"] = x_objkeysholder.owner_name
-    insert_sqlstr = create_budconcept_metrics_insert_sqlstr(x_dict)
+    insert_sqlstr = create_budconc_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
@@ -198,7 +198,7 @@ def insert_job_obj(cursor: sqlite3_Cursor, world_id: WorldID, job_bud: BudUnit):
         x_objkeysholder.way = x_concept.get_concept_way()
         healerlink = x_concept.healerlink
         laborheir = x_concept._laborheir
-        insert_job_budconcept(cursor, x_objkeysholder, x_concept)
+        insert_job_budconc(cursor, x_objkeysholder, x_concept)
         insert_job_budheal(cursor, x_objkeysholder, healerlink)
         insert_job_budlabor(cursor, x_objkeysholder, laborheir)
         for x_awardheir in x_concept._awardheirs.values():

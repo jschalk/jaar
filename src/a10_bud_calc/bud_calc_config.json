@@ -441,7 +441,7 @@
         "jvalues": {}
     },
     "bud_conceptunit": {
-        "abbreviation": "budconcept",
+        "abbreviation": "budconc",
         "jkeys": {
             "fisc_label": {
                 "class_type": "LabelStr",

@@ -82,8 +82,8 @@ BUD_PRIME_TABLENAMES = {
     f"{bud_concept_reasonunit_str()}_sound_put_raw": "BUDREAS_PUT_RAW",
     f"{bud_concept_laborlink_str()}_sound_put_agg": "BUDLABO_PUT_AGG",
     f"{bud_concept_laborlink_str()}_sound_put_raw": "BUDLABO_PUT_RAW",
-    f"{bud_conceptunit_str()}_sound_put_agg": "BUDCONCEPT_PUT_AGG",
-    f"{bud_conceptunit_str()}_sound_put_raw": "BUDCONCEPT_PUT_RAW",
+    f"{bud_conceptunit_str()}_sound_put_agg": "BUDCONC_PUT_AGG",
+    f"{bud_conceptunit_str()}_sound_put_raw": "BUDCONC_PUT_RAW",
     f"{budunit_str()}_sound_put_agg": "BUDUNIT_PUT_AGG",
     f"{budunit_str()}_sound_put_raw": "BUDUNIT_PUT_RAW",
     f"{bud_acct_membership_str()}_sound_del_agg": "BUDMEMB_DEL_AGG",
@@ -102,8 +102,8 @@ BUD_PRIME_TABLENAMES = {
     f"{bud_concept_reasonunit_str()}_sound_del_raw": "BUDREAS_DEL_RAW",
     f"{bud_concept_laborlink_str()}_sound_del_agg": "BUDLABO_DEL_AGG",
     f"{bud_concept_laborlink_str()}_sound_del_raw": "BUDLABO_DEL_RAW",
-    f"{bud_conceptunit_str()}_sound_del_agg": "BUDCONCEPT_DEL_AGG",
-    f"{bud_conceptunit_str()}_sound_del_raw": "BUDCONCEPT_DEL_RAW",
+    f"{bud_conceptunit_str()}_sound_del_agg": "BUDCONC_DEL_AGG",
+    f"{bud_conceptunit_str()}_sound_del_raw": "BUDCONC_DEL_RAW",
     f"{budunit_str()}_sound_del_agg": "BUDUNIT_DEL_AGG",
     f"{budunit_str()}_sound_del_raw": "BUDUNIT_DEL_RAW",
 }
@@ -119,7 +119,7 @@ def test_create_prime_tablename_ReturnsObj():
     budunit_dimen = budunit_str()
     budacct_dimen = bud_acctunit_str()
     budmemb_dimen = bud_acct_membership_str()
-    budconcept_dimen = bud_conceptunit_str()
+    budconc_dimen = bud_conceptunit_str()
     budawar_dimen = bud_concept_awardlink_str()
     budreas_dimen = bud_concept_reasonunit_str()
     budprem_dimen = bud_concept_reason_premiseunit_str()
@@ -146,10 +146,7 @@ def test_create_prime_tablename_ReturnsObj():
     assert prime_tbl("budunit", "s", agg_str, put_str) == f"{budunit_dimen}_s_put_agg"
     assert prime_tbl("budacct", "s", agg_str, put_str) == f"{budacct_dimen}_s_put_agg"
     assert prime_tbl("budmemb", "s", agg_str, put_str) == f"{budmemb_dimen}_s_put_agg"
-    assert (
-        prime_tbl("budconcept", "s", agg_str, put_str)
-        == f"{budconcept_dimen}_s_put_agg"
-    )
+    assert prime_tbl("budconc", "s", agg_str, put_str) == f"{budconc_dimen}_s_put_agg"
     assert prime_tbl("budawar", "s", agg_str, put_str) == f"{budawar_dimen}_s_put_agg"
     assert prime_tbl("budreas", "s", agg_str, put_str) == f"{budreas_dimen}_s_put_agg"
     assert prime_tbl("budprem", "s", agg_str, put_str) == f"{budprem_dimen}_s_put_agg"
