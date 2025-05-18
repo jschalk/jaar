@@ -508,6 +508,7 @@ def test_check_dataframe_column_names_ScenarioLessThanTwoColumns():
 def test_update_all_face_name_event_int_columns_Scenario0_UpdatesValidSheet(
     env_dir_setup_cleanup,
 ):
+    # sourcery skip: no-loop-in-tests
     # ESTABLISH
     excel_path = create_path(creed_fisc_mstr_dir(), "test_excel.xlsx")
     set_dir(creed_fisc_mstr_dir())

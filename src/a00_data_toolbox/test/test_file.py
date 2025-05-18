@@ -382,7 +382,7 @@ def test_get_integer_filenames_ReturnsCoorectObjIfDirectoryDoesNotExist(
     assert files_dict == set()
 
 
-def test_get_integer_filenames_GrabsFileNamesWithIntegers_v0(env_dir_setup_cleanup):
+def test_get_integer_filenames_GrabsFileNamesWith_Integers_v0(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_module_temp_dir()
     x1_filename = "1.json"
@@ -399,7 +399,7 @@ def test_get_integer_filenames_GrabsFileNamesWithIntegers_v0(env_dir_setup_clean
     assert files_dict == {1, 2}
 
 
-def test_get_integer_filenames_GrabsFileNamesWithIntegersWithCorrectExtension(
+def test_get_integer_filenames_GrabsFileNamesWith_IntegersWithCorrectExtension(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -428,7 +428,7 @@ def test_get_integer_filenames_GrabsFileNamesWithIntegersWithCorrectExtension(
     assert get_integer_filenames(env_dir, None, "txt") == {1, 3}
 
 
-def test_get_integer_filenames_GrabsFileNamesWithIntegersGreaterThan_min_integer(
+def test_get_integer_filenames_GrabsFileNamesWith_IntegersGreaterThan_min_integer(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

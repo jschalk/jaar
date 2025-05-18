@@ -218,7 +218,7 @@ def test_insert_creed_csv_ChangesDBState_CanCreateTable(
         os_remove(zia_csv_filepath)
 
 
-def test_create_creed_table_from_csv_DoesNothinpackableExists(
+def test_create_creed_table_from_csv_NopackableExists(
     setup_database_and_csv: tuple[sqlite3_Connection, str, str],
 ):
     # ESTABLISH

@@ -141,8 +141,8 @@ class PremiseStatusFinderException(Exception):
 
 @dataclass
 class PremiseStatusFinder:
-    popen: float  # within 0 and pdivisor, can be more than pnigh
-    pnigh: float  # within 0 and pdivisor, can be less than popen
+    popen: float  # between 0 and pdivisor, can be more than pnigh
+    pnigh: float  # between 0 and pdivisor, can be less than popen
     pdivisor: float  # greater than zero
     fopen_full: float  # less than fnigh
     fnigh_full: float  # less than fnigh

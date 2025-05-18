@@ -246,7 +246,7 @@ def test_acctunits_get_from_dict_ReturnsObjWith_bridge():
     assert x_acctunits_objs.get(yao_str).bridge == slash_str
 
 
-def test_acctunits_get_from_json_ReturnsObj_SimpleExampleWithIncompleteData():
+def test_acctunits_get_from_json_ReturnsObj_SimpleExampleWith_IncompleteData():
     # ESTABLISH
     yao_str = "Yao"
     yao_credit_belief = 13
