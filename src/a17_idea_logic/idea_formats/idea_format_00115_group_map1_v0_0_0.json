@@ -1,0 +1,32 @@
+{
+    "attributes": {
+        "acct_name": {
+            "otx_key": true
+        },
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "fisc_label": {
+            "otx_key": true
+        },
+        "inx_title": {
+            "otx_key": false
+        },
+        "otx_title": {
+            "otx_key": true
+        },
+        "owner_name": {
+            "otx_key": true
+        }
+    },
+    "idea_number": "br00115",
+    "dimens": [
+        "pidgin_title",
+        "bud_acctunit",
+        "budunit",
+        "fiscunit"
+    ]
+}

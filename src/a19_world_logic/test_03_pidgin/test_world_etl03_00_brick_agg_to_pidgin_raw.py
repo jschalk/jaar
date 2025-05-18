@@ -14,11 +14,11 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_title_str,
     unknown_term_str,
 )
-from src.a17_creed_logic._utils.str_a17 import brick_agg_str
-from src.a17_creed_logic.creed_db_tool import (
+from src.a17_idea_logic._utils.str_a17 import brick_agg_str
+from src.a17_idea_logic.idea_db_tool import (
     upsert_sheet,
     sheet_exists,
-    _get_pidgen_creed_format_filenames,
+    _get_pidgen_idea_format_filenames,
 )
 from src.a18_etl_toolbox.tran_path import create_brick_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
@@ -31,13 +31,13 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_get_pidgen_creed_format_filenames_ReturnsObj():
+def test_get_pidgen_idea_format_filenames_ReturnsObj():
     # ESTABLISH / WHEN
-    pidgen_creed_filenames = _get_pidgen_creed_format_filenames()
+    pidgen_idea_filenames = _get_pidgen_idea_format_filenames()
 
     # THEN
-    print(f"pbranch examples for {pidgen_creed_filenames=}")
-    assert pidgen_creed_filenames == {
+    print(f"pbranch examples for {pidgen_idea_filenames=}")
+    assert pidgen_idea_filenames == {
         "br00042.xlsx",
         "br00043.xlsx",
         "br00044.xlsx",
@@ -245,7 +245,7 @@ def test_WorldUnit_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(
     assert gen_name_df.to_csv(index=False) == e1_name_df.to_csv(index=False)
 
     label_file_columns = [
-        "creed_number",
+        "idea_number",
         event_int_str(),
         face_name_str(),
         otx_label_str(),
@@ -268,7 +268,7 @@ def test_WorldUnit_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(
     assert gen_label_df.to_csv(index=False) == e1_label_df.to_csv(index=False)
 
     way_file_columns = [
-        "creed_number",
+        "idea_number",
         event_int_str(),
         face_name_str(),
         otx_way_str(),

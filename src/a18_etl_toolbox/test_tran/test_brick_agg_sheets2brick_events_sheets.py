@@ -6,8 +6,8 @@ from src.a00_data_toolbox.db_toolbox import (
 from src.a02_finance_logic._utils.strs_a02 import fisc_label_str
 from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str
 from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_label_str
-from src.a17_creed_logic._utils.str_a17 import creed_number_str, brick_agg_str
-from src.a17_creed_logic.creed_db_tool import create_creed_sorted_table
+from src.a17_idea_logic._utils.str_a17 import idea_number_str, brick_agg_str
+from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
 from src.a18_etl_toolbox.transformers import (
     etl_brick_raw_tables_to_events_brick_agg_table,
     etl_events_brick_agg_table_to_events_brick_valid_table,
@@ -38,7 +38,7 @@ def test_etl_brick_agg_db_to_events_brick_agg_db_PopulatesTables_Scenario0():
     ]
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_creed_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)
+        create_idea_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)
         insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
   {event_int_str()}
 , {face_name_str()}
@@ -67,7 +67,7 @@ VALUES
         assert db_table_exists(cursor, brick_events_tablename)
         brick_events_table_cols = set(get_table_columns(cursor, brick_events_tablename))
         assert len(brick_events_table_cols) == 4
-        assert creed_number_str() in brick_events_table_cols
+        assert idea_number_str() in brick_events_table_cols
         assert face_name_str() in brick_events_table_cols
         assert event_int_str() in brick_events_table_cols
         assert "error_message" in brick_events_table_cols
@@ -112,7 +112,7 @@ def test_etl_brick_agg_db_to_events_brick_agg_db_PopulatesTables_Scenario1():
     ]
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_creed_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)
+        create_idea_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)
         insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
   {event_int_str()}
 , {face_name_str()}
@@ -172,10 +172,10 @@ def test_etl_events_brick_agg_table_to_events_brick_valid_table_PopulatesTables_
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         agg_events_tablename = "events_brick_agg"
-        agg_events_columns = ["creed_number", "event_int", "face_name", "error_message"]
-        create_creed_sorted_table(cursor, agg_events_tablename, agg_events_columns)
+        agg_events_columns = ["idea_number", "event_int", "face_name", "error_message"]
+        create_idea_sorted_table(cursor, agg_events_tablename, agg_events_columns)
         insert_into_clause = f"""INSERT INTO {agg_events_tablename} (
-  {creed_number_str()}
+  {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
 , error_message
@@ -228,7 +228,7 @@ def test_etl_events_brick_agg_db_to_event_dict_ReturnsObj_Scenario0():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         agg_events_tablename = "events_brick_agg"
-        create_creed_sorted_table(cursor, agg_events_tablename, agg_columns)
+        create_idea_sorted_table(cursor, agg_events_tablename, agg_columns)
         insert_into_clause = f"""
 INSERT INTO {agg_events_tablename} ({event_int_str()}, {face_name_str()}, error_message)
 VALUES     

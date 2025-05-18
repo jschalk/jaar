@@ -4,12 +4,12 @@ from src.a00_data_toolbox.db_toolbox import (
     get_table_columns,
 )
 from src.a16_pidgin_logic.pidgin_config import get_pidgin_dimens
-from src.a17_creed_logic._utils.str_a17 import creed_category_str, creed_number_str
-from src.a17_creed_logic.creed_config import (
-    get_creed_sqlite_types,
-    get_creed_config_dict,
+from src.a17_idea_logic._utils.str_a17 import idea_category_str, idea_number_str
+from src.a17_idea_logic.idea_config import (
+    get_idea_sqlite_types,
+    get_idea_config_dict,
 )
-from src.a17_creed_logic.creed_db_tool import get_default_sorted_list
+from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
 from src.a18_etl_toolbox.tran_sqlstrs import (
     get_dimen_abbv7,
     get_pidgin_prime_create_table_sqlstrs,
@@ -24,21 +24,21 @@ def test_get_pidgin_prime_create_table_sqlstrs_ReturnsObj():
     create_table_sqlstrs = get_pidgin_prime_create_table_sqlstrs()
 
     # THEN
-    creed_config = get_creed_config_dict()
-    creed_config = {
+    idea_config = get_idea_config_dict()
+    idea_config = {
         x_dimen: dimen_config
-        for x_dimen, dimen_config in creed_config.items()
-        if dimen_config.get(creed_category_str()) == "pidgin"
+        for x_dimen, dimen_config in idea_config.items()
+        if dimen_config.get(idea_category_str()) == "pidgin"
     }
-    sqlite_types = get_creed_sqlite_types()
-    for x_dimen in creed_config:
+    sqlite_types = get_idea_sqlite_types()
+    for x_dimen in idea_config:
         # print(f"{x_dimen} checking...")
-        x_config = creed_config.get(x_dimen)
+        x_config = idea_config.get(x_dimen)
 
         raw_table = f"{x_dimen}_raw"
         raw_cols = set(x_config.get("jkeys").keys())
         raw_cols.update(set(x_config.get("jvalues").keys()))
-        raw_cols.add("creed_number")
+        raw_cols.add("idea_number")
         raw_cols.add("error_message")
         raw_cols = get_default_sorted_list(raw_cols)
         ex_raw_sqlstr = get_create_table_sqlstr(raw_table, raw_cols, sqlite_types)
@@ -126,14 +126,14 @@ def test_create_pidgin_prime_tables_CreatesPidginPrimeTables():
         assert "error_message" not in pidwayy_agg_columns
         assert "error_message" in pidtitl_raw_columns
         assert "error_message" not in pidtitl_agg_columns
-        assert creed_number_str() in pidname_raw_columns
-        assert creed_number_str() not in pidname_agg_columns
-        assert creed_number_str() in pidlabe_raw_columns
-        assert creed_number_str() not in pidlabe_agg_columns
-        assert creed_number_str() in pidwayy_raw_columns
-        assert creed_number_str() not in pidwayy_agg_columns
-        assert creed_number_str() in pidtitl_raw_columns
-        assert creed_number_str() not in pidtitl_agg_columns
+        assert idea_number_str() in pidname_raw_columns
+        assert idea_number_str() not in pidname_agg_columns
+        assert idea_number_str() in pidlabe_raw_columns
+        assert idea_number_str() not in pidlabe_agg_columns
+        assert idea_number_str() in pidwayy_raw_columns
+        assert idea_number_str() not in pidwayy_agg_columns
+        assert idea_number_str() in pidtitl_raw_columns
+        assert idea_number_str() not in pidtitl_agg_columns
         assert len(pidname_raw_columns) == 9
         assert len(pidname_agg_columns) == 7
         assert len(pidlabe_raw_columns) == 9

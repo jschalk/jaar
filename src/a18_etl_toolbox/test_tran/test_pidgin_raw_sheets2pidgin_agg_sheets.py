@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a17_creed_logic.creed_db_tool import upsert_sheet, sheet_exists
+from src.a17_idea_logic.idea_db_tool import upsert_sheet, sheet_exists
 from src.a18_etl_toolbox.tran_path import create_brick_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
 from src.a18_etl_toolbox.transformers import (
@@ -59,7 +59,7 @@ def test_etl_pidgin_name_raw_to_name_agg_Scenario0_CreatesEmptyFileBecauseOfConf
     pandas_testing_assert_frame_equal(gen_name_agg_df, e1_name_agg_df)
 
 
-def test_etl_pidgin_name_raw_to_name_agg_Scenario1_CreatesFileFromSingleCreed(
+def test_etl_pidgin_name_raw_to_name_agg_Scenario1_CreatesFileFromSingleIdea(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -104,7 +104,7 @@ def test_etl_pidgin_name_raw_to_name_agg_Scenario1_CreatesFileFromSingleCreed(
     pandas_testing_assert_frame_equal(gen_name_agg_df, e1_name_agg_df)
 
 
-def test_etl_pidgin_title_raw_to_title_agg_Scenario0_CreatesFileFromSingleCreed(
+def test_etl_pidgin_title_raw_to_title_agg_Scenario0_CreatesFileFromSingleIdea(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -148,7 +148,7 @@ def test_etl_pidgin_title_raw_to_title_agg_Scenario0_CreatesFileFromSingleCreed(
     pandas_testing_assert_frame_equal(gen_title_agg_df, e1_title_agg_df)
 
 
-def test_etl_pidgin_way_raw_to_way_agg_Scenario0_CreatesFileFromSingleCreed(
+def test_etl_pidgin_way_raw_to_way_agg_Scenario0_CreatesFileFromSingleIdea(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -192,7 +192,7 @@ def test_etl_pidgin_way_raw_to_way_agg_Scenario0_CreatesFileFromSingleCreed(
     pandas_testing_assert_frame_equal(gen_way_agg_df, e1_way_agg_df)
 
 
-def test_etl_pidgin_label_raw_to_label_agg_Scenario0_CreatesFileFromSingleCreed(
+def test_etl_pidgin_label_raw_to_label_agg_Scenario0_CreatesFileFromSingleIdea(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

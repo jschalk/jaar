@@ -95,7 +95,7 @@ class FiscPrimeColumnsRef:
         self.week_agg_columns = ["fisc_label", "weekday_order", "weekday_label"]
         self.offi_agg_columns = ["fisc_label", "offi_time"]
 
-        _front_cols = ["creed_number", "event_int", "face_name"]
+        _front_cols = ["idea_number", "event_int", "face_name"]
         _back_cols = ["error_message"]
         self.unit_agg_csv_header = "fisc_label,timeline_label,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,bridge,job_listen_rotations"
         self.deal_agg_csv_header = "fisc_label,owner_name,deal_time,quota,celldepth"
@@ -111,14 +111,14 @@ class FiscPrimeColumnsRef:
         self.mont_raw_columns = [*_front_cols, *self.mont_agg_columns, *_back_cols]
         self.week_raw_columns = [*_front_cols, *self.week_agg_columns, *_back_cols]
         self.offi_raw_columns = [*_front_cols, *self.offi_agg_columns, *_back_cols]
-        self.unit_raw_csv_header = """creed_number,event_int,face_name,fisc_label,timeline_label,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,bridge,job_listen_rotations,error_message"""
-        self.deal_raw_csv_header = """creed_number,event_int,face_name,fisc_label,owner_name,deal_time,quota,celldepth,error_message"""
-        self.cash_raw_csv_header = """creed_number,event_int,face_name,fisc_label,owner_name,acct_name,tran_time,amount,error_message"""
-        self.hour_raw_csv_header = """creed_number,event_int,face_name,fisc_label,cumlative_minute,hour_label,error_message"""
-        self.mont_raw_csv_header = """creed_number,event_int,face_name,fisc_label,cumlative_day,month_label,error_message"""
-        self.week_raw_csv_header = """creed_number,event_int,face_name,fisc_label,weekday_order,weekday_label,error_message"""
+        self.unit_raw_csv_header = """idea_number,event_int,face_name,fisc_label,timeline_label,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,bridge,job_listen_rotations,error_message"""
+        self.deal_raw_csv_header = """idea_number,event_int,face_name,fisc_label,owner_name,deal_time,quota,celldepth,error_message"""
+        self.cash_raw_csv_header = """idea_number,event_int,face_name,fisc_label,owner_name,acct_name,tran_time,amount,error_message"""
+        self.hour_raw_csv_header = """idea_number,event_int,face_name,fisc_label,cumlative_minute,hour_label,error_message"""
+        self.mont_raw_csv_header = """idea_number,event_int,face_name,fisc_label,cumlative_day,month_label,error_message"""
+        self.week_raw_csv_header = """idea_number,event_int,face_name,fisc_label,weekday_order,weekday_label,error_message"""
         self.offi_raw_csv_header = (
-            """creed_number,event_int,face_name,fisc_label,offi_time,error_message"""
+            """idea_number,event_int,face_name,fisc_label,offi_time,error_message"""
         )
         self.unit_agg_empty_csv = f"{self.unit_agg_csv_header}\n"
         self.deal_agg_empty_csv = f"{self.deal_agg_csv_header}\n"

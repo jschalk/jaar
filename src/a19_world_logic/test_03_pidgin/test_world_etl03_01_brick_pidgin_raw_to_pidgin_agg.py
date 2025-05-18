@@ -1,4 +1,4 @@
-from src.a17_creed_logic.creed_db_tool import upsert_sheet, sheet_exists
+from src.a17_idea_logic.idea_db_tool import upsert_sheet, sheet_exists
 from src.a18_etl_toolbox.tran_path import create_brick_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
 from src.a19_world_logic.world import worldunit_shop

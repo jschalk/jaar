@@ -59,9 +59,9 @@ VALUES
     # THEN
     assert os_path_exists(a23_event_time_p)
     assert os_path_exists(a45_event_time_p)
-    # creed_types = get_creed_sqlite_types()
-    # a23_event_time_csv = open_csv_with_types(a23_event_time_p, creed_types)
-    # a45_event_time_csv = open_csv_with_types(a45_event_time_p, creed_types)
+    # idea_types = get_idea_sqlite_types()
+    # a23_event_time_csv = open_csv_with_types(a23_event_time_p, idea_types)
+    # a45_event_time_csv = open_csv_with_types(a45_event_time_p, idea_types)
     a23_event_time_csv = open_file(a23_event_time_p)
     a45_event_time_csv = open_file(a45_event_time_p)
     #         expected_a23_event_time_csv = f"""{event_int_str()}, {fisc_label_str()}, {owner_name_str()}, {deal_time_str()}

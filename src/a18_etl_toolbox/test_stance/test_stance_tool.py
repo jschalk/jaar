@@ -2,9 +2,9 @@ from src.a00_data_toolbox.file_toolbox import create_path, save_file, open_file
 from src.a06_bud_logic.bud import budunit_shop
 from src.a12_hub_tools.hub_path import create_fisc_json_path, create_gut_path
 from src.a15_fisc_logic.fisc import fiscunit_shop
-from src.a17_creed_logic.creed_db_tool import get_sheet_names
-from src.a17_creed_logic.creed_csv_tool import (
-    create_init_stance_creed_csv_strs,
+from src.a17_idea_logic.idea_db_tool import get_sheet_names
+from src.a17_idea_logic.idea_csv_tool import (
+    create_init_stance_idea_csv_strs,
     add_budunit_to_stance_csv_strs,
     add_fiscunit_to_stance_csv_strs,
 )
@@ -31,7 +31,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario0_NoFiscUnits(
     gen_stance_csv_strs = collect_stance_csv_strs(fisc_mstr_dir)
 
     # THEN
-    expected_stance_csv_strs = create_init_stance_creed_csv_strs()
+    expected_stance_csv_strs = create_init_stance_idea_csv_strs()
     assert gen_stance_csv_strs == expected_stance_csv_strs
 
 
@@ -49,7 +49,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario1_SingleFiscUnit_NoBudUnits(
     gen_stance_csv_strs = collect_stance_csv_strs(fisc_mstr_dir)
 
     # THEN
-    expected_stance_csv_strs = create_init_stance_creed_csv_strs()
+    expected_stance_csv_strs = create_init_stance_idea_csv_strs()
     add_fiscunit_to_stance_csv_strs(a23_fisc, expected_stance_csv_strs, ",")
     assert gen_stance_csv_strs == expected_stance_csv_strs
 
@@ -74,7 +74,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BudUnits(
     gen_stance_csv_strs = collect_stance_csv_strs(fisc_mstr_dir)
 
     # THEN
-    expected_stance_csv_strs = create_init_stance_creed_csv_strs()
+    expected_stance_csv_strs = create_init_stance_idea_csv_strs()
     add_fiscunit_to_stance_csv_strs(a23_fisc, expected_stance_csv_strs, ",")
     add_budunit_to_stance_csv_strs(bob_gut, expected_stance_csv_strs, ",")
     assert gen_stance_csv_strs == expected_stance_csv_strs
@@ -94,5 +94,5 @@ def test_create_stance0001_file_CreatesFile_Scenario0_NoFiscUnits(
     # THEN
     assert os_path_exists(stance0001_path)
     bob_stance0001_sheetnames = get_sheet_names(stance0001_path)
-    stance_csv_strs = create_init_stance_creed_csv_strs()
+    stance_csv_strs = create_init_stance_idea_csv_strs()
     assert set(bob_stance0001_sheetnames) == set(stance_csv_strs.keys())

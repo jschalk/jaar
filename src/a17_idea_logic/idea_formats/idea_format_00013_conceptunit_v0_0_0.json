@@ -1,0 +1,31 @@
+{
+    "attributes": {
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "fisc_label": {
+            "otx_key": true
+        },
+        "concept_way": {
+            "otx_key": true
+        },
+        "mass": {
+            "otx_key": false
+        },
+        "owner_name": {
+            "otx_key": true
+        },
+        "pledge": {
+            "otx_key": false
+        }
+    },
+    "idea_number": "br00013",
+    "dimens": [
+        "fiscunit",
+        "budunit",
+        "bud_conceptunit"
+    ]
+}

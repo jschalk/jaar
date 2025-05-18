@@ -59,31 +59,31 @@ from src.a16_pidgin_logic.pidgin_config import (
     get_quick_pidgens_column_ref,
     get_pidgin_args_class_types,
 )
-from src.a17_creed_logic.creed_config import (
-    get_creed_numbers,
-    get_creed_format_filename,
-    get_creed_dimen_ref,
-    get_creed_config_dict,
-    get_creed_sqlite_types,
-    get_creedref_from_file,
+from src.a17_idea_logic.idea_config import (
+    get_idea_numbers,
+    get_idea_format_filename,
+    get_idea_dimen_ref,
+    get_idea_config_dict,
+    get_idea_sqlite_types,
+    get_idearef_from_file,
 )
-from src.a17_creed_logic.creed import get_creedref_obj
-from src.a17_creed_logic.creed_db_tool import (
+from src.a17_idea_logic.idea import get_idearef_obj
+from src.a17_idea_logic.idea_db_tool import (
     get_default_sorted_list,
-    create_creed_sorted_table,
+    create_idea_sorted_table,
     upsert_sheet,
     split_excel_into_dirs,
     sheet_exists,
-    _get_pidgen_creed_format_filenames,
+    _get_pidgen_idea_format_filenames,
     get_brick_raw_grouping_with_all_values_equal_df,
     get_grouping_with_all_values_equal_sql_query,
     translate_all_columns_dataframe,
-    insert_creed_csv,
+    insert_idea_csv,
     save_table_to_csv,
     get_ordered_csv,
-    get_creed_into_dimen_raw_query,
+    get_idea_into_dimen_raw_query,
 )
-from src.a17_creed_logic.pidgin_toolbox import init_pidginunit_from_dir
+from src.a17_idea_logic.pidgin_toolbox import init_pidginunit_from_dir
 from src.a18_etl_toolbox.tran_path import create_brick_pidgin_path
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
@@ -111,7 +111,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     get_bud_put_update_inconsist_error_message_sqlstrs,
     get_bud_insert_put_agg_from_raw_sqlstrs,
     get_bud_insert_del_agg_from_raw_sqlstrs,
-    get_creed_slabeleble_put_dimens,
+    get_idea_slabeleble_put_dimens,
     CREATE_FISC_EVENT_TIME_AGG_SQLSTR,
     INSERT_FISC_EVENT_TIME_AGG_SQLSTR,
     UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR,
@@ -119,7 +119,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     INSERT_FISC_OTE1_AGG_SQLSTR,
 )
 from src.a18_etl_toolbox.db_obj_tool import get_fisc_dict_from_db
-from src.a18_etl_toolbox.creed_collector import get_all_creed_dataframes, CreedFileRef
+from src.a18_etl_toolbox.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from src.a18_etl_toolbox.pidgin_agg import (
     pidginheartbook_shop,
     PidginHeartRow,
@@ -204,85 +204,85 @@ def get_inx_obj(class_type, x_row) -> str:
 
 
 def etl_mud_dfs_to_brick_raw_tables(conn: sqlite3_Connection, mud_dir: str):
-    for ref in get_all_creed_dataframes(mud_dir):
+    for ref in get_all_idea_dataframes(mud_dir):
         x_file_path = create_path(ref.file_dir, ref.filename)
         df = pandas_read_excel(x_file_path, ref.sheet_name)
-        creed_sorting_columns = get_default_sorted_list(set(df.columns))
-        df = df.reindex(columns=creed_sorting_columns)
-        df.sort_values(creed_sorting_columns, inplace=True)
+        idea_sorting_columns = get_default_sorted_list(set(df.columns))
+        df = df.reindex(columns=idea_sorting_columns)
+        df.sort_values(idea_sorting_columns, inplace=True)
         df.reset_index(inplace=True)
         df.drop(columns=["index"], inplace=True)
         df.insert(0, "file_dir", ref.file_dir)
         df.insert(1, "filename", ref.filename)
         df.insert(2, "sheet_name", ref.sheet_name)
-        x_tablename = f"{ref.creed_number}_brick_raw"
+        x_tablename = f"{ref.idea_number}_brick_raw"
         df.to_sql(x_tablename, conn, index=False, if_exists="append")
 
 
 def etl_brick_raw_db_to_brick_raw_df(conn: sqlite3_Connection, brick_dir: str):
-    brick_raw_dict = {f"{creed}_brick_raw": creed for creed in get_creed_numbers()}
+    brick_raw_dict = {f"{idea}_brick_raw": idea for idea in get_idea_numbers()}
     brick_raw_tables = set(brick_raw_dict.keys())
     for table_name in get_db_tables(conn):
         if table_name in brick_raw_tables:
-            creed_number = brick_raw_dict.get(table_name)
-            brick_path = create_path(brick_dir, f"{creed_number}.xlsx")
+            idea_number = brick_raw_dict.get(table_name)
+            brick_path = create_path(brick_dir, f"{idea_number}.xlsx")
             sqlstr = f"SELECT * FROM {table_name}"
-            brick_raw_creed_df = pandas_read_sql_query(sqlstr, conn)
-            upsert_sheet(brick_path, "brick_raw", brick_raw_creed_df)
+            brick_raw_idea_df = pandas_read_sql_query(sqlstr, conn)
+            upsert_sheet(brick_path, "brick_raw", brick_raw_idea_df)
 
 
-def get_existing_excel_creed_file_refs(x_dir: str) -> list[CreedFileRef]:
-    existing_excel_creed_filepaths = []
-    for creed_number in sorted(get_creed_numbers()):
-        creed_filename = f"{creed_number}.xlsx"
-        x_creed_path = create_path(x_dir, creed_filename)
-        if os_path_exists(x_creed_path):
-            x_fileref = CreedFileRef(
-                file_dir=x_dir, filename=creed_filename, creed_number=creed_number
+def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
+    existing_excel_idea_filepaths = []
+    for idea_number in sorted(get_idea_numbers()):
+        idea_filename = f"{idea_number}.xlsx"
+        x_idea_path = create_path(x_dir, idea_filename)
+        if os_path_exists(x_idea_path):
+            x_fileref = IdeaFileRef(
+                file_dir=x_dir, filename=idea_filename, idea_number=idea_number
             )
-            existing_excel_creed_filepaths.append(x_fileref)
-    return existing_excel_creed_filepaths
+            existing_excel_idea_filepaths.append(x_fileref)
+    return existing_excel_idea_filepaths
 
 
 def etl_brick_raw_db_to_brick_agg_df(brick_dir):
-    for br_ref in get_existing_excel_creed_file_refs(brick_dir):
-        brick_creed_path = create_path(br_ref.file_dir, br_ref.filename)
-        brick_raw_df = pandas_read_excel(brick_creed_path, "brick_raw")
-        otx_df = create_df_with_groupby_creed_columns(brick_raw_df, br_ref.creed_number)
-        upsert_sheet(brick_creed_path, "brick_agg", otx_df)
+    for br_ref in get_existing_excel_idea_file_refs(brick_dir):
+        brick_idea_path = create_path(br_ref.file_dir, br_ref.filename)
+        brick_raw_df = pandas_read_excel(brick_idea_path, "brick_raw")
+        otx_df = create_df_with_groupby_idea_columns(brick_raw_df, br_ref.idea_number)
+        upsert_sheet(brick_idea_path, "brick_agg", otx_df)
 
 
 def etl_brick_agg_tables_to_brick_agg_dfs(conn: sqlite3_Connection, brick_dir: str):
-    brick_agg_dict = {f"{creed}_brick_agg": creed for creed in get_creed_numbers()}
+    brick_agg_dict = {f"{idea}_brick_agg": idea for idea in get_idea_numbers()}
     brick_agg_tables = set(brick_agg_dict.keys())
     for table_name in get_db_tables(conn):
         if table_name in brick_agg_tables:
-            creed_number = brick_agg_dict.get(table_name)
-            brick_path = create_path(brick_dir, f"{creed_number}.xlsx")
+            idea_number = brick_agg_dict.get(table_name)
+            brick_path = create_path(brick_dir, f"{idea_number}.xlsx")
             sqlstr = f"SELECT * FROM {table_name}"
-            brick_agg_creed_df = pandas_read_sql_query(sqlstr, conn)
-            upsert_sheet(brick_path, "brick_agg", brick_agg_creed_df)
+            brick_agg_idea_df = pandas_read_sql_query(sqlstr, conn)
+            upsert_sheet(brick_path, "brick_agg", brick_agg_idea_df)
 
 
 def etl_brick_raw_tables_to_brick_agg_tables(conn_or_cursor: sqlite3_Connection):
-    brick_raw_dict = {f"{creed}_brick_raw": creed for creed in get_creed_numbers()}
+    brick_raw_dict = {f"{idea}_brick_raw": idea for idea in get_idea_numbers()}
     brick_raw_tables = set(brick_raw_dict.keys())
     for x_tablename in get_db_tables(conn_or_cursor):
         if x_tablename in brick_raw_tables:
-            creed_number = brick_raw_dict.get(x_tablename)
-            creed_filename = get_creed_format_filename(creed_number)
-            creedref = get_creedref_obj(creed_filename)
-            key_columns_set = set(creedref.get_otx_keys_list())
-            creed_columns_set = set(creedref._attributes.keys())
-            value_columns_set = creed_columns_set.difference(key_columns_set)
-            creed_columns = get_default_sorted_list(creed_columns_set)
-            key_columns_list = get_default_sorted_list(key_columns_set, creed_columns)
+            idea_number = brick_raw_dict.get(x_tablename)
+            idea_filename = get_idea_format_filename(idea_number)
+            idearef = get_idearef_obj(idea_filename)
+            key_columns_set = set(idearef.get_otx_keys_list())
+            idea_columns_set = set(idearef._attributes.keys())
+            value_columns_set = idea_columns_set.difference(key_columns_set)
+            idea_columns = get_default_sorted_list(idea_columns_set)
+            key_columns_list = get_default_sorted_list(key_columns_set, idea_columns)
             value_columns_list = get_default_sorted_list(
-                value_columns_set, creed_columns
+                value_columns_set, idea_columns
             )
-            agg_tablename = f"{creed_number}_brick_agg"
+            agg_tablename = f"{idea_number}_brick_agg"
             if not db_table_exists(conn_or_cursor, agg_tablename):
-                create_creed_sorted_table(conn_or_cursor, agg_tablename, creed_columns)
+                create_idea_sorted_table(conn_or_cursor, agg_tablename, idea_columns)
             select_sqlstr = get_grouping_with_all_values_equal_sql_query(
                 x_table=x_tablename,
                 groupby_columns=key_columns_list,
@@ -291,7 +291,7 @@ def etl_brick_raw_tables_to_brick_agg_tables(conn_or_cursor: sqlite3_Connection)
             insert_clause_sqlstr = create_insert_into_clause_str(
                 conn_or_cursor,
                 agg_tablename,
-                columns_set=set(creedref._attributes.keys()),
+                columns_set=set(idearef._attributes.keys()),
             )
             insert_from_select_sqlstr = f"""
 {insert_clause_sqlstr}
@@ -300,19 +300,19 @@ def etl_brick_raw_tables_to_brick_agg_tables(conn_or_cursor: sqlite3_Connection)
 
 
 def etl_brick_agg_tables_to_brick_valid_tables(conn_or_cursor: sqlite3_Connection):
-    creed_sqlite_types = get_creed_sqlite_types()
-    brick_agg_dict = {f"{creed}_brick_agg": creed for creed in get_creed_numbers()}
+    idea_sqlite_types = get_idea_sqlite_types()
+    brick_agg_dict = {f"{idea}_brick_agg": idea for idea in get_idea_numbers()}
     brick_agg_tables = set(brick_agg_dict.keys())
     for x_tablename in get_db_tables(conn_or_cursor):
         if x_tablename in brick_agg_tables:
-            creed_number = brick_agg_dict.get(x_tablename)
-            valid_tablename = f"{creed_number}_brick_valid"
+            idea_number = brick_agg_dict.get(x_tablename)
+            valid_tablename = f"{idea_number}_brick_valid"
             agg_columns = get_table_columns(conn_or_cursor, x_tablename)
             create_table_from_columns(
                 conn_or_cursor,
                 tablename=valid_tablename,
                 columns_list=agg_columns,
-                column_types=creed_sqlite_types,
+                column_types=idea_sqlite_types,
             )
             agg_cols_dict = {agg_col: None for agg_col in agg_columns}
             insert_clause_str = create_insert_into_clause_str(
@@ -332,51 +332,51 @@ def etl_brick_agg_tables_to_brick_valid_tables(conn_or_cursor: sqlite3_Connectio
             conn_or_cursor.execute(insert_select_into_sqlstr)
 
 
-def create_df_with_groupby_creed_columns(
-    brick_raw_df: DataFrame, creed_number: str
+def create_df_with_groupby_idea_columns(
+    brick_raw_df: DataFrame, idea_number: str
 ) -> DataFrame:
-    creed_filename = get_creed_format_filename(creed_number)
-    creedref = get_creedref_obj(creed_filename)
-    required_columns = creedref.get_otx_keys_list()
-    creed_columns_set = set(creedref._attributes.keys())
-    creed_columns_list = get_default_sorted_list(creed_columns_set)
-    brick_raw_df = brick_raw_df[creed_columns_list]
+    idea_filename = get_idea_format_filename(idea_number)
+    idearef = get_idearef_obj(idea_filename)
+    required_columns = idearef.get_otx_keys_list()
+    idea_columns_set = set(idearef._attributes.keys())
+    idea_columns_list = get_default_sorted_list(idea_columns_set)
+    brick_raw_df = brick_raw_df[idea_columns_list]
     return get_brick_raw_grouping_with_all_values_equal_df(
-        brick_raw_df, required_columns, creed_number
+        brick_raw_df, required_columns, idea_number
     )
 
 
-def etl_brick_agg_non_pidgin_creeds_to_brick_valid(
+def etl_brick_agg_non_pidgin_ideas_to_brick_valid(
     brick_dir: str, legitimate_events: set[EventInt]
 ):
-    """create brick_legit sheet with each creed's data that is of a legitimate event"""
-    for br_ref in get_existing_excel_creed_file_refs(brick_dir):
-        brick_creed_path = create_path(br_ref.file_dir, br_ref.filename)
-        brick_agg = pandas_read_excel(brick_creed_path, "brick_agg")
+    """create brick_legit sheet with each idea's data that is of a legitimate event"""
+    for br_ref in get_existing_excel_idea_file_refs(brick_dir):
+        brick_idea_path = create_path(br_ref.file_dir, br_ref.filename)
+        brick_agg = pandas_read_excel(brick_idea_path, "brick_agg")
         brick_valid_df = brick_agg[brick_agg["event_int"].isin(legitimate_events)]
-        upsert_sheet(brick_creed_path, "brick_valid", brick_valid_df)
+        upsert_sheet(brick_idea_path, "brick_valid", brick_valid_df)
 
 
 def etl_brick_raw_tables_to_events_brick_agg_table(conn_or_cursor: sqlite3_Cursor):
     brick_events_tablename = "events_brick_agg"
     if not db_table_exists(conn_or_cursor, brick_events_tablename):
         brick_events_columns = [
-            "creed_number",
+            "idea_number",
             "face_name",
             "event_int",
             "error_message",
         ]
-        create_creed_sorted_table(
+        create_idea_sorted_table(
             conn_or_cursor, brick_events_tablename, brick_events_columns
         )
 
-    brick_agg_tables = {f"{creed}_brick_agg": creed for creed in get_creed_numbers()}
+    brick_agg_tables = {f"{idea}_brick_agg": idea for idea in get_idea_numbers()}
     for agg_tablename in get_db_tables(conn_or_cursor):
         if agg_tablename in brick_agg_tables:
-            creed_number = brick_agg_tables.get(agg_tablename)
+            idea_number = brick_agg_tables.get(agg_tablename)
             insert_from_select_sqlstr = f"""
-INSERT INTO {brick_events_tablename} (creed_number, event_int, face_name)
-SELECT '{creed_number}', event_int, face_name 
+INSERT INTO {brick_events_tablename} (idea_number, event_int, face_name)
+SELECT '{idea_number}', event_int, face_name 
 FROM {agg_tablename}
 GROUP BY event_int, face_name
 ;
@@ -403,7 +403,7 @@ def etl_events_brick_agg_table_to_events_brick_valid_table(
     valid_events_tablename = "events_brick_valid"
     if not db_table_exists(conn_or_cursor, valid_events_tablename):
         brick_events_columns = ["event_int", "face_name"]
-        create_creed_sorted_table(
+        create_idea_sorted_table(
             conn_or_cursor, valid_events_tablename, brick_events_columns
         )
     insert_select_sqlstr = f"""
@@ -430,7 +430,7 @@ FROM events_brick_valid
 
 def get_brick_valid_tables(cursor: sqlite3_Cursor) -> dict[str, str]:
     possible_brick_valid_tables = {
-        f"brick_valid_{creed}": creed for creed in get_creed_numbers()
+        f"brick_valid_{idea}": idea for idea in get_idea_numbers()
     }
     active_tables = get_db_tables(cursor)
     return {
@@ -442,22 +442,22 @@ def get_brick_valid_tables(cursor: sqlite3_Cursor) -> dict[str, str]:
 
 def brick_valid_tables_to_pidgin_prime_raw_tables(cursor: sqlite3_Cursor):
     brick_valid_tables = get_brick_valid_tables(cursor)
-    creed_dimen_ref = {
-        pidgin_dimen: creed_numbers
-        for pidgin_dimen, creed_numbers in get_creed_dimen_ref().items()
+    idea_dimen_ref = {
+        pidgin_dimen: idea_numbers
+        for pidgin_dimen, idea_numbers in get_idea_dimen_ref().items()
         if pidgin_dimen[:6] == "pidgin"
     }
     pidgin_raw_tables = {}
-    for pidgin_dimen in creed_dimen_ref:
-        creed_numbers = creed_dimen_ref.get(pidgin_dimen)
+    for pidgin_dimen in idea_dimen_ref:
+        idea_numbers = idea_dimen_ref.get(pidgin_dimen)
         raw_tablename = f"{pidgin_dimen}_raw"
-        pidgin_raw_tables[raw_tablename] = creed_numbers
+        pidgin_raw_tables[raw_tablename] = idea_numbers
 
-    for brick_valid_table, creed_number in brick_valid_tables.items():
-        for raw_tablename, creed_numbers in pidgin_raw_tables.items():
-            if creed_number in creed_numbers:
+    for brick_valid_table, idea_number in brick_valid_tables.items():
+        for raw_tablename, idea_numbers in pidgin_raw_tables.items():
+            if idea_number in idea_numbers:
                 etl_brick_valid_table_into_old_prime_table(
-                    cursor, brick_valid_table, raw_tablename, creed_number
+                    cursor, brick_valid_table, raw_tablename, idea_number
                 )
 
 
@@ -484,25 +484,25 @@ def etl_brick_valid_tables_to_sound_raw_tables(cursor: sqlite3_Cursor):
     create_sound_and_voice_tables(cursor)
     brick_valid_tablenames = get_db_tables(cursor, "_brick_valid", "br")
     for brick_valid_tablename in brick_valid_tablenames:
-        creed_number = brick_valid_tablename[:7]
-        creedref_filename = get_creed_format_filename(creed_number)
-        creedref = get_creedref_from_file(creedref_filename)
-        dimens = creedref.get("dimens")
+        idea_number = brick_valid_tablename[:7]
+        idearef_filename = get_idea_format_filename(idea_number)
+        idearef = get_idearef_from_file(idearef_filename)
+        dimens = idearef.get("dimens")
         s_raw_tables = get_sound_raw_tablenames(cursor, dimens, brick_valid_tablename)
         for sound_raw_table in s_raw_tables:
             etl_brick_valid_table_into_prime_table(
-                cursor, brick_valid_tablename, sound_raw_table, creed_number
+                cursor, brick_valid_tablename, sound_raw_table, idea_number
             )
 
 
 def set_sound_raw_tables_error_message(cursor: sqlite3_Cursor):
-    for dimen in get_creed_dimen_ref().keys():
+    for dimen in get_idea_dimen_ref().keys():
         sqlstr = create_sound_raw_update_inconsist_error_message_sqlstr(cursor, dimen)
         cursor.execute(sqlstr)
 
 
 def insert_sound_raw_selects_into_sound_agg_tables(cursor: sqlite3_Cursor):
-    for dimen in get_creed_dimen_ref().keys():
+    for dimen in get_idea_dimen_ref().keys():
         sqlstrs = create_sound_agg_insert_sqlstrs(cursor, dimen)
         for sqlstr in sqlstrs:
             cursor.execute(sqlstr)
@@ -625,15 +625,15 @@ def etl_brick_valid_table_into_prime_table(
     cursor: sqlite3_Cursor,
     brick_valid_table: str,
     raw_tablename: str,
-    creed_number: str,
+    idea_number: str,
 ):
     lab_columns = set(get_table_columns(cursor, raw_tablename))
     valid_columns = set(get_table_columns(cursor, brick_valid_table))
     common_cols = lab_columns.intersection(valid_columns)
     common_cols = get_default_sorted_list(common_cols)
     select_str = create_select_query(cursor, brick_valid_table, common_cols)
-    select_str = select_str.replace("SELECT", f"SELECT '{creed_number}',")
-    common_cols.append("creed_number")
+    select_str = select_str.replace("SELECT", f"SELECT '{idea_number}',")
+    common_cols.append("idea_number")
     common_cols = get_default_sorted_list(common_cols)
     x_dict = {common_col: None for common_col in common_cols}
     insert_clause_str = create_insert_into_clause_str(cursor, raw_tablename, x_dict)
@@ -645,16 +645,16 @@ def etl_brick_valid_table_into_old_prime_table(
     cursor: sqlite3_Cursor,
     brick_valid_table: str,
     raw_tablename: str,
-    creed_number: str,
+    idea_number: str,
 ):
     lab_columns = set(get_table_columns(cursor, raw_tablename))
     valid_columns = set(get_table_columns(cursor, brick_valid_table))
     common_cols = lab_columns.intersection(valid_columns)
     common_cols = get_default_sorted_list(common_cols)
     select_str = create_select_query(cursor, brick_valid_table, common_cols)
-    select_str = select_str.replace("SELECT", f"SELECT '{creed_number}',")
+    select_str = select_str.replace("SELECT", f"SELECT '{idea_number}',")
     group_by_clause_str = _get_grouping_groupby_clause(common_cols)
-    common_cols.append("creed_number")
+    common_cols.append("idea_number")
     common_cols = get_default_sorted_list(common_cols)
     x_dict = {common_col: None for common_col in common_cols}
     insert_clause_str = create_insert_into_clause_str(cursor, raw_tablename, x_dict)
@@ -713,19 +713,19 @@ class BrickAggToPidginRawTransformer:
         self.class_type = get_class_type(pidgin_dimen)
 
     def transform(self):
-        dimen_creeds = get_creed_dimen_ref().get(self.pidgin_dimen)
+        dimen_ideas = get_idea_dimen_ref().get(self.pidgin_dimen)
         pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_dimen)
         pidgin_columns.update({"event_int", "face_name"})
         pidgin_columns = get_default_sorted_list(pidgin_columns)
-        pidgin_columns.insert(0, "creed_number")
-        # empty df with creed_number, event_int, face_name, creed_columns...
+        pidgin_columns.insert(0, "idea_number")
+        # empty df with idea_number, event_int, face_name, idea_columns...
         pidgin_df = DataFrame(columns=pidgin_columns)
-        for creed_number in sorted(dimen_creeds):
-            creed_filename = f"{creed_number}.xlsx"
-            brick_creed_path = create_path(self.brick_dir, creed_filename)
-            if os_path_exists(brick_creed_path):
+        for idea_number in sorted(dimen_ideas):
+            idea_filename = f"{idea_number}.xlsx"
+            brick_idea_path = create_path(self.brick_dir, idea_filename)
+            if os_path_exists(brick_idea_path):
                 self.insert_raw_rows(
-                    pidgin_df, creed_number, brick_creed_path, pidgin_columns
+                    pidgin_df, idea_number, brick_idea_path, pidgin_columns
                 )
         pidgin_file_path = create_brick_pidgin_path(self.brick_dir)
         upsert_sheet(pidgin_file_path, get_sheet_raw_name(self.class_type), pidgin_df)
@@ -733,11 +733,11 @@ class BrickAggToPidginRawTransformer:
     def insert_raw_rows(
         self,
         raw_df: DataFrame,
-        creed_number: str,
-        brick_creed_path: str,
+        idea_number: str,
+        brick_idea_path: str,
         df_columns: list[str],
     ):
-        brick_agg_df = pandas_read_excel(brick_creed_path, sheet_name="brick_agg")
+        brick_agg_df = pandas_read_excel(brick_idea_path, sheet_name="brick_agg")
         df_missing_cols = set(df_columns).difference(brick_agg_df.columns)
 
         for index, x_row in brick_agg_df.iterrows():
@@ -755,7 +755,7 @@ class BrickAggToPidginRawTransformer:
                     unknown_term = x_row["unknown_term"]
                 df_len = len(raw_df.index)
                 raw_df.loc[df_len] = [
-                    creed_number,
+                    idea_number,
                     event_int,
                     face_name,
                     get_otx_obj(self.class_type, x_row),
@@ -948,29 +948,29 @@ def get_event_pidgin_path(
     return create_path(event_dir, "pidgin.json")
 
 
-def etl_brick_creeds_to_otz_face_creeds(brick_dir: str, faces_dir: str):
-    for brick_br_ref in get_existing_excel_creed_file_refs(brick_dir):
-        brick_creed_path = create_path(brick_dir, brick_br_ref.filename)
-        if brick_br_ref.filename not in _get_pidgen_creed_format_filenames():
+def etl_brick_ideas_to_otz_face_ideas(brick_dir: str, faces_dir: str):
+    for brick_br_ref in get_existing_excel_idea_file_refs(brick_dir):
+        brick_idea_path = create_path(brick_dir, brick_br_ref.filename)
+        if brick_br_ref.filename not in _get_pidgen_idea_format_filenames():
             split_excel_into_dirs(
-                input_file=brick_creed_path,
+                input_file=brick_idea_path,
                 output_dir=faces_dir,
                 column_name="face_name",
-                filename=brick_br_ref.creed_number,
+                filename=brick_br_ref.idea_number,
                 sheet_name="brick_valid",
             )
 
 
-def etl_otz_face_creeds_to_otz_event_otx_creeds(faces_dir: str):
+def etl_otz_face_ideas_to_otz_event_otx_ideas(faces_dir: str):
     for face_name_dir in get_level1_dirs(faces_dir):
         face_dir = create_path(faces_dir, face_name_dir)
-        for face_br_ref in get_existing_excel_creed_file_refs(face_dir):
-            face_creed_path = create_path(face_dir, face_br_ref.filename)
+        for face_br_ref in get_existing_excel_idea_file_refs(face_dir):
+            face_idea_path = create_path(face_dir, face_br_ref.filename)
             split_excel_into_dirs(
-                input_file=face_creed_path,
+                input_file=face_idea_path,
                 output_dir=face_dir,
                 column_name="event_int",
-                filename=face_br_ref.creed_number,
+                filename=face_br_ref.idea_number,
                 sheet_name="brick_valid",
             )
 
@@ -998,7 +998,7 @@ def get_most_recent_event_int(
     return max(recent_event_ints, default=None)
 
 
-def etl_otz_event_creeds_to_inz_events(
+def etl_otz_event_ideas_to_inz_events(
     syntax_otz_dir: str, event_pidgins: dict[FaceName, set[EventInt]]
 ):
     for face_name in get_level1_dirs(syntax_otz_dir):
@@ -1010,127 +1010,127 @@ def etl_otz_event_creeds_to_inz_events(
             event_dir = create_path(face_dir, event_int)
             event_int = int(event_int)
             pidgin_event_int = get_most_recent_event_int(face_pidgin_events, event_int)
-            for event_br_ref in get_existing_excel_creed_file_refs(event_dir):
-                event_creed_path = create_path(event_dir, event_br_ref.filename)
-                creed_df = pandas_read_excel(event_creed_path, "brick_valid")
+            for event_br_ref in get_existing_excel_idea_file_refs(event_dir):
+                event_idea_path = create_path(event_dir, event_br_ref.filename)
+                idea_df = pandas_read_excel(event_idea_path, "brick_valid")
                 if pidgin_event_int != None:
                     pidgin_event_dir = create_path(face_dir, pidgin_event_int)
                     pidgin_path = create_path(pidgin_event_dir, "pidgin.json")
                     x_pidginunit = get_pidginunit_from_json(open_file(pidgin_path))
-                    translate_all_columns_dataframe(creed_df, x_pidginunit)
-                upsert_sheet(event_creed_path, "inx", creed_df)
+                    translate_all_columns_dataframe(idea_df, x_pidginunit)
+                upsert_sheet(event_idea_path, "inx", idea_df)
 
 
-def etl_otz_inx_event_creeds_to_inz_faces(syntax_otz_dir: str, syntax_inz_dir: str):
+def etl_otz_inx_event_ideas_to_inz_faces(syntax_otz_dir: str, syntax_inz_dir: str):
     for face_name in get_level1_dirs(syntax_otz_dir):
         face_dir = create_path(syntax_otz_dir, face_name)
         for event_int in get_level1_dirs(face_dir):
             event_int = int(event_int)
             event_dir = create_path(face_dir, event_int)
-            for event_br_ref in get_existing_excel_creed_file_refs(event_dir):
-                event_creed_path = create_path(event_dir, event_br_ref.filename)
+            for event_br_ref in get_existing_excel_idea_file_refs(event_dir):
+                event_idea_path = create_path(event_dir, event_br_ref.filename)
                 split_excel_into_dirs(
-                    input_file=event_creed_path,
+                    input_file=event_idea_path,
                     output_dir=syntax_inz_dir,
                     column_name="face_name",
-                    filename=event_br_ref.creed_number,
+                    filename=event_br_ref.idea_number,
                     sheet_name="inx",
                 )
 
 
-def etl_inz_face_creeds_to_csv_files(syntax_inz_dir: str):
+def etl_inz_face_ideas_to_csv_files(syntax_inz_dir: str):
     for face_name in get_level1_dirs(syntax_inz_dir):
         face_dir = create_path(syntax_inz_dir, face_name)
-        for face_br_ref in get_existing_excel_creed_file_refs(face_dir):
-            face_creed_excel_path = create_path(face_dir, face_br_ref.filename)
-            creed_csv = get_ordered_csv(pandas_read_excel(face_creed_excel_path, "inx"))
-            save_file(face_dir, face_br_ref.get_csv_filename(), creed_csv)
+        for face_br_ref in get_existing_excel_idea_file_refs(face_dir):
+            face_idea_excel_path = create_path(face_dir, face_br_ref.filename)
+            idea_csv = get_ordered_csv(pandas_read_excel(face_idea_excel_path, "inx"))
+            save_file(face_dir, face_br_ref.get_csv_filename(), idea_csv)
 
 
-def etl_inz_face_csv_files2creed_raw_tables(
+def etl_inz_face_csv_files2idea_raw_tables(
     conn_or_cursor: sqlite3_Connection, syntax_inz_dir: str
 ):
     for face_name in get_level1_dirs(syntax_inz_dir):
         face_dir = create_path(syntax_inz_dir, face_name)
-        for creed_number in sorted(get_creed_numbers()):
-            csv_filename = f"{creed_number}.csv"
+        for idea_number in sorted(get_idea_numbers()):
+            csv_filename = f"{idea_number}.csv"
             csv_path = create_path(face_dir, csv_filename)
             if os_path_exists(csv_path):
-                insert_creed_csv(csv_path, conn_or_cursor, f"{creed_number}_raw")
+                insert_idea_csv(csv_path, conn_or_cursor, f"{idea_number}_raw")
 
 
-def etl_creed_raw_to_pidgin_prime_tables(conn_or_cursor):
+def etl_idea_raw_to_pidgin_prime_tables(conn_or_cursor):
     create_pidgin_prime_tables(conn_or_cursor)
     brick_valid_tables_to_pidgin_prime_raw_tables(conn_or_cursor)
     set_pidgin_raw_error_message(conn_or_cursor)
 
 
-def etl_creed_raw_to_fisc_prime_tables(conn_or_cursor):
+def etl_idea_raw_to_fisc_prime_tables(conn_or_cursor):
     create_fisc_prime_tables(conn_or_cursor)
-    creed_raw_tables2fisc_raw_tables(conn_or_cursor)
+    idea_raw_tables2fisc_raw_tables(conn_or_cursor)
     set_fisc_raw_error_message(conn_or_cursor)
     fisc_raw_tables2fisc_agg_tables(conn_or_cursor)
     fisc_agg_tables2fisc_event_time_agg(conn_or_cursor)
 
 
-def etl_creed_raw_to_bud_prime_tables(conn_or_cursor):
+def etl_idea_raw_to_bud_prime_tables(conn_or_cursor):
     create_bud_prime_tables(conn_or_cursor)
-    creed_raw_tables2bud_raw_tables(conn_or_cursor)
+    idea_raw_tables2bud_raw_tables(conn_or_cursor)
     set_bud_raw_error_message(conn_or_cursor)
     bud_raw_tables2bud_agg_tables(conn_or_cursor)
 
 
-def creed_raw_tables2fisc_raw_tables(conn_or_cursor: sqlite3_Connection):
-    creeds_slabeleble_dimens = get_creed_slabeleble_put_dimens()
-    creed_config_dict = get_creed_config_dict()
-    for creed_number in get_creed_numbers():
-        creed_raw = f"{creed_number}_raw"
-        if db_table_exists(conn_or_cursor, creed_raw):
-            # only inserts from pre-identified creed categorys
-            slabeleble_dimens = creeds_slabeleble_dimens.get(creed_number)
+def idea_raw_tables2fisc_raw_tables(conn_or_cursor: sqlite3_Connection):
+    ideas_slabeleble_dimens = get_idea_slabeleble_put_dimens()
+    idea_config_dict = get_idea_config_dict()
+    for idea_number in get_idea_numbers():
+        idea_raw = f"{idea_number}_raw"
+        if db_table_exists(conn_or_cursor, idea_raw):
+            # only inserts from pre-identified idea categorys
+            slabeleble_dimens = ideas_slabeleble_dimens.get(idea_number)
             for x_dimen in slabeleble_dimens:
-                dimen_config = creed_config_dict.get(x_dimen)
-                if dimen_config.get("creed_category") == "fisc":
+                dimen_config = idea_config_dict.get(x_dimen)
+                if dimen_config.get("idea_category") == "fisc":
                     dimen_jkeys = set(dimen_config.get("jkeys").keys())
-                    gen_sqlstr = get_creed_into_dimen_raw_query(
-                        conn_or_cursor, creed_number, x_dimen, dimen_jkeys
+                    gen_sqlstr = get_idea_into_dimen_raw_query(
+                        conn_or_cursor, idea_number, x_dimen, dimen_jkeys
                     )
                     conn_or_cursor.execute(gen_sqlstr)
 
             # for x_dimen in fisc_dimens:
-            #     dimen_config = creed_config_dict.get(x_dimen)
+            #     dimen_config = idea_config_dict.get(x_dimen)
             #     dimen_jkeys = set(dimen_config.get("jkeys").keys())
-            #     if required_columns_exist(conn_or_cursor, creed_raw, dimen_jkeys):
-            #         gen_sqlstr = get_creed_into_dimen_raw_query(
-            #             conn_or_cursor, creed_number, x_dimen, dimen_jkeys
+            #     if required_columns_exist(conn_or_cursor, idea_raw, dimen_jkeys):
+            #         gen_sqlstr = get_idea_into_dimen_raw_query(
+            #             conn_or_cursor, idea_number, x_dimen, dimen_jkeys
             #         )
             #         conn_or_cursor.execute(gen_sqlstr)
 
 
-def creed_raw_tables2bud_raw_tables(conn_or_cursor: sqlite3_Connection):
-    creed_config_dict = get_creed_config_dict()
+def idea_raw_tables2bud_raw_tables(conn_or_cursor: sqlite3_Connection):
+    idea_config_dict = get_idea_config_dict()
 
-    for creed_number in get_creed_numbers():
-        creed_raw = f"{creed_number}_raw"
-        if db_table_exists(conn_or_cursor, creed_raw):
-            # only inserts from pre-identified creed categorys
-            slabeleble_dimens = get_creed_slabeleble_put_dimens().get(creed_number)
+    for idea_number in get_idea_numbers():
+        idea_raw = f"{idea_number}_raw"
+        if db_table_exists(conn_or_cursor, idea_raw):
+            # only inserts from pre-identified idea categorys
+            slabeleble_dimens = get_idea_slabeleble_put_dimens().get(idea_number)
             for x_dimen in slabeleble_dimens:
-                dimen_config = creed_config_dict.get(x_dimen)
-                if dimen_config.get("creed_category") == "bud":
+                dimen_config = idea_config_dict.get(x_dimen)
+                if dimen_config.get("idea_category") == "bud":
                     dimen_jkeys = set(dimen_config.get("jkeys").keys())
-                    insert_sqlstr = get_creed_into_dimen_raw_query(
-                        conn_or_cursor, creed_number, x_dimen, dimen_jkeys, "put"
+                    insert_sqlstr = get_idea_into_dimen_raw_query(
+                        conn_or_cursor, idea_number, x_dimen, dimen_jkeys, "put"
                     )
                     conn_or_cursor.execute(insert_sqlstr)
 
-            # manually checks each creed categorys
+            # manually checks each idea categorys
             # for x_dimen in bud_dimens:
-            #     dimen_config = creed_config_dict.get(x_dimen)
+            #     dimen_config = idea_config_dict.get(x_dimen)
             #     dimen_jkeys = set(dimen_config.get("jkeys").keys())
-            #     if required_columns_exist(conn_or_cursor, creed_raw, dimen_jkeys):
-            #         insert_sqlstr = get_creed_into_dimen_raw_query(
-            #             conn_or_cursor, creed_number, x_dimen, dimen_jkeys
+            #     if required_columns_exist(conn_or_cursor, idea_raw, dimen_jkeys):
+            #         insert_sqlstr = get_idea_into_dimen_raw_query(
+            #             conn_or_cursor, idea_number, x_dimen, dimen_jkeys
             #         )
             #         conn_or_cursor.execute(insert_sqlstr)
 
@@ -1179,11 +1179,11 @@ def etl_fisc_table2fisc_ote1_agg_csvs(
 
 
 def etl_fisc_ote1_agg_csvs2jsons(fisc_mstr_dir: str):
-    creed_types = get_creed_sqlite_types()
+    idea_types = get_idea_sqlite_types()
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_label in get_level1_dirs(fiscs_dir):
         csv_path = create_fisc_ote1_csv_path(fisc_mstr_dir, fisc_label)
-        csv_arrays = open_csv_with_types(csv_path, creed_types)
+        csv_arrays = open_csv_with_types(csv_path, idea_types)
         x_dict = {}
         header_row = csv_arrays.pop(0)
         for row in csv_arrays:
@@ -1315,7 +1315,7 @@ def etl_event_bud_csvs_to_pack_json(fisc_mstr_dir: str):
 
 
 def add_budatoms_from_csv(owner_pack: PackUnit, owner_path: str):
-    creed_sqlite_types = get_creed_sqlite_types()
+    idea_sqlite_types = get_idea_sqlite_types()
     bud_dimens = get_bud_dimens()
     bud_dimens.remove("budunit")
     for bud_dimen in bud_dimens:
@@ -1324,7 +1324,7 @@ def add_budatoms_from_csv(owner_pack: PackUnit, owner_path: str):
         put_path = create_path(owner_path, bud_dimen_put_csv)
         del_path = create_path(owner_path, bud_dimen_del_csv)
         if os_path_exists(put_path):
-            put_rows = open_csv_with_types(put_path, creed_sqlite_types)
+            put_rows = open_csv_with_types(put_path, idea_sqlite_types)
             headers = put_rows.pop(0)
             for put_row in put_rows:
                 x_atom = budatom_shop(bud_dimen, "INSERT")
@@ -1339,7 +1339,7 @@ def add_budatoms_from_csv(owner_pack: PackUnit, owner_path: str):
                 owner_pack._buddelta.set_budatom(x_atom)
 
         if os_path_exists(del_path):
-            del_rows = open_csv_with_types(del_path, creed_sqlite_types)
+            del_rows = open_csv_with_types(del_path, idea_sqlite_types)
             headers = del_rows.pop(0)
             for del_row in del_rows:
                 x_atom = budatom_shop(bud_dimen, "DELETE")

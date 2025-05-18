@@ -1,0 +1,29 @@
+{
+    "attributes": {
+        "awardee_title_ERASE": {
+            "otx_key": true
+        },
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "fisc_label": {
+            "otx_key": true
+        },
+        "concept_way": {
+            "otx_key": true
+        },
+        "owner_name": {
+            "otx_key": true
+        }
+    },
+    "idea_number": "br00052",
+    "dimens": [
+        "budunit",
+        "fiscunit",
+        "bud_conceptunit",
+        "bud_concept_awardlink"
+    ]
+}

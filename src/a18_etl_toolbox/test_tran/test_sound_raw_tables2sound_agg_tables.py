@@ -16,7 +16,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_way_str,
     unknown_term_str,
 )
-from src.a17_creed_logic._utils.str_a17 import creed_number_str
+from src.a17_idea_logic._utils.str_a17 import idea_number_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
     create_sound_and_voice_tables,
@@ -52,7 +52,7 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ExecutedSqlUpdat
         pidwayy_str = "pidgin_way"
         pidwayy_s_raw_tablename = create_prime_tablename(pidwayy_str, "s", "raw")
         insert_into_clause = f"""INSERT INTO {pidwayy_s_raw_tablename} (
-  {creed_number_str()}
+  {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
 , {otx_way_str()}
@@ -109,7 +109,7 @@ def test_set_sound_raw_tables_error_message_UpdatesTableCorrectly_Scenario0():
         create_sound_and_voice_tables(cursor)
         pidwayy_s_raw_tablename = create_prime_tablename(pidgin_way_str(), "s", "raw")
         insert_into_clause = f"""INSERT INTO {pidwayy_s_raw_tablename} (
-  {creed_number_str()}
+  {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
 , {otx_way_str()}
@@ -141,7 +141,7 @@ VALUES
 
         # THEN
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 2
-        error_select_sqlstr = f"SELECT creed_number, event_int FROM {pidwayy_s_raw_tablename} WHERE error_message IS NOT NULL"
+        error_select_sqlstr = f"SELECT idea_number, event_int FROM {pidwayy_s_raw_tablename} WHERE error_message IS NOT NULL"
         cursor.execute(error_select_sqlstr)
         assert cursor.fetchall() == [("br00117", 1), ("br00077", 1)]
 
@@ -166,7 +166,7 @@ def test_set_sound_raw_tables_error_message_UpdatesTableCorrectly_Scenario1_bud_
         create_sound_and_voice_tables(cursor)
         buda_s_raw_del = create_prime_tablename(bud_acctunit_str(), "s", "raw", "del")
         insert_into_clause = f"""INSERT INTO {buda_s_raw_del} (
-  {creed_number_str()}
+  {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
 , {fisc_label_str()}
@@ -227,7 +227,7 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
         create_sound_and_voice_tables(cursor)
         pidwayy_s_raw_tablename = create_prime_tablename("PIDWAYY", "s", "raw")
         insert_into_clause = f"""INSERT INTO {pidwayy_s_raw_tablename} (
-  {creed_number_str()}
+  {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
 , {otx_way_str()}
@@ -255,7 +255,7 @@ VALUES
         cursor.execute(f"{insert_into_clause} {values_clause}")
         budacct_s_put_raw_tblname = create_prime_tablename("BUDACCT", "s", "raw", "put")
         insert_into_clause = f"""INSERT INTO {budacct_s_put_raw_tblname} (
-  {creed_number_str()}
+  {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
 , {fisc_label_str()}
@@ -335,7 +335,7 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
         create_sound_and_voice_tables(cursor)
         budacct_s_del_raw_tblname = create_prime_tablename("BUDACCT", "s", "raw", "del")
         insert_into_clause = f"""INSERT INTO {budacct_s_del_raw_tblname} (
-  {creed_number_str()}
+  {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
 , {fisc_label_str()}
@@ -394,7 +394,7 @@ def test_etl_sound_raw_tables_to_sound_agg_tables_PopulatesValidTable_Scenario0(
         create_sound_and_voice_tables(cursor)
         pidwayy_s_raw_tablename = create_prime_tablename("PIDWAYY", "s", "raw")
         insert_into_clause = f"""INSERT INTO {pidwayy_s_raw_tablename} (
-  {creed_number_str()}
+  {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
 , {otx_way_str()}
@@ -423,7 +423,7 @@ VALUES
         cursor.execute(f"{insert_into_clause} {values_clause}")
         budacct_s_put_raw_tblname = create_prime_tablename("BUDACCT", "s", "raw", "put")
         insert_into_clause = f"""INSERT INTO {budacct_s_put_raw_tblname} (
-  {creed_number_str()}
+  {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
 , {fisc_label_str()}

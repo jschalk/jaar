@@ -1,11 +1,11 @@
 from src.a00_data_toolbox.db_toolbox import sqlite_obj_str
-from src.a17_creed_logic.creed_db_tool import (
+from src.a17_idea_logic.idea_db_tool import (
     get_default_sorted_list,
-    create_creed_sorted_table,
+    create_idea_sorted_table,
 )
-from src.a17_creed_logic.creed_config import (
-    get_quick_creeds_column_ref,
-    get_creed_sqlite_types,
+from src.a17_idea_logic.idea_config import (
+    get_quick_ideas_column_ref,
+    get_idea_sqlite_types,
 )
 from sqlite3 import Connection as sqlite3_Connection
 

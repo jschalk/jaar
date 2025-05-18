@@ -23,7 +23,7 @@ def test_PidginPrimeColumns_Exists():
     pidgin_title_agg_args = pidgin_title_agg_args.union(event_args)
     pidgin_label_agg_args = pidgin_label_agg_args.union(event_args)
     pidgin_way_agg_args = pidgin_way_agg_args.union(event_args)
-    raw_args = {"creed_number"}
+    raw_args = {"idea_number"}
     pidgin_name_raw_args = pidgin_name_agg_args.union(raw_args)
     pidgin_title_raw_args = pidgin_title_agg_args.union(raw_args)
     pidgin_label_raw_args = pidgin_label_agg_args.union(raw_args)
