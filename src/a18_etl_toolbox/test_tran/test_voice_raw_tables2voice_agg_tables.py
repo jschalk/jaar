@@ -78,6 +78,73 @@ GROUP BY {raw_columns_str}
             assert gen_sqlstr == expected_table2table_agg_insert_sqlstr
 
 
+def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_BudDimens():
+    # sourcery skip: no-loop-in-tests
+    # ESTABLISH
+    idea_config = get_idea_config_dict()
+    bud_dimens_config = {
+        x_dimen: dimen_config
+        for x_dimen, dimen_config in idea_config.items()
+        if dimen_config.get(idea_category_str()) == "bud"
+    }
+
+    # WHEN
+    insert_voice_agg_sqlstrs = get_insert_voice_agg_sqlstrs()
+
+    # THEN
+    with sqlite3_connect(":memory:") as conn:
+        cursor = conn.cursor()
+        create_sound_and_voice_tables(cursor)
+
+        for bud_dimen in bud_dimens_config:
+            # print(f"{bud_dimen=}")
+            v_raw_put_tablename = prime_tbl(bud_dimen, "v", "raw", "put")
+            v_raw_del_tablename = prime_tbl(bud_dimen, "v", "raw", "del")
+            v_agg_put_tablename = prime_tbl(bud_dimen, "v", "agg", "put")
+            v_agg_del_tablename = prime_tbl(bud_dimen, "v", "agg", "del")
+            v_raw_put_cols = get_table_columns(cursor, v_raw_put_tablename)
+            v_raw_del_cols = get_table_columns(cursor, v_raw_del_tablename)
+            v_agg_put_cols = get_table_columns(cursor, v_agg_put_tablename)
+            v_agg_del_cols = get_table_columns(cursor, v_agg_del_tablename)
+            v_raw_put_cols = {col for col in v_raw_put_cols if col[-3:] != "otx"}
+            v_raw_del_cols = {col for col in v_raw_del_cols if col[-3:] != "otx"}
+            v_raw_put_cols.remove(f"{face_name_str()}_inx")
+            v_raw_del_cols.remove(f"{face_name_str()}_inx")
+            v_raw_put_cols.remove(event_int_str())
+            v_raw_del_cols.remove(event_int_str())
+            v_raw_put_cols = get_default_sorted_list(v_raw_put_cols)
+            v_raw_del_cols = get_default_sorted_list(v_raw_del_cols)
+            v_raw_put_columns_str = ", ".join(v_raw_put_cols)
+            v_raw_del_columns_str = ", ".join(v_raw_del_cols)
+            v_agg_put_columns_str = ", ".join(v_agg_put_cols)
+            v_agg_del_columns_str = ", ".join(v_agg_del_cols)
+            expected_agg_put_insert_sqlstr = f"""
+INSERT INTO {v_agg_put_tablename} ({v_agg_put_columns_str})
+SELECT {v_raw_put_columns_str}
+WHERE error_message IS NULL
+FROM {v_raw_put_tablename}
+GROUP BY {v_raw_put_columns_str}
+"""
+            expected_agg_del_insert_sqlstr = f"""
+INSERT INTO {v_agg_del_tablename} ({v_agg_del_columns_str})
+SELECT {v_raw_del_columns_str}
+WHERE error_message IS NULL
+FROM {v_raw_del_tablename}
+GROUP BY {v_raw_del_columns_str}
+"""
+            abbv7 = get_dimen_abbv7(bud_dimen)
+            put_sqlstr_ref = f"INSERT_{abbv7.upper()}_VOICE_AGG_PUT_SQLSTR"
+            del_sqlstr_ref = f"INSERT_{abbv7.upper()}_VOICE_AGG_DEL_SQLSTR"
+            # print(f'{put_sqlstr_ref}= """{expected_agg_put_insert_sqlstr}"""')
+            # print(f'{del_sqlstr_ref}= """{expected_agg_del_insert_sqlstr}"""')
+            print(f"'{v_agg_put_tablename}': {put_sqlstr_ref},")
+            print(f"'{v_agg_del_tablename}': {del_sqlstr_ref},")
+            insert_v_agg_put_sqlstr = insert_voice_agg_sqlstrs.get(v_agg_put_tablename)
+            insert_v_agg_del_sqlstr = insert_voice_agg_sqlstrs.get(v_agg_del_tablename)
+            assert insert_v_agg_put_sqlstr == expected_agg_put_insert_sqlstr
+            assert insert_v_agg_del_sqlstr == expected_agg_del_insert_sqlstr
+
+
 # def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
 #     # ESTABLISH
 #     a23_str = "accord23"

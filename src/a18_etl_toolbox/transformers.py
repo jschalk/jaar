@@ -621,6 +621,10 @@ def set_voice_raw_inx_column(
         cursor.execute(update_empty_inx_sqlstr)
 
 
+def etl_voice_raw_tables_to_voice_agg_tables(cursor: sqlite3_Cursor):
+    pass
+
+
 def etl_brick_valid_table_into_prime_table(
     cursor: sqlite3_Cursor,
     brick_valid_table: str,
