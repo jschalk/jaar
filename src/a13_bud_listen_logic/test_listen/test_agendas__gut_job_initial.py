@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import delete_dir, save_file
-from src.a05_idea_logic.idea import ideaunit_shop
+from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a12_hub_tools.hub_path import create_gut_path
 from src.a12_hub_tools.hub_tool import save_gut_file, save_gut_file
@@ -47,8 +47,8 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsTasksToBudWhenNo_laborl
     save_gut_file(fisc_mstr_dir, yao_gut)
 
     zia_gut = budunit_shop(zia_str, a23_str)
-    zia_gut.set_idea(ideaunit_shop(clean_str(), pledge=True), casa_way())
-    zia_gut.set_idea(ideaunit_shop(cook_str(), pledge=True), casa_way())
+    zia_gut.set_concept(conceptunit_shop(clean_str(), pledge=True), casa_way())
+    zia_gut.set_concept(conceptunit_shop(cook_str(), pledge=True), casa_way())
     zia_gut.add_acctunit(yao_str, debtit_belief=12)
     save_gut_file(fisc_mstr_dir, zia_gut)
 
@@ -56,7 +56,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsTasksToBudWhenNo_laborl
     assert len(new_yao_job.get_agenda_dict()) == 0
 
     # WHEN
-    print(f"{len(new_yao_job.get_idea_dict())=}")
+    print(f"{len(new_yao_job.get_concept_dict())=}")
     listen_to_agendas_create_init_job_from_guts(fisc_mstr_dir, new_yao_job)
 
     # THEN
@@ -80,19 +80,19 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsTasksToBud(
     a23_str = "accord23"
     save_gut_file(fisc_mstr_dir, yao_gut)
     zia_gut = budunit_shop(zia_str, a23_str)
-    zia_gut.set_idea(ideaunit_shop(clean_str(), pledge=True), casa_way())
-    zia_gut.set_idea(ideaunit_shop(cook_str(), pledge=True), casa_way())
+    zia_gut.set_concept(conceptunit_shop(clean_str(), pledge=True), casa_way())
+    zia_gut.set_concept(conceptunit_shop(cook_str(), pledge=True), casa_way())
     zia_gut.add_acctunit(yao_str, debtit_belief=12)
-    clean_ideaunit = zia_gut.get_idea_obj(clean_way())
-    cook_ideaunit = zia_gut.get_idea_obj(cook_way())
-    clean_ideaunit.laborunit.set_laborlink(yao_str)
-    cook_ideaunit.laborunit.set_laborlink(yao_str)
+    clean_conceptunit = zia_gut.get_concept_obj(clean_way())
+    cook_conceptunit = zia_gut.get_concept_obj(cook_way())
+    clean_conceptunit.laborunit.set_laborlink(yao_str)
+    cook_conceptunit.laborunit.set_laborlink(yao_str)
     save_gut_file(fisc_mstr_dir, zia_gut)
     new_yao_job = create_listen_basis(yao_gut)
     assert len(new_yao_job.get_agenda_dict()) == 0
 
     # WHEN
-    print(f"{len(new_yao_job.get_idea_dict())=}")
+    print(f"{len(new_yao_job.get_concept_dict())=}")
     listen_to_agendas_create_init_job_from_guts(fisc_mstr_dir, new_yao_job)
 
     # THEN
@@ -106,16 +106,16 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsTasksToBudWithDetailsDe
     fisc_mstr_dir = env_dir()
     zia_gut = get_example_zia_speaker()
     bob_gut = get_example_bob_speaker()
-    bob_gut.edit_idea_attr(
+    bob_gut.edit_concept_attr(
         cook_way(),
         reason_del_premise_rcontext=eat_way(),
         reason_del_premise_pbranch=hungry_way(),
     )
-    bob_cook_ideaunit = bob_gut.get_idea_obj(cook_way())
-    zia_cook_ideaunit = zia_gut.get_idea_obj(cook_way())
-    assert bob_cook_ideaunit != zia_cook_ideaunit
-    assert len(zia_cook_ideaunit.reasonunits) == 1
-    assert len(bob_cook_ideaunit.reasonunits) == 0
+    bob_cook_conceptunit = bob_gut.get_concept_obj(cook_way())
+    zia_cook_conceptunit = zia_gut.get_concept_obj(cook_way())
+    assert bob_cook_conceptunit != zia_cook_conceptunit
+    assert len(zia_cook_conceptunit.reasonunits) == 1
+    assert len(bob_cook_conceptunit.reasonunits) == 0
     zia_str = zia_gut.owner_name
     bob_str = bob_gut.owner_name
     a23_str = "accord23"
@@ -127,19 +127,19 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsTasksToBudWithDetailsDe
     save_gut_file(fisc_mstr_dir, yao_gut)
 
     new_yao_gut1 = create_listen_basis(yao_gut)
-    assert new_yao_gut1.idea_exists(cook_way()) is False
+    assert new_yao_gut1.concept_exists(cook_way()) is False
 
     # WHEN
     yao_hubunit = hubunit_shop(fisc_mstr_dir, a23_str, yao_str)
     listen_to_agendas_create_init_job_from_guts(fisc_mstr_dir, new_yao_gut1)
 
     # THEN
-    assert new_yao_gut1.idea_exists(cook_way())
-    new_cook_idea = new_yao_gut1.get_idea_obj(cook_way())
+    assert new_yao_gut1.concept_exists(cook_way())
+    new_cook_concept = new_yao_gut1.get_concept_obj(cook_way())
     zia_acctunit = new_yao_gut1.get_acct(zia_str)
     bob_acctunit = new_yao_gut1.get_acct(bob_str)
     assert zia_acctunit.debtit_belief < bob_acctunit.debtit_belief
-    assert new_cook_idea.get_reasonunit(eat_way()) is None
+    assert new_cook_concept.get_reasonunit(eat_way()) is None
 
     yao_zia_debtit_belief = 15
     yao_bob_debtit_belief = 5
@@ -147,19 +147,19 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsTasksToBudWithDetailsDe
     yao_gut.add_acctunit(bob_str, None, yao_bob_debtit_belief)
     yao_gut.set_acct_respect(100)
     new_yao_gut2 = create_listen_basis(yao_gut)
-    assert new_yao_gut2.idea_exists(cook_way()) is False
+    assert new_yao_gut2.concept_exists(cook_way()) is False
 
     # WHEN
     listen_to_agendas_create_init_job_from_guts(fisc_mstr_dir, new_yao_gut2)
 
     # THEN
-    assert new_yao_gut2.idea_exists(cook_way())
-    new_cook_idea = new_yao_gut2.get_idea_obj(cook_way())
+    assert new_yao_gut2.concept_exists(cook_way())
+    new_cook_concept = new_yao_gut2.get_concept_obj(cook_way())
     zia_acctunit = new_yao_gut2.get_acct(zia_str)
     bob_acctunit = new_yao_gut2.get_acct(bob_str)
     assert zia_acctunit.debtit_belief > bob_acctunit.debtit_belief
-    zia_eat_reasonunit = zia_cook_ideaunit.get_reasonunit(eat_way())
-    assert new_cook_idea.get_reasonunit(eat_way()) == zia_eat_reasonunit
+    zia_eat_reasonunit = zia_cook_conceptunit.get_reasonunit(eat_way())
+    assert new_cook_concept.get_reasonunit(eat_way()) == zia_eat_reasonunit
 
 
 def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalBud(
@@ -185,13 +185,13 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalBud(
 
     zia_str = "Zia"
     zia_gut = budunit_shop(zia_str, a23_str)
-    zia_gut.set_idea(ideaunit_shop(clean_str(), pledge=True), casa_way())
-    zia_gut.set_idea(ideaunit_shop(cook_str(), pledge=True), casa_way())
+    zia_gut.set_concept(conceptunit_shop(clean_str(), pledge=True), casa_way())
+    zia_gut.set_concept(conceptunit_shop(cook_str(), pledge=True), casa_way())
     zia_gut.add_acctunit(yao_str, debtit_belief=12)
-    clean_ideaunit = zia_gut.get_idea_obj(clean_way())
-    cook_ideaunit = zia_gut.get_idea_obj(cook_way())
-    clean_ideaunit.laborunit.set_laborlink(yao_str)
-    cook_ideaunit.laborunit.set_laborlink(yao_str)
+    clean_conceptunit = zia_gut.get_concept_obj(clean_way())
+    cook_conceptunit = zia_gut.get_concept_obj(cook_way())
+    clean_conceptunit.laborunit.set_laborlink(yao_str)
+    cook_conceptunit.laborunit.set_laborlink(yao_str)
     save_gut_file(fisc_mstr_dir, zia_gut)
 
     sue_gut = budunit_shop(sue_str, a23_str)
@@ -199,29 +199,29 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalBud(
     zia_gut.add_acctunit(yao_str, debtit_belief=12)
     vacuum_str = "vacuum"
     vacuum_way = sue_gut.make_l1_way(vacuum_str)
-    sue_gut.set_l1_idea(ideaunit_shop(vacuum_str, pledge=True))
-    vacuum_ideaunit = sue_gut.get_idea_obj(vacuum_way)
-    vacuum_ideaunit.laborunit.set_laborlink(yao_str)
+    sue_gut.set_l1_concept(conceptunit_shop(vacuum_str, pledge=True))
+    vacuum_conceptunit = sue_gut.get_concept_obj(vacuum_way)
+    vacuum_conceptunit.laborunit.set_laborlink(yao_str)
 
     egg_str = "egg first"
     egg_way = sue_gut.make_l1_way(egg_str)
-    sue_gut.set_l1_idea(ideaunit_shop(egg_str))
+    sue_gut.set_l1_concept(conceptunit_shop(egg_str))
     chicken_str = "chicken first"
     chicken_way = sue_gut.make_l1_way(chicken_str)
-    sue_gut.set_l1_idea(ideaunit_shop(chicken_str))
+    sue_gut.set_l1_concept(conceptunit_shop(chicken_str))
     # set egg pledge is True when chicken first is False
-    sue_gut.edit_idea_attr(
+    sue_gut.edit_concept_attr(
         egg_way,
         pledge=True,
         reason_rcontext=chicken_way,
-        reason_rcontext_idea_active_requisite=True,
+        reason_rcontext_concept_active_requisite=True,
     )
     # set chick pledge is True when egg first is False
-    sue_gut.edit_idea_attr(
+    sue_gut.edit_concept_attr(
         chicken_way,
         pledge=True,
         reason_rcontext=egg_way,
-        reason_rcontext_idea_active_requisite=False,
+        reason_rcontext_concept_active_requisite=False,
     )
     save_gut_file(fisc_mstr_dir, sue_gut)
 
@@ -264,13 +264,13 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorBud(
     save_gut_file(fisc_mstr_dir, yao_gut)
 
     zia_gut = budunit_shop(zia_str, a23_str)
-    zia_gut.set_idea(ideaunit_shop(clean_str(), pledge=True), casa_way())
-    zia_gut.set_idea(ideaunit_shop(cook_str(), pledge=True), casa_way())
+    zia_gut.set_concept(conceptunit_shop(clean_str(), pledge=True), casa_way())
+    zia_gut.set_concept(conceptunit_shop(cook_str(), pledge=True), casa_way())
     zia_gut.add_acctunit(yao_str, debtit_belief=12)
-    clean_ideaunit = zia_gut.get_idea_obj(clean_way())
-    cook_ideaunit = zia_gut.get_idea_obj(cook_way())
-    clean_ideaunit.laborunit.set_laborlink(yao_str)
-    cook_ideaunit.laborunit.set_laborlink(yao_str)
+    clean_conceptunit = zia_gut.get_concept_obj(clean_way())
+    cook_conceptunit = zia_gut.get_concept_obj(cook_way())
+    clean_conceptunit.laborunit.set_laborlink(yao_str)
+    cook_conceptunit.laborunit.set_laborlink(yao_str)
     save_gut_file(fisc_mstr_dir, zia_gut)
 
     # WHEN

@@ -503,7 +503,7 @@ def hubunit_shop(
 
 
 def get_keep_path(x_hubunit: HubUnit, x_way: LabelStr) -> str:
-    keep_root = "idearoot"
+    keep_root = "conceptroot"
     x_way = rebuild_way(x_way, x_hubunit.fisc_label, keep_root)
     x_list = get_all_way_labels(x_way, x_hubunit.bridge)
     keep_sub_path = get_directory_path(x_list=[*x_list])

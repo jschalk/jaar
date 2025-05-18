@@ -62,25 +62,25 @@ BudUnit AcctUnit objects
 
 BudUnit GroupUnit objects
 
-BudUnit IdeaUnit objects
+BudUnit ConceptUnit objects
 
-BudUnit IdeaUnit hierarchical structure
+BudUnit ConceptUnit hierarchical structure
 
-BudUnit IdeaUnit AwardLink objects
+BudUnit ConceptUnit AwardLink objects
 
-BudUnit IdeaUnit AwardLine objects
+BudUnit ConceptUnit AwardLine objects
 
-BudUnit IdeaUnit AwardHeir objects
+BudUnit ConceptUnit AwardHeir objects
 
-BudUnit IdeaUnit AwardHeir objects
+BudUnit ConceptUnit AwardHeir objects
 
-BudUnit IdeaUnit Reason PremiseUnit objects
+BudUnit ConceptUnit Reason PremiseUnit objects
 
-BudUnit IdeaUnit Reason PremiseHeir objects
+BudUnit ConceptUnit Reason PremiseHeir objects
 
-BudUnit IdeaUnit FactUnit objects
+BudUnit ConceptUnit FactUnit objects
 
-BudUnit IdeaUnit FactHeir objects1
+BudUnit ConceptUnit FactHeir objects1
 
 
 ## 1.3 Test-Driven-Development

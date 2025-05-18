@@ -29,7 +29,7 @@ def get_bud_agenda_dataframe(x_bud: BudUnit, rcontext: WayStr = None) -> DataFra
             columns=[
                 "owner_name",
                 "fund_ratio",
-                "idea_label",
+                "concept_label",
                 "parent_way",
                 "begin",
                 "close",
@@ -39,19 +39,19 @@ def get_bud_agenda_dataframe(x_bud: BudUnit, rcontext: WayStr = None) -> DataFra
                 "morph",
             ]
         )
-    x_idea_list = []
-    for x_idea in agenda_dict.values():
-        idea_dict = {
+    x_concept_list = []
+    for x_concept in agenda_dict.values():
+        concept_dict = {
             "owner_name": x_bud.owner_name,
-            "fund_ratio": x_idea._fund_ratio,
-            "idea_label": x_idea.idea_label,
-            "parent_way": x_idea.parent_way,
-            "begin": x_idea.begin,
-            "close": x_idea.close,
-            "addin": x_idea.addin,
-            "denom": x_idea.denom,
-            "numor": x_idea.numor,
-            "morph": x_idea.morph,
+            "fund_ratio": x_concept._fund_ratio,
+            "concept_label": x_concept.concept_label,
+            "parent_way": x_concept.parent_way,
+            "begin": x_concept.begin,
+            "close": x_concept.close,
+            "addin": x_concept.addin,
+            "denom": x_concept.denom,
+            "numor": x_concept.numor,
+            "morph": x_concept.morph,
         }
-        x_idea_list.append(idea_dict)
-    return DataFrame(x_idea_list)
+        x_concept_list.append(concept_dict)
+    return DataFrame(x_concept_list)

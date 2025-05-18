@@ -1,13 +1,13 @@
 from src.a01_way_logic.way import to_way
-from src.a05_idea_logic.idea import ideaunit_shop
+from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._utils.str_a06 import (
     bud_acctunit_str,
     bud_acct_membership_str,
-    bud_ideaunit_str,
+    bud_conceptunit_str,
     acct_name_str,
     group_title_str,
-    idea_way_str,
+    concept_way_str,
     pledge_str,
     mass_str,
     debtit_belief_str,
@@ -22,7 +22,7 @@ from src.a17_creed_logic.creed import create_creed_df, make_buddelta, get_creedr
 from src.a17_creed_logic.creed_config import (
     creed_format_00021_bud_acctunit_v0_0_0,
     creed_format_00020_bud_acct_membership_v0_0_0,
-    creed_format_00013_ideaunit_v0_0_0,
+    creed_format_00013_conceptunit_v0_0_0,
 )
 
 
@@ -143,7 +143,7 @@ def test_make_buddelta_Arg_creed_format_00021_bud_acctunit_v0_0_0():
 #     assert len(membership_changunit.get_ordered_budatoms()) == 10
 
 
-def test_make_buddelta_Arg_creed_format_00013_ideaunit_v0_0_0():
+def test_make_buddelta_Arg_creed_format_00013_conceptunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -152,51 +152,51 @@ def test_make_buddelta_Arg_creed_format_00013_ideaunit_v0_0_0():
     casa_str = "casa"
     casa_way = sue_budunit.make_l1_way(casa_str)
     casa_mass = 31
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_str, mass=casa_mass))
+    sue_budunit.set_l1_concept(conceptunit_shop(casa_str, mass=casa_mass))
     clean_str = "clean"
     clean_way = sue_budunit.make_way(casa_way, clean_str)
-    sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
-    x_creed_name = creed_format_00013_ideaunit_v0_0_0()
-    ideaunit_dataframe = create_creed_df(sue_budunit, x_creed_name)
-    ideaunit_csv = ideaunit_dataframe.to_csv(index=False)
+    sue_budunit.set_concept(conceptunit_shop(clean_str, pledge=True), casa_way)
+    x_creed_name = creed_format_00013_conceptunit_v0_0_0()
+    conceptunit_dataframe = create_creed_df(sue_budunit, x_creed_name)
+    conceptunit_csv = conceptunit_dataframe.to_csv(index=False)
 
     # WHEN
-    ideaunit_changunit = make_buddelta(ideaunit_csv)
+    conceptunit_changunit = make_buddelta(conceptunit_csv)
 
     # THEN
-    casa_budatom = budatom_shop(bud_ideaunit_str(), atom_insert())
-    casa_budatom.set_arg(idea_way_str(), casa_way)
+    casa_budatom = budatom_shop(bud_conceptunit_str(), atom_insert())
+    casa_budatom.set_arg(concept_way_str(), casa_way)
     casa_budatom.set_arg(pledge_str(), False)
     casa_budatom.set_arg(mass_str(), casa_mass)
     print(f"{casa_budatom=}")
     assert casa_budatom.get_value(mass_str()) == casa_mass
-    clean_budatom = budatom_shop(bud_ideaunit_str(), atom_insert())
-    clean_budatom.set_arg(idea_way_str(), clean_way)
+    clean_budatom = budatom_shop(bud_conceptunit_str(), atom_insert())
+    clean_budatom.set_arg(concept_way_str(), clean_way)
     clean_budatom.set_arg(pledge_str(), True)
     clean_budatom.set_arg(mass_str(), 1)
-    assert ideaunit_changunit.budatom_exists(casa_budatom)
-    assert ideaunit_changunit.budatom_exists(clean_budatom)
-    assert len(ideaunit_changunit.get_ordered_budatoms()) == 2
+    assert conceptunit_changunit.budatom_exists(casa_budatom)
+    assert conceptunit_changunit.budatom_exists(clean_budatom)
+    assert len(conceptunit_changunit.get_ordered_budatoms()) == 2
 
 
-def test_create_creed_df_Arg_creed_format_00013_ideaunit_v0_0_0_Scenario_budunit_v001(
+def test_create_creed_df_Arg_creed_format_00013_conceptunit_v0_0_0_Scenario_budunit_v001(
     big_volume,
 ):
     # sourcery skip: no-conditionals-in-tests
     if big_volume:
         # ESTABLISH / WHEN
-        x_creed_name = creed_format_00013_ideaunit_v0_0_0()
+        x_creed_name = creed_format_00013_conceptunit_v0_0_0()
 
         # WHEN
-        ideaunit_format = create_creed_df(budunit_v001(), x_creed_name)
+        conceptunit_format = create_creed_df(budunit_v001(), x_creed_name)
 
         # THEN
-        array_headers = list(ideaunit_format.columns)
+        array_headers = list(conceptunit_format.columns)
         assert array_headers == get_creedref_obj(x_creed_name).get_headers_list()
-        assert len(ideaunit_format) == 251
+        assert len(conceptunit_format) == 251
 
 
-def test_make_buddelta_Arg_creed_format_00013_ideaunit_v0_0_0():
+def test_make_buddelta_Arg_creed_format_00013_conceptunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -205,28 +205,28 @@ def test_make_buddelta_Arg_creed_format_00013_ideaunit_v0_0_0():
     casa_str = "casa"
     casa_way = sue_budunit.make_l1_way(casa_str)
     casa_mass = 31
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_str, mass=casa_mass))
+    sue_budunit.set_l1_concept(conceptunit_shop(casa_str, mass=casa_mass))
     clean_str = "clean"
     clean_way = sue_budunit.make_way(casa_way, clean_str)
-    sue_budunit.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
-    x_creed_name = creed_format_00013_ideaunit_v0_0_0()
-    ideaunit_dataframe = create_creed_df(sue_budunit, x_creed_name)
-    ideaunit_csv = ideaunit_dataframe.to_csv(index=False)
+    sue_budunit.set_concept(conceptunit_shop(clean_str, pledge=True), casa_way)
+    x_creed_name = creed_format_00013_conceptunit_v0_0_0()
+    conceptunit_dataframe = create_creed_df(sue_budunit, x_creed_name)
+    conceptunit_csv = conceptunit_dataframe.to_csv(index=False)
 
     # WHEN
-    ideaunit_changunit = make_buddelta(ideaunit_csv)
+    conceptunit_changunit = make_buddelta(conceptunit_csv)
 
     # THEN
-    casa_budatom = budatom_shop(bud_ideaunit_str(), atom_insert())
-    casa_budatom.set_arg(idea_way_str(), casa_way)
+    casa_budatom = budatom_shop(bud_conceptunit_str(), atom_insert())
+    casa_budatom.set_arg(concept_way_str(), casa_way)
     casa_budatom.set_arg(pledge_str(), False)
     casa_budatom.set_arg(mass_str(), casa_mass)
     print(f"{casa_budatom=}")
     assert casa_budatom.get_value(mass_str()) == casa_mass
-    clean_budatom = budatom_shop(bud_ideaunit_str(), atom_insert())
-    clean_budatom.set_arg(idea_way_str(), clean_way)
+    clean_budatom = budatom_shop(bud_conceptunit_str(), atom_insert())
+    clean_budatom.set_arg(concept_way_str(), clean_way)
     clean_budatom.set_arg(pledge_str(), True)
     clean_budatom.set_arg(mass_str(), 1)
-    assert ideaunit_changunit.budatom_exists(casa_budatom)
-    assert ideaunit_changunit.budatom_exists(clean_budatom)
-    assert len(ideaunit_changunit.get_ordered_budatoms()) == 2
+    assert conceptunit_changunit.budatom_exists(casa_budatom)
+    assert conceptunit_changunit.budatom_exists(clean_budatom)
+    assert len(conceptunit_changunit.get_ordered_budatoms()) == 2

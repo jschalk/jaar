@@ -7,26 +7,26 @@ from src.a03_group_logic.group import (
     groupunit_shop,
     membership_shop,
 )
-from src.a05_idea_logic.healer import healerlink_shop
+from src.a05_concept_logic.healer import healerlink_shop
 from src.a04_reason_logic.reason_labor import laborheir_shop, laborunit_shop
-from src.a04_reason_logic.reason_idea import (
+from src.a04_reason_logic.reason_concept import (
     reasonheir_shop,
     premiseunit_shop,
     factheir_shop,
 )
-from src.a05_idea_logic.idea import ideaunit_shop
+from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
-    bud_ideaunit_str,
-    bud_idea_awardlink_str,
-    bud_idea_reasonunit_str,
-    bud_idea_reason_premiseunit_str,
-    bud_idea_laborlink_str,
-    bud_idea_healerlink_str,
-    bud_idea_factunit_str,
+    bud_conceptunit_str,
+    bud_concept_awardlink_str,
+    bud_concept_reasonunit_str,
+    bud_concept_reason_premiseunit_str,
+    bud_concept_laborlink_str,
+    bud_concept_healerlink_str,
+    bud_concept_factunit_str,
     bud_groupunit_str,
 )
 from src.a12_hub_tools.hub_tool import save_job_file
@@ -45,7 +45,7 @@ from src.a20_lobby_db_toolbox.lobby_tranformers import (
     insert_job_budprem,
     insert_job_budreas,
     insert_job_budlabor,
-    insert_job_budidea,
+    insert_job_budconcept,
     insert_job_budunit,
     insert_job_obj,
 )
@@ -146,17 +146,17 @@ def test_insert_job_budunit_CreatesTableRowsFor_budunit_job():
         assert rows == expected_data
 
 
-def test_insert_job_budidea_CreatesTableRowsFor_budidea_job():
+def test_insert_job_budconcept_CreatesTableRowsFor_budconcept_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_calc_dimen_args("bud_ideaunit")
+    # x_args = get_bud_calc_dimen_args("bud_conceptunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
     #     print(f"    x_{x_arg} = {x_count}")
     # print("")
     # for x_arg in get_default_sorted_list(x_args):
-    #     print(f"""    x_idea.{x_arg} = x_{x_arg}""")
+    #     print(f"""    x_concept.{x_arg} = x_{x_arg}""")
     # print("")
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
@@ -166,7 +166,7 @@ def test_insert_job_budidea_CreatesTableRowsFor_budidea_job():
     x_owner_name = 2
     casa_way = create_way(x_fisc_label, "casa")
     x_parent_way = casa_way
-    x_idea_label = "clean"
+    x_concept_label = "clean"
     x_begin = 5.0
     x_close = 6.0
     x_addin = 7.0
@@ -192,70 +192,70 @@ def test_insert_job_budidea_CreatesTableRowsFor_budidea_job():
     x__healerlink_ratio = 27.0
     x__all_acct_cred = 28
     x__all_acct_debt = 29
-    x_idea = ideaunit_shop()
-    x_idea.fisc_label = x_fisc_label
-    x_idea.parent_way = x_parent_way
-    x_idea.idea_label = x_idea_label
-    x_idea.begin = x_begin
-    x_idea.close = x_close
-    x_idea.addin = x_addin
-    x_idea.numor = x_numor
-    x_idea.denom = x_denom
-    x_idea.morph = x_morph
-    x_idea.gogo_want = x_gogo_want
-    x_idea.stop_want = x_stop_want
-    x_idea.mass = x_mass
-    x_idea.pledge = x_pledge
-    x_idea.problem_bool = x_problem_bool
-    x_idea._active = x__active
-    x_idea._task = x__task
-    x_idea.fund_coin = x_fund_coin
-    x_idea._fund_onset = x__fund_onset
-    x_idea._fund_cease = x__fund_cease
-    x_idea._fund_ratio = x__fund_ratio
-    x_idea._gogo_calc = x__gogo_calc
-    x_idea._stop_calc = x__stop_calc
-    x_idea._level = x__level
-    x_idea._range_evaluated = x__range_evaluated
-    x_idea._descendant_pledge_count = x__descendant_pledge_count
-    x_idea._healerlink_ratio = x__healerlink_ratio
-    x_idea._all_acct_cred = x__all_acct_cred
-    x_idea._all_acct_debt = x__all_acct_debt
-    x_idea.begin = x_begin
-    x_idea.close = x_close
-    x_idea.addin = x_addin
-    x_idea.numor = x_numor
-    x_idea.denom = x_denom
-    x_idea.morph = x_morph
-    x_idea.gogo_want = x_gogo_want
-    x_idea.stop_want = x_stop_want
-    x_idea.mass = x_mass
-    x_idea.pledge = x_pledge
-    x_idea.problem_bool = x_problem_bool
-    x_idea._active = x__active
-    x_idea._task = x__task
-    x_idea.fund_coin = x_fund_coin
-    x_idea._fund_onset = x__fund_onset
-    x_idea._fund_cease = x__fund_cease
-    x_idea._fund_ratio = x__fund_ratio
-    x_idea._gogo_calc = x__gogo_calc
-    x_idea._stop_calc = x__stop_calc
-    x_idea._level = x__level
-    x_idea._range_evaluated = x__range_evaluated
-    x_idea._descendant_pledge_count = x__descendant_pledge_count
-    x_idea._healerlink_ratio = x__healerlink_ratio
-    x_idea._all_acct_cred = x__all_acct_cred
-    x_idea._all_acct_debt = x__all_acct_debt
+    x_concept = conceptunit_shop()
+    x_concept.fisc_label = x_fisc_label
+    x_concept.parent_way = x_parent_way
+    x_concept.concept_label = x_concept_label
+    x_concept.begin = x_begin
+    x_concept.close = x_close
+    x_concept.addin = x_addin
+    x_concept.numor = x_numor
+    x_concept.denom = x_denom
+    x_concept.morph = x_morph
+    x_concept.gogo_want = x_gogo_want
+    x_concept.stop_want = x_stop_want
+    x_concept.mass = x_mass
+    x_concept.pledge = x_pledge
+    x_concept.problem_bool = x_problem_bool
+    x_concept._active = x__active
+    x_concept._task = x__task
+    x_concept.fund_coin = x_fund_coin
+    x_concept._fund_onset = x__fund_onset
+    x_concept._fund_cease = x__fund_cease
+    x_concept._fund_ratio = x__fund_ratio
+    x_concept._gogo_calc = x__gogo_calc
+    x_concept._stop_calc = x__stop_calc
+    x_concept._level = x__level
+    x_concept._range_evaluated = x__range_evaluated
+    x_concept._descendant_pledge_count = x__descendant_pledge_count
+    x_concept._healerlink_ratio = x__healerlink_ratio
+    x_concept._all_acct_cred = x__all_acct_cred
+    x_concept._all_acct_debt = x__all_acct_debt
+    x_concept.begin = x_begin
+    x_concept.close = x_close
+    x_concept.addin = x_addin
+    x_concept.numor = x_numor
+    x_concept.denom = x_denom
+    x_concept.morph = x_morph
+    x_concept.gogo_want = x_gogo_want
+    x_concept.stop_want = x_stop_want
+    x_concept.mass = x_mass
+    x_concept.pledge = x_pledge
+    x_concept.problem_bool = x_problem_bool
+    x_concept._active = x__active
+    x_concept._task = x__task
+    x_concept.fund_coin = x_fund_coin
+    x_concept._fund_onset = x__fund_onset
+    x_concept._fund_cease = x__fund_cease
+    x_concept._fund_ratio = x__fund_ratio
+    x_concept._gogo_calc = x__gogo_calc
+    x_concept._stop_calc = x__stop_calc
+    x_concept._level = x__level
+    x_concept._range_evaluated = x__range_evaluated
+    x_concept._descendant_pledge_count = x__descendant_pledge_count
+    x_concept._healerlink_ratio = x__healerlink_ratio
+    x_concept._all_acct_cred = x__all_acct_cred
+    x_concept._all_acct_debt = x__all_acct_debt
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "bud_ideaunit_job"
+        x_table_name = "bud_conceptunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_label, x_owner_name)
 
         # WHEN
-        insert_job_budidea(cursor, x_objkeysholder, x_idea)
+        insert_job_budconcept(cursor, x_objkeysholder, x_concept)
 
         # THEN
         clean_way = create_way(casa_way, "clean")
@@ -301,7 +301,7 @@ def test_insert_job_budidea_CreatesTableRowsFor_budidea_job():
 def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_calc_dimen_args("bud_idea_reasonunit")
+    # x_args = get_bud_calc_dimen_args("bud_concept_reasonunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -319,21 +319,21 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
     x_owner_name = 2
     x_way = 3
     x_rcontext = 4
-    x_rcontext_idea_active_requisite = 5
+    x_rcontext_concept_active_requisite = 5
     x__task = 6
     x__status = 7
-    x__rcontext_idea_active_value = 8
+    x__rcontext_concept_active_value = 8
     x_reasonheir = reasonheir_shop(rcontext=x_rcontext)
     x_reasonheir.rcontext = x_rcontext
-    x_reasonheir.rcontext_idea_active_requisite = x_rcontext_idea_active_requisite
+    x_reasonheir.rcontext_concept_active_requisite = x_rcontext_concept_active_requisite
     x_reasonheir._task = x__task
     x_reasonheir._status = x__status
-    x_reasonheir._rcontext_idea_active_value = x__rcontext_idea_active_value
+    x_reasonheir._rcontext_concept_active_value = x__rcontext_concept_active_value
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "bud_idea_reasonunit_job"
+        x_table_name = "bud_concept_reasonunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_label, x_owner_name, x_way)
 
@@ -351,10 +351,10 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
             str(x_owner_name),
             str(x_way),
             str(x_rcontext),
-            x_rcontext_idea_active_requisite,
+            x_rcontext_concept_active_requisite,
             x__task,
             x__status,
-            x__rcontext_idea_active_value,
+            x__rcontext_concept_active_value,
         )
         expected_data = [expected_row1]
         assert rows == expected_data
@@ -363,7 +363,7 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
 def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_calc_dimen_args("bud_idea_reason_premiseunit")
+    # x_args = get_bud_calc_dimen_args("bud_concept_reason_premiseunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -397,7 +397,7 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "bud_idea_reason_premiseunit_job"
+        x_table_name = "bud_concept_reason_premiseunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(
             x_world_id, x_fisc_label, x_owner_name, x_way, x_rcontext
@@ -664,7 +664,7 @@ def test_insert_job_budgrou_CreatesTableRowsFor_budgrou_job():
 def test_insert_job_budawar_CreatesTableRowsFor_budawar_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_calc_dimen_args("bud_idea_awardlink")
+    # x_args = get_bud_calc_dimen_args("bud_concept_awardlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -695,7 +695,7 @@ def test_insert_job_budawar_CreatesTableRowsFor_budawar_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "bud_idea_awardlink_job"
+        x_table_name = "bud_concept_awardlink_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_label, x_owner_name, x_way)
 
@@ -725,7 +725,7 @@ def test_insert_job_budawar_CreatesTableRowsFor_budawar_job():
 def test_insert_job_budfact_CreatesTableRowsFor_budfact_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_calc_dimen_args("bud_idea_factunit")
+    # x_args = get_bud_calc_dimen_args("bud_concept_factunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -754,7 +754,7 @@ def test_insert_job_budfact_CreatesTableRowsFor_budfact_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "bud_idea_factunit_job"
+        x_table_name = "bud_concept_factunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_label, x_owner_name, x_way)
 
@@ -783,7 +783,7 @@ def test_insert_job_budfact_CreatesTableRowsFor_budfact_job():
 def test_insert_job_budheal_CreatesTableRowsFor_budheal_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_calc_dimen_args("bud_idea_healerlink")
+    # x_args = get_bud_calc_dimen_args("bud_concept_healerlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -808,7 +808,7 @@ def test_insert_job_budheal_CreatesTableRowsFor_budheal_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "bud_idea_healerlink_job"
+        x_table_name = "bud_concept_healerlink_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_label, x_owner_name, x_way)
 
@@ -841,7 +841,7 @@ def test_insert_job_budheal_CreatesTableRowsFor_budheal_job():
 def test_insert_job_budlabor_CreatesTableRowsFor_budlabor_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_calc_dimen_args("bud_idea_laborlink")
+    # x_args = get_bud_calc_dimen_args("bud_concept_laborlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -867,7 +867,7 @@ def test_insert_job_budlabor_CreatesTableRowsFor_budlabor_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "bud_idea_laborlink_job"
+        x_table_name = "bud_concept_laborlink_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_label, x_owner_name, x_way)
 
@@ -915,15 +915,15 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
     status_way = sue_bud.make_l1_way("status")
     clean_way = sue_bud.make_way(status_way, "clean")
     dirty_way = sue_bud.make_way(status_way, "dirty")
-    sue_bud.add_idea(casa_way)
-    sue_bud.add_idea(clean_way)
-    sue_bud.add_idea(dirty_way)
-    sue_bud.edit_idea_attr(
+    sue_bud.add_concept(casa_way)
+    sue_bud.add_concept(clean_way)
+    sue_bud.add_concept(dirty_way)
+    sue_bud.edit_concept_attr(
         casa_way, reason_rcontext=status_way, reason_premise=dirty_way
     )
-    sue_bud.edit_idea_attr(casa_way, awardlink=awardlink_shop(run_str))
-    sue_bud.edit_idea_attr(casa_way, healerlink=healerlink_shop({bob_str}))
-    sue_bud.edit_idea_attr(casa_way, laborunit=laborunit_shop({sue_str}))
+    sue_bud.edit_concept_attr(casa_way, awardlink=awardlink_shop(run_str))
+    sue_bud.edit_concept_attr(casa_way, healerlink=healerlink_shop({bob_str}))
+    sue_bud.edit_concept_attr(casa_way, laborunit=laborunit_shop({sue_str}))
     sue_bud.add_fact(status_way, clean_way)
 
     with sqlite3_connect(":memory:") as conn:
@@ -932,16 +932,16 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         budmemb_job_table = "bud_acct_membership_job"
         budacct_job_table = "bud_acctunit_job"
         budgrou_job_table = "bud_groupunit_job"
-        budawar_job_table = "bud_idea_awardlink_job"
-        budfact_job_table = "bud_idea_factunit_job"
-        budheal_job_table = "bud_idea_healerlink_job"
-        budprem_job_table = "bud_idea_reason_premiseunit_job"
-        budreas_job_table = "bud_idea_reasonunit_job"
-        budlabor_job_table = "bud_idea_laborlink_job"
-        budidea_job_table = "bud_ideaunit_job"
+        budawar_job_table = "bud_concept_awardlink_job"
+        budfact_job_table = "bud_concept_factunit_job"
+        budheal_job_table = "bud_concept_healerlink_job"
+        budprem_job_table = "bud_concept_reason_premiseunit_job"
+        budreas_job_table = "bud_concept_reasonunit_job"
+        budlabor_job_table = "bud_concept_laborlink_job"
+        budconcept_job_table = "bud_conceptunit_job"
         budunit_job_table = "budunit_job"
         assert get_row_count(cursor, budunit_job_table) == 0
-        assert get_row_count(cursor, budidea_job_table) == 0
+        assert get_row_count(cursor, budconcept_job_table) == 0
         assert get_row_count(cursor, budacct_job_table) == 0
         assert get_row_count(cursor, budmemb_job_table) == 0
         assert get_row_count(cursor, budgrou_job_table) == 0
@@ -957,7 +957,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
 
         # THEN
         assert get_row_count(cursor, budunit_job_table) == 1
-        assert get_row_count(cursor, budidea_job_table) == 5
+        assert get_row_count(cursor, budconcept_job_table) == 5
         assert get_row_count(cursor, budacct_job_table) == 2
         assert get_row_count(cursor, budmemb_job_table) == 3
         assert get_row_count(cursor, budgrou_job_table) == 3
@@ -989,18 +989,18 @@ def test_etl_fisc_jobs_json_to_db_SetsDB_Scenario0(
     status_way = sue_bud.make_l1_way("status")
     clean_way = sue_bud.make_way(status_way, "clean")
     dirty_way = sue_bud.make_way(status_way, "dirty")
-    sue_bud.add_idea(casa_way)
-    sue_bud.add_idea(clean_way)
-    sue_bud.add_idea(dirty_way)
-    sue_bud.edit_idea_attr(
+    sue_bud.add_concept(casa_way)
+    sue_bud.add_concept(clean_way)
+    sue_bud.add_concept(dirty_way)
+    sue_bud.edit_concept_attr(
         casa_way, reason_rcontext=status_way, reason_premise=dirty_way
     )
-    sue_bud.edit_idea_attr(casa_way, awardlink=awardlink_shop(run_str))
-    sue_bud.edit_idea_attr(casa_way, healerlink=healerlink_shop({bob_str}))
-    sue_bud.edit_idea_attr(casa_way, laborunit=laborunit_shop({sue_str}))
+    sue_bud.edit_concept_attr(casa_way, awardlink=awardlink_shop(run_str))
+    sue_bud.edit_concept_attr(casa_way, healerlink=healerlink_shop({bob_str}))
+    sue_bud.edit_concept_attr(casa_way, laborunit=laborunit_shop({sue_str}))
     sue_bud.add_fact(status_way, clean_way)
-    print(f"{sue_bud.get_idea_obj(casa_way).laborunit=}")
-    print(f"{sue_bud.get_idea_obj(casa_way).get_dict()=}")
+    print(f"{sue_bud.get_concept_obj(casa_way).laborunit=}")
+    print(f"{sue_bud.get_concept_obj(casa_way).get_dict()=}")
     save_job_file(m23_fisc_mstr_dir, sue_bud)
 
     with sqlite3_connect(":memory:") as conn:
@@ -1009,16 +1009,16 @@ def test_etl_fisc_jobs_json_to_db_SetsDB_Scenario0(
         budmemb_job_table = f"{bud_acct_membership_str()}_job"
         budacct_job_table = f"{bud_acctunit_str()}_job"
         budgrou_job_table = f"{bud_groupunit_str()}_job"
-        budawar_job_table = f"{bud_idea_awardlink_str()}_job"
-        budfact_job_table = f"{bud_idea_factunit_str()}_job"
-        budheal_job_table = f"{bud_idea_healerlink_str()}_job"
-        budprem_job_table = f"{bud_idea_reason_premiseunit_str()}_job"
-        budreas_job_table = f"{bud_idea_reasonunit_str()}_job"
-        budlabor_job_table = f"{bud_idea_laborlink_str()}_job"
-        budidea_job_table = f"{bud_ideaunit_str()}_job"
+        budawar_job_table = f"{bud_concept_awardlink_str()}_job"
+        budfact_job_table = f"{bud_concept_factunit_str()}_job"
+        budheal_job_table = f"{bud_concept_healerlink_str()}_job"
+        budprem_job_table = f"{bud_concept_reason_premiseunit_str()}_job"
+        budreas_job_table = f"{bud_concept_reasonunit_str()}_job"
+        budlabor_job_table = f"{bud_concept_laborlink_str()}_job"
+        budconcept_job_table = f"{bud_conceptunit_str()}_job"
         budunit_job_table = f"{budunit_str()}_job"
         assert get_row_count(cursor, budunit_job_table) == 0
-        assert get_row_count(cursor, budidea_job_table) == 0
+        assert get_row_count(cursor, budconcept_job_table) == 0
         assert get_row_count(cursor, budacct_job_table) == 0
         assert get_row_count(cursor, budmemb_job_table) == 0
         assert get_row_count(cursor, budgrou_job_table) == 0
@@ -1034,7 +1034,7 @@ def test_etl_fisc_jobs_json_to_db_SetsDB_Scenario0(
 
         # THEN
         assert get_row_count(cursor, budunit_job_table) == 1
-        assert get_row_count(cursor, budidea_job_table) == 5
+        assert get_row_count(cursor, budconcept_job_table) == 5
         assert get_row_count(cursor, budacct_job_table) == 2
         assert get_row_count(cursor, budmemb_job_table) == 3
         assert get_row_count(cursor, budgrou_job_table) == 3
@@ -1056,15 +1056,15 @@ def test_etl_fiscs_jobs_json_to_db_SetsDB_Scenario0_TwoBudsInDifferentFiscUnits(
     sue_str = "Sue"
     a23_sue_bud = budunit_shop(sue_str, a23_str)
     a23_sue_bud.add_acctunit(sue_str)
-    a23_sue_bud.add_idea(a23_sue_bud.make_l1_way("casa"))
+    a23_sue_bud.add_concept(a23_sue_bud.make_l1_way("casa"))
 
     a99_str = "accord99"
     bob_str = "Bob"
     a99_sue_bud = budunit_shop(sue_str, a99_str)
     a99_sue_bud.add_acctunit(sue_str)
     a99_sue_bud.add_acctunit(bob_str)
-    a99_sue_bud.add_idea(a99_sue_bud.make_l1_way("casa"))
-    a99_sue_bud.add_idea(a99_sue_bud.make_l1_way("sports"))
+    a99_sue_bud.add_concept(a99_sue_bud.make_l1_way("casa"))
+    a99_sue_bud.add_concept(a99_sue_bud.make_l1_way("sports"))
 
     w34_str = "world34"
     w99_str = "world99"
@@ -1079,10 +1079,10 @@ def test_etl_fiscs_jobs_json_to_db_SetsDB_Scenario0_TwoBudsInDifferentFiscUnits(
         cursor = conn.cursor()
         create_job_tables(cursor)
         budacct_job_table = f"{bud_acctunit_str()}_job"
-        budidea_job_table = f"{bud_ideaunit_str()}_job"
+        budconcept_job_table = f"{bud_conceptunit_str()}_job"
         budunit_job_table = f"{budunit_str()}_job"
         assert get_row_count(cursor, budunit_job_table) == 0
-        assert get_row_count(cursor, budidea_job_table) == 0
+        assert get_row_count(cursor, budconcept_job_table) == 0
         assert get_row_count(cursor, budacct_job_table) == 0
 
         # WHEN
@@ -1091,5 +1091,5 @@ def test_etl_fiscs_jobs_json_to_db_SetsDB_Scenario0_TwoBudsInDifferentFiscUnits(
 
         # THEN
         assert get_row_count(cursor, budunit_job_table) == 2
-        assert get_row_count(cursor, budidea_job_table) == 5
+        assert get_row_count(cursor, budconcept_job_table) == 5
         assert get_row_count(cursor, budacct_job_table) == 3

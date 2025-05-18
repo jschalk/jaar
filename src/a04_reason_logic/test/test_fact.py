@@ -1,4 +1,4 @@
-from src.a04_reason_logic.reason_idea import (
+from src.a04_reason_logic.reason_concept import (
     FactUnit,
     factunit_shop,
     factheir_shop,

@@ -29,7 +29,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     parent_way_str,
     penny_str,
     respect_bit_str,
-    idea_way_str,
+    concept_way_str,
     stop_want_str,
     labor_title_str,
     type_NameStr_str,
@@ -69,7 +69,7 @@ def test_str_functions_ReturnsObj():
     assert parent_way_str() == "parent_way"
     assert penny_str() == "penny"
     assert respect_bit_str() == "respect_bit"
-    assert idea_way_str() == "idea_way"
+    assert concept_way_str() == "concept_way"
     assert stop_want_str() == "stop_want"
     assert labor_title_str() == "labor_title"
     assert type_NameStr_str() == "NameStr"

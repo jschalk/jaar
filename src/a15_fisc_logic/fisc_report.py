@@ -142,7 +142,7 @@ def get_fisc_guts_agenda_plotly_fig(x_fisc: FiscUnit) -> plotly_Figure:
     column_header_list = [
         "owner_name",
         "fund_ratio",
-        "idea_label",
+        "concept_label",
         "parent_way",
         "begin",
         "close",
@@ -161,7 +161,7 @@ def get_fisc_guts_agenda_plotly_fig(x_fisc: FiscUnit) -> plotly_Figure:
             values=[
                 df.owner_name,
                 df.fund_ratio,
-                df.idea_label,
+                df.concept_label,
                 df.parent_way,
                 df.begin,
                 df.close,
@@ -199,7 +199,7 @@ def get_fisc_jobs_agenda_plotly_fig(x_fisc: FiscUnit) -> plotly_Figure:
     column_header_list = [
         "owner_name",
         "fund_ratio",
-        "idea_label",
+        "concept_label",
         "parent_way",
         "begin",
         "close",
@@ -218,7 +218,7 @@ def get_fisc_jobs_agenda_plotly_fig(x_fisc: FiscUnit) -> plotly_Figure:
             values=[
                 df.owner_name,
                 df.fund_ratio,
-                df.idea_label,
+                df.concept_label,
                 df.parent_way,
                 df.begin,
                 df.close,

@@ -1,5 +1,5 @@
 from src.a01_way_logic.way import create_way
-from src.a04_reason_logic.reason_idea import factunit_shop
+from src.a04_reason_logic.reason_concept import factunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a11_deal_cell_logic.cell import cellunit_shop
 from src.a12_hub_tools.hub_path import create_cell_dir_path as cell_dir
@@ -37,7 +37,7 @@ def test_set_cell_trees_found_facts_ChildNodeWithOneFactIsAssignedToAncestors(
     bob5_budevent.add_acctunit(yao_str)
     bob5_yao_budevent.add_acctunit(sue_str)
     bob5_yao_sue_budevent.add_acctunit(bob_str)
-    bob5_yao_sue_budevent.add_idea(clean_fact.fbranch, 1)
+    bob5_yao_sue_budevent.add_concept(clean_fact.fbranch, 1)
     bob5_yao_sue_budevent.add_fact(clean_fact.fcontext, clean_fact.fbranch)
     bob5_cell = cellunit_shop(bob_str, das, budadjust=bob5_budevent)
     bob5_yao_cell = cellunit_shop(bob_str, das_y, budadjust=bob5_yao_budevent)

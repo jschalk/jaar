@@ -11,13 +11,13 @@ from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
-    bud_ideaunit_str,
-    bud_idea_awardlink_str,
-    bud_idea_reasonunit_str,
-    bud_idea_reason_premiseunit_str,
-    bud_idea_laborlink_str,
-    bud_idea_healerlink_str,
-    bud_idea_factunit_str,
+    bud_conceptunit_str,
+    bud_concept_awardlink_str,
+    bud_concept_reasonunit_str,
+    bud_concept_reason_premiseunit_str,
+    bud_concept_laborlink_str,
+    bud_concept_healerlink_str,
+    bud_concept_factunit_str,
     event_int_str,
     face_name_str,
 )
@@ -70,40 +70,40 @@ BUD_PRIME_TABLENAMES = {
     f"{bud_acct_membership_str()}_sound_put_raw": "BUDMEMB_PUT_RAW",
     f"{bud_acctunit_str()}_sound_put_agg": "BUDACCT_PUT_AGG",
     f"{bud_acctunit_str()}_sound_put_raw": "BUDACCT_PUT_RAW",
-    f"{bud_idea_awardlink_str()}_sound_put_agg": "BUDAWAR_PUT_AGG",
-    f"{bud_idea_awardlink_str()}_sound_put_raw": "BUDAWAR_PUT_RAW",
-    f"{bud_idea_factunit_str()}_sound_put_agg": "BUDFACT_PUT_AGG",
-    f"{bud_idea_factunit_str()}_sound_put_raw": "BUDFACT_PUT_RAW",
-    f"{bud_idea_healerlink_str()}_sound_put_agg": "BUDHEAL_PUT_AGG",
-    f"{bud_idea_healerlink_str()}_sound_put_raw": "BUDHEAL_PUT_RAW",
-    f"{bud_idea_reason_premiseunit_str()}_sound_put_agg": "BUDPREM_PUT_AGG",
-    f"{bud_idea_reason_premiseunit_str()}_sound_put_raw": "BUDPREM_PUT_RAW",
-    f"{bud_idea_reasonunit_str()}_sound_put_agg": "BUDREAS_PUT_AGG",
-    f"{bud_idea_reasonunit_str()}_sound_put_raw": "BUDREAS_PUT_RAW",
-    f"{bud_idea_laborlink_str()}_sound_put_agg": "BUDLABO_PUT_AGG",
-    f"{bud_idea_laborlink_str()}_sound_put_raw": "BUDLABO_PUT_RAW",
-    f"{bud_ideaunit_str()}_sound_put_agg": "BUDIDEA_PUT_AGG",
-    f"{bud_ideaunit_str()}_sound_put_raw": "BUDIDEA_PUT_RAW",
+    f"{bud_concept_awardlink_str()}_sound_put_agg": "BUDAWAR_PUT_AGG",
+    f"{bud_concept_awardlink_str()}_sound_put_raw": "BUDAWAR_PUT_RAW",
+    f"{bud_concept_factunit_str()}_sound_put_agg": "BUDFACT_PUT_AGG",
+    f"{bud_concept_factunit_str()}_sound_put_raw": "BUDFACT_PUT_RAW",
+    f"{bud_concept_healerlink_str()}_sound_put_agg": "BUDHEAL_PUT_AGG",
+    f"{bud_concept_healerlink_str()}_sound_put_raw": "BUDHEAL_PUT_RAW",
+    f"{bud_concept_reason_premiseunit_str()}_sound_put_agg": "BUDPREM_PUT_AGG",
+    f"{bud_concept_reason_premiseunit_str()}_sound_put_raw": "BUDPREM_PUT_RAW",
+    f"{bud_concept_reasonunit_str()}_sound_put_agg": "BUDREAS_PUT_AGG",
+    f"{bud_concept_reasonunit_str()}_sound_put_raw": "BUDREAS_PUT_RAW",
+    f"{bud_concept_laborlink_str()}_sound_put_agg": "BUDLABO_PUT_AGG",
+    f"{bud_concept_laborlink_str()}_sound_put_raw": "BUDLABO_PUT_RAW",
+    f"{bud_conceptunit_str()}_sound_put_agg": "BUDCONCEPT_PUT_AGG",
+    f"{bud_conceptunit_str()}_sound_put_raw": "BUDCONCEPT_PUT_RAW",
     f"{budunit_str()}_sound_put_agg": "BUDUNIT_PUT_AGG",
     f"{budunit_str()}_sound_put_raw": "BUDUNIT_PUT_RAW",
     f"{bud_acct_membership_str()}_sound_del_agg": "BUDMEMB_DEL_AGG",
     f"{bud_acct_membership_str()}_sound_del_raw": "BUDMEMB_DEL_RAW",
     f"{bud_acctunit_str()}_sound_del_agg": "BUDACCT_DEL_AGG",
     f"{bud_acctunit_str()}_sound_del_raw": "BUDACCT_DEL_RAW",
-    f"{bud_idea_awardlink_str()}_sound_del_agg": "BUDAWAR_DEL_AGG",
-    f"{bud_idea_awardlink_str()}_sound_del_raw": "BUDAWAR_DEL_RAW",
-    f"{bud_idea_factunit_str()}_sound_del_agg": "BUDFACT_DEL_AGG",
-    f"{bud_idea_factunit_str()}_sound_del_raw": "BUDFACT_DEL_RAW",
-    f"{bud_idea_healerlink_str()}_sound_del_agg": "BUDHEAL_DEL_AGG",
-    f"{bud_idea_healerlink_str()}_sound_del_raw": "BUDHEAL_DEL_RAW",
-    f"{bud_idea_reason_premiseunit_str()}_sound_del_agg": "BUDPREM_DEL_AGG",
-    f"{bud_idea_reason_premiseunit_str()}_sound_del_raw": "BUDPREM_DEL_RAW",
-    f"{bud_idea_reasonunit_str()}_sound_del_agg": "BUDREAS_DEL_AGG",
-    f"{bud_idea_reasonunit_str()}_sound_del_raw": "BUDREAS_DEL_RAW",
-    f"{bud_idea_laborlink_str()}_sound_del_agg": "BUDLABO_DEL_AGG",
-    f"{bud_idea_laborlink_str()}_sound_del_raw": "BUDLABO_DEL_RAW",
-    f"{bud_ideaunit_str()}_sound_del_agg": "BUDIDEA_DEL_AGG",
-    f"{bud_ideaunit_str()}_sound_del_raw": "BUDIDEA_DEL_RAW",
+    f"{bud_concept_awardlink_str()}_sound_del_agg": "BUDAWAR_DEL_AGG",
+    f"{bud_concept_awardlink_str()}_sound_del_raw": "BUDAWAR_DEL_RAW",
+    f"{bud_concept_factunit_str()}_sound_del_agg": "BUDFACT_DEL_AGG",
+    f"{bud_concept_factunit_str()}_sound_del_raw": "BUDFACT_DEL_RAW",
+    f"{bud_concept_healerlink_str()}_sound_del_agg": "BUDHEAL_DEL_AGG",
+    f"{bud_concept_healerlink_str()}_sound_del_raw": "BUDHEAL_DEL_RAW",
+    f"{bud_concept_reason_premiseunit_str()}_sound_del_agg": "BUDPREM_DEL_AGG",
+    f"{bud_concept_reason_premiseunit_str()}_sound_del_raw": "BUDPREM_DEL_RAW",
+    f"{bud_concept_reasonunit_str()}_sound_del_agg": "BUDREAS_DEL_AGG",
+    f"{bud_concept_reasonunit_str()}_sound_del_raw": "BUDREAS_DEL_RAW",
+    f"{bud_concept_laborlink_str()}_sound_del_agg": "BUDLABO_DEL_AGG",
+    f"{bud_concept_laborlink_str()}_sound_del_raw": "BUDLABO_DEL_RAW",
+    f"{bud_conceptunit_str()}_sound_del_agg": "BUDCONCEPT_DEL_AGG",
+    f"{bud_conceptunit_str()}_sound_del_raw": "BUDCONCEPT_DEL_RAW",
     f"{budunit_str()}_sound_del_agg": "BUDUNIT_DEL_AGG",
     f"{budunit_str()}_sound_del_raw": "BUDUNIT_DEL_RAW",
 }
@@ -119,13 +119,13 @@ def test_create_prime_tablename_ReturnsObj():
     budunit_dimen = budunit_str()
     budacct_dimen = bud_acctunit_str()
     budmemb_dimen = bud_acct_membership_str()
-    budidea_dimen = bud_ideaunit_str()
-    budawar_dimen = bud_idea_awardlink_str()
-    budreas_dimen = bud_idea_reasonunit_str()
-    budprem_dimen = bud_idea_reason_premiseunit_str()
-    budlabor_dimen = bud_idea_laborlink_str()
-    budheal_dimen = bud_idea_healerlink_str()
-    budfact_dimen = bud_idea_factunit_str()
+    budconcept_dimen = bud_conceptunit_str()
+    budawar_dimen = bud_concept_awardlink_str()
+    budreas_dimen = bud_concept_reasonunit_str()
+    budprem_dimen = bud_concept_reason_premiseunit_str()
+    budlabor_dimen = bud_concept_laborlink_str()
+    budheal_dimen = bud_concept_healerlink_str()
+    budfact_dimen = bud_concept_factunit_str()
     fisunit_dimen = fiscunit_str()
     fiscash_dimen = fisc_cashbook_str()
     fisdeal_dimen = fisc_dealunit_str()
@@ -146,7 +146,10 @@ def test_create_prime_tablename_ReturnsObj():
     assert prime_tbl("budunit", "s", agg_str, put_str) == f"{budunit_dimen}_s_put_agg"
     assert prime_tbl("budacct", "s", agg_str, put_str) == f"{budacct_dimen}_s_put_agg"
     assert prime_tbl("budmemb", "s", agg_str, put_str) == f"{budmemb_dimen}_s_put_agg"
-    assert prime_tbl("budidea", "s", agg_str, put_str) == f"{budidea_dimen}_s_put_agg"
+    assert (
+        prime_tbl("budconcept", "s", agg_str, put_str)
+        == f"{budconcept_dimen}_s_put_agg"
+    )
     assert prime_tbl("budawar", "s", agg_str, put_str) == f"{budawar_dimen}_s_put_agg"
     assert prime_tbl("budreas", "s", agg_str, put_str) == f"{budreas_dimen}_s_put_agg"
     assert prime_tbl("budprem", "s", agg_str, put_str) == f"{budprem_dimen}_s_put_agg"
@@ -665,7 +668,7 @@ WHERE inconsistency_rows.fisc_label = fisc_timeline_hour_s_raw.fisc_label
 def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scenario2_BudDimen():
     # sourcery skip: extract-method
     # ESTABLISH
-    dimen = bud_idea_awardlink_str()
+    dimen = bud_concept_awardlink_str()
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
@@ -687,21 +690,21 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
         assert update_sqlstr == expected_update_sqlstr
 
         static_example_sqlstr = """WITH inconsistency_rows AS (
-SELECT event_int, face_name, fisc_label, owner_name, idea_way, awardee_title
-FROM bud_idea_awardlink_s_put_raw
-GROUP BY event_int, face_name, fisc_label, owner_name, idea_way, awardee_title
+SELECT event_int, face_name, fisc_label, owner_name, concept_way, awardee_title
+FROM bud_concept_awardlink_s_put_raw
+GROUP BY event_int, face_name, fisc_label, owner_name, concept_way, awardee_title
 HAVING MIN(give_force) != MAX(give_force)
     OR MIN(take_force) != MAX(take_force)
 )
-UPDATE bud_idea_awardlink_s_put_raw
+UPDATE bud_concept_awardlink_s_put_raw
 SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
-WHERE inconsistency_rows.event_int = bud_idea_awardlink_s_put_raw.event_int
-    AND inconsistency_rows.face_name = bud_idea_awardlink_s_put_raw.face_name
-    AND inconsistency_rows.fisc_label = bud_idea_awardlink_s_put_raw.fisc_label
-    AND inconsistency_rows.owner_name = bud_idea_awardlink_s_put_raw.owner_name
-    AND inconsistency_rows.idea_way = bud_idea_awardlink_s_put_raw.idea_way
-    AND inconsistency_rows.awardee_title = bud_idea_awardlink_s_put_raw.awardee_title
+WHERE inconsistency_rows.event_int = bud_concept_awardlink_s_put_raw.event_int
+    AND inconsistency_rows.face_name = bud_concept_awardlink_s_put_raw.face_name
+    AND inconsistency_rows.fisc_label = bud_concept_awardlink_s_put_raw.fisc_label
+    AND inconsistency_rows.owner_name = bud_concept_awardlink_s_put_raw.owner_name
+    AND inconsistency_rows.concept_way = bud_concept_awardlink_s_put_raw.concept_way
+    AND inconsistency_rows.awardee_title = bud_concept_awardlink_s_put_raw.awardee_title
 ;
 """
         print(update_sqlstr)
@@ -796,7 +799,7 @@ GROUP BY fisc_label, cumlative_minute
 def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario2_BudDimen():
     # sourcery skip: extract-method
     # ESTABLISH
-    dimen = bud_idea_awardlink_str()
+    dimen = bud_concept_awardlink_str()
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
@@ -820,11 +823,11 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario2_BudDimen():
         # print(put_expected_insert_sqlstr)
         assert update_sqlstrs[0] == put_expected_insert_sqlstr
 
-        static_example_put_sqlstr = """INSERT INTO bud_idea_awardlink_s_put_agg (event_int, face_name, fisc_label, owner_name, idea_way, awardee_title, give_force, take_force)
-SELECT event_int, face_name, fisc_label, owner_name, idea_way, awardee_title, MAX(give_force), MAX(take_force)
-FROM bud_idea_awardlink_s_put_raw
+        static_example_put_sqlstr = """INSERT INTO bud_concept_awardlink_s_put_agg (event_int, face_name, fisc_label, owner_name, concept_way, awardee_title, give_force, take_force)
+SELECT event_int, face_name, fisc_label, owner_name, concept_way, awardee_title, MAX(give_force), MAX(take_force)
+FROM bud_concept_awardlink_s_put_raw
 WHERE error_message IS NULL
-GROUP BY event_int, face_name, fisc_label, owner_name, idea_way, awardee_title
+GROUP BY event_int, face_name, fisc_label, owner_name, concept_way, awardee_title
 ;
 """
         # print(update_sqlstrs[0])
@@ -845,10 +848,10 @@ GROUP BY event_int, face_name, fisc_label, owner_name, idea_way, awardee_title
         print(del_expected_insert_sqlstr)
         assert update_sqlstrs[1] == del_expected_insert_sqlstr
 
-        static_example_del_sqlstr = """INSERT INTO bud_idea_awardlink_s_del_agg (event_int, face_name, fisc_label, owner_name, idea_way, awardee_title_ERASE)
-SELECT event_int, face_name, fisc_label, owner_name, idea_way, awardee_title_ERASE
-FROM bud_idea_awardlink_s_del_raw
-GROUP BY event_int, face_name, fisc_label, owner_name, idea_way, awardee_title_ERASE
+        static_example_del_sqlstr = """INSERT INTO bud_concept_awardlink_s_del_agg (event_int, face_name, fisc_label, owner_name, concept_way, awardee_title_ERASE)
+SELECT event_int, face_name, fisc_label, owner_name, concept_way, awardee_title_ERASE
+FROM bud_concept_awardlink_s_del_raw
+GROUP BY event_int, face_name, fisc_label, owner_name, concept_way, awardee_title_ERASE
 ;
 """
         print(update_sqlstrs[1])

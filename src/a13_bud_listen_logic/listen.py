@@ -5,7 +5,7 @@ from src.a01_way_logic.way import (
     get_root_label_from_way,
     OwnerName,
 )
-from src.a05_idea_logic.idea import IdeaUnit
+from src.a05_concept_logic.concept import ConceptUnit
 from src.a06_bud_logic.bud import BudUnit, AcctUnit
 from src.a12_hub_tools.basis_buds import create_empty_bud_from_bud, create_listen_basis
 from src.a12_hub_tools.hub_tool import (
@@ -22,17 +22,17 @@ class Missing_debtor_respectException(Exception):
     pass
 
 
-def generate_perspective_agenda(perspective_bud: BudUnit) -> list[IdeaUnit]:
-    for x_factunit in perspective_bud.idearoot.factunits.values():
+def generate_perspective_agenda(perspective_bud: BudUnit) -> list[ConceptUnit]:
+    for x_factunit in perspective_bud.conceptroot.factunits.values():
         x_factunit.set_fbranch_to_fcontext()
     return list(perspective_bud.get_agenda_dict().values())
 
 
-def _ingest_perspective_agenda(listener: BudUnit, agenda: list[IdeaUnit]) -> BudUnit:
+def _ingest_perspective_agenda(listener: BudUnit, agenda: list[ConceptUnit]) -> BudUnit:
     debtor_amount = listener.debtor_respect
     ingest_list = generate_ingest_list(agenda, debtor_amount, listener.respect_bit)
-    for ingest_ideaunit in ingest_list:
-        _ingest_single_ideaunit(listener, ingest_ideaunit)
+    for ingest_conceptunit in ingest_list:
+        _ingest_single_conceptunit(listener, ingest_conceptunit)
     return listener
 
 
@@ -59,27 +59,31 @@ def get_speaker_perspective(speaker: BudUnit, listener_owner_name: OwnerName):
 
 
 def generate_ingest_list(
-    idea_list: list[IdeaUnit], debtor_amount: float, respect_bit: float
-) -> list[IdeaUnit]:
-    idea_ledger = {x_idea.get_idea_way(): x_idea.mass for x_idea in idea_list}
-    mass_allot = allot_scale(idea_ledger, debtor_amount, respect_bit)
-    for x_ideaunit in idea_list:
-        x_ideaunit.mass = mass_allot.get(x_ideaunit.get_idea_way())
-    return idea_list
+    concept_list: list[ConceptUnit], debtor_amount: float, respect_bit: float
+) -> list[ConceptUnit]:
+    concept_ledger = {
+        x_concept.get_concept_way(): x_concept.mass for x_concept in concept_list
+    }
+    mass_allot = allot_scale(concept_ledger, debtor_amount, respect_bit)
+    for x_conceptunit in concept_list:
+        x_conceptunit.mass = mass_allot.get(x_conceptunit.get_concept_way())
+    return concept_list
 
 
-def _ingest_single_ideaunit(listener: BudUnit, ingest_ideaunit: IdeaUnit):
-    mass_data = _create_mass_data(listener, ingest_ideaunit.get_idea_way())
+def _ingest_single_conceptunit(listener: BudUnit, ingest_conceptunit: ConceptUnit):
+    mass_data = _create_mass_data(listener, ingest_conceptunit.get_concept_way())
 
-    if listener.idea_exists(ingest_ideaunit.get_idea_way()) is False:
-        x_parent_way = ingest_ideaunit.parent_way
-        listener.set_idea(ingest_ideaunit, x_parent_way, create_missing_ideas=True)
+    if listener.concept_exists(ingest_conceptunit.get_concept_way()) is False:
+        x_parent_way = ingest_conceptunit.parent_way
+        listener.set_concept(
+            ingest_conceptunit, x_parent_way, create_missing_concepts=True
+        )
 
-    _add_and_replace_ideaunit_masss(
+    _add_and_replace_conceptunit_masss(
         listener=listener,
         replace_mass_list=mass_data.replace_mass_list,
         add_to_mass_list=mass_data.add_to_mass_list,
-        x_mass=ingest_ideaunit.mass,
+        x_mass=ingest_conceptunit.mass,
     )
 
 
@@ -97,24 +101,24 @@ def _create_mass_data(listener: BudUnit, x_way: WayStr) -> list:
     root_way = get_root_label_from_way(x_way, listener.bridge)
     for ancestor_way in ancestor_ways:
         if ancestor_way != root_way:
-            if listener.idea_exists(ancestor_way):
+            if listener.concept_exists(ancestor_way):
                 mass_data.add_to_mass_list.append(ancestor_way)
             else:
                 mass_data.replace_mass_list.append(ancestor_way)
     return mass_data
 
 
-def _add_and_replace_ideaunit_masss(
+def _add_and_replace_conceptunit_masss(
     listener: BudUnit,
     replace_mass_list: list[WayStr],
     add_to_mass_list: list[WayStr],
     x_mass: float,
 ):
-    for idea_way in replace_mass_list:
-        listener.edit_idea_attr(idea_way, mass=x_mass)
-    for idea_way in add_to_mass_list:
-        x_ideaunit = listener.get_idea_obj(idea_way)
-        x_ideaunit.mass += x_mass
+    for concept_way in replace_mass_list:
+        listener.edit_concept_attr(concept_way, mass=x_mass)
+    for concept_way in add_to_mass_list:
+        x_conceptunit = listener.get_concept_obj(concept_way)
+        x_conceptunit.mass += x_mass
 
 
 def get_debtors_roll(x_duty: BudUnit) -> list[AcctUnit]:
@@ -132,15 +136,15 @@ def get_ordered_debtors_roll(x_bud: BudUnit) -> list[AcctUnit]:
 
 
 def migrate_all_facts(src_listener: BudUnit, dst_listener: BudUnit):
-    for x_factunit in src_listener.idearoot.factunits.values():
+    for x_factunit in src_listener.conceptroot.factunits.values():
         fcontext_way = x_factunit.fcontext
         fbranch_way = x_factunit.fbranch
-        if dst_listener.idea_exists(fcontext_way) is False:
-            rcontext_idea = src_listener.get_idea_obj(fcontext_way)
-            dst_listener.set_idea(rcontext_idea, rcontext_idea.parent_way)
-        if dst_listener.idea_exists(fbranch_way) is False:
-            fbranch_idea = src_listener.get_idea_obj(fbranch_way)
-            dst_listener.set_idea(fbranch_idea, fbranch_idea.parent_way)
+        if dst_listener.concept_exists(fcontext_way) is False:
+            rcontext_concept = src_listener.get_concept_obj(fcontext_way)
+            dst_listener.set_concept(rcontext_concept, rcontext_concept.parent_way)
+        if dst_listener.concept_exists(fbranch_way) is False:
+            fbranch_concept = src_listener.get_concept_obj(fbranch_way)
+            dst_listener.set_concept(fbranch_concept, fbranch_concept.parent_way)
         dst_listener.add_fact(fcontext_way, fbranch_way)
 
 
@@ -159,7 +163,7 @@ def listen_to_speaker_fact(
                 fbranch=x_factunit.fbranch,
                 fopen=x_factunit.fopen,
                 fnigh=x_factunit.fnigh,
-                create_missing_ideas=True,
+                create_missing_concepts=True,
             )
 
 
@@ -312,13 +316,13 @@ def fbranch_keep_plan_and_listen(
 
 
 def listen_to_plan_agenda(listener: BudUnit, plan: BudUnit):
-    for x_idea in plan._idea_dict.values():
-        if listener.idea_exists(x_idea.get_idea_way()) is False:
-            listener.set_idea(x_idea, x_idea.parent_way)
-        if listener.get_fact(x_idea.get_idea_way()) is False:
-            listener.set_idea(x_idea, x_idea.parent_way)
-    for x_fact_way, x_fact_unit in plan.idearoot.factunits.items():
-        listener.idearoot.set_factunit(x_fact_unit)
+    for x_concept in plan._concept_dict.values():
+        if listener.concept_exists(x_concept.get_concept_way()) is False:
+            listener.set_concept(x_concept, x_concept.parent_way)
+        if listener.get_fact(x_concept.get_concept_way()) is False:
+            listener.set_concept(x_concept, x_concept.parent_way)
+    for x_fact_way, x_fact_unit in plan.conceptroot.factunits.items():
+        listener.conceptroot.set_factunit(x_fact_unit)
     listener.settle_bud()
 
 

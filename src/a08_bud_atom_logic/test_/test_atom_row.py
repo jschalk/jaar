@@ -2,8 +2,8 @@ from src.a01_way_logic.way import create_way, to_way
 from src.a06_bud_logic._utils.str_a06 import (
     bud_acctunit_str,
     bud_acct_membership_str,
-    bud_ideaunit_str,
-    bud_idea_healerlink_str,
+    bud_conceptunit_str,
+    bud_concept_healerlink_str,
 )
 from src.a06_bud_logic._utils.str_a06 import acct_name_str
 from src.a08_bud_atom_logic._utils.str_a08 import atom_insert, atom_delete
@@ -21,7 +21,7 @@ def test_AtomRow_exists():
     assert x_atomrow.acct_name is None
     assert x_atomrow.addin is None
     assert x_atomrow.rcontext is None
-    assert x_atomrow.rcontext_idea_active_requisite is None
+    assert x_atomrow.rcontext_concept_active_requisite is None
     assert x_atomrow.begin is None
     assert x_atomrow.respect_bit is None
     assert x_atomrow.close is None
@@ -53,7 +53,7 @@ def test_AtomRow_exists():
     assert x_atomrow.fbranch is None
     assert x_atomrow.pledge is None
     assert x_atomrow.problem_bool is None
-    assert x_atomrow.idea_way is None
+    assert x_atomrow.concept_way is None
     assert x_atomrow.stop_want is None
     assert x_atomrow.take_force is None
     assert x_atomrow.tally is None
@@ -126,15 +126,15 @@ def test_AtomRow_set_class_types_SetsAttr():
     x_atomrow = atomrow_shop({}, atom_insert())
     x_atomrow.close = "4"
     x_parent_way = "fizz_buzz"
-    x_idea_label = "buzzziy"
+    x_concept_label = "buzzziy"
     x_morph_str = "True"
     x_morph_bool = True
-    x_way = create_way(x_parent_way, x_idea_label)
-    x_atomrow.idea_way = x_way
+    x_way = create_way(x_parent_way, x_concept_label)
+    x_atomrow.concept_way = x_way
     x_atomrow.morph = x_morph_str
     four_int = 4
     assert x_atomrow.close != four_int
-    assert x_atomrow.idea_way == x_way
+    assert x_atomrow.concept_way == x_way
     assert x_atomrow.morph == x_morph_str
 
     # WHEN
@@ -142,7 +142,7 @@ def test_AtomRow_set_class_types_SetsAttr():
 
     # THEN
     assert x_atomrow.close == four_int
-    assert x_atomrow.idea_way == x_way
+    assert x_atomrow.concept_way == x_way
     assert x_atomrow.morph == x_morph_bool
 
 
@@ -229,10 +229,10 @@ def test_AtomRow_get_budatoms_ReturnsObjIfDimenIsCorrect():
     assert len(x_atomrow.get_budatoms()) == 1
 
 
-def test_AtomRow_get_budatoms_ReturnsObj_bud_ideaunit_INSERT_pledge_False_Scenario0():
+def test_AtomRow_get_budatoms_ReturnsObj_bud_conceptunit_INSERT_pledge_False_Scenario0():
     # ESTABLISH
-    x_atomrow = atomrow_shop({bud_ideaunit_str()}, atom_insert())
-    x_atomrow.idea_way = create_way("accord78", "casa")
+    x_atomrow = atomrow_shop({bud_conceptunit_str()}, atom_insert())
+    x_atomrow.concept_way = create_way("accord78", "casa")
     x_atomrow.pledge = False
     assert len(x_atomrow.get_budatoms()) == 1
 
@@ -240,19 +240,19 @@ def test_AtomRow_get_budatoms_ReturnsObj_bud_ideaunit_INSERT_pledge_False_Scenar
     x_budatom = x_atomrow.get_budatoms()[0]
 
     # THEN
-    static_budatom = budatom_shop(bud_ideaunit_str(), atom_insert())
-    static_budatom.set_arg("idea_way", create_way("accord78", "casa"))
+    static_budatom = budatom_shop(bud_conceptunit_str(), atom_insert())
+    static_budatom.set_arg("concept_way", create_way("accord78", "casa"))
     static_budatom.set_arg("pledge", False)
     print(static_budatom)
     print(x_budatom)
     assert x_budatom == static_budatom
 
 
-def test_AtomRow_get_budatoms_ReturnsObj_bud_ideaunit_INSERT_pledge_False_Scenario1():
+def test_AtomRow_get_budatoms_ReturnsObj_bud_conceptunit_INSERT_pledge_False_Scenario1():
     # ESTABLISH
-    x_dimens = {bud_ideaunit_str(), bud_idea_healerlink_str()}
+    x_dimens = {bud_conceptunit_str(), bud_concept_healerlink_str()}
     x_atomrow = atomrow_shop(x_dimens, atom_insert())
-    x_atomrow.idea_way = create_way("accord78", "casa")
+    x_atomrow.concept_way = create_way("accord78", "casa")
     x_atomrow.pledge = False
     x_atomrow.healer_name = "Bob"
 
@@ -261,12 +261,12 @@ def test_AtomRow_get_budatoms_ReturnsObj_bud_ideaunit_INSERT_pledge_False_Scenar
 
     # THEN
     assert len(x_budatoms) == 2
-    y_idea_budatom = budatom_shop(bud_ideaunit_str(), atom_insert())
+    y_concept_budatom = budatom_shop(bud_conceptunit_str(), atom_insert())
     casa_way = create_way("accord78", "casa")
-    y_idea_budatom.set_arg("idea_way", casa_way)
-    y_idea_budatom.set_arg("pledge", False)
-    assert y_idea_budatom in x_budatoms
-    healerlink_budatom = budatom_shop(bud_idea_healerlink_str(), atom_insert())
-    healerlink_budatom.set_arg("idea_way", casa_way)
+    y_concept_budatom.set_arg("concept_way", casa_way)
+    y_concept_budatom.set_arg("pledge", False)
+    assert y_concept_budatom in x_budatoms
+    healerlink_budatom = budatom_shop(bud_concept_healerlink_str(), atom_insert())
+    healerlink_budatom.set_arg("concept_way", casa_way)
     healerlink_budatom.set_arg("healer_name", "Bob")
     assert healerlink_budatom in x_budatoms

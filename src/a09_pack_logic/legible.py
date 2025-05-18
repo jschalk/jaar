@@ -4,13 +4,13 @@ from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
-    bud_ideaunit_str,
-    bud_idea_awardlink_str,
-    bud_idea_reasonunit_str,
-    bud_idea_reason_premiseunit_str,
-    bud_idea_laborlink_str,
-    bud_idea_healerlink_str,
-    bud_idea_factunit_str,
+    bud_conceptunit_str,
+    bud_concept_awardlink_str,
+    bud_concept_reasonunit_str,
+    bud_concept_reason_premiseunit_str,
+    bud_concept_laborlink_str,
+    bud_concept_healerlink_str,
+    bud_concept_factunit_str,
 )
 from src.a08_bud_atom_logic.atom import BudAtom
 from src.a06_bud_logic._utils.str_a06 import (
@@ -19,8 +19,8 @@ from src.a06_bud_logic._utils.str_a06 import (
     group_title_str,
     labor_title_str,
     healer_name_str,
-    idea_way_str,
-    rcontext_idea_active_requisite_str,
+    concept_way_str,
+    rcontext_concept_active_requisite_str,
     pledge_str,
     addin_str,
     begin_str,
@@ -65,50 +65,50 @@ def create_legible_list(x_delta: BudDelta, x_bud: BudUnit) -> list[str]:
     x_list = [atom_delete(), bud_acct_membership_str()]
     acct_membership_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), bud_ideaunit_str()]
-    bud_ideaunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), bud_ideaunit_str()]
-    bud_ideaunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), bud_ideaunit_str()]
-    bud_ideaunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), bud_conceptunit_str()]
+    bud_conceptunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), bud_conceptunit_str()]
+    bud_conceptunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), bud_conceptunit_str()]
+    bud_conceptunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), bud_idea_awardlink_str()]
-    bud_idea_awardlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), bud_idea_awardlink_str()]
-    bud_idea_awardlink_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), bud_idea_awardlink_str()]
-    bud_idea_awardlink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), bud_concept_awardlink_str()]
+    bud_concept_awardlink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), bud_concept_awardlink_str()]
+    bud_concept_awardlink_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), bud_concept_awardlink_str()]
+    bud_concept_awardlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), bud_idea_reasonunit_str()]
-    bud_idea_reasonunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), bud_idea_reasonunit_str()]
-    bud_idea_reasonunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), bud_idea_reasonunit_str()]
-    bud_idea_reasonunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), bud_concept_reasonunit_str()]
+    bud_concept_reasonunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), bud_concept_reasonunit_str()]
+    bud_concept_reasonunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), bud_concept_reasonunit_str()]
+    bud_concept_reasonunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), bud_idea_reason_premiseunit_str()]
-    bud_idea_reason_premiseunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), bud_idea_reason_premiseunit_str()]
-    bud_idea_reason_premiseunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), bud_idea_reason_premiseunit_str()]
-    bud_idea_reason_premiseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), bud_concept_reason_premiseunit_str()]
+    bud_concept_reason_premiseunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), bud_concept_reason_premiseunit_str()]
+    bud_concept_reason_premiseunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), bud_concept_reason_premiseunit_str()]
+    bud_concept_reason_premiseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), bud_idea_laborlink_str()]
-    bud_idea_laborlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), bud_idea_laborlink_str()]
-    bud_idea_laborlink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), bud_concept_laborlink_str()]
+    bud_concept_laborlink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), bud_concept_laborlink_str()]
+    bud_concept_laborlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), bud_idea_healerlink_str()]
-    bud_idea_healerlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), bud_idea_healerlink_str()]
-    bud_idea_healerlink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), bud_concept_healerlink_str()]
+    bud_concept_healerlink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), bud_concept_healerlink_str()]
+    bud_concept_healerlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = [atom_insert(), bud_idea_factunit_str()]
-    bud_idea_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_update(), bud_idea_factunit_str()]
-    bud_idea_factunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = [atom_delete(), bud_idea_factunit_str()]
-    bud_idea_factunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_insert(), bud_concept_factunit_str()]
+    bud_concept_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_update(), bud_concept_factunit_str()]
+    bud_concept_factunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = [atom_delete(), bud_concept_factunit_str()]
+    bud_concept_factunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     leg_list = []
     if budunit_atom is not None:
@@ -133,87 +133,87 @@ def create_legible_list(x_delta: BudDelta, x_bud: BudUnit) -> list[str]:
             leg_list, acct_membership_delete_dict, x_bud
         )
 
-    if bud_ideaunit_insert_dict is not None:
-        add_bud_ideaunit_insert_to_legible_list(
-            leg_list, bud_ideaunit_insert_dict, x_bud
+    if bud_conceptunit_insert_dict is not None:
+        add_bud_conceptunit_insert_to_legible_list(
+            leg_list, bud_conceptunit_insert_dict, x_bud
         )
-    if bud_ideaunit_update_dict is not None:
-        add_bud_ideaunit_update_to_legible_list(
-            leg_list, bud_ideaunit_update_dict, x_bud
+    if bud_conceptunit_update_dict is not None:
+        add_bud_conceptunit_update_to_legible_list(
+            leg_list, bud_conceptunit_update_dict, x_bud
         )
-    if bud_ideaunit_delete_dict is not None:
-        add_bud_ideaunit_delete_to_legible_list(
-            leg_list, bud_ideaunit_delete_dict, x_bud
-        )
-
-    if bud_idea_awardlink_insert_dict is not None:
-        add_bud_idea_awardlink_insert_to_legible_list(
-            leg_list, bud_idea_awardlink_insert_dict, x_bud
-        )
-    if bud_idea_awardlink_update_dict is not None:
-        add_bud_idea_awardlink_update_to_legible_list(
-            leg_list, bud_idea_awardlink_update_dict, x_bud
-        )
-    if bud_idea_awardlink_delete_dict is not None:
-        add_bud_idea_awardlink_delete_to_legible_list(
-            leg_list, bud_idea_awardlink_delete_dict, x_bud
+    if bud_conceptunit_delete_dict is not None:
+        add_bud_conceptunit_delete_to_legible_list(
+            leg_list, bud_conceptunit_delete_dict, x_bud
         )
 
-    if bud_idea_reasonunit_insert_dict is not None:
-        add_bud_idea_reasonunit_insert_to_legible_list(
-            leg_list, bud_idea_reasonunit_insert_dict, x_bud
+    if bud_concept_awardlink_insert_dict is not None:
+        add_bud_concept_awardlink_insert_to_legible_list(
+            leg_list, bud_concept_awardlink_insert_dict, x_bud
         )
-    if bud_idea_reasonunit_update_dict is not None:
-        add_bud_idea_reasonunit_update_to_legible_list(
-            leg_list, bud_idea_reasonunit_update_dict, x_bud
+    if bud_concept_awardlink_update_dict is not None:
+        add_bud_concept_awardlink_update_to_legible_list(
+            leg_list, bud_concept_awardlink_update_dict, x_bud
         )
-    if bud_idea_reasonunit_delete_dict is not None:
-        add_bud_idea_reasonunit_delete_to_legible_list(
-            leg_list, bud_idea_reasonunit_delete_dict, x_bud
+    if bud_concept_awardlink_delete_dict is not None:
+        add_bud_concept_awardlink_delete_to_legible_list(
+            leg_list, bud_concept_awardlink_delete_dict, x_bud
         )
 
-    if bud_idea_reason_premiseunit_insert_dict is not None:
+    if bud_concept_reasonunit_insert_dict is not None:
+        add_bud_concept_reasonunit_insert_to_legible_list(
+            leg_list, bud_concept_reasonunit_insert_dict, x_bud
+        )
+    if bud_concept_reasonunit_update_dict is not None:
+        add_bud_concept_reasonunit_update_to_legible_list(
+            leg_list, bud_concept_reasonunit_update_dict, x_bud
+        )
+    if bud_concept_reasonunit_delete_dict is not None:
+        add_bud_concept_reasonunit_delete_to_legible_list(
+            leg_list, bud_concept_reasonunit_delete_dict, x_bud
+        )
+
+    if bud_concept_reason_premiseunit_insert_dict is not None:
         add_bud_reason_premiseunit_insert_to_legible_list(
-            leg_list, bud_idea_reason_premiseunit_insert_dict, x_bud
+            leg_list, bud_concept_reason_premiseunit_insert_dict, x_bud
         )
-    if bud_idea_reason_premiseunit_update_dict is not None:
+    if bud_concept_reason_premiseunit_update_dict is not None:
         add_bud_reason_premiseunit_update_to_legible_list(
-            leg_list, bud_idea_reason_premiseunit_update_dict, x_bud
+            leg_list, bud_concept_reason_premiseunit_update_dict, x_bud
         )
-    if bud_idea_reason_premiseunit_delete_dict is not None:
+    if bud_concept_reason_premiseunit_delete_dict is not None:
         add_bud_reason_premiseunit_delete_to_legible_list(
-            leg_list, bud_idea_reason_premiseunit_delete_dict, x_bud
+            leg_list, bud_concept_reason_premiseunit_delete_dict, x_bud
         )
 
-    if bud_idea_laborlink_insert_dict is not None:
-        add_bud_idea_laborlink_insert_to_legible_list(
-            leg_list, bud_idea_laborlink_insert_dict, x_bud
+    if bud_concept_laborlink_insert_dict is not None:
+        add_bud_concept_laborlink_insert_to_legible_list(
+            leg_list, bud_concept_laborlink_insert_dict, x_bud
         )
-    if bud_idea_laborlink_delete_dict is not None:
-        add_bud_idea_laborlink_delete_to_legible_list(
-            leg_list, bud_idea_laborlink_delete_dict, x_bud
-        )
-
-    if bud_idea_healerlink_insert_dict is not None:
-        add_bud_idea_healerlink_insert_to_legible_list(
-            leg_list, bud_idea_healerlink_insert_dict, x_bud
-        )
-    if bud_idea_healerlink_delete_dict is not None:
-        add_bud_idea_healerlink_delete_to_legible_list(
-            leg_list, bud_idea_healerlink_delete_dict, x_bud
+    if bud_concept_laborlink_delete_dict is not None:
+        add_bud_concept_laborlink_delete_to_legible_list(
+            leg_list, bud_concept_laborlink_delete_dict, x_bud
         )
 
-    if bud_idea_factunit_insert_dict is not None:
-        add_bud_idea_factunit_insert_to_legible_list(
-            leg_list, bud_idea_factunit_insert_dict, x_bud
+    if bud_concept_healerlink_insert_dict is not None:
+        add_bud_concept_healerlink_insert_to_legible_list(
+            leg_list, bud_concept_healerlink_insert_dict, x_bud
         )
-    if bud_idea_factunit_update_dict is not None:
-        add_bud_idea_factunit_update_to_legible_list(
-            leg_list, bud_idea_factunit_update_dict, x_bud
+    if bud_concept_healerlink_delete_dict is not None:
+        add_bud_concept_healerlink_delete_to_legible_list(
+            leg_list, bud_concept_healerlink_delete_dict, x_bud
         )
-    if bud_idea_factunit_delete_dict is not None:
-        add_bud_idea_factunit_delete_to_legible_list(
-            leg_list, bud_idea_factunit_delete_dict, x_bud
+
+    if bud_concept_factunit_insert_dict is not None:
+        add_bud_concept_factunit_insert_to_legible_list(
+            leg_list, bud_concept_factunit_insert_dict, x_bud
+        )
+    if bud_concept_factunit_update_dict is not None:
+        add_bud_concept_factunit_update_to_legible_list(
+            leg_list, bud_concept_factunit_update_dict, x_bud
+        )
+    if bud_concept_factunit_delete_dict is not None:
+        add_bud_concept_factunit_delete_to_legible_list(
+            leg_list, bud_concept_factunit_delete_dict, x_bud
         )
 
     return leg_list
@@ -327,22 +327,22 @@ def add_bud_acct_membership_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_bud_ideaunit_insert_to_legible_list(
-    legible_list: list[str], ideaunit_insert_dict: dict, x_bud: BudUnit
+def add_bud_conceptunit_insert_to_legible_list(
+    legible_list: list[str], conceptunit_insert_dict: dict, x_bud: BudUnit
 ):
     _problem_bool_str = "problem_bool"
-    for ideaunit_atom in ideaunit_insert_dict.values():
-        way_value = ideaunit_atom.get_value(idea_way_str())
-        _addin_value = ideaunit_atom.get_value(addin_str())
-        _begin_value = ideaunit_atom.get_value(begin_str())
-        _close_value = ideaunit_atom.get_value(close_str())
-        _denom_value = ideaunit_atom.get_value(denom_str())
-        _numor_value = ideaunit_atom.get_value(numor_str())
-        _problem_bool_value = ideaunit_atom.get_value(_problem_bool_str)
-        _morph_value = ideaunit_atom.get_value(morph_str())
-        _mass_value = ideaunit_atom.get_value(mass_str())
-        pledge_value = ideaunit_atom.get_value(pledge_str())
-        x_str = f"Created Idea '{way_value}'. "
+    for conceptunit_atom in conceptunit_insert_dict.values():
+        way_value = conceptunit_atom.get_value(concept_way_str())
+        _addin_value = conceptunit_atom.get_value(addin_str())
+        _begin_value = conceptunit_atom.get_value(begin_str())
+        _close_value = conceptunit_atom.get_value(close_str())
+        _denom_value = conceptunit_atom.get_value(denom_str())
+        _numor_value = conceptunit_atom.get_value(numor_str())
+        _problem_bool_value = conceptunit_atom.get_value(_problem_bool_str)
+        _morph_value = conceptunit_atom.get_value(morph_str())
+        _mass_value = conceptunit_atom.get_value(mass_str())
+        pledge_value = conceptunit_atom.get_value(pledge_str())
+        x_str = f"Created Concept '{way_value}'. "
         if _addin_value is not None:
             x_str += f"addin={_addin_value}."
         if _begin_value is not None:
@@ -365,22 +365,22 @@ def add_bud_ideaunit_insert_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_bud_ideaunit_update_to_legible_list(
-    legible_list: list[str], ideaunit_update_dict: dict, x_bud: BudUnit
+def add_bud_conceptunit_update_to_legible_list(
+    legible_list: list[str], conceptunit_update_dict: dict, x_bud: BudUnit
 ):
     _problem_bool_str = "problem_bool"
-    for ideaunit_atom in ideaunit_update_dict.values():
-        way_value = ideaunit_atom.get_value(idea_way_str())
-        addin_value = ideaunit_atom.get_value(addin_str())
-        begin_value = ideaunit_atom.get_value(begin_str())
-        close_value = ideaunit_atom.get_value(close_str())
-        denom_value = ideaunit_atom.get_value(denom_str())
-        numor_value = ideaunit_atom.get_value(numor_str())
-        problem_bool_value = ideaunit_atom.get_value(_problem_bool_str)
-        morph_value = ideaunit_atom.get_value(morph_str())
-        mass_value = ideaunit_atom.get_value(mass_str())
-        pledge_value = ideaunit_atom.get_value(pledge_str())
-        x_str = f"Idea '{way_value}' set these attributes: "
+    for conceptunit_atom in conceptunit_update_dict.values():
+        way_value = conceptunit_atom.get_value(concept_way_str())
+        addin_value = conceptunit_atom.get_value(addin_str())
+        begin_value = conceptunit_atom.get_value(begin_str())
+        close_value = conceptunit_atom.get_value(close_str())
+        denom_value = conceptunit_atom.get_value(denom_str())
+        numor_value = conceptunit_atom.get_value(numor_str())
+        problem_bool_value = conceptunit_atom.get_value(_problem_bool_str)
+        morph_value = conceptunit_atom.get_value(morph_str())
+        mass_value = conceptunit_atom.get_value(mass_str())
+        pledge_value = conceptunit_atom.get_value(pledge_str())
+        x_str = f"Concept '{way_value}' set these attributes: "
         if addin_value is not None:
             x_str += f"addin={addin_value}."
         if begin_value is not None:
@@ -403,116 +403,118 @@ def add_bud_ideaunit_update_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_bud_ideaunit_delete_to_legible_list(
-    legible_list: list[str], ideaunit_delete_dict: dict, x_bud: BudUnit
+def add_bud_conceptunit_delete_to_legible_list(
+    legible_list: list[str], conceptunit_delete_dict: dict, x_bud: BudUnit
 ):
-    for ideaunit_atom in ideaunit_delete_dict.values():
-        way_value = ideaunit_atom.get_value(idea_way_str())
-        x_str = f"Idea '{way_value}' was deleted."
+    for conceptunit_atom in conceptunit_delete_dict.values():
+        way_value = conceptunit_atom.get_value(concept_way_str())
+        x_str = f"Concept '{way_value}' was deleted."
         legible_list.append(x_str)
 
 
-def add_bud_idea_awardlink_insert_to_legible_list(
-    legible_list: list[str], idea_awardlink_insert_dict: dict, x_bud: BudUnit
+def add_bud_concept_awardlink_insert_to_legible_list(
+    legible_list: list[str], concept_awardlink_insert_dict: dict, x_bud: BudUnit
 ):
-    for way_dict in idea_awardlink_insert_dict.values():
-        for idea_awardlink_atom in way_dict.values():
-            awardee_title_value = idea_awardlink_atom.get_value(awardee_title_str())
-            way_value = idea_awardlink_atom.get_value("idea_way")
-            give_force_value = idea_awardlink_atom.get_value("give_force")
-            take_force_value = idea_awardlink_atom.get_value("take_force")
-            x_str = f"Awardlink created for group {awardee_title_value} for idea '{way_value}' with give_force={give_force_value} and take_force={take_force_value}."
+    for way_dict in concept_awardlink_insert_dict.values():
+        for concept_awardlink_atom in way_dict.values():
+            awardee_title_value = concept_awardlink_atom.get_value(awardee_title_str())
+            way_value = concept_awardlink_atom.get_value("concept_way")
+            give_force_value = concept_awardlink_atom.get_value("give_force")
+            take_force_value = concept_awardlink_atom.get_value("take_force")
+            x_str = f"Awardlink created for group {awardee_title_value} for concept '{way_value}' with give_force={give_force_value} and take_force={take_force_value}."
             legible_list.append(x_str)
 
 
-def add_bud_idea_awardlink_update_to_legible_list(
-    legible_list: list[str], idea_awardlink_update_dict: dict, x_bud: BudUnit
+def add_bud_concept_awardlink_update_to_legible_list(
+    legible_list: list[str], concept_awardlink_update_dict: dict, x_bud: BudUnit
 ):
-    for way_dict in idea_awardlink_update_dict.values():
-        for idea_awardlink_atom in way_dict.values():
-            awardee_title_value = idea_awardlink_atom.get_value(awardee_title_str())
-            way_value = idea_awardlink_atom.get_value("idea_way")
-            give_force_value = idea_awardlink_atom.get_value("give_force")
-            take_force_value = idea_awardlink_atom.get_value("take_force")
+    for way_dict in concept_awardlink_update_dict.values():
+        for concept_awardlink_atom in way_dict.values():
+            awardee_title_value = concept_awardlink_atom.get_value(awardee_title_str())
+            way_value = concept_awardlink_atom.get_value("concept_way")
+            give_force_value = concept_awardlink_atom.get_value("give_force")
+            take_force_value = concept_awardlink_atom.get_value("take_force")
             if give_force_value is not None and take_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_title_value} for idea '{way_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
+                x_str = f"Awardlink has been set for group {awardee_title_value} for concept '{way_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
             elif give_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_title_value} for idea '{way_value}'. Now give_force={give_force_value}."
+                x_str = f"Awardlink has been set for group {awardee_title_value} for concept '{way_value}'. Now give_force={give_force_value}."
             elif take_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_title_value} for idea '{way_value}'. Now take_force={take_force_value}."
+                x_str = f"Awardlink has been set for group {awardee_title_value} for concept '{way_value}'. Now take_force={take_force_value}."
             legible_list.append(x_str)
 
 
-def add_bud_idea_awardlink_delete_to_legible_list(
-    legible_list: list[str], idea_awardlink_delete_dict: dict, x_bud: BudUnit
+def add_bud_concept_awardlink_delete_to_legible_list(
+    legible_list: list[str], concept_awardlink_delete_dict: dict, x_bud: BudUnit
 ):
-    for way_dict in idea_awardlink_delete_dict.values():
-        for idea_awardlink_atom in way_dict.values():
-            awardee_title_value = idea_awardlink_atom.get_value(awardee_title_str())
-            way_value = idea_awardlink_atom.get_value("idea_way")
-            x_str = f"Awardlink for group {awardee_title_value}, idea '{way_value}' has been deleted."
+    for way_dict in concept_awardlink_delete_dict.values():
+        for concept_awardlink_atom in way_dict.values():
+            awardee_title_value = concept_awardlink_atom.get_value(awardee_title_str())
+            way_value = concept_awardlink_atom.get_value("concept_way")
+            x_str = f"Awardlink for group {awardee_title_value}, concept '{way_value}' has been deleted."
             legible_list.append(x_str)
 
 
-def add_bud_idea_reasonunit_insert_to_legible_list(
-    legible_list: list[str], idea_reasonunit_insert_dict: dict, x_bud: BudUnit
+def add_bud_concept_reasonunit_insert_to_legible_list(
+    legible_list: list[str], concept_reasonunit_insert_dict: dict, x_bud: BudUnit
 ):
-    for way_dict in idea_reasonunit_insert_dict.values():
-        for idea_reasonunit_atom in way_dict.values():
-            way_value = idea_reasonunit_atom.get_value("idea_way")
-            rcontext_value = idea_reasonunit_atom.get_value("rcontext")
-            rcontext_idea_active_requisite_value = idea_reasonunit_atom.get_value(
-                rcontext_idea_active_requisite_str()
+    for way_dict in concept_reasonunit_insert_dict.values():
+        for concept_reasonunit_atom in way_dict.values():
+            way_value = concept_reasonunit_atom.get_value("concept_way")
+            rcontext_value = concept_reasonunit_atom.get_value("rcontext")
+            rcontext_concept_active_requisite_value = concept_reasonunit_atom.get_value(
+                rcontext_concept_active_requisite_str()
             )
-            x_str = f"ReasonUnit created for idea '{way_value}' with rcontext '{rcontext_value}'."
-            if rcontext_idea_active_requisite_value is not None:
-                x_str += f" rcontext_idea_active_requisite={rcontext_idea_active_requisite_value}."
+            x_str = f"ReasonUnit created for concept '{way_value}' with rcontext '{rcontext_value}'."
+            if rcontext_concept_active_requisite_value is not None:
+                x_str += f" rcontext_concept_active_requisite={rcontext_concept_active_requisite_value}."
             legible_list.append(x_str)
 
 
-def add_bud_idea_reasonunit_update_to_legible_list(
-    legible_list: list[str], idea_reasonunit_update_dict: dict, x_bud: BudUnit
+def add_bud_concept_reasonunit_update_to_legible_list(
+    legible_list: list[str], concept_reasonunit_update_dict: dict, x_bud: BudUnit
 ):
-    for way_dict in idea_reasonunit_update_dict.values():
-        for idea_reasonunit_atom in way_dict.values():
-            way_value = idea_reasonunit_atom.get_value("idea_way")
-            rcontext_value = idea_reasonunit_atom.get_value("rcontext")
-            rcontext_idea_active_requisite_value = idea_reasonunit_atom.get_value(
-                rcontext_idea_active_requisite_str()
+    for way_dict in concept_reasonunit_update_dict.values():
+        for concept_reasonunit_atom in way_dict.values():
+            way_value = concept_reasonunit_atom.get_value("concept_way")
+            rcontext_value = concept_reasonunit_atom.get_value("rcontext")
+            rcontext_concept_active_requisite_value = concept_reasonunit_atom.get_value(
+                rcontext_concept_active_requisite_str()
             )
-            if rcontext_idea_active_requisite_value is not None:
-                x_str = f"ReasonUnit rcontext='{rcontext_value}' for idea '{way_value}' set with rcontext_idea_active_requisite={rcontext_idea_active_requisite_value}."
+            if rcontext_concept_active_requisite_value is not None:
+                x_str = f"ReasonUnit rcontext='{rcontext_value}' for concept '{way_value}' set with rcontext_concept_active_requisite={rcontext_concept_active_requisite_value}."
             else:
-                x_str = f"ReasonUnit rcontext='{rcontext_value}' for idea '{way_value}' and no longer checks rcontext active mode."
+                x_str = f"ReasonUnit rcontext='{rcontext_value}' for concept '{way_value}' and no longer checks rcontext active mode."
             legible_list.append(x_str)
 
 
-def add_bud_idea_reasonunit_delete_to_legible_list(
-    legible_list: list[str], idea_reasonunit_delete_dict: dict, x_bud: BudUnit
+def add_bud_concept_reasonunit_delete_to_legible_list(
+    legible_list: list[str], concept_reasonunit_delete_dict: dict, x_bud: BudUnit
 ):
-    for way_dict in idea_reasonunit_delete_dict.values():
-        for idea_reasonunit_atom in way_dict.values():
-            way_value = idea_reasonunit_atom.get_value("idea_way")
-            rcontext_value = idea_reasonunit_atom.get_value("rcontext")
-            x_str = f"ReasonUnit rcontext='{rcontext_value}' for idea '{way_value}' has been deleted."
+    for way_dict in concept_reasonunit_delete_dict.values():
+        for concept_reasonunit_atom in way_dict.values():
+            way_value = concept_reasonunit_atom.get_value("concept_way")
+            rcontext_value = concept_reasonunit_atom.get_value("rcontext")
+            x_str = f"ReasonUnit rcontext='{rcontext_value}' for concept '{way_value}' has been deleted."
             legible_list.append(x_str)
 
 
 def add_bud_reason_premiseunit_insert_to_legible_list(
     legible_list: list[str],
-    idea_reason_premiseunit_insert_dict: dict,
+    concept_reason_premiseunit_insert_dict: dict,
     x_bud: BudUnit,
 ):
-    for way_dict in idea_reason_premiseunit_insert_dict.values():
+    for way_dict in concept_reason_premiseunit_insert_dict.values():
         for rcontext_dict in way_dict.values():
-            for idea_reason_premiseunit_atom in rcontext_dict.values():
-                way_value = idea_reason_premiseunit_atom.get_value(idea_way_str())
-                rcontext_value = idea_reason_premiseunit_atom.get_value(rcontext_str())
-                pbranch_value = idea_reason_premiseunit_atom.get_value(pbranch_str())
-                pdivisor_value = idea_reason_premiseunit_atom.get_value("pdivisor")
-                pnigh_value = idea_reason_premiseunit_atom.get_value(pnigh_str())
-                popen_value = idea_reason_premiseunit_atom.get_value(popen_str())
-                x_str = f"PremiseUnit '{pbranch_value}' created for reason '{rcontext_value}' for idea '{way_value}'."
+            for concept_reason_premiseunit_atom in rcontext_dict.values():
+                way_value = concept_reason_premiseunit_atom.get_value(concept_way_str())
+                rcontext_value = concept_reason_premiseunit_atom.get_value(
+                    rcontext_str()
+                )
+                pbranch_value = concept_reason_premiseunit_atom.get_value(pbranch_str())
+                pdivisor_value = concept_reason_premiseunit_atom.get_value("pdivisor")
+                pnigh_value = concept_reason_premiseunit_atom.get_value(pnigh_str())
+                popen_value = concept_reason_premiseunit_atom.get_value(popen_str())
+                x_str = f"PremiseUnit '{pbranch_value}' created for reason '{rcontext_value}' for concept '{way_value}'."
                 if popen_value is not None:
                     x_str += f" Popen={popen_value}."
                 if pnigh_value is not None:
@@ -524,19 +526,21 @@ def add_bud_reason_premiseunit_insert_to_legible_list(
 
 def add_bud_reason_premiseunit_update_to_legible_list(
     legible_list: list[str],
-    idea_reason_premiseunit_update_dict: dict,
+    concept_reason_premiseunit_update_dict: dict,
     x_bud: BudUnit,
 ):
-    for way_dict in idea_reason_premiseunit_update_dict.values():
+    for way_dict in concept_reason_premiseunit_update_dict.values():
         for rcontext_dict in way_dict.values():
-            for idea_reason_premiseunit_atom in rcontext_dict.values():
-                way_value = idea_reason_premiseunit_atom.get_value(idea_way_str())
-                rcontext_value = idea_reason_premiseunit_atom.get_value(rcontext_str())
-                pbranch_value = idea_reason_premiseunit_atom.get_value(pbranch_str())
-                pdivisor_value = idea_reason_premiseunit_atom.get_value("pdivisor")
-                pnigh_value = idea_reason_premiseunit_atom.get_value(pnigh_str())
-                popen_value = idea_reason_premiseunit_atom.get_value(popen_str())
-                x_str = f"PremiseUnit '{pbranch_value}' updated for reason '{rcontext_value}' for idea '{way_value}'."
+            for concept_reason_premiseunit_atom in rcontext_dict.values():
+                way_value = concept_reason_premiseunit_atom.get_value(concept_way_str())
+                rcontext_value = concept_reason_premiseunit_atom.get_value(
+                    rcontext_str()
+                )
+                pbranch_value = concept_reason_premiseunit_atom.get_value(pbranch_str())
+                pdivisor_value = concept_reason_premiseunit_atom.get_value("pdivisor")
+                pnigh_value = concept_reason_premiseunit_atom.get_value(pnigh_str())
+                popen_value = concept_reason_premiseunit_atom.get_value(popen_str())
+                x_str = f"PremiseUnit '{pbranch_value}' updated for reason '{rcontext_value}' for concept '{way_value}'."
                 if popen_value is not None:
                     x_str += f" Popen={popen_value}."
                 if pnigh_value is not None:
@@ -548,108 +552,116 @@ def add_bud_reason_premiseunit_update_to_legible_list(
 
 def add_bud_reason_premiseunit_delete_to_legible_list(
     legible_list: list[str],
-    idea_reason_premiseunit_delete_dict: dict,
+    concept_reason_premiseunit_delete_dict: dict,
     x_bud: BudUnit,
 ):
-    for way_dict in idea_reason_premiseunit_delete_dict.values():
+    for way_dict in concept_reason_premiseunit_delete_dict.values():
         for rcontext_dict in way_dict.values():
-            for idea_reason_premiseunit_atom in rcontext_dict.values():
-                way_value = idea_reason_premiseunit_atom.get_value(idea_way_str())
-                rcontext_value = idea_reason_premiseunit_atom.get_value(rcontext_str())
-                pbranch_value = idea_reason_premiseunit_atom.get_value(pbranch_str())
-                x_str = f"PremiseUnit '{pbranch_value}' deleted from reason '{rcontext_value}' for idea '{way_value}'."
+            for concept_reason_premiseunit_atom in rcontext_dict.values():
+                way_value = concept_reason_premiseunit_atom.get_value(concept_way_str())
+                rcontext_value = concept_reason_premiseunit_atom.get_value(
+                    rcontext_str()
+                )
+                pbranch_value = concept_reason_premiseunit_atom.get_value(pbranch_str())
+                x_str = f"PremiseUnit '{pbranch_value}' deleted from reason '{rcontext_value}' for concept '{way_value}'."
                 legible_list.append(x_str)
 
 
-def add_bud_idea_laborlink_insert_to_legible_list(
-    legible_list: list[str], idea_laborlink_insert_dict: dict, x_bud: BudUnit
+def add_bud_concept_laborlink_insert_to_legible_list(
+    legible_list: list[str], concept_laborlink_insert_dict: dict, x_bud: BudUnit
 ):
-    for way_dict in idea_laborlink_insert_dict.values():
-        for idea_laborlink_atom in way_dict.values():
-            labor_title_value = idea_laborlink_atom.get_value(labor_title_str())
-            way_value = idea_laborlink_atom.get_value("idea_way")
-            x_str = f"laborlink '{labor_title_value}' created for idea '{way_value}'."
-            legible_list.append(x_str)
-
-
-def add_bud_idea_laborlink_delete_to_legible_list(
-    legible_list: list[str], idea_laborlink_delete_dict: dict, x_bud: BudUnit
-):
-    for way_dict in idea_laborlink_delete_dict.values():
-        for idea_laborlink_atom in way_dict.values():
-            labor_title_value = idea_laborlink_atom.get_value(labor_title_str())
-            way_value = idea_laborlink_atom.get_value("idea_way")
-            x_str = f"laborlink '{labor_title_value}' deleted for idea '{way_value}'."
-            legible_list.append(x_str)
-
-
-def add_bud_idea_healerlink_insert_to_legible_list(
-    legible_list: list[str], idea_healerlink_insert_dict: dict, x_bud: BudUnit
-):
-    for way_dict in idea_healerlink_insert_dict.values():
-        for idea_healerlink_atom in way_dict.values():
-            healer_name_value = idea_healerlink_atom.get_value(healer_name_str())
-            way_value = idea_healerlink_atom.get_value("idea_way")
-            x_str = f"HealerLink '{healer_name_value}' created for idea '{way_value}'."
-            legible_list.append(x_str)
-
-
-def add_bud_idea_healerlink_delete_to_legible_list(
-    legible_list: list[str], idea_healerlink_delete_dict: dict, x_bud: BudUnit
-):
-    for way_dict in idea_healerlink_delete_dict.values():
-        for idea_healerlink_atom in way_dict.values():
-            healer_name_value = idea_healerlink_atom.get_value(healer_name_str())
-            way_value = idea_healerlink_atom.get_value("idea_way")
-            x_str = f"HealerLink '{healer_name_value}' deleted for idea '{way_value}'."
-            legible_list.append(x_str)
-
-
-def add_bud_idea_factunit_insert_to_legible_list(
-    legible_list: list[str], idea_factunit_insert_dict: dict, x_bud: BudUnit
-):
-    for way_dict in idea_factunit_insert_dict.values():
-        for idea_factunit_atom in way_dict.values():
-            way_value = idea_factunit_atom.get_value(idea_way_str())
-            fcontext_value = idea_factunit_atom.get_value(fcontext_str())
-            fbranch_value = idea_factunit_atom.get_value(fbranch_str())
-            fnigh_value = idea_factunit_atom.get_value(fnigh_str())
-            fopen_value = idea_factunit_atom.get_value(fopen_str())
-            x_str = f"FactUnit '{fbranch_value}' created for rcontext '{fcontext_value}' for idea '{way_value}'."
-            if fopen_value is not None:
-                x_str += f" fopen={fopen_value}."
-            if fnigh_value is not None:
-                x_str += f" fnigh={fnigh_value}."
-            legible_list.append(x_str)
-
-
-def add_bud_idea_factunit_update_to_legible_list(
-    legible_list: list[str], idea_factunit_update_dict: dict, x_bud: BudUnit
-):
-    for way_dict in idea_factunit_update_dict.values():
-        for idea_factunit_atom in way_dict.values():
-            way_value = idea_factunit_atom.get_value(idea_way_str())
-            fcontext_value = idea_factunit_atom.get_value(fcontext_str())
-            fbranch_value = idea_factunit_atom.get_value(fbranch_str())
-            fnigh_value = idea_factunit_atom.get_value(fnigh_str())
-            fopen_value = idea_factunit_atom.get_value(fopen_str())
-            x_str = f"FactUnit '{fbranch_value}' updated for rcontext '{fcontext_value}' for idea '{way_value}'."
-            if fopen_value is not None:
-                x_str += f" fopen={fopen_value}."
-            if fnigh_value is not None:
-                x_str += f" fnigh={fnigh_value}."
-            legible_list.append(x_str)
-
-
-def add_bud_idea_factunit_delete_to_legible_list(
-    legible_list: list[str], idea_factunit_delete_dict: dict, x_bud: BudUnit
-):
-    for way_dict in idea_factunit_delete_dict.values():
-        for idea_factunit_atom in way_dict.values():
-            way_value = idea_factunit_atom.get_value(idea_way_str())
-            fcontext_value = idea_factunit_atom.get_value(fcontext_str())
-            fbranch_value = idea_factunit_atom.get_value(fbranch_str())
+    for way_dict in concept_laborlink_insert_dict.values():
+        for concept_laborlink_atom in way_dict.values():
+            labor_title_value = concept_laborlink_atom.get_value(labor_title_str())
+            way_value = concept_laborlink_atom.get_value("concept_way")
             x_str = (
-                f"FactUnit rcontext '{fcontext_value}' deleted for idea '{way_value}'."
+                f"laborlink '{labor_title_value}' created for concept '{way_value}'."
             )
+            legible_list.append(x_str)
+
+
+def add_bud_concept_laborlink_delete_to_legible_list(
+    legible_list: list[str], concept_laborlink_delete_dict: dict, x_bud: BudUnit
+):
+    for way_dict in concept_laborlink_delete_dict.values():
+        for concept_laborlink_atom in way_dict.values():
+            labor_title_value = concept_laborlink_atom.get_value(labor_title_str())
+            way_value = concept_laborlink_atom.get_value("concept_way")
+            x_str = (
+                f"laborlink '{labor_title_value}' deleted for concept '{way_value}'."
+            )
+            legible_list.append(x_str)
+
+
+def add_bud_concept_healerlink_insert_to_legible_list(
+    legible_list: list[str], concept_healerlink_insert_dict: dict, x_bud: BudUnit
+):
+    for way_dict in concept_healerlink_insert_dict.values():
+        for concept_healerlink_atom in way_dict.values():
+            healer_name_value = concept_healerlink_atom.get_value(healer_name_str())
+            way_value = concept_healerlink_atom.get_value("concept_way")
+            x_str = (
+                f"HealerLink '{healer_name_value}' created for concept '{way_value}'."
+            )
+            legible_list.append(x_str)
+
+
+def add_bud_concept_healerlink_delete_to_legible_list(
+    legible_list: list[str], concept_healerlink_delete_dict: dict, x_bud: BudUnit
+):
+    for way_dict in concept_healerlink_delete_dict.values():
+        for concept_healerlink_atom in way_dict.values():
+            healer_name_value = concept_healerlink_atom.get_value(healer_name_str())
+            way_value = concept_healerlink_atom.get_value("concept_way")
+            x_str = (
+                f"HealerLink '{healer_name_value}' deleted for concept '{way_value}'."
+            )
+            legible_list.append(x_str)
+
+
+def add_bud_concept_factunit_insert_to_legible_list(
+    legible_list: list[str], concept_factunit_insert_dict: dict, x_bud: BudUnit
+):
+    for way_dict in concept_factunit_insert_dict.values():
+        for concept_factunit_atom in way_dict.values():
+            way_value = concept_factunit_atom.get_value(concept_way_str())
+            fcontext_value = concept_factunit_atom.get_value(fcontext_str())
+            fbranch_value = concept_factunit_atom.get_value(fbranch_str())
+            fnigh_value = concept_factunit_atom.get_value(fnigh_str())
+            fopen_value = concept_factunit_atom.get_value(fopen_str())
+            x_str = f"FactUnit '{fbranch_value}' created for rcontext '{fcontext_value}' for concept '{way_value}'."
+            if fopen_value is not None:
+                x_str += f" fopen={fopen_value}."
+            if fnigh_value is not None:
+                x_str += f" fnigh={fnigh_value}."
+            legible_list.append(x_str)
+
+
+def add_bud_concept_factunit_update_to_legible_list(
+    legible_list: list[str], concept_factunit_update_dict: dict, x_bud: BudUnit
+):
+    for way_dict in concept_factunit_update_dict.values():
+        for concept_factunit_atom in way_dict.values():
+            way_value = concept_factunit_atom.get_value(concept_way_str())
+            fcontext_value = concept_factunit_atom.get_value(fcontext_str())
+            fbranch_value = concept_factunit_atom.get_value(fbranch_str())
+            fnigh_value = concept_factunit_atom.get_value(fnigh_str())
+            fopen_value = concept_factunit_atom.get_value(fopen_str())
+            x_str = f"FactUnit '{fbranch_value}' updated for rcontext '{fcontext_value}' for concept '{way_value}'."
+            if fopen_value is not None:
+                x_str += f" fopen={fopen_value}."
+            if fnigh_value is not None:
+                x_str += f" fnigh={fnigh_value}."
+            legible_list.append(x_str)
+
+
+def add_bud_concept_factunit_delete_to_legible_list(
+    legible_list: list[str], concept_factunit_delete_dict: dict, x_bud: BudUnit
+):
+    for way_dict in concept_factunit_delete_dict.values():
+        for concept_factunit_atom in way_dict.values():
+            way_value = concept_factunit_atom.get_value(concept_way_str())
+            fcontext_value = concept_factunit_atom.get_value(fcontext_str())
+            fbranch_value = concept_factunit_atom.get_value(fbranch_str())
+            x_str = f"FactUnit rcontext '{fcontext_value}' deleted for concept '{way_value}'."
             legible_list.append(x_str)

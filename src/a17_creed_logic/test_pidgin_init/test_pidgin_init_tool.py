@@ -4,7 +4,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     type_LabelStr_str,
     type_WayStr_str,
     type_TitleStr_str,
-    idea_way_str,
+    concept_way_str,
     face_name_str,
     event_int_str,
     type_NameStr_str,

@@ -165,13 +165,13 @@ def _add_hours_to_br00003_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for hour_idea in x_fisc.timeline.hours_config:
+    for hour_concept in x_fisc.timeline.hours_config:
         x_row = [
             if_none_str(face_name),
             if_none_str(event_int),
             x_fisc.fisc_label,
-            str(hour_idea[1]),
-            hour_idea[0],
+            str(hour_concept[1]),
+            hour_concept[0],
         ]
         x_csv += csv_delimiter.join(x_row)
         x_csv += "\n"
@@ -185,13 +185,13 @@ def _add_months_to_br00004_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for month_idea in x_fisc.timeline.months_config:
+    for month_concept in x_fisc.timeline.months_config:
         x_row = [
             if_none_str(face_name),
             if_none_str(event_int),
             x_fisc.fisc_label,
-            str(month_idea[1]),
-            month_idea[0],
+            str(month_concept[1]),
+            month_concept[0],
         ]
         x_csv += csv_delimiter.join(x_row)
         x_csv += "\n"
@@ -271,14 +271,14 @@ def add_bud_to_br00022_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for ideaunit in x_bud._idea_dict.values():
-        for awardlink in ideaunit.awardlinks.values():
+    for conceptunit in x_bud._concept_dict.values():
+        for awardlink in conceptunit.awardlinks.values():
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
                 x_bud.fisc_label,
                 x_bud.owner_name,
-                ideaunit.get_idea_way(),
+                conceptunit.get_concept_way(),
                 awardlink.awardee_title,
                 if_none_str(awardlink.give_force),
                 if_none_str(awardlink.take_force),
@@ -295,13 +295,13 @@ def add_bud_to_br00023_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for factunit in x_bud.idearoot.factunits.values():
+    for factunit in x_bud.conceptroot.factunits.values():
         x_row = [
             if_none_str(face_name),
             if_none_str(event_int),
             x_bud.fisc_label,
             x_bud.owner_name,
-            x_bud.idearoot.get_idea_way(),
+            x_bud.conceptroot.get_concept_way(),
             factunit.fcontext,
             factunit.fbranch,
             if_none_str(factunit.fopen),
@@ -319,14 +319,14 @@ def add_bud_to_br00024_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for ideaunit in x_bud._idea_dict.values():
-        for group_title in ideaunit.laborunit._laborlinks:
+    for conceptunit in x_bud._concept_dict.values():
+        for group_title in conceptunit.laborunit._laborlinks:
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
                 x_bud.fisc_label,
                 x_bud.owner_name,
-                ideaunit.get_idea_way(),
+                conceptunit.get_concept_way(),
                 group_title,
             ]
             x_csv += csv_delimiter.join(x_row)
@@ -341,14 +341,14 @@ def add_bud_to_br00025_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for ideaunit in x_bud._idea_dict.values():
-        for group_title in ideaunit.healerlink._healer_names:
+    for conceptunit in x_bud._concept_dict.values():
+        for group_title in conceptunit.healerlink._healer_names:
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
                 x_bud.fisc_label,
                 x_bud.owner_name,
-                ideaunit.get_idea_way(),
+                conceptunit.get_concept_way(),
                 group_title,
             ]
             x_csv += csv_delimiter.join(x_row)
@@ -363,15 +363,15 @@ def add_bud_to_br00026_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for ideaunit in x_bud._idea_dict.values():
-        for reasonunit in ideaunit.reasonunits.values():
+    for conceptunit in x_bud._concept_dict.values():
+        for reasonunit in conceptunit.reasonunits.values():
             for premiseunit in reasonunit.premises.values():
                 x_row = [
                     if_none_str(face_name),
                     if_none_str(event_int),
                     x_bud.fisc_label,
                     x_bud.owner_name,
-                    ideaunit.get_idea_way(),
+                    conceptunit.get_concept_way(),
                     reasonunit.rcontext,
                     premiseunit.pbranch,
                     if_none_str(premiseunit.popen),
@@ -390,16 +390,16 @@ def add_bud_to_br00027_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for ideaunit in x_bud._idea_dict.values():
-        for reasonunit in ideaunit.reasonunits.values():
+    for conceptunit in x_bud._concept_dict.values():
+        for reasonunit in conceptunit.reasonunits.values():
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
                 x_bud.fisc_label,
                 x_bud.owner_name,
-                ideaunit.get_idea_way(),
+                conceptunit.get_concept_way(),
                 reasonunit.rcontext,
-                if_none_str(reasonunit.rcontext_idea_active_requisite),
+                if_none_str(reasonunit.rcontext_concept_active_requisite),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -413,25 +413,25 @@ def add_bud_to_br00028_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for ideaunit in x_bud._idea_dict.values():
-        if ideaunit != x_bud.idearoot:
+    for conceptunit in x_bud._concept_dict.values():
+        if conceptunit != x_bud.conceptroot:
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
                 x_bud.fisc_label,
                 x_bud.owner_name,
-                ideaunit.get_idea_way(),
-                if_none_str(ideaunit.begin),
-                if_none_str(ideaunit.close),
-                if_none_str(ideaunit.addin),
-                if_none_str(ideaunit.numor),
-                if_none_str(ideaunit.denom),
-                if_none_str(ideaunit.morph),
-                if_none_str(ideaunit.gogo_want),
-                if_none_str(ideaunit.stop_want),
-                if_none_str(ideaunit.mass),
-                if_none_str(ideaunit.pledge),
-                if_none_str(ideaunit.problem_bool),
+                conceptunit.get_concept_way(),
+                if_none_str(conceptunit.begin),
+                if_none_str(conceptunit.close),
+                if_none_str(conceptunit.addin),
+                if_none_str(conceptunit.numor),
+                if_none_str(conceptunit.denom),
+                if_none_str(conceptunit.morph),
+                if_none_str(conceptunit.gogo_want),
+                if_none_str(conceptunit.stop_want),
+                if_none_str(conceptunit.mass),
+                if_none_str(conceptunit.pledge),
+                if_none_str(conceptunit.problem_bool),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -623,13 +623,13 @@ def add_pack_to_br00022_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
     for budatom in x_packunit._buddelta.get_ordered_budatoms().values():
-        if budatom.dimen == "bud_idea_awardlink":
+        if budatom.dimen == "bud_concept_awardlink":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.fisc_label,
                 x_packunit.owner_name,
-                budatom.jkeys.get("idea_way"),
+                budatom.jkeys.get("concept_way"),
                 budatom.jkeys.get("awardee_title"),
                 if_none_str(budatom.jvalues.get("give_force")),
                 if_none_str(budatom.jvalues.get("take_force")),
@@ -643,13 +643,13 @@ def add_pack_to_br00023_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
     for budatom in x_packunit._buddelta.get_ordered_budatoms().values():
-        if budatom.dimen == "bud_idea_factunit":
+        if budatom.dimen == "bud_concept_factunit":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.fisc_label,
                 x_packunit.owner_name,
-                budatom.jkeys.get("idea_way"),
+                budatom.jkeys.get("concept_way"),
                 budatom.jkeys.get("fcontext"),
                 if_none_str(budatom.jvalues.get("fbranch")),
                 if_none_str(budatom.jvalues.get("fopen")),
@@ -664,13 +664,13 @@ def add_pack_to_br00024_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
     for budatom in x_packunit._buddelta.get_ordered_budatoms().values():
-        if budatom.dimen == "bud_idea_laborlink":
+        if budatom.dimen == "bud_concept_laborlink":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.fisc_label,
                 x_packunit.owner_name,
-                budatom.jkeys.get("idea_way"),
+                budatom.jkeys.get("concept_way"),
                 budatom.jkeys.get("labor_title"),
             ]
             x_csv += csv_delimiter.join(x_row)
@@ -682,13 +682,13 @@ def add_pack_to_br00025_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
     for budatom in x_packunit._buddelta.get_ordered_budatoms().values():
-        if budatom.dimen == "bud_idea_healerlink":
+        if budatom.dimen == "bud_concept_healerlink":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.fisc_label,
                 x_packunit.owner_name,
-                budatom.jkeys.get("idea_way"),
+                budatom.jkeys.get("concept_way"),
                 budatom.jkeys.get("healer_name"),
             ]
             x_csv += csv_delimiter.join(x_row)
@@ -700,13 +700,13 @@ def add_pack_to_br00026_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
     for budatom in x_packunit._buddelta.get_ordered_budatoms().values():
-        if budatom.dimen == "bud_idea_reason_premiseunit":
+        if budatom.dimen == "bud_concept_reason_premiseunit":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.fisc_label,
                 x_packunit.owner_name,
-                budatom.jkeys.get("idea_way"),
+                budatom.jkeys.get("concept_way"),
                 budatom.jkeys.get("rcontext"),
                 budatom.jkeys.get("pbranch"),
                 if_none_str(budatom.jvalues.get("popen")),
@@ -722,15 +722,15 @@ def add_pack_to_br00027_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
     for budatom in x_packunit._buddelta.get_ordered_budatoms().values():
-        if budatom.dimen == "bud_idea_reasonunit":
+        if budatom.dimen == "bud_concept_reasonunit":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.fisc_label,
                 x_packunit.owner_name,
-                budatom.jkeys.get("idea_way"),
+                budatom.jkeys.get("concept_way"),
                 budatom.jkeys.get("rcontext"),
-                if_none_str(budatom.jvalues.get("rcontext_idea_active_requisite")),
+                if_none_str(budatom.jvalues.get("rcontext_concept_active_requisite")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -741,13 +741,13 @@ def add_pack_to_br00028_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
     for budatom in x_packunit._buddelta.get_ordered_budatoms().values():
-        if budatom.dimen == "bud_ideaunit":
+        if budatom.dimen == "bud_conceptunit":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.fisc_label,
                 x_packunit.owner_name,
-                budatom.jkeys.get("idea_way"),
+                budatom.jkeys.get("concept_way"),
                 if_none_str(budatom.jvalues.get("begin")),
                 if_none_str(budatom.jvalues.get("close")),
                 if_none_str(budatom.jvalues.get("addin")),

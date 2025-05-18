@@ -1,7 +1,7 @@
 from src.a01_way_logic.way import create_way
-from src.a06_bud_logic._utils.str_a06 import budunit_str, bud_idea_factunit_str
+from src.a06_bud_logic._utils.str_a06 import budunit_str, bud_concept_factunit_str
 from src.a06_bud_logic._utils.str_a06 import (
-    idea_way_str,
+    concept_way_str,
     fcontext_str,
     fopen_str,
 )
@@ -25,7 +25,7 @@ def test_BudAtom_get_insert_sqlstr_RaisesErrorWhen_is_valid_False():
     knee_way = create_way("a", knee_str)
 
     # WHEN
-    x_dimen = bud_idea_factunit_str()
+    x_dimen = bud_concept_factunit_str()
     update_disc_budatom = budatom_shop(x_dimen, atom_update())
     update_disc_budatom.set_jkey("rcontext", knee_way)
 
@@ -58,7 +58,7 @@ VALUES (
     assert x_budatom.get_insert_sqlstr() == example_sqlstr
 
 
-def test_BudAtom_get_insert_sqlstr_ReturnsObj_idea_factunit():
+def test_BudAtom_get_insert_sqlstr_ReturnsObj_concept_factunit():
     # ESTABLISH
     sports_str = "sports"
     sports_way = create_way("a", sports_str)
@@ -67,9 +67,9 @@ def test_BudAtom_get_insert_sqlstr_ReturnsObj_idea_factunit():
     knee_str = "knee"
     knee_way = create_way("a", knee_str)
     knee_popen = 7
-    x_dimen = bud_idea_factunit_str()
+    x_dimen = bud_concept_factunit_str()
     update_disc_budatom = budatom_shop(x_dimen, atom_insert())
-    update_disc_budatom.set_jkey(idea_way_str(), ball_way)
+    update_disc_budatom.set_jkey(concept_way_str(), ball_way)
     update_disc_budatom.set_jkey(fcontext_str(), knee_way)
     update_disc_budatom.set_jvalue(fopen_str(), knee_popen)
 
@@ -79,7 +79,7 @@ def test_BudAtom_get_insert_sqlstr_ReturnsObj_idea_factunit():
     # THEN
     example_sqlstr = f"""
 INSERT INTO {atom_hx_table_name()} (
-  {x_dimen}_{atom_insert()}_{idea_way_str()}
+  {x_dimen}_{atom_insert()}_{concept_way_str()}
 , {x_dimen}_{atom_insert()}_{fcontext_str()}
 , {x_dimen}_{atom_insert()}_{fopen_str()}
 )
@@ -93,7 +93,7 @@ VALUES (
     assert generated_sqlstr == example_sqlstr
 
 
-def test_get_budatom_from_rowdata_ReturnsObj_idea_factunit():
+def test_get_budatom_from_rowdata_ReturnsObj_concept_factunit():
     # ESTABLISH
     sports_str = "sports"
     sports_way = create_way("a", sports_str)
@@ -102,9 +102,9 @@ def test_get_budatom_from_rowdata_ReturnsObj_idea_factunit():
     knee_str = "knee"
     knee_way = create_way("a", knee_str)
     knee_fopen = 7
-    x_dimen = bud_idea_factunit_str()
+    x_dimen = bud_concept_factunit_str()
     x_sqlstr = f"""SELECT
-  '{ball_way}' as {x_dimen}_{atom_insert()}_{idea_way_str()}
+  '{ball_way}' as {x_dimen}_{atom_insert()}_{concept_way_str()}
 , '{knee_way}' as {x_dimen}_{atom_insert()}_{fcontext_str()}
 , {knee_fopen} as {x_dimen}_{atom_insert()}_{fopen_str()}
 """
@@ -116,7 +116,7 @@ def test_get_budatom_from_rowdata_ReturnsObj_idea_factunit():
 
     # THEN
     update_disc_budatom = budatom_shop(x_dimen, atom_insert())
-    update_disc_budatom.set_jkey(idea_way_str(), ball_way)
+    update_disc_budatom.set_jkey(concept_way_str(), ball_way)
     update_disc_budatom.set_jkey(fcontext_str(), knee_way)
     update_disc_budatom.set_jvalue(fopen_str(), knee_fopen)
     assert update_disc_budatom.dimen == x_budatom.dimen

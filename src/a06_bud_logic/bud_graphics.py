@@ -5,7 +5,7 @@ from src.a00_data_toolbox.plotly_toolbox import (
     add_keep__rect,
 )
 from src.a01_way_logic.way import get_parent_way, WayStr, is_sub_way
-from src.a05_idea_logic.idea import IdeaUnit
+from src.a05_concept_logic.concept import ConceptUnit
 from src.a06_bud_logic.bud import BudUnit
 from src.a06_bud_logic.report import (
     get_bud_acctunits_dataframe,
@@ -22,35 +22,40 @@ def _get_dot_diameter(x_ratio: float):
     return ((x_ratio**0.4)) * 100
 
 
-def _get_parent_y(x_idea: IdeaUnit, ideaunit_y_coordinate_dict: dict) -> WayStr:
-    parent_way = get_parent_way(x_idea.get_idea_way())
-    return ideaunit_y_coordinate_dict.get(parent_way)
+def _get_parent_y(
+    x_concept: ConceptUnit, conceptunit_y_coordinate_dict: dict
+) -> WayStr:
+    parent_way = get_parent_way(x_concept.get_concept_way())
+    return conceptunit_y_coordinate_dict.get(parent_way)
 
 
-def _get_color_for_ideaunit_trace(x_ideaunit: IdeaUnit, mode: str) -> str:
+def _get_color_for_conceptunit_trace(x_conceptunit: ConceptUnit, mode: str) -> str:
     if mode is None:
-        if x_ideaunit._level == 0:
+        if x_conceptunit._level == 0:
             return "Red"
-        elif x_ideaunit._level == 1:
+        elif x_conceptunit._level == 1:
             return "Pink"
-        elif x_ideaunit._level == 2:
+        elif x_conceptunit._level == 2:
             return "Green"
-        elif x_ideaunit._level == 3:
+        elif x_conceptunit._level == 3:
             return "Blue"
-        elif x_ideaunit._level == 4:
+        elif x_conceptunit._level == 4:
             return "Purple"
-        elif x_ideaunit._level == 5:
+        elif x_conceptunit._level == 5:
             return "Gold"
         else:
             return "Black"
     elif mode == "Task":
-        return "Red" if x_ideaunit.pledge else "Pink"
+        return "Red" if x_conceptunit.pledge else "Pink"
     elif mode == "Keep":
-        if x_ideaunit.problem_bool and x_ideaunit.healerlink.any_healer_name_exists():
+        if (
+            x_conceptunit.problem_bool
+            and x_conceptunit.healerlink.any_healer_name_exists()
+        ):
             return "Purple"
-        elif x_ideaunit.healerlink.any_healer_name_exists():
+        elif x_conceptunit.healerlink.any_healer_name_exists():
             return "Blue"
-        elif x_ideaunit.problem_bool:
+        elif x_conceptunit.problem_bool:
             return "Red"
         else:
             return "Pink"
@@ -61,63 +66,63 @@ def _add_individual_trace(
     anno_list: list,
     parent_y,
     source_y,
-    kid_idea: IdeaUnit,
+    kid_concept: ConceptUnit,
     mode: str,
 ):
     trace_list.append(
         plotly_Scatter(
-            x=[kid_idea._level - 1, kid_idea._level],
+            x=[kid_concept._level - 1, kid_concept._level],
             y=[parent_y, source_y],
-            marker_size=_get_dot_diameter(kid_idea._fund_ratio),
-            name=kid_idea.idea_label,
-            marker_color=_get_color_for_ideaunit_trace(kid_idea, mode=mode),
+            marker_size=_get_dot_diameter(kid_concept._fund_ratio),
+            name=kid_concept.concept_label,
+            marker_color=_get_color_for_conceptunit_trace(kid_concept, mode=mode),
         )
     )
     anno_list.append(
         dict(
-            x=kid_idea._level,
-            y=source_y + (_get_dot_diameter(kid_idea._fund_ratio) / 150) + 0.002,
-            text=kid_idea.idea_label,
+            x=kid_concept._level,
+            y=source_y + (_get_dot_diameter(kid_concept._fund_ratio) / 150) + 0.002,
+            text=kid_concept.concept_label,
             showarrow=False,
         )
     )
 
 
-def _create_ideaunit_traces(
+def _create_conceptunit_traces(
     trace_list, anno_list, x_bud: BudUnit, source_y: float, mode: str
 ):
-    ideas = [x_bud.idearoot]
-    y_ideaunit_y_coordinate_dict = {None: 0}
-    prev_way = x_bud.idearoot.get_idea_way()
+    concepts = [x_bud.conceptroot]
+    y_conceptunit_y_coordinate_dict = {None: 0}
+    prev_way = x_bud.conceptroot.get_concept_way()
     source_y = 0
-    while ideas != []:
-        x_idea = ideas.pop(-1)
-        if is_sub_way(x_idea.get_idea_way(), prev_way) is False:
+    while concepts != []:
+        x_concept = concepts.pop(-1)
+        if is_sub_way(x_concept.get_concept_way(), prev_way) is False:
             source_y -= 1
         _add_individual_trace(
             trace_list=trace_list,
             anno_list=anno_list,
-            parent_y=_get_parent_y(x_idea, y_ideaunit_y_coordinate_dict),
+            parent_y=_get_parent_y(x_concept, y_conceptunit_y_coordinate_dict),
             source_y=source_y,
-            kid_idea=x_idea,
+            kid_concept=x_concept,
             mode=mode,
         )
-        ideas.extend(iter(x_idea._kids.values()))
-        y_ideaunit_y_coordinate_dict[x_idea.get_idea_way()] = source_y
-        prev_way = x_idea.get_idea_way()
+        concepts.extend(iter(x_concept._kids.values()))
+        y_conceptunit_y_coordinate_dict[x_concept.get_concept_way()] = source_y
+        prev_way = x_concept.get_concept_way()
 
 
 def _update_layout_fig(x_fig: plotly_Figure, mode: str, x_bud: BudUnit):
     fig_label = "Tree with lines Layout"
     if mode == "Task":
-        fig_label = "Idea Tree with task ideas in Red."
-    fig_label += f" (Ideas: {len(x_bud._idea_dict)})"
+        fig_label = "Concept Tree with task concepts in Red."
+    fig_label += f" (Concepts: {len(x_bud._concept_dict)})"
     fig_label += f" (_sum_healerlink_share: {x_bud._sum_healerlink_share})"
     fig_label += f" (_keeps_justified: {x_bud._keeps_justified})"
     x_fig.update_layout(title_text=fig_label, font_size=12)
 
 
-def display_ideatree(
+def display_concepttree(
     x_bud: BudUnit, mode: str = None, graphics_bool: bool = False
 ) -> plotly_Figure:
     """Mode can be None, Task, Keep"""
@@ -127,7 +132,7 @@ def display_ideatree(
     source_y = 0
     trace_list = []
     anno_list = []
-    _create_ideaunit_traces(trace_list, anno_list, x_bud, source_y, mode=mode)
+    _create_conceptunit_traces(trace_list, anno_list, x_bud, source_y, mode=mode)
     _update_layout_fig(x_fig, mode, x_bud=x_bud)
     while trace_list:
         x_trace = trace_list.pop(-1)
@@ -196,7 +201,7 @@ def get_bud_agenda_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
     column_header_list = [
         "owner_name",
         "fund_ratio",
-        "idea_label",
+        "concept_label",
         "parent_way",
     ]
     df = get_bud_agenda_dataframe(x_bud)
@@ -209,7 +214,7 @@ def get_bud_agenda_plotly_fig(x_bud: BudUnit) -> plotly_Figure:
             values=[
                 df.owner_name,
                 df.fund_ratio,
-                df.idea_label,
+                df.concept_label,
                 df.parent_way,
             ],
             fill_color="lavender",
@@ -237,7 +242,7 @@ def add_rect_str(fig, x, y, text):
     )
 
 
-def create_idea_rect(
+def create_concept_rect(
     fig: plotly_Figure,
     base_width,
     base_h,
@@ -414,7 +419,7 @@ def budunit_graph2(graphics_bool) -> plotly_Figure:
     # Add shapes
     base_w = 0.1
     base_h = 0.125
-    create_idea_rect(fig, base_w, base_h, 0, 0, 1, "Root Idea")
+    create_concept_rect(fig, base_w, base_h, 0, 0, 1, "Root Concept")
     add_group_rect(fig, base_w, base_h, 1, 0, 1, "groups")
     add_people_rect(fig, base_w, base_h, 0, 0, 1, "people")
 
@@ -424,8 +429,8 @@ def budunit_graph2(graphics_bool) -> plotly_Figure:
             y=[3.75, 3.5, 3.25],
             text=[
                 "What Buds Are Made Of: Graph 1",
-                "Pledges are from Ideas",
-                "All ideas build from one",
+                "Pledges are from Concepts",
+                "All concepts build from one",
             ],
             mode="text",
         )
@@ -439,12 +444,12 @@ def budunit_graph3(graphics_bool) -> plotly_Figure:
     # Add shapes
     base_w = 0.1
     base_h = 0.125
-    create_idea_rect(fig, base_w, base_h, 2, 0.4, 0.7, "Sub Idea")
-    create_idea_rect(fig, base_w, base_h, 2, 0.3, 0.4, "Sub Idea")
-    create_idea_rect(fig, base_w, base_h, 1, 0, 0.3, "Sub Idea")
-    create_idea_rect(fig, base_w, base_h, 1, 0.3, 0.7, "Sub Idea")
-    create_idea_rect(fig, base_w, base_h, 1, 0.7, 1, "Sub Idea")
-    create_idea_rect(fig, base_w, base_h, 0, 0, 1, "Root Idea")
+    create_concept_rect(fig, base_w, base_h, 2, 0.4, 0.7, "Sub Concept")
+    create_concept_rect(fig, base_w, base_h, 2, 0.3, 0.4, "Sub Concept")
+    create_concept_rect(fig, base_w, base_h, 1, 0, 0.3, "Sub Concept")
+    create_concept_rect(fig, base_w, base_h, 1, 0.3, 0.7, "Sub Concept")
+    create_concept_rect(fig, base_w, base_h, 1, 0.7, 1, "Sub Concept")
+    create_concept_rect(fig, base_w, base_h, 0, 0, 1, "Root Concept")
     add_group_rect(fig, base_w, base_h, 1, 0, 1, "groups")
     add_people_rect(fig, base_w, base_h, 0, 0, 1, "people")
 
@@ -454,8 +459,8 @@ def budunit_graph3(graphics_bool) -> plotly_Figure:
             y=[3.75, 3.5, 3.25],
             text=[
                 "What Buds Are Made Of: Graph 1",
-                "Pledges are from Ideas",
-                "All ideas build from one",
+                "Pledges are from Concepts",
+                "All concepts build from one",
             ],
             mode="text",
         )
@@ -469,12 +474,12 @@ def budunit_graph4(graphics_bool) -> plotly_Figure:
     # Add shapes
     base_w = 0.1
     base_h = 0.125
-    create_idea_rect(fig, base_w, base_h, 2, 0.4, 0.7, "Premise against Pledge")
-    create_idea_rect(fig, base_w, base_h, 2, 0.1, 0.4, "Premise for Pledge")
-    create_idea_rect(fig, base_w, base_h, 1, 0, 0.1, "Idea")
-    create_idea_rect(fig, base_w, base_h, 1, 0.1, 0.7, "Pledge Reason Base")
-    create_idea_rect(fig, base_w, base_h, 0, 0, 1, "Root Idea")
-    create_idea_rect(fig, base_w, base_h, 1, 0.7, 1, "Pledge Itself", True)
+    create_concept_rect(fig, base_w, base_h, 2, 0.4, 0.7, "Premise against Pledge")
+    create_concept_rect(fig, base_w, base_h, 2, 0.1, 0.4, "Premise for Pledge")
+    create_concept_rect(fig, base_w, base_h, 1, 0, 0.1, "Concept")
+    create_concept_rect(fig, base_w, base_h, 1, 0.1, 0.7, "Pledge Reason Base")
+    create_concept_rect(fig, base_w, base_h, 0, 0, 1, "Root Concept")
+    create_concept_rect(fig, base_w, base_h, 1, 0.7, 1, "Pledge Itself", True)
     add_group_rect(fig, base_w, base_h, 1, 0, 1, "groups")
     add_people_rect(fig, base_w, base_h, 0, 0, 1, "people")
 
@@ -484,8 +489,8 @@ def budunit_graph4(graphics_bool) -> plotly_Figure:
             y=[3.75, 3.5, 3.25],
             text=[
                 "What Buds Are Made Of: Graph 1",
-                "Some Ideas are pledges, others are reasons for pledges",
-                "All ideas build from one",
+                "Some Concepts are pledges, others are reasons for pledges",
+                "All concepts build from one",
             ],
             mode="text",
         )
@@ -496,7 +501,7 @@ def budunit_graph4(graphics_bool) -> plotly_Figure:
 def fund_graph0(
     x_bud: BudUnit, mode: str = None, graphics_bool: bool = False
 ) -> plotly_Figure:
-    fig = display_ideatree(x_bud, mode, False)
+    fig = display_concepttree(x_bud, mode, False)
     fig.update_xaxes(range=[-1, 11])
     fig.update_yaxes(range=[-5.5, 3])
 
@@ -523,8 +528,10 @@ def fund_graph0(
     add_simp_rect(fig, 4, -3.2, 5, -2.8, laborunit_str)
     add_rect_arrow(fig, 4, -2.9, 3.1, -2.9, green_str)
     add_keep__rect(fig, -0.5, -4.5, 10, 2.3, d_sue1_label, "", "", "")
-    d_sue1_p0 = "Fund Source is IdeaRoot. Each Idea fund range calculated by mass "
-    d_sue1_p1 = "IdeaRoot Fund ranges: Black arrows. Sum of childless Idea's funds equal idearoot's fund "
+    d_sue1_p0 = (
+        "Fund Source is ConceptRoot. Each Concept fund range calculated by mass "
+    )
+    d_sue1_p1 = "ConceptRoot Fund ranges: Black arrows. Sum of childless Concept's funds equal conceptroot's fund "
     d_sue1_p2 = "Regular Fund: Green arrows, all fund_coins end up at AcctUnits"
     d_sue1_p3 = "Agenda Fund: Blue arrows, fund_coins from active tasks"
     d_sue1_p4 = f"fund_pool = {x_bud.fund_pool} "
@@ -568,8 +575,8 @@ def fund_graph0(
     add_simp_rect(fig, 9, -4.0, 9.75, -2.2, acctunit_str, "gold")
 
     fund_t0 = "BudUnit.fund_pool"
-    fund_t1_0 = "IdeaUnit._fund_onset"
-    fund_t1_1 = "IdeaUnit._fund_cease"
+    fund_t1_0 = "ConceptUnit._fund_onset"
+    fund_t1_1 = "ConceptUnit._fund_cease"
     fund_t2_0 = "AwardHeir._fund_give"
     fund_t2_1 = "AwardHeir._fund_take"
 

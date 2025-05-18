@@ -65,7 +65,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "addin": "float",
         "awardee_title": "TitleStr",
         "rcontext": "WayStr",
-        "rcontext_idea_active_requisite": "bool",
+        "rcontext_concept_active_requisite": "bool",
         "begin": "float",
         "close": "float",
         "credit_belief": "float",
@@ -97,7 +97,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "pledge": "bool",
         "problem_bool": "bool",
         "respect_bit": "float",
-        "idea_way": "WayStr",
+        "concept_way": "WayStr",
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
@@ -229,13 +229,13 @@ def get_bud_dimens() -> set:
         "budunit",
         "bud_acctunit",
         "bud_acct_membership",
-        "bud_ideaunit",
-        "bud_idea_awardlink",
-        "bud_idea_reasonunit",
-        "bud_idea_reason_premiseunit",
-        "bud_idea_laborlink",
-        "bud_idea_healerlink",
-        "bud_idea_factunit",
+        "bud_conceptunit",
+        "bud_concept_awardlink",
+        "bud_concept_reasonunit",
+        "bud_concept_reason_premiseunit",
+        "bud_concept_laborlink",
+        "bud_concept_healerlink",
+        "bud_concept_factunit",
     }
 
 
@@ -249,7 +249,7 @@ def get_all_bud_dimen_keys() -> set:
         "healer_name",
         "pbranch",
         "owner_name",
-        "idea_way",
+        "concept_way",
         "labor_title",
     }
 
@@ -268,7 +268,7 @@ def get_all_bud_dimen_delete_keys() -> set:
         "healer_name_ERASE",
         "pbranch_ERASE",
         "owner_name_ERASE",
-        "idea_way_ERASE",
+        "concept_way_ERASE",
         "labor_title_ERASE",
     }
 

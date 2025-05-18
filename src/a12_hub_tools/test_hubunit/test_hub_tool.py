@@ -296,7 +296,7 @@ def test_get_budevent_obj_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup)
     casa_way = sue_bud.make_l1_way("case")
     clean_way = sue_bud.make_l1_way("clean")
     dirty_way = sue_bud.make_l1_way("dirty")
-    sue_bud.add_fact(casa_way, dirty_way, create_missing_ideas=True)
+    sue_bud.add_fact(casa_way, dirty_way, create_missing_concepts=True)
     save_bud_file(t3_json_path, None, sue_bud)
 
     # WHEN
@@ -658,13 +658,15 @@ def test_create_cell_acct_mandate_ledger_json_CreatesFile_Scenario1(
     sue_bud.add_acctunit(yao_str, 7, 2)
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
-    sue_bud.add_idea(clean_fact.fbranch)
-    sue_bud.add_idea(dirty_fact.fbranch)
+    sue_bud.add_concept(clean_fact.fbranch)
+    sue_bud.add_concept(dirty_fact.fbranch)
     casa_way = sue_bud.make_l1_way("casa")
     mop_way = sue_bud.make_way(casa_way, "mop")
-    sue_bud.add_idea(mop_way, 1, pledge=True)
+    sue_bud.add_concept(mop_way, 1, pledge=True)
     sue_bud.edit_reason(mop_way, dirty_fact.fcontext, dirty_fact.fbranch)
-    sue_bud.add_fact(dirty_fact.fcontext, dirty_fact.fbranch, create_missing_ideas=True)
+    sue_bud.add_fact(
+        dirty_fact.fcontext, dirty_fact.fbranch, create_missing_concepts=True
+    )
     sky_blue_fact = sky_blue_factunit()
     sue_budevent_factunits = {clean_fact.fcontext: clean_fact}
     sue_found_factunits = {dirty_fact.fcontext: dirty_fact}

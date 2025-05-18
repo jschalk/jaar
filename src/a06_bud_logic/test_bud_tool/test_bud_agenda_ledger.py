@@ -278,11 +278,13 @@ def test_get_acct_mandate_ledger_ReturnsObj_Scenario5_Zero_fund_agenda_give():
     clean_way = sue_bud.make_way(floor_way, clean_str)
     dirty_way = sue_bud.make_way(floor_way, dirty_str)
     mop_way = sue_bud.make_way(casa_way, mop_str)
-    sue_bud.add_idea(floor_way)
-    sue_bud.add_idea(clean_way)
-    sue_bud.add_idea(dirty_way)
-    sue_bud.add_idea(mop_way, pledge=True)
-    sue_bud.edit_idea_attr(mop_way, reason_rcontext=floor_way, reason_premise=clean_way)
+    sue_bud.add_concept(floor_way)
+    sue_bud.add_concept(clean_way)
+    sue_bud.add_concept(dirty_way)
+    sue_bud.add_concept(mop_way, pledge=True)
+    sue_bud.edit_concept_attr(
+        mop_way, reason_rcontext=floor_way, reason_premise=clean_way
+    )
     yao_str = "Yao"
     sue_bud.add_acctunit(yao_str, 13, 5)
 

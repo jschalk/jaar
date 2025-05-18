@@ -2,7 +2,7 @@ from src.a02_finance_logic.finance_config import (
     default_respect_num,
     validate_respect_num,
 )
-from src.a05_idea_logic.idea import ideaunit_shop
+from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a12_hub_tools.basis_buds import (
     create_empty_bud_from_bud,
@@ -17,7 +17,7 @@ def test_create_empty_bud_from_bud_ReturnsObj():
     slash_str = "/"
     penny_float = 0.7
     yao_gut = budunit_shop(yao_str, bridge=slash_str, penny=penny_float)
-    yao_gut.set_l1_idea(ideaunit_shop("Iowa"))
+    yao_gut.set_l1_concept(conceptunit_shop("Iowa"))
     zia_str = "Zia"
     zia_credit_belief = 47
     zia_debtit_belief = 41
@@ -61,7 +61,7 @@ def test_create_listen_basis_ReturnsObj():
     yao_str = "Yao"
     slash_str = "/"
     yao_duty = budunit_shop(yao_str, bridge=slash_str)
-    yao_duty.set_l1_idea(ideaunit_shop("Iowa"))
+    yao_duty.set_l1_concept(conceptunit_shop("Iowa"))
     zia_str = "Zia"
     zia_credit_belief = 47
     zia_debtit_belief = 41
@@ -93,8 +93,8 @@ def test_create_listen_basis_ReturnsObj():
     assert yao_basis_plan.credor_respect == yao_duty.credor_respect
     assert yao_basis_plan.debtor_respect == yao_duty.debtor_respect
     yao_basis_plan.settle_bud()
-    assert len(yao_basis_plan._idea_dict) != len(yao_duty._idea_dict)
-    assert len(yao_basis_plan._idea_dict) == 1
+    assert len(yao_basis_plan._concept_dict) != len(yao_duty._concept_dict)
+    assert len(yao_basis_plan._concept_dict) == 1
     plan_zia_acctunit = yao_basis_plan.get_acct(zia_str)
     assert (
         yao_basis_plan.get_acctunits_dict().keys()
@@ -125,7 +125,7 @@ def test_get_default_job_ReturnsObj():
     bob_acctunit = sue_budunit.get_acct(bob_str)
     bob_acctunit.add_membership(f"{slash_str}swimmers")
     sue_budunit.set_acct_respect(sue_acct_pool)
-    sue_budunit.set_l1_idea(ideaunit_shop(casa_str))
+    sue_budunit.set_l1_concept(conceptunit_shop(casa_str))
     sue_budunit.set_max_tree_traverse(sue_max_tree_traverse)
 
     # WHEN
@@ -145,4 +145,4 @@ def test_get_default_job_ReturnsObj():
     assert default_job.debtor_respect == default_respect_num()
     assert default_job.max_tree_traverse == sue_max_tree_traverse
     assert len(default_job.get_acctunits_dict()) == 1
-    assert len(default_job._idea_dict) == 1
+    assert len(default_job._concept_dict) == 1

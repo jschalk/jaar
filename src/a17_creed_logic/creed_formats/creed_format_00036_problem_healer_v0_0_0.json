@@ -12,10 +12,10 @@
         "healer_name": {
             "otx_key": true
         },
-        "idea_label": {
+        "concept_label": {
             "otx_key": true
         },
-        "idea_way": {
+        "concept_way": {
             "otx_key": true
         },
         "owner_name": {
@@ -29,7 +29,7 @@
     "dimens": [
         "fiscunit",
         "budunit",
-        "bud_ideaunit",
-        "bud_idea_healerlink"
+        "bud_conceptunit",
+        "bud_concept_healerlink"
     ]
 }

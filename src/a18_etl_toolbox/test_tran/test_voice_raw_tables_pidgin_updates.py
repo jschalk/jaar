@@ -2,13 +2,13 @@ from src.a00_data_toolbox.db_toolbox import get_table_columns
 from src.a01_way_logic.way import create_way
 from src.a02_finance_logic._utils.strs_a02 import owner_name_str
 from src.a06_bud_logic._utils.str_a06 import (
-    bud_idea_awardlink_str,
+    bud_concept_awardlink_str,
     face_name_str,
     event_int_str,
     acct_name_str,
     credit_belief_str,
     debtit_belief_str,
-    idea_way_str,
+    concept_way_str,
     awardee_title_str,
     give_force_str,
     take_force_str,
@@ -82,7 +82,7 @@ def test_create_pidtitl_face_otx_event_sqlstr_ReturnsObj_Scenario0_TitleStr():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budawar_dimen = bud_idea_awardlink_str()
+        budawar_dimen = bud_concept_awardlink_str()
         budawar_v_raw_put_tablename = prime_tbl(budawar_dimen, "v", "raw", "put")
         print(f"{get_table_columns(cursor, budawar_v_raw_put_tablename)=}")
         insert_sqlstr = f"""INSERT INTO {budawar_v_raw_put_tablename}
@@ -130,7 +130,7 @@ SELECT
 , raw_dim.face_name_otx
 , raw_dim.awardee_title_otx
 , MAX(pid.event_int) pidgin_event_int
-FROM bud_idea_awardlink_v_put_raw raw_dim
+FROM bud_concept_awardlink_v_put_raw raw_dim
 LEFT JOIN pidgin_title_s_vld pid ON pid.face_name = raw_dim.face_name_otx
     AND pid.otx_title = raw_dim.awardee_title_otx
     AND raw_dim.event_int >= pid.event_int
@@ -287,11 +287,11 @@ def test_create_pidwayy_face_otx_event_sqlstr_ReturnsObj_Scenario0_WayStr():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budawar_put_dimen = bud_idea_awardlink_str()
+        budawar_put_dimen = bud_concept_awardlink_str()
         budawar_put_v_raw_tablename = prime_tbl(budawar_put_dimen, "v", "raw", "put")
         print(f"{get_table_columns(cursor, budawar_put_v_raw_tablename)=}")
         insert_sqlstr = f"""INSERT INTO {budawar_put_v_raw_tablename}
-        ({event_int_str()}, {face_name_str()}_otx, {idea_way_str()}_otx, {idea_way_str()}_inx)
+        ({event_int_str()}, {face_name_str()}_otx, {concept_way_str()}_otx, {concept_way_str()}_inx)
         VALUES
           ({event0}, '{bob_otx}', '{clean_way_otx}', NULL)
         , ({event1}, '{bob_otx}', '{clean_way_otx}', NULL)
@@ -323,7 +323,7 @@ def test_create_pidwayy_face_otx_event_sqlstr_ReturnsObj_Scenario0_WayStr():
 
         # WHEN
         pidname_face_otx_event_sqlstr = create_pidwayy_face_otx_event_sqlstr(
-            budawar_put_v_raw_tablename, idea_way_str()
+            budawar_put_v_raw_tablename, concept_way_str()
         )
         cursor.execute(pidname_face_otx_event_sqlstr)
 
@@ -333,17 +333,17 @@ SELECT
   raw_dim.rowid raw_rowid
 , raw_dim.event_int
 , raw_dim.face_name_otx
-, raw_dim.idea_way_otx
+, raw_dim.concept_way_otx
 , MAX(pid.event_int) pidgin_event_int
-FROM bud_idea_awardlink_v_put_raw raw_dim
+FROM bud_concept_awardlink_v_put_raw raw_dim
 LEFT JOIN pidgin_way_s_vld pid ON pid.face_name = raw_dim.face_name_otx
-    AND pid.otx_way = raw_dim.idea_way_otx
+    AND pid.otx_way = raw_dim.concept_way_otx
     AND raw_dim.event_int >= pid.event_int
 GROUP BY
   raw_dim.rowid
 , raw_dim.event_int
 , raw_dim.face_name_otx
-, raw_dim.idea_way_otx
+, raw_dim.concept_way_otx
 """
 
         print(pidname_face_otx_event_sqlstr)
@@ -385,7 +385,7 @@ def test_create_pidname_face_otx_event_sqlstr_ReturnsObj_Scenario2_NameStr():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budawar_dimen = bud_idea_awardlink_str()
+        budawar_dimen = bud_concept_awardlink_str()
         budawar_v_raw_put_tablename = prime_tbl(budawar_dimen, "v", "raw", "put")
         # print(f"{get_table_columns(cursor, budawar_v_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {budawar_v_raw_put_tablename}
@@ -433,7 +433,7 @@ SELECT
 , raw_dim.face_name_otx
 , raw_dim.face_name_otx
 , MAX(pid.event_int) pidgin_event_int
-FROM bud_idea_awardlink_v_put_raw raw_dim
+FROM bud_concept_awardlink_v_put_raw raw_dim
 LEFT JOIN pidgin_name_s_vld pid ON pid.face_name = raw_dim.face_name_otx
     AND pid.otx_name = raw_dim.face_name_otx
     AND raw_dim.event_int >= pid.event_int
@@ -485,7 +485,7 @@ def test_create_pidname_face_otx_event_sqlstr_ReturnsObj_Scenario1_SelectsMostRe
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budawar_dimen = bud_idea_awardlink_str()
+        budawar_dimen = bud_concept_awardlink_str()
         budawar_v_raw_put_tablename = prime_tbl(budawar_dimen, "v", "raw", "put")
         print(f"{get_table_columns(cursor, budawar_v_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {budawar_v_raw_put_tablename}
@@ -533,7 +533,7 @@ SELECT
 , raw_dim.face_name_otx
 , raw_dim.owner_name_otx
 , MAX(pid.event_int) pidgin_event_int
-FROM bud_idea_awardlink_v_put_raw raw_dim
+FROM bud_concept_awardlink_v_put_raw raw_dim
 LEFT JOIN pidgin_name_s_vld pid ON pid.face_name = raw_dim.face_name_otx
     AND pid.otx_name = raw_dim.owner_name_otx
     AND raw_dim.event_int >= pid.event_int
@@ -577,7 +577,7 @@ def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario0_
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budawar_dimen = bud_idea_awardlink_str()
+        budawar_dimen = bud_concept_awardlink_str()
         budawar_v_raw_put_tablename = prime_tbl(budawar_dimen, "v", "raw", "put")
         # print(f"{get_table_columns(cursor, budawar_v_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {budawar_v_raw_put_tablename} 
@@ -642,7 +642,7 @@ def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario1_
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budawar_dimen = bud_idea_awardlink_str()
+        budawar_dimen = bud_concept_awardlink_str()
         budawar_v_raw_put_tablename = prime_tbl(budawar_dimen, "v", "raw", "put")
         insert_face_name_only_sqlstr = f"""INSERT INTO {budawar_v_raw_put_tablename}
         ({event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx)
@@ -709,7 +709,7 @@ def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario2_
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budawar_dimen = bud_idea_awardlink_str()
+        budawar_dimen = bud_concept_awardlink_str()
         budawar_v_raw_put_tablename = prime_tbl(budawar_dimen, "v", "raw", "put")
         print(f"{get_table_columns(cursor, budawar_v_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {budawar_v_raw_put_tablename}
@@ -785,7 +785,7 @@ def test_create_update_voice_raw_empty_inx_col_sqlstr_UpdatesTable_Scenario0_Emp
         print(f"{pidname_s_vld_tablename=}")
         print(f"{get_table_columns(cursor, pidname_s_vld_tablename)=}")
 
-        budawar_dimen = bud_idea_awardlink_str()
+        budawar_dimen = bud_concept_awardlink_str()
         budawar_v_raw_put_tablename = prime_tbl(budawar_dimen, "v", "raw", "put")
         print(f"{get_table_columns(cursor, budawar_v_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {budawar_v_raw_put_tablename} ({event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx)
@@ -842,7 +842,7 @@ def test_set_all_voice_raw_inx_columns_Scenario0_empty_tables():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budawar_dimen = bud_idea_awardlink_str()
+        budawar_dimen = bud_concept_awardlink_str()
         budawar_v_raw_put_tablename = prime_tbl(budawar_dimen, "v", "raw", "put")
         print(f"{get_table_columns(cursor, budawar_v_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {budawar_v_raw_put_tablename}

@@ -1,0 +1,29 @@
+{
+    "attributes": {
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "fisc_label": {
+            "otx_key": true
+        },
+        "concept_way": {
+            "otx_key": true
+        },
+        "owner_name": {
+            "otx_key": true
+        },
+        "rcontext_ERASE": {
+            "otx_key": true
+        }
+    },
+    "creed_number": "br00057",
+    "dimens": [
+        "fiscunit",
+        "budunit",
+        "bud_conceptunit",
+        "bud_concept_reasonunit"
+    ]
+}

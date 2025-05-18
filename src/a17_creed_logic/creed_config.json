@@ -32,7 +32,7 @@
       "debtit_belief": {}
     }
   },
-  "bud_idea_awardlink": {
+  "bud_concept_awardlink": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
     "build_order": 11,
     "creed_category": "bud",
@@ -41,7 +41,7 @@
       "event_int": {},
       "face_name": {},
       "fisc_label": {},
-      "idea_way": {},
+      "concept_way": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -49,7 +49,7 @@
       "take_force": {}
     }
   },
-  "bud_idea_factunit": {
+  "bud_concept_factunit": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
     "build_order": 12,
     "creed_category": "bud",
@@ -58,7 +58,7 @@
       "face_name": {},
       "fcontext": {},
       "fisc_label": {},
-      "idea_way": {},
+      "concept_way": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -67,7 +67,7 @@
       "fopen": {}
     }
   },
-  "bud_idea_healerlink": {
+  "bud_concept_healerlink": {
     "allowed_crud": "DELETE_INSERT",
     "build_order": 15,
     "creed_category": "bud",
@@ -76,12 +76,12 @@
       "face_name": {},
       "fisc_label": {},
       "healer_name": {},
-      "idea_way": {},
+      "concept_way": {},
       "owner_name": {}
     },
     "jvalues": {}
   },
-  "bud_idea_reason_premiseunit": {
+  "bud_concept_reason_premiseunit": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
     "build_order": 16,
     "creed_category": "bud",
@@ -89,7 +89,7 @@
       "event_int": {},
       "face_name": {},
       "fisc_label": {},
-      "idea_way": {},
+      "concept_way": {},
       "owner_name": {},
       "pbranch": {},
       "rcontext": {}
@@ -100,7 +100,7 @@
       "popen": {}
     }
   },
-  "bud_idea_reasonunit": {
+  "bud_concept_reasonunit": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
     "build_order": 17,
     "creed_category": "bud",
@@ -108,15 +108,15 @@
       "event_int": {},
       "face_name": {},
       "fisc_label": {},
-      "idea_way": {},
+      "concept_way": {},
       "owner_name": {},
       "rcontext": {}
     },
     "jvalues": {
-      "rcontext_idea_active_requisite": {}
+      "rcontext_concept_active_requisite": {}
     }
   },
-  "bud_idea_laborlink": {
+  "bud_concept_laborlink": {
     "allowed_crud": "DELETE_INSERT",
     "build_order": 14,
     "creed_category": "bud",
@@ -124,13 +124,13 @@
       "event_int": {},
       "face_name": {},
       "fisc_label": {},
-      "idea_way": {},
+      "concept_way": {},
       "owner_name": {},
       "labor_title": {}
     },
     "jvalues": {}
   },
-  "bud_ideaunit": {
+  "bud_conceptunit": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
     "build_order": 18,
     "creed_category": "bud",
@@ -138,7 +138,7 @@
       "event_int": {},
       "face_name": {},
       "fisc_label": {},
-      "idea_way": {},
+      "concept_way": {},
       "owner_name": {}
     },
     "jvalues": {

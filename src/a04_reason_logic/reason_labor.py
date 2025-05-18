@@ -106,7 +106,7 @@ class LaborHeir:
             if not set(all_laborunit_accts).issubset(set(all_parent_laborheir_accts)):
                 # else raise error
                 raise InvalidLaborHeirPopulateException(
-                    f"parent_laborheir does not contain all accts of the idea's laborunit\n{set(all_parent_laborheir_accts)=}\n\n{set(all_laborunit_accts)=}"
+                    f"parent_laborheir does not contain all accts of the concept's laborunit\n{set(all_parent_laborheir_accts)=}\n\n{set(all_laborunit_accts)=}"
                 )
 
             # set dict_x = to laborunit groupunits

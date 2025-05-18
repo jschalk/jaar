@@ -21,7 +21,7 @@ from src.a09_pack_logic.pack import (
     get_init_pack_id_if_None,
     get_packunit_from_json,
 )
-from src.a09_pack_logic._utils.example_atoms import get_atom_example_ideaunit_sports
+from src.a09_pack_logic._utils.example_atoms import get_atom_example_conceptunit_sports
 from src.a09_pack_logic._utils.example_deltas import get_buddelta_sue_example
 from pytest import raises as pytest_raises
 
@@ -162,7 +162,7 @@ def test_PackUnit_set_buddelta_SetsAttribute():
 
     # WHEN
     x_buddelta = buddelta_shop()
-    x_buddelta.set_budatom(get_atom_example_ideaunit_sports())
+    x_buddelta.set_budatom(get_atom_example_conceptunit_sports())
     bob_packunit.set_buddelta(x_buddelta)
 
     # THEN
@@ -191,7 +191,7 @@ def test_PackUnit_budatom_exists_ReturnsObj():
     bob_packunit.set_buddelta(x_buddelta)
 
     # WHEN
-    sports_budatom = get_atom_example_ideaunit_sports()
+    sports_budatom = get_atom_example_conceptunit_sports()
 
     # THEN
     assert bob_packunit.budatom_exists(sports_budatom) is False
@@ -208,7 +208,7 @@ def test_PackUnit_del_buddelta_SetsAttribute():
     # ESTABLISH
     bob_str = "Bob"
     x_buddelta = buddelta_shop()
-    x_buddelta.set_budatom(get_atom_example_ideaunit_sports())
+    x_buddelta.set_budatom(get_atom_example_conceptunit_sports())
     bob_packunit = packunit_shop(owner_name=bob_str, _buddelta=x_buddelta)
     assert bob_packunit._buddelta != buddelta_shop()
     assert bob_packunit._buddelta == x_buddelta

@@ -10,13 +10,13 @@ from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
-    bud_ideaunit_str,
-    bud_idea_awardlink_str,
-    bud_idea_reasonunit_str,
-    bud_idea_reason_premiseunit_str,
-    bud_idea_laborlink_str,
-    bud_idea_healerlink_str,
-    bud_idea_factunit_str,
+    bud_conceptunit_str,
+    bud_concept_awardlink_str,
+    bud_concept_reasonunit_str,
+    bud_concept_reason_premiseunit_str,
+    bud_concept_laborlink_str,
+    bud_concept_healerlink_str,
+    bud_concept_factunit_str,
     bud_groupunit_str,
 )
 from src.a10_bud_calc.bud_calc_config import get_bud_calc_config_dict
@@ -66,13 +66,13 @@ def test_create_job_tables_CreatesTables():
         budmemb_job_table = f"{bud_acct_membership_str()}_job"
         budacct_job_table = f"{bud_acctunit_str()}_job"
         budgrou_job_table = f"{bud_groupunit_str()}_job"
-        budawar_job_table = f"{bud_idea_awardlink_str()}_job"
-        budfact_job_table = f"{bud_idea_factunit_str()}_job"
-        budheal_job_table = f"{bud_idea_healerlink_str()}_job"
-        budprem_job_table = f"{bud_idea_reason_premiseunit_str()}_job"
-        budares_job_table = f"{bud_idea_reasonunit_str()}_job"
-        budlabor_job_table = f"{bud_idea_laborlink_str()}_job"
-        budidea_job_table = f"{bud_ideaunit_str()}_job"
+        budawar_job_table = f"{bud_concept_awardlink_str()}_job"
+        budfact_job_table = f"{bud_concept_factunit_str()}_job"
+        budheal_job_table = f"{bud_concept_healerlink_str()}_job"
+        budprem_job_table = f"{bud_concept_reason_premiseunit_str()}_job"
+        budares_job_table = f"{bud_concept_reasonunit_str()}_job"
+        budlabor_job_table = f"{bud_concept_laborlink_str()}_job"
+        budconcept_job_table = f"{bud_conceptunit_str()}_job"
         budunit_job_table = f"{budunit_str()}_job"
 
         assert db_table_exists(cursor, budmemb_job_table) is False
@@ -84,7 +84,7 @@ def test_create_job_tables_CreatesTables():
         assert db_table_exists(cursor, budprem_job_table) is False
         assert db_table_exists(cursor, budares_job_table) is False
         assert db_table_exists(cursor, budlabor_job_table) is False
-        assert db_table_exists(cursor, budidea_job_table) is False
+        assert db_table_exists(cursor, budconcept_job_table) is False
         assert db_table_exists(cursor, budunit_job_table) is False
 
         # WHEN
@@ -106,7 +106,7 @@ def test_create_job_tables_CreatesTables():
         assert db_table_exists(cursor, budprem_job_table)
         assert db_table_exists(cursor, budares_job_table)
         assert db_table_exists(cursor, budlabor_job_table)
-        assert db_table_exists(cursor, budidea_job_table)
+        assert db_table_exists(cursor, budconcept_job_table)
         assert db_table_exists(cursor, budunit_job_table)
         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
         assert cursor.fetchone()[0] == 11

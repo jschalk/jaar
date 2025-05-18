@@ -15,11 +15,11 @@ from src.a06_bud_logic._utils.str_a06 import (
     fund_coin_str,
     healer_name_str,
     group_title_str,
-    idea_label_str,
+    concept_label_str,
     pbranch_str,
     penny_str,
     respect_bit_str,
-    idea_way_str,
+    concept_way_str,
     labor_title_str,
 )
 from src.a07_calendar_logic._utils.str_a07 import timeline_label_str
@@ -75,7 +75,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("amount") == "float"
     assert pidgin_args_class_types.get("awardee_title") == type_TitleStr_str()
     assert pidgin_args_class_types.get("rcontext") == type_WayStr_str()
-    assert pidgin_args_class_types.get("rcontext_idea_active_requisite") == "bool"
+    assert pidgin_args_class_types.get("rcontext_concept_active_requisite") == "bool"
     assert pidgin_args_class_types.get("begin") == "float"
     assert pidgin_args_class_types.get("c400_number") == "int"
     assert pidgin_args_class_types.get("close") == "float"
@@ -118,7 +118,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("problem_bool") == "bool"
     assert pidgin_args_class_types.get("quota") == "int"
     assert pidgin_args_class_types.get("respect_bit") == "float"
-    assert pidgin_args_class_types.get("idea_way") == type_WayStr_str()
+    assert pidgin_args_class_types.get("concept_way") == type_WayStr_str()
     assert pidgin_args_class_types.get("celldepth") == "int"
     assert pidgin_args_class_types.get("stop_want") == "float"
     assert pidgin_args_class_types.get("take_force") == "float"
@@ -217,7 +217,7 @@ def test_get_pidginable_args_ReturnsObj():
         month_label_str(),
         pbranch_str(),
         owner_name_str(),
-        idea_way_str(),
+        concept_way_str(),
         labor_title_str(),
         timeline_label_str(),
         weekday_label_str(),
@@ -363,7 +363,7 @@ def test_get_pidgin_WayStr_args_ReturnsObj():
     assert pidgin_WayStr_args == {
         fbranch_str(),
         fcontext_str(),
-        idea_way_str(),
+        concept_way_str(),
         rcontext_str(),
         pbranch_str(),
     }

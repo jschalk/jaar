@@ -21,16 +21,16 @@ def create_pledge(
         and pledge_way != ""
         and get_terminus_label(pledge_way) != ""
     ):
-        x_idea = x_bud.get_idea_obj(pledge_way, if_missing_create=True)
-        x_idea.pledge = True
-        x_idea.laborunit.set_laborlink(x_laborlink)
+        x_concept = x_bud.get_concept_obj(pledge_way, if_missing_create=True)
+        x_concept.pledge = True
+        x_concept.laborunit.set_laborlink(x_laborlink)
 
         if x_laborlink is not None and x_bud.acct_exists(x_laborlink) is False:
             x_bud.add_acctunit(x_laborlink)
 
         if reason_premise is not None:
-            if x_bud.idea_exists(reason_premise) is False:
-                x_bud.get_idea_obj(reason_premise, if_missing_create=True)
+            if x_bud.concept_exists(reason_premise) is False:
+                x_bud.get_concept_obj(reason_premise, if_missing_create=True)
             reason_rcontext = get_parent_way(reason_premise)
             x_bud.edit_reason(pledge_way, reason_rcontext, reason_premise)
 
@@ -55,8 +55,8 @@ def add_gut_pledge(
 
 
 def create_fact(x_bud: BudUnit, fact_fbranch: WayStr):
-    if x_bud.idea_exists(fact_fbranch) is False:
-        x_bud.get_idea_obj(fact_fbranch, if_missing_create=True)
+    if x_bud.concept_exists(fact_fbranch) is False:
+        x_bud.get_concept_obj(fact_fbranch, if_missing_create=True)
     fact_rcontext = get_parent_way(fact_fbranch)
     x_bud.add_fact(fact_rcontext, fact_fbranch)
 

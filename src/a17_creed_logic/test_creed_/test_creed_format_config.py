@@ -8,7 +8,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     group_title_str,
     mass_str,
-    idea_way_str,
+    concept_way_str,
     pledge_str,
     acct_pool_str,
     debtit_belief_str,
@@ -35,17 +35,17 @@ from src.a17_creed_logic.creed_config import (
     get_creed_formats_dir,
     get_creed_format_filenames,
     get_creedref_from_file,
-    creed_format_00013_ideaunit_v0_0_0,
-    creed_format_00019_ideaunit_v0_0_0,
+    creed_format_00013_conceptunit_v0_0_0,
+    creed_format_00019_conceptunit_v0_0_0,
     creed_format_00020_bud_acct_membership_v0_0_0,
     creed_format_00021_bud_acctunit_v0_0_0,
-    creed_format_00022_bud_idea_awardlink_v0_0_0,
-    creed_format_00023_bud_idea_factunit_v0_0_0,
-    creed_format_00024_bud_idea_laborlink_v0_0_0,
-    creed_format_00025_bud_idea_healerlink_v0_0_0,
-    creed_format_00026_bud_idea_reason_premiseunit_v0_0_0,
-    creed_format_00027_bud_idea_reasonunit_v0_0_0,
-    creed_format_00028_bud_ideaunit_v0_0_0,
+    creed_format_00022_bud_concept_awardlink_v0_0_0,
+    creed_format_00023_bud_concept_factunit_v0_0_0,
+    creed_format_00024_bud_concept_laborlink_v0_0_0,
+    creed_format_00025_bud_concept_healerlink_v0_0_0,
+    creed_format_00026_bud_concept_reason_premiseunit_v0_0_0,
+    creed_format_00027_bud_concept_reasonunit_v0_0_0,
+    creed_format_00028_bud_conceptunit_v0_0_0,
     creed_format_00029_budunit_v0_0_0,
     get_creed_format_headers,
     get_creed_elements_sort_order,
@@ -66,8 +66,8 @@ def test_config_str_functions_ReturnObjs():
     assert creed_format_00021_bud_acctunit_v0_0_0() == x00021_creed
     x00020_creed = "creed_format_00020_bud_acct_membership_v0_0_0"
     assert creed_format_00020_bud_acct_membership_v0_0_0() == x00020_creed
-    x0003_creed = "creed_format_00013_ideaunit_v0_0_0"
-    assert creed_format_00013_ideaunit_v0_0_0() == x0003_creed
+    x0003_creed = "creed_format_00013_conceptunit_v0_0_0"
+    assert creed_format_00013_conceptunit_v0_0_0() == x0003_creed
 
 
 def test_get_creed_formats_dir_ReturnsObj():
@@ -134,12 +134,12 @@ def test_get_sorted_headers_str_ReturnsObj():
     )
 
     # ESTABLISH / WHEN
-    br00019_headers = get_sorted_headers_str(creed_format_00019_ideaunit_v0_0_0())
+    br00019_headers = get_sorted_headers_str(creed_format_00019_conceptunit_v0_0_0())
 
     # THEN
     print(f"{br00019_headers=}")
-    idea_headers_str = "fisc_label,owner_name,idea_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want"
-    assert br00019_headers == idea_headers_str
+    concept_headers_str = "fisc_label,owner_name,concept_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want"
+    assert br00019_headers == concept_headers_str
 
 
 def check_sorted_headers_exist(creed_format_filename: str, x_headers: dict):
@@ -253,9 +253,9 @@ def test_get_creedref_obj_HasCorrectAttrs_creed_format_00020_bud_acct_membership
     assert headers_list[7] == debtit_vote_str()
 
 
-def test_get_creedref_obj_HasCorrectAttrs_creed_format_00013_ideaunit_v0_0_0():
+def test_get_creedref_obj_HasCorrectAttrs_creed_format_00013_conceptunit_v0_0_0():
     # ESTABLISH
-    creed_name = creed_format_00013_ideaunit_v0_0_0()
+    creed_name = creed_format_00013_conceptunit_v0_0_0()
 
     # WHEN
     format_00003_creedref = get_creedref_obj(creed_name)
@@ -267,14 +267,14 @@ def test_get_creedref_obj_HasCorrectAttrs_creed_format_00013_ideaunit_v0_0_0():
     assert headers_list[1] == face_name_str()
     assert headers_list[2] == fisc_label_str()
     assert headers_list[3] == owner_name_str()
-    assert headers_list[4] == idea_way_str()
+    assert headers_list[4] == concept_way_str()
     assert headers_list[5] == mass_str()
     assert headers_list[6] == pledge_str()
 
 
-def test_get_creedref_obj_HasCorrectAttrs_creed_format_00019_ideaunit_v0_0_0():
+def test_get_creedref_obj_HasCorrectAttrs_creed_format_00019_conceptunit_v0_0_0():
     # ESTABLISH
-    creed_name = creed_format_00019_ideaunit_v0_0_0()
+    creed_name = creed_format_00019_conceptunit_v0_0_0()
 
     # WHEN
     format_00019_creedref = get_creedref_obj(creed_name)
@@ -286,7 +286,7 @@ def test_get_creedref_obj_HasCorrectAttrs_creed_format_00019_ideaunit_v0_0_0():
     assert headers_list[1] == face_name_str()
     assert headers_list[2] == fisc_label_str()
     assert headers_list[3] == owner_name_str()
-    assert headers_list[4] == idea_way_str()
+    assert headers_list[4] == concept_way_str()
     assert headers_list[5] == begin_str()
     assert headers_list[6] == close_str()
     assert headers_list[7] == addin_str()

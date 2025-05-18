@@ -2,7 +2,7 @@ from src.a02_finance_logic._utils.strs_a02 import fisc_label_str, owner_name_str
 from src.a06_bud_logic._utils.str_a06 import (
     event_int_str,
     face_name_str,
-    idea_way_str,
+    concept_way_str,
     labor_title_str,
     acct_name_str,
     credit_belief_str,
@@ -18,7 +18,7 @@ from src.a17_creed_logic.creed_db_tool import (
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_get_creed_into_dimen_raw_query_ReturnsObj_Scenario0_bud_idea_laborlink():
+def test_get_creed_into_dimen_raw_query_ReturnsObj_Scenario0_bud_concept_laborlink():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
         creed_number = "br000XX"
@@ -26,13 +26,13 @@ def test_get_creed_into_dimen_raw_query_ReturnsObj_Scenario0_bud_idea_laborlink(
             event_int_str(),
             face_name_str(),
             fisc_label_str(),
-            idea_way_str(),
+            concept_way_str(),
             labor_title_str(),
             owner_name_str(),
             acct_name_str(),
             amount_str(),
         ]
-        budlabor_cat = "bud_idea_laborlink"
+        budlabor_cat = "bud_concept_laborlink"
         src_table = f"{creed_number}_raw"
         dst_table = f"{budlabor_cat}_raw"
         creed_config = get_creed_config_dict()
@@ -55,12 +55,12 @@ def test_get_creed_into_dimen_raw_query_ReturnsObj_Scenario0_bud_idea_laborlink(
 
         # THEN
         columns_str = (
-            "event_int, face_name, fisc_label, owner_name, idea_way, labor_title"
+            "event_int, face_name, fisc_label, owner_name, concept_way, labor_title"
         )
         expected_sqlstr = f"""INSERT INTO {budlabor_cat}_raw (creed_number, {columns_str})
 SELECT '{creed_number}' as creed_number, {columns_str}
 FROM {creed_number}_raw
-WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND fisc_label IS NOT NULL AND owner_name IS NOT NULL AND idea_way IS NOT NULL AND labor_title IS NOT NULL
+WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND fisc_label IS NOT NULL AND owner_name IS NOT NULL AND concept_way IS NOT NULL AND labor_title IS NOT NULL
 GROUP BY {columns_str}
 ;
 """
@@ -78,7 +78,7 @@ def test_get_creed_into_dimen_raw_query_ReturnsObj_Scenario1_bud_acctunit():
             event_int_str(),
             face_name_str(),
             fisc_label_str(),
-            idea_way_str(),
+            concept_way_str(),
             labor_title_str(),
             owner_name_str(),
             acct_name_str(),
@@ -128,7 +128,7 @@ def test_get_creed_into_dimen_raw_query_ReturnsObj_Scenario2_bud_acctunit():
             event_int_str(),
             face_name_str(),
             fisc_label_str(),
-            idea_way_str(),
+            concept_way_str(),
             labor_title_str(),
             owner_name_str(),
             acct_name_str(),

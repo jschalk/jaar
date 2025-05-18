@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
-from src.a04_reason_logic.reason_idea import (
+from src.a04_reason_logic.reason_concept import (
     PremiseStatusFinder,
     premisestatusfinder_shop,
 )

@@ -4,8 +4,8 @@ from src.a02_finance_logic.finance_config import FundNum, get_net, RespectNum
 from src.a01_way_logic.way import AcctName, FiscLabel, WayStr
 from src.a03_group_logic.acct import AcctUnit
 from src.a03_group_logic.group import MemberShip, AwardLink
-from src.a05_idea_logic.idea import IdeaUnit
-from src.a04_reason_logic.reason_idea import (
+from src.a05_concept_logic.concept import ConceptUnit
+from src.a04_reason_logic.reason_concept import (
     ReasonUnit,
     FactUnit,
     PremiseUnit,
@@ -32,65 +32,67 @@ def bud_acct_membership_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
     )
 
 
-def bud_ideaunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_way = jkeys.get("idea_way")
-    return False if x_bud is None else bool(x_bud.idea_exists(x_way))
+def bud_conceptunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
+    x_way = jkeys.get("concept_way")
+    return False if x_bud is None else bool(x_bud.concept_exists(x_way))
 
 
-def bud_idea_awardlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
+def bud_concept_awardlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
     x_awardee_title = jkeys.get("awardee_title")
-    x_way = jkeys.get("idea_way")
+    x_way = jkeys.get("concept_way")
     return bool(
-        bud_ideaunit_exists(x_bud, jkeys)
-        and x_bud.get_idea_obj(x_way).awardlink_exists(x_awardee_title)
+        bud_conceptunit_exists(x_bud, jkeys)
+        and x_bud.get_concept_obj(x_way).awardlink_exists(x_awardee_title)
     )
 
 
-def bud_idea_reasonunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_way = jkeys.get("idea_way")
+def bud_concept_reasonunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
+    x_way = jkeys.get("concept_way")
     x_rcontext = jkeys.get("rcontext")
     return bool(
-        bud_ideaunit_exists(x_bud, jkeys)
-        and x_bud.get_idea_obj(x_way).reasonunit_exists(x_rcontext)
+        bud_conceptunit_exists(x_bud, jkeys)
+        and x_bud.get_concept_obj(x_way).reasonunit_exists(x_rcontext)
     )
 
 
-def bud_idea_reason_premiseunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_way = jkeys.get("idea_way")
+def bud_concept_reason_premiseunit_exists(
+    x_bud: BudUnit, jkeys: dict[str, any]
+) -> bool:
+    x_way = jkeys.get("concept_way")
     x_rcontext = jkeys.get("rcontext")
     x_pbranch = jkeys.get("pbranch")
     return bool(
-        bud_idea_reasonunit_exists(x_bud, jkeys)
-        and x_bud.get_idea_obj(x_way)
+        bud_concept_reasonunit_exists(x_bud, jkeys)
+        and x_bud.get_concept_obj(x_way)
         .get_reasonunit(x_rcontext)
         .premise_exists(x_pbranch)
     )
 
 
-def bud_idea_laborlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
+def bud_concept_laborlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
     x_labor_title = jkeys.get("labor_title")
-    x_way = jkeys.get("idea_way")
+    x_way = jkeys.get("concept_way")
     return bool(
-        bud_ideaunit_exists(x_bud, jkeys)
-        and x_bud.get_idea_obj(x_way).laborunit.laborlink_exists(x_labor_title)
+        bud_conceptunit_exists(x_bud, jkeys)
+        and x_bud.get_concept_obj(x_way).laborunit.laborlink_exists(x_labor_title)
     )
 
 
-def bud_idea_healerlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
+def bud_concept_healerlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
     x_healer_name = jkeys.get("healer_name")
-    x_way = jkeys.get("idea_way")
+    x_way = jkeys.get("concept_way")
     return bool(
-        bud_ideaunit_exists(x_bud, jkeys)
-        and x_bud.get_idea_obj(x_way).healerlink.healer_name_exists(x_healer_name)
+        bud_conceptunit_exists(x_bud, jkeys)
+        and x_bud.get_concept_obj(x_way).healerlink.healer_name_exists(x_healer_name)
     )
 
 
-def bud_idea_factunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_way = jkeys.get("idea_way")
+def bud_concept_factunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
+    x_way = jkeys.get("concept_way")
     x_fcontext = jkeys.get("fcontext")
     return bool(
-        bud_ideaunit_exists(x_bud, jkeys)
-        and x_bud.get_idea_obj(x_way).factunit_exists(x_fcontext)
+        bud_conceptunit_exists(x_bud, jkeys)
+        and x_bud.get_concept_obj(x_way).factunit_exists(x_fcontext)
     )
 
 
@@ -99,20 +101,20 @@ def bud_attr_exists(x_dimen: str, x_bud: BudUnit, jkeys: dict[str, any]) -> bool
         return bud_acct_membership_exists(x_bud, jkeys)
     elif x_dimen == "bud_acctunit":
         return bud_acctunit_exists(x_bud, jkeys)
-    elif x_dimen == "bud_idea_awardlink":
-        return bud_idea_awardlink_exists(x_bud, jkeys)
-    elif x_dimen == "bud_idea_factunit":
-        return bud_idea_factunit_exists(x_bud, jkeys)
-    elif x_dimen == "bud_idea_healerlink":
-        return bud_idea_healerlink_exists(x_bud, jkeys)
-    elif x_dimen == "bud_idea_reason_premiseunit":
-        return bud_idea_reason_premiseunit_exists(x_bud, jkeys)
-    elif x_dimen == "bud_idea_reasonunit":
-        return bud_idea_reasonunit_exists(x_bud, jkeys)
-    elif x_dimen == "bud_idea_laborlink":
-        return bud_idea_laborlink_exists(x_bud, jkeys)
-    elif x_dimen == "bud_ideaunit":
-        return bud_ideaunit_exists(x_bud, jkeys)
+    elif x_dimen == "bud_concept_awardlink":
+        return bud_concept_awardlink_exists(x_bud, jkeys)
+    elif x_dimen == "bud_concept_factunit":
+        return bud_concept_factunit_exists(x_bud, jkeys)
+    elif x_dimen == "bud_concept_healerlink":
+        return bud_concept_healerlink_exists(x_bud, jkeys)
+    elif x_dimen == "bud_concept_reason_premiseunit":
+        return bud_concept_reason_premiseunit_exists(x_bud, jkeys)
+    elif x_dimen == "bud_concept_reasonunit":
+        return bud_concept_reasonunit_exists(x_bud, jkeys)
+    elif x_dimen == "bud_concept_laborlink":
+        return bud_concept_laborlink_exists(x_bud, jkeys)
+    elif x_dimen == "bud_conceptunit":
+        return bud_conceptunit_exists(x_bud, jkeys)
     elif x_dimen == "budunit":
         return budunit_exists(x_bud)
     return True
@@ -128,38 +130,40 @@ def bud_acct_membership_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> Member
     return x_bud.get_acct(x_acct_name).get_membership(x_group_title)
 
 
-def bud_ideaunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> IdeaUnit:
-    x_way = jkeys.get("idea_way")
-    return x_bud.get_idea_obj(x_way)
+def bud_conceptunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> ConceptUnit:
+    x_way = jkeys.get("concept_way")
+    return x_bud.get_concept_obj(x_way)
 
 
-def bud_idea_awardlink_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> AwardLink:
-    x_way = jkeys.get("idea_way")
+def bud_concept_awardlink_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> AwardLink:
+    x_way = jkeys.get("concept_way")
     x_awardee_title = jkeys.get("awardee_title")
-    return x_bud.get_idea_obj(x_way).get_awardlink(x_awardee_title)
+    return x_bud.get_concept_obj(x_way).get_awardlink(x_awardee_title)
 
 
-def bud_idea_reasonunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> ReasonUnit:
-    x_way = jkeys.get("idea_way")
+def bud_concept_reasonunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> ReasonUnit:
+    x_way = jkeys.get("concept_way")
     x_rcontext = jkeys.get("rcontext")
-    return x_bud.get_idea_obj(x_way).get_reasonunit(x_rcontext)
+    return x_bud.get_concept_obj(x_way).get_reasonunit(x_rcontext)
 
 
-def bud_idea_reason_premiseunit_get_obj(
+def bud_concept_reason_premiseunit_get_obj(
     x_bud: BudUnit, jkeys: dict[str, any]
 ) -> PremiseUnit:
-    x_way = jkeys.get("idea_way")
+    x_way = jkeys.get("concept_way")
     x_rcontext = jkeys.get("rcontext")
     x_pbranch = jkeys.get("pbranch")
-    return x_bud.get_idea_obj(x_way).get_reasonunit(x_rcontext).get_premise(x_pbranch)
+    return (
+        x_bud.get_concept_obj(x_way).get_reasonunit(x_rcontext).get_premise(x_pbranch)
+    )
 
 
-def bud_idea_factunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> FactUnit:
-    x_way = jkeys.get("idea_way")
+def bud_concept_factunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> FactUnit:
+    x_way = jkeys.get("concept_way")
     x_fcontext = jkeys.get("fcontext")
     print(f"{x_fcontext=}")
-    print(f"{x_bud.get_idea_obj(x_way).factunits=}")
-    return x_bud.get_idea_obj(x_way).factunits.get(x_fcontext)
+    print(f"{x_bud.get_concept_obj(x_way).factunits=}")
+    return x_bud.get_concept_obj(x_way).factunits.get(x_fcontext)
 
 
 def bud_get_obj(x_dimen: str, x_bud: BudUnit, jkeys: dict[str, any]) -> any:
@@ -169,11 +173,11 @@ def bud_get_obj(x_dimen: str, x_bud: BudUnit, jkeys: dict[str, any]) -> any:
     x_dimens = {
         "bud_acctunit": bud_acctunit_get_obj,
         "bud_acct_membership": bud_acct_membership_get_obj,
-        "bud_ideaunit": bud_ideaunit_get_obj,
-        "bud_idea_awardlink": bud_idea_awardlink_get_obj,
-        "bud_idea_reasonunit": bud_idea_reasonunit_get_obj,
-        "bud_idea_reason_premiseunit": bud_idea_reason_premiseunit_get_obj,
-        "bud_idea_factunit": bud_idea_factunit_get_obj,
+        "bud_conceptunit": bud_conceptunit_get_obj,
+        "bud_concept_awardlink": bud_concept_awardlink_get_obj,
+        "bud_concept_reasonunit": bud_concept_reasonunit_get_obj,
+        "bud_concept_reason_premiseunit": bud_concept_reason_premiseunit_get_obj,
+        "bud_concept_factunit": bud_concept_factunit_get_obj,
     }
     if x_func := x_dimens.get(x_dimen):
         return x_func(x_bud, jkeys)
@@ -263,7 +267,7 @@ def set_factunits_to_bud(x_bud: BudUnit, x_facts_dict: dict[WayStr, dict]):
                 factunit.fbranch,
                 factunit.fopen,
                 factunit.fnigh,
-                create_missing_ideas=True,
+                create_missing_concepts=True,
             )
 
 
