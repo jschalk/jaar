@@ -404,13 +404,13 @@ def test_BudUnit_edit_idea_attr_IsAbleToEditAnyAncestor_Idea():
 
     # _awardlink: dict = None,
     sue_bud.idearoot._kids[casa_str].awardlinks = {
-        "fun": awardlink_shop(awardee_label="fun", give_force=1, take_force=7)
+        "fun": awardlink_shop(awardee_title="fun", give_force=1, take_force=7)
     }
     _awardlinks = sue_bud.idearoot._kids[casa_str].awardlinks
     assert _awardlinks == {
-        "fun": awardlink_shop(awardee_label="fun", give_force=1, take_force=7)
+        "fun": awardlink_shop(awardee_title="fun", give_force=1, take_force=7)
     }
-    x_awardlink = awardlink_shop(awardee_label="fun", give_force=4, take_force=8)
+    x_awardlink = awardlink_shop(awardee_title="fun", give_force=4, take_force=8)
     sue_bud.edit_idea_attr(casa_way, awardlink=x_awardlink)
     assert sue_bud.idearoot._kids[casa_str].awardlinks == {"fun": x_awardlink}
 
@@ -471,7 +471,7 @@ def test_BudUnit_edit_idea_attr_RaisesErrorWhen_healerlink_healer_names_DoNotExi
         yao_bud.edit_idea_attr(casa_way, healerlink=x_healerlink)
     assert (
         str(excinfo.value)
-        == f"Idea cannot edit healerlink because group_label '{sue_str}' does not exist as group in Bud"
+        == f"Idea cannot edit healerlink because group_title '{sue_str}' does not exist as group in Bud"
     )
 
 

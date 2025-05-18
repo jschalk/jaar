@@ -81,9 +81,9 @@ def get_ex02_atom_dataframe() -> DataFrame:
     ex02_columns = [
         "healer_name",
         "acct_name",
-        "group_label",
-        "labor_label",
-        "awardee_label",
+        "group_title",
+        "labor_title",
+        "awardee_title",
         "idea_way",
     ]
     x_dt = DataFrame(columns=ex02_columns)
@@ -108,7 +108,7 @@ def get_ex02_atom_dataframe() -> DataFrame:
 
 
 def get_ex02_atom_csv() -> str:
-    return """acct_name,group_label,idea_way,labor_label,awardee_label,healer_name
+    return """acct_name,group_title,idea_way,labor_title,awardee_title,healer_name
 sue1,;swim1,accord45;casa,;labor5,aw1,;yao4
 sue1,;swim1,accord45;casa;clean,;labor4,aw1,;yao3
 sue1,;swim2,accord45;casa,;labor5,aw1,;yao4

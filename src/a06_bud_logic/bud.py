@@ -46,7 +46,7 @@ from src.a02_finance_logic.finance_config import (
 from src.a03_group_logic.acct import AcctUnit, acctunits_get_from_dict, acctunit_shop
 from src.a03_group_logic.group import (
     AwardLink,
-    GroupLabel,
+    GroupTitle,
     GroupUnit,
     groupunit_shop,
     membership_shop,
@@ -110,7 +110,7 @@ class _last_pack_idException(Exception):
     pass
 
 
-class healerlink_group_label_Exception(Exception):
+class healerlink_group_title_Exception(Exception):
     pass
 
 
@@ -144,7 +144,7 @@ class BudUnit:
     _keeps_justified: bool = None
     _keeps_buildable: bool = None
     _sum_healerlink_share: float = None
-    _groupunits: dict[GroupLabel, GroupUnit] = None
+    _groupunits: dict[GroupTitle, GroupUnit] = None
     _offtrack_kids_mass_set: set[WayStr] = None
     _offtrack_fund: float = None
     _reason_rcontexts: set[WayStr] = None
@@ -288,28 +288,28 @@ class BudUnit:
         all_ideas_set = set(self.get_idea_tree_ordered_way_list())
         return all_ideas_set == all_ideas_set.intersection(pledge_idea_assoc_set)
 
-    def get_awardlinks_metrics(self) -> dict[GroupLabel, AwardLink]:
+    def get_awardlinks_metrics(self) -> dict[GroupTitle, AwardLink]:
         tree_metrics = self.get_tree_metrics()
         return tree_metrics.awardlinks_metrics
 
     def add_to_groupunit_fund_give_fund_take(
         self,
-        group_label: GroupLabel,
+        group_title: GroupTitle,
         awardheir_fund_give: float,
         awardheir_fund_take: float,
     ):
-        x_groupunit = self.get_groupunit(group_label)
+        x_groupunit = self.get_groupunit(group_title)
         if x_groupunit is not None:
             x_groupunit._fund_give += awardheir_fund_give
             x_groupunit._fund_take += awardheir_fund_take
 
     def add_to_groupunit_fund_agenda_give_take(
         self,
-        group_label: GroupLabel,
+        group_title: GroupTitle,
         awardline_fund_give: float,
         awardline_fund_take: float,
     ):
-        x_groupunit = self.get_groupunit(group_label)
+        x_groupunit = self.get_groupunit(group_title)
         if awardline_fund_give is not None and awardline_fund_take is not None:
             x_groupunit._fund_agenda_give += awardline_fund_give
             x_groupunit._fund_agenda_take += awardline_fund_take
@@ -371,33 +371,33 @@ class BudUnit:
     def get_acct(self, acct_name: AcctName) -> AcctUnit:
         return self.accts.get(acct_name)
 
-    def get_acctunit_group_labels_dict(self) -> dict[GroupLabel, set[AcctName]]:
+    def get_acctunit_group_titles_dict(self) -> dict[GroupTitle, set[AcctName]]:
         x_dict = {}
         for x_acctunit in self.accts.values():
-            for x_group_label in x_acctunit._memberships.keys():
-                acct_name_set = x_dict.get(x_group_label)
+            for x_group_title in x_acctunit._memberships.keys():
+                acct_name_set = x_dict.get(x_group_title)
                 if acct_name_set is None:
-                    x_dict[x_group_label] = {x_acctunit.acct_name}
+                    x_dict[x_group_title] = {x_acctunit.acct_name}
                 else:
                     acct_name_set.add(x_acctunit.acct_name)
-                    x_dict[x_group_label] = acct_name_set
+                    x_dict[x_group_title] = acct_name_set
         return x_dict
 
     def set_groupunit(self, x_groupunit: GroupUnit):
         x_groupunit.fund_coin = self.fund_coin
-        self._groupunits[x_groupunit.group_label] = x_groupunit
+        self._groupunits[x_groupunit.group_title] = x_groupunit
 
-    def groupunit_exists(self, group_label: GroupLabel) -> bool:
-        return self._groupunits.get(group_label) is not None
+    def groupunit_exists(self, group_title: GroupTitle) -> bool:
+        return self._groupunits.get(group_title) is not None
 
-    def get_groupunit(self, x_group_label: GroupLabel) -> GroupUnit:
-        return self._groupunits.get(x_group_label)
+    def get_groupunit(self, x_group_title: GroupTitle) -> GroupUnit:
+        return self._groupunits.get(x_group_title)
 
-    def create_symmetry_groupunit(self, x_group_label: GroupLabel) -> GroupUnit:
-        x_groupunit = groupunit_shop(x_group_label)
+    def create_symmetry_groupunit(self, x_group_title: GroupTitle) -> GroupUnit:
+        x_groupunit = groupunit_shop(x_group_title)
         for x_acctunit in self.accts.values():
             x_membership = membership_shop(
-                group_label=x_group_label,
+                group_title=x_group_title,
                 credit_vote=x_acctunit.credit_belief,
                 debtit_vote=x_acctunit.debtit_belief,
                 acct_name=x_acctunit.acct_name,
@@ -405,10 +405,10 @@ class BudUnit:
             x_groupunit.set_membership(x_membership)
         return x_groupunit
 
-    def get_tree_traverse_generated_groupunits(self) -> set[GroupLabel]:
-        x_acctunit_group_labels = set(self.get_acctunit_group_labels_dict().keys())
-        all_group_labels = set(self._groupunits.keys())
-        return all_group_labels.difference(x_acctunit_group_labels)
+    def get_tree_traverse_generated_groupunits(self) -> set[GroupTitle]:
+        x_acctunit_group_titles = set(self.get_acctunit_group_titles_dict().keys())
+        all_group_titles = set(self._groupunits.keys())
+        return all_group_titles.difference(x_acctunit_group_titles)
 
     def _is_idea_rangeroot(self, idea_way: WayStr) -> bool:
         if self.fisc_word == idea_way:
@@ -589,7 +589,7 @@ class BudUnit:
         self,
         idea_kid: IdeaUnit,
         create_missing_ideas: bool = None,
-        get_rid_of_missing_awardlinks_awardee_labels: bool = None,
+        get_rid_of_missing_awardlinks_awardee_titles: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
         create_missing_ancestors: bool = True,
@@ -598,7 +598,7 @@ class BudUnit:
             idea_kid=idea_kid,
             parent_way=self.fisc_word,
             create_missing_ideas=create_missing_ideas,
-            get_rid_of_missing_awardlinks_awardee_labels=get_rid_of_missing_awardlinks_awardee_labels,
+            get_rid_of_missing_awardlinks_awardee_titles=get_rid_of_missing_awardlinks_awardee_titles,
             adoptees=adoptees,
             bundling=bundling,
             create_missing_ancestors=create_missing_ancestors,
@@ -608,7 +608,7 @@ class BudUnit:
         self,
         idea_kid: IdeaUnit,
         parent_way: WayStr,
-        get_rid_of_missing_awardlinks_awardee_labels: bool = None,
+        get_rid_of_missing_awardlinks_awardee_titles: bool = None,
         create_missing_ideas: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
@@ -629,7 +629,7 @@ class BudUnit:
             idea_kid.fisc_word = self.fisc_word
         if idea_kid.fund_coin != self.fund_coin:
             idea_kid.fund_coin = self.fund_coin
-        if not get_rid_of_missing_awardlinks_awardee_labels:
+        if not get_rid_of_missing_awardlinks_awardee_titles:
             idea_kid = self._get_filtered_awardlinks_idea(idea_kid)
         idea_kid.set_parent_way(parent_way=parent_way)
 
@@ -662,22 +662,22 @@ class BudUnit:
 
     def _get_filtered_awardlinks_idea(self, x_idea: IdeaUnit) -> IdeaUnit:
         _awardlinks_to_delete = [
-            _awardlink_awardee_label
-            for _awardlink_awardee_label in x_idea.awardlinks.keys()
-            if self.get_acctunit_group_labels_dict().get(_awardlink_awardee_label)
+            _awardlink_awardee_title
+            for _awardlink_awardee_title in x_idea.awardlinks.keys()
+            if self.get_acctunit_group_titles_dict().get(_awardlink_awardee_title)
             is None
         ]
-        for _awardlink_awardee_label in _awardlinks_to_delete:
-            x_idea.awardlinks.pop(_awardlink_awardee_label)
+        for _awardlink_awardee_title in _awardlinks_to_delete:
+            x_idea.awardlinks.pop(_awardlink_awardee_title)
         if x_idea.laborunit is not None:
             _laborlinks_to_delete = [
-                _laborlink_labor_label
-                for _laborlink_labor_label in x_idea.laborunit._laborlinks
-                if self.get_acctunit_group_labels_dict().get(_laborlink_labor_label)
+                _laborlink_labor_title
+                for _laborlink_labor_title in x_idea.laborunit._laborlinks
+                if self.get_acctunit_group_titles_dict().get(_laborlink_labor_title)
                 is None
             ]
-            for _laborlink_labor_label in _laborlinks_to_delete:
-                x_idea.laborunit.del_laborlink(_laborlink_labor_label)
+            for _laborlink_labor_title in _laborlinks_to_delete:
+                x_idea.laborunit.del_laborlink(_laborlink_labor_title)
         return x_idea
 
     def _create_missing_ideas(self, way):
@@ -817,15 +817,15 @@ class BudUnit:
         all_acct_cred: bool = None,
         all_acct_debt: bool = None,
         awardlink: AwardLink = None,
-        awardlink_del: GroupLabel = None,
+        awardlink_del: GroupTitle = None,
         is_expanded: bool = None,
         problem_bool: bool = None,
     ):
         if healerlink is not None:
             for x_healer_name in healerlink._healer_names:
-                if self.get_acctunit_group_labels_dict().get(x_healer_name) is None:
-                    exception_str = f"Idea cannot edit healerlink because group_label '{x_healer_name}' does not exist as group in Bud"
-                    raise healerlink_group_label_Exception(exception_str)
+                if self.get_acctunit_group_titles_dict().get(x_healer_name) is None:
+                    exception_str = f"Idea cannot edit healerlink because group_title '{x_healer_name}' does not exist as group in Bud"
+                    raise healerlink_group_title_Exception(exception_str)
 
         x_ideaattrholder = ideaattrholder_shop(
             mass=mass,
@@ -930,13 +930,13 @@ class BudUnit:
         for groupunit_obj in self._groupunits.values():
             groupunit_obj.clear_fund_give_take()
 
-    def _set_groupunits_fund_share(self, awardheirs: dict[GroupLabel, AwardLink]):
+    def _set_groupunits_fund_share(self, awardheirs: dict[GroupTitle, AwardLink]):
         for awardlink_obj in awardheirs.values():
-            x_awardee_label = awardlink_obj.awardee_label
-            if not self.groupunit_exists(x_awardee_label):
-                self.set_groupunit(self.create_symmetry_groupunit(x_awardee_label))
+            x_awardee_title = awardlink_obj.awardee_title
+            if not self.groupunit_exists(x_awardee_title):
+                self.set_groupunit(self.create_symmetry_groupunit(x_awardee_title))
             self.add_to_groupunit_fund_give_fund_take(
-                group_label=awardlink_obj.awardee_label,
+                group_title=awardlink_obj.awardee_title,
                 awardheir_fund_give=awardlink_obj._fund_give,
                 awardheir_fund_take=awardlink_obj._fund_take,
             )
@@ -951,7 +951,7 @@ class BudUnit:
                 if idea.awardheir_exists():
                     for x_awardline in idea._awardlines.values():
                         self.add_to_groupunit_fund_agenda_give_take(
-                            group_label=x_awardline.awardee_label,
+                            group_title=x_awardline.awardee_title,
                             awardline_fund_give=x_awardline._fund_give,
                             awardline_fund_take=x_awardline._fund_take,
                         )
@@ -1173,12 +1173,12 @@ class BudUnit:
     def _create_groupunits_metrics(self):
         self._groupunits = {}
         for (
-            group_label,
+            group_title,
             acct_name_set,
-        ) in self.get_acctunit_group_labels_dict().items():
-            x_groupunit = groupunit_shop(group_label, bridge=self.bridge)
+        ) in self.get_acctunit_group_titles_dict().items():
+            x_groupunit = groupunit_shop(group_title, bridge=self.bridge)
             for x_acct_name in acct_name_set:
-                x_membership = self.get_acct(x_acct_name).get_membership(group_label)
+                x_membership = self.get_acct(x_acct_name).get_membership(group_title)
                 x_groupunit.set_membership(x_membership)
                 self.set_groupunit(x_groupunit)
 
@@ -1407,7 +1407,7 @@ class BudUnit:
         self.set_idea(
             idea_kid=idea_kid,
             parent_way=self.make_way(idea_kid.parent_way),
-            get_rid_of_missing_awardlinks_awardee_labels=True,
+            get_rid_of_missing_awardlinks_awardee_titles=True,
             create_missing_ideas=True,
         )
 

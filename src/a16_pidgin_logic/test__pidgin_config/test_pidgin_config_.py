@@ -12,8 +12,8 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     pidgin_filename,
     otx_bridge_str,
     inx_bridge_str,
-    inx_label_str,
-    otx_label_str,
+    inx_title_str,
+    otx_title_str,
     inx_name_str,
     otx_name_str,
     inx_word_str,
@@ -24,7 +24,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx2inx_str,
     map_otx2inx_str,
     pidgin_name_str,
-    pidgin_label_str,
+    pidgin_title_str,
     pidgin_word_str,
     pidgin_way_str,
     pidgin_core_str,
@@ -47,8 +47,8 @@ def test_str_functions_ReturnsObj():
     assert pidgin_filename() == "pidgin.json"
     assert otx_bridge_str() == "otx_bridge"
     assert inx_bridge_str() == "inx_bridge"
-    assert inx_label_str() == "inx_label"
-    assert otx_label_str() == "otx_label"
+    assert inx_title_str() == "inx_title"
+    assert otx_title_str() == "otx_title"
     assert inx_name_str() == "inx_name"
     assert otx_name_str() == "otx_name"
     assert inx_word_str() == "inx_word"
@@ -58,7 +58,7 @@ def test_str_functions_ReturnsObj():
     assert unknown_term_str() == "unknown_term"
     assert otx2inx_str() == "otx2inx"
     assert pidgin_name_str() == "pidgin_name"
-    assert pidgin_label_str() == "pidgin_label"
+    assert pidgin_title_str() == "pidgin_title"
     assert pidgin_word_str() == "pidgin_word"
     assert pidgin_way_str() == "pidgin_way"
     assert pidgin_core_str() == "pidgin_core"
@@ -83,7 +83,7 @@ def test_get_pidgin_config_dict_ReturnsObj():
     assert pidgin_config
     pidgin_config_dimens = set(pidgin_config.keys())
     assert pidgin_name_str() in pidgin_config_dimens
-    assert pidgin_label_str() in pidgin_config_dimens
+    assert pidgin_title_str() in pidgin_config_dimens
     assert pidgin_word_str() in pidgin_config_dimens
     assert pidgin_way_str() in pidgin_config_dimens
     assert len(pidgin_config) == 4
@@ -109,8 +109,8 @@ def _validate_pidgin_config(pidgin_config: dict):
     x_possible_args = {
         inx_bridge_str(),
         otx_bridge_str(),
-        inx_label_str(),
-        otx_label_str(),
+        inx_title_str(),
+        otx_title_str(),
         inx_name_str(),
         otx_name_str(),
         inx_word_str(),
@@ -146,7 +146,7 @@ def test_get_pidgin_dimens_ReturnsObj():
 
     # THEN
     assert pidgin_name_str() in pidgin_config_dimens
-    assert pidgin_label_str() in pidgin_config_dimens
+    assert pidgin_title_str() in pidgin_config_dimens
     assert pidgin_word_str() in pidgin_config_dimens
     assert pidgin_way_str() in pidgin_config_dimens
     assert len(pidgin_config_dimens) == 4

@@ -73,17 +73,17 @@ def test_create_init_stance_creed_csv_strs_ReturnsObj_Scenario0_EmptyFiscUnit(
         "br00004": "fisc_word,cumlative_day,month_word\n",
         "br00005": "fisc_word,weekday_order,weekday_word\n",
         # "br00006": "fisc_word,offi_time,_offi_time_max\n",
-        "br00020": "fisc_word,owner_name,acct_name,group_label,credit_vote,debtit_vote\n",
+        "br00020": "fisc_word,owner_name,acct_name,group_title,credit_vote,debtit_vote\n",
         "br00021": "fisc_word,owner_name,acct_name,credit_belief,debtit_belief\n",
-        "br00022": "fisc_word,owner_name,idea_way,awardee_label,give_force,take_force\n",
+        "br00022": "fisc_word,owner_name,idea_way,awardee_title,give_force,take_force\n",
         "br00023": "fisc_word,owner_name,idea_way,fcontext,fbranch,fopen,fnigh\n",
-        "br00024": "fisc_word,owner_name,idea_way,labor_label\n",
+        "br00024": "fisc_word,owner_name,idea_way,labor_title\n",
         "br00025": "fisc_word,owner_name,idea_way,healer_name\n",
         "br00026": "fisc_word,owner_name,idea_way,rcontext,pbranch,pnigh,popen,pdivisor\n",
         "br00027": "fisc_word,owner_name,idea_way,rcontext,rcontext_idea_active_requisite\n",
         "br00028": "fisc_word,owner_name,idea_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool\n",
         "br00029": "fisc_word,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit\n",
-        "br00042": "otx_label,inx_label,otx_bridge,inx_bridge,unknown_term\n",
+        "br00042": "otx_title,inx_title,otx_bridge,inx_bridge,unknown_term\n",
         "br00043": "otx_name,inx_name,otx_bridge,inx_bridge,unknown_term\n",
         "br00044": "otx_word,inx_word,otx_bridge,inx_bridge,unknown_term\n",
         "br00045": "otx_way,inx_way,otx_bridge,inx_bridge,unknown_term\n",
@@ -641,7 +641,7 @@ def test_add_to_br00042_csv_ReturnsObj():
     )
     run_otx = "run"
     run_inx = "cours"
-    bob7_pidginunit.set_otx2inx("LabelStr", run_otx, run_inx)
+    bob7_pidginunit.set_otx2inx("TitleStr", run_otx, run_inx)
     csv_header = x_creeds.get("br00042")
     print(f"{csv_header=}")
 
@@ -751,7 +751,7 @@ def test_add_pidginunit_to_stance_csv_strs_ReturnsObj():
     bob7_pidginunit.set_otx2inx("NameStr", yao_otx, yao_inx)
     run_otx = "run"
     run_inx = "cours"
-    bob7_pidginunit.set_otx2inx("LabelStr", run_otx, run_inx)
+    bob7_pidginunit.set_otx2inx("TitleStr", run_otx, run_inx)
     clean_otx = "clean"
     clean_inx = "prope"
     bob7_pidginunit.set_otx2inx("WordStr", clean_otx, clean_inx)

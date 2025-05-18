@@ -15,9 +15,9 @@ from src.a06_bud_logic._utils.str_a06 import (
 from src.a08_bud_atom_logic.atom import BudAtom
 from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
-    awardee_label_str,
-    group_label_str,
-    labor_label_str,
+    awardee_title_str,
+    group_title_str,
+    labor_title_str,
     healer_name_str,
     idea_way_str,
     rcontext_idea_active_requisite_str,
@@ -290,11 +290,11 @@ def add_bud_acct_membership_insert_to_legible_list(
 ):
     for acct_membership_dict in acct_membership_insert_dict.values():
         for acct_membership_atom in acct_membership_dict.values():
-            group_label = acct_membership_atom.get_value(group_label_str())
+            group_title = acct_membership_atom.get_value(group_title_str())
             acct_name = acct_membership_atom.get_value(acct_name_str())
             credit_vote_value = acct_membership_atom.get_value(credit_vote_str())
             debtit_vote_value = acct_membership_atom.get_value(debtit_vote_str())
-            x_str = f"Group '{group_label}' has new membership {acct_name} with {credit_vote_str()}_value{credit_vote_value} and {debtit_vote_str()}_value={debtit_vote_value}."
+            x_str = f"Group '{group_title}' has new membership {acct_name} with {credit_vote_str()}_value{credit_vote_value} and {debtit_vote_str()}_value={debtit_vote_value}."
             legible_list.append(x_str)
 
 
@@ -303,16 +303,16 @@ def add_bud_acct_membership_update_to_legible_list(
 ):
     for acct_membership_dict in acct_membership_update_dict.values():
         for acct_membership_atom in acct_membership_dict.values():
-            group_label = acct_membership_atom.get_value(group_label_str())
+            group_title = acct_membership_atom.get_value(group_title_str())
             acct_name = acct_membership_atom.get_value(acct_name_str())
             credit_vote_value = acct_membership_atom.get_value(credit_vote_str())
             debtit_vote_value = acct_membership_atom.get_value(debtit_vote_str())
             if credit_vote_value is not None and debtit_vote_value is not None:
-                x_str = f"Group '{group_label}' membership {acct_name} has new {credit_vote_str()}_value{credit_vote_value} and {debtit_vote_str()}_value={debtit_vote_value}."
+                x_str = f"Group '{group_title}' membership {acct_name} has new {credit_vote_str()}_value{credit_vote_value} and {debtit_vote_str()}_value={debtit_vote_value}."
             elif credit_vote_value is not None:
-                x_str = f"Group '{group_label}' membership {acct_name} has new {credit_vote_str()}_value{credit_vote_value}."
+                x_str = f"Group '{group_title}' membership {acct_name} has new {credit_vote_str()}_value{credit_vote_value}."
             elif debtit_vote_value is not None:
-                x_str = f"Group '{group_label}' membership {acct_name} has new {debtit_vote_str()}_value={debtit_vote_value}."
+                x_str = f"Group '{group_title}' membership {acct_name} has new {debtit_vote_str()}_value={debtit_vote_value}."
             legible_list.append(x_str)
 
 
@@ -321,9 +321,9 @@ def add_bud_acct_membership_delete_to_legible_list(
 ):
     for acct_membership_dict in acct_membership_delete_dict.values():
         for acct_membership_atom in acct_membership_dict.values():
-            group_label = acct_membership_atom.get_value(group_label_str())
+            group_title = acct_membership_atom.get_value(group_title_str())
             acct_name = acct_membership_atom.get_value(acct_name_str())
-            x_str = f"Group '{group_label}' no longer has membership {acct_name}."
+            x_str = f"Group '{group_title}' no longer has membership {acct_name}."
             legible_list.append(x_str)
 
 
@@ -417,11 +417,11 @@ def add_bud_idea_awardlink_insert_to_legible_list(
 ):
     for way_dict in idea_awardlink_insert_dict.values():
         for idea_awardlink_atom in way_dict.values():
-            awardee_label_value = idea_awardlink_atom.get_value(awardee_label_str())
+            awardee_title_value = idea_awardlink_atom.get_value(awardee_title_str())
             way_value = idea_awardlink_atom.get_value("idea_way")
             give_force_value = idea_awardlink_atom.get_value("give_force")
             take_force_value = idea_awardlink_atom.get_value("take_force")
-            x_str = f"Awardlink created for group {awardee_label_value} for idea '{way_value}' with give_force={give_force_value} and take_force={take_force_value}."
+            x_str = f"Awardlink created for group {awardee_title_value} for idea '{way_value}' with give_force={give_force_value} and take_force={take_force_value}."
             legible_list.append(x_str)
 
 
@@ -430,16 +430,16 @@ def add_bud_idea_awardlink_update_to_legible_list(
 ):
     for way_dict in idea_awardlink_update_dict.values():
         for idea_awardlink_atom in way_dict.values():
-            awardee_label_value = idea_awardlink_atom.get_value(awardee_label_str())
+            awardee_title_value = idea_awardlink_atom.get_value(awardee_title_str())
             way_value = idea_awardlink_atom.get_value("idea_way")
             give_force_value = idea_awardlink_atom.get_value("give_force")
             take_force_value = idea_awardlink_atom.get_value("take_force")
             if give_force_value is not None and take_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_label_value} for idea '{way_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
+                x_str = f"Awardlink has been set for group {awardee_title_value} for idea '{way_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
             elif give_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_label_value} for idea '{way_value}'. Now give_force={give_force_value}."
+                x_str = f"Awardlink has been set for group {awardee_title_value} for idea '{way_value}'. Now give_force={give_force_value}."
             elif take_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_label_value} for idea '{way_value}'. Now take_force={take_force_value}."
+                x_str = f"Awardlink has been set for group {awardee_title_value} for idea '{way_value}'. Now take_force={take_force_value}."
             legible_list.append(x_str)
 
 
@@ -448,9 +448,9 @@ def add_bud_idea_awardlink_delete_to_legible_list(
 ):
     for way_dict in idea_awardlink_delete_dict.values():
         for idea_awardlink_atom in way_dict.values():
-            awardee_label_value = idea_awardlink_atom.get_value(awardee_label_str())
+            awardee_title_value = idea_awardlink_atom.get_value(awardee_title_str())
             way_value = idea_awardlink_atom.get_value("idea_way")
-            x_str = f"Awardlink for group {awardee_label_value}, idea '{way_value}' has been deleted."
+            x_str = f"Awardlink for group {awardee_title_value}, idea '{way_value}' has been deleted."
             legible_list.append(x_str)
 
 
@@ -566,9 +566,9 @@ def add_bud_idea_laborlink_insert_to_legible_list(
 ):
     for way_dict in idea_laborlink_insert_dict.values():
         for idea_laborlink_atom in way_dict.values():
-            labor_label_value = idea_laborlink_atom.get_value(labor_label_str())
+            labor_title_value = idea_laborlink_atom.get_value(labor_title_str())
             way_value = idea_laborlink_atom.get_value("idea_way")
-            x_str = f"laborlink '{labor_label_value}' created for idea '{way_value}'."
+            x_str = f"laborlink '{labor_title_value}' created for idea '{way_value}'."
             legible_list.append(x_str)
 
 
@@ -577,9 +577,9 @@ def add_bud_idea_laborlink_delete_to_legible_list(
 ):
     for way_dict in idea_laborlink_delete_dict.values():
         for idea_laborlink_atom in way_dict.values():
-            labor_label_value = idea_laborlink_atom.get_value(labor_label_str())
+            labor_title_value = idea_laborlink_atom.get_value(labor_title_str())
             way_value = idea_laborlink_atom.get_value("idea_way")
-            x_str = f"laborlink '{labor_label_value}' deleted for idea '{way_value}'."
+            x_str = f"laborlink '{labor_title_value}' deleted for idea '{way_value}'."
             legible_list.append(x_str)
 
 

@@ -12,7 +12,7 @@
         "fisc_word": {
             "otx_key": true
         },
-        "group_label": {
+        "group_title": {
             "otx_key": true
         },
         "owner_name": {

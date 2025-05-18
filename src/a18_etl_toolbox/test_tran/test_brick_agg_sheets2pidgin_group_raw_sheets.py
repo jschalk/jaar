@@ -4,15 +4,15 @@ from src.a06_bud_logic._utils.str_a06 import face_name_str, acct_name_str, event
 from src.a16_pidgin_logic._utils.str_a16 import (
     inx_bridge_str,
     otx_bridge_str,
-    inx_label_str,
-    otx_label_str,
+    inx_title_str,
+    otx_title_str,
     unknown_term_str,
 )
 from src.a17_creed_logic._utils.str_a17 import brick_agg_str
 from src.a17_creed_logic.creed_db_tool import get_sheet_names, upsert_sheet
 from src.a18_etl_toolbox.tran_path import create_brick_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
-from src.a18_etl_toolbox.transformers import etl_brick_agg_dfs_to_pidgin_label_raw
+from src.a18_etl_toolbox.transformers import etl_brick_agg_dfs_to_pidgin_title_raw
 from src.a18_etl_toolbox._utils.env_a18 import (
     get_module_temp_dir,
     env_dir_setup_cleanup,
@@ -21,7 +21,7 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_etl_brick_agg_dfs_to_pidgin_label_raw_CreatesFile_Scenario0_SingleCreed(
+def test_etl_brick_agg_dfs_to_pidgin_title_raw_CreatesFile_Scenario0_SingleCreed(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -40,8 +40,8 @@ def test_etl_brick_agg_dfs_to_pidgin_label_raw_CreatesFile_Scenario0_SingleCreed
         fisc_word_str(),
         owner_name_str(),
         acct_name_str(),
-        otx_label_str(),
-        inx_label_str(),
+        otx_title_str(),
+        inx_title_str(),
     ]
     sue0 = [event7, sue_str, m_str, bob_str, yao_str, yao_str, yao_inx]
     sue1 = [event7, sue_str, m_str, bob_str, bob_str, bob_str, bob_inx]
@@ -53,28 +53,28 @@ def test_etl_brick_agg_dfs_to_pidgin_label_raw_CreatesFile_Scenario0_SingleCreed
 
     # WHEN
     legitimate_events = {event7}
-    etl_brick_agg_dfs_to_pidgin_label_raw(legitimate_events, x_brick_dir)
+    etl_brick_agg_dfs_to_pidgin_title_raw(legitimate_events, x_brick_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
-    label_raw_str = "label_raw"
-    gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_raw_str)
-    label_raw_columns = PidginPrimeColumns().pidgin_label_raw_columns
-    assert list(gen_label_df.columns) == label_raw_columns
-    assert len(gen_label_df) == 2
+    title_raw_str = "title_raw"
+    gen_title_df = pandas_read_excel(pidgin_path, sheet_name=title_raw_str)
+    title_raw_columns = PidginPrimeColumns().pidgin_title_raw_columns
+    assert list(gen_title_df.columns) == title_raw_columns
+    assert len(gen_title_df) == 2
     bx = "br00115"
-    e1_label0 = [bx, event7, sue_str, yao_str, yao_inx, None, None, None]
-    e1_label1 = [bx, event7, sue_str, bob_str, bob_inx, None, None, None]
-    e1_label_rows = [e1_label0, e1_label1]
-    e1_label_df = DataFrame(e1_label_rows, columns=label_raw_columns)
-    assert len(gen_label_df) == len(e1_label_df)
-    print(f"{gen_label_df.to_csv()=}")
-    print(f" {e1_label_df.to_csv()=}")
-    assert gen_label_df.to_csv(index=False) == e1_label_df.to_csv(index=False)
-    assert get_sheet_names(pidgin_path) == [label_raw_str]
+    e1_title0 = [bx, event7, sue_str, yao_str, yao_inx, None, None, None]
+    e1_title1 = [bx, event7, sue_str, bob_str, bob_inx, None, None, None]
+    e1_title_rows = [e1_title0, e1_title1]
+    e1_title_df = DataFrame(e1_title_rows, columns=title_raw_columns)
+    assert len(gen_title_df) == len(e1_title_df)
+    print(f"{gen_title_df.to_csv()=}")
+    print(f" {e1_title_df.to_csv()=}")
+    assert gen_title_df.to_csv(index=False) == e1_title_df.to_csv(index=False)
+    assert get_sheet_names(pidgin_path) == [title_raw_str]
 
 
-def test_etl_brick_agg_dfs_to_pidgin_label_raw_CreatesFile_Scenario1_MultipleCreedsFiles(
+def test_etl_brick_agg_dfs_to_pidgin_title_raw_CreatesFile_Scenario1_MultipleCreedsFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -98,15 +98,15 @@ def test_etl_brick_agg_dfs_to_pidgin_label_raw_CreatesFile_Scenario1_MultipleCre
         fisc_word_str(),
         owner_name_str(),
         acct_name_str(),
-        otx_label_str(),
-        inx_label_str(),
+        otx_title_str(),
+        inx_title_str(),
     ]
     br00042_file_path = create_path(x_brick_dir, "br00042.xlsx")
     br00042_columns = [
         event_int_str(),
         face_name_str(),
-        otx_label_str(),
-        inx_label_str(),
+        otx_title_str(),
+        inx_title_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_term_str(),
@@ -127,33 +127,33 @@ def test_etl_brick_agg_dfs_to_pidgin_label_raw_CreatesFile_Scenario1_MultipleCre
 
     # WHEN
     legitimate_events = {event1, event2, event5, event7}
-    etl_brick_agg_dfs_to_pidgin_label_raw(legitimate_events, x_brick_dir)
+    etl_brick_agg_dfs_to_pidgin_title_raw(legitimate_events, x_brick_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
-    label_raw_str = "label_raw"
-    gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_raw_str)
-    label_raw_columns = PidginPrimeColumns().pidgin_label_raw_columns
-    assert list(gen_label_df.columns) == label_raw_columns
-    assert len(gen_label_df) == 5
+    title_raw_str = "title_raw"
+    gen_title_df = pandas_read_excel(pidgin_path, sheet_name=title_raw_str)
+    title_raw_columns = PidginPrimeColumns().pidgin_title_raw_columns
+    assert list(gen_title_df.columns) == title_raw_columns
+    assert len(gen_title_df) == 5
     b3 = "br00115"
     b4 = "br00042"
-    e1_label3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
-    e1_label4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
-    e1_label5 = [b4, event7, yao_str, yao_str, yao_inx, rdx, rdx, ukx]
-    e1_label0 = [b3, event1, sue_str, yao_str, yao_inx, None, None, None]
-    e1_label1 = [b3, event1, sue_str, bob_str, bob_inx, None, None, None]
+    e1_title3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    e1_title4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_title5 = [b4, event7, yao_str, yao_str, yao_inx, rdx, rdx, ukx]
+    e1_title0 = [b3, event1, sue_str, yao_str, yao_inx, None, None, None]
+    e1_title1 = [b3, event1, sue_str, bob_str, bob_inx, None, None, None]
 
-    e1_label_rows = [e1_label3, e1_label4, e1_label5, e1_label0, e1_label1]
-    e1_label_df = DataFrame(e1_label_rows, columns=label_raw_columns)
-    assert len(gen_label_df) == len(e1_label_df)
-    print(f"{gen_label_df.to_csv()=}")
-    print(f" {e1_label_df.to_csv()=}")
-    assert gen_label_df.to_csv(index=False) == e1_label_df.to_csv(index=False)
-    assert get_sheet_names(pidgin_path) == [label_raw_str]
+    e1_title_rows = [e1_title3, e1_title4, e1_title5, e1_title0, e1_title1]
+    e1_title_df = DataFrame(e1_title_rows, columns=title_raw_columns)
+    assert len(gen_title_df) == len(e1_title_df)
+    print(f"{gen_title_df.to_csv()=}")
+    print(f" {e1_title_df.to_csv()=}")
+    assert gen_title_df.to_csv(index=False) == e1_title_df.to_csv(index=False)
+    assert get_sheet_names(pidgin_path) == [title_raw_str]
 
 
-def test_etl_brick_agg_dfs_to_pidgin_label_raw_CreatesFile_Scenario2_WorldUnit_events_Filters(
+def test_etl_brick_agg_dfs_to_pidgin_title_raw_CreatesFile_Scenario2_WorldUnit_events_Filters(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -176,15 +176,15 @@ def test_etl_brick_agg_dfs_to_pidgin_label_raw_CreatesFile_Scenario2_WorldUnit_e
         fisc_word_str(),
         owner_name_str(),
         acct_name_str(),
-        otx_label_str(),
-        inx_label_str(),
+        otx_title_str(),
+        inx_title_str(),
     ]
     br00042_file_path = create_path(x_brick_dir, "br00042.xlsx")
     br00042_columns = [
         event_int_str(),
         face_name_str(),
-        otx_label_str(),
-        inx_label_str(),
+        otx_title_str(),
+        inx_title_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_term_str(),
@@ -205,23 +205,23 @@ def test_etl_brick_agg_dfs_to_pidgin_label_raw_CreatesFile_Scenario2_WorldUnit_e
 
     # WHEN
     legitimate_events = {event2, event5}
-    etl_brick_agg_dfs_to_pidgin_label_raw(legitimate_events, x_brick_dir)
+    etl_brick_agg_dfs_to_pidgin_title_raw(legitimate_events, x_brick_dir)
 
     # THEN
     assert os_path_exists(pidgin_path)
-    label_raw_str = "label_raw"
-    gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_raw_str)
-    label_raw_columns = PidginPrimeColumns().pidgin_label_raw_columns
-    assert list(gen_label_df.columns) == label_raw_columns
-    assert len(gen_label_df) == 2
+    title_raw_str = "title_raw"
+    gen_title_df = pandas_read_excel(pidgin_path, sheet_name=title_raw_str)
+    title_raw_columns = PidginPrimeColumns().pidgin_title_raw_columns
+    assert list(gen_title_df.columns) == title_raw_columns
+    assert len(gen_title_df) == 2
     b3 = "br00115"
     b4 = "br00042"
-    e1_label3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
-    e1_label4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
-    e1_label_rows = [e1_label3, e1_label4]
-    e1_label_df = DataFrame(e1_label_rows, columns=label_raw_columns)
-    assert len(gen_label_df) == len(e1_label_df)
-    print(f"{gen_label_df.to_csv()=}")
-    print(f" {e1_label_df.to_csv()=}")
-    assert gen_label_df.to_csv(index=False) == e1_label_df.to_csv(index=False)
-    assert get_sheet_names(pidgin_path) == [label_raw_str]
+    e1_title3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    e1_title4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_title_rows = [e1_title3, e1_title4]
+    e1_title_df = DataFrame(e1_title_rows, columns=title_raw_columns)
+    assert len(gen_title_df) == len(e1_title_df)
+    print(f"{gen_title_df.to_csv()=}")
+    print(f" {e1_title_df.to_csv()=}")
+    assert gen_title_df.to_csv(index=False) == e1_title_df.to_csv(index=False)
+    assert get_sheet_names(pidgin_path) == [title_raw_str]

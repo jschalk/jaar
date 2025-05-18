@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.dict_toolbox import get_1_if_None, get_dict_from_json
-from src.a01_way_logic.way import GroupLabel, AcctName, default_bridge_if_None
+from src.a01_way_logic.way import GroupTitle, AcctName, default_bridge_if_None
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import FundCoin, default_fund_coin_if_None
 from dataclasses import dataclass
@@ -9,13 +9,13 @@ class InvalidGroupException(Exception):
     pass
 
 
-class membership_group_label_Exception(Exception):
+class membership_group_title_Exception(Exception):
     pass
 
 
 @dataclass
 class GroupCore:
-    group_label: GroupLabel = None
+    group_title: GroupTitle = None
 
 
 @dataclass
@@ -43,7 +43,7 @@ class MemberShip(GroupCore):
 
     def get_dict(self) -> dict[str, str]:
         return {
-            "group_label": self.group_label,
+            "group_title": self.group_title,
             "credit_vote": self.credit_vote,
             "debtit_vote": self.debtit_vote,
         }
@@ -58,13 +58,13 @@ class MemberShip(GroupCore):
 
 
 def membership_shop(
-    group_label: GroupLabel,
+    group_title: GroupTitle,
     credit_vote: float = None,
     debtit_vote: float = None,
     acct_name: AcctName = None,
 ) -> MemberShip:
     return MemberShip(
-        group_label=group_label,
+        group_title=group_title,
         credit_vote=get_1_if_None(credit_vote),
         debtit_vote=get_1_if_None(debtit_vote),
         _credor_pool=0,
@@ -75,7 +75,7 @@ def membership_shop(
 
 def membership_get_from_dict(x_dict: dict, x_acct_name: AcctName) -> MemberShip:
     return membership_shop(
-        group_label=x_dict.get("group_label"),
+        group_title=x_dict.get("group_title"),
         credit_vote=x_dict.get("credit_vote"),
         debtit_vote=x_dict.get("debtit_vote"),
         acct_name=x_acct_name,
@@ -84,16 +84,16 @@ def membership_get_from_dict(x_dict: dict, x_acct_name: AcctName) -> MemberShip:
 
 def memberships_get_from_dict(
     x_dict: dict, x_acct_name: AcctName
-) -> dict[GroupLabel, MemberShip]:
+) -> dict[GroupTitle, MemberShip]:
     return {
-        x_group_label: membership_get_from_dict(x_membership_dict, x_acct_name)
-        for x_group_label, x_membership_dict in x_dict.items()
+        x_group_title: membership_get_from_dict(x_membership_dict, x_acct_name)
+        for x_group_title, x_membership_dict in x_dict.items()
     }
 
 
 @dataclass
 class AwardCore:
-    awardee_label: GroupLabel = None
+    awardee_title: GroupTitle = None
 
 
 @dataclass
@@ -103,38 +103,38 @@ class AwardLink(AwardCore):
 
     def get_dict(self) -> dict[str, str]:
         return {
-            "awardee_label": self.awardee_label,
+            "awardee_title": self.awardee_title,
             "give_force": self.give_force,
             "take_force": self.take_force,
         }
 
 
 # class AwardLinksshop:
-def awardlinks_get_from_json(awardlinks_json: str) -> dict[GroupLabel, AwardLink]:
+def awardlinks_get_from_json(awardlinks_json: str) -> dict[GroupTitle, AwardLink]:
     awardlinks_dict = get_dict_from_json(awardlinks_json)
     return awardlinks_get_from_dict(awardlinks_dict)
 
 
-def awardlinks_get_from_dict(x_dict: dict) -> dict[GroupLabel, AwardLink]:
+def awardlinks_get_from_dict(x_dict: dict) -> dict[GroupTitle, AwardLink]:
     awardlinks = {}
     for awardlinks_dict in x_dict.values():
         x_group = awardlink_shop(
-            awardee_label=awardlinks_dict["awardee_label"],
+            awardee_title=awardlinks_dict["awardee_title"],
             give_force=awardlinks_dict["give_force"],
             take_force=awardlinks_dict["take_force"],
         )
-        awardlinks[x_group.awardee_label] = x_group
+        awardlinks[x_group.awardee_title] = x_group
     return awardlinks
 
 
 def awardlink_shop(
-    awardee_label: GroupLabel,
+    awardee_title: GroupTitle,
     give_force: float = None,
     take_force: float = None,
 ) -> AwardLink:
     give_force = get_1_if_None(give_force)
     take_force = get_1_if_None(take_force)
-    return AwardLink(awardee_label, give_force, take_force=take_force)
+    return AwardLink(awardee_title, give_force, take_force=take_force)
 
 
 @dataclass
@@ -146,7 +146,7 @@ class AwardHeir(AwardCore):
 
 
 def awardheir_shop(
-    awardee_label: GroupLabel,
+    awardee_title: GroupTitle,
     give_force: float = None,
     take_force: float = None,
     _fund_give: float = None,
@@ -154,7 +154,7 @@ def awardheir_shop(
 ) -> AwardHeir:
     give_force = get_1_if_None(give_force)
     take_force = get_1_if_None(take_force)
-    return AwardHeir(awardee_label, give_force, take_force, _fund_give, _fund_take)
+    return AwardHeir(awardee_title, give_force, take_force, _fund_give, _fund_take)
 
 
 @dataclass
@@ -174,8 +174,8 @@ class AwardLine(AwardCore):
             self._fund_take = 0
 
 
-def awardline_shop(awardee_label: GroupLabel, _fund_give: float, _fund_take: float):
-    return AwardLine(awardee_label, _fund_give=_fund_give, _fund_take=_fund_take)
+def awardline_shop(awardee_title: GroupTitle, _fund_give: float, _fund_take: float):
+    return AwardLine(awardee_title, _fund_give=_fund_give, _fund_take=_fund_take)
 
 
 @dataclass
@@ -192,13 +192,13 @@ class GroupUnit(GroupCore):
     fund_coin: FundCoin = None
 
     def set_membership(self, x_membership: MemberShip):
-        if x_membership.group_label != self.group_label:
-            raise membership_group_label_Exception(
-                f"GroupUnit.group_label={self.group_label} cannot set membership.group_label={x_membership.group_label}"
+        if x_membership.group_title != self.group_title:
+            raise membership_group_title_Exception(
+                f"GroupUnit.group_title={self.group_title} cannot set membership.group_title={x_membership.group_title}"
             )
         if x_membership.acct_name is None:
-            raise membership_group_label_Exception(
-                f"membership group_label={x_membership.group_label} cannot be set when _acct_name is None."
+            raise membership_group_title_Exception(
+                f"membership group_title={x_membership.group_title} cannot be set when _acct_name is None."
             )
 
         self._memberships[x_membership.acct_name] = x_membership
@@ -249,10 +249,10 @@ class GroupUnit(GroupCore):
 
 
 def groupunit_shop(
-    group_label: GroupLabel, bridge: str = None, fund_coin: FundCoin = None
+    group_title: GroupTitle, bridge: str = None, fund_coin: FundCoin = None
 ) -> GroupUnit:
     return GroupUnit(
-        group_label=group_label,
+        group_title=group_title,
         _memberships={},
         _fund_give=0,
         _fund_take=0,
@@ -263,5 +263,5 @@ def groupunit_shop(
         bridge=default_bridge_if_None(bridge),
         fund_coin=default_fund_coin_if_None(fund_coin),
     )
-    # x_groupunit.set_group_label(group_label=group_label)
+    # x_groupunit.set_group_title(group_title=group_title)
     # return x_groupunit

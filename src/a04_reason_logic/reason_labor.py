@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.dict_toolbox import get_empty_set_if_None
-from src.a03_group_logic.group import GroupUnit, GroupLabel
+from src.a03_group_logic.group import GroupUnit, GroupTitle
 from src.a03_group_logic.acct import AcctName
 from dataclasses import dataclass
 
@@ -10,30 +10,30 @@ class InvalidLaborHeirPopulateException(Exception):
 
 @dataclass
 class LaborUnit:
-    _laborlinks: set[GroupLabel]
+    _laborlinks: set[GroupTitle]
 
     def get_dict(self) -> dict[str, str]:
         return {"_laborlinks": list(self._laborlinks)}
 
-    def set_laborlink(self, labor_label: GroupLabel):
-        self._laborlinks.add(labor_label)
+    def set_laborlink(self, labor_title: GroupTitle):
+        self._laborlinks.add(labor_title)
 
-    def laborlink_exists(self, labor_label: GroupLabel):
-        return labor_label in self._laborlinks
+    def laborlink_exists(self, labor_title: GroupTitle):
+        return labor_title in self._laborlinks
 
-    def del_laborlink(self, labor_label: GroupLabel):
-        self._laborlinks.remove(labor_label)
+    def del_laborlink(self, labor_title: GroupTitle):
+        self._laborlinks.remove(labor_title)
 
-    def get_laborlink(self, labor_label: GroupLabel) -> GroupLabel:
-        if self.laborlink_exists(labor_label):
-            return labor_label
+    def get_laborlink(self, labor_title: GroupTitle) -> GroupTitle:
+        if self.laborlink_exists(labor_title):
+            return labor_title
 
 
-def laborunit_shop(_laborlinks: set[GroupLabel] = None) -> LaborUnit:
+def laborunit_shop(_laborlinks: set[GroupTitle] = None) -> LaborUnit:
     return LaborUnit(get_empty_set_if_None(_laborlinks))
 
 
-def create_laborunit(laborlink: GroupLabel):
+def create_laborunit(laborlink: GroupTitle):
     x_laborunit = laborunit_shop()
     x_laborunit.set_laborlink(laborlink)
     return x_laborunit
@@ -41,37 +41,37 @@ def create_laborunit(laborlink: GroupLabel):
 
 @dataclass
 class LaborHeir:
-    _laborlinks: set[GroupLabel]
+    _laborlinks: set[GroupTitle]
     _owner_name_labor: bool
 
     def _get_all_accts(
         self,
-        bud_groupunits: dict[GroupLabel, GroupUnit],
-        labor_label_set: set[GroupLabel],
-    ) -> dict[GroupLabel, GroupUnit]:
+        bud_groupunits: dict[GroupTitle, GroupUnit],
+        labor_title_set: set[GroupTitle],
+    ) -> dict[GroupTitle, GroupUnit]:
         dict_x = {}
-        for x_labor_label in labor_label_set:
-            dict_x |= bud_groupunits.get(x_labor_label)._memberships
+        for x_labor_title in labor_title_set:
+            dict_x |= bud_groupunits.get(x_labor_title)._memberships
         return dict_x
 
     def is_empty(self) -> bool:
         return self._laborlinks == set()
 
     def set_owner_name_labor(
-        self, bud_groupunits: dict[GroupLabel, GroupUnit], bud_owner_name: AcctName
+        self, bud_groupunits: dict[GroupTitle, GroupUnit], bud_owner_name: AcctName
     ):
         self._owner_name_labor = self.get_owner_name_labor_bool(
             bud_groupunits, bud_owner_name
         )
 
     def get_owner_name_labor_bool(
-        self, bud_groupunits: dict[GroupLabel, GroupUnit], bud_owner_name: AcctName
+        self, bud_groupunits: dict[GroupTitle, GroupUnit], bud_owner_name: AcctName
     ) -> bool:
         if self._laborlinks == set():
             return True
 
-        for x_labor_label, x_groupunit in bud_groupunits.items():
-            if x_labor_label in self._laborlinks:
+        for x_labor_title, x_groupunit in bud_groupunits.items():
+            if x_labor_title in self._laborlinks:
                 for x_acct_name in x_groupunit._memberships.keys():
                     if x_acct_name == bud_owner_name:
                         return True
@@ -81,7 +81,7 @@ class LaborHeir:
         self,
         parent_laborheir,
         laborunit: LaborUnit,
-        bud_groupunits: dict[GroupLabel, GroupUnit],
+        bud_groupunits: dict[GroupTitle, GroupUnit],
     ):
         x_laborlinks = set()
         if parent_laborheir is None or parent_laborheir._laborlinks == set():
@@ -96,12 +96,12 @@ class LaborHeir:
             # get all_accts of parent laborheir groupunits
             all_parent_laborheir_accts = self._get_all_accts(
                 bud_groupunits=bud_groupunits,
-                labor_label_set=parent_laborheir._laborlinks,
+                labor_title_set=parent_laborheir._laborlinks,
             )
             # get all_accts of laborunit groupunits
             all_laborunit_accts = self._get_all_accts(
                 bud_groupunits=bud_groupunits,
-                labor_label_set=laborunit._laborlinks,
+                labor_title_set=laborunit._laborlinks,
             )
             if not set(all_laborunit_accts).issubset(set(all_parent_laborheir_accts)):
                 # else raise error
@@ -114,12 +114,12 @@ class LaborHeir:
                 x_laborlinks.add(laborlink)
         self._laborlinks = x_laborlinks
 
-    def has_labor(self, labor_labels: set[GroupLabel]):
-        return self.is_empty() or any(gn_x in self._laborlinks for gn_x in labor_labels)
+    def has_labor(self, labor_titles: set[GroupTitle]):
+        return self.is_empty() or any(gn_x in self._laborlinks for gn_x in labor_titles)
 
 
 def laborheir_shop(
-    _laborlinks: set[GroupLabel] = None, _owner_name_labor: bool = None
+    _laborlinks: set[GroupTitle] = None, _owner_name_labor: bool = None
 ) -> LaborHeir:
     _laborlinks = get_empty_set_if_None(_laborlinks)
     if _owner_name_labor is None:
@@ -130,7 +130,7 @@ def laborheir_shop(
 
 def laborunit_get_from_dict(laborunit_dict: dict) -> LaborUnit:
     x_laborunit = laborunit_shop()
-    for x_labor_label in laborunit_dict.get("_laborlinks"):
-        x_laborunit.set_laborlink(x_labor_label)
+    for x_labor_title in laborunit_dict.get("_laborlinks"):
+        x_laborunit.set_laborlink(x_labor_title)
 
     return x_laborunit

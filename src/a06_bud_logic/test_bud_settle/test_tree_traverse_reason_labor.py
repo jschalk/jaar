@@ -120,7 +120,7 @@ def test_bud_ideakid_laborunit_CorrectlySets_grandchild_idea_laborheir():
     four_way = sue_bud.make_way(morn_way, four_str)
     x_laborunit = laborunit_shop()
     swimmers_str = ";swimmers"
-    x_laborunit.set_laborlink(labor_label=swimmers_str)
+    x_laborunit.set_laborlink(labor_title=swimmers_str)
 
     yao_str = "Yao"
     sue_bud.add_acctunit(yao_str)
@@ -166,8 +166,8 @@ def test_BudUnit__get_filtered_awardlinks_idea_CorrectlyCleansIdea_Laborunit():
     sue1_bud.set_idea(ideaunit_shop(casa_str), parent_way=sue1_bud.fisc_word)
     sue1_bud.set_idea(ideaunit_shop(swim_str), parent_way=sue1_bud.fisc_word)
     swim_laborunit = laborunit_shop()
-    swim_laborunit.set_laborlink(labor_label=xia_str)
-    swim_laborunit.set_laborlink(labor_label=zoa_str)
+    swim_laborunit.set_laborlink(labor_title=xia_str)
+    swim_laborunit.set_laborlink(labor_title=zoa_str)
     sue1_bud.edit_idea_attr(swim_way, laborunit=swim_laborunit)
     sue1_bud_swim_idea = sue1_bud.get_idea_obj(swim_way)
     sue1_bud_swim_laborlinks = sue1_bud_swim_idea.laborunit._laborlinks
@@ -199,8 +199,8 @@ def test_BudUnit_set_idea_CorrectlyCleansIdea_awardlinks():
     sue1_bud.set_idea(ideaunit_shop(casa_str), parent_way=sue1_bud.fisc_word)
     sue1_bud.set_idea(ideaunit_shop(swim_str), parent_way=sue1_bud.fisc_word)
     swim_laborunit = laborunit_shop()
-    swim_laborunit.set_laborlink(labor_label=xia_str)
-    swim_laborunit.set_laborlink(labor_label=zoa_str)
+    swim_laborunit.set_laborlink(labor_title=xia_str)
+    swim_laborunit.set_laborlink(labor_title=zoa_str)
     sue1_bud.edit_idea_attr(swim_way, laborunit=swim_laborunit)
     sue1_bud_swim_idea = sue1_bud.get_idea_obj(swim_way)
     sue1_bud_swim_laborlinks = sue1_bud_swim_idea.laborunit._laborlinks
@@ -210,7 +210,7 @@ def test_BudUnit_set_idea_CorrectlyCleansIdea_awardlinks():
     sue2_bud = budunit_shop("Sue")
     sue2_bud.add_acctunit(xia_str)
     sue2_bud.set_l1_idea(
-        sue1_bud_swim_idea, get_rid_of_missing_awardlinks_awardee_labels=False
+        sue1_bud_swim_idea, get_rid_of_missing_awardlinks_awardee_titles=False
     )
 
     # THEN

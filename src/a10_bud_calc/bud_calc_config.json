@@ -10,8 +10,8 @@
                 "class_type": "WordStr",
                 "sqlite_datatype": "TEXT"
             },
-            "group_label": {
-                "class_type": "LabelStr",
+            "group_title": {
+                "class_type": "TitleStr",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {
@@ -148,8 +148,8 @@
                 "class_type": "WordStr",
                 "sqlite_datatype": "TEXT"
             },
-            "group_label": {
-                "class_type": "LabelStr",
+            "group_title": {
+                "class_type": "TitleStr",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {
@@ -201,8 +201,8 @@
     "bud_idea_awardlink": {
         "abbreviation": "budawar",
         "jkeys": {
-            "awardee_label": {
-                "class_type": "LabelStr",
+            "awardee_title": {
+                "class_type": "TitleStr",
                 "sqlite_datatype": "TEXT"
             },
             "fisc_word": {
@@ -423,8 +423,8 @@
                 "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
-            "labor_label": {
-                "class_type": "LabelStr",
+            "labor_title": {
+                "class_type": "TitleStr",
                 "sqlite_datatype": "TEXT"
             },
             "world_id": {

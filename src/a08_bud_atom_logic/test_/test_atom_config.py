@@ -15,7 +15,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     acct_pool_str,
     addin_str,
-    awardee_label_str,
+    awardee_title_str,
     rcontext_str,
     fcontext_str,
     begin_str,
@@ -32,7 +32,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     fopen_str,
     fund_coin_str,
     gogo_want_str,
-    group_label_str,
+    group_title_str,
     healer_name_str,
     morph_str,
     numor_str,
@@ -41,9 +41,9 @@ from src.a06_bud_logic._utils.str_a06 import (
     respect_bit_str,
     idea_way_str,
     stop_want_str,
-    labor_label_str,
+    labor_title_str,
     type_NameStr_str,
-    type_LabelStr_str,
+    type_TitleStr_str,
     type_WordStr_str,
     type_WayStr_str,
 )
@@ -367,8 +367,8 @@ def unique_jkeys():
             new_jkey_keys.remove(rcontext_str())
         if acct_name_str() in new_jkey_keys:
             new_jkey_keys.remove(acct_name_str())
-        if group_label_str() in new_jkey_keys:
-            new_jkey_keys.remove(group_label_str())
+        if group_title_str() in new_jkey_keys:
+            new_jkey_keys.remove(group_title_str())
         print(f"{atom_dimen} {new_jkey_keys=}")
         jkey_key_count += len(new_jkey_keys)
         jkey_keys.update(new_jkey_keys)
@@ -582,7 +582,7 @@ def test_get_allowed_class_types_ReturnsObj():
     x_allowed_class_types = {
         "int",
         type_NameStr_str(),
-        type_LabelStr_str(),
+        type_TitleStr_str(),
         type_WordStr_str(),
         type_WayStr_str(),
         "float",
@@ -643,7 +643,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     # THEN
     assert x_class_types.get(acct_name_str()) == type_NameStr_str()
     assert x_class_types.get(addin_str()) == "float"
-    assert x_class_types.get(awardee_label_str()) == type_LabelStr_str()
+    assert x_class_types.get(awardee_title_str()) == type_TitleStr_str()
     assert x_class_types.get(rcontext_str()) == type_WayStr_str()
     assert x_class_types.get("rcontext_idea_active_requisite") == "bool"
     assert x_class_types.get(begin_str()) == "float"
@@ -664,7 +664,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("fund_pool") == "float"
     assert x_class_types.get("give_force") == "float"
     assert x_class_types.get(gogo_want_str()) == "float"
-    assert x_class_types.get(group_label_str()) == type_LabelStr_str()
+    assert x_class_types.get(group_title_str()) == type_TitleStr_str()
     assert x_class_types.get(healer_name_str()) == type_NameStr_str()
     assert x_class_types.get("mass") == "int"
     assert x_class_types.get("max_tree_traverse") == "int"
@@ -681,6 +681,6 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(stop_want_str()) == "float"
     assert x_class_types.get("take_force") == "float"
     assert x_class_types.get("tally") == "int"
-    assert x_class_types.get(labor_label_str()) == type_LabelStr_str()
+    assert x_class_types.get(labor_title_str()) == type_TitleStr_str()
     assert x_class_types.keys() == get_atom_args_dimen_mapping().keys()
     assert all_atom_args_class_types_are_correct(x_class_types)

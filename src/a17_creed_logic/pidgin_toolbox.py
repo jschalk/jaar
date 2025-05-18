@@ -3,7 +3,7 @@ from src.a16_pidgin_logic.pidgin import (
     PidginUnit,
     pidginunit_shop,
     NameMap,
-    LabelMap,
+    TitleMap,
     WordMap,
     WayMap,
 )
@@ -24,15 +24,15 @@ def get_pidgin_name_dt_columns() -> list[str]:
     ]
 
 
-def get_pidgin_label_dt_columns() -> list[str]:
+def get_pidgin_title_dt_columns() -> list[str]:
     return [
         "event_int",
         "face_name",
         "otx_bridge",
         "inx_bridge",
         "unknown_term",
-        "otx_label",
-        "inx_label",
+        "otx_title",
+        "inx_title",
     ]
 
 
@@ -76,7 +76,7 @@ def create_pidgin_name_dt(x_map: NameMap) -> DataFrame:
     return DataFrame(x_rows_list, columns=get_pidgin_name_dt_columns())
 
 
-def create_pidgin_label_dt(x_map: LabelMap) -> DataFrame:
+def create_pidgin_title_dt(x_map: TitleMap) -> DataFrame:
     x_rows_list = [
         {
             "event_int": x_map.event_int,
@@ -84,12 +84,12 @@ def create_pidgin_label_dt(x_map: LabelMap) -> DataFrame:
             "otx_bridge": x_map.otx_bridge,
             "inx_bridge": x_map.inx_bridge,
             "unknown_term": x_map.unknown_term,
-            "otx_label": otx_value,
-            "inx_label": inx_value,
+            "otx_title": otx_value,
+            "inx_title": inx_value,
         }
         for otx_value, inx_value in x_map.otx2inx.items()
     ]
-    return DataFrame(x_rows_list, columns=get_pidgin_label_dt_columns())
+    return DataFrame(x_rows_list, columns=get_pidgin_title_dt_columns())
 
 
 def create_pidgin_word_dt(x_map: WordMap) -> DataFrame:
@@ -126,7 +126,7 @@ def create_pidgin_way_dt(x_map: WayMap) -> DataFrame:
 
 def save_all_csvs_from_pidginunit(x_dir: str, x_pidginunit: PidginUnit):
     _save_pidgin_name_csv(x_dir, x_pidginunit.namemap)
-    _save_pidgin_label_csv(x_dir, x_pidginunit.labelmap)
+    _save_pidgin_title_csv(x_dir, x_pidginunit.titlemap)
     _save_pidgin_word_csv(x_dir, x_pidginunit.wordmap)
     _save_pidgin_way_csv(x_dir, x_pidginunit.waymap)
 
@@ -136,9 +136,9 @@ def _save_pidgin_name_csv(x_dir: str, namemap: NameMap):
     save_file(x_dir, "name.csv", get_ordered_csv(x_dt))
 
 
-def _save_pidgin_label_csv(x_dir: str, labelmap: LabelMap):
-    x_dt = create_pidgin_label_dt(labelmap)
-    save_file(x_dir, "label.csv", get_ordered_csv(x_dt))
+def _save_pidgin_title_csv(x_dir: str, titlemap: TitleMap):
+    x_dt = create_pidgin_title_dt(titlemap)
+    save_file(x_dir, "title.csv", get_ordered_csv(x_dt))
 
 
 def _save_pidgin_word_csv(x_dir: str, wordmap: WordMap):
@@ -163,16 +163,16 @@ def _load_namemap_from_csv(x_dir, x_namemap: NameMap) -> NameMap:
     return x_namemap
 
 
-def _load_labelmap_from_csv(x_dir, x_labelmap: LabelMap) -> LabelMap:
-    label_filename = "label.csv"
-    if os_path_exists(create_path(x_dir, label_filename)):
-        otx2inx_dt = open_csv(x_dir, label_filename)
+def _load_titlemap_from_csv(x_dir, x_titlemap: TitleMap) -> TitleMap:
+    title_filename = "title.csv"
+    if os_path_exists(create_path(x_dir, title_filename)):
+        otx2inx_dt = open_csv(x_dir, title_filename)
         for table_row in otx2inx_dt.to_dict("records"):
-            otx_value = table_row.get("otx_label")
-            inx_value = table_row.get("inx_label")
-            if x_labelmap.otx2inx_exists(otx_value, inx_value) is False:
-                x_labelmap.set_otx2inx(otx_value, inx_value)
-    return x_labelmap
+            otx_value = table_row.get("otx_title")
+            inx_value = table_row.get("inx_title")
+            if x_titlemap.otx2inx_exists(otx_value, inx_value) is False:
+                x_titlemap.set_otx2inx(otx_value, inx_value)
+    return x_titlemap
 
 
 def _load_wordmap_from_csv(x_dir, x_wordmap: WordMap) -> WordMap:
@@ -236,7 +236,7 @@ def create_dir_valid_empty_pidginunit(x_dir: str) -> PidginUnit:
 def init_pidginunit_from_dir(x_dir: str) -> PidginUnit:
     x_pidginunit = create_dir_valid_empty_pidginunit(x_dir)
     _load_namemap_from_csv(x_dir, x_pidginunit.namemap)
-    _load_labelmap_from_csv(x_dir, x_pidginunit.labelmap)
+    _load_titlemap_from_csv(x_dir, x_pidginunit.titlemap)
     _load_wordmap_from_csv(x_dir, x_pidginunit.wordmap)
     _load_waymap_from_csv(x_dir, x_pidginunit.waymap)
     x_pidginunit.waymap.wordmap = x_pidginunit.wordmap

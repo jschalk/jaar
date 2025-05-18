@@ -210,7 +210,7 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_2():
     sue_bud.set_idea(vacuum_idea, parent_way=casa_way)
 
     sue_bud.add_acctunit(acct_name=sue_str)
-    x_awardlink = awardlink_shop(awardee_label=sue_str)
+    x_awardlink = awardlink_shop(awardee_title=sue_str)
 
     sue_bud.idearoot._kids[casa_str]._kids[email_str].set_awardlink(
         awardlink=x_awardlink
@@ -254,7 +254,7 @@ def test_BudUnit_settle_bud_SetsIdeaUnitAttr_awardlinks():
     sue_bud.add_acctunit(Xio_str)
 
     assert len(sue_bud.accts) == 3
-    assert len(sue_bud.get_acctunit_group_labels_dict()) == 3
+    assert len(sue_bud.get_acctunit_group_titles_dict()) == 3
     swim_str = "swim"
     sue_bud.set_l1_idea(ideaunit_shop(swim_str))
     awardlink_yao = awardlink_shop(yao_str, give_force=10)
@@ -526,7 +526,7 @@ def test_BudUnit_settle_bud_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     x_idearoot.set_awardlink(awardlink_shop(zia_str))
     xio_str = "Xio"
     x_idearoot.set_awardlink(awardlink_shop(xio_str))
-    assert len(yao_bud.get_acctunit_group_labels_dict()) == 2
+    assert len(yao_bud.get_acctunit_group_titles_dict()) == 2
     assert not yao_bud.groupunit_exists(yao_str)
     assert not yao_bud.groupunit_exists(zia_str)
     assert not yao_bud.groupunit_exists(xio_str)
@@ -538,8 +538,8 @@ def test_BudUnit_settle_bud_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     assert yao_bud.groupunit_exists(yao_str)
     assert yao_bud.groupunit_exists(zia_str)
     assert yao_bud.groupunit_exists(xio_str)
-    assert len(yao_bud.get_acctunit_group_labels_dict()) == 2
-    assert len(yao_bud.get_acctunit_group_labels_dict()) != len(yao_bud._groupunits)
+    assert len(yao_bud.get_acctunit_group_titles_dict()) == 2
+    assert len(yao_bud.get_acctunit_group_titles_dict()) != len(yao_bud._groupunits)
     assert len(yao_bud._groupunits) == 3
     xio_groupunit = yao_bud.get_groupunit(xio_str)
     xio_symmerty_groupunit = yao_bud.create_symmetry_groupunit(xio_str)
@@ -572,7 +572,7 @@ def test_BudUnit_settle_bud_CreatesNewGroupUnitsWhenNeeded_Scenario1():
     swim_idea.set_awardlink(awardlink_shop(zia_str))
     xio_str = "Xio"
     swim_idea.set_awardlink(awardlink_shop(xio_str))
-    assert len(yao_bud.get_acctunit_group_labels_dict()) == 2
+    assert len(yao_bud.get_acctunit_group_titles_dict()) == 2
     assert not yao_bud.groupunit_exists(yao_str)
     assert not yao_bud.groupunit_exists(zia_str)
     assert not yao_bud.groupunit_exists(xio_str)
@@ -584,8 +584,8 @@ def test_BudUnit_settle_bud_CreatesNewGroupUnitsWhenNeeded_Scenario1():
     assert yao_bud.groupunit_exists(yao_str)
     assert yao_bud.groupunit_exists(zia_str)
     assert yao_bud.groupunit_exists(xio_str)
-    assert len(yao_bud.get_acctunit_group_labels_dict()) == 2
-    assert len(yao_bud.get_acctunit_group_labels_dict()) != len(yao_bud._groupunits)
+    assert len(yao_bud.get_acctunit_group_titles_dict()) == 2
+    assert len(yao_bud.get_acctunit_group_titles_dict()) != len(yao_bud._groupunits)
     assert len(yao_bud._groupunits) == 3
     xio_groupunit = yao_bud.get_groupunit(xio_str)
     xio_symmerty_groupunit = yao_bud.create_symmetry_groupunit(xio_str)
@@ -616,15 +616,15 @@ def test_BudUnit_get_tree_traverse_generated_groupunits_ReturnsObj():
     assert yao_bud.groupunit_exists(yao_str)
     assert yao_bud.groupunit_exists(zia_str)
     assert yao_bud.groupunit_exists(xio_str)
-    assert len(yao_bud.get_acctunit_group_labels_dict()) == 2
-    assert len(yao_bud.get_acctunit_group_labels_dict()) != len(yao_bud._groupunits)
+    assert len(yao_bud.get_acctunit_group_titles_dict()) == 2
+    assert len(yao_bud.get_acctunit_group_titles_dict()) != len(yao_bud._groupunits)
 
     # WHEN
-    symmerty_group_labels = yao_bud.get_tree_traverse_generated_groupunits()
+    symmerty_group_titles = yao_bud.get_tree_traverse_generated_groupunits()
 
     # THEN
-    assert len(symmerty_group_labels) == 1
-    assert symmerty_group_labels == {xio_str}
+    assert len(symmerty_group_titles) == 1
+    assert symmerty_group_titles == {xio_str}
 
     # ESTABLISH
     run_str = ";Run"
@@ -634,11 +634,11 @@ def test_BudUnit_get_tree_traverse_generated_groupunits_ReturnsObj():
     assert yao_bud.groupunit_exists(run_str)
 
     # WHEN
-    symmerty_group_labels = yao_bud.get_tree_traverse_generated_groupunits()
+    symmerty_group_titles = yao_bud.get_tree_traverse_generated_groupunits()
 
     # THEN
-    assert len(symmerty_group_labels) == 2
-    assert symmerty_group_labels == {xio_str, run_str}
+    assert len(symmerty_group_titles) == 2
+    assert symmerty_group_titles == {xio_str, run_str}
 
 
 def test_BudUnit_settle_bud_Sets_idearoot_factheir_With_range_factheirs():

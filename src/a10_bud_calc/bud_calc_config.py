@@ -41,7 +41,7 @@ def get_all_bud_calc_args() -> dict[str, set[str]]:
 def get_bud_calc_args_type_dict() -> dict[str, str]:
     return {
         "acct_name": "NameStr",
-        "group_label": "LabelStr",
+        "group_title": "TitleStr",
         "_credor_pool": "float",
         "_debtor_pool": "float",
         "_fund_agenda_give": "float",
@@ -67,7 +67,7 @@ def get_bud_calc_args_type_dict() -> dict[str, str]:
         "pledge": "bool",
         "problem_bool": "bool",
         "stop_want": "float",
-        "awardee_label": "LabelStr",
+        "awardee_title": "TitleStr",
         "idea_way": "WayStr",
         "give_force": "float",
         "take_force": "float",
@@ -84,7 +84,7 @@ def get_bud_calc_args_type_dict() -> dict[str, str]:
         "popen": "float",
         "_rcontext_idea_active_value": "int",
         "rcontext_idea_active_requisite": "bool",
-        "labor_label": "LabelStr",
+        "labor_title": "TitleStr",
         "_owner_name_labor": "int",
         "_active": "int",
         "_all_acct_cred": "int",
@@ -118,7 +118,7 @@ def get_bud_calc_args_type_dict() -> dict[str, str]:
 def get_bud_calc_args_sqlite_datatype_dict() -> dict[str, str]:
     return {
         "acct_name": "TEXT",
-        "group_label": "TEXT",
+        "group_title": "TEXT",
         "_credor_pool": "REAL",
         "_debtor_pool": "REAL",
         "_fund_agenda_give": "REAL",
@@ -144,7 +144,7 @@ def get_bud_calc_args_sqlite_datatype_dict() -> dict[str, str]:
         "pledge": "INTEGER",
         "problem_bool": "INTEGER",
         "stop_want": "REAL",
-        "awardee_label": "TEXT",
+        "awardee_title": "TEXT",
         "idea_way": "TEXT",
         "give_force": "REAL",
         "take_force": "REAL",
@@ -164,7 +164,7 @@ def get_bud_calc_args_sqlite_datatype_dict() -> dict[str, str]:
         "owner_name": "TEXT",
         "_rcontext_idea_active_value": "INTEGER",
         "rcontext_idea_active_requisite": "INTEGER",
-        "labor_label": "TEXT",
+        "labor_title": "TEXT",
         "bridge": "TEXT",
         "_owner_name_labor": "INTEGER",
         "_active": "INTEGER",

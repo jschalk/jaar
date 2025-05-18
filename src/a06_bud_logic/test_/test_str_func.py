@@ -1,7 +1,7 @@
 from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
     addin_str,
-    awardee_label_str,
+    awardee_title_str,
     rcontext_str,
     begin_str,
     close_str,
@@ -19,7 +19,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     fopen_str,
     fund_coin_str,
     gogo_want_str,
-    group_label_str,
+    group_title_str,
     healer_name_str,
     morph_str,
     pbranch_str,
@@ -31,9 +31,9 @@ from src.a06_bud_logic._utils.str_a06 import (
     respect_bit_str,
     idea_way_str,
     stop_want_str,
-    labor_label_str,
+    labor_title_str,
     type_NameStr_str,
-    type_LabelStr_str,
+    type_TitleStr_str,
     type_WordStr_str,
     type_WayStr_str,
 )
@@ -42,7 +42,7 @@ from src.a06_bud_logic._utils.str_a06 import (
 def test_str_functions_ReturnsObj():
     assert acct_name_str() == "acct_name"
     assert addin_str() == "addin"
-    assert awardee_label_str() == "awardee_label"
+    assert awardee_title_str() == "awardee_title"
     assert rcontext_str() == "rcontext"
     assert fcontext_str() == "fcontext"
     assert begin_str() == "begin"
@@ -60,7 +60,7 @@ def test_str_functions_ReturnsObj():
     assert fopen_str() == "fopen"
     assert fund_coin_str() == "fund_coin"
     assert gogo_want_str() == "gogo_want"
-    assert group_label_str() == "group_label"
+    assert group_title_str() == "group_title"
     assert morph_str() == "morph"
     assert pbranch_str() == "pbranch"
     assert pnigh_str() == "pnigh"
@@ -71,8 +71,8 @@ def test_str_functions_ReturnsObj():
     assert respect_bit_str() == "respect_bit"
     assert idea_way_str() == "idea_way"
     assert stop_want_str() == "stop_want"
-    assert labor_label_str() == "labor_label"
+    assert labor_title_str() == "labor_title"
     assert type_NameStr_str() == "NameStr"
-    assert type_LabelStr_str() == "LabelStr"
+    assert type_TitleStr_str() == "TitleStr"
     assert type_WordStr_str() == "WordStr"
     assert type_WayStr_str() == "WayStr"

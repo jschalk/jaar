@@ -51,7 +51,7 @@ def get_allowed_class_types() -> set[str]:
         "NameStr",
         "bool",
         "float",
-        "LabelStr",
+        "TitleStr",
         "int",
         "WordStr",
         "WayStr",
@@ -63,7 +63,7 @@ def get_atom_args_class_types() -> dict[str, str]:
     return {
         "acct_name": "NameStr",
         "addin": "float",
-        "awardee_label": "LabelStr",
+        "awardee_title": "TitleStr",
         "rcontext": "WayStr",
         "rcontext_idea_active_requisite": "bool",
         "begin": "float",
@@ -83,7 +83,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "fund_pool": "float",
         "give_force": "float",
         "gogo_want": "float",
-        "group_label": "LabelStr",
+        "group_title": "TitleStr",
         "healer_name": "NameStr",
         "mass": "int",
         "max_tree_traverse": "int",
@@ -101,7 +101,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
-        "labor_label": "LabelStr",
+        "labor_title": "TitleStr",
     }
 
 
@@ -242,15 +242,15 @@ def get_bud_dimens() -> set:
 def get_all_bud_dimen_keys() -> set:
     return {
         "acct_name",
-        "awardee_label",
+        "awardee_title",
         "rcontext",
         "fcontext",
-        "group_label",
+        "group_title",
         "healer_name",
         "pbranch",
         "owner_name",
         "idea_way",
-        "labor_label",
+        "labor_title",
     }
 
 
@@ -261,15 +261,15 @@ def get_delete_key_name(key: str) -> str:
 def get_all_bud_dimen_delete_keys() -> set:
     return {
         "acct_name_ERASE",
-        "awardee_label_ERASE",
+        "awardee_title_ERASE",
         "rcontext_ERASE",
         "fcontext_ERASE",
-        "group_label_ERASE",
+        "group_title_ERASE",
         "healer_name_ERASE",
         "pbranch_ERASE",
         "owner_name_ERASE",
         "idea_way_ERASE",
-        "labor_label_ERASE",
+        "labor_title_ERASE",
     }
 
 

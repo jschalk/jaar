@@ -447,7 +447,7 @@ def test_insert_job_budmemb_CreatesTableRowsFor_budmemb_job():
     x_fisc_word = 1
     x_owner_name = 2
     x_acct_name = 3
-    x_group_label = 4
+    x_group_title = 4
     x_credit_vote = 5.0
     x_debtit_vote = 6.0
     x__credor_pool = 7.0
@@ -458,7 +458,7 @@ def test_insert_job_budmemb_CreatesTableRowsFor_budmemb_job():
     x__fund_agenda_take = 12.0
     x__fund_agenda_ratio_give = 13.0
     x__fund_agenda_ratio_take = 14.0
-    x_membership = membership_shop(x_group_label)
+    x_membership = membership_shop(x_group_title)
     x_membership.acct_name = x_acct_name
     x_membership.credit_vote = x_credit_vote
     x_membership.debtit_vote = x_debtit_vote
@@ -491,7 +491,7 @@ def test_insert_job_budmemb_CreatesTableRowsFor_budmemb_job():
             str(x_fisc_word),
             str(x_owner_name),
             str(x_acct_name),
-            str(x_group_label),
+            str(x_group_title),
             x_credit_vote,
             x_debtit_vote,
             x__credor_pool,
@@ -608,7 +608,7 @@ def test_insert_job_budgrou_CreatesTableRowsFor_budgrou_job():
     x_world_id = 0
     x_fisc_word = 1
     x_owner_name = 2
-    x_group_label = 3
+    x_group_title = 3
     x_fund_coin = 4
     x_bridge = 5
     x__credor_pool = 6
@@ -617,8 +617,8 @@ def test_insert_job_budgrou_CreatesTableRowsFor_budgrou_job():
     x__fund_take = 9
     x__fund_agenda_give = 10
     x__fund_agenda_take = 11
-    x_group = groupunit_shop(x_group_label)
-    x_group.group_label = x_group_label
+    x_group = groupunit_shop(x_group_title)
+    x_group.group_title = x_group_title
     x_group.fund_coin = x_fund_coin
     x_group.bridge = x_bridge
     x_group._credor_pool = x__credor_pool
@@ -647,7 +647,7 @@ def test_insert_job_budgrou_CreatesTableRowsFor_budgrou_job():
             str(x_world_id),
             str(x_fisc_word),
             str(x_owner_name),
-            str(x_group_label),
+            str(x_group_title),
             x_fund_coin,
             str(x_bridge),
             x__credor_pool,
@@ -680,13 +680,13 @@ def test_insert_job_budawar_CreatesTableRowsFor_budawar_job():
     x_fisc_word = 1
     x_owner_name = 2
     x_way = 3
-    x_awardee_label = 4
+    x_awardee_title = 4
     x_give_force = 5
     x_take_force = 6
     x__fund_give = 7
     x__fund_take = 8
-    x_awardheir = awardheir_shop(x_awardee_label)
-    x_awardheir.awardee_label = x_awardee_label
+    x_awardheir = awardheir_shop(x_awardee_title)
+    x_awardheir.awardee_title = x_awardee_title
     x_awardheir.give_force = x_give_force
     x_awardheir.take_force = x_take_force
     x_awardheir._fund_give = x__fund_give
@@ -712,7 +712,7 @@ def test_insert_job_budawar_CreatesTableRowsFor_budawar_job():
             str(x_fisc_word),
             str(x_owner_name),
             str(x_way),
-            str(x_awardee_label),
+            str(x_awardee_title),
             x_give_force,
             x_take_force,
             x__fund_give,

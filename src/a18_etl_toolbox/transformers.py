@@ -96,7 +96,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_update_pidword_sound_agg_bridge_error_sqlstr,
     create_update_pidwayy_sound_agg_bridge_error_sqlstr,
     create_update_pidname_sound_agg_bridge_error_sqlstr,
-    create_update_pidlabe_sound_agg_bridge_error_sqlstr,
+    create_update_pidtitl_sound_agg_bridge_error_sqlstr,
     create_insert_pidgin_sound_vld_table_sqlstr,
     get_insert_into_voice_raw_sqlstrs,
     create_update_voice_raw_existing_inx_col_sqlstr,
@@ -144,7 +144,7 @@ class not_given_pidgin_dimen_Exception(Exception):
 
 MAPS_DIMENS = {
     "pidgin_name": "NameStr",
-    "pidgin_label": "LabelStr",
+    "pidgin_title": "TitleStr",
     "pidgin_word": "WordStr",
     "pidgin_way": "WayStr",
 }
@@ -157,12 +157,12 @@ CLASS_TYPES = {
         "otx_obj": "otx_name",
         "inx_obj": "inx_name",
     },
-    "LabelStr": {
-        "raw": "label_raw",
-        "agg": "label_agg",
-        "csv_filename": "label.csv",
-        "otx_obj": "otx_label",
-        "inx_obj": "inx_label",
+    "TitleStr": {
+        "raw": "title_raw",
+        "agg": "title_agg",
+        "csv_filename": "title.csv",
+        "otx_obj": "otx_title",
+        "inx_obj": "inx_title",
     },
     "WordStr": {
         "raw": "word_raw",
@@ -555,7 +555,7 @@ def update_pidgin_sound_agg_brick_errors(cursor: sqlite3_Cursor):
     cursor.execute(create_update_pidword_sound_agg_bridge_error_sqlstr())
     cursor.execute(create_update_pidwayy_sound_agg_bridge_error_sqlstr())
     cursor.execute(create_update_pidname_sound_agg_bridge_error_sqlstr())
-    cursor.execute(create_update_pidlabe_sound_agg_bridge_error_sqlstr())
+    cursor.execute(create_update_pidtitl_sound_agg_bridge_error_sqlstr())
 
 
 def insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor: sqlite3_Cursor):
@@ -601,12 +601,12 @@ def set_voice_raw_inx_column(
     column_without_otx: str,
     arg_class_type: dict[str, str],
 ):
-    if arg_class_type in {"NameStr", "LabelStr", "WordStr", "WayStr"}:
+    if arg_class_type in {"NameStr", "TitleStr", "WordStr", "WayStr"}:
         pidgin_type_abbv = ""
         if arg_class_type == "NameStr":
             pidgin_type_abbv = "name"
-        elif arg_class_type == "LabelStr":
-            pidgin_type_abbv = "label"
+        elif arg_class_type == "TitleStr":
+            pidgin_type_abbv = "title"
         elif arg_class_type == "WordStr":
             pidgin_type_abbv = "word"
         elif arg_class_type == "WayStr":
@@ -666,7 +666,7 @@ def etl_brick_agg_df_to_brick_pidgin_raw_df(
     legitimate_events: set[EventInt], brick_dir: str
 ):
     etl_brick_agg_dfs_to_pidgin_name_raw(legitimate_events, brick_dir)
-    etl_brick_agg_dfs_to_pidgin_label_raw(legitimate_events, brick_dir)
+    etl_brick_agg_dfs_to_pidgin_title_raw(legitimate_events, brick_dir)
     etl_brick_agg_dfs_to_pidgin_word_raw(legitimate_events, brick_dir)
     etl_brick_agg_dfs_to_pidgin_way_raw(legitimate_events, brick_dir)
 
@@ -677,10 +677,10 @@ def etl_brick_agg_dfs_to_pidgin_name_raw(
     brick_agg_single_to_pidgin_raw("pidgin_name", legitimate_events, brick_dir)
 
 
-def etl_brick_agg_dfs_to_pidgin_label_raw(
+def etl_brick_agg_dfs_to_pidgin_title_raw(
     legitimate_events: set[EventInt], brick_dir: str
 ):
-    brick_agg_single_to_pidgin_raw("pidgin_label", legitimate_events, brick_dir)
+    brick_agg_single_to_pidgin_raw("pidgin_title", legitimate_events, brick_dir)
 
 
 def etl_brick_agg_dfs_to_pidgin_word_raw(
@@ -768,8 +768,8 @@ class BrickAggToPidginRawTransformer:
     def get_inx_obj(self, x_row, missing_col: set[str]) -> str:
         if self.class_type == "NameStr" and "inx_name" not in missing_col:
             return x_row["inx_name"]
-        elif self.class_type == "LabelStr" and "inx_label" not in missing_col:
-            return x_row["inx_label"]
+        elif self.class_type == "TitleStr" and "inx_title" not in missing_col:
+            return x_row["inx_title"]
         elif self.class_type == "WordStr" and "inx_word" not in missing_col:
             return x_row["inx_word"]
         elif self.class_type == "WayStr" and "inx_way" not in missing_col:
@@ -781,8 +781,8 @@ def etl_pidgin_name_raw_to_name_agg(brick_dir: str):
     etl_pidgin_single_raw_to_agg(brick_dir, "pidgin_name")
 
 
-def etl_pidgin_label_raw_to_label_agg(brick_dir: str):
-    etl_pidgin_single_raw_to_agg(brick_dir, "pidgin_label")
+def etl_pidgin_title_raw_to_title_agg(brick_dir: str):
+    etl_pidgin_single_raw_to_agg(brick_dir, "pidgin_title")
 
 
 def etl_pidgin_way_raw_to_way_agg(brick_dir: str):
@@ -800,7 +800,7 @@ def etl_pidgin_single_raw_to_agg(brick_dir: str, map_dimen: str):
 
 def etl_brick_pidgin_raw_df_to_pidgin_agg_df(brick_dir):
     etl_pidgin_name_raw_to_name_agg(brick_dir)
-    etl_pidgin_label_raw_to_label_agg(brick_dir)
+    etl_pidgin_title_raw_to_title_agg(brick_dir)
     etl_pidgin_way_raw_to_way_agg(brick_dir)
     etl_pidgin_word_raw_to_word_agg(brick_dir)
 

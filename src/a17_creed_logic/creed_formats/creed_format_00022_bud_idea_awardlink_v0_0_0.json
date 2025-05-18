@@ -1,6 +1,6 @@
 {
     "attributes": {
-        "awardee_label": {
+        "awardee_title": {
             "otx_key": true
         },
         "event_int": {

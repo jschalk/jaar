@@ -1,7 +1,7 @@
 from src.a06_bud_logic._utils.str_a06 import (
     bud_acct_membership_str,
     acct_name_str,
-    group_label_str,
+    group_title_str,
 )
 from src.a08_bud_atom_logic.atom import (
     budatom_shop,
@@ -25,7 +25,7 @@ def test_create_legible_list_ReturnsObj_acct_membership_INSERT():
     credit_vote_value = 81
     debtit_vote_value = 43
     yao_budatom = budatom_shop(dimen, atom_insert())
-    yao_budatom.set_arg(group_label_str(), swim_str)
+    yao_budatom.set_arg(group_title_str(), swim_str)
     yao_budatom.set_arg(acct_name_str(), yao_str)
     yao_budatom.set_arg(credit_vote_str, credit_vote_value)
     yao_budatom.set_arg(debtit_vote_str, debtit_vote_value)
@@ -53,7 +53,7 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote_debti
     credit_vote_value = 81
     debtit_vote_value = 43
     yao_budatom = budatom_shop(dimen, atom_update())
-    yao_budatom.set_arg(group_label_str(), swim_str)
+    yao_budatom.set_arg(group_title_str(), swim_str)
     yao_budatom.set_arg(acct_name_str(), yao_str)
     yao_budatom.set_arg(credit_vote_str, credit_vote_value)
     yao_budatom.set_arg(debtit_vote_str, debtit_vote_value)
@@ -79,7 +79,7 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote():
     yao_str = "Yao"
     credit_vote_value = 81
     yao_budatom = budatom_shop(dimen, atom_update())
-    yao_budatom.set_arg(group_label_str(), swim_str)
+    yao_budatom.set_arg(group_title_str(), swim_str)
     yao_budatom.set_arg(acct_name_str(), yao_str)
     yao_budatom.set_arg(credit_vote_str, credit_vote_value)
     # print(f"{yao_budatom=}")
@@ -104,7 +104,7 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_debtit_vote():
     yao_str = "Yao"
     debtit_vote_value = 43
     yao_budatom = budatom_shop(dimen, atom_update())
-    yao_budatom.set_arg(group_label_str(), swim_str)
+    yao_budatom.set_arg(group_title_str(), swim_str)
     yao_budatom.set_arg(acct_name_str(), yao_str)
     yao_budatom.set_arg(debtit_vote_str, debtit_vote_value)
     # print(f"{yao_budatom=}")
@@ -127,7 +127,7 @@ def test_create_legible_list_ReturnsObj_acct_membership_DELETE():
     swim_str = f"{sue_bud.bridge}Swimmers"
     yao_str = "Yao"
     yao_budatom = budatom_shop(dimen, atom_delete())
-    yao_budatom.set_arg(group_label_str(), swim_str)
+    yao_budatom.set_arg(group_title_str(), swim_str)
     yao_budatom.set_arg(acct_name_str(), yao_str)
     # print(f"{yao_budatom=}")
     x_buddelta = buddelta_shop()

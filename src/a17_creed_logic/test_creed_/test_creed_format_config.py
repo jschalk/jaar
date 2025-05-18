@@ -6,7 +6,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     face_name_str,
     event_int_str,
     acct_name_str,
-    group_label_str,
+    group_title_str,
     mass_str,
     idea_way_str,
     pledge_str,
@@ -248,7 +248,7 @@ def test_get_creedref_obj_HasCorrectAttrs_creed_format_00020_bud_acct_membership
     assert headers_list[2] == fisc_word_str()
     assert headers_list[3] == owner_name_str()
     assert headers_list[4] == acct_name_str()
-    assert headers_list[5] == group_label_str()
+    assert headers_list[5] == group_title_str()
     assert headers_list[6] == credit_vote_str()
     assert headers_list[7] == debtit_vote_str()
 

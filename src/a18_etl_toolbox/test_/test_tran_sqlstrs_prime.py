@@ -34,7 +34,7 @@ from src.a15_fisc_logic._utils.str_a15 import (
 from src.a15_fisc_logic.fisc_config import get_fisc_dimens
 from src.a16_pidgin_logic.pidgin_config import get_pidgin_dimens, find_set_otx_inx_args
 from src.a16_pidgin_logic._utils.str_a16 import (
-    pidgin_label_str,
+    pidgin_title_str,
     pidgin_name_str,
     pidgin_way_str,
     pidgin_word_str,
@@ -136,7 +136,7 @@ def test_create_prime_tablename_ReturnsObj():
     pidname_dimen = pidgin_name_str()
     pidword_dimen = pidgin_word_str()
     pidwayy_dimen = pidgin_way_str()
-    pidlabe_dimen = pidgin_label_str()
+    pidtitl_dimen = pidgin_title_str()
     raw_str = "raw"
     agg_str = "agg"
     put_str = "put"
@@ -164,10 +164,10 @@ def test_create_prime_tablename_ReturnsObj():
     assert prime_tbl("pidname", "s", agg_str) == f"{pidname_dimen}_s_agg"
     assert prime_tbl("pidword", "s", agg_str) == f"{pidword_dimen}_s_agg"
     assert prime_tbl("pidwayy", "s", agg_str) == f"{pidwayy_dimen}_s_agg"
-    assert prime_tbl("pidlabe", "s", agg_str) == f"{pidlabe_dimen}_s_agg"
-    assert prime_tbl("pidlabe", "v", agg_str) == f"{pidlabe_dimen}_v_agg"
-    assert prime_tbl("pidlabe", "s", raw_str) == f"{pidlabe_dimen}_s_raw"
-    assert prime_tbl("pidlabe", "k", raw_str) == f"{pidlabe_dimen}_raw"
+    assert prime_tbl("pidtitl", "s", agg_str) == f"{pidtitl_dimen}_s_agg"
+    assert prime_tbl("pidtitl", "v", agg_str) == f"{pidtitl_dimen}_v_agg"
+    assert prime_tbl("pidtitl", "s", raw_str) == f"{pidtitl_dimen}_s_raw"
+    assert prime_tbl("pidtitl", "k", raw_str) == f"{pidtitl_dimen}_raw"
     assert prime_tbl("bud_acctunit", "k", raw_str) == "bud_acctunit_raw"
 
 
@@ -533,9 +533,9 @@ def test_create_sound_and_voice_tables_CreatesFiscRawTables():
         budmemb_s_agg_table = prime_tbl("budmemb", "s", agg_str, put_str)
         budfact_s_del_table = prime_tbl("budfact", "s", agg_str, del_str)
         fisunit_s_agg_table = prime_tbl("fisunit", "s", agg_str)
-        pidlabe_s_agg_table = prime_tbl("pidlabe", "s", agg_str)
+        pidtitl_s_agg_table = prime_tbl("pidtitl", "s", agg_str)
         fishour_v_agg_table = prime_tbl("fishour", "v", agg_str)
-        pidlabe_s_raw_table = prime_tbl("pidlabe", "s", raw_str)
+        pidtitl_s_raw_table = prime_tbl("pidtitl", "s", raw_str)
         pidcore_s_raw_table = prime_tbl("pidcore", "s", raw_str)
         pidcore_s_agg_table = prime_tbl("pidcore", "s", agg_str)
         pidcore_s_vld_table = prime_tbl("pidcore", "s", vld_str)
@@ -545,9 +545,9 @@ def test_create_sound_and_voice_tables_CreatesFiscRawTables():
         assert not db_table_exists(cursor, budmemb_s_agg_table)
         assert not db_table_exists(cursor, budfact_s_del_table)
         assert not db_table_exists(cursor, fisunit_s_agg_table)
-        assert not db_table_exists(cursor, pidlabe_s_agg_table)
+        assert not db_table_exists(cursor, pidtitl_s_agg_table)
         assert not db_table_exists(cursor, fishour_v_agg_table)
-        assert not db_table_exists(cursor, pidlabe_s_raw_table)
+        assert not db_table_exists(cursor, pidtitl_s_raw_table)
         assert not db_table_exists(cursor, pidcore_s_raw_table)
         assert not db_table_exists(cursor, pidcore_s_agg_table)
         assert not db_table_exists(cursor, pidcore_s_vld_table)
@@ -567,9 +567,9 @@ def test_create_sound_and_voice_tables_CreatesFiscRawTables():
         assert db_table_exists(cursor, budmemb_s_agg_table)
         assert db_table_exists(cursor, budfact_s_del_table)
         assert db_table_exists(cursor, fisunit_s_agg_table)
-        assert db_table_exists(cursor, pidlabe_s_agg_table)
+        assert db_table_exists(cursor, pidtitl_s_agg_table)
         assert db_table_exists(cursor, fishour_v_agg_table)
-        assert db_table_exists(cursor, pidlabe_s_raw_table)
+        assert db_table_exists(cursor, pidtitl_s_raw_table)
         assert db_table_exists(cursor, pidcore_s_raw_table)
         assert db_table_exists(cursor, pidcore_s_agg_table)
         assert db_table_exists(cursor, pidcore_s_vld_table)
@@ -580,7 +580,7 @@ def test_create_sound_and_voice_tables_CreatesFiscRawTables():
 def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scenario0_PidginDimen():
     # sourcery skip: extract-method
     # ESTABLISH
-    dimen = pidgin_label_str()
+    dimen = pidgin_title_str()
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
@@ -601,20 +601,20 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
         assert update_sqlstr == expected_update_sqlstr
 
         static_example_sqlstr = """WITH inconsistency_rows AS (
-SELECT event_int, face_name, otx_label
-FROM pidgin_label_s_raw
-GROUP BY event_int, face_name, otx_label
-HAVING MIN(inx_label) != MAX(inx_label)
+SELECT event_int, face_name, otx_title
+FROM pidgin_title_s_raw
+GROUP BY event_int, face_name, otx_title
+HAVING MIN(inx_title) != MAX(inx_title)
     OR MIN(otx_bridge) != MAX(otx_bridge)
     OR MIN(inx_bridge) != MAX(inx_bridge)
     OR MIN(unknown_term) != MAX(unknown_term)
 )
-UPDATE pidgin_label_s_raw
+UPDATE pidgin_title_s_raw
 SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
-WHERE inconsistency_rows.event_int = pidgin_label_s_raw.event_int
-    AND inconsistency_rows.face_name = pidgin_label_s_raw.face_name
-    AND inconsistency_rows.otx_label = pidgin_label_s_raw.otx_label
+WHERE inconsistency_rows.event_int = pidgin_title_s_raw.event_int
+    AND inconsistency_rows.face_name = pidgin_title_s_raw.face_name
+    AND inconsistency_rows.otx_title = pidgin_title_s_raw.otx_title
 ;
 """
         print(update_sqlstr)
@@ -687,9 +687,9 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
         assert update_sqlstr == expected_update_sqlstr
 
         static_example_sqlstr = """WITH inconsistency_rows AS (
-SELECT event_int, face_name, fisc_word, owner_name, idea_way, awardee_label
+SELECT event_int, face_name, fisc_word, owner_name, idea_way, awardee_title
 FROM bud_idea_awardlink_s_put_raw
-GROUP BY event_int, face_name, fisc_word, owner_name, idea_way, awardee_label
+GROUP BY event_int, face_name, fisc_word, owner_name, idea_way, awardee_title
 HAVING MIN(give_force) != MAX(give_force)
     OR MIN(take_force) != MAX(take_force)
 )
@@ -701,7 +701,7 @@ WHERE inconsistency_rows.event_int = bud_idea_awardlink_s_put_raw.event_int
     AND inconsistency_rows.fisc_word = bud_idea_awardlink_s_put_raw.fisc_word
     AND inconsistency_rows.owner_name = bud_idea_awardlink_s_put_raw.owner_name
     AND inconsistency_rows.idea_way = bud_idea_awardlink_s_put_raw.idea_way
-    AND inconsistency_rows.awardee_label = bud_idea_awardlink_s_put_raw.awardee_label
+    AND inconsistency_rows.awardee_title = bud_idea_awardlink_s_put_raw.awardee_title
 ;
 """
         print(update_sqlstr)
@@ -711,7 +711,7 @@ WHERE inconsistency_rows.event_int = bud_idea_awardlink_s_put_raw.event_int
 def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario0_PidginDimen():
     # sourcery skip: extract-method
     # ESTABLISH
-    dimen = pidgin_label_str()
+    dimen = pidgin_title_str()
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
@@ -735,11 +735,11 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario0_PidginDimen():
         # print(expected_insert_sqlstr)
         assert update_sqlstrs[0] == expected_insert_sqlstr
 
-        static_example_sqlstr = """INSERT INTO pidgin_label_s_agg (event_int, face_name, otx_label, inx_label, otx_bridge, inx_bridge, unknown_term)
-SELECT event_int, face_name, otx_label, MAX(inx_label), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_term)
-FROM pidgin_label_s_raw
+        static_example_sqlstr = """INSERT INTO pidgin_title_s_agg (event_int, face_name, otx_title, inx_title, otx_bridge, inx_bridge, unknown_term)
+SELECT event_int, face_name, otx_title, MAX(inx_title), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_term)
+FROM pidgin_title_s_raw
 WHERE error_message IS NULL
-GROUP BY event_int, face_name, otx_label
+GROUP BY event_int, face_name, otx_title
 ;
 """
         print(update_sqlstrs[0])
@@ -820,11 +820,11 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario2_BudDimen():
         # print(put_expected_insert_sqlstr)
         assert update_sqlstrs[0] == put_expected_insert_sqlstr
 
-        static_example_put_sqlstr = """INSERT INTO bud_idea_awardlink_s_put_agg (event_int, face_name, fisc_word, owner_name, idea_way, awardee_label, give_force, take_force)
-SELECT event_int, face_name, fisc_word, owner_name, idea_way, awardee_label, MAX(give_force), MAX(take_force)
+        static_example_put_sqlstr = """INSERT INTO bud_idea_awardlink_s_put_agg (event_int, face_name, fisc_word, owner_name, idea_way, awardee_title, give_force, take_force)
+SELECT event_int, face_name, fisc_word, owner_name, idea_way, awardee_title, MAX(give_force), MAX(take_force)
 FROM bud_idea_awardlink_s_put_raw
 WHERE error_message IS NULL
-GROUP BY event_int, face_name, fisc_word, owner_name, idea_way, awardee_label
+GROUP BY event_int, face_name, fisc_word, owner_name, idea_way, awardee_title
 ;
 """
         # print(update_sqlstrs[0])
@@ -845,10 +845,10 @@ GROUP BY event_int, face_name, fisc_word, owner_name, idea_way, awardee_label
         print(del_expected_insert_sqlstr)
         assert update_sqlstrs[1] == del_expected_insert_sqlstr
 
-        static_example_del_sqlstr = """INSERT INTO bud_idea_awardlink_s_del_agg (event_int, face_name, fisc_word, owner_name, idea_way, awardee_label_ERASE)
-SELECT event_int, face_name, fisc_word, owner_name, idea_way, awardee_label_ERASE
+        static_example_del_sqlstr = """INSERT INTO bud_idea_awardlink_s_del_agg (event_int, face_name, fisc_word, owner_name, idea_way, awardee_title_ERASE)
+SELECT event_int, face_name, fisc_word, owner_name, idea_way, awardee_title_ERASE
 FROM bud_idea_awardlink_s_del_raw
-GROUP BY event_int, face_name, fisc_word, owner_name, idea_way, awardee_label_ERASE
+GROUP BY event_int, face_name, fisc_word, owner_name, idea_way, awardee_title_ERASE
 ;
 """
         print(update_sqlstrs[1])

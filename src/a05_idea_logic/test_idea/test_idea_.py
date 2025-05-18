@@ -147,13 +147,13 @@ def test_ideaunit_shop_ReturnsObjWith_awardlinks():
     biker_give_force = 12
     biker_take_force = 15
     biker_awardlink = awardlink_shop("bikers2", biker_give_force, biker_take_force)
-    swim_group_label = "swimmers"
+    swim_group_title = "swimmers"
     swim_give_force = 29
     swim_take_force = 32
-    swim_awardlink = awardlink_shop(swim_group_label, swim_give_force, swim_take_force)
+    swim_awardlink = awardlink_shop(swim_group_title, swim_give_force, swim_take_force)
     x_awardlinks = {
-        swim_awardlink.awardee_label: swim_awardlink,
-        biker_awardlink.awardee_label: biker_awardlink,
+        swim_awardlink.awardee_title: swim_awardlink,
+        biker_awardlink.awardee_title: biker_awardlink,
     }
 
     # WHEN

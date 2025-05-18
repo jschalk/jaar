@@ -8,7 +8,7 @@
       "event_int": {},
       "face_name": {},
       "fisc_word": {},
-      "group_label": {},
+      "group_title": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -37,7 +37,7 @@
     "build_order": 11,
     "creed_category": "bud",
     "jkeys": {
-      "awardee_label": {},
+      "awardee_title": {},
       "event_int": {},
       "face_name": {},
       "fisc_word": {},
@@ -126,7 +126,7 @@
       "fisc_word": {},
       "idea_way": {},
       "owner_name": {},
-      "labor_label": {}
+      "labor_title": {}
     },
     "jvalues": {}
   },
@@ -283,18 +283,18 @@
       "yr1_jan1_offset": {}
     }
   },
-  "pidgin_label": {
+  "pidgin_title": {
     "allowed_crud": "INSERT_ONE_TIME",
     "build_order": 1,
     "creed_category": "pidgin",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "otx_label": {}
+      "otx_title": {}
     },
     "jvalues": {
       "inx_bridge": {},
-      "inx_label": {},
+      "inx_title": {},
       "otx_bridge": {},
       "unknown_term": {}
     }

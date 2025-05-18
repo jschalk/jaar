@@ -16,7 +16,7 @@ from src.a01_way_logic.way import (
     replace_bridge,
     FiscWord,
     AcctName,
-    GroupLabel,
+    GroupTitle,
     WayStr,
     rebuild_way,
     find_replace_way_key_dict,
@@ -121,7 +121,7 @@ class IdeaAttrHolder:
     all_acct_cred: bool = None
     all_acct_debt: bool = None
     awardlink: AwardLink = None
-    awardlink_del: GroupLabel = None
+    awardlink_del: GroupTitle = None
     is_expanded: bool = None
     problem_bool: bool = None
 
@@ -168,7 +168,7 @@ def ideaattrholder_shop(
     all_acct_cred: bool = None,
     all_acct_debt: bool = None,
     awardlink: AwardLink = None,
-    awardlink_del: GroupLabel = None,
+    awardlink_del: GroupTitle = None,
     is_expanded: bool = None,
     problem_bool: bool = None,
 ) -> IdeaAttrHolder:
@@ -215,7 +215,7 @@ class IdeaUnit:
     _kids: dict[WayStr,] = None
     fisc_word: FiscWord = None
     _uid: int = None  # Calculated field?
-    awardlinks: dict[GroupLabel, AwardLink] = None
+    awardlinks: dict[GroupTitle, AwardLink] = None
     reasonunits: dict[WayStr, ReasonUnit] = None
     laborunit: LaborUnit = None
     factunits: dict[WayStr, FactUnit] = None
@@ -238,8 +238,8 @@ class IdeaUnit:
     _active_hx: dict[int, bool] = None
     _all_acct_cred: bool = None
     _all_acct_debt: bool = None
-    _awardheirs: dict[GroupLabel, AwardHeir] = None
-    _awardlines: dict[GroupLabel, AwardLine] = None
+    _awardheirs: dict[GroupTitle, AwardHeir] = None
+    _awardlines: dict[GroupTitle, AwardLine] = None
     _descendant_pledge_count: int = None
     _factheirs: dict[WayStr, FactHeir] = None
     _fund_ratio: float = None
@@ -429,64 +429,64 @@ class IdeaUnit:
     def set_parent_way(self, parent_way):
         self.parent_way = parent_way
 
-    def inherit_awardheirs(self, parent_awardheirs: dict[GroupLabel, AwardHeir] = None):
+    def inherit_awardheirs(self, parent_awardheirs: dict[GroupTitle, AwardHeir] = None):
         parent_awardheirs = {} if parent_awardheirs is None else parent_awardheirs
         self._awardheirs = {}
         for ib in parent_awardheirs.values():
             awardheir = awardheir_shop(
-                awardee_label=ib.awardee_label,
+                awardee_title=ib.awardee_title,
                 give_force=ib.give_force,
                 take_force=ib.take_force,
             )
-            self._awardheirs[awardheir.awardee_label] = awardheir
+            self._awardheirs[awardheir.awardee_title] = awardheir
 
         for ib in self.awardlinks.values():
             awardheir = awardheir_shop(
-                awardee_label=ib.awardee_label,
+                awardee_title=ib.awardee_title,
                 give_force=ib.give_force,
                 take_force=ib.take_force,
             )
-            self._awardheirs[awardheir.awardee_label] = awardheir
+            self._awardheirs[awardheir.awardee_title] = awardheir
 
     def set_kidless_awardlines(self):
         # get awardlines from self
         for bh in self._awardheirs.values():
             x_awardline = awardline_shop(
-                awardee_label=bh.awardee_label,
+                awardee_title=bh.awardee_title,
                 _fund_give=bh._fund_give,
                 _fund_take=bh._fund_take,
             )
-            self._awardlines[x_awardline.awardee_label] = x_awardline
+            self._awardlines[x_awardline.awardee_title] = x_awardline
 
-    def set_awardlines(self, child_awardlines: dict[GroupLabel, AwardLine] = None):
+    def set_awardlines(self, child_awardlines: dict[GroupTitle, AwardLine] = None):
         if child_awardlines is None:
             child_awardlines = {}
 
         # get awardlines from child
         for bl in child_awardlines.values():
-            if self._awardlines.get(bl.awardee_label) is None:
-                self._awardlines[bl.awardee_label] = awardline_shop(
-                    awardee_label=bl.awardee_label,
+            if self._awardlines.get(bl.awardee_title) is None:
+                self._awardlines[bl.awardee_title] = awardline_shop(
+                    awardee_title=bl.awardee_title,
                     _fund_give=0,
                     _fund_take=0,
                 )
 
-            self._awardlines[bl.awardee_label].add_fund_give_take(
+            self._awardlines[bl.awardee_title].add_fund_give_take(
                 fund_give=bl._fund_give, fund_take=bl._fund_take
             )
 
     def set_awardheirs_fund_give_fund_take(self):
         give_ledger = {}
         take_ledger = {}
-        for x_awardee_label, x_awardheir in self._awardheirs.items():
-            give_ledger[x_awardee_label] = x_awardheir.give_force
-            take_ledger[x_awardee_label] = x_awardheir.take_force
+        for x_awardee_title, x_awardheir in self._awardheirs.items():
+            give_ledger[x_awardee_title] = x_awardheir.give_force
+            take_ledger[x_awardee_title] = x_awardheir.take_force
         x_fund_share = self.get_fund_share()
         give_allot = allot_scale(give_ledger, x_fund_share, self.fund_coin)
         take_allot = allot_scale(take_ledger, x_fund_share, self.fund_coin)
-        for x_awardee_label, x_awardheir in self._awardheirs.items():
-            x_awardheir._fund_give = give_allot.get(x_awardee_label)
-            x_awardheir._fund_take = take_allot.get(x_awardee_label)
+        for x_awardee_title, x_awardheir in self._awardheirs.items():
+            x_awardheir._fund_give = give_allot.get(x_awardee_title)
+            x_awardheir._fund_take = take_allot.get(x_awardee_title)
 
     def clear_awardlines(self):
         self._awardlines = {}
@@ -608,7 +608,7 @@ class IdeaUnit:
         if idea_attr.awardlink is not None:
             self.set_awardlink(awardlink=idea_attr.awardlink)
         if idea_attr.awardlink_del is not None:
-            self.del_awardlink(awardee_label=idea_attr.awardlink_del)
+            self.del_awardlink(awardee_title=idea_attr.awardlink_del)
         if idea_attr.is_expanded is not None:
             self._is_expanded = idea_attr.is_expanded
         if idea_attr.pledge is not None:
@@ -741,19 +741,19 @@ class IdeaUnit:
         return sum(x_kid.mass for x_kid in self._kids.values())
 
     def set_awardlink(self, awardlink: AwardLink):
-        self.awardlinks[awardlink.awardee_label] = awardlink
+        self.awardlinks[awardlink.awardee_title] = awardlink
 
-    def get_awardlink(self, awardee_label: GroupLabel) -> AwardLink:
-        return self.awardlinks.get(awardee_label)
+    def get_awardlink(self, awardee_title: GroupTitle) -> AwardLink:
+        return self.awardlinks.get(awardee_title)
 
-    def del_awardlink(self, awardee_label: GroupLabel):
+    def del_awardlink(self, awardee_title: GroupTitle):
         try:
-            self.awardlinks.pop(awardee_label)
+            self.awardlinks.pop(awardee_title)
         except KeyError as e:
-            raise (f"Cannot delete awardlink '{awardee_label}'.") from e
+            raise (f"Cannot delete awardlink '{awardee_title}'.") from e
 
-    def awardlink_exists(self, x_awardee_label: GroupLabel) -> bool:
-        return self.awardlinks.get(x_awardee_label) != None
+    def awardlink_exists(self, x_awardee_title: GroupTitle) -> bool:
+        return self.awardlinks.get(x_awardee_title) != None
 
     def set_reasonunit(self, reason: ReasonUnit):
         reason.bridge = self.bridge
@@ -773,7 +773,7 @@ class IdeaUnit:
     def set_active_attrs(
         self,
         tree_traverse_count: int,
-        bud_groupunits: dict[GroupLabel, GroupUnit] = None,
+        bud_groupunits: dict[GroupTitle, GroupUnit] = None,
         bud_owner_name: AcctName = None,
     ):
         prev_to_now_active = deepcopy(self._active)
@@ -793,7 +793,7 @@ class IdeaUnit:
         return any(x_reasonheir._task for x_reasonheir in self._reasonheirs.values())
 
     def _create_active_bool(
-        self, bud_groupunits: dict[GroupLabel, GroupUnit], bud_owner_name: AcctName
+        self, bud_groupunits: dict[GroupTitle, GroupUnit], bud_owner_name: AcctName
     ) -> bool:
         self.set_reasonheirs_status()
         active_bool = self._are_all_reasonheir_active_true()
@@ -878,14 +878,14 @@ class IdeaUnit:
             rcontext: reason.get_dict() for rcontext, reason in self.reasonunits.items()
         }
 
-    def get_kids_dict(self) -> dict[GroupLabel,]:
+    def get_kids_dict(self) -> dict[GroupTitle,]:
         return {c_way: kid.get_dict() for c_way, kid in self._kids.items()}
 
-    def get_awardlinks_dict(self) -> dict[GroupLabel, dict]:
+    def get_awardlinks_dict(self) -> dict[GroupTitle, dict]:
         x_awardlinks = self.awardlinks.items()
         return {
-            x_awardee_label: awardlink.get_dict()
-            for x_awardee_label, awardlink in x_awardlinks
+            x_awardee_title: awardlink.get_dict()
+            for x_awardee_title, awardlink in x_awardlinks
         }
 
     def is_kidless(self) -> bool:
@@ -962,7 +962,7 @@ class IdeaUnit:
     def set_laborheir(
         self,
         parent_laborheir: LaborHeir,
-        bud_groupunits: dict[GroupLabel, GroupUnit],
+        bud_groupunits: dict[GroupTitle, GroupUnit],
     ):
         self._laborheir = laborheir_shop()
         self._laborheir.set_laborlinks(
@@ -981,9 +981,9 @@ def ideaunit_shop(
     parent_way: WayStr = None,
     _kids: dict = None,
     mass: int = 1,
-    awardlinks: dict[GroupLabel, AwardLink] = None,
-    _awardheirs: dict[GroupLabel, AwardHeir] = None,  # Calculated field
-    _awardlines: dict[GroupLabel, AwardLink] = None,  # Calculated field
+    awardlinks: dict[GroupTitle, AwardLink] = None,
+    _awardheirs: dict[GroupTitle, AwardHeir] = None,  # Calculated field
+    _awardlines: dict[GroupTitle, AwardLink] = None,  # Calculated field
     reasonunits: dict[WayStr, ReasonUnit] = None,
     _reasonheirs: dict[WayStr, ReasonHeir] = None,  # Calculated field
     laborunit: LaborUnit = None,

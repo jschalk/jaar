@@ -66,11 +66,11 @@ class YawStr(str):
     pass
 
 
-class LabelStr(str):
-    """If a LabelStr contains bridges it represents a group otherwise it's a single member group of an AcctName."""
+class TitleStr(str):
+    """If a TitleStr contains bridges it represents a group otherwise it's a single member group of an AcctName."""
 
 
-class GroupLabel(LabelStr):  # Created to help track the concept
+class GroupTitle(TitleStr):  # Created to help track the concept
     pass
 
 

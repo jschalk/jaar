@@ -5,7 +5,7 @@ from src.a05_idea_logic.idea import ideaunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
-    group_label_str,
+    group_title_str,
     idea_way_str,
     mass_str,
     pledge_str,
@@ -116,28 +116,28 @@ def test_create_creed_df_Arg_creed_format_00020_bud_acct_membership_v0_0_0():
     assert membership_dataframe.loc[0, fisc_word_str()] == accord_fisc_word
     assert membership_dataframe.loc[0, owner_name_str()] == sue_budunit.owner_name
     assert membership_dataframe.loc[0, acct_name_str()] == bob_str
-    assert membership_dataframe.loc[0, group_label_str()] == iowa_str
+    assert membership_dataframe.loc[0, group_title_str()] == iowa_str
     assert membership_dataframe.loc[0, credit_vote_str()] == bob_iowa_credit_w
     assert membership_dataframe.loc[0, debtit_vote_str()] == bob_iowa_debtit_w
 
     assert membership_dataframe.loc[3, fisc_word_str()] == accord_fisc_word
     assert membership_dataframe.loc[3, owner_name_str()] == sue_budunit.owner_name
     assert membership_dataframe.loc[3, acct_name_str()] == sue_str
-    assert membership_dataframe.loc[3, group_label_str()] == iowa_str
+    assert membership_dataframe.loc[3, group_title_str()] == iowa_str
     assert membership_dataframe.loc[3, credit_vote_str()] == sue_iowa_credit_w
     assert membership_dataframe.loc[3, debtit_vote_str()] == sue_iowa_debtit_w
 
     assert membership_dataframe.loc[4, fisc_word_str()] == accord_fisc_word
     assert membership_dataframe.loc[4, owner_name_str()] == sue_budunit.owner_name
     assert membership_dataframe.loc[4, acct_name_str()] == sue_str
-    assert membership_dataframe.loc[4, group_label_str()] == sue_str
+    assert membership_dataframe.loc[4, group_title_str()] == sue_str
     assert membership_dataframe.loc[4, credit_vote_str()] == 1
     assert membership_dataframe.loc[4, debtit_vote_str()] == 1
 
     assert membership_dataframe.loc[7, fisc_word_str()] == accord_fisc_word
     assert membership_dataframe.loc[7, owner_name_str()] == sue_budunit.owner_name
     assert membership_dataframe.loc[7, acct_name_str()] == yao_str
-    assert membership_dataframe.loc[7, group_label_str()] == ohio_str
+    assert membership_dataframe.loc[7, group_title_str()] == ohio_str
     assert membership_dataframe.loc[7, credit_vote_str()] == yao_ohio_credit_w
     assert membership_dataframe.loc[7, debtit_vote_str()] == yao_ohio_debtit_w
     assert len(membership_dataframe) == 10

@@ -27,13 +27,13 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
     acct_name_str,
-    awardee_label_str,
+    awardee_title_str,
     rcontext_str,
     fcontext_str,
-    group_label_str,
+    group_title_str,
     pbranch_str,
     idea_way_str,
-    labor_label_str,
+    labor_title_str,
     healer_name_str,
 )
 
@@ -66,7 +66,7 @@ def test_bud_acct_membership_exists_ReturnsObj():
     yao_str = "Yao"
     swim_str = ";swim"
     sue_bud = budunit_shop("Sue")
-    jkeys = {acct_name_str(): yao_str, group_label_str(): swim_str}
+    jkeys = {acct_name_str(): yao_str, group_title_str(): swim_str}
 
     # WHEN / THEN
     assert not bud_acct_membership_exists(None, {})
@@ -141,9 +141,9 @@ def test_bud_idea_awardlink_exists_ReturnsObj():
     root_way = to_way(sue_bud.fisc_word)
     swim_str = "Swim"
     root_way = to_way(sue_bud.fisc_word)
-    root_jkeys = {idea_way_str(): root_way, awardee_label_str(): swim_str}
-    casa_jkeys = {idea_way_str(): casa_way, awardee_label_str(): swim_str}
-    clean_jkeys = {idea_way_str(): clean_way, awardee_label_str(): swim_str}
+    root_jkeys = {idea_way_str(): root_way, awardee_title_str(): swim_str}
+    casa_jkeys = {idea_way_str(): casa_way, awardee_title_str(): swim_str}
+    clean_jkeys = {idea_way_str(): clean_way, awardee_title_str(): swim_str}
 
     # WHEN / THEN
     assert not bud_idea_awardlink_exists(None, {})
@@ -256,9 +256,9 @@ def test_bud_idea_laborlink_exists_ReturnsObj():
     clean_way = sue_bud.make_way(casa_way, clean_str)
     root_way = to_way(sue_bud.fisc_word)
     swim_str = "Swim"
-    root_jkeys = {idea_way_str(): root_way, labor_label_str(): swim_str}
-    casa_jkeys = {idea_way_str(): casa_way, labor_label_str(): swim_str}
-    clean_jkeys = {idea_way_str(): clean_way, labor_label_str(): swim_str}
+    root_jkeys = {idea_way_str(): root_way, labor_title_str(): swim_str}
+    casa_jkeys = {idea_way_str(): casa_way, labor_title_str(): swim_str}
+    clean_jkeys = {idea_way_str(): clean_way, labor_title_str(): swim_str}
 
     # WHEN / THEN
     assert not bud_idea_laborlink_exists(None, {})
@@ -366,7 +366,7 @@ def test_bud_attr_exists_ReturnsObj_bud_acct_membership():
     yao_str = "Yao"
     swim_str = ";swim"
     sue_bud = budunit_shop("Sue")
-    x_jkeys = {acct_name_str(): yao_str, group_label_str(): swim_str}
+    x_jkeys = {acct_name_str(): yao_str, group_title_str(): swim_str}
     x_dimen = bud_acct_membership_str()
 
     # WHEN / THEN
@@ -443,9 +443,9 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_awardlink():
     root_way = to_way(sue_bud.fisc_word)
     swim_str = "Swim"
     x_dimen = bud_idea_awardlink_str()
-    root_jkeys = {idea_way_str(): root_way, awardee_label_str(): swim_str}
-    casa_jkeys = {idea_way_str(): casa_way, awardee_label_str(): swim_str}
-    clean_jkeys = {idea_way_str(): clean_way, awardee_label_str(): swim_str}
+    root_jkeys = {idea_way_str(): root_way, awardee_title_str(): swim_str}
+    casa_jkeys = {idea_way_str(): casa_way, awardee_title_str(): swim_str}
+    clean_jkeys = {idea_way_str(): clean_way, awardee_title_str(): swim_str}
 
     # WHEN / THEN
     assert not bud_attr_exists(x_dimen, None, {})
@@ -558,9 +558,9 @@ def test_bud_attr_exists_ReturnsObj_bud_idea_laborlink():
     root_way = to_way(sue_bud.fisc_word)
     swim_str = "Swim"
     x_dimen = bud_idea_laborlink_str()
-    root_jkeys = {idea_way_str(): root_way, labor_label_str(): swim_str}
-    casa_jkeys = {idea_way_str(): casa_way, labor_label_str(): swim_str}
-    clean_jkeys = {idea_way_str(): clean_way, labor_label_str(): swim_str}
+    root_jkeys = {idea_way_str(): root_way, labor_title_str(): swim_str}
+    casa_jkeys = {idea_way_str(): casa_way, labor_title_str(): swim_str}
+    clean_jkeys = {idea_way_str(): clean_way, labor_title_str(): swim_str}
 
     # WHEN / THEN
     assert not bud_attr_exists(x_dimen, None, {})

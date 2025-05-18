@@ -47,8 +47,8 @@ def type_NameStr_str() -> str:
     return "NameStr"
 
 
-def type_LabelStr_str() -> str:
-    return "LabelStr"
+def type_TitleStr_str() -> str:
+    return "TitleStr"
 
 
 def type_WayStr_str() -> str:
@@ -91,8 +91,8 @@ def acct_name_str() -> str:
     return "acct_name"
 
 
-def awardee_label_str() -> str:
-    return "awardee_label"
+def awardee_title_str() -> str:
+    return "awardee_title"
 
 
 def give_force_str() -> str:
@@ -103,12 +103,12 @@ def take_force_str() -> str:
     return "take_force"
 
 
-def group_label_str() -> str:
-    return "group_label"
+def group_title_str() -> str:
+    return "group_title"
 
 
-def labor_label_str() -> str:
-    return "labor_label"
+def labor_title_str() -> str:
+    return "labor_title"
 
 
 def healer_name_str() -> str:

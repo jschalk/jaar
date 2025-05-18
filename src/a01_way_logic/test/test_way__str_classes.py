@@ -1,13 +1,13 @@
 from src.a01_way_logic.way import (
     WordStr,
     NameStr,
-    LabelStr,
+    TitleStr,
     HealerName,
     OwnerName,
     AcctName,
     WayStr,
     YawStr,
-    GroupLabel,
+    GroupTitle,
     default_bridge_if_None,
     WorldID,
     TimeLineWord,
@@ -81,21 +81,21 @@ def test_AcctName_exists():
     assert inspect_getdoc(bob_acct_name) == doc_str
 
 
-def test_LabelStr_exists():
+def test_TitleStr_exists():
     # ESTABLISH
     bob_str = "Bob"
     # WHEN
-    bob_namestr = LabelStr(bob_str)
+    bob_namestr = TitleStr(bob_str)
     # THEN
     assert bob_namestr == bob_str
-    doc_str = """If a LabelStr contains bridges it represents a group otherwise it's a single member group of an AcctName."""
+    doc_str = """If a TitleStr contains bridges it represents a group otherwise it's a single member group of an AcctName."""
     assert inspect_getdoc(bob_namestr) == doc_str
 
 
-def test_GroupLabel_exists():
-    bikers_group_label = GroupLabel(";bikers")
-    assert bikers_group_label is not None
-    assert str(type(bikers_group_label)).find("src.a01_way_logic.way.GroupLabel") > 0
+def test_GroupTitle_exists():
+    bikers_group_title = GroupTitle(";bikers")
+    assert bikers_group_title is not None
+    assert str(type(bikers_group_title)).find("src.a01_way_logic.way.GroupTitle") > 0
 
 
 def test_WordStr_exists():

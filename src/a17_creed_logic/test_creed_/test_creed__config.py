@@ -22,7 +22,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_idea_factunit_str,
     acct_name_str,
     addin_str,
-    awardee_label_str,
+    awardee_title_str,
     rcontext_str,
     rcontext_idea_active_requisite_str,
     begin_str,
@@ -31,11 +31,11 @@ from src.a06_bud_logic._utils.str_a06 import (
     face_name_str,
     fcontext_str,
     fbranch_str,
-    group_label_str,
+    group_title_str,
     healer_name_str,
     idea_way_str,
     numor_str,
-    labor_label_str,
+    labor_title_str,
     close_str,
     credit_belief_str,
     debtit_belief_str,
@@ -118,11 +118,11 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     inx_way_str,
     otx_name_str,
     inx_name_str,
-    otx_label_str,
-    inx_label_str,
+    otx_title_str,
+    inx_title_str,
     map_otx2inx_str,
     pidgin_name_str,
-    pidgin_label_str,
+    pidgin_title_str,
     pidgin_word_str,
     pidgin_way_str,
 )
@@ -265,12 +265,12 @@ def test_get_creed_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[39] == "acct_name_ERASE"
     assert table_sorting_priority[40] == "acct_name_ERASE_otx"
     assert table_sorting_priority[41] == "acct_name_ERASE_inx"
-    assert table_sorting_priority[42] == "group_label"
-    assert table_sorting_priority[43] == "group_label_otx"
-    assert table_sorting_priority[44] == "group_label_inx"
-    assert table_sorting_priority[45] == "group_label_ERASE"
-    assert table_sorting_priority[46] == "group_label_ERASE_otx"
-    assert table_sorting_priority[47] == "group_label_ERASE_inx"
+    assert table_sorting_priority[42] == "group_title"
+    assert table_sorting_priority[43] == "group_title_otx"
+    assert table_sorting_priority[44] == "group_title_inx"
+    assert table_sorting_priority[45] == "group_title_ERASE"
+    assert table_sorting_priority[46] == "group_title_ERASE_otx"
+    assert table_sorting_priority[47] == "group_title_ERASE_inx"
     assert table_sorting_priority[48] == "idea_way"
     assert table_sorting_priority[49] == "idea_way_otx"
     assert table_sorting_priority[50] == "idea_way_inx"
@@ -298,18 +298,18 @@ def test_get_creed_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[72] == "fbranch"
     assert table_sorting_priority[73] == "fbranch_otx"
     assert table_sorting_priority[74] == "fbranch_inx"
-    assert table_sorting_priority[75] == "labor_label"
-    assert table_sorting_priority[76] == "labor_label_otx"
-    assert table_sorting_priority[77] == "labor_label_inx"
-    assert table_sorting_priority[78] == "labor_label_ERASE"
-    assert table_sorting_priority[79] == "labor_label_ERASE_otx"
-    assert table_sorting_priority[80] == "labor_label_ERASE_inx"
-    assert table_sorting_priority[81] == "awardee_label"
-    assert table_sorting_priority[82] == "awardee_label_otx"
-    assert table_sorting_priority[83] == "awardee_label_inx"
-    assert table_sorting_priority[84] == "awardee_label_ERASE"
-    assert table_sorting_priority[85] == "awardee_label_ERASE_otx"
-    assert table_sorting_priority[86] == "awardee_label_ERASE_inx"
+    assert table_sorting_priority[75] == "labor_title"
+    assert table_sorting_priority[76] == "labor_title_otx"
+    assert table_sorting_priority[77] == "labor_title_inx"
+    assert table_sorting_priority[78] == "labor_title_ERASE"
+    assert table_sorting_priority[79] == "labor_title_ERASE_otx"
+    assert table_sorting_priority[80] == "labor_title_ERASE_inx"
+    assert table_sorting_priority[81] == "awardee_title"
+    assert table_sorting_priority[82] == "awardee_title_otx"
+    assert table_sorting_priority[83] == "awardee_title_inx"
+    assert table_sorting_priority[84] == "awardee_title_ERASE"
+    assert table_sorting_priority[85] == "awardee_title_ERASE_otx"
+    assert table_sorting_priority[86] == "awardee_title_ERASE_inx"
     assert table_sorting_priority[87] == "healer_name"
     assert table_sorting_priority[88] == "healer_name_otx"
     assert table_sorting_priority[89] == "healer_name_inx"
@@ -356,8 +356,8 @@ def test_get_creed_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[130] == "inx_way"
     assert table_sorting_priority[131] == "otx_name"
     assert table_sorting_priority[132] == "inx_name"
-    assert table_sorting_priority[133] == "otx_label"
-    assert table_sorting_priority[134] == "inx_label"
+    assert table_sorting_priority[133] == "otx_title"
+    assert table_sorting_priority[134] == "inx_title"
     assert table_sorting_priority[135] == "otx_bridge"
     assert table_sorting_priority[136] == "inx_bridge"
     assert table_sorting_priority[137] == "bridge"
@@ -441,13 +441,13 @@ def test_get_creed_sqlite_types_ReturnsObj():
     assert sqlite_types.get(fisc_word_str()) == "TEXT"
     assert sqlite_types.get(owner_name_str()) == "TEXT"
     assert sqlite_types.get(acct_name_str()) == "TEXT"
-    assert sqlite_types.get(group_label_str()) == "TEXT"
+    assert sqlite_types.get(group_title_str()) == "TEXT"
     assert sqlite_types.get(idea_way_str()) == "TEXT"
     assert sqlite_types.get(rcontext_str()) == "TEXT"
     assert sqlite_types.get("pbranch") == "TEXT"
     assert sqlite_types.get("fbranch") == "TEXT"
-    assert sqlite_types.get(labor_label_str()) == "TEXT"
-    assert sqlite_types.get(awardee_label_str()) == "TEXT"
+    assert sqlite_types.get(labor_title_str()) == "TEXT"
+    assert sqlite_types.get(awardee_title_str()) == "TEXT"
     assert sqlite_types.get(healer_name_str()) == "TEXT"
     assert sqlite_types.get(offi_time_str()) == "INTEGER"
     assert sqlite_types.get(deal_time_str()) == "INTEGER"
@@ -558,7 +558,7 @@ def test_get_creed_config_dict_ReturnsObj():
     assert bud_ideaunit_str() in creed_config_dimens
     assert budunit_str() in creed_config_dimens
     assert pidgin_name_str() in creed_config_dimens
-    assert pidgin_label_str() in creed_config_dimens
+    assert pidgin_title_str() in creed_config_dimens
     assert pidgin_word_str() in creed_config_dimens
     assert pidgin_way_str() in creed_config_dimens
     assert get_bud_dimens().issubset(creed_config_dimens)
@@ -598,7 +598,7 @@ def _validate_creed_config(x_creed_config: dict):
             fisc_timeline_weekday_str(),
             fiscunit_str(),
             map_otx2inx_str(),
-            pidgin_label_str(),
+            pidgin_title_str(),
             pidgin_name_str(),
             pidgin_word_str(),
             pidgin_way_str(),
@@ -846,7 +846,7 @@ def test_get_creed_config_dict_ReturnsObj_build_order():
     # ESTABLISH / WHEN
     bo = build_order_str()
     # set_creed_config_json(pidgin_name_str(), 0)
-    # set_creed_config_json(pidgin_label_str(), 1)
+    # set_creed_config_json(pidgin_title_str(), 1)
     # set_creed_config_json(pidgin_word_str(), 2)
     # set_creed_config_json(pidgin_way_str(), 3)
     # set_creed_config_json(fiscunit_str(), 5)
@@ -870,7 +870,7 @@ def test_get_creed_config_dict_ReturnsObj_build_order():
 
     # THEN
     assert x_creed_config.get(pidgin_name_str()).get(bo) == 0
-    assert x_creed_config.get(pidgin_label_str()).get(bo) == 1
+    assert x_creed_config.get(pidgin_title_str()).get(bo) == 1
     assert x_creed_config.get(pidgin_word_str()).get(bo) == 2
     assert x_creed_config.get(pidgin_way_str()).get(bo) == 3
     assert x_creed_config.get(fiscunit_str()).get(bo) == 5

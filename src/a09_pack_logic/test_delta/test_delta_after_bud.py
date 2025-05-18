@@ -15,9 +15,9 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
     acct_name_str,
-    awardee_label_str,
-    group_label_str,
-    labor_label_str,
+    awardee_title_str,
+    group_title_str,
+    labor_title_str,
     healer_name_str,
     idea_way_str,
     rcontext_idea_active_requisite_str,
@@ -222,17 +222,17 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_membership():
     yao_acctunit.add_membership(fly_str)
     zia_acctunit.add_membership(fly_str)
     bob_acctunit.add_membership(fly_str)
-    before_group_labels_dict = before_sue_budunit.get_acctunit_group_labels_dict()
-    assert len(before_group_labels_dict.get(run_str)) == 2
-    assert len(before_group_labels_dict.get(fly_str)) == 3
+    before_group_titles_dict = before_sue_budunit.get_acctunit_group_titles_dict()
+    assert len(before_group_titles_dict.get(run_str)) == 2
+    assert len(before_group_titles_dict.get(fly_str)) == 3
 
     # WHEN
     yao_budatom = budatom_shop(bud_acct_membership_str(), atom_delete())
-    yao_budatom.set_jkey(group_label_str(), run_str)
+    yao_budatom.set_jkey(group_title_str(), run_str)
     yao_budatom.set_jkey(acct_name_str(), yao_str)
     # print(f"{yao_budatom=}")
     zia_budatom = budatom_shop(bud_acct_membership_str(), atom_delete())
-    zia_budatom.set_jkey(group_label_str(), fly_str)
+    zia_budatom.set_jkey(group_title_str(), fly_str)
     zia_budatom.set_jkey(acct_name_str(), zia_str)
     # print(f"{zia_budatom=}")
     sue_buddelta = buddelta_shop()
@@ -241,9 +241,9 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_membership():
     after_sue_budunit = sue_buddelta.get_edited_bud(before_sue_budunit)
 
     # THEN
-    after_group_labels_dict = after_sue_budunit.get_acctunit_group_labels_dict()
-    assert len(after_group_labels_dict.get(run_str)) == 1
-    assert len(after_group_labels_dict.get(fly_str)) == 2
+    after_group_titles_dict = after_sue_budunit.get_acctunit_group_titles_dict()
+    assert len(after_group_titles_dict.get(run_str)) == 1
+    assert len(after_group_titles_dict.get(fly_str)) == 2
 
 
 def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_membership():
@@ -259,12 +259,12 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_membership():
     run_str = ";runners"
     zia_acctunit = before_sue_budunit.get_acct(zia_str)
     zia_acctunit.add_membership(run_str)
-    before_group_labels = before_sue_budunit.get_acctunit_group_labels_dict()
-    assert len(before_group_labels.get(run_str)) == 1
+    before_group_titles = before_sue_budunit.get_acctunit_group_titles_dict()
+    assert len(before_group_titles.get(run_str)) == 1
 
     # WHEN
     yao_budatom = budatom_shop(bud_acct_membership_str(), atom_insert())
-    yao_budatom.set_jkey(group_label_str(), run_str)
+    yao_budatom.set_jkey(group_title_str(), run_str)
     yao_budatom.set_jkey(acct_name_str(), yao_str)
     yao_run_credit_vote = 17
     yao_budatom.set_jvalue("credit_vote", yao_run_credit_vote)
@@ -274,8 +274,8 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_membership():
     after_sue_budunit = sue_buddelta.get_edited_bud(before_sue_budunit)
 
     # THEN
-    after_group_labels = after_sue_budunit.get_acctunit_group_labels_dict()
-    assert len(after_group_labels.get(run_str)) == 2
+    after_group_titles = after_sue_budunit.get_acctunit_group_titles_dict()
+    assert len(after_group_titles.get(run_str)) == 2
     after_yao_acctunit = after_sue_budunit.get_acct(yao_str)
     after_yao_run_membership = after_yao_acctunit.get_membership(run_str)
     assert after_yao_run_membership is not None
@@ -298,7 +298,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_membership():
 
     # WHEN
     yao_budatom = budatom_shop(bud_acct_membership_str(), atom_update())
-    yao_budatom.set_jkey(group_label_str(), run_str)
+    yao_budatom.set_jkey(group_title_str(), run_str)
     yao_budatom.set_jkey(acct_name_str(), yao_str)
     new_yao_run_credit_vote = 7
     new_yao_run_debtit_vote = 11
@@ -478,7 +478,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_idea_awardlink():
     # WHEN
     delete_disc_budatom = budatom_shop(bud_idea_awardlink_str(), atom_delete())
     delete_disc_budatom.set_jkey(idea_way_str(), disc_way)
-    delete_disc_budatom.set_jkey(awardee_label_str(), fly_str)
+    delete_disc_budatom.set_jkey(awardee_title_str(), fly_str)
     print(f"{delete_disc_budatom=}")
     sue_buddelta = buddelta_shop()
     sue_buddelta.set_budatom(delete_disc_budatom)
@@ -516,7 +516,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_idea_awardlink():
     x_take_force = 66
     update_disc_budatom = budatom_shop(bud_idea_awardlink_str(), atom_update())
     update_disc_budatom.set_jkey(idea_way_str(), ball_way)
-    update_disc_budatom.set_jkey(awardee_label_str(), run_str)
+    update_disc_budatom.set_jkey(awardee_title_str(), run_str)
     update_disc_budatom.set_jvalue(give_force_str(), x_give_force)
     update_disc_budatom.set_jvalue(take_force_str(), x_take_force)
     # print(f"{update_disc_budatom=}")
@@ -555,7 +555,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_idea_awardlink():
     x_take_force = 66
     update_disc_budatom = budatom_shop(bud_idea_awardlink_str(), atom_insert())
     update_disc_budatom.set_jkey(idea_way_str(), ball_way)
-    update_disc_budatom.set_jkey(awardee_label_str(), run_str)
+    update_disc_budatom.set_jkey(awardee_title_str(), run_str)
     update_disc_budatom.set_jvalue(give_force_str(), x_give_force)
     update_disc_budatom.set_jvalue(take_force_str(), x_take_force)
     # print(f"{update_disc_budatom=}")
@@ -996,7 +996,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_idea_laborlink():
     # WHEN
     update_disc_budatom = budatom_shop(bud_idea_laborlink_str(), atom_insert())
     update_disc_budatom.set_jkey(idea_way_str(), ball_way)
-    update_disc_budatom.set_jkey(labor_label_str(), yao_str)
+    update_disc_budatom.set_jkey(labor_title_str(), yao_str)
     sue_buddelta = buddelta_shop()
     sue_buddelta.set_budatom(update_disc_budatom)
     after_sue_au = sue_buddelta.get_edited_bud(before_sue_au)
@@ -1026,7 +1026,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_idea_laborlink():
     # WHEN
     update_disc_budatom = budatom_shop(bud_idea_laborlink_str(), atom_delete())
     update_disc_budatom.set_jkey(idea_way_str(), ball_way)
-    update_disc_budatom.set_jkey(labor_label_str(), yao_str)
+    update_disc_budatom.set_jkey(labor_title_str(), yao_str)
     sue_buddelta = buddelta_shop()
     sue_buddelta.set_budatom(update_disc_budatom)
     print(f"{before_sue_au.get_idea_obj(ball_way).laborunit=}")

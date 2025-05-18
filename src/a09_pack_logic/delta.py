@@ -6,7 +6,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_all_nondictionary_objs,
     get_0_if_None,
 )
-from src.a01_way_logic.way import WayStr, LabelStr
+from src.a01_way_logic.way import WayStr, TitleStr
 from src.a04_reason_logic.reason_idea import FactUnit, ReasonUnit
 from src.a03_group_logic.acct import MemberShip, AcctName, AcctUnit
 from src.a03_group_logic.group import MemberShip
@@ -180,10 +180,10 @@ class BudDelta:
             if insert_acctunit.debtit_belief is not None:
                 x_budatom.set_jvalue("debtit_belief", insert_acctunit.debtit_belief)
             self.set_budatom(x_budatom)
-            all_group_labels = set(insert_acctunit._memberships.keys())
+            all_group_titles = set(insert_acctunit._memberships.keys())
             self.add_budatom_memberships_inserts(
                 after_acctunit=insert_acctunit,
-                insert_membership_group_labels=all_group_labels,
+                insert_membership_group_titles=all_group_titles,
             )
 
     def add_budatom_acctunit_updates(
@@ -210,45 +210,45 @@ class BudDelta:
             x_budatom.set_jkey("acct_name", delete_acct_name)
             self.set_budatom(x_budatom)
             delete_acctunit = before_bud.get_acct(delete_acct_name)
-            non_mirror_group_labels = {
-                x_group_label
-                for x_group_label in delete_acctunit._memberships.keys()
-                if x_group_label != delete_acct_name
+            non_mirror_group_titles = {
+                x_group_title
+                for x_group_title in delete_acctunit._memberships.keys()
+                if x_group_title != delete_acct_name
             }
             self.add_budatom_memberships_delete(
-                delete_acct_name, non_mirror_group_labels
+                delete_acct_name, non_mirror_group_titles
             )
 
     def add_budatom_acctunit_update_memberships(
         self, after_acctunit: AcctUnit, before_acctunit: AcctUnit
     ):
-        # before_non_mirror_group_labels
-        before_group_labels = {
-            x_group_label
-            for x_group_label in before_acctunit._memberships.keys()
-            if x_group_label != before_acctunit.acct_name
+        # before_non_mirror_group_titles
+        before_group_titles = {
+            x_group_title
+            for x_group_title in before_acctunit._memberships.keys()
+            if x_group_title != before_acctunit.acct_name
         }
-        # after_non_mirror_group_labels
-        after_group_labels = {
-            x_group_label
-            for x_group_label in after_acctunit._memberships.keys()
-            if x_group_label != after_acctunit.acct_name
+        # after_non_mirror_group_titles
+        after_group_titles = {
+            x_group_title
+            for x_group_title in after_acctunit._memberships.keys()
+            if x_group_title != after_acctunit.acct_name
         }
 
         self.add_budatom_memberships_inserts(
             after_acctunit=after_acctunit,
-            insert_membership_group_labels=after_group_labels.difference(
-                before_group_labels
+            insert_membership_group_titles=after_group_titles.difference(
+                before_group_titles
             ),
         )
 
         self.add_budatom_memberships_delete(
             before_acct_name=after_acctunit.acct_name,
-            before_group_labels=before_group_labels.difference(after_group_labels),
+            before_group_titles=before_group_titles.difference(after_group_titles),
         )
 
-        update_group_labels = before_group_labels.intersection(after_group_labels)
-        for update_acct_name in update_group_labels:
+        update_group_titles = before_group_titles.intersection(after_group_titles)
+        for update_acct_name in update_group_titles:
             before_membership = before_acctunit.get_membership(update_acct_name)
             after_membership = after_acctunit.get_membership(update_acct_name)
             if jvalues_different(
@@ -263,14 +263,14 @@ class BudDelta:
     def add_budatom_memberships_inserts(
         self,
         after_acctunit: AcctUnit,
-        insert_membership_group_labels: list[LabelStr],
+        insert_membership_group_titles: list[TitleStr],
     ):
         after_acct_name = after_acctunit.acct_name
-        for insert_group_label in insert_membership_group_labels:
-            after_membership = after_acctunit.get_membership(insert_group_label)
+        for insert_group_title in insert_membership_group_titles:
+            after_membership = after_acctunit.get_membership(insert_group_title)
             x_budatom = budatom_shop("bud_acct_membership", atom_insert())
             x_budatom.set_jkey("acct_name", after_acct_name)
-            x_budatom.set_jkey("group_label", after_membership.group_label)
+            x_budatom.set_jkey("group_title", after_membership.group_title)
             if after_membership.credit_vote is not None:
                 x_budatom.set_jvalue("credit_vote", after_membership.credit_vote)
             if after_membership.debtit_vote is not None:
@@ -285,7 +285,7 @@ class BudDelta:
     ):
         x_budatom = budatom_shop("bud_acct_membership", atom_update())
         x_budatom.set_jkey("acct_name", acct_name)
-        x_budatom.set_jkey("group_label", after_membership.group_label)
+        x_budatom.set_jkey("group_title", after_membership.group_title)
         if after_membership.credit_vote != before_membership.credit_vote:
             x_budatom.set_jvalue("credit_vote", after_membership.credit_vote)
         if after_membership.debtit_vote != before_membership.debtit_vote:
@@ -293,12 +293,12 @@ class BudDelta:
         self.set_budatom(x_budatom)
 
     def add_budatom_memberships_delete(
-        self, before_acct_name: AcctName, before_group_labels: LabelStr
+        self, before_acct_name: AcctName, before_group_titles: TitleStr
     ):
-        for delete_group_label in before_group_labels:
+        for delete_group_title in before_group_titles:
             x_budatom = budatom_shop("bud_acct_membership", atom_delete())
             x_budatom.set_jkey("acct_name", before_acct_name)
-            x_budatom.set_jkey("group_label", delete_group_label)
+            x_budatom.set_jkey("group_title", delete_group_title)
             self.set_budatom(x_budatom)
 
     def add_budatoms_ideas(self, before_bud: BudUnit, after_bud: BudUnit):
@@ -340,7 +340,7 @@ class BudDelta:
             )
             self.add_budatom_idea_awardlink_inserts(
                 after_ideaunit=insert_ideaunit,
-                insert_awardlink_awardee_labels=set(insert_ideaunit.awardlinks.keys()),
+                insert_awardlink_awardee_titles=set(insert_ideaunit.awardlinks.keys()),
             )
             self.add_budatom_idea_reasonunit_inserts(
                 after_ideaunit=insert_ideaunit,
@@ -348,7 +348,7 @@ class BudDelta:
             )
             self.add_budatom_idea_laborlink_insert(
                 idea_way=insert_idea_way,
-                insert_laborlink_labor_labels=insert_ideaunit.laborunit._laborlinks,
+                insert_laborlink_labor_titles=insert_ideaunit.laborunit._laborlinks,
             )
             self.add_budatom_idea_healerlink_insert(
                 idea_way=insert_idea_way,
@@ -406,25 +406,25 @@ class BudDelta:
             )
 
             # insert / update / delete awardunits
-            before_awardlinks_awardee_labels = set(before_ideaunit.awardlinks.keys())
-            after_awardlinks_awardee_labels = set(after_ideaunit.awardlinks.keys())
+            before_awardlinks_awardee_titles = set(before_ideaunit.awardlinks.keys())
+            after_awardlinks_awardee_titles = set(after_ideaunit.awardlinks.keys())
             self.add_budatom_idea_awardlink_inserts(
                 after_ideaunit=after_ideaunit,
-                insert_awardlink_awardee_labels=after_awardlinks_awardee_labels.difference(
-                    before_awardlinks_awardee_labels
+                insert_awardlink_awardee_titles=after_awardlinks_awardee_titles.difference(
+                    before_awardlinks_awardee_titles
                 ),
             )
             self.add_budatom_idea_awardlink_updates(
                 before_ideaunit=before_ideaunit,
                 after_ideaunit=after_ideaunit,
-                update_awardlink_awardee_labels=before_awardlinks_awardee_labels.intersection(
-                    after_awardlinks_awardee_labels
+                update_awardlink_awardee_titles=before_awardlinks_awardee_titles.intersection(
+                    after_awardlinks_awardee_titles
                 ),
             )
             self.add_budatom_idea_awardlink_deletes(
                 idea_way=idea_way,
-                delete_awardlink_awardee_labels=before_awardlinks_awardee_labels.difference(
-                    after_awardlinks_awardee_labels
+                delete_awardlink_awardee_titles=before_awardlinks_awardee_titles.difference(
+                    after_awardlinks_awardee_titles
                 ),
             )
 
@@ -456,18 +456,18 @@ class BudDelta:
             # update reasonunits_permises delete_premise
 
             # insert / update / delete laborlinks
-            before_laborlinks_labor_labels = set(before_ideaunit.laborunit._laborlinks)
-            after_laborlinks_labor_labels = set(after_ideaunit.laborunit._laborlinks)
+            before_laborlinks_labor_titles = set(before_ideaunit.laborunit._laborlinks)
+            after_laborlinks_labor_titles = set(after_ideaunit.laborunit._laborlinks)
             self.add_budatom_idea_laborlink_insert(
                 idea_way=idea_way,
-                insert_laborlink_labor_labels=after_laborlinks_labor_labels.difference(
-                    before_laborlinks_labor_labels
+                insert_laborlink_labor_titles=after_laborlinks_labor_titles.difference(
+                    before_laborlinks_labor_titles
                 ),
             )
             self.add_budatom_idea_laborlink_deletes(
                 idea_way=idea_way,
-                delete_laborlink_labor_labels=before_laborlinks_labor_labels.difference(
-                    after_laborlinks_labor_labels
+                delete_laborlink_labor_titles=before_laborlinks_labor_titles.difference(
+                    after_laborlinks_labor_titles
                 ),
             )
 
@@ -505,7 +505,7 @@ class BudDelta:
 
             self.add_budatom_idea_awardlink_deletes(
                 idea_way=delete_idea_way,
-                delete_awardlink_awardee_labels=set(delete_ideaunit.awardlinks.keys()),
+                delete_awardlink_awardee_titles=set(delete_ideaunit.awardlinks.keys()),
             )
             self.add_budatom_idea_reasonunit_deletes(
                 before_ideaunit=delete_ideaunit,
@@ -513,7 +513,7 @@ class BudDelta:
             )
             self.add_budatom_idea_laborlink_deletes(
                 idea_way=delete_idea_way,
-                delete_laborlink_labor_labels=delete_ideaunit.laborunit._laborlinks,
+                delete_laborlink_labor_titles=delete_ideaunit.laborunit._laborlinks,
             )
             self.add_budatom_idea_healerlink_deletes(
                 idea_way=delete_idea_way,
@@ -672,21 +672,21 @@ class BudDelta:
             self.set_budatom(x_budatom)
 
     def add_budatom_idea_laborlink_insert(
-        self, idea_way: WayStr, insert_laborlink_labor_labels: set
+        self, idea_way: WayStr, insert_laborlink_labor_titles: set
     ):
-        for insert_laborlink_labor_label in insert_laborlink_labor_labels:
+        for insert_laborlink_labor_title in insert_laborlink_labor_titles:
             x_budatom = budatom_shop("bud_idea_laborlink", atom_insert())
             x_budatom.set_jkey("idea_way", idea_way)
-            x_budatom.set_jkey("labor_label", insert_laborlink_labor_label)
+            x_budatom.set_jkey("labor_title", insert_laborlink_labor_title)
             self.set_budatom(x_budatom)
 
     def add_budatom_idea_laborlink_deletes(
-        self, idea_way: WayStr, delete_laborlink_labor_labels: set
+        self, idea_way: WayStr, delete_laborlink_labor_titles: set
     ):
-        for delete_laborlink_labor_label in delete_laborlink_labor_labels:
+        for delete_laborlink_labor_title in delete_laborlink_labor_titles:
             x_budatom = budatom_shop("bud_idea_laborlink", atom_delete())
             x_budatom.set_jkey("idea_way", idea_way)
-            x_budatom.set_jkey("labor_label", delete_laborlink_labor_label)
+            x_budatom.set_jkey("labor_title", delete_laborlink_labor_title)
             self.set_budatom(x_budatom)
 
     def add_budatom_idea_healerlink_insert(
@@ -708,15 +708,15 @@ class BudDelta:
             self.set_budatom(x_budatom)
 
     def add_budatom_idea_awardlink_inserts(
-        self, after_ideaunit: IdeaUnit, insert_awardlink_awardee_labels: set
+        self, after_ideaunit: IdeaUnit, insert_awardlink_awardee_titles: set
     ):
-        for after_awardlink_awardee_label in insert_awardlink_awardee_labels:
+        for after_awardlink_awardee_title in insert_awardlink_awardee_titles:
             after_awardlink = after_ideaunit.awardlinks.get(
-                after_awardlink_awardee_label
+                after_awardlink_awardee_title
             )
             x_budatom = budatom_shop("bud_idea_awardlink", atom_insert())
             x_budatom.set_jkey("idea_way", after_ideaunit.get_idea_way())
-            x_budatom.set_jkey("awardee_label", after_awardlink.awardee_label)
+            x_budatom.set_jkey("awardee_title", after_awardlink.awardee_title)
             x_budatom.set_jvalue("give_force", after_awardlink.give_force)
             x_budatom.set_jvalue("take_force", after_awardlink.take_force)
             self.set_budatom(x_budatom)
@@ -725,21 +725,21 @@ class BudDelta:
         self,
         before_ideaunit: IdeaUnit,
         after_ideaunit: IdeaUnit,
-        update_awardlink_awardee_labels: set,
+        update_awardlink_awardee_titles: set,
     ):
-        for update_awardlink_awardee_label in update_awardlink_awardee_labels:
+        for update_awardlink_awardee_title in update_awardlink_awardee_titles:
             before_awardlink = before_ideaunit.awardlinks.get(
-                update_awardlink_awardee_label
+                update_awardlink_awardee_title
             )
             after_awardlink = after_ideaunit.awardlinks.get(
-                update_awardlink_awardee_label
+                update_awardlink_awardee_title
             )
             if jvalues_different(
                 "bud_idea_awardlink", before_awardlink, after_awardlink
             ):
                 x_budatom = budatom_shop("bud_idea_awardlink", atom_update())
                 x_budatom.set_jkey("idea_way", before_ideaunit.get_idea_way())
-                x_budatom.set_jkey("awardee_label", after_awardlink.awardee_label)
+                x_budatom.set_jkey("awardee_title", after_awardlink.awardee_title)
                 if before_awardlink.give_force != after_awardlink.give_force:
                     x_budatom.set_jvalue("give_force", after_awardlink.give_force)
                 if before_awardlink.take_force != after_awardlink.take_force:
@@ -747,12 +747,12 @@ class BudDelta:
                 self.set_budatom(x_budatom)
 
     def add_budatom_idea_awardlink_deletes(
-        self, idea_way: WayStr, delete_awardlink_awardee_labels: set
+        self, idea_way: WayStr, delete_awardlink_awardee_titles: set
     ):
-        for delete_awardlink_awardee_label in delete_awardlink_awardee_labels:
+        for delete_awardlink_awardee_title in delete_awardlink_awardee_titles:
             x_budatom = budatom_shop("bud_idea_awardlink", atom_delete())
             x_budatom.set_jkey("idea_way", idea_way)
-            x_budatom.set_jkey("awardee_label", delete_awardlink_awardee_label)
+            x_budatom.set_jkey("awardee_title", delete_awardlink_awardee_title)
             self.set_budatom(x_budatom)
 
     def add_budatom_idea_factunit_inserts(

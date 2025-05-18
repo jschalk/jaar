@@ -341,7 +341,7 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
     sue_str = "Sue"
     week_str = "weekdays"
     nation_str = "nation-state"
-    sue_awardlink = awardlink_shop(awardee_label=sue_str)
+    sue_awardlink = awardlink_shop(awardee_title=sue_str)
     sue_bud.add_acctunit(acct_name=sue_str)
     sue_bud.idearoot.set_awardlink(awardlink=sue_awardlink)
     # idea tree has awardlines
@@ -352,7 +352,7 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
 
     # THEN
     assert sue_bud.idearoot._awardheirs.get(sue_str) is not None
-    assert sue_bud.idearoot._awardheirs.get(sue_str).awardee_label == sue_str
+    assert sue_bud.idearoot._awardheirs.get(sue_str).awardee_title == sue_str
     assert sue_bud.idearoot._awardlines != {}
     root_way = to_way(sue_bud.idearoot.idea_word)
     root_idea = sue_bud.get_idea_obj(way=root_way)
@@ -386,7 +386,7 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
     assert round(sue_awardline._fund_give, 15) == default_fund_pool()
     assert round(sue_awardline._fund_take, 15) == default_fund_pool()
     x_awardline = awardline_shop(sue_str, default_fund_pool(), default_fund_pool())
-    assert sue_bud.idearoot._awardlines == {x_awardline.awardee_label: x_awardline}
+    assert sue_bud.idearoot._awardlines == {x_awardline.awardee_title: x_awardline}
 
 
 def test_BudUnit_settle_bud_TreeTraverseSets_awardlines_ToRootIdeaUnitFromNonRootIdeaUnit():
@@ -396,7 +396,7 @@ def test_BudUnit_settle_bud_TreeTraverseSets_awardlines_ToRootIdeaUnitFromNonRoo
     sue_str = "Sue"
     sue_bud.add_acctunit(sue_str)
     casa_way = sue_bud.make_l1_way("casa")
-    sue_bud.get_idea_obj(casa_way).set_awardlink(awardlink_shop(awardee_label=sue_str))
+    sue_bud.get_idea_obj(casa_way).set_awardlink(awardlink_shop(awardee_title=sue_str))
     assert sue_bud.idearoot._awardlines == {}
 
     # WHEN
@@ -406,14 +406,14 @@ def test_BudUnit_settle_bud_TreeTraverseSets_awardlines_ToRootIdeaUnitFromNonRoo
     assert sue_bud.idearoot._awardlines != {}
     print(f"{sue_bud.idearoot._awardlines=}")
     x_awardline = awardline_shop(
-        awardee_label=sue_str,
+        awardee_title=sue_str,
         _fund_give=0.230769231 * default_fund_pool(),
         _fund_take=0.230769231 * default_fund_pool(),
     )
-    assert sue_bud.idearoot._awardlines == {x_awardline.awardee_label: x_awardline}
+    assert sue_bud.idearoot._awardlines == {x_awardline.awardee_title: x_awardline}
     casa_ideaunit = sue_bud.get_idea_obj(casa_way)
     assert casa_ideaunit._awardlines != {}
-    assert casa_ideaunit._awardlines == {x_awardline.awardee_label: x_awardline}
+    assert casa_ideaunit._awardlines == {x_awardline.awardee_title: x_awardline}
 
 
 def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsGroupUnit_fund_give_fund_take():
@@ -434,7 +434,7 @@ def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsGroupUnit_fund_give_fund_t
     x_idearoot.set_awardlink(awardlink=yao_awardlink)
     x_idearoot.set_awardlink(awardlink=zia_awardlink)
     x_idearoot.set_awardlink(awardlink=xio_awardlink)
-    assert len(sue_bud.get_acctunit_group_labels_dict()) == 3
+    assert len(sue_bud.get_acctunit_group_titles_dict()) == 3
 
     # WHEN
     sue_bud.settle_bud()
@@ -461,7 +461,7 @@ def test_BudUnit_settle_bud_WithRootLevelAwardLinkSetsGroupUnit_fund_give_fund_t
     sue_awardlink = awardlink_shop(sue_str, give_force=37)
     x_idearoot.set_awardlink(sue_awardlink)
     assert len(x_idearoot.awardlinks) == 4
-    assert len(sue_bud.get_acctunit_group_labels_dict()) == 4
+    assert len(sue_bud.get_acctunit_group_titles_dict()) == 4
 
     # WHEN
     sue_bud.settle_bud()
@@ -508,7 +508,7 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkSetsGroupUnit_fund_give_fund_take
     swim_idea.set_awardlink(yao_awardlink)
     swim_idea.set_awardlink(zia_awardlink)
     swim_idea.set_awardlink(xio_awardlink)
-    assert len(x_bud.get_acctunit_group_labels_dict()) == 3
+    assert len(x_bud.get_acctunit_group_titles_dict()) == 3
 
     # WHEN
     x_bud.settle_bud()
@@ -554,7 +554,7 @@ def test_BudUnit_settle_bud_CreatesNewGroupUnitAndSets_fund_give_fund_take():
     swim_idea.set_awardlink(yao_awardlink)
     swim_idea.set_awardlink(zia_awardlink)
     swim_idea.set_awardlink(xio_awardlink)
-    assert len(x_bud.get_acctunit_group_labels_dict()) == 2
+    assert len(x_bud.get_acctunit_group_titles_dict()) == 2
 
     # WHEN
     x_bud.settle_bud()
@@ -563,7 +563,7 @@ def test_BudUnit_settle_bud_CreatesNewGroupUnitAndSets_fund_give_fund_take():
     yao_groupunit = x_bud.get_groupunit(yao_str)
     zia_groupunit = x_bud.get_groupunit(zia_str)
     xio_groupunit = x_bud.get_groupunit(xio_str)
-    assert len(x_bud.get_acctunit_group_labels_dict()) != len(x_bud._groupunits)
+    assert len(x_bud.get_acctunit_group_titles_dict()) != len(x_bud._groupunits)
     assert yao_groupunit._fund_give == 0.5 * default_fund_pool()
     assert yao_groupunit._fund_take == 0.75 * default_fund_pool()
     assert zia_groupunit._fund_give == 0.25 * default_fund_pool()
@@ -985,14 +985,14 @@ def test_BudUnit_settle_bud_CreatesNewGroupUnitAndSets_fund_give_fund_take():
     swim_idea.set_awardlink(yao_awardlink)
     swim_idea.set_awardlink(zia_awardlink)
     swim_idea.set_awardlink(xio_awardlink)
-    assert len(bob_bud.get_acctunit_group_labels_dict()) == 2
+    assert len(bob_bud.get_acctunit_group_titles_dict()) == 2
 
     # WHEN
     bob_bud.settle_bud()
 
     # THEN
     xio_groupunit = bob_bud.get_groupunit(xio_str)
-    assert len(bob_bud.get_acctunit_group_labels_dict()) != len(bob_bud._groupunits)
+    assert len(bob_bud.get_acctunit_group_titles_dict()) != len(bob_bud._groupunits)
     assert not bob_bud.acct_exists(xio_str)
     yao_acctunit = bob_bud.get_acct(yao_str)
     zia_acctunit = bob_bud.get_acct(zia_str)
@@ -1127,7 +1127,7 @@ def test_BudUnit_agenda_cred_debt_IsCorrectlySet():
     #     print(f"{idea_way=}")
     # for x_acct in yao_bud.accts.values():
     #     for x_membership in x_acct._memberships.values():
-    #         print(f"{x_membership.group_label=}")
+    #         print(f"{x_membership.group_title=}")
 
     # THEN
     print(f"{yao_bud.get_reason_rcontexts()=}")

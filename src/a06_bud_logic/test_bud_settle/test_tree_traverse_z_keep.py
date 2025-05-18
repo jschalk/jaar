@@ -29,7 +29,7 @@ def test_BudUnit_settle_bud_CorrectlySets_keeps_justified_WhenThereAreNotAny():
     assert sue_bud._keeps_justified
 
 
-def test_BudUnit_settle_bud_CorrectlySets_keeps_justified_WhenSingleIdeaUnit_healerlink_any_group_label_exists_IsTrue():
+def test_BudUnit_settle_bud_CorrectlySets_keeps_justified_WhenSingleIdeaUnit_healerlink_any_group_title_exists_IsTrue():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     sue_bud.set_l1_idea(ideaunit_shop("Texas", healerlink=healerlink_shop({"Yao"})))

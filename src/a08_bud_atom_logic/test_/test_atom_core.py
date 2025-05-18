@@ -6,7 +6,7 @@ from src.a06_bud_logic._utils.str_a06 import (
 )
 from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
-    group_label_str,
+    group_title_str,
     credit_belief_str,
     debtit_belief_str,
 )
@@ -295,7 +295,7 @@ def test_BudAtom_get_nesting_order_args_ReturnsObj_bud_acct_membership():
     sue_str = "Sue"
     iowa_str = ";Iowa"
     sue_insert_budatom = budatom_shop(bud_acct_membership_str(), atom_insert())
-    sue_insert_budatom.set_arg(group_label_str(), iowa_str)
+    sue_insert_budatom.set_arg(group_title_str(), iowa_str)
     sue_insert_budatom.set_arg(acct_name_str(), sue_str)
     print(f"{sue_insert_budatom.jkeys=}")
 

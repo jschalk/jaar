@@ -164,8 +164,8 @@ def insert_job_budlabor(
     x_dict["fisc_word"] = x_objkeysholder.fisc_word
     x_dict["owner_name"] = x_objkeysholder.owner_name
     x_dict["idea_way"] = x_objkeysholder.way
-    for labor_label in sorted(x_laborheir._laborlinks):
-        x_dict["labor_label"] = labor_label
+    for labor_title in sorted(x_laborheir._laborlinks):
+        x_dict["labor_title"] = labor_title
         insert_sqlstr = create_budlabor_metrics_insert_sqlstr(x_dict)
         cursor.execute(insert_sqlstr)
 

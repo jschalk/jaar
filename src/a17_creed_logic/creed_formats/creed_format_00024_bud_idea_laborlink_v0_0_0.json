@@ -15,7 +15,7 @@
         "owner_name": {
             "otx_key": true
         },
-        "labor_label": {
+        "labor_title": {
             "otx_key": true
         }
     },

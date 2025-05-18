@@ -233,7 +233,7 @@ def add_bud_to_br00020_csv(
                 x_bud.fisc_word,
                 x_bud.owner_name,
                 acctunit.acct_name,
-                membership.group_label,
+                membership.group_title,
                 if_none_str(membership.credit_vote),
                 if_none_str(membership.debtit_vote),
             ]
@@ -279,7 +279,7 @@ def add_bud_to_br00022_csv(
                 x_bud.fisc_word,
                 x_bud.owner_name,
                 ideaunit.get_idea_way(),
-                awardlink.awardee_label,
+                awardlink.awardee_title,
                 if_none_str(awardlink.give_force),
                 if_none_str(awardlink.take_force),
             ]
@@ -320,14 +320,14 @@ def add_bud_to_br00024_csv(
     event_int: int = None,
 ) -> str:
     for ideaunit in x_bud._idea_dict.values():
-        for group_label in ideaunit.laborunit._laborlinks:
+        for group_title in ideaunit.laborunit._laborlinks:
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
                 x_bud.fisc_word,
                 x_bud.owner_name,
                 ideaunit.get_idea_way(),
-                group_label,
+                group_title,
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -342,14 +342,14 @@ def add_bud_to_br00025_csv(
     event_int: int = None,
 ) -> str:
     for ideaunit in x_bud._idea_dict.values():
-        for group_label in ideaunit.healerlink._healer_names:
+        for group_title in ideaunit.healerlink._healer_names:
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
                 x_bud.fisc_word,
                 x_bud.owner_name,
                 ideaunit.get_idea_way(),
-                group_label,
+                group_title,
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -500,7 +500,7 @@ def add_budunit_to_stance_csv_strs(
 
 
 def add_to_br00042_csv(x_csv: str, x_pidginunit: PidginUnit, csv_delimiter: str) -> str:
-    for x_otx, x_inx in x_pidginunit.labelmap.otx2inx.items():
+    for x_otx, x_inx in x_pidginunit.titlemap.otx2inx.items():
         x_row = [
             x_pidginunit.face_name,
             str(x_pidginunit.event_int),
@@ -591,7 +591,7 @@ def add_pack_to_br00020_csv(
                 x_packunit.fisc_word,
                 x_packunit.owner_name,
                 budatom.jkeys.get("acct_name"),
-                budatom.jkeys.get("group_label"),
+                budatom.jkeys.get("group_title"),
                 if_none_str(budatom.jvalues.get("credit_vote")),
                 if_none_str(budatom.jvalues.get("debtit_vote")),
             ]
@@ -630,7 +630,7 @@ def add_pack_to_br00022_csv(
                 x_packunit.fisc_word,
                 x_packunit.owner_name,
                 budatom.jkeys.get("idea_way"),
-                budatom.jkeys.get("awardee_label"),
+                budatom.jkeys.get("awardee_title"),
                 if_none_str(budatom.jvalues.get("give_force")),
                 if_none_str(budatom.jvalues.get("take_force")),
             ]
@@ -671,7 +671,7 @@ def add_pack_to_br00024_csv(
                 x_packunit.fisc_word,
                 x_packunit.owner_name,
                 budatom.jkeys.get("idea_way"),
-                budatom.jkeys.get("labor_label"),
+                budatom.jkeys.get("labor_title"),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"

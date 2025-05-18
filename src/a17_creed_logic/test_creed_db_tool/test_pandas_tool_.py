@@ -1,7 +1,7 @@
 from src.a00_data_toolbox.file_toolbox import open_file, create_path
 from src.a06_bud_logic._utils.str_a06 import (
     acct_name_str,
-    group_label_str,
+    group_title_str,
     credor_respect_str,
 )
 from src.a17_creed_logic._utils.env_a17 import (
@@ -172,7 +172,7 @@ def test_get_relevant_columns_dataframe_ReturnsObj_Scenario3_ColumnOrderCorrect(
 
 def test_get_relevant_columns_dataframe_ReturnsObj_Scenario4_ColumnOrderCorrect():
     # ESTABLISH
-    df1 = DataFrame([["AAA", "BBB"]], columns=[group_label_str(), acct_name_str()])
+    df1 = DataFrame([["AAA", "BBB"]], columns=[group_title_str(), acct_name_str()])
 
     # WHEN
     relevant_dataframe = get_relevant_columns_dataframe(df1)
@@ -181,13 +181,13 @@ def test_get_relevant_columns_dataframe_ReturnsObj_Scenario4_ColumnOrderCorrect(
     assert relevant_dataframe is not None
     print(f"{relevant_dataframe.columns=}")
     assert relevant_dataframe.columns.to_list()[0] == acct_name_str()
-    assert relevant_dataframe.columns.to_list() == [acct_name_str(), group_label_str()]
+    assert relevant_dataframe.columns.to_list() == [acct_name_str(), group_title_str()]
 
 
 def test_get_brick_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario0_EmptyDataframe():
     # ESTABLISH
     df1 = DataFrame([[]], columns=[])
-    groupby_list = [group_label_str(), acct_name_str()]
+    groupby_list = [group_title_str(), acct_name_str()]
 
     # WHEN
     groupby_dataframe = get_brick_raw_grouping_with_all_values_equal_df(
@@ -203,10 +203,10 @@ def test_get_brick_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario0_Em
 
 def test_get_brick_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario1_GroupBySingleColumn():
     # ESTABLISH
-    df_columns = [group_label_str(), credor_respect_str()]
+    df_columns = [group_title_str(), credor_respect_str()]
     before_df_values = [["AA0", "BB0"], ["AA0", "BB0"]]
     df1 = DataFrame(before_df_values, columns=df_columns)
-    groupby_list = [group_label_str()]
+    groupby_list = [group_title_str()]
 
     # WHEN
     groupby_dataframe = get_brick_raw_grouping_with_all_values_equal_df(
@@ -226,10 +226,10 @@ def test_get_brick_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario1_Gr
 
 def test_get_brick_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario2_GroupByExtraColumns():
     # ESTABLISH
-    df_columns = [group_label_str(), credor_respect_str()]
+    df_columns = [group_title_str(), credor_respect_str()]
     before_df_values = [["AA0", "BB0"], ["AA0", "BB0"]]
     df1 = DataFrame(before_df_values, columns=df_columns)
-    groupby_list = [group_label_str(), acct_name_str()]
+    groupby_list = [group_title_str(), acct_name_str()]
 
     # WHEN
     groupby_dataframe = get_brick_raw_grouping_with_all_values_equal_df(
@@ -249,10 +249,10 @@ def test_get_brick_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario2_Gr
 
 def test_get_brick_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario3_GroupByExtraColumns():
     # ESTABLISH
-    df_columns = [group_label_str(), credor_respect_str(), "column3"]
+    df_columns = [group_title_str(), credor_respect_str(), "column3"]
     before_df_values = [["AA0", "BB0", "CC0"], ["AA0", "BB0", "CC0"]]
     df1 = DataFrame(before_df_values, columns=df_columns)
-    groupby_list = [group_label_str(), acct_name_str(), credor_respect_str()]
+    groupby_list = [group_title_str(), acct_name_str(), credor_respect_str()]
 
     # WHEN
     groupby_dataframe = get_brick_raw_grouping_with_all_values_equal_df(
@@ -272,14 +272,14 @@ def test_get_brick_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario3_Gr
 
 def test_get_brick_raw_grouping_with_all_values_equal_df_ReturnsObj_Scenario4_GroupByExtraColumns():
     # ESTABLISH
-    df_columns = [group_label_str(), credor_respect_str(), "column3"]
+    df_columns = [group_title_str(), credor_respect_str(), "column3"]
     before_df_values = [
         ["AA0", "BB0", "CC0"],
         ["AA0", "BB0", "CC1"],
         ["DD0", "EE0", "FF0"],
     ]
     df1 = DataFrame(before_df_values, columns=df_columns)
-    groupby_list = [group_label_str(), acct_name_str(), credor_respect_str()]
+    groupby_list = [group_title_str(), acct_name_str(), credor_respect_str()]
 
     # WHEN
     groupby_dataframe = get_brick_raw_grouping_with_all_values_equal_df(

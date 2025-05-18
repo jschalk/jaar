@@ -1,7 +1,7 @@
 from src.a06_bud_logic._utils.str_a06 import (
     bud_acctunit_str,
     acct_name_str,
-    group_label_str,
+    group_title_str,
     idea_way_str,
     rcontext_str,
 )
@@ -63,13 +63,13 @@ def test_CreedRef_get_headers_list_ReturnsObj_Scenario1():
     # ESTABLISH
 
     x3_creedref = creedref_shop("0003", bud_acctunit_str())
-    x3_creedref.set_attribute(group_label_str(), True)
+    x3_creedref.set_attribute(group_title_str(), True)
 
     # WHEN
     x_headers_list = x3_creedref.get_headers_list()
 
     # THEN
-    assert x_headers_list == [group_label_str()]
+    assert x_headers_list == [group_title_str()]
 
 
 def test_CreedRef_get_headers_list_ReturnsObj_Scenario2():
@@ -77,14 +77,14 @@ def test_CreedRef_get_headers_list_ReturnsObj_Scenario2():
 
     x3_creedref = creedref_shop("0003", bud_acctunit_str())
     x3_creedref.set_attribute(idea_way_str(), True)
-    x3_creedref.set_attribute(group_label_str(), False)
+    x3_creedref.set_attribute(group_title_str(), False)
     x3_creedref.set_attribute(acct_name_str(), True)
 
     # WHEN
     x_headers_list = x3_creedref.get_headers_list()
 
     # THEN
-    assert x_headers_list == [acct_name_str(), group_label_str(), idea_way_str()]
+    assert x_headers_list == [acct_name_str(), group_title_str(), idea_way_str()]
 
 
 def test_CreedRef_get_otx_keys_list_ReturnsObj_Scenario0():
@@ -102,13 +102,13 @@ def test_CreedRef_get_otx_keys_list_ReturnsObj_Scenario1():
     # ESTABLISH
 
     x3_creedref = creedref_shop("0003", bud_acctunit_str())
-    x3_creedref.set_attribute(group_label_str(), True)
+    x3_creedref.set_attribute(group_title_str(), True)
 
     # WHEN
     x_otx_keys_list = x3_creedref.get_otx_keys_list()
 
     # THEN
-    assert x_otx_keys_list == [group_label_str()]
+    assert x_otx_keys_list == [group_title_str()]
 
 
 def test_CreedRef_get_otx_keys_list_ReturnsObj_Scenario2():
@@ -116,7 +116,7 @@ def test_CreedRef_get_otx_keys_list_ReturnsObj_Scenario2():
 
     x3_creedref = creedref_shop("0003", bud_acctunit_str())
     x3_creedref.set_attribute(idea_way_str(), True)
-    x3_creedref.set_attribute(group_label_str(), False)
+    x3_creedref.set_attribute(group_title_str(), False)
     x3_creedref.set_attribute(acct_name_str(), True)
 
     # WHEN
@@ -141,7 +141,7 @@ def test_CreedRef_get_otx_values_list_ReturnsObj_Scenario1():
     # ESTABLISH
 
     x3_creedref = creedref_shop("0003", bud_acctunit_str())
-    x3_creedref.set_attribute(group_label_str(), True)
+    x3_creedref.set_attribute(group_title_str(), True)
 
     # WHEN
     x_otx_values_list = x3_creedref.get_otx_values_list()
@@ -155,7 +155,7 @@ def test_CreedRef_get_otx_values_list_ReturnsObj_Scenario2():
 
     x3_creedref = creedref_shop("0003", bud_acctunit_str())
     x3_creedref.set_attribute(idea_way_str(), True)
-    x3_creedref.set_attribute(group_label_str(), False)
+    x3_creedref.set_attribute(group_title_str(), False)
     x3_creedref.set_attribute(rcontext_str(), False)
     x3_creedref.set_attribute(acct_name_str(), False)
 
@@ -163,4 +163,4 @@ def test_CreedRef_get_otx_values_list_ReturnsObj_Scenario2():
     x_otx_values_list = x3_creedref.get_otx_values_list()
 
     # THEN
-    assert x_otx_values_list == [acct_name_str(), group_label_str(), rcontext_str()]
+    assert x_otx_values_list == [acct_name_str(), group_title_str(), rcontext_str()]

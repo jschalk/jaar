@@ -10,8 +10,8 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_word_str,
     inx_way_str,
     otx_way_str,
-    inx_label_str,
-    otx_label_str,
+    inx_title_str,
+    otx_title_str,
     unknown_term_str,
 )
 from src.a17_creed_logic._utils.str_a17 import brick_agg_str
@@ -105,15 +105,15 @@ def test_WorldUnit_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(
         fisc_word_str(),
         owner_name_str(),
         acct_name_str(),
-        otx_label_str(),
-        inx_label_str(),
+        otx_title_str(),
+        inx_title_str(),
     ]
     br00042_file_path = create_path(fizz_world._brick_dir, "br00042.xlsx")
     br00042_columns = [
         event_int_str(),
         face_name_str(),
-        otx_label_str(),
-        inx_label_str(),
+        otx_title_str(),
+        inx_title_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_term_str(),
@@ -202,33 +202,33 @@ def test_WorldUnit_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(
 
     # THEN
     assert os_path_exists(pidgin_path)
-    label_raw_str = "label_raw"
+    title_raw_str = "title_raw"
     name_raw_str = "name_raw"
     word_raw_str = "word_raw"
     way_raw_str = "way_raw"
     assert sheet_exists(pidgin_path, name_raw_str)
-    assert sheet_exists(pidgin_path, label_raw_str)
+    assert sheet_exists(pidgin_path, title_raw_str)
     assert sheet_exists(pidgin_path, word_raw_str)
     assert sheet_exists(pidgin_path, way_raw_str)
 
-    gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_raw_str)
+    gen_title_df = pandas_read_excel(pidgin_path, sheet_name=title_raw_str)
     gen_name_df = pandas_read_excel(pidgin_path, sheet_name=name_raw_str)
     gen_word_df = pandas_read_excel(pidgin_path, sheet_name=word_raw_str)
     gen_way_df = pandas_read_excel(pidgin_path, sheet_name=way_raw_str)
 
-    label_file_columns = PidginPrimeColumns().pidgin_label_raw_columns
-    assert list(gen_label_df.columns) == label_file_columns
-    assert len(gen_label_df) == 2
+    title_file_columns = PidginPrimeColumns().pidgin_title_raw_columns
+    assert list(gen_title_df.columns) == title_file_columns
+    assert len(gen_title_df) == 2
     b3 = "br00115"
     b4 = "br00042"
-    e1_label3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
-    e1_label4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
-    e1_label_rows = [e1_label3, e1_label4]
-    e1_label_df = DataFrame(e1_label_rows, columns=label_file_columns)
-    assert len(gen_label_df) == len(e1_label_df)
-    print(f"{gen_label_df.to_csv()=}")
-    print(f" {e1_label_df.to_csv()=}")
-    assert gen_label_df.to_csv(index=False) == e1_label_df.to_csv(index=False)
+    e1_title3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    e1_title4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_title_rows = [e1_title3, e1_title4]
+    e1_title_df = DataFrame(e1_title_rows, columns=title_file_columns)
+    assert len(gen_title_df) == len(e1_title_df)
+    print(f"{gen_title_df.to_csv()=}")
+    print(f" {e1_title_df.to_csv()=}")
+    assert gen_title_df.to_csv(index=False) == e1_title_df.to_csv(index=False)
 
     name_raw_columns = PidginPrimeColumns().pidgin_name_raw_columns
     assert list(gen_name_df.columns) == name_raw_columns

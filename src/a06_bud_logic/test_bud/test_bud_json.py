@@ -89,7 +89,7 @@ def test_BudUnit_get_dict_ReturnsObj_Scenario2_idearoot_laborunit():
     run_str = "runners"
     sue_bud = budunit_shop("Sue")
     x_laborunit = laborunit_shop()
-    x_laborunit.set_laborlink(labor_label=run_str)
+    x_laborunit.set_laborlink(labor_title=run_str)
     root_way = to_way(sue_bud.fisc_word)
     sue_bud.edit_idea_attr(root_way, laborunit=x_laborunit)
     root_idea = sue_bud.get_idea_obj(root_way)
@@ -143,7 +143,7 @@ def test_BudUnit_get_dict_ReturnsObj_Scenario4_ideakid_LaborUnit():
     morn_way = sue_bud.make_l1_way(morn_str)
     sue_bud.set_l1_idea(ideaunit_shop(morn_str))
     x_laborunit = laborunit_shop()
-    x_laborunit.set_laborlink(labor_label=run_str)
+    x_laborunit.set_laborlink(labor_title=run_str)
     sue_bud.edit_idea_attr(morn_way, laborunit=x_laborunit)
 
     # WHEN
@@ -327,11 +327,11 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     sue_acctunit.add_membership(run_str)
     xio_acctunit.add_membership(run_str)
     run_laborunit = laborunit_shop()
-    run_laborunit.set_laborlink(labor_label=run_str)
+    run_laborunit.set_laborlink(labor_title=run_str)
     root_way = to_way(zia_bud.fisc_word)
     zia_bud.edit_idea_attr(root_way, laborunit=run_laborunit)
     xio_laborunit = laborunit_shop()
-    xio_laborunit.set_laborlink(labor_label=xio_str)
+    xio_laborunit.set_laborlink(labor_title=xio_str)
     zia_bud.edit_idea_attr(shave_way, laborunit=xio_laborunit)
     zia_bud.edit_idea_attr(shave_way, awardlink=awardlink_shop(xio_str))
     zia_bud.edit_idea_attr(shave_way, awardlink=awardlink_shop(sue_str))

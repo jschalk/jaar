@@ -3,7 +3,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     face_name_str,
     event_int_str,
     acct_name_str,
-    group_label_str,
+    group_title_str,
     gogo_want_str,
 )
 from src.a17_creed_logic.creed_config import get_creed_sqlite_types
@@ -42,7 +42,7 @@ def setup_database_and_csv() -> tuple[sqlite3_Connection, str, str]:  # type: ig
     #         fisc_word TEXT,
     #         owner_name TEXT,
     #         acct_name TEXT,
-    #         group_label TEXT,
+    #         group_title TEXT,
     #         gogo_want REAL
     #     )
     # """
@@ -52,7 +52,7 @@ def setup_database_and_csv() -> tuple[sqlite3_Connection, str, str]:  # type: ig
     # Create a test CSV file
     with open(test_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write(
-            f"{event_int_str()},{face_name_str()},{fisc_word_str()},{owner_name_str()},{acct_name_str()},{group_label_str()},{gogo_want_str()}\n"
+            f"{event_int_str()},{face_name_str()},{fisc_word_str()},{owner_name_str()},{acct_name_str()},{group_title_str()},{gogo_want_str()}\n"
         )
         csv_file.write("3,Sue,Accord43,Bob,Bob,;runners,6.5\n")
         csv_file.write("3,Sue,Accord43,Yao,Bob,;runners,7.5\n")
@@ -95,7 +95,7 @@ def test_create_creed_table_from_csv_ChangesDBState(
         (2, fisc_word_str(), "TEXT", 0, None, 0),
         (3, owner_name_str(), "TEXT", 0, None, 0),
         (4, acct_name_str(), "TEXT", 0, None, 0),
-        (5, group_label_str(), "TEXT", 0, None, 0),
+        (5, group_title_str(), "TEXT", 0, None, 0),
         (6, gogo_want_str(), "REAL", 0, None, 0),
     ]
     assert columns == expected_columns
@@ -106,7 +106,7 @@ def test_create_creed_table_from_csv_ChangesDBState(
         (2, fisc_word_str(), column_types.get(fisc_word_str()), 0, None, 0),
         (3, owner_name_str(), column_types.get(owner_name_str()), 0, None, 0),
         (4, acct_name_str(), column_types.get(acct_name_str()), 0, None, 0),
-        (5, group_label_str(), column_types.get(group_label_str()), 0, None, 0),
+        (5, group_title_str(), column_types.get(group_title_str()), 0, None, 0),
         (6, gogo_want_str(), column_types.get(gogo_want_str()), 0, None, 0),
     ]
     assert columns == get_creed_sqlite_types_columns
@@ -147,7 +147,7 @@ def test_insert_creed_csv_ChangesDBState_CorrectlyInserts(
     zia_csv_filepath = "zia_brXXXXX.csv"
     with open(zia_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write(
-            f"{event_int_str()},{face_name_str()},{fisc_word_str()},{owner_name_str()},{acct_name_str()},{group_label_str()},{gogo_want_str()}\n"
+            f"{event_int_str()},{face_name_str()},{fisc_word_str()},{owner_name_str()},{acct_name_str()},{group_title_str()},{gogo_want_str()}\n"
         )
         csv_file.write("7,Zia,Accord55,Yao,Zia,;swimmers,10.2\n")
         csv_file.write("8,Zia,Accord43,Zia,Bob,;runners,11.1\n")
@@ -191,7 +191,7 @@ def test_insert_creed_csv_ChangesDBState_CanCreateTable(
     zia_csv_filepath = "zia_brXXXXX.csv"
     with open(zia_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write(
-            f"{event_int_str()},{face_name_str()},{fisc_word_str()},{owner_name_str()},{acct_name_str()},{group_label_str()},{gogo_want_str()}\n"
+            f"{event_int_str()},{face_name_str()},{fisc_word_str()},{owner_name_str()},{acct_name_str()},{group_title_str()},{gogo_want_str()}\n"
         )
         csv_file.write("7,Zia,Accord55,Yao,Zia,;swimmers,10.2\n")
         csv_file.write("8,Zia,Accord43,Zia,Bob,;runners,11.1\n")

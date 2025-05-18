@@ -18,8 +18,8 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
     acct_name_str,
-    awardee_label_str,
-    group_label_str,
+    awardee_title_str,
+    group_title_str,
     healer_name_str,
     parent_way_str,
     idea_word_str,
@@ -142,7 +142,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_acct_membership():
 
     zia_atom = budatom_shop(bud_acct_membership_str(), atom_insert())
     zia_atom.set_arg(acct_name_str(), zia_str)
-    zia_atom.set_arg(group_label_str(), run_str)
+    zia_atom.set_arg(group_title_str(), run_str)
     zia_atom.set_arg(debtit_vote_str(), zia_run_debtit_vote)
 
     # WHEN
@@ -221,7 +221,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_idea_awardlink():
 
     zia_atom = budatom_shop(bud_idea_awardlink_str(), atom_insert())
     zia_atom.set_arg(idea_way_str(), casa_way)
-    zia_atom.set_arg(awardee_label_str(), run_str)
+    zia_atom.set_arg(awardee_title_str(), run_str)
     zia_atom.set_arg(give_force_str(), zia_run_give_force)
     zia_atom.set_arg(take_force_str(), zia_run_take_force)
 

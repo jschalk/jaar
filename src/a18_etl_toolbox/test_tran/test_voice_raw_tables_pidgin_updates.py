@@ -9,7 +9,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     credit_belief_str,
     debtit_belief_str,
     idea_way_str,
-    awardee_label_str,
+    awardee_title_str,
     give_force_str,
     take_force_str,
 )
@@ -26,7 +26,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     pidgin_word_str,
     pidgin_way_str,
     pidgin_name_str,
-    pidgin_label_str,
+    pidgin_title_str,
     pidgin_core_str,
     inx_bridge_str,
     otx_bridge_str,
@@ -36,8 +36,8 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_way_str,
     inx_name_str,
     otx_name_str,
-    inx_label_str,
-    otx_label_str,
+    inx_title_str,
+    otx_title_str,
     unknown_term_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
@@ -45,7 +45,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_sound_and_voice_tables,
     create_update_voice_raw_existing_inx_col_sqlstr,
     create_pidname_face_otx_event_sqlstr,
-    create_pidlabe_face_otx_event_sqlstr,
+    create_pidtitl_face_otx_event_sqlstr,
     create_pidword_face_otx_event_sqlstr,
     create_pidwayy_face_otx_event_sqlstr,
     create_update_voice_raw_empty_inx_col_sqlstr,
@@ -58,7 +58,7 @@ from sqlite3 import connect as sqlite3_connect
 # TODO create test for mapped_names sqlstr (link otx_)
 
 
-def test_create_pidlabe_face_otx_event_sqlstr_ReturnsObj_Scenario0_LabelStr():
+def test_create_pidtitl_face_otx_event_sqlstr_ReturnsObj_Scenario0_TitleStr():
     # ESTABLISH
     bob_otx = "Bob"
     yao_otx = "Yao"
@@ -86,7 +86,7 @@ def test_create_pidlabe_face_otx_event_sqlstr_ReturnsObj_Scenario0_LabelStr():
         budawar_v_raw_put_tablename = prime_tbl(budawar_dimen, "v", "raw", "put")
         print(f"{get_table_columns(cursor, budawar_v_raw_put_tablename)=}")
         insert_sqlstr = f"""INSERT INTO {budawar_v_raw_put_tablename}
-        ({event_int_str()}, {face_name_str()}_otx, {awardee_label_str()}_otx, {awardee_label_str()}_inx)
+        ({event_int_str()}, {face_name_str()}_otx, {awardee_title_str()}_otx, {awardee_title_str()}_inx)
         VALUES
           ({event0}, '{bob_otx}', '{fly_otx}', NULL)
         , ({event1}, '{bob_otx}', '{fly_otx}', NULL)
@@ -98,11 +98,11 @@ def test_create_pidlabe_face_otx_event_sqlstr_ReturnsObj_Scenario0_LabelStr():
         """
         cursor.execute(insert_sqlstr)
 
-        pidlabe_dimen = pidgin_label_str()
-        pidlabe_s_vld_tablename = prime_tbl(pidlabe_dimen, "s", "vld")
-        # print(f"{pidlabe_s_vld_tablename=}")
-        insert_pidlabe_sqlstr = f"""INSERT INTO {pidlabe_s_vld_tablename}
-        ({event_int_str()}, {face_name_str()}, {otx_label_str()}, {inx_label_str()})
+        pidtitl_dimen = pidgin_title_str()
+        pidtitl_s_vld_tablename = prime_tbl(pidtitl_dimen, "s", "vld")
+        # print(f"{pidtitl_s_vld_tablename=}")
+        insert_pidtitl_sqlstr = f"""INSERT INTO {pidtitl_s_vld_tablename}
+        ({event_int_str()}, {face_name_str()}, {otx_title_str()}, {inx_title_str()})
         VALUES
           ({event1}, '{bob_otx}', '{fly_otx}', '{fly_inx1}')
         , ({event2}, '{yao_otx}', '{swi_otx}', '{swi_inx}')
@@ -111,41 +111,41 @@ def test_create_pidlabe_face_otx_event_sqlstr_ReturnsObj_Scenario0_LabelStr():
         , ({event8}, '{zia_otx}', '{run_otx}', '{run_inx}')
         ;
         """
-        cursor.execute(insert_pidlabe_sqlstr)
+        cursor.execute(insert_pidtitl_sqlstr)
 
         face_name_inx_count_sql = f"SELECT COUNT(*) FROM {budawar_v_raw_put_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 0
 
         # WHEN
-        pidname_face_otx_event_sqlstr = create_pidlabe_face_otx_event_sqlstr(
-            budawar_v_raw_put_tablename, awardee_label_str()
+        pidname_face_otx_event_sqlstr = create_pidtitl_face_otx_event_sqlstr(
+            budawar_v_raw_put_tablename, awardee_title_str()
         )
         cursor.execute(pidname_face_otx_event_sqlstr)
 
         # THEN
-        static_select_pidlabe_sqlstr = """
+        static_select_pidtitl_sqlstr = """
 SELECT
   raw_dim.rowid raw_rowid
 , raw_dim.event_int
 , raw_dim.face_name_otx
-, raw_dim.awardee_label_otx
+, raw_dim.awardee_title_otx
 , MAX(pid.event_int) pidgin_event_int
 FROM bud_idea_awardlink_v_put_raw raw_dim
-LEFT JOIN pidgin_label_s_vld pid ON pid.face_name = raw_dim.face_name_otx
-    AND pid.otx_label = raw_dim.awardee_label_otx
+LEFT JOIN pidgin_title_s_vld pid ON pid.face_name = raw_dim.face_name_otx
+    AND pid.otx_title = raw_dim.awardee_title_otx
     AND raw_dim.event_int >= pid.event_int
 GROUP BY
   raw_dim.rowid
 , raw_dim.event_int
 , raw_dim.face_name_otx
-, raw_dim.awardee_label_otx
+, raw_dim.awardee_title_otx
 """
 
         print(pidname_face_otx_event_sqlstr)
         print("")
-        # print(static_select_pidlabe_sqlstr)
-        assert static_select_pidlabe_sqlstr == pidname_face_otx_event_sqlstr
-        cursor.execute(static_select_pidlabe_sqlstr)
+        # print(static_select_pidtitl_sqlstr)
+        assert static_select_pidtitl_sqlstr == pidname_face_otx_event_sqlstr
+        cursor.execute(static_select_pidtitl_sqlstr)
         rows = cursor.fetchall()
         print(rows)
         # event5 does not link to event7 pidgin record's

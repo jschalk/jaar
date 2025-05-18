@@ -13,8 +13,8 @@
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
-            "group_label": {
-                "class_type": "LabelStr",
+            "group_title": {
+                "class_type": "TitleStr",
                 "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
@@ -80,8 +80,8 @@
             "atom_order": 3
         },
         "jkeys": {
-            "awardee_label": {
-                "class_type": "LabelStr",
+            "awardee_title": {
+                "class_type": "TitleStr",
                 "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
@@ -283,8 +283,8 @@
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
-            "labor_label": {
-                "class_type": "LabelStr",
+            "labor_title": {
+                "class_type": "TitleStr",
                 "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"

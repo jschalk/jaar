@@ -3,12 +3,12 @@ from src.a06_bud_logic._utils.str_a06 import (
     type_NameStr_str,
     type_WordStr_str,
     type_WayStr_str,
-    type_LabelStr_str,
+    type_TitleStr_str,
     idea_way_str,
     face_name_str,
     event_int_str,
     type_NameStr_str,
-    type_LabelStr_str,
+    type_TitleStr_str,
 )
 from src.a16_pidgin_logic._utils.str_a16 import (
     otx_bridge_str,
@@ -32,17 +32,17 @@ from src.a16_pidgin_logic._utils.example_pidgins import (
 )
 from src.a17_creed_logic.pidgin_toolbox import (
     get_pidgin_name_dt_columns,
-    get_pidgin_label_dt_columns,
+    get_pidgin_title_dt_columns,
     get_pidgin_word_dt_columns,
     get_pidgin_way_dt_columns,
     create_pidgin_name_dt,
-    create_pidgin_label_dt,
+    create_pidgin_title_dt,
     create_pidgin_word_dt,
     create_pidgin_way_dt,
     create_pidgin_word_dt,
     save_all_csvs_from_pidginunit,
     _load_namemap_from_csv,
-    _load_labelmap_from_csv,
+    _load_titlemap_from_csv,
     _load_wordmap_from_csv,
     _load_waymap_from_csv,
     _save_pidgin_word_csv,
@@ -73,21 +73,21 @@ def test_get_pidgin_name_dt_columns_ReturnsObj():
     assert set(get_pidgin_name_dt_columns()).issubset(set(sorting_columns()))
 
 
-def test_get_pidgin_label_dt_columns_ReturnsObj():
+def test_get_pidgin_title_dt_columns_ReturnsObj():
     # ESTABLISH / WHEN /THEN
-    assert get_pidgin_label_dt_columns()
-    assert len(get_pidgin_label_dt_columns()) == 7
+    assert get_pidgin_title_dt_columns()
+    assert len(get_pidgin_title_dt_columns()) == 7
     static_list = [
         event_int_str(),
         face_name_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_term_str(),
-        "otx_label",
-        "inx_label",
+        "otx_title",
+        "inx_title",
     ]
-    assert get_pidgin_label_dt_columns() == static_list
-    assert set(get_pidgin_label_dt_columns()).issubset(set(sorting_columns()))
+    assert get_pidgin_title_dt_columns() == static_list
+    assert set(get_pidgin_title_dt_columns()).issubset(set(sorting_columns()))
 
 
 def test_get_pidgin_word_dt_columns_ReturnsObj():
@@ -171,11 +171,11 @@ def test_save_all_csvs_from_pidginunit_SavesFiles(env_dir_setup_cleanup):
     sue_pidginunit = get_sue_pidginunit()
     map_dir = get_example_face_dir()
     name_filename = "name.csv"
-    label_filename = "label.csv"
+    title_filename = "title.csv"
     word_filename = "word.csv"
     way_filename = "way.csv"
     name_csv_path = create_path(map_dir, name_filename)
-    group_csv_path = create_path(map_dir, label_filename)
+    group_csv_path = create_path(map_dir, title_filename)
     word_csv_path = create_path(map_dir, word_filename)
     way_csv_path = create_path(map_dir, way_filename)
     assert os_path_exists(name_csv_path) is False
@@ -237,48 +237,48 @@ def test_load_namemap_from_csv_DoesNotChangeWhenFileDoesNotExist(env_dir_setup_c
     assert len(sue_namemap.otx2inx) == 0
 
 
-def test_load_labelmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
+def test_load_titlemap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     # ESTABLISH
     sue_pidginunit = get_sue_pidginunit()
     map_dir = get_example_face_dir()
-    label_filename = "label.csv"
-    group_csv_path = create_path(map_dir, label_filename)
+    title_filename = "title.csv"
+    group_csv_path = create_path(map_dir, title_filename)
     save_all_csvs_from_pidginunit(map_dir, sue_pidginunit)
     assert os_path_exists(group_csv_path)
     empty_pidginunit = pidginunit_shop("Sue")
-    sue_labelmap = empty_pidginunit.get_mapunit(type_LabelStr_str())
-    sue_labelmap.face_name = "Sue"
-    print(f"{empty_pidginunit=} {sue_labelmap=}")
-    assert len(sue_labelmap.otx2inx) == 0
+    sue_titlemap = empty_pidginunit.get_mapunit(type_TitleStr_str())
+    sue_titlemap.face_name = "Sue"
+    print(f"{empty_pidginunit=} {sue_titlemap=}")
+    assert len(sue_titlemap.otx2inx) == 0
 
     # WHEN
-    sue_labelmap = _load_labelmap_from_csv(map_dir, sue_labelmap)
+    sue_titlemap = _load_titlemap_from_csv(map_dir, sue_titlemap)
 
     # THEN
-    assert len(sue_labelmap.otx2inx) == 2
-    ex_labelmap = sue_pidginunit.get_mapunit(type_LabelStr_str())
-    assert ex_labelmap == sue_labelmap
+    assert len(sue_titlemap.otx2inx) == 2
+    ex_titlemap = sue_pidginunit.get_mapunit(type_TitleStr_str())
+    assert ex_titlemap == sue_titlemap
 
 
-def test_load_labelmap_from_csv_DoesNotChangeWhenFileDoesNotExist(
+def test_load_titlemap_from_csv_DoesNotChangeWhenFileDoesNotExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     map_dir = get_example_face_dir()
-    label_filename = "label.csv"
-    group_csv_path = create_path(map_dir, label_filename)
+    title_filename = "title.csv"
+    group_csv_path = create_path(map_dir, title_filename)
     assert os_path_exists(group_csv_path) is False
     empty_pidginunit = pidginunit_shop("Sue")
-    sue_labelmap = empty_pidginunit.get_mapunit(type_LabelStr_str())
-    sue_labelmap.face_name = "Sue"
-    print(f"{empty_pidginunit=} {sue_labelmap=}")
-    assert len(sue_labelmap.otx2inx) == 0
+    sue_titlemap = empty_pidginunit.get_mapunit(type_TitleStr_str())
+    sue_titlemap.face_name = "Sue"
+    print(f"{empty_pidginunit=} {sue_titlemap=}")
+    assert len(sue_titlemap.otx2inx) == 0
 
     # WHEN
-    sue_labelmap = _load_labelmap_from_csv(map_dir, sue_labelmap)
+    sue_titlemap = _load_titlemap_from_csv(map_dir, sue_titlemap)
 
     # THEN
-    assert len(sue_labelmap.otx2inx) == 0
+    assert len(sue_titlemap.otx2inx) == 0
 
 
 def test_load_wordmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
@@ -453,7 +453,7 @@ def test_init_pidginunit_from_dir_ReturnsObj(env_dir_setup_cleanup):
 
     assert len(sue_pidginunit.namemap.otx2inx) == 3
     assert gen_pidginunit.namemap == sue_pidginunit.namemap
-    assert gen_pidginunit.labelmap == sue_pidginunit.labelmap
+    assert gen_pidginunit.titlemap == sue_pidginunit.titlemap
     assert gen_pidginunit.wordmap == sue_pidginunit.wordmap
     assert gen_pidginunit.waymap.wordmap == sue_pidginunit.waymap.wordmap
     assert gen_pidginunit.waymap == sue_pidginunit.waymap

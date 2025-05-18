@@ -49,7 +49,7 @@ def test_bud_acct_membership_get_obj_ReturnsObj():
     yao_str = "Yao"
     swim_str = ";swim"
     sue_bud = budunit_shop("Sue")
-    jkeys = {"acct_name": yao_str, "group_label": swim_str}
+    jkeys = {"acct_name": yao_str, "group_title": swim_str}
     sue_bud.add_acctunit(yao_str)
     sue_bud.get_acct(yao_str).add_membership(swim_str)
 
@@ -82,7 +82,7 @@ def test_bud_idea_awardlink_get_obj_ReturnsObj():
     swim_str = "swim"
     casa_way = sue_bud.make_l1_way(casa_str)
     sue_bud.add_idea(casa_way)
-    jkeys = {idea_way_str(): casa_way, "awardee_label": swim_str}
+    jkeys = {idea_way_str(): casa_way, "awardee_title": swim_str}
     sue_bud.add_idea(casa_way)
     sue_bud.get_idea_obj(casa_way).set_awardlink(awardlink_shop(swim_str))
 
@@ -191,7 +191,7 @@ def test_bud_get_obj_ReturnsObj_bud_acct_membership_get_obj():
     yao_str = "Yao"
     swim_str = ";swim"
     sue_bud = budunit_shop("Sue")
-    jkeys = {"acct_name": yao_str, "group_label": swim_str}
+    jkeys = {"acct_name": yao_str, "group_title": swim_str}
     sue_bud.add_acctunit(yao_str)
     sue_bud.get_acct(yao_str).add_membership(swim_str)
 
@@ -224,7 +224,7 @@ def test_bud_get_obj_ReturnsObj_bud_idea_awardlink_get_obj():
     swim_str = "swim"
     casa_way = sue_bud.make_l1_way(casa_str)
     sue_bud.add_idea(casa_way)
-    jkeys = {idea_way_str(): casa_way, "awardee_label": swim_str}
+    jkeys = {idea_way_str(): casa_way, "awardee_title": swim_str}
     sue_bud.add_idea(casa_way)
     sue_bud.get_idea_obj(casa_way).set_awardlink(awardlink_shop(swim_str))
 

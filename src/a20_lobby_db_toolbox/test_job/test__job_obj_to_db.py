@@ -328,7 +328,7 @@ def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
     x_fisc_word = "accord23"
     x_owner_name = "Sue"
     x_way = 1
-    x_awardee_label = 2
+    x_awardee_title = 2
     x_give_force = 3
     x_take_force = 4
     x__fund_give = 5
@@ -338,7 +338,7 @@ def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
         "fisc_word": x_fisc_word,
         "owner_name": x_owner_name,
         "idea_way": x_way,
-        "awardee_label": x_awardee_label,
+        "awardee_title": x_awardee_title,
         "give_force": x_give_force,
         "take_force": x_take_force,
         "_fund_give": x__fund_give,
@@ -510,14 +510,14 @@ def test_create_budlabor_metrics_insert_sqlstr_ReturnsObj():
     x_fisc_word = "accord23"
     x_owner_name = "Sue"
     x_way = 1
-    x_labor_label = 2
+    x_labor_title = 2
     x__owner_name_labor = 3
     values_dict = {
         "world_id": x_world_id,
         "fisc_word": x_fisc_word,
         "owner_name": x_owner_name,
         "idea_way": x_way,
-        "labor_label": x_labor_label,
+        "labor_title": x_labor_title,
         "_owner_name_labor": x__owner_name_labor,
     }
     # all args included in values dict
@@ -646,7 +646,7 @@ def test_create_budmemb_metrics_insert_sqlstr_ReturnsObj():
     x_fisc_word = "accord23"
     x_owner_name = "Sue"
     x_acct_name = 1
-    x_group_label = 2
+    x_group_title = 2
     x_credit_vote = 3
     x_debtit_vote = 4
     x__credor_pool = 5
@@ -662,7 +662,7 @@ def test_create_budmemb_metrics_insert_sqlstr_ReturnsObj():
         "fisc_word": x_fisc_word,
         "owner_name": x_owner_name,
         "acct_name": x_acct_name,
-        "group_label": x_group_label,
+        "group_title": x_group_title,
         "credit_vote": x_credit_vote,
         "debtit_vote": x_debtit_vote,
         "_credor_pool": x__credor_pool,
@@ -721,7 +721,7 @@ def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
     x_world_id = "music23"
     x_fisc_word = "accord23"
     x_owner_name = "Sue"
-    x_group_label = 1
+    x_group_title = 1
     x__credor_pool = 2
     x__debtor_pool = 3
     x_fund_coin = 4
@@ -734,7 +734,7 @@ def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
         "world_id": x_world_id,
         "fisc_word": x_fisc_word,
         "owner_name": x_owner_name,
-        "group_label": x_group_label,
+        "group_title": x_group_title,
         "_credor_pool": x__credor_pool,
         "_debtor_pool": x__debtor_pool,
         "fund_coin": x_fund_coin,

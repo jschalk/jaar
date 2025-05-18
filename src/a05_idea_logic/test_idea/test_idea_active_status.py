@@ -80,7 +80,7 @@ def test_IdeaUnit_get_awardlink_ReturnsObj():
 
     # THEN
     assert biker_awardlink
-    assert biker_awardlink.awardee_label == biker_str
+    assert biker_awardlink.awardee_title == biker_str
 
 
 def test_IdeaUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValues():
@@ -90,13 +90,13 @@ def test_IdeaUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValue
     biker_str = "bikers2"
     biker_awardheir = awardheir_shop(biker_str, biker_give_force, biker_take_force)
     swim_str = "swimmers"
-    swim_group_label = swim_str
+    swim_group_title = swim_str
     swim_give_force = 29
     swim_take_force = 32
-    swim_awardheir = awardheir_shop(swim_group_label, swim_give_force, swim_take_force)
+    swim_awardheir = awardheir_shop(swim_group_title, swim_give_force, swim_take_force)
     x_awardheirs = {
-        swim_awardheir.awardee_label: swim_awardheir,
-        biker_awardheir.awardee_label: biker_awardheir,
+        swim_awardheir.awardee_title: swim_awardheir,
+        biker_awardheir.awardee_title: biker_awardheir,
     }
     sport_str = "sport"
     sport_idea = ideaunit_shop(sport_str, _awardheirs=x_awardheirs)
@@ -454,7 +454,7 @@ def test_IdeaUnit_set_laborheir_CorrectlySetsAttr():
     swim_str = "swimmers"
     sport_str = "sports"
     sport_idea = ideaunit_shop(sport_str)
-    sport_idea.laborunit.set_laborlink(labor_label=swim_str)
+    sport_idea.laborunit.set_laborlink(labor_title=swim_str)
     # assert sport_idea._laborheir is None
 
     # WHEN
@@ -463,7 +463,7 @@ def test_IdeaUnit_set_laborheir_CorrectlySetsAttr():
     # THEN
     assert sport_idea._laborheir is not None
     swim_laborunit = laborunit_shop()
-    swim_laborunit.set_laborlink(labor_label=swim_str)
+    swim_laborunit.set_laborlink(labor_title=swim_str)
     swim_laborheir = laborheir_shop()
     swim_laborheir.set_laborlinks(
         laborunit=swim_laborunit, parent_laborheir=None, bud_groupunits=None

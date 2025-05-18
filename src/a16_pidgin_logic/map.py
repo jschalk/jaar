@@ -149,33 +149,33 @@ def get_namemap_from_json(x_json: str) -> NameMap:
     return get_namemap_from_dict(get_dict_from_json(x_json))
 
 
-class LabelMap(MapCore):
-    def set_otx2inx(self, otx_label: str, inx_label: str):
-        self.otx2inx[otx_label] = inx_label
+class TitleMap(MapCore):
+    def set_otx2inx(self, otx_title: str, inx_title: str):
+        self.otx2inx[otx_title] = inx_title
 
-    def _get_inx_value(self, otx_label: str) -> str:
-        return self.otx2inx.get(otx_label)
+    def _get_inx_value(self, otx_title: str) -> str:
+        return self.otx2inx.get(otx_title)
 
-    def otx2inx_exists(self, otx_label: str, inx_label: str) -> bool:
-        return self._get_inx_value(otx_label) == inx_label
+    def otx2inx_exists(self, otx_title: str, inx_title: str) -> bool:
+        return self._get_inx_value(otx_title) == inx_title
 
-    def otx_exists(self, otx_label: str) -> bool:
-        return self._get_inx_value(otx_label) != None
+    def otx_exists(self, otx_title: str) -> bool:
+        return self._get_inx_value(otx_title) != None
 
-    def del_otx2inx(self, otx_label: str):
-        self.otx2inx.pop(otx_label)
+    def del_otx2inx(self, otx_title: str):
+        self.otx2inx.pop(otx_title)
 
-    def reveal_inx(self, otx_label: str, missing_add: bool = True) -> str:
-        if missing_add and self.otx_exists(otx_label) is False:
-            inx_label = copy_copy(otx_label)
-            if self.inx_bridge in otx_label:
+    def reveal_inx(self, otx_title: str, missing_add: bool = True) -> str:
+        if missing_add and self.otx_exists(otx_title) is False:
+            inx_title = copy_copy(otx_title)
+            if self.inx_bridge in otx_title:
                 return None
             otx_r_bridge = self.otx_bridge
             inx_r_bridge = self.inx_bridge
-            inx_label = inx_label.replace(otx_r_bridge, inx_r_bridge)
-            self.set_otx2inx(otx_label, inx_label)
+            inx_title = inx_title.replace(otx_r_bridge, inx_r_bridge)
+            self.set_otx2inx(otx_title, inx_title)
 
-        return self._get_inx_value(otx_label)
+        return self._get_inx_value(otx_title)
 
     def _is_inx_bridge_inclusion_correct(self):
         return str_in_all_dict_values(self.inx_bridge, self.otx2inx)
@@ -190,19 +190,19 @@ class LabelMap(MapCore):
         )
 
 
-def labelmap_shop(
+def titlemap_shop(
     face_name: FaceName = None,
     event_int: EventInt = None,
     otx_bridge: str = None,
     inx_bridge: str = None,
     otx2inx: dict = None,
     unknown_term: str = None,
-) -> LabelMap:
+) -> TitleMap:
     unknown_term = default_unknown_term_if_None(unknown_term)
     otx_bridge = default_bridge_if_None(otx_bridge)
     inx_bridge = default_bridge_if_None(inx_bridge)
 
-    return LabelMap(
+    return TitleMap(
         face_name=face_name,
         event_int=get_0_if_None(event_int),
         otx_bridge=otx_bridge,
@@ -212,8 +212,8 @@ def labelmap_shop(
     )
 
 
-def get_labelmap_from_dict(x_dict: dict) -> LabelMap:
-    return labelmap_shop(
+def get_titlemap_from_dict(x_dict: dict) -> TitleMap:
+    return titlemap_shop(
         face_name=x_dict.get("face_name"),
         event_int=x_dict.get("event_int"),
         otx_bridge=x_dict.get("otx_bridge"),
@@ -223,8 +223,8 @@ def get_labelmap_from_dict(x_dict: dict) -> LabelMap:
     )
 
 
-def get_labelmap_from_json(x_json: str) -> LabelMap:
-    return get_labelmap_from_dict(get_dict_from_json(x_json))
+def get_titlemap_from_json(x_json: str) -> TitleMap:
+    return get_titlemap_from_dict(get_dict_from_json(x_json))
 
 
 class WordMap(MapCore):
@@ -501,7 +501,7 @@ def inherit_namemap(new: NameMap, old: NameMap) -> NameMap:
     return _inherit_mapunit(new, old)
 
 
-def inherit_labelmap(new: LabelMap, old: LabelMap) -> LabelMap:
+def inherit_titlemap(new: TitleMap, old: TitleMap) -> TitleMap:
     return _inherit_mapunit(new, old)
 
 

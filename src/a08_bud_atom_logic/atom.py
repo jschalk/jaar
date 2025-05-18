@@ -11,7 +11,7 @@ from src.a01_way_logic.way import (
     create_way,
     WordStr,
     WayStr,
-    LabelStr,
+    TitleStr,
     AcctName,
     is_wordstr,
     get_terminus_word,
@@ -218,15 +218,15 @@ def _modify_bud_update_budunit(x_bud: BudUnit, x_atom: BudAtom):
 
 def _modify_bud_acct_membership_delete(x_bud: BudUnit, x_atom: BudAtom):
     x_acct_name = x_atom.get_value("acct_name")
-    x_group_label = x_atom.get_value("group_label")
-    x_bud.get_acct(x_acct_name).delete_membership(x_group_label)
+    x_group_title = x_atom.get_value("group_title")
+    x_bud.get_acct(x_acct_name).delete_membership(x_group_title)
 
 
 def _modify_bud_acct_membership_update(x_bud: BudUnit, x_atom: BudAtom):
     x_acct_name = x_atom.get_value("acct_name")
-    x_group_label = x_atom.get_value("group_label")
+    x_group_title = x_atom.get_value("group_title")
     x_acctunit = x_bud.get_acct(x_acct_name)
-    x_membership = x_acctunit.get_membership(x_group_label)
+    x_membership = x_acctunit.get_membership(x_group_title)
     x_credit_vote = x_atom.get_value("credit_vote")
     x_debtit_vote = x_atom.get_value("debtit_vote")
     x_membership.set_credit_vote(x_credit_vote)
@@ -235,11 +235,11 @@ def _modify_bud_acct_membership_update(x_bud: BudUnit, x_atom: BudAtom):
 
 def _modify_bud_acct_membership_insert(x_bud: BudUnit, x_atom: BudAtom):
     x_acct_name = x_atom.get_value("acct_name")
-    x_group_label = x_atom.get_value("group_label")
+    x_group_title = x_atom.get_value("group_title")
     x_credit_vote = x_atom.get_value("credit_vote")
     x_debtit_vote = x_atom.get_value("debtit_vote")
     x_acctunit = x_bud.get_acct(x_acct_name)
-    x_acctunit.add_membership(x_group_label, x_credit_vote, x_debtit_vote)
+    x_acctunit.add_membership(x_group_title, x_credit_vote, x_debtit_vote)
 
 
 def _modify_bud_ideaunit_delete(x_bud: BudUnit, x_atom: BudAtom):
@@ -282,7 +282,7 @@ def _modify_bud_ideaunit_insert(x_bud: BudUnit, x_atom: BudAtom):
         ),
         parent_way=idea_parent_way,
         create_missing_ideas=False,
-        get_rid_of_missing_awardlinks_awardee_labels=False,
+        get_rid_of_missing_awardlinks_awardee_titles=False,
         create_missing_ancestors=True,
     )
 
@@ -290,13 +290,13 @@ def _modify_bud_ideaunit_insert(x_bud: BudUnit, x_atom: BudAtom):
 def _modify_bud_idea_awardlink_delete(x_bud: BudUnit, x_atom: BudAtom):
     x_bud.edit_idea_attr(
         x_atom.get_value("idea_way"),
-        awardlink_del=x_atom.get_value("awardee_label"),
+        awardlink_del=x_atom.get_value("awardee_title"),
     )
 
 
 def _modify_bud_idea_awardlink_update(x_bud: BudUnit, x_atom: BudAtom):
     x_idea = x_bud.get_idea_obj(x_atom.get_value("idea_way"))
-    x_awardlink = x_idea.awardlinks.get(x_atom.get_value("awardee_label"))
+    x_awardlink = x_idea.awardlinks.get(x_atom.get_value("awardee_title"))
     x_give_force = x_atom.get_value("give_force")
     if x_give_force is not None and x_awardlink.give_force != x_give_force:
         x_awardlink.give_force = x_give_force
@@ -308,7 +308,7 @@ def _modify_bud_idea_awardlink_update(x_bud: BudUnit, x_atom: BudAtom):
 
 def _modify_bud_idea_awardlink_insert(x_bud: BudUnit, x_atom: BudAtom):
     x_awardlink = awardlink_shop(
-        awardee_label=x_atom.get_value("awardee_label"),
+        awardee_title=x_atom.get_value("awardee_title"),
         give_force=x_atom.get_value("give_force"),
         take_force=x_atom.get_value("take_force"),
     )
@@ -399,12 +399,12 @@ def _modify_bud_idea_reason_premiseunit_insert(x_bud: BudUnit, x_atom: BudAtom):
 
 def _modify_bud_idea_laborlink_delete(x_bud: BudUnit, x_atom: BudAtom):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("idea_way"))
-    x_ideaunit.laborunit.del_laborlink(labor_label=x_atom.get_value("labor_label"))
+    x_ideaunit.laborunit.del_laborlink(labor_title=x_atom.get_value("labor_title"))
 
 
 def _modify_bud_idea_laborlink_insert(x_bud: BudUnit, x_atom: BudAtom):
     x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("idea_way"))
-    x_ideaunit.laborunit.set_laborlink(labor_label=x_atom.get_value("labor_label"))
+    x_ideaunit.laborunit.set_laborlink(labor_title=x_atom.get_value("labor_title"))
 
 
 def _modify_bud_idea_healerlink_delete(x_bud: BudUnit, x_atom: BudAtom):
@@ -616,7 +616,7 @@ class AtomRow:
     _crud_command: CRUD_command = None
     acct_name: AcctName = None
     addin: float = None
-    awardee_label: LabelStr = None
+    awardee_title: TitleStr = None
     rcontext: WayStr = None
     rcontext_idea_active_requisite: bool = None
     begin: float = None
@@ -637,8 +637,8 @@ class AtomRow:
     fund_pool: float = None
     give_force: float = None
     gogo_want: float = None
-    group_label: LabelStr = None
-    healer_name: LabelStr = None
+    group_title: TitleStr = None
+    healer_name: TitleStr = None
     mass: int = None
     max_tree_traverse: int = None
     morph: bool = None
@@ -654,7 +654,7 @@ class AtomRow:
     stop_want: float = None
     take_force: float = None
     tally: int = None
-    labor_label: int = None
+    labor_title: int = None
 
     def set_atom_dimen(self, atom_dimen: str):
         self._atom_dimens.add(atom_dimen)
@@ -671,8 +671,8 @@ class AtomRow:
             if x_value != None:
                 if class_type == "NameStr":
                     self.__dict__[x_arg] = AcctName(x_value)
-                elif class_type == "LabelStr":
-                    self.__dict__[x_arg] = LabelStr(x_value)
+                elif class_type == "TitleStr":
+                    self.__dict__[x_arg] = TitleStr(x_value)
                 elif class_type == "WayStr":
                     self.__dict__[x_arg] = WayStr(x_value)
                 elif class_type == "WordStr":

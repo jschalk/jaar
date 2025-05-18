@@ -1,11 +1,11 @@
 {
-    "pidgin_label": {
+    "pidgin_title": {
         "jkeys": {
-            "otx_label": {}
+            "otx_title": {}
         },
         "jvalues": {
             "inx_bridge": {},
-            "inx_label": {},
+            "inx_title": {},
             "otx_bridge": {},
             "unknown_term": {}
         }

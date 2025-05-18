@@ -2,7 +2,7 @@ from src.a01_way_logic.way import (
     WayStr,
     get_terminus_word,
     get_parent_way,
-    LabelStr,
+    TitleStr,
 )
 from src.a06_bud_logic.bud import BudUnit
 from src.a12_hub_tools.hub_tool import open_gut_file
@@ -13,7 +13,7 @@ from copy import deepcopy as copy_deepcopy
 def create_pledge(
     x_bud: BudUnit,
     pledge_way: WayStr,
-    x_laborlink: LabelStr = None,
+    x_laborlink: TitleStr = None,
     reason_premise: WayStr = None,
 ):
     if (
@@ -38,7 +38,7 @@ def create_pledge(
 def add_gut_pledge(
     x_hubunit: HubUnit,
     pledge_way: WayStr,
-    x_laborlink: LabelStr = None,
+    x_laborlink: TitleStr = None,
     reason_premise: WayStr = None,
 ):
     gut_bud = open_gut_file(

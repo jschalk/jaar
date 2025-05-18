@@ -47,7 +47,7 @@ from src.a15_fisc_logic._utils.str_a15 import (
 from src.a15_fisc_logic.fisc_config import get_fisc_dimens
 from src.a16_pidgin_logic.pidgin_config import get_pidgin_dimens
 from src.a16_pidgin_logic._utils.str_a16 import (
-    pidgin_label_str,
+    pidgin_title_str,
     pidgin_name_str,
     pidgin_way_str,
     pidgin_word_str,
@@ -176,7 +176,7 @@ def test_create_prime_tablename_ReturnsObj():
     pidname_dimen = pidgin_name_str()
     pidword_dimen = pidgin_word_str()
     pidwayy_dimen = pidgin_way_str()
-    pidlabe_dimen = pidgin_label_str()
+    pidtitl_dimen = pidgin_title_str()
     pidcore_dimen = pidgin_core_str()
     raw_str = "raw"
     agg_str = "agg"
@@ -206,10 +206,10 @@ def test_create_prime_tablename_ReturnsObj():
     pidname_s_agg_table = create_prime_tablename("pidname", "s", agg_str)
     pidword_s_agg_table = create_prime_tablename("pidword", "s", agg_str)
     pidwayy_s_agg_table = create_prime_tablename("pidwayy", "s", agg_str)
-    pidlabe_s_agg_table = create_prime_tablename("pidlabe", "s", agg_str)
-    pidlabe_v_agg_table = create_prime_tablename("pidlabe", "v", agg_str)
-    pidlabe_s_raw_table = create_prime_tablename("pidlabe", "s", raw_str)
-    pidlabe_s_val_table = create_prime_tablename("pidlabe", "s", vld_str)
+    pidtitl_s_agg_table = create_prime_tablename("pidtitl", "s", agg_str)
+    pidtitl_v_agg_table = create_prime_tablename("pidtitl", "v", agg_str)
+    pidtitl_s_raw_table = create_prime_tablename("pidtitl", "s", raw_str)
+    pidtitl_s_val_table = create_prime_tablename("pidtitl", "s", vld_str)
     pidcore_s_raw_table = create_prime_tablename("pidcore", "s", raw_str)
     pidcore_s_agg_table = create_prime_tablename("pidcore", "s", agg_str)
 
@@ -235,10 +235,10 @@ def test_create_prime_tablename_ReturnsObj():
     assert pidname_s_agg_table == f"{pidname_dimen}_s_agg"
     assert pidword_s_agg_table == f"{pidword_dimen}_s_agg"
     assert pidwayy_s_agg_table == f"{pidwayy_dimen}_s_agg"
-    assert pidlabe_s_agg_table == f"{pidlabe_dimen}_s_agg"
-    assert pidlabe_v_agg_table == f"{pidlabe_dimen}_v_agg"
-    assert pidlabe_s_raw_table == f"{pidlabe_dimen}_s_raw"
-    assert pidlabe_s_val_table == f"{pidlabe_dimen}_s_vld"
+    assert pidtitl_s_agg_table == f"{pidtitl_dimen}_s_agg"
+    assert pidtitl_v_agg_table == f"{pidtitl_dimen}_v_agg"
+    assert pidtitl_s_raw_table == f"{pidtitl_dimen}_s_raw"
+    assert pidtitl_s_val_table == f"{pidtitl_dimen}_s_vld"
     assert pidcore_s_raw_table == f"{pidcore_dimen}_s_raw"
     assert pidcore_s_agg_table == f"{pidcore_dimen}_s_agg"
 

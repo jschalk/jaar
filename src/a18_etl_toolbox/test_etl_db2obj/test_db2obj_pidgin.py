@@ -1,6 +1,6 @@
 # from src.a16_pidgin_logic.pidgin import get_pidginunit_from_dict
 # from src.a16_pidgin_logic._utils.str_a16 import (
-#     pidgin_label_str,
+#     pidgin_title_str,
 #     pidgin_name_str,
 #     pidgin_way_str,
 #     pidgin_word_str,
@@ -26,7 +26,7 @@
 # #     "wordmap": {
 # #         "otx2inx": {},
 # #     },
-# #     "labelmap": {
+# #     "titlemap": {
 # #         "otx2inx": {},
 # #     },
 # #     "waymap": {

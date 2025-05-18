@@ -13,9 +13,9 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
     acct_name_str,
-    awardee_label_str,
-    group_label_str,
-    labor_label_str,
+    awardee_title_str,
+    group_title_str,
+    labor_title_str,
     healer_name_str,
     idea_way_str,
     rcontext_str,
@@ -61,10 +61,10 @@ def test_sift_atom_ReturnsObj_BudAtom_INSERT_bud_acct_membership():
 
     bob_run_atom = budatom_shop(bud_acct_membership_str(), atom_insert())
     bob_run_atom.set_arg(acct_name_str(), bob_str)
-    bob_run_atom.set_arg(group_label_str(), run_str)
+    bob_run_atom.set_arg(group_title_str(), run_str)
     yao_run_atom = budatom_shop(bud_acct_membership_str(), atom_insert())
     yao_run_atom.set_arg(acct_name_str(), yao_str)
-    yao_run_atom.set_arg(group_label_str(), run_str)
+    yao_run_atom.set_arg(group_title_str(), run_str)
 
     # WHEN
     new_bob_run_budatom = sift_budatom(sue_bud, bob_run_atom)
@@ -126,10 +126,10 @@ def test_sift_atom_ReturnsObj_BudAtom_INSERT_bud_idea_awardlink():
 
     casa_swim_atom = budatom_shop(bud_idea_awardlink_str(), atom_insert())
     casa_swim_atom.set_arg(idea_way_str(), casa_way)
-    casa_swim_atom.set_arg(awardee_label_str(), swim_str)
+    casa_swim_atom.set_arg(awardee_title_str(), swim_str)
     clean_swim_atom = budatom_shop(bud_idea_awardlink_str(), atom_insert())
     clean_swim_atom.set_arg(idea_way_str(), clean_way)
-    clean_swim_atom.set_arg(awardee_label_str(), swim_str)
+    clean_swim_atom.set_arg(awardee_title_str(), swim_str)
     sue_bud.add_idea(casa_way)
     sue_bud.add_idea(clean_way)
     assert sift_budatom(sue_bud, casa_swim_atom)
@@ -239,10 +239,10 @@ def test_sift_atom_ReturnsObj_BudAtom_INSERT_bud_idea_laborlink():
 
     casa_swim_atom = budatom_shop(bud_idea_laborlink_str(), atom_insert())
     casa_swim_atom.set_arg(idea_way_str(), casa_way)
-    casa_swim_atom.set_arg(labor_label_str(), swim_str)
+    casa_swim_atom.set_arg(labor_title_str(), swim_str)
     clean_swim_atom = budatom_shop(bud_idea_laborlink_str(), atom_insert())
     clean_swim_atom.set_arg(idea_way_str(), clean_way)
-    clean_swim_atom.set_arg(labor_label_str(), swim_str)
+    clean_swim_atom.set_arg(labor_title_str(), swim_str)
     sue_bud.add_idea(casa_way)
     sue_bud.add_idea(clean_way)
     assert sift_budatom(sue_bud, casa_swim_atom)

@@ -16,10 +16,10 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_idea_healerlink_str,
     bud_idea_factunit_str,
     acct_name_str,
-    awardee_label_str,
-    group_label_str,
+    awardee_title_str,
+    group_title_str,
     idea_way_str,
-    labor_label_str,
+    labor_title_str,
     healer_name_str,
     pledge_str,
     begin_str,
@@ -231,7 +231,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_acct_membership_ins
     zia_run_credit_w = 77
     zia_run_debtit_w = 88
     after_zia_acctunit.add_membership(run_str, zia_run_credit_w, zia_run_debtit_w)
-    print(f"{after_sue_bud.get_acctunit_group_labels_dict()=}")
+    print(f"{after_sue_bud.get_acctunit_group_titles_dict()=}")
 
     # WHEN
     sue_buddelta = buddelta_shop()
@@ -256,7 +256,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_acct_membership_ins
     x_keylist = [atom_insert(), bud_acct_membership_str(), zia_str, run_str]
     run_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert run_budatom.get_value(acct_name_str()) == zia_str
-    assert run_budatom.get_value(group_label_str()) == run_str
+    assert run_budatom.get_value(group_title_str()) == run_str
     assert run_budatom.get_value("credit_vote") == zia_run_credit_w
     assert run_budatom.get_value("debtit_vote") == zia_run_debtit_w
 
@@ -301,7 +301,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_acct_membership_upd
     x_keylist = [atom_update(), bud_acct_membership_str(), xio_str, run_str]
     xio_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert xio_budatom.get_value(acct_name_str()) == xio_str
-    assert xio_budatom.get_value(group_label_str()) == run_str
+    assert xio_budatom.get_value(group_title_str()) == run_str
     assert xio_budatom.get_value("credit_vote") == after_xio_credit_w
     assert xio_budatom.get_value("debtit_vote") == after_xio_debtit_w
 
@@ -329,7 +329,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_acct_membership_del
     before_xio_acctunit.add_membership(fly_str)
     before_zia_acctunit.add_membership(fly_str)
     before_bob_acctunit.add_membership(fly_str)
-    before_group_labels_dict = before_sue_bud.get_acctunit_group_labels_dict()
+    before_group_titles_dict = before_sue_bud.get_acctunit_group_titles_dict()
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_xio_acctunit = after_sue_bud.get_acct(xio_str)
@@ -338,11 +338,11 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_acct_membership_del
     after_xio_acctunit.delete_membership(run_str)
     after_zia_acctunit.delete_membership(run_str)
     after_bob_acctunit.delete_membership(fly_str)
-    after_group_labels_dict = after_sue_bud.get_acctunit_group_labels_dict()
-    assert len(before_group_labels_dict.get(fly_str)) == 3
-    assert len(before_group_labels_dict.get(run_str)) == 2
-    assert len(after_group_labels_dict.get(fly_str)) == 2
-    assert after_group_labels_dict.get(run_str) is None
+    after_group_titles_dict = after_sue_bud.get_acctunit_group_titles_dict()
+    assert len(before_group_titles_dict.get(fly_str)) == 3
+    assert len(before_group_titles_dict.get(run_str)) == 2
+    assert len(after_group_titles_dict.get(fly_str)) == 2
+    assert after_group_titles_dict.get(run_str) is None
 
     # WHEN
     sue_buddelta = buddelta_shop()
@@ -352,7 +352,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_acct_membership_del
     x_keylist = [atom_delete(), bud_acct_membership_str(), bob_str, fly_str]
     xio_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert xio_budatom.get_value(acct_name_str()) == bob_str
-    assert xio_budatom.get_value(group_label_str()) == fly_str
+    assert xio_budatom.get_value(group_title_str()) == fly_str
 
     print(f"{get_budatom_total_count(sue_buddelta)=}")
     print_budatom_keys(sue_buddelta)
@@ -559,7 +559,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_awardlink_dele
     x_keylist = [atom_delete(), bud_idea_awardlink_str(), disc_way, run_str]
     run_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert run_budatom.get_value(idea_way_str()) == disc_way
-    assert run_budatom.get_value(awardee_label_str()) == run_str
+    assert run_budatom.get_value(awardee_title_str()) == run_str
 
     assert get_budatom_total_count(sue_buddelta) == 1
 
@@ -611,9 +611,9 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_awardlink_inse
     x_keylist = [atom_insert(), bud_idea_awardlink_str(), disc_way, run_str]
     run_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert run_budatom.get_value(idea_way_str()) == disc_way
-    assert run_budatom.get_value(awardee_label_str()) == run_str
+    assert run_budatom.get_value(awardee_title_str()) == run_str
     assert run_budatom.get_value(idea_way_str()) == disc_way
-    assert run_budatom.get_value(awardee_label_str()) == run_str
+    assert run_budatom.get_value(awardee_title_str()) == run_str
     assert run_budatom.get_value(give_force_str()) == after_run_give_force
     assert run_budatom.get_value(take_force_str()) == after_run_take_force
 
@@ -645,7 +645,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_awardlink_upda
     after_sue_bud.edit_idea_attr(
         ball_way,
         awardlink=awardlink_shop(
-            awardee_label=run_str,
+            awardee_title=run_str,
             give_force=after_give_force,
             take_force=after_take_force,
         ),
@@ -660,7 +660,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_awardlink_upda
     x_keylist = [atom_update(), bud_idea_awardlink_str(), ball_way, run_str]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(idea_way_str()) == ball_way
-    assert ball_budatom.get_value(awardee_label_str()) == run_str
+    assert ball_budatom.get_value(awardee_title_str()) == run_str
     assert ball_budatom.get_value(give_force_str()) == after_give_force
     assert ball_budatom.get_value(take_force_str()) == after_take_force
     assert get_budatom_total_count(sue_buddelta) == 1
@@ -1148,7 +1148,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_laborlink_inse
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(idea_way_str()) == ball_way
-    assert ball_budatom.get_value(labor_label_str()) == xio_str
+    assert ball_budatom.get_value(labor_title_str()) == xio_str
     assert get_budatom_total_count(sue_buddelta) == 1
 
 
@@ -1184,7 +1184,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_laborlink_dele
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(idea_way_str()) == ball_way
-    assert ball_budatom.get_value(labor_label_str()) == xio_str
+    assert ball_budatom.get_value(labor_title_str()) == xio_str
     assert get_budatom_total_count(sue_buddelta) == 1
 
 

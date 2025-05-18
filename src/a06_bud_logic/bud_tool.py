@@ -25,10 +25,10 @@ def bud_acctunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
 
 def bud_acct_membership_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
     x_acct_name = jkeys.get("acct_name")
-    x_group_label = jkeys.get("group_label")
+    x_group_title = jkeys.get("group_title")
     return bool(
         bud_acctunit_exists(x_bud, jkeys)
-        and x_bud.get_acct(x_acct_name).membership_exists(x_group_label)
+        and x_bud.get_acct(x_acct_name).membership_exists(x_group_title)
     )
 
 
@@ -38,11 +38,11 @@ def bud_ideaunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
 
 
 def bud_idea_awardlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_awardee_label = jkeys.get("awardee_label")
+    x_awardee_title = jkeys.get("awardee_title")
     x_way = jkeys.get("idea_way")
     return bool(
         bud_ideaunit_exists(x_bud, jkeys)
-        and x_bud.get_idea_obj(x_way).awardlink_exists(x_awardee_label)
+        and x_bud.get_idea_obj(x_way).awardlink_exists(x_awardee_title)
     )
 
 
@@ -68,11 +68,11 @@ def bud_idea_reason_premiseunit_exists(x_bud: BudUnit, jkeys: dict[str, any]) ->
 
 
 def bud_idea_laborlink_exists(x_bud: BudUnit, jkeys: dict[str, any]) -> bool:
-    x_labor_label = jkeys.get("labor_label")
+    x_labor_title = jkeys.get("labor_title")
     x_way = jkeys.get("idea_way")
     return bool(
         bud_ideaunit_exists(x_bud, jkeys)
-        and x_bud.get_idea_obj(x_way).laborunit.laborlink_exists(x_labor_label)
+        and x_bud.get_idea_obj(x_way).laborunit.laborlink_exists(x_labor_title)
     )
 
 
@@ -124,8 +124,8 @@ def bud_acctunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> AcctUnit:
 
 def bud_acct_membership_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> MemberShip:
     x_acct_name = jkeys.get("acct_name")
-    x_group_label = jkeys.get("group_label")
-    return x_bud.get_acct(x_acct_name).get_membership(x_group_label)
+    x_group_title = jkeys.get("group_title")
+    return x_bud.get_acct(x_acct_name).get_membership(x_group_title)
 
 
 def bud_ideaunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> IdeaUnit:
@@ -135,8 +135,8 @@ def bud_ideaunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> IdeaUnit:
 
 def bud_idea_awardlink_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> AwardLink:
     x_way = jkeys.get("idea_way")
-    x_awardee_label = jkeys.get("awardee_label")
-    return x_bud.get_idea_obj(x_way).get_awardlink(x_awardee_label)
+    x_awardee_title = jkeys.get("awardee_title")
+    return x_bud.get_idea_obj(x_way).get_awardlink(x_awardee_title)
 
 
 def bud_idea_reasonunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> ReasonUnit:

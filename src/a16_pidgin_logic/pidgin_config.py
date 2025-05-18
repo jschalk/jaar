@@ -69,7 +69,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "acct_name": "NameStr",
         "addin": "float",
         "amount": "float",
-        "awardee_label": "LabelStr",
+        "awardee_title": "TitleStr",
         "begin": "float",
         "c400_number": "int",
         "celldepth": "int",
@@ -93,7 +93,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "fund_pool": "float",
         "give_force": "float",
         "gogo_want": "float",
-        "group_label": "LabelStr",
+        "group_title": "TitleStr",
         "healer_name": "NameStr",
         "hour_word": "WordStr",
         "idea_way": "WayStr",
@@ -120,7 +120,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
-        "labor_label": "LabelStr",
+        "labor_title": "TitleStr",
         "tran_time": "TimeLinePoint",
         "deal_time": "TimeLinePoint",
         "timeline_word": "WordStr",
@@ -134,9 +134,9 @@ def get_pidgin_args_class_types() -> dict[str, str]:
 def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
     """for each pidgin_config dimen contains the associated columns"""
     return {
-        "pidgin_label": {
-            "inx_label",
-            "otx_label",
+        "pidgin_title": {
+            "inx_title",
+            "otx_title",
             "inx_bridge",
             "otx_bridge",
             "unknown_term",
@@ -166,18 +166,18 @@ def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
 
 
 def pidginable_class_types() -> set:
-    return {"NameStr", "LabelStr", "WordStr", "WayStr"}
+    return {"NameStr", "TitleStr", "WordStr", "WayStr"}
 
 
 def get_pidginable_args() -> set:
     return {
         "acct_name",
-        "awardee_label",
+        "awardee_title",
         "face_name",
         "fcontext",
         "fisc_word",
         "fbranch",
-        "group_label",
+        "group_title",
         "healer_name",
         "hour_word",
         "idea_way",
@@ -185,7 +185,7 @@ def get_pidginable_args() -> set:
         "owner_name",
         "pbranch",
         "rcontext",
-        "labor_label",
+        "labor_title",
         "timeline_word",
         "weekday_word",
     }
@@ -215,11 +215,11 @@ def get_pidgin_NameStr_args() -> set[str]:
     }
 
 
-def get_pidgin_LabelStr_args() -> set[str]:
+def get_pidgin_TitleStr_args() -> set[str]:
     return {
-        "awardee_label",
-        "group_label",
-        "labor_label",
+        "awardee_title",
+        "group_title",
+        "labor_title",
     }
 
 

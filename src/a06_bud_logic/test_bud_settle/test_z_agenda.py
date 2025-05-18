@@ -452,7 +452,7 @@ def test_BudUnit_agenda_IsSetByLaborUnit_1AcctGroup():
     sue_str = "Sue"
     yao_bud.add_acctunit(sue_str)
     laborunit_sue = laborunit_shop()
-    laborunit_sue.set_laborlink(labor_label=sue_str)
+    laborunit_sue.set_laborlink(labor_title=sue_str)
     assert len(yao_bud.get_agenda_dict()) == 1
 
     # WHEN
@@ -464,7 +464,7 @@ def test_BudUnit_agenda_IsSetByLaborUnit_1AcctGroup():
     # WHEN
     yao_bud.add_acctunit(yao_str)
     laborunit_yao = laborunit_shop()
-    laborunit_yao.set_laborlink(labor_label=yao_str)
+    laborunit_yao.set_laborlink(labor_title=yao_str)
 
     # WHEN
     yao_bud.edit_idea_attr(casa_way, laborunit=laborunit_yao)
@@ -492,7 +492,7 @@ def test_BudUnit_get_agenda_dict_IsSetByLaborUnit_2AcctGroup():
     sue_acctunit.add_membership(run_str)
 
     run_laborunit = laborunit_shop()
-    run_laborunit.set_laborlink(labor_label=run_str)
+    run_laborunit.set_laborlink(labor_title=run_str)
     assert len(yao_bud.get_agenda_dict()) == 1
 
     # WHEN

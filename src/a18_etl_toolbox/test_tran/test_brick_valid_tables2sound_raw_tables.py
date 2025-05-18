@@ -14,7 +14,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a18_etl_toolbox.transformers import etl_brick_valid_tables_to_sound_raw_tables
 from sqlite3 import connect as sqlite3_connect
 
-# get examples from tests from etl_brick_agg_dfs_to_pidgin_label_raw
+# get examples from tests from etl_brick_agg_dfs_to_pidgin_title_raw
 # get examples from tests from etl_brick_agg_dfs_to_pidgin_way_raw
 # get examples from tests from etl_brick_agg_dfs_to_pidgin__raw
 # get examples from tests from etl_brick_agg_dfs_to_pidgin_way_raw

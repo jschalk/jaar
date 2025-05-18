@@ -6,7 +6,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_acct_membership_str,
     bud_ideaunit_str,
     acct_name_str,
-    group_label_str,
+    group_title_str,
     idea_way_str,
     pledge_str,
     mass_str,
@@ -115,10 +115,10 @@ def test_make_buddelta_Arg_creed_format_00021_bud_acctunit_v0_0_0():
 #     bob_iowa_budatom = budatom_shop(bud_acct_membership_str(), atom_insert())
 #     yao_iowa_budatom = budatom_shop(bud_acct_membership_str(), atom_insert())
 #     yao_ohio_budatom = budatom_shop(bud_acct_membership_str(), atom_insert())
-#     sue_iowa_budatom.set_arg(group_label_str(), iowa_str)
-#     bob_iowa_budatom.set_arg(group_label_str(), iowa_str)
-#     yao_iowa_budatom.set_arg(group_label_str(), iowa_str)
-#     yao_ohio_budatom.set_arg(group_label_str(), ohio_str)
+#     sue_iowa_budatom.set_arg(group_title_str(), iowa_str)
+#     bob_iowa_budatom.set_arg(group_title_str(), iowa_str)
+#     yao_iowa_budatom.set_arg(group_title_str(), iowa_str)
+#     yao_ohio_budatom.set_arg(group_title_str(), ohio_str)
 #     sue_iowa_budatom.set_arg(acct_name_str(), sue_str)
 #     bob_iowa_budatom.set_arg(acct_name_str(), bob_str)
 #     yao_iowa_budatom.set_arg(acct_name_str(), yao_str)

@@ -10,15 +10,15 @@ from src.a17_creed_logic.creed_config import (
 from sqlite3 import Connection as sqlite3_Connection
 
 
-CREATE_JOB_BUDMEMB_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_job (world_id TEXT, fisc_word TEXT, owner_name TEXT, acct_name TEXT, group_label TEXT, credit_vote REAL, debtit_vote REAL, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL, _fund_agenda_ratio_give REAL, _fund_agenda_ratio_take REAL)"""
+CREATE_JOB_BUDMEMB_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_job (world_id TEXT, fisc_word TEXT, owner_name TEXT, acct_name TEXT, group_title TEXT, credit_vote REAL, debtit_vote REAL, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL, _fund_agenda_ratio_give REAL, _fund_agenda_ratio_take REAL)"""
 CREATE_JOB_BUDACCT_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acctunit_job (world_id TEXT, fisc_word TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL, _fund_agenda_ratio_give REAL, _fund_agenda_ratio_take REAL, _inallocable_debtit_belief REAL, _irrational_debtit_belief REAL)"""
-CREATE_JOB_BUDGROU_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_groupunit_job (world_id TEXT, fisc_word TEXT, owner_name TEXT, group_label TEXT, fund_coin REAL, bridge TEXT, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL)"""
-CREATE_JOB_BUDAWAR_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_awardlink_job (world_id TEXT, fisc_word TEXT, owner_name TEXT, idea_way TEXT, awardee_label TEXT, give_force REAL, take_force REAL, _fund_give REAL, _fund_take REAL)"""
+CREATE_JOB_BUDGROU_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_groupunit_job (world_id TEXT, fisc_word TEXT, owner_name TEXT, group_title TEXT, fund_coin REAL, bridge TEXT, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL)"""
+CREATE_JOB_BUDAWAR_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_awardlink_job (world_id TEXT, fisc_word TEXT, owner_name TEXT, idea_way TEXT, awardee_title TEXT, give_force REAL, take_force REAL, _fund_give REAL, _fund_take REAL)"""
 CREATE_JOB_BUDFACT_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_factunit_job (world_id TEXT, fisc_word TEXT, owner_name TEXT, idea_way TEXT, fcontext TEXT, fbranch TEXT, fopen REAL, fnigh REAL)"""
 CREATE_JOB_BUDHEAL_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_healerlink_job (world_id TEXT, fisc_word TEXT, owner_name TEXT, idea_way TEXT, healer_name TEXT)"""
 CREATE_JOB_BUDPREM_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_reason_premiseunit_job (world_id TEXT, fisc_word TEXT, owner_name TEXT, idea_way TEXT, rcontext TEXT, pbranch TEXT, pnigh REAL, popen REAL, pdivisor INTEGER, _task INTEGER, _status INTEGER)"""
 CREATE_JOB_BUDREAS_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_reasonunit_job (world_id TEXT, fisc_word TEXT, owner_name TEXT, idea_way TEXT, rcontext TEXT, rcontext_idea_active_requisite INTEGER, _task INTEGER, _status INTEGER, _rcontext_idea_active_value INTEGER)"""
-CREATE_JOB_BUDLABOR_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_laborlink_job (world_id TEXT, fisc_word TEXT, owner_name TEXT, idea_way TEXT, labor_label TEXT, _owner_name_labor INTEGER)"""
+CREATE_JOB_BUDLABOR_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_idea_laborlink_job (world_id TEXT, fisc_word TEXT, owner_name TEXT, idea_way TEXT, labor_title TEXT, _owner_name_labor INTEGER)"""
 CREATE_JOB_BUDIDEA_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_ideaunit_job (world_id TEXT, fisc_word TEXT, owner_name TEXT, idea_way TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER, fund_coin REAL, _active INTEGER, _task INTEGER, _fund_onset REAL, _fund_cease REAL, _fund_ratio REAL, _gogo_calc REAL, _stop_calc REAL, _level INTEGER, _range_evaluated INTEGER, _descendant_pledge_count INTEGER, _healerlink_ratio REAL, _all_acct_cred INTEGER, _all_acct_debt INTEGER)"""
 CREATE_JOB_BUDUNIT_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_job (world_id TEXT, fisc_word TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, _rational INTEGER, _keeps_justified INTEGER, _offtrack_fund REAL, _sum_healerlink_share REAL, _keeps_buildable INTEGER, _tree_traverse_count INTEGER)"""
 
@@ -49,7 +49,7 @@ def create_budmemb_metrics_insert_sqlstr(values_dict: dict[str,]):
     fisc_word = values_dict.get("fisc_word")
     owner_name = values_dict.get("owner_name")
     acct_name = values_dict.get("acct_name")
-    group_label = values_dict.get("group_label")
+    group_title = values_dict.get("group_title")
     credit_vote = values_dict.get("credit_vote")
     debtit_vote = values_dict.get("debtit_vote")
     _credor_pool = values_dict.get("_credor_pool")
@@ -61,13 +61,13 @@ def create_budmemb_metrics_insert_sqlstr(values_dict: dict[str,]):
     _fund_agenda_ratio_give = values_dict.get("_fund_agenda_ratio_give")
     _fund_agenda_ratio_take = values_dict.get("_fund_agenda_ratio_take")
     real_str = "REAL"
-    return f"""INSERT INTO bud_acct_membership_job (world_id, fisc_word, owner_name, acct_name, group_label, credit_vote, debtit_vote, _credor_pool, _debtor_pool, _fund_give, _fund_take, _fund_agenda_give, _fund_agenda_take, _fund_agenda_ratio_give, _fund_agenda_ratio_take)
+    return f"""INSERT INTO bud_acct_membership_job (world_id, fisc_word, owner_name, acct_name, group_title, credit_vote, debtit_vote, _credor_pool, _debtor_pool, _fund_give, _fund_take, _fund_agenda_give, _fund_agenda_take, _fund_agenda_ratio_give, _fund_agenda_ratio_take)
 VALUES (
   {sqlite_obj_str(world_id, "TEXT")}
 , {sqlite_obj_str(fisc_word, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
 , {sqlite_obj_str(acct_name, "TEXT")}
-, {sqlite_obj_str(group_label, "TEXT")}
+, {sqlite_obj_str(group_title, "TEXT")}
 , {sqlite_obj_str(credit_vote, real_str)}
 , {sqlite_obj_str(debtit_vote, real_str)}
 , {sqlite_obj_str(_credor_pool, real_str)}
@@ -128,7 +128,7 @@ def create_budgrou_metrics_insert_sqlstr(values_dict: dict[str,]):
     world_id = values_dict.get("world_id")
     fisc_word = values_dict.get("fisc_word")
     owner_name = values_dict.get("owner_name")
-    group_label = values_dict.get("group_label")
+    group_title = values_dict.get("group_title")
     _credor_pool = values_dict.get("_credor_pool")
     _debtor_pool = values_dict.get("_debtor_pool")
     fund_coin = values_dict.get("fund_coin")
@@ -138,12 +138,12 @@ def create_budgrou_metrics_insert_sqlstr(values_dict: dict[str,]):
     _fund_agenda_take = values_dict.get("_fund_agenda_take")
     bridge = values_dict.get("bridge")
     real_str = "REAL"
-    return f"""INSERT INTO bud_groupunit_job (world_id, fisc_word, owner_name, group_label, fund_coin, bridge, _credor_pool, _debtor_pool, _fund_give, _fund_take, _fund_agenda_give, _fund_agenda_take)
+    return f"""INSERT INTO bud_groupunit_job (world_id, fisc_word, owner_name, group_title, fund_coin, bridge, _credor_pool, _debtor_pool, _fund_give, _fund_take, _fund_agenda_give, _fund_agenda_take)
 VALUES (
   {sqlite_obj_str(world_id, "TEXT")}
 , {sqlite_obj_str(fisc_word, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
-, {sqlite_obj_str(group_label, "TEXT")}
+, {sqlite_obj_str(group_title, "TEXT")}
 , {sqlite_obj_str(fund_coin, real_str)}
 , {sqlite_obj_str(bridge, "TEXT")}
 , {sqlite_obj_str(_credor_pool, real_str)}
@@ -162,18 +162,18 @@ def create_budawar_metrics_insert_sqlstr(values_dict: dict[str,]):
     fisc_word = values_dict.get("fisc_word")
     owner_name = values_dict.get("owner_name")
     way = values_dict.get("idea_way")
-    awardee_label = values_dict.get("awardee_label")
+    awardee_title = values_dict.get("awardee_title")
     give_force = values_dict.get("give_force")
     take_force = values_dict.get("take_force")
     _fund_give = values_dict.get("_fund_give")
     _fund_take = values_dict.get("_fund_take")
-    return f"""INSERT INTO bud_idea_awardlink_job (world_id, fisc_word, owner_name, idea_way, awardee_label, give_force, take_force, _fund_give, _fund_take)
+    return f"""INSERT INTO bud_idea_awardlink_job (world_id, fisc_word, owner_name, idea_way, awardee_title, give_force, take_force, _fund_give, _fund_take)
 VALUES (
   {sqlite_obj_str(world_id, "TEXT")}
 , {sqlite_obj_str(fisc_word, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
 , {sqlite_obj_str(way, "TEXT")}
-, {sqlite_obj_str(awardee_label, "TEXT")}
+, {sqlite_obj_str(awardee_title, "TEXT")}
 , {sqlite_obj_str(give_force, "REAL")}
 , {sqlite_obj_str(take_force, "REAL")}
 , {sqlite_obj_str(_fund_give, "REAL")}
@@ -286,15 +286,15 @@ def create_budlabor_metrics_insert_sqlstr(values_dict: dict[str,]):
     fisc_word = values_dict.get("fisc_word")
     owner_name = values_dict.get("owner_name")
     way = values_dict.get("idea_way")
-    labor_label = values_dict.get("labor_label")
+    labor_title = values_dict.get("labor_title")
     _owner_name_labor = values_dict.get("_owner_name_labor")
-    return f"""INSERT INTO bud_idea_laborlink_job (world_id, fisc_word, owner_name, idea_way, labor_label, _owner_name_labor)
+    return f"""INSERT INTO bud_idea_laborlink_job (world_id, fisc_word, owner_name, idea_way, labor_title, _owner_name_labor)
 VALUES (
   {sqlite_obj_str(world_id, "TEXT")}
 , {sqlite_obj_str(fisc_word, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
 , {sqlite_obj_str(way, "TEXT")}
-, {sqlite_obj_str(labor_label, "TEXT")}
+, {sqlite_obj_str(labor_title, "TEXT")}
 , {sqlite_obj_str(_owner_name_labor, "INTEGER")}
 )
 ;

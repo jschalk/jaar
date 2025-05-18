@@ -12,10 +12,10 @@
         "fisc_word": {
             "otx_key": true
         },
-        "inx_label": {
+        "inx_title": {
             "otx_key": false
         },
-        "otx_label": {
+        "otx_title": {
             "otx_key": true
         },
         "owner_name": {
@@ -24,7 +24,7 @@
     },
     "creed_number": "br00115",
     "dimens": [
-        "pidgin_label",
+        "pidgin_title",
         "bud_acctunit",
         "budunit",
         "fiscunit"
