@@ -101,6 +101,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     get_insert_into_voice_raw_sqlstrs,
     create_update_voice_raw_existing_inx_col_sqlstr,
     create_update_voice_raw_empty_inx_col_sqlstr,
+    get_insert_voice_agg_sqlstrs,
     get_bud_prime_create_table_sqlstrs,
     create_pidgin_prime_tables,
     create_fisc_prime_tables,
@@ -111,7 +112,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     get_bud_put_update_inconsist_error_message_sqlstrs,
     get_bud_insert_put_agg_from_raw_sqlstrs,
     get_bud_insert_del_agg_from_raw_sqlstrs,
-    get_idea_slabeleble_put_dimens,
+    get_idea_stageble_put_dimens,
     CREATE_FISC_EVENT_TIME_AGG_SQLSTR,
     INSERT_FISC_EVENT_TIME_AGG_SQLSTR,
     UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR,
@@ -621,6 +622,11 @@ def set_voice_raw_inx_column(
         cursor.execute(update_empty_inx_sqlstr)
 
 
+def etl_voice_raw_tables_to_voice_agg_tables(cursor: sqlite3_Cursor):
+    for insert_voice_agg_sqlstr in get_insert_voice_agg_sqlstrs().values():
+        cursor.execute(insert_voice_agg_sqlstr)
+
+
 def etl_brick_valid_table_into_prime_table(
     cursor: sqlite3_Cursor,
     brick_valid_table: str,
@@ -1081,14 +1087,14 @@ def etl_idea_raw_to_bud_prime_tables(conn_or_cursor):
 
 
 def idea_raw_tables2fisc_raw_tables(conn_or_cursor: sqlite3_Connection):
-    ideas_slabeleble_dimens = get_idea_slabeleble_put_dimens()
+    ideas_stageble_dimens = get_idea_stageble_put_dimens()
     idea_config_dict = get_idea_config_dict()
     for idea_number in get_idea_numbers():
         idea_raw = f"{idea_number}_raw"
         if db_table_exists(conn_or_cursor, idea_raw):
             # only inserts from pre-identified idea categorys
-            slabeleble_dimens = ideas_slabeleble_dimens.get(idea_number)
-            for x_dimen in slabeleble_dimens:
+            stageble_dimens = ideas_stageble_dimens.get(idea_number)
+            for x_dimen in stageble_dimens:
                 dimen_config = idea_config_dict.get(x_dimen)
                 if dimen_config.get("idea_category") == "fisc":
                     dimen_jkeys = set(dimen_config.get("jkeys").keys())
@@ -1114,8 +1120,8 @@ def idea_raw_tables2bud_raw_tables(conn_or_cursor: sqlite3_Connection):
         idea_raw = f"{idea_number}_raw"
         if db_table_exists(conn_or_cursor, idea_raw):
             # only inserts from pre-identified idea categorys
-            slabeleble_dimens = get_idea_slabeleble_put_dimens().get(idea_number)
-            for x_dimen in slabeleble_dimens:
+            stageble_dimens = get_idea_stageble_put_dimens().get(idea_number)
+            for x_dimen in stageble_dimens:
                 dimen_config = idea_config_dict.get(x_dimen)
                 if dimen_config.get("idea_category") == "bud":
                     dimen_jkeys = set(dimen_config.get("jkeys").keys())

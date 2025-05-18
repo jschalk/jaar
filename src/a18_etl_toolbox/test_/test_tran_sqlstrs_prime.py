@@ -993,12 +993,12 @@ def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_BudDimens():
             v_del_raw_insert_select = f"{v_del_raw_insert_sql} {s_del_agg_select_sql}"
             # create_select_query(cursor=)
             abbv7 = get_dimen_abbv7(bud_dimen)
-            put_sqlstr_ref = f"INSERT_{abbv7.upper()}_VOICE_PUT_RAW_SQLSTR"
-            del_sqlstr_ref = f"INSERT_{abbv7.upper()}_VOICE_DEL_RAW_SQLSTR"
-            print(f'{put_sqlstr_ref}= "{v_put_raw_insert_select}"')
-            print(f'{del_sqlstr_ref}= "{v_del_raw_insert_select}"')
-            # print(f"{v_put_raw_tablename}: {put_sqlstr_ref},")
-            # print(f"{v_del_raw_tablename}: {del_sqlstr_ref},")
+            put_sqlstr_ref = f"INSERT_{abbv7.upper()}_VOICE_RAW_PUT_SQLSTR"
+            del_sqlstr_ref = f"INSERT_{abbv7.upper()}_VOICE_RAW_DEL_SQLSTR"
+            # print(f'{put_sqlstr_ref}= "{v_put_raw_insert_select}"')
+            # print(f'{del_sqlstr_ref}= "{v_del_raw_insert_select}"')
+            # print(f"""'{v_put_raw_tablename}': {put_sqlstr_ref},""")
+            # print(f"""'{v_del_raw_tablename}': {del_sqlstr_ref},""")
             assert insert_v_raw_sqlstrs.get(v_put_raw_tbl) == v_put_raw_insert_select
             assert insert_v_raw_sqlstrs.get(v_del_raw_tbl) == v_del_raw_insert_select
 
