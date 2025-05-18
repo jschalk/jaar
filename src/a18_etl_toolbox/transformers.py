@@ -600,7 +600,7 @@ def set_voice_raw_inx_column(
     cursor: sqlite3_Cursor,
     voice_raw_tablename: str,
     column_without_otx: str,
-    arg_class_type: dict[str, str],
+    arg_class_type: str,
 ):
     if arg_class_type in {"NameStr", "TitleStr", "LabelStr", "WayStr"}:
         pidgin_type_abbv = ""

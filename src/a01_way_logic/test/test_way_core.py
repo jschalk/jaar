@@ -39,6 +39,7 @@ def test_to_way_ReturnsObj_WithDefault_bridge():
     two_bridge_in_front_one_back = f"{x_bridge}{x_bridge}{x_label}{x_bridge}"
     assert to_way(f"{x_bridge}{x_bridge}{x_label}") == two_bridge_in_front_one_back
     assert to_way(x_bridge) == x_bridge
+    assert to_way("", x_bridge) == x_bridge
     assert to_way(None) == x_bridge
 
 

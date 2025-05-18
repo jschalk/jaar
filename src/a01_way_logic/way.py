@@ -174,6 +174,7 @@ def is_sub_way(ref_way: WayStr, sub_way: WayStr) -> bool:
 
 
 def is_heir_way(src: WayStr, heir: WayStr, bridge: str = None) -> bool:
+    # return src == heir or heir.startswith(src + default_bridge_if_None(bridge))
     return src == heir or heir.find(src) == 0
 
 
