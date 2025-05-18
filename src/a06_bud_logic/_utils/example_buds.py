@@ -263,7 +263,7 @@ def get_budunit_rcontext_time_example() -> BudUnit:
 
 
 def get_budunit_irrational_example() -> BudUnit:
-    # this bud has no conclusive agenda because 2 pledge ideas are in contradiction
+    # this bud has no definitive agenda because 2 pledge ideas are in contradiction
     # "egg first" is true when "chicken first" is false
     # "chicken first" is true when "egg first" is true
     # Step 0: if chicken._active is True, egg._active is set to False

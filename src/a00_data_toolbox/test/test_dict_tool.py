@@ -144,7 +144,7 @@ def test_del_in_nested_dict_CorrectSetsDict():
     #         return reduce(operator.getidea, keys, d)
     #     except (KeyError, TypeError):
     #         return default
-    # These changes maintain the consistent interface while reducing code complexity and improving efficiency. The defaultdict approach eliminates the need for explicit nested dictionary creation, the simplified del_in_nested_dict is more readable and efficient, and the reduce-based get_from_nested_dict is more concise.
+    # These changes maintain the consistent interface while reducing code complexity and improving efficiency. The defaultdict approach eliminates the need for explicit nested dictionary creation, the simplified del_in_nested_dict is more readable and efficient, and the reduce-based get_from_nested_dict is more con_cise.
     # ESTABLISH
     y_dict = {}
     y_key1 = "sports"
