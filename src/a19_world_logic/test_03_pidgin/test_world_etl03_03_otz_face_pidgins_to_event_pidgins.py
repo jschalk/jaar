@@ -5,15 +5,15 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_bridge_str,
     inx_name_str,
     otx_name_str,
+    inx_title_str,
+    otx_title_str,
     inx_label_str,
     otx_label_str,
-    inx_word_str,
-    otx_word_str,
     inx_way_str,
     otx_way_str,
     unknown_term_str,
 )
-from src.a17_creed_logic.creed_db_tool import sheet_exists, upsert_sheet
+from src.a17_idea_logic.idea_db_tool import sheet_exists, upsert_sheet
 from src.a18_etl_toolbox.tran_path import (
     create_syntax_otx_pidgin_path,
     create_otx_event_pidgin_path as otx_event_pidgin_path,

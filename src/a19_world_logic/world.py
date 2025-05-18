@@ -8,9 +8,9 @@ from src.a02_finance_logic.deal import TimeLinePoint, TimeConversion
 from src.a01_way_logic.way import (
     FaceName,
     EventInt,
-    FiscWord,
+    FiscLabel,
     WorldID,
-    TimeLineWord,
+    TimeLineLabel,
 )
 from src.a15_fisc_logic.fisc import FiscUnit
 from src.a18_etl_toolbox.stance_tool import create_stance0001_file
@@ -27,7 +27,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_brick_raw_tables_to_events_brick_agg_table,
     etl_events_brick_agg_table_to_events_brick_valid_table,
     etl_events_brick_agg_db_to_event_dict,
-    etl_brick_agg_non_pidgin_creeds_to_brick_valid,
+    etl_brick_agg_non_pidgin_ideas_to_brick_valid,
     etl_brick_pidgin_raw_df_to_pidgin_agg_df,
     etl_brick_agg_df_to_brick_pidgin_raw_df,
     etl_brick_pidgin_agg_df_to_otz_face_pidgin_agg_df,
@@ -36,17 +36,17 @@ from src.a18_etl_toolbox.transformers import (
     etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons,
     etl_pidgin_jsons_inherit_younger_pidgins,
     get_pidgin_events_by_dirs,
-    etl_brick_creeds_to_otz_face_creeds,
-    etl_otz_face_creeds_to_otz_event_otx_creeds,
-    etl_otz_event_creeds_to_inz_events,
-    etl_otz_inx_event_creeds_to_inz_faces,
-    etl_inz_face_creeds_to_csv_files,
-    etl_inz_face_csv_files2creed_raw_tables,
-    etl_creed_raw_to_fisc_prime_tables,
+    etl_brick_ideas_to_otz_face_ideas,
+    etl_otz_face_ideas_to_otz_event_otx_ideas,
+    etl_otz_event_ideas_to_inz_events,
+    etl_otz_inx_event_ideas_to_inz_faces,
+    etl_inz_face_ideas_to_csv_files,
+    etl_inz_face_csv_files2idea_raw_tables,
+    etl_idea_raw_to_fisc_prime_tables,
     etl_fisc_raw_tables_to_fisc_csvs,
     etl_fisc_agg_tables_to_fisc_csvs,
     etl_fisc_agg_tables_to_fisc_jsons,
-    etl_creed_raw_to_bud_prime_tables,
+    etl_idea_raw_to_bud_prime_tables,
     etl_bud_tables_to_event_bud_csvs,
     etl_event_bud_csvs_to_pack_json,
     etl_event_pack_json_to_event_inherited_budunits,
@@ -75,14 +75,14 @@ class WorldUnit:
     world_id: WorldID = None
     worlds_dir: str = None
     world_time_pnigh: TimeLinePoint = None
-    timeconversions: dict[TimeLineWord, TimeConversion] = None
+    timeconversions: dict[TimeLineLabel, TimeConversion] = None
     _syntax_otz_dir: str = None
     _syntax_inz_dir: str = None
     _world_dir: str = None
     _mud_dir: str = None
     _brick_dir: str = None
     _fisc_mstr_dir: str = None
-    _fiscunits: set[FiscWord] = None
+    _fiscunits: set[FiscLabel] = None
     _events: dict[EventInt, FaceName] = None
     _pidgin_events: dict[FaceName, set[EventInt]] = None
 
@@ -118,7 +118,7 @@ class WorldUnit:
         set_dir(self._brick_dir)
         set_dir(self._fisc_mstr_dir)
 
-    def get_timeconversions_dict(self) -> dict[TimeLineWord, TimeConversion]:
+    def get_timeconversions_dict(self) -> dict[TimeLineLabel, TimeConversion]:
         return self.timeconversions
 
     def mud_dfs_to_brick_raw_tables(self, conn: sqlite3_Connection):
@@ -130,8 +130,8 @@ class WorldUnit:
         etl_brick_raw_tables_to_brick_agg_tables(cursor)
         etl_brick_agg_tables_to_brick_agg_dfs(conn, self._brick_dir)
 
-    def brick_agg_non_pidgin_creeds_to_brick_valid(self):
-        etl_brick_agg_non_pidgin_creeds_to_brick_valid(
+    def brick_agg_non_pidgin_ideas_to_brick_valid(self):
+        etl_brick_agg_non_pidgin_ideas_to_brick_valid(
             self._brick_dir, set(self._events.keys())
         )
 
@@ -163,33 +163,31 @@ class WorldUnit:
         etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons(self._syntax_otz_dir)
         self._set_pidgin_events()
 
-    def brick_creeds_to_otz_face_creeds(self):
-        etl_brick_creeds_to_otz_face_creeds(self._brick_dir, self._syntax_otz_dir)
+    def brick_ideas_to_otz_face_ideas(self):
+        etl_brick_ideas_to_otz_face_ideas(self._brick_dir, self._syntax_otz_dir)
 
-    def otz_face_creeds_to_otz_event_otx_creeds(self):
-        etl_otz_face_creeds_to_otz_event_otx_creeds(self._syntax_otz_dir)
+    def otz_face_ideas_to_otz_event_otx_ideas(self):
+        etl_otz_face_ideas_to_otz_event_otx_ideas(self._syntax_otz_dir)
 
-    def otz_event_creeds_to_inz_events(self):
-        etl_otz_event_creeds_to_inz_events(self._syntax_otz_dir, self._pidgin_events)
+    def otz_event_ideas_to_inz_events(self):
+        etl_otz_event_ideas_to_inz_events(self._syntax_otz_dir, self._pidgin_events)
 
-    def otz_inx_event_creeds_to_inz_faces(self):
-        etl_otz_inx_event_creeds_to_inz_faces(
-            self._syntax_otz_dir, self._syntax_inz_dir
-        )
+    def otz_inx_event_ideas_to_inz_faces(self):
+        etl_otz_inx_event_ideas_to_inz_faces(self._syntax_otz_dir, self._syntax_inz_dir)
 
-    def inz_face_creeds_to_csv_files(self):
-        etl_inz_face_creeds_to_csv_files(self._syntax_inz_dir)
+    def inz_face_ideas_to_csv_files(self):
+        etl_inz_face_ideas_to_csv_files(self._syntax_inz_dir)
 
-    def inz_face_csv_files2creed_raw_tables(self, conn_or_cursor: sqlite3_Connection):
-        etl_inz_face_csv_files2creed_raw_tables(conn_or_cursor, self._syntax_inz_dir)
+    def inz_face_csv_files2idea_raw_tables(self, conn_or_cursor: sqlite3_Connection):
+        etl_inz_face_csv_files2idea_raw_tables(conn_or_cursor, self._syntax_inz_dir)
 
-    def creed_raw_to_fisc_prime_tables(self, conn_or_cursor: sqlite3_Connection):
-        etl_creed_raw_to_fisc_prime_tables(conn_or_cursor)
+    def idea_raw_to_fisc_prime_tables(self, conn_or_cursor: sqlite3_Connection):
+        etl_idea_raw_to_fisc_prime_tables(conn_or_cursor)
 
-    def creed_raw_to_bud_prime_tables(self, conn_or_cursor: sqlite3_Connection):
-        etl_creed_raw_to_bud_prime_tables(conn_or_cursor)
+    def idea_raw_to_bud_prime_tables(self, conn_or_cursor: sqlite3_Connection):
+        etl_idea_raw_to_bud_prime_tables(conn_or_cursor)
 
-    def inz_faces_creeds_to_fisc_mstr_csvs(self, conn_or_cursor: sqlite3_Connection):
+    def inz_faces_ideas_to_fisc_mstr_csvs(self, conn_or_cursor: sqlite3_Connection):
         etl_fisc_raw_tables_to_fisc_csvs(conn_or_cursor, self._fisc_mstr_dir)
         etl_fisc_agg_tables_to_fisc_csvs(conn_or_cursor, self._fisc_mstr_dir)
 
@@ -263,18 +261,18 @@ class WorldUnit:
         store_tracing_files: bool = False,
     ):
         # collect excel file data into central location
-        # grab all excel sheets that fit creed format
+        # grab all excel sheets that fit idea format
         self.mud_dfs_to_brick_raw_tables(db_conn)
-        # per creed filter to only non-conflicting creed data
+        # per idea filter to only non-conflicting idea data
         self.brick_raw_db_to_brick_agg_df(db_conn, cursor)
 
-        # identify all creed data that has conflicting face_name/event_int uniqueness
+        # identify all idea data that has conflicting face_name/event_int uniqueness
         etl_brick_raw_tables_to_events_brick_agg_table(cursor)
         etl_events_brick_agg_table_to_events_brick_valid_table(cursor)
         self._events = etl_events_brick_agg_db_to_event_dict(cursor)
 
         # build pidgins
-        # collect all pidgin data from all relevant valid creeds
+        # collect all pidgin data from all relevant valid ideas
         self.brick_agg_df_to_brick_pidgin_raw_df()  # self._events.keys()
         # per pidgin dimen filter to only non-conflicting pidgin data
         self.brick_pidgin_raw_df_to_pidgin_agg_df()
@@ -286,24 +284,24 @@ class WorldUnit:
         # per event create complete (inherited) pidgin.json
         self.pidgin_jsons_inherit_younger_pidgins()  # self._pidgin_events
 
-        # pidgins translate all fisc&bud creeds
-        self.brick_agg_non_pidgin_creeds_to_brick_valid()  # self._events.keys()
-        self.brick_creeds_to_otz_face_creeds()
-        self.otz_face_creeds_to_otz_event_otx_creeds()
-        self.otz_event_creeds_to_inz_events()  # self._pidgin_events
-        self.otz_inx_event_creeds_to_inz_faces()
-        self.inz_face_creeds_to_csv_files()
-        self.inz_face_csv_files2creed_raw_tables(cursor)
+        # pidgins translate all fisc&bud ideas
+        self.brick_agg_non_pidgin_ideas_to_brick_valid()  # self._events.keys()
+        self.brick_ideas_to_otz_face_ideas()
+        self.otz_face_ideas_to_otz_event_otx_ideas()
+        self.otz_event_ideas_to_inz_events()  # self._pidgin_events
+        self.otz_inx_event_ideas_to_inz_faces()
+        self.inz_face_ideas_to_csv_files()
+        self.inz_face_csv_files2idea_raw_tables(cursor)
 
         # create fiscunits
-        self.creed_raw_to_fisc_prime_tables(cursor)
+        self.idea_raw_to_fisc_prime_tables(cursor)
         self.fisc_agg_tables_to_fisc_jsons(cursor)
         self.fisc_agg_tables_to_fisc_ote1_agg(cursor)
         self.fisc_table2fisc_ote1_agg_csvs(cursor)
         self.fisc_ote1_agg_csvs2jsons()
 
         # create budunits
-        self.creed_raw_to_bud_prime_tables(cursor)
+        self.idea_raw_to_bud_prime_tables(cursor)
         self.bud_tables_to_event_bud_csvs(cursor)
         self.event_bud_csvs_to_pack_json()
         self.event_pack_json_to_event_inherited_budunits()
@@ -316,7 +314,7 @@ class WorldUnit:
         if store_tracing_files:
             etl_brick_raw_db_to_brick_raw_df(db_conn, self._brick_dir)
             # etl_brick_agg_tables_to_brick_agg_dfs(db_conn, self._brick_dir)
-            self.inz_faces_creeds_to_fisc_mstr_csvs(cursor)
+            self.inz_faces_ideas_to_fisc_mstr_csvs(cursor)
 
     def mud_to_stances_v2_with_cursor(
         self,
@@ -335,11 +333,11 @@ class WorldUnit:
         etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor)
         etl_sound_agg_tables_to_voice_raw_tables(cursor)
 
-        # identify all creed data that has conflicting face_name/event_int uniqueness
+        # identify all idea data that has conflicting face_name/event_int uniqueness
         # self._events = etl_events_brick_agg_db_to_event_dict(cursor)
 
         # # build pidgins
-        # # collect all pidgin data from all relevant valid creeds
+        # # collect all pidgin data from all relevant valid ideas
         # self.brick_agg_df_to_brick_pidgin_raw_df()  # self._events.keys()
         # # per pidgin dimen filter to only non-conflicting pidgin data
         # self.brick_pidgin_raw_df_to_pidgin_agg_df()
@@ -351,24 +349,24 @@ class WorldUnit:
         # # per event create complete (inherited) pidgin.json
         # self.pidgin_jsons_inherit_younger_pidgins()  # self._pidgin_events
 
-        # # pidgins translate all fisc&bud creeds
-        # self.brick_agg_non_pidgin_creeds_to_brick_valid()  # self._events.keys()
-        # self.brick_creeds_to_otz_face_creeds()
-        # self.otz_face_creeds_to_otz_event_otx_creeds()
-        # self.otz_event_creeds_to_inz_events()  # self._pidgin_events
-        # self.otz_inx_event_creeds_to_inz_faces()
-        # self.inz_face_creeds_to_csv_files()
-        # self.inz_face_csv_files2creed_raw_tables(cursor)
+        # # pidgins translate all fisc&bud ideas
+        # self.brick_agg_non_pidgin_ideas_to_brick_valid()  # self._events.keys()
+        # self.brick_ideas_to_otz_face_ideas()
+        # self.otz_face_ideas_to_otz_event_otx_ideas()
+        # self.otz_event_ideas_to_inz_events()  # self._pidgin_events
+        # self.otz_inx_event_ideas_to_inz_faces()
+        # self.inz_face_ideas_to_csv_files()
+        # self.inz_face_csv_files2idea_raw_tables(cursor)
 
         # # create fiscunits
-        # self.creed_raw_to_fisc_prime_tables(cursor)
+        # self.idea_raw_to_fisc_prime_tables(cursor)
         # self.fisc_agg_tables_to_fisc_jsons(cursor)
         # self.fisc_agg_tables_to_fisc_ote1_agg(cursor)
         # self.fisc_table2fisc_ote1_agg_csvs(cursor)
         # self.fisc_ote1_agg_csvs2jsons()
 
         # # create budunits
-        # self.creed_raw_to_bud_prime_tables(cursor)
+        # self.idea_raw_to_bud_prime_tables(cursor)
         # self.bud_tables_to_event_bud_csvs(cursor)
         # self.event_bud_csvs_to_pack_json()
         # self.event_pack_json_to_event_inherited_budunits()
@@ -381,7 +379,7 @@ class WorldUnit:
         # if store_tracing_files:
         #     etl_brick_raw_db_to_brick_raw_df(db_conn, self._brick_dir)
         #     # etl_brick_agg_tables_to_brick_agg_dfs(db_conn, self._brick_dir)
-        #     self.inz_faces_creeds_to_fisc_mstr_csvs(cursor)
+        #     self.inz_faces_ideas_to_fisc_mstr_csvs(cursor)
 
     def create_stances(self):
         create_stance0001_file(self._fisc_mstr_dir)
@@ -399,8 +397,8 @@ def worldunit_shop(
     worlds_dir: str,
     mud_dir: str = None,
     world_time_pnigh: TimeLinePoint = None,
-    timeconversions: dict[TimeLineWord, TimeConversion] = None,
-    _fiscunits: set[FiscWord] = None,
+    timeconversions: dict[TimeLineLabel, TimeConversion] = None,
+    _fiscunits: set[FiscLabel] = None,
 ) -> WorldUnit:
     x_worldunit = WorldUnit(
         world_id=world_id,

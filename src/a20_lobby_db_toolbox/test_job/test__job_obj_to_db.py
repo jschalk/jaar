@@ -11,7 +11,7 @@ from src.a20_lobby_db_toolbox.lobby_tranformers import (
     create_budprem_metrics_insert_sqlstr,
     create_budreas_metrics_insert_sqlstr,
     create_budlabor_metrics_insert_sqlstr,
-    create_budidea_metrics_insert_sqlstr,
+    create_budconc_metrics_insert_sqlstr,
     create_budunit_metrics_insert_sqlstr,
 )
 from sqlite3 import connect as sqlite3_connect
@@ -24,7 +24,7 @@ def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
     # for x_arg in sorted(x_args):
     #     print(f"{x_arg=}")
     x_world_id = "music23"
-    x_fisc_word = "accord23"
+    x_fisc_label = "accord23"
     x_owner_name = "Sue"
     x__keeps_buildable = True
     x__keeps_justified = False
@@ -42,7 +42,7 @@ def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
     x_tally = 6
     values_dict = {
         "world_id": x_world_id,
-        "fisc_word": x_fisc_word,
+        "fisc_label": x_fisc_label,
         "owner_name": x_owner_name,
         "_keeps_buildable": x__keeps_buildable,
         "_keeps_justified": x__keeps_justified,
@@ -78,10 +78,10 @@ def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_budidea_metrics_insert_sqlstr_ReturnsObj():
+def test_create_budconc_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_calc_dimen_args("bud_ideaunit")
+    x_args = get_bud_calc_dimen_args("bud_conceptunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -92,7 +92,7 @@ def test_create_budidea_metrics_insert_sqlstr_ReturnsObj():
     #     # b1_str = "}"
     #     # print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
     x_world_id = "music23"
-    x_fisc_word = "accord23"
+    x_fisc_label = "accord23"
     x_owner_name = "Sue"
     x__active = 1
     x__all_acct_cred = 2
@@ -122,7 +122,7 @@ def test_create_budidea_metrics_insert_sqlstr_ReturnsObj():
     x_stop_want = 27
     values_dict = {
         "world_id": x_world_id,
-        "fisc_word": x_fisc_word,
+        "fisc_label": x_fisc_label,
         "owner_name": x_owner_name,
         "_active": x__active,
         "_all_acct_cred": x__all_acct_cred,
@@ -146,7 +146,7 @@ def test_create_budidea_metrics_insert_sqlstr_ReturnsObj():
         "mass": x_mass,
         "morph": x_morph,
         "numor": x_numor,
-        "idea_way": x_way,
+        "concept_way": x_way,
         "pledge": x_pledge,
         "problem_bool": x_problem_bool,
         "stop_want": x_stop_want,
@@ -155,14 +155,14 @@ def test_create_budidea_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_budidea_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_budconc_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "bud_ideaunit_job"
+        table_name = "bud_conceptunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print(expected_sqlstr)
         print("")
@@ -173,7 +173,7 @@ def test_create_budidea_metrics_insert_sqlstr_ReturnsObj():
 def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_calc_dimen_args("bud_idea_reasonunit")
+    x_args = get_bud_calc_dimen_args("bud_concept_reasonunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -193,24 +193,24 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
     #     b1_str = "}"
     #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
     x_world_id = "music23"
-    x_fisc_word = "accord23"
+    x_fisc_label = "accord23"
     x_owner_name = "Sue"
     x_way = 1
     x_rcontext = 2
-    x_rcontext_idea_active_requisite = 3
+    x_rcontext_concept_active_requisite = 3
     x__task = 4
     x__status = 5
-    x__rcontext_idea_active_value = 6
+    x__rcontext_concept_active_value = 6
     values_dict = {
         "world_id": x_world_id,
-        "fisc_word": x_fisc_word,
+        "fisc_label": x_fisc_label,
         "owner_name": x_owner_name,
-        "idea_way": x_way,
+        "concept_way": x_way,
         "rcontext": x_rcontext,
-        "rcontext_idea_active_requisite": x_rcontext_idea_active_requisite,
+        "rcontext_concept_active_requisite": x_rcontext_concept_active_requisite,
         "_task": x__task,
         "_status": x__status,
-        "_rcontext_idea_active_value": x__rcontext_idea_active_value,
+        "_rcontext_concept_active_value": x__rcontext_concept_active_value,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())
@@ -223,7 +223,7 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "bud_idea_reasonunit_job"
+        table_name = "bud_concept_reasonunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print(expected_sqlstr)
         print("")
@@ -234,7 +234,7 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
 def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_calc_dimen_args("bud_idea_reason_premiseunit")
+    x_args = get_bud_calc_dimen_args("bud_concept_reason_premiseunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -257,7 +257,7 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
     x_world_id = "music23"
-    x_fisc_word = "accord23"
+    x_fisc_label = "accord23"
     x_owner_name = "Sue"
     x_way = 1
     x_rcontext = 2
@@ -269,9 +269,9 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
     x__status = 8
     values_dict = {
         "world_id": x_world_id,
-        "fisc_word": x_fisc_word,
+        "fisc_label": x_fisc_label,
         "owner_name": x_owner_name,
-        "idea_way": x_way,
+        "concept_way": x_way,
         "rcontext": x_rcontext,
         "pbranch": x_pbranch,
         "pnigh": x_pnigh,
@@ -291,7 +291,7 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "bud_idea_reason_premiseunit_job"
+        table_name = "bud_concept_reason_premiseunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         # print(expected_sqlstr)
         print("")
@@ -302,7 +302,7 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
 def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_calc_dimen_args("bud_idea_awardlink")
+    x_args = get_bud_calc_dimen_args("bud_concept_awardlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -325,20 +325,20 @@ def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
     x_world_id = "music23"
-    x_fisc_word = "accord23"
+    x_fisc_label = "accord23"
     x_owner_name = "Sue"
     x_way = 1
-    x_awardee_label = 2
+    x_awardee_title = 2
     x_give_force = 3
     x_take_force = 4
     x__fund_give = 5
     x__fund_take = 6
     values_dict = {
         "world_id": x_world_id,
-        "fisc_word": x_fisc_word,
+        "fisc_label": x_fisc_label,
         "owner_name": x_owner_name,
-        "idea_way": x_way,
-        "awardee_label": x_awardee_label,
+        "concept_way": x_way,
+        "awardee_title": x_awardee_title,
         "give_force": x_give_force,
         "take_force": x_take_force,
         "_fund_give": x__fund_give,
@@ -355,7 +355,7 @@ def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "bud_idea_awardlink_job"
+        table_name = "bud_concept_awardlink_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -366,7 +366,7 @@ def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
 def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_calc_dimen_args("bud_idea_factunit")
+    x_args = get_bud_calc_dimen_args("bud_concept_factunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -389,7 +389,7 @@ def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
     x_world_id = "music23"
-    x_fisc_word = "accord23"
+    x_fisc_label = "accord23"
     x_owner_name = "Sue"
     x_way = 1
     x_fcontext = 2
@@ -398,9 +398,9 @@ def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
     x_fnigh = 5
     values_dict = {
         "world_id": x_world_id,
-        "fisc_word": x_fisc_word,
+        "fisc_label": x_fisc_label,
         "owner_name": x_owner_name,
-        "idea_way": x_way,
+        "concept_way": x_way,
         "fcontext": x_fcontext,
         "fbranch": x_fbranch,
         "fopen": x_fopen,
@@ -417,7 +417,7 @@ def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "bud_idea_factunit_job"
+        table_name = "bud_concept_factunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -428,7 +428,7 @@ def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
 def test_create_budheal_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_calc_dimen_args("bud_idea_healerlink")
+    x_args = get_bud_calc_dimen_args("bud_concept_healerlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -451,15 +451,15 @@ def test_create_budheal_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
     x_world_id = "music23"
-    x_fisc_word = "accord23"
+    x_fisc_label = "accord23"
     x_owner_name = "Sue"
     x_way = 1
     x_healer_name = 2
     values_dict = {
         "world_id": x_world_id,
-        "fisc_word": x_fisc_word,
+        "fisc_label": x_fisc_label,
         "owner_name": x_owner_name,
-        "idea_way": x_way,
+        "concept_way": x_way,
         "healer_name": x_healer_name,
     }
     # all args included in values dict
@@ -473,7 +473,7 @@ def test_create_budheal_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "bud_idea_healerlink_job"
+        table_name = "bud_concept_healerlink_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -484,7 +484,7 @@ def test_create_budheal_metrics_insert_sqlstr_ReturnsObj():
 def test_create_budlabor_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_calc_dimen_args("bud_idea_laborlink")
+    x_args = get_bud_calc_dimen_args("bud_concept_laborlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -507,17 +507,17 @@ def test_create_budlabor_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
     x_world_id = "music23"
-    x_fisc_word = "accord23"
+    x_fisc_label = "accord23"
     x_owner_name = "Sue"
     x_way = 1
-    x_labor_label = 2
+    x_labor_title = 2
     x__owner_name_labor = 3
     values_dict = {
         "world_id": x_world_id,
-        "fisc_word": x_fisc_word,
+        "fisc_label": x_fisc_label,
         "owner_name": x_owner_name,
-        "idea_way": x_way,
-        "labor_label": x_labor_label,
+        "concept_way": x_way,
+        "labor_title": x_labor_title,
         "_owner_name_labor": x__owner_name_labor,
     }
     # all args included in values dict
@@ -531,7 +531,7 @@ def test_create_budlabor_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "bud_idea_laborlink_job"
+        table_name = "bud_concept_laborlink_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -565,7 +565,7 @@ def test_create_budacct_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
     x_world_id = "music23"
-    x_fisc_word = "accord23"
+    x_fisc_label = "accord23"
     x_owner_name = "Sue"
     x_acct_name = 1
     x_credit_belief = 2
@@ -582,7 +582,7 @@ def test_create_budacct_metrics_insert_sqlstr_ReturnsObj():
     x__irrational_debtit_belief = 13
     values_dict = {
         "world_id": x_world_id,
-        "fisc_word": x_fisc_word,
+        "fisc_label": x_fisc_label,
         "owner_name": x_owner_name,
         "acct_name": x_acct_name,
         "credit_belief": x_credit_belief,
@@ -643,10 +643,10 @@ def test_create_budmemb_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
     x_world_id = "music23"
-    x_fisc_word = "accord23"
+    x_fisc_label = "accord23"
     x_owner_name = "Sue"
     x_acct_name = 1
-    x_group_label = 2
+    x_group_title = 2
     x_credit_vote = 3
     x_debtit_vote = 4
     x__credor_pool = 5
@@ -659,10 +659,10 @@ def test_create_budmemb_metrics_insert_sqlstr_ReturnsObj():
     x__fund_agenda_ratio_take = 12
     values_dict = {
         "world_id": x_world_id,
-        "fisc_word": x_fisc_word,
+        "fisc_label": x_fisc_label,
         "owner_name": x_owner_name,
         "acct_name": x_acct_name,
-        "group_label": x_group_label,
+        "group_title": x_group_title,
         "credit_vote": x_credit_vote,
         "debtit_vote": x_debtit_vote,
         "_credor_pool": x__credor_pool,
@@ -719,9 +719,9 @@ def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
     x_world_id = "music23"
-    x_fisc_word = "accord23"
+    x_fisc_label = "accord23"
     x_owner_name = "Sue"
-    x_group_label = 1
+    x_group_title = 1
     x__credor_pool = 2
     x__debtor_pool = 3
     x_fund_coin = 4
@@ -732,9 +732,9 @@ def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
     x_bridge = 9
     values_dict = {
         "world_id": x_world_id,
-        "fisc_word": x_fisc_word,
+        "fisc_label": x_fisc_label,
         "owner_name": x_owner_name,
-        "group_label": x_group_label,
+        "group_title": x_group_title,
         "_credor_pool": x__credor_pool,
         "_debtor_pool": x__debtor_pool,
         "fund_coin": x_fund_coin,

@@ -10,7 +10,7 @@ from src.a15_fisc_logic._utils.str_a15 import (
     fisc_timeoffi_str,
 )
 from src.a15_fisc_logic.fisc_config import get_fisc_config_args
-from src.a17_creed_logic.creed_db_tool import get_default_sorted_list
+from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
 from src.a18_etl_toolbox.fisc_etl_tool import (
     FiscPrimeObjsRef,
     FiscPrimeColumnsRef,
@@ -113,7 +113,7 @@ def test_FiscPrimeColumnsRef_Exists():
     assert fisc_cols.week_agg_columns == get_default_sorted_list(week_args)
     assert fisc_cols.offi_agg_columns == get_default_sorted_list(offi_args)
 
-    raw_args = {"creed_number", face_name_str(), event_int_str(), "error_message"}
+    raw_args = {"idea_number", face_name_str(), event_int_str(), "error_message"}
     unit_raw_args = unit_args.union(raw_args)
     cash_raw_args = cash_args.union(raw_args)
     deal_raw_args = deal_args.union(raw_args)
@@ -129,7 +129,7 @@ def test_FiscPrimeColumnsRef_Exists():
     assert fisc_cols.week_raw_columns == get_default_sorted_list(week_raw_args)
     assert fisc_cols.offi_raw_columns == get_default_sorted_list(offi_raw_args)
 
-    # unit_raw_csv_header = f"""{event_int_str()},{face_name_str()},{fisc_word_str()},{owner_name_str()},{acct_name_str()}"""
+    # unit_raw_csv_header = f"""{event_int_str()},{face_name_str()},{fisc_label_str()},{owner_name_str()},{acct_name_str()}"""
     unit_raw_csv_header = ",".join(fisc_cols.unit_raw_columns)
     deal_raw_csv_header = ",".join(fisc_cols.deal_raw_columns)
     cash_raw_csv_header = ",".join(fisc_cols.cash_raw_columns)

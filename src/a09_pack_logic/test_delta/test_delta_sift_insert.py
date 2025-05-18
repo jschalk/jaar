@@ -3,7 +3,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_acctunit_str,
     bud_acct_membership_str,
     acct_name_str,
-    group_label_str,
+    group_title_str,
 )
 from src.a08_bud_atom_logic.atom import atom_insert, budatom_shop
 from src.a09_pack_logic.delta import buddelta_shop, get_minimal_buddelta
@@ -55,13 +55,13 @@ def test_sift_ReturnsObjWithoutUnecessaryINSERT_bud_acct_membership():
     accts_buddelta = buddelta_shop()
     bob_run_atom = budatom_shop(bud_acct_membership_str(), atom_insert())
     bob_run_atom.set_arg(acct_name_str(), bob_str)
-    bob_run_atom.set_arg(group_label_str(), run_str)
+    bob_run_atom.set_arg(group_title_str(), run_str)
     yao_run_atom = budatom_shop(bud_acct_membership_str(), atom_insert())
     yao_run_atom.set_arg(acct_name_str(), yao_str)
-    yao_run_atom.set_arg(group_label_str(), run_str)
+    yao_run_atom.set_arg(group_title_str(), run_str)
     zia_run_atom = budatom_shop(bud_acct_membership_str(), atom_insert())
     zia_run_atom.set_arg(acct_name_str(), zia_str)
-    zia_run_atom.set_arg(group_label_str(), run_str)
+    zia_run_atom.set_arg(group_title_str(), run_str)
     accts_buddelta.set_budatom(bob_run_atom)
     accts_buddelta.set_budatom(yao_run_atom)
     accts_buddelta.set_budatom(zia_run_atom)

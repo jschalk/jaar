@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.dict_toolbox import get_empty_set_if_None
-from src.a17_creed_logic.creed_db_tool import if_nan_return_None
+from src.a17_idea_logic.idea_db_tool import if_nan_return_None
 from dataclasses import dataclass
 
 
@@ -290,13 +290,13 @@ def pidginbodybook_shop(pidginheartbook: PidginHeartBook = None) -> PidginBodyBo
 class PidginPrimeColumns:
     def __init__(self):
         f1_cols = ["event_int", "face_name"]
-        f2_cols = ["creed_number", "event_int", "face_name"]
+        f2_cols = ["idea_number", "event_int", "face_name"]
         back_cols = ["otx_bridge", "inx_bridge", "unknown_term"]
         self.pidgin_name_agg_columns = [*f1_cols, "otx_name", "inx_name", *back_cols]
+        self.pidgin_title_agg_columns = [*f1_cols, "otx_title", "inx_title", *back_cols]
         self.pidgin_label_agg_columns = [*f1_cols, "otx_label", "inx_label", *back_cols]
-        self.pidgin_word_agg_columns = [*f1_cols, "otx_word", "inx_word", *back_cols]
         self.pidgin_way_agg_columns = [*f1_cols, "otx_way", "inx_way", *back_cols]
         self.pidgin_name_raw_columns = [*f2_cols, "otx_name", "inx_name", *back_cols]
+        self.pidgin_title_raw_columns = [*f2_cols, "otx_title", "inx_title", *back_cols]
         self.pidgin_label_raw_columns = [*f2_cols, "otx_label", "inx_label", *back_cols]
-        self.pidgin_word_raw_columns = [*f2_cols, "otx_word", "inx_word", *back_cols]
         self.pidgin_way_raw_columns = [*f2_cols, "otx_way", "inx_way", *back_cols]

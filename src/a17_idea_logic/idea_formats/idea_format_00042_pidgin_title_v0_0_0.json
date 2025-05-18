@@ -1,0 +1,29 @@
+{
+    "attributes": {
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "inx_bridge": {
+            "otx_key": false
+        },
+        "inx_title": {
+            "otx_key": false
+        },
+        "otx_bridge": {
+            "otx_key": false
+        },
+        "otx_title": {
+            "otx_key": true
+        },
+        "unknown_term": {
+            "otx_key": false
+        }
+    },
+    "idea_number": "br00042",
+    "dimens": [
+        "pidgin_title"
+    ]
+}

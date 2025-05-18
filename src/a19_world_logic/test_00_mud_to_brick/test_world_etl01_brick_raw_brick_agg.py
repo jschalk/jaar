@@ -1,9 +1,9 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a02_finance_logic._utils.strs_a02 import fisc_word_str
+from src.a02_finance_logic._utils.strs_a02 import fisc_label_str
 from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str
-from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_word_str
-from src.a17_creed_logic._utils.str_a17 import brick_agg_str, brick_raw_str
-from src.a17_creed_logic.creed_db_tool import (
+from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_label_str
+from src.a17_idea_logic._utils.str_a17 import brick_agg_str, brick_raw_str
+from src.a17_idea_logic.idea_db_tool import (
     get_sheet_names,
     upsert_sheet,
     sheet_exists,
@@ -32,18 +32,18 @@ def test_WorldUnit_brick_raw_db_to_brick_agg_df_CreatesOtxSheets_Scenario0_Group
     ex_filename = "fizzbuzz.xlsx"
     mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
     brick_file_path = create_path(fizz_world._brick_dir, "br00003.xlsx")
-    creed_columns = [
+    idea_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_word_str(),
+        fisc_label_str(),
         cumlative_minute_str(),
-        hour_word_str(),
+        hour_label_str(),
     ]
     accord23_str = "accord23"
     row1 = [event1, sue_str, accord23_str, minute_360, hour6am]
     row2 = [event1, sue_str, accord23_str, minute_420, hour7am]
     row3 = [event1, sue_str, accord23_str, minute_420, hour7am]
-    df1 = DataFrame([row1, row2, row3], columns=creed_columns)
+    df1 = DataFrame([row1, row2, row3], columns=idea_columns)
     upsert_sheet(mud_file_path, "example1_br00003", df1)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -54,7 +54,7 @@ def test_WorldUnit_brick_raw_db_to_brick_agg_df_CreatesOtxSheets_Scenario0_Group
 
     # THEN
     gen_otx_df = pandas_read_excel(brick_file_path, sheet_name=brick_agg_str())
-    ex_otx_df = DataFrame([row1, row2], columns=creed_columns)
+    ex_otx_df = DataFrame([row1, row2], columns=idea_columns)
     print(f"{gen_otx_df.columns=}")
     assert len(ex_otx_df.columns) == len(gen_otx_df.columns)
     assert list(ex_otx_df.columns) == list(gen_otx_df.columns)
@@ -80,19 +80,19 @@ def test_WorldUnit_brick_raw_db_to_brick_agg_df_CreatesOtxSheets_Scenario1_Group
     hour8am = "8am"
     ex_filename = "fizzbuzz.xlsx"
     mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
-    creed_columns = [
+    idea_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_word_str(),
+        fisc_label_str(),
         cumlative_minute_str(),
-        hour_word_str(),
+        hour_label_str(),
     ]
     accord23_str = "accord23"
     row1 = [event3, sue_str, accord23_str, minute_360, hour6am]
     row2 = [event3, sue_str, accord23_str, minute_420, hour7am]
     row3 = [event3, sue_str, accord23_str, minute_420, hour8am]
     row4 = [event7, sue_str, accord23_str, minute_420, hour8am]
-    df1 = DataFrame([row1, row2, row3, row4], columns=creed_columns)
+    df1 = DataFrame([row1, row2, row3, row4], columns=idea_columns)
     upsert_sheet(mud_file_path, "example1_br00003", df1)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -108,7 +108,7 @@ def test_WorldUnit_brick_raw_db_to_brick_agg_df_CreatesOtxSheets_Scenario1_Group
     gen_br00003_agg_df = pandas_read_excel(
         br00003_agg_file_path, sheet_name=brick_agg_str()
     )
-    ex_otx_df = DataFrame([row1, row4], columns=creed_columns)
+    ex_otx_df = DataFrame([row1, row4], columns=idea_columns)
     # print(f"{gen_otx_df.columns=}")
     print("gen_br00003_agg_df")
     print(f"{gen_br00003_agg_df}")

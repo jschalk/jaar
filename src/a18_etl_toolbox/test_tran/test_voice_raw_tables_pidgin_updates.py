@@ -2,20 +2,20 @@ from src.a00_data_toolbox.db_toolbox import get_table_columns
 from src.a01_way_logic.way import create_way
 from src.a02_finance_logic._utils.strs_a02 import owner_name_str
 from src.a06_bud_logic._utils.str_a06 import (
-    bud_idea_awardlink_str,
+    bud_concept_awardlink_str,
     face_name_str,
     event_int_str,
     acct_name_str,
     credit_belief_str,
     debtit_belief_str,
-    idea_way_str,
-    awardee_label_str,
+    concept_way_str,
+    awardee_title_str,
     give_force_str,
     take_force_str,
 )
 from src.a15_fisc_logic._utils.str_a15 import (
     fisc_timeline_hour_str,
-    hour_word_str,
+    hour_label_str,
     cumlative_minute_str,
 )
 from src.a16_pidgin_logic.pidgin import (
@@ -23,21 +23,21 @@ from src.a16_pidgin_logic.pidgin import (
     default_unknown_term_if_None,
 )
 from src.a16_pidgin_logic._utils.str_a16 import (
-    pidgin_word_str,
+    pidgin_label_str,
     pidgin_way_str,
     pidgin_name_str,
-    pidgin_label_str,
+    pidgin_title_str,
     pidgin_core_str,
     inx_bridge_str,
     otx_bridge_str,
-    inx_word_str,
-    otx_word_str,
+    inx_label_str,
+    otx_label_str,
     inx_way_str,
     otx_way_str,
     inx_name_str,
     otx_name_str,
-    inx_label_str,
-    otx_label_str,
+    inx_title_str,
+    otx_title_str,
     unknown_term_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
@@ -45,8 +45,8 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_sound_and_voice_tables,
     create_update_voice_raw_existing_inx_col_sqlstr,
     create_pidname_face_otx_event_sqlstr,
+    create_pidtitl_face_otx_event_sqlstr,
     create_pidlabe_face_otx_event_sqlstr,
-    create_pidword_face_otx_event_sqlstr,
     create_pidwayy_face_otx_event_sqlstr,
     create_update_voice_raw_empty_inx_col_sqlstr,
 )
@@ -58,7 +58,7 @@ from sqlite3 import connect as sqlite3_connect
 # TODO create test for mapped_names sqlstr (link otx_)
 
 
-def test_create_pidlabe_face_otx_event_sqlstr_ReturnsObj_Scenario0_LabelStr():
+def test_create_pidtitl_face_otx_event_sqlstr_ReturnsObj_Scenario0_TitleStr():
     # ESTABLISH
     bob_otx = "Bob"
     yao_otx = "Yao"
@@ -82,11 +82,11 @@ def test_create_pidlabe_face_otx_event_sqlstr_ReturnsObj_Scenario0_LabelStr():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budawar_dimen = bud_idea_awardlink_str()
+        budawar_dimen = bud_concept_awardlink_str()
         budawar_v_raw_put_tablename = prime_tbl(budawar_dimen, "v", "raw", "put")
         print(f"{get_table_columns(cursor, budawar_v_raw_put_tablename)=}")
         insert_sqlstr = f"""INSERT INTO {budawar_v_raw_put_tablename}
-        ({event_int_str()}, {face_name_str()}_otx, {awardee_label_str()}_otx, {awardee_label_str()}_inx)
+        ({event_int_str()}, {face_name_str()}_otx, {awardee_title_str()}_otx, {awardee_title_str()}_inx)
         VALUES
           ({event0}, '{bob_otx}', '{fly_otx}', NULL)
         , ({event1}, '{bob_otx}', '{fly_otx}', NULL)
@@ -98,11 +98,11 @@ def test_create_pidlabe_face_otx_event_sqlstr_ReturnsObj_Scenario0_LabelStr():
         """
         cursor.execute(insert_sqlstr)
 
-        pidlabe_dimen = pidgin_label_str()
-        pidlabe_s_vld_tablename = prime_tbl(pidlabe_dimen, "s", "vld")
-        # print(f"{pidlabe_s_vld_tablename=}")
-        insert_pidlabe_sqlstr = f"""INSERT INTO {pidlabe_s_vld_tablename}
-        ({event_int_str()}, {face_name_str()}, {otx_label_str()}, {inx_label_str()})
+        pidtitl_dimen = pidgin_title_str()
+        pidtitl_s_vld_tablename = prime_tbl(pidtitl_dimen, "s", "vld")
+        # print(f"{pidtitl_s_vld_tablename=}")
+        insert_pidtitl_sqlstr = f"""INSERT INTO {pidtitl_s_vld_tablename}
+        ({event_int_str()}, {face_name_str()}, {otx_title_str()}, {inx_title_str()})
         VALUES
           ({event1}, '{bob_otx}', '{fly_otx}', '{fly_inx1}')
         , ({event2}, '{yao_otx}', '{swi_otx}', '{swi_inx}')
@@ -111,41 +111,41 @@ def test_create_pidlabe_face_otx_event_sqlstr_ReturnsObj_Scenario0_LabelStr():
         , ({event8}, '{zia_otx}', '{run_otx}', '{run_inx}')
         ;
         """
-        cursor.execute(insert_pidlabe_sqlstr)
+        cursor.execute(insert_pidtitl_sqlstr)
 
         face_name_inx_count_sql = f"SELECT COUNT(*) FROM {budawar_v_raw_put_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 0
 
         # WHEN
-        pidname_face_otx_event_sqlstr = create_pidlabe_face_otx_event_sqlstr(
-            budawar_v_raw_put_tablename, awardee_label_str()
+        pidname_face_otx_event_sqlstr = create_pidtitl_face_otx_event_sqlstr(
+            budawar_v_raw_put_tablename, awardee_title_str()
         )
         cursor.execute(pidname_face_otx_event_sqlstr)
 
         # THEN
-        static_select_pidlabe_sqlstr = """
+        static_select_pidtitl_sqlstr = """
 SELECT
   raw_dim.rowid raw_rowid
 , raw_dim.event_int
 , raw_dim.face_name_otx
-, raw_dim.awardee_label_otx
+, raw_dim.awardee_title_otx
 , MAX(pid.event_int) pidgin_event_int
-FROM bud_idea_awardlink_v_put_raw raw_dim
-LEFT JOIN pidgin_label_s_vld pid ON pid.face_name = raw_dim.face_name_otx
-    AND pid.otx_label = raw_dim.awardee_label_otx
+FROM bud_concept_awardlink_v_put_raw raw_dim
+LEFT JOIN pidgin_title_s_vld pid ON pid.face_name = raw_dim.face_name_otx
+    AND pid.otx_title = raw_dim.awardee_title_otx
     AND raw_dim.event_int >= pid.event_int
 GROUP BY
   raw_dim.rowid
 , raw_dim.event_int
 , raw_dim.face_name_otx
-, raw_dim.awardee_label_otx
+, raw_dim.awardee_title_otx
 """
 
         print(pidname_face_otx_event_sqlstr)
         print("")
-        # print(static_select_pidlabe_sqlstr)
-        assert static_select_pidlabe_sqlstr == pidname_face_otx_event_sqlstr
-        cursor.execute(static_select_pidlabe_sqlstr)
+        # print(static_select_pidtitl_sqlstr)
+        assert static_select_pidtitl_sqlstr == pidname_face_otx_event_sqlstr
+        cursor.execute(static_select_pidtitl_sqlstr)
         rows = cursor.fetchall()
         print(rows)
         # event5 does not link to event7 pidgin record's
@@ -159,7 +159,7 @@ GROUP BY
         ]
 
 
-def test_create_pidword_face_otx_event_sqlstr_ReturnsObj_Scenario0_WordStr():
+def test_create_pidlabe_face_otx_event_sqlstr_ReturnsObj_Scenario0_LabelStr():
     # ESTABLISH
     bob_otx = "Bob"
     yao_otx = "Yao"
@@ -187,7 +187,7 @@ def test_create_pidword_face_otx_event_sqlstr_ReturnsObj_Scenario0_WordStr():
         fishour_v_raw_tablename = prime_tbl(fishour_dimen, "v", "raw")
         print(f"{get_table_columns(cursor, fishour_v_raw_tablename)=}")
         insert_sqlstr = f"""INSERT INTO {fishour_v_raw_tablename}
-        ({event_int_str()}, {face_name_str()}_otx, {hour_word_str()}_otx, {hour_word_str()}_inx)
+        ({event_int_str()}, {face_name_str()}_otx, {hour_label_str()}_otx, {hour_label_str()}_inx)
         VALUES
           ({event0}, '{bob_otx}', '{hr8_otx}', NULL)
         , ({event1}, '{bob_otx}', '{hr8_otx}', NULL)
@@ -199,11 +199,11 @@ def test_create_pidword_face_otx_event_sqlstr_ReturnsObj_Scenario0_WordStr():
         """
         cursor.execute(insert_sqlstr)
 
-        pidword_dimen = pidgin_word_str()
-        pidword_s_vld_tablename = prime_tbl(pidword_dimen, "s", "vld")
-        # print(f"{pidword_s_vld_tablename=}")
-        insert_pidword_sqlstr = f"""INSERT INTO {pidword_s_vld_tablename}
-        ({event_int_str()}, {face_name_str()}, {otx_word_str()}, {inx_word_str()})
+        pidlabe_dimen = pidgin_label_str()
+        pidlabe_s_vld_tablename = prime_tbl(pidlabe_dimen, "s", "vld")
+        # print(f"{pidlabe_s_vld_tablename=}")
+        insert_pidlabe_sqlstr = f"""INSERT INTO {pidlabe_s_vld_tablename}
+        ({event_int_str()}, {face_name_str()}, {otx_label_str()}, {inx_label_str()})
         VALUES
           ({event1}, '{bob_otx}', '{hr8_otx}', '{hr8_inx1}')
         , ({event2}, '{yao_otx}', '{hr2_otx}', '{hr2_inx}')
@@ -212,41 +212,41 @@ def test_create_pidword_face_otx_event_sqlstr_ReturnsObj_Scenario0_WordStr():
         , ({event8}, '{zia_otx}', '{hr7_otx}', '{hr7_inx}')
         ;
         """
-        cursor.execute(insert_pidword_sqlstr)
+        cursor.execute(insert_pidlabe_sqlstr)
 
         face_name_inx_count_sql = f"SELECT COUNT(*) FROM {fishour_v_raw_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 0
 
         # WHEN
-        pidname_face_otx_event_sqlstr = create_pidword_face_otx_event_sqlstr(
-            fishour_v_raw_tablename, hour_word_str()
+        pidname_face_otx_event_sqlstr = create_pidlabe_face_otx_event_sqlstr(
+            fishour_v_raw_tablename, hour_label_str()
         )
         cursor.execute(pidname_face_otx_event_sqlstr)
 
         # THEN
-        static_select_pidword_sqlstr = """
+        static_select_pidlabe_sqlstr = """
 SELECT
   raw_dim.rowid raw_rowid
 , raw_dim.event_int
 , raw_dim.face_name_otx
-, raw_dim.hour_word_otx
+, raw_dim.hour_label_otx
 , MAX(pid.event_int) pidgin_event_int
 FROM fisc_timeline_hour_v_raw raw_dim
-LEFT JOIN pidgin_word_s_vld pid ON pid.face_name = raw_dim.face_name_otx
-    AND pid.otx_word = raw_dim.hour_word_otx
+LEFT JOIN pidgin_label_s_vld pid ON pid.face_name = raw_dim.face_name_otx
+    AND pid.otx_label = raw_dim.hour_label_otx
     AND raw_dim.event_int >= pid.event_int
 GROUP BY
   raw_dim.rowid
 , raw_dim.event_int
 , raw_dim.face_name_otx
-, raw_dim.hour_word_otx
+, raw_dim.hour_label_otx
 """
 
         print(pidname_face_otx_event_sqlstr)
         print("")
-        # print(static_select_pidword_sqlstr)
-        assert static_select_pidword_sqlstr == pidname_face_otx_event_sqlstr
-        cursor.execute(static_select_pidword_sqlstr)
+        # print(static_select_pidlabe_sqlstr)
+        assert static_select_pidlabe_sqlstr == pidname_face_otx_event_sqlstr
+        cursor.execute(static_select_pidlabe_sqlstr)
         rows = cursor.fetchall()
         print(rows)
         # event5 does not link to event7 pidgin record's
@@ -287,11 +287,11 @@ def test_create_pidwayy_face_otx_event_sqlstr_ReturnsObj_Scenario0_WayStr():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budawar_put_dimen = bud_idea_awardlink_str()
+        budawar_put_dimen = bud_concept_awardlink_str()
         budawar_put_v_raw_tablename = prime_tbl(budawar_put_dimen, "v", "raw", "put")
         print(f"{get_table_columns(cursor, budawar_put_v_raw_tablename)=}")
         insert_sqlstr = f"""INSERT INTO {budawar_put_v_raw_tablename}
-        ({event_int_str()}, {face_name_str()}_otx, {idea_way_str()}_otx, {idea_way_str()}_inx)
+        ({event_int_str()}, {face_name_str()}_otx, {concept_way_str()}_otx, {concept_way_str()}_inx)
         VALUES
           ({event0}, '{bob_otx}', '{clean_way_otx}', NULL)
         , ({event1}, '{bob_otx}', '{clean_way_otx}', NULL)
@@ -323,7 +323,7 @@ def test_create_pidwayy_face_otx_event_sqlstr_ReturnsObj_Scenario0_WayStr():
 
         # WHEN
         pidname_face_otx_event_sqlstr = create_pidwayy_face_otx_event_sqlstr(
-            budawar_put_v_raw_tablename, idea_way_str()
+            budawar_put_v_raw_tablename, concept_way_str()
         )
         cursor.execute(pidname_face_otx_event_sqlstr)
 
@@ -333,17 +333,17 @@ SELECT
   raw_dim.rowid raw_rowid
 , raw_dim.event_int
 , raw_dim.face_name_otx
-, raw_dim.idea_way_otx
+, raw_dim.concept_way_otx
 , MAX(pid.event_int) pidgin_event_int
-FROM bud_idea_awardlink_v_put_raw raw_dim
+FROM bud_concept_awardlink_v_put_raw raw_dim
 LEFT JOIN pidgin_way_s_vld pid ON pid.face_name = raw_dim.face_name_otx
-    AND pid.otx_way = raw_dim.idea_way_otx
+    AND pid.otx_way = raw_dim.concept_way_otx
     AND raw_dim.event_int >= pid.event_int
 GROUP BY
   raw_dim.rowid
 , raw_dim.event_int
 , raw_dim.face_name_otx
-, raw_dim.idea_way_otx
+, raw_dim.concept_way_otx
 """
 
         print(pidname_face_otx_event_sqlstr)
@@ -385,7 +385,7 @@ def test_create_pidname_face_otx_event_sqlstr_ReturnsObj_Scenario2_NameStr():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budawar_dimen = bud_idea_awardlink_str()
+        budawar_dimen = bud_concept_awardlink_str()
         budawar_v_raw_put_tablename = prime_tbl(budawar_dimen, "v", "raw", "put")
         # print(f"{get_table_columns(cursor, budawar_v_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {budawar_v_raw_put_tablename}
@@ -433,7 +433,7 @@ SELECT
 , raw_dim.face_name_otx
 , raw_dim.face_name_otx
 , MAX(pid.event_int) pidgin_event_int
-FROM bud_idea_awardlink_v_put_raw raw_dim
+FROM bud_concept_awardlink_v_put_raw raw_dim
 LEFT JOIN pidgin_name_s_vld pid ON pid.face_name = raw_dim.face_name_otx
     AND pid.otx_name = raw_dim.face_name_otx
     AND raw_dim.event_int >= pid.event_int
@@ -485,7 +485,7 @@ def test_create_pidname_face_otx_event_sqlstr_ReturnsObj_Scenario1_SelectsMostRe
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budawar_dimen = bud_idea_awardlink_str()
+        budawar_dimen = bud_concept_awardlink_str()
         budawar_v_raw_put_tablename = prime_tbl(budawar_dimen, "v", "raw", "put")
         print(f"{get_table_columns(cursor, budawar_v_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {budawar_v_raw_put_tablename}
@@ -533,7 +533,7 @@ SELECT
 , raw_dim.face_name_otx
 , raw_dim.owner_name_otx
 , MAX(pid.event_int) pidgin_event_int
-FROM bud_idea_awardlink_v_put_raw raw_dim
+FROM bud_concept_awardlink_v_put_raw raw_dim
 LEFT JOIN pidgin_name_s_vld pid ON pid.face_name = raw_dim.face_name_otx
     AND pid.otx_name = raw_dim.owner_name_otx
     AND raw_dim.event_int >= pid.event_int
@@ -577,7 +577,7 @@ def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario0_
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budawar_dimen = bud_idea_awardlink_str()
+        budawar_dimen = bud_concept_awardlink_str()
         budawar_v_raw_put_tablename = prime_tbl(budawar_dimen, "v", "raw", "put")
         # print(f"{get_table_columns(cursor, budawar_v_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {budawar_v_raw_put_tablename} 
@@ -642,7 +642,7 @@ def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario1_
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budawar_dimen = bud_idea_awardlink_str()
+        budawar_dimen = bud_concept_awardlink_str()
         budawar_v_raw_put_tablename = prime_tbl(budawar_dimen, "v", "raw", "put")
         insert_face_name_only_sqlstr = f"""INSERT INTO {budawar_v_raw_put_tablename}
         ({event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx)
@@ -709,7 +709,7 @@ def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario2_
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budawar_dimen = bud_idea_awardlink_str()
+        budawar_dimen = bud_concept_awardlink_str()
         budawar_v_raw_put_tablename = prime_tbl(budawar_dimen, "v", "raw", "put")
         print(f"{get_table_columns(cursor, budawar_v_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {budawar_v_raw_put_tablename}
@@ -785,7 +785,7 @@ def test_create_update_voice_raw_empty_inx_col_sqlstr_UpdatesTable_Scenario0_Emp
         print(f"{pidname_s_vld_tablename=}")
         print(f"{get_table_columns(cursor, pidname_s_vld_tablename)=}")
 
-        budawar_dimen = bud_idea_awardlink_str()
+        budawar_dimen = bud_concept_awardlink_str()
         budawar_v_raw_put_tablename = prime_tbl(budawar_dimen, "v", "raw", "put")
         print(f"{get_table_columns(cursor, budawar_v_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {budawar_v_raw_put_tablename} ({event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx)
@@ -842,7 +842,7 @@ def test_set_all_voice_raw_inx_columns_Scenario0_empty_tables():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budawar_dimen = bud_idea_awardlink_str()
+        budawar_dimen = bud_concept_awardlink_str()
         budawar_v_raw_put_tablename = prime_tbl(budawar_dimen, "v", "raw", "put")
         print(f"{get_table_columns(cursor, budawar_v_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {budawar_v_raw_put_tablename}

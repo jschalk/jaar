@@ -452,7 +452,7 @@ def test_create_table_from_csv_ChangesDBState(
     assert columns == expected_columns
 
 
-def test_create_creed_table_from_csv_DoesNotEmptyTable(
+def test_create_idea_table_from_csv_DoesNotEmptyTable(
     setup_database_and_csv: tuple[sqlite3_Connection, str, str],
 ):
     # ESTABLISH
@@ -534,7 +534,7 @@ def test_get_table_columns_ReturnsObj_Scenario0_TableDoesNotExist(
 ):
     """Test the create_table_from_csv_with_types function."""
     conn, test_table, test_csv_filepath = setup_database_and_csv
-    x_tablename = "something_dark_side_table"
+    x_tablename = "some_dark_side_table"
     assert db_table_exists(conn, x_tablename) is False
 
     # WHEN / THEN
@@ -545,7 +545,7 @@ def test_get_table_columns_ReturnsObj_Scenario1_TableExists(
     setup_database_and_csv: tuple[sqlite3_Connection, str, str],
 ):
     conn, test_table, test_csv_filepath = setup_database_and_csv
-    x_tablename = "something_dark_side_table"
+    x_tablename = "some_dark_side_table"
     create_table_from_csv(test_csv_filepath, conn, x_tablename, {})
 
     # WHEN / THEN
@@ -556,7 +556,7 @@ def test_get_table_columns_ReturnsObj_Scenario2_TableExists_PassCursorObj(
     setup_database_and_csv: tuple[sqlite3_Connection, str, str],
 ):
     conn, test_table, test_csv_filepath = setup_database_and_csv
-    x_tablename = "something_dark_side_table"
+    x_tablename = "some_dark_side_table"
     create_table_from_csv(test_csv_filepath, conn, x_tablename, {})
     expected_columns = ["id", "name", "age", "email"]
 

@@ -6,8 +6,8 @@ from src.a02_finance_logic.finance_config import (
 )
 from src.a01_way_logic.way import default_bridge_if_None
 from src.a02_finance_logic.deal import tranbook_shop
-from src.a05_idea_logic.healer import healerlink_shop
-from src.a05_idea_logic.idea import ideaunit_shop
+from src.a05_concept_logic.healer import healerlink_shop
+from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a07_calendar_logic.chrono import timelineunit_shop
 from src.a12_hub_tools.hub_path import create_path, create_owner_dir_path
@@ -41,7 +41,7 @@ def test_FiscUnit_Exists():
     # ESTABLISH / WHEN
     accord_fisc = FiscUnit()
     # THEN
-    assert not accord_fisc.fisc_word
+    assert not accord_fisc.fisc_label
     assert not accord_fisc.timeline
     assert not accord_fisc.brokerunits
     assert not accord_fisc.cashbook
@@ -68,7 +68,7 @@ def test_fiscunit_shop_ReturnsFiscUnit():
     a23_fisc = fiscunit_shop(a23_str)
 
     # THEN
-    assert a23_fisc.fisc_word == a23_str
+    assert a23_fisc.fisc_label == a23_str
     assert a23_fisc.timeline == timelineunit_shop()
     assert a23_fisc.brokerunits == {}
     assert a23_fisc.cashbook == tranbook_shop(a23_str)
@@ -93,7 +93,7 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_fiscs_dir(env_dir_setup_cleanup):
     a23_fisc = fiscunit_shop(a23_str, fisc_mstr_dir=get_module_temp_dir())
 
     # THEN
-    assert a23_fisc.fisc_word == a23_str
+    assert a23_fisc.fisc_label == a23_str
     assert a23_fisc.fisc_mstr_dir == get_module_temp_dir()
     assert a23_fisc._owners_dir is not None
     assert a23_fisc._packs_dir is not None
@@ -111,7 +111,7 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_bridge(env_dir_setup_cleanup):
 
     # WHEN
     a23_fisc = fiscunit_shop(
-        fisc_word=a23_str,
+        fisc_label=a23_str,
         fisc_mstr_dir=get_module_temp_dir(),
         offi_times=a45_offi_times,
         in_memory_journal=True,
@@ -173,7 +173,7 @@ def test_fiscunit_shop_SetsfiscsDirs(env_dir_setup_cleanup):
     a23_fisc = fiscunit_shop(a23_str, get_module_temp_dir(), in_memory_journal=True)
 
     # THEN
-    assert a23_fisc.fisc_word == a23_str
+    assert a23_fisc.fisc_label == a23_str
     x_fiscs_dir = create_path(get_module_temp_dir(), "fiscs")
     assert a23_fisc._fisc_dir == create_path(x_fiscs_dir, a23_str)
     assert a23_fisc._owners_dir == create_path(a23_fisc._fisc_dir, "owners")
@@ -409,13 +409,13 @@ def test_FiscUnit_create_init_job_from_guts_Scenario3_gut_FilesAreListenedTo(
     sue_gut = budunit_shop(sue_str, a23_str, bridge=slash_str)
     sue_gut.add_acctunit(bob_str)
     save_gut_file(fisc_mstr_dir, sue_gut)
-    # create Bob gut with agenda idea for Sue
+    # create Bob gut with agenda concept for Sue
     bob_gut = budunit_shop(bob_str, a23_str, bridge=slash_str)
     bob_gut.add_acctunit(sue_str)
     casa_way = bob_gut.make_l1_way("casa")
     clean_way = bob_gut.make_way(casa_way, "clean")
-    bob_gut.add_idea(clean_way, pledge=True)
-    bob_gut.get_idea_obj(clean_way).laborunit.set_laborlink(sue_str)
+    bob_gut.add_concept(clean_way, pledge=True)
+    bob_gut.get_concept_obj(clean_way).laborunit.set_laborlink(sue_str)
     save_gut_file(fisc_mstr_dir, bob_gut)
     assert not open_job_file(fisc_mstr_dir, a23_str, sue_str).get_agenda_dict()
 
@@ -426,7 +426,7 @@ def test_FiscUnit_create_init_job_from_guts_Scenario3_gut_FilesAreListenedTo(
     assert open_job_file(fisc_mstr_dir, a23_str, sue_str).get_agenda_dict()
     sue_agenda = open_job_file(fisc_mstr_dir, a23_str, sue_str).get_agenda_dict()
     assert len(sue_agenda) == 1
-    assert sue_agenda.get(clean_way).get_idea_way() == clean_way
+    assert sue_agenda.get(clean_way).get_concept_way() == clean_way
 
 
 def test_FiscUnit__set_all_healer_dutys_CorrectlySetsdutys(
@@ -449,21 +449,21 @@ def test_FiscUnit__set_all_healer_dutys_CorrectlySetsdutys(
     yao_gut_bud.add_acctunit(yao_str)
     texas_str = "Texas"
     texas_way = sue_gut_bud.make_l1_way(texas_str)
-    sue_gut_bud.set_l1_idea(ideaunit_shop(texas_str, problem_bool=True))
-    yao_gut_bud.set_l1_idea(ideaunit_shop(texas_str, problem_bool=True))
+    sue_gut_bud.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
+    yao_gut_bud.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
     dallas_way = sue_gut_bud.make_way(texas_way, dallas_str)
     dallas_healerlink = healerlink_shop({sue_str, yao_str})
-    dallas_idea = ideaunit_shop(dallas_str, healerlink=dallas_healerlink)
+    dallas_concept = conceptunit_shop(dallas_str, healerlink=dallas_healerlink)
     elpaso_str = "el paso"
     elpaso_way = sue_gut_bud.make_way(texas_way, elpaso_str)
     elpaso_healerlink = healerlink_shop({sue_str})
-    elpaso_idea = ideaunit_shop(elpaso_str, healerlink=elpaso_healerlink)
+    elpaso_concept = conceptunit_shop(elpaso_str, healerlink=elpaso_healerlink)
 
-    sue_gut_bud.set_idea(dallas_idea, texas_way)
-    sue_gut_bud.set_idea(elpaso_idea, texas_way)
-    yao_gut_bud.set_idea(dallas_idea, texas_way)
-    yao_gut_bud.set_idea(elpaso_idea, texas_way)
+    sue_gut_bud.set_concept(dallas_concept, texas_way)
+    sue_gut_bud.set_concept(elpaso_concept, texas_way)
+    yao_gut_bud.set_concept(dallas_concept, texas_way)
+    yao_gut_bud.set_concept(elpaso_concept, texas_way)
 
     save_gut_file(x_fisc_mstr_dir, sue_gut_bud)
     save_gut_file(x_fisc_mstr_dir, yao_gut_bud)
@@ -518,7 +518,7 @@ def test_FiscUnit_get_owner_hubunits_ReturnsObj(env_dir_setup_cleanup):
     # THEN
     sue_hubunit = hubunit_shop(
         fisc_mstr_dir=a23_fisc.fisc_mstr_dir,
-        fisc_word=a23_fisc.fisc_word,
+        fisc_label=a23_fisc.fisc_label,
         owner_name=sue_str,
         keep_way=None,
         bridge=a23_fisc.bridge,
@@ -527,7 +527,7 @@ def test_FiscUnit_get_owner_hubunits_ReturnsObj(env_dir_setup_cleanup):
     )
     yao_hubunit = hubunit_shop(
         fisc_mstr_dir=a23_fisc.fisc_mstr_dir,
-        fisc_word=a23_fisc.fisc_word,
+        fisc_label=a23_fisc.fisc_label,
         owner_name=yao_str,
         keep_way=None,
         bridge=a23_fisc.bridge,

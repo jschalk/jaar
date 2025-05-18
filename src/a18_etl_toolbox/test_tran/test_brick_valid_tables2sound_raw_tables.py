@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_word_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_label_str
 from src.a06_bud_logic._utils.str_a06 import face_name_str, acct_name_str, event_int_str
 from src.a16_pidgin_logic._utils.str_a16 import (
     inx_bridge_str,
@@ -8,13 +8,13 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_way_str,
     unknown_term_str,
 )
-from src.a17_creed_logic.creed_db_tool import create_creed_sorted_table
-from src.a17_creed_logic._utils.str_a17 import brick_valid_str
+from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
+from src.a17_idea_logic._utils.str_a17 import brick_valid_str
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a18_etl_toolbox.transformers import etl_brick_valid_tables_to_sound_raw_tables
 from sqlite3 import connect as sqlite3_connect
 
-# get examples from tests from etl_brick_agg_dfs_to_pidgin_label_raw
+# get examples from tests from etl_brick_agg_dfs_to_pidgin_title_raw
 # get examples from tests from etl_brick_agg_dfs_to_pidgin_way_raw
 # get examples from tests from etl_brick_agg_dfs_to_pidgin__raw
 # get examples from tests from etl_brick_agg_dfs_to_pidgin_way_raw
@@ -42,17 +42,17 @@ def test_etl_brick_valid_tables_to_sound_raw_tables_PopulatesValidTable_Scenario
         br00117_columns = [
             event_int_str(),
             face_name_str(),
-            fisc_word_str(),
+            fisc_label_str(),
             owner_name_str(),
             acct_name_str(),
             otx_way_str(),
             inx_way_str(),
         ]
-        create_creed_sorted_table(cursor, br00117_valid_tablename, br00117_columns)
+        create_idea_sorted_table(cursor, br00117_valid_tablename, br00117_columns)
         insert_into_clause = f"""INSERT INTO {br00117_valid_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {fisc_word_str()}
+, {fisc_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {otx_way_str()}
@@ -76,7 +76,7 @@ VALUES
             inx_bridge_str(),
             unknown_term_str(),
         ]
-        create_creed_sorted_table(cursor, br00045_valid_tablename, br00045_columns)
+        create_idea_sorted_table(cursor, br00045_valid_tablename, br00045_columns)
         insert_into_clause = f"""INSERT INTO {br00045_valid_tablename} (
   {event_int_str()}
 , {face_name_str()}

@@ -1,24 +1,24 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_word_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_label_str
 from src.a06_bud_logic._utils.str_a06 import face_name_str, acct_name_str, event_int_str
 from src.a16_pidgin_logic._utils.str_a16 import (
     inx_bridge_str,
     otx_bridge_str,
     inx_name_str,
     otx_name_str,
-    inx_word_str,
-    otx_word_str,
-    inx_way_str,
-    otx_way_str,
     inx_label_str,
     otx_label_str,
+    inx_way_str,
+    otx_way_str,
+    inx_title_str,
+    otx_title_str,
     unknown_term_str,
 )
-from src.a17_creed_logic._utils.str_a17 import brick_agg_str
-from src.a17_creed_logic.creed_db_tool import (
+from src.a17_idea_logic._utils.str_a17 import brick_agg_str
+from src.a17_idea_logic.idea_db_tool import (
     upsert_sheet,
     sheet_exists,
-    _get_pidgen_creed_format_filenames,
+    _get_pidgen_idea_format_filenames,
 )
 from src.a18_etl_toolbox.tran_path import create_brick_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
@@ -31,13 +31,13 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
 
 
-def test_get_pidgen_creed_format_filenames_ReturnsObj():
+def test_get_pidgen_idea_format_filenames_ReturnsObj():
     # ESTABLISH / WHEN
-    pidgen_creed_filenames = _get_pidgen_creed_format_filenames()
+    pidgen_idea_filenames = _get_pidgen_idea_format_filenames()
 
     # THEN
-    print(f"pbranch examples for {pidgen_creed_filenames=}")
-    assert pidgen_creed_filenames == {
+    print(f"pbranch examples for {pidgen_idea_filenames=}")
+    assert pidgen_idea_filenames == {
         "br00042.xlsx",
         "br00043.xlsx",
         "br00044.xlsx",
@@ -69,7 +69,7 @@ def test_WorldUnit_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(
     br00113_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_word_str(),
+        fisc_label_str(),
         owner_name_str(),
         acct_name_str(),
         otx_name_str(),
@@ -102,18 +102,18 @@ def test_WorldUnit_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(
     br00115_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_word_str(),
+        fisc_label_str(),
         owner_name_str(),
         acct_name_str(),
-        otx_label_str(),
-        inx_label_str(),
+        otx_title_str(),
+        inx_title_str(),
     ]
     br00042_file_path = create_path(fizz_world._brick_dir, "br00042.xlsx")
     br00042_columns = [
         event_int_str(),
         face_name_str(),
-        otx_label_str(),
-        inx_label_str(),
+        otx_title_str(),
+        inx_title_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_term_str(),
@@ -134,18 +134,18 @@ def test_WorldUnit_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(
     br00116_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_word_str(),
+        fisc_label_str(),
         owner_name_str(),
         acct_name_str(),
-        otx_word_str(),
-        inx_word_str(),
+        otx_label_str(),
+        inx_label_str(),
     ]
     br00044_file_path = create_path(fizz_world._brick_dir, "br00044.xlsx")
     br00044_columns = [
         event_int_str(),
         face_name_str(),
-        otx_word_str(),
-        inx_word_str(),
+        otx_label_str(),
+        inx_label_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_term_str(),
@@ -166,7 +166,7 @@ def test_WorldUnit_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(
     br00117_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_word_str(),
+        fisc_label_str(),
         owner_name_str(),
         acct_name_str(),
         otx_way_str(),
@@ -202,33 +202,33 @@ def test_WorldUnit_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(
 
     # THEN
     assert os_path_exists(pidgin_path)
-    label_raw_str = "label_raw"
+    title_raw_str = "title_raw"
     name_raw_str = "name_raw"
-    word_raw_str = "word_raw"
+    label_raw_str = "label_raw"
     way_raw_str = "way_raw"
     assert sheet_exists(pidgin_path, name_raw_str)
+    assert sheet_exists(pidgin_path, title_raw_str)
     assert sheet_exists(pidgin_path, label_raw_str)
-    assert sheet_exists(pidgin_path, word_raw_str)
     assert sheet_exists(pidgin_path, way_raw_str)
 
-    gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_raw_str)
+    gen_title_df = pandas_read_excel(pidgin_path, sheet_name=title_raw_str)
     gen_name_df = pandas_read_excel(pidgin_path, sheet_name=name_raw_str)
-    gen_word_df = pandas_read_excel(pidgin_path, sheet_name=word_raw_str)
+    gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_raw_str)
     gen_way_df = pandas_read_excel(pidgin_path, sheet_name=way_raw_str)
 
-    label_file_columns = PidginPrimeColumns().pidgin_label_raw_columns
-    assert list(gen_label_df.columns) == label_file_columns
-    assert len(gen_label_df) == 2
+    title_file_columns = PidginPrimeColumns().pidgin_title_raw_columns
+    assert list(gen_title_df.columns) == title_file_columns
+    assert len(gen_title_df) == 2
     b3 = "br00115"
     b4 = "br00042"
-    e1_label3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
-    e1_label4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
-    e1_label_rows = [e1_label3, e1_label4]
-    e1_label_df = DataFrame(e1_label_rows, columns=label_file_columns)
-    assert len(gen_label_df) == len(e1_label_df)
-    print(f"{gen_label_df.to_csv()=}")
-    print(f" {e1_label_df.to_csv()=}")
-    assert gen_label_df.to_csv(index=False) == e1_label_df.to_csv(index=False)
+    e1_title3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    e1_title4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_title_rows = [e1_title3, e1_title4]
+    e1_title_df = DataFrame(e1_title_rows, columns=title_file_columns)
+    assert len(gen_title_df) == len(e1_title_df)
+    print(f"{gen_title_df.to_csv()=}")
+    print(f" {e1_title_df.to_csv()=}")
+    assert gen_title_df.to_csv(index=False) == e1_title_df.to_csv(index=False)
 
     name_raw_columns = PidginPrimeColumns().pidgin_name_raw_columns
     assert list(gen_name_df.columns) == name_raw_columns
@@ -244,31 +244,31 @@ def test_WorldUnit_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(
     print(f" {e1_name_df.to_csv()=}")
     assert gen_name_df.to_csv(index=False) == e1_name_df.to_csv(index=False)
 
-    word_file_columns = [
-        "creed_number",
+    label_file_columns = [
+        "idea_number",
         event_int_str(),
         face_name_str(),
-        otx_word_str(),
-        inx_word_str(),
+        otx_label_str(),
+        inx_label_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_term_str(),
     ]
-    assert list(gen_word_df.columns) == word_file_columns
-    assert len(gen_word_df) == 2
+    assert list(gen_label_df.columns) == label_file_columns
+    assert len(gen_label_df) == 2
     b3 = "br00116"
     b4 = "br00044"
-    e1_word3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
-    e1_word4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
-    e1_word_rows = [e1_word3, e1_word4]
-    e1_word_df = DataFrame(e1_word_rows, columns=word_file_columns)
-    assert len(gen_word_df) == len(e1_word_df)
-    print(f"{gen_word_df.to_csv()=}")
-    print(f" {e1_word_df.to_csv()=}")
-    assert gen_word_df.to_csv(index=False) == e1_word_df.to_csv(index=False)
+    e1_label3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    e1_label4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_label_rows = [e1_label3, e1_label4]
+    e1_label_df = DataFrame(e1_label_rows, columns=label_file_columns)
+    assert len(gen_label_df) == len(e1_label_df)
+    print(f"{gen_label_df.to_csv()=}")
+    print(f" {e1_label_df.to_csv()=}")
+    assert gen_label_df.to_csv(index=False) == e1_label_df.to_csv(index=False)
 
     way_file_columns = [
-        "creed_number",
+        "idea_number",
         event_int_str(),
         face_name_str(),
         otx_way_str(),

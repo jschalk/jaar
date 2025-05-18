@@ -2,8 +2,8 @@ from src.a06_bud_logic._utils.str_a06 import type_NameStr_str
 from src.a16_pidgin_logic.pidgin import pidginunit_shop, inherit_pidginunit
 from src.a16_pidgin_logic._utils.example_pidgins import (
     get_clean_waymap,
-    get_clean_wordmap,
-    get_swim_labelmap,
+    get_clean_labelmap,
+    get_swim_titlemap,
     get_suita_namemap,
 )
 from pytest import raises as pytest_raises
@@ -88,8 +88,8 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario6_namemap_Inherited():
     event1 = 1
     old_pidginunit = pidginunit_shop(sue_str, 0)
     old_pidginunit.set_namemap(get_suita_namemap())
-    old_pidginunit.set_labelmap(get_swim_labelmap())
-    old_pidginunit.set_wordmap(get_clean_wordmap())
+    old_pidginunit.set_titlemap(get_swim_titlemap())
+    old_pidginunit.set_labelmap(get_clean_labelmap())
     old_pidginunit.set_waymap(get_clean_waymap())
     new_pidginunit = pidginunit_shop(sue_str, event1)
     assert new_pidginunit.namemap != get_suita_namemap()
@@ -102,15 +102,15 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario6_namemap_Inherited():
     merged_acctbrigde = get_suita_namemap()
     merged_acctbrigde.event_int = event1
     assert merged_pidginunit.namemap == merged_acctbrigde
-    merged_groupbrigde = get_swim_labelmap()
+    merged_groupbrigde = get_swim_titlemap()
     merged_groupbrigde.event_int = event1
-    assert merged_pidginunit.labelmap == merged_groupbrigde
-    merged_wordbrigde = get_clean_wordmap()
-    merged_wordbrigde.event_int = event1
-    assert merged_pidginunit.wordmap == merged_wordbrigde
+    assert merged_pidginunit.titlemap == merged_groupbrigde
+    merged_labelbrigde = get_clean_labelmap()
+    merged_labelbrigde.event_int = event1
+    assert merged_pidginunit.labelmap == merged_labelbrigde
     merged_waybrigde = get_clean_waymap()
     merged_waybrigde.event_int = event1
-    merged_waybrigde.wordmap = merged_wordbrigde
+    merged_waybrigde.labelmap = merged_labelbrigde
     assert merged_pidginunit.waymap == merged_waybrigde
 
 
@@ -120,7 +120,7 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario7_namemap_Inherited():
     event1 = 1
     old_pidginunit = pidginunit_shop(sue_str, 0)
     old_pidginunit.set_namemap(get_suita_namemap())
-    old_pidginunit.set_labelmap(get_swim_labelmap())
+    old_pidginunit.set_titlemap(get_swim_titlemap())
     new_pidginunit = pidginunit_shop(sue_str, event1)
     bob_otx = "Bob"
     bob_inx = "Bobby"
@@ -138,6 +138,6 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario7_namemap_Inherited():
     merged_acctbrigde.event_int = event1
     merged_acctbrigde.set_otx2inx(bob_otx, bob_inx)
     assert merged_pidginunit.namemap == merged_acctbrigde
-    merged_groupbrigde = get_swim_labelmap()
+    merged_groupbrigde = get_swim_titlemap()
     merged_groupbrigde.event_int = event1
-    assert merged_pidginunit.labelmap == merged_groupbrigde
+    assert merged_pidginunit.titlemap == merged_groupbrigde

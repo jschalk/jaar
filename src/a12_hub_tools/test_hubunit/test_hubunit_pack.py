@@ -11,7 +11,7 @@ from src.a09_pack_logic.pack import init_pack_id, packunit_shop
 from src.a12_hub_tools.hub_tool import save_gut_file, open_gut_file
 from src.a12_hub_tools.hubunit import hubunit_shop
 from src.a13_bud_listen_logic._utils.example_listen_atoms import (
-    get_atom_example_ideaunit_knee,
+    get_atom_example_conceptunit_knee,
 )
 from src.a13_bud_listen_logic._utils.example_listen_packs import (
     get_sue_packunit,
@@ -373,7 +373,7 @@ def test_HubUnit_del_pack_file_DeletespackjsonAndNotBudAtomjsons(
         _atoms_dir=sue_hubunit._atoms_dir,
         _packs_dir=sue_hubunit._packs_dir,
     )
-    sue_packunit._buddelta.set_budatom(get_atom_example_ideaunit_knee())
+    sue_packunit._buddelta.set_budatom(get_atom_example_conceptunit_knee())
     zero_int = 0
     assert sue_hubunit.pack_file_exists(six_int) is False
     assert sue_hubunit.atom_file_exists(zero_int) is False
@@ -491,20 +491,20 @@ def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_1atom(
     sue_hubunit.save_pack_file(sue_1budatoms_packunit())
     save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
     gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
-    print(f"{gut_bud.fisc_word=}")
-    print(f"{sue_hubunit.fisc_word=}")
+    print(f"{gut_bud.fisc_label=}")
+    print(f"{sue_hubunit.fisc_label=}")
     sports_str = "sports"
     sports_way = gut_bud.make_l1_way(sports_str)
     knee_str = "knee"
     knee_way = gut_bud.make_way(sports_way, knee_str)
-    assert gut_bud.idea_exists(sports_way) is False
+    assert gut_bud.concept_exists(sports_way) is False
 
     # WHEN
     new_bud = sue_hubunit._merge_any_packs(gut_bud)
 
     # THEN
     assert new_bud != gut_bud
-    assert new_bud.idea_exists(sports_way)
+    assert new_bud.concept_exists(sports_way)
 
 
 def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_2atoms(
@@ -516,18 +516,18 @@ def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_2atoms(
     sue_hubunit.save_pack_file(sue_2budatoms_packunit())
     save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
     gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
-    print(f"{gut_bud.fisc_word=}")
+    print(f"{gut_bud.fisc_label=}")
     sports_str = "sports"
     sports_way = gut_bud.make_l1_way(sports_str)
     knee_str = "knee"
     knee_way = gut_bud.make_way(sports_way, knee_str)
-    assert gut_bud.idea_exists(sports_way) is False
-    assert gut_bud.idea_exists(knee_way) is False
+    assert gut_bud.concept_exists(sports_way) is False
+    assert gut_bud.concept_exists(knee_way) is False
 
     # WHEN
     new_bud = sue_hubunit._merge_any_packs(gut_bud)
 
     # THEN
     assert new_bud != gut_bud
-    assert new_bud.idea_exists(sports_way)
-    assert new_bud.idea_exists(knee_way)
+    assert new_bud.concept_exists(sports_way)
+    assert new_bud.concept_exists(knee_way)

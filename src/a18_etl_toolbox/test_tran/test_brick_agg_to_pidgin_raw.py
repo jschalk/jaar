@@ -4,31 +4,31 @@ from src.a00_data_toolbox.db_toolbox import (
     get_row_count,
     get_table_columns,
 )
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_word_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_label_str
 from src.a06_bud_logic._utils.str_a06 import face_name_str, acct_name_str, event_int_str
 from src.a16_pidgin_logic._utils.str_a16 import (
     inx_bridge_str,
     otx_bridge_str,
     inx_name_str,
     otx_name_str,
-    inx_word_str,
-    otx_word_str,
-    inx_way_str,
-    otx_way_str,
     inx_label_str,
     otx_label_str,
+    inx_way_str,
+    otx_way_str,
+    inx_title_str,
+    otx_title_str,
     unknown_term_str,
 )
-from src.a17_creed_logic._utils.str_a17 import (
-    creed_number_str,
+from src.a17_idea_logic._utils.str_a17 import (
+    idea_number_str,
     brick_agg_str,
     brick_valid_str,
 )
-from src.a17_creed_logic.creed_db_tool import (
+from src.a17_idea_logic.idea_db_tool import (
     upsert_sheet,
     sheet_exists,
-    _get_pidgen_creed_format_filenames,
-    create_creed_sorted_table,
+    _get_pidgen_idea_format_filenames,
+    create_idea_sorted_table,
 )
 from src.a18_etl_toolbox.tran_path import create_brick_pidgin_path
 from src.a18_etl_toolbox.pidgin_agg import PidginPrimeColumns
@@ -46,13 +46,13 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect, Cursor as sqlite_Cursor
 
 
-def test_get_pidgen_creed_format_filenames_ReturnsObj():
+def test_get_pidgen_idea_format_filenames_ReturnsObj():
     # ESTABLISH / WHEN
-    pidgen_creed_filenames = _get_pidgen_creed_format_filenames()
+    pidgen_idea_filenames = _get_pidgen_idea_format_filenames()
 
     # THEN
-    print(f"pbranch examples for {pidgen_creed_filenames=}")
-    assert pidgen_creed_filenames == {
+    print(f"pbranch examples for {pidgen_idea_filenames=}")
+    assert pidgen_idea_filenames == {
         "br00042.xlsx",
         "br00043.xlsx",
         "br00044.xlsx",
@@ -82,7 +82,7 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
     br00113_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_word_str(),
+        fisc_label_str(),
         owner_name_str(),
         acct_name_str(),
         otx_name_str(),
@@ -115,18 +115,18 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
     br00115_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_word_str(),
+        fisc_label_str(),
         owner_name_str(),
         acct_name_str(),
-        otx_label_str(),
-        inx_label_str(),
+        otx_title_str(),
+        inx_title_str(),
     ]
     br00042_file_path = create_path(brick_dir, "br00042.xlsx")
     br00042_columns = [
         event_int_str(),
         face_name_str(),
-        otx_label_str(),
-        inx_label_str(),
+        otx_title_str(),
+        inx_title_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_term_str(),
@@ -147,18 +147,18 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
     br00116_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_word_str(),
+        fisc_label_str(),
         owner_name_str(),
         acct_name_str(),
-        otx_word_str(),
-        inx_word_str(),
+        otx_label_str(),
+        inx_label_str(),
     ]
     br00044_file_path = create_path(brick_dir, "br00044.xlsx")
     br00044_columns = [
         event_int_str(),
         face_name_str(),
-        otx_word_str(),
-        inx_word_str(),
+        otx_label_str(),
+        inx_label_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_term_str(),
@@ -179,7 +179,7 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
     br00117_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_word_str(),
+        fisc_label_str(),
         owner_name_str(),
         acct_name_str(),
         otx_way_str(),
@@ -215,33 +215,33 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
 
     # THEN
     assert os_path_exists(pidgin_path)
-    label_raw_str = "label_raw"
+    title_raw_str = "title_raw"
     name_raw_str = "name_raw"
-    word_raw_str = "word_raw"
+    label_raw_str = "label_raw"
     way_raw_str = "way_raw"
     assert sheet_exists(pidgin_path, name_raw_str)
+    assert sheet_exists(pidgin_path, title_raw_str)
     assert sheet_exists(pidgin_path, label_raw_str)
-    assert sheet_exists(pidgin_path, word_raw_str)
     assert sheet_exists(pidgin_path, way_raw_str)
 
-    gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_raw_str)
+    gen_title_df = pandas_read_excel(pidgin_path, sheet_name=title_raw_str)
     gen_name_df = pandas_read_excel(pidgin_path, sheet_name=name_raw_str)
-    gen_word_df = pandas_read_excel(pidgin_path, sheet_name=word_raw_str)
+    gen_label_df = pandas_read_excel(pidgin_path, sheet_name=label_raw_str)
     gen_way_df = pandas_read_excel(pidgin_path, sheet_name=way_raw_str)
 
-    label_file_columns = PidginPrimeColumns().pidgin_label_raw_columns
-    assert list(gen_label_df.columns) == label_file_columns
-    assert len(gen_label_df) == 2
+    title_file_columns = PidginPrimeColumns().pidgin_title_raw_columns
+    assert list(gen_title_df.columns) == title_file_columns
+    assert len(gen_title_df) == 2
     b3 = "br00115"
     b4 = "br00042"
-    e1_label3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
-    e1_label4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
-    e1_label_rows = [e1_label3, e1_label4]
-    e1_label_df = DataFrame(e1_label_rows, columns=label_file_columns)
-    assert len(gen_label_df) == len(e1_label_df)
-    print(f"{gen_label_df.to_csv()=}")
-    print(f" {e1_label_df.to_csv()=}")
-    assert gen_label_df.to_csv(index=False) == e1_label_df.to_csv(index=False)
+    e1_title3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    e1_title4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_title_rows = [e1_title3, e1_title4]
+    e1_title_df = DataFrame(e1_title_rows, columns=title_file_columns)
+    assert len(gen_title_df) == len(e1_title_df)
+    print(f"{gen_title_df.to_csv()=}")
+    print(f" {e1_title_df.to_csv()=}")
+    assert gen_title_df.to_csv(index=False) == e1_title_df.to_csv(index=False)
 
     name_raw_columns = PidginPrimeColumns().pidgin_name_raw_columns
     assert list(gen_name_df.columns) == name_raw_columns
@@ -257,31 +257,31 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
     print(f" {e1_name_df.to_csv()=}")
     assert gen_name_df.to_csv(index=False) == e1_name_df.to_csv(index=False)
 
-    word_file_columns = [
-        creed_number_str(),
+    label_file_columns = [
+        idea_number_str(),
         event_int_str(),
         face_name_str(),
-        otx_word_str(),
-        inx_word_str(),
+        otx_label_str(),
+        inx_label_str(),
         otx_bridge_str(),
         inx_bridge_str(),
         unknown_term_str(),
     ]
-    assert list(gen_word_df.columns) == word_file_columns
-    assert len(gen_word_df) == 2
+    assert list(gen_label_df.columns) == label_file_columns
+    assert len(gen_label_df) == 2
     b3 = "br00116"
     b4 = "br00044"
-    e1_word3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
-    e1_word4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
-    e1_word_rows = [e1_word3, e1_word4]
-    e1_word_df = DataFrame(e1_word_rows, columns=word_file_columns)
-    assert len(gen_word_df) == len(e1_word_df)
-    print(f"{gen_word_df.to_csv()=}")
-    print(f" {e1_word_df.to_csv()=}")
-    assert gen_word_df.to_csv(index=False) == e1_word_df.to_csv(index=False)
+    e1_label3 = [b4, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx]
+    e1_label4 = [b4, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx]
+    e1_label_rows = [e1_label3, e1_label4]
+    e1_label_df = DataFrame(e1_label_rows, columns=label_file_columns)
+    assert len(gen_label_df) == len(e1_label_df)
+    print(f"{gen_label_df.to_csv()=}")
+    print(f" {e1_label_df.to_csv()=}")
+    assert gen_label_df.to_csv(index=False) == e1_label_df.to_csv(index=False)
 
     way_file_columns = [
-        creed_number_str(),
+        idea_number_str(),
         event_int_str(),
         face_name_str(),
         otx_way_str(),
@@ -304,18 +304,18 @@ def test_etl_brick_agg_df_to_brick_pidgin_raw_df_CreatesFile(env_dir_setup_clean
     assert gen_way_df.to_csv(index=False) == e1_way_df.to_csv(index=False)
 
 
-def create_brick_valid_table(cursor, creed_number: str):
-    if creed_number == "br00113":
+def create_brick_valid_table(cursor, idea_number: str):
+    if idea_number == "br00113":
         x_columns = [
             event_int_str(),
             face_name_str(),
-            fisc_word_str(),
+            fisc_label_str(),
             owner_name_str(),
             acct_name_str(),
             otx_name_str(),
             inx_name_str(),
         ]
-    elif creed_number == "br00043":
+    elif idea_number == "br00043":
         x_columns = [
             event_int_str(),
             face_name_str(),
@@ -325,17 +325,37 @@ def create_brick_valid_table(cursor, creed_number: str):
             inx_bridge_str(),
             unknown_term_str(),
         ]
-    elif creed_number == "br00115":
+    elif idea_number == "br00115":
         x_columns = [
             event_int_str(),
             face_name_str(),
-            fisc_word_str(),
+            fisc_label_str(),
+            owner_name_str(),
+            acct_name_str(),
+            otx_title_str(),
+            inx_title_str(),
+        ]
+    elif idea_number == "br00042":
+        x_columns = [
+            event_int_str(),
+            face_name_str(),
+            otx_title_str(),
+            inx_title_str(),
+            otx_bridge_str(),
+            inx_bridge_str(),
+            unknown_term_str(),
+        ]
+    elif idea_number == "br00116":
+        x_columns = [
+            event_int_str(),
+            face_name_str(),
+            fisc_label_str(),
             owner_name_str(),
             acct_name_str(),
             otx_label_str(),
             inx_label_str(),
         ]
-    elif creed_number == "br00042":
+    elif idea_number == "br00044":
         x_columns = [
             event_int_str(),
             face_name_str(),
@@ -345,37 +365,17 @@ def create_brick_valid_table(cursor, creed_number: str):
             inx_bridge_str(),
             unknown_term_str(),
         ]
-    elif creed_number == "br00116":
+    elif idea_number == "br00117":
         x_columns = [
             event_int_str(),
             face_name_str(),
-            fisc_word_str(),
-            owner_name_str(),
-            acct_name_str(),
-            otx_word_str(),
-            inx_word_str(),
-        ]
-    elif creed_number == "br00044":
-        x_columns = [
-            event_int_str(),
-            face_name_str(),
-            otx_word_str(),
-            inx_word_str(),
-            otx_bridge_str(),
-            inx_bridge_str(),
-            unknown_term_str(),
-        ]
-    elif creed_number == "br00117":
-        x_columns = [
-            event_int_str(),
-            face_name_str(),
-            fisc_word_str(),
+            fisc_label_str(),
             owner_name_str(),
             acct_name_str(),
             otx_way_str(),
             inx_way_str(),
         ]
-    elif creed_number == "br00045":
+    elif idea_number == "br00045":
         x_columns = [
             event_int_str(),
             face_name_str(),
@@ -385,11 +385,11 @@ def create_brick_valid_table(cursor, creed_number: str):
             inx_bridge_str(),
             unknown_term_str(),
         ]
-    agg_tablename = f"{brick_valid_str()}_{creed_number}"
-    create_creed_sorted_table(cursor, agg_tablename, x_columns)
+    agg_tablename = f"{brick_valid_str()}_{idea_number}"
+    create_idea_sorted_table(cursor, agg_tablename, x_columns)
 
 
-def populate_brick_valid_table(cursor, creed_number: str):
+def populate_brick_valid_table(cursor, idea_number: str):
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -404,14 +404,14 @@ def populate_brick_valid_table(cursor, creed_number: str):
     event2 = 2
     event5 = 5
     event9 = 9
-    agg_tablename = f"{brick_valid_str()}_{creed_number}"
-    if creed_number == "br00042":
+    agg_tablename = f"{brick_valid_str()}_{idea_number}"
+    if idea_number == "br00042":
         insert_into_clause = f"""
 INSERT INTO {agg_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {otx_label_str()}
-, {inx_label_str()}
+, {otx_title_str()}
+, {inx_title_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
 , {unknown_term_str()}
@@ -423,7 +423,7 @@ VALUES
 , ('{event1}', '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
 ;
 """
-    elif creed_number == "br00043":
+    elif idea_number == "br00043":
         insert_into_clause = f"""
 INSERT INTO {agg_tablename} (
   {event_int_str()}
@@ -441,13 +441,13 @@ VALUES
 , ('{event1}', '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
 ;
 """
-    elif creed_number == "br00044":
+    elif idea_number == "br00044":
         insert_into_clause = f"""
 INSERT INTO {agg_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {otx_word_str()}
-, {inx_word_str()}
+, {otx_label_str()}
+, {inx_label_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
 , {unknown_term_str()}
@@ -459,7 +459,7 @@ VALUES
 , ('{event1}', '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
 ;
 """
-    elif creed_number == "br00045":
+    elif idea_number == "br00045":
         insert_into_clause = f"""
 INSERT INTO {agg_tablename} (
   {event_int_str()}
@@ -479,12 +479,12 @@ VALUES
 , ('{event1}', '{yao_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
 ;
 """
-    elif creed_number == "br00113":
+    elif idea_number == "br00113":
         insert_into_clause = f"""
 INSERT INTO {agg_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {fisc_word_str()}
+, {fisc_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {otx_name_str()}
@@ -496,12 +496,30 @@ VALUES
 , ('{event9}', '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
 ;
 """
-    elif creed_number == "br00115":
+    elif idea_number == "br00115":
         insert_into_clause = f"""
 INSERT INTO {agg_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {fisc_word_str()}
+, {fisc_label_str()}
+, {owner_name_str()}
+, {acct_name_str()}
+, {otx_title_str()}
+, {inx_title_str()}
+)"""
+        values_clause = f"""
+VALUES     
+  ('{event1}', '{sue_str}', '{a23_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
+, ('{event1}', '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
+, ('{event1}', '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
+;
+"""
+    elif idea_number == "br00116":
+        insert_into_clause = f"""
+INSERT INTO {agg_tablename} (
+  {event_int_str()}
+, {face_name_str()}
+, {fisc_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {otx_label_str()}
@@ -511,32 +529,14 @@ INSERT INTO {agg_tablename} (
 VALUES     
   ('{event1}', '{sue_str}', '{a23_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
 , ('{event1}', '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
-, ('{event1}', '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
 ;
 """
-    elif creed_number == "br00116":
+    elif idea_number == "br00117":
         insert_into_clause = f"""
 INSERT INTO {agg_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {fisc_word_str()}
-, {owner_name_str()}
-, {acct_name_str()}
-, {otx_word_str()}
-, {inx_word_str()}
-)"""
-        values_clause = f"""
-VALUES     
-  ('{event1}', '{sue_str}', '{a23_str}', '{bob_str}', '{yao_str}', '{yao_str}', '{yao_inx}')
-, ('{event1}', '{sue_str}', '{a23_str}', '{bob_str}', '{bob_str}', '{bob_str}', '{bob_inx}')
-;
-"""
-    elif creed_number == "br00117":
-        insert_into_clause = f"""
-INSERT INTO {agg_tablename} (
-  {event_int_str()}
-, {face_name_str()}
-, {fisc_word_str()}
+, {fisc_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {otx_way_str()}
@@ -608,47 +608,47 @@ def test_brick_valid_tables_to_pidgin_prime_raw_tables_PopulatesTables():
         assert get_row_count(cursor, br00044_tablename) == 3
         assert get_row_count(cursor, br00117_tablename) == 2
         assert get_row_count(cursor, br00045_tablename) == 5
-        pidgin_raw_label_tablename = "pidgin_label_raw"
+        pidgin_raw_title_tablename = "pidgin_title_raw"
         pidgin_raw_name_tablename = "pidgin_name_raw"
-        pidgin_raw_word_tablename = "pidgin_word_raw"
+        pidgin_raw_label_tablename = "pidgin_label_raw"
         pidgin_raw_way_tablename = "pidgin_way_raw"
         create_pidgin_prime_tables(cursor)
-        assert get_row_count(cursor, pidgin_raw_label_tablename) == 0
+        assert get_row_count(cursor, pidgin_raw_title_tablename) == 0
         assert get_row_count(cursor, pidgin_raw_name_tablename) == 0
-        assert get_row_count(cursor, pidgin_raw_word_tablename) == 0
+        assert get_row_count(cursor, pidgin_raw_label_tablename) == 0
         assert get_row_count(cursor, pidgin_raw_way_tablename) == 0
 
         # WHEN
         brick_valid_tables_to_pidgin_prime_raw_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, pidgin_raw_label_tablename) == 5
+        assert get_row_count(cursor, pidgin_raw_title_tablename) == 5
         assert get_row_count(cursor, pidgin_raw_name_tablename) == 5
-        assert get_row_count(cursor, pidgin_raw_word_tablename) == 5
+        assert get_row_count(cursor, pidgin_raw_label_tablename) == 5
         assert get_row_count(cursor, pidgin_raw_way_tablename) == 7
-        pidlabe_raw_cols = get_table_columns(cursor, pidgin_raw_label_tablename)
+        pidtitl_raw_cols = get_table_columns(cursor, pidgin_raw_title_tablename)
         pidname_raw_cols = get_table_columns(cursor, pidgin_raw_name_tablename)
-        pidword_raw_cols = get_table_columns(cursor, pidgin_raw_word_tablename)
+        pidlabe_raw_cols = get_table_columns(cursor, pidgin_raw_label_tablename)
         pidwayy_raw_cols = get_table_columns(cursor, pidgin_raw_way_tablename)
-        lab_table = pidgin_raw_label_tablename
+        lab_table = pidgin_raw_title_tablename
         nam_table = pidgin_raw_name_tablename
-        word_table = pidgin_raw_word_tablename
+        label_table = pidgin_raw_label_tablename
         roa_table = pidgin_raw_way_tablename
-        select_pidlabe = create_select_query(cursor, lab_table, pidlabe_raw_cols)
+        select_pidtitl = create_select_query(cursor, lab_table, pidtitl_raw_cols)
         select_pidname = create_select_query(cursor, nam_table, pidname_raw_cols)
-        select_pidword = create_select_query(cursor, word_table, pidword_raw_cols)
+        select_pidlabe = create_select_query(cursor, label_table, pidlabe_raw_cols)
         select_pidwayy = create_select_query(cursor, roa_table, pidwayy_raw_cols)
-        cursor.execute(select_pidlabe)
+        cursor.execute(select_pidtitl)
         lab_rows = cursor.fetchall()
         cursor.execute(select_pidname)
         nam_rows = cursor.fetchall()
-        cursor.execute(select_pidword)
-        word_rows = cursor.fetchall()
+        cursor.execute(select_pidlabe)
+        label_rows = cursor.fetchall()
         cursor.execute(select_pidwayy)
         roa_rows = cursor.fetchall()
         assert len(lab_rows) == 5
         assert len(nam_rows) == 5
-        assert len(word_rows) == 5
+        assert len(label_rows) == 5
         assert len(roa_rows) == 7
 
         br00115_str = "br00115"
@@ -684,11 +684,11 @@ def test_brick_valid_tables_to_pidgin_prime_raw_tables_PopulatesTables():
         row2 = (br00044_str, event1, yao_str, yao_str, yao_inx, rdx, rdx, ukx, None)
         row3 = (br00116_str, event1, sue_str, bob_str, bob_inx, None, None, None, None)
         row4 = (br00116_str, event1, sue_str, yao_str, yao_inx, None, None, None, None)
-        assert word_rows[0] == row0
-        assert word_rows[1] == row1
-        assert word_rows[2] == row2
-        assert word_rows[3] == row3
-        assert word_rows[4] == row4
+        assert label_rows[0] == row0
+        assert label_rows[1] == row1
+        assert label_rows[2] == row2
+        assert label_rows[3] == row3
+        assert label_rows[4] == row4
 
         br00117_str = "br00117"
         br00045_str = "br00045"
@@ -725,9 +725,9 @@ def populate_pidgin_raw_tables(cursor: sqlite_Cursor):
     event2 = 2
     event5 = 5
     event9 = 9
-    raw_lab_table = "pidgin_label_raw"
+    raw_lab_table = "pidgin_title_raw"
     raw_nam_table = "pidgin_name_raw"
-    raw_word_table = "pidgin_word_raw"
+    raw_label_table = "pidgin_label_raw"
     raw_roa_table = "pidgin_way_raw"
     br00113_str = "br00113"
     br00043_str = "br00043"
@@ -738,10 +738,10 @@ def populate_pidgin_raw_tables(cursor: sqlite_Cursor):
     br00117_str = "br00117"
     br00045_str = "br00045"
 
-    raw_nam_insert_into_clause = f"""INSERT INTO {raw_nam_table} ({creed_number_str()},{event_int_str()},{face_name_str()},{otx_name_str()},{inx_name_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_term_str()})"""
-    raw_lab_insert_into_clause = f"""INSERT INTO {raw_lab_table} ({creed_number_str()},{event_int_str()},{face_name_str()},{otx_label_str()},{inx_label_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_term_str()})"""
-    raw_word_insert_into_clause = f"""INSERT INTO {raw_word_table} ({creed_number_str()},{event_int_str()},{face_name_str()},{otx_word_str()},{inx_word_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_term_str()})"""
-    raw_roa_insert_into_clause = f"""INSERT INTO {raw_roa_table} ({creed_number_str()},{event_int_str()},{face_name_str()},{otx_way_str()},{inx_way_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_term_str()})"""
+    raw_nam_insert_into_clause = f"""INSERT INTO {raw_nam_table} ({idea_number_str()},{event_int_str()},{face_name_str()},{otx_name_str()},{inx_name_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_term_str()})"""
+    raw_lab_insert_into_clause = f"""INSERT INTO {raw_lab_table} ({idea_number_str()},{event_int_str()},{face_name_str()},{otx_title_str()},{inx_title_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_term_str()})"""
+    raw_label_insert_into_clause = f"""INSERT INTO {raw_label_table} ({idea_number_str()},{event_int_str()},{face_name_str()},{otx_label_str()},{inx_label_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_term_str()})"""
+    raw_roa_insert_into_clause = f"""INSERT INTO {raw_roa_table} ({idea_number_str()},{event_int_str()},{face_name_str()},{otx_way_str()},{inx_way_str()},{otx_bridge_str()},{inx_bridge_str()},{unknown_term_str()})"""
     raw_nam_values_clause = f"""
 VALUES     
   ('{br00042_str}', {event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
@@ -760,7 +760,7 @@ VALUES
 , ('{br00113_str}', {event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
 ;
 """
-    raw_word_values_clause = f"""
+    raw_label_values_clause = f"""
 VALUES     
   ('{br00044_str}', {event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
 , ('{br00044_str}', {event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
@@ -780,9 +780,9 @@ VALUES
 """
     nam_insert_sqlstr = f"{raw_nam_insert_into_clause} {raw_nam_values_clause}"
     lab_insert_sqlstr = f"{raw_lab_insert_into_clause} {raw_lab_values_clause}"
-    word_insert_sqlstr = f"{raw_word_insert_into_clause} {raw_word_values_clause}"
+    label_insert_sqlstr = f"{raw_label_insert_into_clause} {raw_label_values_clause}"
     roa_insert_sqlstr = f"{raw_roa_insert_into_clause} {raw_roa_values_clause}"
     cursor.execute(nam_insert_sqlstr)
     cursor.execute(lab_insert_sqlstr)
-    cursor.execute(word_insert_sqlstr)
+    cursor.execute(label_insert_sqlstr)
     cursor.execute(roa_insert_sqlstr)

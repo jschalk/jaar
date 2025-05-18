@@ -4,8 +4,8 @@
             "acct_name": {
                 "class_type": "NameStr"
             },
-            "fisc_word": {
-                "class_type": "WordStr"
+            "fisc_label": {
+                "class_type": "LabelStr"
             },
             "owner_name": {
                 "class_type": "NameStr"
@@ -26,8 +26,8 @@
             "deal_time": {
                 "class_type": "TimeLinePoint"
             },
-            "fisc_word": {
-                "class_type": "WordStr"
+            "fisc_label": {
+                "class_type": "LabelStr"
             },
             "owner_name": {
                 "class_type": "NameStr"
@@ -48,13 +48,13 @@
             "cumlative_minute": {
                 "class_type": "int"
             },
-            "fisc_word": {
-                "class_type": "WordStr"
+            "fisc_label": {
+                "class_type": "LabelStr"
             }
         },
         "jvalues": {
-            "hour_word": {
-                "class_type": "WordStr"
+            "hour_label": {
+                "class_type": "LabelStr"
             }
         },
         "static": "True"
@@ -64,37 +64,37 @@
             "cumlative_day": {
                 "class_type": "int"
             },
-            "fisc_word": {
-                "class_type": "WordStr"
+            "fisc_label": {
+                "class_type": "LabelStr"
             }
         },
         "jvalues": {
-            "month_word": {
-                "class_type": "WordStr"
+            "month_label": {
+                "class_type": "LabelStr"
             }
         },
         "static": "True"
     },
     "fisc_timeline_weekday": {
         "jkeys": {
-            "fisc_word": {
-                "class_type": "WordStr"
+            "fisc_label": {
+                "class_type": "LabelStr"
             },
             "weekday_order": {
                 "class_type": "int"
             }
         },
         "jvalues": {
-            "weekday_word": {
-                "class_type": "WordStr"
+            "weekday_label": {
+                "class_type": "LabelStr"
             }
         },
         "static": "True"
     },
     "fisc_timeoffi": {
         "jkeys": {
-            "fisc_word": {
-                "class_type": "WordStr"
+            "fisc_label": {
+                "class_type": "LabelStr"
             },
             "offi_time": {
                 "class_type": "TimeLinePoint"
@@ -105,8 +105,8 @@
     },
     "fiscunit": {
         "jkeys": {
-            "fisc_word": {
-                "class_type": "WordStr"
+            "fisc_label": {
+                "class_type": "LabelStr"
             }
         },
         "jvalues": {
@@ -131,8 +131,8 @@
             "respect_bit": {
                 "class_type": "float"
             },
-            "timeline_word": {
-                "class_type": "WordStr"
+            "timeline_label": {
+                "class_type": "LabelStr"
             },
             "yr1_jan1_offset": {
                 "class_type": "int"

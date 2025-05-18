@@ -1,29 +1,29 @@
 from src.a03_group_logic.group import awardlink_shop
-from src.a04_reason_logic.reason_idea import reasonunit_shop, factunit_shop
+from src.a04_reason_logic.reason_concept import reasonunit_shop, factunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic.bud_tool import (
-    bud_idea_reasonunit_get_obj,
-    bud_idea_reason_premiseunit_get_obj as premiseunit_get_obj,
-    bud_idea_factunit_get_obj,
+    bud_concept_reasonunit_get_obj,
+    bud_concept_reason_premiseunit_get_obj as premiseunit_get_obj,
+    bud_concept_factunit_get_obj,
 )
 from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
-    bud_ideaunit_str,
-    bud_idea_awardlink_str,
-    bud_idea_reasonunit_str,
-    bud_idea_reason_premiseunit_str,
-    bud_idea_laborlink_str,
-    bud_idea_healerlink_str,
-    bud_idea_factunit_str,
+    bud_conceptunit_str,
+    bud_concept_awardlink_str,
+    bud_concept_reasonunit_str,
+    bud_concept_reason_premiseunit_str,
+    bud_concept_laborlink_str,
+    bud_concept_healerlink_str,
+    bud_concept_factunit_str,
     acct_name_str,
-    awardee_label_str,
-    group_label_str,
+    awardee_title_str,
+    group_title_str,
     healer_name_str,
     parent_way_str,
-    idea_word_str,
-    idea_way_str,
+    concept_label_str,
+    concept_way_str,
     rcontext_str,
     fcontext_str,
     debtit_belief_str,
@@ -38,7 +38,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     numor_str,
     pledge_str,
     stop_want_str,
-    rcontext_idea_active_requisite_str,
+    rcontext_concept_active_requisite_str,
     fopen_str,
     give_force_str,
     take_force_str,
@@ -56,10 +56,10 @@ def test_sift_atom_ReturnsNoneIfGivenBudAtomIsUPDATE():
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
     casa_way = sue_bud.make_l1_way(casa_str)
-    sue_bud.add_idea(casa_way)
-    casa_atom = budatom_shop(bud_ideaunit_str(), atom_update())
-    casa_atom.set_arg(parent_way_str(), sue_bud.fisc_word)
-    casa_atom.set_arg(idea_word_str(), casa_str)
+    sue_bud.add_concept(casa_way)
+    casa_atom = budatom_shop(bud_conceptunit_str(), atom_update())
+    casa_atom.set_arg(parent_way_str(), sue_bud.fisc_label)
+    casa_atom.set_arg(concept_label_str(), casa_str)
     casa_atom.set_arg(mass_str(), 8)
     # THEN
     new_casa_atom = sift_budatom(sue_bud, casa_atom)
@@ -142,7 +142,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_acct_membership():
 
     zia_atom = budatom_shop(bud_acct_membership_str(), atom_insert())
     zia_atom.set_arg(acct_name_str(), zia_str)
-    zia_atom.set_arg(group_label_str(), run_str)
+    zia_atom.set_arg(group_title_str(), run_str)
     zia_atom.set_arg(debtit_vote_str(), zia_run_debtit_vote)
 
     # WHEN
@@ -156,12 +156,12 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_acct_membership():
     assert zia_jvalues == {debtit_vote_str(): zia_run_debtit_vote}
 
 
-def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_ideaunit():
+def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_conceptunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
     casa_way = sue_bud.make_l1_way(casa_str)
-    sue_bud.add_idea(casa_way)
+    sue_bud.add_concept(casa_way)
 
     sue_addin = 23
     sue_begin = 37
@@ -174,8 +174,8 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_ideaunit():
     sue_pledge = 97
     sue_problem_bool = True
     sue_stop_want = 107
-    old_casa_atom = budatom_shop(bud_ideaunit_str(), atom_insert())
-    old_casa_atom.set_arg(idea_way_str(), casa_way)
+    old_casa_atom = budatom_shop(bud_conceptunit_str(), atom_insert())
+    old_casa_atom.set_arg(concept_way_str(), casa_way)
     old_casa_atom.set_arg(addin_str(), sue_addin)
     old_casa_atom.set_arg(begin_str(), sue_begin)
     old_casa_atom.set_arg(close_str(), sue_close)
@@ -208,20 +208,20 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_ideaunit():
     assert zia_jvalues.get(stop_want_str()) == sue_stop_want
 
 
-def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_idea_awardlink():
+def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_concept_awardlink():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
     casa_way = sue_bud.make_l1_way(casa_str)
-    sue_bud.add_idea(casa_way)
+    sue_bud.add_concept(casa_way)
     run_str = ";run"
     zia_run_give_force = 72
     zia_run_take_force = 76
-    sue_bud.get_idea_obj(casa_way).set_awardlink(awardlink_shop(run_str, 2, 3))
+    sue_bud.get_concept_obj(casa_way).set_awardlink(awardlink_shop(run_str, 2, 3))
 
-    zia_atom = budatom_shop(bud_idea_awardlink_str(), atom_insert())
-    zia_atom.set_arg(idea_way_str(), casa_way)
-    zia_atom.set_arg(awardee_label_str(), run_str)
+    zia_atom = budatom_shop(bud_concept_awardlink_str(), atom_insert())
+    zia_atom.set_arg(concept_way_str(), casa_way)
+    zia_atom.set_arg(awardee_title_str(), run_str)
     zia_atom.set_arg(give_force_str(), zia_run_give_force)
     zia_atom.set_arg(take_force_str(), zia_run_take_force)
 
@@ -237,30 +237,30 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_idea_awardlink():
     assert zia_jvalues.get(take_force_str()) == zia_run_take_force
 
 
-def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_idea_reasonunit():
+def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_concept_reasonunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
     casa_way = sue_bud.make_l1_way(casa_str)
     week_str = "week"
     week_way = sue_bud.make_l1_way(casa_str)
-    sue_bud.add_idea(casa_way)
-    sue_bud.get_idea_obj(casa_way).set_reasonunit(reasonunit_shop(week_way))
+    sue_bud.add_concept(casa_way)
+    sue_bud.get_concept_obj(casa_way).set_reasonunit(reasonunit_shop(week_way))
 
-    new_rcontext_idea_active_requisite = True
-    casa_atom = budatom_shop(bud_idea_reasonunit_str(), atom_insert())
-    casa_atom.set_arg(idea_way_str(), casa_way)
+    new_rcontext_concept_active_requisite = True
+    casa_atom = budatom_shop(bud_concept_reasonunit_str(), atom_insert())
+    casa_atom.set_arg(concept_way_str(), casa_way)
     casa_atom.set_arg(rcontext_str(), week_way)
     casa_atom.set_arg(
-        rcontext_idea_active_requisite_str(), new_rcontext_idea_active_requisite
+        rcontext_concept_active_requisite_str(), new_rcontext_concept_active_requisite
     )
     casa_jkeys = casa_atom.get_jkeys_dict()
-    casa_reasonunit = bud_idea_reasonunit_get_obj(sue_bud, casa_jkeys)
+    casa_reasonunit = bud_concept_reasonunit_get_obj(sue_bud, casa_jkeys)
     assert (
-        casa_reasonunit.rcontext_idea_active_requisite
-        != new_rcontext_idea_active_requisite
+        casa_reasonunit.rcontext_concept_active_requisite
+        != new_rcontext_concept_active_requisite
     )
-    assert casa_reasonunit.rcontext_idea_active_requisite is None
+    assert casa_reasonunit.rcontext_concept_active_requisite is None
 
     # WHEN
     new_zia_budatom = sift_budatom(sue_bud, casa_atom)
@@ -270,11 +270,11 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_idea_reasonunit():
     assert new_zia_budatom.crud_str == atom_update()
     assert new_zia_budatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_budatom.get_jvalues_dict()
-    zia_requisite_value = zia_jvalues.get(rcontext_idea_active_requisite_str())
-    assert zia_requisite_value == new_rcontext_idea_active_requisite
+    zia_requisite_value = zia_jvalues.get(rcontext_concept_active_requisite_str())
+    assert zia_requisite_value == new_rcontext_concept_active_requisite
 
 
-def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_idea_reason_premiseunit():
+def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_concept_reason_premiseunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
@@ -285,15 +285,15 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_idea_reason_premiseunit():
     week_way = sue_bud.make_l1_way(week_str)
     thur_str = "thur"
     thur_way = sue_bud.make_way(week_way, thur_str)
-    sue_bud.add_idea(clean_way)
-    sue_bud.get_idea_obj(casa_way).set_reasonunit(reasonunit_shop(week_way))
-    clean_idea = sue_bud.get_idea_obj(clean_way)
-    clean_idea.set_reasonunit(reasonunit_shop(week_way))
-    clean_idea.get_reasonunit(week_way).set_premise(thur_way)
+    sue_bud.add_concept(clean_way)
+    sue_bud.get_concept_obj(casa_way).set_reasonunit(reasonunit_shop(week_way))
+    clean_concept = sue_bud.get_concept_obj(clean_way)
+    clean_concept.set_reasonunit(reasonunit_shop(week_way))
+    clean_concept.get_reasonunit(week_way).set_premise(thur_way)
 
     thur_pdivisor = 39
-    thur_atom = budatom_shop(bud_idea_reason_premiseunit_str(), atom_insert())
-    thur_atom.set_arg(idea_way_str(), clean_way)
+    thur_atom = budatom_shop(bud_concept_reason_premiseunit_str(), atom_insert())
+    thur_atom.set_arg(concept_way_str(), clean_way)
     thur_atom.set_arg(rcontext_str(), week_way)
     thur_atom.set_arg("pbranch", thur_way)
     assert thur_atom.is_valid()
@@ -314,23 +314,23 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_idea_reason_premiseunit():
     assert zia_jvalues.get("pdivisor") == thur_pdivisor
 
 
-def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_idea_factunit():
+def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_concept_factunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
     casa_str = "casa"
     casa_way = sue_bud.make_l1_way(casa_str)
     week_str = "week"
     week_way = sue_bud.make_l1_way(casa_str)
-    sue_bud.add_idea(casa_way)
-    sue_bud.get_idea_obj(casa_way).set_factunit(factunit_shop(week_way))
+    sue_bud.add_concept(casa_way)
+    sue_bud.get_concept_obj(casa_way).set_factunit(factunit_shop(week_way))
 
     casa_fopen = 32
-    casa_atom = budatom_shop(bud_idea_factunit_str(), atom_insert())
-    casa_atom.set_arg(idea_way_str(), casa_way)
+    casa_atom = budatom_shop(bud_concept_factunit_str(), atom_insert())
+    casa_atom.set_arg(concept_way_str(), casa_way)
     casa_atom.set_arg(fcontext_str(), week_way)
     casa_atom.set_arg(fopen_str(), casa_fopen)
     casa_jkeys = casa_atom.get_jkeys_dict()
-    casa_factunit = bud_idea_factunit_get_obj(sue_bud, casa_jkeys)
+    casa_factunit = bud_concept_factunit_get_obj(sue_bud, casa_jkeys)
     assert casa_factunit.fopen != casa_fopen
     assert casa_factunit.fopen is None
 

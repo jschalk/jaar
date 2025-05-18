@@ -69,7 +69,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "acct_name": "NameStr",
         "addin": "float",
         "amount": "float",
-        "awardee_label": "LabelStr",
+        "awardee_title": "TitleStr",
         "begin": "float",
         "c400_number": "int",
         "celldepth": "int",
@@ -85,7 +85,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "denom": "int",
         "face_name": "NameStr",
         "fcontext": "WayStr",
-        "fisc_word": "WordStr",
+        "fisc_label": "LabelStr",
         "fbranch": "WayStr",
         "fnigh": "float",
         "fopen": "float",
@@ -93,13 +93,13 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "fund_pool": "float",
         "give_force": "float",
         "gogo_want": "float",
-        "group_label": "LabelStr",
+        "group_title": "TitleStr",
         "healer_name": "NameStr",
-        "hour_word": "WordStr",
-        "idea_way": "WayStr",
+        "hour_label": "LabelStr",
+        "concept_way": "WayStr",
         "mass": "int",
         "max_tree_traverse": "int",
-        "month_word": "WordStr",
+        "month_label": "LabelStr",
         "monthday_distortion": "int",
         "morph": "bool",
         "numor": "int",
@@ -115,16 +115,16 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "popen": "float",
         "pnigh": "float",
         "rcontext": "WayStr",
-        "rcontext_idea_active_requisite": "bool",
+        "rcontext_concept_active_requisite": "bool",
         "respect_bit": "float",
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
-        "labor_label": "LabelStr",
+        "labor_title": "TitleStr",
         "tran_time": "TimeLinePoint",
         "deal_time": "TimeLinePoint",
-        "timeline_word": "WordStr",
-        "weekday_word": "WordStr",
+        "timeline_label": "LabelStr",
+        "weekday_label": "LabelStr",
         "weekday_order": "int",
         "bridge": "str",
         "yr1_jan1_offset": "int",
@@ -134,9 +134,9 @@ def get_pidgin_args_class_types() -> dict[str, str]:
 def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
     """for each pidgin_config dimen contains the associated columns"""
     return {
-        "pidgin_label": {
-            "inx_label",
-            "otx_label",
+        "pidgin_title": {
+            "inx_title",
+            "otx_title",
             "inx_bridge",
             "otx_bridge",
             "unknown_term",
@@ -148,9 +148,9 @@ def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
             "otx_bridge",
             "unknown_term",
         },
-        "pidgin_word": {
-            "inx_word",
-            "otx_word",
+        "pidgin_label": {
+            "inx_label",
+            "otx_label",
             "inx_bridge",
             "otx_bridge",
             "unknown_term",
@@ -166,28 +166,28 @@ def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
 
 
 def pidginable_class_types() -> set:
-    return {"NameStr", "LabelStr", "WordStr", "WayStr"}
+    return {"NameStr", "TitleStr", "LabelStr", "WayStr"}
 
 
 def get_pidginable_args() -> set:
     return {
         "acct_name",
-        "awardee_label",
+        "awardee_title",
         "face_name",
         "fcontext",
-        "fisc_word",
+        "fisc_label",
         "fbranch",
-        "group_label",
+        "group_title",
         "healer_name",
-        "hour_word",
-        "idea_way",
-        "month_word",
+        "hour_label",
+        "concept_way",
+        "month_label",
         "owner_name",
         "pbranch",
         "rcontext",
-        "labor_label",
-        "timeline_word",
-        "weekday_word",
+        "labor_title",
+        "timeline_label",
+        "weekday_label",
     }
 
 
@@ -215,21 +215,21 @@ def get_pidgin_NameStr_args() -> set[str]:
     }
 
 
-def get_pidgin_LabelStr_args() -> set[str]:
+def get_pidgin_TitleStr_args() -> set[str]:
     return {
-        "awardee_label",
-        "group_label",
-        "labor_label",
+        "awardee_title",
+        "group_title",
+        "labor_title",
     }
 
 
-def get_pidgin_WordStr_args() -> set[str]:
+def get_pidgin_LabelStr_args() -> set[str]:
     return {
-        "fisc_word",
-        "hour_word",
-        "month_word",
-        "timeline_word",
-        "weekday_word",
+        "fisc_label",
+        "hour_label",
+        "month_label",
+        "timeline_label",
+        "weekday_label",
     }
 
 
@@ -237,7 +237,7 @@ def get_pidgin_WayStr_args() -> set[str]:
     return {
         "fbranch",
         "fcontext",
-        "idea_way",
+        "concept_way",
         "pbranch",
         "rcontext",
     }

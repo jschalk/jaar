@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
-from src.a04_reason_logic.reason_idea import (
+from src.a04_reason_logic.reason_concept import (
     PremiseStatusFinder,
     premisestatusfinder_shop,
 )
@@ -283,10 +283,10 @@ def get_fig(pd: float, graphics_bool: bool) -> plotly_figure:
         sought_status_str="Task Status",
         pdivisor=pd,
     )
-    fig_word = "When Fact.range < Pdivisor: Premise.active Checks."
+    fig_label = "When Fact.range < Pdivisor: Premise.active Checks."
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
-    fig.update_layout(plot_bgcolor="white", title=fig_word, title_font_size=20)
+    fig.update_layout(plot_bgcolor="white", title=fig_label, title_font_size=20)
     return fig
 
 

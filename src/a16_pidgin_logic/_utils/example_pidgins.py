@@ -6,28 +6,28 @@ from src.a06_bud_logic._utils.str_a06 import (
 )
 from src.a16_pidgin_logic.pidgin_config import default_unknown_term_if_None
 from src.a16_pidgin_logic.map import (
-    labelmap_shop,
+    titlemap_shop,
     namemap_shop,
-    wordmap_shop,
+    labelmap_shop,
     waymap_shop,
-    LabelMap,
+    TitleMap,
     NameMap,
-    WordMap,
+    LabelMap,
     WayMap,
 )
 from src.a16_pidgin_logic.pidgin import PidginUnit, pidginunit_shop
 from pandas import DataFrame
 
 
-def get_clean_wordmap() -> WordMap:
+def get_clean_labelmap() -> LabelMap:
     clean_otx = "clean"
     clean_inx = "propre"
     casa_otx = "casa1"
     casa_inx = "casa2"
-    wordmap = wordmap_shop(face_name="Sue")
-    wordmap.set_otx2inx(clean_otx, clean_inx)
-    wordmap.set_otx2inx(casa_otx, casa_inx)
-    return wordmap
+    labelmap = labelmap_shop(face_name="Sue")
+    labelmap.set_otx2inx(clean_otx, clean_inx)
+    labelmap.set_otx2inx(casa_otx, casa_inx)
+    return labelmap
 
 
 def get_clean_waymap() -> WayMap:
@@ -41,22 +41,22 @@ def get_clean_waymap() -> WayMap:
     clean_otx_way = create_way(otx_accord45_str, clean_otx_str, bridge)
     # clean_otx_way = f"{bridge}{otx_accord45_str}{bridge}{clean_otx_str}{bridge}"
     way_mapunit = waymap_shop(face_name="Sue")
-    way_mapunit.set_word(clean_otx_str, clean_inx_str)
+    way_mapunit.set_label(clean_otx_str, clean_inx_str)
     way_mapunit.set_otx2inx(otx_accord45_way, inx_accord87_way)
     print(f"{way_mapunit.otx2inx.keys()=}")
     way_mapunit.reveal_inx(clean_otx_way)
     return way_mapunit
 
 
-def get_swim_labelmap() -> LabelMap:
+def get_swim_titlemap() -> TitleMap:
     bridge = default_bridge_if_None()
     swim_otx = f"swim{bridge}"
     swim_inx = f"nage{bridge}"
     climb_otx = f"climb{bridge}"
-    x_labelmap = labelmap_shop(face_name="Sue")
-    x_labelmap.set_otx2inx(swim_otx, swim_inx)
-    x_labelmap.set_otx2inx(climb_otx, climb_otx)
-    return x_labelmap
+    x_titlemap = titlemap_shop(face_name="Sue")
+    x_titlemap.set_otx2inx(swim_otx, swim_inx)
+    x_titlemap.set_otx2inx(climb_otx, climb_otx)
+    return x_titlemap
 
 
 def get_suita_namemap() -> NameMap:
@@ -79,21 +79,21 @@ def get_suita_namemap() -> NameMap:
 #     sue_inx = "Sue"
 #     zia_otx = "Zia"
 #     zia_inx = "Zia"
-#     x_labelmap = mapunit_shop(type_NameStr_str(), face_name="Sue")
-#     x_labelmap.set_otx2inx(sue_otx, sue_inx)
-#     x_labelmap.set_otx2inx(zia_otx, zia_inx)
-#     return x_labelmap
+#     x_titlemap = mapunit_shop(type_NameStr_str(), face_name="Sue")
+#     x_titlemap.set_otx2inx(sue_otx, sue_inx)
+#     x_titlemap.set_otx2inx(zia_otx, zia_inx)
+#     return x_titlemap
 
 
-# def get_invalid_group_label_mapunit() -> MapUnit:
+# def get_invalid_group_title_mapunit() -> MapUnit:
 #     sue_otx = f"Xio{default_bridge_if_None()}"
 #     sue_inx = f"Sue{default_bridge_if_None()}"
 #     zia_otx = "Zia"
 #     zia_inx = f"Zia{default_bridge_if_None()}"
-#     x_labelmap = mapunit_shop(type_LabelStr_str(), face_name="Sue")
-#     x_labelmap.set_otx2inx(sue_otx, sue_inx)
-#     x_labelmap.set_otx2inx(zia_otx, zia_inx)
-#     return x_labelmap
+#     x_titlemap = mapunit_shop(type_TitleStr_str(), face_name="Sue")
+#     x_titlemap.set_otx2inx(sue_otx, sue_inx)
+#     x_titlemap.set_otx2inx(zia_otx, zia_inx)
+#     return x_titlemap
 
 
 # def get_invalid_way_mapunit() -> MapUnit:
@@ -101,10 +101,10 @@ def get_suita_namemap() -> NameMap:
 #     clean_inx = "propre"
 #     casa_otx = f"casa{default_bridge_if_None()}"
 #     casa_inx = "casa"
-#     wordmap = mapunit_shop(type_WordStr_str(), face_name="Sue")
-#     wordmap.set_otx2inx(clean_str, clean_inx)
-#     wordmap.set_otx2inx(casa_otx, casa_inx)
-#     return wordmap
+#     labelmap = mapunit_shop(type_LabelStr_str(), face_name="Sue")
+#     labelmap.set_otx2inx(clean_str, clean_inx)
+#     labelmap.set_otx2inx(casa_otx, casa_inx)
+#     return labelmap
 
 
 def get_slash_waymap() -> WayMap:
@@ -123,13 +123,13 @@ def get_slash_waymap() -> WayMap:
         unknown_term=x_unknown_term,
         face_name="Sue",
     )
-    way_mapunit.set_word(clean_otx_str, clean_inx_str)
+    way_mapunit.set_label(clean_otx_str, clean_inx_str)
     way_mapunit.set_otx2inx(otx_accord45_str, inx_accord87_str)
     way_mapunit.reveal_inx(clean_otx_way)
     return way_mapunit
 
 
-def get_slash_labelmap() -> LabelMap:
+def get_slash_titlemap() -> TitleMap:
     x_unknown_term = "UnknownTerm"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
@@ -137,15 +137,15 @@ def get_slash_labelmap() -> LabelMap:
     swim_inx = f"nage{colon_inx_bridge}"
     climb_otx = f"climb{slash_otx_bridge}"
     climb_inx = f"climb{colon_inx_bridge}"
-    x_labelmap = labelmap_shop(
+    x_titlemap = titlemap_shop(
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
         unknown_term=x_unknown_term,
         face_name="Sue",
     )
-    x_labelmap.set_otx2inx(swim_otx, swim_inx)
-    x_labelmap.set_otx2inx(climb_otx, climb_inx)
-    return x_labelmap
+    x_titlemap.set_otx2inx(swim_otx, swim_inx)
+    x_titlemap.set_otx2inx(climb_otx, climb_inx)
+    return x_titlemap
 
 
 def get_slash_namemap() -> NameMap:
@@ -174,10 +174,10 @@ def get_slash_namemap() -> NameMap:
 def get_sue_pidginunit() -> PidginUnit:
     sue_pidginunit = pidginunit_shop("Sue")
     sue_pidginunit.set_namemap(get_suita_namemap())
-    sue_pidginunit.set_labelmap(get_swim_labelmap())
-    sue_pidginunit.set_wordmap(get_clean_wordmap())
+    sue_pidginunit.set_titlemap(get_swim_titlemap())
+    sue_pidginunit.set_labelmap(get_clean_labelmap())
     sue_pidginunit.set_waymap(get_clean_waymap())
-    sue_pidginunit.waymap.wordmap = get_clean_wordmap()
+    sue_pidginunit.waymap.labelmap = get_clean_labelmap()
     return sue_pidginunit
 
 
@@ -233,7 +233,7 @@ def get_casa_maison_pidginunit_set_by_otx2inx() -> PidginUnit:
     return sue_pidginunit
 
 
-def get_casa_maison_pidginunit_set_by_word() -> PidginUnit:
+def get_casa_maison_pidginunit_set_by_label() -> PidginUnit:
     otx_accord45_str = "accord45"
     inx_accord87_str = "accord87"
     casa_otx_str = "casa"
@@ -249,9 +249,9 @@ def get_casa_maison_pidginunit_set_by_word() -> PidginUnit:
     sweep_inx_way = create_way(clean_inx_way, sweep_str)
 
     sue_pidginunit = pidginunit_shop("Sue", 7)
-    sue_pidginunit.set_word(otx_accord45_str, inx_accord87_str)
-    sue_pidginunit.set_word(casa_otx_str, casa_inx_str)
-    sue_pidginunit.set_word(clean_otx_str, clean_inx_str)
+    sue_pidginunit.set_label(otx_accord45_str, inx_accord87_str)
+    sue_pidginunit.set_label(casa_otx_str, casa_inx_str)
+    sue_pidginunit.set_label(clean_otx_str, clean_inx_str)
     return sue_pidginunit
 
 
@@ -319,7 +319,7 @@ def get_casa_maison_way_otx2inx_dt() -> DataFrame:
     return inx_dt
 
 
-def get_casa_maison_word_dt() -> DataFrame:
+def get_casa_maison_label_dt() -> DataFrame:
     inx_accord87_str = "accord87"
     casa_inx_str = "maison"
     clean_inx_str = "propre"
@@ -339,8 +339,8 @@ def get_casa_maison_word_dt() -> DataFrame:
             "otx_bridge",
             "inx_bridge",
             "unknown_term",
-            "otx_word",
-            "inx_word",
+            "otx_label",
+            "inx_label",
         ]
     )
     inx_dt.loc[0] = ["Sue", e7, x_rd, x_rd, uw, otx_accord45_str, inx_accord87_str]
@@ -360,15 +360,15 @@ def get_invalid_namemap() -> NameMap:
     return namemap
 
 
-def get_invalid_labelmap() -> LabelMap:
+def get_invalid_titlemap() -> TitleMap:
     sue_otx = f"Xio{default_bridge_if_None()}"
     sue_inx = f"Sue{default_bridge_if_None()}"
     zia_otx = "Zia"
     zia_inx = f"Zia{default_bridge_if_None()}"
-    x_labelmap = labelmap_shop(face_name="Sue")
-    x_labelmap.set_otx2inx(sue_otx, sue_inx)
-    x_labelmap.set_otx2inx(zia_otx, zia_inx)
-    return x_labelmap
+    x_titlemap = titlemap_shop(face_name="Sue")
+    x_titlemap.set_otx2inx(sue_otx, sue_inx)
+    x_titlemap.set_otx2inx(zia_otx, zia_inx)
+    return x_titlemap
 
 
 def get_invalid_waymap() -> WayMap:
@@ -383,7 +383,7 @@ def get_invalid_waymap() -> WayMap:
     return waymap
 
 
-def get_slash_wordmap() -> WordMap:
+def get_slash_labelmap() -> LabelMap:
     otx_accord45_str = "accord45"
     inx_accord87_str = "accord87"
     clean_otx_str = "clean"
@@ -391,17 +391,17 @@ def get_slash_wordmap() -> WordMap:
     x_unknown_term = "UnknownTerm"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
-    x_wordmap = wordmap_shop(
+    x_labelmap = labelmap_shop(
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
         unknown_term=x_unknown_term,
         face_name="Sue",
         event_int=7,
     )
-    x_wordmap.set_otx2inx(otx_accord45_str, inx_accord87_str)
-    x_wordmap.set_otx2inx(clean_otx_str, clean_inx_str)
-    x_wordmap.reveal_inx("running")
-    return x_wordmap
+    x_labelmap.set_otx2inx(otx_accord45_str, inx_accord87_str)
+    x_labelmap.set_otx2inx(clean_otx_str, clean_inx_str)
+    x_labelmap.reveal_inx("running")
+    return x_labelmap
 
 
 def get_slash_waymap() -> WayMap:
@@ -422,15 +422,15 @@ def get_slash_waymap() -> WayMap:
         unknown_term=x_unknown_term,
         face_name="Sue",
         event_int=7,
-        x_wordmap=get_slash_wordmap(),
+        x_labelmap=get_slash_labelmap(),
     )
-    x_waymap.set_word(clean_otx_str, clean_inx_str)
+    x_waymap.set_label(clean_otx_str, clean_inx_str)
     x_waymap.set_otx2inx(otx_accord45_way, inx_accord87_way)
     x_waymap.reveal_inx(clean_otx_way)
     return x_waymap
 
 
-def get_slash_labelmap() -> LabelMap:
+def get_slash_titlemap() -> TitleMap:
     x_unknown_term = "UnknownTerm"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
@@ -438,16 +438,16 @@ def get_slash_labelmap() -> LabelMap:
     swim_inx = f"nage{colon_inx_bridge}"
     climb_otx = f"climb{slash_otx_bridge}"
     climb_inx = f"climb{colon_inx_bridge}"
-    x_labelmap = labelmap_shop(
+    x_titlemap = titlemap_shop(
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
         unknown_term=x_unknown_term,
         face_name="Sue",
         event_int=7,
     )
-    x_labelmap.set_otx2inx(swim_otx, swim_inx)
-    x_labelmap.set_otx2inx(climb_otx, climb_inx)
-    return x_labelmap
+    x_titlemap.set_otx2inx(swim_otx, swim_inx)
+    x_titlemap.set_otx2inx(climb_otx, climb_inx)
+    return x_titlemap
 
 
 def get_slash_namemap() -> NameMap:

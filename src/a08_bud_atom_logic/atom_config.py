@@ -51,9 +51,9 @@ def get_allowed_class_types() -> set[str]:
         "NameStr",
         "bool",
         "float",
-        "LabelStr",
+        "TitleStr",
         "int",
-        "WordStr",
+        "LabelStr",
         "WayStr",
         "TimeLinePoint",
     }
@@ -63,9 +63,9 @@ def get_atom_args_class_types() -> dict[str, str]:
     return {
         "acct_name": "NameStr",
         "addin": "float",
-        "awardee_label": "LabelStr",
+        "awardee_title": "TitleStr",
         "rcontext": "WayStr",
-        "rcontext_idea_active_requisite": "bool",
+        "rcontext_concept_active_requisite": "bool",
         "begin": "float",
         "close": "float",
         "credit_belief": "float",
@@ -83,7 +83,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "fund_pool": "float",
         "give_force": "float",
         "gogo_want": "float",
-        "group_label": "LabelStr",
+        "group_title": "TitleStr",
         "healer_name": "NameStr",
         "mass": "int",
         "max_tree_traverse": "int",
@@ -97,11 +97,11 @@ def get_atom_args_class_types() -> dict[str, str]:
         "pledge": "bool",
         "problem_bool": "bool",
         "respect_bit": "float",
-        "idea_way": "WayStr",
+        "concept_way": "WayStr",
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
-        "labor_label": "LabelStr",
+        "labor_title": "TitleStr",
     }
 
 
@@ -229,28 +229,28 @@ def get_bud_dimens() -> set:
         "budunit",
         "bud_acctunit",
         "bud_acct_membership",
-        "bud_ideaunit",
-        "bud_idea_awardlink",
-        "bud_idea_reasonunit",
-        "bud_idea_reason_premiseunit",
-        "bud_idea_laborlink",
-        "bud_idea_healerlink",
-        "bud_idea_factunit",
+        "bud_conceptunit",
+        "bud_concept_awardlink",
+        "bud_concept_reasonunit",
+        "bud_concept_reason_premiseunit",
+        "bud_concept_laborlink",
+        "bud_concept_healerlink",
+        "bud_concept_factunit",
     }
 
 
 def get_all_bud_dimen_keys() -> set:
     return {
         "acct_name",
-        "awardee_label",
+        "awardee_title",
         "rcontext",
         "fcontext",
-        "group_label",
+        "group_title",
         "healer_name",
         "pbranch",
         "owner_name",
-        "idea_way",
-        "labor_label",
+        "concept_way",
+        "labor_title",
     }
 
 
@@ -261,15 +261,15 @@ def get_delete_key_name(key: str) -> str:
 def get_all_bud_dimen_delete_keys() -> set:
     return {
         "acct_name_ERASE",
-        "awardee_label_ERASE",
+        "awardee_title_ERASE",
         "rcontext_ERASE",
         "fcontext_ERASE",
-        "group_label_ERASE",
+        "group_title_ERASE",
         "healer_name_ERASE",
         "pbranch_ERASE",
         "owner_name_ERASE",
-        "idea_way_ERASE",
-        "labor_label_ERASE",
+        "concept_way_ERASE",
+        "labor_title_ERASE",
     }
 
 

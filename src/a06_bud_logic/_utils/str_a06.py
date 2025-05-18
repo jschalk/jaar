@@ -10,32 +10,32 @@ def bud_acct_membership_str() -> str:
     return "bud_acct_membership"
 
 
-def bud_ideaunit_str() -> str:
-    return "bud_ideaunit"
+def bud_conceptunit_str() -> str:
+    return "bud_conceptunit"
 
 
-def bud_idea_awardlink_str() -> str:
-    return "bud_idea_awardlink"
+def bud_concept_awardlink_str() -> str:
+    return "bud_concept_awardlink"
 
 
-def bud_idea_reasonunit_str() -> str:
-    return "bud_idea_reasonunit"
+def bud_concept_reasonunit_str() -> str:
+    return "bud_concept_reasonunit"
 
 
-def bud_idea_reason_premiseunit_str() -> str:
-    return "bud_idea_reason_premiseunit"
+def bud_concept_reason_premiseunit_str() -> str:
+    return "bud_concept_reason_premiseunit"
 
 
-def bud_idea_laborlink_str() -> str:
-    return "bud_idea_laborlink"
+def bud_concept_laborlink_str() -> str:
+    return "bud_concept_laborlink"
 
 
-def bud_idea_healerlink_str() -> str:
-    return "bud_idea_healerlink"
+def bud_concept_healerlink_str() -> str:
+    return "bud_concept_healerlink"
 
 
-def bud_idea_factunit_str() -> str:
-    return "bud_idea_factunit"
+def bud_concept_factunit_str() -> str:
+    return "bud_concept_factunit"
 
 
 def bud_groupunit_str() -> str:
@@ -47,16 +47,16 @@ def type_NameStr_str() -> str:
     return "NameStr"
 
 
-def type_LabelStr_str() -> str:
-    return "LabelStr"
+def type_TitleStr_str() -> str:
+    return "TitleStr"
 
 
 def type_WayStr_str() -> str:
     return "WayStr"
 
 
-def type_WordStr_str() -> str:
-    return "WordStr"
+def type_LabelStr_str() -> str:
+    return "LabelStr"
 
 
 def face_name_str() -> str:
@@ -91,8 +91,8 @@ def acct_name_str() -> str:
     return "acct_name"
 
 
-def awardee_label_str() -> str:
-    return "awardee_label"
+def awardee_title_str() -> str:
+    return "awardee_title"
 
 
 def give_force_str() -> str:
@@ -103,12 +103,12 @@ def take_force_str() -> str:
     return "take_force"
 
 
-def group_label_str() -> str:
-    return "group_label"
+def group_title_str() -> str:
+    return "group_title"
 
 
-def labor_label_str() -> str:
-    return "labor_label"
+def labor_title_str() -> str:
+    return "labor_title"
 
 
 def healer_name_str() -> str:
@@ -135,16 +135,16 @@ def credit_vote_str() -> str:
     return "credit_vote"
 
 
-def idea_way_str() -> str:
-    return "idea_way"
+def concept_way_str() -> str:
+    return "concept_way"
 
 
 def parent_way_str() -> str:
     return "parent_way"
 
 
-def idea_word_str() -> str:
-    return "idea_word"
+def concept_label_str() -> str:
+    return "concept_label"
 
 
 def mass_str() -> str:
@@ -219,5 +219,5 @@ def popen_str() -> str:
     return "popen"
 
 
-def rcontext_idea_active_requisite_str() -> str:
-    return "rcontext_idea_active_requisite"
+def rcontext_concept_active_requisite_str() -> str:
+    return "rcontext_concept_active_requisite"

@@ -34,5 +34,5 @@ def owner_name_str() -> str:
     return "owner_name"
 
 
-def fisc_word_str() -> str:
-    return "fisc_word"
+def fisc_label_str() -> str:
+    return "fisc_label"

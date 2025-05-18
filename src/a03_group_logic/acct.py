@@ -6,8 +6,8 @@ from src.a00_data_toolbox.dict_toolbox import (
 from src.a01_way_logic.way import (
     AcctName,
     default_bridge_if_None,
-    validate_wordstr,
-    is_wordstr,
+    validate_labelstr,
+    is_labelstr,
 )
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import (
@@ -15,7 +15,7 @@ from src.a02_finance_logic.finance_config import (
     RespectNum,
 )
 from src.a03_group_logic.group import (
-    GroupLabel,
+    GroupTitle,
     MemberShip,
     memberships_get_from_dict,
     membership_shop,
@@ -38,7 +38,7 @@ class AcctCore:
     _respect_bit: float = None
 
     def set_namestr(self, x_acct_name: AcctName):
-        self.acct_name = validate_wordstr(x_acct_name, self.bridge)
+        self.acct_name = validate_labelstr(x_acct_name, self.bridge)
 
 
 @dataclass
@@ -157,32 +157,32 @@ class AcctUnit(AcctCore):
 
     def add_membership(
         self,
-        group_label: GroupLabel,
+        group_title: GroupTitle,
         credit_vote: float = None,
         debtit_vote: float = None,
     ):
-        x_membership = membership_shop(group_label, credit_vote, debtit_vote)
+        x_membership = membership_shop(group_title, credit_vote, debtit_vote)
         self.set_membership(x_membership)
 
     def set_membership(self, x_membership: MemberShip):
-        x_group_label = x_membership.group_label
-        group_label_is_acct_name = is_wordstr(x_group_label, self.bridge)
-        if group_label_is_acct_name and self.acct_name != x_group_label:
+        x_group_title = x_membership.group_title
+        group_title_is_acct_name = is_labelstr(x_group_title, self.bridge)
+        if group_title_is_acct_name and self.acct_name != x_group_title:
             raise Bad_acct_nameMemberShipException(
-                f"AcctUnit with acct_name='{self.acct_name}' cannot have link to '{x_group_label}'."
+                f"AcctUnit with acct_name='{self.acct_name}' cannot have link to '{x_group_title}'."
             )
 
         x_membership.acct_name = self.acct_name
-        self._memberships[x_membership.group_label] = x_membership
+        self._memberships[x_membership.group_title] = x_membership
 
-    def get_membership(self, group_label: GroupLabel) -> MemberShip:
-        return self._memberships.get(group_label)
+    def get_membership(self, group_title: GroupTitle) -> MemberShip:
+        return self._memberships.get(group_title)
 
-    def membership_exists(self, group_label: GroupLabel) -> bool:
-        return self._memberships.get(group_label) is not None
+    def membership_exists(self, group_title: GroupTitle) -> bool:
+        return self._memberships.get(group_title) is not None
 
-    def delete_membership(self, group_label: GroupLabel):
-        return self._memberships.pop(group_label)
+    def delete_membership(self, group_title: GroupTitle):
+        return self._memberships.pop(group_title)
 
     def memberships_exist(self):
         return len(self._memberships) != 0
@@ -193,26 +193,26 @@ class AcctUnit(AcctCore):
     def set_credor_pool(self, credor_pool: RespectNum):
         self._credor_pool = credor_pool
         ledger_dict = {
-            x_membership.group_label: x_membership.credit_vote
+            x_membership.group_title: x_membership.credit_vote
             for x_membership in self._memberships.values()
         }
         allot_dict = allot_scale(ledger_dict, self._credor_pool, self._respect_bit)
-        for x_group_label, group_credor_pool in allot_dict.items():
-            self.get_membership(x_group_label)._credor_pool = group_credor_pool
+        for x_group_title, group_credor_pool in allot_dict.items():
+            self.get_membership(x_group_title)._credor_pool = group_credor_pool
 
     def set_debtor_pool(self, debtor_pool: RespectNum):
         self._debtor_pool = debtor_pool
         ledger_dict = {
-            x_membership.group_label: x_membership.debtit_vote
+            x_membership.group_title: x_membership.debtit_vote
             for x_membership in self._memberships.values()
         }
         allot_dict = allot_scale(ledger_dict, self._debtor_pool, self._respect_bit)
-        for x_group_label, group_debtor_pool in allot_dict.items():
-            self.get_membership(x_group_label)._debtor_pool = group_debtor_pool
+        for x_group_title, group_debtor_pool in allot_dict.items():
+            self.get_membership(x_group_title)._debtor_pool = group_debtor_pool
 
     def get_memberships_dict(self) -> dict:
         return {
-            x_membership.group_label: x_membership.get_dict()
+            x_membership.group_title: x_membership.get_dict()
             for x_membership in self._memberships.values()
         }
 

@@ -1,4 +1,4 @@
-from src.a04_reason_logic.reason_idea import (
+from src.a04_reason_logic.reason_concept import (
     PremiseUnit,
     premiseunit_shop,
     factheir_shop,
@@ -6,7 +6,7 @@ from src.a04_reason_logic.reason_idea import (
     premises_get_from_dict,
 )
 from src.a01_way_logic.way import (
-    get_default_fisc_word as root_word,
+    get_default_fisc_label as root_label,
     get_default_fisc_way,
     create_way,
     find_replace_way_key_dict,
@@ -16,7 +16,7 @@ from src.a01_way_logic.way import (
 def test_PremiseUnit_Exists():
     # ESTABLISH
     casa_str = "casa"
-    casa_way = create_way(root_word(), casa_str)
+    casa_way = create_way(root_label(), casa_str)
     email_str = "check email"
     email_way = create_way(casa_way, email_str)
 
@@ -36,7 +36,7 @@ def test_PremiseUnit_Exists():
 def test_premiseunit_shop_ReturnsObj():
     # ESTABLISH
     casa_str = "casa"
-    casa_way = create_way(root_word(), casa_str)
+    casa_way = create_way(root_label(), casa_str)
     email_str = "check email"
     email_way = create_way(casa_way, email_str)
 
@@ -50,7 +50,7 @@ def test_premiseunit_shop_ReturnsObj():
 def test_PremiseUnit_clear_status_CorrectlySetsAttrs():
     # WHEN
     casa_str = "casa"
-    casa_way = create_way(root_word(), casa_str)
+    casa_way = create_way(root_label(), casa_str)
     casa_premise = premiseunit_shop(pbranch=casa_way)
     # THEN
     assert casa_premise._status is None
@@ -69,7 +69,7 @@ def test_PremiseUnit_clear_status_CorrectlySetsAttrs():
 def test_PremiseUnit_is_range_IdentifiesStatus():
     # ESTABLISH
     casa_str = "casa"
-    casa_way = create_way(root_word(), casa_str)
+    casa_way = create_way(root_label(), casa_str)
 
     # WHEN
     casa_premise = premiseunit_shop(pbranch=casa_way, popen=1, pnigh=3)
@@ -90,7 +90,7 @@ def test_PremiseUnit_is_range_IdentifiesStatus():
 def test_PremiseUnit_is_segregate_CorrectlyIdentifiesSegregateStatus():
     # ESTABLISH
     casa_str = "casa"
-    casa_way = create_way(root_word(), casa_str)
+    casa_way = create_way(root_label(), casa_str)
 
     # WHEN
     casa_premise = premiseunit_shop(pbranch=casa_way, popen=1, pnigh=3)
@@ -110,7 +110,7 @@ def test_PremiseUnit_is_segregate_CorrectlyIdentifiesSegregateStatus():
 
 def test_PremiseUnit_is_in_lineage_CorrectlyIdentifiesLineage():
     # ESTABLISH
-    nation_way = create_way(root_word(), "Nation-States")
+    nation_way = create_way(root_label(), "Nation-States")
     usa_way = create_way(nation_way, "USA")
     texas_way = create_way(usa_way, "Texas")
     idaho_way = create_way(usa_way, "Idaho")
@@ -144,7 +144,7 @@ def test_PremiseUnit_is_in_lineage_CorrectlyIdentifiesLineage():
 def test_PremiseUnit_is_in_lineage_CorrectlyIdentifiesLineageWithNonDefaultBridge():
     # ESTABLISH
     slash_str = "/"
-    nation_way = create_way(root_word(), "Nation-States", bridge=slash_str)
+    nation_way = create_way(root_label(), "Nation-States", bridge=slash_str)
     usa_way = create_way(nation_way, "USA", bridge=slash_str)
     texas_way = create_way(usa_way, "Texas", bridge=slash_str)
     idaho_way = create_way(usa_way, "Idaho", bridge=slash_str)
@@ -185,7 +185,7 @@ def test_PremiseUnit_is_in_lineage_CorrectlyIdentifiesLineageWithNonDefaultBridg
 def test_PremiseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolFor_is_rangePremise():
     # ESTABLISH
     yr_str = "ced_year"
-    yr_way = create_way(root_word(), yr_str)
+    yr_way = create_way(root_label(), yr_str)
     yr_premise = premiseunit_shop(pbranch=yr_way, popen=3, pnigh=13)
 
     # WHEN / THEN
@@ -230,7 +230,7 @@ def test_PremiseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolFor_is_r
 def test_PremiseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolForSegregatePremise():
     # ESTABLISH
     yr_str = "ced_year"
-    yr_way = create_way(root_word(), yr_str)
+    yr_way = create_way(root_label(), yr_str)
     yr_premise = premiseunit_shop(pbranch=yr_way, pdivisor=5, popen=0, pnigh=0)
 
     # WHEN / THEN
@@ -263,7 +263,7 @@ def test_PremiseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolForSegre
 def test_PremiseUnitUnit_is_range_or_segregate_ReturnsCorrectBool():
     # ESTABLISH
     wkday_str = "weekday"
-    wkday_way = create_way(root_word(), wkday_str)
+    wkday_way = create_way(root_label(), wkday_str)
 
     # WHEN / THEN
     wkday_premise = premiseunit_shop(pbranch=wkday_way)
@@ -279,7 +279,7 @@ def test_PremiseUnitUnit_is_range_or_segregate_ReturnsCorrectBool():
 def test_PremiseUnitUnit_get_premise_status_Returns_active_Boolean():
     # WHEN assumes fact is in lineage
     wkday_str = "weekday"
-    wkday_way = create_way(root_word(), wkday_str)
+    wkday_way = create_way(root_label(), wkday_str)
     wkday_premise = premiseunit_shop(pbranch=wkday_way)
 
     # WHEN / THEN
@@ -293,7 +293,7 @@ def test_PremiseUnitUnit_get_premise_status_Returns_active_Boolean():
 def test_PremiseUnitUnit_get_active_Returns_is_range_active_Boolean():
     # ESTABLISH assumes fact is in lineage
     wkday_str = "weekday"
-    wkday_way = create_way(root_word(), wkday_str)
+    wkday_way = create_way(root_label(), wkday_str)
     wkday_premise = premiseunit_shop(pbranch=wkday_way, popen=3, pnigh=7)
 
     # WHEN / THEN
@@ -306,7 +306,7 @@ def test_PremiseUnitUnit_get_active_Returns_is_range_active_Boolean():
 def test_PremiseUnitUnit_set_status_SetsAttr_status_WhenFactUnitIsNull():
     # ESTABLISH
     wkday_str = "weekday"
-    wkday_way = create_way(root_word(), wkday_str)
+    wkday_way = create_way(root_label(), wkday_str)
     after_str = "afternoon"
     after_way = create_way(wkday_way, after_str)
     premise_2 = premiseunit_shop(pbranch=after_way)
@@ -323,7 +323,7 @@ def test_PremiseUnitUnit_set_status_SetsAttr_status_WhenFactUnitIsNull():
 def test_PremiseUnitUnit_set_status_SetsAttr_status_OfSimple():
     # ESTABLISH
     wkday_str = "weekday"
-    wkday_way = create_way(root_word(), wkday_str)
+    wkday_way = create_way(root_label(), wkday_str)
     wed_str = "wednesday"
     wed_way = create_way(wkday_way, wed_str)
     wed_premise = premiseunit_shop(pbranch=wed_way)
@@ -340,7 +340,7 @@ def test_PremiseUnitUnit_set_status_SetsAttr_status_OfSimple():
 def test_PremiseUnit_set_status_SetsAttr_status_Scenario2():
     # ESTABLISH
     wkday_str = "weekday"
-    wkday_way = create_way(root_word(), wkday_str)
+    wkday_way = create_way(root_label(), wkday_str)
     wed_str = "wednesday"
     wed_way = create_way(wkday_way, wed_str)
     wed_after_str = "afternoon"
@@ -359,7 +359,7 @@ def test_PremiseUnit_set_status_SetsAttr_status_Scenario2():
 def test_PremiseUnit_set_status_SetsAttr_status_Scenario3():
     # ESTABLISH
     wkday_str = "weekday"
-    wkday_way = create_way(root_word(), wkday_str)
+    wkday_way = create_way(root_label(), wkday_str)
     wed_str = "wednesday"
     wed_way = create_way(wkday_way, wed_str)
     wed_noon_str = "noon"
@@ -378,7 +378,7 @@ def test_PremiseUnit_set_status_SetsAttr_status_Scenario3():
 def test_PremiseUnit_set_status_SetsAttr_status_Scenario4():
     # ESTABLISH
     wkday_str = "weekday"
-    wkday_way = create_way(root_word(), wkday_str)
+    wkday_way = create_way(root_label(), wkday_str)
     wed_str = "wednesday"
     wed_way = create_way(wkday_way, wed_str)
     thu_str = "thursday"
@@ -400,7 +400,7 @@ def test_PremiseUnit_set_status_SetsAttr_status_Scenario4():
 def test_PremiseUnit_set_status_SetsAttr_status_Scenario5():
     # ESTABLISH
     wkday_str = "weekday"
-    wkday_way = create_way(root_word(), wkday_str)
+    wkday_way = create_way(root_label(), wkday_str)
     wed_str = "wednesday"
     wed_way = create_way(wkday_way, wed_str)
     wed_cloudy_str = "cloudy"
@@ -421,7 +421,7 @@ def test_PremiseUnit_set_status_SetsAttr_status_Scenario5():
 def test_PremiseUnit_set_status_SetsStatus_status_ScenarioTime():
     # ESTABLISH
     timetech_str = "timetech"
-    timetech_way = create_way(root_word(), timetech_str)
+    timetech_way = create_way(root_label(), timetech_str)
     hr24_str = "24hr"
     hr24_way = create_way(timetech_way, hr24_str)
     hr24_premise = premiseunit_shop(pbranch=hr24_way, popen=7, pnigh=7)
@@ -438,7 +438,7 @@ def test_PremiseUnit_set_status_SetsStatus_status_ScenarioTime():
 def test_PremiseUnit_get_task_status_ReturnsObjWhen_status_IsFalse():
     # ESTABLISH
     hr24_str = "24hr"
-    hr24_way = create_way(root_word(), hr24_str)
+    hr24_way = create_way(root_label(), hr24_str)
     no_range_premise = premiseunit_shop(pbranch=hr24_way)
     no_range_premise._status = False
 
@@ -450,7 +450,7 @@ def test_PremiseUnit_get_task_status_ReturnsObjWhen_status_IsFalse():
 def test_PremiseUnit_get_task_status_ReturnsObjWhenBool_is_range_True():
     # ESTABLISH
     hr24_str = "24hr"
-    hr24_way = create_way(root_word(), hr24_str)
+    hr24_way = create_way(root_label(), hr24_str)
     range_5_to_31_premise = premiseunit_shop(pbranch=hr24_way, popen=5, pnigh=31)
     range_5_to_31_premise._status = True
 
@@ -462,7 +462,7 @@ def test_PremiseUnit_get_task_status_ReturnsObjWhenBool_is_range_True():
 def test_PremiseUnit_get_task_status_ReturnsObjWhenBool_is_range_False():
     # ESTABLISH
     hr24_str = "24hr"
-    hr24_way = create_way(root_word(), hr24_str)
+    hr24_way = create_way(root_label(), hr24_str)
     range_5_to_31_premise = premiseunit_shop(pbranch=hr24_way, popen=5, pnigh=31)
     range_5_to_31_premise._status = True
 
@@ -474,7 +474,7 @@ def test_PremiseUnit_get_task_status_ReturnsObjWhenBool_is_range_False():
 def test_PremiseUnit_get_task_status_ReturnsObjWhenBoolSegregateFalse_01():
     # ESTABLISH
     hr24_str = "24hr"
-    hr24_way = create_way(root_word(), hr24_str)
+    hr24_way = create_way(root_label(), hr24_str)
     o0_n0_d5_premise = premiseunit_shop(pbranch=hr24_way, pdivisor=5, popen=0, pnigh=0)
     o0_n0_d5_premise._status = True
 
@@ -486,7 +486,7 @@ def test_PremiseUnit_get_task_status_ReturnsObjWhenBoolSegregateFalse_01():
 def test_PremiseUnit_get_task_status_ReturnsObjWhenBoolSegregateFalse_02():
     # ESTABLISH
     hr24_str = "24hr"
-    hr24_way = create_way(root_word(), hr24_str)
+    hr24_way = create_way(root_label(), hr24_str)
     o0_n0_d5_premise = premiseunit_shop(pbranch=hr24_way, pdivisor=5, popen=0, pnigh=0)
     o0_n0_d5_premise._status = False
 
@@ -498,7 +498,7 @@ def test_PremiseUnit_get_task_status_ReturnsObjWhenBoolSegregateFalse_02():
 def test_PremiseUnit_get_task_status_ReturnsObjWhenBoolSegregateTrue_01():
     # ESTABLISH
     hr24_str = "24hr"
-    hr24_way = create_way(root_word(), hr24_str)
+    hr24_way = create_way(root_label(), hr24_str)
     o0_n0_d5_premise = premiseunit_shop(pbranch=hr24_way, pdivisor=5, popen=0, pnigh=0)
     o0_n0_d5_premise._status = True
 
@@ -510,7 +510,7 @@ def test_PremiseUnit_get_task_status_ReturnsObjWhenBoolSegregateTrue_01():
 def test_PremiseUnit_get_task_status_ReturnsObjWhenBoolSegregateTrue_02():
     # ESTABLISH
     hr24_str = "24hr"
-    hr24_way = create_way(root_word(), hr24_str)
+    hr24_way = create_way(root_label(), hr24_str)
     o0_n0_d5_premise = premiseunit_shop(pbranch=hr24_way, pdivisor=5, popen=0, pnigh=0)
     o0_n0_d5_premise._status = True
 
@@ -522,7 +522,7 @@ def test_PremiseUnit_get_task_status_ReturnsObjWhenBoolSegregateTrue_02():
 def test_PremiseUnit_get_task_status_ReturnsObjNotNull():
     # ESTABLISH
     week_str = "weekdays"
-    week_way = create_way(root_word(), week_str)
+    week_way = create_way(root_label(), week_str)
     wed_str = "Wednesday"
     wed_way = create_way(week_way, wed_str)
     wed_premise = premiseunit_shop(pbranch=wed_way)
@@ -538,7 +538,7 @@ def test_PremiseUnit_get_task_status_ReturnsObjNotNull():
 def test_PremiseUnit_set_status_SetsAttrs_Scenario01():
     # ESTABLISH
     hr24_str = "24hr"
-    hr24_way = create_way(root_word(), hr24_str)
+    hr24_way = create_way(root_label(), hr24_str)
     range_2_to_7_premise = premiseunit_shop(pbranch=hr24_way, popen=2, pnigh=7)
     assert range_2_to_7_premise._status is None
     assert range_2_to_7_premise._task is None
@@ -555,7 +555,7 @@ def test_PremiseUnit_set_status_SetsAttrs_Scenario01():
 def test_PremiseUnit_set_status_SetsAttrs_Scenario02():
     # ESTABLISH
     hr24_str = "24hr"
-    hr24_way = create_way(root_word(), hr24_str)
+    hr24_way = create_way(root_label(), hr24_str)
     range_2_to_7_premise = premiseunit_shop(pbranch=hr24_way, popen=2, pnigh=7)
     range_0_to_8_fact = factheir_shop(hr24_way, hr24_way, fopen=0, fnigh=8)
     assert range_2_to_7_premise._status is None
@@ -585,7 +585,7 @@ def test_PremiseUnit_set_status_SetsAttrs_Scenario02():
 def test_PremiseUnit_set_status_SetsAttrs_Scenario03():
     # ESTABLISH
     timetech_str = "timetech"
-    timetech_way = create_way(root_word(), timetech_str)
+    timetech_way = create_way(root_label(), timetech_str)
     hr24_str = "24hr"
     hr24_way = create_way(timetech_way, hr24_str)
     hr24_premise = premiseunit_shop(pbranch=hr24_way, popen=7, pnigh=7)
@@ -602,7 +602,7 @@ def test_PremiseUnit_set_status_SetsAttrs_Scenario03():
 def test_PremiseUnit_set_status_CorrectlySetCEDWeekStatusFalse():
     # ESTABLISH
     timetech_str = "timetech"
-    timetech_way = create_way(root_word(), timetech_str)
+    timetech_way = create_way(root_label(), timetech_str)
     week_str = "ced_week"
     week_way = create_way(timetech_way, week_str)
     o1_n1_d6_premise = premiseunit_shop(pbranch=week_way, pdivisor=6, popen=1, pnigh=1)
@@ -619,7 +619,7 @@ def test_PremiseUnit_set_status_CorrectlySetCEDWeekStatusFalse():
 def test_PremiseUnit_set_status_CorrectlySetCEDWeekStatusTrue():
     # ESTABLISH
     timetech_str = "timetech"
-    timetech_way = create_way(root_word(), timetech_str)
+    timetech_way = create_way(root_label(), timetech_str)
     week_str = "ced_week"
     week_way = create_way(timetech_way, week_str)
     week_premise = premiseunit_shop(pbranch=week_way, pdivisor=6, popen=1, pnigh=1)
@@ -636,7 +636,7 @@ def test_PremiseUnit_set_status_CorrectlySetCEDWeekStatusTrue():
 def test_PremiseUnit_get_dict_ReturnsCorrectDictWithDvisiorAndPopen_Pnigh():
     # ESTABLISH
     timetech_str = "timetech"
-    timetech_way = create_way(root_word(), timetech_str)
+    timetech_way = create_way(root_label(), timetech_str)
     week_str = "ced_week"
     week_way = create_way(timetech_way, week_str)
     week_premise = premiseunit_shop(pbranch=week_way, pdivisor=6, popen=1, pnigh=1)
@@ -653,7 +653,7 @@ def test_PremiseUnit_get_dict_ReturnsCorrectDictWithDvisiorAndPopen_Pnigh():
 def test_PremiseUnit_get_dict_ReturnsCorrectDictWithPopenAndPnigh():
     # ESTABLISH
     timetech_str = "timetech"
-    timetech_way = create_way(root_word(), timetech_str)
+    timetech_way = create_way(root_label(), timetech_str)
     week_str = "ced_week"
     week_way = create_way(timetech_way, week_str)
     week_premise = premiseunit_shop(pbranch=week_way, popen=1, pnigh=4)
@@ -670,7 +670,7 @@ def test_PremiseUnit_get_dict_ReturnsCorrectDictWithPopenAndPnigh():
 def test_PremiseUnit_get_dict_ReturnsCorrectDictWithOnlyWayStr():
     # ESTABLISH
     timetech_str = "timetech"
-    timetech_way = create_way(root_word(), timetech_str)
+    timetech_way = create_way(root_label(), timetech_str)
     week_str = "ced_week"
     week_way = create_way(timetech_way, week_str)
     week_premise = premiseunit_shop(pbranch=week_way)
@@ -687,7 +687,7 @@ def test_PremiseUnit_get_dict_ReturnsCorrectDictWithOnlyWayStr():
 def test_PremiseUnit_get_obj_key():
     # ESTABLISH
     timetech_str = "timetech"
-    timetech_way = create_way(root_word(), timetech_str)
+    timetech_way = create_way(root_label(), timetech_str)
     week_str = "ced_week"
     week_way = create_way(timetech_way, week_str)
     week_premise = premiseunit_shop(pbranch=week_way)
@@ -700,7 +700,7 @@ def test_PremiseUnit_find_replace_way_casas():
     # ESTABLISH
     old_root_way = get_default_fisc_way()
     weekday_str = "weekday"
-    weekday_way = create_way(root_word(), weekday_str)
+    weekday_way = create_way(root_label(), weekday_str)
     sunday_str = "Sunday"
     old_sunday_way = create_way(weekday_way, sunday_str)
     sunday_premise = premiseunit_shop(pbranch=old_sunday_way)
@@ -720,7 +720,7 @@ def test_PremiseUnit_find_replace_way_casas():
 def test_PremiseUnits_get_from_dict_ReturnsCompleteObj():
     # ESTABLISH
     weekday_str = "weekdays"
-    weekday_way = create_way(root_word(), weekday_str)
+    weekday_way = create_way(root_label(), weekday_str)
     static_dict = {
         weekday_way: {
             "pbranch": weekday_way,
@@ -742,7 +742,7 @@ def test_PremiseUnits_get_from_dict_ReturnsCompleteObj():
 def test_PremiseUnits_get_from_dict_CorrectlyBuildsObjFromIncompleteDict():
     # ESTABLISH
     weekday_str = "weekdays"
-    weekday_way = create_way(root_word(), weekday_str)
+    weekday_way = create_way(root_label(), weekday_str)
     static_dict = {weekday_way: {"pbranch": weekday_way}}
 
     # WHEN
@@ -759,7 +759,7 @@ def test_PremiseUnitsUnit_set_bridge_SetsAttrsCorrectly():
     week_str = "weekday"
     sun_str = "Sunday"
     slash_str = "/"
-    slash_week_way = create_way(root_word(), week_str, bridge=slash_str)
+    slash_week_way = create_way(root_label(), week_str, bridge=slash_str)
     slash_sun_way = create_way(slash_week_way, sun_str, bridge=slash_str)
     sun_premiseunit = premiseunit_shop(slash_sun_way, bridge=slash_str)
     assert sun_premiseunit.bridge == slash_str
@@ -771,14 +771,14 @@ def test_PremiseUnitsUnit_set_bridge_SetsAttrsCorrectly():
 
     # THEN
     assert sun_premiseunit.bridge == star_str
-    star_week_way = create_way(root_word(), week_str, bridge=star_str)
+    star_week_way = create_way(root_label(), week_str, bridge=star_str)
     star_sun_way = create_way(star_week_way, sun_str, bridge=star_str)
     assert sun_premiseunit.pbranch == star_sun_way
 
 
 def test_way_find_replace_way_key_dict_ReturnsCorrectPremisesUnit_Scenario1():
     # ESTABLISH
-    casa_way = create_way(root_word(), "casa")
+    casa_way = create_way(root_label(), "casa")
     old_seasons_way = create_way(casa_way, "seasons")
     old_premise_x = premiseunit_shop(pbranch=old_seasons_way)
     old_premises_x = {old_premise_x.pbranch: old_premise_x}
@@ -798,18 +798,18 @@ def test_way_find_replace_way_key_dict_ReturnsCorrectPremisesUnit_Scenario1():
 
 def test_way_find_replace_way_key_dict_ReturnsCorrectPremisesUnit_Scenario2():
     # ESTABLISH
-    old_fisc_word = "El Paso"
+    old_fisc_label = "El Paso"
     casa_str = "casa"
     seasons_str = "seasons"
-    old_casa_way = create_way(old_fisc_word, casa_str)
+    old_casa_way = create_way(old_fisc_label, casa_str)
     old_seasons_way = create_way(old_casa_way, seasons_str)
     old_premiseunit = premiseunit_shop(pbranch=old_seasons_way)
     old_premiseunits = {old_premiseunit.pbranch: old_premiseunit}
     assert old_premiseunits.get(old_seasons_way) == old_premiseunit
 
     # WHEN
-    new_fisc_word = "Austin"
-    new_casa_way = create_way(new_fisc_word, casa_str)
+    new_fisc_label = "Austin"
+    new_casa_way = create_way(new_fisc_label, casa_str)
     new_seasons_way = create_way(new_casa_way, seasons_str)
     new_premise_ways = find_replace_way_key_dict(
         dict_x=old_premiseunits, old_way=old_seasons_way, new_way=new_seasons_way

@@ -11,13 +11,13 @@ from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
-    bud_ideaunit_str,
-    bud_idea_awardlink_str,
-    bud_idea_reasonunit_str,
-    bud_idea_reason_premiseunit_str,
-    bud_idea_laborlink_str,
-    bud_idea_healerlink_str,
-    bud_idea_factunit_str,
+    bud_conceptunit_str,
+    bud_concept_awardlink_str,
+    bud_concept_reasonunit_str,
+    bud_concept_reason_premiseunit_str,
+    bud_concept_laborlink_str,
+    bud_concept_healerlink_str,
+    bud_concept_factunit_str,
     event_int_str,
     face_name_str,
 )
@@ -34,21 +34,21 @@ from src.a15_fisc_logic._utils.str_a15 import (
 from src.a15_fisc_logic.fisc_config import get_fisc_dimens
 from src.a16_pidgin_logic.pidgin_config import get_pidgin_dimens, find_set_otx_inx_args
 from src.a16_pidgin_logic._utils.str_a16 import (
-    pidgin_label_str,
+    pidgin_title_str,
     pidgin_name_str,
     pidgin_way_str,
-    pidgin_word_str,
+    pidgin_label_str,
     pidgin_core_str,
     otx_bridge_str,
     inx_bridge_str,
     unknown_term_str,
 )
-from src.a17_creed_logic._utils.str_a17 import creed_category_str, creed_number_str
-from src.a17_creed_logic.creed_config import (
-    get_creed_sqlite_types,
-    get_creed_config_dict,
+from src.a17_idea_logic._utils.str_a17 import idea_category_str, idea_number_str
+from src.a17_idea_logic.idea_config import (
+    get_idea_sqlite_types,
+    get_idea_config_dict,
 )
-from src.a17_creed_logic.creed_db_tool import get_default_sorted_list
+from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
 from src.a18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
     get_dimen_abbv7,
@@ -70,40 +70,40 @@ BUD_PRIME_TABLENAMES = {
     f"{bud_acct_membership_str()}_sound_put_raw": "BUDMEMB_PUT_RAW",
     f"{bud_acctunit_str()}_sound_put_agg": "BUDACCT_PUT_AGG",
     f"{bud_acctunit_str()}_sound_put_raw": "BUDACCT_PUT_RAW",
-    f"{bud_idea_awardlink_str()}_sound_put_agg": "BUDAWAR_PUT_AGG",
-    f"{bud_idea_awardlink_str()}_sound_put_raw": "BUDAWAR_PUT_RAW",
-    f"{bud_idea_factunit_str()}_sound_put_agg": "BUDFACT_PUT_AGG",
-    f"{bud_idea_factunit_str()}_sound_put_raw": "BUDFACT_PUT_RAW",
-    f"{bud_idea_healerlink_str()}_sound_put_agg": "BUDHEAL_PUT_AGG",
-    f"{bud_idea_healerlink_str()}_sound_put_raw": "BUDHEAL_PUT_RAW",
-    f"{bud_idea_reason_premiseunit_str()}_sound_put_agg": "BUDPREM_PUT_AGG",
-    f"{bud_idea_reason_premiseunit_str()}_sound_put_raw": "BUDPREM_PUT_RAW",
-    f"{bud_idea_reasonunit_str()}_sound_put_agg": "BUDREAS_PUT_AGG",
-    f"{bud_idea_reasonunit_str()}_sound_put_raw": "BUDREAS_PUT_RAW",
-    f"{bud_idea_laborlink_str()}_sound_put_agg": "BUDLABO_PUT_AGG",
-    f"{bud_idea_laborlink_str()}_sound_put_raw": "BUDLABO_PUT_RAW",
-    f"{bud_ideaunit_str()}_sound_put_agg": "BUDIDEA_PUT_AGG",
-    f"{bud_ideaunit_str()}_sound_put_raw": "BUDIDEA_PUT_RAW",
+    f"{bud_concept_awardlink_str()}_sound_put_agg": "BUDAWAR_PUT_AGG",
+    f"{bud_concept_awardlink_str()}_sound_put_raw": "BUDAWAR_PUT_RAW",
+    f"{bud_concept_factunit_str()}_sound_put_agg": "BUDFACT_PUT_AGG",
+    f"{bud_concept_factunit_str()}_sound_put_raw": "BUDFACT_PUT_RAW",
+    f"{bud_concept_healerlink_str()}_sound_put_agg": "BUDHEAL_PUT_AGG",
+    f"{bud_concept_healerlink_str()}_sound_put_raw": "BUDHEAL_PUT_RAW",
+    f"{bud_concept_reason_premiseunit_str()}_sound_put_agg": "BUDPREM_PUT_AGG",
+    f"{bud_concept_reason_premiseunit_str()}_sound_put_raw": "BUDPREM_PUT_RAW",
+    f"{bud_concept_reasonunit_str()}_sound_put_agg": "BUDREAS_PUT_AGG",
+    f"{bud_concept_reasonunit_str()}_sound_put_raw": "BUDREAS_PUT_RAW",
+    f"{bud_concept_laborlink_str()}_sound_put_agg": "BUDLABO_PUT_AGG",
+    f"{bud_concept_laborlink_str()}_sound_put_raw": "BUDLABO_PUT_RAW",
+    f"{bud_conceptunit_str()}_sound_put_agg": "BUDCONC_PUT_AGG",
+    f"{bud_conceptunit_str()}_sound_put_raw": "BUDCONC_PUT_RAW",
     f"{budunit_str()}_sound_put_agg": "BUDUNIT_PUT_AGG",
     f"{budunit_str()}_sound_put_raw": "BUDUNIT_PUT_RAW",
     f"{bud_acct_membership_str()}_sound_del_agg": "BUDMEMB_DEL_AGG",
     f"{bud_acct_membership_str()}_sound_del_raw": "BUDMEMB_DEL_RAW",
     f"{bud_acctunit_str()}_sound_del_agg": "BUDACCT_DEL_AGG",
     f"{bud_acctunit_str()}_sound_del_raw": "BUDACCT_DEL_RAW",
-    f"{bud_idea_awardlink_str()}_sound_del_agg": "BUDAWAR_DEL_AGG",
-    f"{bud_idea_awardlink_str()}_sound_del_raw": "BUDAWAR_DEL_RAW",
-    f"{bud_idea_factunit_str()}_sound_del_agg": "BUDFACT_DEL_AGG",
-    f"{bud_idea_factunit_str()}_sound_del_raw": "BUDFACT_DEL_RAW",
-    f"{bud_idea_healerlink_str()}_sound_del_agg": "BUDHEAL_DEL_AGG",
-    f"{bud_idea_healerlink_str()}_sound_del_raw": "BUDHEAL_DEL_RAW",
-    f"{bud_idea_reason_premiseunit_str()}_sound_del_agg": "BUDPREM_DEL_AGG",
-    f"{bud_idea_reason_premiseunit_str()}_sound_del_raw": "BUDPREM_DEL_RAW",
-    f"{bud_idea_reasonunit_str()}_sound_del_agg": "BUDREAS_DEL_AGG",
-    f"{bud_idea_reasonunit_str()}_sound_del_raw": "BUDREAS_DEL_RAW",
-    f"{bud_idea_laborlink_str()}_sound_del_agg": "BUDLABO_DEL_AGG",
-    f"{bud_idea_laborlink_str()}_sound_del_raw": "BUDLABO_DEL_RAW",
-    f"{bud_ideaunit_str()}_sound_del_agg": "BUDIDEA_DEL_AGG",
-    f"{bud_ideaunit_str()}_sound_del_raw": "BUDIDEA_DEL_RAW",
+    f"{bud_concept_awardlink_str()}_sound_del_agg": "BUDAWAR_DEL_AGG",
+    f"{bud_concept_awardlink_str()}_sound_del_raw": "BUDAWAR_DEL_RAW",
+    f"{bud_concept_factunit_str()}_sound_del_agg": "BUDFACT_DEL_AGG",
+    f"{bud_concept_factunit_str()}_sound_del_raw": "BUDFACT_DEL_RAW",
+    f"{bud_concept_healerlink_str()}_sound_del_agg": "BUDHEAL_DEL_AGG",
+    f"{bud_concept_healerlink_str()}_sound_del_raw": "BUDHEAL_DEL_RAW",
+    f"{bud_concept_reason_premiseunit_str()}_sound_del_agg": "BUDPREM_DEL_AGG",
+    f"{bud_concept_reason_premiseunit_str()}_sound_del_raw": "BUDPREM_DEL_RAW",
+    f"{bud_concept_reasonunit_str()}_sound_del_agg": "BUDREAS_DEL_AGG",
+    f"{bud_concept_reasonunit_str()}_sound_del_raw": "BUDREAS_DEL_RAW",
+    f"{bud_concept_laborlink_str()}_sound_del_agg": "BUDLABO_DEL_AGG",
+    f"{bud_concept_laborlink_str()}_sound_del_raw": "BUDLABO_DEL_RAW",
+    f"{bud_conceptunit_str()}_sound_del_agg": "BUDCONC_DEL_AGG",
+    f"{bud_conceptunit_str()}_sound_del_raw": "BUDCONC_DEL_RAW",
     f"{budunit_str()}_sound_del_agg": "BUDUNIT_DEL_AGG",
     f"{budunit_str()}_sound_del_raw": "BUDUNIT_DEL_RAW",
 }
@@ -111,7 +111,7 @@ BUD_PRIME_TABLENAMES = {
 
 def test_ALL_DIMEN_ABBV7_has_all_dimens():
     # ESTABLISH / WHEN / THEN
-    assert len(ALL_DIMEN_ABBV7) == len(get_creed_config_dict())
+    assert len(ALL_DIMEN_ABBV7) == len(get_idea_config_dict())
 
 
 def test_create_prime_tablename_ReturnsObj():
@@ -119,13 +119,13 @@ def test_create_prime_tablename_ReturnsObj():
     budunit_dimen = budunit_str()
     budacct_dimen = bud_acctunit_str()
     budmemb_dimen = bud_acct_membership_str()
-    budidea_dimen = bud_ideaunit_str()
-    budawar_dimen = bud_idea_awardlink_str()
-    budreas_dimen = bud_idea_reasonunit_str()
-    budprem_dimen = bud_idea_reason_premiseunit_str()
-    budlabor_dimen = bud_idea_laborlink_str()
-    budheal_dimen = bud_idea_healerlink_str()
-    budfact_dimen = bud_idea_factunit_str()
+    budconc_dimen = bud_conceptunit_str()
+    budawar_dimen = bud_concept_awardlink_str()
+    budreas_dimen = bud_concept_reasonunit_str()
+    budprem_dimen = bud_concept_reason_premiseunit_str()
+    budlabor_dimen = bud_concept_laborlink_str()
+    budheal_dimen = bud_concept_healerlink_str()
+    budfact_dimen = bud_concept_factunit_str()
     fisunit_dimen = fiscunit_str()
     fiscash_dimen = fisc_cashbook_str()
     fisdeal_dimen = fisc_dealunit_str()
@@ -134,9 +134,9 @@ def test_create_prime_tablename_ReturnsObj():
     fisweek_dimen = fisc_timeline_weekday_str()
     fisoffi_dimen = fisc_timeoffi_str()
     pidname_dimen = pidgin_name_str()
-    pidword_dimen = pidgin_word_str()
-    pidwayy_dimen = pidgin_way_str()
     pidlabe_dimen = pidgin_label_str()
+    pidwayy_dimen = pidgin_way_str()
+    pidtitl_dimen = pidgin_title_str()
     raw_str = "raw"
     agg_str = "agg"
     put_str = "put"
@@ -146,7 +146,7 @@ def test_create_prime_tablename_ReturnsObj():
     assert prime_tbl("budunit", "s", agg_str, put_str) == f"{budunit_dimen}_s_put_agg"
     assert prime_tbl("budacct", "s", agg_str, put_str) == f"{budacct_dimen}_s_put_agg"
     assert prime_tbl("budmemb", "s", agg_str, put_str) == f"{budmemb_dimen}_s_put_agg"
-    assert prime_tbl("budidea", "s", agg_str, put_str) == f"{budidea_dimen}_s_put_agg"
+    assert prime_tbl("budconc", "s", agg_str, put_str) == f"{budconc_dimen}_s_put_agg"
     assert prime_tbl("budawar", "s", agg_str, put_str) == f"{budawar_dimen}_s_put_agg"
     assert prime_tbl("budreas", "s", agg_str, put_str) == f"{budreas_dimen}_s_put_agg"
     assert prime_tbl("budprem", "s", agg_str, put_str) == f"{budprem_dimen}_s_put_agg"
@@ -162,12 +162,12 @@ def test_create_prime_tablename_ReturnsObj():
     assert prime_tbl("fisweek", "s", agg_str) == f"{fisweek_dimen}_s_agg"
     assert prime_tbl("fisoffi", "s", agg_str) == f"{fisoffi_dimen}_s_agg"
     assert prime_tbl("pidname", "s", agg_str) == f"{pidname_dimen}_s_agg"
-    assert prime_tbl("pidword", "s", agg_str) == f"{pidword_dimen}_s_agg"
-    assert prime_tbl("pidwayy", "s", agg_str) == f"{pidwayy_dimen}_s_agg"
     assert prime_tbl("pidlabe", "s", agg_str) == f"{pidlabe_dimen}_s_agg"
-    assert prime_tbl("pidlabe", "v", agg_str) == f"{pidlabe_dimen}_v_agg"
-    assert prime_tbl("pidlabe", "s", raw_str) == f"{pidlabe_dimen}_s_raw"
-    assert prime_tbl("pidlabe", "k", raw_str) == f"{pidlabe_dimen}_raw"
+    assert prime_tbl("pidwayy", "s", agg_str) == f"{pidwayy_dimen}_s_agg"
+    assert prime_tbl("pidtitl", "s", agg_str) == f"{pidtitl_dimen}_s_agg"
+    assert prime_tbl("pidtitl", "v", agg_str) == f"{pidtitl_dimen}_v_agg"
+    assert prime_tbl("pidtitl", "s", raw_str) == f"{pidtitl_dimen}_s_raw"
+    assert prime_tbl("pidtitl", "k", raw_str) == f"{pidtitl_dimen}_raw"
     assert prime_tbl("bud_acctunit", "k", raw_str) == "bud_acctunit_raw"
 
 
@@ -185,14 +185,14 @@ def get_all_dimen_columns_set(x_dimen: str) -> set[str]:
             inx_bridge_str(),
             unknown_term_str(),
         }
-    x_config = get_creed_config_dict().get(x_dimen)
+    x_config = get_idea_config_dict().get(x_dimen)
     columns = set(x_config.get("jkeys").keys())
     columns.update(set(x_config.get("jvalues").keys()))
     return columns
 
 
 def get_del_dimen_columns_set(x_dimen: str) -> list[str]:
-    x_config = get_creed_config_dict().get(x_dimen)
+    x_config = get_idea_config_dict().get(x_dimen)
     columns_set = set(x_config.get("jkeys").keys())
     columns_list = get_default_sorted_list(columns_set)
     columns_list[-1] = get_delete_key_name(columns_list[-1])
@@ -202,10 +202,10 @@ def get_del_dimen_columns_set(x_dimen: str) -> list[str]:
 def create_pf_sound_raw_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "raw")
     columns = get_all_dimen_columns_set(x_dimen)
-    columns.add(creed_number_str())
+    columns.add(idea_number_str())
     columns.add("error_message")
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
 def create_pidgin_sound_agg_table_sqlstr(x_dimen):
@@ -213,14 +213,14 @@ def create_pidgin_sound_agg_table_sqlstr(x_dimen):
     columns = get_all_dimen_columns_set(x_dimen)
     columns.add("error_message")
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
 def create_fisc_sound_agg_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg")
     columns = get_all_dimen_columns_set(x_dimen)
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
 def create_pf_sound_vld_table_sqlstr(x_dimen):
@@ -230,7 +230,7 @@ def create_pf_sound_vld_table_sqlstr(x_dimen):
     columns.remove(inx_bridge_str())
     columns.remove(unknown_term_str())
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
 def create_pidgin_core_raw_table_sqlstr(x_dimen):
@@ -240,7 +240,7 @@ def create_pidgin_core_raw_table_sqlstr(x_dimen):
     columns.add("source_dimen")
     columns.add("error_message")
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
 def create_pidgin_core_agg_table_sqlstr(x_dimen):
@@ -248,7 +248,7 @@ def create_pidgin_core_agg_table_sqlstr(x_dimen):
     columns = get_all_dimen_columns_set(x_dimen)
     columns.remove(event_int_str())
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
 def create_pidgin_core_vld_table_sqlstr(x_dimen):
@@ -265,7 +265,7 @@ def create_fisc_voice_raw_table_sqlstr(x_dimen):
     columns = find_set_otx_inx_args(columns)
     columns.add("error_message")
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
 def create_fisc_voice_agg_table_sqlstr(x_dimen):
@@ -274,38 +274,38 @@ def create_fisc_voice_agg_table_sqlstr(x_dimen):
     columns.remove(event_int_str())
     columns.remove(face_name_str())
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
 def create_bud_sound_put_raw_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "raw", "put")
     columns = get_all_dimen_columns_set(x_dimen)
-    columns.add(creed_number_str())
+    columns.add(idea_number_str())
     columns.add("error_message")
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
 def create_bud_sound_put_agg_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg", "put")
     columns = get_all_dimen_columns_set(x_dimen)
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
 def create_bud_sound_del_raw_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "raw", "del")
     columns = get_del_dimen_columns_set(x_dimen)
-    columns.add(creed_number_str())
+    columns.add(idea_number_str())
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
 def create_bud_sound_del_agg_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg", "del")
     columns = get_del_dimen_columns_set(x_dimen)
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
 def create_bud_voice_put_raw_table_sqlstr(x_dimen: str) -> str:
@@ -315,14 +315,14 @@ def create_bud_voice_put_raw_table_sqlstr(x_dimen: str) -> str:
     columns = find_set_otx_inx_args(columns)
     columns.add("pidgin_event_int")
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
 def create_bud_voice_put_agg_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "agg", "put")
     columns = get_all_dimen_columns_set(x_dimen)
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
 def create_bud_voice_del_raw_table_sqlstr(x_dimen: str) -> str:
@@ -331,14 +331,14 @@ def create_bud_voice_del_raw_table_sqlstr(x_dimen: str) -> str:
     columns = find_set_otx_inx_args(columns)
     columns.add("pidgin_event_int")
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
 def create_bud_voice_del_agg_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "agg", "del")
     columns = get_del_dimen_columns_set(x_dimen)
     columns = get_default_sorted_list(columns)
-    return get_create_table_sqlstr(tablename, columns, get_creed_sqlite_types())
+    return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
 def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckPidginDimens():
@@ -347,11 +347,11 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckPidginDimens():
     create_table_sqlstrs = get_prime_create_table_sqlstrs()
 
     # THEN
-    creed_config = get_creed_config_dict()
+    idea_config = get_idea_config_dict()
     pidgin_dimens_config = {
         x_dimen: dimen_config
-        for x_dimen, dimen_config in creed_config.items()
-        if dimen_config.get(creed_category_str()) == "pidgin"
+        for x_dimen, dimen_config in idea_config.items()
+        if dimen_config.get(idea_category_str()) == "pidgin"
     }
 
     for x_dimen in pidgin_dimens_config:
@@ -407,11 +407,11 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckFiscDimens():
     create_table_sqlstrs = get_prime_create_table_sqlstrs()
 
     # THEN
-    creed_config = get_creed_config_dict()
+    idea_config = get_idea_config_dict()
     fisc_dimens_config = {
         x_dimen: dimen_config
-        for x_dimen, dimen_config in creed_config.items()
-        if dimen_config.get(creed_category_str()) == "fisc"
+        for x_dimen, dimen_config in idea_config.items()
+        if dimen_config.get(idea_category_str()) == "fisc"
     }
 
     for x_dimen in fisc_dimens_config:
@@ -448,8 +448,8 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckBudDimens():
     # THEN
     bud_dimens_config = {
         x_dimen: dimen_config
-        for x_dimen, dimen_config in get_creed_config_dict().items()
-        if dimen_config.get(creed_category_str()) == "bud"
+        for x_dimen, dimen_config in get_idea_config_dict().items()
+        if dimen_config.get(idea_category_str()) == "bud"
     }
 
     for x_dimen in bud_dimens_config:
@@ -533,9 +533,9 @@ def test_create_sound_and_voice_tables_CreatesFiscRawTables():
         budmemb_s_agg_table = prime_tbl("budmemb", "s", agg_str, put_str)
         budfact_s_del_table = prime_tbl("budfact", "s", agg_str, del_str)
         fisunit_s_agg_table = prime_tbl("fisunit", "s", agg_str)
-        pidlabe_s_agg_table = prime_tbl("pidlabe", "s", agg_str)
+        pidtitl_s_agg_table = prime_tbl("pidtitl", "s", agg_str)
         fishour_v_agg_table = prime_tbl("fishour", "v", agg_str)
-        pidlabe_s_raw_table = prime_tbl("pidlabe", "s", raw_str)
+        pidtitl_s_raw_table = prime_tbl("pidtitl", "s", raw_str)
         pidcore_s_raw_table = prime_tbl("pidcore", "s", raw_str)
         pidcore_s_agg_table = prime_tbl("pidcore", "s", agg_str)
         pidcore_s_vld_table = prime_tbl("pidcore", "s", vld_str)
@@ -545,9 +545,9 @@ def test_create_sound_and_voice_tables_CreatesFiscRawTables():
         assert not db_table_exists(cursor, budmemb_s_agg_table)
         assert not db_table_exists(cursor, budfact_s_del_table)
         assert not db_table_exists(cursor, fisunit_s_agg_table)
-        assert not db_table_exists(cursor, pidlabe_s_agg_table)
+        assert not db_table_exists(cursor, pidtitl_s_agg_table)
         assert not db_table_exists(cursor, fishour_v_agg_table)
-        assert not db_table_exists(cursor, pidlabe_s_raw_table)
+        assert not db_table_exists(cursor, pidtitl_s_raw_table)
         assert not db_table_exists(cursor, pidcore_s_raw_table)
         assert not db_table_exists(cursor, pidcore_s_agg_table)
         assert not db_table_exists(cursor, pidcore_s_vld_table)
@@ -567,9 +567,9 @@ def test_create_sound_and_voice_tables_CreatesFiscRawTables():
         assert db_table_exists(cursor, budmemb_s_agg_table)
         assert db_table_exists(cursor, budfact_s_del_table)
         assert db_table_exists(cursor, fisunit_s_agg_table)
-        assert db_table_exists(cursor, pidlabe_s_agg_table)
+        assert db_table_exists(cursor, pidtitl_s_agg_table)
         assert db_table_exists(cursor, fishour_v_agg_table)
-        assert db_table_exists(cursor, pidlabe_s_raw_table)
+        assert db_table_exists(cursor, pidtitl_s_raw_table)
         assert db_table_exists(cursor, pidcore_s_raw_table)
         assert db_table_exists(cursor, pidcore_s_agg_table)
         assert db_table_exists(cursor, pidcore_s_vld_table)
@@ -580,7 +580,7 @@ def test_create_sound_and_voice_tables_CreatesFiscRawTables():
 def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scenario0_PidginDimen():
     # sourcery skip: extract-method
     # ESTABLISH
-    dimen = pidgin_label_str()
+    dimen = pidgin_title_str()
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
@@ -592,29 +592,29 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
 
         # THEN
         x_tablename = prime_tbl(dimen, "s", "raw")
-        dimen_config = get_creed_config_dict().get(dimen)
+        dimen_config = get_idea_config_dict().get(dimen)
         dimen_focus_columns = set(dimen_config.get("jkeys").keys())
-        exclude_cols = {creed_number_str(), "error_message"}
+        exclude_cols = {idea_number_str(), "error_message"}
         expected_update_sqlstr = create_update_inconsistency_error_query(
             cursor, x_tablename, dimen_focus_columns, exclude_cols
         )
         assert update_sqlstr == expected_update_sqlstr
 
         static_example_sqlstr = """WITH inconsistency_rows AS (
-SELECT event_int, face_name, otx_label
-FROM pidgin_label_s_raw
-GROUP BY event_int, face_name, otx_label
-HAVING MIN(inx_label) != MAX(inx_label)
+SELECT event_int, face_name, otx_title
+FROM pidgin_title_s_raw
+GROUP BY event_int, face_name, otx_title
+HAVING MIN(inx_title) != MAX(inx_title)
     OR MIN(otx_bridge) != MAX(otx_bridge)
     OR MIN(inx_bridge) != MAX(inx_bridge)
     OR MIN(unknown_term) != MAX(unknown_term)
 )
-UPDATE pidgin_label_s_raw
+UPDATE pidgin_title_s_raw
 SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
-WHERE inconsistency_rows.event_int = pidgin_label_s_raw.event_int
-    AND inconsistency_rows.face_name = pidgin_label_s_raw.face_name
-    AND inconsistency_rows.otx_label = pidgin_label_s_raw.otx_label
+WHERE inconsistency_rows.event_int = pidgin_title_s_raw.event_int
+    AND inconsistency_rows.face_name = pidgin_title_s_raw.face_name
+    AND inconsistency_rows.otx_title = pidgin_title_s_raw.otx_title
 ;
 """
         print(update_sqlstr)
@@ -636,9 +636,9 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
 
         # THEN
         x_tablename = prime_tbl(dimen, "s", "raw")
-        dimen_config = get_creed_config_dict().get(dimen)
+        dimen_config = get_idea_config_dict().get(dimen)
         dimen_focus_columns = set(dimen_config.get("jkeys").keys())
-        exclude_cols = {creed_number_str(), "event_int", "face_name", "error_message"}
+        exclude_cols = {idea_number_str(), "event_int", "face_name", "error_message"}
         expected_update_sqlstr = create_update_inconsistency_error_query(
             cursor, x_tablename, dimen_focus_columns, exclude_cols
         )
@@ -646,15 +646,15 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
         assert update_sqlstr == expected_update_sqlstr
 
         static_example_sqlstr = """WITH inconsistency_rows AS (
-SELECT fisc_word, cumlative_minute
+SELECT fisc_label, cumlative_minute
 FROM fisc_timeline_hour_s_raw
-GROUP BY fisc_word, cumlative_minute
-HAVING MIN(hour_word) != MAX(hour_word)
+GROUP BY fisc_label, cumlative_minute
+HAVING MIN(hour_label) != MAX(hour_label)
 )
 UPDATE fisc_timeline_hour_s_raw
 SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
-WHERE inconsistency_rows.fisc_word = fisc_timeline_hour_s_raw.fisc_word
+WHERE inconsistency_rows.fisc_label = fisc_timeline_hour_s_raw.fisc_label
     AND inconsistency_rows.cumlative_minute = fisc_timeline_hour_s_raw.cumlative_minute
 ;
 """
@@ -665,7 +665,7 @@ WHERE inconsistency_rows.fisc_word = fisc_timeline_hour_s_raw.fisc_word
 def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scenario2_BudDimen():
     # sourcery skip: extract-method
     # ESTABLISH
-    dimen = bud_idea_awardlink_str()
+    dimen = bud_concept_awardlink_str()
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
@@ -677,9 +677,9 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
 
         # THEN
         x_tablename = prime_tbl(dimen, "s", "raw", "put")
-        dimen_config = get_creed_config_dict().get(dimen)
+        dimen_config = get_idea_config_dict().get(dimen)
         dimen_focus_columns = set(dimen_config.get("jkeys").keys())
-        exclude_cols = {creed_number_str(), "error_message"}
+        exclude_cols = {idea_number_str(), "error_message"}
         expected_update_sqlstr = create_update_inconsistency_error_query(
             cursor, x_tablename, dimen_focus_columns, exclude_cols
         )
@@ -687,21 +687,21 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
         assert update_sqlstr == expected_update_sqlstr
 
         static_example_sqlstr = """WITH inconsistency_rows AS (
-SELECT event_int, face_name, fisc_word, owner_name, idea_way, awardee_label
-FROM bud_idea_awardlink_s_put_raw
-GROUP BY event_int, face_name, fisc_word, owner_name, idea_way, awardee_label
+SELECT event_int, face_name, fisc_label, owner_name, concept_way, awardee_title
+FROM bud_concept_awardlink_s_put_raw
+GROUP BY event_int, face_name, fisc_label, owner_name, concept_way, awardee_title
 HAVING MIN(give_force) != MAX(give_force)
     OR MIN(take_force) != MAX(take_force)
 )
-UPDATE bud_idea_awardlink_s_put_raw
+UPDATE bud_concept_awardlink_s_put_raw
 SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
-WHERE inconsistency_rows.event_int = bud_idea_awardlink_s_put_raw.event_int
-    AND inconsistency_rows.face_name = bud_idea_awardlink_s_put_raw.face_name
-    AND inconsistency_rows.fisc_word = bud_idea_awardlink_s_put_raw.fisc_word
-    AND inconsistency_rows.owner_name = bud_idea_awardlink_s_put_raw.owner_name
-    AND inconsistency_rows.idea_way = bud_idea_awardlink_s_put_raw.idea_way
-    AND inconsistency_rows.awardee_label = bud_idea_awardlink_s_put_raw.awardee_label
+WHERE inconsistency_rows.event_int = bud_concept_awardlink_s_put_raw.event_int
+    AND inconsistency_rows.face_name = bud_concept_awardlink_s_put_raw.face_name
+    AND inconsistency_rows.fisc_label = bud_concept_awardlink_s_put_raw.fisc_label
+    AND inconsistency_rows.owner_name = bud_concept_awardlink_s_put_raw.owner_name
+    AND inconsistency_rows.concept_way = bud_concept_awardlink_s_put_raw.concept_way
+    AND inconsistency_rows.awardee_title = bud_concept_awardlink_s_put_raw.awardee_title
 ;
 """
         print(update_sqlstr)
@@ -711,7 +711,7 @@ WHERE inconsistency_rows.event_int = bud_idea_awardlink_s_put_raw.event_int
 def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario0_PidginDimen():
     # sourcery skip: extract-method
     # ESTABLISH
-    dimen = pidgin_label_str()
+    dimen = pidgin_title_str()
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
@@ -722,9 +722,9 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario0_PidginDimen():
         # THEN
         raw_tablename = prime_tbl(dimen, "s", "raw")
         agg_tablename = prime_tbl(dimen, "s", "agg")
-        dimen_config = get_creed_config_dict().get(dimen)
+        dimen_config = get_idea_config_dict().get(dimen)
         dimen_focus_columns = set(dimen_config.get("jkeys").keys())
-        exclude_cols = {creed_number_str(), "error_message"}
+        exclude_cols = {idea_number_str(), "error_message"}
         expected_insert_sqlstr = create_table2table_agg_insert_query(
             cursor,
             src_table=raw_tablename,
@@ -735,11 +735,11 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario0_PidginDimen():
         # print(expected_insert_sqlstr)
         assert update_sqlstrs[0] == expected_insert_sqlstr
 
-        static_example_sqlstr = """INSERT INTO pidgin_label_s_agg (event_int, face_name, otx_label, inx_label, otx_bridge, inx_bridge, unknown_term)
-SELECT event_int, face_name, otx_label, MAX(inx_label), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_term)
-FROM pidgin_label_s_raw
+        static_example_sqlstr = """INSERT INTO pidgin_title_s_agg (event_int, face_name, otx_title, inx_title, otx_bridge, inx_bridge, unknown_term)
+SELECT event_int, face_name, otx_title, MAX(inx_title), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_term)
+FROM pidgin_title_s_raw
 WHERE error_message IS NULL
-GROUP BY event_int, face_name, otx_label
+GROUP BY event_int, face_name, otx_title
 ;
 """
         print(update_sqlstrs[0])
@@ -760,13 +760,13 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario1_FiscDimen():
         # THEN
         raw_tablename = prime_tbl(dimen, "s", "raw")
         agg_tablename = prime_tbl(dimen, "s", "agg")
-        dimen_config = get_creed_config_dict().get(dimen)
+        dimen_config = get_idea_config_dict().get(dimen)
         dimen_focus_columns = set(dimen_config.get("jkeys").keys())
         dimen_focus_columns.remove("event_int")
         dimen_focus_columns.remove("face_name")
         dimen_focus_columns = get_default_sorted_list(dimen_focus_columns)
         exclude_cols = {
-            creed_number_str(),
+            idea_number_str(),
             event_int_str(),
             face_name_str(),
             "error_message",
@@ -782,11 +782,11 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario1_FiscDimen():
         print(expected_insert_sqlstr)
         assert update_sqlstrs[0] == expected_insert_sqlstr
 
-        static_example_sqlstr = """INSERT INTO fisc_timeline_hour_s_agg (fisc_word, cumlative_minute, hour_word)
-SELECT fisc_word, cumlative_minute, MAX(hour_word)
+        static_example_sqlstr = """INSERT INTO fisc_timeline_hour_s_agg (fisc_label, cumlative_minute, hour_label)
+SELECT fisc_label, cumlative_minute, MAX(hour_label)
 FROM fisc_timeline_hour_s_raw
 WHERE error_message IS NULL
-GROUP BY fisc_word, cumlative_minute
+GROUP BY fisc_label, cumlative_minute
 ;
 """
         print(update_sqlstrs[0])
@@ -796,7 +796,7 @@ GROUP BY fisc_word, cumlative_minute
 def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario2_BudDimen():
     # sourcery skip: extract-method
     # ESTABLISH
-    dimen = bud_idea_awardlink_str()
+    dimen = bud_concept_awardlink_str()
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
@@ -807,9 +807,9 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario2_BudDimen():
         # THEN
         put_raw_tablename = prime_tbl(dimen, "s", "raw", "put")
         put_agg_tablename = prime_tbl(dimen, "s", "agg", "put")
-        put_dimen_config = get_creed_config_dict().get(dimen)
+        put_dimen_config = get_idea_config_dict().get(dimen)
         put_dimen_focus_columns = set(put_dimen_config.get("jkeys").keys())
-        put_exclude_cols = {creed_number_str(), "error_message"}
+        put_exclude_cols = {idea_number_str(), "error_message"}
         put_expected_insert_sqlstr = create_table2table_agg_insert_query(
             cursor,
             src_table=put_raw_tablename,
@@ -820,11 +820,11 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario2_BudDimen():
         # print(put_expected_insert_sqlstr)
         assert update_sqlstrs[0] == put_expected_insert_sqlstr
 
-        static_example_put_sqlstr = """INSERT INTO bud_idea_awardlink_s_put_agg (event_int, face_name, fisc_word, owner_name, idea_way, awardee_label, give_force, take_force)
-SELECT event_int, face_name, fisc_word, owner_name, idea_way, awardee_label, MAX(give_force), MAX(take_force)
-FROM bud_idea_awardlink_s_put_raw
+        static_example_put_sqlstr = """INSERT INTO bud_concept_awardlink_s_put_agg (event_int, face_name, fisc_label, owner_name, concept_way, awardee_title, give_force, take_force)
+SELECT event_int, face_name, fisc_label, owner_name, concept_way, awardee_title, MAX(give_force), MAX(take_force)
+FROM bud_concept_awardlink_s_put_raw
 WHERE error_message IS NULL
-GROUP BY event_int, face_name, fisc_word, owner_name, idea_way, awardee_label
+GROUP BY event_int, face_name, fisc_label, owner_name, concept_way, awardee_title
 ;
 """
         # print(update_sqlstrs[0])
@@ -833,7 +833,7 @@ GROUP BY event_int, face_name, fisc_word, owner_name, idea_way, awardee_label
         # del
         del_raw_tablename = prime_tbl(dimen, "s", "raw", "del")
         del_agg_tablename = prime_tbl(dimen, "s", "agg", "del")
-        del_exclude_cols = {creed_number_str(), "error_message"}
+        del_exclude_cols = {idea_number_str(), "error_message"}
         del_expected_insert_sqlstr = create_table2table_agg_insert_query(
             cursor,
             src_table=del_raw_tablename,
@@ -845,10 +845,10 @@ GROUP BY event_int, face_name, fisc_word, owner_name, idea_way, awardee_label
         print(del_expected_insert_sqlstr)
         assert update_sqlstrs[1] == del_expected_insert_sqlstr
 
-        static_example_del_sqlstr = """INSERT INTO bud_idea_awardlink_s_del_agg (event_int, face_name, fisc_word, owner_name, idea_way, awardee_label_ERASE)
-SELECT event_int, face_name, fisc_word, owner_name, idea_way, awardee_label_ERASE
-FROM bud_idea_awardlink_s_del_raw
-GROUP BY event_int, face_name, fisc_word, owner_name, idea_way, awardee_label_ERASE
+        static_example_del_sqlstr = """INSERT INTO bud_concept_awardlink_s_del_agg (event_int, face_name, fisc_label, owner_name, concept_way, awardee_title_ERASE)
+SELECT event_int, face_name, fisc_label, owner_name, concept_way, awardee_title_ERASE
+FROM bud_concept_awardlink_s_del_raw
+GROUP BY event_int, face_name, fisc_label, owner_name, concept_way, awardee_title_ERASE
 ;
 """
         print(update_sqlstrs[1])
@@ -921,34 +921,34 @@ GROUP BY event_int, face_name
     assert way_sqlstr == expected_way_sqlstr
 
 
-def test_create_insert_pidgin_sound_vld_table_sqlstr_ReturnsObj_pidgin_word():
+def test_create_insert_pidgin_sound_vld_table_sqlstr_ReturnsObj_pidgin_label():
     # ESTABLISH
-    dimen = pidgin_word_str()
+    dimen = pidgin_label_str()
     # WHEN
-    word_sqlstr = create_insert_pidgin_sound_vld_table_sqlstr(dimen)
+    label_sqlstr = create_insert_pidgin_sound_vld_table_sqlstr(dimen)
 
     # THEN
-    pidgin_word_s_agg_tablename = prime_tbl(dimen, "s", "agg")
-    pidgin_word_s_vld_tablename = prime_tbl(dimen, "s", "vld")
-    expected_word_sqlstr = f"""
-INSERT INTO {pidgin_word_s_vld_tablename} (event_int, face_name, otx_word, inx_word)
-SELECT event_int, face_name, MAX(otx_word), MAX(inx_word)
-FROM {pidgin_word_s_agg_tablename}
+    pidgin_label_s_agg_tablename = prime_tbl(dimen, "s", "agg")
+    pidgin_label_s_vld_tablename = prime_tbl(dimen, "s", "vld")
+    expected_label_sqlstr = f"""
+INSERT INTO {pidgin_label_s_vld_tablename} (event_int, face_name, otx_label, inx_label)
+SELECT event_int, face_name, MAX(otx_label), MAX(inx_label)
+FROM {pidgin_label_s_agg_tablename}
 WHERE error_message IS NULL
 GROUP BY event_int, face_name
 ;
 """
-    assert word_sqlstr == expected_word_sqlstr
+    assert label_sqlstr == expected_label_sqlstr
 
 
 def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_BudDimens():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH
-    creed_config = get_creed_config_dict()
+    idea_config = get_idea_config_dict()
     bud_dimens_config = {
         x_dimen: dimen_config
-        for x_dimen, dimen_config in creed_config.items()
-        if dimen_config.get(creed_category_str()) == "bud"
+        for x_dimen, dimen_config in idea_config.items()
+        if dimen_config.get(idea_category_str()) == "bud"
     }
 
     # WHEN
@@ -1006,11 +1006,11 @@ def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_BudDimens():
 def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_FiscDimens():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH
-    creed_config = get_creed_config_dict()
+    idea_config = get_idea_config_dict()
     fisc_dimens_config = {
         x_dimen: dimen_config
-        for x_dimen, dimen_config in creed_config.items()
-        if dimen_config.get(creed_category_str()) == "fisc"
+        for x_dimen, dimen_config in idea_config.items()
+        if dimen_config.get(idea_category_str()) == "fisc"
     }
 
     # WHEN

@@ -9,18 +9,18 @@ from src.a00_data_toolbox.db_toolbox import (
 )
 from src.a01_way_logic.way import (
     create_way,
-    WordStr,
-    WayStr,
     LabelStr,
+    WayStr,
+    TitleStr,
     AcctName,
-    is_wordstr,
-    get_terminus_word,
+    is_labelstr,
+    get_terminus_label,
     get_parent_way,
 )
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import awardlink_shop
-from src.a04_reason_logic.reason_idea import factunit_shop
-from src.a05_idea_logic.idea import ideaunit_shop
+from src.a04_reason_logic.reason_concept import factunit_shop
+from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_bud_logic.bud import BudUnit
 from src.a06_bud_logic.bud_tool import bud_attr_exists, bud_get_obj
 from src.a08_bud_atom_logic._utils.str_a08 import (
@@ -218,15 +218,15 @@ def _modify_bud_update_budunit(x_bud: BudUnit, x_atom: BudAtom):
 
 def _modify_bud_acct_membership_delete(x_bud: BudUnit, x_atom: BudAtom):
     x_acct_name = x_atom.get_value("acct_name")
-    x_group_label = x_atom.get_value("group_label")
-    x_bud.get_acct(x_acct_name).delete_membership(x_group_label)
+    x_group_title = x_atom.get_value("group_title")
+    x_bud.get_acct(x_acct_name).delete_membership(x_group_title)
 
 
 def _modify_bud_acct_membership_update(x_bud: BudUnit, x_atom: BudAtom):
     x_acct_name = x_atom.get_value("acct_name")
-    x_group_label = x_atom.get_value("group_label")
+    x_group_title = x_atom.get_value("group_title")
     x_acctunit = x_bud.get_acct(x_acct_name)
-    x_membership = x_acctunit.get_membership(x_group_label)
+    x_membership = x_acctunit.get_membership(x_group_title)
     x_credit_vote = x_atom.get_value("credit_vote")
     x_debtit_vote = x_atom.get_value("debtit_vote")
     x_membership.set_credit_vote(x_credit_vote)
@@ -235,22 +235,22 @@ def _modify_bud_acct_membership_update(x_bud: BudUnit, x_atom: BudAtom):
 
 def _modify_bud_acct_membership_insert(x_bud: BudUnit, x_atom: BudAtom):
     x_acct_name = x_atom.get_value("acct_name")
-    x_group_label = x_atom.get_value("group_label")
+    x_group_title = x_atom.get_value("group_title")
     x_credit_vote = x_atom.get_value("credit_vote")
     x_debtit_vote = x_atom.get_value("debtit_vote")
     x_acctunit = x_bud.get_acct(x_acct_name)
-    x_acctunit.add_membership(x_group_label, x_credit_vote, x_debtit_vote)
+    x_acctunit.add_membership(x_group_title, x_credit_vote, x_debtit_vote)
 
 
-def _modify_bud_ideaunit_delete(x_bud: BudUnit, x_atom: BudAtom):
-    idea_way = create_way(x_atom.get_value("idea_way"), bridge=x_bud.bridge)
-    x_bud.del_idea_obj(idea_way, del_children=x_atom.get_value("del_children"))
+def _modify_bud_conceptunit_delete(x_bud: BudUnit, x_atom: BudAtom):
+    concept_way = create_way(x_atom.get_value("concept_way"), bridge=x_bud.bridge)
+    x_bud.del_concept_obj(concept_way, del_children=x_atom.get_value("del_children"))
 
 
-def _modify_bud_ideaunit_update(x_bud: BudUnit, x_atom: BudAtom):
-    idea_way = create_way(x_atom.get_value("idea_way"), bridge=x_bud.bridge)
-    x_bud.edit_idea_attr(
-        idea_way,
+def _modify_bud_conceptunit_update(x_bud: BudUnit, x_atom: BudAtom):
+    concept_way = create_way(x_atom.get_value("concept_way"), bridge=x_bud.bridge)
+    x_bud.edit_concept_attr(
+        concept_way,
         addin=x_atom.get_value("addin"),
         begin=x_atom.get_value("begin"),
         gogo_want=x_atom.get_value("gogo_want"),
@@ -264,13 +264,13 @@ def _modify_bud_ideaunit_update(x_bud: BudUnit, x_atom: BudAtom):
     )
 
 
-def _modify_bud_ideaunit_insert(x_bud: BudUnit, x_atom: BudAtom):
-    idea_way = x_atom.get_value("idea_way")
-    idea_word = get_terminus_word(idea_way)
-    idea_parent_way = get_parent_way(idea_way)
-    x_bud.set_idea(
-        idea_kid=ideaunit_shop(
-            idea_word=idea_word,
+def _modify_bud_conceptunit_insert(x_bud: BudUnit, x_atom: BudAtom):
+    concept_way = x_atom.get_value("concept_way")
+    concept_label = get_terminus_label(concept_way)
+    concept_parent_way = get_parent_way(concept_way)
+    x_bud.set_concept(
+        concept_kid=conceptunit_shop(
+            concept_label=concept_label,
             addin=x_atom.get_value("addin"),
             begin=x_atom.get_value("begin"),
             close=x_atom.get_value("close"),
@@ -280,49 +280,49 @@ def _modify_bud_ideaunit_insert(x_bud: BudUnit, x_atom: BudAtom):
             numor=x_atom.get_value("numor"),
             pledge=x_atom.get_value("pledge"),
         ),
-        parent_way=idea_parent_way,
-        create_missing_ideas=False,
-        get_rid_of_missing_awardlinks_awardee_labels=False,
+        parent_way=concept_parent_way,
+        create_missing_concepts=False,
+        get_rid_of_missing_awardlinks_awardee_titles=False,
         create_missing_ancestors=True,
     )
 
 
-def _modify_bud_idea_awardlink_delete(x_bud: BudUnit, x_atom: BudAtom):
-    x_bud.edit_idea_attr(
-        x_atom.get_value("idea_way"),
-        awardlink_del=x_atom.get_value("awardee_label"),
+def _modify_bud_concept_awardlink_delete(x_bud: BudUnit, x_atom: BudAtom):
+    x_bud.edit_concept_attr(
+        x_atom.get_value("concept_way"),
+        awardlink_del=x_atom.get_value("awardee_title"),
     )
 
 
-def _modify_bud_idea_awardlink_update(x_bud: BudUnit, x_atom: BudAtom):
-    x_idea = x_bud.get_idea_obj(x_atom.get_value("idea_way"))
-    x_awardlink = x_idea.awardlinks.get(x_atom.get_value("awardee_label"))
+def _modify_bud_concept_awardlink_update(x_bud: BudUnit, x_atom: BudAtom):
+    x_concept = x_bud.get_concept_obj(x_atom.get_value("concept_way"))
+    x_awardlink = x_concept.awardlinks.get(x_atom.get_value("awardee_title"))
     x_give_force = x_atom.get_value("give_force")
     if x_give_force is not None and x_awardlink.give_force != x_give_force:
         x_awardlink.give_force = x_give_force
     x_take_force = x_atom.get_value("take_force")
     if x_take_force is not None and x_awardlink.take_force != x_take_force:
         x_awardlink.take_force = x_take_force
-    x_bud.edit_idea_attr(x_atom.get_value("idea_way"), awardlink=x_awardlink)
+    x_bud.edit_concept_attr(x_atom.get_value("concept_way"), awardlink=x_awardlink)
 
 
-def _modify_bud_idea_awardlink_insert(x_bud: BudUnit, x_atom: BudAtom):
+def _modify_bud_concept_awardlink_insert(x_bud: BudUnit, x_atom: BudAtom):
     x_awardlink = awardlink_shop(
-        awardee_label=x_atom.get_value("awardee_label"),
+        awardee_title=x_atom.get_value("awardee_title"),
         give_force=x_atom.get_value("give_force"),
         take_force=x_atom.get_value("take_force"),
     )
-    x_bud.edit_idea_attr(x_atom.get_value("idea_way"), awardlink=x_awardlink)
+    x_bud.edit_concept_attr(x_atom.get_value("concept_way"), awardlink=x_awardlink)
 
 
-def _modify_bud_idea_factunit_delete(x_bud: BudUnit, x_atom: BudAtom):
-    x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("idea_way"))
-    x_ideaunit.del_factunit(x_atom.get_value("fcontext"))
+def _modify_bud_concept_factunit_delete(x_bud: BudUnit, x_atom: BudAtom):
+    x_conceptunit = x_bud.get_concept_obj(x_atom.get_value("concept_way"))
+    x_conceptunit.del_factunit(x_atom.get_value("fcontext"))
 
 
-def _modify_bud_idea_factunit_update(x_bud: BudUnit, x_atom: BudAtom):
-    x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("idea_way"))
-    x_factunit = x_ideaunit.factunits.get(x_atom.get_value("fcontext"))
+def _modify_bud_concept_factunit_update(x_bud: BudUnit, x_atom: BudAtom):
+    x_conceptunit = x_bud.get_concept_obj(x_atom.get_value("concept_way"))
+    x_factunit = x_conceptunit.factunits.get(x_atom.get_value("fcontext"))
     x_factunit.set_attr(
         fbranch=x_atom.get_value("fbranch"),
         fopen=x_atom.get_value("fopen"),
@@ -330,9 +330,9 @@ def _modify_bud_idea_factunit_update(x_bud: BudUnit, x_atom: BudAtom):
     )
 
 
-def _modify_bud_idea_factunit_insert(x_bud: BudUnit, x_atom: BudAtom):
-    x_bud.edit_idea_attr(
-        x_atom.get_value("idea_way"),
+def _modify_bud_concept_factunit_insert(x_bud: BudUnit, x_atom: BudAtom):
+    x_bud.edit_concept_attr(
+        x_atom.get_value("concept_way"),
         factunit=factunit_shop(
             fcontext=x_atom.get_value("fcontext"),
             fbranch=x_atom.get_value("fbranch"),
@@ -342,42 +342,42 @@ def _modify_bud_idea_factunit_insert(x_bud: BudUnit, x_atom: BudAtom):
     )
 
 
-def _modify_bud_idea_reasonunit_delete(x_bud: BudUnit, x_atom: BudAtom):
-    x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("idea_way"))
-    x_ideaunit.del_reasonunit_rcontext(x_atom.get_value("rcontext"))
+def _modify_bud_concept_reasonunit_delete(x_bud: BudUnit, x_atom: BudAtom):
+    x_conceptunit = x_bud.get_concept_obj(x_atom.get_value("concept_way"))
+    x_conceptunit.del_reasonunit_rcontext(x_atom.get_value("rcontext"))
 
 
-def _modify_bud_idea_reasonunit_update(x_bud: BudUnit, x_atom: BudAtom):
-    x_bud.edit_idea_attr(
-        x_atom.get_value("idea_way"),
+def _modify_bud_concept_reasonunit_update(x_bud: BudUnit, x_atom: BudAtom):
+    x_bud.edit_concept_attr(
+        x_atom.get_value("concept_way"),
         reason_rcontext=x_atom.get_value("rcontext"),
-        reason_rcontext_idea_active_requisite=x_atom.get_value(
-            "rcontext_idea_active_requisite"
+        reason_rcontext_concept_active_requisite=x_atom.get_value(
+            "rcontext_concept_active_requisite"
         ),
     )
 
 
-def _modify_bud_idea_reasonunit_insert(x_bud: BudUnit, x_atom: BudAtom):
-    x_bud.edit_idea_attr(
-        x_atom.get_value("idea_way"),
+def _modify_bud_concept_reasonunit_insert(x_bud: BudUnit, x_atom: BudAtom):
+    x_bud.edit_concept_attr(
+        x_atom.get_value("concept_way"),
         reason_rcontext=x_atom.get_value("rcontext"),
-        reason_rcontext_idea_active_requisite=x_atom.get_value(
-            "rcontext_idea_active_requisite"
+        reason_rcontext_concept_active_requisite=x_atom.get_value(
+            "rcontext_concept_active_requisite"
         ),
     )
 
 
-def _modify_bud_idea_reason_premiseunit_delete(x_bud: BudUnit, x_atom: BudAtom):
-    x_bud.edit_idea_attr(
-        x_atom.get_value("idea_way"),
+def _modify_bud_concept_reason_premiseunit_delete(x_bud: BudUnit, x_atom: BudAtom):
+    x_bud.edit_concept_attr(
+        x_atom.get_value("concept_way"),
         reason_del_premise_rcontext=x_atom.get_value("rcontext"),
         reason_del_premise_pbranch=x_atom.get_value("pbranch"),
     )
 
 
-def _modify_bud_idea_reason_premiseunit_update(x_bud: BudUnit, x_atom: BudAtom):
-    x_bud.edit_idea_attr(
-        x_atom.get_value("idea_way"),
+def _modify_bud_concept_reason_premiseunit_update(x_bud: BudUnit, x_atom: BudAtom):
+    x_bud.edit_concept_attr(
+        x_atom.get_value("concept_way"),
         reason_rcontext=x_atom.get_value("rcontext"),
         reason_premise=x_atom.get_value("pbranch"),
         popen=x_atom.get_value("popen"),
@@ -386,9 +386,9 @@ def _modify_bud_idea_reason_premiseunit_update(x_bud: BudUnit, x_atom: BudAtom):
     )
 
 
-def _modify_bud_idea_reason_premiseunit_insert(x_bud: BudUnit, x_atom: BudAtom):
-    x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("idea_way"))
-    x_ideaunit.set_reason_premise(
+def _modify_bud_concept_reason_premiseunit_insert(x_bud: BudUnit, x_atom: BudAtom):
+    x_conceptunit = x_bud.get_concept_obj(x_atom.get_value("concept_way"))
+    x_conceptunit.set_reason_premise(
         rcontext=x_atom.get_value("rcontext"),
         premise=x_atom.get_value("pbranch"),
         popen=x_atom.get_value("popen"),
@@ -397,24 +397,24 @@ def _modify_bud_idea_reason_premiseunit_insert(x_bud: BudUnit, x_atom: BudAtom):
     )
 
 
-def _modify_bud_idea_laborlink_delete(x_bud: BudUnit, x_atom: BudAtom):
-    x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("idea_way"))
-    x_ideaunit.laborunit.del_laborlink(labor_label=x_atom.get_value("labor_label"))
+def _modify_bud_concept_laborlink_delete(x_bud: BudUnit, x_atom: BudAtom):
+    x_conceptunit = x_bud.get_concept_obj(x_atom.get_value("concept_way"))
+    x_conceptunit.laborunit.del_laborlink(labor_title=x_atom.get_value("labor_title"))
 
 
-def _modify_bud_idea_laborlink_insert(x_bud: BudUnit, x_atom: BudAtom):
-    x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("idea_way"))
-    x_ideaunit.laborunit.set_laborlink(labor_label=x_atom.get_value("labor_label"))
+def _modify_bud_concept_laborlink_insert(x_bud: BudUnit, x_atom: BudAtom):
+    x_conceptunit = x_bud.get_concept_obj(x_atom.get_value("concept_way"))
+    x_conceptunit.laborunit.set_laborlink(labor_title=x_atom.get_value("labor_title"))
 
 
-def _modify_bud_idea_healerlink_delete(x_bud: BudUnit, x_atom: BudAtom):
-    x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("idea_way"))
-    x_ideaunit.healerlink.del_healer_name(x_atom.get_value("healer_name"))
+def _modify_bud_concept_healerlink_delete(x_bud: BudUnit, x_atom: BudAtom):
+    x_conceptunit = x_bud.get_concept_obj(x_atom.get_value("concept_way"))
+    x_conceptunit.healerlink.del_healer_name(x_atom.get_value("healer_name"))
 
 
-def _modify_bud_idea_healerlink_insert(x_bud: BudUnit, x_atom: BudAtom):
-    x_ideaunit = x_bud.get_idea_obj(x_atom.get_value("idea_way"))
-    x_ideaunit.healerlink.set_healer_name(x_atom.get_value("healer_name"))
+def _modify_bud_concept_healerlink_insert(x_bud: BudUnit, x_atom: BudAtom):
+    x_conceptunit = x_bud.get_concept_obj(x_atom.get_value("concept_way"))
+    x_conceptunit.healerlink.set_healer_name(x_atom.get_value("healer_name"))
 
 
 def _modify_bud_acctunit_delete(x_bud: BudUnit, x_atom: BudAtom):
@@ -453,63 +453,63 @@ def _modify_bud_acct_membership(x_bud: BudUnit, x_atom: BudAtom):
         _modify_bud_acct_membership_insert(x_bud, x_atom)
 
 
-def _modify_bud_ideaunit(x_bud: BudUnit, x_atom: BudAtom):
+def _modify_bud_conceptunit(x_bud: BudUnit, x_atom: BudAtom):
     if x_atom.crud_str == atom_delete():
-        _modify_bud_ideaunit_delete(x_bud, x_atom)
+        _modify_bud_conceptunit_delete(x_bud, x_atom)
     elif x_atom.crud_str == atom_update():
-        _modify_bud_ideaunit_update(x_bud, x_atom)
+        _modify_bud_conceptunit_update(x_bud, x_atom)
     elif x_atom.crud_str == atom_insert():
-        _modify_bud_ideaunit_insert(x_bud, x_atom)
+        _modify_bud_conceptunit_insert(x_bud, x_atom)
 
 
-def _modify_bud_idea_awardlink(x_bud: BudUnit, x_atom: BudAtom):
+def _modify_bud_concept_awardlink(x_bud: BudUnit, x_atom: BudAtom):
     if x_atom.crud_str == atom_delete():
-        _modify_bud_idea_awardlink_delete(x_bud, x_atom)
+        _modify_bud_concept_awardlink_delete(x_bud, x_atom)
     elif x_atom.crud_str == atom_update():
-        _modify_bud_idea_awardlink_update(x_bud, x_atom)
+        _modify_bud_concept_awardlink_update(x_bud, x_atom)
     elif x_atom.crud_str == atom_insert():
-        _modify_bud_idea_awardlink_insert(x_bud, x_atom)
+        _modify_bud_concept_awardlink_insert(x_bud, x_atom)
 
 
-def _modify_bud_idea_factunit(x_bud: BudUnit, x_atom: BudAtom):
+def _modify_bud_concept_factunit(x_bud: BudUnit, x_atom: BudAtom):
     if x_atom.crud_str == atom_delete():
-        _modify_bud_idea_factunit_delete(x_bud, x_atom)
+        _modify_bud_concept_factunit_delete(x_bud, x_atom)
     elif x_atom.crud_str == atom_update():
-        _modify_bud_idea_factunit_update(x_bud, x_atom)
+        _modify_bud_concept_factunit_update(x_bud, x_atom)
     elif x_atom.crud_str == atom_insert():
-        _modify_bud_idea_factunit_insert(x_bud, x_atom)
+        _modify_bud_concept_factunit_insert(x_bud, x_atom)
 
 
-def _modify_bud_idea_reasonunit(x_bud: BudUnit, x_atom: BudAtom):
+def _modify_bud_concept_reasonunit(x_bud: BudUnit, x_atom: BudAtom):
     if x_atom.crud_str == atom_delete():
-        _modify_bud_idea_reasonunit_delete(x_bud, x_atom)
+        _modify_bud_concept_reasonunit_delete(x_bud, x_atom)
     elif x_atom.crud_str == atom_update():
-        _modify_bud_idea_reasonunit_update(x_bud, x_atom)
+        _modify_bud_concept_reasonunit_update(x_bud, x_atom)
     elif x_atom.crud_str == atom_insert():
-        _modify_bud_idea_reasonunit_insert(x_bud, x_atom)
+        _modify_bud_concept_reasonunit_insert(x_bud, x_atom)
 
 
-def _modify_bud_idea_reason_premiseunit(x_bud: BudUnit, x_atom: BudAtom):
+def _modify_bud_concept_reason_premiseunit(x_bud: BudUnit, x_atom: BudAtom):
     if x_atom.crud_str == atom_delete():
-        _modify_bud_idea_reason_premiseunit_delete(x_bud, x_atom)
+        _modify_bud_concept_reason_premiseunit_delete(x_bud, x_atom)
     elif x_atom.crud_str == atom_update():
-        _modify_bud_idea_reason_premiseunit_update(x_bud, x_atom)
+        _modify_bud_concept_reason_premiseunit_update(x_bud, x_atom)
     elif x_atom.crud_str == atom_insert():
-        _modify_bud_idea_reason_premiseunit_insert(x_bud, x_atom)
+        _modify_bud_concept_reason_premiseunit_insert(x_bud, x_atom)
 
 
-def _modify_bud_idea_laborlink(x_bud: BudUnit, x_atom: BudAtom):
+def _modify_bud_concept_laborlink(x_bud: BudUnit, x_atom: BudAtom):
     if x_atom.crud_str == atom_delete():
-        _modify_bud_idea_laborlink_delete(x_bud, x_atom)
+        _modify_bud_concept_laborlink_delete(x_bud, x_atom)
     elif x_atom.crud_str == atom_insert():
-        _modify_bud_idea_laborlink_insert(x_bud, x_atom)
+        _modify_bud_concept_laborlink_insert(x_bud, x_atom)
 
 
-def _modify_bud_idea_healerlink(x_bud: BudUnit, x_atom: BudAtom):
+def _modify_bud_concept_healerlink(x_bud: BudUnit, x_atom: BudAtom):
     if x_atom.crud_str == atom_delete():
-        _modify_bud_idea_healerlink_delete(x_bud, x_atom)
+        _modify_bud_concept_healerlink_delete(x_bud, x_atom)
     elif x_atom.crud_str == atom_insert():
-        _modify_bud_idea_healerlink_insert(x_bud, x_atom)
+        _modify_bud_concept_healerlink_insert(x_bud, x_atom)
 
 
 def _modify_bud_acctunit(x_bud: BudUnit, x_atom: BudAtom):
@@ -526,20 +526,20 @@ def modify_bud_with_budatom(x_bud: BudUnit, x_atom: BudAtom):
         _modify_bud_budunit(x_bud, x_atom)
     elif x_atom.dimen == "bud_acct_membership":
         _modify_bud_acct_membership(x_bud, x_atom)
-    elif x_atom.dimen == "bud_ideaunit":
-        _modify_bud_ideaunit(x_bud, x_atom)
-    elif x_atom.dimen == "bud_idea_awardlink":
-        _modify_bud_idea_awardlink(x_bud, x_atom)
-    elif x_atom.dimen == "bud_idea_factunit":
-        _modify_bud_idea_factunit(x_bud, x_atom)
-    elif x_atom.dimen == "bud_idea_reasonunit":
-        _modify_bud_idea_reasonunit(x_bud, x_atom)
-    elif x_atom.dimen == "bud_idea_reason_premiseunit":
-        _modify_bud_idea_reason_premiseunit(x_bud, x_atom)
-    elif x_atom.dimen == "bud_idea_healerlink":
-        _modify_bud_idea_healerlink(x_bud, x_atom)
-    elif x_atom.dimen == "bud_idea_laborlink":
-        _modify_bud_idea_laborlink(x_bud, x_atom)
+    elif x_atom.dimen == "bud_conceptunit":
+        _modify_bud_conceptunit(x_bud, x_atom)
+    elif x_atom.dimen == "bud_concept_awardlink":
+        _modify_bud_concept_awardlink(x_bud, x_atom)
+    elif x_atom.dimen == "bud_concept_factunit":
+        _modify_bud_concept_factunit(x_bud, x_atom)
+    elif x_atom.dimen == "bud_concept_reasonunit":
+        _modify_bud_concept_reasonunit(x_bud, x_atom)
+    elif x_atom.dimen == "bud_concept_reason_premiseunit":
+        _modify_bud_concept_reason_premiseunit(x_bud, x_atom)
+    elif x_atom.dimen == "bud_concept_healerlink":
+        _modify_bud_concept_healerlink(x_bud, x_atom)
+    elif x_atom.dimen == "bud_concept_laborlink":
+        _modify_bud_concept_laborlink(x_bud, x_atom)
     elif x_atom.dimen == "bud_acctunit":
         _modify_bud_acctunit(x_bud, x_atom)
 
@@ -559,11 +559,11 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
         return (x_obj.credit_vote != y_obj.credit_vote) or (
             x_obj.debtit_vote != y_obj.debtit_vote
         )
-    elif dimen in {"bud_idea_awardlink"}:
+    elif dimen in {"bud_concept_awardlink"}:
         return (x_obj.give_force != y_obj.give_force) or (
             x_obj.take_force != y_obj.take_force
         )
-    elif dimen == "bud_ideaunit":
+    elif dimen == "bud_conceptunit":
         return (
             x_obj.addin != y_obj.addin
             or x_obj.begin != y_obj.begin
@@ -574,17 +574,18 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.mass != y_obj.mass
             or x_obj.pledge != y_obj.pledge
         )
-    elif dimen == "bud_idea_factunit":
+    elif dimen == "bud_concept_factunit":
         return (
             (x_obj.fbranch != y_obj.fbranch)
             or (x_obj.popen != y_obj.popen)
             or (x_obj.pnigh != y_obj.pnigh)
         )
-    elif dimen == "bud_idea_reasonunit":
+    elif dimen == "bud_concept_reasonunit":
         return (
-            x_obj.rcontext_idea_active_requisite != y_obj.rcontext_idea_active_requisite
+            x_obj.rcontext_concept_active_requisite
+            != y_obj.rcontext_concept_active_requisite
         )
-    elif dimen == "bud_idea_reason_premiseunit":
+    elif dimen == "bud_concept_reason_premiseunit":
         return (
             x_obj.popen != y_obj.popen
             or x_obj.pnigh != y_obj.pnigh
@@ -616,9 +617,9 @@ class AtomRow:
     _crud_command: CRUD_command = None
     acct_name: AcctName = None
     addin: float = None
-    awardee_label: LabelStr = None
+    awardee_title: TitleStr = None
     rcontext: WayStr = None
-    rcontext_idea_active_requisite: bool = None
+    rcontext_concept_active_requisite: bool = None
     begin: float = None
     respect_bit: float = None
     close: float = None
@@ -637,8 +638,8 @@ class AtomRow:
     fund_pool: float = None
     give_force: float = None
     gogo_want: float = None
-    group_label: LabelStr = None
-    healer_name: LabelStr = None
+    group_title: TitleStr = None
+    healer_name: TitleStr = None
     mass: int = None
     max_tree_traverse: int = None
     morph: bool = None
@@ -650,11 +651,11 @@ class AtomRow:
     fbranch: WayStr = None
     pledge: bool = None
     problem_bool: bool = None
-    idea_way: WayStr = None
+    concept_way: WayStr = None
     stop_want: float = None
     take_force: float = None
     tally: int = None
-    labor_label: int = None
+    labor_title: int = None
 
     def set_atom_dimen(self, atom_dimen: str):
         self._atom_dimens.add(atom_dimen)
@@ -671,12 +672,12 @@ class AtomRow:
             if x_value != None:
                 if class_type == "NameStr":
                     self.__dict__[x_arg] = AcctName(x_value)
-                elif class_type == "LabelStr":
-                    self.__dict__[x_arg] = LabelStr(x_value)
+                elif class_type == "TitleStr":
+                    self.__dict__[x_arg] = TitleStr(x_value)
                 elif class_type == "WayStr":
                     self.__dict__[x_arg] = WayStr(x_value)
-                elif class_type == "WordStr":
-                    self.__dict__[x_arg] = WordStr(x_value)
+                elif class_type == "LabelStr":
+                    self.__dict__[x_arg] = LabelStr(x_value)
                 elif class_type == "str":
                     self.__dict__[x_arg] = str(x_value)
                 elif class_type == "bool":

@@ -31,16 +31,16 @@ class AcctUnitTable(Base):
 class MemberShipTable(Base):
     __tablename__ = "membership"
     uid = Column(Integer, primary_key=True)
-    group_label = Column(String)
+    group_title = Column(String)
     acct_name = Column(String)
     credit_vote = Column(Float)
     debtit_vote = Column(Float)
 
 
-class IdeaTable(Base):
-    __tablename__ = "idea"
+class ConceptTable(Base):
+    __tablename__ = "concept"
     uid = Column(Integer, primary_key=True)
-    idea_way = Column(String)
+    concept_way = Column(String)
     addin = Column(Float)
     begin = Column(Float)
     close = Column(Float)
@@ -57,8 +57,8 @@ class IdeaTable(Base):
 class AwardLinkTable(Base):
     __tablename__ = "awardlink"
     uid = Column(Integer, primary_key=True)
-    awardee_label = Column(String)
-    idea_way = Column(String)
+    awardee_title = Column(String)
+    concept_way = Column(String)
     give_force = Column(Float)
     take_force = Column(Float)
 
@@ -67,8 +67,8 @@ class ReasonTable(Base):
     __tablename__ = "reason"
     uid = Column(Integer, primary_key=True)
     rcontext = Column(String)
-    idea_way = Column(String)
-    rcontext_idea_active_requisite = Column(Integer)
+    concept_way = Column(String)
+    rcontext_concept_active_requisite = Column(Integer)
 
 
 class PremiseTable(Base):
@@ -76,7 +76,7 @@ class PremiseTable(Base):
     uid = Column(Integer, primary_key=True)
     rcontext = Column(String)
     pbranch = Column(String)
-    idea_way = Column(String)
+    concept_way = Column(String)
     pdivisor = Column(Integer)
     pnigh = Column(Float)
     popen = Column(Float)
@@ -85,22 +85,22 @@ class PremiseTable(Base):
 class LaborLinkTable(Base):
     __tablename__ = "laborlink"
     uid = Column(Integer, primary_key=True)
-    labor_label = Column(String)
-    idea_way = Column(String)
+    labor_title = Column(String)
+    concept_way = Column(String)
 
 
 class HealerLinkTable(Base):
     __tablename__ = "healerlink"
     uid = Column(Integer, primary_key=True)
     healer_name = Column(String)
-    idea_way = Column(String)
+    concept_way = Column(String)
 
 
 class FactTable(Base):
     __tablename__ = "fact"
     uid = Column(Integer, primary_key=True)
     fcontext = Column(String)
-    idea_way = Column(String)
+    concept_way = Column(String)
     fnigh = Column(Float)
     fopen = Column(Float)
     fbranch = Column(String)

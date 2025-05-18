@@ -31,7 +31,7 @@
         "way_ref": {
             "columns": {
                 "bridge": {},
-                "idea_way": {}
+                "concept_way": {}
             }
         }
     }

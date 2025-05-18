@@ -1,25 +1,25 @@
 from src.a01_way_logic.way import to_way
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import awardlink_shop
-from src.a05_idea_logic.idea import ideaunit_shop
-from src.a04_reason_logic.reason_idea import factunit_shop
+from src.a05_concept_logic.concept import conceptunit_shop
+from src.a04_reason_logic.reason_concept import factunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
-    bud_ideaunit_str,
-    bud_idea_awardlink_str,
-    bud_idea_reasonunit_str,
-    bud_idea_reason_premiseunit_str,
-    bud_idea_laborlink_str,
-    bud_idea_healerlink_str,
-    bud_idea_factunit_str,
+    bud_conceptunit_str,
+    bud_concept_awardlink_str,
+    bud_concept_reasonunit_str,
+    bud_concept_reason_premiseunit_str,
+    bud_concept_laborlink_str,
+    bud_concept_healerlink_str,
+    bud_concept_factunit_str,
     acct_name_str,
-    awardee_label_str,
-    group_label_str,
-    idea_way_str,
-    labor_label_str,
+    awardee_title_str,
+    group_title_str,
+    concept_way_str,
+    labor_title_str,
     healer_name_str,
     pledge_str,
     begin_str,
@@ -29,7 +29,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     fbranch_str,
     fnigh_str,
     fopen_str,
-    rcontext_idea_active_requisite_str,
+    rcontext_concept_active_requisite_str,
     give_force_str,
     take_force_str,
 )
@@ -231,7 +231,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_acct_membership_ins
     zia_run_credit_w = 77
     zia_run_debtit_w = 88
     after_zia_acctunit.add_membership(run_str, zia_run_credit_w, zia_run_debtit_w)
-    print(f"{after_sue_bud.get_acctunit_group_labels_dict()=}")
+    print(f"{after_sue_bud.get_acctunit_group_titles_dict()=}")
 
     # WHEN
     sue_buddelta = buddelta_shop()
@@ -256,7 +256,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_acct_membership_ins
     x_keylist = [atom_insert(), bud_acct_membership_str(), zia_str, run_str]
     run_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert run_budatom.get_value(acct_name_str()) == zia_str
-    assert run_budatom.get_value(group_label_str()) == run_str
+    assert run_budatom.get_value(group_title_str()) == run_str
     assert run_budatom.get_value("credit_vote") == zia_run_credit_w
     assert run_budatom.get_value("debtit_vote") == zia_run_debtit_w
 
@@ -301,7 +301,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_acct_membership_upd
     x_keylist = [atom_update(), bud_acct_membership_str(), xio_str, run_str]
     xio_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert xio_budatom.get_value(acct_name_str()) == xio_str
-    assert xio_budatom.get_value(group_label_str()) == run_str
+    assert xio_budatom.get_value(group_title_str()) == run_str
     assert xio_budatom.get_value("credit_vote") == after_xio_credit_w
     assert xio_budatom.get_value("debtit_vote") == after_xio_debtit_w
 
@@ -329,7 +329,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_acct_membership_del
     before_xio_acctunit.add_membership(fly_str)
     before_zia_acctunit.add_membership(fly_str)
     before_bob_acctunit.add_membership(fly_str)
-    before_group_labels_dict = before_sue_bud.get_acctunit_group_labels_dict()
+    before_group_titles_dict = before_sue_bud.get_acctunit_group_titles_dict()
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_xio_acctunit = after_sue_bud.get_acct(xio_str)
@@ -338,11 +338,11 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_acct_membership_del
     after_xio_acctunit.delete_membership(run_str)
     after_zia_acctunit.delete_membership(run_str)
     after_bob_acctunit.delete_membership(fly_str)
-    after_group_labels_dict = after_sue_bud.get_acctunit_group_labels_dict()
-    assert len(before_group_labels_dict.get(fly_str)) == 3
-    assert len(before_group_labels_dict.get(run_str)) == 2
-    assert len(after_group_labels_dict.get(fly_str)) == 2
-    assert after_group_labels_dict.get(run_str) is None
+    after_group_titles_dict = after_sue_bud.get_acctunit_group_titles_dict()
+    assert len(before_group_titles_dict.get(fly_str)) == 3
+    assert len(before_group_titles_dict.get(run_str)) == 2
+    assert len(after_group_titles_dict.get(fly_str)) == 2
+    assert after_group_titles_dict.get(run_str) is None
 
     # WHEN
     sue_buddelta = buddelta_shop()
@@ -352,7 +352,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_acct_membership_del
     x_keylist = [atom_delete(), bud_acct_membership_str(), bob_str, fly_str]
     xio_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert xio_budatom.get_value(acct_name_str()) == bob_str
-    assert xio_budatom.get_value(group_label_str()) == fly_str
+    assert xio_budatom.get_value(group_title_str()) == fly_str
 
     print(f"{get_budatom_total_count(sue_buddelta)=}")
     print_budatom_keys(sue_buddelta)
@@ -362,7 +362,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_acct_membership_del
     assert get_budatom_total_count(sue_buddelta) == 3
 
 
-def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_delete():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -370,40 +370,40 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_delete():
     sports_way = before_sue_bud.make_l1_way(sports_str)
     ball_str = "basketball"
     ball_way = before_sue_bud.make_way(sports_way, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_way)
+    before_sue_bud.set_concept(conceptunit_shop(ball_str), sports_way)
     street_str = "street ball"
     street_way = before_sue_bud.make_way(ball_way, street_str)
-    before_sue_bud.set_idea(ideaunit_shop(street_str), ball_way)
+    before_sue_bud.set_concept(conceptunit_shop(street_str), ball_way)
     disc_str = "Ultimate Disc"
     disc_way = before_sue_bud.make_way(sports_way, disc_str)
     accord45_str = "accord45"
-    before_sue_bud.set_l1_idea(ideaunit_shop(accord45_str))
-    before_sue_bud.set_idea(ideaunit_shop(disc_str), sports_way)
-    # create after without ball_idea and street_idea
+    before_sue_bud.set_l1_concept(conceptunit_shop(accord45_str))
+    before_sue_bud.set_concept(conceptunit_shop(disc_str), sports_way)
+    # create after without ball_concept and street_concept
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_sue_bud.del_idea_obj(ball_way)
+    after_sue_bud.del_concept_obj(ball_way)
 
     # WHEN
     sue_buddelta = buddelta_shop()
     sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
-    x_dimen = bud_ideaunit_str()
+    x_dimen = bud_conceptunit_str()
     print(f"{sue_buddelta.budatoms.get(atom_delete()).get(x_dimen).keys()=}")
 
-    x_keylist = [atom_delete(), bud_ideaunit_str(), street_way]
+    x_keylist = [atom_delete(), bud_conceptunit_str(), street_way]
     street_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
-    assert street_budatom.get_value(idea_way_str()) == street_way
+    assert street_budatom.get_value(concept_way_str()) == street_way
 
-    x_keylist = [atom_delete(), bud_ideaunit_str(), ball_way]
+    x_keylist = [atom_delete(), bud_conceptunit_str(), ball_way]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
-    assert ball_budatom.get_value(idea_way_str()) == ball_way
+    assert ball_budatom.get_value(concept_way_str()) == ball_way
 
     print(f"{get_budatom_total_count(sue_buddelta)=}")
     assert get_budatom_total_count(sue_buddelta) == 2
 
 
-def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_insert():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -411,23 +411,23 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_insert():
     sports_way = before_sue_bud.make_l1_way(sports_str)
     ball_str = "basketball"
     ball_way = before_sue_bud.make_way(sports_way, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_way)
+    before_sue_bud.set_concept(conceptunit_shop(ball_str), sports_way)
     street_str = "street ball"
     street_way = before_sue_bud.make_way(ball_way, street_str)
-    before_sue_bud.set_idea(ideaunit_shop(street_str), ball_way)
+    before_sue_bud.set_concept(conceptunit_shop(street_str), ball_way)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     disc_str = "Ultimate Disc"
     disc_way = after_sue_bud.make_way(sports_way, disc_str)
-    after_sue_bud.set_idea(ideaunit_shop(disc_str), sports_way)
+    after_sue_bud.set_concept(conceptunit_shop(disc_str), sports_way)
     accord45_str = "accord45"
     accord_begin = 34
     accord_close = 78
     accord_mass = 55
     accord_pledge = True
     accord_way = after_sue_bud.make_l1_way(accord45_str)
-    after_sue_bud.set_l1_idea(
-        ideaunit_shop(
+    after_sue_bud.set_l1_concept(
+        conceptunit_shop(
             accord45_str,
             begin=accord_begin,
             close=accord_close,
@@ -443,14 +443,14 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_insert():
     # THEN
     print_budatom_keys(sue_buddelta)
 
-    x_keylist = [atom_insert(), bud_ideaunit_str(), disc_way]
+    x_keylist = [atom_insert(), bud_conceptunit_str(), disc_way]
     street_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
-    assert street_budatom.get_value(idea_way_str()) == disc_way
+    assert street_budatom.get_value(concept_way_str()) == disc_way
 
     a45_way = after_sue_bud.make_l1_way(accord45_str)
-    x_keylist = [atom_insert(), bud_ideaunit_str(), a45_way]
+    x_keylist = [atom_insert(), bud_conceptunit_str(), a45_way]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
-    assert ball_budatom.get_value(idea_way_str()) == a45_way
+    assert ball_budatom.get_value(concept_way_str()) == a45_way
     assert ball_budatom.get_value(begin_str()) == accord_begin
     assert ball_budatom.get_value(close_str()) == accord_close
     assert ball_budatom.get_value(mass_str()) == accord_mass
@@ -459,7 +459,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_insert():
     assert get_budatom_total_count(sue_buddelta) == 2
 
 
-def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_update():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -472,8 +472,8 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_update():
     before_accord_mass = 55
     before_accord_pledge = True
     accord_way = before_sue_bud.make_l1_way(accord45_str)
-    before_sue_bud.set_l1_idea(
-        ideaunit_shop(
+    before_sue_bud.set_l1_concept(
+        conceptunit_shop(
             accord45_str,
             begin=before_accord_begin,
             close=before_accord_close,
@@ -487,7 +487,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_update():
     after_accord_close = 111
     after_accord_mass = 22
     after_accord_pledge = False
-    after_sue_bud.edit_idea_attr(
+    after_sue_bud.edit_concept_attr(
         accord_way,
         begin=after_accord_begin,
         close=after_accord_close,
@@ -502,9 +502,9 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_update():
     # THEN
     print_budatom_keys(sue_buddelta)
 
-    x_keylist = [atom_update(), bud_ideaunit_str(), accord45_way]
+    x_keylist = [atom_update(), bud_conceptunit_str(), accord45_way]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
-    assert ball_budatom.get_value(idea_way_str()) == accord45_way
+    assert ball_budatom.get_value(concept_way_str()) == accord45_way
     assert ball_budatom.get_value(begin_str()) == after_accord_begin
     assert ball_budatom.get_value(close_str()) == after_accord_close
     assert ball_budatom.get_value(mass_str()) == after_accord_mass
@@ -513,7 +513,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_update():
     assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_awardlink_delete():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_awardlink_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = budunit_shop(sue_str)
@@ -539,15 +539,15 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_awardlink_dele
     ball_way = before_sue_au.make_way(sports_way, ball_str)
     disc_str = "Ultimate Disc"
     disc_way = before_sue_au.make_way(sports_way, disc_str)
-    before_sue_au.set_idea(ideaunit_shop(ball_str), sports_way)
-    before_sue_au.set_idea(ideaunit_shop(disc_str), sports_way)
-    before_sue_au.edit_idea_attr(ball_way, awardlink=awardlink_shop(run_str))
-    before_sue_au.edit_idea_attr(ball_way, awardlink=awardlink_shop(fly_str))
-    before_sue_au.edit_idea_attr(disc_way, awardlink=awardlink_shop(run_str))
-    before_sue_au.edit_idea_attr(disc_way, awardlink=awardlink_shop(fly_str))
+    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_way)
+    before_sue_au.set_concept(conceptunit_shop(disc_str), sports_way)
+    before_sue_au.edit_concept_attr(ball_way, awardlink=awardlink_shop(run_str))
+    before_sue_au.edit_concept_attr(ball_way, awardlink=awardlink_shop(fly_str))
+    before_sue_au.edit_concept_attr(disc_way, awardlink=awardlink_shop(run_str))
+    before_sue_au.edit_concept_attr(disc_way, awardlink=awardlink_shop(fly_str))
 
     after_sue_bud = copy_deepcopy(before_sue_au)
-    after_sue_bud.edit_idea_attr(disc_way, awardlink_del=run_str)
+    after_sue_bud.edit_concept_attr(disc_way, awardlink_del=run_str)
 
     # WHEN
     sue_buddelta = buddelta_shop()
@@ -556,15 +556,15 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_awardlink_dele
     # THEN
     print(f"{print_budatom_keys(sue_buddelta)=}")
 
-    x_keylist = [atom_delete(), bud_idea_awardlink_str(), disc_way, run_str]
+    x_keylist = [atom_delete(), bud_concept_awardlink_str(), disc_way, run_str]
     run_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
-    assert run_budatom.get_value(idea_way_str()) == disc_way
-    assert run_budatom.get_value(awardee_label_str()) == run_str
+    assert run_budatom.get_value(concept_way_str()) == disc_way
+    assert run_budatom.get_value(awardee_title_str()) == run_str
 
     assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_awardlink_insert():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_awardlink_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = budunit_shop(sue_str)
@@ -590,16 +590,16 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_awardlink_inse
     ball_way = before_sue_au.make_way(sports_way, ball_str)
     disc_str = "Ultimate Disc"
     disc_way = before_sue_au.make_way(sports_way, disc_str)
-    before_sue_au.set_idea(ideaunit_shop(ball_str), sports_way)
-    before_sue_au.set_idea(ideaunit_shop(disc_str), sports_way)
-    before_sue_au.edit_idea_attr(ball_way, awardlink=awardlink_shop(run_str))
-    before_sue_au.edit_idea_attr(disc_way, awardlink=awardlink_shop(fly_str))
+    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_way)
+    before_sue_au.set_concept(conceptunit_shop(disc_str), sports_way)
+    before_sue_au.edit_concept_attr(ball_way, awardlink=awardlink_shop(run_str))
+    before_sue_au.edit_concept_attr(disc_way, awardlink=awardlink_shop(fly_str))
     after_sue_au = copy_deepcopy(before_sue_au)
-    after_sue_au.edit_idea_attr(ball_way, awardlink=awardlink_shop(fly_str))
+    after_sue_au.edit_concept_attr(ball_way, awardlink=awardlink_shop(fly_str))
     after_run_give_force = 44
     after_run_take_force = 66
     x_awardlink = awardlink_shop(run_str, after_run_give_force, after_run_take_force)
-    after_sue_au.edit_idea_attr(disc_way, awardlink=x_awardlink)
+    after_sue_au.edit_concept_attr(disc_way, awardlink=x_awardlink)
 
     # WHEN
     sue_buddelta = buddelta_shop()
@@ -608,19 +608,19 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_awardlink_inse
     # THEN
     print(f"{print_budatom_keys(sue_buddelta)=}")
 
-    x_keylist = [atom_insert(), bud_idea_awardlink_str(), disc_way, run_str]
+    x_keylist = [atom_insert(), bud_concept_awardlink_str(), disc_way, run_str]
     run_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
-    assert run_budatom.get_value(idea_way_str()) == disc_way
-    assert run_budatom.get_value(awardee_label_str()) == run_str
-    assert run_budatom.get_value(idea_way_str()) == disc_way
-    assert run_budatom.get_value(awardee_label_str()) == run_str
+    assert run_budatom.get_value(concept_way_str()) == disc_way
+    assert run_budatom.get_value(awardee_title_str()) == run_str
+    assert run_budatom.get_value(concept_way_str()) == disc_way
+    assert run_budatom.get_value(awardee_title_str()) == run_str
     assert run_budatom.get_value(give_force_str()) == after_run_give_force
     assert run_budatom.get_value(take_force_str()) == after_run_take_force
 
     assert get_budatom_total_count(sue_buddelta) == 2
 
 
-def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_awardlink_update():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_awardlink_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = budunit_shop(sue_str)
@@ -635,17 +635,17 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_awardlink_upda
     sports_way = before_sue_au.make_l1_way(sports_str)
     ball_str = "basketball"
     ball_way = before_sue_au.make_way(sports_way, ball_str)
-    before_sue_au.set_idea(ideaunit_shop(ball_str), sports_way)
-    before_sue_au.edit_idea_attr(ball_way, awardlink=awardlink_shop(run_str))
-    run_awardlink = before_sue_au.get_idea_obj(ball_way).awardlinks.get(run_str)
+    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_way)
+    before_sue_au.edit_concept_attr(ball_way, awardlink=awardlink_shop(run_str))
+    run_awardlink = before_sue_au.get_concept_obj(ball_way).awardlinks.get(run_str)
 
     after_sue_bud = copy_deepcopy(before_sue_au)
     after_give_force = 55
     after_take_force = 66
-    after_sue_bud.edit_idea_attr(
+    after_sue_bud.edit_concept_attr(
         ball_way,
         awardlink=awardlink_shop(
-            awardee_label=run_str,
+            awardee_title=run_str,
             give_force=after_give_force,
             take_force=after_take_force,
         ),
@@ -657,16 +657,16 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_awardlink_upda
     # THEN
     print(f"{print_budatom_keys(sue_buddelta)=}")
 
-    x_keylist = [atom_update(), bud_idea_awardlink_str(), ball_way, run_str]
+    x_keylist = [atom_update(), bud_concept_awardlink_str(), ball_way, run_str]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
-    assert ball_budatom.get_value(idea_way_str()) == ball_way
-    assert ball_budatom.get_value(awardee_label_str()) == run_str
+    assert ball_budatom.get_value(concept_way_str()) == ball_way
+    assert ball_budatom.get_value(awardee_title_str()) == run_str
     assert ball_budatom.get_value(give_force_str()) == after_give_force
     assert ball_budatom.get_value(take_force_str()) == after_take_force
     assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_factunit_update():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_factunit_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -674,26 +674,26 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_factunit_updat
     sports_way = before_sue_bud.make_l1_way(sports_str)
     ball_str = "basketball"
     ball_way = before_sue_bud.make_way(sports_way, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_way)
+    before_sue_bud.set_concept(conceptunit_shop(ball_str), sports_way)
     knee_str = "knee"
     knee_way = before_sue_bud.make_l1_way(knee_str)
     bend_str = "bendable"
     bend_way = before_sue_bud.make_way(knee_way, bend_str)
-    before_sue_bud.set_idea(ideaunit_shop(bend_str), knee_way)
+    before_sue_bud.set_concept(conceptunit_shop(bend_str), knee_way)
     damaged_str = "damaged mcl"
     damaged_way = before_sue_bud.make_way(knee_way, damaged_str)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
-    before_sue_bud.set_idea(ideaunit_shop(damaged_str), knee_way)
+    before_sue_bud.set_l1_concept(conceptunit_shop(knee_str))
+    before_sue_bud.set_concept(conceptunit_shop(damaged_str), knee_way)
     before_fopen = 11
     before_fnigh = 22
     before_fact = factunit_shop(knee_way, bend_way, before_fopen, before_fnigh)
-    before_sue_bud.edit_idea_attr(ball_way, factunit=before_fact)
+    before_sue_bud.edit_concept_attr(ball_way, factunit=before_fact)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_fopen = 55
     after_fnigh = 66
     knee_fact = factunit_shop(knee_way, damaged_way, after_fopen, after_fnigh)
-    after_sue_bud.edit_idea_attr(ball_way, factunit=knee_fact)
+    after_sue_bud.edit_concept_attr(ball_way, factunit=knee_fact)
 
     # WHEN
     sue_buddelta = buddelta_shop()
@@ -702,9 +702,9 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_factunit_updat
     # THEN
     print(f"{print_budatom_keys(sue_buddelta)=}")
 
-    x_keylist = [atom_update(), bud_idea_factunit_str(), ball_way, knee_way]
+    x_keylist = [atom_update(), bud_concept_factunit_str(), ball_way, knee_way]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
-    assert ball_budatom.get_value(idea_way_str()) == ball_way
+    assert ball_budatom.get_value(concept_way_str()) == ball_way
     assert ball_budatom.get_value(fcontext_str()) == knee_way
     assert ball_budatom.get_value(fbranch_str()) == damaged_way
     assert ball_budatom.get_value(fopen_str()) == after_fopen
@@ -712,7 +712,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_factunit_updat
     assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_factunit_insert():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_factunit_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -720,19 +720,19 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_factunit_inser
     sports_way = before_sue_bud.make_l1_way(sports_str)
     ball_str = "basketball"
     ball_way = before_sue_bud.make_way(sports_way, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_way)
+    before_sue_bud.set_concept(conceptunit_shop(ball_str), sports_way)
     knee_str = "knee"
     knee_way = before_sue_bud.make_l1_way(knee_str)
     damaged_str = "damaged mcl"
     damaged_way = before_sue_bud.make_way(knee_way, damaged_str)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
-    before_sue_bud.set_idea(ideaunit_shop(damaged_str), knee_way)
+    before_sue_bud.set_l1_concept(conceptunit_shop(knee_str))
+    before_sue_bud.set_concept(conceptunit_shop(damaged_str), knee_way)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     after_fopen = 55
     after_fnigh = 66
     after_fact = factunit_shop(knee_way, damaged_way, after_fopen, after_fnigh)
-    after_sue_bud.edit_idea_attr(ball_way, factunit=after_fact)
+    after_sue_bud.edit_concept_attr(ball_way, factunit=after_fact)
 
     # WHEN
     sue_buddelta = buddelta_shop()
@@ -740,10 +740,10 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_factunit_inser
 
     # THEN
     print(f"{print_budatom_keys(sue_buddelta)=}")
-    x_keylist = [atom_insert(), bud_idea_factunit_str(), ball_way, knee_way]
+    x_keylist = [atom_insert(), bud_concept_factunit_str(), ball_way, knee_way]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     print(f"{ball_budatom=}")
-    assert ball_budatom.get_value(idea_way_str()) == ball_way
+    assert ball_budatom.get_value(concept_way_str()) == ball_way
     assert ball_budatom.get_value(fcontext_str()) == knee_way
     assert ball_budatom.get_value(fbranch_str()) == damaged_way
     assert ball_budatom.get_value(fopen_str()) == after_fopen
@@ -751,7 +751,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_factunit_inser
     assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_factunit_delete():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_factunit_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -759,13 +759,13 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_factunit_delet
     sports_way = before_sue_bud.make_l1_way(sports_str)
     ball_str = "basketball"
     ball_way = before_sue_bud.make_way(sports_way, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_way)
+    before_sue_bud.set_concept(conceptunit_shop(ball_str), sports_way)
     knee_str = "knee"
     knee_way = before_sue_bud.make_l1_way(knee_str)
     damaged_str = "damaged mcl"
     damaged_way = before_sue_bud.make_way(knee_way, damaged_str)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
-    before_sue_bud.set_idea(ideaunit_shop(damaged_str), knee_way)
+    before_sue_bud.set_l1_concept(conceptunit_shop(knee_str))
+    before_sue_bud.set_concept(conceptunit_shop(damaged_str), knee_way)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
     before_damaged_popen = 55
@@ -776,7 +776,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_factunit_delet
         fopen=before_damaged_popen,
         fnigh=before_damaged_pnigh,
     )
-    before_sue_bud.edit_idea_attr(ball_way, factunit=before_fact)
+    before_sue_bud.edit_concept_attr(ball_way, factunit=before_fact)
 
     # WHEN
     sue_buddelta = buddelta_shop()
@@ -784,14 +784,14 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_factunit_delet
 
     # THEN
     print(f"{print_budatom_keys(sue_buddelta)=}")
-    x_keylist = [atom_delete(), bud_idea_factunit_str(), ball_way, knee_way]
+    x_keylist = [atom_delete(), bud_concept_factunit_str(), ball_way, knee_way]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
-    assert ball_budatom.get_value(idea_way_str()) == ball_way
+    assert ball_budatom.get_value(concept_way_str()) == ball_way
     assert ball_budatom.get_value(fcontext_str()) == knee_way
     assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premiseunit_insert():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_reason_premiseunit_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -799,17 +799,17 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
     sports_way = before_sue_bud.make_l1_way(sports_str)
     ball_str = "basketball"
     ball_way = before_sue_bud.make_way(sports_way, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_way)
+    before_sue_bud.set_concept(conceptunit_shop(ball_str), sports_way)
     knee_str = "knee"
     knee_way = before_sue_bud.make_l1_way(knee_str)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
+    before_sue_bud.set_l1_concept(conceptunit_shop(knee_str))
     damaged_str = "damaged mcl"
     damaged_way = before_sue_bud.make_way(knee_way, damaged_str)
-    before_sue_bud.set_idea(ideaunit_shop(damaged_str), knee_way)
+    before_sue_bud.set_concept(conceptunit_shop(damaged_str), knee_way)
     bend_str = "bend"
     bend_way = before_sue_bud.make_way(knee_way, bend_str)
-    before_sue_bud.set_idea(ideaunit_shop(bend_str), knee_way)
-    before_sue_bud.edit_idea_attr(
+    before_sue_bud.set_concept(conceptunit_shop(bend_str), knee_way)
+    before_sue_bud.edit_concept_attr(
         ball_way, reason_rcontext=knee_way, reason_premise=bend_way
     )
 
@@ -817,7 +817,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
     damaged_popen = 45
     damaged_pnigh = 77
     damaged_pdivisor = 3
-    after_sue_bud.edit_idea_attr(
+    after_sue_bud.edit_concept_attr(
         ball_way,
         reason_rcontext=knee_way,
         reason_premise=damaged_way,
@@ -834,13 +834,13 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_insert(),
-        bud_idea_reason_premiseunit_str(),
+        bud_concept_reason_premiseunit_str(),
         ball_way,
         knee_way,
         damaged_way,
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
-    assert ball_budatom.get_value(idea_way_str()) == ball_way
+    assert ball_budatom.get_value(concept_way_str()) == ball_way
     assert ball_budatom.get_value("rcontext") == knee_way
     assert ball_budatom.get_value("pbranch") == damaged_way
     assert ball_budatom.get_value("popen") == damaged_popen
@@ -849,7 +849,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
     assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premiseunit_delete():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_reason_premiseunit_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -857,23 +857,23 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
     sports_way = before_sue_bud.make_l1_way(sports_str)
     ball_str = "basketball"
     ball_way = before_sue_bud.make_way(sports_way, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_way)
+    before_sue_bud.set_concept(conceptunit_shop(ball_str), sports_way)
     knee_str = "knee"
     knee_way = before_sue_bud.make_l1_way(knee_str)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
+    before_sue_bud.set_l1_concept(conceptunit_shop(knee_str))
     damaged_str = "damaged mcl"
     damaged_way = before_sue_bud.make_way(knee_way, damaged_str)
-    before_sue_bud.set_idea(ideaunit_shop(damaged_str), knee_way)
+    before_sue_bud.set_concept(conceptunit_shop(damaged_str), knee_way)
     bend_str = "bend"
     bend_way = before_sue_bud.make_way(knee_way, bend_str)
-    before_sue_bud.set_idea(ideaunit_shop(bend_str), knee_way)
-    before_sue_bud.edit_idea_attr(
+    before_sue_bud.set_concept(conceptunit_shop(bend_str), knee_way)
+    before_sue_bud.edit_concept_attr(
         ball_way, reason_rcontext=knee_way, reason_premise=bend_way
     )
     damaged_popen = 45
     damaged_pnigh = 77
     damaged_pdivisor = 3
-    before_sue_bud.edit_idea_attr(
+    before_sue_bud.edit_concept_attr(
         ball_way,
         reason_rcontext=knee_way,
         reason_premise=damaged_way,
@@ -882,7 +882,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
         pdivisor=damaged_pdivisor,
     )
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_sue_bud.edit_idea_attr(
+    after_sue_bud.edit_concept_attr(
         ball_way,
         reason_del_premise_rcontext=knee_way,
         reason_del_premise_pbranch=damaged_way,
@@ -896,19 +896,19 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_delete(),
-        bud_idea_reason_premiseunit_str(),
+        bud_concept_reason_premiseunit_str(),
         ball_way,
         knee_way,
         damaged_way,
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
-    assert ball_budatom.get_value(idea_way_str()) == ball_way
+    assert ball_budatom.get_value(concept_way_str()) == ball_way
     assert ball_budatom.get_value("rcontext") == knee_way
     assert ball_budatom.get_value("pbranch") == damaged_way
     assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premiseunit_update():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_reason_premiseunit_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -916,23 +916,23 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
     sports_way = before_sue_bud.make_l1_way(sports_str)
     ball_str = "basketball"
     ball_way = before_sue_bud.make_way(sports_way, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_way)
+    before_sue_bud.set_concept(conceptunit_shop(ball_str), sports_way)
     knee_str = "knee"
     knee_way = before_sue_bud.make_l1_way(knee_str)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
+    before_sue_bud.set_l1_concept(conceptunit_shop(knee_str))
     damaged_str = "damaged mcl"
     damaged_way = before_sue_bud.make_way(knee_way, damaged_str)
-    before_sue_bud.set_idea(ideaunit_shop(damaged_str), knee_way)
+    before_sue_bud.set_concept(conceptunit_shop(damaged_str), knee_way)
     bend_str = "bend"
     bend_way = before_sue_bud.make_way(knee_way, bend_str)
-    before_sue_bud.set_idea(ideaunit_shop(bend_str), knee_way)
-    before_sue_bud.edit_idea_attr(
+    before_sue_bud.set_concept(conceptunit_shop(bend_str), knee_way)
+    before_sue_bud.edit_concept_attr(
         ball_way, reason_rcontext=knee_way, reason_premise=bend_way
     )
     before_damaged_popen = 111
     before_damaged_pnigh = 777
     before_damaged_pdivisor = 13
-    before_sue_bud.edit_idea_attr(
+    before_sue_bud.edit_concept_attr(
         ball_way,
         reason_rcontext=knee_way,
         reason_premise=damaged_way,
@@ -945,7 +945,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
     after_damaged_popen = 333
     after_damaged_pnigh = 555
     after_damaged_pdivisor = 78
-    after_sue_bud.edit_idea_attr(
+    after_sue_bud.edit_concept_attr(
         ball_way,
         reason_rcontext=knee_way,
         reason_premise=damaged_way,
@@ -962,13 +962,13 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_update(),
-        bud_idea_reason_premiseunit_str(),
+        bud_concept_reason_premiseunit_str(),
         ball_way,
         knee_way,
         damaged_way,
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
-    assert ball_budatom.get_value(idea_way_str()) == ball_way
+    assert ball_budatom.get_value(concept_way_str()) == ball_way
     assert ball_budatom.get_value("rcontext") == knee_way
     assert ball_budatom.get_value("pbranch") == damaged_way
     assert ball_budatom.get_value("popen") == after_damaged_popen
@@ -977,7 +977,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reason_premise
     assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reasonunit_insert():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_reasonunit_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -985,20 +985,20 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reasonunit_ins
     sports_way = before_sue_bud.make_l1_way(sports_str)
     ball_str = "basketball"
     ball_way = before_sue_bud.make_way(sports_way, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_way)
+    before_sue_bud.set_concept(conceptunit_shop(ball_str), sports_way)
     knee_str = "knee"
     knee_way = before_sue_bud.make_l1_way(knee_str)
     medical_str = "get medical attention"
     medical_way = before_sue_bud.make_way(knee_way, medical_str)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
-    before_sue_bud.set_idea(ideaunit_shop(medical_str), knee_way)
+    before_sue_bud.set_l1_concept(conceptunit_shop(knee_str))
+    before_sue_bud.set_concept(conceptunit_shop(medical_str), knee_way)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_medical_rcontext_idea_active_requisite = False
-    after_sue_bud.edit_idea_attr(
+    after_medical_rcontext_concept_active_requisite = False
+    after_sue_bud.edit_concept_attr(
         ball_way,
         reason_rcontext=medical_way,
-        reason_rcontext_idea_active_requisite=after_medical_rcontext_idea_active_requisite,
+        reason_rcontext_concept_active_requisite=after_medical_rcontext_concept_active_requisite,
     )
 
     sue_buddelta = buddelta_shop()
@@ -1008,21 +1008,21 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reasonunit_ins
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_insert(),
-        bud_idea_reasonunit_str(),
+        bud_concept_reasonunit_str(),
         ball_way,
         medical_way,
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
-    assert ball_budatom.get_value(idea_way_str()) == ball_way
+    assert ball_budatom.get_value(concept_way_str()) == ball_way
     assert ball_budatom.get_value("rcontext") == medical_way
     assert (
-        ball_budatom.get_value(rcontext_idea_active_requisite_str())
-        == after_medical_rcontext_idea_active_requisite
+        ball_budatom.get_value(rcontext_concept_active_requisite_str())
+        == after_medical_rcontext_concept_active_requisite
     )
     assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reasonunit_update():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_reasonunit_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1030,26 +1030,26 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reasonunit_upd
     sports_way = before_sue_bud.make_l1_way(sports_str)
     ball_str = "basketball"
     ball_way = before_sue_bud.make_way(sports_way, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_way)
+    before_sue_bud.set_concept(conceptunit_shop(ball_str), sports_way)
     knee_str = "knee"
     knee_way = before_sue_bud.make_l1_way(knee_str)
     medical_str = "get medical attention"
     medical_way = before_sue_bud.make_way(knee_way, medical_str)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
-    before_sue_bud.set_idea(ideaunit_shop(medical_str), knee_way)
-    before_medical_rcontext_idea_active_requisite = True
-    before_sue_bud.edit_idea_attr(
+    before_sue_bud.set_l1_concept(conceptunit_shop(knee_str))
+    before_sue_bud.set_concept(conceptunit_shop(medical_str), knee_way)
+    before_medical_rcontext_concept_active_requisite = True
+    before_sue_bud.edit_concept_attr(
         ball_way,
         reason_rcontext=medical_way,
-        reason_rcontext_idea_active_requisite=before_medical_rcontext_idea_active_requisite,
+        reason_rcontext_concept_active_requisite=before_medical_rcontext_concept_active_requisite,
     )
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_medical_rcontext_idea_active_requisite = False
-    after_sue_bud.edit_idea_attr(
+    after_medical_rcontext_concept_active_requisite = False
+    after_sue_bud.edit_concept_attr(
         ball_way,
         reason_rcontext=medical_way,
-        reason_rcontext_idea_active_requisite=after_medical_rcontext_idea_active_requisite,
+        reason_rcontext_concept_active_requisite=after_medical_rcontext_concept_active_requisite,
     )
 
     # WHEN
@@ -1060,21 +1060,21 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reasonunit_upd
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_update(),
-        bud_idea_reasonunit_str(),
+        bud_concept_reasonunit_str(),
         ball_way,
         medical_way,
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
-    assert ball_budatom.get_value(idea_way_str()) == ball_way
+    assert ball_budatom.get_value(concept_way_str()) == ball_way
     assert ball_budatom.get_value("rcontext") == medical_way
     assert (
-        ball_budatom.get_value(rcontext_idea_active_requisite_str())
-        == after_medical_rcontext_idea_active_requisite
+        ball_budatom.get_value(rcontext_concept_active_requisite_str())
+        == after_medical_rcontext_concept_active_requisite
     )
     assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reasonunit_delete():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_reasonunit_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1082,23 +1082,23 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reasonunit_del
     sports_way = before_sue_bud.make_l1_way(sports_str)
     ball_str = "basketball"
     ball_way = before_sue_bud.make_way(sports_way, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_way)
+    before_sue_bud.set_concept(conceptunit_shop(ball_str), sports_way)
     knee_str = "knee"
     knee_way = before_sue_bud.make_l1_way(knee_str)
     medical_str = "get medical attention"
     medical_way = before_sue_bud.make_way(knee_way, medical_str)
-    before_sue_bud.set_l1_idea(ideaunit_shop(knee_str))
-    before_sue_bud.set_idea(ideaunit_shop(medical_str), knee_way)
-    before_medical_rcontext_idea_active_requisite = True
-    before_sue_bud.edit_idea_attr(
+    before_sue_bud.set_l1_concept(conceptunit_shop(knee_str))
+    before_sue_bud.set_concept(conceptunit_shop(medical_str), knee_way)
+    before_medical_rcontext_concept_active_requisite = True
+    before_sue_bud.edit_concept_attr(
         ball_way,
         reason_rcontext=medical_way,
-        reason_rcontext_idea_active_requisite=before_medical_rcontext_idea_active_requisite,
+        reason_rcontext_concept_active_requisite=before_medical_rcontext_concept_active_requisite,
     )
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_ball_idea = after_sue_bud.get_idea_obj(ball_way)
-    after_ball_idea.del_reasonunit_rcontext(medical_way)
+    after_ball_concept = after_sue_bud.get_concept_obj(ball_way)
+    after_ball_concept.del_reasonunit_rcontext(medical_way)
 
     # WHEN
     sue_buddelta = buddelta_shop()
@@ -1108,17 +1108,17 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_reasonunit_del
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_delete(),
-        bud_idea_reasonunit_str(),
+        bud_concept_reasonunit_str(),
         ball_way,
         medical_way,
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
-    assert ball_budatom.get_value(idea_way_str()) == ball_way
+    assert ball_budatom.get_value(concept_way_str()) == ball_way
     assert ball_budatom.get_value("rcontext") == medical_way
     assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_laborlink_insert():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_laborlink_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1128,11 +1128,11 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_laborlink_inse
     sports_way = before_sue_bud.make_l1_way(sports_str)
     ball_str = "basketball"
     ball_way = before_sue_bud.make_way(sports_way, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_way)
+    before_sue_bud.set_concept(conceptunit_shop(ball_str), sports_way)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_way)
-    after_ball_ideaunit.laborunit.set_laborlink(xio_str)
+    after_ball_conceptunit = after_sue_bud.get_concept_obj(ball_way)
+    after_ball_conceptunit.laborunit.set_laborlink(xio_str)
 
     # WHEN
     sue_buddelta = buddelta_shop()
@@ -1142,17 +1142,17 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_laborlink_inse
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_insert(),
-        bud_idea_laborlink_str(),
+        bud_concept_laborlink_str(),
         ball_way,
         xio_str,
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
-    assert ball_budatom.get_value(idea_way_str()) == ball_way
-    assert ball_budatom.get_value(labor_label_str()) == xio_str
+    assert ball_budatom.get_value(concept_way_str()) == ball_way
+    assert ball_budatom.get_value(labor_title_str()) == xio_str
     assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_laborlink_delete():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_laborlink_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1162,13 +1162,13 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_laborlink_dele
     sports_way = before_sue_bud.make_l1_way(sports_str)
     ball_str = "basketball"
     ball_way = before_sue_bud.make_way(sports_way, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_way)
-    before_ball_ideaunit = before_sue_bud.get_idea_obj(ball_way)
-    before_ball_ideaunit.laborunit.set_laborlink(xio_str)
+    before_sue_bud.set_concept(conceptunit_shop(ball_str), sports_way)
+    before_ball_conceptunit = before_sue_bud.get_concept_obj(ball_way)
+    before_ball_conceptunit.laborunit.set_laborlink(xio_str)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_way)
-    after_ball_ideaunit.laborunit.del_laborlink(xio_str)
+    after_ball_conceptunit = after_sue_bud.get_concept_obj(ball_way)
+    after_ball_conceptunit.laborunit.del_laborlink(xio_str)
 
     # WHEN
     sue_buddelta = buddelta_shop()
@@ -1178,17 +1178,17 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_laborlink_dele
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_delete(),
-        bud_idea_laborlink_str(),
+        bud_concept_laborlink_str(),
         ball_way,
         xio_str,
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
-    assert ball_budatom.get_value(idea_way_str()) == ball_way
-    assert ball_budatom.get_value(labor_label_str()) == xio_str
+    assert ball_budatom.get_value(concept_way_str()) == ball_way
+    assert ball_budatom.get_value(labor_title_str()) == xio_str
     assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_healerlink_insert_IdeaUnitUpdate():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_healerlink_insert_ConceptUnitUpdate():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1198,11 +1198,11 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_healerlink_ins
     sports_way = before_sue_bud.make_l1_way(sports_str)
     ball_str = "basketball"
     ball_way = before_sue_bud.make_way(sports_way, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_way)
+    before_sue_bud.set_concept(conceptunit_shop(ball_str), sports_way)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_way)
-    after_ball_ideaunit.healerlink.set_healer_name(xio_str)
+    after_ball_conceptunit = after_sue_bud.get_concept_obj(ball_way)
+    after_ball_conceptunit.healerlink.set_healer_name(xio_str)
 
     # WHEN
     sue_buddelta = buddelta_shop()
@@ -1212,17 +1212,17 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_healerlink_ins
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_insert(),
-        bud_idea_healerlink_str(),
+        bud_concept_healerlink_str(),
         ball_way,
         xio_str,
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
-    assert ball_budatom.get_value(idea_way_str()) == ball_way
+    assert ball_budatom.get_value(concept_way_str()) == ball_way
     assert ball_budatom.get_value(healer_name_str()) == xio_str
     assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_healerlink_insert_IdeaUnitInsert():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_healerlink_insert_ConceptUnitInsert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1234,9 +1234,9 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_healerlink_ins
     sports_way = before_sue_bud.make_l1_way(sports_str)
     ball_str = "basketball"
     ball_way = before_sue_bud.make_way(sports_way, ball_str)
-    after_sue_bud.set_idea(ideaunit_shop(ball_str), sports_way)
-    after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_way)
-    after_ball_ideaunit.healerlink.set_healer_name(xio_str)
+    after_sue_bud.set_concept(conceptunit_shop(ball_str), sports_way)
+    after_ball_conceptunit = after_sue_bud.get_concept_obj(ball_way)
+    after_ball_conceptunit.healerlink.set_healer_name(xio_str)
 
     # WHEN
     sue_buddelta = buddelta_shop()
@@ -1246,18 +1246,18 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_healerlink_ins
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_insert(),
-        bud_idea_healerlink_str(),
+        bud_concept_healerlink_str(),
         ball_way,
         xio_str,
     ]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist, True)
     assert ball_budatom
-    assert ball_budatom.get_value(idea_way_str()) == ball_way
+    assert ball_budatom.get_value(concept_way_str()) == ball_way
     assert ball_budatom.get_value(healer_name_str()) == xio_str
     assert get_budatom_total_count(sue_buddelta) == 3
 
 
-def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_healerlink_delete_IdeaUnitUpdate():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_healerlink_delete_ConceptUnitUpdate():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1267,13 +1267,13 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_healerlink_del
     sports_way = before_sue_bud.make_l1_way(sports_str)
     ball_str = "basketball"
     ball_way = before_sue_bud.make_way(sports_way, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_way)
-    before_ball_ideaunit = before_sue_bud.get_idea_obj(ball_way)
-    before_ball_ideaunit.healerlink.set_healer_name(xio_str)
+    before_sue_bud.set_concept(conceptunit_shop(ball_str), sports_way)
+    before_ball_conceptunit = before_sue_bud.get_concept_obj(ball_way)
+    before_ball_conceptunit.healerlink.set_healer_name(xio_str)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_way)
-    after_ball_ideaunit.healerlink.del_healer_name(xio_str)
+    after_ball_conceptunit = after_sue_bud.get_concept_obj(ball_way)
+    after_ball_conceptunit.healerlink.del_healer_name(xio_str)
 
     # WHEN
     sue_buddelta = buddelta_shop()
@@ -1283,7 +1283,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_healerlink_del
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_delete(),
-        bud_idea_healerlink_str(),
+        bud_concept_healerlink_str(),
         ball_way,
         xio_str,
     ]
@@ -1291,12 +1291,12 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_healerlink_del
         sue_buddelta.budatoms, x_keylist, if_missing_return_None=True
     )
     assert ball_budatom
-    assert ball_budatom.get_value(idea_way_str()) == ball_way
+    assert ball_budatom.get_value(concept_way_str()) == ball_way
     assert ball_budatom.get_value(healer_name_str()) == xio_str
     assert get_budatom_total_count(sue_buddelta) == 1
 
 
-def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_healerlink_delete_IdeaUnitDelete():
+def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_healerlink_delete_ConceptUnitDelete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_bud = budunit_shop(sue_str)
@@ -1306,12 +1306,12 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_healerlink_del
     sports_way = before_sue_bud.make_l1_way(sports_str)
     ball_str = "basketball"
     ball_way = before_sue_bud.make_way(sports_way, ball_str)
-    before_sue_bud.set_idea(ideaunit_shop(ball_str), sports_way)
-    before_ball_ideaunit = before_sue_bud.get_idea_obj(ball_way)
-    before_ball_ideaunit.healerlink.set_healer_name(xio_str)
+    before_sue_bud.set_concept(conceptunit_shop(ball_str), sports_way)
+    before_ball_conceptunit = before_sue_bud.get_concept_obj(ball_way)
+    before_ball_conceptunit.healerlink.set_healer_name(xio_str)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_sue_bud.del_idea_obj(ball_way)
+    after_sue_bud.del_concept_obj(ball_way)
 
     # WHEN
     sue_buddelta = buddelta_shop()
@@ -1321,7 +1321,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_healerlink_del
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
         atom_delete(),
-        bud_idea_healerlink_str(),
+        bud_concept_healerlink_str(),
         ball_way,
         xio_str,
     ]
@@ -1329,7 +1329,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_idea_healerlink_del
         sue_buddelta.budatoms, x_keylist, if_missing_return_None=True
     )
     assert ball_budatom
-    assert ball_budatom.get_value(idea_way_str()) == ball_way
+    assert ball_budatom.get_value(concept_way_str()) == ball_way
     assert ball_budatom.get_value(healer_name_str()) == xio_str
     assert get_budatom_total_count(sue_buddelta) == 2
 
@@ -1346,9 +1346,9 @@ def test_BudDelta_add_all_budatoms_CorrectlyCreates_BudAtoms():
     sports_way = after_sue_bud.make_l1_way(sports_str)
     ball_str = "basketball"
     ball_way = after_sue_bud.make_way(sports_way, ball_str)
-    after_sue_bud.set_idea(ideaunit_shop(ball_str), sports_way)
-    after_ball_ideaunit = after_sue_bud.get_idea_obj(ball_way)
-    after_ball_ideaunit.laborunit.set_laborlink(xio_str)
+    after_sue_bud.set_concept(conceptunit_shop(ball_str), sports_way)
+    after_ball_conceptunit = after_sue_bud.get_concept_obj(ball_way)
+    after_ball_conceptunit.laborunit.set_laborlink(xio_str)
 
     before_sue_bud = budunit_shop(sue_str)
     sue1_buddelta = buddelta_shop()

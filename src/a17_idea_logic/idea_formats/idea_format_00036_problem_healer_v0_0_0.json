@@ -1,0 +1,35 @@
+{
+    "attributes": {
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "fisc_label": {
+            "otx_key": true
+        },
+        "healer_name": {
+            "otx_key": true
+        },
+        "concept_label": {
+            "otx_key": true
+        },
+        "concept_way": {
+            "otx_key": true
+        },
+        "owner_name": {
+            "otx_key": true
+        },
+        "problem_bool": {
+            "otx_key": false
+        }
+    },
+    "idea_number": "br00036",
+    "dimens": [
+        "fiscunit",
+        "budunit",
+        "bud_conceptunit",
+        "bud_concept_healerlink"
+    ]
+}

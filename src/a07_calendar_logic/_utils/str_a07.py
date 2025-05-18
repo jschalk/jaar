@@ -62,8 +62,8 @@ def monthday_distortion_str() -> str:
     return "monthday_distortion"
 
 
-def timeline_word_str() -> str:
-    return "timeline_word"
+def timeline_label_str() -> str:
+    return "timeline_label"
 
 
 def c400_number_str() -> str:

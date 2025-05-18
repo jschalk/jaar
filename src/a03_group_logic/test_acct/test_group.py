@@ -1,6 +1,6 @@
 from src.a02_finance_logic.finance_config import default_fund_coin_if_None
 from src.a01_way_logic.way import (
-    get_default_fisc_word as root_word,
+    get_default_fisc_label as root_label,
     create_way,
     default_bridge_if_None,
 )
@@ -13,10 +13,10 @@ def test_GroupUnit_exists():
     # ESTABLISH
     swim_str = ";swimmers"
     # WHEN
-    swim_groupunit = GroupUnit(group_label=swim_str)
+    swim_groupunit = GroupUnit(group_title=swim_str)
     # THEN
     assert swim_groupunit is not None
-    assert swim_groupunit.group_label == swim_str
+    assert swim_groupunit.group_title == swim_str
     assert swim_groupunit._memberships is None
     assert swim_groupunit._fund_give is None
     assert swim_groupunit._fund_take is None
@@ -31,17 +31,17 @@ def test_GroupUnit_exists():
 def test_groupunit_shop_ReturnsObj():
     # ESTABLISH
     swim_str = ";swimmers"
-    nation_way = create_way(root_word(), "nation-states")
+    nation_way = create_way(root_label(), "nation-states")
     usa_way = create_way(nation_way, "USA")
 
     # WHEN
-    swim_groupunit = groupunit_shop(group_label=swim_str)
+    swim_groupunit = groupunit_shop(group_title=swim_str)
 
     # THEN
     print(f"{swim_str}")
     assert swim_groupunit is not None
-    assert swim_groupunit.group_label is not None
-    assert swim_groupunit.group_label == swim_str
+    assert swim_groupunit.group_title is not None
+    assert swim_groupunit.group_title == swim_str
     assert swim_groupunit._memberships == {}
     assert swim_groupunit._fund_give == 0
     assert swim_groupunit._fund_take == 0
@@ -61,7 +61,7 @@ def test_groupunit_shop_ReturnsObj_bridge():
 
     # WHEN
     swim_groupunit = groupunit_shop(
-        group_label=swim_str, bridge=slash_str, fund_coin=x_fund_coin
+        group_title=swim_str, bridge=slash_str, fund_coin=x_fund_coin
     )
 
     # THEN
@@ -69,7 +69,7 @@ def test_groupunit_shop_ReturnsObj_bridge():
     assert swim_groupunit.fund_coin == x_fund_coin
 
 
-# def test_GroupUnit_set_group_label_RaisesErrorIfParameterContains_bridge_And_acct_mirror_True():
+# def test_GroupUnit_set_group_title_RaisesErrorIfParameterContains_bridge_And_acct_mirror_True():
 #     # ESTABLISH
 #     slash_str = "/"
 #     bob_str = f"Bob{slash_str}Texas"
@@ -79,7 +79,7 @@ def test_groupunit_shop_ReturnsObj_bridge():
 #         groupunit_shop(bob_str, _acct_mirror=True, bridge=slash_str)
 #     assert (
 #         str(excinfo.value)
-#         == f"'{bob_str}' needs to be a WordStr. Cannot contain bridge: '{slash_str}'"
+#         == f"'{bob_str}' needs to be a LabelStr. Cannot contain bridge: '{slash_str}'"
 #     )
 
 
@@ -137,7 +137,7 @@ def test_GroupUnit_set_membership_SetsAttr_credor_pool_debtor_pool():
     assert ohio_groupunit._debtor_pool == 8800
 
 
-def test_GroupUnit_set_membership_RaisesErrorIf_membership_group_label_IsWrong():
+def test_GroupUnit_set_membership_RaisesErrorIf_membership_group_title_IsWrong():
     # ESTABLISH
     yao_str = "Yao"
     ohio_str = ";Ohio"
@@ -154,7 +154,7 @@ def test_GroupUnit_set_membership_RaisesErrorIf_membership_group_label_IsWrong()
         iowa_groupunit.set_membership(yao_ohio_membership)
     assert (
         str(excinfo.value)
-        == f"GroupUnit.group_label={iowa_str} cannot set membership.group_label={ohio_str}"
+        == f"GroupUnit.group_title={iowa_str} cannot set membership.group_title={ohio_str}"
     )
 
 
@@ -169,5 +169,5 @@ def test_GroupUnit_set_membership_RaisesErrorIf_acct_name_IsNone():
         ohio_groupunit.set_membership(yao_ohio_membership)
     assert (
         str(excinfo.value)
-        == f"membership group_label={ohio_str} cannot be set when _acct_name is None."
+        == f"membership group_title={ohio_str} cannot be set when _acct_name is None."
     )

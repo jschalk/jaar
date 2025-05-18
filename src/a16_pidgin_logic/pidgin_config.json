@@ -1,11 +1,11 @@
 {
-    "pidgin_label": {
+    "pidgin_title": {
         "jkeys": {
-            "otx_label": {}
+            "otx_title": {}
         },
         "jvalues": {
             "inx_bridge": {},
-            "inx_label": {},
+            "inx_title": {},
             "otx_bridge": {},
             "unknown_term": {}
         }
@@ -21,13 +21,13 @@
             "unknown_term": {}
         }
     },
-    "pidgin_word": {
+    "pidgin_label": {
         "jkeys": {
-            "otx_word": {}
+            "otx_label": {}
         },
         "jvalues": {
             "inx_bridge": {},
-            "inx_word": {},
+            "inx_label": {},
             "otx_bridge": {},
             "unknown_term": {}
         }

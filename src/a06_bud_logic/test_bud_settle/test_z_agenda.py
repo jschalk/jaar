@@ -1,6 +1,6 @@
 from src.a01_way_logic.way import WayStr
 from src.a04_reason_logic.reason_labor import laborunit_shop
-from src.a05_idea_logic.idea import IdeaUnit, ideaunit_shop
+from src.a05_concept_logic.concept import ConceptUnit, conceptunit_shop
 from src.a06_bud_logic.bud import budunit_shop, get_from_json as budunit_get_from_json
 from src.a06_bud_logic._utils.example_buds import (
     get_budunit_with_4_levels,
@@ -13,8 +13,8 @@ from src.a06_bud_logic._utils.example_buds import (
 )
 
 
-def get_tasks_count(agenda_dict: dict[WayStr, IdeaUnit]) -> int:
-    return sum(bool(x_ideaunit._task) for x_ideaunit in agenda_dict.values())
+def get_tasks_count(agenda_dict: dict[WayStr, ConceptUnit]) -> int:
+    return sum(bool(x_conceptunit._task) for x_conceptunit in agenda_dict.values())
 
 
 def test_BudUnit_get_agenda_dict_ReturnsObj():
@@ -32,7 +32,7 @@ def test_BudUnit_get_agenda_dict_ReturnsObj():
     assert sue_bud.make_l1_way("cat have dinner") in agenda_dict.keys()
 
 
-def test_BudUnit_get_agenda_dict_ReturnsAgendaWithOnlyCorrectIdeas():
+def test_BudUnit_get_agenda_dict_ReturnsAgendaWithOnlyCorrectConcepts():
     # ESTABLISH
     x_bud = get_budunit_with_4_levels_and_2reasons()
     week_str = "weekdays"
@@ -65,11 +65,11 @@ def test_BudUnit_get_agenda_dict_WithLargeBud_fund():
 
     casa_str = "casa"
     print(f"{agenda_dict.keys()=} {x_bud.make_l1_way(casa_str)=}")
-    print(f"{agenda_dict.get(x_bud.make_l1_way(casa_str)).idea_word=}")
+    print(f"{agenda_dict.get(x_bud.make_l1_way(casa_str)).concept_label=}")
     assert agenda_dict.get(x_bud.make_l1_way(casa_str))._fund_ratio
 
 
-def test_BudUnit_get_agenda_dict_WithNo7amIdeaExample():
+def test_BudUnit_get_agenda_dict_WithNo7amConceptExample():
     # ESTABLISH
     x_bud = get_budunit_with7amCleanTableReason()
 
@@ -81,15 +81,15 @@ def test_BudUnit_get_agenda_dict_WithNo7amIdeaExample():
     assert len(agenda_dict) == 1
     clean_str = "clean table"
     print(f"{agenda_dict.keys()=} {x_bud.make_l1_way(clean_str)=}")
-    # print(f"{agenda_dict[0].idea_word=}")
+    # print(f"{agenda_dict[0].concept_label=}")
     assert len(agenda_dict) == 1
 
     cat_str = "cat have dinner"
-    cat_agenda_idea = agenda_dict.get(x_bud.make_l1_way(cat_str))
-    assert cat_agenda_idea.idea_word != clean_str
+    cat_agenda_concept = agenda_dict.get(x_bud.make_l1_way(cat_str))
+    assert cat_agenda_concept.concept_label != clean_str
 
 
-def test_BudUnit_get_agenda_dict_With7amIdeaExample():
+def test_BudUnit_get_agenda_dict_With7amConceptExample():
     # ESTABLISH
     # set facts as midevening to 8am
     x_bud = get_budunit_with7amCleanTableReason()
@@ -108,14 +108,14 @@ def test_BudUnit_get_agenda_dict_With7amIdeaExample():
     x_bud.add_fact(day24hr_way, day24hr_way, day24hr_popen, day24hr_pnigh, True)
 
     # THEN
-    print(x_bud.idearoot.factunits[day24hr_way])
-    print(x_bud.get_idea_obj(clean_way).reasonunits)
-    print(x_bud.get_idea_obj(clean_way)._active)
+    print(x_bud.conceptroot.factunits[day24hr_way])
+    print(x_bud.get_concept_obj(clean_way).reasonunits)
+    print(x_bud.get_concept_obj(clean_way)._active)
     agenda_dict = x_bud.get_agenda_dict()
     print(f"{len(agenda_dict)=} {agenda_dict.keys()=}")
     assert len(agenda_dict) == 6
-    clean_idea = agenda_dict.get(clean_way)
-    assert clean_idea.idea_word == clean_str
+    clean_concept = agenda_dict.get(clean_way)
+    assert clean_concept.concept_label == clean_str
 
 
 def test_budunit_v001_AgendaExists():
@@ -125,10 +125,10 @@ def test_budunit_v001_AgendaExists():
     min_way = yao_bud.make_l1_way(min_str)
     yao_bud.add_fact(fcontext=min_way, fbranch=min_way, fopen=0, fnigh=1399)
     assert yao_bud
-    # for idea_kid in yao_bud.idearoot._kids.values():
-    #     # print(idea_kid.idea_word)
-    #     assert str(type(idea_kid)) != "<class 'str'>"
-    #     assert idea_kid.pledge is not None
+    # for concept_kid in yao_bud.conceptroot._kids.values():
+    #     # print(concept_kid.concept_label)
+    #     assert str(type(concept_kid)) != "<class 'str'>"
+    #     assert concept_kid.pledge is not None
 
     # WHEN
     agenda_dict = yao_bud.get_agenda_dict()
@@ -181,15 +181,15 @@ def test_BudUnit_get_agenda_dict_BudUnitHasCorrectAttributes_budunit_v001():
     # yao_bud.add_fact(fcontext=movie_way, fbranch=movie_str)
 
     # WHEN
-    idea_pledge_list = yao_bud.get_agenda_dict()
+    concept_pledge_list = yao_bud.get_agenda_dict()
 
     # THEN
-    assert len(idea_pledge_list) == 27
+    assert len(concept_pledge_list) == 27
 
     week1_way = yao_bud.make_way(month_week_way, "1st week")
     yao_bud.add_fact(month_week_way, week1_way)
-    idea_pledge_list = yao_bud.get_agenda_dict()
-    assert len(idea_pledge_list) == 27
+    concept_pledge_list = yao_bud.get_agenda_dict()
+    assert len(concept_pledge_list) == 27
 
     weekday_str = "weekdays"
     weekday_way = yao_bud.make_l1_way(weekday_str)
@@ -197,28 +197,28 @@ def test_BudUnit_get_agenda_dict_BudUnitHasCorrectAttributes_budunit_v001():
     monday_way = yao_bud.make_way(weekday_way, monday_str)
 
     yao_bud.add_fact(fcontext=weekday_way, fbranch=monday_way)
-    idea_pledge_list = yao_bud.get_agenda_dict()
-    assert len(idea_pledge_list) == 39
+    concept_pledge_list = yao_bud.get_agenda_dict()
+    assert len(concept_pledge_list) == 39
 
     yao_bud.add_fact(fcontext=weekday_way, fbranch=weekday_way)
-    idea_pledge_list = yao_bud.get_agenda_dict()
-    assert len(idea_pledge_list) == 53
+    concept_pledge_list = yao_bud.get_agenda_dict()
+    assert len(concept_pledge_list) == 53
 
     # yao_bud.add_fact(fcontext=nations_way, fbranch=nations_way)
-    # idea_pledge_list = yao_bud.get_agenda_dict()
-    # assert len(idea_pledge_list) == 53
+    # concept_pledge_list = yao_bud.get_agenda_dict()
+    # assert len(concept_pledge_list) == 53
 
     # for rcontext in yao_bud.get_missing_fact_rcontexts():
     #     print(f"{rcontext=}")
 
-    # for agenda_idea in idea_pledge_list:
-    #     print(f"{agenda_idea._uid=} {agenda_idea.parent_way=}")
+    # for agenda_concept in concept_pledge_list:
+    #     print(f"{agenda_concept._uid=} {agenda_concept.parent_way=}")
 
-    # for agenda_idea in idea_pledge_list:
-    #     # print(f"{agenda_idea.parent_way=}")
+    # for agenda_concept in concept_pledge_list:
+    #     # print(f"{agenda_concept.parent_way=}")
     #     pass
 
-    print(len(idea_pledge_list))
+    print(len(concept_pledge_list))
 
 
 def test_BudUnit_get_agenda_dict_BudUnitCanCleanOnRcontext_budunit_v001_with_large_agenda():
@@ -230,11 +230,11 @@ def test_BudUnit_get_agenda_dict_BudUnitCanCleanOnRcontext_budunit_v001_with_lar
     # for rcontext in yao_bud.get_missing_fact_rcontexts():
     #     print(f"{rcontext=}")
 
-    # for agenda_idea in yao_bud.get_agenda_dict():
+    # for agenda_concept in yao_bud.get_agenda_dict():
     #     print(
-    #         f"{agenda_idea.parent_way=} {agenda_idea.idea_word} {len(agenda_idea.reasonunits)=}"
+    #         f"{agenda_concept.parent_way=} {agenda_concept.concept_label} {len(agenda_concept.reasonunits)=}"
     #     )
-    #     for reason in agenda_idea.reasonunits.values():
+    #     for reason in agenda_concept.reasonunits.values():
     #         if reason.rcontext == weekdays:
     #             print(f"         {weekdays}")
 
@@ -260,9 +260,9 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Range():
     day_str = "day"
     day_way = zia_bud.make_way(time_way, day_str)
 
-    zia_bud.set_l1_idea(ideaunit_shop(run_str, pledge=True))
-    zia_bud.set_idea(ideaunit_shop(day_str, begin=0, close=500), time_way)
-    zia_bud.edit_idea_attr(
+    zia_bud.set_l1_concept(conceptunit_shop(run_str, pledge=True))
+    zia_bud.set_concept(conceptunit_shop(day_str, begin=0, close=500), time_way)
+    zia_bud.edit_concept_attr(
         run_way,
         reason_rcontext=day_way,
         reason_premise=day_way,
@@ -271,12 +271,12 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Range():
     )
     zia_bud.add_fact(fcontext=day_way, fbranch=day_way, fopen=30, fnigh=87)
     zia_bud.get_agenda_dict()
-    run_reasonunits = zia_bud.idearoot._kids[run_str].reasonunits[day_way]
+    run_reasonunits = zia_bud.conceptroot._kids[run_str].reasonunits[day_way]
     print(f"{run_reasonunits=}")
     print(f"{run_reasonunits.premises[day_way]._status=}")
     print(f"{run_reasonunits.premises[day_way]._task=}")
     print(f"{zia_bud.get_reason_rcontexts()=}")
-    assert len(zia_bud.get_idea_dict()) == 4
+    assert len(zia_bud.get_concept_dict()) == 4
     assert len(zia_bud.get_agenda_dict()) == 1
     print(f"{zia_bud.get_agenda_dict().keys()=}")
     assert zia_bud.get_agenda_dict().get(run_way)._task is True
@@ -301,9 +301,9 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Division():
     day_str = "day"
     day_way = zia_bud.make_way(time_way, day_str)
 
-    zia_bud.set_l1_idea(ideaunit_shop(run_str, pledge=True))
-    zia_bud.set_idea(ideaunit_shop(day_str, begin=0, close=500), time_way)
-    zia_bud.edit_idea_attr(
+    zia_bud.set_l1_concept(conceptunit_shop(run_str, pledge=True))
+    zia_bud.set_concept(conceptunit_shop(day_str, begin=0, close=500), time_way)
+    zia_bud.edit_concept_attr(
         run_way,
         reason_rcontext=day_way,
         reason_premise=day_way,
@@ -312,8 +312,8 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Division():
         pdivisor=2,
     )
 
-    run_idea = zia_bud.get_idea_obj(run_way)
-    # print(f"{run_idea._factheirs=}")
+    run_concept = zia_bud.get_concept_obj(run_way)
+    # print(f"{run_concept._factheirs=}")
     zia_bud.add_fact(fcontext=day_way, fbranch=day_way, fopen=1, fnigh=2)
     assert len(zia_bud.get_agenda_dict()) == 1
     zia_bud.add_fact(fcontext=day_way, fbranch=day_way, fopen=2, fnigh=2)
@@ -322,15 +322,15 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Division():
     assert len(zia_bud.get_agenda_dict()) == 0
     zia_bud.add_fact(fcontext=day_way, fbranch=day_way, fopen=401, fnigh=402)
     assert len(zia_bud.get_agenda_dict()) == 1
-    # print(f"{run_idea._factheirs=}")
-    print(f"{run_idea.factunits=}")
+    # print(f"{run_concept._factheirs=}")
+    print(f"{run_concept.factunits=}")
 
     # WHEN
     zia_bud.set_agenda_task_complete(task_way=run_way, rcontext=day_way)
 
     # THEN
-    print(f"{run_idea.factunits=}")
-    # print(f"{run_idea._factheirs=}")
+    print(f"{run_concept.factunits=}")
+    # print(f"{run_concept._factheirs=}")
     assert len(zia_bud.get_agenda_dict()) == 0
 
 
@@ -342,31 +342,31 @@ def test_budunit_get_from_json_CorrectlyLoadsPledgeFromJSON():
     yao_bud = budunit_get_from_json(x_bud_json=yao_bud_json)
 
     # THEN
-    assert len(yao_bud.get_idea_dict()) == 252
-    print(f"{len(yao_bud.get_idea_dict())=}")
+    assert len(yao_bud.get_concept_dict()) == 252
+    print(f"{len(yao_bud.get_concept_dict())=}")
     casa_str = "casa"
     casa_way = yao_bud.make_l1_way(casa_str)
     body_str = "exercise"
     body_way = yao_bud.make_way(casa_way, body_str)
     veg_str = "cook veggies every morning"
     veg_way = yao_bud.make_way(body_way, veg_str)
-    veg_idea = yao_bud.get_idea_obj(veg_way)
-    assert not veg_idea._active
-    assert veg_idea.pledge
+    veg_concept = yao_bud.get_concept_obj(veg_way)
+    assert not veg_concept._active
+    assert veg_concept.pledge
 
-    # idea_list = yao_bud.get_idea_dict()
+    # concept_list = yao_bud.get_concept_dict()
     # pledge_true_count = 0
-    # for idea in idea_list:
-    #     if str(type(idea)).find(".idea.IdeaUnit'>") > 0:
-    #         assert idea._active in (True, False)
-    #     assert idea.pledge in (True, False)
-    #     # if idea._active:
-    #     #     print(idea.idea_word)
-    #     if idea.pledge:
+    # for concept in concept_list:
+    #     if str(type(concept)).find(".concept.ConceptUnit'>") > 0:
+    #         assert concept._active in (True, False)
+    #     assert concept.pledge in (True, False)
+    #     # if concept._active:
+    #     #     print(concept.concept_label)
+    #     if concept.pledge:
     #         pledge_true_count += 1
-    #         # if idea.pledge is False:
-    #         #     print(f"pledge is false {idea.idea_word}")
-    #         # for reason in idea.reasonunits.values():
+    #         # if concept.pledge is False:
+    #         #     print(f"pledge is false {concept.concept_label}")
+    #         # for reason in concept.reasonunits.values():
     #         #     assert reason._status in (True, False)
     # assert pledge_true_count > 0
 
@@ -390,28 +390,28 @@ def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
 
     # WHEN
     yao_bud.add_fact(gregtime_way, gregtime_way, fopen=1063998720, fnigh=1064130373)
-    pledge_idea_list = yao_bud.get_agenda_dict()
+    pledge_concept_list = yao_bud.get_agenda_dict()
 
     # THEN
-    assert len(pledge_idea_list) == 66
+    assert len(pledge_concept_list) == 66
     db_way = yao_bud.make_l1_way("D&B")
     evening_str = "late_evening_go_to_sleep"
     evening_way = yao_bud.make_way(db_way, evening_str)
-    evening_idea = yao_bud._idea_dict.get(evening_way)
-    # for idea_x in yao_bud.get_agenda_dict():
-    #     # if idea_x._task != True:
-    #     #     print(f"{len(pledge_idea_list)=} {idea_x._task=} {idea_x.get_idea_way()}")
-    #     if idea_x.idea_word == evening_idea_word:
-    #         evening_idea = idea_x
-    #         print(f"{idea_x.get_idea_way()=}")
+    evening_concept = yao_bud._concept_dict.get(evening_way)
+    # for concept_x in yao_bud.get_agenda_dict():
+    #     # if concept_x._task != True:
+    #     #     print(f"{len(pledge_concept_list)=} {concept_x._task=} {concept_x.get_concept_way()}")
+    #     if concept_x.concept_label == evening_concept_label:
+    #         evening_concept = concept_x
+    #         print(f"{concept_x.get_concept_way()=}")
 
-    print(f"\nIdea = '{evening_str}' and reason '{gregtime_way}'")
-    factheir_gregtime = evening_idea._factheirs.get(gregtime_way)
+    print(f"\nConcept = '{evening_str}' and reason '{gregtime_way}'")
+    factheir_gregtime = evening_concept._factheirs.get(gregtime_way)
     print(f"\n{factheir_gregtime=}")
 
-    # for reasonheir in agenda_idea._reasonheirs.values():
+    # for reasonheir in agenda_concept._reasonheirs.values():
     #     print(f"{reasonheir.rcontext=} {reasonheir._status=} {reasonheir._task=}")
-    reasonheir_gregtime = evening_idea._reasonheirs.get(gregtime_way)
+    reasonheir_gregtime = evening_concept._reasonheirs.get(gregtime_way)
     reasonheir_str = f"\nreasonheir_gregtime= '{reasonheir_gregtime.rcontext}', status={reasonheir_gregtime._status}, task={reasonheir_gregtime._task}"
     print(reasonheir_str)
 
@@ -437,7 +437,7 @@ def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
     # )
 
     # print(f"  {segr_obj.get_active()=}  {segr_obj.get_task_status()=}")
-    assert get_tasks_count(pledge_idea_list) == 64
+    assert get_tasks_count(pledge_concept_list) == 64
 
 
 def test_BudUnit_agenda_IsSetByLaborUnit_1AcctGroup():
@@ -446,17 +446,17 @@ def test_BudUnit_agenda_IsSetByLaborUnit_1AcctGroup():
     yao_bud = budunit_shop(yao_str)
     casa_str = "casa"
     casa_way = yao_bud.make_l1_way(casa_str)
-    yao_bud.set_l1_idea(ideaunit_shop(casa_str, pledge=True))
+    yao_bud.set_l1_concept(conceptunit_shop(casa_str, pledge=True))
     assert len(yao_bud.get_agenda_dict()) == 1
 
     sue_str = "Sue"
     yao_bud.add_acctunit(sue_str)
     laborunit_sue = laborunit_shop()
-    laborunit_sue.set_laborlink(labor_label=sue_str)
+    laborunit_sue.set_laborlink(labor_title=sue_str)
     assert len(yao_bud.get_agenda_dict()) == 1
 
     # WHEN
-    yao_bud.edit_idea_attr(casa_way, laborunit=laborunit_sue)
+    yao_bud.edit_concept_attr(casa_way, laborunit=laborunit_sue)
 
     # THEN
     assert len(yao_bud.get_agenda_dict()) == 0
@@ -464,16 +464,16 @@ def test_BudUnit_agenda_IsSetByLaborUnit_1AcctGroup():
     # WHEN
     yao_bud.add_acctunit(yao_str)
     laborunit_yao = laborunit_shop()
-    laborunit_yao.set_laborlink(labor_label=yao_str)
+    laborunit_yao.set_laborlink(labor_title=yao_str)
 
     # WHEN
-    yao_bud.edit_idea_attr(casa_way, laborunit=laborunit_yao)
+    yao_bud.edit_concept_attr(casa_way, laborunit=laborunit_yao)
 
     # THEN
     assert len(yao_bud.get_agenda_dict()) == 1
 
     # agenda_dict = yao_bud.get_agenda_dict()
-    # print(f"{agenda_dict[0].idea_word=}")
+    # print(f"{agenda_dict[0].concept_label=}")
 
 
 def test_BudUnit_get_agenda_dict_IsSetByLaborUnit_2AcctGroup():
@@ -483,7 +483,7 @@ def test_BudUnit_get_agenda_dict_IsSetByLaborUnit_2AcctGroup():
     yao_bud.add_acctunit(yao_str)
     casa_str = "casa"
     casa_way = yao_bud.make_l1_way(casa_str)
-    yao_bud.set_l1_idea(ideaunit_shop(casa_str, pledge=True))
+    yao_bud.set_l1_concept(conceptunit_shop(casa_str, pledge=True))
 
     sue_str = "Sue"
     yao_bud.add_acctunit(sue_str)
@@ -492,11 +492,11 @@ def test_BudUnit_get_agenda_dict_IsSetByLaborUnit_2AcctGroup():
     sue_acctunit.add_membership(run_str)
 
     run_laborunit = laborunit_shop()
-    run_laborunit.set_laborlink(labor_label=run_str)
+    run_laborunit.set_laborlink(labor_title=run_str)
     assert len(yao_bud.get_agenda_dict()) == 1
 
     # WHEN
-    yao_bud.edit_idea_attr(casa_way, laborunit=run_laborunit)
+    yao_bud.edit_concept_attr(casa_way, laborunit=run_laborunit)
 
     # THEN
     assert len(yao_bud.get_agenda_dict()) == 0
@@ -521,14 +521,14 @@ def test_BudUnit_get_all_pledges_ReturnsObj():
     sweep_way = zia_bud.make_way(clean_way, sweep_str)
     couch_str = "couch"
     couch_way = zia_bud.make_way(casa_way, couch_str)
-    zia_bud.set_idea(ideaunit_shop(couch_str), casa_way)
-    zia_bud.set_idea(ideaunit_shop(clean_str, pledge=True), casa_way)
-    zia_bud.set_idea(ideaunit_shop(sweep_str, pledge=True), clean_way)
-    sweep_idea = zia_bud.get_idea_obj(sweep_way)
+    zia_bud.set_concept(conceptunit_shop(couch_str), casa_way)
+    zia_bud.set_concept(conceptunit_shop(clean_str, pledge=True), casa_way)
+    zia_bud.set_concept(conceptunit_shop(sweep_str, pledge=True), clean_way)
+    sweep_concept = zia_bud.get_concept_obj(sweep_way)
     yao_str = "Yao"
     zia_bud.add_acctunit(yao_str)
-    sweep_idea.laborunit.set_laborlink(yao_str)
-    print(f"{sweep_idea}")
+    sweep_concept.laborunit.set_laborlink(yao_str)
+    print(f"{sweep_concept}")
     agenda_dict = zia_bud.get_agenda_dict()
     assert agenda_dict.get(clean_way) is not None
     assert agenda_dict.get(sweep_way) is None
@@ -538,6 +538,6 @@ def test_BudUnit_get_all_pledges_ReturnsObj():
     all_pledges_dict = zia_bud.get_all_pledges()
 
     # THEN
-    assert all_pledges_dict.get(sweep_way) == zia_bud.get_idea_obj(sweep_way)
-    assert all_pledges_dict.get(clean_way) == zia_bud.get_idea_obj(clean_way)
+    assert all_pledges_dict.get(sweep_way) == zia_bud.get_concept_obj(sweep_way)
+    assert all_pledges_dict.get(clean_way) == zia_bud.get_concept_obj(clean_way)
     assert all_pledges_dict.get(couch_way) is None

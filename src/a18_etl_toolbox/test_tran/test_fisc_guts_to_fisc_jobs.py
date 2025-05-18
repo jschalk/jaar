@@ -59,6 +59,6 @@ def test_etl_fisc_gut_to_fisc_job_SetsFiles_Scenario0(
     # assert generated_job.get_acct(yao_inx) == expected_job.get_acct(yao_inx)
     assert generated_job.accts.keys() == expected_job.accts.keys()
     # assert generated_job.accts == expected_job.accts
-    # assert generated_job.get_idea_dict() == expected_job.get_dict()
+    # assert generated_job.get_concept_dict() == expected_job.get_dict()
     # assert generated_job.get_dict() == expected_job.get_dict()
     # assert generated_job == expected_job

@@ -4,11 +4,11 @@ from src.a00_data_toolbox.db_toolbox import (
     get_row_count,
     get_table_columns,
 )
-from src.a02_finance_logic._utils.strs_a02 import fisc_word_str
+from src.a02_finance_logic._utils.strs_a02 import fisc_label_str
 from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str
-from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_word_str
-from src.a17_creed_logic._utils.str_a17 import brick_raw_str
-from src.a17_creed_logic.creed_db_tool import get_sheet_names, upsert_sheet
+from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_label_str
+from src.a17_idea_logic._utils.str_a17 import brick_raw_str
+from src.a17_idea_logic.idea_db_tool import get_sheet_names, upsert_sheet
 from src.a18_etl_toolbox.transformers import (
     etl_mud_dfs_to_brick_raw_tables,
     etl_brick_raw_db_to_brick_raw_df,
@@ -35,29 +35,29 @@ def test_etl_mud_dfs_to_brick_raw_tables_PopulatesBrickTables(env_dir_setup_clea
     mud_dir = create_path(get_module_temp_dir(), "mud")
     brick_dir = create_path(get_module_temp_dir(), "brick")
     mud_file_path = create_path(mud_dir, ex_filename)
-    creed_columns = [
+    idea_columns = [
         event_int_str(),
         face_name_str(),
         cumlative_minute_str(),
-        fisc_word_str(),
-        hour_word_str(),
+        fisc_label_str(),
+        hour_label_str(),
     ]
     a23_str = "accord23"
     row1 = [event1, sue_str, minute_360, a23_str, hour6am]
     row2 = [event1, sue_str, minute_420, a23_str, hour7am]
     row3 = [event2, sue_str, minute_420, a23_str, hour7am]
-    incomplete_creed_columns = [
+    incomplete_idea_columns = [
         event_int_str(),
         face_name_str(),
         cumlative_minute_str(),
-        fisc_word_str(),
+        fisc_label_str(),
     ]
     incom_row1 = [event1, sue_str, minute_360, a23_str]
     incom_row2 = [event1, sue_str, minute_420, a23_str]
 
-    df1 = DataFrame([row1, row2], columns=creed_columns)
-    df2 = DataFrame([incom_row1, incom_row2], columns=incomplete_creed_columns)
-    df3 = DataFrame([row2, row1, row3], columns=creed_columns)
+    df1 = DataFrame([row1, row2], columns=idea_columns)
+    df2 = DataFrame([incom_row1, incom_row2], columns=incomplete_idea_columns)
+    df3 = DataFrame([row2, row1, row3], columns=idea_columns)
     br00003_ex1_str = "example1_br00003"
     br00003_ex2_str = "example2_br00003"
     br00003_ex3_str = "example3_br00003"
@@ -122,7 +122,7 @@ ORDER BY sheet_name, {event_int_str()}, {cumlative_minute_str()};"""
         print(f"{brick_file_path=}")
         assert os_path_exists(brick_file_path)
         x_df = pandas_read_excel(brick_file_path, sheet_name=brick_raw_str())
-        assert set(creed_columns).issubset(set(x_df.columns))
+        assert set(idea_columns).issubset(set(x_df.columns))
         assert file_dir_str in set(x_df.columns)
         assert filename_str in set(x_df.columns)
         assert sheet_name_str in set(x_df.columns)

@@ -3,7 +3,7 @@ from src.a00_data_toolbox.file_toolbox import open_file
 from src.a02_finance_logic._utils.strs_a02 import (
     deal_time_str,
     owner_name_str,
-    fisc_word_str,
+    fisc_label_str,
 )
 from src.a06_bud_logic._utils.str_a06 import event_int_str
 from src.a12_hub_tools.hub_path import create_fisc_ote1_csv_path
@@ -36,7 +36,7 @@ def test_WorldUnit_fisc_table2fisc_ote1_agg_csvs_Scenaro1_SetsTableAttr():
         etl_fisc_agg_tables_to_fisc_ote1_agg(cursor)
         fisc_ote1_agg_str = "fisc_ote1_agg"
         insert_raw_sqlstr = f"""
-INSERT INTO {fisc_ote1_agg_str} ({event_int_str()}, {fisc_word_str()}, {owner_name_str()}, {deal_time_str()})
+INSERT INTO {fisc_ote1_agg_str} ({event_int_str()}, {fisc_label_str()}, {owner_name_str()}, {deal_time_str()})
 VALUES
   ({event3}, '{accord23_str}', '{bob_str}', {timepoint55})
 , ({event3}, '{accord45_str}', '{sue_str}', {timepoint55})
@@ -59,21 +59,21 @@ VALUES
     # THEN
     assert os_path_exists(a23_event_time_p)
     assert os_path_exists(a45_event_time_p)
-    # creed_types = get_creed_sqlite_types()
-    # a23_event_time_csv = open_csv_with_types(a23_event_time_p, creed_types)
-    # a45_event_time_csv = open_csv_with_types(a45_event_time_p, creed_types)
+    # idea_types = get_idea_sqlite_types()
+    # a23_event_time_csv = open_csv_with_types(a23_event_time_p, idea_types)
+    # a45_event_time_csv = open_csv_with_types(a45_event_time_p, idea_types)
     a23_event_time_csv = open_file(a23_event_time_p)
     a45_event_time_csv = open_file(a45_event_time_p)
-    #         expected_a23_event_time_csv = f"""{event_int_str()}, {fisc_word_str()}, {owner_name_str()}, {deal_time_str()}
+    #         expected_a23_event_time_csv = f"""{event_int_str()}, {fisc_label_str()}, {owner_name_str()}, {deal_time_str()}
     #   '{accord23_str}', '{bob_str}', {event3}, {timepoint55}, NULL)
     # , '{accord45_str}', '{sue_str}', {event3}, {timepoint55}, NULL)
     # , '{accord45_str}', '{sue_str}', {event7}, {timepoint66}, NULL)
     # ;
     # """
-    expected_a23_event_time_csv = """fisc_word,owner_name,event_int,deal_time,error_message
+    expected_a23_event_time_csv = """fisc_label,owner_name,event_int,deal_time,error_message
 accord23,Bob,3,55,
 """
-    expected_a45_event_time_csv = f"""fisc_word,owner_name,event_int,deal_time,error_message
+    expected_a45_event_time_csv = f"""fisc_label,owner_name,event_int,deal_time,error_message
 {accord45_str},{sue_str},{event3},{timepoint55},
 {accord45_str},{sue_str},{event7},{timepoint66},
 """

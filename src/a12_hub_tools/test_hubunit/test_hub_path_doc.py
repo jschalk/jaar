@@ -1,7 +1,7 @@
 from src.a02_finance_logic._utils.strs_a02 import (
     owner_name_str,
     deal_time_str,
-    fisc_word_str,
+    fisc_label_str,
 )
 from src.a06_bud_logic._utils.str_a06 import event_int_str
 from src.a12_hub_tools.hub_path import (
@@ -38,7 +38,7 @@ LINUX_OS = platform_system() == "Linux"
 
 def test_create_fisc_dir_path_HasDocString():
     # ESTABLISH
-    doc_str = create_fisc_dir_path("fisc_mstr_dir", fisc_word_str())
+    doc_str = create_fisc_dir_path("fisc_mstr_dir", fisc_label_str())
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_fisc_dir_path) == doc_str
@@ -46,7 +46,7 @@ def test_create_fisc_dir_path_HasDocString():
 
 def test_create_fisc_json_path_HasDocString():
     # ESTABLISH
-    doc_str = create_fisc_json_path("fisc_mstr_dir", fisc_word=fisc_word_str())
+    doc_str = create_fisc_json_path("fisc_mstr_dir", fisc_label=fisc_label_str())
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_fisc_json_path) == doc_str
@@ -54,7 +54,7 @@ def test_create_fisc_json_path_HasDocString():
 
 def test_create_fisc_ote1_csv_path_HasDocString():
     # ESTABLISH
-    doc_str = create_fisc_ote1_csv_path("fisc_mstr_dir", fisc_word=fisc_word_str())
+    doc_str = create_fisc_ote1_csv_path("fisc_mstr_dir", fisc_label=fisc_label_str())
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_fisc_ote1_csv_path) == doc_str
@@ -62,7 +62,7 @@ def test_create_fisc_ote1_csv_path_HasDocString():
 
 def test_create_fisc_ote1_json_path_HasDocString():
     # ESTABLISH
-    doc_str = create_fisc_ote1_json_path("fisc_mstr_dir", fisc_word=fisc_word_str())
+    doc_str = create_fisc_ote1_json_path("fisc_mstr_dir", fisc_label=fisc_label_str())
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_fisc_ote1_json_path) == doc_str
@@ -70,7 +70,7 @@ def test_create_fisc_ote1_json_path_HasDocString():
 
 def test_fisc_agenda_list_report_path_HasDocString():
     # ESTABLISH
-    doc_str = fisc_agenda_list_report_path("fisc_mstr_dir", fisc_word=fisc_word_str())
+    doc_str = fisc_agenda_list_report_path("fisc_mstr_dir", fisc_label=fisc_label_str())
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(fisc_agenda_list_report_path) == doc_str
@@ -78,7 +78,7 @@ def test_fisc_agenda_list_report_path_HasDocString():
 
 def test_create_fisc_owners_dir_path_HasDocString():
     # ESTABLISH
-    doc_str = create_fisc_owners_dir_path("fisc_mstr_dir", fisc_word=fisc_word_str())
+    doc_str = create_fisc_owners_dir_path("fisc_mstr_dir", fisc_label=fisc_label_str())
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_fisc_owners_dir_path) == doc_str
@@ -88,7 +88,7 @@ def test_create_owner_dir_path_HasDocString():
     # ESTABLISH
     doc_str = create_owner_dir_path(
         fisc_mstr_dir="fisc_mstr_dir",
-        fisc_word=fisc_word_str(),
+        fisc_label=fisc_label_str(),
         owner_name=owner_name_str(),
     )
     doc_str = f"Returns path: {doc_str}"
@@ -100,7 +100,7 @@ def test_create_keeps_dir_path_HasDocString():
     # ESTABLISH
     doc_str = create_keeps_dir_path(
         fisc_mstr_dir="fisc_mstr_dir",
-        fisc_word=fisc_word_str(),
+        fisc_label=fisc_label_str(),
         owner_name=owner_name_str(),
     )
     doc_str = f"Returns path: {doc_str}"
@@ -112,7 +112,7 @@ def test_create_atoms_dir_path_HasDocString():
     # ESTABLISH
     doc_str = create_atoms_dir_path(
         fisc_mstr_dir="fisc_mstr_dir",
-        fisc_word=fisc_word_str(),
+        fisc_label=fisc_label_str(),
         owner_name=owner_name_str(),
     )
     doc_str = f"Returns path: {doc_str}"
@@ -124,7 +124,7 @@ def test_create_packs_dir_path_HasDocString():
     # ESTABLISH
     doc_str = create_packs_dir_path(
         fisc_mstr_dir="fisc_mstr_dir",
-        fisc_word=fisc_word_str(),
+        fisc_label=fisc_label_str(),
         owner_name=owner_name_str(),
     )
     doc_str = f"Returns path: {doc_str}"
@@ -136,7 +136,7 @@ def test_create_deals_dir_path_HasDocString():
     # ESTABLISH
     doc_str = create_deals_dir_path(
         fisc_mstr_dir="fisc_mstr_dir",
-        fisc_word=fisc_word_str(),
+        fisc_label=fisc_label_str(),
         owner_name=owner_name_str(),
     )
     doc_str = f"Returns path: {doc_str}"
@@ -148,7 +148,7 @@ def test_create_deal_dir_path_HasDocString():
     # ESTABLISH
     doc_str = create_deal_dir_path(
         fisc_mstr_dir="fisc_mstr_dir",
-        fisc_word=fisc_word_str(),
+        fisc_label=fisc_label_str(),
         owner_name=owner_name_str(),
         deal_time=deal_time_str(),
     )
@@ -162,7 +162,7 @@ def test_create_cell_dir_path_HasDocString():
     # ESTABLISH
     doc_str = create_cell_dir_path(
         fisc_mstr_dir="fisc_mstr_dir",
-        fisc_word=fisc_word_str(),
+        fisc_label=fisc_label_str(),
         owner_name=owner_name_str(),
         deal_time=deal_time_str(),
         deal_ancestors=["ledger_owner1", "ledger_owner2", "ledger_owner3"],
@@ -178,7 +178,7 @@ def test_create_cell_json_path_HasDocString():
     # ESTABLISH
     doc_str = create_cell_json_path(
         fisc_mstr_dir="fisc_mstr_dir",
-        fisc_word=fisc_word_str(),
+        fisc_label=fisc_label_str(),
         owner_name=owner_name_str(),
         deal_time=deal_time_str(),
         deal_ancestors=["ledger_owner1", "ledger_owner2", "ledger_owner3"],
@@ -194,7 +194,7 @@ def test_create_cell_acct_mandate_ledger_path_HasDocString():
     # ESTABLISH
     doc_str = create_cell_acct_mandate_ledger_path(
         fisc_mstr_dir="fisc_mstr_dir",
-        fisc_word=fisc_word_str(),
+        fisc_label=fisc_label_str(),
         owner_name=owner_name_str(),
         deal_time=deal_time_str(),
         deal_ancestors=["ledger_owner1", "ledger_owner2", "ledger_owner3"],
@@ -210,7 +210,7 @@ def test_create_dealunit_json_path_HasDocString():
     # ESTABLISH
     doc_str = create_dealunit_json_path(
         fisc_mstr_dir="fisc_mstr_dir",
-        fisc_word=fisc_word_str(),
+        fisc_label=fisc_label_str(),
         owner_name=owner_name_str(),
         deal_time=deal_time_str(),
     )
@@ -224,7 +224,7 @@ def test_create_deal_acct_mandate_ledger_path_HasDocString():
     # ESTABLISH
     doc_str = create_deal_acct_mandate_ledger_path(
         fisc_mstr_dir="fisc_mstr_dir",
-        fisc_word=fisc_word_str(),
+        fisc_label=fisc_label_str(),
         owner_name=owner_name_str(),
         deal_time=deal_time_str(),
     )
@@ -238,7 +238,7 @@ def test_create_budpoint_path_HasDocString():
     # ESTABLISH
     doc_str = create_budpoint_path(
         fisc_mstr_dir="fisc_mstr_dir",
-        fisc_word=fisc_word_str(),
+        fisc_label=fisc_label_str(),
         owner_name=owner_name_str(),
         deal_time=deal_time_str(),
     )
@@ -252,7 +252,7 @@ def test_create_owner_event_dir_path_HasDocString():
     # ESTABLISH
     doc_str = create_owner_event_dir_path(
         fisc_mstr_dir="fisc_mstr_dir",
-        fisc_word=fisc_word_str(),
+        fisc_label=fisc_label_str(),
         owner_name=owner_name_str(),
         event_int=event_int_str(),
     )
@@ -265,7 +265,7 @@ def test_create_budevent_path_HasDocString():
     # ESTABLISH
     doc_str = create_budevent_path(
         fisc_mstr_dir="fisc_mstr_dir",
-        fisc_word=fisc_word_str(),
+        fisc_label=fisc_label_str(),
         owner_name=owner_name_str(),
         event_int=event_int_str(),
     )
@@ -278,7 +278,7 @@ def test_create_event_all_pack_path_HasDocString():
     # ESTABLISH
     doc_str = create_event_all_pack_path(
         fisc_mstr_dir="fisc_mstr_dir",
-        fisc_word=fisc_word_str(),
+        fisc_label=fisc_label_str(),
         owner_name=owner_name_str(),
         event_int=event_int_str(),
     )
@@ -291,7 +291,7 @@ def test_create_event_expressed_pack_path_HasDocString():
     # ESTABLISH
     doc_str = create_event_expressed_pack_path(
         fisc_mstr_dir="fisc_mstr_dir",
-        fisc_word=fisc_word_str(),
+        fisc_label=fisc_label_str(),
         owner_name=owner_name_str(),
         event_int=event_int_str(),
     )
@@ -304,7 +304,7 @@ def test_create_gut_path_HasDocString():
     # ESTABLISH
     doc_str = create_gut_path(
         fisc_mstr_dir="fisc_mstr_dir",
-        fisc_word=fisc_word_str(),
+        fisc_label=fisc_label_str(),
         owner_name=owner_name_str(),
     )
     doc_str = f"Returns path: {doc_str}"
@@ -319,7 +319,7 @@ def test_create_job_path_HasDocString():
     # ESTABLISH
     doc_str = create_job_path(
         fisc_mstr_dir="fisc_mstr_dir",
-        fisc_word=fisc_word_str(),
+        fisc_label=fisc_label_str(),
         owner_name=owner_name_str(),
     )
     doc_str = f"Returns path: {doc_str}"

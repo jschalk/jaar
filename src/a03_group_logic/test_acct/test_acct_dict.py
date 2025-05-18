@@ -32,12 +32,12 @@ def test_AcctUnit_get_memberships_dict_ReturnObj():
     sue_membership_dict = sue_memberships_dict.get(sue_str)
     run_membership_dict = sue_memberships_dict.get(run_str)
     assert sue_membership_dict == {
-        "group_label": sue_str,
+        "group_title": sue_str,
         "credit_vote": sue_credit_vote,
         "debtit_vote": sue_debtit_vote,
     }
     assert run_membership_dict == {
-        "group_label": run_str,
+        "group_title": run_str,
         "credit_vote": run_credit_vote,
         "debtit_vote": run_debtit_vote,
     }
@@ -71,8 +71,8 @@ def test_AcctUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
         "credit_belief": bob_credit_belief,
         "debtit_belief": bob_debtit_belief,
         "_memberships": {
-            bob_str: {"group_label": bob_str, "credit_vote": 1, "debtit_vote": 1},
-            run_str: {"group_label": run_str, "credit_vote": 1, "debtit_vote": 1},
+            bob_str: {"group_title": bob_str, "credit_vote": 1, "debtit_vote": 1},
+            run_str: {"group_title": run_str, "credit_vote": 1, "debtit_vote": 1},
         },
     }
 
@@ -246,7 +246,7 @@ def test_acctunits_get_from_dict_ReturnsObjWith_bridge():
     assert x_acctunits_objs.get(yao_str).bridge == slash_str
 
 
-def test_acctunits_get_from_json_ReturnsObj_SimpleExampleWithIncompleteData():
+def test_acctunits_get_from_json_ReturnsObj_SimpleExampleWith_IncompleteData():
     # ESTABLISH
     yao_str = "Yao"
     yao_credit_belief = 13

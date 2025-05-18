@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import open_file, save_file
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_word_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_label_str
 from src.a06_bud_logic._utils.str_a06 import (
     bud_acctunit_str,
     face_name_str,
@@ -49,10 +49,10 @@ def test_WorldUnit_event_bud_csvs_to_pack_json_CreatesFiles(
     a23_bob_e7_dir = create_owner_event_dir_path(
         fisc_mstr_dir, a23_str, bob_inx, event7
     )
-    e3_put_csv = f"""{event_int_str()},{face_name_str()},{fisc_word_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
+    e3_put_csv = f"""{event_int_str()},{face_name_str()},{fisc_label_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
 {event3},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debtit_empty}
 """
-    e7_put_csv = f"""{event_int_str()},{face_name_str()},{fisc_word_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
+    e7_put_csv = f"""{event_int_str()},{face_name_str()},{fisc_label_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
 {event7},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debtit_empty}
 {event7},{sue_inx},{a23_str},{bob_inx},{sue_inx},{credit88},{debtit_empty}
 """

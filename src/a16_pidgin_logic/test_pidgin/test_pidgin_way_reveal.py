@@ -57,7 +57,7 @@ def test_WayMap_reveal_inx_ReturnsObjAndSetsAttr_way_Scenario1():
     assert gen_inx_way == f"{inx_accord87_way}{clean_otx_str}{inx_r_bridge}"
 
 
-def test_WayMap_reveal_inx_ReturnsObjAndSetsAttr_way_Scenario2_With_word():
+def test_WayMap_reveal_inx_ReturnsObjAndSetsAttr_way_Scenario2_With_label():
     # ESTABLISH
     otx_r_bridge = "/"
     inx_r_bridge = ":"
@@ -67,7 +67,7 @@ def test_WayMap_reveal_inx_ReturnsObjAndSetsAttr_way_Scenario2_With_word():
     clean_inx_str = "prop"
     clean_otx_way = f"{otx_accord45_way}{clean_otx_str}{otx_r_bridge}"
     way_waymap = waymap_shop(otx_bridge=otx_r_bridge, inx_bridge=inx_r_bridge)
-    way_waymap.set_word(clean_otx_str, clean_inx_str)
+    way_waymap.set_label(clean_otx_str, clean_inx_str)
     assert way_waymap.otx_exists(otx_accord45_way) is False
     assert way_waymap.otx_exists(clean_otx_way) is False
 
@@ -113,10 +113,10 @@ def test_WayMap_reveal_inx_AddsMissingObjsTo_otx2inx_WayStr():
     sweep_otx_way = create_way(clean_otx_way, sweep_str)
     sweep_inx_way = create_way(clean_inx_way, sweep_str)
     x_waymap = waymap_shop()
-    x_waymap.set_word(otx_a45_str, inx_a87_str)
-    x_waymap.set_word(casa_otx_str, casa_inx_str)
-    x_waymap.set_word(clean_otx_str, clean_inx_str)
-    print(f"{x_waymap.wordmap.otx2inx=}")
+    x_waymap.set_label(otx_a45_str, inx_a87_str)
+    x_waymap.set_label(casa_otx_str, casa_inx_str)
+    x_waymap.set_label(clean_otx_str, clean_inx_str)
+    print(f"{x_waymap.labelmap.otx2inx=}")
     print(f"{x_waymap.otx2inx=}")
     assert x_waymap.otx_exists(otx_accord45_way) is False
     assert x_waymap.otx_exists(casa_otx_way) is False
@@ -129,7 +129,7 @@ def test_WayMap_reveal_inx_AddsMissingObjsTo_otx2inx_WayStr():
 
     # WHEN
     assert x_waymap.reveal_inx(otx_accord45_way) == inx_accord87_way
-    print(f"{x_waymap.wordmap.otx2inx=}")
+    print(f"{x_waymap.labelmap.otx2inx=}")
     print(f"{x_waymap.otx2inx=}")
     # THEN
     assert x_waymap.otx_exists(otx_accord45_way)
