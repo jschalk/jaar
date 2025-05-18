@@ -101,6 +101,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     get_insert_into_voice_raw_sqlstrs,
     create_update_voice_raw_existing_inx_col_sqlstr,
     create_update_voice_raw_empty_inx_col_sqlstr,
+    get_insert_voice_agg_sqlstrs,
     get_bud_prime_create_table_sqlstrs,
     create_pidgin_prime_tables,
     create_fisc_prime_tables,
@@ -622,7 +623,8 @@ def set_voice_raw_inx_column(
 
 
 def etl_voice_raw_tables_to_voice_agg_tables(cursor: sqlite3_Cursor):
-    pass
+    for insert_voice_agg_sqlstr in get_insert_voice_agg_sqlstrs().values():
+        cursor.execute(insert_voice_agg_sqlstr)
 
 
 def etl_brick_valid_table_into_prime_table(
