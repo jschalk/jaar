@@ -67,7 +67,7 @@ def get_dimen_abbv7(dimen: str) -> str:
 
 
 def create_prime_tablename(
-    idea_dimen_or_abbv7: str, sound: str, slabele: str, put_del: str = None
+    idea_dimen_or_abbv7: str, sound: str, stage: str, put_del: str = None
 ) -> str:
     abbv_references = {
         "FISCASH": "fisc_cashbook",
@@ -99,7 +99,7 @@ def create_prime_tablename(
     if sound in {"s", "v"}:
         tablename = f"{tablename}_{sound}"
 
-    return f"{tablename}_{put_del}_{slabele}" if put_del else f"{tablename}_{slabele}"
+    return f"{tablename}_{put_del}_{stage}" if put_del else f"{tablename}_{stage}"
 
 
 CREATE_PIDTITL_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_title_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_title TEXT, inx_title TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_term TEXT, error_message TEXT)"""
@@ -868,6 +868,69 @@ SET {column_prefix}_inx = {column_prefix}_otx
 WHERE {column_prefix}_inx IS NULL
 ;
 """
+
+
+FISCASH_VOICE_AGG_INSERT_SQLSTR = """
+INSERT INTO fisc_cashbook_v_agg (fisc_label, owner_name, acct_name, tran_time, amount)
+SELECT fisc_label_inx, owner_name_inx, acct_name_inx, tran_time, amount
+WHERE error_message IS NULL
+FROM fisc_cashbook_v_raw
+GROUP BY fisc_label_inx, owner_name_inx, acct_name_inx, tran_time, amount
+"""
+FISDEAL_VOICE_AGG_INSERT_SQLSTR = """
+INSERT INTO fisc_dealunit_v_agg (fisc_label, owner_name, deal_time, quota, celldepth)
+SELECT fisc_label_inx, owner_name_inx, deal_time, quota, celldepth
+WHERE error_message IS NULL
+FROM fisc_dealunit_v_raw
+GROUP BY fisc_label_inx, owner_name_inx, deal_time, quota, celldepth
+"""
+FISHOUR_VOICE_AGG_INSERT_SQLSTR = """
+INSERT INTO fisc_timeline_hour_v_agg (fisc_label, cumlative_minute, hour_label)
+SELECT fisc_label_inx, cumlative_minute, hour_label_inx
+WHERE error_message IS NULL
+FROM fisc_timeline_hour_v_raw
+GROUP BY fisc_label_inx, cumlative_minute, hour_label_inx
+"""
+FISMONT_VOICE_AGG_INSERT_SQLSTR = """
+INSERT INTO fisc_timeline_month_v_agg (fisc_label, cumlative_day, month_label)
+SELECT fisc_label_inx, cumlative_day, month_label_inx
+WHERE error_message IS NULL
+FROM fisc_timeline_month_v_raw
+GROUP BY fisc_label_inx, cumlative_day, month_label_inx
+"""
+FISWEEK_VOICE_AGG_INSERT_SQLSTR = """
+INSERT INTO fisc_timeline_weekday_v_agg (fisc_label, weekday_order, weekday_label)
+SELECT fisc_label_inx, weekday_order, weekday_label_inx
+WHERE error_message IS NULL
+FROM fisc_timeline_weekday_v_raw
+GROUP BY fisc_label_inx, weekday_order, weekday_label_inx
+"""
+FISOFFI_VOICE_AGG_INSERT_SQLSTR = """
+INSERT INTO fisc_timeoffi_v_agg (fisc_label, offi_time)
+SELECT fisc_label_inx, offi_time
+WHERE error_message IS NULL
+FROM fisc_timeoffi_v_raw
+GROUP BY fisc_label_inx, offi_time
+"""
+FISUNIT_VOICE_AGG_INSERT_SQLSTR = """
+INSERT INTO fiscunit_v_agg (fisc_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations)
+SELECT fisc_label_inx, timeline_label_inx, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations
+WHERE error_message IS NULL
+FROM fiscunit_v_raw
+GROUP BY fisc_label_inx, timeline_label_inx, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations
+"""
+
+
+def get_insert_voice_agg_sqlstrs() -> dict[str, str]:
+    return {
+        "fisc_cashbook": FISCASH_VOICE_AGG_INSERT_SQLSTR,
+        "fisc_dealunit": FISDEAL_VOICE_AGG_INSERT_SQLSTR,
+        "fisc_timeline_hour": FISHOUR_VOICE_AGG_INSERT_SQLSTR,
+        "fisc_timeline_month": FISMONT_VOICE_AGG_INSERT_SQLSTR,
+        "fisc_timeline_weekday": FISWEEK_VOICE_AGG_INSERT_SQLSTR,
+        "fisc_timeoffi": FISOFFI_VOICE_AGG_INSERT_SQLSTR,
+        "fiscunit": FISUNIT_VOICE_AGG_INSERT_SQLSTR,
+    }
 
 
 PIDTITL_INCONSISTENCY_SQLSTR = """SELECT otx_title

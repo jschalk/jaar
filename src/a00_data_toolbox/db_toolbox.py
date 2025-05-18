@@ -446,6 +446,7 @@ def create_table2table_agg_insert_query(
     dst_columns_str = ", ".join(list(dst_columns))
     select_columns_str = None
     for dst_column in dst_columns:
+        print(f"{dst_column=}")
         if select_columns_str is None and dst_column in focus_cols_set:
             select_columns_str = f"{dst_column}"
         elif dst_column in focus_cols_set:
