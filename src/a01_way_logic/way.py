@@ -16,7 +16,7 @@ class LabelStr(str):
         return self.find(default_bridge_if_None(bridge)) == -1
 
 
-class FiscLabel(LabelStr):  # Created to help track the concept
+class FiscLabel(LabelStr):  # Created to help track the object class relations
     pass
 
 
@@ -36,7 +36,7 @@ class OwnerName(NameStr):
     pass
 
 
-class AcctName(OwnerName):  # Created to help track the concept
+class AcctName(OwnerName):  # Created to help track the object class relations
     """Every AcctName object is OwnerName, must follow OwnerName format."""
 
     pass
@@ -70,7 +70,7 @@ class TitleStr(str):
     """If a TitleStr contains bridges it represents a group otherwise it's a single member group of an AcctName."""
 
 
-class GroupTitle(TitleStr):  # Created to help track the concept
+class GroupTitle(TitleStr):  # Created to help track the object class relations
     pass
 
 
