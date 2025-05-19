@@ -20,7 +20,7 @@ from src.a15_fisc_logic._utils.str_a15 import (
 from src.a18_etl_toolbox.tran_sqlstrs import (
     get_dimen_abbv7,
     create_prime_tablename,
-    get_fisc_voice_select_sqlstrs,
+    get_fisc_voice_select1_sqlstrs,
 )
 from src.a18_etl_toolbox.transformers import (
     create_sound_and_voice_tables,
@@ -34,12 +34,12 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_get_fisc_voice_select_sqlstrs_ReturnsObj_HasAllNeededKeys():
+def test_get_fisc_voice_select1_sqlstrs_ReturnsObj_HasAllNeededKeys():
     # ESTABLISH
     a23_str = "accord23"
 
     # WHEN
-    fu2_select_sqlstrs = get_fisc_voice_select_sqlstrs(a23_str)
+    fu2_select_sqlstrs = get_fisc_voice_select1_sqlstrs(a23_str)
 
     # THEN
     assert fu2_select_sqlstrs
@@ -47,13 +47,13 @@ def test_get_fisc_voice_select_sqlstrs_ReturnsObj_HasAllNeededKeys():
     assert set(fu2_select_sqlstrs.keys()) == expected_fu2_select_dimens
 
 
-def test_get_fisc_voice_select_sqlstrs_ReturnsObj():
+def test_get_fisc_voice_select1_sqlstrs_ReturnsObj():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH
     a23_str = "accord23"
 
     # WHEN
-    fu2_select_sqlstrs = get_fisc_voice_select_sqlstrs(fisc_label=a23_str)
+    fu2_select_sqlstrs = get_fisc_voice_select1_sqlstrs(fisc_label=a23_str)
 
     # THEN
     gen_fiscash_sqlstr = fu2_select_sqlstrs.get(fisc_cashbook_str())
@@ -115,45 +115,45 @@ def test_get_fisc_voice_select_sqlstrs_ReturnsObj():
         assert gen_fisunit_sqlstr == static_example_sqlstr
 
 
-# def test_etl_voice_agg_tables_to_fisc_jsons_Scenario0_CreateFilesWithOnlyFiscLabel(
-#     env_dir_setup_cleanup,
-# ):
-#     # ESTABLISH
-#     accord23_str = "accord23"
-#     accord45_str = "accord45"
-#     fisc_mstr_dir = get_module_temp_dir()
-#     fisunit_v_agg_tablename = create_prime_tablename(fiscunit_str(), "v", "agg")
-#     print(f"{fisunit_v_agg_tablename=}")
+def test_etl_voice_agg_tables_to_fisc_jsons_Scenario0_CreateFilesWithOnlyFiscLabel(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    accord23_str = "accord23"
+    accord45_str = "accord45"
+    fisc_mstr_dir = get_module_temp_dir()
+    fisunit_v_agg_tablename = create_prime_tablename(fiscunit_str(), "v", "agg")
+    print(f"{fisunit_v_agg_tablename=}")
 
-#     with sqlite3_connect(":memory:") as fisc_db_conn:
-#         cursor = fisc_db_conn.cursor()
-#         create_sound_and_voice_tables(cursor)
+    with sqlite3_connect(":memory:") as fisc_db_conn:
+        cursor = fisc_db_conn.cursor()
+        create_sound_and_voice_tables(cursor)
 
-#         insert_raw_sqlstr = f"""
-# INSERT INTO {fisunit_v_agg_tablename} ({fisc_label_str()})
-# VALUES ('{accord23_str}'), ('{accord45_str}')
-# ;
-# """
-#         cursor.execute(insert_raw_sqlstr)
-#         assert get_row_count(cursor, fisunit_v_agg_tablename) == 2
-#         fisc_event_time_agg_str = "fisc_event_time_agg"
-#         assert db_table_exists(cursor, fisc_event_time_agg_str) is False
+        insert_raw_sqlstr = f"""
+INSERT INTO {fisunit_v_agg_tablename} ({fisc_label_str()})
+VALUES ('{accord23_str}'), ('{accord45_str}')
+;
+"""
+        cursor.execute(insert_raw_sqlstr)
+        assert get_row_count(cursor, fisunit_v_agg_tablename) == 2
+        fisc_event_time_agg_str = "fisc_event_time_agg"
+        assert db_table_exists(cursor, fisc_event_time_agg_str) is False
 
-#         accord23_json_path = create_fisc_json_path(fisc_mstr_dir, accord23_str)
-#         accord45_json_path = create_fisc_json_path(fisc_mstr_dir, accord45_str)
-#         assert os_path_exists(accord23_json_path) is False
-#         assert os_path_exists(accord45_json_path) is False
+        accord23_json_path = create_fisc_json_path(fisc_mstr_dir, accord23_str)
+        accord45_json_path = create_fisc_json_path(fisc_mstr_dir, accord45_str)
+        assert os_path_exists(accord23_json_path) is False
+        assert os_path_exists(accord45_json_path) is False
 
-#         # WHEN
-#         etl_voice_agg_tables_to_fisc_jsons(cursor, fisc_mstr_dir)
+        # WHEN
+        etl_voice_agg_tables_to_fisc_jsons(cursor, fisc_mstr_dir)
 
-#     # THEN
-#     assert os_path_exists(accord23_json_path)
-#     assert os_path_exists(accord45_json_path)
-#     accord23_fisc = fiscunit_get_from_json(open_file(accord23_json_path))
-#     accord45_fisc = fiscunit_get_from_json(open_file(accord45_json_path))
-#     assert accord23_fisc.fisc_label == accord23_str
-#     assert accord45_fisc.fisc_label == accord45_str
+    # THEN
+    assert os_path_exists(accord23_json_path)
+    assert os_path_exists(accord45_json_path)
+    accord23_fisc = fiscunit_get_from_json(open_file(accord23_json_path))
+    accord45_fisc = fiscunit_get_from_json(open_file(accord45_json_path))
+    assert accord23_fisc.fisc_label == accord23_str
+    assert accord45_fisc.fisc_label == accord45_str
 
 
 # def test_etl_fisc_agg_tables_to_fisc_jsons_Scenario1_CreateFilesWithFiscUnitAttrs(

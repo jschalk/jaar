@@ -1078,7 +1078,7 @@ FISOFFI_FU2_SELECT_SQLSTR = (
 FISUNIT_FU2_SELECT_SQLSTR = "SELECT fisc_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations FROM fiscunit_v_agg WHERE fisc_label = "
 
 
-def get_fisc_voice_select_sqlstrs(fisc_label: str) -> dict[str, str]:
+def get_fisc_voice_select1_sqlstrs(fisc_label: str) -> dict[str, str]:
     return {
         "fiscunit": f"{FISUNIT_FU2_SELECT_SQLSTR}'{fisc_label}'",
         "fisc_dealunit": f"{FISDEAL_FU2_SELECT_SQLSTR}'{fisc_label}'",

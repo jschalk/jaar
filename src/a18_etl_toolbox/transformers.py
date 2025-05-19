@@ -119,7 +119,10 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_FISC_OTE1_AGG_SQLSTR,
     INSERT_FISC_OTE1_AGG_SQLSTR,
 )
-from src.a18_etl_toolbox.db_obj_tool import get_fisc_dict_from_db
+from src.a18_etl_toolbox.db_obj_tool import (
+    get_fisc_dict_from_db,
+    get_fisc_dict_from_voice_tables,
+)
 from src.a18_etl_toolbox.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from src.a18_etl_toolbox.pidgin_agg import (
     pidginheartbook_shop,
@@ -634,7 +637,7 @@ def etl_voice_agg_tables_to_fisc_jsons(cursor: sqlite3_Cursor, fisc_mstr_dir: st
     cursor.execute(select_fisc_label_sqlstr)
     for fisc_label_set in cursor.fetchall():
         fisc_label = fisc_label_set[0]
-        fisc_dict = get_fisc_dict_from_db(cursor, fisc_label)
+        fisc_dict = get_fisc_dict_from_voice_tables(cursor, fisc_label)
         fiscunit_dir = create_path(fiscs_dir, fisc_label)
         save_json(fiscunit_dir, fisc_filename, fisc_dict)
 
