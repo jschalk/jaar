@@ -81,6 +81,7 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
         inx_name_str(),
     ]
     a23_str = "accord23"
+    tp37 = 37
     br00113_str = "br00113"
     br00113row0 = [sue_str, e3, a23_str, sue_str, sue_str, sue_str, sue_inx]
     br00113_df = DataFrame([br00113row0], columns=br00113_columns)
@@ -109,10 +110,11 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
     budunit_voice_put_agg = create_prime_tablename("budunit", "v", "agg", "put")
     budacct_voice_put_raw = create_prime_tablename("budacct", "v", "raw", "put")
     budacct_voice_put_agg = create_prime_tablename("budacct", "v", "agg", "put")
-    event1_pidgin_json_path = "events/1/pidgin.json"
-    event1_inherited_pidgin_json_path = "events/1/inherited_pidgin.json"
-    event1_voice_budunit_path = "events/1/voice_budunit.csv"
-    event1_voice_budacct_path = "events/1/voice_budacct.csv"
+    mstr_dir = fizz_world._fisc_mstr_dir
+    a23_json_path = create_fisc_json_path(mstr_dir, a23_str)
+    a23_sue_gut_path = create_gut_path(mstr_dir, a23_str, sue_str)
+    a23_sue_job_path = create_job_path(mstr_dir, a23_str, sue_str)
+    # sue37_mandate_path = deal_mandate(mstr_dir, a23_str, sue_str, tp37)
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -137,6 +139,23 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
         assert not db_table_exists(cursor, budunit_voice_put_agg)
         assert not db_table_exists(cursor, budacct_voice_put_raw)
         assert not db_table_exists(cursor, budacct_voice_put_agg)
+        assert not os_path_exists(a23_json_path)
+        # assert not os_path_exists(a23_sue_gut_path)
+        # assert not os_path_exists(a23_sue_job_path)
+
+        # self.fisc_agg_tables_to_fisc_jsons(cursor)
+        # self.fisc_agg_tables_to_fisc_ote1_agg(cursor)
+        # self.fisc_table2fisc_ote1_agg_csvs(cursor)
+        # self.fisc_ote1_agg_csvs2jsons()
+
+        # # create budunits
+        # self.bud_tables_to_event_bud_csvs(cursor)
+        # self.event_bud_csvs_to_pack_json()
+        # self.event_inherited_budunits_to_fisc_gut()
+
+        # # create all fisc_job and mandate reports
+        # self.fisc_gut_to_fisc_job()
+        # self.calc_fisc_deal_acct_mandate_net_ledgers()
 
         # WHEN
         fizz_world.mud_to_stances_v2_with_cursor(db_conn, cursor)
@@ -165,6 +184,9 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
         assert get_row_count(cursor, fisunit_voice_agg) == 1
         assert get_row_count(cursor, budunit_voice_put_agg) == 1
         assert get_row_count(cursor, budacct_voice_put_agg) == 1
+        assert os_path_exists(a23_json_path)
+        # assert os_path_exists(a23_sue_gut_path)
+        # assert os_path_exists(a23_sue_job_path)
 
 
 def test_WorldUnit_mud_to_stances_Scenario3_CreatesFiles(env_dir_setup_cleanup):

@@ -162,7 +162,9 @@ def get_csv_idearef(header_row: list[str]) -> IdeaRef:
 
 
 def _remove_non_bud_dimens_from_idearef(x_idearef: IdeaRef) -> IdeaRef:
-    to_delete_dimen_set = {dimen for dimen in x_idearef.dimens if dimen[:3] != "bud"}
+    to_delete_dimen_set = {
+        dimen for dimen in x_idearef.dimens if not dimen.startswith("bud")
+    }
     dimens_set = set(x_idearef.dimens)
     for to_delete_dimen in to_delete_dimen_set:
         if to_delete_dimen in dimens_set:

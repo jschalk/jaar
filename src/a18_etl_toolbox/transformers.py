@@ -119,7 +119,10 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_FISC_OTE1_AGG_SQLSTR,
     INSERT_FISC_OTE1_AGG_SQLSTR,
 )
-from src.a18_etl_toolbox.db_obj_tool import get_fisc_dict_from_db
+from src.a18_etl_toolbox.db_obj_tool import (
+    get_fisc_dict_from_db,
+    get_fisc_dict_from_voice_tables,
+)
 from src.a18_etl_toolbox.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from src.a18_etl_toolbox.pidgin_agg import (
     pidginheartbook_shop,
@@ -468,7 +471,7 @@ def get_sound_raw_tablenames(
     valid_columns = set(get_table_columns(cursor, brick_valid_tablename))
     s_raw_tables = set()
     for dimen in dimens:
-        if dimen[:3].lower() == "bud":
+        if dimen.lower().startswith("bud"):
             bud_del_tablename = create_prime_tablename(dimen, "s", "raw", "del")
             bud_del_columns = get_table_columns(cursor, bud_del_tablename)
             delete_key = bud_del_columns[-1]
@@ -600,7 +603,7 @@ def set_voice_raw_inx_column(
     cursor: sqlite3_Cursor,
     voice_raw_tablename: str,
     column_without_otx: str,
-    arg_class_type: dict[str, str],
+    arg_class_type: str,
 ):
     if arg_class_type in {"NameStr", "TitleStr", "LabelStr", "WayStr"}:
         pidgin_type_abbv = ""
@@ -625,6 +628,18 @@ def set_voice_raw_inx_column(
 def etl_voice_raw_tables_to_voice_agg_tables(cursor: sqlite3_Cursor):
     for insert_voice_agg_sqlstr in get_insert_voice_agg_sqlstrs().values():
         cursor.execute(insert_voice_agg_sqlstr)
+
+
+def etl_voice_agg_tables_to_fisc_jsons(cursor: sqlite3_Cursor, fisc_mstr_dir: str):
+    fisc_filename = "fisc.json"
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    select_fisc_label_sqlstr = """SELECT fisc_label FROM fiscunit_v_agg;"""
+    cursor.execute(select_fisc_label_sqlstr)
+    for fisc_label_set in cursor.fetchall():
+        fisc_label = fisc_label_set[0]
+        fisc_dict = get_fisc_dict_from_voice_tables(cursor, fisc_label)
+        fiscunit_dir = create_path(fiscs_dir, fisc_label)
+        save_json(fiscunit_dir, fisc_filename, fisc_dict)
 
 
 def etl_brick_valid_table_into_prime_table(

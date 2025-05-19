@@ -27,7 +27,7 @@ from sqlite3 import connect as sqlite3_connect
 
 
 def test_get_insert_voice_agg_sqlstrs_ReturnsObj_CheckFiscDimen():
-    # sourcery skip: extract-method, no-loop-in-tests
+    # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
     insert_voice_agg_sqlstrs = get_insert_voice_agg_sqlstrs()
 

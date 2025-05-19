@@ -1,6 +1,9 @@
 from src.a00_data_toolbox.dict_toolbox import set_in_nested_dict
 from src.a02_finance_logic.deal import FiscLabel
-from src.a18_etl_toolbox.tran_sqlstrs import get_fisc_fu1_select_sqlstrs
+from src.a18_etl_toolbox.tran_sqlstrs import (
+    get_fisc_fu1_select_sqlstrs,
+    get_fisc_voice_select1_sqlstrs,
+)
 from sqlite3 import Cursor as sqlite3_Cursor
 
 
@@ -8,6 +11,19 @@ def get_fisc_dict_from_db(cursor: sqlite3_Cursor, fisc_label: FiscLabel) -> dict
     """Fetches a FiscUnit's data from multiple tables and returns it as a dictionary."""
 
     fu1_sqlstrs = get_fisc_fu1_select_sqlstrs(fisc_label)
+    return get_fisc_dict_from_sqlstrs(cursor, fu1_sqlstrs, fisc_label)
+
+
+def get_fisc_dict_from_voice_tables(
+    cursor: sqlite3_Cursor, fisc_label: FiscLabel
+) -> dict:
+    fu1_sqlstrs = get_fisc_voice_select1_sqlstrs(fisc_label)
+    return get_fisc_dict_from_sqlstrs(cursor, fu1_sqlstrs, fisc_label)
+
+
+def get_fisc_dict_from_sqlstrs(
+    cursor: sqlite3_Cursor, fu1_sqlstrs: dict[str, str], fisc_label: FiscLabel
+) -> dict:
     cursor.execute(fu1_sqlstrs.get("fiscunit"))
     fiscunit_row = cursor.fetchone()
     if not fiscunit_row:
