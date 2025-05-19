@@ -531,11 +531,11 @@ def create_all_idea_tables(conn_or_cursor: sqlite3_Connection):
 def create_sound_raw_update_inconsist_error_message_sqlstr(
     conn_or_cursor: sqlite3_Connection, dimen: str
 ) -> str:
-    if dimen[:4].lower() == "fisc":
+    if dimen.lower().startswith("fisc"):
         exclude_cols = {"idea_number", "event_int", "face_name", "error_message"}
     else:
         exclude_cols = {"idea_number", "error_message"}
-    if dimen[:3].lower() == "bud":
+    if dimen.lower().startswith("bud"):
         x_tablename = create_prime_tablename(dimen, "s", "raw", "put")
     else:
         x_tablename = create_prime_tablename(dimen, "s", "raw")
@@ -552,7 +552,7 @@ def create_sound_agg_insert_sqlstrs(
     dimen_config = get_idea_config_dict().get(dimen)
     dimen_focus_columns = set(dimen_config.get("jkeys").keys())
 
-    if dimen[:4].lower() == "fisc":
+    if dimen.lower().startswith("fisc"):
         exclude_cols = {"idea_number", "event_int", "face_name", "error_message"}
         dimen_focus_columns = set(dimen_config.get("jkeys").keys())
         dimen_focus_columns.remove("event_int")
@@ -561,7 +561,7 @@ def create_sound_agg_insert_sqlstrs(
     else:
         exclude_cols = {"idea_number", "error_message"}
 
-    if dimen[:3].lower() == "bud":
+    if dimen.lower().startswith("bud"):
         agg_tablename = create_prime_tablename(dimen, "s", "agg", "put")
         raw_tablename = create_prime_tablename(dimen, "s", "raw", "put")
     else:
@@ -576,7 +576,7 @@ def create_sound_agg_insert_sqlstrs(
         exclude_cols=exclude_cols,
     )
     sqlstrs = [pidgin_fisc_bud_put_sqlstr]
-    if dimen[:3].lower() == "bud":
+    if dimen.lower().startswith("bud"):
         del_raw_tablename = create_prime_tablename(dimen, "s", "raw", "del")
         del_agg_tablename = create_prime_tablename(dimen, "s", "agg", "del")
         bud_del_sqlstr = create_table2table_agg_insert_query(
@@ -710,8 +710,8 @@ def create_insert_pidgin_sound_vld_table_sqlstr(dimen: str) -> str:
         "pidgin_label": "label",
         "pidgin_way": "way",
     }
-    otx_str = f"otx_{dimen_otx_inx_obj_names[dimen]}"
-    inx_str = f"inx_{dimen_otx_inx_obj_names[dimen]}"
+    otx_str = f"otx_{dimen_otx_inx_obj_names.get(dimen, dimen)}"
+    inx_str = f"inx_{dimen_otx_inx_obj_names.get(dimen, dimen)}"
     return f"""
 INSERT INTO {pidgin_s_vld_tablename} (event_int, face_name, {otx_str}, {inx_str})
 SELECT event_int, face_name, MAX({otx_str}), MAX({inx_str})
@@ -1064,6 +1064,29 @@ def get_insert_voice_agg_sqlstrs() -> dict[str, str]:
         "bud_conceptunit_v_del_agg": INSERT_BUDCONC_VOICE_AGG_DEL_SQLSTR,
         "budunit_v_put_agg": INSERT_BUDUNIT_VOICE_AGG_PUT_SQLSTR,
         "budunit_v_del_agg": INSERT_BUDUNIT_VOICE_AGG_DEL_SQLSTR,
+    }
+
+
+FISCASH_FU2_SELECT_SQLSTR = "SELECT fisc_label, owner_name, acct_name, tran_time, amount FROM fisc_cashbook_v_agg WHERE fisc_label = "
+FISDEAL_FU2_SELECT_SQLSTR = "SELECT fisc_label, owner_name, deal_time, quota, celldepth FROM fisc_dealunit_v_agg WHERE fisc_label = "
+FISHOUR_FU2_SELECT_SQLSTR = "SELECT fisc_label, cumlative_minute, hour_label FROM fisc_timeline_hour_v_agg WHERE fisc_label = "
+FISMONT_FU2_SELECT_SQLSTR = "SELECT fisc_label, cumlative_day, month_label FROM fisc_timeline_month_v_agg WHERE fisc_label = "
+FISWEEK_FU2_SELECT_SQLSTR = "SELECT fisc_label, weekday_order, weekday_label FROM fisc_timeline_weekday_v_agg WHERE fisc_label = "
+FISOFFI_FU2_SELECT_SQLSTR = (
+    "SELECT fisc_label, offi_time FROM fisc_timeoffi_v_agg WHERE fisc_label = "
+)
+FISUNIT_FU2_SELECT_SQLSTR = "SELECT fisc_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations FROM fiscunit_v_agg WHERE fisc_label = "
+
+
+def get_fisc_voice_select_sqlstrs(fisc_label: str) -> dict[str, str]:
+    return {
+        "fiscunit": f"{FISUNIT_FU2_SELECT_SQLSTR}'{fisc_label}'",
+        "fisc_dealunit": f"{FISDEAL_FU2_SELECT_SQLSTR}'{fisc_label}'",
+        "fisc_cashbook": f"{FISCASH_FU2_SELECT_SQLSTR}'{fisc_label}'",
+        "fisc_timeline_hour": f"{FISHOUR_FU2_SELECT_SQLSTR}'{fisc_label}'",
+        "fisc_timeline_month": f"{FISMONT_FU2_SELECT_SQLSTR}'{fisc_label}'",
+        "fisc_timeline_weekday": f"{FISWEEK_FU2_SELECT_SQLSTR}'{fisc_label}'",
+        "fisc_timeoffi": f"{FISOFFI_FU2_SELECT_SQLSTR}'{fisc_label}'",
     }
 
 

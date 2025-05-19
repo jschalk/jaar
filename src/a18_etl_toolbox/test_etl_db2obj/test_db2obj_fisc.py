@@ -6,7 +6,10 @@ from src.a15_fisc_logic._utils.str_a15 import (
     timeline_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import create_fisc_prime_tables
-from src.a18_etl_toolbox.db_obj_tool import get_fisc_dict_from_db
+from src.a18_etl_toolbox.db_obj_tool import (
+    get_fisc_dict_from_db,
+    # get_fisc_dict_from_voice_tables,
+)
 from sqlite3 import connect as sqlite3_connect
 
 
