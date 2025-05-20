@@ -23,7 +23,7 @@ from src.a18_etl_toolbox._utils.env_a18 import (
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_event_bud_csvs_to_pack_json_CreatesFiles_Scenario0_IgnoresCSV_budunit(
+def test_etl_event_bud_csvs_to_pack_json_CreatesFiles_Scenario0_IgnoresCSV_budunit(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -64,7 +64,7 @@ def test_WorldUnit_event_bud_csvs_to_pack_json_CreatesFiles_Scenario0_IgnoresCSV
     assert e3_packunit == expected_e3_pack
 
 
-def test_WorldUnit_event_bud_csvs_to_pack_json_CreatesFiles_Scenario1(
+def test_etl_event_bud_csvs_to_pack_json_CreatesFiles_Scenario1(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
