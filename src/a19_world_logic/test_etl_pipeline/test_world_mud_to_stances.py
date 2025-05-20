@@ -92,6 +92,8 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
     br00113_valid = f"{br00113_str}_brick_valid"
     events_brick_agg_tablename = "events_brick_agg"
     events_brick_valid_tablename = "events_brick_valid"
+    fisc_event_time_agg_tablename = "fisc_event_time_agg"
+    fisc_ote1_agg_tablename = "fisc_ote1_agg"
     pidname_sound_raw = create_prime_tablename("pidname", "s", "raw")
     pidname_sound_agg = create_prime_tablename("pidname", "s", "agg")
     pidname_sound_vld = create_prime_tablename("pidname", "s", "vld")
@@ -143,7 +145,8 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
         # assert not os_path_exists(a23_sue_gut_path)
         # assert not os_path_exists(a23_sue_job_path)
 
-        # self.fisc_agg_tables_to_fisc_jsons(cursor)
+        assert not db_table_exists(cursor, fisc_event_time_agg_tablename)
+        assert not db_table_exists(cursor, fisc_ote1_agg_tablename)
         # self.fisc_agg_tables_to_fisc_ote1_agg(cursor)
         # self.fisc_table2fisc_ote1_agg_csvs(cursor)
         # self.fisc_ote1_agg_csvs2jsons()
@@ -187,6 +190,8 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
         assert os_path_exists(a23_json_path)
         # assert os_path_exists(a23_sue_gut_path)
         # assert os_path_exists(a23_sue_job_path)
+        # assert get_row_count(cursor, fisc_event_time_agg_tablename) == 0
+        # assert get_row_count(cursor, fisc_ote1_agg_tablename) == 0
 
 
 def test_WorldUnit_mud_to_stances_Scenario3_CreatesFiles(env_dir_setup_cleanup):

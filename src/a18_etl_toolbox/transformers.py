@@ -32,6 +32,7 @@ from src.a12_hub_tools.hub_path import (
     create_fisc_ote1_json_path,
     create_owner_event_dir_path,
     create_budevent_path,
+    create_event_all_pack_path,
 )
 from src.a12_hub_tools.hub_tool import (
     collect_owner_event_dir_sets,
@@ -1324,15 +1325,18 @@ def etl_event_bud_csvs_to_pack_json(fisc_mstr_dir: str):
             owner_path = create_path(owners_path, owner_name)
             events_path = create_path(owner_path, "events")
             for event_int in get_level1_dirs(events_path):
-                event_path = create_path(events_path, event_int)
                 event_pack = packunit_shop(
                     owner_name=owner_name,
                     face_name=None,
                     fisc_label=fisc_label,
                     event_int=event_int,
                 )
+                event_path = create_path(events_path, event_int)
                 add_budatoms_from_csv(event_pack, event_path)
-                save_file(event_path, "all_pack.json", event_pack.get_json())
+                event_all_pack_path = create_event_all_pack_path(
+                    fisc_mstr_dir, fisc_label, owner_name, event_int
+                )
+                save_file(event_all_pack_path, None, event_pack.get_json())
 
 
 def add_budatoms_from_csv(owner_pack: PackUnit, owner_path: str):
@@ -1394,8 +1398,11 @@ def etl_event_pack_json_to_event_inherited_budunits(fisc_mstr_dir: str):
                 event_dir = create_owner_event_dir_path(
                     fisc_mstr_dir, fisc_label, owner_name, event_int
                 )
-                pack_path = create_path(event_dir, "all_pack.json")
-                event_pack = get_packunit_from_json(open_file(pack_path))
+
+                event_all_pack_path = create_event_all_pack_path(
+                    fisc_mstr_dir, fisc_label, owner_name, event_int
+                )
+                event_pack = get_packunit_from_json(open_file(event_all_pack_path))
                 sift_delta = get_minimal_buddelta(event_pack._buddelta, prev_bud)
                 curr_bud = event_pack.get_edited_bud(prev_bud)
                 save_file(budevent_path, None, curr_bud.get_json())
