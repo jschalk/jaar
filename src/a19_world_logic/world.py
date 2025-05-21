@@ -24,6 +24,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_sound_agg_tables_to_voice_raw_tables,
     etl_voice_raw_tables_to_voice_agg_tables,
     etl_voice_agg_tables_to_fisc_jsons,
+    etl_voice_agg_to_event_bud_csvs,
     etl_brick_raw_db_to_brick_raw_df,
     etl_brick_agg_tables_to_brick_agg_dfs,
     etl_brick_raw_tables_to_events_brick_agg_table,
@@ -336,6 +337,11 @@ class WorldUnit:
         etl_sound_agg_tables_to_voice_raw_tables(cursor)
         etl_voice_raw_tables_to_voice_agg_tables(cursor)
         etl_voice_agg_tables_to_fisc_jsons(cursor, self._fisc_mstr_dir)
+        etl_voice_agg_to_event_bud_csvs(cursor, self._fisc_mstr_dir)
+        etl_event_bud_csvs_to_pack_json(self._fisc_mstr_dir)
+        etl_event_pack_json_to_event_inherited_budunits(self._fisc_mstr_dir)
+        etl_event_inherited_budunits_to_fisc_gut(self._fisc_mstr_dir)
+        etl_fisc_gut_to_fisc_job(self._fisc_mstr_dir)
 
         # identify all idea data that has conflicting face_name/event_int uniqueness
         # self._events = etl_events_brick_agg_db_to_event_dict(cursor)

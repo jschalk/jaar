@@ -11,6 +11,8 @@ from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str, acct_
 from src.a12_hub_tools.hub_path import (
     create_fisc_ote1_csv_path,
     create_fisc_json_path,
+    create_event_all_pack_path,
+    create_event_expressed_pack_path as expressed_path,
     create_gut_path,
     create_job_path,
     create_deal_acct_mandate_ledger_path as deal_mandate,
@@ -114,8 +116,10 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
     budacct_voice_put_agg = create_prime_tablename("budacct", "v", "agg", "put")
     mstr_dir = fizz_world._fisc_mstr_dir
     a23_json_path = create_fisc_json_path(mstr_dir, a23_str)
-    a23_sue_gut_path = create_gut_path(mstr_dir, a23_str, sue_str)
-    a23_sue_job_path = create_job_path(mstr_dir, a23_str, sue_str)
+    a23_e1_all_pack_path = create_event_all_pack_path(mstr_dir, a23_str, sue_inx, e3)
+    a23_e1_expressed_pack_path = expressed_path(mstr_dir, a23_str, sue_inx, e3)
+    a23_sue_gut_path = create_gut_path(mstr_dir, a23_str, sue_inx)
+    a23_sue_job_path = create_job_path(mstr_dir, a23_str, sue_inx)
     # sue37_mandate_path = deal_mandate(mstr_dir, a23_str, sue_str, tp37)
 
     with sqlite3_connect(":memory:") as db_conn:
@@ -142,8 +146,10 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
         assert not db_table_exists(cursor, budacct_voice_put_raw)
         assert not db_table_exists(cursor, budacct_voice_put_agg)
         assert not os_path_exists(a23_json_path)
-        # assert not os_path_exists(a23_sue_gut_path)
-        # assert not os_path_exists(a23_sue_job_path)
+        assert not os_path_exists(a23_e1_all_pack_path)
+        assert not os_path_exists(a23_e1_expressed_pack_path)
+        assert not os_path_exists(a23_sue_gut_path)
+        assert not os_path_exists(a23_sue_job_path)
 
         assert not db_table_exists(cursor, fisc_event_time_agg_tablename)
         assert not db_table_exists(cursor, fisc_ote1_agg_tablename)
@@ -188,8 +194,11 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
         assert get_row_count(cursor, budunit_voice_put_agg) == 1
         assert get_row_count(cursor, budacct_voice_put_agg) == 1
         assert os_path_exists(a23_json_path)
-        # assert os_path_exists(a23_sue_gut_path)
-        # assert os_path_exists(a23_sue_job_path)
+        print(f"{a23_e1_all_pack_path=}")
+        assert os_path_exists(a23_e1_all_pack_path)
+        assert os_path_exists(a23_e1_expressed_pack_path)
+        assert os_path_exists(a23_sue_gut_path)
+        assert os_path_exists(a23_sue_job_path)
         # assert get_row_count(cursor, fisc_event_time_agg_tablename) == 0
         # assert get_row_count(cursor, fisc_ote1_agg_tablename) == 0
 

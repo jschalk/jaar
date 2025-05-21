@@ -358,6 +358,21 @@ def get_prime_create_table_sqlstrs() -> dict[str:str]:
     }
 
 
+def get_bud_voice_agg_tablenames() -> set[str]:
+    return {
+        "budunit_v_put_agg",
+        "bud_concept_healerlink_v_put_agg",
+        "bud_acctunit_v_put_agg",
+        "bud_concept_reason_premiseunit_v_put_agg",
+        "bud_concept_laborlink_v_put_agg",
+        "bud_concept_reasonunit_v_put_agg",
+        "bud_concept_factunit_v_put_agg",
+        "bud_acct_membership_v_put_agg",
+        "bud_conceptunit_v_put_agg",
+        "bud_concept_awardlink_v_put_agg",
+    }
+
+
 CREATE_PIDTITL_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_title_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_title TEXT, inx_title TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_term TEXT, error_message TEXT)"""
 CREATE_PIDTITL_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_title_agg (event_int INTEGER, face_name TEXT, otx_title TEXT, inx_title TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_term TEXT)"""
 CREATE_PIDNAME_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_term TEXT, error_message TEXT)"""

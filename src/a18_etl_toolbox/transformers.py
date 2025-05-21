@@ -100,6 +100,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_update_pidtitl_sound_agg_bridge_error_sqlstr,
     create_insert_pidgin_sound_vld_table_sqlstr,
     get_insert_into_voice_raw_sqlstrs,
+    get_bud_voice_agg_tablenames,
     create_update_voice_raw_existing_inx_col_sqlstr,
     create_update_voice_raw_empty_inx_col_sqlstr,
     get_insert_voice_agg_sqlstrs,
@@ -1271,6 +1272,22 @@ def bud_raw_tables2bud_agg_tables(conn_or_cursor: sqlite3_Connection):
         conn_or_cursor.execute(x_sqlstr)
     for x_sqlstr in get_bud_insert_del_agg_from_raw_sqlstrs().values():
         conn_or_cursor.execute(x_sqlstr)
+
+
+def etl_voice_agg_to_event_bud_csvs(
+    conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str
+):
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    for bud_table in get_bud_voice_agg_tablenames():
+        if get_row_count(conn_or_cursor, bud_table) > 0:
+            save_to_split_csvs(
+                conn_or_cursor=conn_or_cursor,
+                tablename=bud_table,
+                key_columns=["fisc_label", "owner_name", "event_int"],
+                output_dir=fiscs_dir,
+                col1_prefix="owners",
+                col2_prefix="events",
+            )
 
 
 def etl_bud_tables_to_event_bud_csvs(

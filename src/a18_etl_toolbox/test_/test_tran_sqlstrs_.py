@@ -72,7 +72,6 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
     get_dimen_abbv7,
     create_prime_tablename,
-    get_prime_create_table_sqlstrs,
     get_fisc_prime_create_table_sqlstrs,
     get_bud_prime_create_table_sqlstrs,
     create_pidgin_prime_tables,

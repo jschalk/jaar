@@ -54,6 +54,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     get_dimen_abbv7,
     create_prime_tablename as prime_tbl,
     get_prime_create_table_sqlstrs,
+    get_bud_voice_agg_tablenames,
     create_sound_and_voice_tables,
     create_sound_raw_update_inconsist_error_message_sqlstr,
     create_sound_agg_insert_sqlstrs,
@@ -515,6 +516,23 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
     pidgin_core_count = 3
     all_dimens_count += pidgin_core_count
     assert len(create_table_sqlstrs) == all_dimens_count
+
+
+def test_get_bud_voice_agg_tablenames_ReturnsObj_BudDimens():
+    # ESTABLISH / WHEN
+    bud_voice_agg_tablenames = get_bud_voice_agg_tablenames()
+
+    # THEN
+    assert bud_voice_agg_tablenames
+    expected_bud_voice_agg_tablenames = {
+        prime_tbl(bud_dimen, "v", "agg", "put") for bud_dimen in get_bud_dimens()
+    }
+    print(f"{expected_bud_voice_agg_tablenames=}")
+    assert expected_bud_voice_agg_tablenames == bud_voice_agg_tablenames
+    assert len(bud_voice_agg_tablenames) == len(get_bud_dimens())
+    assert bud_voice_agg_tablenames.issubset(
+        set(get_prime_create_table_sqlstrs().keys())
+    )
 
 
 def test_create_sound_and_voice_tables_CreatesFiscRawTables():
