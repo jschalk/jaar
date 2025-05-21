@@ -32,7 +32,7 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_WorldUnit_mud_to_stances_Scenario0_DeletesPreviousFiles(
+def test_WorldUnit_mud_to_clarity_Scenario0_DeletesPreviousFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -53,7 +53,7 @@ def test_WorldUnit_mud_to_stances_Scenario0_DeletesPreviousFiles(
     assert count_dirs_files(fizz_world.worlds_dir) == 9
 
     # WHEN
-    fizz_world.mud_to_stances(store_tracing_files=True)
+    fizz_world.mud_to_clarity(store_tracing_files=True)
 
     # THEN
     assert os_path_exists(testing2_path)
@@ -61,7 +61,7 @@ def test_WorldUnit_mud_to_stances_Scenario0_DeletesPreviousFiles(
     assert count_dirs_files(fizz_world.worlds_dir) == 23
 
 
-def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTables(
+def test_WorldUnit_mud_to_clarity_v2_with_cursor_Scenario3_br000113PopulatesTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH:
@@ -167,7 +167,7 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
         # self.calc_fisc_deal_acct_mandate_net_ledgers()
 
         # WHEN
-        fizz_world.mud_to_stances_v2_with_cursor(db_conn, cursor)
+        fizz_world.mud_to_clarity_v2_with_cursor(db_conn, cursor)
 
         # THEN
         assert get_row_count(cursor, br00113_raw) == 1
@@ -203,7 +203,7 @@ def test_WorldUnit_mud_to_stances_v2_with_cursor_Scenario3_br000113PopulatesTabl
         # assert get_row_count(cursor, fisc_ote1_agg_tablename) == 0
 
 
-def test_WorldUnit_mud_to_stances_Scenario3_CreatesFiles(env_dir_setup_cleanup):
+def test_WorldUnit_mud_to_clarity_Scenario3_CreatesFiles(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_str = "fizz"
     fizz_world = worldunit_shop(fizz_str, worlds_dir())
@@ -278,7 +278,7 @@ def test_WorldUnit_mud_to_stances_Scenario3_CreatesFiles(env_dir_setup_cleanup):
     assert count_dirs_files(fizz_world.worlds_dir) == 7
 
     # WHEN
-    fizz_world.mud_to_stances(store_tracing_files=True)
+    fizz_world.mud_to_clarity(store_tracing_files=True)
 
     # THEN
     assert os_path_exists(wrong_a23_fisc_dir) is False
@@ -293,7 +293,7 @@ def test_WorldUnit_mud_to_stances_Scenario3_CreatesFiles(env_dir_setup_cleanup):
     assert count_dirs_files(fizz_world.worlds_dir) == 81
 
 
-def test_WorldUnit_mud_to_stances_Senario4_WhenNoFiscIdeas_ote1_IsStillCreated(
+def test_WorldUnit_mud_to_clarity_Senario4_WhenNoFiscIdeas_ote1_IsStillCreated(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -319,13 +319,13 @@ def test_WorldUnit_mud_to_stances_Senario4_WhenNoFiscIdeas_ote1_IsStillCreated(
     assert os_path_exists(a23_ote1_csv_path) is False
 
     # WHEN
-    fizz_world.mud_to_stances()
+    fizz_world.mud_to_clarity()
 
     # THEN
     assert os_path_exists(a23_ote1_csv_path)
 
 
-# def test_WorldUnit_mud_to_stances_CreatesBrickFiles(env_dir_setup_cleanup):
+# def test_WorldUnit_mud_to_clarity_CreatesBrickFiles(env_dir_setup_cleanup):
 #     # ESTABLISH
 #     fizz_str = "fizz"
 #     fizz_world = worldunit_shop(fizz_str, worlds_dir())
@@ -377,7 +377,7 @@ def test_WorldUnit_mud_to_stances_Senario4_WhenNoFiscIdeas_ote1_IsStillCreated(
 #     assert os_path_exists(a23_sue_job_path) is False
 
 #     # WHEN
-#     fizz_world.mud_to_stances()
+#     fizz_world.mud_to_clarity()
 
 #     # THEN
 #     brick_file_path = create_path(fizz_world._brick_dir, "br00003.xlsx")

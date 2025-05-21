@@ -248,16 +248,16 @@ class WorldUnit:
         etl_set_cell_tree_cell_mandates(mstr_dir)
         etl_create_deal_mandate_ledgers(mstr_dir)
 
-    def mud_to_stances(self, store_tracing_files: bool = False):
+    def mud_to_clarity(self, store_tracing_files: bool = False):
         fisc_mstr_dir = create_path(self._world_dir, "fisc_mstr")
         delete_dir(fisc_mstr_dir)
         set_dir(fisc_mstr_dir)
 
         with sqlite3_connect(":memory:") as db_conn:
             cursor = db_conn.cursor()
-            self.mud_to_stances_v1_with_cursor(db_conn, cursor, store_tracing_files)
+            self.mud_to_clarity_v1_with_cursor(db_conn, cursor, store_tracing_files)
 
-    def mud_to_stances_v1_with_cursor(
+    def mud_to_clarity_v1_with_cursor(
         self,
         db_conn: sqlite3_Connection,
         cursor: sqlite3_Cursor,
@@ -319,7 +319,7 @@ class WorldUnit:
             # etl_brick_agg_tables_to_brick_agg_dfs(db_conn, self._brick_dir)
             self.inz_faces_ideas_to_fisc_mstr_csvs(cursor)
 
-    def mud_to_stances_v2_with_cursor(
+    def mud_to_clarity_v2_with_cursor(
         self,
         db_conn: sqlite3_Connection,
         cursor: sqlite3_Cursor,
@@ -343,31 +343,6 @@ class WorldUnit:
         etl_event_inherited_budunits_to_fisc_gut(self._fisc_mstr_dir)
         etl_fisc_gut_to_fisc_job(self._fisc_mstr_dir)
 
-        # identify all idea data that has conflicting face_name/event_int uniqueness
-        # self._events = etl_events_brick_agg_db_to_event_dict(cursor)
-
-        # # build pidgins
-        # # collect all pidgin data from all relevant valid ideas
-        # self.brick_agg_df_to_brick_pidgin_raw_df()  # self._events.keys()
-        # # per pidgin dimen filter to only non-conflicting pidgin data
-        # self.brick_pidgin_raw_df_to_pidgin_agg_df()
-        # self.brick_pidgin_agg_df_to_otz_face_pidgin_agg_df()
-        # self.otz_face_pidgins_df_to_otz_event_pidgins_df()
-        # # per event create isolated pidgin.json
-        # self.otz_event_pidgins_to_otz_pidgin_csv_files()
-        # self.otz_event_pidgins_csvs_to_otz_pidgin_jsons()  # self._pidgin_events
-        # # per event create complete (inherited) pidgin.json
-        # self.pidgin_jsons_inherit_younger_pidgins()  # self._pidgin_events
-
-        # # pidgins translate all fisc&bud ideas
-        # self.brick_agg_non_pidgin_ideas_to_brick_valid()  # self._events.keys()
-        # self.brick_ideas_to_otz_face_ideas()
-        # self.otz_face_ideas_to_otz_event_otx_ideas()
-        # self.otz_event_ideas_to_inz_events()  # self._pidgin_events
-        # self.otz_inx_event_ideas_to_inz_faces()
-        # self.inz_face_ideas_to_csv_files()
-        # self.inz_face_csv_files2idea_raw_tables(cursor)
-
         # # create fiscunits
         # self.idea_raw_to_fisc_prime_tables(cursor)
         # self.fisc_agg_tables_to_fisc_jsons(cursor)
@@ -375,21 +350,11 @@ class WorldUnit:
         # self.fisc_table2fisc_ote1_agg_csvs(cursor)
         # self.fisc_ote1_agg_csvs2jsons()
 
-        # # create budunits
-        # self.idea_raw_to_bud_prime_tables(cursor)
-        # self.bud_tables_to_event_bud_csvs(cursor)
-        # self.event_bud_csvs_to_pack_json()
-        # self.event_pack_json_to_event_inherited_budunits()
-        # self.event_inherited_budunits_to_fisc_gut()
-
         # # create all fisc_job and mandate reports
         # self.fisc_gut_to_fisc_job()
         # self.calc_fisc_deal_acct_mandate_net_ledgers()
 
         # if store_tracing_files:
-        #     etl_brick_raw_db_to_brick_raw_df(db_conn, self._brick_dir)
-        #     # etl_brick_agg_tables_to_brick_agg_dfs(db_conn, self._brick_dir)
-        #     self.inz_faces_ideas_to_fisc_mstr_csvs(cursor)
 
     def create_stances(self):
         create_stance0001_file(self._fisc_mstr_dir)
