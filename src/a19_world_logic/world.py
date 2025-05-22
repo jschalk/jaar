@@ -25,6 +25,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_voice_raw_tables_to_voice_agg_tables,
     etl_voice_agg_tables_to_fisc_jsons,
     etl_voice_agg_to_event_bud_csvs,
+    etl_voice_raw_tables_to_fisc_ote1_agg,
     etl_brick_raw_db_to_brick_raw_df,
     etl_brick_agg_tables_to_brick_agg_dfs,
     etl_brick_raw_tables_to_events_brick_agg_table,
@@ -56,7 +57,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_event_inherited_budunits_to_fisc_gut,
     etl_fisc_gut_to_fisc_job,
     etl_fisc_agg_tables_to_fisc_ote1_agg,
-    etl_fisc_table2fisc_ote1_agg_csvs,
+    etl_fisc_ote1_agg_table2fisc_ote1_agg_csvs,
     etl_fisc_ote1_agg_csvs2jsons,
     etl_create_deals_root_cells,
     etl_create_fisc_cell_trees,
@@ -201,7 +202,7 @@ class WorldUnit:
         etl_fisc_agg_tables_to_fisc_ote1_agg(conn_or_cursor)
 
     def fisc_table2fisc_ote1_agg_csvs(self, conn_or_cursor: sqlite3_Connection):
-        etl_fisc_table2fisc_ote1_agg_csvs(conn_or_cursor, self._fisc_mstr_dir)
+        etl_fisc_ote1_agg_table2fisc_ote1_agg_csvs(conn_or_cursor, self._fisc_mstr_dir)
 
     def bud_tables_to_event_bud_csvs(self, conn_or_cursor: sqlite3_Connection):
         etl_bud_tables_to_event_bud_csvs(conn_or_cursor, self._fisc_mstr_dir)
@@ -345,6 +346,10 @@ class WorldUnit:
         etl_event_pack_json_to_event_inherited_budunits(self._fisc_mstr_dir)
         etl_event_inherited_budunits_to_fisc_gut(self._fisc_mstr_dir)
         etl_fisc_gut_to_fisc_job(self._fisc_mstr_dir)
+        etl_voice_raw_tables_to_fisc_ote1_agg(cursor)
+        etl_fisc_ote1_agg_table2fisc_ote1_agg_csvs(cursor, self._fisc_mstr_dir)
+        etl_fisc_ote1_agg_csvs2jsons(self._fisc_mstr_dir)
+        self.calc_fisc_deal_acct_mandate_net_ledgers()
 
         # # create fiscunits
         # self.idea_raw_to_fisc_prime_tables(cursor)

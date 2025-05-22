@@ -14,7 +14,7 @@ from src.a12_hub_tools.hub_path import (
 from src.a18_etl_toolbox.transformers import create_fisc_prime_tables
 from src.a18_etl_toolbox.transformers import (
     etl_fisc_agg_tables_to_fisc_ote1_agg,
-    etl_fisc_table2fisc_ote1_agg_csvs,
+    etl_fisc_ote1_agg_table2fisc_ote1_agg_csvs,
 )
 from src.a18_etl_toolbox._utils.env_a18 import (
     env_dir_setup_cleanup,
@@ -24,7 +24,7 @@ from sqlite3 import connect as sqlite3_connect
 from os.path import exists as os_path_exists
 
 
-def test_etl_fisc_table2fisc_ote1_agg_csvs_Scenaro1_SetsTableAttr(
+def test_etl_fisc_ote1_agg_table2fisc_ote1_agg_csvs_Scenaro1_SetsTableAttr(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -58,7 +58,7 @@ VALUES
         assert os_path_exists(a45_event_time_p) is False
 
         # WHEN
-        etl_fisc_table2fisc_ote1_agg_csvs(cursor, fisc_mstr_dir)
+        etl_fisc_ote1_agg_table2fisc_ote1_agg_csvs(cursor, fisc_mstr_dir)
 
     # THEN
     assert os_path_exists(a23_event_time_p)
@@ -85,7 +85,7 @@ VALUES
     assert a45_event_time_csv == expected_a45_event_time_csv
 
 
-def test_etl_fisc_table2fisc_ote1_agg_csvs_Scenaro2_ote1_agg_TableIsEmpty(
+def test_etl_fisc_ote1_agg_table2fisc_ote1_agg_csvs_Scenaro2_ote1_agg_TableIsEmpty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -117,7 +117,7 @@ VALUES
         assert os_path_exists(a45_event_time_p) is False
 
         # WHEN
-        etl_fisc_table2fisc_ote1_agg_csvs(cursor, fisc_mstr_dir)
+        etl_fisc_ote1_agg_table2fisc_ote1_agg_csvs(cursor, fisc_mstr_dir)
 
     # THEN
     assert os_path_exists(a23_event_time_p)

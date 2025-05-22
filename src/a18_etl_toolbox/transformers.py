@@ -1191,12 +1191,10 @@ def etl_fisc_agg_tables_to_fisc_ote1_agg(conn_or_cursor: sqlite3_Connection):
 
 def etl_voice_raw_tables_to_fisc_ote1_agg(conn_or_cursor: sqlite3_Connection):
     conn_or_cursor.execute(CREATE_FISC_OTE1_AGG_SQLSTR)
-    print(CREATE_FISC_OTE1_AGG_SQLSTR)
-    print(INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR)
     conn_or_cursor.execute(INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR)
 
 
-def etl_fisc_table2fisc_ote1_agg_csvs(
+def etl_fisc_ote1_agg_table2fisc_ote1_agg_csvs(
     conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str
 ):
     empty_ote1_csv_str = """fisc_label,owner_name,event_int,deal_time,error_message

@@ -10,7 +10,7 @@ from src.a12_hub_tools.hub_path import create_fisc_ote1_csv_path
 from src.a18_etl_toolbox.transformers import (
     create_fisc_prime_tables,
     etl_fisc_agg_tables_to_fisc_ote1_agg,
-    etl_fisc_table2fisc_ote1_agg_csvs,
+    etl_fisc_ote1_agg_table2fisc_ote1_agg_csvs,
 )
 from src.a18_etl_toolbox._utils.env_a18 import (
     get_module_temp_dir,
@@ -54,7 +54,7 @@ VALUES
         assert os_path_exists(a45_event_time_p) is False
 
         # WHEN
-        etl_fisc_table2fisc_ote1_agg_csvs(cursor, fisc_mstr_dir)
+        etl_fisc_ote1_agg_table2fisc_ote1_agg_csvs(cursor, fisc_mstr_dir)
 
     # THEN
     assert os_path_exists(a23_event_time_p)
