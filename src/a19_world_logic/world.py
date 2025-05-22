@@ -30,7 +30,6 @@ from src.a18_etl_toolbox.transformers import (
     etl_events_brick_agg_table_to_events_brick_valid_table,
     etl_pidgin_jsons_inherit_younger_pidgins,
     get_pidgin_events_by_dirs,
-    etl_otz_inx_event_ideas_to_inz_faces,
     etl_inz_face_csv_files2idea_raw_tables,
     etl_idea_raw_to_fisc_prime_tables,
     etl_fisc_raw_tables_to_fisc_csvs,
@@ -123,9 +122,6 @@ class WorldUnit:
         etl_pidgin_jsons_inherit_younger_pidgins(
             self._syntax_otz_dir, self._pidgin_events
         )
-
-    def otz_inx_event_ideas_to_inz_faces(self):
-        etl_otz_inx_event_ideas_to_inz_faces(self._syntax_otz_dir, self._syntax_inz_dir)
 
     def inz_face_csv_files2idea_raw_tables(self, conn_or_cursor: sqlite3_Connection):
         etl_inz_face_csv_files2idea_raw_tables(conn_or_cursor, self._syntax_inz_dir)

@@ -267,17 +267,6 @@ def create_df_with_groupby_idea_columns(
     )
 
 
-def etl_brick_agg_non_pidgin_ideas_to_brick_valid(
-    brick_dir: str, legitimate_events: set[EventInt]
-):
-    """create brick_legit sheet with each idea's data that is of a legitimate event"""
-    for br_ref in get_existing_excel_idea_file_refs(brick_dir):
-        brick_idea_path = create_path(br_ref.file_dir, br_ref.filename)
-        brick_agg = pandas_read_excel(brick_idea_path, "brick_agg")
-        brick_valid_df = brick_agg[brick_agg["event_int"].isin(legitimate_events)]
-        upsert_sheet(brick_idea_path, "brick_valid", brick_valid_df)
-
-
 def etl_brick_raw_tables_to_events_brick_agg_table(conn_or_cursor: sqlite3_Cursor):
     brick_events_tablename = "events_brick_agg"
     if not db_table_exists(conn_or_cursor, brick_events_tablename):
@@ -665,23 +654,6 @@ def get_most_recent_event_int(
 ) -> EventInt:
     recent_event_ints = [e_id for e_id in event_set if e_id <= max_event_int]
     return max(recent_event_ints, default=None)
-
-
-def etl_otz_inx_event_ideas_to_inz_faces(syntax_otz_dir: str, syntax_inz_dir: str):
-    for face_name in get_level1_dirs(syntax_otz_dir):
-        face_dir = create_path(syntax_otz_dir, face_name)
-        for event_int in get_level1_dirs(face_dir):
-            event_int = int(event_int)
-            event_dir = create_path(face_dir, event_int)
-            for event_br_ref in get_existing_excel_idea_file_refs(event_dir):
-                event_idea_path = create_path(event_dir, event_br_ref.filename)
-                split_excel_into_dirs(
-                    input_file=event_idea_path,
-                    output_dir=syntax_inz_dir,
-                    column_name="face_name",
-                    filename=event_br_ref.idea_number,
-                    sheet_name="inx",
-                )
 
 
 def etl_inz_face_csv_files2idea_raw_tables(
