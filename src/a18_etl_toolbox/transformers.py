@@ -684,15 +684,6 @@ def etl_otz_inx_event_ideas_to_inz_faces(syntax_otz_dir: str, syntax_inz_dir: st
                 )
 
 
-def etl_inz_face_ideas_to_csv_files(syntax_inz_dir: str):
-    for face_name in get_level1_dirs(syntax_inz_dir):
-        face_dir = create_path(syntax_inz_dir, face_name)
-        for face_br_ref in get_existing_excel_idea_file_refs(face_dir):
-            face_idea_excel_path = create_path(face_dir, face_br_ref.filename)
-            idea_csv = get_ordered_csv(pandas_read_excel(face_idea_excel_path, "inx"))
-            save_file(face_dir, face_br_ref.get_csv_filename(), idea_csv)
-
-
 def etl_inz_face_csv_files2idea_raw_tables(
     conn_or_cursor: sqlite3_Connection, syntax_inz_dir: str
 ):
