@@ -29,11 +29,6 @@ from src.a18_etl_toolbox.transformers import (
     etl_brick_raw_tables_to_events_brick_agg_table,
     etl_events_brick_agg_table_to_events_brick_valid_table,
     get_pidgin_events_by_dirs,
-    etl_inz_face_csv_files2idea_raw_tables,
-    etl_idea_raw_to_fisc_prime_tables,
-    etl_fisc_agg_tables_to_fisc_jsons,
-    etl_idea_raw_to_bud_prime_tables,
-    etl_bud_tables_to_event_bud_csvs,
     etl_event_bud_csvs_to_pack_json,
     etl_event_pack_json_to_event_inherited_budunits,
     etl_event_inherited_budunits_to_fisc_gut,
@@ -109,21 +104,6 @@ class WorldUnit:
     def mud_dfs_to_brick_raw_tables(self, conn: sqlite3_Connection):
         etl_mud_dfs_to_brick_raw_tables(conn, self._mud_dir)
 
-    def inz_face_csv_files2idea_raw_tables(self, conn_or_cursor: sqlite3_Connection):
-        etl_inz_face_csv_files2idea_raw_tables(conn_or_cursor, self._syntax_inz_dir)
-
-    def idea_raw_to_fisc_prime_tables(self, conn_or_cursor: sqlite3_Connection):
-        etl_idea_raw_to_fisc_prime_tables(conn_or_cursor)
-
-    def idea_raw_to_bud_prime_tables(self, conn_or_cursor: sqlite3_Connection):
-        etl_idea_raw_to_bud_prime_tables(conn_or_cursor)
-
-    def fisc_agg_tables_to_fisc_jsons(self, cursor: sqlite3_Connection):
-        etl_fisc_agg_tables_to_fisc_jsons(cursor, self._fisc_mstr_dir)
-
-    def bud_tables_to_event_bud_csvs(self, conn_or_cursor: sqlite3_Connection):
-        etl_bud_tables_to_event_bud_csvs(conn_or_cursor, self._fisc_mstr_dir)
-
     def event_bud_csvs_to_pack_json(self):
         etl_event_bud_csvs_to_pack_json(self._fisc_mstr_dir)
 
@@ -188,7 +168,6 @@ class WorldUnit:
         self.calc_fisc_deal_acct_mandate_net_ledgers()
 
         # # create fiscunits
-        # self.idea_raw_to_fisc_prime_tables(cursor)
         # self.fisc_agg_tables_to_fisc_jsons(cursor)
         # self.fisc_ote1_agg_csvs2jsons()
 

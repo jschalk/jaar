@@ -103,16 +103,6 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_update_voice_raw_existing_inx_col_sqlstr,
     create_update_voice_raw_empty_inx_col_sqlstr,
     get_insert_voice_agg_sqlstrs,
-    get_bud_prime_create_table_sqlstrs,
-    create_pidgin_prime_tables,
-    create_fisc_prime_tables,
-    create_bud_prime_tables,
-    get_pidgin_update_inconsist_error_message_sqlstrs,
-    get_fisc_update_inconsist_error_message_sqlstrs,
-    get_fisc_insert_agg_from_raw_sqlstrs,
-    get_bud_put_update_inconsist_error_message_sqlstrs,
-    get_bud_insert_put_agg_from_raw_sqlstrs,
-    get_bud_insert_del_agg_from_raw_sqlstrs,
     get_idea_stageble_put_dimens,
     CREATE_FISC_EVENT_TIME_AGG_SQLSTR,
     INSERT_FISC_EVENT_TIME_AGG_SQLSTR,
@@ -120,10 +110,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_FISC_OTE1_AGG_SQLSTR,
     INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR,
 )
-from src.a18_etl_toolbox.db_obj_tool import (
-    get_fisc_dict_from_db,
-    get_fisc_dict_from_voice_tables,
-)
+from src.a18_etl_toolbox.db_obj_tool import get_fisc_dict_from_voice_tables
 from src.a18_etl_toolbox.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from pandas import (
     read_excel as pandas_read_excel,
@@ -631,113 +618,6 @@ def get_most_recent_event_int(
     return max(recent_event_ints, default=None)
 
 
-def etl_inz_face_csv_files2idea_raw_tables(
-    conn_or_cursor: sqlite3_Connection, syntax_inz_dir: str
-):
-    for face_name in get_level1_dirs(syntax_inz_dir):
-        face_dir = create_path(syntax_inz_dir, face_name)
-        for idea_number in sorted(get_idea_numbers()):
-            csv_filename = f"{idea_number}.csv"
-            csv_path = create_path(face_dir, csv_filename)
-            if os_path_exists(csv_path):
-                insert_idea_csv(csv_path, conn_or_cursor, f"{idea_number}_raw")
-
-
-def etl_idea_raw_to_pidgin_prime_tables(conn_or_cursor):
-    create_pidgin_prime_tables(conn_or_cursor)
-    brick_valid_tables_to_pidgin_prime_raw_tables(conn_or_cursor)
-    set_pidgin_raw_error_message(conn_or_cursor)
-
-
-def etl_idea_raw_to_fisc_prime_tables(conn_or_cursor):
-    create_fisc_prime_tables(conn_or_cursor)
-    idea_raw_tables2fisc_raw_tables(conn_or_cursor)
-    set_fisc_raw_error_message(conn_or_cursor)
-    fisc_raw_tables2fisc_agg_tables(conn_or_cursor)
-    fisc_agg_tables2fisc_event_time_agg(conn_or_cursor)
-
-
-def etl_idea_raw_to_bud_prime_tables(conn_or_cursor):
-    create_bud_prime_tables(conn_or_cursor)
-    idea_raw_tables2bud_raw_tables(conn_or_cursor)
-    set_bud_raw_error_message(conn_or_cursor)
-    bud_raw_tables2bud_agg_tables(conn_or_cursor)
-
-
-def idea_raw_tables2fisc_raw_tables(conn_or_cursor: sqlite3_Connection):
-    ideas_stageble_dimens = get_idea_stageble_put_dimens()
-    idea_config_dict = get_idea_config_dict()
-    for idea_number in get_idea_numbers():
-        idea_raw = f"{idea_number}_raw"
-        if db_table_exists(conn_or_cursor, idea_raw):
-            # only inserts from pre-identified idea categorys
-            stageble_dimens = ideas_stageble_dimens.get(idea_number)
-            for x_dimen in stageble_dimens:
-                dimen_config = idea_config_dict.get(x_dimen)
-                if dimen_config.get("idea_category") == "fisc":
-                    dimen_jkeys = set(dimen_config.get("jkeys").keys())
-                    gen_sqlstr = get_idea_into_dimen_raw_query(
-                        conn_or_cursor, idea_number, x_dimen, dimen_jkeys
-                    )
-                    conn_or_cursor.execute(gen_sqlstr)
-
-            # for x_dimen in fisc_dimens:
-            #     dimen_config = idea_config_dict.get(x_dimen)
-            #     dimen_jkeys = set(dimen_config.get("jkeys").keys())
-            #     if required_columns_exist(conn_or_cursor, idea_raw, dimen_jkeys):
-            #         gen_sqlstr = get_idea_into_dimen_raw_query(
-            #             conn_or_cursor, idea_number, x_dimen, dimen_jkeys
-            #         )
-            #         conn_or_cursor.execute(gen_sqlstr)
-
-
-def idea_raw_tables2bud_raw_tables(conn_or_cursor: sqlite3_Connection):
-    idea_config_dict = get_idea_config_dict()
-
-    for idea_number in get_idea_numbers():
-        idea_raw = f"{idea_number}_raw"
-        if db_table_exists(conn_or_cursor, idea_raw):
-            # only inserts from pre-identified idea categorys
-            stageble_dimens = get_idea_stageble_put_dimens().get(idea_number)
-            for x_dimen in stageble_dimens:
-                dimen_config = idea_config_dict.get(x_dimen)
-                if dimen_config.get("idea_category") == "bud":
-                    dimen_jkeys = set(dimen_config.get("jkeys").keys())
-                    insert_sqlstr = get_idea_into_dimen_raw_query(
-                        conn_or_cursor, idea_number, x_dimen, dimen_jkeys, "put"
-                    )
-                    conn_or_cursor.execute(insert_sqlstr)
-
-            # manually checks each idea categorys
-            # for x_dimen in bud_dimens:
-            #     dimen_config = idea_config_dict.get(x_dimen)
-            #     dimen_jkeys = set(dimen_config.get("jkeys").keys())
-            #     if required_columns_exist(conn_or_cursor, idea_raw, dimen_jkeys):
-            #         insert_sqlstr = get_idea_into_dimen_raw_query(
-            #             conn_or_cursor, idea_number, x_dimen, dimen_jkeys
-            #         )
-            #         conn_or_cursor.execute(insert_sqlstr)
-
-
-def set_pidgin_raw_error_message(conn_or_cursor: sqlite3_Connection):
-    for (
-        set_error_sqlstr
-    ) in get_pidgin_update_inconsist_error_message_sqlstrs().values():
-        conn_or_cursor.execute(set_error_sqlstr)
-
-
-def set_fisc_raw_error_message(conn_or_cursor: sqlite3_Connection):
-    for set_error_sqlstr in get_fisc_update_inconsist_error_message_sqlstrs().values():
-        conn_or_cursor.execute(set_error_sqlstr)
-
-
-def set_bud_raw_error_message(conn_or_cursor: sqlite3_Connection):
-    for (
-        set_error_sqlstr
-    ) in get_bud_put_update_inconsist_error_message_sqlstrs().values():
-        conn_or_cursor.execute(set_error_sqlstr)
-
-
 def fisc_agg_tables2fisc_event_time_agg(conn_or_cursor: sqlite3_Connection):
     conn_or_cursor.execute(CREATE_FISC_EVENT_TIME_AGG_SQLSTR)
     conn_or_cursor.execute(INSERT_FISC_EVENT_TIME_AGG_SQLSTR)
@@ -823,18 +703,6 @@ def etl_create_deal_mandate_ledgers(fisc_mstr_dir: str):
         create_deal_mandate_ledgers(fisc_mstr_dir, fisc_label)
 
 
-def fisc_raw_tables2fisc_agg_tables(conn_or_cursor: sqlite3_Connection):
-    for x_sqlstr in get_fisc_insert_agg_from_raw_sqlstrs().values():
-        conn_or_cursor.execute(x_sqlstr)
-
-
-def bud_raw_tables2bud_agg_tables(conn_or_cursor: sqlite3_Connection):
-    for x_sqlstr in get_bud_insert_put_agg_from_raw_sqlstrs().values():
-        conn_or_cursor.execute(x_sqlstr)
-    for x_sqlstr in get_bud_insert_del_agg_from_raw_sqlstrs().values():
-        conn_or_cursor.execute(x_sqlstr)
-
-
 def etl_voice_agg_to_event_bud_csvs(
     conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str
 ):
@@ -849,42 +717,6 @@ def etl_voice_agg_to_event_bud_csvs(
                 col1_prefix="owners",
                 col2_prefix="events",
             )
-
-
-def etl_bud_tables_to_event_bud_csvs(
-    conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str
-):
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for bud_table in get_bud_prime_create_table_sqlstrs():
-        if get_row_count(conn_or_cursor, bud_table) > 0:
-            save_to_split_csvs(
-                conn_or_cursor=conn_or_cursor,
-                tablename=bud_table,
-                key_columns=["fisc_label", "owner_name", "event_int"],
-                output_dir=fiscs_dir,
-                col1_prefix="owners",
-                col2_prefix="events",
-            )
-
-
-def etl_fisc_raw_tables_to_fisc_csvs(
-    conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str
-):
-    for fisc_dimen in get_fisc_dimens():
-        raw_tablename = f"{fisc_dimen}_raw"
-        save_table_to_csv(conn_or_cursor, fisc_mstr_dir, raw_tablename)
-
-
-def etl_fisc_agg_tables_to_fisc_jsons(cursor: sqlite3_Cursor, fisc_mstr_dir: str):
-    fisc_filename = "fisc.json"
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    select_fisc_label_sqlstr = """SELECT fisc_label FROM fiscunit_agg;"""
-    cursor.execute(select_fisc_label_sqlstr)
-    for fisc_label_set in cursor.fetchall():
-        fisc_label = fisc_label_set[0]
-        fisc_dict = get_fisc_dict_from_db(cursor, fisc_label)
-        fiscunit_dir = create_path(fiscs_dir, fisc_label)
-        save_json(fiscunit_dir, fisc_filename, fisc_dict)
 
 
 def etl_event_bud_csvs_to_pack_json(fisc_mstr_dir: str):
