@@ -125,7 +125,6 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
 
         # # create budunits
         # self.bud_tables_to_event_bud_csvs(cursor)
-        # self.event_inherited_budunits_to_fisc_gut()
 
         # # create all fisc_job and mandate reports
         # self.fisc_gut_to_fisc_job()
@@ -281,7 +280,6 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateDealCashRows(
 
         # # create budunits
         # self.bud_tables_to_event_bud_csvs(cursor)
-        # self.event_inherited_budunits_to_fisc_gut()
 
         # # create all fisc_job and mandate reports
         # self.fisc_gut_to_fisc_job()

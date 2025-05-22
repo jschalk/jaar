@@ -104,9 +104,6 @@ class WorldUnit:
     def event_pack_json_to_event_inherited_budunits(self):
         etl_event_pack_json_to_event_inherited_budunits(self._fisc_mstr_dir)
 
-    def event_inherited_budunits_to_fisc_gut(self):
-        etl_event_inherited_budunits_to_fisc_gut(self._fisc_mstr_dir)
-
     def fisc_gut_to_fisc_job(self):
         etl_fisc_gut_to_fisc_job(self._fisc_mstr_dir)
 
