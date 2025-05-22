@@ -118,7 +118,6 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     INSERT_FISC_EVENT_TIME_AGG_SQLSTR,
     UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR,
     CREATE_FISC_OTE1_AGG_SQLSTR,
-    INSERT_FISC_OTE1_AGG_SQLSTR,
     INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR,
 )
 from src.a18_etl_toolbox.db_obj_tool import (
@@ -745,11 +744,6 @@ def fisc_agg_tables2fisc_event_time_agg(conn_or_cursor: sqlite3_Connection):
     conn_or_cursor.execute(UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR)
 
 
-def etl_fisc_agg_tables_to_fisc_ote1_agg(conn_or_cursor: sqlite3_Connection):
-    conn_or_cursor.execute(CREATE_FISC_OTE1_AGG_SQLSTR)
-    conn_or_cursor.execute(INSERT_FISC_OTE1_AGG_SQLSTR)
-
-
 def etl_voice_raw_tables_to_fisc_ote1_agg(conn_or_cursor: sqlite3_Connection):
     conn_or_cursor.execute(CREATE_FISC_OTE1_AGG_SQLSTR)
     conn_or_cursor.execute(INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR)
@@ -879,13 +873,6 @@ def etl_fisc_raw_tables_to_fisc_csvs(
     for fisc_dimen in get_fisc_dimens():
         raw_tablename = f"{fisc_dimen}_raw"
         save_table_to_csv(conn_or_cursor, fisc_mstr_dir, raw_tablename)
-
-
-def etl_fisc_agg_tables_to_fisc_csvs(
-    conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str
-):
-    for fisc_dimen in get_fisc_dimens():
-        save_table_to_csv(conn_or_cursor, fisc_mstr_dir, f"{fisc_dimen}_agg")
 
 
 def etl_fisc_agg_tables_to_fisc_jsons(cursor: sqlite3_Cursor, fisc_mstr_dir: str):

@@ -31,8 +31,6 @@ from src.a18_etl_toolbox.transformers import (
     get_pidgin_events_by_dirs,
     etl_inz_face_csv_files2idea_raw_tables,
     etl_idea_raw_to_fisc_prime_tables,
-    etl_fisc_raw_tables_to_fisc_csvs,
-    etl_fisc_agg_tables_to_fisc_csvs,
     etl_fisc_agg_tables_to_fisc_jsons,
     etl_idea_raw_to_bud_prime_tables,
     etl_bud_tables_to_event_bud_csvs,
@@ -40,7 +38,6 @@ from src.a18_etl_toolbox.transformers import (
     etl_event_pack_json_to_event_inherited_budunits,
     etl_event_inherited_budunits_to_fisc_gut,
     etl_fisc_gut_to_fisc_job,
-    etl_fisc_agg_tables_to_fisc_ote1_agg,
     etl_fisc_ote1_agg_table2fisc_ote1_agg_csvs,
     etl_fisc_ote1_agg_csvs2jsons,
     etl_create_deals_root_cells,
@@ -121,18 +118,8 @@ class WorldUnit:
     def idea_raw_to_bud_prime_tables(self, conn_or_cursor: sqlite3_Connection):
         etl_idea_raw_to_bud_prime_tables(conn_or_cursor)
 
-    def inz_faces_ideas_to_fisc_mstr_csvs(self, conn_or_cursor: sqlite3_Connection):
-        etl_fisc_raw_tables_to_fisc_csvs(conn_or_cursor, self._fisc_mstr_dir)
-        etl_fisc_agg_tables_to_fisc_csvs(conn_or_cursor, self._fisc_mstr_dir)
-
     def fisc_agg_tables_to_fisc_jsons(self, cursor: sqlite3_Connection):
         etl_fisc_agg_tables_to_fisc_jsons(cursor, self._fisc_mstr_dir)
-
-    def fisc_agg_tables_to_fisc_ote1_agg(self, conn_or_cursor: sqlite3_Connection):
-        etl_fisc_agg_tables_to_fisc_ote1_agg(conn_or_cursor)
-
-    def fisc_table2fisc_ote1_agg_csvs(self, conn_or_cursor: sqlite3_Connection):
-        etl_fisc_ote1_agg_table2fisc_ote1_agg_csvs(conn_or_cursor, self._fisc_mstr_dir)
 
     def bud_tables_to_event_bud_csvs(self, conn_or_cursor: sqlite3_Connection):
         etl_bud_tables_to_event_bud_csvs(conn_or_cursor, self._fisc_mstr_dir)
@@ -203,8 +190,6 @@ class WorldUnit:
         # # create fiscunits
         # self.idea_raw_to_fisc_prime_tables(cursor)
         # self.fisc_agg_tables_to_fisc_jsons(cursor)
-        # self.fisc_agg_tables_to_fisc_ote1_agg(cursor)
-        # self.fisc_table2fisc_ote1_agg_csvs(cursor)
         # self.fisc_ote1_agg_csvs2jsons()
 
         # # create all fisc_job and mandate reports

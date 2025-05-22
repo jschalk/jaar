@@ -120,11 +120,8 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
         assert not os_path_exists(a23_e1_expressed_pack_path)
         assert not os_path_exists(a23_sue_gut_path)
         assert not os_path_exists(a23_sue_job_path)
-
         assert not db_table_exists(cursor, fisc_event_time_agg_tablename)
         assert not db_table_exists(cursor, fisc_ote1_agg_tablename)
-        # self.fisc_agg_tables_to_fisc_ote1_agg(cursor)
-        # self.fisc_table2fisc_ote1_agg_csvs(cursor)
         # self.fisc_ote1_agg_csvs2jsons()
 
         # # create budunits
@@ -283,7 +280,6 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateDealCashRows(
         assert not db_table_exists(cursor, fisc_ote1_agg_tablename)
         assert not os_path_exists(sue37_mandate_path)
         # self.fisc_agg_tables_to_fisc_ote1_agg(cursor)
-        # self.fisc_table2fisc_ote1_agg_csvs(cursor)
         # self.fisc_ote1_agg_csvs2jsons()
 
         # # create budunits

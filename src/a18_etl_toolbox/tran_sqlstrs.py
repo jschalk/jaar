@@ -2103,17 +2103,6 @@ CREATE TABLE IF NOT EXISTS fisc_ote1_agg (
 )
 ;
 """
-INSERT_FISC_OTE1_AGG_SQLSTR = """
-INSERT INTO fisc_ote1_agg (fisc_label, owner_name, event_int, deal_time)
-SELECT fisc_label, owner_name, event_int, deal_time
-FROM (
-    SELECT fisc_label, owner_name, event_int, deal_time
-    FROM fisc_dealunit_raw
-    GROUP BY fisc_label, owner_name, event_int, deal_time
-)
-ORDER BY fisc_label, owner_name, event_int, deal_time
-;
-"""
 INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR = """
 INSERT INTO fisc_ote1_agg (fisc_label, owner_name, event_int, deal_time)
 SELECT fisc_label, owner_name, event_int, deal_time

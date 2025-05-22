@@ -1,22 +1,10 @@
-from src.a00_data_toolbox.file_toolbox import open_file
 from src.a00_data_toolbox.db_toolbox import get_row_count
-from src.a02_finance_logic._utils.strs_a02 import bridge_str, fisc_label_str
-from src.a07_calendar_logic._utils.str_a07 import (
-    c400_number_str,
-    monthday_distortion_str,
-    timeline_label_str,
-    yr1_jan1_offset_str,
-)
-from src.a06_bud_logic._utils.str_a06 import fund_coin_str, penny_str, respect_bit_str
 from src.a18_etl_toolbox.fisc_etl_tool import FiscPrimeObjsRef, FiscPrimeColumnsRef
 from src.a18_etl_toolbox.transformers import (
     create_fisc_prime_tables,
     fisc_raw_tables2fisc_agg_tables,
-    etl_fisc_agg_tables_to_fisc_csvs,
 )
-from src.a18_etl_toolbox._utils.env_a18 import get_module_temp_dir
 from sqlite3 import connect as sqlite3_connect
-from os.path import exists as os_path_exists
 
 
 def test_fisc_raw_tables2fisc_agg_tables_PassesOnly_fisc_label():
@@ -466,45 +454,3 @@ VALUES
         expected_agg_row1 = (accord45_str, bob_inx, yao_inx, t1_tran_time, t1_amount_1)
         expected_agg_row2 = (accord45_str, bob_inx, yao_inx, t2_tran_time, t2_amount)
         assert rows == [expected_agg_row0, expected_agg_row1, expected_agg_row2]
-
-
-def test_etl_fisc_agg_tables_to_fisc_csvs_CreateFiles():
-    # sourcery skip: extract-method
-    # ESTABLISH
-    accord23_str = "accord23"
-    accord45_str = "accord45"
-    with sqlite3_connect(":memory:") as fisc_db_conn:
-        cursor = fisc_db_conn.cursor()
-        create_fisc_prime_tables(cursor)
-        fisc_mstr_dir = get_module_temp_dir()
-        x_fisc = FiscPrimeObjsRef(fisc_mstr_dir)
-        insert_agg_sqlstr = f"""
-INSERT INTO {x_fisc.unit_agg_tablename} ({fisc_label_str()})
-VALUES ('{accord23_str}'), ('{accord45_str}')
-;
-"""
-        cursor.execute(insert_agg_sqlstr)
-        assert os_path_exists(x_fisc.unit_agg_csv_path) is False
-        assert os_path_exists(x_fisc.deal_agg_csv_path) is False
-        assert os_path_exists(x_fisc.cash_agg_csv_path) is False
-        assert os_path_exists(x_fisc.hour_agg_csv_path) is False
-        assert os_path_exists(x_fisc.mont_agg_csv_path) is False
-        assert os_path_exists(x_fisc.week_agg_csv_path) is False
-
-        # WHEN
-        etl_fisc_agg_tables_to_fisc_csvs(cursor, fisc_mstr_dir)
-
-        # THEN
-        assert os_path_exists(x_fisc.unit_agg_csv_path)
-        assert os_path_exists(x_fisc.deal_agg_csv_path)
-        assert os_path_exists(x_fisc.cash_agg_csv_path)
-        assert os_path_exists(x_fisc.hour_agg_csv_path)
-        assert os_path_exists(x_fisc.mont_agg_csv_path)
-        assert os_path_exists(x_fisc.week_agg_csv_path)
-        unit_agg_csv_filename = x_fisc.unit_agg_csv_filename
-        generated_fiscunit_csv = open_file(fisc_mstr_dir, unit_agg_csv_filename)
-        expected_fiscunit_csv_str = f"""{fisc_label_str()},{timeline_label_str()},{c400_number_str()},{yr1_jan1_offset_str()},{monthday_distortion_str()},{fund_coin_str()},{penny_str()},{respect_bit_str()},{bridge_str()},job_listen_rotations
-{accord23_str},,,,,,,,,
-{accord45_str},,,,,,,,,
-"""
-        assert generated_fiscunit_csv == expected_fiscunit_csv_str
