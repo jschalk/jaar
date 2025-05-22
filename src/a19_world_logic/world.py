@@ -326,6 +326,9 @@ class WorldUnit:
         cursor: sqlite3_Cursor,
         store_tracing_files: bool = False,
     ):
+        fisc_mstr_dir = create_path(self._world_dir, "fisc_mstr")
+        delete_dir(fisc_mstr_dir)
+        set_dir(fisc_mstr_dir)
         # collect excel file data into central location
         etl_mud_dfs_to_brick_raw_tables(db_conn, self._mud_dir)
         etl_brick_raw_tables_to_brick_agg_tables(cursor)
