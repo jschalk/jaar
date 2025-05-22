@@ -177,14 +177,6 @@ def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
     return existing_excel_idea_filepaths
 
 
-def etl_brick_raw_db_to_brick_agg_df(brick_dir):
-    for br_ref in get_existing_excel_idea_file_refs(brick_dir):
-        brick_idea_path = create_path(br_ref.file_dir, br_ref.filename)
-        brick_raw_df = pandas_read_excel(brick_idea_path, "brick_raw")
-        otx_df = create_df_with_groupby_idea_columns(brick_raw_df, br_ref.idea_number)
-        upsert_sheet(brick_idea_path, "brick_agg", otx_df)
-
-
 def etl_brick_raw_tables_to_brick_agg_tables(conn_or_cursor: sqlite3_Connection):
     brick_raw_dict = {f"{idea}_brick_raw": idea for idea in get_idea_numbers()}
     brick_raw_tables = set(brick_raw_dict.keys())
@@ -607,22 +599,6 @@ def _get_all_syntax_otz_dir_event_dirs(faces_dir) -> list[str]:
 def etl_event_pidgin_csvs_to_pidgin_json(event_dir: str):
     pidginunit = init_pidginunit_from_dir(event_dir)
     save_file(event_dir, "pidgin.json", pidginunit.get_json(), replace=True)
-
-
-def etl_pidgin_jsons_inherit_younger_pidgins(
-    faces_dir: str, pidgin_events: dict[FaceName, set[EventInt]]
-):
-    old_pidginunit = None
-    for face_name, pidgin_event_ints in pidgin_events.items():
-        for pidgin_event_int in pidgin_event_ints:
-            new_pidgin_path = get_event_pidgin_path(
-                faces_dir, face_name, pidgin_event_int
-            )
-            new_pidginunit = get_pidginunit_from_json(open_file(new_pidgin_path))
-            if old_pidginunit != None:
-                new_pidginunit = inherit_pidginunit(old_pidginunit, new_pidginunit)
-                save_file(new_pidgin_path, None, new_pidginunit.get_json())
-            old_pidginunit = new_pidginunit
 
 
 def get_event_pidgin_path(

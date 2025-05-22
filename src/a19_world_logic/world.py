@@ -28,7 +28,6 @@ from src.a18_etl_toolbox.transformers import (
     etl_voice_raw_tables_to_fisc_ote1_agg,
     etl_brick_raw_tables_to_events_brick_agg_table,
     etl_events_brick_agg_table_to_events_brick_valid_table,
-    etl_pidgin_jsons_inherit_younger_pidgins,
     get_pidgin_events_by_dirs,
     etl_inz_face_csv_files2idea_raw_tables,
     etl_idea_raw_to_fisc_prime_tables,
@@ -113,16 +112,6 @@ class WorldUnit:
     def mud_dfs_to_brick_raw_tables(self, conn: sqlite3_Connection):
         etl_mud_dfs_to_brick_raw_tables(conn, self._mud_dir)
 
-    def brick_raw_db_to_brick_agg_df(
-        self, conn: sqlite3_Connection, cursor: sqlite3_Cursor
-    ):
-        etl_brick_raw_tables_to_brick_agg_tables(cursor)
-
-    def pidgin_jsons_inherit_younger_pidgins(self):
-        etl_pidgin_jsons_inherit_younger_pidgins(
-            self._syntax_otz_dir, self._pidgin_events
-        )
-
     def inz_face_csv_files2idea_raw_tables(self, conn_or_cursor: sqlite3_Connection):
         etl_inz_face_csv_files2idea_raw_tables(conn_or_cursor, self._syntax_inz_dir)
 
@@ -162,24 +151,6 @@ class WorldUnit:
 
     def fisc_ote1_agg_csvs2jsons(self):
         etl_fisc_ote1_agg_csvs2jsons(self._fisc_mstr_dir)
-
-    def create_deals_root_cells(self):
-        etl_create_deals_root_cells(self._fisc_mstr_dir)
-
-    def create_fisc_cell_trees(self):
-        etl_create_fisc_cell_trees(self._fisc_mstr_dir)
-
-    def set_cell_trees_found_facts(self):
-        etl_set_cell_trees_found_facts(self._fisc_mstr_dir)
-
-    def set_cell_trees_decrees(self):
-        etl_set_cell_trees_decrees(self._fisc_mstr_dir)
-
-    def set_cell_tree_cell_mandates(self):
-        etl_set_cell_tree_cell_mandates(self._fisc_mstr_dir)
-
-    def create_deal_mandate_ledgers(self):
-        etl_create_deal_mandate_ledgers(self._fisc_mstr_dir)
 
     def calc_fisc_deal_acct_mandate_net_ledgers(self):
         mstr_dir = self._fisc_mstr_dir
