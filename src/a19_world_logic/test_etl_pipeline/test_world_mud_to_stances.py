@@ -19,8 +19,7 @@ from src.a12_hub_tools.hub_path import (
 )
 from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_label_str
 from src.a16_pidgin_logic._utils.str_a16 import otx_name_str, inx_name_str
-from src.a17_idea_logic._utils.str_a17 import brick_agg_str, brick_raw_str
-from src.a17_idea_logic.idea_db_tool import upsert_sheet, sheet_exists
+from src.a17_idea_logic.idea_db_tool import upsert_sheet
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a19_world_logic.world import worldunit_shop
 from src.a19_world_logic._utils.env_a19 import (
@@ -32,129 +31,7 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_WorldUnit_mud_to_clarity_Scenario3_CreatesFiles(env_dir_setup_cleanup):
-    # ESTABLISH
-    fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str, worlds_dir())
-    # delete_dir(fizz_world.worlds_dir)
-    sue_str = "Sue"
-    event1 = 1
-    event2 = 2
-    minute_360 = 360
-    minute_420 = 420
-    hour6am = "6am"
-    hour7am = "7am"
-    ex_filename = "fizzbuzz.xlsx"
-    mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
-    br00003_columns = [
-        event_int_str(),
-        face_name_str(),
-        cumlative_minute_str(),
-        fisc_label_str(),
-        hour_label_str(),
-    ]
-    br00001_columns = [
-        event_int_str(),
-        face_name_str(),
-        fisc_label_str(),
-        owner_name_str(),
-        deal_time_str(),
-        quota_str(),
-        celldepth_str(),
-    ]
-    accord23_str = "accord23"
-    tp37 = 37
-    sue_quota = 235
-    sue_celldepth = 3
-    br1row0 = [event2, sue_str, accord23_str, sue_str, tp37, sue_quota, sue_celldepth]
-    br00001_1df = DataFrame([br1row0], columns=br00001_columns)
-    br00001_ex0_str = "example0_br00001"
-    upsert_sheet(mud_file_path, br00001_ex0_str, br00001_1df)
-
-    br3row0 = [event1, sue_str, minute_360, accord23_str, hour6am]
-    br3row1 = [event1, sue_str, minute_420, accord23_str, hour7am]
-    br3row2 = [event2, sue_str, minute_420, accord23_str, hour7am]
-    br00003_1df = DataFrame([br3row0, br3row1], columns=br00003_columns)
-    br00003_3df = DataFrame([br3row1, br3row0, br3row2], columns=br00003_columns)
-    br00003_ex1_str = "example1_br00003"
-    br00003_ex3_str = "example3_br00003"
-    upsert_sheet(mud_file_path, br00003_ex1_str, br00003_1df)
-    upsert_sheet(mud_file_path, br00003_ex3_str, br00003_3df)
-    br00011_columns = [
-        event_int_str(),
-        face_name_str(),
-        fisc_label_str(),
-        owner_name_str(),
-        acct_name_str(),
-    ]
-    br00011_rows = [[event2, sue_str, accord23_str, sue_str, sue_str]]
-    br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
-    upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
-    mstr_dir = fizz_world._fisc_mstr_dir
-    wrong_a23_fisc_dir = create_path(mstr_dir, accord23_str)
-    assert os_path_exists(wrong_a23_fisc_dir) is False
-    brick_file_path = create_path(fizz_world._brick_dir, "br00003.xlsx")
-    a23_json_path = create_fisc_json_path(mstr_dir, accord23_str)
-    a23_sue_gut_path = create_gut_path(mstr_dir, accord23_str, sue_str)
-    a23_sue_job_path = create_job_path(mstr_dir, accord23_str, sue_str)
-    sue37_mandate_path = deal_mandate(mstr_dir, accord23_str, sue_str, tp37)
-    assert os_path_exists(mud_file_path)
-    assert not os_path_exists(brick_file_path)
-    assert not os_path_exists(a23_json_path)
-    assert not os_path_exists(a23_sue_gut_path)
-    assert not os_path_exists(a23_sue_job_path)
-    assert not os_path_exists(sue37_mandate_path)
-    assert count_dirs_files(fizz_world.worlds_dir) == 7
-
-    # WHEN
-    fizz_world.mud_to_clarity(store_tracing_files=True)
-
-    # THEN
-    assert os_path_exists(wrong_a23_fisc_dir) is False
-    assert os_path_exists(mud_file_path)
-    assert os_path_exists(brick_file_path)
-    assert sheet_exists(brick_file_path, brick_raw_str())
-    assert os_path_exists(brick_file_path)
-    assert os_path_exists(a23_json_path)
-    assert os_path_exists(a23_sue_gut_path)
-    assert os_path_exists(a23_sue_job_path)
-    assert os_path_exists(sue37_mandate_path)
-    assert count_dirs_files(fizz_world.worlds_dir) == 81
-
-
-def test_WorldUnit_mud_to_clarity_Senario4_WhenNoFiscIdeas_ote1_IsStillCreated(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str, worlds_dir())
-    sue_str = "Sue"
-    event2 = 2
-    ex_filename = "fizzbuzz.xlsx"
-    mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
-    accord23_str = "accord23"
-    br00011_columns = [
-        event_int_str(),
-        face_name_str(),
-        fisc_label_str(),
-        owner_name_str(),
-        acct_name_str(),
-    ]
-    br00011_rows = [[event2, sue_str, accord23_str, sue_str, sue_str]]
-    br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
-    upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
-    fisc_mstr = fizz_world._fisc_mstr_dir
-    a23_ote1_csv_path = create_fisc_ote1_csv_path(fisc_mstr, accord23_str)
-    assert os_path_exists(a23_ote1_csv_path) is False
-
-    # WHEN
-    fizz_world.mud_to_clarity()
-
-    # THEN
-    assert os_path_exists(a23_ote1_csv_path)
-
-
-def test_WorldUnit_mud_to_clarity_v2_with_cursor_Scenario0_br000113PopulatesTables(
+def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH:
@@ -260,7 +137,7 @@ def test_WorldUnit_mud_to_clarity_v2_with_cursor_Scenario0_br000113PopulatesTabl
         # self.calc_fisc_deal_acct_mandate_net_ledgers()
 
         # WHEN
-        fizz_world.mud_to_clarity_v2_with_cursor(db_conn, cursor)
+        fizz_world.mud_to_clarity_with_cursor(db_conn, cursor)
 
         # THEN
         assert get_row_count(cursor, br00113_raw) == 1
@@ -296,7 +173,7 @@ def test_WorldUnit_mud_to_clarity_v2_with_cursor_Scenario0_br000113PopulatesTabl
         # assert get_row_count(cursor, fisc_ote1_agg_tablename) == 0
 
 
-def test_WorldUnit_mud_to_clarity_v2_with_cursor_Scenario1_PopulateDealCashRows(
+def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateDealCashRows(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH:
@@ -419,7 +296,7 @@ def test_WorldUnit_mud_to_clarity_v2_with_cursor_Scenario1_PopulateDealCashRows(
         # self.calc_fisc_deal_acct_mandate_net_ledgers()
 
         # WHEN
-        fizz_world.mud_to_clarity_v2_with_cursor(db_conn, cursor)
+        fizz_world.mud_to_clarity_with_cursor(db_conn, cursor)
 
         # THEN
         assert get_row_count(cursor, br00113_raw) == 1
@@ -455,7 +332,7 @@ def test_WorldUnit_mud_to_clarity_v2_with_cursor_Scenario1_PopulateDealCashRows(
         assert os_path_exists(sue37_mandate_path)
 
 
-def test_WorldUnit_mud_to_clarity_v2_with_cursor_Senario1_WhenNoFiscIdeas_ote1_IsStillCreated(
+def test_WorldUnit_mud_to_clarity_with_cursor_Senario1_WhenNoFiscIdeas_ote1_IsStillCreated(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -483,13 +360,13 @@ def test_WorldUnit_mud_to_clarity_v2_with_cursor_Senario1_WhenNoFiscIdeas_ote1_I
         assert os_path_exists(a23_ote1_csv_path) is False
 
         # WHEN
-        fizz_world.mud_to_clarity_v2_with_cursor(db_conn, cursor)
+        fizz_world.mud_to_clarity_with_cursor(db_conn, cursor)
 
     # THEN
     assert os_path_exists(a23_ote1_csv_path)
 
 
-def test_WorldUnit_mud_to_clarity_v2_with_cursor_Scenario2_DeletesPreviousFiles(
+def test_WorldUnit_mud_to_clarity_with_cursor_Scenario2_DeletesPreviousFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -511,14 +388,14 @@ def test_WorldUnit_mud_to_clarity_v2_with_cursor_Scenario2_DeletesPreviousFiles(
         cursor = db_conn.cursor()
 
         # WHEN
-        fizz_world.mud_to_clarity_v2_with_cursor(db_conn, cursor)
+        fizz_world.mud_to_clarity_with_cursor(db_conn, cursor)
 
     # THEN
     assert os_path_exists(testing2_path)
     assert os_path_exists(testing3_path) is False
 
 
-def test_WorldUnit_mud_to_clarity_v2_with_cursor_Scenario3_CreatesFiles(
+def test_WorldUnit_mud_to_clarity_with_cursor_Scenario3_CreatesFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -595,7 +472,7 @@ def test_WorldUnit_mud_to_clarity_v2_with_cursor_Scenario3_CreatesFiles(
         assert count_dirs_files(fizz_world.worlds_dir) == 7
 
         # WHEN
-        fizz_world.mud_to_clarity_v2_with_cursor(db_conn, cursor)
+        fizz_world.mud_to_clarity_with_cursor(db_conn, cursor)
 
         # THEN
         assert os_path_exists(wrong_a23_fisc_dir) is False
