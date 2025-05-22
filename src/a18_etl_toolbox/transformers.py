@@ -259,18 +259,6 @@ def etl_brick_raw_db_to_brick_agg_df(brick_dir):
         upsert_sheet(brick_idea_path, "brick_agg", otx_df)
 
 
-def etl_brick_agg_tables_to_brick_agg_dfs(conn: sqlite3_Connection, brick_dir: str):
-    brick_agg_dict = {f"{idea}_brick_agg": idea for idea in get_idea_numbers()}
-    brick_agg_tables = set(brick_agg_dict.keys())
-    for table_name in get_db_tables(conn):
-        if table_name in brick_agg_tables:
-            idea_number = brick_agg_dict.get(table_name)
-            brick_path = create_path(brick_dir, f"{idea_number}.xlsx")
-            sqlstr = f"SELECT * FROM {table_name}"
-            brick_agg_idea_df = pandas_read_sql_query(sqlstr, conn)
-            upsert_sheet(brick_path, "brick_agg", brick_agg_idea_df)
-
-
 def etl_brick_raw_tables_to_brick_agg_tables(conn_or_cursor: sqlite3_Connection):
     brick_raw_dict = {f"{idea}_brick_raw": idea for idea in get_idea_numbers()}
     brick_raw_tables = set(brick_raw_dict.keys())
