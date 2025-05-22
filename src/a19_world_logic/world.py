@@ -104,9 +104,6 @@ class WorldUnit:
     def mud_dfs_to_brick_raw_tables(self, conn: sqlite3_Connection):
         etl_mud_dfs_to_brick_raw_tables(conn, self._mud_dir)
 
-    def event_bud_csvs_to_pack_json(self):
-        etl_event_bud_csvs_to_pack_json(self._fisc_mstr_dir)
-
     def event_pack_json_to_event_inherited_budunits(self):
         etl_event_pack_json_to_event_inherited_budunits(self._fisc_mstr_dir)
 
@@ -115,9 +112,6 @@ class WorldUnit:
 
     def fisc_gut_to_fisc_job(self):
         etl_fisc_gut_to_fisc_job(self._fisc_mstr_dir)
-
-    def fisc_ote1_agg_csvs2jsons(self):
-        etl_fisc_ote1_agg_csvs2jsons(self._fisc_mstr_dir)
 
     def calc_fisc_deal_acct_mandate_net_ledgers(self):
         mstr_dir = self._fisc_mstr_dir
@@ -169,7 +163,6 @@ class WorldUnit:
 
         # # create fiscunits
         # self.fisc_agg_tables_to_fisc_jsons(cursor)
-        # self.fisc_ote1_agg_csvs2jsons()
 
         # # create all fisc_job and mandate reports
         # self.fisc_gut_to_fisc_job()

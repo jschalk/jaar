@@ -122,11 +122,9 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
         assert not os_path_exists(a23_sue_job_path)
         assert not db_table_exists(cursor, fisc_event_time_agg_tablename)
         assert not db_table_exists(cursor, fisc_ote1_agg_tablename)
-        # self.fisc_ote1_agg_csvs2jsons()
 
         # # create budunits
         # self.bud_tables_to_event_bud_csvs(cursor)
-        # self.event_bud_csvs_to_pack_json()
         # self.event_inherited_budunits_to_fisc_gut()
 
         # # create all fisc_job and mandate reports
@@ -280,11 +278,9 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateDealCashRows(
         assert not db_table_exists(cursor, fisc_ote1_agg_tablename)
         assert not os_path_exists(sue37_mandate_path)
         # self.fisc_agg_tables_to_fisc_ote1_agg(cursor)
-        # self.fisc_ote1_agg_csvs2jsons()
 
         # # create budunits
         # self.bud_tables_to_event_bud_csvs(cursor)
-        # self.event_bud_csvs_to_pack_json()
         # self.event_inherited_budunits_to_fisc_gut()
 
         # # create all fisc_job and mandate reports

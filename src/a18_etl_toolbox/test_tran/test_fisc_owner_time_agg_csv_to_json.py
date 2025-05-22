@@ -9,9 +9,9 @@ from src.a12_hub_tools.hub_path import (
     create_fisc_ote1_csv_path,
     create_fisc_ote1_json_path,
 )
-from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic._utils.env_a19 import (
-    get_module_temp_dir as worlds_dir,
+from src.a18_etl_toolbox.transformers import etl_fisc_ote1_agg_csvs2jsons
+from src.a18_etl_toolbox._utils.env_a18 import (
+    get_module_temp_dir,
     env_dir_setup_cleanup,
 )
 from os.path import exists as os_path_exists
@@ -21,7 +21,6 @@ def test_WorldUnit_fisc_ote1_agg_csvs2jsons_CreatesFile_Scenaro0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz", worlds_dir())
     bob_str = "Bob"
     sue_str = "Sue"
     event3 = 3
@@ -30,7 +29,7 @@ def test_WorldUnit_fisc_ote1_agg_csvs2jsons_CreatesFile_Scenaro0(
     accord45_str = "accord45"
     timepoint55 = 55
     timepoint66 = 66
-    fisc_mstr_dir = fizz_world._fisc_mstr_dir
+    fisc_mstr_dir = get_module_temp_dir()
     a23_event_time_p = create_fisc_ote1_csv_path(fisc_mstr_dir, accord23_str)
     a45_event_time_p = create_fisc_ote1_csv_path(fisc_mstr_dir, accord45_str)
     a23_event_time_csv = f"""{fisc_label_str()},{owner_name_str()},{event_int_str()},{deal_time_str()},error_message
@@ -50,7 +49,7 @@ def test_WorldUnit_fisc_ote1_agg_csvs2jsons_CreatesFile_Scenaro0(
     assert os_path_exists(a45_ote1_json_path) is False
 
     # WHEN
-    fizz_world.fisc_ote1_agg_csvs2jsons()
+    etl_fisc_ote1_agg_csvs2jsons(fisc_mstr_dir)
 
     # THEN
     assert os_path_exists(a23_ote1_json_path)
