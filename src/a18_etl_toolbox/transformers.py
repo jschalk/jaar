@@ -85,7 +85,6 @@ from src.a17_idea_logic.idea_db_tool import (
     get_idea_into_dimen_raw_query,
 )
 from src.a17_idea_logic.pidgin_toolbox import init_pidginunit_from_dir
-from src.a18_etl_toolbox.tran_path import create_brick_pidgin_path
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
     create_sound_and_voice_tables,
@@ -127,14 +126,6 @@ from src.a18_etl_toolbox.db_obj_tool import (
     get_fisc_dict_from_voice_tables,
 )
 from src.a18_etl_toolbox.idea_collector import get_all_idea_dataframes, IdeaFileRef
-from src.a18_etl_toolbox.pidgin_agg import (
-    pidginheartbook_shop,
-    PidginHeartRow,
-    PidginHeartBook,
-    pidginbodybook_shop,
-    PidginBodyRow,
-    PidginBodyBook,
-)
 from pandas import (
     read_excel as pandas_read_excel,
     DataFrame,
@@ -143,71 +134,6 @@ from pandas import (
 from os.path import exists as os_path_exists
 from sqlite3 import Connection as sqlite3_Connection, Cursor as sqlite3_Cursor
 from copy import deepcopy as copy_deepcopy
-
-
-class not_given_pidgin_dimen_Exception(Exception):
-    pass
-
-
-MAPS_DIMENS = {
-    "pidgin_name": "NameStr",
-    "pidgin_title": "TitleStr",
-    "pidgin_label": "LabelStr",
-    "pidgin_way": "WayStr",
-}
-
-CLASS_TYPES = {
-    "NameStr": {
-        "raw": "name_raw",
-        "agg": "name_agg",
-        "csv_filename": "name.csv",
-        "otx_obj": "otx_name",
-        "inx_obj": "inx_name",
-    },
-    "TitleStr": {
-        "raw": "title_raw",
-        "agg": "title_agg",
-        "csv_filename": "title.csv",
-        "otx_obj": "otx_title",
-        "inx_obj": "inx_title",
-    },
-    "LabelStr": {
-        "raw": "label_raw",
-        "agg": "label_agg",
-        "csv_filename": "label.csv",
-        "otx_obj": "otx_label",
-        "inx_obj": "inx_label",
-    },
-    "WayStr": {
-        "raw": "way_raw",
-        "agg": "way_agg",
-        "csv_filename": "way.csv",
-        "otx_obj": "otx_way",
-        "inx_obj": "inx_way",
-    },
-}
-
-
-def get_class_type(pidgin_dimen: str) -> str:
-    if pidgin_dimen not in MAPS_DIMENS:
-        raise not_given_pidgin_dimen_Exception("not given pidgin_dimen")
-    return MAPS_DIMENS[pidgin_dimen]
-
-
-def get_sheet_raw_name(class_type: str) -> str:
-    return CLASS_TYPES[class_type]["raw"]
-
-
-def get_sheet_agg_name(class_type: str) -> str:
-    return CLASS_TYPES[class_type]["agg"]
-
-
-def get_otx_obj(class_type, x_row) -> str:
-    return x_row[CLASS_TYPES[class_type]["otx_obj"]]
-
-
-def get_inx_obj(class_type, x_row) -> str:
-    return x_row[CLASS_TYPES[class_type]["inx_obj"]]
 
 
 def etl_mud_dfs_to_brick_raw_tables(conn: sqlite3_Connection, mud_dir: str):
@@ -674,240 +600,8 @@ def etl_brick_valid_table_into_old_prime_table(
     cursor.execute(insert_select_sqlstr)
 
 
-def etl_brick_agg_df_to_brick_pidgin_raw_df(
-    legitimate_events: set[EventInt], brick_dir: str
-):
-    etl_brick_agg_dfs_to_pidgin_name_raw(legitimate_events, brick_dir)
-    etl_brick_agg_dfs_to_pidgin_title_raw(legitimate_events, brick_dir)
-    etl_brick_agg_dfs_to_pidgin_label_raw(legitimate_events, brick_dir)
-    etl_brick_agg_dfs_to_pidgin_way_raw(legitimate_events, brick_dir)
-
-
-def etl_brick_agg_dfs_to_pidgin_name_raw(
-    legitimate_events: set[EventInt], brick_dir: str
-):
-    brick_agg_single_to_pidgin_raw("pidgin_name", legitimate_events, brick_dir)
-
-
-def etl_brick_agg_dfs_to_pidgin_title_raw(
-    legitimate_events: set[EventInt], brick_dir: str
-):
-    brick_agg_single_to_pidgin_raw("pidgin_title", legitimate_events, brick_dir)
-
-
-def etl_brick_agg_dfs_to_pidgin_label_raw(
-    legitimate_events: set[EventInt], brick_dir: str
-):
-    brick_agg_single_to_pidgin_raw("pidgin_label", legitimate_events, brick_dir)
-
-
-def etl_brick_agg_dfs_to_pidgin_way_raw(
-    legitimate_events: set[EventInt], brick_dir: str
-):
-    brick_agg_single_to_pidgin_raw("pidgin_way", legitimate_events, brick_dir)
-
-
-def brick_agg_single_to_pidgin_raw(
-    pidgin_dimen: str, legitimate_events: set[EventInt], brick_dir: str
-):
-    x_events = legitimate_events
-    transformer = BrickAggToPidginRawTransformer(brick_dir, pidgin_dimen, x_events)
-    transformer.transform()
-
-
-class BrickAggToPidginRawTransformer:
-    def __init__(
-        self, brick_dir: str, pidgin_dimen: str, legitmate_events: set[EventInt]
-    ):
-        self.brick_dir = brick_dir
-        self.legitmate_events = legitmate_events
-        self.pidgin_dimen = pidgin_dimen
-        self.class_type = get_class_type(pidgin_dimen)
-
-    def transform(self):
-        dimen_ideas = get_idea_dimen_ref().get(self.pidgin_dimen)
-        pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_dimen)
-        pidgin_columns.update({"event_int", "face_name"})
-        pidgin_columns = get_default_sorted_list(pidgin_columns)
-        pidgin_columns.insert(0, "idea_number")
-        # empty df with idea_number, event_int, face_name, idea_columns...
-        pidgin_df = DataFrame(columns=pidgin_columns)
-        for idea_number in sorted(dimen_ideas):
-            idea_filename = f"{idea_number}.xlsx"
-            brick_idea_path = create_path(self.brick_dir, idea_filename)
-            if os_path_exists(brick_idea_path):
-                self.insert_raw_rows(
-                    pidgin_df, idea_number, brick_idea_path, pidgin_columns
-                )
-        pidgin_file_path = create_brick_pidgin_path(self.brick_dir)
-        upsert_sheet(pidgin_file_path, get_sheet_raw_name(self.class_type), pidgin_df)
-
-    def insert_raw_rows(
-        self,
-        raw_df: DataFrame,
-        idea_number: str,
-        brick_idea_path: str,
-        df_columns: list[str],
-    ):
-        brick_agg_df = pandas_read_excel(brick_idea_path, sheet_name="brick_agg")
-        df_missing_cols = set(df_columns).difference(brick_agg_df.columns)
-
-        for index, x_row in brick_agg_df.iterrows():
-            event_int = x_row["event_int"]
-            if event_int in self.legitmate_events:
-                face_name = x_row["face_name"]
-                otx_bridge = None
-                if "otx_bridge" not in df_missing_cols:
-                    otx_bridge = x_row["otx_bridge"]
-                inx_bridge = None
-                if "inx_bridge" not in df_missing_cols:
-                    inx_bridge = x_row["inx_bridge"]
-                unknown_term = None
-                if "unknown_term" not in df_missing_cols:
-                    unknown_term = x_row["unknown_term"]
-                df_len = len(raw_df.index)
-                raw_df.loc[df_len] = [
-                    idea_number,
-                    event_int,
-                    face_name,
-                    get_otx_obj(self.class_type, x_row),
-                    self.get_inx_obj(x_row, df_missing_cols),
-                    otx_bridge,
-                    inx_bridge,
-                    unknown_term,
-                ]
-
-    def get_inx_obj(self, x_row, missing_col: set[str]) -> str:
-        if self.class_type == "NameStr" and "inx_name" not in missing_col:
-            return x_row["inx_name"]
-        elif self.class_type == "TitleStr" and "inx_title" not in missing_col:
-            return x_row["inx_title"]
-        elif self.class_type == "LabelStr" and "inx_label" not in missing_col:
-            return x_row["inx_label"]
-        elif self.class_type == "WayStr" and "inx_way" not in missing_col:
-            return x_row["inx_way"]
-        return None
-
-
-def etl_pidgin_name_raw_to_name_agg(brick_dir: str):
-    etl_pidgin_single_raw_to_agg(brick_dir, "pidgin_name")
-
-
-def etl_pidgin_title_raw_to_title_agg(brick_dir: str):
-    etl_pidgin_single_raw_to_agg(brick_dir, "pidgin_title")
-
-
-def etl_pidgin_way_raw_to_way_agg(brick_dir: str):
-    etl_pidgin_single_raw_to_agg(brick_dir, "pidgin_way")
-
-
-def etl_pidgin_label_raw_to_label_agg(brick_dir: str):
-    etl_pidgin_single_raw_to_agg(brick_dir, "pidgin_label")
-
-
-def etl_pidgin_single_raw_to_agg(brick_dir: str, map_dimen: str):
-    transformer = PidginRawToAggTransformer(brick_dir, map_dimen)
-    transformer.transform()
-
-
-def etl_brick_pidgin_raw_df_to_pidgin_agg_df(brick_dir):
-    etl_pidgin_name_raw_to_name_agg(brick_dir)
-    etl_pidgin_title_raw_to_title_agg(brick_dir)
-    etl_pidgin_way_raw_to_way_agg(brick_dir)
-    etl_pidgin_label_raw_to_label_agg(brick_dir)
-
-
-class PidginRawToAggTransformer:
-    def __init__(self, brick_dir: str, pidgin_dimen: str):
-        self.brick_dir = brick_dir
-        self.pidgin_dimen = pidgin_dimen
-        self.file_path = create_brick_pidgin_path(self.brick_dir)
-        self.class_type = get_class_type(self.pidgin_dimen)
-
-    def transform(self):
-        pidgin_columns = get_quick_pidgens_column_ref().get(self.pidgin_dimen)
-        pidgin_columns.update({"event_int", "face_name"})
-        pidgin_columns = get_default_sorted_list(pidgin_columns)
-        pidgin_agg_df = DataFrame(columns=pidgin_columns)
-        self.insert_agg_rows(pidgin_agg_df)
-        upsert_sheet(self.file_path, get_sheet_agg_name(self.class_type), pidgin_agg_df)
-
-    def insert_agg_rows(self, pidgin_agg_df: DataFrame):
-        pidgin_file_path = create_brick_pidgin_path(self.brick_dir)
-        raw_sheet_name = get_sheet_raw_name(self.class_type)
-        raw_df = pandas_read_excel(pidgin_file_path, sheet_name=raw_sheet_name)
-        x_pidginbodybook = self.get_validated_pidginbodybook(raw_df)
-        for pidginbodylist in x_pidginbodybook.get_valid_pidginbodylists():
-            pidgin_agg_df.loc[len(pidgin_agg_df)] = pidginbodylist
-
-    def get_validated_pidginbodybook(self, raw_df: DataFrame) -> PidginBodyBook:
-        x_pidginheartbook = self.get_validated_pidginheart(raw_df)
-        x_pidginbodybook = pidginbodybook_shop(x_pidginheartbook)
-        for index, x_row in raw_df.iterrows():
-            x_pidginbodyrow = PidginBodyRow(
-                event_int=x_row["event_int"],
-                face_name=x_row["face_name"],
-                otx_str=get_otx_obj(self.class_type, x_row),
-                inx_str=get_inx_obj(self.class_type, x_row),
-            )
-            x_pidginbodybook.eval_pidginbodyrow(x_pidginbodyrow)
-        return x_pidginbodybook
-
-    def get_validated_pidginheart(self, raw_df: DataFrame) -> PidginHeartBook:
-        x_pidginheartbook = pidginheartbook_shop()
-        for index, x_row in raw_df.iterrows():
-            x_pidginheartrow = PidginHeartRow(
-                event_int=x_row["event_int"],
-                face_name=x_row["face_name"],
-                otx_bridge=x_row["otx_bridge"],
-                inx_bridge=x_row["inx_bridge"],
-                unknown_term=x_row["unknown_term"],
-            )
-            x_pidginheartbook.eval_pidginheartrow(x_pidginheartrow)
-        return x_pidginheartbook
-
-
-def etl_brick_pidgin_agg_df_to_otz_face_pidgin_agg_df(brick_dir: str, faces_dir: str):
-    agg_pidgin = create_brick_pidgin_path(brick_dir)
-    for class_type in CLASS_TYPES.keys():
-        agg_sheet_name = CLASS_TYPES[class_type]["agg"]
-        if sheet_exists(agg_pidgin, agg_sheet_name):
-            split_excel_into_dirs(
-                input_file=agg_pidgin,
-                output_dir=faces_dir,
-                column_name="face_name",
-                filename="pidgin",
-                sheet_name=agg_sheet_name,
-            )
-
-
-def etl_face_pidgin_to_event_pidgins(face_dir: str):
-    face_pidgin_path = create_brick_pidgin_path(face_dir)
-    for class_type in CLASS_TYPES.keys():
-        agg_sheet_name = CLASS_TYPES[class_type]["agg"]
-        if sheet_exists(face_pidgin_path, agg_sheet_name):
-            split_excel_into_events_dirs(face_pidgin_path, face_dir, agg_sheet_name)
-
-
-def etl_otz_face_pidgins_df_to_otz_event_pidgins_df(faces_dir: str):
-    for face_name_dir in get_level1_dirs(faces_dir):
-        face_dir = create_path(faces_dir, face_name_dir)
-        etl_face_pidgin_to_event_pidgins(face_dir)
-
-
 def split_excel_into_events_dirs(pidgin_file: str, face_dir: str, sheet_name: str):
     split_excel_into_dirs(pidgin_file, face_dir, "event_int", "pidgin", sheet_name)
-
-
-def event_pidgin_to_pidgin_csv_files(event_pidgin_dir: str):
-    event_pidgin_path = create_brick_pidgin_path(event_pidgin_dir)
-    for class_type in CLASS_TYPES.keys():
-        agg_sheet_name = CLASS_TYPES[class_type]["agg"]
-        csv_filename = CLASS_TYPES[class_type]["csv_filename"]
-        if sheet_exists(event_pidgin_path, agg_sheet_name):
-            name_csv_path = create_path(event_pidgin_dir, csv_filename)
-            name_df = pandas_read_excel(event_pidgin_path, agg_sheet_name)
-            name_df.to_csv(name_csv_path, index=False)
 
 
 def _get_all_syntax_otz_dir_event_dirs(faces_dir) -> list[str]:
@@ -919,11 +613,6 @@ def _get_all_syntax_otz_dir_event_dirs(faces_dir) -> list[str]:
             create_path(face_dir, event_dir) for event_dir in event_dirs.keys()
         )
     return full_event_dirs
-
-
-def etl_otz_event_pidgins_to_otz_pidgin_csv_files(faces_dir: str):
-    for event_pidgin_dir in _get_all_syntax_otz_dir_event_dirs(faces_dir):
-        event_pidgin_to_pidgin_csv_files(event_pidgin_dir)
 
 
 def etl_event_pidgin_csvs_to_pidgin_json(event_dir: str):

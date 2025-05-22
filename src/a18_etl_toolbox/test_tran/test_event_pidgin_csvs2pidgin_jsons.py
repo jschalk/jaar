@@ -138,9 +138,9 @@ def test_etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons_Scenario0_1Event_way(
     # event3_dir = create_path(bob_dir, event3)
     # event7_dir = create_path(bob_dir, event7)
     # event9_dir = create_path(z
-    # event3_pidgin_file_path = create_otx_event_pidgin_path(event3_dir)
-    # event7_pidgin_file_path = create_otx_event_pidgin_path(event7_dir)
-    # event9_pidgin_file_path = create_otx_event_pidgin_path(event9_dir)
+    # event3_pidgin_file_path = creain_path(event3_dir)
+    # event7_pidgin_file_path = creain_path(event7_dir)
+    # event9_pidgin_file_path = creain_path(event9_dir)
     # event3_way_csv_file_path = create_path(event3_dir, "way.csv")
     # event7_way_csv_file_path = create_path(event7_dir, "way.csv")
     # event9_way_csv_file_path = create_path(event9_dir, "way.csv")

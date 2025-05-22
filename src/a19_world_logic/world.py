@@ -29,11 +29,6 @@ from src.a18_etl_toolbox.transformers import (
     etl_brick_raw_tables_to_events_brick_agg_table,
     etl_events_brick_agg_table_to_events_brick_valid_table,
     etl_brick_agg_non_pidgin_ideas_to_brick_valid,
-    etl_brick_pidgin_raw_df_to_pidgin_agg_df,
-    etl_brick_agg_df_to_brick_pidgin_raw_df,
-    etl_brick_pidgin_agg_df_to_otz_face_pidgin_agg_df,
-    etl_otz_face_pidgins_df_to_otz_event_pidgins_df,
-    etl_otz_event_pidgins_to_otz_pidgin_csv_files,
     etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons,
     etl_pidgin_jsons_inherit_younger_pidgins,
     get_pidgin_events_by_dirs,
@@ -135,29 +130,10 @@ class WorldUnit:
             self._brick_dir, set(self._events.keys())
         )
 
-    def brick_agg_df_to_brick_pidgin_raw_df(self):
-        etl_brick_agg_df_to_brick_pidgin_raw_df(
-            set(self._events.keys()), self._brick_dir
-        )
-
-    def brick_pidgin_raw_df_to_pidgin_agg_df(self):
-        etl_brick_pidgin_raw_df_to_pidgin_agg_df(self._brick_dir)
-
-    def brick_pidgin_agg_df_to_otz_face_pidgin_agg_df(self):
-        etl_brick_pidgin_agg_df_to_otz_face_pidgin_agg_df(
-            self._brick_dir, self._syntax_otz_dir
-        )
-
     def pidgin_jsons_inherit_younger_pidgins(self):
         etl_pidgin_jsons_inherit_younger_pidgins(
             self._syntax_otz_dir, self._pidgin_events
         )
-
-    def otz_face_pidgins_df_to_otz_event_pidgins_df(self):
-        etl_otz_face_pidgins_df_to_otz_event_pidgins_df(self._syntax_otz_dir)
-
-    def otz_event_pidgins_to_otz_pidgin_csv_files(self):
-        etl_otz_event_pidgins_to_otz_pidgin_csv_files(self._syntax_otz_dir)
 
     def otz_event_pidgins_csvs_to_otz_pidgin_jsons(self):
         etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons(self._syntax_otz_dir)
