@@ -28,7 +28,6 @@ from src.a18_etl_toolbox.transformers import (
     etl_voice_raw_tables_to_fisc_ote1_agg,
     etl_brick_raw_tables_to_events_brick_agg_table,
     etl_events_brick_agg_table_to_events_brick_valid_table,
-    etl_brick_agg_non_pidgin_ideas_to_brick_valid,
     etl_pidgin_jsons_inherit_younger_pidgins,
     get_pidgin_events_by_dirs,
     etl_otz_inx_event_ideas_to_inz_faces,
@@ -119,11 +118,6 @@ class WorldUnit:
         self, conn: sqlite3_Connection, cursor: sqlite3_Cursor
     ):
         etl_brick_raw_tables_to_brick_agg_tables(cursor)
-
-    def brick_agg_non_pidgin_ideas_to_brick_valid(self):
-        etl_brick_agg_non_pidgin_ideas_to_brick_valid(
-            self._brick_dir, set(self._events.keys())
-        )
 
     def pidgin_jsons_inherit_younger_pidgins(self):
         etl_pidgin_jsons_inherit_younger_pidgins(
