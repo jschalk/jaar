@@ -353,6 +353,25 @@ def test_WorldUnit_mud_to_clarity_v2_with_cursor_Scenario0_br000113PopulatesTabl
 #     br00113_df = DataFrame([br00113row0], columns=br00113_columns)
 #     br00113_ex0_str = f"example0_{br00113_str}"
 #     upsert_sheet(mud_file_path, br00113_ex0_str, br00113_df)
+
+#     br00001_columns = [
+#         event_int_str(),
+#         face_name_str(),
+#         fisc_label_str(),
+#         owner_name_str(),
+#         deal_time_str(),
+#         quota_str(),
+#         celldepth_str(),
+#     ]
+#     tp37 = 37
+#     sue_quota = 235
+#     sue_celldepth = 3
+#     br1row0 = [e3, sue_str, a23_str, sue_str, tp37, sue_quota, sue_celldepth]
+#     br00001_1df = DataFrame([br1row0], columns=br00001_columns)
+#     br00001_ex0_str = "example0_br00001"
+#     upsert_sheet(mud_file_path, br00001_ex0_str, br00001_1df)
+
+#     # Names of tables
 #     br00113_raw = f"{br00113_str}_brick_raw"
 #     br00113_agg = f"{br00113_str}_brick_agg"
 #     br00113_valid = f"{br00113_str}_brick_valid"
@@ -384,7 +403,7 @@ def test_WorldUnit_mud_to_clarity_v2_with_cursor_Scenario0_br000113PopulatesTabl
 #     a23_e1_expressed_pack_path = expressed_path(mstr_dir, a23_str, sue_inx, e3)
 #     a23_sue_gut_path = create_gut_path(mstr_dir, a23_str, sue_inx)
 #     a23_sue_job_path = create_job_path(mstr_dir, a23_str, sue_inx)
-#     # sue37_mandate_path = deal_mandate(mstr_dir, a23_str, sue_str, tp37)
+#     sue37_mandate_path = deal_mandate(mstr_dir, a23_str, sue_str, tp37)
 
 #     with sqlite3_connect(":memory:") as db_conn:
 #         cursor = db_conn.cursor()
@@ -414,9 +433,9 @@ def test_WorldUnit_mud_to_clarity_v2_with_cursor_Scenario0_br000113PopulatesTabl
 #         assert not os_path_exists(a23_e1_expressed_pack_path)
 #         assert not os_path_exists(a23_sue_gut_path)
 #         assert not os_path_exists(a23_sue_job_path)
-
 #         assert not db_table_exists(cursor, fisc_event_time_agg_tablename)
 #         assert not db_table_exists(cursor, fisc_ote1_agg_tablename)
+#         assert not os_path_exists(sue37_mandate_path)
 #         # self.fisc_agg_tables_to_fisc_ote1_agg(cursor)
 #         # self.fisc_table2fisc_ote1_agg_csvs(cursor)
 #         # self.fisc_ote1_agg_csvs2jsons()
@@ -436,13 +455,13 @@ def test_WorldUnit_mud_to_clarity_v2_with_cursor_Scenario0_br000113PopulatesTabl
 #         # THEN
 #         assert get_row_count(cursor, br00113_raw) == 1
 #         assert get_row_count(cursor, br00113_agg) == 1
-#         assert get_row_count(cursor, events_brick_agg_tablename) == 1
-#         assert get_row_count(cursor, events_brick_valid_tablename) == 1
-#         assert get_row_count(cursor, br00113_valid) == 1
-#         assert get_row_count(cursor, pidname_sound_raw) == 1
-#         assert get_row_count(cursor, fisunit_sound_raw) == 1
-#         assert get_row_count(cursor, budunit_sound_put_raw) == 1
-#         assert get_row_count(cursor, budacct_sound_put_raw) == 1
+#         assert get_row_count(cursor, events_brick_agg_tablename) == 2
+#         assert get_row_count(cursor, events_brick_valid_tablename) == 2
+#         assert get_row_count(cursor, br00113_valid) == 2
+#         assert get_row_count(cursor, pidname_sound_raw) == 2
+#         assert get_row_count(cursor, fisunit_sound_raw) == 4
+#         assert get_row_count(cursor, budunit_sound_put_raw) == 4
+#         assert get_row_count(cursor, budacct_sound_put_raw) == 2
 #         assert get_row_count(cursor, pidname_sound_agg) == 1
 #         assert get_row_count(cursor, fisunit_sound_agg) == 1
 #         assert get_row_count(cursor, budunit_sound_put_agg) == 1
@@ -463,5 +482,6 @@ def test_WorldUnit_mud_to_clarity_v2_with_cursor_Scenario0_br000113PopulatesTabl
 #         assert os_path_exists(a23_e1_expressed_pack_path)
 #         assert os_path_exists(a23_sue_gut_path)
 #         assert os_path_exists(a23_sue_job_path)
-#         # assert get_row_count(cursor, fisc_event_time_agg_tablename) == 0
-#         # assert get_row_count(cursor, fisc_ote1_agg_tablename) == 0
+#         assert get_row_count(cursor, fisc_event_time_agg_tablename) == 1
+#         assert get_row_count(cursor, fisc_ote1_agg_tablename) == 1
+#         assert not os_path_exists(sue37_mandate_path)

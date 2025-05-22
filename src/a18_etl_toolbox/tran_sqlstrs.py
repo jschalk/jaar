@@ -2114,7 +2114,21 @@ FROM (
 ORDER BY fisc_label, owner_name, event_int, deal_time
 ;
 """
-
+INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR = """
+INSERT INTO fisc_ote1_agg (fisc_label, owner_name, event_int, deal_time)
+SELECT fisc_label, owner_name, event_int, deal_time
+FROM (
+    SELECT 
+      fisc_label_inx fisc_label
+    , owner_name_inx owner_name
+    , event_int
+    , deal_time
+    FROM fisc_dealunit_v_raw
+    GROUP BY fisc_label_inx, owner_name_inx, event_int, deal_time
+)
+ORDER BY fisc_label, owner_name, event_int, deal_time
+;
+"""
 
 FISCASH_FU1_SELECT_SQLSTR = "SELECT fisc_label, owner_name, acct_name, tran_time, amount FROM fisc_cashbook_agg WHERE fisc_label = "
 FISDEAL_FU1_SELECT_SQLSTR = "SELECT fisc_label, owner_name, deal_time, quota, celldepth FROM fisc_dealunit_agg WHERE fisc_label = "

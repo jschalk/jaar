@@ -96,6 +96,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR,
     CREATE_FISC_OTE1_AGG_SQLSTR,
     INSERT_FISC_OTE1_AGG_SQLSTR,
+    INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR,
     get_fisc_fu1_select_sqlstrs,
     # get_bud_bu1_select_sqlstrs,
 )
@@ -1240,6 +1241,30 @@ ORDER BY {fisc_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_s
 """
     # WHEN / THEN
     assert INSERT_FISC_OTE1_AGG_SQLSTR == expected_INSERT_sqlstr
+
+
+# TODO create test to prove this insert should grab minimun event_int instead of just event_int
+# TODO create test to prove this insert should never grab when error message is not null in source table
+def test_INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR_Exists():
+    # ESTABLISH
+    fisdeal_v_raw_tablename = create_prime_tablename(fisc_dealunit_str(), "v", "raw")
+    expected_INSERT_sqlstr = f"""
+INSERT INTO fisc_ote1_agg ({fisc_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()})
+SELECT {fisc_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
+FROM (
+    SELECT 
+      {fisc_label_str()}_inx {fisc_label_str()}
+    , {owner_name_str()}_inx {owner_name_str()}
+    , {event_int_str()}
+    , {deal_time_str()}
+    FROM {fisdeal_v_raw_tablename}
+    GROUP BY {fisc_label_str()}_inx, {owner_name_str()}_inx, {event_int_str()}, {deal_time_str()}
+)
+ORDER BY {fisc_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
+;
+"""
+    # WHEN / THEN
+    assert INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR == expected_INSERT_sqlstr
 
 
 def test_get_fisc_fu1_select_sqlstrs_ReturnsObj_HasAllNeededKeys():

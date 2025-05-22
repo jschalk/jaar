@@ -120,6 +120,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR,
     CREATE_FISC_OTE1_AGG_SQLSTR,
     INSERT_FISC_OTE1_AGG_SQLSTR,
+    INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR,
 )
 from src.a18_etl_toolbox.db_obj_tool import (
     get_fisc_dict_from_db,
@@ -1186,6 +1187,13 @@ def fisc_agg_tables2fisc_event_time_agg(conn_or_cursor: sqlite3_Connection):
 def etl_fisc_agg_tables_to_fisc_ote1_agg(conn_or_cursor: sqlite3_Connection):
     conn_or_cursor.execute(CREATE_FISC_OTE1_AGG_SQLSTR)
     conn_or_cursor.execute(INSERT_FISC_OTE1_AGG_SQLSTR)
+
+
+def etl_voice_raw_tables_to_fisc_ote1_agg(conn_or_cursor: sqlite3_Connection):
+    conn_or_cursor.execute(CREATE_FISC_OTE1_AGG_SQLSTR)
+    print(CREATE_FISC_OTE1_AGG_SQLSTR)
+    print(INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR)
+    conn_or_cursor.execute(INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR)
 
 
 def etl_fisc_table2fisc_ote1_agg_csvs(

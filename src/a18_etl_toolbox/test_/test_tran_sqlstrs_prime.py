@@ -269,7 +269,7 @@ def create_fisc_voice_raw_table_sqlstr(x_dimen):
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
-def create_fisc_voice_agg_table_sqlstr(x_dimen):
+def create_fisc_voice_agg_table_sqlstr(x_dimen: str):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "agg")
     columns = get_all_dimen_columns_set(x_dimen)
     columns.remove(event_int_str())
@@ -430,7 +430,7 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckFiscDimens():
         print(f'CREATE_{abbv7.upper()}_SOUND_AGG_SQLSTR= """{expected_s_agg_sqlstr}"""')
         print(f'CREATE_{abbv7.upper()}_VOICE_RAW_SQLSTR= """{expected_v_raw_sqlstr}"""')
         print(f'CREATE_{abbv7.upper()}_VOICE_AGG_SQLSTR= """{expected_v_agg_sqlstr}"""')
-
+        print("huh")
         # print(f'"{s_raw_tablename}": CREATE_{abbv7.upper()}_SOUND_RAW_SQLSTR,')
         # print(f'"{s_agg_tablename}": CREATE_{abbv7.upper()}_SOUND_AGG_SQLSTR,')
         # print(f'"{v_raw_tablename}": CREATE_{abbv7.upper()}_VOICE_RAW_SQLSTR,')
