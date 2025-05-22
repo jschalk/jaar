@@ -29,12 +29,8 @@ from src.a18_etl_toolbox.transformers import (
     etl_brick_raw_tables_to_events_brick_agg_table,
     etl_events_brick_agg_table_to_events_brick_valid_table,
     etl_brick_agg_non_pidgin_ideas_to_brick_valid,
-    etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons,
     etl_pidgin_jsons_inherit_younger_pidgins,
     get_pidgin_events_by_dirs,
-    etl_brick_ideas_to_otz_face_ideas,
-    etl_otz_face_ideas_to_otz_event_otx_ideas,
-    etl_otz_event_ideas_to_inz_events,
     etl_otz_inx_event_ideas_to_inz_faces,
     etl_inz_face_ideas_to_csv_files,
     etl_inz_face_csv_files2idea_raw_tables,
@@ -134,19 +130,6 @@ class WorldUnit:
         etl_pidgin_jsons_inherit_younger_pidgins(
             self._syntax_otz_dir, self._pidgin_events
         )
-
-    def otz_event_pidgins_csvs_to_otz_pidgin_jsons(self):
-        etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons(self._syntax_otz_dir)
-        self._set_pidgin_events()
-
-    def brick_ideas_to_otz_face_ideas(self):
-        etl_brick_ideas_to_otz_face_ideas(self._brick_dir, self._syntax_otz_dir)
-
-    def otz_face_ideas_to_otz_event_otx_ideas(self):
-        etl_otz_face_ideas_to_otz_event_otx_ideas(self._syntax_otz_dir)
-
-    def otz_event_ideas_to_inz_events(self):
-        etl_otz_event_ideas_to_inz_events(self._syntax_otz_dir, self._pidgin_events)
 
     def otz_inx_event_ideas_to_inz_faces(self):
         etl_otz_inx_event_ideas_to_inz_faces(self._syntax_otz_dir, self._syntax_inz_dir)

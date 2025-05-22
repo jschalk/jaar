@@ -620,11 +620,6 @@ def etl_event_pidgin_csvs_to_pidgin_json(event_dir: str):
     save_file(event_dir, "pidgin.json", pidginunit.get_json(), replace=True)
 
 
-def etl_otz_event_pidgins_csvs_to_otz_pidgin_jsons(faces_dir: str):
-    for event_pidgin_dir in _get_all_syntax_otz_dir_event_dirs(faces_dir):
-        etl_event_pidgin_csvs_to_pidgin_json(event_pidgin_dir)
-
-
 def etl_pidgin_jsons_inherit_younger_pidgins(
     faces_dir: str, pidgin_events: dict[FaceName, set[EventInt]]
 ):
@@ -649,33 +644,6 @@ def get_event_pidgin_path(
     return create_path(event_dir, "pidgin.json")
 
 
-def etl_brick_ideas_to_otz_face_ideas(brick_dir: str, faces_dir: str):
-    for brick_br_ref in get_existing_excel_idea_file_refs(brick_dir):
-        brick_idea_path = create_path(brick_dir, brick_br_ref.filename)
-        if brick_br_ref.filename not in _get_pidgen_idea_format_filenames():
-            split_excel_into_dirs(
-                input_file=brick_idea_path,
-                output_dir=faces_dir,
-                column_name="face_name",
-                filename=brick_br_ref.idea_number,
-                sheet_name="brick_valid",
-            )
-
-
-def etl_otz_face_ideas_to_otz_event_otx_ideas(faces_dir: str):
-    for face_name_dir in get_level1_dirs(faces_dir):
-        face_dir = create_path(faces_dir, face_name_dir)
-        for face_br_ref in get_existing_excel_idea_file_refs(face_dir):
-            face_idea_path = create_path(face_dir, face_br_ref.filename)
-            split_excel_into_dirs(
-                input_file=face_idea_path,
-                output_dir=face_dir,
-                column_name="event_int",
-                filename=face_br_ref.idea_number,
-                sheet_name="brick_valid",
-            )
-
-
 def get_pidgin_events_by_dirs(faces_dir: str) -> dict[FaceName, set[EventInt]]:
     pidgin_events = {}
     for face_name in get_level1_dirs(faces_dir):
@@ -697,29 +665,6 @@ def get_most_recent_event_int(
 ) -> EventInt:
     recent_event_ints = [e_id for e_id in event_set if e_id <= max_event_int]
     return max(recent_event_ints, default=None)
-
-
-def etl_otz_event_ideas_to_inz_events(
-    syntax_otz_dir: str, event_pidgins: dict[FaceName, set[EventInt]]
-):
-    for face_name in get_level1_dirs(syntax_otz_dir):
-        face_pidgin_events = event_pidgins.get(face_name)
-        if face_pidgin_events is None:
-            face_pidgin_events = set()
-        face_dir = create_path(syntax_otz_dir, face_name)
-        for event_int in get_level1_dirs(face_dir):
-            event_dir = create_path(face_dir, event_int)
-            event_int = int(event_int)
-            pidgin_event_int = get_most_recent_event_int(face_pidgin_events, event_int)
-            for event_br_ref in get_existing_excel_idea_file_refs(event_dir):
-                event_idea_path = create_path(event_dir, event_br_ref.filename)
-                idea_df = pandas_read_excel(event_idea_path, "brick_valid")
-                if pidgin_event_int != None:
-                    pidgin_event_dir = create_path(face_dir, pidgin_event_int)
-                    pidgin_path = create_path(pidgin_event_dir, "pidgin.json")
-                    x_pidginunit = get_pidginunit_from_json(open_file(pidgin_path))
-                    translate_all_columns_dataframe(idea_df, x_pidginunit)
-                upsert_sheet(event_idea_path, "inx", idea_df)
 
 
 def etl_otz_inx_event_ideas_to_inz_faces(syntax_otz_dir: str, syntax_inz_dir: str):
