@@ -57,7 +57,6 @@ class WorldUnit:
     world_time_pnigh: TimeLinePoint = None
     timeconversions: dict[TimeLineLabel, TimeConversion] = None
     _syntax_otz_dir: str = None
-    _syntax_inz_dir: str = None
     _world_dir: str = None
     _mud_dir: str = None
     _brick_dir: str = None
@@ -89,12 +88,10 @@ class WorldUnit:
     def _set_world_dirs(self):
         self._world_dir = create_path(self.worlds_dir, self.world_id)
         self._syntax_otz_dir = create_path(self._world_dir, "syntax_otz")
-        self._syntax_inz_dir = create_path(self._world_dir, "syntax_inz")
         self._brick_dir = create_path(self._world_dir, "brick")
         self._fisc_mstr_dir = create_path(self._world_dir, "fisc_mstr")
         set_dir(self._world_dir)
         set_dir(self._syntax_otz_dir)
-        set_dir(self._syntax_inz_dir)
         set_dir(self._brick_dir)
         set_dir(self._fisc_mstr_dir)
 

@@ -461,7 +461,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario3_CreatesFiles(
         assert not os_path_exists(a23_sue_gut_path)
         assert not os_path_exists(a23_sue_job_path)
         assert not os_path_exists(sue37_mandate_path)
-        assert count_dirs_files(fizz_world.worlds_dir) == 7
+        assert count_dirs_files(fizz_world.worlds_dir) == 6
 
         # WHEN
         fizz_world.mud_to_clarity_with_cursor(db_conn, cursor)
@@ -473,4 +473,4 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario3_CreatesFiles(
         assert os_path_exists(a23_sue_gut_path)
         assert os_path_exists(a23_sue_job_path)
         assert os_path_exists(sue37_mandate_path)
-        assert count_dirs_files(fizz_world.worlds_dir) == 44
+        assert count_dirs_files(fizz_world.worlds_dir) == 43
