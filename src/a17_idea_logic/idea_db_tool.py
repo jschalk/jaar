@@ -28,7 +28,7 @@ from src.a17_idea_logic.idea_config import (
     get_idea_sqlite_types,
     get_default_sorted_list,
 )
-from numpy import float64, nan as numpy_nan
+from numpy import float64
 from pandas import (
     DataFrame,
     read_csv as pandas_read_csv,

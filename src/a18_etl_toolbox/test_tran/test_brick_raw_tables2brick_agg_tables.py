@@ -11,7 +11,6 @@ from src.a17_idea_logic._utils.str_a17 import brick_raw_str, brick_agg_str
 from src.a17_idea_logic.idea_db_tool import sheet_exists, create_idea_sorted_table
 from src.a18_etl_toolbox.transformers import (
     etl_brick_raw_tables_to_brick_agg_tables,
-    etl_brick_agg_tables_to_brick_agg_dfs,
 )
 from src.a18_etl_toolbox._utils.env_a18 import (
     get_module_temp_dir,
@@ -161,68 +160,3 @@ VALUES
         print(f"{rows[0]=}")
         print(f"   {row0=}")
         assert rows[0] == row0
-
-
-def test_etl_brick_agg_tables_to_brick_agg_dfs_PopulatesAggTable_Scenario0_GroupByWorks(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    a23_str = "accord23"
-    sue_str = "Sue"
-    event1 = 1
-    event2 = 2
-    minute_360 = 360
-    minute_420 = 420
-    minute_480 = 480
-    hour6am = "6am"
-    hour7am = "7am"
-    hour8am = "8am"
-    agg_br00003_tablename = f"br00003_{brick_agg_str()}"
-    agg_br00003_columns = [
-        event_int_str(),
-        face_name_str(),
-        fisc_label_str(),
-        cumlative_minute_str(),
-        hour_label_str(),
-    ]
-    with sqlite3_connect(":memory:") as db_conn:
-        cursor = db_conn.cursor()
-        create_idea_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)
-        insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
-  {event_int_str()}
-, {face_name_str()}
-, {fisc_label_str()}
-, {cumlative_minute_str()}
-, {hour_label_str()}
-)"""
-        values_clause = f"""
-VALUES     
-  ('{event1}', '{sue_str}', '{a23_str}', '{minute_360}', '{hour6am}')
-, ('{event1}', '{sue_str}', '{a23_str}', '{minute_420}', '{hour7am}')
-, ('{event2}', '{sue_str}', '{a23_str}', '{minute_480}', '{hour8am}')
-;
-"""
-        insert_sqlstr = f"{insert_into_clause} {values_clause}"
-        cursor.execute(insert_sqlstr)
-        assert get_row_count(cursor, agg_br00003_tablename) == 3
-        brick_dir = create_path(get_module_temp_dir(), "brick")
-        brick_file_path = create_path(brick_dir, "br00003.xlsx")
-        assert not sheet_exists(brick_file_path, brick_agg_str())
-
-        # WHEN
-        etl_brick_agg_tables_to_brick_agg_dfs(db_conn, brick_dir)
-
-        # THEN
-        assert sheet_exists(brick_file_path, brick_agg_str())
-        agg_df = pandas_read_excel(brick_file_path, sheet_name=brick_agg_str())
-        row0 = [event1, sue_str, a23_str, minute_360, hour6am]
-        row1 = [event1, sue_str, a23_str, minute_420, hour7am]
-        row2 = [event2, sue_str, a23_str, minute_480, hour8am]
-        ex_agg_df = DataFrame([row0, row1, row2], columns=agg_br00003_columns)
-        print(f"{agg_df.columns=}")
-        assert len(ex_agg_df.columns) == len(agg_df.columns)
-        assert list(ex_agg_df.columns) == list(agg_df.columns)
-        assert len(agg_df) > 0
-        assert len(ex_agg_df) == len(agg_df)
-        assert len(agg_df) == 3
-        assert ex_agg_df.to_csv() == agg_df.to_csv()

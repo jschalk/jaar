@@ -107,7 +107,7 @@ def test_get_fisc_config_dict_ReturnsObj():
         monthday_distortion_str(),
         penny_str(),
         respect_bit_str(),
-        "bridge",
+        bridge_str(),
         timeline_label_str(),
         yr1_jan1_offset_str(),
         "job_listen_rotations",
@@ -134,9 +134,9 @@ def _validate_fisc_config(fisc_config: dict):
         assert dimen_dict.get(jkeys_str()) is not None
         assert dimen_dict.get(jvalues_str()) is not None
         if fisc_dimen == fisc_timeoffi_str():
-            assert dimen_dict.get("static") == "False"
+            assert dimen_dict.get("fisc_static") == "False"
         else:
-            assert dimen_dict.get("static") == "True"
+            assert dimen_dict.get("fisc_static") == "True"
         assert dimen_dict.get(atom_update()) is None
         assert dimen_dict.get(atom_insert()) is None
         assert dimen_dict.get(atom_delete()) is None

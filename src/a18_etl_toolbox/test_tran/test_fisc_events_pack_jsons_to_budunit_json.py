@@ -10,19 +10,20 @@ from src.a08_bud_atom_logic._utils.str_a08 import atom_insert
 from src.a09_pack_logic.pack import packunit_shop, get_packunit_from_json
 from src.a12_hub_tools.hub_path import (
     create_owner_event_dir_path,
-    create_budevent_path,
     create_event_all_pack_path,
     create_event_expressed_pack_path,
 )
-from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic._utils.env_a19 import (
-    get_module_temp_dir as worlds_dir,
+from src.a18_etl_toolbox.transformers import (
+    etl_event_pack_json_to_event_inherited_budunits,
+)
+from src.a18_etl_toolbox._utils.env_a18 import (
+    get_module_temp_dir,
     env_dir_setup_cleanup,
 )
 from os.path import exists as os_path_exists
 
 
-def test_WorldUnit_event_pack_json_to_event_inherited_budunits_SetsFiles_bud_json(
+def test_etl_event_pack_json_to_event_inherited_budunits_SetsFiles_bud_json(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -35,8 +36,7 @@ def test_WorldUnit_event_pack_json_to_event_inherited_budunits_SetsFiles_bud_jso
     credit77 = 77
     credit88 = 88
     a23_str = "accord23"
-    fizz_world = worldunit_shop("fizz", worlds_dir())
-    fisc_mstr_dir = fizz_world._fisc_mstr_dir
+    fisc_mstr_dir = get_module_temp_dir()
     a23_bob_e3_dir = create_owner_event_dir_path(
         fisc_mstr_dir, a23_str, bob_inx, event3
     )
@@ -74,7 +74,7 @@ def test_WorldUnit_event_pack_json_to_event_inherited_budunits_SetsFiles_bud_jso
     assert os_path_exists(e7_bud_path) is False
 
     # WHEN
-    fizz_world.event_pack_json_to_event_inherited_budunits()
+    etl_event_pack_json_to_event_inherited_budunits(fisc_mstr_dir)
 
     # THEN
     assert os_path_exists(e3_bud_path)
@@ -95,7 +95,7 @@ def test_WorldUnit_event_pack_json_to_event_inherited_budunits_SetsFiles_bud_jso
     assert generated_e7_bud.get_dict() == expected_e7_bob_bud.get_dict()
 
 
-def test_WorldUnit_event_pack_json_to_event_inherited_budunits_SetsFiles_expressed_pack(
+def test_etl_event_pack_json_to_event_inherited_budunits_SetsFiles_expressed_pack(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -109,8 +109,7 @@ def test_WorldUnit_event_pack_json_to_event_inherited_budunits_SetsFiles_express
     credit77 = 77
     credit88 = 88
     a23_str = "accord23"
-    fizz_world = worldunit_shop("fizz", worlds_dir())
-    fisc_mstr_dir = fizz_world._fisc_mstr_dir
+    fisc_mstr_dir = get_module_temp_dir()
     a23_bob_e3_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event3)
     a23_bob_e7_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event7)
     budacct_dimen = bud_acctunit_str()
@@ -145,7 +144,7 @@ def test_WorldUnit_event_pack_json_to_event_inherited_budunits_SetsFiles_express
     assert os_path_exists(e7_expressed_pack_path) is False
 
     # WHEN
-    fizz_world.event_pack_json_to_event_inherited_budunits()
+    etl_event_pack_json_to_event_inherited_budunits(fisc_mstr_dir)
 
     # THEN
     assert os_path_exists(e3_expressed_pack_path)

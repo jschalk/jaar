@@ -8,8 +8,11 @@ from src.a06_bud_logic._utils.str_a06 import (
     event_int_str,
 )
 from src.a12_hub_tools.hub_path import create_owner_event_dir_path
-from src.a18_etl_toolbox.tran_sqlstrs import create_bud_prime_tables
-from src.a18_etl_toolbox.transformers import etl_bud_tables_to_event_bud_csvs
+from src.a18_etl_toolbox.tran_sqlstrs import (
+    create_sound_and_voice_tables,
+    create_prime_tablename,
+)
+from src.a18_etl_toolbox.transformers import etl_voice_agg_to_event_bud_csvs
 from src.a18_etl_toolbox._utils.env_a18 import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
@@ -18,7 +21,7 @@ from sqlite3 import connect as sqlite3_connect
 from os.path import exists as os_path_exists
 
 
-def test_etl_bud_tables_to_event_bud_csvs_PopulatesBudPulabelTables(
+def test_etl_voice_agg_to_event_bud_csvs_PopulatesBudPulabelTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -30,7 +33,7 @@ def test_etl_bud_tables_to_event_bud_csvs_PopulatesBudPulabelTables(
     accord23_str = "accord23"
     yao_credit_belief5 = 5
     sue_credit_belief7 = 7
-    put_agg_tablename = f"{bud_acctunit_str()}_put_agg"
+    put_agg_tablename = create_prime_tablename(bud_acctunit_str(), "v", "agg", "put")
     put_agg_csv = f"{put_agg_tablename}.csv"
     x_fisc_mstr_dir = get_module_temp_dir()
     a23_bob_e3_dir = create_owner_event_dir_path(
@@ -44,7 +47,7 @@ def test_etl_bud_tables_to_event_bud_csvs_PopulatesBudPulabelTables(
 
     with sqlite3_connect(":memory:") as bud_db_conn:
         cursor = bud_db_conn.cursor()
-        create_bud_prime_tables(cursor)
+        create_sound_and_voice_tables(cursor)
         insert_raw_sqlstr = f"""
 INSERT INTO {put_agg_tablename} ({event_int_str()},{face_name_str()},{fisc_label_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()})
 VALUES
@@ -59,7 +62,7 @@ VALUES
         assert os_path_exists(a23_e7_budacct_put_path) is False
 
         # WHEN
-        etl_bud_tables_to_event_bud_csvs(cursor, x_fisc_mstr_dir)
+        etl_voice_agg_to_event_bud_csvs(cursor, x_fisc_mstr_dir)
 
         # THEN
         assert os_path_exists(a23_e3_budacct_put_path)
@@ -77,52 +80,3 @@ VALUES
 """
         assert e3_put_csv == expected_e3_put_csv
         assert e7_put_csv == expected_e7_put_csv
-
-
-# def test_etl_idea_raw_to_bud_prime_tables_PopulatesBudDelAggTables(
-#     env_dir_setup_cleanup,
-# ):  # sourcery skip: extract-method
-
-#     # ESTABLISH
-#     sue_inx = "Suzy"
-#     bob_inx = "Bobby"
-#     yao_inx = "Bobby"
-#     event3 = 3
-#     event7 = 7
-#     accord23_str = "accord23"
-#     accord45_str = "accord45"
-#     fizz_world = worldunit_shop("fizz", worlds_dir())
-#     x_error_message = "Inconsistent bud data"
-#     acct_name_delete_str = get_delete_key_name(acct_name_str())
-
-#     with sqlite3_connect(":memory:") as bud_db_conn:
-#         cursor = bud_db_conn.cursor()
-#         create_bud_prime_tables(cursor)
-#         raw_tablename = f"{bud_acctunit_str()}_del_raw"
-#         insert_raw_sqlstr = f"""
-# INSERT INTO {raw_tablename} ({idea_number_str()},{event_int_str()},{face_name_str()},{fisc_label_str()},{owner_name_str()},{acct_name_delete_str},error_message)
-# VALUES
-#   ('br00051',{event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',NULL)
-# , ('br00051',{event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',NULL)
-# , ('br00051',{event7},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',NULL)
-# , ('br00051',{event7},'{sue_inx}','{accord45_str}','{bob_inx}','{yao_inx}','{x_error_message}')
-# , ('br00051',{event7},'{sue_inx}','{accord45_str}','{bob_inx}','{yao_inx}','{x_error_message}')
-# ;
-# """
-#         print(insert_raw_sqlstr)
-#         cursor.execute(insert_raw_sqlstr)
-#         agg_tablename = f"{bud_acctunit_str()}_del_agg"
-#         assert get_row_count(cursor, agg_tablename) == 0
-
-#         # WHEN
-#         fizz_world.idea_raw_to_bud_prime_tables(cursor)
-
-#         # THEN
-#         assert get_row_count(cursor, agg_tablename) == 2
-#         select_sqlstr = f"SELECT {event_int_str()}, {fisc_label_str()}, {acct_name_delete_str} FROM {agg_tablename};"
-#         cursor.execute(select_sqlstr)
-#         budunit_agg_rows = cursor.fetchall()
-#         assert budunit_agg_rows == [
-#             (event3, accord23_str, yao_inx),
-#             (event7, accord23_str, yao_inx),
-#         ]

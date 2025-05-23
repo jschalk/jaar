@@ -27,7 +27,6 @@ def test_WorldUnit_Exists():
     assert not x_world.timeconversions
     assert not x_world._events
     assert not x_world._syntax_otz_dir
-    assert not x_world._syntax_inz_dir
     assert not x_world._world_dir
     assert not x_world._mud_dir
     assert not x_world._brick_dir
@@ -67,20 +66,17 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     fizz_world = WorldUnit(world_id=fizz_str, worlds_dir=worlds_dir())
     x_world_dir = create_path(worlds_dir(), fizz_str)
     x_syntax_otz_dir = create_path(x_world_dir, "syntax_otz")
-    x_syntax_inz_dir = create_path(x_world_dir, "syntax_inz")
     x_mud_dir = create_path(x_world_dir, "mud")
     x_brick_dir = create_path(x_world_dir, "brick")
     x_fisc_mstr_dir = create_path(x_world_dir, "fisc_mstr")
 
     assert not fizz_world._world_dir
     assert not fizz_world._syntax_otz_dir
-    assert not fizz_world._syntax_inz_dir
     assert not fizz_world._mud_dir
     assert not fizz_world._brick_dir
     assert not fizz_world._fisc_mstr_dir
     assert os_path_exists(x_world_dir) is False
     assert os_path_exists(x_syntax_otz_dir) is False
-    assert os_path_exists(x_syntax_inz_dir) is False
     assert os_path_exists(x_mud_dir) is False
     assert os_path_exists(x_brick_dir) is False
     assert os_path_exists(x_fisc_mstr_dir) is False
@@ -91,12 +87,10 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     # THEN
     assert fizz_world._world_dir == x_world_dir
     assert fizz_world._syntax_otz_dir == x_syntax_otz_dir
-    assert fizz_world._syntax_inz_dir == x_syntax_inz_dir
     assert not fizz_world._mud_dir
     assert fizz_world._brick_dir == x_brick_dir
     assert os_path_exists(x_world_dir)
     assert os_path_exists(x_syntax_otz_dir)
-    assert os_path_exists(x_syntax_inz_dir)
     assert os_path_exists(x_mud_dir) is False
     assert os_path_exists(x_brick_dir)
     assert os_path_exists(x_fisc_mstr_dir)
@@ -151,7 +145,6 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
     assert x_world._events == {}
     assert x_world._mud_dir == create_path(x_world._world_dir, "mud")
     assert x_world._syntax_otz_dir == create_path(world_dir, "syntax_otz")
-    assert x_world._syntax_inz_dir == create_path(world_dir, "syntax_inz")
     assert x_world._fiscunits == set()
 
 

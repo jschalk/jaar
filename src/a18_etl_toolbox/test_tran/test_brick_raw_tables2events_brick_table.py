@@ -16,7 +16,7 @@ from src.a18_etl_toolbox.transformers import (
 from sqlite3 import connect as sqlite3_connect
 
 
-def test_etl_brick_agg_db_to_events_brick_agg_db_PopulatesTables_Scenario0():
+def test_etl_brick_raw_tables_to_events_brick_agg_table_PopulatesTables_Scenario0():
     # ESTABLISH
     a23_str = "accord23"
     sue_str = "Sue"
@@ -89,7 +89,7 @@ ORDER BY {event_int_str()}, {face_name_str()};"""
         assert rows[2] == yao9_r
 
 
-def test_etl_brick_agg_db_to_events_brick_agg_db_PopulatesTables_Scenario1():
+def test_etl_brick_raw_tables_to_events_brick_agg_table_PopulatesTables_Scenario1():
     # ESTABLISH
     a23_str = "accord23"
     sue_str = "Sue"

@@ -19,7 +19,7 @@
                 "class_type": "float"
             }
         },
-        "static": "True"
+        "fisc_static": "True"
     },
     "fisc_dealunit": {
         "jkeys": {
@@ -41,7 +41,7 @@
                 "class_type": "int"
             }
         },
-        "static": "True"
+        "fisc_static": "True"
     },
     "fisc_timeline_hour": {
         "jkeys": {
@@ -57,7 +57,7 @@
                 "class_type": "LabelStr"
             }
         },
-        "static": "True"
+        "fisc_static": "True"
     },
     "fisc_timeline_month": {
         "jkeys": {
@@ -73,7 +73,7 @@
                 "class_type": "LabelStr"
             }
         },
-        "static": "True"
+        "fisc_static": "True"
     },
     "fisc_timeline_weekday": {
         "jkeys": {
@@ -89,7 +89,7 @@
                 "class_type": "LabelStr"
             }
         },
-        "static": "True"
+        "fisc_static": "True"
     },
     "fisc_timeoffi": {
         "jkeys": {
@@ -101,7 +101,7 @@
             }
         },
         "jvalues": {},
-        "static": "False"
+        "fisc_static": "False"
     },
     "fiscunit": {
         "jkeys": {
@@ -138,6 +138,6 @@
                 "class_type": "int"
             }
         },
-        "static": "True"
+        "fisc_static": "True"
     }
 }
