@@ -47,8 +47,8 @@ from src.a17_idea_logic._utils.str_a17 import idea_category_str, idea_number_str
 from src.a17_idea_logic.idea_config import (
     get_idea_sqlite_types,
     get_idea_config_dict,
+    get_default_sorted_list,
 )
-from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
 from src.a18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
     get_dimen_abbv7,
@@ -220,6 +220,7 @@ def create_pidgin_sound_agg_table_sqlstr(x_dimen):
 def create_fisc_sound_agg_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg")
     columns = get_all_dimen_columns_set(x_dimen)
+    columns.add("error_message")
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
@@ -290,6 +291,7 @@ def create_bud_sound_put_raw_table_sqlstr(x_dimen: str) -> str:
 def create_bud_sound_put_agg_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg", "put")
     columns = get_all_dimen_columns_set(x_dimen)
+    columns.add("error_message")
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
@@ -305,6 +307,7 @@ def create_bud_sound_del_raw_table_sqlstr(x_dimen: str) -> str:
 def create_bud_sound_del_agg_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg", "del")
     columns = get_del_dimen_columns_set(x_dimen)
+    columns.add("error_message")
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
@@ -430,7 +433,6 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckFiscDimens():
         print(f'CREATE_{abbv7.upper()}_SOUND_AGG_SQLSTR= """{expected_s_agg_sqlstr}"""')
         print(f'CREATE_{abbv7.upper()}_VOICE_RAW_SQLSTR= """{expected_v_raw_sqlstr}"""')
         print(f'CREATE_{abbv7.upper()}_VOICE_AGG_SQLSTR= """{expected_v_agg_sqlstr}"""')
-        print("huh")
         # print(f'"{s_raw_tablename}": CREATE_{abbv7.upper()}_SOUND_RAW_SQLSTR,')
         # print(f'"{s_agg_tablename}": CREATE_{abbv7.upper()}_SOUND_AGG_SQLSTR,')
         # print(f'"{v_raw_tablename}": CREATE_{abbv7.upper()}_VOICE_RAW_SQLSTR,')
@@ -473,14 +475,15 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckBudDimens():
         expected_v_del_raw_sqlstr = create_bud_voice_del_raw_table_sqlstr(x_dimen)
         expected_v_del_agg_sqlstr = create_bud_voice_del_agg_table_sqlstr(x_dimen)
         abbv7 = get_dimen_abbv7(x_dimen)
-        print(f'CREATE_{abbv7}_SOUND_PUT_RAW_STR= "{expected_s_put_raw_sqlstr}"')
-        print(f'CREATE_{abbv7}_SOUND_PUT_AGG_STR= "{expected_s_put_agg_sqlstr}"')
-        print(f'CREATE_{abbv7}_SOUND_DEL_RAW_STR= "{expected_s_del_raw_sqlstr}"')
-        print(f'CREATE_{abbv7}_SOUND_DEL_AGG_STR= "{expected_s_del_agg_sqlstr}"')
-        print(f'CREATE_{abbv7}_VOICE_PUT_RAW_STR= "{expected_v_put_raw_sqlstr}"')
-        print(f'CREATE_{abbv7}_VOICE_PUT_AGG_STR= "{expected_v_put_agg_sqlstr}"')
-        print(f'CREATE_{abbv7}_VOICE_DEL_RAW_STR= "{expected_v_del_raw_sqlstr}"')
-        print(f'CREATE_{abbv7}_VOICE_DEL_AGG_STR= "{expected_v_del_agg_sqlstr}"')
+        print(f"{x_dimen=} {abbv7=}")
+        # print(f'CREATE_{abbv7}_SOUND_PUT_RAW_STR= "{expected_s_put_raw_sqlstr}"')
+        # print(f'CREATE_{abbv7}_SOUND_PUT_AGG_STR= "{expected_s_put_agg_sqlstr}"')
+        # print(f'CREATE_{abbv7}_SOUND_DEL_RAW_STR= "{expected_s_del_raw_sqlstr}"')
+        # print(f'CREATE_{abbv7}_SOUND_DEL_AGG_STR= "{expected_s_del_agg_sqlstr}"')
+        # print(f'CREATE_{abbv7}_VOICE_PUT_RAW_STR= "{expected_v_put_raw_sqlstr}"')
+        # print(f'CREATE_{abbv7}_VOICE_PUT_AGG_STR= "{expected_v_put_agg_sqlstr}"')
+        # print(f'CREATE_{abbv7}_VOICE_DEL_RAW_STR= "{expected_v_del_raw_sqlstr}"')
+        # print(f'CREATE_{abbv7}_VOICE_DEL_AGG_STR= "{expected_v_del_agg_sqlstr}"')
 
         # print(f'"{s_put_raw_tablename}": CREATE_{abbv7}_SOUND_PUT_RAW_STR,')
         # print(f'"{s_put_agg_tablename}": CREATE_{abbv7}_SOUND_PUT_AGG_STR,')
@@ -851,16 +854,22 @@ GROUP BY event_int, face_name, fisc_label, owner_name, concept_way, awardee_titl
         # del
         del_raw_tablename = prime_tbl(dimen, "s", "raw", "del")
         del_agg_tablename = prime_tbl(dimen, "s", "agg", "del")
+        del_dimen_focus_columns = set(put_dimen_config.get("jkeys").keys())
+        del_dimen_focus_columns = get_default_sorted_list(del_dimen_focus_columns)
+        last_element = del_dimen_focus_columns.pop(-1)
+        del_dimen_focus_columns.append(f"{last_element}_ERASE")
+        print(f"{del_dimen_focus_columns=} {last_element}")
         del_exclude_cols = {idea_number_str(), "error_message"}
         del_expected_insert_sqlstr = create_table2table_agg_insert_query(
             cursor,
             src_table=del_raw_tablename,
             dst_table=del_agg_tablename,
-            focus_cols=None,
+            focus_cols=del_dimen_focus_columns,
             exclude_cols=del_exclude_cols,
             where_block="",
         )
         print(del_expected_insert_sqlstr)
+        print(update_sqlstrs[1])
         assert update_sqlstrs[1] == del_expected_insert_sqlstr
 
         static_example_del_sqlstr = """INSERT INTO bud_concept_awardlink_s_del_agg (event_int, face_name, fisc_label, owner_name, concept_way, awardee_title_ERASE)
@@ -869,7 +878,6 @@ FROM bud_concept_awardlink_s_del_raw
 GROUP BY event_int, face_name, fisc_label, owner_name, concept_way, awardee_title_ERASE
 ;
 """
-        print(update_sqlstrs[1])
         assert update_sqlstrs[1] == static_example_del_sqlstr
 
 
@@ -985,6 +993,8 @@ def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_BudDimens():
             v_del_raw_tablename = prime_tbl(bud_dimen, "v", "raw", "del")
             s_put_cols = get_table_columns(cursor, s_put_agg_tablename)
             s_del_cols = get_table_columns(cursor, s_del_agg_tablename)
+            s_put_cols.remove("error_message")
+            s_del_cols.remove("error_message")
             # s_put_cols = set(s_put_cols).remove("error_message")
             # s_del_cols = set(s_del_cols).remove("error_message")
             v_put_raw_cols = get_table_columns(cursor, v_put_raw_tablename)
@@ -1044,6 +1054,7 @@ def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_FiscDimens():
             s_agg_tablename = prime_tbl(fisc_dimen, "s", "agg")
             v_raw_tablename = prime_tbl(fisc_dimen, "v", "raw")
             s_cols = get_table_columns(cursor, s_agg_tablename)
+            s_cols.remove("error_message")
             v_raw_cols = get_table_columns(cursor, v_raw_tablename)
             v_raw_cols.remove("error_message")
             v_cols = find_set_otx_inx_args(v_raw_cols)

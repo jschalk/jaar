@@ -306,8 +306,8 @@ VALUES
         print(rows)
         assert len(rows) == 2
         assert rows == [
-            (event1, sue_str, a23_str, bob_str, bob_str, None, None),
-            (event1, sue_str, a23_str, yao_str, yao_str, None, None),
+            (event1, sue_str, a23_str, bob_str, bob_str, None, None, None),
+            (event1, sue_str, a23_str, yao_str, yao_str, None, None, None),
         ]
 
 
@@ -368,9 +368,9 @@ VALUES
         rows = cursor.fetchall()
         print(rows)
         assert rows == [
-            (event1, sue_str, a23_str, bob_str, bob_str),
-            (event1, sue_str, a23_str, bob_str, yao_str),
-            (event1, sue_str, a23_str, yao_str, yao_str),
+            (event1, sue_str, a23_str, bob_str, bob_str, None),
+            (event1, sue_str, a23_str, bob_str, yao_str, None),
+            (event1, sue_str, a23_str, yao_str, yao_str, None),
         ]
 
 
@@ -475,7 +475,7 @@ VALUES
         rows = cursor.fetchall()
         print(rows)
         assert rows == [
-            (event1, sue_str, a23_str, bob_str, bob_str, None, None),
-            (event1, sue_str, a23_str, bob_str, yao_str, None, None),
-            (event1, sue_str, a23_str, yao_str, yao_str, None, None),
+            (event1, sue_str, a23_str, bob_str, bob_str, None, None, None),
+            (event1, sue_str, a23_str, bob_str, yao_str, None, None, None),
+            (event1, sue_str, a23_str, yao_str, yao_str, None, None, None),
         ]

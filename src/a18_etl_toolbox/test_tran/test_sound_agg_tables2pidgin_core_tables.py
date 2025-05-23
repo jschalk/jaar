@@ -46,7 +46,7 @@ from src.a18_etl_toolbox.transformers import (
     update_inconsistency_pidgin_core_raw_table,
     insert_pidgin_core_raw_to_pidgin_core_agg_table,
     update_pidgin_sound_agg_inconsist_errors,
-    update_pidgin_sound_agg_brick_errors,
+    update_pidgin_sound_agg_bridge_errors,
     insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table,
     etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables,
 )
@@ -903,7 +903,7 @@ VALUES
         assert rows == [exp_row0, exp_row1, exp_row2, exp_row3, exp_row4]
 
 
-def test_update_pidgin_sound_agg_brick_errors_UpdatesTables_Scenario0():
+def test_update_pidgin_sound_agg_bridge_errors_UpdatesTables_Scenario0():
     # ESTABLISH
     bob_str = "bob"
     casa_str = "Casa"
@@ -956,7 +956,7 @@ VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
         assert cursor.execute(pidtitl_error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
-        update_pidgin_sound_agg_brick_errors(cursor)
+        update_pidgin_sound_agg_bridge_errors(cursor)
 
         # THEN
         assert cursor.execute(pidlabe_error_count_sqlstr).fetchone()[0] == 1

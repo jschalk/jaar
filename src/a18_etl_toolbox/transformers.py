@@ -411,7 +411,7 @@ def update_pidgin_sound_agg_inconsist_errors(cursor: sqlite3_Cursor):
         cursor.execute(create_update_pidgin_sound_agg_inconsist_sqlstr(dimen))
 
 
-def update_pidgin_sound_agg_brick_errors(cursor: sqlite3_Cursor):
+def update_pidgin_sound_agg_bridge_errors(cursor: sqlite3_Cursor):
     cursor.execute(create_update_pidlabe_sound_agg_bridge_error_sqlstr())
     cursor.execute(create_update_pidwayy_sound_agg_bridge_error_sqlstr())
     cursor.execute(create_update_pidname_sound_agg_bridge_error_sqlstr())
@@ -429,7 +429,7 @@ def etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor: sqlite3_Curso
     insert_pidgin_core_raw_to_pidgin_core_agg_table(cursor)
     insert_pidgin_core_agg_to_pidgin_core_vld_table(cursor)
     update_pidgin_sound_agg_inconsist_errors(cursor)
-    update_pidgin_sound_agg_brick_errors(cursor)
+    update_pidgin_sound_agg_bridge_errors(cursor)
     insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor)
 
 
