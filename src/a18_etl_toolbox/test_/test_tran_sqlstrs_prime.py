@@ -1017,14 +1017,16 @@ def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_BudDimens():
             s_del_agg_select_sql = get_select_sql(
                 cursor, s_del_agg_tbl, s_del_cols, flat_bool=True
             )
+            s_put_agg_select_sql = f"{s_put_agg_select_sql} WHERE error_message IS NULL"
+            s_del_agg_select_sql = f"{s_del_agg_select_sql} WHERE error_message IS NULL"
             v_put_raw_insert_select = f"{v_put_raw_insert_sql} {s_put_agg_select_sql}"
             v_del_raw_insert_select = f"{v_del_raw_insert_sql} {s_del_agg_select_sql}"
             # create_select_query(cursor=)
             abbv7 = get_dimen_abbv7(bud_dimen)
             put_sqlstr_ref = f"INSERT_{abbv7.upper()}_VOICE_RAW_PUT_SQLSTR"
             del_sqlstr_ref = f"INSERT_{abbv7.upper()}_VOICE_RAW_DEL_SQLSTR"
-            # print(f'{put_sqlstr_ref}= "{v_put_raw_insert_select}"')
-            # print(f'{del_sqlstr_ref}= "{v_del_raw_insert_select}"')
+            print(f'{put_sqlstr_ref}= "{v_put_raw_insert_select}"')
+            print(f'{del_sqlstr_ref}= "{v_del_raw_insert_select}"')
             # print(f"""'{v_put_raw_tablename}': {put_sqlstr_ref},""")
             # print(f"""'{v_del_raw_tablename}': {del_sqlstr_ref},""")
             assert insert_v_raw_sqlstrs.get(v_put_raw_tbl) == v_put_raw_insert_select
@@ -1063,7 +1065,8 @@ def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_FiscDimens():
             s_agg_tbl = s_agg_tablename
             v_raw_insert_sql = get_insert_sql(cursor, v_raw_tbl, v_cols)
             s_agg_select_sql = get_select_sql(cursor, s_agg_tbl, s_cols, flat_bool=True)
-            v_raw_insert_select = f"{v_raw_insert_sql} {s_agg_select_sql}"
+            where_clause = "WHERE error_message IS NULL"
+            v_raw_insert_select = f"{v_raw_insert_sql} {s_agg_select_sql}{where_clause}"
             # create_select_query(cursor=)
             abbv7 = get_dimen_abbv7(fisc_dimen)
             sqlstr_ref = f"INSERT_{abbv7.upper()}_VOICE_RAW_SQLSTR"
