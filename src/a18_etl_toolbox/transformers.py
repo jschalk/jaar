@@ -70,7 +70,6 @@ from src.a17_idea_logic.idea_db_tool import (
     create_idea_sorted_table,
     upsert_sheet,
     split_excel_into_dirs,
-    get_brick_raw_grouping_with_all_values_equal_df,
     get_grouping_with_all_values_equal_sql_query,
 )
 from src.a17_idea_logic.pidgin_toolbox import init_pidginunit_from_dir

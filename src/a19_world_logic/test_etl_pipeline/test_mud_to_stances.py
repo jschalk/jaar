@@ -127,7 +127,6 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
         # self.bud_tables_to_event_bud_csvs(cursor)
 
         # # create all fisc_job and mandate reports
-        # self.fisc_gut_to_fisc_job()
         # self.calc_fisc_deal_acct_mandate_net_ledgers()
 
         # WHEN
@@ -282,7 +281,6 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateDealCashRows(
         # self.bud_tables_to_event_bud_csvs(cursor)
 
         # # create all fisc_job and mandate reports
-        # self.fisc_gut_to_fisc_job()
         # self.calc_fisc_deal_acct_mandate_net_ledgers()
 
         # WHEN

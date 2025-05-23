@@ -104,9 +104,6 @@ class WorldUnit:
     def event_pack_json_to_event_inherited_budunits(self):
         etl_event_pack_json_to_event_inherited_budunits(self._fisc_mstr_dir)
 
-    def fisc_gut_to_fisc_job(self):
-        etl_fisc_gut_to_fisc_job(self._fisc_mstr_dir)
-
     def calc_fisc_deal_acct_mandate_net_ledgers(self):
         mstr_dir = self._fisc_mstr_dir
         etl_create_deals_root_cells(mstr_dir)
@@ -153,7 +150,6 @@ class WorldUnit:
         self.calc_fisc_deal_acct_mandate_net_ledgers()
 
         # # create all fisc_job and mandate reports
-        # self.fisc_gut_to_fisc_job()
         # self.calc_fisc_deal_acct_mandate_net_ledgers()
 
         # if store_tracing_files:
