@@ -33,8 +33,8 @@ from src.a18_etl_toolbox.transformers import (
     etl_event_pack_json_to_event_inherited_budunits,
     etl_event_inherited_budunits_to_fisc_gut,
     etl_fisc_gut_to_fisc_job,
-    etl_fisc_ote1_agg_table2fisc_ote1_agg_csvs,
-    etl_fisc_ote1_agg_csvs2jsons,
+    etl_fisc_ote1_agg_table_to_fisc_ote1_agg_csvs,
+    etl_fisc_ote1_agg_csvs_to_jsons,
     etl_create_deals_root_cells,
     etl_create_fisc_cell_trees,
     etl_set_cell_trees_found_facts,
@@ -142,21 +142,15 @@ class WorldUnit:
         etl_sound_agg_tables_to_voice_raw_tables(cursor)
         etl_voice_raw_tables_to_voice_agg_tables(cursor)
         etl_voice_agg_tables_to_fisc_jsons(cursor, self._fisc_mstr_dir)
-        # etl_voice_raw_tables_to_fisc_ote1_agg(cursor)
-        # etl_voice_agg_table_to_fisc_ote1_agg_csvs(cursor)
-        # etl_fisc_ote1_agg_csvs_to_jsons()
         etl_voice_agg_to_event_bud_csvs(cursor, self._fisc_mstr_dir)
         etl_event_bud_csvs_to_pack_json(self._fisc_mstr_dir)
         etl_event_pack_json_to_event_inherited_budunits(self._fisc_mstr_dir)
         etl_event_inherited_budunits_to_fisc_gut(self._fisc_mstr_dir)
         etl_fisc_gut_to_fisc_job(self._fisc_mstr_dir)
         etl_voice_raw_tables_to_fisc_ote1_agg(cursor)
-        etl_fisc_ote1_agg_table2fisc_ote1_agg_csvs(cursor, self._fisc_mstr_dir)
-        etl_fisc_ote1_agg_csvs2jsons(self._fisc_mstr_dir)
+        etl_fisc_ote1_agg_table_to_fisc_ote1_agg_csvs(cursor, self._fisc_mstr_dir)
+        etl_fisc_ote1_agg_csvs_to_jsons(self._fisc_mstr_dir)
         self.calc_fisc_deal_acct_mandate_net_ledgers()
-
-        # # create fiscunits
-        # self.fisc_agg_tables_to_fisc_jsons(cursor)
 
         # # create all fisc_job and mandate reports
         # self.fisc_gut_to_fisc_job()

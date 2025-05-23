@@ -4,10 +4,6 @@ from src.a06_bud_logic._utils.str_a06 import (
     group_title_str,
     credor_respect_str,
 )
-from src.a17_idea_logic._utils.env_a17 import (
-    env_dir_setup_cleanup,
-    idea_examples_dir,
-)
 from src.a17_idea_logic._utils.example_pandas import (
     get_empty_dataframe,
     get_small_example01_csv,
@@ -21,20 +17,15 @@ from src.a17_idea_logic._utils.example_pandas import (
     get_ex02_atom_dataframe,
     get_ex02_atom_csv,
 )
-from src.a17_idea_logic._utils.str_a17 import (
-    brick_raw_str,
-    brick_agg_str,
-    brick_valid_str,
-    sound_raw_str,
-    sound_agg_str,
-    voice_raw_str,
-    voice_agg_str,
-)
 from src.a17_idea_logic.idea_db_tool import (
     save_dataframe_to_csv,
     get_ordered_csv,
     get_relevant_columns_dataframe,
     get_brick_raw_grouping_with_all_values_equal_df,
+)
+from src.a17_idea_logic._utils.env_a17 import (
+    env_dir_setup_cleanup,
+    idea_examples_dir,
 )
 from os.path import exists as os_path_exists
 from pandas import DataFrame

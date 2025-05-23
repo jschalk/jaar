@@ -20,7 +20,7 @@ from src.a00_data_toolbox.db_toolbox import (
     create_table_from_columns,
     create_update_inconsistency_error_query,
 )
-from src.a01_way_logic.way import FaceName, EventInt, OwnerName, FiscLabel
+from src.a01_way_logic.way import FaceName, EventInt
 from src.a06_bud_logic.bud import budunit_shop, BudUnit
 from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a08_bud_atom_logic.atom_config import get_bud_dimens
@@ -49,10 +49,7 @@ from src.a15_fisc_logic.fisc_tool import (
     set_cell_tree_cell_mandates,
     create_deal_mandate_ledgers,
 )
-from src.a15_fisc_logic.fisc_config import get_fisc_dimens
 from src.a16_pidgin_logic.pidgin import (
-    get_pidginunit_from_json,
-    inherit_pidginunit,
     default_bridge_if_None,
     default_unknown_term_if_None,
 )
@@ -64,7 +61,6 @@ from src.a17_idea_logic.idea_config import (
     get_idea_numbers,
     get_idea_format_filename,
     get_idea_dimen_ref,
-    get_idea_config_dict,
     get_idea_sqlite_types,
     get_idearef_from_file,
 )
@@ -74,15 +70,8 @@ from src.a17_idea_logic.idea_db_tool import (
     create_idea_sorted_table,
     upsert_sheet,
     split_excel_into_dirs,
-    sheet_exists,
-    _get_pidgen_idea_format_filenames,
     get_brick_raw_grouping_with_all_values_equal_df,
     get_grouping_with_all_values_equal_sql_query,
-    translate_all_columns_dataframe,
-    insert_idea_csv,
-    save_table_to_csv,
-    get_ordered_csv,
-    get_idea_into_dimen_raw_query,
 )
 from src.a17_idea_logic.pidgin_toolbox import init_pidginunit_from_dir
 from src.a18_etl_toolbox.tran_sqlstrs import (
@@ -103,7 +92,6 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_update_voice_raw_existing_inx_col_sqlstr,
     create_update_voice_raw_empty_inx_col_sqlstr,
     get_insert_voice_agg_sqlstrs,
-    get_idea_stageble_put_dimens,
     CREATE_FISC_EVENT_TIME_AGG_SQLSTR,
     INSERT_FISC_EVENT_TIME_AGG_SQLSTR,
     UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR,
@@ -114,7 +102,6 @@ from src.a18_etl_toolbox.db_obj_tool import get_fisc_dict_from_voice_tables
 from src.a18_etl_toolbox.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from pandas import (
     read_excel as pandas_read_excel,
-    DataFrame,
     read_sql_query as pandas_read_sql_query,
 )
 from os.path import exists as os_path_exists
@@ -229,20 +216,6 @@ def etl_brick_agg_tables_to_brick_valid_tables(conn_or_cursor: sqlite3_Connectio
 {select_sqlstr}{join_clause_str}
 """
             conn_or_cursor.execute(insert_select_into_sqlstr)
-
-
-def create_df_with_groupby_idea_columns(
-    brick_raw_df: DataFrame, idea_number: str
-) -> DataFrame:
-    idea_filename = get_idea_format_filename(idea_number)
-    idearef = get_idearef_obj(idea_filename)
-    required_columns = idearef.get_otx_keys_list()
-    idea_columns_set = set(idearef._attributes.keys())
-    idea_columns_list = get_default_sorted_list(idea_columns_set)
-    brick_raw_df = brick_raw_df[idea_columns_list]
-    return get_brick_raw_grouping_with_all_values_equal_df(
-        brick_raw_df, required_columns, idea_number
-    )
 
 
 def etl_brick_raw_tables_to_events_brick_agg_table(conn_or_cursor: sqlite3_Cursor):
@@ -629,7 +602,7 @@ def etl_voice_raw_tables_to_fisc_ote1_agg(conn_or_cursor: sqlite3_Connection):
     conn_or_cursor.execute(INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR)
 
 
-def etl_fisc_ote1_agg_table2fisc_ote1_agg_csvs(
+def etl_fisc_ote1_agg_table_to_fisc_ote1_agg_csvs(
     conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str
 ):
     empty_ote1_csv_str = """fisc_label,owner_name,event_int,deal_time,error_message
@@ -642,7 +615,7 @@ def etl_fisc_ote1_agg_table2fisc_ote1_agg_csvs(
     save_to_split_csvs(conn_or_cursor, "fisc_ote1_agg", ["fisc_label"], fiscs_dir)
 
 
-def etl_fisc_ote1_agg_csvs2jsons(fisc_mstr_dir: str):
+def etl_fisc_ote1_agg_csvs_to_jsons(fisc_mstr_dir: str):
     idea_types = get_idea_sqlite_types()
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_label in get_level1_dirs(fiscs_dir):

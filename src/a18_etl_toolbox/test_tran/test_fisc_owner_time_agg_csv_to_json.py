@@ -9,7 +9,7 @@ from src.a12_hub_tools.hub_path import (
     create_fisc_ote1_csv_path,
     create_fisc_ote1_json_path,
 )
-from src.a18_etl_toolbox.transformers import etl_fisc_ote1_agg_csvs2jsons
+from src.a18_etl_toolbox.transformers import etl_fisc_ote1_agg_csvs_to_jsons
 from src.a18_etl_toolbox._utils.env_a18 import (
     get_module_temp_dir,
     env_dir_setup_cleanup,
@@ -49,7 +49,7 @@ def test_WorldUnit_fisc_ote1_agg_csvs2jsons_CreatesFile_Scenaro0(
     assert os_path_exists(a45_ote1_json_path) is False
 
     # WHEN
-    etl_fisc_ote1_agg_csvs2jsons(fisc_mstr_dir)
+    etl_fisc_ote1_agg_csvs_to_jsons(fisc_mstr_dir)
 
     # THEN
     assert os_path_exists(a23_ote1_json_path)
