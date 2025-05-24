@@ -590,12 +590,6 @@ def get_most_recent_event_int(
     return max(recent_event_ints, default=None)
 
 
-def fisc_agg_tables2fisc_event_time_agg(conn_or_cursor: sqlite3_Connection):
-    conn_or_cursor.execute(CREATE_FISC_EVENT_TIME_AGG_SQLSTR)
-    conn_or_cursor.execute(INSERT_FISC_EVENT_TIME_AGG_SQLSTR)
-    conn_or_cursor.execute(UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR)
-
-
 def etl_voice_raw_tables_to_fisc_ote1_agg(conn_or_cursor: sqlite3_Connection):
     conn_or_cursor.execute(CREATE_FISC_OTE1_AGG_SQLSTR)
     conn_or_cursor.execute(INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR)
@@ -812,7 +806,7 @@ def etl_event_inherited_budunits_to_fisc_gut(fisc_mstr_dir: str):
             save_file(gut_path, None, max_event_bud_json)
 
 
-def etl_fisc_gut_to_fisc_job(fisc_mstr_dir: str):
+def etl_fisc_guts_to_fisc_jobs(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_label in get_level1_dirs(fiscs_dir):
         x_fiscunit = fiscunit_get_from_default_path(fisc_mstr_dir, fisc_label)
