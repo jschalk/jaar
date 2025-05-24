@@ -226,14 +226,15 @@ VALUES
 
         # THEN
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 2
-        select_core_raw_sqlstr = f"SELECT * FROM {budacct_s_agg_put}"
+        select_core_raw_sqlstr = f"SELECT * FROM {budacct_s_agg_put} ORDER BY {fisc_label_str()}, {acct_name_str()}"
         cursor.execute(select_core_raw_sqlstr)
         name_bridge_str = f"Bridge cannot exist in NameStr column {acct_name_str()}"
         label_bridge_str = f"Bridge cannot exist in LabelStr column {fisc_label_str()}"
+        # print(f"{cursor.fetchall()=}")
         assert cursor.fetchall() == [
-            (event1, sue_str, a23_str, yao_str, yao_str, None, None, None),
-            (event1, sue_str, a23_str, yao_str, bob_str, None, None, name_bridge_str),
             (event1, sue_str, a45_str, yao_str, bob_str, None, None, label_bridge_str),
+            (event1, sue_str, a23_str, yao_str, bob_str, None, None, name_bridge_str),
+            (event1, sue_str, a23_str, yao_str, yao_str, None, None, None),
         ]
 
 
