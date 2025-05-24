@@ -91,9 +91,6 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_update_voice_raw_existing_inx_col_sqlstr,
     create_update_voice_raw_empty_inx_col_sqlstr,
     get_insert_voice_agg_sqlstrs,
-    CREATE_FISC_EVENT_TIME_AGG_SQLSTR,
-    INSERT_FISC_EVENT_TIME_AGG_SQLSTR,
-    UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR,
     CREATE_FISC_OTE1_AGG_SQLSTR,
     INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR,
 )
@@ -105,7 +102,7 @@ from pandas import (
 )
 from os.path import exists as os_path_exists
 from sqlite3 import Connection as sqlite3_Connection, Cursor as sqlite3_Cursor
-from copy import deepcopy as copy_deepcopy
+from copy import deepcopy as copy_deepcopy, copy as copy_copy
 
 
 def etl_mud_dfs_to_brick_raw_tables(conn: sqlite3_Connection, mud_dir: str):
@@ -442,17 +439,24 @@ def etl_sound_agg_tables_to_voice_raw_tables(cursor: sqlite3_Cursor):
 def set_all_voice_raw_inx_columns(cursor: sqlite3_Cursor):
     pidgin_args = get_pidgin_args_class_types()
     # get list of all voice_raw tables
+    for voice_raw_tablename, otx_columnname in get_all_voice_raw_otx_columns(cursor):
+        columnname_without_otx = otx_columnname[:-4]
+        x_arg = copy_copy(columnname_without_otx)
+        if x_arg[-5:] == "ERASE":
+            x_arg = x_arg[:-6]
+        arg_class_type = pidgin_args.get(x_arg)
+        set_voice_raw_inx_column(
+            cursor, voice_raw_tablename, columnname_without_otx, arg_class_type
+        )
+
+
+def get_all_voice_raw_otx_columns(cursor: sqlite3_Cursor) -> set[tuple[str, str]]:
+    otx_columns = set()
     for voice_raw_tablename in get_insert_into_voice_raw_sqlstrs().keys():
         for columnname in get_table_columns(cursor, voice_raw_tablename):
             if columnname[-3:] in {"otx"}:
-                column_without_otx = columnname[:-4]
-                x_arg = columnname[:-4]
-                if x_arg[-5:] == "ERASE":
-                    x_arg = x_arg[:-6]
-                arg_class_type = pidgin_args.get(x_arg)
-                set_voice_raw_inx_column(
-                    cursor, voice_raw_tablename, column_without_otx, arg_class_type
-                )
+                otx_columns.add((voice_raw_tablename, columnname))
+    return otx_columns
 
 
 def set_voice_raw_inx_column(

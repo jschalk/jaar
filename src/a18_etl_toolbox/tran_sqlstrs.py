@@ -648,7 +648,7 @@ def create_update_voice_raw_existing_inx_col_sqlstr(
     return f"""
 WITH pid_face_otx_event AS (
     SELECT 
-    raw_dim.rowid raw_rowid
+      raw_dim.rowid raw_rowid
     , raw_dim.event_int
     , raw_dim.face_name_otx
     , raw_dim.{column_prefix}_otx
@@ -658,7 +658,7 @@ WITH pid_face_otx_event AS (
         AND pid.otx_{pidgin_type_abbv} = raw_dim.{column_prefix}_otx
         AND raw_dim.event_int >= pid.event_int
     GROUP BY 
-    raw_dim.rowid
+      raw_dim.rowid
     , raw_dim.event_int
     , raw_dim.face_name_otx
     , raw_dim.{column_prefix}_otx
