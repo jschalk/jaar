@@ -580,6 +580,34 @@ GROUP BY event_int, face_name
 """
 
 
+def create_bridge_exists_in_name_error_update_sqlstr(table: str, column: str) -> str:
+    pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
+    return f"""UPDATE {table}
+SET error_message = 'Bridge cannot exist in NameStr column {column}'
+WHERE rowid IN (
+    SELECT sound_agg.rowid
+    FROM {table} sound_agg
+    JOIN {pidcore_s_vld_tablename} core_vld ON core_vld.face_name = sound_agg.face_name
+    WHERE sound_agg.{column} LIKE '%' || core_vld.otx_bridge || '%'
+)
+;
+"""
+
+
+def create_bridge_exists_in_label_error_update_sqlstr(table: str, column: str) -> str:
+    pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
+    return f"""UPDATE {table}
+SET error_message = 'Bridge cannot exist in LabelStr column {column}'
+WHERE rowid IN (
+    SELECT sound_agg.rowid
+    FROM {table} sound_agg
+    JOIN {pidcore_s_vld_tablename} core_vld ON core_vld.face_name = sound_agg.face_name
+    WHERE sound_agg.{column} LIKE '%' || core_vld.otx_bridge || '%'
+)
+;
+"""
+
+
 INSERT_FISCASH_VOICE_RAW_SQLSTR = "INSERT INTO fisc_cashbook_v_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, acct_name_otx, tran_time, amount) SELECT event_int, face_name, fisc_label, owner_name, acct_name, tran_time, amount FROM fisc_cashbook_s_agg WHERE error_message IS NULL"
 INSERT_FISDEAL_VOICE_RAW_SQLSTR = "INSERT INTO fisc_dealunit_v_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, deal_time, quota, celldepth) SELECT event_int, face_name, fisc_label, owner_name, deal_time, quota, celldepth FROM fisc_dealunit_s_agg WHERE error_message IS NULL"
 INSERT_FISHOUR_VOICE_RAW_SQLSTR = "INSERT INTO fisc_timeline_hour_v_raw (event_int, face_name_otx, fisc_label_otx, cumlative_minute, hour_label_otx) SELECT event_int, face_name, fisc_label, cumlative_minute, hour_label FROM fisc_timeline_hour_s_agg WHERE error_message IS NULL"

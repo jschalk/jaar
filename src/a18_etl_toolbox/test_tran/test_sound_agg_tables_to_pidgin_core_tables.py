@@ -1185,15 +1185,9 @@ def test_etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables_Scenario1_Update
     # ESTABLISH
     bob_str = "bob"
     casa_str = "Casa"
-    mop_str = "Mop"
-    yao_str = "Yao"
-    yao_inx = "Yaoito"
-    casa_inx = "Casaito"
     rdx = ":"
-    mop_rdx_mop = f"{mop_str}{rdx}{mop_str}"
     ukx = "Unknown"
     event1 = 1
-    error_message = "Bridge cannot exist in LabelStr"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
