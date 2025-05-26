@@ -6,7 +6,7 @@ from src.a12_hub_tools.hub_path import (
     create_job_path,
 )
 from src.a15_fisc_logic.fisc import fiscunit_shop
-from src.a18_etl_toolbox.transformers import etl_fisc_gut_to_fisc_job
+from src.a18_etl_toolbox.transformers import etl_fisc_guts_to_fisc_jobs
 from src.a18_etl_toolbox._utils.env_a18 import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
@@ -14,7 +14,7 @@ from src.a18_etl_toolbox._utils.env_a18 import (
 from os.path import exists as os_path_exists
 
 
-def test_etl_fisc_gut_to_fisc_job_SetsFiles_Scenario0(
+def test_etl_fisc_guts_to_fisc_jobs_SetsFiles_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -43,7 +43,7 @@ def test_etl_fisc_gut_to_fisc_job_SetsFiles_Scenario0(
     assert os_path_exists(a23_bob_job_path) is False
 
     # WHEN
-    etl_fisc_gut_to_fisc_job(fisc_mstr_dir)
+    etl_fisc_guts_to_fisc_jobs(fisc_mstr_dir)
 
     # THEN
     assert os_path_exists(a23_bob_job_path)

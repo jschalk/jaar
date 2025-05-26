@@ -21,7 +21,8 @@ from src.a18_etl_toolbox.transformers import (
     etl_brick_valid_tables_to_sound_raw_tables,
     etl_sound_raw_tables_to_sound_agg_tables,
     etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables,
-    etl_sound_agg_tables_to_voice_raw_tables,
+    etl_sound_agg_tables_to_sound_vld_tables,
+    etl_sound_vld_tables_to_voice_raw_tables,
     etl_voice_raw_tables_to_voice_agg_tables,
     etl_voice_agg_tables_to_fisc_jsons,
     etl_voice_agg_to_event_bud_csvs,
@@ -32,7 +33,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_event_bud_csvs_to_pack_json,
     etl_event_pack_json_to_event_inherited_budunits,
     etl_event_inherited_budunits_to_fisc_gut,
-    etl_fisc_gut_to_fisc_job,
+    etl_fisc_guts_to_fisc_jobs,
     etl_fisc_ote1_agg_table_to_fisc_ote1_agg_csvs,
     etl_fisc_ote1_agg_csvs_to_jsons,
     etl_create_deals_root_cells,
@@ -136,14 +137,15 @@ class WorldUnit:
         etl_brick_valid_tables_to_sound_raw_tables(cursor)
         etl_sound_raw_tables_to_sound_agg_tables(cursor)
         etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor)
-        etl_sound_agg_tables_to_voice_raw_tables(cursor)
+        etl_sound_agg_tables_to_sound_vld_tables(cursor)
+        etl_sound_vld_tables_to_voice_raw_tables(cursor)
         etl_voice_raw_tables_to_voice_agg_tables(cursor)
         etl_voice_agg_tables_to_fisc_jsons(cursor, self._fisc_mstr_dir)
         etl_voice_agg_to_event_bud_csvs(cursor, self._fisc_mstr_dir)
         etl_event_bud_csvs_to_pack_json(self._fisc_mstr_dir)
         etl_event_pack_json_to_event_inherited_budunits(self._fisc_mstr_dir)
         etl_event_inherited_budunits_to_fisc_gut(self._fisc_mstr_dir)
-        etl_fisc_gut_to_fisc_job(self._fisc_mstr_dir)
+        etl_fisc_guts_to_fisc_jobs(self._fisc_mstr_dir)
         etl_voice_raw_tables_to_fisc_ote1_agg(cursor)
         etl_fisc_ote1_agg_table_to_fisc_ote1_agg_csvs(cursor, self._fisc_mstr_dir)
         etl_fisc_ote1_agg_csvs_to_jsons(self._fisc_mstr_dir)

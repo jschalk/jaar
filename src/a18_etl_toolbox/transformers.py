@@ -56,6 +56,10 @@ from src.a16_pidgin_logic.pidgin import (
 from src.a16_pidgin_logic.pidgin_config import (
     get_quick_pidgens_column_ref,
     get_pidgin_args_class_types,
+    get_pidgin_LabelStr_args,
+    get_pidgin_NameStr_args,
+    get_pidgin_TitleStr_args,
+    get_pidgin_WayStr_args,
 )
 from src.a17_idea_logic.idea_config import (
     get_idea_numbers,
@@ -86,14 +90,14 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_update_pidname_sound_agg_bridge_error_sqlstr,
     create_update_pidtitl_sound_agg_bridge_error_sqlstr,
     create_insert_pidgin_sound_vld_table_sqlstr,
+    get_insert_into_sound_vld_sqlstrs,
     get_insert_into_voice_raw_sqlstrs,
     get_bud_voice_agg_tablenames,
     create_update_voice_raw_existing_inx_col_sqlstr,
     create_update_voice_raw_empty_inx_col_sqlstr,
     get_insert_voice_agg_sqlstrs,
-    CREATE_FISC_EVENT_TIME_AGG_SQLSTR,
-    INSERT_FISC_EVENT_TIME_AGG_SQLSTR,
-    UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR,
+    create_bridge_exists_in_name_error_update_sqlstr,
+    create_bridge_exists_in_label_error_update_sqlstr,
     CREATE_FISC_OTE1_AGG_SQLSTR,
     INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR,
 )
@@ -105,7 +109,7 @@ from pandas import (
 )
 from os.path import exists as os_path_exists
 from sqlite3 import Connection as sqlite3_Connection, Cursor as sqlite3_Cursor
-from copy import deepcopy as copy_deepcopy
+from copy import deepcopy as copy_deepcopy, copy as copy_copy
 
 
 def etl_mud_dfs_to_brick_raw_tables(conn: sqlite3_Connection, mud_dir: str):
@@ -411,7 +415,7 @@ def update_pidgin_sound_agg_inconsist_errors(cursor: sqlite3_Cursor):
         cursor.execute(create_update_pidgin_sound_agg_inconsist_sqlstr(dimen))
 
 
-def update_pidgin_sound_agg_brick_errors(cursor: sqlite3_Cursor):
+def update_pidgin_sound_agg_bridge_errors(cursor: sqlite3_Cursor):
     cursor.execute(create_update_pidlabe_sound_agg_bridge_error_sqlstr())
     cursor.execute(create_update_pidwayy_sound_agg_bridge_error_sqlstr())
     cursor.execute(create_update_pidname_sound_agg_bridge_error_sqlstr())
@@ -423,17 +427,59 @@ def insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor: sqlite3_Cur
         cursor.execute(create_insert_pidgin_sound_vld_table_sqlstr(dimen))
 
 
+def set_fisc_bud_sound_agg_bridge_errors(cursor: sqlite3_Cursor):
+    pidgin_label_args = get_pidgin_LabelStr_args()
+    pidgin_name_args = get_pidgin_NameStr_args()
+    pidgin_title_args = get_pidgin_TitleStr_args()
+    pidgin_way_args = get_pidgin_WayStr_args()
+    pidgin_args = copy_copy(pidgin_label_args)
+    pidgin_args.update(pidgin_name_args)
+    pidgin_args.update(pidgin_title_args)
+    pidgin_args.update(pidgin_way_args)
+    pidginable_tuples = get_fisc_bud_sound_agg_pidginable_columns(cursor, pidgin_args)
+    for voice_raw_tablename, pidginable_columnname in pidginable_tuples:
+        error_update_sqlstr = None
+        if pidginable_columnname in pidgin_label_args:
+            error_update_sqlstr = create_bridge_exists_in_label_error_update_sqlstr(
+                voice_raw_tablename, pidginable_columnname
+            )
+        if pidginable_columnname in pidgin_name_args:
+            error_update_sqlstr = create_bridge_exists_in_name_error_update_sqlstr(
+                voice_raw_tablename, pidginable_columnname
+            )
+        if error_update_sqlstr:
+            cursor.execute(error_update_sqlstr)
+
+
+def get_fisc_bud_sound_agg_pidginable_columns(
+    cursor: sqlite3_Cursor, pidgin_args: set[str]
+) -> set[tuple[str, str]]:
+    pidgin_columns = set()
+    for x_tablename in get_insert_into_voice_raw_sqlstrs().keys():
+        x_tablename = x_tablename.replace("_v_", "_s_")
+        x_tablename = x_tablename.replace("_raw", "_agg")
+        for columnname in get_table_columns(cursor, x_tablename):
+            if columnname in pidgin_args:
+                pidgin_columns.add((x_tablename, columnname))
+    return pidgin_columns
+
+
 def etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor: sqlite3_Cursor):
     insert_pidgin_sound_agg_into_pidgin_core_raw_table(cursor)
     update_inconsistency_pidgin_core_raw_table(cursor)
     insert_pidgin_core_raw_to_pidgin_core_agg_table(cursor)
     insert_pidgin_core_agg_to_pidgin_core_vld_table(cursor)
     update_pidgin_sound_agg_inconsist_errors(cursor)
-    update_pidgin_sound_agg_brick_errors(cursor)
+    update_pidgin_sound_agg_bridge_errors(cursor)
     insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor)
 
 
-def etl_sound_agg_tables_to_voice_raw_tables(cursor: sqlite3_Cursor):
+def etl_sound_agg_tables_to_sound_vld_tables(cursor: sqlite3_Cursor):
+    for sqlstr in get_insert_into_sound_vld_sqlstrs().values():
+        cursor.execute(sqlstr)
+
+
+def etl_sound_vld_tables_to_voice_raw_tables(cursor: sqlite3_Cursor):
     for sqlstr in get_insert_into_voice_raw_sqlstrs().values():
         cursor.execute(sqlstr)
     set_all_voice_raw_inx_columns(cursor)
@@ -441,18 +487,24 @@ def etl_sound_agg_tables_to_voice_raw_tables(cursor: sqlite3_Cursor):
 
 def set_all_voice_raw_inx_columns(cursor: sqlite3_Cursor):
     pidgin_args = get_pidgin_args_class_types()
-    # get list of all voice_raw tables
+    for voice_raw_tablename, otx_columnname in get_all_voice_raw_otx_columns(cursor):
+        columnname_without_otx = otx_columnname[:-4]
+        x_arg = copy_copy(columnname_without_otx)
+        if x_arg[-5:] == "ERASE":
+            x_arg = x_arg[:-6]
+        arg_class_type = pidgin_args.get(x_arg)
+        set_voice_raw_inx_column(
+            cursor, voice_raw_tablename, columnname_without_otx, arg_class_type
+        )
+
+
+def get_all_voice_raw_otx_columns(cursor: sqlite3_Cursor) -> set[tuple[str, str]]:
+    otx_columns = set()
     for voice_raw_tablename in get_insert_into_voice_raw_sqlstrs().keys():
         for columnname in get_table_columns(cursor, voice_raw_tablename):
             if columnname[-3:] in {"otx"}:
-                column_without_otx = columnname[:-4]
-                x_arg = columnname[:-4]
-                if x_arg[-5:] == "ERASE":
-                    x_arg = x_arg[:-6]
-                arg_class_type = pidgin_args.get(x_arg)
-                set_voice_raw_inx_column(
-                    cursor, voice_raw_tablename, column_without_otx, arg_class_type
-                )
+                otx_columns.add((voice_raw_tablename, columnname))
+    return otx_columns
 
 
 def set_voice_raw_inx_column(
@@ -588,12 +640,6 @@ def get_most_recent_event_int(
 ) -> EventInt:
     recent_event_ints = [e_id for e_id in event_set if e_id <= max_event_int]
     return max(recent_event_ints, default=None)
-
-
-def fisc_agg_tables2fisc_event_time_agg(conn_or_cursor: sqlite3_Connection):
-    conn_or_cursor.execute(CREATE_FISC_EVENT_TIME_AGG_SQLSTR)
-    conn_or_cursor.execute(INSERT_FISC_EVENT_TIME_AGG_SQLSTR)
-    conn_or_cursor.execute(UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR)
 
 
 def etl_voice_raw_tables_to_fisc_ote1_agg(conn_or_cursor: sqlite3_Connection):
@@ -812,7 +858,7 @@ def etl_event_inherited_budunits_to_fisc_gut(fisc_mstr_dir: str):
             save_file(gut_path, None, max_event_bud_json)
 
 
-def etl_fisc_gut_to_fisc_job(fisc_mstr_dir: str):
+def etl_fisc_guts_to_fisc_jobs(fisc_mstr_dir: str):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     for fisc_label in get_level1_dirs(fiscs_dir):
         x_fiscunit = fiscunit_get_from_default_path(fisc_mstr_dir, fisc_label)

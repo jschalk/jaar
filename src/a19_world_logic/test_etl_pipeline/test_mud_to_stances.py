@@ -74,10 +74,13 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
     pidcore_sound_vld = create_prime_tablename("pidcore", "s", "vld")
     fisunit_sound_raw = create_prime_tablename("fisunit", "s", "raw")
     fisunit_sound_agg = create_prime_tablename("fisunit", "s", "agg")
+    fisunit_sound_vld = create_prime_tablename("fisunit", "s", "vld")
     budunit_sound_put_raw = create_prime_tablename("budunit", "s", "raw", "put")
     budunit_sound_put_agg = create_prime_tablename("budunit", "s", "agg", "put")
+    budunit_sound_put_vld = create_prime_tablename("budunit", "s", "vld", "put")
     budacct_sound_put_raw = create_prime_tablename("budacct", "s", "raw", "put")
     budacct_sound_put_agg = create_prime_tablename("budacct", "s", "agg", "put")
+    budacct_sound_put_vld = create_prime_tablename("budacct", "s", "vld", "put")
     fisunit_voice_raw = create_prime_tablename("fisunit", "v", "raw")
     fisunit_voice_agg = create_prime_tablename("fisunit", "v", "agg")
     budunit_voice_put_raw = create_prime_tablename("budunit", "v", "raw", "put")
@@ -103,8 +106,10 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
         assert not db_table_exists(cursor, pidname_sound_agg)
         assert not db_table_exists(cursor, fisunit_sound_raw)
         assert not db_table_exists(cursor, fisunit_sound_agg)
+        assert not db_table_exists(cursor, fisunit_sound_vld)
         assert not db_table_exists(cursor, budunit_sound_put_raw)
         assert not db_table_exists(cursor, budunit_sound_put_agg)
+        assert not db_table_exists(cursor, budunit_sound_put_vld)
         assert not db_table_exists(cursor, pidcore_sound_raw)
         assert not db_table_exists(cursor, pidcore_sound_agg)
         assert not db_table_exists(cursor, pidcore_sound_vld)
@@ -150,6 +155,9 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
         assert get_row_count(cursor, pidcore_sound_agg) == 1
         assert get_row_count(cursor, pidcore_sound_vld) == 1
         assert get_row_count(cursor, pidname_sound_vld) == 1
+        assert get_row_count(cursor, fisunit_sound_vld) == 1
+        assert get_row_count(cursor, budunit_sound_put_vld) == 1
+        assert get_row_count(cursor, budacct_sound_put_vld) == 1
         assert get_row_count(cursor, fisunit_voice_raw) == 1
         assert get_row_count(cursor, budunit_voice_put_raw) == 1
         assert get_row_count(cursor, budacct_voice_put_raw) == 1

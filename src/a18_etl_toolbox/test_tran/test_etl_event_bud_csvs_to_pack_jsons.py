@@ -12,8 +12,8 @@ from src.a06_bud_logic._utils.str_a06 import (
 from src.a08_bud_atom_logic._utils.str_a08 import atom_insert
 from src.a09_pack_logic.pack import packunit_shop, get_packunit_from_json
 from src.a12_hub_tools.hub_path import (
-    create_owner_event_dir_path,
-    create_event_all_pack_path,
+    create_owner_event_dir_path as owner_event_dir,
+    create_event_all_pack_path as all_pack_path,
 )
 from src.a18_etl_toolbox.transformers import etl_event_bud_csvs_to_pack_json
 from src.a18_etl_toolbox._utils.env_a18 import (
@@ -37,16 +37,12 @@ def test_etl_event_bud_csvs_to_pack_json_CreatesFiles_Scenario0_IgnoresCSV_budun
     # a23_bob_dir = create_path(a23_dir, bob_inx)
     # a23_bob_e3_dir = create_path(a23_bob_dir, event3)
     # a23_bob_e7_dir = create_path(a23_bob_dir, event7)
-    a23_bob_e3_dir = create_owner_event_dir_path(
-        fisc_mstr_dir, a23_str, bob_inx, event3
-    )
+    a23_bob_e3_dir = owner_event_dir(fisc_mstr_dir, a23_str, bob_inx, event3)
     e3_put_csv = f"""{event_int_str()},{face_name_str()},fisc_label,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit
 {event3},{sue_inx},{a23_str},{bob_inx},,,,,,,,
 """
     save_file(a23_bob_e3_dir, put_agg_csv_filename, e3_put_csv)
-    e3_all_pack_path = create_event_all_pack_path(
-        fisc_mstr_dir, a23_str, bob_inx, event3
-    )
+    e3_all_pack_path = all_pack_path(fisc_mstr_dir, a23_str, bob_inx, event3)
     assert os_path_exists(e3_all_pack_path) is False
 
     # WHEN
@@ -83,12 +79,8 @@ def test_etl_event_bud_csvs_to_pack_json_CreatesFiles_Scenario1(
     # a23_bob_dir = create_path(a23_dir, bob_inx)
     # a23_bob_e3_dir = create_path(a23_bob_dir, event3)
     # a23_bob_e7_dir = create_path(a23_bob_dir, event7)
-    a23_bob_e3_dir = create_owner_event_dir_path(
-        fisc_mstr_dir, a23_str, bob_inx, event3
-    )
-    a23_bob_e7_dir = create_owner_event_dir_path(
-        fisc_mstr_dir, a23_str, bob_inx, event7
-    )
+    a23_bob_e3_dir = owner_event_dir(fisc_mstr_dir, a23_str, bob_inx, event3)
+    a23_bob_e7_dir = owner_event_dir(fisc_mstr_dir, a23_str, bob_inx, event7)
     e3_put_csv = f"""{event_int_str()},{face_name_str()},{fisc_label_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()},{debtit_belief_str()}
 {event3},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debtit_empty}
 """
@@ -98,12 +90,8 @@ def test_etl_event_bud_csvs_to_pack_json_CreatesFiles_Scenario1(
 """
     save_file(a23_bob_e3_dir, put_agg_csv_filename, e3_put_csv)
     save_file(a23_bob_e7_dir, put_agg_csv_filename, e7_put_csv)
-    e3_all_pack_path = create_event_all_pack_path(
-        fisc_mstr_dir, a23_str, bob_inx, event3
-    )
-    e7_all_pack_path = create_event_all_pack_path(
-        fisc_mstr_dir, a23_str, bob_inx, event7
-    )
+    e3_all_pack_path = all_pack_path(fisc_mstr_dir, a23_str, bob_inx, event3)
+    e7_all_pack_path = all_pack_path(fisc_mstr_dir, a23_str, bob_inx, event7)
     # print(f"{e3_pack_path=}")
     # print(f"{e7_pack_path=}")
     assert os_path_exists(e3_all_pack_path) is False
