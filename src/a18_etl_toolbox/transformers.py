@@ -90,6 +90,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_update_pidname_sound_agg_bridge_error_sqlstr,
     create_update_pidtitl_sound_agg_bridge_error_sqlstr,
     create_insert_pidgin_sound_vld_table_sqlstr,
+    get_insert_into_sound_vld_sqlstrs,
     get_insert_into_voice_raw_sqlstrs,
     get_bud_voice_agg_tablenames,
     create_update_voice_raw_existing_inx_col_sqlstr,
@@ -457,7 +458,6 @@ def get_fisc_bud_sound_agg_pidginable_columns(
     for x_tablename in get_insert_into_voice_raw_sqlstrs().keys():
         x_tablename = x_tablename.replace("_v_", "_s_")
         x_tablename = x_tablename.replace("_raw", "_agg")
-        print(f"{x_tablename=}")
         for columnname in get_table_columns(cursor, x_tablename):
             if columnname in pidgin_args:
                 pidgin_columns.add((x_tablename, columnname))
@@ -474,7 +474,12 @@ def etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor: sqlite3_Curso
     insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor)
 
 
-def etl_sound_agg_tables_to_voice_raw_tables(cursor: sqlite3_Cursor):
+def etl_sound_agg_tables_to_sound_vld_tables(cursor: sqlite3_Cursor):
+    for sqlstr in get_insert_into_sound_vld_sqlstrs().values():
+        cursor.execute(sqlstr)
+
+
+def etl_sound_vld_tables_to_voice_raw_tables(cursor: sqlite3_Cursor):
     for sqlstr in get_insert_into_voice_raw_sqlstrs().values():
         cursor.execute(sqlstr)
     set_all_voice_raw_inx_columns(cursor)

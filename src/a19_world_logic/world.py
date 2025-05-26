@@ -21,7 +21,8 @@ from src.a18_etl_toolbox.transformers import (
     etl_brick_valid_tables_to_sound_raw_tables,
     etl_sound_raw_tables_to_sound_agg_tables,
     etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables,
-    etl_sound_agg_tables_to_voice_raw_tables,
+    etl_sound_agg_tables_to_sound_vld_tables,
+    etl_sound_vld_tables_to_voice_raw_tables,
     etl_voice_raw_tables_to_voice_agg_tables,
     etl_voice_agg_tables_to_fisc_jsons,
     etl_voice_agg_to_event_bud_csvs,
@@ -136,7 +137,8 @@ class WorldUnit:
         etl_brick_valid_tables_to_sound_raw_tables(cursor)
         etl_sound_raw_tables_to_sound_agg_tables(cursor)
         etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor)
-        etl_sound_agg_tables_to_voice_raw_tables(cursor)
+        etl_sound_agg_tables_to_sound_vld_tables(cursor)
+        etl_sound_vld_tables_to_voice_raw_tables(cursor)
         etl_voice_raw_tables_to_voice_agg_tables(cursor)
         etl_voice_agg_tables_to_fisc_jsons(cursor, self._fisc_mstr_dir)
         etl_voice_agg_to_event_bud_csvs(cursor, self._fisc_mstr_dir)
