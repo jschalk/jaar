@@ -415,6 +415,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     all_args.add("source_dimen")
     all_args.add("pidgin_event_int")
     all_args.add("error_message")
+    all_args.add("world_id")
     assert all_args == set(table_sorting_priority)
 
     x_no_underscore_set = {x_arg.replace("_", "") for x_arg in table_sorting_priority}

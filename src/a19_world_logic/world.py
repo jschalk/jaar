@@ -130,15 +130,18 @@ class WorldUnit:
         set_dir(fisc_mstr_dir)
         # collect excel file data into central location
         etl_mud_dfs_to_brick_raw_tables(db_conn, self._mud_dir)
+        # brick raw to sound raw, check by event_ints
         etl_brick_raw_tables_to_brick_agg_tables(cursor)
         etl_brick_raw_tables_to_events_brick_agg_table(cursor)
         etl_events_brick_agg_table_to_events_brick_valid_table(cursor)
         etl_brick_agg_tables_to_brick_valid_tables(cursor)
         etl_brick_valid_tables_to_sound_raw_tables(cursor)
+        # sound raw to voice raw, filter through pidgins
         etl_sound_raw_tables_to_sound_agg_tables(cursor)
         etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor)
         etl_sound_agg_tables_to_sound_vld_tables(cursor)
         etl_sound_vld_tables_to_voice_raw_tables(cursor)
+        # voice raw to fisc/bud jsons
         etl_voice_raw_tables_to_voice_agg_tables(cursor)
         etl_voice_agg_tables_to_fisc_jsons(cursor, self._fisc_mstr_dir)
         etl_voice_agg_to_event_bud_csvs(cursor, self._fisc_mstr_dir)

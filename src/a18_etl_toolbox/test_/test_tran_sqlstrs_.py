@@ -121,7 +121,7 @@ def test_create_prime_tablename_ReturnsObj():
     budawar_dimen = bud_concept_awardlink_str()
     budreas_dimen = bud_concept_reasonunit_str()
     budprem_dimen = bud_concept_reason_premiseunit_str()
-    budlabor_dimen = bud_concept_laborlink_str()
+    budlabo_dimen = bud_concept_laborlink_str()
     budheal_dimen = bud_concept_healerlink_str()
     budfact_dimen = bud_concept_factunit_str()
     fisunit_dimen = fiscunit_str()
@@ -141,6 +141,7 @@ def test_create_prime_tablename_ReturnsObj():
     vld_str = "vld"
     put_str = "put"
     del_str = "del"
+    job_str = "job"
 
     # WHEN
     budunit_s_agg_table = create_prime_tablename("budunit", "s", agg_str, put_str)
@@ -150,7 +151,7 @@ def test_create_prime_tablename_ReturnsObj():
     budawar_s_agg_table = create_prime_tablename("budawar", "s", agg_str, put_str)
     budreas_s_agg_table = create_prime_tablename("budreas", "s", agg_str, put_str)
     budprem_s_agg_table = create_prime_tablename("budprem", "s", agg_str, put_str)
-    budlabor_s_agg_table = create_prime_tablename("BUDLABO", "s", agg_str, put_str)
+    budlabo_s_agg_table = create_prime_tablename("BUDLABO", "s", agg_str, put_str)
     budheal_s_agg_table = create_prime_tablename("budheal", "s", agg_str, put_str)
     budfact_s_agg_table = create_prime_tablename("budfact", "s", agg_str, put_str)
     budfact_s_del_table = create_prime_tablename("budfact", "s", agg_str, del_str)
@@ -170,6 +171,7 @@ def test_create_prime_tablename_ReturnsObj():
     pidtitl_s_val_table = create_prime_tablename("pidtitl", "s", vld_str)
     pidcore_s_raw_table = create_prime_tablename("pidcore", "s", raw_str)
     pidcore_s_agg_table = create_prime_tablename("pidcore", "s", agg_str)
+    budacct_job_table = create_prime_tablename("budacct", "job", None)
 
     # THEN
     assert budunit_s_agg_table == f"{budunit_dimen}_s_put_agg"
@@ -179,7 +181,7 @@ def test_create_prime_tablename_ReturnsObj():
     assert budawar_s_agg_table == f"{budawar_dimen}_s_put_agg"
     assert budreas_s_agg_table == f"{budreas_dimen}_s_put_agg"
     assert budprem_s_agg_table == f"{budprem_dimen}_s_put_agg"
-    assert budlabor_s_agg_table == f"{budlabor_dimen}_s_put_agg"
+    assert budlabo_s_agg_table == f"{budlabo_dimen}_s_put_agg"
     assert budheal_s_agg_table == f"{budheal_dimen}_s_put_agg"
     assert budfact_s_agg_table == f"{budfact_dimen}_s_put_agg"
     assert budfact_s_del_table == f"{budfact_dimen}_s_del_agg"
@@ -199,6 +201,7 @@ def test_create_prime_tablename_ReturnsObj():
     assert pidtitl_s_val_table == f"{pidtitl_dimen}_s_vld"
     assert pidcore_s_raw_table == f"{pidcore_dimen}_s_raw"
     assert pidcore_s_agg_table == f"{pidcore_dimen}_s_agg"
+    assert budacct_job_table == f"{budacct_dimen}_job"
 
 
 def test_create_all_idea_tables_CreatesFiscRawTables():

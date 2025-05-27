@@ -127,7 +127,7 @@ def test_create_prime_tablename_ReturnsObj():
     budawar_dimen = bud_concept_awardlink_str()
     budreas_dimen = bud_concept_reasonunit_str()
     budprem_dimen = bud_concept_reason_premiseunit_str()
-    budlabor_dimen = bud_concept_laborlink_str()
+    budlabo_dimen = bud_concept_laborlink_str()
     budheal_dimen = bud_concept_healerlink_str()
     budfact_dimen = bud_concept_factunit_str()
     fisunit_dimen = fiscunit_str()
@@ -154,7 +154,7 @@ def test_create_prime_tablename_ReturnsObj():
     assert prime_tbl("budawar", "s", agg_str, put_str) == f"{budawar_dimen}_s_put_agg"
     assert prime_tbl("budreas", "s", agg_str, put_str) == f"{budreas_dimen}_s_put_agg"
     assert prime_tbl("budprem", "s", agg_str, put_str) == f"{budprem_dimen}_s_put_agg"
-    assert prime_tbl("BUDLABO", "s", agg_str, put_str) == f"{budlabor_dimen}_s_put_agg"
+    assert prime_tbl("BUDLABO", "s", agg_str, put_str) == f"{budlabo_dimen}_s_put_agg"
     assert prime_tbl("budheal", "s", agg_str, put_str) == f"{budheal_dimen}_s_put_agg"
     assert prime_tbl("budfact", "s", agg_str, put_str) == f"{budfact_dimen}_s_put_agg"
     assert prime_tbl("budfact", "s", agg_str, del_str) == f"{budfact_dimen}_s_del_agg"

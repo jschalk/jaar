@@ -17,10 +17,6 @@
             "owner_name": {
                 "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
-            },
-            "world_id": {
-                "class_type": "WorldID",
-                "sqlite_datatype": "TEXT"
             }
         },
         "jmetrics": {
@@ -82,10 +78,6 @@
             "owner_name": {
                 "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
-            },
-            "world_id": {
-                "class_type": "WorldID",
-                "sqlite_datatype": "TEXT"
             }
         },
         "jmetrics": {
@@ -141,63 +133,6 @@
             }
         }
     },
-    "bud_groupunit": {
-        "abbreviation": "budgrou",
-        "jkeys": {
-            "fisc_label": {
-                "class_type": "LabelStr",
-                "sqlite_datatype": "TEXT"
-            },
-            "group_title": {
-                "class_type": "TitleStr",
-                "sqlite_datatype": "TEXT"
-            },
-            "owner_name": {
-                "class_type": "NameStr",
-                "sqlite_datatype": "TEXT"
-            },
-            "world_id": {
-                "class_type": "WorldID",
-                "sqlite_datatype": "TEXT"
-            }
-        },
-        "jmetrics": {
-            "_credor_pool": {
-                "class_type": "float",
-                "sqlite_datatype": "REAL"
-            },
-            "_debtor_pool": {
-                "class_type": "float",
-                "sqlite_datatype": "REAL"
-            },
-            "_fund_agenda_give": {
-                "class_type": "float",
-                "sqlite_datatype": "REAL"
-            },
-            "_fund_agenda_take": {
-                "class_type": "float",
-                "sqlite_datatype": "REAL"
-            },
-            "_fund_give": {
-                "class_type": "float",
-                "sqlite_datatype": "REAL"
-            },
-            "_fund_take": {
-                "class_type": "float",
-                "sqlite_datatype": "REAL"
-            },
-            "fund_coin": {
-                "class_type": "float",
-                "sqlite_datatype": "REAL"
-            }
-        },
-        "jvalues": {
-            "bridge": {
-                "class_type": "str",
-                "sqlite_datatype": "TEXT"
-            }
-        }
-    },
     "bud_concept_awardlink": {
         "abbreviation": "budawar",
         "jkeys": {
@@ -205,20 +140,16 @@
                 "class_type": "TitleStr",
                 "sqlite_datatype": "TEXT"
             },
-            "fisc_label": {
-                "class_type": "LabelStr",
-                "sqlite_datatype": "TEXT"
-            },
             "concept_way": {
                 "class_type": "WayStr",
                 "sqlite_datatype": "TEXT"
             },
-            "owner_name": {
-                "class_type": "NameStr",
+            "fisc_label": {
+                "class_type": "LabelStr",
                 "sqlite_datatype": "TEXT"
             },
-            "world_id": {
-                "class_type": "WorldID",
+            "owner_name": {
+                "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             }
         },
@@ -246,6 +177,10 @@
     "bud_concept_factunit": {
         "abbreviation": "budfact",
         "jkeys": {
+            "concept_way": {
+                "class_type": "WayStr",
+                "sqlite_datatype": "TEXT"
+            },
             "fcontext": {
                 "class_type": "WayStr",
                 "sqlite_datatype": "TEXT"
@@ -254,16 +189,8 @@
                 "class_type": "LabelStr",
                 "sqlite_datatype": "TEXT"
             },
-            "concept_way": {
-                "class_type": "WayStr",
-                "sqlite_datatype": "TEXT"
-            },
             "owner_name": {
                 "class_type": "NameStr",
-                "sqlite_datatype": "TEXT"
-            },
-            "world_id": {
-                "class_type": "WorldID",
                 "sqlite_datatype": "TEXT"
             }
         },
@@ -286,6 +213,10 @@
     "bud_concept_healerlink": {
         "abbreviation": "budheal",
         "jkeys": {
+            "concept_way": {
+                "class_type": "WayStr",
+                "sqlite_datatype": "TEXT"
+            },
             "fisc_label": {
                 "class_type": "LabelStr",
                 "sqlite_datatype": "TEXT"
@@ -294,31 +225,51 @@
                 "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
-            "concept_way": {
-                "class_type": "WayStr",
-                "sqlite_datatype": "TEXT"
-            },
             "owner_name": {
                 "class_type": "NameStr",
-                "sqlite_datatype": "TEXT"
-            },
-            "world_id": {
-                "class_type": "WorldID",
                 "sqlite_datatype": "TEXT"
             }
         },
         "jmetrics": {},
         "jvalues": {}
     },
-    "bud_concept_reason_premiseunit": {
-        "abbreviation": "budprem",
+    "bud_concept_laborlink": {
+        "abbreviation": "budlabo",
         "jkeys": {
+            "concept_way": {
+                "class_type": "WayStr",
+                "sqlite_datatype": "TEXT"
+            },
             "fisc_label": {
                 "class_type": "LabelStr",
                 "sqlite_datatype": "TEXT"
             },
+            "labor_title": {
+                "class_type": "TitleStr",
+                "sqlite_datatype": "TEXT"
+            },
+            "owner_name": {
+                "class_type": "NameStr",
+                "sqlite_datatype": "TEXT"
+            }
+        },
+        "jmetrics": {
+            "_owner_name_labor": {
+                "class_type": "int",
+                "sqlite_datatype": "INTEGER"
+            }
+        },
+        "jvalues": {}
+    },
+    "bud_concept_reason_premiseunit": {
+        "abbreviation": "budprem",
+        "jkeys": {
             "concept_way": {
                 "class_type": "WayStr",
+                "sqlite_datatype": "TEXT"
+            },
+            "fisc_label": {
+                "class_type": "LabelStr",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {
@@ -331,10 +282,6 @@
             },
             "rcontext": {
                 "class_type": "WayStr",
-                "sqlite_datatype": "TEXT"
-            },
-            "world_id": {
-                "class_type": "WorldID",
                 "sqlite_datatype": "TEXT"
             }
         },
@@ -366,12 +313,12 @@
     "bud_concept_reasonunit": {
         "abbreviation": "budreas",
         "jkeys": {
-            "fisc_label": {
-                "class_type": "LabelStr",
-                "sqlite_datatype": "TEXT"
-            },
             "concept_way": {
                 "class_type": "WayStr",
+                "sqlite_datatype": "TEXT"
+            },
+            "fisc_label": {
+                "class_type": "LabelStr",
                 "sqlite_datatype": "TEXT"
             },
             "owner_name": {
@@ -380,10 +327,6 @@
             },
             "rcontext": {
                 "class_type": "WayStr",
-                "sqlite_datatype": "TEXT"
-            },
-            "world_id": {
-                "class_type": "WorldID",
                 "sqlite_datatype": "TEXT"
             }
         },
@@ -408,55 +351,19 @@
             }
         }
     },
-    "bud_concept_laborlink": {
-        "abbreviation": "budlabo",
-        "jkeys": {
-            "fisc_label": {
-                "class_type": "LabelStr",
-                "sqlite_datatype": "TEXT"
-            },
-            "concept_way": {
-                "class_type": "WayStr",
-                "sqlite_datatype": "TEXT"
-            },
-            "owner_name": {
-                "class_type": "NameStr",
-                "sqlite_datatype": "TEXT"
-            },
-            "labor_title": {
-                "class_type": "TitleStr",
-                "sqlite_datatype": "TEXT"
-            },
-            "world_id": {
-                "class_type": "WorldID",
-                "sqlite_datatype": "TEXT"
-            }
-        },
-        "jmetrics": {
-            "_owner_name_labor": {
-                "class_type": "int",
-                "sqlite_datatype": "INTEGER"
-            }
-        },
-        "jvalues": {}
-    },
     "bud_conceptunit": {
         "abbreviation": "budconc",
         "jkeys": {
-            "fisc_label": {
-                "class_type": "LabelStr",
-                "sqlite_datatype": "TEXT"
-            },
             "concept_way": {
                 "class_type": "WayStr",
                 "sqlite_datatype": "TEXT"
             },
-            "owner_name": {
-                "class_type": "NameStr",
+            "fisc_label": {
+                "class_type": "LabelStr",
                 "sqlite_datatype": "TEXT"
             },
-            "world_id": {
-                "class_type": "WorldID",
+            "owner_name": {
+                "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             }
         },
@@ -565,6 +472,59 @@
             }
         }
     },
+    "bud_groupunit": {
+        "abbreviation": "budgrou",
+        "jkeys": {
+            "fisc_label": {
+                "class_type": "LabelStr",
+                "sqlite_datatype": "TEXT"
+            },
+            "group_title": {
+                "class_type": "TitleStr",
+                "sqlite_datatype": "TEXT"
+            },
+            "owner_name": {
+                "class_type": "NameStr",
+                "sqlite_datatype": "TEXT"
+            }
+        },
+        "jmetrics": {
+            "_credor_pool": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_debtor_pool": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_agenda_give": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_agenda_take": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_give": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "_fund_take": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            },
+            "fund_coin": {
+                "class_type": "float",
+                "sqlite_datatype": "REAL"
+            }
+        },
+        "jvalues": {
+            "bridge": {
+                "class_type": "str",
+                "sqlite_datatype": "TEXT"
+            }
+        }
+    },
     "budunit": {
         "abbreviation": "budunit",
         "jkeys": {
@@ -574,10 +534,6 @@
             },
             "owner_name": {
                 "class_type": "NameStr",
-                "sqlite_datatype": "TEXT"
-            },
-            "world_id": {
-                "class_type": "WorldID",
                 "sqlite_datatype": "TEXT"
             }
         },
