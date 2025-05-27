@@ -410,6 +410,38 @@ def get_prime_create_table_sqlstrs() -> dict[str:str]:
     }
 
 
+def get_fisc_bud_sound_agg_tablenames():
+    return {
+        "bud_acct_membership_s_del_agg",
+        "bud_acct_membership_s_put_agg",
+        "bud_acctunit_s_del_agg",
+        "bud_acctunit_s_put_agg",
+        "bud_concept_awardlink_s_del_agg",
+        "bud_concept_awardlink_s_put_agg",
+        "bud_concept_factunit_s_del_agg",
+        "bud_concept_factunit_s_put_agg",
+        "bud_concept_healerlink_s_del_agg",
+        "bud_concept_healerlink_s_put_agg",
+        "bud_concept_laborlink_s_del_agg",
+        "bud_concept_laborlink_s_put_agg",
+        "bud_concept_reason_premiseunit_s_del_agg",
+        "bud_concept_reason_premiseunit_s_put_agg",
+        "bud_concept_reasonunit_s_del_agg",
+        "bud_concept_reasonunit_s_put_agg",
+        "bud_conceptunit_s_del_agg",
+        "bud_conceptunit_s_put_agg",
+        "budunit_s_del_agg",
+        "budunit_s_put_agg",
+        "fisc_cashbook_s_agg",
+        "fisc_dealunit_s_agg",
+        "fisc_timeline_hour_s_agg",
+        "fisc_timeline_month_s_agg",
+        "fisc_timeline_weekday_s_agg",
+        "fisc_timeoffi_s_agg",
+        "fiscunit_s_agg",
+    }
+
+
 def get_bud_voice_agg_tablenames() -> set[str]:
     return {
         "budunit_v_put_agg",
@@ -462,14 +494,9 @@ def create_sound_agg_insert_sqlstrs(
     dimen_focus_columns = set(dimen_config.get("jkeys").keys())
 
     if dimen.lower().startswith("fisc"):
-        exclude_cols = {"idea_number", "event_int", "face_name", "error_message"}
         dimen_focus_columns = set(dimen_config.get("jkeys").keys())
-        dimen_focus_columns.remove("event_int")
-        dimen_focus_columns.remove("face_name")
         dimen_focus_columns = get_default_sorted_list(dimen_focus_columns)
-    else:
-        exclude_cols = {"idea_number", "error_message"}
-
+    exclude_cols = {"idea_number", "error_message"}
     if dimen.lower().startswith("bud"):
         agg_tablename = create_prime_tablename(dimen, "s", "agg", "put")
         raw_tablename = create_prime_tablename(dimen, "s", "raw", "put")
@@ -515,7 +542,7 @@ GROUP BY face_name, otx_bridge, inx_bridge, unknown_term
 """
 
 
-def create_insert_into_pidgin_core_vld_sqlstr(
+def create_insert_pidgin_core_agg_into_vld_sqlstr(
     default_bridge: str, default_unknown: str
 ):
     return f"""INSERT INTO pidgin_core_s_vld (face_name, otx_bridge, inx_bridge, unknown_term)
@@ -525,6 +552,23 @@ SELECT
 , IFNULL(inx_bridge, '{default_bridge}')
 , IFNULL(unknown_term, '{default_unknown}')
 FROM pidgin_core_s_agg
+;
+"""
+
+
+def create_insert_missing_face_name_into_pidgin_core_vld_sqlstr(
+    default_bridge: str, default_unknown: str, fisc_bud_sound_agg_tablename: str
+):
+    return f"""INSERT INTO pidgin_core_s_vld (face_name, otx_bridge, inx_bridge, unknown_term)
+SELECT
+  {fisc_bud_sound_agg_tablename}.face_name
+, '{default_bridge}'
+, '{default_bridge}'
+, '{default_unknown}'
+FROM {fisc_bud_sound_agg_tablename} 
+LEFT JOIN pidgin_core_s_vld ON pidgin_core_s_vld.face_name = {fisc_bud_sound_agg_tablename}.face_name
+WHERE pidgin_core_s_vld.face_name IS NULL
+GROUP BY {fisc_bud_sound_agg_tablename}.face_name
 ;
 """
 

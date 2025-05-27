@@ -79,16 +79,18 @@ from src.a17_idea_logic.idea_db_tool import (
 from src.a17_idea_logic.pidgin_toolbox import init_pidginunit_from_dir
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
+    get_fisc_bud_sound_agg_tablenames,
     create_sound_and_voice_tables,
     create_sound_raw_update_inconsist_error_message_sqlstr,
     create_sound_agg_insert_sqlstrs,
     create_insert_into_pidgin_core_raw_sqlstr,
-    create_insert_into_pidgin_core_vld_sqlstr,
+    create_insert_pidgin_core_agg_into_vld_sqlstr,
     create_update_pidgin_sound_agg_inconsist_sqlstr,
     create_update_pidlabe_sound_agg_bridge_error_sqlstr,
     create_update_pidwayy_sound_agg_bridge_error_sqlstr,
     create_update_pidname_sound_agg_bridge_error_sqlstr,
     create_update_pidtitl_sound_agg_bridge_error_sqlstr,
+    create_insert_missing_face_name_into_pidgin_core_vld_sqlstr,
     create_insert_pidgin_sound_vld_table_sqlstr,
     get_insert_into_sound_vld_sqlstrs,
     get_insert_into_voice_raw_sqlstrs,
@@ -385,7 +387,7 @@ def insert_pidgin_sound_agg_into_pidgin_core_raw_table(cursor: sqlite3_Cursor):
 def insert_pidgin_core_agg_to_pidgin_core_vld_table(cursor: sqlite3_Cursor):
     bridge = default_bridge_if_None()
     unknown = default_unknown_term_if_None()
-    insert_sqlstr = create_insert_into_pidgin_core_vld_sqlstr(bridge, unknown)
+    insert_sqlstr = create_insert_pidgin_core_agg_into_vld_sqlstr(bridge, unknown)
     cursor.execute(insert_sqlstr)
 
 
@@ -464,11 +466,22 @@ def get_fisc_bud_sound_agg_pidginable_columns(
     return pidgin_columns
 
 
+def populate_pidgin_core_vld_with_missing_face_names(cursor: sqlite3_Cursor):
+    for agg_tablename in get_fisc_bud_sound_agg_tablenames():
+        insert_sqlstr = create_insert_missing_face_name_into_pidgin_core_vld_sqlstr(
+            default_bridge=default_bridge_if_None(),
+            default_unknown=default_unknown_term_if_None(),
+            fisc_bud_sound_agg_tablename=agg_tablename,
+        )
+        cursor.execute(insert_sqlstr)
+
+
 def etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor: sqlite3_Cursor):
     insert_pidgin_sound_agg_into_pidgin_core_raw_table(cursor)
     update_inconsistency_pidgin_core_raw_table(cursor)
     insert_pidgin_core_raw_to_pidgin_core_agg_table(cursor)
     insert_pidgin_core_agg_to_pidgin_core_vld_table(cursor)
+    populate_pidgin_core_vld_with_missing_face_names(cursor)
     update_pidgin_sound_agg_inconsist_errors(cursor)
     update_pidgin_sound_agg_bridge_errors(cursor)
     insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor)
