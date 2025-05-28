@@ -1,6 +1,6 @@
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_label_str
 from src.a01_way_logic.way import default_bridge_if_None
-from src.a06_bud_logic._utils.str_a06 import (
+from src.a02_finance_logic._test_util.a02_str import owner_name_str, fisc_label_str
+from src.a06_bud_logic._test_util.a06_str import (
     type_NameStr_str,
     type_TitleStr_str,
     type_LabelStr_str,
@@ -22,12 +22,12 @@ from src.a06_bud_logic._utils.str_a06 import (
     concept_way_str,
     labor_title_str,
 )
-from src.a07_calendar_logic._utils.str_a07 import timeline_label_str
+from src.a07_calendar_logic._test_util.a07_str import timeline_label_str
 from src.a08_bud_atom_logic.atom_config import (
     get_atom_args_class_types,
     get_all_bud_dimen_delete_keys,
 )
-from src.a15_fisc_logic._utils.str_a15 import (
+from src.a15_fisc_logic._test_util.a15_str import (
     weekday_label_str,
     month_label_str,
     hour_label_str,
@@ -51,7 +51,7 @@ from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_WayStr_args,
 )
 from src.a16_pidgin_logic.pidgin import PidginUnit, pidginunit_shop
-from src.a16_pidgin_logic._utils.example_pidgins import (
+from src.a16_pidgin_logic._test_util.example_pidgins import (
     get_invalid_namemap,
     get_invalid_titlemap,
     get_invalid_waymap,

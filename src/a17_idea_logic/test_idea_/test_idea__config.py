@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import save_json, create_path
-from src.a02_finance_logic._utils.strs_a02 import (
+from src.a02_finance_logic._test_util.a02_str import (
     quota_str,
     deal_time_str,
     tran_time_str,
@@ -9,7 +9,7 @@ from src.a02_finance_logic._utils.strs_a02 import (
     fisc_label_str,
     world_id_str,
 )
-from src.a06_bud_logic._utils.str_a06 import (
+from src.a06_bud_logic._test_util.a06_str import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
@@ -59,13 +59,13 @@ from src.a06_bud_logic._utils.str_a06 import (
     pnigh_str,
     popen_str,
 )
-from src.a07_calendar_logic._utils.str_a07 import (
+from src.a07_calendar_logic._test_util.a07_str import (
     c400_number_str,
     monthday_distortion_str,
     timeline_label_str,
     yr1_jan1_offset_str,
 )
-from src.a08_bud_atom_logic._utils.str_a08 import (
+from src.a08_bud_atom_logic._test_util.a08_str import (
     jkeys_str,
     jvalues_str,
     normal_specs_str,
@@ -85,7 +85,7 @@ from src.a10_bud_calc.bud_calc_config import (
     get_all_bud_calc_args,
     get_bud_calc_args_sqlite_datatype_dict,
 )
-from src.a15_fisc_logic._utils.str_a15 import (
+from src.a15_fisc_logic._test_util.a15_str import (
     fiscunit_str,
     fisc_dealunit_str,
     fisc_cashbook_str,
@@ -107,7 +107,7 @@ from src.a15_fisc_logic.fisc_config import (
     get_fisc_config_dict,
     get_fisc_dimens,
 )
-from src.a16_pidgin_logic._utils.str_a16 import (
+from src.a16_pidgin_logic._test_util.a16_str import (
     pidginunit_str,
     otx_bridge_str,
     inx_bridge_str,
@@ -132,7 +132,7 @@ from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_args_dimen_mapping,
     get_pidginable_args,
 )
-from src.a17_idea_logic._utils.str_a17 import (
+from src.a17_idea_logic._test_util.a17_str import (
     idea_category_str,
     get_idea_categorys,
     idea_number_str,

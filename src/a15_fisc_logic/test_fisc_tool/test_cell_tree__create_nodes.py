@@ -10,7 +10,7 @@ from src.a12_hub_tools.hub_tool import (
     cellunit_get_from_dir,
 )
 from src.a15_fisc_logic.fisc_tool import create_cell_tree
-from src.a15_fisc_logic._utils.env_a15 import (
+from src.a15_fisc_logic._test_util.env_a15 import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )

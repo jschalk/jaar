@@ -2,7 +2,7 @@
 # from src.a00_data_toolbox.sqlite import check_table_column_existence
 # from src.a15_fisc_logic.journal_sqlstr import get_atom_hx_table_insert_sqlstr
 # from src.a15_fisc_logic.fisc import fiscunit_shop
-# from src.a15_fisc_logic._utils.fisc_env import (
+# from src.a15_fisc_logic._test_util.fisc_env import (
 #     env_dir_setup_cleanup,
 # )
 # from src.a00_data_toolbox.sqlite import get_row_count

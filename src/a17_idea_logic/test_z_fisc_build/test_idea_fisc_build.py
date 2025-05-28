@@ -1,16 +1,16 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a07_calendar_logic._utils.calendar_examples import get_five_config
+from src.a07_calendar_logic._test_util.calendar_examples import get_five_config
 from src.a07_calendar_logic.chrono import (
     timelineunit_shop,
     get_default_timeline_config_dict,
 )
 from src.a15_fisc_logic.fisc import fiscunit_shop
 from src.a17_idea_logic.idea import fisc_build_from_df
-from src.a17_idea_logic._utils.env_a17 import (
+from src.a17_idea_logic._test_util.env_a17 import (
     idea_fiscs_dir,
     env_dir_setup_cleanup,
 )
-from src.a17_idea_logic._utils.idea_df_examples import (
+from src.a17_idea_logic._test_util.idea_df_examples import (
     get_ex1_br00000_df,
     get_ex1_br00001_df,
     get_ex1_br00002_df,

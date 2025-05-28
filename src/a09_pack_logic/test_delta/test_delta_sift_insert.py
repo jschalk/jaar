@@ -1,5 +1,5 @@
 from src.a06_bud_logic.bud import budunit_shop
-from src.a06_bud_logic._utils.str_a06 import (
+from src.a06_bud_logic._test_util.a06_str import (
     bud_acctunit_str,
     bud_acct_membership_str,
     acct_name_str,

@@ -1,6 +1,6 @@
-from src.a06_bud_logic._utils.str_a06 import type_NameStr_str
+from src.a06_bud_logic._test_util.a06_str import type_NameStr_str
 from src.a16_pidgin_logic.pidgin import pidginunit_shop, inherit_pidginunit
-from src.a16_pidgin_logic._utils.example_pidgins import (
+from src.a16_pidgin_logic._test_util.example_pidgins import (
     get_clean_waymap,
     get_clean_labelmap,
     get_swim_titlemap,

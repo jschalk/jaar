@@ -1,11 +1,11 @@
 # from src.a00_data_toolbox.dict_toolbox import get_from_nested_dict
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a02_finance_logic._utils.strs_a02 import (
+from src.a02_finance_logic._test_util.a02_str import (
     fisc_label_str,
     owner_name_str,
     world_id_str,
 )
-from src.a06_bud_logic._utils.str_a06 import (
+from src.a06_bud_logic._test_util.a06_str import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
@@ -52,14 +52,14 @@ from src.a06_bud_logic._utils.str_a06 import (
     type_LabelStr_str,
     type_WayStr_str,
 )
-from src.a08_bud_atom_logic._utils.str_a08 import (
+from src.a08_bud_atom_logic._test_util.a08_str import (
     class_type_str,
     jkeys_str,
     jvalues_str,
     sqlite_datatype_str,
 )
 from src.a08_bud_atom_logic.atom_config import get_atom_config_dict
-from src.a10_bud_calc._utils.str_a10 import (
+from src.a10_bud_calc._test_util.a10_str import (
     jmetrics_str,
     fund_take_str,
     fund_give_str,

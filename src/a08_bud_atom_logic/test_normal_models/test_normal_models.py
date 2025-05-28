@@ -1,4 +1,4 @@
-from src.a06_bud_logic._utils.str_a06 import (
+from src.a06_bud_logic._test_util.a06_str import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
@@ -10,7 +10,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_concept_healerlink_str,
     bud_concept_factunit_str,
 )
-from src.a08_bud_atom_logic._utils.str_a08 import (
+from src.a08_bud_atom_logic._test_util.a08_str import (
     normal_table_name_str,
     normal_specs_str,
     columns_str,

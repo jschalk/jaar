@@ -10,16 +10,16 @@ from src.a00_data_toolbox.dict_toolbox import (
     exists_in_nested_dict,
     del_in_nested_dict,
 )
-from src.a02_finance_logic.finance_config import (
-    FundNum,
-    TimeLinePoint,
-    default_fund_pool,
-)
 from src.a01_way_logic.way import (
     AcctName,
     OwnerName,
     FiscLabel,
     get_default_fisc_label,
+)
+from src.a02_finance_logic.finance_config import (
+    FundNum,
+    TimeLinePoint,
+    default_fund_pool,
 )
 from dataclasses import dataclass
 

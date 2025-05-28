@@ -1,10 +1,10 @@
-from src.a05_concept_logic.concept import conceptunit_shop
+from src.a01_way_logic.way import get_default_fisc_label as root_label, create_way
 from src.a04_reason_logic.reason_concept import (
     reasonunit_shop,
     premiseunit_shop,
     factunit_shop,
 )
-from src.a01_way_logic.way import get_default_fisc_label as root_label, create_way
+from src.a05_concept_logic.concept import conceptunit_shop
 
 
 def test_ConceptUnit_find_replace_way_CorrectlyModifies_parent_way():

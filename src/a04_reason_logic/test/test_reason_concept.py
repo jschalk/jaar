@@ -1,3 +1,9 @@
+from src.a01_way_logic.way import (
+    get_default_fisc_label as root_label,
+    get_default_fisc_way,
+    create_way,
+    default_bridge_if_None,
+)
 from src.a04_reason_logic.reason_concept import (
     ReasonCore,
     reasoncore_shop,
@@ -6,12 +12,6 @@ from src.a04_reason_logic.reason_concept import (
     factheir_shop,
     premiseunit_shop,
     reasons_get_from_dict,
-)
-from src.a01_way_logic.way import (
-    get_default_fisc_label as root_label,
-    get_default_fisc_way,
-    create_way,
-    default_bridge_if_None,
 )
 
 

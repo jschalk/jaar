@@ -15,7 +15,7 @@ from src.a01_way_logic.way import (
     get_default_face_name,
     EventInt,
 )
-from src.a01_way_logic._utils.strs_a01 import bridge_str
+from src.a01_way_logic._test_util.a01_str import bridge_str
 from inspect import getdoc as inspect_getdoc
 
 

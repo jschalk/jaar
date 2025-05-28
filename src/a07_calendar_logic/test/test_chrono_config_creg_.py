@@ -9,7 +9,7 @@ from src.a07_calendar_logic.chrono import (
     get_timeline_min_difference,
     get_min_from_dt,
 )
-from src.a07_calendar_logic._utils.str_a07 import (
+from src.a07_calendar_logic._test_util.a07_str import (
     c100_str,
     c400_leap_str,
     c400_clean_str,
@@ -25,7 +25,7 @@ from src.a07_calendar_logic._utils.str_a07 import (
     yr4_leap_str,
     yr4_clean_str,
 )
-from src.a07_calendar_logic._utils.calendar_examples import (
+from src.a07_calendar_logic._test_util.calendar_examples import (
     add_time_creg_conceptunit,
     add_time_five_conceptunit,
     get_creg_min_from_dt,

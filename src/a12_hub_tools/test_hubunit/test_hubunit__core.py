@@ -13,7 +13,7 @@ from src.a02_finance_logic.finance_config import (
 )
 from src.a12_hub_tools.hub_path import create_owner_dir_path
 from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop, get_keep_path
-from src.a13_bud_listen_logic._utils.env_a13 import (
+from src.a13_bud_listen_logic._test_util.env_a13 import (
     get_module_temp_dir as env_dir,
     env_dir_setup_cleanup,
 )
@@ -56,7 +56,7 @@ def test_HubUnit_RaisesError_keep_way_DoesNotExist():
 
 def test_hubunit_shop_ReturnsObj():
     # ESTABLISH
-    x_fisc_mstr_dir = "src/a15_fisc_logic/_utils"
+    x_fisc_mstr_dir = "src/a15_fisc_logic/_test_util"
     x_fisc_label = "accord45"
     sue_str = "Sue"
     x_bridge = "/"

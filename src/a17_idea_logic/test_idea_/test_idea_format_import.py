@@ -1,7 +1,7 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_label_str
+from src.a02_finance_logic._test_util.a02_str import owner_name_str, fisc_label_str
 from src.a06_bud_logic.bud import budunit_shop
-from src.a06_bud_logic._utils.str_a06 import (
+from src.a06_bud_logic._test_util.a06_str import (
     acct_name_str,
     debtit_belief_str,
     credit_belief_str,
@@ -15,7 +15,7 @@ from src.a17_idea_logic.idea_config import (
     idea_format_00013_conceptunit_v0_0_0,
 )
 from src.a17_idea_logic.idea_db_tool import open_csv
-from src.a17_idea_logic._utils.env_a17 import (
+from src.a17_idea_logic._test_util.env_a17 import (
     idea_examples_dir,
     env_dir_setup_cleanup,
 )

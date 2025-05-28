@@ -10,7 +10,7 @@ from src.a06_bud_logic.bud import (
     get_from_json as budunit_get_from_json,
     get_dict_of_bud_from_dict,
 )
-from src.a06_bud_logic._utils.example_buds import (
+from src.a06_bud_logic._test_util.example_buds import (
     budunit_v001,
     get_budunit_x1_3levels_1reason_1facts,
     get_budunit_rcontext_time_example,

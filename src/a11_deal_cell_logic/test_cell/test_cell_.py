@@ -1,7 +1,7 @@
 from src.a01_way_logic.way import create_way
 from src.a04_reason_logic.reason_concept import factunit_shop
 from src.a06_bud_logic.bud import budunit_shop
-from src.a11_deal_cell_logic._utils.str_a11 import (
+from src.a11_deal_cell_logic._test_util.a11_str import (
     ancestors_str,
     celldepth_str,
     deal_owner_name_str,
@@ -17,7 +17,7 @@ from src.a11_deal_cell_logic.cell import (
     CELLNODE_QUOTA_DEFAULT,
     create_child_cellunits,
 )
-from src.a13_bud_listen_logic._utils.example_listen import (
+from src.a13_bud_listen_logic._test_util.example_listen import (
     example_casa_clean_factunit as clean_factunit,
     example_casa_dirty_factunit as dirty_factunit,
     example_casa_grimy_factunit as grimy_factunit,

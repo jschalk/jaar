@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.dict_toolbox import get_from_nested_dict
-from src.a06_bud_logic._utils.str_a06 import (
+from src.a06_bud_logic._test_util.a06_str import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
@@ -11,7 +11,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     bud_concept_healerlink_str,
     bud_concept_factunit_str,
 )
-from src.a06_bud_logic._utils.str_a06 import (
+from src.a06_bud_logic._test_util.a06_str import (
     acct_name_str,
     acct_pool_str,
     addin_str,
@@ -47,7 +47,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     type_LabelStr_str,
     type_WayStr_str,
 )
-from src.a08_bud_atom_logic._utils.str_a08 import (
+from src.a08_bud_atom_logic._test_util.a08_str import (
     atom_insert,
     atom_delete,
     atom_update,

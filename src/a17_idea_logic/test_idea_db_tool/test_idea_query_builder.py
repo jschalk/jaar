@@ -1,5 +1,5 @@
-from src.a02_finance_logic._utils.strs_a02 import fisc_label_str, owner_name_str
-from src.a06_bud_logic._utils.str_a06 import (
+from src.a02_finance_logic._test_util.a02_str import fisc_label_str, owner_name_str
+from src.a06_bud_logic._test_util.a06_str import (
     event_int_str,
     face_name_str,
     concept_way_str,
@@ -8,7 +8,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     credit_belief_str,
     debtit_belief_str,
 )
-from src.a15_fisc_logic._utils.str_a15 import amount_str
+from src.a15_fisc_logic._test_util.a15_str import amount_str
 from src.a17_idea_logic.idea_config import get_idea_config_dict
 from src.a17_idea_logic.idea_db_tool import (
     create_idea_sorted_table,

@@ -1,9 +1,9 @@
-from src.a02_finance_logic.finance_config import default_fund_coin_if_None
 from src.a01_way_logic.way import (
     get_default_fisc_label as root_label,
     create_way,
     default_bridge_if_None,
 )
+from src.a02_finance_logic.finance_config import default_fund_coin_if_None
 from src.a03_group_logic.group import membership_shop
 from src.a03_group_logic.group import groupunit_shop, GroupUnit
 from pytest import raises as pytest_raises

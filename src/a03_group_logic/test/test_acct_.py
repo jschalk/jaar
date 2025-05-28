@@ -1,7 +1,7 @@
 from src.a01_way_logic.way import default_bridge_if_None
 from src.a02_finance_logic.finance_config import default_respect_bit_if_None
 from src.a03_group_logic.acct import AcctUnit, acctunit_shop
-from src.a03_group_logic._utils.strs_a03 import (
+from src.a03_group_logic._test_util.a03_str import (
     credit_belief_str,
     debtit_belief_str,
     acct_name_str,

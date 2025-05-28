@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_create_table_sqlstr
-from src.a02_finance_logic._utils.strs_a02 import fisc_label_str, owner_name_str
-from src.a06_bud_logic._utils.str_a06 import (
+from src.a02_finance_logic._test_util.a02_str import fisc_label_str, owner_name_str
+from src.a06_bud_logic._test_util.a06_str import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,

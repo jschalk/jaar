@@ -9,7 +9,7 @@ from src.a05_concept_logic.concept import conceptunit_shop
 from src.a05_concept_logic.healer import healerlink_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic.bud_graphics import display_concepttree
-from src.a06_bud_logic._utils.example_buds import (
+from src.a06_bud_logic._test_util.example_buds import (
     get_budunit_with_4_levels_and_2reasons,
     get_budunit_with7amCleanTableReason,
     budunit_v001,

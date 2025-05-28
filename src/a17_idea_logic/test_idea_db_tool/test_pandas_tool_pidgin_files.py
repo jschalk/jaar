@@ -1,13 +1,13 @@
 from src.a00_data_toolbox.file_toolbox import save_file, create_path
 from src.a01_way_logic.way import create_way, to_way
-from src.a06_bud_logic._utils.str_a06 import acct_name_str, rcontext_str
+from src.a06_bud_logic._test_util.a06_str import acct_name_str, rcontext_str
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
-from src.a16_pidgin_logic._utils.str_a16 import pidgin_filename
-from src.a16_pidgin_logic._utils.env_a16 import (
+from src.a16_pidgin_logic._test_util.a16_str import pidgin_filename
+from src.a16_pidgin_logic._test_util.env_a16 import (
     env_dir_setup_cleanup,
     get_example_face_dir,
 )
-from src.a16_pidgin_logic._utils.example_pidgins import (
+from src.a16_pidgin_logic._test_util.example_pidgins import (
     get_casa_maison_pidginunit_set_by_label,
     get_casa_maison_way_otx_dt,
     get_casa_maison_way_inx_dt,

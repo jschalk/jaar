@@ -5,14 +5,18 @@ from src.a00_data_toolbox.file_toolbox import (
     open_json,
 )
 from src.a00_data_toolbox.db_toolbox import get_row_count, db_table_exists
-from src.a02_finance_logic._utils.strs_a02 import (
+from src.a02_finance_logic._test_util.a02_str import (
     owner_name_str,
     fisc_label_str,
     deal_time_str,
     quota_str,
     celldepth_str,
 )
-from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str, acct_name_str
+from src.a06_bud_logic._test_util.a06_str import (
+    face_name_str,
+    event_int_str,
+    acct_name_str,
+)
 from src.a12_hub_tools.hub_path import (
     create_fisc_ote1_csv_path,
     create_fisc_json_path,
@@ -22,12 +26,12 @@ from src.a12_hub_tools.hub_path import (
     create_job_path,
     create_deal_acct_mandate_ledger_path as deal_mandate,
 )
-from src.a15_fisc_logic._utils.str_a15 import cumlative_minute_str, hour_label_str
-from src.a16_pidgin_logic._utils.str_a16 import otx_name_str, inx_name_str
+from src.a15_fisc_logic._test_util.a15_str import cumlative_minute_str, hour_label_str
+from src.a16_pidgin_logic._test_util.a16_str import otx_name_str, inx_name_str
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic._utils.env_a19 import (
+from src.a19_world_logic._test_util.env_a19 import (
     get_module_temp_dir as worlds_dir,
     env_dir_setup_cleanup,
 )

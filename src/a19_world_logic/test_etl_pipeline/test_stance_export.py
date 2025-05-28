@@ -1,13 +1,17 @@
 from src.a00_data_toolbox.file_toolbox import create_path, set_dir
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_label_str
-from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str, acct_name_str
+from src.a02_finance_logic._test_util.a02_str import owner_name_str, fisc_label_str
+from src.a06_bud_logic._test_util.a06_str import (
+    face_name_str,
+    event_int_str,
+    acct_name_str,
+)
 from src.a17_idea_logic.idea_db_tool import upsert_sheet, get_sheet_names
 from src.a18_etl_toolbox.tran_path import (
     create_stances_dir_path,
     create_stance0001_path,
 )
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic._utils.env_a19 import (
+from src.a19_world_logic._test_util.env_a19 import (
     get_module_temp_dir as worlds_dir,
     env_dir_setup_cleanup,
 )

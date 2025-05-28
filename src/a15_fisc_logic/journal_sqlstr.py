@@ -1,16 +1,10 @@
+from src.a01_way_logic.way import WayStr
 from src.a08_bud_atom_logic.atom_config import get_flattened_atom_table_build
-from src.a08_bud_atom_logic._utils.str_a08 import (
+from src.a08_bud_atom_logic._test_util.a08_str import (
     atom_hx_table_name,
     atom_mstr_table_name,
 )
 from src.a08_bud_atom_logic.atom import BudAtom
-from src.a01_way_logic.way import WayStr
-
-# from src.a00_data_toolbox.sqlite import (
-#     sqlite_to_python,
-# )
-# from dataclasses import dataclass
-# from sqlite3 import Connection
 
 
 def get_atom_hx_table_create_sqlstr() -> str:

@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a20_lobby_db_toolbox._utils.str_a20 import (
+from src.a20_lobby_db_toolbox._test_util.a20_str import (
     lobbys_str,
     lobby_id_str,
     lobby_mstr_dir_str,
@@ -10,7 +10,7 @@ from src.a20_lobby_db_toolbox.lobby_path import (
     create_world_dir_path,
     create_fisc_mstr_dir_path,
 )
-from src.a20_lobby_db_toolbox._utils.env_a20 import get_module_temp_dir
+from src.a20_lobby_db_toolbox._test_util.env_a20 import get_module_temp_dir
 
 
 def test_str_functions_ReturnObjs():

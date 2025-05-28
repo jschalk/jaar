@@ -10,13 +10,13 @@ from src.a12_hub_tools.hub_tool import (
     save_bud_file,
 )
 from src.a15_fisc_logic.fisc_tool import set_cell_trees_decrees, DecreeUnit
-from src.a15_fisc_logic._utils.example_fiscs import (
+from src.a15_fisc_logic._test_util.example_fiscs import (
     example_casa_clean_factunit,
     example_casa_dirty_factunit,
     get_bob_mop_without_reason_budunit_example,
     get_bob_mop_with_reason_budunit_example,
 )
-from src.a15_fisc_logic._utils.env_a15 import (
+from src.a15_fisc_logic._test_util.env_a15 import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )

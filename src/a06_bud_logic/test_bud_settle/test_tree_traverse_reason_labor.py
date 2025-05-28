@@ -1,7 +1,7 @@
 from src.a01_way_logic.way import to_way
 from src.a04_reason_logic.reason_labor import laborheir_shop, laborunit_shop
-from src.a06_bud_logic.bud import budunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
+from src.a06_bud_logic.bud import budunit_shop
 
 
 def test_bud_edit_concept_attr_CorrectlySetsLaborUnit():

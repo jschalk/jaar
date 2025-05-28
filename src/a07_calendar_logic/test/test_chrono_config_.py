@@ -1,6 +1,6 @@
 from src.a02_finance_logic.finance_config import TimeLinePoint
 from src.a06_bud_logic.bud import budunit_shop
-from src.a07_calendar_logic._utils.calendar_examples import (
+from src.a07_calendar_logic._test_util.calendar_examples import (
     get_creg_config,
     get_five_config,
     get_squirt_config,
@@ -20,7 +20,7 @@ from src.a07_calendar_logic.chrono import (
     get_week_way,
     get_day_way,
 )
-from src.a07_calendar_logic._utils.str_a07 import (
+from src.a07_calendar_logic._test_util.a07_str import (
     c100_str,
     c400_leap_str,
     c400_clean_str,

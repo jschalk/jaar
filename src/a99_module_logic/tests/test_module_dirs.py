@@ -1,0 +1,115 @@
+from src.a00_data_toolbox.file_toolbox import get_level1_dirs, create_path
+from os.path import exists as os_path_exists
+from ast import (
+    parse as ast_parse,
+    walk as ast_walk,
+    Import as ast_Import,
+    ImportFrom as ast_ImportFrom,
+)
+from os.path import join as os_path_join
+from os import walk as os_walk
+
+
+def get_imports_from_file(file_path):
+    """
+    Parses a Python file and returns a list of lists.
+    Each inner list contains:
+    - The source module from a 'from ... import ...' statement
+    - Followed by all imported objects from that module
+
+    Example:
+    [['math', 'sqrt', 'pi'], ['os.path', 'join']]
+
+    :param file_path: Path to the Python (.py) file
+    :return: List of lists: [module, imported_obj1, imported_obj2, ...]
+    """
+    imports = []
+
+    with open(file_path, "r", encoding="utf-8") as file:
+        node = ast_parse(file.read(), filename=file_path)
+
+    for n in ast_walk(node):
+        if isinstance(n, ast_ImportFrom) and n.module:
+            import_entry = [n.module, [alias.name for alias in n.names]]
+            imports.append(import_entry)
+
+    return imports
+
+
+def get_python_files_with_flag(directory):
+    """
+    Recursively finds all .py files in a given directory.
+    Returns a dictionary with file paths as keys and 1 as the value for each.
+
+    :param directory: The root directory to search
+    :return: Dictionary {file_path: 1, ...}
+    """
+    py_files = {}
+
+    for root, _, files in os_walk(directory):
+        for file in files:
+            if file.endswith(".py"):
+                full_path = os_path_join(root, file)
+                py_files[full_path] = get_imports_from_file(full_path)
+
+    return py_files
+
+
+def get_module_descs() -> dict[str, str]:
+    src_dir = "src"
+    module_descs = get_level1_dirs(src_dir)
+    module_descs.pop(-1) == "a99_module_logic"
+    return {
+        module_desc: create_path(src_dir, module_desc) for module_desc in module_descs
+    }
+
+
+def test_ModuleDirectorysAreNumberedCorrectly():
+    # sourcery skip: no-loop-in-tests
+    # ESTABLISH
+
+    # WHEN / THEN
+    previous_module_number = -1
+    for module_desc, module_dir in get_module_descs().items():
+        module_number = int(module_desc[1:3])
+        assert module_number == previous_module_number + 1
+        print(f"{module_desc=} {module_number=}")
+        utils_dir = create_path(module_dir, "_test_util")
+        assert os_path_exists(utils_dir)
+        str_func_path = create_path(utils_dir, f"a{module_desc[1:3]}_str.py")
+        assert os_path_exists(str_func_path)
+
+        previous_module_number = module_number
+
+
+def test_CheckAllPythonFileImportsAreInCorrectFormat():
+    # sourcery skip: no-loop-in-tests
+    # ESTABLISH / WHEN / THEN
+    for module_desc, module_dir in get_module_descs().items():
+        python_files = get_python_files_with_flag(module_dir)
+        print(f"{module_desc=} {len(python_files)=}")
+        for file_path, file_imports in python_files.items():
+            check_module_imports_are_ordered(file_imports, file_path)
+
+    # example_path = "src/a09_pack_logic/delta.py"
+    # imports = get_imports_from_file(example_path)
+    # check_module_imports_are_ordered(imports, example_path)
+
+
+def check_module_imports_are_ordered(imports: list[list], file_path: str):
+    previous_module_number = -1
+    module_section_passed = False
+    for x_import in imports:
+        module_location = x_import[0]
+        print(f"{file_path} {module_location=}")
+        if module_location[:3] == "src":
+            module_number = int(module_location[5:7])
+            assert module_section_passed is False
+            if module_number < previous_module_number:
+                print(
+                    f"{file_path} {module_number=} {previous_module_number=} {x_import=}"
+                )
+            assert module_number >= previous_module_number
+            previous_module_number = module_number
+        else:
+            module_section_passed = True

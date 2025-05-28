@@ -1,6 +1,6 @@
 from src.a01_way_logic.way import default_bridge_if_None
-from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str
-from src.a16_pidgin_logic._utils.str_a16 import (
+from src.a06_bud_logic._test_util.a06_str import face_name_str, event_int_str
+from src.a16_pidgin_logic._test_util.a16_str import (
     otx_bridge_str,
     inx_bridge_str,
     unknown_term_str,
@@ -11,7 +11,7 @@ from src.a16_pidgin_logic.pidgin import (
     get_pidginunit_from_dict,
     get_pidginunit_from_json,
 )
-from src.a16_pidgin_logic._utils.example_pidgins import (
+from src.a16_pidgin_logic._test_util.example_pidgins import (
     get_clean_waymap,
     get_clean_labelmap,
     get_swim_titlemap,

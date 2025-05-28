@@ -1,15 +1,15 @@
+from src.a01_way_logic.way import (
+    get_default_fisc_label as root_label,
+    get_default_fisc_way,
+    create_way,
+    find_replace_way_key_dict,
+)
 from src.a04_reason_logic.reason_concept import (
     PremiseUnit,
     premiseunit_shop,
     factheir_shop,
     premiseunit_shop,
     premises_get_from_dict,
-)
-from src.a01_way_logic.way import (
-    get_default_fisc_label as root_label,
-    get_default_fisc_way,
-    create_way,
-    find_replace_way_key_dict,
 )
 
 

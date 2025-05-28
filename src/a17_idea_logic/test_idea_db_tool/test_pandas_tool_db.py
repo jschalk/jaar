@@ -1,5 +1,5 @@
-from src.a02_finance_logic._utils.strs_a02 import fisc_label_str, owner_name_str
-from src.a06_bud_logic._utils.str_a06 import (
+from src.a02_finance_logic._test_util.a02_str import fisc_label_str, owner_name_str
+from src.a06_bud_logic._test_util.a06_str import (
     face_name_str,
     event_int_str,
     acct_name_str,
@@ -7,7 +7,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     gogo_want_str,
 )
 from src.a17_idea_logic.idea_config import get_idea_sqlite_types
-from src.a17_idea_logic._utils.env_a17 import env_dir_setup_cleanup
+from src.a17_idea_logic._test_util.env_a17 import env_dir_setup_cleanup
 from src.a17_idea_logic.idea_db_tool import (
     create_idea_table_from_csv,
     insert_idea_csv,

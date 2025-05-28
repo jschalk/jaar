@@ -3,7 +3,7 @@ from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import factunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_bud_logic.bud import budunit_shop
-from src.a06_bud_logic._utils.str_a06 import (
+from src.a06_bud_logic._test_util.a06_str import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
@@ -42,7 +42,7 @@ from src.a08_bud_atom_logic.atom import (
     budatom_shop,
 )
 from src.a09_pack_logic.delta import buddelta_shop
-from src.a09_pack_logic._utils.example_deltas import get_buddelta_example1
+from src.a09_pack_logic._test_util.example_deltas import get_buddelta_example1
 
 
 def test_BudDelta_get_edited_bud_ReturnsObj_SimplestScenario():

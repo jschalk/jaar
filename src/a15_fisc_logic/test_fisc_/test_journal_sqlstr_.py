@@ -1,11 +1,11 @@
 from src.a01_way_logic.way import create_way
-from src.a06_bud_logic._utils.str_a06 import bud_concept_factunit_str
-from src.a06_bud_logic._utils.str_a06 import (
+from src.a06_bud_logic._test_util.a06_str import bud_concept_factunit_str
+from src.a06_bud_logic._test_util.a06_str import (
     fopen_str,
     fcontext_str,
     concept_way_str,
 )
-from src.a08_bud_atom_logic._utils.str_a08 import atom_insert, atom_hx_table_name
+from src.a08_bud_atom_logic._test_util.a08_str import atom_insert, atom_hx_table_name
 from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a15_fisc_logic.journal_sqlstr import (
     get_atom2delta_table_create_sqlstr,

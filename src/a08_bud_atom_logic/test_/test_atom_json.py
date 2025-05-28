@@ -1,12 +1,13 @@
+from src.a00_data_toolbox.dict_toolbox import x_is_json
 from src.a01_way_logic.way import create_way
-from src.a06_bud_logic._utils.str_a06 import bud_concept_factunit_str
-from src.a06_bud_logic._utils.str_a06 import (
+from src.a06_bud_logic._test_util.a06_str import bud_concept_factunit_str
+from src.a06_bud_logic._test_util.a06_str import (
     concept_way_str,
     fcontext_str,
     fopen_str,
     fnigh_str,
 )
-from src.a08_bud_atom_logic._utils.str_a08 import (
+from src.a08_bud_atom_logic._test_util.a08_str import (
     jkeys_str,
     jvalues_str,
     dimen_str,
@@ -17,7 +18,6 @@ from src.a08_bud_atom_logic.atom import (
     atom_insert,
     get_from_json as budatom_get_from_json,
 )
-from src.a00_data_toolbox.dict_toolbox import x_is_json
 
 
 def test_BudAtom_get_dict_ReturnsObj():

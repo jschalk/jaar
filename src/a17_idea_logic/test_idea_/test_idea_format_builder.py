@@ -1,17 +1,17 @@
 from src.a00_data_toolbox.file_toolbox import save_json
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_label_str
-from src.a06_bud_logic._utils.str_a06 import (
+from src.a02_finance_logic._test_util.a02_str import owner_name_str, fisc_label_str
+from src.a06_bud_logic._test_util.a06_str import bud_conceptunit_str
+from src.a06_bud_logic._test_util.a06_str import (
     bud_conceptunit_str,
     concept_way_str,
     gogo_want_str,
 )
 from src.a08_bud_atom_logic.atom_config import get_atom_config_args
-from src.a17_idea_logic._utils.str_a17 import attributes_str, dimens_str
+from src.a17_idea_logic._test_util.a17_str import attributes_str, dimens_str
 from src.a17_idea_logic.idea_config import (
     get_idea_formats_dir,
     get_idea_config_dict,
 )
-from src.a06_bud_logic._utils.str_a06 import bud_conceptunit_str
 
 
 def create_dimens_idea_format_dict() -> dict:

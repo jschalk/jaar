@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.file_toolbox import get_dir_file_strs
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_label_str
-from src.a06_bud_logic._utils.str_a06 import (
+from src.a02_finance_logic._test_util.a02_str import owner_name_str, fisc_label_str
+from src.a06_bud_logic._test_util.a06_str import (
     budunit_str,
     bud_acctunit_str,
     face_name_str,
@@ -24,13 +24,13 @@ from src.a06_bud_logic._utils.str_a06 import (
     gogo_want_str,
     stop_want_str,
 )
-from src.a15_fisc_logic._utils.str_a15 import fiscunit_str
+from src.a15_fisc_logic._test_util.a15_str import fiscunit_str
 from src.a17_idea_logic.idea import (
     _generate_idea_dataframe,
     get_idearef_obj,
     _get_headers_list,
 )
-from src.a17_idea_logic._utils.str_a17 import attributes_str
+from src.a17_idea_logic._test_util.a17_str import attributes_str
 from src.a17_idea_logic.idea_config import (
     get_idea_formats_dir,
     get_idea_format_filenames,
@@ -43,7 +43,7 @@ from src.a17_idea_logic.idea_config import (
     get_idea_elements_sort_order,
     get_default_sorted_list,
 )
-from src.a17_idea_logic._utils.env_a17 import src_module_dir
+from src.a17_idea_logic._test_util.env_a17 import src_module_dir
 
 
 def test_config_str_functions_ReturnObjs():

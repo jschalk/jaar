@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.file_toolbox import open_file, save_file
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_label_str
-from src.a06_bud_logic._utils.str_a06 import (
+from src.a02_finance_logic._test_util.a02_str import owner_name_str, fisc_label_str
+from src.a06_bud_logic._test_util.a06_str import (
     bud_acctunit_str,
     budunit_str,
     face_name_str,
@@ -9,7 +9,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     debtit_belief_str,
     event_int_str,
 )
-from src.a08_bud_atom_logic._utils.str_a08 import atom_insert
+from src.a08_bud_atom_logic._test_util.a08_str import atom_insert
 from src.a09_pack_logic.pack import packunit_shop, get_packunit_from_json
 from src.a12_hub_tools.hub_path import (
     create_owner_event_dir_path as owner_event_dir,
@@ -17,7 +17,7 @@ from src.a12_hub_tools.hub_path import (
 )
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a18_etl_toolbox.transformers import etl_event_bud_csvs_to_pack_json
-from src.a18_etl_toolbox._utils.env_a18 import (
+from src.a18_etl_toolbox._test_util.env_a18 import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )

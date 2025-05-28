@@ -1,3 +1,7 @@
+from src.a01_way_logic.way import (
+    get_default_fisc_label as root_label,
+    default_bridge_if_None,
+)
 from src.a02_finance_logic.finance_config import (
     default_respect_bit_if_None,
     filter_penny,
@@ -5,12 +9,8 @@ from src.a02_finance_logic.finance_config import (
     validate_fund_pool,
     validate_respect_num,
 )
-from src.a06_bud_logic.bud import budunit_shop, BudUnit
-from src.a01_way_logic.way import (
-    get_default_fisc_label as root_label,
-    default_bridge_if_None,
-)
 from src.a05_concept_logic.origin import originunit_shop
+from src.a06_bud_logic.bud import budunit_shop, BudUnit
 from pytest import raises as pytest_raises
 
 

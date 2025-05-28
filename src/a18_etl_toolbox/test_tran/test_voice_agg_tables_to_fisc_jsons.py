@@ -4,11 +4,11 @@ from src.a00_data_toolbox.db_toolbox import (
     db_table_exists,
     create_select_query,
 )
-from src.a02_finance_logic._utils.strs_a02 import fisc_label_str
+from src.a02_finance_logic._test_util.a02_str import fisc_label_str
 from src.a12_hub_tools.hub_path import create_fisc_json_path
 from src.a15_fisc_logic.fisc import get_from_json as fiscunit_get_from_json
 from src.a15_fisc_logic.fisc_config import get_fisc_dimens
-from src.a15_fisc_logic._utils.str_a15 import (
+from src.a15_fisc_logic._test_util.a15_str import (
     fiscunit_str,
     fisc_cashbook_str,
     fisc_dealunit_str,
@@ -26,7 +26,7 @@ from src.a18_etl_toolbox.transformers import (
     create_sound_and_voice_tables,
     etl_voice_agg_tables_to_fisc_jsons,
 )
-from src.a18_etl_toolbox._utils.env_a18 import (
+from src.a18_etl_toolbox._test_util.env_a18 import (
     get_module_temp_dir,
     env_dir_setup_cleanup,
 )
