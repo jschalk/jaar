@@ -550,7 +550,7 @@ class BudDelta:
             self.add_budatom_concept_reason_premiseunit_inserts(
                 concept_way=after_conceptunit.get_concept_way(),
                 after_reasonunit=after_reasonunit,
-                insert_premise_pbranchs=set(after_reasonunit.premises.keys()),
+                insert_premise_pstates=set(after_reasonunit.premises.keys()),
             )
 
     def add_budatom_concept_reasonunit_updates(
@@ -582,28 +582,28 @@ class BudDelta:
                     )
                 self.set_budatom(x_budatom)
 
-            before_premise_pbranchs = set(before_reasonunit.premises.keys())
-            after_premise_pbranchs = set(after_reasonunit.premises.keys())
+            before_premise_pstates = set(before_reasonunit.premises.keys())
+            after_premise_pstates = set(after_reasonunit.premises.keys())
             self.add_budatom_concept_reason_premiseunit_inserts(
                 concept_way=before_conceptunit.get_concept_way(),
                 after_reasonunit=after_reasonunit,
-                insert_premise_pbranchs=after_premise_pbranchs.difference(
-                    before_premise_pbranchs
+                insert_premise_pstates=after_premise_pstates.difference(
+                    before_premise_pstates
                 ),
             )
             self.add_budatom_concept_reason_premiseunit_updates(
                 concept_way=before_conceptunit.get_concept_way(),
                 before_reasonunit=before_reasonunit,
                 after_reasonunit=after_reasonunit,
-                update_premise_pbranchs=after_premise_pbranchs.intersection(
-                    before_premise_pbranchs
+                update_premise_pstates=after_premise_pstates.intersection(
+                    before_premise_pstates
                 ),
             )
             self.add_budatom_concept_reason_premiseunit_deletes(
                 concept_way=before_conceptunit.get_concept_way(),
                 reasonunit_rcontext=update_reasonunit_rcontext,
-                delete_premise_pbranchs=before_premise_pbranchs.difference(
-                    after_premise_pbranchs
+                delete_premise_pstates=before_premise_pstates.difference(
+                    after_premise_pstates
                 ),
             )
 
@@ -622,21 +622,21 @@ class BudDelta:
             self.add_budatom_concept_reason_premiseunit_deletes(
                 concept_way=before_conceptunit.get_concept_way(),
                 reasonunit_rcontext=delete_reasonunit_rcontext,
-                delete_premise_pbranchs=set(before_reasonunit.premises.keys()),
+                delete_premise_pstates=set(before_reasonunit.premises.keys()),
             )
 
     def add_budatom_concept_reason_premiseunit_inserts(
         self,
         concept_way: WayStr,
         after_reasonunit: ReasonUnit,
-        insert_premise_pbranchs: set,
+        insert_premise_pstates: set,
     ):
-        for insert_premise_pbranch in insert_premise_pbranchs:
-            after_premiseunit = after_reasonunit.get_premise(insert_premise_pbranch)
+        for insert_premise_pstate in insert_premise_pstates:
+            after_premiseunit = after_reasonunit.get_premise(insert_premise_pstate)
             x_budatom = budatom_shop("bud_concept_reason_premiseunit", atom_insert())
             x_budatom.set_jkey("concept_way", concept_way)
             x_budatom.set_jkey("rcontext", after_reasonunit.rcontext)
-            x_budatom.set_jkey("pbranch", after_premiseunit.pbranch)
+            x_budatom.set_jkey("pstate", after_premiseunit.pstate)
             if after_premiseunit.popen is not None:
                 x_budatom.set_jvalue("popen", after_premiseunit.popen)
             if after_premiseunit.pnigh is not None:
@@ -650,11 +650,11 @@ class BudDelta:
         concept_way: WayStr,
         before_reasonunit: ReasonUnit,
         after_reasonunit: ReasonUnit,
-        update_premise_pbranchs: set,
+        update_premise_pstates: set,
     ):
-        for update_premise_pbranch in update_premise_pbranchs:
-            before_premiseunit = before_reasonunit.get_premise(update_premise_pbranch)
-            after_premiseunit = after_reasonunit.get_premise(update_premise_pbranch)
+        for update_premise_pstate in update_premise_pstates:
+            before_premiseunit = before_reasonunit.get_premise(update_premise_pstate)
+            after_premiseunit = after_reasonunit.get_premise(update_premise_pstate)
             if jvalues_different(
                 "bud_concept_reason_premiseunit",
                 before_premiseunit,
@@ -665,7 +665,7 @@ class BudDelta:
                 )
                 x_budatom.set_jkey("concept_way", concept_way)
                 x_budatom.set_jkey("rcontext", before_reasonunit.rcontext)
-                x_budatom.set_jkey("pbranch", after_premiseunit.pbranch)
+                x_budatom.set_jkey("pstate", after_premiseunit.pstate)
                 if after_premiseunit.popen != before_premiseunit.popen:
                     x_budatom.set_jvalue("popen", after_premiseunit.popen)
                 if after_premiseunit.pnigh != before_premiseunit.pnigh:
@@ -678,13 +678,13 @@ class BudDelta:
         self,
         concept_way: WayStr,
         reasonunit_rcontext: WayStr,
-        delete_premise_pbranchs: set,
+        delete_premise_pstates: set,
     ):
-        for delete_premise_pbranch in delete_premise_pbranchs:
+        for delete_premise_pstate in delete_premise_pstates:
             x_budatom = budatom_shop("bud_concept_reason_premiseunit", atom_delete())
             x_budatom.set_jkey("concept_way", concept_way)
             x_budatom.set_jkey("rcontext", reasonunit_rcontext)
-            x_budatom.set_jkey("pbranch", delete_premise_pbranch)
+            x_budatom.set_jkey("pstate", delete_premise_pstate)
             self.set_budatom(x_budatom)
 
     def add_budatom_concept_laborlink_insert(
@@ -779,8 +779,8 @@ class BudDelta:
             x_budatom = budatom_shop("bud_concept_factunit", atom_insert())
             x_budatom.set_jkey("concept_way", conceptunit.get_concept_way())
             x_budatom.set_jkey("fcontext", insert_factunit.fcontext)
-            if insert_factunit.fbranch is not None:
-                x_budatom.set_jvalue("fbranch", insert_factunit.fbranch)
+            if insert_factunit.fstate is not None:
+                x_budatom.set_jvalue("fstate", insert_factunit.fstate)
             if insert_factunit.fopen is not None:
                 x_budatom.set_jvalue("fopen", insert_factunit.fopen)
             if insert_factunit.fnigh is not None:
@@ -802,8 +802,8 @@ class BudDelta:
                 x_budatom = budatom_shop("bud_concept_factunit", atom_update())
                 x_budatom.set_jkey("concept_way", before_conceptunit.get_concept_way())
                 x_budatom.set_jkey("fcontext", after_factunit.fcontext)
-                if before_factunit.fbranch != after_factunit.fbranch:
-                    x_budatom.set_jvalue("fbranch", after_factunit.fbranch)
+                if before_factunit.fstate != after_factunit.fstate:
+                    x_budatom.set_jvalue("fstate", after_factunit.fstate)
                 if before_factunit.fopen != after_factunit.fopen:
                     x_budatom.set_jvalue("fopen", after_factunit.fopen)
                 if before_factunit.fnigh != after_factunit.fnigh:

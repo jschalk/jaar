@@ -13,7 +13,7 @@ def test_ConceptAttrHolder_Exists():
     assert new_obj.reason_pnigh is None
     assert new_obj.pdivisor is None
     assert new_obj.reason_del_premise_rcontext is None
-    assert new_obj.reason_del_premise_pbranch is None
+    assert new_obj.reason_del_premise_pstate is None
     assert new_obj.reason_rcontext_concept_active_requisite is None
     assert new_obj.laborunit is None
     assert new_obj.healerlink is None

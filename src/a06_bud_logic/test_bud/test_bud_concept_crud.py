@@ -379,7 +379,7 @@ def test_BudUnit_edit_concept_attr_IsAbleToEditAnyAncestor_Concept():
     assert sue_bud.conceptroot._kids[casa_str].factunits == {}
     wkdays_way = sue_bud.make_l1_way("weekdays")
     fact_way = sue_bud.make_way(wkdays_way, "Sunday")
-    x_factunit = factunit_shop(fcontext=fact_way, fbranch=fact_way)
+    x_factunit = factunit_shop(fcontext=fact_way, fstate=fact_way)
 
     casa_factunits = sue_bud.conceptroot._kids[casa_str].factunits
     print(f"{casa_factunits=}")

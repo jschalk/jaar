@@ -132,8 +132,8 @@ def get_budunit_with_4_levels_and_2reasons_2facts() -> BudUnit:
     nation_way = sue_bud.make_l1_way(nation_str)
     usa_str = "USA"
     usa_way = sue_bud.make_way(nation_way, usa_str)
-    sue_bud.add_fact(fcontext=week_way, fbranch=wed_way)
-    sue_bud.add_fact(fcontext=nation_way, fbranch=usa_way)
+    sue_bud.add_fact(fcontext=week_way, fstate=wed_way)
+    sue_bud.add_fact(fcontext=nation_way, fstate=usa_way)
     return sue_bud
 
 
@@ -250,8 +250,8 @@ def get_budunit_x1_3levels_1reason_1facts() -> BudUnit:
     shave_reason.set_premise(mon_way)
 
     zia_bud.edit_concept_attr(shave_way, reason=shave_reason)
-    zia_bud.add_fact(fcontext=week_way, fbranch=sun_way)
-    x_factunit = factunit_shop(fcontext=week_way, fbranch=church_way)
+    zia_bud.add_fact(fcontext=week_way, fstate=sun_way)
+    x_factunit = factunit_shop(fcontext=week_way, fstate=church_way)
     zia_bud.edit_concept_attr(shave_way, factunit=x_factunit)
     return zia_bud
 
@@ -372,7 +372,7 @@ def get_budunit_laundry_example1() -> BudUnit:
     cali_laborunit = laborunit_shop()
     cali_laborunit.set_laborlink(cali_str)
     amos_bud.edit_concept_attr(laundry_task_way, laborunit=cali_laborunit)
-    amos_bud.add_fact(fcontext=basket_way, fbranch=b_full_way)
+    amos_bud.add_fact(fcontext=basket_way, fstate=b_full_way)
 
     return amos_bud
 

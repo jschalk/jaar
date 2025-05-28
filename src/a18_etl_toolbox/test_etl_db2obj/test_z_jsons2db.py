@@ -352,14 +352,14 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
     x_owner_name = 2
     x_way = 3
     x_rcontext = 4
-    x_pbranch = 5
+    x_pstate = 5
     x_pnigh = 6.0
     x_popen = 7.0
     x_pdivisor = 8
     x__task = 9
     x__status = 10
-    x_premiseunit = premiseunit_shop(pbranch=x_pbranch)
-    x_premiseunit.pbranch = x_pbranch
+    x_premiseunit = premiseunit_shop(pstate=x_pstate)
+    x_premiseunit.pstate = x_pstate
     x_premiseunit.pnigh = x_pnigh
     x_premiseunit.popen = x_popen
     x_premiseunit.pdivisor = x_pdivisor
@@ -386,7 +386,7 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
             str(x_owner_name),
             str(x_way),
             str(x_rcontext),
-            str(x_pbranch),
+            str(x_pstate),
             x_pnigh,
             x_popen,
             x_pdivisor,
@@ -702,12 +702,12 @@ def test_insert_job_budfact_CreatesTableRowsFor_budfact_job():
     x_owner_name = 2
     x_way = 3
     x_rcontext = 4
-    x_fbranch = 5
+    x_fstate = 5
     x_fopen = 6
     x_fnigh = 7
     x_factheir = factheir_shop()
     x_factheir.fcontext = x_rcontext
-    x_factheir.fbranch = x_fbranch
+    x_factheir.fstate = x_fstate
     x_factheir.fopen = x_fopen
     x_factheir.fnigh = x_fnigh
 
@@ -731,7 +731,7 @@ def test_insert_job_budfact_CreatesTableRowsFor_budfact_job():
             str(x_owner_name),
             str(x_way),
             str(x_rcontext),
-            str(x_fbranch),
+            str(x_fstate),
             x_fopen,
             x_fnigh,
         )

@@ -1,5 +1,8 @@
 {
     "attributes": {
+        "concept_way": {
+            "otx_key": true
+        },
         "event_int": {
             "otx_key": true
         },
@@ -9,25 +12,22 @@
         "fisc_label": {
             "otx_key": true
         },
-        "concept_way": {
-            "otx_key": true
-        },
         "owner_name": {
             "otx_key": true
         },
-        "pbranch_ERASE": {
+        "pstate_ERASE": {
             "otx_key": true
         },
         "rcontext": {
             "otx_key": true
         }
     },
-    "idea_number": "br00056",
     "dimens": [
         "fiscunit",
         "budunit",
         "bud_conceptunit",
         "bud_concept_reasonunit",
         "bud_concept_reason_premiseunit"
-    ]
+    ],
+    "idea_number": "br00056"
 }

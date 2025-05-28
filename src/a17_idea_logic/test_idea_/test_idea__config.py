@@ -30,7 +30,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     event_int_str,
     face_name_str,
     fcontext_str,
-    fbranch_str,
+    fstate_str,
     group_title_str,
     healer_name_str,
     concept_way_str,
@@ -48,7 +48,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     gogo_want_str,
     mass_str,
     morph_str,
-    pbranch_str,
+    pstate_str,
     pledge_str,
     stop_want_str,
     fund_coin_str,
@@ -289,15 +289,15 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[63] == "fcontext_ERASE"
     assert table_sorting_priority[64] == "fcontext_ERASE_otx"
     assert table_sorting_priority[65] == "fcontext_ERASE_inx"
-    assert table_sorting_priority[66] == "pbranch"
-    assert table_sorting_priority[67] == "pbranch_otx"
-    assert table_sorting_priority[68] == "pbranch_inx"
-    assert table_sorting_priority[69] == "pbranch_ERASE"
-    assert table_sorting_priority[70] == "pbranch_ERASE_otx"
-    assert table_sorting_priority[71] == "pbranch_ERASE_inx"
-    assert table_sorting_priority[72] == "fbranch"
-    assert table_sorting_priority[73] == "fbranch_otx"
-    assert table_sorting_priority[74] == "fbranch_inx"
+    assert table_sorting_priority[66] == "pstate"
+    assert table_sorting_priority[67] == "pstate_otx"
+    assert table_sorting_priority[68] == "pstate_inx"
+    assert table_sorting_priority[69] == "pstate_ERASE"
+    assert table_sorting_priority[70] == "pstate_ERASE_otx"
+    assert table_sorting_priority[71] == "pstate_ERASE_inx"
+    assert table_sorting_priority[72] == "fstate"
+    assert table_sorting_priority[73] == "fstate_otx"
+    assert table_sorting_priority[74] == "fstate_inx"
     assert table_sorting_priority[75] == "labor_title"
     assert table_sorting_priority[76] == "labor_title_otx"
     assert table_sorting_priority[77] == "labor_title_inx"
@@ -445,8 +445,8 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(group_title_str()) == "TEXT"
     assert sqlite_types.get(concept_way_str()) == "TEXT"
     assert sqlite_types.get(rcontext_str()) == "TEXT"
-    assert sqlite_types.get("pbranch") == "TEXT"
-    assert sqlite_types.get("fbranch") == "TEXT"
+    assert sqlite_types.get("pstate") == "TEXT"
+    assert sqlite_types.get("fstate") == "TEXT"
     assert sqlite_types.get(labor_title_str()) == "TEXT"
     assert sqlite_types.get(awardee_title_str()) == "TEXT"
     assert sqlite_types.get(healer_name_str()) == "TEXT"

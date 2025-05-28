@@ -324,7 +324,7 @@ def _modify_bud_concept_factunit_update(x_bud: BudUnit, x_atom: BudAtom):
     x_conceptunit = x_bud.get_concept_obj(x_atom.get_value("concept_way"))
     x_factunit = x_conceptunit.factunits.get(x_atom.get_value("fcontext"))
     x_factunit.set_attr(
-        fbranch=x_atom.get_value("fbranch"),
+        fstate=x_atom.get_value("fstate"),
         fopen=x_atom.get_value("fopen"),
         fnigh=x_atom.get_value("fnigh"),
     )
@@ -335,7 +335,7 @@ def _modify_bud_concept_factunit_insert(x_bud: BudUnit, x_atom: BudAtom):
         x_atom.get_value("concept_way"),
         factunit=factunit_shop(
             fcontext=x_atom.get_value("fcontext"),
-            fbranch=x_atom.get_value("fbranch"),
+            fstate=x_atom.get_value("fstate"),
             fopen=x_atom.get_value("fopen"),
             fnigh=x_atom.get_value("fnigh"),
         ),
@@ -371,7 +371,7 @@ def _modify_bud_concept_reason_premiseunit_delete(x_bud: BudUnit, x_atom: BudAto
     x_bud.edit_concept_attr(
         x_atom.get_value("concept_way"),
         reason_del_premise_rcontext=x_atom.get_value("rcontext"),
-        reason_del_premise_pbranch=x_atom.get_value("pbranch"),
+        reason_del_premise_pstate=x_atom.get_value("pstate"),
     )
 
 
@@ -379,7 +379,7 @@ def _modify_bud_concept_reason_premiseunit_update(x_bud: BudUnit, x_atom: BudAto
     x_bud.edit_concept_attr(
         x_atom.get_value("concept_way"),
         reason_rcontext=x_atom.get_value("rcontext"),
-        reason_premise=x_atom.get_value("pbranch"),
+        reason_premise=x_atom.get_value("pstate"),
         popen=x_atom.get_value("popen"),
         reason_pnigh=x_atom.get_value("pnigh"),
         pdivisor=x_atom.get_value("pdivisor"),
@@ -390,7 +390,7 @@ def _modify_bud_concept_reason_premiseunit_insert(x_bud: BudUnit, x_atom: BudAto
     x_conceptunit = x_bud.get_concept_obj(x_atom.get_value("concept_way"))
     x_conceptunit.set_reason_premise(
         rcontext=x_atom.get_value("rcontext"),
-        premise=x_atom.get_value("pbranch"),
+        premise=x_atom.get_value("pstate"),
         popen=x_atom.get_value("popen"),
         pnigh=x_atom.get_value("pnigh"),
         pdivisor=x_atom.get_value("pdivisor"),
@@ -576,7 +576,7 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
         )
     elif dimen == "bud_concept_factunit":
         return (
-            (x_obj.fbranch != y_obj.fbranch)
+            (x_obj.fstate != y_obj.fstate)
             or (x_obj.popen != y_obj.popen)
             or (x_obj.pnigh != y_obj.pnigh)
         )
@@ -643,12 +643,12 @@ class AtomRow:
     mass: int = None
     max_tree_traverse: int = None
     morph: bool = None
-    pbranch: WayStr = None
+    pstate: WayStr = None
     pnigh: float = None
     numor: int = None
     popen: float = None
     penny: float = None
-    fbranch: WayStr = None
+    fstate: WayStr = None
     pledge: bool = None
     problem_bool: bool = None
     concept_way: WayStr = None

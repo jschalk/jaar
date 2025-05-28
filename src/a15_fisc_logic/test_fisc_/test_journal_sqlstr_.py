@@ -173,7 +173,7 @@ CREATE TABLE IF NOT EXISTS atom_hx (
         "concept_reasonunit_UPDATE_rcontext_concept_active_requisite INTEGER NULL"
     )
     assert generated_sqlstr.find(example_concept_reasonunit_str) > 0
-    assert generated_sqlstr.find(example_concept_reasonunit_str) == 3718
+    assert generated_sqlstr.find(example_concept_reasonunit_str) == 3957
 
 
 def test_get_atom_hx_table_insert_sqlstr_ReturnsCorrectStr():
@@ -222,12 +222,12 @@ CREATE TABLE IF NOT EXISTS atom_mstr (
 ;"""
     assert generated_sqlstr.find(begin_sqlstr) == 0
     assert generated_sqlstr.find(end_sqlstr) > 0
-    assert generated_sqlstr.find(end_sqlstr) == 5635
+    assert generated_sqlstr.find(end_sqlstr) == 5630
     example_concept_reasonunit_str = (
         "concept_reasonunit_UPDATE_rcontext_concept_active_requisite INTEGER NULL"
     )
     assert generated_sqlstr.find(example_concept_reasonunit_str) > 0
-    assert generated_sqlstr.find(example_concept_reasonunit_str) == 3750
+    assert generated_sqlstr.find(example_concept_reasonunit_str) == 3989
 
 
 def test_get_create_table_if_not_exist_sqlstrs_HasCorrectNumberOfNumber():

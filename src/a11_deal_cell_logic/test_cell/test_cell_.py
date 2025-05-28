@@ -142,9 +142,9 @@ def test_cellunit_shop_ReturnsObj_Scenario2_WithReasonRcontexts():
     casa_way = sue_bud.make_l1_way("casa")
     mop_way = sue_bud.make_way(casa_way, "mop")
     clean_fact = clean_factunit()
-    sue_bud.add_concept(clean_factunit().fbranch)
+    sue_bud.add_concept(clean_factunit().fstate)
     sue_bud.add_concept(mop_way, pledge=True)
-    sue_bud.edit_reason(mop_way, clean_fact.fcontext, clean_fact.fbranch)
+    sue_bud.edit_reason(mop_way, clean_fact.fcontext, clean_fact.fstate)
 
     # WHEN
     x_cellunit = cellunit_shop(sue_str, budadjust=sue_bud)
@@ -163,10 +163,10 @@ def test_cellunit_shop_ReturnsObj_Scenario3_clear_facts():
     casa_way = sue_bud.make_l1_way("casa")
     mop_way = sue_bud.make_way(casa_way, "mop")
     clean_fact = clean_factunit()
-    sue_bud.add_concept(clean_factunit().fbranch)
+    sue_bud.add_concept(clean_factunit().fstate)
     sue_bud.add_concept(mop_way, pledge=True)
-    sue_bud.edit_reason(mop_way, clean_fact.fcontext, clean_fact.fbranch)
-    sue_bud.add_fact(clean_fact.fcontext, clean_fact.fbranch)
+    sue_bud.edit_reason(mop_way, clean_fact.fcontext, clean_fact.fstate)
+    sue_bud.add_fact(clean_fact.fcontext, clean_fact.fstate)
     assert len(sue_bud.get_factunits_dict()) == 1
 
     # WHEN
@@ -230,11 +230,11 @@ def test_CellUnit_eval_budevent_SetsAttr_Scenario1():
     casa_way = yao_bud.make_l1_way("casa")
     mop_way = yao_bud.make_way(casa_way, "mop")
     clean_fact = clean_factunit()
-    yao_bud.add_concept(clean_fact.fbranch)
+    yao_bud.add_concept(clean_fact.fstate)
     yao_bud.add_concept(mop_way, pledge=True)
-    yao_bud.edit_reason(mop_way, clean_fact.fcontext, clean_fact.fbranch)
+    yao_bud.edit_reason(mop_way, clean_fact.fcontext, clean_fact.fstate)
     yao_bud.add_fact(
-        clean_fact.fcontext, clean_fact.fbranch, create_missing_concepts=True
+        clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
     )
     yao_cellunit = cellunit_shop(yao_str)
     assert yao_cellunit.budevent_facts == {}
@@ -322,7 +322,7 @@ def test_CellUnit_set_found_facts_from_dict_SetsAttr():
     clean_fact = clean_factunit()
     yao_bud = budunit_shop(yao_str, "accord23")
     yao_bud.add_fact(
-        clean_fact.fcontext, clean_fact.fbranch, create_missing_concepts=True
+        clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
     )
     yao_found_fact_dict = {clean_fact.fcontext: clean_fact.get_dict()}
     yao_cellunit = cellunit_shop(yao_str)
@@ -342,7 +342,7 @@ def test_CellUnit_set_budevent_facts_from_dict_SetsAttr():
     clean_fact = clean_factunit()
     yao_bud = budunit_shop(yao_str, "accord23")
     yao_bud.add_fact(
-        clean_fact.fcontext, clean_fact.fbranch, create_missing_concepts=True
+        clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
     )
     yao_found_fact_dict = {clean_fact.fcontext: clean_fact.get_dict()}
     yao_cellunit = cellunit_shop(yao_str)
@@ -362,7 +362,7 @@ def test_CellUnit_set_boss_facts_from_other_facts_SetsAttr_Scenario0_found_facts
     clean_fact = clean_factunit()
     yao_bud = budunit_shop(yao_str, "accord23")
     yao_bud.add_fact(
-        clean_fact.fcontext, clean_fact.fbranch, create_missing_concepts=True
+        clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
     )
     yao_found_fact_dict = {clean_fact.fcontext: clean_fact.get_dict()}
     yao_cellunit = cellunit_shop(yao_str)
@@ -387,7 +387,7 @@ def test_CellUnit_set_boss_facts_from_other_facts_SetsAttr_Scenario1_budevent_fa
     clean_fact = clean_factunit()
     yao_bud = budunit_shop(yao_str, "accord23")
     yao_bud.add_fact(
-        clean_fact.fcontext, clean_fact.fbranch, create_missing_concepts=True
+        clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
     )
     yao_found_fact_dict = {clean_fact.fcontext: clean_fact.get_dict()}
     yao_cellunit = cellunit_shop(yao_str)
@@ -413,7 +413,7 @@ def test_CellUnit_set_boss_facts_from_other_facts_SetsAttr_Scenario2_budevent_fa
     sky_fact = sky_blue_factunit()
     yao_bud = budunit_shop(yao_str, "accord23")
     yao_bud.add_fact(
-        clean_fact.fcontext, clean_fact.fbranch, create_missing_concepts=True
+        clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
     )
     yao_budevent_fact_dict = {sky_fact.fcontext: sky_fact.get_dict()}
     yao_found_fact_dict = {clean_fact.fcontext: clean_fact.get_dict()}
@@ -439,7 +439,7 @@ def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario0_found_facts_o
     clean_fact = clean_factunit()
     yao_bud = budunit_shop(yao_str, "accord23")
     yao_bud.add_fact(
-        clean_fact.fcontext, clean_fact.fbranch, create_missing_concepts=True
+        clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
     )
     yao_found_fact_dict = {clean_fact.fcontext: clean_fact.get_dict()}
     yao_cellunit = cellunit_shop(yao_str)
@@ -463,7 +463,7 @@ def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario1_budevent_fact
     clean_fact = clean_factunit()
     yao_bud = budunit_shop(yao_str, "accord23")
     yao_bud.add_fact(
-        clean_fact.fcontext, clean_fact.fbranch, create_missing_concepts=True
+        clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
     )
     yao_found_fact_dict = {clean_fact.fcontext: clean_fact.get_dict()}
     yao_cellunit = cellunit_shop(yao_str)
@@ -489,7 +489,7 @@ def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario2_budevent_fact
     sky_fact = sky_blue_factunit()
     yao_bud = budunit_shop(yao_str, "accord23")
     yao_bud.add_fact(
-        clean_fact.fcontext, clean_fact.fbranch, create_missing_concepts=True
+        clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
     )
     run_way = yao_bud.make_l1_way("run")
     run_fact = factunit_shop(run_way, run_way)
@@ -650,7 +650,7 @@ def test_CellUnit_set_budadjust_facts_ReturnsObj_Scenario1():
     casa_clean_fact = clean_factunit()
     clean_facts = {casa_clean_fact.fcontext: casa_clean_fact}
     sue_bud = budunit_shop(sue_str, "accord23")
-    sue_bud.add_concept(casa_clean_fact.fbranch)
+    sue_bud.add_concept(casa_clean_fact.fstate)
     sue_cell = cellunit_shop(
         sue_deal_owner,
         sue_ancestors,
@@ -672,7 +672,7 @@ def test_CellUnit_set_budadjust_facts_ReturnsObj_Scenario1():
     a23_str = "accord23"
     casa_way = create_way(a23_str, "casa")
     sue_bud_casa_fact_dict = sue_bud_facts.get(casa_way)
-    assert sue_bud_casa_fact_dict.get("fbranch") == casa_clean_fact.fbranch
+    assert sue_bud_casa_fact_dict.get("fstate") == casa_clean_fact.fstate
 
 
 def test_CellUnit_set_budadjust_facts_ReturnsObj_Scenario2():
@@ -690,8 +690,8 @@ def test_CellUnit_set_budadjust_facts_ReturnsObj_Scenario2():
     clean_facts = {casa_clean_fact.fcontext: casa_clean_fact}
     dirty_facts = {casa_dirty_fact.fcontext: casa_dirty_fact}
     sue_bud = budunit_shop(sue_str, "accord23")
-    sue_bud.add_concept(casa_clean_fact.fbranch)
-    sue_bud.add_concept(casa_dirty_fact.fbranch)
+    sue_bud.add_concept(casa_clean_fact.fstate)
+    sue_bud.add_concept(casa_dirty_fact.fstate)
     sue_cell = cellunit_shop(
         sue_deal_owner,
         sue_ancestors,
@@ -714,7 +714,7 @@ def test_CellUnit_set_budadjust_facts_ReturnsObj_Scenario2():
     a23_str = "accord23"
     casa_way = create_way(a23_str, "casa")
     sue_bud_casa_fact_dict = sue_bud_facts.get(casa_way)
-    assert sue_bud_casa_fact_dict.get("fbranch") == casa_dirty_fact.fbranch
+    assert sue_bud_casa_fact_dict.get("fstate") == casa_dirty_fact.fstate
 
 
 def test_CellUnit_set_budadjust_facts_ReturnsObj_Scenario3():
@@ -734,9 +734,9 @@ def test_CellUnit_set_budadjust_facts_ReturnsObj_Scenario3():
     dirty_facts = {casa_dirty_fact.fcontext: casa_dirty_fact}
     grimy_facts = {casa_grimy_fact.fcontext: casa_grimy_fact}
     sue_bud = budunit_shop(sue_str, "accord23")
-    sue_bud.add_concept(casa_clean_fact.fbranch)
-    sue_bud.add_concept(casa_dirty_fact.fbranch)
-    sue_bud.add_concept(casa_grimy_fact.fbranch)
+    sue_bud.add_concept(casa_clean_fact.fstate)
+    sue_bud.add_concept(casa_dirty_fact.fstate)
+    sue_bud.add_concept(casa_grimy_fact.fstate)
     sue_cell = cellunit_shop(
         sue_deal_owner,
         sue_ancestors,
@@ -760,7 +760,7 @@ def test_CellUnit_set_budadjust_facts_ReturnsObj_Scenario3():
     a23_str = "accord23"
     casa_way = create_way(a23_str, "casa")
     sue_bud_casa_fact_dict = sue_bud_facts.get(casa_way)
-    assert sue_bud_casa_fact_dict.get("fbranch") == casa_grimy_fact.fbranch
+    assert sue_bud_casa_fact_dict.get("fstate") == casa_grimy_fact.fstate
 
 
 def test_CellUnit_set_acct_mandate_ledger_ReturnsObj_Scenario0():
@@ -849,14 +849,14 @@ def test_CellUnit_calc_acct_mandate_ledger_ReturnsObj_Scenario0():
     sue_bud.add_acctunit(yao_str, 7, 2)
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
-    sue_bud.add_concept(clean_fact.fbranch)
-    sue_bud.add_concept(dirty_fact.fbranch)
+    sue_bud.add_concept(clean_fact.fstate)
+    sue_bud.add_concept(dirty_fact.fstate)
     casa_way = sue_bud.make_l1_way("casa")
     mop_way = sue_bud.make_way(casa_way, "mop")
     sue_bud.add_concept(mop_way, 1, pledge=True)
-    sue_bud.edit_reason(mop_way, dirty_fact.fcontext, dirty_fact.fbranch)
+    sue_bud.edit_reason(mop_way, dirty_fact.fcontext, dirty_fact.fstate)
     sue_bud.add_fact(
-        dirty_fact.fcontext, dirty_fact.fbranch, create_missing_concepts=True
+        dirty_fact.fcontext, dirty_fact.fstate, create_missing_concepts=True
     )
     sky_blue_fact = sky_blue_factunit()
     sue_budevent_factunits = {clean_fact.fcontext: clean_fact}
@@ -1003,9 +1003,9 @@ def test_create_child_cellunits_ReturnsObj_Scenario2_boss_facts():
     clean_fact = clean_factunit()
     yao_bud.add_concept(casa_way, 1)
     yao_bud.add_concept(mop_way, 1, pledge=True)
-    yao_bud.add_concept(clean_fact.fbranch)
-    yao_bud.add_concept(dirty_fact.fbranch)
-    yao_bud.edit_reason(mop_way, dirty_fact.fcontext, dirty_fact.fbranch)
+    yao_bud.add_concept(clean_fact.fstate)
+    yao_bud.add_concept(dirty_fact.fstate)
+    yao_bud.edit_reason(mop_way, dirty_fact.fcontext, dirty_fact.fstate)
     yao_cell = cellunit_shop(
         yao_str, celldepth=yao_celldepth, quota=yao_quota, budadjust=yao_bud
     )
@@ -1042,14 +1042,14 @@ def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
     sue_bud.add_acctunit(yao_str, 7, 2)
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
-    sue_bud.add_concept(clean_fact.fbranch)
-    sue_bud.add_concept(dirty_fact.fbranch)
+    sue_bud.add_concept(clean_fact.fstate)
+    sue_bud.add_concept(dirty_fact.fstate)
     casa_way = sue_bud.make_l1_way("casa")
     mop_way = sue_bud.make_way(casa_way, "mop")
     sue_bud.add_concept(mop_way, 1, pledge=True)
-    sue_bud.edit_reason(mop_way, dirty_fact.fcontext, dirty_fact.fbranch)
+    sue_bud.edit_reason(mop_way, dirty_fact.fcontext, dirty_fact.fstate)
     sue_bud.add_fact(
-        dirty_fact.fcontext, dirty_fact.fbranch, create_missing_concepts=True
+        dirty_fact.fcontext, dirty_fact.fstate, create_missing_concepts=True
     )
     sky_blue_fact = sky_blue_factunit()
     sue_budevent_factunits = {clean_fact.fcontext: clean_fact}

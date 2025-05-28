@@ -103,7 +103,7 @@ class ConceptAttrHolder:
     reason_pnigh: float = None
     pdivisor: int = None
     reason_del_premise_rcontext: WayStr = None
-    reason_del_premise_pbranch: WayStr = None
+    reason_del_premise_pstate: WayStr = None
     reason_rcontext_concept_active_requisite: str = None
     laborunit: LaborUnit = None
     healerlink: HealerLink = None
@@ -150,7 +150,7 @@ def conceptattrholder_shop(
     reason_pnigh: float = None,
     pdivisor: int = None,
     reason_del_premise_rcontext: WayStr = None,
-    reason_del_premise_pbranch: WayStr = None,
+    reason_del_premise_pstate: WayStr = None,
     reason_rcontext_concept_active_requisite: str = None,
     laborunit: LaborUnit = None,
     healerlink: HealerLink = None,
@@ -182,7 +182,7 @@ def conceptattrholder_shop(
         reason_pnigh=reason_pnigh,
         pdivisor=pdivisor,
         reason_del_premise_rcontext=reason_del_premise_rcontext,
-        reason_del_premise_pbranch=reason_del_premise_pbranch,
+        reason_del_premise_pstate=reason_del_premise_pstate,
         reason_rcontext_concept_active_requisite=reason_rcontext_concept_active_requisite,
         laborunit=laborunit,
         healerlink=healerlink,
@@ -292,7 +292,7 @@ class ConceptUnit:
                 f"Cannot have fact for range inheritor '{self.get_concept_way()}'. A ranged fact concept must have _begin, _close attributes"
             )
         x_factheir = factheir_shop(
-            x_fact.fcontext, x_fact.fbranch, x_fact.fopen, x_fact.fnigh
+            x_fact.fcontext, x_fact.fstate, x_fact.fopen, x_fact.fnigh
         )
         self.delete_factunit_if_past(x_factheir)
         x_factheir = self.apply_factunit_moldations(x_factheir)
@@ -334,7 +334,7 @@ class ConceptUnit:
         # self.set_factunits(rcontext=fact, fact=rcontext, popen=pnigh, pnigh=fnigh)
         self.factunits[fcontextunit.fcontext] = factunit_shop(
             fcontext=fcontextunit.fcontext,
-            fbranch=fcontextunit.fcontext,
+            fstate=fcontextunit.fcontext,
             fopen=fcontextunit.fnigh,
             fnigh=fcontextunit.fnigh,
         )
@@ -543,12 +543,12 @@ class ConceptUnit:
                 new_bridge=self.bridge,
             )
             x_factunit.fcontext = new_rcontext_way
-            new_fbranch_way = replace_bridge(
-                way=x_factunit.fbranch,
+            new_fstate_way = replace_bridge(
+                way=x_factunit.fstate,
                 old_bridge=old_bridge,
                 new_bridge=self.bridge,
             )
-            x_factunit.set_attr(fbranch=new_fbranch_way)
+            x_factunit.set_attr(fstate=new_fstate_way)
             new_factunits[new_rcontext_way] = x_factunit
         self.factunits = new_factunits
 
@@ -626,7 +626,7 @@ class ConceptUnit:
 
         self._del_reasonunit_all_cases(
             rcontext=concept_attr.reason_del_premise_rcontext,
-            premise=concept_attr.reason_del_premise_pbranch,
+            premise=concept_attr.reason_del_premise_pstate,
         )
         self._set_addin_to_zero_if_any_moldations_exist()
 

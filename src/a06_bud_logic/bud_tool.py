@@ -60,12 +60,12 @@ def bud_concept_reason_premiseunit_exists(
 ) -> bool:
     x_way = jkeys.get("concept_way")
     x_rcontext = jkeys.get("rcontext")
-    x_pbranch = jkeys.get("pbranch")
+    x_pstate = jkeys.get("pstate")
     return bool(
         bud_concept_reasonunit_exists(x_bud, jkeys)
         and x_bud.get_concept_obj(x_way)
         .get_reasonunit(x_rcontext)
-        .premise_exists(x_pbranch)
+        .premise_exists(x_pstate)
     )
 
 
@@ -152,10 +152,8 @@ def bud_concept_reason_premiseunit_get_obj(
 ) -> PremiseUnit:
     x_way = jkeys.get("concept_way")
     x_rcontext = jkeys.get("rcontext")
-    x_pbranch = jkeys.get("pbranch")
-    return (
-        x_bud.get_concept_obj(x_way).get_reasonunit(x_rcontext).get_premise(x_pbranch)
-    )
+    x_pstate = jkeys.get("pstate")
+    return x_bud.get_concept_obj(x_way).get_reasonunit(x_rcontext).get_premise(x_pstate)
 
 
 def bud_concept_factunit_get_obj(x_bud: BudUnit, jkeys: dict[str, any]) -> FactUnit:
@@ -264,7 +262,7 @@ def set_factunits_to_bud(x_bud: BudUnit, x_facts_dict: dict[WayStr, dict]):
         if factunit.fcontext in bud_fact_rcontexts:
             x_bud.add_fact(
                 factunit.fcontext,
-                factunit.fbranch,
+                factunit.fstate,
                 factunit.fopen,
                 factunit.fnigh,
                 create_missing_concepts=True,

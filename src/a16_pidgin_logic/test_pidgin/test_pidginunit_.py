@@ -10,13 +10,13 @@ from src.a06_bud_logic._utils.str_a06 import (
     rcontext_str,
     face_name_str,
     fcontext_str,
-    fbranch_str,
+    fstate_str,
     fopen_str,
     fund_coin_str,
     healer_name_str,
     group_title_str,
     concept_label_str,
-    pbranch_str,
+    pstate_str,
     penny_str,
     respect_bit_str,
     concept_way_str,
@@ -106,14 +106,14 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("month_label") == type_LabelStr_str()
     assert pidgin_args_class_types.get("monthday_distortion") == "int"
     assert pidgin_args_class_types.get("morph") == "bool"
-    assert pidgin_args_class_types.get("pbranch") == type_WayStr_str()
+    assert pidgin_args_class_types.get("pstate") == type_WayStr_str()
     assert pidgin_args_class_types.get("pnigh") == "float"
     assert pidgin_args_class_types.get("numor") == "int"
     assert pidgin_args_class_types.get("offi_time") == "TimeLinePoint"
     assert pidgin_args_class_types.get("owner_name") == type_NameStr_str()
     assert pidgin_args_class_types.get("popen") == "float"
     assert pidgin_args_class_types.get("penny") == "float"
-    assert pidgin_args_class_types.get("fbranch") == type_WayStr_str()
+    assert pidgin_args_class_types.get("fstate") == type_WayStr_str()
     assert pidgin_args_class_types.get("pledge") == "bool"
     assert pidgin_args_class_types.get("problem_bool") == "bool"
     assert pidgin_args_class_types.get("quota") == "int"
@@ -210,12 +210,12 @@ def test_get_pidginable_args_ReturnsObj():
         face_name_str(),
         fcontext_str(),
         fisc_label_str(),
-        fbranch_str(),
+        fstate_str(),
         group_title_str(),
         healer_name_str(),
         hour_label_str(),
         month_label_str(),
-        pbranch_str(),
+        pstate_str(),
         owner_name_str(),
         concept_way_str(),
         labor_title_str(),
@@ -361,11 +361,11 @@ def test_get_pidgin_WayStr_args_ReturnsObj():
 
     # THEN
     assert pidgin_WayStr_args == {
-        fbranch_str(),
+        fstate_str(),
         fcontext_str(),
         concept_way_str(),
         rcontext_str(),
-        pbranch_str(),
+        pstate_str(),
     }
     expected_args = {
         x_arg

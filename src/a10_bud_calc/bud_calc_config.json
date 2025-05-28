@@ -196,10 +196,6 @@
         },
         "jmetrics": {},
         "jvalues": {
-            "fbranch": {
-                "class_type": "WayStr",
-                "sqlite_datatype": "TEXT"
-            },
             "fnigh": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
@@ -207,6 +203,10 @@
             "fopen": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
+            },
+            "fstate": {
+                "class_type": "WayStr",
+                "sqlite_datatype": "TEXT"
             }
         }
     },
@@ -276,7 +276,7 @@
                 "class_type": "NameStr",
                 "sqlite_datatype": "TEXT"
             },
-            "pbranch": {
+            "pstate": {
                 "class_type": "WayStr",
                 "sqlite_datatype": "TEXT"
             },

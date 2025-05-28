@@ -437,15 +437,15 @@ class BudUnit:
     def add_fact(
         self,
         fcontext: WayStr,
-        fbranch: WayStr = None,
+        fstate: WayStr = None,
         fopen: float = None,
         fnigh: float = None,
         create_missing_concepts: bool = None,
     ):
-        fbranch = fcontext if fbranch is None else fbranch
+        fstate = fcontext if fstate is None else fstate
         if create_missing_concepts:
             self._create_conceptkid_if_empty(way=fcontext)
-            self._create_conceptkid_if_empty(way=fbranch)
+            self._create_conceptkid_if_empty(way=fstate)
 
         fact_fcontext_concept = self.get_concept_obj(fcontext)
         x_conceptroot = self.get_concept_obj(to_way(self.fisc_label))
@@ -461,7 +461,7 @@ class BudUnit:
             x_fnigh = fnigh
         x_factunit = factunit_shop(
             fcontext=fcontext,
-            fbranch=fbranch,
+            fstate=fstate,
             fopen=x_fopen,
             fnigh=x_fnigh,
         )
@@ -481,7 +481,7 @@ class BudUnit:
             # calculate and set those descendant facts
             # example: timeline range (0-, 1.5e9) is range-root
             # example: "timeline,weeks" (spllt 10080) is range-descendant
-            # there exists a reason rcontext "timeline,weeks" with premise.pbranch = "timeline,weeks"
+            # there exists a reason rcontext "timeline,weeks" with premise.pstate = "timeline,weeks"
             # and (1,2) pdivisor=2 (every other week)
             #
             # should not set "timeline,weeks" fact, only "timeline" fact and
@@ -700,7 +700,7 @@ class BudUnit:
         for x_reason in posted_concept.reasonunits.values():
             self._create_conceptkid_if_empty(way=x_reason.rcontext)
             for premise_x in x_reason.premises.values():
-                self._create_conceptkid_if_empty(way=premise_x.pbranch)
+                self._create_conceptkid_if_empty(way=premise_x.pstate)
 
     def _create_conceptkid_if_empty(self, way: WayStr):
         if self.concept_exists(way) is False:
@@ -816,7 +816,7 @@ class BudUnit:
         reason_pnigh: float = None,
         pdivisor: int = None,
         reason_del_premise_rcontext: WayStr = None,
-        reason_del_premise_pbranch: WayStr = None,
+        reason_del_premise_pstate: WayStr = None,
         reason_rcontext_concept_active_requisite: str = None,
         laborunit: LaborUnit = None,
         healerlink: HealerLink = None,
@@ -854,7 +854,7 @@ class BudUnit:
             reason_pnigh=reason_pnigh,
             pdivisor=pdivisor,
             reason_del_premise_rcontext=reason_del_premise_rcontext,
-            reason_del_premise_pbranch=reason_del_premise_pbranch,
+            reason_del_premise_pstate=reason_del_premise_pstate,
             reason_rcontext_concept_active_requisite=reason_rcontext_concept_active_requisite,
             laborunit=laborunit,
             healerlink=healerlink,

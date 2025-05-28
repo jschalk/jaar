@@ -179,8 +179,8 @@ def morph_str() -> str:
     return "morph"
 
 
-def pbranch_str() -> str:
-    return "pbranch"
+def pstate_str() -> str:
+    return "pstate"
 
 
 def pnigh_str() -> str:
@@ -207,8 +207,8 @@ def fopen_str() -> str:
     return "fopen"
 
 
-def fbranch_str() -> str:
-    return "fbranch"
+def fstate_str() -> str:
+    return "fstate"
 
 
 def fnigh_str() -> str:

@@ -25,9 +25,9 @@ def test_BudUnit_get_dict_ReturnsObj_Scenario1_large_json():
     day_hour_way = yao_bud.make_l1_way(day_hour_str)
     day_hour_concept = yao_bud.get_concept_obj(day_hour_way)
     day_hour_concept._originunit.set_originhold(acct_name="Bob", importance=2)
-    yao_bud.add_fact(fcontext=day_hour_way, fbranch=day_hour_way, fopen=0, fnigh=23)
+    yao_bud.add_fact(fcontext=day_hour_way, fstate=day_hour_way, fopen=0, fnigh=23)
     time_minute = yao_bud.make_l1_way("day_minute")
-    yao_bud.add_fact(fcontext=time_minute, fbranch=time_minute, fopen=0, fnigh=1440)
+    yao_bud.add_fact(fcontext=time_minute, fstate=time_minute, fopen=0, fnigh=1440)
     yao_str = "Yao"
     yao_bud.originunit.set_originhold(yao_str, 1)
     yao_fund_pool = 23000
@@ -232,10 +232,10 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     yao_bud = budunit_v001()
     day_hour_str = "day_hour"
     day_hour_way = yao_bud.make_l1_way(day_hour_str)
-    yao_bud.add_fact(fcontext=day_hour_way, fbranch=day_hour_way, fopen=0, fnigh=23)
+    yao_bud.add_fact(fcontext=day_hour_way, fstate=day_hour_way, fopen=0, fnigh=23)
     day_min_str = "day_minute"
     day_min_way = yao_bud.make_l1_way(day_min_str)
-    yao_bud.add_fact(fcontext=day_min_way, fbranch=day_min_way, fopen=0, fnigh=59)
+    yao_bud.add_fact(fcontext=day_min_way, fstate=day_min_way, fopen=0, fnigh=59)
     x_factunit = factunit_shop(day_min_way, day_min_way, 5, 59)
     yao_bud.edit_concept_attr(x_factunit.fcontext, factunit=x_factunit)
     yao_bud.set_max_tree_traverse(2)

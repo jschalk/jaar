@@ -296,16 +296,16 @@ def create_budfact_metrics_insert_sqlstr(values_dict: dict[str,]):
     owner_name = values_dict.get("owner_name")
     way = values_dict.get("concept_way")
     fcontext = values_dict.get("fcontext")
-    fbranch = values_dict.get("fbranch")
+    fstate = values_dict.get("fstate")
     fopen = values_dict.get("fopen")
     fnigh = values_dict.get("fnigh")
-    return f"""INSERT INTO bud_concept_factunit_job (fisc_label, owner_name, concept_way, fcontext, fbranch, fopen, fnigh)
+    return f"""INSERT INTO bud_concept_factunit_job (fisc_label, owner_name, concept_way, fcontext, fstate, fopen, fnigh)
 VALUES (
   {sqlite_obj_str(fisc_label, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
 , {sqlite_obj_str(way, "TEXT")}
 , {sqlite_obj_str(fcontext, "TEXT")}
-, {sqlite_obj_str(fbranch, "TEXT")}
+, {sqlite_obj_str(fstate, "TEXT")}
 , {sqlite_obj_str(fopen, "REAL")}
 , {sqlite_obj_str(fnigh, "REAL")}
 )
@@ -334,19 +334,19 @@ def create_budprem_metrics_insert_sqlstr(values_dict: dict[str,]):
     owner_name = values_dict.get("owner_name")
     way = values_dict.get("concept_way")
     rcontext = values_dict.get("rcontext")
-    pbranch = values_dict.get("pbranch")
+    pstate = values_dict.get("pstate")
     pnigh = values_dict.get("pnigh")
     popen = values_dict.get("popen")
     pdivisor = values_dict.get("pdivisor")
     _task = values_dict.get("_task")
     _status = values_dict.get("_status")
-    return f"""INSERT INTO bud_concept_reason_premiseunit_job (fisc_label, owner_name, concept_way, rcontext, pbranch, pnigh, popen, pdivisor, _task, _status)
+    return f"""INSERT INTO bud_concept_reason_premiseunit_job (fisc_label, owner_name, concept_way, rcontext, pstate, pnigh, popen, pdivisor, _task, _status)
 VALUES (
   {sqlite_obj_str(fisc_label, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
 , {sqlite_obj_str(way, "TEXT")}
 , {sqlite_obj_str(rcontext, "TEXT")}
-, {sqlite_obj_str(pbranch, "TEXT")}
+, {sqlite_obj_str(pstate, "TEXT")}
 , {sqlite_obj_str(pnigh, "REAL")}
 , {sqlite_obj_str(popen, "REAL")}
 , {sqlite_obj_str(pdivisor, "REAL")}

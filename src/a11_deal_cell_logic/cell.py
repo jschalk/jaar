@@ -110,15 +110,15 @@ class CellUnit:
     def set_budadjust_facts(self):
         for fact in self.budevent_facts.values():
             self.budadjust.add_fact(
-                fact.fcontext, fact.fbranch, fact.fopen, fact.fnigh, True
+                fact.fcontext, fact.fstate, fact.fopen, fact.fnigh, True
             )
         for fact in self.found_facts.values():
             self.budadjust.add_fact(
-                fact.fcontext, fact.fbranch, fact.fopen, fact.fnigh, True
+                fact.fcontext, fact.fstate, fact.fopen, fact.fnigh, True
             )
         for fact in self.boss_facts.values():
             self.budadjust.add_fact(
-                fact.fcontext, fact.fbranch, fact.fopen, fact.fnigh, True
+                fact.fcontext, fact.fstate, fact.fopen, fact.fnigh, True
             )
 
     def _set_acct_mandate_ledger(self):

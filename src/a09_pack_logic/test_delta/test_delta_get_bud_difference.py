@@ -26,7 +26,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     close_str,
     mass_str,
     fcontext_str,
-    fbranch_str,
+    fstate_str,
     fnigh_str,
     fopen_str,
     rcontext_concept_active_requisite_str,
@@ -706,7 +706,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_factunit_up
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(concept_way_str()) == ball_way
     assert ball_budatom.get_value(fcontext_str()) == knee_way
-    assert ball_budatom.get_value(fbranch_str()) == damaged_way
+    assert ball_budatom.get_value(fstate_str()) == damaged_way
     assert ball_budatom.get_value(fopen_str()) == after_fopen
     assert ball_budatom.get_value(fnigh_str()) == after_fnigh
     assert get_budatom_total_count(sue_buddelta) == 1
@@ -745,7 +745,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_factunit_in
     print(f"{ball_budatom=}")
     assert ball_budatom.get_value(concept_way_str()) == ball_way
     assert ball_budatom.get_value(fcontext_str()) == knee_way
-    assert ball_budatom.get_value(fbranch_str()) == damaged_way
+    assert ball_budatom.get_value(fstate_str()) == damaged_way
     assert ball_budatom.get_value(fopen_str()) == after_fopen
     assert ball_budatom.get_value(fnigh_str()) == after_fnigh
     assert get_budatom_total_count(sue_buddelta) == 1
@@ -772,7 +772,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_factunit_de
     before_damaged_pnigh = 66
     before_fact = factunit_shop(
         fcontext=knee_way,
-        fbranch=damaged_way,
+        fstate=damaged_way,
         fopen=before_damaged_popen,
         fnigh=before_damaged_pnigh,
     )
@@ -842,7 +842,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_reason_prem
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(concept_way_str()) == ball_way
     assert ball_budatom.get_value("rcontext") == knee_way
-    assert ball_budatom.get_value("pbranch") == damaged_way
+    assert ball_budatom.get_value("pstate") == damaged_way
     assert ball_budatom.get_value("popen") == damaged_popen
     assert ball_budatom.get_value("pnigh") == damaged_pnigh
     assert ball_budatom.get_value("pdivisor") == damaged_pdivisor
@@ -885,7 +885,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_reason_prem
     after_sue_bud.edit_concept_attr(
         ball_way,
         reason_del_premise_rcontext=knee_way,
-        reason_del_premise_pbranch=damaged_way,
+        reason_del_premise_pstate=damaged_way,
     )
 
     # WHEN
@@ -904,7 +904,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_reason_prem
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(concept_way_str()) == ball_way
     assert ball_budatom.get_value("rcontext") == knee_way
-    assert ball_budatom.get_value("pbranch") == damaged_way
+    assert ball_budatom.get_value("pstate") == damaged_way
     assert get_budatom_total_count(sue_buddelta) == 1
 
 
@@ -970,7 +970,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_reason_prem
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(concept_way_str()) == ball_way
     assert ball_budatom.get_value("rcontext") == knee_way
-    assert ball_budatom.get_value("pbranch") == damaged_way
+    assert ball_budatom.get_value("pstate") == damaged_way
     assert ball_budatom.get_value("popen") == after_damaged_popen
     assert ball_budatom.get_value("pnigh") == after_damaged_pnigh
     assert ball_budatom.get_value("pdivisor") == after_damaged_pdivisor
