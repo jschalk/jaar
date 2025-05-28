@@ -31,7 +31,7 @@ def test_GroupUnit_exists():
 def test_groupunit_shop_ReturnsObj():
     # ESTABLISH
     swim_str = ";swimmers"
-    nation_way = create_way(root_label(), "nation-states")
+    nation_way = create_way(root_label(), "nations")
     usa_way = create_way(nation_way, "USA")
 
     # WHEN

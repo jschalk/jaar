@@ -403,7 +403,7 @@ def test_get_sorted_jkey_keys_ReturnsObj_bud_concept_reason_premiseunit():
     x_sorted_jkey_keys = get_sorted_jkey_keys(x_dimen)
 
     # THEN
-    assert x_sorted_jkey_keys == [concept_way_str(), rcontext_str(), "pbranch"]
+    assert x_sorted_jkey_keys == [concept_way_str(), rcontext_str(), "pstate"]
 
 
 def test_get_flattened_atom_table_build_ReturnsObj():
@@ -669,12 +669,12 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("mass") == "int"
     assert x_class_types.get("max_tree_traverse") == "int"
     assert x_class_types.get(morph_str()) == "bool"
-    assert x_class_types.get("pbranch") == type_WayStr_str()
+    assert x_class_types.get("pstate") == type_WayStr_str()
     assert x_class_types.get("pnigh") == "float"
     assert x_class_types.get(numor_str()) == "int"
     assert x_class_types.get("popen") == "float"
     assert x_class_types.get(penny_str()) == "float"
-    assert x_class_types.get("fbranch") == type_WayStr_str()
+    assert x_class_types.get("fstate") == type_WayStr_str()
     assert x_class_types.get("pledge") == "bool"
     assert x_class_types.get("problem_bool") == "bool"
     assert x_class_types.get(concept_way_str()) == type_WayStr_str()

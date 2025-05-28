@@ -28,6 +28,7 @@ from src.a09_pack_logic.delta import get_minimal_buddelta
 from src.a09_pack_logic.pack import packunit_shop, get_packunit_from_json, PackUnit
 from src.a12_hub_tools.hub_path import (
     create_gut_path,
+    create_job_path,
     create_fisc_ote1_csv_path,
     create_fisc_ote1_json_path,
     create_owner_event_dir_path,
@@ -38,6 +39,7 @@ from src.a12_hub_tools.hub_tool import (
     collect_owner_event_dir_sets,
     get_owners_downhill_event_ints,
     open_bud_file,
+    open_job_file,
 )
 from src.a15_fisc_logic.fisc import (
     get_from_default_path as fiscunit_get_from_default_path,
@@ -79,16 +81,18 @@ from src.a17_idea_logic.idea_db_tool import (
 from src.a17_idea_logic.pidgin_toolbox import init_pidginunit_from_dir
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
+    get_fisc_bud_sound_agg_tablenames,
     create_sound_and_voice_tables,
     create_sound_raw_update_inconsist_error_message_sqlstr,
     create_sound_agg_insert_sqlstrs,
     create_insert_into_pidgin_core_raw_sqlstr,
-    create_insert_into_pidgin_core_vld_sqlstr,
+    create_insert_pidgin_core_agg_into_vld_sqlstr,
     create_update_pidgin_sound_agg_inconsist_sqlstr,
     create_update_pidlabe_sound_agg_bridge_error_sqlstr,
     create_update_pidwayy_sound_agg_bridge_error_sqlstr,
     create_update_pidname_sound_agg_bridge_error_sqlstr,
     create_update_pidtitl_sound_agg_bridge_error_sqlstr,
+    create_insert_missing_face_name_into_pidgin_core_vld_sqlstr,
     create_insert_pidgin_sound_vld_table_sqlstr,
     get_insert_into_sound_vld_sqlstrs,
     get_insert_into_voice_raw_sqlstrs,
@@ -100,8 +104,12 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_bridge_exists_in_label_error_update_sqlstr,
     CREATE_FISC_OTE1_AGG_SQLSTR,
     INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR,
+    create_job_tables,
 )
-from src.a18_etl_toolbox.db_obj_tool import get_fisc_dict_from_voice_tables
+from src.a18_etl_toolbox.db_obj_tool import (
+    get_fisc_dict_from_voice_tables,
+    insert_job_obj,
+)
 from src.a18_etl_toolbox.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from pandas import (
     read_excel as pandas_read_excel,
@@ -385,7 +393,7 @@ def insert_pidgin_sound_agg_into_pidgin_core_raw_table(cursor: sqlite3_Cursor):
 def insert_pidgin_core_agg_to_pidgin_core_vld_table(cursor: sqlite3_Cursor):
     bridge = default_bridge_if_None()
     unknown = default_unknown_term_if_None()
-    insert_sqlstr = create_insert_into_pidgin_core_vld_sqlstr(bridge, unknown)
+    insert_sqlstr = create_insert_pidgin_core_agg_into_vld_sqlstr(bridge, unknown)
     cursor.execute(insert_sqlstr)
 
 
@@ -464,11 +472,22 @@ def get_fisc_bud_sound_agg_pidginable_columns(
     return pidgin_columns
 
 
+def populate_pidgin_core_vld_with_missing_face_names(cursor: sqlite3_Cursor):
+    for agg_tablename in get_fisc_bud_sound_agg_tablenames():
+        insert_sqlstr = create_insert_missing_face_name_into_pidgin_core_vld_sqlstr(
+            default_bridge=default_bridge_if_None(),
+            default_unknown=default_unknown_term_if_None(),
+            fisc_bud_sound_agg_tablename=agg_tablename,
+        )
+        cursor.execute(insert_sqlstr)
+
+
 def etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor: sqlite3_Cursor):
     insert_pidgin_sound_agg_into_pidgin_core_raw_table(cursor)
     update_inconsistency_pidgin_core_raw_table(cursor)
     insert_pidgin_core_raw_to_pidgin_core_agg_table(cursor)
     insert_pidgin_core_agg_to_pidgin_core_vld_table(cursor)
+    populate_pidgin_core_vld_with_missing_face_names(cursor)
     update_pidgin_sound_agg_inconsist_errors(cursor)
     update_pidgin_sound_agg_bridge_errors(cursor)
     insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor)
@@ -752,23 +771,25 @@ def etl_event_bud_csvs_to_pack_json(fisc_mstr_dir: str):
                     fisc_label=fisc_label,
                     event_int=event_int,
                 )
-                event_path = create_path(events_path, event_int)
-                add_budatoms_from_csv(event_pack, event_path)
+                event_dir = create_path(events_path, event_int)
+                add_budatoms_from_csv(event_pack, event_dir)
                 event_all_pack_path = create_event_all_pack_path(
                     fisc_mstr_dir, fisc_label, owner_name, event_int
                 )
                 save_file(event_all_pack_path, None, event_pack.get_json())
 
 
-def add_budatoms_from_csv(owner_pack: PackUnit, owner_path: str):
+def add_budatoms_from_csv(event_pack: PackUnit, event_dir: str):
     idea_sqlite_types = get_idea_sqlite_types()
     bud_dimens = get_bud_dimens()
     bud_dimens.remove("budunit")
     for bud_dimen in bud_dimens:
-        bud_dimen_put_csv = f"{bud_dimen}_put_agg.csv"
-        bud_dimen_del_csv = f"{bud_dimen}_del_agg.csv"
-        put_path = create_path(owner_path, bud_dimen_put_csv)
-        del_path = create_path(owner_path, bud_dimen_del_csv)
+        bud_dimen_put_tablename = create_prime_tablename(bud_dimen, "v", "agg", "put")
+        bud_dimen_del_tablename = create_prime_tablename(bud_dimen, "v", "agg", "del")
+        bud_dimen_put_csv = f"{bud_dimen_put_tablename}.csv"
+        bud_dimen_del_csv = f"{bud_dimen_del_tablename}.csv"
+        put_path = create_path(event_dir, bud_dimen_put_csv)
+        del_path = create_path(event_dir, bud_dimen_del_csv)
         if os_path_exists(put_path):
             put_rows = open_csv_with_types(put_path, idea_sqlite_types)
             headers = put_rows.pop(0)
@@ -782,7 +803,7 @@ def add_budatoms_from_csv(owner_pack: PackUnit, owner_path: str):
                         "owner_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
-                owner_pack._buddelta.set_budatom(x_atom)
+                event_pack._buddelta.set_budatom(x_atom)
 
         if os_path_exists(del_path):
             del_rows = open_csv_with_types(del_path, idea_sqlite_types)
@@ -797,7 +818,7 @@ def add_budatoms_from_csv(owner_pack: PackUnit, owner_path: str):
                         "owner_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
-                owner_pack._buddelta.set_budatom(x_atom)
+                event_pack._buddelta.set_budatom(x_atom)
 
 
 def etl_event_pack_json_to_event_inherited_budunits(fisc_mstr_dir: str):
@@ -863,3 +884,14 @@ def etl_fisc_guts_to_fisc_jobs(fisc_mstr_dir: str):
     for fisc_label in get_level1_dirs(fiscs_dir):
         x_fiscunit = fiscunit_get_from_default_path(fisc_mstr_dir, fisc_label)
         x_fiscunit.generate_all_jobs()
+
+
+def etl_fisc_job_jsons_to_job_tables(cursor: sqlite3_Cursor, fisc_mstr_dir: str):
+    create_job_tables(cursor)
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    for fisc_label in get_level1_dirs(fiscs_dir):
+        fisc_path = create_path(fiscs_dir, fisc_label)
+        owners_dir = create_path(fisc_path, "owners")
+        for owner_name in get_level1_dirs(owners_dir):
+            job_obj = open_job_file(fisc_mstr_dir, fisc_label, owner_name)
+            insert_job_obj(cursor, job_obj)

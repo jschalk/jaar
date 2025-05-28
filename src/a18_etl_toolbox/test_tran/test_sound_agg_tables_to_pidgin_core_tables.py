@@ -1,5 +1,11 @@
 from src.a00_data_toolbox.db_toolbox import get_row_count
-from src.a06_bud_logic._utils.str_a06 import face_name_str, event_int_str
+from src.a02_finance_logic._utils.strs_a02 import owner_name_str
+from src.a06_bud_logic._utils.str_a06 import (
+    face_name_str,
+    event_int_str,
+    bud_acctunit_str,
+    acct_name_str,
+)
 from src.a16_pidgin_logic.pidgin import (
     default_bridge_if_None,
     default_unknown_term_if_None,
@@ -48,6 +54,7 @@ from src.a18_etl_toolbox.transformers import (
     update_pidgin_sound_agg_inconsist_errors,
     update_pidgin_sound_agg_bridge_errors,
     insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table,
+    populate_pidgin_core_vld_with_missing_face_names,
     etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables,
 )
 from sqlite3 import connect as sqlite3_connect
@@ -1233,3 +1240,159 @@ VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
         exp_row0 = (1, bob_str, f"{casa_str}{rdx}", casa_str)
         assert rows[0] == exp_row0
         assert rows == [exp_row0]
+
+
+def test_populate_pidgin_core_vld_with_missing_face_names_Scenario0_Populates1MissingPidginCoreRow():
+    # ESTABLISH
+    bob_str = "Bob"
+    yao_str = "Yao"
+    casa_str = "Casa"
+    rdx = ":"
+    ukx = "Unknown"
+    event1 = 1
+
+    with sqlite3_connect(":memory:") as db_conn:
+        cursor = db_conn.cursor()
+        create_sound_and_voice_tables(cursor)
+        budacct_str = bud_acctunit_str()
+        budacct_s_agg_tablename = create_prime_tablename(budacct_str, "s", "agg", "put")
+        insert_budacct_sqlstr = f"""
+INSERT INTO {budacct_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {owner_name_str()}, {acct_name_str()})
+VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}');"""
+        cursor.execute(insert_budacct_sqlstr)
+
+        pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
+        assert get_row_count(cursor, pidcore_s_vld_tablename) == 0
+
+        # WHEN
+        populate_pidgin_core_vld_with_missing_face_names(cursor)
+
+        # THEN
+        assert get_row_count(cursor, pidcore_s_vld_tablename) == 1
+        select_core_vld_sqlstr = f"SELECT {face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_term_str()} FROM {pidcore_s_vld_tablename}"
+        cursor.execute(select_core_vld_sqlstr)
+        rows = cursor.fetchall()
+        x_bridge = default_bridge_if_None()
+        exp_row0 = (bob_str, x_bridge, x_bridge, default_unknown_term_if_None())
+        assert rows[0] == exp_row0
+        assert rows == [exp_row0]
+
+
+def test_populate_pidgin_core_vld_with_missing_face_names_Scenario1_PopulatesSomeMissingPidginCoreRows():
+    # ESTABLISH
+    bob_str = "Bob"
+    yao_str = "Yao"
+    rdx = ":"
+    ukx = "Unknown"
+    event1 = 1
+
+    with sqlite3_connect(":memory:") as db_conn:
+        cursor = db_conn.cursor()
+        create_sound_and_voice_tables(cursor)
+        budacct_str = bud_acctunit_str()
+        budacct_s_agg_tablename = create_prime_tablename(budacct_str, "s", "agg", "put")
+        insert_budacct_sqlstr = f"""
+INSERT INTO {budacct_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {owner_name_str()}, {acct_name_str()})
+VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}'), ({event1}, '{yao_str}', '{yao_str}', '{yao_str}');"""
+        cursor.execute(insert_budacct_sqlstr)
+
+        pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
+        insert_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename} (
+{face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_term_str()})
+VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
+        cursor.execute(insert_sqlstr)
+        assert get_row_count(cursor, pidcore_s_vld_tablename) == 1
+
+        # WHEN
+        populate_pidgin_core_vld_with_missing_face_names(cursor)
+
+        # THEN
+        assert get_row_count(cursor, pidcore_s_vld_tablename) == 2
+        select_core_vld_sqlstr = f"SELECT {face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_term_str()} FROM {pidcore_s_vld_tablename} ORDER BY {face_name_str()}"
+        cursor.execute(select_core_vld_sqlstr)
+        rows = cursor.fetchall()
+        default_bridge = default_bridge_if_None()
+        default_unknown = default_unknown_term_if_None()
+        exp_row0 = (bob_str, rdx, rdx, ukx)
+        exp_row1 = (yao_str, default_bridge, default_bridge, default_unknown)
+        assert rows[0] == exp_row0
+        assert rows[1] == exp_row1
+        assert rows == [exp_row0, exp_row1]
+
+
+def test_etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables_Scenario2_Populates1MissingPidginCoreRow():
+    # ESTABLISH
+    bob_str = "Bob"
+    yao_str = "Yao"
+    casa_str = "Casa"
+    rdx = ":"
+    ukx = "Unknown"
+    event1 = 1
+
+    with sqlite3_connect(":memory:") as db_conn:
+        cursor = db_conn.cursor()
+        create_sound_and_voice_tables(cursor)
+        budacct_str = bud_acctunit_str()
+        budacct_s_agg_tablename = create_prime_tablename(budacct_str, "s", "agg", "put")
+        insert_budacct_sqlstr = f"""
+INSERT INTO {budacct_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {owner_name_str()}, {acct_name_str()})
+VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}');"""
+        cursor.execute(insert_budacct_sqlstr)
+
+        pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
+        assert get_row_count(cursor, pidcore_s_vld_tablename) == 0
+
+        # WHEN
+        etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor)
+
+        # THEN
+        assert get_row_count(cursor, pidcore_s_vld_tablename) == 1
+        select_core_vld_sqlstr = f"SELECT * FROM {pidcore_s_vld_tablename}"
+        cursor.execute(select_core_vld_sqlstr)
+        rows = cursor.fetchall()
+        x_bridge = default_bridge_if_None()
+        exp_row0 = (bob_str, x_bridge, x_bridge, default_unknown_term_if_None())
+        assert rows[0] == exp_row0
+        assert rows == [exp_row0]
+
+
+def test_etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables_Scenario3_PopulatesSomeMissingPidginCoreRows():
+    # ESTABLISH
+    bob_str = "Bob"
+    yao_str = "Yao"
+    rdx = ":"
+    ukx = "Unknown"
+    event1 = 1
+
+    with sqlite3_connect(":memory:") as db_conn:
+        cursor = db_conn.cursor()
+        create_sound_and_voice_tables(cursor)
+        budacct_str = bud_acctunit_str()
+        budacct_s_agg_tablename = create_prime_tablename(budacct_str, "s", "agg", "put")
+        insert_budacct_sqlstr = f"""
+INSERT INTO {budacct_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {owner_name_str()}, {acct_name_str()})
+VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}'), ({event1}, '{yao_str}', '{yao_str}', '{yao_str}');"""
+        cursor.execute(insert_budacct_sqlstr)
+
+        pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
+        insert_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename} (
+{face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_term_str()})
+VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
+        cursor.execute(insert_sqlstr)
+        assert get_row_count(cursor, pidcore_s_vld_tablename) == 1
+
+        # WHEN
+        etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor)
+
+        # THEN
+        assert get_row_count(cursor, pidcore_s_vld_tablename) == 2
+        select_core_vld_sqlstr = f"SELECT * FROM {pidcore_s_vld_tablename}"
+        cursor.execute(select_core_vld_sqlstr)
+        rows = cursor.fetchall()
+        default_bridge = default_bridge_if_None()
+        default_unknown = default_unknown_term_if_None()
+        exp_row0 = (bob_str, rdx, rdx, ukx)
+        exp_row1 = (yao_str, default_bridge, default_bridge, default_unknown)
+        assert rows[0] == exp_row0
+        assert rows[1] == exp_row1
+        assert rows == [exp_row0, exp_row1]

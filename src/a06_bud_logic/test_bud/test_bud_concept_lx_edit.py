@@ -162,13 +162,13 @@ def test_bud_edit_concept_label_Modifies_factunits():
     yao_bud.set_l1_concept(conceptunit_shop(casa_str))
     yao_bud.set_concept(conceptunit_shop(roses_str), parent_way=bloomers_way)
     yao_bud.set_concept(conceptunit_shop(rain_str), parent_way=old_water_way)
-    yao_bud.add_fact(fcontext=old_water_way, fbranch=old_rain_way)
+    yao_bud.add_fact(fcontext=old_water_way, fstate=old_rain_way)
 
     concept_x = yao_bud.get_concept_obj(roses_way)
     assert yao_bud.conceptroot.factunits[old_water_way] is not None
     old_water_rain_factunit = yao_bud.conceptroot.factunits[old_water_way]
     assert old_water_rain_factunit.fcontext == old_water_way
-    assert old_water_rain_factunit.fbranch == old_rain_way
+    assert old_water_rain_factunit.fstate == old_rain_way
 
     # WHEN
     new_water_str = "h2o"
@@ -183,14 +183,14 @@ def test_bud_edit_concept_label_Modifies_factunits():
     new_water_rain_factunit = yao_bud.conceptroot.factunits[new_water_way]
     assert new_water_rain_factunit.fcontext == new_water_way
     new_rain_way = yao_bud.make_way(new_water_way, rain_str)
-    assert new_water_rain_factunit.fbranch == new_rain_way
+    assert new_water_rain_factunit.fstate == new_rain_way
 
     assert yao_bud.conceptroot.factunits.get(new_water_way)
     x_factunit = yao_bud.conceptroot.factunits.get(new_water_way)
     # for factunit_key, x_factunit in yao_bud.conceptroot.factunits.items():
     #     assert factunit_key == new_water_way
     assert x_factunit.fcontext == new_water_way
-    assert x_factunit.fbranch == new_rain_way
+    assert x_factunit.fstate == new_rain_way
 
 
 def test_bud_edit_concept_label_ModifiesConceptReasonUnitsScenario1():
@@ -201,15 +201,15 @@ def test_bud_edit_concept_label_ModifiesConceptReasonUnitsScenario1():
     wednesday_str = "Wednesday"
     old_wednesday_way = sue_bud.make_way(old_weekday_way, wednesday_str)
     casa_concept = sue_bud.get_concept_obj(sue_bud.make_l1_way("casa"))
-    # casa_wk_reason = reasonunit_shop(weekday, premises={wed_premise.pbranch: wed_premise})
-    # nation_reason = reasonunit_shop(nationstate, premises={usa_premise.pbranch: usa_premise})
+    # casa_wk_reason = reasonunit_shop(weekday, premises={wed_premise.pstate: wed_premise})
+    # nation_reason = reasonunit_shop(nation, premises={usa_premise.pstate: usa_premise})
     assert len(casa_concept.reasonunits) == 2
     assert casa_concept.reasonunits.get(old_weekday_way) is not None
     wednesday_concept = sue_bud.get_concept_obj(old_weekday_way)
     casa_weekday_reason = casa_concept.reasonunits.get(old_weekday_way)
     assert casa_weekday_reason.premises.get(old_wednesday_way) is not None
     assert (
-        casa_weekday_reason.premises.get(old_wednesday_way).pbranch == old_wednesday_way
+        casa_weekday_reason.premises.get(old_wednesday_way).pstate == old_wednesday_way
     )
     new_weekday_str = "days of week"
     new_weekday_way = sue_bud.make_l1_way(new_weekday_str)
@@ -235,7 +235,7 @@ def test_bud_edit_concept_label_ModifiesConceptReasonUnitsScenario1():
     casa_weekday_reason = casa_concept.reasonunits.get(new_weekday_way)
     assert casa_weekday_reason.premises.get(new_wednesday_way) is not None
     assert (
-        casa_weekday_reason.premises.get(new_wednesday_way).pbranch == new_wednesday_way
+        casa_weekday_reason.premises.get(new_wednesday_way).pstate == new_wednesday_way
     )
     assert len(casa_concept.reasonunits) == 2
 

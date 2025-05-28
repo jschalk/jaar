@@ -567,7 +567,7 @@ def test_update_all_face_name_event_int_columns_Scenario1_NoMatchingSheets(
     ws = workbook.active
     ws.append(["foo", "bar"])
     workbook.save(excel_path)
-    # Ensure initial state is correct
+    # Ensure initial data is correct
     workbook = openpyxl_load_workbook(excel_path)
     ws = workbook.active
     assert ws.cell(row=1, column=1).value == "foo"

@@ -30,7 +30,7 @@ def env_dir_setup_cleanup():
 
 
 def get_texas_way() -> WayStr:
-    naton_str = "nation-state"
+    naton_str = "nation"
     usa_str = "usa"
     texas_str = "texas"
     return create_way_from_labels([naton_str, usa_str, texas_str])

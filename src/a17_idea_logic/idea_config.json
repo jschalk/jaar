@@ -38,10 +38,10 @@
     "idea_category": "bud",
     "jkeys": {
       "awardee_title": {},
+      "concept_way": {},
       "event_int": {},
       "face_name": {},
       "fisc_label": {},
-      "concept_way": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -54,17 +54,17 @@
     "build_order": 12,
     "idea_category": "bud",
     "jkeys": {
+      "concept_way": {},
       "event_int": {},
       "face_name": {},
       "fcontext": {},
       "fisc_label": {},
-      "concept_way": {},
       "owner_name": {}
     },
     "jvalues": {
-      "fbranch": {},
       "fnigh": {},
-      "fopen": {}
+      "fopen": {},
+      "fstate": {}
     }
   },
   "bud_concept_healerlink": {
@@ -72,11 +72,25 @@
     "build_order": 15,
     "idea_category": "bud",
     "jkeys": {
+      "concept_way": {},
       "event_int": {},
       "face_name": {},
       "fisc_label": {},
       "healer_name": {},
+      "owner_name": {}
+    },
+    "jvalues": {}
+  },
+  "bud_concept_laborlink": {
+    "allowed_crud": "DELETE_INSERT",
+    "build_order": 14,
+    "idea_category": "bud",
+    "jkeys": {
       "concept_way": {},
+      "event_int": {},
+      "face_name": {},
+      "fisc_label": {},
+      "labor_title": {},
       "owner_name": {}
     },
     "jvalues": {}
@@ -86,12 +100,12 @@
     "build_order": 16,
     "idea_category": "bud",
     "jkeys": {
+      "concept_way": {},
       "event_int": {},
       "face_name": {},
       "fisc_label": {},
-      "concept_way": {},
       "owner_name": {},
-      "pbranch": {},
+      "pstate": {},
       "rcontext": {}
     },
     "jvalues": {
@@ -105,10 +119,10 @@
     "build_order": 17,
     "idea_category": "bud",
     "jkeys": {
+      "concept_way": {},
       "event_int": {},
       "face_name": {},
       "fisc_label": {},
-      "concept_way": {},
       "owner_name": {},
       "rcontext": {}
     },
@@ -116,29 +130,15 @@
       "rcontext_concept_active_requisite": {}
     }
   },
-  "bud_concept_laborlink": {
-    "allowed_crud": "DELETE_INSERT",
-    "build_order": 14,
-    "idea_category": "bud",
-    "jkeys": {
-      "event_int": {},
-      "face_name": {},
-      "fisc_label": {},
-      "concept_way": {},
-      "owner_name": {},
-      "labor_title": {}
-    },
-    "jvalues": {}
-  },
   "bud_conceptunit": {
     "allowed_crud": "DELETE_INSERT_UPDATE",
     "build_order": 18,
     "idea_category": "bud",
     "jkeys": {
+      "concept_way": {},
       "event_int": {},
       "face_name": {},
       "fisc_label": {},
-      "concept_way": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -283,18 +283,18 @@
       "yr1_jan1_offset": {}
     }
   },
-  "pidgin_title": {
+  "pidgin_label": {
     "allowed_crud": "INSERT_ONE_TIME",
-    "build_order": 1,
+    "build_order": 2,
     "idea_category": "pidgin",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "otx_title": {}
+      "otx_label": {}
     },
     "jvalues": {
       "inx_bridge": {},
-      "inx_title": {},
+      "inx_label": {},
       "otx_bridge": {},
       "unknown_term": {}
     }
@@ -315,18 +315,18 @@
       "unknown_term": {}
     }
   },
-  "pidgin_label": {
+  "pidgin_title": {
     "allowed_crud": "INSERT_ONE_TIME",
-    "build_order": 2,
+    "build_order": 1,
     "idea_category": "pidgin",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "otx_label": {}
+      "otx_title": {}
     },
     "jvalues": {
       "inx_bridge": {},
-      "inx_label": {},
+      "inx_title": {},
       "otx_bridge": {},
       "unknown_term": {}
     }

@@ -109,7 +109,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsTasksToBudWithDetailsDe
     bob_gut.edit_concept_attr(
         cook_way(),
         reason_del_premise_rcontext=eat_way(),
-        reason_del_premise_pbranch=hungry_way(),
+        reason_del_premise_pstate=hungry_way(),
     )
     bob_cook_conceptunit = bob_gut.get_concept_obj(cook_way())
     zia_cook_conceptunit = zia_gut.get_concept_obj(cook_way())

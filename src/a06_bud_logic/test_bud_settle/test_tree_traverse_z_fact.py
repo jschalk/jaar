@@ -18,13 +18,13 @@ def test_BudUnit_settle_bud_ChangesConceptUnit_pledge_task():
     hour_way = yao_bud.make_l1_way(hour_str)
 
     # WHEN
-    yao_bud.add_fact(fcontext=hour_way, fbranch=hour_way, fopen=82, fnigh=85)
+    yao_bud.add_fact(fcontext=hour_way, fstate=hour_way, fopen=82, fnigh=85)
 
     # THEN
     mail_way = yao_bud.make_l1_way("obtain mail")
     concept_dict = yao_bud.get_concept_dict()
     mail_concept = concept_dict.get(mail_way)
-    yao_bud.add_fact(fcontext=hour_way, fbranch=hour_way, fopen=82, fnigh=95)
+    yao_bud.add_fact(fcontext=hour_way, fstate=hour_way, fopen=82, fnigh=95)
     assert mail_concept.pledge is True
     assert mail_concept._task is False
 
@@ -54,7 +54,7 @@ def test_BudUnit_settle_bud_ExecutesWithRangeRootFacts():
     sweep_concept = conceptunit_shop(sweep_str, gogo_want=sweep_gogo_want)
     sweep_concept.stop_want = sweep_stop_want
     zia_bud.set_concept(clean_concept, parent_way=casa_way)
-    zia_bud.add_fact(fcontext=clean_way, fbranch=clean_way, fopen=1, fnigh=5)
+    zia_bud.add_fact(fcontext=clean_way, fstate=clean_way, fopen=1, fnigh=5)
     assert zia_bud.conceptroot._factheirs == {}
 
     # WHEN
@@ -113,7 +113,7 @@ def test_BudUnit_settle_bud_FactHeirsCorrectlyInherited():
     swim_concept = zia_bud.get_concept_obj(swim_way)
     fast_concept = zia_bud.get_concept_obj(fast_way)
     slow_concept = zia_bud.get_concept_obj(slow_way)
-    zia_bud.add_fact(fcontext=earth_way, fbranch=earth_way, fopen=1.0, fnigh=5.0)
+    zia_bud.add_fact(fcontext=earth_way, fstate=earth_way, fopen=1.0, fnigh=5.0)
     assert swim_concept._factheirs == {}
     assert fast_concept._factheirs == {}
     assert slow_concept._factheirs == {}
@@ -170,7 +170,7 @@ def test_BudUnit_settle_bud_FactUnitMoldsFactHeir():
     assert swim_concept._factheirs == {}
 
     # WHEN
-    zia_bud.add_fact(fcontext=earth_way, fbranch=earth_way, fopen=1.0, fnigh=5.0)
+    zia_bud.add_fact(fcontext=earth_way, fstate=earth_way, fopen=1.0, fnigh=5.0)
     zia_bud.settle_bud()
 
     # THEN
@@ -179,9 +179,9 @@ def test_BudUnit_settle_bud_FactUnitMoldsFactHeir():
     assert swim_concept._factheirs == first_earthdict
 
     # WHEN
-    # earth_curb = factunit_shop(fcontext=earth_way, fbranch=earth_way, popen=3.0, pnigh=4.0)
+    # earth_curb = factunit_shop(fcontext=earth_way, fstate=earth_way, popen=3.0, pnigh=4.0)
     # swim_y.set_factunit(factunit=earth_curb) Not sure what this is for. Testing what "set_factunit" does with the parameters, but what?
-    zia_bud.add_fact(fcontext=earth_way, fbranch=earth_way, fopen=3.0, fnigh=5.0)
+    zia_bud.add_fact(fcontext=earth_way, fstate=earth_way, fopen=3.0, fnigh=5.0)
     zia_bud.settle_bud()
 
     # THEN

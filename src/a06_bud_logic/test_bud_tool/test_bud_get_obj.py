@@ -25,8 +25,8 @@ from src.a06_bud_logic._utils.str_a06 import (
     concept_way_str,
     rcontext_str,
     fcontext_str,
-    pbranch_str,
-    fbranch_str,
+    pstate_str,
+    fstate_str,
 )
 
 
@@ -123,7 +123,7 @@ def test_bud_concept_reason_premiseunit_get_obj_ReturnsObj():
     casa_jkeys = {
         concept_way_str(): casa_way,
         rcontext_str(): week_way,
-        pbranch_str(): thur_way,
+        pstate_str(): thur_way,
     }
     sue_bud.add_concept(casa_way)
     sue_bud.add_concept(week_way)
@@ -265,7 +265,7 @@ def test_bud_get_obj_ReturnsObj_bud_concept_reason_premiseunit_get_obj():
     casa_jkeys = {
         concept_way_str(): casa_way,
         rcontext_str(): week_way,
-        pbranch_str(): thur_way,
+        pstate_str(): thur_way,
     }
     sue_bud.add_concept(casa_way)
     sue_bud.add_concept(week_way)

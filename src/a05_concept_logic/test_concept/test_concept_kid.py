@@ -52,7 +52,7 @@ def test_get_kids_in_range_EmptyParametersReturnsAll_kids():
 
 def test_ConceptUnit_get_descendants_ReturnsNoWayStrs():
     # ESTABLISH
-    nation_str = "nation-state"
+    nation_str = "nation"
     nation_concept = conceptunit_shop(nation_str, parent_way=root_label())
 
     # WHEN
@@ -64,7 +64,7 @@ def test_ConceptUnit_get_descendants_ReturnsNoWayStrs():
 
 def test_ConceptUnit_get_descendants_Returns3DescendantsWayStrs():
     # ESTABLISH
-    nation_str = "nation-state"
+    nation_str = "nation"
     nation_way = create_way(root_label(), nation_str)
     nation_concept = conceptunit_shop(nation_str, parent_way=root_label())
 
@@ -95,7 +95,7 @@ def test_ConceptUnit_get_descendants_Returns3DescendantsWayStrs():
 
 def test_ConceptUnit_get_descendants_ErrorRaisedIfInfiniteLoop():
     # ESTABLISH
-    nation_str = "nation-state"
+    nation_str = "nation"
     nation_way = create_way(root_label(), nation_str)
     nation_concept = conceptunit_shop(nation_str, parent_way=root_label())
     nation_concept.add_kid(nation_concept)
@@ -112,7 +112,7 @@ def test_ConceptUnit_get_descendants_ErrorRaisedIfInfiniteLoop():
 
 def test_ConceptUnit_clear_kids_CorrectlySetsAttr():
     # ESTABLISH
-    nation_str = "nation-state"
+    nation_str = "nation"
     nation_way = create_way(root_label(), nation_str)
     nation_concept = conceptunit_shop(nation_str, parent_way=root_label())
     nation_concept.add_kid(conceptunit_shop("USA", parent_way=nation_way))
@@ -128,7 +128,7 @@ def test_ConceptUnit_clear_kids_CorrectlySetsAttr():
 
 def test_ConceptUnit_get_kid_ReturnsObj():
     # ESTABLISH
-    nation_str = "nation-state"
+    nation_str = "nation"
     nation_way = create_way(root_label(), nation_str)
     nation_concept = conceptunit_shop(nation_str, parent_way=root_label())
 
@@ -150,7 +150,7 @@ def test_ConceptUnit_get_kid_ReturnsObj():
 
 def test_ConceptUnit_del_kid_CorrectModifiesAttr():
     # ESTABLISH
-    nation_str = "nation-state"
+    nation_str = "nation"
     nation_way = create_way(root_label(), nation_str)
     nation_concept = conceptunit_shop(nation_str, parent_way=root_label())
 
@@ -172,7 +172,7 @@ def test_ConceptUnit_del_kid_CorrectModifiesAttr():
 
 def test_ConceptUnit_get_kids_mass_sum_ReturnsObj_Scenario0():
     # ESTABLISH
-    nation_str = "nation-state"
+    nation_str = "nation"
     nation_way = create_way(root_label(), nation_str)
     nation_concept = conceptunit_shop(nation_str, parent_way=root_label())
     usa_str = "USA"
@@ -188,7 +188,7 @@ def test_ConceptUnit_get_kids_mass_sum_ReturnsObj_Scenario0():
 
 def test_ConceptUnit_get_kids_mass_sum_ReturnsObj_Scenario1():
     # ESTABLISH
-    nation_str = "nation-state"
+    nation_str = "nation"
     nation_way = create_way(root_label(), nation_str)
     nation_concept = conceptunit_shop(nation_str, parent_way=root_label())
     usa_str = "USA"

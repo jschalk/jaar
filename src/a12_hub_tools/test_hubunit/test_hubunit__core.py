@@ -99,7 +99,7 @@ def test_hubunit_shop_ReturnsObj():
 def test_hubunit_shop_ReturnsObjWhenEmpty():
     # ESTABLISH
     sue_str = "Sue"
-    nation_str = "nation-state"
+    nation_str = "nation"
     nation_way = create_way(root_label(), nation_str)
     usa_str = "USA"
     usa_way = create_way(nation_way, usa_str)

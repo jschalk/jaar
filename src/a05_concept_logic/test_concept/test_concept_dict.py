@@ -69,27 +69,25 @@ def test_ConceptUnit_get_dict_ReturnsCorrectCompleteDict():
     week_way = create_way(root_label(), week_str)
     wed_str = "Wednesday"
     wed_way = create_way(week_way, wed_str)
-    states_str = "nation-state"
-    states_way = create_way(root_label(), states_str)
+    nation_str = "nation"
+    nation_way = create_way(root_label(), nation_str)
     usa_str = "USA"
-    usa_way = create_way(states_way, usa_str)
+    usa_way = create_way(nation_way, usa_str)
 
-    wed_premise = premiseunit_shop(pbranch=wed_way)
+    wed_premise = premiseunit_shop(pstate=wed_way)
     wed_premise._status = True
-    usa_premise = premiseunit_shop(pbranch=usa_way)
+    usa_premise = premiseunit_shop(pstate=usa_way)
     usa_premise._status = False
 
     x1_reasonunits = {
-        week_way: reasonunit_shop(
-            week_way, premises={wed_premise.pbranch: wed_premise}
-        ),
-        states_way: reasonunit_shop(states_way, {usa_premise.pbranch: usa_premise}),
+        week_way: reasonunit_shop(week_way, premises={wed_premise.pstate: wed_premise}),
+        nation_way: reasonunit_shop(nation_way, {usa_premise.pstate: usa_premise}),
     }
-    wed_premises = {wed_premise.pbranch: wed_premise}
-    usa_premises = {usa_premise.pbranch: usa_premise}
+    wed_premises = {wed_premise.pstate: wed_premise}
+    usa_premises = {usa_premise.pstate: usa_premise}
     x1_reasonheirs = {
         week_way: reasonheir_shop(week_way, wed_premises, _status=True),
-        states_way: reasonheir_shop(states_way, usa_premises, _status=False),
+        nation_way: reasonheir_shop(nation_way, usa_premises, _status=False),
     }
     biker_awardee_title = "bikers"
     biker_give_force = 3.0
@@ -145,7 +143,7 @@ def test_ConceptUnit_get_dict_ReturnsCorrectCompleteDict():
         pledge=True,
         problem_bool=x_problem_bool,
     )
-    x_factunit = factunit_shop(fcontext=week_way, fbranch=week_way, fopen=5, fnigh=59)
+    x_factunit = factunit_shop(fcontext=week_way, fstate=week_way, fopen=5, fnigh=59)
     casa_concept.set_factunit(factunit=x_factunit)
     casa_concept._originunit.set_originhold(acct_name="Ray", importance=None)
     casa_concept._originunit.set_originhold(acct_name="Lei", importance=4)

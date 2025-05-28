@@ -16,25 +16,8 @@ from src.a04_reason_logic.reason_concept import (
 )
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_bud_logic.bud import budunit_shop
-from src.a06_bud_logic._utils.str_a06 import (
-    budunit_str,
-    bud_acctunit_str,
-    bud_acct_membership_str,
-    bud_conceptunit_str,
-    bud_concept_awardlink_str,
-    bud_concept_reasonunit_str,
-    bud_concept_reason_premiseunit_str,
-    bud_concept_laborlink_str,
-    bud_concept_healerlink_str,
-    bud_concept_factunit_str,
-    bud_groupunit_str,
-)
-from src.a12_hub_tools.hub_tool import save_job_file
-from src.a20_lobby_db_toolbox.lobby_path import create_fisc_mstr_dir_path
-from src.a20_lobby_db_toolbox.lobby_sqlstrs import create_job_tables
-from src.a20_lobby_db_toolbox.lobby_tranformers import (
-    etl_fisc_jobs_json_to_db,
-    etl_fiscs_jobs_json_to_db,
+from src.a18_etl_toolbox.tran_sqlstrs import create_job_tables
+from src.a18_etl_toolbox.db_obj_tool import (
     ObjKeysHolder,
     insert_job_budmemb,
     insert_job_budacct,
@@ -44,15 +27,12 @@ from src.a20_lobby_db_toolbox.lobby_tranformers import (
     insert_job_budheal,
     insert_job_budprem,
     insert_job_budreas,
-    insert_job_budlabor,
+    insert_job_budlabo,
     insert_job_budconc,
     insert_job_budunit,
     insert_job_obj,
 )
-from src.a20_lobby_db_toolbox._utils.env_a20 import (
-    env_dir_setup_cleanup,
-    get_module_temp_dir,
-)
+from src.a20_lobby_db_toolbox._utils.env_a20 import env_dir_setup_cleanup
 from sqlite3 import connect as sqlite3_connect
 
 
@@ -61,7 +41,6 @@ def test_ObjKeysHolder_Exists():
     x_objkeyholder = ObjKeysHolder()
 
     # THEN
-    assert not x_objkeyholder.world_id
     assert not x_objkeyholder.fisc_label
     assert not x_objkeyholder.owner_name
     assert not x_objkeyholder.way
@@ -75,7 +54,6 @@ def test_ObjKeysHolder_Exists():
 def test_insert_job_budunit_CreatesTableRowsFor_budunit_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_world_id = "music23"
     x_fisc_label = "accord23"
     x_owner_name = "Sue"
     x__keeps_buildable = 99
@@ -113,7 +91,7 @@ def test_insert_job_budunit_CreatesTableRowsFor_budunit_job():
         create_job_tables(cursor)
         x_table_name = "budunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        objkeysholder = ObjKeysHolder(world_id=x_world_id)
+        objkeysholder = ObjKeysHolder()
 
         # WHEN
         insert_job_budunit(cursor, objkeysholder, sue_bud)
@@ -124,7 +102,6 @@ def test_insert_job_budunit_CreatesTableRowsFor_budunit_job():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
-            x_world_id,
             x_fisc_label,
             x_owner_name,
             x_credor_respect,
@@ -161,7 +138,6 @@ def test_insert_job_budconc_CreatesTableRowsFor_budconc_job():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
     # print("")
-    x_world_id = 0
     x_fisc_label = "accord23"
     x_owner_name = 2
     casa_way = create_way(x_fisc_label, "casa")
@@ -252,7 +228,7 @@ def test_insert_job_budconc_CreatesTableRowsFor_budconc_job():
         create_job_tables(cursor)
         x_table_name = "bud_conceptunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_label, x_owner_name)
+        x_objkeysholder = ObjKeysHolder(x_fisc_label, x_owner_name)
 
         # WHEN
         insert_job_budconc(cursor, x_objkeysholder, x_concept)
@@ -264,7 +240,6 @@ def test_insert_job_budconc_CreatesTableRowsFor_budconc_job():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
-            str(x_world_id),
             x_fisc_label,
             str(x_owner_name),
             clean_way,
@@ -314,7 +289,6 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
     #     print(f"""            x_{x_arg},""")
     # print("")
 
-    x_world_id = 0
     x_fisc_label = 1
     x_owner_name = 2
     x_way = 3
@@ -335,7 +309,7 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
         create_job_tables(cursor)
         x_table_name = "bud_concept_reasonunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_label, x_owner_name, x_way)
+        x_objkeysholder = ObjKeysHolder(x_fisc_label, x_owner_name, x_way)
 
         # WHEN
         insert_job_budreas(cursor, x_objkeysholder, x_reasonheir)
@@ -346,7 +320,6 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
-            str(x_world_id),
             str(x_fisc_label),
             str(x_owner_name),
             str(x_way),
@@ -375,19 +348,18 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
 
-    x_world_id = 0
     x_fisc_label = 1
     x_owner_name = 2
     x_way = 3
     x_rcontext = 4
-    x_pbranch = 5
+    x_pstate = 5
     x_pnigh = 6.0
     x_popen = 7.0
     x_pdivisor = 8
     x__task = 9
     x__status = 10
-    x_premiseunit = premiseunit_shop(pbranch=x_pbranch)
-    x_premiseunit.pbranch = x_pbranch
+    x_premiseunit = premiseunit_shop(pstate=x_pstate)
+    x_premiseunit.pstate = x_pstate
     x_premiseunit.pnigh = x_pnigh
     x_premiseunit.popen = x_popen
     x_premiseunit.pdivisor = x_pdivisor
@@ -399,9 +371,7 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
         create_job_tables(cursor)
         x_table_name = "bud_concept_reason_premiseunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(
-            x_world_id, x_fisc_label, x_owner_name, x_way, x_rcontext
-        )
+        x_objkeysholder = ObjKeysHolder(x_fisc_label, x_owner_name, x_way, x_rcontext)
 
         # WHEN
         insert_job_budprem(cursor, x_objkeysholder, x_premiseunit)
@@ -412,12 +382,11 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
-            str(x_world_id),
             str(x_fisc_label),
             str(x_owner_name),
             str(x_way),
             str(x_rcontext),
-            str(x_pbranch),
+            str(x_pstate),
             x_pnigh,
             x_popen,
             x_pdivisor,
@@ -443,7 +412,6 @@ def test_insert_job_budmemb_CreatesTableRowsFor_budmemb_job():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
 
-    x_world_id = 0
     x_fisc_label = 1
     x_owner_name = 2
     x_acct_name = 3
@@ -476,7 +444,7 @@ def test_insert_job_budmemb_CreatesTableRowsFor_budmemb_job():
         create_job_tables(cursor)
         x_table_name = "bud_acct_membership_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_label, x_owner_name)
+        x_objkeysholder = ObjKeysHolder(x_fisc_label, x_owner_name)
 
         # WHEN
         insert_job_budmemb(cursor, x_objkeysholder, x_membership)
@@ -487,7 +455,6 @@ def test_insert_job_budmemb_CreatesTableRowsFor_budmemb_job():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
-            str(x_world_id),
             str(x_fisc_label),
             str(x_owner_name),
             str(x_acct_name),
@@ -522,7 +489,6 @@ def test_insert_job_budacct_CreatesTableRowsFor_budacct_job():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
 
-    x_world_id = 0
     x_fisc_label = 1
     x_owner_name = 2
     x_acct_name = 3
@@ -558,7 +524,7 @@ def test_insert_job_budacct_CreatesTableRowsFor_budacct_job():
         create_job_tables(cursor)
         x_table_name = "bud_acctunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_label, x_owner_name)
+        x_objkeysholder = ObjKeysHolder(x_fisc_label, x_owner_name)
 
         # WHEN
         insert_job_budacct(cursor, x_objkeysholder, x_acct)
@@ -569,7 +535,6 @@ def test_insert_job_budacct_CreatesTableRowsFor_budacct_job():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
-            str(x_world_id),
             str(x_fisc_label),
             str(x_owner_name),
             str(x_acct_name),
@@ -605,7 +570,6 @@ def test_insert_job_budgrou_CreatesTableRowsFor_budgrou_job():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
 
-    x_world_id = 0
     x_fisc_label = 1
     x_owner_name = 2
     x_group_title = 3
@@ -633,7 +597,7 @@ def test_insert_job_budgrou_CreatesTableRowsFor_budgrou_job():
         create_job_tables(cursor)
         x_table_name = "bud_groupunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_label, x_owner_name)
+        x_objkeysholder = ObjKeysHolder(x_fisc_label, x_owner_name)
 
         # WHEN
         insert_job_budgrou(cursor, x_objkeysholder, x_group)
@@ -644,7 +608,6 @@ def test_insert_job_budgrou_CreatesTableRowsFor_budgrou_job():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
-            str(x_world_id),
             str(x_fisc_label),
             str(x_owner_name),
             str(x_group_title),
@@ -676,7 +639,6 @@ def test_insert_job_budawar_CreatesTableRowsFor_budawar_job():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
 
-    x_world_id = 0
     x_fisc_label = 1
     x_owner_name = 2
     x_way = 3
@@ -697,7 +659,7 @@ def test_insert_job_budawar_CreatesTableRowsFor_budawar_job():
         create_job_tables(cursor)
         x_table_name = "bud_concept_awardlink_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_label, x_owner_name, x_way)
+        x_objkeysholder = ObjKeysHolder(x_fisc_label, x_owner_name, x_way)
 
         # WHEN
         insert_job_budawar(cursor, x_objkeysholder, x_awardheir)
@@ -708,7 +670,6 @@ def test_insert_job_budawar_CreatesTableRowsFor_budawar_job():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
-            str(x_world_id),
             str(x_fisc_label),
             str(x_owner_name),
             str(x_way),
@@ -737,17 +698,16 @@ def test_insert_job_budfact_CreatesTableRowsFor_budfact_job():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
 
-    x_world_id = 0
     x_fisc_label = 1
     x_owner_name = 2
     x_way = 3
     x_rcontext = 4
-    x_fbranch = 5
+    x_fstate = 5
     x_fopen = 6
     x_fnigh = 7
     x_factheir = factheir_shop()
     x_factheir.fcontext = x_rcontext
-    x_factheir.fbranch = x_fbranch
+    x_factheir.fstate = x_fstate
     x_factheir.fopen = x_fopen
     x_factheir.fnigh = x_fnigh
 
@@ -756,7 +716,7 @@ def test_insert_job_budfact_CreatesTableRowsFor_budfact_job():
         create_job_tables(cursor)
         x_table_name = "bud_concept_factunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_label, x_owner_name, x_way)
+        x_objkeysholder = ObjKeysHolder(x_fisc_label, x_owner_name, x_way)
 
         # WHEN
         insert_job_budfact(cursor, x_objkeysholder, x_factheir)
@@ -767,12 +727,11 @@ def test_insert_job_budfact_CreatesTableRowsFor_budfact_job():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
-            str(x_world_id),
             str(x_fisc_label),
             str(x_owner_name),
             str(x_way),
             str(x_rcontext),
-            str(x_fbranch),
+            str(x_fstate),
             x_fopen,
             x_fnigh,
         )
@@ -795,7 +754,6 @@ def test_insert_job_budheal_CreatesTableRowsFor_budheal_job():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
 
-    x_world_id = 0
     x_fisc_label = 1
     x_owner_name = 2
     x_way = 3
@@ -810,7 +768,7 @@ def test_insert_job_budheal_CreatesTableRowsFor_budheal_job():
         create_job_tables(cursor)
         x_table_name = "bud_concept_healerlink_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_label, x_owner_name, x_way)
+        x_objkeysholder = ObjKeysHolder(x_fisc_label, x_owner_name, x_way)
 
         # WHEN
         insert_job_budheal(cursor, x_objkeysholder, x_healerlink)
@@ -821,14 +779,12 @@ def test_insert_job_budheal_CreatesTableRowsFor_budheal_job():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
-            str(x_world_id),
             str(x_fisc_label),
             str(x_owner_name),
             str(x_way),
             bob_str,
         )
         expected_row2 = (
-            str(x_world_id),
             str(x_fisc_label),
             str(x_owner_name),
             str(x_way),
@@ -838,7 +794,7 @@ def test_insert_job_budheal_CreatesTableRowsFor_budheal_job():
         assert rows == expected_data
 
 
-def test_insert_job_budlabor_CreatesTableRowsFor_budlabor_job():
+def test_insert_job_budlabo_CreatesTableRowsFor_budlabo_job():
     # sourcery skip: extract-method
     # ESTABLISH
     # x_args = get_bud_calc_dimen_args("bud_concept_laborlink")
@@ -853,7 +809,6 @@ def test_insert_job_budlabor_CreatesTableRowsFor_budlabor_job():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
 
-    x_world_id = 0
     x_fisc_label = 1
     x_owner_name = 2
     x_way = 3
@@ -869,10 +824,10 @@ def test_insert_job_budlabor_CreatesTableRowsFor_budlabor_job():
         create_job_tables(cursor)
         x_table_name = "bud_concept_laborlink_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_world_id, x_fisc_label, x_owner_name, x_way)
+        x_objkeysholder = ObjKeysHolder(x_fisc_label, x_owner_name, x_way)
 
         # WHEN
-        insert_job_budlabor(cursor, x_objkeysholder, x_laborheir)
+        insert_job_budlabo(cursor, x_objkeysholder, x_laborheir)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 2
@@ -880,7 +835,6 @@ def test_insert_job_budlabor_CreatesTableRowsFor_budlabor_job():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
-            str(x_world_id),
             str(x_fisc_label),
             str(x_owner_name),
             str(x_way),
@@ -888,7 +842,6 @@ def test_insert_job_budlabor_CreatesTableRowsFor_budlabor_job():
             x__owner_name_labor,
         )
         expected_row2 = (
-            str(x_world_id),
             str(x_fisc_label),
             str(x_owner_name),
             str(x_way),
@@ -902,7 +855,6 @@ def test_insert_job_budlabor_CreatesTableRowsFor_budlabor_job():
 def test_insert_job_obj_CreatesTableRows_Scenario0():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_world_id = "music23"
     a23_str = "accord23"
     sue_str = "Sue"
     bob_str = "Bob"
@@ -937,7 +889,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         budheal_job_table = "bud_concept_healerlink_job"
         budprem_job_table = "bud_concept_reason_premiseunit_job"
         budreas_job_table = "bud_concept_reasonunit_job"
-        budlabor_job_table = "bud_concept_laborlink_job"
+        budlabo_job_table = "bud_concept_laborlink_job"
         budconc_job_table = "bud_conceptunit_job"
         budunit_job_table = "budunit_job"
         assert get_row_count(cursor, budunit_job_table) == 0
@@ -950,10 +902,10 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         assert get_row_count(cursor, budheal_job_table) == 0
         assert get_row_count(cursor, budreas_job_table) == 0
         assert get_row_count(cursor, budprem_job_table) == 0
-        assert get_row_count(cursor, budlabor_job_table) == 0
+        assert get_row_count(cursor, budlabo_job_table) == 0
 
         # WHEN
-        insert_job_obj(cursor, x_world_id, sue_bud)
+        insert_job_obj(cursor, sue_bud)
 
         # THEN
         assert get_row_count(cursor, budunit_job_table) == 1
@@ -966,130 +918,53 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         assert get_row_count(cursor, budheal_job_table) == 1
         assert get_row_count(cursor, budreas_job_table) == 1
         assert get_row_count(cursor, budprem_job_table) == 1
-        assert get_row_count(cursor, budlabor_job_table) == 1
+        assert get_row_count(cursor, budlabo_job_table) == 1
 
 
-def test_etl_fisc_jobs_json_to_db_SetsDB_Scenario0(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    lobby_mstr_dir = get_module_temp_dir()
-    c23_str = "Chat23"
-    m23_str = "music23"
-    m23_fisc_mstr_dir = create_fisc_mstr_dir_path(lobby_mstr_dir, c23_str, m23_str)
-    a23_str = "accord23"
-    sue_str = "Sue"
-    bob_str = "Bob"
-    run_str = ";run"
-    sue_bud = budunit_shop(sue_str, a23_str)
-    sue_bud.add_acctunit(sue_str)
-    sue_bud.add_acctunit(bob_str)
-    sue_bud.get_acct(bob_str).add_membership(run_str)
-    casa_way = sue_bud.make_l1_way("casa")
-    status_way = sue_bud.make_l1_way("status")
-    clean_way = sue_bud.make_way(status_way, "clean")
-    dirty_way = sue_bud.make_way(status_way, "dirty")
-    sue_bud.add_concept(casa_way)
-    sue_bud.add_concept(clean_way)
-    sue_bud.add_concept(dirty_way)
-    sue_bud.edit_concept_attr(
-        casa_way, reason_rcontext=status_way, reason_premise=dirty_way
-    )
-    sue_bud.edit_concept_attr(casa_way, awardlink=awardlink_shop(run_str))
-    sue_bud.edit_concept_attr(casa_way, healerlink=healerlink_shop({bob_str}))
-    sue_bud.edit_concept_attr(casa_way, laborunit=laborunit_shop({sue_str}))
-    sue_bud.add_fact(status_way, clean_way)
-    print(f"{sue_bud.get_concept_obj(casa_way).laborunit=}")
-    print(f"{sue_bud.get_concept_obj(casa_way).get_dict()=}")
-    save_job_file(m23_fisc_mstr_dir, sue_bud)
+# def test_etl_fiscs_jobs_json_to_db_SetsDB_Scenario0_TwoBudsInDifferentFiscUnits(
+#     env_dir_setup_cleanup,
+# ):
+#     # ESTABLISH
+#     lobby_mstr_dir = get_module_temp_dir()
+#     c77_str = "Chat77"
+#     a23_str = "accord23"
+#     sue_str = "Sue"
+#     a23_sue_bud = budunit_shop(sue_str, a23_str)
+#     a23_sue_bud.add_acctunit(sue_str)
+#     a23_sue_bud.add_concept(a23_sue_bud.make_l1_way("casa"))
 
-    with sqlite3_connect(":memory:") as conn:
-        cursor = conn.cursor()
-        create_job_tables(cursor)
-        budmemb_job_table = f"{bud_acct_membership_str()}_job"
-        budacct_job_table = f"{bud_acctunit_str()}_job"
-        budgrou_job_table = f"{bud_groupunit_str()}_job"
-        budawar_job_table = f"{bud_concept_awardlink_str()}_job"
-        budfact_job_table = f"{bud_concept_factunit_str()}_job"
-        budheal_job_table = f"{bud_concept_healerlink_str()}_job"
-        budprem_job_table = f"{bud_concept_reason_premiseunit_str()}_job"
-        budreas_job_table = f"{bud_concept_reasonunit_str()}_job"
-        budlabor_job_table = f"{bud_concept_laborlink_str()}_job"
-        budconc_job_table = f"{bud_conceptunit_str()}_job"
-        budunit_job_table = f"{budunit_str()}_job"
-        assert get_row_count(cursor, budunit_job_table) == 0
-        assert get_row_count(cursor, budconc_job_table) == 0
-        assert get_row_count(cursor, budacct_job_table) == 0
-        assert get_row_count(cursor, budmemb_job_table) == 0
-        assert get_row_count(cursor, budgrou_job_table) == 0
-        assert get_row_count(cursor, budawar_job_table) == 0
-        assert get_row_count(cursor, budfact_job_table) == 0
-        assert get_row_count(cursor, budheal_job_table) == 0
-        assert get_row_count(cursor, budreas_job_table) == 0
-        assert get_row_count(cursor, budprem_job_table) == 0
-        assert get_row_count(cursor, budlabor_job_table) == 0
+#     a99_str = "accord99"
+#     bob_str = "Bob"
+#     a99_sue_bud = budunit_shop(sue_str, a99_str)
+#     a99_sue_bud.add_acctunit(sue_str)
+#     a99_sue_bud.add_acctunit(bob_str)
+#     a99_sue_bud.add_concept(a99_sue_bud.make_l1_way("casa"))
+#     a99_sue_bud.add_concept(a99_sue_bud.make_l1_way("sports"))
 
-        # WHEN
-        etl_fisc_jobs_json_to_db(cursor, m23_str, m23_fisc_mstr_dir)
+#     w34_str = "world34"
+#     w99_str = "world99"
+#     w34_fisc_mstr_dir = create_fisc_mstr_dir_path(lobby_mstr_dir, c77_str, w34_str)
+#     w99_fisc_mstr_dir = create_fisc_mstr_dir_path(lobby_mstr_dir, c77_str, w99_str)
+#     print(f"{w34_fisc_mstr_dir=}")
+#     print(f"{w99_fisc_mstr_dir=}")
+#     save_job_file(w34_fisc_mstr_dir, a23_sue_bud)
+#     save_job_file(w99_fisc_mstr_dir, a99_sue_bud)
 
-        # THEN
-        assert get_row_count(cursor, budunit_job_table) == 1
-        assert get_row_count(cursor, budconc_job_table) == 5
-        assert get_row_count(cursor, budacct_job_table) == 2
-        assert get_row_count(cursor, budmemb_job_table) == 3
-        assert get_row_count(cursor, budgrou_job_table) == 3
-        assert get_row_count(cursor, budawar_job_table) == 1
-        assert get_row_count(cursor, budfact_job_table) == 1
-        assert get_row_count(cursor, budheal_job_table) == 1
-        assert get_row_count(cursor, budreas_job_table) == 1
-        assert get_row_count(cursor, budprem_job_table) == 1
-        assert get_row_count(cursor, budlabor_job_table) == 1
+#     with sqlite3_connect(":memory:") as conn:
+#         cursor = conn.cursor()
+#         create_job_tables(cursor)
+#         budacct_job_table = f"{bud_acctunit_str()}_job"
+#         budconc_job_table = f"{bud_conceptunit_str()}_job"
+#         budunit_job_table = f"{budunit_str()}_job"
+#         assert get_row_count(cursor, budunit_job_table) == 0
+#         assert get_row_count(cursor, budconc_job_table) == 0
+#         assert get_row_count(cursor, budacct_job_table) == 0
 
+#         # WHEN
+#         worlds = [w34_str, w99_str]
+#         etl_fiscs_jobs_json_to_db(cursor, lobby_mstr_dir, c77_str, worlds)
 
-def test_etl_fiscs_jobs_json_to_db_SetsDB_Scenario0_TwoBudsInDifferentFiscUnits(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    lobby_mstr_dir = get_module_temp_dir()
-    c77_str = "Chat77"
-    a23_str = "accord23"
-    sue_str = "Sue"
-    a23_sue_bud = budunit_shop(sue_str, a23_str)
-    a23_sue_bud.add_acctunit(sue_str)
-    a23_sue_bud.add_concept(a23_sue_bud.make_l1_way("casa"))
-
-    a99_str = "accord99"
-    bob_str = "Bob"
-    a99_sue_bud = budunit_shop(sue_str, a99_str)
-    a99_sue_bud.add_acctunit(sue_str)
-    a99_sue_bud.add_acctunit(bob_str)
-    a99_sue_bud.add_concept(a99_sue_bud.make_l1_way("casa"))
-    a99_sue_bud.add_concept(a99_sue_bud.make_l1_way("sports"))
-
-    w34_str = "world34"
-    w99_str = "world99"
-    w34_fisc_mstr_dir = create_fisc_mstr_dir_path(lobby_mstr_dir, c77_str, w34_str)
-    w99_fisc_mstr_dir = create_fisc_mstr_dir_path(lobby_mstr_dir, c77_str, w99_str)
-    print(f"{w34_fisc_mstr_dir=}")
-    print(f"{w99_fisc_mstr_dir=}")
-    save_job_file(w34_fisc_mstr_dir, a23_sue_bud)
-    save_job_file(w99_fisc_mstr_dir, a99_sue_bud)
-
-    with sqlite3_connect(":memory:") as conn:
-        cursor = conn.cursor()
-        create_job_tables(cursor)
-        budacct_job_table = f"{bud_acctunit_str()}_job"
-        budconc_job_table = f"{bud_conceptunit_str()}_job"
-        budunit_job_table = f"{budunit_str()}_job"
-        assert get_row_count(cursor, budunit_job_table) == 0
-        assert get_row_count(cursor, budconc_job_table) == 0
-        assert get_row_count(cursor, budacct_job_table) == 0
-
-        # WHEN
-        worlds = [w34_str, w99_str]
-        etl_fiscs_jobs_json_to_db(cursor, lobby_mstr_dir, c77_str, worlds)
-
-        # THEN
-        assert get_row_count(cursor, budunit_job_table) == 2
-        assert get_row_count(cursor, budconc_job_table) == 5
-        assert get_row_count(cursor, budacct_job_table) == 3
+#         # THEN
+#         assert get_row_count(cursor, budunit_job_table) == 2
+#         assert get_row_count(cursor, budconc_job_table) == 5
+#         assert get_row_count(cursor, budacct_job_table) == 3

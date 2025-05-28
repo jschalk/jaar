@@ -266,28 +266,28 @@ def test_BudUnit_del_concept_obj_Level1CanBeDeleted_ChildrenInherited():
 def test_BudUnit_del_concept_obj_LevelNCanBeDeleted_ChildrenInherited():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    states_str = "nation-state"
-    states_way = sue_bud.make_l1_way(states_str)
+    nation_str = "nation"
+    nation_way = sue_bud.make_l1_way(nation_str)
     usa_str = "USA"
-    usa_way = sue_bud.make_way(states_way, usa_str)
+    usa_way = sue_bud.make_way(nation_way, usa_str)
     texas_str = "Texas"
     oregon_str = "Oregon"
     usa_texas_way = sue_bud.make_way(usa_way, texas_str)
     usa_oregon_way = sue_bud.make_way(usa_way, oregon_str)
-    states_texas_way = sue_bud.make_way(states_way, texas_str)
-    states_oregon_way = sue_bud.make_way(states_way, oregon_str)
+    nation_texas_way = sue_bud.make_way(nation_way, texas_str)
+    nation_oregon_way = sue_bud.make_way(nation_way, oregon_str)
     assert sue_bud.concept_exists(usa_way)
     assert sue_bud.concept_exists(usa_texas_way)
     assert sue_bud.concept_exists(usa_oregon_way)
-    assert sue_bud.concept_exists(states_texas_way) is False
-    assert sue_bud.concept_exists(states_oregon_way) is False
+    assert sue_bud.concept_exists(nation_texas_way) is False
+    assert sue_bud.concept_exists(nation_oregon_way) is False
 
     # WHEN
     sue_bud.del_concept_obj(way=usa_way, del_children=False)
 
     # THEN
-    assert sue_bud.concept_exists(states_texas_way)
-    assert sue_bud.concept_exists(states_oregon_way)
+    assert sue_bud.concept_exists(nation_texas_way)
+    assert sue_bud.concept_exists(nation_oregon_way)
     assert sue_bud.concept_exists(usa_texas_way) is False
     assert sue_bud.concept_exists(usa_oregon_way) is False
     assert sue_bud.concept_exists(usa_way) is False
@@ -312,10 +312,10 @@ def test_BudUnit_del_concept_obj_Level2CanBeDeleted_ChildrenDeleted():
 def test_BudUnit_del_concept_obj_LevelNCanBeDeleted_ChildrenDeleted():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    states_str = "nation-state"
-    states_way = sue_bud.make_l1_way(states_str)
+    nation_str = "nation"
+    nation_way = sue_bud.make_l1_way(nation_str)
     usa_str = "USA"
-    usa_way = sue_bud.make_way(states_way, usa_str)
+    usa_way = sue_bud.make_way(nation_way, usa_str)
     texas_str = "Texas"
     usa_texas_way = sue_bud.make_way(usa_way, texas_str)
     assert sue_bud.get_concept_obj(usa_texas_way)
@@ -379,7 +379,7 @@ def test_BudUnit_edit_concept_attr_IsAbleToEditAnyAncestor_Concept():
     assert sue_bud.conceptroot._kids[casa_str].factunits == {}
     wkdays_way = sue_bud.make_l1_way("weekdays")
     fact_way = sue_bud.make_way(wkdays_way, "Sunday")
-    x_factunit = factunit_shop(fcontext=fact_way, fbranch=fact_way)
+    x_factunit = factunit_shop(fcontext=fact_way, fstate=fact_way)
 
     casa_factunits = sue_bud.conceptroot._kids[casa_str].factunits
     print(f"{casa_factunits=}")
@@ -800,7 +800,7 @@ def test_BudUnit_set_concept_CorrectlyCleansConcept_awardlinks():
 def test_BudUnit_get_concept_obj_ReturnsConcept():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    nation_str = "nation-state"
+    nation_str = "nation"
     nation_way = sue_bud.make_l1_way(nation_str)
     brazil_str = "Brazil"
     brazil_way = sue_bud.make_way(nation_way, brazil_str)
@@ -842,7 +842,7 @@ def test_BudUnit_concept_exists_ReturnsCorrectBool():
     cat_way = sue_bud.make_l1_way("cat have dinner")
     week_way = sue_bud.make_l1_way("weekdays")
     casa_way = sue_bud.make_l1_way("casa")
-    nation_way = sue_bud.make_l1_way("nation-state")
+    nation_way = sue_bud.make_l1_way("nation")
     sun_way = sue_bud.make_way(week_way, "Sunday")
     mon_way = sue_bud.make_way(week_way, "Monday")
     tue_way = sue_bud.make_way(week_way, "Tuesday")

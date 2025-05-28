@@ -32,32 +32,32 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_bud_concept_laborlin
             acct_name_str(),
             amount_str(),
         ]
-        budlabor_cat = "bud_concept_laborlink"
+        budlabo_cat = "bud_concept_laborlink"
         src_table = f"{idea_number}_raw"
-        dst_table = f"{budlabor_cat}_raw"
+        dst_table = f"{budlabo_cat}_raw"
         idea_config = get_idea_config_dict()
-        budlabor_config = idea_config.get(budlabor_cat)
-        print(f"{budlabor_cat=}")
-        print(f"{budlabor_config=}")
-        budlabor_jkeys = budlabor_config.get("jkeys")
-        budlabor_jvals = budlabor_config.get("jvalues")
-        budlabor_args = set(budlabor_jkeys.keys()).union(set(budlabor_jvals.keys()))
-        budlabor_args = get_default_sorted_list(budlabor_args)
-        print(f"{budlabor_jkeys=}")
-        print(f"{budlabor_jvals=}")
+        budlabo_config = idea_config.get(budlabo_cat)
+        print(f"{budlabo_cat=}")
+        print(f"{budlabo_config=}")
+        budlabo_jkeys = budlabo_config.get("jkeys")
+        budlabo_jvals = budlabo_config.get("jvalues")
+        budlabo_args = set(budlabo_jkeys.keys()).union(set(budlabo_jvals.keys()))
+        budlabo_args = get_default_sorted_list(budlabo_args)
+        print(f"{budlabo_jkeys=}")
+        print(f"{budlabo_jvals=}")
         create_idea_sorted_table(conn, src_table, idea_cols)
-        create_idea_sorted_table(conn, dst_table, budlabor_args)
+        create_idea_sorted_table(conn, dst_table, budlabo_args)
 
         # WHEN
         gen_sqlstr = get_idea_into_dimen_raw_query(
-            conn, idea_number, budlabor_cat, budlabor_jkeys
+            conn, idea_number, budlabo_cat, budlabo_jkeys
         )
 
         # THEN
         columns_str = (
             "event_int, face_name, fisc_label, owner_name, concept_way, labor_title"
         )
-        expected_sqlstr = f"""INSERT INTO {budlabor_cat}_raw (idea_number, {columns_str})
+        expected_sqlstr = f"""INSERT INTO {budlabo_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
 WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND fisc_label IS NOT NULL AND owner_name IS NOT NULL AND concept_way IS NOT NULL AND labor_title IS NOT NULL

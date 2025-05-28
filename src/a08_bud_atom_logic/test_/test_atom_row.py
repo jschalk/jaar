@@ -45,12 +45,12 @@ def test_AtomRow_exists():
     assert x_atomrow.mass is None
     assert x_atomrow.max_tree_traverse is None
     assert x_atomrow.morph is None
-    assert x_atomrow.pbranch is None
+    assert x_atomrow.pstate is None
     assert x_atomrow.pnigh is None
     assert x_atomrow.numor is None
     assert x_atomrow.popen is None
     assert x_atomrow.penny is None
-    assert x_atomrow.fbranch is None
+    assert x_atomrow.fstate is None
     assert x_atomrow.pledge is None
     assert x_atomrow.problem_bool is None
     assert x_atomrow.concept_way is None

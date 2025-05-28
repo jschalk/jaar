@@ -31,7 +31,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     debtit_vote_str,
     denom_str,
     fcontext_str,
-    fbranch_str,
+    fstate_str,
     fnigh_str,
     fopen_str,
     fund_coin_str,
@@ -39,7 +39,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     group_title_str,
     healer_name_str,
     morph_str,
-    pbranch_str,
+    pstate_str,
     pnigh_str,
     numor_str,
     popen_str,
@@ -151,7 +151,6 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
                 if level2_key == jkeys_str():
                     atom_args = atom_dimen.get(jkeys_str())
                     dimen_keys = set(atom_args)
-                    dimen_keys.add(world_id_str())
                     dimen_keys.add(fisc_label_str())
                     dimen_keys.add(owner_name_str())
                     fm_aspect_keys = set(fm_aspect_dict.keys())
@@ -172,7 +171,7 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     budawar_aspect = bud_calc_config.get(bud_concept_awardlink_str())
     budreas_aspect = bud_calc_config.get(bud_concept_reasonunit_str())
     budprem_aspect = bud_calc_config.get(bud_concept_reason_premiseunit_str())
-    budlabor_aspect = bud_calc_config.get(bud_concept_laborlink_str())
+    budlabo_aspect = bud_calc_config.get(bud_concept_laborlink_str())
     budheal_aspect = bud_calc_config.get(bud_concept_healerlink_str())
     budfact_aspect = bud_calc_config.get(bud_concept_factunit_str())
     budgrou_aspect = bud_calc_config.get(bud_groupunit_str())
@@ -184,7 +183,7 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     budawar_jmetrics_keys = set(budawar_aspect.get(jmetrics_str()))
     budreas_jmetrics_keys = set(budreas_aspect.get(jmetrics_str()))
     budprem_jmetrics_keys = set(budprem_aspect.get(jmetrics_str()))
-    budlabor_jmetrics_keys = set(budlabor_aspect.get(jmetrics_str()))
+    budlabo_jmetrics_keys = set(budlabo_aspect.get(jmetrics_str()))
     budheal_jmetrics_keys = set(budheal_aspect.get(jmetrics_str()))
     budfact_jmetrics_keys = set(budfact_aspect.get(jmetrics_str()))
     budgrou_jmetrics_keys = set(budgrou_aspect.get(jmetrics_str()))
@@ -249,8 +248,8 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     assert expected_budreas_jmetrics_keys == budreas_jmetrics_keys
     expected_budprem_jmetrics_keys = {"_status", "_task"}
     assert expected_budprem_jmetrics_keys == budprem_jmetrics_keys
-    expected_budlabor_jmetrics_keys = {"_owner_name_labor"}
-    assert expected_budlabor_jmetrics_keys == budlabor_jmetrics_keys
+    expected_budlabo_jmetrics_keys = {"_owner_name_labor"}
+    assert expected_budlabo_jmetrics_keys == budlabo_jmetrics_keys
     expected_budgrou_jmetrics_keys = {
         "_fund_give",
         "_fund_take",
@@ -269,7 +268,7 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     assert budawar_jmetrics_keys  # Non-empty
     assert budreas_jmetrics_keys  # Non-empty
     assert budprem_jmetrics_keys  # Non-empty
-    assert budlabor_jmetrics_keys  # Non-empty
+    assert budlabo_jmetrics_keys  # Non-empty
     assert not budheal_jmetrics_keys  # empty
     assert not budfact_jmetrics_keys  # empty
     assert budgrou_jmetrics_keys  # Non-empty
@@ -287,7 +286,7 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckAbbreviations():
     budawar_aspect = bud_calc_config.get(bud_concept_awardlink_str())
     budreas_aspect = bud_calc_config.get(bud_concept_reasonunit_str())
     budprem_aspect = bud_calc_config.get(bud_concept_reason_premiseunit_str())
-    budlabor_aspect = bud_calc_config.get(bud_concept_laborlink_str())
+    budlabo_aspect = bud_calc_config.get(bud_concept_laborlink_str())
     budheal_aspect = bud_calc_config.get(bud_concept_healerlink_str())
     budfact_aspect = bud_calc_config.get(bud_concept_factunit_str())
     budgrou_aspect = bud_calc_config.get(bud_groupunit_str())
@@ -299,7 +298,7 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckAbbreviations():
     assert budawar_aspect.get(abbr_str) == "budawar"
     assert budreas_aspect.get(abbr_str) == "budreas"
     assert budprem_aspect.get(abbr_str) == "budprem"
-    assert budlabor_aspect.get(abbr_str) == "budlabo"
+    assert budlabo_aspect.get(abbr_str) == "budlabo"
     assert budheal_aspect.get(abbr_str) == "budheal"
     assert budfact_aspect.get(abbr_str) == "budfact"
     assert budgrou_aspect.get(abbr_str) == "budgrou"
@@ -328,7 +327,7 @@ def test_get_all_bud_calc_args_ReturnsObj():
     # assert bud_concept_factunit_str() in way_bud_calc_aspects
     # assert bud_concept_laborlink_str() in way_bud_calc_aspects
     # assert len(way_bud_calc_aspects) == 6
-    assert len(all_bud_calc_args) == 77
+    assert len(all_bud_calc_args) == 76
 
 
 def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesKeysExist():
@@ -382,7 +381,6 @@ def test_get_bud_calc_dimen_args_ReturnsObj():
     print(f"{bud_acctunit_args=}")
     print(f"{bud_groupunit_args=}")
     assert bud_acctunit_args == {
-        world_id_str(),
         fisc_label_str(),
         owner_name_str(),
         "_fund_agenda_give",
@@ -400,7 +398,6 @@ def test_get_bud_calc_dimen_args_ReturnsObj():
         "_irrational_debtit_belief",
     }
     assert bud_conceptunit_args == {
-        world_id_str(),
         fisc_label_str(),
         owner_name_str(),
         morph_str(),
@@ -431,7 +428,6 @@ def test_get_bud_calc_dimen_args_ReturnsObj():
         begin_str(),
     }
     assert bud_groupunit_args == {
-        world_id_str(),
         fisc_label_str(),
         owner_name_str(),
         "_debtor_pool",
@@ -491,7 +487,7 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     budawar = bud_concept_awardlink_str()
     budreas = bud_concept_reasonunit_str()
     budprem = bud_concept_reason_premiseunit_str()
-    budlabor = bud_concept_laborlink_str()
+    budlabo = bud_concept_laborlink_str()
     budheal = bud_concept_healerlink_str()
     budfact = bud_concept_factunit_str()
     budgrou = bud_groupunit_str()
@@ -585,16 +581,16 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(config, budfact, jv, fnigh_str()) == "REAL"
     assert g_class_type(config, budfact, jv, fopen_str()) == "float"
     assert g_sqlitetype(config, budfact, jv, fopen_str()) == "REAL"
-    assert g_class_type(config, budfact, jv, fbranch_str()) == type_WayStr_str()
-    assert g_sqlitetype(config, budfact, jv, fbranch_str()) == "TEXT"
+    assert g_class_type(config, budfact, jv, fstate_str()) == type_WayStr_str()
+    assert g_sqlitetype(config, budfact, jv, fstate_str()) == "TEXT"
     assert g_class_type(config, budheal, jk, healer_name_str()) == type_NameStr_str()
     assert g_sqlitetype(config, budheal, jk, healer_name_str()) == "TEXT"
     assert g_class_type(config, budheal, jk, concept_way_str()) == type_WayStr_str()
     assert g_sqlitetype(config, budheal, jk, concept_way_str()) == "TEXT"
     assert g_class_type(config, budprem, jk, rcontext_str()) == type_WayStr_str()
     assert g_sqlitetype(config, budprem, jk, rcontext_str()) == "TEXT"
-    assert g_class_type(config, budprem, jk, pbranch_str()) == type_WayStr_str()
-    assert g_sqlitetype(config, budprem, jk, pbranch_str()) == "TEXT"
+    assert g_class_type(config, budprem, jk, pstate_str()) == type_WayStr_str()
+    assert g_sqlitetype(config, budprem, jk, pstate_str()) == "TEXT"
     assert g_class_type(config, budprem, jk, concept_way_str()) == type_WayStr_str()
     assert g_sqlitetype(config, budprem, jk, concept_way_str()) == "TEXT"
     assert g_class_type(config, budprem, jm, "_status") == "int"
@@ -626,12 +622,12 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
         g_sqlitetype(config, budreas, jv, "rcontext_concept_active_requisite")
         == "INTEGER"
     )
-    assert g_class_type(config, budlabor, jk, concept_way_str()) == type_WayStr_str()
-    assert g_sqlitetype(config, budlabor, jk, concept_way_str()) == "TEXT"
-    assert g_class_type(config, budlabor, jk, "labor_title") == type_TitleStr_str()
-    assert g_sqlitetype(config, budlabor, jk, "labor_title") == "TEXT"
-    assert g_class_type(config, budlabor, jm, "_owner_name_labor") == "int"
-    assert g_sqlitetype(config, budlabor, jm, "_owner_name_labor") == "INTEGER"
+    assert g_class_type(config, budlabo, jk, concept_way_str()) == type_WayStr_str()
+    assert g_sqlitetype(config, budlabo, jk, concept_way_str()) == "TEXT"
+    assert g_class_type(config, budlabo, jk, "labor_title") == type_TitleStr_str()
+    assert g_sqlitetype(config, budlabo, jk, "labor_title") == "TEXT"
+    assert g_class_type(config, budlabo, jm, "_owner_name_labor") == "int"
+    assert g_sqlitetype(config, budlabo, jm, "_owner_name_labor") == "INTEGER"
     assert g_class_type(config, budconc, jm, "_active") == "int"
     assert g_sqlitetype(config, budconc, jm, "_active") == "INTEGER"
     assert g_class_type(config, budconc, jm, "_all_acct_cred") == "int"
@@ -813,9 +809,9 @@ def test_get_bud_calc_args_type_dict_ReturnObj():
     assert bud_calc_args_type_dict.get(rcontext_str()) == type_WayStr_str()
     assert bud_calc_args_type_dict.get(fnigh_str()) == "float"
     assert bud_calc_args_type_dict.get(fopen_str()) == "float"
-    assert bud_calc_args_type_dict.get(fbranch_str()) == type_WayStr_str()
+    assert bud_calc_args_type_dict.get(fstate_str()) == type_WayStr_str()
     assert bud_calc_args_type_dict.get(healer_name_str()) == type_NameStr_str()
-    assert bud_calc_args_type_dict.get(pbranch_str()) == type_WayStr_str()
+    assert bud_calc_args_type_dict.get(pstate_str()) == type_WayStr_str()
     assert bud_calc_args_type_dict.get("_status") == "int"
     assert bud_calc_args_type_dict.get("_task") == "int"
     assert bud_calc_args_type_dict.get("pdivisor") == "int"

@@ -18,14 +18,14 @@ class InvalidReasonException(Exception):
 @dataclass
 class FactCore:
     fcontext: WayStr
-    fbranch: WayStr
+    fstate: WayStr
     fopen: float = None
     fnigh: float = None
 
     def get_dict(self) -> dict[str,]:
         x_dict = {
             "fcontext": self.fcontext,
-            "fbranch": self.fbranch,
+            "fstate": self.fstate,
         }
         if self.fopen is not None:
             x_dict["fopen"] = self.fopen
@@ -37,30 +37,28 @@ class FactCore:
         self.fopen = None
         self.fnigh = None
 
-    def set_attr(
-        self, fbranch: WayStr = None, fopen: float = None, fnigh: float = None
-    ):
-        if fbranch is not None:
-            self.fbranch = fbranch
+    def set_attr(self, fstate: WayStr = None, fopen: float = None, fnigh: float = None):
+        if fstate is not None:
+            self.fstate = fstate
         if fopen is not None:
             self.fopen = fopen
         if fnigh is not None:
             self.fnigh = fnigh
 
-    def set_fbranch_to_fcontext(self):
-        self.set_attr(fbranch=self.fcontext)
+    def set_fstate_to_fcontext(self):
+        self.set_attr(fstate=self.fcontext)
         self.fopen = None
         self.fnigh = None
 
     def find_replace_way(self, old_way: WayStr, new_way: WayStr):
         self.fcontext = rebuild_way(self.fcontext, old_way, new_way)
-        self.fbranch = rebuild_way(self.fbranch, old_way, new_way)
+        self.fstate = rebuild_way(self.fstate, old_way, new_way)
 
     def get_obj_key(self) -> WayStr:
         return self.fcontext
 
     def get_tuple(self) -> tuple[WayStr, WayStr, float, float]:
-        return (self.fcontext, self.fbranch, self.fopen, self.fnigh)
+        return (self.fcontext, self.fstate, self.fopen, self.fnigh)
 
 
 @dataclass
@@ -70,18 +68,18 @@ class FactUnit(FactCore):
 
 def factunit_shop(
     fcontext: WayStr = None,
-    fbranch: WayStr = None,
+    fstate: WayStr = None,
     fopen: float = None,
     fnigh: float = None,
 ) -> FactUnit:
-    return FactUnit(fcontext=fcontext, fbranch=fbranch, fopen=fopen, fnigh=fnigh)
+    return FactUnit(fcontext=fcontext, fstate=fstate, fopen=fopen, fnigh=fnigh)
 
 
 def factunits_get_from_dict(x_dict: dict) -> dict[WayStr, FactUnit]:
     facts = {}
     for fact_dict in x_dict.values():
         x_fcontext = fact_dict["fcontext"]
-        x_fbranch = fact_dict["fbranch"]
+        x_fstate = fact_dict["fstate"]
 
         try:
             x_fopen = fact_dict["fopen"]
@@ -94,7 +92,7 @@ def factunits_get_from_dict(x_dict: dict) -> dict[WayStr, FactUnit]:
 
         x_fact = factunit_shop(
             fcontext=x_fcontext,
-            fbranch=x_fbranch,
+            fstate=x_fstate,
             fopen=x_fopen,
             fnigh=x_fnigh,
         )
@@ -128,11 +126,11 @@ class FactHeir(FactCore):
 
 def factheir_shop(
     fcontext: WayStr = None,
-    fbranch: WayStr = None,
+    fstate: WayStr = None,
     fopen: float = None,
     fnigh: float = None,
 ) -> FactHeir:
-    return FactHeir(fcontext=fcontext, fbranch=fbranch, fopen=fopen, fnigh=fnigh)
+    return FactHeir(fcontext=fcontext, fstate=fstate, fopen=fopen, fnigh=fnigh)
 
 
 class PremiseStatusFinderException(Exception):
@@ -294,7 +292,7 @@ def premisestatusfinder_shop(
 
 @dataclass
 class PremiseUnit:
-    pbranch: WayStr
+    pstate: WayStr
     popen: float = None
     pnigh: float = None
     pdivisor: int = None
@@ -303,10 +301,10 @@ class PremiseUnit:
     bridge: str = None
 
     def get_obj_key(self):
-        return self.pbranch
+        return self.pstate
 
     def get_dict(self) -> dict[str, str]:
-        x_dict = {"pbranch": self.pbranch}
+        x_dict = {"pstate": self.pstate}
         if self.popen is not None:
             x_dict["popen"] = self.popen
         if self.pnigh is not None:
@@ -323,14 +321,14 @@ class PremiseUnit:
     def set_bridge(self, new_bridge: str):
         old_bridge = copy_deepcopy(self.bridge)
         self.bridge = new_bridge
-        self.pbranch = replace_bridge(
-            way=self.pbranch, old_bridge=old_bridge, new_bridge=self.bridge
+        self.pstate = replace_bridge(
+            way=self.pstate, old_bridge=old_bridge, new_bridge=self.bridge
         )
 
-    def is_in_lineage(self, fact_fbranch: WayStr):
+    def is_in_lineage(self, fact_fstate: WayStr):
         return is_heir_way(
-            src=self.pbranch, heir=fact_fbranch, bridge=self.bridge
-        ) or is_heir_way(src=fact_fbranch, heir=self.pbranch, bridge=self.bridge)
+            src=self.pstate, heir=fact_fstate, bridge=self.bridge
+        ) or is_heir_way(src=fact_fstate, heir=self.pstate, bridge=self.bridge)
 
     def set_status(self, x_factheir: FactHeir):
         self._status = self._get_active(factheir=x_factheir)
@@ -341,14 +339,14 @@ class PremiseUnit:
         # status might be true if premise is in lineage of fact
         if factheir is None:
             x_status = False
-        elif self.is_in_lineage(fact_fbranch=factheir.fbranch):
+        elif self.is_in_lineage(fact_fstate=factheir.fstate):
             if self._is_range_or_segregate() is False:
                 x_status = True
             elif self._is_range_or_segregate() and factheir.is_range() is False:
                 x_status = False
             elif self._is_range_or_segregate() and factheir.is_range():
                 x_status = self._get_range_segregate_status(factheir=factheir)
-        elif self.is_in_lineage(fact_fbranch=factheir.fbranch) is False:
+        elif self.is_in_lineage(fact_fstate=factheir.fstate) is False:
             x_status = False
 
         return x_status
@@ -413,19 +411,19 @@ class PremiseUnit:
         )
 
     def find_replace_way(self, old_way: WayStr, new_way: WayStr):
-        self.pbranch = rebuild_way(self.pbranch, old_way, new_way)
+        self.pstate = rebuild_way(self.pstate, old_way, new_way)
 
 
 # class premisesshop:
 def premiseunit_shop(
-    pbranch: WayStr,
+    pstate: WayStr,
     popen: float = None,
     pnigh: float = None,
     pdivisor: float = None,
     bridge: str = None,
 ) -> PremiseUnit:
     return PremiseUnit(
-        pbranch=pbranch,
+        pstate=pstate,
         popen=popen,
         pnigh=pnigh,
         pdivisor=pdivisor,
@@ -450,12 +448,12 @@ def premises_get_from_dict(x_dict: dict) -> dict[str, PremiseUnit]:
             x_pdivisor = None
 
         premise_x = premiseunit_shop(
-            pbranch=premise_dict["pbranch"],
+            pstate=premise_dict["pstate"],
             popen=x_popen,
             pnigh=x_pnigh,
             pdivisor=x_pdivisor,
         )
-        premises[premise_x.pbranch] = premise_x
+        premises[premise_x.pstate] = premise_x
     return premises
 
 
@@ -496,15 +494,15 @@ class ReasonCore:
         pdivisor: int = None,
     ):
         self.premises[premise] = premiseunit_shop(
-            pbranch=premise,
+            pstate=premise,
             popen=popen,
             pnigh=pnigh,
             pdivisor=pdivisor,
             bridge=self.bridge,
         )
 
-    def premise_exists(self, pbranch: WayStr) -> bool:
-        return self.premises.get(pbranch) != None
+    def premise_exists(self, pstate: WayStr) -> bool:
+        return self.premises.get(pstate) != None
 
     def get_premise(self, premise: WayStr) -> PremiseUnit:
         return self.premises.get(premise)
@@ -577,12 +575,12 @@ class ReasonHeir(ReasonCore):
         x_premises = {}
         for x_premiseunit in x_reasonunit.premises.values():
             premise_x = premiseunit_shop(
-                pbranch=x_premiseunit.pbranch,
+                pstate=x_premiseunit.pstate,
                 popen=x_premiseunit.popen,
                 pnigh=x_premiseunit.pnigh,
                 pdivisor=x_premiseunit.pdivisor,
             )
-            x_premises[premise_x.pbranch] = premise_x
+            x_premises[premise_x.pstate] = premise_x
         self.premises = x_premises
 
     def clear_status(self):

@@ -55,11 +55,13 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
     get_prime_create_table_sqlstrs,
     get_bud_voice_agg_tablenames,
+    get_fisc_bud_sound_agg_tablenames,
     create_sound_and_voice_tables,
     create_sound_raw_update_inconsist_error_message_sqlstr,
     create_sound_agg_insert_sqlstrs,
     create_insert_into_pidgin_core_raw_sqlstr,
-    create_insert_into_pidgin_core_vld_sqlstr,
+    create_insert_pidgin_core_agg_into_vld_sqlstr,
+    create_insert_missing_face_name_into_pidgin_core_vld_sqlstr,
     create_insert_pidgin_sound_vld_table_sqlstr,
     get_insert_into_voice_raw_sqlstrs,
     get_insert_into_sound_vld_sqlstrs,
@@ -114,68 +116,6 @@ BUD_PRIME_TABLENAMES = {
 def test_ALL_DIMEN_ABBV7_has_all_dimens():
     # ESTABLISH / WHEN / THEN
     assert len(ALL_DIMEN_ABBV7) == len(get_idea_config_dict())
-
-
-def test_create_prime_tablename_ReturnsObj():
-    # ESTABLISH
-    budunit_dimen = budunit_str()
-    budacct_dimen = bud_acctunit_str()
-    budmemb_dimen = bud_acct_membership_str()
-    budconc_dimen = bud_conceptunit_str()
-    budawar_dimen = bud_concept_awardlink_str()
-    budreas_dimen = bud_concept_reasonunit_str()
-    budprem_dimen = bud_concept_reason_premiseunit_str()
-    budlabor_dimen = bud_concept_laborlink_str()
-    budheal_dimen = bud_concept_healerlink_str()
-    budfact_dimen = bud_concept_factunit_str()
-    fisunit_dimen = fiscunit_str()
-    fiscash_dimen = fisc_cashbook_str()
-    fisdeal_dimen = fisc_dealunit_str()
-    fishour_dimen = fisc_timeline_hour_str()
-    fismont_dimen = fisc_timeline_month_str()
-    fisweek_dimen = fisc_timeline_weekday_str()
-    fisoffi_dimen = fisc_timeoffi_str()
-    pidname_dimen = pidgin_name_str()
-    pidlabe_dimen = pidgin_label_str()
-    pidwayy_dimen = pidgin_way_str()
-    pidtitl_dimen = pidgin_title_str()
-    raw_str = "raw"
-    agg_str = "agg"
-    put_str = "put"
-    del_str = "del"
-
-    # WHEN / THEN
-    assert prime_tbl("budunit", "s", agg_str, put_str) == f"{budunit_dimen}_s_put_agg"
-    assert prime_tbl("budacct", "s", agg_str, put_str) == f"{budacct_dimen}_s_put_agg"
-    assert prime_tbl("budmemb", "s", agg_str, put_str) == f"{budmemb_dimen}_s_put_agg"
-    assert prime_tbl("budconc", "s", agg_str, put_str) == f"{budconc_dimen}_s_put_agg"
-    assert prime_tbl("budawar", "s", agg_str, put_str) == f"{budawar_dimen}_s_put_agg"
-    assert prime_tbl("budreas", "s", agg_str, put_str) == f"{budreas_dimen}_s_put_agg"
-    assert prime_tbl("budprem", "s", agg_str, put_str) == f"{budprem_dimen}_s_put_agg"
-    assert prime_tbl("BUDLABO", "s", agg_str, put_str) == f"{budlabor_dimen}_s_put_agg"
-    assert prime_tbl("budheal", "s", agg_str, put_str) == f"{budheal_dimen}_s_put_agg"
-    assert prime_tbl("budfact", "s", agg_str, put_str) == f"{budfact_dimen}_s_put_agg"
-    assert prime_tbl("budfact", "s", agg_str, del_str) == f"{budfact_dimen}_s_del_agg"
-    assert prime_tbl("fisunit", "s", agg_str) == f"{fisunit_dimen}_s_agg"
-    assert prime_tbl("fiscash", "s", agg_str) == f"{fiscash_dimen}_s_agg"
-    assert prime_tbl("fisdeal", "s", agg_str) == f"{fisdeal_dimen}_s_agg"
-    assert prime_tbl("fishour", "s", agg_str) == f"{fishour_dimen}_s_agg"
-    assert prime_tbl("fismont", "s", agg_str) == f"{fismont_dimen}_s_agg"
-    assert prime_tbl("fisweek", "s", agg_str) == f"{fisweek_dimen}_s_agg"
-    assert prime_tbl("fisoffi", "s", agg_str) == f"{fisoffi_dimen}_s_agg"
-    assert prime_tbl("pidname", "s", agg_str) == f"{pidname_dimen}_s_agg"
-    assert prime_tbl("pidlabe", "s", agg_str) == f"{pidlabe_dimen}_s_agg"
-    assert prime_tbl("pidwayy", "s", agg_str) == f"{pidwayy_dimen}_s_agg"
-    assert prime_tbl("pidtitl", "s", agg_str) == f"{pidtitl_dimen}_s_agg"
-    assert prime_tbl("pidtitl", "v", agg_str) == f"{pidtitl_dimen}_v_agg"
-    assert prime_tbl("pidtitl", "s", raw_str) == f"{pidtitl_dimen}_s_raw"
-    assert prime_tbl("pidtitl", "k", raw_str) == f"{pidtitl_dimen}_raw"
-    assert prime_tbl("bud_acctunit", "k", raw_str) == "bud_acctunit_raw"
-
-
-def create_agg_table_sqlstr(abbv7, sqlite_types) -> str:
-    pass
-    #  prime_tbl(abbv7, "s", "agg")
 
 
 def get_all_dimen_columns_set(x_dimen: str) -> set[str]:
@@ -558,6 +498,26 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
     assert len(create_table_sqlstrs) == all_dimens_count
 
 
+def test_get_fisc_bud_sound_agg_tablenames_ReturnsObj():
+    # sourcery skip: no-loop-in-tests
+    # ESTABLISH / WHEN
+    fisc_bud_sound_agg_tablenames = get_fisc_bud_sound_agg_tablenames()
+
+    # THEN
+    assert fisc_bud_sound_agg_tablenames
+    expected_sound_agg_tablenames = set()
+    for bud_dimen in get_bud_dimens():
+        expected_sound_agg_tablenames.add(prime_tbl(bud_dimen, "s", "agg", "put"))
+        expected_sound_agg_tablenames.add(prime_tbl(bud_dimen, "s", "agg", "del"))
+    for fisc_dimen in get_fisc_dimens():
+        expected_sound_agg_tablenames.add(prime_tbl(fisc_dimen, "s", "agg"))
+    print(sorted(list(expected_sound_agg_tablenames)))
+    assert expected_sound_agg_tablenames == fisc_bud_sound_agg_tablenames
+    agg_tablenames = fisc_bud_sound_agg_tablenames
+    assert len(agg_tablenames) == len(get_bud_dimens()) * 2 + len(get_fisc_dimens())
+    assert agg_tablenames.issubset(set(get_prime_create_table_sqlstrs().keys()))
+
+
 def test_get_bud_voice_agg_tablenames_ReturnsObj_BudDimens():
     # ESTABLISH / WHEN
     bud_voice_agg_tablenames = get_bud_voice_agg_tablenames()
@@ -570,9 +530,8 @@ def test_get_bud_voice_agg_tablenames_ReturnsObj_BudDimens():
     print(f"{expected_bud_voice_agg_tablenames=}")
     assert expected_bud_voice_agg_tablenames == bud_voice_agg_tablenames
     assert len(bud_voice_agg_tablenames) == len(get_bud_dimens())
-    assert bud_voice_agg_tablenames.issubset(
-        set(get_prime_create_table_sqlstrs().keys())
-    )
+    agg_tablenames = bud_voice_agg_tablenames
+    assert agg_tablenames.issubset(set(get_prime_create_table_sqlstrs().keys()))
 
 
 def test_create_sound_and_voice_tables_CreatesFiscRawTables():
@@ -826,13 +785,9 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario1_FiscDimen():
         agg_tablename = prime_tbl(dimen, "s", "agg")
         dimen_config = get_idea_config_dict().get(dimen)
         dimen_focus_columns = set(dimen_config.get("jkeys").keys())
-        dimen_focus_columns.remove("event_int")
-        dimen_focus_columns.remove("face_name")
         dimen_focus_columns = get_default_sorted_list(dimen_focus_columns)
         exclude_cols = {
             idea_number_str(),
-            event_int_str(),
-            face_name_str(),
             "error_message",
         }
         print("yeah")
@@ -846,11 +801,11 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario1_FiscDimen():
         print(expected_insert_sqlstr)
         assert update_sqlstrs[0] == expected_insert_sqlstr
 
-        static_example_sqlstr = """INSERT INTO fisc_timeline_hour_s_agg (fisc_label, cumlative_minute, hour_label)
-SELECT fisc_label, cumlative_minute, MAX(hour_label)
+        static_example_sqlstr = """INSERT INTO fisc_timeline_hour_s_agg (event_int, face_name, fisc_label, cumlative_minute, hour_label)
+SELECT event_int, face_name, fisc_label, cumlative_minute, MAX(hour_label)
 FROM fisc_timeline_hour_s_raw
 WHERE error_message IS NULL
-GROUP BY fisc_label, cumlative_minute
+GROUP BY event_int, face_name, fisc_label, cumlative_minute
 ;
 """
         print(update_sqlstrs[0])
@@ -942,13 +897,13 @@ GROUP BY face_name, otx_bridge, inx_bridge, unknown_term
     assert way_sqlstr == expected_sqlstr
 
 
-def test_create_insert_into_pidgin_core_vld_sqlstr_ReturnsObj():
+def test_create_insert_pidgin_core_agg_into_vld_sqlstr_ReturnsObj():
     # ESTABLISH
     default_bridge = "|"
     default_unknown_str = "unknown2"
 
     # WHEN
-    insert_sqlstr = create_insert_into_pidgin_core_vld_sqlstr(
+    insert_sqlstr = create_insert_pidgin_core_agg_into_vld_sqlstr(
         default_bridge, default_unknown_str
     )
 
@@ -963,6 +918,36 @@ SELECT
 , IFNULL(inx_bridge, '{default_bridge}')
 , IFNULL(unknown_term, '{default_unknown_str}')
 FROM {pidgin_core_s_agg_tablename}
+;
+"""
+    print(expected_sqlstr)
+    assert insert_sqlstr == expected_sqlstr
+
+
+def test_create_insert_missing_face_name_into_pidgin_core_vld_sqlstr_ReturnsObj():
+    # ESTABLISH
+    default_bridge = "|"
+    default_unknown_str = "unknown2"
+    budacct_s_agg_tablename = prime_tbl(bud_acctunit_str(), "s", "agg")
+
+    # WHEN
+    insert_sqlstr = create_insert_missing_face_name_into_pidgin_core_vld_sqlstr(
+        default_bridge, default_unknown_str, budacct_s_agg_tablename
+    )
+
+    # THEN
+    pidcore_dimen = "PIDCORE"
+    pidgin_core_s_vld_tablename = prime_tbl(pidcore_dimen, "s", "vld")
+    expected_sqlstr = f"""INSERT INTO {pidgin_core_s_vld_tablename} (face_name, otx_bridge, inx_bridge, unknown_term)
+SELECT
+  {budacct_s_agg_tablename}.face_name
+, '{default_bridge}'
+, '{default_bridge}'
+, '{default_unknown_str}'
+FROM {budacct_s_agg_tablename} 
+LEFT JOIN pidgin_core_s_vld ON pidgin_core_s_vld.face_name = {budacct_s_agg_tablename}.face_name
+WHERE pidgin_core_s_vld.face_name IS NULL
+GROUP BY {budacct_s_agg_tablename}.face_name
 ;
 """
     print(expected_sqlstr)

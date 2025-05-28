@@ -108,7 +108,7 @@ def test_listen_to_agendas_jobs_into_job_AddsTasksToBudWithDetailsDecidedBy_debt
     bob_job.edit_concept_attr(
         cook_way(),
         reason_del_premise_rcontext=eat_way(),
-        reason_del_premise_pbranch=hungry_way(),
+        reason_del_premise_pstate=hungry_way(),
     )
     bob_cook_conceptunit = bob_job.get_concept_obj(cook_way())
     zia_cook_conceptunit = zia_job.get_concept_obj(cook_way())

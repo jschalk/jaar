@@ -13,6 +13,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
+    bud_groupunit_str,
     bud_conceptunit_str,
     bud_concept_awardlink_str,
     bud_concept_reasonunit_str,
@@ -61,52 +62,6 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
 from sqlite3 import connect as sqlite3_connect
 
 
-def abbv(tablename: str) -> str:
-    abbrevions = {
-        f"{bud_acct_membership_str()}_put_agg": "BUDMEMB_PUT_AGG",
-        f"{bud_acct_membership_str()}_put_raw": "BUDMEMB_PUT_RAW",
-        f"{bud_acctunit_str()}_put_agg": "BUDACCT_PUT_AGG",
-        f"{bud_acctunit_str()}_put_raw": "BUDACCT_PUT_RAW",
-        f"{bud_concept_awardlink_str()}_put_agg": "BUDAWAR_PUT_AGG",
-        f"{bud_concept_awardlink_str()}_put_raw": "BUDAWAR_PUT_RAW",
-        f"{bud_concept_factunit_str()}_put_agg": "BUDFACT_PUT_AGG",
-        f"{bud_concept_factunit_str()}_put_raw": "BUDFACT_PUT_RAW",
-        f"{bud_concept_healerlink_str()}_put_agg": "BUDHEAL_PUT_AGG",
-        f"{bud_concept_healerlink_str()}_put_raw": "BUDHEAL_PUT_RAW",
-        f"{bud_concept_reason_premiseunit_str()}_put_agg": "BUDPREM_PUT_AGG",
-        f"{bud_concept_reason_premiseunit_str()}_put_raw": "BUDPREM_PUT_RAW",
-        f"{bud_concept_reasonunit_str()}_put_agg": "BUDREAS_PUT_AGG",
-        f"{bud_concept_reasonunit_str()}_put_raw": "BUDREAS_PUT_RAW",
-        f"{bud_concept_laborlink_str()}_put_agg": "BUDLABO_PUT_AGG",
-        f"{bud_concept_laborlink_str()}_put_raw": "BUDLABO_PUT_RAW",
-        f"{bud_conceptunit_str()}_put_agg": "BUDCONC_PUT_AGG",
-        f"{bud_conceptunit_str()}_put_raw": "BUDCONC_PUT_RAW",
-        f"{budunit_str()}_put_agg": "BUDUNIT_PUT_AGG",
-        f"{budunit_str()}_put_raw": "BUDUNIT_PUT_RAW",
-        f"{bud_acct_membership_str()}_del_agg": "BUDMEMB_DEL_AGG",
-        f"{bud_acct_membership_str()}_del_raw": "BUDMEMB_DEL_RAW",
-        f"{bud_acctunit_str()}_del_agg": "BUDACCT_DEL_AGG",
-        f"{bud_acctunit_str()}_del_raw": "BUDACCT_DEL_RAW",
-        f"{bud_concept_awardlink_str()}_del_agg": "BUDAWAR_DEL_AGG",
-        f"{bud_concept_awardlink_str()}_del_raw": "BUDAWAR_DEL_RAW",
-        f"{bud_concept_factunit_str()}_del_agg": "BUDFACT_DEL_AGG",
-        f"{bud_concept_factunit_str()}_del_raw": "BUDFACT_DEL_RAW",
-        f"{bud_concept_healerlink_str()}_del_agg": "BUDHEAL_DEL_AGG",
-        f"{bud_concept_healerlink_str()}_del_raw": "BUDHEAL_DEL_RAW",
-        f"{bud_concept_reason_premiseunit_str()}_del_agg": "BUDPREM_DEL_AGG",
-        f"{bud_concept_reason_premiseunit_str()}_del_raw": "BUDPREM_DEL_RAW",
-        f"{bud_concept_reasonunit_str()}_del_agg": "BUDREAS_DEL_AGG",
-        f"{bud_concept_reasonunit_str()}_del_raw": "BUDREAS_DEL_RAW",
-        f"{bud_concept_laborlink_str()}_del_agg": "BUDLABO_DEL_AGG",
-        f"{bud_concept_laborlink_str()}_del_raw": "BUDLABO_DEL_RAW",
-        f"{bud_conceptunit_str()}_del_agg": "BUDCONC_DEL_AGG",
-        f"{bud_conceptunit_str()}_del_raw": "BUDCONC_DEL_RAW",
-        f"{budunit_str()}_del_agg": "BUDUNIT_DEL_AGG",
-        f"{budunit_str()}_del_raw": "BUDUNIT_DEL_RAW",
-    }
-    return abbrevions.get(tablename)
-
-
 def test_ALL_DIMEN_ABBV7_has_all_dimens():
     # ESTABLISH / WHEN / THEN
     assert len(ALL_DIMEN_ABBV7) == len(get_idea_config_dict())
@@ -117,11 +72,12 @@ def test_create_prime_tablename_ReturnsObj():
     budunit_dimen = budunit_str()
     budacct_dimen = bud_acctunit_str()
     budmemb_dimen = bud_acct_membership_str()
+    budgrou_dimen = bud_groupunit_str()
     budconc_dimen = bud_conceptunit_str()
     budawar_dimen = bud_concept_awardlink_str()
     budreas_dimen = bud_concept_reasonunit_str()
     budprem_dimen = bud_concept_reason_premiseunit_str()
-    budlabor_dimen = bud_concept_laborlink_str()
+    budlabo_dimen = bud_concept_laborlink_str()
     budheal_dimen = bud_concept_healerlink_str()
     budfact_dimen = bud_concept_factunit_str()
     fisunit_dimen = fiscunit_str()
@@ -141,6 +97,7 @@ def test_create_prime_tablename_ReturnsObj():
     vld_str = "vld"
     put_str = "put"
     del_str = "del"
+    job_str = "job"
 
     # WHEN
     budunit_s_agg_table = create_prime_tablename("budunit", "s", agg_str, put_str)
@@ -150,7 +107,7 @@ def test_create_prime_tablename_ReturnsObj():
     budawar_s_agg_table = create_prime_tablename("budawar", "s", agg_str, put_str)
     budreas_s_agg_table = create_prime_tablename("budreas", "s", agg_str, put_str)
     budprem_s_agg_table = create_prime_tablename("budprem", "s", agg_str, put_str)
-    budlabor_s_agg_table = create_prime_tablename("BUDLABO", "s", agg_str, put_str)
+    budlabo_s_agg_table = create_prime_tablename("BUDLABO", "s", agg_str, put_str)
     budheal_s_agg_table = create_prime_tablename("budheal", "s", agg_str, put_str)
     budfact_s_agg_table = create_prime_tablename("budfact", "s", agg_str, put_str)
     budfact_s_del_table = create_prime_tablename("budfact", "s", agg_str, del_str)
@@ -170,6 +127,9 @@ def test_create_prime_tablename_ReturnsObj():
     pidtitl_s_val_table = create_prime_tablename("pidtitl", "s", vld_str)
     pidcore_s_raw_table = create_prime_tablename("pidcore", "s", raw_str)
     pidcore_s_agg_table = create_prime_tablename("pidcore", "s", agg_str)
+    budacct_job_table = create_prime_tablename("budacct", "job", None)
+    x_budacct_raw = create_prime_tablename("budacct", "k", raw_str)
+    budgrou_job_table = create_prime_tablename("budgrou", "job", None)
 
     # THEN
     assert budunit_s_agg_table == f"{budunit_dimen}_s_put_agg"
@@ -179,7 +139,7 @@ def test_create_prime_tablename_ReturnsObj():
     assert budawar_s_agg_table == f"{budawar_dimen}_s_put_agg"
     assert budreas_s_agg_table == f"{budreas_dimen}_s_put_agg"
     assert budprem_s_agg_table == f"{budprem_dimen}_s_put_agg"
-    assert budlabor_s_agg_table == f"{budlabor_dimen}_s_put_agg"
+    assert budlabo_s_agg_table == f"{budlabo_dimen}_s_put_agg"
     assert budheal_s_agg_table == f"{budheal_dimen}_s_put_agg"
     assert budfact_s_agg_table == f"{budfact_dimen}_s_put_agg"
     assert budfact_s_del_table == f"{budfact_dimen}_s_del_agg"
@@ -199,6 +159,9 @@ def test_create_prime_tablename_ReturnsObj():
     assert pidtitl_s_val_table == f"{pidtitl_dimen}_s_vld"
     assert pidcore_s_raw_table == f"{pidcore_dimen}_s_raw"
     assert pidcore_s_agg_table == f"{pidcore_dimen}_s_agg"
+    assert budacct_job_table == f"{budacct_dimen}_job"
+    assert budgrou_job_table == f"{budgrou_dimen}_job"
+    assert x_budacct_raw == "bud_acctunit_raw"
 
 
 def test_create_all_idea_tables_CreatesFiscRawTables():

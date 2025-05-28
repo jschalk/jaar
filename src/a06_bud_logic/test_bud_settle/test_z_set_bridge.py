@@ -205,8 +205,8 @@ def test_bud_set_bridge_CorrectlyModifiesFactUnit():
     gen_time_factunit = casa_concept.factunits.get(slash_time_way)
     assert gen_time_factunit.fcontext is not None
     assert gen_time_factunit.fcontext == slash_time_way
-    assert gen_time_factunit.fbranch is not None
-    assert gen_time_factunit.fbranch == slash_8am_way
+    assert gen_time_factunit.fstate is not None
+    assert gen_time_factunit.fstate == slash_8am_way
 
     assert casa_concept.factunits.get(semicolon_time_way) is None
 

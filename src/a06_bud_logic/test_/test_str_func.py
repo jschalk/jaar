@@ -14,7 +14,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     denom_str,
     event_int_str,
     fcontext_str,
-    fbranch_str,
+    fstate_str,
     fnigh_str,
     fopen_str,
     fund_coin_str,
@@ -22,7 +22,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     group_title_str,
     healer_name_str,
     morph_str,
-    pbranch_str,
+    pstate_str,
     pnigh_str,
     numor_str,
     popen_str,
@@ -55,14 +55,14 @@ def test_str_functions_ReturnsObj():
     assert debtit_vote_str() == "debtit_vote"
     assert denom_str() == "denom"
     assert event_int_str() == "event_int"
-    assert fbranch_str() == "fbranch"
+    assert fstate_str() == "fstate"
     assert fnigh_str() == "fnigh"
     assert fopen_str() == "fopen"
     assert fund_coin_str() == "fund_coin"
     assert gogo_want_str() == "gogo_want"
     assert group_title_str() == "group_title"
     assert morph_str() == "morph"
-    assert pbranch_str() == "pbranch"
+    assert pstate_str() == "pstate"
     assert pnigh_str() == "pnigh"
     assert numor_str() == "numor"
     assert popen_str() == "popen"

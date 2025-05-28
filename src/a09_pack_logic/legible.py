@@ -31,14 +31,14 @@ from src.a06_bud_logic._utils.str_a06 import (
     debtor_respect_str,
     denom_str,
     fcontext_str,
-    fbranch_str,
+    fstate_str,
     fnigh_str,
     fopen_str,
     mass_str,
     morph_str,
     numor_str,
     rcontext_str,
-    pbranch_str,
+    pstate_str,
     pnigh_str,
     popen_str,
 )
@@ -510,11 +510,11 @@ def add_bud_reason_premiseunit_insert_to_legible_list(
                 rcontext_value = concept_reason_premiseunit_atom.get_value(
                     rcontext_str()
                 )
-                pbranch_value = concept_reason_premiseunit_atom.get_value(pbranch_str())
+                pstate_value = concept_reason_premiseunit_atom.get_value(pstate_str())
                 pdivisor_value = concept_reason_premiseunit_atom.get_value("pdivisor")
                 pnigh_value = concept_reason_premiseunit_atom.get_value(pnigh_str())
                 popen_value = concept_reason_premiseunit_atom.get_value(popen_str())
-                x_str = f"PremiseUnit '{pbranch_value}' created for reason '{rcontext_value}' for concept '{way_value}'."
+                x_str = f"PremiseUnit '{pstate_value}' created for reason '{rcontext_value}' for concept '{way_value}'."
                 if popen_value is not None:
                     x_str += f" Popen={popen_value}."
                 if pnigh_value is not None:
@@ -536,11 +536,11 @@ def add_bud_reason_premiseunit_update_to_legible_list(
                 rcontext_value = concept_reason_premiseunit_atom.get_value(
                     rcontext_str()
                 )
-                pbranch_value = concept_reason_premiseunit_atom.get_value(pbranch_str())
+                pstate_value = concept_reason_premiseunit_atom.get_value(pstate_str())
                 pdivisor_value = concept_reason_premiseunit_atom.get_value("pdivisor")
                 pnigh_value = concept_reason_premiseunit_atom.get_value(pnigh_str())
                 popen_value = concept_reason_premiseunit_atom.get_value(popen_str())
-                x_str = f"PremiseUnit '{pbranch_value}' updated for reason '{rcontext_value}' for concept '{way_value}'."
+                x_str = f"PremiseUnit '{pstate_value}' updated for reason '{rcontext_value}' for concept '{way_value}'."
                 if popen_value is not None:
                     x_str += f" Popen={popen_value}."
                 if pnigh_value is not None:
@@ -562,8 +562,8 @@ def add_bud_reason_premiseunit_delete_to_legible_list(
                 rcontext_value = concept_reason_premiseunit_atom.get_value(
                     rcontext_str()
                 )
-                pbranch_value = concept_reason_premiseunit_atom.get_value(pbranch_str())
-                x_str = f"PremiseUnit '{pbranch_value}' deleted from reason '{rcontext_value}' for concept '{way_value}'."
+                pstate_value = concept_reason_premiseunit_atom.get_value(pstate_str())
+                x_str = f"PremiseUnit '{pstate_value}' deleted from reason '{rcontext_value}' for concept '{way_value}'."
                 legible_list.append(x_str)
 
 
@@ -626,10 +626,10 @@ def add_bud_concept_factunit_insert_to_legible_list(
         for concept_factunit_atom in way_dict.values():
             way_value = concept_factunit_atom.get_value(concept_way_str())
             fcontext_value = concept_factunit_atom.get_value(fcontext_str())
-            fbranch_value = concept_factunit_atom.get_value(fbranch_str())
+            fstate_value = concept_factunit_atom.get_value(fstate_str())
             fnigh_value = concept_factunit_atom.get_value(fnigh_str())
             fopen_value = concept_factunit_atom.get_value(fopen_str())
-            x_str = f"FactUnit '{fbranch_value}' created for rcontext '{fcontext_value}' for concept '{way_value}'."
+            x_str = f"FactUnit '{fstate_value}' created for rcontext '{fcontext_value}' for concept '{way_value}'."
             if fopen_value is not None:
                 x_str += f" fopen={fopen_value}."
             if fnigh_value is not None:
@@ -644,10 +644,10 @@ def add_bud_concept_factunit_update_to_legible_list(
         for concept_factunit_atom in way_dict.values():
             way_value = concept_factunit_atom.get_value(concept_way_str())
             fcontext_value = concept_factunit_atom.get_value(fcontext_str())
-            fbranch_value = concept_factunit_atom.get_value(fbranch_str())
+            fstate_value = concept_factunit_atom.get_value(fstate_str())
             fnigh_value = concept_factunit_atom.get_value(fnigh_str())
             fopen_value = concept_factunit_atom.get_value(fopen_str())
-            x_str = f"FactUnit '{fbranch_value}' updated for rcontext '{fcontext_value}' for concept '{way_value}'."
+            x_str = f"FactUnit '{fstate_value}' updated for rcontext '{fcontext_value}' for concept '{way_value}'."
             if fopen_value is not None:
                 x_str += f" fopen={fopen_value}."
             if fnigh_value is not None:
@@ -662,6 +662,6 @@ def add_bud_concept_factunit_delete_to_legible_list(
         for concept_factunit_atom in way_dict.values():
             way_value = concept_factunit_atom.get_value(concept_way_str())
             fcontext_value = concept_factunit_atom.get_value(fcontext_str())
-            fbranch_value = concept_factunit_atom.get_value(fbranch_str())
+            fstate_value = concept_factunit_atom.get_value(fstate_str())
             x_str = f"FactUnit rcontext '{fcontext_value}' deleted for concept '{way_value}'."
             legible_list.append(x_str)

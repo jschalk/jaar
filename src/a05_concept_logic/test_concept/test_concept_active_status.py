@@ -156,8 +156,8 @@ def test_ConceptUnit_set_reasonheirs_CorrectlyAcceptsNewValues():
     run_str = "run"
     run_way = create_way(ball_way, run_str)
     ball_concept = conceptunit_shop(ball_str)
-    run_premise = premiseunit_shop(pbranch=run_way, popen=0, pnigh=7)
-    run_premises = {run_premise.pbranch: run_premise}
+    run_premise = premiseunit_shop(pstate=run_way, popen=0, pnigh=7)
+    run_premises = {run_premise.pstate: run_premise}
     reasonheir = reasonheir_shop(run_way, premises=run_premises)
     reasonheirs = {reasonheir.rcontext: reasonheir}
     assert ball_concept._reasonheirs == {}
@@ -176,8 +176,8 @@ def test_ConceptUnit_set_reasonheirs_CorrectlyRefusesNewValues():
     ball_way = create_way(ball_str)
     run_str = "run"
     run_way = create_way(ball_way, run_str)
-    run_premise = premiseunit_shop(pbranch=run_way, popen=0, pnigh=7)
-    run_premises = {run_premise.pbranch: run_premise}
+    run_premise = premiseunit_shop(pstate=run_way, popen=0, pnigh=7)
+    run_premises = {run_premise.pstate: run_premise}
     run_reasonunit = reasonunit_shop(rcontext=run_way, premises=run_premises)
     run_reasonunits = {run_reasonunit.rcontext: run_reasonunit}
     ball_concept = conceptunit_shop(ball_str, reasonunits=run_reasonunits)

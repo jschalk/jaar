@@ -64,9 +64,18 @@ def get_dimen_abbv7(dimen: str) -> str:
     }.get(dimen)
 
 
+class prime_tablenameException(Exception):
+    pass
+
+
 def create_prime_tablename(
-    idea_dimen_or_abbv7: str, sound: str, stage: str, put_del: str = None
+    idea_dimen_or_abbv7: str, phase: str, stage: str, put_del: str = None
 ) -> str:
+    """
+    phase must be one: 's', 'v', 'job'
+    stage must be one: 'raw', 'agg', 'vld'
+    """
+
     abbv_references = {
         "FISCASH": "fisc_cashbook",
         "FISDEAL": "fisc_dealunit",
@@ -79,6 +88,7 @@ def create_prime_tablename(
         "BUDACCT": "bud_acctunit",
         "BUDAWAR": "bud_concept_awardlink",
         "BUDFACT": "bud_concept_factunit",
+        "BUDGROU": "bud_groupunit",
         "BUDHEAL": "bud_concept_healerlink",
         "BUDPREM": "bud_concept_reason_premiseunit",
         "BUDREAS": "bud_concept_reasonunit",
@@ -94,8 +104,12 @@ def create_prime_tablename(
     tablename = idea_dimen_or_abbv7
     if abbv_references.get(idea_dimen_or_abbv7.upper()):
         tablename = abbv_references.get(idea_dimen_or_abbv7.upper())
-    if sound in {"s", "v"}:
-        tablename = f"{tablename}_{sound}"
+    if phase in {"s", "v", "job"}:
+        tablename = f"{tablename}_{phase}"
+    if stage is None:
+        return tablename
+    if stage not in {"raw", "agg", "vld"}:
+        raise prime_tablenameException(f"'{stage}' is not a valid stage")
 
     return f"{tablename}_{put_del}_{stage}" if put_del else f"{tablename}_{stage}"
 
@@ -183,14 +197,14 @@ CREATE_BUDAWAR_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_award
 CREATE_BUDAWAR_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_awardlink_v_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, awardee_title TEXT, give_force REAL, take_force REAL)"
 CREATE_BUDAWAR_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_awardlink_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, awardee_title_ERASE_otx TEXT, awardee_title_ERASE_inx TEXT)"
 CREATE_BUDAWAR_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_awardlink_v_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, awardee_title_ERASE TEXT)"
-CREATE_BUDFACT_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_factunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, fcontext TEXT, fbranch TEXT, fopen REAL, fnigh REAL, error_message TEXT)"
-CREATE_BUDFACT_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_factunit_s_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, fcontext TEXT, fbranch TEXT, fopen REAL, fnigh REAL, error_message TEXT)"
-CREATE_BUDFACT_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_concept_factunit_s_put_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, fcontext TEXT, fbranch TEXT, fopen REAL, fnigh REAL)"
+CREATE_BUDFACT_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_factunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, fcontext TEXT, fstate TEXT, fopen REAL, fnigh REAL, error_message TEXT)"
+CREATE_BUDFACT_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_factunit_s_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, fcontext TEXT, fstate TEXT, fopen REAL, fnigh REAL, error_message TEXT)"
+CREATE_BUDFACT_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_concept_factunit_s_put_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, fcontext TEXT, fstate TEXT, fopen REAL, fnigh REAL)"
 CREATE_BUDFACT_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_factunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, fcontext_ERASE TEXT)"
 CREATE_BUDFACT_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_factunit_s_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, fcontext_ERASE TEXT, error_message TEXT)"
 CREATE_BUDFACT_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_concept_factunit_s_del_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, fcontext_ERASE TEXT)"
-CREATE_BUDFACT_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_factunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, fcontext_otx TEXT, fcontext_inx TEXT, fbranch_otx TEXT, fbranch_inx TEXT, fopen REAL, fnigh REAL)"
-CREATE_BUDFACT_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_factunit_v_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, fcontext TEXT, fbranch TEXT, fopen REAL, fnigh REAL)"
+CREATE_BUDFACT_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_factunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, fcontext_otx TEXT, fcontext_inx TEXT, fstate_otx TEXT, fstate_inx TEXT, fopen REAL, fnigh REAL)"
+CREATE_BUDFACT_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_factunit_v_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, fcontext TEXT, fstate TEXT, fopen REAL, fnigh REAL)"
 CREATE_BUDFACT_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_factunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, fcontext_ERASE_otx TEXT, fcontext_ERASE_inx TEXT)"
 CREATE_BUDFACT_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_factunit_v_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, fcontext_ERASE TEXT)"
 CREATE_BUDHEAL_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_healerlink_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, healer_name TEXT, error_message TEXT)"
@@ -203,16 +217,16 @@ CREATE_BUDHEAL_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_heale
 CREATE_BUDHEAL_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_healerlink_v_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, healer_name TEXT)"
 CREATE_BUDHEAL_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_healerlink_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, healer_name_ERASE_otx TEXT, healer_name_ERASE_inx TEXT)"
 CREATE_BUDHEAL_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_healerlink_v_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, healer_name_ERASE TEXT)"
-CREATE_BUDPREM_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pbranch TEXT, pnigh REAL, popen REAL, pdivisor INTEGER, error_message TEXT)"
-CREATE_BUDPREM_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_s_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pbranch TEXT, pnigh REAL, popen REAL, pdivisor INTEGER, error_message TEXT)"
-CREATE_BUDPREM_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_s_put_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pbranch TEXT, pnigh REAL, popen REAL, pdivisor INTEGER)"
-CREATE_BUDPREM_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pbranch_ERASE TEXT)"
-CREATE_BUDPREM_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_s_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pbranch_ERASE TEXT, error_message TEXT)"
-CREATE_BUDPREM_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_s_del_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pbranch_ERASE TEXT)"
-CREATE_BUDPREM_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, rcontext_otx TEXT, rcontext_inx TEXT, pbranch_otx TEXT, pbranch_inx TEXT, pnigh REAL, popen REAL, pdivisor INTEGER)"
-CREATE_BUDPREM_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_v_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pbranch TEXT, pnigh REAL, popen REAL, pdivisor INTEGER)"
-CREATE_BUDPREM_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, rcontext_otx TEXT, rcontext_inx TEXT, pbranch_ERASE_otx TEXT, pbranch_ERASE_inx TEXT)"
-CREATE_BUDPREM_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_v_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pbranch_ERASE TEXT)"
+CREATE_BUDPREM_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate TEXT, pnigh REAL, popen REAL, pdivisor INTEGER, error_message TEXT)"
+CREATE_BUDPREM_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_s_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate TEXT, pnigh REAL, popen REAL, pdivisor INTEGER, error_message TEXT)"
+CREATE_BUDPREM_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_s_put_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate TEXT, pnigh REAL, popen REAL, pdivisor INTEGER)"
+CREATE_BUDPREM_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate_ERASE TEXT)"
+CREATE_BUDPREM_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_s_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate_ERASE TEXT, error_message TEXT)"
+CREATE_BUDPREM_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_s_del_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate_ERASE TEXT)"
+CREATE_BUDPREM_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, rcontext_otx TEXT, rcontext_inx TEXT, pstate_otx TEXT, pstate_inx TEXT, pnigh REAL, popen REAL, pdivisor INTEGER)"
+CREATE_BUDPREM_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_v_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate TEXT, pnigh REAL, popen REAL, pdivisor INTEGER)"
+CREATE_BUDPREM_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, rcontext_otx TEXT, rcontext_inx TEXT, pstate_ERASE_otx TEXT, pstate_ERASE_inx TEXT)"
+CREATE_BUDPREM_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_v_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate_ERASE TEXT)"
 CREATE_BUDREAS_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reasonunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, rcontext_concept_active_requisite INTEGER, error_message TEXT)"
 CREATE_BUDREAS_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reasonunit_s_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, rcontext_concept_active_requisite INTEGER, error_message TEXT)"
 CREATE_BUDREAS_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reasonunit_s_put_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, rcontext_concept_active_requisite INTEGER)"
@@ -410,6 +424,38 @@ def get_prime_create_table_sqlstrs() -> dict[str:str]:
     }
 
 
+def get_fisc_bud_sound_agg_tablenames():
+    return {
+        "bud_acct_membership_s_del_agg",
+        "bud_acct_membership_s_put_agg",
+        "bud_acctunit_s_del_agg",
+        "bud_acctunit_s_put_agg",
+        "bud_concept_awardlink_s_del_agg",
+        "bud_concept_awardlink_s_put_agg",
+        "bud_concept_factunit_s_del_agg",
+        "bud_concept_factunit_s_put_agg",
+        "bud_concept_healerlink_s_del_agg",
+        "bud_concept_healerlink_s_put_agg",
+        "bud_concept_laborlink_s_del_agg",
+        "bud_concept_laborlink_s_put_agg",
+        "bud_concept_reason_premiseunit_s_del_agg",
+        "bud_concept_reason_premiseunit_s_put_agg",
+        "bud_concept_reasonunit_s_del_agg",
+        "bud_concept_reasonunit_s_put_agg",
+        "bud_conceptunit_s_del_agg",
+        "bud_conceptunit_s_put_agg",
+        "budunit_s_del_agg",
+        "budunit_s_put_agg",
+        "fisc_cashbook_s_agg",
+        "fisc_dealunit_s_agg",
+        "fisc_timeline_hour_s_agg",
+        "fisc_timeline_month_s_agg",
+        "fisc_timeline_weekday_s_agg",
+        "fisc_timeoffi_s_agg",
+        "fiscunit_s_agg",
+    }
+
+
 def get_bud_voice_agg_tablenames() -> set[str]:
     return {
         "budunit_v_put_agg",
@@ -462,14 +508,9 @@ def create_sound_agg_insert_sqlstrs(
     dimen_focus_columns = set(dimen_config.get("jkeys").keys())
 
     if dimen.lower().startswith("fisc"):
-        exclude_cols = {"idea_number", "event_int", "face_name", "error_message"}
         dimen_focus_columns = set(dimen_config.get("jkeys").keys())
-        dimen_focus_columns.remove("event_int")
-        dimen_focus_columns.remove("face_name")
         dimen_focus_columns = get_default_sorted_list(dimen_focus_columns)
-    else:
-        exclude_cols = {"idea_number", "error_message"}
-
+    exclude_cols = {"idea_number", "error_message"}
     if dimen.lower().startswith("bud"):
         agg_tablename = create_prime_tablename(dimen, "s", "agg", "put")
         raw_tablename = create_prime_tablename(dimen, "s", "raw", "put")
@@ -515,7 +556,7 @@ GROUP BY face_name, otx_bridge, inx_bridge, unknown_term
 """
 
 
-def create_insert_into_pidgin_core_vld_sqlstr(
+def create_insert_pidgin_core_agg_into_vld_sqlstr(
     default_bridge: str, default_unknown: str
 ):
     return f"""INSERT INTO pidgin_core_s_vld (face_name, otx_bridge, inx_bridge, unknown_term)
@@ -525,6 +566,23 @@ SELECT
 , IFNULL(inx_bridge, '{default_bridge}')
 , IFNULL(unknown_term, '{default_unknown}')
 FROM pidgin_core_s_agg
+;
+"""
+
+
+def create_insert_missing_face_name_into_pidgin_core_vld_sqlstr(
+    default_bridge: str, default_unknown: str, fisc_bud_sound_agg_tablename: str
+):
+    return f"""INSERT INTO pidgin_core_s_vld (face_name, otx_bridge, inx_bridge, unknown_term)
+SELECT
+  {fisc_bud_sound_agg_tablename}.face_name
+, '{default_bridge}'
+, '{default_bridge}'
+, '{default_unknown}'
+FROM {fisc_bud_sound_agg_tablename} 
+LEFT JOIN pidgin_core_s_vld ON pidgin_core_s_vld.face_name = {fisc_bud_sound_agg_tablename}.face_name
+WHERE pidgin_core_s_vld.face_name IS NULL
+GROUP BY {fisc_bud_sound_agg_tablename}.face_name
 ;
 """
 
@@ -668,12 +726,12 @@ INSERT_BUDACCT_SOUND_VLD_PUT_SQLSTR = "INSERT INTO bud_acctunit_s_put_vld (event
 INSERT_BUDACCT_SOUND_VLD_DEL_SQLSTR = "INSERT INTO bud_acctunit_s_del_vld (event_int, face_name, fisc_label, owner_name, acct_name_ERASE) SELECT event_int, face_name, fisc_label, owner_name, acct_name_ERASE FROM bud_acctunit_s_del_agg WHERE error_message IS NULL"
 INSERT_BUDAWAR_SOUND_VLD_PUT_SQLSTR = "INSERT INTO bud_concept_awardlink_s_put_vld (event_int, face_name, fisc_label, owner_name, concept_way, awardee_title, give_force, take_force) SELECT event_int, face_name, fisc_label, owner_name, concept_way, awardee_title, give_force, take_force FROM bud_concept_awardlink_s_put_agg WHERE error_message IS NULL"
 INSERT_BUDAWAR_SOUND_VLD_DEL_SQLSTR = "INSERT INTO bud_concept_awardlink_s_del_vld (event_int, face_name, fisc_label, owner_name, concept_way, awardee_title_ERASE) SELECT event_int, face_name, fisc_label, owner_name, concept_way, awardee_title_ERASE FROM bud_concept_awardlink_s_del_agg WHERE error_message IS NULL"
-INSERT_BUDFACT_SOUND_VLD_PUT_SQLSTR = "INSERT INTO bud_concept_factunit_s_put_vld (event_int, face_name, fisc_label, owner_name, concept_way, fcontext, fbranch, fopen, fnigh) SELECT event_int, face_name, fisc_label, owner_name, concept_way, fcontext, fbranch, fopen, fnigh FROM bud_concept_factunit_s_put_agg WHERE error_message IS NULL"
+INSERT_BUDFACT_SOUND_VLD_PUT_SQLSTR = "INSERT INTO bud_concept_factunit_s_put_vld (event_int, face_name, fisc_label, owner_name, concept_way, fcontext, fstate, fopen, fnigh) SELECT event_int, face_name, fisc_label, owner_name, concept_way, fcontext, fstate, fopen, fnigh FROM bud_concept_factunit_s_put_agg WHERE error_message IS NULL"
 INSERT_BUDFACT_SOUND_VLD_DEL_SQLSTR = "INSERT INTO bud_concept_factunit_s_del_vld (event_int, face_name, fisc_label, owner_name, concept_way, fcontext_ERASE) SELECT event_int, face_name, fisc_label, owner_name, concept_way, fcontext_ERASE FROM bud_concept_factunit_s_del_agg WHERE error_message IS NULL"
 INSERT_BUDHEAL_SOUND_VLD_PUT_SQLSTR = "INSERT INTO bud_concept_healerlink_s_put_vld (event_int, face_name, fisc_label, owner_name, concept_way, healer_name) SELECT event_int, face_name, fisc_label, owner_name, concept_way, healer_name FROM bud_concept_healerlink_s_put_agg WHERE error_message IS NULL"
 INSERT_BUDHEAL_SOUND_VLD_DEL_SQLSTR = "INSERT INTO bud_concept_healerlink_s_del_vld (event_int, face_name, fisc_label, owner_name, concept_way, healer_name_ERASE) SELECT event_int, face_name, fisc_label, owner_name, concept_way, healer_name_ERASE FROM bud_concept_healerlink_s_del_agg WHERE error_message IS NULL"
-INSERT_BUDPREM_SOUND_VLD_PUT_SQLSTR = "INSERT INTO bud_concept_reason_premiseunit_s_put_vld (event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pbranch, pnigh, popen, pdivisor) SELECT event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pbranch, pnigh, popen, pdivisor FROM bud_concept_reason_premiseunit_s_put_agg WHERE error_message IS NULL"
-INSERT_BUDPREM_SOUND_VLD_DEL_SQLSTR = "INSERT INTO bud_concept_reason_premiseunit_s_del_vld (event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pbranch_ERASE) SELECT event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pbranch_ERASE FROM bud_concept_reason_premiseunit_s_del_agg WHERE error_message IS NULL"
+INSERT_BUDPREM_SOUND_VLD_PUT_SQLSTR = "INSERT INTO bud_concept_reason_premiseunit_s_put_vld (event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pstate, pnigh, popen, pdivisor) SELECT event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pstate, pnigh, popen, pdivisor FROM bud_concept_reason_premiseunit_s_put_agg WHERE error_message IS NULL"
+INSERT_BUDPREM_SOUND_VLD_DEL_SQLSTR = "INSERT INTO bud_concept_reason_premiseunit_s_del_vld (event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pstate_ERASE) SELECT event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pstate_ERASE FROM bud_concept_reason_premiseunit_s_del_agg WHERE error_message IS NULL"
 INSERT_BUDREAS_SOUND_VLD_PUT_SQLSTR = "INSERT INTO bud_concept_reasonunit_s_put_vld (event_int, face_name, fisc_label, owner_name, concept_way, rcontext, rcontext_concept_active_requisite) SELECT event_int, face_name, fisc_label, owner_name, concept_way, rcontext, rcontext_concept_active_requisite FROM bud_concept_reasonunit_s_put_agg WHERE error_message IS NULL"
 INSERT_BUDREAS_SOUND_VLD_DEL_SQLSTR = "INSERT INTO bud_concept_reasonunit_s_del_vld (event_int, face_name, fisc_label, owner_name, concept_way, rcontext_ERASE) SELECT event_int, face_name, fisc_label, owner_name, concept_way, rcontext_ERASE FROM bud_concept_reasonunit_s_del_agg WHERE error_message IS NULL"
 INSERT_BUDLABO_SOUND_VLD_PUT_SQLSTR = "INSERT INTO bud_concept_laborlink_s_put_vld (event_int, face_name, fisc_label, owner_name, concept_way, labor_title) SELECT event_int, face_name, fisc_label, owner_name, concept_way, labor_title FROM bud_concept_laborlink_s_put_agg WHERE error_message IS NULL"
@@ -738,12 +796,12 @@ INSERT_BUDACCT_VOICE_RAW_PUT_SQLSTR = "INSERT INTO bud_acctunit_v_put_raw (event
 INSERT_BUDACCT_VOICE_RAW_DEL_SQLSTR = "INSERT INTO bud_acctunit_v_del_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, acct_name_ERASE_otx) SELECT event_int, face_name, fisc_label, owner_name, acct_name_ERASE FROM bud_acctunit_s_del_vld "
 INSERT_BUDAWAR_VOICE_RAW_PUT_SQLSTR = "INSERT INTO bud_concept_awardlink_v_put_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, awardee_title_otx, give_force, take_force) SELECT event_int, face_name, fisc_label, owner_name, concept_way, awardee_title, give_force, take_force FROM bud_concept_awardlink_s_put_vld "
 INSERT_BUDAWAR_VOICE_RAW_DEL_SQLSTR = "INSERT INTO bud_concept_awardlink_v_del_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, awardee_title_ERASE_otx) SELECT event_int, face_name, fisc_label, owner_name, concept_way, awardee_title_ERASE FROM bud_concept_awardlink_s_del_vld "
-INSERT_BUDFACT_VOICE_RAW_PUT_SQLSTR = "INSERT INTO bud_concept_factunit_v_put_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, fcontext_otx, fbranch_otx, fopen, fnigh) SELECT event_int, face_name, fisc_label, owner_name, concept_way, fcontext, fbranch, fopen, fnigh FROM bud_concept_factunit_s_put_vld "
+INSERT_BUDFACT_VOICE_RAW_PUT_SQLSTR = "INSERT INTO bud_concept_factunit_v_put_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, fcontext_otx, fstate_otx, fopen, fnigh) SELECT event_int, face_name, fisc_label, owner_name, concept_way, fcontext, fstate, fopen, fnigh FROM bud_concept_factunit_s_put_vld "
 INSERT_BUDFACT_VOICE_RAW_DEL_SQLSTR = "INSERT INTO bud_concept_factunit_v_del_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, fcontext_ERASE_otx) SELECT event_int, face_name, fisc_label, owner_name, concept_way, fcontext_ERASE FROM bud_concept_factunit_s_del_vld "
 INSERT_BUDHEAL_VOICE_RAW_PUT_SQLSTR = "INSERT INTO bud_concept_healerlink_v_put_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, healer_name_otx) SELECT event_int, face_name, fisc_label, owner_name, concept_way, healer_name FROM bud_concept_healerlink_s_put_vld "
 INSERT_BUDHEAL_VOICE_RAW_DEL_SQLSTR = "INSERT INTO bud_concept_healerlink_v_del_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, healer_name_ERASE_otx) SELECT event_int, face_name, fisc_label, owner_name, concept_way, healer_name_ERASE FROM bud_concept_healerlink_s_del_vld "
-INSERT_BUDPREM_VOICE_RAW_PUT_SQLSTR = "INSERT INTO bud_concept_reason_premiseunit_v_put_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, rcontext_otx, pbranch_otx, pnigh, popen, pdivisor) SELECT event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pbranch, pnigh, popen, pdivisor FROM bud_concept_reason_premiseunit_s_put_vld "
-INSERT_BUDPREM_VOICE_RAW_DEL_SQLSTR = "INSERT INTO bud_concept_reason_premiseunit_v_del_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, rcontext_otx, pbranch_ERASE_otx) SELECT event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pbranch_ERASE FROM bud_concept_reason_premiseunit_s_del_vld "
+INSERT_BUDPREM_VOICE_RAW_PUT_SQLSTR = "INSERT INTO bud_concept_reason_premiseunit_v_put_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, rcontext_otx, pstate_otx, pnigh, popen, pdivisor) SELECT event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pstate, pnigh, popen, pdivisor FROM bud_concept_reason_premiseunit_s_put_vld "
+INSERT_BUDPREM_VOICE_RAW_DEL_SQLSTR = "INSERT INTO bud_concept_reason_premiseunit_v_del_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, rcontext_otx, pstate_ERASE_otx) SELECT event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pstate_ERASE FROM bud_concept_reason_premiseunit_s_del_vld "
 INSERT_BUDREAS_VOICE_RAW_PUT_SQLSTR = "INSERT INTO bud_concept_reasonunit_v_put_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, rcontext_otx, rcontext_concept_active_requisite) SELECT event_int, face_name, fisc_label, owner_name, concept_way, rcontext, rcontext_concept_active_requisite FROM bud_concept_reasonunit_s_put_vld "
 INSERT_BUDREAS_VOICE_RAW_DEL_SQLSTR = "INSERT INTO bud_concept_reasonunit_v_del_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, rcontext_ERASE_otx) SELECT event_int, face_name, fisc_label, owner_name, concept_way, rcontext_ERASE FROM bud_concept_reasonunit_s_del_vld "
 INSERT_BUDLABO_VOICE_RAW_PUT_SQLSTR = "INSERT INTO bud_concept_laborlink_v_put_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, labor_title_otx) SELECT event_int, face_name, fisc_label, owner_name, concept_way, labor_title FROM bud_concept_laborlink_s_put_vld "
@@ -914,10 +972,10 @@ FROM bud_concept_awardlink_v_del_raw
 GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, awardee_title_ERASE_inx
 """
 INSERT_BUDFACT_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO bud_concept_factunit_v_put_agg (event_int, face_name, fisc_label, owner_name, concept_way, fcontext, fbranch, fopen, fnigh)
-SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, fcontext_inx, fbranch_inx, fopen, fnigh
+INSERT INTO bud_concept_factunit_v_put_agg (event_int, face_name, fisc_label, owner_name, concept_way, fcontext, fstate, fopen, fnigh)
+SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, fcontext_inx, fstate_inx, fopen, fnigh
 FROM bud_concept_factunit_v_put_raw
-GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, fcontext_inx, fbranch_inx, fopen, fnigh
+GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, fcontext_inx, fstate_inx, fopen, fnigh
 """
 INSERT_BUDFACT_VOICE_AGG_DEL_SQLSTR = """
 INSERT INTO bud_concept_factunit_v_del_agg (event_int, face_name, fisc_label, owner_name, concept_way, fcontext_ERASE)
@@ -938,16 +996,16 @@ FROM bud_concept_healerlink_v_del_raw
 GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, healer_name_ERASE_inx
 """
 INSERT_BUDPREM_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO bud_concept_reason_premiseunit_v_put_agg (event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pbranch, pnigh, popen, pdivisor)
-SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, pbranch_inx, pnigh, popen, pdivisor
+INSERT INTO bud_concept_reason_premiseunit_v_put_agg (event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pstate, pnigh, popen, pdivisor)
+SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, pstate_inx, pnigh, popen, pdivisor
 FROM bud_concept_reason_premiseunit_v_put_raw
-GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, pbranch_inx, pnigh, popen, pdivisor
+GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, pstate_inx, pnigh, popen, pdivisor
 """
 INSERT_BUDPREM_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO bud_concept_reason_premiseunit_v_del_agg (event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pbranch_ERASE)
-SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, pbranch_ERASE_inx
+INSERT INTO bud_concept_reason_premiseunit_v_del_agg (event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pstate_ERASE)
+SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, pstate_ERASE_inx
 FROM bud_concept_reason_premiseunit_v_del_raw
-GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, pbranch_ERASE_inx
+GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, pstate_ERASE_inx
 """
 INSERT_BUDREAS_VOICE_AGG_PUT_SQLSTR = """
 INSERT INTO bud_concept_reasonunit_v_put_agg (event_int, face_name, fisc_label, owner_name, concept_way, rcontext, rcontext_concept_active_requisite)
@@ -1188,3 +1246,37 @@ FROM (
 ORDER BY fisc_label, owner_name, event_int, deal_time
 ;
 """
+
+
+CREATE_JOB_BUDMEMB_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_job (fisc_label TEXT, owner_name TEXT, acct_name TEXT, group_title TEXT, credit_vote REAL, debtit_vote REAL, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL, _fund_agenda_ratio_give REAL, _fund_agenda_ratio_take REAL)"""
+CREATE_JOB_BUDACCT_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acctunit_job (fisc_label TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL, _fund_agenda_ratio_give REAL, _fund_agenda_ratio_take REAL, _inallocable_debtit_belief REAL, _irrational_debtit_belief REAL)"""
+CREATE_JOB_BUDGROU_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_groupunit_job (fisc_label TEXT, owner_name TEXT, group_title TEXT, fund_coin REAL, bridge TEXT, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL)"""
+CREATE_JOB_BUDAWAR_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_concept_awardlink_job (fisc_label TEXT, owner_name TEXT, concept_way TEXT, awardee_title TEXT, give_force REAL, take_force REAL, _fund_give REAL, _fund_take REAL)"""
+CREATE_JOB_BUDFACT_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_concept_factunit_job (fisc_label TEXT, owner_name TEXT, concept_way TEXT, fcontext TEXT, fstate TEXT, fopen REAL, fnigh REAL)"""
+CREATE_JOB_BUDHEAL_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_concept_healerlink_job (fisc_label TEXT, owner_name TEXT, concept_way TEXT, healer_name TEXT)"""
+CREATE_JOB_BUDPREM_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_job (fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate TEXT, pnigh REAL, popen REAL, pdivisor INTEGER, _task INTEGER, _status INTEGER)"""
+CREATE_JOB_BUDREAS_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_concept_reasonunit_job (fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, rcontext_concept_active_requisite INTEGER, _task INTEGER, _status INTEGER, _rcontext_concept_active_value INTEGER)"""
+CREATE_JOB_BUDLABO_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_concept_laborlink_job (fisc_label TEXT, owner_name TEXT, concept_way TEXT, labor_title TEXT, _owner_name_labor INTEGER)"""
+CREATE_JOB_BUDCONC_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_conceptunit_job (fisc_label TEXT, owner_name TEXT, concept_way TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER, fund_coin REAL, _active INTEGER, _task INTEGER, _fund_onset REAL, _fund_cease REAL, _fund_ratio REAL, _gogo_calc REAL, _stop_calc REAL, _level INTEGER, _range_evaluated INTEGER, _descendant_pledge_count INTEGER, _healerlink_ratio REAL, _all_acct_cred INTEGER, _all_acct_debt INTEGER)"""
+CREATE_JOB_BUDUNIT_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_job (fisc_label TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, _rational INTEGER, _keeps_justified INTEGER, _offtrack_fund REAL, _sum_healerlink_share REAL, _keeps_buildable INTEGER, _tree_traverse_count INTEGER)"""
+
+
+def get_job_create_table_sqlstrs() -> dict[str, str]:
+    return {
+        "bud_acct_membership_job": CREATE_JOB_BUDMEMB_SQLSTR,
+        "bud_acctunit_job": CREATE_JOB_BUDACCT_SQLSTR,
+        "bud_groupunit_job": CREATE_JOB_BUDGROU_SQLSTR,
+        "bud_concept_awardlink_job": CREATE_JOB_BUDAWAR_SQLSTR,
+        "bud_concept_factunit_job": CREATE_JOB_BUDFACT_SQLSTR,
+        "bud_concept_healerlink_job": CREATE_JOB_BUDHEAL_SQLSTR,
+        "bud_concept_reason_premiseunit_job": CREATE_JOB_BUDPREM_SQLSTR,
+        "bud_concept_reasonunit_job": CREATE_JOB_BUDREAS_SQLSTR,
+        "bud_concept_laborlink_job": CREATE_JOB_BUDLABO_SQLSTR,
+        "bud_conceptunit_job": CREATE_JOB_BUDCONC_SQLSTR,
+        "budunit_job": CREATE_JOB_BUDUNIT_SQLSTR,
+    }
+
+
+def create_job_tables(conn_or_cursor: sqlite3_Connection):
+    for create_table_sqlstr in get_job_create_table_sqlstrs().values():
+        conn_or_cursor.execute(create_table_sqlstr)
