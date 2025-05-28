@@ -32,7 +32,7 @@ from src.a18_etl_toolbox.db_obj_tool import (
     insert_job_budunit,
     insert_job_obj,
 )
-from src.a20_lobby_db_toolbox._test_util.a20_env import env_dir_setup_cleanup
+from src.a18_etl_toolbox._test_util.a18_env import env_dir_setup_cleanup
 from sqlite3 import connect as sqlite3_connect
 
 

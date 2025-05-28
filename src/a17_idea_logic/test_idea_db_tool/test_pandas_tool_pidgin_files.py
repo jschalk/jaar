@@ -3,10 +3,6 @@ from src.a01_way_logic.way import create_way, to_way
 from src.a06_bud_logic._test_util.a06_str import acct_name_str, rcontext_str
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
 from src.a16_pidgin_logic._test_util.a16_str import pidgin_filename
-from src.a16_pidgin_logic._test_util.a16_env import (
-    env_dir_setup_cleanup,
-    get_example_face_dir,
-)
 from src.a16_pidgin_logic._test_util.example_pidgins import (
     get_casa_maison_pidginunit_set_by_label,
     get_casa_maison_way_otx_dt,
@@ -23,6 +19,10 @@ from src.a17_idea_logic.idea_db_tool import (
     open_csv,
     move_otx_csvs_to_pidgin_inx,
     _get_pidgen_idea_format_filenames,
+)
+from src.a17_idea_logic._test_util.a17_env import (
+    env_dir_setup_cleanup,
+    idea_fiscs_dir as get_example_face_dir,
 )
 from os.path import exists as os_path_exists
 from pandas import DataFrame

@@ -68,6 +68,7 @@ def get_module_descs() -> dict[str, str]:
 
 def test_ModuleDirectorysAreNumberedCorrectly():
     # sourcery skip: no-loop-in-tests
+    # sourcery skip: no-conditionals-in-tests
     # ESTABLISH
 
     # WHEN / THEN
@@ -96,21 +97,23 @@ def test_CheckAllPythonFileImportsAreInCorrectFormat():
     # ESTABLISH / WHEN / THEN
     for module_desc, module_dir in get_module_descs().items():
         python_files = get_python_files_with_flag(module_dir)
-        print(f"{module_desc=} {len(python_files)=}")
+        desc_number = int(module_desc[1:3])
+        print(f"{desc_number} {module_desc=} {len(python_files)=}")
         for file_path, file_imports in python_files.items():
-            check_module_imports_are_ordered(file_imports, file_path)
+            check_module_imports_are_ordered(file_imports, file_path, desc_number)
 
     # example_path = "src/a09_pack_logic/delta.py"
     # imports = get_imports_from_file(example_path)
     # check_module_imports_are_ordered(imports, example_path)
+    assert 1 == 2
 
 
-def check_module_imports_are_ordered(imports: list[list], file_path: str):
+def check_module_imports_are_ordered(imports: list[list], file_path: str, desc_number):
     previous_module_number = -1
     module_section_passed = False
     for x_import in imports:
-        module_location = x_import[0]
-        if module_location[:3] == "src":
+        module_location = str(x_import[0])
+        if module_location.startswith("src"):
             module_number = int(module_location[5:7])
             assert module_section_passed is False
             if module_number < previous_module_number:
@@ -121,3 +124,9 @@ def check_module_imports_are_ordered(imports: list[list], file_path: str):
             previous_module_number = module_number
         else:
             module_section_passed = True
+
+        if module_location.endswith("env"):
+            env_number = int(module_location[-6:-4])
+            if desc_number != env_number:
+                print(f"{desc_number} {file_path} {env_number=} {module_location=}")
+            assert desc_number == env_number
