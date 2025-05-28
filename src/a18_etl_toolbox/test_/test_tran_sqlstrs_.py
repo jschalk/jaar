@@ -61,52 +61,6 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
 from sqlite3 import connect as sqlite3_connect
 
 
-def abbv(tablename: str) -> str:
-    abbrevions = {
-        f"{bud_acct_membership_str()}_put_agg": "BUDMEMB_PUT_AGG",
-        f"{bud_acct_membership_str()}_put_raw": "BUDMEMB_PUT_RAW",
-        f"{bud_acctunit_str()}_put_agg": "BUDACCT_PUT_AGG",
-        f"{bud_acctunit_str()}_put_raw": "BUDACCT_PUT_RAW",
-        f"{bud_concept_awardlink_str()}_put_agg": "BUDAWAR_PUT_AGG",
-        f"{bud_concept_awardlink_str()}_put_raw": "BUDAWAR_PUT_RAW",
-        f"{bud_concept_factunit_str()}_put_agg": "BUDFACT_PUT_AGG",
-        f"{bud_concept_factunit_str()}_put_raw": "BUDFACT_PUT_RAW",
-        f"{bud_concept_healerlink_str()}_put_agg": "BUDHEAL_PUT_AGG",
-        f"{bud_concept_healerlink_str()}_put_raw": "BUDHEAL_PUT_RAW",
-        f"{bud_concept_reason_premiseunit_str()}_put_agg": "BUDPREM_PUT_AGG",
-        f"{bud_concept_reason_premiseunit_str()}_put_raw": "BUDPREM_PUT_RAW",
-        f"{bud_concept_reasonunit_str()}_put_agg": "BUDREAS_PUT_AGG",
-        f"{bud_concept_reasonunit_str()}_put_raw": "BUDREAS_PUT_RAW",
-        f"{bud_concept_laborlink_str()}_put_agg": "BUDLABO_PUT_AGG",
-        f"{bud_concept_laborlink_str()}_put_raw": "BUDLABO_PUT_RAW",
-        f"{bud_conceptunit_str()}_put_agg": "BUDCONC_PUT_AGG",
-        f"{bud_conceptunit_str()}_put_raw": "BUDCONC_PUT_RAW",
-        f"{budunit_str()}_put_agg": "BUDUNIT_PUT_AGG",
-        f"{budunit_str()}_put_raw": "BUDUNIT_PUT_RAW",
-        f"{bud_acct_membership_str()}_del_agg": "BUDMEMB_DEL_AGG",
-        f"{bud_acct_membership_str()}_del_raw": "BUDMEMB_DEL_RAW",
-        f"{bud_acctunit_str()}_del_agg": "BUDACCT_DEL_AGG",
-        f"{bud_acctunit_str()}_del_raw": "BUDACCT_DEL_RAW",
-        f"{bud_concept_awardlink_str()}_del_agg": "BUDAWAR_DEL_AGG",
-        f"{bud_concept_awardlink_str()}_del_raw": "BUDAWAR_DEL_RAW",
-        f"{bud_concept_factunit_str()}_del_agg": "BUDFACT_DEL_AGG",
-        f"{bud_concept_factunit_str()}_del_raw": "BUDFACT_DEL_RAW",
-        f"{bud_concept_healerlink_str()}_del_agg": "BUDHEAL_DEL_AGG",
-        f"{bud_concept_healerlink_str()}_del_raw": "BUDHEAL_DEL_RAW",
-        f"{bud_concept_reason_premiseunit_str()}_del_agg": "BUDPREM_DEL_AGG",
-        f"{bud_concept_reason_premiseunit_str()}_del_raw": "BUDPREM_DEL_RAW",
-        f"{bud_concept_reasonunit_str()}_del_agg": "BUDREAS_DEL_AGG",
-        f"{bud_concept_reasonunit_str()}_del_raw": "BUDREAS_DEL_RAW",
-        f"{bud_concept_laborlink_str()}_del_agg": "BUDLABO_DEL_AGG",
-        f"{bud_concept_laborlink_str()}_del_raw": "BUDLABO_DEL_RAW",
-        f"{bud_conceptunit_str()}_del_agg": "BUDCONC_DEL_AGG",
-        f"{bud_conceptunit_str()}_del_raw": "BUDCONC_DEL_RAW",
-        f"{budunit_str()}_del_agg": "BUDUNIT_DEL_AGG",
-        f"{budunit_str()}_del_raw": "BUDUNIT_DEL_RAW",
-    }
-    return abbrevions.get(tablename)
-
-
 def test_ALL_DIMEN_ABBV7_has_all_dimens():
     # ESTABLISH / WHEN / THEN
     assert len(ALL_DIMEN_ABBV7) == len(get_idea_config_dict())

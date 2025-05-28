@@ -15,6 +15,7 @@ from src.a12_hub_tools.hub_path import (
     create_owner_event_dir_path as owner_event_dir,
     create_event_all_pack_path as all_pack_path,
 )
+from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a18_etl_toolbox.transformers import etl_event_bud_csvs_to_pack_json
 from src.a18_etl_toolbox._utils.env_a18 import (
     env_dir_setup_cleanup,
@@ -31,7 +32,7 @@ def test_etl_event_bud_csvs_to_pack_json_CreatesFiles_Scenario0_IgnoresCSV_budun
     bob_inx = "Bobby"
     event3 = 3
     a23_str = "accord23"
-    put_agg_tablename = f"{budunit_str()}_put_agg"
+    put_agg_tablename = create_prime_tablename(budunit_str(), "v", "agg", "put")
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
     fisc_mstr_dir = get_module_temp_dir()
     # a23_bob_dir = create_path(a23_dir, bob_inx)
@@ -66,14 +67,14 @@ def test_etl_event_bud_csvs_to_pack_json_CreatesFiles_Scenario1(
     # ESTABLISH
     sue_inx = "Suzy"
     bob_inx = "Bobby"
-    yao_inx = "Bobby"
     event3 = 3
     event7 = 7
     credit77 = 77
     credit88 = 88
     debtit_empty = ""
     a23_str = "accord23"
-    put_agg_tablename = f"{bud_acctunit_str()}_put_agg"
+    budacct_str = bud_acctunit_str()
+    put_agg_tablename = create_prime_tablename(budacct_str, "v", "agg", "put")
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
     fisc_mstr_dir = get_module_temp_dir()
     # a23_bob_dir = create_path(a23_dir, bob_inx)
@@ -88,12 +89,14 @@ def test_etl_event_bud_csvs_to_pack_json_CreatesFiles_Scenario1(
 {event7},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debtit_empty}
 {event7},{sue_inx},{a23_str},{bob_inx},{sue_inx},{credit88},{debtit_empty}
 """
+    print(f"     {a23_bob_e3_dir=}  {put_agg_csv_filename}")
+    print(f"     {a23_bob_e7_dir=}  {put_agg_csv_filename}")
     save_file(a23_bob_e3_dir, put_agg_csv_filename, e3_put_csv)
     save_file(a23_bob_e7_dir, put_agg_csv_filename, e7_put_csv)
     e3_all_pack_path = all_pack_path(fisc_mstr_dir, a23_str, bob_inx, event3)
     e7_all_pack_path = all_pack_path(fisc_mstr_dir, a23_str, bob_inx, event7)
-    # print(f"{e3_pack_path=}")
-    # print(f"{e7_pack_path=}")
+    print(f"   {e3_all_pack_path=}")
+    print(f"   {e7_all_pack_path=}")
     assert os_path_exists(e3_all_pack_path) is False
     assert os_path_exists(e7_all_pack_path) is False
 

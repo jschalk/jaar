@@ -42,6 +42,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_set_cell_trees_decrees,
     etl_set_cell_tree_cell_mandates,
     etl_create_deal_mandate_ledgers,
+    etl_fisc_job_jsons_to_job_tables,
 )
 from dataclasses import dataclass
 from sqlite3 import (
@@ -153,6 +154,7 @@ class WorldUnit:
         etl_fisc_ote1_agg_table_to_fisc_ote1_agg_csvs(cursor, self._fisc_mstr_dir)
         etl_fisc_ote1_agg_csvs_to_jsons(self._fisc_mstr_dir)
         self.calc_fisc_deal_acct_mandate_net_ledgers()
+        etl_fisc_job_jsons_to_job_tables(cursor, self._fisc_mstr_dir)
 
         # # create all fisc_job and mandate reports
         # self.calc_fisc_deal_acct_mandate_net_ledgers()

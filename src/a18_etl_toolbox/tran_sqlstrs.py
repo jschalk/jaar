@@ -64,12 +64,16 @@ def get_dimen_abbv7(dimen: str) -> str:
     }.get(dimen)
 
 
+class prime_tablenameException(Exception):
+    pass
+
+
 def create_prime_tablename(
     idea_dimen_or_abbv7: str, phase: str, stage: str, put_del: str = None
 ) -> str:
     """
     phase must be one: 's', 'v', 'job'
-    stage must be one: 'raw', 'aag', 'vld'
+    stage must be one: 'raw', 'agg', 'vld'
     """
 
     abbv_references = {
@@ -103,6 +107,8 @@ def create_prime_tablename(
         tablename = f"{tablename}_{phase}"
     if stage is None:
         return tablename
+    if stage not in {"raw", "agg", "vld"}:
+        raise prime_tablenameException(f"'{stage}' is not a valid stage")
 
     return f"{tablename}_{put_del}_{stage}" if put_del else f"{tablename}_{stage}"
 
