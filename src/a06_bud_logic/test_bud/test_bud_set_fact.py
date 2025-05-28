@@ -27,7 +27,7 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttr_1():
     # ESTABLISH
     x_conceptroot.factunits = {}
     assert not x_conceptroot.factunits
-    usa_week_way = sue_bud.make_l1_way("nation-state")
+    usa_week_way = sue_bud.make_l1_way("nation")
     usa_week_fact = factunit_shop(usa_week_way, usa_week_way, fopen=608, fnigh=610)
     x_conceptroot.factunits = {usa_week_fact.fcontext: usa_week_fact}
 

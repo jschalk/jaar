@@ -9,7 +9,7 @@ from src.a13_bud_listen_logic._utils.env_a13 import get_module_temp_dir
 
 def get_texas_way() -> WayStr:
     fisc_label = get_default_fisc_label()
-    nation_str = "nation-state"
+    nation_str = "nation"
     usa_str = "USA"
     texas_str = "Texas"
     return create_way_from_labels([fisc_label, nation_str, usa_str, texas_str])
@@ -28,7 +28,7 @@ def get_texas_hubunit() -> HubUnit:
 
 def get_dakota_way() -> WayStr:
     fisc_label = get_default_fisc_label()
-    nation_str = "nation-state"
+    nation_str = "nation"
     usa_str = "USA"
     dakota_str = "Dakota"
     return create_way_from_labels([fisc_label, nation_str, usa_str, dakota_str])

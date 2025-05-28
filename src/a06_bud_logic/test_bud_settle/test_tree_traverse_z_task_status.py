@@ -64,11 +64,11 @@ def test_BudUnit_settle_bud_SetsStatus_active_WhenFactModifies():
     assert sue_budunit._concept_dict.get(casa_way)._active is False
 
     # WHEN
-    states_str = "nation-state"
-    states_way = sue_budunit.make_l1_way(states_str)
+    nation_str = "nation"
+    nation_way = sue_budunit.make_l1_way(nation_str)
     usa_str = "USA"
-    usa_way = sue_budunit.make_way(states_way, usa_str)
-    sue_budunit.add_fact(fcontext=states_way, fbranch=usa_way)
+    usa_way = sue_budunit.make_way(nation_way, usa_str)
+    sue_budunit.add_fact(fcontext=nation_way, fbranch=usa_way)
 
     # THEN
     sue_budunit.settle_bud()
@@ -78,8 +78,8 @@ def test_BudUnit_settle_bud_SetsStatus_active_WhenFactModifies():
 
     # WHEN
     france_str = "France"
-    france_way = sue_budunit.make_way(states_way, france_str)
-    sue_budunit.add_fact(fcontext=states_way, fbranch=france_way)
+    france_way = sue_budunit.make_way(nation_way, france_str)
+    sue_budunit.add_fact(fcontext=nation_way, fbranch=france_way)
 
     # THEN
     sue_budunit.settle_bud()
@@ -95,12 +95,12 @@ def test_BudUnit_settle_bud_CorrectlySets_concept_dict():
     week_way = sue_budunit.make_l1_way(week_str)
     wed_str = "Wednesday"
     wed_way = sue_budunit.make_way(week_way, wed_str)
-    state_str = "nation-state"
-    state_way = sue_budunit.make_l1_way(state_str)
+    nation_str = "nation"
+    nation_way = sue_budunit.make_l1_way(nation_str)
     france_str = "France"
-    france_way = sue_budunit.make_way(state_way, france_str)
+    france_way = sue_budunit.make_way(nation_way, france_str)
     sue_budunit.add_fact(fcontext=week_way, fbranch=wed_way)
-    sue_budunit.add_fact(fcontext=state_way, fbranch=france_way)
+    sue_budunit.add_fact(fcontext=nation_way, fbranch=france_way)
 
     casa_str = "casa"
     casa_way = sue_budunit.make_l1_way(casa_str)
@@ -115,7 +115,7 @@ def test_BudUnit_settle_bud_CorrectlySets_concept_dict():
     assert len(sue_budunit._concept_dict) == 17
 
     usa_str = "USA"
-    usa_way = sue_budunit.make_way(state_way, usa_str)
+    usa_way = sue_budunit.make_way(nation_way, usa_str)
     oregon_str = "Oregon"
     oregon_way = sue_budunit.make_way(usa_way, oregon_str)
 
@@ -127,7 +127,7 @@ def test_BudUnit_settle_bud_CorrectlySets_concept_dict():
     usa._task = False
 
     wed_lu = reasonunit_shop(week_way, premises={wed.pbranch: wed})
-    sta_lu = reasonunit_shop(state_way, premises={usa.pbranch: usa})
+    sta_lu = reasonunit_shop(nation_way, premises={usa.pbranch: usa})
     wed_lh = reasonheir_shop(
         rcontext=week_way,
         premises={wed.pbranch: wed},
@@ -136,7 +136,7 @@ def test_BudUnit_settle_bud_CorrectlySets_concept_dict():
         _rcontext_concept_active_value=True,
     )
     sta_lh = reasonheir_shop(
-        rcontext=state_way,
+        rcontext=nation_way,
         premises={usa.pbranch: usa},
         _status=True,
         _task=False,
@@ -153,7 +153,7 @@ def test_BudUnit_settle_bud_CorrectlySets_concept_dict():
     }
 
     # WHEN
-    sue_budunit.add_fact(fcontext=state_way, fbranch=oregon_way)
+    sue_budunit.add_fact(fcontext=nation_way, fbranch=oregon_way)
     sue_budunit.settle_bud()
 
     # THEN
@@ -167,9 +167,9 @@ def test_BudUnit_settle_bud_CorrectlySets_concept_dict():
     assert casa_concept._active
     assert casa_concept.pledge
     # print(f"{casa_concept._reasonheirs=}")
-    x_reasonheir_state = casa_concept._reasonheirs[state_way]
-    print(f"  {x_reasonheir_state=}")
-    print(f"  {x_reasonheir_state._status=}\n")
+    nation_reasonheir = casa_concept._reasonheirs[nation_way]
+    print(f"  {nation_reasonheir=}")
+    print(f"  {nation_reasonheir._status=}\n")
     # assert casa_concept._reasonheirs == x1_reasonheirs
 
     assert len(casa_concept._reasonheirs) == len(x1_reasonheirs)
@@ -520,7 +520,7 @@ def test_BudUnit_settle_bud_CorrectlySetsConceptUnitsActiveWithEvery6WeeksReason
     nation_way = yao_budunit.make_l1_way(nation_str)
     yao_budunit.add_fact(fcontext=nation_way, fbranch=nation_way)
     print(
-        f"Nation-states set and also fact set: {ced_week_rcontext=} with {ced_week_popen=} and {ced_week_popen=}"
+        f"Nation set and also fact set: {ced_week_rcontext=} with {ced_week_popen=} and {ced_week_popen=}"
     )
     print(f"{yao_budunit.conceptroot.factunits=}")
     yao_budunit.settle_bud()
@@ -653,7 +653,7 @@ def test_BudUnit_settle_bud_CorrectlySets_sum_healerlink_share(graphics_bool):
     sue_budunit = get_budunit_with_4_levels_and_2reasons()
     sue_budunit.add_acctunit("Sue")
     sue_budunit.settle_bud()
-    nation_way = sue_budunit.make_l1_way("nation-state")
+    nation_way = sue_budunit.make_l1_way("nation")
     usa_way = sue_budunit.make_way(nation_way, "USA")
     oregon_way = sue_budunit.make_way(usa_way, "Oregon")
     sue_healerlink = healerlink_shop({"Sue"})
@@ -724,7 +724,7 @@ def test_BudUnit_settle_bud_CorrectlySets_keep_dict_v1(graphics_bool):
     sue_budunit = get_budunit_with_4_levels_and_2reasons()
     sue_budunit.add_acctunit("Sue")
     sue_budunit.settle_bud()
-    nation_way = sue_budunit.make_l1_way("nation-state")
+    nation_way = sue_budunit.make_l1_way("nation")
     usa_way = sue_budunit.make_way(nation_way, "USA")
     oregon_way = sue_budunit.make_way(usa_way, "Oregon")
     sue_healerlink = healerlink_shop({"Sue"})
@@ -797,7 +797,7 @@ def test_BudUnit_settle_bud_CorrectlySets_healers_dict():
     assert sue_budunit._healers_dict == {}
 
     # ESTABLISH
-    nation_way = sue_budunit.make_l1_way("nation-state")
+    nation_way = sue_budunit.make_l1_way("nation")
     usa_way = sue_budunit.make_way(nation_way, "USA")
     oregon_way = sue_budunit.make_way(usa_way, "Oregon")
     sue_healerlink = healerlink_shop({sue_str})
@@ -838,7 +838,7 @@ def test_BudUnit_settle_bud_CorrectlySets_keeps_buildable_True():
     assert sue_budunit._keeps_buildable
 
     # ESTABLISH
-    nation_way = sue_budunit.make_l1_way("nation-state")
+    nation_way = sue_budunit.make_l1_way("nation")
     usa_way = sue_budunit.make_way(nation_way, "USA")
     oregon_way = sue_budunit.make_way(usa_way, "Oregon")
     sue_healerlink = healerlink_shop({sue_str})
@@ -873,7 +873,7 @@ def test_BudUnit_settle_bud_CorrectlySets_keeps_buildable_False():
     assert sue_budunit._keeps_buildable
 
     # ESTABLISH
-    nation_way = sue_budunit.make_l1_way("nation-state")
+    nation_way = sue_budunit.make_l1_way("nation")
     usa_way = sue_budunit.make_way(nation_way, "USA")
     oregon_way = sue_budunit.make_way(usa_way, "Oregon")
     bend_str = "Be/nd"

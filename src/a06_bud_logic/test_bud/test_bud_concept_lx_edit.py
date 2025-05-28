@@ -202,7 +202,7 @@ def test_bud_edit_concept_label_ModifiesConceptReasonUnitsScenario1():
     old_wednesday_way = sue_bud.make_way(old_weekday_way, wednesday_str)
     casa_concept = sue_bud.get_concept_obj(sue_bud.make_l1_way("casa"))
     # casa_wk_reason = reasonunit_shop(weekday, premises={wed_premise.pbranch: wed_premise})
-    # nation_reason = reasonunit_shop(nationstate, premises={usa_premise.pbranch: usa_premise})
+    # nation_reason = reasonunit_shop(nation, premises={usa_premise.pbranch: usa_premise})
     assert len(casa_concept.reasonunits) == 2
     assert casa_concept.reasonunits.get(old_weekday_way) is not None
     wednesday_concept = sue_bud.get_concept_obj(old_weekday_way)

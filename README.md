@@ -13,7 +13,7 @@ JAAR Version 0.0.0
 
 `jaar` is a python library for listening to the climate of a community. Individual 
 positions are aggregated by a listener into a coherant agenda that can include pledges 
-to do and pledges of states of existence. Listening and acting on it.
+to do and pledges of  of existence. Listening and acting on it.
 
 A agents's agenda in the community is built by the the massed intreprtation of
 1. Acct agents agendas 

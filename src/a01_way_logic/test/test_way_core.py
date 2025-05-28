@@ -327,7 +327,7 @@ def test_way_find_replace_way_key_dict_ReturnsCorrectDict_Scenario1():
 def test_way_get_ancestor_ways_ReturnsObj_Scenario0_default_bridge():
     # ESTABLISH
     x_s = default_bridge_if_None()
-    nation_str = "nation-state"
+    nation_str = "nation"
     nation_way = f"{root_way()}{nation_str}{x_s}"
     usa_str = "USA"
     usa_way = f"{nation_way}{usa_str}{x_s}"
@@ -359,7 +359,7 @@ def test_way_get_ancestor_ways_ReturnsObj_Scenario1_nondefault_bridge():
     # ESTABLISH
     x_s = "/"
     root_fisc_way = f"{x_s}accord23{x_s}"
-    nation_str = "nation-state"
+    nation_str = "nation"
     nation_way = f"{root_fisc_way}{nation_str}{x_s}"
     usa_str = "USA"
     usa_way = f"{nation_way}{usa_str}{x_s}"
@@ -385,7 +385,7 @@ def test_way_get_ancestor_ways_ReturnsObj_Scenario1_nondefault_bridge():
 def test_way_get_forefather_ways_ReturnsAncestorWayStrsWithoutClean():
     # ESTABLISH
     x_s = default_bridge_if_None()
-    nation_str = "nation-state"
+    nation_str = "nation"
     nation_way = f"{root_way()}{nation_str}{x_s}"
     usa_str = "USA"
     usa_way = f"{nation_way}{usa_str}{x_s}"

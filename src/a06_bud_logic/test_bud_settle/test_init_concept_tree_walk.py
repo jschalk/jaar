@@ -58,10 +58,10 @@ def test_BudUnit_set_concept_dict_Clears_gogo_calc_stop_calc():
     sue_bud = get_budunit_with_4_levels()
     root_way = to_way(sue_bud.fisc_label)
     root_concept = sue_bud.get_concept_obj(root_way)
-    states_str = "nation-state"
-    states_way = sue_bud.make_l1_way(states_str)
+    nation_str = "nation"
+    nation_way = sue_bud.make_l1_way(nation_str)
     usa_str = "USA"
-    usa_way = sue_bud.make_way(states_way, usa_str)
+    usa_way = sue_bud.make_way(nation_way, usa_str)
     texas_str = "Texas"
     texas_way = sue_bud.make_way(usa_way, texas_str)
     texas_concept = sue_bud.get_concept_obj(texas_way)
@@ -88,17 +88,17 @@ def test_BudUnit_set_concept_dict_Clears_gogo_calc_stop_calc():
 def test_BudUnit_set_concept_dict_Sets_reason_rcontexts():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    states_str = "nation-state"
-    states_way = sue_bud.make_l1_way(states_str)
+    nation_str = "nation"
+    nation_way = sue_bud.make_l1_way(nation_str)
     polis_str = "polis"
     polis_way = sue_bud.make_l1_way(polis_str)
     sue_bud.add_concept(polis_way)
-    sue_bud.add_concept(states_way)
+    sue_bud.add_concept(nation_way)
     sue_bud.edit_concept_attr(
-        states_way, reason_rcontext=polis_way, reason_premise=polis_way
+        nation_way, reason_rcontext=polis_way, reason_premise=polis_way
     )
-    states_concept = sue_bud.get_concept_obj(states_way)
-    assert states_concept.rcontext_reasonunit_exists(polis_way)
+    nation_concept = sue_bud.get_concept_obj(nation_way)
+    assert nation_concept.rcontext_reasonunit_exists(polis_way)
     assert sue_bud._reason_rcontexts == set()
 
     # WHEN
@@ -150,10 +150,10 @@ def test_get_sorted_concept_list_ReturnsObj():
     thu_way = sue_bud.make_way(week_way, "Thursday")
     fri_way = sue_bud.make_way(week_way, "Friday")
     sat_way = sue_bud.make_way(week_way, "Saturday")
-    states_way = sue_bud.make_l1_way("nation-state")
-    usa_way = sue_bud.make_way(states_way, "USA")
-    france_way = sue_bud.make_way(states_way, "France")
-    brazil_way = sue_bud.make_way(states_way, "Brazil")
+    nation_way = sue_bud.make_l1_way("nation")
+    usa_way = sue_bud.make_way(nation_way, "USA")
+    france_way = sue_bud.make_way(nation_way, "France")
+    brazil_way = sue_bud.make_way(nation_way, "Brazil")
     texas_way = sue_bud.make_way(usa_way, "Texas")
     oregon_way = sue_bud.make_way(usa_way, "Oregon")
     sue_bud._set_concept_dict()

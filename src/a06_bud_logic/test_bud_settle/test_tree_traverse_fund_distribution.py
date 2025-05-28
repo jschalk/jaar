@@ -360,7 +360,7 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
     assert sue_bud.conceptroot._awardlines == {}
     sue_str = "Sue"
     week_str = "weekdays"
-    nation_str = "nation-state"
+    nation_str = "nation"
     sue_awardlink = awardlink_shop(awardee_title=sue_str)
     sue_bud.add_acctunit(acct_name=sue_str)
     sue_bud.conceptroot.set_awardlink(awardlink=sue_awardlink)

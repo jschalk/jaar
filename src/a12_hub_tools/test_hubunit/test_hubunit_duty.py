@@ -17,7 +17,7 @@ from os.path import exists as os_path_exists
 def test_HubUnit_create_keep_dir_if_missing_CreatesDirectory(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    nation_str = "nation-state"
+    nation_str = "nation"
     nation_way = create_way(root_label(), nation_str)
     usa_str = "USA"
     usa_way = create_way(nation_way, usa_str)
@@ -37,7 +37,7 @@ def test_HubUnit_create_keep_dir_if_missing_CreatesDirectory(env_dir_setup_clean
 def test_HubUnit_save_duty_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    nation_str = "nation-state"
+    nation_str = "nation"
     nation_way = create_way(root_label(), nation_str)
     usa_str = "USA"
     usa_way = create_way(nation_way, usa_str)
@@ -60,7 +60,7 @@ def test_HubUnit_save_duty_bud_CorrectlySavesFile(env_dir_setup_cleanup):
 def test_HubUnit_duty_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    nation_str = "nation-state"
+    nation_str = "nation"
     nation_way = create_way(root_label(), nation_str)
     usa_str = "USA"
     usa_way = create_way(nation_way, usa_str)
@@ -83,7 +83,7 @@ def test_HubUnit_duty_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
 def test_HubUnit_get_duty_bud_PopensFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    nation_str = "nation-state"
+    nation_str = "nation"
     nation_way = create_way(root_label(), nation_str)
     usa_str = "USA"
     usa_way = create_way(nation_way, usa_str)
@@ -120,7 +120,7 @@ def test_HubUnit_delete_duty_file_DeletesBudFile(env_dir_setup_cleanup):
 def test_HubUnit_save_plan_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    nation_str = "nation-state"
+    nation_str = "nation"
     nation_way = create_way(root_label(), nation_str)
     usa_str = "USA"
     usa_way = create_way(nation_way, usa_str)
@@ -143,7 +143,7 @@ def test_HubUnit_save_plan_bud_CorrectlySavesFile(env_dir_setup_cleanup):
 def test_HubUnit_plan_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    nation_str = "nation-state"
+    nation_str = "nation"
     nation_way = create_way(root_label(), nation_str)
     usa_str = "USA"
     usa_way = create_way(nation_way, usa_str)
@@ -166,7 +166,7 @@ def test_HubUnit_plan_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
 def test_HubUnit_get_plan_bud_PopensFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    nation_str = "nation-state"
+    nation_str = "nation"
     nation_way = create_way(root_label(), nation_str)
     usa_str = "USA"
     usa_way = create_way(nation_way, usa_str)
@@ -186,7 +186,7 @@ def test_HubUnit_get_plan_bud_PopensFile(env_dir_setup_cleanup):
 def test_HubUnit_get_plan_bud_ReturnsNoneIfFileDoesNotExist(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    nation_str = "nation-state"
+    nation_str = "nation"
     nation_way = create_way(root_label(), nation_str)
     usa_str = "USA"
     usa_way = create_way(nation_way, usa_str)

@@ -58,7 +58,7 @@ def test_HubUnit_rj_perspective_bud_ReturnsBudWith_owner_nameSetToHubUnit_owner_
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    nation_str = "nation-state"
+    nation_str = "nation"
     nation_way = create_way("accord23", nation_str)
     iowa_way = create_way(nation_way, "Iowa")
     a23_str = "accord23"

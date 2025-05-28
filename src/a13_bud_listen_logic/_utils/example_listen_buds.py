@@ -41,21 +41,21 @@ def get_budunit_with_4_levels() -> BudUnit:
     sue_bud.set_concept(concept_grandkidF, week_way)
     sue_bud.set_concept(concept_grandkidA, week_way)
 
-    states_str = "nation-state"
-    states_way = sue_bud.make_l1_way(states_str)
-    concept_kid_states = conceptunit_shop(states_str, mass=30)
-    sue_bud.set_l1_concept(concept_kid_states)
+    nation_str = "nation"
+    nation_way = sue_bud.make_l1_way(nation_str)
+    concept_kid_nation = conceptunit_shop(nation_str, mass=30)
+    sue_bud.set_l1_concept(concept_kid_nation)
 
     usa_str = "USA"
-    usa_way = sue_bud.make_way(states_way, usa_str)
+    usa_way = sue_bud.make_way(nation_way, usa_str)
     france_str = "France"
     brazil_str = "Brazil"
     concept_grandkid_usa = conceptunit_shop(usa_str, mass=50)
     concept_grandkid_france = conceptunit_shop(france_str, mass=50)
     concept_grandkid_brazil = conceptunit_shop(brazil_str, mass=50)
-    sue_bud.set_concept(concept_grandkid_france, states_way)
-    sue_bud.set_concept(concept_grandkid_brazil, states_way)
-    sue_bud.set_concept(concept_grandkid_usa, states_way)
+    sue_bud.set_concept(concept_grandkid_france, nation_way)
+    sue_bud.set_concept(concept_grandkid_brazil, nation_way)
+    sue_bud.set_concept(concept_grandkid_usa, nation_way)
 
     texas_str = "Texas"
     oregon_str = "Oregon"
@@ -117,21 +117,21 @@ def get_fund_breakdown_bud() -> BudUnit:
     # sue_bud.set_concept(concept_grandkidF, week_way)
     # sue_bud.set_concept(concept_grandkidA, week_way)
 
-    # states_str = "nation-state"
-    # states_way = sue_bud.make_l1_way(states_str)
-    # concept_kid_states = conceptunit_shop(states_str, mass=30)
-    # sue_bud.set_l1_concept(concept_kid_states)
+    # nation_str = "nation"
+    # nation_way = sue_bud.make_l1_way(nation_str)
+    # concept_kid_nation = conceptunit_shop(nation_str, mass=30)
+    # sue_bud.set_l1_concept(concept_kid_nation)
 
     # usa_str = "USA"
-    # usa_way = sue_bud.make_way(states_way, usa_str)
+    # usa_way = sue_bud.make_way(nation_way, usa_str)
     # france_str = "France"
     # brazil_str = "Brazil"
     # concept_grandkid_usa = conceptunit_shop(usa_str, mass=50)
     # concept_grandkid_france = conceptunit_shop(france_str, mass=50)
     # concept_grandkid_brazil = conceptunit_shop(brazil_str, mass=50)
-    # sue_bud.set_concept(concept_grandkid_france, states_way)
-    # sue_bud.set_concept(concept_grandkid_brazil, states_way)
-    # sue_bud.set_concept(concept_grandkid_usa, states_way)
+    # sue_bud.set_concept(concept_grandkid_france, nation_way)
+    # sue_bud.set_concept(concept_grandkid_brazil, nation_way)
+    # sue_bud.set_concept(concept_grandkid_usa, nation_way)
 
     # texas_str = "Texas"
     # oregon_str = "Oregon"
