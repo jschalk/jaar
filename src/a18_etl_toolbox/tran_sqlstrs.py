@@ -88,6 +88,7 @@ def create_prime_tablename(
         "BUDACCT": "bud_acctunit",
         "BUDAWAR": "bud_concept_awardlink",
         "BUDFACT": "bud_concept_factunit",
+        "BUDGROU": "bud_groupunit",
         "BUDHEAL": "bud_concept_healerlink",
         "BUDPREM": "bud_concept_reason_premiseunit",
         "BUDREAS": "bud_concept_reasonunit",

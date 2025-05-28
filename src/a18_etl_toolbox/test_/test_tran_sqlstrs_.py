@@ -13,6 +13,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
+    bud_groupunit_str,
     bud_conceptunit_str,
     bud_concept_awardlink_str,
     bud_concept_reasonunit_str,
@@ -71,6 +72,7 @@ def test_create_prime_tablename_ReturnsObj():
     budunit_dimen = budunit_str()
     budacct_dimen = bud_acctunit_str()
     budmemb_dimen = bud_acct_membership_str()
+    budgrou_dimen = bud_groupunit_str()
     budconc_dimen = bud_conceptunit_str()
     budawar_dimen = bud_concept_awardlink_str()
     budreas_dimen = bud_concept_reasonunit_str()
@@ -126,6 +128,8 @@ def test_create_prime_tablename_ReturnsObj():
     pidcore_s_raw_table = create_prime_tablename("pidcore", "s", raw_str)
     pidcore_s_agg_table = create_prime_tablename("pidcore", "s", agg_str)
     budacct_job_table = create_prime_tablename("budacct", "job", None)
+    x_budacct_raw = create_prime_tablename("budacct", "k", raw_str)
+    budgrou_job_table = create_prime_tablename("budgrou", "job", None)
 
     # THEN
     assert budunit_s_agg_table == f"{budunit_dimen}_s_put_agg"
@@ -156,6 +160,8 @@ def test_create_prime_tablename_ReturnsObj():
     assert pidcore_s_raw_table == f"{pidcore_dimen}_s_raw"
     assert pidcore_s_agg_table == f"{pidcore_dimen}_s_agg"
     assert budacct_job_table == f"{budacct_dimen}_job"
+    assert budgrou_job_table == f"{budgrou_dimen}_job"
+    assert x_budacct_raw == "bud_acctunit_raw"
 
 
 def test_create_all_idea_tables_CreatesFiscRawTables():

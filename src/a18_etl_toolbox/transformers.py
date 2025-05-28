@@ -39,6 +39,7 @@ from src.a12_hub_tools.hub_tool import (
     collect_owner_event_dir_sets,
     get_owners_downhill_event_ints,
     open_bud_file,
+    open_job_file,
 )
 from src.a15_fisc_logic.fisc import (
     get_from_default_path as fiscunit_get_from_default_path,
@@ -107,7 +108,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
 )
 from src.a18_etl_toolbox.db_obj_tool import (
     get_fisc_dict_from_voice_tables,
-    etl_fisc_jobs_json_to_db,
+    insert_job_obj,
 )
 from src.a18_etl_toolbox.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from pandas import (
@@ -887,4 +888,10 @@ def etl_fisc_guts_to_fisc_jobs(fisc_mstr_dir: str):
 
 def etl_fisc_job_jsons_to_job_tables(cursor: sqlite3_Cursor, fisc_mstr_dir: str):
     create_job_tables(cursor)
-    etl_fisc_jobs_json_to_db(cursor, fisc_mstr_dir)
+    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
+    for fisc_label in get_level1_dirs(fiscs_dir):
+        fisc_path = create_path(fiscs_dir, fisc_label)
+        owners_dir = create_path(fisc_path, "owners")
+        for owner_name in get_level1_dirs(owners_dir):
+            job_obj = open_job_file(fisc_mstr_dir, fisc_label, owner_name)
+            insert_job_obj(cursor, job_obj)

@@ -1,4 +1,3 @@
-from src.a00_data_toolbox.file_toolbox import create_path, get_level1_dirs
 from src.a00_data_toolbox.db_toolbox import sqlite_obj_str
 from src.a00_data_toolbox.dict_toolbox import set_in_nested_dict
 from src.a01_way_logic.way import OwnerName, WayStr, AcctName, GroupTitle
@@ -9,7 +8,6 @@ from src.a04_reason_logic.reason_concept import FactHeir, PremiseUnit, ReasonHei
 from src.a04_reason_logic.reason_labor import LaborHeir
 from src.a05_concept_logic.concept import HealerLink, ConceptUnit
 from src.a06_bud_logic.bud import BudUnit
-from src.a12_hub_tools.hub_tool import open_job_file
 from src.a18_etl_toolbox.tran_sqlstrs import get_fisc_voice_select1_sqlstrs
 from sqlite3 import Cursor as sqlite3_Cursor
 from copy import deepcopy as copy_deepcopy
@@ -630,7 +628,7 @@ def insert_job_budreas(
     cursor.execute(insert_sqlstr)
 
 
-def insert_job_budlabor(
+def insert_job_budlabo(
     cursor: sqlite3_Cursor,
     x_objkeysholder: ObjKeysHolder,
     x_laborheir: LaborHeir,
@@ -673,7 +671,7 @@ def insert_job_obj(cursor: sqlite3_Cursor, job_bud: BudUnit):
         laborheir = x_concept._laborheir
         insert_job_budconc(cursor, x_objkeysholder, x_concept)
         insert_job_budheal(cursor, x_objkeysholder, healerlink)
-        insert_job_budlabor(cursor, x_objkeysholder, laborheir)
+        insert_job_budlabo(cursor, x_objkeysholder, laborheir)
         for x_awardheir in x_concept._awardheirs.values():
             insert_job_budawar(cursor, x_objkeysholder, x_awardheir)
         for rcontext, reasonheir in x_concept._reasonheirs.items():
@@ -693,13 +691,3 @@ def insert_job_obj(cursor: sqlite3_Cursor, job_bud: BudUnit):
     for x_factheir in job_bud.conceptroot._factheirs.values():
         x_objkeysholder.fact_way = job_bud.conceptroot.get_concept_way()
         insert_job_budfact(cursor, x_objkeysholder, x_factheir)
-
-
-def etl_fisc_jobs_json_to_db(conn_or_cursor: sqlite3_Cursor, fisc_mstr_dir: str):
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_label in get_level1_dirs(fiscs_dir):
-        fisc_path = create_path(fiscs_dir, fisc_label)
-        owners_dir = create_path(fisc_path, "owners")
-        for owner_name in get_level1_dirs(owners_dir):
-            job_obj = open_job_file(fisc_mstr_dir, fisc_label, owner_name)
-            insert_job_obj(conn_or_cursor, job_obj)

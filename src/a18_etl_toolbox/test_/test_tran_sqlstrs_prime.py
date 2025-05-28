@@ -118,68 +118,6 @@ def test_ALL_DIMEN_ABBV7_has_all_dimens():
     assert len(ALL_DIMEN_ABBV7) == len(get_idea_config_dict())
 
 
-def test_create_prime_tablename_ReturnsObj():
-    # ESTABLISH
-    budunit_dimen = budunit_str()
-    budacct_dimen = bud_acctunit_str()
-    budmemb_dimen = bud_acct_membership_str()
-    budconc_dimen = bud_conceptunit_str()
-    budawar_dimen = bud_concept_awardlink_str()
-    budreas_dimen = bud_concept_reasonunit_str()
-    budprem_dimen = bud_concept_reason_premiseunit_str()
-    budlabo_dimen = bud_concept_laborlink_str()
-    budheal_dimen = bud_concept_healerlink_str()
-    budfact_dimen = bud_concept_factunit_str()
-    fisunit_dimen = fiscunit_str()
-    fiscash_dimen = fisc_cashbook_str()
-    fisdeal_dimen = fisc_dealunit_str()
-    fishour_dimen = fisc_timeline_hour_str()
-    fismont_dimen = fisc_timeline_month_str()
-    fisweek_dimen = fisc_timeline_weekday_str()
-    fisoffi_dimen = fisc_timeoffi_str()
-    pidname_dimen = pidgin_name_str()
-    pidlabe_dimen = pidgin_label_str()
-    pidwayy_dimen = pidgin_way_str()
-    pidtitl_dimen = pidgin_title_str()
-    raw_str = "raw"
-    agg_str = "agg"
-    put_str = "put"
-    del_str = "del"
-
-    # WHEN / THEN
-    assert prime_tbl("budunit", "s", agg_str, put_str) == f"{budunit_dimen}_s_put_agg"
-    assert prime_tbl("budacct", "s", agg_str, put_str) == f"{budacct_dimen}_s_put_agg"
-    assert prime_tbl("budmemb", "s", agg_str, put_str) == f"{budmemb_dimen}_s_put_agg"
-    assert prime_tbl("budconc", "s", agg_str, put_str) == f"{budconc_dimen}_s_put_agg"
-    assert prime_tbl("budawar", "s", agg_str, put_str) == f"{budawar_dimen}_s_put_agg"
-    assert prime_tbl("budreas", "s", agg_str, put_str) == f"{budreas_dimen}_s_put_agg"
-    assert prime_tbl("budprem", "s", agg_str, put_str) == f"{budprem_dimen}_s_put_agg"
-    assert prime_tbl("BUDLABO", "s", agg_str, put_str) == f"{budlabo_dimen}_s_put_agg"
-    assert prime_tbl("budheal", "s", agg_str, put_str) == f"{budheal_dimen}_s_put_agg"
-    assert prime_tbl("budfact", "s", agg_str, put_str) == f"{budfact_dimen}_s_put_agg"
-    assert prime_tbl("budfact", "s", agg_str, del_str) == f"{budfact_dimen}_s_del_agg"
-    assert prime_tbl("fisunit", "s", agg_str) == f"{fisunit_dimen}_s_agg"
-    assert prime_tbl("fiscash", "s", agg_str) == f"{fiscash_dimen}_s_agg"
-    assert prime_tbl("fisdeal", "s", agg_str) == f"{fisdeal_dimen}_s_agg"
-    assert prime_tbl("fishour", "s", agg_str) == f"{fishour_dimen}_s_agg"
-    assert prime_tbl("fismont", "s", agg_str) == f"{fismont_dimen}_s_agg"
-    assert prime_tbl("fisweek", "s", agg_str) == f"{fisweek_dimen}_s_agg"
-    assert prime_tbl("fisoffi", "s", agg_str) == f"{fisoffi_dimen}_s_agg"
-    assert prime_tbl("pidname", "s", agg_str) == f"{pidname_dimen}_s_agg"
-    assert prime_tbl("pidlabe", "s", agg_str) == f"{pidlabe_dimen}_s_agg"
-    assert prime_tbl("pidwayy", "s", agg_str) == f"{pidwayy_dimen}_s_agg"
-    assert prime_tbl("pidtitl", "s", agg_str) == f"{pidtitl_dimen}_s_agg"
-    assert prime_tbl("pidtitl", "v", agg_str) == f"{pidtitl_dimen}_v_agg"
-    assert prime_tbl("pidtitl", "s", raw_str) == f"{pidtitl_dimen}_s_raw"
-    assert prime_tbl("pidtitl", "k", raw_str) == f"{pidtitl_dimen}_raw"
-    assert prime_tbl("bud_acctunit", "k", raw_str) == "bud_acctunit_raw"
-
-
-def create_agg_table_sqlstr(abbv7, sqlite_types) -> str:
-    pass
-    #  prime_tbl(abbv7, "s", "agg")
-
-
 def get_all_dimen_columns_set(x_dimen: str) -> set[str]:
     if x_dimen == pidgin_core_str():
         return {

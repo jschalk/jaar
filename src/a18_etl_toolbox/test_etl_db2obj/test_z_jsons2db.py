@@ -16,23 +16,8 @@ from src.a04_reason_logic.reason_concept import (
 )
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_bud_logic.bud import budunit_shop
-from src.a06_bud_logic._utils.str_a06 import (
-    budunit_str,
-    bud_acctunit_str,
-    bud_acct_membership_str,
-    bud_conceptunit_str,
-    bud_concept_awardlink_str,
-    bud_concept_reasonunit_str,
-    bud_concept_reason_premiseunit_str,
-    bud_concept_laborlink_str,
-    bud_concept_healerlink_str,
-    bud_concept_factunit_str,
-    bud_groupunit_str,
-)
-from src.a12_hub_tools.hub_tool import save_job_file
 from src.a18_etl_toolbox.tran_sqlstrs import create_job_tables
 from src.a18_etl_toolbox.db_obj_tool import (
-    etl_fisc_jobs_json_to_db,
     ObjKeysHolder,
     insert_job_budmemb,
     insert_job_budacct,
@@ -42,15 +27,12 @@ from src.a18_etl_toolbox.db_obj_tool import (
     insert_job_budheal,
     insert_job_budprem,
     insert_job_budreas,
-    insert_job_budlabor,
+    insert_job_budlabo,
     insert_job_budconc,
     insert_job_budunit,
     insert_job_obj,
 )
-from src.a20_lobby_db_toolbox._utils.env_a20 import (
-    env_dir_setup_cleanup,
-    get_module_temp_dir,
-)
+from src.a20_lobby_db_toolbox._utils.env_a20 import env_dir_setup_cleanup
 from sqlite3 import connect as sqlite3_connect
 
 
@@ -812,7 +794,7 @@ def test_insert_job_budheal_CreatesTableRowsFor_budheal_job():
         assert rows == expected_data
 
 
-def test_insert_job_budlabor_CreatesTableRowsFor_budlabor_job():
+def test_insert_job_budlabo_CreatesTableRowsFor_budlabo_job():
     # sourcery skip: extract-method
     # ESTABLISH
     # x_args = get_bud_calc_dimen_args("bud_concept_laborlink")
@@ -845,7 +827,7 @@ def test_insert_job_budlabor_CreatesTableRowsFor_budlabor_job():
         x_objkeysholder = ObjKeysHolder(x_fisc_label, x_owner_name, x_way)
 
         # WHEN
-        insert_job_budlabor(cursor, x_objkeysholder, x_laborheir)
+        insert_job_budlabo(cursor, x_objkeysholder, x_laborheir)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 2
@@ -907,7 +889,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         budheal_job_table = "bud_concept_healerlink_job"
         budprem_job_table = "bud_concept_reason_premiseunit_job"
         budreas_job_table = "bud_concept_reasonunit_job"
-        budlabor_job_table = "bud_concept_laborlink_job"
+        budlabo_job_table = "bud_concept_laborlink_job"
         budconc_job_table = "bud_conceptunit_job"
         budunit_job_table = "budunit_job"
         assert get_row_count(cursor, budunit_job_table) == 0
@@ -920,7 +902,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         assert get_row_count(cursor, budheal_job_table) == 0
         assert get_row_count(cursor, budreas_job_table) == 0
         assert get_row_count(cursor, budprem_job_table) == 0
-        assert get_row_count(cursor, budlabor_job_table) == 0
+        assert get_row_count(cursor, budlabo_job_table) == 0
 
         # WHEN
         insert_job_obj(cursor, sue_bud)
@@ -936,82 +918,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         assert get_row_count(cursor, budheal_job_table) == 1
         assert get_row_count(cursor, budreas_job_table) == 1
         assert get_row_count(cursor, budprem_job_table) == 1
-        assert get_row_count(cursor, budlabor_job_table) == 1
-
-
-def test_etl_fisc_jobs_json_to_db_SetsDB_Scenario0(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    m23_fisc_mstr_dir = get_module_temp_dir()
-    m23_str = "music23"
-    a23_str = "accord23"
-    sue_str = "Sue"
-    bob_str = "Bob"
-    run_str = ";run"
-    sue_bud = budunit_shop(sue_str, a23_str)
-    sue_bud.add_acctunit(sue_str)
-    sue_bud.add_acctunit(bob_str)
-    sue_bud.get_acct(bob_str).add_membership(run_str)
-    casa_way = sue_bud.make_l1_way("casa")
-    status_way = sue_bud.make_l1_way("status")
-    clean_way = sue_bud.make_way(status_way, "clean")
-    dirty_way = sue_bud.make_way(status_way, "dirty")
-    sue_bud.add_concept(casa_way)
-    sue_bud.add_concept(clean_way)
-    sue_bud.add_concept(dirty_way)
-    sue_bud.edit_concept_attr(
-        casa_way, reason_rcontext=status_way, reason_premise=dirty_way
-    )
-    sue_bud.edit_concept_attr(casa_way, awardlink=awardlink_shop(run_str))
-    sue_bud.edit_concept_attr(casa_way, healerlink=healerlink_shop({bob_str}))
-    sue_bud.edit_concept_attr(casa_way, laborunit=laborunit_shop({sue_str}))
-    sue_bud.add_fact(status_way, clean_way)
-    print(f"{sue_bud.get_concept_obj(casa_way).laborunit=}")
-    print(f"{sue_bud.get_concept_obj(casa_way).get_dict()=}")
-    save_job_file(m23_fisc_mstr_dir, sue_bud)
-
-    with sqlite3_connect(":memory:") as conn:
-        cursor = conn.cursor()
-        create_job_tables(cursor)
-        budmemb_job_table = f"{bud_acct_membership_str()}_job"
-        budacct_job_table = f"{bud_acctunit_str()}_job"
-        budgrou_job_table = f"{bud_groupunit_str()}_job"
-        budawar_job_table = f"{bud_concept_awardlink_str()}_job"
-        budfact_job_table = f"{bud_concept_factunit_str()}_job"
-        budheal_job_table = f"{bud_concept_healerlink_str()}_job"
-        budprem_job_table = f"{bud_concept_reason_premiseunit_str()}_job"
-        budreas_job_table = f"{bud_concept_reasonunit_str()}_job"
-        budlabor_job_table = f"{bud_concept_laborlink_str()}_job"
-        budconc_job_table = f"{bud_conceptunit_str()}_job"
-        budunit_job_table = f"{budunit_str()}_job"
-        assert get_row_count(cursor, budunit_job_table) == 0
-        assert get_row_count(cursor, budconc_job_table) == 0
-        assert get_row_count(cursor, budacct_job_table) == 0
-        assert get_row_count(cursor, budmemb_job_table) == 0
-        assert get_row_count(cursor, budgrou_job_table) == 0
-        assert get_row_count(cursor, budawar_job_table) == 0
-        assert get_row_count(cursor, budfact_job_table) == 0
-        assert get_row_count(cursor, budheal_job_table) == 0
-        assert get_row_count(cursor, budreas_job_table) == 0
-        assert get_row_count(cursor, budprem_job_table) == 0
-        assert get_row_count(cursor, budlabor_job_table) == 0
-
-        # WHEN
-        etl_fisc_jobs_json_to_db(cursor, m23_fisc_mstr_dir)
-
-        # THEN
-        assert get_row_count(cursor, budunit_job_table) == 1
-        assert get_row_count(cursor, budconc_job_table) == 5
-        assert get_row_count(cursor, budacct_job_table) == 2
-        assert get_row_count(cursor, budmemb_job_table) == 3
-        assert get_row_count(cursor, budgrou_job_table) == 3
-        assert get_row_count(cursor, budawar_job_table) == 1
-        assert get_row_count(cursor, budfact_job_table) == 1
-        assert get_row_count(cursor, budheal_job_table) == 1
-        assert get_row_count(cursor, budreas_job_table) == 1
-        assert get_row_count(cursor, budprem_job_table) == 1
-        assert get_row_count(cursor, budlabor_job_table) == 1
+        assert get_row_count(cursor, budlabo_job_table) == 1
 
 
 # def test_etl_fiscs_jobs_json_to_db_SetsDB_Scenario0_TwoBudsInDifferentFiscUnits(
