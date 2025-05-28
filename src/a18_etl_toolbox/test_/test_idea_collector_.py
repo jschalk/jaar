@@ -8,7 +8,7 @@ from src.a18_etl_toolbox.idea_collector import (
     get_all_idea_dataframes,
     IdeaFileRef,
 )
-from src.a18_etl_toolbox._test_util.env_a18 import (
+from src.a18_etl_toolbox._test_util.a18_env import (
     get_module_temp_dir,
     env_dir_setup_cleanup,
 )

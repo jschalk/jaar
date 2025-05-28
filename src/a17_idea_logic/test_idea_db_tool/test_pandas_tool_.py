@@ -23,7 +23,7 @@ from src.a17_idea_logic.idea_db_tool import (
     get_relevant_columns_dataframe,
     get_brick_raw_grouping_with_all_values_equal_df,
 )
-from src.a17_idea_logic._test_util.env_a17 import (
+from src.a17_idea_logic._test_util.a17_env import (
     env_dir_setup_cleanup,
     idea_examples_dir,
 )

@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a17_idea_logic._test_util.env_a17 import (
+from src.a17_idea_logic._test_util.a17_env import (
     src_module_dir,
     idea_examples_dir,
     get_module_temp_dir,

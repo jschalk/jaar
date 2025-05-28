@@ -19,7 +19,7 @@ from src.a07_calendar_logic._test_util.a07_str import (
     creg_str,
     five_str,
 )
-from src.a07_calendar_logic._test_util.env_a07 import get_module_examples_dir
+from src.a07_calendar_logic._test_util.a07_env import get_module_examples_dir
 from datetime import datetime
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 

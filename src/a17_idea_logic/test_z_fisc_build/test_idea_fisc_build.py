@@ -6,7 +6,7 @@ from src.a07_calendar_logic.chrono import (
 )
 from src.a15_fisc_logic.fisc import fiscunit_shop
 from src.a17_idea_logic.idea import fisc_build_from_df
-from src.a17_idea_logic._test_util.env_a17 import (
+from src.a17_idea_logic._test_util.a17_env import (
     idea_fiscs_dir,
     env_dir_setup_cleanup,
 )

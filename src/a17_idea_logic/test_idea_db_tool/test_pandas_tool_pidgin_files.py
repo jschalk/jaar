@@ -3,7 +3,7 @@ from src.a01_way_logic.way import create_way, to_way
 from src.a06_bud_logic._test_util.a06_str import acct_name_str, rcontext_str
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
 from src.a16_pidgin_logic._test_util.a16_str import pidgin_filename
-from src.a16_pidgin_logic._test_util.env_a16 import (
+from src.a16_pidgin_logic._test_util.a16_env import (
     env_dir_setup_cleanup,
     get_example_face_dir,
 )

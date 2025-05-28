@@ -7,7 +7,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     gogo_want_str,
 )
 from src.a17_idea_logic.idea_config import get_idea_sqlite_types
-from src.a17_idea_logic._test_util.env_a17 import env_dir_setup_cleanup
+from src.a17_idea_logic._test_util.a17_env import env_dir_setup_cleanup
 from src.a17_idea_logic.idea_db_tool import (
     create_idea_table_from_csv,
     insert_idea_csv,

@@ -5,7 +5,7 @@ from src.a18_etl_toolbox.tran_path import (
     create_stances_owner_dir_path,
     create_stance0001_path,
 )
-from src.a18_etl_toolbox._test_util.env_a18 import (
+from src.a18_etl_toolbox._test_util.a18_env import (
     get_module_temp_dir,
     env_dir_setup_cleanup,
 )

@@ -15,7 +15,7 @@ from src.a17_idea_logic.idea_config import (
     idea_format_00013_conceptunit_v0_0_0,
 )
 from src.a17_idea_logic.idea_db_tool import open_csv
-from src.a17_idea_logic._test_util.env_a17 import (
+from src.a17_idea_logic._test_util.a17_env import (
     idea_examples_dir,
     env_dir_setup_cleanup,
 )

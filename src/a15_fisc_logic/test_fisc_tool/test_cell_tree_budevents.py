@@ -4,7 +4,7 @@ from src.a12_hub_tools.hub_path import create_cell_json_path, create_budevent_pa
 from src.a12_hub_tools.hub_tool import save_arbitrary_budevent, cellunit_add_json_file
 from src.a15_fisc_logic.fisc_tool import load_cells_budevent
 from src.a15_fisc_logic._test_util.example_fiscs import example_casa_clean_factunit
-from src.a15_fisc_logic._test_util.env_a15 import (
+from src.a15_fisc_logic._test_util.a15_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )

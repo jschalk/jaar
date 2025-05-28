@@ -12,7 +12,7 @@ from src.a17_idea_logic.idea_db_tool import sheet_exists, create_idea_sorted_tab
 from src.a18_etl_toolbox.transformers import (
     etl_brick_raw_tables_to_brick_agg_tables,
 )
-from src.a18_etl_toolbox._test_util.env_a18 import (
+from src.a18_etl_toolbox._test_util.a18_env import (
     get_module_temp_dir,
     env_dir_setup_cleanup,
 )

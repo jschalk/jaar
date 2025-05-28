@@ -3,7 +3,6 @@ from os.path import exists as os_path_exists
 from ast import (
     parse as ast_parse,
     walk as ast_walk,
-    Import as ast_Import,
     ImportFrom as ast_ImportFrom,
 )
 from os.path import join as os_path_join
@@ -36,19 +35,22 @@ def get_imports_from_file(file_path):
     return imports
 
 
-def get_python_files_with_flag(directory):
+def get_python_files_with_flag(directory, x_str=None):
     """
-    Recursively finds all .py files in a given directory.
-    Returns a dictionary with file paths as keys and 1 as the value for each.
+    Recursively finds .py files in a directory.
+    If x_str is provided, only files with x_str in the filename are included.
 
-    :param directory: The root directory to search
-    :return: Dictionary {file_path: 1, ...}
+    Returns a dictionary: {file_path: 1, ...}
+
+    :param directory: Root directory to search
+    :param x_str: Optional substring to filter filenames
+    :return: Dictionary of matching file paths and the number 1
     """
     py_files = {}
 
     for root, _, files in os_walk(directory):
         for file in files:
-            if file.endswith(".py"):
+            if file.endswith(".py") and (x_str is None or x_str in file):
                 full_path = os_path_join(root, file)
                 py_files[full_path] = get_imports_from_file(full_path)
 
@@ -73,11 +75,18 @@ def test_ModuleDirectorysAreNumberedCorrectly():
     for module_desc, module_dir in get_module_descs().items():
         module_number = int(module_desc[1:3])
         assert module_number == previous_module_number + 1
-        print(f"{module_desc=} {module_number=}")
+        # print(f"{module_desc=} {module_number=}")
         utils_dir = create_path(module_dir, "_test_util")
         assert os_path_exists(utils_dir)
         str_func_path = create_path(utils_dir, f"a{module_desc[1:3]}_str.py")
         assert os_path_exists(str_func_path)
+        env_files = get_python_files_with_flag(utils_dir, "env")
+        if len(env_files) > 0:
+            print(f"{env_files=}")
+            assert len(env_files) == 1
+            env_filename = str(list(env_files.keys())[0])
+            print(f"{env_filename=}")
+            assert env_filename.endswith(f"a{module_desc[1:3]}_env.py")
 
         previous_module_number = module_number
 
@@ -101,7 +110,6 @@ def check_module_imports_are_ordered(imports: list[list], file_path: str):
     module_section_passed = False
     for x_import in imports:
         module_location = x_import[0]
-        print(f"{file_path} {module_location=}")
         if module_location[:3] == "src":
             module_number = int(module_location[5:7])
             assert module_section_passed is False

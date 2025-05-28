@@ -11,7 +11,7 @@ from src.a18_etl_toolbox.tran_path import (
     create_stance0001_path,
 )
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic._test_util.env_a19 import (
+from src.a19_world_logic._test_util.a19_env import (
     get_module_temp_dir as worlds_dir,
     env_dir_setup_cleanup,
 )

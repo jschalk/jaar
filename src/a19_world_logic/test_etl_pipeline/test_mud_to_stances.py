@@ -31,7 +31,7 @@ from src.a16_pidgin_logic._test_util.a16_str import otx_name_str, inx_name_str
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic._test_util.env_a19 import (
+from src.a19_world_logic._test_util.a19_env import (
     get_module_temp_dir as worlds_dir,
     env_dir_setup_cleanup,
 )

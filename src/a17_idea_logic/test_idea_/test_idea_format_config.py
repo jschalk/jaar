@@ -43,7 +43,7 @@ from src.a17_idea_logic.idea_config import (
     get_idea_elements_sort_order,
     get_default_sorted_list,
 )
-from src.a17_idea_logic._test_util.env_a17 import src_module_dir
+from src.a17_idea_logic._test_util.a17_env import src_module_dir
 
 
 def test_config_str_functions_ReturnObjs():

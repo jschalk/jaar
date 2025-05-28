@@ -13,7 +13,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
 )
 from src.a18_etl_toolbox.transformers import etl_voice_agg_to_event_bud_csvs
-from src.a18_etl_toolbox._test_util.env_a18 import (
+from src.a18_etl_toolbox._test_util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )

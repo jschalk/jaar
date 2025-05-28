@@ -8,7 +8,7 @@ from src.a09_pack_logic._test_util.example_atoms import (
     get_atom_example_conceptunit_knee,
     get_atom_example_conceptunit_ball,
 )
-from src.a09_pack_logic._test_util.pack_env import (
+from src.a09_pack_logic._test_util.a09_env import (
     get_module_temp_dir as fiscs_dir,
     env_dir_setup_cleanup,
 )

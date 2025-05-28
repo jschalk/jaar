@@ -16,7 +16,7 @@ from src.a16_pidgin_logic._test_util.a16_str import (
     unknown_term_str,
 )
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
-from src.a16_pidgin_logic._test_util.env_a16 import (
+from src.a16_pidgin_logic._test_util.a16_env import (
     env_dir_setup_cleanup,
     get_example_face_dir,
 )

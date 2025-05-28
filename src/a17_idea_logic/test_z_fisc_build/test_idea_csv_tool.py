@@ -39,7 +39,7 @@ from src.a17_idea_logic.idea_csv_tool import (
     add_packunit_to_stance_csv_strs,
 )
 from src.a17_idea_logic.idea_db_tool import get_ordered_csv
-from src.a17_idea_logic._test_util.env_a17 import (
+from src.a17_idea_logic._test_util.a17_env import (
     idea_fiscs_dir,
     env_dir_setup_cleanup,
 )

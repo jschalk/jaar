@@ -13,7 +13,7 @@ from src.a12_hub_tools.hub_path import (
     create_cell_json_path,
 )
 from src.a15_fisc_logic.fisc import fiscunit_shop, _get_ote1_max_past_event_int
-from src.a15_fisc_logic._test_util.env_a15 import (
+from src.a15_fisc_logic._test_util.a15_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
