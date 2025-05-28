@@ -1,3 +1,7 @@
+from src.a02_finance_logic._utils.strs_a02 import acct_name_str
+from src.a03_group_logic._utils.strs_a03 import credit_belief_str, debtit_belief_str
+
+
 def budunit_str() -> str:
     return "budunit"
 
@@ -87,10 +91,6 @@ def respect_bit_str() -> str:
     return "respect_bit"
 
 
-def acct_name_str() -> str:
-    return "acct_name"
-
-
 def awardee_title_str() -> str:
     return "awardee_title"
 
@@ -117,14 +117,6 @@ def healer_name_str() -> str:
 
 def acct_pool_str() -> str:
     return "acct_pool"
-
-
-def debtit_belief_str() -> str:
-    return "debtit_belief"
-
-
-def credit_belief_str() -> str:
-    return "credit_belief"
 
 
 def debtit_vote_str() -> str:

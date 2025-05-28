@@ -1,3 +1,6 @@
+from src.a01_way_logic._utils.strs_a01 import bridge_str
+
+
 def world_id_str() -> str:
     return "world_id"
 
@@ -8,10 +11,6 @@ def tran_time_str() -> str:
 
 def deal_time_str() -> str:
     return "deal_time"
-
-
-def bridge_str() -> str:
-    return "bridge"
 
 
 def quota_str() -> str:
@@ -36,3 +35,7 @@ def owner_name_str() -> str:
 
 def fisc_label_str() -> str:
     return "fisc_label"
+
+
+def acct_name_str() -> str:
+    return "acct_name"

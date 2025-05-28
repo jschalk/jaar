@@ -15,6 +15,7 @@ from src.a01_way_logic.way import (
     get_default_face_name,
     EventInt,
 )
+from src.a01_way_logic._utils.strs_a01 import bridge_str
 from inspect import getdoc as inspect_getdoc
 
 
@@ -88,7 +89,7 @@ def test_TitleStr_exists():
     bob_namestr = TitleStr(bob_str)
     # THEN
     assert bob_namestr == bob_str
-    doc_str = """If a TitleStr contains bridges it represents a group otherwise it's a single member group of an AcctName."""
+    doc_str = f"""If a TitleStr contains {bridge_str()}s it represents a group otherwise it's a single member group of an AcctName."""
     assert inspect_getdoc(bob_namestr) == doc_str
 
 
@@ -105,9 +106,7 @@ def test_LabelStr_exists():
     x_way = LabelStr(empty_str)
     # THEN
     assert x_way == empty_str
-    doc_str = (
-        "A string representation of a tree node. Nodes cannot contain WayStr bridge"
-    )
+    doc_str = f"A string representation of a tree node. Nodes cannot contain WayStr {bridge_str()}"
     assert inspect_getdoc(x_way) == doc_str
 
 
@@ -154,9 +153,7 @@ def test_WayStr_exists():
     x_way = WayStr(empty_str)
     # THEN
     assert x_way == empty_str
-    doc_str = (
-        "A string representation of a tree path. LabelStrs are seperated by way bridge"
-    )
+    doc_str = f"A string representation of a tree path. LabelStrs are seperated by way {bridge_str()}"
     assert inspect_getdoc(x_way) == doc_str
 
 
@@ -167,7 +164,7 @@ def test_YawStr_exists():
     x_way = YawStr(empty_str)
     # THEN
     assert x_way == empty_str
-    doc_str = "YawStr is a WayStr in reverse direction. A string representation of a tree path. LabelStrs are seperated by way bridge."
+    doc_str = f"YawStr is a WayStr in reverse direction. A string representation of a tree path. LabelStrs are seperated by way {bridge_str()}."
     assert inspect_getdoc(x_way) == doc_str
 
 
@@ -178,7 +175,7 @@ def test_TimeLineLabel_exists():
     x_timelinelabel = TimeLineLabel(empty_str)
     # THEN
     assert x_timelinelabel == empty_str
-    doc_str = "TimeLineLabel is required for every TimeLineUnit. It is a LabelStr that must not container the bridge."
+    doc_str = f"TimeLineLabel is required for every TimeLineUnit. It is a LabelStr that must not container the {bridge_str()}."
     assert inspect_getdoc(x_timelinelabel) == doc_str
 
 

@@ -15,6 +15,7 @@ from src.a02_finance_logic._utils.strs_a02 import (
     magnitude_str,
     deal_acct_nets_str,
     world_id_str,
+    acct_name_str,
 )
 
 from pytest import raises as pytest_raises
@@ -29,6 +30,7 @@ def test_str_functions_ReturnObj():
     assert magnitude_str() == "magnitude"
     assert deal_acct_nets_str() == "deal_acct_nets"
     assert world_id_str() == "world_id"
+    assert acct_name_str() == "acct_name"
 
 
 def test_DEFAULT_CELLDEPTH():

@@ -42,15 +42,15 @@ def test_MemberShip_exists():
     assert swim_membership.group_title == swim_str
     assert swim_membership.credit_vote == 1.0
     assert swim_membership.debtit_vote == 1.0
-    assert swim_membership._credor_pool is None
-    assert swim_membership._debtor_pool is None
-    assert swim_membership._fund_give is None
-    assert swim_membership._fund_take is None
-    assert swim_membership._fund_agenda_give is None
-    assert swim_membership._fund_agenda_take is None
-    assert swim_membership._fund_agenda_ratio_give is None
-    assert swim_membership._fund_agenda_ratio_take is None
-    assert swim_membership.acct_name is None
+    assert not swim_membership._credor_pool
+    assert not swim_membership._debtor_pool
+    assert not swim_membership._fund_give
+    assert not swim_membership._fund_take
+    assert not swim_membership._fund_agenda_give
+    assert not swim_membership._fund_agenda_take
+    assert not swim_membership._fund_agenda_ratio_give
+    assert not swim_membership._fund_agenda_ratio_take
+    assert not swim_membership.acct_name
 
 
 def test_membership_shop_ReturnsObj():
@@ -71,13 +71,13 @@ def test_membership_shop_ReturnsObj():
     assert swim_membership.debtit_vote == swim_debtit_vote
     assert swim_membership._credor_pool == 0
     assert swim_membership._debtor_pool == 0
-    assert swim_membership._fund_give is None
-    assert swim_membership._fund_take is None
-    assert swim_membership._fund_agenda_give is None
-    assert swim_membership._fund_agenda_take is None
-    assert swim_membership._fund_agenda_ratio_give is None
-    assert swim_membership._fund_agenda_ratio_take is None
-    assert swim_membership.acct_name is None
+    assert not swim_membership._fund_give
+    assert not swim_membership._fund_take
+    assert not swim_membership._fund_agenda_give
+    assert not swim_membership._fund_agenda_take
+    assert not swim_membership._fund_agenda_ratio_give
+    assert not swim_membership._fund_agenda_ratio_take
+    assert not swim_membership.acct_name
 
 
 def test_membership_shop_ReturnsObjAttr_acct_name():

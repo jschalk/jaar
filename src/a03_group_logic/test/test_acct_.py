@@ -1,6 +1,12 @@
 from src.a01_way_logic.way import default_bridge_if_None
 from src.a02_finance_logic.finance_config import default_respect_bit_if_None
 from src.a03_group_logic.acct import AcctUnit, acctunit_shop
+from src.a03_group_logic._utils.strs_a03 import (
+    credit_belief_str,
+    debtit_belief_str,
+    acct_name_str,
+    bridge_str,
+)
 from pytest import raises as pytest_raises
 
 
@@ -13,23 +19,43 @@ def test_AcctUnit_exists():
 
     # THEN
     print(f"{bob_str}")
-    assert bob_acctunit is not None
-    assert bob_acctunit.acct_name is not None
+    assert bob_acctunit
+    assert bob_acctunit.acct_name
     assert bob_acctunit.acct_name == bob_str
-    assert bob_acctunit.credit_belief is None
-    assert bob_acctunit.debtit_belief is None
+    assert not bob_acctunit.credit_belief
+    assert not bob_acctunit.debtit_belief
     # calculated fields
-    assert bob_acctunit._credor_pool is None
-    assert bob_acctunit._debtor_pool is None
-    assert bob_acctunit._memberships is None
-    assert bob_acctunit._irrational_debtit_belief is None
-    assert bob_acctunit._inallocable_debtit_belief is None
-    assert bob_acctunit._fund_give is None
-    assert bob_acctunit._fund_take is None
-    assert bob_acctunit._fund_agenda_give is None
-    assert bob_acctunit._fund_agenda_take is None
-    assert bob_acctunit.bridge is None
-    assert bob_acctunit._respect_bit is None
+    assert not bob_acctunit._credor_pool
+    assert not bob_acctunit._debtor_pool
+    assert not bob_acctunit._memberships
+    assert not bob_acctunit._irrational_debtit_belief
+    assert not bob_acctunit._inallocable_debtit_belief
+    assert not bob_acctunit._fund_give
+    assert not bob_acctunit._fund_take
+    assert not bob_acctunit._fund_agenda_give
+    assert not bob_acctunit._fund_agenda_take
+    assert not bob_acctunit.bridge
+    assert not bob_acctunit._respect_bit
+    obj_attrs = set(bob_acctunit.__dict__.keys())
+    print(sorted(list(obj_attrs)))
+    assert obj_attrs == {
+        "_credor_pool",
+        "_debtor_pool",
+        "_fund_agenda_give",
+        "_fund_agenda_ratio_give",
+        "_fund_agenda_ratio_take",
+        "_fund_agenda_take",
+        "_fund_give",
+        "_fund_take",
+        "_inallocable_debtit_belief",
+        "_irrational_debtit_belief",
+        "_memberships",
+        "_respect_bit",
+        acct_name_str(),
+        bridge_str(),
+        credit_belief_str(),
+        debtit_belief_str(),
+    }
 
 
 def test_AcctUnit_set_namestr_CorrectlySetsAttr():
@@ -54,7 +80,7 @@ def test_AcctUnit_set_namestr_RaisesErrorIfParameterContains_bridge():
         acctunit_shop(acct_name=texas_str, bridge=slash_str)
     assert (
         str(excinfo.value)
-        == f"'{texas_str}' needs to be a LabelStr. Cannot contain bridge: '{slash_str}'"
+        == f"'{texas_str}' needs to be a LabelStr. Cannot contain {bridge_str()}: '{slash_str}'"
     )
 
 
