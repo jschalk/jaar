@@ -254,6 +254,7 @@ def save_budpoint_file(
     budpoint_json_path = create_budpoint_path(
         fisc_mstr_dir, x_budpoint.fisc_label, x_budpoint.owner_name, x_deal_time
     )
+    print(f"{x_budpoint.fisc_label=} {budpoint_json_path=}")
     save_bud_file(budpoint_json_path, None, x_budpoint)
 
 

@@ -105,7 +105,6 @@ def test_CheckAllPythonFileImportsAreInCorrectFormat():
     # example_path = "src/a09_pack_logic/delta.py"
     # imports = get_imports_from_file(example_path)
     # check_module_imports_are_ordered(imports, example_path)
-    assert 1 == 2
 
 
 def check_module_imports_are_ordered(imports: list[list], file_path: str, desc_number):
@@ -115,6 +114,9 @@ def check_module_imports_are_ordered(imports: list[list], file_path: str, desc_n
         module_location = str(x_import[0])
         if module_location.startswith("src"):
             module_number = int(module_location[5:7])
+            if desc_number < module_number:
+                print(f"{desc_number} {file_path} {module_number=} {module_location=}")
+            assert desc_number >= module_number
             assert module_section_passed is False
             if module_number < previous_module_number:
                 print(

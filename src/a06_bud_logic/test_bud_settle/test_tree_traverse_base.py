@@ -381,7 +381,7 @@ def test_BudUnit_get_concept_tree_ordered_way_list_ReturnsObj():
     assert x_8th_way_in_ordered_list == sue_bud.make_l1_way(week_str)
 
     # WHEN
-    y_bud = budunit_shop()
+    y_bud = budunit_shop(fisc_label="accord23")
 
     # THEN
     y_1st_way_in_ordered_list = y_bud.get_concept_tree_ordered_way_list()[0]

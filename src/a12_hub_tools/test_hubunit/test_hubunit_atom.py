@@ -5,7 +5,7 @@ from src.a12_hub_tools._test_util.a12_env import (
     get_module_temp_dir as fisc_mstr_dir,
     env_dir_setup_cleanup,
 )
-from src.a13_bud_listen_logic._test_util.example_listen_atoms import (
+from src.a12_hub_tools._test_util.example_hub_atoms import (
     get_atom_example_factunit_knee,
     get_atom_example_conceptunit_sports,
     get_atom_example_conceptunit_ball,

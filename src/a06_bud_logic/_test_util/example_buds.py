@@ -49,7 +49,8 @@ def budunit_v002() -> BudUnit:
 
 
 def get_budunit_with_4_levels() -> BudUnit:
-    sue_bud = budunit_shop("Sue")
+    a23_str = "accord23"
+    sue_bud = budunit_shop("Sue", a23_str)
     casa_str = "casa"
     sue_bud.set_l1_concept(conceptunit_shop(casa_str, mass=30, pledge=True))
     cat_str = "cat have dinner"
