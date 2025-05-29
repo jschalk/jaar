@@ -1,10 +1,6 @@
 # from src.a00_data_toolbox.dict_toolbox import get_from_nested_dict
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a02_finance_logic._test_util.a02_str import (
-    fisc_label_str,
-    owner_name_str,
-    world_id_str,
-)
+from src.a02_finance_logic._test_util.a02_str import fisc_label_str, owner_name_str
 from src.a06_bud_logic._test_util.a06_str import (
     budunit_str,
     bud_acctunit_str,
@@ -59,11 +55,7 @@ from src.a08_bud_atom_logic._test_util.a08_str import (
     sqlite_datatype_str,
 )
 from src.a08_bud_atom_logic.atom_config import get_atom_config_dict
-from src.a10_bud_calc._test_util.a10_str import (
-    jmetrics_str,
-    fund_take_str,
-    fund_give_str,
-)
+from src.a10_bud_calc._test_util.a10_str import jmetrics_str
 from src.a10_bud_calc.bud_calc_config import (
     get_bud_calc_config_filename,
     config_file_path,
@@ -76,13 +68,6 @@ from src.a10_bud_calc.bud_calc_config import (
 )
 from os.path import exists as os_path_exists
 from os import getcwd as os_getcwd
-
-
-def test_str_functions_ReturnsObj():
-    # ESTABLISH / WHEN / THEN
-    assert jmetrics_str() == "jmetrics"
-    assert fund_take_str() == "fund_take"
-    assert fund_give_str() == "fund_give"
 
 
 def test_get_bud_calc_config_dict_Exists():
@@ -708,7 +693,7 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(config, budunit, jv, "tally") == "INTEGER"
 
 
-def test_get_bud_calc_config_dict_ReturnObj_EachArgHasOneClassType():
+def test_get_bud_calc_config_dict_ReturnsObj_EachArgHasOneClassType():
     # ESTABLISH
     bud_calc_config_dict = get_bud_calc_config_dict()
     all_args = {}
@@ -727,7 +712,7 @@ def test_get_bud_calc_config_dict_ReturnObj_EachArgHasOneClassType():
         assert len(arg_types) == 1
 
 
-def test_get_bud_calc_config_dict_ReturnObj_EachArgHasOne_sqlite_datatype():
+def test_get_bud_calc_config_dict_ReturnsObj_EachArgHasOne_sqlite_datatype():
     # ESTABLISH
     bud_calc_config_dict = get_bud_calc_config_dict()
     all_args = {}
@@ -757,7 +742,7 @@ def test_get_bud_calc_config_dict_ReturnObj_EachArgHasOne_sqlite_datatype():
         assert list(arg_types)[0] == sqlite_datatype_dict.get(x_arg)
 
 
-def test_get_bud_calc_args_type_dict_ReturnObj():
+def test_get_bud_calc_args_type_dict_ReturnsObj():
     # ESTABLISH
     bud_calc_config_dict = get_bud_calc_config_dict()
     all_args = {}

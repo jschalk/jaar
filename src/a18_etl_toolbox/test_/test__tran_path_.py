@@ -16,7 +16,7 @@ def test_hub_path_constants_are_values():
     assert STANCE0001_FILENAME == "stance0001.xlsx"
 
 
-def test_create_stances_dir_path_ReturnObj():
+def test_create_stances_dir_path_ReturnsObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
 
@@ -28,7 +28,7 @@ def test_create_stances_dir_path_ReturnObj():
     assert gen_bob_stance_dir == expected_stances_dir
 
 
-def test_create_stances_owner_dir_path_ReturnObj():
+def test_create_stances_owner_dir_path_ReturnsObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     bob_str = "Bob"
@@ -42,7 +42,7 @@ def test_create_stances_owner_dir_path_ReturnObj():
     assert gen_bob_stance_dir == expected_bob_stance_dir
 
 
-def test_create_stance0001_path_ReturnObj():
+def test_create_stance0001_path_ReturnsObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
 

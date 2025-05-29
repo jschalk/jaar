@@ -46,7 +46,7 @@ from src.a17_idea_logic.idea_config import (
 from src.a17_idea_logic._test_util.a17_env import src_module_dir
 
 
-def test_config_str_functions_ReturnObjs():
+def test_config_str_functions_ReturnsObjs():
     # ESTABLISH / WHEN / THEN
     assert acct_pool_str() == "acct_pool"
     assert debtit_belief_str() == "debtit_belief"

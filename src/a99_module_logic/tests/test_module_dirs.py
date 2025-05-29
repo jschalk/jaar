@@ -4,6 +4,7 @@ from ast import (
     parse as ast_parse,
     walk as ast_walk,
     ImportFrom as ast_ImportFrom,
+    FunctionDef as ast_FunctionDef,
 )
 from os.path import join as os_path_join
 from os import walk as os_walk
@@ -57,6 +58,19 @@ def get_python_files_with_flag(directory, x_str=None):
     return py_files
 
 
+def get_function_names_from_file(file_path: str, suffix: str = None) -> list:
+    """
+    Parses a Python file and returns a list of all top-level function names.
+
+    :param file_path: Path to the .py file
+    :return: List of function names
+    """
+
+    with open(file_path, "r", encoding="utf-8") as file:
+        node = ast_parse(file.read(), filename=file_path)
+    return [n.name for n in ast_walk(node) if isinstance(n, ast_FunctionDef)]
+
+
 def get_module_descs() -> dict[str, str]:
     src_dir = "src"
     module_descs = get_level1_dirs(src_dir)
@@ -102,10 +116,6 @@ def test_CheckAllPythonFileImportsAreInCorrectFormat():
         for file_path, file_imports in python_files.items():
             check_module_imports_are_ordered(file_imports, file_path, desc_number)
 
-    # example_path = "src/a09_pack_logic/delta.py"
-    # imports = get_imports_from_file(example_path)
-    # check_module_imports_are_ordered(imports, example_path)
-
 
 def check_module_imports_are_ordered(imports: list[list], file_path: str, desc_number):
     previous_module_number = -1
@@ -132,3 +142,42 @@ def check_module_imports_are_ordered(imports: list[list], file_path: str, desc_n
             if desc_number != env_number:
                 print(f"{desc_number} {file_path} {env_number=} {module_location=}")
             assert desc_number == env_number
+
+
+def test_StrFunctionsAreAllTested():
+    # sourcery skip: no-loop-in-tests
+    # sourcery skip: no-conditionals-in-tests
+    # ESTABLISH / WHEN / THEN
+    for module_desc, module_dir in get_module_descs().items():
+        desc_number_str = module_desc[1:3]
+        util_dir = create_path(module_dir, "_test_util")
+        str_util_path = create_path(util_dir, f"a{desc_number_str}_str.py")
+        str_functions = get_function_names_from_file(str_util_path)
+        if len(str_functions) > 0:
+            test_file_path = create_path(util_dir, f"test_a{desc_number_str}_str.py")
+            assert os_path_exists(test_file_path)
+            test_file_imports = get_imports_from_file(test_file_path)
+            assert len(test_file_imports) == 1
+            test_functions = get_function_names_from_file(test_file_path)
+            # print(f"{test_file_path=}")
+            assert test_functions == ["test_str_functions_ReturnsObj"]
+            str_functions = get_function_names_from_file(str_util_path)
+            test_file_str = open(test_file_path).read()
+            for str_function in str_functions:
+                if not str(str_function).endswith("_str"):
+                    print(f"{str_util_path} {str_function=}")
+                # assert str(str_function).endswith("_str")
+
+            # print(test_file_str)
+        # python_files = get_python_files_with_flag(module_dir, "_str.py")
+        # for file_path, file_imports in python_files.items():
+
+        #     print(f"{file_path=}")
+
+    # example_path = "src/a07_calendar_logic/_test_util/a07_str.py"
+    # # imports = get_imports_from_file(example_path)
+    # # check_module_imports_are_ordered(imports, example_path)
+    # functions_list = get_function_names_from_file(example_path)
+    # print(f"{functions_list=}")
+
+    # assert 1 == 2

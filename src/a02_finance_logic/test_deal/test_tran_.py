@@ -405,7 +405,7 @@ def test_TranBook_get_tran_times_ReturnsObj():
     assert accord23_tran_times == {t55_tran_time, t66_tran_time, t77_tran_time}
 
 
-def test_TranBook_get_owners_accts_net_ReturnObj_Scenario0():
+def test_TranBook_get_owners_accts_net_ReturnsObj_Scenario0():
     # ESTABLISH
     accord23_str = "accord23"
     accord23_tranbook = tranbook_shop(accord23_str)
@@ -458,7 +458,7 @@ def test_TranBook_get_owners_accts_net_ReturnsObj_Scenario1():
     }
 
 
-def test_TranBook_get_accts_net_dict_ReturnObj_Scenario0():
+def test_TranBook_get_accts_net_dict_ReturnsObj_Scenario0():
     # ESTABLISH
     accord23_str = "accord23"
     accord23_tranbook = tranbook_shop(accord23_str)
@@ -479,7 +479,7 @@ def test_TranBook_get_accts_net_dict_ReturnObj_Scenario0():
     assert accord23_accts_net_dict == {bob_str: t55_bob_amount}
 
 
-def test_TranBook_get_accts_net_dict_ReturnObj_Scenario1():
+def test_TranBook_get_accts_net_dict_ReturnsObj_Scenario1():
     # ESTABLISH
     accord23_str = "accord23"
     accord23_tranbook = tranbook_shop(accord23_str)

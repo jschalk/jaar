@@ -170,7 +170,7 @@ from os import getcwd as os_getcwd
 from copy import copy as copy_copy
 
 
-def test_str_functions_ReturnObj():
+def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert idea_category_str() == "idea_category"
     assert build_order_str() == "build_order"
@@ -509,7 +509,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
         assert sqlite_types.get(x_arg) == datatype
 
 
-def test_get_allowed_curds_ReturnObj():
+def test_get_allowed_curds_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert get_allowed_curds() == {
         insert_one_time_str(),

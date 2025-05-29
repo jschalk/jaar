@@ -8,7 +8,7 @@ from src.a03_group_logic.acct import (
 )
 
 
-def test_AcctUnit_get_memberships_dict_ReturnObj():
+def test_AcctUnit_get_memberships_dict_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     sue_credit_vote = 11

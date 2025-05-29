@@ -79,17 +79,6 @@ def test_day_length_ReturnsObj():
     assert day_length() == 1440
 
 
-def test_str_functions_ReturnsObj():
-    # ESTABLISH / WHEN / THEN
-    assert hours_config_str() == "hours_config"
-    assert weekdays_config_str() == "weekdays_config"
-    assert months_config_str() == "months_config"
-    assert monthday_distortion_str() == "monthday_distortion"
-    assert timeline_label_str() == "timeline_label"
-    assert c400_number_str() == "c400_number"
-    assert yr1_jan1_offset_str() == "yr1_jan1_offset"
-
-
 def test_validate_timeline_config_ReturnsObj_CheckEachElementIsNecessary():
     # ESTABLISH / WHEN / THEN
     assert not validate_timeline_config({})

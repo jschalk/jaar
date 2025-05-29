@@ -11,7 +11,7 @@ def test_TimeConversion_Exists():
     assert not x_timeconversion.addin
 
 
-def test_timeconversion_shop_ReturnObj_WithParameters():
+def test_timeconversion_shop_ReturnsObj_WithParameters():
     # ESTABLISH
     accord_fisc_label = "accord34"
     accord_addin = 91
@@ -24,7 +24,7 @@ def test_timeconversion_shop_ReturnObj_WithParameters():
     assert x_timeconversion.addin == accord_addin
 
 
-def test_timeconversion_shop_ReturnObj_EmtpyParameters():
+def test_timeconversion_shop_ReturnsObj_EmtpyParameters():
     # ESTABLISH / WHEN
     x_timeconversion = timeconversion_shop()
 

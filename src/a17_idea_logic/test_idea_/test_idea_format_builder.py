@@ -30,7 +30,7 @@ def create_dimens_idea_format_dict() -> dict:
     return idea_format_files_dict
 
 
-def test_create_dimens_idea_format_dict_ReturnObj(rebuild_bool):
+def test_create_dimens_idea_format_dict_ReturnsObj(rebuild_bool):
     # ESTABLISH / WHEN
     dimens_idea_format_dict = create_dimens_idea_format_dict()
     print(f"{dimens_idea_format_dict.keys()=}")

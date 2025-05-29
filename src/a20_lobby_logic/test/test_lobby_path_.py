@@ -13,7 +13,7 @@ from src.a20_lobby_logic.lobby_path import (
 from src.a20_lobby_logic._test_util.a20_env import get_module_temp_dir
 
 
-def test_str_functions_ReturnObjs():
+def test_str_functions_ReturnsObjs():
     assert lobbys_str() == "lobbys"
     assert lobby_id_str() == "lobby_id"
     assert lobby_mstr_dir_str() == "lobby_mstr_dir"
@@ -23,7 +23,7 @@ def test_LobbyID_Exists():
     assert LobbyID("chat23") == "chat23"
 
 
-def test_create_lobby_dir_path_ReturnObj():
+def test_create_lobby_dir_path_ReturnsObj():
     # ESTABLISH
     x_lobby_mstr_dir = get_module_temp_dir()
     c23_str = "chat23"
@@ -37,7 +37,7 @@ def test_create_lobby_dir_path_ReturnObj():
     assert gen_c23_dir_path == expected_c23_path
 
 
-def test_create_world_dir_path_ReturnObj():
+def test_create_world_dir_path_ReturnsObj():
     # ESTABLISH
     x_lobby_mstr_dir = get_module_temp_dir()
     c23_str = "chat23"
@@ -54,7 +54,7 @@ def test_create_world_dir_path_ReturnObj():
     assert gen_m23_dir_path == expected_m23_path
 
 
-def test_create_fisc_mstr_dir_path_ReturnObj():
+def test_create_fisc_mstr_dir_path_ReturnsObj():
     # ESTABLISH
     x_lobby_mstr_dir = get_module_temp_dir()
     c23_str = "chat23"

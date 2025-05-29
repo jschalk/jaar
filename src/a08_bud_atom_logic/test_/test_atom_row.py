@@ -67,7 +67,7 @@ def test_AtomRow_exists():
     assert atomrow_args_set == config_args_set
 
 
-def test_atomrow_shop_ReturnObj():
+def test_atomrow_shop_ReturnsObj():
     # ESTABLISH
     x_atom_dimens = {bud_acctunit_str()}
 

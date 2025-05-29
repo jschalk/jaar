@@ -55,7 +55,7 @@ def test_treasury_filename_ReturnsObj():
     assert treasury_filename() == "treasury.db"
 
 
-def test_create_fisc_dir_path_ReturnObj():
+def test_create_fisc_dir_path_ReturnsObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
@@ -69,7 +69,7 @@ def test_create_fisc_dir_path_ReturnObj():
     assert gen_a23_dir_path == expected_a23_path
 
 
-def test_create_fisc_json_path_ReturnObj():
+def test_create_fisc_json_path_ReturnsObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
@@ -84,7 +84,7 @@ def test_create_fisc_json_path_ReturnObj():
     assert gen_a23_json_path == expected_a23_json_path
 
 
-def test_create_fisc_ote1_csv_path_ReturnObj():
+def test_create_fisc_ote1_csv_path_ReturnsObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
@@ -99,7 +99,7 @@ def test_create_fisc_ote1_csv_path_ReturnObj():
     assert gen_a23_te_csv_path == expected_a23_te_path
 
 
-def test_create_fisc_ote1_json_path_ReturnObj():
+def test_create_fisc_ote1_json_path_ReturnsObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
@@ -114,7 +114,7 @@ def test_create_fisc_ote1_json_path_ReturnObj():
     assert gen_a23_te_csv_path == expected_a23_te_path
 
 
-def test_fisc_agenda_list_report_path_ReturnObj():
+def test_fisc_agenda_list_report_path_ReturnsObj():
     # ESTABLISH
     fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
@@ -131,7 +131,7 @@ def test_fisc_agenda_list_report_path_ReturnObj():
     assert gen_a23_full_report_path == expected_a23_agenda_full_path
 
 
-def test_create_fisc_owners_dir_path_ReturnObj():
+def test_create_fisc_owners_dir_path_ReturnsObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     accord23_str = "accord23"
@@ -146,7 +146,7 @@ def test_create_fisc_owners_dir_path_ReturnObj():
     assert gen_owners_dir == expected_owners_dir
 
 
-def test_create_owner_dir_path_ReturnObj():
+def test_create_owner_dir_path_ReturnsObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     accord23_str = "accord23"
@@ -163,7 +163,7 @@ def test_create_owner_dir_path_ReturnObj():
     assert sue_dir == expected_sue_dir
 
 
-def test_create_keeps_dir_path_ReturnObj():
+def test_create_keeps_dir_path_ReturnsObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     accord23_str = "accord23"
@@ -181,7 +181,7 @@ def test_create_keeps_dir_path_ReturnObj():
     assert keeps_dir == expected_keeps_dir
 
 
-def test_create_atoms_dir_path_ReturnObj():
+def test_create_atoms_dir_path_ReturnsObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     accord23_str = "accord23"
@@ -199,7 +199,7 @@ def test_create_atoms_dir_path_ReturnObj():
     assert atoms_dir == expected_atoms_dir
 
 
-def test_create_packs_dir_path_ReturnObj():
+def test_create_packs_dir_path_ReturnsObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     accord23_str = "accord23"
@@ -217,7 +217,7 @@ def test_create_packs_dir_path_ReturnObj():
     assert packs_dir == expected_packs_dir
 
 
-def test_create_deals_dir_path_ReturnObj():
+def test_create_deals_dir_path_ReturnsObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     accord23_str = "accord23"
@@ -235,7 +235,7 @@ def test_create_deals_dir_path_ReturnObj():
     assert deals_dir == expected_deals_dir
 
 
-def test_create_deal_dir_path_ReturnObj():
+def test_create_deal_dir_path_ReturnsObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     accord23_str = "accord23"
@@ -257,7 +257,7 @@ def test_create_deal_dir_path_ReturnObj():
     assert generated_timepoint_dir == expected_timepoint_dir
 
 
-def test_create_dealunit_json_path_ReturnObj():
+def test_create_dealunit_json_path_ReturnsObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
@@ -280,7 +280,7 @@ def test_create_dealunit_json_path_ReturnObj():
     assert gen_deal_path == expected_deal_path_dir
 
 
-def test_create_deal_acct_mandate_ledger_path_ReturnObj():
+def test_create_deal_acct_mandate_ledger_path_ReturnsObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
@@ -303,7 +303,7 @@ def test_create_deal_acct_mandate_ledger_path_ReturnObj():
     assert gen_deal_path == expected_deal_path_dir
 
 
-def test_create_budpoint_path_ReturnObj():
+def test_create_budpoint_path_ReturnsObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
@@ -326,7 +326,7 @@ def test_create_budpoint_path_ReturnObj():
     assert gen_budpoint_path == expected_budpoint_path_dir
 
 
-def test_create_cell_dir_path_ReturnObj_Scenario0_No_deal_ancestors():
+def test_create_cell_dir_path_ReturnsObj_Scenario0_No_deal_ancestors():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
@@ -341,7 +341,7 @@ def test_create_cell_dir_path_ReturnObj_Scenario0_No_deal_ancestors():
     assert gen_cell_dir == timepoint_dir
 
 
-def test_create_cell_dir_path_ReturnObj_Scenario1_One_deal_ancestors():
+def test_create_cell_dir_path_ReturnsObj_Scenario1_One_deal_ancestors():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
@@ -361,7 +361,7 @@ def test_create_cell_dir_path_ReturnObj_Scenario1_One_deal_ancestors():
     assert gen_cell_dir == tp_yao_dir
 
 
-def test_create_cell_dir_path_ReturnObj_Scenario2_Three_deal_ancestors():
+def test_create_cell_dir_path_ReturnsObj_Scenario2_Three_deal_ancestors():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
@@ -385,7 +385,7 @@ def test_create_cell_dir_path_ReturnObj_Scenario2_Three_deal_ancestors():
     assert gen_deal_celldepth_dir_path == expected_tp_yao_bob_zia_dir
 
 
-def test_create_cell_json_path_ReturnObj_Scenario0_Empty_deal_ancestors():
+def test_create_cell_json_path_ReturnsObj_Scenario0_Empty_deal_ancestors():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
@@ -408,7 +408,7 @@ def test_create_cell_json_path_ReturnObj_Scenario0_Empty_deal_ancestors():
     assert gen_cell_json_path == expected_cell_json_path
 
 
-def test_create_cell_json_path_ReturnObj_Scenario1_Three_deal_ancestors():
+def test_create_cell_json_path_ReturnsObj_Scenario1_Three_deal_ancestors():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
@@ -431,7 +431,7 @@ def test_create_cell_json_path_ReturnObj_Scenario1_Three_deal_ancestors():
     assert gen_cell_json_path == expected_cell_json_path
 
 
-def test_create_cell_acct_mandate_ledger_path_ReturnObj_Scenario1_Three_deal_ancestors():
+def test_create_cell_acct_mandate_ledger_path_ReturnsObj_Scenario1_Three_deal_ancestors():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
@@ -454,7 +454,7 @@ def test_create_cell_acct_mandate_ledger_path_ReturnObj_Scenario1_Three_deal_anc
     assert gen_cell_json_path == expected_cell_json_path
 
 
-def test_create_owner_event_dir_path_ReturnObj():
+def test_create_owner_event_dir_path_ReturnsObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     accord23_str = "accord23"
@@ -476,7 +476,7 @@ def test_create_owner_event_dir_path_ReturnObj():
     assert gen_a23_e3_dir_path == expected_a23_bob_e3_dir
 
 
-def test_create_budevent_path_ReturnObj():
+def test_create_budevent_path_ReturnsObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     accord23_str = "accord23"
@@ -499,7 +499,7 @@ def test_create_budevent_path_ReturnObj():
     assert gen_a23_e3_bud_path == expected_a23_bob_e3_bud_path
 
 
-def test_create_event_all_pack_path_ReturnObj():
+def test_create_event_all_pack_path_ReturnsObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     accord23_str = "accord23"
@@ -524,7 +524,7 @@ def test_create_event_all_pack_path_ReturnObj():
     assert gen_a23_e3_bud_path == expected_a23_bob_e3_all_pack_path
 
 
-def test_create_event_expressed_pack_path_ReturnObj():
+def test_create_event_expressed_pack_path_ReturnsObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     accord23_str = "accord23"
@@ -549,7 +549,7 @@ def test_create_event_expressed_pack_path_ReturnObj():
     assert gen_a23_e3_bud_path == expected_a23_bob_e3_expressed_pack_path
 
 
-def test_create_gut_path_ReturnObj():
+def test_create_gut_path_ReturnsObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
@@ -570,7 +570,7 @@ def test_create_gut_path_ReturnObj():
     assert gen_a23_e3_bud_path == expected_a23_bob_gut_json_path
 
 
-def test_create_job_path_ReturnObj():
+def test_create_job_path_ReturnsObj():
     # ESTABLISH
     x_fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"

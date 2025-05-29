@@ -176,7 +176,7 @@ def test_save_json_SetsFile(env_dir_setup_cleanup):
     assert generated_dict == expected_dict
 
 
-def test_open_json_ReturnObj(
+def test_open_json_ReturnsObj(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

@@ -11,7 +11,7 @@ from src.a02_finance_logic._test_util.a02_str import (
 )
 
 
-def test_str_functions_ReturnObj():
+def test_str_functions_ReturnsObj():
     assert bridge_str() == "bridge"
     assert celldepth_str() == "celldepth"
     assert deal_time_str() == "deal_time"
