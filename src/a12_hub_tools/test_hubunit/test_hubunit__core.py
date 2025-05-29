@@ -13,8 +13,8 @@ from src.a02_finance_logic.finance_config import (
 )
 from src.a12_hub_tools.hub_path import create_owner_dir_path
 from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop, get_keep_path
-from src.a13_bud_listen_logic._utils.env_a13 import (
-    get_module_temp_dir as env_dir,
+from src.a12_hub_tools._test_util.a12_env import (
+    get_module_temp_dir,
     env_dir_setup_cleanup,
 )
 from pytest import raises as pytest_raises
@@ -56,7 +56,7 @@ def test_HubUnit_RaisesError_keep_way_DoesNotExist():
 
 def test_hubunit_shop_ReturnsObj():
     # ESTABLISH
-    x_fisc_mstr_dir = "src/a15_fisc_logic/_utils"
+    x_fisc_mstr_dir = "src/a15_fisc_logic/_test_util"
     x_fisc_label = "accord45"
     sue_str = "Sue"
     x_bridge = "/"
@@ -105,7 +105,7 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     usa_way = create_way(nation_way, usa_str)
     texas_str = "Texas"
     texas_way = create_way(usa_way, texas_str)
-    fisc_mstr_dir = env_dir()
+    fisc_mstr_dir = get_module_temp_dir()
     accord23_str = "accord23"
 
     # WHEN
@@ -163,7 +163,9 @@ def test_get_keep_path_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     peru_str = "peru"
-    sue_hubunit = hubunit_shop(env_dir(), fisc_label=peru_str, owner_name=sue_str)
+    sue_hubunit = hubunit_shop(
+        get_module_temp_dir(), fisc_label=peru_str, owner_name=sue_str
+    )
     texas_str = "texas"
     dallas_str = "dallas"
     elpaso_str = "el paso"

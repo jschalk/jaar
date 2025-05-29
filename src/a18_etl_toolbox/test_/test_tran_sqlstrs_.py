@@ -3,13 +3,13 @@ from src.a00_data_toolbox.db_toolbox import (
     get_table_columns,
     required_columns_exist,
 )
-from src.a02_finance_logic._utils.strs_a02 import (
+from src.a02_finance_logic._test_util.a02_str import (
     fisc_label_str,
     owner_name_str,
     deal_time_str,
     tran_time_str,
 )
-from src.a06_bud_logic._utils.str_a06 import (
+from src.a06_bud_logic._test_util.a06_str import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
@@ -24,7 +24,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     event_int_str,
 )
 from src.a08_bud_atom_logic.atom_config import get_delete_key_name
-from src.a15_fisc_logic._utils.str_a15 import (
+from src.a15_fisc_logic._test_util.a15_str import (
     fiscunit_str,
     fisc_cashbook_str,
     fisc_dealunit_str,
@@ -33,14 +33,14 @@ from src.a15_fisc_logic._utils.str_a15 import (
     fisc_timeline_weekday_str,
     fisc_timeoffi_str,
 )
-from src.a16_pidgin_logic._utils.str_a16 import (
+from src.a16_pidgin_logic._test_util.a16_str import (
     pidgin_title_str,
     pidgin_name_str,
     pidgin_way_str,
     pidgin_label_str,
     pidgin_core_str,
 )
-from src.a17_idea_logic._utils.str_a17 import idea_category_str
+from src.a17_idea_logic._test_util.a17_str import idea_category_str
 from src.a17_idea_logic.idea_config import get_idea_config_dict, get_idea_numbers
 from src.a17_idea_logic.idea_db_tool import (
     get_default_sorted_list,

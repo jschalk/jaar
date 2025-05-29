@@ -6,7 +6,7 @@ from src.a06_bud_logic.bud_graphics import (
     budunit_graph3,
     budunit_graph4,
 )
-from src.a06_bud_logic._utils.example_buds import (
+from src.a06_bud_logic._test_util.example_buds import (
     get_budunit_with_4_levels,
     get_budunit_with_4_levels_and_2reasons,
     get_budunit_x1_3levels_1reason_1facts,

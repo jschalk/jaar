@@ -5,9 +5,9 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_1_if_None,
     get_json_from_dict,
 )
+from src.a01_way_logic.way import OwnerName, EventInt, WayStr
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import PennyNum, FundNum
-from src.a01_way_logic.way import OwnerName, EventInt, WayStr
 from src.a04_reason_logic.reason_concept import (
     FactUnit,
     factunits_get_from_dict,

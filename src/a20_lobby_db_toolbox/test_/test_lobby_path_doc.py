@@ -1,11 +1,11 @@
-from src.a02_finance_logic._utils.strs_a02 import (
+from src.a02_finance_logic._test_util.a02_str import (
     owner_name_str,
     deal_time_str,
     fisc_label_str,
     world_id_str,
 )
-from src.a06_bud_logic._utils.str_a06 import event_int_str
-from src.a20_lobby_db_toolbox._utils.str_a20 import (
+from src.a06_bud_logic._test_util.a06_str import event_int_str
+from src.a20_lobby_db_toolbox._test_util.a20_str import (
     lobbys_str,
     lobby_id_str,
     lobby_mstr_dir_str,

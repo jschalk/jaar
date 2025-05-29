@@ -1,8 +1,8 @@
 from src.a00_data_toolbox.dict_toolbox import x_is_json
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_label_str
 from src.a01_way_logic.way import get_default_fisc_label as root_label
+from src.a02_finance_logic._test_util.a02_str import owner_name_str, fisc_label_str
 from src.a03_group_logic.acct import acctunit_shop
-from src.a06_bud_logic._utils.str_a06 import (
+from src.a06_bud_logic._test_util.a06_str import (
     bud_acctunit_str,
     face_name_str,
     event_int_str,
@@ -12,7 +12,11 @@ from src.a06_bud_logic._utils.str_a06 import (
 )
 from src.a06_bud_logic.bud import budunit_shop
 from src.a08_bud_atom_logic.atom import budatom_shop
-from src.a08_bud_atom_logic._utils.str_a08 import atom_insert, atom_delete, atom_update
+from src.a08_bud_atom_logic._test_util.a08_str import (
+    atom_insert,
+    atom_delete,
+    atom_update,
+)
 from src.a09_pack_logic.delta import buddelta_shop
 from src.a09_pack_logic.pack import (
     init_pack_id,
@@ -21,8 +25,10 @@ from src.a09_pack_logic.pack import (
     get_init_pack_id_if_None,
     get_packunit_from_json,
 )
-from src.a09_pack_logic._utils.example_atoms import get_atom_example_conceptunit_sports
-from src.a09_pack_logic._utils.example_deltas import get_buddelta_sue_example
+from src.a09_pack_logic._test_util.example_atoms import (
+    get_atom_example_conceptunit_sports,
+)
+from src.a09_pack_logic._test_util.example_deltas import get_buddelta_sue_example
 from pytest import raises as pytest_raises
 
 

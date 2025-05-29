@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.db_toolbox import get_table_columns, get_row_count
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_label_str
-from src.a06_bud_logic._utils.str_a06 import (
+from src.a02_finance_logic._test_util.a02_str import owner_name_str, fisc_label_str
+from src.a06_bud_logic._test_util.a06_str import (
     bud_acctunit_str,
     face_name_str,
     acct_name_str,
@@ -8,7 +8,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     credit_belief_str,
     debtit_belief_str,
 )
-from src.a16_pidgin_logic._utils.str_a16 import (
+from src.a16_pidgin_logic._test_util.a16_str import (
     pidgin_way_str,
     inx_bridge_str,
     otx_bridge_str,
@@ -16,7 +16,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     otx_way_str,
     unknown_term_str,
 )
-from src.a17_idea_logic._utils.str_a17 import idea_number_str
+from src.a17_idea_logic._test_util.a17_str import idea_number_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
     create_sound_and_voice_tables,

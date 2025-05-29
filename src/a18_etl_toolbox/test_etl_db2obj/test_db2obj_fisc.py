@@ -1,6 +1,6 @@
-from src.a02_finance_logic._utils.strs_a02 import fisc_label_str
+from src.a02_finance_logic._test_util.a02_str import fisc_label_str
 from src.a15_fisc_logic.fisc import get_from_dict as fiscunit_get_from_dict
-from src.a15_fisc_logic._utils.str_a15 import (
+from src.a15_fisc_logic._test_util.a15_str import (
     cashbook_str,
     brokerunits_str,
     timeline_str,

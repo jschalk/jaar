@@ -1,5 +1,5 @@
-from src.a02_finance_logic._utils.strs_a02 import fisc_label_str
-from src.a14_keep_logic._utils.example_credorledgers import example_yao_hubunit
+from src.a02_finance_logic._test_util.a02_str import fisc_label_str
+from src.a14_keep_logic._test_util.example_credorledgers import example_yao_hubunit
 from src.a14_keep_logic.rivercycle import RiverGrade, rivergrade_shop
 
 

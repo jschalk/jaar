@@ -1,14 +1,14 @@
 from src.a00_data_toolbox.file_toolbox import create_path, open_json
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str
-from src.a06_bud_logic._utils.str_a06 import face_name_str
+from src.a02_finance_logic._test_util.a02_str import owner_name_str
+from src.a06_bud_logic._test_util.a06_str import face_name_str
 from src.a09_pack_logic.delta import buddelta_shop
 from src.a09_pack_logic.pack import packunit_shop, create_packunit_from_files
-from src.a09_pack_logic._utils.example_atoms import (
+from src.a09_pack_logic._test_util.example_atoms import (
     get_atom_example_conceptunit_sports,
     get_atom_example_conceptunit_knee,
     get_atom_example_conceptunit_ball,
 )
-from src.a09_pack_logic._utils.pack_env import (
+from src.a09_pack_logic._test_util.a09_env import (
     get_module_temp_dir as fiscs_dir,
     env_dir_setup_cleanup,
 )

@@ -1,6 +1,6 @@
 from src.a06_bud_logic.bud import BudUnit, budunit_shop
 from src.a07_calendar_logic.chrono import ChronoUnit, chronounit_shop
-from src.a07_calendar_logic._utils.calendar_examples import (
+from src.a07_calendar_logic._test_util.calendar_examples import (
     five_str,
     add_time_creg_conceptunit,
     add_time_five_conceptunit,

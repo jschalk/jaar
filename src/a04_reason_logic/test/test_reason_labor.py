@@ -1,4 +1,6 @@
 from src.a01_way_logic.way import GroupTitle
+from src.a03_group_logic.group import membership_shop
+from src.a03_group_logic.group import groupunit_shop
 from src.a04_reason_logic.reason_labor import (
     LaborUnit,
     laborunit_shop,
@@ -6,9 +8,6 @@ from src.a04_reason_logic.reason_labor import (
     laborheir_shop,
     create_laborunit,
 )
-from src.a03_group_logic.group import membership_shop
-from src.a03_group_logic.group import groupunit_shop
-from pytest import raises as pytest_raises
 
 
 def test_LaborUnit_exists():

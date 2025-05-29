@@ -17,11 +17,11 @@ from src.a15_fisc_logic.fisc import (
     get_from_dict as fiscunit_get_from_dict,
 )
 from src.a19_world_logic.world import worldunit_shop
-from src.a19_world_logic._utils.example_worlds import (
+from src.a19_world_logic._test_util.example_worlds import (
     get_bob_mop_with_reason_budunit_example,
     example_casa_clean_factunit,
 )
-from src.a19_world_logic._utils.env_a19 import (
+from src.a19_world_logic._test_util.a19_env import (
     get_module_temp_dir as worlds_dir,
     env_dir_setup_cleanup,
 )

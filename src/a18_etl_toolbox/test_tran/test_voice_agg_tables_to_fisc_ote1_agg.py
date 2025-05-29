@@ -1,11 +1,11 @@
 from src.a00_data_toolbox.db_toolbox import get_row_count, db_table_exists
-from src.a02_finance_logic._utils.strs_a02 import (
+from src.a02_finance_logic._test_util.a02_str import (
     deal_time_str,
     owner_name_str,
     fisc_label_str,
 )
-from src.a06_bud_logic._utils.str_a06 import event_int_str
-from src.a15_fisc_logic._utils.str_a15 import fisc_dealunit_str
+from src.a06_bud_logic._test_util.a06_str import event_int_str
+from src.a15_fisc_logic._test_util.a15_str import fisc_dealunit_str
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a18_etl_toolbox.transformers import (
     create_sound_and_voice_tables,

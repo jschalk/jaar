@@ -1,5 +1,5 @@
-from src.a05_concept_logic.concept import conceptunit_shop
 from src.a01_way_logic.way import get_default_fisc_label as root_label
+from src.a05_concept_logic.concept import conceptunit_shop
 from pytest import raises as pytest_raises
 
 

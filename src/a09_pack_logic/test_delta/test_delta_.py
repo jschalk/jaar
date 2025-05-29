@@ -1,10 +1,12 @@
+from src.a00_data_toolbox.dict_toolbox import x_is_json
 from src.a01_way_logic.way import (
     create_way,
     get_default_fisc_label as root_label,
     to_way,
 )
 from src.a03_group_logic.acct import acctunit_shop
-from src.a06_bud_logic._utils.str_a06 import (
+from src.a06_bud_logic.bud import budunit_shop
+from src.a06_bud_logic._test_util.a06_str import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
@@ -17,7 +19,11 @@ from src.a06_bud_logic._utils.str_a06 import (
     credit_belief_str,
     debtit_belief_str,
 )
-from src.a08_bud_atom_logic._utils.str_a08 import atom_update, atom_insert, atom_delete
+from src.a08_bud_atom_logic._test_util.a08_str import (
+    atom_update,
+    atom_insert,
+    atom_delete,
+)
 from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a09_pack_logic.delta import (
     BudDelta,
@@ -25,12 +31,10 @@ from src.a09_pack_logic.delta import (
     bud_built_from_delta_is_valid,
     get_buddelta_from_ordered_dict,
 )
-from src.a06_bud_logic.bud import budunit_shop
-from src.a09_pack_logic._utils.example_deltas import (
+from src.a09_pack_logic._test_util.example_deltas import (
     get_buddelta_example1,
     get_buddelta_sue_example,
 )
-from src.a00_data_toolbox.dict_toolbox import x_is_json
 from pytest import raises as pytest_raises
 
 

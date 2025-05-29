@@ -1,10 +1,10 @@
 from src.a00_data_toolbox.file_toolbox import open_file, create_path
-from src.a06_bud_logic._utils.str_a06 import (
+from src.a06_bud_logic._test_util.a06_str import (
     acct_name_str,
     group_title_str,
     credor_respect_str,
 )
-from src.a17_idea_logic._utils.example_pandas import (
+from src.a17_idea_logic._test_util.example_pandas import (
     get_empty_dataframe,
     get_small_example01_csv,
     get_small_example01_dataframe,
@@ -23,7 +23,7 @@ from src.a17_idea_logic.idea_db_tool import (
     get_relevant_columns_dataframe,
     get_brick_raw_grouping_with_all_values_equal_df,
 )
-from src.a17_idea_logic._utils.env_a17 import (
+from src.a17_idea_logic._test_util.a17_env import (
     env_dir_setup_cleanup,
     idea_examples_dir,
 )

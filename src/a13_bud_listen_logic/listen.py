@@ -1,10 +1,10 @@
-from src.a02_finance_logic.allot import allot_scale
 from src.a01_way_logic.way import (
     get_ancestor_ways,
     WayStr,
     get_root_label_from_way,
     OwnerName,
 )
+from src.a02_finance_logic.allot import allot_scale
 from src.a05_concept_logic.concept import ConceptUnit
 from src.a06_bud_logic.bud import BudUnit, AcctUnit
 from src.a12_hub_tools.basis_buds import create_empty_bud_from_bud, create_listen_basis

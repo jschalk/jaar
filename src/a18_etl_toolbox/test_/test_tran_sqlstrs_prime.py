@@ -7,7 +7,7 @@ from src.a00_data_toolbox.db_toolbox import (
     create_insert_into_clause_str as get_insert_sql,
     create_select_query as get_select_sql,
 )
-from src.a06_bud_logic._utils.str_a06 import (
+from src.a06_bud_logic._test_util.a06_str import (
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
@@ -22,7 +22,7 @@ from src.a06_bud_logic._utils.str_a06 import (
     face_name_str,
 )
 from src.a08_bud_atom_logic.atom_config import get_bud_dimens, get_delete_key_name
-from src.a15_fisc_logic._utils.str_a15 import (
+from src.a15_fisc_logic._test_util.a15_str import (
     fiscunit_str,
     fisc_cashbook_str,
     fisc_dealunit_str,
@@ -33,7 +33,7 @@ from src.a15_fisc_logic._utils.str_a15 import (
 )
 from src.a15_fisc_logic.fisc_config import get_fisc_dimens
 from src.a16_pidgin_logic.pidgin_config import get_pidgin_dimens, find_set_otx_inx_args
-from src.a16_pidgin_logic._utils.str_a16 import (
+from src.a16_pidgin_logic._test_util.a16_str import (
     pidgin_title_str,
     pidgin_name_str,
     pidgin_way_str,
@@ -43,7 +43,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     inx_bridge_str,
     unknown_term_str,
 )
-from src.a17_idea_logic._utils.str_a17 import idea_category_str, idea_number_str
+from src.a17_idea_logic._test_util.a17_str import idea_category_str, idea_number_str
 from src.a17_idea_logic.idea_config import (
     get_idea_sqlite_types,
     get_idea_config_dict,

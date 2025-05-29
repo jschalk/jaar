@@ -1,6 +1,6 @@
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_bud_logic.bud import budunit_shop
-from src.a06_bud_logic._utils.str_a06 import bud_acctunit_str, acct_name_str
+from src.a06_bud_logic._test_util.a06_str import bud_acctunit_str, acct_name_str
 from src.a08_bud_atom_logic.atom import atom_insert
 from src.a09_pack_logic.delta import buddelta_shop, get_dimens_cruds_buddelta
 

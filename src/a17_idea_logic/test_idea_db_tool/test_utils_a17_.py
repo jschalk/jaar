@@ -1,4 +1,4 @@
-from src.a17_idea_logic._utils.str_a17 import (
+from src.a17_idea_logic._test_util.a17_str import (
     brick_raw_str,
     brick_agg_str,
     brick_valid_str,

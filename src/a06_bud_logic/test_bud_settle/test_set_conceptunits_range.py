@@ -1,7 +1,7 @@
 from src.a01_way_logic.way import to_way
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_bud_logic.bud import budunit_shop
-from src.a06_bud_logic._utils.example_buds import (
+from src.a06_bud_logic._test_util.example_buds import (
     get_budunit_with_4_levels_and_2reasons,
 )
 

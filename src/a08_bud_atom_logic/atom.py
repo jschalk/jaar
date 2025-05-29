@@ -23,7 +23,7 @@ from src.a04_reason_logic.reason_concept import factunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_bud_logic.bud import BudUnit
 from src.a06_bud_logic.bud_tool import bud_attr_exists, bud_get_obj
-from src.a08_bud_atom_logic._utils.str_a08 import (
+from src.a08_bud_atom_logic._test_util.a08_str import (
     atom_delete,
     atom_insert,
     atom_update,

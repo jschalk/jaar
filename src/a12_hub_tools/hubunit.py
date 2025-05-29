@@ -14,13 +14,6 @@ from src.a00_data_toolbox.file_toolbox import (
 )
 from src.a00_data_toolbox.dict_toolbox import get_empty_set_if_None
 from src.a00_data_toolbox.db_toolbox import sqlite_connection
-from src.a02_finance_logic.finance_config import (
-    default_fund_coin_if_None,
-    validate_fund_pool,
-    default_respect_bit_if_None,
-    filter_penny,
-    default_money_magnitude_if_None,
-)
 from src.a01_way_logic.way import (
     OwnerName,
     FiscLabel,
@@ -30,6 +23,13 @@ from src.a01_way_logic.way import (
     get_all_way_labels,
     validate_labelstr,
     default_bridge_if_None,
+)
+from src.a02_finance_logic.finance_config import (
+    default_fund_coin_if_None,
+    validate_fund_pool,
+    default_respect_bit_if_None,
+    filter_penny,
+    default_money_magnitude_if_None,
 )
 from src.a06_bud_logic.bud import (
     BudUnit,

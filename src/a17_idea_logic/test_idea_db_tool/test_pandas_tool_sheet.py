@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path, set_dir
-from src.a17_idea_logic._utils.env_a17 import (
+from src.a17_idea_logic._test_util.a17_env import (
     env_dir_setup_cleanup,
     idea_fisc_mstr_dir,
 )

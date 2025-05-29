@@ -1,4 +1,4 @@
-from src.a06_bud_logic._utils.str_a06 import (
+from src.a06_bud_logic._test_util.a06_str import (
     acct_name_str,
     addin_str,
     awardee_title_str,
@@ -40,7 +40,6 @@ from src.a06_bud_logic._utils.str_a06 import (
 
 
 def test_str_functions_ReturnsObj():
-    assert acct_name_str() == "acct_name"
     assert addin_str() == "addin"
     assert awardee_title_str() == "awardee_title"
     assert rcontext_str() == "rcontext"

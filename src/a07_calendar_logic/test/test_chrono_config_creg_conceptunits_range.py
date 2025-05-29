@@ -1,5 +1,5 @@
 from src.a06_bud_logic.bud import budunit_shop
-from src.a07_calendar_logic._utils.calendar_examples import (
+from src.a07_calendar_logic._test_util.calendar_examples import (
     add_time_creg_conceptunit,
     get_cregtime_str,
     get_sun,
@@ -10,7 +10,7 @@ from src.a07_calendar_logic._utils.calendar_examples import (
     get_fri,
     get_sat,
 )
-from src.a07_calendar_logic._utils.str_a07 import (
+from src.a07_calendar_logic._test_util.a07_str import (
     c100_str,
     c400_leap_str,
     c400_clean_str,

@@ -2,7 +2,7 @@ from src.a01_way_logic.way import WayStr
 from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a05_concept_logic.concept import ConceptUnit, conceptunit_shop
 from src.a06_bud_logic.bud import budunit_shop, get_from_json as budunit_get_from_json
-from src.a06_bud_logic._utils.example_buds import (
+from src.a06_bud_logic._test_util.example_buds import (
     get_budunit_with_4_levels,
     get_budunit_with_4_levels_and_2reasons,
     get_budunit_with7amCleanTableReason,

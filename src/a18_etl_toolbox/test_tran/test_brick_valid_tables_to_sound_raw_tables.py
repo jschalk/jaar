@@ -1,7 +1,11 @@
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
-from src.a02_finance_logic._utils.strs_a02 import owner_name_str, fisc_label_str
-from src.a06_bud_logic._utils.str_a06 import face_name_str, acct_name_str, event_int_str
-from src.a16_pidgin_logic._utils.str_a16 import (
+from src.a02_finance_logic._test_util.a02_str import owner_name_str, fisc_label_str
+from src.a06_bud_logic._test_util.a06_str import (
+    face_name_str,
+    acct_name_str,
+    event_int_str,
+)
+from src.a16_pidgin_logic._test_util.a16_str import (
     inx_bridge_str,
     otx_bridge_str,
     inx_way_str,
@@ -9,7 +13,7 @@ from src.a16_pidgin_logic._utils.str_a16 import (
     unknown_term_str,
 )
 from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
-from src.a17_idea_logic._utils.str_a17 import brick_valid_str
+from src.a17_idea_logic._test_util.a17_str import brick_valid_str
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a18_etl_toolbox.transformers import etl_brick_valid_tables_to_sound_raw_tables
 from sqlite3 import connect as sqlite3_connect

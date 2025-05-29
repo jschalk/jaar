@@ -1,3 +1,8 @@
+from src.a01_way_logic.way import (
+    get_default_fisc_label as root_label,
+    create_way,
+    get_default_fisc_way,
+)
 from src.a04_reason_logic.reason_concept import (
     FactUnit,
     factunit_shop,
@@ -5,11 +10,6 @@ from src.a04_reason_logic.reason_concept import (
     FactCore,
     factunits_get_from_dict,
     get_factunit_from_tuple,
-)
-from src.a01_way_logic.way import (
-    get_default_fisc_label as root_label,
-    create_way,
-    get_default_fisc_way,
 )
 
 

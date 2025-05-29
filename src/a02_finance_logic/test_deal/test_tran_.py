@@ -5,7 +5,7 @@ from src.a02_finance_logic.deal import (
     tranbook_shop,
     get_tranbook_from_dict,
 )
-from src.a02_finance_logic._utils.strs_a02 import fisc_label_str
+from src.a02_finance_logic._test_util.a02_str import fisc_label_str, acct_name_str
 from pytest import raises as pytest_raises
 
 

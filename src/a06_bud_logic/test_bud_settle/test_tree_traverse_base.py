@@ -3,7 +3,7 @@ from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import factheir_shop
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_bud_logic.bud import budunit_shop
-from src.a06_bud_logic._utils.example_buds import (
+from src.a06_bud_logic._test_util.example_buds import (
     get_budunit_with_4_levels,
     get_budunit_with_4_levels_and_2reasons,
 )
@@ -381,7 +381,7 @@ def test_BudUnit_get_concept_tree_ordered_way_list_ReturnsObj():
     assert x_8th_way_in_ordered_list == sue_bud.make_l1_way(week_str)
 
     # WHEN
-    y_bud = budunit_shop()
+    y_bud = budunit_shop(fisc_label="accord23")
 
     # THEN
     y_1st_way_in_ordered_list = y_bud.get_concept_tree_ordered_way_list()[0]

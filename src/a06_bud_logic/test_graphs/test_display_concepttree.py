@@ -6,7 +6,7 @@ from src.a06_bud_logic.bud_graphics import (
     get_bud_agenda_plotly_fig,
     fund_graph0,
 )
-from src.a06_bud_logic._utils.example_buds import (
+from src.a06_bud_logic._test_util.example_buds import (
     budunit_v001_with_large_agenda,
     get_budunit_with_4_levels,
     get_budunit_laundry_example1,

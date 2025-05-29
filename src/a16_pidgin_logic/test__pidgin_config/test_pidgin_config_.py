@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a08_bud_atom_logic._utils.str_a08 import (
+from src.a08_bud_atom_logic._test_util.a08_str import (
     jkeys_str,
     jvalues_str,
     atom_update,
@@ -7,7 +7,7 @@ from src.a08_bud_atom_logic._utils.str_a08 import (
     atom_delete,
     normal_specs_str,
 )
-from src.a16_pidgin_logic._utils.str_a16 import (
+from src.a16_pidgin_logic._test_util.a16_str import (
     pidginunit_str,
     pidgin_filename,
     otx_bridge_str,
