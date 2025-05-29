@@ -9,7 +9,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     debtit_belief_str,
     event_int_str,
 )
-from src.a08_bud_atom_logic._test_util.a08_str import atom_insert
+from src.a08_bud_atom_logic._test_util.a08_str import INSERT_str
 from src.a09_pack_logic.pack import packunit_shop, get_packunit_from_json
 from src.a12_hub_tools.hub_path import (
     create_owner_event_dir_path as owner_event_dir,
@@ -115,22 +115,21 @@ def test_etl_event_bud_csvs_to_pack_json_CreatesFiles_Scenario1(
     expected_e3_pack = packunit_shop(bob_inx, None, a23_str, event_int=event3)
     expected_e7_pack = packunit_shop(bob_inx, None, a23_str, event_int=event7)
     budacct_dimen = bud_acctunit_str()
-    insert_str = atom_insert()
     expected_e3_pack._buddelta.add_budatom(
         budacct_dimen,
-        insert_str,
+        INSERT_str(),
         jkeys={acct_name_str(): bob_inx},
         jvalues={credit_belief_str(): credit77, debtit_belief_str(): None},
     )
     expected_e7_pack._buddelta.add_budatom(
         budacct_dimen,
-        insert_str,
+        INSERT_str(),
         jkeys={acct_name_str(): bob_inx},
         jvalues={credit_belief_str(): credit77, debtit_belief_str(): None},
     )
     expected_e7_pack._buddelta.add_budatom(
         budacct_dimen,
-        insert_str,
+        INSERT_str(),
         jkeys={acct_name_str(): sue_inx},
         jvalues={credit_belief_str(): credit88, debtit_belief_str(): None},
     )

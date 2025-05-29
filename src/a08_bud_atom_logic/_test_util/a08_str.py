@@ -1,24 +1,20 @@
-class CRUD_command(str):
-    pass
-
-
-def atom_update() -> CRUD_command:
+def UPDATE_str() -> str:
     return "UPDATE"
 
 
-def atom_insert() -> CRUD_command:
+def INSERT_str() -> str:
     return "INSERT"
 
 
-def atom_delete() -> CRUD_command:
+def DELETE_str() -> str:
     return "DELETE"
 
 
-def atom_hx_table_name() -> str:
+def atom_hx_str() -> str:
     return "atom_hx"
 
 
-def atom_mstr_table_name() -> str:
+def atom_mstr_tablename_str() -> str:
     return "atom_mstr"
 
 

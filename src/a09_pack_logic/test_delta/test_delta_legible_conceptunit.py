@@ -12,9 +12,9 @@ from src.a06_bud_logic._test_util.a06_str import (
     mass_str,
 )
 from src.a08_bud_atom_logic._test_util.a08_str import (
-    atom_update,
-    atom_insert,
-    atom_delete,
+    UPDATE_str,
+    INSERT_str,
+    DELETE_str,
 )
 from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a09_pack_logic.delta import buddelta_shop
@@ -38,7 +38,7 @@ def test_create_legible_list_ReturnsObj_conceptunit_INSERT():
     morph_value = 37
     mass_value = 43
     pledge_value = False
-    clean_budatom = budatom_shop(dimen, atom_insert())
+    clean_budatom = budatom_shop(dimen, INSERT_str())
     clean_budatom.set_arg(concept_way_str(), clean_way)
     clean_budatom.set_arg(addin_str(), addin_value)
     clean_budatom.set_arg(begin_str(), begin_value)
@@ -79,7 +79,7 @@ def test_create_legible_list_ReturnsObj_conceptunit_UPDATE():
     morph_value = 37
     mass_value = 43
     pledge_value = False
-    clean_budatom = budatom_shop(dimen, atom_update())
+    clean_budatom = budatom_shop(dimen, UPDATE_str())
     clean_budatom.set_arg(concept_way_str(), clean_way)
     clean_budatom.set_arg(addin_str(), addin_value)
     clean_budatom.set_arg(begin_str(), begin_value)
@@ -110,7 +110,7 @@ def test_create_legible_list_ReturnsObj_conceptunit_DELETE():
     clean_label = "clean fridge"
     casa_way = sue_bud.make_l1_way("casa")
     clean_way = sue_bud.make_way(casa_way, clean_label)
-    clean_budatom = budatom_shop(dimen, atom_delete())
+    clean_budatom = budatom_shop(dimen, DELETE_str())
     clean_budatom.set_arg(concept_way_str(), clean_way)
 
     x_buddelta = buddelta_shop()

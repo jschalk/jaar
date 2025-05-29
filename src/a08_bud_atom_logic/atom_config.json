@@ -282,7 +282,7 @@
             }
         },
         "jvalues": {
-            "rcontext_concept_active_requisite": {
+            "rconcept_active_requisite": {
                 "class_type": "bool",
                 "column_order": 2,
                 "sqlite_datatype": "INTEGER"

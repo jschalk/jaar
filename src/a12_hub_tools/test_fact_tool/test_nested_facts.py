@@ -6,7 +6,7 @@ from src.a11_deal_cell_logic._test_util.example_factunits import (
 from src.a12_hub_tools.fact_tool import get_nodes_with_weighted_facts
 
 
-def test_get_nodes_with_weighted_facts_ReturnObj_Scenario00_RootOnly_NoFacts():
+def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario00_RootOnly_NoFacts():
     # ESTABLISH
     nodes_facts_dict = {}
     nodes_quota_ledger_dict = {}
@@ -20,7 +20,7 @@ def test_get_nodes_with_weighted_facts_ReturnObj_Scenario00_RootOnly_NoFacts():
     assert nodes_weighted_facts == {}
 
 
-def test_get_nodes_with_weighted_facts_ReturnObj_Scenario01_Multiple_Nodes_NoFacts():
+def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario01_Multiple_Nodes_NoFacts():
     # ESTABLISH
     bob_str = "Bob"
     yao_str = "Yao"
@@ -42,7 +42,7 @@ def test_get_nodes_with_weighted_facts_ReturnObj_Scenario01_Multiple_Nodes_NoFac
     assert nodes_wgt_facts == nodes_facts_dict
 
 
-def test_get_nodes_with_weighted_facts_ReturnObj_Scenario02_RootHasOneFact():
+def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario02_RootHasOneFact():
     # ESTABLISH
     clean_fact = example_casa_clean_factunit()
     root_facts = {clean_fact.fcontext: clean_fact}
@@ -58,7 +58,7 @@ def test_get_nodes_with_weighted_facts_ReturnObj_Scenario02_RootHasOneFact():
     assert nodes_wgt_facts == nodes_facts_dict
 
 
-def test_get_nodes_with_weighted_facts_ReturnObj_Scenario03_ChildHasOneFact():
+def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario03_ChildHasOneFact():
     # ESTABLISH
     bob_str = "Bob"
     clean_fact = example_casa_clean_factunit()
@@ -78,7 +78,7 @@ def test_get_nodes_with_weighted_facts_ReturnObj_Scenario03_ChildHasOneFact():
     assert nodes_wgt_facts == expected_nodes_weighted_facts
 
 
-def test_get_nodes_with_weighted_facts_ReturnObj_Scenario04_ChildHasOneFact():
+def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario04_ChildHasOneFact():
     # ESTABLISH
     bob_str = "Bob"
     clean_fact = example_casa_clean_factunit()
@@ -98,7 +98,7 @@ def test_get_nodes_with_weighted_facts_ReturnObj_Scenario04_ChildHasOneFact():
     assert nodes_wgt_facts == expected_nodes_weighted_facts
 
 
-def test_get_nodes_with_weighted_facts_ReturnObj_Scenario05_Level2ChildHasOneFact():
+def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario05_Level2ChildHasOneFact():
     # ESTABLISH
     bob_str = "Bob"
     yao_str = "Yao"
@@ -129,7 +129,7 @@ def test_get_nodes_with_weighted_facts_ReturnObj_Scenario05_Level2ChildHasOneFac
     assert nodes_wgt_facts == expected_nodes_weighted_facts
 
 
-def test_get_nodes_with_weighted_facts_ReturnObj_Scenario06_Level2ChildsHaveTwoFacts():
+def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario06_Level2ChildsHaveTwoFacts():
     # ESTABLISH
     bob_str = "Bob"
     yao_str = "Yao"
@@ -163,7 +163,7 @@ def test_get_nodes_with_weighted_facts_ReturnObj_Scenario06_Level2ChildsHaveTwoF
     assert nodes_wgt_facts == expected_nodes_weighted_facts
 
 
-def test_get_nodes_with_weighted_facts_ReturnObj_Scenario07_Level2ChildFactOverridesAncestorFact():
+def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario07_Level2ChildFactOverridesAncestorFact():
     # ESTABLISH
     bob_str = "Bob"
     yao_str = "Yao"
@@ -201,7 +201,7 @@ def test_get_nodes_with_weighted_facts_ReturnObj_Scenario07_Level2ChildFactOverr
     assert nodes_wgt_facts == expected_nodes_weighted_facts
 
 
-def test_get_nodes_with_weighted_facts_ReturnObj_Scenario08_Level2ChildHasDiffentFacts():
+def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario08_Level2ChildHasDiffentFacts():
     # ESTABLISH
     bob_str = "Bob"
     yao_str = "Yao"
@@ -250,7 +250,7 @@ def test_get_nodes_with_weighted_facts_ReturnObj_Scenario08_Level2ChildHasDiffen
     assert nodes_wgt_facts == expected_nodes_weighted_facts
 
 
-def test_get_nodes_with_weighted_facts_ReturnObj_Scenario09_Level2ChildThreeChildFacts():
+def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario09_Level2ChildThreeChildFacts():
     # ESTABLISH
     bob_str = "Bob"
     yao_str = "Yao"
@@ -307,7 +307,7 @@ def test_get_nodes_with_weighted_facts_ReturnObj_Scenario09_Level2ChildThreeChil
     assert nodes_wgt_facts == expected_nodes_weighted_facts
 
 
-def test_get_nodes_with_weighted_facts_ReturnObj_Scenario10_Level2ChildTwoChildFactsOneMissing():
+def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario10_Level2ChildTwoChildFactsOneMissing():
     # ESTABLISH
     bob_str = "Bob"
     yao_str = "Yao"

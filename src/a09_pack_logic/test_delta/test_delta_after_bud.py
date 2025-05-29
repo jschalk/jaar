@@ -20,7 +20,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     labor_title_str,
     healer_name_str,
     concept_way_str,
-    rcontext_concept_active_requisite_str,
+    rconcept_active_requisite_str,
     pledge_str,
     begin_str,
     close_str,
@@ -35,12 +35,8 @@ from src.a06_bud_logic._test_util.a06_str import (
     give_force_str,
     take_force_str,
 )
-from src.a08_bud_atom_logic.atom import (
-    atom_update,
-    atom_delete,
-    atom_insert,
-    budatom_shop,
-)
+from src.a08_bud_atom_logic._test_util.a08_str import INSERT_str, UPDATE_str, DELETE_str
+from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a09_pack_logic.delta import buddelta_shop
 from src.a09_pack_logic._test_util.example_deltas import get_buddelta_example1
 
@@ -69,7 +65,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnitSimpleAttrs():
     before_sue_budunit = budunit_shop(sue_str, tally=sue_tally)
 
     dimen = budunit_str()
-    x_budatom = budatom_shop(dimen, atom_update())
+    x_budatom = budatom_shop(dimen, UPDATE_str())
     new1_value = 55
     new1_arg = "tally"
     x_budatom.set_jvalue(new1_arg, new1_value)
@@ -130,7 +126,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_acct():
     before_sue_budunit.add_acctunit(zia_str)
 
     dimen = bud_acctunit_str()
-    x_budatom = budatom_shop(dimen, atom_delete())
+    x_budatom = budatom_shop(dimen, DELETE_str())
     x_budatom.set_jkey(acct_name_str(), zia_str)
     sue_buddelta.set_budatom(x_budatom)
 
@@ -158,7 +154,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_acct():
 
     # WHEN
     dimen = bud_acctunit_str()
-    x_budatom = budatom_shop(dimen, atom_insert())
+    x_budatom = budatom_shop(dimen, INSERT_str())
     x_budatom.set_jkey(acct_name_str(), zia_str)
     x_credit_belief = 55
     x_debtit_belief = 66
@@ -189,7 +185,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_acct():
 
     # WHEN
     dimen = bud_acctunit_str()
-    x_budatom = budatom_shop(dimen, atom_update())
+    x_budatom = budatom_shop(dimen, UPDATE_str())
     x_budatom.set_jkey(acct_name_str(), yao_str)
     yao_credit_belief = 55
     x_budatom.set_jvalue("credit_belief", yao_credit_belief)
@@ -227,11 +223,11 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_membership():
     assert len(before_group_titles_dict.get(fly_str)) == 3
 
     # WHEN
-    yao_budatom = budatom_shop(bud_acct_membership_str(), atom_delete())
+    yao_budatom = budatom_shop(bud_acct_membership_str(), DELETE_str())
     yao_budatom.set_jkey(group_title_str(), run_str)
     yao_budatom.set_jkey(acct_name_str(), yao_str)
     # print(f"{yao_budatom=}")
-    zia_budatom = budatom_shop(bud_acct_membership_str(), atom_delete())
+    zia_budatom = budatom_shop(bud_acct_membership_str(), DELETE_str())
     zia_budatom.set_jkey(group_title_str(), fly_str)
     zia_budatom.set_jkey(acct_name_str(), zia_str)
     # print(f"{zia_budatom=}")
@@ -263,7 +259,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_membership():
     assert len(before_group_titles.get(run_str)) == 1
 
     # WHEN
-    yao_budatom = budatom_shop(bud_acct_membership_str(), atom_insert())
+    yao_budatom = budatom_shop(bud_acct_membership_str(), INSERT_str())
     yao_budatom.set_jkey(group_title_str(), run_str)
     yao_budatom.set_jkey(acct_name_str(), yao_str)
     yao_run_credit_vote = 17
@@ -297,7 +293,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_membership():
     assert yao_run_membership.debtit_vote == 1
 
     # WHEN
-    yao_budatom = budatom_shop(bud_acct_membership_str(), atom_update())
+    yao_budatom = budatom_shop(bud_acct_membership_str(), UPDATE_str())
     yao_budatom.set_jkey(group_title_str(), run_str)
     yao_budatom.set_jkey(acct_name_str(), yao_str)
     new_yao_run_credit_vote = 7
@@ -327,7 +323,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_conceptunit():
     disc_way = before_sue_budunit.make_way(sports_way, disc_str)
     before_sue_budunit.set_concept(conceptunit_shop(ball_str), sports_way)
     before_sue_budunit.set_concept(conceptunit_shop(disc_str), sports_way)
-    delete_disc_budatom = budatom_shop(bud_conceptunit_str(), atom_delete())
+    delete_disc_budatom = budatom_shop(bud_conceptunit_str(), DELETE_str())
     delete_disc_budatom.set_jkey(concept_way_str(), disc_way)
     print(f"{disc_way=}")
     delete_disc_budatom.set_jkey(concept_way_str(), disc_way)
@@ -366,7 +362,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_conceptunit():
     # x_denom = 17
     # x_numor = 10
     x_pledge = True
-    insert_disc_budatom = budatom_shop(bud_conceptunit_str(), atom_insert())
+    insert_disc_budatom = budatom_shop(bud_conceptunit_str(), INSERT_str())
     insert_disc_budatom.set_jkey(concept_way_str(), disc_way)
     # insert_disc_budatom.set_jvalue(addin_str(), x_addin)
     # insert_disc_budatom.set_jvalue(begin_str(), x_begin)
@@ -408,7 +404,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_conceptunit_SimpleAtt
     x_gogo_want = 1222
     x_stop_want = 1333
     x_pledge = True
-    insert_disc_budatom = budatom_shop(bud_conceptunit_str(), atom_update())
+    insert_disc_budatom = budatom_shop(bud_conceptunit_str(), UPDATE_str())
     insert_disc_budatom.set_jkey(concept_way_str(), ball_way)
     # insert_disc_budatom.set_jvalue(addin_str(), x_addin)
     insert_disc_budatom.set_jvalue(begin_str(), x_begin)
@@ -476,7 +472,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_concept_awardlink():
     assert len(before_sue_budunit.get_concept_obj(disc_way).awardlinks) == 2
 
     # WHEN
-    delete_disc_budatom = budatom_shop(bud_concept_awardlink_str(), atom_delete())
+    delete_disc_budatom = budatom_shop(bud_concept_awardlink_str(), DELETE_str())
     delete_disc_budatom.set_jkey(concept_way_str(), disc_way)
     delete_disc_budatom.set_jkey(awardee_title_str(), fly_str)
     print(f"{delete_disc_budatom=}")
@@ -514,7 +510,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_concept_awardlink():
     # WHEN
     x_give_force = 55
     x_take_force = 66
-    update_disc_budatom = budatom_shop(bud_concept_awardlink_str(), atom_update())
+    update_disc_budatom = budatom_shop(bud_concept_awardlink_str(), UPDATE_str())
     update_disc_budatom.set_jkey(concept_way_str(), ball_way)
     update_disc_budatom.set_jkey(awardee_title_str(), run_str)
     update_disc_budatom.set_jvalue(give_force_str(), x_give_force)
@@ -553,7 +549,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_concept_awardlink():
     # WHEN
     x_give_force = 55
     x_take_force = 66
-    update_disc_budatom = budatom_shop(bud_concept_awardlink_str(), atom_insert())
+    update_disc_budatom = budatom_shop(bud_concept_awardlink_str(), INSERT_str())
     update_disc_budatom.set_jkey(concept_way_str(), ball_way)
     update_disc_budatom.set_jkey(awardee_title_str(), run_str)
     update_disc_budatom.set_jvalue(give_force_str(), x_give_force)
@@ -589,7 +585,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_concept_factunit():
     # WHEN
     damaged_fopen = 55
     damaged_fnigh = 66
-    update_disc_budatom = budatom_shop(bud_concept_factunit_str(), atom_insert())
+    update_disc_budatom = budatom_shop(bud_concept_factunit_str(), INSERT_str())
     update_disc_budatom.set_jkey(concept_way_str(), ball_way)
     update_disc_budatom.set_jkey(fcontext_str(), knee_way)
     update_disc_budatom.set_jvalue(fstate_str(), damaged_way)
@@ -633,7 +629,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_concept_factunit():
     assert before_ball_concept.factunits.get(knee_way) is not None
 
     # WHEN
-    update_disc_budatom = budatom_shop(bud_concept_factunit_str(), atom_delete())
+    update_disc_budatom = budatom_shop(bud_concept_factunit_str(), DELETE_str())
     update_disc_budatom.set_jkey(concept_way_str(), ball_way)
     update_disc_budatom.set_jkey(fcontext_str(), knee_way)
     # print(f"{update_disc_budatom=}")
@@ -676,7 +672,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_concept_factunit():
     # WHEN
     medical_fopen = 45
     medical_fnigh = 77
-    update_disc_budatom = budatom_shop(bud_concept_factunit_str(), atom_update())
+    update_disc_budatom = budatom_shop(bud_concept_factunit_str(), UPDATE_str())
     update_disc_budatom.set_jkey(concept_way_str(), ball_way)
     update_disc_budatom.set_jkey(fcontext_str(), knee_way)
     update_disc_budatom.set_jvalue(fstate_str(), medical_way)
@@ -729,7 +725,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_concept_reason_premis
     damaged_pnigh = 77
     damaged_pdivisor = 3
     update_disc_budatom = budatom_shop(
-        bud_concept_reason_premiseunit_str(), atom_update()
+        bud_concept_reason_premiseunit_str(), UPDATE_str()
     )
     update_disc_budatom.set_jkey(concept_way_str(), ball_way)
     update_disc_budatom.set_jkey("rcontext", knee_way)
@@ -784,7 +780,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_concept_reason_premis
     medical_pnigh = 77
     medical_pdivisor = 3
     update_disc_budatom = budatom_shop(
-        bud_concept_reason_premiseunit_str(), atom_insert()
+        bud_concept_reason_premiseunit_str(), INSERT_str()
     )
     update_disc_budatom.set_jkey(concept_way_str(), ball_way)
     update_disc_budatom.set_jkey("rcontext", knee_way)
@@ -839,7 +835,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_concept_reason_premis
 
     # WHEN
     update_disc_budatom = budatom_shop(
-        bud_concept_reason_premiseunit_str(), atom_delete()
+        bud_concept_reason_premiseunit_str(), DELETE_str()
     )
     update_disc_budatom.set_jkey(concept_way_str(), ball_way)
     update_disc_budatom.set_jkey("rcontext", knee_way)
@@ -874,13 +870,13 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_concept_reasonunit():
     assert before_ball_concept.get_reasonunit(knee_way) is None
 
     # WHEN
-    medical_rcontext_concept_active_requisite = True
-    update_disc_budatom = budatom_shop(bud_concept_reasonunit_str(), atom_insert())
+    medical_rconcept_active_requisite = True
+    update_disc_budatom = budatom_shop(bud_concept_reasonunit_str(), INSERT_str())
     update_disc_budatom.set_jkey(concept_way_str(), ball_way)
     update_disc_budatom.set_jkey("rcontext", knee_way)
     update_disc_budatom.set_jvalue(
-        rcontext_concept_active_requisite_str(),
-        medical_rcontext_concept_active_requisite,
+        rconcept_active_requisite_str(),
+        medical_rconcept_active_requisite,
     )
     # print(f"{update_disc_budatom=}")
     sue_buddelta = buddelta_shop()
@@ -893,8 +889,8 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_concept_reasonunit():
     assert after_knee_reasonunit is not None
     assert after_knee_reasonunit.get_premise(medical_way) is None
     assert (
-        after_knee_reasonunit.rcontext_concept_active_requisite
-        == medical_rcontext_concept_active_requisite
+        after_knee_reasonunit.rconcept_active_requisite
+        == medical_rconcept_active_requisite
     )
 
 
@@ -911,30 +907,30 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_concept_reasonunit():
     knee_way = before_sue_au.make_l1_way(knee_str)
     medical_str = "get medical attention"
     medical_way = before_sue_au.make_way(knee_way, medical_str)
-    before_medical_rcontext_concept_active_requisite = False
+    before_medical_rconcept_active_requisite = False
     before_sue_au.set_l1_concept(conceptunit_shop(knee_str))
     before_sue_au.set_concept(conceptunit_shop(medical_str), knee_way)
     before_sue_au.edit_concept_attr(
         ball_way,
         reason_rcontext=knee_way,
-        reason_rcontext_concept_active_requisite=before_medical_rcontext_concept_active_requisite,
+        reason_rconcept_active_requisite=before_medical_rconcept_active_requisite,
     )
     before_ball_concept = before_sue_au.get_concept_obj(ball_way)
     before_ball_reasonunit = before_ball_concept.get_reasonunit(knee_way)
     assert before_ball_reasonunit is not None
     assert (
-        before_ball_reasonunit.rcontext_concept_active_requisite
-        == before_medical_rcontext_concept_active_requisite
+        before_ball_reasonunit.rconcept_active_requisite
+        == before_medical_rconcept_active_requisite
     )
 
     # WHEN
-    after_medical_rcontext_concept_active_requisite = True
-    update_disc_budatom = budatom_shop(bud_concept_reasonunit_str(), atom_update())
+    after_medical_rconcept_active_requisite = True
+    update_disc_budatom = budatom_shop(bud_concept_reasonunit_str(), UPDATE_str())
     update_disc_budatom.set_jkey(concept_way_str(), ball_way)
     update_disc_budatom.set_jkey("rcontext", knee_way)
     update_disc_budatom.set_jvalue(
-        rcontext_concept_active_requisite_str(),
-        after_medical_rcontext_concept_active_requisite,
+        rconcept_active_requisite_str(),
+        after_medical_rconcept_active_requisite,
     )
     # print(f"{update_disc_budatom=}")
     sue_buddelta = buddelta_shop()
@@ -947,8 +943,8 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_concept_reasonunit():
     assert after_knee_reasonunit is not None
     assert after_knee_reasonunit.get_premise(medical_way) is None
     assert (
-        after_knee_reasonunit.rcontext_concept_active_requisite
-        == after_medical_rcontext_concept_active_requisite
+        after_knee_reasonunit.rconcept_active_requisite
+        == after_medical_rconcept_active_requisite
     )
 
 
@@ -963,18 +959,18 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_concept_reasonunit():
     before_sue_au.set_concept(conceptunit_shop(ball_str), sports_way)
     knee_str = "knee"
     knee_way = before_sue_au.make_l1_way(knee_str)
-    medical_rcontext_concept_active_requisite = False
+    medical_rconcept_active_requisite = False
     before_sue_au.set_l1_concept(conceptunit_shop(knee_str))
     before_sue_au.edit_concept_attr(
         ball_way,
         reason_rcontext=knee_way,
-        reason_rcontext_concept_active_requisite=medical_rcontext_concept_active_requisite,
+        reason_rconcept_active_requisite=medical_rconcept_active_requisite,
     )
     before_ball_concept = before_sue_au.get_concept_obj(ball_way)
     assert before_ball_concept.get_reasonunit(knee_way) is not None
 
     # WHEN
-    update_disc_budatom = budatom_shop(bud_concept_reasonunit_str(), atom_delete())
+    update_disc_budatom = budatom_shop(bud_concept_reasonunit_str(), DELETE_str())
     update_disc_budatom.set_jkey(concept_way_str(), ball_way)
     update_disc_budatom.set_jkey("rcontext", knee_way)
     sue_buddelta = buddelta_shop()
@@ -1001,7 +997,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_concept_laborlink():
     assert before_ball_conceptunit.laborunit._laborlinks == set()
 
     # WHEN
-    update_disc_budatom = budatom_shop(bud_concept_laborlink_str(), atom_insert())
+    update_disc_budatom = budatom_shop(bud_concept_laborlink_str(), INSERT_str())
     update_disc_budatom.set_jkey(concept_way_str(), ball_way)
     update_disc_budatom.set_jkey(labor_title_str(), yao_str)
     sue_buddelta = buddelta_shop()
@@ -1031,7 +1027,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_concept_laborlink():
     assert before_ball_conceptunit.laborunit.get_laborlink(yao_str) is not None
 
     # WHEN
-    update_disc_budatom = budatom_shop(bud_concept_laborlink_str(), atom_delete())
+    update_disc_budatom = budatom_shop(bud_concept_laborlink_str(), DELETE_str())
     update_disc_budatom.set_jkey(concept_way_str(), ball_way)
     update_disc_budatom.set_jkey(labor_title_str(), yao_str)
     sue_buddelta = buddelta_shop()
@@ -1060,7 +1056,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_concept_healerlink():
     assert not before_ball_conceptunit.healerlink.healer_name_exists(yao_str)
 
     # WHEN
-    x_budatom = budatom_shop(bud_concept_healerlink_str(), atom_insert())
+    x_budatom = budatom_shop(bud_concept_healerlink_str(), INSERT_str())
     x_budatom.set_jkey(concept_way_str(), ball_way)
     x_budatom.set_jkey(healer_name_str(), yao_str)
     print(f"{x_budatom=}")
@@ -1091,7 +1087,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_concept_healerlink():
     assert before_ball_conceptunit.healerlink.healer_name_exists(yao_str)
 
     # WHEN
-    x_budatom = budatom_shop(bud_concept_healerlink_str(), atom_delete())
+    x_budatom = budatom_shop(bud_concept_healerlink_str(), DELETE_str())
     x_budatom.set_jkey(concept_way_str(), ball_way)
     x_budatom.set_jkey(healer_name_str(), yao_str)
     sue_buddelta = buddelta_shop()

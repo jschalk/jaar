@@ -32,12 +32,12 @@ from src.a06_bud_logic._test_util.a06_str import (
     fstate_str,
     fnigh_str,
     fopen_str,
-    rcontext_concept_active_requisite_str,
+    rconcept_active_requisite_str,
     give_force_str,
     take_force_str,
 )
 from src.a06_bud_logic._test_util.example_buds import get_budunit_with_4_levels
-from src.a08_bud_atom_logic.atom import atom_insert, atom_update, atom_delete
+from src.a08_bud_atom_logic._test_util.a08_str import INSERT_str, UPDATE_str, DELETE_str
 from src.a09_pack_logic.delta import BudDelta, buddelta_shop
 from copy import deepcopy as copy_deepcopy
 
@@ -53,19 +53,19 @@ def print_budatom_keys(x_buddelta: BudDelta):
 
 def get_delete_budatom_list(x_buddelta: BudDelta) -> list:
     return get_empty_list_if_None(
-        x_buddelta._get_crud_budatoms_list().get(atom_delete())
+        x_buddelta._get_crud_budatoms_list().get(DELETE_str())
     )
 
 
 def get_insert_budatom_list(x_buddelta: BudDelta):
     return get_empty_list_if_None(
-        x_buddelta._get_crud_budatoms_list().get(atom_insert())
+        x_buddelta._get_crud_budatoms_list().get(INSERT_str())
     )
 
 
 def get_update_budatom_list(x_buddelta: BudDelta):
     return get_empty_list_if_None(
-        x_buddelta._get_crud_budatoms_list().get(atom_update())
+        x_buddelta._get_crud_budatoms_list().get(UPDATE_str())
     )
 
 
@@ -107,8 +107,8 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_acctunit_insert():
     sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
-    assert len(sue_buddelta.budatoms.get(atom_insert()).get(bud_acctunit_str())) == 1
-    sue_insert_dict = sue_buddelta.budatoms.get(atom_insert())
+    assert len(sue_buddelta.budatoms.get(INSERT_str()).get(bud_acctunit_str())) == 1
+    sue_insert_dict = sue_buddelta.budatoms.get(INSERT_str())
     sue_acctunit_dict = sue_insert_dict.get(bud_acctunit_str())
     xio_budatom = sue_acctunit_dict.get(xio_str)
     assert xio_budatom.get_value(acct_name_str()) == xio_str
@@ -137,7 +137,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_acctunit_delete():
 
     # THEN
     xio_budatom = get_from_nested_dict(
-        sue_buddelta.budatoms, [atom_delete(), bud_acctunit_str(), xio_str]
+        sue_buddelta.budatoms, [DELETE_str(), bud_acctunit_str(), xio_str]
     )
     assert xio_budatom.get_value(acct_name_str()) == xio_str
 
@@ -162,7 +162,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_acctunit_update():
     sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
-    x_keylist = [atom_update(), bud_acctunit_str(), xio_str]
+    x_keylist = [UPDATE_str(), bud_acctunit_str(), xio_str]
     xio_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert xio_budatom.get_value(acct_name_str()) == xio_str
     assert xio_budatom.get_value("credit_belief") == xio_credit_belief
@@ -197,7 +197,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_BudUnit_simple_attr
     sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
-    x_keylist = [atom_update(), budunit_str()]
+    x_keylist = [UPDATE_str(), budunit_str()]
     xio_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert xio_budatom.get_value("max_tree_traverse") == x_max_tree_traverse
     assert xio_budatom.get_value("credor_respect") == x_credor_respect
@@ -234,23 +234,23 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_acct_membership_ins
     sue_buddelta = buddelta_shop()
     print(f"{after_sue_bud.get_acct(zia_str)._memberships=}")
     sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
-    # print(f"{sue_buddelta.budatoms.get(atom_insert()).keys()=}")
+    # print(f"{sue_buddelta.budatoms.get(INSERT_str()).keys()=}")
     # print(
-    #     sue_buddelta.budatoms.get(atom_insert()).get(bud_acct_membership_str()).keys()
+    #     sue_buddelta.budatoms.get(INSERT_str()).get(bud_acct_membership_str()).keys()
     # )
 
     # THEN
-    x_keylist = [atom_insert(), bud_acctunit_str(), yao_str]
+    x_keylist = [INSERT_str(), bud_acctunit_str(), yao_str]
     yao_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert yao_budatom.get_value(acct_name_str()) == yao_str
 
-    x_keylist = [atom_insert(), bud_acctunit_str(), zia_str]
+    x_keylist = [INSERT_str(), bud_acctunit_str(), zia_str]
     zia_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert zia_budatom.get_value(acct_name_str()) == zia_str
     print(f"\n{sue_buddelta.budatoms=}")
     # print(f"\n{zia_budatom=}")
 
-    x_keylist = [atom_insert(), bud_acct_membership_str(), zia_str, run_str]
+    x_keylist = [INSERT_str(), bud_acct_membership_str(), zia_str, run_str]
     run_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert run_budatom.get_value(acct_name_str()) == zia_str
     assert run_budatom.get_value(group_title_str()) == run_str
@@ -289,13 +289,13 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_acct_membership_upd
     sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
-    # x_keylist = [atom_update(), bud_acctunit_str(), xio_str]
+    # x_keylist = [UPDATE_str(), bud_acctunit_str(), xio_str]
     # xio_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     # assert xio_budatom.get_value(acct_name_str()) == xio_str
     # print(f"\n{sue_buddelta.budatoms=}")
     # print(f"\n{xio_budatom=}")
 
-    x_keylist = [atom_update(), bud_acct_membership_str(), xio_str, run_str]
+    x_keylist = [UPDATE_str(), bud_acct_membership_str(), xio_str, run_str]
     xio_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert xio_budatom.get_value(acct_name_str()) == xio_str
     assert xio_budatom.get_value(group_title_str()) == run_str
@@ -346,7 +346,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_acct_membership_del
     sue_buddelta.add_all_different_budatoms(before_sue_bud, after_sue_bud)
 
     # THEN
-    x_keylist = [atom_delete(), bud_acct_membership_str(), bob_str, fly_str]
+    x_keylist = [DELETE_str(), bud_acct_membership_str(), bob_str, fly_str]
     xio_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert xio_budatom.get_value(acct_name_str()) == bob_str
     assert xio_budatom.get_value(group_title_str()) == fly_str
@@ -386,13 +386,13 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_delete():
 
     # THEN
     x_dimen = bud_conceptunit_str()
-    print(f"{sue_buddelta.budatoms.get(atom_delete()).get(x_dimen).keys()=}")
+    print(f"{sue_buddelta.budatoms.get(DELETE_str()).get(x_dimen).keys()=}")
 
-    x_keylist = [atom_delete(), bud_conceptunit_str(), street_way]
+    x_keylist = [DELETE_str(), bud_conceptunit_str(), street_way]
     street_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert street_budatom.get_value(concept_way_str()) == street_way
 
-    x_keylist = [atom_delete(), bud_conceptunit_str(), ball_way]
+    x_keylist = [DELETE_str(), bud_conceptunit_str(), ball_way]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(concept_way_str()) == ball_way
 
@@ -440,12 +440,12 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_insert():
     # THEN
     print_budatom_keys(sue_buddelta)
 
-    x_keylist = [atom_insert(), bud_conceptunit_str(), disc_way]
+    x_keylist = [INSERT_str(), bud_conceptunit_str(), disc_way]
     street_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert street_budatom.get_value(concept_way_str()) == disc_way
 
     a45_way = after_sue_bud.make_l1_way(accord45_str)
-    x_keylist = [atom_insert(), bud_conceptunit_str(), a45_way]
+    x_keylist = [INSERT_str(), bud_conceptunit_str(), a45_way]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(concept_way_str()) == a45_way
     assert ball_budatom.get_value(begin_str()) == accord_begin
@@ -499,7 +499,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_update():
     # THEN
     print_budatom_keys(sue_buddelta)
 
-    x_keylist = [atom_update(), bud_conceptunit_str(), accord45_way]
+    x_keylist = [UPDATE_str(), bud_conceptunit_str(), accord45_way]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(concept_way_str()) == accord45_way
     assert ball_budatom.get_value(begin_str()) == after_accord_begin
@@ -553,7 +553,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_awardlink_d
     # THEN
     print(f"{print_budatom_keys(sue_buddelta)=}")
 
-    x_keylist = [atom_delete(), bud_concept_awardlink_str(), disc_way, run_str]
+    x_keylist = [DELETE_str(), bud_concept_awardlink_str(), disc_way, run_str]
     run_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert run_budatom.get_value(concept_way_str()) == disc_way
     assert run_budatom.get_value(awardee_title_str()) == run_str
@@ -605,7 +605,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_awardlink_i
     # THEN
     print(f"{print_budatom_keys(sue_buddelta)=}")
 
-    x_keylist = [atom_insert(), bud_concept_awardlink_str(), disc_way, run_str]
+    x_keylist = [INSERT_str(), bud_concept_awardlink_str(), disc_way, run_str]
     run_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert run_budatom.get_value(concept_way_str()) == disc_way
     assert run_budatom.get_value(awardee_title_str()) == run_str
@@ -654,7 +654,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_awardlink_u
     # THEN
     print(f"{print_budatom_keys(sue_buddelta)=}")
 
-    x_keylist = [atom_update(), bud_concept_awardlink_str(), ball_way, run_str]
+    x_keylist = [UPDATE_str(), bud_concept_awardlink_str(), ball_way, run_str]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(concept_way_str()) == ball_way
     assert ball_budatom.get_value(awardee_title_str()) == run_str
@@ -699,7 +699,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_factunit_up
     # THEN
     print(f"{print_budatom_keys(sue_buddelta)=}")
 
-    x_keylist = [atom_update(), bud_concept_factunit_str(), ball_way, knee_way]
+    x_keylist = [UPDATE_str(), bud_concept_factunit_str(), ball_way, knee_way]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(concept_way_str()) == ball_way
     assert ball_budatom.get_value(fcontext_str()) == knee_way
@@ -737,7 +737,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_factunit_in
 
     # THEN
     print(f"{print_budatom_keys(sue_buddelta)=}")
-    x_keylist = [atom_insert(), bud_concept_factunit_str(), ball_way, knee_way]
+    x_keylist = [INSERT_str(), bud_concept_factunit_str(), ball_way, knee_way]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     print(f"{ball_budatom=}")
     assert ball_budatom.get_value(concept_way_str()) == ball_way
@@ -781,7 +781,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_factunit_de
 
     # THEN
     print(f"{print_budatom_keys(sue_buddelta)=}")
-    x_keylist = [atom_delete(), bud_concept_factunit_str(), ball_way, knee_way]
+    x_keylist = [DELETE_str(), bud_concept_factunit_str(), ball_way, knee_way]
     ball_budatom = get_from_nested_dict(sue_buddelta.budatoms, x_keylist)
     assert ball_budatom.get_value(concept_way_str()) == ball_way
     assert ball_budatom.get_value(fcontext_str()) == knee_way
@@ -830,7 +830,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_reason_prem
     # THEN
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
-        atom_insert(),
+        INSERT_str(),
         bud_concept_reason_premiseunit_str(),
         ball_way,
         knee_way,
@@ -892,7 +892,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_reason_prem
     # THEN
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
-        atom_delete(),
+        DELETE_str(),
         bud_concept_reason_premiseunit_str(),
         ball_way,
         knee_way,
@@ -958,7 +958,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_reason_prem
     # THEN
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
-        atom_update(),
+        UPDATE_str(),
         bud_concept_reason_premiseunit_str(),
         ball_way,
         knee_way,
@@ -991,11 +991,11 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_reasonunit_
     before_sue_bud.set_concept(conceptunit_shop(medical_str), knee_way)
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_medical_rcontext_concept_active_requisite = False
+    after_medical_rconcept_active_requisite = False
     after_sue_bud.edit_concept_attr(
         ball_way,
         reason_rcontext=medical_way,
-        reason_rcontext_concept_active_requisite=after_medical_rcontext_concept_active_requisite,
+        reason_rconcept_active_requisite=after_medical_rconcept_active_requisite,
     )
 
     sue_buddelta = buddelta_shop()
@@ -1004,7 +1004,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_reasonunit_
     # THEN
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
-        atom_insert(),
+        INSERT_str(),
         bud_concept_reasonunit_str(),
         ball_way,
         medical_way,
@@ -1013,8 +1013,8 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_reasonunit_
     assert ball_budatom.get_value(concept_way_str()) == ball_way
     assert ball_budatom.get_value("rcontext") == medical_way
     assert (
-        ball_budatom.get_value(rcontext_concept_active_requisite_str())
-        == after_medical_rcontext_concept_active_requisite
+        ball_budatom.get_value(rconcept_active_requisite_str())
+        == after_medical_rconcept_active_requisite
     )
     assert get_budatom_total_count(sue_buddelta) == 1
 
@@ -1034,19 +1034,19 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_reasonunit_
     medical_way = before_sue_bud.make_way(knee_way, medical_str)
     before_sue_bud.set_l1_concept(conceptunit_shop(knee_str))
     before_sue_bud.set_concept(conceptunit_shop(medical_str), knee_way)
-    before_medical_rcontext_concept_active_requisite = True
+    before_medical_rconcept_active_requisite = True
     before_sue_bud.edit_concept_attr(
         ball_way,
         reason_rcontext=medical_way,
-        reason_rcontext_concept_active_requisite=before_medical_rcontext_concept_active_requisite,
+        reason_rconcept_active_requisite=before_medical_rconcept_active_requisite,
     )
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
-    after_medical_rcontext_concept_active_requisite = False
+    after_medical_rconcept_active_requisite = False
     after_sue_bud.edit_concept_attr(
         ball_way,
         reason_rcontext=medical_way,
-        reason_rcontext_concept_active_requisite=after_medical_rcontext_concept_active_requisite,
+        reason_rconcept_active_requisite=after_medical_rconcept_active_requisite,
     )
 
     # WHEN
@@ -1056,7 +1056,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_reasonunit_
     # THEN
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
-        atom_update(),
+        UPDATE_str(),
         bud_concept_reasonunit_str(),
         ball_way,
         medical_way,
@@ -1065,8 +1065,8 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_reasonunit_
     assert ball_budatom.get_value(concept_way_str()) == ball_way
     assert ball_budatom.get_value("rcontext") == medical_way
     assert (
-        ball_budatom.get_value(rcontext_concept_active_requisite_str())
-        == after_medical_rcontext_concept_active_requisite
+        ball_budatom.get_value(rconcept_active_requisite_str())
+        == after_medical_rconcept_active_requisite
     )
     assert get_budatom_total_count(sue_buddelta) == 1
 
@@ -1086,11 +1086,11 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_reasonunit_
     medical_way = before_sue_bud.make_way(knee_way, medical_str)
     before_sue_bud.set_l1_concept(conceptunit_shop(knee_str))
     before_sue_bud.set_concept(conceptunit_shop(medical_str), knee_way)
-    before_medical_rcontext_concept_active_requisite = True
+    before_medical_rconcept_active_requisite = True
     before_sue_bud.edit_concept_attr(
         ball_way,
         reason_rcontext=medical_way,
-        reason_rcontext_concept_active_requisite=before_medical_rcontext_concept_active_requisite,
+        reason_rconcept_active_requisite=before_medical_rconcept_active_requisite,
     )
 
     after_sue_bud = copy_deepcopy(before_sue_bud)
@@ -1104,7 +1104,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_reasonunit_
     # THEN
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
-        atom_delete(),
+        DELETE_str(),
         bud_concept_reasonunit_str(),
         ball_way,
         medical_way,
@@ -1138,7 +1138,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_laborlink_i
     # THEN
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
-        atom_insert(),
+        INSERT_str(),
         bud_concept_laborlink_str(),
         ball_way,
         xio_str,
@@ -1174,7 +1174,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_laborlink_d
     # THEN
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
-        atom_delete(),
+        DELETE_str(),
         bud_concept_laborlink_str(),
         ball_way,
         xio_str,
@@ -1208,7 +1208,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_healerlink_
     # THEN
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
-        atom_insert(),
+        INSERT_str(),
         bud_concept_healerlink_str(),
         ball_way,
         xio_str,
@@ -1242,7 +1242,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_healerlink_
     # THEN
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
-        atom_insert(),
+        INSERT_str(),
         bud_concept_healerlink_str(),
         ball_way,
         xio_str,
@@ -1279,7 +1279,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_healerlink_
     # THEN
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
-        atom_delete(),
+        DELETE_str(),
         bud_concept_healerlink_str(),
         ball_way,
         xio_str,
@@ -1317,7 +1317,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_healerlink_
     # THEN
     print(f"{print_budatom_keys(sue_buddelta)=}")
     x_keylist = [
-        atom_delete(),
+        DELETE_str(),
         bud_concept_healerlink_str(),
         ball_way,
         xio_str,

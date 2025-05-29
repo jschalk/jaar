@@ -1,10 +1,10 @@
 from src.a01_way_logic.way import default_bridge_if_None
 from src.a02_finance_logic._test_util.a02_str import owner_name_str, fisc_label_str
 from src.a06_bud_logic._test_util.a06_str import (
-    type_NameStr_str,
-    type_TitleStr_str,
-    type_LabelStr_str,
-    type_WayStr_str,
+    NameStr_str,
+    TitleStr_str,
+    LabelStr_str,
+    WayStr_str,
     acct_name_str,
     awardee_title_str,
     rcontext_str,
@@ -70,12 +70,12 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     pidgin_args_class_types = get_pidgin_args_class_types()
 
     # THEN
-    assert pidgin_args_class_types.get("acct_name") == type_NameStr_str()
+    assert pidgin_args_class_types.get("acct_name") == NameStr_str()
     assert pidgin_args_class_types.get("addin") == "float"
     assert pidgin_args_class_types.get("amount") == "float"
-    assert pidgin_args_class_types.get("awardee_title") == type_TitleStr_str()
-    assert pidgin_args_class_types.get("rcontext") == type_WayStr_str()
-    assert pidgin_args_class_types.get("rcontext_concept_active_requisite") == "bool"
+    assert pidgin_args_class_types.get("awardee_title") == TitleStr_str()
+    assert pidgin_args_class_types.get("rcontext") == WayStr_str()
+    assert pidgin_args_class_types.get("rconcept_active_requisite") == "bool"
     assert pidgin_args_class_types.get("begin") == "float"
     assert pidgin_args_class_types.get("c400_number") == "int"
     assert pidgin_args_class_types.get("close") == "float"
@@ -89,45 +89,45 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("debtor_respect") == "float"
     assert pidgin_args_class_types.get("denom") == "int"
     assert pidgin_args_class_types.get("pdivisor") == "int"
-    assert pidgin_args_class_types.get("face_name") == type_NameStr_str()
-    assert pidgin_args_class_types.get("fcontext") == type_WayStr_str()
-    assert pidgin_args_class_types.get("fisc_label") == type_LabelStr_str()
+    assert pidgin_args_class_types.get("face_name") == NameStr_str()
+    assert pidgin_args_class_types.get("fcontext") == WayStr_str()
+    assert pidgin_args_class_types.get("fisc_label") == LabelStr_str()
     assert pidgin_args_class_types.get("fnigh") == "float"
     assert pidgin_args_class_types.get("fopen") == "float"
     assert pidgin_args_class_types.get("fund_coin") == "float"
     assert pidgin_args_class_types.get("fund_pool") == "float"
     assert pidgin_args_class_types.get("give_force") == "float"
     assert pidgin_args_class_types.get("gogo_want") == "float"
-    assert pidgin_args_class_types.get("group_title") == type_TitleStr_str()
-    assert pidgin_args_class_types.get("healer_name") == type_NameStr_str()
-    assert pidgin_args_class_types.get("hour_label") == type_LabelStr_str()
+    assert pidgin_args_class_types.get("group_title") == TitleStr_str()
+    assert pidgin_args_class_types.get("healer_name") == NameStr_str()
+    assert pidgin_args_class_types.get("hour_label") == LabelStr_str()
     assert pidgin_args_class_types.get("mass") == "int"
     assert pidgin_args_class_types.get("max_tree_traverse") == "int"
-    assert pidgin_args_class_types.get("month_label") == type_LabelStr_str()
+    assert pidgin_args_class_types.get("month_label") == LabelStr_str()
     assert pidgin_args_class_types.get("monthday_distortion") == "int"
     assert pidgin_args_class_types.get("morph") == "bool"
-    assert pidgin_args_class_types.get("pstate") == type_WayStr_str()
+    assert pidgin_args_class_types.get("pstate") == WayStr_str()
     assert pidgin_args_class_types.get("pnigh") == "float"
     assert pidgin_args_class_types.get("numor") == "int"
     assert pidgin_args_class_types.get("offi_time") == "TimeLinePoint"
-    assert pidgin_args_class_types.get("owner_name") == type_NameStr_str()
+    assert pidgin_args_class_types.get("owner_name") == NameStr_str()
     assert pidgin_args_class_types.get("popen") == "float"
     assert pidgin_args_class_types.get("penny") == "float"
-    assert pidgin_args_class_types.get("fstate") == type_WayStr_str()
+    assert pidgin_args_class_types.get("fstate") == WayStr_str()
     assert pidgin_args_class_types.get("pledge") == "bool"
     assert pidgin_args_class_types.get("problem_bool") == "bool"
     assert pidgin_args_class_types.get("quota") == "int"
     assert pidgin_args_class_types.get("respect_bit") == "float"
-    assert pidgin_args_class_types.get("concept_way") == type_WayStr_str()
+    assert pidgin_args_class_types.get("concept_way") == WayStr_str()
     assert pidgin_args_class_types.get("celldepth") == "int"
     assert pidgin_args_class_types.get("stop_want") == "float"
     assert pidgin_args_class_types.get("take_force") == "float"
     assert pidgin_args_class_types.get("tally") == "int"
-    assert pidgin_args_class_types.get("labor_title") == type_TitleStr_str()
+    assert pidgin_args_class_types.get("labor_title") == TitleStr_str()
     assert pidgin_args_class_types.get("deal_time") == "TimeLinePoint"
     assert pidgin_args_class_types.get("tran_time") == "TimeLinePoint"
-    assert pidgin_args_class_types.get("timeline_label") == type_LabelStr_str()
-    assert pidgin_args_class_types.get("weekday_label") == type_LabelStr_str()
+    assert pidgin_args_class_types.get("timeline_label") == LabelStr_str()
+    assert pidgin_args_class_types.get("weekday_label") == LabelStr_str()
     assert pidgin_args_class_types.get("weekday_order") == "int"
     assert pidgin_args_class_types.get("bridge") == "str"
     assert pidgin_args_class_types.get("yr1_jan1_offset") == "int"
@@ -177,14 +177,14 @@ def test_pidginable_class_types_ReturnsObj():
     # THEN
     assert len(x_pidginable_class_types) == 4
     assert x_pidginable_class_types == {
-        type_NameStr_str(),
-        type_TitleStr_str(),
-        type_LabelStr_str(),
-        type_WayStr_str(),
+        NameStr_str(),
+        TitleStr_str(),
+        LabelStr_str(),
+        WayStr_str(),
     }
     print(f"{set(get_atom_args_class_types().values())=}")
     all_atom_class_types = set(get_atom_args_class_types().values())
-    all_atom_class_types.add(type_LabelStr_str())
+    all_atom_class_types.add(LabelStr_str())
     inter_x = set(all_atom_class_types).intersection(x_pidginable_class_types)
     assert inter_x == x_pidginable_class_types
 
@@ -312,7 +312,7 @@ def test_get_pidgin_NameStr_args_ReturnsObj():
     expected_args = {
         x_arg
         for x_arg, class_type in get_pidgin_args_class_types().items()
-        if class_type == type_NameStr_str()
+        if class_type == NameStr_str()
     }
     assert pidgin_NameStr_args == expected_args
 
@@ -330,7 +330,7 @@ def test_get_pidgin_TitleStr_args_ReturnsObj():
     expected_args = {
         x_arg
         for x_arg, class_type in get_pidgin_args_class_types().items()
-        if class_type == type_TitleStr_str()
+        if class_type == TitleStr_str()
     }
     assert pidgin_TitleStr_args == expected_args
 
@@ -350,7 +350,7 @@ def test_get_pidgin_LabelStr_args_ReturnsObj():
     expected_args = {
         x_arg
         for x_arg, class_type in get_pidgin_args_class_types().items()
-        if class_type == type_LabelStr_str()
+        if class_type == LabelStr_str()
     }
     assert pidgin_LabelStr_args == expected_args
 
@@ -370,7 +370,7 @@ def test_get_pidgin_WayStr_args_ReturnsObj():
     expected_args = {
         x_arg
         for x_arg, class_type in get_pidgin_args_class_types().items()
-        if class_type == type_WayStr_str()
+        if class_type == WayStr_str()
     }
     assert pidgin_WayStr_args == expected_args
 
@@ -609,14 +609,14 @@ def test_PidginUnit_get_mapunit_ReturnsObj():
     sue_pu.set_namemap(static_namemap)
 
     # WHEN / THEN
-    assert sue_pu.get_mapunit(type_NameStr_str()) == sue_pu.namemap
-    assert sue_pu.get_mapunit(type_TitleStr_str()) == sue_pu.titlemap
-    assert sue_pu.get_mapunit(type_LabelStr_str()) == sue_pu.labelmap
-    assert sue_pu.get_mapunit(type_WayStr_str()) == sue_pu.waymap
+    assert sue_pu.get_mapunit(NameStr_str()) == sue_pu.namemap
+    assert sue_pu.get_mapunit(TitleStr_str()) == sue_pu.titlemap
+    assert sue_pu.get_mapunit(LabelStr_str()) == sue_pu.labelmap
+    assert sue_pu.get_mapunit(WayStr_str()) == sue_pu.waymap
 
-    assert sue_pu.get_mapunit(type_NameStr_str()) != sue_pu.waymap
-    assert sue_pu.get_mapunit(type_TitleStr_str()) != sue_pu.waymap
-    assert sue_pu.get_mapunit(type_LabelStr_str()) != sue_pu.waymap
+    assert sue_pu.get_mapunit(NameStr_str()) != sue_pu.waymap
+    assert sue_pu.get_mapunit(TitleStr_str()) != sue_pu.waymap
+    assert sue_pu.get_mapunit(LabelStr_str()) != sue_pu.waymap
 
 
 def test_PidginUnit_is_valid_ReturnsObj():
@@ -661,7 +661,7 @@ def test_PidginUnit_is_valid_ReturnsObj():
     assert sue_pidginunit.is_valid()
 
 
-def test_PidginUnit_set_otx2inx_SetsAttr_Scenario0_type_NameStr_str():
+def test_PidginUnit_set_otx2inx_SetsAttr_Scenario0_NameStr_str():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
@@ -671,13 +671,13 @@ def test_PidginUnit_set_otx2inx_SetsAttr_Scenario0_type_NameStr_str():
     assert namemap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_otx2inx(type_NameStr_str(), sue_otx, sue_inx)
+    zia_pidginunit.set_otx2inx(NameStr_str(), sue_otx, sue_inx)
 
     # THEN
     assert namemap.otx2inx_exists(sue_otx, sue_inx)
 
 
-def test_PidginUnit_set_otx2inx_SetsAttr_Scenario1_type_WayStr_str():
+def test_PidginUnit_set_otx2inx_SetsAttr_Scenario1_WayStr_str():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
@@ -687,13 +687,13 @@ def test_PidginUnit_set_otx2inx_SetsAttr_Scenario1_type_WayStr_str():
     assert waymap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_otx2inx(type_WayStr_str(), sue_otx, sue_inx)
+    zia_pidginunit.set_otx2inx(WayStr_str(), sue_otx, sue_inx)
 
     # THEN
     assert waymap.otx2inx_exists(sue_otx, sue_inx)
 
 
-def test_PidginUnit_set_otx2inx_SetsAttr_Scenario2_type_LabelStr_str():
+def test_PidginUnit_set_otx2inx_SetsAttr_Scenario2_LabelStr_str():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
@@ -703,7 +703,7 @@ def test_PidginUnit_set_otx2inx_SetsAttr_Scenario2_type_LabelStr_str():
     assert waymap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_otx2inx(type_LabelStr_str(), sue_otx, sue_inx)
+    zia_pidginunit.set_otx2inx(LabelStr_str(), sue_otx, sue_inx)
 
     # THEN
     assert waymap.otx2inx_exists(sue_otx, sue_inx)
@@ -715,11 +715,11 @@ def test_PidginUnit_otx2inx_exists_ReturnsObj():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    way_type = type_LabelStr_str()
+    way_type = LabelStr_str()
     assert zia_pidginunit.otx2inx_exists(way_type, sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_otx2inx(type_LabelStr_str(), sue_otx, sue_inx)
+    zia_pidginunit.set_otx2inx(LabelStr_str(), sue_otx, sue_inx)
 
     # THEN
     assert zia_pidginunit.otx2inx_exists(way_type, sue_otx, sue_inx)
@@ -731,13 +731,13 @@ def test_PidginUnit_get_inx_value_ReturnsObj():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    assert zia_pidginunit._get_inx_value(type_NameStr_str(), sue_otx) != sue_inx
+    assert zia_pidginunit._get_inx_value(NameStr_str(), sue_otx) != sue_inx
 
     # WHEN
-    zia_pidginunit.set_otx2inx(type_NameStr_str(), sue_otx, sue_inx)
+    zia_pidginunit.set_otx2inx(NameStr_str(), sue_otx, sue_inx)
 
     # THEN
-    assert zia_pidginunit._get_inx_value(type_NameStr_str(), sue_otx) == sue_inx
+    assert zia_pidginunit._get_inx_value(NameStr_str(), sue_otx) == sue_inx
 
 
 def test_PidginUnit_del_otx2inx_ReturnsObj():
@@ -746,9 +746,9 @@ def test_PidginUnit_del_otx2inx_ReturnsObj():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    way_type = type_LabelStr_str()
-    zia_pidginunit.set_otx2inx(type_LabelStr_str(), sue_otx, sue_inx)
-    zia_pidginunit.set_otx2inx(type_LabelStr_str(), zia_str, zia_str)
+    way_type = LabelStr_str()
+    zia_pidginunit.set_otx2inx(LabelStr_str(), sue_otx, sue_inx)
+    zia_pidginunit.set_otx2inx(LabelStr_str(), zia_str, zia_str)
     assert zia_pidginunit.otx2inx_exists(way_type, sue_otx, sue_inx)
     assert zia_pidginunit.otx2inx_exists(way_type, zia_str, zia_str)
 
@@ -760,7 +760,7 @@ def test_PidginUnit_del_otx2inx_ReturnsObj():
     assert zia_pidginunit.otx2inx_exists(way_type, zia_str, zia_str)
 
 
-def test_PidginUnit_set_label_SetsAttr_Scenario1_type_WayStr_str():
+def test_PidginUnit_set_label_SetsAttr_Scenario1_WayStr_str():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"

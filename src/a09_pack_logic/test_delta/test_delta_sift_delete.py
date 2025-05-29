@@ -7,7 +7,8 @@ from src.a06_bud_logic._test_util.a06_str import (
     acct_name_str,
     group_title_str,
 )
-from src.a08_bud_atom_logic.atom import atom_delete, budatom_shop
+from src.a08_bud_atom_logic._test_util.a08_str import DELETE_str
+from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a09_pack_logic.delta import buddelta_shop, get_minimal_buddelta
 
 
@@ -22,11 +23,11 @@ def test_get_minimal_buddelta_ReturnsObjWithoutUnecessaryDELETE_bud_acctunit():
     sue_bud.add_acctunit(bob_str)
 
     accts_buddelta = buddelta_shop()
-    bob_atom = budatom_shop(bud_acctunit_str(), atom_delete())
+    bob_atom = budatom_shop(bud_acctunit_str(), DELETE_str())
     bob_atom.set_arg(acct_name_str(), bob_str)
-    yao_atom = budatom_shop(bud_acctunit_str(), atom_delete())
+    yao_atom = budatom_shop(bud_acctunit_str(), DELETE_str())
     yao_atom.set_arg(acct_name_str(), yao_str)
-    zia_atom = budatom_shop(bud_acctunit_str(), atom_delete())
+    zia_atom = budatom_shop(bud_acctunit_str(), DELETE_str())
     zia_atom.set_arg(acct_name_str(), zia_str)
     accts_buddelta.set_budatom(bob_atom)
     accts_buddelta.set_budatom(yao_atom)
@@ -59,13 +60,13 @@ def test_sift_ReturnsObjWithoutUnecessaryDELETE_bud_acct_membership():
     print(f"{yao_acctunit._memberships.keys()=}")
 
     accts_buddelta = buddelta_shop()
-    bob_run_atom = budatom_shop(bud_acct_membership_str(), atom_delete())
+    bob_run_atom = budatom_shop(bud_acct_membership_str(), DELETE_str())
     bob_run_atom.set_arg(acct_name_str(), bob_str)
     bob_run_atom.set_arg(group_title_str(), run_str)
-    yao_run_atom = budatom_shop(bud_acct_membership_str(), atom_delete())
+    yao_run_atom = budatom_shop(bud_acct_membership_str(), DELETE_str())
     yao_run_atom.set_arg(acct_name_str(), yao_str)
     yao_run_atom.set_arg(group_title_str(), run_str)
-    zia_run_atom = budatom_shop(bud_acct_membership_str(), atom_delete())
+    zia_run_atom = budatom_shop(bud_acct_membership_str(), DELETE_str())
     zia_run_atom.set_arg(acct_name_str(), zia_str)
     zia_run_atom.set_arg(group_title_str(), run_str)
     accts_buddelta.set_budatom(bob_run_atom)

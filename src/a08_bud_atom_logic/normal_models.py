@@ -68,7 +68,7 @@ class ReasonTable(Base):
     uid = Column(Integer, primary_key=True)
     rcontext = Column(String)
     concept_way = Column(String)
-    rcontext_concept_active_requisite = Column(Integer)
+    rconcept_active_requisite = Column(Integer)
 
 
 class PremiseTable(Base):

@@ -3,6 +3,10 @@ from src.a00_data_toolbox.dict_toolbox import get_from_nested_dict
 from os import getcwd as os_getcwd
 
 
+class CRUD_command(str):
+    pass
+
+
 def get_atom_config_filename() -> str:
     return "atom_config.json"
 
@@ -65,7 +69,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "addin": "float",
         "awardee_title": "TitleStr",
         "rcontext": "WayStr",
-        "rcontext_concept_active_requisite": "bool",
+        "rconcept_active_requisite": "bool",
         "begin": "float",
         "close": "float",
         "credit_belief": "float",

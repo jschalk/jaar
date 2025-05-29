@@ -13,9 +13,9 @@ from src.a06_bud_logic._test_util.a06_str import (
 from src.a06_bud_logic.bud import budunit_shop
 from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a08_bud_atom_logic._test_util.a08_str import (
-    atom_insert,
-    atom_delete,
-    atom_update,
+    INSERT_str,
+    DELETE_str,
+    UPDATE_str,
 )
 from src.a09_pack_logic.delta import buddelta_shop
 from src.a09_pack_logic.pack import (
@@ -494,7 +494,7 @@ def test_PackUnit_add_budatom_CorrectlySets_BudUnit_acctunits():
     # WHEN
     bob_packunit.add_budatom(
         dimen=bud_acctunit_str(),
-        crud_str=atom_insert(),
+        crud_str=INSERT_str(),
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
     )
@@ -502,7 +502,7 @@ def test_PackUnit_add_budatom_CorrectlySets_BudUnit_acctunits():
     # THEN
     assert len(bob_packunit._buddelta.budatoms) == 1
     assert (
-        bob_packunit._buddelta.budatoms.get(atom_insert())
+        bob_packunit._buddelta.budatoms.get(INSERT_str())
         .get(bud_acctunit_str())
         .get(bob_str)
         is not None
@@ -521,7 +521,7 @@ def test_PackUnit_get_edited_bud_ReturnsObj_BudUnit_insert_acct():
     assert before_sue_budunit.acct_exists(yao_str)
     assert before_sue_budunit.acct_exists(zia_str) is False
     dimen = bud_acctunit_str()
-    x_budatom = budatom_shop(dimen, atom_insert())
+    x_budatom = budatom_shop(dimen, INSERT_str())
     x_budatom.set_jkey(acct_name_str(), zia_str)
     x_credit_belief = 55
     x_debtit_belief = 66
@@ -578,7 +578,7 @@ def test_PackUnit_is_empty_ReturnsObj():
     # WHEN
     bob_packunit.add_budatom(
         dimen=bud_acctunit_str(),
-        crud_str=atom_insert(),
+        crud_str=INSERT_str(),
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
     )
@@ -593,22 +593,22 @@ def test_PackUnit_is_empty_ReturnsObj():
     # THEN
     assert bob_packunit.is_empty()
 
-    # Test for atom_update operation
+    # Test for UPDATE_str operation
     bob_packunit_update = packunit_shop(bob_str)
     bob_packunit_update.add_budatom(
         dimen=bud_acctunit_str(),
-        crud_str=atom_update(),
+        crud_str=UPDATE_str(),
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
     )
     assert len(bob_packunit_update._buddelta.budatoms) == 1
     assert bob_packunit_update.is_empty() is False
 
-    # Test for atom_delete operation
+    # Test for DELETE_str operation
     bob_packunit_delete = packunit_shop(bob_str)
     bob_packunit_delete.add_budatom(
         dimen=bud_acctunit_str(),
-        crud_str=atom_delete(),
+        crud_str=DELETE_str(),
         jkeys=bob_required_dict,
         jvalues={},
     )

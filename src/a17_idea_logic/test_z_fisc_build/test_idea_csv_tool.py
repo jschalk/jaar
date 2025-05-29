@@ -80,7 +80,7 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyFiscUnit(
         "br00024": "fisc_label,owner_name,concept_way,labor_title\n",
         "br00025": "fisc_label,owner_name,concept_way,healer_name\n",
         "br00026": "fisc_label,owner_name,concept_way,rcontext,pstate,pnigh,popen,pdivisor\n",
-        "br00027": "fisc_label,owner_name,concept_way,rcontext,rcontext_concept_active_requisite\n",
+        "br00027": "fisc_label,owner_name,concept_way,rcontext,rconcept_active_requisite\n",
         "br00028": "fisc_label,owner_name,concept_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool\n",
         "br00029": "fisc_label,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit\n",
         "br00042": "otx_title,inx_title,otx_bridge,inx_bridge,unknown_term\n",
@@ -484,7 +484,7 @@ def test_add_bud_to_br00027_csv_ReturnsObj():
     bob_bud.edit_concept_attr(
         mop_way,
         reason_rcontext=casa_way,
-        reason_rcontext_concept_active_requisite=True,
+        reason_rconcept_active_requisite=True,
     )
     csv_header = x_ideas.get("br00027")
     print(f"{csv_header=}")
@@ -1016,7 +1016,7 @@ def test_add_pack_to_br00027_csv_ReturnsObj():
     bob_bud.edit_concept_attr(
         mop_way,
         reason_rcontext=casa_way,
-        reason_rcontext_concept_active_requisite=True,
+        reason_rconcept_active_requisite=True,
     )
     bob_buddelta = buddelta_shop()
     bob_buddelta.add_all_budatoms(bob_bud)

@@ -8,9 +8,9 @@ from src.a06_bud_logic._test_util.a06_str import (
     popen_str,
 )
 from src.a08_bud_atom_logic._test_util.a08_str import (
-    atom_update,
-    atom_insert,
-    atom_delete,
+    UPDATE_str,
+    INSERT_str,
+    DELETE_str,
 )
 from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a09_pack_logic.delta import buddelta_shop
@@ -26,7 +26,7 @@ def test_create_legible_list_ReturnsObj_concept_reason_premiseunit_INSERT_WithOu
     casa_way = sue_bud.make_l1_way("casa")
     rcontext_value = sue_bud.make_way(casa_way, "fridge status")
     pstate_value = sue_bud.make_way(rcontext_value, "dirty")
-    swim_budatom = budatom_shop(dimen, atom_insert())
+    swim_budatom = budatom_shop(dimen, INSERT_str())
     swim_budatom.set_arg(concept_way_str(), way_value)
     swim_budatom.set_arg(rcontext_str(), rcontext_value)
     swim_budatom.set_arg(pstate_str(), pstate_value)
@@ -55,7 +55,7 @@ def test_create_legible_list_ReturnsObj_concept_reason_premiseunit_INSERT_WithNu
     pdivisor_value = 7
     pnigh_value = 13
     popen_value = 17
-    swim_budatom = budatom_shop(dimen, atom_insert())
+    swim_budatom = budatom_shop(dimen, INSERT_str())
     swim_budatom.set_arg(concept_way_str(), way_value)
     swim_budatom.set_arg(rcontext_str(), rcontext_value)
     swim_budatom.set_arg(pstate_str(), pstate_value)
@@ -84,7 +84,7 @@ def test_create_legible_list_ReturnsObj_concept_reason_premiseunit_UPDATE_WithOu
     casa_way = sue_bud.make_l1_way("casa")
     rcontext_value = sue_bud.make_way(casa_way, "fridge status")
     pstate_value = sue_bud.make_way(rcontext_value, "dirty")
-    swim_budatom = budatom_shop(dimen, atom_update())
+    swim_budatom = budatom_shop(dimen, UPDATE_str())
     swim_budatom.set_arg(concept_way_str(), way_value)
     swim_budatom.set_arg(rcontext_str(), rcontext_value)
     swim_budatom.set_arg(pstate_str(), pstate_value)
@@ -113,7 +113,7 @@ def test_create_legible_list_ReturnsObj_concept_reason_premiseunit_UPDATE_WithNu
     pdivisor_value = 7
     pnigh_value = 13
     popen_value = 17
-    swim_budatom = budatom_shop(dimen, atom_update())
+    swim_budatom = budatom_shop(dimen, UPDATE_str())
     swim_budatom.set_arg(concept_way_str(), way_value)
     swim_budatom.set_arg(rcontext_str(), rcontext_value)
     swim_budatom.set_arg(pstate_str(), pstate_value)
@@ -142,7 +142,7 @@ def test_create_legible_list_ReturnsObj_concept_reason_premiseunit_DELETE():
     casa_way = sue_bud.make_l1_way("casa")
     rcontext_value = sue_bud.make_way(casa_way, "fridge status")
     pstate_value = sue_bud.make_way(rcontext_value, "dirty")
-    swim_budatom = budatom_shop(dimen, atom_delete())
+    swim_budatom = budatom_shop(dimen, DELETE_str())
     swim_budatom.set_arg(concept_way_str(), way_value)
     swim_budatom.set_arg(rcontext_str(), rcontext_value)
     swim_budatom.set_arg(pstate_str(), pstate_value)

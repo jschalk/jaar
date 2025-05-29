@@ -31,18 +31,6 @@ def test_CELLNODE_QUOTA_DEFAULT_value():
     assert CELLNODE_QUOTA_DEFAULT == 1000
 
 
-def test_str_functions_ReturnsObj():
-    # ESTABLISH / WHEN / THEN
-    assert ancestors_str() == "ancestors"
-    assert celldepth_str() == "celldepth"
-    assert deal_owner_name_str() == "deal_owner_name"
-    assert mandate_str() == "mandate"
-    assert budadjust_str() == "budadjust"
-    assert budevent_facts_str() == "budevent_facts"
-    assert found_facts_str() == "found_facts"
-    assert boss_facts_str() == "boss_facts"
-
-
 def test_CellUnit_Exists():
     # ESTABLISH / WHEN
     x_cellunit = CellUnit()

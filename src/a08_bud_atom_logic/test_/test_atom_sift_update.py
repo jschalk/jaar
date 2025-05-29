@@ -38,17 +38,13 @@ from src.a06_bud_logic._test_util.a06_str import (
     numor_str,
     pledge_str,
     stop_want_str,
-    rcontext_concept_active_requisite_str,
+    rconcept_active_requisite_str,
     fopen_str,
     give_force_str,
     take_force_str,
 )
-from src.a08_bud_atom_logic.atom import (
-    atom_insert,
-    atom_update,
-    budatom_shop,
-    sift_budatom,
-)
+from src.a08_bud_atom_logic._test_util.a08_str import INSERT_str, UPDATE_str
+from src.a08_bud_atom_logic.atom import budatom_shop, sift_budatom
 
 
 def test_sift_atom_ReturnsNoneIfGivenBudAtomIsUPDATE():
@@ -57,7 +53,7 @@ def test_sift_atom_ReturnsNoneIfGivenBudAtomIsUPDATE():
     casa_str = "casa"
     casa_way = sue_bud.make_l1_way(casa_str)
     sue_bud.add_concept(casa_way)
-    casa_atom = budatom_shop(bud_conceptunit_str(), atom_update())
+    casa_atom = budatom_shop(bud_conceptunit_str(), UPDATE_str())
     casa_atom.set_arg(parent_way_str(), sue_bud.fisc_label)
     casa_atom.set_arg(concept_label_str(), casa_str)
     casa_atom.set_arg(mass_str(), 8)
@@ -79,7 +75,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_budunit():
     sue_max_tree_traverse = 72
     sue_penny = 2
     sue_tally = 100
-    zia_atom = budatom_shop(budunit_str(), atom_insert())
+    zia_atom = budatom_shop(budunit_str(), INSERT_str())
     zia_atom.set_arg("respect_bit", sue_bit)
     zia_atom.set_arg("credor_respect", sue_credor_respect)
     zia_atom.set_arg("debtor_respect", sue_debtor_respect)
@@ -94,7 +90,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_budunit():
 
     # THEN
     assert new_zia_budatom
-    assert new_zia_budatom.crud_str == atom_update()
+    assert new_zia_budatom.crud_str == UPDATE_str()
     assert new_zia_budatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_budatom.get_jvalues_dict()
     assert zia_jvalues == {
@@ -116,7 +112,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_acctunit():
     sue_bud = budunit_shop("Sue")
     sue_bud.add_acctunit(zia_str)
 
-    zia_atom = budatom_shop(bud_acctunit_str(), atom_insert())
+    zia_atom = budatom_shop(bud_acctunit_str(), INSERT_str())
     zia_atom.set_arg(acct_name_str(), zia_str)
     zia_atom.set_arg(debtit_belief_str(), zia_debtit_belief)
 
@@ -125,7 +121,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_acctunit():
 
     # THEN
     assert new_zia_budatom
-    assert new_zia_budatom.crud_str == atom_update()
+    assert new_zia_budatom.crud_str == UPDATE_str()
     assert new_zia_budatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_budatom.get_jvalues_dict()
     assert zia_jvalues == {debtit_belief_str(): 51}
@@ -140,7 +136,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_acct_membership():
     sue_bud.add_acctunit(zia_str)
     sue_bud.get_acct(zia_str).add_membership(run_str)
 
-    zia_atom = budatom_shop(bud_acct_membership_str(), atom_insert())
+    zia_atom = budatom_shop(bud_acct_membership_str(), INSERT_str())
     zia_atom.set_arg(acct_name_str(), zia_str)
     zia_atom.set_arg(group_title_str(), run_str)
     zia_atom.set_arg(debtit_vote_str(), zia_run_debtit_vote)
@@ -150,7 +146,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_acct_membership():
 
     # THEN
     assert new_zia_budatom
-    assert new_zia_budatom.crud_str == atom_update()
+    assert new_zia_budatom.crud_str == UPDATE_str()
     assert new_zia_budatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_budatom.get_jvalues_dict()
     assert zia_jvalues == {debtit_vote_str(): zia_run_debtit_vote}
@@ -174,7 +170,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_conceptunit():
     sue_pledge = 97
     sue_problem_bool = True
     sue_stop_want = 107
-    old_casa_atom = budatom_shop(bud_conceptunit_str(), atom_insert())
+    old_casa_atom = budatom_shop(bud_conceptunit_str(), INSERT_str())
     old_casa_atom.set_arg(concept_way_str(), casa_way)
     old_casa_atom.set_arg(addin_str(), sue_addin)
     old_casa_atom.set_arg(begin_str(), sue_begin)
@@ -192,7 +188,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_conceptunit():
 
     # THEN
     assert new_casa_atom
-    assert new_casa_atom.crud_str == atom_update()
+    assert new_casa_atom.crud_str == UPDATE_str()
     assert new_casa_atom.get_jvalues_dict()
     zia_jvalues = new_casa_atom.get_jvalues_dict()
     assert zia_jvalues.get(addin_str()) == sue_addin
@@ -219,7 +215,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_concept_awardlink():
     zia_run_take_force = 76
     sue_bud.get_concept_obj(casa_way).set_awardlink(awardlink_shop(run_str, 2, 3))
 
-    zia_atom = budatom_shop(bud_concept_awardlink_str(), atom_insert())
+    zia_atom = budatom_shop(bud_concept_awardlink_str(), INSERT_str())
     zia_atom.set_arg(concept_way_str(), casa_way)
     zia_atom.set_arg(awardee_title_str(), run_str)
     zia_atom.set_arg(give_force_str(), zia_run_give_force)
@@ -230,7 +226,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_concept_awardlink():
 
     # THEN
     assert new_zia_budatom
-    assert new_zia_budatom.crud_str == atom_update()
+    assert new_zia_budatom.crud_str == UPDATE_str()
     assert new_zia_budatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_budatom.get_jvalues_dict()
     assert zia_jvalues.get(give_force_str()) == zia_run_give_force
@@ -247,31 +243,26 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_concept_reasonunit():
     sue_bud.add_concept(casa_way)
     sue_bud.get_concept_obj(casa_way).set_reasonunit(reasonunit_shop(week_way))
 
-    new_rcontext_concept_active_requisite = True
-    casa_atom = budatom_shop(bud_concept_reasonunit_str(), atom_insert())
+    new_rconcept_active_requisite = True
+    casa_atom = budatom_shop(bud_concept_reasonunit_str(), INSERT_str())
     casa_atom.set_arg(concept_way_str(), casa_way)
     casa_atom.set_arg(rcontext_str(), week_way)
-    casa_atom.set_arg(
-        rcontext_concept_active_requisite_str(), new_rcontext_concept_active_requisite
-    )
+    casa_atom.set_arg(rconcept_active_requisite_str(), new_rconcept_active_requisite)
     casa_jkeys = casa_atom.get_jkeys_dict()
     casa_reasonunit = bud_concept_reasonunit_get_obj(sue_bud, casa_jkeys)
-    assert (
-        casa_reasonunit.rcontext_concept_active_requisite
-        != new_rcontext_concept_active_requisite
-    )
-    assert casa_reasonunit.rcontext_concept_active_requisite is None
+    assert casa_reasonunit.rconcept_active_requisite != new_rconcept_active_requisite
+    assert casa_reasonunit.rconcept_active_requisite is None
 
     # WHEN
     new_zia_budatom = sift_budatom(sue_bud, casa_atom)
 
     # THEN
     assert new_zia_budatom
-    assert new_zia_budatom.crud_str == atom_update()
+    assert new_zia_budatom.crud_str == UPDATE_str()
     assert new_zia_budatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_budatom.get_jvalues_dict()
-    zia_requisite_value = zia_jvalues.get(rcontext_concept_active_requisite_str())
-    assert zia_requisite_value == new_rcontext_concept_active_requisite
+    zia_requisite_value = zia_jvalues.get(rconcept_active_requisite_str())
+    assert zia_requisite_value == new_rconcept_active_requisite
 
 
 def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_concept_reason_premiseunit():
@@ -292,7 +283,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_concept_reason_premiseunit():
     clean_concept.get_reasonunit(week_way).set_premise(thur_way)
 
     thur_pdivisor = 39
-    thur_atom = budatom_shop(bud_concept_reason_premiseunit_str(), atom_insert())
+    thur_atom = budatom_shop(bud_concept_reason_premiseunit_str(), INSERT_str())
     thur_atom.set_arg(concept_way_str(), clean_way)
     thur_atom.set_arg(rcontext_str(), week_way)
     thur_atom.set_arg("pstate", thur_way)
@@ -308,7 +299,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_concept_reason_premiseunit():
 
     # THEN
     assert new_zia_budatom
-    assert new_zia_budatom.crud_str == atom_update()
+    assert new_zia_budatom.crud_str == UPDATE_str()
     assert new_zia_budatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_budatom.get_jvalues_dict()
     assert zia_jvalues.get("pdivisor") == thur_pdivisor
@@ -325,7 +316,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_concept_factunit():
     sue_bud.get_concept_obj(casa_way).set_factunit(factunit_shop(week_way))
 
     casa_fopen = 32
-    casa_atom = budatom_shop(bud_concept_factunit_str(), atom_insert())
+    casa_atom = budatom_shop(bud_concept_factunit_str(), INSERT_str())
     casa_atom.set_arg(concept_way_str(), casa_way)
     casa_atom.set_arg(fcontext_str(), week_way)
     casa_atom.set_arg(fopen_str(), casa_fopen)
@@ -339,7 +330,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_concept_factunit():
 
     # THEN
     assert new_zia_budatom
-    assert new_zia_budatom.crud_str == atom_update()
+    assert new_zia_budatom.crud_str == UPDATE_str()
     assert new_zia_budatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_budatom.get_jvalues_dict()
     assert zia_jvalues.get(fopen_str()) == casa_fopen

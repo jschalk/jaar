@@ -12,15 +12,12 @@ from src.a03_group_logic.group import MemberShip
 from src.a04_reason_logic.reason_concept import FactUnit, ReasonUnit
 from src.a05_concept_logic.concept import ConceptUnit
 from src.a06_bud_logic.bud import BudUnit, budunit_shop
-from src.a08_bud_atom_logic._test_util.a08_str import CRUD_command
+from src.a08_bud_atom_logic.atom_config import CRUD_command
 from src.a08_bud_atom_logic.atom import (
     BudAtom,
     budatom_shop,
     modify_bud_with_budatom,
     InvalidBudAtomException,
-    atom_delete,
-    atom_insert,
-    atom_update,
     jvalues_different,
     sift_budatom,
     get_from_dict as get_budatom_from_dict,
@@ -135,7 +132,7 @@ class BudDelta:
     ):
         if not jvalues_different("budunit", before_bud, after_bud):
             return
-        x_budatom = budatom_shop("budunit", atom_update())
+        x_budatom = budatom_shop("budunit", "UPDATE")
         if before_bud.max_tree_traverse != after_bud.max_tree_traverse:
             x_budatom.set_jvalue("max_tree_traverse", after_bud.max_tree_traverse)
         if before_bud.credor_respect != after_bud.credor_respect:
@@ -173,7 +170,7 @@ class BudDelta:
     def add_budatom_acctunit_inserts(self, after_bud: BudUnit, insert_acct_names: set):
         for insert_acct_name in insert_acct_names:
             insert_acctunit = after_bud.get_acct(insert_acct_name)
-            x_budatom = budatom_shop("bud_acctunit", atom_insert())
+            x_budatom = budatom_shop("bud_acctunit", "INSERT")
             x_budatom.set_jkey("acct_name", insert_acctunit.acct_name)
             if insert_acctunit.credit_belief is not None:
                 x_budatom.set_jvalue("credit_belief", insert_acctunit.credit_belief)
@@ -193,7 +190,7 @@ class BudDelta:
             after_acctunit = after_bud.get_acct(acct_name)
             before_acctunit = before_bud.get_acct(acct_name)
             if jvalues_different("bud_acctunit", after_acctunit, before_acctunit):
-                x_budatom = budatom_shop("bud_acctunit", atom_update())
+                x_budatom = budatom_shop("bud_acctunit", "UPDATE")
                 x_budatom.set_jkey("acct_name", after_acctunit.acct_name)
                 if before_acctunit.credit_belief != after_acctunit.credit_belief:
                     x_budatom.set_jvalue("credit_belief", after_acctunit.credit_belief)
@@ -206,7 +203,7 @@ class BudDelta:
 
     def add_budatom_acctunit_deletes(self, before_bud: BudUnit, delete_acct_names: set):
         for delete_acct_name in delete_acct_names:
-            x_budatom = budatom_shop("bud_acctunit", atom_delete())
+            x_budatom = budatom_shop("bud_acctunit", "DELETE")
             x_budatom.set_jkey("acct_name", delete_acct_name)
             self.set_budatom(x_budatom)
             delete_acctunit = before_bud.get_acct(delete_acct_name)
@@ -268,7 +265,7 @@ class BudDelta:
         after_acct_name = after_acctunit.acct_name
         for insert_group_title in insert_membership_group_titles:
             after_membership = after_acctunit.get_membership(insert_group_title)
-            x_budatom = budatom_shop("bud_acct_membership", atom_insert())
+            x_budatom = budatom_shop("bud_acct_membership", "INSERT")
             x_budatom.set_jkey("acct_name", after_acct_name)
             x_budatom.set_jkey("group_title", after_membership.group_title)
             if after_membership.credit_vote is not None:
@@ -283,7 +280,7 @@ class BudDelta:
         before_membership: MemberShip,
         after_membership: MemberShip,
     ):
-        x_budatom = budatom_shop("bud_acct_membership", atom_update())
+        x_budatom = budatom_shop("bud_acct_membership", "UPDATE")
         x_budatom.set_jkey("acct_name", acct_name)
         x_budatom.set_jkey("group_title", after_membership.group_title)
         if after_membership.credit_vote != before_membership.credit_vote:
@@ -296,7 +293,7 @@ class BudDelta:
         self, before_acct_name: AcctName, before_group_titles: TitleStr
     ):
         for delete_group_title in before_group_titles:
-            x_budatom = budatom_shop("bud_acct_membership", atom_delete())
+            x_budatom = budatom_shop("bud_acct_membership", "DELETE")
             x_budatom.set_jkey("acct_name", before_acct_name)
             x_budatom.set_jkey("group_title", delete_group_title)
             self.set_budatom(x_budatom)
@@ -322,7 +319,7 @@ class BudDelta:
     def add_budatom_concept_inserts(self, after_bud: BudUnit, insert_concept_ways: set):
         for insert_concept_way in insert_concept_ways:
             insert_conceptunit = after_bud.get_concept_obj(insert_concept_way)
-            x_budatom = budatom_shop("bud_conceptunit", atom_insert())
+            x_budatom = budatom_shop("bud_conceptunit", "INSERT")
             x_budatom.set_jkey("concept_way", insert_conceptunit.get_concept_way())
             x_budatom.set_jvalue("addin", insert_conceptunit.addin)
             x_budatom.set_jvalue("begin", insert_conceptunit.begin)
@@ -366,7 +363,7 @@ class BudDelta:
             if jvalues_different(
                 "bud_conceptunit", before_conceptunit, after_conceptunit
             ):
-                x_budatom = budatom_shop("bud_conceptunit", atom_update())
+                x_budatom = budatom_shop("bud_conceptunit", "UPDATE")
                 x_budatom.set_jkey("concept_way", after_conceptunit.get_concept_way())
                 if before_conceptunit.addin != after_conceptunit.addin:
                     x_budatom.set_jvalue("addin", after_conceptunit.addin)
@@ -501,7 +498,7 @@ class BudDelta:
         self, before_bud: BudUnit, delete_concept_ways: set
     ):
         for delete_concept_way in delete_concept_ways:
-            x_budatom = budatom_shop("bud_conceptunit", atom_delete())
+            x_budatom = budatom_shop("bud_conceptunit", "DELETE")
             x_budatom.set_jkey("concept_way", delete_concept_way)
             self.set_budatom(x_budatom)
 
@@ -537,13 +534,13 @@ class BudDelta:
             after_reasonunit = after_conceptunit.get_reasonunit(
                 insert_reasonunit_rcontext
             )
-            x_budatom = budatom_shop("bud_concept_reasonunit", atom_insert())
+            x_budatom = budatom_shop("bud_concept_reasonunit", "INSERT")
             x_budatom.set_jkey("concept_way", after_conceptunit.get_concept_way())
             x_budatom.set_jkey("rcontext", after_reasonunit.rcontext)
-            if after_reasonunit.rcontext_concept_active_requisite is not None:
+            if after_reasonunit.rconcept_active_requisite is not None:
                 x_budatom.set_jvalue(
-                    "rcontext_concept_active_requisite",
-                    after_reasonunit.rcontext_concept_active_requisite,
+                    "rconcept_active_requisite",
+                    after_reasonunit.rconcept_active_requisite,
                 )
             self.set_budatom(x_budatom)
 
@@ -569,16 +566,16 @@ class BudDelta:
             if jvalues_different(
                 "bud_concept_reasonunit", before_reasonunit, after_reasonunit
             ):
-                x_budatom = budatom_shop("bud_concept_reasonunit", atom_update())
+                x_budatom = budatom_shop("bud_concept_reasonunit", "UPDATE")
                 x_budatom.set_jkey("concept_way", before_conceptunit.get_concept_way())
                 x_budatom.set_jkey("rcontext", after_reasonunit.rcontext)
                 if (
-                    before_reasonunit.rcontext_concept_active_requisite
-                    != after_reasonunit.rcontext_concept_active_requisite
+                    before_reasonunit.rconcept_active_requisite
+                    != after_reasonunit.rconcept_active_requisite
                 ):
                     x_budatom.set_jvalue(
-                        "rcontext_concept_active_requisite",
-                        after_reasonunit.rcontext_concept_active_requisite,
+                        "rconcept_active_requisite",
+                        after_reasonunit.rconcept_active_requisite,
                     )
                 self.set_budatom(x_budatom)
 
@@ -611,7 +608,7 @@ class BudDelta:
         self, before_conceptunit: ConceptUnit, delete_reasonunit_rcontexts: set
     ):
         for delete_reasonunit_rcontext in delete_reasonunit_rcontexts:
-            x_budatom = budatom_shop("bud_concept_reasonunit", atom_delete())
+            x_budatom = budatom_shop("bud_concept_reasonunit", "DELETE")
             x_budatom.set_jkey("concept_way", before_conceptunit.get_concept_way())
             x_budatom.set_jkey("rcontext", delete_reasonunit_rcontext)
             self.set_budatom(x_budatom)
@@ -633,7 +630,7 @@ class BudDelta:
     ):
         for insert_premise_pstate in insert_premise_pstates:
             after_premiseunit = after_reasonunit.get_premise(insert_premise_pstate)
-            x_budatom = budatom_shop("bud_concept_reason_premiseunit", atom_insert())
+            x_budatom = budatom_shop("bud_concept_reason_premiseunit", "INSERT")
             x_budatom.set_jkey("concept_way", concept_way)
             x_budatom.set_jkey("rcontext", after_reasonunit.rcontext)
             x_budatom.set_jkey("pstate", after_premiseunit.pstate)
@@ -660,9 +657,7 @@ class BudDelta:
                 before_premiseunit,
                 after_premiseunit,
             ):
-                x_budatom = budatom_shop(
-                    "bud_concept_reason_premiseunit", atom_update()
-                )
+                x_budatom = budatom_shop("bud_concept_reason_premiseunit", "UPDATE")
                 x_budatom.set_jkey("concept_way", concept_way)
                 x_budatom.set_jkey("rcontext", before_reasonunit.rcontext)
                 x_budatom.set_jkey("pstate", after_premiseunit.pstate)
@@ -681,7 +676,7 @@ class BudDelta:
         delete_premise_pstates: set,
     ):
         for delete_premise_pstate in delete_premise_pstates:
-            x_budatom = budatom_shop("bud_concept_reason_premiseunit", atom_delete())
+            x_budatom = budatom_shop("bud_concept_reason_premiseunit", "DELETE")
             x_budatom.set_jkey("concept_way", concept_way)
             x_budatom.set_jkey("rcontext", reasonunit_rcontext)
             x_budatom.set_jkey("pstate", delete_premise_pstate)
@@ -691,7 +686,7 @@ class BudDelta:
         self, concept_way: WayStr, insert_laborlink_labor_titles: set
     ):
         for insert_laborlink_labor_title in insert_laborlink_labor_titles:
-            x_budatom = budatom_shop("bud_concept_laborlink", atom_insert())
+            x_budatom = budatom_shop("bud_concept_laborlink", "INSERT")
             x_budatom.set_jkey("concept_way", concept_way)
             x_budatom.set_jkey("labor_title", insert_laborlink_labor_title)
             self.set_budatom(x_budatom)
@@ -700,7 +695,7 @@ class BudDelta:
         self, concept_way: WayStr, delete_laborlink_labor_titles: set
     ):
         for delete_laborlink_labor_title in delete_laborlink_labor_titles:
-            x_budatom = budatom_shop("bud_concept_laborlink", atom_delete())
+            x_budatom = budatom_shop("bud_concept_laborlink", "DELETE")
             x_budatom.set_jkey("concept_way", concept_way)
             x_budatom.set_jkey("labor_title", delete_laborlink_labor_title)
             self.set_budatom(x_budatom)
@@ -709,7 +704,7 @@ class BudDelta:
         self, concept_way: WayStr, insert_healerlink_healer_names: set
     ):
         for insert_healerlink_healer_name in insert_healerlink_healer_names:
-            x_budatom = budatom_shop("bud_concept_healerlink", atom_insert())
+            x_budatom = budatom_shop("bud_concept_healerlink", "INSERT")
             x_budatom.set_jkey("concept_way", concept_way)
             x_budatom.set_jkey("healer_name", insert_healerlink_healer_name)
             self.set_budatom(x_budatom)
@@ -718,7 +713,7 @@ class BudDelta:
         self, concept_way: WayStr, delete_healerlink_healer_names: set
     ):
         for delete_healerlink_healer_name in delete_healerlink_healer_names:
-            x_budatom = budatom_shop("bud_concept_healerlink", atom_delete())
+            x_budatom = budatom_shop("bud_concept_healerlink", "DELETE")
             x_budatom.set_jkey("concept_way", concept_way)
             x_budatom.set_jkey("healer_name", delete_healerlink_healer_name)
             self.set_budatom(x_budatom)
@@ -730,7 +725,7 @@ class BudDelta:
             after_awardlink = after_conceptunit.awardlinks.get(
                 after_awardlink_awardee_title
             )
-            x_budatom = budatom_shop("bud_concept_awardlink", atom_insert())
+            x_budatom = budatom_shop("bud_concept_awardlink", "INSERT")
             x_budatom.set_jkey("concept_way", after_conceptunit.get_concept_way())
             x_budatom.set_jkey("awardee_title", after_awardlink.awardee_title)
             x_budatom.set_jvalue("give_force", after_awardlink.give_force)
@@ -753,7 +748,7 @@ class BudDelta:
             if jvalues_different(
                 "bud_concept_awardlink", before_awardlink, after_awardlink
             ):
-                x_budatom = budatom_shop("bud_concept_awardlink", atom_update())
+                x_budatom = budatom_shop("bud_concept_awardlink", "UPDATE")
                 x_budatom.set_jkey("concept_way", before_conceptunit.get_concept_way())
                 x_budatom.set_jkey("awardee_title", after_awardlink.awardee_title)
                 if before_awardlink.give_force != after_awardlink.give_force:
@@ -766,7 +761,7 @@ class BudDelta:
         self, concept_way: WayStr, delete_awardlink_awardee_titles: set
     ):
         for delete_awardlink_awardee_title in delete_awardlink_awardee_titles:
-            x_budatom = budatom_shop("bud_concept_awardlink", atom_delete())
+            x_budatom = budatom_shop("bud_concept_awardlink", "DELETE")
             x_budatom.set_jkey("concept_way", concept_way)
             x_budatom.set_jkey("awardee_title", delete_awardlink_awardee_title)
             self.set_budatom(x_budatom)
@@ -776,7 +771,7 @@ class BudDelta:
     ):
         for insert_factunit_rcontext in insert_factunit_rcontexts:
             insert_factunit = conceptunit.factunits.get(insert_factunit_rcontext)
-            x_budatom = budatom_shop("bud_concept_factunit", atom_insert())
+            x_budatom = budatom_shop("bud_concept_factunit", "INSERT")
             x_budatom.set_jkey("concept_way", conceptunit.get_concept_way())
             x_budatom.set_jkey("fcontext", insert_factunit.fcontext)
             if insert_factunit.fstate is not None:
@@ -799,7 +794,7 @@ class BudDelta:
             if jvalues_different(
                 "bud_concept_factunit", before_factunit, after_factunit
             ):
-                x_budatom = budatom_shop("bud_concept_factunit", atom_update())
+                x_budatom = budatom_shop("bud_concept_factunit", "UPDATE")
                 x_budatom.set_jkey("concept_way", before_conceptunit.get_concept_way())
                 x_budatom.set_jkey("fcontext", after_factunit.fcontext)
                 if before_factunit.fstate != after_factunit.fstate:
@@ -814,7 +809,7 @@ class BudDelta:
         self, concept_way: WayStr, delete_factunit_rcontexts: FactUnit
     ):
         for delete_factunit_rcontext in delete_factunit_rcontexts:
-            x_budatom = budatom_shop("bud_concept_factunit", atom_delete())
+            x_budatom = budatom_shop("bud_concept_factunit", "DELETE")
             x_budatom.set_jkey("concept_way", concept_way)
             x_budatom.set_jkey("fcontext", delete_factunit_rcontext)
             self.set_budatom(x_budatom)

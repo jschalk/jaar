@@ -1,6 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import open_json, create_path
 from src.a00_data_toolbox.dict_toolbox import get_from_nested_dict
-from src.a08_bud_atom_logic._test_util.a08_str import jkeys_str, jvalues_str
 from src.a08_bud_atom_logic.atom_config import get_all_bud_dimen_delete_keys
 from os import getcwd as os_getcwd
 
@@ -35,12 +34,12 @@ def default_unknown_term_if_None(unknown_term: any = None) -> str:
 
 
 def get_pidgin_config_jkeys(x_dimen: str) -> dict:
-    jkeys_key_list = [x_dimen, jkeys_str()]
+    jkeys_key_list = [x_dimen, "jkeys"]
     return get_from_nested_dict(get_pidgin_config_dict(), jkeys_key_list)
 
 
 def get_pidgin_config_jvalues(x_dimen: str) -> dict:
-    jvalues_key_list = [x_dimen, jvalues_str()]
+    jvalues_key_list = [x_dimen, "jvalues"]
     return get_from_nested_dict(get_pidgin_config_dict(), jvalues_key_list)
 
 
@@ -115,7 +114,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "popen": "float",
         "pnigh": "float",
         "rcontext": "WayStr",
-        "rcontext_concept_active_requisite": "bool",
+        "rconcept_active_requisite": "bool",
         "respect_bit": "float",
         "stop_want": "float",
         "take_force": "float",

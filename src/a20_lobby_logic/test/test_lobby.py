@@ -1,4 +1,4 @@
-from src.a21_lobby_logic.lobby import LobbyUnit, lobbyunit_shop
+from src.a20_lobby_logic.lobby import LobbyUnit, lobbyunit_shop
 
 
 def test_LobbyUnit_Exists():

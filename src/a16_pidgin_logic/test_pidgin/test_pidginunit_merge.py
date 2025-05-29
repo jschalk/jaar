@@ -1,4 +1,4 @@
-from src.a06_bud_logic._test_util.a06_str import type_NameStr_str
+from src.a06_bud_logic._test_util.a06_str import NameStr_str
 from src.a16_pidgin_logic.pidgin import pidginunit_shop, inherit_pidginunit
 from src.a16_pidgin_logic._test_util.example_pidgins import (
     get_clean_waymap,
@@ -124,7 +124,7 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario7_namemap_Inherited():
     new_pidginunit = pidginunit_shop(sue_str, event1)
     bob_otx = "Bob"
     bob_inx = "Bobby"
-    new_pidginunit.set_otx2inx(type_NameStr_str(), bob_otx, bob_inx)
+    new_pidginunit.set_otx2inx(NameStr_str(), bob_otx, bob_inx)
     assert new_pidginunit.namemap != get_suita_namemap()
     assert new_pidginunit.namestr_exists(bob_otx, bob_inx)
 

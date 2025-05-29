@@ -42,15 +42,15 @@ from src.a06_bud_logic._test_util.a06_str import (
     concept_way_str,
     stop_want_str,
     labor_title_str,
-    type_NameStr_str,
-    type_TitleStr_str,
-    type_LabelStr_str,
-    type_WayStr_str,
+    NameStr_str,
+    TitleStr_str,
+    LabelStr_str,
+    WayStr_str,
 )
 from src.a08_bud_atom_logic._test_util.a08_str import (
-    atom_insert,
-    atom_delete,
-    atom_update,
+    INSERT_str,
+    DELETE_str,
+    UPDATE_str,
     dimen_str,
     column_order_str,
     crud_str,
@@ -78,22 +78,6 @@ from src.a08_bud_atom_logic.atom_config import (
     get_flattened_atom_table_build,
     get_normalized_bud_table_build,
 )
-
-
-def test_str_functions_ReturnsObj():
-    assert atom_insert() == "INSERT"
-    assert atom_update() == "UPDATE"
-    assert atom_delete() == "DELETE"
-    assert dimen_str() == "dimen"
-    assert column_order_str() == "column_order"
-    assert crud_str() == "crud"
-    assert class_type_str() == "class_type"
-    assert jkeys_str() == "jkeys"
-    assert jvalues_str() == "jvalues"
-    assert nesting_order_str() == "nesting_order"
-    assert normal_specs_str() == "normal_specs"
-    assert normal_table_name_str() == "normal_table_name"
-    assert sqlite_datatype_str() == "sqlite_datatype"
 
 
 def test_get_bud_dimens_ReturnsObj():
@@ -141,24 +125,24 @@ def test_get_all_bud_dimen_delete_keys_ReturnsObj():
 
 def _check_every_crud_dict_has_element(atom_config_dict, atom_order_str):
     for dimen, dimen_dict in atom_config_dict.items():
-        if dimen_dict.get(atom_insert()) is not None:
-            dimen_insert = dimen_dict.get(atom_insert())
+        if dimen_dict.get(INSERT_str()) is not None:
+            dimen_insert = dimen_dict.get(INSERT_str())
             if dimen_insert.get(atom_order_str) is None:
-                x_str = f"Missing from {dimen} {atom_insert()} {dimen_insert.get(atom_order_str)=}"
+                x_str = f"Missing from {dimen} {INSERT_str()} {dimen_insert.get(atom_order_str)=}"
                 print(x_str)
                 return False
 
-        if dimen_dict.get(atom_update()) is not None:
-            dimen_update = dimen_dict.get(atom_update())
+        if dimen_dict.get(UPDATE_str()) is not None:
+            dimen_update = dimen_dict.get(UPDATE_str())
             if dimen_update.get(atom_order_str) is None:
-                x_str = f"Missing from {dimen} {atom_update()} {dimen_update.get(atom_order_str)=}"
+                x_str = f"Missing from {dimen} {UPDATE_str()} {dimen_update.get(atom_order_str)=}"
                 print(x_str)
                 return False
 
-        if dimen_dict.get(atom_delete()) is not None:
-            dimen_delete = dimen_dict.get(atom_delete())
+        if dimen_dict.get(DELETE_str()) is not None:
+            dimen_delete = dimen_dict.get(DELETE_str())
             if dimen_delete.get(atom_order_str) is None:
-                x_str = f"Missing from {dimen} {atom_delete()} {dimen_delete.get(atom_order_str)=}"
+                x_str = f"Missing from {dimen} {DELETE_str()} {dimen_delete.get(atom_order_str)=}"
                 print(x_str)
                 return False
 
@@ -176,59 +160,59 @@ def test_get_atom_config_dict_EveryCrudOperationHasBudDeltaOrderGroup():
     # WHEN / THEN
     assert _check_every_crud_dict_has_element(get_atom_config_dict(), atom_order_str)
     # # Simple script for editing atom_config.json
-    # set_mog(atom_insert(), bud_acctunit_str(), 0)
-    # set_mog(atom_insert(), bud_acct_membership_str(), 1)
-    # set_mog(atom_insert(), bud_conceptunit_str(), 2)
-    # set_mog(atom_insert(), bud_concept_awardlink_str(), 3)
-    # set_mog(atom_insert(), bud_concept_laborlink_str(), 4)
-    # set_mog(atom_insert(), bud_concept_healerlink_str(), 5)
-    # set_mog(atom_insert(), bud_concept_factunit_str(), 6)
-    # set_mog(atom_insert(), bud_concept_reasonunit_str(), 7)
-    # set_mog(atom_insert(), bud_concept_reason_premiseunit_str(), 8)
-    # set_mog(atom_update(), bud_acctunit_str(), 9)
-    # set_mog(atom_update(), bud_acct_membership_str(), 10)
-    # set_mog(atom_update(), bud_conceptunit_str(), 11)
-    # set_mog(atom_update(), bud_concept_awardlink_str(), 12)
-    # set_mog(atom_update(), bud_concept_factunit_str(), 13)
-    # set_mog(atom_update(), bud_concept_reason_premiseunit_str(), 14)
-    # set_mog(atom_update(), bud_concept_reasonunit_str(), 15)
-    # set_mog(atom_delete(), bud_concept_reason_premiseunit_str(), 16)
-    # set_mog(atom_delete(), bud_concept_reasonunit_str(), 17)
-    # set_mog(atom_delete(), bud_concept_factunit_str(), 18)
-    # set_mog(atom_delete(), bud_concept_laborlink_str(), 19)
-    # set_mog(atom_delete(), bud_concept_healerlink_str(), 20)
-    # set_mog(atom_delete(), bud_concept_awardlink_str(), 21)
-    # set_mog(atom_delete(), bud_conceptunit_str(), 22)
-    # set_mog(atom_delete(), bud_acct_membership_str(), 23)
-    # set_mog(atom_delete(), bud_acctunit_str(), 24)
-    # set_mog(atom_update(), budunit_str(), 25)
+    # set_mog(INSERT_str(), bud_acctunit_str(), 0)
+    # set_mog(INSERT_str(), bud_acct_membership_str(), 1)
+    # set_mog(INSERT_str(), bud_conceptunit_str(), 2)
+    # set_mog(INSERT_str(), bud_concept_awardlink_str(), 3)
+    # set_mog(INSERT_str(), bud_concept_laborlink_str(), 4)
+    # set_mog(INSERT_str(), bud_concept_healerlink_str(), 5)
+    # set_mog(INSERT_str(), bud_concept_factunit_str(), 6)
+    # set_mog(INSERT_str(), bud_concept_reasonunit_str(), 7)
+    # set_mog(INSERT_str(), bud_concept_reason_premiseunit_str(), 8)
+    # set_mog(UPDATE_str(), bud_acctunit_str(), 9)
+    # set_mog(UPDATE_str(), bud_acct_membership_str(), 10)
+    # set_mog(UPDATE_str(), bud_conceptunit_str(), 11)
+    # set_mog(UPDATE_str(), bud_concept_awardlink_str(), 12)
+    # set_mog(UPDATE_str(), bud_concept_factunit_str(), 13)
+    # set_mog(UPDATE_str(), bud_concept_reason_premiseunit_str(), 14)
+    # set_mog(UPDATE_str(), bud_concept_reasonunit_str(), 15)
+    # set_mog(DELETE_str(), bud_concept_reason_premiseunit_str(), 16)
+    # set_mog(DELETE_str(), bud_concept_reasonunit_str(), 17)
+    # set_mog(DELETE_str(), bud_concept_factunit_str(), 18)
+    # set_mog(DELETE_str(), bud_concept_laborlink_str(), 19)
+    # set_mog(DELETE_str(), bud_concept_healerlink_str(), 20)
+    # set_mog(DELETE_str(), bud_concept_awardlink_str(), 21)
+    # set_mog(DELETE_str(), bud_conceptunit_str(), 22)
+    # set_mog(DELETE_str(), bud_acct_membership_str(), 23)
+    # set_mog(DELETE_str(), bud_acctunit_str(), 24)
+    # set_mog(UPDATE_str(), budunit_str(), 25)
 
-    assert 0 == q_order(atom_insert(), bud_acctunit_str())
-    assert 1 == q_order(atom_insert(), bud_acct_membership_str())
-    assert 2 == q_order(atom_insert(), bud_conceptunit_str())
-    assert 3 == q_order(atom_insert(), bud_concept_awardlink_str())
-    assert 4 == q_order(atom_insert(), bud_concept_laborlink_str())
-    assert 5 == q_order(atom_insert(), bud_concept_healerlink_str())
-    assert 6 == q_order(atom_insert(), bud_concept_factunit_str())
-    assert 7 == q_order(atom_insert(), bud_concept_reasonunit_str())
-    assert 8 == q_order(atom_insert(), bud_concept_reason_premiseunit_str())
-    assert 9 == q_order(atom_update(), bud_acctunit_str())
-    assert 10 == q_order(atom_update(), bud_acct_membership_str())
-    assert 11 == q_order(atom_update(), bud_conceptunit_str())
-    assert 12 == q_order(atom_update(), bud_concept_awardlink_str())
-    assert 13 == q_order(atom_update(), bud_concept_factunit_str())
-    assert 14 == q_order(atom_update(), bud_concept_reason_premiseunit_str())
-    assert 15 == q_order(atom_update(), bud_concept_reasonunit_str())
-    assert 16 == q_order(atom_delete(), bud_concept_reason_premiseunit_str())
-    assert 17 == q_order(atom_delete(), bud_concept_reasonunit_str())
-    assert 18 == q_order(atom_delete(), bud_concept_factunit_str())
-    assert 19 == q_order(atom_delete(), bud_concept_laborlink_str())
-    assert 20 == q_order(atom_delete(), bud_concept_healerlink_str())
-    assert 21 == q_order(atom_delete(), bud_concept_awardlink_str())
-    assert 22 == q_order(atom_delete(), bud_conceptunit_str())
-    assert 23 == q_order(atom_delete(), bud_acct_membership_str())
-    assert 24 == q_order(atom_delete(), bud_acctunit_str())
-    assert 25 == q_order(atom_update(), budunit_str())
+    assert 0 == q_order(INSERT_str(), bud_acctunit_str())
+    assert 1 == q_order(INSERT_str(), bud_acct_membership_str())
+    assert 2 == q_order(INSERT_str(), bud_conceptunit_str())
+    assert 3 == q_order(INSERT_str(), bud_concept_awardlink_str())
+    assert 4 == q_order(INSERT_str(), bud_concept_laborlink_str())
+    assert 5 == q_order(INSERT_str(), bud_concept_healerlink_str())
+    assert 6 == q_order(INSERT_str(), bud_concept_factunit_str())
+    assert 7 == q_order(INSERT_str(), bud_concept_reasonunit_str())
+    assert 8 == q_order(INSERT_str(), bud_concept_reason_premiseunit_str())
+    assert 9 == q_order(UPDATE_str(), bud_acctunit_str())
+    assert 10 == q_order(UPDATE_str(), bud_acct_membership_str())
+    assert 11 == q_order(UPDATE_str(), bud_conceptunit_str())
+    assert 12 == q_order(UPDATE_str(), bud_concept_awardlink_str())
+    assert 13 == q_order(UPDATE_str(), bud_concept_factunit_str())
+    assert 14 == q_order(UPDATE_str(), bud_concept_reason_premiseunit_str())
+    assert 15 == q_order(UPDATE_str(), bud_concept_reasonunit_str())
+    assert 16 == q_order(DELETE_str(), bud_concept_reason_premiseunit_str())
+    assert 17 == q_order(DELETE_str(), bud_concept_reasonunit_str())
+    assert 18 == q_order(DELETE_str(), bud_concept_factunit_str())
+    assert 19 == q_order(DELETE_str(), bud_concept_laborlink_str())
+    assert 20 == q_order(DELETE_str(), bud_concept_healerlink_str())
+    assert 21 == q_order(DELETE_str(), bud_concept_awardlink_str())
+    assert 22 == q_order(DELETE_str(), bud_conceptunit_str())
+    assert 23 == q_order(DELETE_str(), bud_acct_membership_str())
+    assert 24 == q_order(DELETE_str(), bud_acctunit_str())
+    assert 25 == q_order(UPDATE_str(), budunit_str())
 
 
 def _get_atom_config_jkeys_len(x_dimen: str) -> int:
@@ -573,7 +557,7 @@ def get_class_type(x_dimen: str, x_arg: str) -> str:
 
 def test_get_class_type_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert get_class_type(bud_acctunit_str(), acct_name_str()) == type_NameStr_str()
+    assert get_class_type(bud_acctunit_str(), acct_name_str()) == NameStr_str()
     assert get_class_type(bud_conceptunit_str(), gogo_want_str()) == "float"
 
 
@@ -581,10 +565,10 @@ def test_get_allowed_class_types_ReturnsObj():
     # ESTABLISH
     x_allowed_class_types = {
         "int",
-        type_NameStr_str(),
-        type_TitleStr_str(),
-        type_LabelStr_str(),
-        type_WayStr_str(),
+        NameStr_str(),
+        TitleStr_str(),
+        LabelStr_str(),
+        WayStr_str(),
         "float",
         "bool",
         "TimeLinePoint",
@@ -641,11 +625,11 @@ def test_get_atom_args_class_types_ReturnsObj():
     x_class_types = get_atom_args_class_types()
 
     # THEN
-    assert x_class_types.get(acct_name_str()) == type_NameStr_str()
+    assert x_class_types.get(acct_name_str()) == NameStr_str()
     assert x_class_types.get(addin_str()) == "float"
-    assert x_class_types.get(awardee_title_str()) == type_TitleStr_str()
-    assert x_class_types.get(rcontext_str()) == type_WayStr_str()
-    assert x_class_types.get("rcontext_concept_active_requisite") == "bool"
+    assert x_class_types.get(awardee_title_str()) == TitleStr_str()
+    assert x_class_types.get(rcontext_str()) == WayStr_str()
+    assert x_class_types.get("rconcept_active_requisite") == "bool"
     assert x_class_types.get(begin_str()) == "float"
     assert x_class_types.get(respect_bit_str()) == "float"
     assert x_class_types.get(close_str()) == "float"
@@ -657,30 +641,30 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(debtor_respect_str()) == "float"
     assert x_class_types.get(denom_str()) == "int"
     assert x_class_types.get("pdivisor") == "int"
-    assert x_class_types.get(fcontext_str()) == type_WayStr_str()
+    assert x_class_types.get(fcontext_str()) == WayStr_str()
     assert x_class_types.get(fnigh_str()) == "float"
     assert x_class_types.get(fopen_str()) == "float"
     assert x_class_types.get(fund_coin_str()) == "float"
     assert x_class_types.get("fund_pool") == "float"
     assert x_class_types.get("give_force") == "float"
     assert x_class_types.get(gogo_want_str()) == "float"
-    assert x_class_types.get(group_title_str()) == type_TitleStr_str()
-    assert x_class_types.get(healer_name_str()) == type_NameStr_str()
+    assert x_class_types.get(group_title_str()) == TitleStr_str()
+    assert x_class_types.get(healer_name_str()) == NameStr_str()
     assert x_class_types.get("mass") == "int"
     assert x_class_types.get("max_tree_traverse") == "int"
     assert x_class_types.get(morph_str()) == "bool"
-    assert x_class_types.get("pstate") == type_WayStr_str()
+    assert x_class_types.get("pstate") == WayStr_str()
     assert x_class_types.get("pnigh") == "float"
     assert x_class_types.get(numor_str()) == "int"
     assert x_class_types.get("popen") == "float"
     assert x_class_types.get(penny_str()) == "float"
-    assert x_class_types.get("fstate") == type_WayStr_str()
+    assert x_class_types.get("fstate") == WayStr_str()
     assert x_class_types.get("pledge") == "bool"
     assert x_class_types.get("problem_bool") == "bool"
-    assert x_class_types.get(concept_way_str()) == type_WayStr_str()
+    assert x_class_types.get(concept_way_str()) == WayStr_str()
     assert x_class_types.get(stop_want_str()) == "float"
     assert x_class_types.get("take_force") == "float"
     assert x_class_types.get("tally") == "int"
-    assert x_class_types.get(labor_title_str()) == type_TitleStr_str()
+    assert x_class_types.get(labor_title_str()) == TitleStr_str()
     assert x_class_types.keys() == get_atom_args_dimen_mapping().keys()
     assert all_atom_args_class_types_are_correct(x_class_types)

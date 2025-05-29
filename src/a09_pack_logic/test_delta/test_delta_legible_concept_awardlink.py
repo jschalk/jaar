@@ -7,9 +7,9 @@ from src.a06_bud_logic._test_util.a06_str import (
     take_force_str,
 )
 from src.a08_bud_atom_logic._test_util.a08_str import (
-    atom_update,
-    atom_insert,
-    atom_delete,
+    UPDATE_str,
+    INSERT_str,
+    DELETE_str,
 )
 from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a09_pack_logic.delta import buddelta_shop
@@ -25,7 +25,7 @@ def test_create_legible_list_ReturnsObj_concept_awardlink_INSERT():
     awardee_title_value = f"{sue_bud.bridge}Swimmers"
     give_force_value = 81
     take_force_value = 43
-    swim_budatom = budatom_shop(dimen, atom_insert())
+    swim_budatom = budatom_shop(dimen, INSERT_str())
     swim_budatom.set_arg(concept_way_str(), way_value)
     swim_budatom.set_arg(awardee_title_str(), awardee_title_value)
     swim_budatom.set_arg(give_force_str(), give_force_value)
@@ -53,7 +53,7 @@ def test_create_legible_list_ReturnsObj_concept_awardlink_UPDATE_give_force_take
     way_value = sue_bud.make_way(casa_way, "clean fridge")
     give_force_value = 81
     take_force_value = 43
-    swim_budatom = budatom_shop(dimen, atom_update())
+    swim_budatom = budatom_shop(dimen, UPDATE_str())
     swim_budatom.set_arg(concept_way_str(), way_value)
     swim_budatom.set_arg(awardee_title_str(), awardee_title_value)
     swim_budatom.set_arg(give_force_str(), give_force_value)
@@ -79,7 +79,7 @@ def test_create_legible_list_ReturnsObj_concept_awardlink_UPDATE_give_force():
     casa_way = sue_bud.make_l1_way("casa")
     way_value = sue_bud.make_way(casa_way, "clean fridge")
     give_force_value = 81
-    swim_budatom = budatom_shop(dimen, atom_update())
+    swim_budatom = budatom_shop(dimen, UPDATE_str())
     swim_budatom.set_arg(concept_way_str(), way_value)
     swim_budatom.set_arg(awardee_title_str(), awardee_title_value)
     swim_budatom.set_arg(give_force_str(), give_force_value)
@@ -105,7 +105,7 @@ def test_create_legible_list_ReturnsObj_concept_awardlink_UPDATE_take_force():
     way_value = sue_bud.make_way(casa_way, "clean fridge")
 
     take_force_value = 81
-    swim_budatom = budatom_shop(dimen, atom_update())
+    swim_budatom = budatom_shop(dimen, UPDATE_str())
     swim_budatom.set_arg(concept_way_str(), way_value)
     swim_budatom.set_arg(awardee_title_str(), awardee_title_value)
     swim_budatom.set_arg(take_force_str(), take_force_value)
@@ -129,7 +129,7 @@ def test_create_legible_list_ReturnsObj_concept_awardlink_DELETE():
     casa_way = sue_bud.make_l1_way("casa")
     way_value = sue_bud.make_way(casa_way, "clean fridge")
     awardee_title_value = f"{sue_bud.bridge}Swimmers"
-    swim_budatom = budatom_shop(dimen, atom_delete())
+    swim_budatom = budatom_shop(dimen, DELETE_str())
     swim_budatom.set_arg(concept_way_str(), way_value)
     swim_budatom.set_arg(awardee_title_str(), awardee_title_value)
     # print(f"{swim_budatom=}")

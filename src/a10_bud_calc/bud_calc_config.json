@@ -345,7 +345,7 @@
             }
         },
         "jvalues": {
-            "rcontext_concept_active_requisite": {
+            "rconcept_active_requisite": {
                 "class_type": "bool",
                 "sqlite_datatype": "INTEGER"
             }

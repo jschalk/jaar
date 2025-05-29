@@ -208,14 +208,14 @@ def test_listen_to_agenda_duty_plan_agenda_ProcessesIrrationalBud(
         egg_way,
         pledge=True,
         reason_rcontext=chicken_way,
-        reason_rcontext_concept_active_requisite=True,
+        reason_rconcept_active_requisite=True,
     )
     # set chick pledge is True when egg first is False
     sue_plan.edit_concept_attr(
         chicken_way,
         pledge=True,
         reason_rcontext=egg_way,
-        reason_rcontext_concept_active_requisite=False,
+        reason_rconcept_active_requisite=False,
     )
     yao_dakota_hubunit.save_plan_bud(sue_plan)
 

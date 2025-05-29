@@ -260,14 +260,14 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalBud():
         egg_way,
         pledge=True,
         reason_rcontext=chicken_way,
-        reason_rcontext_concept_active_requisite=True,
+        reason_rconcept_active_requisite=True,
     )
     # set chick pledge is True when egg first is False
     sue_budunit.edit_concept_attr(
         chicken_way,
         pledge=True,
         reason_rcontext=egg_way,
-        reason_rcontext_concept_active_requisite=False,
+        reason_rconcept_active_requisite=False,
     )
     sue_budunit.settle_bud()
     assert sue_budunit._rational is False

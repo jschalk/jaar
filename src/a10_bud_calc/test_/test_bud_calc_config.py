@@ -1,10 +1,6 @@
 # from src.a00_data_toolbox.dict_toolbox import get_from_nested_dict
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a02_finance_logic._test_util.a02_str import (
-    fisc_label_str,
-    owner_name_str,
-    world_id_str,
-)
+from src.a02_finance_logic._test_util.a02_str import fisc_label_str, owner_name_str
 from src.a06_bud_logic._test_util.a06_str import (
     budunit_str,
     bud_acctunit_str,
@@ -47,10 +43,10 @@ from src.a06_bud_logic._test_util.a06_str import (
     respect_bit_str,
     concept_way_str,
     stop_want_str,
-    type_NameStr_str,
-    type_TitleStr_str,
-    type_LabelStr_str,
-    type_WayStr_str,
+    NameStr_str,
+    TitleStr_str,
+    LabelStr_str,
+    WayStr_str,
 )
 from src.a08_bud_atom_logic._test_util.a08_str import (
     class_type_str,
@@ -59,11 +55,7 @@ from src.a08_bud_atom_logic._test_util.a08_str import (
     sqlite_datatype_str,
 )
 from src.a08_bud_atom_logic.atom_config import get_atom_config_dict
-from src.a10_bud_calc._test_util.a10_str import (
-    jmetrics_str,
-    fund_take_str,
-    fund_give_str,
-)
+from src.a10_bud_calc._test_util.a10_str import jmetrics_str
 from src.a10_bud_calc.bud_calc_config import (
     get_bud_calc_config_filename,
     config_file_path,
@@ -76,13 +68,6 @@ from src.a10_bud_calc.bud_calc_config import (
 )
 from os.path import exists as os_path_exists
 from os import getcwd as os_getcwd
-
-
-def test_str_functions_ReturnsObj():
-    # ESTABLISH / WHEN / THEN
-    assert jmetrics_str() == "jmetrics"
-    assert fund_take_str() == "fund_take"
-    assert fund_give_str() == "fund_give"
 
 
 def test_get_bud_calc_config_dict_Exists():
@@ -491,9 +476,9 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     budheal = bud_concept_healerlink_str()
     budfact = bud_concept_factunit_str()
     budgrou = bud_groupunit_str()
-    assert g_class_type(config, budmemb, jk, acct_name_str()) == type_NameStr_str()
+    assert g_class_type(config, budmemb, jk, acct_name_str()) == NameStr_str()
     assert g_sqlitetype(config, budmemb, jk, acct_name_str()) == "TEXT"
-    assert g_class_type(config, budmemb, jk, group_title_str()) == type_TitleStr_str()
+    assert g_class_type(config, budmemb, jk, group_title_str()) == TitleStr_str()
     assert g_sqlitetype(config, budmemb, jk, group_title_str()) == "TEXT"
     assert g_class_type(config, budmemb, jm, "_credor_pool") == "float"
     assert g_sqlitetype(config, budmemb, jm, "_credor_pool") == "REAL"
@@ -515,7 +500,7 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(config, budmemb, jv, credit_vote_str()) == "REAL"
     assert g_class_type(config, budmemb, jv, debtit_vote_str()) == "float"
     assert g_sqlitetype(config, budmemb, jv, debtit_vote_str()) == "REAL"
-    assert g_class_type(config, budacct, jk, acct_name_str()) == type_NameStr_str()
+    assert g_class_type(config, budacct, jk, acct_name_str()) == NameStr_str()
     assert g_sqlitetype(config, budacct, jk, acct_name_str()) == "TEXT"
     assert g_class_type(config, budacct, jm, "_credor_pool") == "float"
     assert g_sqlitetype(config, budacct, jm, "_credor_pool") == "REAL"
@@ -561,9 +546,9 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_class_type(config, budgrou, jm, "fund_coin") == "float"
     assert g_sqlitetype(config, budgrou, jm, "fund_coin") == "REAL"
 
-    assert g_class_type(config, budawar, jk, awardee_title_str()) == type_TitleStr_str()
+    assert g_class_type(config, budawar, jk, awardee_title_str()) == TitleStr_str()
     assert g_sqlitetype(config, budawar, jk, awardee_title_str()) == "TEXT"
-    assert g_class_type(config, budawar, jk, concept_way_str()) == type_WayStr_str()
+    assert g_class_type(config, budawar, jk, concept_way_str()) == WayStr_str()
     assert g_sqlitetype(config, budawar, jk, concept_way_str()) == "TEXT"
     assert g_class_type(config, budawar, jm, "_fund_give") == "float"
     assert g_sqlitetype(config, budawar, jm, "_fund_give") == "REAL"
@@ -573,25 +558,25 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(config, budawar, jv, "give_force") == "REAL"
     assert g_class_type(config, budawar, jv, "take_force") == "float"
     assert g_sqlitetype(config, budawar, jv, "take_force") == "REAL"
-    assert g_class_type(config, budfact, jk, fcontext_str()) == type_WayStr_str()
+    assert g_class_type(config, budfact, jk, fcontext_str()) == WayStr_str()
     assert g_sqlitetype(config, budfact, jk, fcontext_str()) == "TEXT"
-    assert g_class_type(config, budfact, jk, concept_way_str()) == type_WayStr_str()
+    assert g_class_type(config, budfact, jk, concept_way_str()) == WayStr_str()
     assert g_sqlitetype(config, budfact, jk, concept_way_str()) == "TEXT"
     assert g_class_type(config, budfact, jv, fnigh_str()) == "float"
     assert g_sqlitetype(config, budfact, jv, fnigh_str()) == "REAL"
     assert g_class_type(config, budfact, jv, fopen_str()) == "float"
     assert g_sqlitetype(config, budfact, jv, fopen_str()) == "REAL"
-    assert g_class_type(config, budfact, jv, fstate_str()) == type_WayStr_str()
+    assert g_class_type(config, budfact, jv, fstate_str()) == WayStr_str()
     assert g_sqlitetype(config, budfact, jv, fstate_str()) == "TEXT"
-    assert g_class_type(config, budheal, jk, healer_name_str()) == type_NameStr_str()
+    assert g_class_type(config, budheal, jk, healer_name_str()) == NameStr_str()
     assert g_sqlitetype(config, budheal, jk, healer_name_str()) == "TEXT"
-    assert g_class_type(config, budheal, jk, concept_way_str()) == type_WayStr_str()
+    assert g_class_type(config, budheal, jk, concept_way_str()) == WayStr_str()
     assert g_sqlitetype(config, budheal, jk, concept_way_str()) == "TEXT"
-    assert g_class_type(config, budprem, jk, rcontext_str()) == type_WayStr_str()
+    assert g_class_type(config, budprem, jk, rcontext_str()) == WayStr_str()
     assert g_sqlitetype(config, budprem, jk, rcontext_str()) == "TEXT"
-    assert g_class_type(config, budprem, jk, pstate_str()) == type_WayStr_str()
+    assert g_class_type(config, budprem, jk, pstate_str()) == WayStr_str()
     assert g_sqlitetype(config, budprem, jk, pstate_str()) == "TEXT"
-    assert g_class_type(config, budprem, jk, concept_way_str()) == type_WayStr_str()
+    assert g_class_type(config, budprem, jk, concept_way_str()) == WayStr_str()
     assert g_sqlitetype(config, budprem, jk, concept_way_str()) == "TEXT"
     assert g_class_type(config, budprem, jm, "_status") == "int"
     assert g_sqlitetype(config, budprem, jm, "_status") == "INTEGER"
@@ -603,9 +588,9 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(config, budprem, jv, pnigh_str()) == "REAL"
     assert g_class_type(config, budprem, jv, popen_str()) == "float"
     assert g_sqlitetype(config, budprem, jv, popen_str()) == "REAL"
-    assert g_class_type(config, budreas, jk, rcontext_str()) == type_WayStr_str()
+    assert g_class_type(config, budreas, jk, rcontext_str()) == WayStr_str()
     assert g_sqlitetype(config, budreas, jk, rcontext_str()) == "TEXT"
-    assert g_class_type(config, budreas, jk, concept_way_str()) == type_WayStr_str()
+    assert g_class_type(config, budreas, jk, concept_way_str()) == WayStr_str()
     assert g_sqlitetype(config, budreas, jk, concept_way_str()) == "TEXT"
     assert g_class_type(config, budreas, jm, "_rcontext_concept_active_value") == "int"
     assert (
@@ -615,16 +600,11 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(config, budreas, jm, "_status") == "INTEGER"
     assert g_class_type(config, budreas, jm, "_task") == "int"
     assert g_sqlitetype(config, budreas, jm, "_task") == "INTEGER"
-    assert (
-        g_class_type(config, budreas, jv, "rcontext_concept_active_requisite") == "bool"
-    )
-    assert (
-        g_sqlitetype(config, budreas, jv, "rcontext_concept_active_requisite")
-        == "INTEGER"
-    )
-    assert g_class_type(config, budlabo, jk, concept_way_str()) == type_WayStr_str()
+    assert g_class_type(config, budreas, jv, "rconcept_active_requisite") == "bool"
+    assert g_sqlitetype(config, budreas, jv, "rconcept_active_requisite") == "INTEGER"
+    assert g_class_type(config, budlabo, jk, concept_way_str()) == WayStr_str()
     assert g_sqlitetype(config, budlabo, jk, concept_way_str()) == "TEXT"
-    assert g_class_type(config, budlabo, jk, "labor_title") == type_TitleStr_str()
+    assert g_class_type(config, budlabo, jk, "labor_title") == TitleStr_str()
     assert g_sqlitetype(config, budlabo, jk, "labor_title") == "TEXT"
     assert g_class_type(config, budlabo, jm, "_owner_name_labor") == "int"
     assert g_sqlitetype(config, budlabo, jm, "_owner_name_labor") == "INTEGER"
@@ -708,7 +688,7 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(config, budunit, jv, "tally") == "INTEGER"
 
 
-def test_get_bud_calc_config_dict_ReturnObj_EachArgHasOneClassType():
+def test_get_bud_calc_config_dict_ReturnsObj_EachArgHasOneClassType():
     # ESTABLISH
     bud_calc_config_dict = get_bud_calc_config_dict()
     all_args = {}
@@ -727,7 +707,7 @@ def test_get_bud_calc_config_dict_ReturnObj_EachArgHasOneClassType():
         assert len(arg_types) == 1
 
 
-def test_get_bud_calc_config_dict_ReturnObj_EachArgHasOne_sqlite_datatype():
+def test_get_bud_calc_config_dict_ReturnsObj_EachArgHasOne_sqlite_datatype():
     # ESTABLISH
     bud_calc_config_dict = get_bud_calc_config_dict()
     all_args = {}
@@ -757,7 +737,7 @@ def test_get_bud_calc_config_dict_ReturnObj_EachArgHasOne_sqlite_datatype():
         assert list(arg_types)[0] == sqlite_datatype_dict.get(x_arg)
 
 
-def test_get_bud_calc_args_type_dict_ReturnObj():
+def test_get_bud_calc_args_type_dict_ReturnsObj():
     # ESTABLISH
     bud_calc_config_dict = get_bud_calc_config_dict()
     all_args = {}
@@ -775,8 +755,8 @@ def test_get_bud_calc_args_type_dict_ReturnObj():
     bud_calc_args_type_dict = get_bud_calc_args_type_dict()
 
     # THEN
-    assert bud_calc_args_type_dict.get(acct_name_str()) == type_NameStr_str()
-    assert bud_calc_args_type_dict.get(group_title_str()) == type_TitleStr_str()
+    assert bud_calc_args_type_dict.get(acct_name_str()) == NameStr_str()
+    assert bud_calc_args_type_dict.get(group_title_str()) == TitleStr_str()
     assert bud_calc_args_type_dict.get("_credor_pool") == "float"
     assert bud_calc_args_type_dict.get("_debtor_pool") == "float"
     assert bud_calc_args_type_dict.get("_fund_agenda_give") == "float"
@@ -802,24 +782,24 @@ def test_get_bud_calc_args_type_dict_ReturnObj():
     assert bud_calc_args_type_dict.get("pledge") == "bool"
     assert bud_calc_args_type_dict.get("problem_bool") == "bool"
     assert bud_calc_args_type_dict.get(stop_want_str()) == "float"
-    assert bud_calc_args_type_dict.get(awardee_title_str()) == type_TitleStr_str()
-    assert bud_calc_args_type_dict.get(concept_way_str()) == type_WayStr_str()
+    assert bud_calc_args_type_dict.get(awardee_title_str()) == TitleStr_str()
+    assert bud_calc_args_type_dict.get(concept_way_str()) == WayStr_str()
     assert bud_calc_args_type_dict.get("give_force") == "float"
     assert bud_calc_args_type_dict.get("take_force") == "float"
-    assert bud_calc_args_type_dict.get(rcontext_str()) == type_WayStr_str()
+    assert bud_calc_args_type_dict.get(rcontext_str()) == WayStr_str()
     assert bud_calc_args_type_dict.get(fnigh_str()) == "float"
     assert bud_calc_args_type_dict.get(fopen_str()) == "float"
-    assert bud_calc_args_type_dict.get(fstate_str()) == type_WayStr_str()
-    assert bud_calc_args_type_dict.get(healer_name_str()) == type_NameStr_str()
-    assert bud_calc_args_type_dict.get(pstate_str()) == type_WayStr_str()
+    assert bud_calc_args_type_dict.get(fstate_str()) == WayStr_str()
+    assert bud_calc_args_type_dict.get(healer_name_str()) == NameStr_str()
+    assert bud_calc_args_type_dict.get(pstate_str()) == WayStr_str()
     assert bud_calc_args_type_dict.get("_status") == "int"
     assert bud_calc_args_type_dict.get("_task") == "int"
     assert bud_calc_args_type_dict.get("pdivisor") == "int"
     assert bud_calc_args_type_dict.get(pnigh_str()) == "float"
     assert bud_calc_args_type_dict.get(popen_str()) == "float"
     assert bud_calc_args_type_dict.get("_rcontext_concept_active_value") == "int"
-    assert bud_calc_args_type_dict.get("rcontext_concept_active_requisite") == "bool"
-    assert bud_calc_args_type_dict.get("labor_title") == type_TitleStr_str()
+    assert bud_calc_args_type_dict.get("rconcept_active_requisite") == "bool"
+    assert bud_calc_args_type_dict.get("labor_title") == TitleStr_str()
     assert bud_calc_args_type_dict.get("_owner_name_labor") == "int"
     assert bud_calc_args_type_dict.get("_active") == "int"
     assert bud_calc_args_type_dict.get("_all_acct_cred") == "int"

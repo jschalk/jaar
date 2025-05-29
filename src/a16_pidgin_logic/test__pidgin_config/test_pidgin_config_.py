@@ -2,14 +2,14 @@ from src.a00_data_toolbox.file_toolbox import create_path
 from src.a08_bud_atom_logic._test_util.a08_str import (
     jkeys_str,
     jvalues_str,
-    atom_update,
-    atom_insert,
-    atom_delete,
+    UPDATE_str,
+    INSERT_str,
+    DELETE_str,
     normal_specs_str,
 )
 from src.a16_pidgin_logic._test_util.a16_str import (
     pidginunit_str,
-    pidgin_filename,
+    pidgin_filename_str,
     otx_bridge_str,
     inx_bridge_str,
     inx_title_str,
@@ -40,29 +40,6 @@ from src.a16_pidgin_logic.pidgin_config import (
     default_unknown_term_if_None,
 )
 from os import getcwd as os_getcwd
-
-
-def test_str_functions_ReturnsObj():
-    assert pidginunit_str() == "pidginunit"
-    assert pidgin_filename() == "pidgin.json"
-    assert otx_bridge_str() == "otx_bridge"
-    assert inx_bridge_str() == "inx_bridge"
-    assert inx_title_str() == "inx_title"
-    assert otx_title_str() == "otx_title"
-    assert inx_name_str() == "inx_name"
-    assert otx_name_str() == "otx_name"
-    assert inx_label_str() == "inx_label"
-    assert otx_label_str() == "otx_label"
-    assert inx_way_str() == "inx_way"
-    assert otx_way_str() == "otx_way"
-    assert unknown_term_str() == "unknown_term"
-    assert otx2inx_str() == "otx2inx"
-    assert pidgin_name_str() == "pidgin_name"
-    assert pidgin_title_str() == "pidgin_title"
-    assert pidgin_label_str() == "pidgin_label"
-    assert pidgin_way_str() == "pidgin_way"
-    assert pidgin_core_str() == "pidgin_core"
-    assert map_otx2inx_str() == "map_otx2inx"
 
 
 def test_get_pidgin_config_filename_ReturnsObj():
@@ -125,9 +102,9 @@ def _validate_pidgin_config(pidgin_config: dict):
         print(f"_validate_pidgin_config {pidgin_dimens=}")
         assert dimen_dict.get(jkeys_str()) is not None
         assert dimen_dict.get(jvalues_str()) is not None
-        assert dimen_dict.get(atom_update()) is None
-        assert dimen_dict.get(atom_insert()) is None
-        assert dimen_dict.get(atom_delete()) is None
+        assert dimen_dict.get(UPDATE_str()) is None
+        assert dimen_dict.get(INSERT_str()) is None
+        assert dimen_dict.get(DELETE_str()) is None
         assert dimen_dict.get(normal_specs_str()) is None
 
         pidgin_jkeys_keys = set(dimen_dict.get(jkeys_str()).keys())
