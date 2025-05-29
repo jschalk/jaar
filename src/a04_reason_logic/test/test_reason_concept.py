@@ -26,13 +26,13 @@ def test_ReasonCore_attributesExist():
 
     # WHEN
     wkday_reason = ReasonCore(
-        wkday_way, premises=premises, rcontext_concept_active_requisite=False
+        wkday_way, premises=premises, rconcept_active_requisite=False
     )
 
     # THEN
     assert wkday_reason.rcontext == wkday_way
     assert wkday_reason.premises == premises
-    assert wkday_reason.rcontext_concept_active_requisite is False
+    assert wkday_reason.rconcept_active_requisite is False
     assert wkday_reason.bridge is None
 
 
@@ -165,9 +165,7 @@ def test_ReasonHeir_set_status_BudTrueCorrectlySetsStatusTrue():
     # ESTABLISH
     wkday_str = "weekday"
     wkday_way = create_way(root_label(), wkday_str)
-    week_reason = reasonheir_shop(
-        rcontext=wkday_way, rcontext_concept_active_requisite=True
-    )
+    week_reason = reasonheir_shop(rcontext=wkday_way, rconcept_active_requisite=True)
     week_reason.set_rcontext_concept_active_value(bool_x=True)
     assert week_reason._status is None
 
@@ -182,7 +180,7 @@ def test_ReasonHeir_set_status_BudFalseCorrectlySetsStatusTrue():
     # ESTABLISH
     wkday_str = "weekday"
     wkday_way = create_way(root_label(), wkday_str)
-    wkday_reason = reasonheir_shop(wkday_way, rcontext_concept_active_requisite=False)
+    wkday_reason = reasonheir_shop(wkday_way, rconcept_active_requisite=False)
     wkday_reason.set_rcontext_concept_active_value(bool_x=False)
     assert wkday_reason._status is None
 
@@ -197,7 +195,7 @@ def test_ReasonHeir_set_status_BudTrueCorrectlySetsStatusFalse():
     # ESTABLISH
     wkday_str = "weekday"
     wkday_way = create_way(root_label(), wkday_str)
-    wkday_reason = reasonheir_shop(wkday_way, rcontext_concept_active_requisite=True)
+    wkday_reason = reasonheir_shop(wkday_way, rconcept_active_requisite=True)
     wkday_reason.set_rcontext_concept_active_value(bool_x=False)
     assert wkday_reason._status is None
 
@@ -212,7 +210,7 @@ def test_ReasonHeir_set_status_BudNoneCorrectlySetsStatusFalse():
     # ESTABLISH
     wkday_str = "weekday"
     wkday_way = create_way(root_label(), wkday_str)
-    wkday_reason = reasonheir_shop(wkday_way, rcontext_concept_active_requisite=True)
+    wkday_reason = reasonheir_shop(wkday_way, rconcept_active_requisite=True)
     wkday_reason.set_rcontext_concept_active_value(bool_x=None)
     assert wkday_reason._status is None
 
@@ -259,14 +257,14 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWithSinglethu_premiseequireds():
     assert wkday_reason_dict == static_wkday_reason_dict
 
 
-def test_ReasonUnit_get_dict_ReturnsCorrectDictWith_rcontext_concept_active_requisite():
+def test_ReasonUnit_get_dict_ReturnsCorrectDictWith_rconcept_active_requisite():
     # ESTABLISH
     wkday_str = "weekday"
     wkday_way = create_way(root_label(), wkday_str)
-    wkday_rcontext_concept_active_requisite = True
+    wkday_rconcept_active_requisite = True
     wkday_reason = reasonunit_shop(
         wkday_way,
-        rcontext_concept_active_requisite=wkday_rcontext_concept_active_requisite,
+        rconcept_active_requisite=wkday_rconcept_active_requisite,
     )
 
     # WHEN
@@ -276,7 +274,7 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWith_rcontext_concept_active_requ
     assert wkday_reason_dict is not None
     static_wkday_reason_dict = {
         "rcontext": wkday_way,
-        "rcontext_concept_active_requisite": wkday_rcontext_concept_active_requisite,
+        "rconcept_active_requisite": wkday_rconcept_active_requisite,
     }
     print(wkday_reason_dict)
     assert wkday_reason_dict == static_wkday_reason_dict
@@ -312,17 +310,17 @@ def test_reasons_get_from_dict_ReturnsObj():
     # ESTABLISH
     wkday_str = "weekday"
     wkday_way = create_way(root_label(), wkday_str)
-    wkday_rcontext_concept_active_requisite = False
+    wkday_rconcept_active_requisite = False
     wkday_reasonunit = reasonunit_shop(
         wkday_way,
-        rcontext_concept_active_requisite=wkday_rcontext_concept_active_requisite,
+        rconcept_active_requisite=wkday_rconcept_active_requisite,
     )
     x_wkday_reasonunits_dict = {wkday_reasonunit.rcontext: wkday_reasonunit.get_dict()}
     assert x_wkday_reasonunits_dict is not None
     static_wkday_reason_dict = {
         wkday_way: {
             "rcontext": wkday_way,
-            "rcontext_concept_active_requisite": wkday_rcontext_concept_active_requisite,
+            "rconcept_active_requisite": wkday_rconcept_active_requisite,
         }
     }
     assert x_wkday_reasonunits_dict == static_wkday_reason_dict

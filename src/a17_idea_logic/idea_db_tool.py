@@ -153,8 +153,8 @@ def translate_all_columns_dataframe(x_df: DataFrame, x_pidginunit: PidginUnit):
 def move_otx_csvs_to_pidgin_inx(face_dir: str):
     otz_dir = create_path(face_dir, "otz")
     inz_dir = create_path(face_dir, "inz")
-    pidgin_filename = "pidgin.json"
-    pidginunit_json = open_file(face_dir, pidgin_filename)
+    pidgin_filename_str = "pidgin.json"
+    pidginunit_json = open_file(face_dir, pidgin_filename_str)
     face_pidginunit = get_pidginunit_from_json(pidginunit_json)
     otz_dir_files = get_dir_file_strs(otz_dir, delete_extensions=False)
     for x_filename in otz_dir_files.keys():

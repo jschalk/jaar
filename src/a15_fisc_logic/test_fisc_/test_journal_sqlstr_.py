@@ -5,7 +5,10 @@ from src.a06_bud_logic._test_util.a06_str import (
     fcontext_str,
     concept_way_str,
 )
-from src.a08_bud_atom_logic._test_util.a08_str import atom_insert, atom_hx_table_name
+from src.a08_bud_atom_logic._test_util.a08_str import (
+    INSERT_str,
+    atom_hx_str,
+)
 from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a15_fisc_logic.journal_sqlstr import (
     get_atom2delta_table_create_sqlstr,
@@ -170,10 +173,10 @@ CREATE TABLE IF NOT EXISTS atom_hx (
     assert generated_sqlstr.find(begin_sqlstr) == 0
     assert generated_sqlstr.find(end_sqlstr) > 0
     example_concept_reasonunit_str = (
-        "concept_reasonunit_UPDATE_rcontext_concept_active_requisite INTEGER NULL"
+        "concept_reasonunit_UPDATE_rconcept_active_requisite INTEGER NULL"
     )
     assert generated_sqlstr.find(example_concept_reasonunit_str) > 0
-    assert generated_sqlstr.find(example_concept_reasonunit_str) == 3957
+    assert generated_sqlstr.find(example_concept_reasonunit_str) == 3949
 
 
 def test_get_atom_hx_table_insert_sqlstr_ReturnsCorrectStr():
@@ -188,17 +191,17 @@ def test_get_atom_hx_table_insert_sqlstr_ReturnsCorrectStr():
 
     # WHEN
     x_dimen = bud_concept_factunit_str()
-    update_disc_budatom = budatom_shop(x_dimen, atom_insert())
+    update_disc_budatom = budatom_shop(x_dimen, INSERT_str())
     update_disc_budatom.set_jkey(concept_way_str(), ball_way)
     update_disc_budatom.set_jkey(fcontext_str(), knee_way)
     update_disc_budatom.set_jvalue(fopen_str(), knee_fopen)
 
     # THEN
     example_sqlstr = f"""
-INSERT INTO {atom_hx_table_name()} (
-  {x_dimen}_{atom_insert()}_{concept_way_str()}
-, {x_dimen}_{atom_insert()}_{fcontext_str()}
-, {x_dimen}_{atom_insert()}_{fopen_str()}
+INSERT INTO {atom_hx_str()} (
+  {x_dimen}_{INSERT_str()}_{concept_way_str()}
+, {x_dimen}_{INSERT_str()}_{fcontext_str()}
+, {x_dimen}_{INSERT_str()}_{fopen_str()}
 )
 VALUES (
   '{ball_way}'
@@ -222,12 +225,12 @@ CREATE TABLE IF NOT EXISTS atom_mstr (
 ;"""
     assert generated_sqlstr.find(begin_sqlstr) == 0
     assert generated_sqlstr.find(end_sqlstr) > 0
-    assert generated_sqlstr.find(end_sqlstr) == 5630
+    assert generated_sqlstr.find(end_sqlstr) == 5614
     example_concept_reasonunit_str = (
-        "concept_reasonunit_UPDATE_rcontext_concept_active_requisite INTEGER NULL"
+        "concept_reasonunit_UPDATE_rconcept_active_requisite INTEGER NULL"
     )
     assert generated_sqlstr.find(example_concept_reasonunit_str) > 0
-    assert generated_sqlstr.find(example_concept_reasonunit_str) == 3989
+    assert generated_sqlstr.find(example_concept_reasonunit_str) == 3981
 
 
 def test_get_create_table_if_not_exist_sqlstrs_HasCorrectNumberOfNumber():

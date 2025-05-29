@@ -10,7 +10,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     credit_belief_str,
     debtit_belief_str,
 )
-from src.a08_bud_atom_logic._test_util.a08_str import atom_insert, atom_delete
+from src.a08_bud_atom_logic._test_util.a08_str import INSERT_str, DELETE_str
 from src.a08_bud_atom_logic.atom import BudAtom, budatom_shop
 
 
@@ -42,7 +42,7 @@ def test_budatom_shop_ReturnsObj():
     # WHEN
     x_budatom = budatom_shop(
         dimen=acctunit_str,
-        crud_str=atom_insert(),
+        crud_str=INSERT_str(),
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
     )
@@ -50,7 +50,7 @@ def test_budatom_shop_ReturnsObj():
     # THEN
     print(f"{x_budatom=}")
     assert x_budatom.dimen == acctunit_str
-    assert x_budatom.crud_str == atom_insert()
+    assert x_budatom.crud_str == INSERT_str()
     assert x_budatom.jkeys == bob_required_dict
     assert x_budatom.jvalues == bob_optional_dict
 
@@ -59,7 +59,7 @@ def test_BudAtom_set_jkey_CorrectlySetsAttr():
     # ESTABLISH
     bob_str = "Bob"
     acctunit_str = bud_acctunit_str()
-    acctunit_budatom = budatom_shop(acctunit_str, atom_insert())
+    acctunit_budatom = budatom_shop(acctunit_str, INSERT_str())
     assert acctunit_budatom.jkeys == {}
 
     # WHEN
@@ -73,7 +73,7 @@ def test_BudAtom_set_jvalue_CorrectlySetsAttr():
     # ESTABLISH
     bob_str = "Bob"
     acctunit_str = bud_acctunit_str()
-    acctunit_budatom = budatom_shop(acctunit_str, atom_insert())
+    acctunit_budatom = budatom_shop(acctunit_str, INSERT_str())
     assert acctunit_budatom.jvalues == {}
 
     # WHEN
@@ -87,7 +87,7 @@ def test_BudAtom_get_value_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
     acctunit_str = bud_acctunit_str()
-    acctunit_budatom = budatom_shop(acctunit_str, atom_insert())
+    acctunit_budatom = budatom_shop(acctunit_str, INSERT_str())
     acctunit_budatom.set_jkey(x_key=acct_name_str(), x_value=bob_str)
 
     # WHEN / THEN
@@ -97,7 +97,7 @@ def test_BudAtom_get_value_ReturnsObj():
 def test_BudAtom_is_jvalues_valid_ReturnsCorrectBoolean():
     # WHEN
     acctunit_str = bud_acctunit_str()
-    bob_insert_budatom = budatom_shop(acctunit_str, crud_str=atom_insert())
+    bob_insert_budatom = budatom_shop(acctunit_str, crud_str=INSERT_str())
     assert bob_insert_budatom.is_jvalues_valid()
 
     # WHEN
@@ -127,7 +127,7 @@ def test_BudAtom_is_valid_ReturnsCorrectBoolean_AcctUnit_INSERT():
     acctunit_str = bud_acctunit_str()
 
     # WHEN
-    bob_insert_budatom = budatom_shop(acctunit_str, crud_str=atom_insert())
+    bob_insert_budatom = budatom_shop(acctunit_str, crud_str=INSERT_str())
 
     # THEN
     assert bob_insert_budatom.is_jkeys_valid() is False
@@ -170,7 +170,7 @@ def test_BudAtom_is_valid_ReturnsCorrectBoolean_AcctUnit_INSERT():
     assert bob_insert_budatom.is_valid() is False
 
     # WHEN
-    bob_insert_budatom.crud_str = atom_insert()
+    bob_insert_budatom.crud_str = INSERT_str()
 
     # THEN
     assert bob_insert_budatom.is_jkeys_valid()
@@ -184,7 +184,7 @@ def test_BudAtom_get_value_ReturnsObj():
     bob_debtit_belief = 66
     bob_acctunit = acctunit_shop(bob_str, bob_credit_belief, bob_debtit_belief)
     acctunit_str = bud_acctunit_str()
-    bob_insert_budatom = budatom_shop(acctunit_str, atom_insert())
+    bob_insert_budatom = budatom_shop(acctunit_str, INSERT_str())
     cw_str = credit_belief_str()
     dw_str = debtit_belief_str()
     print(f"{bob_acctunit.get_dict()=}")
@@ -203,7 +203,7 @@ def test_BudAtom_get_value_ReturnsObj():
 def test_BudAtom_is_valid_ReturnsCorrectBoolean_AcctUnit_DELETE():
     bob_str = "Bob"
     acctunit_str = bud_acctunit_str()
-    delete_str = atom_delete()
+    delete_str = DELETE_str()
 
     # WHEN
     bob_delete_budatom = budatom_shop(acctunit_str, crud_str=delete_str)
@@ -222,7 +222,7 @@ def test_BudAtom_is_valid_ReturnsCorrectBoolean_AcctUnit_DELETE():
 
 def test_BudAtom_is_valid_ReturnsCorrectBoolean_budunit():
     # ESTABLISH / WHEN
-    bob_update_budatom = budatom_shop(budunit_str(), atom_insert())
+    bob_update_budatom = budatom_shop(budunit_str(), INSERT_str())
 
     # THEN
     assert bob_update_budatom.is_jkeys_valid()
@@ -242,7 +242,7 @@ def test_BudAtom_set_atom_order_SetCorrectAttr():
     bob_credit_belief = 55
     bob_debtit_belief = 66
     acctunit_str = bud_acctunit_str()
-    bob_insert_budatom = budatom_shop(acctunit_str, atom_insert())
+    bob_insert_budatom = budatom_shop(acctunit_str, INSERT_str())
     cw_str = credit_belief_str()
     dw_str = debtit_belief_str()
     bob_insert_budatom.set_jkey(acct_name_str(), bob_str)
@@ -261,7 +261,7 @@ def test_BudAtom_set_arg_SetsAny_jkey_jvalue():
     bob_credit_belief = 55
     bob_debtit_belief = 66
     acctunit_str = bud_acctunit_str()
-    bob_insert_budatom = budatom_shop(acctunit_str, atom_insert())
+    bob_insert_budatom = budatom_shop(acctunit_str, INSERT_str())
     cw_str = credit_belief_str()
     dw_str = debtit_belief_str()
 
@@ -281,7 +281,7 @@ def test_BudAtom_set_arg_SetsAny_jkey_jvalue():
 def test_BudAtom_get_nesting_order_args_ReturnsObj_bud_acctunit():
     # ESTABLISH
     sue_str = "Sue"
-    sue_insert_budatom = budatom_shop(bud_acctunit_str(), atom_insert())
+    sue_insert_budatom = budatom_shop(bud_acctunit_str(), INSERT_str())
     sue_insert_budatom.set_arg(acct_name_str(), sue_str)
     print(f"{sue_insert_budatom.jkeys=}")
 
@@ -294,7 +294,7 @@ def test_BudAtom_get_nesting_order_args_ReturnsObj_bud_acct_membership():
     # ESTABLISH
     sue_str = "Sue"
     iowa_str = ";Iowa"
-    sue_insert_budatom = budatom_shop(bud_acct_membership_str(), atom_insert())
+    sue_insert_budatom = budatom_shop(bud_acct_membership_str(), INSERT_str())
     sue_insert_budatom.set_arg(group_title_str(), iowa_str)
     sue_insert_budatom.set_arg(acct_name_str(), sue_str)
     print(f"{sue_insert_budatom.jkeys=}")

@@ -47,19 +47,19 @@ def bud_groupunit_str() -> str:
     return "bud_groupunit"
 
 
-def type_NameStr_str() -> str:
+def NameStr_str() -> str:
     return "NameStr"
 
 
-def type_TitleStr_str() -> str:
+def TitleStr_str() -> str:
     return "TitleStr"
 
 
-def type_WayStr_str() -> str:
+def WayStr_str() -> str:
     return "WayStr"
 
 
-def type_LabelStr_str() -> str:
+def LabelStr_str() -> str:
     return "LabelStr"
 
 
@@ -211,5 +211,5 @@ def popen_str() -> str:
     return "popen"
 
 
-def rcontext_concept_active_requisite_str() -> str:
-    return "rcontext_concept_active_requisite"
+def rconcept_active_requisite_str() -> str:
+    return "rconcept_active_requisite"

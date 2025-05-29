@@ -18,7 +18,7 @@
         "rcontext": {
             "otx_key": true
         },
-        "rcontext_concept_active_requisite": {
+        "rconcept_active_requisite": {
             "otx_key": false
         }
     },

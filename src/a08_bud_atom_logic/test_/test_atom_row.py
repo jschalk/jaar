@@ -6,7 +6,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     bud_concept_healerlink_str,
 )
 from src.a06_bud_logic._test_util.a06_str import acct_name_str
-from src.a08_bud_atom_logic._test_util.a08_str import atom_insert, atom_delete
+from src.a08_bud_atom_logic._test_util.a08_str import INSERT_str, DELETE_str
 from src.a08_bud_atom_logic.atom import AtomRow, atomrow_shop, budatom_shop
 from src.a08_bud_atom_logic.atom_config import get_atom_args_class_types
 
@@ -21,7 +21,7 @@ def test_AtomRow_exists():
     assert x_atomrow.acct_name is None
     assert x_atomrow.addin is None
     assert x_atomrow.rcontext is None
-    assert x_atomrow.rcontext_concept_active_requisite is None
+    assert x_atomrow.rconcept_active_requisite is None
     assert x_atomrow.begin is None
     assert x_atomrow.respect_bit is None
     assert x_atomrow.close is None
@@ -72,16 +72,16 @@ def test_atomrow_shop_ReturnsObj():
     x_atom_dimens = {bud_acctunit_str()}
 
     # WHEN
-    x_atomrow = atomrow_shop(x_atom_dimens, atom_insert())
+    x_atomrow = atomrow_shop(x_atom_dimens, INSERT_str())
 
     # THEN
     assert x_atomrow._atom_dimens == x_atom_dimens
-    assert x_atomrow._crud_command == atom_insert()
+    assert x_atomrow._crud_command == INSERT_str()
 
 
 def test_AtomRow_set_atom_dimen_SetsAttr():
     # ESTABLISH
-    x_atomrow = atomrow_shop({bud_acctunit_str()}, atom_insert())
+    x_atomrow = atomrow_shop({bud_acctunit_str()}, INSERT_str())
     assert bud_acct_membership_str() not in x_atomrow._atom_dimens
 
     # WHEN
@@ -93,7 +93,7 @@ def test_AtomRow_set_atom_dimen_SetsAttr():
 
 def test_AtomRow_atom_dimen_exists_ReturnsObj():
     # ESTABLISH
-    x_atomrow = atomrow_shop(set(), atom_insert())
+    x_atomrow = atomrow_shop(set(), INSERT_str())
     assert not x_atomrow.atom_dimen_exists(bud_acctunit_str())
     assert not x_atomrow.atom_dimen_exists(bud_acct_membership_str())
 
@@ -107,7 +107,7 @@ def test_AtomRow_atom_dimen_exists_ReturnsObj():
 
 def test_AtomRow_delete_atom_dimen_SetsAttr():
     # ESTABLISH
-    x_atomrow = atomrow_shop({bud_acctunit_str()}, atom_insert())
+    x_atomrow = atomrow_shop({bud_acctunit_str()}, INSERT_str())
     x_atomrow.set_atom_dimen(bud_acctunit_str())
     x_atomrow.set_atom_dimen(bud_acct_membership_str())
     assert x_atomrow.atom_dimen_exists(bud_acctunit_str())
@@ -123,7 +123,7 @@ def test_AtomRow_delete_atom_dimen_SetsAttr():
 
 def test_AtomRow_set_class_types_SetsAttr():
     # ESTABLISH
-    x_atomrow = atomrow_shop({}, atom_insert())
+    x_atomrow = atomrow_shop({}, INSERT_str())
     x_atomrow.close = "4"
     x_parent_way = "fizz_buzz"
     x_concept_label = "buzzziy"
@@ -149,7 +149,7 @@ def test_AtomRow_set_class_types_SetsAttr():
 def test_AtomRow_get_budatoms_ReturnsObj_bud_acctunit_str_INSERT_Scenario0():
     # ESTABLISH
     x_dimen = bud_acctunit_str()
-    x_atomrow = atomrow_shop({x_dimen}, atom_insert())
+    x_atomrow = atomrow_shop({x_dimen}, INSERT_str())
     x_atomrow.acct_name = "Bob"
 
     # WHEN
@@ -157,7 +157,7 @@ def test_AtomRow_get_budatoms_ReturnsObj_bud_acctunit_str_INSERT_Scenario0():
 
     # THEN
     assert len(x_budatoms) == 1
-    static_atom = budatom_shop(x_dimen, atom_insert())
+    static_atom = budatom_shop(x_dimen, INSERT_str())
     static_atom.set_arg(acct_name_str(), "Bob")
     assert x_budatoms[0] == static_atom
 
@@ -165,7 +165,7 @@ def test_AtomRow_get_budatoms_ReturnsObj_bud_acctunit_str_INSERT_Scenario0():
 def test_AtomRow_get_budatoms_ReturnsObj_bud_acctunit_str_INSERT_Scenario1():
     # ESTABLISH
     x_dimen = bud_acctunit_str()
-    x_atomrow = atomrow_shop({x_dimen}, atom_insert())
+    x_atomrow = atomrow_shop({x_dimen}, INSERT_str())
     x_atomrow.acct_name = "Bob"
     x_atomrow.credit_belief = 5
 
@@ -174,7 +174,7 @@ def test_AtomRow_get_budatoms_ReturnsObj_bud_acctunit_str_INSERT_Scenario1():
 
     # THEN
     assert len(x_budatoms) == 1
-    static_atom = budatom_shop(x_dimen, atom_insert())
+    static_atom = budatom_shop(x_dimen, INSERT_str())
     static_atom.set_arg(acct_name_str(), "Bob")
     static_atom.set_arg("credit_belief", 5)
     assert x_budatoms[0] == static_atom
@@ -183,7 +183,7 @@ def test_AtomRow_get_budatoms_ReturnsObj_bud_acctunit_str_INSERT_Scenario1():
 def test_AtomRow_get_budatoms_ReturnsObj_bud_acctunit_NSERT_Fails():
     # ESTABLISH
     x_dimen = bud_acctunit_str()
-    x_atomrow = atomrow_shop({x_dimen}, atom_insert())
+    x_atomrow = atomrow_shop({x_dimen}, INSERT_str())
 
     # WHEN
     x_budatoms = x_atomrow.get_budatoms()
@@ -195,7 +195,7 @@ def test_AtomRow_get_budatoms_ReturnsObj_bud_acctunit_NSERT_Fails():
 def test_AtomRow_get_budatoms_ReturnsObj_bud_acctunit_INSERT_Scenario2():
     # ESTABLISH
     x_dimen = bud_acctunit_str()
-    x_atomrow = atomrow_shop({x_dimen}, atom_insert())
+    x_atomrow = atomrow_shop({x_dimen}, INSERT_str())
     x_atomrow.acct_name = "Bob"
     four_str = "4"
     x_atomrow.credit_belief = four_str
@@ -205,7 +205,7 @@ def test_AtomRow_get_budatoms_ReturnsObj_bud_acctunit_INSERT_Scenario2():
 
     # THEN
     assert len(x_budatoms) == 1
-    static_atom = budatom_shop(x_dimen, atom_insert())
+    static_atom = budatom_shop(x_dimen, INSERT_str())
     static_atom.set_arg(acct_name_str(), "Bob")
     four_int = 4
     static_atom.set_arg("credit_belief", four_int)
@@ -214,7 +214,7 @@ def test_AtomRow_get_budatoms_ReturnsObj_bud_acctunit_INSERT_Scenario2():
 
 def test_AtomRow_get_budatoms_ReturnsObjIfDimenIsCorrect():
     # ESTABLISH
-    x_atomrow = atomrow_shop(set(), atom_insert())
+    x_atomrow = atomrow_shop(set(), INSERT_str())
     x_atomrow.acct_name = "Bob"
     four_str = "4"
     x_atomrow.credit_belief = four_str
@@ -231,7 +231,7 @@ def test_AtomRow_get_budatoms_ReturnsObjIfDimenIsCorrect():
 
 def test_AtomRow_get_budatoms_ReturnsObj_bud_conceptunit_INSERT_pledge_False_Scenario0():
     # ESTABLISH
-    x_atomrow = atomrow_shop({bud_conceptunit_str()}, atom_insert())
+    x_atomrow = atomrow_shop({bud_conceptunit_str()}, INSERT_str())
     x_atomrow.concept_way = create_way("accord78", "casa")
     x_atomrow.pledge = False
     assert len(x_atomrow.get_budatoms()) == 1
@@ -240,7 +240,7 @@ def test_AtomRow_get_budatoms_ReturnsObj_bud_conceptunit_INSERT_pledge_False_Sce
     x_budatom = x_atomrow.get_budatoms()[0]
 
     # THEN
-    static_budatom = budatom_shop(bud_conceptunit_str(), atom_insert())
+    static_budatom = budatom_shop(bud_conceptunit_str(), INSERT_str())
     static_budatom.set_arg("concept_way", create_way("accord78", "casa"))
     static_budatom.set_arg("pledge", False)
     print(static_budatom)
@@ -251,7 +251,7 @@ def test_AtomRow_get_budatoms_ReturnsObj_bud_conceptunit_INSERT_pledge_False_Sce
 def test_AtomRow_get_budatoms_ReturnsObj_bud_conceptunit_INSERT_pledge_False_Scenario1():
     # ESTABLISH
     x_dimens = {bud_conceptunit_str(), bud_concept_healerlink_str()}
-    x_atomrow = atomrow_shop(x_dimens, atom_insert())
+    x_atomrow = atomrow_shop(x_dimens, INSERT_str())
     x_atomrow.concept_way = create_way("accord78", "casa")
     x_atomrow.pledge = False
     x_atomrow.healer_name = "Bob"
@@ -261,12 +261,12 @@ def test_AtomRow_get_budatoms_ReturnsObj_bud_conceptunit_INSERT_pledge_False_Sce
 
     # THEN
     assert len(x_budatoms) == 2
-    y_concept_budatom = budatom_shop(bud_conceptunit_str(), atom_insert())
+    y_concept_budatom = budatom_shop(bud_conceptunit_str(), INSERT_str())
     casa_way = create_way("accord78", "casa")
     y_concept_budatom.set_arg("concept_way", casa_way)
     y_concept_budatom.set_arg("pledge", False)
     assert y_concept_budatom in x_budatoms
-    healerlink_budatom = budatom_shop(bud_concept_healerlink_str(), atom_insert())
+    healerlink_budatom = budatom_shop(bud_concept_healerlink_str(), INSERT_str())
     healerlink_budatom.set_arg("concept_way", casa_way)
     healerlink_budatom.set_arg("healer_name", "Bob")
     assert healerlink_budatom in x_budatoms

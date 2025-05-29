@@ -399,7 +399,7 @@ def add_bud_to_br00027_csv(
                 x_bud.owner_name,
                 conceptunit.get_concept_way(),
                 reasonunit.rcontext,
-                if_none_str(reasonunit.rcontext_concept_active_requisite),
+                if_none_str(reasonunit.rconcept_active_requisite),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -730,7 +730,7 @@ def add_pack_to_br00027_csv(
                 x_packunit.owner_name,
                 budatom.jkeys.get("concept_way"),
                 budatom.jkeys.get("rcontext"),
-                if_none_str(budatom.jvalues.get("rcontext_concept_active_requisite")),
+                if_none_str(budatom.jvalues.get("rconcept_active_requisite")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"

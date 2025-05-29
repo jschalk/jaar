@@ -1,6 +1,6 @@
 from src.a16_pidgin_logic._test_util.a16_str import (
     pidginunit_str,
-    pidgin_filename,
+    pidgin_filename_str,
     otx_bridge_str,
     inx_bridge_str,
     inx_title_str,
@@ -24,7 +24,7 @@ from src.a16_pidgin_logic._test_util.a16_str import (
 
 def test_str_functions_ReturnsObj():
     assert pidginunit_str() == "pidginunit"
-    assert pidgin_filename() == "pidgin.json"
+    assert pidgin_filename_str() == "pidgin.json"
     assert otx_bridge_str() == "otx_bridge"
     assert inx_bridge_str() == "inx_bridge"
     assert inx_title_str() == "inx_title"

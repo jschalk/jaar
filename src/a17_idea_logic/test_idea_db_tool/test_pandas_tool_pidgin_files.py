@@ -2,7 +2,7 @@ from src.a00_data_toolbox.file_toolbox import save_file, create_path
 from src.a01_way_logic.way import create_way, to_way
 from src.a06_bud_logic._test_util.a06_str import acct_name_str, rcontext_str
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
-from src.a16_pidgin_logic._test_util.a16_str import pidgin_filename
+from src.a16_pidgin_logic._test_util.a16_str import pidgin_filename_str
 from src.a16_pidgin_logic._test_util.example_pidgins import (
     get_casa_maison_pidginunit_set_by_label,
     get_casa_maison_way_otx_dt,
@@ -42,9 +42,9 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario0_SingleFile(
     sue_pidginunit = pidginunit_shop(sue_otx)
     sue_pidginunit.set_namemap(get_suita_namemap())
     sue_dir = create_path(get_example_face_dir(), sue_otx)
-    pidginunit_file_path = create_path(sue_dir, pidgin_filename())
+    pidginunit_file_path = create_path(sue_dir, pidgin_filename_str())
     print(f"{sue_dir=}")
-    save_file(sue_dir, pidgin_filename(), sue_pidginunit.get_json())
+    save_file(sue_dir, pidgin_filename_str(), sue_pidginunit.get_json())
     sue_otx_dt = get_suita_acct_name_otx_dt()
     sue_inx_dt = get_suita_acct_name_inx_dt()
     otz_dir = create_path(sue_dir, "otz")
@@ -108,7 +108,7 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario1_SingleFile_W
 
     sue_pidginunit = get_casa_maison_pidginunit_set_by_label()
     sue_dir = create_path(get_example_face_dir(), sue_pidginunit.face_name)
-    save_file(sue_dir, pidgin_filename(), sue_pidginunit.get_json())
+    save_file(sue_dir, pidgin_filename_str(), sue_pidginunit.get_json())
     sue_otx_dt = get_casa_maison_way_otx_dt()
     sue_inx_dt = get_casa_maison_way_inx_dt()
     otz_dir = create_path(sue_dir, "otz")
@@ -152,9 +152,9 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario2_TwoFile(
     sue_pidginunit = get_casa_maison_pidginunit_set_by_label()
     sue_pidginunit.set_namemap(get_suita_namemap())
     sue_dir = create_path(get_example_face_dir(), sue_pidginunit.face_name)
-    pidginunit_file_path = create_path(sue_dir, pidgin_filename())
+    pidginunit_file_path = create_path(sue_dir, pidgin_filename_str())
     print(f"{sue_dir=}")
-    save_file(sue_dir, pidgin_filename(), sue_pidginunit.get_json())
+    save_file(sue_dir, pidgin_filename_str(), sue_pidginunit.get_json())
     sue_otx_dt = get_suita_acct_name_otx_dt()
     otz_dir = create_path(sue_dir, "otz")
     inz_dir = create_path(sue_dir, "inz")

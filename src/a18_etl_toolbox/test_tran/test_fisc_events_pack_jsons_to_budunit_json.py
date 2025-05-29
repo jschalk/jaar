@@ -6,7 +6,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     credit_belief_str,
     debtit_belief_str,
 )
-from src.a08_bud_atom_logic._test_util.a08_str import atom_insert
+from src.a08_bud_atom_logic._test_util.a08_str import INSERT_str
 from src.a09_pack_logic.pack import packunit_shop, get_packunit_from_json
 from src.a12_hub_tools.hub_path import (
     create_owner_event_dir_path,
@@ -46,17 +46,16 @@ def test_etl_event_pack_json_to_event_inherited_budunits_SetsFiles_bud_json(
     a23_bob_e3_pack = packunit_shop(bob_inx, None, a23_str, event_int=event3)
     a23_bob_e7_pack = packunit_shop(bob_inx, None, a23_str, event_int=event7)
     budacct_dimen = bud_acctunit_str()
-    insert_str = atom_insert()
     bob_jkeys = {acct_name_str(): bob_inx}
     bob_jvalues = {credit_belief_str(): credit77, debtit_belief_str(): None}
     yao_jkeys = {acct_name_str(): yao_inx}
     yao_jvalues = {credit_belief_str(): credit44, debtit_belief_str(): None}
-    a23_bob_e3_pack.add_budatom(budacct_dimen, insert_str, bob_jkeys, bob_jvalues)
-    a23_bob_e3_pack.add_budatom(budacct_dimen, insert_str, yao_jkeys, yao_jvalues)
+    a23_bob_e3_pack.add_budatom(budacct_dimen, INSERT_str(), bob_jkeys, bob_jvalues)
+    a23_bob_e3_pack.add_budatom(budacct_dimen, INSERT_str(), yao_jkeys, yao_jvalues)
     sue_jkeys = {acct_name_str(): sue_inx}
     sue_jvalues = {credit_belief_str(): credit88, debtit_belief_str(): None}
-    a23_bob_e7_pack.add_budatom(budacct_dimen, insert_str, bob_jkeys, bob_jvalues)
-    a23_bob_e7_pack.add_budatom(budacct_dimen, insert_str, sue_jkeys, sue_jvalues)
+    a23_bob_e7_pack.add_budatom(budacct_dimen, INSERT_str(), bob_jkeys, bob_jvalues)
+    a23_bob_e7_pack.add_budatom(budacct_dimen, INSERT_str(), sue_jkeys, sue_jvalues)
     e3_all_pack_path = create_event_all_pack_path(
         fisc_mstr_dir, a23_str, bob_inx, event3
     )
@@ -113,17 +112,16 @@ def test_etl_event_pack_json_to_event_inherited_budunits_SetsFiles_expressed_pac
     a23_bob_e3_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event3)
     a23_bob_e7_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event7)
     budacct_dimen = bud_acctunit_str()
-    insert_str = atom_insert()
     bob_jkeys = {acct_name_str(): bob_inx}
     bob_jvalues = {credit_belief_str(): credit77}
     yao_jkeys = {acct_name_str(): yao_inx}
     yao_jvalues = {credit_belief_str(): credit44}
-    a23_bob_e3_pack.add_budatom(budacct_dimen, insert_str, bob_jkeys, bob_jvalues)
-    a23_bob_e3_pack.add_budatom(budacct_dimen, insert_str, yao_jkeys, yao_jvalues)
+    a23_bob_e3_pack.add_budatom(budacct_dimen, INSERT_str(), bob_jkeys, bob_jvalues)
+    a23_bob_e3_pack.add_budatom(budacct_dimen, INSERT_str(), yao_jkeys, yao_jvalues)
     sue_jkeys = {acct_name_str(): sue_inx}
     sue_jvalues = {credit_belief_str(): credit88}
-    a23_bob_e7_pack.add_budatom(budacct_dimen, insert_str, bob_jkeys, bob_jvalues)
-    a23_bob_e7_pack.add_budatom(budacct_dimen, insert_str, sue_jkeys, sue_jvalues)
+    a23_bob_e7_pack.add_budatom(budacct_dimen, INSERT_str(), bob_jkeys, bob_jvalues)
+    a23_bob_e7_pack.add_budatom(budacct_dimen, INSERT_str(), sue_jkeys, sue_jvalues)
     a23_bob_e3_all_pack_path = create_event_all_pack_path(
         fisc_mstr_dir, a23_str, bob_inx, event3
     )
@@ -153,9 +151,15 @@ def test_etl_event_pack_json_to_event_inherited_budunits_SetsFiles_expressed_pac
     gen_e7_express_pack = get_packunit_from_json(open_file(e7_expressed_pack_path))
     expected_e3_bob_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event3)
     expected_e7_bob_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event7)
-    expected_e3_bob_pack.add_budatom(budacct_dimen, insert_str, bob_jkeys, bob_jvalues)
-    expected_e3_bob_pack.add_budatom(budacct_dimen, insert_str, yao_jkeys, yao_jvalues)
-    expected_e7_bob_pack.add_budatom(budacct_dimen, insert_str, sue_jkeys, sue_jvalues)
+    expected_e3_bob_pack.add_budatom(
+        budacct_dimen, INSERT_str(), bob_jkeys, bob_jvalues
+    )
+    expected_e3_bob_pack.add_budatom(
+        budacct_dimen, INSERT_str(), yao_jkeys, yao_jvalues
+    )
+    expected_e7_bob_pack.add_budatom(
+        budacct_dimen, INSERT_str(), sue_jkeys, sue_jvalues
+    )
     assert expected_e3_bob_pack == a23_bob_e3_pack
     assert expected_e7_bob_pack._buddelta != a23_bob_e7_pack._buddelta
     assert expected_e7_bob_pack != a23_bob_e7_pack

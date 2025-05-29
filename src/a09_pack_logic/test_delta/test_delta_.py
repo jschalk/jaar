@@ -20,9 +20,9 @@ from src.a06_bud_logic._test_util.a06_str import (
     debtit_belief_str,
 )
 from src.a08_bud_atom_logic._test_util.a08_str import (
-    atom_update,
-    atom_insert,
-    atom_delete,
+    UPDATE_str,
+    INSERT_str,
+    DELETE_str,
 )
 from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a09_pack_logic.delta import (
@@ -66,7 +66,7 @@ def test_BudDelta_set_budatom_CorrectlySets_BudUnitSimpleAttrs():
     jkeys = {}
     bud_mass_budatom = budatom_shop(
         dimen,
-        atom_update(),
+        UPDATE_str(),
         jkeys=jkeys,
         jvalues=jvalues,
     )
@@ -78,7 +78,7 @@ def test_BudDelta_set_budatom_CorrectlySets_BudUnitSimpleAttrs():
 
     # THEN
     assert len(ex1_buddelta.budatoms) == 1
-    x_update_dict = ex1_buddelta.budatoms.get(atom_update())
+    x_update_dict = ex1_buddelta.budatoms.get(UPDATE_str())
     # print(f"{x_update_dict=}")
     x_dimen_budatom = x_update_dict.get(dimen)
     print(f"{x_dimen_budatom=}")
@@ -90,7 +90,7 @@ def test_BudDelta_set_budatom_RaisesErrorWhen_is_valid_IsFalse():
     # ESTABLISH
     ex1_buddelta = buddelta_shop()
     x_dimen = bud_acctunit_str()
-    bud_mass_budatom = budatom_shop(x_dimen, atom_update())
+    bud_mass_budatom = budatom_shop(x_dimen, UPDATE_str())
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
@@ -107,7 +107,7 @@ def test_ChangUnit_budatom_exists_ReturnsObj_bud_acctunit_str():
     # ESTABLISH
     bob_str = "Bob"
     x_buddelta = buddelta_shop()
-    bob_budatom = budatom_shop(bud_acctunit_str(), atom_insert())
+    bob_budatom = budatom_shop(bud_acctunit_str(), INSERT_str())
     bob_budatom.set_arg(acct_name_str(), bob_str)
     assert not x_buddelta.budatom_exists(bob_budatom)
 
@@ -123,7 +123,7 @@ def test_ChangUnit_budatom_exists_ReturnsObj_bud_acct_membership_str():
     bob_str = "Bob"
     iowa_str = ";Iowa"
     x_buddelta = buddelta_shop()
-    bob_iowa_budatom = budatom_shop(bud_acct_membership_str(), atom_insert())
+    bob_iowa_budatom = budatom_shop(bud_acct_membership_str(), INSERT_str())
     bob_iowa_budatom.set_arg(group_title_str(), iowa_str)
     bob_iowa_budatom.set_arg(acct_name_str(), bob_str)
     assert not x_buddelta.budatom_exists(bob_iowa_budatom)
@@ -140,12 +140,12 @@ def test_BudDelta_get_atom_ReturnsObj():
     ex1_buddelta = buddelta_shop()
     opt_arg1 = "tally"
     opt_value = 55
-    budunit_budatom = budatom_shop(budunit_str(), atom_update())
+    budunit_budatom = budatom_shop(budunit_str(), UPDATE_str())
     budunit_budatom.set_jvalue(x_key=opt_arg1, x_value=opt_value)
     ex1_buddelta.set_budatom(budunit_budatom)
 
     # WHEN
-    gen_budatom = ex1_buddelta.get_budatom(atom_update(), dimen=budunit_str(), jkeys=[])
+    gen_budatom = ex1_buddelta.get_budatom(UPDATE_str(), dimen=budunit_str(), jkeys=[])
 
     # THEN
     assert gen_budatom == budunit_budatom
@@ -163,14 +163,14 @@ def test_BudDelta_add_budatom_CorrectlySets_BudUnitSimpleAttrs():
     jvalues = {op2_arg: op2_value}
     ex1_buddelta.add_budatom(
         budunit_str(),
-        atom_update(),
+        UPDATE_str(),
         jkeys,
         jvalues=jvalues,
     )
 
     # THEN
     assert len(ex1_buddelta.budatoms) == 1
-    x_update_dict = ex1_buddelta.budatoms.get(atom_update())
+    x_update_dict = ex1_buddelta.budatoms.get(UPDATE_str())
     x_budatom = x_update_dict.get(budunit_str())
     assert x_budatom is not None
     assert x_budatom.dimen == budunit_str()
@@ -196,14 +196,14 @@ def test_BudDelta_add_budatom_CorrectlySets_BudUnit_acctunits():
     acctunit_str = bud_acctunit_str()
     ex1_buddelta.add_budatom(
         dimen=acctunit_str,
-        crud_str=atom_insert(),
+        crud_str=INSERT_str(),
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
     )
     # THEN
     assert len(ex1_buddelta.budatoms) == 1
     assert (
-        ex1_buddelta.budatoms.get(atom_insert()).get(acctunit_str).get(bob_str)
+        ex1_buddelta.budatoms.get(INSERT_str()).get(acctunit_str).get(bob_str)
         is not None
     )
 
@@ -211,9 +211,9 @@ def test_BudDelta_add_budatom_CorrectlySets_BudUnit_acctunits():
 def test_BudDelta_get_crud_budatoms_list_ReturnsObj():
     # ESTABLISH
     ex1_buddelta = get_buddelta_example1()
-    assert len(ex1_buddelta.budatoms.get(atom_update()).keys()) == 1
-    assert ex1_buddelta.budatoms.get(atom_insert()) is None
-    assert len(ex1_buddelta.budatoms.get(atom_delete()).keys()) == 1
+    assert len(ex1_buddelta.budatoms.get(UPDATE_str()).keys()) == 1
+    assert ex1_buddelta.budatoms.get(INSERT_str()) is None
+    assert len(ex1_buddelta.budatoms.get(DELETE_str()).keys()) == 1
 
     # WHEN
     sue_atom_order_dict = ex1_buddelta._get_crud_budatoms_list()
@@ -221,9 +221,9 @@ def test_BudDelta_get_crud_budatoms_list_ReturnsObj():
     # THEN
     assert len(sue_atom_order_dict) == 2
     print(f"{sue_atom_order_dict.keys()=}")
-    # print(f"{sue_atom_order_dict.get(atom_update())=}")
-    assert len(sue_atom_order_dict.get(atom_update())) == 1
-    assert len(sue_atom_order_dict.get(atom_delete())) == 1
+    # print(f"{sue_atom_order_dict.get(UPDATE_str())=}")
+    assert len(sue_atom_order_dict.get(UPDATE_str())) == 1
+    assert len(sue_atom_order_dict.get(DELETE_str())) == 1
     # for crud_str, atom_list in sue_atom_order_dict.items():
     #     print(f"{crud_str=}")
     #     print(f"{len(atom_list)=}")
@@ -234,11 +234,11 @@ def test_BudDelta_get_crud_budatoms_list_ReturnsObj():
 def test_BudDelta_get_dimen_sorted_budatoms_list_ReturnsObj_Scenario0_way():
     # ESTABLISH
     ex1_buddelta = get_buddelta_example1()
-    update_dict = ex1_buddelta.budatoms.get(atom_update())
+    update_dict = ex1_buddelta.budatoms.get(UPDATE_str())
     assert len(update_dict.keys()) == 1
     print(f"{update_dict.keys()=}")
-    assert ex1_buddelta.budatoms.get(atom_insert()) is None
-    delete_dict = ex1_buddelta.budatoms.get(atom_delete())
+    assert ex1_buddelta.budatoms.get(INSERT_str()) is None
+    delete_dict = ex1_buddelta.budatoms.get(DELETE_str())
     assert len(delete_dict.keys()) == 1
 
     # WHEN
@@ -263,12 +263,12 @@ def test_BudDelta_get_dimen_sorted_budatoms_list_ReturnsObj_Scenario0_way():
 #     opt2_value = 55
 #     dimen = budunit_str()
 #     opt2_arg = "mass"
-#     mass_budatom = budatom_shop(dimen, atom_update())
+#     mass_budatom = budatom_shop(dimen, UPDATE_str())
 #     mass_budatom.set_jvalue(opt2_arg, opt2_value)
 #     ex1_buddelta.set_budatom(mass_budatom)
 #     # THEN
-#     assert len(ex1_buddelta.budatoms.get(atom_update()).keys()) == 1
-#     sue_budunit_dict = ex1_buddelta.budatoms.get(atom_update())
+#     assert len(ex1_buddelta.budatoms.get(UPDATE_str()).keys()) == 1
+#     sue_budunit_dict = ex1_buddelta.budatoms.get(UPDATE_str())
 #     sue_mass_budatom = sue_budunit_dict.get(dimen)
 #     print(f"{sue_mass_budatom=}")
 #     assert mass_budatom == sue_mass_budatom
@@ -277,46 +277,46 @@ def test_BudDelta_get_dimen_sorted_budatoms_list_ReturnsObj_Scenario0_way():
 #     new2_value = 66
 #     x_attribute = "max_tree_traverse"
 #     jkeys = {x_attribute: new2_value}
-#     x_budatom = budatom_shop(x_attribute, atom_update(), None, jkeys)
+#     x_budatom = budatom_shop(x_attribute, UPDATE_str(), None, jkeys)
 #     ex1_buddelta.set_budatom(x_budatom)
 #     # THEN
 #     print(f"{ex1_buddelta.budatoms.keys()=}")
-#     print(f"{ex1_buddelta.budatoms.get(atom_update()).keys()=}")
-#     assert len(ex1_buddelta.budatoms.get(atom_update()).keys()) == 2
-#     assert x_budatom == ex1_buddelta.budatoms.get(atom_update()).get(x_attribute)
+#     print(f"{ex1_buddelta.budatoms.get(UPDATE_str()).keys()=}")
+#     assert len(ex1_buddelta.budatoms.get(UPDATE_str()).keys()) == 2
+#     assert x_budatom == ex1_buddelta.budatoms.get(UPDATE_str()).get(x_attribute)
 
 #     # WHEN
 #     new3_value = 77
 #     x_attribute = "credor_respect"
 #     jkeys = {x_attribute: new3_value}
-#     x_budatom = budatom_shop(x_attribute, atom_update(), None, jkeys)
+#     x_budatom = budatom_shop(x_attribute, UPDATE_str(), None, jkeys)
 #     ex1_buddelta.set_budatom(x_budatom)
 #     # THEN
-#     assert len(ex1_buddelta.budatoms.get(atom_update()).keys()) == 3
-#     assert x_budatom == ex1_buddelta.budatoms.get(atom_update()).get(x_attribute)
+#     assert len(ex1_buddelta.budatoms.get(UPDATE_str()).keys()) == 3
+#     assert x_budatom == ex1_buddelta.budatoms.get(UPDATE_str()).get(x_attribute)
 
 #     # WHEN
 #     new4_value = 88
 #     x_attribute = "debtor_respect"
 #     jkeys = {x_attribute: new4_value}
-#     x_budatom = budatom_shop(x_attribute, atom_update(), None, jkeys)
+#     x_budatom = budatom_shop(x_attribute, UPDATE_str(), None, jkeys)
 #     ex1_buddelta.set_budatom(x_budatom)
 #     # THEN
-#     assert len(ex1_buddelta.budatoms.get(atom_update()).keys()) == 4
-#     assert x_budatom == ex1_buddelta.budatoms.get(atom_update()).get(x_attribute)
+#     assert len(ex1_buddelta.budatoms.get(UPDATE_str()).keys()) == 4
+#     assert x_budatom == ex1_buddelta.budatoms.get(UPDATE_str()).get(x_attribute)
 
 
 def test_BudDelta_get_sorted_budatoms_ReturnsObj():
     # ESTABLISH
     ex1_buddelta = get_buddelta_example1()
-    update_dict = ex1_buddelta.budatoms.get(atom_update())
+    update_dict = ex1_buddelta.budatoms.get(UPDATE_str())
     assert len(update_dict.keys()) == 1
     assert update_dict.get(budunit_str()) is not None
-    print(f"atom_order 28 {ex1_buddelta.budatoms.get(atom_update()).keys()=}")
-    delete_dict = ex1_buddelta.budatoms.get(atom_delete())
+    print(f"atom_order 28 {ex1_buddelta.budatoms.get(UPDATE_str()).keys()=}")
+    delete_dict = ex1_buddelta.budatoms.get(DELETE_str())
     assert len(delete_dict.keys()) == 1
     assert delete_dict.get(bud_acctunit_str()) is not None
-    print(f"atom_order 26 {ex1_buddelta.budatoms.get(atom_delete()).keys()=}")
+    print(f"atom_order 26 {ex1_buddelta.budatoms.get(DELETE_str()).keys()=}")
 
     # WHEN
     sue_atom_order_list = ex1_buddelta.get_sorted_budatoms()
@@ -345,9 +345,9 @@ def test_BudDelta_get_sorted_budatoms_ReturnsObj_ConceptUnitsSorted():
     knee_str = "knee"
     knee_way = create_way(x_fisc_label, knee_str)
     x_dimen = bud_conceptunit_str()
-    sports_insert_conceptunit_budatom = budatom_shop(x_dimen, atom_insert())
+    sports_insert_conceptunit_budatom = budatom_shop(x_dimen, INSERT_str())
     sports_insert_conceptunit_budatom.set_jkey(concept_way_str(), sports_way)
-    knee_insert_conceptunit_budatom = budatom_shop(x_dimen, atom_insert())
+    knee_insert_conceptunit_budatom = budatom_shop(x_dimen, INSERT_str())
     knee_insert_conceptunit_budatom.set_jkey(concept_way_str(), knee_way)
     x_buddelta = buddelta_shop()
     x_buddelta.set_budatom(knee_insert_conceptunit_budatom)
@@ -378,10 +378,10 @@ def test_BudDelta_get_sorted_budatoms_ReturnsObj_Way_Sorted():
     knee_way = create_way(sports_way, knee_str)
     x_dimen = bud_concept_awardlink_str()
     swimmers_str = ",Swimmers"
-    sports_awardlink_budatom = budatom_shop(x_dimen, atom_insert())
+    sports_awardlink_budatom = budatom_shop(x_dimen, INSERT_str())
     sports_awardlink_budatom.set_jkey(awardee_title_str(), swimmers_str)
     sports_awardlink_budatom.set_jkey(concept_way_str(), sports_way)
-    knee_awardlink_budatom = budatom_shop(x_dimen, atom_insert())
+    knee_awardlink_budatom = budatom_shop(x_dimen, INSERT_str())
     knee_awardlink_budatom.set_jkey(awardee_title_str(), swimmers_str)
     knee_awardlink_budatom.set_jkey(concept_way_str(), knee_way)
     x_buddelta = buddelta_shop()
@@ -408,14 +408,14 @@ def test_bud_built_from_delta_is_valid_ReturnsObjEstablishWithNoBud_scenario1():
     # ESTABLISH
     sue_buddelta = buddelta_shop()
 
-    x_budatom = budatom_shop(budunit_str(), atom_update())
+    x_budatom = budatom_shop(budunit_str(), UPDATE_str())
     x_attribute = "credor_respect"
     x_budatom.set_jvalue(x_attribute, 100)
     sue_buddelta.set_budatom(x_budatom)
 
     dimen = bud_acctunit_str()
     zia_str = "Zia"
-    x_budatom = budatom_shop(dimen, atom_insert())
+    x_budatom = budatom_shop(dimen, INSERT_str())
     x_budatom.set_arg(acct_name_str(), zia_str)
     x_budatom.set_arg(credit_belief_str(), "70 is the number")
     sue_buddelta.set_budatom(x_budatom)
@@ -430,7 +430,7 @@ def test_bud_built_from_delta_is_valid_ReturnsObjEstablishWithNoBud_scenario2():
     dimen = bud_acctunit_str()
     # WHEN
     yao_str = "Yao"
-    x_budatom = budatom_shop(dimen, atom_insert())
+    x_budatom = budatom_shop(dimen, INSERT_str())
     x_budatom.set_arg(acct_name_str(), yao_str)
     x_budatom.set_arg(credit_belief_str(), 30)
     sue_buddelta.set_budatom(x_budatom)
@@ -440,7 +440,7 @@ def test_bud_built_from_delta_is_valid_ReturnsObjEstablishWithNoBud_scenario2():
 
     # WHEN
     bob_str = "Bob"
-    x_budatom = budatom_shop(dimen, atom_insert())
+    x_budatom = budatom_shop(dimen, INSERT_str())
     x_budatom.set_arg(acct_name_str(), bob_str)
     x_budatom.set_arg(credit_belief_str(), "70 is the number")
     sue_buddelta.set_budatom(x_budatom)
@@ -452,20 +452,20 @@ def test_bud_built_from_delta_is_valid_ReturnsObjEstablishWithNoBud_scenario2():
 def test_BudDelta_get_ordered_budatoms_ReturnsObj_EstablishWithNoStartingNumber():
     # ESTABLISH
     sue_buddelta = buddelta_shop()
-    pool_budatom = budatom_shop(budunit_str(), atom_update())
+    pool_budatom = budatom_shop(budunit_str(), UPDATE_str())
     pool_attribute = "credor_respect"
     pool_budatom.set_jvalue(pool_attribute, 100)
     sue_buddelta.set_budatom(pool_budatom)
     dimen = bud_acctunit_str()
     zia_str = "Zia"
-    zia_budatom = budatom_shop(dimen, atom_insert())
+    zia_budatom = budatom_shop(dimen, INSERT_str())
     zia_budatom.set_arg(acct_name_str(), zia_str)
     zia_budatom.set_arg(credit_belief_str(), 70)
     sue_buddelta.set_budatom(zia_budatom)
     sue_bud = budunit_shop("Sue")
     sue_bud.set_credor_respect(100)
     yao_str = "Yao"
-    yao_budatom = budatom_shop(dimen, atom_insert())
+    yao_budatom = budatom_shop(dimen, INSERT_str())
     yao_budatom.set_arg(acct_name_str(), yao_str)
     yao_budatom.set_arg(credit_belief_str(), 30)
     sue_buddelta.set_budatom(yao_budatom)
@@ -491,20 +491,20 @@ def test_BudDelta_get_ordered_budatoms_ReturnsObj_EstablishWithNoStartingNumber(
 def test_BudDelta_get_ordered_budatoms_ReturnsObj_EstablishWithStartingNumber():
     # ESTABLISH
     sue_buddelta = buddelta_shop()
-    pool_budatom = budatom_shop(budunit_str(), atom_update())
+    pool_budatom = budatom_shop(budunit_str(), UPDATE_str())
     pool_attribute = "credor_respect"
     pool_budatom.set_jvalue(pool_attribute, 100)
     sue_buddelta.set_budatom(pool_budatom)
     dimen = bud_acctunit_str()
     zia_str = "Zia"
-    zia_budatom = budatom_shop(dimen, atom_insert())
+    zia_budatom = budatom_shop(dimen, INSERT_str())
     zia_budatom.set_arg(acct_name_str(), zia_str)
     zia_budatom.set_arg(credit_belief_str(), 70)
     sue_buddelta.set_budatom(zia_budatom)
     sue_bud = budunit_shop("Sue")
     sue_bud.set_credor_respect(100)
     yao_str = "Yao"
-    yao_budatom = budatom_shop(dimen, atom_insert())
+    yao_budatom = budatom_shop(dimen, INSERT_str())
     yao_budatom.set_arg(acct_name_str(), yao_str)
     yao_budatom.set_arg(credit_belief_str(), 30)
     sue_buddelta.set_budatom(yao_budatom)
@@ -530,20 +530,20 @@ def test_BudDelta_get_ordered_budatoms_ReturnsObj_EstablishWithStartingNumber():
 def test_BudDelta_get_ordered_dict_ReturnsObj_EstablishWithStartingNumber():
     # ESTABLISH
     sue_buddelta = buddelta_shop()
-    pool_budatom = budatom_shop(budunit_str(), atom_update())
+    pool_budatom = budatom_shop(budunit_str(), UPDATE_str())
     pool_attribute = "credor_respect"
     pool_budatom.set_jvalue(pool_attribute, 100)
     sue_buddelta.set_budatom(pool_budatom)
     dimen = bud_acctunit_str()
     zia_str = "Zia"
-    zia_budatom = budatom_shop(dimen, atom_insert())
+    zia_budatom = budatom_shop(dimen, INSERT_str())
     zia_budatom.set_arg(acct_name_str(), zia_str)
     zia_budatom.set_arg(credit_belief_str(), 70)
     sue_buddelta.set_budatom(zia_budatom)
     sue_bud = budunit_shop("Sue")
     sue_bud.set_credor_respect(100)
     yao_str = "Yao"
-    yao_budatom = budatom_shop(dimen, atom_insert())
+    yao_budatom = budatom_shop(dimen, INSERT_str())
     yao_budatom.set_arg(acct_name_str(), yao_str)
     yao_budatom.set_arg(credit_belief_str(), 30)
     sue_buddelta.set_budatom(yao_budatom)
@@ -569,20 +569,20 @@ def test_BudDelta_get_ordered_dict_ReturnsObj_EstablishWithStartingNumber():
 def test_get_buddelta_from_ordered_dict_ReturnsObj():
     # ESTABLISH
     expected_buddelta = buddelta_shop()
-    pool_budatom = budatom_shop(budunit_str(), atom_update())
+    pool_budatom = budatom_shop(budunit_str(), UPDATE_str())
     pool_attribute = "credor_respect"
     pool_budatom.set_jvalue(pool_attribute, 100)
     expected_buddelta.set_budatom(pool_budatom)
     dimen = bud_acctunit_str()
     zia_str = "Zia"
-    zia_budatom = budatom_shop(dimen, atom_insert())
+    zia_budatom = budatom_shop(dimen, INSERT_str())
     zia_budatom.set_arg(acct_name_str(), zia_str)
     zia_budatom.set_arg(credit_belief_str(), 70)
     expected_buddelta.set_budatom(zia_budatom)
     sue_bud = budunit_shop("Sue")
     sue_bud.set_credor_respect(100)
     yao_str = "Yao"
-    yao_budatom = budatom_shop(dimen, atom_insert())
+    yao_budatom = budatom_shop(dimen, INSERT_str())
     yao_budatom.set_arg(acct_name_str(), yao_str)
     yao_budatom.set_arg(credit_belief_str(), 30)
     expected_buddelta.set_budatom(yao_budatom)
@@ -607,18 +607,18 @@ def test_get_buddelta_from_ordered_dict_ReturnsObj():
 def test_BudDelta_get_json_ReturnsObj():
     # ESTABLISH
     sue_buddelta = buddelta_shop()
-    pool_budatom = budatom_shop(budunit_str(), atom_update())
+    pool_budatom = budatom_shop(budunit_str(), UPDATE_str())
     pool_attribute = "credor_respect"
     pool_budatom.set_jvalue(pool_attribute, 100)
     sue_buddelta.set_budatom(pool_budatom)
     dimen = bud_acctunit_str()
     zia_str = "Zia"
-    zia_budatom = budatom_shop(dimen, atom_insert())
+    zia_budatom = budatom_shop(dimen, INSERT_str())
     zia_budatom.set_arg(acct_name_str(), zia_str)
     zia_budatom.set_arg(credit_belief_str(), 70)
     sue_buddelta.set_budatom(zia_budatom)
     yao_str = "Yao"
-    yao_budatom = budatom_shop(dimen, atom_insert())
+    yao_budatom = budatom_shop(dimen, INSERT_str())
     yao_budatom.set_arg(acct_name_str(), yao_str)
     yao_budatom.set_arg(credit_belief_str(), 30)
     sue_buddelta.set_budatom(yao_budatom)
@@ -638,7 +638,7 @@ def test_BudDelta_budatom_exists_ReturnsObj():
     # WHEN / THEN
     dimen = bud_acctunit_str()
     zia_str = "Zia"
-    zia_budatom = budatom_shop(dimen, atom_insert())
+    zia_budatom = budatom_shop(dimen, INSERT_str())
     zia_budatom.set_arg(acct_name_str(), zia_str)
     zia_budatom.set_arg(credit_belief_str(), 70)
     assert x_buddelta.budatom_exists(zia_budatom) is False
@@ -657,7 +657,7 @@ def test_BudDelta_is_empty_ReturnsObj():
     # WHEN / THEN
     dimen = bud_acctunit_str()
     zia_str = "Zia"
-    zia_budatom = budatom_shop(dimen, atom_insert())
+    zia_budatom = budatom_shop(dimen, INSERT_str())
     zia_budatom.set_arg(acct_name_str(), zia_str)
     zia_budatom.set_arg(credit_belief_str(), 70)
     assert x_buddelta.is_empty()

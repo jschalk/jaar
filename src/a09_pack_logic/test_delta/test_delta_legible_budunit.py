@@ -1,6 +1,6 @@
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._test_util.a06_str import budunit_str
-from src.a08_bud_atom_logic._test_util.a08_str import atom_update
+from src.a08_bud_atom_logic._test_util.a08_str import UPDATE_str
 from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a09_pack_logic.delta import buddelta_shop
 from src.a09_pack_logic.legible import create_legible_list
@@ -20,7 +20,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_tally():
     dimen = budunit_str()
     tally_str = "tally"
     tally_int = 55
-    tally_budatom = budatom_shop(dimen, atom_update())
+    tally_budatom = budatom_shop(dimen, UPDATE_str())
     tally_budatom.set_arg(tally_str, tally_int)
     x_buddelta = buddelta_shop()
     x_buddelta.set_budatom(tally_budatom)
@@ -39,7 +39,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect():
     dimen = budunit_str()
     acct_credor_pool_str = "credor_respect"
     acct_credor_pool_int = 71
-    acct_credor_pool_budatom = budatom_shop(dimen, atom_update())
+    acct_credor_pool_budatom = budatom_shop(dimen, UPDATE_str())
     acct_credor_pool_budatom.set_arg(acct_credor_pool_str, acct_credor_pool_int)
 
     print(f"{acct_credor_pool_budatom=}")
@@ -60,7 +60,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_debtor_respect():
     dimen = budunit_str()
     acct_debtor_pool_str = "debtor_respect"
     acct_debtor_pool_int = 78
-    acct_debtor_pool_budatom = budatom_shop(dimen, atom_update())
+    acct_debtor_pool_budatom = budatom_shop(dimen, UPDATE_str())
     acct_debtor_pool_budatom.set_arg(acct_debtor_pool_str, acct_debtor_pool_int)
 
     print(f"{acct_debtor_pool_budatom=}")
@@ -83,7 +83,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_credor_respect_Equ
     acct_credor_pool_str = "credor_respect"
     acct_debtor_pool_str = "debtor_respect"
     acct_pool_int = 83
-    budunit_budatom = budatom_shop(dimen, atom_update())
+    budunit_budatom = budatom_shop(dimen, UPDATE_str())
     budunit_budatom.set_arg(acct_credor_pool_str, acct_pool_int)
     budunit_budatom.set_arg(acct_debtor_pool_str, acct_pool_int)
     x_buddelta.set_budatom(budunit_budatom)
@@ -103,7 +103,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBudUpdate_max_tree_traverse(
     dimen = budunit_str()
     max_tree_traverse_str = "max_tree_traverse"
     max_tree_traverse_int = 71
-    max_tree_traverse_budatom = budatom_shop(dimen, atom_update())
+    max_tree_traverse_budatom = budatom_shop(dimen, UPDATE_str())
     max_tree_traverse_budatom.set_arg(max_tree_traverse_str, max_tree_traverse_int)
 
     print(f"{max_tree_traverse_budatom=}")

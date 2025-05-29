@@ -24,7 +24,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     addin_str,
     awardee_title_str,
     rcontext_str,
-    rcontext_concept_active_requisite_str,
+    rconcept_active_requisite_str,
     begin_str,
     denom_str,
     event_int_str,
@@ -70,9 +70,9 @@ from src.a08_bud_atom_logic._test_util.a08_str import (
     jvalues_str,
     normal_specs_str,
     column_order_str,
-    atom_delete,
-    atom_insert,
-    atom_update,
+    DELETE_str,
+    INSERT_str,
+    UPDATE_str,
 )
 from src.a08_bud_atom_logic.atom_config import (
     get_atom_args_dimen_mapping,
@@ -134,7 +134,6 @@ from src.a16_pidgin_logic.pidgin_config import (
 )
 from src.a17_idea_logic._test_util.a17_str import (
     idea_category_str,
-    get_idea_categorys,
     idea_number_str,
     allowed_crud_str,
     attributes_str,
@@ -144,7 +143,7 @@ from src.a17_idea_logic._test_util.a17_str import (
     insert_mulitple_str,
     delete_insert_update_str,
     insert_update_str,
-    delete_insert_str,
+    delete_INSERT_str,
     delete_update_str,
     build_order_str,
 )
@@ -183,10 +182,8 @@ def test_str_functions_ReturnsObj():
     assert insert_mulitple_str() == "INSERT_MULITPLE"
     assert delete_insert_update_str() == "DELETE_INSERT_UPDATE"
     assert insert_update_str() == "INSERT_UPDATE"
-    assert delete_insert_str() == "DELETE_INSERT"
+    assert delete_INSERT_str() == "DELETE_INSERT"
     assert delete_update_str() == "DELETE_UPDATE"
-
-    assert get_idea_categorys() == {"bud", "fisc", "pidgin"}
 
 
 def test_get_idea_elements_sort_order_ReturnsObj():
@@ -326,7 +323,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[100] == "morph"
     assert table_sorting_priority[101] == "gogo_want"
     assert table_sorting_priority[102] == "stop_want"
-    assert table_sorting_priority[103] == "rcontext_concept_active_requisite"
+    assert table_sorting_priority[103] == "rconcept_active_requisite"
     assert table_sorting_priority[104] == "credit_belief"
     assert table_sorting_priority[105] == "debtit_belief"
     assert table_sorting_priority[106] == "credit_vote"
@@ -461,7 +458,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(morph_str()) == "INTEGER"
     assert sqlite_types.get(gogo_want_str()) == "REAL"
     assert sqlite_types.get(stop_want_str()) == "REAL"
-    assert sqlite_types.get(rcontext_concept_active_requisite_str()) == "INTEGER"
+    assert sqlite_types.get(rconcept_active_requisite_str()) == "INTEGER"
     assert sqlite_types.get(credit_belief_str()) == "REAL"
     assert sqlite_types.get(debtit_belief_str()) == "REAL"
     assert sqlite_types.get(credit_vote_str()) == "REAL"
@@ -516,11 +513,11 @@ def test_get_allowed_curds_ReturnsObj():
         insert_mulitple_str(),
         delete_insert_update_str(),
         insert_update_str(),
-        delete_insert_str(),
+        delete_INSERT_str(),
         delete_update_str(),
-        atom_insert(),
-        atom_delete(),
-        atom_update(),
+        INSERT_str(),
+        DELETE_str(),
+        UPDATE_str(),
     }
 
 
@@ -569,6 +566,10 @@ def test_get_idea_config_dict_ReturnsObj():
     _validate_idea_config(x_idea_config)
 
 
+def get_idea_categorys():
+    return {"bud", "fisc", "pidgin"}
+
+
 def _validate_idea_config(x_idea_config: dict):
     atom_config_dict = get_atom_config_dict()
     fisc_config_dict = get_fisc_config_dict()
@@ -580,9 +581,9 @@ def _validate_idea_config(x_idea_config: dict):
         assert idea_dict.get(jkeys_str()) is not None
         assert idea_dict.get(jvalues_str()) is not None
         assert idea_dict.get(allowed_crud_str()) is not None
-        assert idea_dict.get(atom_update()) is None
-        assert idea_dict.get(atom_insert()) is None
-        assert idea_dict.get(atom_delete()) is None
+        assert idea_dict.get(UPDATE_str()) is None
+        assert idea_dict.get(INSERT_str()) is None
+        assert idea_dict.get(DELETE_str()) is None
         assert idea_dict.get(normal_specs_str()) is None
         if idea_dict.get(idea_category_str()) == "bud":
             sub_dimen = atom_config_dict.get(idea_dimen)
@@ -612,47 +613,47 @@ def _validate_idea_config(x_idea_config: dict):
         }:
             assert idea_dict.get(allowed_crud_str()) == insert_mulitple_str()
         elif (
-            sub_dimen.get(atom_update()) != None
-            and sub_dimen.get(atom_insert()) != None
-            and sub_dimen.get(atom_delete()) != None
+            sub_dimen.get(UPDATE_str()) != None
+            and sub_dimen.get(INSERT_str()) != None
+            and sub_dimen.get(DELETE_str()) != None
         ):
             assert idea_dict.get(allowed_crud_str()) == delete_insert_update_str()
         elif (
-            sub_dimen.get(atom_update()) != None
-            and sub_dimen.get(atom_insert()) != None
-            and sub_dimen.get(atom_delete()) is None
+            sub_dimen.get(UPDATE_str()) != None
+            and sub_dimen.get(INSERT_str()) != None
+            and sub_dimen.get(DELETE_str()) is None
         ):
             assert idea_dict.get(allowed_crud_str()) == insert_update_str()
         elif (
-            sub_dimen.get(atom_update()) is None
-            and sub_dimen.get(atom_insert()) != None
-            and sub_dimen.get(atom_delete()) != None
+            sub_dimen.get(UPDATE_str()) is None
+            and sub_dimen.get(INSERT_str()) != None
+            and sub_dimen.get(DELETE_str()) != None
         ):
-            assert idea_dict.get(allowed_crud_str()) == delete_insert_str()
+            assert idea_dict.get(allowed_crud_str()) == delete_INSERT_str()
         elif (
-            sub_dimen.get(atom_update()) != None
-            and sub_dimen.get(atom_insert()) is None
-            and sub_dimen.get(atom_delete()) != None
+            sub_dimen.get(UPDATE_str()) != None
+            and sub_dimen.get(INSERT_str()) is None
+            and sub_dimen.get(DELETE_str()) != None
         ):
             assert idea_dict.get(allowed_crud_str()) == delete_update_str()
         elif (
-            sub_dimen.get(atom_update()) != None
-            and sub_dimen.get(atom_insert()) is None
-            and sub_dimen.get(atom_delete()) is None
+            sub_dimen.get(UPDATE_str()) != None
+            and sub_dimen.get(INSERT_str()) is None
+            and sub_dimen.get(DELETE_str()) is None
         ):
-            assert idea_dict.get(allowed_crud_str()) == atom_update()
+            assert idea_dict.get(allowed_crud_str()) == UPDATE_str()
         elif (
-            sub_dimen.get(atom_update()) is None
-            and sub_dimen.get(atom_insert()) != None
-            and sub_dimen.get(atom_delete()) is None
+            sub_dimen.get(UPDATE_str()) is None
+            and sub_dimen.get(INSERT_str()) != None
+            and sub_dimen.get(DELETE_str()) is None
         ):
-            assert idea_dict.get(allowed_crud_str()) == atom_insert()
+            assert idea_dict.get(allowed_crud_str()) == INSERT_str()
         elif (
-            sub_dimen.get(atom_update()) is None
-            and sub_dimen.get(atom_insert()) is None
-            and sub_dimen.get(atom_delete()) != None
+            sub_dimen.get(UPDATE_str()) is None
+            and sub_dimen.get(INSERT_str()) is None
+            and sub_dimen.get(DELETE_str()) != None
         ):
-            assert idea_dict.get(allowed_crud_str()) == atom_delete()
+            assert idea_dict.get(allowed_crud_str()) == DELETE_str()
         else:
             test_str = f"{allowed_crud_str()} not checked by test"
             assert idea_dict.get(allowed_crud_str()) == test_str

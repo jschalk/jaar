@@ -1,9 +1,9 @@
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._test_util.a06_str import bud_acctunit_str, acct_name_str
 from src.a08_bud_atom_logic._test_util.a08_str import (
-    atom_update,
-    atom_insert,
-    atom_delete,
+    UPDATE_str,
+    INSERT_str,
+    DELETE_str,
 )
 from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a09_pack_logic.delta import buddelta_shop
@@ -18,7 +18,7 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT():
     credit_belief_value = 81
     debtit_belief_value = 43
     yao_str = "Yao"
-    yao_budatom = budatom_shop(dimen, atom_insert())
+    yao_budatom = budatom_shop(dimen, INSERT_str())
     yao_budatom.set_arg(acct_name_str(), yao_str)
     yao_budatom.set_arg(credit_belief_str, credit_belief_value)
     yao_budatom.set_arg(debtit_belief_str, debtit_belief_value)
@@ -44,7 +44,7 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT_belief():
     credit_belief_value = 81
     debtit_belief_value = 43
     yao_str = "Yao"
-    yao_budatom = budatom_shop(dimen, atom_insert())
+    yao_budatom = budatom_shop(dimen, INSERT_str())
     yao_budatom.set_arg(acct_name_str(), yao_str)
     yao_budatom.set_arg(credit_belief_str, credit_belief_value)
     yao_budatom.set_arg(debtit_belief_str, debtit_belief_value)
@@ -70,7 +70,7 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credit_belief_debtit_bel
     credit_belief_value = 81
     debtit_belief_value = 43
     yao_str = "Yao"
-    yao_budatom = budatom_shop(dimen, atom_update())
+    yao_budatom = budatom_shop(dimen, UPDATE_str())
     yao_budatom.set_arg(acct_name_str(), yao_str)
     yao_budatom.set_arg(credit_belief_str, credit_belief_value)
     yao_budatom.set_arg(debtit_belief_str, debtit_belief_value)
@@ -94,7 +94,7 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credit_belief():
     credit_belief_str = "credit_belief"
     credit_belief_value = 81
     yao_str = "Yao"
-    yao_budatom = budatom_shop(dimen, atom_update())
+    yao_budatom = budatom_shop(dimen, UPDATE_str())
     yao_budatom.set_arg(acct_name_str(), yao_str)
     yao_budatom.set_arg(credit_belief_str, credit_belief_value)
     # print(f"{yao_budatom=}")
@@ -117,7 +117,7 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_debtit_belief():
     debtit_belief_str = "debtit_belief"
     debtit_belief_value = 43
     yao_str = "Yao"
-    yao_budatom = budatom_shop(dimen, atom_update())
+    yao_budatom = budatom_shop(dimen, UPDATE_str())
     yao_budatom.set_arg(acct_name_str(), yao_str)
     yao_budatom.set_arg(debtit_belief_str, debtit_belief_value)
     # print(f"{yao_budatom=}")
@@ -138,7 +138,7 @@ def test_create_legible_list_ReturnsObj_acctunit_DELETE():
     # ESTABLISH
     dimen = bud_acctunit_str()
     yao_str = "Yao"
-    yao_budatom = budatom_shop(dimen, atom_delete())
+    yao_budatom = budatom_shop(dimen, DELETE_str())
     yao_budatom.set_arg(acct_name_str(), yao_str)
     # print(f"{yao_budatom=}")
     x_buddelta = buddelta_shop()

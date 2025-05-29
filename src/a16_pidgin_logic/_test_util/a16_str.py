@@ -2,7 +2,7 @@ def pidginunit_str() -> str:
     return "pidginunit"
 
 
-def pidgin_filename() -> str:
+def pidgin_filename_str() -> str:
     return "pidgin.json"
 
 

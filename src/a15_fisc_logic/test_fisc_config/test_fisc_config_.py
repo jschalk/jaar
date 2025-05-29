@@ -24,9 +24,9 @@ from src.a07_calendar_logic._test_util.a07_str import (
 from src.a08_bud_atom_logic._test_util.a08_str import (
     jkeys_str,
     jvalues_str,
-    atom_update,
-    atom_insert,
-    atom_delete,
+    UPDATE_str,
+    INSERT_str,
+    DELETE_str,
     normal_specs_str,
     class_type_str,
 )
@@ -137,9 +137,9 @@ def _validate_fisc_config(fisc_config: dict):
             assert dimen_dict.get("fisc_static") == "False"
         else:
             assert dimen_dict.get("fisc_static") == "True"
-        assert dimen_dict.get(atom_update()) is None
-        assert dimen_dict.get(atom_insert()) is None
-        assert dimen_dict.get(atom_delete()) is None
+        assert dimen_dict.get(UPDATE_str()) is None
+        assert dimen_dict.get(INSERT_str()) is None
+        assert dimen_dict.get(DELETE_str()) is None
         assert dimen_dict.get(normal_specs_str()) is None
 
         fisc_jkeys_keys = set(dimen_dict.get(jkeys_str()).keys())

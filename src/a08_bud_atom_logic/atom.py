@@ -13,7 +13,6 @@ from src.a01_way_logic.way import (
     WayStr,
     TitleStr,
     AcctName,
-    is_labelstr,
     get_terminus_label,
     get_parent_way,
 )
@@ -23,14 +22,8 @@ from src.a04_reason_logic.reason_concept import factunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_bud_logic.bud import BudUnit
 from src.a06_bud_logic.bud_tool import bud_attr_exists, bud_get_obj
-from src.a08_bud_atom_logic._test_util.a08_str import (
-    atom_delete,
-    atom_insert,
-    atom_update,
-    atom_hx_table_name,
-    CRUD_command,
-)
 from src.a08_bud_atom_logic.atom_config import (
+    CRUD_command,
     get_dimen_from_dict,
     get_atom_config_jkeys,
     get_atom_order,
@@ -70,9 +63,7 @@ class BudAtom:
         )
         x_values = self.get_nesting_order_args()
         x_values.extend(iter(self.jvalues.values()))
-        return create_class_type_reference_insert_sqlstr(
-            atom_hx_table_name(), x_columns, x_values
-        )
+        return create_class_type_reference_insert_sqlstr("atom_hx", x_columns, x_values)
 
     def get_all_args_in_list(self):
         x_list = self.get_nesting_order_args()
@@ -117,15 +108,19 @@ class BudAtom:
         return [self.jkeys.get(jkey) for jkey in sorted_jkey_keys]
 
     def is_jkeys_valid(self) -> bool:
-        if self.crud_str not in {atom_delete(), atom_insert(), atom_update()}:
+        if self.crud_str not in {
+            "DELETE",
+            "INSERT",
+            "UPDATE",
+        }:
             return False
         jkeys_dict = self._get_jkeys_dict()
         return jkeys_dict.keys() == self.jkeys.keys()
 
     def is_jvalues_valid(self) -> bool:
-        if self.crud_str == atom_delete() and self.jvalues == {}:
+        if self.crud_str == "DELETE" and self.jvalues == {}:
             return True
-        if self.crud_str not in {atom_insert(), atom_update()}:
+        if self.crud_str not in {"INSERT", "UPDATE"}:
             return False
         jvalues_dict = self._get_jvalues_dict()
         return set(self.jvalues.keys()).issubset(set(jvalues_dict.keys()))
@@ -351,9 +346,7 @@ def _modify_bud_concept_reasonunit_update(x_bud: BudUnit, x_atom: BudAtom):
     x_bud.edit_concept_attr(
         x_atom.get_value("concept_way"),
         reason_rcontext=x_atom.get_value("rcontext"),
-        reason_rcontext_concept_active_requisite=x_atom.get_value(
-            "rcontext_concept_active_requisite"
-        ),
+        reason_rconcept_active_requisite=x_atom.get_value("rconcept_active_requisite"),
     )
 
 
@@ -361,9 +354,7 @@ def _modify_bud_concept_reasonunit_insert(x_bud: BudUnit, x_atom: BudAtom):
     x_bud.edit_concept_attr(
         x_atom.get_value("concept_way"),
         reason_rcontext=x_atom.get_value("rcontext"),
-        reason_rcontext_concept_active_requisite=x_atom.get_value(
-            "rcontext_concept_active_requisite"
-        ),
+        reason_rconcept_active_requisite=x_atom.get_value("rconcept_active_requisite"),
     )
 
 
@@ -440,84 +431,84 @@ def _modify_bud_acctunit_insert(x_bud: BudUnit, x_atom: BudAtom):
 
 
 def _modify_bud_budunit(x_bud: BudUnit, x_atom: BudAtom):
-    if x_atom.crud_str == atom_update():
+    if x_atom.crud_str == "UPDATE":
         _modify_bud_update_budunit(x_bud, x_atom)
 
 
 def _modify_bud_acct_membership(x_bud: BudUnit, x_atom: BudAtom):
-    if x_atom.crud_str == atom_delete():
+    if x_atom.crud_str == "DELETE":
         _modify_bud_acct_membership_delete(x_bud, x_atom)
-    elif x_atom.crud_str == atom_update():
+    elif x_atom.crud_str == "UPDATE":
         _modify_bud_acct_membership_update(x_bud, x_atom)
-    elif x_atom.crud_str == atom_insert():
+    elif x_atom.crud_str == "INSERT":
         _modify_bud_acct_membership_insert(x_bud, x_atom)
 
 
 def _modify_bud_conceptunit(x_bud: BudUnit, x_atom: BudAtom):
-    if x_atom.crud_str == atom_delete():
+    if x_atom.crud_str == "DELETE":
         _modify_bud_conceptunit_delete(x_bud, x_atom)
-    elif x_atom.crud_str == atom_update():
+    elif x_atom.crud_str == "UPDATE":
         _modify_bud_conceptunit_update(x_bud, x_atom)
-    elif x_atom.crud_str == atom_insert():
+    elif x_atom.crud_str == "INSERT":
         _modify_bud_conceptunit_insert(x_bud, x_atom)
 
 
 def _modify_bud_concept_awardlink(x_bud: BudUnit, x_atom: BudAtom):
-    if x_atom.crud_str == atom_delete():
+    if x_atom.crud_str == "DELETE":
         _modify_bud_concept_awardlink_delete(x_bud, x_atom)
-    elif x_atom.crud_str == atom_update():
+    elif x_atom.crud_str == "UPDATE":
         _modify_bud_concept_awardlink_update(x_bud, x_atom)
-    elif x_atom.crud_str == atom_insert():
+    elif x_atom.crud_str == "INSERT":
         _modify_bud_concept_awardlink_insert(x_bud, x_atom)
 
 
 def _modify_bud_concept_factunit(x_bud: BudUnit, x_atom: BudAtom):
-    if x_atom.crud_str == atom_delete():
+    if x_atom.crud_str == "DELETE":
         _modify_bud_concept_factunit_delete(x_bud, x_atom)
-    elif x_atom.crud_str == atom_update():
+    elif x_atom.crud_str == "UPDATE":
         _modify_bud_concept_factunit_update(x_bud, x_atom)
-    elif x_atom.crud_str == atom_insert():
+    elif x_atom.crud_str == "INSERT":
         _modify_bud_concept_factunit_insert(x_bud, x_atom)
 
 
 def _modify_bud_concept_reasonunit(x_bud: BudUnit, x_atom: BudAtom):
-    if x_atom.crud_str == atom_delete():
+    if x_atom.crud_str == "DELETE":
         _modify_bud_concept_reasonunit_delete(x_bud, x_atom)
-    elif x_atom.crud_str == atom_update():
+    elif x_atom.crud_str == "UPDATE":
         _modify_bud_concept_reasonunit_update(x_bud, x_atom)
-    elif x_atom.crud_str == atom_insert():
+    elif x_atom.crud_str == "INSERT":
         _modify_bud_concept_reasonunit_insert(x_bud, x_atom)
 
 
 def _modify_bud_concept_reason_premiseunit(x_bud: BudUnit, x_atom: BudAtom):
-    if x_atom.crud_str == atom_delete():
+    if x_atom.crud_str == "DELETE":
         _modify_bud_concept_reason_premiseunit_delete(x_bud, x_atom)
-    elif x_atom.crud_str == atom_update():
+    elif x_atom.crud_str == "UPDATE":
         _modify_bud_concept_reason_premiseunit_update(x_bud, x_atom)
-    elif x_atom.crud_str == atom_insert():
+    elif x_atom.crud_str == "INSERT":
         _modify_bud_concept_reason_premiseunit_insert(x_bud, x_atom)
 
 
 def _modify_bud_concept_laborlink(x_bud: BudUnit, x_atom: BudAtom):
-    if x_atom.crud_str == atom_delete():
+    if x_atom.crud_str == "DELETE":
         _modify_bud_concept_laborlink_delete(x_bud, x_atom)
-    elif x_atom.crud_str == atom_insert():
+    elif x_atom.crud_str == "INSERT":
         _modify_bud_concept_laborlink_insert(x_bud, x_atom)
 
 
 def _modify_bud_concept_healerlink(x_bud: BudUnit, x_atom: BudAtom):
-    if x_atom.crud_str == atom_delete():
+    if x_atom.crud_str == "DELETE":
         _modify_bud_concept_healerlink_delete(x_bud, x_atom)
-    elif x_atom.crud_str == atom_insert():
+    elif x_atom.crud_str == "INSERT":
         _modify_bud_concept_healerlink_insert(x_bud, x_atom)
 
 
 def _modify_bud_acctunit(x_bud: BudUnit, x_atom: BudAtom):
-    if x_atom.crud_str == atom_delete():
+    if x_atom.crud_str == "DELETE":
         _modify_bud_acctunit_delete(x_bud, x_atom)
-    elif x_atom.crud_str == atom_update():
+    elif x_atom.crud_str == "UPDATE":
         _modify_bud_acctunit_update(x_bud, x_atom)
-    elif x_atom.crud_str == atom_insert():
+    elif x_atom.crud_str == "INSERT":
         _modify_bud_acctunit_insert(x_bud, x_atom)
 
 
@@ -581,10 +572,7 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
             or (x_obj.pnigh != y_obj.pnigh)
         )
     elif dimen == "bud_concept_reasonunit":
-        return (
-            x_obj.rcontext_concept_active_requisite
-            != y_obj.rcontext_concept_active_requisite
-        )
+        return x_obj.rconcept_active_requisite != y_obj.rconcept_active_requisite
     elif dimen == "bud_concept_reason_premiseunit":
         return (
             x_obj.popen != y_obj.popen
@@ -619,7 +607,7 @@ class AtomRow:
     addin: float = None
     awardee_title: TitleStr = None
     rcontext: WayStr = None
-    rcontext_concept_active_requisite: bool = None
+    rconcept_active_requisite: bool = None
     begin: float = None
     respect_bit: float = None
     close: float = None
@@ -712,14 +700,14 @@ def sift_budatom(x_bud: BudUnit, x_atom: BudAtom) -> BudAtom:
     x_exists = bud_attr_exists(x_atom.dimen, x_bud, x_atom_reqs)
     print(f"{x_exists=}")
 
-    if x_atom.crud_str == atom_delete() and x_exists:
+    if x_atom.crud_str == "DELETE" and x_exists:
         return x_atom
-    elif x_atom.crud_str == atom_insert() and not x_exists:
+    elif x_atom.crud_str == "INSERT" and not x_exists:
         return x_atom
-    elif x_atom.crud_str == atom_insert() and x_exists:
+    elif x_atom.crud_str == "INSERT":
         x_bud_obj = bud_get_obj(x_atom.dimen, x_bud, x_atom_reqs)
         x_jvalues = x_atom.get_jvalues_dict()
-        update_atom = budatom_shop(x_atom.dimen, atom_update(), x_atom.jkeys)
+        update_atom = budatom_shop(x_atom.dimen, "UPDATE", x_atom.jkeys)
         for jvalue in x_jvalues:
             optional_jvalue = x_atom.get_value(jvalue)
             obj_jvalue = x_bud_obj.__dict__[jvalue]

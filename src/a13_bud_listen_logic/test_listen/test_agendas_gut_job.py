@@ -211,14 +211,14 @@ def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalBud(env_dir_setup_cl
         egg_way,
         pledge=True,
         reason_rcontext=chicken_way,
-        reason_rcontext_concept_active_requisite=True,
+        reason_rconcept_active_requisite=True,
     )
     # set chick pledge is True when egg first is False
     sue_job.edit_concept_attr(
         chicken_way,
         pledge=True,
         reason_rcontext=egg_way,
-        reason_rcontext_concept_active_requisite=False,
+        reason_rconcept_active_requisite=False,
     )
     save_job_file(fisc_mstr_dir, sue_job)
 

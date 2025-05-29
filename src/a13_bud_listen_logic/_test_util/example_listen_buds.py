@@ -171,7 +171,7 @@ def get_budunit_irrational_example() -> BudUnit:
         egg_way,
         pledge=True,
         reason_rcontext=chicken_way,
-        reason_rcontext_concept_active_requisite=True,
+        reason_rconcept_active_requisite=True,
     )
 
     # set chick pledge is True when egg first is False
@@ -179,7 +179,7 @@ def get_budunit_irrational_example() -> BudUnit:
         chicken_way,
         pledge=True,
         reason_rcontext=egg_way,
-        reason_rcontext_concept_active_requisite=False,
+        reason_rconcept_active_requisite=False,
     )
 
     return hatter_bud

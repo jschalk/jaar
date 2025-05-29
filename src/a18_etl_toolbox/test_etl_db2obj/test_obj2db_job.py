@@ -195,7 +195,7 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
     x_owner_name = "Sue"
     x_way = 1
     x_rcontext = 2
-    x_rcontext_concept_active_requisite = 3
+    x_rconcept_active_requisite = 3
     x__task = 4
     x__status = 5
     x__rcontext_concept_active_value = 6
@@ -204,7 +204,7 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
         "owner_name": x_owner_name,
         "concept_way": x_way,
         "rcontext": x_rcontext,
-        "rcontext_concept_active_requisite": x_rcontext_concept_active_requisite,
+        "rconcept_active_requisite": x_rconcept_active_requisite,
         "_task": x__task,
         "_status": x__status,
         "_rcontext_concept_active_value": x__rcontext_concept_active_value,

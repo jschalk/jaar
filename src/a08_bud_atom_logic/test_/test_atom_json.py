@@ -12,10 +12,10 @@ from src.a08_bud_atom_logic._test_util.a08_str import (
     jvalues_str,
     dimen_str,
     crud_str,
+    INSERT_str,
 )
 from src.a08_bud_atom_logic.atom import (
     budatom_shop,
-    atom_insert,
     get_from_json as budatom_get_from_json,
 )
 
@@ -31,7 +31,7 @@ def test_BudAtom_get_dict_ReturnsObj():
     x_dimen = bud_concept_factunit_str()
     knee_popen = 7
     knee_pnigh = 13
-    insert_factunit_budatom = budatom_shop(x_dimen, atom_insert())
+    insert_factunit_budatom = budatom_shop(x_dimen, INSERT_str())
     insert_factunit_budatom.set_jkey(concept_way_str(), ball_way)
     insert_factunit_budatom.set_jkey(fcontext_str(), knee_way)
     insert_factunit_budatom.set_jvalue(fopen_str(), knee_popen)
@@ -43,7 +43,7 @@ def test_BudAtom_get_dict_ReturnsObj():
     # THEN
     assert atom_dict == {
         dimen_str(): x_dimen,
-        crud_str(): atom_insert(),
+        crud_str(): INSERT_str(),
         jkeys_str(): {concept_way_str(): ball_way, fcontext_str(): knee_way},
         jvalues_str(): {fopen_str(): knee_popen, fnigh_str(): knee_pnigh},
     }
@@ -60,7 +60,7 @@ def test_BudAtom_get_json_ReturnsObj():
     x_dimen = bud_concept_factunit_str()
     knee_popen = 7
     knee_pnigh = 13
-    insert_factunit_budatom = budatom_shop(x_dimen, atom_insert())
+    insert_factunit_budatom = budatom_shop(x_dimen, INSERT_str())
     insert_factunit_budatom.set_jkey(concept_way_str(), ball_way)
     insert_factunit_budatom.set_jkey(fcontext_str(), knee_way)
     insert_factunit_budatom.set_jvalue(fopen_str(), knee_popen)
@@ -84,7 +84,7 @@ def test_budatom_get_from_json_ReturnsObj():
     x_dimen = bud_concept_factunit_str()
     knee_popen = 7
     knee_pnigh = 13
-    gen_budatom = budatom_shop(x_dimen, atom_insert())
+    gen_budatom = budatom_shop(x_dimen, INSERT_str())
     gen_budatom.set_jkey(concept_way_str(), ball_way)
     gen_budatom.set_jkey(fcontext_str(), knee_way)
     gen_budatom.set_jvalue(fopen_str(), knee_popen)

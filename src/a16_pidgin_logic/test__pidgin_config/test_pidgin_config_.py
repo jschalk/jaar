@@ -2,14 +2,14 @@ from src.a00_data_toolbox.file_toolbox import create_path
 from src.a08_bud_atom_logic._test_util.a08_str import (
     jkeys_str,
     jvalues_str,
-    atom_update,
-    atom_insert,
-    atom_delete,
+    UPDATE_str,
+    INSERT_str,
+    DELETE_str,
     normal_specs_str,
 )
 from src.a16_pidgin_logic._test_util.a16_str import (
     pidginunit_str,
-    pidgin_filename,
+    pidgin_filename_str,
     otx_bridge_str,
     inx_bridge_str,
     inx_title_str,
@@ -102,9 +102,9 @@ def _validate_pidgin_config(pidgin_config: dict):
         print(f"_validate_pidgin_config {pidgin_dimens=}")
         assert dimen_dict.get(jkeys_str()) is not None
         assert dimen_dict.get(jvalues_str()) is not None
-        assert dimen_dict.get(atom_update()) is None
-        assert dimen_dict.get(atom_insert()) is None
-        assert dimen_dict.get(atom_delete()) is None
+        assert dimen_dict.get(UPDATE_str()) is None
+        assert dimen_dict.get(INSERT_str()) is None
+        assert dimen_dict.get(DELETE_str()) is None
         assert dimen_dict.get(normal_specs_str()) is None
 
         pidgin_jkeys_keys = set(dimen_dict.get(jkeys_str()).keys())

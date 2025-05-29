@@ -362,19 +362,17 @@ def create_budreas_metrics_insert_sqlstr(values_dict: dict[str,]):
     owner_name = values_dict.get("owner_name")
     way = values_dict.get("concept_way")
     rcontext = values_dict.get("rcontext")
-    rcontext_concept_active_requisite = values_dict.get(
-        "rcontext_concept_active_requisite"
-    )
+    rconcept_active_requisite = values_dict.get("rconcept_active_requisite")
     _task = values_dict.get("_task")
     _status = values_dict.get("_status")
     _rcontext_concept_active_value = values_dict.get("_rcontext_concept_active_value")
-    return f"""INSERT INTO bud_concept_reasonunit_job (fisc_label, owner_name, concept_way, rcontext, rcontext_concept_active_requisite, _task, _status, _rcontext_concept_active_value)
+    return f"""INSERT INTO bud_concept_reasonunit_job (fisc_label, owner_name, concept_way, rcontext, rconcept_active_requisite, _task, _status, _rcontext_concept_active_value)
 VALUES (
   {sqlite_obj_str(fisc_label, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
 , {sqlite_obj_str(way, "TEXT")}
 , {sqlite_obj_str(rcontext, "TEXT")}
-, {sqlite_obj_str(rcontext_concept_active_requisite, "INTEGER")}
+, {sqlite_obj_str(rconcept_active_requisite, "INTEGER")}
 , {sqlite_obj_str(_task, "INTEGER")}
 , {sqlite_obj_str(_status, "INTEGER")}
 , {sqlite_obj_str(_rcontext_concept_active_value, "INTEGER")}

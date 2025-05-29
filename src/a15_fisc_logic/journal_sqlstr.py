@@ -1,16 +1,12 @@
 from src.a01_way_logic.way import WayStr
 from src.a08_bud_atom_logic.atom_config import get_flattened_atom_table_build
-from src.a08_bud_atom_logic._test_util.a08_str import (
-    atom_hx_table_name,
-    atom_mstr_table_name,
-)
 from src.a08_bud_atom_logic.atom import BudAtom
 
 
 def get_atom_hx_table_create_sqlstr() -> str:
     """Create table that hold atom_hx."""
-    x_str = f"""
-CREATE TABLE IF NOT EXISTS {atom_hx_table_name()} (
+    x_str = """
+CREATE TABLE IF NOT EXISTS atom_hx (
   owner_name VARCHAR(255) NOT NULL"""
 
     for x_key, x_value in get_flattened_atom_table_build().items():
@@ -18,10 +14,9 @@ CREATE TABLE IF NOT EXISTS {atom_hx_table_name()} (
             x_value = "VARCHAR(255)"
         x_str = f"""{x_str}\n, {x_key} {x_value} NULL"""
 
-    x_str = f"""{x_str}
+    return f"""{x_str}
 )
 ;"""
-    return x_str
 
 
 def get_atom_hx_table_insert_sqlstr(x_atom: BudAtom) -> str:
@@ -30,20 +25,19 @@ def get_atom_hx_table_insert_sqlstr(x_atom: BudAtom) -> str:
 
 def get_atom_mstr_table_create_sqlstr() -> str:
     """Create table that holds budatoms."""
-    x_str = f"""
-CREATE TABLE IF NOT EXISTS {atom_mstr_table_name()} (
+    x_str = """
+CREATE TABLE IF NOT EXISTS atom_mstr (
   owner_name VARCHAR(255) NOT NULL
-, {atom_hx_table_name()}_row_id INT NOT NULL"""
+, atom_hx_row_id INT NOT NULL"""
 
     for x_key, x_value in get_flattened_atom_table_build().items():
         if x_value == "TEXT":
             x_value = "VARCHAR(255)"
         x_str = f"""{x_str}\n, {x_key} {x_value} NULL"""
 
-    x_str = f"""{x_str}
+    return f"""{x_str}
 )
 ;"""
-    return x_str
 
 
 def get_atom2delta_table_create_sqlstr() -> str:

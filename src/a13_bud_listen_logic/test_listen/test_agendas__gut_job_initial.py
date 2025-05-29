@@ -214,14 +214,14 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalBud(
         egg_way,
         pledge=True,
         reason_rcontext=chicken_way,
-        reason_rcontext_concept_active_requisite=True,
+        reason_rconcept_active_requisite=True,
     )
     # set chick pledge is True when egg first is False
     sue_gut.edit_concept_attr(
         chicken_way,
         pledge=True,
         reason_rcontext=egg_way,
-        reason_rcontext_concept_active_requisite=False,
+        reason_rconcept_active_requisite=False,
     )
     save_gut_file(fisc_mstr_dir, sue_gut)
 

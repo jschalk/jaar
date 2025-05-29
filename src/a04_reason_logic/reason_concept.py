@@ -461,7 +461,7 @@ def premises_get_from_dict(x_dict: dict) -> dict[str, PremiseUnit]:
 class ReasonCore:
     rcontext: WayStr
     premises: dict[WayStr, PremiseUnit]
-    rcontext_concept_active_requisite: bool = None
+    rconcept_active_requisite: bool = None
     bridge: str = None
 
     def set_bridge(self, new_bridge: str):
@@ -523,13 +523,13 @@ class ReasonCore:
 def reasoncore_shop(
     rcontext: WayStr,
     premises: dict[WayStr, PremiseUnit] = None,
-    rcontext_concept_active_requisite: bool = None,
+    rconcept_active_requisite: bool = None,
     bridge: str = None,
 ):
     return ReasonCore(
         rcontext=rcontext,
         premises=get_empty_dict_if_None(premises),
-        rcontext_concept_active_requisite=rcontext_concept_active_requisite,
+        rconcept_active_requisite=rconcept_active_requisite,
         bridge=default_bridge_if_None(bridge),
     )
 
@@ -544,23 +544,21 @@ class ReasonUnit(ReasonCore):
         x_dict = {"rcontext": self.rcontext}
         if premises_dict != {}:
             x_dict["premises"] = premises_dict
-        if self.rcontext_concept_active_requisite is not None:
-            x_dict["rcontext_concept_active_requisite"] = (
-                self.rcontext_concept_active_requisite
-            )
+        if self.rconcept_active_requisite is not None:
+            x_dict["rconcept_active_requisite"] = self.rconcept_active_requisite
         return x_dict
 
 
 def reasonunit_shop(
     rcontext: WayStr,
     premises: dict[WayStr, PremiseUnit] = None,
-    rcontext_concept_active_requisite: bool = None,
+    rconcept_active_requisite: bool = None,
     bridge: str = None,
 ):
     return ReasonUnit(
         rcontext=rcontext,
         premises=get_empty_dict_if_None(premises),
-        rcontext_concept_active_requisite=rcontext_concept_active_requisite,
+        rconcept_active_requisite=rconcept_active_requisite,
         bridge=default_bridge_if_None(bridge),
     )
 
@@ -603,11 +601,10 @@ class ReasonHeir(ReasonCore):
     def set_rcontext_concept_active_value(self, bool_x: bool):
         self._rcontext_concept_active_value = bool_x
 
-    def is_rcontext_concept_active_requisite_operational(self) -> bool:
+    def is_rconcept_active_requisite_operational(self) -> bool:
         return (
             self._rcontext_concept_active_value is not None
-            and self._rcontext_concept_active_value
-            == self.rcontext_concept_active_requisite
+            and self._rcontext_concept_active_value == self.rconcept_active_requisite
         )
 
     def is_any_premise_true(self) -> tuple[bool, bool]:
@@ -622,7 +619,7 @@ class ReasonHeir(ReasonCore):
 
     def _set_attr_status(self, any_premise_true: bool):
         self._status = (
-            any_premise_true or self.is_rcontext_concept_active_requisite_operational()
+            any_premise_true or self.is_rconcept_active_requisite_operational()
         )
 
     def _set_attr_task(self, any_task_true: bool):
@@ -641,7 +638,7 @@ class ReasonHeir(ReasonCore):
 def reasonheir_shop(
     rcontext: WayStr,
     premises: dict[WayStr, PremiseUnit] = None,
-    rcontext_concept_active_requisite: bool = None,
+    rconcept_active_requisite: bool = None,
     _status: bool = None,
     _task: bool = None,
     _rcontext_concept_active_value: bool = None,
@@ -650,7 +647,7 @@ def reasonheir_shop(
     return ReasonHeir(
         rcontext=rcontext,
         premises=get_empty_dict_if_None(premises),
-        rcontext_concept_active_requisite=rcontext_concept_active_requisite,
+        rconcept_active_requisite=rconcept_active_requisite,
         _status=_status,
         _task=_task,
         _rcontext_concept_active_value=_rcontext_concept_active_value,
@@ -667,9 +664,9 @@ def reasons_get_from_dict(reasons_dict: dict) -> dict[WayStr, ReasonUnit]:
             x_reasonunit.premises = premises_get_from_dict(
                 x_dict=reason_dict["premises"]
             )
-        if reason_dict.get("rcontext_concept_active_requisite") is not None:
-            x_reasonunit.rcontext_concept_active_requisite = reason_dict.get(
-                "rcontext_concept_active_requisite"
+        if reason_dict.get("rconcept_active_requisite") is not None:
+            x_reasonunit.rconcept_active_requisite = reason_dict.get(
+                "rconcept_active_requisite"
             )
         x_dict[x_reasonunit.rcontext] = x_reasonunit
     return x_dict

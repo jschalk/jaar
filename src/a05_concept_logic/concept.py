@@ -104,7 +104,7 @@ class ConceptAttrHolder:
     pdivisor: int = None
     reason_del_premise_rcontext: WayStr = None
     reason_del_premise_pstate: WayStr = None
-    reason_rcontext_concept_active_requisite: str = None
+    reason_rconcept_active_requisite: str = None
     laborunit: LaborUnit = None
     healerlink: HealerLink = None
     begin: float = None
@@ -151,7 +151,7 @@ def conceptattrholder_shop(
     pdivisor: int = None,
     reason_del_premise_rcontext: WayStr = None,
     reason_del_premise_pstate: WayStr = None,
-    reason_rcontext_concept_active_requisite: str = None,
+    reason_rconcept_active_requisite: str = None,
     laborunit: LaborUnit = None,
     healerlink: HealerLink = None,
     begin: float = None,
@@ -183,7 +183,7 @@ def conceptattrholder_shop(
         pdivisor=pdivisor,
         reason_del_premise_rcontext=reason_del_premise_rcontext,
         reason_del_premise_pstate=reason_del_premise_pstate,
-        reason_rcontext_concept_active_requisite=reason_rcontext_concept_active_requisite,
+        reason_rconcept_active_requisite=reason_rconcept_active_requisite,
         laborunit=laborunit,
         healerlink=healerlink,
         begin=begin,
@@ -579,11 +579,11 @@ class ConceptUnit:
             )
         if (
             concept_attr.reason_rcontext is not None
-            and concept_attr.reason_rcontext_concept_active_requisite is not None
+            and concept_attr.reason_rconcept_active_requisite is not None
         ):
-            self.set_reason_rcontext_concept_active_requisite(
+            self.set_reason_rconcept_active_requisite(
                 rcontext=concept_attr.reason_rcontext,
-                rcontext_concept_active_requisite=concept_attr.reason_rcontext_concept_active_requisite,
+                rconcept_active_requisite=concept_attr.reason_rconcept_active_requisite,
             )
         if concept_attr.laborunit is not None:
             self.laborunit = concept_attr.laborunit
@@ -679,16 +679,16 @@ class ConceptUnit:
             if len(self.reasonunits[rcontext].premises) == 0:
                 self.del_reasonunit_rcontext(rcontext=rcontext)
 
-    def set_reason_rcontext_concept_active_requisite(
-        self, rcontext: WayStr, rcontext_concept_active_requisite: str
+    def set_reason_rconcept_active_requisite(
+        self, rcontext: WayStr, rconcept_active_requisite: str
     ):
         x_reasonunit = self._get_or_create_reasonunit(rcontext=rcontext)
-        if rcontext_concept_active_requisite is False:
-            x_reasonunit.rcontext_concept_active_requisite = False
-        elif rcontext_concept_active_requisite == "Set to Ignore":
-            x_reasonunit.rcontext_concept_active_requisite = None
-        elif rcontext_concept_active_requisite:
-            x_reasonunit.rcontext_concept_active_requisite = True
+        if rconcept_active_requisite is False:
+            x_reasonunit.rconcept_active_requisite = False
+        elif rconcept_active_requisite == "Set to Ignore":
+            x_reasonunit.rconcept_active_requisite = None
+        elif rconcept_active_requisite:
+            x_reasonunit.rconcept_active_requisite = True
 
     def _get_or_create_reasonunit(self, rcontext: WayStr) -> ReasonUnit:
         x_reasonunit = None
@@ -861,7 +861,7 @@ class ConceptUnit:
         self._reasonheirs = {}
         for old_reasonheir in coalesced_reasons.values():
             old_rcontext = old_reasonheir.rcontext
-            old_active_requisite = old_reasonheir.rcontext_concept_active_requisite
+            old_active_requisite = old_reasonheir.rconcept_active_requisite
             new_reasonheir = reasonheir_shop(old_rcontext, None, old_active_requisite)
             new_reasonheir.inherit_from_reasonheir(old_reasonheir)
 

@@ -1,7 +1,7 @@
 from src.a08_bud_atom_logic._test_util.a08_str import (
-    atom_insert,
-    atom_delete,
-    atom_update,
+    INSERT_str,
+    DELETE_str,
+    UPDATE_str,
     dimen_str,
     column_order_str,
     crud_str,
@@ -16,9 +16,9 @@ from src.a08_bud_atom_logic._test_util.a08_str import (
 
 
 def test_str_functions_ReturnsObj():
-    assert atom_insert() == "INSERT"
-    assert atom_update() == "UPDATE"
-    assert atom_delete() == "DELETE"
+    assert INSERT_str() == "INSERT"
+    assert UPDATE_str() == "UPDATE"
+    assert DELETE_str() == "DELETE"
     assert dimen_str() == "dimen"
     assert column_order_str() == "column_order"
     assert crud_str() == "crud"

@@ -6,7 +6,7 @@ from ast import (
     ImportFrom as ast_ImportFrom,
     FunctionDef as ast_FunctionDef,
 )
-from os.path import join as os_path_join
+from os.path import join as os_path_join, basename as os_path_basename
 from os import walk as os_walk
 
 
@@ -108,13 +108,22 @@ def test_ModuleDirectorysAreNumberedCorrectly():
 
 def test_CheckAllPythonFileImportsAreInCorrectFormat():
     # sourcery skip: no-loop-in-tests
+    # sourcery skip: no-conditionals-in-tests
     # ESTABLISH / WHEN / THEN
     for module_desc, module_dir in get_module_descs().items():
         python_files = get_python_files_with_flag(module_dir)
         desc_number = int(module_desc[1:3])
-        print(f"{desc_number} {module_desc=} {len(python_files)=}")
+        # print(f"{desc_number} {module_desc=} {len(python_files)=}")
         for file_path, file_imports in python_files.items():
             check_module_imports_are_ordered(file_imports, file_path, desc_number)
+
+            filename = str(os_path_basename(file_path))
+            file_path = str(file_path)
+            if not filename.startswith("test") and "_test_util" not in file_path:
+                for file_import in file_imports:
+                    if str(file_import[0]).endswith("_str"):
+                        print(f"{module_desc} {filename} {file_import[0]=}")
+                    assert not str(file_import[0]).endswith("_str")
 
 
 def check_module_imports_are_ordered(imports: list[list], file_path: str, desc_number):
@@ -148,6 +157,7 @@ def test_StrFunctionsAreAllTested():
     # sourcery skip: no-loop-in-tests
     # sourcery skip: no-conditionals-in-tests
     # ESTABLISH / WHEN / THEN
+    all_str_functions = []
     for module_desc, module_dir in get_module_descs().items():
         desc_number_str = module_desc[1:3]
         util_dir = create_path(module_dir, "_test_util")
@@ -164,20 +174,25 @@ def test_StrFunctionsAreAllTested():
             str_functions = get_function_names_from_file(str_util_path)
             test_file_str = open(test_file_path).read()
             for str_function in str_functions:
-                if not str(str_function).endswith("_str"):
-                    print(f"{str_util_path} {str_function=}")
-                # assert str(str_function).endswith("_str")
+                # print(f"{str_util_path} {str_function=}")
+                assert str(str_function).endswith("_str")
+                str_func_assert_str = (
+                    f"""assert {str_function}() == "{str_function[:-4]}"""
+                )
+                # if test_file_str.find(str_func_assert_str) <= 0:
+                #     print(f"{str_util_path} {str_func_assert_str=}")
+                # assert test_file_str.find(str_func_assert_str) > 0
 
-            # print(test_file_str)
-        # python_files = get_python_files_with_flag(module_dir, "_str.py")
-        # for file_path, file_imports in python_files.items():
+                all_str_functions.append(str_function)
 
-        #     print(f"{file_path=}")
+                # print(test_file_str)
+            # python_files = get_python_files_with_flag(module_dir, "_str.py")
+            # for file_path, file_imports in python_files.items():
 
+            #     print(f"{file_path=}")
+    print(f"{all_str_functions=}")
     # example_path = "src/a07_calendar_logic/_test_util/a07_str.py"
     # # imports = get_imports_from_file(example_path)
     # # check_module_imports_are_ordered(imports, example_path)
     # functions_list = get_function_names_from_file(example_path)
     # print(f"{functions_list=}")
-
-    # assert 1 == 2

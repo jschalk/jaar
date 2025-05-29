@@ -293,13 +293,13 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
     x_owner_name = 2
     x_way = 3
     x_rcontext = 4
-    x_rcontext_concept_active_requisite = 5
+    x_rconcept_active_requisite = 5
     x__task = 6
     x__status = 7
     x__rcontext_concept_active_value = 8
     x_reasonheir = reasonheir_shop(rcontext=x_rcontext)
     x_reasonheir.rcontext = x_rcontext
-    x_reasonheir.rcontext_concept_active_requisite = x_rcontext_concept_active_requisite
+    x_reasonheir.rconcept_active_requisite = x_rconcept_active_requisite
     x_reasonheir._task = x__task
     x_reasonheir._status = x__status
     x_reasonheir._rcontext_concept_active_value = x__rcontext_concept_active_value
@@ -324,7 +324,7 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
             str(x_owner_name),
             str(x_way),
             str(x_rcontext),
-            x_rcontext_concept_active_requisite,
+            x_rconcept_active_requisite,
             x__task,
             x__status,
             x__rcontext_concept_active_value,

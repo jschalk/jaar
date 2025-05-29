@@ -9,7 +9,7 @@ from src.a00_data_toolbox.dict_toolbox import (
 from src.a01_way_logic.way import FiscLabel, OwnerName
 from src.a06_bud_logic.bud import BudUnit
 from src.a07_calendar_logic.chrono import timelineunit_shop
-from src.a08_bud_atom_logic.atom import atom_insert, BudAtom, atomrow_shop
+from src.a08_bud_atom_logic.atom import BudAtom, atomrow_shop
 from src.a09_pack_logic.delta import buddelta_shop, get_dimens_cruds_buddelta, BudDelta
 from src.a09_pack_logic.pack import packunit_shop
 from src.a12_hub_tools.hub_tool import open_gut_file, save_gut_file
@@ -88,7 +88,7 @@ def create_idea_df(x_budunit: BudUnit, idea_name: str) -> DataFrame:
     x_idearef = get_idearef_obj(idea_name)
     x_fisc_label = x_budunit.fisc_label
     x_owner_name = x_budunit.owner_name
-    sorted_budatoms = _get_sorted_atom_insert_budatoms(x_buddelta, x_idearef)
+    sorted_budatoms = _get_sorted_INSERT_str_budatoms(x_buddelta, x_idearef)
     d2_list = _create_d2_list(sorted_budatoms, x_idearef, x_fisc_label, x_owner_name)
     d2_list = _delta_all_pledge_values(d2_list, x_idearef)
     x_idea = _generate_idea_dataframe(d2_list, idea_name)
@@ -96,11 +96,11 @@ def create_idea_df(x_budunit: BudUnit, idea_name: str) -> DataFrame:
     return _sort_dataframe(x_idea, sorting_columns)
 
 
-def _get_sorted_atom_insert_budatoms(
+def _get_sorted_INSERT_str_budatoms(
     x_buddelta: BudDelta, x_idearef: IdeaRef
 ) -> list[BudAtom]:
     dimen_set = set(x_idearef.dimens)
-    curd_set = {atom_insert()}
+    curd_set = {"INSERT"}
     limited_delta = get_dimens_cruds_buddelta(x_buddelta, dimen_set, curd_set)
     return limited_delta.get_dimen_sorted_budatoms_list()
 
@@ -182,7 +182,7 @@ def make_buddelta(x_csv: str) -> BudDelta:
     x_buddelta = buddelta_shop()
 
     for row in x_reader:
-        x_atomrow = atomrow_shop(x_idearef.dimens, atom_insert())
+        x_atomrow = atomrow_shop(x_idearef.dimens, "INSERT")
         for x_header in header_row:
             if header_index := x_dict.get(x_header):
                 x_atomrow.__dict__[x_header] = row[header_index]

@@ -1,6 +1,5 @@
 from src.a17_idea_logic._test_util.a17_str import (
     idea_category_str,
-    get_idea_categorys,
     idea_number_str,
     allowed_crud_str,
     attributes_str,
@@ -10,7 +9,7 @@ from src.a17_idea_logic._test_util.a17_str import (
     insert_mulitple_str,
     delete_insert_update_str,
     insert_update_str,
-    delete_insert_str,
+    delete_INSERT_str,
     delete_update_str,
     build_order_str,
 )
@@ -29,7 +28,5 @@ def test_str_functions_ReturnsObj():
     assert insert_mulitple_str() == "INSERT_MULITPLE"
     assert delete_insert_update_str() == "DELETE_INSERT_UPDATE"
     assert insert_update_str() == "INSERT_UPDATE"
-    assert delete_insert_str() == "DELETE_INSERT"
+    assert delete_INSERT_str() == "DELETE_INSERT"
     assert delete_update_str() == "DELETE_UPDATE"
-
-    assert get_idea_categorys() == {"bud", "fisc", "pidgin"}

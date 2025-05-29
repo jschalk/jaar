@@ -221,8 +221,8 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
     assert rla_week_reasonheir.rcontext == casa_wk_built_reasonheir.rcontext
     assert rla_week_reasonheir.premises == casa_wk_built_reasonheir.premises
     assert (
-        rla_week_reasonheir.rcontext_concept_active_requisite
-        == casa_wk_built_reasonheir.rcontext_concept_active_requisite
+        rla_week_reasonheir.rconcept_active_requisite
+        == casa_wk_built_reasonheir.rconcept_active_requisite
     )
     assert rla_week_reasonheir._status == casa_wk_built_reasonheir._status
     assert rla_week_reasonheir._task == casa_wk_built_reasonheir._task
@@ -236,8 +236,8 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
     assert cost_week_reasonheir.rcontext == casa_wk_built_reasonheir.rcontext
     assert cost_week_reasonheir.premises == casa_wk_built_reasonheir.premises
     assert (
-        cost_week_reasonheir.rcontext_concept_active_requisite
-        == casa_wk_built_reasonheir.rcontext_concept_active_requisite
+        cost_week_reasonheir.rconcept_active_requisite
+        == casa_wk_built_reasonheir.rconcept_active_requisite
     )
     assert cost_week_reasonheir._status == casa_wk_built_reasonheir._status
     assert cost_week_reasonheir._task == casa_wk_built_reasonheir._task
@@ -298,8 +298,8 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
     assert rla_week_reasonheir.rcontext == casa_wk_built_reasonheir.rcontext
     assert rla_week_reasonheir.premises == casa_wk_built_reasonheir.premises
     assert (
-        rla_week_reasonheir.rcontext_concept_active_requisite
-        == casa_wk_built_reasonheir.rcontext_concept_active_requisite
+        rla_week_reasonheir.rconcept_active_requisite
+        == casa_wk_built_reasonheir.rconcept_active_requisite
     )
     assert rla_week_reasonheir._status == casa_wk_built_reasonheir._status
     assert rla_week_reasonheir._task == casa_wk_built_reasonheir._task
@@ -313,8 +313,8 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
     assert cost_week_reasonheir.rcontext == casa_wk_built_reasonheir.rcontext
     assert cost_week_reasonheir.premises == casa_wk_built_reasonheir.premises
     assert (
-        cost_week_reasonheir.rcontext_concept_active_requisite
-        == casa_wk_built_reasonheir.rcontext_concept_active_requisite
+        cost_week_reasonheir.rconcept_active_requisite
+        == casa_wk_built_reasonheir.rconcept_active_requisite
     )
     assert cost_week_reasonheir._status == casa_wk_built_reasonheir._status
     assert cost_week_reasonheir._task == casa_wk_built_reasonheir._task
@@ -517,8 +517,8 @@ def test_BudUnit_ReasonUnits_del_reason_premise_UncoupledMethod2():
     assert str(excinfo.value) == f"No ReasonUnit at '{weekdays_way}'"
 
 
-def test_BudUnit_edit_concept_attr_budIsAbleToEdit_rcontext_concept_active_requisite_AnyConceptIfInvaildThrowsError():
-    # _rcontext_concept_active_requisite: str = None
+def test_BudUnit_edit_concept_attr_budIsAbleToEdit_rconcept_active_requisite_AnyConceptIfInvaildThrowsError():
+    # _rconcept_active_requisite: str = None
     # must be 1 of 3: bool: True, bool: False, str="Set to Ignore"
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
@@ -536,7 +536,7 @@ def test_BudUnit_edit_concept_attr_budIsAbleToEdit_rcontext_concept_active_requi
     sue_bud.edit_concept_attr(
         run_way,
         reason_rcontext=casa_way,
-        reason_rcontext_concept_active_requisite=True,
+        reason_rconcept_active_requisite=True,
     )
 
     # THEN
@@ -544,13 +544,13 @@ def test_BudUnit_edit_concept_attr_budIsAbleToEdit_rcontext_concept_active_requi
     reasonunit_casa = run_concept.reasonunits.get(casa_way)
     assert reasonunit_casa.rcontext == casa_way
     assert len(reasonunit_casa.premises) == 0
-    assert reasonunit_casa.rcontext_concept_active_requisite is True
+    assert reasonunit_casa.rconcept_active_requisite is True
 
     # WHEN
     sue_bud.edit_concept_attr(
         run_way,
         reason_rcontext=casa_way,
-        reason_rcontext_concept_active_requisite=False,
+        reason_rconcept_active_requisite=False,
     )
 
     # THEN
@@ -558,13 +558,13 @@ def test_BudUnit_edit_concept_attr_budIsAbleToEdit_rcontext_concept_active_requi
     reasonunit_casa = run_concept.reasonunits.get(casa_way)
     assert reasonunit_casa.rcontext == casa_way
     assert len(reasonunit_casa.premises) == 0
-    assert reasonunit_casa.rcontext_concept_active_requisite is False
+    assert reasonunit_casa.rconcept_active_requisite is False
 
     # WHEN
     sue_bud.edit_concept_attr(
         run_way,
         reason_rcontext=casa_way,
-        reason_rcontext_concept_active_requisite="Set to Ignore",
+        reason_rconcept_active_requisite="Set to Ignore",
     )
 
     # THEN
@@ -572,7 +572,7 @@ def test_BudUnit_edit_concept_attr_budIsAbleToEdit_rcontext_concept_active_requi
     reasonunit_casa = run_concept.reasonunits.get(casa_way)
     assert reasonunit_casa.rcontext == casa_way
     assert len(reasonunit_casa.premises) == 0
-    assert reasonunit_casa.rcontext_concept_active_requisite is None
+    assert reasonunit_casa.rconcept_active_requisite is None
 
 
 def test_BudUnit_ReasonUnits_ConceptUnit_active_InfluencesReasonUnitStatus():
@@ -603,7 +603,7 @@ def test_BudUnit_ReasonUnits_ConceptUnit_active_InfluencesReasonUnitStatus():
     assert casa_concept._active is False
 
     # 5. concept(...,run to casa) with
-    # 5.1. ReasonUnit: concept(rcontext=...,casa) has .rcontext_concept_active_requisite = True
+    # 5.1. ReasonUnit: concept(rcontext=...,casa) has .rconcept_active_requisite = True
     # 5.2. concept(...,casa).active = False
     run_str = "run to casa"
     run_way = sue_bud.make_l1_way(run_str)
@@ -611,7 +611,7 @@ def test_BudUnit_ReasonUnits_ConceptUnit_active_InfluencesReasonUnitStatus():
     sue_bud.edit_concept_attr(
         run_way,
         reason_rcontext=casa_way,
-        reason_rcontext_concept_active_requisite=True,
+        reason_rconcept_active_requisite=True,
     )
     run_concept = sue_bud.get_concept_obj(run_way)
     sue_bud.settle_bud()

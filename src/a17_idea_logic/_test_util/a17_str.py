@@ -6,10 +6,6 @@ def idea_category_str() -> str:
     return "idea_category"
 
 
-def get_idea_categorys() -> set[str]:
-    return {"bud", "fisc", "pidgin"}
-
-
 def allowed_crud_str() -> str:
     return "allowed_crud"
 
@@ -42,7 +38,7 @@ def insert_update_str() -> str:
     return "INSERT_UPDATE"
 
 
-def delete_insert_str() -> str:
+def delete_INSERT_str() -> str:
     return "DELETE_INSERT"
 
 

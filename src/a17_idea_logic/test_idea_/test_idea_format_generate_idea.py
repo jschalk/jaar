@@ -16,7 +16,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     credit_vote_str,
 )
 from src.a06_bud_logic._test_util.example_buds import budunit_v001
-from src.a08_bud_atom_logic._test_util.a08_str import atom_insert
+from src.a08_bud_atom_logic._test_util.a08_str import INSERT_str
 from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a17_idea_logic.idea import create_idea_df, make_buddelta, get_idearef_obj
 from src.a17_idea_logic.idea_config import (
@@ -52,19 +52,19 @@ def test_make_buddelta_Arg_idea_format_00021_bud_acctunit_v0_0_0():
 
     # THEN
     assert sue_acct_buddelta
-    sue_budatom = budatom_shop(bud_acctunit_str(), atom_insert())
+    sue_budatom = budatom_shop(bud_acctunit_str(), INSERT_str())
     sue_budatom.set_arg(acct_name_str(), sue_str)
     sue_budatom.set_arg(credit_belief_str(), sue_credit_belief)
     sue_budatom.set_arg(debtit_belief_str(), sue_debtit_belief)
     sue_budatom.set_atom_order()
-    bob_budatom = budatom_shop(bud_acctunit_str(), atom_insert())
+    bob_budatom = budatom_shop(bud_acctunit_str(), INSERT_str())
     bob_budatom.set_arg(acct_name_str(), bob_str)
     bob_budatom.set_arg(credit_belief_str(), bob_credit_belief)
     bob_budatom.set_arg(debtit_belief_str(), bob_debtit_belief)
     bob_budatom.set_atom_order()
     # print(f"{sue_acct_buddelta.get_ordered_dict()=}")
     # print(
-    #     f"{sue_acct_buddelta.budatoms.get(atom_insert()).get(bud_acctunit_str()).get(sue_str)=}"
+    #     f"{sue_acct_buddelta.budatoms.get(INSERT_str()).get(bud_acctunit_str()).get(sue_str)=}"
     # )
     print(f"{sue_budatom=}")
     assert sue_acct_buddelta.budatom_exists(sue_budatom)
@@ -111,10 +111,10 @@ def test_make_buddelta_Arg_idea_format_00021_bud_acctunit_v0_0_0():
 
 #     # THEN
 #     assert membership_changunit
-#     sue_iowa_budatom = budatom_shop(bud_acct_membership_str(), atom_insert())
-#     bob_iowa_budatom = budatom_shop(bud_acct_membership_str(), atom_insert())
-#     yao_iowa_budatom = budatom_shop(bud_acct_membership_str(), atom_insert())
-#     yao_ohio_budatom = budatom_shop(bud_acct_membership_str(), atom_insert())
+#     sue_iowa_budatom = budatom_shop(bud_acct_membership_str(), INSERT_str())
+#     bob_iowa_budatom = budatom_shop(bud_acct_membership_str(), INSERT_str())
+#     yao_iowa_budatom = budatom_shop(bud_acct_membership_str(), INSERT_str())
+#     yao_ohio_budatom = budatom_shop(bud_acct_membership_str(), INSERT_str())
 #     sue_iowa_budatom.set_arg(group_title_str(), iowa_str)
 #     bob_iowa_budatom.set_arg(group_title_str(), iowa_str)
 #     yao_iowa_budatom.set_arg(group_title_str(), iowa_str)
@@ -164,13 +164,13 @@ def test_make_buddelta_Arg_idea_format_00013_conceptunit_v0_0_0():
     conceptunit_changunit = make_buddelta(conceptunit_csv)
 
     # THEN
-    casa_budatom = budatom_shop(bud_conceptunit_str(), atom_insert())
+    casa_budatom = budatom_shop(bud_conceptunit_str(), INSERT_str())
     casa_budatom.set_arg(concept_way_str(), casa_way)
     casa_budatom.set_arg(pledge_str(), False)
     casa_budatom.set_arg(mass_str(), casa_mass)
     print(f"{casa_budatom=}")
     assert casa_budatom.get_value(mass_str()) == casa_mass
-    clean_budatom = budatom_shop(bud_conceptunit_str(), atom_insert())
+    clean_budatom = budatom_shop(bud_conceptunit_str(), INSERT_str())
     clean_budatom.set_arg(concept_way_str(), clean_way)
     clean_budatom.set_arg(pledge_str(), True)
     clean_budatom.set_arg(mass_str(), 1)
@@ -217,13 +217,13 @@ def test_make_buddelta_Arg_idea_format_00013_conceptunit_v0_0_0():
     conceptunit_changunit = make_buddelta(conceptunit_csv)
 
     # THEN
-    casa_budatom = budatom_shop(bud_conceptunit_str(), atom_insert())
+    casa_budatom = budatom_shop(bud_conceptunit_str(), INSERT_str())
     casa_budatom.set_arg(concept_way_str(), casa_way)
     casa_budatom.set_arg(pledge_str(), False)
     casa_budatom.set_arg(mass_str(), casa_mass)
     print(f"{casa_budatom=}")
     assert casa_budatom.get_value(mass_str()) == casa_mass
-    clean_budatom = budatom_shop(bud_conceptunit_str(), atom_insert())
+    clean_budatom = budatom_shop(bud_conceptunit_str(), INSERT_str())
     clean_budatom.set_arg(concept_way_str(), clean_way)
     clean_budatom.set_arg(pledge_str(), True)
     clean_budatom.set_arg(mass_str(), 1)
