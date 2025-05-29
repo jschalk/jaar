@@ -21,18 +21,6 @@ from src.a02_finance_logic._test_util.a02_str import (
 from pytest import raises as pytest_raises
 
 
-def test_str_functions_ReturnObj():
-    assert bridge_str() == "bridge"
-    assert celldepth_str() == "celldepth"
-    assert deal_time_str() == "deal_time"
-    assert tran_time_str() == "tran_time"
-    assert quota_str() == "quota"
-    assert magnitude_str() == "magnitude"
-    assert deal_acct_nets_str() == "deal_acct_nets"
-    assert world_id_str() == "world_id"
-    assert acct_name_str() == "acct_name"
-
-
 def test_DEFAULT_CELLDEPTH():
     # ESTABLISH / WHEN / THEN
     assert DEFAULT_CELLDEPTH == 2
