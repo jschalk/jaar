@@ -27,7 +27,6 @@ from src.a02_finance_logic.finance_config import (
     FundNum,
     default_fund_coin_if_None,
 )
-from src.a02_finance_logic.test.range_toolbox import get_morphed_rangeunit, RangeUnit
 from src.a03_group_logic.group import (
     AwardHeir,
     AwardLink,
@@ -61,6 +60,7 @@ from src.a04_reason_logic.reason_concept import (
     factunits_get_from_dict,
     get_dict_from_factunits,
 )
+from src.a05_concept_logic.range_toolbox import get_morphed_rangeunit, RangeUnit
 from src.a05_concept_logic.healer import (
     HealerLink,
     healerlink_shop,
@@ -125,7 +125,7 @@ class ConceptAttrHolder:
     is_expanded: bool = None
     problem_bool: bool = None
 
-    def set_premise_range_attributes_influenced_by_premise_concept(
+    def set_premise_range_influenced_by_premise_concept(
         self,
         popen,
         pnigh,
@@ -289,7 +289,7 @@ class ConceptUnit:
             and self.close is None
         ):
             raise ranged_fact_concept_Exception(
-                f"Cannot have fact for range inheritor '{self.get_concept_way()}'. A ranged fact concept must have _begin, _close attributes"
+                f"Cannot have fact for range inheritor '{self.get_concept_way()}'. A ranged fact concept must have _begin, _close"
             )
         x_factheir = factheir_shop(
             x_fact.fcontext, x_fact.fstate, x_fact.fopen, x_fact.fnigh
@@ -779,11 +779,11 @@ class ConceptUnit:
     def set_active_attrs(
         self,
         tree_traverse_count: int,
-        bud_groupunits: dict[GroupTitle, GroupUnit] = None,
+        groupunits: dict[GroupTitle, GroupUnit] = None,
         bud_owner_name: AcctName = None,
     ):
         prev_to_now_active = deepcopy(self._active)
-        self._active = self._create_active_bool(bud_groupunits, bud_owner_name)
+        self._active = self._create_active_bool(groupunits, bud_owner_name)
         self._set_concept_task()
         self.record_active_hx(tree_traverse_count, prev_to_now_active, self._active)
 
@@ -799,17 +799,17 @@ class ConceptUnit:
         return any(x_reasonheir._task for x_reasonheir in self._reasonheirs.values())
 
     def _create_active_bool(
-        self, bud_groupunits: dict[GroupTitle, GroupUnit], bud_owner_name: AcctName
+        self, groupunits: dict[GroupTitle, GroupUnit], bud_owner_name: AcctName
     ) -> bool:
         self.set_reasonheirs_status()
         active_bool = self._are_all_reasonheir_active_true()
         if (
             active_bool
-            and bud_groupunits != {}
+            and groupunits != {}
             and bud_owner_name is not None
             and self._laborheir._laborlinks != {}
         ):
-            self._laborheir.set_owner_name_labor(bud_groupunits, bud_owner_name)
+            self._laborheir.set_owner_name_labor(groupunits, bud_owner_name)
             if self._laborheir._owner_name_labor is False:
                 active_bool = False
         return active_bool
@@ -970,13 +970,13 @@ class ConceptUnit:
     def set_laborheir(
         self,
         parent_laborheir: LaborHeir,
-        bud_groupunits: dict[GroupTitle, GroupUnit],
+        groupunits: dict[GroupTitle, GroupUnit],
     ):
         self._laborheir = laborheir_shop()
         self._laborheir.set_laborlinks(
             parent_laborheir=parent_laborheir,
             laborunit=self.laborunit,
-            bud_groupunits=bud_groupunits,
+            groupunits=groupunits,
         )
 
     def get_laborunit_dict(self) -> dict:

@@ -1,10 +1,7 @@
 from src.a00_data_toolbox.file_toolbox import create_path, set_dir
 from src.a02_finance_logic._test_util.a02_str import owner_name_str, fisc_label_str
-from src.a06_bud_logic._test_util.a06_str import (
-    face_name_str,
-    event_int_str,
-    acct_name_str,
-)
+from src.a06_bud_logic._test_util.a06_str import acct_name_str
+from src.a09_pack_logic._test_util.a09_str import face_name_str, event_int_str
 from src.a17_idea_logic.idea_db_tool import upsert_sheet, get_sheet_names
 from src.a18_etl_toolbox.tran_path import (
     create_stances_dir_path,

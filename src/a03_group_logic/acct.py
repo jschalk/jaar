@@ -11,7 +11,7 @@ from src.a01_way_logic.way import (
 )
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import (
-    default_respect_bit_if_None,
+    default_RespectBit_if_None,
     RespectNum,
 )
 from src.a03_group_logic.group import (
@@ -43,7 +43,7 @@ class AcctCore:
 
 @dataclass
 class AcctUnit(AcctCore):
-    """This represents the budunit.owner_name's opinion of the AcctUnit.acct_name
+    """This represents the owner_name's opinion of the AcctUnit.acct_name
     AcctUnit.credit_belief represents how much credit_belief the _owner_name projects to the acct_name
     AcctUnit.debtit_belief represents how much debtit_belief the _owner_name projects to the acct_name
     """
@@ -136,10 +136,10 @@ class AcctUnit(AcctCore):
         self,
         fund_agenda_ratio_give_sum: float,
         fund_agenda_ratio_take_sum: float,
-        bud_acctunit_total_credit_belief: float,
-        bud_acctunit_total_debtit_belief: float,
+        acctunits_credit_belief_sum: float,
+        acctunits_debtit_belief_sum: float,
     ):
-        total_credit_belief = bud_acctunit_total_credit_belief
+        total_credit_belief = acctunits_credit_belief_sum
         ratio_give_sum = fund_agenda_ratio_give_sum
         self._fund_agenda_ratio_give = (
             self.get_credit_belief() / total_credit_belief
@@ -147,7 +147,7 @@ class AcctUnit(AcctCore):
             else self._fund_agenda_give / ratio_give_sum
         )
         if fund_agenda_ratio_take_sum == 0:
-            total_debtit_belief = bud_acctunit_total_debtit_belief
+            total_debtit_belief = acctunits_debtit_belief_sum
             self._fund_agenda_ratio_take = (
                 self.get_debtit_belief() / total_debtit_belief
             )
@@ -291,7 +291,7 @@ def acctunit_shop(
         _fund_agenda_ratio_give=0,
         _fund_agenda_ratio_take=0,
         bridge=default_bridge_if_None(bridge),
-        _respect_bit=default_respect_bit_if_None(_respect_bit),
+        _respect_bit=default_RespectBit_if_None(_respect_bit),
     )
     x_acctunit.set_nameterm(x_acct_name=acct_name)
     return x_acctunit

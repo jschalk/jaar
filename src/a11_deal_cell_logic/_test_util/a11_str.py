@@ -1,9 +1,8 @@
+from src.a02_finance_logic._test_util.a02_str import celldepth_str
+
+
 def ancestors_str() -> str:
     return "ancestors"
-
-
-def celldepth_str() -> str:
-    return "celldepth"
 
 
 def deal_owner_name_str() -> str:

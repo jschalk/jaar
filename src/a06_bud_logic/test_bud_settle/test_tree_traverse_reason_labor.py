@@ -37,7 +37,7 @@ def test_bud_conceptroot_laborunit_CorrectlySets_concept_laborheir():
     # THEN
     x_laborheir = laborheir_shop()
     x_laborheir.set_laborlinks(
-        parent_laborheir=None, laborunit=x_laborunit, bud_groupunits=None
+        parent_laborheir=None, laborunit=x_laborunit, groupunits=None
     )
     assert yao_bud.conceptroot._laborheir is not None
     assert yao_bud.conceptroot._laborheir == x_laborheir
@@ -68,7 +68,7 @@ def test_bud_conceptkid_laborunit_EmptyCorrectlySets_concept_laborheir():
     x_laborheir.set_laborlinks(
         parent_laborheir=None,
         laborunit=x_laborunit,
-        bud_groupunits=bob_bud._groupunits,
+        groupunits=bob_bud._groupunits,
     )
     x_laborheir.set_owner_name_labor(bob_bud._groupunits, bob_bud.owner_name)
     print(f"{x_laborheir._owner_name_labor=}")
@@ -101,7 +101,7 @@ def test_bud_conceptkid_laborunit_EmptyCorrectlySets_concept_laborheir():
     x_laborheir.set_laborlinks(
         parent_laborheir=None,
         laborunit=x_laborunit,
-        bud_groupunits=bob_bud._groupunits,
+        groupunits=bob_bud._groupunits,
     )
     x_laborheir.set_owner_name_labor(bob_bud._groupunits, bob_bud.owner_name)
     print(f"{x_laborheir._owner_name_labor=}")
@@ -144,7 +144,7 @@ def test_bud_conceptkid_laborunit_CorrectlySets_grandchild_concept_laborheir():
     x_laborheir.set_laborlinks(
         parent_laborheir=None,
         laborunit=x_laborunit,
-        bud_groupunits=sue_bud._groupunits,
+        groupunits=sue_bud._groupunits,
     )
     assert four_concept._laborheir is not None
     assert four_concept._laborheir == x_laborheir

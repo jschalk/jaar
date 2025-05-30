@@ -3,7 +3,7 @@ from src.a01_way_logic.way import (
     default_bridge_if_None,
 )
 from src.a02_finance_logic.finance_config import (
-    default_respect_bit_if_None,
+    default_RespectBit_if_None,
     filter_penny,
     default_fund_coin_if_None,
     validate_fund_pool,
@@ -116,7 +116,7 @@ def test_budunit_shop_ReturnsObjectWithCorrectEmptyField():
     assert x_bud.bridge == default_bridge_if_None()
     assert x_bud.fund_pool == validate_fund_pool()
     assert x_bud.fund_coin == default_fund_coin_if_None()
-    assert x_bud.respect_bit == default_respect_bit_if_None()
+    assert x_bud.respect_bit == default_RespectBit_if_None()
     assert x_bud.penny == filter_penny()
     assert x_bud.conceptroot.fund_coin == x_bud.fund_coin
     assert x_bud.conceptroot.bridge == x_bud.bridge

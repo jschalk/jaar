@@ -674,7 +674,7 @@ def test_BudUnit_settle_bud_Sets_conceptroot_factheir_With_range_factheirs():
     # WHEN
     with pytest_raises(Exception) as excinfo:
         yao_bud.settle_bud()
-    exception_str = f"Cannot have fact for range inheritor '{tue_way}'. A ranged fact concept must have _begin, _close attributes"
+    exception_str = f"Cannot have fact for range inheritor '{tue_way}'. A ranged fact concept must have _begin, _close"
     assert str(excinfo.value) == exception_str
 
     # THEN

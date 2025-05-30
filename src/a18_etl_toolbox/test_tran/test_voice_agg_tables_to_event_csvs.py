@@ -2,11 +2,10 @@ from src.a00_data_toolbox.file_toolbox import create_path, open_file
 from src.a02_finance_logic._test_util.a02_str import owner_name_str, fisc_label_str
 from src.a06_bud_logic._test_util.a06_str import (
     bud_acctunit_str,
-    face_name_str,
     acct_name_str,
     credit_belief_str,
-    event_int_str,
 )
+from src.a09_pack_logic._test_util.a09_str import face_name_str, event_int_str
 from src.a12_hub_tools.hub_path import create_owner_event_dir_path
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_sound_and_voice_tables,

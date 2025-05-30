@@ -2,7 +2,7 @@ from src.a00_data_toolbox.file_toolbox import save_file, create_path
 from src.a01_way_logic.way import default_bridge_if_None
 from src.a02_finance_logic.finance_config import (
     default_fund_coin_if_None,
-    default_respect_bit_if_None,
+    default_RespectBit_if_None,
     filter_penny,
 )
 from src.a02_finance_logic._test_util.a02_str import bridge_str, fisc_label_str
@@ -71,7 +71,7 @@ def test_FiscUnit_get_dict_ReturnsObjWith_cashbook():
     assert x_dict.get(offi_times_str) == list(a45_offi_times)
     assert x_dict.get(bridge_str()) == default_bridge_if_None()
     assert x_dict.get(fund_coin_str()) == default_fund_coin_if_None()
-    assert x_dict.get(respect_bit_str()) == default_respect_bit_if_None()
+    assert x_dict.get(respect_bit_str()) == default_RespectBit_if_None()
     assert x_dict.get(penny_str()) == filter_penny()
     assert x_dict.get(brokerunits_str()) == accord_fisc._get_brokerunits_dict()
     assert x_dict.get(cashbook_str()) == accord_fisc.cashbook.get_dict()
@@ -212,7 +212,7 @@ def test_get_from_dict_ReturnsFiscUnit_Scenario1_WithOutParameters():
     assert generated_fisc.offi_times == set()
     assert generated_fisc.bridge == default_bridge_if_None()
     assert generated_fisc.fund_coin == default_fund_coin_if_None()
-    assert generated_fisc.respect_bit == default_respect_bit_if_None()
+    assert generated_fisc.respect_bit == default_RespectBit_if_None()
     assert generated_fisc.penny == 1
     assert generated_fisc.brokerunits == accord_fisc.brokerunits
     assert generated_fisc.cashbook == accord_fisc.cashbook

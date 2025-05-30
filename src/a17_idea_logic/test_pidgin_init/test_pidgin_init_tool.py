@@ -4,12 +4,10 @@ from src.a06_bud_logic._test_util.a06_str import (
     LabelTerm_str,
     WayTerm_str,
     TitleTerm_str,
-    concept_way_str,
-    face_name_str,
-    event_int_str,
     NameTerm_str,
     TitleTerm_str,
 )
+from src.a09_pack_logic._test_util.a09_str import face_name_str, event_int_str
 from src.a16_pidgin_logic._test_util.a16_str import (
     otx_bridge_str,
     inx_bridge_str,

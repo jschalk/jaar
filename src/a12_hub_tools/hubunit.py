@@ -27,7 +27,7 @@ from src.a01_way_logic.way import (
 from src.a02_finance_logic.finance_config import (
     default_fund_coin_if_None,
     validate_fund_pool,
-    default_respect_bit_if_None,
+    default_RespectBit_if_None,
     filter_penny,
     default_money_magnitude_if_None,
 )
@@ -494,7 +494,7 @@ def hubunit_shop(
         bridge=default_bridge_if_None(bridge),
         fund_pool=validate_fund_pool(fund_pool),
         fund_coin=default_fund_coin_if_None(fund_coin),
-        respect_bit=default_respect_bit_if_None(respect_bit),
+        respect_bit=default_RespectBit_if_None(respect_bit),
         penny=filter_penny(penny),
         keep_point_magnitude=default_money_magnitude_if_None(keep_point_magnitude),
     )

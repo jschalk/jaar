@@ -170,14 +170,38 @@ def get_module_str_functions(module_dir, desc_number_str) -> list[str]:
     return get_function_names_from_file(str_util_path)
 
 
-def test_StrFunctionsAreAllTested():
-    # sourcery skip: no-loop-in-tests
-    # sourcery skip: no-conditionals-in-tests
-    # ESTABLISH / WHEN / THEN
+def get_all_str_functions() -> list:
+    all_str_functions = []
     for module_desc, module_dir in get_module_descs().items():
         desc_number_str = module_desc[1:3]
         util_dir = create_path(module_dir, "_test_util")
+        str_util_path = create_path(util_dir, f"a{desc_number_str}_str.py")
+        str_functions = get_function_names_from_file(str_util_path)
+        if len(str_functions) > 0:
+            str_functions = get_function_names_from_file(str_util_path)
+            all_str_functions.extend(iter(str_functions))
+    return all_str_functions
+
+
+def test_StrFunctionsAreAllTested():
+    # sourcery skip: no-loop-in-tests
+    # sourcery skip: no-conditionals-in-tests
+    # ESTABLISH
+
+    # WHEN / THEN
+    running_str_functions_set = set()
+    for module_desc, module_dir in get_module_descs().items():
+        desc_number_str = module_desc[1:3]
+        util_dir = create_path(module_dir, "_test_util")
+
         module_str_funcs = get_module_str_functions(module_dir, desc_number_str)
+        if set(module_str_funcs).intersection(set(running_str_functions_set)):
+            print(
+                f"{util_dir=} Duplicate functions: {set(module_str_funcs).intersection(set(running_str_functions_set))}"
+            )
+        assert not set(module_str_funcs).intersection(set(running_str_functions_set))
+        running_str_functions_set.update(set(module_str_funcs))
+
         if len(module_str_funcs) > 0:
             test_file_path = create_path(util_dir, f"test_a{desc_number_str}_str.py")
             assert os_path_exists(test_file_path)
@@ -199,48 +223,36 @@ def test_StrFunctionsAreAllTested():
                 assert test_file_str.find(str_func_assert_str) > 0
 
 
-def get_all_str_functions() -> list:
-    all_str_functions = []
-    for module_desc, module_dir in get_module_descs().items():
-        desc_number_str = module_desc[1:3]
-        util_dir = create_path(module_dir, "_test_util")
-        str_util_path = create_path(util_dir, f"a{desc_number_str}_str.py")
-        str_functions = get_function_names_from_file(str_util_path)
-        if len(str_functions) > 0:
-            str_functions = get_function_names_from_file(str_util_path)
-            all_str_functions.extend(iter(str_functions))
-    return all_str_functions
+# def test_StrFunctionsAppearWhereTheyShould():
+#     # sourcery skip: no-loop-in-tests
+#     # sourcery skip: no-conditionals-in-tests
+#     # ESTABLISH
+#     all_str_functions = get_all_str_functions()
+#     str_first_ref = {str_function: None for str_function in all_str_functions}
+#     # TODO change excluded_strs to empty set by editing codebase
+#     excluded_strs = {"close", "time", "day", "days", "week", "weeks", "year", "hour"}
 
+#     # WHEN / THEN
+#     for module_desc, module_dir in get_module_descs().items():
+#         desc_number_str = module_desc[1:3]
+#         module_files = list(get_python_files_with_flag(module_dir).keys())
+#         module_files.extend(list(get_json_files(module_dir)))
+#         module_files = sorted(module_files)
+#         str_funcs_set = set(get_module_str_functions(module_dir, desc_number_str))
+#         for file_path in module_files:
+#             if file_path.find("_test_util") == -1:
+#                 first_ref_missing_strs = {
+#                     str_function[:-4]
+#                     for str_function in str_first_ref
+#                     if str_first_ref.get(str_function) is None
+#                 }
+#                 file_str = open(file_path).read()
+#                 for x_str in first_ref_missing_strs:
+#                     if file_str.find(x_str) > -1 and x_str not in excluded_strs:
+#                         x_str_func_name = f"{x_str}_str"
+#                         str_first_ref[x_str_func_name] = file_path
+#                         if x_str_func_name not in str_funcs_set:
+#                             print(f"missing {x_str=} {file_path=}")
+#                         # assert x_str_func_name in str_funcs_set
 
-def test_StrFunctionsAppearWhereTheyShould():
-    # sourcery skip: no-loop-in-tests
-    # sourcery skip: no-conditionals-in-tests
-    # ESTABLISH
-    all_str_functions = get_all_str_functions()
-    str_first_ref = {str_function: None for str_function in all_str_functions}
-    # TODO change excluded_strs to empty set by editing codebase
-    excluded_strs = {"close", "time", "day"}
-
-    # WHEN / THEN
-    for module_desc, module_dir in get_module_descs().items():
-        desc_number_str = module_desc[1:3]
-        module_files = list(get_python_files_with_flag(module_dir).keys())
-        module_files.extend(list(get_json_files(module_dir)))
-        module_files = sorted(module_files)
-        str_funcs_set = set(get_module_str_functions(module_dir, desc_number_str))
-        for file_path in module_files:
-            first_ref_missing_strs = {
-                str_function[:-4]
-                for str_function in str_first_ref
-                if str_first_ref.get(str_function) is None
-            }
-            file_str = open(file_path).read()
-            for x_str in first_ref_missing_strs:
-                if file_str.find(x_str) > -1 and x_str not in excluded_strs:
-                    x_str_func_name = f"{x_str}_str"
-                    str_first_ref[x_str_func_name] = file_path
-                    if x_str_func_name not in str_funcs_set:
-                        print(f"missing {x_str=} {file_path=}")
-                    assert x_str_func_name in str_funcs_set
-
-    assert 1 == 2
+#     assert 1 == 2

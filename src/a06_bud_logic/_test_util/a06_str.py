@@ -3,9 +3,54 @@ from src.a01_way_logic._test_util.a01_str import (
     TitleTerm_str,
     LabelTerm_str,
     WayTerm_str,
+    parent_way_str,
 )
-from src.a02_finance_logic._test_util.a02_str import acct_name_str
-from src.a03_group_logic._test_util.a03_str import credit_belief_str, debtit_belief_str
+from src.a02_finance_logic._test_util.a02_str import (
+    acct_name_str,
+    fund_coin_str,
+    penny_str,
+    addin_str,
+    amount_str,
+)
+from src.a03_group_logic._test_util.a03_str import (
+    credit_belief_str,
+    debtit_belief_str,
+    credit_vote_str,
+    group_title_str,
+    fund_take_str,
+    respect_bit_str,
+    fund_give_str,
+    debtit_vote_str,
+    give_force_str,
+    awardee_title_str,
+    take_force_str,
+)
+from src.a04_reason_logic._test_util.a04_str import (
+    pstate_str,
+    pnigh_str,
+    fstate_str,
+    popen_str,
+    fcontext_str,
+    rconcept_active_requisite_str,
+    fopen_str,
+    fnigh_str,
+    rcontext_str,
+    labor_title_str,
+)
+from src.a05_concept_logic._test_util.a05_str import (
+    concept_label_str,
+    denom_str,
+    numor_str,
+    pledge_str,
+    begin_str,
+    close_str,
+    morph_str,
+    concept_way_str,
+    gogo_want_str,
+    stop_want_str,
+    mass_str,
+    healer_name_str,
+)
 
 
 def budunit_str() -> str:
@@ -48,19 +93,6 @@ def bud_concept_factunit_str() -> str:
     return "bud_concept_factunit"
 
 
-def bud_groupunit_str() -> str:
-    """Is not saved to raw data budunit json"""
-    return "bud_groupunit"
-
-
-def face_name_str() -> str:
-    return "face_name"
-
-
-def event_int_str() -> str:
-    return "event_int"
-
-
 def credor_respect_str() -> str:
     return "credor_respect"
 
@@ -69,137 +101,9 @@ def debtor_respect_str() -> str:
     return "debtor_respect"
 
 
-def fund_coin_str() -> str:
-    return "fund_coin"
-
-
-def penny_str() -> str:
-    return "penny"
-
-
-def respect_bit_str() -> str:
-    return "respect_bit"
-
-
-def awardee_title_str() -> str:
-    return "awardee_title"
-
-
-def give_force_str() -> str:
-    return "give_force"
-
-
-def take_force_str() -> str:
-    return "take_force"
-
-
-def group_title_str() -> str:
-    return "group_title"
-
-
-def labor_title_str() -> str:
-    return "labor_title"
-
-
-def healer_name_str() -> str:
-    return "healer_name"
-
-
 def acct_pool_str() -> str:
     return "acct_pool"
 
 
-def debtit_vote_str() -> str:
-    return "debtit_vote"
-
-
-def credit_vote_str() -> str:
-    return "credit_vote"
-
-
-def concept_way_str() -> str:
-    return "concept_way"
-
-
-def parent_way_str() -> str:
-    return "parent_way"
-
-
-def concept_label_str() -> str:
-    return "concept_label"
-
-
-def mass_str() -> str:
-    return "mass"
-
-
-def pledge_str() -> str:
-    return "pledge"
-
-
-def begin_str() -> str:
-    return "begin"
-
-
-def close_str() -> str:
-    return "close"
-
-
-def addin_str() -> str:
-    return "addin"
-
-
-def numor_str() -> str:
-    return "numor"
-
-
-def denom_str() -> str:
-    return "denom"
-
-
-def morph_str() -> str:
-    return "morph"
-
-
-def pstate_str() -> str:
-    return "pstate"
-
-
-def pnigh_str() -> str:
-    return "pnigh"
-
-
-def gogo_want_str() -> str:
-    return "gogo_want"
-
-
-def stop_want_str() -> str:
-    return "stop_want"
-
-
-def rcontext_str() -> str:
-    return "rcontext"
-
-
-def fcontext_str() -> str:
-    return "fcontext"
-
-
-def fopen_str() -> str:
-    return "fopen"
-
-
-def fstate_str() -> str:
-    return "fstate"
-
-
-def fnigh_str() -> str:
-    return "fnigh"
-
-
-def popen_str() -> str:
-    return "popen"
-
-
-def rconcept_active_requisite_str() -> str:
-    return "rconcept_active_requisite"
+def jkeys_str() -> str:
+    return "jkeys"

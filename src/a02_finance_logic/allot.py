@@ -85,7 +85,7 @@ def _calc_allot_value(
 ):
     if ledger_value_total == 0:
         return 0
-    # calculate the allot based on credit_belief
+    # calculate the allot based on obj to total ratio
     allot_amt = (obj / ledger_value_total) * scale_number
     # Adjust to the nearest grain unit
     return round(allot_amt / grain_unit) * grain_unit
@@ -94,7 +94,7 @@ def _calc_allot_value(
 def _create_allot_dict(
     ledger: dict[str, float], scale_number: GrainFloat, grain_unit: float
 ) -> dict[str, GrainFloat]:
-    # Calculate the total credit_belief
+    # Calculate the total sum of ledger allots
     ledger_value_total = sum(ledger.values())
     return {
         x_key: _calc_allot_value(x_obj, ledger_value_total, scale_number, grain_unit)

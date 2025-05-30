@@ -11,9 +11,9 @@ from src.a06_bud_logic._test_util.a06_str import (
     bud_concept_laborlink_str,
     bud_concept_healerlink_str,
     bud_concept_factunit_str,
-    bud_groupunit_str,
 )
 from src.a10_bud_calc.bud_calc_config import get_bud_calc_config_dict
+from src.a10_bud_calc._test_util.a10_str import bud_groupunit_str
 from src.a17_idea_logic.idea_config import get_idea_sqlite_types
 from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
 from src.a18_etl_toolbox.tran_sqlstrs import (

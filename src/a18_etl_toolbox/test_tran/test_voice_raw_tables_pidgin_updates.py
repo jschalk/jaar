@@ -1,11 +1,6 @@
 from src.a00_data_toolbox.db_toolbox import get_table_columns
-from src.a01_way_logic.way import create_way
-from src.a02_finance_logic._test_util.a02_str import owner_name_str
-from src.a06_bud_logic._test_util.a06_str import (
-    bud_concept_awardlink_str,
-    face_name_str,
-    event_int_str,
-)
+from src.a06_bud_logic._test_util.a06_str import bud_concept_awardlink_str
+from src.a09_pack_logic._test_util.a09_str import face_name_str, event_int_str
 from src.a16_pidgin_logic._test_util.a16_str import (
     pidgin_name_str,
     inx_name_str,

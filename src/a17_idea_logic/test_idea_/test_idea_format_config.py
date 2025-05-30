@@ -3,8 +3,6 @@ from src.a02_finance_logic._test_util.a02_str import owner_name_str, fisc_label_
 from src.a06_bud_logic._test_util.a06_str import (
     budunit_str,
     bud_acctunit_str,
-    face_name_str,
-    event_int_str,
     acct_name_str,
     group_title_str,
     mass_str,
@@ -24,6 +22,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     gogo_want_str,
     stop_want_str,
 )
+from src.a09_pack_logic._test_util.a09_str import face_name_str, event_int_str
 from src.a15_fisc_logic._test_util.a15_str import fiscunit_str
 from src.a17_idea_logic.idea import (
     _generate_idea_dataframe,

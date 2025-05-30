@@ -32,7 +32,7 @@ from src.a01_way_logic.way import (
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import (
     valid_finance_ratio,
-    default_respect_bit_if_None,
+    default_RespectBit_if_None,
     filter_penny,
     default_fund_coin_if_None,
     validate_fund_pool,
@@ -780,7 +780,7 @@ class BudUnit:
         self, x_conceptattrholder: ConceptAttrHolder
     ):
         premise_concept = self.get_concept_obj(x_conceptattrholder.reason_premise)
-        x_conceptattrholder.set_premise_range_attributes_influenced_by_premise_concept(
+        x_conceptattrholder.set_premise_range_influenced_by_premise_concept(
             popen=premise_concept.begin,
             pnigh=premise_concept.close,
             premise_denom=premise_concept.denom,
@@ -1000,14 +1000,14 @@ class BudUnit:
         fund_agenda_ratio_take_sum = sum(
             x_acctunit._fund_agenda_take for x_acctunit in self.accts.values()
         )
-        x_acctunit_credit_belief_sum = self.get_acctunits_credit_belief_sum()
-        x_acctunit_debtit_belief_sum = self.get_acctunits_debtit_belief_sum()
+        x_acctunits_credit_belief_sum = self.get_acctunits_credit_belief_sum()
+        x_acctunits_debtit_belief_sum = self.get_acctunits_debtit_belief_sum()
         for x_acctunit in self.accts.values():
             x_acctunit.set_fund_agenda_ratio_give_take(
                 fund_agenda_ratio_give_sum=fund_agenda_ratio_give_sum,
                 fund_agenda_ratio_take_sum=fund_agenda_ratio_take_sum,
-                bud_acctunit_total_credit_belief=x_acctunit_credit_belief_sum,
-                bud_acctunit_total_debtit_belief=x_acctunit_debtit_belief_sum,
+                acctunits_credit_belief_sum=x_acctunits_credit_belief_sum,
+                acctunits_debtit_belief_sum=x_acctunits_debtit_belief_sum,
             )
 
     def _reset_acctunit_fund_give_take(self):
@@ -1478,7 +1478,7 @@ def budunit_shop(
         debtor_respect=validate_respect_num(),
         fund_pool=validate_fund_pool(fund_pool),
         fund_coin=default_fund_coin_if_None(fund_coin),
-        respect_bit=default_respect_bit_if_None(respect_bit),
+        respect_bit=default_RespectBit_if_None(respect_bit),
         penny=filter_penny(penny),
         _concept_dict=get_empty_dict_if_None(),
         _keep_dict=get_empty_dict_if_None(),
@@ -1522,7 +1522,7 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.fund_coin = default_fund_coin_if_None(
         obj_from_bud_dict(bud_dict, "fund_coin")
     )
-    x_bud.respect_bit = default_respect_bit_if_None(
+    x_bud.respect_bit = default_RespectBit_if_None(
         obj_from_bud_dict(bud_dict, "respect_bit")
     )
     x_bud.penny = filter_penny(obj_from_bud_dict(bud_dict, "penny"))

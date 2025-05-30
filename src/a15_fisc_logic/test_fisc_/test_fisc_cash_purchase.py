@@ -67,14 +67,14 @@ def test_FiscUnit_set_cashpurchase_RaisesErrorWhen_tranunit_tran_time_GreaterTha
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         x_fisc.set_cashpurchase(sue_bob_t77_tranunit)
-    exception_str = f"Cannot set tranunit for tran_time={t77_t}, timelinepoint is greater than current time={t6606_offi_time_max}"
+    exception_str = f"Cannot set tranunit for tran_time={t77_t}, TimeLinePoint is greater than current time={t6606_offi_time_max}"
     assert str(excinfo.value) == exception_str
 
     # WHEN / THEN
     sue_bob_t6606 = tranunit_shop(sue_str, bob_str, t6606_offi_time_max, t77_amount)
     with pytest_raises(Exception) as excinfo:
         x_fisc.set_cashpurchase(sue_bob_t6606)
-    exception_str = f"Cannot set tranunit for tran_time={t6606_offi_time_max}, timelinepoint is greater than current time={t6606_offi_time_max}"
+    exception_str = f"Cannot set tranunit for tran_time={t6606_offi_time_max}, TimeLinePoint is greater than current time={t6606_offi_time_max}"
     assert str(excinfo.value) == exception_str
 
 
@@ -97,7 +97,7 @@ def test_FiscUnit_set_cashpurchase_RaisesErrorWhenDealUnitHas_tran_time():
     with pytest_raises(Exception) as excinfo:
         x_fisc.set_cashpurchase(sue_bob_t55_tranunit)
     exception_str = (
-        f"Cannot set tranunit for tran_time={t55_t}, timelinepoint is blocked"
+        f"Cannot set tranunit for tran_time={t55_t}, TimeLinePoint is blocked"
     )
     assert str(excinfo.value) == exception_str
 

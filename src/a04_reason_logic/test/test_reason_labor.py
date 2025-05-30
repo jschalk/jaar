@@ -152,8 +152,8 @@ def test_LaborHeir_set_owner_name_labor_CorrectlySetsAttribute_Emptyx_laborlinks
     assert x_laborheir._owner_name_labor is False
 
     # WHEN
-    bud_groupunits = {}
-    x_laborheir.set_owner_name_labor(bud_groupunits, bud_owner_name="")
+    groupunits = {}
+    x_laborheir.set_owner_name_labor(groupunits, bud_owner_name="")
 
     # THEN
     assert x_laborheir._owner_name_labor
@@ -248,7 +248,7 @@ def test_LaborHeir_set_laborlink_LaborUnit_Empty_ParentLaborHeirEmpty():
     x_laborheir.set_laborlinks(
         parent_laborheir=parent_laborheir_empty,
         laborunit=x_laborunit,
-        bud_groupunits=None,
+        groupunits=None,
     )
 
     # THEN
@@ -265,7 +265,7 @@ def test_LaborHeir_set_laborlink_LaborUnitNotEmpty_ParentLaborHeirIsNone():
 
     # WHEN
     x_laborheir = laborheir_shop()
-    x_laborheir.set_laborlinks(None, laborunit=x_laborunit, bud_groupunits=None)
+    x_laborheir.set_laborlinks(None, laborunit=x_laborunit, groupunits=None)
 
     # THEN
     assert x_laborheir._laborlinks == x_laborunit._laborlinks
@@ -282,7 +282,7 @@ def test_LaborHeir_set_laborlink_LaborUnitNotEmpty_ParentLaborHeirEmpty():
     # WHEN
     x_laborheir = laborheir_shop()
     parent_laborheir_empty = laborheir_shop()
-    x_laborheir.set_laborlinks(parent_laborheir_empty, x_laborunit, bud_groupunits=None)
+    x_laborheir.set_laborlinks(parent_laborheir_empty, x_laborunit, groupunits=None)
 
     # THEN
     assert x_laborheir._laborlinks == x_laborunit._laborlinks
@@ -298,16 +298,14 @@ def test_LaborHeir_set_laborlink_LaborUnit_Empty_ParentLaborHeirNotEmpty():
     empty_laborheir = laborheir_shop()
 
     parent_laborheir = laborheir_shop()
-    parent_laborheir.set_laborlinks(
-        empty_laborheir, laborunit_swim, bud_groupunits=None
-    )
+    parent_laborheir.set_laborlinks(empty_laborheir, laborunit_swim, groupunits=None)
 
     laborunit_empty = laborunit_shop()
 
     # WHEN
     x_laborheir = laborheir_shop()
     assert x_laborheir._laborlinks == set()
-    x_laborheir.set_laborlinks(parent_laborheir, laborunit_empty, bud_groupunits=None)
+    x_laborheir.set_laborlinks(parent_laborheir, laborunit_empty, groupunits=None)
 
     # THEN
     assert len(x_laborheir._laborlinks)
@@ -324,14 +322,12 @@ def test_LaborHeir_set_laborlink_LaborUnitEqualParentLaborHeir_NonEmpty():
     empty_laborheir = laborheir_shop()
 
     parent_laborheir = laborheir_shop()
-    parent_laborheir.set_laborlinks(
-        empty_laborheir, laborunit_swim, bud_groupunits=None
-    )
+    parent_laborheir.set_laborlinks(empty_laborheir, laborunit_swim, groupunits=None)
 
     # WHEN
     x_laborheir = laborheir_shop()
     assert x_laborheir._laborlinks == set()
-    x_laborheir.set_laborlinks(parent_laborheir, laborunit_swim, bud_groupunits=None)
+    x_laborheir.set_laborlinks(parent_laborheir, laborunit_swim, groupunits=None)
 
     # THEN
     assert x_laborheir._laborlinks == parent_laborheir._laborlinks
@@ -373,7 +369,7 @@ def test_LaborHeir_set_laborlink_LaborUnit_NotEqual_ParentLaborHeir_NonEmpty():
     parent_laborunit.set_laborlink(labor_title=swim3_str)
     parent_laborheir = laborheir_shop()
     parent_laborheir.set_laborlinks(
-        parent_laborheir=None, laborunit=parent_laborunit, bud_groupunits=None
+        parent_laborheir=None, laborunit=parent_laborunit, groupunits=None
     )
 
     laborunit_swim2 = laborunit_shop()
@@ -470,7 +466,7 @@ def test_LaborHeir_labor_title_in_ReturnsCorrectBoolWhen_laborlinksNotEmpty():
     x_laborunit.set_laborlink(labor_title=hike_str)
     x_laborheir = laborheir_shop()
     x_laborheir.set_laborlinks(
-        parent_laborheir=None, laborunit=x_laborunit, bud_groupunits=None
+        parent_laborheir=None, laborunit=x_laborunit, groupunits=None
     )
     hunt_str = ",hunt"
     hunt_dict = {hunt_str}
@@ -499,7 +495,7 @@ def test_LaborHeir_has_labor_ReturnsCorrectBoolWhen_laborlinksEmpty():
     x_laborunit = laborunit_shop()
     x_laborheir = laborheir_shop()
     x_laborheir.set_laborlinks(
-        parent_laborheir=None, laborunit=x_laborunit, bud_groupunits=None
+        parent_laborheir=None, laborunit=x_laborunit, groupunits=None
     )
     hunt_str = ",hunt"
     hunt_dict = {hunt_str}

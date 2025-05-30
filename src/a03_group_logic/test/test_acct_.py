@@ -1,5 +1,5 @@
 from src.a01_way_logic.way import default_bridge_if_None
-from src.a02_finance_logic.finance_config import default_respect_bit_if_None
+from src.a02_finance_logic.finance_config import default_RespectBit_if_None
 from src.a03_group_logic.acct import AcctUnit, acctunit_shop
 from src.a03_group_logic._test_util.a03_str import (
     credit_belief_str,
@@ -108,7 +108,7 @@ def test_acctunit_shop_CorrectlySetsAttributes():
     assert yao_acctunit._fund_agenda_ratio_give == 0
     assert yao_acctunit._fund_agenda_ratio_take == 0
     assert yao_acctunit.bridge == default_bridge_if_None()
-    assert yao_acctunit._respect_bit == default_respect_bit_if_None()
+    assert yao_acctunit._respect_bit == default_RespectBit_if_None()
 
 
 def test_acctunit_shop_CorrectlySetsAttributes_bridge():
@@ -365,8 +365,8 @@ def test_AcctUnit_set_acctunits_fund_agenda_ratios_SetsAttrCorrectly():
     bob_acctunit.set_fund_agenda_ratio_give_take(
         fund_agenda_ratio_give_sum=0.2,
         fund_agenda_ratio_take_sum=0.5,
-        bud_acctunit_total_credit_belief=20,
-        bud_acctunit_total_debtit_belief=14,
+        acctunits_credit_belief_sum=20,
+        acctunits_debtit_belief_sum=14,
     )
 
     # THEN
@@ -377,8 +377,8 @@ def test_AcctUnit_set_acctunits_fund_agenda_ratios_SetsAttrCorrectly():
     bob_acctunit.set_fund_agenda_ratio_give_take(
         fund_agenda_ratio_give_sum=0,
         fund_agenda_ratio_take_sum=0,
-        bud_acctunit_total_credit_belief=20,
-        bud_acctunit_total_debtit_belief=14,
+        acctunits_credit_belief_sum=20,
+        acctunits_debtit_belief_sum=14,
     )
 
     # THEN

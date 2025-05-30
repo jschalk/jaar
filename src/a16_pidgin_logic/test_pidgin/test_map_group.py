@@ -1,5 +1,5 @@
 from src.a01_way_logic.way import default_bridge_if_None
-from src.a06_bud_logic._test_util.a06_str import event_int_str, face_name_str
+from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
 from src.a16_pidgin_logic._test_util.a16_str import (
     otx_bridge_str,

@@ -27,8 +27,6 @@ from src.a06_bud_logic._test_util.a06_str import (
     rconcept_active_requisite_str,
     begin_str,
     denom_str,
-    event_int_str,
-    face_name_str,
     fcontext_str,
     fstate_str,
     group_title_str,
@@ -81,6 +79,7 @@ from src.a08_bud_atom_logic.atom_config import (
     get_delete_key_name,
     get_all_bud_dimen_delete_keys,
 )
+from src.a09_pack_logic._test_util.a09_str import face_name_str, event_int_str
 from src.a10_bud_calc.bud_calc_config import (
     get_all_bud_calc_args,
     get_bud_calc_args_sqlite_datatype_dict,

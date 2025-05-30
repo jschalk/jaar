@@ -1,4 +1,4 @@
-from src.a01_way_logic._test_util.a01_str import bridge_str
+from src.a01_way_logic._test_util.a01_str import bridge_str, fisc_label_str
 
 
 def world_id_str() -> str:
@@ -33,9 +33,25 @@ def owner_name_str() -> str:
     return "owner_name"
 
 
-def fisc_label_str() -> str:
-    return "fisc_label"
-
-
 def acct_name_str() -> str:
     return "acct_name"
+
+
+def offi_time_str() -> str:
+    return "offi_time"
+
+
+def amount_str() -> str:
+    return "amount"
+
+
+def fund_coin_str() -> str:
+    return "fund_coin"
+
+
+def penny_str() -> str:
+    return "penny"
+
+
+def addin_str() -> str:
+    return "addin"

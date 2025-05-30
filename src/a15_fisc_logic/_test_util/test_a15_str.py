@@ -1,9 +1,7 @@
 from src.a15_fisc_logic._test_util.a15_str import (
     timeline_str,
-    offi_time_str,
     brokerunits_str,
     cashbook_str,
-    amount_str,
     month_label_str,
     hour_label_str,
     cumlative_minute_str,
@@ -22,10 +20,8 @@ from src.a15_fisc_logic._test_util.a15_str import (
 
 def test_str_functions_ReturnsObj():
     assert timeline_str() == "timeline"
-    assert offi_time_str() == "offi_time"
     assert brokerunits_str() == "brokerunits"
     assert cashbook_str() == "cashbook"
-    assert amount_str() == "amount"
     assert month_label_str() == "month_label"
     assert hour_label_str() == "hour_label"
     assert cumlative_minute_str() == "cumlative_minute"

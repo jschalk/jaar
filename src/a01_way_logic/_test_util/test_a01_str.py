@@ -4,6 +4,8 @@ from src.a01_way_logic._test_util.a01_str import (
     TitleTerm_str,
     LabelTerm_str,
     WayTerm_str,
+    fisc_label_str,
+    parent_way_str,
 )
 
 
@@ -14,3 +16,5 @@ def test_str_functions_ReturnsObj():
     assert TitleTerm_str() == "TitleTerm"
     assert LabelTerm_str() == "LabelTerm"
     assert WayTerm_str() == "WayTerm"
+    assert fisc_label_str() == "fisc_label"
+    assert parent_way_str() == "parent_way"

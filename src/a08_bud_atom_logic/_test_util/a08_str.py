@@ -3,6 +3,7 @@ from src.a00_data_toolbox._test_util.a00_str import (
     INSERT_str,
     sqlite_datatype_str,
 )
+from src.a06_bud_logic._test_util.a06_str import jkeys_str
 
 
 def DELETE_str() -> str:
@@ -27,10 +28,6 @@ def class_type_str() -> str:
 
 def nesting_order_str() -> str:
     return "nesting_order"
-
-
-def jkeys_str() -> str:
-    return "jkeys"
 
 
 def jvalues_str() -> str:

@@ -80,10 +80,10 @@ class TranBook:
         _offi_time_max: TimeLinePoint = None,
     ):
         if tran_time in get_empty_set_if_None(blocked_tran_times):
-            exception_str = f"Cannot set tranunit for tran_time={tran_time}, timelinepoint is blocked"
+            exception_str = f"Cannot set tranunit for tran_time={tran_time}, TimeLinePoint is blocked"
             raise tran_time_Exception(exception_str)
         if _offi_time_max != None and tran_time >= _offi_time_max:
-            exception_str = f"Cannot set tranunit for tran_time={tran_time}, timelinepoint is greater than current time={_offi_time_max}"
+            exception_str = f"Cannot set tranunit for tran_time={tran_time}, TimeLinePoint is greater than current time={_offi_time_max}"
             raise tran_time_Exception(exception_str)
         x_keylist = [owner_name, acct_name, tran_time]
         set_in_nested_dict(self.tranunits, x_keylist, amount)

@@ -27,7 +27,6 @@ from src.a06_bud_logic._test_util.a06_str import (
     debtor_respect_str,
     debtit_vote_str,
     denom_str,
-    event_int_str,
     fnigh_str,
     fopen_str,
     fund_coin_str,

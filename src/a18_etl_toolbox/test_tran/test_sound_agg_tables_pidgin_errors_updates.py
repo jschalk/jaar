@@ -1,30 +1,9 @@
 from src.a02_finance_logic._test_util.a02_str import owner_name_str, fisc_label_str
-from src.a06_bud_logic._test_util.a06_str import (
-    face_name_str,
-    event_int_str,
-    acct_name_str,
-    bud_acctunit_str,
-)
-from src.a16_pidgin_logic.pidgin import (
-    default_bridge_if_None,
-    default_unknown_str_if_None,
-)
+from src.a06_bud_logic._test_util.a06_str import acct_name_str, bud_acctunit_str
+from src.a09_pack_logic._test_util.a09_str import face_name_str, event_int_str
 from src.a16_pidgin_logic._test_util.a16_str import (
-    pidgin_label_str,
-    pidgin_way_str,
-    pidgin_name_str,
-    pidgin_title_str,
-    pidgin_core_str,
     inx_bridge_str,
     otx_bridge_str,
-    inx_label_str,
-    otx_label_str,
-    inx_way_str,
-    otx_way_str,
-    inx_name_str,
-    otx_name_str,
-    inx_title_str,
-    otx_title_str,
     unknown_str_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (

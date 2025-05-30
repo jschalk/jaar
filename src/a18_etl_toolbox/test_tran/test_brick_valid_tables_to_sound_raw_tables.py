@@ -1,10 +1,7 @@
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.a02_finance_logic._test_util.a02_str import owner_name_str, fisc_label_str
-from src.a06_bud_logic._test_util.a06_str import (
-    face_name_str,
-    acct_name_str,
-    event_int_str,
-)
+from src.a06_bud_logic._test_util.a06_str import acct_name_str
+from src.a09_pack_logic._test_util.a09_str import face_name_str, event_int_str
 from src.a16_pidgin_logic._test_util.a16_str import (
     inx_bridge_str,
     otx_bridge_str,

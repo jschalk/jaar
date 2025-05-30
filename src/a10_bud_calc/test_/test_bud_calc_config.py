@@ -12,7 +12,6 @@ from src.a06_bud_logic._test_util.a06_str import (
     bud_concept_laborlink_str,
     bud_concept_healerlink_str,
     bud_concept_factunit_str,
-    bud_groupunit_str,
     acct_name_str,
     addin_str,
     awardee_title_str,
@@ -55,7 +54,7 @@ from src.a08_bud_atom_logic._test_util.a08_str import (
     sqlite_datatype_str,
 )
 from src.a08_bud_atom_logic.atom_config import get_atom_config_dict
-from src.a10_bud_calc._test_util.a10_str import jmetrics_str
+from src.a10_bud_calc._test_util.a10_str import jmetrics_str, bud_groupunit_str
 from src.a10_bud_calc.bud_calc_config import (
     get_bud_calc_config_filename,
     config_file_path,

@@ -1,6 +1,5 @@
 from src.a01_way_logic.way import create_way, FiscLabel
-from src.a06_bud_logic._test_util.a06_str import bud_conceptunit_str
-from src.a06_bud_logic._test_util.a06_str import concept_way_str
+from src.a06_bud_logic._test_util.a06_str import bud_conceptunit_str, concept_way_str
 from src.a08_bud_atom_logic._test_util.a08_str import INSERT_str
 from src.a08_bud_atom_logic.atom import budatom_shop, BudAtom
 

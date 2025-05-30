@@ -18,10 +18,9 @@ from src.a06_bud_logic._test_util.a06_str import (
     bud_concept_laborlink_str,
     bud_concept_healerlink_str,
     bud_concept_factunit_str,
-    event_int_str,
-    face_name_str,
 )
 from src.a08_bud_atom_logic.atom_config import get_bud_dimens, get_delete_key_name
+from src.a09_pack_logic._test_util.a09_str import face_name_str, event_int_str
 from src.a15_fisc_logic._test_util.a15_str import (
     fiscunit_str,
     fisc_cashbook_str,

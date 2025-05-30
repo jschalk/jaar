@@ -1,9 +1,8 @@
+from src.a02_finance_logic._test_util.a02_str import offi_time_str, amount_str
+
+
 def timeline_str() -> str:
     return "timeline"
-
-
-def offi_time_str() -> str:
-    return "offi_time"
 
 
 def brokerunits_str() -> str:
@@ -12,10 +11,6 @@ def brokerunits_str() -> str:
 
 def cashbook_str() -> str:
     return "cashbook"
-
-
-def amount_str() -> str:
-    return "amount"
 
 
 def month_label_str() -> str:

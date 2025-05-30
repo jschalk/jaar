@@ -8,7 +8,6 @@ from src.a06_bud_logic._test_util.a06_str import (
     acct_name_str,
     awardee_title_str,
     rcontext_str,
-    face_name_str,
     fcontext_str,
     fstate_str,
     fopen_str,
@@ -27,6 +26,7 @@ from src.a08_bud_atom_logic.atom_config import (
     get_atom_args_class_types,
     get_all_bud_dimen_delete_keys,
 )
+from src.a09_pack_logic._test_util.a09_str import face_name_str
 from src.a15_fisc_logic._test_util.a15_str import (
     weekday_label_str,
     month_label_str,
