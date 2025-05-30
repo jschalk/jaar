@@ -133,14 +133,14 @@ def test_BudUnit_settle_bud_CorrectlySets_concept_dict():
         premises={wed.pstate: wed},
         _status=True,
         _task=False,
-        _rcontext_concept_active_value=True,
+        _rconcept_active_value=True,
     )
     sta_lh = reasonheir_shop(
         rcontext=nation_way,
         premises={usa.pstate: usa},
         _status=True,
         _task=False,
-        _rcontext_concept_active_value=True,
+        _rconcept_active_value=True,
     )
 
     x1_reasonunits = {

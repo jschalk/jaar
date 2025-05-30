@@ -11,6 +11,15 @@ from src.a04_reason_logic.reason_concept import (
     premiseunit_shop,
     premises_get_from_dict,
 )
+from src.a04_reason_logic._test_util.a04_str import (
+    _status_str,
+    _task_str,
+    bridge_str,
+    pdivisor_str,
+    pnigh_str,
+    popen_str,
+    pstate_str,
+)
 
 
 def test_PremiseUnit_Exists():
@@ -31,6 +40,17 @@ def test_PremiseUnit_Exists():
     assert email_premise._status is None
     assert email_premise._task is None
     assert email_premise.bridge is None
+    obj_attrs = set(email_premise.__dict__.keys())
+    print(sorted(list(obj_attrs)))
+    assert obj_attrs == {
+        _status_str(),
+        _task_str(),
+        bridge_str(),
+        pdivisor_str(),
+        pnigh_str(),
+        popen_str(),
+        pstate_str(),
+    }
 
 
 def test_premiseunit_shop_ReturnsObj():

@@ -2,6 +2,12 @@ from src.a01_term_logic.way import (
     get_default_fisc_label as root_label,
     default_bridge_if_None,
 )
+from src.a02_finance_logic._test_util.a02_str import (
+    bridge_str,
+    fisc_label_str,
+    owner_name_str,
+    fund_pool_str,
+)
 from src.a02_finance_logic.finance_config import (
     default_RespectBit_if_None,
     filter_penny,
@@ -11,6 +17,24 @@ from src.a02_finance_logic.finance_config import (
 )
 from src.a05_concept_logic.origin import originunit_shop
 from src.a06_bud_logic.bud import budunit_shop, BudUnit
+from src.a06_bud_logic._test_util.a06_str import (
+    _keeps_buildable_str,
+    _keeps_justified_str,
+    _offtrack_fund_str,
+    _offtrack_kids_mass_set_str,
+    _rational_str,
+    _reason_rcontexts_str,
+    _sum_healerlink_share_str,
+    _tree_traverse_count_str,
+    credor_respect_str,
+    debtor_respect_str,
+    fund_coin_str,
+    last_pack_id_str,
+    max_tree_traverse_str,
+    penny_str,
+    respect_bit_str,
+    tally_str,
+)
 from pytest import raises as pytest_raises
 
 
@@ -49,6 +73,38 @@ def test_BudUnit_Exists():
     assert x_bud._reason_rcontexts is None
     assert x_bud._range_inheritors is None
     assert str(type(x_bud.conceptroot)).find("None") == 8
+    obj_attrs = set(x_bud.__dict__.keys())
+    print(sorted(list(obj_attrs)))
+    assert obj_attrs == {
+        "_concept_dict",
+        "_healers_dict",
+        "_keep_dict",
+        _keeps_buildable_str(),
+        _keeps_justified_str(),
+        _offtrack_fund_str(),
+        _offtrack_kids_mass_set_str(),
+        "_range_inheritors",
+        _rational_str(),
+        _reason_rcontexts_str(),
+        _sum_healerlink_share_str(),
+        _tree_traverse_count_str(),
+        "accts",
+        bridge_str(),
+        "conceptroot",
+        credor_respect_str(),
+        debtor_respect_str(),
+        "_groupunits",
+        fisc_label_str(),
+        fund_coin_str(),
+        fund_pool_str(),
+        last_pack_id_str(),
+        max_tree_traverse_str(),
+        "originunit",
+        owner_name_str(),
+        penny_str(),
+        respect_bit_str(),
+        tally_str(),
+    }
 
 
 def test_budunit_shop_ReturnsObjectWithFilledFields():

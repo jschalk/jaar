@@ -388,7 +388,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[166] == "_all_acct_cred"
     assert table_sorting_priority[167] == "_keeps_justified"
     assert table_sorting_priority[168] == "_offtrack_fund"
-    assert table_sorting_priority[169] == "_rcontext_concept_active_value"
+    assert table_sorting_priority[169] == "_rconcept_active_value"
     assert table_sorting_priority[170] == "_irrational_debtit_belief"
     assert table_sorting_priority[171] == "_sum_healerlink_share"
     assert table_sorting_priority[172] == "_keeps_buildable"

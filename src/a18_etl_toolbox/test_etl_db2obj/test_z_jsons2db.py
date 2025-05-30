@@ -296,13 +296,13 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
     x_rconcept_active_requisite = 5
     x__task = 6
     x__status = 7
-    x__rcontext_concept_active_value = 8
+    x__rconcept_active_value = 8
     x_reasonheir = reasonheir_shop(rcontext=x_rcontext)
     x_reasonheir.rcontext = x_rcontext
     x_reasonheir.rconcept_active_requisite = x_rconcept_active_requisite
     x_reasonheir._task = x__task
     x_reasonheir._status = x__status
-    x_reasonheir._rcontext_concept_active_value = x__rcontext_concept_active_value
+    x_reasonheir._rconcept_active_value = x__rconcept_active_value
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -327,7 +327,7 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
             x_rconcept_active_requisite,
             x__task,
             x__status,
-            x__rcontext_concept_active_value,
+            x__rconcept_active_value,
         )
         expected_data = [expected_row1]
         assert rows == expected_data

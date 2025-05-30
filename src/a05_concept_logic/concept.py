@@ -866,9 +866,7 @@ class ConceptUnit:
             new_reasonheir.inherit_from_reasonheir(old_reasonheir)
 
             if rcontext_concept := bud_concept_dict.get(old_reasonheir.rcontext):
-                new_reasonheir.set_rcontext_concept_active_value(
-                    rcontext_concept._active
-                )
+                new_reasonheir.set_rconcept_active_value(rcontext_concept._active)
             self._reasonheirs[new_reasonheir.rcontext] = new_reasonheir
 
     def set_conceptroot_inherit_reasonheirs(self):

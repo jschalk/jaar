@@ -29,6 +29,10 @@ def fund_coin_str() -> str:
     return "fund_coin"
 
 
+def fund_pool_str() -> str:
+    return "fund_pool"
+
+
 def magnitude_str() -> str:
     return "magnitude"
 

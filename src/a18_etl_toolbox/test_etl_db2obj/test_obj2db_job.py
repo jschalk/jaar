@@ -198,7 +198,7 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
     x_rconcept_active_requisite = 3
     x__task = 4
     x__status = 5
-    x__rcontext_concept_active_value = 6
+    x__rconcept_active_value = 6
     values_dict = {
         "fisc_label": x_fisc_label,
         "owner_name": x_owner_name,
@@ -207,7 +207,7 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
         "rconcept_active_requisite": x_rconcept_active_requisite,
         "_task": x__task,
         "_status": x__status,
-        "_rcontext_concept_active_value": x__rcontext_concept_active_value,
+        "_rconcept_active_value": x__rconcept_active_value,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())

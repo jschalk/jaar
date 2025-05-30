@@ -13,6 +13,11 @@ from src.a04_reason_logic.reason_concept import (
     premiseunit_shop,
     reasons_get_from_dict,
 )
+from src.a04_reason_logic._test_util.a04_str import (
+    bridge_str,
+    rconcept_active_requisite_str,
+    rcontext_str,
+)
 
 
 def test_ReasonCore_Exists():
@@ -34,6 +39,14 @@ def test_ReasonCore_Exists():
     assert wkday_reason.premises == premises
     assert wkday_reason.rconcept_active_requisite is False
     assert wkday_reason.bridge is None
+    obj_attrs = set(wkday_reason.__dict__.keys())
+    print(sorted(list(obj_attrs)))
+    assert obj_attrs == {
+        bridge_str(),
+        "premises",
+        rconcept_active_requisite_str(),
+        rcontext_str(),
+    }
 
 
 def test_reasoncore_shop_ReturnsCorrectAttrWith_bridge():
@@ -84,7 +97,7 @@ def test_ReasonHeir_clear_CorrectlyClearsField():
     casa_reason.clear_status()
     # THEN
     assert casa_reason._status is None
-    assert casa_reason._rcontext_concept_active_value is None
+    assert casa_reason._rconcept_active_value is None
 
 
 def test_ReasonHeir_set_status_CorrectlySetsStatus():
@@ -147,18 +160,18 @@ def test_ReasonHeir_set_status_EmptyFactCorrectlySetsStatus():
     assert wkday_reason._status is False
 
 
-def test_ReasonHeir_set_rcontext_concept_active_value_Correctly():
+def test_ReasonHeir_set_rconcept_active_value_Correctly():
     # ESTABLISH
     day_str = "day"
     day_way = create_way(root_label(), day_str)
     day_reason = reasonheir_shop(rcontext=day_way)
-    assert day_reason._rcontext_concept_active_value is None
+    assert day_reason._rconcept_active_value is None
 
     # WHEN
-    day_reason.set_rcontext_concept_active_value(bool_x=True)
+    day_reason.set_rconcept_active_value(bool_x=True)
 
     # THEN
-    assert day_reason._rcontext_concept_active_value
+    assert day_reason._rconcept_active_value
 
 
 def test_ReasonHeir_set_status_BudTrueCorrectlySetsStatusTrue():
@@ -166,7 +179,7 @@ def test_ReasonHeir_set_status_BudTrueCorrectlySetsStatusTrue():
     wkday_str = "wkday"
     wkday_way = create_way(root_label(), wkday_str)
     wk_reason = reasonheir_shop(rcontext=wkday_way, rconcept_active_requisite=True)
-    wk_reason.set_rcontext_concept_active_value(bool_x=True)
+    wk_reason.set_rconcept_active_value(bool_x=True)
     assert wk_reason._status is None
 
     # WHEN
@@ -181,7 +194,7 @@ def test_ReasonHeir_set_status_BudFalseCorrectlySetsStatusTrue():
     wkday_str = "wkday"
     wkday_way = create_way(root_label(), wkday_str)
     wkday_reason = reasonheir_shop(wkday_way, rconcept_active_requisite=False)
-    wkday_reason.set_rcontext_concept_active_value(bool_x=False)
+    wkday_reason.set_rconcept_active_value(bool_x=False)
     assert wkday_reason._status is None
 
     # WHEN
@@ -196,7 +209,7 @@ def test_ReasonHeir_set_status_BudTrueCorrectlySetsStatusFalse():
     wkday_str = "wkday"
     wkday_way = create_way(root_label(), wkday_str)
     wkday_reason = reasonheir_shop(wkday_way, rconcept_active_requisite=True)
-    wkday_reason.set_rcontext_concept_active_value(bool_x=False)
+    wkday_reason.set_rconcept_active_value(bool_x=False)
     assert wkday_reason._status is None
 
     # WHEN
@@ -211,7 +224,7 @@ def test_ReasonHeir_set_status_BudNoneCorrectlySetsStatusFalse():
     wkday_str = "wkday"
     wkday_way = create_way(root_label(), wkday_str)
     wkday_reason = reasonheir_shop(wkday_way, rconcept_active_requisite=True)
-    wkday_reason.set_rcontext_concept_active_value(bool_x=None)
+    wkday_reason.set_rconcept_active_value(bool_x=None)
     assert wkday_reason._status is None
 
     # WHEN

@@ -2,6 +2,54 @@ from src.a01_term_logic._test_util.a01_str import bridge_str
 from src.a02_finance_logic._test_util.a02_str import acct_name_str
 
 
+def _credor_pool_str() -> str:
+    return "_credor_pool"
+
+
+def _debtor_pool_str() -> str:
+    return "_debtor_pool"
+
+
+def _fund_agenda_give_str() -> str:
+    return "_fund_agenda_give"
+
+
+def _fund_agenda_ratio_give_str() -> str:
+    return "_fund_agenda_ratio_give"
+
+
+def _fund_agenda_ratio_take_str() -> str:
+    return "_fund_agenda_ratio_take"
+
+
+def _fund_agenda_take_str() -> str:
+    return "_fund_agenda_take"
+
+
+def _fund_give_str() -> str:
+    return "_fund_give"
+
+
+def _fund_take_str() -> str:
+    return "_fund_take"
+
+
+def _inallocable_debtit_belief_str() -> str:
+    return "_inallocable_debtit_belief"
+
+
+def _irrational_debtit_belief_str() -> str:
+    return "_irrational_debtit_belief"
+
+
+def _memberships_str() -> str:
+    return "_memberships"
+
+
+def _respect_bit_str() -> str:
+    return "_respect_bit"
+
+
 def awardee_title_str() -> str:
     return "awardee_title"
 

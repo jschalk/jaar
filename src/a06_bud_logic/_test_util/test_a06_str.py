@@ -1,4 +1,12 @@
 from src.a06_bud_logic._test_util.a06_str import (
+    _keeps_buildable_str,
+    _keeps_justified_str,
+    _offtrack_fund_str,
+    _offtrack_kids_mass_set_str,
+    _rational_str,
+    _reason_rcontexts_str,
+    _sum_healerlink_share_str,
+    _tree_traverse_count_str,
     acct_pool_str,
     ancestors_str,
     attributes_str,
@@ -19,12 +27,30 @@ from src.a06_bud_logic._test_util.a06_str import (
     dimen_str,
     dimens_str,
     jkeys_str,
+    last_pack_id_str,
     mandate_str,
+    max_tree_traverse_str,
+    penny_str,
+    respect_bit_str,
+    tally_str,
     timeline_str,
 )
 
 
 def test_str_functions_ReturnsObj():
+    assert _keeps_buildable_str() == "_keeps_buildable"
+    assert _keeps_justified_str() == "_keeps_justified"
+    assert _offtrack_fund_str() == "_offtrack_fund"
+    assert _offtrack_kids_mass_set_str() == "_offtrack_kids_mass_set"
+    assert _rational_str() == "_rational"
+    assert _reason_rcontexts_str() == "_reason_rcontexts"
+    assert _sum_healerlink_share_str() == "_sum_healerlink_share"
+    assert _tree_traverse_count_str() == "_tree_traverse_count"
+    assert last_pack_id_str() == "last_pack_id"
+    assert max_tree_traverse_str() == "max_tree_traverse"
+    assert penny_str() == "penny"
+    assert respect_bit_str() == "respect_bit"
+    assert tally_str() == "tally"
     assert acct_pool_str() == "acct_pool"
     assert credit_belief_str() == "credit_belief"
     assert credor_respect_str() == "credor_respect"

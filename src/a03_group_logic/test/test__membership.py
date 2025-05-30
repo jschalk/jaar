@@ -14,6 +14,20 @@ from src.a03_group_logic.group import (
     AwardHeir,
     awardheir_shop,
 )
+from src.a03_group_logic._test_util.a03_str import (
+    _credor_pool_str,
+    _debtor_pool_str,
+    _fund_agenda_give_str,
+    _fund_agenda_ratio_give_str,
+    _fund_agenda_ratio_take_str,
+    _fund_agenda_take_str,
+    _fund_give_str,
+    _fund_take_str,
+    acct_name_str,
+    credit_vote_str,
+    debtit_vote_str,
+    group_title_str,
+)
 
 
 def test_GroupTitle_exists():
@@ -51,6 +65,22 @@ def test_MemberShip_exists():
     assert not swim_membership._fund_agenda_ratio_give
     assert not swim_membership._fund_agenda_ratio_take
     assert not swim_membership.acct_name
+    obj_attrs = set(swim_membership.__dict__.keys())
+    print(sorted(list(obj_attrs)))
+    assert obj_attrs == {
+        _credor_pool_str(),
+        _debtor_pool_str(),
+        _fund_agenda_give_str(),
+        _fund_agenda_ratio_give_str(),
+        _fund_agenda_ratio_take_str(),
+        _fund_agenda_take_str(),
+        _fund_give_str(),
+        _fund_take_str(),
+        acct_name_str(),
+        credit_vote_str(),
+        debtit_vote_str(),
+        group_title_str(),
+    }
 
 
 def test_membership_shop_ReturnsObj():

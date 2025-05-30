@@ -1,4 +1,16 @@
 from src.a03_group_logic._test_util.a03_str import (
+    _credor_pool_str,
+    _debtor_pool_str,
+    _fund_agenda_give_str,
+    _fund_agenda_ratio_give_str,
+    _fund_agenda_ratio_take_str,
+    _fund_agenda_take_str,
+    _fund_give_str,
+    _fund_take_str,
+    _inallocable_debtit_belief_str,
+    _irrational_debtit_belief_str,
+    _memberships_str,
+    _respect_bit_str,
     awardee_title_str,
     credit_belief_str,
     credit_vote_str,
@@ -15,6 +27,18 @@ from src.a03_group_logic._test_util.a03_str import (
 
 def test_str_functions_ReturnsObj():
     # ESTABLISH
+    assert _credor_pool_str() == "_credor_pool"
+    assert _debtor_pool_str() == "_debtor_pool"
+    assert _fund_agenda_give_str() == "_fund_agenda_give"
+    assert _fund_agenda_ratio_give_str() == "_fund_agenda_ratio_give"
+    assert _fund_agenda_ratio_take_str() == "_fund_agenda_ratio_take"
+    assert _fund_agenda_take_str() == "_fund_agenda_take"
+    assert _fund_give_str() == "_fund_give"
+    assert _fund_take_str() == "_fund_take"
+    assert _inallocable_debtit_belief_str() == "_inallocable_debtit_belief"
+    assert _irrational_debtit_belief_str() == "_irrational_debtit_belief"
+    assert _memberships_str() == "_memberships"
+    assert _respect_bit_str() == "_respect_bit"
     assert credit_belief_str() == "credit_belief"
     assert debtit_belief_str() == "debtit_belief"
     assert credit_vote_str() == "credit_vote"

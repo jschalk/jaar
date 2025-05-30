@@ -11,9 +11,15 @@ from src.a04_reason_logic.reason_concept import (
     factunits_get_from_dict,
     get_factunit_from_tuple,
 )
+from src.a04_reason_logic._test_util.a04_str import (
+    fcontext_str,
+    fnigh_str,
+    fopen_str,
+    fstate_str,
+)
 
 
-def test_FactUnit_exists():
+def test_FactUnit_Exists():
     # ESTABLISH / WHEN
     x_fact = FactUnit()
 
@@ -22,9 +28,12 @@ def test_FactUnit_exists():
     assert not x_fact.fstate
     assert not x_fact.fopen
     assert not x_fact.fnigh
+    obj_attrs = set(x_fact.__dict__.keys())
+    print(sorted(list(obj_attrs)))
+    assert obj_attrs == {fcontext_str(), fnigh_str(), fopen_str(), fstate_str()}
 
 
-def test_FactUnit_exists():
+def test_FactUnit_DataClass_function():
     # ESTABLISH
     wkday_str = "wkdays"
     wkday_way = create_way(root_label(), wkday_str)

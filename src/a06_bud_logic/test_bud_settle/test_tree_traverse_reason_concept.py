@@ -162,7 +162,7 @@ def test_BudUnit_reasonheirs_AreCorrectlyInherited_v1():
         rcontext=wk_way,
         premises=premises,
         _status=False,
-        _rcontext_concept_active_value=True,
+        _rconcept_active_value=True,
     )
     tue_task = built_wk_reasonheir.premises.get(premise_tue.pstate)._task
     assert premise_tue._task == tue_task
@@ -192,7 +192,7 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
         rcontext=wk_way,
         premises=premises_x,
         _status=False,
-        _rcontext_concept_active_value=True,
+        _rconcept_active_value=True,
     )
     a4_bud.edit_concept_attr(casa_way, reason=casa_wk_build_reasonunit)
 
@@ -224,8 +224,8 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
     )
     assert rla_wk_reasonheir._status == casa_wk_built_reasonheir._status
     assert rla_wk_reasonheir._task == casa_wk_built_reasonheir._task
-    assert rla_wk_reasonheir._rcontext_concept_active_value
-    assert rla_wk_reasonheir._rcontext_concept_active_value != casa_wk_built_reasonheir
+    assert rla_wk_reasonheir._rconcept_active_value
+    assert rla_wk_reasonheir._rconcept_active_value != casa_wk_built_reasonheir
 
     # 3
     cost_wk_reasonheir = cost_concept._reasonheirs[wk_way]
@@ -237,8 +237,8 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
     )
     assert cost_wk_reasonheir._status == casa_wk_built_reasonheir._status
     assert cost_wk_reasonheir._task == casa_wk_built_reasonheir._task
-    assert cost_wk_reasonheir._rcontext_concept_active_value
-    assert cost_wk_reasonheir._rcontext_concept_active_value != casa_wk_built_reasonheir
+    assert cost_wk_reasonheir._rconcept_active_value
+    assert cost_wk_reasonheir._rconcept_active_value != casa_wk_built_reasonheir
 
 
 def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
@@ -259,7 +259,7 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
         rcontext=wk_way,
         premises=premises,
         _status=False,
-        _rcontext_concept_active_value=True,
+        _rconcept_active_value=True,
     )
     a4_bud.edit_concept_attr(casa_way, reason=casa_wk_build_reasonunit)
     rla_str = "hp"
@@ -297,8 +297,8 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
     )
     assert rla_wk_reasonheir._status == casa_wk_built_reasonheir._status
     assert rla_wk_reasonheir._task == casa_wk_built_reasonheir._task
-    assert rla_wk_reasonheir._rcontext_concept_active_value
-    assert rla_wk_reasonheir._rcontext_concept_active_value != casa_wk_built_reasonheir
+    assert rla_wk_reasonheir._rconcept_active_value
+    assert rla_wk_reasonheir._rconcept_active_value != casa_wk_built_reasonheir
 
     # 3
     cost_wk_reasonheir = cost_concept._reasonheirs[wk_way]
@@ -310,8 +310,8 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
     )
     assert cost_wk_reasonheir._status == casa_wk_built_reasonheir._status
     assert cost_wk_reasonheir._task == casa_wk_built_reasonheir._task
-    assert cost_wk_reasonheir._rcontext_concept_active_value
-    assert cost_wk_reasonheir._rcontext_concept_active_value != casa_wk_built_reasonheir
+    assert cost_wk_reasonheir._rconcept_active_value
+    assert cost_wk_reasonheir._rconcept_active_value != casa_wk_built_reasonheir
 
 
 def test_BudUnit_ReasonUnits_set_UnCoupledMethod():

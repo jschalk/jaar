@@ -11,6 +11,7 @@ from src.a02_finance_logic._test_util.a02_str import (
     penny_str,
     addin_str,
     amount_str,
+    fund_pool_str,
 )
 from src.a03_group_logic._test_util.a03_str import (
     credit_belief_str,
@@ -51,6 +52,38 @@ from src.a05_concept_logic._test_util.a05_str import (
     mass_str,
     healer_name_str,
 )
+
+
+def _keeps_buildable_str() -> str:
+    return "_keeps_buildable"
+
+
+def _keeps_justified_str() -> str:
+    return "_keeps_justified"
+
+
+def _offtrack_fund_str() -> str:
+    return "_offtrack_fund"
+
+
+def _offtrack_kids_mass_set_str() -> str:
+    return "_offtrack_kids_mass_set"
+
+
+def _rational_str() -> str:
+    return "_rational"
+
+
+def _reason_rcontexts_str() -> str:
+    return "_reason_rcontexts"
+
+
+def _sum_healerlink_share_str() -> str:
+    return "_sum_healerlink_share"
+
+
+def _tree_traverse_count_str() -> str:
+    return "_tree_traverse_count"
 
 
 def acct_pool_str() -> str:
@@ -125,8 +158,20 @@ def jkeys_str() -> str:
     return "jkeys"
 
 
+def last_pack_id_str() -> str:
+    return "last_pack_id"
+
+
 def mandate_str() -> str:
     return "mandate"
+
+
+def max_tree_traverse_str() -> str:
+    return "max_tree_traverse"
+
+
+def tally_str() -> str:
+    return "tally"
 
 
 def timeline_str() -> str:

@@ -217,8 +217,8 @@ def create_budreas_metrics_insert_sqlstr(values_dict: dict[str,]):
     rconcept_active_requisite = values_dict.get("rconcept_active_requisite")
     _task = values_dict.get("_task")
     _status = values_dict.get("_status")
-    _rcontext_concept_active_value = values_dict.get("_rcontext_concept_active_value")
-    return f"""INSERT INTO bud_concept_reasonunit_job (fisc_label, owner_name, concept_way, rcontext, rconcept_active_requisite, _task, _status, _rcontext_concept_active_value)
+    _rconcept_active_value = values_dict.get("_rconcept_active_value")
+    return f"""INSERT INTO bud_concept_reasonunit_job (fisc_label, owner_name, concept_way, rcontext, rconcept_active_requisite, _task, _status, _rconcept_active_value)
 VALUES (
   {sqlite_obj_str(fisc_label, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
@@ -227,7 +227,7 @@ VALUES (
 , {sqlite_obj_str(rconcept_active_requisite, "INTEGER")}
 , {sqlite_obj_str(_task, "INTEGER")}
 , {sqlite_obj_str(_status, "INTEGER")}
-, {sqlite_obj_str(_rcontext_concept_active_value, "INTEGER")}
+, {sqlite_obj_str(_rconcept_active_value, "INTEGER")}
 )
 ;
 """

@@ -3,12 +3,56 @@ from src.a01_term_logic.way import (
     create_way,
     default_bridge_if_None,
 )
+from src.a01_term_logic._test_util.a01_str import bridge_str, parent_way_str
 from src.a02_finance_logic.finance_config import default_fund_coin_if_None
+from src.a02_finance_logic._test_util.a02_str import (
+    fisc_label_str,
+    fund_coin_str,
+    addin_str,
+)
 from src.a03_group_logic.group import awardlink_shop
+from src.a04_reason_logic.reason_labor import laborunit_shop
+from src.a04_reason_logic._test_util.a04_str import _task_str
 from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a05_concept_logic.healer import healerlink_shop
 from src.a05_concept_logic.origin import originunit_shop
 from src.a05_concept_logic.concept import ConceptUnit, conceptunit_shop
+from src.a05_concept_logic._test_util.a05_str import (
+    _active_hx_str,
+    _all_acct_cred_str,
+    _all_acct_debt_str,
+    _awardheirs_str,
+    _awardlines_str,
+    _descendant_pledge_count_str,
+    _factheirs_str,
+    _fund_cease_str,
+    _fund_onset_str,
+    _fund_ratio_str,
+    _gogo_calc_str,
+    _healerlink_ratio_str,
+    _is_expanded_str,
+    _kids_str,
+    _originunit_str,
+    _range_evaluated_str,
+    _reasonheirs_str,
+    _stop_calc_str,
+    _uid_str,
+    begin_str,
+    bridge_str,
+    close_str,
+    concept_label_str,
+    denom_str,
+    fisc_label_str,
+    fund_coin_str,
+    gogo_want_str,
+    healerlink_str,
+    mass_str,
+    morph_str,
+    numor_str,
+    pledge_str,
+    problem_bool_str,
+    stop_want_str,
+)
 
 
 def test_ConceptUnit_Exists():
@@ -57,6 +101,55 @@ def test_ConceptUnit_Exists():
     assert x_conceptunit.root is None
     assert x_conceptunit.fisc_label is None
     assert x_conceptunit._healerlink_ratio is None
+    obj_attrs = set(x_conceptunit.__dict__.keys())
+    print(sorted(list(obj_attrs)))
+    assert obj_attrs == {
+        "_active",
+        _active_hx_str(),
+        _all_acct_cred_str(),
+        _all_acct_debt_str(),
+        _awardheirs_str(),
+        _awardlines_str(),
+        _descendant_pledge_count_str(),
+        _factheirs_str(),
+        _fund_cease_str(),
+        _fund_onset_str(),
+        _fund_ratio_str(),
+        _gogo_calc_str(),
+        _healerlink_ratio_str(),
+        _is_expanded_str(),
+        _kids_str(),
+        "_laborheir",
+        "_level",
+        _originunit_str(),
+        _range_evaluated_str(),
+        _reasonheirs_str(),
+        _stop_calc_str(),
+        "_task",
+        _uid_str(),
+        addin_str(),
+        "awardlinks",
+        begin_str(),
+        bridge_str(),
+        close_str(),
+        concept_label_str(),
+        denom_str(),
+        "factunits",
+        fisc_label_str(),
+        fund_coin_str(),
+        gogo_want_str(),
+        healerlink_str(),
+        "laborunit",
+        mass_str(),
+        morph_str(),
+        numor_str(),
+        parent_way_str(),
+        pledge_str(),
+        problem_bool_str(),
+        "reasonunits",
+        "root",
+        stop_want_str(),
+    }
 
 
 def test_conceptunit_shop_WithNoParametersReturnsObj():
