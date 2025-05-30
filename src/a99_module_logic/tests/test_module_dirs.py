@@ -137,7 +137,6 @@ def test_CheckAllPythonFileImportsAreInCorrectFormat():
                     if str(file_import[0]).endswith("_str"):
                         print(f"{module_desc} {filename} {file_import[0]=}")
                     assert not str(file_import[0]).endswith("_str")
-    assert 1 == 2
 
 
 def check_module_imports_are_ordered(imports: list[list], file_path: str, desc_number):
@@ -231,7 +230,7 @@ def test_StrFunctionsAreAllTested():
             assert os_path_exists(test_file_path)
             test_file_imports = get_imports_from_file(test_file_path)
             assert len(test_file_imports) == 1
-            check_import_objs_are_ordered(test_file_imports)
+            check_import_objs_are_ordered(test_file_imports, test_file_path)
             test_functions = get_function_names_from_file(test_file_path)
             assert test_functions == ["test_str_functions_ReturnsObj"]
             check_str_func_test_file_has_needed_asserts(
