@@ -10,7 +10,6 @@ from src.a03_group_logic._test_util.a03_str import (
     _inallocable_debtit_belief_str,
     _irrational_debtit_belief_str,
     _memberships_str,
-    _respect_bit_str,
     awardee_title_str,
     credit_belief_str,
     credit_vote_str,
@@ -38,7 +37,6 @@ def test_str_functions_ReturnsObj():
     assert _inallocable_debtit_belief_str() == "_inallocable_debtit_belief"
     assert _irrational_debtit_belief_str() == "_irrational_debtit_belief"
     assert _memberships_str() == "_memberships"
-    assert _respect_bit_str() == "_respect_bit"
     assert credit_belief_str() == "credit_belief"
     assert debtit_belief_str() == "debtit_belief"
     assert credit_vote_str() == "credit_vote"

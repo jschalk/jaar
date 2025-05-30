@@ -46,10 +46,6 @@ def _memberships_str() -> str:
     return "_memberships"
 
 
-def _respect_bit_str() -> str:
-    return "_respect_bit"
-
-
 def awardee_title_str() -> str:
     return "awardee_title"
 

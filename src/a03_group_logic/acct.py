@@ -35,7 +35,7 @@ class Bad_acct_nameMemberShipException(Exception):
 class AcctCore:
     acct_name: AcctName = None
     bridge: str = None
-    _respect_bit: float = None
+    respect_bit: float = None
 
     def set_nameterm(self, x_acct_name: AcctName):
         self.acct_name = validate_labelterm(x_acct_name, self.bridge)
@@ -66,7 +66,7 @@ class AcctUnit(AcctCore):
     _fund_agenda_ratio_take: float = None
 
     def set_respect_bit(self, x_respect_bit: float):
-        self._respect_bit = x_respect_bit
+        self.respect_bit = x_respect_bit
 
     def set_credor_debtit_belief(
         self,
@@ -196,7 +196,7 @@ class AcctUnit(AcctCore):
             x_membership.group_title: x_membership.credit_vote
             for x_membership in self._memberships.values()
         }
-        allot_dict = allot_scale(ledger_dict, self._credor_pool, self._respect_bit)
+        allot_dict = allot_scale(ledger_dict, self._credor_pool, self.respect_bit)
         for x_group_title, group_credor_pool in allot_dict.items():
             self.get_membership(x_group_title)._credor_pool = group_credor_pool
 
@@ -206,7 +206,7 @@ class AcctUnit(AcctCore):
             x_membership.group_title: x_membership.debtit_vote
             for x_membership in self._memberships.values()
         }
-        allot_dict = allot_scale(ledger_dict, self._debtor_pool, self._respect_bit)
+        allot_dict = allot_scale(ledger_dict, self._debtor_pool, self.respect_bit)
         for x_group_title, group_debtor_pool in allot_dict.items():
             self.get_membership(x_group_title)._debtor_pool = group_debtor_pool
 
@@ -274,7 +274,7 @@ def acctunit_shop(
     credit_belief: int = None,
     debtit_belief: int = None,
     bridge: str = None,
-    _respect_bit: float = None,
+    respect_bit: float = None,
 ) -> AcctUnit:
     x_acctunit = AcctUnit(
         credit_belief=get_1_if_None(credit_belief),
@@ -291,7 +291,7 @@ def acctunit_shop(
         _fund_agenda_ratio_give=0,
         _fund_agenda_ratio_take=0,
         bridge=default_bridge_if_None(bridge),
-        _respect_bit=default_RespectBit_if_None(_respect_bit),
+        respect_bit=default_RespectBit_if_None(respect_bit),
     )
     x_acctunit.set_nameterm(x_acct_name=acct_name)
     return x_acctunit

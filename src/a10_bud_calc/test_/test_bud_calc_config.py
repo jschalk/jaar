@@ -13,7 +13,6 @@ from src.a03_group_logic._test_util.a03_str import (
     _fund_take_str,
     _inallocable_debtit_belief_str,
     _irrational_debtit_belief_str,
-    _respect_bit_str,
     awardee_title_str,
     credit_belief_str,
     credit_vote_str,
@@ -94,7 +93,6 @@ from src.a06_bud_logic._test_util.a06_str import (
     numor_str,
     popen_str,
     penny_str,
-    respect_bit_str,
     concept_way_str,
     stop_want_str,
     NameTerm_str,
@@ -107,7 +105,6 @@ from src.a06_bud_logic._test_util.a06_str import (
     _tree_traverse_count_str,
     fund_pool_str,
     max_tree_traverse_str,
-    respect_bit_str,
     tally_str,
 )
 from src.a08_bud_atom_logic._test_util.a08_str import (
@@ -817,18 +814,18 @@ def test_get_bud_calc_args_type_dict_ReturnsObj():
     # THEN
     assert bud_calc_args_type_dict.get(acct_name_str()) == NameTerm_str()
     assert bud_calc_args_type_dict.get(group_title_str()) == TitleTerm_str()
-    assert bud_calc_args_type_dict.get("_credor_pool") == "float"
-    assert bud_calc_args_type_dict.get("_debtor_pool") == "float"
-    assert bud_calc_args_type_dict.get("_fund_agenda_give") == "float"
-    assert bud_calc_args_type_dict.get("_fund_agenda_ratio_give") == "float"
-    assert bud_calc_args_type_dict.get("_fund_agenda_ratio_take") == "float"
-    assert bud_calc_args_type_dict.get("_fund_agenda_take") == "float"
-    assert bud_calc_args_type_dict.get("_fund_give") == "float"
-    assert bud_calc_args_type_dict.get("_fund_take") == "float"
+    assert bud_calc_args_type_dict.get(_credor_pool_str()) == "float"
+    assert bud_calc_args_type_dict.get(_debtor_pool_str()) == "float"
+    assert bud_calc_args_type_dict.get(_fund_agenda_give_str()) == "float"
+    assert bud_calc_args_type_dict.get(_fund_agenda_ratio_give_str()) == "float"
+    assert bud_calc_args_type_dict.get(_fund_agenda_ratio_take_str()) == "float"
+    assert bud_calc_args_type_dict.get(_fund_agenda_take_str()) == "float"
+    assert bud_calc_args_type_dict.get(_fund_give_str()) == "float"
+    assert bud_calc_args_type_dict.get(_fund_take_str()) == "float"
     assert bud_calc_args_type_dict.get(credit_vote_str()) == "int"
     assert bud_calc_args_type_dict.get(debtit_vote_str()) == "int"
-    assert bud_calc_args_type_dict.get("_inallocable_debtit_belief") == "float"
-    assert bud_calc_args_type_dict.get("_irrational_debtit_belief") == "float"
+    assert bud_calc_args_type_dict.get(_inallocable_debtit_belief_str()) == "float"
+    assert bud_calc_args_type_dict.get(_irrational_debtit_belief_str()) == "float"
     assert bud_calc_args_type_dict.get(credit_belief_str()) == "float"
     assert bud_calc_args_type_dict.get(debtit_belief_str()) == "float"
     assert bud_calc_args_type_dict.get(addin_str()) == "float"
@@ -836,16 +833,16 @@ def test_get_bud_calc_args_type_dict_ReturnsObj():
     assert bud_calc_args_type_dict.get(close_str()) == "float"
     assert bud_calc_args_type_dict.get(denom_str()) == "int"
     assert bud_calc_args_type_dict.get(gogo_want_str()) == "float"
-    assert bud_calc_args_type_dict.get("mass") == "int"
+    assert bud_calc_args_type_dict.get(mass_str()) == "int"
     assert bud_calc_args_type_dict.get(morph_str()) == "bool"
     assert bud_calc_args_type_dict.get(numor_str()) == "int"
-    assert bud_calc_args_type_dict.get("pledge") == "bool"
-    assert bud_calc_args_type_dict.get("problem_bool") == "bool"
+    assert bud_calc_args_type_dict.get(pledge_str()) == "bool"
+    assert bud_calc_args_type_dict.get(problem_bool_str()) == "bool"
     assert bud_calc_args_type_dict.get(stop_want_str()) == "float"
     assert bud_calc_args_type_dict.get(awardee_title_str()) == TitleTerm_str()
     assert bud_calc_args_type_dict.get(concept_way_str()) == WayTerm_str()
-    assert bud_calc_args_type_dict.get("give_force") == "float"
-    assert bud_calc_args_type_dict.get("take_force") == "float"
+    assert bud_calc_args_type_dict.get(give_force_str()) == "float"
+    assert bud_calc_args_type_dict.get(take_force_str()) == "float"
     assert bud_calc_args_type_dict.get(rcontext_str()) == WayTerm_str()
     assert bud_calc_args_type_dict.get(fnigh_str()) == "float"
     assert bud_calc_args_type_dict.get(fopen_str()) == "float"
@@ -854,37 +851,37 @@ def test_get_bud_calc_args_type_dict_ReturnsObj():
     assert bud_calc_args_type_dict.get(pstate_str()) == WayTerm_str()
     assert bud_calc_args_type_dict.get("_status") == "int"
     assert bud_calc_args_type_dict.get("_task") == "int"
-    assert bud_calc_args_type_dict.get("pdivisor") == "int"
+    assert bud_calc_args_type_dict.get(pdivisor_str()) == "int"
     assert bud_calc_args_type_dict.get(pnigh_str()) == "float"
     assert bud_calc_args_type_dict.get(popen_str()) == "float"
     assert bud_calc_args_type_dict.get("_rconcept_active_value") == "int"
     assert bud_calc_args_type_dict.get("rconcept_active_requisite") == "bool"
-    assert bud_calc_args_type_dict.get("labor_title") == TitleTerm_str()
+    assert bud_calc_args_type_dict.get(labor_title_str()) == TitleTerm_str()
     assert bud_calc_args_type_dict.get("_owner_name_labor") == "int"
     assert bud_calc_args_type_dict.get("_active") == "int"
-    assert bud_calc_args_type_dict.get("_all_acct_cred") == "int"
-    assert bud_calc_args_type_dict.get("_all_acct_debt") == "int"
-    assert bud_calc_args_type_dict.get("_descendant_pledge_count") == "int"
-    assert bud_calc_args_type_dict.get("_fund_cease") == "float"
-    assert bud_calc_args_type_dict.get("_fund_onset") == "float"
-    assert bud_calc_args_type_dict.get("_fund_ratio") == "float"
-    assert bud_calc_args_type_dict.get("_gogo_calc") == "float"
+    assert bud_calc_args_type_dict.get(_all_acct_cred_str()) == "int"
+    assert bud_calc_args_type_dict.get(_all_acct_debt_str()) == "int"
+    assert bud_calc_args_type_dict.get(_descendant_pledge_count_str()) == "int"
+    assert bud_calc_args_type_dict.get(_fund_cease_str()) == "float"
+    assert bud_calc_args_type_dict.get(_fund_onset_str()) == "float"
+    assert bud_calc_args_type_dict.get(_fund_ratio_str()) == "float"
+    assert bud_calc_args_type_dict.get(_gogo_calc_str()) == "float"
     assert bud_calc_args_type_dict.get("_healerlink_ratio") == "float"
     assert bud_calc_args_type_dict.get("_level") == "int"
-    assert bud_calc_args_type_dict.get("_range_evaluated") == "int"
-    assert bud_calc_args_type_dict.get("_stop_calc") == "float"
+    assert bud_calc_args_type_dict.get(_range_evaluated_str()) == "int"
+    assert bud_calc_args_type_dict.get(_stop_calc_str()) == "float"
     assert bud_calc_args_type_dict.get("_keeps_buildable") == "int"
     assert bud_calc_args_type_dict.get("_keeps_justified") == "int"
-    assert bud_calc_args_type_dict.get("_offtrack_fund") == "int"
-    assert bud_calc_args_type_dict.get("_rational") == "bool"
-    assert bud_calc_args_type_dict.get("_sum_healerlink_share") == "float"
-    assert bud_calc_args_type_dict.get("_tree_traverse_count") == "int"
+    assert bud_calc_args_type_dict.get(_offtrack_fund_str()) == "int"
+    assert bud_calc_args_type_dict.get(_rational_str()) == "bool"
+    assert bud_calc_args_type_dict.get(_sum_healerlink_share_str()) == "float"
+    assert bud_calc_args_type_dict.get(_tree_traverse_count_str()) == "int"
     assert bud_calc_args_type_dict.get(credor_respect_str()) == "float"
     assert bud_calc_args_type_dict.get(debtor_respect_str()) == "float"
     assert bud_calc_args_type_dict.get(fund_coin_str()) == "float"
-    assert bud_calc_args_type_dict.get("fund_pool") == "float"
-    assert bud_calc_args_type_dict.get("max_tree_traverse") == "int"
+    assert bud_calc_args_type_dict.get(fund_pool_str()) == "float"
+    assert bud_calc_args_type_dict.get(max_tree_traverse_str()) == "int"
     assert bud_calc_args_type_dict.get(penny_str()) == "float"
     assert bud_calc_args_type_dict.get(respect_bit_str()) == "float"
-    assert bud_calc_args_type_dict.get("tally") == "int"
+    assert bud_calc_args_type_dict.get(tally_str()) == "int"
     assert len(bud_calc_args_type_dict) == 72

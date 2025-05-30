@@ -94,7 +94,7 @@ def test_BudUnit_add_acctunit_CorrectlySets_accts():
     assert len(yao_bud.get_acctunit_group_titles_dict()) == 3
     assert yao_bud.accts.get(xio_str).credit_belief == 17
     assert yao_bud.accts.get(sue_str).debtit_belief == 5
-    assert yao_bud.accts.get(xio_str)._respect_bit == x_respect_bit
+    assert yao_bud.accts.get(xio_str).respect_bit == x_respect_bit
 
 
 def test_BudUnit_acct_exists_ReturnsObj():

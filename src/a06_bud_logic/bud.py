@@ -349,8 +349,8 @@ class BudUnit:
     def set_acctunit(self, x_acctunit: AcctUnit, auto_set_membership: bool = True):
         if x_acctunit.bridge != self.bridge:
             x_acctunit.bridge = self.bridge
-        if x_acctunit._respect_bit != self.respect_bit:
-            x_acctunit._respect_bit = self.respect_bit
+        if x_acctunit.respect_bit != self.respect_bit:
+            x_acctunit.respect_bit = self.respect_bit
         if auto_set_membership and x_acctunit.memberships_exist() is False:
             x_acctunit.add_membership(x_acctunit.acct_name)
         self.accts[x_acctunit.acct_name] = x_acctunit
