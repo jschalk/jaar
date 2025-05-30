@@ -1,7 +1,6 @@
 from src.a08_bud_atom_logic._test_util.a08_str import (
-    INSERT_str,
     DELETE_str,
-    UPDATE_str,
+    atom_hx_str,
     dimen_str,
     column_order_str,
     crud_str,
@@ -11,13 +10,11 @@ from src.a08_bud_atom_logic._test_util.a08_str import (
     nesting_order_str,
     normal_specs_str,
     normal_table_name_str,
-    sqlite_datatype_str,
 )
 
 
 def test_str_functions_ReturnsObj():
-    assert INSERT_str() == "INSERT"
-    assert UPDATE_str() == "UPDATE"
+    assert atom_hx_str() == "atom_hx"
     assert DELETE_str() == "DELETE"
     assert dimen_str() == "dimen"
     assert column_order_str() == "column_order"
@@ -28,4 +25,3 @@ def test_str_functions_ReturnsObj():
     assert nesting_order_str() == "nesting_order"
     assert normal_specs_str() == "normal_specs"
     assert normal_table_name_str() == "normal_table_name"
-    assert sqlite_datatype_str() == "sqlite_datatype"

@@ -1,3 +1,4 @@
+from src.a01_way_logic._test_util.a01_str import bridge_str
 from src.a02_finance_logic.finance_config import TimeLinePoint
 from src.a06_bud_logic.bud import budunit_shop
 from src.a07_calendar_logic._test_util.calendar_examples import (
@@ -8,6 +9,7 @@ from src.a07_calendar_logic._test_util.calendar_examples import (
     five_str,
 )
 from src.a07_calendar_logic.chrono import (
+    TimeLineLabel,
     C400Constants,
     get_c400_constants,
     day_length,
@@ -39,6 +41,18 @@ from src.a07_calendar_logic._test_util.a07_str import (
     yr4_clean_str,
 )
 from copy import deepcopy as copy_deepcopy
+from inspect import getdoc as inspect_getdoc
+
+
+def test_TimeLineLabel_exists():
+    # ESTABLISH
+    empty_str = ""
+    # WHEN
+    x_timelinelabel = TimeLineLabel(empty_str)
+    # THEN
+    assert x_timelinelabel == empty_str
+    doc_str = f"TimeLineLabel is required for every TimeLineUnit. It is a LabelStr that must not contain the {bridge_str()}."
+    assert inspect_getdoc(x_timelinelabel) == doc_str
 
 
 def test_TimeLinePoint_Exists():

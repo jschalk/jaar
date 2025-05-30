@@ -9,7 +9,6 @@ from src.a08_bud_atom_logic._test_util.a08_str import (
 )
 from src.a16_pidgin_logic._test_util.a16_str import (
     pidginunit_str,
-    pidgin_filename_str,
     otx_bridge_str,
     inx_bridge_str,
     inx_title_str,
@@ -33,6 +32,7 @@ from src.a16_pidgin_logic.pidgin_config import (
     config_file_dir,
     get_pidgin_dimens,
     get_pidgin_config_filename,
+    get_pidgin_filename,
     get_pidgin_config_dict,
     get_pidgin_args_dimen_mapping,
     get_quick_pidgens_column_ref,
@@ -45,6 +45,11 @@ from os import getcwd as os_getcwd
 def test_get_pidgin_config_filename_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert get_pidgin_config_filename() == "pidgin_config.json"
+
+
+def test_get_pidgin_filename_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert get_pidgin_filename() == "pidgin.json"
 
 
 def test_config_file_dir_ReturnsObj() -> str:

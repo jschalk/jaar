@@ -13,6 +13,10 @@ def get_pidgin_config_filename() -> str:
     return "pidgin_config.json"
 
 
+def get_pidgin_filename() -> str:
+    return "pidgin.json"
+
+
 def get_pidgin_config_dict() -> dict:
     return open_json(config_file_dir(), get_pidgin_config_filename())
 

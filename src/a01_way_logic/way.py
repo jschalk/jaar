@@ -31,7 +31,7 @@ class NameStr(str):
 
 
 class OwnerName(NameStr):
-    """A LabelStr used to identify a BudUnit's owner_name"""
+    """A NameStr used to identify a BudUnit's owner"""
 
     pass
 
@@ -44,12 +44,6 @@ class AcctName(OwnerName):  # Created to help track the object class relations
 
 class HealerName(OwnerName):
     """A LabelStr used to identify a Problem's Healer"""
-
-    pass
-
-
-class TimeLineLabel(LabelStr):
-    "TimeLineLabel is required for every TimeLineUnit. It is a LabelStr that must not container the bridge."
 
     pass
 
@@ -80,10 +74,6 @@ class WorldID(str):
 
 class FaceName(NameStr):
     pass
-
-
-def get_default_face_name() -> FaceName:
-    return FaceName("Face1234")
 
 
 class EventInt(int):

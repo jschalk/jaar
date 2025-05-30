@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.dict_toolbox import get_1_if_None
 from src.a00_data_toolbox.file_toolbox import open_json, create_path
-from src.a01_way_logic.way import WayStr, TimeLineLabel
+from src.a01_way_logic.way import WayStr, LabelStr
 from src.a05_concept_logic.concept import (
     conceptunit_shop,
     ConceptUnit,
@@ -11,6 +11,12 @@ from src.a06_bud_logic.bud import BudUnit
 from datetime import datetime
 from dataclasses import dataclass
 from os import getcwd as os_getcwd
+
+
+class TimeLineLabel(LabelStr):
+    "TimeLineLabel is required for every TimeLineUnit. It is a LabelStr that must not contain the bridge."
+
+    pass
 
 
 @dataclass

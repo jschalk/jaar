@@ -90,7 +90,7 @@ def get_cregtime_str() -> str:
     return get_creg_config().get(timeline_label_str())
 
 
-def creg_hour_label(x_int: int) -> str:
+def creg_hour_int_label(x_int: int) -> str:
     return creg_hours_list()[x_int][0]
 
 

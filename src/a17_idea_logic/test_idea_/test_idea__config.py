@@ -120,6 +120,7 @@ from src.a16_pidgin_logic._test_util.a16_str import (
     inx_name_str,
     otx_title_str,
     inx_title_str,
+    otx_key_str,
     map_otx2inx_str,
     pidgin_name_str,
     pidgin_title_str,
@@ -138,12 +139,11 @@ from src.a17_idea_logic._test_util.a17_str import (
     allowed_crud_str,
     attributes_str,
     dimens_str,
-    otx_key_str,
     insert_one_time_str,
-    insert_mulitple_str,
+    insert_multiple_str,
     delete_insert_update_str,
     insert_update_str,
-    delete_INSERT_str,
+    delete_insert_str,
     delete_update_str,
     build_order_str,
 )
@@ -178,12 +178,12 @@ def test_str_functions_ReturnsObj():
     assert attributes_str() == "attributes"
     assert dimens_str() == "dimens"
     assert otx_key_str() == "otx_key"
-    assert insert_one_time_str() == "INSERT_ONE_TIME"
-    assert insert_mulitple_str() == "INSERT_MULITPLE"
-    assert delete_insert_update_str() == "DELETE_INSERT_UPDATE"
-    assert insert_update_str() == "INSERT_UPDATE"
-    assert delete_INSERT_str() == "DELETE_INSERT"
-    assert delete_update_str() == "DELETE_UPDATE"
+    assert insert_one_time_str() == "insert_one_time"
+    assert insert_multiple_str() == "insert_multiple"
+    assert delete_insert_update_str() == "delete_insert_update"
+    assert insert_update_str() == "insert_update"
+    assert delete_insert_str() == "delete_insert"
+    assert delete_update_str() == "delete_update"
 
 
 def test_get_idea_elements_sort_order_ReturnsObj():
@@ -510,10 +510,10 @@ def test_get_allowed_curds_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert get_allowed_curds() == {
         insert_one_time_str(),
-        insert_mulitple_str(),
+        insert_multiple_str(),
         delete_insert_update_str(),
         insert_update_str(),
-        delete_INSERT_str(),
+        delete_insert_str(),
         delete_update_str(),
         INSERT_str(),
         DELETE_str(),
@@ -611,7 +611,7 @@ def _validate_idea_config(x_idea_config: dict):
             fisc_cashbook_str(),
             fisc_timeoffi_str(),
         }:
-            assert idea_dict.get(allowed_crud_str()) == insert_mulitple_str()
+            assert idea_dict.get(allowed_crud_str()) == insert_multiple_str()
         elif (
             sub_dimen.get(UPDATE_str()) != None
             and sub_dimen.get(INSERT_str()) != None
@@ -629,7 +629,7 @@ def _validate_idea_config(x_idea_config: dict):
             and sub_dimen.get(INSERT_str()) != None
             and sub_dimen.get(DELETE_str()) != None
         ):
-            assert idea_dict.get(allowed_crud_str()) == delete_INSERT_str()
+            assert idea_dict.get(allowed_crud_str()) == delete_insert_str()
         elif (
             sub_dimen.get(UPDATE_str()) != None
             and sub_dimen.get(INSERT_str()) is None

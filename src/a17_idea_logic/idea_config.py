@@ -22,12 +22,12 @@ def get_idea_config_dict() -> dict:
 
 def get_allowed_curds() -> set[str]:
     return {
-        "INSERT_ONE_TIME",
-        "INSERT_MULITPLE",
-        "DELETE_INSERT_UPDATE",
-        "INSERT_UPDATE",
-        "DELETE_INSERT",
-        "DELETE_UPDATE",
+        "insert_one_time",
+        "insert_multiple",
+        "delete_insert_update",
+        "insert_update",
+        "delete_insert",
+        "delete_update",
         "UPDATE",
         "DELETE",
         "INSERT",

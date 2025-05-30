@@ -10,11 +10,11 @@ def temp_fisc_label():
 
 
 def temp_fisc_mstr_dir():
-    return "src\\a14_keep_logic\\test_util\\fisc_mstr"
+    return "src\\a14_keep_logic\\_test_util\\fisc_mstr"
 
 
 def get_module_temp_dir():
-    return "src\\a14_keep_logic\\test_util\\fisc_mstr\\fiscs"
+    return "src\\a14_keep_logic\\_test_util\\fisc_mstr\\fiscs"
 
 
 def temp_owner_name():

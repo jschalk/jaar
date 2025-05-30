@@ -4,7 +4,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_dict_from_json,
 )
 from src.a00_data_toolbox.db_toolbox import (
-    create_class_type_reference_insert_sqlstr,
+    create_type_reference_insert_sqlstr,
     RowData,
 )
 from src.a01_way_logic.way import (
@@ -63,7 +63,7 @@ class BudAtom:
         )
         x_values = self.get_nesting_order_args()
         x_values.extend(iter(self.jvalues.values()))
-        return create_class_type_reference_insert_sqlstr("atom_hx", x_columns, x_values)
+        return create_type_reference_insert_sqlstr("atom_hx", x_columns, x_values)
 
     def get_all_args_in_list(self):
         x_list = self.get_nesting_order_args()

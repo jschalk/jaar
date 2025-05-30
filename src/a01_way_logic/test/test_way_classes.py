@@ -10,9 +10,7 @@ from src.a01_way_logic.way import (
     GroupTitle,
     default_bridge_if_None,
     WorldID,
-    TimeLineLabel,
     FaceName,
-    get_default_face_name,
     EventInt,
 )
 from src.a01_way_logic._test_util.a01_str import bridge_str
@@ -53,11 +51,11 @@ def test_HealerName_exists():
     # ESTABLISH
     bob_str = "Bob"
     # WHEN
-    bob_healer_name = HealerName(bob_str)
+    bob_healer_str = HealerName(bob_str)
     # THEN
-    assert bob_healer_name == bob_str
+    assert bob_healer_str == bob_str
     doc_str = "A LabelStr used to identify a Problem's Healer"
-    assert inspect_getdoc(bob_healer_name) == doc_str
+    assert inspect_getdoc(bob_healer_str) == doc_str
 
 
 def test_OwnerName_exists():
@@ -67,7 +65,7 @@ def test_OwnerName_exists():
     bob_owner_name = OwnerName(bob_str)
     # THEN
     assert bob_owner_name == bob_str
-    doc_str = "A LabelStr used to identify a BudUnit's owner_name"
+    doc_str = "A NameStr used to identify a BudUnit's owner"
     assert inspect_getdoc(bob_owner_name) == doc_str
 
 
@@ -168,17 +166,6 @@ def test_YawStr_exists():
     assert inspect_getdoc(x_way) == doc_str
 
 
-def test_TimeLineLabel_exists():
-    # ESTABLISH
-    empty_str = ""
-    # WHEN
-    x_timelinelabel = TimeLineLabel(empty_str)
-    # THEN
-    assert x_timelinelabel == empty_str
-    doc_str = f"TimeLineLabel is required for every TimeLineUnit. It is a LabelStr that must not container the {bridge_str()}."
-    assert inspect_getdoc(x_timelinelabel) == doc_str
-
-
 def test_WorldID_Exists():
     # ESTABLISH / WHEN / THEN
     assert WorldID() == ""
@@ -189,11 +176,6 @@ def test_FaceName_Exists():
     # ESTABLISH / WHEN / THEN
     assert FaceName() == ""
     assert FaceName("cookie") == "cookie"
-
-
-def test_get_default_face_name_ReturnsObj():
-    # ESTABLISH / WHEN / THEN
-    assert get_default_face_name() == "Face1234"
 
 
 def test_EventInt_Exists():

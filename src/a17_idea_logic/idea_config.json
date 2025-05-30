@@ -1,6 +1,6 @@
 {
   "bud_acct_membership": {
-    "allowed_crud": "DELETE_INSERT_UPDATE",
+    "allowed_crud": "delete_insert_update",
     "build_order": 9,
     "idea_category": "bud",
     "jkeys": {
@@ -17,7 +17,7 @@
     }
   },
   "bud_acctunit": {
-    "allowed_crud": "DELETE_INSERT_UPDATE",
+    "allowed_crud": "delete_insert_update",
     "build_order": 10,
     "idea_category": "bud",
     "jkeys": {
@@ -33,7 +33,7 @@
     }
   },
   "bud_concept_awardlink": {
-    "allowed_crud": "DELETE_INSERT_UPDATE",
+    "allowed_crud": "delete_insert_update",
     "build_order": 11,
     "idea_category": "bud",
     "jkeys": {
@@ -50,7 +50,7 @@
     }
   },
   "bud_concept_factunit": {
-    "allowed_crud": "DELETE_INSERT_UPDATE",
+    "allowed_crud": "delete_insert_update",
     "build_order": 12,
     "idea_category": "bud",
     "jkeys": {
@@ -68,7 +68,7 @@
     }
   },
   "bud_concept_healerlink": {
-    "allowed_crud": "DELETE_INSERT",
+    "allowed_crud": "delete_insert",
     "build_order": 15,
     "idea_category": "bud",
     "jkeys": {
@@ -82,7 +82,7 @@
     "jvalues": {}
   },
   "bud_concept_laborlink": {
-    "allowed_crud": "DELETE_INSERT",
+    "allowed_crud": "delete_insert",
     "build_order": 14,
     "idea_category": "bud",
     "jkeys": {
@@ -96,7 +96,7 @@
     "jvalues": {}
   },
   "bud_concept_reason_premiseunit": {
-    "allowed_crud": "DELETE_INSERT_UPDATE",
+    "allowed_crud": "delete_insert_update",
     "build_order": 16,
     "idea_category": "bud",
     "jkeys": {
@@ -115,7 +115,7 @@
     }
   },
   "bud_concept_reasonunit": {
-    "allowed_crud": "DELETE_INSERT_UPDATE",
+    "allowed_crud": "delete_insert_update",
     "build_order": 17,
     "idea_category": "bud",
     "jkeys": {
@@ -131,7 +131,7 @@
     }
   },
   "bud_conceptunit": {
-    "allowed_crud": "DELETE_INSERT_UPDATE",
+    "allowed_crud": "delete_insert_update",
     "build_order": 18,
     "idea_category": "bud",
     "jkeys": {
@@ -177,7 +177,7 @@
     }
   },
   "fisc_cashbook": {
-    "allowed_crud": "INSERT_MULITPLE",
+    "allowed_crud": "insert_multiple",
     "build_order": 21,
     "idea_category": "fisc",
     "jkeys": {
@@ -193,7 +193,7 @@
     }
   },
   "fisc_dealunit": {
-    "allowed_crud": "INSERT_MULITPLE",
+    "allowed_crud": "insert_multiple",
     "build_order": 20,
     "idea_category": "fisc",
     "jkeys": {
@@ -209,7 +209,7 @@
     }
   },
   "fisc_timeline_hour": {
-    "allowed_crud": "INSERT_ONE_TIME",
+    "allowed_crud": "insert_one_time",
     "build_order": 6,
     "idea_category": "fisc",
     "jkeys": {
@@ -223,7 +223,7 @@
     }
   },
   "fisc_timeline_month": {
-    "allowed_crud": "INSERT_ONE_TIME",
+    "allowed_crud": "insert_one_time",
     "build_order": 7,
     "idea_category": "fisc",
     "jkeys": {
@@ -237,7 +237,7 @@
     }
   },
   "fisc_timeline_weekday": {
-    "allowed_crud": "INSERT_ONE_TIME",
+    "allowed_crud": "insert_one_time",
     "build_order": 8,
     "idea_category": "fisc",
     "jkeys": {
@@ -251,7 +251,7 @@
     }
   },
   "fisc_timeoffi": {
-    "allowed_crud": "INSERT_MULITPLE",
+    "allowed_crud": "insert_multiple",
     "build_order": 8,
     "idea_category": "fisc",
     "jkeys": {
@@ -263,7 +263,7 @@
     "jvalues": {}
   },
   "fiscunit": {
-    "allowed_crud": "INSERT_ONE_TIME",
+    "allowed_crud": "insert_one_time",
     "build_order": 5,
     "idea_category": "fisc",
     "jkeys": {
@@ -284,7 +284,7 @@
     }
   },
   "pidgin_label": {
-    "allowed_crud": "INSERT_ONE_TIME",
+    "allowed_crud": "insert_one_time",
     "build_order": 2,
     "idea_category": "pidgin",
     "jkeys": {
@@ -300,7 +300,7 @@
     }
   },
   "pidgin_name": {
-    "allowed_crud": "INSERT_ONE_TIME",
+    "allowed_crud": "insert_one_time",
     "build_order": 0,
     "idea_category": "pidgin",
     "jkeys": {
@@ -316,7 +316,7 @@
     }
   },
   "pidgin_title": {
-    "allowed_crud": "INSERT_ONE_TIME",
+    "allowed_crud": "insert_one_time",
     "build_order": 1,
     "idea_category": "pidgin",
     "jkeys": {
@@ -332,7 +332,7 @@
     }
   },
   "pidgin_way": {
-    "allowed_crud": "INSERT_ONE_TIME",
+    "allowed_crud": "insert_one_time",
     "build_order": 3,
     "idea_category": "pidgin",
     "jkeys": {

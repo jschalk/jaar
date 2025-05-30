@@ -16,6 +16,7 @@ from src.a15_fisc_logic._test_util.a15_str import (
     fisc_timeline_hour_str,
     fisc_timeline_month_str,
     fisc_timeline_weekday_str,
+    fisc_timeoffi_str,
 )
 
 
@@ -37,3 +38,4 @@ def test_str_functions_ReturnsObj():
     assert fisc_timeline_hour_str() == "fisc_timeline_hour"
     assert fisc_timeline_month_str() == "fisc_timeline_month"
     assert fisc_timeline_weekday_str() == "fisc_timeline_weekday"
+    assert fisc_timeoffi_str() == "fisc_timeoffi"

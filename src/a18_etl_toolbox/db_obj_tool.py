@@ -517,7 +517,7 @@ class ObjKeysHolder:
     rcontext: WayStr = None
     acct_name: AcctName = None
     membership: GroupTitle = None
-    group_name: GroupTitle = None
+    group_title: GroupTitle = None
     fact_way: WayStr = None
 
 

@@ -202,12 +202,12 @@ def test_get_all_nondictionary_objs_ReturnsCorrectDict():
     mount_obj = "hard"
 
     frank_str = "franklin mountain"
-    day_str = "day"
-    evening_str = "evening"
-    day_list = [sports_str, run_str, frank_str, day_str]
-    day_obj = "is hot"
-    evening_list = [sports_str, run_str, frank_str, evening_str]
-    evening_obj = "is cool"
+    _2pm_str = "_2pm"
+    _1am_str = "_1am"
+    _2pm_list = [sports_str, run_str, frank_str, _2pm_str]
+    _2pm_obj = "is hot"
+    _1am_list = [sports_str, run_str, frank_str, _1am_str]
+    _1am_obj = "is cool"
     rain_str = "raining"
     coat_str = "coat"
     fluf_str = "fluffy"
@@ -225,8 +225,8 @@ def test_get_all_nondictionary_objs_ReturnsCorrectDict():
 
     set_in_nested_dict(x_dict=y_dict, x_keylist=fun_list, x_obj=fun_obj)
     set_in_nested_dict(x_dict=y_dict, x_keylist=mount_list, x_obj=mount_obj)
-    set_in_nested_dict(x_dict=y_dict, x_keylist=day_list, x_obj=day_obj)
-    set_in_nested_dict(x_dict=y_dict, x_keylist=evening_list, x_obj=evening_obj)
+    set_in_nested_dict(x_dict=y_dict, x_keylist=_2pm_list, x_obj=_2pm_obj)
+    set_in_nested_dict(x_dict=y_dict, x_keylist=_1am_list, x_obj=_1am_obj)
     set_in_nested_dict(x_dict=y_dict, x_keylist=rain_list, x_obj=silver_obj)
     print(y_dict)
 
@@ -236,8 +236,8 @@ def test_get_all_nondictionary_objs_ReturnsCorrectDict():
                 fun_str: fun_obj,
                 mount_str: mount_obj,
                 frank_str: {
-                    day_str: day_obj,
-                    evening_str: evening_obj,
+                    _2pm_str: _2pm_obj,
+                    _1am_str: _1am_obj,
                     rain_str: {coat_str: {fluf_str: {button_str: silver_obj}}},
                 },
             }
@@ -249,9 +249,9 @@ def test_get_all_nondictionary_objs_ReturnsCorrectDict():
 
     # THEN
     assert childless_objs == {
-        sports_str: [fun_obj, mount_obj, day_obj, evening_obj, silver_obj]
+        sports_str: [fun_obj, mount_obj, _2pm_obj, _1am_obj, silver_obj]
     }
-    assert get_from_nested_dict(y_dict, day_list) == day_obj
+    assert get_from_nested_dict(y_dict, _2pm_list) == _2pm_obj
     assert get_from_nested_dict(y_dict, mount_list) == mount_obj
 
 
@@ -270,18 +270,18 @@ def test_get_from_nested_dict_RaisesNestedException():
     mount_obj = "hard"
 
     frank_str = "franklin mountain"
-    day_str = "day"
-    evening_str = "evening"
-    day_list = [sports_str, run_str, frank_str, day_str]
-    day_obj = "is hot"
-    evening_list = [sports_str, run_str, frank_str, evening_str]
-    evening_obj = "is cool"
+    _2pm_str = "_2pm"
+    _1am_str = "_1am"
+    _2pm_list = [sports_str, run_str, frank_str, _2pm_str]
+    _2pm_obj = "is hot"
+    _1am_list = [sports_str, run_str, frank_str, _1am_str]
+    _1am_obj = "is cool"
 
     set_in_nested_dict(x_dict=y_dict, x_keylist=fun_list, x_obj=fun_obj)
     set_in_nested_dict(x_dict=y_dict, x_keylist=mount_list, x_obj=mount_obj)
-    set_in_nested_dict(x_dict=y_dict, x_keylist=day_list, x_obj=day_obj)
-    set_in_nested_dict(x_dict=y_dict, x_keylist=evening_list, x_obj=evening_obj)
-    assert get_from_nested_dict(y_dict, day_list) == day_obj
+    set_in_nested_dict(x_dict=y_dict, x_keylist=_2pm_list, x_obj=_2pm_obj)
+    set_in_nested_dict(x_dict=y_dict, x_keylist=_1am_list, x_obj=_1am_obj)
+    assert get_from_nested_dict(y_dict, _2pm_list) == _2pm_obj
 
     # WHEN / THEN
     swim_str = "swim"
@@ -298,7 +298,7 @@ def test_get_from_nested_dict_RaisesNestedException():
     # WHEN / THEN
     swim_str = "swim"
     with pytest_raises(Exception) as excinfo:
-        get_from_nested_dict(y_dict, [sports_str, swim_str, day_str])
+        get_from_nested_dict(y_dict, [sports_str, swim_str, _2pm_str])
     assert str(excinfo.value) == f"'{swim_str}' failed at level 1."
 
 
@@ -316,19 +316,19 @@ def test_get_from_nested_dict_ReturnsNoneWhen_if_missing_return_None_True():
     mount_obj = "hard"
 
     frank_str = "franklin mountain"
-    day_str = "day"
-    evening_str = "evening"
-    day_list = [sports_str, run_str, frank_str, day_str]
-    day_obj = "is hot"
-    evening_list = [sports_str, run_str, frank_str, evening_str]
-    evening_obj = "is cool"
+    _2pm_str = "_2pm"
+    _1am_str = "_1am"
+    _2pm_list = [sports_str, run_str, frank_str, _2pm_str]
+    _2pm_obj = "is hot"
+    _1am_list = [sports_str, run_str, frank_str, _1am_str]
+    _1am_obj = "is cool"
 
     set_in_nested_dict(x_dict=y_dict, x_keylist=fun_list, x_obj=fun_obj)
     set_in_nested_dict(x_dict=y_dict, x_keylist=mount_list, x_obj=mount_obj)
-    set_in_nested_dict(x_dict=y_dict, x_keylist=day_list, x_obj=day_obj)
-    set_in_nested_dict(x_dict=y_dict, x_keylist=evening_list, x_obj=evening_obj)
+    set_in_nested_dict(x_dict=y_dict, x_keylist=_2pm_list, x_obj=_2pm_obj)
+    set_in_nested_dict(x_dict=y_dict, x_keylist=_1am_list, x_obj=_1am_obj)
     assert (
-        get_from_nested_dict(y_dict, day_list, if_missing_return_None=True) == day_obj
+        get_from_nested_dict(y_dict, _2pm_list, if_missing_return_None=True) == _2pm_obj
     )
 
     # WHEN / THEN
@@ -345,7 +345,7 @@ def test_get_from_nested_dict_ReturnsNoneWhen_if_missing_return_None_True():
     # WHEN / THEN
     swim_str = "swim"
     x_value = get_from_nested_dict(
-        y_dict, [sports_str, swim_str, day_str], if_missing_return_None=True
+        y_dict, [sports_str, swim_str, _2pm_str], if_missing_return_None=True
     )
     assert x_value is None
 
@@ -489,15 +489,15 @@ def test_create_l2nested_csv_dict_ReturnsObj_Scenario0():
 """
     static_bob_csv = f""",,{x_id},{bob_str},Yao,41,37
 """
-    generated_owner_name_dict = u_dict.get(x_id)
-    assert generated_owner_name_dict
-    assert list(generated_owner_name_dict.keys()) == [sue_str, bob_str]
-    generated_bob_csv = generated_owner_name_dict.get(bob_str)
+    generated_sue_bob_dict = u_dict.get(x_id)
+    assert generated_sue_bob_dict
+    assert list(generated_sue_bob_dict.keys()) == [sue_str, bob_str]
+    generated_bob_csv = generated_sue_bob_dict.get(bob_str)
     assert generated_bob_csv == static_bob_csv
-    generated_sue_csv = generated_owner_name_dict.get(sue_str)
+    generated_sue_csv = generated_sue_bob_dict.get(sue_str)
     assert generated_sue_csv == static_sue_csv
-    owner_name_csv_dict = {sue_str: static_sue_csv, bob_str: static_bob_csv}
-    assert u_dict == {x_id: owner_name_csv_dict}
+    sue_bob_csv_dict = {sue_str: static_sue_csv, bob_str: static_bob_csv}
+    assert u_dict == {x_id: sue_bob_csv_dict}
 
 
 def test_create_l2nested_csv_dict_ReturnsObj_Scenario1_Multiple1stLevels():
@@ -540,11 +540,11 @@ def test_create_l2nested_csv_dict_ReturnsObj_Scenario1_Multiple1stLevels():
     print(f"{generated4_sue_csv=}")
     assert generated3_sue_csv == accord3_sue_csv
     assert generated4_sue_csv == accord4_sue_csv
-    owner_name3_csv_dict = {sue_str: accord3_sue_csv}
-    owner_name4_csv_dict = {sue_str: accord4_sue_csv, bob_str: static_bob_csv}
+    people3_csv_dict = {sue_str: accord3_sue_csv}
+    people4_csv_dict = {sue_str: accord4_sue_csv, bob_str: static_bob_csv}
     assert tiered_dict == {
-        accord3_id: owner_name3_csv_dict,
-        accord4_id: owner_name4_csv_dict,
+        accord3_id: people3_csv_dict,
+        accord4_id: people4_csv_dict,
     }
 
 

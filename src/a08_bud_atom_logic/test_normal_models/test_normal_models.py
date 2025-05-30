@@ -13,7 +13,6 @@ from src.a06_bud_logic._test_util.a06_str import (
 from src.a08_bud_atom_logic._test_util.a08_str import (
     normal_table_name_str,
     normal_specs_str,
-    columns_str,
     sqlite_datatype_str,
 )
 from src.a08_bud_atom_logic.atom_config import get_normalized_bud_table_build
@@ -39,7 +38,7 @@ def get_config_table_name(config_dimen) -> str:
 
 def all_columns_are_as_config_requires(mapper, config_dimen):
     config_table_name = get_config_table_name(config_dimen)
-    config_columns = config_dimen.get(columns_str())
+    config_columns = config_dimen.get("columns")
 
     for config_column, column_dict in config_columns.items():
         table_column = mapper.columns.get(config_column)
@@ -56,7 +55,7 @@ def all_columns_are_as_config_requires(mapper, config_dimen):
 
 def print_out_expected_class_attribute_declarations(config_dimen):
     config_table_name = get_config_table_name(config_dimen)
-    config_columns = config_dimen.get(columns_str())
+    config_columns = config_dimen.get("columns")
 
     print(f"Table {config_table_name}")
     for config_column, column_dict in config_columns.items():
