@@ -107,3 +107,27 @@ def acct_pool_str() -> str:
 
 def jkeys_str() -> str:
     return "jkeys"
+
+
+def attributes_str() -> str:
+    return "attributes"
+
+
+def timeline_str() -> str:
+    return "timeline"
+
+
+def ancestors_str() -> str:
+    return "ancestors"
+
+
+def mandate_str() -> str:
+    return "mandate"
+
+
+def dimen_str() -> str:
+    return "dimen"
+
+
+def dimens_str() -> str:
+    return "dimens"

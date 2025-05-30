@@ -3,7 +3,7 @@ from src.a00_data_toolbox._test_util.a00_str import (
     INSERT_str,
     sqlite_datatype_str,
 )
-from src.a06_bud_logic._test_util.a06_str import jkeys_str
+from src.a06_bud_logic._test_util.a06_str import jkeys_str, dimen_str
 
 
 def DELETE_str() -> str:
@@ -36,10 +36,6 @@ def jvalues_str() -> str:
 
 def column_order_str() -> str:
     return "column_order"
-
-
-def dimen_str() -> str:
-    return "dimen"
 
 
 def crud_str() -> str:

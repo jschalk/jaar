@@ -1,5 +1,4 @@
 from src.a15_fisc_logic._test_util.a15_str import (
-    timeline_str,
     brokerunits_str,
     cashbook_str,
     month_label_str,
@@ -19,7 +18,6 @@ from src.a15_fisc_logic._test_util.a15_str import (
 
 
 def test_str_functions_ReturnsObj():
-    assert timeline_str() == "timeline"
     assert brokerunits_str() == "brokerunits"
     assert cashbook_str() == "cashbook"
     assert month_label_str() == "month_label"

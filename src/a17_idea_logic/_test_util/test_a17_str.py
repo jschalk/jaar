@@ -2,8 +2,6 @@ from src.a17_idea_logic._test_util.a17_str import (
     idea_number_str,
     idea_category_str,
     allowed_crud_str,
-    dimens_str,
-    attributes_str,
     insert_one_time_str,
     insert_multiple_str,
     delete_insert_update_str,
@@ -27,8 +25,6 @@ def test_str_functions_ReturnsObj():
     assert idea_number_str() == "idea_number"
     assert idea_category_str() == "idea_category"
     assert allowed_crud_str() == "allowed_crud"
-    assert dimens_str() == "dimens"
-    assert attributes_str() == "attributes"
     assert insert_one_time_str() == "insert_one_time"
     assert insert_multiple_str() == "insert_multiple"
     assert delete_insert_update_str() == "delete_insert_update"

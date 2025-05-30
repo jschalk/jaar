@@ -1,3 +1,6 @@
+from src.a06_bud_logic._test_util.a06_str import attributes_str, dimens_str
+
+
 def idea_number_str() -> str:
     return "idea_number"
 
@@ -8,14 +11,6 @@ def idea_category_str() -> str:
 
 def allowed_crud_str() -> str:
     return "allowed_crud"
-
-
-def dimens_str() -> str:
-    return "dimens"
-
-
-def attributes_str() -> str:
-    return "attributes"
 
 
 def insert_one_time_str() -> str:

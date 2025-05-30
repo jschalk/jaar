@@ -15,6 +15,12 @@ from src.a06_bud_logic._test_util.a06_str import (
     bud_concept_healerlink_str,
     bud_concept_factunit_str,
     jkeys_str,
+    attributes_str,
+    timeline_str,
+    ancestors_str,
+    mandate_str,
+    dimen_str,
+    dimens_str,
 )
 
 
@@ -35,3 +41,9 @@ def test_str_functions_ReturnsObj():
     assert bud_concept_healerlink_str() == "bud_concept_healerlink"
     assert bud_concept_factunit_str() == "bud_concept_factunit"
     assert jkeys_str() == "jkeys"
+    assert attributes_str() == "attributes"
+    assert timeline_str() == "timeline"
+    assert ancestors_str() == "ancestors"
+    assert mandate_str() == "mandate"
+    assert dimen_str() == "dimen"
+    assert dimens_str() == "dimens"

@@ -1,7 +1,6 @@
 from src.a08_bud_atom_logic._test_util.a08_str import (
     DELETE_str,
     atom_hx_str,
-    dimen_str,
     column_order_str,
     crud_str,
     class_type_str,
@@ -15,7 +14,6 @@ from src.a08_bud_atom_logic._test_util.a08_str import (
 def test_str_functions_ReturnsObj():
     assert atom_hx_str() == "atom_hx"
     assert DELETE_str() == "DELETE"
-    assert dimen_str() == "dimen"
     assert column_order_str() == "column_order"
     assert crud_str() == "crud"
     assert class_type_str() == "class_type"
