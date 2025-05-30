@@ -11,7 +11,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_dict_from_json,
     get_json_from_dict,
 )
-from src.a01_way_logic.way import (
+from src.a01_term_logic.way import (
     default_bridge_if_None,
     OwnerName,
     WayTerm,

@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import OwnerName, AcctName
+from src.a01_term_logic.way import OwnerName, AcctName
 from src.a06_bud_logic.bud import budunit_shop
 from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop
 from src.a14_keep_logic._test_util.a14_env import (

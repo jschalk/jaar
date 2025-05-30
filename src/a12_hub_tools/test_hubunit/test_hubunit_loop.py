@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import create_way
+from src.a01_term_logic.way import create_way
 from src.a06_bud_logic._test_util.example_buds import get_budunit_with_4_levels
 from src.a12_hub_tools.hub_tool import save_job_file
 from src.a12_hub_tools.hubunit import hubunit_shop

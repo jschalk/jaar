@@ -14,7 +14,7 @@ from src.a00_data_toolbox.file_toolbox import (
 )
 from src.a00_data_toolbox.dict_toolbox import get_empty_set_if_None
 from src.a00_data_toolbox.db_toolbox import sqlite_connection
-from src.a01_way_logic.way import (
+from src.a01_term_logic.way import (
     OwnerName,
     FiscLabel,
     LabelTerm,

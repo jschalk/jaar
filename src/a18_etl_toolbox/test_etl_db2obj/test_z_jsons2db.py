@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.db_toolbox import get_row_count
-from src.a01_way_logic.way import create_way
+from src.a01_term_logic.way import create_way
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import (
     awardlink_shop,

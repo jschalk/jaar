@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.db_toolbox import sqlite_obj_str
-from src.a01_way_logic.way import OwnerName, WayTerm, AcctName, GroupTitle
+from src.a01_term_logic.way import OwnerName, WayTerm, AcctName, GroupTitle
 from src.a02_finance_logic.deal import FiscLabel, OwnerName
 from src.a03_group_logic.acct import AcctUnit
 from src.a03_group_logic.group import MemberShip, GroupUnit, AwardHeir

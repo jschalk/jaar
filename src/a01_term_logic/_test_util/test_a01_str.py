@@ -1,4 +1,4 @@
-from src.a01_way_logic._test_util.a01_str import (
+from src.a01_term_logic._test_util.a01_str import (
     bridge_str,
     NameTerm_str,
     TitleTerm_str,

@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.dict_toolbox import get_empty_dict_if_None, get_0_if_None
-from src.a01_way_logic.way import GroupTitle
+from src.a01_term_logic.way import GroupTitle
 from src.a03_group_logic.group import AwardLink
 from src.a04_reason_logic.reason_concept import ReasonUnit, WayTerm
 from dataclasses import dataclass

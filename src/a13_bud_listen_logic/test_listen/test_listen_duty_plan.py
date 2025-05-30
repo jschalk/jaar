@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import (
+from src.a01_term_logic.way import (
     WayTerm,
     create_way,
     get_default_fisc_label,

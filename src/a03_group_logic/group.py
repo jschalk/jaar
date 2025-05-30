@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.dict_toolbox import get_1_if_None, get_dict_from_json
-from src.a01_way_logic.way import GroupTitle, AcctName, default_bridge_if_None
+from src.a01_term_logic.way import GroupTitle, AcctName, default_bridge_if_None
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import FundCoin, default_fund_coin_if_None
 from dataclasses import dataclass

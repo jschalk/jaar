@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import save_file, create_path
-from src.a01_way_logic.way import create_way, to_way
+from src.a01_term_logic.way import create_way, to_way
 from src.a06_bud_logic._test_util.a06_str import acct_name_str, rcontext_str
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
 from src.a16_pidgin_logic.pidgin_config import get_pidgin_filename

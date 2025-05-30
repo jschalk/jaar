@@ -5,7 +5,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_False_if_None,
     get_positive_int,
 )
-from src.a01_way_logic.way import (
+from src.a01_term_logic.way import (
     WayTerm,
     LabelTerm,
     is_sub_way,

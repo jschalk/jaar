@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import (
+from src.a01_term_logic.way import (
     LabelTerm,
     NameTerm,
     TitleTerm,
@@ -13,7 +13,7 @@ from src.a01_way_logic.way import (
     FaceName,
     EventInt,
 )
-from src.a01_way_logic._test_util.a01_str import bridge_str
+from src.a01_term_logic._test_util.a01_str import bridge_str
 from inspect import getdoc as inspect_getdoc
 
 
@@ -94,7 +94,7 @@ def test_TitleTerm_exists():
 def test_GroupTitle_exists():
     bikers_GroupTitle = GroupTitle(";bikers")
     assert bikers_GroupTitle is not None
-    assert str(type(bikers_GroupTitle)).find("src.a01_way_logic.way.GroupTitle") > 0
+    assert str(type(bikers_GroupTitle)).find("src.a01_term_logic.way.GroupTitle") > 0
 
 
 def test_LabelTerm_exists():

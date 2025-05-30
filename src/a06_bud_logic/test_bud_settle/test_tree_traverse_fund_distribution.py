@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import WayTerm, to_way
+from src.a01_term_logic.way import WayTerm, to_way
 from src.a02_finance_logic.finance_config import default_fund_pool
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import awardlink_shop, awardline_shop

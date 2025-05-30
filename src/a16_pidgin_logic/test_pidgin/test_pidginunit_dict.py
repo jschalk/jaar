@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import default_bridge_if_None
+from src.a01_term_logic.way import default_bridge_if_None
 from src.a09_pack_logic._test_util.a09_str import face_name_str, event_int_str
 from src.a16_pidgin_logic._test_util.a16_str import (
     otx_bridge_str,

@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import open_file, create_path
-from src.a01_way_logic.way import to_way
+from src.a01_term_logic.way import to_way
 from src.a02_finance_logic._test_util.a02_str import owner_name_str, fisc_label_str
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_bud_logic.bud import budunit_shop

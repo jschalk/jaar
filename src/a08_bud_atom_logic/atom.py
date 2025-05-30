@@ -7,7 +7,7 @@ from src.a00_data_toolbox.db_toolbox import (
     create_type_reference_insert_sqlstr,
     RowData,
 )
-from src.a01_way_logic.way import (
+from src.a01_term_logic.way import (
     create_way,
     LabelTerm,
     WayTerm,

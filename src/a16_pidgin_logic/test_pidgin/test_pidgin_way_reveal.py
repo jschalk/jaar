@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import create_way, to_way
+from src.a01_term_logic.way import create_way, to_way
 from src.a16_pidgin_logic.map import waymap_shop
 
 

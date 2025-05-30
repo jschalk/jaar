@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import (
+from src.a01_term_logic.way import (
     get_ancestor_ways,
     WayTerm,
     get_root_label_from_way,

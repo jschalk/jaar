@@ -20,7 +20,7 @@ from src.a00_data_toolbox.db_toolbox import (
     create_table_from_columns,
     create_update_inconsistency_error_query,
 )
-from src.a01_way_logic.way import FaceName, EventInt
+from src.a01_term_logic.way import FaceName, EventInt
 from src.a06_bud_logic.bud import budunit_shop, BudUnit
 from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a08_bud_atom_logic.atom_config import get_bud_dimens

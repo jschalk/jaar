@@ -6,7 +6,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_False_if_None,
     get_empty_dict_if_None,
 )
-from src.a01_way_logic.way import (
+from src.a01_term_logic.way import (
     get_parent_way,
     to_way,
     is_sub_way,

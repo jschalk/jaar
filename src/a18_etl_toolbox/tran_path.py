@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a01_way_logic.way import OwnerName, LabelTerm, FaceName, EventInt
+from src.a01_term_logic.way import OwnerName, LabelTerm, FaceName, EventInt
 
 
 STANCE0001_FILENAME = "stance0001.xlsx"

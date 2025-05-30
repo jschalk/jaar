@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.dict_toolbox import x_is_json
-from src.a01_way_logic.way import (
+from src.a01_term_logic.way import (
     create_way,
     get_default_fisc_label as root_label,
     to_way,

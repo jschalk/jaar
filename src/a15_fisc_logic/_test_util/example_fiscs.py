@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import create_way
+from src.a01_term_logic.way import create_way
 from src.a04_reason_logic.reason_concept import factunit_shop, FactUnit
 from src.a05_concept_logic.healer import healerlink_shop
 from src.a05_concept_logic.concept import conceptunit_shop

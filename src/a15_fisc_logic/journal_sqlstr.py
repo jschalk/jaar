@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import WayTerm
+from src.a01_term_logic.way import WayTerm
 from src.a08_bud_atom_logic.atom_config import get_flattened_atom_table_build
 from src.a08_bud_atom_logic.atom import BudAtom
 

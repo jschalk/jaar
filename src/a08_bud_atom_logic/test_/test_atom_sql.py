@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.db_toolbox import get_rowdata, sqlite_connection
-from src.a01_way_logic.way import create_way
+from src.a01_term_logic.way import create_way
 from src.a06_bud_logic._test_util.a06_str import budunit_str, bud_concept_factunit_str
 from src.a06_bud_logic._test_util.a06_str import (
     concept_way_str,

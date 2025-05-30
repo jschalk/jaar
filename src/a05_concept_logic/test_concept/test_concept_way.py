@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import get_default_fisc_label as root_label, create_way
+from src.a01_term_logic.way import get_default_fisc_label as root_label, create_way
 from src.a04_reason_logic.reason_concept import (
     reasonunit_shop,
     premiseunit_shop,

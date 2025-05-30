@@ -1,4 +1,4 @@
-from src.a01_way_logic._test_util.a01_str import bridge_str, fisc_label_str
+from src.a01_term_logic._test_util.a01_str import bridge_str, fisc_label_str
 
 
 def world_id_str() -> str:

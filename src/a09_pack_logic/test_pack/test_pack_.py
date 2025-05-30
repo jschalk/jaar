@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.dict_toolbox import x_is_json
-from src.a01_way_logic.way import get_default_fisc_label as root_label
+from src.a01_term_logic.way import get_default_fisc_label as root_label
 from src.a02_finance_logic._test_util.a02_str import owner_name_str, fisc_label_str
 from src.a03_group_logic.acct import acctunit_shop
 from src.a06_bud_logic._test_util.a06_str import (
