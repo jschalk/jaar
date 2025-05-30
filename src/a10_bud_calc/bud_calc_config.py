@@ -193,7 +193,6 @@ def get_bud_calc_args_sqlite_datatype_dict() -> dict[str, str]:
         "penny": "REAL",
         "respect_bit": "REAL",
         "tally": "INTEGER",
-        "world_id": "TEXT",
     }
 
 

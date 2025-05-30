@@ -1,15 +1,5 @@
-from src.a02_finance_logic._test_util.a02_str import (
-    owner_name_str,
-    deal_time_str,
-    fisc_label_str,
-    world_id_str,
-)
-from src.a09_pack_logic._test_util.a09_str import event_int_str
-from src.a20_lobby_logic._test_util.a20_str import (
-    lobbys_str,
-    lobby_id_str,
-    lobby_mstr_dir_str,
-)
+from src.a17_idea_logic._test_util.a17_str import world_id_str
+from src.a20_lobby_logic._test_util.a20_str import lobby_id_str, lobby_mstr_dir_str
 from src.a20_lobby_logic.lobby_path import (
     create_lobby_dir_path,
     create_world_dir_path,

@@ -9,13 +9,9 @@ from src.a02_finance_logic.deal import (
 from src.a02_finance_logic._test_util.a02_str import (
     quota_str,
     deal_time_str,
-    tran_time_str,
-    bridge_str,
     celldepth_str,
     magnitude_str,
     deal_acct_nets_str,
-    world_id_str,
-    acct_name_str,
 )
 
 from pytest import raises as pytest_raises

@@ -51,7 +51,3 @@ def quota_str() -> str:
 
 def tran_time_str() -> str:
     return "tran_time"
-
-
-def world_id_str() -> str:
-    return "world_id"

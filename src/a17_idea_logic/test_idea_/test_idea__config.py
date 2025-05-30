@@ -7,7 +7,6 @@ from src.a02_finance_logic._test_util.a02_str import (
     celldepth_str,
     owner_name_str,
     fisc_label_str,
-    world_id_str,
 )
 from src.a06_bud_logic._test_util.a06_str import (
     budunit_str,
@@ -145,6 +144,7 @@ from src.a17_idea_logic._test_util.a17_str import (
     delete_insert_str,
     delete_update_str,
     build_order_str,
+    world_id_str,
 )
 from src.a17_idea_logic.idea_config import (
     get_idea_elements_sort_order,

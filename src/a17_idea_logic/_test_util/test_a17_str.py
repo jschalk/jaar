@@ -16,6 +16,7 @@ from src.a17_idea_logic._test_util.a17_str import (
     sound_raw_str,
     voice_agg_str,
     voice_raw_str,
+    world_id_str,
 )
 
 
@@ -39,3 +40,4 @@ def test_str_functions_ReturnsObj():
     assert sound_agg_str() == "sound_agg"
     assert voice_raw_str() == "voice_raw"
     assert voice_agg_str() == "voice_agg"
+    assert world_id_str() == "world_id"

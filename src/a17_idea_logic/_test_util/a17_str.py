@@ -67,3 +67,7 @@ def voice_agg_str() -> str:
 
 def voice_raw_str() -> str:
     return "voice_raw"
+
+
+def world_id_str() -> str:
+    return "world_id"
