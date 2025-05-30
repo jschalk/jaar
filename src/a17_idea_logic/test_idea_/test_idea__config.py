@@ -27,8 +27,6 @@ from src.a06_bud_logic._test_util.a06_str import (
     rconcept_active_requisite_str,
     begin_str,
     denom_str,
-    event_int_str,
-    face_name_str,
     fcontext_str,
     fstate_str,
     group_title_str,
@@ -81,6 +79,7 @@ from src.a08_bud_atom_logic.atom_config import (
     get_delete_key_name,
     get_all_bud_dimen_delete_keys,
 )
+from src.a09_pack_logic._test_util.a09_str import face_name_str, event_int_str
 from src.a10_bud_calc.bud_calc_config import (
     get_all_bud_calc_args,
     get_bud_calc_args_sqlite_datatype_dict,
@@ -111,7 +110,7 @@ from src.a16_pidgin_logic._test_util.a16_str import (
     pidginunit_str,
     otx_bridge_str,
     inx_bridge_str,
-    unknown_term_str,
+    unknown_str_str,
     otx_label_str,
     inx_label_str,
     otx_way_str,
@@ -120,6 +119,7 @@ from src.a16_pidgin_logic._test_util.a16_str import (
     inx_name_str,
     otx_title_str,
     inx_title_str,
+    otx_key_str,
     map_otx2inx_str,
     pidgin_name_str,
     pidgin_title_str,
@@ -138,12 +138,11 @@ from src.a17_idea_logic._test_util.a17_str import (
     allowed_crud_str,
     attributes_str,
     dimens_str,
-    otx_key_str,
     insert_one_time_str,
-    insert_mulitple_str,
+    insert_multiple_str,
     delete_insert_update_str,
     insert_update_str,
-    delete_INSERT_str,
+    delete_insert_str,
     delete_update_str,
     build_order_str,
 )
@@ -178,12 +177,12 @@ def test_str_functions_ReturnsObj():
     assert attributes_str() == "attributes"
     assert dimens_str() == "dimens"
     assert otx_key_str() == "otx_key"
-    assert insert_one_time_str() == "INSERT_ONE_TIME"
-    assert insert_mulitple_str() == "INSERT_MULITPLE"
-    assert delete_insert_update_str() == "DELETE_INSERT_UPDATE"
-    assert insert_update_str() == "INSERT_UPDATE"
-    assert delete_INSERT_str() == "DELETE_INSERT"
-    assert delete_update_str() == "DELETE_UPDATE"
+    assert insert_one_time_str() == "insert_one_time"
+    assert insert_multiple_str() == "insert_multiple"
+    assert delete_insert_update_str() == "delete_insert_update"
+    assert insert_update_str() == "insert_update"
+    assert delete_insert_str() == "delete_insert"
+    assert delete_update_str() == "delete_update"
 
 
 def test_get_idea_elements_sort_order_ReturnsObj():
@@ -358,7 +357,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[135] == "otx_bridge"
     assert table_sorting_priority[136] == "inx_bridge"
     assert table_sorting_priority[137] == "bridge"
-    assert table_sorting_priority[138] == "unknown_term"
+    assert table_sorting_priority[138] == "unknown_str"
     assert table_sorting_priority[139] == "quota"
     assert table_sorting_priority[140] == "celldepth"
     assert table_sorting_priority[141] == "job_listen_rotations"
@@ -490,7 +489,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(weekday_order_str()) == "INTEGER"
     assert sqlite_types.get(otx_bridge_str()) == "TEXT"
     assert sqlite_types.get(inx_bridge_str()) == "TEXT"
-    assert sqlite_types.get(unknown_term_str()) == "TEXT"
+    assert sqlite_types.get(unknown_str_str()) == "TEXT"
     assert sqlite_types.get(bridge_str()) == "TEXT"
     assert sqlite_types.get(c400_number_str()) == "INTEGER"
     assert sqlite_types.get(yr1_jan1_offset_str()) == "INTEGER"
@@ -510,10 +509,10 @@ def test_get_allowed_curds_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert get_allowed_curds() == {
         insert_one_time_str(),
-        insert_mulitple_str(),
+        insert_multiple_str(),
         delete_insert_update_str(),
         insert_update_str(),
-        delete_INSERT_str(),
+        delete_insert_str(),
         delete_update_str(),
         INSERT_str(),
         DELETE_str(),
@@ -611,7 +610,7 @@ def _validate_idea_config(x_idea_config: dict):
             fisc_cashbook_str(),
             fisc_timeoffi_str(),
         }:
-            assert idea_dict.get(allowed_crud_str()) == insert_mulitple_str()
+            assert idea_dict.get(allowed_crud_str()) == insert_multiple_str()
         elif (
             sub_dimen.get(UPDATE_str()) != None
             and sub_dimen.get(INSERT_str()) != None
@@ -629,7 +628,7 @@ def _validate_idea_config(x_idea_config: dict):
             and sub_dimen.get(INSERT_str()) != None
             and sub_dimen.get(DELETE_str()) != None
         ):
-            assert idea_dict.get(allowed_crud_str()) == delete_INSERT_str()
+            assert idea_dict.get(allowed_crud_str()) == delete_insert_str()
         elif (
             sub_dimen.get(UPDATE_str()) != None
             and sub_dimen.get(INSERT_str()) is None

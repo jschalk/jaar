@@ -2,10 +2,6 @@ def pidginunit_str() -> str:
     return "pidginunit"
 
 
-def pidgin_filename_str() -> str:
-    return "pidgin.json"
-
-
 def otx_bridge_str() -> str:
     return "otx_bridge"
 
@@ -34,6 +30,10 @@ def inx_label_str() -> str:
     return "inx_label"
 
 
+def otx_key_str() -> str:
+    return "otx_key"
+
+
 def otx_label_str() -> str:
     return "otx_label"
 
@@ -46,8 +46,8 @@ def otx_way_str() -> str:
     return "otx_way"
 
 
-def unknown_term_str() -> str:
-    return "unknown_term"
+def unknown_str_str() -> str:
+    return "unknown_str"
 
 
 def otx2inx_str() -> str:

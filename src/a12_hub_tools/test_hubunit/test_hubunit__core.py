@@ -6,7 +6,7 @@ from src.a01_way_logic.way import (
     get_default_fisc_label as root_label,
 )
 from src.a02_finance_logic.finance_config import (
-    default_respect_bit_if_None,
+    default_RespectBit_if_None,
     filter_penny,
     default_fund_coin_if_None,
     validate_fund_pool,
@@ -122,7 +122,7 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     assert sue_hubunit.bridge == default_bridge_if_None()
     assert sue_hubunit.fund_pool == validate_fund_pool()
     assert sue_hubunit.fund_coin == default_fund_coin_if_None()
-    assert sue_hubunit.respect_bit == default_respect_bit_if_None()
+    assert sue_hubunit.respect_bit == default_RespectBit_if_None()
     assert sue_hubunit.penny == filter_penny()
     x_hubunit = hubunit_shop(fisc_mstr_dir, accord23_str, sue_str)
     assert sue_hubunit.keep_way == texas_way
@@ -155,7 +155,7 @@ def test_hubunit_shop_RaisesErrorIf_owner_name_Contains_bridge():
         hubunit_shop(None, None, owner_name=bob_str, bridge=slash_str)
     assert (
         str(excinfo.value)
-        == f"'{bob_str}' needs to be a LabelStr. Cannot contain bridge: '{slash_str}'"
+        == f"'{bob_str}' needs to be a LabelTerm. Cannot contain bridge: '{slash_str}'"
     )
 
 

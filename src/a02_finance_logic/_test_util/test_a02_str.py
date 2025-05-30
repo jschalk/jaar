@@ -1,4 +1,5 @@
 from src.a02_finance_logic._test_util.a02_str import (
+    addin_str,
     quota_str,
     deal_time_str,
     tran_time_str,
@@ -9,11 +10,15 @@ from src.a02_finance_logic._test_util.a02_str import (
     world_id_str,
     acct_name_str,
     owner_name_str,
-    fisc_label_str,
+    offi_time_str,
+    amount_str,
+    fund_coin_str,
+    penny_str,
 )
 
 
 def test_str_functions_ReturnsObj():
+    assert addin_str() == "addin"
     assert bridge_str() == "bridge"
     assert celldepth_str() == "celldepth"
     assert deal_time_str() == "deal_time"
@@ -24,4 +29,7 @@ def test_str_functions_ReturnsObj():
     assert world_id_str() == "world_id"
     assert acct_name_str() == "acct_name"
     assert owner_name_str() == "owner_name"
-    assert fisc_label_str() == "fisc_label"
+    assert offi_time_str() == "offi_time"
+    assert amount_str() == "amount"
+    assert fund_coin_str() == "fund_coin"
+    assert penny_str() == "penny"

@@ -8,7 +8,7 @@ from src.a00_data_toolbox.file_toolbox import (
     open_json,
 )
 from src.a00_data_toolbox.dict_toolbox import get_empty_list_if_None
-from src.a01_way_logic.way import OwnerName, LabelStr, EventInt, WayStr
+from src.a01_way_logic.way import OwnerName, LabelTerm, EventInt, WayTerm
 from src.a02_finance_logic.deal import (
     DealUnit,
     TimeLinePoint,
@@ -79,7 +79,7 @@ def open_job_file(
 
 
 def get_budevent_obj(
-    fisc_mstr_dir: str, fisc_label: LabelStr, owner_name: OwnerName, event_int: int
+    fisc_mstr_dir: str, fisc_label: LabelTerm, owner_name: OwnerName, event_int: int
 ) -> BudUnit:
     budevent_json_path = create_budevent_path(
         fisc_mstr_dir, fisc_label, owner_name, event_int
@@ -88,7 +88,7 @@ def get_budevent_obj(
 
 
 def collect_owner_event_dir_sets(
-    fisc_mstr_dir: str, fisc_label: LabelStr
+    fisc_mstr_dir: str, fisc_label: LabelTerm
 ) -> dict[OwnerName, set[EventInt]]:
     x_dict = {}
     owners_dir = create_fisc_owners_dir_path(fisc_mstr_dir, fisc_label)
@@ -142,7 +142,7 @@ def save_arbitrary_budevent(
     owner_name: str,
     event_int: int,
     accts: list[list] = None,
-    facts: list[tuple[WayStr, WayStr, float, float]] = None,
+    facts: list[tuple[WayTerm, WayTerm, float, float]] = None,
 ) -> str:
     accts = get_empty_list_if_None(accts)
     facts = get_empty_list_if_None(facts)

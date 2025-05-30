@@ -10,9 +10,9 @@ from src.a01_way_logic.way import (
     get_parent_way,
     to_way,
     is_sub_way,
-    all_waystrs_between,
+    all_wayterms_between,
     rebuild_way,
-    get_terminus_label,
+    get_tail_label,
     get_root_label_from_way,
     get_ancestor_ways,
     get_default_fisc_label,
@@ -20,19 +20,19 @@ from src.a01_way_logic.way import (
     get_forefather_ways,
     create_way,
     default_bridge_if_None,
-    LabelStr,
-    WayStr,
+    LabelTerm,
+    WayTerm,
     is_string_in_way,
     OwnerName,
     AcctName,
     HealerName,
     FiscLabel,
-    waystr_valid_dir_path,
+    wayterm_valid_dir_path,
 )
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import (
     valid_finance_ratio,
-    default_respect_bit_if_None,
+    default_RespectBit_if_None,
     filter_penny,
     default_fund_coin_if_None,
     validate_fund_pool,
@@ -55,7 +55,7 @@ from src.a04_reason_logic.reason_concept import (
     FactUnit,
     FactUnit,
     ReasonUnit,
-    WayStr,
+    WayTerm,
     factunit_shop,
 )
 from src.a04_reason_logic.reason_labor import LaborUnit
@@ -136,19 +136,19 @@ class BudUnit:
     last_pack_id: int = None
     originunit: OriginUnit = None  # In plan buds this shows source
     # settle_bud Calculated field begin
-    _concept_dict: dict[WayStr, ConceptUnit] = None
-    _keep_dict: dict[WayStr, ConceptUnit] = None
-    _healers_dict: dict[HealerName, dict[WayStr, ConceptUnit]] = None
+    _concept_dict: dict[WayTerm, ConceptUnit] = None
+    _keep_dict: dict[WayTerm, ConceptUnit] = None
+    _healers_dict: dict[HealerName, dict[WayTerm, ConceptUnit]] = None
     _tree_traverse_count: int = None
     _rational: bool = None
     _keeps_justified: bool = None
     _keeps_buildable: bool = None
     _sum_healerlink_share: float = None
     _groupunits: dict[GroupTitle, GroupUnit] = None
-    _offtrack_kids_mass_set: set[WayStr] = None
+    _offtrack_kids_mass_set: set[WayTerm] = None
     _offtrack_fund: float = None
-    _reason_rcontexts: set[WayStr] = None
-    _range_inheritors: dict[WayStr, WayStr] = None
+    _reason_rcontexts: set[WayTerm] = None
+    _range_inheritors: dict[WayTerm, WayTerm] = None
     # settle_bud Calculated field end
 
     def del_last_pack_id(self):
@@ -186,16 +186,16 @@ class BudUnit:
 
     def make_way(
         self,
-        parent_way: WayStr = None,
-        terminus_label: LabelStr = None,
-    ) -> WayStr:
+        parent_way: WayTerm = None,
+        tail_label: LabelTerm = None,
+    ) -> WayTerm:
         return create_way(
             parent_way=parent_way,
-            terminus_label=terminus_label,
+            tail_label=tail_label,
             bridge=self.bridge,
         )
 
-    def make_l1_way(self, l1_label: LabelStr):
+    def make_l1_way(self, l1_label: LabelTerm):
         return self.make_way(self.fisc_label, l1_label)
 
     def set_bridge(self, new_bridge: str):
@@ -230,7 +230,7 @@ class BudUnit:
         else:
             self.max_tree_traverse = x_int
 
-    def _get_relevant_ways(self, ways: dict[WayStr,]) -> set[WayStr]:
+    def _get_relevant_ways(self, ways: dict[WayTerm,]) -> set[WayTerm]:
         to_evaluate_list = []
         to_evaluate_hx_dict = {}
         for x_way in ways:
@@ -266,9 +266,9 @@ class BudUnit:
 
     def _evaluate_relevancy(
         self,
-        to_evaluate_list: list[WayStr],
-        to_evaluate_hx_dict: dict[WayStr, int],
-        to_evaluate_way: WayStr,
+        to_evaluate_list: list[WayTerm],
+        to_evaluate_hx_dict: dict[WayTerm, int],
+        to_evaluate_way: WayTerm,
         way_type: str,
     ):
         if to_evaluate_hx_dict.get(to_evaluate_way) is None:
@@ -287,7 +287,7 @@ class BudUnit:
                         way_type="reasonunit_descendant",
                     )
 
-    def all_concepts_relevant_to_pledge_concept(self, way: WayStr) -> bool:
+    def all_concepts_relevant_to_pledge_concept(self, way: WayTerm) -> bool:
         pledge_concept_assoc_set = set(self._get_relevant_ways({way}))
         all_concepts_set = set(self.get_concept_tree_ordered_way_list())
         return all_concepts_set == all_concepts_set.intersection(
@@ -416,7 +416,7 @@ class BudUnit:
         all_group_titles = set(self._groupunits.keys())
         return all_group_titles.difference(x_acctunit_group_titles)
 
-    def _is_concept_rangeroot(self, concept_way: WayStr) -> bool:
+    def _is_concept_rangeroot(self, concept_way: WayTerm) -> bool:
         if self.fisc_label == concept_way:
             raise InvalidBudException(
                 "its difficult to foresee a scenario where conceptroot is rangeroot"
@@ -436,8 +436,8 @@ class BudUnit:
 
     def add_fact(
         self,
-        fcontext: WayStr,
-        fstate: WayStr = None,
+        fcontext: WayTerm,
+        fstate: WayTerm = None,
         fopen: float = None,
         fnigh: float = None,
         create_missing_concepts: bool = None,
@@ -489,13 +489,13 @@ class BudUnit:
             # that has that rcontext.
             x_conceptroot.set_factunit(x_factunit)
 
-    def get_fact(self, fcontext: WayStr) -> FactUnit:
+    def get_fact(self, fcontext: WayTerm) -> FactUnit:
         return self.conceptroot.factunits.get(fcontext)
 
-    def del_fact(self, fcontext: WayStr):
+    def del_fact(self, fcontext: WayTerm):
         self.conceptroot.del_factunit(fcontext)
 
-    def get_concept_dict(self, problem: bool = None) -> dict[WayStr, ConceptUnit]:
+    def get_concept_dict(self, problem: bool = None) -> dict[WayTerm, ConceptUnit]:
         self.settle_bud()
         if not problem:
             return self._concept_dict
@@ -571,10 +571,10 @@ class BudUnit:
             level_count = 0
         return level_count
 
-    def get_reason_rcontexts(self) -> set[WayStr]:
+    def get_reason_rcontexts(self) -> set[WayTerm]:
         return set(self.get_tree_metrics().reason_rcontexts.keys())
 
-    def get_missing_fact_rcontexts(self) -> dict[WayStr, int]:
+    def get_missing_fact_rcontexts(self) -> dict[WayTerm, int]:
         tree_metrics = self.get_tree_metrics()
         reason_rcontexts = tree_metrics.reason_rcontexts
         missing_rcontexts = {}
@@ -586,9 +586,9 @@ class BudUnit:
         return missing_rcontexts
 
     def add_concept(
-        self, concept_way: WayStr, mass: float = None, pledge: bool = None
+        self, concept_way: WayTerm, mass: float = None, pledge: bool = None
     ) -> ConceptUnit:
-        x_concept_label = get_terminus_label(concept_way, self.bridge)
+        x_concept_label = get_tail_label(concept_way, self.bridge)
         x_parent_way = get_parent_way(concept_way, self.bridge)
         x_conceptunit = conceptunit_shop(x_concept_label, mass=mass)
         if pledge:
@@ -618,7 +618,7 @@ class BudUnit:
     def set_concept(
         self,
         concept_kid: ConceptUnit,
-        parent_way: WayStr,
+        parent_way: WayTerm,
         get_rid_of_missing_awardlinks_awardee_titles: bool = None,
         create_missing_concepts: bool = None,
         adoptees: list[str] = None,
@@ -626,8 +626,8 @@ class BudUnit:
         create_missing_ancestors: bool = True,
     ):
         parent_way = to_way(parent_way, self.bridge)
-        if LabelStr(concept_kid.concept_label).is_label(self.bridge) is False:
-            x_str = f"set_concept failed because '{concept_kid.concept_label}' is not a LabelStr."
+        if LabelTerm(concept_kid.concept_label).is_label(self.bridge) is False:
+            x_str = f"set_concept failed because '{concept_kid.concept_label}' is not a LabelTerm."
             raise InvalidBudException(x_str)
 
         x_root_label = get_root_label_from_way(parent_way, self.bridge)
@@ -702,11 +702,11 @@ class BudUnit:
             for premise_x in x_reason.premises.values():
                 self._create_conceptkid_if_empty(way=premise_x.pstate)
 
-    def _create_conceptkid_if_empty(self, way: WayStr):
+    def _create_conceptkid_if_empty(self, way: WayTerm):
         if self.concept_exists(way) is False:
             self.add_concept(way)
 
-    def del_concept_obj(self, way: WayStr, del_children: bool = True):
+    def del_concept_obj(self, way: WayTerm, del_children: bool = True):
         if way == self.conceptroot.get_concept_way():
             raise InvalidBudException("Conceptroot cannot be deleted")
         parent_way = get_parent_way(way)
@@ -714,10 +714,10 @@ class BudUnit:
             if not del_children:
                 self._shift_concept_kids(x_way=way)
             parent_concept = self.get_concept_obj(parent_way)
-            parent_concept.del_kid(get_terminus_label(way, self.bridge))
+            parent_concept.del_kid(get_tail_label(way, self.bridge))
         self.settle_bud()
 
-    def _shift_concept_kids(self, x_way: WayStr):
+    def _shift_concept_kids(self, x_way: WayTerm):
         parent_way = get_parent_way(x_way)
         d_temp_concept = self.get_concept_obj(x_way)
         for kid in d_temp_concept._kids.values():
@@ -726,7 +726,7 @@ class BudUnit:
     def set_owner_name(self, new_owner_name):
         self.owner_name = new_owner_name
 
-    def edit_concept_label(self, old_way: WayStr, new_concept_label: LabelStr):
+    def edit_concept_label(self, old_way: WayTerm, new_concept_label: LabelTerm):
         if self.bridge in new_concept_label:
             exception_str = f"Cannot modify '{old_way}' because new_concept_label {new_concept_label} contains bridge {self.bridge}"
             raise InvalidLabelException(exception_str)
@@ -749,16 +749,16 @@ class BudUnit:
             self._conceptroot_find_replace_way(old_way=old_way, new_way=new_way)
 
     def _non_root_concept_label_edit(
-        self, old_way: WayStr, new_concept_label: LabelStr, parent_way: WayStr
+        self, old_way: WayTerm, new_concept_label: LabelTerm, parent_way: WayTerm
     ):
         x_concept = self.get_concept_obj(old_way)
         x_concept.set_concept_label(new_concept_label)
         x_concept.parent_way = parent_way
         concept_parent = self.get_concept_obj(get_parent_way(old_way))
-        concept_parent._kids.pop(get_terminus_label(old_way, self.bridge))
+        concept_parent._kids.pop(get_tail_label(old_way, self.bridge))
         concept_parent._kids[x_concept.concept_label] = x_concept
 
-    def _conceptroot_find_replace_way(self, old_way: WayStr, new_way: WayStr):
+    def _conceptroot_find_replace_way(self, old_way: WayTerm, new_way: WayTerm):
         self.conceptroot.find_replace_way(old_way=old_way, new_way=new_way)
 
         concept_iter_list = [self.conceptroot]
@@ -780,7 +780,7 @@ class BudUnit:
         self, x_conceptattrholder: ConceptAttrHolder
     ):
         premise_concept = self.get_concept_obj(x_conceptattrholder.reason_premise)
-        x_conceptattrholder.set_premise_range_attributes_influenced_by_premise_concept(
+        x_conceptattrholder.set_premise_range_influenced_by_premise_concept(
             popen=premise_concept.begin,
             pnigh=premise_concept.close,
             premise_denom=premise_concept.denom,
@@ -788,9 +788,9 @@ class BudUnit:
 
     def edit_reason(
         self,
-        concept_way: WayStr,
-        reason_rcontext: WayStr = None,
-        reason_premise: WayStr = None,
+        concept_way: WayTerm,
+        reason_rcontext: WayTerm = None,
+        reason_premise: WayTerm = None,
         popen: float = None,
         reason_pnigh: float = None,
         pdivisor: int = None,
@@ -806,17 +806,17 @@ class BudUnit:
 
     def edit_concept_attr(
         self,
-        concept_way: WayStr,
+        concept_way: WayTerm,
         mass: int = None,
         uid: int = None,
         reason: ReasonUnit = None,
-        reason_rcontext: WayStr = None,
-        reason_premise: WayStr = None,
+        reason_rcontext: WayTerm = None,
+        reason_premise: WayTerm = None,
         popen: float = None,
         reason_pnigh: float = None,
         pdivisor: int = None,
-        reason_del_premise_rcontext: WayStr = None,
-        reason_del_premise_pstate: WayStr = None,
+        reason_del_premise_rcontext: WayTerm = None,
+        reason_del_premise_pstate: WayTerm = None,
         reason_rconcept_active_requisite: str = None,
         laborunit: LaborUnit = None,
         healerlink: HealerLink = None,
@@ -882,8 +882,8 @@ class BudUnit:
         x_concept._set_attrs_to_conceptunit(concept_attr=x_conceptattrholder)
 
     def get_agenda_dict(
-        self, necessary_rcontext: WayStr = None
-    ) -> dict[WayStr, ConceptUnit]:
+        self, necessary_rcontext: WayTerm = None
+    ) -> dict[WayTerm, ConceptUnit]:
         self.settle_bud()
         return {
             x_concept.get_concept_way(): x_concept
@@ -891,7 +891,7 @@ class BudUnit:
             if x_concept.is_agenda_concept(necessary_rcontext)
         }
 
-    def get_all_pledges(self) -> dict[WayStr, ConceptUnit]:
+    def get_all_pledges(self) -> dict[WayTerm, ConceptUnit]:
         self.settle_bud()
         all_concepts = self._concept_dict.values()
         return {
@@ -900,7 +900,7 @@ class BudUnit:
             if x_concept.pledge
         }
 
-    def set_agenda_task_complete(self, task_way: WayStr, rcontext: WayStr):
+    def set_agenda_task_complete(self, task_way: WayTerm, rcontext: WayTerm):
         pledge_concept = self.get_concept_obj(task_way)
         pledge_concept.set_factunit_to_complete(self.conceptroot.factunits[rcontext])
 
@@ -1000,21 +1000,21 @@ class BudUnit:
         fund_agenda_ratio_take_sum = sum(
             x_acctunit._fund_agenda_take for x_acctunit in self.accts.values()
         )
-        x_acctunit_credit_belief_sum = self.get_acctunits_credit_belief_sum()
-        x_acctunit_debtit_belief_sum = self.get_acctunits_debtit_belief_sum()
+        x_acctunits_credit_belief_sum = self.get_acctunits_credit_belief_sum()
+        x_acctunits_debtit_belief_sum = self.get_acctunits_debtit_belief_sum()
         for x_acctunit in self.accts.values():
             x_acctunit.set_fund_agenda_ratio_give_take(
                 fund_agenda_ratio_give_sum=fund_agenda_ratio_give_sum,
                 fund_agenda_ratio_take_sum=fund_agenda_ratio_take_sum,
-                bud_acctunit_total_credit_belief=x_acctunit_credit_belief_sum,
-                bud_acctunit_total_debtit_belief=x_acctunit_debtit_belief_sum,
+                acctunits_credit_belief_sum=x_acctunits_credit_belief_sum,
+                acctunits_debtit_belief_sum=x_acctunits_debtit_belief_sum,
             )
 
     def _reset_acctunit_fund_give_take(self):
         for acctunit in self.accts.values():
             acctunit.clear_fund_give_take()
 
-    def concept_exists(self, way: WayStr) -> bool:
+    def concept_exists(self, way: WayTerm) -> bool:
         if way in {"", None}:
             return False
         root_way_concept_label = get_root_label_from_way(way, self.bridge)
@@ -1038,21 +1038,21 @@ class BudUnit:
         return True
 
     def get_concept_obj(
-        self, way: WayStr, if_missing_create: bool = False
+        self, way: WayTerm, if_missing_create: bool = False
     ) -> ConceptUnit:
         if way is None:
             raise InvalidBudException("get_concept_obj received way=None")
         if self.concept_exists(way) is False and not if_missing_create:
             raise InvalidBudException(f"get_concept_obj failed. no concept at '{way}'")
-        labelstrs = get_all_way_labels(way, bridge=self.bridge)
-        if len(labelstrs) == 1:
+        labelterms = get_all_way_labels(way, bridge=self.bridge)
+        if len(labelterms) == 1:
             return self.conceptroot
 
-        labelstrs.pop(0)
-        concept_label = labelstrs.pop(0)
+        labelterms.pop(0)
+        concept_label = labelterms.pop(0)
         x_concept = self.conceptroot.get_kid(concept_label, if_missing_create)
-        while labelstrs != []:
-            x_concept = x_concept.get_kid(labelstrs.pop(0), if_missing_create)
+        while labelterms != []:
+            x_concept = x_concept.get_kid(labelterms.pop(0), if_missing_create)
 
         return x_concept
 
@@ -1063,9 +1063,9 @@ class BudUnit:
         return x_concept.get_kids_in_range(x_gogo_calc, x_stop_calc)
 
     def get_inheritor_concept_list(
-        self, math_way: WayStr, inheritor_way: WayStr
+        self, math_way: WayTerm, inheritor_way: WayTerm
     ) -> list[ConceptUnit]:
-        concept_ways = all_waystrs_between(math_way, inheritor_way)
+        concept_ways = all_wayterms_between(math_way, inheritor_way)
         return [self.get_concept_obj(x_concept_way) for x_concept_way in concept_ways]
 
     def _set_concept_dict(self):
@@ -1081,7 +1081,7 @@ class BudUnit:
             for x_reason_rcontext in x_concept.reasonunits.keys():
                 self._reason_rcontexts.add(x_reason_rcontext)
 
-    def _raise_gogo_calc_stop_calc_exception(self, concept_way: WayStr):
+    def _raise_gogo_calc_stop_calc_exception(self, concept_way: WayTerm):
         exception_str = f"Error has occurred, Concept '{concept_way}' is having _gogo_calc and _stop_calc attributes set twice"
         raise _gogo_calc_stop_calc_Exception(exception_str)
 
@@ -1128,7 +1128,7 @@ class BudUnit:
                 self._allot_fund_share(x_concept)
 
     def _set_ancestors_pledge_fund_keep_attrs(
-        self, way: WayStr, keep_exceptions: bool = False
+        self, way: WayTerm, keep_exceptions: bool = False
     ):
         x_descendant_pledge_count = 0
         child_awardlines = None
@@ -1341,7 +1341,7 @@ class BudUnit:
             if self._keeps_justified and x_concept.healerlink.any_healer_name_exists():
                 self._keep_dict[x_concept.get_concept_way()] = x_concept
 
-    def _get_healers_dict(self) -> dict[HealerName, dict[WayStr, ConceptUnit]]:
+    def _get_healers_dict(self) -> dict[HealerName, dict[WayTerm, ConceptUnit]]:
         _healers_dict = {}
         for x_keep_way, x_keep_concept in self._keep_dict.items():
             for x_healer_name in x_keep_concept.healerlink._healer_names:
@@ -1356,7 +1356,7 @@ class BudUnit:
 
     def _get_buildable_keeps(self) -> bool:
         return all(
-            waystr_valid_dir_path(keep_way, self.bridge) != False
+            wayterm_valid_dir_path(keep_way, self.bridge) != False
             for keep_way in self._keep_dict.keys()
         )
 
@@ -1366,7 +1366,7 @@ class BudUnit:
 
     def get_concept_tree_ordered_way_list(
         self, no_range_descendants: bool = False
-    ) -> list[WayStr]:
+    ) -> list[WayTerm]:
         concept_list = list(self.get_concept_dict().values())
         label_dict = {
             concept.get_concept_way().lower(): concept.get_concept_way()
@@ -1451,7 +1451,7 @@ class BudUnit:
     def set_offtrack_fund(self) -> float:
         mass_set = self._offtrack_kids_mass_set
         self._offtrack_fund = sum(
-            self.get_concept_obj(x_waystr).get_fund_share() for x_waystr in mass_set
+            self.get_concept_obj(x_wayterm).get_fund_share() for x_wayterm in mass_set
         )
 
 
@@ -1478,7 +1478,7 @@ def budunit_shop(
         debtor_respect=validate_respect_num(),
         fund_pool=validate_fund_pool(fund_pool),
         fund_coin=default_fund_coin_if_None(fund_coin),
-        respect_bit=default_respect_bit_if_None(respect_bit),
+        respect_bit=default_RespectBit_if_None(respect_bit),
         penny=filter_penny(penny),
         _concept_dict=get_empty_dict_if_None(),
         _keep_dict=get_empty_dict_if_None(),
@@ -1522,7 +1522,7 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.fund_coin = default_fund_coin_if_None(
         obj_from_bud_dict(bud_dict, "fund_coin")
     )
-    x_bud.respect_bit = default_respect_bit_if_None(
+    x_bud.respect_bit = default_RespectBit_if_None(
         obj_from_bud_dict(bud_dict, "respect_bit")
     )
     x_bud.penny = filter_penny(obj_from_bud_dict(bud_dict, "penny"))

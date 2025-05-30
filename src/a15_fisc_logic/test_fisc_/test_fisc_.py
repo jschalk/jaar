@@ -2,7 +2,7 @@ from src.a00_data_toolbox.file_toolbox import create_path, get_json_filename, se
 from src.a01_way_logic.way import default_bridge_if_None
 from src.a02_finance_logic.finance_config import (
     default_fund_coin_if_None,
-    default_respect_bit_if_None,
+    default_RespectBit_if_None,
     filter_penny,
 )
 from src.a02_finance_logic.deal import tranbook_shop
@@ -75,7 +75,7 @@ def test_fiscunit_shop_ReturnsFiscUnit():
     assert a23_fisc.offi_times == set()
     assert a23_fisc.bridge == default_bridge_if_None()
     assert a23_fisc.fund_coin == default_fund_coin_if_None()
-    assert a23_fisc.respect_bit == default_respect_bit_if_None()
+    assert a23_fisc.respect_bit == default_RespectBit_if_None()
     assert a23_fisc.penny == filter_penny()
     assert a23_fisc.fisc_mstr_dir == get_module_temp_dir()
     assert a23_fisc.job_listen_rotations == get_default_job_listen_count()

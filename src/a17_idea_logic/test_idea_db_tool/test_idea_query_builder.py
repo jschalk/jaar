@@ -1,13 +1,12 @@
 from src.a02_finance_logic._test_util.a02_str import fisc_label_str, owner_name_str
 from src.a06_bud_logic._test_util.a06_str import (
-    event_int_str,
-    face_name_str,
     concept_way_str,
     labor_title_str,
     acct_name_str,
     credit_belief_str,
     debtit_belief_str,
 )
+from src.a09_pack_logic._test_util.a09_str import face_name_str, event_int_str
 from src.a15_fisc_logic._test_util.a15_str import amount_str
 from src.a17_idea_logic.idea_config import get_idea_config_dict
 from src.a17_idea_logic.idea_db_tool import (

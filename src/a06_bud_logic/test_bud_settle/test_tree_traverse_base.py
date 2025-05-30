@@ -388,7 +388,7 @@ def test_BudUnit_get_concept_tree_ordered_way_list_ReturnsObj():
     assert y_1st_way_in_ordered_list == root_way
 
 
-def test_BudUnit_get_concept_tree_ordered_way_list_CorrectlyCleansRangedConceptWayStrs():
+def test_BudUnit_get_concept_tree_ordered_way_list_CorrectlyCleansRangedConceptWayTerms():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
 
@@ -674,7 +674,7 @@ def test_BudUnit_settle_bud_Sets_conceptroot_factheir_With_range_factheirs():
     # WHEN
     with pytest_raises(Exception) as excinfo:
         yao_bud.settle_bud()
-    exception_str = f"Cannot have fact for range inheritor '{tue_way}'. A ranged fact concept must have _begin, _close attributes"
+    exception_str = f"Cannot have fact for range inheritor '{tue_way}'. A ranged fact concept must have _begin, _close"
     assert str(excinfo.value) == exception_str
 
     # THEN

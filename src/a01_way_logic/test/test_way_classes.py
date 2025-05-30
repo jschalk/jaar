@@ -1,112 +1,110 @@
 from src.a01_way_logic.way import (
-    LabelStr,
-    NameStr,
-    TitleStr,
+    LabelTerm,
+    NameTerm,
+    TitleTerm,
     HealerName,
     OwnerName,
     AcctName,
-    WayStr,
-    YawStr,
+    WayTerm,
+    YawTerm,
     GroupTitle,
     default_bridge_if_None,
     WorldID,
-    TimeLineLabel,
     FaceName,
-    get_default_face_name,
     EventInt,
 )
 from src.a01_way_logic._test_util.a01_str import bridge_str
 from inspect import getdoc as inspect_getdoc
 
 
-def test_NameStr_exists():
+def test_NameTerm_exists():
     # ESTABLISH
     bob_str = "Bob"
     # WHEN
-    bob_namestr = NameStr(bob_str)
+    bob_nameterm = NameTerm(bob_str)
     # THEN
-    assert bob_namestr == bob_str
+    assert bob_nameterm == bob_str
     doc_str = "All Name string classes should inherit from this class"
-    assert inspect_getdoc(bob_namestr) == doc_str
+    assert inspect_getdoc(bob_nameterm) == doc_str
 
 
-def test_NameStr_is_name_ReturnsObj_Scenario0():
+def test_NameTerm_is_name_ReturnsObj_Scenario0():
     # WHEN / THEN
-    assert NameStr("").is_name() is False
-    assert NameStr("A").is_name()
+    assert NameTerm("").is_name() is False
+    assert NameTerm("A").is_name()
 
     # WHEN / THEN
     x_s = default_bridge_if_None()
-    x_namestr = NameStr(f"casa{x_s}kitchen")
-    assert x_namestr.is_name() is False
+    x_nameterm = NameTerm(f"casa{x_s}kitchen")
+    assert x_nameterm.is_name() is False
 
 
-def test_NameStr_is_name_ReturnsObj_Scenario1():
+def test_NameTerm_is_name_ReturnsObj_Scenario1():
     # ESTABLISH / WHEN / THEN
     slash_str = "/"
-    x_namestr = NameStr(f"casa{slash_str}kitchen")
-    assert x_namestr.is_name()
-    assert x_namestr.is_name(slash_str) is False
+    x_nameterm = NameTerm(f"casa{slash_str}kitchen")
+    assert x_nameterm.is_name()
+    assert x_nameterm.is_name(slash_str) is False
 
 
 def test_HealerName_exists():
     # ESTABLISH
     bob_str = "Bob"
     # WHEN
-    bob_healer_name = HealerName(bob_str)
+    bob_healer_str = HealerName(bob_str)
     # THEN
-    assert bob_healer_name == bob_str
-    doc_str = "A LabelStr used to identify a Problem's Healer"
-    assert inspect_getdoc(bob_healer_name) == doc_str
+    assert bob_healer_str == bob_str
+    doc_str = "A LabelTerm used to identify a Problem's Healer"
+    assert inspect_getdoc(bob_healer_str) == doc_str
 
 
 def test_OwnerName_exists():
     # ESTABLISH
     bob_str = "Bob"
     # WHEN
-    bob_owner_name = OwnerName(bob_str)
+    bob_OwnerName_str = OwnerName(bob_str)
     # THEN
-    assert bob_owner_name == bob_str
-    doc_str = "A LabelStr used to identify a BudUnit's owner_name"
-    assert inspect_getdoc(bob_owner_name) == doc_str
+    assert bob_OwnerName_str == bob_str
+    doc_str = "A NameTerm used to identify a BudUnit's owner"
+    assert inspect_getdoc(bob_OwnerName_str) == doc_str
 
 
 def test_AcctName_exists():
     # ESTABLISH
     bob_str = "Bob"
     # WHEN
-    bob_acct_name = AcctName(bob_str)
+    bob_AcctName = AcctName(bob_str)
     # THEN
-    assert bob_acct_name == bob_str
+    assert bob_AcctName == bob_str
     doc_str = "Every AcctName object is OwnerName, must follow OwnerName format."
-    assert inspect_getdoc(bob_acct_name) == doc_str
+    assert inspect_getdoc(bob_AcctName) == doc_str
 
 
-def test_TitleStr_exists():
+def test_TitleTerm_exists():
     # ESTABLISH
     bob_str = "Bob"
     # WHEN
-    bob_namestr = TitleStr(bob_str)
+    bob_nameterm = TitleTerm(bob_str)
     # THEN
-    assert bob_namestr == bob_str
-    doc_str = f"""If a TitleStr contains {bridge_str()}s it represents a group otherwise it's a single member group of an AcctName."""
-    assert inspect_getdoc(bob_namestr) == doc_str
+    assert bob_nameterm == bob_str
+    doc_str = f"""If a TitleTerm contains {bridge_str()}s it represents a group otherwise it's a single member group of an AcctName."""
+    assert inspect_getdoc(bob_nameterm) == doc_str
 
 
 def test_GroupTitle_exists():
-    bikers_group_title = GroupTitle(";bikers")
-    assert bikers_group_title is not None
-    assert str(type(bikers_group_title)).find("src.a01_way_logic.way.GroupTitle") > 0
+    bikers_GroupTitle = GroupTitle(";bikers")
+    assert bikers_GroupTitle is not None
+    assert str(type(bikers_GroupTitle)).find("src.a01_way_logic.way.GroupTitle") > 0
 
 
-def test_LabelStr_exists():
+def test_LabelTerm_exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_way = LabelStr(empty_str)
+    x_way = LabelTerm(empty_str)
     # THEN
     assert x_way == empty_str
-    doc_str = f"A string representation of a tree node. Nodes cannot contain WayStr {bridge_str()}"
+    doc_str = f"A string representation of a tree node. Nodes cannot contain WayTerm {bridge_str()}"
     assert inspect_getdoc(x_way) == doc_str
 
 
@@ -127,56 +125,45 @@ def test_default_bridge_if_None_ReturnsObj():
     assert default_bridge_if_None(buzz_str) == buzz_str
 
 
-def test_LabelStr_is_label_ReturnsObj_Scenario0():
+def test_LabelTerm_is_label_ReturnsObj_Scenario0():
     # WHEN / THEN
-    assert LabelStr("").is_label() is False
-    assert LabelStr("A").is_label()
+    assert LabelTerm("").is_label() is False
+    assert LabelTerm("A").is_label()
 
     # WHEN / THEN
     x_s = default_bridge_if_None()
-    x_labelstr = LabelStr(f"casa{x_s}kitchen")
-    assert x_labelstr.is_label() is False
+    x_labelterm = LabelTerm(f"casa{x_s}kitchen")
+    assert x_labelterm.is_label() is False
 
 
-def test_LabelStr_is_label_ReturnsObj_Scenario1():
+def test_LabelTerm_is_label_ReturnsObj_Scenario1():
     # ESTABLISH / WHEN / THEN
     slash_str = "/"
-    x_labelstr = LabelStr(f"casa{slash_str}kitchen")
-    assert x_labelstr.is_label()
-    assert x_labelstr.is_label(slash_str) is False
+    x_labelterm = LabelTerm(f"casa{slash_str}kitchen")
+    assert x_labelterm.is_label()
+    assert x_labelterm.is_label(slash_str) is False
 
 
-def test_WayStr_exists():
+def test_WayTerm_exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_way = WayStr(empty_str)
+    x_way = WayTerm(empty_str)
     # THEN
     assert x_way == empty_str
-    doc_str = f"A string representation of a tree path. LabelStrs are seperated by way {bridge_str()}"
+    doc_str = f"A string representation of a tree path. LabelTerms are seperated by way {bridge_str()}"
     assert inspect_getdoc(x_way) == doc_str
 
 
-def test_YawStr_exists():
+def test_YawTerm_exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_way = YawStr(empty_str)
+    x_way = YawTerm(empty_str)
     # THEN
     assert x_way == empty_str
-    doc_str = f"YawStr is a WayStr in reverse direction. A string representation of a tree path. LabelStrs are seperated by way {bridge_str()}."
+    doc_str = f"YawTerm is a WayTerm in reverse direction. A string representation of a tree path. LabelTerms are seperated by way {bridge_str()}."
     assert inspect_getdoc(x_way) == doc_str
-
-
-def test_TimeLineLabel_exists():
-    # ESTABLISH
-    empty_str = ""
-    # WHEN
-    x_timelinelabel = TimeLineLabel(empty_str)
-    # THEN
-    assert x_timelinelabel == empty_str
-    doc_str = f"TimeLineLabel is required for every TimeLineUnit. It is a LabelStr that must not container the {bridge_str()}."
-    assert inspect_getdoc(x_timelinelabel) == doc_str
 
 
 def test_WorldID_Exists():
@@ -189,11 +176,6 @@ def test_FaceName_Exists():
     # ESTABLISH / WHEN / THEN
     assert FaceName() == ""
     assert FaceName("cookie") == "cookie"
-
-
-def test_get_default_face_name_ReturnsObj():
-    # ESTABLISH / WHEN / THEN
-    assert get_default_face_name() == "Face1234"
 
 
 def test_EventInt_Exists():

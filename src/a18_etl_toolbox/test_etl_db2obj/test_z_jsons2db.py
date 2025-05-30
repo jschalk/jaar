@@ -47,7 +47,7 @@ def test_ObjKeysHolder_Exists():
     assert not x_objkeyholder.rcontext
     assert not x_objkeyholder.acct_name
     assert not x_objkeyholder.membership
-    assert not x_objkeyholder.group_name
+    assert not x_objkeyholder.group_title
     assert not x_objkeyholder.fact_way
 
 
@@ -919,52 +919,3 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         assert get_row_count(cursor, budreas_job_table) == 1
         assert get_row_count(cursor, budprem_job_table) == 1
         assert get_row_count(cursor, budlabo_job_table) == 1
-
-
-# def test_etl_fiscs_jobs_json_to_db_SetsDB_Scenario0_TwoBudsInDifferentFiscUnits(
-#     env_dir_setup_cleanup,
-# ):
-#     # ESTABLISH
-#     lobby_mstr_dir = get_module_temp_dir()
-#     c77_str = "Chat77"
-#     a23_str = "accord23"
-#     sue_str = "Sue"
-#     a23_sue_bud = budunit_shop(sue_str, a23_str)
-#     a23_sue_bud.add_acctunit(sue_str)
-#     a23_sue_bud.add_concept(a23_sue_bud.make_l1_way("casa"))
-
-#     a99_str = "accord99"
-#     bob_str = "Bob"
-#     a99_sue_bud = budunit_shop(sue_str, a99_str)
-#     a99_sue_bud.add_acctunit(sue_str)
-#     a99_sue_bud.add_acctunit(bob_str)
-#     a99_sue_bud.add_concept(a99_sue_bud.make_l1_way("casa"))
-#     a99_sue_bud.add_concept(a99_sue_bud.make_l1_way("sports"))
-
-#     w34_str = "world34"
-#     w99_str = "world99"
-#     w34_fisc_mstr_dir = create_fisc_mstr_dir_path(lobby_mstr_dir, c77_str, w34_str)
-#     w99_fisc_mstr_dir = create_fisc_mstr_dir_path(lobby_mstr_dir, c77_str, w99_str)
-#     print(f"{w34_fisc_mstr_dir=}")
-#     print(f"{w99_fisc_mstr_dir=}")
-#     save_job_file(w34_fisc_mstr_dir, a23_sue_bud)
-#     save_job_file(w99_fisc_mstr_dir, a99_sue_bud)
-
-#     with sqlite3_connect(":memory:") as conn:
-#         cursor = conn.cursor()
-#         create_job_tables(cursor)
-#         budacct_job_table = f"{bud_acctunit_str()}_job"
-#         budconc_job_table = f"{bud_conceptunit_str()}_job"
-#         budunit_job_table = f"{budunit_str()}_job"
-#         assert get_row_count(cursor, budunit_job_table) == 0
-#         assert get_row_count(cursor, budconc_job_table) == 0
-#         assert get_row_count(cursor, budacct_job_table) == 0
-
-#         # WHEN
-#         worlds = [w34_str, w99_str]
-#         etl_fiscs_jobs_json_to_db(cursor, lobby_mstr_dir, c77_str, worlds)
-
-#         # THEN
-#         assert get_row_count(cursor, budunit_job_table) == 2
-#         assert get_row_count(cursor, budconc_job_table) == 5
-#         assert get_row_count(cursor, budacct_job_table) == 3

@@ -15,7 +15,7 @@ from src.a04_reason_logic.reason_concept import (
 )
 
 
-def test_ReasonCore_attributesExist():
+def test_ReasonCore_Exists():
     # ESTABLISH
     wkday_str = "weekday"
     wkday_way = create_way(root_label(), wkday_str)

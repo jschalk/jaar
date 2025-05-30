@@ -2,12 +2,12 @@ from src.a00_data_toolbox.file_toolbox import is_path_valid
 from pathlib import Path as pathlib_Path
 
 
-class InvalidWayStrException(Exception):
+class InvalidWayTermException(Exception):
     pass
 
 
-class LabelStr(str):
-    """A string representation of a tree node. Nodes cannot contain WayStr bridge"""
+class LabelTerm(str):
+    """A string representation of a tree node. Nodes cannot contain WayTerm bridge"""
 
     def is_label(self, bridge: str = None) -> bool:
         return len(self) > 0 and self.contains_bridge(bridge)
@@ -16,11 +16,11 @@ class LabelStr(str):
         return self.find(default_bridge_if_None(bridge)) == -1
 
 
-class FiscLabel(LabelStr):  # Created to help track the object class relations
+class FiscLabel(LabelTerm):  # Created to help track the object class relations
     pass
 
 
-class NameStr(str):
+class NameTerm(str):
     """All Name string classes should inherit from this class"""
 
     def is_name(self, bridge: str = None) -> bool:
@@ -30,8 +30,8 @@ class NameStr(str):
         return self.find(default_bridge_if_None(bridge)) == -1
 
 
-class OwnerName(NameStr):
-    """A LabelStr used to identify a BudUnit's owner_name"""
+class OwnerName(NameTerm):
+    """A NameTerm used to identify a BudUnit's owner"""
 
     pass
 
@@ -43,34 +43,28 @@ class AcctName(OwnerName):  # Created to help track the object class relations
 
 
 class HealerName(OwnerName):
-    """A LabelStr used to identify a Problem's Healer"""
+    """A LabelTerm used to identify a Problem's Healer"""
 
     pass
 
 
-class TimeLineLabel(LabelStr):
-    "TimeLineLabel is required for every TimeLineUnit. It is a LabelStr that must not container the bridge."
+class WayTerm(str):
+    """A string representation of a tree path. LabelTerms are seperated by way bridge"""
 
     pass
 
 
-class WayStr(str):
-    """A string representation of a tree path. LabelStrs are seperated by way bridge"""
+class YawTerm(str):
+    """YawTerm is a WayTerm in reverse direction. A string representation of a tree path. LabelTerms are seperated by way bridge."""
 
     pass
 
 
-class YawStr(str):
-    """YawStr is a WayStr in reverse direction. A string representation of a tree path. LabelStrs are seperated by way bridge."""
-
-    pass
+class TitleTerm(str):
+    """If a TitleTerm contains bridges it represents a group otherwise it's a single member group of an AcctName."""
 
 
-class TitleStr(str):
-    """If a TitleStr contains bridges it represents a group otherwise it's a single member group of an AcctName."""
-
-
-class GroupTitle(TitleStr):  # Created to help track the object class relations
+class GroupTitle(TitleTerm):  # Created to help track the object class relations
     pass
 
 
@@ -78,12 +72,8 @@ class WorldID(str):
     pass
 
 
-class FaceName(NameStr):
+class FaceName(NameTerm):
     pass
-
-
-def get_default_face_name() -> FaceName:
-    return FaceName("Face1234")
 
 
 class EventInt(int):
@@ -98,7 +88,7 @@ def get_default_fisc_label() -> FiscLabel:
     return "ZZ"
 
 
-def to_way(label: LabelStr, bridge: str = None):
+def to_way(label: LabelTerm, bridge: str = None):
     x_bridge = default_bridge_if_None(bridge)
     if label is None:
         return x_bridge
@@ -125,13 +115,13 @@ class bridge_in_label_Exception(Exception):
 
 
 def create_way(
-    parent_way: WayStr,
-    terminus_label: LabelStr = None,
+    parent_way: WayTerm,
+    tail_label: LabelTerm = None,
     bridge: str = None,
     auto_add_first_bridge: bool = True,
-) -> WayStr:
+) -> WayTerm:
     bridge = default_bridge_if_None(bridge)
-    if terminus_label in {"", None}:
+    if tail_label in {"", None}:
         return to_way(parent_way, bridge)
 
     if parent_way and parent_way.find(bridge) != 0:
@@ -143,23 +133,23 @@ def create_way(
             )
             raise init_bridge_not_presentException(exception_str)
 
-    terminus_label = LabelStr(terminus_label)
-    if terminus_label.is_label(bridge) is False:
-        raise bridge_in_label_Exception(f"bridge '{bridge}' is in {terminus_label}")
-    if terminus_label is None:
-        return WayStr(parent_way)
-    if terminus_label.is_label(bridge) is False:
-        raise bridge_in_label_Exception(f"bridge '{bridge}' is in {terminus_label}")
+    tail_label = LabelTerm(tail_label)
+    if tail_label.is_label(bridge) is False:
+        raise bridge_in_label_Exception(f"bridge '{bridge}' is in {tail_label}")
+    if tail_label is None:
+        return WayTerm(parent_way)
+    if tail_label.is_label(bridge) is False:
+        raise bridge_in_label_Exception(f"bridge '{bridge}' is in {tail_label}")
     if parent_way in {"", None}:
-        x_way = to_way(terminus_label, bridge)
+        x_way = to_way(tail_label, bridge)
     elif parent_way.endswith(bridge):
-        x_way = f"{parent_way}{terminus_label}{bridge}"
+        x_way = f"{parent_way}{tail_label}{bridge}"
     else:
-        x_way = f"{parent_way}{bridge}{terminus_label}{bridge}"
+        x_way = f"{parent_way}{bridge}{tail_label}{bridge}"
     return to_way(x_way, bridge)
 
 
-def rebuild_way(subj_way: WayStr, old_way: WayStr, new_way: WayStr) -> WayStr:
+def rebuild_way(subj_way: WayTerm, old_way: WayTerm, new_way: WayTerm) -> WayTerm:
     if subj_way is None:
         return subj_way
     elif is_sub_way(subj_way, old_way):
@@ -168,17 +158,17 @@ def rebuild_way(subj_way: WayStr, old_way: WayStr, new_way: WayStr) -> WayStr:
         return subj_way
 
 
-def is_sub_way(ref_way: WayStr, sub_way: WayStr) -> bool:
+def is_sub_way(ref_way: WayTerm, sub_way: WayTerm) -> bool:
     ref_way = "" if ref_way is None else ref_way
     return ref_way.find(sub_way) == 0
 
 
-def is_heir_way(src: WayStr, heir: WayStr, bridge: str = None) -> bool:
+def is_heir_way(src: WayTerm, heir: WayTerm, bridge: str = None) -> bool:
     # return src == heir or heir.startswith(src + default_bridge_if_None(bridge))
     return src == heir or heir.find(src) == 0
 
 
-def find_replace_way_key_dict(dict_x: dict, old_way: WayStr, new_way: WayStr) -> dict:
+def find_replace_way_key_dict(dict_x: dict, old_way: WayTerm, new_way: WayTerm) -> dict:
     keys_to_delete = []
     objs_to_add = []
     for x_key, x_obj in dict_x.items():
@@ -196,11 +186,11 @@ def find_replace_way_key_dict(dict_x: dict, old_way: WayStr, new_way: WayStr) ->
     return dict_x
 
 
-def get_all_way_labels(way: WayStr, bridge: str = None) -> list[LabelStr]:
+def get_all_way_labels(way: WayTerm, bridge: str = None) -> list[LabelTerm]:
     return way.split(default_bridge_if_None(bridge))[1:-1]
 
 
-def get_terminus_label(way: WayStr, bridge: str = None) -> LabelStr:
+def get_tail_label(way: WayTerm, bridge: str = None) -> LabelTerm:
     bridge = default_bridge_if_None(bridge)
     if way in ["", bridge]:
         return ""
@@ -209,17 +199,17 @@ def get_terminus_label(way: WayStr, bridge: str = None) -> LabelStr:
 
 
 def get_parent_way(
-    way: WayStr, bridge: str = None
-) -> WayStr:  # way without terminus label
+    way: WayTerm, bridge: str = None
+) -> WayTerm:  # way without tail label
     parent_labels = get_all_way_labels(way=way, bridge=bridge)[:-1]
     return create_way_from_labels(parent_labels, bridge=bridge)
 
 
-def get_root_label_from_way(way: WayStr, bridge: str = None) -> LabelStr:
+def get_root_label_from_way(way: WayTerm, bridge: str = None) -> LabelTerm:
     return get_all_way_labels(way=way, bridge=bridge)[0]
 
 
-def get_ancestor_ways(way: WayStr, bridge: str = None) -> list[WayStr]:
+def get_ancestor_ways(way: WayTerm, bridge: str = None) -> list[WayTerm]:
     bridge = default_bridge_if_None(bridge)
     if not way:
         return []
@@ -238,7 +228,7 @@ def get_ancestor_ways(way: WayStr, bridge: str = None) -> list[WayStr]:
     return x_ways
 
 
-def all_waystrs_between(src_way, dst_way) -> list[WayStr]:
+def all_wayterms_between(src_way, dst_way) -> list[WayTerm]:
     x_list = []
     anc_ways = get_ancestor_ways(dst_way)
     while anc_ways != []:
@@ -252,7 +242,7 @@ class ForeFatherException(Exception):
     pass
 
 
-def get_forefather_ways(way: WayStr) -> dict[WayStr]:
+def get_forefather_ways(way: WayTerm) -> dict[WayTerm]:
     ancestor_ways = get_ancestor_ways(way=way)
     popped_way = ancestor_ways.pop(0)
     if popped_way != way:
@@ -262,11 +252,7 @@ def get_forefather_ways(way: WayStr) -> dict[WayStr]:
     return {a_way: None for a_way in ancestor_ways}
 
 
-def get_default_fisc_label() -> FiscLabel:
-    return "ZZ"
-
-
-def create_way_from_labels(labels: list[LabelStr], bridge: str = None) -> WayStr:
+def create_way_from_labels(labels: list[LabelTerm], bridge: str = None) -> WayTerm:
     if not labels:
         return ""
     return to_way(default_bridge_if_None(bridge).join(labels), bridge)
@@ -276,11 +262,11 @@ class InvalidbridgeReplaceException(Exception):
     pass
 
 
-def is_string_in_way(string: str, way: WayStr) -> bool:
+def is_string_in_way(string: str, way: WayTerm) -> bool:
     return way.find(string) >= 0
 
 
-def replace_bridge(way: WayStr, old_bridge: str, new_bridge: str):
+def replace_bridge(way: WayTerm, old_bridge: str, new_bridge: str):
     if is_string_in_way(string=new_bridge, way=way):
         raise InvalidbridgeReplaceException(
             f"Cannot replace_bridge '{old_bridge}' with '{new_bridge}' because the new one exists in way '{way}'."
@@ -288,32 +274,32 @@ def replace_bridge(way: WayStr, old_bridge: str, new_bridge: str):
     return way.replace(old_bridge, new_bridge)
 
 
-class ValidateLabelStrException(Exception):
+class ValidateLabelTermException(Exception):
     pass
 
 
-def is_labelstr(x_labelstr: LabelStr, x_bridge: str):
-    x_labelstr = LabelStr(x_labelstr)
-    return x_labelstr.is_label(bridge=x_bridge)
+def is_labelterm(x_labelterm: LabelTerm, x_bridge: str):
+    x_labelterm = LabelTerm(x_labelterm)
+    return x_labelterm.is_label(bridge=x_bridge)
 
 
-def validate_labelstr(
-    x_labelstr: LabelStr, x_bridge: str, not_labelstr_required: bool = False
+def validate_labelterm(
+    x_labelterm: LabelTerm, x_bridge: str, not_labelterm_required: bool = False
 ):
-    if is_labelstr(x_labelstr, x_bridge) and not_labelstr_required:
-        raise ValidateLabelStrException(
-            f"'{x_labelstr}' needs to not be a LabelStr. Must contain bridge: '{x_bridge}'"
+    if is_labelterm(x_labelterm, x_bridge) and not_labelterm_required:
+        raise ValidateLabelTermException(
+            f"'{x_labelterm}' needs to not be a LabelTerm. Must contain bridge: '{x_bridge}'"
         )
-    elif is_labelstr(x_labelstr, x_bridge) is False and not not_labelstr_required:
-        raise ValidateLabelStrException(
-            f"'{x_labelstr}' needs to be a LabelStr. Cannot contain bridge: '{x_bridge}'"
+    elif is_labelterm(x_labelterm, x_bridge) is False and not not_labelterm_required:
+        raise ValidateLabelTermException(
+            f"'{x_labelterm}' needs to be a LabelTerm. Cannot contain bridge: '{x_bridge}'"
         )
 
-    return x_labelstr
+    return x_labelterm
 
 
-def waystr_valid_dir_path(x_waystr: WayStr, bridge: str) -> bool:
-    x_way_labels = get_all_way_labels(x_waystr, bridge)
+def wayterm_valid_dir_path(x_wayterm: WayTerm, bridge: str) -> bool:
+    x_way_labels = get_all_way_labels(x_wayterm, bridge)
     slash_str = "/"
     x_way_os_path = create_way_from_labels(x_way_labels, bridge=slash_str)
     parts = pathlib_Path(x_way_os_path).parts
@@ -321,11 +307,11 @@ def waystr_valid_dir_path(x_waystr: WayStr, bridge: str) -> bool:
     return False if len(parts) != len(x_way_labels) else is_path_valid(x_way_os_path)
 
 
-def get_way_from_yaw(x_yawstr: YawStr, bridge: str = None) -> WayStr:
+def get_way_from_yaw(x_yawterm: YawTerm, bridge: str = None) -> WayTerm:
     x_bridge = default_bridge_if_None(bridge)
-    yaw_labels = get_all_way_labels(x_yawstr, x_bridge)
-    return WayStr(create_way_from_labels(yaw_labels[::-1], x_bridge))
+    yaw_labels = get_all_way_labels(x_yawterm, x_bridge)
+    return WayTerm(create_way_from_labels(yaw_labels[::-1], x_bridge))
 
 
-def get_yaw_from_way(x_waystr: WayStr, bridge: str = None) -> YawStr:
-    return YawStr(get_way_from_yaw(x_waystr, bridge))
+def get_yaw_from_way(x_wayterm: WayTerm, bridge: str = None) -> YawTerm:
+    return YawTerm(get_way_from_yaw(x_wayterm, bridge))

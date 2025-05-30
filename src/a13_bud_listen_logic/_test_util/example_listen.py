@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import WayStr, create_way
+from src.a01_way_logic.way import WayTerm, create_way
 from src.a04_reason_logic.reason_concept import factunit_shop, FactUnit
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_bud_logic.bud import budunit_shop, BudUnit
@@ -32,31 +32,31 @@ def run_str() -> str:
     return "run"
 
 
-def casa_way() -> WayStr:
+def casa_way() -> WayTerm:
     return create_way("accord23", casa_str())
 
 
-def cook_way() -> WayStr:
+def cook_way() -> WayTerm:
     return create_way(casa_way(), cook_str())
 
 
-def eat_way() -> WayStr:
+def eat_way() -> WayTerm:
     return create_way(casa_way(), eat_str())
 
 
-def hungry_way() -> WayStr:
+def hungry_way() -> WayTerm:
     return create_way(eat_way(), hungry_str())
 
 
-def full_way() -> WayStr:
+def full_way() -> WayTerm:
     return create_way(eat_way(), full_str())
 
 
-def clean_way() -> WayStr:
+def clean_way() -> WayTerm:
     return create_way(casa_way(), clean_str())
 
 
-def run_way() -> WayStr:
+def run_way() -> WayTerm:
     return create_way(casa_way(), run_str())
 
 

@@ -133,7 +133,7 @@ def test_ConceptUnit_get_obj_key_ReturnsCorrectInfo():
     assert red_concept.get_obj_key() == red_str
 
 
-def test_ConceptUnit_set_bridge_CorrectlyModifiesReasonWayStrs():
+def test_ConceptUnit_set_bridge_CorrectlyModifiesReasonWayTerms():
     # ESTABLISH
     casa_str = "casa"
     casa_concept = conceptunit_shop(casa_str)

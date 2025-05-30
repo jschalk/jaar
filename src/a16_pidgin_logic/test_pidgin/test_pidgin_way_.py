@@ -1,11 +1,11 @@
 from src.a01_way_logic.way import default_bridge_if_None, create_way, to_way
-from src.a06_bud_logic._test_util.a06_str import event_int_str, face_name_str
-from src.a16_pidgin_logic.pidgin_config import default_unknown_term_if_None
+from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
+from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
 from src.a16_pidgin_logic._test_util.a16_str import (
     inx_bridge_str,
     otx2inx_str,
     otx_bridge_str,
-    unknown_term_str,
+    unknown_str_str,
 )
 from src.a16_pidgin_logic.map import (
     labelmap_shop,
@@ -22,9 +22,9 @@ from pytest import raises as pytest_raises
 # initialize fiscunits and output acct metrics such as calendars, financial status, healer status
 
 
-def test_default_unknown_term_if_None_ReturnsObj():
+def test_default_unknown_str_if_None_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert default_unknown_term_if_None() == "UNKNOWN"
+    assert default_unknown_str_if_None() == "UNKNOWN"
 
 
 def test_WayMap_Exists():
@@ -35,7 +35,7 @@ def test_WayMap_Exists():
     assert not x_waymap.face_name
     assert not x_waymap.event_int
     assert not x_waymap.otx2inx
-    assert not x_waymap.unknown_term
+    assert not x_waymap.unknown_str
     assert not x_waymap.otx_bridge
     assert not x_waymap.inx_bridge
     assert not x_waymap.labelmap
@@ -48,7 +48,7 @@ def test_waymap_shop_ReturnsObj_scenario0():
     bob_str = "Bob"
     event7 = 7
     otx2inx = {xio_str: sue_str}
-    x_unknown_term = "UnknownTerm"
+    x_unknown_str = "UnknownTerm"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
 
@@ -57,7 +57,7 @@ def test_waymap_shop_ReturnsObj_scenario0():
         face_name=bob_str,
         event_int=event7,
         otx2inx=otx2inx,
-        unknown_term=x_unknown_term,
+        unknown_str=x_unknown_str,
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
     )
@@ -66,13 +66,13 @@ def test_waymap_shop_ReturnsObj_scenario0():
     assert e7_waymap.face_name == bob_str
     assert e7_waymap.event_int == event7
     assert e7_waymap.otx2inx == otx2inx
-    assert e7_waymap.unknown_term == x_unknown_term
+    assert e7_waymap.unknown_str == x_unknown_str
     assert e7_waymap.otx_bridge == slash_otx_bridge
     assert e7_waymap.inx_bridge == colon_inx_bridge
     assert e7_waymap.labelmap == labelmap_shop(
         face_name=bob_str,
         event_int=event7,
-        unknown_term=x_unknown_term,
+        unknown_str=x_unknown_str,
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
     )
@@ -84,14 +84,14 @@ def test_waymap_shop_ReturnsObj_Scenario2():
 
     # THEN
     assert x_waymap.otx2inx == {}
-    assert x_waymap.unknown_term == default_unknown_term_if_None()
+    assert x_waymap.unknown_str == default_unknown_str_if_None()
     assert x_waymap.otx_bridge == default_bridge_if_None()
     assert x_waymap.inx_bridge == default_bridge_if_None()
     assert x_waymap.face_name is None
     assert x_waymap.event_int == 0
     assert x_waymap.labelmap == labelmap_shop(
         event_int=0,
-        unknown_term=default_unknown_term_if_None(),
+        unknown_str=default_unknown_str_if_None(),
         otx_bridge=default_bridge_if_None(),
         inx_bridge=default_bridge_if_None(),
     )
@@ -111,7 +111,7 @@ def test_waymap_shop_ReturnsObj_scenario3_PidginCoreAttrAreDefaultWhenGiven_floa
         face_name=bob_str,
         event_int=event7,
         otx2inx=otx2inx,
-        unknown_term=x_nan,
+        unknown_str=x_nan,
         otx_bridge=x_nan,
         inx_bridge=x_nan,
     )
@@ -120,7 +120,7 @@ def test_waymap_shop_ReturnsObj_scenario3_PidginCoreAttrAreDefaultWhenGiven_floa
     assert x_waymap.face_name == bob_str
     assert x_waymap.event_int == event7
     assert x_waymap.otx2inx == otx2inx
-    assert x_waymap.unknown_term == default_unknown_term_if_None()
+    assert x_waymap.unknown_str == default_unknown_str_if_None()
     assert x_waymap.otx_bridge == default_bridge_if_None()
     assert x_waymap.inx_bridge == default_bridge_if_None()
 
@@ -141,20 +141,20 @@ def test_WayMap_set_all_otx2inx_SetsAttr():
     assert acct_name_waymap.otx2inx == x_otx2inx
 
 
-def test_WayMap_set_all_otx2inx_RaisesErrorIf_unknown_term_IsKeyIn_otx2inx():
+def test_WayMap_set_all_otx2inx_RaisesErrorIf_unknown_str_IsKeyIn_otx2inx():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     zia_str = "Zia"
-    x_unknown_term = "UnknownTerm"
-    acct_name_waymap = waymap_shop(unknown_term=x_unknown_term)
-    x_otx2inx = {xio_str: sue_str, x_unknown_term: zia_str}
+    x_unknown_str = "UnknownTerm"
+    acct_name_waymap = waymap_shop(unknown_str=x_unknown_str)
+    x_otx2inx = {xio_str: sue_str, x_unknown_str: zia_str}
     assert acct_name_waymap.otx2inx != x_otx2inx
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         acct_name_waymap.set_all_otx2inx(x_otx2inx, True)
-    exception_str = f"otx2inx cannot have unknown_term '{x_unknown_term}' in any str. Affected keys include ['{x_unknown_term}']."
+    exception_str = f"otx2inx cannot have unknown_str '{x_unknown_str}' in any str. Affected keys include ['{x_unknown_str}']."
     assert str(excinfo.value) == exception_str
 
 
@@ -163,9 +163,9 @@ def test_WayMap_set_all_otx2inx_DoesNotRaiseErrorIfParameterSetToTrue():
     xio_str = "Xio"
     sue_str = "Sue"
     zia_str = "Zia"
-    x_unknown_term = "UnknownTerm"
+    x_unknown_str = "UnknownTerm"
     x_waymap = waymap_shop(None)
-    x_otx2inx = {xio_str: sue_str, x_unknown_term: zia_str}
+    x_otx2inx = {xio_str: sue_str, x_unknown_str: zia_str}
     assert x_waymap.otx2inx != x_otx2inx
 
     # WHEN
@@ -280,21 +280,21 @@ def test_WayMap_del_otx2inx_SetsAttr():
     assert x_waymap.otx2inx_exists(xio_str, sue_str) is False
 
 
-def test_WayMap_unknown_term_in_otx2inx_ReturnsObj():
+def test_WayMap_unknown_str_in_otx2inx_ReturnsObj():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     zia_str = "Zia"
-    x_unknown_term = "UnknownTerm"
-    x_waymap = waymap_shop(unknown_term=x_unknown_term)
+    x_unknown_str = "UnknownTerm"
+    x_waymap = waymap_shop(unknown_str=x_unknown_str)
     x_waymap.set_otx2inx(xio_str, sue_str)
-    assert x_waymap._unknown_term_in_otx2inx() is False
+    assert x_waymap._unknown_str_in_otx2inx() is False
 
     # WHEN
-    x_waymap.set_otx2inx(zia_str, x_unknown_term)
+    x_waymap.set_otx2inx(zia_str, x_unknown_str)
 
     # THEN
-    assert x_waymap._unknown_term_in_otx2inx()
+    assert x_waymap._unknown_str_in_otx2inx()
 
 
 def test_WayMap_set_label_SetsAttr():
@@ -483,7 +483,7 @@ def test_WayMap_get_json_ReturnsObj():
   "{inx_bridge_str()}": "{x_waymap.inx_bridge}",
   "{otx2inx_str()}": {{}},
   "{otx_bridge_str()}": "{x_waymap.otx_bridge}",
-  "{unknown_term_str()}": "{x_waymap.unknown_term}"
+  "{unknown_str_str()}": "{x_waymap.unknown_str}"
 }}"""
     print(f"           {x1_way_map_json=}")
     print(f"{x_waymap.get_json()=}")
@@ -502,7 +502,7 @@ def test_WayMap_get_json_ReturnsObj():
     "{clean_otx}": "{clean_inx}"
   }},
   "{otx_bridge_str()}": "{x_waymap.otx_bridge}",
-  "{unknown_term_str()}": "{x_waymap.unknown_term}"
+  "{unknown_str_str()}": "{x_waymap.unknown_str}"
 }}"""
     print(f"           {x2_way_map_json=}")
     print(f"{x_waymap.get_json()=}")
@@ -533,7 +533,7 @@ def test_get_waymap_from_dict_ReturnsObj():
     assert gen_waymap.otx2inx == x_waymap.otx2inx
     assert gen_waymap.otx_bridge == x_waymap.otx_bridge
     assert gen_waymap.inx_bridge == x_waymap.inx_bridge
-    assert gen_waymap.unknown_term == x_waymap.unknown_term
+    assert gen_waymap.unknown_str == x_waymap.unknown_str
 
 
 def test_get_waymap_from_json_ReturnsObj():
@@ -552,7 +552,7 @@ def test_get_waymap_from_json_ReturnsObj():
     assert x_waymap == x_waymap
 
 
-def test_WayMap_all_otx_parent_ways_exist_ReturnsObj_WayStr():
+def test_WayMap_all_otx_parent_ways_exist_ReturnsObj_WayTerm():
     # ESTABLISH
     otx_r_bridge = "/"
     clean_otx_parent_way = to_way("accord45", otx_r_bridge)
@@ -583,7 +583,7 @@ def test_WayMap_is_valid_ReturnsObj_Scenario0_concept_label_str():
     # ESTABLISH
     x_otx_bridge = "/"
     x_inx_bridge = ":"
-    labelstr_waymap = waymap_shop(otx_bridge=x_otx_bridge, inx_bridge=x_inx_bridge)
+    labelterm_waymap = waymap_shop(otx_bridge=x_otx_bridge, inx_bridge=x_inx_bridge)
 
     clean_str = "clean"
     clean_inx = to_way("propre", x_inx_bridge)
@@ -591,17 +591,17 @@ def test_WayMap_is_valid_ReturnsObj_Scenario0_concept_label_str():
     mop_otx = create_way(casa_otx, "mop", x_otx_bridge)
     mop_inx = "mop"
     casa_inx = "casa"
-    assert labelstr_waymap.is_valid()
+    assert labelterm_waymap.is_valid()
 
     # WHEN
-    labelstr_waymap.set_otx2inx(clean_str, clean_inx)
+    labelterm_waymap.set_otx2inx(clean_str, clean_inx)
     # THEN
-    assert labelstr_waymap.is_valid()
+    assert labelterm_waymap.is_valid()
 
     # WHEN
-    labelstr_waymap.set_otx2inx(mop_otx, mop_inx)
+    labelterm_waymap.set_otx2inx(mop_otx, mop_inx)
     # THEN
-    assert labelstr_waymap.is_valid() is False
+    assert labelterm_waymap.is_valid() is False
 
 
 def test_WayMap_is_valid_ReturnsObj_Scenario1_way_str():
@@ -627,7 +627,7 @@ def test_WayMap_is_valid_ReturnsObj_Scenario1_way_str():
     assert x_waymap.otx2inx_exists(clean_otx_way, clean_inx_way)
 
 
-def test_WayMap_is_valid_ReturnsObj_Scenario3_WayStr():
+def test_WayMap_is_valid_ReturnsObj_Scenario3_WayTerm():
     # ESTABLISH
     otx_r_bridge = "/"
     clean_otx_parent_way = to_way("accord45", otx_r_bridge)
@@ -694,11 +694,11 @@ def test_inherit_waymap_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_bridge(
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
-def test_inherit_waymap_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown_term():
+def test_inherit_waymap_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown_str():
     # ESTABLISH
     sue_str = "Sue"
-    x_unknown_term = "UnknownTerm"
-    old_waymap = waymap_shop(sue_str, 0, unknown_term=x_unknown_term)
+    x_unknown_str = "UnknownTerm"
+    old_waymap = waymap_shop(sue_str, 0, unknown_str=x_unknown_str)
     new_waymap = waymap_shop(sue_str, 1)
 
     with pytest_raises(Exception) as excinfo:

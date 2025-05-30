@@ -58,7 +58,7 @@ def get_sorted_intersection_list(
     return [x_col for x_col in sorting_columns if x_col in sort_columns_in_existing]
 
 
-def create_class_type_reference_insert_sqlstr(
+def create_type_reference_insert_sqlstr(
     x_table: str, x_columns: list[str], x_values: list[str]
 ) -> str:
     x_str = f"""

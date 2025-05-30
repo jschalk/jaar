@@ -1,10 +1,10 @@
+from src.a03_group_logic._test_util.a03_str import fund_take_str, fund_give_str
+
+
 def jmetrics_str() -> str:
     return "jmetrics"
 
 
-def fund_take_str() -> str:
-    return "fund_take"
-
-
-def fund_give_str() -> str:
-    return "fund_give"
+def bud_groupunit_str() -> str:
+    """Is not saved to raw data budunit json"""
+    return "bud_groupunit"

@@ -14,13 +14,13 @@ from src.a00_data_toolbox.dict_toolbox import (
 from src.a01_way_logic.way import (
     default_bridge_if_None,
     OwnerName,
-    WayStr,
+    WayTerm,
     FiscLabel,
     AcctName,
     EventInt,
 )
 from src.a02_finance_logic.finance_config import (
-    default_respect_bit_if_None,
+    default_RespectBit_if_None,
     filter_penny,
     PennyNum,
     default_fund_coin_if_None,
@@ -200,7 +200,7 @@ class FiscUnit:
     def _set_owner_duty(
         self,
         healer_hubunit: HubUnit,
-        keep_way: WayStr,
+        keep_way: WayTerm,
         gut_bud: BudUnit,
     ):
         healer_hubunit.keep_way = keep_way
@@ -492,7 +492,7 @@ def fiscunit_shop(
         offi_times=get_empty_set_if_None(offi_times),
         bridge=default_bridge_if_None(bridge),
         fund_coin=default_fund_coin_if_None(fund_coin),
-        respect_bit=default_respect_bit_if_None(respect_bit),
+        respect_bit=default_RespectBit_if_None(respect_bit),
         penny=filter_penny(penny),
         _all_tranbook=tranbook_shop(fisc_label),
         job_listen_rotations=job_listen_rotations,

@@ -4,19 +4,13 @@ from src.a02_finance_logic._test_util.a02_str import owner_name_str, fisc_label_
 from src.a03_group_logic.acct import acctunit_shop
 from src.a06_bud_logic._test_util.a06_str import (
     bud_acctunit_str,
-    face_name_str,
-    event_int_str,
     credit_belief_str,
     debtit_belief_str,
     acct_name_str,
 )
 from src.a06_bud_logic.bud import budunit_shop
 from src.a08_bud_atom_logic.atom import budatom_shop
-from src.a08_bud_atom_logic._test_util.a08_str import (
-    INSERT_str,
-    DELETE_str,
-    UPDATE_str,
-)
+from src.a08_bud_atom_logic._test_util.a08_str import INSERT_str, DELETE_str, UPDATE_str
 from src.a09_pack_logic.delta import buddelta_shop
 from src.a09_pack_logic.pack import (
     init_pack_id,
@@ -29,6 +23,7 @@ from src.a09_pack_logic._test_util.example_atoms import (
     get_atom_example_conceptunit_sports,
 )
 from src.a09_pack_logic._test_util.example_deltas import get_buddelta_sue_example
+from src.a09_pack_logic._test_util.a09_str import face_name_str, event_int_str
 from pytest import raises as pytest_raises
 
 

@@ -95,7 +95,7 @@ def test_WayMap_reveal_inx_ReturnsObjAndSetsAttr_way_Scenario2_With_label():
     assert gen_inx_way == f"{inx_accord87_way}{clean_inx_str}{inx_r_bridge}"
 
 
-def test_WayMap_reveal_inx_AddsMissingObjsTo_otx2inx_WayStr():
+def test_WayMap_reveal_inx_AddsMissingObjsTo_otx2inx_WayTerm():
     # ESTABLISH
     otx_a45_str = "accord45"
     inx_a87_str = "accord87"

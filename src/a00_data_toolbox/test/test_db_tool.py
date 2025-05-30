@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.db_toolbox import (
     sqlite_obj_str,
-    create_class_type_reference_insert_sqlstr,
+    create_type_reference_insert_sqlstr,
     RowData,
     rowdata_shop,
     get_rowdata,
@@ -49,7 +49,7 @@ def test_sqlite_obj_str_ReturnsObj():
     assert sqlite_obj_str(None, "REAL") == "NULL"
 
 
-def test_sqlite_create_class_type_reference_insert_sqlstr_ReturnsObj():
+def test_sqlite_create_type_reference_insert_sqlstr_ReturnsObj():
     # ESTABLISH
     x_table = "kubo_casas"
     eagle_id_str = "eagle_id"
@@ -62,7 +62,7 @@ def test_sqlite_create_class_type_reference_insert_sqlstr_ReturnsObj():
     x_values = [eagle_id_value, casa_id_value, casa_color_value]
 
     # WHEN
-    gen_sqlstr = create_class_type_reference_insert_sqlstr(x_table, x_columns, x_values)
+    gen_sqlstr = create_type_reference_insert_sqlstr(x_table, x_columns, x_values)
 
     # THEN
     example_sqlstr = f"""
@@ -307,7 +307,7 @@ def setup_database_and_csv() -> tuple[sqlite3_Connection, str, str]:  # type: ig
     Fixture to set up a temporary SQLite database and CSV file for testing.
     Yields the database connection, table name, and CSV file path, and cleans up after the test.
     """
-    test_db = "test_database.db"
+    test_db = "test_database2.db"
     test_table = "test_table"
     test_csv_filepath = "test_data.csv"
 
@@ -406,7 +406,7 @@ def test_insert_csv_ChangesNotCommitted(
 
     # Close and reopen the connection to verify persistence
     conn.close()
-    conn = sqlite3_connect("test_database.db")
+    conn = sqlite3_connect("test_database2.db")
 
     # Verify no data committed
     cursor = conn.cursor()

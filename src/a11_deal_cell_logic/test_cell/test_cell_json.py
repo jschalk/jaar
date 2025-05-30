@@ -1,6 +1,7 @@
 from src.a02_finance_logic._test_util.a02_str import quota_str
 from src.a06_bud_logic.bud import budunit_shop
-from src.a06_bud_logic._test_util.a06_str import event_int_str, penny_str
+from src.a06_bud_logic._test_util.a06_str import penny_str
+from src.a09_pack_logic._test_util.a09_str import event_int_str
 from src.a11_deal_cell_logic._test_util.a11_str import (
     ancestors_str,
     celldepth_str,

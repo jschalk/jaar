@@ -50,19 +50,19 @@ def test_PidginUnit_set_titlemap_RaisesErrorIf_titlemap_inx_bridge_IsNotSame():
     assert str(excinfo.value) == exception_str
 
 
-def test_PidginUnit_set_titlemap_RaisesErrorIf_titlemap_unknown_term_IsNotSame():
+def test_PidginUnit_set_titlemap_RaisesErrorIf_titlemap_unknown_str_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    casa_unknown_term = "Unknown_casa"
-    x_titlemap = titlemap_shop(unknown_term=casa_unknown_term, face_name=sue_str)
-    assert sue_pidginunit.unknown_term != x_titlemap.unknown_term
+    casa_unknown_str = "Unknown_casa"
+    x_titlemap = titlemap_shop(unknown_str=casa_unknown_str, face_name=sue_str)
+    assert sue_pidginunit.unknown_str != x_titlemap.unknown_str
     assert sue_pidginunit.titlemap != x_titlemap
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_pidginunit.set_titlemap(x_titlemap)
-    exception_str = f"set_mapcore Error: PidginUnit unknown_term is '{sue_pidginunit.unknown_term}', MapCore is '{casa_unknown_term}'."
+    exception_str = f"set_mapcore Error: PidginUnit unknown_str is '{sue_pidginunit.unknown_str}', MapCore is '{casa_unknown_str}'."
     assert str(excinfo.value) == exception_str
 
 
@@ -97,7 +97,7 @@ def test_PidginUnit_get_titlemap_ReturnsObj():
     assert gen_x_titlemap == static_x_titlemap
 
 
-def test_PidginUnit_set_titlestr_SetsAttr_Scenario0():
+def test_PidginUnit_set_titleterm_SetsAttr_Scenario0():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
@@ -107,26 +107,26 @@ def test_PidginUnit_set_titlestr_SetsAttr_Scenario0():
     assert acct_name_titlemap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_titlestr(sue_otx, sue_inx)
+    zia_pidginunit.set_titleterm(sue_otx, sue_inx)
 
     # THEN
     assert acct_name_titlemap.otx2inx_exists(sue_otx, sue_inx)
 
 
-def test_PidginUnit_titlestr_exists_ReturnsObj():
+def test_PidginUnit_titleterm_exists_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
 
-    assert zia_pidginunit.titlestr_exists(sue_otx, sue_inx) is False
+    assert zia_pidginunit.titleterm_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_titlestr(sue_otx, sue_inx)
+    zia_pidginunit.set_titleterm(sue_otx, sue_inx)
 
     # THEN
-    assert zia_pidginunit.titlestr_exists(sue_otx, sue_inx)
+    assert zia_pidginunit.titleterm_exists(sue_otx, sue_inx)
 
 
 def test_PidginUnit_get_inx_title_ReturnsObj():
@@ -138,27 +138,27 @@ def test_PidginUnit_get_inx_title_ReturnsObj():
     assert zia_pidginunit._get_inx_title(sue_otx) != sue_inx
 
     # WHEN
-    zia_pidginunit.set_titlestr(sue_otx, sue_inx)
+    zia_pidginunit.set_titleterm(sue_otx, sue_inx)
 
     # THEN
     assert zia_pidginunit._get_inx_title(sue_otx) == sue_inx
 
 
-def test_PidginUnit_del_titlestr_ReturnsObj():
+def test_PidginUnit_del_titleterm_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
 
-    zia_pidginunit.set_titlestr(sue_otx, sue_inx)
-    zia_pidginunit.set_titlestr(zia_str, zia_str)
-    assert zia_pidginunit.titlestr_exists(sue_otx, sue_inx)
-    assert zia_pidginunit.titlestr_exists(zia_str, zia_str)
+    zia_pidginunit.set_titleterm(sue_otx, sue_inx)
+    zia_pidginunit.set_titleterm(zia_str, zia_str)
+    assert zia_pidginunit.titleterm_exists(sue_otx, sue_inx)
+    assert zia_pidginunit.titleterm_exists(zia_str, zia_str)
 
     # WHEN
-    zia_pidginunit.del_titlestr(sue_otx)
+    zia_pidginunit.del_titleterm(sue_otx)
 
     # THEN
-    assert zia_pidginunit.titlestr_exists(sue_otx, sue_inx) is False
-    assert zia_pidginunit.titlestr_exists(zia_str, zia_str)
+    assert zia_pidginunit.titleterm_exists(sue_otx, sue_inx) is False
+    assert zia_pidginunit.titleterm_exists(zia_str, zia_str)

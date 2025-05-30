@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import open_file
-from src.a01_way_logic.way import WayStr
+from src.a01_way_logic.way import WayTerm
 from src.a04_reason_logic.reason_concept import factunit_shop, reasonunit_shop
 from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
@@ -378,7 +378,7 @@ def get_budunit_laundry_example1() -> BudUnit:
 
 # class YR:
 def from_list_get_active(
-    way: WayStr, concept_dict: dict, asse_bool: bool = None
+    way: WayTerm, concept_dict: dict, asse_bool: bool = None
 ) -> bool:
     active = None
     temp_concept = None

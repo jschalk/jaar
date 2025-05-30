@@ -27,7 +27,6 @@ from src.a06_bud_logic._test_util.a06_str import (
     debtor_respect_str,
     debtit_vote_str,
     denom_str,
-    event_int_str,
     fnigh_str,
     fopen_str,
     fund_coin_str,
@@ -42,10 +41,10 @@ from src.a06_bud_logic._test_util.a06_str import (
     concept_way_str,
     stop_want_str,
     labor_title_str,
-    NameStr_str,
-    TitleStr_str,
-    LabelStr_str,
-    WayStr_str,
+    NameTerm_str,
+    TitleTerm_str,
+    LabelTerm_str,
+    WayTerm_str,
 )
 from src.a08_bud_atom_logic._test_util.a08_str import (
     INSERT_str,
@@ -557,7 +556,7 @@ def get_class_type(x_dimen: str, x_arg: str) -> str:
 
 def test_get_class_type_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert get_class_type(bud_acctunit_str(), acct_name_str()) == NameStr_str()
+    assert get_class_type(bud_acctunit_str(), acct_name_str()) == NameTerm_str()
     assert get_class_type(bud_conceptunit_str(), gogo_want_str()) == "float"
 
 
@@ -565,10 +564,10 @@ def test_get_allowed_class_types_ReturnsObj():
     # ESTABLISH
     x_allowed_class_types = {
         "int",
-        NameStr_str(),
-        TitleStr_str(),
-        LabelStr_str(),
-        WayStr_str(),
+        NameTerm_str(),
+        TitleTerm_str(),
+        LabelTerm_str(),
+        WayTerm_str(),
         "float",
         "bool",
         "TimeLinePoint",
@@ -625,10 +624,10 @@ def test_get_atom_args_class_types_ReturnsObj():
     x_class_types = get_atom_args_class_types()
 
     # THEN
-    assert x_class_types.get(acct_name_str()) == NameStr_str()
+    assert x_class_types.get(acct_name_str()) == NameTerm_str()
     assert x_class_types.get(addin_str()) == "float"
-    assert x_class_types.get(awardee_title_str()) == TitleStr_str()
-    assert x_class_types.get(rcontext_str()) == WayStr_str()
+    assert x_class_types.get(awardee_title_str()) == TitleTerm_str()
+    assert x_class_types.get(rcontext_str()) == WayTerm_str()
     assert x_class_types.get("rconcept_active_requisite") == "bool"
     assert x_class_types.get(begin_str()) == "float"
     assert x_class_types.get(respect_bit_str()) == "float"
@@ -641,30 +640,30 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(debtor_respect_str()) == "float"
     assert x_class_types.get(denom_str()) == "int"
     assert x_class_types.get("pdivisor") == "int"
-    assert x_class_types.get(fcontext_str()) == WayStr_str()
+    assert x_class_types.get(fcontext_str()) == WayTerm_str()
     assert x_class_types.get(fnigh_str()) == "float"
     assert x_class_types.get(fopen_str()) == "float"
     assert x_class_types.get(fund_coin_str()) == "float"
     assert x_class_types.get("fund_pool") == "float"
     assert x_class_types.get("give_force") == "float"
     assert x_class_types.get(gogo_want_str()) == "float"
-    assert x_class_types.get(group_title_str()) == TitleStr_str()
-    assert x_class_types.get(healer_name_str()) == NameStr_str()
+    assert x_class_types.get(group_title_str()) == TitleTerm_str()
+    assert x_class_types.get(healer_name_str()) == NameTerm_str()
     assert x_class_types.get("mass") == "int"
     assert x_class_types.get("max_tree_traverse") == "int"
     assert x_class_types.get(morph_str()) == "bool"
-    assert x_class_types.get("pstate") == WayStr_str()
+    assert x_class_types.get("pstate") == WayTerm_str()
     assert x_class_types.get("pnigh") == "float"
     assert x_class_types.get(numor_str()) == "int"
     assert x_class_types.get("popen") == "float"
     assert x_class_types.get(penny_str()) == "float"
-    assert x_class_types.get("fstate") == WayStr_str()
+    assert x_class_types.get("fstate") == WayTerm_str()
     assert x_class_types.get("pledge") == "bool"
     assert x_class_types.get("problem_bool") == "bool"
-    assert x_class_types.get(concept_way_str()) == WayStr_str()
+    assert x_class_types.get(concept_way_str()) == WayTerm_str()
     assert x_class_types.get(stop_want_str()) == "float"
     assert x_class_types.get("take_force") == "float"
     assert x_class_types.get("tally") == "int"
-    assert x_class_types.get(labor_title_str()) == TitleStr_str()
+    assert x_class_types.get(labor_title_str()) == TitleTerm_str()
     assert x_class_types.keys() == get_atom_args_dimen_mapping().keys()
     assert all_atom_args_class_types_are_correct(x_class_types)

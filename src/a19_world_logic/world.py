@@ -4,14 +4,9 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_0_if_None,
     get_empty_set_if_None,
 )
-from src.a01_way_logic.way import (
-    FaceName,
-    EventInt,
-    FiscLabel,
-    WorldID,
-    TimeLineLabel,
-)
+from src.a01_way_logic.way import FaceName, EventInt, FiscLabel, WorldID
 from src.a02_finance_logic.deal import TimeLinePoint, TimeConversion
+from src.a07_calendar_logic.chrono import TimeLineLabel
 from src.a15_fisc_logic.fisc import FiscUnit
 from src.a18_etl_toolbox.stance_tool import create_stance0001_file
 from src.a18_etl_toolbox.transformers import (

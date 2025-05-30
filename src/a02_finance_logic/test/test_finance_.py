@@ -11,7 +11,7 @@ from src.a02_finance_logic.finance_config import (
     default_respect_num,
     validate_respect_num,
     default_fund_coin_if_None,
-    default_respect_bit_if_None,
+    default_RespectBit_if_None,
     filter_penny,
     trim_fund_coin_excess,
     trim_bit_excess,
@@ -30,16 +30,18 @@ def test_BitNum_exists():
     y_BitNum = BitNum(x_float)
     # THEN
     assert y_BitNum == x_float
-    inspect_str = "Smallest Unit of credit_belief or debtit_belief (RespectNum) ala 'the slightest bit of respect!'"
+    inspect_str = (
+        "Smallest Unit of belief (RespectNum) ala 'the slightest bit of respect!'"
+    )
     assert inspect_getdoc(y_BitNum) == inspect_str
 
 
-def test_default_respect_bit_if_None_ReturnsObj():
+def test_default_RespectBit_if_None_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert default_respect_bit_if_None() == 1
-    assert default_respect_bit_if_None(None) == 1
-    assert default_respect_bit_if_None(5) == 5
-    assert default_respect_bit_if_None(0.03) == 1
+    assert default_RespectBit_if_None() == 1
+    assert default_RespectBit_if_None(None) == 1
+    assert default_RespectBit_if_None(5) == 5
+    assert default_RespectBit_if_None(0.03) == 1
 
 
 def test_trim_bit_excess_ReturnsCorrectedFloat():
@@ -165,7 +167,7 @@ def test_validate_respect_num_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert validate_respect_num() == default_respect_num()
     assert validate_respect_num(None) == default_respect_num()
-    assert validate_respect_num(0.5) == default_respect_bit_if_None()
+    assert validate_respect_num(0.5) == default_RespectBit_if_None()
     assert validate_respect_num(0.5) == 1
     assert (
         validate_respect_num(default_fund_coin_if_None() - 0.01)

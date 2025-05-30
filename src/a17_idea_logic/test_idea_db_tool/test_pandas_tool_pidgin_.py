@@ -4,7 +4,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     acct_name_str,
     credit_belief_str,
     rcontext_str,
-    NameStr_str,
+    NameTerm_str,
 )
 from src.a16_pidgin_logic.map import namemap_shop
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
@@ -176,9 +176,9 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario1_AcctName()
     sue_inx = "Suita"
     bob_inx = "Bobita"
     yao_pidginunit = pidginunit_shop(yao_str)
-    yao_pidginunit.set_otx2inx(NameStr_str(), xio_otx, xio_inx)
-    yao_pidginunit.set_otx2inx(NameStr_str(), sue_otx, sue_inx)
-    yao_pidginunit.set_otx2inx(NameStr_str(), bob_otx, bob_inx)
+    yao_pidginunit.set_otx2inx(NameTerm_str(), xio_otx, xio_inx)
+    yao_pidginunit.set_otx2inx(NameTerm_str(), sue_otx, sue_inx)
+    yao_pidginunit.set_otx2inx(NameTerm_str(), bob_otx, bob_inx)
     otx_dt = DataFrame(columns=[fisc_label_str(), acct_name_str(), credit_belief_str()])
     otx_dt.loc[0] = ["ZZ", zia_otx, 12]
     otx_dt.loc[1] = ["ZZ", sue_otx, 12]

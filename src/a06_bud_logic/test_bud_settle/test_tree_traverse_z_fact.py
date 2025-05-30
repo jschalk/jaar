@@ -89,7 +89,7 @@ def test_BudUnit_settle_bud_RaisesErrorIfNonRangeRootHasFactUnit():
         zia_bud.settle_bud()
     assert (
         str(excinfo.value)
-        == f"Cannot have fact for range inheritor '{sweep_way}'. A ranged fact concept must have _begin, _close attributes"
+        == f"Cannot have fact for range inheritor '{sweep_way}'. A ranged fact concept must have _begin, _close"
     )
 
 

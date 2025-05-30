@@ -458,7 +458,7 @@ def test_ConceptUnit_set_laborheir_CorrectlySetsAttr():
     # assert sport_concept._laborheir is None
 
     # WHEN
-    sport_concept.set_laborheir(parent_laborheir=None, bud_groupunits=None)
+    sport_concept.set_laborheir(parent_laborheir=None, groupunits=None)
 
     # THEN
     assert sport_concept._laborheir is not None
@@ -466,6 +466,6 @@ def test_ConceptUnit_set_laborheir_CorrectlySetsAttr():
     swim_laborunit.set_laborlink(labor_title=swim_str)
     swim_laborheir = laborheir_shop()
     swim_laborheir.set_laborlinks(
-        laborunit=swim_laborunit, parent_laborheir=None, bud_groupunits=None
+        laborunit=swim_laborunit, parent_laborheir=None, groupunits=None
     )
     assert sport_concept._laborheir == swim_laborheir

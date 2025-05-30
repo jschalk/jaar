@@ -1,5 +1,5 @@
 from src.a01_way_logic.way import (
-    WayStr,
+    WayTerm,
     create_way,
     FiscLabel,
     get_default_fisc_label,
@@ -108,7 +108,7 @@ def get_buddelta_sue_example() -> BudDelta:
     return sue_buddelta
 
 
-def get_texas_way() -> WayStr:
+def get_texas_way() -> WayTerm:
     fisc_label = get_default_fisc_label()
     nation_str = "nation"
     usa_str = "USA"

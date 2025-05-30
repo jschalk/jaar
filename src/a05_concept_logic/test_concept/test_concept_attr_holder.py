@@ -43,7 +43,7 @@ def test_ConceptAttrHolder_CorrectlyCalculatesPremiseRanges():
     # assert concept_attr.reason_premise_morph is None
 
     # WHEN
-    concept_attr.set_premise_range_attributes_influenced_by_premise_concept(
+    concept_attr.set_premise_range_influenced_by_premise_concept(
         popen=5.0,
         pnigh=20.0,
         # premise_numor,

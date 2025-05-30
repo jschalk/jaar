@@ -53,15 +53,15 @@ from src.a15_fisc_logic.fisc_tool import (
 )
 from src.a16_pidgin_logic.pidgin import (
     default_bridge_if_None,
-    default_unknown_term_if_None,
+    default_unknown_str_if_None,
 )
 from src.a16_pidgin_logic.pidgin_config import (
     get_quick_pidgens_column_ref,
     get_pidgin_args_class_types,
-    get_pidgin_LabelStr_args,
-    get_pidgin_NameStr_args,
-    get_pidgin_TitleStr_args,
-    get_pidgin_WayStr_args,
+    get_pidgin_LabelTerm_args,
+    get_pidgin_NameTerm_args,
+    get_pidgin_TitleTerm_args,
+    get_pidgin_WayTerm_args,
 )
 from src.a17_idea_logic.idea_config import (
     get_idea_numbers,
@@ -392,7 +392,7 @@ def insert_pidgin_sound_agg_into_pidgin_core_raw_table(cursor: sqlite3_Cursor):
 
 def insert_pidgin_core_agg_to_pidgin_core_vld_table(cursor: sqlite3_Cursor):
     bridge = default_bridge_if_None()
-    unknown = default_unknown_term_if_None()
+    unknown = default_unknown_str_if_None()
     insert_sqlstr = create_insert_pidgin_core_agg_into_vld_sqlstr(bridge, unknown)
     cursor.execute(insert_sqlstr)
 
@@ -409,8 +409,8 @@ def insert_pidgin_core_raw_to_pidgin_core_agg_table(cursor: sqlite3_Cursor):
     pidgin_core_s_raw_tablename = create_prime_tablename("pidcore", "s", "raw")
     pidgin_core_s_agg_tablename = create_prime_tablename("pidcore", "s", "agg")
     sqlstr = f"""
-INSERT INTO {pidgin_core_s_agg_tablename} (face_name, otx_bridge, inx_bridge, unknown_term)
-SELECT face_name, MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_term)
+INSERT INTO {pidgin_core_s_agg_tablename} (face_name, otx_bridge, inx_bridge, unknown_str)
+SELECT face_name, MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_str)
 FROM {pidgin_core_s_raw_tablename}
 WHERE error_message IS NULL
 GROUP BY face_name
@@ -436,10 +436,10 @@ def insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor: sqlite3_Cur
 
 
 def set_fisc_bud_sound_agg_bridge_errors(cursor: sqlite3_Cursor):
-    pidgin_label_args = get_pidgin_LabelStr_args()
-    pidgin_name_args = get_pidgin_NameStr_args()
-    pidgin_title_args = get_pidgin_TitleStr_args()
-    pidgin_way_args = get_pidgin_WayStr_args()
+    pidgin_label_args = get_pidgin_LabelTerm_args()
+    pidgin_name_args = get_pidgin_NameTerm_args()
+    pidgin_title_args = get_pidgin_TitleTerm_args()
+    pidgin_way_args = get_pidgin_WayTerm_args()
     pidgin_args = copy_copy(pidgin_label_args)
     pidgin_args.update(pidgin_name_args)
     pidgin_args.update(pidgin_title_args)
@@ -476,7 +476,7 @@ def populate_pidgin_core_vld_with_missing_face_names(cursor: sqlite3_Cursor):
     for agg_tablename in get_fisc_bud_sound_agg_tablenames():
         insert_sqlstr = create_insert_missing_face_name_into_pidgin_core_vld_sqlstr(
             default_bridge=default_bridge_if_None(),
-            default_unknown=default_unknown_term_if_None(),
+            default_unknown=default_unknown_str_if_None(),
             fisc_bud_sound_agg_tablename=agg_tablename,
         )
         cursor.execute(insert_sqlstr)
@@ -532,15 +532,15 @@ def set_voice_raw_inx_column(
     column_without_otx: str,
     arg_class_type: str,
 ):
-    if arg_class_type in {"NameStr", "TitleStr", "LabelStr", "WayStr"}:
+    if arg_class_type in {"NameTerm", "TitleTerm", "LabelTerm", "WayTerm"}:
         pidgin_type_abbv = ""
-        if arg_class_type == "NameStr":
+        if arg_class_type == "NameTerm":
             pidgin_type_abbv = "name"
-        elif arg_class_type == "TitleStr":
+        elif arg_class_type == "TitleTerm":
             pidgin_type_abbv = "title"
-        elif arg_class_type == "LabelStr":
+        elif arg_class_type == "LabelTerm":
             pidgin_type_abbv = "label"
-        elif arg_class_type == "WayStr":
+        elif arg_class_type == "WayTerm":
             pidgin_type_abbv = "way"
         update_calc_inx_sqlstr = create_update_voice_raw_existing_inx_col_sqlstr(
             pidgin_type_abbv, voice_raw_tablename, column_without_otx

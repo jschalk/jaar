@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a02_finance_logic._test_util.a02_str import fisc_label_str
-from src.a06_bud_logic._test_util.a06_str import face_name_str, event_int_str
+from src.a09_pack_logic._test_util.a09_str import face_name_str, event_int_str
 from src.a15_fisc_logic._test_util.a15_str import cumlative_minute_str, hour_label_str
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
 from src.a18_etl_toolbox.idea_collector import (

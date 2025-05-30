@@ -1,7 +1,28 @@
-from src.a03_group_logic._test_util.a03_str import credit_belief_str, debtit_belief_str
+from src.a03_group_logic._test_util.a03_str import (
+    credit_belief_str,
+    debtit_belief_str,
+    credit_vote_str,
+    group_title_str,
+    fund_take_str,
+    respect_bit_str,
+    fund_give_str,
+    debtit_vote_str,
+    give_force_str,
+    awardee_title_str,
+    take_force_str,
+)
 
 
 def test_str_functions_ReturnsObj():
     # ESTABLISH
     assert credit_belief_str() == "credit_belief"
     assert debtit_belief_str() == "debtit_belief"
+    assert credit_vote_str() == "credit_vote"
+    assert group_title_str() == "group_title"
+    assert fund_take_str() == "fund_take"
+    assert respect_bit_str() == "respect_bit"
+    assert fund_give_str() == "fund_give"
+    assert debtit_vote_str() == "debtit_vote"
+    assert give_force_str() == "give_force"
+    assert awardee_title_str() == "awardee_title"
+    assert take_force_str() == "take_force"

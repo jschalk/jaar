@@ -46,31 +46,31 @@ class LaborHeir:
 
     def _get_all_accts(
         self,
-        bud_groupunits: dict[GroupTitle, GroupUnit],
+        groupunits: dict[GroupTitle, GroupUnit],
         labor_title_set: set[GroupTitle],
     ) -> dict[GroupTitle, GroupUnit]:
         dict_x = {}
         for x_labor_title in labor_title_set:
-            dict_x |= bud_groupunits.get(x_labor_title)._memberships
+            dict_x |= groupunits.get(x_labor_title)._memberships
         return dict_x
 
     def is_empty(self) -> bool:
         return self._laborlinks == set()
 
     def set_owner_name_labor(
-        self, bud_groupunits: dict[GroupTitle, GroupUnit], bud_owner_name: AcctName
+        self, groupunits: dict[GroupTitle, GroupUnit], bud_owner_name: AcctName
     ):
         self._owner_name_labor = self.get_owner_name_labor_bool(
-            bud_groupunits, bud_owner_name
+            groupunits, bud_owner_name
         )
 
     def get_owner_name_labor_bool(
-        self, bud_groupunits: dict[GroupTitle, GroupUnit], bud_owner_name: AcctName
+        self, groupunits: dict[GroupTitle, GroupUnit], bud_owner_name: AcctName
     ) -> bool:
         if self._laborlinks == set():
             return True
 
-        for x_labor_title, x_groupunit in bud_groupunits.items():
+        for x_labor_title, x_groupunit in groupunits.items():
             if x_labor_title in self._laborlinks:
                 for x_acct_name in x_groupunit._memberships.keys():
                     if x_acct_name == bud_owner_name:
@@ -81,7 +81,7 @@ class LaborHeir:
         self,
         parent_laborheir,
         laborunit: LaborUnit,
-        bud_groupunits: dict[GroupTitle, GroupUnit],
+        groupunits: dict[GroupTitle, GroupUnit],
     ):
         x_laborlinks = set()
         if parent_laborheir is None or parent_laborheir._laborlinks == set():
@@ -95,12 +95,12 @@ class LaborHeir:
         else:
             # get all_accts of parent laborheir groupunits
             all_parent_laborheir_accts = self._get_all_accts(
-                bud_groupunits=bud_groupunits,
+                groupunits=groupunits,
                 labor_title_set=parent_laborheir._laborlinks,
             )
             # get all_accts of laborunit groupunits
             all_laborunit_accts = self._get_all_accts(
-                bud_groupunits=bud_groupunits,
+                groupunits=groupunits,
                 labor_title_set=laborunit._laborlinks,
             )
             if not set(all_laborunit_accts).issubset(set(all_parent_laborheir_accts)):

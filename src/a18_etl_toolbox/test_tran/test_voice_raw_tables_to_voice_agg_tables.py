@@ -2,14 +2,12 @@ from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
 from src.a02_finance_logic._test_util.a02_str import fisc_label_str, owner_name_str
 from src.a06_bud_logic._test_util.a06_str import (
     bud_acctunit_str,
-    face_name_str,
-    event_int_str,
     acct_name_str,
     credit_belief_str,
     debtit_belief_str,
 )
+from src.a09_pack_logic._test_util.a09_str import face_name_str, event_int_str
 from src.a15_fisc_logic.fisc_config import get_fisc_dimens
-from src.a15_fisc_logic._test_util.a15_str import fiscunit_str
 from src.a17_idea_logic.idea_config import get_idea_config_dict, get_default_sorted_list
 from src.a17_idea_logic._test_util.a17_str import idea_category_str
 from src.a18_etl_toolbox.tran_sqlstrs import (

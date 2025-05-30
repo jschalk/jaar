@@ -8,13 +8,13 @@
         },
         "jkeys": {
             "acct_name": {
-                "class_type": "NameStr",
+                "class_type": "NameTerm",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
             "group_title": {
-                "class_type": "TitleStr",
+                "class_type": "TitleTerm",
                 "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
@@ -48,7 +48,7 @@
         },
         "jkeys": {
             "acct_name": {
-                "class_type": "NameStr",
+                "class_type": "NameTerm",
                 "column_order": 0,
                 "sqlite_datatype": "TEXT"
             }
@@ -81,13 +81,13 @@
         },
         "jkeys": {
             "awardee_title": {
-                "class_type": "TitleStr",
+                "class_type": "TitleTerm",
                 "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
             "concept_way": {
-                "class_type": "WayStr",
+                "class_type": "WayTerm",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
@@ -121,13 +121,13 @@
         },
         "jkeys": {
             "concept_way": {
-                "class_type": "WayStr",
+                "class_type": "WayTerm",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
             "fcontext": {
-                "class_type": "WayStr",
+                "class_type": "WayTerm",
                 "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
@@ -145,7 +145,7 @@
                 "sqlite_datatype": "REAL"
             },
             "fstate": {
-                "class_type": "WayStr",
+                "class_type": "WayTerm",
                 "column_order": 2,
                 "sqlite_datatype": "TEXT"
             }
@@ -166,13 +166,13 @@
         },
         "jkeys": {
             "concept_way": {
-                "class_type": "WayStr",
+                "class_type": "WayTerm",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
             "healer_name": {
-                "class_type": "NameStr",
+                "class_type": "NameTerm",
                 "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
@@ -192,13 +192,13 @@
         },
         "jkeys": {
             "concept_way": {
-                "class_type": "WayStr",
+                "class_type": "WayTerm",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
             "labor_title": {
-                "class_type": "TitleStr",
+                "class_type": "TitleTerm",
                 "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
@@ -218,19 +218,19 @@
         },
         "jkeys": {
             "concept_way": {
-                "class_type": "WayStr",
+                "class_type": "WayTerm",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
             "pstate": {
-                "class_type": "WayStr",
+                "class_type": "WayTerm",
                 "column_order": 2,
                 "nesting_order": 2,
                 "sqlite_datatype": "TEXT"
             },
             "rcontext": {
-                "class_type": "WayStr",
+                "class_type": "WayTerm",
                 "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
@@ -269,13 +269,13 @@
         },
         "jkeys": {
             "concept_way": {
-                "class_type": "WayStr",
+                "class_type": "WayTerm",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
             "rcontext": {
-                "class_type": "WayStr",
+                "class_type": "WayTerm",
                 "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
@@ -304,7 +304,7 @@
         },
         "jkeys": {
             "concept_way": {
-                "class_type": "WayStr",
+                "class_type": "WayTerm",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"

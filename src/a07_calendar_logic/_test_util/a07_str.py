@@ -31,7 +31,7 @@ def day_str() -> str:
 
 
 def days_str() -> str:
-    return f"{day_str()}s"
+    return "days"
 
 
 def hour_str() -> str:

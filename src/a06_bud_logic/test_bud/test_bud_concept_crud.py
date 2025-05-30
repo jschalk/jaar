@@ -53,7 +53,7 @@ def test_BudUnit_set_concept_RaisesErrorWhen_concept_label_IsNotLabel():
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         zia_bud.set_concept(conceptunit_shop(run_way), parent_way=swim_way)
-    exception_str = f"set_concept failed because '{run_way}' is not a LabelStr."
+    exception_str = f"set_concept failed because '{run_way}' is not a LabelTerm."
     assert str(excinfo.value) == exception_str
 
 

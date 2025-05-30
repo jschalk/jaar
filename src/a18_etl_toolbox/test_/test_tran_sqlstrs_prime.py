@@ -18,10 +18,9 @@ from src.a06_bud_logic._test_util.a06_str import (
     bud_concept_laborlink_str,
     bud_concept_healerlink_str,
     bud_concept_factunit_str,
-    event_int_str,
-    face_name_str,
 )
 from src.a08_bud_atom_logic.atom_config import get_bud_dimens, get_delete_key_name
+from src.a09_pack_logic._test_util.a09_str import face_name_str, event_int_str
 from src.a15_fisc_logic._test_util.a15_str import (
     fiscunit_str,
     fisc_cashbook_str,
@@ -41,7 +40,7 @@ from src.a16_pidgin_logic._test_util.a16_str import (
     pidgin_core_str,
     otx_bridge_str,
     inx_bridge_str,
-    unknown_term_str,
+    unknown_str_str,
 )
 from src.a17_idea_logic._test_util.a17_str import idea_category_str, idea_number_str
 from src.a17_idea_logic.idea_config import (
@@ -125,7 +124,7 @@ def get_all_dimen_columns_set(x_dimen: str) -> set[str]:
             face_name_str(),
             otx_bridge_str(),
             inx_bridge_str(),
-            unknown_term_str(),
+            unknown_str_str(),
         }
     x_config = get_idea_config_dict().get(x_dimen)
     columns = set(x_config.get("jkeys").keys())
@@ -178,7 +177,7 @@ def create_pidgin_sound_vld_table_sqlstr(x_dimen):
     columns = get_all_dimen_columns_set(x_dimen)
     columns.remove(otx_bridge_str())
     columns.remove(inx_bridge_str())
-    columns.remove(unknown_term_str())
+    columns.remove(unknown_str_str())
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
@@ -630,7 +629,7 @@ GROUP BY event_int, face_name, otx_title
 HAVING MIN(inx_title) != MAX(inx_title)
     OR MIN(otx_bridge) != MAX(otx_bridge)
     OR MIN(inx_bridge) != MAX(inx_bridge)
-    OR MIN(unknown_term) != MAX(unknown_term)
+    OR MIN(unknown_str) != MAX(unknown_str)
 )
 UPDATE pidgin_title_s_raw
 SET error_message = 'Inconsistent data'
@@ -758,8 +757,8 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario0_PidginDimen():
         # print(expected_insert_sqlstr)
         assert update_sqlstrs[0] == expected_insert_sqlstr
 
-        static_example_sqlstr = """INSERT INTO pidgin_title_s_agg (event_int, face_name, otx_title, inx_title, otx_bridge, inx_bridge, unknown_term)
-SELECT event_int, face_name, otx_title, MAX(inx_title), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_term)
+        static_example_sqlstr = """INSERT INTO pidgin_title_s_agg (event_int, face_name, otx_title, inx_title, otx_bridge, inx_bridge, unknown_str)
+SELECT event_int, face_name, otx_title, MAX(inx_title), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_str)
 FROM pidgin_title_s_raw
 WHERE error_message IS NULL
 GROUP BY event_int, face_name, otx_title
@@ -888,10 +887,10 @@ def test_create_insert_into_pidgin_core_raw_sqlstr_ReturnsObj():
     # THEN
     pidgin_s_agg_tablename = prime_tbl(dimen, "s", "agg")
     pidgin_core_s_raw_tablename = prime_tbl("PIDCORE", "s", "raw")
-    expected_sqlstr = f"""INSERT INTO {pidgin_core_s_raw_tablename} (source_dimen, face_name, otx_bridge, inx_bridge, unknown_term)
-SELECT '{pidgin_s_agg_tablename}', face_name, otx_bridge, inx_bridge, unknown_term
+    expected_sqlstr = f"""INSERT INTO {pidgin_core_s_raw_tablename} (source_dimen, face_name, otx_bridge, inx_bridge, unknown_str)
+SELECT '{pidgin_s_agg_tablename}', face_name, otx_bridge, inx_bridge, unknown_str
 FROM {pidgin_s_agg_tablename}
-GROUP BY face_name, otx_bridge, inx_bridge, unknown_term
+GROUP BY face_name, otx_bridge, inx_bridge, unknown_str
 ;
 """
     assert way_sqlstr == expected_sqlstr
@@ -911,12 +910,12 @@ def test_create_insert_pidgin_core_agg_into_vld_sqlstr_ReturnsObj():
     pidcore_dimen = "PIDCORE"
     pidgin_core_s_agg_tablename = prime_tbl(pidcore_dimen, "s", "agg")
     pidgin_core_s_vld_tablename = prime_tbl(pidcore_dimen, "s", "vld")
-    expected_sqlstr = f"""INSERT INTO {pidgin_core_s_vld_tablename} (face_name, otx_bridge, inx_bridge, unknown_term)
+    expected_sqlstr = f"""INSERT INTO {pidgin_core_s_vld_tablename} (face_name, otx_bridge, inx_bridge, unknown_str)
 SELECT
   face_name
 , IFNULL(otx_bridge, '{default_bridge}')
 , IFNULL(inx_bridge, '{default_bridge}')
-, IFNULL(unknown_term, '{default_unknown_str}')
+, IFNULL(unknown_str, '{default_unknown_str}')
 FROM {pidgin_core_s_agg_tablename}
 ;
 """
@@ -938,7 +937,7 @@ def test_create_insert_missing_face_name_into_pidgin_core_vld_sqlstr_ReturnsObj(
     # THEN
     pidcore_dimen = "PIDCORE"
     pidgin_core_s_vld_tablename = prime_tbl(pidcore_dimen, "s", "vld")
-    expected_sqlstr = f"""INSERT INTO {pidgin_core_s_vld_tablename} (face_name, otx_bridge, inx_bridge, unknown_term)
+    expected_sqlstr = f"""INSERT INTO {pidgin_core_s_vld_tablename} (face_name, otx_bridge, inx_bridge, unknown_str)
 SELECT
   {budacct_s_agg_tablename}.face_name
 , '{default_bridge}'

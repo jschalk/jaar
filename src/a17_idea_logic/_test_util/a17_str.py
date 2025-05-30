@@ -1,3 +1,6 @@
+from src.a06_bud_logic._test_util.a06_str import attributes_str, dimens_str
+
+
 def idea_number_str() -> str:
     return "idea_number"
 
@@ -10,40 +13,28 @@ def allowed_crud_str() -> str:
     return "allowed_crud"
 
 
-def dimens_str() -> str:
-    return "dimens"
-
-
-def otx_key_str() -> str:
-    return "otx_key"
-
-
-def attributes_str() -> str:
-    return "attributes"
-
-
 def insert_one_time_str() -> str:
-    return "INSERT_ONE_TIME"
+    return "insert_one_time"
 
 
-def insert_mulitple_str() -> str:
-    return "INSERT_MULITPLE"
+def insert_multiple_str() -> str:
+    return "insert_multiple"
 
 
 def delete_insert_update_str() -> str:
-    return "DELETE_INSERT_UPDATE"
+    return "delete_insert_update"
 
 
 def insert_update_str() -> str:
-    return "INSERT_UPDATE"
+    return "insert_update"
 
 
-def delete_INSERT_str() -> str:
-    return "DELETE_INSERT"
+def delete_insert_str() -> str:
+    return "delete_insert"
 
 
 def delete_update_str() -> str:
-    return "DELETE_UPDATE"
+    return "delete_update"
 
 
 def build_order_str() -> str:

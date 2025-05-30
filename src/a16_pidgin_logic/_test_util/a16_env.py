@@ -3,7 +3,7 @@ from pytest import fixture as pytest_fixture
 
 
 def get_module_temp_dir():
-    return "src\\a16_pidgin_logic\\test_util\\fiscs"
+    return "src\\a16_pidgin_logic\\_test_util\\fiscs"
 
 
 def get_example_face_dir():

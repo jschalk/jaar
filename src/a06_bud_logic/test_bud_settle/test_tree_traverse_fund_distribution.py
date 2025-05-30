@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import WayStr, to_way
+from src.a01_way_logic.way import WayTerm, to_way
 from src.a02_finance_logic.finance_config import default_fund_pool
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import awardlink_shop, awardline_shop
@@ -1059,13 +1059,13 @@ def test_BudUnit_settle_bud_CorrectlySetsAcctUnit_fund_give_fund_take():
 
 
 def clear_all_acctunits_groupunits_fund_agenda_give_take(x_bud: BudUnit):
-    # DELETE bud_agenda_debt and bud_agenda_cred
+    # delete bud_agenda_debt and bud_agenda_cred
     for groupunit_x in x_bud._groupunits.values():
         groupunit_x.clear_fund_give_take()
         # for membership_x in groupunit_x._accts.values():
         #     print(f"{groupunit_x.} {membership_x.}  {membership_x._fund_give:.6f} {membership_x.debtit_belief=} {membership__fund_take:t:.6f} {membership_x.} ")
 
-    # DELETE bud_agenda_debt and bud_agenda_cred
+    # delete bud_agenda_debt and bud_agenda_cred
     for x_acctunit in x_bud.accts.values():
         x_acctunit.clear_fund_give_take()
 
@@ -1111,7 +1111,7 @@ class AwardAgendaMetrics:
     agenda_no_bud_i_sum = 0
     agenda_yes_bud_i_sum = 0
 
-    def set_sums(self, agenda_dict: dict[WayStr, ConceptUnit]):
+    def set_sums(self, agenda_dict: dict[WayTerm, ConceptUnit]):
         for agenda_concept in agenda_dict.values():
             self.sum_bud_agenda_share += agenda_concept.get_fund_share()
             if agenda_concept._awardlines == {}:

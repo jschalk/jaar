@@ -1,4 +1,4 @@
-from src.a02_finance_logic.test.range_toolbox import RangeUnit
+from src.a05_concept_logic.range_toolbox import RangeUnit
 from src.a05_concept_logic.concept import conceptunit_shop, concepts_calculated_range
 
 
