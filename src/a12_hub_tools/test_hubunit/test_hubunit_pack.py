@@ -22,9 +22,8 @@ from src.a12_hub_tools._test_util.example_hub_atoms import (
     sue_3budatoms_packunit,
     sue_4budatoms_packunit,
 )
-
-from pytest import raises as pytest_raises
 from copy import deepcopy as copy_deepcopy
+from pytest import raises as pytest_raises
 
 
 def test_HubUnit_get_max_pack_file_number_ReturnsObj(env_dir_setup_cleanup):

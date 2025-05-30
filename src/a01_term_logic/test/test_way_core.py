@@ -23,9 +23,9 @@ from src.a01_term_logic.way import (
     all_wayterms_between,
     is_labelterm,
 )
-from pytest import raises as pytest_raises
 from dataclasses import dataclass
 from platform import system as platform_system
+from pytest import raises as pytest_raises
 
 
 def test_to_way_ReturnsObj_WithDefault_bridge():

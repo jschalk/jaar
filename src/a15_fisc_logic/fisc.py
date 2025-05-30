@@ -60,9 +60,9 @@ from src.a13_bud_listen_logic.listen import (
     create_plan_file_from_duty_file,
 )
 from src.a15_fisc_logic.journal_sqlstr import get_create_table_if_not_exist_sqlstrs
+from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 from sqlite3 import connect as sqlite3_connect, Connection
-from copy import deepcopy as copy_deepcopy
 
 
 def get_default_job_listen_count() -> int:

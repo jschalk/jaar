@@ -14,15 +14,15 @@ from src.a17_idea_logic.idea_db_tool import (
     check_dataframe_column_names,
     update_all_face_name_event_int_columns,
 )
-from pytest import fixture as pytest_fixture, raises as pytest_raises
-from pandas import DataFrame, read_excel as pandas_read_excel
-from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
+from numpy import nan as numpy_nan, float64
 from openpyxl import (
     load_workbook as openpyxl_load_workbook,
     Workbook as openpyxl_Workbook,
 )
 from os.path import exists as os_path_exists
-from numpy import nan as numpy_nan, float64
+from pandas import DataFrame, read_excel as pandas_read_excel
+from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
+from pytest import fixture as pytest_fixture, raises as pytest_raises
 
 
 def test_append_df_to_excel_CreatesSheet(env_dir_setup_cleanup):

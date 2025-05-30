@@ -62,9 +62,9 @@ from src.a12_hub_tools.hub_tool import (
     open_job_file,
     gut_file_exists,
 )
-from os.path import exists as os_path_exists
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
+from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect, Connection
 
 

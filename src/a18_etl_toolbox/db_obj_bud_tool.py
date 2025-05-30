@@ -7,9 +7,9 @@ from src.a04_reason_logic.reason_concept import FactHeir, PremiseUnit, ReasonHei
 from src.a04_reason_logic.reason_labor import LaborHeir
 from src.a05_concept_logic.concept import HealerLink, ConceptUnit
 from src.a06_bud_logic.bud import BudUnit
-from sqlite3 import Cursor as sqlite3_Cursor
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
+from sqlite3 import Cursor as sqlite3_Cursor
 
 
 def create_budmemb_metrics_insert_sqlstr(values_dict: dict[str,]):

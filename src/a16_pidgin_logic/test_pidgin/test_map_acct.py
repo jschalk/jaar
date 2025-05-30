@@ -14,8 +14,8 @@ from src.a16_pidgin_logic.map import (
     get_namemap_from_json,
     inherit_namemap,
 )
-from pytest import raises as pytest_raises
 from numpy import int64 as numpy_int64
+from pytest import raises as pytest_raises
 
 
 def test_NameMap_Exists():

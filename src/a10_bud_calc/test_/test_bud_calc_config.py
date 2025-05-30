@@ -65,8 +65,8 @@ from src.a10_bud_calc.bud_calc_config import (
     get_bud_calc_dimens,
     get_bud_calc_args_sqlite_datatype_dict,
 )
-from os.path import exists as os_path_exists
 from os import getcwd as os_getcwd
+from os.path import exists as os_path_exists
 
 
 def test_get_bud_calc_config_dict_Exists():

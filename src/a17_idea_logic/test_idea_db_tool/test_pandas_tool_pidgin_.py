@@ -19,9 +19,9 @@ from src.a17_idea_logic.idea_db_tool import (
     translate_all_columns_dataframe,
     get_dataframe_pidginable_columns,
 )
-from pandas.testing import assert_frame_equal as pandas_assert_frame_equal
-from pandas import DataFrame
 from copy import deepcopy as copy_deepcopy
+from pandas import DataFrame
+from pandas.testing import assert_frame_equal as pandas_assert_frame_equal
 
 
 def test_get_dataframe_pidginable_columns_ReturnsObj():

@@ -1,7 +1,7 @@
 from src.a03_group_logic.acct import acctunit_shop
 from src.a06_bud_logic.bud import budunit_shop
-from pytest import raises as pytest_raises
 from copy import deepcopy as copy_deepcopy
+from pytest import raises as pytest_raises
 
 
 def test_BudUnit_set_acctunit_SetObjCorrectly():

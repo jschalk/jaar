@@ -25,9 +25,9 @@ from src.a17_idea_logic.idea_db_tool import (
     get_default_sorted_list,
     if_nan_return_None,
 )
-from pandas import DataFrame
 from csv import reader as csv_reader
 from dataclasses import dataclass
+from pandas import DataFrame
 
 
 @dataclass

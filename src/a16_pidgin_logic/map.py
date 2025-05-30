@@ -24,8 +24,8 @@ from src.a01_term_logic.way import (
     EventInt,
 )
 from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
-from dataclasses import dataclass
 from copy import copy as copy_copy
+from dataclasses import dataclass
 
 
 class set_all_otx2inxException(Exception):

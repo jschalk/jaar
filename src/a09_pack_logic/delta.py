@@ -22,8 +22,8 @@ from src.a08_bud_atom_logic.atom import (
     sift_budatom,
     get_from_dict as get_budatom_from_dict,
 )
-from dataclasses import dataclass
 from copy import deepcopy as copy_deepcopy
+from dataclasses import dataclass
 
 
 @dataclass

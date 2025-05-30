@@ -24,8 +24,8 @@ from src.a06_bud_logic.bud_tool import (
     get_acct_mandate_ledger,
     get_credit_ledger,
 )
-from dataclasses import dataclass
 from copy import deepcopy as copy_deepcopy
+from dataclasses import dataclass
 
 CELLNODE_QUOTA_DEFAULT = 1000
 

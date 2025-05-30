@@ -1,7 +1,7 @@
 from src.a08_bud_atom_logic.atom_config import get_normal_table_name
 from src.a08_bud_atom_logic.atom import budatom_shop, BudAtom
-from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 from dataclasses import dataclass
+from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 
 
 @dataclass

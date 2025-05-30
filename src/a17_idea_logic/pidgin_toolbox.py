@@ -8,8 +8,8 @@ from src.a16_pidgin_logic.pidgin import (
     WayMap,
 )
 from src.a17_idea_logic.idea_db_tool import get_ordered_csv, open_csv
-from pandas import DataFrame
 from os.path import exists as os_path_exists
+from pandas import DataFrame
 
 
 def get_pidgin_name_dt_columns() -> list[str]:

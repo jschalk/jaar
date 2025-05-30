@@ -164,8 +164,8 @@ from src.a17_idea_logic.idea_config import (
     idea_format_00020_bud_acct_membership_v0_0_0,
     idea_format_00013_conceptunit_v0_0_0,
 )
-from os import getcwd as os_getcwd
 from copy import copy as copy_copy
+from os import getcwd as os_getcwd
 
 
 def test_str_functions_ReturnsObj():

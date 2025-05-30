@@ -5,8 +5,8 @@ from src.a02_finance_logic.allot import (
     _get_missing_scale_list,
     GrainFloat,
 )
-from pytest import raises as pytest_raises
 from inspect import getdoc as inspect_getdoc
+from pytest import raises as pytest_raises
 
 
 def test_GrainFloat_exists():

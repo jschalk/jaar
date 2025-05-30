@@ -91,7 +91,7 @@ def get_module_descs() -> dict[str, str]:
     }
 
 
-def test_ModuleDirectorysAreNumberedCorrectly():
+def test_ModuleDirectorys_test_util_FilesAreFormattedCorrectly():
     # sourcery skip: no-loop-in-tests
     # sourcery skip: no-conditionals-in-tests
     # ESTABLISH
@@ -127,6 +127,8 @@ def test_CheckAllPythonFileImportsAreInCorrectFormat():
         # print(f"{desc_number} {module_desc=} {len(python_files)=}")
         for file_path, file_imports in python_files.items():
             check_module_imports_are_ordered(file_imports, file_path, desc_number)
+            # TODO uncomment and correct all file imports
+            # check_import_objs_are_ordered(file_imports, file_path)
 
             filename = str(os_path_basename(file_path))
             file_path = str(file_path)
@@ -135,10 +137,12 @@ def test_CheckAllPythonFileImportsAreInCorrectFormat():
                     if str(file_import[0]).endswith("_str"):
                         print(f"{module_desc} {filename} {file_import[0]=}")
                     assert not str(file_import[0]).endswith("_str")
+    assert 1 == 2
 
 
 def check_module_imports_are_ordered(imports: list[list], file_path: str, desc_number):
     previous_module_number = -1
+    previous_module_str = "a"
     module_section_passed = False
     for x_import in imports:
         module_location = str(x_import[0])
@@ -156,6 +160,10 @@ def check_module_imports_are_ordered(imports: list[list], file_path: str, desc_n
             previous_module_number = module_number
         else:
             module_section_passed = True
+            if module_location <= previous_module_str:
+                print(f"{file_path} switch {module_location} and {previous_module_str}")
+            assert module_location > previous_module_str
+            previous_module_str = module_location
 
         if module_location.endswith("env"):
             env_number = int(module_location[-6:-4])
@@ -223,20 +231,26 @@ def test_StrFunctionsAreAllTested():
             assert os_path_exists(test_file_path)
             test_file_imports = get_imports_from_file(test_file_path)
             assert len(test_file_imports) == 1
-            test_file_import_objs = test_file_imports[0][1]
-            if test_file_import_objs != sorted(test_file_import_objs):
-                test_file_import_objs_str = str(sorted(test_file_import_objs))
-                test_file_import_objs_str = test_file_import_objs_str.replace("'", "")
-                test_file_import_objs_str = test_file_import_objs_str.replace("[", "")
-                test_file_import_objs_str = test_file_import_objs_str.replace("]", "")
-                print(f"{test_file_import_objs_str}")
-            assert test_file_import_objs == sorted(test_file_import_objs)
-            # print(f"{test_file_path=}")
+            check_import_objs_are_ordered(test_file_imports)
             test_functions = get_function_names_from_file(test_file_path)
             assert test_functions == ["test_str_functions_ReturnsObj"]
             check_str_func_test_file_has_needed_asserts(
                 module_str_funcs, test_file_path, util_dir, desc_number_str
             )
+
+
+def check_import_objs_are_ordered(test_file_imports: list[list], file_path: str):
+    for file_import in test_file_imports:
+        file_import_src = file_import[0]
+        file_import_objs = file_import[1]
+        if file_import_objs != sorted(file_import_objs):
+            print(f"{file_path=}")
+            file_import_objs_str = str(sorted(file_import_objs))
+            file_import_objs_str = file_import_objs_str.replace("'", "")
+            file_import_objs_str = file_import_objs_str.replace("[", "")
+            file_import_objs_str = file_import_objs_str.replace("]", "")
+            print(f"from {file_import_src} import ({file_import_objs_str})")
+        assert file_import_objs == sorted(file_import_objs)
 
 
 def check_str_func_test_file_has_needed_asserts(

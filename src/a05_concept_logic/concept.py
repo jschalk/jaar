@@ -72,8 +72,8 @@ from src.a05_concept_logic.origin import (
     originunit_get_from_dict,
     originunit_shop,
 )
-from dataclasses import dataclass
 from copy import deepcopy
+from dataclasses import dataclass
 
 
 class InvalidConceptException(Exception):

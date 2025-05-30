@@ -33,8 +33,8 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_sorted_list_of_dict_keys,
     get_max_key,
 )
-from pytest import raises as pytest_raises
 from numpy import int64 as numpy_int64
+from pytest import raises as pytest_raises
 
 
 def test_get_1_if_None():
