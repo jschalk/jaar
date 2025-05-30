@@ -53,7 +53,7 @@ def test_PythonFileImportsFormat():
         for file_path, file_imports in python_files.items():
             check_module_imports_are_ordered(file_imports, file_path, desc_number)
             # TODO uncomment and correct all file imports
-            # check_import_objs_are_ordered(file_imports, file_path)
+            check_import_objs_are_ordered(file_imports, file_path)
 
             filename = str(os_path_basename(file_path))
             file_path = str(file_path)

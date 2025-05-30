@@ -1,7 +1,7 @@
 from src.a01_term_logic.way import (
+    default_bridge_if_None,
     get_default_fisc_label as root_label,
     get_default_fisc_way as root_way,
-    default_bridge_if_None,
     get_way_from_yaw,
     get_yaw_from_way,
 )

@@ -1,17 +1,17 @@
 from src.a01_term_logic.way import (
+    AcctName,
+    EventInt,
+    FaceName,
+    GroupTitle,
+    HealerName,
     LabelTerm,
     NameTerm,
-    TitleTerm,
-    HealerName,
     OwnerName,
-    AcctName,
+    TitleTerm,
     WayTerm,
-    YawTerm,
-    GroupTitle,
-    default_bridge_if_None,
     WorldID,
-    FaceName,
-    EventInt,
+    YawTerm,
+    default_bridge_if_None,
 )
 from src.a01_term_logic._test_util.a01_str import bridge_str
 from inspect import getdoc as inspect_getdoc
