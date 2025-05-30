@@ -195,6 +195,13 @@ def test_StrFunctionsAreAllTested():
         util_dir = create_path(module_dir, "_test_util")
 
         module_str_funcs = get_module_str_functions(module_dir, desc_number_str)
+        if module_str_funcs != sorted(module_str_funcs):
+            print(f"{util_dir}")
+            for module_str_func in sorted(module_str_funcs):
+                module_str_func = module_str_func.replace("'", "")
+                module_str_func = module_str_func.replace("_str", "")
+                print(f"def {module_str_func}_str() -> str: return '{module_str_func}'")
+        assert module_str_funcs == sorted(module_str_funcs)
         if set(module_str_funcs).intersection(set(running_str_functions_set)):
             print(
                 f"{util_dir=} Duplicate functions: {set(module_str_funcs).intersection(set(running_str_functions_set))}"
@@ -208,7 +215,7 @@ def test_StrFunctionsAreAllTested():
             test_file_imports = get_imports_from_file(test_file_path)
             assert len(test_file_imports) == 1
             test_functions = get_function_names_from_file(test_file_path)
-            print(f"{test_file_path=}")
+            # print(f"{test_file_path=}")
             assert test_functions == ["test_str_functions_ReturnsObj"]
             for str_function in module_str_funcs:
                 # print(f"{str_util_path} {str_function=}")

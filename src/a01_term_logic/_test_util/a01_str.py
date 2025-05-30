@@ -1,5 +1,5 @@
-def bridge_str() -> str:
-    return "bridge"
+def LabelTerm_str() -> str:
+    return "LabelTerm"
 
 
 def NameTerm_str() -> str:
@@ -10,12 +10,12 @@ def TitleTerm_str() -> str:
     return "TitleTerm"
 
 
-def LabelTerm_str() -> str:
-    return "LabelTerm"
-
-
 def WayTerm_str() -> str:
     return "WayTerm"
+
+
+def bridge_str() -> str:
+    return "bridge"
 
 
 def fisc_label_str() -> str:
