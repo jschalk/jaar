@@ -106,10 +106,8 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR,
     create_job_tables,
 )
-from src.a18_etl_toolbox.db_obj_tool import (
-    get_fisc_dict_from_voice_tables,
-    insert_job_obj,
-)
+from src.a18_etl_toolbox.db_obj_fisc_tool import get_fisc_dict_from_voice_tables
+from src.a18_etl_toolbox.db_obj_bud_tool import insert_job_obj
 from src.a18_etl_toolbox.idea_collector import get_all_idea_dataframes, IdeaFileRef
 from pandas import (
     read_excel as pandas_read_excel,
