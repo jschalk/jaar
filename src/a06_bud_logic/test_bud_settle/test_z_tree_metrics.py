@@ -84,8 +84,8 @@ def test_BudUnit_get_tree_metrics_ReturnsANone_pledge_ConceptWayTerm():
     # ESTABLISH
     nia_str = "Nia"
     nia_bud = budunit_shop(nia_str, tally=10)
-    weekdays = "weekdays"
-    nia_bud.set_l1_concept(conceptunit_shop(weekdays, mass=40))
+    wkdays = "wkdays"
+    nia_bud.set_l1_concept(conceptunit_shop(wkdays, mass=40))
     tree_metrics_before = nia_bud.get_tree_metrics()
 
     # WHEN / THEN

@@ -8,9 +8,9 @@ from pytest import raises as pytest_raises
 def test_BudUnit_set_fact_CorrectlyModifiesAttr_1():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    weekday_way = sue_bud.make_l1_way("weekdays")
-    sunday_way = sue_bud.make_way(weekday_way, "Sunday")
-    sunday_bud_fact = factunit_shop(fcontext=weekday_way, fstate=sunday_way)
+    wkday_way = sue_bud.make_l1_way("wkdays")
+    sunday_way = sue_bud.make_way(wkday_way, "Sunday")
+    sunday_bud_fact = factunit_shop(fcontext=wkday_way, fstate=sunday_way)
     print(sunday_bud_fact)
     x_conceptroot = sue_bud.conceptroot
     x_conceptroot.factunits = {sunday_bud_fact.fcontext: sunday_bud_fact}
@@ -19,7 +19,7 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttr_1():
     assert not x_conceptroot.factunits
 
     # ESTABLISH
-    sue_bud.add_fact(fcontext=weekday_way, fstate=sunday_way)
+    sue_bud.add_fact(fcontext=wkday_way, fstate=sunday_way)
 
     # THEN
     assert x_conceptroot.factunits == {sunday_bud_fact.fcontext: sunday_bud_fact}
@@ -27,32 +27,32 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttr_1():
     # ESTABLISH
     x_conceptroot.factunits = {}
     assert not x_conceptroot.factunits
-    usa_week_way = sue_bud.make_l1_way("nation")
-    usa_week_fact = factunit_shop(usa_week_way, usa_week_way, fopen=608, fnigh=610)
-    x_conceptroot.factunits = {usa_week_fact.fcontext: usa_week_fact}
+    usa_wk_way = sue_bud.make_l1_way("nation")
+    usa_wk_fact = factunit_shop(usa_wk_way, usa_wk_way, fopen=608, fnigh=610)
+    x_conceptroot.factunits = {usa_wk_fact.fcontext: usa_wk_fact}
 
     x_conceptroot.factunits = {}
     assert not x_conceptroot.factunits
 
     # WHEN
-    sue_bud.add_fact(fcontext=usa_week_way, fstate=usa_week_way, fopen=608, fnigh=610)
+    sue_bud.add_fact(fcontext=usa_wk_way, fstate=usa_wk_way, fopen=608, fnigh=610)
 
     # THEN
     assert x_conceptroot.factunits is not None
-    assert x_conceptroot.factunits == {usa_week_fact.fcontext: usa_week_fact}
+    assert x_conceptroot.factunits == {usa_wk_fact.fcontext: usa_wk_fact}
 
 
 def test_BudUnit_set_fact_CorrectlyModifiesAttr_2():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    weekday_way = sue_bud.make_l1_way("weekdays")
-    sunday_way = sue_bud.make_way(weekday_way, "Sunday")
+    wkday_way = sue_bud.make_l1_way("wkdays")
+    sunday_way = sue_bud.make_way(wkday_way, "Sunday")
 
     # WHEN
-    sue_bud.add_fact(fcontext=weekday_way, fstate=sunday_way)
+    sue_bud.add_fact(fcontext=wkday_way, fstate=sunday_way)
 
     # THEN
-    sunday_bud_fact = factunit_shop(fcontext=weekday_way, fstate=sunday_way)
+    sunday_bud_fact = factunit_shop(fcontext=wkday_way, fstate=sunday_way)
     x_conceptroot = sue_bud.conceptroot
     assert x_conceptroot.factunits == {sunday_bud_fact.fcontext: sunday_bud_fact}
 
@@ -60,13 +60,13 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttr_2():
 def test_BudUnit_set_fact_CorrectlyModifiesAttrWhen_fstate_IsNone():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    weekday_way = sue_bud.make_l1_way("weekdays")
+    wkday_way = sue_bud.make_l1_way("wkdays")
 
     # WHEN
-    sue_bud.add_fact(fcontext=weekday_way, fopen=5, fnigh=7)
+    sue_bud.add_fact(fcontext=wkday_way, fopen=5, fnigh=7)
 
     # THEN
-    sunday_bud_fact = factunit_shop(weekday_way, weekday_way, 5, 7)
+    sunday_bud_fact = factunit_shop(wkday_way, wkday_way, 5, 7)
     x_conceptroot = sue_bud.conceptroot
     assert x_conceptroot.factunits == {sunday_bud_fact.fcontext: sunday_bud_fact}
 
@@ -74,18 +74,18 @@ def test_BudUnit_set_fact_CorrectlyModifiesAttrWhen_fstate_IsNone():
 def test_BudUnit_set_fact_CorrectlyModifiesAttrWhen_popen_IsNone():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    weekday_way = sue_bud.make_l1_way("weekdays")
-    sue_bud.add_fact(fcontext=weekday_way, fopen=5, fnigh=7)
+    wkday_way = sue_bud.make_l1_way("wkdays")
+    sue_bud.add_fact(fcontext=wkday_way, fopen=5, fnigh=7)
     x_conceptroot = sue_bud.conceptroot
-    x7_factunit = factunit_shop(weekday_way, weekday_way, 5, 7)
-    assert x_conceptroot.factunits.get(weekday_way) == x7_factunit
+    x7_factunit = factunit_shop(wkday_way, wkday_way, 5, 7)
+    assert x_conceptroot.factunits.get(wkday_way) == x7_factunit
 
     # WHEN
-    sue_bud.add_fact(fcontext=weekday_way, fnigh=10)
+    sue_bud.add_fact(fcontext=wkday_way, fnigh=10)
 
     # THEN
-    x10_factunit = factunit_shop(weekday_way, weekday_way, 5, 10)
-    assert x_conceptroot.factunits.get(weekday_way) == x10_factunit
+    x10_factunit = factunit_shop(wkday_way, wkday_way, 5, 10)
+    assert x_conceptroot.factunits.get(wkday_way) == x10_factunit
 
 
 def test_BudUnit_set_fact_FailsToCreateWhenRcontextAndFactAreDifferenctAndFactConceptIsNot_RangeRoot():
@@ -115,15 +115,15 @@ def test_BudUnit_set_fact_FailsToCreateWhenRcontextAndFactAreDifferenctAndFactCo
 def test_BudUnit_del_fact_CorrectlyModifiesAttr():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    weekday_way = sue_bud.make_l1_way("weekdays")
-    sunday_way = sue_bud.make_way(weekday_way, "Sunday")
-    sue_bud.add_fact(fcontext=weekday_way, fstate=sunday_way)
-    sunday_bud_fact = factunit_shop(fcontext=weekday_way, fstate=sunday_way)
+    wkday_way = sue_bud.make_l1_way("wkdays")
+    sunday_way = sue_bud.make_way(wkday_way, "Sunday")
+    sue_bud.add_fact(fcontext=wkday_way, fstate=sunday_way)
+    sunday_bud_fact = factunit_shop(fcontext=wkday_way, fstate=sunday_way)
     x_conceptroot = sue_bud.conceptroot
     assert x_conceptroot.factunits == {sunday_bud_fact.fcontext: sunday_bud_fact}
 
     # WHEN
-    sue_bud.del_fact(fcontext=weekday_way)
+    sue_bud.del_fact(fcontext=wkday_way)
 
     # THEN
     assert x_conceptroot.factunits == {}

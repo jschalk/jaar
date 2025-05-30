@@ -19,27 +19,27 @@ def budunit_v001() -> BudUnit:
 def budunit_v001_with_large_agenda() -> BudUnit:
     yao_bud = budunit_v001()
     day_minute_way = yao_bud.make_l1_way("day_minute")
-    month_week_way = yao_bud.make_l1_way("month_week")
+    month_wk_way = yao_bud.make_l1_way("month_wk")
     nations_way = yao_bud.make_l1_way("Nation-States")
     mood_way = yao_bud.make_l1_way("Moods")
     aaron_way = yao_bud.make_l1_way("Aaron Donald objects effected by him")
-    year_month_way = yao_bud.make_l1_way("year_month")
+    yr_month_way = yao_bud.make_l1_way("yr_month")
     season_way = yao_bud.make_l1_way("Seasons")
-    ced_week_way = yao_bud.make_l1_way("ced_week")
-    weekdays_way = yao_bud.make_l1_way("weekdays")
+    ced_wk_way = yao_bud.make_l1_way("ced_wk")
+    wkdays_way = yao_bud.make_l1_way("wkdays")
 
     yao_bud.add_fact(aaron_way, aaron_way)
-    yao_bud.add_fact(ced_week_way, ced_week_way, fopen=0, fnigh=53)
+    yao_bud.add_fact(ced_wk_way, ced_wk_way, fopen=0, fnigh=53)
     yao_bud.add_fact(day_minute_way, day_minute_way, fopen=0, fnigh=1399)
     # yao_bud.add_fact(interweb, interweb)
-    yao_bud.add_fact(month_week_way, month_week_way, fopen=0, fnigh=5)
+    yao_bud.add_fact(month_wk_way, month_wk_way, fopen=0, fnigh=5)
     yao_bud.add_fact(mood_way, mood_way)
     # yao_bud.add_fact(movie, movie)
     yao_bud.add_fact(nations_way, nations_way)
     yao_bud.add_fact(season_way, season_way)
-    yao_bud.add_fact(year_month_way, year_month_way, fopen=0, fnigh=12)
+    yao_bud.add_fact(yr_month_way, yr_month_way, fopen=0, fnigh=12)
     # yao_bud.add_fact(water, water)
-    yao_bud.add_fact(weekdays_way, weekdays_way)
+    yao_bud.add_fact(wkdays_way, wkdays_way)
     return yao_bud
 
 
@@ -56,10 +56,10 @@ def get_budunit_with_4_levels() -> BudUnit:
     cat_str = "cat have dinner"
     sue_bud.set_l1_concept(conceptunit_shop(cat_str, mass=30, pledge=True))
 
-    week_str = "weekdays"
-    week_way = sue_bud.make_l1_way(week_str)
-    concept_kid_weekdays = conceptunit_shop(week_str, mass=40)
-    sue_bud.set_l1_concept(concept_kid_weekdays)
+    wk_str = "wkdays"
+    wk_way = sue_bud.make_l1_way(wk_str)
+    concept_kid_wkdays = conceptunit_shop(wk_str, mass=40)
+    sue_bud.set_l1_concept(concept_kid_wkdays)
     sun_str = "Sunday"
     mon_str = "Monday"
     tue_str = "Tuesday"
@@ -67,13 +67,13 @@ def get_budunit_with_4_levels() -> BudUnit:
     thu_str = "Thursday"
     fri_str = "Friday"
     sat_str = "Saturday"
-    sue_bud.set_concept(conceptunit_shop(sun_str, mass=20), week_way)
-    sue_bud.set_concept(conceptunit_shop(mon_str, mass=20), week_way)
-    sue_bud.set_concept(conceptunit_shop(tue_str, mass=20), week_way)
-    sue_bud.set_concept(conceptunit_shop(wed_str, mass=20), week_way)
-    sue_bud.set_concept(conceptunit_shop(thu_str, mass=30), week_way)
-    sue_bud.set_concept(conceptunit_shop(fri_str, mass=40), week_way)
-    sue_bud.set_concept(conceptunit_shop(sat_str, mass=50), week_way)
+    sue_bud.set_concept(conceptunit_shop(sun_str, mass=20), wk_way)
+    sue_bud.set_concept(conceptunit_shop(mon_str, mass=20), wk_way)
+    sue_bud.set_concept(conceptunit_shop(tue_str, mass=20), wk_way)
+    sue_bud.set_concept(conceptunit_shop(wed_str, mass=20), wk_way)
+    sue_bud.set_concept(conceptunit_shop(thu_str, mass=30), wk_way)
+    sue_bud.set_concept(conceptunit_shop(fri_str, mass=40), wk_way)
+    sue_bud.set_concept(conceptunit_shop(sat_str, mass=50), wk_way)
 
     nation_str = "nation"
     nation_way = sue_bud.make_l1_way(nation_str)
@@ -100,12 +100,12 @@ def get_budunit_with_4_levels() -> BudUnit:
 
 def get_budunit_with_4_levels_and_2reasons() -> BudUnit:
     sue_bud = get_budunit_with_4_levels()
-    week_str = "weekdays"
-    week_way = sue_bud.make_l1_way(week_str)
+    wk_str = "wkdays"
+    wk_way = sue_bud.make_l1_way(wk_str)
     wed_str = "Wednesday"
-    wed_way = sue_bud.make_way(week_way, wed_str)
-    week_reason = reasonunit_shop(week_way)
-    week_reason.set_premise(wed_way)
+    wed_way = sue_bud.make_way(wk_way, wed_str)
+    wk_reason = reasonunit_shop(wk_way)
+    wk_reason.set_premise(wed_way)
 
     nation_str = "nation"
     nation_way = sue_bud.make_l1_way(nation_str)
@@ -116,22 +116,22 @@ def get_budunit_with_4_levels_and_2reasons() -> BudUnit:
 
     casa_str = "casa"
     casa_way = sue_bud.make_l1_way(casa_str)
-    sue_bud.edit_concept_attr(casa_way, reason=week_reason)
+    sue_bud.edit_concept_attr(casa_way, reason=wk_reason)
     sue_bud.edit_concept_attr(casa_way, reason=nation_reason)
     return sue_bud
 
 
 def get_budunit_with_4_levels_and_2reasons_2facts() -> BudUnit:
     sue_bud = get_budunit_with_4_levels_and_2reasons()
-    week_str = "weekdays"
-    week_way = sue_bud.make_l1_way(week_str)
+    wk_str = "wkdays"
+    wk_way = sue_bud.make_l1_way(wk_str)
     wed_str = "Wednesday"
-    wed_way = sue_bud.make_way(week_way, wed_str)
+    wed_way = sue_bud.make_way(wk_way, wed_str)
     nation_str = "nation"
     nation_way = sue_bud.make_l1_way(nation_str)
     usa_str = "USA"
     usa_way = sue_bud.make_way(nation_way, usa_str)
-    sue_bud.add_fact(fcontext=week_way, fstate=wed_way)
+    sue_bud.add_fact(fcontext=wk_way, fstate=wed_way)
     sue_bud.add_fact(fcontext=nation_way, fstate=usa_way)
     return sue_bud
 
@@ -207,18 +207,18 @@ def get_budunit_with7amCleanTableReason() -> BudUnit:
 
 def get_budunit_1Task_1CE0MinutesReason_1Fact() -> BudUnit:
     yao_bud = budunit_shop("Yao")
-    hour_min_str = "hour"
-    hour_min_concept = conceptunit_shop(hour_min_str)
-    hour_way = yao_bud.make_l1_way(hour_min_str)
-    hour_reasonunit = reasonunit_shop(hour_way)
-    hour_reasonunit.set_premise(hour_way, popen=80, pnigh=90)
-    yao_bud.set_l1_concept(hour_min_concept)
-    yao_bud.add_fact(hour_way, hour_way, 85, 95)
+    hr_min_str = "hr"
+    hr_min_concept = conceptunit_shop(hr_min_str)
+    hr_way = yao_bud.make_l1_way(hr_min_str)
+    hr_reasonunit = reasonunit_shop(hr_way)
+    hr_reasonunit.set_premise(hr_way, popen=80, pnigh=90)
+    yao_bud.set_l1_concept(hr_min_concept)
+    yao_bud.add_fact(hr_way, hr_way, 85, 95)
     mail_str = "obtain mail"
     mail_way = yao_bud.make_l1_way(mail_str)
     mail_concept = conceptunit_shop(mail_str, pledge=True)
     yao_bud.set_l1_concept(mail_concept)
-    yao_bud.edit_concept_attr(mail_way, reason=hour_reasonunit)
+    yao_bud.edit_concept_attr(mail_way, reason=hr_reasonunit)
     return yao_bud
 
 
@@ -229,28 +229,28 @@ def get_budunit_x1_3levels_1reason_1facts() -> BudUnit:
     shave_way = zia_bud.make_l1_way(shave_str)
     concept_kid_shave = conceptunit_shop(shave_str, mass=30, pledge=True)
     zia_bud.set_l1_concept(concept_kid_shave)
-    week_str = "weekdays"
-    week_way = zia_bud.make_l1_way(week_str)
-    week_concept = conceptunit_shop(week_str, mass=40)
-    zia_bud.set_l1_concept(week_concept)
+    wk_str = "wkdays"
+    wk_way = zia_bud.make_l1_way(wk_str)
+    wk_concept = conceptunit_shop(wk_str, mass=40)
+    zia_bud.set_l1_concept(wk_concept)
 
     sun_str = "Sunday"
-    sun_way = zia_bud.make_way(week_way, sun_str)
+    sun_way = zia_bud.make_way(wk_way, sun_str)
     church_str = "Church"
     church_way = zia_bud.make_way(sun_way, church_str)
     mon_str = "Monday"
-    mon_way = zia_bud.make_way(week_way, mon_str)
+    mon_way = zia_bud.make_way(wk_way, mon_str)
     concept_grandkidU = conceptunit_shop(sun_str, mass=20)
     concept_grandkidM = conceptunit_shop(mon_str, mass=20)
-    zia_bud.set_concept(concept_grandkidU, week_way)
-    zia_bud.set_concept(concept_grandkidM, week_way)
+    zia_bud.set_concept(concept_grandkidU, wk_way)
+    zia_bud.set_concept(concept_grandkidM, wk_way)
 
-    shave_reason = reasonunit_shop(week_way)
+    shave_reason = reasonunit_shop(wk_way)
     shave_reason.set_premise(mon_way)
 
     zia_bud.edit_concept_attr(shave_way, reason=shave_reason)
-    zia_bud.add_fact(fcontext=week_way, fstate=sun_way)
-    x_factunit = factunit_shop(fcontext=week_way, fstate=church_way)
+    zia_bud.add_fact(fcontext=wk_way, fstate=sun_way)
+    x_factunit = factunit_shop(fcontext=wk_way, fstate=church_way)
     zia_bud.edit_concept_attr(shave_way, factunit=x_factunit)
     return zia_bud
 

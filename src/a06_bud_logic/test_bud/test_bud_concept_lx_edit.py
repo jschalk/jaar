@@ -196,47 +196,41 @@ def test_bud_edit_concept_label_Modifies_factunits():
 def test_bud_edit_concept_label_ModifiesConceptReasonUnitsScenario1():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels_and_2reasons_2facts()
-    old_weekday_str = "weekdays"
-    old_weekday_way = sue_bud.make_l1_way(old_weekday_str)
+    old_wkday_str = "wkdays"
+    old_wkday_way = sue_bud.make_l1_way(old_wkday_str)
     wednesday_str = "Wednesday"
-    old_wednesday_way = sue_bud.make_way(old_weekday_way, wednesday_str)
+    old_wednesday_way = sue_bud.make_way(old_wkday_way, wednesday_str)
     casa_concept = sue_bud.get_concept_obj(sue_bud.make_l1_way("casa"))
-    # casa_wk_reason = reasonunit_shop(weekday, premises={wed_premise.pstate: wed_premise})
+    # casa_wk_reason = reasonunit_shop(wkday, premises={wed_premise.pstate: wed_premise})
     # nation_reason = reasonunit_shop(nation, premises={usa_premise.pstate: usa_premise})
     assert len(casa_concept.reasonunits) == 2
-    assert casa_concept.reasonunits.get(old_weekday_way) is not None
-    wednesday_concept = sue_bud.get_concept_obj(old_weekday_way)
-    casa_weekday_reason = casa_concept.reasonunits.get(old_weekday_way)
-    assert casa_weekday_reason.premises.get(old_wednesday_way) is not None
-    assert (
-        casa_weekday_reason.premises.get(old_wednesday_way).pstate == old_wednesday_way
-    )
-    new_weekday_str = "days of week"
-    new_weekday_way = sue_bud.make_l1_way(new_weekday_str)
-    new_wednesday_way = sue_bud.make_way(new_weekday_way, wednesday_str)
-    assert casa_concept.reasonunits.get(new_weekday_str) is None
+    assert casa_concept.reasonunits.get(old_wkday_way) is not None
+    wednesday_concept = sue_bud.get_concept_obj(old_wkday_way)
+    casa_wkday_reason = casa_concept.reasonunits.get(old_wkday_way)
+    assert casa_wkday_reason.premises.get(old_wednesday_way) is not None
+    assert casa_wkday_reason.premises.get(old_wednesday_way).pstate == old_wednesday_way
+    new_wkday_str = "days of wk"
+    new_wkday_way = sue_bud.make_l1_way(new_wkday_str)
+    new_wednesday_way = sue_bud.make_way(new_wkday_way, wednesday_str)
+    assert casa_concept.reasonunits.get(new_wkday_str) is None
 
     # WHEN
     # for key_x, x_reason in casa_concept.reasonunits.items():
     #     print(f"Before {key_x=} {x_reason.rcontext=}")
     print(f"before {wednesday_concept.concept_label=}")
     print(f"before {wednesday_concept.parent_way=}")
-    sue_bud.edit_concept_label(
-        old_way=old_weekday_way, new_concept_label=new_weekday_str
-    )
+    sue_bud.edit_concept_label(old_way=old_wkday_way, new_concept_label=new_wkday_str)
     # for key_x, x_reason in casa_concept.reasonunits.items():
     #     print(f"after {key_x=} {x_reason.rcontext=}")
     print(f"after  {wednesday_concept.concept_label=}")
     print(f"after  {wednesday_concept.parent_way=}")
 
     # THEN
-    assert casa_concept.reasonunits.get(new_weekday_way) is not None
-    assert casa_concept.reasonunits.get(old_weekday_way) is None
-    casa_weekday_reason = casa_concept.reasonunits.get(new_weekday_way)
-    assert casa_weekday_reason.premises.get(new_wednesday_way) is not None
-    assert (
-        casa_weekday_reason.premises.get(new_wednesday_way).pstate == new_wednesday_way
-    )
+    assert casa_concept.reasonunits.get(new_wkday_way) is not None
+    assert casa_concept.reasonunits.get(old_wkday_way) is None
+    casa_wkday_reason = casa_concept.reasonunits.get(new_wkday_way)
+    assert casa_wkday_reason.premises.get(new_wednesday_way) is not None
+    assert casa_wkday_reason.premises.get(new_wednesday_way).pstate == new_wednesday_way
     assert len(casa_concept.reasonunits) == 2
 
 
@@ -262,16 +256,16 @@ def test_bud_set_owner_name_CorrectlyModifiesBoth():
 def test_bud_edit_concept_label_RaisesErrorIfbridgeIsInLabel():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels_and_2reasons_2facts()
-    old_weekday_str = "weekdays"
-    old_weekday_way = sue_bud.make_l1_way(old_weekday_str)
+    old_wkday_str = "wkdays"
+    old_wkday_way = sue_bud.make_l1_way(old_wkday_str)
 
     # WHEN / THEN
-    new_weekday_str = "days; of week"
+    new_wkday_str = "days; of wk"
     with pytest_raises(Exception) as excinfo:
         sue_bud.edit_concept_label(
-            old_way=old_weekday_way, new_concept_label=new_weekday_str
+            old_way=old_wkday_way, new_concept_label=new_wkday_str
         )
     assert (
         str(excinfo.value)
-        == f"Cannot modify '{old_weekday_way}' because new_concept_label {new_weekday_str} contains bridge {sue_bud.bridge}"
+        == f"Cannot modify '{old_wkday_way}' because new_concept_label {new_wkday_str} contains bridge {sue_bud.bridge}"
     )

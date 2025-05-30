@@ -21,11 +21,11 @@ from pytest import raises as pytest_raises
 def test_BudUnit_get_dict_ReturnsObj_Scenario1_large_json():
     # ESTABLISH
     yao_bud = budunit_v001()
-    day_hour_str = "day_hour"
-    day_hour_way = yao_bud.make_l1_way(day_hour_str)
-    day_hour_concept = yao_bud.get_concept_obj(day_hour_way)
-    day_hour_concept._originunit.set_originhold(acct_name="Bob", importance=2)
-    yao_bud.add_fact(fcontext=day_hour_way, fstate=day_hour_way, fopen=0, fnigh=23)
+    day_hr_str = "day_hr"
+    day_hr_way = yao_bud.make_l1_way(day_hr_str)
+    day_hr_concept = yao_bud.get_concept_obj(day_hr_way)
+    day_hr_concept._originunit.set_originhold(acct_name="Bob", importance=2)
+    yao_bud.add_fact(fcontext=day_hr_way, fstate=day_hr_way, fopen=0, fnigh=23)
     time_minute = yao_bud.make_l1_way("day_minute")
     yao_bud.add_fact(fcontext=time_minute, fstate=time_minute, fopen=0, fnigh=1440)
     yao_str = "Yao"
@@ -74,8 +74,8 @@ def test_BudUnit_get_dict_ReturnsObj_Scenario1_large_json():
     assert len(conceptroot_dict[_kids]) == len(x_conceptroot._kids)
 
     originunit_str = "originunit"
-    day_hour_originunit_dict = conceptroot_dict[_kids][day_hour_str][originunit_str]
-    assert day_hour_originunit_dict == day_hour_concept._originunit.get_dict()
+    day_hr_originunit_dict = conceptroot_dict[_kids][day_hr_str][originunit_str]
+    assert day_hr_originunit_dict == day_hr_concept._originunit.get_dict()
     originholds_str = "_originholds"
     yao_bud_originhold = bud_dict[originunit_str][originholds_str][yao_str]
     print(f"{yao_bud_originhold=}")
@@ -230,9 +230,9 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
 def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     # ESTABLISH
     yao_bud = budunit_v001()
-    day_hour_str = "day_hour"
-    day_hour_way = yao_bud.make_l1_way(day_hour_str)
-    yao_bud.add_fact(fcontext=day_hour_way, fstate=day_hour_way, fopen=0, fnigh=23)
+    day_hr_str = "day_hr"
+    day_hr_way = yao_bud.make_l1_way(day_hr_str)
+    yao_bud.add_fact(fcontext=day_hr_way, fstate=day_hr_way, fopen=0, fnigh=23)
     day_min_str = "day_minute"
     day_min_way = yao_bud.make_l1_way(day_min_str)
     yao_bud.add_fact(fcontext=day_min_way, fstate=day_min_way, fopen=0, fnigh=59)
@@ -391,13 +391,13 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
 
     assert len(json_bud.conceptroot._kids) == 2
 
-    weekday_str = "weekdays"
-    weekday_way = json_bud.make_l1_way(weekday_str)
-    weekday_concept_x = json_bud.get_concept_obj(weekday_way)
-    assert len(weekday_concept_x._kids) == 2
+    wkday_str = "wkdays"
+    wkday_way = json_bud.make_l1_way(wkday_str)
+    wkday_concept_x = json_bud.get_concept_obj(wkday_way)
+    assert len(wkday_concept_x._kids) == 2
 
     sunday_str = "Sunday"
-    sunday_way = json_bud.make_way(weekday_way, sunday_str)
+    sunday_way = json_bud.make_way(wkday_way, sunday_str)
     sunday_concept = json_bud.get_concept_obj(sunday_way)
     assert sunday_concept.mass == 20
 
@@ -500,12 +500,12 @@ def test_budunit_get_from_json_ReturnsObj_Scenario7_conceptroot_bridge_IsCorrect
     run_str = "runners"
     sue_bud = budunit_shop("Sue", bridge=slash_str)
     root_way = to_way(sue_bud.fisc_label, slash_str)
-    day_hour_str = "day_hour"
-    day_hour_way = sue_bud.make_l1_way(day_hour_str)
-    sue_bud.add_concept(day_hour_way)
+    day_hr_str = "day_hr"
+    day_hr_way = sue_bud.make_l1_way(day_hr_str)
+    sue_bud.add_concept(day_hr_way)
     assert sue_bud.bridge == slash_str
     assert sue_bud.get_concept_obj(root_way).bridge == slash_str
-    assert sue_bud.get_concept_obj(day_hour_way).bridge == slash_str
+    assert sue_bud.get_concept_obj(day_hr_way).bridge == slash_str
 
     # WHEN
     after_bob_bud = budunit_get_from_json(sue_bud.get_json())
@@ -513,7 +513,7 @@ def test_budunit_get_from_json_ReturnsObj_Scenario7_conceptroot_bridge_IsCorrect
     # THEN
     assert after_bob_bud.bridge == slash_str
     assert after_bob_bud.get_concept_obj(root_way).bridge == slash_str
-    assert after_bob_bud.get_concept_obj(day_hour_way).bridge == slash_str
+    assert after_bob_bud.get_concept_obj(day_hr_way).bridge == slash_str
 
 
 def test_budunit_get_from_json_ExportsBudUnit_mass():
@@ -563,9 +563,9 @@ def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
     assert ccn2_bud.conceptroot.parent_way == x2_bud.conceptroot.parent_way
     assert ccn2_bud.conceptroot.fund_coin == x2_bud.conceptroot.fund_coin
     shave_way = ccn2_bud.make_l1_way("shave")
-    week_way = ccn2_bud.make_l1_way("weekdays")
+    wk_way = ccn2_bud.make_l1_way("wkdays")
     # assert ccn2_bud.get_concept_obj(shave_way) == x2_bud.get_concept_obj(shave_way)
-    # assert ccn2_bud.get_concept_obj(week_way) == x2_bud.get_concept_obj(week_way)
+    # assert ccn2_bud.get_concept_obj(wk_way) == x2_bud.get_concept_obj(wk_way)
     # assert ccn2_bud.conceptroot == x2_bud.conceptroot
     assert ccn2_bud.get_dict() == x2_bud.get_dict()
 

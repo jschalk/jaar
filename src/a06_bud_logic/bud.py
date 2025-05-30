@@ -480,12 +480,12 @@ class BudUnit:
             # WHEN concept is "range-root" identify any reason.rcontexts that are descendants
             # calculate and set those descendant facts
             # example: timeline range (0-, 1.5e9) is range-root
-            # example: "timeline,weeks" (spllt 10080) is range-descendant
-            # there exists a reason rcontext "timeline,weeks" with premise.pstate = "timeline,weeks"
-            # and (1,2) pdivisor=2 (every other week)
+            # example: "timeline,wks" (spllt 10080) is range-descendant
+            # there exists a reason rcontext "timeline,wks" with premise.pstate = "timeline,wks"
+            # and (1,2) pdivisor=2 (every other wk)
             #
-            # should not set "timeline,weeks" fact, only "timeline" fact and
-            # "timeline,weeks" should be set automatica_lly since there exists a reason
+            # should not set "timeline,wks" fact, only "timeline" fact and
+            # "timeline,wks" should be set automatica_lly since there exists a reason
             # that has that rcontext.
             x_conceptroot.set_factunit(x_factunit)
 

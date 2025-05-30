@@ -810,7 +810,7 @@
                     "IT DEPT": {
                         "_is_expanded": false,
                         "_kids": {
-                            "IT DEPT off-hours responsiblities": {
+                            "IT DEPT off-hrs responsiblities": {
                                 "_kids": {
                                     "check ETLs ran correctly": {
                                         "_kids": {
@@ -932,7 +932,7 @@
                                     }
                                 },
                                 "_uid": 136,
-                                "concept_label": "IT DEPT off-hours responsiblities",
+                                "concept_label": "IT DEPT off-hrs responsiblities",
                                 "mass": 1,
                                 "reasonunits": {
                                     "A;time;gregtime;": {
@@ -948,7 +948,7 @@
                                     }
                                 }
                             },
-                            "IT DEPT regular hours responsiblities": {
+                            "IT DEPT regular hrs responsiblities": {
                                 "_kids": {
                                     "Add to Azure DevOps": {
                                         "_uid": 156,
@@ -1151,7 +1151,7 @@
                                     }
                                 },
                                 "_uid": 133,
-                                "concept_label": "IT DEPT regular hours responsiblities",
+                                "concept_label": "IT DEPT regular hrs responsiblities",
                                 "mass": 1.0,
                                 "morph": false,
                                 "pledge": true,
@@ -2219,7 +2219,7 @@
                                     }
                                 }
                             },
-                            "check protein for week is adequate": {
+                            "check protein for wk is adequate": {
                                 "_uid": 61,
                                 "awardlinks": {
                                     ";Family": {
@@ -2228,7 +2228,7 @@
                                         "take_force": 1
                                     }
                                 },
-                                "concept_label": "check protein for week is adequate",
+                                "concept_label": "check protein for wk is adequate",
                                 "mass": 1,
                                 "pledge": true,
                                 "reasonunits": {
@@ -2828,7 +2828,7 @@
                                     }
                                 }
                             },
-                            "set aside a little bucks for fun the week": {
+                            "set aside a little bucks for fun the wk": {
                                 "_uid": 75,
                                 "awardlinks": {
                                     ";Family": {
@@ -2837,7 +2837,7 @@
                                         "take_force": 1
                                     }
                                 },
-                                "concept_label": "set aside a little bucks for fun the week",
+                                "concept_label": "set aside a little bucks for fun the wk",
                                 "mass": 1,
                                 "pledge": true,
                                 "reasonunits": {
@@ -3733,9 +3733,9 @@
                 "_kids": {
                     "gregtime": {
                         "_kids": {
-                            "400 year segment": {
+                            "400 yr segment": {
                                 "_is_expanded": false,
-                                "concept_label": "400 year segment",
+                                "concept_label": "400 yr segment",
                                 "denom": 7,
                                 "gogo_want": 0.0,
                                 "mass": 1,
@@ -3743,9 +3743,9 @@
                                 "numor": 1,
                                 "stop_want": 210379680.0
                             },
-                            "400 year segments": {
+                            "400 yr segments": {
                                 "_is_expanded": false,
-                                "concept_label": "400 year segments",
+                                "concept_label": "400 yr segments",
                                 "denom": 210379680,
                                 "gogo_want": 0.0,
                                 "mass": 1,
@@ -3773,9 +3773,9 @@
                                 "numor": 1,
                                 "stop_want": 1022679.0
                             },
-                            "week": {
+                            "wk": {
                                 "_is_expanded": false,
-                                "concept_label": "week",
+                                "concept_label": "wk",
                                 "denom": 146097.0,
                                 "gogo_want": 0.0,
                                 "mass": 1,
@@ -3783,9 +3783,9 @@
                                 "numor": 1,
                                 "stop_want": 10080.0
                             },
-                            "weeks": {
+                            "wks": {
                                 "_is_expanded": false,
-                                "concept_label": "weeks",
+                                "concept_label": "wks",
                                 "denom": 10080,
                                 "gogo_want": 0.0,
                                 "mass": 1,
@@ -3833,7 +3833,7 @@
                     },
                     "tech": {
                         "_kids": {
-                            "365 year": {
+                            "365 yr": {
                                 "_is_expanded": false,
                                 "_kids": {
                                     "1-Jan": {
@@ -3923,10 +3923,10 @@
                                 },
                                 "begin": 0,
                                 "close": 525600,
-                                "concept_label": "365 year",
+                                "concept_label": "365 yr",
                                 "mass": 1
                             },
-                            "366 year": {
+                            "366 yr": {
                                 "_is_expanded": false,
                                 "_kids": {
                                     "1-Jan": {
@@ -4016,18 +4016,18 @@
                                 },
                                 "begin": 0,
                                 "close": 527040,
-                                "concept_label": "366 year",
+                                "concept_label": "366 yr",
                                 "mass": 1
                             },
-                            "400 year segment": {
+                            "400 yr segment": {
                                 "_is_expanded": false,
                                 "_kids": {
-                                    "0-100-25 leap years": {
+                                    "0-100-25 leap yrs": {
                                         "_is_expanded": false,
                                         "_kids": {
-                                            "4year with leap": {
+                                            "4yr with leap": {
                                                 "_is_expanded": false,
-                                                "concept_label": "4year with leap",
+                                                "concept_label": "4yr with leap",
                                                 "denom": 25,
                                                 "gogo_want": 0.0,
                                                 "mass": 1,
@@ -4036,17 +4036,17 @@
                                                 "stop_want": 2103840.0
                                             }
                                         },
-                                        "concept_label": "0-100-25 leap years",
+                                        "concept_label": "0-100-25 leap yrs",
                                         "gogo_want": 0,
                                         "mass": 1,
                                         "stop_want": 52596000
                                     },
-                                    "100-104-0 leap years": {
+                                    "100-104-0 leap yrs": {
                                         "_is_expanded": false,
                                         "_kids": {
-                                            "4year wo leap": {
+                                            "4yr wo leap": {
                                                 "_is_expanded": false,
-                                                "concept_label": "4year wo leap",
+                                                "concept_label": "4yr wo leap",
                                                 "denom": 1,
                                                 "gogo_want": 52596000.0,
                                                 "mass": 1,
@@ -4055,17 +4055,17 @@
                                                 "stop_want": 54698400.0
                                             }
                                         },
-                                        "concept_label": "100-104-0 leap years",
+                                        "concept_label": "100-104-0 leap yrs",
                                         "gogo_want": 52596000,
                                         "mass": 1,
                                         "stop_want": 54698400
                                     },
-                                    "104-200-24 leap years": {
+                                    "104-200-24 leap yrs": {
                                         "_is_expanded": false,
                                         "_kids": {
-                                            "4year with leap": {
+                                            "4yr with leap": {
                                                 "_is_expanded": false,
-                                                "concept_label": "4year with leap",
+                                                "concept_label": "4yr with leap",
                                                 "denom": 24,
                                                 "gogo_want": 2279100.0,
                                                 "mass": 1,
@@ -4074,17 +4074,17 @@
                                                 "stop_want": 4382940.0
                                             }
                                         },
-                                        "concept_label": "104-200-24 leap years",
+                                        "concept_label": "104-200-24 leap yrs",
                                         "gogo_want": 54698400,
                                         "mass": 1,
                                         "stop_want": 105190560
                                     },
-                                    "200-204-0 leap years": {
+                                    "200-204-0 leap yrs": {
                                         "_is_expanded": false,
                                         "_kids": {
-                                            "4year wo leap": {
+                                            "4yr wo leap": {
                                                 "_is_expanded": false,
-                                                "concept_label": "4year wo leap",
+                                                "concept_label": "4yr wo leap",
                                                 "denom": 1,
                                                 "gogo_want": 105190560.0,
                                                 "mass": 1,
@@ -4093,17 +4093,17 @@
                                                 "stop_want": 107292960.0
                                             }
                                         },
-                                        "concept_label": "200-204-0 leap years",
+                                        "concept_label": "200-204-0 leap yrs",
                                         "gogo_want": 105190560,
                                         "mass": 1,
                                         "stop_want": 107292960
                                     },
-                                    "204-300-24 leap years": {
+                                    "204-300-24 leap yrs": {
                                         "_is_expanded": false,
                                         "_kids": {
-                                            "4year with leap": {
+                                            "4yr with leap": {
                                                 "_is_expanded": false,
-                                                "concept_label": "4year with leap",
+                                                "concept_label": "4yr with leap",
                                                 "denom": 24,
                                                 "gogo_want": 4470540.0,
                                                 "mass": 1,
@@ -4112,17 +4112,17 @@
                                                 "stop_want": 6574380.0
                                             }
                                         },
-                                        "concept_label": "204-300-24 leap years",
+                                        "concept_label": "204-300-24 leap yrs",
                                         "gogo_want": 107292960,
                                         "mass": 1,
                                         "stop_want": 157785120
                                     },
-                                    "300-304-0 leap years": {
+                                    "300-304-0 leap yrs": {
                                         "_is_expanded": false,
                                         "_kids": {
-                                            "4year wo leap": {
+                                            "4yr wo leap": {
                                                 "_is_expanded": false,
-                                                "concept_label": "4year wo leap",
+                                                "concept_label": "4yr wo leap",
                                                 "denom": 1,
                                                 "gogo_want": 157785120.0,
                                                 "mass": 1,
@@ -4131,17 +4131,17 @@
                                                 "stop_want": 159887520.0
                                             }
                                         },
-                                        "concept_label": "300-304-0 leap years",
+                                        "concept_label": "300-304-0 leap yrs",
                                         "gogo_want": 157785120,
                                         "mass": 1,
                                         "stop_want": 159887520
                                     },
-                                    "304-400-24 leap years": {
+                                    "304-400-24 leap yrs": {
                                         "_is_expanded": false,
                                         "_kids": {
-                                            "4year with leap": {
+                                            "4yr with leap": {
                                                 "_is_expanded": false,
-                                                "concept_label": "4year with leap",
+                                                "concept_label": "4yr with leap",
                                                 "denom": 24,
                                                 "gogo_want": 6661980.0,
                                                 "mass": 1,
@@ -4150,7 +4150,7 @@
                                                 "stop_want": 8765820.0
                                             }
                                         },
-                                        "concept_label": "304-400-24 leap years",
+                                        "concept_label": "304-400-24 leap yrs",
                                         "gogo_want": 159887520,
                                         "mass": 1,
                                         "stop_want": 210379680
@@ -4158,36 +4158,36 @@
                                 },
                                 "begin": 0.0,
                                 "close": 210379680.0,
-                                "concept_label": "400 year segment",
+                                "concept_label": "400 yr segment",
                                 "mass": 1
                             },
-                            "4year with leap": {
+                            "4yr with leap": {
                                 "_is_expanded": false,
                                 "_kids": {
-                                    "1-year": {
+                                    "1-yr": {
                                         "_is_expanded": false,
-                                        "concept_label": "1-year",
+                                        "concept_label": "1-yr",
                                         "gogo_want": 0,
                                         "mass": 1,
                                         "stop_want": 527040
                                     },
-                                    "2-year": {
+                                    "2-yr": {
                                         "_is_expanded": false,
-                                        "concept_label": "2-year",
+                                        "concept_label": "2-yr",
                                         "gogo_want": 527040,
                                         "mass": 1,
                                         "stop_want": 1052640
                                     },
-                                    "3-year": {
+                                    "3-yr": {
                                         "_is_expanded": false,
-                                        "concept_label": "3-year",
+                                        "concept_label": "3-yr",
                                         "gogo_want": 1052640,
                                         "mass": 1,
                                         "stop_want": 1578240
                                     },
-                                    "4-year": {
+                                    "4-yr": {
                                         "_is_expanded": false,
-                                        "concept_label": "4-year",
+                                        "concept_label": "4-yr",
                                         "gogo_want": 1578240,
                                         "mass": 1,
                                         "stop_want": 2103840
@@ -4195,36 +4195,36 @@
                                 },
                                 "begin": 0.0,
                                 "close": 2103840.0,
-                                "concept_label": "4year with leap",
+                                "concept_label": "4yr with leap",
                                 "mass": 1
                             },
-                            "4year wo leap": {
+                            "4yr wo leap": {
                                 "_is_expanded": false,
                                 "_kids": {
-                                    "1-year": {
+                                    "1-yr": {
                                         "_is_expanded": false,
-                                        "concept_label": "1-year",
+                                        "concept_label": "1-yr",
                                         "gogo_want": 0,
                                         "mass": 1,
                                         "stop_want": 525600
                                     },
-                                    "2-year": {
+                                    "2-yr": {
                                         "_is_expanded": false,
-                                        "concept_label": "2-year",
+                                        "concept_label": "2-yr",
                                         "gogo_want": 525600,
                                         "mass": 1,
                                         "stop_want": 1051200
                                     },
-                                    "3-year": {
+                                    "3-yr": {
                                         "_is_expanded": false,
-                                        "concept_label": "3-year",
+                                        "concept_label": "3-yr",
                                         "gogo_want": 1051200,
                                         "mass": 1,
                                         "stop_want": 1576800
                                     },
-                                    "4-year": {
+                                    "4-yr": {
                                         "_is_expanded": false,
-                                        "concept_label": "4-year",
+                                        "concept_label": "4-yr",
                                         "gogo_want": 1576800,
                                         "mass": 1,
                                         "stop_want": 2102400
@@ -4232,7 +4232,7 @@
                                 },
                                 "begin": 0,
                                 "close": 2102400,
-                                "concept_label": "4year wo leap",
+                                "concept_label": "4yr wo leap",
                                 "mass": 1
                             },
                             "day": {
@@ -4412,7 +4412,7 @@
                                 "concept_label": "day",
                                 "mass": 1
                             },
-                            "hour": {
+                            "hr": {
                                 "_is_expanded": false,
                                 "_kids": {
                                     "0-:00": {
@@ -4838,7 +4838,7 @@
                                 },
                                 "begin": 0,
                                 "close": 60,
-                                "concept_label": "hour",
+                                "concept_label": "hr",
                                 "mass": 1
                             },
                             "month": {
@@ -5095,7 +5095,7 @@
                                 "concept_label": "month",
                                 "mass": 1
                             },
-                            "week": {
+                            "wk": {
                                 "_is_expanded": false,
                                 "_kids": {
                                     "Friday": {
@@ -5150,7 +5150,7 @@
                                 },
                                 "begin": 0.0,
                                 "close": 10080.0,
-                                "concept_label": "week",
+                                "concept_label": "wk",
                                 "mass": 1
                             }
                         },

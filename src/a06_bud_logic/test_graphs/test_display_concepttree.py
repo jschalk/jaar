@@ -69,8 +69,8 @@ def test_get_bud_accts_plotly_fig_DisplaysCorrectInfo(graphics_bool):
 def test_get_bud_agenda_plotly_fig_DisplaysCorrectInfo(graphics_bool):
     # ESTABLISH
     yao_bud = budunit_v001_with_large_agenda()
-    week_str = "weekdays"
-    week_way = yao_bud.make_l1_way(week_str)
+    wk_str = "wkdays"
+    wk_way = yao_bud.make_l1_way(wk_str)
     assert len(yao_bud.get_agenda_dict()) == 63
 
     # WHEN

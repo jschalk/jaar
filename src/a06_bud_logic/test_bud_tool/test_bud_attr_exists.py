@@ -169,11 +169,11 @@ def test_bud_concept_reasonunit_exists_ReturnsObj():
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
     root_way = to_way(sue_bud.fisc_label)
-    week_str = "week"
-    week_way = sue_bud.make_l1_way(week_str)
-    root_jkeys = {concept_way_str(): root_way, rcontext_str(): week_way}
-    casa_jkeys = {concept_way_str(): casa_way, rcontext_str(): week_way}
-    clean_jkeys = {concept_way_str(): clean_way, rcontext_str(): week_way}
+    wk_str = "wk"
+    wk_way = sue_bud.make_l1_way(wk_str)
+    root_jkeys = {concept_way_str(): root_way, rcontext_str(): wk_way}
+    casa_jkeys = {concept_way_str(): casa_way, rcontext_str(): wk_way}
+    clean_jkeys = {concept_way_str(): clean_way, rcontext_str(): wk_way}
 
     # WHEN / THEN
     assert not bud_concept_reasonunit_exists(None, {})
@@ -183,8 +183,8 @@ def test_bud_concept_reasonunit_exists_ReturnsObj():
     assert not bud_concept_reasonunit_exists(sue_bud, clean_jkeys)
 
     # WHEN
-    sue_bud.add_concept(week_way)
-    sue_bud.conceptroot.set_reasonunit(reasonunit_shop(week_way))
+    sue_bud.add_concept(wk_way)
+    sue_bud.conceptroot.set_reasonunit(reasonunit_shop(wk_way))
 
     # THEN
     assert not bud_concept_reasonunit_exists(sue_bud, {})
@@ -200,22 +200,22 @@ def test_bud_concept_reason_premiseunit_exists_ReturnsObj():
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
     root_way = to_way(sue_bud.fisc_label)
-    week_str = "week"
-    week_way = sue_bud.make_l1_way(week_str)
-    thur_way = sue_bud.make_way(week_way, "thur")
+    wk_str = "wk"
+    wk_way = sue_bud.make_l1_way(wk_str)
+    thur_way = sue_bud.make_way(wk_way, "thur")
     root_jkeys = {
         concept_way_str(): root_way,
-        rcontext_str(): week_way,
+        rcontext_str(): wk_way,
         pstate_str(): thur_way,
     }
     casa_jkeys = {
         concept_way_str(): casa_way,
-        rcontext_str(): week_way,
+        rcontext_str(): wk_way,
         pstate_str(): thur_way,
     }
     clean_jkeys = {
         concept_way_str(): clean_way,
-        rcontext_str(): week_way,
+        rcontext_str(): wk_way,
         pstate_str(): thur_way,
     }
 
@@ -227,8 +227,8 @@ def test_bud_concept_reason_premiseunit_exists_ReturnsObj():
     assert not premiseunit_exists(sue_bud, clean_jkeys)
 
     # WHEN
-    sue_bud.add_concept(week_way)
-    sue_bud.conceptroot.set_reasonunit(reasonunit_shop(week_way))
+    sue_bud.add_concept(wk_way)
+    sue_bud.conceptroot.set_reasonunit(reasonunit_shop(wk_way))
 
     # THEN
     assert not premiseunit_exists(sue_bud, {})
@@ -238,7 +238,7 @@ def test_bud_concept_reason_premiseunit_exists_ReturnsObj():
 
     # WHEN
     sue_bud.add_concept(thur_way)
-    sue_bud.conceptroot.get_reasonunit(week_way).set_premise(thur_way)
+    sue_bud.conceptroot.get_reasonunit(wk_way).set_premise(thur_way)
 
     # THEN
     assert not premiseunit_exists(sue_bud, {})
@@ -314,11 +314,11 @@ def test_bud_concept_factunit_exists_ReturnsObj():
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
     root_way = to_way(sue_bud.fisc_label)
-    week_str = "week"
-    week_way = sue_bud.make_l1_way(week_str)
-    root_jkeys = {concept_way_str(): root_way, fcontext_str(): week_way}
-    casa_jkeys = {concept_way_str(): casa_way, fcontext_str(): week_way}
-    clean_jkeys = {concept_way_str(): clean_way, fcontext_str(): week_way}
+    wk_str = "wk"
+    wk_way = sue_bud.make_l1_way(wk_str)
+    root_jkeys = {concept_way_str(): root_way, fcontext_str(): wk_way}
+    casa_jkeys = {concept_way_str(): casa_way, fcontext_str(): wk_way}
+    clean_jkeys = {concept_way_str(): clean_way, fcontext_str(): wk_way}
 
     # WHEN / THEN
     assert not bud_concept_factunit_exists(None, {})
@@ -328,8 +328,8 @@ def test_bud_concept_factunit_exists_ReturnsObj():
     assert not bud_concept_factunit_exists(sue_bud, clean_jkeys)
 
     # WHEN
-    sue_bud.add_concept(week_way)
-    sue_bud.conceptroot.set_factunit(factunit_shop(week_way))
+    sue_bud.add_concept(wk_way)
+    sue_bud.conceptroot.set_factunit(factunit_shop(wk_way))
 
     # THEN
     assert not bud_concept_factunit_exists(sue_bud, {})
@@ -471,12 +471,12 @@ def test_bud_attr_exists_ReturnsObj_bud_concept_reasonunit():
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
     root_way = to_way(sue_bud.fisc_label)
-    week_str = "week"
-    week_way = sue_bud.make_l1_way(week_str)
+    wk_str = "wk"
+    wk_way = sue_bud.make_l1_way(wk_str)
     x_dimen = bud_concept_reasonunit_str()
-    root_jkeys = {concept_way_str(): root_way, rcontext_str(): week_way}
-    casa_jkeys = {concept_way_str(): casa_way, rcontext_str(): week_way}
-    clean_jkeys = {concept_way_str(): clean_way, rcontext_str(): week_way}
+    root_jkeys = {concept_way_str(): root_way, rcontext_str(): wk_way}
+    casa_jkeys = {concept_way_str(): casa_way, rcontext_str(): wk_way}
+    clean_jkeys = {concept_way_str(): clean_way, rcontext_str(): wk_way}
 
     # WHEN / THEN
     assert not bud_attr_exists(x_dimen, None, {})
@@ -486,8 +486,8 @@ def test_bud_attr_exists_ReturnsObj_bud_concept_reasonunit():
     assert not bud_attr_exists(x_dimen, sue_bud, clean_jkeys)
 
     # WHEN
-    sue_bud.add_concept(week_way)
-    sue_bud.conceptroot.set_reasonunit(reasonunit_shop(week_way))
+    sue_bud.add_concept(wk_way)
+    sue_bud.conceptroot.set_reasonunit(reasonunit_shop(wk_way))
 
     # THEN
     assert bud_attr_exists(x_dimen, sue_bud, root_jkeys)
@@ -502,23 +502,23 @@ def test_bud_attr_exists_ReturnsObj_bud_concept_reason_premiseunit():
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
     root_way = to_way(sue_bud.fisc_label)
-    week_str = "week"
-    week_way = sue_bud.make_l1_way(week_str)
-    thur_way = sue_bud.make_way(week_way, "thur")
+    wk_str = "wk"
+    wk_way = sue_bud.make_l1_way(wk_str)
+    thur_way = sue_bud.make_way(wk_way, "thur")
     x_dimen = bud_concept_reason_premiseunit_str()
     root_jkeys = {
         concept_way_str(): root_way,
-        rcontext_str(): week_way,
+        rcontext_str(): wk_way,
         pstate_str(): thur_way,
     }
     casa_jkeys = {
         concept_way_str(): casa_way,
-        rcontext_str(): week_way,
+        rcontext_str(): wk_way,
         pstate_str(): thur_way,
     }
     clean_jkeys = {
         concept_way_str(): clean_way,
-        rcontext_str(): week_way,
+        rcontext_str(): wk_way,
         pstate_str(): thur_way,
     }
 
@@ -530,8 +530,8 @@ def test_bud_attr_exists_ReturnsObj_bud_concept_reason_premiseunit():
     assert not bud_attr_exists(x_dimen, sue_bud, clean_jkeys)
 
     # WHEN
-    sue_bud.add_concept(week_way)
-    sue_bud.conceptroot.set_reasonunit(reasonunit_shop(week_way))
+    sue_bud.add_concept(wk_way)
+    sue_bud.conceptroot.set_reasonunit(reasonunit_shop(wk_way))
 
     # THEN
     assert not bud_attr_exists(x_dimen, sue_bud, root_jkeys)
@@ -540,7 +540,7 @@ def test_bud_attr_exists_ReturnsObj_bud_concept_reason_premiseunit():
 
     # WHEN
     sue_bud.add_concept(thur_way)
-    sue_bud.conceptroot.get_reasonunit(week_way).set_premise(thur_way)
+    sue_bud.conceptroot.get_reasonunit(wk_way).set_premise(thur_way)
 
     # THEN
     assert bud_attr_exists(x_dimen, sue_bud, root_jkeys)
@@ -617,12 +617,12 @@ def test_bud_attr_exists_ReturnsObj_bud_concept_factunit():
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
     root_way = to_way(sue_bud.fisc_label)
-    week_str = "week"
-    week_way = sue_bud.make_l1_way(week_str)
+    wk_str = "wk"
+    wk_way = sue_bud.make_l1_way(wk_str)
     x_dimen = bud_concept_factunit_str()
-    root_jkeys = {concept_way_str(): root_way, fcontext_str(): week_way}
-    casa_jkeys = {concept_way_str(): casa_way, fcontext_str(): week_way}
-    clean_jkeys = {concept_way_str(): clean_way, fcontext_str(): week_way}
+    root_jkeys = {concept_way_str(): root_way, fcontext_str(): wk_way}
+    casa_jkeys = {concept_way_str(): casa_way, fcontext_str(): wk_way}
+    clean_jkeys = {concept_way_str(): clean_way, fcontext_str(): wk_way}
 
     # WHEN / THEN
     assert not bud_attr_exists(x_dimen, None, {})
@@ -632,8 +632,8 @@ def test_bud_attr_exists_ReturnsObj_bud_concept_factunit():
     assert not bud_attr_exists(x_dimen, sue_bud, clean_jkeys)
 
     # WHEN
-    sue_bud.add_concept(week_way)
-    sue_bud.conceptroot.set_factunit(factunit_shop(week_way))
+    sue_bud.add_concept(wk_way)
+    sue_bud.conceptroot.set_factunit(factunit_shop(wk_way))
 
     # THEN
     assert bud_attr_exists(x_dimen, sue_bud, root_jkeys)
