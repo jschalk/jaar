@@ -94,7 +94,7 @@ def test_TitleTerm_exists():
 def test_GroupTitle_exists():
     bikers_GroupTitle = GroupTitle(";bikers")
     assert bikers_GroupTitle is not None
-    assert str(type(bikers_GroupTitle)).find("src.a01_term_logic.way.GroupTitle") > 0
+    assert str(type(bikers_GroupTitle)).find("src.a01_term_logic.term.GroupTitle") > 0
 
 
 def test_LabelTerm_exists():
