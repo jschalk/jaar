@@ -388,7 +388,7 @@ def test_BudUnit_get_concept_tree_ordered_way_list_ReturnsObj():
     assert y_1st_way_in_ordered_list == root_way
 
 
-def test_BudUnit_get_concept_tree_ordered_way_list_CorrectlyCleansRangedConceptWayStrs():
+def test_BudUnit_get_concept_tree_ordered_way_list_CorrectlyCleansRangedConceptWayTerms():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
 

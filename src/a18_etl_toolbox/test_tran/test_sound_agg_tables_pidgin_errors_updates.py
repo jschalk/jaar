@@ -7,7 +7,7 @@ from src.a06_bud_logic._test_util.a06_str import (
 )
 from src.a16_pidgin_logic.pidgin import (
     default_bridge_if_None,
-    default_unknown_term_if_None,
+    default_unknown_str_if_None,
 )
 from src.a16_pidgin_logic._test_util.a16_str import (
     pidgin_label_str,
@@ -25,7 +25,7 @@ from src.a16_pidgin_logic._test_util.a16_str import (
     otx_name_str,
     inx_title_str,
     otx_title_str,
-    unknown_term_str,
+    unknown_str_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
@@ -67,7 +67,7 @@ VALUES
         cursor.execute(CREATE_PIDCORE_SOUND_VLD_SQLSTR)
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_pidcore_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename} (
-  {face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_term_str()})
+  {face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_str_str()})
 VALUES
   ('{sue_str}', '{colon}', '{colon}', '{ukx}')
 , ('{yao_str}', '{comma}', '{comma}', '{ukx}')
@@ -90,7 +90,7 @@ VALUES
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 1
         select_core_raw_sqlstr = f"SELECT * FROM {budacct_s_agg_put}"
         cursor.execute(select_core_raw_sqlstr)
-        name_bridge_str = f"Bridge cannot exist in NameStr column {acct_name_str()}"
+        name_bridge_str = f"Bridge cannot exist in NameTerm column {acct_name_str()}"
         assert cursor.fetchall() == [
             (event1, sue_str, a23_str, yao_str, yao_str, None, None, None),
             (event1, sue_str, a23_str, yao_str, bob_str, None, None, name_bridge_str),
@@ -126,7 +126,7 @@ VALUES
         cursor.execute(CREATE_PIDCORE_SOUND_VLD_SQLSTR)
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_pidcore_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename} (
-  {face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_term_str()})
+  {face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_str_str()})
 VALUES
   ('{sue_str}', '{colon}', '{colon}', '{ukx}')
 , ('{yao_str}', '{comma}', '{comma}', '{ukx}')
@@ -149,7 +149,7 @@ VALUES
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 1
         select_core_raw_sqlstr = f"SELECT * FROM {budacct_s_agg_put}"
         cursor.execute(select_core_raw_sqlstr)
-        label_bridge_str = f"Bridge cannot exist in LabelStr column {fisc_label_str()}"
+        label_bridge_str = f"Bridge cannot exist in LabelTerm column {fisc_label_str()}"
         assert cursor.fetchall() == [
             (event1, sue_str, a23_str, yao_str, yao_str, None, None, None),
             (event1, sue_str, a23_str, yao_str, bob_str, None, None, None),
@@ -187,7 +187,7 @@ VALUES
         cursor.execute(CREATE_PIDCORE_SOUND_VLD_SQLSTR)
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_pidcore_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename} (
-  {face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_term_str()})
+  {face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_str_str()})
 VALUES
   ('{sue_str}', '{colon}', '{colon}', '{ukx}')
 , ('{yao_str}', '{comma}', '{comma}', '{ukx}')
@@ -206,8 +206,8 @@ VALUES
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 2
         select_core_raw_sqlstr = f"SELECT * FROM {budacct_s_agg_put} ORDER BY {fisc_label_str()}, {owner_name_str()}, {acct_name_str()}"
         cursor.execute(select_core_raw_sqlstr)
-        name_bridge_str = f"Bridge cannot exist in NameStr column {acct_name_str()}"
-        label_bridge_str = f"Bridge cannot exist in LabelStr column {fisc_label_str()}"
+        name_bridge_str = f"Bridge cannot exist in NameTerm column {acct_name_str()}"
+        label_bridge_str = f"Bridge cannot exist in LabelTerm column {fisc_label_str()}"
         rows = cursor.fetchall()
         print(f"{rows=}")
         assert rows == [

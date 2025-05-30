@@ -4,7 +4,7 @@ from src.a00_data_toolbox.plotly_toolbox import (
     add_rect_arrow,
     add_keep__rect,
 )
-from src.a01_way_logic.way import get_parent_way, WayStr, is_sub_way
+from src.a01_way_logic.way import get_parent_way, WayTerm, is_sub_way
 from src.a05_concept_logic.concept import ConceptUnit
 from src.a06_bud_logic.bud import BudUnit
 from src.a06_bud_logic.report import (
@@ -24,7 +24,7 @@ def _get_dot_diameter(x_ratio: float):
 
 def _get_parent_y(
     x_concept: ConceptUnit, conceptunit_y_coordinate_dict: dict
-) -> WayStr:
+) -> WayTerm:
     parent_way = get_parent_way(x_concept.get_concept_way())
     return conceptunit_y_coordinate_dict.get(parent_way)
 

@@ -58,19 +58,19 @@ def test_AcctUnit_exists():
     }
 
 
-def test_AcctUnit_set_namestr_CorrectlySetsAttr():
+def test_AcctUnit_set_nameterm_CorrectlySetsAttr():
     # ESTABLISH
     x_acctunit = AcctUnit()
 
     # WHEN
     bob_str = "Bob"
-    x_acctunit.set_namestr(bob_str)
+    x_acctunit.set_nameterm(bob_str)
 
     # THEN
     assert x_acctunit.acct_name == bob_str
 
 
-def test_AcctUnit_set_namestr_RaisesErrorIfParameterContains_bridge():
+def test_AcctUnit_set_nameterm_RaisesErrorIfParameterContains_bridge():
     # ESTABLISH
     slash_str = "/"
     texas_str = f"Texas{slash_str}Arkansas"
@@ -80,7 +80,7 @@ def test_AcctUnit_set_namestr_RaisesErrorIfParameterContains_bridge():
         acctunit_shop(acct_name=texas_str, bridge=slash_str)
     assert (
         str(excinfo.value)
-        == f"'{texas_str}' needs to be a LabelStr. Cannot contain {bridge_str()}: '{slash_str}'"
+        == f"'{texas_str}' needs to be a LabelTerm. Cannot contain {bridge_str()}: '{slash_str}'"
     )
 
 

@@ -1,13 +1,13 @@
 from src.a01_way_logic.way import (
     create_way_from_labels,
     get_default_fisc_label,
-    WayStr,
+    WayTerm,
 )
 from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop
 from src.a13_bud_listen_logic._test_util.a13_env import get_module_temp_dir
 
 
-def get_texas_way() -> WayStr:
+def get_texas_way() -> WayTerm:
     fisc_label = get_default_fisc_label()
     nation_str = "nation"
     usa_str = "USA"
@@ -26,7 +26,7 @@ def get_texas_hubunit() -> HubUnit:
     )
 
 
-def get_dakota_way() -> WayStr:
+def get_dakota_way() -> WayTerm:
     fisc_label = get_default_fisc_label()
     nation_str = "nation"
     usa_str = "USA"

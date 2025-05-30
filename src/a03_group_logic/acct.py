@@ -6,8 +6,8 @@ from src.a00_data_toolbox.dict_toolbox import (
 from src.a01_way_logic.way import (
     AcctName,
     default_bridge_if_None,
-    validate_labelstr,
-    is_labelstr,
+    validate_labelterm,
+    is_labelterm,
 )
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import (
@@ -37,8 +37,8 @@ class AcctCore:
     bridge: str = None
     _respect_bit: float = None
 
-    def set_namestr(self, x_acct_name: AcctName):
-        self.acct_name = validate_labelstr(x_acct_name, self.bridge)
+    def set_nameterm(self, x_acct_name: AcctName):
+        self.acct_name = validate_labelterm(x_acct_name, self.bridge)
 
 
 @dataclass
@@ -166,7 +166,7 @@ class AcctUnit(AcctCore):
 
     def set_membership(self, x_membership: MemberShip):
         x_group_title = x_membership.group_title
-        group_title_is_acct_name = is_labelstr(x_group_title, self.bridge)
+        group_title_is_acct_name = is_labelterm(x_group_title, self.bridge)
         if group_title_is_acct_name and self.acct_name != x_group_title:
             raise Bad_acct_nameMemberShipException(
                 f"AcctUnit with acct_name='{self.acct_name}' cannot have link to '{x_group_title}'."
@@ -293,5 +293,5 @@ def acctunit_shop(
         bridge=default_bridge_if_None(bridge),
         _respect_bit=default_respect_bit_if_None(_respect_bit),
     )
-    x_acctunit.set_namestr(x_acct_name=acct_name)
+    x_acctunit.set_nameterm(x_acct_name=acct_name)
     return x_acctunit

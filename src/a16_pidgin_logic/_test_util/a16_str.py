@@ -46,8 +46,8 @@ def otx_way_str() -> str:
     return "otx_way"
 
 
-def unknown_term_str() -> str:
-    return "unknown_term"
+def unknown_str_str() -> str:
+    return "unknown_str"
 
 
 def otx2inx_str() -> str:

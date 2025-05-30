@@ -50,7 +50,7 @@ def test_get_kids_in_range_EmptyParametersReturnsAll_kids():
     assert len(mon_concept.get_kids_in_range()) == 3
 
 
-def test_ConceptUnit_get_descendants_ReturnsNoWayStrs():
+def test_ConceptUnit_get_descendants_ReturnsNoWayTerms():
     # ESTABLISH
     nation_str = "nation"
     nation_concept = conceptunit_shop(nation_str, parent_way=root_label())
@@ -62,7 +62,7 @@ def test_ConceptUnit_get_descendants_ReturnsNoWayStrs():
     assert nation_descendants == {}
 
 
-def test_ConceptUnit_get_descendants_Returns3DescendantsWayStrs():
+def test_ConceptUnit_get_descendants_Returns3DescendantsWayTerms():
     # ESTABLISH
     nation_str = "nation"
     nation_way = create_way(root_label(), nation_str)

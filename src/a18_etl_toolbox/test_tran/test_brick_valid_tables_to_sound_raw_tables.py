@@ -10,7 +10,7 @@ from src.a16_pidgin_logic._test_util.a16_str import (
     otx_bridge_str,
     inx_way_str,
     otx_way_str,
-    unknown_term_str,
+    unknown_str_str,
 )
 from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
 from src.a17_idea_logic._test_util.a17_str import brick_valid_str
@@ -78,7 +78,7 @@ VALUES
             inx_way_str(),
             otx_bridge_str(),
             inx_bridge_str(),
-            unknown_term_str(),
+            unknown_str_str(),
         ]
         create_idea_sorted_table(cursor, br00045_valid_tablename, br00045_columns)
         insert_into_clause = f"""INSERT INTO {br00045_valid_tablename} (
@@ -88,7 +88,7 @@ VALUES
 , {inx_way_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_term_str()}
+, {unknown_str_str()}
 )"""
         values_clause = f"""
 VALUES

@@ -19,7 +19,7 @@ from src.a16_pidgin_logic._test_util.a16_str import (
     otx_label_str,
     inx_way_str,
     otx_way_str,
-    unknown_term_str,
+    unknown_str_str,
     otx2inx_str,
     map_otx2inx_str,
     pidgin_name_str,
@@ -36,8 +36,8 @@ from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_config_dict,
     get_pidgin_args_dimen_mapping,
     get_quick_pidgens_column_ref,
-    default_unknown_term,
-    default_unknown_term_if_None,
+    default_unknown_str,
+    default_unknown_str_if_None,
 )
 from os import getcwd as os_getcwd
 
@@ -99,7 +99,7 @@ def _validate_pidgin_config(pidgin_config: dict):
         otx_label_str(),
         inx_way_str(),
         otx_way_str(),
-        unknown_term_str(),
+        unknown_str_str(),
     }
 
     # for every pidgin_format file there exists a unique pidgin_number with leading zeros to make 5 digits
@@ -172,18 +172,18 @@ def test_get_quick_pidgens_column_ref_ReturnsObj():
     assert get_quick_pidgens_column_ref() == all_pidgen_config_attrs
 
 
-def test_default_unknown_term_ReturnsObj():
+def test_default_unknown_str_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert default_unknown_term() == "UNKNOWN"
+    assert default_unknown_str() == "UNKNOWN"
 
 
-def test_default_unknown_term_if_None_ReturnsObj():
+def test_default_unknown_str_if_None_ReturnsObj():
     # ESTABLISH
     unknown33_str = "unknown33"
     x_nan = float("nan")
 
     # WHEN / THEN
-    assert default_unknown_term_if_None() == default_unknown_term()
-    assert default_unknown_term_if_None(None) == default_unknown_term()
-    assert default_unknown_term_if_None(unknown33_str) == unknown33_str
-    assert default_unknown_term_if_None(x_nan) == default_unknown_term()
+    assert default_unknown_str_if_None() == default_unknown_str()
+    assert default_unknown_str_if_None(None) == default_unknown_str()
+    assert default_unknown_str_if_None(unknown33_str) == unknown33_str
+    assert default_unknown_str_if_None(x_nan) == default_unknown_str()

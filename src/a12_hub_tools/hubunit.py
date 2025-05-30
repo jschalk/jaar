@@ -17,11 +17,11 @@ from src.a00_data_toolbox.db_toolbox import sqlite_connection
 from src.a01_way_logic.way import (
     OwnerName,
     FiscLabel,
-    LabelStr,
-    WayStr,
+    LabelTerm,
+    WayTerm,
     rebuild_way,
     get_all_way_labels,
-    validate_labelstr,
+    validate_labelterm,
     default_bridge_if_None,
 )
 from src.a02_finance_logic.finance_config import (
@@ -101,7 +101,7 @@ class HubUnit:
     owner_name: OwnerName = None
     fisc_mstr_dir: str = None
     fisc_label: str = None
-    keep_way: WayStr = None
+    keep_way: WayTerm = None
     bridge: str = None
     fund_pool: float = None
     fund_coin: float = None
@@ -428,7 +428,7 @@ class HubUnit:
         speaker_plan = self.rj_speaker_bud(healer_name, speaker_id)
         return self.get_perspective_bud(speaker_plan)
 
-    def get_keep_ways(self) -> set[WayStr]:
+    def get_keep_ways(self) -> set[WayTerm]:
         x_gut_bud = open_gut_file(self.fisc_mstr_dir, self.fisc_label, self.owner_name)
         x_gut_bud.settle_bud()
         if x_gut_bud._keeps_justified is False:
@@ -478,7 +478,7 @@ def hubunit_shop(
     fisc_mstr_dir: str,
     fisc_label: FiscLabel,
     owner_name: OwnerName = None,
-    keep_way: WayStr = None,
+    keep_way: WayTerm = None,
     bridge: str = None,
     fund_pool: float = None,
     fund_coin: float = None,
@@ -489,7 +489,7 @@ def hubunit_shop(
     x_hubunit = HubUnit(
         fisc_mstr_dir=fisc_mstr_dir,
         fisc_label=fisc_label,
-        owner_name=validate_labelstr(owner_name, bridge),
+        owner_name=validate_labelterm(owner_name, bridge),
         keep_way=keep_way,
         bridge=default_bridge_if_None(bridge),
         fund_pool=validate_fund_pool(fund_pool),
@@ -502,7 +502,7 @@ def hubunit_shop(
     return x_hubunit
 
 
-def get_keep_path(x_hubunit: HubUnit, x_way: LabelStr) -> str:
+def get_keep_path(x_hubunit: HubUnit, x_way: LabelTerm) -> str:
     keep_root = "conceptroot"
     x_way = rebuild_way(x_way, x_hubunit.fisc_label, keep_root)
     x_list = get_all_way_labels(x_way, x_hubunit.bridge)

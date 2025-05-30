@@ -155,7 +155,7 @@ def test_hubunit_shop_RaisesErrorIf_owner_name_Contains_bridge():
         hubunit_shop(None, None, owner_name=bob_str, bridge=slash_str)
     assert (
         str(excinfo.value)
-        == f"'{bob_str}' needs to be a LabelStr. Cannot contain bridge: '{slash_str}'"
+        == f"'{bob_str}' needs to be a LabelTerm. Cannot contain bridge: '{slash_str}'"
     )
 
 

@@ -667,7 +667,7 @@ def test_PremiseUnit_get_dict_ReturnsCorrectDictWithPopenAndPnigh():
     assert premise_dict == static_dict
 
 
-def test_PremiseUnit_get_dict_ReturnsCorrectDictWithOnlyWayStr():
+def test_PremiseUnit_get_dict_ReturnsCorrectDictWithOnlyWayTerm():
     # ESTABLISH
     timetech_str = "timetech"
     timetech_way = create_way(root_label(), timetech_str)

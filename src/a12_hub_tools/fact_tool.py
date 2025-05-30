@@ -1,12 +1,12 @@
 from src.a00_data_toolbox.dict_toolbox import get_max_key
-from src.a01_way_logic.way import OwnerName, WayStr
+from src.a01_way_logic.way import OwnerName, WayTerm
 from src.a04_reason_logic.reason_concept import FactUnit, get_factunit_from_tuple
 
 
 def get_nodes_with_weighted_facts(
-    nodes_facts_dict: dict[tuple[OwnerName], dict[WayStr, FactUnit]],
+    nodes_facts_dict: dict[tuple[OwnerName], dict[WayTerm, FactUnit]],
     nodes_quota_ledger_dict: dict[tuple[OwnerName], dict[OwnerName, float]],
-) -> dict[tuple[OwnerName], dict[WayStr, FactUnit]]:
+) -> dict[tuple[OwnerName], dict[WayTerm, FactUnit]]:
 
     sorted_node_addrs = sorted(nodes_facts_dict.keys(), key=len)
     while sorted_node_addrs != []:
@@ -44,7 +44,7 @@ def get_nodes_with_weighted_facts(
 
 
 def _add_to_tuple_quota_sum(
-    to_eval_temp: dict[WayStr, dict[tuple[WayStr, WayStr, float, float], float]],
+    to_eval_temp: dict[WayTerm, dict[tuple[WayTerm, WayTerm, float, float], float]],
     child_fact: FactUnit,
     child_quota: float,
 ):

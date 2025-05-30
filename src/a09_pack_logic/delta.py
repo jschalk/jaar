@@ -6,7 +6,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_all_nondictionary_objs,
     get_0_if_None,
 )
-from src.a01_way_logic.way import WayStr, TitleStr
+from src.a01_way_logic.way import WayTerm, TitleTerm
 from src.a03_group_logic.acct import MemberShip, AcctName, AcctUnit
 from src.a03_group_logic.group import MemberShip
 from src.a04_reason_logic.reason_concept import FactUnit, ReasonUnit
@@ -260,7 +260,7 @@ class BudDelta:
     def add_budatom_memberships_inserts(
         self,
         after_acctunit: AcctUnit,
-        insert_membership_group_titles: list[TitleStr],
+        insert_membership_group_titles: list[TitleTerm],
     ):
         after_acct_name = after_acctunit.acct_name
         for insert_group_title in insert_membership_group_titles:
@@ -290,7 +290,7 @@ class BudDelta:
         self.set_budatom(x_budatom)
 
     def add_budatom_memberships_delete(
-        self, before_acct_name: AcctName, before_group_titles: TitleStr
+        self, before_acct_name: AcctName, before_group_titles: TitleTerm
     ):
         for delete_group_title in before_group_titles:
             x_budatom = budatom_shop("bud_acct_membership", "DELETE")
@@ -624,7 +624,7 @@ class BudDelta:
 
     def add_budatom_concept_reason_premiseunit_inserts(
         self,
-        concept_way: WayStr,
+        concept_way: WayTerm,
         after_reasonunit: ReasonUnit,
         insert_premise_pstates: set,
     ):
@@ -644,7 +644,7 @@ class BudDelta:
 
     def add_budatom_concept_reason_premiseunit_updates(
         self,
-        concept_way: WayStr,
+        concept_way: WayTerm,
         before_reasonunit: ReasonUnit,
         after_reasonunit: ReasonUnit,
         update_premise_pstates: set,
@@ -671,8 +671,8 @@ class BudDelta:
 
     def add_budatom_concept_reason_premiseunit_deletes(
         self,
-        concept_way: WayStr,
-        reasonunit_rcontext: WayStr,
+        concept_way: WayTerm,
+        reasonunit_rcontext: WayTerm,
         delete_premise_pstates: set,
     ):
         for delete_premise_pstate in delete_premise_pstates:
@@ -683,7 +683,7 @@ class BudDelta:
             self.set_budatom(x_budatom)
 
     def add_budatom_concept_laborlink_insert(
-        self, concept_way: WayStr, insert_laborlink_labor_titles: set
+        self, concept_way: WayTerm, insert_laborlink_labor_titles: set
     ):
         for insert_laborlink_labor_title in insert_laborlink_labor_titles:
             x_budatom = budatom_shop("bud_concept_laborlink", "INSERT")
@@ -692,7 +692,7 @@ class BudDelta:
             self.set_budatom(x_budatom)
 
     def add_budatom_concept_laborlink_deletes(
-        self, concept_way: WayStr, delete_laborlink_labor_titles: set
+        self, concept_way: WayTerm, delete_laborlink_labor_titles: set
     ):
         for delete_laborlink_labor_title in delete_laborlink_labor_titles:
             x_budatom = budatom_shop("bud_concept_laborlink", "DELETE")
@@ -701,7 +701,7 @@ class BudDelta:
             self.set_budatom(x_budatom)
 
     def add_budatom_concept_healerlink_insert(
-        self, concept_way: WayStr, insert_healerlink_healer_names: set
+        self, concept_way: WayTerm, insert_healerlink_healer_names: set
     ):
         for insert_healerlink_healer_name in insert_healerlink_healer_names:
             x_budatom = budatom_shop("bud_concept_healerlink", "INSERT")
@@ -710,7 +710,7 @@ class BudDelta:
             self.set_budatom(x_budatom)
 
     def add_budatom_concept_healerlink_deletes(
-        self, concept_way: WayStr, delete_healerlink_healer_names: set
+        self, concept_way: WayTerm, delete_healerlink_healer_names: set
     ):
         for delete_healerlink_healer_name in delete_healerlink_healer_names:
             x_budatom = budatom_shop("bud_concept_healerlink", "DELETE")
@@ -758,7 +758,7 @@ class BudDelta:
                 self.set_budatom(x_budatom)
 
     def add_budatom_concept_awardlink_deletes(
-        self, concept_way: WayStr, delete_awardlink_awardee_titles: set
+        self, concept_way: WayTerm, delete_awardlink_awardee_titles: set
     ):
         for delete_awardlink_awardee_title in delete_awardlink_awardee_titles:
             x_budatom = budatom_shop("bud_concept_awardlink", "DELETE")
@@ -806,7 +806,7 @@ class BudDelta:
                 self.set_budatom(x_budatom)
 
     def add_budatom_concept_factunit_deletes(
-        self, concept_way: WayStr, delete_factunit_rcontexts: FactUnit
+        self, concept_way: WayTerm, delete_factunit_rcontexts: FactUnit
     ):
         for delete_factunit_rcontext in delete_factunit_rcontexts:
             x_budatom = budatom_shop("bud_concept_factunit", "DELETE")

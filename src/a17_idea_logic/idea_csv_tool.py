@@ -508,7 +508,7 @@ def add_to_br00042_csv(x_csv: str, x_pidginunit: PidginUnit, csv_delimiter: str)
             x_pidginunit.otx_bridge,
             x_inx,
             x_pidginunit.inx_bridge,
-            x_pidginunit.unknown_term,
+            x_pidginunit.unknown_str,
         ]
         x_csv += csv_delimiter.join(x_row)
         x_csv += "\n"
@@ -524,7 +524,7 @@ def add_to_br00043_csv(x_csv: str, x_pidginunit: PidginUnit, csv_delimiter: str)
             x_pidginunit.otx_bridge,
             x_inx,
             x_pidginunit.inx_bridge,
-            x_pidginunit.unknown_term,
+            x_pidginunit.unknown_str,
         ]
         x_csv += csv_delimiter.join(x_row)
         x_csv += "\n"
@@ -540,7 +540,7 @@ def add_to_br00044_csv(x_csv: str, x_pidginunit: PidginUnit, csv_delimiter: str)
             x_pidginunit.otx_bridge,
             x_inx,
             x_pidginunit.inx_bridge,
-            x_pidginunit.unknown_term,
+            x_pidginunit.unknown_str,
         ]
         x_csv += csv_delimiter.join(x_row)
         x_csv += "\n"
@@ -556,7 +556,7 @@ def add_to_br00045_csv(x_csv: str, x_pidginunit: PidginUnit, csv_delimiter: str)
             x_pidginunit.otx_bridge,
             x_inx,
             x_pidginunit.inx_bridge,
-            x_pidginunit.unknown_term,
+            x_pidginunit.unknown_str,
         ]
         x_csv += csv_delimiter.join(x_row)
         x_csv += "\n"

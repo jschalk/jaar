@@ -24,7 +24,7 @@ def test_PidginUnit_set_namemap_SetsAttrWhenAttrIs_float_nan():
     sue_pidginunit = pidginunit_shop(sue_str)
     x_nan = float("nan")
     x_namemap = namemap_shop(
-        face_name=sue_str, otx_bridge=x_nan, inx_bridge=x_nan, unknown_term=x_nan
+        face_name=sue_str, otx_bridge=x_nan, inx_bridge=x_nan, unknown_str=x_nan
     )
     x_namemap.set_otx2inx("Bob", "Bob of Portland")
     assert sue_pidginunit.namemap != x_namemap
@@ -68,19 +68,19 @@ def test_PidginUnit_set_namemap_RaisesErrorIf_namemap_inx_bridge_IsNotSame():
     assert str(excinfo.value) == exception_str
 
 
-def test_PidginUnit_set_namemap_RaisesErrorIf_namemap_unknown_term_IsNotSame():
+def test_PidginUnit_set_namemap_RaisesErrorIf_namemap_unknown_str_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    casa_unknown_term = "Unknown_casa"
-    x_namemap = namemap_shop(unknown_term=casa_unknown_term, face_name=sue_str)
-    assert sue_pidginunit.unknown_term != x_namemap.unknown_term
+    casa_unknown_str = "Unknown_casa"
+    x_namemap = namemap_shop(unknown_str=casa_unknown_str, face_name=sue_str)
+    assert sue_pidginunit.unknown_str != x_namemap.unknown_str
     assert sue_pidginunit.namemap != x_namemap
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_pidginunit.set_namemap(x_namemap)
-    exception_str = f"set_mapcore Error: PidginUnit unknown_term is '{sue_pidginunit.unknown_term}', MapCore is '{casa_unknown_term}'."
+    exception_str = f"set_mapcore Error: PidginUnit unknown_str is '{sue_pidginunit.unknown_str}', MapCore is '{casa_unknown_str}'."
     assert str(excinfo.value) == exception_str
 
 
@@ -115,7 +115,7 @@ def test_PidginUnit_get_namemap_ReturnsObj():
     assert gen_x_namemap == static_x_namemap
 
 
-def test_PidginUnit_set_namestr_SetsAttr_Scenario0():
+def test_PidginUnit_set_nameterm_SetsAttr_Scenario0():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
@@ -125,26 +125,26 @@ def test_PidginUnit_set_namestr_SetsAttr_Scenario0():
     assert acct_name_namemap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_namestr(sue_otx, sue_inx)
+    zia_pidginunit.set_nameterm(sue_otx, sue_inx)
 
     # THEN
     assert acct_name_namemap.otx2inx_exists(sue_otx, sue_inx)
 
 
-def test_PidginUnit_namestr_exists_ReturnsObj():
+def test_PidginUnit_nameterm_exists_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
 
-    assert zia_pidginunit.namestr_exists(sue_otx, sue_inx) is False
+    assert zia_pidginunit.nameterm_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_namestr(sue_otx, sue_inx)
+    zia_pidginunit.set_nameterm(sue_otx, sue_inx)
 
     # THEN
-    assert zia_pidginunit.namestr_exists(sue_otx, sue_inx)
+    assert zia_pidginunit.nameterm_exists(sue_otx, sue_inx)
 
 
 def test_PidginUnit_get_inx_name_ReturnsObj():
@@ -156,27 +156,27 @@ def test_PidginUnit_get_inx_name_ReturnsObj():
     assert zia_pidginunit._get_inx_name(sue_otx) != sue_inx
 
     # WHEN
-    zia_pidginunit.set_namestr(sue_otx, sue_inx)
+    zia_pidginunit.set_nameterm(sue_otx, sue_inx)
 
     # THEN
     assert zia_pidginunit._get_inx_name(sue_otx) == sue_inx
 
 
-def test_PidginUnit_del_namestr_ReturnsObj():
+def test_PidginUnit_del_nameterm_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
 
-    zia_pidginunit.set_namestr(sue_otx, sue_inx)
-    zia_pidginunit.set_namestr(zia_str, zia_str)
-    assert zia_pidginunit.namestr_exists(sue_otx, sue_inx)
-    assert zia_pidginunit.namestr_exists(zia_str, zia_str)
+    zia_pidginunit.set_nameterm(sue_otx, sue_inx)
+    zia_pidginunit.set_nameterm(zia_str, zia_str)
+    assert zia_pidginunit.nameterm_exists(sue_otx, sue_inx)
+    assert zia_pidginunit.nameterm_exists(zia_str, zia_str)
 
     # WHEN
-    zia_pidginunit.del_namestr(sue_otx)
+    zia_pidginunit.del_nameterm(sue_otx)
 
     # THEN
-    assert zia_pidginunit.namestr_exists(sue_otx, sue_inx) is False
-    assert zia_pidginunit.namestr_exists(zia_str, zia_str)
+    assert zia_pidginunit.nameterm_exists(sue_otx, sue_inx) is False
+    assert zia_pidginunit.nameterm_exists(zia_str, zia_str)

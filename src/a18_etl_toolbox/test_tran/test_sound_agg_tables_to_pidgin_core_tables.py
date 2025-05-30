@@ -8,7 +8,7 @@ from src.a06_bud_logic._test_util.a06_str import (
 )
 from src.a16_pidgin_logic.pidgin import (
     default_bridge_if_None,
-    default_unknown_term_if_None,
+    default_unknown_str_if_None,
 )
 from src.a16_pidgin_logic._test_util.a16_str import (
     pidgin_label_str,
@@ -26,7 +26,7 @@ from src.a16_pidgin_logic._test_util.a16_str import (
     otx_name_str,
     inx_title_str,
     otx_title_str,
-    unknown_term_str,
+    unknown_str_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
@@ -87,7 +87,7 @@ def test_create_insert_into_pidgin_core_raw_sqlstr_ReturnsObj_PopulatesTable_Sce
 , {inx_way_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_term_str()}
+, {unknown_str_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -147,7 +147,7 @@ def test_insert_pidgin_sound_agg_into_pidgin_core_raw_table_PopulatesTable_Scena
 , {inx_way_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_term_str()}
+, {unknown_str_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -168,7 +168,7 @@ VALUES
 , {inx_name_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_term_str()}
+, {unknown_str_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -226,7 +226,7 @@ def test_update_inconsistency_pidgin_core_raw_table_UpdatesTable_Scenario0():
 , {face_name_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_term_str()}
+, {unknown_str_str()}
 , error_message
 )"""
         values_clause = f"""
@@ -287,7 +287,7 @@ def test_insert_pidgin_core_raw_to_pidgin_core_agg_table_PopulatesTable_Scenario
 , {face_name_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_term_str()}
+, {unknown_str_str()}
 , error_message
 )"""
         values_clause = f"""
@@ -328,7 +328,7 @@ def test_insert_pidgin_core_agg_to_pidgin_core_vld_table_PopulatesTable_Scenario
     unknown_str = "Unknown"
     huh_str = "Huh"
     default_bridge = default_bridge_if_None()
-    default_unknown = default_unknown_term_if_None()
+    default_unknown = default_unknown_str_if_None()
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -339,7 +339,7 @@ def test_insert_pidgin_core_agg_to_pidgin_core_vld_table_PopulatesTable_Scenario
   {face_name_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_term_str()}
+, {unknown_str_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -400,7 +400,7 @@ def test_create_update_pidgin_sound_agg_inconsist_sqlstr_PopulatesTable_Scenario
 , {inx_way_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_term_str()}
+, {unknown_str_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -420,7 +420,7 @@ VALUES
   {face_name_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_term_str()}
+, {unknown_str_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -480,7 +480,7 @@ def test_update_pidgin_sound_agg_inconsist_errors_PopulatesTable_Scenario1():
 , {inx_way_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_term_str()}
+, {unknown_str_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -498,7 +498,7 @@ VALUES
   {face_name_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_term_str()}
+, {unknown_str_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -545,7 +545,7 @@ def test_create_update_pidlabe_sound_agg_bridge_error_sqlstr_PopulatesTable_Scen
     event5 = 5
     event7 = 7
     event9 = 9
-    error_message = "Bridge cannot exist in LabelStr"
+    error_message = "Bridge cannot exist in LabelTerm"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -574,7 +574,7 @@ VALUES
   {face_name_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_term_str()}
+, {unknown_str_str()}
 )
 VALUES
   ('{bob_str}', '{rdx}', '{rdx}', '{ukx}')
@@ -637,7 +637,7 @@ def test_create_update_pidwayy_sound_agg_bridge_error_sqlstr_PopulatesTable_Scen
     event5 = 5
     event7 = 7
     event9 = 9
-    error_message = "Bridge must exist in WayStr"
+    error_message = "Bridge must exist in WayTerm"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -666,7 +666,7 @@ VALUES
   {face_name_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_term_str()}
+, {unknown_str_str()}
 )
 VALUES
   ('{bob_str}', '{rdx}', '{rdx}', '{ukx}')
@@ -731,7 +731,7 @@ def test_create_update_pidname_sound_agg_bridge_error_sqlstr_PopulatesTable_Scen
     event5 = 5
     event7 = 7
     event9 = 9
-    error_message = "Bridge cannot exist in NameStr"
+    error_message = "Bridge cannot exist in NameTerm"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -760,7 +760,7 @@ VALUES
   {face_name_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_term_str()}
+, {unknown_str_str()}
 )
 VALUES
   ('{bob_str}', '{rdx}', '{rdx}', '{ukx}')
@@ -856,7 +856,7 @@ VALUES
   {face_name_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_term_str()}
+, {unknown_str_str()}
 )
 VALUES
   ('{bob_str}', '{rdx_otx}', '{rdx_inx}', '{ukx}')
@@ -950,7 +950,7 @@ VALUES ({event1}, '{bob_str}', '{bad_sue_otx}', '{sue_inx}');"""
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         cursor.execute(CREATE_PIDCORE_SOUND_VLD_SQLSTR)
         insert_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename} (
-{face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_term_str()})
+{face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_str_str()})
 VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
         cursor.execute(insert_sqlstr)
         pidlabe_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidlabe_s_agg_tablename} WHERE error_message IS NOT NULL;"
@@ -1007,7 +1007,7 @@ def test_create_insert_pidgin_sound_vld_table_sqlstr_ReturnsObj_PopulatesTable_S
 , {inx_way_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_term_str()}
+, {unknown_str_str()}
 , error_message
 )"""
         values_clause = f"""
@@ -1073,7 +1073,7 @@ def test_insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table_PopulatesTable
 , {inx_way_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_term_str()}
+, {unknown_str_str()}
 , error_message
 )"""
         values_clause = f"""
@@ -1136,7 +1136,7 @@ def test_etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables_Scenario0_Popula
 , {inx_name_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_term_str()}
+, {unknown_str_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -1217,7 +1217,7 @@ VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
 
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename} (
-{face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_term_str()})
+{face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_str_str()})
 VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
         cursor.execute(insert_sqlstr)
         pidlabe_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidlabe_s_agg_tablename} WHERE error_message IS NOT NULL;"
@@ -1269,11 +1269,11 @@ VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}');"""
 
         # THEN
         assert get_row_count(cursor, pidcore_s_vld_tablename) == 1
-        select_core_vld_sqlstr = f"SELECT {face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_term_str()} FROM {pidcore_s_vld_tablename}"
+        select_core_vld_sqlstr = f"SELECT {face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_str_str()} FROM {pidcore_s_vld_tablename}"
         cursor.execute(select_core_vld_sqlstr)
         rows = cursor.fetchall()
         x_bridge = default_bridge_if_None()
-        exp_row0 = (bob_str, x_bridge, x_bridge, default_unknown_term_if_None())
+        exp_row0 = (bob_str, x_bridge, x_bridge, default_unknown_str_if_None())
         assert rows[0] == exp_row0
         assert rows == [exp_row0]
 
@@ -1298,7 +1298,7 @@ VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}'), ({event1}, '{yao_str}'
 
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename} (
-{face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_term_str()})
+{face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_str_str()})
 VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
         cursor.execute(insert_sqlstr)
         assert get_row_count(cursor, pidcore_s_vld_tablename) == 1
@@ -1308,11 +1308,11 @@ VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
 
         # THEN
         assert get_row_count(cursor, pidcore_s_vld_tablename) == 2
-        select_core_vld_sqlstr = f"SELECT {face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_term_str()} FROM {pidcore_s_vld_tablename} ORDER BY {face_name_str()}"
+        select_core_vld_sqlstr = f"SELECT {face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_str_str()} FROM {pidcore_s_vld_tablename} ORDER BY {face_name_str()}"
         cursor.execute(select_core_vld_sqlstr)
         rows = cursor.fetchall()
         default_bridge = default_bridge_if_None()
-        default_unknown = default_unknown_term_if_None()
+        default_unknown = default_unknown_str_if_None()
         exp_row0 = (bob_str, rdx, rdx, ukx)
         exp_row1 = (yao_str, default_bridge, default_bridge, default_unknown)
         assert rows[0] == exp_row0
@@ -1351,7 +1351,7 @@ VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}');"""
         cursor.execute(select_core_vld_sqlstr)
         rows = cursor.fetchall()
         x_bridge = default_bridge_if_None()
-        exp_row0 = (bob_str, x_bridge, x_bridge, default_unknown_term_if_None())
+        exp_row0 = (bob_str, x_bridge, x_bridge, default_unknown_str_if_None())
         assert rows[0] == exp_row0
         assert rows == [exp_row0]
 
@@ -1376,7 +1376,7 @@ VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}'), ({event1}, '{yao_str}'
 
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename} (
-{face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_term_str()})
+{face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_str_str()})
 VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
         cursor.execute(insert_sqlstr)
         assert get_row_count(cursor, pidcore_s_vld_tablename) == 1
@@ -1390,7 +1390,7 @@ VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
         cursor.execute(select_core_vld_sqlstr)
         rows = cursor.fetchall()
         default_bridge = default_bridge_if_None()
-        default_unknown = default_unknown_term_if_None()
+        default_unknown = default_unknown_str_if_None()
         exp_row0 = (bob_str, rdx, rdx, ukx)
         exp_row1 = (yao_str, default_bridge, default_bridge, default_unknown)
         assert rows[0] == exp_row0

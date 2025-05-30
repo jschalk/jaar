@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import WayStr
+from src.a01_way_logic.way import WayTerm
 from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a05_concept_logic.concept import ConceptUnit, conceptunit_shop
 from src.a06_bud_logic.bud import budunit_shop, get_from_json as budunit_get_from_json
@@ -13,7 +13,7 @@ from src.a06_bud_logic._test_util.example_buds import (
 )
 
 
-def get_tasks_count(agenda_dict: dict[WayStr, ConceptUnit]) -> int:
+def get_tasks_count(agenda_dict: dict[WayTerm, ConceptUnit]) -> int:
     return sum(bool(x_conceptunit._task) for x_conceptunit in agenda_dict.values())
 
 

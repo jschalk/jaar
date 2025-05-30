@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import delete_dir, copy_dir, create_path
-from src.a01_way_logic.way import create_way_from_labels, WayStr
+from src.a01_way_logic.way import create_way_from_labels, WayTerm
 from src.a12_hub_tools.hubunit import hubunit_shop, HubUnit
 from os.path import exists as os_path_exists
 from pytest import fixture as pytest_fixture
@@ -29,7 +29,7 @@ def env_dir_setup_cleanup():
     delete_dir(env_dir)
 
 
-def get_texas_way() -> WayStr:
+def get_texas_way() -> WayTerm:
     naton_str = "nation"
     usa_str = "usa"
     texas_str = "texas"

@@ -51,7 +51,7 @@ def test_TimeLineLabel_exists():
     x_timelinelabel = TimeLineLabel(empty_str)
     # THEN
     assert x_timelinelabel == empty_str
-    doc_str = f"TimeLineLabel is required for every TimeLineUnit. It is a LabelStr that must not contain the {bridge_str()}."
+    doc_str = f"TimeLineLabel is required for every TimeLineUnit. It is a LabelTerm that must not contain the {bridge_str()}."
     assert inspect_getdoc(x_timelinelabel) == doc_str
 
 

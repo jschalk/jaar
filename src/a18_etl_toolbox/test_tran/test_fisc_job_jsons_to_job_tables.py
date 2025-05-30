@@ -1,7 +1,7 @@
 from src.a00_data_toolbox.file_toolbox import save_file
 from src.a00_data_toolbox.db_toolbox import get_row_count, db_table_exists
 
-from src.a01_way_logic.way import OwnerName, WayStr, AcctName, GroupTitle
+from src.a01_way_logic.way import OwnerName, WayTerm, AcctName, GroupTitle
 from src.a02_finance_logic.deal import FiscLabel, OwnerName
 from src.a03_group_logic.acct import AcctUnit
 from src.a03_group_logic.group import awardlink_shop, GroupUnit, AwardHeir

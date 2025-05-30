@@ -8,7 +8,7 @@ from src.a06_bud_logic._test_util.example_buds import (
 )
 
 
-def test_BudUnit_get_relevant_ways_EmptyWayStrReturnsEmpty():
+def test_BudUnit_get_relevant_ways_EmptyWayTermReturnsEmpty():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
 
@@ -21,7 +21,7 @@ def test_BudUnit_get_relevant_ways_EmptyWayStrReturnsEmpty():
     assert relevant_ways == set()
 
 
-def test_BudUnit_get_relevant_ways_RootWayStrReturnsOnlyItself():
+def test_BudUnit_get_relevant_ways_RootWayTermReturnsOnlyItself():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
     root_way = to_way(sue_bud.fisc_label)

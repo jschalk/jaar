@@ -25,16 +25,16 @@ def get_pidgin_dimens() -> set[str]:
     return set(get_pidgin_config_dict().keys())
 
 
-def default_unknown_term() -> str:
+def default_unknown_str() -> str:
     return "UNKNOWN"
 
 
-def default_unknown_term_if_None(unknown_term: any = None) -> str:
-    if unknown_term != unknown_term:
-        unknown_term = None
-    if unknown_term is None:
-        unknown_term = default_unknown_term()
-    return unknown_term
+def default_unknown_str_if_None(unknown_str: any = None) -> str:
+    if unknown_str != unknown_str:
+        unknown_str = None
+    if unknown_str is None:
+        unknown_str = default_unknown_str()
+    return unknown_str
 
 
 def get_pidgin_config_jkeys(x_dimen: str) -> dict:
@@ -69,10 +69,10 @@ def get_pidgin_args_dimen_mapping() -> dict[str, str]:
 
 def get_pidgin_args_class_types() -> dict[str, str]:
     return {
-        "acct_name": "NameStr",
+        "acct_name": "NameTerm",
         "addin": "float",
         "amount": "float",
-        "awardee_title": "TitleStr",
+        "awardee_title": "TitleTerm",
         "begin": "float",
         "c400_number": "int",
         "celldepth": "int",
@@ -86,48 +86,48 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "debtit_vote": "float",
         "debtor_respect": "float",
         "denom": "int",
-        "face_name": "NameStr",
-        "fcontext": "WayStr",
-        "fisc_label": "LabelStr",
-        "fstate": "WayStr",
+        "face_name": "NameTerm",
+        "fcontext": "WayTerm",
+        "fisc_label": "LabelTerm",
+        "fstate": "WayTerm",
         "fnigh": "float",
         "fopen": "float",
         "fund_coin": "float",
         "fund_pool": "float",
         "give_force": "float",
         "gogo_want": "float",
-        "group_title": "TitleStr",
-        "healer_name": "NameStr",
-        "hour_label": "LabelStr",
-        "concept_way": "WayStr",
+        "group_title": "TitleTerm",
+        "healer_name": "NameTerm",
+        "hour_label": "LabelTerm",
+        "concept_way": "WayTerm",
         "mass": "int",
         "max_tree_traverse": "int",
-        "month_label": "LabelStr",
+        "month_label": "LabelTerm",
         "monthday_distortion": "int",
         "morph": "bool",
         "numor": "int",
         "offi_time": "TimeLinePoint",
-        "owner_name": "NameStr",
+        "owner_name": "NameTerm",
         "penny": "float",
         "job_listen_rotations": "int",
         "pledge": "bool",
         "problem_bool": "bool",
         "quota": "int",
-        "pstate": "WayStr",
+        "pstate": "WayTerm",
         "pdivisor": "int",
         "popen": "float",
         "pnigh": "float",
-        "rcontext": "WayStr",
+        "rcontext": "WayTerm",
         "rconcept_active_requisite": "bool",
         "respect_bit": "float",
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
-        "labor_title": "TitleStr",
+        "labor_title": "TitleTerm",
         "tran_time": "TimeLinePoint",
         "deal_time": "TimeLinePoint",
-        "timeline_label": "LabelStr",
-        "weekday_label": "LabelStr",
+        "timeline_label": "LabelTerm",
+        "weekday_label": "LabelTerm",
         "weekday_order": "int",
         "bridge": "str",
         "yr1_jan1_offset": "int",
@@ -142,34 +142,34 @@ def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
             "otx_title",
             "inx_bridge",
             "otx_bridge",
-            "unknown_term",
+            "unknown_str",
         },
         "pidgin_name": {
             "inx_name",
             "otx_name",
             "inx_bridge",
             "otx_bridge",
-            "unknown_term",
+            "unknown_str",
         },
         "pidgin_label": {
             "inx_label",
             "otx_label",
             "inx_bridge",
             "otx_bridge",
-            "unknown_term",
+            "unknown_str",
         },
         "pidgin_way": {
             "inx_way",
             "otx_way",
             "inx_bridge",
             "otx_bridge",
-            "unknown_term",
+            "unknown_str",
         },
     }
 
 
 def pidginable_class_types() -> set:
-    return {"NameStr", "TitleStr", "LabelStr", "WayStr"}
+    return {"NameTerm", "TitleTerm", "LabelTerm", "WayTerm"}
 
 
 def get_pidginable_args() -> set:
@@ -209,7 +209,7 @@ def find_set_otx_inx_args(args: set) -> set:
     return transformed_args
 
 
-def get_pidgin_NameStr_args() -> set[str]:
+def get_pidgin_NameTerm_args() -> set[str]:
     return {
         "acct_name",
         "face_name",
@@ -218,7 +218,7 @@ def get_pidgin_NameStr_args() -> set[str]:
     }
 
 
-def get_pidgin_TitleStr_args() -> set[str]:
+def get_pidgin_TitleTerm_args() -> set[str]:
     return {
         "awardee_title",
         "group_title",
@@ -226,7 +226,7 @@ def get_pidgin_TitleStr_args() -> set[str]:
     }
 
 
-def get_pidgin_LabelStr_args() -> set[str]:
+def get_pidgin_LabelTerm_args() -> set[str]:
     return {
         "fisc_label",
         "hour_label",
@@ -236,7 +236,7 @@ def get_pidgin_LabelStr_args() -> set[str]:
     }
 
 
-def get_pidgin_WayStr_args() -> set[str]:
+def get_pidgin_WayTerm_args() -> set[str]:
     return {
         "fstate",
         "fcontext",

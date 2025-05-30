@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import WayStr
+from src.a01_way_logic.way import WayTerm
 from src.a08_bud_atom_logic.atom_config import get_flattened_atom_table_build
 from src.a08_bud_atom_logic.atom import BudAtom
 
@@ -119,7 +119,7 @@ CREATE TABLE IF NOT EXISTS way_ref (
 ;"""
 
 
-def get_way_ref_table_single_insert_sqlstr(way: WayStr, bridge: str) -> str:
+def get_way_ref_table_single_insert_sqlstr(way: WayTerm, bridge: str) -> str:
     return f"""
 INSERT OR IGNORE INTO way_ref (way, bridge) 
 VALUES (
@@ -129,7 +129,7 @@ VALUES (
 ;"""
 
 
-def get_way_ref_table_row_id_select_sqlstr(way: WayStr, bridge: str) -> str:
+def get_way_ref_table_row_id_select_sqlstr(way: WayTerm, bridge: str) -> str:
     return f"""
 SELECT rowid FROM way_ref  
 WHERE way = '{way}' 

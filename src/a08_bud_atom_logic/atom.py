@@ -9,11 +9,11 @@ from src.a00_data_toolbox.db_toolbox import (
 )
 from src.a01_way_logic.way import (
     create_way,
-    LabelStr,
-    WayStr,
-    TitleStr,
+    LabelTerm,
+    WayTerm,
+    TitleTerm,
     AcctName,
-    get_terminus_label,
+    get_tail_label,
     get_parent_way,
 )
 from src.a03_group_logic.acct import acctunit_shop
@@ -261,7 +261,7 @@ def _modify_bud_conceptunit_update(x_bud: BudUnit, x_atom: BudAtom):
 
 def _modify_bud_conceptunit_insert(x_bud: BudUnit, x_atom: BudAtom):
     concept_way = x_atom.get_value("concept_way")
-    concept_label = get_terminus_label(concept_way)
+    concept_label = get_tail_label(concept_way)
     concept_parent_way = get_parent_way(concept_way)
     x_bud.set_concept(
         concept_kid=conceptunit_shop(
@@ -605,8 +605,8 @@ class AtomRow:
     _crud_command: CRUD_command = None
     acct_name: AcctName = None
     addin: float = None
-    awardee_title: TitleStr = None
-    rcontext: WayStr = None
+    awardee_title: TitleTerm = None
+    rcontext: WayTerm = None
     rconcept_active_requisite: bool = None
     begin: float = None
     respect_bit: float = None
@@ -619,27 +619,27 @@ class AtomRow:
     debtor_respect: int = None
     denom: int = None
     pdivisor: int = None
-    fcontext: WayStr = None
+    fcontext: WayTerm = None
     fnigh: float = None
     fopen: float = None
     fund_coin: float = None
     fund_pool: float = None
     give_force: float = None
     gogo_want: float = None
-    group_title: TitleStr = None
-    healer_name: TitleStr = None
+    group_title: TitleTerm = None
+    healer_name: TitleTerm = None
     mass: int = None
     max_tree_traverse: int = None
     morph: bool = None
-    pstate: WayStr = None
+    pstate: WayTerm = None
     pnigh: float = None
     numor: int = None
     popen: float = None
     penny: float = None
-    fstate: WayStr = None
+    fstate: WayTerm = None
     pledge: bool = None
     problem_bool: bool = None
-    concept_way: WayStr = None
+    concept_way: WayTerm = None
     stop_want: float = None
     take_force: float = None
     tally: int = None
@@ -658,14 +658,14 @@ class AtomRow:
         for x_arg, class_type in get_atom_args_class_types().items():
             x_value = self.__dict__.get(x_arg)
             if x_value != None:
-                if class_type == "NameStr":
+                if class_type == "NameTerm":
                     self.__dict__[x_arg] = AcctName(x_value)
-                elif class_type == "TitleStr":
-                    self.__dict__[x_arg] = TitleStr(x_value)
-                elif class_type == "WayStr":
-                    self.__dict__[x_arg] = WayStr(x_value)
-                elif class_type == "LabelStr":
-                    self.__dict__[x_arg] = LabelStr(x_value)
+                elif class_type == "TitleTerm":
+                    self.__dict__[x_arg] = TitleTerm(x_value)
+                elif class_type == "WayTerm":
+                    self.__dict__[x_arg] = WayTerm(x_value)
+                elif class_type == "LabelTerm":
+                    self.__dict__[x_arg] = LabelTerm(x_value)
                 elif class_type == "str":
                     self.__dict__[x_arg] = str(x_value)
                 elif class_type == "bool":

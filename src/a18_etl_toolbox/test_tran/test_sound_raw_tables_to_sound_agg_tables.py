@@ -14,7 +14,7 @@ from src.a16_pidgin_logic._test_util.a16_str import (
     otx_bridge_str,
     inx_way_str,
     otx_way_str,
-    unknown_term_str,
+    unknown_str_str,
 )
 from src.a17_idea_logic._test_util.a17_str import idea_number_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
@@ -59,7 +59,7 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ExecutedSqlUpdat
 , {inx_way_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_term_str()}
+, {unknown_str_str()}
 , "error_message"
 )"""
         b117 = "br00117"
@@ -116,7 +116,7 @@ def test_set_sound_raw_tables_error_message_UpdatesTableCorrectly_Scenario0():
 , {inx_way_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_term_str()}
+, {unknown_str_str()}
 , "error_message"
 )"""
         b117 = "br00117"
@@ -234,7 +234,7 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
 , {inx_way_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_term_str()}
+, {unknown_str_str()}
 , "error_message"
 )"""
         b117 = "br00117"
@@ -401,7 +401,7 @@ def test_etl_sound_raw_tables_to_sound_agg_tables_PopulatesValidTable_Scenario0(
 , {inx_way_str()}
 , {otx_bridge_str()}
 , {inx_bridge_str()}
-, {unknown_term_str()}
+, {unknown_str_str()}
 , "error_message"
 )"""
         b117 = "br00117"

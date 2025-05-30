@@ -11,7 +11,7 @@ from src.a16_pidgin_logic._test_util.a16_str import (
     otx_key_str,
     inx_way_str,
     otx_way_str,
-    unknown_term_str,
+    unknown_str_str,
     otx2inx_str,
     map_otx2inx_str,
     pidgin_name_str,
@@ -35,7 +35,7 @@ def test_str_functions_ReturnsObj():
     assert otx_key_str() == "otx_key"
     assert inx_way_str() == "inx_way"
     assert otx_way_str() == "otx_way"
-    assert unknown_term_str() == "unknown_term"
+    assert unknown_str_str() == "unknown_str"
     assert otx2inx_str() == "otx2inx"
     assert pidgin_name_str() == "pidgin_name"
     assert pidgin_title_str() == "pidgin_title"

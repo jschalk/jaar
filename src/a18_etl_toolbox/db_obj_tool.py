@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.db_toolbox import sqlite_obj_str
 from src.a00_data_toolbox.dict_toolbox import set_in_nested_dict
-from src.a01_way_logic.way import OwnerName, WayStr, AcctName, GroupTitle
+from src.a01_way_logic.way import OwnerName, WayTerm, AcctName, GroupTitle
 from src.a02_finance_logic.deal import FiscLabel, OwnerName
 from src.a03_group_logic.acct import AcctUnit
 from src.a03_group_logic.group import MemberShip, GroupUnit, AwardHeir
@@ -513,12 +513,12 @@ VALUES (
 class ObjKeysHolder:
     fisc_label: FiscLabel = None
     owner_name: OwnerName = None
-    way: WayStr = None
-    rcontext: WayStr = None
+    way: WayTerm = None
+    rcontext: WayTerm = None
     acct_name: AcctName = None
     membership: GroupTitle = None
     group_title: GroupTitle = None
-    fact_way: WayStr = None
+    fact_way: WayTerm = None
 
 
 def insert_job_budmemb(

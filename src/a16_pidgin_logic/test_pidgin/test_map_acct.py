@@ -1,10 +1,10 @@
 from src.a01_way_logic.way import default_bridge_if_None
 from src.a06_bud_logic._test_util.a06_str import event_int_str, face_name_str
-from src.a16_pidgin_logic.pidgin_config import default_unknown_term_if_None
+from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
 from src.a16_pidgin_logic._test_util.a16_str import (
     otx_bridge_str,
     inx_bridge_str,
-    unknown_term_str,
+    unknown_str_str,
     otx2inx_str,
 )
 from src.a16_pidgin_logic.map import (
@@ -26,7 +26,7 @@ def test_NameMap_Exists():
     assert not x_namemap.face_name
     assert not x_namemap.event_int
     assert not x_namemap.otx2inx
-    assert not x_namemap.unknown_term
+    assert not x_namemap.unknown_str
     assert not x_namemap.otx_bridge
     assert not x_namemap.inx_bridge
 
@@ -39,7 +39,7 @@ def test_namemap_shop_ReturnsObj_scenario0():
     assert not x_namemap.face_name
     assert x_namemap.event_int == 0
     assert x_namemap.otx2inx == {}
-    assert x_namemap.unknown_term == default_unknown_term_if_None()
+    assert x_namemap.unknown_str == default_unknown_str_if_None()
     assert x_namemap.otx_bridge == default_bridge_if_None()
     assert x_namemap.inx_bridge == default_bridge_if_None()
 
@@ -51,7 +51,7 @@ def test_namemap_shop_ReturnsObj_scenario1_WithParameters():
     bob_str = "Bob"
     event7 = 7
     otx2inx = {xio_str: sue_str}
-    x_unknown_term = "UnknownTerm"
+    x_unknown_str = "UnknownTerm"
     slash_otx_bridge = "/"
     colon_inx_bridge = ":"
 
@@ -60,7 +60,7 @@ def test_namemap_shop_ReturnsObj_scenario1_WithParameters():
         face_name=bob_str,
         event_int=event7,
         otx2inx=otx2inx,
-        unknown_term=x_unknown_term,
+        unknown_str=x_unknown_str,
         otx_bridge=slash_otx_bridge,
         inx_bridge=colon_inx_bridge,
     )
@@ -69,7 +69,7 @@ def test_namemap_shop_ReturnsObj_scenario1_WithParameters():
     assert x_namemap.face_name == bob_str
     assert x_namemap.event_int == event7
     assert x_namemap.otx2inx == otx2inx
-    assert x_namemap.unknown_term == x_unknown_term
+    assert x_namemap.unknown_str == x_unknown_str
     assert x_namemap.otx_bridge == slash_otx_bridge
     assert x_namemap.inx_bridge == colon_inx_bridge
 
@@ -88,7 +88,7 @@ def test_namemap_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_flo
         face_name=bob_str,
         event_int=numpy_int64(event7),
         otx2inx=otx2inx,
-        unknown_term=x_nan,
+        unknown_str=x_nan,
         otx_bridge=x_nan,
         inx_bridge=x_nan,
     )
@@ -99,7 +99,7 @@ def test_namemap_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_flo
     assert str(type(x_namemap.event_int)) != "<class 'numpy.int64'>"
     assert str(type(x_namemap.event_int)) == "<class 'int'>"
     assert x_namemap.otx2inx == otx2inx
-    assert x_namemap.unknown_term == default_unknown_term_if_None()
+    assert x_namemap.unknown_str == default_unknown_str_if_None()
     assert x_namemap.otx_bridge == default_bridge_if_None()
     assert x_namemap.inx_bridge == default_bridge_if_None()
 
@@ -120,20 +120,20 @@ def test_NameMap_set_all_otx2inx_SetsAttr():
     assert x_namemap.otx2inx == x_otx2inx
 
 
-def test_NameMap_set_all_otx2inx_RaisesErrorIf_unknown_term_IsKeyIn_otx2inx():
+def test_NameMap_set_all_otx2inx_RaisesErrorIf_unknown_str_IsKeyIn_otx2inx():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     zia_str = "Zia"
-    x_unknown_term = "UnknownTerm"
-    x_namemap = namemap_shop(None, unknown_term=x_unknown_term)
-    x_otx2inx = {xio_str: sue_str, x_unknown_term: zia_str}
+    x_unknown_str = "UnknownTerm"
+    x_namemap = namemap_shop(None, unknown_str=x_unknown_str)
+    x_otx2inx = {xio_str: sue_str, x_unknown_str: zia_str}
     assert x_namemap.otx2inx != x_otx2inx
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         x_namemap.set_all_otx2inx(x_otx2inx, True)
-    exception_str = f"otx2inx cannot have unknown_term '{x_unknown_term}' in any str. Affected keys include ['{x_unknown_term}']."
+    exception_str = f"otx2inx cannot have unknown_str '{x_unknown_str}' in any str. Affected keys include ['{x_unknown_str}']."
     assert str(excinfo.value) == exception_str
 
 
@@ -142,9 +142,9 @@ def test_NameMap_set_all_otx2inx_DoesNotRaiseErrorIfParameterSetToTrue():
     xio_str = "Xio"
     sue_str = "Sue"
     zia_str = "Zia"
-    x_unknown_term = "UnknownTerm"
+    x_unknown_str = "UnknownTerm"
     x_namemap = namemap_shop(None)
-    x_otx2inx = {xio_str: sue_str, x_unknown_term: zia_str}
+    x_otx2inx = {xio_str: sue_str, x_unknown_str: zia_str}
     assert x_namemap.otx2inx != x_otx2inx
 
     # WHEN
@@ -259,21 +259,21 @@ def test_NameMap_del_otx2inx_SetsAttr():
     assert x_namemap.otx2inx_exists(xio_str, sue_str) is False
 
 
-def test_NameMap_unknown_term_in_otx2inx_ReturnsObj():
+def test_NameMap_unknown_str_in_otx2inx_ReturnsObj():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
     zia_str = "Zia"
-    x_unknown_term = "UnknownTerm"
-    x_namemap = namemap_shop(None, unknown_term=x_unknown_term)
+    x_unknown_str = "UnknownTerm"
+    x_namemap = namemap_shop(None, unknown_str=x_unknown_str)
     x_namemap.set_otx2inx(xio_str, sue_str)
-    assert x_namemap._unknown_term_in_otx2inx() is False
+    assert x_namemap._unknown_str_in_otx2inx() is False
 
     # WHEN
-    x_namemap.set_otx2inx(zia_str, x_unknown_term)
+    x_namemap.set_otx2inx(zia_str, x_unknown_str)
 
     # THEN
-    assert x_namemap._unknown_term_in_otx2inx()
+    assert x_namemap._unknown_str_in_otx2inx()
 
 
 def test_NameMap_reveal_inx_ReturnsObjAndSetsAttr_acct_name():
@@ -319,7 +319,7 @@ def test_NameMap_get_dict_ReturnsObj():
     x1_way_map_dict = {
         otx_bridge_str(): x_namemap.otx_bridge,
         inx_bridge_str(): x_namemap.inx_bridge,
-        unknown_term_str(): x_namemap.unknown_term,
+        unknown_str_str(): x_namemap.unknown_str,
         otx2inx_str(): {},
         face_name_str(): x_namemap.face_name,
         event_int_str(): x_namemap.event_int,
@@ -332,7 +332,7 @@ def test_NameMap_get_dict_ReturnsObj():
     x2_way_map_dict = {
         otx_bridge_str(): x_namemap.otx_bridge,
         inx_bridge_str(): x_namemap.inx_bridge,
-        unknown_term_str(): x_namemap.unknown_term,
+        unknown_str_str(): x_namemap.unknown_str,
         otx2inx_str(): {clean_otx: clean_inx},
         face_name_str(): sue_str,
         event_int_str(): event7,
@@ -356,7 +356,7 @@ def test_NameMap_get_json_ReturnsObj():
   "{inx_bridge_str()}": "{x_namemap.inx_bridge}",
   "{otx2inx_str()}": {{}},
   "{otx_bridge_str()}": "{x_namemap.otx_bridge}",
-  "{unknown_term_str()}": "{x_namemap.unknown_term}"
+  "{unknown_str_str()}": "{x_namemap.unknown_str}"
 }}"""
     print(f"           {x1_way_map_json=}")
     print(f"{x_namemap.get_json()=}")
@@ -374,7 +374,7 @@ def test_NameMap_get_json_ReturnsObj():
     "{clean_otx}": "{clean_inx}"
   }},
   "{otx_bridge_str()}": "{x_namemap.otx_bridge}",
-  "{unknown_term_str()}": "{x_namemap.unknown_term}"
+  "{unknown_str_str()}": "{x_namemap.unknown_str}"
 }}"""
     print(f"           {x2_way_map_json=}")
     print(f"{x_namemap.get_json()=}")
@@ -523,11 +523,11 @@ def test_inherit_namemap_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_bridge
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
-def test_inherit_namemap_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown_term():
+def test_inherit_namemap_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown_str():
     # ESTABLISH
     sue_str = "Sue"
-    x_unknown_term = "UnknownTerm"
-    old_namemap = namemap_shop(sue_str, 0, unknown_term=x_unknown_term)
+    x_unknown_str = "UnknownTerm"
+    old_namemap = namemap_shop(sue_str, 0, unknown_str=x_unknown_str)
     new_namemap = namemap_shop(sue_str, 1)
 
     with pytest_raises(Exception) as excinfo:

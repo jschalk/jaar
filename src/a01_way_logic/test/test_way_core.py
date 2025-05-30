@@ -1,5 +1,5 @@
 from src.a01_way_logic.way import (
-    WayStr,
+    WayTerm,
     to_way,
     get_default_fisc_way,
     create_way,
@@ -7,7 +7,7 @@ from src.a01_way_logic.way import (
     rebuild_way,
     is_sub_way,
     get_all_way_labels,
-    get_terminus_label,
+    get_tail_label,
     find_replace_way_key_dict,
     get_parent_way,
     get_root_label_from_way,
@@ -18,10 +18,10 @@ from src.a01_way_logic.way import (
     is_heir_way,
     default_bridge_if_None,
     replace_bridge,
-    validate_labelstr,
-    waystr_valid_dir_path,
-    all_waystrs_between,
-    is_labelstr,
+    validate_labelterm,
+    wayterm_valid_dir_path,
+    all_wayterms_between,
+    is_labelterm,
 )
 from pytest import raises as pytest_raises
 from dataclasses import dataclass
@@ -163,7 +163,7 @@ def test_way_is_sub_way_correctlyReturnsBool():
     assert is_sub_way(cleaning_way, laundrys_way) is False
 
 
-def test_way_rebuild_way_ReturnsCorrectWayStr():
+def test_way_rebuild_way_ReturnsCorrectWayTerm():
     # ESTABLISH
     casa_str = "casa"
     casa_way = create_way(root_way(), casa_str)
@@ -183,7 +183,7 @@ def test_way_rebuild_way_ReturnsCorrectWayStr():
     assert rebuild_way(old_roses_way, "random_str", greenery_way) == old_roses_way
 
 
-def test_way_get_all_way_labels_ReturnsLabelStrs():
+def test_way_get_all_way_labels_ReturnsLabelTerms():
     # ESTABLISH
     x_s = default_bridge_if_None()
     casa_str = "casa"
@@ -204,7 +204,7 @@ def test_way_get_all_way_labels_ReturnsLabelStrs():
     assert get_all_way_labels(way=roses_way) == roses_list
 
 
-def test_way_get_terminus_label_ReturnsLabelStr():
+def test_way_get_tail_label_ReturnsLabelTerm():
     # ESTABLISH
     x_s = default_bridge_if_None()
     casa_str = "casa"
@@ -215,14 +215,14 @@ def test_way_get_terminus_label_ReturnsLabelStr():
     roses_way = f"{bloomers_way}{x_s}{roses_str}{x_s}"
 
     # WHEN / THENs
-    assert get_terminus_label(way=root_way()) == get_default_fisc_label()
-    assert get_terminus_label(way=casa_way) == casa_str
-    assert get_terminus_label(way=bloomers_way) == bloomers_str
-    assert get_terminus_label(way=roses_way) == roses_str
-    assert get_terminus_label(way="") == ""
+    assert get_tail_label(way=root_way()) == get_default_fisc_label()
+    assert get_tail_label(way=casa_way) == casa_str
+    assert get_tail_label(way=bloomers_way) == bloomers_str
+    assert get_tail_label(way=roses_way) == roses_str
+    assert get_tail_label(way="") == ""
 
 
-def test_way_get_terminus_label_ReturnsLabelStrWhenNonDefaultbridge():
+def test_way_get_tail_label_ReturnsLabelTermWhenNonDefaultbridge():
     # ESTABLISH
     casa_str = "casa"
     bloomers_str = "bloomers"
@@ -235,12 +235,12 @@ def test_way_get_terminus_label_ReturnsLabelStrWhenNonDefaultbridge():
     slash_roses_way = f"{slash_bloomers_way}{roses_str}{slash_str}"
 
     # WHEN / THENs
-    assert get_terminus_label(slash_casa_way, slash_str) == casa_str
-    assert get_terminus_label(slash_bloomers_way, slash_str) == bloomers_str
-    assert get_terminus_label(slash_roses_way, slash_str) == roses_str
+    assert get_tail_label(slash_casa_way, slash_str) == casa_str
+    assert get_tail_label(slash_bloomers_way, slash_str) == bloomers_str
+    assert get_tail_label(slash_roses_way, slash_str) == roses_str
 
 
-def test_way_get_root_label_from_way_ReturnsLabelStr():
+def test_way_get_root_label_from_way_ReturnsLabelTerm():
     # ESTABLISH
     casa_str = "casa"
     casa_way = create_way(root_way(), casa_str)
@@ -294,12 +294,12 @@ def test_way_get_parent_way_ReturnsObj_Scenario1():
 
 @dataclass
 class TempTestingObj:
-    x_way: WayStr = ""
+    x_way: WayTerm = ""
 
     def find_replace_way(self, old_way, new_way):
         self.x_way = rebuild_way(self.x_way, old_way=old_way, new_way=new_way)
 
-    def get_obj_key(self) -> WayStr:
+    def get_obj_key(self) -> WayTerm:
         return self.x_way
 
 
@@ -382,7 +382,7 @@ def test_way_get_ancestor_ways_ReturnsObj_Scenario1_nondefault_bridge():
     assert texas_anc_ways == texas_ancestor_ways
 
 
-def test_way_get_forefather_ways_ReturnsAncestorWayStrsWithoutClean():
+def test_way_get_forefather_ways_ReturnsAncestorWayTermsWithoutClean():
     # ESTABLISH
     x_s = default_bridge_if_None()
     nation_str = "nation"
@@ -431,16 +431,16 @@ def test_way_create_way_from_labels_ReturnsObj():
     assert roses_way == create_way_from_labels(roses_list)
 
 
-def test_is_labelstr_ReturnsObj():
+def test_is_labelterm_ReturnsObj():
     # ESTABLISH
     x_s = default_bridge_if_None()
 
     # WHEN / THEN
-    assert is_labelstr("", x_bridge=x_s) is False
-    assert is_labelstr("casa", x_bridge=x_s)
-    assert not is_labelstr(f"ZZ{x_s}casa", x_s)
-    assert not is_labelstr(WayStr(f"ZZ{x_s}casa"), x_s)
-    assert is_labelstr(WayStr("ZZ"), x_s)
+    assert is_labelterm("", x_bridge=x_s) is False
+    assert is_labelterm("casa", x_bridge=x_s)
+    assert not is_labelterm(f"ZZ{x_s}casa", x_s)
+    assert not is_labelterm(WayTerm(f"ZZ{x_s}casa"), x_s)
+    assert is_labelterm(WayTerm("ZZ"), x_s)
 
 
 def test_is_heir_way_CorrectlyIdentifiesHeirs():
@@ -516,7 +516,7 @@ def test_replace_bridge_CorrectlyRaisesError():
     )
 
 
-def test_replace_bridge_WhenNewbridgeIsFirstInWayStrRaisesError():
+def test_replace_bridge_WhenNewbridgeIsFirstInWayTermRaisesError():
     # ESTABLISH
     cooker_str = "/cooker"
     cleaner_str = "cleaner"
@@ -538,56 +538,56 @@ def test_replace_bridge_WhenNewbridgeIsFirstInWayStrRaisesError():
     )
 
 
-def test_validate_labelstr_RaisesErrorWhenNotLabelStr():
+def test_validate_labelterm_RaisesErrorWhenNotLabelTerm():
     # ESTABLISH
     bob_str = "Bob, Tom"
     slash_str = "/"
-    assert bob_str == validate_labelstr(bob_str, x_bridge=slash_str)
+    assert bob_str == validate_labelterm(bob_str, x_bridge=slash_str)
 
     # WHEN
     comma_str = ","
     with pytest_raises(Exception) as excinfo:
-        bob_str == validate_labelstr(bob_str, x_bridge=comma_str)
+        bob_str == validate_labelterm(bob_str, x_bridge=comma_str)
     assert (
         str(excinfo.value)
-        == f"'{bob_str}' needs to be a LabelStr. Cannot contain bridge: '{comma_str}'"
+        == f"'{bob_str}' needs to be a LabelTerm. Cannot contain bridge: '{comma_str}'"
     )
 
 
-def test_validate_labelstr_RaisesErrorWhenLabelStr():
+def test_validate_labelterm_RaisesErrorWhenLabelTerm():
     # ESTABLISH
     slash_str = "/"
     bob_str = f"Bob{slash_str}Tom"
-    assert bob_str == validate_labelstr(
-        bob_str, x_bridge=slash_str, not_labelstr_required=True
+    assert bob_str == validate_labelterm(
+        bob_str, x_bridge=slash_str, not_labelterm_required=True
     )
 
     # WHEN
     comma_str = ","
     with pytest_raises(Exception) as excinfo:
-        bob_str == validate_labelstr(
-            bob_str, x_bridge=comma_str, not_labelstr_required=True
+        bob_str == validate_labelterm(
+            bob_str, x_bridge=comma_str, not_labelterm_required=True
         )
     assert (
         str(excinfo.value)
-        == f"'{bob_str}' needs to not be a LabelStr. Must contain bridge: '{comma_str}'"
+        == f"'{bob_str}' needs to not be a LabelTerm. Must contain bridge: '{comma_str}'"
     )
 
 
-def test_waystr_valid_dir_path_ReturnsObj_simple_bridge():
+def test_wayterm_valid_dir_path_ReturnsObj_simple_bridge():
     # ESTABLISH
     comma_str = ","
     # WHEN / THEN
-    assert waystr_valid_dir_path(",run,", bridge=comma_str)
-    assert waystr_valid_dir_path(",run,sport,", bridge=comma_str)
+    assert wayterm_valid_dir_path(",run,", bridge=comma_str)
+    assert wayterm_valid_dir_path(",run,sport,", bridge=comma_str)
     print(f"{platform_system()=}")
-    sport_question_valid_bool = waystr_valid_dir_path("run,sport?,", comma_str)
+    sport_question_valid_bool = wayterm_valid_dir_path("run,sport?,", comma_str)
     assert (
         platform_system() == "Windows" and sport_question_valid_bool is False
     ) or platform_system() == "Linux"
 
 
-def test_waystr_valid_dir_path_ReturnsObj_complicated_bridge():
+def test_wayterm_valid_dir_path_ReturnsObj_complicated_bridge():
     # ESTABLISH
     question_str = "?"
     sport_str = "sport"
@@ -599,16 +599,16 @@ def test_waystr_valid_dir_path_ReturnsObj_complicated_bridge():
     lap_way = create_way(run_way, lap_str, bridge=question_str)
     assert lap_way == f"{sport_way}{run_str}?{lap_str}?"
 
-    assert waystr_valid_dir_path(sport_way, bridge=question_str)
-    assert waystr_valid_dir_path(run_way, bridge=question_str)
-    assert waystr_valid_dir_path(lap_way, bridge=question_str)
+    assert wayterm_valid_dir_path(sport_way, bridge=question_str)
+    assert wayterm_valid_dir_path(run_way, bridge=question_str)
+    assert wayterm_valid_dir_path(lap_way, bridge=question_str)
     assert (
         platform_system() == "Windows"
-        and waystr_valid_dir_path(lap_way, bridge=",") is False
+        and wayterm_valid_dir_path(lap_way, bridge=",") is False
     ) or platform_system() == "Linux"
 
 
-def test_waystr_valid_dir_path_ReturnsObjWhereSlashNotbridgeEdgeCases():
+def test_wayterm_valid_dir_path_ReturnsObjWhereSlashNotbridgeEdgeCases():
     # ESTABLISH
     question_str = "?"
     sport_str = "sport"
@@ -619,13 +619,13 @@ def test_waystr_valid_dir_path_ReturnsObjWhereSlashNotbridgeEdgeCases():
     lap_way = create_way(run_way, lap_str, bridge=question_str)
     assert lap_way == f"{sport_way}{run_str}?{lap_str}?"
 
-    assert waystr_valid_dir_path(sport_way, bridge=question_str)
-    assert waystr_valid_dir_path(run_way, bridge=question_str) is False
-    assert waystr_valid_dir_path(lap_way, bridge=question_str) is False
-    assert waystr_valid_dir_path(lap_way, bridge=",") is False
+    assert wayterm_valid_dir_path(sport_way, bridge=question_str)
+    assert wayterm_valid_dir_path(run_way, bridge=question_str) is False
+    assert wayterm_valid_dir_path(lap_way, bridge=question_str) is False
+    assert wayterm_valid_dir_path(lap_way, bridge=",") is False
 
 
-def test_all_waystrs_between_ReturnsObj():
+def test_all_wayterms_between_ReturnsObj():
     casa_str = "casa"
     sport_str = "sport"
     run_str = "run/swim"
@@ -634,9 +634,9 @@ def test_all_waystrs_between_ReturnsObj():
     run_way = create_way(sport_way, run_str)
     lap_way = create_way(run_way, lap_str)
 
-    assert all_waystrs_between(sport_way, sport_way) == [sport_way]
-    assert all_waystrs_between(sport_way, run_way) == [sport_way, run_way]
-    assert all_waystrs_between(sport_way, lap_way) == [
+    assert all_wayterms_between(sport_way, sport_way) == [sport_way]
+    assert all_wayterms_between(sport_way, run_way) == [sport_way, run_way]
+    assert all_wayterms_between(sport_way, lap_way) == [
         sport_way,
         run_way,
         lap_way,

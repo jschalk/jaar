@@ -1,3 +1,9 @@
+from src.a01_way_logic._test_util.a01_str import (
+    NameTerm_str,
+    TitleTerm_str,
+    LabelTerm_str,
+    WayTerm_str,
+)
 from src.a02_finance_logic._test_util.a02_str import acct_name_str
 from src.a03_group_logic._test_util.a03_str import credit_belief_str, debtit_belief_str
 
@@ -45,22 +51,6 @@ def bud_concept_factunit_str() -> str:
 def bud_groupunit_str() -> str:
     """Is not saved to raw data budunit json"""
     return "bud_groupunit"
-
-
-def NameStr_str() -> str:
-    return "NameStr"
-
-
-def TitleStr_str() -> str:
-    return "TitleStr"
-
-
-def WayStr_str() -> str:
-    return "WayStr"
-
-
-def LabelStr_str() -> str:
-    return "LabelStr"
 
 
 def face_name_str() -> str:

@@ -4,7 +4,7 @@ from src.a00_data_toolbox.file_toolbox import (
     open_json,
     save_json,
 )
-from src.a01_way_logic.way import LabelStr, OwnerName
+from src.a01_way_logic.way import LabelTerm, OwnerName
 from src.a02_finance_logic.allot import allot_nested_scale
 from src.a02_finance_logic.finance_config import TimeLinePoint
 from src.a02_finance_logic.deal import FiscLabel
@@ -100,7 +100,7 @@ def _exists_create_cell_tree(fisc_mstr_dir, fisc_label, deal_owner_name, deal_ti
                         cells_to_evaluate.append(child_cellunit)
 
 
-def load_cells_budevent(fisc_mstr_dir: str, fisc_label: LabelStr):
+def load_cells_budevent(fisc_mstr_dir: str, fisc_label: LabelTerm):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_dir = create_path(fiscs_dir, fisc_label)
     owners_dir = create_path(fisc_dir, "owners")
@@ -123,7 +123,7 @@ def _load_cell_budevent(fisc_mstr_dir, fisc_label, dirpath):
     cellunit_save_to_dir(dirpath, x_cellunit)
 
 
-def set_cell_trees_found_facts(fisc_mstr_dir: str, fisc_label: LabelStr):
+def set_cell_trees_found_facts(fisc_mstr_dir: str, fisc_label: LabelTerm):
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
     fisc_dir = create_path(fiscs_dir, fisc_label)
     owners_dir = create_path(fisc_dir, "owners")

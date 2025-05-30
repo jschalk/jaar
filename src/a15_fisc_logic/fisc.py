@@ -14,7 +14,7 @@ from src.a00_data_toolbox.dict_toolbox import (
 from src.a01_way_logic.way import (
     default_bridge_if_None,
     OwnerName,
-    WayStr,
+    WayTerm,
     FiscLabel,
     AcctName,
     EventInt,
@@ -200,7 +200,7 @@ class FiscUnit:
     def _set_owner_duty(
         self,
         healer_hubunit: HubUnit,
-        keep_way: WayStr,
+        keep_way: WayTerm,
         gut_bud: BudUnit,
     ):
         healer_hubunit.keep_way = keep_way

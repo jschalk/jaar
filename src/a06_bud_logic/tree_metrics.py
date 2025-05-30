@@ -1,7 +1,7 @@
 from src.a00_data_toolbox.dict_toolbox import get_empty_dict_if_None, get_0_if_None
 from src.a01_way_logic.way import GroupTitle
 from src.a03_group_logic.group import AwardLink
-from src.a04_reason_logic.reason_concept import ReasonUnit, WayStr
+from src.a04_reason_logic.reason_concept import ReasonUnit, WayTerm
 from dataclasses import dataclass
 
 
@@ -9,21 +9,21 @@ from dataclasses import dataclass
 class TreeMetrics:
     label_count: int = None
     level_count: dict[int, int] = None
-    reason_rcontexts: dict[WayStr, int] = None
+    reason_rcontexts: dict[WayTerm, int] = None
     awardlinks_metrics: dict[GroupTitle, AwardLink] = None
     uid_max: int = None
     uid_dict: dict[int, int] = None
     all_concept_uids_are_unique: bool = None
-    last_evaluated_pledge_concept_way: WayStr = None
+    last_evaluated_pledge_concept_way: WayTerm = None
 
     def evaluate_label(
         self,
         level: int,
-        reasons: dict[WayStr, ReasonUnit],
+        reasons: dict[WayTerm, ReasonUnit],
         awardlinks: dict[GroupTitle, AwardLink],
         uid: int,
         pledge: bool,
-        concept_way: WayStr,
+        concept_way: WayTerm,
     ):
         self.label_count += 1
         self.evaluate_pledge(pledge=pledge, concept_way=concept_way)
@@ -32,7 +32,7 @@ class TreeMetrics:
         self.evaluate_awardlinks(awardlinks=awardlinks)
         self.evaluate_uid_max(uid=uid)
 
-    def evaluate_pledge(self, pledge: bool, concept_way: WayStr):
+    def evaluate_pledge(self, pledge: bool, concept_way: WayTerm):
         if pledge:
             self.last_evaluated_pledge_concept_way = concept_way
 
@@ -42,7 +42,7 @@ class TreeMetrics:
         else:
             self.level_count[level] = self.level_count[level] + 1
 
-    def evaluate_reasonunits(self, reasons: dict[WayStr, ReasonUnit]):
+    def evaluate_reasonunits(self, reasons: dict[WayTerm, ReasonUnit]):
         reasons = {} if reasons is None else reasons
         for reason in reasons.values():
             if self.reason_rcontexts.get(reason.rcontext) is None:
@@ -71,7 +71,7 @@ class TreeMetrics:
 def treemetrics_shop(
     label_count: int = None,
     level_count: dict[int, int] = None,
-    reason_rcontexts: dict[WayStr, int] = None,
+    reason_rcontexts: dict[WayTerm, int] = None,
     awardlinks_metrics: dict[GroupTitle, AwardLink] = None,
     uid_max: int = None,
     uid_dict: dict[int, int] = None,

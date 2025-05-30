@@ -40,10 +40,6 @@ from src.a06_bud_logic._test_util.a06_str import (
     stop_want_str,
     take_force_str,
     labor_title_str,
-    NameStr_str,
-    TitleStr_str,
-    LabelStr_str,
-    WayStr_str,
     budunit_str,
     bud_acctunit_str,
     bud_acct_membership_str,
@@ -99,10 +95,6 @@ def test_str_functions_ReturnsObj():
     assert stop_want_str() == "stop_want"
     assert take_force_str() == "take_force"
     assert labor_title_str() == "labor_title"
-    assert NameStr_str() == "NameStr"
-    assert TitleStr_str() == "TitleStr"
-    assert LabelStr_str() == "LabelStr"
-    assert WayStr_str() == "WayStr"
     assert budunit_str() == "budunit"
     assert bud_acctunit_str() == "bud_acctunit"
     assert bud_acct_membership_str() == "bud_acct_membership"

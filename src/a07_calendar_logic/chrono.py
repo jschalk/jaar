@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.dict_toolbox import get_1_if_None
 from src.a00_data_toolbox.file_toolbox import open_json, create_path
-from src.a01_way_logic.way import WayStr, LabelStr
+from src.a01_way_logic.way import WayTerm, LabelTerm
 from src.a05_concept_logic.concept import (
     conceptunit_shop,
     ConceptUnit,
@@ -13,8 +13,8 @@ from dataclasses import dataclass
 from os import getcwd as os_getcwd
 
 
-class TimeLineLabel(LabelStr):
-    "TimeLineLabel is required for every TimeLineUnit. It is a LabelStr that must not contain the bridge."
+class TimeLineLabel(LabelTerm):
+    "TimeLineLabel is required for every TimeLineUnit. It is a LabelTerm that must not contain the bridge."
 
     pass
 
@@ -184,7 +184,7 @@ def add_newtimeline_conceptunit(x_budunit: BudUnit, timeline_config: dict):
 
 
 def add_conceptunits(
-    x_budunit: BudUnit, parent_way: WayStr, config_dict: dict[str, ConceptUnit]
+    x_budunit: BudUnit, parent_way: WayTerm, config_dict: dict[str, ConceptUnit]
 ):
     for x_time_conceptunit in config_dict.values():
         x_budunit.set_concept(x_time_conceptunit, parent_way)
@@ -192,7 +192,7 @@ def add_conceptunits(
 
 def add_stan_conceptunits(
     x_budunit: BudUnit,
-    time_way: WayStr,
+    time_way: WayTerm,
     timeline_label: TimeLineLabel,
     timeline_c400_number: int,
 ):
@@ -220,32 +220,32 @@ def add_stan_conceptunits(
     x_budunit.set_concept(stan_days_conceptunit(), new_way)
 
 
-def get_c400_clean_way(x_budunit: BudUnit, time_range_root_way: WayStr) -> WayStr:
+def get_c400_clean_way(x_budunit: BudUnit, time_range_root_way: WayTerm) -> WayTerm:
     c400_leap_way = x_budunit.make_way(time_range_root_way, "c400_leap")
     return x_budunit.make_way(c400_leap_way, "c400_clean")
 
 
-def get_c100_way(x_budunit: BudUnit, time_range_root_way: WayStr) -> WayStr:
+def get_c100_way(x_budunit: BudUnit, time_range_root_way: WayTerm) -> WayTerm:
     c400_clean_way = get_c400_clean_way(x_budunit, time_range_root_way)
     return x_budunit.make_way(c400_clean_way, "c100")
 
 
-def get_yr4_clean_way(x_budunit: BudUnit, time_range_root_way: WayStr) -> WayStr:
+def get_yr4_clean_way(x_budunit: BudUnit, time_range_root_way: WayTerm) -> WayTerm:
     c100_way = get_c100_way(x_budunit, time_range_root_way)
     yr4_leap_way = x_budunit.make_way(c100_way, "yr4_leap")
     return x_budunit.make_way(yr4_leap_way, "yr4_clean")
 
 
-def get_year_way(x_budunit: BudUnit, time_range_root_way: WayStr) -> WayStr:
+def get_year_way(x_budunit: BudUnit, time_range_root_way: WayTerm) -> WayTerm:
     yr4_clean_way = get_yr4_clean_way(x_budunit, time_range_root_way)
     return x_budunit.make_way(yr4_clean_way, "year")
 
 
-def get_week_way(x_budunit: BudUnit, time_range_root_way: WayStr) -> WayStr:
+def get_week_way(x_budunit: BudUnit, time_range_root_way: WayTerm) -> WayTerm:
     return x_budunit.make_way(time_range_root_way, "week")
 
 
-def get_day_way(x_budunit: BudUnit, time_range_root_way: WayStr) -> WayStr:
+def get_day_way(x_budunit: BudUnit, time_range_root_way: WayTerm) -> WayTerm:
     return x_budunit.make_way(time_range_root_way, "day")
 
 
@@ -403,7 +403,7 @@ def get_min_from_dt_offset(dt: datetime, yr1_jan1_offset: int) -> int:
     return round(min_time_difference.total_seconds() / 60) + yr1_jan1_offset
 
 
-def get_min_from_dt(x_bud: BudUnit, timeline_way: WayStr, x_datetime: datetime) -> int:
+def get_min_from_dt(x_bud: BudUnit, timeline_way: WayTerm, x_datetime: datetime) -> int:
     offset_way = x_bud.make_way(timeline_way, "yr1_jan1_offset")
     offset_concept = x_bud.get_concept_obj(offset_way)
     offset_amount = offset_concept.addin
@@ -419,7 +419,7 @@ def get_timeline_min_difference(timeline_config0: dict, timeline_config1: dict) 
 @dataclass
 class ChronoUnit:
     x_budunit: BudUnit = None
-    time_range_root_way: WayStr = None
+    time_range_root_way: WayTerm = None
     x_min: int = None
     # calculated fields
     _timeline_concept: ConceptUnit = None
