@@ -183,51 +183,74 @@ def get_all_str_functions() -> list:
     return all_str_functions
 
 
+def check_if_module_str_funcs_is_sorted(module_str_funcs: list[str]):
+    if module_str_funcs != sorted(module_str_funcs):
+        for module_str_func in sorted(module_str_funcs):
+            module_str_func = module_str_func.replace("'", "")
+            module_str_func = module_str_func.replace("_str", "")
+            print(f"def {module_str_func}_str() -> str: return '{module_str_func}'")
+    assert module_str_funcs == sorted(module_str_funcs)
+
+
+def check_str_funcs_are_not_duplicated(
+    module_str_funcs: list[str], running_str_functions_set: set[str]
+):
+    if set(module_str_funcs).intersection(set(running_str_functions_set)):
+        print(
+            f"Duplicate functions: {set(module_str_funcs).intersection(set(running_str_functions_set))}"
+        )
+    assert not set(module_str_funcs).intersection(set(running_str_functions_set))
+
+
 def test_StrFunctionsAreAllTested():
     # sourcery skip: no-loop-in-tests
     # sourcery skip: no-conditionals-in-tests
     # ESTABLISH
 
     # WHEN / THEN
-    running_str_functions_set = set()
+    running_str_functions = set()
     for module_desc, module_dir in get_module_descs().items():
         desc_number_str = module_desc[1:3]
         util_dir = create_path(module_dir, "_test_util")
-
+        print(f"{util_dir}")
         module_str_funcs = get_module_str_functions(module_dir, desc_number_str)
-        if module_str_funcs != sorted(module_str_funcs):
-            print(f"{util_dir}")
-            for module_str_func in sorted(module_str_funcs):
-                module_str_func = module_str_func.replace("'", "")
-                module_str_func = module_str_func.replace("_str", "")
-                print(f"def {module_str_func}_str() -> str: return '{module_str_func}'")
-        assert module_str_funcs == sorted(module_str_funcs)
-        if set(module_str_funcs).intersection(set(running_str_functions_set)):
-            print(
-                f"{util_dir=} Duplicate functions: {set(module_str_funcs).intersection(set(running_str_functions_set))}"
-            )
-        assert not set(module_str_funcs).intersection(set(running_str_functions_set))
-        running_str_functions_set.update(set(module_str_funcs))
+        check_if_module_str_funcs_is_sorted(module_str_funcs)
+        check_str_funcs_are_not_duplicated(module_str_funcs, running_str_functions)
+        running_str_functions.update(set(module_str_funcs))
 
         if len(module_str_funcs) > 0:
             test_file_path = create_path(util_dir, f"test_a{desc_number_str}_str.py")
             assert os_path_exists(test_file_path)
             test_file_imports = get_imports_from_file(test_file_path)
             assert len(test_file_imports) == 1
-            test_functions = get_function_names_from_file(test_file_path)
+            test_file_import_objs = test_file_imports[0][1]
+            if test_file_import_objs != sorted(test_file_import_objs):
+                test_file_import_objs_str = str(sorted(test_file_import_objs))
+                test_file_import_objs_str = test_file_import_objs_str.replace("'", "")
+                test_file_import_objs_str = test_file_import_objs_str.replace("[", "")
+                test_file_import_objs_str = test_file_import_objs_str.replace("]", "")
+                print(f"{test_file_import_objs_str}")
+            assert test_file_import_objs == sorted(test_file_import_objs)
             # print(f"{test_file_path=}")
+            test_functions = get_function_names_from_file(test_file_path)
             assert test_functions == ["test_str_functions_ReturnsObj"]
-            for str_function in module_str_funcs:
-                # print(f"{str_util_path} {str_function=}")
-                assert str(str_function).endswith("_str")
-                str_func_assert_str = (
-                    f"""assert {str_function}() == "{str_function[:-4]}"""
-                )
-                test_file_str = open(test_file_path).read()
-                if test_file_str.find(str_func_assert_str) <= 0:
-                    str_util_path = create_path(util_dir, f"a{desc_number_str}_str.py")
-                    print(f"{str_util_path} {str_func_assert_str=}")
-                assert test_file_str.find(str_func_assert_str) > 0
+            check_str_func_test_file_has_needed_asserts(
+                module_str_funcs, test_file_path, util_dir, desc_number_str
+            )
+
+
+def check_str_func_test_file_has_needed_asserts(
+    module_str_funcs, test_file_path, util_dir, desc_number_str
+):
+    for str_function in module_str_funcs:
+        # print(f"{str_util_path} {str_function=}")
+        assert str(str_function).endswith("_str")
+        str_func_assert_str = f"""assert {str_function}() == "{str_function[:-4]}"""
+        test_file_str = open(test_file_path).read()
+        if test_file_str.find(str_func_assert_str) <= 0:
+            str_util_path = create_path(util_dir, f"a{desc_number_str}_str.py")
+            print(f"{str_util_path} {str_func_assert_str=}")
+        assert test_file_str.find(str_func_assert_str) > 0
 
 
 def test_StrFunctionsAppearWhereTheyShould():

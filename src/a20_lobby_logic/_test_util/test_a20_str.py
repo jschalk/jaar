@@ -1,7 +1,7 @@
 from src.a20_lobby_logic._test_util.a20_str import (
-    lobbys_str,
     lobby_id_str,
     lobby_mstr_dir_str,
+    lobbys_str,
 )
 
 

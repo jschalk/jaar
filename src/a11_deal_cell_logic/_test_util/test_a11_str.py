@@ -1,12 +1,12 @@
 from src.a11_deal_cell_logic._test_util.a11_str import (
     ancestors_str,
-    celldepth_str,
-    deal_owner_name_str,
-    mandate_str,
+    boss_facts_str,
     budadjust_str,
     budevent_facts_str,
+    celldepth_str,
+    deal_owner_name_str,
     found_facts_str,
-    boss_facts_str,
+    mandate_str,
 )
 
 

@@ -1,16 +1,16 @@
 from src.a05_concept_logic._test_util.a05_str import (
-    concept_label_str,
-    denom_str,
-    numor_str,
-    pledge_str,
     begin_str,
     close_str,
-    morph_str,
+    concept_label_str,
     concept_way_str,
+    denom_str,
     gogo_want_str,
-    stop_want_str,
-    mass_str,
     healer_name_str,
+    mass_str,
+    morph_str,
+    numor_str,
+    pledge_str,
+    stop_want_str,
 )
 
 

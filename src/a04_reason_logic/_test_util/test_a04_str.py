@@ -1,14 +1,14 @@
 from src.a04_reason_logic._test_util.a04_str import (
-    pstate_str,
-    pnigh_str,
-    fstate_str,
-    popen_str,
     fcontext_str,
-    rconcept_active_requisite_str,
-    fopen_str,
     fnigh_str,
-    rcontext_str,
+    fopen_str,
+    fstate_str,
     labor_title_str,
+    pnigh_str,
+    popen_str,
+    pstate_str,
+    rconcept_active_requisite_str,
+    rcontext_str,
 )
 
 
