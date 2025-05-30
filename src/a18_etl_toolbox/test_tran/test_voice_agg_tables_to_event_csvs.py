@@ -16,8 +16,8 @@ from src.a18_etl_toolbox._test_util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
-from sqlite3 import connect as sqlite3_connect
 from os.path import exists as os_path_exists
+from sqlite3 import connect as sqlite3_connect
 
 
 def test_etl_voice_agg_to_event_bud_csvs_PopulatesBudPulabelTables(

@@ -14,7 +14,7 @@ from src.a00_data_toolbox.file_toolbox import (
 )
 from src.a00_data_toolbox.dict_toolbox import get_empty_set_if_None
 from src.a00_data_toolbox.db_toolbox import sqlite_connection
-from src.a01_way_logic.way import (
+from src.a01_term_logic.way import (
     OwnerName,
     FiscLabel,
     LabelTerm,
@@ -62,9 +62,9 @@ from src.a12_hub_tools.hub_tool import (
     open_job_file,
     gut_file_exists,
 )
-from os.path import exists as os_path_exists
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
+from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect, Connection
 
 

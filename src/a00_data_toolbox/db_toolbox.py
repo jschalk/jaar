@@ -1,14 +1,13 @@
-from src.a00_data_toolbox.file_toolbox import set_dir, create_path
-from sqlite3 import (
-    Connection,
-    connect as sqlite3_connect,
-    Error as sqlite3_Error,
-    Connection as sqlite3_Connection,
-)
-from dataclasses import dataclass
+from src.a00_data_toolbox.file_toolbox import create_path, set_dir
 from contextlib import contextmanager
 from csv import reader as csv_reader, writer as csv_writer
+from dataclasses import dataclass
 from os.path import join as os_path_join
+from sqlite3 import (
+    Connection as sqlite3_Connection,
+    Error as sqlite3_Error,
+    connect as sqlite3_connect,
+)
 
 
 def sqlite_obj_str(x_obj: any, sqlite_datatype: str):
@@ -43,7 +42,7 @@ def sqlite_to_python(query_value) -> str:
     return None if query_value == "NULL" else query_value
 
 
-def check_connection(conn: Connection) -> bool:
+def check_connection(conn: sqlite3_Connection) -> bool:
     try:
         conn.cursor()
         return True
@@ -117,7 +116,9 @@ def rowdata_shop(
     return RowData(tablename, x_dict)
 
 
-def get_rowdata(tablename: str, x_conn: Connection, select_sqlstr: str) -> RowData:
+def get_rowdata(
+    tablename: str, x_conn: sqlite3_Connection, select_sqlstr: str
+) -> RowData:
     x_conn.row_factory = dict_factory
     results = x_conn.execute(select_sqlstr)
     row1 = results.fetchone()
@@ -125,7 +126,7 @@ def get_rowdata(tablename: str, x_conn: Connection, select_sqlstr: str) -> RowDa
 
 
 def get_db_tables(
-    x_conn: Connection, tablename_contains: str = None, prefix: str = None
+    x_conn: sqlite3_Connection, tablename_contains: str = None, prefix: str = None
 ) -> dict[str, int]:
     sqlstr = "SELECT name FROM sqlite_schema WHERE type='table' ORDER BY name;"
     results = x_conn.execute(sqlstr)
@@ -145,7 +146,7 @@ def get_db_tables(
     return tablenames_dict
 
 
-def get_db_columns(x_conn: Connection) -> dict[str : dict[str, int]]:
+def get_db_columns(x_conn: sqlite3_Connection) -> dict[str : dict[str, int]]:
     return {
         table_name: get_table_columns(x_conn, table_name)
         for table_name in get_db_tables(x_conn).keys()
@@ -171,7 +172,7 @@ def get_column_data_type(cursor: sqlite3_Connection, table_name: str, column_nam
         return None
 
 
-def get_single_result(db_conn: Connection, sqlstr: str) -> str:
+def get_single_result(db_conn: sqlite3_Connection, sqlstr: str) -> str:
     results = db_conn.execute(sqlstr)
     return results.fetchone()[0]
 
@@ -180,11 +181,13 @@ def get_row_count_sqlstr(table_name: str) -> str:
     return f"SELECT COUNT(*) FROM {table_name}"
 
 
-def get_row_count(db_conn: Connection, table_name: str) -> str:
+def get_row_count(db_conn: sqlite3_Connection, table_name: str) -> str:
     return get_single_result(db_conn, get_row_count_sqlstr(table_name))
 
 
-def check_table_column_existence(tables_dict: dict, db_conn: Connection) -> bool:
+def check_table_column_existence(
+    tables_dict: dict, db_conn: sqlite3_Connection
+) -> bool:
     db_tables = get_db_tables(db_conn)
     db_tables_columns = get_db_columns(db_conn)
 

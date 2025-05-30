@@ -1,4 +1,4 @@
-from src.a01_way_logic._test_util.a01_str import bridge_str
+from src.a01_term_logic._test_util.a01_str import bridge_str
 from src.a02_finance_logic.finance_config import TimeLinePoint
 from src.a06_bud_logic.bud import budunit_shop
 from src.a07_calendar_logic._test_util.calendar_examples import (

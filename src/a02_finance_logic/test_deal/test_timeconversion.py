@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import get_default_fisc_label
+from src.a01_term_logic.way import get_default_fisc_label
 from src.a02_finance_logic.deal import TimeConversion, timeconversion_shop
 
 

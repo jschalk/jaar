@@ -24,9 +24,9 @@ from src.a00_data_toolbox.db_toolbox import (
     create_select_query,
     create_insert_query,
 )
-from pytest import raises as pytest_raises, fixture as pytest_fixture
 from os import remove as os_remove
 from os.path import exists as os_path_exists
+from pytest import raises as pytest_raises, fixture as pytest_fixture
 from sqlite3 import (
     connect as sqlite3_connect,
     Connection as sqlite3_Connection,

@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import create_way
+from src.a01_term_logic.way import create_way
 from src.a04_reason_logic.reason_concept import factunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a11_deal_cell_logic._test_util.a11_str import (

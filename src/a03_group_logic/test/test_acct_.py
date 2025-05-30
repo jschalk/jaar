@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import default_bridge_if_None
+from src.a01_term_logic.way import default_bridge_if_None
 from src.a02_finance_logic.finance_config import default_RespectBit_if_None
 from src.a03_group_logic.acct import AcctUnit, acctunit_shop
 from src.a03_group_logic._test_util.a03_str import (

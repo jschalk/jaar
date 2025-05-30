@@ -25,13 +25,13 @@ from src.a00_data_toolbox._test_util.a00_env import (
     get_module_temp_dir,
     env_dir_setup_cleanup,
 )
-from pytest import raises as pytest_raises
-from platform import system as platform_system
 from os.path import (
     exists as os_path_exist,
     join as os_path_join,
 )
 from pathlib import Path as pathlib_Path
+from platform import system as platform_system
+from pytest import raises as pytest_raises
 
 
 def test_create_path_ReturnsObj():

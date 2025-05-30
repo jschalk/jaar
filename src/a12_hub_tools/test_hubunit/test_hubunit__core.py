@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a01_way_logic.way import (
+from src.a01_term_logic.way import (
     default_bridge_if_None,
     create_way_from_labels,
     create_way,

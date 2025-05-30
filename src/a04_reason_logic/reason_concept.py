@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.dict_toolbox import get_empty_dict_if_None
-from src.a01_way_logic.way import (
+from src.a01_term_logic.way import (
     WayTerm,
     rebuild_way,
     find_replace_way_key_dict,

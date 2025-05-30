@@ -1,9 +1,9 @@
-from src.a01_way_logic._test_util.a01_str import (
-    bridge_str,
+from src.a01_term_logic._test_util.a01_str import (
+    LabelTerm_str,
     NameTerm_str,
     TitleTerm_str,
-    LabelTerm_str,
     WayTerm_str,
+    bridge_str,
     fisc_label_str,
     parent_way_str,
 )

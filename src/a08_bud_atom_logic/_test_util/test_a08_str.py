@@ -1,9 +1,9 @@
 from src.a08_bud_atom_logic._test_util.a08_str import (
     DELETE_str,
     atom_hx_str,
+    class_type_str,
     column_order_str,
     crud_str,
-    class_type_str,
     jvalues_str,
     nesting_order_str,
     normal_specs_str,

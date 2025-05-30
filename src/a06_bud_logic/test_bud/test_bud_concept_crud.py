@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import default_bridge_if_None, create_way, to_way
+from src.a01_term_logic.way import default_bridge_if_None, create_way, to_way
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import factunit_shop
 from src.a05_concept_logic.healer import healerlink_shop

@@ -6,7 +6,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_all_nondictionary_objs,
     get_0_if_None,
 )
-from src.a01_way_logic.way import WayTerm, TitleTerm
+from src.a01_term_logic.way import WayTerm, TitleTerm
 from src.a03_group_logic.acct import MemberShip, AcctName, AcctUnit
 from src.a03_group_logic.group import MemberShip
 from src.a04_reason_logic.reason_concept import FactUnit, ReasonUnit
@@ -22,8 +22,8 @@ from src.a08_bud_atom_logic.atom import (
     sift_budatom,
     get_from_dict as get_budatom_from_dict,
 )
-from dataclasses import dataclass
 from copy import deepcopy as copy_deepcopy
+from dataclasses import dataclass
 
 
 @dataclass

@@ -3,8 +3,8 @@ from src.a04_reason_logic.reason_concept import (
     PremiseStatusFinder,
     premisestatusfinder_shop,
 )
-from pytest import raises as pytest_raises
 from plotly.graph_objects import Figure as plotly_figure, Scatter as plotly_Scatter
+from pytest import raises as pytest_raises
 
 
 def test_PremiseStatusFinder_Exists():

@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import GroupTitle
+from src.a01_term_logic.way import GroupTitle
 from src.a03_group_logic.group import membership_shop
 from src.a03_group_logic.group import groupunit_shop
 from src.a04_reason_logic.reason_labor import (

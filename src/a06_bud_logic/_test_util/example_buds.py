@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import open_file
-from src.a01_way_logic.way import WayTerm
+from src.a01_term_logic.way import WayTerm
 from src.a04_reason_logic.reason_concept import factunit_shop, reasonunit_shop
 from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop

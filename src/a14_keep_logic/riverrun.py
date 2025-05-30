@@ -5,7 +5,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_0_if_None,
     set_in_nested_dict,
 )
-from src.a01_way_logic.way import AcctName, OwnerName
+from src.a01_term_logic.way import AcctName, OwnerName
 from src.a02_finance_logic.allot import allot_scale
 from src.a12_hub_tools.hubunit import HubUnit
 from src.a14_keep_logic.rivercycle import (

@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import WayTerm
+from src.a01_term_logic.way import WayTerm
 from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a05_concept_logic.concept import ConceptUnit, conceptunit_shop
 from src.a06_bud_logic.bud import budunit_shop, get_from_json as budunit_get_from_json

@@ -10,8 +10,8 @@ from src.a12_hub_tools._test_util.a12_env import (
     get_module_temp_dir as env_dir,
     env_dir_setup_cleanup,
 )
-from pytest import raises as pytest_raises
 from os.path import exists as os_path_exists
+from pytest import raises as pytest_raises
 
 
 def test_HubUnit_get_keep_ways_RaisesErrorWhen__keeps_justified_IsFalse(

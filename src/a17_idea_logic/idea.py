@@ -6,7 +6,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_positional_dict,
     add_headers_to_csv,
 )
-from src.a01_way_logic.way import FiscLabel, OwnerName
+from src.a01_term_logic.way import FiscLabel, OwnerName
 from src.a06_bud_logic.bud import BudUnit
 from src.a07_calendar_logic.chrono import timelineunit_shop
 from src.a08_bud_atom_logic.atom import BudAtom, atomrow_shop
@@ -25,9 +25,9 @@ from src.a17_idea_logic.idea_db_tool import (
     get_default_sorted_list,
     if_nan_return_None,
 )
-from pandas import DataFrame
 from csv import reader as csv_reader
 from dataclasses import dataclass
+from pandas import DataFrame
 
 
 @dataclass

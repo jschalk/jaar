@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import to_way
+from src.a01_term_logic.way import to_way
 from src.a02_finance_logic.finance_config import default_fund_pool
 from src.a04_reason_logic.reason_concept import (
     premiseunit_shop,

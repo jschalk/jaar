@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path, get_json_filename, set_dir
-from src.a01_way_logic.way import default_bridge_if_None
+from src.a01_term_logic.way import default_bridge_if_None
 from src.a02_finance_logic.finance_config import (
     default_fund_coin_if_None,
     default_RespectBit_if_None,

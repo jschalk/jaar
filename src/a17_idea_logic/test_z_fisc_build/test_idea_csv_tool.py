@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a01_way_logic.way import to_way
+from src.a01_term_logic.way import to_way
 from src.a03_group_logic.group import awardlink_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a09_pack_logic.delta import buddelta_shop

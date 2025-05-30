@@ -10,7 +10,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_dict_from_json,
     get_0_if_None,
 )
-from src.a01_way_logic.way import (
+from src.a01_term_logic.way import (
     default_bridge_if_None,
     create_way,
     get_all_way_labels,
@@ -24,8 +24,8 @@ from src.a01_way_logic.way import (
     EventInt,
 )
 from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
-from dataclasses import dataclass
 from copy import copy as copy_copy
+from dataclasses import dataclass
 
 
 class set_all_otx2inxException(Exception):

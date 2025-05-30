@@ -15,7 +15,7 @@ from src.a00_data_toolbox.db_toolbox import (
     create_table_from_columns,
 )
 from src.a00_data_toolbox.dict_toolbox import set_in_nested_dict
-from src.a01_way_logic.way import FaceName, EventInt
+from src.a01_term_logic.way import FaceName, EventInt
 from src.a16_pidgin_logic.map import MapCore
 from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_args_class_types,
@@ -28,7 +28,10 @@ from src.a17_idea_logic.idea_config import (
     get_idea_sqlite_types,
     get_default_sorted_list,
 )
+from io import StringIO as io_StringIO
 from numpy import float64
+from openpyxl import load_workbook as openpyxl_load_workbook
+from os.path import exists as os_path_exists, dirname as os_path_dirname
 from pandas import (
     DataFrame,
     read_csv as pandas_read_csv,
@@ -36,10 +39,7 @@ from pandas import (
     ExcelWriter,
     read_excel as pandas_read_excel,
 )
-from openpyxl import load_workbook as openpyxl_load_workbook
 from sqlite3 import connect as sqlite3_connect, Connection as sqlite3_Connection
-from os.path import exists as os_path_exists, dirname as os_path_dirname
-from io import StringIO as io_StringIO
 
 
 def save_dataframe_to_csv(x_df: DataFrame, x_dir: str, x_filename: str):

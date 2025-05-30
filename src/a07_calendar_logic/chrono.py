@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.dict_toolbox import get_1_if_None
 from src.a00_data_toolbox.file_toolbox import open_json, create_path
-from src.a01_way_logic.way import WayTerm, LabelTerm
+from src.a01_term_logic.way import WayTerm, LabelTerm
 from src.a05_concept_logic.concept import (
     conceptunit_shop,
     ConceptUnit,
@@ -8,8 +8,8 @@ from src.a05_concept_logic.concept import (
     all_concepts_between as all_between,
 )
 from src.a06_bud_logic.bud import BudUnit
-from datetime import datetime
 from dataclasses import dataclass
+from datetime import datetime
 from os import getcwd as os_getcwd
 
 

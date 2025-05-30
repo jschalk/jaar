@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import default_bridge_if_None
+from src.a01_term_logic.way import default_bridge_if_None
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
 from src.a16_pidgin_logic._test_util.a16_str import (
@@ -14,8 +14,8 @@ from src.a16_pidgin_logic.map import (
     get_namemap_from_json,
     inherit_namemap,
 )
-from pytest import raises as pytest_raises
 from numpy import int64 as numpy_int64
+from pytest import raises as pytest_raises
 
 
 def test_NameMap_Exists():

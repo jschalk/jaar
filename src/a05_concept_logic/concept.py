@@ -5,7 +5,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_False_if_None,
     get_positive_int,
 )
-from src.a01_way_logic.way import (
+from src.a01_term_logic.way import (
     WayTerm,
     LabelTerm,
     is_sub_way,
@@ -72,8 +72,8 @@ from src.a05_concept_logic.origin import (
     originunit_get_from_dict,
     originunit_shop,
 )
-from dataclasses import dataclass
 from copy import deepcopy
+from dataclasses import dataclass
 
 
 class InvalidConceptException(Exception):

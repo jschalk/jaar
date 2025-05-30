@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.dict_toolbox import get_empty_str_if_None as if_none_str
-from src.a01_way_logic.way import FiscLabel, FaceName
+from src.a01_term_logic.way import FiscLabel, FaceName
 from src.a06_bud_logic.bud import BudUnit
 from src.a09_pack_logic.pack import PackUnit
 from src.a15_fisc_logic.fisc import FiscUnit

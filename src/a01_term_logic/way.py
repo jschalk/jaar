@@ -1,83 +1,21 @@
 from src.a00_data_toolbox.file_toolbox import is_path_valid
+from src.a01_term_logic.term import (
+    LabelTerm,
+    FiscLabel,
+    NameTerm,
+    OwnerName,
+    AcctName,
+    HealerName,
+    WayTerm,
+    YawTerm,
+    TitleTerm,
+    GroupTitle,
+    WorldID,
+    FaceName,
+    EventInt,
+    default_bridge_if_None,
+)
 from pathlib import Path as pathlib_Path
-
-
-class InvalidWayTermException(Exception):
-    pass
-
-
-class LabelTerm(str):
-    """A string representation of a tree node. Nodes cannot contain WayTerm bridge"""
-
-    def is_label(self, bridge: str = None) -> bool:
-        return len(self) > 0 and self.contains_bridge(bridge)
-
-    def contains_bridge(self, bridge: str = None) -> bool:
-        return self.find(default_bridge_if_None(bridge)) == -1
-
-
-class FiscLabel(LabelTerm):  # Created to help track the object class relations
-    pass
-
-
-class NameTerm(str):
-    """All Name string classes should inherit from this class"""
-
-    def is_name(self, bridge: str = None) -> bool:
-        return len(self) > 0 and self.contains_bridge(bridge)
-
-    def contains_bridge(self, bridge: str = None) -> bool:
-        return self.find(default_bridge_if_None(bridge)) == -1
-
-
-class OwnerName(NameTerm):
-    """A NameTerm used to identify a BudUnit's owner"""
-
-    pass
-
-
-class AcctName(OwnerName):  # Created to help track the object class relations
-    """Every AcctName object is OwnerName, must follow OwnerName format."""
-
-    pass
-
-
-class HealerName(OwnerName):
-    """A LabelTerm used to identify a Problem's Healer"""
-
-    pass
-
-
-class WayTerm(str):
-    """A string representation of a tree path. LabelTerms are seperated by way bridge"""
-
-    pass
-
-
-class YawTerm(str):
-    """YawTerm is a WayTerm in reverse direction. A string representation of a tree path. LabelTerms are seperated by way bridge."""
-
-    pass
-
-
-class TitleTerm(str):
-    """If a TitleTerm contains bridges it represents a group otherwise it's a single member group of an AcctName."""
-
-
-class GroupTitle(TitleTerm):  # Created to help track the object class relations
-    pass
-
-
-class WorldID(str):
-    pass
-
-
-class FaceName(NameTerm):
-    pass
-
-
-class EventInt(int):
-    pass
 
 
 class bridge_not_in_parent_way_Exception(Exception):
@@ -98,12 +36,6 @@ def to_way(label: LabelTerm, bridge: str = None):
 
 def get_default_fisc_way(bridge: str = None) -> str:
     return to_way(get_default_fisc_label(), bridge)
-
-
-def default_bridge_if_None(bridge: any = None) -> str:
-    if bridge != bridge:  # float("nan")
-        bridge = None
-    return bridge if bridge is not None else ";"
 
 
 class init_bridge_not_presentException(Exception):

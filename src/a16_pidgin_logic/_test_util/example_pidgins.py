@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import default_bridge_if_None, create_way, to_way
+from src.a01_term_logic.way import default_bridge_if_None, create_way, to_way
 from src.a06_bud_logic._test_util.a06_str import (
     acct_name_str,
     rcontext_str,

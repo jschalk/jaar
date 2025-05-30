@@ -17,8 +17,8 @@ from src.a18_etl_toolbox._test_util.a18_env import (
     get_module_temp_dir,
     env_dir_setup_cleanup,
 )
-from pandas import DataFrame, read_excel as pandas_read_excel
 from os.path import exists as os_path_exists
+from pandas import DataFrame, read_excel as pandas_read_excel
 from sqlite3 import connect as sqlite3_connect
 
 

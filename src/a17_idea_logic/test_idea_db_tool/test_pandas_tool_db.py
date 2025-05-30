@@ -11,10 +11,10 @@ from src.a17_idea_logic.idea_db_tool import (
     create_idea_table_from_csv,
     insert_idea_csv,
 )
-from pytest import fixture as pytest_fixture
+from numpy import nan as numpy_nan, float64
 from os import remove as os_remove
 from os.path import exists as os_path_exists
-from numpy import nan as numpy_nan, float64
+from pytest import fixture as pytest_fixture
 from sqlite3 import Connection as sqlite3_Connection, connect as sqlite3_connect
 
 

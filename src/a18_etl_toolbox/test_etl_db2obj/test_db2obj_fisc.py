@@ -9,7 +9,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
     create_sound_and_voice_tables,
 )
-from src.a18_etl_toolbox.db_obj_tool import get_fisc_dict_from_voice_tables
+from src.a18_etl_toolbox.db_obj_fisc_tool import get_fisc_dict_from_voice_tables
 from sqlite3 import connect as sqlite3_connect
 
 

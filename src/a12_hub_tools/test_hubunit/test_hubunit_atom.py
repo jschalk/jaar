@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import get_dir_file_strs, create_path
-from src.a01_way_logic.way import get_default_fisc_label as fisc_label
+from src.a01_term_logic.way import get_default_fisc_label as fisc_label
 from src.a12_hub_tools.hubunit import hubunit_shop
 from src.a12_hub_tools._test_util.a12_env import (
     get_module_temp_dir as fisc_mstr_dir,

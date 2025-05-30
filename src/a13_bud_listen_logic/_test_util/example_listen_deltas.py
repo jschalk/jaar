@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import FiscLabel
+from src.a01_term_logic.way import FiscLabel
 from src.a06_bud_logic._test_util.a06_str import (
     bud_acctunit_str,
     bud_conceptunit_str,

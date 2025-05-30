@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import create_way
+from src.a01_term_logic.way import create_way
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a12_hub_tools.special_func import create_pledge

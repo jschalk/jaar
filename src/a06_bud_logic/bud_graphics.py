@@ -4,7 +4,7 @@ from src.a00_data_toolbox.plotly_toolbox import (
     add_rect_arrow,
     add_keep__rect,
 )
-from src.a01_way_logic.way import get_parent_way, WayTerm, is_sub_way
+from src.a01_term_logic.way import get_parent_way, WayTerm, is_sub_way
 from src.a05_concept_logic.concept import ConceptUnit
 from src.a06_bud_logic.bud import BudUnit
 from src.a06_bud_logic.report import (

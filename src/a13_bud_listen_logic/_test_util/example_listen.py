@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import WayTerm, create_way
+from src.a01_term_logic.way import WayTerm, create_way
 from src.a04_reason_logic.reason_concept import factunit_shop, FactUnit
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_bud_logic.bud import budunit_shop, BudUnit

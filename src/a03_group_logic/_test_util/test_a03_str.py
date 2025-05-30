@@ -1,14 +1,14 @@
 from src.a03_group_logic._test_util.a03_str import (
-    credit_belief_str,
-    debtit_belief_str,
-    credit_vote_str,
-    group_title_str,
-    fund_take_str,
-    respect_bit_str,
-    fund_give_str,
-    debtit_vote_str,
-    give_force_str,
     awardee_title_str,
+    credit_belief_str,
+    credit_vote_str,
+    debtit_belief_str,
+    debtit_vote_str,
+    fund_give_str,
+    fund_take_str,
+    give_force_str,
+    group_title_str,
+    respect_bit_str,
     take_force_str,
 )
 

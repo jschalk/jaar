@@ -3,9 +3,9 @@ from src.a17_idea_logic._test_util.a17_env import (
     idea_examples_dir,
     env_dir_setup_cleanup,
 )
+from os.path import exists as os_path_exists
 from pandas import read_excel as pandas_read_excel, DataFrame
 from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
-from os.path import exists as os_path_exists
 
 
 def test_csv_dict_to_excel_SavesFile(env_dir_setup_cleanup):

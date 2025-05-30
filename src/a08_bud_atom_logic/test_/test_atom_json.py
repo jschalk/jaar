@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.dict_toolbox import x_is_json
-from src.a01_way_logic.way import create_way
+from src.a01_term_logic.way import create_way
 from src.a06_bud_logic._test_util.a06_str import bud_concept_factunit_str
 from src.a06_bud_logic._test_util.a06_str import (
     concept_way_str,

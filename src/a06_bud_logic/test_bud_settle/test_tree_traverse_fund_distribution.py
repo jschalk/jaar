@@ -1,4 +1,4 @@
-from src.a01_way_logic.way import WayTerm, to_way
+from src.a01_term_logic.way import WayTerm, to_way
 from src.a02_finance_logic.finance_config import default_fund_pool
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import awardlink_shop, awardline_shop
@@ -10,8 +10,8 @@ from src.a06_bud_logic._test_util.example_buds import (
     get_budunit_with7amCleanTableReason,
     get_budunit_with_4_levels,
 )
-from pytest import raises as pytest_raises
 from dataclasses import dataclass
+from pytest import raises as pytest_raises
 
 
 def test_BudUnit_settle_bud_Sets_conceptunit_fund_onset_fund_cease_Scenario0():

@@ -27,8 +27,8 @@ from src.a19_world_logic._test_util.a19_env import (
     get_module_temp_dir as worlds_dir,
     env_dir_setup_cleanup,
 )
-from pandas import DataFrame
 from os.path import exists as os_path_exists
+from pandas import DataFrame
 from sqlite3 import connect as sqlite3_connect
 
 

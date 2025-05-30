@@ -4,8 +4,8 @@ from src.a17_idea_logic.idea_config import (
     get_quick_ideas_column_ref,
 )
 from src.a17_idea_logic.idea_db_tool import get_all_excel_sheet_names
-from pandas import read_excel as pandas_read_excel, DataFrame, Series as PandaSeries
 from dataclasses import dataclass
+from pandas import read_excel as pandas_read_excel, DataFrame, Series as PandaSeries
 
 
 def get_all_excel_ideasheets(dir: str) -> set[tuple[str, str, str]]:

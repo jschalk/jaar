@@ -3,7 +3,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_dict_from_json,
     get_0_if_None,
 )
-from src.a01_way_logic.way import (
+from src.a01_term_logic.way import (
     AcctName,
     default_bridge_if_None,
     validate_labelterm,

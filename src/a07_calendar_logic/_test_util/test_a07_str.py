@@ -1,7 +1,7 @@
 from src.a07_calendar_logic._test_util.a07_str import (
     c100_str,
-    c400_leap_str,
     c400_clean_str,
+    c400_leap_str,
     c400_number_str,
     creg_str,
     day_str,
@@ -9,17 +9,17 @@ from src.a07_calendar_logic._test_util.a07_str import (
     five_str,
     hour_str,
     hours_config_str,
-    months_config_str,
     monthday_distortion_str,
-    weekdays_config_str,
+    months_config_str,
     time_str,
     timeline_label_str,
     week_str,
+    weekdays_config_str,
     weeks_str,
     year_str,
     yr1_jan1_offset_str,
-    yr4_leap_str,
     yr4_clean_str,
+    yr4_leap_str,
 )
 
 
