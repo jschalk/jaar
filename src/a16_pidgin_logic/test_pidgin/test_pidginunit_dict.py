@@ -1,26 +1,26 @@
 from src.a01_term_logic.way import default_bridge_if_None
-from src.a09_pack_logic._test_util.a09_str import face_name_str, event_int_str
+from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic._test_util.a16_str import (
-    otx_bridge_str,
     inx_bridge_str,
+    otx_bridge_str,
     unknown_str_str,
 )
-from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
-from src.a16_pidgin_logic.pidgin import (
-    pidginunit_shop,
-    get_pidginunit_from_dict,
-    get_pidginunit_from_json,
-)
 from src.a16_pidgin_logic._test_util.example_pidgins import (
-    get_clean_waymap,
     get_clean_labelmap,
-    get_swim_titlemap,
+    get_clean_waymap,
+    get_slash_labelmap,
     get_slash_namemap,
     get_slash_titlemap,
-    get_slash_labelmap,
     get_slash_waymap,
     get_suita_namemap,
+    get_swim_titlemap,
 )
+from src.a16_pidgin_logic.pidgin import (
+    get_pidginunit_from_dict,
+    get_pidginunit_from_json,
+    pidginunit_shop,
+)
+from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
 
 
 def _get_rid_of_pidgin_core_keys(map_dict: dict) -> dict:

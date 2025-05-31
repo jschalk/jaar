@@ -1,12 +1,12 @@
-from src.a02_finance_logic.deal import (
-    TranUnit,
-    tranunit_shop,
-    TranBook,
-    tranbook_shop,
-    get_tranbook_from_dict,
-)
-from src.a02_finance_logic._test_util.a02_str import fisc_label_str, acct_name_str
 from pytest import raises as pytest_raises
+from src.a02_finance_logic._test_util.a02_str import acct_name_str, fisc_label_str
+from src.a02_finance_logic.deal import (
+    TranBook,
+    TranUnit,
+    get_tranbook_from_dict,
+    tranbook_shop,
+    tranunit_shop,
+)
 
 
 def test_TranUnit_Exists():

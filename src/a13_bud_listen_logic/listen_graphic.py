@@ -1,16 +1,17 @@
+from plotly.graph_objects import Figure as plotly_Figure
+from plotly.graph_objects import Scatter as plotly_Scatter
 from src.a00_data_toolbox.plotly_toolbox import (
-    conditional_fig_show,
-    add_simp_rect,
-    add_direc_rect,
     add_2_curve,
-    add_rect_arrow,
+    add_direc_rect,
     add_keep__rect,
+    add_rect_arrow,
+    add_simp_rect,
+    conditional_fig_show,
 )
 from src.a02_finance_logic.finance_config import default_money_magnitude
 from src.a06_bud_logic.bud import BudUnit
 from src.a06_bud_logic.bud_graphics import display_concepttree
 from src.a12_hub_tools.hub_path import gut_str, job_str
-from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 
 
 def get_hubunit_base_fig() -> plotly_Figure:

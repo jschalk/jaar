@@ -1,21 +1,23 @@
+from numpy import float64
+from numpy import nan as numpy_nan
+from os import remove as os_remove
+from os.path import exists as os_path_exists
+from pytest import fixture as pytest_fixture
+from sqlite3 import Connection as sqlite3_Connection
+from sqlite3 import connect as sqlite3_connect
 from src.a02_finance_logic._test_util.a02_str import fisc_label_str, owner_name_str
 from src.a06_bud_logic._test_util.a06_str import (
     acct_name_str,
-    group_title_str,
     gogo_want_str,
+    group_title_str,
 )
-from src.a09_pack_logic._test_util.a09_str import face_name_str, event_int_str
-from src.a17_idea_logic.idea_config import get_idea_sqlite_types
+from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a17_idea_logic._test_util.a17_env import env_dir_setup_cleanup
+from src.a17_idea_logic.idea_config import get_idea_sqlite_types
 from src.a17_idea_logic.idea_db_tool import (
     create_idea_table_from_csv,
     insert_idea_csv,
 )
-from numpy import nan as numpy_nan, float64
-from os import remove as os_remove
-from os.path import exists as os_path_exists
-from pytest import fixture as pytest_fixture
-from sqlite3 import Connection as sqlite3_Connection, connect as sqlite3_connect
 
 
 @pytest_fixture

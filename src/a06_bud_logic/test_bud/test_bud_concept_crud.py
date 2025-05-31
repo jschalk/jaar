@@ -1,11 +1,11 @@
-from src.a01_term_logic.way import default_bridge_if_None, create_way, to_way
+from pytest import raises as pytest_raises
+from src.a01_term_logic.way import create_way, default_bridge_if_None, to_way
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import factunit_shop
-from src.a05_concept_logic.healer import healerlink_shop
 from src.a05_concept_logic.concept import conceptunit_shop
-from src.a06_bud_logic.bud import budunit_shop
+from src.a05_concept_logic.healer import healerlink_shop
 from src.a06_bud_logic._test_util.example_buds import get_budunit_with_4_levels
-from pytest import raises as pytest_raises
+from src.a06_bud_logic.bud import budunit_shop
 
 
 def test_BudUnit_set_concept_RaisesErrorWhen_parent_way_IsInvalid():
@@ -159,14 +159,14 @@ def test_BudUnit_set_concept_CorrectlyAddsConceptObjWithNonDefault_bridge():
     assert slash_str != default_bridge_if_None()
     bob_bud = budunit_shop("Bob", bridge=slash_str)
     casa_str = "casa"
-    week_str = "week"
+    wk_str = "wk"
     wed_str = "Wednesday"
     casa_way = bob_bud.make_l1_way(casa_str)
-    week_way = bob_bud.make_l1_way(week_str)
-    wed_way = bob_bud.make_way(week_way, wed_str)
+    wk_way = bob_bud.make_l1_way(wk_str)
+    wed_way = bob_bud.make_way(wk_way, wed_str)
     bob_bud.set_l1_concept(conceptunit_shop(casa_str))
-    bob_bud.set_l1_concept(conceptunit_shop(week_str))
-    bob_bud.set_concept(conceptunit_shop(wed_str), week_way)
+    bob_bud.set_l1_concept(conceptunit_shop(wk_str))
+    bob_bud.set_concept(conceptunit_shop(wed_str), wk_way)
     print(f"{bob_bud.conceptroot._kids.keys()=}")
     assert len(bob_bud.conceptroot._kids) == 2
     wed_concept = bob_bud.get_concept_obj(wed_way)
@@ -174,13 +174,11 @@ def test_BudUnit_set_concept_CorrectlyAddsConceptObjWithNonDefault_bridge():
     assert wed_concept.bridge == bob_bud.bridge
 
     # WHEN
-    bob_bud.edit_concept_attr(
-        casa_way, reason_rcontext=week_way, reason_premise=wed_way
-    )
+    bob_bud.edit_concept_attr(casa_way, reason_rcontext=wk_way, reason_premise=wed_way)
 
     # THEN
     casa_concept = bob_bud.get_concept_obj(casa_way)
-    assert casa_concept.reasonunits.get(week_way) is not None
+    assert casa_concept.reasonunits.get(wk_way) is not None
 
 
 def test_BudUnit_set_concept_CanCreateMissingConceptUnits():
@@ -215,20 +213,20 @@ def test_BudUnit_del_concept_obj_Level0CannotBeDeleted():
 def test_BudUnit_del_concept_obj_Level1CanBeDeleted_ChildrenDeleted():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    week_str = "weekdays"
-    week_way = sue_bud.make_l1_way(week_str)
+    wk_str = "wkdays"
+    wk_way = sue_bud.make_l1_way(wk_str)
     sun_str = "Sunday"
-    sun_way = sue_bud.make_way(week_way, sun_str)
-    assert sue_bud.get_concept_obj(week_way)
+    sun_way = sue_bud.make_way(wk_way, sun_str)
+    assert sue_bud.get_concept_obj(wk_way)
     assert sue_bud.get_concept_obj(sun_way)
 
     # WHEN
-    sue_bud.del_concept_obj(way=week_way)
+    sue_bud.del_concept_obj(way=wk_way)
 
     # THEN
     with pytest_raises(Exception) as excinfo:
-        sue_bud.get_concept_obj(week_way)
-    assert str(excinfo.value) == f"get_concept_obj failed. no concept at '{week_way}'"
+        sue_bud.get_concept_obj(wk_way)
+    assert str(excinfo.value) == f"get_concept_obj failed. no concept at '{wk_way}'"
     new_sunday_way = sue_bud.make_l1_way("Sunday")
     with pytest_raises(Exception) as excinfo:
         sue_bud.get_concept_obj(new_sunday_way)
@@ -241,14 +239,14 @@ def test_BudUnit_del_concept_obj_Level1CanBeDeleted_ChildrenDeleted():
 def test_BudUnit_del_concept_obj_Level1CanBeDeleted_ChildrenInherited():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    week_str = "weekdays"
-    week_way = sue_bud.make_l1_way(week_str)
+    wk_str = "wkdays"
+    wk_way = sue_bud.make_l1_way(wk_str)
     sun_str = "Sunday"
-    old_sunday_way = sue_bud.make_way(week_way, sun_str)
+    old_sunday_way = sue_bud.make_way(wk_way, sun_str)
     assert sue_bud.get_concept_obj(old_sunday_way)
 
     # WHEN
-    sue_bud.del_concept_obj(way=week_way, del_children=False)
+    sue_bud.del_concept_obj(way=wk_way, del_children=False)
 
     # THEN
     with pytest_raises(Exception) as excinfo:
@@ -296,7 +294,7 @@ def test_BudUnit_del_concept_obj_LevelNCanBeDeleted_ChildrenInherited():
 def test_BudUnit_del_concept_obj_Level2CanBeDeleted_ChildrenDeleted():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    wkday_way = sue_bud.make_l1_way("weekdays")
+    wkday_way = sue_bud.make_l1_way("wkdays")
     monday_way = sue_bud.make_way(wkday_way, "Monday")
     assert sue_bud.get_concept_obj(monday_way)
 
@@ -377,7 +375,7 @@ def test_BudUnit_edit_concept_attr_IsAbleToEditAnyAncestor_Concept():
     # factunit: factunit_shop = None,
     # sue_bud.conceptroot._kids[casa_str].factunits = None
     assert sue_bud.conceptroot._kids[casa_str].factunits == {}
-    wkdays_way = sue_bud.make_l1_way("weekdays")
+    wkdays_way = sue_bud.make_l1_way("wkdays")
     fact_way = sue_bud.make_way(wkdays_way, "Sunday")
     x_factunit = factunit_shop(fcontext=fact_way, fstate=fact_way)
 
@@ -813,13 +811,13 @@ def test_BudUnit_get_concept_obj_ReturnsConcept():
     assert brazil_concept.concept_label == brazil_str
 
     # WHEN
-    week_str = "weekdays"
-    week_way = sue_bud.make_l1_way(week_str)
-    week_concept = sue_bud.get_concept_obj(way=week_way)
+    wk_str = "wkdays"
+    wk_way = sue_bud.make_l1_way(wk_str)
+    wk_concept = sue_bud.get_concept_obj(way=wk_way)
 
     # THEN
-    assert week_concept is not None
-    assert week_concept.concept_label == week_str
+    assert wk_concept is not None
+    assert wk_concept.concept_label == wk_str
 
     # WHEN
     root_concept = sue_bud.get_concept_obj(to_way(sue_bud.fisc_label))
@@ -840,16 +838,16 @@ def test_BudUnit_concept_exists_ReturnsCorrectBool():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
     cat_way = sue_bud.make_l1_way("cat have dinner")
-    week_way = sue_bud.make_l1_way("weekdays")
+    wk_way = sue_bud.make_l1_way("wkdays")
     casa_way = sue_bud.make_l1_way("casa")
     nation_way = sue_bud.make_l1_way("nation")
-    sun_way = sue_bud.make_way(week_way, "Sunday")
-    mon_way = sue_bud.make_way(week_way, "Monday")
-    tue_way = sue_bud.make_way(week_way, "Tuesday")
-    wed_way = sue_bud.make_way(week_way, "Wednesday")
-    thu_way = sue_bud.make_way(week_way, "Thursday")
-    fri_way = sue_bud.make_way(week_way, "Friday")
-    sat_way = sue_bud.make_way(week_way, "Saturday")
+    sun_way = sue_bud.make_way(wk_way, "Sunday")
+    mon_way = sue_bud.make_way(wk_way, "Monday")
+    tue_way = sue_bud.make_way(wk_way, "Tuesday")
+    wed_way = sue_bud.make_way(wk_way, "Wednesday")
+    thu_way = sue_bud.make_way(wk_way, "Thursday")
+    fri_way = sue_bud.make_way(wk_way, "Friday")
+    sat_way = sue_bud.make_way(wk_way, "Saturday")
     france_way = sue_bud.make_way(nation_way, "France")
     brazil_way = sue_bud.make_way(nation_way, "Brazil")
     usa_way = sue_bud.make_way(nation_way, "USA")
@@ -866,7 +864,7 @@ def test_BudUnit_concept_exists_ReturnsCorrectBool():
     assert sue_bud.concept_exists(None) is False
     assert sue_bud.concept_exists(to_way(sue_bud.fisc_label))
     assert sue_bud.concept_exists(cat_way)
-    assert sue_bud.concept_exists(week_way)
+    assert sue_bud.concept_exists(wk_way)
     assert sue_bud.concept_exists(casa_way)
     assert sue_bud.concept_exists(nation_way)
     assert sue_bud.concept_exists(sun_way)
@@ -901,22 +899,22 @@ def test_BudUnit_set_offtrack_fund_ReturnsObj():
 
     # ESTABLISH
     casa_str = "casa"
-    week_str = "week"
+    wk_str = "wk"
     wed_str = "Wednesday"
     casa_way = bob_budunit.make_l1_way(casa_str)
-    week_way = bob_budunit.make_l1_way(week_str)
-    wed_way = bob_budunit.make_way(week_way, wed_str)
+    wk_way = bob_budunit.make_l1_way(wk_str)
+    wed_way = bob_budunit.make_way(wk_way, wed_str)
     casa_concept = conceptunit_shop(casa_str, _fund_onset=70, _fund_cease=170)
-    week_concept = conceptunit_shop(week_str, _fund_onset=70, _fund_cease=75)
+    wk_concept = conceptunit_shop(wk_str, _fund_onset=70, _fund_cease=75)
     wed_concept = conceptunit_shop(wed_str, _fund_onset=72, _fund_cease=75)
     casa_concept.parent_way = bob_budunit.fisc_label
-    week_concept.parent_way = bob_budunit.fisc_label
-    wed_concept.parent_way = week_way
+    wk_concept.parent_way = bob_budunit.fisc_label
+    wed_concept.parent_way = wk_way
     bob_budunit.set_l1_concept(casa_concept)
-    bob_budunit.set_l1_concept(week_concept)
-    bob_budunit.set_concept(wed_concept, week_way)
+    bob_budunit.set_l1_concept(wk_concept)
+    bob_budunit.set_concept(wed_concept, wk_way)
     bob_budunit._offtrack_kids_mass_set.add(casa_way)
-    bob_budunit._offtrack_kids_mass_set.add(week_way)
+    bob_budunit._offtrack_kids_mass_set.add(wk_way)
     assert bob_budunit._offtrack_fund == 0
 
     # WHEN
@@ -958,22 +956,22 @@ def test_BudUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
 
     # WHEN
     casa_str = "casa"
-    week_str = "week"
+    wk_str = "wk"
     wed_str = "Wednesday"
     casa_way = bob_budunit.make_l1_way(casa_str)
-    week_way = bob_budunit.make_l1_way(week_str)
-    wed_way = bob_budunit.make_way(week_way, wed_str)
+    wk_way = bob_budunit.make_l1_way(wk_str)
+    wed_way = bob_budunit.make_way(wk_way, wed_str)
     casa_concept = conceptunit_shop(casa_str, _fund_onset=70, _fund_cease=170)
-    week_concept = conceptunit_shop(week_str, _fund_onset=70, _fund_cease=75)
+    wk_concept = conceptunit_shop(wk_str, _fund_onset=70, _fund_cease=75)
     wed_concept = conceptunit_shop(wed_str, _fund_onset=72, _fund_cease=75)
     casa_concept.parent_way = bob_budunit.fisc_label
-    week_concept.parent_way = bob_budunit.fisc_label
-    wed_concept.parent_way = week_way
+    wk_concept.parent_way = bob_budunit.fisc_label
+    wed_concept.parent_way = wk_way
     bob_budunit.set_l1_concept(casa_concept)
-    bob_budunit.set_l1_concept(week_concept)
-    bob_budunit.set_concept(wed_concept, week_way)
+    bob_budunit.set_l1_concept(wk_concept)
+    bob_budunit.set_concept(wed_concept, wk_way)
     bob_budunit._offtrack_kids_mass_set.add(casa_way)
-    bob_budunit._offtrack_kids_mass_set.add(week_way)
+    bob_budunit._offtrack_kids_mass_set.add(wk_way)
     bob_budunit.set_offtrack_fund()
     assert bob_budunit._offtrack_fund == 105
 

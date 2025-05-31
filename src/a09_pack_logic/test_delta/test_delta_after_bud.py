@@ -1,44 +1,44 @@
-from src.a01_term_logic.way import get_tail_label, get_parent_way
+from src.a01_term_logic.way import get_parent_way, get_tail_label
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import factunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
-from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._test_util.a06_str import (
-    budunit_str,
-    bud_acctunit_str,
-    bud_acct_membership_str,
-    bud_conceptunit_str,
-    bud_concept_awardlink_str,
-    bud_concept_reasonunit_str,
-    bud_concept_reason_premiseunit_str,
-    bud_concept_laborlink_str,
-    bud_concept_healerlink_str,
-    bud_concept_factunit_str,
     acct_name_str,
     awardee_title_str,
-    group_title_str,
-    labor_title_str,
-    healer_name_str,
-    concept_way_str,
-    rconcept_active_requisite_str,
-    pledge_str,
     begin_str,
+    bud_acct_membership_str,
+    bud_acctunit_str,
+    bud_concept_awardlink_str,
+    bud_concept_factunit_str,
+    bud_concept_healerlink_str,
+    bud_concept_laborlink_str,
+    bud_concept_reason_premiseunit_str,
+    bud_concept_reasonunit_str,
+    bud_conceptunit_str,
+    budunit_str,
     close_str,
+    concept_way_str,
     credit_vote_str,
     debtit_vote_str,
     fcontext_str,
-    fstate_str,
-    gogo_want_str,
-    stop_want_str,
-    fopen_str,
     fnigh_str,
+    fopen_str,
+    fstate_str,
     give_force_str,
+    gogo_want_str,
+    group_title_str,
+    healer_name_str,
+    labor_title_str,
+    pledge_str,
+    rconcept_active_requisite_str,
+    stop_want_str,
     take_force_str,
 )
-from src.a08_bud_atom_logic._test_util.a08_str import INSERT_str, UPDATE_str, DELETE_str
+from src.a06_bud_logic.bud import budunit_shop
+from src.a08_bud_atom_logic._test_util.a08_str import DELETE_str, INSERT_str, UPDATE_str
 from src.a08_bud_atom_logic.atom import budatom_shop
-from src.a09_pack_logic.delta import buddelta_shop
 from src.a09_pack_logic._test_util.example_deltas import get_buddelta_example1
+from src.a09_pack_logic.delta import buddelta_shop
 
 
 def test_BudDelta_get_edited_bud_ReturnsObj_SimplestScenario():

@@ -1,15 +1,16 @@
-from src.a01_term_logic.way import get_default_fisc_label as root_label, create_way
+from src.a01_term_logic.way import create_way
+from src.a01_term_logic.way import get_default_fisc_label as root_label
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import (
-    reasonunit_shop,
-    reasonheir_shop,
     factunit_shop,
     premiseunit_shop,
+    reasonheir_shop,
+    reasonunit_shop,
 )
 from src.a04_reason_logic.reason_labor import laborunit_shop
+from src.a05_concept_logic.concept import conceptunit_shop, get_obj_from_concept_dict
 from src.a05_concept_logic.healer import healerlink_shop
 from src.a05_concept_logic.origin import originunit_shop
-from src.a05_concept_logic.concept import conceptunit_shop, get_obj_from_concept_dict
 
 
 def test_get_obj_from_concept_dict_ReturnsObj():
@@ -65,10 +66,10 @@ def test_get_obj_from_concept_dict_ReturnsCorrect_HealerLink():
 
 def test_ConceptUnit_get_dict_ReturnsCorrectCompleteDict():
     # ESTABLISH
-    week_str = "weekdays"
-    week_way = create_way(root_label(), week_str)
+    wk_str = "wkdays"
+    wk_way = create_way(root_label(), wk_str)
     wed_str = "Wednesday"
-    wed_way = create_way(week_way, wed_str)
+    wed_way = create_way(wk_way, wed_str)
     nation_str = "nation"
     nation_way = create_way(root_label(), nation_str)
     usa_str = "USA"
@@ -80,13 +81,13 @@ def test_ConceptUnit_get_dict_ReturnsCorrectCompleteDict():
     usa_premise._status = False
 
     x1_reasonunits = {
-        week_way: reasonunit_shop(week_way, premises={wed_premise.pstate: wed_premise}),
+        wk_way: reasonunit_shop(wk_way, premises={wed_premise.pstate: wed_premise}),
         nation_way: reasonunit_shop(nation_way, {usa_premise.pstate: usa_premise}),
     }
     wed_premises = {wed_premise.pstate: wed_premise}
     usa_premises = {usa_premise.pstate: usa_premise}
     x1_reasonheirs = {
-        week_way: reasonheir_shop(week_way, wed_premises, _status=True),
+        wk_way: reasonheir_shop(wk_way, wed_premises, _status=True),
         nation_way: reasonheir_shop(nation_way, usa_premises, _status=False),
     }
     biker_awardee_title = "bikers"
@@ -143,7 +144,7 @@ def test_ConceptUnit_get_dict_ReturnsCorrectCompleteDict():
         pledge=True,
         problem_bool=x_problem_bool,
     )
-    x_factunit = factunit_shop(fcontext=week_way, fstate=week_way, fopen=5, fnigh=59)
+    x_factunit = factunit_shop(fcontext=wk_way, fstate=wk_way, fopen=5, fnigh=59)
     casa_concept.set_factunit(factunit=x_factunit)
     casa_concept._originunit.set_originhold(acct_name="Ray", importance=None)
     casa_concept._originunit.set_originhold(acct_name="Lei", importance=4)

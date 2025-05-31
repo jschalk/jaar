@@ -1,3 +1,14 @@
+from src.a01_term_logic._test_util.a01_str import bridge_str
+
+
+def _status_str() -> str:
+    return "_status"
+
+
+def _task_str() -> str:
+    return "_task"
+
+
 def fcontext_str() -> str:
     return "fcontext"
 
@@ -16,6 +27,10 @@ def fstate_str() -> str:
 
 def labor_title_str() -> str:
     return "labor_title"
+
+
+def pdivisor_str() -> str:
+    return "pdivisor"
 
 
 def pnigh_str() -> str:

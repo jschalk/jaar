@@ -1,9 +1,9 @@
 from src.a01_term_logic.way import to_way
 from src.a04_reason_logic.reason_concept import reasonunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
+from src.a06_bud_logic._test_util.example_buds import get_budunit_with_4_levels
 from src.a06_bud_logic.bud import budunit_shop, get_sorted_concept_list
 from src.a06_bud_logic.tree_metrics import TreeMetrics, treemetrics_shop
-from src.a06_bud_logic._test_util.example_buds import get_budunit_with_4_levels
 
 
 def test_TreeMetrics_Exists():
@@ -181,14 +181,14 @@ def test_get_sorted_concept_list_ReturnsObj():
     sue_bud = get_budunit_with_4_levels()
     casa_way = sue_bud.make_l1_way("casa")
     cat_way = sue_bud.make_l1_way("cat have dinner")
-    week_way = sue_bud.make_l1_way("weekdays")
-    sun_way = sue_bud.make_way(week_way, "Sunday")
-    mon_way = sue_bud.make_way(week_way, "Monday")
-    tue_way = sue_bud.make_way(week_way, "Tuesday")
-    wed_way = sue_bud.make_way(week_way, "Wednesday")
-    thu_way = sue_bud.make_way(week_way, "Thursday")
-    fri_way = sue_bud.make_way(week_way, "Friday")
-    sat_way = sue_bud.make_way(week_way, "Saturday")
+    wk_way = sue_bud.make_l1_way("wkdays")
+    sun_way = sue_bud.make_way(wk_way, "Sunday")
+    mon_way = sue_bud.make_way(wk_way, "Monday")
+    tue_way = sue_bud.make_way(wk_way, "Tuesday")
+    wed_way = sue_bud.make_way(wk_way, "Wednesday")
+    thu_way = sue_bud.make_way(wk_way, "Thursday")
+    fri_way = sue_bud.make_way(wk_way, "Friday")
+    sat_way = sue_bud.make_way(wk_way, "Saturday")
     nation_way = sue_bud.make_l1_way("nation")
     usa_way = sue_bud.make_way(nation_way, "USA")
     france_way = sue_bud.make_way(nation_way, "France")

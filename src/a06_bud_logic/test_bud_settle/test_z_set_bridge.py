@@ -1,13 +1,15 @@
+from pytest import raises as pytest_raises
 from src.a01_term_logic.way import (
     create_way,
-    get_default_fisc_label as root_label,
+)
+from src.a01_term_logic.way import (
     to_way,
 )
-from src.a04_reason_logic.reason_concept import reasonunit_shop, factunit_shop
+from src.a01_term_logic.way import get_default_fisc_label as root_label
+from src.a04_reason_logic.reason_concept import factunit_shop, reasonunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
-from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._test_util.example_buds import get_budunit_with_4_levels
-from pytest import raises as pytest_raises
+from src.a06_bud_logic.bud import budunit_shop
 
 
 def test_BudUnit_set_fisc_label_CorrectlySetsAttr():

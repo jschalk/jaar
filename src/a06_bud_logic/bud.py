@@ -1,49 +1,51 @@
+from copy import deepcopy as copy_deepcopy
+from dataclasses import dataclass
 from src.a00_data_toolbox.dict_toolbox import (
-    get_json_from_dict,
-    get_dict_from_json,
-    get_1_if_None,
     get_0_if_None,
-    get_False_if_None,
+    get_1_if_None,
+    get_dict_from_json,
     get_empty_dict_if_None,
+    get_False_if_None,
+    get_json_from_dict,
 )
 from src.a01_term_logic.way import (
-    get_parent_way,
-    to_way,
-    is_sub_way,
+    AcctName,
+    FiscLabel,
+    HealerName,
+    LabelTerm,
+    OwnerName,
+    WayTerm,
     all_wayterms_between,
-    rebuild_way,
-    get_tail_label,
-    get_root_label_from_way,
-    get_ancestor_ways,
-    get_default_fisc_label,
-    get_all_way_labels,
-    get_forefather_ways,
     create_way,
     default_bridge_if_None,
-    LabelTerm,
-    WayTerm,
+    get_all_way_labels,
+    get_ancestor_ways,
+    get_default_fisc_label,
+    get_forefather_ways,
+    get_parent_way,
+    get_root_label_from_way,
+    get_tail_label,
     is_string_in_way,
-    OwnerName,
-    AcctName,
-    HealerName,
-    FiscLabel,
+    is_sub_way,
+    rebuild_way,
+    to_way,
     wayterm_valid_dir_path,
 )
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import (
-    valid_finance_ratio,
-    default_RespectBit_if_None,
-    filter_penny,
-    default_fund_coin_if_None,
-    validate_fund_pool,
     BitNum,
-    RespectNum,
-    PennyNum,
     FundCoin,
     FundNum,
+    PennyNum,
+    RespectNum,
+    default_fund_coin_if_None,
+    default_RespectBit_if_None,
+    filter_penny,
+    valid_finance_ratio,
+    validate_fund_pool,
     validate_respect_num,
 )
-from src.a03_group_logic.acct import AcctUnit, acctunits_get_from_dict, acctunit_shop
+from src.a03_group_logic.acct import AcctUnit, acctunit_shop, acctunits_get_from_dict
 from src.a03_group_logic.group import (
     AwardLink,
     GroupTitle,
@@ -53,29 +55,26 @@ from src.a03_group_logic.group import (
 )
 from src.a04_reason_logic.reason_concept import (
     FactUnit,
-    FactUnit,
     ReasonUnit,
     WayTerm,
     factunit_shop,
 )
 from src.a04_reason_logic.reason_labor import LaborUnit
-from src.a05_concept_logic.healer import HealerLink
 from src.a05_concept_logic.concept import (
-    ConceptUnit,
-    conceptunit_shop,
-    conceptattrholder_shop,
     ConceptAttrHolder,
+    ConceptUnit,
+    conceptattrholder_shop,
+    conceptunit_shop,
     get_obj_from_concept_dict,
 )
+from src.a05_concept_logic.healer import HealerLink
 from src.a05_concept_logic.origin import (
+    OriginUnit,
     originunit_get_from_dict,
     originunit_shop,
-    OriginUnit,
 )
 from src.a06_bud_logic.bud_config import max_tree_traverse_default
 from src.a06_bud_logic.tree_metrics import TreeMetrics, treemetrics_shop
-from copy import deepcopy as copy_deepcopy
-from dataclasses import dataclass
 
 
 class InvalidBudException(Exception):
@@ -349,8 +348,8 @@ class BudUnit:
     def set_acctunit(self, x_acctunit: AcctUnit, auto_set_membership: bool = True):
         if x_acctunit.bridge != self.bridge:
             x_acctunit.bridge = self.bridge
-        if x_acctunit._respect_bit != self.respect_bit:
-            x_acctunit._respect_bit = self.respect_bit
+        if x_acctunit.respect_bit != self.respect_bit:
+            x_acctunit.respect_bit = self.respect_bit
         if auto_set_membership and x_acctunit.memberships_exist() is False:
             x_acctunit.add_membership(x_acctunit.acct_name)
         self.accts[x_acctunit.acct_name] = x_acctunit
@@ -480,12 +479,12 @@ class BudUnit:
             # WHEN concept is "range-root" identify any reason.rcontexts that are descendants
             # calculate and set those descendant facts
             # example: timeline range (0-, 1.5e9) is range-root
-            # example: "timeline,weeks" (spllt 10080) is range-descendant
-            # there exists a reason rcontext "timeline,weeks" with premise.pstate = "timeline,weeks"
-            # and (1,2) pdivisor=2 (every other week)
+            # example: "timeline,wks" (spllt 10080) is range-descendant
+            # there exists a reason rcontext "timeline,wks" with premise.pstate = "timeline,wks"
+            # and (1,2) pdivisor=2 (every other wk)
             #
-            # should not set "timeline,weeks" fact, only "timeline" fact and
-            # "timeline,weeks" should be set automatica_lly since there exists a reason
+            # should not set "timeline,wks" fact, only "timeline" fact and
+            # "timeline,wks" should be set automatica_lly since there exists a reason
             # that has that rcontext.
             x_conceptroot.set_factunit(x_factunit)
 

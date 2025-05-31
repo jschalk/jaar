@@ -1,16 +1,16 @@
+from sqlite3 import connect as sqlite3_connect
 from src.a02_finance_logic._test_util.a02_str import fisc_label_str
-from src.a15_fisc_logic.fisc import get_from_dict as fiscunit_get_from_dict
 from src.a15_fisc_logic._test_util.a15_str import (
-    cashbook_str,
     brokerunits_str,
+    cashbook_str,
     timeline_str,
 )
+from src.a15_fisc_logic.fisc import get_from_dict as fiscunit_get_from_dict
+from src.a18_etl_toolbox.db_obj_fisc_tool import get_fisc_dict_from_voice_tables
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
     create_sound_and_voice_tables,
 )
-from src.a18_etl_toolbox.db_obj_fisc_tool import get_fisc_dict_from_voice_tables
-from sqlite3 import connect as sqlite3_connect
 
 
 def test_get_fisc_dict_from_voice_tables_ReturnsObj_With_fisunit_Attrs_Scenario0():

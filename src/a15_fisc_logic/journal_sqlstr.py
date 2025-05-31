@@ -1,6 +1,6 @@
 from src.a01_term_logic.way import WayTerm
-from src.a08_bud_atom_logic.atom_config import get_flattened_atom_table_build
 from src.a08_bud_atom_logic.atom import BudAtom
+from src.a08_bud_atom_logic.atom_config import get_flattened_atom_table_build
 
 
 def get_atom_hx_table_create_sqlstr() -> str:

@@ -1,13 +1,13 @@
+from copy import deepcopy as copy_deepcopy
 from src.a01_term_logic.way import (
-    WayTerm,
-    get_tail_label,
-    get_parent_way,
     TitleTerm,
+    WayTerm,
+    get_parent_way,
+    get_tail_label,
 )
 from src.a06_bud_logic.bud import BudUnit
 from src.a12_hub_tools.hub_tool import open_gut_file
 from src.a12_hub_tools.hubunit import HubUnit
-from copy import deepcopy as copy_deepcopy
 
 
 def create_pledge(

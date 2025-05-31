@@ -1,18 +1,32 @@
-from src.a00_data_toolbox.dict_toolbox import x_is_json, get_json_from_dict
+from src.a00_data_toolbox.dict_toolbox import get_json_from_dict, x_is_json
+from src.a03_group_logic._test_util.a03_str import (
+    _credor_pool_str,
+    _debtor_pool_str,
+    _fund_agenda_give_str,
+    _fund_agenda_ratio_give_str,
+    _fund_agenda_ratio_take_str,
+    _fund_agenda_take_str,
+    _fund_give_str,
+    _fund_take_str,
+    acct_name_str,
+    credit_vote_str,
+    debtit_vote_str,
+    group_title_str,
+)
 from src.a03_group_logic.group import (
+    AwardHeir,
+    AwardLine,
+    AwardLink,
     GroupCore,
     GroupTitle,
-    membership_shop,
     MemberShip,
-    membership_get_from_dict,
-    memberships_get_from_dict,
-    AwardLine,
+    awardheir_shop,
     awardline_shop,
-    AwardLink,
     awardlink_shop,
     awardlinks_get_from_json,
-    AwardHeir,
-    awardheir_shop,
+    membership_get_from_dict,
+    membership_shop,
+    memberships_get_from_dict,
 )
 
 
@@ -51,6 +65,22 @@ def test_MemberShip_exists():
     assert not swim_membership._fund_agenda_ratio_give
     assert not swim_membership._fund_agenda_ratio_take
     assert not swim_membership.acct_name
+    obj_attrs = set(swim_membership.__dict__.keys())
+    print(sorted(list(obj_attrs)))
+    assert obj_attrs == {
+        _credor_pool_str(),
+        _debtor_pool_str(),
+        _fund_agenda_give_str(),
+        _fund_agenda_ratio_give_str(),
+        _fund_agenda_ratio_take_str(),
+        _fund_agenda_take_str(),
+        _fund_give_str(),
+        _fund_take_str(),
+        acct_name_str(),
+        credit_vote_str(),
+        debtit_vote_str(),
+        group_title_str(),
+    }
 
 
 def test_membership_shop_ReturnsObj():

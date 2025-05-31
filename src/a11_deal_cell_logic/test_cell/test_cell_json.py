@@ -1,23 +1,27 @@
 from src.a02_finance_logic._test_util.a02_str import quota_str
-from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._test_util.a06_str import penny_str
+from src.a06_bud_logic.bud import budunit_shop
 from src.a09_pack_logic._test_util.a09_str import event_int_str
 from src.a11_deal_cell_logic._test_util.a11_str import (
     ancestors_str,
-    celldepth_str,
-    deal_owner_name_str,
-    mandate_str,
+    boss_facts_str,
     budadjust_str,
     budevent_facts_str,
+    celldepth_str,
+    deal_owner_name_str,
     found_facts_str,
-    boss_facts_str,
+    mandate_str,
 )
-from src.a11_deal_cell_logic.cell import cellunit_shop, cellunit_get_from_dict
 from src.a11_deal_cell_logic._test_util.example_factunits import (
     example_casa_clean_factunit as clean_factunit,
+)
+from src.a11_deal_cell_logic._test_util.example_factunits import (
     example_casa_dirty_factunit as dirty_factunit,
+)
+from src.a11_deal_cell_logic._test_util.example_factunits import (
     example_sky_blue_factunit as sky_blue_factunit,
 )
+from src.a11_deal_cell_logic.cell import cellunit_get_from_dict, cellunit_shop
 
 
 def test_CellUnit_get_dict_ReturnsObj_Scenario0():

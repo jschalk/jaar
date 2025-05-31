@@ -1,8 +1,8 @@
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a13_bud_listen_logic.listen import (
-    generate_ingest_list,
     _allocate_irrational_debtit_belief,
+    generate_ingest_list,
     generate_perspective_agenda,
 )
 

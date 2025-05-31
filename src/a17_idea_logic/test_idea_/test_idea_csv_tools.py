@@ -1,9 +1,9 @@
 from src.a00_data_toolbox.dict_toolbox import extract_csv_headers
-from src.a02_finance_logic._test_util.a02_str import owner_name_str, fisc_label_str
+from src.a02_finance_logic._test_util.a02_str import fisc_label_str, owner_name_str
 from src.a06_bud_logic._test_util.a06_str import acct_name_str
 from src.a17_idea_logic.idea import (
-    get_csv_fisc_label_owner_name_metrics,
     fisc_label_owner_name_nested_csv_dict,
+    get_csv_fisc_label_owner_name_metrics,
 )
 
 

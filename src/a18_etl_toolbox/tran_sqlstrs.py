@@ -1,16 +1,16 @@
+from sqlite3 import Connection as sqlite3_Connection
 from src.a00_data_toolbox.db_toolbox import (
-    create_update_inconsistency_error_query,
     create_table2table_agg_insert_query,
-)
-from src.a17_idea_logic.idea_db_tool import (
-    get_default_sorted_list,
-    create_idea_sorted_table,
+    create_update_inconsistency_error_query,
 )
 from src.a17_idea_logic.idea_config import (
-    get_quick_ideas_column_ref,
     get_idea_config_dict,
+    get_quick_ideas_column_ref,
 )
-from sqlite3 import Connection as sqlite3_Connection
+from src.a17_idea_logic.idea_db_tool import (
+    create_idea_sorted_table,
+    get_default_sorted_list,
+)
 
 ALL_DIMEN_ABBV7 = {
     "FISCASH",
@@ -1255,7 +1255,7 @@ CREATE_JOB_BUDAWAR_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_concept_awardlink_
 CREATE_JOB_BUDFACT_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_concept_factunit_job (fisc_label TEXT, owner_name TEXT, concept_way TEXT, fcontext TEXT, fstate TEXT, fopen REAL, fnigh REAL)"""
 CREATE_JOB_BUDHEAL_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_concept_healerlink_job (fisc_label TEXT, owner_name TEXT, concept_way TEXT, healer_name TEXT)"""
 CREATE_JOB_BUDPREM_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_job (fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate TEXT, pnigh REAL, popen REAL, pdivisor INTEGER, _task INTEGER, _status INTEGER)"""
-CREATE_JOB_BUDREAS_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_concept_reasonunit_job (fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, rconcept_active_requisite INTEGER, _task INTEGER, _status INTEGER, _rcontext_concept_active_value INTEGER)"""
+CREATE_JOB_BUDREAS_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_concept_reasonunit_job (fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, rconcept_active_requisite INTEGER, _task INTEGER, _status INTEGER, _rconcept_active_value INTEGER)"""
 CREATE_JOB_BUDLABO_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_concept_laborlink_job (fisc_label TEXT, owner_name TEXT, concept_way TEXT, labor_title TEXT, _owner_name_labor INTEGER)"""
 CREATE_JOB_BUDCONC_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_conceptunit_job (fisc_label TEXT, owner_name TEXT, concept_way TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER, fund_coin REAL, _active INTEGER, _task INTEGER, _fund_onset REAL, _fund_cease REAL, _fund_ratio REAL, _gogo_calc REAL, _stop_calc REAL, _level INTEGER, _range_evaluated INTEGER, _descendant_pledge_count INTEGER, _healerlink_ratio REAL, _all_acct_cred INTEGER, _all_acct_debt INTEGER)"""
 CREATE_JOB_BUDUNIT_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_job (fisc_label TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, _rational INTEGER, _keeps_justified INTEGER, _offtrack_fund REAL, _sum_healerlink_share REAL, _keeps_buildable INTEGER, _tree_traverse_count INTEGER)"""

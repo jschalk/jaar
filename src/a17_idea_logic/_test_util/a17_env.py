@@ -1,6 +1,6 @@
-from src.a00_data_toolbox.file_toolbox import delete_dir
 from os import makedirs as os_makedirs
 from pytest import fixture as pytest_fixture
+from src.a00_data_toolbox.file_toolbox import delete_dir
 
 
 def src_module_dir() -> str:

@@ -1,20 +1,20 @@
+from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import create_insert_query
 from src.a10_bud_calc.bud_calc_config import get_bud_calc_dimen_args
-from src.a18_etl_toolbox.tran_sqlstrs import create_job_tables
 from src.a18_etl_toolbox.db_obj_bud_tool import (
-    create_budmemb_metrics_insert_sqlstr,
     create_budacct_metrics_insert_sqlstr,
-    create_budgrou_metrics_insert_sqlstr,
     create_budawar_metrics_insert_sqlstr,
+    create_budconc_metrics_insert_sqlstr,
     create_budfact_metrics_insert_sqlstr,
+    create_budgrou_metrics_insert_sqlstr,
     create_budheal_metrics_insert_sqlstr,
+    create_budlabo_metrics_insert_sqlstr,
+    create_budmemb_metrics_insert_sqlstr,
     create_budprem_metrics_insert_sqlstr,
     create_budreas_metrics_insert_sqlstr,
-    create_budlabo_metrics_insert_sqlstr,
-    create_budconc_metrics_insert_sqlstr,
     create_budunit_metrics_insert_sqlstr,
 )
-from sqlite3 import connect as sqlite3_connect
+from src.a18_etl_toolbox.tran_sqlstrs import create_job_tables
 
 
 def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
@@ -198,7 +198,7 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
     x_rconcept_active_requisite = 3
     x__task = 4
     x__status = 5
-    x__rcontext_concept_active_value = 6
+    x__rconcept_active_value = 6
     values_dict = {
         "fisc_label": x_fisc_label,
         "owner_name": x_owner_name,
@@ -207,7 +207,7 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
         "rconcept_active_requisite": x_rconcept_active_requisite,
         "_task": x__task,
         "_status": x__status,
-        "_rcontext_concept_active_value": x__rcontext_concept_active_value,
+        "_rconcept_active_value": x__rconcept_active_value,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())

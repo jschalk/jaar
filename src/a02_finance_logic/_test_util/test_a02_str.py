@@ -7,13 +7,13 @@ from src.a02_finance_logic._test_util.a02_str import (
     deal_acct_nets_str,
     deal_time_str,
     fund_coin_str,
+    fund_pool_str,
     magnitude_str,
     offi_time_str,
     owner_name_str,
     penny_str,
     quota_str,
     tran_time_str,
-    world_id_str,
 )
 
 
@@ -22,11 +22,11 @@ def test_str_functions_ReturnsObj():
     assert bridge_str() == "bridge"
     assert celldepth_str() == "celldepth"
     assert deal_time_str() == "deal_time"
+    assert fund_pool_str() == "fund_pool"
     assert tran_time_str() == "tran_time"
     assert quota_str() == "quota"
     assert magnitude_str() == "magnitude"
     assert deal_acct_nets_str() == "deal_acct_nets"
-    assert world_id_str() == "world_id"
     assert acct_name_str() == "acct_name"
     assert owner_name_str() == "owner_name"
     assert offi_time_str() == "offi_time"

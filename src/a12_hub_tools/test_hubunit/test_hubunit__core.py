@@ -1,23 +1,23 @@
+from pytest import raises as pytest_raises
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a01_term_logic.way import (
-    default_bridge_if_None,
-    create_way_from_labels,
     create_way,
-    get_default_fisc_label as root_label,
+    create_way_from_labels,
+    default_bridge_if_None,
 )
+from src.a01_term_logic.way import get_default_fisc_label as root_label
 from src.a02_finance_logic.finance_config import (
+    default_fund_coin_if_None,
     default_RespectBit_if_None,
     filter_penny,
-    default_fund_coin_if_None,
     validate_fund_pool,
 )
-from src.a12_hub_tools.hub_path import create_owner_dir_path
-from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop, get_keep_path
 from src.a12_hub_tools._test_util.a12_env import (
-    get_module_temp_dir,
     env_dir_setup_cleanup,
+    get_module_temp_dir,
 )
-from pytest import raises as pytest_raises
+from src.a12_hub_tools.hub_path import create_owner_dir_path
+from src.a12_hub_tools.hubunit import HubUnit, get_keep_path, hubunit_shop
 
 
 def test_HubUnit_Exists():

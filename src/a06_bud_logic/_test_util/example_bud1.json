@@ -604,16 +604,16 @@
                                         },
                                         "rcontext": ";accord45;day_minute;"
                                     },
-                                    ";accord45;year_month;": {
+                                    ";accord45;yr_month;": {
                                         "premises": {
-                                            ";accord45;year_month;September": {
+                                            ";accord45;yr_month;September": {
                                                 "pdivisor": 12,
                                                 "pnigh": 9,
                                                 "popen": 9,
-                                                "pstate": ";accord45;year_month;September"
+                                                "pstate": ";accord45;yr_month;September"
                                             }
                                         },
-                                        "rcontext": ";accord45;year_month;"
+                                        "rcontext": ";accord45;yr_month;"
                                     }
                                 }
                             },
@@ -635,16 +635,16 @@
                                                 },
                                                 "rcontext": ";accord45;day_minute;"
                                             },
-                                            ";accord45;year_month;": {
+                                            ";accord45;yr_month;": {
                                                 "premises": {
-                                                    ";accord45;year_month;September": {
+                                                    ";accord45;yr_month;September": {
                                                         "pdivisor": 12,
                                                         "pnigh": 9,
                                                         "popen": 9,
-                                                        "pstate": ";accord45;year_month;September"
+                                                        "pstate": ";accord45;yr_month;September"
                                                     }
                                                 },
-                                                "rcontext": ";accord45;year_month;"
+                                                "rcontext": ";accord45;yr_month;"
                                             }
                                         }
                                     }
@@ -670,16 +670,16 @@
                                                 },
                                                 "rcontext": ";accord45;day_minute;"
                                             },
-                                            ";accord45;year_month;": {
+                                            ";accord45;yr_month;": {
                                                 "premises": {
-                                                    ";accord45;year_month;September": {
+                                                    ";accord45;yr_month;September": {
                                                         "pdivisor": 12,
                                                         "pnigh": 9,
                                                         "popen": 9,
-                                                        "pstate": ";accord45;year_month;September"
+                                                        "pstate": ";accord45;yr_month;September"
                                                     }
                                                 },
-                                                "rcontext": ";accord45;year_month;"
+                                                "rcontext": ";accord45;yr_month;"
                                             }
                                         }
                                     }
@@ -707,16 +707,16 @@
                                                 },
                                                 "rcontext": ";accord45;day_minute;"
                                             },
-                                            ";accord45;year_month;": {
+                                            ";accord45;yr_month;": {
                                                 "premises": {
-                                                    ";accord45;year_month;September": {
+                                                    ";accord45;yr_month;September": {
                                                         "pdivisor": 12,
                                                         "pnigh": 9,
                                                         "popen": 9,
-                                                        "pstate": ";accord45;year_month;September"
+                                                        "pstate": ";accord45;yr_month;September"
                                                     }
                                                 },
-                                                "rcontext": ";accord45;year_month;"
+                                                "rcontext": ";accord45;yr_month;"
                                             }
                                         }
                                     }
@@ -757,16 +757,16 @@
                                                 },
                                                 "rcontext": ";accord45;day_minute;"
                                             },
-                                            ";accord45;year_month;": {
+                                            ";accord45;yr_month;": {
                                                 "premises": {
-                                                    ";accord45;year_month;September": {
+                                                    ";accord45;yr_month;September": {
                                                         "pdivisor": 12,
                                                         "pnigh": 9,
                                                         "popen": 9,
-                                                        "pstate": ";accord45;year_month;September"
+                                                        "pstate": ";accord45;yr_month;September"
                                                     }
                                                 },
-                                                "rcontext": ";accord45;year_month;"
+                                                "rcontext": ";accord45;yr_month;"
                                             }
                                         }
                                     }
@@ -794,16 +794,16 @@
                                                 },
                                                 "rcontext": ";accord45;day_minute;"
                                             },
-                                            ";accord45;year_month;": {
+                                            ";accord45;yr_month;": {
                                                 "premises": {
-                                                    ";accord45;year_month;September": {
+                                                    ";accord45;yr_month;September": {
                                                         "pdivisor": 12,
                                                         "pnigh": 9,
                                                         "popen": 9,
-                                                        "pstate": ";accord45;year_month;September"
+                                                        "pstate": ";accord45;yr_month;September"
                                                     }
                                                 },
-                                                "rcontext": ";accord45;year_month;"
+                                                "rcontext": ";accord45;yr_month;"
                                             }
                                         }
                                     }
@@ -831,16 +831,16 @@
                                                 },
                                                 "rcontext": ";accord45;day_minute;"
                                             },
-                                            ";accord45;year_month;": {
+                                            ";accord45;yr_month;": {
                                                 "premises": {
-                                                    ";accord45;year_month;September": {
+                                                    ";accord45;yr_month;September": {
                                                         "pdivisor": 12,
                                                         "pnigh": 9,
                                                         "popen": 9,
-                                                        "pstate": ";accord45;year_month;September"
+                                                        "pstate": ";accord45;yr_month;September"
                                                     }
                                                 },
-                                                "rcontext": ";accord45;year_month;"
+                                                "rcontext": ";accord45;yr_month;"
                                             }
                                         }
                                     }
@@ -866,16 +866,16 @@
                                                 },
                                                 "rcontext": ";accord45;day_minute;"
                                             },
-                                            ";accord45;year_month;": {
+                                            ";accord45;yr_month;": {
                                                 "premises": {
-                                                    ";accord45;year_month;September": {
+                                                    ";accord45;yr_month;September": {
                                                         "pdivisor": 12,
                                                         "pnigh": 9,
                                                         "popen": 9,
-                                                        "pstate": ";accord45;year_month;September"
+                                                        "pstate": ";accord45;yr_month;September"
                                                     }
                                                 },
-                                                "rcontext": ";accord45;year_month;"
+                                                "rcontext": ";accord45;yr_month;"
                                             }
                                         }
                                     }
@@ -891,7 +891,7 @@
                     },
                     "IT DEPT": {
                         "_kids": {
-                            "IT DEPT off-hours responsiblities": {
+                            "IT DEPT off-hrs responsiblities": {
                                 "_kids": {
                                     "check ETLs ran correctly": {
                                         "_kids": {
@@ -1009,7 +1009,7 @@
                                     }
                                 },
                                 "_uid": 136,
-                                "concept_label": "IT DEPT off-hours responsiblities",
+                                "concept_label": "IT DEPT off-hrs responsiblities",
                                 "mass": 1,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
@@ -1024,7 +1024,7 @@
                                     }
                                 }
                             },
-                            "IT DEPT regular hours responsiblities": {
+                            "IT DEPT regular hrs responsiblities": {
                                 "_kids": {
                                     "Add to Azure DevOps": {
                                         "_uid": 156,
@@ -1218,7 +1218,7 @@
                                     }
                                 },
                                 "_uid": 133,
-                                "concept_label": "IT DEPT regular hours responsiblities",
+                                "concept_label": "IT DEPT regular hrs responsiblities",
                                 "mass": 1,
                                 "pledge": true,
                                 "reasonunits": {
@@ -1560,16 +1560,16 @@
                                 },
                                 "rcontext": ";accord45;day_minute;"
                             },
-                            ";accord45;year_month;": {
+                            ";accord45;yr_month;": {
                                 "premises": {
-                                    ";accord45;year_month;": {
+                                    ";accord45;yr_month;": {
                                         "pdivisor": 3,
                                         "pnigh": 0,
                                         "popen": 0,
-                                        "pstate": ";accord45;year_month;"
+                                        "pstate": ";accord45;yr_month;"
                                     }
                                 },
-                                "rcontext": ";accord45;year_month;"
+                                "rcontext": ";accord45;yr_month;"
                             }
                         }
                     },
@@ -1622,13 +1622,13 @@
                                         },
                                         "rcontext": ";accord45;Nation-States;"
                                     },
-                                    ";accord45;weekdays;": {
+                                    ";accord45;wkdays;": {
                                         "premises": {
-                                            ";accord45;weekdays;Sunday": {
-                                                "pstate": ";accord45;weekdays;Sunday"
+                                            ";accord45;wkdays;Sunday": {
+                                                "pstate": ";accord45;wkdays;Sunday"
                                             }
                                         },
-                                        "rcontext": ";accord45;weekdays;"
+                                        "rcontext": ";accord45;wkdays;"
                                     }
                                 }
                             },
@@ -1689,16 +1689,16 @@
                                         },
                                         "rcontext": ";accord45;Nation-States;"
                                     },
-                                    ";accord45;year_month;": {
+                                    ";accord45;yr_month;": {
                                         "premises": {
-                                            ";accord45;year_month;": {
+                                            ";accord45;yr_month;": {
                                                 "pdivisor": 3,
                                                 "pnigh": 0,
                                                 "popen": 0,
-                                                "pstate": ";accord45;year_month;"
+                                                "pstate": ";accord45;yr_month;"
                                             }
                                         },
-                                        "rcontext": ";accord45;year_month;"
+                                        "rcontext": ";accord45;yr_month;"
                                     }
                                 }
                             },
@@ -1766,13 +1766,13 @@
                                         },
                                         "rcontext": ";accord45;Nation-States;"
                                     },
-                                    ";accord45;weekdays;": {
+                                    ";accord45;wkdays;": {
                                         "premises": {
-                                            ";accord45;weekdays;Monday": {
-                                                "pstate": ";accord45;weekdays;Monday"
+                                            ";accord45;wkdays;Monday": {
+                                                "pstate": ";accord45;wkdays;Monday"
                                             }
                                         },
-                                        "rcontext": ";accord45;weekdays;"
+                                        "rcontext": ";accord45;wkdays;"
                                     }
                                 }
                             },
@@ -1807,13 +1807,13 @@
                                         },
                                         "rcontext": ";accord45;Nation-States;"
                                     },
-                                    ";accord45;weekdays;": {
+                                    ";accord45;wkdays;": {
                                         "premises": {
-                                            ";accord45;weekdays;Monday": {
-                                                "pstate": ";accord45;weekdays;Monday"
+                                            ";accord45;wkdays;Monday": {
+                                                "pstate": ";accord45;wkdays;Monday"
                                             }
                                         },
-                                        "rcontext": ";accord45;weekdays;"
+                                        "rcontext": ";accord45;wkdays;"
                                     }
                                 }
                             },
@@ -1830,16 +1830,16 @@
                                 "mass": 1,
                                 "pledge": true,
                                 "reasonunits": {
-                                    ";accord45;ced_week;": {
+                                    ";accord45;ced_wk;": {
                                         "premises": {
-                                            ";accord45;ced_week;": {
+                                            ";accord45;ced_wk;": {
                                                 "pdivisor": 6,
                                                 "pnigh": 1,
                                                 "popen": 1,
-                                                "pstate": ";accord45;ced_week;"
+                                                "pstate": ";accord45;ced_wk;"
                                             }
                                         },
-                                        "rcontext": ";accord45;ced_week;"
+                                        "rcontext": ";accord45;ced_wk;"
                                     },
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -1859,13 +1859,13 @@
                                         },
                                         "rcontext": ";accord45;Nation-States;"
                                     },
-                                    ";accord45;weekdays;": {
+                                    ";accord45;wkdays;": {
                                         "premises": {
-                                            ";accord45;weekdays;Monday": {
-                                                "pstate": ";accord45;weekdays;Monday"
+                                            ";accord45;wkdays;Monday": {
+                                                "pstate": ";accord45;wkdays;Monday"
                                             }
                                         },
-                                        "rcontext": ";accord45;weekdays;"
+                                        "rcontext": ";accord45;wkdays;"
                                     }
                                 }
                             },
@@ -1900,13 +1900,13 @@
                                         },
                                         "rcontext": ";accord45;Nation-States;"
                                     },
-                                    ";accord45;weekdays;": {
+                                    ";accord45;wkdays;": {
                                         "premises": {
-                                            ";accord45;weekdays;Monday": {
-                                                "pstate": ";accord45;weekdays;Monday"
+                                            ";accord45;wkdays;Monday": {
+                                                "pstate": ";accord45;wkdays;Monday"
                                             }
                                         },
-                                        "rcontext": ";accord45;weekdays;"
+                                        "rcontext": ";accord45;wkdays;"
                                     }
                                 }
                             },
@@ -1933,13 +1933,13 @@
                                         },
                                         "rcontext": ";accord45;day_minute;"
                                     },
-                                    ";accord45;month_week;": {
+                                    ";accord45;month_wk;": {
                                         "premises": {
-                                            ";accord45;month_week;1st week": {
-                                                "pstate": ";accord45;month_week;1st week"
+                                            ";accord45;month_wk;1st wk": {
+                                                "pstate": ";accord45;month_wk;1st wk"
                                             }
                                         },
-                                        "rcontext": ";accord45;month_week;"
+                                        "rcontext": ";accord45;month_wk;"
                                     },
                                     ";accord45;Nation-States;": {
                                         "premises": {
@@ -1949,16 +1949,16 @@
                                         },
                                         "rcontext": ";accord45;Nation-States;"
                                     },
-                                    ";accord45;year_month;": {
+                                    ";accord45;yr_month;": {
                                         "premises": {
-                                            ";accord45;year_month;": {
+                                            ";accord45;yr_month;": {
                                                 "pdivisor": 2,
                                                 "pnigh": 0,
                                                 "popen": 0,
-                                                "pstate": ";accord45;year_month;"
+                                                "pstate": ";accord45;yr_month;"
                                             }
                                         },
-                                        "rcontext": ";accord45;year_month;"
+                                        "rcontext": ";accord45;yr_month;"
                                     }
                                 }
                             },
@@ -1993,13 +1993,13 @@
                                         },
                                         "rcontext": ";accord45;Nation-States;"
                                     },
-                                    ";accord45;weekdays;": {
+                                    ";accord45;wkdays;": {
                                         "premises": {
-                                            ";accord45;weekdays;Friday": {
-                                                "pstate": ";accord45;weekdays;Friday"
+                                            ";accord45;wkdays;Friday": {
+                                                "pstate": ";accord45;wkdays;Friday"
                                             }
                                         },
-                                        "rcontext": ";accord45;weekdays;"
+                                        "rcontext": ";accord45;wkdays;"
                                     }
                                 }
                             },
@@ -2034,13 +2034,13 @@
                                         },
                                         "rcontext": ";accord45;Nation-States;"
                                     },
-                                    ";accord45;weekdays;": {
+                                    ";accord45;wkdays;": {
                                         "premises": {
-                                            ";accord45;weekdays;Friday": {
-                                                "pstate": ";accord45;weekdays;Friday"
+                                            ";accord45;wkdays;Friday": {
+                                                "pstate": ";accord45;wkdays;Friday"
                                             }
                                         },
-                                        "rcontext": ";accord45;weekdays;"
+                                        "rcontext": ";accord45;wkdays;"
                                     }
                                 }
                             },
@@ -2075,13 +2075,13 @@
                                         },
                                         "rcontext": ";accord45;Nation-States;"
                                     },
-                                    ";accord45;weekdays;": {
+                                    ";accord45;wkdays;": {
                                         "premises": {
-                                            ";accord45;weekdays;Monday": {
-                                                "pstate": ";accord45;weekdays;Monday"
+                                            ";accord45;wkdays;Monday": {
+                                                "pstate": ";accord45;wkdays;Monday"
                                             }
                                         },
-                                        "rcontext": ";accord45;weekdays;"
+                                        "rcontext": ";accord45;wkdays;"
                                     }
                                 }
                             },
@@ -2116,13 +2116,13 @@
                                         },
                                         "rcontext": ";accord45;Nation-States;"
                                     },
-                                    ";accord45;weekdays;": {
+                                    ";accord45;wkdays;": {
                                         "premises": {
-                                            ";accord45;weekdays;Saturday": {
-                                                "pstate": ";accord45;weekdays;Saturday"
+                                            ";accord45;wkdays;Saturday": {
+                                                "pstate": ";accord45;wkdays;Saturday"
                                             }
                                         },
-                                        "rcontext": ";accord45;weekdays;"
+                                        "rcontext": ";accord45;wkdays;"
                                     }
                                 }
                             },
@@ -2157,13 +2157,13 @@
                                         },
                                         "rcontext": ";accord45;Nation-States;"
                                     },
-                                    ";accord45;weekdays;": {
+                                    ";accord45;wkdays;": {
                                         "premises": {
-                                            ";accord45;weekdays;Wednesday": {
-                                                "pstate": ";accord45;weekdays;Wednesday"
+                                            ";accord45;wkdays;Wednesday": {
+                                                "pstate": ";accord45;wkdays;Wednesday"
                                             }
                                         },
-                                        "rcontext": ";accord45;weekdays;"
+                                        "rcontext": ";accord45;wkdays;"
                                     }
                                 }
                             },
@@ -2256,13 +2256,13 @@
                                         },
                                         "rcontext": ";accord45;Nation-States;"
                                     },
-                                    ";accord45;weekdays;": {
+                                    ";accord45;wkdays;": {
                                         "premises": {
-                                            ";accord45;weekdays;Tuesday": {
-                                                "pstate": ";accord45;weekdays;Tuesday"
+                                            ";accord45;wkdays;Tuesday": {
+                                                "pstate": ";accord45;wkdays;Tuesday"
                                             }
                                         },
-                                        "rcontext": ";accord45;weekdays;"
+                                        "rcontext": ";accord45;wkdays;"
                                     }
                                 }
                             },
@@ -2297,13 +2297,13 @@
                                         },
                                         "rcontext": ";accord45;Nation-States;"
                                     },
-                                    ";accord45;weekdays;": {
+                                    ";accord45;wkdays;": {
                                         "premises": {
-                                            ";accord45;weekdays;Friday": {
-                                                "pstate": ";accord45;weekdays;Friday"
+                                            ";accord45;wkdays;Friday": {
+                                                "pstate": ";accord45;wkdays;Friday"
                                             }
                                         },
-                                        "rcontext": ";accord45;weekdays;"
+                                        "rcontext": ";accord45;wkdays;"
                                     }
                                 }
                             },
@@ -2338,13 +2338,13 @@
                                         },
                                         "rcontext": ";accord45;Nation-States;"
                                     },
-                                    ";accord45;weekdays;": {
+                                    ";accord45;wkdays;": {
                                         "premises": {
-                                            ";accord45;weekdays;Monday": {
-                                                "pstate": ";accord45;weekdays;Monday"
+                                            ";accord45;wkdays;Monday": {
+                                                "pstate": ";accord45;wkdays;Monday"
                                             }
                                         },
-                                        "rcontext": ";accord45;weekdays;"
+                                        "rcontext": ";accord45;wkdays;"
                                     }
                                 }
                             },
@@ -2379,13 +2379,13 @@
                                         },
                                         "rcontext": ";accord45;Nation-States;"
                                     },
-                                    ";accord45;weekdays;": {
+                                    ";accord45;wkdays;": {
                                         "premises": {
-                                            ";accord45;weekdays;Thursday": {
-                                                "pstate": ";accord45;weekdays;Thursday"
+                                            ";accord45;wkdays;Thursday": {
+                                                "pstate": ";accord45;wkdays;Thursday"
                                             }
                                         },
-                                        "rcontext": ";accord45;weekdays;"
+                                        "rcontext": ";accord45;wkdays;"
                                     }
                                 }
                             },
@@ -2420,13 +2420,13 @@
                                         },
                                         "rcontext": ";accord45;Nation-States;"
                                     },
-                                    ";accord45;weekdays;": {
+                                    ";accord45;wkdays;": {
                                         "premises": {
-                                            ";accord45;weekdays;Monday": {
-                                                "pstate": ";accord45;weekdays;Monday"
+                                            ";accord45;wkdays;Monday": {
+                                                "pstate": ";accord45;wkdays;Monday"
                                             }
                                         },
-                                        "rcontext": ";accord45;weekdays;"
+                                        "rcontext": ";accord45;wkdays;"
                                     }
                                 }
                             },
@@ -2461,13 +2461,13 @@
                                         },
                                         "rcontext": ";accord45;Nation-States;"
                                     },
-                                    ";accord45;weekdays;": {
+                                    ";accord45;wkdays;": {
                                         "premises": {
-                                            ";accord45;weekdays;Monday": {
-                                                "pstate": ";accord45;weekdays;Monday"
+                                            ";accord45;wkdays;Monday": {
+                                                "pstate": ";accord45;wkdays;Monday"
                                             }
                                         },
-                                        "rcontext": ";accord45;weekdays;"
+                                        "rcontext": ";accord45;wkdays;"
                                     }
                                 }
                             }
@@ -2513,7 +2513,7 @@
                                     }
                                 }
                             },
-                            "check protein for week is adequate": {
+                            "check protein for wk is adequate": {
                                 "_uid": 61,
                                 "awardlinks": {
                                     ";Family": {
@@ -2522,7 +2522,7 @@
                                         "take_force": 1.0
                                     }
                                 },
-                                "concept_label": "check protein for week is adequate",
+                                "concept_label": "check protein for wk is adequate",
                                 "mass": 1,
                                 "pledge": true,
                                 "reasonunits": {
@@ -2561,16 +2561,16 @@
                                         },
                                         "rcontext": ";accord45;day_minute;"
                                     },
-                                    ";accord45;year_month;": {
+                                    ";accord45;yr_month;": {
                                         "premises": {
-                                            ";accord45;year_month;": {
+                                            ";accord45;yr_month;": {
                                                 "pdivisor": 3,
                                                 "pnigh": 0,
                                                 "popen": 0,
-                                                "pstate": ";accord45;year_month;"
+                                                "pstate": ";accord45;yr_month;"
                                             }
                                         },
-                                        "rcontext": ";accord45;year_month;"
+                                        "rcontext": ";accord45;yr_month;"
                                     }
                                 }
                             },
@@ -2597,13 +2597,13 @@
                                         },
                                         "rcontext": ";accord45;day_minute;"
                                     },
-                                    ";accord45;weekdays;": {
+                                    ";accord45;wkdays;": {
                                         "premises": {
-                                            ";accord45;weekdays;Monday": {
-                                                "pstate": ";accord45;weekdays;Monday"
+                                            ";accord45;wkdays;Monday": {
+                                                "pstate": ";accord45;wkdays;Monday"
                                             }
                                         },
-                                        "rcontext": ";accord45;weekdays;"
+                                        "rcontext": ";accord45;wkdays;"
                                     }
                                 }
                             },
@@ -2717,16 +2717,16 @@
                                         },
                                         "rcontext": ";accord45;day_minute;"
                                     },
-                                    ";accord45;year_month;": {
+                                    ";accord45;yr_month;": {
                                         "premises": {
-                                            ";accord45;year_month;": {
+                                            ";accord45;yr_month;": {
                                                 "pdivisor": 3,
                                                 "pnigh": 0,
                                                 "popen": 0,
-                                                "pstate": ";accord45;year_month;"
+                                                "pstate": ";accord45;yr_month;"
                                             }
                                         },
-                                        "rcontext": ";accord45;year_month;"
+                                        "rcontext": ";accord45;yr_month;"
                                     }
                                 }
                             },
@@ -2755,13 +2755,13 @@
                                                 },
                                                 "rcontext": ";accord45;day_minute;"
                                             },
-                                            ";accord45;weekdays;": {
+                                            ";accord45;wkdays;": {
                                                 "premises": {
-                                                    ";accord45;weekdays;Saturday": {
-                                                        "pstate": ";accord45;weekdays;Saturday"
+                                                    ";accord45;wkdays;Saturday": {
+                                                        "pstate": ";accord45;wkdays;Saturday"
                                                     }
                                                 },
-                                                "rcontext": ";accord45;weekdays;"
+                                                "rcontext": ";accord45;wkdays;"
                                             }
                                         }
                                     },
@@ -2803,13 +2803,13 @@
                                                 },
                                                 "rcontext": ";accord45;day_minute;"
                                             },
-                                            ";accord45;weekdays;": {
+                                            ";accord45;wkdays;": {
                                                 "premises": {
-                                                    ";accord45;weekdays;Monday": {
-                                                        "pstate": ";accord45;weekdays;Monday"
+                                                    ";accord45;wkdays;Monday": {
+                                                        "pstate": ";accord45;wkdays;Monday"
                                                     }
                                                 },
-                                                "rcontext": ";accord45;weekdays;"
+                                                "rcontext": ";accord45;wkdays;"
                                             }
                                         }
                                     },
@@ -2828,13 +2828,13 @@
                                                 },
                                                 "rcontext": ";accord45;day_minute;"
                                             },
-                                            ";accord45;weekdays;": {
+                                            ";accord45;wkdays;": {
                                                 "premises": {
-                                                    ";accord45;weekdays;Friday": {
-                                                        "pstate": ";accord45;weekdays;Friday"
+                                                    ";accord45;wkdays;Friday": {
+                                                        "pstate": ";accord45;wkdays;Friday"
                                                     }
                                                 },
-                                                "rcontext": ";accord45;weekdays;"
+                                                "rcontext": ";accord45;wkdays;"
                                             }
                                         }
                                     },
@@ -2861,13 +2861,13 @@
                                                 },
                                                 "rcontext": ";accord45;day_minute;"
                                             },
-                                            ";accord45;weekdays;": {
+                                            ";accord45;wkdays;": {
                                                 "premises": {
-                                                    ";accord45;weekdays;Wednesday": {
-                                                        "pstate": ";accord45;weekdays;Wednesday"
+                                                    ";accord45;wkdays;Wednesday": {
+                                                        "pstate": ";accord45;wkdays;Wednesday"
                                                     }
                                                 },
-                                                "rcontext": ";accord45;weekdays;"
+                                                "rcontext": ";accord45;wkdays;"
                                             }
                                         }
                                     },
@@ -2884,13 +2884,13 @@
                                         "concept_label": "rest",
                                         "mass": 1,
                                         "reasonunits": {
-                                            ";accord45;weekdays;": {
+                                            ";accord45;wkdays;": {
                                                 "premises": {
-                                                    ";accord45;weekdays;Sunday": {
-                                                        "pstate": ";accord45;weekdays;Sunday"
+                                                    ";accord45;wkdays;Sunday": {
+                                                        "pstate": ";accord45;wkdays;Sunday"
                                                     }
                                                 },
-                                                "rcontext": ";accord45;weekdays;"
+                                                "rcontext": ";accord45;wkdays;"
                                             }
                                         }
                                     },
@@ -2932,13 +2932,13 @@
                                                 },
                                                 "rcontext": ";accord45;day_minute;"
                                             },
-                                            ";accord45;weekdays;": {
+                                            ";accord45;wkdays;": {
                                                 "premises": {
-                                                    ";accord45;weekdays;Tuesday": {
-                                                        "pstate": ";accord45;weekdays;Tuesday"
+                                                    ";accord45;wkdays;Tuesday": {
+                                                        "pstate": ";accord45;wkdays;Tuesday"
                                                     }
                                                 },
-                                                "rcontext": ";accord45;weekdays;"
+                                                "rcontext": ";accord45;wkdays;"
                                             }
                                         }
                                     },
@@ -2965,13 +2965,13 @@
                                                 },
                                                 "rcontext": ";accord45;day_minute;"
                                             },
-                                            ";accord45;weekdays;": {
+                                            ";accord45;wkdays;": {
                                                 "premises": {
-                                                    ";accord45;weekdays;Thursday": {
-                                                        "pstate": ";accord45;weekdays;Thursday"
+                                                    ";accord45;wkdays;Thursday": {
+                                                        "pstate": ";accord45;wkdays;Thursday"
                                                     }
                                                 },
-                                                "rcontext": ";accord45;weekdays;"
+                                                "rcontext": ";accord45;wkdays;"
                                             }
                                         }
                                     }
@@ -3028,13 +3028,13 @@
                                         },
                                         "rcontext": ";accord45;day_minute;"
                                     },
-                                    ";accord45;weekdays;": {
+                                    ";accord45;wkdays;": {
                                         "premises": {
-                                            ";accord45;weekdays;Monday": {
-                                                "pstate": ";accord45;weekdays;Monday"
+                                            ";accord45;wkdays;Monday": {
+                                                "pstate": ";accord45;wkdays;Monday"
                                             }
                                         },
-                                        "rcontext": ";accord45;weekdays;"
+                                        "rcontext": ";accord45;wkdays;"
                                     }
                                 }
                             },
@@ -3086,13 +3086,13 @@
                                         },
                                         "rcontext": ";accord45;day_minute;"
                                     },
-                                    ";accord45;weekdays;": {
+                                    ";accord45;wkdays;": {
                                         "premises": {
-                                            ";accord45;weekdays;Monday": {
-                                                "pstate": ";accord45;weekdays;Monday"
+                                            ";accord45;wkdays;Monday": {
+                                                "pstate": ";accord45;wkdays;Monday"
                                             }
                                         },
-                                        "rcontext": ";accord45;weekdays;"
+                                        "rcontext": ";accord45;wkdays;"
                                     }
                                 }
                             }
@@ -3127,13 +3127,13 @@
                                         },
                                         "rcontext": ";accord45;day_minute;"
                                     },
-                                    ";accord45;month_week;": {
+                                    ";accord45;month_wk;": {
                                         "premises": {
-                                            ";accord45;month_week;1st week": {
-                                                "pstate": ";accord45;month_week;1st week"
+                                            ";accord45;month_wk;1st wk": {
+                                                "pstate": ";accord45;month_wk;1st wk"
                                             }
                                         },
-                                        "rcontext": ";accord45;month_week;"
+                                        "rcontext": ";accord45;month_wk;"
                                     }
                                 }
                             },
@@ -3160,13 +3160,13 @@
                                         },
                                         "rcontext": ";accord45;day_minute;"
                                     },
-                                    ";accord45;month_week;": {
+                                    ";accord45;month_wk;": {
                                         "premises": {
-                                            ";accord45;month_week;1st week": {
-                                                "pstate": ";accord45;month_week;1st week"
+                                            ";accord45;month_wk;1st wk": {
+                                                "pstate": ";accord45;month_wk;1st wk"
                                             }
                                         },
-                                        "rcontext": ";accord45;month_week;"
+                                        "rcontext": ";accord45;month_wk;"
                                     }
                                 }
                             },
@@ -3193,17 +3193,17 @@
                                         },
                                         "rcontext": ";accord45;day_minute;"
                                     },
-                                    ";accord45;month_week;": {
+                                    ";accord45;month_wk;": {
                                         "premises": {
-                                            ";accord45;month_week;1st week": {
-                                                "pstate": ";accord45;month_week;1st week"
+                                            ";accord45;month_wk;1st wk": {
+                                                "pstate": ";accord45;month_wk;1st wk"
                                             }
                                         },
-                                        "rcontext": ";accord45;month_week;"
+                                        "rcontext": ";accord45;month_wk;"
                                     }
                                 }
                             },
-                            "set resturant bucks for the week": {
+                            "set resturant bucks for the wk": {
                                 "_uid": 75,
                                 "awardlinks": {
                                     ";Family": {
@@ -3212,7 +3212,7 @@
                                         "take_force": 1.0
                                     }
                                 },
-                                "concept_label": "set resturant bucks for the week",
+                                "concept_label": "set resturant bucks for the wk",
                                 "mass": 1,
                                 "pledge": true,
                                 "reasonunits": {
@@ -3226,13 +3226,13 @@
                                         },
                                         "rcontext": ";accord45;day_minute;"
                                     },
-                                    ";accord45;weekdays;": {
+                                    ";accord45;wkdays;": {
                                         "premises": {
-                                            ";accord45;weekdays;Tuesday": {
-                                                "pstate": ";accord45;weekdays;Tuesday"
+                                            ";accord45;wkdays;Tuesday": {
+                                                "pstate": ";accord45;wkdays;Tuesday"
                                             }
                                         },
-                                        "rcontext": ";accord45;weekdays;"
+                                        "rcontext": ";accord45;wkdays;"
                                     }
                                 }
                             }
@@ -3393,16 +3393,16 @@
                                 "mass": 1,
                                 "pledge": true,
                                 "reasonunits": {
-                                    ";accord45;ced_week;": {
+                                    ";accord45;ced_wk;": {
                                         "premises": {
-                                            ";accord45;ced_week;": {
+                                            ";accord45;ced_wk;": {
                                                 "pdivisor": 2,
                                                 "pnigh": 1,
                                                 "popen": 1,
-                                                "pstate": ";accord45;ced_week;"
+                                                "pstate": ";accord45;ced_wk;"
                                             }
                                         },
-                                        "rcontext": ";accord45;ced_week;"
+                                        "rcontext": ";accord45;ced_wk;"
                                     },
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -3422,13 +3422,13 @@
                                         },
                                         "rcontext": ";accord45;Nation-States;"
                                     },
-                                    ";accord45;weekdays;": {
+                                    ";accord45;wkdays;": {
                                         "premises": {
-                                            ";accord45;weekdays;Friday": {
-                                                "pstate": ";accord45;weekdays;Friday"
+                                            ";accord45;wkdays;Friday": {
+                                                "pstate": ";accord45;wkdays;Friday"
                                             }
                                         },
-                                        "rcontext": ";accord45;weekdays;"
+                                        "rcontext": ";accord45;wkdays;"
                                     }
                                 }
                             },
@@ -3463,16 +3463,16 @@
                                         },
                                         "rcontext": ";accord45;Nation-States;"
                                     },
-                                    ";accord45;year_month;": {
+                                    ";accord45;yr_month;": {
                                         "premises": {
-                                            ";accord45;year_month;": {
+                                            ";accord45;yr_month;": {
                                                 "pdivisor": 2,
                                                 "pnigh": 0,
                                                 "popen": 0,
-                                                "pstate": ";accord45;year_month;"
+                                                "pstate": ";accord45;yr_month;"
                                             }
                                         },
-                                        "rcontext": ";accord45;year_month;"
+                                        "rcontext": ";accord45;yr_month;"
                                     }
                                 }
                             },
@@ -3561,16 +3561,16 @@
                 "concept_label": "ced_day",
                 "mass": 40
             },
-            "ced_week": {
+            "ced_wk": {
                 "begin": 0,
                 "close": 110000,
-                "concept_label": "ced_week",
+                "concept_label": "ced_wk",
                 "mass": 40
             },
-            "ced_year": {
+            "ced_yr": {
                 "begin": 0,
                 "close": 2100,
-                "concept_label": "ced_year",
+                "concept_label": "ced_yr",
                 "mass": 40
             },
             "D&B": {
@@ -3649,13 +3649,13 @@
                                         },
                                         "rcontext": ";accord45;day_minute;"
                                     },
-                                    ";accord45;weekdays;": {
+                                    ";accord45;wkdays;": {
                                         "premises": {
-                                            ";accord45;weekdays;Monday": {
-                                                "pstate": ";accord45;weekdays;Monday"
+                                            ";accord45;wkdays;Monday": {
+                                                "pstate": ";accord45;wkdays;Monday"
                                             }
                                         },
-                                        "rcontext": ";accord45;weekdays;"
+                                        "rcontext": ";accord45;wkdays;"
                                     }
                                 }
                             }
@@ -3705,16 +3705,16 @@
                                         },
                                         "rcontext": ";accord45;Aaron Donald objects effected by him;"
                                     },
-                                    ";accord45;ced_week;": {
+                                    ";accord45;ced_wk;": {
                                         "premises": {
-                                            ";accord45;ced_week;": {
+                                            ";accord45;ced_wk;": {
                                                 "pdivisor": 2,
                                                 "pnigh": 0,
                                                 "popen": 0,
-                                                "pstate": ";accord45;ced_week;"
+                                                "pstate": ";accord45;ced_wk;"
                                             }
                                         },
-                                        "rcontext": ";accord45;ced_week;"
+                                        "rcontext": ";accord45;ced_wk;"
                                     },
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -3726,13 +3726,13 @@
                                         },
                                         "rcontext": ";accord45;day_minute;"
                                     },
-                                    ";accord45;weekdays;": {
+                                    ";accord45;wkdays;": {
                                         "premises": {
-                                            ";accord45;weekdays;Friday": {
-                                                "pstate": ";accord45;weekdays;Friday"
+                                            ";accord45;wkdays;Friday": {
+                                                "pstate": ";accord45;wkdays;Friday"
                                             }
                                         },
-                                        "rcontext": ";accord45;weekdays;"
+                                        "rcontext": ";accord45;wkdays;"
                                     }
                                 }
                             }
@@ -3841,16 +3841,16 @@
                                                 },
                                                 "rcontext": ";accord45;day_minute;"
                                             },
-                                            ";accord45;year_month;": {
+                                            ";accord45;yr_month;": {
                                                 "premises": {
-                                                    ";accord45;year_month;": {
+                                                    ";accord45;yr_month;": {
                                                         "pdivisor": 1,
                                                         "pnigh": 0,
                                                         "popen": 0,
-                                                        "pstate": ";accord45;year_month;"
+                                                        "pstate": ";accord45;yr_month;"
                                                     }
                                                 },
-                                                "rcontext": ";accord45;year_month;"
+                                                "rcontext": ";accord45;yr_month;"
                                             }
                                         }
                                     }
@@ -3914,13 +3914,13 @@
                                         },
                                         "rcontext": ";accord45;Aaron Donald objects effected by him;"
                                     },
-                                    ";accord45;weekdays;": {
+                                    ";accord45;wkdays;": {
                                         "premises": {
-                                            ";accord45;weekdays;Friday": {
-                                                "pstate": ";accord45;weekdays;Friday"
+                                            ";accord45;wkdays;Friday": {
+                                                "pstate": ";accord45;wkdays;Friday"
                                             }
                                         },
-                                        "rcontext": ";accord45;weekdays;"
+                                        "rcontext": ";accord45;wkdays;"
                                     }
                                 }
                             }
@@ -3971,10 +3971,10 @@
                     }
                 }
             },
-            "day_hour": {
+            "day_hr": {
                 "begin": 0,
                 "close": 23,
-                "concept_label": "day_hour",
+                "concept_label": "day_hr",
                 "mass": 40
             },
             "day_minute": {
@@ -3994,10 +3994,10 @@
             "Freelancing": {
                 "_is_expanded": false,
                 "_kids": {
-                    "Submit hours on website": {
+                    "Submit hrs on website": {
                         "_is_expanded": false,
                         "_uid": 104,
-                        "concept_label": "Submit hours on website",
+                        "concept_label": "Submit hrs on website",
                         "mass": 1,
                         "pledge": true,
                         "reasonunits": {
@@ -4011,13 +4011,13 @@
                                 },
                                 "rcontext": ";accord45;day_minute;"
                             },
-                            ";accord45;weekdays;": {
+                            ";accord45;wkdays;": {
                                 "premises": {
-                                    ";accord45;weekdays;Friday": {
-                                        "pstate": ";accord45;weekdays;Friday"
+                                    ";accord45;wkdays;Friday": {
+                                        "pstate": ";accord45;wkdays;Friday"
                                     }
                                 },
-                                "rcontext": ";accord45;weekdays;"
+                                "rcontext": ";accord45;wkdays;"
                             }
                         }
                     }
@@ -4079,34 +4079,34 @@
                 "concept_label": "month_day",
                 "mass": 40
             },
-            "month_week": {
+            "month_wk": {
                 "_kids": {
-                    "1st week": {
-                        "concept_label": "1st week",
+                    "1st wk": {
+                        "concept_label": "1st wk",
                         "gogo_want": 1,
                         "mass": 40,
                         "stop_want": 2
                     },
-                    "2nd week": {
-                        "concept_label": "2nd week",
+                    "2nd wk": {
+                        "concept_label": "2nd wk",
                         "gogo_want": 2,
                         "mass": 40,
                         "stop_want": 3
                     },
-                    "3rd week": {
-                        "concept_label": "3rd week",
+                    "3rd wk": {
+                        "concept_label": "3rd wk",
                         "gogo_want": 3,
                         "mass": 40,
                         "stop_want": 4
                     },
-                    "4th week": {
-                        "concept_label": "4th week",
+                    "4th wk": {
+                        "concept_label": "4th wk",
                         "gogo_want": 4,
                         "mass": 40,
                         "stop_want": 5
                     },
-                    "5th week": {
-                        "concept_label": "5th week",
+                    "5th wk": {
+                        "concept_label": "5th wk",
                         "gogo_want": 5,
                         "mass": 40,
                         "stop_want": 6
@@ -4114,7 +4114,7 @@
                 },
                 "begin": 1,
                 "close": 5,
-                "concept_label": "month_week",
+                "concept_label": "month_wk",
                 "mass": 40
             },
             "Moods": {
@@ -4481,7 +4481,7 @@
                 "concept_label": "WaterExistence",
                 "mass": 1
             },
-            "weekdays": {
+            "wkdays": {
                 "_kids": {
                     "Friday": {
                         "concept_label": "Friday",
@@ -4512,10 +4512,10 @@
                         "mass": 20
                     }
                 },
-                "concept_label": "weekdays",
+                "concept_label": "wkdays",
                 "mass": 40
             },
-            "year_month": {
+            "yr_month": {
                 "_kids": {
                     "April": {
                         "concept_label": "April",
@@ -4592,24 +4592,24 @@
                 },
                 "begin": 1,
                 "close": 13,
-                "concept_label": "year_month",
+                "concept_label": "yr_month",
                 "mass": 40
             },
-            "year_week": {
+            "yr_wk": {
                 "begin": 0,
                 "close": 52,
-                "concept_label": "year_week",
+                "concept_label": "yr_wk",
                 "mass": 40
             }
         },
         "_uid": 1,
         "concept_label": "accord45",
         "factunits": {
-            ";accord45;day_hour": {
-                "fcontext": ";accord45;day_hour",
+            ";accord45;day_hr": {
+                "fcontext": ";accord45;day_hr",
                 "fnigh": 23,
                 "fopen": 0,
-                "fstate": ";accord45;day_hour"
+                "fstate": ";accord45;day_hr"
             },
             ";accord45;day_minute;": {
                 "fcontext": ";accord45;day_minute;",

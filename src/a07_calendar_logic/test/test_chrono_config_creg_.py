@@ -1,18 +1,13 @@
+from datetime import datetime
 from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import reasonunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_bud_logic.bud import budunit_shop
-from src.a07_calendar_logic.chrono import (
-    get_year_way,
-    get_c400_constants,
-    get_timeline_min_difference,
-    get_min_from_dt,
-)
 from src.a07_calendar_logic._test_util.a07_str import (
     c100_str,
-    c400_leap_str,
     c400_clean_str,
+    c400_leap_str,
     day_str,
     days_str,
     hour_str,
@@ -22,32 +17,37 @@ from src.a07_calendar_logic._test_util.a07_str import (
     weeks_str,
     year_str,
     yr1_jan1_offset_str,
-    yr4_leap_str,
     yr4_clean_str,
+    yr4_leap_str,
 )
 from src.a07_calendar_logic._test_util.calendar_examples import (
     add_time_creg_conceptunit,
     add_time_five_conceptunit,
-    get_creg_min_from_dt,
-    get_five_min_from_dt,
-    get_cregtime_str,
-    get_sun,
-    get_mon,
-    get_tue,
-    get_wed,
-    get_thu,
-    get_fri,
-    get_sat,
     creg_hour_int_label,
-    cregtime_conceptunit,
-    creg_weekday_conceptunits,
     creg_str,
+    creg_weekday_conceptunits,
+    cregtime_conceptunit,
+    display_current_creg_five_min,
     five_str,
     get_creg_config,
+    get_creg_min_from_dt,
+    get_cregtime_str,
     get_five_config,
-    display_current_creg_five_min,
+    get_five_min_from_dt,
+    get_fri,
+    get_mon,
+    get_sat,
+    get_sun,
+    get_thu,
+    get_tue,
+    get_wed,
 )
-from datetime import datetime
+from src.a07_calendar_logic.chrono import (
+    get_c400_constants,
+    get_min_from_dt,
+    get_timeline_min_difference,
+    get_year_way,
+)
 
 
 def test_get_creg_config_ReturnsObj():

@@ -1,30 +1,29 @@
+from pytest import raises as pytest_raises
 from src.a04_reason_logic.reason_concept import (
-    factunit_shop,
-    factunit_shop,
     factheir_shop,
+    factunit_shop,
 )
 from src.a05_concept_logic.concept import conceptunit_shop
-from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._test_util.example_buds import (
     get_budunit_1Task_1CE0MinutesReason_1Fact,
 )
-from pytest import raises as pytest_raises
+from src.a06_bud_logic.bud import budunit_shop
 
 
 def test_BudUnit_settle_bud_ChangesConceptUnit_pledge_task():
     # ESTABLISH
     yao_bud = get_budunit_1Task_1CE0MinutesReason_1Fact()
-    hour_str = "hour"
-    hour_way = yao_bud.make_l1_way(hour_str)
+    hr_str = "hr"
+    hr_way = yao_bud.make_l1_way(hr_str)
 
     # WHEN
-    yao_bud.add_fact(fcontext=hour_way, fstate=hour_way, fopen=82, fnigh=85)
+    yao_bud.add_fact(fcontext=hr_way, fstate=hr_way, fopen=82, fnigh=85)
 
     # THEN
     mail_way = yao_bud.make_l1_way("obtain mail")
     concept_dict = yao_bud.get_concept_dict()
     mail_concept = concept_dict.get(mail_way)
-    yao_bud.add_fact(fcontext=hour_way, fstate=hour_way, fopen=82, fnigh=95)
+    yao_bud.add_fact(fcontext=hr_way, fstate=hr_way, fopen=82, fnigh=95)
     assert mail_concept.pledge is True
     assert mail_concept._task is False
 
@@ -233,9 +232,9 @@ def test_BudUnit_settle_bud_SetsTaskAsComplete():
     assert len(yao_bud.conceptroot._kids[mail_str].reasonunits) == 1
     concept_dict = yao_bud.get_concept_dict()
     mail_concept = concept_dict.get(yao_bud.make_l1_way(mail_str))
-    hour_str = "hour"
-    hour_way = yao_bud.make_l1_way(hour_str)
-    yao_bud.add_fact(hour_way, hour_way, fopen=82, fnigh=85)
+    hr_str = "hr"
+    hr_way = yao_bud.make_l1_way(hr_str)
+    yao_bud.add_fact(hr_way, hr_way, fopen=82, fnigh=85)
     assert mail_concept.pledge
     assert mail_concept._task
 

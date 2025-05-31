@@ -1,17 +1,17 @@
+from dataclasses import dataclass
+from pytest import raises as pytest_raises
 from src.a01_term_logic.way import WayTerm, to_way
 from src.a02_finance_logic.finance_config import default_fund_pool
 from src.a03_group_logic.acct import acctunit_shop
-from src.a03_group_logic.group import awardlink_shop, awardline_shop
-from src.a05_concept_logic.concept import conceptunit_shop, ConceptUnit
-from src.a06_bud_logic.bud import BudUnit, budunit_shop
+from src.a03_group_logic.group import awardline_shop, awardlink_shop
+from src.a05_concept_logic.concept import ConceptUnit, conceptunit_shop
 from src.a06_bud_logic._test_util.example_buds import (
     budunit_v001,
     budunit_v001_with_large_agenda,
     get_budunit_with7amCleanTableReason,
     get_budunit_with_4_levels,
 )
-from dataclasses import dataclass
-from pytest import raises as pytest_raises
+from src.a06_bud_logic.bud import BudUnit, budunit_shop
 
 
 def test_BudUnit_settle_bud_Sets_conceptunit_fund_onset_fund_cease_Scenario0():
@@ -19,15 +19,15 @@ def test_BudUnit_settle_bud_Sets_conceptunit_fund_onset_fund_cease_Scenario0():
     x_budunit = get_budunit_with7amCleanTableReason()
     casa_way = x_budunit.make_l1_way("casa")
     catt_way = x_budunit.make_l1_way("cat have dinner")
-    week_way = x_budunit.make_l1_way("weekdays")
+    wk_way = x_budunit.make_l1_way("wkdays")
     x_budunit.conceptroot._fund_onset = 13
     x_budunit.conceptroot._fund_cease = 13
     x_budunit.get_concept_obj(casa_way)._fund_onset = 13
     x_budunit.get_concept_obj(casa_way)._fund_cease = 13
     x_budunit.get_concept_obj(catt_way)._fund_onset = 13
     x_budunit.get_concept_obj(catt_way)._fund_cease = 13
-    x_budunit.get_concept_obj(week_way)._fund_onset = 13
-    x_budunit.get_concept_obj(week_way)._fund_cease = 13
+    x_budunit.get_concept_obj(wk_way)._fund_onset = 13
+    x_budunit.get_concept_obj(wk_way)._fund_cease = 13
 
     assert x_budunit.conceptroot._fund_onset == 13
     assert x_budunit.conceptroot._fund_cease == 13
@@ -35,8 +35,8 @@ def test_BudUnit_settle_bud_Sets_conceptunit_fund_onset_fund_cease_Scenario0():
     assert x_budunit.get_concept_obj(casa_way)._fund_cease == 13
     assert x_budunit.get_concept_obj(catt_way)._fund_onset == 13
     assert x_budunit.get_concept_obj(catt_way)._fund_cease == 13
-    assert x_budunit.get_concept_obj(week_way)._fund_onset == 13
-    assert x_budunit.get_concept_obj(week_way)._fund_cease == 13
+    assert x_budunit.get_concept_obj(wk_way)._fund_onset == 13
+    assert x_budunit.get_concept_obj(wk_way)._fund_cease == 13
 
     # WHEN
     x_budunit.settle_bud()
@@ -48,8 +48,8 @@ def test_BudUnit_settle_bud_Sets_conceptunit_fund_onset_fund_cease_Scenario0():
     assert x_budunit.get_concept_obj(casa_way)._fund_cease != 13
     assert x_budunit.get_concept_obj(catt_way)._fund_onset != 13
     assert x_budunit.get_concept_obj(catt_way)._fund_cease != 13
-    assert x_budunit.get_concept_obj(week_way)._fund_onset != 13
-    assert x_budunit.get_concept_obj(week_way)._fund_cease != 13
+    assert x_budunit.get_concept_obj(wk_way)._fund_onset != 13
+    assert x_budunit.get_concept_obj(wk_way)._fund_cease != 13
 
 
 def test_BudUnit_settle_bud_Sets_conceptunit_fund_onset_fund_cease_Scenario1():
@@ -359,7 +359,7 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
     # concept tree has no awardlinks
     assert sue_bud.conceptroot._awardlines == {}
     sue_str = "Sue"
-    week_str = "weekdays"
+    wk_str = "wkdays"
     nation_str = "nation"
     sue_awardlink = awardlink_shop(awardee_title=sue_str)
     sue_bud.add_acctunit(acct_name=sue_str)
@@ -382,8 +382,8 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
     sum_x = 0
     cat_way = sue_bud.make_l1_way("cat have dinner")
     cat_concept = sue_bud.get_concept_obj(cat_way)
-    week_way = sue_bud.make_l1_way(week_str)
-    week_concept = sue_bud.get_concept_obj(week_way)
+    wk_way = sue_bud.make_l1_way(wk_str)
+    wk_concept = sue_bud.get_concept_obj(wk_way)
     casa_str = "casa"
     casa_way = sue_bud.make_l1_way(casa_str)
     casa_concept = sue_bud.get_concept_obj(casa_way)
@@ -391,8 +391,8 @@ def test_BudUnit_settle_bud_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
     nation_concept = sue_bud.get_concept_obj(nation_way)
     sum_x = cat_concept._fund_ratio
     print(f"{cat_concept._fund_ratio=} {sum_x} ")
-    sum_x += week_concept._fund_ratio
-    print(f"{week_concept._fund_ratio=} {sum_x} ")
+    sum_x += wk_concept._fund_ratio
+    print(f"{wk_concept._fund_ratio=} {sum_x} ")
     sum_x += casa_concept._fund_ratio
     print(f"{casa_concept._fund_ratio=} {sum_x} ")
     sum_x += nation_concept._fund_ratio

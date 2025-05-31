@@ -1,11 +1,11 @@
+from copy import deepcopy as copy_deepcopy
 from src.a01_term_logic.way import create_way
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic.bud_tool import (
+    clear_factunits_from_bud,
     get_bud_root_facts_dict,
     set_factunits_to_bud,
-    clear_factunits_from_bud,
 )
-from copy import deepcopy as copy_deepcopy
 
 
 def test_get_bud_root_facts_dict_ReturnsObj_Scenario0_No_factunits():

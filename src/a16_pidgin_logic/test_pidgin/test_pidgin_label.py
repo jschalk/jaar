@@ -1,20 +1,20 @@
+from pytest import raises as pytest_raises
 from src.a01_term_logic.way import default_bridge_if_None
-from src.a09_pack_logic._test_util.a09_str import face_name_str, event_int_str
+from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic._test_util.a16_str import (
-    otx_bridge_str,
     inx_bridge_str,
-    unknown_str_str,
     otx2inx_str,
+    otx_bridge_str,
+    unknown_str_str,
 )
-from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
 from src.a16_pidgin_logic.map import (
     LabelMap,
-    labelmap_shop,
     get_labelmap_from_dict,
     get_labelmap_from_json,
     inherit_labelmap,
+    labelmap_shop,
 )
-from pytest import raises as pytest_raises
+from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
 
 
 def test_LabelMap_Exists():

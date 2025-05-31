@@ -1,15 +1,15 @@
-from src.a00_data_toolbox.db_toolbox import sqlite_obj_str
-from src.a01_term_logic.way import OwnerName, WayTerm, AcctName, GroupTitle
-from src.a02_finance_logic.deal import FiscLabel, OwnerName
-from src.a03_group_logic.acct import AcctUnit
-from src.a03_group_logic.group import MemberShip, GroupUnit, AwardHeir
-from src.a04_reason_logic.reason_concept import FactHeir, PremiseUnit, ReasonHeir
-from src.a04_reason_logic.reason_labor import LaborHeir
-from src.a05_concept_logic.concept import HealerLink, ConceptUnit
-from src.a06_bud_logic.bud import BudUnit
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 from sqlite3 import Cursor as sqlite3_Cursor
+from src.a00_data_toolbox.db_toolbox import sqlite_obj_str
+from src.a01_term_logic.way import AcctName, GroupTitle, OwnerName, WayTerm
+from src.a02_finance_logic.deal import FiscLabel, OwnerName
+from src.a03_group_logic.acct import AcctUnit
+from src.a03_group_logic.group import AwardHeir, GroupUnit, MemberShip
+from src.a04_reason_logic.reason_concept import FactHeir, PremiseUnit, ReasonHeir
+from src.a04_reason_logic.reason_labor import LaborHeir
+from src.a05_concept_logic.concept import ConceptUnit, HealerLink
+from src.a06_bud_logic.bud import BudUnit
 
 
 def create_budmemb_metrics_insert_sqlstr(values_dict: dict[str,]):
@@ -217,8 +217,8 @@ def create_budreas_metrics_insert_sqlstr(values_dict: dict[str,]):
     rconcept_active_requisite = values_dict.get("rconcept_active_requisite")
     _task = values_dict.get("_task")
     _status = values_dict.get("_status")
-    _rcontext_concept_active_value = values_dict.get("_rcontext_concept_active_value")
-    return f"""INSERT INTO bud_concept_reasonunit_job (fisc_label, owner_name, concept_way, rcontext, rconcept_active_requisite, _task, _status, _rcontext_concept_active_value)
+    _rconcept_active_value = values_dict.get("_rconcept_active_value")
+    return f"""INSERT INTO bud_concept_reasonunit_job (fisc_label, owner_name, concept_way, rcontext, rconcept_active_requisite, _task, _status, _rconcept_active_value)
 VALUES (
   {sqlite_obj_str(fisc_label, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
@@ -227,7 +227,7 @@ VALUES (
 , {sqlite_obj_str(rconcept_active_requisite, "INTEGER")}
 , {sqlite_obj_str(_task, "INTEGER")}
 , {sqlite_obj_str(_status, "INTEGER")}
-, {sqlite_obj_str(_rcontext_concept_active_value, "INTEGER")}
+, {sqlite_obj_str(_rconcept_active_value, "INTEGER")}
 )
 ;
 """

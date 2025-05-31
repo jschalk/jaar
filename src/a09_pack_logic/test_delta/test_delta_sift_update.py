@@ -1,9 +1,9 @@
-from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._test_util.a06_str import (
-    bud_acctunit_str,
     acct_name_str,
+    bud_acctunit_str,
     credit_belief_str,
 )
+from src.a06_bud_logic.bud import budunit_shop
 from src.a08_bud_atom_logic._test_util.a08_str import INSERT_str, UPDATE_str
 from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a09_pack_logic.delta import buddelta_shop, get_minimal_buddelta

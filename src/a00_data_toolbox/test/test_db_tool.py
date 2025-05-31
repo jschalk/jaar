@@ -1,36 +1,35 @@
-from src.a00_data_toolbox.db_toolbox import (
-    sqlite_obj_str,
-    create_type_reference_insert_sqlstr,
-    RowData,
-    rowdata_shop,
-    get_rowdata,
-    dict_factory,
-    sqlite_connection,
-    _get_grouping_select_clause,
-    _get_grouping_groupby_clause,
-    _get_having_equal_value_clause,
-    get_grouping_with_all_values_equal_sql_query,
-    get_groupby_sql_query,
-    insert_csv,
-    create_table_from_csv,
-    db_table_exists,
-    get_db_tables,
-    get_table_columns,
-    create_table_from_columns,
-    create_select_inconsistency_query,
-    create_update_inconsistency_error_query,
-    create_table2table_agg_insert_query,
-    required_columns_exist,
-    create_select_query,
-    create_insert_query,
-)
 from os import remove as os_remove
 from os.path import exists as os_path_exists
-from pytest import raises as pytest_raises, fixture as pytest_fixture
-from sqlite3 import (
-    connect as sqlite3_connect,
-    Connection as sqlite3_Connection,
-    sqlite_version as sqlite3_sqlite_version,
+from pytest import fixture as pytest_fixture
+from pytest import raises as pytest_raises
+from sqlite3 import Connection as sqlite3_Connection
+from sqlite3 import connect as sqlite3_connect
+from sqlite3 import sqlite_version as sqlite3_sqlite_version
+from src.a00_data_toolbox.db_toolbox import (
+    RowData,
+    _get_grouping_groupby_clause,
+    _get_grouping_select_clause,
+    _get_having_equal_value_clause,
+    create_insert_query,
+    create_select_inconsistency_query,
+    create_select_query,
+    create_table2table_agg_insert_query,
+    create_table_from_columns,
+    create_table_from_csv,
+    create_type_reference_insert_sqlstr,
+    create_update_inconsistency_error_query,
+    db_table_exists,
+    dict_factory,
+    get_db_tables,
+    get_groupby_sql_query,
+    get_grouping_with_all_values_equal_sql_query,
+    get_rowdata,
+    get_table_columns,
+    insert_csv,
+    required_columns_exist,
+    rowdata_shop,
+    sqlite_connection,
+    sqlite_obj_str,
 )
 
 

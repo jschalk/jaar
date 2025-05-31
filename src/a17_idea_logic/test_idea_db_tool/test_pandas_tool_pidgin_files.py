@@ -1,31 +1,31 @@
-from src.a00_data_toolbox.file_toolbox import save_file, create_path
-from src.a01_term_logic.way import create_way, to_way
-from src.a06_bud_logic._test_util.a06_str import acct_name_str, rcontext_str
-from src.a16_pidgin_logic.pidgin import pidginunit_shop
-from src.a16_pidgin_logic.pidgin_config import get_pidgin_filename
-from src.a16_pidgin_logic._test_util.example_pidgins import (
-    get_casa_maison_pidginunit_set_by_label,
-    get_casa_maison_way_otx_dt,
-    get_casa_maison_way_inx_dt,
-    get_clean_waymap,
-    get_swim_titlemap,
-    get_suita_namemap,
-    get_suita_acct_name_otx_dt,
-    get_suita_acct_name_inx_dt,
-    get_sue_pidginunit,
-)
-from src.a17_idea_logic.idea_db_tool import (
-    save_dataframe_to_csv,
-    open_csv,
-    move_otx_csvs_to_pidgin_inx,
-    _get_pidgen_idea_format_filenames,
-)
-from src.a17_idea_logic._test_util.a17_env import (
-    env_dir_setup_cleanup,
-    idea_fiscs_dir as get_example_face_dir,
-)
 from os.path import exists as os_path_exists
 from pandas import DataFrame
+from src.a00_data_toolbox.file_toolbox import create_path, save_file
+from src.a01_term_logic.way import create_way, to_way
+from src.a06_bud_logic._test_util.a06_str import acct_name_str, rcontext_str
+from src.a16_pidgin_logic._test_util.example_pidgins import (
+    get_casa_maison_pidginunit_set_by_label,
+    get_casa_maison_way_inx_dt,
+    get_casa_maison_way_otx_dt,
+    get_clean_waymap,
+    get_sue_pidginunit,
+    get_suita_acct_name_inx_dt,
+    get_suita_acct_name_otx_dt,
+    get_suita_namemap,
+    get_swim_titlemap,
+)
+from src.a16_pidgin_logic.pidgin import pidginunit_shop
+from src.a16_pidgin_logic.pidgin_config import get_pidgin_filename
+from src.a17_idea_logic._test_util.a17_env import (
+    env_dir_setup_cleanup,
+)
+from src.a17_idea_logic._test_util.a17_env import idea_fiscs_dir as get_example_face_dir
+from src.a17_idea_logic.idea_db_tool import (
+    _get_pidgen_idea_format_filenames,
+    move_otx_csvs_to_pidgin_inx,
+    open_csv,
+    save_dataframe_to_csv,
+)
 
 
 def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario0_SingleFile(

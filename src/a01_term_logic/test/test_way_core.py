@@ -1,31 +1,33 @@
-from src.a01_term_logic.way import (
-    WayTerm,
-    to_way,
-    get_default_fisc_way,
-    create_way,
-    create_way_from_labels,
-    rebuild_way,
-    is_sub_way,
-    get_all_way_labels,
-    get_tail_label,
-    find_replace_way_key_dict,
-    get_parent_way,
-    get_root_label_from_way,
-    get_ancestor_ways,
-    get_forefather_ways,
-    get_default_fisc_label,
-    get_default_fisc_way as root_way,
-    is_heir_way,
-    default_bridge_if_None,
-    replace_bridge,
-    validate_labelterm,
-    wayterm_valid_dir_path,
-    all_wayterms_between,
-    is_labelterm,
-)
 from dataclasses import dataclass
 from platform import system as platform_system
 from pytest import raises as pytest_raises
+from src.a01_term_logic.way import (
+    WayTerm,
+    all_wayterms_between,
+    create_way,
+    create_way_from_labels,
+    default_bridge_if_None,
+    find_replace_way_key_dict,
+    get_all_way_labels,
+    get_ancestor_ways,
+    get_default_fisc_label,
+)
+from src.a01_term_logic.way import (
+    get_forefather_ways,
+    get_parent_way,
+    get_root_label_from_way,
+    get_tail_label,
+    is_heir_way,
+    is_labelterm,
+    is_sub_way,
+    rebuild_way,
+    replace_bridge,
+    to_way,
+    validate_labelterm,
+    wayterm_valid_dir_path,
+)
+from src.a01_term_logic.way import get_default_fisc_way
+from src.a01_term_logic.way import get_default_fisc_way as root_way
 
 
 def test_to_way_ReturnsObj_WithDefault_bridge():

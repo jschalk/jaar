@@ -1,32 +1,32 @@
 from src.a01_term_logic.way import (
+    FiscLabel,
     WayTerm,
     create_way,
-    FiscLabel,
-    get_default_fisc_label,
     create_way_from_labels,
+    get_default_fisc_label,
 )
-from src.a02_finance_logic.deal import dealunit_shop, DealUnit
+from src.a02_finance_logic.deal import DealUnit, dealunit_shop
 from src.a06_bud_logic._test_util.a06_str import (
-    budunit_str,
-    bud_acctunit_str,
-    bud_conceptunit_str,
-    bud_concept_factunit_str,
     acct_name_str,
+    bud_acctunit_str,
+    bud_concept_factunit_str,
+    bud_conceptunit_str,
+    budunit_str,
     concept_way_str,
     fcontext_str,
-    fopen_str,
     fnigh_str,
+    fopen_str,
 )
 from src.a08_bud_atom_logic._test_util.a08_str import (
+    DELETE_str,
     INSERT_str,
     UPDATE_str,
-    DELETE_str,
 )
-from src.a08_bud_atom_logic.atom import budatom_shop, BudAtom
+from src.a08_bud_atom_logic.atom import BudAtom, budatom_shop
+from src.a09_pack_logic.delta import BudDelta, buddelta_shop
 from src.a09_pack_logic.pack import PackUnit, packunit_shop
-from src.a09_pack_logic.delta import buddelta_shop, BudDelta
-from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop
 from src.a12_hub_tools._test_util.a12_env import get_module_temp_dir
+from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop
 
 
 def get_atom_example_conceptunit_sports(fisc_label: FiscLabel = None) -> BudAtom:

@@ -1,41 +1,43 @@
+from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import x_is_json
 from src.a01_term_logic.way import (
     create_way,
-    get_default_fisc_label as root_label,
+)
+from src.a01_term_logic.way import (
     to_way,
 )
+from src.a01_term_logic.way import get_default_fisc_label as root_label
 from src.a03_group_logic.acct import acctunit_shop
-from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._test_util.a06_str import (
-    budunit_str,
-    bud_acctunit_str,
-    bud_acct_membership_str,
-    bud_conceptunit_str,
-    bud_concept_awardlink_str,
     acct_name_str,
     awardee_title_str,
-    group_title_str,
+    bud_acct_membership_str,
+    bud_acctunit_str,
+    bud_concept_awardlink_str,
+    bud_conceptunit_str,
+    budunit_str,
     concept_way_str,
     credit_belief_str,
     debtit_belief_str,
+    group_title_str,
 )
+from src.a06_bud_logic.bud import budunit_shop
 from src.a08_bud_atom_logic._test_util.a08_str import (
-    UPDATE_str,
-    INSERT_str,
     DELETE_str,
+    INSERT_str,
+    UPDATE_str,
 )
 from src.a08_bud_atom_logic.atom import budatom_shop
-from src.a09_pack_logic.delta import (
-    BudDelta,
-    buddelta_shop,
-    bud_built_from_delta_is_valid,
-    get_buddelta_from_ordered_dict,
-)
 from src.a09_pack_logic._test_util.example_deltas import (
     get_buddelta_example1,
     get_buddelta_sue_example,
 )
-from pytest import raises as pytest_raises
+from src.a09_pack_logic.delta import (
+    BudDelta,
+    bud_built_from_delta_is_valid,
+    buddelta_shop,
+    get_buddelta_from_ordered_dict,
+)
 
 
 def test_BudDelta_exists():

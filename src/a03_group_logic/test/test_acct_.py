@@ -1,13 +1,25 @@
+from pytest import raises as pytest_raises
 from src.a01_term_logic.way import default_bridge_if_None
 from src.a02_finance_logic.finance_config import default_RespectBit_if_None
-from src.a03_group_logic.acct import AcctUnit, acctunit_shop
 from src.a03_group_logic._test_util.a03_str import (
-    credit_belief_str,
-    debtit_belief_str,
+    _credor_pool_str,
+    _debtor_pool_str,
+    _fund_agenda_give_str,
+    _fund_agenda_ratio_give_str,
+    _fund_agenda_ratio_take_str,
+    _fund_agenda_take_str,
+    _fund_give_str,
+    _fund_take_str,
+    _inallocable_debtit_belief_str,
+    _irrational_debtit_belief_str,
+    _memberships_str,
     acct_name_str,
     bridge_str,
+    credit_belief_str,
+    debtit_belief_str,
+    respect_bit_str,
 )
-from pytest import raises as pytest_raises
+from src.a03_group_logic.acct import AcctUnit, acctunit_shop
 
 
 def test_AcctUnit_exists():
@@ -35,22 +47,22 @@ def test_AcctUnit_exists():
     assert not bob_acctunit._fund_agenda_give
     assert not bob_acctunit._fund_agenda_take
     assert not bob_acctunit.bridge
-    assert not bob_acctunit._respect_bit
+    assert not bob_acctunit.respect_bit
     obj_attrs = set(bob_acctunit.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
-        "_credor_pool",
-        "_debtor_pool",
-        "_fund_agenda_give",
-        "_fund_agenda_ratio_give",
-        "_fund_agenda_ratio_take",
-        "_fund_agenda_take",
-        "_fund_give",
-        "_fund_take",
-        "_inallocable_debtit_belief",
-        "_irrational_debtit_belief",
-        "_memberships",
-        "_respect_bit",
+        _credor_pool_str(),
+        _debtor_pool_str(),
+        _fund_agenda_give_str(),
+        _fund_agenda_ratio_give_str(),
+        _fund_agenda_ratio_take_str(),
+        _fund_agenda_take_str(),
+        _fund_give_str(),
+        _fund_take_str(),
+        _inallocable_debtit_belief_str(),
+        _irrational_debtit_belief_str(),
+        _memberships_str(),
+        respect_bit_str(),
         acct_name_str(),
         bridge_str(),
         credit_belief_str(),
@@ -108,7 +120,7 @@ def test_acctunit_shop_CorrectlySetsAttributes():
     assert yao_acctunit._fund_agenda_ratio_give == 0
     assert yao_acctunit._fund_agenda_ratio_take == 0
     assert yao_acctunit.bridge == default_bridge_if_None()
-    assert yao_acctunit._respect_bit == default_RespectBit_if_None()
+    assert yao_acctunit.respect_bit == default_RespectBit_if_None()
 
 
 def test_acctunit_shop_CorrectlySetsAttributes_bridge():
@@ -127,23 +139,23 @@ def test_acctunit_shop_CorrectlySetsAttributes_respect_bit():
     respect_bit_float = 00.45
 
     # WHEN
-    yao_acctunit = acctunit_shop("Yao", _respect_bit=respect_bit_float)
+    yao_acctunit = acctunit_shop("Yao", respect_bit=respect_bit_float)
 
     # THEN
-    assert yao_acctunit._respect_bit == 1
+    assert yao_acctunit.respect_bit == 1
 
 
 def test_AcctUnit_set_respect_bit_CorrectlySetsAttribute():
     # ESTABLISH
     bob_acctunit = acctunit_shop("Bob")
-    assert bob_acctunit._respect_bit == 1
+    assert bob_acctunit.respect_bit == 1
 
     # WHEN
     x_respect_bit = 5
     bob_acctunit.set_respect_bit(x_respect_bit)
 
     # THEN
-    assert bob_acctunit._respect_bit == x_respect_bit
+    assert bob_acctunit.respect_bit == x_respect_bit
 
 
 def test_AcctUnit_set_credit_belief_CorrectlySetsAttribute():

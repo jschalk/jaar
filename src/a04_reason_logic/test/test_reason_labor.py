@@ -1,12 +1,12 @@
 from src.a01_term_logic.way import GroupTitle
-from src.a03_group_logic.group import membership_shop
-from src.a03_group_logic.group import groupunit_shop
+from src.a03_group_logic.group import groupunit_shop, membership_shop
+from src.a04_reason_logic._test_util.a04_str import bridge_str
 from src.a04_reason_logic.reason_labor import (
-    LaborUnit,
-    laborunit_shop,
     LaborHeir,
-    laborheir_shop,
+    LaborUnit,
     create_laborunit,
+    laborheir_shop,
+    laborunit_shop,
 )
 
 
@@ -20,6 +20,9 @@ def test_LaborUnit_exists():
     # THEN
     assert x_laborunit
     assert x_laborunit._laborlinks == x_laborlinks
+    obj_attrs = set(x_laborunit.__dict__.keys())
+    print(sorted(list(obj_attrs)))
+    assert obj_attrs == {"_laborlinks"}
 
 
 def test_laborunit_shop_ReturnsCorrectWithCorrectAttributes_v1():
@@ -127,6 +130,9 @@ def test_LaborHeir_exists():
     assert x_laborheir
     assert x_laborheir._laborlinks == x_laborlinks
     assert x_laborheir._owner_name_labor == _owner_name_x_laborunit
+    obj_attrs = set(x_laborheir.__dict__.keys())
+    print(sorted(list(obj_attrs)))
+    assert obj_attrs == {"_laborlinks", "_owner_name_labor"}
 
 
 def test_laborheir_shop_ReturnsCorrectWithCorrectAttributes_v1():

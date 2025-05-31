@@ -1,26 +1,29 @@
+from copy import deepcopy
+from dataclasses import dataclass
 from src.a00_data_toolbox.dict_toolbox import (
-    get_empty_dict_if_None,
     get_0_if_None,
     get_1_if_None,
+    get_empty_dict_if_None,
     get_False_if_None,
     get_positive_int,
 )
 from src.a01_term_logic.way import (
-    WayTerm,
+    AcctName,
+    FiscLabel,
+    GroupTitle,
     LabelTerm,
-    is_sub_way,
-    get_default_fisc_label as root_label,
+    WayTerm,
     all_wayterms_between,
     create_way,
     default_bridge_if_None,
-    replace_bridge,
-    FiscLabel,
-    AcctName,
-    GroupTitle,
-    WayTerm,
-    rebuild_way,
     find_replace_way_key_dict,
 )
+from src.a01_term_logic.way import (
+    is_sub_way,
+    rebuild_way,
+    replace_bridge,
+)
+from src.a01_term_logic.way import get_default_fisc_label as root_label
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import (
     FundCoin,
@@ -29,51 +32,47 @@ from src.a02_finance_logic.finance_config import (
 )
 from src.a03_group_logic.group import (
     AwardHeir,
-    AwardLink,
-    awardlinks_get_from_dict,
     AwardLine,
-    awardline_shop,
-    awardheir_shop,
+    AwardLink,
     GroupUnit,
-)
-
-from src.a04_reason_logic.reason_labor import (
-    LaborUnit,
-    LaborHeir,
-    laborunit_shop,
-    laborheir_shop,
-    laborunit_get_from_dict,
+    awardheir_shop,
+    awardline_shop,
+    awardlinks_get_from_dict,
 )
 from src.a04_reason_logic.reason_concept import (
     FactCore,
     FactHeir,
-    factheir_shop,
-    ReasonCore,
-    ReasonUnit,
-    reasonunit_shop,
-    WayTerm,
     FactUnit,
-    factunit_shop,
+    ReasonCore,
     ReasonHeir,
-    reasonheir_shop,
-    reasons_get_from_dict,
+    ReasonUnit,
+    WayTerm,
+    factheir_shop,
+    factunit_shop,
     factunits_get_from_dict,
     get_dict_from_factunits,
+    reasonheir_shop,
+    reasons_get_from_dict,
+    reasonunit_shop,
 )
-from src.a05_concept_logic.range_toolbox import get_morphed_rangeunit, RangeUnit
+from src.a04_reason_logic.reason_labor import (
+    LaborHeir,
+    LaborUnit,
+    laborheir_shop,
+    laborunit_get_from_dict,
+    laborunit_shop,
+)
 from src.a05_concept_logic.healer import (
     HealerLink,
-    healerlink_shop,
     healerlink_get_from_dict,
+    healerlink_shop,
 )
-
 from src.a05_concept_logic.origin import (
     OriginUnit,
     originunit_get_from_dict,
     originunit_shop,
 )
-from copy import deepcopy
-from dataclasses import dataclass
+from src.a05_concept_logic.range_toolbox import RangeUnit, get_morphed_rangeunit
 
 
 class InvalidConceptException(Exception):
@@ -866,9 +865,7 @@ class ConceptUnit:
             new_reasonheir.inherit_from_reasonheir(old_reasonheir)
 
             if rcontext_concept := bud_concept_dict.get(old_reasonheir.rcontext):
-                new_reasonheir.set_rcontext_concept_active_value(
-                    rcontext_concept._active
-                )
+                new_reasonheir.set_rconcept_active_value(rcontext_concept._active)
             self._reasonheirs[new_reasonheir.rcontext] = new_reasonheir
 
     def set_conceptroot_inherit_reasonheirs(self):

@@ -1,14 +1,14 @@
+from copy import deepcopy as copy_deepcopy
+from dataclasses import dataclass
 from src.a00_data_toolbox.dict_toolbox import get_empty_dict_if_None
 from src.a01_term_logic.way import (
     WayTerm,
-    rebuild_way,
-    find_replace_way_key_dict,
-    replace_bridge,
-    is_heir_way,
     default_bridge_if_None,
+    find_replace_way_key_dict,
+    is_heir_way,
+    rebuild_way,
+    replace_bridge,
 )
-from copy import deepcopy as copy_deepcopy
-from dataclasses import dataclass
 
 
 class InvalidReasonException(Exception):
@@ -17,8 +17,8 @@ class InvalidReasonException(Exception):
 
 @dataclass
 class FactCore:
-    fcontext: WayTerm
-    fstate: WayTerm
+    fcontext: WayTerm = None
+    fstate: WayTerm = None
     fopen: float = None
     fnigh: float = None
 
@@ -569,7 +569,7 @@ def reasonunit_shop(
 class ReasonHeir(ReasonCore):
     _status: bool = None
     _task: bool = None
-    _rcontext_concept_active_value: bool = None
+    _rconcept_active_value: bool = None
 
     def inherit_from_reasonheir(self, x_reasonunit: ReasonUnit):
         x_premises = {}
@@ -600,13 +600,13 @@ class ReasonHeir(ReasonCore):
                 fcontext = y_factheir
         return fcontext
 
-    def set_rcontext_concept_active_value(self, bool_x: bool):
-        self._rcontext_concept_active_value = bool_x
+    def set_rconcept_active_value(self, bool_x: bool):
+        self._rconcept_active_value = bool_x
 
     def is_rconcept_active_requisite_operational(self) -> bool:
         return (
-            self._rcontext_concept_active_value is not None
-            and self._rcontext_concept_active_value == self.rconcept_active_requisite
+            self._rconcept_active_value is not None
+            and self._rconcept_active_value == self.rconcept_active_requisite
         )
 
     def is_any_premise_true(self) -> tuple[bool, bool]:
@@ -643,7 +643,7 @@ def reasonheir_shop(
     rconcept_active_requisite: bool = None,
     _status: bool = None,
     _task: bool = None,
-    _rcontext_concept_active_value: bool = None,
+    _rconcept_active_value: bool = None,
     bridge: str = None,
 ):
     return ReasonHeir(
@@ -652,7 +652,7 @@ def reasonheir_shop(
         rconcept_active_requisite=rconcept_active_requisite,
         _status=_status,
         _task=_task,
-        _rcontext_concept_active_value=_rcontext_concept_active_value,
+        _rconcept_active_value=_rconcept_active_value,
         bridge=default_bridge_if_None(bridge),
     )
 

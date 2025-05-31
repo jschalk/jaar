@@ -1,6 +1,6 @@
-from src.a17_idea_logic.idea_db_tool import is_column_type_valid
 from pandas import DataFrame
 from pytest import raises as pytest_raises
+from src.a17_idea_logic.idea_db_tool import is_column_type_valid
 
 
 def test_is_column_type_valid_ReturnsObjs():

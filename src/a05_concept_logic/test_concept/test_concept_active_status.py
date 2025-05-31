@@ -1,13 +1,14 @@
-from src.a01_term_logic.way import get_default_fisc_label as root_label, create_way
+from src.a01_term_logic.way import create_way
+from src.a01_term_logic.way import get_default_fisc_label as root_label
 from src.a03_group_logic.group import awardheir_shop, awardlink_shop
 from src.a04_reason_logic.reason_concept import (
-    reasonunit_shop,
-    reasonheir_shop,
-    premiseunit_shop,
     factheir_shop,
     factunit_shop,
+    premiseunit_shop,
+    reasonheir_shop,
+    reasonunit_shop,
 )
-from src.a04_reason_logic.reason_labor import laborunit_shop, laborheir_shop
+from src.a04_reason_logic.reason_labor import laborheir_shop, laborunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
 
 
@@ -206,32 +207,32 @@ def test_ConceptUnit_set_range_factheirs_SetsAttrNoParameters():
 
 def test_ConceptUnit_set_range_factheirs_SetsAttrNewFactHeir():
     # ESTABLISH
-    week_str = "week"
-    week_way = create_way(root_label(), week_str)
-    week_popen = 3
-    week_pnigh = 7
-    week_addin = 10
-    week_concept = conceptunit_shop(week_str, parent_way=root_label(), addin=week_addin)
-    week_factheir = factheir_shop(week_way, week_way, week_popen, week_pnigh)
+    wk_str = "wk"
+    wk_way = create_way(root_label(), wk_str)
+    wk_popen = 3
+    wk_pnigh = 7
+    wk_addin = 10
+    wk_concept = conceptunit_shop(wk_str, parent_way=root_label(), addin=wk_addin)
+    wk_factheir = factheir_shop(wk_way, wk_way, wk_popen, wk_pnigh)
     tue_str = "Tue"
-    tue_way = create_way(week_way, tue_str)
+    tue_way = create_way(wk_way, tue_str)
     tue_addin = 100
-    tue_concept = conceptunit_shop(tue_str, parent_way=week_way, addin=tue_addin)
+    tue_concept = conceptunit_shop(tue_str, parent_way=wk_way, addin=tue_addin)
     ball_str = "ball"
     ball_way = create_way(root_label(), ball_str)
     ball_concept = conceptunit_shop(ball_str)
-    ball_concept._set_factheir(week_factheir)
+    ball_concept._set_factheir(wk_factheir)
     tue_reasonheirs = {tue_way: reasonheir_shop(tue_way, None, False)}
     x_bud_concept_dict = {
-        week_concept.get_concept_way(): week_concept,
+        wk_concept.get_concept_way(): wk_concept,
         tue_concept.get_concept_way(): tue_concept,
     }
     ball_concept.set_reasonheirs(x_bud_concept_dict, tue_reasonheirs)
 
-    x_range_inheritors = {tue_way: week_way}
+    x_range_inheritors = {tue_way: wk_way}
     assert len(ball_concept._reasonheirs) == 1
-    assert ball_concept._factheirs == {week_way: week_factheir}
-    assert ball_concept._factheirs.get(week_way)
+    assert ball_concept._factheirs == {wk_way: wk_factheir}
+    assert ball_concept._factheirs.get(wk_way)
     assert len(ball_concept._factheirs) == 1
     assert ball_concept._factheirs.get(tue_way) is None
 
@@ -243,7 +244,7 @@ def test_ConceptUnit_set_range_factheirs_SetsAttrNewFactHeir():
     tue_pnigh = 117
     tue_factheir = factheir_shop(tue_way, tue_way, tue_popen, tue_pnigh)
     assert len(ball_concept._factheirs) == 2
-    assert ball_concept._factheirs == {tue_way: tue_factheir, week_way: week_factheir}
+    assert ball_concept._factheirs == {tue_way: tue_factheir, wk_way: wk_factheir}
 
 
 def test_ConceptUnit_set_reasonunit_SetsAttr():

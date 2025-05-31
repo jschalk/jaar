@@ -1,5 +1,5 @@
-from src.a05_concept_logic.healer import healerlink_shop
 from src.a05_concept_logic.concept import ConceptAttrHolder, conceptattrholder_shop
+from src.a05_concept_logic.healer import healerlink_shop
 
 
 def test_ConceptAttrHolder_Exists():

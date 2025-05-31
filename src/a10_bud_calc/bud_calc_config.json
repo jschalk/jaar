@@ -331,7 +331,7 @@
             }
         },
         "jmetrics": {
-            "_rcontext_concept_active_value": {
+            "_rconcept_active_value": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },

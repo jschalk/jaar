@@ -1,5 +1,6 @@
+from plotly.graph_objects import Figure as plotly_Figure
+from plotly.graph_objects import Scatter as plotly_Scatter
 from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
-from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 
 
 def green_str() -> str:

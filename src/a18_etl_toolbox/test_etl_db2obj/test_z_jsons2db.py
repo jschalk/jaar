@@ -1,39 +1,39 @@
+from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_row_count
 from src.a01_term_logic.way import create_way
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import (
-    awardlink_shop,
     awardheir_shop,
+    awardlink_shop,
     groupunit_shop,
     membership_shop,
 )
-from src.a04_reason_logic.reason_labor import laborheir_shop, laborunit_shop
 from src.a04_reason_logic.reason_concept import (
-    reasonheir_shop,
-    premiseunit_shop,
     factheir_shop,
+    premiseunit_shop,
+    reasonheir_shop,
 )
-from src.a05_concept_logic.healer import healerlink_shop
+from src.a04_reason_logic.reason_labor import laborheir_shop, laborunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
+from src.a05_concept_logic.healer import healerlink_shop
 from src.a06_bud_logic.bud import budunit_shop
-from src.a18_etl_toolbox.tran_sqlstrs import create_job_tables
+from src.a18_etl_toolbox._test_util.a18_env import env_dir_setup_cleanup
 from src.a18_etl_toolbox.db_obj_bud_tool import (
     ObjKeysHolder,
-    insert_job_budmemb,
     insert_job_budacct,
-    insert_job_budgrou,
     insert_job_budawar,
+    insert_job_budconc,
     insert_job_budfact,
+    insert_job_budgrou,
     insert_job_budheal,
+    insert_job_budlabo,
+    insert_job_budmemb,
     insert_job_budprem,
     insert_job_budreas,
-    insert_job_budlabo,
-    insert_job_budconc,
     insert_job_budunit,
     insert_job_obj,
 )
-from src.a18_etl_toolbox._test_util.a18_env import env_dir_setup_cleanup
-from sqlite3 import connect as sqlite3_connect
+from src.a18_etl_toolbox.tran_sqlstrs import create_job_tables
 
 
 def test_ObjKeysHolder_Exists():
@@ -296,13 +296,13 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
     x_rconcept_active_requisite = 5
     x__task = 6
     x__status = 7
-    x__rcontext_concept_active_value = 8
+    x__rconcept_active_value = 8
     x_reasonheir = reasonheir_shop(rcontext=x_rcontext)
     x_reasonheir.rcontext = x_rcontext
     x_reasonheir.rconcept_active_requisite = x_rconcept_active_requisite
     x_reasonheir._task = x__task
     x_reasonheir._status = x__status
-    x_reasonheir._rcontext_concept_active_value = x__rcontext_concept_active_value
+    x_reasonheir._rconcept_active_value = x__rconcept_active_value
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -327,7 +327,7 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
             x_rconcept_active_requisite,
             x__task,
             x__status,
-            x__rcontext_concept_active_value,
+            x__rconcept_active_value,
         )
         expected_data = [expected_row1]
         assert rows == expected_data

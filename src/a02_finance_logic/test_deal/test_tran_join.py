@@ -1,4 +1,4 @@
-from src.a02_finance_logic.deal import tranunit_shop, tranbook_shop
+from src.a02_finance_logic.deal import tranbook_shop, tranunit_shop
 
 
 def test_TranBook_join_SetsAttr():

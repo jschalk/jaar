@@ -1,8 +1,8 @@
-from src.a05_concept_logic.healer import healerlink_shop
-from src.a05_concept_logic.concept import conceptunit_shop
-from src.a06_bud_logic.bud import budunit_shop
-from src.a06_bud_logic._test_util.example_buds import get_budunit_with_4_levels
 from pytest import raises as pytest_raises
+from src.a05_concept_logic.concept import conceptunit_shop
+from src.a05_concept_logic.healer import healerlink_shop
+from src.a06_bud_logic._test_util.example_buds import get_budunit_with_4_levels
+from src.a06_bud_logic.bud import budunit_shop
 
 
 def test_BudUnit_settle_bud_CorrectlySets_keeps_justified_WhenBudUnit_Empty():

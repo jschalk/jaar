@@ -1,23 +1,30 @@
 from src.a01_term_logic.way import (
-    get_default_fisc_label as root_label,
-    get_default_fisc_way,
     create_way,
     default_bridge_if_None,
 )
+from src.a01_term_logic.way import (
+    get_default_fisc_way,
+)
+from src.a01_term_logic.way import get_default_fisc_label as root_label
+from src.a04_reason_logic._test_util.a04_str import (
+    bridge_str,
+    rconcept_active_requisite_str,
+    rcontext_str,
+)
 from src.a04_reason_logic.reason_concept import (
     ReasonCore,
-    reasoncore_shop,
-    reasonheir_shop,
-    reasonunit_shop,
     factheir_shop,
     premiseunit_shop,
+    reasoncore_shop,
+    reasonheir_shop,
     reasons_get_from_dict,
+    reasonunit_shop,
 )
 
 
 def test_ReasonCore_Exists():
     # ESTABLISH
-    wkday_str = "weekday"
+    wkday_str = "wkday"
     wkday_way = create_way(root_label(), wkday_str)
     wed_str = "wednesday"
     wed_way = create_way(wkday_way, wed_str)
@@ -34,6 +41,14 @@ def test_ReasonCore_Exists():
     assert wkday_reason.premises == premises
     assert wkday_reason.rconcept_active_requisite is False
     assert wkday_reason.bridge is None
+    obj_attrs = set(wkday_reason.__dict__.keys())
+    print(sorted(list(obj_attrs)))
+    assert obj_attrs == {
+        bridge_str(),
+        "premises",
+        rconcept_active_requisite_str(),
+        rcontext_str(),
+    }
 
 
 def test_reasoncore_shop_ReturnsCorrectAttrWith_bridge():
@@ -84,12 +99,12 @@ def test_ReasonHeir_clear_CorrectlyClearsField():
     casa_reason.clear_status()
     # THEN
     assert casa_reason._status is None
-    assert casa_reason._rcontext_concept_active_value is None
+    assert casa_reason._rconcept_active_value is None
 
 
 def test_ReasonHeir_set_status_CorrectlySetsStatus():
     # ESTABLISH
-    wkday_str = "weekday"
+    wkday_str = "wkday"
     wkday_way = create_way(root_label(), wkday_str)
     fri_str = "friday"
     fri_way = create_way(wkday_way, fri_str)
@@ -135,7 +150,7 @@ def test_ReasonHeir_set_status_CorrectlySetsStatus():
 
 def test_ReasonHeir_set_status_EmptyFactCorrectlySetsStatus():
     # ESTABLISH
-    wkday_str = "weekday"
+    wkday_str = "wkday"
     wkday_way = create_way(root_label(), wkday_str)
     wed_str = "wednesday"
     wed_way = create_way(wkday_way, wed_str)
@@ -147,41 +162,41 @@ def test_ReasonHeir_set_status_EmptyFactCorrectlySetsStatus():
     assert wkday_reason._status is False
 
 
-def test_ReasonHeir_set_rcontext_concept_active_value_Correctly():
+def test_ReasonHeir_set_rconcept_active_value_Correctly():
     # ESTABLISH
     day_str = "day"
     day_way = create_way(root_label(), day_str)
     day_reason = reasonheir_shop(rcontext=day_way)
-    assert day_reason._rcontext_concept_active_value is None
+    assert day_reason._rconcept_active_value is None
 
     # WHEN
-    day_reason.set_rcontext_concept_active_value(bool_x=True)
+    day_reason.set_rconcept_active_value(bool_x=True)
 
     # THEN
-    assert day_reason._rcontext_concept_active_value
+    assert day_reason._rconcept_active_value
 
 
 def test_ReasonHeir_set_status_BudTrueCorrectlySetsStatusTrue():
     # ESTABLISH
-    wkday_str = "weekday"
+    wkday_str = "wkday"
     wkday_way = create_way(root_label(), wkday_str)
-    week_reason = reasonheir_shop(rcontext=wkday_way, rconcept_active_requisite=True)
-    week_reason.set_rcontext_concept_active_value(bool_x=True)
-    assert week_reason._status is None
+    wk_reason = reasonheir_shop(rcontext=wkday_way, rconcept_active_requisite=True)
+    wk_reason.set_rconcept_active_value(bool_x=True)
+    assert wk_reason._status is None
 
     # WHEN
-    week_reason.set_status(factheirs=None)
+    wk_reason.set_status(factheirs=None)
 
     # THEN
-    assert week_reason._status is True
+    assert wk_reason._status is True
 
 
 def test_ReasonHeir_set_status_BudFalseCorrectlySetsStatusTrue():
     # ESTABLISH
-    wkday_str = "weekday"
+    wkday_str = "wkday"
     wkday_way = create_way(root_label(), wkday_str)
     wkday_reason = reasonheir_shop(wkday_way, rconcept_active_requisite=False)
-    wkday_reason.set_rcontext_concept_active_value(bool_x=False)
+    wkday_reason.set_rconcept_active_value(bool_x=False)
     assert wkday_reason._status is None
 
     # WHEN
@@ -193,10 +208,10 @@ def test_ReasonHeir_set_status_BudFalseCorrectlySetsStatusTrue():
 
 def test_ReasonHeir_set_status_BudTrueCorrectlySetsStatusFalse():
     # ESTABLISH
-    wkday_str = "weekday"
+    wkday_str = "wkday"
     wkday_way = create_way(root_label(), wkday_str)
     wkday_reason = reasonheir_shop(wkday_way, rconcept_active_requisite=True)
-    wkday_reason.set_rcontext_concept_active_value(bool_x=False)
+    wkday_reason.set_rconcept_active_value(bool_x=False)
     assert wkday_reason._status is None
 
     # WHEN
@@ -208,10 +223,10 @@ def test_ReasonHeir_set_status_BudTrueCorrectlySetsStatusFalse():
 
 def test_ReasonHeir_set_status_BudNoneCorrectlySetsStatusFalse():
     # ESTABLISH
-    wkday_str = "weekday"
+    wkday_str = "wkday"
     wkday_way = create_way(root_label(), wkday_str)
     wkday_reason = reasonheir_shop(wkday_way, rconcept_active_requisite=True)
-    wkday_reason.set_rcontext_concept_active_value(bool_x=None)
+    wkday_reason.set_rconcept_active_value(bool_x=None)
     assert wkday_reason._status is None
 
     # WHEN
@@ -223,7 +238,7 @@ def test_ReasonHeir_set_status_BudNoneCorrectlySetsStatusFalse():
 
 def test_reasonunit_shop_ReturnsObj():
     # ESTABLISH
-    wkday_str = "weekday"
+    wkday_str = "wkday"
     wkday_way = create_way(root_label(), wkday_str)
 
     # WHEN
@@ -236,7 +251,7 @@ def test_reasonunit_shop_ReturnsObj():
 
 def test_ReasonUnit_get_dict_ReturnsCorrectDictWithSinglethu_premiseequireds():
     # ESTABLISH
-    wkday_str = "weekday"
+    wkday_str = "wkday"
     wkday_way = create_way(root_label(), wkday_str)
     wed_str = "wednesday"
     wed_way = create_way(wkday_way, wed_str)
@@ -259,7 +274,7 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWithSinglethu_premiseequireds():
 
 def test_ReasonUnit_get_dict_ReturnsCorrectDictWith_rconcept_active_requisite():
     # ESTABLISH
-    wkday_str = "weekday"
+    wkday_str = "wkday"
     wkday_way = create_way(root_label(), wkday_str)
     wkday_rconcept_active_requisite = True
     wkday_reason = reasonunit_shop(
@@ -282,7 +297,7 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWith_rconcept_active_requisite():
 
 def test_ReasonUnit_get_dict_ReturnsCorrectDictWithTwoPremisesReasons():
     # ESTABLISH
-    wkday_str = "weekday"
+    wkday_str = "wkday"
     wkday_way = create_way(root_label(), wkday_str)
     wed_str = "wednesday"
     wed_way = create_way(wkday_way, wed_str)
@@ -308,7 +323,7 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWithTwoPremisesReasons():
 
 def test_reasons_get_from_dict_ReturnsObj():
     # ESTABLISH
-    wkday_str = "weekday"
+    wkday_str = "wkday"
     wkday_way = create_way(root_label(), wkday_str)
     wkday_rconcept_active_requisite = False
     wkday_reasonunit = reasonunit_shop(
@@ -448,14 +463,14 @@ def test_ReasonCore_del_premise_CorrectlyDeletesPremise():
 
 def test_ReasonCore_find_replace_way_casas():
     # ESTABLISH
-    weekday_str = "weekday"
+    wkday_str = "wkday"
     sunday_str = "Sunday"
-    old_weekday_way = create_way(root_label(), weekday_str)
-    old_sunday_way = create_way(old_weekday_way, sunday_str)
-    x_reason = reasoncore_shop(rcontext=old_weekday_way)
+    old_wkday_way = create_way(root_label(), wkday_str)
+    old_sunday_way = create_way(old_wkday_way, sunday_str)
+    x_reason = reasoncore_shop(rcontext=old_wkday_way)
     x_reason.set_premise(premise=old_sunday_way)
     # print(f"{x_reason=}")
-    assert x_reason.rcontext == old_weekday_way
+    assert x_reason.rcontext == old_wkday_way
     assert len(x_reason.premises) == 1
     print(f"{x_reason.premises=}")
     assert x_reason.premises.get(old_sunday_way).pstate == old_sunday_way
@@ -464,11 +479,11 @@ def test_ReasonCore_find_replace_way_casas():
     old_way = get_default_fisc_way()
     new_way = create_way("fun")
     x_reason.find_replace_way(old_way=old_way, new_way=new_way)
-    new_weekday_way = create_way(new_way, weekday_str)
-    new_sunday_way = create_way(new_weekday_way, sunday_str)
+    new_wkday_way = create_way(new_way, wkday_str)
+    new_sunday_way = create_way(new_wkday_way, sunday_str)
 
     # THEN
-    assert x_reason.rcontext == new_weekday_way
+    assert x_reason.rcontext == new_wkday_way
     assert len(x_reason.premises) == 1
     assert x_reason.premises.get(new_sunday_way) is not None
     assert x_reason.premises.get(old_sunday_way) is None
@@ -478,28 +493,28 @@ def test_ReasonCore_find_replace_way_casas():
 
 def test_ReasonCore_set_bridge_SetsAttrsCorrectly():
     # ESTABLISH
-    week_str = "weekday"
+    wk_str = "wkday"
     sun_str = "Sunday"
     slash_str = "/"
-    slash_week_way = create_way(root_label(), week_str, bridge=slash_str)
-    slash_sun_way = create_way(slash_week_way, sun_str, bridge=slash_str)
-    week_reasonunit = reasoncore_shop(slash_week_way, bridge=slash_str)
-    week_reasonunit.set_premise(slash_sun_way)
-    assert week_reasonunit.bridge == slash_str
-    assert week_reasonunit.rcontext == slash_week_way
-    assert week_reasonunit.premises.get(slash_sun_way).pstate == slash_sun_way
+    slash_wk_way = create_way(root_label(), wk_str, bridge=slash_str)
+    slash_sun_way = create_way(slash_wk_way, sun_str, bridge=slash_str)
+    wk_reasonunit = reasoncore_shop(slash_wk_way, bridge=slash_str)
+    wk_reasonunit.set_premise(slash_sun_way)
+    assert wk_reasonunit.bridge == slash_str
+    assert wk_reasonunit.rcontext == slash_wk_way
+    assert wk_reasonunit.premises.get(slash_sun_way).pstate == slash_sun_way
 
     # WHEN
     star_str = "*"
-    week_reasonunit.set_bridge(new_bridge=star_str)
+    wk_reasonunit.set_bridge(new_bridge=star_str)
 
     # THEN
-    assert week_reasonunit.bridge == star_str
-    star_week_way = create_way(root_label(), week_str, bridge=star_str)
-    star_sun_way = create_way(star_week_way, sun_str, bridge=star_str)
-    assert week_reasonunit.rcontext == star_week_way
-    assert week_reasonunit.premises.get(star_sun_way) is not None
-    assert week_reasonunit.premises.get(star_sun_way).pstate == star_sun_way
+    assert wk_reasonunit.bridge == star_str
+    star_wk_way = create_way(root_label(), wk_str, bridge=star_str)
+    star_sun_way = create_way(star_wk_way, sun_str, bridge=star_str)
+    assert wk_reasonunit.rcontext == star_wk_way
+    assert wk_reasonunit.premises.get(star_sun_way) is not None
+    assert wk_reasonunit.premises.get(star_sun_way).pstate == star_sun_way
 
 
 def test_ReasonCore_get_obj_key():

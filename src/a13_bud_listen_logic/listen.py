@@ -1,21 +1,21 @@
+from copy import deepcopy as copy_deepcopy
+from dataclasses import dataclass
 from src.a01_term_logic.way import (
-    get_ancestor_ways,
-    WayTerm,
-    get_root_label_from_way,
     OwnerName,
+    WayTerm,
+    get_ancestor_ways,
+    get_root_label_from_way,
 )
 from src.a02_finance_logic.allot import allot_scale
 from src.a05_concept_logic.concept import ConceptUnit
-from src.a06_bud_logic.bud import BudUnit, AcctUnit
+from src.a06_bud_logic.bud import AcctUnit, BudUnit
 from src.a12_hub_tools.basis_buds import create_empty_bud_from_bud, create_listen_basis
 from src.a12_hub_tools.hub_tool import (
-    save_job_file,
-    open_job_file,
     open_gut_file,
+    open_job_file,
+    save_job_file,
 )
 from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop
-from copy import deepcopy as copy_deepcopy
-from dataclasses import dataclass
 
 
 class Missing_debtor_respectException(Exception):

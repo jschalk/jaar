@@ -1,6 +1,6 @@
+from pytest import raises as pytest_raises
 from src.a02_finance_logic.deal import tranbook_shop, tranunit_shop
 from src.a15_fisc_logic.fisc import fiscunit_shop
-from pytest import raises as pytest_raises
 
 
 def test_FiscUnit_set_cashpurchase_SetsAttr():

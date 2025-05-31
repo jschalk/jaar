@@ -1,31 +1,31 @@
+from copy import copy as copy_copy
+from dataclasses import dataclass
 from src.a00_data_toolbox.dict_toolbox import (
+    get_0_if_None,
+    get_dict_from_json,
     get_empty_dict_if_None,
-    str_in_dict,
-    str_in_dict_keys,
-    str_in_dict_values,
+    get_json_from_dict,
     get_str_in_sub_dict,
     str_in_all_dict_keys,
     str_in_all_dict_values,
-    get_json_from_dict,
-    get_dict_from_json,
-    get_0_if_None,
+    str_in_dict,
+    str_in_dict_keys,
+    str_in_dict_values,
 )
 from src.a01_term_logic.way import (
-    default_bridge_if_None,
-    create_way,
-    get_all_way_labels,
-    create_way_from_labels,
-    get_tail_label,
-    get_parent_way,
-    is_labelterm,
-    WayTerm,
-    LabelTerm,
-    FaceName,
     EventInt,
+    FaceName,
+    LabelTerm,
+    WayTerm,
+    create_way,
+    create_way_from_labels,
+    default_bridge_if_None,
+    get_all_way_labels,
+    get_parent_way,
+    get_tail_label,
+    is_labelterm,
 )
 from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
-from copy import copy as copy_copy
-from dataclasses import dataclass
 
 
 class set_all_otx2inxException(Exception):

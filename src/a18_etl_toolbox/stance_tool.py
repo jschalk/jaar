@@ -1,3 +1,4 @@
+from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, get_level1_dirs
 from src.a01_term_logic.way import OwnerName
 from src.a12_hub_tools.hub_tool import open_bud_file
@@ -5,14 +6,13 @@ from src.a15_fisc_logic.fisc import (
     get_from_default_path as fiscunit_get_from_default_path,
 )
 from src.a17_idea_logic.idea_csv_tool import (
-    create_init_stance_idea_csv_strs,
-    add_fiscunit_to_stance_csv_strs,
     add_budunit_to_stance_csv_strs,
+    add_fiscunit_to_stance_csv_strs,
     add_pidginunit_to_stance_csv_strs,
+    create_init_stance_idea_csv_strs,
 )
 from src.a17_idea_logic.idea_db_tool import csv_dict_to_excel
-from src.a18_etl_toolbox.tran_path import create_stances_dir_path, STANCE0001_FILENAME
-from os.path import exists as os_path_exists
+from src.a18_etl_toolbox.tran_path import STANCE0001_FILENAME, create_stances_dir_path
 
 
 def collect_stance_csv_strs(fisc_mstr_dir: str) -> dict[str, str]:

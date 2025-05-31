@@ -1,11 +1,11 @@
 from src.a17_idea_logic._test_util.a17_str import (
-    brick_raw_str,
     brick_agg_str,
+    brick_raw_str,
     brick_valid_str,
-    sound_raw_str,
     sound_agg_str,
-    voice_raw_str,
+    sound_raw_str,
     voice_agg_str,
+    voice_raw_str,
 )
 
 

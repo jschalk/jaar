@@ -1,28 +1,29 @@
+from numpy import float64
+from numpy import nan as numpy_nan
+from openpyxl import Workbook as openpyxl_Workbook
+from openpyxl import load_workbook as openpyxl_load_workbook
+from os.path import exists as os_path_exists
+from pandas import DataFrame
+from pandas import read_excel as pandas_read_excel
+from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
+from pytest import fixture as pytest_fixture
+from pytest import raises as pytest_raises
 from src.a00_data_toolbox.file_toolbox import create_path, set_dir
 from src.a17_idea_logic._test_util.a17_env import (
     env_dir_setup_cleanup,
     idea_fisc_mstr_dir,
 )
 from src.a17_idea_logic.idea_db_tool import (
-    sheet_exists,
-    upsert_sheet,
-    get_all_excel_sheet_names,
-    split_excel_into_dirs,
-    if_nan_return_None,
     append_df_to_excel,
-    set_dataframe_first_two_columns,
     check_dataframe_column_names,
+    get_all_excel_sheet_names,
+    if_nan_return_None,
+    set_dataframe_first_two_columns,
+    sheet_exists,
+    split_excel_into_dirs,
     update_all_face_name_event_int_columns,
+    upsert_sheet,
 )
-from numpy import nan as numpy_nan, float64
-from openpyxl import (
-    load_workbook as openpyxl_load_workbook,
-    Workbook as openpyxl_Workbook,
-)
-from os.path import exists as os_path_exists
-from pandas import DataFrame, read_excel as pandas_read_excel
-from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
-from pytest import fixture as pytest_fixture, raises as pytest_raises
 
 
 def test_append_df_to_excel_CreatesSheet(env_dir_setup_cleanup):

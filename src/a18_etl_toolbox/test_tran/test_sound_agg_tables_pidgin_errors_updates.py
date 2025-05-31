@@ -1,22 +1,22 @@
-from src.a02_finance_logic._test_util.a02_str import owner_name_str, fisc_label_str
+from sqlite3 import connect as sqlite3_connect
+from src.a02_finance_logic._test_util.a02_str import fisc_label_str, owner_name_str
 from src.a06_bud_logic._test_util.a06_str import acct_name_str, bud_acctunit_str
-from src.a09_pack_logic._test_util.a09_str import face_name_str, event_int_str
+from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic._test_util.a16_str import (
     inx_bridge_str,
     otx_bridge_str,
     unknown_str_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
-    create_prime_tablename,
     CREATE_BUDACCT_SOUND_PUT_AGG_STR,
     CREATE_PIDCORE_SOUND_VLD_SQLSTR,
-    create_bridge_exists_in_name_error_update_sqlstr,
     create_bridge_exists_in_label_error_update_sqlstr,
+    create_bridge_exists_in_name_error_update_sqlstr,
+    create_prime_tablename,
 )
 from src.a18_etl_toolbox.transformers import (
     set_fisc_bud_sound_agg_bridge_errors,
 )
-from sqlite3 import connect as sqlite3_connect
 
 
 def test_create_bridge_exists_in_name_error_update_sqlstr_ReturnsObj_PopulatesTable_Scenario0():

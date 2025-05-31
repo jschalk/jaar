@@ -1,16 +1,17 @@
 from src.a01_term_logic.way import WayTerm
 from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a05_concept_logic.concept import ConceptUnit, conceptunit_shop
-from src.a06_bud_logic.bud import budunit_shop, get_from_json as budunit_get_from_json
 from src.a06_bud_logic._test_util.example_buds import (
-    get_budunit_with_4_levels,
-    get_budunit_with_4_levels_and_2reasons,
-    get_budunit_with7amCleanTableReason,
-    get_budunit_with_4_levels_and_2reasons_2facts,
     budunit_v001,
     budunit_v001_with_large_agenda,
     budunit_v002,
+    get_budunit_with7amCleanTableReason,
+    get_budunit_with_4_levels,
+    get_budunit_with_4_levels_and_2reasons,
+    get_budunit_with_4_levels_and_2reasons_2facts,
 )
+from src.a06_bud_logic.bud import budunit_shop
+from src.a06_bud_logic.bud import get_from_json as budunit_get_from_json
 
 
 def get_tasks_count(agenda_dict: dict[WayTerm, ConceptUnit]) -> int:
@@ -35,11 +36,11 @@ def test_BudUnit_get_agenda_dict_ReturnsObj():
 def test_BudUnit_get_agenda_dict_ReturnsAgendaWithOnlyCorrectConcepts():
     # ESTABLISH
     x_bud = get_budunit_with_4_levels_and_2reasons()
-    week_str = "weekdays"
-    week_way = x_bud.make_l1_way(week_str)
+    wk_str = "wkdays"
+    wk_way = x_bud.make_l1_way(wk_str)
     sun_str = "Sunday"
-    sun_way = x_bud.make_way(week_way, sun_str)
-    x_bud.add_fact(fcontext=week_way, fstate=sun_way)
+    sun_way = x_bud.make_way(wk_way, sun_str)
+    x_bud.add_fact(fcontext=wk_way, fstate=sun_way)
 
     # WHEN
     agenda_dict = x_bud.get_agenda_dict()
@@ -149,8 +150,8 @@ def test_BudUnit_get_agenda_dict_BudUnitHasCorrectAttributes_budunit_v001():
     day_min_str = "day_minute"
     day_min_way = yao_bud.make_l1_way(day_min_str)
     yao_bud.add_fact(fcontext=day_min_way, fstate=day_min_way, fopen=0, fnigh=1399)
-    month_week_str = "month_week"
-    month_week_way = yao_bud.make_l1_way(month_week_str)
+    month_wk_str = "month_wk"
+    month_wk_way = yao_bud.make_l1_way(month_wk_str)
     nations_str = "Nation-States"
     nations_way = yao_bud.make_l1_way(nations_str)
     mood_str = "Moods"
@@ -159,20 +160,20 @@ def test_BudUnit_get_agenda_dict_BudUnitHasCorrectAttributes_budunit_v001():
     aaron_way = yao_bud.make_l1_way(aaron_str)
     # interweb_str = "Interweb"
     # interweb_way = yao_bud.make_l1_way(interweb_str)
-    year_month_str = "year_month"
-    year_month_way = yao_bud.make_l1_way(year_month_str)
-    yao_bud.add_fact(fcontext=month_week_way, fstate=month_week_way)
+    yr_month_str = "yr_month"
+    yr_month_way = yao_bud.make_l1_way(yr_month_str)
+    yao_bud.add_fact(fcontext=month_wk_way, fstate=month_wk_way)
     yao_bud.add_fact(fcontext=nations_way, fstate=nations_way)
     yao_bud.add_fact(fcontext=mood_way, fstate=mood_way)
     yao_bud.add_fact(fcontext=aaron_way, fstate=aaron_way)
     # yao_bud.add_fact(fcontext=interweb_way, fstate=interweb_way)
-    yao_bud.add_fact(fcontext=year_month_way, fstate=year_month_way)
+    yao_bud.add_fact(fcontext=yr_month_way, fstate=yr_month_way)
     # season_str = "Seasons"
     # season_way = yao_bud.make_l1_way(season_str)
     # yao_bud.add_fact(fcontext=season_way, fstate=season_way)
-    ced_week_str = "ced_week"
-    ced_week_way = yao_bud.make_l1_way(ced_week_str)
-    yao_bud.add_fact(fcontext=ced_week_way, fstate=ced_week_way)
+    ced_wk_str = "ced_wk"
+    ced_wk_way = yao_bud.make_l1_way(ced_wk_str)
+    yao_bud.add_fact(fcontext=ced_wk_way, fstate=ced_wk_way)
     # water_str = "WaterExistence"
     # water_way = yao_bud.make_l1_way(water_str)
     # yao_bud.add_fact(fcontext=water_way, fstate=water_way)
@@ -186,21 +187,21 @@ def test_BudUnit_get_agenda_dict_BudUnitHasCorrectAttributes_budunit_v001():
     # THEN
     assert len(concept_pledge_list) == 27
 
-    week1_way = yao_bud.make_way(month_week_way, "1st week")
-    yao_bud.add_fact(month_week_way, week1_way)
+    wk1_way = yao_bud.make_way(month_wk_way, "1st wk")
+    yao_bud.add_fact(month_wk_way, wk1_way)
     concept_pledge_list = yao_bud.get_agenda_dict()
     assert len(concept_pledge_list) == 27
 
-    weekday_str = "weekdays"
-    weekday_way = yao_bud.make_l1_way(weekday_str)
+    wkday_str = "wkdays"
+    wkday_way = yao_bud.make_l1_way(wkday_str)
     monday_str = "Monday"
-    monday_way = yao_bud.make_way(weekday_way, monday_str)
+    monday_way = yao_bud.make_way(wkday_way, monday_str)
 
-    yao_bud.add_fact(fcontext=weekday_way, fstate=monday_way)
+    yao_bud.add_fact(fcontext=wkday_way, fstate=monday_way)
     concept_pledge_list = yao_bud.get_agenda_dict()
     assert len(concept_pledge_list) == 39
 
-    yao_bud.add_fact(fcontext=weekday_way, fstate=weekday_way)
+    yao_bud.add_fact(fcontext=wkday_way, fstate=wkday_way)
     concept_pledge_list = yao_bud.get_agenda_dict()
     assert len(concept_pledge_list) == 53
 
@@ -224,8 +225,8 @@ def test_BudUnit_get_agenda_dict_BudUnitHasCorrectAttributes_budunit_v001():
 def test_BudUnit_get_agenda_dict_BudUnitCanCleanOnRcontext_budunit_v001_with_large_agenda():
     # ESTABLISH
     yao_bud = budunit_v001_with_large_agenda()
-    week_str = "weekdays"
-    week_way = yao_bud.make_l1_way(week_str)
+    wk_str = "wkdays"
+    wk_way = yao_bud.make_l1_way(wk_str)
     print(f"{type(yao_bud)=}")
     # for rcontext in yao_bud.get_missing_fact_rcontexts():
     #     print(f"{rcontext=}")
@@ -235,14 +236,14 @@ def test_BudUnit_get_agenda_dict_BudUnitCanCleanOnRcontext_budunit_v001_with_lar
     #         f"{agenda_concept.parent_way=} {agenda_concept.concept_label} {len(agenda_concept.reasonunits)=}"
     #     )
     #     for reason in agenda_concept.reasonunits.values():
-    #         if reason.rcontext == weekdays:
-    #             print(f"         {weekdays}")
+    #         if reason.rcontext == wkdays:
+    #             print(f"         {wkdays}")
 
     # this list went from 68 to 63 when the method of identifying activees was improved.
     assert len(yao_bud.get_agenda_dict()) == 63
 
     # WHEN
-    pledge_list = yao_bud.get_agenda_dict(necessary_rcontext=week_way)
+    pledge_list = yao_bud.get_agenda_dict(necessary_rcontext=wk_way)
 
     # THEN
     assert len(pledge_list) != 63

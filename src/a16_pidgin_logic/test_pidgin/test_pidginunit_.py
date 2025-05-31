@@ -1,66 +1,66 @@
+from pytest import raises as pytest_raises
 from src.a01_term_logic.way import default_bridge_if_None
-from src.a02_finance_logic._test_util.a02_str import owner_name_str, fisc_label_str
+from src.a02_finance_logic._test_util.a02_str import fisc_label_str, owner_name_str
 from src.a06_bud_logic._test_util.a06_str import (
+    LabelTerm_str,
     NameTerm_str,
     TitleTerm_str,
-    LabelTerm_str,
     WayTerm_str,
     acct_name_str,
     awardee_title_str,
-    rcontext_str,
-    fcontext_str,
-    fstate_str,
-    fopen_str,
-    fund_coin_str,
-    healer_name_str,
-    group_title_str,
     concept_label_str,
-    pstate_str,
-    penny_str,
-    respect_bit_str,
     concept_way_str,
+    fcontext_str,
+    fopen_str,
+    fstate_str,
+    fund_coin_str,
+    group_title_str,
+    healer_name_str,
     labor_title_str,
+    penny_str,
+    pstate_str,
+    rcontext_str,
+    respect_bit_str,
 )
 from src.a07_calendar_logic._test_util.a07_str import timeline_label_str
 from src.a08_bud_atom_logic.atom_config import (
-    get_atom_args_class_types,
     get_all_bud_dimen_delete_keys,
+    get_atom_args_class_types,
 )
 from src.a09_pack_logic._test_util.a09_str import face_name_str
 from src.a15_fisc_logic._test_util.a15_str import (
-    weekday_label_str,
-    month_label_str,
     hour_label_str,
+    month_label_str,
+    weekday_label_str,
 )
 from src.a15_fisc_logic.fisc_config import get_fisc_args_class_types
-from src.a16_pidgin_logic.map import (
-    titlemap_shop,
-    namemap_shop,
-    labelmap_shop,
-    waymap_shop,
-)
-from src.a16_pidgin_logic.pidgin_config import (
-    get_pidgin_args_class_types,
-    default_unknown_str_if_None,
-    pidginable_class_types,
-    get_pidginable_args,
-    find_set_otx_inx_args,
-    get_pidgin_NameTerm_args,
-    get_pidgin_TitleTerm_args,
-    get_pidgin_LabelTerm_args,
-    get_pidgin_WayTerm_args,
-)
-from src.a16_pidgin_logic.pidgin import PidginUnit, pidginunit_shop
 from src.a16_pidgin_logic._test_util.example_pidgins import (
+    get_clean_labelmap,
+    get_clean_waymap,
     get_invalid_namemap,
     get_invalid_titlemap,
     get_invalid_waymap,
-    get_clean_waymap,
-    get_clean_labelmap,
-    get_swim_titlemap,
     get_suita_namemap,
+    get_swim_titlemap,
 )
-from pytest import raises as pytest_raises
+from src.a16_pidgin_logic.map import (
+    labelmap_shop,
+    namemap_shop,
+    titlemap_shop,
+    waymap_shop,
+)
+from src.a16_pidgin_logic.pidgin import PidginUnit, pidginunit_shop
+from src.a16_pidgin_logic.pidgin_config import (
+    default_unknown_str_if_None,
+    find_set_otx_inx_args,
+    get_pidgin_args_class_types,
+    get_pidgin_LabelTerm_args,
+    get_pidgin_NameTerm_args,
+    get_pidgin_TitleTerm_args,
+    get_pidgin_WayTerm_args,
+    get_pidginable_args,
+    pidginable_class_types,
+)
 
 
 # The goal of the pidgin function is to allow a single command, pointing at a bunch of directories

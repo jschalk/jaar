@@ -1,11 +1,11 @@
+from copy import deepcopy as copy_deepcopy
+from pytest import raises as pytest_raises
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a13_bud_listen_logic.listen import (
-    listen_to_speaker_agenda,
     create_empty_bud_from_bud,
+    listen_to_speaker_agenda,
 )
-from copy import deepcopy as copy_deepcopy
-from pytest import raises as pytest_raises
 
 
 def test_listen_to_speaker_agenda_RaisesErrorIfPoolIsNotSet():

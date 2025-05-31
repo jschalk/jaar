@@ -1,22 +1,22 @@
-from src.a01_term_logic.way import default_bridge_if_None, create_way, to_way
+from pandas import DataFrame
+from src.a01_term_logic.way import create_way, default_bridge_if_None, to_way
 from src.a06_bud_logic._test_util.a06_str import (
+    WayTerm_str,
     acct_name_str,
     rcontext_str,
-    WayTerm_str,
 )
-from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
 from src.a16_pidgin_logic.map import (
-    titlemap_shop,
-    namemap_shop,
-    labelmap_shop,
-    waymap_shop,
-    TitleMap,
-    NameMap,
     LabelMap,
+    NameMap,
+    TitleMap,
     WayMap,
+    labelmap_shop,
+    namemap_shop,
+    titlemap_shop,
+    waymap_shop,
 )
 from src.a16_pidgin_logic.pidgin import PidginUnit, pidginunit_shop
-from pandas import DataFrame
+from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
 
 
 def get_clean_labelmap() -> LabelMap:

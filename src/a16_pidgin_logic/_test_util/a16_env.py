@@ -1,5 +1,5 @@
-from src.a00_data_toolbox.file_toolbox import delete_dir, create_path
 from pytest import fixture as pytest_fixture
+from src.a00_data_toolbox.file_toolbox import create_path, delete_dir
 
 
 def get_module_temp_dir():

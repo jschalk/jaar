@@ -1,13 +1,13 @@
+from pytest import raises as pytest_raises
 from src.a01_term_logic.way import to_way
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import factheir_shop
 from src.a05_concept_logic.concept import conceptunit_shop
-from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._test_util.example_buds import (
     get_budunit_with_4_levels,
     get_budunit_with_4_levels_and_2reasons,
 )
-from pytest import raises as pytest_raises
+from src.a06_bud_logic.bud import budunit_shop
 
 
 def test_BudUnit_clear_concept_dict_and_bud_obj_settle_attrs_CorrectlySetsAttrs():
@@ -81,10 +81,10 @@ def test_BudUnit_settle_bud_ClearsDescendantAttributes():
     casa_str = "casa"
     casa_way = sue_bud.make_l1_way(casa_str)
     casa_concept = sue_bud.get_concept_obj(casa_way)
-    week_str = "weekdays"
-    week_way = sue_bud.make_l1_way(week_str)
+    wk_str = "wkdays"
+    wk_way = sue_bud.make_l1_way(wk_str)
     mon_str = "Monday"
-    mon_way = sue_bud.make_way(week_way, mon_str)
+    mon_way = sue_bud.make_way(wk_way, mon_str)
     mon_concept = sue_bud.get_concept_obj(mon_way)
     assert sue_bud.conceptroot._descendant_pledge_count is None
     assert sue_bud.conceptroot._all_acct_cred is None
@@ -154,11 +154,11 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_1():
     casa_str = "casa"
     casa_way = sue_bud.make_l1_way(casa_str)
     casa_concept = sue_bud.get_concept_obj(casa_way)
-    week_str = "weekdays"
-    week_way = sue_bud.make_l1_way(week_str)
-    week_concept = sue_bud.get_concept_obj(week_way)
+    wk_str = "wkdays"
+    wk_way = sue_bud.make_l1_way(wk_str)
+    wk_concept = sue_bud.get_concept_obj(wk_way)
     mon_str = "Monday"
-    mon_way = sue_bud.make_way(week_way, mon_str)
+    mon_way = sue_bud.make_way(wk_way, mon_str)
     mon_concept = sue_bud.get_concept_obj(mon_way)
 
     email_str = "email"
@@ -199,7 +199,7 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_2():
     sue_bud = get_budunit_with_4_levels()
     email_str = "email"
     casa_str = "casa"
-    week_str = "weekdays"
+    wk_str = "wkdays"
     mon_str = "Monday"
     tue_str = "Tuesday"
     vacuum_str = "vacuum"
@@ -235,13 +235,13 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_2():
     assert casa_concept._kids[email_str]._all_acct_debt is False
     assert casa_concept._kids[vacuum_str]._all_acct_cred is True
     assert casa_concept._kids[vacuum_str]._all_acct_debt is True
-    week_concept = sue_bud.conceptroot._kids[week_str]
-    assert week_concept._all_acct_cred is True
-    assert week_concept._all_acct_debt is True
-    assert week_concept._kids[mon_str]._all_acct_cred is True
-    assert week_concept._kids[mon_str]._all_acct_debt is True
-    assert week_concept._kids[tue_str]._all_acct_cred is True
-    assert week_concept._kids[tue_str]._all_acct_debt is True
+    wk_concept = sue_bud.conceptroot._kids[wk_str]
+    assert wk_concept._all_acct_cred is True
+    assert wk_concept._all_acct_debt is True
+    assert wk_concept._kids[mon_str]._all_acct_cred is True
+    assert wk_concept._kids[mon_str]._all_acct_debt is True
+    assert wk_concept._kids[tue_str]._all_acct_cred is True
+    assert wk_concept._kids[tue_str]._all_acct_debt is True
 
 
 def test_BudUnit_settle_bud_SetsConceptUnitAttr_awardlinks():
@@ -366,7 +366,7 @@ def test_BudUnit_settle_bud_DoesNotKeepUnneeded_awardheirs():
 def test_BudUnit_get_concept_tree_ordered_way_list_ReturnsObj():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    week_str = "weekdays"
+    wk_str = "wkdays"
     assert sue_bud.get_concept_tree_ordered_way_list()
 
     # WHEN
@@ -378,7 +378,7 @@ def test_BudUnit_get_concept_tree_ordered_way_list_ReturnsObj():
     root_way = to_way(sue_bud.fisc_label)
     assert x_1st_way_in_ordered_list == root_way
     x_8th_way_in_ordered_list = sue_bud.get_concept_tree_ordered_way_list()[9]
-    assert x_8th_way_in_ordered_list == sue_bud.make_l1_way(week_str)
+    assert x_8th_way_in_ordered_list == sue_bud.make_l1_way(wk_str)
 
     # WHEN
     y_bud = budunit_shop(fisc_label="accord23")
@@ -396,8 +396,8 @@ def test_BudUnit_get_concept_tree_ordered_way_list_CorrectlyCleansRangedConceptW
     time_str = "timeline"
     time_way = yao_bud.make_l1_way(time_str)
     yao_bud.set_l1_concept(conceptunit_shop(time_str, begin=0, close=700))
-    weeks_str = "weeks"
-    yao_bud.set_concept(conceptunit_shop(weeks_str, denom=7), time_way)
+    wks_str = "wks"
+    yao_bud.set_concept(conceptunit_shop(wks_str, denom=7), time_way)
 
     # THEN
     assert len(yao_bud.get_concept_tree_ordered_way_list()) == 3
@@ -649,25 +649,25 @@ def test_BudUnit_settle_bud_Sets_conceptroot_factheir_With_range_factheirs():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(yao_str)
-    week_str = "week"
-    week_way = yao_bud.make_l1_way(week_str)
-    week_addin = 10
-    week_concept = conceptunit_shop(week_str, begin=10, close=15, addin=week_addin)
-    yao_bud.set_l1_concept(week_concept)
+    wk_str = "wk"
+    wk_way = yao_bud.make_l1_way(wk_str)
+    wk_addin = 10
+    wk_concept = conceptunit_shop(wk_str, begin=10, close=15, addin=wk_addin)
+    yao_bud.set_l1_concept(wk_concept)
     tue_str = "Tue"
-    tue_way = yao_bud.make_way(week_way, tue_str)
+    tue_way = yao_bud.make_way(wk_way, tue_str)
     tue_addin = 100
-    yao_bud.set_concept(conceptunit_shop(tue_str, addin=tue_addin), week_way)
+    yao_bud.set_concept(conceptunit_shop(tue_str, addin=tue_addin), wk_way)
     root_way = to_way(yao_bud.fisc_label)
     yao_bud.edit_concept_attr(root_way, reason_rcontext=tue_way, reason_premise=tue_way)
 
-    week_popen = 3
-    week_pnigh = 7
-    yao_bud.add_fact(week_way, week_way, week_popen, week_pnigh)
+    wk_popen = 3
+    wk_pnigh = 7
+    yao_bud.add_fact(wk_way, wk_way, wk_popen, wk_pnigh)
 
     # assert len(ball_concept._reasonheirs) == 1
-    # assert ball_concept._factheirs == {week_way: week_factheir}
-    # assert ball_concept._factheirs.get(week_way)
+    # assert ball_concept._factheirs == {wk_way: wk_factheir}
+    # assert ball_concept._factheirs.get(wk_way)
     # assert len(ball_concept._factheirs) == 1
     # assert ball_concept._factheirs.get(tue_way) is None
 
@@ -678,48 +678,48 @@ def test_BudUnit_settle_bud_Sets_conceptroot_factheir_With_range_factheirs():
     assert str(excinfo.value) == exception_str
 
     # THEN
-    # week_factunit = factunit_shop(week_way, week_way, week_popen, week_pnigh)
+    # wk_factunit = factunit_shop(wk_way, wk_way, wk_popen, wk_pnigh)
     # tue_reasonheirs = {tue_way: reasonheir_shop(tue_way, None, False)}
-    # x_bud_concept_dict = {week_concept.get_concept_way(): week_concept, tue_concept.get_concept_way(): tue_concept}
+    # x_bud_concept_dict = {wk_concept.get_concept_way(): wk_concept, tue_concept.get_concept_way(): tue_concept}
     # ball_concept.set_reasonheirs(x_bud_concept_dict, tue_reasonheirs)
-    # x_range_inheritors = {tue_way: week_way}
-    # week_factheir = factheir_shop(week_way, week_way, week_popen, week_pnigh)
+    # x_range_inheritors = {tue_way: wk_way}
+    # wk_factheir = factheir_shop(wk_way, wk_way, wk_popen, wk_pnigh)
 
     # tue_popen = 113
     # tue_pnigh = 117
     # tue_factheir = factheir_shop(tue_way, tue_way, tue_popen, tue_pnigh)
     # root_concept = yao_bud.get_concept_obj(root_way)
-    # print(f"{week_way=} {root_concept._factheirs.keys()=}")
-    # assert root_concept._factheirs.get(week_way) == week_factheir
+    # print(f"{wk_way=} {root_concept._factheirs.keys()=}")
+    # assert root_concept._factheirs.get(wk_way) == wk_factheir
     # assert len(root_concept._factheirs) == 2
-    # assert root_concept._factheirs == {tue_way: tue_factheir, week_way: week_factheir}
+    # assert root_concept._factheirs == {tue_way: tue_factheir, wk_way: wk_factheir}
 
 
 def test_BudUnit_settle_bud_SetsConceptUnit_factheir_With_range_factheirs():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(yao_str)
-    week_str = "week"
-    week_way = yao_bud.make_l1_way(week_str)
-    week_addin = 10
-    week_concept = conceptunit_shop(week_str, begin=10, close=15, addin=week_addin)
-    yao_bud.set_l1_concept(week_concept)
+    wk_str = "wk"
+    wk_way = yao_bud.make_l1_way(wk_str)
+    wk_addin = 10
+    wk_concept = conceptunit_shop(wk_str, begin=10, close=15, addin=wk_addin)
+    yao_bud.set_l1_concept(wk_concept)
     tue_str = "Tue"
-    tue_way = yao_bud.make_way(week_way, tue_str)
+    tue_way = yao_bud.make_way(wk_way, tue_str)
     tue_addin = 100
-    yao_bud.set_concept(conceptunit_shop(tue_str, addin=tue_addin), week_way)
+    yao_bud.set_concept(conceptunit_shop(tue_str, addin=tue_addin), wk_way)
     ball_str = "ball"
     ball_way = yao_bud.make_l1_way(ball_str)
     yao_bud.set_l1_concept(conceptunit_shop(ball_str))
     yao_bud.edit_concept_attr(ball_way, reason_rcontext=tue_way, reason_premise=tue_way)
 
-    week_popen = 3
-    week_pnigh = 7
-    yao_bud.add_fact(week_way, week_way, week_popen, week_pnigh)
+    wk_popen = 3
+    wk_pnigh = 7
+    yao_bud.add_fact(wk_way, wk_way, wk_popen, wk_pnigh)
 
     # assert len(ball_concept._reasonheirs) == 1
-    # assert ball_concept._factheirs == {week_way: week_factheir}
-    # assert ball_concept._factheirs.get(week_way)
+    # assert ball_concept._factheirs == {wk_way: wk_factheir}
+    # assert ball_concept._factheirs.get(wk_way)
     # assert len(ball_concept._factheirs) == 1
     # assert ball_concept._factheirs.get(tue_way) is None
 
@@ -727,18 +727,18 @@ def test_BudUnit_settle_bud_SetsConceptUnit_factheir_With_range_factheirs():
     yao_bud.settle_bud()
 
     # THEN
-    # week_factunit = factunit_shop(week_way, week_way, week_popen, week_pnigh)
+    # wk_factunit = factunit_shop(wk_way, wk_way, wk_popen, wk_pnigh)
     # tue_reasonheirs = {tue_way: reasonheir_shop(tue_way, None, False)}
-    # x_bud_concept_dict = {week_concept.get_concept_way(): week_concept, tue_concept.get_concept_way(): tue_concept}
+    # x_bud_concept_dict = {wk_concept.get_concept_way(): wk_concept, tue_concept.get_concept_way(): tue_concept}
     # ball_concept.set_reasonheirs(x_bud_concept_dict, tue_reasonheirs)
-    x_range_inheritors = {tue_way: week_way}
-    week_factheir = factheir_shop(week_way, week_way, week_popen, week_pnigh)
+    x_range_inheritors = {tue_way: wk_way}
+    wk_factheir = factheir_shop(wk_way, wk_way, wk_popen, wk_pnigh)
 
     tue_popen = 113
     tue_pnigh = 117
     tue_factheir = factheir_shop(tue_way, tue_way, tue_popen, tue_pnigh)
     ball_concept = yao_bud.get_concept_obj(ball_way)
-    print(f"{week_way=} {ball_concept._factheirs.keys()=}")
-    assert ball_concept._factheirs.get(week_way) == week_factheir
+    print(f"{wk_way=} {ball_concept._factheirs.keys()=}")
+    assert ball_concept._factheirs.get(wk_way) == wk_factheir
     assert len(ball_concept._factheirs) == 2
-    assert ball_concept._factheirs == {tue_way: tue_factheir, week_way: week_factheir}
+    assert ball_concept._factheirs == {tue_way: tue_factheir, wk_way: wk_factheir}

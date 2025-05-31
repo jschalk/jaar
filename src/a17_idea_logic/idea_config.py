@@ -1,10 +1,10 @@
+from os import getcwd as os_getcwd
+from src.a00_data_toolbox.db_toolbox import get_sorted_intersection_list
 from src.a00_data_toolbox.file_toolbox import (
-    open_json,
     create_path,
     get_json_filename,
+    open_json,
 )
-from src.a00_data_toolbox.db_toolbox import get_sorted_intersection_list
-from os import getcwd as os_getcwd
 
 
 def get_idea_config_filename() -> str:
@@ -212,7 +212,7 @@ def get_idea_elements_sort_order() -> list[str]:
         "_all_acct_cred",
         "_keeps_justified",
         "_offtrack_fund",
-        "_rcontext_concept_active_value",
+        "_rconcept_active_value",
         "_irrational_debtit_belief",
         "_sum_healerlink_share",
         "_keeps_buildable",
@@ -391,7 +391,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "_stop_calc": "REAL",
         "_all_acct_cred": "INTEGER",
         "_all_acct_debt": "INTEGER",
-        "_rcontext_concept_active_value": "INTEGER",
+        "_rconcept_active_value": "INTEGER",
         "_inallocable_debtit_belief": "REAL",
         "_irrational_debtit_belief": "REAL",
         "_status": "INTEGER",

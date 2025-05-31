@@ -1,5 +1,5 @@
-from src.a00_data_toolbox.file_toolbox import open_json, create_path
 from os import getcwd as os_getcwd
+from src.a00_data_toolbox.file_toolbox import create_path, open_json
 
 
 def get_bud_calc_config_filename() -> str:
@@ -82,7 +82,7 @@ def get_bud_calc_args_type_dict() -> dict[str, str]:
         "pdivisor": "int",
         "pnigh": "float",
         "popen": "float",
-        "_rcontext_concept_active_value": "int",
+        "_rconcept_active_value": "int",
         "rconcept_active_requisite": "bool",
         "labor_title": "TitleTerm",
         "_owner_name_labor": "int",
@@ -162,7 +162,7 @@ def get_bud_calc_args_sqlite_datatype_dict() -> dict[str, str]:
         "pnigh": "REAL",
         "popen": "REAL",
         "owner_name": "TEXT",
-        "_rcontext_concept_active_value": "INTEGER",
+        "_rconcept_active_value": "INTEGER",
         "rconcept_active_requisite": "INTEGER",
         "labor_title": "TEXT",
         "bridge": "TEXT",
@@ -193,7 +193,6 @@ def get_bud_calc_args_sqlite_datatype_dict() -> dict[str, str]:
         "penny": "REAL",
         "respect_bit": "REAL",
         "tally": "INTEGER",
-        "world_id": "TEXT",
     }
 
 

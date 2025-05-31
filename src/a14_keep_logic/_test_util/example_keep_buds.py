@@ -1,4 +1,4 @@
-from src.a06_bud_logic.bud import BudUnit, budunit_shop, conceptunit_shop, FiscLabel
+from src.a06_bud_logic.bud import BudUnit, FiscLabel, budunit_shop, conceptunit_shop
 from src.a14_keep_logic._test_util.a14_env import temp_fisc_label
 
 

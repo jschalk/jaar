@@ -1,9 +1,9 @@
+from src.a06_bud_logic._test_util.example_buds import budunit_v001_with_large_agenda
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic.report import (
     get_bud_acctunits_dataframe,
     get_bud_agenda_dataframe,
 )
-from src.a06_bud_logic._test_util.example_buds import budunit_v001_with_large_agenda
 
 
 def test_get_bud_acctunits_dataframe_ReturnsCorrectDataFrame():
@@ -70,8 +70,8 @@ def test_get_bud_acctunits_dataframe_ReturnsCorrectEmptyDataFrame():
 def test_get_bud_agenda_dataframe_ReturnsCorrectDataFrame():
     # ESTABLISH
     yao_bud = budunit_v001_with_large_agenda()
-    week_str = "weekdays"
-    week_way = yao_bud.make_l1_way(week_str)
+    wk_str = "wkdays"
+    wk_way = yao_bud.make_l1_way(wk_str)
     assert len(yao_bud.get_agenda_dict()) == 63
 
     # WHEN

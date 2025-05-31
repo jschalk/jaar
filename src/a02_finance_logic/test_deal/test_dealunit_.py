@@ -1,24 +1,19 @@
-from src.a02_finance_logic.finance_config import default_fund_pool
+from pytest import raises as pytest_raises
+from src.a02_finance_logic._test_util.a02_str import (
+    celldepth_str,
+    deal_acct_nets_str,
+    deal_time_str,
+    magnitude_str,
+    quota_str,
+)
 from src.a02_finance_logic.deal import (
+    DEFAULT_CELLDEPTH,
     DealUnit,
     dealunit_shop,
     get_dealunit_from_dict,
     get_dealunit_from_json,
-    DEFAULT_CELLDEPTH,
 )
-from src.a02_finance_logic._test_util.a02_str import (
-    quota_str,
-    deal_time_str,
-    tran_time_str,
-    bridge_str,
-    celldepth_str,
-    magnitude_str,
-    deal_acct_nets_str,
-    world_id_str,
-    acct_name_str,
-)
-
-from pytest import raises as pytest_raises
+from src.a02_finance_logic.finance_config import default_fund_pool
 
 
 def test_DEFAULT_CELLDEPTH():

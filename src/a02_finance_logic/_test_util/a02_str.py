@@ -29,6 +29,10 @@ def fund_coin_str() -> str:
     return "fund_coin"
 
 
+def fund_pool_str() -> str:
+    return "fund_pool"
+
+
 def magnitude_str() -> str:
     return "magnitude"
 
@@ -51,7 +55,3 @@ def quota_str() -> str:
 
 def tran_time_str() -> str:
     return "tran_time"
-
-
-def world_id_str() -> str:
-    return "world_id"
