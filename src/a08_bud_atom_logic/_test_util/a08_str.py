@@ -1,9 +1,9 @@
 from src.a00_data_toolbox._test_util.a00_str import (
-    UPDATE_str,
     INSERT_str,
+    UPDATE_str,
     sqlite_datatype_str,
 )
-from src.a06_bud_logic._test_util.a06_str import jkeys_str, dimen_str
+from src.a06_bud_logic._test_util.a06_str import dimen_str, jkeys_str
 
 
 def DELETE_str() -> str:

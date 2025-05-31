@@ -1,8 +1,9 @@
-from src.a00_data_toolbox.db_toolbox import get_row_count, db_table_exists
+from sqlite3 import connect as sqlite3_connect
+from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.a02_finance_logic._test_util.a02_str import (
     deal_time_str,
-    owner_name_str,
     fisc_label_str,
+    owner_name_str,
 )
 from src.a09_pack_logic._test_util.a09_str import event_int_str
 from src.a15_fisc_logic._test_util.a15_str import fisc_dealunit_str
@@ -11,7 +12,6 @@ from src.a18_etl_toolbox.transformers import (
     create_sound_and_voice_tables,
     etl_voice_raw_tables_to_fisc_ote1_agg,
 )
-from sqlite3 import connect as sqlite3_connect
 
 
 def test_etl_voice_raw_tables_to_fisc_ote1_agg_SetsTableAttr():

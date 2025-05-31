@@ -1,5 +1,5 @@
 from src.a01_term_logic.way import create_way
-from src.a04_reason_logic.reason_concept import factunit_shop, FactUnit
+from src.a04_reason_logic.reason_concept import FactUnit, factunit_shop
 
 
 def example_casa_clean_factunit() -> FactUnit:

@@ -1,14 +1,14 @@
+from copy import deepcopy as copy_deepcopy
+from dataclasses import dataclass
 from src.a00_data_toolbox.dict_toolbox import get_empty_dict_if_None
 from src.a01_term_logic.way import (
     WayTerm,
-    rebuild_way,
-    find_replace_way_key_dict,
-    replace_bridge,
-    is_heir_way,
     default_bridge_if_None,
+    find_replace_way_key_dict,
+    is_heir_way,
+    rebuild_way,
+    replace_bridge,
 )
-from copy import deepcopy as copy_deepcopy
-from dataclasses import dataclass
 
 
 class InvalidReasonException(Exception):

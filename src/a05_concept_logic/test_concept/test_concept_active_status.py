@@ -1,13 +1,14 @@
-from src.a01_term_logic.way import get_default_fisc_label as root_label, create_way
+from src.a01_term_logic.way import create_way
+from src.a01_term_logic.way import get_default_fisc_label as root_label
 from src.a03_group_logic.group import awardheir_shop, awardlink_shop
 from src.a04_reason_logic.reason_concept import (
-    reasonunit_shop,
-    reasonheir_shop,
-    premiseunit_shop,
     factheir_shop,
     factunit_shop,
+    premiseunit_shop,
+    reasonheir_shop,
+    reasonunit_shop,
 )
-from src.a04_reason_logic.reason_labor import laborunit_shop, laborheir_shop
+from src.a04_reason_logic.reason_labor import laborheir_shop, laborunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
 
 

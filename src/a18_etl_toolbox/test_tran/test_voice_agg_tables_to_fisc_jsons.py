@@ -1,37 +1,37 @@
-from src.a00_data_toolbox.file_toolbox import open_file
+from os.path import exists as os_path_exists
+from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import (
-    get_row_count,
-    db_table_exists,
     create_select_query,
+    db_table_exists,
+    get_row_count,
 )
+from src.a00_data_toolbox.file_toolbox import open_file
 from src.a02_finance_logic._test_util.a02_str import fisc_label_str
 from src.a12_hub_tools.hub_path import create_fisc_json_path
-from src.a15_fisc_logic.fisc import get_from_json as fiscunit_get_from_json
-from src.a15_fisc_logic.fisc_config import get_fisc_dimens
 from src.a15_fisc_logic._test_util.a15_str import (
-    fiscunit_str,
     fisc_cashbook_str,
     fisc_dealunit_str,
     fisc_timeline_hour_str,
     fisc_timeline_month_str,
     fisc_timeline_weekday_str,
     fisc_timeoffi_str,
+    fiscunit_str,
+)
+from src.a15_fisc_logic.fisc import get_from_json as fiscunit_get_from_json
+from src.a15_fisc_logic.fisc_config import get_fisc_dimens
+from src.a18_etl_toolbox._test_util.a18_env import (
+    env_dir_setup_cleanup,
+    get_module_temp_dir,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
-    get_dimen_abbv7,
     create_prime_tablename,
+    get_dimen_abbv7,
     get_fisc_voice_select1_sqlstrs,
 )
 from src.a18_etl_toolbox.transformers import (
     create_sound_and_voice_tables,
     etl_voice_agg_tables_to_fisc_jsons,
 )
-from src.a18_etl_toolbox._test_util.a18_env import (
-    get_module_temp_dir,
-    env_dir_setup_cleanup,
-)
-from os.path import exists as os_path_exists
-from sqlite3 import connect as sqlite3_connect
 
 
 def test_get_fisc_voice_select1_sqlstrs_ReturnsObj_HasAllNeededKeys():

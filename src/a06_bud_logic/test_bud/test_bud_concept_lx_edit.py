@@ -1,14 +1,14 @@
+from pytest import raises as pytest_raises
 from src.a01_term_logic.way import (
-    get_default_fisc_label as root_label,
-    to_way,
     get_default_fisc_way,
+    to_way,
 )
+from src.a01_term_logic.way import get_default_fisc_label as root_label
 from src.a05_concept_logic.concept import conceptunit_shop
-from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._test_util.example_buds import (
     get_budunit_with_4_levels_and_2reasons_2facts,
 )
-from pytest import raises as pytest_raises
+from src.a06_bud_logic.bud import budunit_shop
 
 
 def test_BudUnit_edit_concept_label_FailsWhenConceptDoesNotExist():

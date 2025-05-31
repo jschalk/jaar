@@ -2,33 +2,33 @@ from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
 from src.a02_finance_logic._test_util.a02_str import owner_name_str
 from src.a06_bud_logic._test_util.a06_str import (
     acct_name_str,
-    credit_belief_str,
-    debtit_belief_str,
-    concept_label_str,
-    parent_way_str,
+    addin_str,
     begin_str,
     close_str,
-    addin_str,
+    concept_label_str,
+    credit_belief_str,
+    debtit_belief_str,
     denom_str,
-    numor_str,
     morph_str,
+    numor_str,
+    parent_way_str,
 )
-from src.a15_fisc_logic.fisc_report import (
-    get_fisc_guts_accts_dataframe,
-    get_fisc_guts_accts_plotly_fig,
-    get_fisc_jobs_accts_dataframe,
-    get_fisc_jobs_accts_plotly_fig,
-    get_fisc_guts_agenda_dataframe,
-    get_fisc_guts_agenda_plotly_fig,
-    get_fisc_jobs_agenda_dataframe,
-    get_fisc_jobs_agenda_plotly_fig,
-)
+from src.a15_fisc_logic._test_util.a15_env import env_dir_setup_cleanup
 from src.a15_fisc_logic._test_util.example_fiscs import (
     create_example_fisc2,
     create_example_fisc3,
     create_example_fisc4,
 )
-from src.a15_fisc_logic._test_util.a15_env import env_dir_setup_cleanup
+from src.a15_fisc_logic.fisc_report import (
+    get_fisc_guts_accts_dataframe,
+    get_fisc_guts_accts_plotly_fig,
+    get_fisc_guts_agenda_dataframe,
+    get_fisc_guts_agenda_plotly_fig,
+    get_fisc_jobs_accts_dataframe,
+    get_fisc_jobs_accts_plotly_fig,
+    get_fisc_jobs_agenda_dataframe,
+    get_fisc_jobs_agenda_plotly_fig,
+)
 
 
 def test_get_fisc_guts_accts_dataframe_ReturnsObj(env_dir_setup_cleanup, graphics_bool):

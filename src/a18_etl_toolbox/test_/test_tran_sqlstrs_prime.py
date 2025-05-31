@@ -1,72 +1,75 @@
+from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import (
+    create_insert_into_clause_str as get_insert_sql,
+)
+from src.a00_data_toolbox.db_toolbox import (
+    create_table2table_agg_insert_query,
+    create_update_inconsistency_error_query,
     db_table_exists,
     get_create_table_sqlstr,
     get_table_columns,
-    create_update_inconsistency_error_query,
-    create_table2table_agg_insert_query,
-    create_insert_into_clause_str as get_insert_sql,
-    create_select_query as get_select_sql,
 )
+from src.a00_data_toolbox.db_toolbox import create_select_query as get_select_sql
 from src.a06_bud_logic._test_util.a06_str import (
-    budunit_str,
-    bud_acctunit_str,
     bud_acct_membership_str,
-    bud_conceptunit_str,
+    bud_acctunit_str,
     bud_concept_awardlink_str,
-    bud_concept_reasonunit_str,
-    bud_concept_reason_premiseunit_str,
-    bud_concept_laborlink_str,
-    bud_concept_healerlink_str,
     bud_concept_factunit_str,
+    bud_concept_healerlink_str,
+    bud_concept_laborlink_str,
+    bud_concept_reason_premiseunit_str,
+    bud_concept_reasonunit_str,
+    bud_conceptunit_str,
+    budunit_str,
 )
 from src.a08_bud_atom_logic.atom_config import get_bud_dimens, get_delete_key_name
-from src.a09_pack_logic._test_util.a09_str import face_name_str, event_int_str
+from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a15_fisc_logic._test_util.a15_str import (
-    fiscunit_str,
     fisc_cashbook_str,
     fisc_dealunit_str,
     fisc_timeline_hour_str,
     fisc_timeline_month_str,
     fisc_timeline_weekday_str,
     fisc_timeoffi_str,
+    fiscunit_str,
 )
 from src.a15_fisc_logic.fisc_config import get_fisc_dimens
-from src.a16_pidgin_logic.pidgin_config import get_pidgin_dimens, find_set_otx_inx_args
 from src.a16_pidgin_logic._test_util.a16_str import (
-    pidgin_title_str,
-    pidgin_name_str,
-    pidgin_way_str,
-    pidgin_label_str,
-    pidgin_core_str,
-    otx_bridge_str,
     inx_bridge_str,
+    otx_bridge_str,
+    pidgin_core_str,
+    pidgin_label_str,
+    pidgin_name_str,
+    pidgin_title_str,
+    pidgin_way_str,
     unknown_str_str,
 )
+from src.a16_pidgin_logic.pidgin_config import find_set_otx_inx_args, get_pidgin_dimens
 from src.a17_idea_logic._test_util.a17_str import idea_category_str, idea_number_str
 from src.a17_idea_logic.idea_config import (
-    get_idea_sqlite_types,
-    get_idea_config_dict,
     get_default_sorted_list,
+    get_idea_config_dict,
+    get_idea_sqlite_types,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
-    get_dimen_abbv7,
-    create_prime_tablename as prime_tbl,
-    get_prime_create_table_sqlstrs,
-    get_bud_voice_agg_tablenames,
-    get_fisc_bud_sound_agg_tablenames,
+    create_insert_into_pidgin_core_raw_sqlstr,
+    create_insert_missing_face_name_into_pidgin_core_vld_sqlstr,
+    create_insert_pidgin_core_agg_into_vld_sqlstr,
+    create_insert_pidgin_sound_vld_table_sqlstr,
+)
+from src.a18_etl_toolbox.tran_sqlstrs import (
+    create_sound_agg_insert_sqlstrs,
     create_sound_and_voice_tables,
     create_sound_raw_update_inconsist_error_message_sqlstr,
-    create_sound_agg_insert_sqlstrs,
-    create_insert_into_pidgin_core_raw_sqlstr,
-    create_insert_pidgin_core_agg_into_vld_sqlstr,
-    create_insert_missing_face_name_into_pidgin_core_vld_sqlstr,
-    create_insert_pidgin_sound_vld_table_sqlstr,
-    get_insert_into_voice_raw_sqlstrs,
+    get_bud_voice_agg_tablenames,
+    get_dimen_abbv7,
+    get_fisc_bud_sound_agg_tablenames,
     get_insert_into_sound_vld_sqlstrs,
+    get_insert_into_voice_raw_sqlstrs,
+    get_prime_create_table_sqlstrs,
 )
-from sqlite3 import connect as sqlite3_connect
-
+from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_tbl
 
 BUD_PRIME_TABLENAMES = {
     f"{bud_acct_membership_str()}_sound_put_agg": "BUDMEMB_PUT_AGG",

@@ -1,12 +1,12 @@
 from src.a01_term_logic.way import FiscLabel
 from src.a06_bud_logic._test_util.a06_str import (
+    acct_name_str,
     bud_acctunit_str,
     bud_conceptunit_str,
-    acct_name_str,
-    parent_way_str,
     concept_label_str,
+    parent_way_str,
 )
-from src.a08_bud_atom_logic._test_util.a08_str import INSERT_str, UPDATE_str, DELETE_str
+from src.a08_bud_atom_logic._test_util.a08_str import DELETE_str, INSERT_str, UPDATE_str
 from src.a08_bud_atom_logic.atom import BudAtom, budatom_shop
 from src.a09_pack_logic.delta import BudDelta, buddelta_shop
 

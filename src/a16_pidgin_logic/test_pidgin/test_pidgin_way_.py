@@ -1,6 +1,6 @@
-from src.a01_term_logic.way import default_bridge_if_None, create_way, to_way
+from pytest import raises as pytest_raises
+from src.a01_term_logic.way import create_way, default_bridge_if_None, to_way
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
-from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
 from src.a16_pidgin_logic._test_util.a16_str import (
     inx_bridge_str,
     otx2inx_str,
@@ -8,15 +8,14 @@ from src.a16_pidgin_logic._test_util.a16_str import (
     unknown_str_str,
 )
 from src.a16_pidgin_logic.map import (
-    labelmap_shop,
     WayMap,
-    waymap_shop,
     get_waymap_from_dict,
     get_waymap_from_json,
     inherit_waymap,
+    labelmap_shop,
+    waymap_shop,
 )
-from pytest import raises as pytest_raises
-
+from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
 
 # The goal of the pidgin function is to allow a single command, pointing at a bunch of directories
 # initialize fiscunits and output acct metrics such as calendars, financial status, healer status

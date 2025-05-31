@@ -1,39 +1,46 @@
+from copy import copy as copy_copy
+from copy import deepcopy as copy_deepcopy
+from os.path import exists as os_path_exists
+from pandas import read_excel as pandas_read_excel
+from pandas import read_sql_query as pandas_read_sql_query
+from sqlite3 import Connection as sqlite3_Connection
+from sqlite3 import Cursor as sqlite3_Cursor
+from src.a00_data_toolbox.csv_toolbox import open_csv_with_types
+from src.a00_data_toolbox.db_toolbox import (
+    _get_grouping_groupby_clause,
+    create_insert_into_clause_str,
+    create_select_query,
+    create_table_from_columns,
+    create_update_inconsistency_error_query,
+    db_table_exists,
+    get_db_tables,
+    get_row_count,
+    get_table_columns,
+    save_to_split_csvs,
+)
 from src.a00_data_toolbox.file_toolbox import (
     create_path,
     get_dir_file_strs,
-    save_file,
-    open_file,
-    save_json,
-    open_json,
     get_level1_dirs,
+    open_file,
+    open_json,
+    save_file,
+    save_json,
 )
-from src.a00_data_toolbox.csv_toolbox import open_csv_with_types
-from src.a00_data_toolbox.db_toolbox import (
-    db_table_exists,
-    get_row_count,
-    save_to_split_csvs,
-    get_db_tables,
-    create_select_query,
-    create_insert_into_clause_str,
-    _get_grouping_groupby_clause,
-    get_table_columns,
-    create_table_from_columns,
-    create_update_inconsistency_error_query,
-)
-from src.a01_term_logic.way import FaceName, EventInt
-from src.a06_bud_logic.bud import budunit_shop, BudUnit
+from src.a01_term_logic.way import EventInt, FaceName
+from src.a06_bud_logic.bud import BudUnit, budunit_shop
 from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a08_bud_atom_logic.atom_config import get_bud_dimens
 from src.a09_pack_logic.delta import get_minimal_buddelta
-from src.a09_pack_logic.pack import packunit_shop, get_packunit_from_json, PackUnit
+from src.a09_pack_logic.pack import PackUnit, get_packunit_from_json, packunit_shop
 from src.a12_hub_tools.hub_path import (
-    create_gut_path,
-    create_job_path,
-    create_fisc_ote1_csv_path,
-    create_fisc_ote1_json_path,
-    create_owner_event_dir_path,
     create_budevent_path,
     create_event_all_pack_path,
+    create_fisc_ote1_csv_path,
+    create_fisc_ote1_json_path,
+    create_gut_path,
+    create_job_path,
+    create_owner_event_dir_path,
 )
 from src.a12_hub_tools.hub_tool import (
     collect_owner_event_dir_sets,
@@ -45,77 +52,70 @@ from src.a15_fisc_logic.fisc import (
     get_from_default_path as fiscunit_get_from_default_path,
 )
 from src.a15_fisc_logic.fisc_tool import (
-    create_fisc_owners_cell_trees,
-    set_cell_trees_found_facts,
-    set_cell_trees_decrees,
-    set_cell_tree_cell_mandates,
     create_deal_mandate_ledgers,
+    create_fisc_owners_cell_trees,
+    set_cell_tree_cell_mandates,
+    set_cell_trees_decrees,
+    set_cell_trees_found_facts,
 )
 from src.a16_pidgin_logic.pidgin import (
     default_bridge_if_None,
     default_unknown_str_if_None,
 )
 from src.a16_pidgin_logic.pidgin_config import (
-    get_quick_pidgens_column_ref,
     get_pidgin_args_class_types,
     get_pidgin_LabelTerm_args,
     get_pidgin_NameTerm_args,
     get_pidgin_TitleTerm_args,
     get_pidgin_WayTerm_args,
+    get_quick_pidgens_column_ref,
 )
+from src.a17_idea_logic.idea import get_idearef_obj
 from src.a17_idea_logic.idea_config import (
-    get_idea_numbers,
-    get_idea_format_filename,
     get_idea_dimen_ref,
+    get_idea_format_filename,
+    get_idea_numbers,
     get_idea_sqlite_types,
     get_idearef_from_file,
 )
-from src.a17_idea_logic.idea import get_idearef_obj
 from src.a17_idea_logic.idea_db_tool import (
-    get_default_sorted_list,
     create_idea_sorted_table,
-    upsert_sheet,
-    split_excel_into_dirs,
+    get_default_sorted_list,
     get_grouping_with_all_values_equal_sql_query,
+    split_excel_into_dirs,
+    upsert_sheet,
 )
 from src.a17_idea_logic.pidgin_toolbox import init_pidginunit_from_dir
+from src.a18_etl_toolbox.db_obj_bud_tool import insert_job_obj
+from src.a18_etl_toolbox.db_obj_fisc_tool import get_fisc_dict_from_voice_tables
+from src.a18_etl_toolbox.idea_collector import IdeaFileRef, get_all_idea_dataframes
 from src.a18_etl_toolbox.tran_sqlstrs import (
-    create_prime_tablename,
-    get_fisc_bud_sound_agg_tablenames,
-    create_sound_and_voice_tables,
-    create_sound_raw_update_inconsist_error_message_sqlstr,
-    create_sound_agg_insert_sqlstrs,
-    create_insert_into_pidgin_core_raw_sqlstr,
-    create_insert_pidgin_core_agg_into_vld_sqlstr,
-    create_update_pidgin_sound_agg_inconsist_sqlstr,
-    create_update_pidlabe_sound_agg_bridge_error_sqlstr,
-    create_update_pidwayy_sound_agg_bridge_error_sqlstr,
-    create_update_pidname_sound_agg_bridge_error_sqlstr,
-    create_update_pidtitl_sound_agg_bridge_error_sqlstr,
-    create_insert_missing_face_name_into_pidgin_core_vld_sqlstr,
-    create_insert_pidgin_sound_vld_table_sqlstr,
-    get_insert_into_sound_vld_sqlstrs,
-    get_insert_into_voice_raw_sqlstrs,
-    get_bud_voice_agg_tablenames,
-    create_update_voice_raw_existing_inx_col_sqlstr,
-    create_update_voice_raw_empty_inx_col_sqlstr,
-    get_insert_voice_agg_sqlstrs,
-    create_bridge_exists_in_name_error_update_sqlstr,
-    create_bridge_exists_in_label_error_update_sqlstr,
     CREATE_FISC_OTE1_AGG_SQLSTR,
     INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR,
+    create_bridge_exists_in_label_error_update_sqlstr,
+    create_bridge_exists_in_name_error_update_sqlstr,
+    create_insert_into_pidgin_core_raw_sqlstr,
+    create_insert_missing_face_name_into_pidgin_core_vld_sqlstr,
+    create_insert_pidgin_core_agg_into_vld_sqlstr,
+    create_insert_pidgin_sound_vld_table_sqlstr,
     create_job_tables,
+    create_prime_tablename,
+    create_sound_agg_insert_sqlstrs,
+    create_sound_and_voice_tables,
+    create_sound_raw_update_inconsist_error_message_sqlstr,
+    create_update_pidgin_sound_agg_inconsist_sqlstr,
+    create_update_pidlabe_sound_agg_bridge_error_sqlstr,
+    create_update_pidname_sound_agg_bridge_error_sqlstr,
+    create_update_pidtitl_sound_agg_bridge_error_sqlstr,
+    create_update_pidwayy_sound_agg_bridge_error_sqlstr,
+    create_update_voice_raw_empty_inx_col_sqlstr,
+    create_update_voice_raw_existing_inx_col_sqlstr,
+    get_bud_voice_agg_tablenames,
+    get_fisc_bud_sound_agg_tablenames,
+    get_insert_into_sound_vld_sqlstrs,
+    get_insert_into_voice_raw_sqlstrs,
+    get_insert_voice_agg_sqlstrs,
 )
-from src.a18_etl_toolbox.db_obj_fisc_tool import get_fisc_dict_from_voice_tables
-from src.a18_etl_toolbox.db_obj_bud_tool import insert_job_obj
-from src.a18_etl_toolbox.idea_collector import get_all_idea_dataframes, IdeaFileRef
-from copy import deepcopy as copy_deepcopy, copy as copy_copy
-from os.path import exists as os_path_exists
-from pandas import (
-    read_excel as pandas_read_excel,
-    read_sql_query as pandas_read_sql_query,
-)
-from sqlite3 import Connection as sqlite3_Connection, Cursor as sqlite3_Cursor
 
 
 def etl_mud_dfs_to_brick_raw_tables(conn: sqlite3_Connection, mud_dir: str):

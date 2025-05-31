@@ -1,6 +1,6 @@
+from dataclasses import dataclass
 from src.a00_data_toolbox.dict_toolbox import get_empty_dict_if_None
 from src.a03_group_logic.acct import AcctName
-from dataclasses import dataclass
 
 
 @dataclass

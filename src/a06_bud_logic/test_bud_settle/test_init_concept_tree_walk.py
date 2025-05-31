@@ -1,9 +1,9 @@
 from src.a01_term_logic.way import to_way
 from src.a04_reason_logic.reason_concept import reasonunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
+from src.a06_bud_logic._test_util.example_buds import get_budunit_with_4_levels
 from src.a06_bud_logic.bud import budunit_shop, get_sorted_concept_list
 from src.a06_bud_logic.tree_metrics import TreeMetrics, treemetrics_shop
-from src.a06_bud_logic._test_util.example_buds import get_budunit_with_4_levels
 
 
 def test_TreeMetrics_Exists():

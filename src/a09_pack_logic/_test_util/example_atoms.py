@@ -1,7 +1,7 @@
-from src.a01_term_logic.way import create_way, FiscLabel
+from src.a01_term_logic.way import FiscLabel, create_way
 from src.a06_bud_logic._test_util.a06_str import bud_conceptunit_str, concept_way_str
 from src.a08_bud_atom_logic._test_util.a08_str import INSERT_str
-from src.a08_bud_atom_logic.atom import budatom_shop, BudAtom
+from src.a08_bud_atom_logic.atom import BudAtom, budatom_shop
 
 
 def get_atom_example_conceptunit_sports(fisc_label: FiscLabel = None) -> BudAtom:

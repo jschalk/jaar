@@ -1,9 +1,9 @@
+from src.a06_bud_logic._test_util.example_buds import budunit_v001_with_large_agenda
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic.report import (
     get_bud_acctunits_dataframe,
     get_bud_agenda_dataframe,
 )
-from src.a06_bud_logic._test_util.example_buds import budunit_v001_with_large_agenda
 
 
 def test_get_bud_acctunits_dataframe_ReturnsCorrectDataFrame():

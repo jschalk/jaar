@@ -1,9 +1,9 @@
 from src.a01_term_logic.way import to_way
 from src.a05_concept_logic.concept import conceptunit_shop
-from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._test_util.example_buds import (
     get_budunit_with_4_levels_and_2reasons,
 )
+from src.a06_bud_logic.bud import budunit_shop
 
 
 def test_BudUnit_set_concepttree_range_attrs_SetsInitialConcept_gogo_calc_stop_calc_UnitDoesNotErrorWithEmptyBudUnit():

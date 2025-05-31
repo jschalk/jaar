@@ -1,7 +1,7 @@
 from src.a05_concept_logic.healer import (
     HealerLink,
-    healerlink_shop,
     healerlink_get_from_dict,
+    healerlink_shop,
 )
 
 

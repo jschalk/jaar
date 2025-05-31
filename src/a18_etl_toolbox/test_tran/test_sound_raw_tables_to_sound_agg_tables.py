@@ -1,33 +1,33 @@
-from src.a00_data_toolbox.db_toolbox import get_table_columns, get_row_count
-from src.a02_finance_logic._test_util.a02_str import owner_name_str, fisc_label_str
+from sqlite3 import connect as sqlite3_connect
+from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
+from src.a02_finance_logic._test_util.a02_str import fisc_label_str, owner_name_str
 from src.a06_bud_logic._test_util.a06_str import (
-    bud_acctunit_str,
     acct_name_str,
+    bud_acctunit_str,
     credit_belief_str,
     debtit_belief_str,
 )
-from src.a09_pack_logic._test_util.a09_str import face_name_str, event_int_str
+from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic._test_util.a16_str import (
-    pidgin_way_str,
     inx_bridge_str,
-    otx_bridge_str,
     inx_way_str,
+    otx_bridge_str,
     otx_way_str,
+    pidgin_way_str,
     unknown_str_str,
 )
 from src.a17_idea_logic._test_util.a17_str import idea_number_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
+    CREATE_PIDWAYY_SOUND_RAW_SQLSTR,
     create_prime_tablename,
     create_sound_and_voice_tables,
-    CREATE_PIDWAYY_SOUND_RAW_SQLSTR,
     create_sound_raw_update_inconsist_error_message_sqlstr,
 )
 from src.a18_etl_toolbox.transformers import (
+    etl_sound_raw_tables_to_sound_agg_tables,
     insert_sound_raw_selects_into_sound_agg_tables,
     set_sound_raw_tables_error_message,
-    etl_sound_raw_tables_to_sound_agg_tables,
 )
-from sqlite3 import connect as sqlite3_connect
 
 
 def test_create_sound_raw_update_inconsist_error_message_sqlstr_ExecutedSqlUpdatesTableCorrectly_Scenario0():

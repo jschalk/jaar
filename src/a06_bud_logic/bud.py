@@ -1,49 +1,51 @@
+from copy import deepcopy as copy_deepcopy
+from dataclasses import dataclass
 from src.a00_data_toolbox.dict_toolbox import (
-    get_json_from_dict,
-    get_dict_from_json,
-    get_1_if_None,
     get_0_if_None,
-    get_False_if_None,
+    get_1_if_None,
+    get_dict_from_json,
     get_empty_dict_if_None,
+    get_False_if_None,
+    get_json_from_dict,
 )
 from src.a01_term_logic.way import (
-    get_parent_way,
-    to_way,
-    is_sub_way,
+    AcctName,
+    FiscLabel,
+    HealerName,
+    LabelTerm,
+    OwnerName,
+    WayTerm,
     all_wayterms_between,
-    rebuild_way,
-    get_tail_label,
-    get_root_label_from_way,
-    get_ancestor_ways,
-    get_default_fisc_label,
-    get_all_way_labels,
-    get_forefather_ways,
     create_way,
     default_bridge_if_None,
-    LabelTerm,
-    WayTerm,
+    get_all_way_labels,
+    get_ancestor_ways,
+    get_default_fisc_label,
+    get_forefather_ways,
+    get_parent_way,
+    get_root_label_from_way,
+    get_tail_label,
     is_string_in_way,
-    OwnerName,
-    AcctName,
-    HealerName,
-    FiscLabel,
+    is_sub_way,
+    rebuild_way,
+    to_way,
     wayterm_valid_dir_path,
 )
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import (
-    valid_finance_ratio,
-    default_RespectBit_if_None,
-    filter_penny,
-    default_fund_coin_if_None,
-    validate_fund_pool,
     BitNum,
-    RespectNum,
-    PennyNum,
     FundCoin,
     FundNum,
+    PennyNum,
+    RespectNum,
+    default_fund_coin_if_None,
+    default_RespectBit_if_None,
+    filter_penny,
+    valid_finance_ratio,
+    validate_fund_pool,
     validate_respect_num,
 )
-from src.a03_group_logic.acct import AcctUnit, acctunits_get_from_dict, acctunit_shop
+from src.a03_group_logic.acct import AcctUnit, acctunit_shop, acctunits_get_from_dict
 from src.a03_group_logic.group import (
     AwardLink,
     GroupTitle,
@@ -53,29 +55,26 @@ from src.a03_group_logic.group import (
 )
 from src.a04_reason_logic.reason_concept import (
     FactUnit,
-    FactUnit,
     ReasonUnit,
     WayTerm,
     factunit_shop,
 )
 from src.a04_reason_logic.reason_labor import LaborUnit
-from src.a05_concept_logic.healer import HealerLink
 from src.a05_concept_logic.concept import (
-    ConceptUnit,
-    conceptunit_shop,
-    conceptattrholder_shop,
     ConceptAttrHolder,
+    ConceptUnit,
+    conceptattrholder_shop,
+    conceptunit_shop,
     get_obj_from_concept_dict,
 )
+from src.a05_concept_logic.healer import HealerLink
 from src.a05_concept_logic.origin import (
+    OriginUnit,
     originunit_get_from_dict,
     originunit_shop,
-    OriginUnit,
 )
 from src.a06_bud_logic.bud_config import max_tree_traverse_default
 from src.a06_bud_logic.tree_metrics import TreeMetrics, treemetrics_shop
-from copy import deepcopy as copy_deepcopy
-from dataclasses import dataclass
 
 
 class InvalidBudException(Exception):

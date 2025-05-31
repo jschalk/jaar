@@ -1,14 +1,6 @@
+from datetime import datetime
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_bud_logic.bud import budunit_shop
-from src.a07_calendar_logic._test_util.calendar_examples import (
-    get_creg_min_from_dt,
-    add_time_creg_conceptunit,
-    get_cregtime_str,
-    get_wed,
-    get_thu,
-    creg_weekday_conceptunits,
-)
-from src.a07_calendar_logic.chrono import get_year_way
 from src.a07_calendar_logic._test_util.a07_str import (
     day_str,
     days_str,
@@ -16,7 +8,15 @@ from src.a07_calendar_logic._test_util.a07_str import (
     week_str,
     weeks_str,
 )
-from datetime import datetime
+from src.a07_calendar_logic._test_util.calendar_examples import (
+    add_time_creg_conceptunit,
+    creg_weekday_conceptunits,
+    get_creg_min_from_dt,
+    get_cregtime_str,
+    get_thu,
+    get_wed,
+)
+from src.a07_calendar_logic.chrono import get_year_way
 
 
 def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_concept_Scenario0():

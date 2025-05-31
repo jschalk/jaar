@@ -1,9 +1,9 @@
 from src.a01_term_logic.way import create_way_from_labels
-from src.a03_group_logic.group import awardlink_shop
 from src.a03_group_logic.acct import acctunit_shop
+from src.a03_group_logic.group import awardlink_shop
 from src.a05_concept_logic.concept import conceptunit_shop
-from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._test_util.example_buds import budunit_v001
+from src.a06_bud_logic.bud import budunit_shop
 
 
 def test_BudUnit_get_tree_metrics_exists():

@@ -1,23 +1,23 @@
 from src.a00_data_toolbox.dict_toolbox import x_is_json
 from src.a01_term_logic.way import create_way
-from src.a06_bud_logic._test_util.a06_str import bud_concept_factunit_str
 from src.a06_bud_logic._test_util.a06_str import (
+    bud_concept_factunit_str,
     concept_way_str,
     fcontext_str,
-    fopen_str,
     fnigh_str,
+    fopen_str,
 )
 from src.a08_bud_atom_logic._test_util.a08_str import (
+    INSERT_str,
+    crud_str,
+    dimen_str,
     jkeys_str,
     jvalues_str,
-    dimen_str,
-    crud_str,
-    INSERT_str,
 )
 from src.a08_bud_atom_logic.atom import (
     budatom_shop,
-    get_from_json as budatom_get_from_json,
 )
+from src.a08_bud_atom_logic.atom import get_from_json as budatom_get_from_json
 
 
 def test_BudAtom_get_dict_ReturnsObj():

@@ -1,6 +1,6 @@
+from pytest import raises as pytest_raises
 from src.a01_term_logic.way import default_bridge_if_None
 from src.a02_finance_logic.finance_config import default_RespectBit_if_None
-from src.a03_group_logic.acct import AcctUnit, acctunit_shop
 from src.a03_group_logic._test_util.a03_str import (
     _credor_pool_str,
     _debtor_pool_str,
@@ -13,13 +13,13 @@ from src.a03_group_logic._test_util.a03_str import (
     _inallocable_debtit_belief_str,
     _irrational_debtit_belief_str,
     _memberships_str,
-    respect_bit_str,
-    credit_belief_str,
-    debtit_belief_str,
     acct_name_str,
     bridge_str,
+    credit_belief_str,
+    debtit_belief_str,
+    respect_bit_str,
 )
-from pytest import raises as pytest_raises
+from src.a03_group_logic.acct import AcctUnit, acctunit_shop
 
 
 def test_AcctUnit_exists():

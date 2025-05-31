@@ -1,16 +1,17 @@
 from src.a01_term_logic.way import WayTerm
 from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a05_concept_logic.concept import ConceptUnit, conceptunit_shop
-from src.a06_bud_logic.bud import budunit_shop, get_from_json as budunit_get_from_json
 from src.a06_bud_logic._test_util.example_buds import (
-    get_budunit_with_4_levels,
-    get_budunit_with_4_levels_and_2reasons,
-    get_budunit_with7amCleanTableReason,
-    get_budunit_with_4_levels_and_2reasons_2facts,
     budunit_v001,
     budunit_v001_with_large_agenda,
     budunit_v002,
+    get_budunit_with7amCleanTableReason,
+    get_budunit_with_4_levels,
+    get_budunit_with_4_levels_and_2reasons,
+    get_budunit_with_4_levels_and_2reasons_2facts,
 )
+from src.a06_bud_logic.bud import budunit_shop
+from src.a06_bud_logic.bud import get_from_json as budunit_get_from_json
 
 
 def get_tasks_count(agenda_dict: dict[WayTerm, ConceptUnit]) -> int:

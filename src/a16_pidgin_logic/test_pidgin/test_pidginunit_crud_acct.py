@@ -1,6 +1,6 @@
+from pytest import raises as pytest_raises
 from src.a16_pidgin_logic.map import namemap_shop
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
-from pytest import raises as pytest_raises
 
 
 def test_PidginUnit_set_namemap_SetsAttr():

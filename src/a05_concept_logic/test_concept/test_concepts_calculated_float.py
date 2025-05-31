@@ -1,5 +1,5 @@
+from src.a05_concept_logic.concept import concepts_calculated_range, conceptunit_shop
 from src.a05_concept_logic.range_toolbox import RangeUnit
-from src.a05_concept_logic.concept import conceptunit_shop, concepts_calculated_range
 
 
 def test_concepts_calculated_range_ReturnsObj_EmptyList():

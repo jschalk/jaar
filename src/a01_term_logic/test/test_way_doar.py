@@ -1,10 +1,12 @@
 from src.a01_term_logic.way import (
     default_bridge_if_None,
-    get_default_fisc_label as root_label,
-    get_default_fisc_way as root_way,
+)
+from src.a01_term_logic.way import (
     get_way_from_yaw,
     get_yaw_from_way,
 )
+from src.a01_term_logic.way import get_default_fisc_label as root_label
+from src.a01_term_logic.way import get_default_fisc_way as root_way
 
 
 def test_get_way_from_yaw_ReturnsObj_default_bridge():

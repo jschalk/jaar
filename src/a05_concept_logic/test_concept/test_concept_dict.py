@@ -1,15 +1,16 @@
-from src.a01_term_logic.way import get_default_fisc_label as root_label, create_way
+from src.a01_term_logic.way import create_way
+from src.a01_term_logic.way import get_default_fisc_label as root_label
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import (
-    reasonunit_shop,
-    reasonheir_shop,
     factunit_shop,
     premiseunit_shop,
+    reasonheir_shop,
+    reasonunit_shop,
 )
 from src.a04_reason_logic.reason_labor import laborunit_shop
+from src.a05_concept_logic.concept import conceptunit_shop, get_obj_from_concept_dict
 from src.a05_concept_logic.healer import healerlink_shop
 from src.a05_concept_logic.origin import originunit_shop
-from src.a05_concept_logic.concept import conceptunit_shop, get_obj_from_concept_dict
 
 
 def test_get_obj_from_concept_dict_ReturnsObj():

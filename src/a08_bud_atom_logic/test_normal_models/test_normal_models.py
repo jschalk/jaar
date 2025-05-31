@@ -1,34 +1,34 @@
+from sqlalchemy import inspect
 from src.a06_bud_logic._test_util.a06_str import (
-    budunit_str,
-    bud_acctunit_str,
     bud_acct_membership_str,
-    bud_conceptunit_str,
+    bud_acctunit_str,
     bud_concept_awardlink_str,
-    bud_concept_reasonunit_str,
-    bud_concept_reason_premiseunit_str,
-    bud_concept_laborlink_str,
-    bud_concept_healerlink_str,
     bud_concept_factunit_str,
+    bud_concept_healerlink_str,
+    bud_concept_laborlink_str,
+    bud_concept_reason_premiseunit_str,
+    bud_concept_reasonunit_str,
+    bud_conceptunit_str,
+    budunit_str,
 )
 from src.a08_bud_atom_logic._test_util.a08_str import (
-    normal_table_name_str,
     normal_specs_str,
+    normal_table_name_str,
     sqlite_datatype_str,
 )
 from src.a08_bud_atom_logic.atom_config import get_normalized_bud_table_build
 from src.a08_bud_atom_logic.normal_models import (
-    BudTable,
     AcctUnitTable,
-    MemberShipTable,
-    ConceptTable,
     AwardLinkTable,
-    ReasonTable,
-    PremiseTable,
-    LaborLinkTable,
-    HealerLinkTable,
+    BudTable,
+    ConceptTable,
     FactTable,
+    HealerLinkTable,
+    LaborLinkTable,
+    MemberShipTable,
+    PremiseTable,
+    ReasonTable,
 )
-from sqlalchemy import inspect
 
 
 def get_config_table_name(config_dimen) -> str:

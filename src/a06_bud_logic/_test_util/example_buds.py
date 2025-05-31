@@ -6,8 +6,8 @@ from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_bud_logic.bud import (
     BudUnit,
     budunit_shop,
-    get_from_json as budunit_get_from_json,
 )
+from src.a06_bud_logic.bud import get_from_json as budunit_get_from_json
 
 
 def budunit_v001() -> BudUnit:

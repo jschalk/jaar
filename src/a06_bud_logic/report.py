@@ -1,6 +1,6 @@
+from pandas import DataFrame
 from src.a01_term_logic.way import WayTerm
 from src.a06_bud_logic.bud import BudUnit
-from pandas import DataFrame
 
 
 def get_bud_acctunits_dataframe(x_bud: BudUnit) -> DataFrame:

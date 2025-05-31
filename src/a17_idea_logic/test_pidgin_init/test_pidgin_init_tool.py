@@ -1,57 +1,55 @@
-from src.a00_data_toolbox.file_toolbox import get_dir_file_strs, create_path
+from os.path import exists as os_path_exists
+from src.a00_data_toolbox.file_toolbox import create_path, get_dir_file_strs
 from src.a06_bud_logic._test_util.a06_str import (
-    NameTerm_str,
     LabelTerm_str,
-    WayTerm_str,
-    TitleTerm_str,
     NameTerm_str,
     TitleTerm_str,
+    WayTerm_str,
 )
-from src.a09_pack_logic._test_util.a09_str import face_name_str, event_int_str
+from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic._test_util.a16_str import (
-    otx_bridge_str,
     inx_bridge_str,
+    otx_bridge_str,
     unknown_str_str,
 )
-from src.a16_pidgin_logic.pidgin import pidginunit_shop
 from src.a16_pidgin_logic._test_util.example_pidgins import (
-    get_casa_maison_pidginunit_set_by_otx2inx,
-    get_casa_maison_pidginunit_set_by_label,
-    get_casa_maison_way_otx2inx_dt,
     get_casa_maison_label_dt,
+    get_casa_maison_pidginunit_set_by_label,
+    get_casa_maison_pidginunit_set_by_otx2inx,
+    get_casa_maison_way_otx2inx_dt,
+    get_pidgin_core_attrs_are_none_namemap,
     get_slash_namemap,
     get_sue_pidginunit,
-    get_casa_maison_pidginunit_set_by_label,
-    get_pidgin_core_attrs_are_none_namemap,
 )
-from src.a17_idea_logic.pidgin_toolbox import (
-    get_pidgin_name_dt_columns,
-    get_pidgin_title_dt_columns,
-    get_pidgin_label_dt_columns,
-    get_pidgin_way_dt_columns,
-    create_pidgin_name_dt,
-    create_pidgin_title_dt,
-    create_pidgin_label_dt,
-    create_pidgin_way_dt,
-    create_pidgin_label_dt,
-    save_all_csvs_from_pidginunit,
-    _load_namemap_from_csv,
-    _load_titlemap_from_csv,
-    _load_labelmap_from_csv,
-    _load_waymap_from_csv,
-    _save_pidgin_label_csv,
-    create_dir_valid_empty_pidginunit,
-    init_pidginunit_from_dir,
+from src.a16_pidgin_logic.pidgin import pidginunit_shop
+from src.a17_idea_logic._test_util.a17_env import (
+    env_dir_setup_cleanup,
+)
+from src.a17_idea_logic._test_util.a17_env import idea_fiscs_dir as get_example_face_dir
+from src.a17_idea_logic.idea_db_tool import (
+    get_idea_elements_sort_order as sorting_columns,
 )
 from src.a17_idea_logic.idea_db_tool import (
     get_ordered_csv,
-    get_idea_elements_sort_order as sorting_columns,
 )
-from src.a17_idea_logic._test_util.a17_env import (
-    env_dir_setup_cleanup,
-    idea_fiscs_dir as get_example_face_dir,
+from src.a17_idea_logic.pidgin_toolbox import (
+    _load_labelmap_from_csv,
+    _load_namemap_from_csv,
+    _load_titlemap_from_csv,
+    _load_waymap_from_csv,
+    _save_pidgin_label_csv,
+    create_dir_valid_empty_pidginunit,
+    create_pidgin_label_dt,
+    create_pidgin_name_dt,
+    create_pidgin_title_dt,
+    create_pidgin_way_dt,
+    get_pidgin_label_dt_columns,
+    get_pidgin_name_dt_columns,
+    get_pidgin_title_dt_columns,
+    get_pidgin_way_dt_columns,
+    init_pidginunit_from_dir,
+    save_all_csvs_from_pidginunit,
 )
-from os.path import exists as os_path_exists
 
 
 def test_get_pidgin_name_dt_columns_ReturnsObj():

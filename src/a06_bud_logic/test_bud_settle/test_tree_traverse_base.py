@@ -1,13 +1,13 @@
+from pytest import raises as pytest_raises
 from src.a01_term_logic.way import to_way
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import factheir_shop
 from src.a05_concept_logic.concept import conceptunit_shop
-from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._test_util.example_buds import (
     get_budunit_with_4_levels,
     get_budunit_with_4_levels_and_2reasons,
 )
-from pytest import raises as pytest_raises
+from src.a06_bud_logic.bud import budunit_shop
 
 
 def test_BudUnit_clear_concept_dict_and_bud_obj_settle_attrs_CorrectlySetsAttrs():

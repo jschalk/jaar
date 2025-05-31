@@ -1,22 +1,24 @@
 from src.a01_term_logic.way import (
-    get_default_fisc_label as root_label,
-    get_default_fisc_way,
     create_way,
     default_bridge_if_None,
 )
-from src.a04_reason_logic.reason_concept import (
-    ReasonCore,
-    reasoncore_shop,
-    reasonheir_shop,
-    reasonunit_shop,
-    factheir_shop,
-    premiseunit_shop,
-    reasons_get_from_dict,
+from src.a01_term_logic.way import (
+    get_default_fisc_way,
 )
+from src.a01_term_logic.way import get_default_fisc_label as root_label
 from src.a04_reason_logic._test_util.a04_str import (
     bridge_str,
     rconcept_active_requisite_str,
     rcontext_str,
+)
+from src.a04_reason_logic.reason_concept import (
+    ReasonCore,
+    factheir_shop,
+    premiseunit_shop,
+    reasoncore_shop,
+    reasonheir_shop,
+    reasons_get_from_dict,
+    reasonunit_shop,
 )
 
 

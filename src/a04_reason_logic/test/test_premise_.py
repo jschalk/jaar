@@ -1,16 +1,11 @@
 from src.a01_term_logic.way import (
-    get_default_fisc_label as root_label,
-    get_default_fisc_way,
     create_way,
     find_replace_way_key_dict,
 )
-from src.a04_reason_logic.reason_concept import (
-    PremiseUnit,
-    premiseunit_shop,
-    factheir_shop,
-    premiseunit_shop,
-    premises_get_from_dict,
+from src.a01_term_logic.way import (
+    get_default_fisc_way,
 )
+from src.a01_term_logic.way import get_default_fisc_label as root_label
 from src.a04_reason_logic._test_util.a04_str import (
     _status_str,
     _task_str,
@@ -19,6 +14,12 @@ from src.a04_reason_logic._test_util.a04_str import (
     pnigh_str,
     popen_str,
     pstate_str,
+)
+from src.a04_reason_logic.reason_concept import (
+    PremiseUnit,
+    factheir_shop,
+    premises_get_from_dict,
+    premiseunit_shop,
 )
 
 

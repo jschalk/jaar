@@ -1,59 +1,59 @@
+from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_row_count
 from src.a02_finance_logic._test_util.a02_str import owner_name_str
-from src.a06_bud_logic._test_util.a06_str import bud_acctunit_str, acct_name_str
-from src.a09_pack_logic._test_util.a09_str import face_name_str, event_int_str
+from src.a06_bud_logic._test_util.a06_str import acct_name_str, bud_acctunit_str
+from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
+from src.a16_pidgin_logic._test_util.a16_str import (
+    inx_bridge_str,
+    inx_label_str,
+    inx_name_str,
+    inx_title_str,
+    inx_way_str,
+    otx_bridge_str,
+    otx_label_str,
+    otx_name_str,
+    otx_title_str,
+    otx_way_str,
+    pidgin_core_str,
+    pidgin_label_str,
+    pidgin_name_str,
+    pidgin_title_str,
+    pidgin_way_str,
+    unknown_str_str,
+)
 from src.a16_pidgin_logic.pidgin import (
     default_bridge_if_None,
     default_unknown_str_if_None,
 )
-from src.a16_pidgin_logic._test_util.a16_str import (
-    pidgin_label_str,
-    pidgin_way_str,
-    pidgin_name_str,
-    pidgin_title_str,
-    pidgin_core_str,
-    inx_bridge_str,
-    otx_bridge_str,
-    inx_label_str,
-    otx_label_str,
-    inx_way_str,
-    otx_way_str,
-    inx_name_str,
-    otx_name_str,
-    inx_title_str,
-    otx_title_str,
-    unknown_str_str,
-)
 from src.a18_etl_toolbox.tran_sqlstrs import (
-    create_prime_tablename,
-    create_sound_and_voice_tables,
+    CREATE_PIDCORE_SOUND_AGG_SQLSTR,
+    CREATE_PIDCORE_SOUND_RAW_SQLSTR,
+    CREATE_PIDCORE_SOUND_VLD_SQLSTR,
     CREATE_PIDLABE_SOUND_AGG_SQLSTR,
-    CREATE_PIDWAYY_SOUND_AGG_SQLSTR,
     CREATE_PIDNAME_SOUND_AGG_SQLSTR,
     CREATE_PIDTITL_SOUND_AGG_SQLSTR,
-    CREATE_PIDCORE_SOUND_RAW_SQLSTR,
-    CREATE_PIDCORE_SOUND_AGG_SQLSTR,
-    CREATE_PIDCORE_SOUND_VLD_SQLSTR,
+    CREATE_PIDWAYY_SOUND_AGG_SQLSTR,
     create_insert_into_pidgin_core_raw_sqlstr,
+    create_insert_pidgin_sound_vld_table_sqlstr,
+    create_prime_tablename,
+    create_sound_and_voice_tables,
     create_update_pidgin_sound_agg_inconsist_sqlstr,
     create_update_pidlabe_sound_agg_bridge_error_sqlstr,
-    create_update_pidwayy_sound_agg_bridge_error_sqlstr,
     create_update_pidname_sound_agg_bridge_error_sqlstr,
     create_update_pidtitl_sound_agg_bridge_error_sqlstr,
-    create_insert_pidgin_sound_vld_table_sqlstr,
+    create_update_pidwayy_sound_agg_bridge_error_sqlstr,
 )
 from src.a18_etl_toolbox.transformers import (
-    insert_pidgin_sound_agg_into_pidgin_core_raw_table,
+    etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables,
     insert_pidgin_core_agg_to_pidgin_core_vld_table,
-    update_inconsistency_pidgin_core_raw_table,
     insert_pidgin_core_raw_to_pidgin_core_agg_table,
-    update_pidgin_sound_agg_inconsist_errors,
-    update_pidgin_sound_agg_bridge_errors,
+    insert_pidgin_sound_agg_into_pidgin_core_raw_table,
     insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table,
     populate_pidgin_core_vld_with_missing_face_names,
-    etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables,
+    update_inconsistency_pidgin_core_raw_table,
+    update_pidgin_sound_agg_bridge_errors,
+    update_pidgin_sound_agg_inconsist_errors,
 )
-from sqlite3 import connect as sqlite3_connect
 
 
 def test_create_insert_into_pidgin_core_raw_sqlstr_ReturnsObj_PopulatesTable_Scenario0():

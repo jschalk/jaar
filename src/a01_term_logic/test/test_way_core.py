@@ -1,3 +1,6 @@
+from dataclasses import dataclass
+from platform import system as platform_system
+from pytest import raises as pytest_raises
 from src.a01_term_logic.way import (
     WayTerm,
     all_wayterms_between,
@@ -8,8 +11,8 @@ from src.a01_term_logic.way import (
     get_all_way_labels,
     get_ancestor_ways,
     get_default_fisc_label,
-    get_default_fisc_way,
-    get_default_fisc_way as root_way,
+)
+from src.a01_term_logic.way import (
     get_forefather_ways,
     get_parent_way,
     get_root_label_from_way,
@@ -23,9 +26,8 @@ from src.a01_term_logic.way import (
     validate_labelterm,
     wayterm_valid_dir_path,
 )
-from dataclasses import dataclass
-from platform import system as platform_system
-from pytest import raises as pytest_raises
+from src.a01_term_logic.way import get_default_fisc_way
+from src.a01_term_logic.way import get_default_fisc_way as root_way
 
 
 def test_to_way_ReturnsObj_WithDefault_bridge():

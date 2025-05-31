@@ -1,12 +1,12 @@
-from src.a06_bud_logic._test_util.a06_str import NameTerm_str
-from src.a16_pidgin_logic.pidgin import pidginunit_shop, inherit_pidginunit
-from src.a16_pidgin_logic._test_util.example_pidgins import (
-    get_clean_waymap,
-    get_clean_labelmap,
-    get_swim_titlemap,
-    get_suita_namemap,
-)
 from pytest import raises as pytest_raises
+from src.a06_bud_logic._test_util.a06_str import NameTerm_str
+from src.a16_pidgin_logic._test_util.example_pidgins import (
+    get_clean_labelmap,
+    get_clean_waymap,
+    get_suita_namemap,
+    get_swim_titlemap,
+)
+from src.a16_pidgin_logic.pidgin import inherit_pidginunit, pidginunit_shop
 
 
 def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario0_EmptyPidginUnits():

@@ -1,45 +1,45 @@
+from copy import deepcopy as copy_deepcopy
 from src.a00_data_toolbox.dict_toolbox import (
-    get_from_nested_dict,
     get_empty_list_if_None,
+    get_from_nested_dict,
 )
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import factunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
-from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._test_util.a06_str import (
-    budunit_str,
-    bud_acctunit_str,
-    bud_acct_membership_str,
-    bud_conceptunit_str,
-    bud_concept_awardlink_str,
-    bud_concept_reasonunit_str,
-    bud_concept_reason_premiseunit_str,
-    bud_concept_laborlink_str,
-    bud_concept_healerlink_str,
-    bud_concept_factunit_str,
     acct_name_str,
     awardee_title_str,
-    group_title_str,
-    concept_way_str,
-    labor_title_str,
-    healer_name_str,
-    pledge_str,
     begin_str,
+    bud_acct_membership_str,
+    bud_acctunit_str,
+    bud_concept_awardlink_str,
+    bud_concept_factunit_str,
+    bud_concept_healerlink_str,
+    bud_concept_laborlink_str,
+    bud_concept_reason_premiseunit_str,
+    bud_concept_reasonunit_str,
+    bud_conceptunit_str,
+    budunit_str,
     close_str,
-    mass_str,
+    concept_way_str,
     fcontext_str,
-    fstate_str,
     fnigh_str,
     fopen_str,
-    rconcept_active_requisite_str,
+    fstate_str,
     give_force_str,
+    group_title_str,
+    healer_name_str,
+    labor_title_str,
+    mass_str,
+    pledge_str,
+    rconcept_active_requisite_str,
     take_force_str,
 )
 from src.a06_bud_logic._test_util.example_buds import get_budunit_with_4_levels
-from src.a08_bud_atom_logic._test_util.a08_str import INSERT_str, UPDATE_str, DELETE_str
+from src.a06_bud_logic.bud import budunit_shop
+from src.a08_bud_atom_logic._test_util.a08_str import DELETE_str, INSERT_str, UPDATE_str
 from src.a09_pack_logic.delta import BudDelta, buddelta_shop
-from copy import deepcopy as copy_deepcopy
 
 
 def print_budatom_keys(x_buddelta: BudDelta):

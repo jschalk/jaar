@@ -1,15 +1,15 @@
+from pytest import raises as pytest_raises
 from src.a04_reason_logic.reason_concept import (
     premiseunit_shop,
-    reasonunit_shop,
     reasonheir_shop,
+    reasonunit_shop,
 )
 from src.a05_concept_logic.concept import conceptunit_shop
-from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._test_util.example_buds import (
-    get_budunit_with_4_levels,
     get_budunit_irrational_example,
+    get_budunit_with_4_levels,
 )
-from pytest import raises as pytest_raises
+from src.a06_bud_logic.bud import budunit_shop
 
 
 def test_BudUnit_ReasonUnits_create():

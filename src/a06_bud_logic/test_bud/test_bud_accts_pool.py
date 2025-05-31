@@ -1,5 +1,5 @@
-from src.a06_bud_logic.bud import budunit_shop
 from pytest import raises as pytest_raises
+from src.a06_bud_logic.bud import budunit_shop
 
 
 def test_BudUnit_set_credor_respect_CorrectlySetsAttr():

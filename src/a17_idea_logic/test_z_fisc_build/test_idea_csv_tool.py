@@ -1,3 +1,4 @@
+from copy import deepcopy as copy_deepcopy
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a01_term_logic.way import to_way
 from src.a03_group_logic.group import awardlink_shop
@@ -5,11 +6,20 @@ from src.a06_bud_logic.bud import budunit_shop
 from src.a09_pack_logic.delta import buddelta_shop
 from src.a09_pack_logic.pack import packunit_shop
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
+from src.a17_idea_logic._test_util.a17_env import (
+    env_dir_setup_cleanup,
+    idea_fiscs_dir,
+)
+from src.a17_idea_logic._test_util.idea_df_examples import (  # get_ex2_br00006_df,
+    get_ex2_br00000_df,
+    get_ex2_br00001_df,
+    get_ex2_br00002_df,
+    get_ex2_br00003_df,
+    get_ex2_br00004_df,
+    get_ex2_br00005_df,
+)
 from src.a17_idea_logic.idea import fisc_build_from_df
 from src.a17_idea_logic.idea_csv_tool import (
-    create_init_stance_idea_csv_strs,
-    add_fiscunit_to_stance_csv_strs,
-    add_fiscunits_to_stance_csv_strs,
     add_bud_to_br00020_csv,
     add_bud_to_br00021_csv,
     add_bud_to_br00022_csv,
@@ -20,6 +30,9 @@ from src.a17_idea_logic.idea_csv_tool import (
     add_bud_to_br00027_csv,
     add_bud_to_br00028_csv,
     add_bud_to_br00029_csv,
+    add_budunit_to_stance_csv_strs,
+    add_fiscunit_to_stance_csv_strs,
+    add_fiscunits_to_stance_csv_strs,
     add_pack_to_br00020_csv,
     add_pack_to_br00021_csv,
     add_pack_to_br00022_csv,
@@ -30,29 +43,15 @@ from src.a17_idea_logic.idea_csv_tool import (
     add_pack_to_br00027_csv,
     add_pack_to_br00028_csv,
     add_pack_to_br00029_csv,
-    add_budunit_to_stance_csv_strs,
+    add_packunit_to_stance_csv_strs,
+    add_pidginunit_to_stance_csv_strs,
     add_to_br00042_csv,
     add_to_br00043_csv,
     add_to_br00044_csv,
     add_to_br00045_csv,
-    add_pidginunit_to_stance_csv_strs,
-    add_packunit_to_stance_csv_strs,
+    create_init_stance_idea_csv_strs,
 )
 from src.a17_idea_logic.idea_db_tool import get_ordered_csv
-from src.a17_idea_logic._test_util.a17_env import (
-    idea_fiscs_dir,
-    env_dir_setup_cleanup,
-)
-from src.a17_idea_logic._test_util.idea_df_examples import (
-    get_ex2_br00000_df,
-    get_ex2_br00001_df,
-    get_ex2_br00002_df,
-    get_ex2_br00003_df,
-    get_ex2_br00004_df,
-    get_ex2_br00005_df,
-    # get_ex2_br00006_df,
-)
-from copy import deepcopy as copy_deepcopy
 
 
 def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyFiscUnit(

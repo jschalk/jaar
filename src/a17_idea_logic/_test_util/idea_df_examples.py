@@ -1,6 +1,5 @@
 from pandas import DataFrame
 
-
 ACCORD23_STR = "accord23"
 JEFFY45_STR = "jeffy45"
 

@@ -1,14 +1,13 @@
 from src.a01_term_logic.way import GroupTitle
-from src.a03_group_logic.group import membership_shop
-from src.a03_group_logic.group import groupunit_shop
-from src.a04_reason_logic.reason_labor import (
-    LaborUnit,
-    laborunit_shop,
-    LaborHeir,
-    laborheir_shop,
-    create_laborunit,
-)
+from src.a03_group_logic.group import groupunit_shop, membership_shop
 from src.a04_reason_logic._test_util.a04_str import bridge_str
+from src.a04_reason_logic.reason_labor import (
+    LaborHeir,
+    LaborUnit,
+    create_laborunit,
+    laborheir_shop,
+    laborunit_shop,
+)
 
 
 def test_LaborUnit_exists():

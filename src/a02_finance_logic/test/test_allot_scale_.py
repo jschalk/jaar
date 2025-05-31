@@ -1,12 +1,12 @@
-from src.a02_finance_logic.allot import (
-    allot_scale,
-    _create_allot_dict,
-    _allot_missing_scale,
-    _get_missing_scale_list,
-    GrainFloat,
-)
 from inspect import getdoc as inspect_getdoc
 from pytest import raises as pytest_raises
+from src.a02_finance_logic.allot import (
+    GrainFloat,
+    _allot_missing_scale,
+    _create_allot_dict,
+    _get_missing_scale_list,
+    allot_scale,
+)
 
 
 def test_GrainFloat_exists():

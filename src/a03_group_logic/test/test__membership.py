@@ -1,19 +1,4 @@
-from src.a00_data_toolbox.dict_toolbox import x_is_json, get_json_from_dict
-from src.a03_group_logic.group import (
-    GroupCore,
-    GroupTitle,
-    membership_shop,
-    MemberShip,
-    membership_get_from_dict,
-    memberships_get_from_dict,
-    AwardLine,
-    awardline_shop,
-    AwardLink,
-    awardlink_shop,
-    awardlinks_get_from_json,
-    AwardHeir,
-    awardheir_shop,
-)
+from src.a00_data_toolbox.dict_toolbox import get_json_from_dict, x_is_json
 from src.a03_group_logic._test_util.a03_str import (
     _credor_pool_str,
     _debtor_pool_str,
@@ -27,6 +12,21 @@ from src.a03_group_logic._test_util.a03_str import (
     credit_vote_str,
     debtit_vote_str,
     group_title_str,
+)
+from src.a03_group_logic.group import (
+    AwardHeir,
+    AwardLine,
+    AwardLink,
+    GroupCore,
+    GroupTitle,
+    MemberShip,
+    awardheir_shop,
+    awardline_shop,
+    awardlink_shop,
+    awardlinks_get_from_json,
+    membership_get_from_dict,
+    membership_shop,
+    memberships_get_from_dict,
 )
 
 

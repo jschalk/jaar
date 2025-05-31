@@ -1,15 +1,15 @@
+from src.a02_finance_logic._test_util.a02_str import (
+    celldepth_str,
+    deal_acct_nets_str,
+    deal_time_str,
+    owner_name_str,
+    quota_str,
+)
 from src.a02_finance_logic.deal import (
-    dealunit_shop,
     BrokerUnit,
     brokerunit_shop,
+    dealunit_shop,
     get_brokerunit_from_dict,
-)
-from src.a02_finance_logic._test_util.a02_str import (
-    quota_str,
-    deal_time_str,
-    celldepth_str,
-    owner_name_str,
-    deal_acct_nets_str,
 )
 
 

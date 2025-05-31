@@ -1,27 +1,27 @@
-from src.a01_term_logic.way import create_way, to_way
-from src.a02_finance_logic._test_util.a02_str import fisc_label_str
-from src.a06_bud_logic._test_util.a06_str import (
-    acct_name_str,
-    credit_belief_str,
-    rcontext_str,
-    NameTerm_str,
-)
-from src.a16_pidgin_logic.map import namemap_shop
-from src.a16_pidgin_logic.pidgin import pidginunit_shop
-from src.a16_pidgin_logic._test_util.example_pidgins import (
-    get_casa_maison_pidginunit_set_by_otx2inx,
-    get_casa_maison_pidginunit_set_by_label,
-    get_casa_maison_way_otx_dt,
-    get_casa_maison_way_inx_dt,
-)
-from src.a17_idea_logic.idea_db_tool import (
-    translate_single_column_dataframe,
-    translate_all_columns_dataframe,
-    get_dataframe_pidginable_columns,
-)
 from copy import deepcopy as copy_deepcopy
 from pandas import DataFrame
 from pandas.testing import assert_frame_equal as pandas_assert_frame_equal
+from src.a01_term_logic.way import create_way, to_way
+from src.a02_finance_logic._test_util.a02_str import fisc_label_str
+from src.a06_bud_logic._test_util.a06_str import (
+    NameTerm_str,
+    acct_name_str,
+    credit_belief_str,
+    rcontext_str,
+)
+from src.a16_pidgin_logic._test_util.example_pidgins import (
+    get_casa_maison_pidginunit_set_by_label,
+    get_casa_maison_pidginunit_set_by_otx2inx,
+    get_casa_maison_way_inx_dt,
+    get_casa_maison_way_otx_dt,
+)
+from src.a16_pidgin_logic.map import namemap_shop
+from src.a16_pidgin_logic.pidgin import pidginunit_shop
+from src.a17_idea_logic.idea_db_tool import (
+    get_dataframe_pidginable_columns,
+    translate_all_columns_dataframe,
+    translate_single_column_dataframe,
+)
 
 
 def test_get_dataframe_pidginable_columns_ReturnsObj():

@@ -1,27 +1,24 @@
+from os.path import exists as os_path_exists
+from sqlite3 import connect as sqlite3_connect
+from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.a00_data_toolbox.file_toolbox import save_file
-from src.a00_data_toolbox.db_toolbox import get_row_count, db_table_exists
-
-from src.a01_term_logic.way import OwnerName, WayTerm, AcctName, GroupTitle
+from src.a01_term_logic.way import AcctName, GroupTitle, OwnerName, WayTerm
 from src.a02_finance_logic.deal import FiscLabel, OwnerName
 from src.a03_group_logic.acct import AcctUnit
-from src.a03_group_logic.group import awardlink_shop, GroupUnit, AwardHeir
+from src.a03_group_logic.group import AwardHeir, GroupUnit, awardlink_shop
 from src.a04_reason_logic.reason_concept import FactHeir, PremiseUnit, ReasonHeir
 from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a05_concept_logic.healer import healerlink_shop
-from src.a06_bud_logic.bud import BudUnit
-
-from src.a06_bud_logic.bud import budunit_shop
+from src.a06_bud_logic.bud import BudUnit, budunit_shop
 from src.a12_hub_tools.hub_path import create_fisc_json_path, create_job_path
 from src.a12_hub_tools.hub_tool import save_job_file
 from src.a15_fisc_logic.fisc import fiscunit_shop
-from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_table
-from src.a18_etl_toolbox.transformers import etl_fisc_job_jsons_to_job_tables
 from src.a18_etl_toolbox._test_util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
-from os.path import exists as os_path_exists
-from sqlite3 import connect as sqlite3_connect
+from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_table
+from src.a18_etl_toolbox.transformers import etl_fisc_job_jsons_to_job_tables
 
 
 def test_etl_fisc_job_jsons_to_job_tables_PopulatesTables_Scenario0(

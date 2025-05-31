@@ -1,20 +1,18 @@
+from plotly.graph_objects import Figure as plotly_Figure
+from plotly.graph_objects import Scatter as plotly_Scatter
+from plotly.graph_objects import Table as plotly_Table
 from src.a00_data_toolbox.plotly_toolbox import (
-    conditional_fig_show,
-    add_simp_rect,
-    add_rect_arrow,
     add_keep__rect,
+    add_rect_arrow,
+    add_simp_rect,
+    conditional_fig_show,
 )
-from src.a01_term_logic.way import get_parent_way, WayTerm, is_sub_way
+from src.a01_term_logic.way import WayTerm, get_parent_way, is_sub_way
 from src.a05_concept_logic.concept import ConceptUnit
 from src.a06_bud_logic.bud import BudUnit
 from src.a06_bud_logic.report import (
     get_bud_acctunits_dataframe,
     get_bud_agenda_dataframe,
-)
-from plotly.graph_objects import (
-    Figure as plotly_Figure,
-    Scatter as plotly_Scatter,
-    Table as plotly_Table,
 )
 
 

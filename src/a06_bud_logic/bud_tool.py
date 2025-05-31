@@ -1,13 +1,13 @@
 from src.a00_data_toolbox.dict_toolbox import create_csv
 from src.a01_term_logic.way import AcctName, FiscLabel, WayTerm
 from src.a02_finance_logic.allot import allot_scale
-from src.a02_finance_logic.finance_config import FundNum, get_net, RespectNum
+from src.a02_finance_logic.finance_config import FundNum, RespectNum, get_net
 from src.a03_group_logic.acct import AcctUnit
-from src.a03_group_logic.group import MemberShip, AwardLink
+from src.a03_group_logic.group import AwardLink, MemberShip
 from src.a04_reason_logic.reason_concept import (
-    ReasonUnit,
     FactUnit,
     PremiseUnit,
+    ReasonUnit,
     factunits_get_from_dict,
 )
 from src.a05_concept_logic.concept import ConceptUnit

@@ -1,18 +1,19 @@
+from pytest import raises as pytest_raises
 from src.a00_data_toolbox.db_toolbox import get_rowdata, sqlite_connection
 from src.a01_term_logic.way import create_way
-from src.a06_bud_logic._test_util.a06_str import budunit_str, bud_concept_factunit_str
 from src.a06_bud_logic._test_util.a06_str import (
+    bud_concept_factunit_str,
+    budunit_str,
     concept_way_str,
     fcontext_str,
     fopen_str,
 )
 from src.a08_bud_atom_logic._test_util.a08_str import (
-    UPDATE_str,
     INSERT_str,
+    UPDATE_str,
     atom_hx_str,
 )
 from src.a08_bud_atom_logic.atom import budatom_shop, get_budatom_from_rowdata
-from pytest import raises as pytest_raises
 
 
 def test_BudAtom_get_insert_sqlstr_RaisesErrorWhen_is_valid_False():

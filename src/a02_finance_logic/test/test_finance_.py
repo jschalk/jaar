@@ -1,26 +1,26 @@
-from src.a02_finance_logic.finance_config import (
-    TimeLinePoint,
-    FundCoin,
-    FundNum,
-    BitNum,
-    PennyNum,
-    MoneyUnit,
-    RespectNum,
-    default_fund_pool,
-    validate_fund_pool,
-    default_respect_num,
-    validate_respect_num,
-    default_fund_coin_if_None,
-    default_RespectBit_if_None,
-    filter_penny,
-    trim_fund_coin_excess,
-    trim_bit_excess,
-    trim_penny_excess,
-    valid_finance_ratio,
-    get_net,
-)
 from inspect import getdoc as inspect_getdoc
 from pytest import raises as pytest_raises
+from src.a02_finance_logic.finance_config import (
+    BitNum,
+    FundCoin,
+    FundNum,
+    MoneyUnit,
+    PennyNum,
+    RespectNum,
+    TimeLinePoint,
+    default_fund_coin_if_None,
+    default_fund_pool,
+    default_respect_num,
+    default_RespectBit_if_None,
+    filter_penny,
+    get_net,
+    trim_bit_excess,
+    trim_fund_coin_excess,
+    trim_penny_excess,
+    valid_finance_ratio,
+    validate_fund_pool,
+    validate_respect_num,
+)
 
 
 def test_BitNum_exists():

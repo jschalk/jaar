@@ -1,5 +1,5 @@
-from src.a17_idea_logic.idea_db_tool import dataframe_to_dict
 from pandas import DataFrame
+from src.a17_idea_logic.idea_db_tool import dataframe_to_dict
 
 
 def test_dataframe_to_dict_ReturnsObj_Empty():

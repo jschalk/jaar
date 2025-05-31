@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from src.a00_data_toolbox.dict_toolbox import (
     create_csv,
     del_in_nested_dict,
@@ -21,7 +22,6 @@ from src.a02_finance_logic.finance_config import (
     TimeLinePoint,
     default_fund_pool,
 )
-from dataclasses import dataclass
 
 
 class calc_magnitudeException(Exception):

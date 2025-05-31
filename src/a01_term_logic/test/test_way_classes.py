@@ -1,3 +1,5 @@
+from inspect import getdoc as inspect_getdoc
+from src.a01_term_logic._test_util.a01_str import bridge_str
 from src.a01_term_logic.way import (
     AcctName,
     EventInt,
@@ -13,8 +15,6 @@ from src.a01_term_logic.way import (
     YawTerm,
     default_bridge_if_None,
 )
-from src.a01_term_logic._test_util.a01_str import bridge_str
-from inspect import getdoc as inspect_getdoc
 
 
 def test_NameTerm_exists():

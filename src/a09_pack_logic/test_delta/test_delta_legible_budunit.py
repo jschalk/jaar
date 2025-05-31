@@ -1,5 +1,5 @@
-from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic._test_util.a06_str import budunit_str
+from src.a06_bud_logic.bud import budunit_shop
 from src.a08_bud_atom_logic._test_util.a08_str import UPDATE_str
 from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a09_pack_logic.delta import buddelta_shop

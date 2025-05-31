@@ -1,16 +1,16 @@
+from datetime import datetime
 from src.a06_bud_logic.bud import BudUnit, budunit_shop
-from src.a07_calendar_logic.chrono import ChronoUnit, chronounit_shop
 from src.a07_calendar_logic._test_util.calendar_examples import (
-    five_str,
     add_time_creg_conceptunit,
     add_time_five_conceptunit,
     creg_str,
+    display_creg_five_squirt_time_attrs,
+    display_current_creg_five_time_attrs,
+    five_str,
     get_creg_min_from_dt,
     get_five_min_from_dt,
-    display_current_creg_five_time_attrs,
-    display_creg_five_squirt_time_attrs,
 )
-from datetime import datetime
+from src.a07_calendar_logic.chrono import ChronoUnit, chronounit_shop
 
 
 def test_ChronoUnit_Exists():

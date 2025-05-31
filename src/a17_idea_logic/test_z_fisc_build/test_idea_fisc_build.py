@@ -1,14 +1,13 @@
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a07_calendar_logic._test_util.calendar_examples import get_five_config
 from src.a07_calendar_logic.chrono import (
-    timelineunit_shop,
     get_default_timeline_config_dict,
+    timelineunit_shop,
 )
 from src.a15_fisc_logic.fisc import fiscunit_shop
-from src.a17_idea_logic.idea import fisc_build_from_df
 from src.a17_idea_logic._test_util.a17_env import (
-    idea_fiscs_dir,
     env_dir_setup_cleanup,
+    idea_fiscs_dir,
 )
 from src.a17_idea_logic._test_util.idea_df_examples import (
     get_ex1_br00000_df,
@@ -24,6 +23,7 @@ from src.a17_idea_logic._test_util.idea_df_examples import (
     get_ex2_br00004_df,
     get_ex2_br00005_df,
 )
+from src.a17_idea_logic.idea import fisc_build_from_df
 
 
 # ESTABLISH a dataframe, build a fisc unit

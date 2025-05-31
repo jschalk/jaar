@@ -1,12 +1,12 @@
+from inspect import getdoc as inspect_getdoc
+from platform import system as platform_system
 from src.a17_idea_logic._test_util.a17_str import world_id_str
 from src.a20_lobby_logic._test_util.a20_str import lobby_id_str, lobby_mstr_dir_str
 from src.a20_lobby_logic.lobby_path import (
+    create_fisc_mstr_dir_path,
     create_lobby_dir_path,
     create_world_dir_path,
-    create_fisc_mstr_dir_path,
 )
-from inspect import getdoc as inspect_getdoc
-from platform import system as platform_system
 
 LINUX_OS = platform_system() == "Linux"
 

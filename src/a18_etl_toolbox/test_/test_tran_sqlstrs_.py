@@ -1,44 +1,45 @@
+from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import (
     db_table_exists,
     get_table_columns,
     required_columns_exist,
 )
 from src.a02_finance_logic._test_util.a02_str import (
+    deal_time_str,
     fisc_label_str,
     owner_name_str,
-    deal_time_str,
     tran_time_str,
 )
 from src.a06_bud_logic._test_util.a06_str import (
-    budunit_str,
-    bud_acctunit_str,
     bud_acct_membership_str,
-    bud_conceptunit_str,
+    bud_acctunit_str,
     bud_concept_awardlink_str,
-    bud_concept_reasonunit_str,
-    bud_concept_reason_premiseunit_str,
-    bud_concept_laborlink_str,
-    bud_concept_healerlink_str,
     bud_concept_factunit_str,
+    bud_concept_healerlink_str,
+    bud_concept_laborlink_str,
+    bud_concept_reason_premiseunit_str,
+    bud_concept_reasonunit_str,
+    bud_conceptunit_str,
+    budunit_str,
 )
 from src.a08_bud_atom_logic.atom_config import get_delete_key_name
 from src.a09_pack_logic._test_util.a09_str import event_int_str
 from src.a10_bud_calc._test_util.a10_str import bud_groupunit_str
 from src.a15_fisc_logic._test_util.a15_str import (
-    fiscunit_str,
     fisc_cashbook_str,
     fisc_dealunit_str,
     fisc_timeline_hour_str,
     fisc_timeline_month_str,
     fisc_timeline_weekday_str,
     fisc_timeoffi_str,
+    fiscunit_str,
 )
 from src.a16_pidgin_logic._test_util.a16_str import (
-    pidgin_title_str,
-    pidgin_name_str,
-    pidgin_way_str,
-    pidgin_label_str,
     pidgin_core_str,
+    pidgin_label_str,
+    pidgin_name_str,
+    pidgin_title_str,
+    pidgin_way_str,
 )
 from src.a17_idea_logic._test_util.a17_str import idea_category_str
 from src.a17_idea_logic.idea_config import get_idea_config_dict, get_idea_numbers
@@ -48,18 +49,17 @@ from src.a17_idea_logic.idea_db_tool import (
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
-    create_prime_tablename,
+    CREATE_FISC_EVENT_TIME_AGG_SQLSTR,
+    CREATE_FISC_OTE1_AGG_SQLSTR,
+    IDEA_STAGEBLE_DEL_DIMENS,
+    INSERT_FISC_EVENT_TIME_AGG_SQLSTR,
+    INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR,
+    UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR,
     create_all_idea_tables,
+    create_prime_tablename,
     create_sound_and_voice_tables,
     get_idea_stageble_put_dimens,
-    IDEA_STAGEBLE_DEL_DIMENS,
-    CREATE_FISC_EVENT_TIME_AGG_SQLSTR,
-    INSERT_FISC_EVENT_TIME_AGG_SQLSTR,
-    UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR,
-    CREATE_FISC_OTE1_AGG_SQLSTR,
-    INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR,
 )
-from sqlite3 import connect as sqlite3_connect
 
 
 def test_ALL_DIMEN_ABBV7_has_all_dimens():

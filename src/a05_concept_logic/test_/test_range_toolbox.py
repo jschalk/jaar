@@ -1,7 +1,7 @@
 from src.a05_concept_logic.range_toolbox import (
     RangeUnit,
-    morph_rangeunit,
     get_morphed_rangeunit,
+    morph_rangeunit,
 )
 
 

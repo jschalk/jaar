@@ -1,29 +1,35 @@
+from copy import deepcopy as copy_deepcopy
 from src.a01_term_logic.way import create_way
 from src.a04_reason_logic.reason_concept import factunit_shop
 from src.a06_bud_logic.bud import budunit_shop
 from src.a11_deal_cell_logic._test_util.a11_str import (
     ancestors_str,
-    celldepth_str,
-    deal_owner_name_str,
-    mandate_str,
+    boss_facts_str,
     budadjust_str,
     budevent_facts_str,
+    celldepth_str,
+    deal_owner_name_str,
     found_facts_str,
-    boss_facts_str,
-)
-from src.a11_deal_cell_logic.cell import (
-    CellUnit,
-    cellunit_shop,
-    CELLNODE_QUOTA_DEFAULT,
-    create_child_cellunits,
+    mandate_str,
 )
 from src.a11_deal_cell_logic._test_util.example_factunits import (
     example_casa_clean_factunit as clean_factunit,
+)
+from src.a11_deal_cell_logic._test_util.example_factunits import (
     example_casa_dirty_factunit as dirty_factunit,
+)
+from src.a11_deal_cell_logic._test_util.example_factunits import (
     example_casa_grimy_factunit as grimy_factunit,
+)
+from src.a11_deal_cell_logic._test_util.example_factunits import (
     example_sky_blue_factunit as sky_blue_factunit,
 )
-from copy import deepcopy as copy_deepcopy
+from src.a11_deal_cell_logic.cell import (
+    CELLNODE_QUOTA_DEFAULT,
+    CellUnit,
+    cellunit_shop,
+    create_child_cellunits,
+)
 
 
 def test_CELLNODE_QUOTA_DEFAULT_value():

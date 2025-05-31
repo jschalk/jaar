@@ -1,3 +1,5 @@
+from numpy import int64 as numpy_int64
+from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import (
     add_headers_to_csv,
     add_nested_dict_if_missing,
@@ -23,7 +25,6 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_sorted_list_of_dict_keys,
     get_str_in_all_sub_dict,
     get_str_in_sub_dict,
-    get_str_in_sub_dict,
     is_2d_with_unique_keys,
     set_in_nested_dict,
     str_in_all_dict,
@@ -33,8 +34,6 @@ from src.a00_data_toolbox.dict_toolbox import (
     str_in_dict_keys,
     str_in_dict_values,
 )
-from numpy import int64 as numpy_int64
-from pytest import raises as pytest_raises
 
 
 def test_get_1_if_None():

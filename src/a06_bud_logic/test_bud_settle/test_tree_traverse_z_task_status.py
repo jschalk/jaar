@@ -2,19 +2,19 @@ from src.a01_term_logic.way import to_way
 from src.a02_finance_logic.finance_config import default_fund_pool
 from src.a04_reason_logic.reason_concept import (
     premiseunit_shop,
-    reasonunit_shop,
     reasonheir_shop,
+    reasonunit_shop,
 )
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a05_concept_logic.healer import healerlink_shop
-from src.a06_bud_logic.bud import budunit_shop
-from src.a06_bud_logic.bud_graphics import display_concepttree
 from src.a06_bud_logic._test_util.example_buds import (
-    get_budunit_with_4_levels_and_2reasons,
-    get_budunit_with7amCleanTableReason,
     budunit_v001,
     from_list_get_active,
+    get_budunit_with7amCleanTableReason,
+    get_budunit_with_4_levels_and_2reasons,
 )
+from src.a06_bud_logic.bud import budunit_shop
+from src.a06_bud_logic.bud_graphics import display_concepttree
 
 
 def test_BudUnit_settle_bud_SetsStatus_active_WhenFactSaysNo():

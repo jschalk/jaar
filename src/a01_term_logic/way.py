@@ -1,3 +1,4 @@
+from pathlib import Path as pathlib_Path
 from src.a00_data_toolbox.file_toolbox import is_path_valid
 from src.a01_term_logic.term import (
     AcctName,
@@ -15,7 +16,6 @@ from src.a01_term_logic.term import (
     YawTerm,
     default_bridge_if_None,
 )
-from pathlib import Path as pathlib_Path
 
 
 class bridge_not_in_parent_way_Exception(Exception):

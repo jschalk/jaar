@@ -1,22 +1,22 @@
-from src.a01_term_logic.way import create_way, FiscLabel
+from src.a01_term_logic.way import FiscLabel, create_way
 from src.a06_bud_logic._test_util.a06_str import (
-    budunit_str,
-    bud_acctunit_str,
-    bud_conceptunit_str,
-    bud_concept_factunit_str,
     acct_name_str,
+    bud_acctunit_str,
+    bud_concept_factunit_str,
+    bud_conceptunit_str,
+    budunit_str,
     concept_way_str,
     fcontext_str,
-    fopen_str,
     fnigh_str,
+    fopen_str,
 )
 from src.a08_bud_atom_logic._test_util.a08_str import (
+    DELETE_str,
     INSERT_str,
     UPDATE_str,
-    DELETE_str,
 )
-from src.a08_bud_atom_logic.atom import budatom_shop, BudAtom
-from src.a09_pack_logic.delta import buddelta_shop, BudDelta
+from src.a08_bud_atom_logic.atom import BudAtom, budatom_shop
+from src.a09_pack_logic.delta import BudDelta, buddelta_shop
 
 
 def get_atom_example_conceptunit_sports(fisc_label: FiscLabel = None) -> BudAtom:

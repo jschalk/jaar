@@ -1,21 +1,23 @@
 from src.a01_term_logic.way import (
-    get_default_fisc_label as root_label,
     create_way,
+)
+from src.a01_term_logic.way import (
     get_default_fisc_way,
 )
-from src.a04_reason_logic.reason_concept import (
-    FactUnit,
-    factunit_shop,
-    factheir_shop,
-    FactCore,
-    factunits_get_from_dict,
-    get_factunit_from_tuple,
-)
+from src.a01_term_logic.way import get_default_fisc_label as root_label
 from src.a04_reason_logic._test_util.a04_str import (
     fcontext_str,
     fnigh_str,
     fopen_str,
     fstate_str,
+)
+from src.a04_reason_logic.reason_concept import (
+    FactCore,
+    FactUnit,
+    factheir_shop,
+    factunit_shop,
+    factunits_get_from_dict,
+    get_factunit_from_tuple,
 )
 
 

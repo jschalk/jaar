@@ -1,22 +1,18 @@
+from src.a01_term_logic._test_util.a01_str import bridge_str, parent_way_str
 from src.a01_term_logic.way import (
-    get_default_fisc_label as root_label,
     create_way,
     default_bridge_if_None,
 )
-from src.a01_term_logic._test_util.a01_str import bridge_str, parent_way_str
-from src.a02_finance_logic.finance_config import default_fund_coin_if_None
+from src.a01_term_logic.way import get_default_fisc_label as root_label
 from src.a02_finance_logic._test_util.a02_str import (
+    addin_str,
     fisc_label_str,
     fund_coin_str,
-    addin_str,
 )
+from src.a02_finance_logic.finance_config import default_fund_coin_if_None
 from src.a03_group_logic.group import awardlink_shop
-from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a04_reason_logic._test_util.a04_str import _task_str
 from src.a04_reason_logic.reason_labor import laborunit_shop
-from src.a05_concept_logic.healer import healerlink_shop
-from src.a05_concept_logic.origin import originunit_shop
-from src.a05_concept_logic.concept import ConceptUnit, conceptunit_shop
 from src.a05_concept_logic._test_util.a05_str import (
     _active_hx_str,
     _all_acct_cred_str,
@@ -53,6 +49,9 @@ from src.a05_concept_logic._test_util.a05_str import (
     problem_bool_str,
     stop_want_str,
 )
+from src.a05_concept_logic.concept import ConceptUnit, conceptunit_shop
+from src.a05_concept_logic.healer import healerlink_shop
+from src.a05_concept_logic.origin import originunit_shop
 
 
 def test_ConceptUnit_Exists():

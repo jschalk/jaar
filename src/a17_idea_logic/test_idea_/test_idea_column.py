@@ -1,8 +1,8 @@
 from src.a06_bud_logic._test_util.a06_str import (
-    bud_acctunit_str,
     acct_name_str,
-    group_title_str,
+    bud_acctunit_str,
     concept_way_str,
+    group_title_str,
     rcontext_str,
 )
 from src.a17_idea_logic.idea import IdeaRef, idearef_shop

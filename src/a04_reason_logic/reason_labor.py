@@ -1,7 +1,7 @@
-from src.a00_data_toolbox.dict_toolbox import get_empty_set_if_None
-from src.a03_group_logic.group import GroupUnit, GroupTitle
-from src.a03_group_logic.acct import AcctName
 from dataclasses import dataclass
+from src.a00_data_toolbox.dict_toolbox import get_empty_set_if_None
+from src.a03_group_logic.acct import AcctName
+from src.a03_group_logic.group import GroupTitle, GroupUnit
 
 
 class InvalidLaborHeirPopulateException(Exception):

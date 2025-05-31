@@ -1,21 +1,21 @@
-from src.a00_data_toolbox.dict_toolbox import x_is_json, get_dict_from_json
+from pytest import raises as pytest_raises
+from src.a00_data_toolbox.dict_toolbox import get_dict_from_json, x_is_json
 from src.a01_term_logic.way import default_bridge_if_None, to_way
 from src.a03_group_logic.group import awardlink_shop
-from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a04_reason_logic.reason_concept import factunit_shop
-from src.a05_concept_logic.healer import healerlink_shop
+from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
-from src.a06_bud_logic.bud import (
-    budunit_shop,
-    get_from_json as budunit_get_from_json,
-    get_dict_of_bud_from_dict,
-)
+from src.a05_concept_logic.healer import healerlink_shop
 from src.a06_bud_logic._test_util.example_buds import (
     budunit_v001,
-    get_budunit_x1_3levels_1reason_1facts,
     get_budunit_rcontext_time_example,
+    get_budunit_x1_3levels_1reason_1facts,
 )
-from pytest import raises as pytest_raises
+from src.a06_bud_logic.bud import (
+    budunit_shop,
+    get_dict_of_bud_from_dict,
+)
+from src.a06_bud_logic.bud import get_from_json as budunit_get_from_json
 
 
 def test_BudUnit_get_dict_ReturnsObj_Scenario1_large_json():

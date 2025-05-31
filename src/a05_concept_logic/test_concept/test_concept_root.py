@@ -1,6 +1,6 @@
+from pytest import raises as pytest_raises
 from src.a01_term_logic.way import get_default_fisc_label as root_label
 from src.a05_concept_logic.concept import conceptunit_shop
-from pytest import raises as pytest_raises
 
 
 def test_conceptunit_shop_With_root_TrueReturnsObj():

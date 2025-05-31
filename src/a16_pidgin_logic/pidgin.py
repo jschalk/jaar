@@ -1,30 +1,30 @@
+from dataclasses import dataclass
 from src.a00_data_toolbox.dict_toolbox import (
     get_0_if_None,
-    get_json_from_dict,
     get_dict_from_json,
+    get_json_from_dict,
 )
-from src.a01_term_logic.way import default_bridge_if_None, OwnerName, EventInt
-from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
+from src.a01_term_logic.way import EventInt, OwnerName, default_bridge_if_None
 from src.a16_pidgin_logic.map import (
-    MapCore,
-    TitleMap,
-    NameMap,
     LabelMap,
+    MapCore,
+    NameMap,
+    TitleMap,
     WayMap,
-    titlemap_shop,
-    namemap_shop,
-    labelmap_shop,
-    waymap_shop,
+    get_labelmap_from_dict,
     get_namemap_from_dict,
     get_titlemap_from_dict,
-    get_labelmap_from_dict,
     get_waymap_from_dict,
+    inherit_labelmap,
     inherit_namemap,
     inherit_titlemap,
-    inherit_labelmap,
     inherit_waymap,
+    labelmap_shop,
+    namemap_shop,
+    titlemap_shop,
+    waymap_shop,
 )
-from dataclasses import dataclass
+from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
 
 
 class check_attrException(Exception):

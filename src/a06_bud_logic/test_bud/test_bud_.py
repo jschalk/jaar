@@ -1,22 +1,22 @@
+from pytest import raises as pytest_raises
 from src.a01_term_logic.way import (
-    get_default_fisc_label as root_label,
     default_bridge_if_None,
 )
+from src.a01_term_logic.way import get_default_fisc_label as root_label
 from src.a02_finance_logic._test_util.a02_str import (
     bridge_str,
     fisc_label_str,
-    owner_name_str,
     fund_pool_str,
+    owner_name_str,
 )
 from src.a02_finance_logic.finance_config import (
+    default_fund_coin_if_None,
     default_RespectBit_if_None,
     filter_penny,
-    default_fund_coin_if_None,
     validate_fund_pool,
     validate_respect_num,
 )
 from src.a05_concept_logic.origin import originunit_shop
-from src.a06_bud_logic.bud import budunit_shop, BudUnit
 from src.a06_bud_logic._test_util.a06_str import (
     _keeps_buildable_str,
     _keeps_justified_str,
@@ -35,7 +35,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     respect_bit_str,
     tally_str,
 )
-from pytest import raises as pytest_raises
+from src.a06_bud_logic.bud import BudUnit, budunit_shop
 
 
 def test_BudUnit_Exists():

@@ -1,26 +1,26 @@
+from dataclasses import dataclass
 from src.a00_data_toolbox.dict_toolbox import (
+    get_0_if_None,
     get_1_if_None,
     get_dict_from_json,
-    get_0_if_None,
 )
 from src.a01_term_logic.way import (
     AcctName,
     default_bridge_if_None,
-    validate_labelterm,
     is_labelterm,
+    validate_labelterm,
 )
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import (
-    default_RespectBit_if_None,
     RespectNum,
+    default_RespectBit_if_None,
 )
 from src.a03_group_logic.group import (
     GroupTitle,
     MemberShip,
-    memberships_get_from_dict,
     membership_shop,
+    memberships_get_from_dict,
 )
-from dataclasses import dataclass
 
 
 class InvalidAcctException(Exception):

@@ -1,11 +1,10 @@
 from src.a00_data_toolbox.dict_toolbox import get_empty_str_if_None as if_none_str
-from src.a01_term_logic.way import FiscLabel, FaceName
+from src.a01_term_logic.way import FaceName, FiscLabel
 from src.a06_bud_logic.bud import BudUnit
 from src.a09_pack_logic.pack import PackUnit
 from src.a15_fisc_logic.fisc import FiscUnit
 from src.a16_pidgin_logic.pidgin import PidginUnit
 from src.a17_idea_logic.idea_config import (
-    get_idea_format_headers,
     get_idea_format_filename,
     get_idea_format_headers,
 )

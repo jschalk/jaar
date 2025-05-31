@@ -1,45 +1,45 @@
+from os import getcwd as os_getcwd
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a08_bud_atom_logic._test_util.a08_str import (
+    DELETE_str,
+    INSERT_str,
+    UPDATE_str,
     jkeys_str,
     jvalues_str,
-    UPDATE_str,
-    INSERT_str,
-    DELETE_str,
     normal_specs_str,
 )
 from src.a16_pidgin_logic._test_util.a16_str import (
-    pidginunit_str,
-    otx_bridge_str,
     inx_bridge_str,
-    inx_title_str,
-    otx_title_str,
-    inx_name_str,
-    otx_name_str,
     inx_label_str,
-    otx_label_str,
+    inx_name_str,
+    inx_title_str,
     inx_way_str,
-    otx_way_str,
-    unknown_str_str,
-    otx2inx_str,
     map_otx2inx_str,
+    otx2inx_str,
+    otx_bridge_str,
+    otx_label_str,
+    otx_name_str,
+    otx_title_str,
+    otx_way_str,
+    pidgin_core_str,
+    pidgin_label_str,
     pidgin_name_str,
     pidgin_title_str,
-    pidgin_label_str,
     pidgin_way_str,
-    pidgin_core_str,
+    pidginunit_str,
+    unknown_str_str,
 )
 from src.a16_pidgin_logic.pidgin_config import (
     config_file_dir,
-    get_pidgin_dimens,
-    get_pidgin_config_filename,
-    get_pidgin_filename,
-    get_pidgin_config_dict,
-    get_pidgin_args_dimen_mapping,
-    get_quick_pidgens_column_ref,
     default_unknown_str,
     default_unknown_str_if_None,
+    get_pidgin_args_dimen_mapping,
+    get_pidgin_config_dict,
+    get_pidgin_config_filename,
+    get_pidgin_dimens,
+    get_pidgin_filename,
+    get_quick_pidgens_column_ref,
 )
-from os import getcwd as os_getcwd
 
 
 def test_get_pidgin_config_filename_ReturnsObj():

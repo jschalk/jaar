@@ -1,16 +1,16 @@
+from sqlite3 import Connection as sqlite3_Connection
 from src.a00_data_toolbox.db_toolbox import (
-    create_update_inconsistency_error_query,
     create_table2table_agg_insert_query,
-)
-from src.a17_idea_logic.idea_db_tool import (
-    get_default_sorted_list,
-    create_idea_sorted_table,
+    create_update_inconsistency_error_query,
 )
 from src.a17_idea_logic.idea_config import (
-    get_quick_ideas_column_ref,
     get_idea_config_dict,
+    get_quick_ideas_column_ref,
 )
-from sqlite3 import Connection as sqlite3_Connection
+from src.a17_idea_logic.idea_db_tool import (
+    create_idea_sorted_table,
+    get_default_sorted_list,
+)
 
 ALL_DIMEN_ABBV7 = {
     "FISCASH",
