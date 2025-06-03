@@ -1,12 +1,8 @@
 from os.path import exists as os_path_exists
-from src.a01_term_logic.way import (
-    create_way,
-)
+from src.a01_term_logic.way import create_way
 from src.a01_term_logic.way import get_default_fisc_label as root_label
 from src.a06_bud_logic._test_util.example_buds import get_budunit_with_4_levels
-from src.a12_hub_tools._test_util.a12_env import (
-    env_dir_setup_cleanup,
-)
+from src.a12_hub_tools._test_util.a12_env import env_dir_setup_cleanup
 from src.a12_hub_tools._test_util.a12_env import get_module_temp_dir as env_dir
 from src.a12_hub_tools._test_util.example_hub_atoms import get_texas_hubunit
 from src.a12_hub_tools.hubunit import hubunit_shop
@@ -218,6 +214,8 @@ def test_HubUnit_delete_treasury_db_file_DeletesFile(env_dir_setup_cleanup):
     # ESTABLISH
     texas_hubunit = get_texas_hubunit()
     texas_hubunit.create_treasury_db_file()
+    treasury_db_path = texas_hubunit.treasury_db_path()
+    print(f"before  {os_path_exists(treasury_db_path)=}")
     assert texas_hubunit.treasury_db_file_exists()
 
     # WHEN

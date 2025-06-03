@@ -36,18 +36,11 @@ from src.a02_finance_logic.finance_config import (
     filter_penny,
     validate_fund_pool,
 )
-from src.a06_bud_logic.bud import (
-    BudUnit,
-    budunit_shop,
-)
+from src.a06_bud_logic.bud import BudUnit, budunit_shop
 from src.a06_bud_logic.bud import get_from_json as budunit_get_from_json
-from src.a08_bud_atom_logic.atom import (
-    BudAtom,
-)
-from src.a08_bud_atom_logic.atom import (
-    modify_bud_with_budatom,
-)
+from src.a08_bud_atom_logic.atom import BudAtom
 from src.a08_bud_atom_logic.atom import get_from_json as budatom_get_from_json
+from src.a08_bud_atom_logic.atom import modify_bud_with_budatom
 from src.a09_pack_logic.pack import (
     PackUnit,
     create_packunit_from_files,
@@ -455,8 +448,9 @@ class HubUnit:
 
     def create_treasury_db_file(self):
         self.create_keep_dir_if_missing()
-        with sqlite3_connect(self.treasury_db_path()) as conn:
-            pass
+        db_path = self.treasury_db_path()
+        conn = sqlite3_connect(db_path)
+        conn.close()
 
     def treasury_db_file_exists(self) -> bool:
         return os_path_exists(self.treasury_db_path())

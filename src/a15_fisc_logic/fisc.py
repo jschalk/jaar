@@ -153,7 +153,7 @@ class FiscUnit:
 
     def _create_journal_db(
         self, in_memory: bool = None, overwrite: bool = None
-    ) -> Connection:
+    ) -> None:
         journal_file_new = False
         if overwrite:
             journal_file_new = True
@@ -164,7 +164,8 @@ class FiscUnit:
                 journal_file_new = True
             self._journal_db = sqlite3_connect(":memory:")
         else:
-            sqlite3_connect(self.get_journal_db_path())
+            conn = sqlite3_connect(self.get_journal_db_path())
+            conn.close()
 
         if journal_file_new:
             with self.get_journal_conn() as journal_conn:
@@ -203,12 +204,14 @@ class FiscUnit:
         healer_hubunit: HubUnit,
         keep_way: WayTerm,
         gut_bud: BudUnit,
-    ):
+    ) -> None:
         healer_hubunit.keep_way = keep_way
         healer_hubunit.create_treasury_db_file()
         healer_hubunit.save_duty_bud(gut_bud)
 
-    def generate_healers_authored_job(self, owner_name: OwnerName, x_gut: BudUnit):
+    def generate_healers_authored_job(
+        self, owner_name: OwnerName, x_gut: BudUnit
+    ) -> BudUnit:
         x_job = get_default_job(x_gut)
         for healer_name, healer_dict in x_gut._healers_dict.items():
             healer_hubunit = hubunit_shop(
@@ -247,12 +250,12 @@ class FiscUnit:
             penny=self.penny,
         )
 
-    def create_gut_file_if_none(self, owner_name: OwnerName):
+    def create_gut_file_if_none(self, owner_name: OwnerName) -> None:
         if not gut_file_exists(self.fisc_mstr_dir, self.fisc_label, owner_name):
             empty_bud = self.create_empty_bud_from_fisc(owner_name)
             save_gut_file(self.fisc_mstr_dir, empty_bud)
 
-    def create_init_job_from_guts(self, owner_name: OwnerName):
+    def create_init_job_from_guts(self, owner_name: OwnerName) -> None:
         self.create_gut_file_if_none(owner_name)
         x_gut = open_gut_file(self.fisc_mstr_dir, self.fisc_label, owner_name)
         x_job = create_listen_basis(x_gut)
@@ -270,7 +273,7 @@ class FiscUnit:
             self.fisc_mstr_dir, self.fisc_label, owner_name
         )
 
-    def generate_all_jobs(self):
+    def generate_all_jobs(self) -> None:
         owner_names = self._get_owner_folder_names()
         for owner_name in owner_names:
             self.create_init_job_from_guts(owner_name)
@@ -283,7 +286,7 @@ class FiscUnit:
         return open_job_file(self.fisc_mstr_dir, self.fisc_label, owner_name)
 
     # brokerunits
-    def set_brokerunit(self, x_brokerunit: BrokerUnit):
+    def set_brokerunit(self, x_brokerunit: BrokerUnit) -> None:
         self.brokerunits[x_brokerunit.owner_name] = x_brokerunit
 
     def brokerunit_exists(self, x_owner_name: OwnerName) -> bool:
@@ -292,7 +295,7 @@ class FiscUnit:
     def get_brokerunit(self, x_owner_name: OwnerName) -> BrokerUnit:
         return self.brokerunits.get(x_owner_name)
 
-    def del_brokerunit(self, x_owner_name: OwnerName):
+    def del_brokerunit(self, x_owner_name: OwnerName) -> None:
         self.brokerunits.pop(x_owner_name)
 
     def add_dealunit(
@@ -336,7 +339,7 @@ class FiscUnit:
     def get_json(self) -> str:
         return get_json_from_dict(self.get_dict())
 
-    def _get_brokerunits_dict(self):
+    def _get_brokerunits_dict(self) -> dict[OwnerName, dict]:
         return {
             x_deal.owner_name: x_deal.get_dict() for x_deal in self.brokerunits.values()
         }
@@ -362,7 +365,7 @@ class FiscUnit:
         amount: FundNum,
         blocked_tran_times: set[TimeLinePoint] = None,
         _offi_time_max: TimeLinePoint = None,
-    ):
+    ) -> None:
         self.cashbook.add_tranunit(
             owner_name=owner_name,
             acct_name=acct_name,
@@ -384,7 +387,7 @@ class FiscUnit:
 
     def del_cashpurchase(
         self, src: AcctName, dst: AcctName, x_tran_time: TimeLinePoint
-    ):
+    ) -> TranUnit:
         return self.cashbook.del_tranunit(src, dst, x_tran_time)
 
     # def set_offi_time(self, offi_time: TimeLinePoint):
@@ -408,7 +411,7 @@ class FiscUnit:
     #     self.set_offi_time(offi_time)
     #     self.set_offi_time_max(_offi_time_max)
 
-    def set_all_tranbook(self):
+    def set_all_tranbook(self) -> None:
         x_tranunits = copy_deepcopy(self.cashbook.tranunits)
         x_tranbook = tranbook_shop(self.fisc_label, x_tranunits)
         for owner_name, x_brokerunit in self.brokerunits.items():
@@ -422,7 +425,7 @@ class FiscUnit:
     def create_deals_root_cells(
         self,
         ote1_dict: dict[OwnerName, dict[TimeLinePoint, EventInt]],
-    ):
+    ) -> None:
         for owner_name, brokerunit in self.brokerunits.items():
             for deal_time in brokerunit.deals.keys():
                 self._create_deal_root_cell(owner_name, ote1_dict, deal_time)
@@ -432,7 +435,7 @@ class FiscUnit:
         owner_name: OwnerName,
         ote1_dict: dict[OwnerName, dict[TimeLinePoint, EventInt]],
         deal_time: TimeLinePoint,
-    ):
+    ) -> None:
         past_event_int = _get_ote1_max_past_event_int(owner_name, ote1_dict, deal_time)
         dealunit = self.get_dealunit(owner_name, deal_time)
         cellunit = cellunit_shop(
@@ -462,6 +465,7 @@ def _get_ote1_max_past_event_int(
         return ote1_owner_dict.get(max_past_timepoint)
 
 
+# TODO get rid of this function
 def get_module_temp_dir():
     return "src/a15_fisc_logic/_test_util/fisc_mstr"
 
