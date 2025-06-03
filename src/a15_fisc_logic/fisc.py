@@ -163,7 +163,8 @@ class FiscUnit:
                 journal_file_new = True
             self._journal_db = sqlite3_connect(":memory:")
         else:
-            sqlite3_connect(self.get_journal_db_path())
+            conn = sqlite3_connect(self.get_journal_db_path())
+            conn.close()
 
         if journal_file_new:
             with self.get_journal_conn() as journal_conn:
