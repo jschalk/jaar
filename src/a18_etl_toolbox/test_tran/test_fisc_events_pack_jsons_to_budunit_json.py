@@ -6,8 +6,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     credit_belief_str,
     debtit_belief_str,
 )
-from src.a06_bud_logic.bud import budunit_shop
-from src.a06_bud_logic.bud import get_from_json as budunit_get_from_json
+from src.a06_bud_logic.bud import budunit_shop, get_from_json as budunit_get_from_json
 from src.a08_bud_atom_logic._test_util.a08_str import INSERT_str
 from src.a09_pack_logic.pack import get_packunit_from_json, packunit_shop
 from src.a12_hub_tools.hub_path import (

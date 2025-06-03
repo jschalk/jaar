@@ -1,6 +1,8 @@
-from plotly.graph_objects import Figure as plotly_Figure
-from plotly.graph_objects import Scatter as plotly_Scatter
-from plotly.graph_objects import Table as plotly_Table
+from plotly.graph_objects import (
+    Figure as plotly_Figure,
+    Scatter as plotly_Scatter,
+    Table as plotly_Table,
+)
 from src.a00_data_toolbox.plotly_toolbox import (
     add_keep__rect,
     add_rect_arrow,

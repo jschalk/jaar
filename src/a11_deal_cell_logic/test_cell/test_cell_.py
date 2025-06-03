@@ -14,14 +14,8 @@ from src.a11_deal_cell_logic._test_util.a11_str import (
 )
 from src.a11_deal_cell_logic._test_util.example_factunits import (
     example_casa_clean_factunit as clean_factunit,
-)
-from src.a11_deal_cell_logic._test_util.example_factunits import (
     example_casa_dirty_factunit as dirty_factunit,
-)
-from src.a11_deal_cell_logic._test_util.example_factunits import (
     example_casa_grimy_factunit as grimy_factunit,
-)
-from src.a11_deal_cell_logic._test_util.example_factunits import (
     example_sky_blue_factunit as sky_blue_factunit,
 )
 from src.a11_deal_cell_logic.cell import (

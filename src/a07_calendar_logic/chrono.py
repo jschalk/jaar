@@ -6,12 +6,10 @@ from src.a00_data_toolbox.file_toolbox import create_path, open_json
 from src.a01_term_logic.way import LabelTerm, WayTerm
 from src.a05_concept_logic.concept import (
     ConceptUnit,
-)
-from src.a05_concept_logic.concept import (
+    all_concepts_between as all_between,
+    concepts_calculated_range as calc_range,
     conceptunit_shop,
 )
-from src.a05_concept_logic.concept import all_concepts_between as all_between
-from src.a05_concept_logic.concept import concepts_calculated_range as calc_range
 from src.a06_bud_logic.bud import BudUnit
 
 

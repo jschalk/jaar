@@ -18,13 +18,11 @@ from src.a08_bud_atom_logic.atom import (
     BudAtom,
     InvalidBudAtomException,
     budatom_shop,
-)
-from src.a08_bud_atom_logic.atom import (
+    get_from_dict as get_budatom_from_dict,
     jvalues_different,
     modify_bud_with_budatom,
     sift_budatom,
 )
-from src.a08_bud_atom_logic.atom import get_from_dict as get_budatom_from_dict
 from src.a08_bud_atom_logic.atom_config import CRUD_command
 
 

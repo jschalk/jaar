@@ -1,10 +1,10 @@
-from copy import copy as copy_copy
-from copy import deepcopy as copy_deepcopy
+from copy import copy as copy_copy, deepcopy as copy_deepcopy
 from os.path import exists as os_path_exists
-from pandas import read_excel as pandas_read_excel
-from pandas import read_sql_query as pandas_read_sql_query
-from sqlite3 import Connection as sqlite3_Connection
-from sqlite3 import Cursor as sqlite3_Cursor
+from pandas import (
+    read_excel as pandas_read_excel,
+    read_sql_query as pandas_read_sql_query,
+)
+from sqlite3 import Connection as sqlite3_Connection, Cursor as sqlite3_Cursor
 from src.a00_data_toolbox.csv_toolbox import open_csv_with_types
 from src.a00_data_toolbox.db_toolbox import (
     _get_grouping_groupby_clause,

@@ -1,13 +1,12 @@
-from numpy import float64
-from numpy import nan as numpy_nan
-from openpyxl import Workbook as openpyxl_Workbook
-from openpyxl import load_workbook as openpyxl_load_workbook
+from numpy import float64, nan as numpy_nan
+from openpyxl import (
+    Workbook as openpyxl_Workbook,
+    load_workbook as openpyxl_load_workbook,
+)
 from os.path import exists as os_path_exists
-from pandas import DataFrame
-from pandas import read_excel as pandas_read_excel
+from pandas import DataFrame, read_excel as pandas_read_excel
 from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
-from pytest import fixture as pytest_fixture
-from pytest import raises as pytest_raises
+from pytest import fixture as pytest_fixture, raises as pytest_raises
 from src.a00_data_toolbox.file_toolbox import create_path, set_dir
 from src.a17_idea_logic._test_util.a17_env import (
     env_dir_setup_cleanup,

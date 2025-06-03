@@ -66,8 +66,7 @@ from src.a08_bud_atom_logic.atom_config import (
     get_atom_args_class_types,
     get_atom_args_dimen_mapping,
     get_atom_config_dict,
-)
-from src.a08_bud_atom_logic.atom_config import (
+    get_atom_order as q_order,
     get_bud_dimens,
     get_delete_key_name,
     get_flattened_atom_table_build,
@@ -76,7 +75,6 @@ from src.a08_bud_atom_logic.atom_config import (
     is_bud_dimen,
     set_mog,
 )
-from src.a08_bud_atom_logic.atom_config import get_atom_order as q_order
 
 
 def test_get_bud_dimens_ReturnsObj():

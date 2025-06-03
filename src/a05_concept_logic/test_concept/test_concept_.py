@@ -2,8 +2,8 @@ from src.a01_term_logic._test_util.a01_str import bridge_str, parent_way_str
 from src.a01_term_logic.way import (
     create_way,
     default_bridge_if_None,
+    get_default_fisc_label as root_label,
 )
-from src.a01_term_logic.way import get_default_fisc_label as root_label
 from src.a02_finance_logic._test_util.a02_str import (
     addin_str,
     fisc_label_str,

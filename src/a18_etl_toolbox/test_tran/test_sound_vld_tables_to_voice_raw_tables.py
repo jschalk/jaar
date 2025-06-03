@@ -9,10 +9,10 @@ from src.a06_bud_logic._test_util.a06_str import (
 )
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
+    create_prime_tablename as prime_tbl,
     create_sound_and_voice_tables,
     get_insert_into_voice_raw_sqlstrs,
 )
-from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_tbl
 from src.a18_etl_toolbox.transformers import (
     etl_sound_vld_tables_to_voice_raw_tables,
 )

@@ -15,8 +15,7 @@ from src.a01_term_logic.way import (
     get_default_fisc_label,
 )
 from src.a06_bud_logic.bud import BudUnit
-from src.a08_bud_atom_logic.atom import BudAtom
-from src.a08_bud_atom_logic.atom import get_from_json as budatom_get_from_json
+from src.a08_bud_atom_logic.atom import BudAtom, get_from_json as budatom_get_from_json
 from src.a09_pack_logic.delta import (
     BudDelta,
     buddelta_shop,

@@ -1,5 +1,4 @@
-from os.path import exists as os_path_exist
-from os.path import join as os_path_join
+from os.path import exists as os_path_exist, join as os_path_join
 from pathlib import Path as pathlib_Path
 from platform import system as platform_system
 from pytest import raises as pytest_raises

@@ -4,8 +4,8 @@ from src.a01_term_logic.way import (
     create_way,
     create_way_from_labels,
     default_bridge_if_None,
+    get_default_fisc_label as root_label,
 )
-from src.a01_term_logic.way import get_default_fisc_label as root_label
 from src.a02_finance_logic.finance_config import (
     default_fund_coin_if_None,
     default_RespectBit_if_None,

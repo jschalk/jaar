@@ -1,7 +1,5 @@
-from pandas import DataFrame
-from pandas import concat as pandas_concat
-from plotly.graph_objects import Figure as plotly_Figure
-from plotly.graph_objects import Table as plotly_Table
+from pandas import DataFrame, concat as pandas_concat
+from plotly.graph_objects import Figure as plotly_Figure, Table as plotly_Table
 from src.a06_bud_logic.report import (
     get_bud_acctunits_dataframe,
     get_bud_agenda_dataframe,

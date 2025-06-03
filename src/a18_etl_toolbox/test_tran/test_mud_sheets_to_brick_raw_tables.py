@@ -1,6 +1,5 @@
 from os.path import exists as os_path_exists
-from pandas import DataFrame
-from pandas import read_excel as pandas_read_excel
+from pandas import DataFrame, read_excel as pandas_read_excel
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import (
     db_table_exists,

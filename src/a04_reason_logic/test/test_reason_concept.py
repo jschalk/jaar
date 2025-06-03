@@ -1,11 +1,9 @@
 from src.a01_term_logic.way import (
     create_way,
     default_bridge_if_None,
-)
-from src.a01_term_logic.way import (
+    get_default_fisc_label as root_label,
     get_default_fisc_way,
 )
-from src.a01_term_logic.way import get_default_fisc_label as root_label
 from src.a04_reason_logic._test_util.a04_str import (
     bridge_str,
     rconcept_active_requisite_str,

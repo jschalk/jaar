@@ -17,13 +17,11 @@ from src.a01_term_logic.way import (
     create_way,
     default_bridge_if_None,
     find_replace_way_key_dict,
-)
-from src.a01_term_logic.way import (
+    get_default_fisc_label as root_label,
     is_sub_way,
     rebuild_way,
     replace_bridge,
 )
-from src.a01_term_logic.way import get_default_fisc_label as root_label
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import (
     FundCoin,

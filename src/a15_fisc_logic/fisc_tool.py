@@ -1,9 +1,7 @@
 from copy import copy as copy_copy
 from dataclasses import dataclass
-from os import sep as os_sep
-from os import walk as os_walk
-from os.path import exists as os_path_exists
-from os.path import join as os_path_join
+from os import sep as os_sep, walk as os_walk
+from os.path import exists as os_path_exists, join as os_path_join
 from src.a00_data_toolbox.file_toolbox import (
     create_path,
     get_level1_dirs,

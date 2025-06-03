@@ -17,14 +17,8 @@ from src.a11_deal_cell_logic._test_util.a11_str import (
 )
 from src.a11_deal_cell_logic._test_util.example_factunits import (
     example_casa_clean_factunit as clean_factunit,
-)
-from src.a11_deal_cell_logic._test_util.example_factunits import (
     example_casa_dirty_factunit as dirty_factunit,
-)
-from src.a11_deal_cell_logic._test_util.example_factunits import (
     example_casa_grimy_factunit as grimy_factunit,
-)
-from src.a11_deal_cell_logic._test_util.example_factunits import (
     example_sky_blue_factunit as sky_blue_factunit,
 )
 from src.a11_deal_cell_logic.cell import CELLNODE_QUOTA_DEFAULT, cellunit_shop
@@ -41,14 +35,12 @@ from src.a12_hub_tools.hub_path import (
     create_budpoint_path,
     create_cell_acct_mandate_ledger_path,
     create_cell_dir_path,
-)
-from src.a12_hub_tools.hub_path import (
+    create_cell_json_path as node_path,
     create_dealunit_json_path,
     create_gut_path,
     create_job_path,
     create_owner_event_dir_path,
 )
-from src.a12_hub_tools.hub_path import create_cell_json_path as node_path
 from src.a12_hub_tools.hub_tool import (
     budpoint_file_exists,
     cellunit_add_json_file,

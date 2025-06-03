@@ -1,7 +1,6 @@
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
-from sqlite3 import Connection
-from sqlite3 import connect as sqlite3_connect
+from sqlite3 import Connection, connect as sqlite3_connect
 from src.a00_data_toolbox.dict_toolbox import (
     get_0_if_None,
     get_dict_from_json,

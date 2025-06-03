@@ -40,11 +40,7 @@ from src.a06_bud_logic._test_util.a06_str import (
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic.bud_tool import (
     bud_concept_factunit_get_obj,
-)
-from src.a06_bud_logic.bud_tool import (
     bud_concept_reason_premiseunit_get_obj as premiseunit_get_obj,
-)
-from src.a06_bud_logic.bud_tool import (
     bud_concept_reasonunit_get_obj,
 )
 from src.a08_bud_atom_logic._test_util.a08_str import INSERT_str, UPDATE_str
