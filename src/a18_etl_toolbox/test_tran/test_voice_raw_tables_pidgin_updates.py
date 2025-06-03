@@ -8,11 +8,11 @@ from src.a16_pidgin_logic._test_util.a16_str import (
     pidgin_name_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
+    create_prime_tablename as prime_tbl,
     create_sound_and_voice_tables,
     create_update_voice_raw_empty_inx_col_sqlstr,
     create_update_voice_raw_existing_inx_col_sqlstr,
 )
-from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_tbl
 from src.a18_etl_toolbox.transformers import set_all_voice_raw_inx_columns
 
 # TODO create test for mapped_names sqlstr (link otx_)

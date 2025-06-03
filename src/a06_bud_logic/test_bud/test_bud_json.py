@@ -14,8 +14,8 @@ from src.a06_bud_logic._test_util.example_buds import (
 from src.a06_bud_logic.bud import (
     budunit_shop,
     get_dict_of_bud_from_dict,
+    get_from_json as budunit_get_from_json,
 )
-from src.a06_bud_logic.bud import get_from_json as budunit_get_from_json
 
 
 def test_BudUnit_get_dict_ReturnsObj_Scenario1_large_json():

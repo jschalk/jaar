@@ -19,11 +19,9 @@ from src.a17_idea_logic.idea_config import get_idea_sqlite_types
 from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_job_tables,
-)
-from src.a18_etl_toolbox.tran_sqlstrs import (
+    create_prime_tablename as prime_table,
     get_job_create_table_sqlstrs,
 )
-from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_table
 
 
 def test_get_job_create_table_sqlstrs_ReturnsObj():

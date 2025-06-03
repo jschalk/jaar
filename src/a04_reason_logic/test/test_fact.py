@@ -1,10 +1,8 @@
 from src.a01_term_logic.way import (
     create_way,
-)
-from src.a01_term_logic.way import (
+    get_default_fisc_label as root_label,
     get_default_fisc_way,
 )
-from src.a01_term_logic.way import get_default_fisc_label as root_label
 from src.a04_reason_logic._test_util.a04_str import (
     fcontext_str,
     fnigh_str,

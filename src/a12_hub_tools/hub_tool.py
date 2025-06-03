@@ -1,6 +1,5 @@
 from os import listdir as os_listdir
-from os.path import exists as os_path_exists
-from os.path import isdir as os_path_isdir
+from os.path import exists as os_path_exists, isdir as os_path_isdir
 from src.a00_data_toolbox.dict_toolbox import get_empty_list_if_None
 from src.a00_data_toolbox.file_toolbox import (
     create_path,
@@ -20,8 +19,8 @@ from src.a02_finance_logic.deal import (
 from src.a06_bud_logic.bud import (
     BudUnit,
     budunit_shop,
+    get_from_json as budunit_get_from_json,
 )
-from src.a06_bud_logic.bud import get_from_json as budunit_get_from_json
 from src.a11_deal_cell_logic.cell import CellUnit, cellunit_get_from_dict, cellunit_shop
 from src.a12_hub_tools.hub_path import (
     CELLNODE_FILENAME,

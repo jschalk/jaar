@@ -12,11 +12,11 @@ from src.a15_fisc_logic.fisc_config import get_fisc_dimens
 from src.a17_idea_logic._test_util.a17_str import idea_category_str
 from src.a17_idea_logic.idea_config import get_default_sorted_list, get_idea_config_dict
 from src.a18_etl_toolbox.tran_sqlstrs import (
+    create_prime_tablename as prime_tbl,
     create_sound_and_voice_tables,
     get_dimen_abbv7,
     get_insert_voice_agg_sqlstrs,
 )
-from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_tbl
 from src.a18_etl_toolbox.transformers import etl_voice_raw_tables_to_voice_agg_tables
 
 

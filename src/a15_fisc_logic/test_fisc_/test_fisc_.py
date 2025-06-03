@@ -1,5 +1,4 @@
-from os.path import exists as os_path_exists
-from os.path import isdir as os_path_isdir
+from os.path import exists as os_path_exists, isdir as os_path_isdir
 from src.a00_data_toolbox.file_toolbox import create_path, get_json_filename, set_dir
 from src.a01_term_logic.way import default_bridge_if_None
 from src.a02_finance_logic.deal import tranbook_shop

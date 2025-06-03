@@ -16,8 +16,8 @@ from src.a08_bud_atom_logic._test_util.a08_str import (
 )
 from src.a08_bud_atom_logic.atom import (
     budatom_shop,
+    get_from_json as budatom_get_from_json,
 )
-from src.a08_bud_atom_logic.atom import get_from_json as budatom_get_from_json
 
 
 def test_BudAtom_get_dict_ReturnsObj():

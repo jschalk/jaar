@@ -25,12 +25,10 @@ from src.a15_fisc_logic._test_util.a15_str import (
 )
 from src.a15_fisc_logic.fisc import (
     fiscunit_shop,
-)
-from src.a15_fisc_logic.fisc import (
     get_from_default_path as fiscunit_get_from_default_path,
+    get_from_dict as fiscunit_get_from_dict,
+    get_from_json as fiscunit_get_from_json,
 )
-from src.a15_fisc_logic.fisc import get_from_dict as fiscunit_get_from_dict
-from src.a15_fisc_logic.fisc import get_from_json as fiscunit_get_from_json
 
 
 def test_FiscUnit_get_dict_ReturnsObjWith_cashbook():

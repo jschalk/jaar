@@ -1,7 +1,6 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import open_file, save_file
-from src.a06_bud_logic.bud import budunit_shop
-from src.a06_bud_logic.bud import get_from_json as budunit_get_from_json
+from src.a06_bud_logic.bud import budunit_shop, get_from_json as budunit_get_from_json
 from src.a12_hub_tools.hub_path import (
     create_fisc_json_path,
     create_gut_path,

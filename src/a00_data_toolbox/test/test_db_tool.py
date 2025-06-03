@@ -1,10 +1,11 @@
 from os import remove as os_remove
 from os.path import exists as os_path_exists
-from pytest import fixture as pytest_fixture
-from pytest import raises as pytest_raises
-from sqlite3 import Connection as sqlite3_Connection
-from sqlite3 import connect as sqlite3_connect
-from sqlite3 import sqlite_version as sqlite3_sqlite_version
+from pytest import fixture as pytest_fixture, raises as pytest_raises
+from sqlite3 import (
+    Connection as sqlite3_Connection,
+    connect as sqlite3_connect,
+    sqlite_version as sqlite3_sqlite_version,
+)
 from src.a00_data_toolbox.db_toolbox import (
     RowData,
     _get_grouping_groupby_clause,

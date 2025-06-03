@@ -1,8 +1,8 @@
 from pytest import raises as pytest_raises
 from src.a01_term_logic.way import (
     default_bridge_if_None,
+    get_default_fisc_label as root_label,
 )
-from src.a01_term_logic.way import get_default_fisc_label as root_label
 from src.a02_finance_logic._test_util.a02_str import (
     bridge_str,
     fisc_label_str,

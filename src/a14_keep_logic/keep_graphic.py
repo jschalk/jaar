@@ -1,5 +1,4 @@
-from plotly.graph_objects import Figure as plotly_Figure
-from plotly.graph_objects import Scatter as plotly_Scatter
+from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
 from src.a02_finance_logic.finance_config import (
     default_money_magnitude as default_point_magnitude,

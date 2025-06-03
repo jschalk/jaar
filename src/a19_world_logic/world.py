@@ -1,7 +1,9 @@
 from dataclasses import dataclass
-from sqlite3 import Connection as sqlite3_Connection
-from sqlite3 import Cursor as sqlite3_Cursor
-from sqlite3 import connect as sqlite3_connect
+from sqlite3 import (
+    Connection as sqlite3_Connection,
+    Cursor as sqlite3_Cursor,
+    connect as sqlite3_connect,
+)
 from src.a00_data_toolbox.dict_toolbox import (
     get_0_if_None,
     get_empty_dict_if_None,

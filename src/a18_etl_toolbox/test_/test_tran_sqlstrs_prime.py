@@ -1,15 +1,13 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import (
     create_insert_into_clause_str as get_insert_sql,
-)
-from src.a00_data_toolbox.db_toolbox import (
+    create_select_query as get_select_sql,
     create_table2table_agg_insert_query,
     create_update_inconsistency_error_query,
     db_table_exists,
     get_create_table_sqlstr,
     get_table_columns,
 )
-from src.a00_data_toolbox.db_toolbox import create_select_query as get_select_sql
 from src.a06_bud_logic._test_util.a06_str import (
     bud_acct_membership_str,
     bud_acctunit_str,
@@ -57,8 +55,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_insert_missing_face_name_into_pidgin_core_vld_sqlstr,
     create_insert_pidgin_core_agg_into_vld_sqlstr,
     create_insert_pidgin_sound_vld_table_sqlstr,
-)
-from src.a18_etl_toolbox.tran_sqlstrs import (
+    create_prime_tablename as prime_tbl,
     create_sound_agg_insert_sqlstrs,
     create_sound_and_voice_tables,
     create_sound_raw_update_inconsist_error_message_sqlstr,
@@ -69,7 +66,6 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     get_insert_into_voice_raw_sqlstrs,
     get_prime_create_table_sqlstrs,
 )
-from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_tbl
 
 BUD_PRIME_TABLENAMES = {
     f"{bud_acct_membership_str()}_sound_put_agg": "BUDMEMB_PUT_AGG",

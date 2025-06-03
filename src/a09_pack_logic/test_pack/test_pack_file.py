@@ -3,8 +3,8 @@ from src.a00_data_toolbox.file_toolbox import create_path, open_json
 from src.a02_finance_logic._test_util.a02_str import owner_name_str
 from src.a09_pack_logic._test_util.a09_env import (
     env_dir_setup_cleanup,
+    get_module_temp_dir as fiscs_dir,
 )
-from src.a09_pack_logic._test_util.a09_env import get_module_temp_dir as fiscs_dir
 from src.a09_pack_logic._test_util.a09_str import face_name_str
 from src.a09_pack_logic._test_util.example_atoms import (
     get_atom_example_conceptunit_ball,

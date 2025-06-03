@@ -10,8 +10,7 @@ from src.a06_bud_logic._test_util.example_buds import (
     get_budunit_with_4_levels_and_2reasons,
     get_budunit_with_4_levels_and_2reasons_2facts,
 )
-from src.a06_bud_logic.bud import budunit_shop
-from src.a06_bud_logic.bud import get_from_json as budunit_get_from_json
+from src.a06_bud_logic.bud import budunit_shop, get_from_json as budunit_get_from_json
 
 
 def get_tasks_count(agenda_dict: dict[WayTerm, ConceptUnit]) -> int:

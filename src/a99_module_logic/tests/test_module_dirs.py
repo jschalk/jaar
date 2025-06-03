@@ -1,5 +1,4 @@
-from os.path import basename as os_path_basename
-from os.path import exists as os_path_exists
+from os.path import basename as os_path_basename, exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a99_module_logic.module_eval import (
     check_if_module_str_funcs_is_sorted,

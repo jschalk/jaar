@@ -1,11 +1,12 @@
 from contextlib import contextmanager
-from csv import reader as csv_reader
-from csv import writer as csv_writer
+from csv import reader as csv_reader, writer as csv_writer
 from dataclasses import dataclass
 from os.path import join as os_path_join
-from sqlite3 import Connection as sqlite3_Connection
-from sqlite3 import Error as sqlite3_Error
-from sqlite3 import connect as sqlite3_connect
+from sqlite3 import (
+    Connection as sqlite3_Connection,
+    Error as sqlite3_Error,
+    connect as sqlite3_connect,
+)
 from src.a00_data_toolbox.file_toolbox import create_path, set_dir
 
 
