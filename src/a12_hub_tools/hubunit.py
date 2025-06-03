@@ -452,7 +452,8 @@ class HubUnit:
 
     def create_treasury_db_file(self):
         self.create_keep_dir_if_missing()
-        conn = sqlite3_connect(self.treasury_db_path())
+        db_path = self.treasury_db_path()
+        conn = sqlite3_connect(db_path)
         conn.close()
 
     def treasury_db_file_exists(self) -> bool:
