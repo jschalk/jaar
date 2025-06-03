@@ -87,9 +87,7 @@ def get_all_excel_sheet_names(
 
 
 def get_relevant_columns_dataframe(
-    src_df: DataFrame,
-    relevant_columns: list[str] = None,
-    relevant_columns_necessary: bool = True,
+    src_df: DataFrame, relevant_columns: list[str] = None
 ) -> DataFrame:
     if relevant_columns is None:
         relevant_columns = get_idea_elements_sort_order()
