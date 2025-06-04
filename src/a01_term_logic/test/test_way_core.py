@@ -1,12 +1,12 @@
 from dataclasses import dataclass
 from platform import system as platform_system
 from pytest import raises as pytest_raises
+from src.a01_term_logic.term import default_bridge_if_None
 from src.a01_term_logic.way import (
     WayTerm,
     all_wayterms_between,
     create_way,
     create_way_from_labels,
-    default_bridge_if_None,
     find_replace_way_key_dict,
     get_all_way_labels,
     get_ancestor_ways,
