@@ -1,9 +1,5 @@
 from pytest import raises as pytest_raises
-from src.a01_term_logic.way import (
-    create_way,
-    default_bridge_if_None,
-    get_default_fisc_label as root_label,
-)
+from src.a01_term_logic.way import default_bridge_if_None
 from src.a02_finance_logic.finance_config import default_fund_coin_if_None
 from src.a03_group_logic.group import GroupUnit, groupunit_shop, membership_shop
 
@@ -30,8 +26,6 @@ def test_GroupUnit_exists():
 def test_groupunit_shop_ReturnsObj():
     # ESTABLISH
     swim_str = ";swimmers"
-    nation_way = create_way(root_label(), "nations")
-    usa_way = create_way(nation_way, "USA")
 
     # WHEN
     swim_groupunit = groupunit_shop(group_title=swim_str)

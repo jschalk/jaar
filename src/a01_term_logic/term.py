@@ -24,7 +24,9 @@ class AxiomLabel(LabelTerm):
     pass
 
 
-class FiscLabel(LabelTerm):  # Created to help track the object class relations
+class FiscLabel(AxiomLabel):  # Created to help track the object class relations
+    """An AxiomLabel for a Fisc Moment. Cannot contain bridge"""
+
     pass
 
 

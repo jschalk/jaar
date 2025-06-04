@@ -1,7 +1,6 @@
 from src.a01_term_logic.way import (
     create_way,
-    get_default_fisc_label as root_label,
-    get_default_fisc_way,
+    get_default_axiom_label as root_label,
 )
 from src.a04_reason_logic._test_util.a04_str import (
     fcontext_str,
@@ -182,7 +181,8 @@ def test_FactUnit_get_dict_ReturnsPartialDict():
 def test_FactUnit_find_replace_way_SetsAttrCorrectly():
     # ESTABLISH
     wkday_str = "wkday"
-    old_wkday_way = create_way(root_label(), wkday_str)
+    old_way = create_way("old_new")
+    old_wkday_way = create_way(old_way, wkday_str)
     sunday_str = "Sunday"
     old_sunday_way = create_way(old_wkday_way, sunday_str)
     sunday_fact = factunit_shop(fcontext=old_wkday_way, fstate=old_sunday_way)
@@ -191,8 +191,7 @@ def test_FactUnit_find_replace_way_SetsAttrCorrectly():
     assert sunday_fact.fstate == old_sunday_way
 
     # WHEN
-    old_way = get_default_fisc_way()
-    new_way = create_way("fun")
+    new_way = create_way("new_fun")
     sunday_fact.find_replace_way(old_way=old_way, new_way=new_way)
 
     # THEN

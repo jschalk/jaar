@@ -1,10 +1,5 @@
-from src.a01_term_logic.way import (
-    LabelTerm,
-    WayTerm,
-    create_way,
-    get_default_fisc_label,
-)
-from src.a05_concept_logic.concept import conceptunit_shop
+from src.a01_term_logic.way import LabelTerm, WayTerm, create_way
+from src.a05_concept_logic.concept import conceptunit_shop, get_default_fisc_label
 from src.a06_bud_logic.bud import BudUnit, budunit_shop
 from src.a12_hub_tools.hub_tool import (
     gut_file_exists,

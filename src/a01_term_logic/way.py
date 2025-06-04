@@ -1,6 +1,7 @@
 from pathlib import Path as pathlib_Path
 from src.a00_data_toolbox.file_toolbox import is_path_valid
 from src.a01_term_logic.term import (
+    AxiomLabel,
     FiscLabel,
     LabelTerm,
     WayTerm,
@@ -13,8 +14,8 @@ class bridge_not_in_parent_way_Exception(Exception):
     pass
 
 
-def get_default_fisc_label() -> FiscLabel:
-    return "ZZ"
+def get_default_axiom_label() -> AxiomLabel:
+    return "YY"
 
 
 def to_way(label: LabelTerm, bridge: str = None) -> LabelTerm:
@@ -25,8 +26,8 @@ def to_way(label: LabelTerm, bridge: str = None) -> LabelTerm:
     return label if label.endswith(x_bridge) else LabelTerm(f"{label}{x_bridge}")
 
 
-def get_default_fisc_way(bridge: str = None) -> str:
-    return to_way(get_default_fisc_label(), bridge)
+def get_default_axiom_way(bridge: str = None) -> str:
+    return to_way(get_default_axiom_label(), bridge)
 
 
 class init_bridge_not_presentException(Exception):

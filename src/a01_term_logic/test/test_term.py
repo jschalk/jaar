@@ -202,3 +202,14 @@ def test_EventInt_Exists():
     assert EventInt() == 0
     assert EventInt(12) == 12
     assert EventInt(12.4) == 12
+
+
+def test_FiscLabel_Exists():
+    # ESTABLISH
+    empty_str = ""
+    # WHEN
+    x_fisc = FiscLabel(empty_str)
+    # THEN
+    assert x_fisc == empty_str
+    doc_str = f"An AxiomLabel for a Fisc Moment. Cannot contain {bridge_str()}"
+    assert inspect_getdoc(x_fisc) == doc_str

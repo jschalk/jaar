@@ -4,7 +4,6 @@ from src.a01_term_logic.way import (
     create_way,
     create_way_from_labels,
     default_bridge_if_None,
-    get_default_fisc_label as root_label,
 )
 from src.a02_finance_logic.finance_config import (
     default_fund_coin_if_None,
@@ -12,6 +11,7 @@ from src.a02_finance_logic.finance_config import (
     filter_penny,
     validate_fund_pool,
 )
+from src.a05_concept_logic.concept import get_default_fisc_label as root_label
 from src.a12_hub_tools._test_util.a12_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,

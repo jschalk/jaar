@@ -1,11 +1,8 @@
 from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import x_is_json
-from src.a01_term_logic.way import (
-    create_way,
-    get_default_fisc_label as root_label,
-    to_way,
-)
+from src.a01_term_logic.way import create_way, to_way
 from src.a03_group_logic.acct import acctunit_shop
+from src.a05_concept_logic.concept import get_default_fisc_label as root_label
 from src.a06_bud_logic._test_util.a06_str import (
     acct_name_str,
     awardee_title_str,
@@ -20,11 +17,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     group_title_str,
 )
 from src.a06_bud_logic.bud import budunit_shop
-from src.a08_bud_atom_logic._test_util.a08_str import (
-    DELETE_str,
-    INSERT_str,
-    UPDATE_str,
-)
+from src.a08_bud_atom_logic._test_util.a08_str import DELETE_str, INSERT_str, UPDATE_str
 from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a09_pack_logic._test_util.example_deltas import (
     get_buddelta_example1,

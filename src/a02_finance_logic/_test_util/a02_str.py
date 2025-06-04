@@ -1,12 +1,8 @@
-from src.a01_term_logic._test_util.a01_str import bridge_str, fisc_label_str
+from src.a01_term_logic._test_util.a01_str import bridge_str
 
 
 def acct_name_str() -> str:
     return "acct_name"
-
-
-def addin_str() -> str:
-    return "addin"
 
 
 def amount_str() -> str:
@@ -23,6 +19,10 @@ def deal_acct_nets_str() -> str:
 
 def deal_time_str() -> str:
     return "deal_time"
+
+
+def fisc_label_str() -> str:
+    return "fisc_label"
 
 
 def fund_coin_str() -> str:

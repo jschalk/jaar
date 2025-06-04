@@ -16,7 +16,6 @@ from src.a01_term_logic.way import (
     create_way,
     default_bridge_if_None,
     find_replace_way_key_dict,
-    get_default_fisc_label as root_label,
     is_sub_way,
     rebuild_way,
     replace_bridge,
@@ -78,6 +77,10 @@ class InvalidConceptException(Exception):
 
 class ConceptGetDescendantsException(Exception):
     pass
+
+
+def get_default_fisc_label() -> FiscLabel:
+    return "ZZ"
 
 
 class Concept_root_LabelNotEmptyException(Exception):
@@ -1022,7 +1025,7 @@ def conceptunit_shop(
     bridge: str = None,
     _healerlink_ratio: float = None,
 ) -> ConceptUnit:
-    fisc_label = root_label() if fisc_label is None else fisc_label
+    fisc_label = get_default_fisc_label() if fisc_label is None else fisc_label
     x_healerlink = healerlink_shop() if healerlink is None else healerlink
 
     x_conceptkid = ConceptUnit(

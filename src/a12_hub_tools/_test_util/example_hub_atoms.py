@@ -3,9 +3,9 @@ from src.a01_term_logic.way import (
     WayTerm,
     create_way,
     create_way_from_labels,
-    get_default_fisc_label,
 )
 from src.a02_finance_logic.deal import DealUnit, dealunit_shop
+from src.a05_concept_logic.concept import get_default_fisc_label
 from src.a06_bud_logic._test_util.a06_str import (
     acct_name_str,
     bud_acctunit_str,
@@ -17,11 +17,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     fnigh_str,
     fopen_str,
 )
-from src.a08_bud_atom_logic._test_util.a08_str import (
-    DELETE_str,
-    INSERT_str,
-    UPDATE_str,
-)
+from src.a08_bud_atom_logic._test_util.a08_str import DELETE_str, INSERT_str, UPDATE_str
 from src.a08_bud_atom_logic.atom import BudAtom, budatom_shop
 from src.a09_pack_logic.delta import BudDelta, buddelta_shop
 from src.a09_pack_logic.pack import PackUnit, packunit_shop

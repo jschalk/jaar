@@ -18,9 +18,5 @@ def bridge_str() -> str:
     return "bridge"
 
 
-def fisc_label_str() -> str:
-    return "fisc_label"
-
-
 def parent_way_str() -> str:
     return "parent_way"

@@ -1,8 +1,8 @@
 from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import x_is_json
-from src.a01_term_logic.way import get_default_fisc_label as root_label
 from src.a02_finance_logic._test_util.a02_str import fisc_label_str, owner_name_str
 from src.a03_group_logic.acct import acctunit_shop
+from src.a05_concept_logic.concept import get_default_fisc_label
 from src.a06_bud_logic._test_util.a06_str import (
     acct_name_str,
     bud_acctunit_str,
@@ -64,7 +64,7 @@ def test_packunit_shop_ReturnsObjEstablishWithEmptyArgs():
 
     # THEN
     assert not bob_packunit.face_name
-    assert bob_packunit.fisc_label == root_label()
+    assert bob_packunit.fisc_label == get_default_fisc_label()
     assert bob_packunit.owner_name == bob_str
     assert bob_packunit._pack_id == 0
     assert bob_packunit._buddelta == buddelta_shop()

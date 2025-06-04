@@ -30,7 +30,7 @@ def _ingest_perspective_agenda(listener: BudUnit, agenda: list[ConceptUnit]) -> 
 
 def _allocate_irrational_debtit_belief(
     listener: BudUnit, speaker_owner_name: OwnerName
-):
+) -> BudUnit:
     speaker_acctunit = listener.get_acct(speaker_owner_name)
     speaker_debtit_belief = speaker_acctunit.debtit_belief
     speaker_acctunit.add_irrational_debtit_belief(speaker_debtit_belief)
@@ -39,7 +39,7 @@ def _allocate_irrational_debtit_belief(
 
 def _allocate_inallocable_debtit_belief(
     listener: BudUnit, speaker_owner_name: OwnerName
-):
+) -> BudUnit:
     speaker_acctunit = listener.get_acct(speaker_owner_name)
     speaker_acctunit.add_inallocable_debtit_belief(speaker_acctunit.debtit_belief)
     return listener
@@ -105,7 +105,7 @@ def _add_and_replace_conceptunit_masss(
     replace_mass_list: list[WayTerm],
     add_to_mass_list: list[WayTerm],
     x_mass: float,
-):
+) -> None:
     for concept_way in replace_mass_list:
         listener.edit_concept_attr(concept_way, mass=x_mass)
     for concept_way in add_to_mass_list:

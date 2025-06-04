@@ -23,7 +23,6 @@ from src.a01_term_logic.way import (
     default_bridge_if_None,
     get_all_way_labels,
     get_ancestor_ways,
-    get_default_fisc_label,
     get_forefather_ways,
     get_parent_way,
     get_root_label_from_way,
@@ -67,6 +66,7 @@ from src.a05_concept_logic.concept import (
     ConceptUnit,
     conceptattrholder_shop,
     conceptunit_shop,
+    get_default_fisc_label,
     get_obj_from_concept_dict,
 )
 from src.a05_concept_logic.healer import HealerLink

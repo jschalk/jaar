@@ -1,8 +1,5 @@
 from pytest import raises as pytest_raises
-from src.a01_term_logic.way import (
-    default_bridge_if_None,
-    get_default_fisc_label as root_label,
-)
+from src.a01_term_logic.way import default_bridge_if_None
 from src.a02_finance_logic._test_util.a02_str import (
     bridge_str,
     fisc_label_str,
@@ -16,6 +13,7 @@ from src.a02_finance_logic.finance_config import (
     validate_fund_pool,
     validate_respect_num,
 )
+from src.a05_concept_logic.concept import get_default_fisc_label as root_label
 from src.a05_concept_logic.origin import originunit_shop
 from src.a06_bud_logic._test_util.a06_str import (
     _keeps_buildable_str,

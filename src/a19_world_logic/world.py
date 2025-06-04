@@ -11,7 +11,7 @@ from src.a00_data_toolbox.dict_toolbox import (
 )
 from src.a00_data_toolbox.file_toolbox import create_path, delete_dir, set_dir
 from src.a01_term_logic.term import EventInt, FaceName, FiscLabel
-from src.a02_finance_logic.deal import TimeConversion, TimeLinePoint
+from src.a02_finance_logic.deal import TimeLinePoint
 from src.a07_calendar_logic.chrono import TimeLineLabel
 from src.a15_fisc_logic.fisc import FiscUnit
 from src.a18_etl_toolbox.stance_tool import create_stance0001_file
@@ -56,7 +56,6 @@ class WorldUnit:
     world_id: WorldID = None
     worlds_dir: str = None
     world_time_pnigh: TimeLinePoint = None
-    timeconversions: dict[TimeLineLabel, TimeConversion] = None
     _syntax_otz_dir: str = None
     _world_dir: str = None
     _mud_dir: str = None
@@ -95,9 +94,6 @@ class WorldUnit:
         set_dir(self._syntax_otz_dir)
         set_dir(self._brick_dir)
         set_dir(self._fisc_mstr_dir)
-
-    def get_timeconversions_dict(self) -> dict[TimeLineLabel, TimeConversion]:
-        return self.timeconversions
 
     def mud_dfs_to_brick_raw_tables(self, conn: sqlite3_Connection):
         etl_mud_dfs_to_brick_raw_tables(conn, self._mud_dir)
@@ -167,7 +163,6 @@ class WorldUnit:
         return {
             "world_id": self.world_id,
             "world_time_pnigh": self.world_time_pnigh,
-            "timeconversions": self.get_timeconversions_dict(),
         }
 
 
@@ -176,14 +171,12 @@ def worldunit_shop(
     worlds_dir: str,
     mud_dir: str = None,
     world_time_pnigh: TimeLinePoint = None,
-    timeconversions: dict[TimeLineLabel, TimeConversion] = None,
     _fiscunits: set[FiscLabel] = None,
 ) -> WorldUnit:
     x_worldunit = WorldUnit(
         world_id=world_id,
         worlds_dir=worlds_dir,
         world_time_pnigh=get_0_if_None(world_time_pnigh),
-        timeconversions=get_empty_dict_if_None(timeconversions),
         _events={},
         _fiscunits=get_empty_set_if_None(_fiscunits),
         _mud_dir=mud_dir,
