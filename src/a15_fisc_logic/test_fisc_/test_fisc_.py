@@ -501,44 +501,6 @@ def test_FiscUnit__set_all_healer_dutys_CorrectlySetsdutys(
     assert os_path_exists(yao_dallas_yao_duty_file_path)
 
 
-def test_FiscUnit_get_owner_hubunits_ReturnsObj(env_dir_setup_cleanup):
-    # ESTABLISH
-    a23_fisc = fiscunit_shop("accord23", get_module_temp_dir(), in_memory_journal=True)
-    sue_str = "Sue"
-    yao_str = "Yao"
-
-    # WHEN / THEN
-    assert len(a23_fisc.get_owner_hubunits()) == 0
-
-    # WHEN
-    a23_fisc.create_init_job_from_guts(sue_str)
-    a23_fisc.create_init_job_from_guts(yao_str)
-    accord_all_owners = a23_fisc.get_owner_hubunits()
-
-    # THEN
-    sue_hubunit = hubunit_shop(
-        fisc_mstr_dir=a23_fisc.fisc_mstr_dir,
-        fisc_label=a23_fisc.fisc_label,
-        owner_name=sue_str,
-        keep_way=None,
-        bridge=a23_fisc.bridge,
-        fund_coin=a23_fisc.fund_coin,
-        respect_bit=a23_fisc.respect_bit,
-    )
-    yao_hubunit = hubunit_shop(
-        fisc_mstr_dir=a23_fisc.fisc_mstr_dir,
-        fisc_label=a23_fisc.fisc_label,
-        owner_name=yao_str,
-        keep_way=None,
-        bridge=a23_fisc.bridge,
-        fund_coin=a23_fisc.fund_coin,
-        respect_bit=a23_fisc.respect_bit,
-    )
-    assert accord_all_owners.get(sue_str) == sue_hubunit
-    assert accord_all_owners.get(yao_str) == yao_hubunit
-    assert len(a23_fisc.get_owner_hubunits()) == 2
-
-
 # def test_FiscUnit_set_offi_time_Scenario0_SetsAttr():
 #     # ESTABLISH
 #     fisc_mstr_dir = get_module_temp_dir()

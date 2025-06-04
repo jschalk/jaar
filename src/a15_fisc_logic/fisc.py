@@ -131,19 +131,6 @@ class FiscUnit:
         )
         return sorted(list(owners.keys()))
 
-    def get_owner_hubunits(self) -> dict[OwnerName:HubUnit]:
-        return {
-            x_owner_name: hubunit_shop(
-                fisc_mstr_dir=self.fisc_mstr_dir,
-                fisc_label=self.fisc_label,
-                owner_name=x_owner_name,
-                keep_way=None,
-                bridge=self.bridge,
-                respect_bit=self.respect_bit,
-            )
-            for x_owner_name in self._get_owner_folder_names()
-        }
-
     # database
     def get_journal_db_path(self) -> str:
         fiscs_dir = create_path(self.fisc_mstr_dir, "fiscs")
