@@ -1,18 +1,9 @@
 from pathlib import Path as pathlib_Path
 from src.a00_data_toolbox.file_toolbox import is_path_valid
 from src.a01_term_logic.term import (
-    AcctName,
-    EventInt,
-    FaceName,
     FiscLabel,
-    GroupTitle,
-    HealerName,
     LabelTerm,
-    NameTerm,
-    OwnerName,
-    TitleTerm,
     WayTerm,
-    WorldID,
     YawTerm,
     default_bridge_if_None,
 )
@@ -26,12 +17,12 @@ def get_default_fisc_label() -> FiscLabel:
     return "ZZ"
 
 
-def to_way(label: LabelTerm, bridge: str = None):
+def to_way(label: LabelTerm, bridge: str = None) -> LabelTerm:
     x_bridge = default_bridge_if_None(bridge)
     if label is None:
         return x_bridge
     label = label if label.find(x_bridge) == 0 else f"{x_bridge}{label}"
-    return label if label.endswith(x_bridge) else f"{label}{x_bridge}"
+    return label if label.endswith(x_bridge) else LabelTerm(f"{label}{x_bridge}")
 
 
 def get_default_fisc_way(bridge: str = None) -> str:
@@ -198,7 +189,7 @@ def is_string_in_way(string: str, way: WayTerm) -> bool:
     return way.find(string) >= 0
 
 
-def replace_bridge(way: WayTerm, old_bridge: str, new_bridge: str):
+def replace_bridge(way: WayTerm, old_bridge: str, new_bridge: str) -> str:
     if is_string_in_way(string=new_bridge, way=way):
         raise InvalidbridgeReplaceException(
             f"Cannot replace_bridge '{old_bridge}' with '{new_bridge}' because the new one exists in way '{way}'."
@@ -210,14 +201,14 @@ class ValidateLabelTermException(Exception):
     pass
 
 
-def is_labelterm(x_labelterm: LabelTerm, x_bridge: str):
+def is_labelterm(x_labelterm: LabelTerm, x_bridge: str) -> bool:
     x_labelterm = LabelTerm(x_labelterm)
     return x_labelterm.is_label(bridge=x_bridge)
 
 
 def validate_labelterm(
     x_labelterm: LabelTerm, x_bridge: str, not_labelterm_required: bool = False
-):
+) -> LabelTerm:
     if is_labelterm(x_labelterm, x_bridge) and not_labelterm_required:
         raise ValidateLabelTermException(
             f"'{x_labelterm}' needs to not be a LabelTerm. Must contain bridge: '{x_bridge}'"

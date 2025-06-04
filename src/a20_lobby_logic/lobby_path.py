@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a01_term_logic.way import LabelTerm, OwnerName, WorldID
+from src.a01_term_logic.term import LabelTerm, OwnerName, WorldID
 
 
 class LobbyID(str):

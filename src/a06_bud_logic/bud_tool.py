@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.dict_toolbox import create_csv
-from src.a01_term_logic.way import AcctName, FiscLabel, WayTerm
+from src.a01_term_logic.term import AcctName, FiscLabel, WayTerm
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import FundNum, RespectNum, get_net
 from src.a03_group_logic.acct import AcctUnit

@@ -7,7 +7,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_empty_list_if_None,
     get_json_from_dict,
 )
-from src.a01_term_logic.way import EventInt, OwnerName, WayTerm
+from src.a01_term_logic.term import EventInt, OwnerName, WayTerm
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import FundNum, PennyNum
 from src.a04_reason_logic.reason_concept import (

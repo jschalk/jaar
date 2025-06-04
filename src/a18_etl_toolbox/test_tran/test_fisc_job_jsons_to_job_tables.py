@@ -2,8 +2,8 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.a00_data_toolbox.file_toolbox import save_file
-from src.a01_term_logic.way import AcctName, GroupTitle, OwnerName, WayTerm
-from src.a02_finance_logic.deal import FiscLabel, OwnerName
+from src.a01_term_logic.term import AcctName, GroupTitle, OwnerName, WayTerm
+from src.a02_finance_logic.deal import FiscLabel
 from src.a03_group_logic.acct import AcctUnit
 from src.a03_group_logic.group import AwardHeir, GroupUnit, awardlink_shop
 from src.a04_reason_logic.reason_concept import FactHeir, PremiseUnit, ReasonHeir

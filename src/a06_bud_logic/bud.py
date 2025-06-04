@@ -8,13 +8,16 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_False_if_None,
     get_json_from_dict,
 )
-from src.a01_term_logic.way import (
+from src.a01_term_logic.term import (
     AcctName,
     FiscLabel,
+    GroupTitle,
     HealerName,
     LabelTerm,
     OwnerName,
     WayTerm,
+)
+from src.a01_term_logic.way import (
     all_wayterms_between,
     create_way,
     default_bridge_if_None,
@@ -48,7 +51,6 @@ from src.a02_finance_logic.finance_config import (
 from src.a03_group_logic.acct import AcctUnit, acctunit_shop, acctunits_get_from_dict
 from src.a03_group_logic.group import (
     AwardLink,
-    GroupTitle,
     GroupUnit,
     groupunit_shop,
     membership_shop,

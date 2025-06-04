@@ -8,12 +8,8 @@ from src.a00_data_toolbox.file_toolbox import (
     open_json,
     save_file,
 )
-from src.a01_term_logic.way import (
-    FaceName,
-    FiscLabel,
-    OwnerName,
-    get_default_fisc_label,
-)
+from src.a01_term_logic.term import FaceName, FiscLabel, OwnerName
+from src.a01_term_logic.way import get_default_fisc_label
 from src.a06_bud_logic.bud import BudUnit
 from src.a08_bud_atom_logic.atom import BudAtom, get_from_json as budatom_get_from_json
 from src.a09_pack_logic.delta import (

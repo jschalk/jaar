@@ -27,7 +27,7 @@ from src.a00_data_toolbox.file_toolbox import (
     save_file,
     set_dir,
 )
-from src.a01_term_logic.way import EventInt, FaceName
+from src.a01_term_logic.term import EventInt, FaceName
 from src.a16_pidgin_logic.map import MapCore
 from src.a16_pidgin_logic.pidgin import PidginUnit, get_pidginunit_from_json
 from src.a16_pidgin_logic.pidgin_config import (

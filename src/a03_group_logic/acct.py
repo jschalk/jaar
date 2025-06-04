@@ -4,17 +4,14 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_1_if_None,
     get_dict_from_json,
 )
+from src.a01_term_logic.term import AcctName
 from src.a01_term_logic.way import (
-    AcctName,
     default_bridge_if_None,
     is_labelterm,
     validate_labelterm,
 )
 from src.a02_finance_logic.allot import allot_scale
-from src.a02_finance_logic.finance_config import (
-    RespectNum,
-    default_RespectBit_if_None,
-)
+from src.a02_finance_logic.finance_config import RespectNum, default_RespectBit_if_None
 from src.a03_group_logic.group import (
     GroupTitle,
     MemberShip,

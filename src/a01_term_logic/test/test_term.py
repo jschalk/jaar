@@ -1,6 +1,6 @@
 from inspect import getdoc as inspect_getdoc
 from src.a01_term_logic._test_util.a01_str import bridge_str
-from src.a01_term_logic.way import (
+from src.a01_term_logic.term import (
     AcctName,
     EventInt,
     FaceName,

@@ -10,7 +10,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_empty_set_if_None,
 )
 from src.a00_data_toolbox.file_toolbox import create_path, delete_dir, set_dir
-from src.a01_term_logic.way import EventInt, FaceName, FiscLabel, WorldID
+from src.a01_term_logic.term import EventInt, FaceName, FiscLabel, WorldID
 from src.a02_finance_logic.deal import TimeConversion, TimeLinePoint
 from src.a07_calendar_logic.chrono import TimeLineLabel
 from src.a15_fisc_logic.fisc import FiscUnit

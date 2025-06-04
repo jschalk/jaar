@@ -14,7 +14,7 @@ from src.a00_data_toolbox.file_toolbox import (
     open_file,
     set_dir,
 )
-from src.a01_term_logic.way import (
+from src.a01_term_logic.term import (
     AcctName,
     EventInt,
     FiscLabel,

@@ -27,7 +27,7 @@ from src.a00_data_toolbox.file_toolbox import (
     save_file,
     save_json,
 )
-from src.a01_term_logic.way import EventInt, FaceName
+from src.a01_term_logic.term import EventInt, FaceName
 from src.a06_bud_logic.bud import BudUnit, budunit_shop
 from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a08_bud_atom_logic.atom_config import get_bud_dimens

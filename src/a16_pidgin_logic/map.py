@@ -12,14 +12,16 @@ from src.a00_data_toolbox.dict_toolbox import (
     str_in_dict_keys,
     str_in_dict_values,
 )
-from src.a01_term_logic.way import (
+from src.a01_term_logic.term import (
     EventInt,
     FaceName,
     LabelTerm,
     WayTerm,
+    default_bridge_if_None,
+)
+from src.a01_term_logic.way import (
     create_way,
     create_way_from_labels,
-    default_bridge_if_None,
     get_all_way_labels,
     get_parent_way,
     get_tail_label,

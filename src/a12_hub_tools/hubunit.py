@@ -18,16 +18,14 @@ from src.a00_data_toolbox.file_toolbox import (
     save_json,
     set_dir,
 )
-from src.a01_term_logic.way import (
+from src.a01_term_logic.term import (
     FiscLabel,
     LabelTerm,
     OwnerName,
     WayTerm,
     default_bridge_if_None,
-    get_all_way_labels,
-    rebuild_way,
-    validate_labelterm,
 )
+from src.a01_term_logic.way import get_all_way_labels, rebuild_way, validate_labelterm
 from src.a02_finance_logic.finance_config import (
     default_fund_coin_if_None,
     default_money_magnitude_if_None,

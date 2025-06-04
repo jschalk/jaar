@@ -2,8 +2,8 @@ from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 from sqlite3 import Cursor as sqlite3_Cursor
 from src.a00_data_toolbox.db_toolbox import sqlite_obj_str
-from src.a01_term_logic.way import AcctName, GroupTitle, OwnerName, WayTerm
-from src.a02_finance_logic.deal import FiscLabel, OwnerName
+from src.a01_term_logic.term import AcctName, GroupTitle, OwnerName, WayTerm
+from src.a02_finance_logic.deal import FiscLabel
 from src.a03_group_logic.acct import AcctUnit
 from src.a03_group_logic.group import AwardHeir, GroupUnit, MemberShip
 from src.a04_reason_logic.reason_concept import FactHeir, PremiseUnit, ReasonHeir

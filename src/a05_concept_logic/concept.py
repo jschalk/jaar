@@ -7,10 +7,9 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_False_if_None,
     get_positive_int,
 )
+from src.a01_term_logic.term import AcctName, GroupTitle, LabelTerm
 from src.a01_term_logic.way import (
-    AcctName,
     FiscLabel,
-    GroupTitle,
     LabelTerm,
     WayTerm,
     all_wayterms_between,

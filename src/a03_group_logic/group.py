@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from src.a00_data_toolbox.dict_toolbox import get_1_if_None, get_dict_from_json
-from src.a01_term_logic.way import AcctName, GroupTitle, default_bridge_if_None
+from src.a01_term_logic.term import AcctName, GroupTitle, default_bridge_if_None
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import FundCoin, default_fund_coin_if_None
 
