@@ -30,6 +30,8 @@ def test_ModuleStrFunctionsTestFileFormat():
         assert os_path_exists(utils_dir)
         str_func_path = create_path(utils_dir, f"a{module_desc[1:3]}_str.py")
         assert os_path_exists(str_func_path)
+        # str_func_test_path = create_path(utils_dir, f"test_a{module_desc[1:3]}_str.py")
+        # assert os_path_exists(str_func_test_path)
         env_files = get_python_files_with_flag(utils_dir, "env")
         if len(env_files) > 0:
             print(f"{env_files=}")
@@ -42,6 +44,8 @@ def test_ModuleStrFunctionsTestFileFormat():
 
 
 def test_PythonFileImportsFormat():
+    """Check all python file imports"""
+
     # sourcery skip: no-loop-in-tests
     # sourcery skip: no-conditionals-in-tests
     # ESTABLISH / WHEN / THEN
@@ -56,6 +60,7 @@ def test_PythonFileImportsFormat():
 
             filename = str(os_path_basename(file_path))
             file_path = str(file_path)
+            print(f"{file_path=}")
             if not filename.startswith("test") and "_test_util" not in file_path:
                 for file_import in file_imports:
                     if str(file_import[0]).endswith("_str"):

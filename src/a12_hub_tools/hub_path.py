@@ -19,14 +19,6 @@ def treasury_filename() -> str:
     return "treasury.db"
 
 
-def gut_str() -> str:
-    return "gut"
-
-
-def job_str() -> str:
-    return "job"
-
-
 def create_fisc_dir_path(fisc_mstr_dir: str, fisc_label: LabelTerm) -> str:
     """Returns path: fisc_mstr_dir\\fiscs\\fisc_label"""
     fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
