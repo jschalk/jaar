@@ -78,6 +78,10 @@ def _uid_str() -> str:
     return "_uid"
 
 
+def addin_str() -> str:
+    return "addin"
+
+
 def begin_str() -> str:
     return "begin"
 

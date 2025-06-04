@@ -11,12 +11,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_json_from_dict,
     set_in_nested_dict,
 )
-from src.a01_term_logic.way import (
-    AcctName,
-    FiscLabel,
-    OwnerName,
-    get_default_fisc_label,
-)
+from src.a01_term_logic.term import AcctName, FiscLabel, OwnerName
 from src.a02_finance_logic.finance_config import (
     FundNum,
     TimeLinePoint,
@@ -345,19 +340,3 @@ def get_deals_from_dict(deals_dict: dict) -> dict[TimeLinePoint, DealUnit]:
         x_dealunit = get_dealunit_from_dict(x_deal_dict)
         x_dict[x_dealunit.deal_time] = x_dealunit
     return x_dict
-
-
-@dataclass
-class TimeConversion:
-    fisc_label: str = None
-    addin: str = None
-
-
-def timeconversion_shop(
-    fisc_label: FiscLabel = None, addin: int = None
-) -> TimeConversion:
-    if fisc_label is None:
-        fisc_label = get_default_fisc_label()
-    if addin is None:
-        addin = 0
-    return TimeConversion(fisc_label=fisc_label, addin=addin)

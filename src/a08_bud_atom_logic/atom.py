@@ -1,22 +1,12 @@
 from dataclasses import dataclass
-from src.a00_data_toolbox.db_toolbox import (
-    RowData,
-    create_type_reference_insert_sqlstr,
-)
+from src.a00_data_toolbox.db_toolbox import RowData, create_type_reference_insert_sqlstr
 from src.a00_data_toolbox.dict_toolbox import (
     get_dict_from_json,
     get_empty_dict_if_None,
     get_json_from_dict,
 )
-from src.a01_term_logic.way import (
-    AcctName,
-    LabelTerm,
-    TitleTerm,
-    WayTerm,
-    create_way,
-    get_parent_way,
-    get_tail_label,
-)
+from src.a01_term_logic.term import AcctName, LabelTerm, TitleTerm, WayTerm
+from src.a01_term_logic.way import create_way, get_parent_way, get_tail_label
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import factunit_shop

@@ -1,4 +1,4 @@
-from src.a01_term_logic.way import create_way, get_default_fisc_label as root_label
+from src.a01_term_logic.way import create_way
 from src.a04_reason_logic.reason_concept import (
     factunit_shop,
     premiseunit_shop,
@@ -10,7 +10,8 @@ from src.a05_concept_logic.concept import conceptunit_shop
 def test_ConceptUnit_find_replace_way_CorrectlyModifies_parent_way():
     # ESTABLISH Concept with _parent_way that will be different
     old_casa_str = "casa1"
-    old_casa_way = create_way(root_label(), old_casa_str)
+    old_root_label = "ZZ"
+    old_casa_way = create_way(old_root_label, old_casa_str)
     bloomers_str = "bloomers"
     old_bloomers_way = create_way(old_casa_way, bloomers_str)
     roses_str = "roses"
@@ -21,7 +22,7 @@ def test_ConceptUnit_find_replace_way_CorrectlyModifies_parent_way():
 
     # WHEN
     new_casa = "casa2"
-    new_casa_way = create_way(root_label(), new_casa)
+    new_casa_way = create_way(old_root_label, new_casa)
     x_concept.find_replace_way(old_way=old_casa_way, new_way=new_casa_way)
 
     # THEN
@@ -34,14 +35,15 @@ def test_ConceptUnit_find_replace_way_CorrectlyModifies_parent_way():
 def test_ConceptUnit_find_replace_way_CorrectlyModifies_reasonunits():
     # ESTABLISH Concept with reason that will be different
     casa_str = "casa1"
-    casa_way = create_way(root_label(), casa_str)
+    old_root_label = "ZZ"
+    casa_way = create_way(old_root_label, casa_str)
     bloomers_str = "bloomers"
     bloomers_way = create_way(casa_way, bloomers_str)
     roses_str = "roses"
     roses_way = create_way(bloomers_way, roses_str)
     # reason ways
     old_water_str = "water"
-    old_water_way = create_way(root_label(), old_water_str)
+    old_water_way = create_way(old_root_label, old_water_str)
     rain_str = "rain"
     old_rain_way = create_way(old_water_way, rain_str)
     # create reasonunit
@@ -60,7 +62,7 @@ def test_ConceptUnit_find_replace_way_CorrectlyModifies_reasonunits():
 
     # WHEN
     new_water_str = "h2o"
-    new_water_way = create_way(root_label(), new_water_str)
+    new_water_way = create_way(old_root_label, new_water_str)
     assert x_concept.reasonunits.get(new_water_way) is None
     x_concept.find_replace_way(old_way=old_water_way, new_way=new_water_way)
 
@@ -89,7 +91,8 @@ def test_ConceptUnit_find_replace_way_CorrectlyModifies_factunits():
     # ESTABLISH Concept with factunit that will be different
     roses_str = "roses"
     old_water_str = "water"
-    old_water_way = create_way(root_label(), old_water_str)
+    old_root_label = "ZZ"
+    old_water_way = create_way(old_root_label, old_water_str)
     rain_str = "rain"
     old_rain_way = create_way(old_water_way, rain_str)
 
@@ -103,7 +106,7 @@ def test_ConceptUnit_find_replace_way_CorrectlyModifies_factunits():
 
     # WHEN
     new_water_str = "h2o"
-    new_water_way = create_way(root_label(), new_water_str)
+    new_water_way = create_way(old_root_label, new_water_str)
     assert x_concept.factunits.get(new_water_way) is None
     x_concept.find_replace_way(old_way=old_water_way, new_way=new_water_way)
 

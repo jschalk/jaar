@@ -2,14 +2,11 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.a00_data_toolbox.file_toolbox import save_file
-from src.a01_term_logic.way import AcctName, GroupTitle, OwnerName, WayTerm
-from src.a02_finance_logic.deal import FiscLabel, OwnerName
-from src.a03_group_logic.acct import AcctUnit
-from src.a03_group_logic.group import AwardHeir, GroupUnit, awardlink_shop
-from src.a04_reason_logic.reason_concept import FactHeir, PremiseUnit, ReasonHeir
+from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a05_concept_logic.healer import healerlink_shop
-from src.a06_bud_logic.bud import BudUnit, budunit_shop
+from src.a06_bud_logic.bud import budunit_shop
+from src.a12_hub_tools._test_util.a12_str import job_str
 from src.a12_hub_tools.hub_path import create_fisc_json_path, create_job_path
 from src.a12_hub_tools.hub_tool import save_job_file
 from src.a15_fisc_logic.fisc import fiscunit_shop
@@ -55,17 +52,17 @@ def test_etl_fisc_job_jsons_to_job_tables_PopulatesTables_Scenario0(
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        budmemb_job_table = prime_table("budmemb", "job", None)
-        budacct_job_table = prime_table("budacct", "job", None)
-        budgrou_job_table = prime_table("budgrou", "job", None)
-        budawar_job_table = prime_table("budawar", "job", None)
-        budfact_job_table = prime_table("budfact", "job", None)
-        budheal_job_table = prime_table("budheal", "job", None)
-        budprem_job_table = prime_table("budprem", "job", None)
-        budreas_job_table = prime_table("budreas", "job", None)
-        budlabo_job_table = prime_table("budlabo", "job", None)
-        budconc_job_table = prime_table("budconc", "job", None)
-        budunit_job_table = prime_table("budunit", "job", None)
+        budmemb_job_table = prime_table("budmemb", job_str(), None)
+        budacct_job_table = prime_table("budacct", job_str(), None)
+        budgrou_job_table = prime_table("budgrou", job_str(), None)
+        budawar_job_table = prime_table("budawar", job_str(), None)
+        budfact_job_table = prime_table("budfact", job_str(), None)
+        budheal_job_table = prime_table("budheal", job_str(), None)
+        budprem_job_table = prime_table("budprem", job_str(), None)
+        budreas_job_table = prime_table("budreas", job_str(), None)
+        budlabo_job_table = prime_table("budlabo", job_str(), None)
+        budconc_job_table = prime_table("budconc", job_str(), None)
+        budunit_job_table = prime_table("budunit", job_str(), None)
         assert not db_table_exists(cursor, budunit_job_table)
         assert not db_table_exists(cursor, budconc_job_table)
         assert not db_table_exists(cursor, budacct_job_table)
@@ -121,7 +118,7 @@ def test_etl_fisc_job_jsons_to_job_tables_PopulatesTables_Scenario1(
     assert os_path_exists(a23_bob_job_path)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        budacct_job_tablename = prime_table("budacct", "job", None)
+        budacct_job_tablename = prime_table("budacct", job_str(), None)
         assert not db_table_exists(cursor, budacct_job_tablename)
 
         # WHEN

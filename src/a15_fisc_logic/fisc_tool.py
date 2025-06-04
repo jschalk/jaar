@@ -8,7 +8,7 @@ from src.a00_data_toolbox.file_toolbox import (
     open_json,
     save_json,
 )
-from src.a01_term_logic.way import LabelTerm, OwnerName
+from src.a01_term_logic.term import LabelTerm, OwnerName
 from src.a02_finance_logic.allot import allot_nested_scale
 from src.a02_finance_logic.deal import FiscLabel
 from src.a02_finance_logic.finance_config import FundNum, TimeLinePoint

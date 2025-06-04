@@ -15,6 +15,7 @@ from src.a06_bud_logic._test_util.a06_str import (
 )
 from src.a10_bud_calc._test_util.a10_str import bud_groupunit_str
 from src.a10_bud_calc.bud_calc_config import get_bud_calc_config_dict
+from src.a12_hub_tools._test_util.a12_str import job_str
 from src.a17_idea_logic.idea_config import get_idea_sqlite_types
 from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
 from src.a18_etl_toolbox.tran_sqlstrs import (
@@ -36,7 +37,7 @@ def test_get_job_create_table_sqlstrs_ReturnsObj():
         # print(f"{x_dimen} checking...")
         x_config = bud_calc_config.get(x_dimen)
 
-        job_table = prime_table(x_dimen, "job", None)
+        job_table = prime_table(x_dimen, job_str(), None)
         job_cols = {fisc_label_str(), owner_name_str()}
         job_cols.update(set(x_config.get("jkeys").keys()))
         job_cols.update(set(x_config.get("jvalues").keys()))
@@ -58,19 +59,19 @@ def test_create_job_tables_CreatesTables():
         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
         assert cursor.fetchone()[0] == 0
 
-        budmemb_job_table = prime_table(bud_acct_membership_str(), "job", None)
-        budacct_job_table = prime_table(bud_acctunit_str(), "job", None)
-        budgrou_job_table = prime_table(bud_groupunit_str(), "job", None)
-        budawar_job_table = prime_table(bud_concept_awardlink_str(), "job", None)
-        budfact_job_table = prime_table(bud_concept_factunit_str(), "job", None)
-        budheal_job_table = prime_table(bud_concept_healerlink_str(), "job", None)
+        budmemb_job_table = prime_table(bud_acct_membership_str(), job_str(), None)
+        budacct_job_table = prime_table(bud_acctunit_str(), job_str(), None)
+        budgrou_job_table = prime_table(bud_groupunit_str(), job_str(), None)
+        budawar_job_table = prime_table(bud_concept_awardlink_str(), job_str(), None)
+        budfact_job_table = prime_table(bud_concept_factunit_str(), job_str(), None)
+        budheal_job_table = prime_table(bud_concept_healerlink_str(), job_str(), None)
         budprem_job_table = prime_table(
-            bud_concept_reason_premiseunit_str(), "job", None
+            bud_concept_reason_premiseunit_str(), job_str(), None
         )
-        budares_job_table = prime_table(bud_concept_reasonunit_str(), "job", None)
-        budlabo_job_table = prime_table(bud_concept_laborlink_str(), "job", None)
-        budconc_job_table = prime_table(bud_conceptunit_str(), "job", None)
-        budunit_job_table = prime_table(budunit_str(), "job", None)
+        budares_job_table = prime_table(bud_concept_reasonunit_str(), job_str(), None)
+        budlabo_job_table = prime_table(bud_concept_laborlink_str(), job_str(), None)
+        budconc_job_table = prime_table(bud_conceptunit_str(), job_str(), None)
+        budunit_job_table = prime_table(budunit_str(), job_str(), None)
         # budmemb_job_table = f"{bud_acct_membership_str()}_job"
         # budacct_job_table = f"{bud_acctunit_str()}_job"
         # budgrou_job_table = f"{bud_groupunit_str()}_job"

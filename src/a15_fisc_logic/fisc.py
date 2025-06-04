@@ -14,7 +14,7 @@ from src.a00_data_toolbox.file_toolbox import (
     open_file,
     set_dir,
 )
-from src.a01_term_logic.way import (
+from src.a01_term_logic.term import (
     AcctName,
     EventInt,
     FiscLabel,
@@ -130,19 +130,6 @@ class FiscUnit:
             self._owners_dir, include_dirs=True, include_files=False
         )
         return sorted(list(owners.keys()))
-
-    def get_owner_hubunits(self) -> dict[OwnerName:HubUnit]:
-        return {
-            x_owner_name: hubunit_shop(
-                fisc_mstr_dir=self.fisc_mstr_dir,
-                fisc_label=self.fisc_label,
-                owner_name=x_owner_name,
-                keep_way=None,
-                bridge=self.bridge,
-                respect_bit=self.respect_bit,
-            )
-            for x_owner_name in self._get_owner_folder_names()
-        }
 
     # database
     def get_journal_db_path(self) -> str:

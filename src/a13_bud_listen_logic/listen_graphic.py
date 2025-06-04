@@ -10,7 +10,6 @@ from src.a00_data_toolbox.plotly_toolbox import (
 from src.a02_finance_logic.finance_config import default_money_magnitude
 from src.a06_bud_logic.bud import BudUnit
 from src.a06_bud_logic.bud_graphics import display_concepttree
-from src.a12_hub_tools.hub_path import gut_str, job_str
 
 
 def get_hubunit_base_fig() -> plotly_Figure:
@@ -26,12 +25,12 @@ def get_listen_structures0_fig(graphics_bool: bool = False) -> plotly_Figure:
         bob_str = "Bob"
         yao_str = "Yao"
         fig = get_hubunit_base_fig()
-        sue_gut_str = f"{sue_str}.{gut_str()}"
-        sue_job_str = f"{sue_str}.{job_str()}"
-        yao_job_str = f"{yao_str}.{job_str()}"
-        bob_job_str = f"{bob_str}.{job_str()}"
-        dir_job_str = f"{job_str()}s directory"
-        dir_gut_str = f"{gut_str()}s directory"
+        sue_gut_str = f"{sue_str}.{"gut"}"
+        sue_job_str = f"{sue_str}.{"job"}"
+        yao_job_str = f"{yao_str}.{"job"}"
+        bob_job_str = f"{bob_str}.{"job"}"
+        dir_job_str = f"{"job"}s directory"
+        dir_gut_str = f"{"gut"}s directory"
 
         green_str = "Green"
         med_purple = "MediumPurple"
@@ -67,8 +66,8 @@ def get_listen_structures1_fig(graphics_bool: bool = False) -> plotly_Figure:
         fig = get_hubunit_base_fig()
         sue_str = "Sue"
         bob_str = "Bob"
-        sue_gut_str = f"{sue_str}.{gut_str()}"
-        dir_gut_str = f"{gut_str()}s dir"
+        sue_gut_str = f"{sue_str}.{"gut"}"
+        dir_gut_str = f"{"gut"}s dir"
 
         green_str = "Green"
         blue_str = "blue"
@@ -132,10 +131,10 @@ def get_listen_structures2_fig(graphics_bool: bool = False) -> plotly_Figure:
         fig.update_yaxes(range=[-4, 10])
         sue_str = "Sue"
         bob_str = "Bob"
-        sue_gut_str = f"{sue_str}.{gut_str()}"
-        sue_job_str = f"{sue_str}.{job_str()}"
-        dir_job_str = f"{job_str()}s dir"
-        dir_gut_str = f"{gut_str()}s dir"
+        sue_gut_str = f"{sue_str}.{"gut"}"
+        sue_job_str = f"{sue_str}.{"job"}"
+        dir_job_str = f"{"job"}s dir"
+        dir_gut_str = f"{"gut"}s dir"
 
         green_str = "Green"
         blue_str = "blue"
@@ -211,10 +210,10 @@ def get_listen_structures3_fig(graphics_bool: bool = False) -> plotly_Figure:
         sue_str = "Sue"
         bob_str = "Bob"
         yao_str = "Yao"
-        sue_gut_str = f"{sue_str}.{gut_str()}"
-        sue_job_str = f"{sue_str}.{job_str()}"
-        dir_job_str = f"{job_str()}s dir"
-        dir_gut_str = f"{gut_str()}s dir"
+        sue_gut_str = f"{sue_str}.{"gut"}"
+        sue_job_str = f"{sue_str}.{"job"}"
+        dir_job_str = f"{"job"}s dir"
+        dir_gut_str = f"{"gut"}s dir"
 
         green_str = "Green"
         blue_str = "blue"

@@ -1,4 +1,4 @@
-from src.a01_term_logic.way import create_way, get_default_fisc_label as root_label
+from src.a01_term_logic.way import create_way
 from src.a03_group_logic.group import awardheir_shop, awardlink_shop
 from src.a04_reason_logic.reason_concept import (
     factheir_shop,
@@ -8,7 +8,10 @@ from src.a04_reason_logic.reason_concept import (
     reasonunit_shop,
 )
 from src.a04_reason_logic.reason_labor import laborheir_shop, laborunit_shop
-from src.a05_concept_logic.concept import conceptunit_shop
+from src.a05_concept_logic.concept import (
+    conceptunit_shop,
+    get_default_fisc_label as root_label,
+)
 
 
 def test_ConceptUnit_clear_all_acct_cred_debt_ClearsCorrectly():

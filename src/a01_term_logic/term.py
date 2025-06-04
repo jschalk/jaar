@@ -1,3 +1,7 @@
+class BridgeTerm(str):
+    """A string to used as a delimiter in WayTerms."""
+
+
 def default_bridge_if_None(bridge: any = None) -> str:
     if bridge != bridge:  # float("nan")
         bridge = None
@@ -14,7 +18,15 @@ class LabelTerm(str):
         return self.find(default_bridge_if_None(bridge)) == -1
 
 
-class FiscLabel(LabelTerm):  # Created to help track the object class relations
+class AxiomLabel(LabelTerm):
+    """A string representation of a tree root node. Node cannot contain bridge"""
+
+    pass
+
+
+class FiscLabel(AxiomLabel):  # Created to help track the object class relations
+    """An AxiomLabel for a Fisc Moment. Cannot contain bridge"""
+
     pass
 
 
@@ -63,10 +75,6 @@ class TitleTerm(str):
 
 
 class GroupTitle(TitleTerm):  # Created to help track the object class relations
-    pass
-
-
-class WorldID(str):
     pass
 
 

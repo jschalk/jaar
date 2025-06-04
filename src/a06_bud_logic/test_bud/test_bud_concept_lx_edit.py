@@ -1,10 +1,9 @@
 from pytest import raises as pytest_raises
-from src.a01_term_logic.way import (
+from src.a01_term_logic.way import to_way
+from src.a05_concept_logic.concept import (
+    conceptunit_shop,
     get_default_fisc_label as root_label,
-    get_default_fisc_way,
-    to_way,
 )
-from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_bud_logic._test_util.example_buds import (
     get_budunit_with_4_levels_and_2reasons_2facts,
 )
@@ -78,7 +77,7 @@ def test_BudUnit_edit_concept_label_RaisesErrorForLevel0When_fisc_label_IsDiffer
     assert yao_bud.conceptroot.fisc_label == sun_str
     assert yao_bud.conceptroot.concept_label == root_label()
     casa_concept = yao_bud.get_concept_obj(casa_way)
-    assert casa_concept.parent_way == get_default_fisc_way()
+    assert casa_concept.parent_way == to_way(root_label())
     swim_concept = yao_bud.get_concept_obj(swim_way)
     assert swim_concept.parent_way == casa_way
 
@@ -86,13 +85,10 @@ def test_BudUnit_edit_concept_label_RaisesErrorForLevel0When_fisc_label_IsDiffer
 
     with pytest_raises(Exception) as excinfo:
         moon_str = "moon"
-        yao_bud.edit_concept_label(
-            old_way=get_default_fisc_way(), new_concept_label=moon_str
-        )
-    assert (
-        str(excinfo.value)
-        == f"Cannot set conceptroot to string different than '{sun_str}'"
-    )
+        root_way = to_way(root_label())
+        yao_bud.edit_concept_label(old_way=root_way, new_concept_label=moon_str)
+    assertion_str = f"Cannot set conceptroot to string different than '{sun_str}'"
+    assert str(excinfo.value) == assertion_str
 
 
 def test_BudUnit_find_replace_way_CorrectlyModifies_kids_Scenario1():
@@ -116,9 +112,9 @@ def test_BudUnit_find_replace_way_CorrectlyModifies_kids_Scenario1():
     r_concept_roses = yao_bud.get_concept_obj(old_roses_way)
     r_concept_bloomers = yao_bud.get_concept_obj(old_bloomers_way)
 
-    assert r_concept_bloomers._kids.get(roses_str) is not None
+    assert r_concept_bloomers._kids.get(roses_str)
     assert r_concept_roses.parent_way == old_bloomers_way
-    assert r_concept_roses._kids.get(red_str) is not None
+    assert r_concept_roses._kids.get(red_str)
     r_concept_red = r_concept_roses._kids.get(red_str)
     assert r_concept_red.parent_way == old_roses_way
 

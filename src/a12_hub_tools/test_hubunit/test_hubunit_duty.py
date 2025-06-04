@@ -1,5 +1,6 @@
 from os.path import exists as os_path_exists
-from src.a01_term_logic.way import create_way, get_default_fisc_label as root_label
+from src.a01_term_logic.way import create_way
+from src.a05_concept_logic.concept import get_default_fisc_label as root_label
 from src.a06_bud_logic._test_util.example_buds import get_budunit_with_4_levels
 from src.a12_hub_tools._test_util.a12_env import (
     env_dir_setup_cleanup,

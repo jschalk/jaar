@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a01_term_logic.way import LabelTerm, OwnerName
+from src.a01_term_logic.term import LabelTerm, OwnerName
 
 FISC_FILENAME = "fisc.json"
 FISC_OTE1_AGG_CSV_FILENAME = "fisc_ote1_agg.csv"
@@ -17,14 +17,6 @@ EVENT_EXPRESSED_PACK_FILENAME = "expressed_pack.json"
 
 def treasury_filename() -> str:
     return "treasury.db"
-
-
-def gut_str() -> str:
-    return "gut"
-
-
-def job_str() -> str:
-    return "job"
 
 
 def create_fisc_dir_path(fisc_mstr_dir: str, fisc_label: LabelTerm) -> str:

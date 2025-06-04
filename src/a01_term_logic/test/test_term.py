@@ -1,9 +1,12 @@
 from inspect import getdoc as inspect_getdoc
 from src.a01_term_logic._test_util.a01_str import bridge_str
-from src.a01_term_logic.way import (
+from src.a01_term_logic.term import (
     AcctName,
+    AxiomLabel,
+    BridgeTerm,
     EventInt,
     FaceName,
+    FiscLabel,
     GroupTitle,
     HealerName,
     LabelTerm,
@@ -11,10 +14,37 @@ from src.a01_term_logic.way import (
     OwnerName,
     TitleTerm,
     WayTerm,
-    WorldID,
     YawTerm,
     default_bridge_if_None,
 )
+
+
+def test_BridgeTerm_Exists():
+    # ESTABLISH
+    empty_str = ""
+    # WHEN
+    x_bridge = BridgeTerm(empty_str)
+    # THEN
+    assert x_bridge == empty_str
+    doc_str = f"A string to used as a delimiter in WayTerms."
+    assert inspect_getdoc(x_bridge) == doc_str
+
+
+def test_default_bridge_if_None_ReturnsObj():
+    # ESTABLISH
+    semicolon_str = ";"
+    slash_str = "/"
+    colon_str = ":"
+    buzz_str = "buzz"
+
+    # WHEN / THEN
+    assert default_bridge_if_None() == semicolon_str
+    assert default_bridge_if_None(None) == semicolon_str
+    x_nan = float("nan")
+    assert default_bridge_if_None(x_nan) == semicolon_str
+    assert default_bridge_if_None(slash_str) == slash_str
+    assert default_bridge_if_None(colon_str) == colon_str
+    assert default_bridge_if_None(buzz_str) == buzz_str
 
 
 def test_NameTerm_exists():
@@ -108,23 +138,6 @@ def test_LabelTerm_exists():
     assert inspect_getdoc(x_way) == doc_str
 
 
-def test_default_bridge_if_None_ReturnsObj():
-    # ESTABLISH
-    semicolon_str = ";"
-    slash_str = "/"
-    colon_str = ":"
-    buzz_str = "buzz"
-
-    # WHEN / THEN
-    assert default_bridge_if_None() == semicolon_str
-    assert default_bridge_if_None(None) == semicolon_str
-    x_nan = float("nan")
-    assert default_bridge_if_None(x_nan) == semicolon_str
-    assert default_bridge_if_None(slash_str) == slash_str
-    assert default_bridge_if_None(colon_str) == colon_str
-    assert default_bridge_if_None(buzz_str) == buzz_str
-
-
 def test_LabelTerm_is_label_ReturnsObj_Scenario0():
     # WHEN / THEN
     assert LabelTerm("").is_label() is False
@@ -142,6 +155,17 @@ def test_LabelTerm_is_label_ReturnsObj_Scenario1():
     x_labelterm = LabelTerm(f"casa{slash_str}kitchen")
     assert x_labelterm.is_label()
     assert x_labelterm.is_label(slash_str) is False
+
+
+def test_AxiomLabel_Exists():
+    # ESTABLISH
+    empty_str = ""
+    # WHEN
+    x_axiom = AxiomLabel(empty_str)
+    # THEN
+    assert x_axiom == empty_str
+    doc_str = f"A string representation of a tree root node. Node cannot contain {bridge_str()}"
+    assert inspect_getdoc(x_axiom) == doc_str
 
 
 def test_WayTerm_exists():
@@ -166,16 +190,11 @@ def test_YawTerm_exists():
     assert inspect_getdoc(x_way) == doc_str
 
 
-def test_WorldID_Exists():
-    # ESTABLISH / WHEN / THEN
-    assert WorldID() == ""
-    assert WorldID("cookie") == "cookie"
-
-
 def test_FaceName_Exists():
     # ESTABLISH / WHEN / THEN
     assert FaceName() == ""
     assert FaceName("cookie") == "cookie"
+    assert not FaceName(f"cookie{default_bridge_if_None()}").is_name()
 
 
 def test_EventInt_Exists():
@@ -183,3 +202,14 @@ def test_EventInt_Exists():
     assert EventInt() == 0
     assert EventInt(12) == 12
     assert EventInt(12.4) == 12
+
+
+def test_FiscLabel_Exists():
+    # ESTABLISH
+    empty_str = ""
+    # WHEN
+    x_fisc = FiscLabel(empty_str)
+    # THEN
+    assert x_fisc == empty_str
+    doc_str = f"An AxiomLabel for a Fisc Moment. Cannot contain {bridge_str()}"
+    assert inspect_getdoc(x_fisc) == doc_str

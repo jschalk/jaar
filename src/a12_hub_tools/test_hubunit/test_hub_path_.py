@@ -1,5 +1,6 @@
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a12_hub_tools._test_util.a12_env import get_module_temp_dir
+from src.a12_hub_tools._test_util.a12_str import gut_str, job_str
 from src.a12_hub_tools.hub_path import (
     BUDEVENT_FILENAME,
     BUDPOINT_FILENAME,
@@ -37,18 +38,8 @@ from src.a12_hub_tools.hub_path import (
     create_owner_event_dir_path,
     create_packs_dir_path,
     fisc_agenda_list_report_path,
-    gut_str,
-    job_str,
     treasury_filename,
 )
-
-
-def test_gut_str():
-    assert gut_str() == "gut"
-
-
-def test_job_str():
-    assert job_str() == "job"
 
 
 def test_treasury_filename_ReturnsObj():
@@ -563,7 +554,7 @@ def test_create_gut_path_ReturnsObj():
     a23_dir = create_path(x_fiscs_dir, a23_str)
     a23_owners_dir = create_path(a23_dir, "owners")
     a23_bob_dir = create_path(a23_owners_dir, bob_str)
-    a23_bob_gut_dir = create_path(a23_bob_dir, "gut")
+    a23_bob_gut_dir = create_path(a23_bob_dir, gut_str())
     expected_a23_bob_gut_json_path = create_path(a23_bob_gut_dir, f"{bob_str}.json")
     # bud_filename = "bud.json"
     # expected_a23_e3_bud_path = create_path(a23_bob_e3_dir, bud_filename)
@@ -584,7 +575,7 @@ def test_create_job_path_ReturnsObj():
     a23_dir = create_path(x_fiscs_dir, a23_str)
     a23_owners_dir = create_path(a23_dir, "owners")
     a23_bob_dir = create_path(a23_owners_dir, bob_str)
-    a23_bob_job_dir = create_path(a23_bob_dir, "job")
+    a23_bob_job_dir = create_path(a23_bob_dir, job_str())
     expected_a23_bob_job_json_path = create_path(a23_bob_job_dir, f"{bob_str}.json")
     # bud_filename = "bud.json"
     # expected_a23_e3_bud_path = create_path(a23_bob_e3_dir, bud_filename)

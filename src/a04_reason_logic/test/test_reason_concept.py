@@ -1,8 +1,7 @@
 from src.a01_term_logic.way import (
     create_way,
     default_bridge_if_None,
-    get_default_fisc_label as root_label,
-    get_default_fisc_way,
+    get_default_axiom_label as root_label,
 )
 from src.a04_reason_logic._test_util.a04_str import (
     bridge_str,
@@ -463,7 +462,8 @@ def test_ReasonCore_find_replace_way_casas():
     # ESTABLISH
     wkday_str = "wkday"
     sunday_str = "Sunday"
-    old_wkday_way = create_way(root_label(), wkday_str)
+    old_way = create_way("old_fun")
+    old_wkday_way = create_way(old_way, wkday_str)
     old_sunday_way = create_way(old_wkday_way, sunday_str)
     x_reason = reasoncore_shop(rcontext=old_wkday_way)
     x_reason.set_premise(premise=old_sunday_way)
@@ -474,7 +474,6 @@ def test_ReasonCore_find_replace_way_casas():
     assert x_reason.premises.get(old_sunday_way).pstate == old_sunday_way
 
     # WHEN
-    old_way = get_default_fisc_way()
     new_way = create_way("fun")
     x_reason.find_replace_way(old_way=old_way, new_way=new_way)
     new_wkday_way = create_way(new_way, wkday_str)

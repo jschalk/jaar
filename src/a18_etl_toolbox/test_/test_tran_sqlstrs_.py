@@ -25,6 +25,7 @@ from src.a06_bud_logic._test_util.a06_str import (
 from src.a08_bud_atom_logic.atom_config import get_delete_key_name
 from src.a09_pack_logic._test_util.a09_str import event_int_str
 from src.a10_bud_calc._test_util.a10_str import bud_groupunit_str
+from src.a12_hub_tools._test_util.a12_str import job_str
 from src.a15_fisc_logic._test_util.a15_str import (
     fisc_cashbook_str,
     fisc_dealunit_str,
@@ -97,7 +98,6 @@ def test_create_prime_tablename_ReturnsObj():
     vld_str = "vld"
     put_str = "put"
     del_str = "del"
-    job_str = "job"
 
     # WHEN
     budunit_s_agg_table = create_prime_tablename("budunit", "s", agg_str, put_str)
@@ -127,9 +127,9 @@ def test_create_prime_tablename_ReturnsObj():
     pidtitl_s_val_table = create_prime_tablename("pidtitl", "s", vld_str)
     pidcore_s_raw_table = create_prime_tablename("pidcore", "s", raw_str)
     pidcore_s_agg_table = create_prime_tablename("pidcore", "s", agg_str)
-    budacct_job_table = create_prime_tablename("budacct", "job", None)
+    budacct_job_table = create_prime_tablename("budacct", job_str(), None)
     x_budacct_raw = create_prime_tablename("budacct", "k", raw_str)
-    budgrou_job_table = create_prime_tablename("budgrou", "job", None)
+    budgrou_job_table = create_prime_tablename("budgrou", job_str(), None)
 
     # THEN
     assert budunit_s_agg_table == f"{budunit_dimen}_s_put_agg"

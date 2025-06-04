@@ -1,7 +1,6 @@
 from dataclasses import dataclass
-from src.a01_term_logic.way import WorldID
 from src.a09_pack_logic.pack import PackUnit
-from src.a19_world_logic.world import WorldUnit
+from src.a19_world_logic.world import WorldID, WorldUnit
 
 
 @dataclass

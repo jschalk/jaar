@@ -7,7 +7,6 @@ from src.a01_term_logic._test_util.a01_str import (
 )
 from src.a02_finance_logic._test_util.a02_str import (
     acct_name_str,
-    addin_str,
     amount_str,
     fund_coin_str,
     fund_pool_str,
@@ -39,6 +38,7 @@ from src.a04_reason_logic._test_util.a04_str import (
     rcontext_str,
 )
 from src.a05_concept_logic._test_util.a05_str import (
+    addin_str,
     begin_str,
     close_str,
     concept_label_str,

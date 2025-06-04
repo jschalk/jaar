@@ -3,7 +3,6 @@ from src.a00_data_toolbox.file_toolbox import create_path
 from src.a99_module_logic.module_eval import (
     check_if_module_str_funcs_is_sorted,
     check_import_objs_are_ordered,
-    check_module_imports_are_ordered,
     check_str_func_test_file_has_needed_asserts,
     check_str_funcs_are_not_duplicated,
     get_all_str_functions,
@@ -31,6 +30,8 @@ def test_ModuleStrFunctionsTestFileFormat():
         assert os_path_exists(utils_dir)
         str_func_path = create_path(utils_dir, f"a{module_desc[1:3]}_str.py")
         assert os_path_exists(str_func_path)
+        # str_func_test_path = create_path(utils_dir, f"test_a{module_desc[1:3]}_str.py")
+        # assert os_path_exists(str_func_test_path)
         env_files = get_python_files_with_flag(utils_dir, "env")
         if len(env_files) > 0:
             print(f"{env_files=}")
@@ -43,6 +44,8 @@ def test_ModuleStrFunctionsTestFileFormat():
 
 
 def test_PythonFileImportsFormat():
+    """Check all non-test python file do not import str functions"""
+
     # sourcery skip: no-loop-in-tests
     # sourcery skip: no-conditionals-in-tests
     # ESTABLISH / WHEN / THEN
@@ -57,6 +60,7 @@ def test_PythonFileImportsFormat():
 
             filename = str(os_path_basename(file_path))
             file_path = str(file_path)
+            print(f"{file_path=}")
             if not filename.startswith("test") and "_test_util" not in file_path:
                 for file_import in file_imports:
                     if str(file_import[0]).endswith("_str"):

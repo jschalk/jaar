@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, get_dir_file_strs
-from src.a01_term_logic.way import get_default_fisc_label as fisc_label
+from src.a05_concept_logic.concept import get_default_fisc_label as fisc_label
 from src.a12_hub_tools._test_util.a12_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as fisc_mstr_dir,

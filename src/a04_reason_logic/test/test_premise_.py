@@ -1,8 +1,7 @@
 from src.a01_term_logic.way import (
     create_way,
     find_replace_way_key_dict,
-    get_default_fisc_label as root_label,
-    get_default_fisc_way,
+    get_default_axiom_label as root_label,
 )
 from src.a04_reason_logic._test_util.a04_str import (
     _status_str,
@@ -717,9 +716,9 @@ def test_PremiseUnit_get_obj_key():
 
 def test_PremiseUnit_find_replace_way_casas():
     # ESTABLISH
-    old_root_way = get_default_fisc_way()
+    old_root_way = create_way("old_way")
     wkday_str = "wkday"
-    wkday_way = create_way(root_label(), wkday_str)
+    wkday_way = create_way(old_root_way, wkday_str)
     sunday_str = "Sunday"
     old_sunday_way = create_way(wkday_way, sunday_str)
     sunday_premise = premiseunit_shop(pstate=old_sunday_way)

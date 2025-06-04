@@ -10,13 +10,11 @@ from src.a15_fisc_logic.fisc import FiscUnit
 
 def get_fisc_guts_accts_dataframe(x_fisc: FiscUnit) -> DataFrame:
     # get list of all owner paths
-    owner_hubunits = x_fisc.get_owner_hubunits()
+    fisc_owner_names = x_fisc._get_owner_folder_names()
     # for all owners get gut
     gut_dfs = []
-    for x_hubunit in owner_hubunits.values():
-        gut_bud = open_gut_file(
-            x_hubunit.fisc_mstr_dir, x_hubunit.fisc_label, x_hubunit.owner_name
-        )
+    for owner_name in fisc_owner_names:
+        gut_bud = open_gut_file(x_fisc.fisc_mstr_dir, x_fisc.fisc_label, owner_name)
         gut_bud.settle_bud()
         df = get_bud_acctunits_dataframe(gut_bud)
         df.insert(0, "owner_name", gut_bud.owner_name)
@@ -68,13 +66,11 @@ def get_fisc_guts_accts_plotly_fig(x_fisc: FiscUnit) -> plotly_Figure:
 
 def get_fisc_jobs_accts_dataframe(x_fisc: FiscUnit) -> DataFrame:
     # get list of all owner paths
-    owner_hubunits = x_fisc.get_owner_hubunits()
-    # for all owners get job
+    fisc_owner_names = x_fisc._get_owner_folder_names()
+    # for all owners get gut
     job_dfs = []
-    for x_hubunit in owner_hubunits.values():
-        job = open_job_file(
-            x_hubunit.fisc_mstr_dir, x_hubunit.fisc_label, x_hubunit.owner_name
-        )
+    for owner_name in fisc_owner_names:
+        job = open_job_file(x_fisc.fisc_mstr_dir, x_fisc.fisc_label, owner_name)
         job.settle_bud()
         job_df = get_bud_acctunits_dataframe(job)
         job_df.insert(0, "owner_name", job.owner_name)
@@ -125,13 +121,11 @@ def get_fisc_jobs_accts_plotly_fig(x_fisc: FiscUnit) -> plotly_Figure:
 
 def get_fisc_guts_agenda_dataframe(x_fisc: FiscUnit) -> DataFrame:
     # get list of all owner paths
-    owner_hubunits = x_fisc.get_owner_hubunits()
+    fisc_owner_names = x_fisc._get_owner_folder_names()
     # for all owners get gut
     gut_dfs = []
-    for x_hubunit in owner_hubunits.values():
-        gut_bud = open_gut_file(
-            x_hubunit.fisc_mstr_dir, x_hubunit.fisc_label, x_hubunit.owner_name
-        )
+    for owner_name in fisc_owner_names:
+        gut_bud = open_gut_file(x_fisc.fisc_mstr_dir, x_fisc.fisc_label, owner_name)
         gut_bud.settle_bud()
         df = get_bud_agenda_dataframe(gut_bud)
         gut_dfs.append(df)

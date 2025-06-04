@@ -1,12 +1,11 @@
 from os.path import exists as os_path_exists
-from src.a00_data_toolbox.file_toolbox import create_path, delete_dir, save_file
-from src.a02_finance_logic.deal import timeconversion_shop
-from src.a16_pidgin_logic.pidgin import pidginunit_shop
+from src.a00_data_toolbox.file_toolbox import create_path
 from src.a19_world_logic._test_util.a19_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as worlds_dir,
 )
 from src.a19_world_logic.world import (
+    WorldID,
     WorldUnit,
     init_fiscunits_from_dirs,
     worldunit_shop,
@@ -14,6 +13,12 @@ from src.a19_world_logic.world import (
 
 # The goal of the world function is to allow a single command, pointing at a bunch of directories
 # initialize fiscunits and output acct metrics such as calendars, financial status, healer status
+
+
+def test_WorldID_Exists():
+    # ESTABLISH / WHEN / THEN
+    assert WorldID() == ""
+    assert WorldID("cookie") == "cookie"
 
 
 def test_WorldUnit_Exists():
@@ -24,7 +29,6 @@ def test_WorldUnit_Exists():
     assert not x_world.world_id
     assert not x_world.worlds_dir
     assert not x_world.world_time_pnigh
-    assert not x_world.timeconversions
     assert not x_world._events
     assert not x_world._syntax_otz_dir
     assert not x_world._world_dir
@@ -102,8 +106,6 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     example_mud_dir = create_path(worlds_dir(), "example_mud")
     five_world_id = "five"
     world2_time_pnigh = 55
-    accord45_str = "accord45"
-    world2timeconversions = {accord45_str: timeconversion_shop(accord45_str)}
     world2_fiscunits = {"accord45"}
 
     # WHEN
@@ -112,7 +114,6 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
         worlds_dir=worlds2_dir,
         mud_dir=example_mud_dir,
         world_time_pnigh=world2_time_pnigh,
-        timeconversions=world2timeconversions,
         _fiscunits=world2_fiscunits,
     )
 
@@ -122,7 +123,6 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     assert x_world.worlds_dir == worlds2_dir
     assert x_world._mud_dir == example_mud_dir
     assert x_world.world_time_pnigh == world2_time_pnigh
-    assert x_world.timeconversions == world2timeconversions
     assert x_world._events == {}
     assert x_world._syntax_otz_dir == create_path(world_dir, "syntax_otz")
     assert x_world._fiscunits == world2_fiscunits
@@ -141,7 +141,6 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
     assert x_world.world_id == a23_str
     assert x_world.worlds_dir == worlds_dir()
     assert x_world.world_time_pnigh == 0
-    assert x_world.timeconversions == {}
     assert x_world._events == {}
     assert x_world._mud_dir == create_path(x_world._world_dir, "mud")
     assert x_world._syntax_otz_dir == create_path(world_dir, "syntax_otz")
