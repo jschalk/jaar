@@ -316,7 +316,7 @@ class HubUnit:
         elif x_gut_file_exists and pack_file_exists is False:
             self._create_initial_pack_files_from_gut()
 
-    def append_packs_to_gut_file(self):
+    def append_packs_to_gut_file(self) -> BudUnit:
         gut_bud = open_gut_file(self.fisc_mstr_dir, self.fisc_label, self.owner_name)
         gut_bud = self._merge_any_packs(gut_bud)
         save_gut_file(self.fisc_mstr_dir, gut_bud)
@@ -360,15 +360,15 @@ class HubUnit:
         except Exception:
             return []
 
-    def save_duty_bud(self, x_bud: BudUnit):
+    def save_duty_bud(self, x_bud: BudUnit) -> None:
         x_filename = get_json_filename(x_bud.owner_name)
         save_file(self.dutys_dir(), x_filename, x_bud.get_json())
 
-    def save_plan_bud(self, x_bud: BudUnit):
+    def save_plan_bud(self, x_bud: BudUnit) -> None:
         x_filename = get_json_filename(x_bud.owner_name)
         save_file(self.plans_dir(), x_filename, x_bud.get_json())
 
-    def initialize_job_file(self, gut: BudUnit):
+    def initialize_job_file(self, gut: BudUnit) -> None:
         save_job_file(self.fisc_mstr_dir, get_default_job(gut))
 
     def duty_file_exists(self, owner_name: OwnerName) -> bool:
@@ -389,13 +389,13 @@ class HubUnit:
         file_content = open_file(self.plans_dir(), get_json_filename(owner_name))
         return budunit_get_from_json(file_content)
 
-    def delete_duty_file(self, owner_name: OwnerName):
+    def delete_duty_file(self, owner_name: OwnerName) -> None:
         delete_dir(self.duty_path(owner_name))
 
-    def delete_plan_file(self, owner_name: OwnerName):
+    def delete_plan_file(self, owner_name: OwnerName) -> None:
         delete_dir(self.plan_path(owner_name))
 
-    def delete_treasury_db_file(self):
+    def delete_treasury_db_file(self) -> None:
         delete_dir(self.treasury_db_path())
 
     def get_perspective_bud(self, speaker: BudUnit) -> BudUnit:
@@ -448,7 +448,7 @@ class HubUnit:
             self.save_duty_bud(gut)
         self.keep_way = None
 
-    def create_treasury_db_file(self):
+    def create_treasury_db_file(self) -> None:
         self.create_keep_dir_if_missing()
         db_path = self.treasury_db_path()
         conn = sqlite3_connect(db_path)

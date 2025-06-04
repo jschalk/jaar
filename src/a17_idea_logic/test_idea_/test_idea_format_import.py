@@ -7,7 +7,6 @@ from src.a06_bud_logic._test_util.a06_str import (
 )
 from src.a06_bud_logic.bud import budunit_shop
 from src.a12_hub_tools.hub_tool import gut_file_exists, open_gut_file
-from src.a12_hub_tools.hubunit import hubunit_shop
 from src.a17_idea_logic._test_util.a17_env import (
     env_dir_setup_cleanup,
     idea_examples_dir,
@@ -101,17 +100,15 @@ def test_load_idea_csv_Arg_idea_format_00021_bud_acctunit_v0_0_0_csvTo_job(
     sue_budunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
     j1_ideaname = idea_format_00021_bud_acctunit_v0_0_0()
     name_filename = f"{sue_str}_acct_example_02.csv"
-    csv_example_path = create_path(idea_examples_dir(), name_filename)
+    fisc_mstr_dir = idea_examples_dir()
+    csv_example_path = create_path(fisc_mstr_dir, name_filename)
     print(f"{csv_example_path}")
-    save_idea_csv(j1_ideaname, sue_budunit, idea_examples_dir(), name_filename)
-    sue_hubunit = hubunit_shop(
-        idea_examples_dir(), accord_fisc_label, owner_name=sue_str
-    )
+    save_idea_csv(j1_ideaname, sue_budunit, fisc_mstr_dir, name_filename)
     # Popen FiscUnit and confirm gut BudUnit does not exist
-    assert not gut_file_exists(idea_examples_dir(), accord_fisc_label, sue_str)
+    assert not gut_file_exists(fisc_mstr_dir, accord_fisc_label, sue_str)
 
     # WHEN
-    load_idea_csv(sue_hubunit.fisc_mstr_dir, idea_examples_dir(), name_filename)
+    load_idea_csv(fisc_mstr_dir, idea_examples_dir(), name_filename)
 
     # THEN
     # assert gut Budunit now exists
@@ -158,14 +155,12 @@ def test_load_idea_csv_csvTo_job(
     csv_example_path = create_path(idea_examples_dir(), name_filename)
     print(f"{csv_example_path}")
     save_idea_csv(j1_ideaname, sue_budunit, idea_examples_dir(), name_filename)
-    sue_hubunit = hubunit_shop(
-        idea_examples_dir(), accord_fisc_label, owner_name=sue_str
-    )
+    fisc_mstr_dir = idea_examples_dir()
     # Popen FiscUnit and confirm gut BudUnit does not exist
-    assert not gut_file_exists(idea_examples_dir(), accord_fisc_label, sue_str)
+    assert not gut_file_exists(fisc_mstr_dir, accord_fisc_label, sue_str)
 
     # WHEN
-    load_idea_csv(sue_hubunit.fisc_mstr_dir, idea_examples_dir(), name_filename)
+    load_idea_csv(fisc_mstr_dir, idea_examples_dir(), name_filename)
 
     # THEN
     # assert gut Budunit now exists
