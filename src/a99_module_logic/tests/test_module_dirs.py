@@ -3,7 +3,6 @@ from src.a00_data_toolbox.file_toolbox import create_path
 from src.a99_module_logic.module_eval import (
     check_if_module_str_funcs_is_sorted,
     check_import_objs_are_ordered,
-    check_module_imports_are_ordered,
     check_str_func_test_file_has_needed_asserts,
     check_str_funcs_are_not_duplicated,
     get_all_str_functions,
