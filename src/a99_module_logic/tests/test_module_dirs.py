@@ -44,7 +44,7 @@ def test_ModuleStrFunctionsTestFileFormat():
 
 
 def test_PythonFileImportsFormat():
-    """Check all python file imports"""
+    """Check all non-test python file do not import str functions"""
 
     # sourcery skip: no-loop-in-tests
     # sourcery skip: no-conditionals-in-tests
