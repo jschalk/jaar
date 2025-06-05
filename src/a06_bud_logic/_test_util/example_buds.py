@@ -205,7 +205,7 @@ def get_budunit_with7amCleanTableReason() -> BudUnit:
     return sue_bud
 
 
-def get_budunit_1Task_1CE0MinutesReason_1Fact() -> BudUnit:
+def get_budunit_1Chore_1CE0MinutesReason_1Fact() -> BudUnit:
     yao_bud = budunit_shop("Yao")
     hr_min_str = "hr"
     hr_min_concept = conceptunit_shop(hr_min_str)
@@ -350,7 +350,7 @@ def get_budunit_laundry_example1() -> BudUnit:
     basket_way = amos_bud.make_way(casa_way, basket_str)
     b_full_way = amos_bud.make_way(basket_way, b_full_str)
     b_smel_way = amos_bud.make_way(basket_way, b_smel_str)
-    laundry_task_way = amos_bud.make_way(casa_way, do_laundry_str)
+    laundry_chore_way = amos_bud.make_way(casa_way, do_laundry_str)
     amos_bud.set_l1_concept(conceptunit_shop(casa_str))
     amos_bud.set_concept(conceptunit_shop(basket_str), casa_way)
     amos_bud.set_concept(conceptunit_shop(b_full_str), basket_way)
@@ -362,15 +362,15 @@ def get_budunit_laundry_example1() -> BudUnit:
 
     # laundry requirement
     amos_bud.edit_concept_attr(
-        laundry_task_way, reason_rcontext=basket_way, reason_premise=b_full_way
+        laundry_chore_way, reason_rcontext=basket_way, reason_premise=b_full_way
     )
     # laundry requirement
     amos_bud.edit_concept_attr(
-        laundry_task_way, reason_rcontext=basket_way, reason_premise=b_smel_way
+        laundry_chore_way, reason_rcontext=basket_way, reason_premise=b_smel_way
     )
     cali_laborunit = laborunit_shop()
     cali_laborunit.set_laborlink(cali_str)
-    amos_bud.edit_concept_attr(laundry_task_way, laborunit=cali_laborunit)
+    amos_bud.edit_concept_attr(laundry_chore_way, laborunit=cali_laborunit)
     amos_bud.add_fact(fcontext=basket_way, fstate=b_full_way)
 
     return amos_bud

@@ -243,7 +243,7 @@ class ConceptUnit:
     _level: int = None
     _range_evaluated: bool = None
     _reasonheirs: dict[WayTerm, ReasonHeir] = None
-    _task: bool = None
+    _chore: bool = None
     _laborheir: LaborHeir = None
     _gogo_calc: float = None
     _stop_calc: float = None
@@ -320,9 +320,9 @@ class ConceptUnit:
         return get_dict_from_factunits(self.factunits)
 
     def set_factunit_to_complete(self, fcontextunit: FactUnit):
-        # if a concept is considered a task then a factheir.fopen attribute can be increased to
-        # a number <= factheir.fnigh so the concept no longer is a task. This method finds
-        # the minimal factheir.fopen to modify concept._task is False. concept_core._factheir cannot be straight up manipulated
+        # if a concept is considered a chore then a factheir.fopen attribute can be increased to
+        # a number <= factheir.fnigh so the concept no longer is a chore. This method finds
+        # the minimal factheir.fopen to modify concept._chore is False. concept_core._factheir cannot be straight up manipulated
         # so it is mandatory that concept._factunit is different.
         # self.set_factunits(rcontext=fact, fact=rcontext, popen=pnigh, pnigh=fnigh)
         self.factunits[fcontextunit.fcontext] = factunit_shop(
@@ -770,19 +770,19 @@ class ConceptUnit:
     ):
         prev_to_now_active = deepcopy(self._active)
         self._active = self._create_active_bool(groupunits, bud_owner_name)
-        self._set_concept_task()
+        self._set_concept_chore()
         self.record_active_hx(tree_traverse_count, prev_to_now_active, self._active)
 
-    def _set_concept_task(self):
-        self._task = False
+    def _set_concept_chore(self):
+        self._chore = False
         if self.pledge and self._active and self._reasonheirs_satisfied():
-            self._task = True
+            self._chore = True
 
     def _reasonheirs_satisfied(self) -> bool:
-        return self._reasonheirs == {} or self._any_reasonheir_task_true()
+        return self._reasonheirs == {} or self._any_reasonheir_chore_true()
 
-    def _any_reasonheir_task_true(self) -> bool:
-        return any(x_reasonheir._task for x_reasonheir in self._reasonheirs.values())
+    def _any_reasonheir_chore_true(self) -> bool:
+        return any(x_reasonheir._chore for x_reasonheir in self._reasonheirs.values())
 
     def _create_active_bool(
         self, groupunits: dict[GroupTitle, GroupUnit], bud_owner_name: AcctName
@@ -999,7 +999,7 @@ def conceptunit_shop(
     fund_iota: FundIota = None,
     _fund_onset: FundNum = None,
     _fund_cease: FundNum = None,
-    _task: bool = None,
+    _chore: bool = None,
     _active: bool = None,
     _descendant_pledge_count: int = None,
     _all_acct_cred: bool = None,
@@ -1046,7 +1046,7 @@ def conceptunit_shop(
         fund_iota=default_fund_iota_if_None(fund_iota),
         _fund_onset=_fund_onset,
         _fund_cease=_fund_cease,
-        _task=_task,
+        _chore=_chore,
         _active=_active,
         _descendant_pledge_count=_descendant_pledge_count,
         _all_acct_cred=_all_acct_cred,

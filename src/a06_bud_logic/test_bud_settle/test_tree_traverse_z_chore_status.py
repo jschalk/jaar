@@ -121,10 +121,10 @@ def test_BudUnit_settle_bud_CorrectlySets_concept_dict():
 
     wed = premiseunit_shop(pstate=wed_way)
     wed._status = True
-    wed._task = False
+    wed._chore = False
     usa = premiseunit_shop(pstate=usa_way)
     usa._status = True
-    usa._task = False
+    usa._chore = False
 
     wed_lu = reasonunit_shop(wk_way, premises={wed.pstate: wed})
     sta_lu = reasonunit_shop(nation_way, premises={usa.pstate: usa})
@@ -132,14 +132,14 @@ def test_BudUnit_settle_bud_CorrectlySets_concept_dict():
         rcontext=wk_way,
         premises={wed.pstate: wed},
         _status=True,
-        _task=False,
+        _chore=False,
         _rconcept_active_value=True,
     )
     sta_lh = reasonheir_shop(
         rcontext=nation_way,
         premises={usa.pstate: usa},
         _status=True,
-        _task=False,
+        _chore=False,
         _rconcept_active_value=True,
     )
 
@@ -177,13 +177,13 @@ def test_BudUnit_settle_bud_CorrectlySets_concept_dict():
     # usa_premise = wk_reasonheir.premises.get(usa_way)
     print(f"    {casa_concept.concept_label=}")
     # print(f"    {usa_premise.rcontext=}")
-    # print(f"    {usa_premise._task=}")
-    # print(f"    {usa_premise._task=}")
-    assert wk_reasonheir._task is False
+    # print(f"    {usa_premise._chore=}")
+    # print(f"    {usa_premise._chore=}")
+    assert wk_reasonheir._chore is False
     # print(f"      premises: {w=}")
     # w_state = usa_premise.premises[wed_way].pstate
     # print(f"      {w_state=}")
-    # assert usa_premise._task == w_state._task
+    # assert usa_premise._chore == w_state._chore
     # assert usa_premise._status == w_state._status
     # assert wk_reasonheir.premises == wk_reasonheir.premises
 
@@ -397,10 +397,10 @@ def test_BudUnit_settle_bud_OptionWeekdaysReturnsObj_budunit_v001():
     tue_way = yao_budunit.make_way(wk_way, tue_str)
     mon_premise_x = premiseunit_shop(pstate=mon_way)
     mon_premise_x._status = False
-    mon_premise_x._task = False
+    mon_premise_x._chore = False
     tue_premise_x = premiseunit_shop(pstate=tue_way)
     tue_premise_x._status = False
-    tue_premise_x._task = False
+    tue_premise_x._chore = False
     mt_premises = {
         mon_premise_x.pstate: mon_premise_x,
         tue_premise_x.pstate: tue_premise_x,

@@ -280,7 +280,7 @@ def fund_graph0(
     blue_str = "blue"
     d_sue1_p1 = "How fund is distributed."
     d_sue1_p2 = "Regular Fund: Green arrows, all fund_iotas end up at AcctUnits"
-    d_sue1_p3 = "Agenda Fund: Blue arrows, fund_iotas from active tasks"
+    d_sue1_p3 = "Agenda Fund: Blue arrows, fund_iotas from active chores"
     d_sue1_p4 = f"Money = {default_money_magnitude()} "
     laborunit_str = "      Awardlinks"
     add_simp_rect(fig, 2, -0.3, 3, 0.3, laborunit_str)

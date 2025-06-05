@@ -45,7 +45,7 @@ def _get_color_for_conceptunit_trace(x_conceptunit: ConceptUnit, mode: str) -> s
             return "Gold"
         else:
             return "Black"
-    elif mode == "Task":
+    elif mode == "Chore":
         return "Red" if x_conceptunit.pledge else "Pink"
     elif mode == "Keep":
         if (
@@ -114,8 +114,8 @@ def _create_conceptunit_traces(
 
 def _update_layout_fig(x_fig: plotly_Figure, mode: str, x_bud: BudUnit):
     fig_label = "Tree with lines Layout"
-    if mode == "Task":
-        fig_label = "Concept Tree with task concepts in Red."
+    if mode == "Chore":
+        fig_label = "Concept Tree with chore concepts in Red."
     fig_label += f" (Concepts: {len(x_bud._concept_dict)})"
     fig_label += f" (_sum_healerlink_share: {x_bud._sum_healerlink_share})"
     fig_label += f" (_keeps_justified: {x_bud._keeps_justified})"
@@ -125,7 +125,7 @@ def _update_layout_fig(x_fig: plotly_Figure, mode: str, x_bud: BudUnit):
 def display_concepttree(
     x_bud: BudUnit, mode: str = None, graphics_bool: bool = False
 ) -> plotly_Figure:
-    """Mode can be None, Task, Keep"""
+    """Mode can be None, Chore, Keep"""
 
     x_bud.settle_bud()
     x_fig = plotly_Figure()
@@ -533,7 +533,7 @@ def fund_graph0(
     )
     d_sue1_p1 = "ConceptRoot Fund ranges: Black arrows. Sum of childless Concept's funds equal conceptroot's fund "
     d_sue1_p2 = "Regular Fund: Green arrows, all fund_iotas end up at AcctUnits"
-    d_sue1_p3 = "Agenda Fund: Blue arrows, fund_iotas from active tasks"
+    d_sue1_p3 = "Agenda Fund: Blue arrows, fund_iotas from active chores"
     d_sue1_p4 = f"fund_pool = {x_bud.fund_pool} "
     fig.add_trace(
         plotly_Scatter(

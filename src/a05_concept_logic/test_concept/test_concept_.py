@@ -3,7 +3,7 @@ from src.a01_term_logic.way import create_way, default_bridge_if_None
 from src.a02_finance_logic._test_util.a02_str import fund_iota_str, vow_label_str
 from src.a02_finance_logic.finance_config import default_fund_iota_if_None
 from src.a03_group_logic.group import awardlink_shop
-from src.a04_reason_logic._test_util.a04_str import _task_str
+from src.a04_reason_logic._test_util.a04_str import _chore_str
 from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a05_concept_logic._test_util.a05_str import (
     _active_hx_str,
@@ -121,7 +121,7 @@ def test_ConceptUnit_Exists():
         _range_evaluated_str(),
         _reasonheirs_str(),
         _stop_calc_str(),
-        "_task",
+        "_chore",
         _uid_str(),
         addin_str(),
         "awardlinks",

@@ -16,7 +16,9 @@ from src.a06_bud_logic.bud_graphics import (
 def test_budunit_graph_Showsgraph0BudGraph(graphics_bool):
     # ESTABLISH / WHEN / THEN
     display_concepttree(get_budunit_with_4_levels(), graphics_bool)
-    display_concepttree(get_budunit_with_4_levels_and_2reasons(), "Task", graphics_bool)
+    display_concepttree(
+        get_budunit_with_4_levels_and_2reasons(), "Chore", graphics_bool
+    )
     display_concepttree(get_budunit_x1_3levels_1reason_1facts(), graphics_bool)
     budunit_graph0(graphics_bool)
     budunit_graph1(graphics_bool)

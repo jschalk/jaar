@@ -30,7 +30,7 @@ from src.a13_bud_listen_logic.listen import (
 )
 
 
-def test_listen_to_agenda_duty_plan_agenda_AddsTasksToplan_BudWhenNo_laborlinkIsSet(
+def test_listen_to_agenda_duty_plan_agenda_AddsChoresToplan_BudWhenNo_laborlinkIsSet(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -61,7 +61,7 @@ def test_listen_to_agenda_duty_plan_agenda_AddsTasksToplan_BudWhenNo_laborlinkIs
     assert len(new_yao_plan.get_agenda_dict()) == 2
 
 
-def test_listen_to_agenda_duty_plan_agenda_AddsTasksToplan_Bud(env_dir_setup_cleanup):
+def test_listen_to_agenda_duty_plan_agenda_AddsChoresToplan_Bud(env_dir_setup_cleanup):
     # ESTABLISH
     a23_str = "accord23"
     yao_str = "Yao"
@@ -97,7 +97,7 @@ def test_listen_to_agenda_duty_plan_agenda_AddsTasksToplan_Bud(env_dir_setup_cle
     assert len(new_yao_plan.get_agenda_dict()) == 2
 
 
-def test_listen_to_agenda_duty_plan_agenda_AddsTasksToplanBudWithDetailsDecidedBy_debtit_belief(
+def test_listen_to_agenda_duty_plan_agenda_AddsChoresToplanBudWithDetailsDecidedBy_debtit_belief(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -297,7 +297,7 @@ def test_listen_to_agenda_duty_plan_agenda_ListensToOwner_duty_AndNotOwner_plan(
     yao_duty.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
     yao_pool = 87
     yao_duty.set_acct_respect(yao_pool)
-    # save yao without task to dutys
+    # save yao without chore to dutys
     yao_dakota_hubunit = hubunit_shop(env_dir(), a23_str, yao_str, get_dakota_way())
     yao_dakota_hubunit.save_duty_bud(yao_duty)
 
@@ -313,7 +313,7 @@ def test_listen_to_agenda_duty_plan_agenda_ListensToOwner_duty_AndNotOwner_plan(
     cook_conceptunit.laborunit.set_laborlink(yao_str)
     yao_dakota_hubunit.save_plan_bud(zia_plan)
 
-    # save yao with task to plans
+    # save yao with chore to plans
     yao_old_plan = budunit_shop(yao_str, a23_str)
     vacuum_str = "vacuum"
     vacuum_way = yao_old_plan.make_l1_way(vacuum_str)
@@ -335,9 +335,9 @@ def test_listen_to_agenda_duty_plan_agenda_GetsAgendaFromSrcBudNotSpeakerSelf(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    # yao_duty has task run_way
-    # yao_plan has task clean_way
-    # yao_new_plan fstates yao_duty task run_way and not clean_way
+    # yao_duty has chore run_way
+    # yao_plan has chore clean_way
+    # yao_new_plan fstates yao_duty chore run_way and not clean_way
     yao_duty = get_example_yao_speaker()
     assert yao_duty.concept_exists(run_way()) is False
     assert yao_duty.concept_exists(clean_way()) is False

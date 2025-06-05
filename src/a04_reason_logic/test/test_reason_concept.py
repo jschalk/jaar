@@ -360,7 +360,7 @@ def test_ReasonHeir_correctSetsPledgeState():
     range_3_to_6_reason.set_status(factheirs=range_5_to_8_facts)
     # THEN
     assert range_3_to_6_reason._status is True
-    assert range_3_to_6_reason._task is True
+    assert range_3_to_6_reason._chore is True
 
     # WHEN
     range_5_to_6_fact = factheir_shop(day_way, day_way, fopen=5, fnigh=6)
@@ -368,7 +368,7 @@ def test_ReasonHeir_correctSetsPledgeState():
     range_3_to_6_reason.set_status(factheirs=range_5_to_6_facts)
     # THEN
     assert range_3_to_6_reason._status is True
-    assert range_3_to_6_reason._task is False
+    assert range_3_to_6_reason._chore is False
 
     # WHEN
     range_0_to_1_fact = factheir_shop(day_way, day_way, fopen=0, fnigh=1)
@@ -376,7 +376,7 @@ def test_ReasonHeir_correctSetsPledgeState():
     range_3_to_6_reason.set_status(factheirs=range_0_to_1_facts)
     # THEN
     assert range_3_to_6_reason._status is False
-    assert range_3_to_6_reason._task is None
+    assert range_3_to_6_reason._chore is None
 
 
 def test_ReasonCore_get_premises_count():

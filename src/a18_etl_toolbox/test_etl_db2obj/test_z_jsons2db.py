@@ -155,7 +155,7 @@ def test_insert_job_budconc_CreatesTableRowsFor_budconc_job():
     x_pledge = 14
     x_problem_bool = 15
     x__active = 16
-    x__task = 17
+    x__chore = 17
     x_fund_iota = 18.0
     x__fund_onset = 19.0
     x__fund_cease = 20.0
@@ -184,7 +184,7 @@ def test_insert_job_budconc_CreatesTableRowsFor_budconc_job():
     x_concept.pledge = x_pledge
     x_concept.problem_bool = x_problem_bool
     x_concept._active = x__active
-    x_concept._task = x__task
+    x_concept._chore = x__chore
     x_concept.fund_iota = x_fund_iota
     x_concept._fund_onset = x__fund_onset
     x_concept._fund_cease = x__fund_cease
@@ -209,7 +209,7 @@ def test_insert_job_budconc_CreatesTableRowsFor_budconc_job():
     x_concept.pledge = x_pledge
     x_concept.problem_bool = x_problem_bool
     x_concept._active = x__active
-    x_concept._task = x__task
+    x_concept._chore = x__chore
     x_concept.fund_iota = x_fund_iota
     x_concept._fund_onset = x__fund_onset
     x_concept._fund_cease = x__fund_cease
@@ -256,7 +256,7 @@ def test_insert_job_budconc_CreatesTableRowsFor_budconc_job():
             x_problem_bool,
             x_fund_iota,
             x__active,
-            x__task,
+            x__chore,
             x__fund_onset,
             x__fund_cease,
             x__fund_ratio,
@@ -294,13 +294,13 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
     x_way = 3
     x_rcontext = 4
     x_rconcept_active_requisite = 5
-    x__task = 6
+    x__chore = 6
     x__status = 7
     x__rconcept_active_value = 8
     x_reasonheir = reasonheir_shop(rcontext=x_rcontext)
     x_reasonheir.rcontext = x_rcontext
     x_reasonheir.rconcept_active_requisite = x_rconcept_active_requisite
-    x_reasonheir._task = x__task
+    x_reasonheir._chore = x__chore
     x_reasonheir._status = x__status
     x_reasonheir._rconcept_active_value = x__rconcept_active_value
 
@@ -325,7 +325,7 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
             str(x_way),
             str(x_rcontext),
             x_rconcept_active_requisite,
-            x__task,
+            x__chore,
             x__status,
             x__rconcept_active_value,
         )
@@ -356,14 +356,14 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
     x_pnigh = 6.0
     x_popen = 7.0
     x_pdivisor = 8
-    x__task = 9
+    x__chore = 9
     x__status = 10
     x_premiseunit = premiseunit_shop(pstate=x_pstate)
     x_premiseunit.pstate = x_pstate
     x_premiseunit.pnigh = x_pnigh
     x_premiseunit.popen = x_popen
     x_premiseunit.pdivisor = x_pdivisor
-    x_premiseunit._task = x__task
+    x_premiseunit._chore = x__chore
     x_premiseunit._status = x__status
 
     with sqlite3_connect(":memory:") as conn:
@@ -390,7 +390,7 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
             x_pnigh,
             x_popen,
             x_pdivisor,
-            x__task,
+            x__chore,
             x__status,
         )
         expected_data = [expected_row1]

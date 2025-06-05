@@ -30,7 +30,7 @@ from src.a13_bud_listen_logic.listen import (
 )
 
 
-def test_listen_to_agendas_create_init_job_from_guts_AddsTasksToBudWhenNo_laborlinkIsSet(
+def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBudWhenNo_laborlinkIsSet(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -63,7 +63,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsTasksToBudWhenNo_laborl
     assert len(new_yao_job.get_agenda_dict()) == 2
 
 
-def test_listen_to_agendas_create_init_job_from_guts_AddsTasksToBud(
+def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBud(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -99,7 +99,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsTasksToBud(
     assert len(new_yao_job.get_agenda_dict()) == 2
 
 
-def test_listen_to_agendas_create_init_job_from_guts_AddsTasksToBudWithDetailsDecidedBy_debtit_belief(
+def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBudWithDetailsDecidedBy_debtit_belief(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

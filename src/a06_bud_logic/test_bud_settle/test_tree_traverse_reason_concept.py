@@ -126,9 +126,9 @@ def test_agenda_returned_WhenNoReasonsExist():
 
     # THEN
     casa_way = sue_bud.make_l1_way("casa")
-    assert sue_bud.get_concept_obj(casa_way)._task is True
+    assert sue_bud.get_concept_obj(casa_way)._chore is True
     cat_way = sue_bud.make_l1_way("cat have dinner")
-    assert sue_bud.get_concept_obj(cat_way)._task is True
+    assert sue_bud.get_concept_obj(cat_way)._chore is True
 
 
 def test_BudUnit_reasonheirs_AreCorrectlyInherited_v1():
@@ -156,7 +156,7 @@ def test_BudUnit_reasonheirs_AreCorrectlyInherited_v1():
     premise_tue = casa_concept.get_reasonheir(wk_way).get_premise(tue_way)
     tue_premise = premiseunit_shop(pstate=tue_way)
     tue_premise._status = False
-    tue_premise._task = False
+    tue_premise._chore = False
     premises = {tue_premise.pstate: tue_premise}
     built_wk_reasonheir = reasonheir_shop(
         rcontext=wk_way,
@@ -164,8 +164,8 @@ def test_BudUnit_reasonheirs_AreCorrectlyInherited_v1():
         _status=False,
         _rconcept_active_value=True,
     )
-    tue_task = built_wk_reasonheir.premises.get(premise_tue.pstate)._task
-    assert premise_tue._task == tue_task
+    tue_chore = built_wk_reasonheir.premises.get(premise_tue.pstate)._chore
+    assert premise_tue._chore == tue_chore
     assert premise_tue == built_wk_reasonheir.premises[premise_tue.pstate]
     wk_reasonheir = casa_concept.get_reasonheir(wk_way)
     assert wk_reasonheir.premises == built_wk_reasonheir.premises
@@ -184,7 +184,7 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
 
     wed_premise = premiseunit_shop(pstate=wed_way)
     wed_premise._status = False
-    wed_premise._task = False
+    wed_premise._chore = False
 
     premises_x = {wed_premise.pstate: wed_premise}
     casa_wk_build_reasonunit = reasonunit_shop(rcontext=wk_way, premises=premises_x)
@@ -223,7 +223,7 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
         == casa_wk_built_reasonheir.rconcept_active_requisite
     )
     assert rla_wk_reasonheir._status == casa_wk_built_reasonheir._status
-    assert rla_wk_reasonheir._task == casa_wk_built_reasonheir._task
+    assert rla_wk_reasonheir._chore == casa_wk_built_reasonheir._chore
     assert rla_wk_reasonheir._rconcept_active_value
     assert rla_wk_reasonheir._rconcept_active_value != casa_wk_built_reasonheir
 
@@ -236,7 +236,7 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
         == casa_wk_built_reasonheir.rconcept_active_requisite
     )
     assert cost_wk_reasonheir._status == casa_wk_built_reasonheir._status
-    assert cost_wk_reasonheir._task == casa_wk_built_reasonheir._task
+    assert cost_wk_reasonheir._chore == casa_wk_built_reasonheir._chore
     assert cost_wk_reasonheir._rconcept_active_value
     assert cost_wk_reasonheir._rconcept_active_value != casa_wk_built_reasonheir
 
@@ -252,7 +252,7 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
 
     wed_premise = premiseunit_shop(pstate=wed_way)
     wed_premise._status = False
-    wed_premise._task = False
+    wed_premise._chore = False
     premises = {wed_premise.pstate: wed_premise}
     casa_wk_build_reasonunit = reasonunit_shop(wk_way, premises=premises)
     casa_wk_built_reasonheir = reasonheir_shop(
@@ -296,7 +296,7 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
         == casa_wk_built_reasonheir.rconcept_active_requisite
     )
     assert rla_wk_reasonheir._status == casa_wk_built_reasonheir._status
-    assert rla_wk_reasonheir._task == casa_wk_built_reasonheir._task
+    assert rla_wk_reasonheir._chore == casa_wk_built_reasonheir._chore
     assert rla_wk_reasonheir._rconcept_active_value
     assert rla_wk_reasonheir._rconcept_active_value != casa_wk_built_reasonheir
 
@@ -309,7 +309,7 @@ def test_BudUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
         == casa_wk_built_reasonheir.rconcept_active_requisite
     )
     assert cost_wk_reasonheir._status == casa_wk_built_reasonheir._status
-    assert cost_wk_reasonheir._task == casa_wk_built_reasonheir._task
+    assert cost_wk_reasonheir._chore == casa_wk_built_reasonheir._chore
     assert cost_wk_reasonheir._rconcept_active_value
     assert cost_wk_reasonheir._rconcept_active_value != casa_wk_built_reasonheir
 

@@ -40,7 +40,7 @@ def test_listen_to_speaker_agenda_ReturnsEqualBud():
     assert after_yao_budunit == yao_budunit
 
 
-def test_listen_to_speaker_agenda_ReturnsSingleTaskBud():
+def test_listen_to_speaker_agenda_ReturnsSingleChoreBud():
     # ESTABLISH
     yao_str = "Yao"
     before_yao_budunit = budunit_shop(yao_str)
@@ -73,7 +73,7 @@ def test_listen_to_speaker_agenda_ReturnsSingleTaskBud():
     assert len(after_yao_budunit.get_agenda_dict()) == 1
 
 
-def test_listen_to_speaker_agenda_ReturnsLevel2TaskBud():
+def test_listen_to_speaker_agenda_ReturnsLevel2ChoreBud():
     # ESTABLISH
     yao_str = "Yao"
     before_yao_budunit = budunit_shop(yao_str)
@@ -111,7 +111,7 @@ def test_listen_to_speaker_agenda_ReturnsLevel2TaskBud():
     assert len(after_yao_budunit.get_agenda_dict()) == 1
 
 
-def test_listen_to_speaker_agenda_Returns2AgendaConceptsLevel2TaskBud():
+def test_listen_to_speaker_agenda_Returns2AgendaConceptsLevel2ChoreBud():
     # ESTABLISH
     yao_str = "Yao"
     before_yao_budunit = budunit_shop(yao_str)
@@ -167,7 +167,7 @@ def test_listen_to_speaker_agenda_Returns2AgendaConceptsLevel2TaskBud():
     assert after_fly_conceptunit.mass == 18
 
 
-def test_listen_to_speaker_agenda_Returns2AgendaConceptsLevel2TaskBudWhereAnConceptUnitExistsInAdvance():
+def test_listen_to_speaker_agenda_Returns2AgendaConceptsLevel2ChoreBudWhereAnConceptUnitExistsInAdvance():
     # ESTABLISH
     yao_str = "Yao"
     before_yao_budunit = budunit_shop(yao_str)

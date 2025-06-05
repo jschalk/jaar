@@ -203,7 +203,7 @@ class PremiseStatusFinder:
 
         return False
 
-    def get_task_status(self) -> bool:
+    def get_chore_status(self) -> bool:
         return bool(
             (
                 self.get_active()
@@ -299,7 +299,7 @@ class PremiseUnit:
     pnigh: float = None
     pdivisor: int = None
     _status: bool = None
-    _task: bool = None
+    _chore: bool = None
     bridge: str = None
 
     def get_obj_key(self):
@@ -334,7 +334,7 @@ class PremiseUnit:
 
     def set_status(self, x_factheir: FactHeir):
         self._status = self._get_active(factheir=x_factheir)
-        self._task = self._get_task_status(factheir=x_factheir)
+        self._chore = self._get_chore_status(factheir=x_factheir)
 
     def _get_active(self, factheir: FactHeir):
         x_status = None
@@ -368,10 +368,10 @@ class PremiseUnit:
             self.pdivisor is None and self.popen is not None and self.pnigh is not None
         )
 
-    def _get_task_status(self, factheir: FactHeir) -> bool:
-        x_task = None
+    def _get_chore_status(self, factheir: FactHeir) -> bool:
+        x_chore = None
         if self._status and self._is_range():
-            x_task = factheir.fnigh > self.pnigh
+            x_chore = factheir.fnigh > self.pnigh
         elif self._status and self._is_segregate():
             segr_obj = premisestatusfinder_shop(
                 popen=self.popen,
@@ -380,11 +380,11 @@ class PremiseUnit:
                 fopen_full=factheir.fopen,
                 fnigh_full=factheir.fnigh,
             )
-            x_task = segr_obj.get_task_status()
+            x_chore = segr_obj.get_chore_status()
         elif self._status in [True, False]:
-            x_task = False
+            x_chore = False
 
-        return x_task
+        return x_chore
 
     def _get_range_segregate_status(self, factheir: FactHeir) -> bool:
         x_status = None
@@ -568,7 +568,7 @@ def reasonunit_shop(
 @dataclass
 class ReasonHeir(ReasonCore):
     _status: bool = None
-    _task: bool = None
+    _chore: bool = None
     _rconcept_active_value: bool = None
 
     def inherit_from_reasonheir(self, x_reasonunit: ReasonUnit):
@@ -611,30 +611,30 @@ class ReasonHeir(ReasonCore):
 
     def is_any_premise_true(self) -> tuple[bool, bool]:
         any_premise_true = False
-        any_task_true = False
+        any_chore_true = False
         for x_premiseunit in self.premises.values():
             if x_premiseunit._status:
                 any_premise_true = True
-                if x_premiseunit._task:
-                    any_task_true = True
-        return any_premise_true, any_task_true
+                if x_premiseunit._chore:
+                    any_chore_true = True
+        return any_premise_true, any_chore_true
 
     def _set_attr_status(self, any_premise_true: bool):
         self._status = (
             any_premise_true or self.is_rconcept_active_requisite_operational()
         )
 
-    def _set_attr_task(self, any_task_true: bool):
-        self._task = True if any_task_true else None
-        if self._status and self._task is None:
-            self._task = False
+    def _set_attr_chore(self, any_chore_true: bool):
+        self._chore = True if any_chore_true else None
+        if self._status and self._chore is None:
+            self._chore = False
 
     def set_status(self, factheirs: dict[WayTerm, FactHeir]):
         self.clear_status()
         self._set_premise_status(self._get_fcontext(factheirs))
-        any_premise_true, any_task_true = self.is_any_premise_true()
+        any_premise_true, any_chore_true = self.is_any_premise_true()
         self._set_attr_status(any_premise_true)
-        self._set_attr_task(any_task_true)
+        self._set_attr_chore(any_chore_true)
 
 
 def reasonheir_shop(
@@ -642,7 +642,7 @@ def reasonheir_shop(
     premises: dict[WayTerm, PremiseUnit] = None,
     rconcept_active_requisite: bool = None,
     _status: bool = None,
-    _task: bool = None,
+    _chore: bool = None,
     _rconcept_active_value: bool = None,
     bridge: str = None,
 ):
@@ -651,7 +651,7 @@ def reasonheir_shop(
         premises=get_empty_dict_if_None(premises),
         rconcept_active_requisite=rconcept_active_requisite,
         _status=_status,
-        _task=_task,
+        _chore=_chore,
         _rconcept_active_value=_rconcept_active_value,
         bridge=default_bridge_if_None(bridge),
     )

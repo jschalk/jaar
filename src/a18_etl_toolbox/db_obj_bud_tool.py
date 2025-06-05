@@ -190,9 +190,9 @@ def create_budprem_metrics_insert_sqlstr(values_dict: dict[str,]):
     pnigh = values_dict.get("pnigh")
     popen = values_dict.get("popen")
     pdivisor = values_dict.get("pdivisor")
-    _task = values_dict.get("_task")
+    _chore = values_dict.get("_chore")
     _status = values_dict.get("_status")
-    return f"""INSERT INTO bud_concept_reason_premiseunit_job (vow_label, owner_name, concept_way, rcontext, pstate, pnigh, popen, pdivisor, _task, _status)
+    return f"""INSERT INTO bud_concept_reason_premiseunit_job (vow_label, owner_name, concept_way, rcontext, pstate, pnigh, popen, pdivisor, _chore, _status)
 VALUES (
   {sqlite_obj_str(vow_label, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
@@ -202,7 +202,7 @@ VALUES (
 , {sqlite_obj_str(pnigh, "REAL")}
 , {sqlite_obj_str(popen, "REAL")}
 , {sqlite_obj_str(pdivisor, "REAL")}
-, {sqlite_obj_str(_task, "INTEGER")}
+, {sqlite_obj_str(_chore, "INTEGER")}
 , {sqlite_obj_str(_status, "INTEGER")}
 )
 ;
@@ -215,17 +215,17 @@ def create_budreas_metrics_insert_sqlstr(values_dict: dict[str,]):
     way = values_dict.get("concept_way")
     rcontext = values_dict.get("rcontext")
     rconcept_active_requisite = values_dict.get("rconcept_active_requisite")
-    _task = values_dict.get("_task")
+    _chore = values_dict.get("_chore")
     _status = values_dict.get("_status")
     _rconcept_active_value = values_dict.get("_rconcept_active_value")
-    return f"""INSERT INTO bud_concept_reasonunit_job (vow_label, owner_name, concept_way, rcontext, rconcept_active_requisite, _task, _status, _rconcept_active_value)
+    return f"""INSERT INTO bud_concept_reasonunit_job (vow_label, owner_name, concept_way, rcontext, rconcept_active_requisite, _chore, _status, _rconcept_active_value)
 VALUES (
   {sqlite_obj_str(vow_label, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
 , {sqlite_obj_str(way, "TEXT")}
 , {sqlite_obj_str(rcontext, "TEXT")}
 , {sqlite_obj_str(rconcept_active_requisite, "INTEGER")}
-, {sqlite_obj_str(_task, "INTEGER")}
+, {sqlite_obj_str(_chore, "INTEGER")}
 , {sqlite_obj_str(_status, "INTEGER")}
 , {sqlite_obj_str(_rconcept_active_value, "INTEGER")}
 )
@@ -267,7 +267,7 @@ def create_budconc_metrics_insert_sqlstr(values_dict: dict[str,]):
     pledge = values_dict.get("pledge")
     problem_bool = values_dict.get("problem_bool")
     _active = values_dict.get("_active")
-    _task = values_dict.get("_task")
+    _chore = values_dict.get("_chore")
     fund_iota = values_dict.get("fund_iota")
     _fund_onset = values_dict.get("_fund_onset")
     _fund_cease = values_dict.get("_fund_cease")
@@ -283,7 +283,7 @@ def create_budconc_metrics_insert_sqlstr(values_dict: dict[str,]):
     integer_str = "INTEGER"
     real_str = "REAL"
 
-    return f"""INSERT INTO bud_conceptunit_job (vow_label, owner_name, concept_way, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool, fund_iota, _active, _task, _fund_onset, _fund_cease, _fund_ratio, _gogo_calc, _stop_calc, _level, _range_evaluated, _descendant_pledge_count, _healerlink_ratio, _all_acct_cred, _all_acct_debt)
+    return f"""INSERT INTO bud_conceptunit_job (vow_label, owner_name, concept_way, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool, fund_iota, _active, _chore, _fund_onset, _fund_cease, _fund_ratio, _gogo_calc, _stop_calc, _level, _range_evaluated, _descendant_pledge_count, _healerlink_ratio, _all_acct_cred, _all_acct_debt)
 VALUES (
   {sqlite_obj_str(vow_label, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
@@ -301,7 +301,7 @@ VALUES (
 , {sqlite_obj_str(problem_bool, "INTEGER")}
 , {sqlite_obj_str(fund_iota, real_str)}
 , {sqlite_obj_str(_active, "INTEGER")}
-, {sqlite_obj_str(_task, "INTEGER")}
+, {sqlite_obj_str(_chore, "INTEGER")}
 , {sqlite_obj_str(_fund_onset, real_str)}
 , {sqlite_obj_str(_fund_cease, real_str)}
 , {sqlite_obj_str(_fund_ratio, real_str)}

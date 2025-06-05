@@ -2,14 +2,14 @@ from pytest import raises as pytest_raises
 from src.a04_reason_logic.reason_concept import factheir_shop, factunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_bud_logic._test_util.example_buds import (
-    get_budunit_1Task_1CE0MinutesReason_1Fact,
+    get_budunit_1Chore_1CE0MinutesReason_1Fact,
 )
 from src.a06_bud_logic.bud import budunit_shop
 
 
-def test_BudUnit_settle_bud_ChangesConceptUnit_pledge_task():
+def test_BudUnit_settle_bud_ChangesConceptUnit_pledge_chore():
     # ESTABLISH
-    yao_bud = get_budunit_1Task_1CE0MinutesReason_1Fact()
+    yao_bud = get_budunit_1Chore_1CE0MinutesReason_1Fact()
     hr_str = "hr"
     hr_way = yao_bud.make_l1_way(hr_str)
 
@@ -22,7 +22,7 @@ def test_BudUnit_settle_bud_ChangesConceptUnit_pledge_task():
     mail_concept = concept_dict.get(mail_way)
     yao_bud.add_fact(fcontext=hr_way, fstate=hr_way, fopen=82, fnigh=95)
     assert mail_concept.pledge is True
-    assert mail_concept._task is False
+    assert mail_concept._chore is False
 
     # WHEN
     yao_bud.settle_bud()
@@ -30,7 +30,7 @@ def test_BudUnit_settle_bud_ChangesConceptUnit_pledge_task():
     # THEN
     mail_concept = yao_bud.get_concept_obj(mail_way)
     assert mail_concept.pledge
-    assert mail_concept._task
+    assert mail_concept._chore
 
 
 def test_BudUnit_settle_bud_ExecutesWithRangeRootFacts():
@@ -221,9 +221,9 @@ def test_BudUnit_settle_bud_FactHeirCorrectlyDeletesFactUnit():
     assert swim_concept.factunits == {}
 
 
-def test_BudUnit_settle_bud_SetsTaskAsComplete():
+def test_BudUnit_settle_bud_SetsChoreAsComplete():
     # ESTABLISH
-    yao_bud = get_budunit_1Task_1CE0MinutesReason_1Fact()
+    yao_bud = get_budunit_1Chore_1CE0MinutesReason_1Fact()
     mail_str = "obtain mail"
     assert yao_bud is not None
     assert len(yao_bud.conceptroot._kids[mail_str].reasonunits) == 1
@@ -233,11 +233,11 @@ def test_BudUnit_settle_bud_SetsTaskAsComplete():
     hr_way = yao_bud.make_l1_way(hr_str)
     yao_bud.add_fact(hr_way, hr_way, fopen=82, fnigh=85)
     assert mail_concept.pledge
-    assert mail_concept._task
+    assert mail_concept._chore
 
     # WHEN
     yao_bud.settle_bud()
 
     # THEN
     assert mail_concept.pledge
-    assert not mail_concept._task
+    assert not mail_concept._chore

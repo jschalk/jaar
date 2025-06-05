@@ -13,8 +13,8 @@ from src.a06_bud_logic._test_util.example_buds import (
 from src.a06_bud_logic.bud import budunit_shop, get_from_json as budunit_get_from_json
 
 
-def get_tasks_count(agenda_dict: dict[WayTerm, ConceptUnit]) -> int:
-    return sum(bool(x_conceptunit._task) for x_conceptunit in agenda_dict.values())
+def get_chores_count(agenda_dict: dict[WayTerm, ConceptUnit]) -> int:
+    return sum(bool(x_conceptunit._chore) for x_conceptunit in agenda_dict.values())
 
 
 def test_BudUnit_get_agenda_dict_ReturnsObj():
@@ -250,7 +250,7 @@ def test_BudUnit_get_agenda_dict_BudUnitCanCleanOnRcontext_budunit_v001_with_lar
     assert len(pledge_list) == 29
 
 
-def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Range():
+def test_BudUnit_set_agenda_chore_as_complete_SetsAttrCorrectly_Range():
     # ESTABLISH
     zia_bud = budunit_shop("Zia")
 
@@ -274,15 +274,15 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Range():
     run_reasonunits = zia_bud.conceptroot._kids[run_str].reasonunits[day_way]
     print(f"{run_reasonunits=}")
     print(f"{run_reasonunits.premises[day_way]._status=}")
-    print(f"{run_reasonunits.premises[day_way]._task=}")
+    print(f"{run_reasonunits.premises[day_way]._chore=}")
     print(f"{zia_bud.get_reason_rcontexts()=}")
     assert len(zia_bud.get_concept_dict()) == 4
     assert len(zia_bud.get_agenda_dict()) == 1
     print(f"{zia_bud.get_agenda_dict().keys()=}")
-    assert zia_bud.get_agenda_dict().get(run_way)._task is True
+    assert zia_bud.get_agenda_dict().get(run_way)._chore is True
 
     # WHEN
-    zia_bud.set_agenda_task_complete(task_way=run_way, rcontext=day_way)
+    zia_bud.set_agenda_chore_complete(chore_way=run_way, rcontext=day_way)
 
     # THEN
     agenda_dict = zia_bud.get_agenda_dict()
@@ -290,7 +290,7 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Range():
     assert agenda_dict == {}
 
 
-def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Division():
+def test_BudUnit_set_agenda_chore_as_complete_SetsAttrCorrectly_Division():
     # ESTABLISH
     zia_bud = budunit_shop("Zia")
 
@@ -326,7 +326,7 @@ def test_BudUnit_set_agenda_task_as_complete_SetsAttrCorrectly_Division():
     print(f"{run_concept.factunits=}")
 
     # WHEN
-    zia_bud.set_agenda_task_complete(task_way=run_way, rcontext=day_way)
+    zia_bud.set_agenda_chore_complete(chore_way=run_way, rcontext=day_way)
 
     # THEN
     print(f"{run_concept.factunits=}")
@@ -379,7 +379,7 @@ def test_budunit_get_from_json_CorrectlyLoadsPledgeFromJSON():
     assert len(yao_bud.get_agenda_dict()) > 0
 
 
-def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
+def test_BudUnit_set_fact_Isue116Resolved_correctlySetsChoreAsTrue():
     # ESTABLISH
     yao_bud = budunit_v002()
     print(f"{yao_bud.get_reason_rcontexts()=}")
@@ -399,8 +399,8 @@ def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
     evening_way = yao_bud.make_way(db_way, evening_str)
     evening_concept = yao_bud._concept_dict.get(evening_way)
     # for concept_x in yao_bud.get_agenda_dict():
-    #     # if concept_x._task != True:
-    #     #     print(f"{len(pledge_concept_list)=} {concept_x._task=} {concept_x.get_concept_way()}")
+    #     # if concept_x._chore != True:
+    #     #     print(f"{len(pledge_concept_list)=} {concept_x._chore=} {concept_x.get_concept_way()}")
     #     if concept_x.concept_label == evening_concept_label:
     #         evening_concept = concept_x
     #         print(f"{concept_x.get_concept_way()=}")
@@ -410,14 +410,14 @@ def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
     print(f"\n{factheir_gregtime=}")
 
     # for reasonheir in agenda_concept._reasonheirs.values():
-    #     print(f"{reasonheir.rcontext=} {reasonheir._status=} {reasonheir._task=}")
+    #     print(f"{reasonheir.rcontext=} {reasonheir._status=} {reasonheir._chore=}")
     reasonheir_gregtime = evening_concept._reasonheirs.get(gregtime_way)
-    reasonheir_str = f"\nreasonheir_gregtime= '{reasonheir_gregtime.rcontext}', status={reasonheir_gregtime._status}, task={reasonheir_gregtime._task}"
+    reasonheir_str = f"\nreasonheir_gregtime= '{reasonheir_gregtime.rcontext}', status={reasonheir_gregtime._status}, chore={reasonheir_gregtime._chore}"
     print(reasonheir_str)
 
     premiseunit = reasonheir_gregtime.premises.get(gregtime_way)
     print(f"----\n {premiseunit=}")
-    print(f" {premiseunit._get_task_status(factheir=factheir_gregtime)=}")
+    print(f" {premiseunit._get_chore_status(factheir=factheir_gregtime)=}")
     print(f" {premiseunit._status=} , {premiseunit._is_range()=} premiseunit fails")
     print(
         f" {premiseunit._status=} , {premiseunit._is_segregate()=} premiseunit passes"
@@ -436,8 +436,8 @@ def test_BudUnit_set_fact_Isue116Resolved_correctlySetsTaskAsTrue():
     #     f"       {segr_obj.fopen_full=}         {segr_obj.fnigh_full=} \tdifference:{segr_obj.fnigh_full-segr_obj.fopen_full}"
     # )
 
-    # print(f"  {segr_obj.get_active()=}  {segr_obj.get_task_status()=}")
-    assert get_tasks_count(pledge_concept_list) == 64
+    # print(f"  {segr_obj.get_active()=}  {segr_obj.get_chore_status()=}")
+    assert get_chores_count(pledge_concept_list) == 64
 
 
 def test_BudUnit_agenda_IsSetByLaborUnit_1AcctGroup():

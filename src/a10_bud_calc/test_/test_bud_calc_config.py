@@ -28,8 +28,8 @@ from src.a03_group_logic._test_util.a03_str import (
     take_force_str,
 )
 from src.a04_reason_logic._test_util.a04_str import (
+    _chore_str,
     _status_str,
-    _task_str,
     fcontext_str,
     fnigh_str,
     fopen_str,
@@ -277,7 +277,7 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
         "_healerlink_ratio",
         "_level",
         "_range_evaluated",
-        "_task",
+        "_chore",
         "_gogo_calc",
         "_stop_calc",
     }
@@ -286,11 +286,11 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     assert expected_budawar_jmetrics_keys == budawar_jmetrics_keys
     expected_budreas_jmetrics_keys = {
         "_status",
-        "_task",
+        "_chore",
         "_rconcept_active_value",
     }
     assert expected_budreas_jmetrics_keys == budreas_jmetrics_keys
-    expected_budprem_jmetrics_keys = {"_status", "_task"}
+    expected_budprem_jmetrics_keys = {"_status", "_chore"}
     assert expected_budprem_jmetrics_keys == budprem_jmetrics_keys
     expected_budlabo_jmetrics_keys = {"_owner_name_labor"}
     assert expected_budlabo_jmetrics_keys == budlabo_jmetrics_keys
@@ -462,7 +462,7 @@ def test_get_bud_calc_dimen_args_ReturnsObj():
         "_all_acct_debt",
         "_healerlink_ratio",
         "_level",
-        "_task",
+        "_chore",
         "fund_iota",
         "_fund_ratio",
         "_range_evaluated",
@@ -639,8 +639,8 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, budprem, jk, concept_way_str()) == "TEXT"
     assert g_class_type(cfig, budprem, jm, _status_str()) == "int"
     assert g_sqlitetype(cfig, budprem, jm, _status_str()) == "INTEGER"
-    assert g_class_type(cfig, budprem, jm, _task_str()) == "int"
-    assert g_sqlitetype(cfig, budprem, jm, _task_str()) == "INTEGER"
+    assert g_class_type(cfig, budprem, jm, _chore_str()) == "int"
+    assert g_sqlitetype(cfig, budprem, jm, _chore_str()) == "INTEGER"
     assert g_class_type(cfig, budprem, jv, pdivisor_str()) == "int"
     assert g_sqlitetype(cfig, budprem, jv, pdivisor_str()) == "INTEGER"
     assert g_class_type(cfig, budprem, jv, pnigh_str()) == "float"
@@ -655,8 +655,8 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, budreas, jm, "_rconcept_active_value") == "INTEGER"
     assert g_class_type(cfig, budreas, jm, _status_str()) == "int"
     assert g_sqlitetype(cfig, budreas, jm, _status_str()) == "INTEGER"
-    assert g_class_type(cfig, budreas, jm, _task_str()) == "int"
-    assert g_sqlitetype(cfig, budreas, jm, _task_str()) == "INTEGER"
+    assert g_class_type(cfig, budreas, jm, _chore_str()) == "int"
+    assert g_sqlitetype(cfig, budreas, jm, _chore_str()) == "INTEGER"
     assert g_class_type(cfig, budreas, jv, rconcept_active_requisite_str()) == "bool"
     assert g_sqlitetype(cfig, budreas, jv, rconcept_active_requisite_str()) == "INTEGER"
     assert g_class_type(cfig, budlabo, jk, concept_way_str()) == WayTerm_str()
@@ -691,8 +691,8 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, budconc, jm, _range_evaluated_str()) == "INTEGER"
     assert g_class_type(cfig, budconc, jm, _stop_calc_str()) == "float"
     assert g_sqlitetype(cfig, budconc, jm, _stop_calc_str()) == "REAL"
-    assert g_class_type(cfig, budconc, jm, _task_str()) == "int"
-    assert g_sqlitetype(cfig, budconc, jm, _task_str()) == "INTEGER"
+    assert g_class_type(cfig, budconc, jm, _chore_str()) == "int"
+    assert g_sqlitetype(cfig, budconc, jm, _chore_str()) == "INTEGER"
     assert g_class_type(cfig, budconc, jv, addin_str()) == "float"
     assert g_sqlitetype(cfig, budconc, jv, addin_str()) == "REAL"
     assert g_class_type(cfig, budconc, jv, begin_str()) == "float"
@@ -850,7 +850,7 @@ def test_get_bud_calc_args_type_dict_ReturnsObj():
     assert bud_calc_args_type_dict.get(healer_name_str()) == NameTerm_str()
     assert bud_calc_args_type_dict.get(pstate_str()) == WayTerm_str()
     assert bud_calc_args_type_dict.get("_status") == "int"
-    assert bud_calc_args_type_dict.get("_task") == "int"
+    assert bud_calc_args_type_dict.get("_chore") == "int"
     assert bud_calc_args_type_dict.get(pdivisor_str()) == "int"
     assert bud_calc_args_type_dict.get(pnigh_str()) == "float"
     assert bud_calc_args_type_dict.get(popen_str()) == "float"

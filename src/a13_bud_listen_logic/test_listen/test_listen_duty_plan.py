@@ -276,9 +276,9 @@ def test_listen_to_owner_plans_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItself
 ):
     # ESTABLISH
     # yao0_gut with 3 debotors of different credit_beliefs
-    # yao_plan1 with 1 task, fact that doesn't make that task active
-    # yao_plan2 with 2 tasks, one is equal fact that makes task active
-    # yao_plan3 with 1 new task, fact stays with it
+    # yao_plan1 with 1 chore, fact that doesn't make that chore active
+    # yao_plan2 with 2 chores, one is equal fact that makes chore active
+    # yao_plan3 with 1 new chore, fact stays with it
     vow_mstr_dir = env_dir()
     vow_label = get_default_vow_label()
     yao_gut0 = get_example_yao_gut_with_3_healers()

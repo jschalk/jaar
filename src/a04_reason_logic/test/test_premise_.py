@@ -4,8 +4,8 @@ from src.a01_term_logic.way import (
     get_default_axiom_label as root_label,
 )
 from src.a04_reason_logic._test_util.a04_str import (
+    _chore_str,
     _status_str,
-    _task_str,
     bridge_str,
     pdivisor_str,
     pnigh_str,
@@ -36,13 +36,13 @@ def test_PremiseUnit_Exists():
     assert email_premise.pnigh is None
     assert email_premise.pdivisor is None
     assert email_premise._status is None
-    assert email_premise._task is None
+    assert email_premise._chore is None
     assert email_premise.bridge is None
     obj_attrs = set(email_premise.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
         _status_str(),
-        _task_str(),
+        _chore_str(),
         bridge_str(),
         pdivisor_str(),
         pnigh_str(),
@@ -453,7 +453,7 @@ def test_PremiseUnit_set_status_SetsStatus_status_ScenarioTime():
     assert hr24_premise._status
 
 
-def test_PremiseUnit_get_task_status_ReturnsObjWhen_status_IsFalse():
+def test_PremiseUnit_get_chore_status_ReturnsObjWhen_status_IsFalse():
     # ESTABLISH
     hr24_str = "24hr"
     hr24_way = create_way(root_label(), hr24_str)
@@ -462,10 +462,10 @@ def test_PremiseUnit_get_task_status_ReturnsObjWhen_status_IsFalse():
 
     # WHEN / THEN
     no_range_fact = factheir_shop(fcontext=hr24_way, fstate=hr24_way)
-    assert no_range_premise._get_task_status(factheir=no_range_fact) is False
+    assert no_range_premise._get_chore_status(factheir=no_range_fact) is False
 
 
-def test_PremiseUnit_get_task_status_ReturnsObjWhenBool_is_range_True():
+def test_PremiseUnit_get_chore_status_ReturnsObjWhenBool_is_range_True():
     # ESTABLISH
     hr24_str = "24hr"
     hr24_way = create_way(root_label(), hr24_str)
@@ -474,10 +474,10 @@ def test_PremiseUnit_get_task_status_ReturnsObjWhenBool_is_range_True():
 
     # WHEN / THEN
     range_7_to_41_fact = factheir_shop(hr24_way, hr24_way, fopen=7, fnigh=41)
-    assert range_5_to_31_premise._get_task_status(range_7_to_41_fact)
+    assert range_5_to_31_premise._get_chore_status(range_7_to_41_fact)
 
 
-def test_PremiseUnit_get_task_status_ReturnsObjWhenBool_is_range_False():
+def test_PremiseUnit_get_chore_status_ReturnsObjWhenBool_is_range_False():
     # ESTABLISH
     hr24_str = "24hr"
     hr24_way = create_way(root_label(), hr24_str)
@@ -486,10 +486,10 @@ def test_PremiseUnit_get_task_status_ReturnsObjWhenBool_is_range_False():
 
     # WHEN / THEN
     range_7_to_21_fact = factheir_shop(hr24_way, hr24_way, fopen=7, fnigh=21)
-    assert range_5_to_31_premise._get_task_status(range_7_to_21_fact) is False
+    assert range_5_to_31_premise._get_chore_status(range_7_to_21_fact) is False
 
 
-def test_PremiseUnit_get_task_status_ReturnsObjWhenBoolSegregateFalse_01():
+def test_PremiseUnit_get_chore_status_ReturnsObjWhenBoolSegregateFalse_01():
     # ESTABLISH
     hr24_str = "24hr"
     hr24_way = create_way(root_label(), hr24_str)
@@ -498,10 +498,10 @@ def test_PremiseUnit_get_task_status_ReturnsObjWhenBoolSegregateFalse_01():
 
     # WHEN / THEN
     range_3_to_5_fact = factheir_shop(hr24_way, hr24_way, fopen=3, fnigh=5)
-    assert o0_n0_d5_premise._get_task_status(range_3_to_5_fact) is False
+    assert o0_n0_d5_premise._get_chore_status(range_3_to_5_fact) is False
 
 
-def test_PremiseUnit_get_task_status_ReturnsObjWhenBoolSegregateFalse_02():
+def test_PremiseUnit_get_chore_status_ReturnsObjWhenBoolSegregateFalse_02():
     # ESTABLISH
     hr24_str = "24hr"
     hr24_way = create_way(root_label(), hr24_str)
@@ -510,10 +510,10 @@ def test_PremiseUnit_get_task_status_ReturnsObjWhenBoolSegregateFalse_02():
 
     # WHEN / THEN
     range_5_to_7_fact = factheir_shop(hr24_way, hr24_way, fopen=5, fnigh=7)
-    assert o0_n0_d5_premise._get_task_status(range_5_to_7_fact) is False
+    assert o0_n0_d5_premise._get_chore_status(range_5_to_7_fact) is False
 
 
-def test_PremiseUnit_get_task_status_ReturnsObjWhenBoolSegregateTrue_01():
+def test_PremiseUnit_get_chore_status_ReturnsObjWhenBoolSegregateTrue_01():
     # ESTABLISH
     hr24_str = "24hr"
     hr24_way = create_way(root_label(), hr24_str)
@@ -522,10 +522,10 @@ def test_PremiseUnit_get_task_status_ReturnsObjWhenBoolSegregateTrue_01():
 
     # WHEN / THEN
     range_5_to_7_fact = factheir_shop(hr24_way, hr24_way, fopen=5, fnigh=7)
-    assert o0_n0_d5_premise._get_task_status(range_5_to_7_fact)
+    assert o0_n0_d5_premise._get_chore_status(range_5_to_7_fact)
 
 
-def test_PremiseUnit_get_task_status_ReturnsObjWhenBoolSegregateTrue_02():
+def test_PremiseUnit_get_chore_status_ReturnsObjWhenBoolSegregateTrue_02():
     # ESTABLISH
     hr24_str = "24hr"
     hr24_way = create_way(root_label(), hr24_str)
@@ -534,10 +534,10 @@ def test_PremiseUnit_get_task_status_ReturnsObjWhenBoolSegregateTrue_02():
 
     # WHEN / THEN
     range_5_to_5_fact = factheir_shop(hr24_way, hr24_way, fopen=5, fnigh=5)
-    assert o0_n0_d5_premise._get_task_status(factheir=range_5_to_5_fact) is False
+    assert o0_n0_d5_premise._get_chore_status(factheir=range_5_to_5_fact) is False
 
 
-def test_PremiseUnit_get_task_status_ReturnsObjNotNull():
+def test_PremiseUnit_get_chore_status_ReturnsObjNotNull():
     # ESTABLISH
     wk_str = "wkdays"
     wk_way = create_way(root_label(), wk_str)
@@ -550,7 +550,7 @@ def test_PremiseUnit_get_task_status_ReturnsObjNotNull():
     factheir = factheir_shop(fcontext=wk_way, fstate=wed_way)
 
     # THEN
-    assert wed_premise._get_task_status(factheir=factheir) is False
+    assert wed_premise._get_chore_status(factheir=factheir) is False
 
 
 def test_PremiseUnit_set_status_SetsAttrs_Scenario01():
@@ -559,7 +559,7 @@ def test_PremiseUnit_set_status_SetsAttrs_Scenario01():
     hr24_way = create_way(root_label(), hr24_str)
     range_2_to_7_premise = premiseunit_shop(pstate=hr24_way, popen=2, pnigh=7)
     assert range_2_to_7_premise._status is None
-    assert range_2_to_7_premise._task is None
+    assert range_2_to_7_premise._chore is None
 
     # WHEN
     range_0_to_5_fact = factheir_shop(hr24_way, hr24_way, fopen=0, fnigh=5)
@@ -567,7 +567,7 @@ def test_PremiseUnit_set_status_SetsAttrs_Scenario01():
 
     # THEN
     assert range_2_to_7_premise._status
-    assert range_2_to_7_premise._task is False
+    assert range_2_to_7_premise._chore is False
 
 
 def test_PremiseUnit_set_status_SetsAttrs_Scenario02():
@@ -582,7 +582,7 @@ def test_PremiseUnit_set_status_SetsAttrs_Scenario02():
     range_2_to_7_premise.set_status(x_factheir=range_0_to_8_fact)
     # THEN
     assert range_2_to_7_premise._status
-    assert range_2_to_7_premise._task
+    assert range_2_to_7_premise._chore
 
     # ESTABLISH
     range_3_to_5_fact = factheir_shop(hr24_way, hr24_way, fopen=3, fnigh=5)
@@ -590,14 +590,14 @@ def test_PremiseUnit_set_status_SetsAttrs_Scenario02():
     range_2_to_7_premise.set_status(x_factheir=range_3_to_5_fact)
     # THEN
     assert range_2_to_7_premise._status
-    assert range_2_to_7_premise._task is False
+    assert range_2_to_7_premise._chore is False
 
     # ESTABLISH
     range_8_to_8_fact = factheir_shop(hr24_way, hr24_way, fopen=8, fnigh=8)
     # WHEN
     range_2_to_7_premise.set_status(x_factheir=range_8_to_8_fact)
     assert range_2_to_7_premise._status is False
-    assert range_2_to_7_premise._task is False
+    assert range_2_to_7_premise._chore is False
 
 
 def test_PremiseUnit_set_status_SetsAttrs_Scenario03():

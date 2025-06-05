@@ -106,7 +106,7 @@ def test_create_budconc_metrics_insert_sqlstr_ReturnsObj():
     x__level = 11
     x__range_evaluated = 12
     x__stop_calc = 13
-    x__task = 14
+    x__chore = 14
     x_addin = 15
     x_begin = 16
     x_close = 17
@@ -135,7 +135,7 @@ def test_create_budconc_metrics_insert_sqlstr_ReturnsObj():
         "_level": x__level,
         "_range_evaluated": x__range_evaluated,
         "_stop_calc": x__stop_calc,
-        "_task": x__task,
+        "_chore": x__chore,
         "addin": x_addin,
         "begin": x_begin,
         "close": x_close,
@@ -196,7 +196,7 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
     x_way = 1
     x_rcontext = 2
     x_rconcept_active_requisite = 3
-    x__task = 4
+    x__chore = 4
     x__status = 5
     x__rconcept_active_value = 6
     values_dict = {
@@ -205,7 +205,7 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
         "concept_way": x_way,
         "rcontext": x_rcontext,
         "rconcept_active_requisite": x_rconcept_active_requisite,
-        "_task": x__task,
+        "_chore": x__chore,
         "_status": x__status,
         "_rconcept_active_value": x__rconcept_active_value,
     }
@@ -262,7 +262,7 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
     x_pnigh = 4
     x_popen = 5
     x_pdivisor = 6
-    x__task = 7
+    x__chore = 7
     x__status = 8
     values_dict = {
         "vow_label": x_vow_label,
@@ -273,7 +273,7 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
         "pnigh": x_pnigh,
         "popen": x_popen,
         "pdivisor": x_pdivisor,
-        "_task": x__task,
+        "_chore": x__chore,
         "_status": x__status,
     }
     # all args included in values dict

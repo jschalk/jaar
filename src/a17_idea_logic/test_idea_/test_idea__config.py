@@ -364,7 +364,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[142] == "error_message"
     assert table_sorting_priority[143] == "_owner_name_labor"
     assert table_sorting_priority[144] == "_active"
-    assert table_sorting_priority[145] == "_task"
+    assert table_sorting_priority[145] == "_chore"
     assert table_sorting_priority[146] == "_status"
     assert table_sorting_priority[147] == "_credor_pool"
     assert table_sorting_priority[148] == "_debtor_pool"

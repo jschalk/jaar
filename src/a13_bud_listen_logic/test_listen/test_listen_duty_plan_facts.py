@@ -59,7 +59,7 @@ def test_listen_to_facts_duty_plan_SetsSingleFactUnit_v1(env_dir_setup_cleanup):
     assert new_yao_plan.get_missing_fact_rcontexts().get(eat_way()) is None
 
 
-def test_listen_to_facts_duty_plan_SetsSingleFactUnitWithDifferentTask(
+def test_listen_to_facts_duty_plan_SetsSingleFactUnitWithDifferentChore(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

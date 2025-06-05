@@ -895,8 +895,8 @@ class BudUnit:
             if x_concept.pledge
         }
 
-    def set_agenda_task_complete(self, task_way: WayTerm, rcontext: WayTerm):
-        pledge_concept = self.get_concept_obj(task_way)
+    def set_agenda_chore_complete(self, chore_way: WayTerm, rcontext: WayTerm):
+        pledge_concept = self.get_concept_obj(chore_way)
         pledge_concept.set_factunit_to_complete(self.conceptroot.factunits[rcontext])
 
     def get_credit_ledger_debtit_ledger(
@@ -1142,7 +1142,7 @@ class BudUnit:
             else:
                 x_concept_obj.set_awardlines(child_awardlines)
 
-            if x_concept_obj._task:
+            if x_concept_obj._chore:
                 x_descendant_pledge_count += 1
 
             if (

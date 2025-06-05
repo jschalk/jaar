@@ -30,7 +30,7 @@ from src.a13_bud_listen_logic.listen import (
 )
 
 
-def test_listen_to_agendas_jobs_into_job_AddsTasksToBudWhenNo_laborlinkIsSet(
+def test_listen_to_agendas_jobs_into_job_AddsChoresToBudWhenNo_laborlinkIsSet(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -63,7 +63,7 @@ def test_listen_to_agendas_jobs_into_job_AddsTasksToBudWhenNo_laborlinkIsSet(
     assert len(new_yao_job.get_agenda_dict()) == 2
 
 
-def test_listen_to_agendas_jobs_into_job_AddsTasksToBud(env_dir_setup_cleanup):
+def test_listen_to_agendas_jobs_into_job_AddsChoresToBud(env_dir_setup_cleanup):
     # ESTABLISH
     vow_mstr_dir = env_dir()
     a23_str = "accord23"
@@ -98,7 +98,7 @@ def test_listen_to_agendas_jobs_into_job_AddsTasksToBud(env_dir_setup_cleanup):
     assert len(new_yao_job.get_agenda_dict()) == 2
 
 
-def test_listen_to_agendas_jobs_into_job_AddsTasksToBudWithDetailsDecidedBy_debtit_belief(
+def test_listen_to_agendas_jobs_into_job_AddsChoresToBudWithDetailsDecidedBy_debtit_belief(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -303,7 +303,7 @@ def test_listen_to_agendas_jobs_into_job_ListensToOwner_gut_AndNotOwner_job(
     yao_gut.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
     yao_pool = 87
     yao_gut.set_acct_respect(yao_pool)
-    # save yao without task to dutys
+    # save yao without chore to dutys
     save_gut_file(vow_mstr_dir, yao_gut)
 
     # Save Zia to job
@@ -318,7 +318,7 @@ def test_listen_to_agendas_jobs_into_job_ListensToOwner_gut_AndNotOwner_job(
     cook_conceptunit.laborunit.set_laborlink(yao_str)
     save_job_file(vow_mstr_dir, zia_job)
 
-    # save yao with task to dutys
+    # save yao with chore to dutys
     yao_old_job = budunit_shop(yao_str, a23_str)
     vacuum_str = "vacuum"
     vacuum_way = yao_old_job.make_l1_way(vacuum_str)

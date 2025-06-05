@@ -30,7 +30,7 @@ def test_display_concepttree_Scenario0(graphics_bool):
     x_fig = display_concepttree(a_bud, graphics_bool)
 
 
-def test_display_concepttree_Scenario1_shows_Tasks(graphics_bool):
+def test_display_concepttree_Scenario1_shows_Chores(graphics_bool):
     # a_bud = get_1label_bud()
     # a_bud = get_2label_bud()
     # a_bud = get_3label_bud()
@@ -42,7 +42,7 @@ def test_display_concepttree_Scenario1_shows_Tasks(graphics_bool):
     print(f"Bud {a_bud.vow_label}: Labels ({len(a_bud._concept_dict)})")
 
     # WHEN / THEN
-    display_concepttree(a_bud, mode="Task", graphics_bool=graphics_bool)
+    display_concepttree(a_bud, mode="Chore", graphics_bool=graphics_bool)
 
 
 def test_get_bud_accts_plotly_fig_DisplaysCorrectInfo(graphics_bool):
@@ -109,4 +109,4 @@ def test_BudUnit_fund_flow(graphics_bool):
     sue_bud.add_concept(dinner_way, mass=30, pledge=True)
 
     # WHEN / THEN
-    fund_graph0(sue_bud, "Task", graphics_bool)
+    fund_graph0(sue_bud, "Chore", graphics_bool)

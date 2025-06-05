@@ -21,4 +21,4 @@ def test_listen_structures0_ShowsGraphs(graphics_bool):
 def test_fund_graph_ShowsGraph(graphics_bool):
     # ESTABLISH / WHEN
     x_budunit = get_fund_breakdown_bud()
-    fund_graph0(x_budunit, "Task", graphics_bool)
+    fund_graph0(x_budunit, "Chore", graphics_bool)

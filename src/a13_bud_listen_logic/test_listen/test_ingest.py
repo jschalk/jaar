@@ -24,7 +24,7 @@ def test_allocate_irrational_debtit_belief_CorrectlySetsBudAttr():
     assert zia_acctunit._irrational_debtit_belief == zia_debtit_belief
 
 
-def test_generate_perspective_agenda_CorrectlyGrabsAgendaTasks():
+def test_generate_perspective_agenda_CorrectlyGrabsAgendaChores():
     # ESTABLISH
     yao_str = "Yao"
     yao_speaker = budunit_shop(yao_str)
