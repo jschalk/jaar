@@ -292,36 +292,36 @@ def test_RiverRun_levy_tax_due_SetsAttr():
     assert bob_riverrun.get_acct_tax_due(bob_str) == 380, 0
 
     # WHEN / THEN
-    excess_payer_points, tax_got = bob_riverrun.levy_tax_due(bob_str, 5)
-    assert excess_payer_points == 0
+    excess_chargeer_points, tax_got = bob_riverrun.levy_tax_due(bob_str, 5)
+    assert excess_chargeer_points == 0
     assert tax_got == 5
     assert bob_riverrun.get_acct_tax_due(bob_str) == 375
 
     # WHEN /THEN
-    excess_payer_points, tax_got = bob_riverrun.levy_tax_due(bob_str, 375)
-    assert excess_payer_points == 0
+    excess_chargeer_points, tax_got = bob_riverrun.levy_tax_due(bob_str, 375)
+    assert excess_chargeer_points == 0
     assert tax_got == 375
     assert bob_riverrun.get_acct_tax_due(bob_str) == 0
     assert bob_riverrun.acct_has_tax_due(bob_str) is False
 
     # WHEN / THEN
     assert bob_riverrun.get_acct_tax_due(sue_str) == 560
-    excess_payer_points, tax_got = bob_riverrun.levy_tax_due(sue_str, 1000)
-    assert excess_payer_points == 440
+    excess_chargeer_points, tax_got = bob_riverrun.levy_tax_due(sue_str, 1000)
+    assert excess_chargeer_points == 440
     assert tax_got == 560
     assert bob_riverrun.get_acct_tax_due(sue_str) == 0
     assert bob_riverrun.tax_dues.get(sue_str) is None
 
     # WHEN / THEN
     zia_str = "Zia"
-    excess_payer_points, tax_got = bob_riverrun.levy_tax_due(zia_str, 1000)
-    assert excess_payer_points == 1000
+    excess_chargeer_points, tax_got = bob_riverrun.levy_tax_due(zia_str, 1000)
+    assert excess_chargeer_points == 1000
     assert tax_got == 0
     assert bob_riverrun.get_acct_tax_due(zia_str) == 0
 
     # WHEN / THEN
     assert bob_riverrun.get_acct_tax_due(yao_str) == 60
-    excess_payer_points, tax_got = bob_riverrun.levy_tax_due(yao_str, 81)
-    assert excess_payer_points == 21
+    excess_chargeer_points, tax_got = bob_riverrun.levy_tax_due(yao_str, 81)
+    assert excess_chargeer_points == 21
     assert tax_got == 60
     assert bob_riverrun.get_acct_tax_due(yao_str) == 0

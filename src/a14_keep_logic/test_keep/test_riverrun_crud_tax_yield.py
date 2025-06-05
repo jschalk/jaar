@@ -223,16 +223,16 @@ def test_RiverRun_levy_tax_due_SetsAttr():
     assert bob_riverrun.get_acct_tax_yield(bob_str) == 0
 
     # WHEN
-    excess_payer_points, tax_got = bob_riverrun.levy_tax_due(bob_str, 5)
+    excess_chargeer_points, tax_got = bob_riverrun.levy_tax_due(bob_str, 5)
     # THEN
-    assert excess_payer_points == 0
+    assert excess_chargeer_points == 0
     assert bob_riverrun.get_acct_tax_due(bob_str) == 375
     assert bob_riverrun.get_acct_tax_yield(bob_str) == 5
 
     # WHEN
-    excess_payer_points, tax_got = bob_riverrun.levy_tax_due(bob_str, 375)
+    excess_chargeer_points, tax_got = bob_riverrun.levy_tax_due(bob_str, 375)
     # THEN
-    assert excess_payer_points == 0
+    assert excess_chargeer_points == 0
     assert bob_riverrun.get_acct_tax_due(bob_str) == 0
     assert bob_riverrun.get_acct_tax_yield(bob_str) == 380
 
@@ -240,9 +240,9 @@ def test_RiverRun_levy_tax_due_SetsAttr():
     assert bob_riverrun.get_acct_tax_due(sue_str) == 560
     assert bob_riverrun.get_acct_tax_yield(sue_str) == 0
     # WHEN
-    excess_payer_points, tax_got = bob_riverrun.levy_tax_due(sue_str, 1000)
+    excess_chargeer_points, tax_got = bob_riverrun.levy_tax_due(sue_str, 1000)
     # THEN
-    assert excess_payer_points == 440
+    assert excess_chargeer_points == 440
     assert bob_riverrun.get_acct_tax_due(sue_str) == 0
     assert bob_riverrun.get_acct_tax_yield(sue_str) == 560
 
@@ -251,9 +251,9 @@ def test_RiverRun_levy_tax_due_SetsAttr():
     assert bob_riverrun.get_acct_tax_due(zia_str) == 0
     assert bob_riverrun.get_acct_tax_yield(zia_str) == 0
     # WHEN
-    excess_payer_points, tax_got = bob_riverrun.levy_tax_due(zia_str, 1000)
+    excess_chargeer_points, tax_got = bob_riverrun.levy_tax_due(zia_str, 1000)
     # THEN
-    assert excess_payer_points == 1000
+    assert excess_chargeer_points == 1000
     assert bob_riverrun.get_acct_tax_due(zia_str) == 0
     assert bob_riverrun.get_acct_tax_yield(zia_str) == 0
 
@@ -261,9 +261,9 @@ def test_RiverRun_levy_tax_due_SetsAttr():
     assert bob_riverrun.get_acct_tax_due(yao_str) == 60
     assert bob_riverrun.get_acct_tax_yield(yao_str) == 0
     # WHEN
-    excess_payer_points, tax_got = bob_riverrun.levy_tax_due(yao_str, 81)
+    excess_chargeer_points, tax_got = bob_riverrun.levy_tax_due(yao_str, 81)
     # THEN
-    assert excess_payer_points == 21
+    assert excess_chargeer_points == 21
     assert bob_riverrun.get_acct_tax_due(yao_str) == 0
     assert bob_riverrun.get_acct_tax_yield(yao_str) == 60
 

@@ -78,11 +78,11 @@ class RiverCycle:
     def create_cylceledger(self) -> dict[AcctName, float]:
         x_dict = {}
         for x_riverbook in self.riverbooks.values():
-            for payee, pay_amount in x_riverbook._rivergrants.items():
-                if x_dict.get(payee) is None:
-                    x_dict[payee] = pay_amount
+            for chargeee, charge_amount in x_riverbook._rivergrants.items():
+                if x_dict.get(chargeee) is None:
+                    x_dict[chargeee] = charge_amount
                 else:
-                    x_dict[payee] = x_dict[payee] + pay_amount
+                    x_dict[chargeee] = x_dict[chargeee] + charge_amount
         return x_dict
 
 
@@ -117,8 +117,8 @@ def create_next_rivercycle(
         number=prev_rivercycle.number + 1,
         keep_credorledgers=prev_rivercycle.keep_credorledgers,
     )
-    for payer_id, paying_amount in prev_cycle_cycleledger_post_tax.items():
-        next_rivercycle.set_riverbook(payer_id, paying_amount)
+    for chargeer_id, chargeing_amount in prev_cycle_cycleledger_post_tax.items():
+        next_rivercycle.set_riverbook(chargeer_id, chargeing_amount)
     return next_rivercycle
 
 
