@@ -132,7 +132,7 @@ def test_AcctUnit_get_dict_ReturnsDictWithAllAttrDataForJSON():
     }
 
 
-def test_AcctUnit_get_dict_ReturnsDictWith_irrational_missing_plan_ValuesIsZerp():
+def test_AcctUnit_get_dict_ReturnsDictWith__irrational_debtit_belief_ValuesIsZero():
     # ESTABLISH
     bob_str = "Bob"
     bob_acctunit = acctunit_shop(bob_str)
@@ -150,7 +150,7 @@ def test_AcctUnit_get_dict_ReturnsDictWith_irrational_missing_plan_ValuesIsZerp(
     assert len(x_dict.keys()) == 10
 
 
-def test_AcctUnit_get_dict_ReturnsDictWith_irrational_missing_plan_ValuesIsNumber():
+def test_AcctUnit_get_dict_ReturnsDictWith__irrational_debtit_belief_ValuesIsNumber():
     # ESTABLISH
     bob_str = "Bob"
     bob_acctunit = acctunit_shop(bob_str)
@@ -170,7 +170,7 @@ def test_AcctUnit_get_dict_ReturnsDictWith_irrational_missing_plan_ValuesIsNumbe
     assert len(x_dict.keys()) == 12
 
 
-def test_AcctUnit_get_dict_ReturnsDictWith_irrational_missing_plan_ValuesIsNone():
+def test_AcctUnit_get_dict_ReturnsDictWith__irrational_debtit_belief_ValuesIsNone():
     # ESTABLISH
     bob_str = "Bob"
     bob_acctunit = acctunit_shop(bob_str)
