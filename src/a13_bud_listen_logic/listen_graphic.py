@@ -79,7 +79,7 @@ def get_listen_structures1_fig(graphics_bool: bool = False) -> plotly_Figure:
         add_rect_arrow(fig, 1.85, 6.5, 1.75, 6.8, blue_str)
 
         sue_duty_str = f"{sue_str} duty"
-        sue_plan_str = f"{sue_str} plan"
+        sue_vision_str = f"{sue_str} vision"
         d_sue1_p1 = f"Healer = {sue_str} "
         d_sue1_p2 = "Problem = problem1"
         d_sue1_p3 = "Keep = keep1"
@@ -94,19 +94,19 @@ def get_listen_structures1_fig(graphics_bool: bool = False) -> plotly_Figure:
         d_sue2_p4 = f"Money={default_money_magnitude()} "
 
         add_simp_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_str)
-        add_simp_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_plan_str)
+        add_simp_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_vision_str)
         add_rect_arrow(fig, 3.7, 2.1, 3.7, 3.9, green_str)
         add_keep__rect(
             fig, 2.7, 0.7, 4.3, 6.7, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4
         )
         add_simp_rect(fig, 5.0, 4.0, 6.0, 5.0, sue_duty_str)
-        add_simp_rect(fig, 5.0, 1.0, 6.0, 2.0, sue_plan_str)
+        add_simp_rect(fig, 5.0, 1.0, 6.0, 2.0, sue_vision_str)
         add_rect_arrow(fig, 5.7, 2.1, 5.7, 3.9, green_str)
         add_keep__rect(
             fig, 4.7, 0.7, 6.3, 6.7, d_bob1_p1, d_bob1_p2, d_bob1_p3, d_bob1_p4
         )
         add_simp_rect(fig, 7.0, 4.0, 8.0, 5.0, sue_duty_str)
-        add_simp_rect(fig, 7.0, 1.0, 8.0, 2.0, sue_plan_str)
+        add_simp_rect(fig, 7.0, 1.0, 8.0, 2.0, sue_vision_str)
         add_rect_arrow(fig, 7.7, 2.1, 7.7, 3.9, green_str)
         add_keep__rect(
             fig, 6.7, 0.7, 8.3, 6.7, d_sue2_p1, d_sue2_p2, d_sue2_p3, d_sue2_p4
@@ -153,7 +153,7 @@ def get_listen_structures2_fig(graphics_bool: bool = False) -> plotly_Figure:
         add_rect_arrow(fig, 1.71, -1.0, 1.75, -0.8, blue_str)
 
         sue_duty_str = f"{sue_str} duty"
-        sue_plan_str = f"{sue_str} plan"
+        sue_vision_str = f"{sue_str} vision"
         d_sue1_p1 = f"Healer = {sue_str} "
         d_sue1_p2 = "Problem = problem1"
         d_sue1_p3 = "Keep = keep1"
@@ -168,19 +168,19 @@ def get_listen_structures2_fig(graphics_bool: bool = False) -> plotly_Figure:
         d_sue2_p4 = f"Money={default_money_magnitude()} "
 
         add_simp_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_str)
-        add_simp_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_plan_str)
+        add_simp_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_vision_str)
         add_rect_arrow(fig, 3.7, 2.1, 3.7, 3.9, green_str)
         add_keep__rect(
             fig, 2.7, 0.7, 4.3, 6.7, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4
         )
         add_simp_rect(fig, 5.0, 4.0, 6.0, 5.0, sue_duty_str)
-        add_simp_rect(fig, 5.0, 1.0, 6.0, 2.0, sue_plan_str)
+        add_simp_rect(fig, 5.0, 1.0, 6.0, 2.0, sue_vision_str)
         add_rect_arrow(fig, 5.7, 2.1, 5.7, 3.9, green_str)
         add_keep__rect(
             fig, 4.7, 0.7, 6.3, 6.7, d_bob1_p1, d_bob1_p2, d_bob1_p3, d_bob1_p4
         )
         add_simp_rect(fig, 7.0, 4.0, 8.0, 5.0, sue_duty_str)
-        add_simp_rect(fig, 7.0, 1.0, 8.0, 2.0, sue_plan_str)
+        add_simp_rect(fig, 7.0, 1.0, 8.0, 2.0, sue_vision_str)
         add_rect_arrow(fig, 7.7, 2.1, 7.7, 3.9, green_str)
         add_keep__rect(
             fig, 6.7, 0.7, 8.3, 6.7, d_sue2_p1, d_sue2_p2, d_sue2_p3, d_sue2_p4
@@ -234,22 +234,22 @@ def get_listen_structures3_fig(graphics_bool: bool = False) -> plotly_Figure:
         add_rect_arrow(fig, 1.71, -1.0, 1.75, -0.8, blue_str)
 
         sue_duty_str = f"{sue_str} duty"
-        sue_plan_str = f"{sue_str} plan"
-        bob_plan_str = f"{bob_str} plan"
-        yao_plan_str = f"{yao_str} plan"
+        sue_vision_str = f"{sue_str} vision"
+        bob_vision_str = f"{bob_str} vision"
+        yao_vision_str = f"{yao_str} vision"
         d_sue1_p1 = f"Healer = {sue_str} "
         d_sue1_p2 = "Problem = problem1"
         d_sue1_p3 = "Keep = keep1"
         d_sue1_p4 = f"Money = {default_money_magnitude()} "
 
         add_simp_rect(fig, 3.0, 4.0, 4.0, 5.0, sue_duty_str)
-        add_simp_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_plan_str)
+        add_simp_rect(fig, 3.0, 1.0, 4.0, 2.0, sue_vision_str)
         add_rect_arrow(fig, 3.7, 2.1, 3.7, 3.9, green_str)
         add_keep__rect(
             fig, 2.7, 0.7, 8.3, 6.7, d_sue1_p1, d_sue1_p2, d_sue1_p3, d_sue1_p4
         )
-        add_simp_rect(fig, 5.0, 1.0, 6.0, 2.0, yao_plan_str)
-        add_simp_rect(fig, 7.0, 1.0, 8.0, 2.0, bob_plan_str)
+        add_simp_rect(fig, 5.0, 1.0, 6.0, 2.0, yao_vision_str)
+        add_simp_rect(fig, 7.0, 1.0, 8.0, 2.0, bob_vision_str)
 
         green_str = "Green"
         fig.add_trace(

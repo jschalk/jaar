@@ -113,7 +113,7 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
 
     # THEN
     x_dutys_path = create_path(sue_hubunit.keep_dir(), "dutys")
-    x_plans_path = create_path(sue_hubunit.keep_dir(), "plans")
+    x_visions_path = create_path(sue_hubunit.keep_dir(), "visions")
     x_grades_path = create_path(sue_hubunit.keep_dir(), "grades")
 
     assert sue_hubunit.vow_mstr_dir == vow_mstr_dir
@@ -129,16 +129,16 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     assert sue_hubunit.keep_dir() == get_keep_path(x_hubunit, texas_way)
     bob_str = "Bob"
     assert sue_hubunit.dutys_dir() == x_dutys_path
-    assert sue_hubunit.plans_dir() == x_plans_path
+    assert sue_hubunit.visions_dir() == x_visions_path
     assert sue_hubunit.grades_dir() == x_grades_path
     sue_dutys_dir = sue_hubunit.dutys_dir()
-    sue_plans_dir = sue_hubunit.plans_dir()
+    sue_visions_dir = sue_hubunit.visions_dir()
     sue_grades_dir = sue_hubunit.grades_dir()
     x_duty_path = create_path(sue_dutys_dir, f"{bob_str}.json")
-    x_plan_path = create_path(sue_plans_dir, f"{bob_str}.json")
+    x_vision_path = create_path(sue_visions_dir, f"{bob_str}.json")
     x_grade_path = create_path(sue_grades_dir, f"{bob_str}.json")
     assert sue_hubunit.duty_path(bob_str) == x_duty_path
-    assert sue_hubunit.plan_path(bob_str) == x_plan_path
+    assert sue_hubunit.vision_path(bob_str) == x_vision_path
     assert sue_hubunit.grade_path(bob_str) == x_grade_path
     treasury_filename = "treasury.db"
     x_treasury_file_path = create_path(sue_hubunit.keep_dir(), treasury_filename)

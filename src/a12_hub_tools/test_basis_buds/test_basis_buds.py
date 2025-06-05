@@ -35,25 +35,25 @@ def test_create_empty_bud_from_bud_ReturnsObj():
     yao_gut.set_debtor_respect(zia_debtor_pool)
 
     # WHEN
-    yao_empty_plan = create_empty_bud_from_bud(yao_gut, x_owner_name=zia_str)
+    yao_empty_vision = create_empty_bud_from_bud(yao_gut, x_owner_name=zia_str)
 
     # THEN
-    assert yao_empty_plan.owner_name != yao_gut.owner_name
-    assert yao_empty_plan.owner_name == zia_str
-    assert yao_empty_plan.vow_label == yao_gut.vow_label
-    assert yao_empty_plan.last_pack_id is None
-    assert yao_empty_plan.get_acctunits_dict() == {}
-    assert yao_empty_plan.bridge == yao_gut.bridge
-    assert yao_empty_plan.fund_pool == yao_gut.fund_pool
-    assert yao_empty_plan.fund_iota == yao_gut.fund_iota
-    assert yao_empty_plan.respect_bit == yao_gut.respect_bit
-    assert yao_empty_plan.penny == yao_gut.penny
-    assert yao_empty_plan.credor_respect != yao_gut.credor_respect
-    assert yao_empty_plan.credor_respect == validate_respect_num()
-    assert yao_empty_plan.debtor_respect != yao_gut.debtor_respect
-    assert yao_empty_plan.debtor_respect == validate_respect_num()
-    yao_empty_plan.settle_bud()
-    assert yao_empty_plan.accts == {}
+    assert yao_empty_vision.owner_name != yao_gut.owner_name
+    assert yao_empty_vision.owner_name == zia_str
+    assert yao_empty_vision.vow_label == yao_gut.vow_label
+    assert yao_empty_vision.last_pack_id is None
+    assert yao_empty_vision.get_acctunits_dict() == {}
+    assert yao_empty_vision.bridge == yao_gut.bridge
+    assert yao_empty_vision.fund_pool == yao_gut.fund_pool
+    assert yao_empty_vision.fund_iota == yao_gut.fund_iota
+    assert yao_empty_vision.respect_bit == yao_gut.respect_bit
+    assert yao_empty_vision.penny == yao_gut.penny
+    assert yao_empty_vision.credor_respect != yao_gut.credor_respect
+    assert yao_empty_vision.credor_respect == validate_respect_num()
+    assert yao_empty_vision.debtor_respect != yao_gut.debtor_respect
+    assert yao_empty_vision.debtor_respect == validate_respect_num()
+    yao_empty_vision.settle_bud()
+    assert yao_empty_vision.accts == {}
 
 
 def test_create_listen_basis_ReturnsObj():
@@ -79,29 +79,29 @@ def test_create_listen_basis_ReturnsObj():
     yao_duty.set_debtor_respect(zia_debtor_pool)
 
     # WHEN
-    yao_basis_plan = create_listen_basis(yao_duty)
+    yao_basis_vision = create_listen_basis(yao_duty)
 
     # THEN
-    assert yao_basis_plan.owner_name == yao_duty.owner_name
-    assert yao_basis_plan.vow_label == yao_duty.vow_label
-    assert yao_basis_plan.last_pack_id == yao_duty.last_pack_id
-    assert yao_basis_plan.get_acctunits_dict() == yao_duty.get_acctunits_dict()
-    assert yao_basis_plan.bridge == yao_duty.bridge
-    assert yao_basis_plan.fund_pool == yao_duty.fund_pool
-    assert yao_basis_plan.fund_iota == yao_duty.fund_iota
-    assert yao_basis_plan.respect_bit == yao_duty.respect_bit
-    assert yao_basis_plan.credor_respect == yao_duty.credor_respect
-    assert yao_basis_plan.debtor_respect == yao_duty.debtor_respect
-    yao_basis_plan.settle_bud()
-    assert len(yao_basis_plan._concept_dict) != len(yao_duty._concept_dict)
-    assert len(yao_basis_plan._concept_dict) == 1
-    plan_zia_acctunit = yao_basis_plan.get_acct(zia_str)
+    assert yao_basis_vision.owner_name == yao_duty.owner_name
+    assert yao_basis_vision.vow_label == yao_duty.vow_label
+    assert yao_basis_vision.last_pack_id == yao_duty.last_pack_id
+    assert yao_basis_vision.get_acctunits_dict() == yao_duty.get_acctunits_dict()
+    assert yao_basis_vision.bridge == yao_duty.bridge
+    assert yao_basis_vision.fund_pool == yao_duty.fund_pool
+    assert yao_basis_vision.fund_iota == yao_duty.fund_iota
+    assert yao_basis_vision.respect_bit == yao_duty.respect_bit
+    assert yao_basis_vision.credor_respect == yao_duty.credor_respect
+    assert yao_basis_vision.debtor_respect == yao_duty.debtor_respect
+    yao_basis_vision.settle_bud()
+    assert len(yao_basis_vision._concept_dict) != len(yao_duty._concept_dict)
+    assert len(yao_basis_vision._concept_dict) == 1
+    vision_zia_acctunit = yao_basis_vision.get_acct(zia_str)
     assert (
-        yao_basis_plan.get_acctunits_dict().keys()
+        yao_basis_vision.get_acctunits_dict().keys()
         == yao_duty.get_acctunits_dict().keys()
     )
-    assert plan_zia_acctunit._irrational_debtit_belief == 0
-    assert plan_zia_acctunit._inallocable_debtit_belief == 0
+    assert vision_zia_acctunit._irrational_debtit_belief == 0
+    assert vision_zia_acctunit._inallocable_debtit_belief == 0
 
 
 def test_get_default_job_ReturnsObj():

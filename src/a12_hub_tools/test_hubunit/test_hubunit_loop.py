@@ -67,7 +67,7 @@ def test_HubUnit_rj_perspective_bud_ReturnsBudWith_owner_nameSetToHubUnit_owner_
     yao_budunit.set_owner_name(yao_str)
 
     bob_iowa_hubunit = hubunit_shop(env_dir(), a23_str, bob_str, iowa_way)
-    bob_iowa_hubunit.save_plan_bud(yao_budunit)
+    bob_iowa_hubunit.save_vision_bud(yao_budunit)
 
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, iowa_way)

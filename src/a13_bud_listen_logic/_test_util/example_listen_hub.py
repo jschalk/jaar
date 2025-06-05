@@ -19,7 +19,7 @@ def get_texas_hubunit() -> HubUnit:
         vow_label,
         owner_name="Sue",
         keep_way=get_texas_way(),
-        # pipeline_duty_plan_str(),
+        # pipeline_duty_vision_str(),
     )
 
 
@@ -38,5 +38,5 @@ def get_dakota_hubunit() -> HubUnit:
         vow_label,
         owner_name="Sue",
         keep_way=get_dakota_way(),
-        # pipeline_duty_plan_str(),
+        # pipeline_duty_vision_str(),
     )

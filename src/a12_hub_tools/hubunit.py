@@ -86,8 +86,8 @@ def get_keep_dutys_dir(x_keep_dir: str) -> str:
     return create_path(x_keep_dir, "dutys")
 
 
-def get_keep_plans_dir(x_keep_dir: str) -> str:
-    return create_path(x_keep_dir, "plans")
+def get_keep_visions_dir(x_keep_dir: str) -> str:
+    return create_path(x_keep_dir, "visions")
 
 
 def get_keep_grades_dir(x_keep_dir: str) -> str:
@@ -337,8 +337,8 @@ class HubUnit:
     def duty_path(self, owner_name: OwnerName) -> str:
         return create_path(self.dutys_dir(), get_json_filename(owner_name))
 
-    def plan_path(self, owner_name: OwnerName) -> str:
-        return create_path(self.plans_dir(), get_json_filename(owner_name))
+    def vision_path(self, owner_name: OwnerName) -> str:
+        return create_path(self.visions_dir(), get_json_filename(owner_name))
 
     def grade_path(self, owner_name: OwnerName) -> str:
         return create_path(self.grades_dir(), get_json_filename(owner_name))
@@ -346,15 +346,15 @@ class HubUnit:
     def dutys_dir(self) -> str:
         return get_keep_dutys_dir(self.keep_dir())
 
-    def plans_dir(self) -> str:
-        return get_keep_plans_dir(self.keep_dir())
+    def visions_dir(self) -> str:
+        return get_keep_visions_dir(self.keep_dir())
 
     def grades_dir(self) -> str:
         return get_keep_grades_dir(self.keep_dir())
 
-    def get_plans_dir_filenames_list(self) -> list[str]:
+    def get_visions_dir_filenames_list(self) -> list[str]:
         try:
-            return list(get_dir_file_strs(self.plans_dir(), True).keys())
+            return list(get_dir_file_strs(self.visions_dir(), True).keys())
         except Exception:
             return []
 
@@ -362,9 +362,9 @@ class HubUnit:
         x_filename = get_json_filename(x_bud.owner_name)
         save_file(self.dutys_dir(), x_filename, x_bud.get_json())
 
-    def save_plan_bud(self, x_bud: BudUnit) -> None:
+    def save_vision_bud(self, x_bud: BudUnit) -> None:
         x_filename = get_json_filename(x_bud.owner_name)
-        save_file(self.plans_dir(), x_filename, x_bud.get_json())
+        save_file(self.visions_dir(), x_filename, x_bud.get_json())
 
     def initialize_job_file(self, gut: BudUnit) -> None:
         save_job_file(self.vow_mstr_dir, get_default_job(gut))
@@ -372,8 +372,8 @@ class HubUnit:
     def duty_file_exists(self, owner_name: OwnerName) -> bool:
         return os_path_exists(self.duty_path(owner_name))
 
-    def plan_file_exists(self, owner_name: OwnerName) -> bool:
-        return os_path_exists(self.plan_path(owner_name))
+    def vision_file_exists(self, owner_name: OwnerName) -> bool:
+        return os_path_exists(self.vision_path(owner_name))
 
     def get_duty_bud(self, owner_name: OwnerName) -> BudUnit:
         if self.duty_file_exists(owner_name) is False:
@@ -381,17 +381,17 @@ class HubUnit:
         file_content = open_file(self.dutys_dir(), get_json_filename(owner_name))
         return budunit_get_from_json(file_content)
 
-    def get_plan_bud(self, owner_name: OwnerName) -> BudUnit:
-        if self.plan_file_exists(owner_name) is False:
+    def get_vision_bud(self, owner_name: OwnerName) -> BudUnit:
+        if self.vision_file_exists(owner_name) is False:
             return None
-        file_content = open_file(self.plans_dir(), get_json_filename(owner_name))
+        file_content = open_file(self.visions_dir(), get_json_filename(owner_name))
         return budunit_get_from_json(file_content)
 
     def delete_duty_file(self, owner_name: OwnerName) -> None:
         delete_dir(self.duty_path(owner_name))
 
-    def delete_plan_file(self, owner_name: OwnerName) -> None:
-        delete_dir(self.plan_path(owner_name))
+    def delete_vision_file(self, owner_name: OwnerName) -> None:
+        delete_dir(self.vision_path(owner_name))
 
     def delete_treasury_db_file(self) -> None:
         delete_dir(self.treasury_db_path())
@@ -416,13 +416,13 @@ class HubUnit:
             bridge=self.bridge,
             respect_bit=self.respect_bit,
         )
-        return speaker_hubunit.get_plan_bud(speaker_id)
+        return speaker_hubunit.get_vision_bud(speaker_id)
 
     def rj_perspective_bud(
         self, healer_name: OwnerName, speaker_id: OwnerName
     ) -> BudUnit:
-        speaker_plan = self.rj_speaker_bud(healer_name, speaker_id)
-        return self.get_perspective_bud(speaker_plan)
+        speaker_vision = self.rj_speaker_bud(healer_name, speaker_id)
+        return self.get_perspective_bud(speaker_vision)
 
     def get_keep_ways(self) -> set[WayTerm]:
         x_gut_bud = open_gut_file(self.vow_mstr_dir, self.vow_label, self.owner_name)

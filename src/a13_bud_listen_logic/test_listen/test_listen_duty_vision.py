@@ -14,8 +14,8 @@ from src.a13_bud_listen_logic._test_util.a13_env import (
 )
 from src.a13_bud_listen_logic._test_util.example_listen_hub import get_texas_hubunit
 from src.a13_bud_listen_logic.listen import (
-    create_plan_file_from_duty_file,
-    listen_to_owner_plans,
+    create_vision_file_from_duty_file,
+    listen_to_owner_visions,
 )
 
 
@@ -112,7 +112,7 @@ def get_example_yao_bud() -> BudUnit:
     return yao_speaker
 
 
-def get_example_yao_plan1_speaker() -> BudUnit:
+def get_example_yao_vision1_speaker() -> BudUnit:
     yao_str = "Yao"
     yao_speaker = get_example_yao_bud()
     yao_speaker.del_concept_obj(run_way())
@@ -127,7 +127,7 @@ def get_example_yao_plan1_speaker() -> BudUnit:
     return yao_speaker
 
 
-def get_example_yao_plan2_speaker() -> BudUnit:
+def get_example_yao_vision2_speaker() -> BudUnit:
     yao_str = "Yao"
     yao_speaker = get_example_yao_bud()
     yao_speaker.del_concept_obj(run_way())
@@ -148,7 +148,7 @@ def get_example_yao_plan2_speaker() -> BudUnit:
     return yao_speaker
 
 
-def get_example_yao_plan3_speaker() -> BudUnit:
+def get_example_yao_vision3_speaker() -> BudUnit:
     yao_speaker = get_example_yao_bud()
     yao_speaker.del_concept_obj(run_way())
     yao_speaker.set_acct_respect(10)
@@ -271,14 +271,14 @@ def get_example_yao_gut_with_3_healers():
     return yao_gut
 
 
-def test_listen_to_owner_plans_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItself(
+def test_listen_to_owner_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItself(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     # yao0_gut with 3 debotors of different credit_beliefs
-    # yao_plan1 with 1 chore, fact that doesn't make that chore active
-    # yao_plan2 with 2 chores, one is equal fact that makes chore active
-    # yao_plan3 with 1 new chore, fact stays with it
+    # yao_vision1 with 1 chore, fact that doesn't make that chore active
+    # yao_vision2 with 2 chores, one is equal fact that makes chore active
+    # yao_vision3 with 1 new chore, fact stays with it
     vow_mstr_dir = env_dir()
     vow_label = get_default_vow_label()
     yao_gut0 = get_example_yao_gut_with_3_healers()
@@ -298,31 +298,31 @@ def test_listen_to_owner_plans_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItself
     # print(f"{yao_gut0._concept_dict.keys()=}")
 
     yao_str = yao_gut0.owner_name
-    yao_plan1 = get_example_yao_plan1_speaker()
-    yao_plan2 = get_example_yao_plan2_speaker()
-    yao_plan3 = get_example_yao_plan3_speaker()
+    yao_vision1 = get_example_yao_vision1_speaker()
+    yao_vision2 = get_example_yao_vision2_speaker()
+    yao_vision3 = get_example_yao_vision3_speaker()
     yao_iowa_hubunit = get_yao_iowa_hubunit()
     yao_ohio_hubunit = get_yao_ohio_hubunit()
     zia_utah_hubunit = get_zia_utah_hubunit()
     # delete_dir(yao_iowa_hubunit.owners_dir())
     assert gut_file_exists(vow_mstr_dir, vow_label, yao_str) is False
     assert job_file_exists(vow_mstr_dir, vow_label, yao_str) is False
-    assert yao_iowa_hubunit.plan_file_exists(yao_str) is False
-    assert yao_ohio_hubunit.plan_file_exists(yao_str) is False
-    assert zia_utah_hubunit.plan_file_exists(yao_str) is False
+    assert yao_iowa_hubunit.vision_file_exists(yao_str) is False
+    assert yao_ohio_hubunit.vision_file_exists(yao_str) is False
+    assert zia_utah_hubunit.vision_file_exists(yao_str) is False
     print(f"{yao_gut0.get_fact(get_location_way())=}")
     save_gut_file(env_dir(), yao_gut0)
-    # yao_iowa_hubunit.save_plan_bud(yao_plan1)
-    # yao_ohio_hubunit.save_plan_bud(yao_plan2)
-    # zia_utah_hubunit.save_plan_bud(yao_plan3)
+    # yao_iowa_hubunit.save_vision_bud(yao_vision1)
+    # yao_ohio_hubunit.save_vision_bud(yao_vision2)
+    # zia_utah_hubunit.save_vision_bud(yao_vision3)
     assert gut_file_exists(vow_mstr_dir, vow_label, yao_str)
-    assert yao_iowa_hubunit.plan_file_exists(yao_str) is False
-    assert yao_ohio_hubunit.plan_file_exists(yao_str) is False
-    assert zia_utah_hubunit.plan_file_exists(yao_str) is False
+    assert yao_iowa_hubunit.vision_file_exists(yao_str) is False
+    assert yao_ohio_hubunit.vision_file_exists(yao_str) is False
+    assert zia_utah_hubunit.vision_file_exists(yao_str) is False
 
     # WHEN
     assert job_file_exists(vow_mstr_dir, vow_label, yao_str) is False
-    listen_to_owner_plans(yao_iowa_hubunit)
+    listen_to_owner_visions(yao_iowa_hubunit)
     assert job_file_exists(vow_mstr_dir, vow_label, yao_str)
 
     yao_job = open_job_file(vow_mstr_dir, vow_label, yao_str)
@@ -355,20 +355,20 @@ def test_listen_to_owner_plans_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItself
     assert yao_job != yao_gut0
 
 
-def test_create_plan_file_from_duty_file_CreatesEmptyplan(env_dir_setup_cleanup):
+def test_create_vision_file_from_duty_file_CreatesEmptyvision(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
     yao_duty = budunit_shop(yao_str)
     sue_texas_hubunit = get_texas_hubunit()
     sue_texas_hubunit.save_duty_bud(yao_duty)
-    assert sue_texas_hubunit.plan_file_exists(yao_str) is False
+    assert sue_texas_hubunit.vision_file_exists(yao_str) is False
 
     # WHEN
-    create_plan_file_from_duty_file(sue_texas_hubunit, yao_str)
+    create_vision_file_from_duty_file(sue_texas_hubunit, yao_str)
 
     # ESTABLISH
-    assert sue_texas_hubunit.plan_file_exists(yao_str)
-    yao_plan = sue_texas_hubunit.get_plan_bud(yao_str)
-    assert yao_plan.owner_name is not None
-    assert yao_plan.owner_name == yao_str
-    assert yao_plan.get_dict() == yao_duty.get_dict()
+    assert sue_texas_hubunit.vision_file_exists(yao_str)
+    yao_vision = sue_texas_hubunit.get_vision_bud(yao_str)
+    assert yao_vision.owner_name is not None
+    assert yao_vision.owner_name == yao_str
+    assert yao_vision.get_dict() == yao_duty.get_dict()

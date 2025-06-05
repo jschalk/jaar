@@ -57,7 +57,7 @@ from src.a12_hub_tools.hub_tool import (
 )
 from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop
 from src.a13_bud_listen_logic.listen import (
-    create_plan_file_from_duty_file,
+    create_vision_file_from_duty_file,
     listen_to_agendas_create_init_job_from_guts,
     listen_to_debtors_roll_jobs_into_job,
     listen_to_speaker_agenda,
@@ -86,10 +86,10 @@ class VowUnit:
     """Data pipelines:
     pipeline1: packs->gut
     pipeline2: gut->dutys
-    pipeline3: duty->plan
-    pipeline4: plan->job
+    pipeline3: duty->vision
+    pipeline4: vision->job
     pipeline5: gut->job (direct)
-    pipeline6: gut->plan->job (through plans)
+    pipeline6: gut->vision->job (through visions)
     pipeline7: packs->job (could be 5 of 6)
     """
 
@@ -178,7 +178,7 @@ class VowUnit:
                 self.vow_label,
                 healer_name,
                 keep_way=None,
-                # "duty_plan",
+                # "duty_vision",
                 bridge=self.bridge,
                 respect_bit=self.respect_bit,
             )
@@ -215,14 +215,14 @@ class VowUnit:
                     vow_label=self.vow_label,
                     owner_name=healer_name,
                     keep_way=keep_way,
-                    # "duty_plan",
+                    # "duty_vision",
                     bridge=self.bridge,
                     respect_bit=self.respect_bit,
                 )
                 keep_hubunit.save_duty_bud(x_gut)
-                create_plan_file_from_duty_file(keep_hubunit, owner_name)
-                x_plan = keep_hubunit.get_plan_bud(owner_name)
-                x_job = listen_to_speaker_agenda(x_job, x_plan)
+                create_vision_file_from_duty_file(keep_hubunit, owner_name)
+                x_vision = keep_hubunit.get_vision_bud(owner_name)
+                x_job = listen_to_speaker_agenda(x_job, x_vision)
         return x_job
 
     # job bud management

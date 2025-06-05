@@ -113,7 +113,7 @@ def test_HubUnit_delete_duty_file_DeletesBudFile(env_dir_setup_cleanup):
     assert texas_hubunit.duty_file_exists(sue_str) is False
 
 
-def test_HubUnit_save_plan_bud_CorrectlySavesFile(env_dir_setup_cleanup):
+def test_HubUnit_save_vision_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
@@ -127,16 +127,16 @@ def test_HubUnit_save_plan_bud_CorrectlySavesFile(env_dir_setup_cleanup):
     bob_str = "Bob"
     bob_bud = get_budunit_with_4_levels()
     bob_bud.set_owner_name(bob_str)
-    assert sue_hubunit.plan_file_exists(bob_str) is False
+    assert sue_hubunit.vision_file_exists(bob_str) is False
 
     # WHEN
-    sue_hubunit.save_plan_bud(bob_bud)
+    sue_hubunit.save_vision_bud(bob_bud)
 
     # THEN
-    assert sue_hubunit.plan_file_exists(bob_str)
+    assert sue_hubunit.vision_file_exists(bob_str)
 
 
-def test_HubUnit_plan_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
+def test_HubUnit_vision_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
@@ -150,16 +150,16 @@ def test_HubUnit_plan_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
     bob_str = "Bob"
     bob_bud = get_budunit_with_4_levels()
     bob_bud.set_owner_name(bob_str)
-    assert sue_hubunit.plan_file_exists(bob_str) is False
+    assert sue_hubunit.vision_file_exists(bob_str) is False
 
     # WHEN
-    sue_hubunit.save_plan_bud(bob_bud)
+    sue_hubunit.save_vision_bud(bob_bud)
 
     # THEN
-    assert sue_hubunit.plan_file_exists(bob_str)
+    assert sue_hubunit.vision_file_exists(bob_str)
 
 
-def test_HubUnit_get_plan_bud_PopensFile(env_dir_setup_cleanup):
+def test_HubUnit_get_vision_bud_PopensFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
@@ -173,13 +173,13 @@ def test_HubUnit_get_plan_bud_PopensFile(env_dir_setup_cleanup):
     bob_str = "Bob"
     bob_bud = get_budunit_with_4_levels()
     bob_bud.set_owner_name(bob_str)
-    sue_hubunit.save_plan_bud(bob_bud)
+    sue_hubunit.save_vision_bud(bob_bud)
 
     # WHEN / THEN
-    assert sue_hubunit.get_plan_bud(bob_str).get_dict() == bob_bud.get_dict()
+    assert sue_hubunit.get_vision_bud(bob_str).get_dict() == bob_bud.get_dict()
 
 
-def test_HubUnit_get_plan_bud_ReturnsNoneIfFileDoesNotExist(env_dir_setup_cleanup):
+def test_HubUnit_get_vision_bud_ReturnsNoneIfFileDoesNotExist(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
@@ -193,23 +193,23 @@ def test_HubUnit_get_plan_bud_ReturnsNoneIfFileDoesNotExist(env_dir_setup_cleanu
     bob_str = "Bob"
 
     # WHEN / THEN
-    assert sue_hubunit.get_plan_bud(bob_str) is None
+    assert sue_hubunit.get_vision_bud(bob_str) is None
 
 
-def test_HubUnit_delete_plan_file_DeletesBudFile(env_dir_setup_cleanup):
+def test_HubUnit_delete_vision_file_DeletesBudFile(env_dir_setup_cleanup):
     # ESTABLISH
     texas_hubunit = get_texas_hubunit()
     sue_bud = get_budunit_with_4_levels()
     sue_str = sue_bud.owner_name
-    texas_hubunit.save_plan_bud(sue_bud)
-    print(f"{texas_hubunit.plan_path(sue_str)=}")
-    assert texas_hubunit.plan_file_exists(sue_str)
+    texas_hubunit.save_vision_bud(sue_bud)
+    print(f"{texas_hubunit.vision_path(sue_str)=}")
+    assert texas_hubunit.vision_file_exists(sue_str)
 
     # WHEN
-    texas_hubunit.delete_plan_file(sue_str)
+    texas_hubunit.delete_vision_file(sue_str)
 
     # THEN
-    assert texas_hubunit.plan_file_exists(sue_str) is False
+    assert texas_hubunit.vision_file_exists(sue_str) is False
 
 
 def test_HubUnit_delete_treasury_db_file_DeletesFile(env_dir_setup_cleanup):
