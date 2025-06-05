@@ -20,7 +20,7 @@ def test_get_fisc_dict_from_voice_tables_ReturnsObj_With_fisunit_Attrs_Scenario0
     a23_c400_number = 3
     a23_yr1_jan1_offset = 7
     a23_monthday_distortion = 9
-    a23_fund_coin = 13
+    a23_fund_iota = 13
     a23_penny = 17
     a23_respect_bit = 23
     a23_bridge = "."
@@ -35,7 +35,7 @@ def test_get_fisc_dict_from_voice_tables_ReturnsObj_With_fisunit_Attrs_Scenario0
 , c400_number
 , yr1_jan1_offset
 , monthday_distortion
-, fund_coin
+, fund_iota
 , penny
 , respect_bit
 , bridge
@@ -46,7 +46,7 @@ VALUES (
 , {a23_c400_number}
 , {a23_yr1_jan1_offset}
 , {a23_monthday_distortion}
-, {a23_fund_coin}
+, {a23_fund_iota}
 , {a23_penny}
 , {a23_respect_bit}
 , '{a23_bridge}'
@@ -66,7 +66,7 @@ VALUES (
     assert a23_timeline_dict.get("c400_number") == a23_c400_number
     assert a23_timeline_dict.get("yr1_jan1_offset") == a23_yr1_jan1_offset
     assert a23_timeline_dict.get("monthday_distortion") == a23_monthday_distortion
-    assert a23_dict.get("fund_coin") == a23_fund_coin
+    assert a23_dict.get("fund_iota") == a23_fund_iota
     assert a23_dict.get("penny") == a23_penny
     assert a23_dict.get("respect_bit") == a23_respect_bit
     assert a23_dict.get("bridge") == a23_bridge
@@ -91,7 +91,7 @@ def test_get_fisc_dict_from_voice_tables_ReturnsObj_With_fisunit_Attrs_Scenario1
     assert a23_dict
     assert a23_dict.get("fisc_label") == a23_str
     assert "timeline" in set(a23_dict.keys())
-    assert a23_dict.get("fund_coin") is None
+    assert a23_dict.get("fund_iota") is None
     assert a23_dict.get("penny") is None
     assert a23_dict.get("respect_bit") is None
     assert a23_dict.get("bridge") is None
@@ -373,7 +373,7 @@ def test_get_fisc_dict_from_voice_tables_ReturnsObj_IsCorrectlyFormatted_Scenari
     a23_c400_number = 3
     a23_yr1_jan1_offset = 7
     a23_monthday_distortion = 9
-    a23_fund_coin = 13
+    a23_fund_iota = 13
     a23_penny = 17
     a23_respect_bit = 23
     a23_bridge = "."
@@ -388,7 +388,7 @@ def test_get_fisc_dict_from_voice_tables_ReturnsObj_IsCorrectlyFormatted_Scenari
 , c400_number
 , yr1_jan1_offset
 , monthday_distortion
-, fund_coin
+, fund_iota
 , penny
 , respect_bit
 , bridge
@@ -399,7 +399,7 @@ VALUES (
 , {a23_c400_number}
 , {a23_yr1_jan1_offset}
 , {a23_monthday_distortion}
-, {a23_fund_coin}
+, {a23_fund_iota}
 , {a23_penny}
 , {a23_respect_bit}
 , '{a23_bridge}'
@@ -416,7 +416,7 @@ VALUES (
     assert a23_fiscunit.timeline.c400_number == a23_c400_number
     assert a23_fiscunit.timeline.yr1_jan1_offset == a23_yr1_jan1_offset
     assert a23_fiscunit.timeline.monthday_distortion == a23_monthday_distortion
-    assert a23_fiscunit.fund_coin == a23_fund_coin
+    assert a23_fiscunit.fund_iota == a23_fund_iota
     assert a23_fiscunit.penny == a23_penny
     assert a23_fiscunit.respect_bit == a23_respect_bit
     assert a23_fiscunit.bridge == a23_bridge

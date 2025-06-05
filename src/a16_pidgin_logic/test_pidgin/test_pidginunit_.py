@@ -13,7 +13,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     fcontext_str,
     fopen_str,
     fstate_str,
-    fund_coin_str,
+    fund_iota_str,
     group_title_str,
     healer_name_str,
     labor_title_str,
@@ -94,7 +94,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("fisc_label") == LabelTerm_str()
     assert pidgin_args_class_types.get("fnigh") == "float"
     assert pidgin_args_class_types.get("fopen") == "float"
-    assert pidgin_args_class_types.get("fund_coin") == "float"
+    assert pidgin_args_class_types.get("fund_iota") == "float"
     assert pidgin_args_class_types.get("fund_pool") == "float"
     assert pidgin_args_class_types.get("give_force") == "float"
     assert pidgin_args_class_types.get("gogo_want") == "float"
@@ -140,7 +140,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert fisc_args.issubset(pidgin_args)
     assert atom_args.intersection(fisc_args) == {
         acct_name_str(),
-        fund_coin_str(),
+        fund_iota_str(),
         penny_str(),
         respect_bit_str(),
     }

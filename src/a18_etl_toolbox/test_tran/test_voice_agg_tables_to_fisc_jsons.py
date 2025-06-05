@@ -111,7 +111,7 @@ def test_get_fisc_voice_select1_sqlstrs_ReturnsObj():
         assert gen_fisweek_sqlstr == fisweek_sql
         assert gen_fisoffi_sqlstr == fisoffi_sql
         assert gen_fisunit_sqlstr == fisunit_sql
-        static_example_sqlstr = f"SELECT fisc_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations FROM fiscunit_v_agg WHERE fisc_label = '{a23_str}'"
+        static_example_sqlstr = f"SELECT fisc_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, bridge, job_listen_rotations FROM fiscunit_v_agg WHERE fisc_label = '{a23_str}'"
         assert gen_fisunit_sqlstr == static_example_sqlstr
 
 

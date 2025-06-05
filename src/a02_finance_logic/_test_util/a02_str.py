@@ -25,8 +25,8 @@ def fisc_label_str() -> str:
     return "fisc_label"
 
 
-def fund_coin_str() -> str:
-    return "fund_coin"
+def fund_iota_str() -> str:
+    return "fund_iota"
 
 
 def fund_pool_str() -> str:

@@ -387,7 +387,7 @@
                 "column_order": 2,
                 "sqlite_datatype": "REAL"
             },
-            "fund_coin": {
+            "fund_iota": {
                 "class_type": "float",
                 "column_order": 1,
                 "sqlite_datatype": "REAL"

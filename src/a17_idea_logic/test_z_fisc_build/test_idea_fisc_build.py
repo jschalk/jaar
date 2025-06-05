@@ -5,10 +5,7 @@ from src.a07_calendar_logic.chrono import (
     timelineunit_shop,
 )
 from src.a15_fisc_logic.fisc import fiscunit_shop
-from src.a17_idea_logic._test_util.a17_env import (
-    env_dir_setup_cleanup,
-    idea_fiscs_dir,
-)
+from src.a17_idea_logic._test_util.a17_env import env_dir_setup_cleanup, idea_fiscs_dir
 from src.a17_idea_logic._test_util.idea_df_examples import (
     get_ex1_br00000_df,
     get_ex1_br00001_df,
@@ -37,7 +34,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscLabel(
     br00003_df = get_ex1_br00003_df()
     br00004_df = get_ex1_br00004_df()
     br00005_df = get_ex1_br00005_df()
-    x_fund_coin = 55
+    x_fund_iota = 55
     x_respect_bit = 66
     x_penny = 77
     x_job_listen_rotations = 7
@@ -53,7 +50,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscLabel(
         br00003_df,
         br00004_df,
         br00005_df,
-        x_fund_coin,
+        x_fund_iota,
         x_respect_bit,
         x_penny,
         x_fiscs_dir,
@@ -66,7 +63,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscLabel(
     expected_accord23_fiscunit = fiscunit_shop(
         fisc_label=accord23_str,
         fisc_mstr_dir=x_fiscs_dir,
-        fund_coin=x_fund_coin,
+        fund_iota=x_fund_iota,
         penny=x_penny,
         respect_bit=x_respect_bit,
         bridge=slash_str,
@@ -87,7 +84,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario0_OneFiscLabel(
         amount=888,
     )
     gen_fiscunit = x_fiscunits.get(accord23_str)
-    assert gen_fiscunit.fund_coin == x_fund_coin
+    assert gen_fiscunit.fund_iota == x_fund_iota
     assert gen_fiscunit.respect_bit == x_respect_bit
     assert gen_fiscunit.penny == x_penny
     assert gen_fiscunit.fisc_label == accord23_str
@@ -113,7 +110,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscLabels(
     br00003_df = get_ex2_br00003_df()
     br00004_df = get_ex2_br00004_df()
     br00005_df = get_ex2_br00005_df()
-    x_fund_coin = 55
+    x_fund_iota = 55
     x_respect_bit = 66
     x_penny = 77
     x_fiscs_dir = create_path(idea_fiscs_dir(), "fizz")
@@ -128,7 +125,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscLabels(
         br00003_df,
         br00004_df,
         br00005_df,
-        x_fund_coin,
+        x_fund_iota,
         x_respect_bit,
         x_penny,
         x_fiscs_dir,
@@ -139,7 +136,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscLabels(
     accord23_fiscunit = fiscunit_shop(
         fisc_label=accord23_str,
         fisc_mstr_dir=x_fiscs_dir,
-        fund_coin=x_fund_coin,
+        fund_iota=x_fund_iota,
         penny=x_penny,
         respect_bit=x_respect_bit,
         bridge=slash_str,
@@ -149,7 +146,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscLabels(
     jeffy45_fiscunit = fiscunit_shop(
         fisc_label="jeffy45",
         fisc_mstr_dir=x_fiscs_dir,
-        fund_coin=x_fund_coin,
+        fund_iota=x_fund_iota,
         penny=x_penny,
         respect_bit=x_respect_bit,
         bridge=",",
@@ -158,7 +155,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscLabels(
     assert x_fiscunits
     assert x_fiscunits.get(accord23_str) != None
     creg_fiscunit = x_fiscunits.get(accord23_str)
-    assert creg_fiscunit.fund_coin == x_fund_coin
+    assert creg_fiscunit.fund_iota == x_fund_iota
     assert creg_fiscunit.respect_bit == x_respect_bit
     assert creg_fiscunit.penny == x_penny
     assert creg_fiscunit.fisc_label == accord23_str
@@ -169,7 +166,7 @@ def test_fisc_build_from_df_ReturnsObj_Scenario1_TwoFiscLabels(
     # assert creg_fiscunit == accord23_fiscunit
 
     five_fiscunit = x_fiscunits.get("jeffy45")
-    assert five_fiscunit.fund_coin == x_fund_coin
+    assert five_fiscunit.fund_iota == x_fund_iota
     assert five_fiscunit.respect_bit == x_respect_bit
     assert five_fiscunit.penny == x_penny
     assert five_fiscunit.fisc_label == "jeffy45"

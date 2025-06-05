@@ -162,7 +162,7 @@ def get_idea_elements_sort_order() -> list[str]:
         "problem_bool",
         "take_force",
         "tally",
-        "fund_coin",
+        "fund_iota",
         "penny",
         "respect_bit",
         "amount",
@@ -376,7 +376,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "_fund_cease": "REAL",
         "_fund_onset": "REAL",
         "_fund_ratio": "REAL",
-        "fund_coin": "REAL",
+        "fund_iota": "REAL",
         "_fund_agenda_give": "REAL",
         "_fund_agenda_ratio_give": "REAL",
         "_fund_agenda_ratio_take": "REAL",
@@ -694,7 +694,7 @@ def get_idea_format_filename(idea_number: str) -> str:
 
 def get_idea_format_headers() -> dict[str, list[str]]:
     return {
-        "fisc_label,timeline_label,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,bridge,job_listen_rotations": idea_format_00000_fiscunit_v0_0_0(),
+        "fisc_label,timeline_label,c400_number,yr1_jan1_offset,monthday_distortion,fund_iota,penny,respect_bit,bridge,job_listen_rotations": idea_format_00000_fiscunit_v0_0_0(),
         "fisc_label,owner_name,deal_time,quota,celldepth": idea_format_00001_fisc_dealunit_v0_0_0(),
         "fisc_label,owner_name,acct_name,tran_time,amount": idea_format_00002_fisc_cashbook_v0_0_0(),
         "fisc_label,cumlative_minute,hour_label": idea_format_00003_fisc_timeline_hour_v0_0_0(),
@@ -714,7 +714,7 @@ def get_idea_format_headers() -> dict[str, list[str]]:
         "fisc_label,owner_name,concept_way,rcontext,pstate,pnigh,popen,pdivisor": idea_format_00026_bud_concept_reason_premiseunit_v0_0_0(),
         "fisc_label,owner_name,concept_way,rcontext,rconcept_active_requisite": idea_format_00027_bud_concept_reasonunit_v0_0_0(),
         "fisc_label,owner_name,concept_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool": idea_format_00028_bud_conceptunit_v0_0_0(),
-        "fisc_label,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit": idea_format_00029_budunit_v0_0_0(),
+        "fisc_label,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_iota,penny,respect_bit": idea_format_00029_budunit_v0_0_0(),
         "fisc_label,owner_name,concept_way,healer_name,problem_bool": idea_format_00036_problem_healer_v0_0_0(),
         "otx_title,inx_title,otx_bridge,inx_bridge,unknown_str": idea_format_00042_pidgin_title_v0_0_0(),
         "otx_name,inx_name,otx_bridge,inx_bridge,unknown_str": idea_format_00043_pidgin_name_v0_0_0(),

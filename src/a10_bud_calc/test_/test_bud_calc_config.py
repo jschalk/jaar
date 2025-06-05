@@ -93,7 +93,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     fnigh_str,
     fopen_str,
     fstate_str,
-    fund_coin_str,
+    fund_iota_str,
     fund_pool_str,
     gogo_want_str,
     group_title_str,
@@ -271,7 +271,7 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
         "_all_acct_debt",
         "_descendant_pledge_count",
         "_fund_ratio",
-        "fund_coin",
+        "fund_iota",
         "_fund_onset",
         "_fund_cease",
         "_healerlink_ratio",
@@ -301,7 +301,7 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
         "_fund_agenda_take",
         "_credor_pool",
         "_debtor_pool",
-        "fund_coin",
+        "fund_iota",
     }
     assert expected_budgrou_jmetrics_keys == budgrou_jmetrics_keys
 
@@ -463,7 +463,7 @@ def test_get_bud_calc_dimen_args_ReturnsObj():
         "_healerlink_ratio",
         "_level",
         "_task",
-        "fund_coin",
+        "fund_iota",
         "_fund_ratio",
         "_range_evaluated",
         "problem_bool",
@@ -482,7 +482,7 @@ def test_get_bud_calc_dimen_args_ReturnsObj():
         "_fund_agenda_give",
         "_fund_agenda_take",
         "_fund_take",
-        "fund_coin",
+        "fund_iota",
     }
 
 
@@ -602,8 +602,8 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, budgrou, jm, _fund_agenda_take_str()) == "REAL"
     assert g_class_type(cfig, budgrou, jm, _fund_take_str()) == "float"
     assert g_sqlitetype(cfig, budgrou, jm, _fund_take_str()) == "REAL"
-    assert g_class_type(cfig, budgrou, jm, fund_coin_str()) == "float"
-    assert g_sqlitetype(cfig, budgrou, jm, fund_coin_str()) == "REAL"
+    assert g_class_type(cfig, budgrou, jm, fund_iota_str()) == "float"
+    assert g_sqlitetype(cfig, budgrou, jm, fund_iota_str()) == "REAL"
 
     assert g_class_type(cfig, budawar, jk, awardee_title_str()) == TitleTerm_str()
     assert g_sqlitetype(cfig, budawar, jk, awardee_title_str()) == "TEXT"
@@ -675,8 +675,8 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, budconc, jm, _descendant_pledge_count_str()) == "INTEGER"
     assert g_class_type(cfig, budconc, jm, _fund_cease_str()) == "float"
     assert g_sqlitetype(cfig, budconc, jm, _fund_cease_str()) == "REAL"
-    assert g_class_type(cfig, budconc, jm, fund_coin_str()) == "float"
-    assert g_sqlitetype(cfig, budconc, jm, fund_coin_str()) == "REAL"
+    assert g_class_type(cfig, budconc, jm, fund_iota_str()) == "float"
+    assert g_sqlitetype(cfig, budconc, jm, fund_iota_str()) == "REAL"
     assert g_class_type(cfig, budconc, jm, _fund_onset_str()) == "float"
     assert g_sqlitetype(cfig, budconc, jm, _fund_onset_str()) == "REAL"
     assert g_class_type(cfig, budconc, jm, _fund_ratio_str()) == "float"
@@ -731,8 +731,8 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, budunit, jv, credor_respect_str()) == "REAL"
     assert g_class_type(cfig, budunit, jv, debtor_respect_str()) == "float"
     assert g_sqlitetype(cfig, budunit, jv, debtor_respect_str()) == "REAL"
-    assert g_class_type(cfig, budunit, jv, fund_coin_str()) == "float"
-    assert g_sqlitetype(cfig, budunit, jv, fund_coin_str()) == "REAL"
+    assert g_class_type(cfig, budunit, jv, fund_iota_str()) == "float"
+    assert g_sqlitetype(cfig, budunit, jv, fund_iota_str()) == "REAL"
     assert g_class_type(cfig, budunit, jv, fund_pool_str()) == "float"
     assert g_sqlitetype(cfig, budunit, jv, fund_pool_str()) == "REAL"
     assert g_class_type(cfig, budunit, jv, max_tree_traverse_str()) == "int"
@@ -878,7 +878,7 @@ def test_get_bud_calc_args_type_dict_ReturnsObj():
     assert bud_calc_args_type_dict.get(_tree_traverse_count_str()) == "int"
     assert bud_calc_args_type_dict.get(credor_respect_str()) == "float"
     assert bud_calc_args_type_dict.get(debtor_respect_str()) == "float"
-    assert bud_calc_args_type_dict.get(fund_coin_str()) == "float"
+    assert bud_calc_args_type_dict.get(fund_iota_str()) == "float"
     assert bud_calc_args_type_dict.get(fund_pool_str()) == "float"
     assert bud_calc_args_type_dict.get(max_tree_traverse_str()) == "int"
     assert bud_calc_args_type_dict.get(penny_str()) == "float"

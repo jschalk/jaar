@@ -15,7 +15,7 @@
         "fisc_label": {
             "otx_key": true
         },
-        "fund_coin": {
+        "fund_iota": {
             "otx_key": false
         },
         "fund_pool": {

@@ -532,8 +532,8 @@ def fund_graph0(
         "Fund Source is ConceptRoot. Each Concept fund range calculated by mass "
     )
     d_sue1_p1 = "ConceptRoot Fund ranges: Black arrows. Sum of childless Concept's funds equal conceptroot's fund "
-    d_sue1_p2 = "Regular Fund: Green arrows, all fund_coins end up at AcctUnits"
-    d_sue1_p3 = "Agenda Fund: Blue arrows, fund_coins from active tasks"
+    d_sue1_p2 = "Regular Fund: Green arrows, all fund_iotas end up at AcctUnits"
+    d_sue1_p3 = "Agenda Fund: Blue arrows, fund_iotas from active tasks"
     d_sue1_p4 = f"fund_pool = {x_bud.fund_pool} "
     fig.add_trace(
         plotly_Scatter(

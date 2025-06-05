@@ -1,6 +1,6 @@
 # Idea Manifest
 
-- [`br00000`](ideas/br00000.md): event_int, face_name, fisc_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations
+- [`br00000`](ideas/br00000.md): event_int, face_name, fisc_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, bridge, job_listen_rotations
 - [`br00001`](ideas/br00001.md): event_int, face_name, fisc_label, owner_name, deal_time, quota, celldepth
 - [`br00002`](ideas/br00002.md): event_int, face_name, fisc_label, owner_name, acct_name, tran_time, amount
 - [`br00003`](ideas/br00003.md): event_int, face_name, fisc_label, cumlative_minute, hour_label
@@ -20,7 +20,7 @@
 - [`br00026`](ideas/br00026.md): event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pstate, pnigh, popen, pdivisor
 - [`br00027`](ideas/br00027.md): event_int, face_name, fisc_label, owner_name, concept_way, rcontext, rconcept_active_requisite
 - [`br00028`](ideas/br00028.md): event_int, face_name, fisc_label, owner_name, concept_way, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool
-- [`br00029`](ideas/br00029.md): event_int, face_name, fisc_label, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_coin, penny, respect_bit
+- [`br00029`](ideas/br00029.md): event_int, face_name, fisc_label, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit
 - [`br00036`](ideas/br00036.md): event_int, face_name, fisc_label, owner_name, concept_way, healer_name, problem_bool
 - [`br00042`](ideas/br00042.md): event_int, face_name, otx_title, inx_title, otx_bridge, inx_bridge, unknown_str
 - [`br00043`](ideas/br00043.md): event_int, face_name, otx_name, inx_name, otx_bridge, inx_bridge, unknown_str

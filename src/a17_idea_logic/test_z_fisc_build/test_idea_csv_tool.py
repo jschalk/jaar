@@ -62,7 +62,7 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyFiscUnit(
 
     # THEN
     expected_stance_csv_strs = {
-        "br00000": "fisc_label,timeline_label,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,bridge,job_listen_rotations\n",
+        "br00000": "fisc_label,timeline_label,c400_number,yr1_jan1_offset,monthday_distortion,fund_iota,penny,respect_bit,bridge,job_listen_rotations\n",
         "br00001": "fisc_label,owner_name,deal_time,quota,celldepth\n",
         "br00002": "fisc_label,owner_name,acct_name,tran_time,amount\n",
         "br00003": "fisc_label,cumlative_minute,hour_label\n",
@@ -78,7 +78,7 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyFiscUnit(
         "br00026": "fisc_label,owner_name,concept_way,rcontext,pstate,pnigh,popen,pdivisor\n",
         "br00027": "fisc_label,owner_name,concept_way,rcontext,rconcept_active_requisite\n",
         "br00028": "fisc_label,owner_name,concept_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool\n",
-        "br00029": "fisc_label,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit\n",
+        "br00029": "fisc_label,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_iota,penny,respect_bit\n",
         "br00042": "otx_title,inx_title,otx_bridge,inx_bridge,unknown_str\n",
         "br00043": "otx_name,inx_name,otx_bridge,inx_bridge,unknown_str\n",
         "br00044": "otx_label,inx_label,otx_bridge,inx_bridge,unknown_str\n",
@@ -146,7 +146,7 @@ def test_add_fiscunit_to_stance_csv_strs_ReturnsObj_Scenario0_OneFiscUnit(
     br00004_df = get_ex2_br00004_df()
     br00005_df = get_ex2_br00005_df()
     # br00006_df = get_ex2_br00006_df()
-    x_fund_coin = 1
+    x_fund_iota = 1
     x_respect_bit = 1
     x_penny = 1
     x_fiscs_dir = create_path(idea_fiscs_dir(), "fizz")
@@ -157,7 +157,7 @@ def test_add_fiscunit_to_stance_csv_strs_ReturnsObj_Scenario0_OneFiscUnit(
         br00003_df,
         br00004_df,
         br00005_df,
-        x_fund_coin,
+        x_fund_iota,
         x_respect_bit,
         x_penny,
         x_fiscs_dir,
@@ -216,7 +216,7 @@ def test_add_fiscunits_to_stance_csv_strs_ReturnsObj_Scenario1_TwoFiscUnits(
     br00003_df = get_ex2_br00003_df()
     br00004_df = get_ex2_br00004_df()
     br00005_df = get_ex2_br00005_df()
-    x_fund_coin = 1
+    x_fund_iota = 1
     x_respect_bit = 1
     x_penny = 1
     x_fiscs_dir = create_path(idea_fiscs_dir(), "fizz")
@@ -227,7 +227,7 @@ def test_add_fiscunits_to_stance_csv_strs_ReturnsObj_Scenario1_TwoFiscUnits(
         br00003_df,
         br00004_df,
         br00005_df,
-        x_fund_coin,
+        x_fund_iota,
         x_respect_bit,
         x_penny,
         x_fiscs_dir,
@@ -561,7 +561,7 @@ def test_add_bud_to_br00029_csv_ReturnsObj():
     bob_bud.fund_pool = 777
     bob_bud.max_tree_traverse = 3
     bob_bud.tally = 10
-    bob_bud.fund_coin = 12
+    bob_bud.fund_iota = 12
     bob_bud.penny = 13
     bob_bud.respect_bit = 15
     csv_header = x_ideas.get("br00029")
@@ -571,7 +571,7 @@ def test_add_bud_to_br00029_csv_ReturnsObj():
     x_csv = add_bud_to_br00029_csv(csv_header, bob_bud, csv_delimiter)
 
     # THEN
-    bud_row = f",,{a23_str},{bob_str},{bob_bud.credor_respect},{bob_bud.debtor_respect},{bob_bud.fund_pool},{bob_bud.max_tree_traverse},{bob_bud.tally},{bob_bud.fund_coin},{bob_bud.penny},{bob_bud.respect_bit}\n"
+    bud_row = f",,{a23_str},{bob_str},{bob_bud.credor_respect},{bob_bud.debtor_respect},{bob_bud.fund_pool},{bob_bud.max_tree_traverse},{bob_bud.tally},{bob_bud.fund_iota},{bob_bud.penny},{bob_bud.respect_bit}\n"
     assert x_csv == f"{csv_header}{bud_row}"
 
 
@@ -1106,7 +1106,7 @@ def test_add_pack_to_br00029_csv_ReturnsObj():
     bob_bud.fund_pool = 999
     bob_bud.max_tree_traverse = 3
     bob_bud.tally = 10
-    bob_bud.fund_coin = 3
+    bob_bud.fund_iota = 3
     bob_bud.penny = 13
     bob_bud.respect_bit = 2
     bob_buddelta = buddelta_shop()
@@ -1122,7 +1122,7 @@ def test_add_pack_to_br00029_csv_ReturnsObj():
     x_csv = add_pack_to_br00029_csv(csv_header, sue7_pack, csv_delimiter)
 
     # THEN
-    bud_row = f"{sue_str},{event7},{a23_str},{bob_str},{bob_bud.credor_respect},{bob_bud.debtor_respect},{bob_bud.fund_pool},,{bob_bud.tally},{bob_bud.fund_coin},,{bob_bud.respect_bit}\n"
+    bud_row = f"{sue_str},{event7},{a23_str},{bob_str},{bob_bud.credor_respect},{bob_bud.debtor_respect},{bob_bud.fund_pool},,{bob_bud.tally},{bob_bud.fund_iota},,{bob_bud.respect_bit}\n"
     assert x_csv == f"{csv_header}{bud_row}"
 
 
@@ -1152,7 +1152,7 @@ def test_add_packunit_to_stance_csv_strs_ReturnsObj():
     bob_bud.fund_pool = 999
     bob_bud.max_tree_traverse = 3
     bob_bud.tally = 10
-    bob_bud.fund_coin = 3
+    bob_bud.fund_iota = 3
     bob_bud.penny = 13
     bob_bud.respect_bit = 2
     bob_buddelta = buddelta_shop()

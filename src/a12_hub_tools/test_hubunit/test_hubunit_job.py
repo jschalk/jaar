@@ -51,7 +51,7 @@ def test_HubUnit_initialize_job_file_CorrectlyDoesNotOverwrite(
     fisc_mstr_dir = env_dir()
     sue_fisc_dir = create_path(fisc_mstr_dir, root_label())
     sue_fund_pool = 50000
-    sue_fund_coin = 5
+    sue_fund_iota = 5
     sue_bit = 25
     sue_hubunit = hubunit_shop(
         fisc_mstr_dir,
@@ -59,14 +59,14 @@ def test_HubUnit_initialize_job_file_CorrectlyDoesNotOverwrite(
         sue_str,
         None,
         fund_pool=sue_fund_pool,
-        fund_coin=sue_fund_coin,
+        fund_iota=sue_fund_iota,
         respect_bit=sue_bit,
     )
     sue_bud = budunit_shop(
         sue_str,
         root_label(),
         fund_pool=sue_fund_pool,
-        fund_coin=sue_fund_coin,
+        fund_iota=sue_fund_iota,
         respect_bit=sue_bit,
     )
     sue_hubunit.initialize_job_file(sue_bud)
@@ -86,7 +86,7 @@ def test_HubUnit_initialize_job_file_CorrectlyDoesNotOverwrite(
     assert job.fisc_label == root_label()
     assert job.owner_name == sue_str
     assert job.fund_pool == sue_fund_pool
-    assert job.fund_coin == sue_fund_coin
+    assert job.fund_iota == sue_fund_iota
     assert job.respect_bit == sue_bit
 
 

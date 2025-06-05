@@ -7,7 +7,7 @@ from src.a02_finance_logic._test_util.a02_str import (
     owner_name_str,
 )
 from src.a02_finance_logic.finance_config import (
-    default_fund_coin_if_None,
+    default_fund_iota_if_None,
     default_RespectBit_if_None,
     filter_penny,
     validate_fund_pool,
@@ -26,7 +26,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     _tree_traverse_count_str,
     credor_respect_str,
     debtor_respect_str,
-    fund_coin_str,
+    fund_iota_str,
     last_pack_id_str,
     max_tree_traverse_str,
     penny_str,
@@ -52,7 +52,7 @@ def test_BudUnit_Exists():
     assert x_bud.max_tree_traverse is None
     assert x_bud.bridge is None
     assert x_bud.fund_pool is None
-    assert x_bud.fund_coin is None
+    assert x_bud.fund_iota is None
     assert x_bud.respect_bit is None
     assert x_bud.penny is None
     assert x_bud.last_pack_id is None
@@ -93,7 +93,7 @@ def test_BudUnit_Exists():
         debtor_respect_str(),
         "_groupunits",
         fisc_label_str(),
-        fund_coin_str(),
+        fund_iota_str(),
         fund_pool_str(),
         last_pack_id_str(),
         max_tree_traverse_str(),
@@ -111,7 +111,7 @@ def test_budunit_shop_ReturnsObjectWithFilledFields():
     iowa_fisc_label = "Iowa"
     slash_bridge = "/"
     x_fund_pool = 555
-    x_fund_coin = 7
+    x_fund_iota = 7
     x_respect_bit = 5
     x_penny = 1
 
@@ -121,7 +121,7 @@ def test_budunit_shop_ReturnsObjectWithFilledFields():
         fisc_label=iowa_fisc_label,
         bridge=slash_bridge,
         fund_pool=x_fund_pool,
-        fund_coin=x_fund_coin,
+        fund_iota=x_fund_iota,
         respect_bit=x_respect_bit,
         penny=x_penny,
     )
@@ -136,7 +136,7 @@ def test_budunit_shop_ReturnsObjectWithFilledFields():
     assert x_bud.max_tree_traverse == 3
     assert x_bud.bridge == slash_bridge
     assert x_bud.fund_pool == x_fund_pool
-    assert x_bud.fund_coin == x_fund_coin
+    assert x_bud.fund_iota == x_fund_iota
     assert x_bud.respect_bit == x_respect_bit
     assert x_bud.penny == x_penny
     assert x_bud.credor_respect == validate_respect_num()
@@ -169,10 +169,10 @@ def test_budunit_shop_ReturnsObjectWithCorrectEmptyField():
     assert x_bud.fisc_label == root_label()
     assert x_bud.bridge == default_bridge_if_None()
     assert x_bud.fund_pool == validate_fund_pool()
-    assert x_bud.fund_coin == default_fund_coin_if_None()
+    assert x_bud.fund_iota == default_fund_iota_if_None()
     assert x_bud.respect_bit == default_RespectBit_if_None()
     assert x_bud.penny == filter_penny()
-    assert x_bud.conceptroot.fund_coin == x_bud.fund_coin
+    assert x_bud.conceptroot.fund_iota == x_bud.fund_iota
     assert x_bud.conceptroot.bridge == x_bud.bridge
     assert x_bud.conceptroot.root
     assert x_bud.conceptroot._uid == 1
@@ -306,7 +306,7 @@ def test_BudUnit_set_fund_pool_RaisesErrorWhenArgIsNotMultiple():
     zia_bud = budunit_shop(zia_str)
     x_fund_pool = 23
     zia_bud.set_fund_pool(x_fund_pool)
-    assert zia_bud.fund_coin == 1
+    assert zia_bud.fund_iota == 1
     assert zia_bud.fund_pool == x_fund_pool
 
     # WHEN
@@ -315,5 +315,5 @@ def test_BudUnit_set_fund_pool_RaisesErrorWhenArgIsNotMultiple():
         zia_bud.set_fund_pool(new_fund_pool)
     assert (
         str(excinfo.value)
-        == f"Bud '{zia_str}' cannot set fund_pool='{new_fund_pool}'. It is not divisible by fund_coin '{zia_bud.fund_coin}'"
+        == f"Bud '{zia_str}' cannot set fund_pool='{new_fund_pool}'. It is not divisible by fund_iota '{zia_bud.fund_iota}'"
     )

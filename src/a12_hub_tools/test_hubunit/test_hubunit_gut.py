@@ -29,7 +29,7 @@ def test_HubUnit_default_gut_bud_ReturnsObj():
         keep_way=None,
         bridge=slash_str,
         fund_pool=x_fund_pool,
-        fund_coin=pnine_float,
+        fund_iota=pnine_float,
         respect_bit=pnine_float,
         penny=pfour_float,
     )
@@ -42,7 +42,7 @@ def test_HubUnit_default_gut_bud_ReturnsObj():
     assert sue_default_gut.owner_name == sue_hubunit.owner_name
     assert sue_default_gut.bridge == sue_hubunit.bridge
     assert sue_default_gut.fund_pool == sue_hubunit.fund_pool
-    assert sue_default_gut.fund_coin == sue_hubunit.fund_coin
+    assert sue_default_gut.fund_iota == sue_hubunit.fund_iota
     assert sue_default_gut.respect_bit == sue_hubunit.respect_bit
     assert sue_default_gut.penny == sue_hubunit.penny
     assert sue_default_gut.last_pack_id == init_pack_id()

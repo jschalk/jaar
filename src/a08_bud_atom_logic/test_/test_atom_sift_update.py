@@ -70,7 +70,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_budunit():
     sue_bit = 34
     sue_credor_respect = 44
     sue_debtor_respect = 54
-    sue_fund_coin = 66
+    sue_fund_iota = 66
     sue_fund_pool = 69
     sue_max_tree_traverse = 72
     sue_penny = 2
@@ -79,7 +79,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_budunit():
     zia_atom.set_arg("respect_bit", sue_bit)
     zia_atom.set_arg("credor_respect", sue_credor_respect)
     zia_atom.set_arg("debtor_respect", sue_debtor_respect)
-    zia_atom.set_arg("fund_coin", sue_fund_coin)
+    zia_atom.set_arg("fund_iota", sue_fund_iota)
     zia_atom.set_arg("fund_pool", sue_fund_pool)
     zia_atom.set_arg("max_tree_traverse", sue_max_tree_traverse)
     zia_atom.set_arg("penny", sue_penny)
@@ -97,7 +97,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_budunit():
         "respect_bit": sue_bit,
         "credor_respect": sue_credor_respect,
         "debtor_respect": sue_debtor_respect,
-        "fund_coin": sue_fund_coin,
+        "fund_iota": sue_fund_iota,
         "fund_pool": sue_fund_pool,
         "max_tree_traverse": sue_max_tree_traverse,
         "penny": sue_penny,

@@ -2,12 +2,12 @@ from src.a00_data_toolbox.file_toolbox import create_path, save_file
 from src.a01_term_logic.way import default_bridge_if_None
 from src.a02_finance_logic._test_util.a02_str import bridge_str, fisc_label_str
 from src.a02_finance_logic.finance_config import (
-    default_fund_coin_if_None,
+    default_fund_iota_if_None,
     default_RespectBit_if_None,
     filter_penny,
 )
 from src.a06_bud_logic._test_util.a06_str import (
-    fund_coin_str,
+    fund_iota_str,
     penny_str,
     respect_bit_str,
 )
@@ -70,7 +70,7 @@ def test_FiscUnit_get_dict_ReturnsObjWith_cashbook():
     assert x_dict.get(timeline_str()) == get_default_timeline_config_dict()
     assert x_dict.get(offi_times_str) == list(a45_offi_times)
     assert x_dict.get(bridge_str()) == default_bridge_if_None()
-    assert x_dict.get(fund_coin_str()) == default_fund_coin_if_None()
+    assert x_dict.get(fund_iota_str()) == default_fund_iota_if_None()
     assert x_dict.get(respect_bit_str()) == default_RespectBit_if_None()
     assert x_dict.get(penny_str()) == filter_penny()
     assert x_dict.get(brokerunits_str()) == accord_fisc._get_brokerunits_dict()
@@ -81,7 +81,7 @@ def test_FiscUnit_get_dict_ReturnsObjWith_cashbook():
         offi_times_str,
         brokerunits_str(),
         bridge_str(),
-        fund_coin_str(),
+        fund_iota_str(),
         respect_bit_str(),
         penny_str(),
         cashbook_str(),
@@ -104,7 +104,7 @@ def test_FiscUnit_get_dict_ReturnsObjWithOut_cashbook():
         f"{offi_time_str()}s",
         brokerunits_str(),
         bridge_str(),
-        fund_coin_str(),
+        fund_iota_str(),
         respect_bit_str(),
         penny_str(),
     }
@@ -143,7 +143,7 @@ def test_get_from_dict_ReturnsFiscUnit_Scenario0_WithParameters():
     sue_timeline_label = "sue casa"
     accord_fisc.timeline.timeline_label = sue_timeline_label
     sue_bridge = "/"
-    sue_fund_coin = 0.3
+    sue_fund_iota = 0.3
     sue_respect_bit = 2
     sue_penny = 3
     bob_str = "Bob"
@@ -160,7 +160,7 @@ def test_get_from_dict_ReturnsFiscUnit_Scenario0_WithParameters():
     accord_fisc.add_dealunit(sue_str, sue_x4_deal_time, sue_x4_quota)
     accord_fisc.add_dealunit(sue_str, sue_x7_deal_time, sue_x7_quota)
     accord_fisc.bridge = sue_bridge
-    accord_fisc.fund_coin = sue_fund_coin
+    accord_fisc.fund_iota = sue_fund_iota
     accord_fisc.respect_bit = sue_respect_bit
     accord_fisc.penny = sue_penny
     accord_fisc.add_cashpurchase(
@@ -179,7 +179,7 @@ def test_get_from_dict_ReturnsFiscUnit_Scenario0_WithParameters():
     assert x_fisc.timeline.timeline_label == sue_timeline_label
     assert x_fisc.offi_times == a45_offi_times
     assert x_fisc.bridge == sue_bridge
-    assert x_fisc.fund_coin == sue_fund_coin
+    assert x_fisc.fund_iota == sue_fund_iota
     assert x_fisc.respect_bit == sue_respect_bit
     assert x_fisc.penny == sue_penny
     assert x_fisc.brokerunits == accord_fisc.brokerunits
@@ -197,7 +197,7 @@ def test_get_from_dict_ReturnsFiscUnit_Scenario1_WithOutParameters():
     x_dict = accord_fisc.get_dict()
     x_dict["timeline"] = {}
     x_dict.pop("bridge")
-    x_dict.pop("fund_coin")
+    x_dict.pop("fund_iota")
     x_dict.pop("respect_bit")
     x_dict.pop("penny")
 
@@ -211,7 +211,7 @@ def test_get_from_dict_ReturnsFiscUnit_Scenario1_WithOutParameters():
     assert generated_fisc.timeline == accord_fisc.timeline
     assert generated_fisc.offi_times == set()
     assert generated_fisc.bridge == default_bridge_if_None()
-    assert generated_fisc.fund_coin == default_fund_coin_if_None()
+    assert generated_fisc.fund_iota == default_fund_iota_if_None()
     assert generated_fisc.respect_bit == default_RespectBit_if_None()
     assert generated_fisc.penny == 1
     assert generated_fisc.brokerunits == accord_fisc.brokerunits
@@ -228,7 +228,7 @@ def test_get_from_json_ReturnsFiscUnit():
     accord_fisc.timeline.timeline_label = sue_timeline_label
     sue_offi_time_max = 23
     sue_bridge = "/"
-    sue_fund_coin = 0.3
+    sue_fund_iota = 0.3
     sue_respect_bit = 2
     sue_penny = 3
     bob_str = "Bob"
@@ -243,7 +243,7 @@ def test_get_from_json_ReturnsFiscUnit():
     accord_fisc.add_dealunit(sue_str, sue_x4_deal_time, sue_x4_quota)
     accord_fisc.add_dealunit(sue_str, sue_x7_deal_time, sue_x7_quota)
     accord_fisc.bridge = sue_bridge
-    accord_fisc.fund_coin = sue_fund_coin
+    accord_fisc.fund_iota = sue_fund_iota
     accord_fisc.respect_bit = sue_respect_bit
     accord_fisc.penny = sue_penny
     accord_json = accord_fisc.get_json()
@@ -255,7 +255,7 @@ def test_get_from_json_ReturnsFiscUnit():
     assert x_fisc.fisc_label == accord45_str
     assert x_fisc.timeline.timeline_label == sue_timeline_label
     assert x_fisc.bridge == sue_bridge
-    assert x_fisc.fund_coin == sue_fund_coin
+    assert x_fisc.fund_iota == sue_fund_iota
     assert x_fisc.respect_bit == sue_respect_bit
     assert x_fisc.penny == sue_penny
     assert x_fisc.brokerunits == accord_fisc.brokerunits

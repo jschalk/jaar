@@ -32,8 +32,8 @@ def test_BudUnit_get_dict_ReturnsObj_Scenario1_large_json():
     yao_bud.originunit.set_originhold(yao_str, 1)
     yao_fund_pool = 23000
     yao_bud.fund_pool = yao_fund_pool
-    yao_fund_coin = 23
-    yao_bud.fund_coin = yao_fund_coin
+    yao_fund_iota = 23
+    yao_bud.fund_iota = yao_fund_iota
     bud_tally = 23
     yao_bud.tally = bud_tally
     x_credor_respect = 22
@@ -55,7 +55,7 @@ def test_BudUnit_get_dict_ReturnsObj_Scenario1_large_json():
     assert bud_dict["tally"] == yao_bud.tally
     assert bud_dict["tally"] == bud_tally
     assert bud_dict["fund_pool"] == yao_fund_pool
-    assert bud_dict["fund_coin"] == yao_fund_coin
+    assert bud_dict["fund_iota"] == yao_fund_iota
     assert bud_dict["max_tree_traverse"] == yao_bud.max_tree_traverse
     assert bud_dict["bridge"] == yao_bud.bridge
     assert bud_dict["credor_respect"] == yao_bud.credor_respect
@@ -164,8 +164,8 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     zia_bud = get_budunit_x1_3levels_1reason_1facts()
     x_fund_pool = 66000
     zia_bud.fund_pool = x_fund_pool
-    x_fund_coin = 66
-    zia_bud.fund_coin = x_fund_coin
+    x_fund_iota = 66
+    zia_bud.fund_iota = x_fund_iota
     x_respect_bit = 7
     zia_bud.respect_bit = x_respect_bit
     x_penny = 0.3
@@ -195,7 +195,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     assert bud_dict["fisc_label"] == zia_bud.fisc_label
     assert bud_dict["tally"] == zia_bud.tally
     assert bud_dict["fund_pool"] == zia_bud.fund_pool
-    assert bud_dict["fund_coin"] == zia_bud.fund_coin
+    assert bud_dict["fund_iota"] == zia_bud.fund_iota
     assert bud_dict["respect_bit"] == zia_bud.respect_bit
     assert bud_dict["penny"] == zia_bud.penny
     assert bud_dict["credor_respect"] == zia_bud.credor_respect
@@ -296,8 +296,8 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     zia_bud.set_fisc_label(tiger_fisc_label)
     zia_fund_pool = 80000
     zia_bud.fund_pool = zia_fund_pool
-    zia_fund_coin = 8
-    zia_bud.fund_coin = zia_fund_coin
+    zia_fund_iota = 8
+    zia_bud.fund_iota = zia_fund_iota
     zia_resepect_bit = 5
     zia_bud.respect_bit = zia_resepect_bit
     zia_penny = 2
@@ -361,8 +361,8 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     assert json_bud.fisc_label == zia_bud.fisc_label
     assert json_bud.fund_pool == zia_fund_pool
     assert json_bud.fund_pool == zia_bud.fund_pool
-    assert json_bud.fund_coin == zia_fund_coin
-    assert json_bud.fund_coin == zia_bud.fund_coin
+    assert json_bud.fund_iota == zia_fund_iota
+    assert json_bud.fund_iota == zia_bud.fund_iota
     assert json_bud.respect_bit == zia_resepect_bit
     assert json_bud.respect_bit == zia_bud.respect_bit
     assert json_bud.penny == zia_penny
@@ -384,8 +384,8 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     assert json_conceptroot.reasonunits == {}
     assert json_conceptroot.laborunit == zia_bud.conceptroot.laborunit
     assert json_conceptroot.laborunit == run_laborunit
-    assert json_conceptroot.fund_coin == 8
-    assert json_conceptroot.fund_coin == zia_fund_coin
+    assert json_conceptroot.fund_iota == 8
+    assert json_conceptroot.fund_iota == zia_fund_iota
     assert len(json_conceptroot.factunits) == 1
     assert len(json_conceptroot.awardlinks) == 1
 
@@ -561,7 +561,7 @@ def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
     ccn2_bud = ccn_dict_of_obj.get(x2_bud.owner_name)
     assert ccn2_bud.conceptroot.concept_label == x2_bud.conceptroot.concept_label
     assert ccn2_bud.conceptroot.parent_way == x2_bud.conceptroot.parent_way
-    assert ccn2_bud.conceptroot.fund_coin == x2_bud.conceptroot.fund_coin
+    assert ccn2_bud.conceptroot.fund_iota == x2_bud.conceptroot.fund_iota
     shave_way = ccn2_bud.make_l1_way("shave")
     wk_way = ccn2_bud.make_l1_way("wkdays")
     # assert ccn2_bud.get_concept_obj(shave_way) == x2_bud.get_concept_obj(shave_way)

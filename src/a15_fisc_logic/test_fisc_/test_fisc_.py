@@ -3,7 +3,7 @@ from src.a00_data_toolbox.file_toolbox import create_path, get_json_filename, se
 from src.a01_term_logic.way import default_bridge_if_None
 from src.a02_finance_logic.deal import tranbook_shop
 from src.a02_finance_logic.finance_config import (
-    default_fund_coin_if_None,
+    default_fund_iota_if_None,
     default_RespectBit_if_None,
     filter_penny,
 )
@@ -47,7 +47,7 @@ def test_FiscUnit_Exists():
     assert not accord_fisc.cashbook
     assert not accord_fisc.offi_times
     assert not accord_fisc.bridge
-    assert not accord_fisc.fund_coin
+    assert not accord_fisc.fund_iota
     assert not accord_fisc.respect_bit
     assert not accord_fisc.penny
     assert not accord_fisc.job_listen_rotations
@@ -74,7 +74,7 @@ def test_fiscunit_shop_ReturnsFiscUnit():
     assert a23_fisc.cashbook == tranbook_shop(a23_str)
     assert a23_fisc.offi_times == set()
     assert a23_fisc.bridge == default_bridge_if_None()
-    assert a23_fisc.fund_coin == default_fund_coin_if_None()
+    assert a23_fisc.fund_iota == default_fund_iota_if_None()
     assert a23_fisc.respect_bit == default_RespectBit_if_None()
     assert a23_fisc.penny == filter_penny()
     assert a23_fisc.fisc_mstr_dir == get_module_temp_dir()
@@ -103,7 +103,7 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_bridge(env_dir_setup_cleanup):
     # ESTABLISH
     a23_str = "accord23"
     slash_str = "/"
-    x_fund_coin = 7.0
+    x_fund_iota = 7.0
     x_respect_bit = 9
     x_penny = 3
     a45_offi_times = {12, 15}
@@ -116,7 +116,7 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_bridge(env_dir_setup_cleanup):
         offi_times=a45_offi_times,
         in_memory_journal=True,
         bridge=slash_str,
-        fund_coin=x_fund_coin,
+        fund_iota=x_fund_iota,
         respect_bit=x_respect_bit,
         penny=x_penny,
         job_listen_rotations=x_job_listen_rotations,
@@ -124,7 +124,7 @@ def test_fiscunit_shop_ReturnsFiscUnitWith_bridge(env_dir_setup_cleanup):
 
     # THEN
     assert a23_fisc.bridge == slash_str
-    assert a23_fisc.fund_coin == x_fund_coin
+    assert a23_fisc.fund_iota == x_fund_iota
     assert a23_fisc.respect_bit == x_respect_bit
     assert a23_fisc.penny == x_penny
     assert a23_fisc.offi_times == a45_offi_times
@@ -186,14 +186,14 @@ def test_FiscUnit_create_empty_bud_from_fisc_ReturnsObj_Scenario0(
     fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     slash_str = "/"
-    x_fund_coin = 4
+    x_fund_iota = 4
     x_respect_bit = 5
     x_penny = 6
     a23_fisc = fiscunit_shop(
         a23_str,
         fisc_mstr_dir,
         bridge=slash_str,
-        fund_coin=x_fund_coin,
+        fund_iota=x_fund_iota,
         respect_bit=x_respect_bit,
         penny=x_penny,
     )
@@ -204,7 +204,7 @@ def test_FiscUnit_create_empty_bud_from_fisc_ReturnsObj_Scenario0(
 
     # THEN
     assert generated_bud.bridge == slash_str
-    assert generated_bud.fund_coin == x_fund_coin
+    assert generated_bud.fund_iota == x_fund_iota
     assert generated_bud.respect_bit == x_respect_bit
     assert generated_bud.penny == x_penny
 
@@ -238,14 +238,14 @@ def test_FiscUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario2_owner_dir_Ex
     fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     slash_str = "/"
-    x_fund_coin = 4
+    x_fund_iota = 4
     x_respect_bit = 5
     x_penny = 6
     a23_fisc = fiscunit_shop(
         a23_str,
         fisc_mstr_dir,
         bridge=slash_str,
-        fund_coin=x_fund_coin,
+        fund_iota=x_fund_iota,
         respect_bit=x_respect_bit,
         penny=x_penny,
     )
@@ -263,7 +263,7 @@ def test_FiscUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario2_owner_dir_Ex
     assert gut_file_exists(fisc_mstr_dir, a23_str, sue_str)
     generated_gut = open_gut_file(fisc_mstr_dir, a23_str, sue_str)
     assert generated_gut.bridge == slash_str
-    assert generated_gut.fund_coin == x_fund_coin
+    assert generated_gut.fund_iota == x_fund_iota
     assert generated_gut.respect_bit == x_respect_bit
     assert generated_gut.penny == x_penny
 
@@ -300,13 +300,13 @@ def test_FiscUnit_create_init_job_from_guts_Scenario0_CreatesFile(
     fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     slash_str = "/"
-    x_fund_coin = 4
+    x_fund_iota = 4
     x_respect_bit = 5
     a23_fisc = fiscunit_shop(
         a23_str,
         fisc_mstr_dir,
         bridge=slash_str,
-        fund_coin=x_fund_coin,
+        fund_iota=x_fund_iota,
         respect_bit=x_respect_bit,
         in_memory_journal=True,
     )
@@ -328,13 +328,13 @@ def test_FiscUnit_create_init_job_from_guts_Scenario1_ReplacesFile(
     fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     slash_str = "/"
-    x_fund_coin = 4
+    x_fund_iota = 4
     x_respect_bit = 5
     a23_fisc = fiscunit_shop(
         a23_str,
         fisc_mstr_dir,
         bridge=slash_str,
-        fund_coin=x_fund_coin,
+        fund_iota=x_fund_iota,
         respect_bit=x_respect_bit,
         in_memory_journal=True,
     )
@@ -359,13 +359,13 @@ def test_FiscUnit_create_init_job_from_guts_Scenario2_job_Has_gut_Accts(
     fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     slash_str = "/"
-    x_fund_coin = 4
+    x_fund_iota = 4
     x_respect_bit = 5
     a23_fisc = fiscunit_shop(
         a23_str,
         fisc_mstr_dir,
         bridge=slash_str,
-        fund_coin=x_fund_coin,
+        fund_iota=x_fund_iota,
         respect_bit=x_respect_bit,
         in_memory_journal=True,
     )
@@ -391,13 +391,13 @@ def test_FiscUnit_create_init_job_from_guts_Scenario3_gut_FilesAreListenedTo(
     fisc_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     slash_str = "/"
-    x_fund_coin = 4
+    x_fund_iota = 4
     x_respect_bit = 5
     a23_fisc = fiscunit_shop(
         a23_str,
         fisc_mstr_dir,
         bridge=slash_str,
-        fund_coin=x_fund_coin,
+        fund_iota=x_fund_iota,
         respect_bit=x_respect_bit,
         in_memory_journal=True,
     )

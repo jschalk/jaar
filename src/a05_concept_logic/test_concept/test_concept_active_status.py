@@ -103,7 +103,7 @@ def test_ConceptUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithVa
     }
     sport_str = "sport"
     sport_concept = conceptunit_shop(sport_str, _awardheirs=x_awardheirs)
-    assert sport_concept.fund_coin == 1
+    assert sport_concept.fund_iota == 1
     assert len(sport_concept._awardheirs) == 2
     swim_awardheir = sport_concept._awardheirs.get(swim_str)
     assert not swim_awardheir._fund_give

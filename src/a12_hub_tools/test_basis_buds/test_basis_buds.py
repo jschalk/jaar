@@ -45,7 +45,7 @@ def test_create_empty_bud_from_bud_ReturnsObj():
     assert yao_empty_plan.get_acctunits_dict() == {}
     assert yao_empty_plan.bridge == yao_gut.bridge
     assert yao_empty_plan.fund_pool == yao_gut.fund_pool
-    assert yao_empty_plan.fund_coin == yao_gut.fund_coin
+    assert yao_empty_plan.fund_iota == yao_gut.fund_iota
     assert yao_empty_plan.respect_bit == yao_gut.respect_bit
     assert yao_empty_plan.penny == yao_gut.penny
     assert yao_empty_plan.credor_respect != yao_gut.credor_respect
@@ -88,7 +88,7 @@ def test_create_listen_basis_ReturnsObj():
     assert yao_basis_plan.get_acctunits_dict() == yao_duty.get_acctunits_dict()
     assert yao_basis_plan.bridge == yao_duty.bridge
     assert yao_basis_plan.fund_pool == yao_duty.fund_pool
-    assert yao_basis_plan.fund_coin == yao_duty.fund_coin
+    assert yao_basis_plan.fund_iota == yao_duty.fund_iota
     assert yao_basis_plan.respect_bit == yao_duty.respect_bit
     assert yao_basis_plan.credor_respect == yao_duty.credor_respect
     assert yao_basis_plan.debtor_respect == yao_duty.debtor_respect
@@ -110,7 +110,7 @@ def test_get_default_job_ReturnsObj():
     blue_str = "blue"
     slash_str = "/"
     x_fund_pool = 99000
-    x_fund_coin = 80
+    x_fund_iota = 80
     x_respect_bit = 5
     sue_acct_pool = 800
     casa_str = "casa"
@@ -118,7 +118,7 @@ def test_get_default_job_ReturnsObj():
     last_pack_id = 7
     sue_max_tree_traverse = 9
     sue_budunit = budunit_shop(
-        sue_str, blue_str, slash_str, x_fund_pool, x_fund_coin, x_respect_bit
+        sue_str, blue_str, slash_str, x_fund_pool, x_fund_iota, x_respect_bit
     )
     sue_budunit.set_last_pack_id(last_pack_id)
     sue_budunit.add_acctunit(bob_str, 3, 4)
@@ -139,7 +139,7 @@ def test_get_default_job_ReturnsObj():
     assert default_job.fisc_label == blue_str
     assert default_job.bridge == slash_str
     assert default_job.fund_pool == sue_acct_pool
-    assert default_job.fund_coin == x_fund_coin
+    assert default_job.fund_iota == x_fund_iota
     assert default_job.respect_bit == x_respect_bit
     assert default_job.credor_respect == default_respect_num()
     assert default_job.debtor_respect == default_respect_num()

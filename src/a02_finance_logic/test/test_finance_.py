@@ -2,20 +2,20 @@ from inspect import getdoc as inspect_getdoc
 from pytest import raises as pytest_raises
 from src.a02_finance_logic.finance_config import (
     BitNum,
-    FundCoin,
+    FundIota,
     FundNum,
     MoneyUnit,
     PennyNum,
     RespectNum,
     TimeLinePoint,
-    default_fund_coin_if_None,
+    default_fund_iota_if_None,
     default_fund_pool,
     default_respect_num,
     default_RespectBit_if_None,
     filter_penny,
     get_net,
     trim_bit_excess,
-    trim_fund_coin_excess,
+    trim_fund_iota_excess,
     trim_penny_excess,
     valid_finance_ratio,
     validate_fund_pool,
@@ -121,41 +121,41 @@ def test_validate_fund_pool_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert validate_fund_pool() == default_fund_pool()
     assert validate_fund_pool(None) == default_fund_pool()
-    assert validate_fund_pool(0.5) == default_fund_coin_if_None()
+    assert validate_fund_pool(0.5) == default_fund_iota_if_None()
     assert (
-        validate_fund_pool(default_fund_coin_if_None() - 0.01)
-        == default_fund_coin_if_None()
+        validate_fund_pool(default_fund_iota_if_None() - 0.01)
+        == default_fund_iota_if_None()
     )
     assert validate_fund_pool(1) == 1
     assert validate_fund_pool(25) == 25
 
 
-def test_FundCoin_exists():
+def test_FundIota_exists():
     # ESTABLISH
     x_float = 0.045
     # WHEN
-    y_fund_coinnum = FundCoin(x_float)
+    y_fund_iotanum = FundIota(x_float)
     # THEN
-    assert y_fund_coinnum == x_float
+    assert y_fund_iotanum == x_float
     inspect_str = "Smallest Unit of fund_num"
-    assert inspect_getdoc(y_fund_coinnum) == inspect_str
+    assert inspect_getdoc(y_fund_iotanum) == inspect_str
 
 
-def test_default_fund_coin_if_None_ReturnsObj():
+def test_default_fund_iota_if_None_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert default_fund_coin_if_None() == 1
-    assert default_fund_coin_if_None(5) == 5
-    assert default_fund_coin_if_None(0.03) == 0.03
+    assert default_fund_iota_if_None() == 1
+    assert default_fund_iota_if_None(5) == 5
+    assert default_fund_iota_if_None(0.03) == 0.03
 
 
-def test_trim_fund_coin_excess_ReturnsCorrectedFloat():
+def test_trim_fund_iota_excess_ReturnsCorrectedFloat():
     # ESTABLISH / WHEN / THEN
-    assert trim_fund_coin_excess(num=5.5, fund_coin=1) == 5
-    assert trim_fund_coin_excess(num=0.5, fund_coin=1) == 0
-    assert trim_fund_coin_excess(num=5.5, fund_coin=0.1) == 5.5
-    assert trim_fund_coin_excess(num=0.5, fund_coin=0.01) == 0.5
-    assert trim_fund_coin_excess(num=0.56, fund_coin=0.1) == 0.5
-    assert trim_fund_coin_excess(num=0.56, fund_coin=0.133) == 0.532
+    assert trim_fund_iota_excess(num=5.5, fund_iota=1) == 5
+    assert trim_fund_iota_excess(num=0.5, fund_iota=1) == 0
+    assert trim_fund_iota_excess(num=5.5, fund_iota=0.1) == 5.5
+    assert trim_fund_iota_excess(num=0.5, fund_iota=0.01) == 0.5
+    assert trim_fund_iota_excess(num=0.56, fund_iota=0.1) == 0.5
+    assert trim_fund_iota_excess(num=0.56, fund_iota=0.133) == 0.532
 
 
 def test_default_respect_num_ReturnsObj():
@@ -170,8 +170,8 @@ def test_validate_respect_num_ReturnsObj():
     assert validate_respect_num(0.5) == default_RespectBit_if_None()
     assert validate_respect_num(0.5) == 1
     assert (
-        validate_respect_num(default_fund_coin_if_None() - 0.01)
-        == default_fund_coin_if_None()
+        validate_respect_num(default_fund_iota_if_None() - 0.01)
+        == default_fund_iota_if_None()
     )
     assert validate_respect_num(1) == 1
     assert validate_respect_num(25) == 25

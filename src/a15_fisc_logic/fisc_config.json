@@ -116,7 +116,7 @@
             "c400_number": {
                 "class_type": "int"
             },
-            "fund_coin": {
+            "fund_iota": {
                 "class_type": "float"
             },
             "job_listen_rotations": {

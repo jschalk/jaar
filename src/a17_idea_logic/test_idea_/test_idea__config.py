@@ -38,7 +38,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     fnigh_str,
     fopen_str,
     fstate_str,
-    fund_coin_str,
+    fund_iota_str,
     give_force_str,
     gogo_want_str,
     group_title_str,
@@ -342,7 +342,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[120] == "problem_bool"
     assert table_sorting_priority[121] == "take_force"
     assert table_sorting_priority[122] == "tally"
-    assert table_sorting_priority[123] == "fund_coin"
+    assert table_sorting_priority[123] == "fund_iota"
     assert table_sorting_priority[124] == "penny"
     assert table_sorting_priority[125] == "respect_bit"
     assert table_sorting_priority[126] == "amount"
@@ -476,7 +476,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get("problem_bool") == "INTEGER"
     assert sqlite_types.get(take_force_str()) == "REAL"
     assert sqlite_types.get("tally") == "INTEGER"
-    assert sqlite_types.get(fund_coin_str()) == "REAL"
+    assert sqlite_types.get(fund_iota_str()) == "REAL"
     assert sqlite_types.get(penny_str()) == "REAL"
     assert sqlite_types.get(pledge_str()) == "INTEGER"
     assert sqlite_types.get(respect_bit_str()) == "REAL"
@@ -903,7 +903,7 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
         face_name_str(),
         c400_number_str(),
         fisc_label_str(),
-        fund_coin_str(),
+        fund_iota_str(),
         monthday_distortion_str(),
         penny_str(),
         respect_bit_str(),

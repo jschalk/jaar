@@ -31,10 +31,10 @@ from src.a00_data_toolbox.file_toolbox import (
 )
 
 
-def test_create_path_ReturnsObj():
+def test_create_path_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     obj_filename = "obj.json"
-    x_dir = os_path_join("src", "_instrument")
+    x_dir = os_path_join(get_module_temp_dir(), "_instrument")
     x_filename = "examples"
 
     # WHEN / THEN

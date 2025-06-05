@@ -64,7 +64,7 @@ def test_insert_job_budunit_CreatesTableRowsFor_budunit_job():
     x__tree_traverse_count = 7
     x_credor_respect = 88.2
     x_debtor_respect = 88.4
-    x_fund_coin = 3.0
+    x_fund_iota = 3.0
     x_fund_pool = 3000.0
     x_max_tree_traverse = 22
     x_penny = 4.0
@@ -72,7 +72,7 @@ def test_insert_job_budunit_CreatesTableRowsFor_budunit_job():
     x_tally = 6
     sue_bud = budunit_shop(owner_name=x_owner_name, fisc_label=x_fisc_label)
     sue_bud.fund_pool = x_fund_pool
-    sue_bud.fund_coin = x_fund_coin
+    sue_bud.fund_iota = x_fund_iota
     sue_bud.penny = x_penny
     sue_bud.tally = x_tally
     sue_bud.respect_bit = x_respect_bit
@@ -109,7 +109,7 @@ def test_insert_job_budunit_CreatesTableRowsFor_budunit_job():
             x_fund_pool,
             x_max_tree_traverse,
             x_tally,
-            x_fund_coin,
+            x_fund_iota,
             x_penny,
             x_respect_bit,
             x__rational,
@@ -156,7 +156,7 @@ def test_insert_job_budconc_CreatesTableRowsFor_budconc_job():
     x_problem_bool = 15
     x__active = 16
     x__task = 17
-    x_fund_coin = 18.0
+    x_fund_iota = 18.0
     x__fund_onset = 19.0
     x__fund_cease = 20.0
     x__fund_ratio = 21.0
@@ -185,7 +185,7 @@ def test_insert_job_budconc_CreatesTableRowsFor_budconc_job():
     x_concept.problem_bool = x_problem_bool
     x_concept._active = x__active
     x_concept._task = x__task
-    x_concept.fund_coin = x_fund_coin
+    x_concept.fund_iota = x_fund_iota
     x_concept._fund_onset = x__fund_onset
     x_concept._fund_cease = x__fund_cease
     x_concept._fund_ratio = x__fund_ratio
@@ -210,7 +210,7 @@ def test_insert_job_budconc_CreatesTableRowsFor_budconc_job():
     x_concept.problem_bool = x_problem_bool
     x_concept._active = x__active
     x_concept._task = x__task
-    x_concept.fund_coin = x_fund_coin
+    x_concept.fund_iota = x_fund_iota
     x_concept._fund_onset = x__fund_onset
     x_concept._fund_cease = x__fund_cease
     x_concept._fund_ratio = x__fund_ratio
@@ -254,7 +254,7 @@ def test_insert_job_budconc_CreatesTableRowsFor_budconc_job():
             x_mass,
             x_pledge,
             x_problem_bool,
-            x_fund_coin,
+            x_fund_iota,
             x__active,
             x__task,
             x__fund_onset,
@@ -573,7 +573,7 @@ def test_insert_job_budgrou_CreatesTableRowsFor_budgrou_job():
     x_fisc_label = 1
     x_owner_name = 2
     x_group_title = 3
-    x_fund_coin = 4
+    x_fund_iota = 4
     x_bridge = 5
     x__credor_pool = 6
     x__debtor_pool = 7
@@ -583,7 +583,7 @@ def test_insert_job_budgrou_CreatesTableRowsFor_budgrou_job():
     x__fund_agenda_take = 11
     x_group = groupunit_shop(x_group_title)
     x_group.group_title = x_group_title
-    x_group.fund_coin = x_fund_coin
+    x_group.fund_iota = x_fund_iota
     x_group.bridge = x_bridge
     x_group._credor_pool = x__credor_pool
     x_group._debtor_pool = x__debtor_pool
@@ -611,7 +611,7 @@ def test_insert_job_budgrou_CreatesTableRowsFor_budgrou_job():
             str(x_fisc_label),
             str(x_owner_name),
             str(x_group_title),
-            x_fund_coin,
+            x_fund_iota,
             str(x_bridge),
             x__credor_pool,
             x__debtor_pool,

@@ -83,7 +83,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "fcontext": "WayTerm",
         "fnigh": "float",
         "fopen": "float",
-        "fund_coin": "float",
+        "fund_iota": "float",
         "fund_pool": "float",
         "give_force": "float",
         "gogo_want": "float",

@@ -47,10 +47,10 @@ def test_BudUnit_set_groupunit_SetsAttr_Scenario0():
     assert bob_bud._groupunits.get(run_str)
 
 
-def test_BudUnit_set_groupunit_Sets_way_fund_coin():
+def test_BudUnit_set_groupunit_Sets_way_fund_iota():
     # ESTABLISH
-    x_fund_coin = 5
-    bob_bud = budunit_shop("Bob", fund_coin=x_fund_coin)
+    x_fund_iota = 5
+    bob_bud = budunit_shop("Bob", fund_iota=x_fund_iota)
     run_str = ";Run"
     assert not bob_bud._groupunits.get(run_str)
 
@@ -58,7 +58,7 @@ def test_BudUnit_set_groupunit_Sets_way_fund_coin():
     bob_bud.set_groupunit(groupunit_shop(run_str))
 
     # THEN
-    assert bob_bud._groupunits.get(run_str).fund_coin == x_fund_coin
+    assert bob_bud._groupunits.get(run_str).fund_iota == x_fund_iota
 
 
 def test_BudUnit_groupunit_exists_ReturnsObj():

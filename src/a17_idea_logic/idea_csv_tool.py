@@ -98,7 +98,7 @@ def _add_fiscunit_to_br00000_csv(
         str(x_fisc.timeline.c400_number),
         str(x_fisc.timeline.yr1_jan1_offset),
         str(x_fisc.timeline.monthday_distortion),
-        str(x_fisc.fund_coin),
+        str(x_fisc.fund_iota),
         str(x_fisc.penny),
         str(x_fisc.respect_bit),
         x_bridge,
@@ -454,7 +454,7 @@ def add_bud_to_br00029_csv(
         if_none_str(x_bud.fund_pool),
         if_none_str(x_bud.max_tree_traverse),
         if_none_str(x_bud.tally),
-        if_none_str(x_bud.fund_coin),
+        if_none_str(x_bud.fund_iota),
         if_none_str(x_bud.penny),
         if_none_str(x_bud.respect_bit),
     ]
@@ -780,7 +780,7 @@ def add_pack_to_br00029_csv(
                 if_none_str(budatom.jvalues.get("fund_pool")),
                 if_none_str(budatom.jvalues.get("max_tree_traverse")),
                 if_none_str(budatom.jvalues.get("tally")),
-                if_none_str(budatom.jvalues.get("fund_coin")),
+                if_none_str(budatom.jvalues.get("fund_iota")),
                 if_none_str(budatom.jvalues.get("penny")),
                 if_none_str(budatom.jvalues.get("respect_bit")),
             ]

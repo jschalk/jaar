@@ -22,9 +22,9 @@ from src.a01_term_logic.way import (
 )
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import (
-    FundCoin,
+    FundIota,
     FundNum,
-    default_fund_coin_if_None,
+    default_fund_iota_if_None,
 )
 from src.a03_group_logic.group import (
     AwardHeir,
@@ -242,7 +242,7 @@ class ConceptUnit:
     _descendant_pledge_count: int = None
     _factheirs: dict[WayTerm, FactHeir] = None
     _fund_ratio: float = None
-    fund_coin: FundCoin = None
+    fund_iota: FundIota = None
     _fund_onset: FundNum = None
     _fund_cease: FundNum = None
     _healerlink_ratio: float = None
@@ -487,8 +487,8 @@ class ConceptUnit:
             give_ledger[x_awardee_title] = x_awardheir.give_force
             take_ledger[x_awardee_title] = x_awardheir.take_force
         x_fund_share = self.get_fund_share()
-        give_allot = allot_scale(give_ledger, x_fund_share, self.fund_coin)
-        take_allot = allot_scale(take_ledger, x_fund_share, self.fund_coin)
+        give_allot = allot_scale(give_ledger, x_fund_share, self.fund_iota)
+        take_allot = allot_scale(take_ledger, x_fund_share, self.fund_iota)
         for x_awardee_title, x_awardheir in self._awardheirs.items():
             x_awardheir._fund_give = give_allot.get(x_awardee_title)
             x_awardheir._fund_take = take_allot.get(x_awardee_title)
@@ -1012,7 +1012,7 @@ def conceptunit_shop(
     # Calculated fields
     _level: int = None,
     _fund_ratio: float = None,
-    fund_coin: FundCoin = None,
+    fund_iota: FundIota = None,
     _fund_onset: FundNum = None,
     _fund_cease: FundNum = None,
     _task: bool = None,
@@ -1060,7 +1060,7 @@ def conceptunit_shop(
         # Calculated fields
         _level=_level,
         _fund_ratio=_fund_ratio,
-        fund_coin=default_fund_coin_if_None(fund_coin),
+        fund_iota=default_fund_iota_if_None(fund_iota),
         _fund_onset=_fund_onset,
         _fund_cease=_fund_cease,
         _task=_task,

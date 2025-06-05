@@ -27,7 +27,7 @@ from src.a01_term_logic.term import (
 )
 from src.a01_term_logic.way import get_all_way_labels, rebuild_way, validate_labelterm
 from src.a02_finance_logic.finance_config import (
-    default_fund_coin_if_None,
+    default_fund_iota_if_None,
     default_money_magnitude_if_None,
     default_RespectBit_if_None,
     filter_penny,
@@ -102,7 +102,7 @@ class HubUnit:
     keep_way: WayTerm = None
     bridge: str = None
     fund_pool: float = None
-    fund_coin: float = None
+    fund_iota: float = None
     respect_bit: float = None
     penny: float = None
     keep_point_magnitude: float = None
@@ -124,7 +124,7 @@ class HubUnit:
             fisc_label=self.fisc_label,
             bridge=self.bridge,
             fund_pool=self.fund_pool,
-            fund_coin=self.fund_coin,
+            fund_iota=self.fund_iota,
             respect_bit=self.respect_bit,
             penny=self.penny,
         )
@@ -480,7 +480,7 @@ def hubunit_shop(
     keep_way: WayTerm = None,
     bridge: str = None,
     fund_pool: float = None,
-    fund_coin: float = None,
+    fund_iota: float = None,
     respect_bit: float = None,
     penny: float = None,
     keep_point_magnitude: float = None,
@@ -492,7 +492,7 @@ def hubunit_shop(
         keep_way=keep_way,
         bridge=default_bridge_if_None(bridge),
         fund_pool=validate_fund_pool(fund_pool),
-        fund_coin=default_fund_coin_if_None(fund_coin),
+        fund_iota=default_fund_iota_if_None(fund_iota),
         respect_bit=default_RespectBit_if_None(respect_bit),
         penny=filter_penny(penny),
         keep_point_magnitude=default_money_magnitude_if_None(keep_point_magnitude),

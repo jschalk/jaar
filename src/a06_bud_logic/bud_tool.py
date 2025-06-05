@@ -217,7 +217,7 @@ def get_acct_mandate_ledger(
     if mandate_sum == 0:
         mandates = set_each_mandate_acct_to_penny_weight(mandates, x_bud.penny)
     if mandate_sum != x_bud.fund_pool:
-        mandates = allot_scale(mandates, x_bud.fund_pool, x_bud.fund_coin)
+        mandates = allot_scale(mandates, x_bud.fund_pool, x_bud.fund_iota)
     return mandates
 
 

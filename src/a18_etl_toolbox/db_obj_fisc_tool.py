@@ -40,8 +40,8 @@ def get_fisc_dict_from_sqlstrs(
         if monthday_distortion:
             fisc_dict["timeline"]["monthday_distortion"] = monthday_distortion
 
-    if fund_coin := fiscunit_row[5]:
-        fisc_dict["fund_coin"] = fund_coin
+    if fund_iota := fiscunit_row[5]:
+        fisc_dict["fund_iota"] = fund_iota
     if penny := fiscunit_row[6]:
         fisc_dict["penny"] = penny
     if respect_bit := fiscunit_row[7]:

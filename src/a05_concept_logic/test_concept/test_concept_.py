@@ -1,7 +1,7 @@
 from src.a01_term_logic._test_util.a01_str import bridge_str, parent_way_str
 from src.a01_term_logic.way import create_way, default_bridge_if_None
-from src.a02_finance_logic._test_util.a02_str import fisc_label_str, fund_coin_str
-from src.a02_finance_logic.finance_config import default_fund_coin_if_None
+from src.a02_finance_logic._test_util.a02_str import fisc_label_str, fund_iota_str
+from src.a02_finance_logic.finance_config import default_fund_iota_if_None
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic._test_util.a04_str import _task_str
 from src.a04_reason_logic.reason_labor import laborunit_shop
@@ -32,7 +32,7 @@ from src.a05_concept_logic._test_util.a05_str import (
     concept_label_str,
     denom_str,
     fisc_label_str,
-    fund_coin_str,
+    fund_iota_str,
     gogo_want_str,
     healerlink_str,
     mass_str,
@@ -95,7 +95,7 @@ def test_ConceptUnit_Exists():
     assert x_conceptunit._level is None
     assert x_conceptunit._active_hx is None
     assert x_conceptunit._fund_ratio is None
-    assert x_conceptunit.fund_coin is None
+    assert x_conceptunit.fund_iota is None
     assert x_conceptunit._fund_onset is None
     assert x_conceptunit._fund_cease is None
     assert x_conceptunit.root is None
@@ -136,7 +136,7 @@ def test_ConceptUnit_Exists():
         denom_str(),
         "factunits",
         fisc_label_str(),
-        fund_coin_str(),
+        fund_iota_str(),
         gogo_want_str(),
         healerlink_str(),
         "laborunit",
@@ -184,7 +184,7 @@ def test_conceptunit_shop_WithNoParametersReturnsObj():
     assert x_conceptunit._level is None
     assert x_conceptunit._active_hx == {}
     assert x_conceptunit._fund_ratio is None
-    assert x_conceptunit.fund_coin == default_fund_coin_if_None()
+    assert x_conceptunit.fund_iota == default_fund_iota_if_None()
     assert x_conceptunit._fund_onset is None
     assert x_conceptunit._fund_cease is None
     assert x_conceptunit.reasonunits == {}
@@ -222,17 +222,17 @@ def test_conceptunit_shop_NonNoneParametersReturnsObj():
     # ESTABLISH
     x_healerlink = healerlink_shop({"Sue", "Yao"})
     x_problem_bool = True
-    x_fund_coin = 88
+    x_fund_iota = 88
 
     # WHEN
     x_conceptunit = conceptunit_shop(
-        healerlink=x_healerlink, problem_bool=x_problem_bool, fund_coin=x_fund_coin
+        healerlink=x_healerlink, problem_bool=x_problem_bool, fund_iota=x_fund_iota
     )
 
     # THEN
     assert x_conceptunit.healerlink == x_healerlink
     assert x_conceptunit.problem_bool == x_problem_bool
-    assert x_conceptunit.fund_coin == x_fund_coin
+    assert x_conceptunit.fund_iota == x_fund_iota
 
 
 def test_conceptunit_shop_ReturnsObjWith_awardlinks():

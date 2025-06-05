@@ -31,7 +31,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     fcontext_str,
     fnigh_str,
     fopen_str,
-    fund_coin_str,
+    fund_iota_str,
     gogo_want_str,
     group_title_str,
     healer_name_str,
@@ -483,7 +483,7 @@ def test_get_normalized_bud_table_build_ReturnsObj():
     assert budunit_columns.get(credor_respect_str()) is not None
     assert budunit_columns.get(debtor_respect_str()) is not None
     assert budunit_columns.get("fund_pool") is not None
-    assert budunit_columns.get(fund_coin_str()) is not None
+    assert budunit_columns.get(fund_iota_str()) is not None
     assert budunit_columns.get(respect_bit_str()) is not None
     assert budunit_columns.get(penny_str()) is not None
     assert budunit_columns.get("tally") is not None
@@ -641,7 +641,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(fcontext_str()) == WayTerm_str()
     assert x_class_types.get(fnigh_str()) == "float"
     assert x_class_types.get(fopen_str()) == "float"
-    assert x_class_types.get(fund_coin_str()) == "float"
+    assert x_class_types.get(fund_iota_str()) == "float"
     assert x_class_types.get("fund_pool") == "float"
     assert x_class_types.get("give_force") == "float"
     assert x_class_types.get(gogo_want_str()) == "float"

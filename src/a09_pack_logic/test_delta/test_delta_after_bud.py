@@ -82,7 +82,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnitSimpleAttrs():
     new9_arg = "fund_pool"
     x_budatom.set_jvalue(new9_arg, new9_value)
     new8_value = 0.5555
-    new8_arg = "fund_coin"
+    new8_arg = "fund_iota"
     x_budatom.set_jvalue(new8_arg, new8_value)
     sue_buddelta.set_budatom(x_budatom)
     new6_value = 0.5
@@ -106,8 +106,8 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnitSimpleAttrs():
     assert after_sue_budunit.tally != before_sue_budunit.tally
     assert after_sue_budunit.fund_pool == new9_value
     assert after_sue_budunit.fund_pool != before_sue_budunit.fund_pool
-    assert after_sue_budunit.fund_coin == new8_value
-    assert after_sue_budunit.fund_coin != before_sue_budunit.fund_coin
+    assert after_sue_budunit.fund_iota == new8_value
+    assert after_sue_budunit.fund_iota != before_sue_budunit.fund_iota
     assert after_sue_budunit.respect_bit == new6_value
     assert after_sue_budunit.respect_bit != before_sue_budunit.respect_bit
     assert after_sue_budunit.penny == new7_value

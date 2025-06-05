@@ -6,7 +6,7 @@ from src.a02_finance_logic._test_util.a02_str import (
     deal_acct_nets_str,
     deal_time_str,
     fisc_label_str,
-    fund_coin_str,
+    fund_iota_str,
     fund_pool_str,
     magnitude_str,
     offi_time_str,
@@ -31,5 +31,5 @@ def test_str_functions_ReturnsObj():
     assert owner_name_str() == "owner_name"
     assert offi_time_str() == "offi_time"
     assert amount_str() == "amount"
-    assert fund_coin_str() == "fund_coin"
+    assert fund_iota_str() == "fund_iota"
     assert penny_str() == "penny"

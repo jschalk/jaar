@@ -168,7 +168,7 @@
     "jvalues": {
       "credor_respect": {},
       "debtor_respect": {},
-      "fund_coin": {},
+      "fund_iota": {},
       "fund_pool": {},
       "max_tree_traverse": {},
       "penny": {},
@@ -274,7 +274,7 @@
     "jvalues": {
       "bridge": {},
       "c400_number": {},
-      "fund_coin": {},
+      "fund_iota": {},
       "job_listen_rotations": {},
       "monthday_distortion": {},
       "penny": {},

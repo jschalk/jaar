@@ -23,6 +23,7 @@ def test_ModuleStrFunctionsTestFileFormat():
     # WHEN / THEN
     # previous_module_number = -1
     for module_desc, module_dir in get_module_descs().items():
+        print(f"{module_desc=} {module_dir=}")
         module_number = int(module_desc[1:3])
         # assert module_number == previous_module_number + 1
         print(f"{module_desc=} {module_number=}")

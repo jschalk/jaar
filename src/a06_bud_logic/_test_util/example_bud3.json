@@ -4621,7 +4621,7 @@
     "mass": 1
   },
   "fisc_label": "accord45",
-  "fund_coin": 1,
+  "fund_iota": 1,
   "fund_pool": 1000000000.0,
   "max_tree_traverse": 2,
   "originunit": {

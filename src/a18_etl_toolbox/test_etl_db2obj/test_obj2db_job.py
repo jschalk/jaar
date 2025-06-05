@@ -34,7 +34,7 @@ def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
     x__tree_traverse_count = 7
     x_credor_respect = 88.2
     x_debtor_respect = 88.4
-    x_fund_coin = 3
+    x_fund_iota = 3
     x_fund_pool = 3000
     x_max_tree_traverse = 22
     x_penny = 4
@@ -51,7 +51,7 @@ def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
         "_tree_traverse_count": x__tree_traverse_count,
         "credor_respect": x_credor_respect,
         "debtor_respect": x_debtor_respect,
-        "fund_coin": x_fund_coin,
+        "fund_iota": x_fund_iota,
         "fund_pool": x_fund_pool,
         "max_tree_traverse": x_max_tree_traverse,
         "penny": x_penny,
@@ -98,7 +98,7 @@ def test_create_budconc_metrics_insert_sqlstr_ReturnsObj():
     x__all_acct_debt = 3
     x__descendant_pledge_count = 4
     x__fund_cease = 5
-    x_fund_coin = 6
+    x_fund_iota = 6
     x__fund_onset = 7
     x__fund_ratio = 8
     x__gogo_calc = 9
@@ -127,7 +127,7 @@ def test_create_budconc_metrics_insert_sqlstr_ReturnsObj():
         "_all_acct_debt": x__all_acct_debt,
         "_descendant_pledge_count": x__descendant_pledge_count,
         "_fund_cease": x__fund_cease,
-        "fund_coin": x_fund_coin,
+        "fund_iota": x_fund_iota,
         "_fund_onset": x__fund_onset,
         "_fund_ratio": x__fund_ratio,
         "_gogo_calc": x__gogo_calc,
@@ -714,7 +714,7 @@ def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
     x_group_title = 1
     x__credor_pool = 2
     x__debtor_pool = 3
-    x_fund_coin = 4
+    x_fund_iota = 4
     x__fund_give = 5
     x__fund_take = 6
     x__fund_agenda_give = 7
@@ -726,7 +726,7 @@ def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
         "group_title": x_group_title,
         "_credor_pool": x__credor_pool,
         "_debtor_pool": x__debtor_pool,
-        "fund_coin": x_fund_coin,
+        "fund_iota": x_fund_iota,
         "_fund_give": x__fund_give,
         "_fund_take": x__fund_take,
         "_fund_agenda_give": x__fund_agenda_give,

@@ -6,7 +6,7 @@ from src.a01_term_logic.way import (
     default_bridge_if_None,
 )
 from src.a02_finance_logic.finance_config import (
-    default_fund_coin_if_None,
+    default_fund_iota_if_None,
     default_RespectBit_if_None,
     filter_penny,
     validate_fund_pool,
@@ -31,7 +31,7 @@ def test_HubUnit_Exists():
     assert not x_hubunit.keep_way
     assert not x_hubunit.bridge
     assert not x_hubunit.fund_pool
-    assert not x_hubunit.fund_coin
+    assert not x_hubunit.fund_iota
     assert not x_hubunit.respect_bit
     assert not x_hubunit.penny
     assert not x_hubunit.keep_point_magnitude
@@ -61,7 +61,7 @@ def test_hubunit_shop_ReturnsObj():
     sue_str = "Sue"
     x_bridge = "/"
     x_fund_pool = 13000
-    x_fund_coin = 13
+    x_fund_iota = 13
     x_respect_bit = 9
     x_penny = 3
     x_money_magnitude = 900
@@ -74,7 +74,7 @@ def test_hubunit_shop_ReturnsObj():
         keep_way=None,
         bridge=x_bridge,
         fund_pool=x_fund_pool,
-        fund_coin=x_fund_coin,
+        fund_iota=x_fund_iota,
         respect_bit=x_respect_bit,
         penny=x_penny,
         keep_point_magnitude=x_money_magnitude,
@@ -86,7 +86,7 @@ def test_hubunit_shop_ReturnsObj():
     assert x_hubunit.owner_name == sue_str
     assert x_hubunit.bridge == x_bridge
     assert x_hubunit.fund_pool == x_fund_pool
-    assert x_hubunit.fund_coin == x_fund_coin
+    assert x_hubunit.fund_iota == x_fund_iota
     assert x_hubunit.respect_bit == x_respect_bit
     assert x_hubunit.penny == x_penny
     assert x_hubunit.keep_point_magnitude == x_money_magnitude
@@ -121,7 +121,7 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     assert sue_hubunit.owner_name == sue_str
     assert sue_hubunit.bridge == default_bridge_if_None()
     assert sue_hubunit.fund_pool == validate_fund_pool()
-    assert sue_hubunit.fund_coin == default_fund_coin_if_None()
+    assert sue_hubunit.fund_iota == default_fund_iota_if_None()
     assert sue_hubunit.respect_bit == default_RespectBit_if_None()
     assert sue_hubunit.penny == filter_penny()
     x_hubunit = hubunit_shop(fisc_mstr_dir, accord23_str, sue_str)

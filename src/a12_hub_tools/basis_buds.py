@@ -13,7 +13,7 @@ def create_empty_bud_from_bud(
     x_owner_name = ref_bud.owner_name if x_owner_name is None else x_owner_name
     x_bridge = ref_bud.bridge
     x_fund_pool = ref_bud.fund_pool
-    x_fund_coin = ref_bud.fund_coin
+    x_fund_iota = ref_bud.fund_iota
     x_respect_bit = ref_bud.respect_bit
     x_penny = ref_bud.penny
     return budunit_shop(
@@ -21,7 +21,7 @@ def create_empty_bud_from_bud(
         fisc_label=ref_bud.fisc_label,
         bridge=x_bridge,
         fund_pool=x_fund_pool,
-        fund_coin=x_fund_coin,
+        fund_iota=x_fund_iota,
         respect_bit=x_respect_bit,
         penny=x_penny,
     )

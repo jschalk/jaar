@@ -36,7 +36,7 @@ def test_AtomRow_exists():
     assert x_atomrow.fcontext is None
     assert x_atomrow.fnigh is None
     assert x_atomrow.fopen is None
-    assert x_atomrow.fund_coin is None
+    assert x_atomrow.fund_iota is None
     assert x_atomrow.fund_pool is None
     assert x_atomrow.give_force is None
     assert x_atomrow.gogo_want is None

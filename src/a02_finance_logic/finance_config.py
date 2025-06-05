@@ -31,7 +31,7 @@ class FundNum(float):
     pass
 
 
-class FundCoin(float):
+class FundIota(float):
     """Smallest Unit of fund_num"""
 
     pass
@@ -49,16 +49,16 @@ class get_net_Exception(Exception):
     pass
 
 
-def default_fund_coin_if_None(fund_coin: FundCoin = None) -> FundCoin:
-    return get_1_if_None(fund_coin)
+def default_fund_iota_if_None(fund_iota: FundIota = None) -> FundIota:
+    return get_1_if_None(fund_iota)
 
 
 def get_whole_grainunit_ratio(num: float, grainunit: float) -> float:
     return grainunit * int(num / grainunit)
 
 
-def trim_fund_coin_excess(num: float, fund_coin: FundCoin) -> float:
-    return get_whole_grainunit_ratio(num, fund_coin)
+def trim_fund_iota_excess(num: float, fund_iota: FundIota) -> float:
+    return get_whole_grainunit_ratio(num, fund_iota)
 
 
 def default_fund_pool() -> FundNum:
@@ -67,7 +67,7 @@ def default_fund_pool() -> FundNum:
 
 def validate_fund_pool(x_fund_pool: FundNum = None) -> FundNum:
     x_fund_pool = default_fund_pool() if x_fund_pool is None else x_fund_pool
-    return max(get_1_if_None(x_fund_pool), default_fund_coin_if_None())
+    return max(get_1_if_None(x_fund_pool), default_fund_iota_if_None())
 
 
 def valid_finance_ratio(big_number: float, small_number: float) -> bool:
@@ -75,10 +75,10 @@ def valid_finance_ratio(big_number: float, small_number: float) -> bool:
     return (big_number % small_number) == 0
 
 
-# def validate_fund_pool(x_fund_pool: FundNum = None, x_fund_coin: FundCoin = None) -> int:
-#     x_fund_coin = default_fund_coin_if_None() if x_fund_coin is None else x_fund_coin
+# def validate_fund_pool(x_fund_pool: FundNum = None, x_fund_iota: FundIota = None) -> int:
+#     x_fund_iota = default_fund_iota_if_None() if x_fund_iota is None else x_fund_iota
 #     x_fund_pool = default_fund_pool() if x_fund_pool is None else x_fund_pool
-#     return max(get_1_if_None(x_fund_pool), default_fund_coin_if_None())
+#     return max(get_1_if_None(x_fund_pool), default_fund_iota_if_None())
 
 
 def default_RespectBit_if_None(bit: BitNum = None) -> BitNum:

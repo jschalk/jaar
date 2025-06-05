@@ -187,9 +187,9 @@ def _modify_bud_update_budunit(x_bud: BudUnit, x_atom: BudAtom):
     x_arg = "fund_pool"
     if x_atom.get_value(x_arg) is not None:
         x_bud.fund_pool = x_atom.get_value(x_arg)
-    x_arg = "fund_coin"
+    x_arg = "fund_iota"
     if x_atom.get_value(x_arg) is not None:
-        x_bud.fund_coin = x_atom.get_value(x_arg)
+        x_bud.fund_iota = x_atom.get_value(x_arg)
     x_arg = "tally"
     if x_atom.get_value(x_arg) is not None:
         x_bud.tally = x_atom.get_value(x_arg)
@@ -534,7 +534,7 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.debtor_respect != y_obj.debtor_respect
             or x_obj.respect_bit != y_obj.respect_bit
             or x_obj.fund_pool != y_obj.fund_pool
-            or x_obj.fund_coin != y_obj.fund_coin
+            or x_obj.fund_iota != y_obj.fund_iota
         )
     elif dimen in {"bud_acct_membership"}:
         return (x_obj.credit_vote != y_obj.credit_vote) or (
@@ -612,7 +612,7 @@ class AtomRow:
     fcontext: WayTerm = None
     fnigh: float = None
     fopen: float = None
-    fund_coin: float = None
+    fund_iota: float = None
     fund_pool: float = None
     give_force: float = None
     gogo_want: float = None

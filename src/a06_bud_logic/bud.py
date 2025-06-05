@@ -36,11 +36,11 @@ from src.a01_term_logic.way import (
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import (
     BitNum,
-    FundCoin,
+    FundIota,
     FundNum,
     PennyNum,
     RespectNum,
-    default_fund_coin_if_None,
+    default_fund_iota_if_None,
     default_RespectBit_if_None,
     filter_penny,
     valid_finance_ratio,
@@ -127,7 +127,7 @@ class BudUnit:
     conceptroot: ConceptUnit = None
     tally: float = None
     fund_pool: FundNum = None
-    fund_coin: FundCoin = None
+    fund_iota: FundIota = None
     penny: PennyNum = None
     credor_respect: RespectNum = None
     debtor_respect: RespectNum = None
@@ -162,8 +162,8 @@ class BudUnit:
         self.last_pack_id = x_last_pack_id
 
     def set_fund_pool(self, x_fund_pool):
-        if valid_finance_ratio(x_fund_pool, self.fund_coin) is False:
-            exception_str = f"Bud '{self.owner_name}' cannot set fund_pool='{x_fund_pool}'. It is not divisible by fund_coin '{self.fund_coin}'"
+        if valid_finance_ratio(x_fund_pool, self.fund_iota) is False:
+            exception_str = f"Bud '{self.owner_name}' cannot set fund_pool='{x_fund_pool}'. It is not divisible by fund_iota '{self.fund_iota}'"
             raise _bit_RatioException(exception_str)
 
         self.fund_pool = validate_fund_pool(x_fund_pool)
@@ -391,7 +391,7 @@ class BudUnit:
         return x_dict
 
     def set_groupunit(self, x_groupunit: GroupUnit):
-        x_groupunit.fund_coin = self.fund_coin
+        x_groupunit.fund_iota = self.fund_iota
         self._groupunits[x_groupunit.group_title] = x_groupunit
 
     def groupunit_exists(self, group_title: GroupTitle) -> bool:
@@ -639,8 +639,8 @@ class BudUnit:
         concept_kid.bridge = self.bridge
         if concept_kid.fisc_label != self.fisc_label:
             concept_kid.fisc_label = self.fisc_label
-        if concept_kid.fund_coin != self.fund_coin:
-            concept_kid.fund_coin = self.fund_coin
+        if concept_kid.fund_iota != self.fund_iota:
+            concept_kid.fund_iota = self.fund_iota
         if not get_rid_of_missing_awardlinks_awardee_titles:
             concept_kid = self._get_filtered_awardlinks_concept(concept_kid)
         concept_kid.set_parent_way(parent_way=parent_way)
@@ -926,8 +926,8 @@ class BudUnit:
 
     def _add_to_acctunits_fund_give_take(self, concept_fund_share: float):
         credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
-        fund_give_allot = allot_scale(credor_ledger, concept_fund_share, self.fund_coin)
-        fund_take_allot = allot_scale(debtor_ledger, concept_fund_share, self.fund_coin)
+        fund_give_allot = allot_scale(credor_ledger, concept_fund_share, self.fund_iota)
+        fund_take_allot = allot_scale(debtor_ledger, concept_fund_share, self.fund_iota)
         for x_acct_name, acct_fund_give in fund_give_allot.items():
             self.get_acct(x_acct_name).add_fund_give(acct_fund_give)
             # if there is no differentiated agenda (what factunits exist do not change agenda)
@@ -941,8 +941,8 @@ class BudUnit:
 
     def _add_to_acctunits_fund_agenda_give_take(self, concept_fund_share: float):
         credor_ledger, debtor_ledger = self.get_credit_ledger_debtit_ledger()
-        fund_give_allot = allot_scale(credor_ledger, concept_fund_share, self.fund_coin)
-        fund_take_allot = allot_scale(debtor_ledger, concept_fund_share, self.fund_coin)
+        fund_give_allot = allot_scale(credor_ledger, concept_fund_share, self.fund_iota)
+        fund_take_allot = allot_scale(debtor_ledger, concept_fund_share, self.fund_iota)
         for x_acct_name, acct_fund_give in fund_give_allot.items():
             self.get_acct(x_acct_name).add_fund_agenda_give(acct_fund_give)
         for x_acct_name, acct_fund_take in fund_take_allot.items():
@@ -1293,7 +1293,7 @@ class BudUnit:
             kids_concepts = parent_concept._kids.items()
             x_ledger = {x_way: concept_kid.mass for x_way, concept_kid in kids_concepts}
             parent_fund_num = parent_concept._fund_cease - parent_concept._fund_onset
-            alloted_fund_num = allot_scale(x_ledger, parent_fund_num, self.fund_coin)
+            alloted_fund_num = allot_scale(x_ledger, parent_fund_num, self.fund_iota)
 
             fund_onset = None
             fund_cease = None
@@ -1419,7 +1419,7 @@ class BudUnit:
             "originunit": self.originunit.get_dict(),
             "tally": self.tally,
             "fund_pool": self.fund_pool,
-            "fund_coin": self.fund_coin,
+            "fund_iota": self.fund_iota,
             "respect_bit": self.respect_bit,
             "penny": self.penny,
             "owner_name": self.owner_name,
@@ -1461,7 +1461,7 @@ def budunit_shop(
     fisc_label: FiscLabel = None,
     bridge: str = None,
     fund_pool: FundNum = None,
-    fund_coin: FundCoin = None,
+    fund_iota: FundIota = None,
     respect_bit: BitNum = None,
     penny: PennyNum = None,
     tally: float = None,
@@ -1478,7 +1478,7 @@ def budunit_shop(
         credor_respect=validate_respect_num(),
         debtor_respect=validate_respect_num(),
         fund_pool=validate_fund_pool(fund_pool),
-        fund_coin=default_fund_coin_if_None(fund_coin),
+        fund_iota=default_fund_iota_if_None(fund_iota),
         respect_bit=default_RespectBit_if_None(respect_bit),
         penny=filter_penny(penny),
         _concept_dict=get_empty_dict_if_None(),
@@ -1497,7 +1497,7 @@ def budunit_shop(
         _level=0,
         fisc_label=x_bud.fisc_label,
         bridge=x_bud.bridge,
-        fund_coin=x_bud.fund_coin,
+        fund_iota=x_bud.fund_iota,
         parent_way="",
     )
     x_bud.set_max_tree_traverse(3)
@@ -1520,8 +1520,8 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     bud_bridge = obj_from_bud_dict(bud_dict, "bridge")
     x_bud.bridge = default_bridge_if_None(bud_bridge)
     x_bud.fund_pool = validate_fund_pool(obj_from_bud_dict(bud_dict, "fund_pool"))
-    x_bud.fund_coin = default_fund_coin_if_None(
-        obj_from_bud_dict(bud_dict, "fund_coin")
+    x_bud.fund_iota = default_fund_iota_if_None(
+        obj_from_bud_dict(bud_dict, "fund_iota")
     )
     x_bud.respect_bit = default_RespectBit_if_None(
         obj_from_bud_dict(bud_dict, "respect_bit")
@@ -1564,7 +1564,7 @@ def create_conceptroot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         _is_expanded=get_obj_from_concept_dict(conceptroot_dict, "_is_expanded"),
         bridge=x_bud.bridge,
         fisc_label=x_bud.fisc_label,
-        fund_coin=default_fund_coin_if_None(x_bud.fund_coin),
+        fund_iota=default_fund_iota_if_None(x_bud.fund_iota),
     )
     create_conceptroot_kids_from_dict(x_bud, conceptroot_dict)
 

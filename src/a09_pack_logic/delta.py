@@ -143,8 +143,8 @@ class BudDelta:
             x_budatom.set_jvalue("tally", after_bud.tally)
         if before_bud.fund_pool != after_bud.fund_pool:
             x_budatom.set_jvalue("fund_pool", after_bud.fund_pool)
-        if before_bud.fund_coin != after_bud.fund_coin:
-            x_budatom.set_jvalue("fund_coin", after_bud.fund_coin)
+        if before_bud.fund_iota != after_bud.fund_iota:
+            x_budatom.set_jvalue("fund_iota", after_bud.fund_iota)
         if before_bud.respect_bit != after_bud.respect_bit:
             x_budatom.set_jvalue("respect_bit", after_bud.respect_bit)
         self.set_budatom(x_budatom)

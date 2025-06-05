@@ -1,6 +1,6 @@
 from pytest import raises as pytest_raises
 from src.a01_term_logic.way import default_bridge_if_None
-from src.a02_finance_logic.finance_config import default_fund_coin_if_None
+from src.a02_finance_logic.finance_config import default_fund_iota_if_None
 from src.a03_group_logic.group import GroupUnit, groupunit_shop, membership_shop
 
 
@@ -20,7 +20,7 @@ def test_GroupUnit_exists():
     assert swim_groupunit._credor_pool is None
     assert swim_groupunit._debtor_pool is None
     assert swim_groupunit.bridge is None
-    assert swim_groupunit.fund_coin is None
+    assert swim_groupunit.fund_iota is None
 
 
 def test_groupunit_shop_ReturnsObj():
@@ -43,23 +43,23 @@ def test_groupunit_shop_ReturnsObj():
     assert swim_groupunit._credor_pool == 0
     assert swim_groupunit._debtor_pool == 0
     assert swim_groupunit.bridge == default_bridge_if_None()
-    assert swim_groupunit.fund_coin == default_fund_coin_if_None()
+    assert swim_groupunit.fund_iota == default_fund_iota_if_None()
 
 
 def test_groupunit_shop_ReturnsObj_bridge():
     # ESTABLISH
     swim_str = "/swimmers"
     slash_str = "/"
-    x_fund_coin = 7
+    x_fund_iota = 7
 
     # WHEN
     swim_groupunit = groupunit_shop(
-        group_title=swim_str, bridge=slash_str, fund_coin=x_fund_coin
+        group_title=swim_str, bridge=slash_str, fund_iota=x_fund_iota
     )
 
     # THEN
     assert swim_groupunit.bridge == slash_str
-    assert swim_groupunit.fund_coin == x_fund_coin
+    assert swim_groupunit.fund_iota == x_fund_iota
 
 
 # def test_GroupUnit_set_group_title_RaisesErrorIfParameterContains_bridge_And_acct_mirror_True():

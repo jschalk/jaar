@@ -23,11 +23,11 @@ def test_BudUnit_set_fisc_label_CorrectlySetsAttr():
     assert sue_bud.fisc_label == x_fisc_label
 
 
-def test_BudUnit_set_concept_CorrectlySetsfisc_label_AND_fund_coin():
+def test_BudUnit_set_concept_CorrectlySetsfisc_label_AND_fund_iota():
     # ESTABLISH'
-    x_fund_coin = 500
+    x_fund_iota = 500
     sue_bud = get_budunit_with_4_levels()
-    sue_bud.fund_coin = x_fund_coin
+    sue_bud.fund_iota = x_fund_iota
     bud_fisc_label = "Texas"
     sue_bud.set_fisc_label(bud_fisc_label)
     assert sue_bud.fisc_label == bud_fisc_label
@@ -43,7 +43,7 @@ def test_BudUnit_set_concept_CorrectlySetsfisc_label_AND_fund_coin():
     # THEN
     cookery_concept = sue_bud.get_concept_obj(cookery_way)
     assert cookery_concept.fisc_label == bud_fisc_label
-    assert cookery_concept.fund_coin == x_fund_coin
+    assert cookery_concept.fund_iota == x_fund_iota
 
 
 def test_bud_set_fisc_label_CorrectlySetsAttr():

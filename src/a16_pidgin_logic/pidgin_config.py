@@ -92,7 +92,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "fstate": "WayTerm",
         "fnigh": "float",
         "fopen": "float",
-        "fund_coin": "float",
+        "fund_iota": "float",
         "fund_pool": "float",
         "give_force": "float",
         "gogo_want": "float",

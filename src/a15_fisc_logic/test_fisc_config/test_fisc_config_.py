@@ -11,7 +11,7 @@ from src.a02_finance_logic._test_util.a02_str import (
 )
 from src.a06_bud_logic._test_util.a06_str import (
     acct_name_str,
-    fund_coin_str,
+    fund_iota_str,
     penny_str,
     respect_bit_str,
 )
@@ -102,7 +102,7 @@ def test_get_fisc_config_dict_ReturnsObj():
 
     x_fiscunit_jvalues = {
         c400_number_str(),
-        fund_coin_str(),
+        fund_iota_str(),
         monthday_distortion_str(),
         penny_str(),
         respect_bit_str(),
@@ -179,7 +179,7 @@ def test_get_fisc_args_dimen_mapping_ReturnsObj():
     assert x_fisc_args_dimen_mapping
     x_hour = {fisc_timeline_hour_str()}
     assert x_fisc_args_dimen_mapping.get(cumlative_minute_str()) == x_hour
-    assert x_fisc_args_dimen_mapping.get(fund_coin_str())
+    assert x_fisc_args_dimen_mapping.get(fund_iota_str())
     fisc_label_dimens = x_fisc_args_dimen_mapping.get(fisc_label_str())
     assert fisc_timeline_hour_str() in fisc_label_dimens
     assert fiscunit_str() in fisc_label_dimens
@@ -245,7 +245,7 @@ def test_get_fisc_args_set_ReturnsObj():
         cumlative_minute_str(),
         hour_label_str(),
         fisc_label_str(),
-        fund_coin_str(),
+        fund_iota_str(),
         month_label_str(),
         monthday_distortion_str(),
         "job_listen_rotations",

@@ -420,7 +420,7 @@
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "fund_coin": {
+            "fund_iota": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }
@@ -513,7 +513,7 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "fund_coin": {
+            "fund_iota": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }
@@ -572,7 +572,7 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "fund_coin": {
+            "fund_iota": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },

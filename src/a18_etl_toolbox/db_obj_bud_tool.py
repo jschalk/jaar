@@ -94,19 +94,19 @@ def create_budgrou_metrics_insert_sqlstr(values_dict: dict[str,]):
     group_title = values_dict.get("group_title")
     _credor_pool = values_dict.get("_credor_pool")
     _debtor_pool = values_dict.get("_debtor_pool")
-    fund_coin = values_dict.get("fund_coin")
+    fund_iota = values_dict.get("fund_iota")
     _fund_give = values_dict.get("_fund_give")
     _fund_take = values_dict.get("_fund_take")
     _fund_agenda_give = values_dict.get("_fund_agenda_give")
     _fund_agenda_take = values_dict.get("_fund_agenda_take")
     bridge = values_dict.get("bridge")
     real_str = "REAL"
-    return f"""INSERT INTO bud_groupunit_job (fisc_label, owner_name, group_title, fund_coin, bridge, _credor_pool, _debtor_pool, _fund_give, _fund_take, _fund_agenda_give, _fund_agenda_take)
+    return f"""INSERT INTO bud_groupunit_job (fisc_label, owner_name, group_title, fund_iota, bridge, _credor_pool, _debtor_pool, _fund_give, _fund_take, _fund_agenda_give, _fund_agenda_take)
 VALUES (
   {sqlite_obj_str(fisc_label, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
 , {sqlite_obj_str(group_title, "TEXT")}
-, {sqlite_obj_str(fund_coin, real_str)}
+, {sqlite_obj_str(fund_iota, real_str)}
 , {sqlite_obj_str(bridge, "TEXT")}
 , {sqlite_obj_str(_credor_pool, real_str)}
 , {sqlite_obj_str(_debtor_pool, real_str)}
@@ -268,7 +268,7 @@ def create_budconc_metrics_insert_sqlstr(values_dict: dict[str,]):
     problem_bool = values_dict.get("problem_bool")
     _active = values_dict.get("_active")
     _task = values_dict.get("_task")
-    fund_coin = values_dict.get("fund_coin")
+    fund_iota = values_dict.get("fund_iota")
     _fund_onset = values_dict.get("_fund_onset")
     _fund_cease = values_dict.get("_fund_cease")
     _fund_ratio = values_dict.get("_fund_ratio")
@@ -283,7 +283,7 @@ def create_budconc_metrics_insert_sqlstr(values_dict: dict[str,]):
     integer_str = "INTEGER"
     real_str = "REAL"
 
-    return f"""INSERT INTO bud_conceptunit_job (fisc_label, owner_name, concept_way, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool, fund_coin, _active, _task, _fund_onset, _fund_cease, _fund_ratio, _gogo_calc, _stop_calc, _level, _range_evaluated, _descendant_pledge_count, _healerlink_ratio, _all_acct_cred, _all_acct_debt)
+    return f"""INSERT INTO bud_conceptunit_job (fisc_label, owner_name, concept_way, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool, fund_iota, _active, _task, _fund_onset, _fund_cease, _fund_ratio, _gogo_calc, _stop_calc, _level, _range_evaluated, _descendant_pledge_count, _healerlink_ratio, _all_acct_cred, _all_acct_debt)
 VALUES (
   {sqlite_obj_str(fisc_label, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
@@ -299,7 +299,7 @@ VALUES (
 , {sqlite_obj_str(mass, real_str)}
 , {sqlite_obj_str(pledge, real_str)}
 , {sqlite_obj_str(problem_bool, "INTEGER")}
-, {sqlite_obj_str(fund_coin, real_str)}
+, {sqlite_obj_str(fund_iota, real_str)}
 , {sqlite_obj_str(_active, "INTEGER")}
 , {sqlite_obj_str(_task, "INTEGER")}
 , {sqlite_obj_str(_fund_onset, real_str)}
@@ -331,14 +331,14 @@ def create_budunit_metrics_insert_sqlstr(values_dict: dict[str,]):
     _tree_traverse_count = values_dict.get("_tree_traverse_count")
     credor_respect = values_dict.get("credor_respect")
     debtor_respect = values_dict.get("debtor_respect")
-    fund_coin = values_dict.get("fund_coin")
+    fund_iota = values_dict.get("fund_iota")
     fund_pool = values_dict.get("fund_pool")
     max_tree_traverse = values_dict.get("max_tree_traverse")
     penny = values_dict.get("penny")
     respect_bit = values_dict.get("respect_bit")
     tally = values_dict.get("tally")
 
-    return f"""INSERT INTO budunit_job (fisc_label, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_coin, penny, respect_bit, _rational, _keeps_justified, _offtrack_fund, _sum_healerlink_share, _keeps_buildable, _tree_traverse_count)
+    return f"""INSERT INTO budunit_job (fisc_label, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit, _rational, _keeps_justified, _offtrack_fund, _sum_healerlink_share, _keeps_buildable, _tree_traverse_count)
 VALUES (
   {sqlite_obj_str(fisc_label, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
@@ -347,7 +347,7 @@ VALUES (
 , {sqlite_obj_str(fund_pool, real_str)}
 , {sqlite_obj_str(max_tree_traverse, integer_str)}
 , {sqlite_obj_str(tally, real_str)}
-, {sqlite_obj_str(fund_coin, real_str)}
+, {sqlite_obj_str(fund_iota, real_str)}
 , {sqlite_obj_str(penny, real_str)}
 , {sqlite_obj_str(respect_bit, real_str)}
 , {sqlite_obj_str(_rational, integer_str)}

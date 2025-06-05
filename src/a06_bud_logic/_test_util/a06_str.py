@@ -8,7 +8,7 @@ from src.a01_term_logic._test_util.a01_str import (
 from src.a02_finance_logic._test_util.a02_str import (
     acct_name_str,
     amount_str,
-    fund_coin_str,
+    fund_iota_str,
     fund_pool_str,
     penny_str,
 )

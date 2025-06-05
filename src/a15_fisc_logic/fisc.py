@@ -34,11 +34,11 @@ from src.a02_finance_logic.deal import (
 )
 from src.a02_finance_logic.finance_config import (
     BitNum,
-    FundCoin,
+    FundIota,
     FundNum,
     PennyNum,
     TimeLinePoint,
-    default_fund_coin_if_None,
+    default_fund_iota_if_None,
     default_RespectBit_if_None,
     filter_penny,
 )
@@ -100,7 +100,7 @@ class FiscUnit:
     cashbook: TranBook = None
     offi_times: set[TimeLinePoint] = None
     bridge: str = None
-    fund_coin: FundCoin = None
+    fund_iota: FundIota = None
     respect_bit: BitNum = None
     penny: PennyNum = None
     job_listen_rotations: int = None
@@ -231,7 +231,7 @@ class FiscUnit:
             owner_name,
             self.fisc_label,
             bridge=self.bridge,
-            fund_coin=self.fund_coin,
+            fund_iota=self.fund_iota,
             respect_bit=self.respect_bit,
             penny=self.penny,
         )
@@ -311,7 +311,7 @@ class FiscUnit:
         x_dict = {
             "fisc_label": self.fisc_label,
             "bridge": self.bridge,
-            "fund_coin": self.fund_coin,
+            "fund_iota": self.fund_iota,
             "penny": self.penny,
             "brokerunits": self._get_brokerunits_dict(),
             "respect_bit": self.respect_bit,
@@ -463,7 +463,7 @@ def fiscunit_shop(
     offi_times: set[TimeLinePoint] = None,
     in_memory_journal: bool = None,
     bridge: str = None,
-    fund_coin: float = None,
+    fund_iota: float = None,
     respect_bit: float = None,
     penny: float = None,
     job_listen_rotations: int = None,
@@ -482,7 +482,7 @@ def fiscunit_shop(
         cashbook=tranbook_shop(fisc_label),
         offi_times=get_empty_set_if_None(offi_times),
         bridge=default_bridge_if_None(bridge),
-        fund_coin=default_fund_coin_if_None(fund_coin),
+        fund_iota=default_fund_iota_if_None(fund_iota),
         respect_bit=default_RespectBit_if_None(respect_bit),
         penny=filter_penny(penny),
         _all_tranbook=tranbook_shop(fisc_label),
@@ -506,7 +506,7 @@ def get_from_dict(fisc_dict: dict) -> FiscUnit:
         fisc_mstr_dir=None,
         offi_times=set(fisc_dict.get("offi_times")),
         bridge=fisc_dict.get("bridge"),
-        fund_coin=fisc_dict.get("fund_coin"),
+        fund_iota=fisc_dict.get("fund_iota"),
         respect_bit=fisc_dict.get("respect_bit"),
         penny=fisc_dict.get("penny"),
     )
