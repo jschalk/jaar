@@ -187,7 +187,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
         # assert get_row_count(cursor, vow_ote1_agg_tablename) == 0
 
 
-def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateDealCashRows(
+def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateDealPayRows(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH:

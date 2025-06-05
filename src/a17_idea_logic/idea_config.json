@@ -176,7 +176,7 @@
       "tally": {}
     }
   },
-  "vow_cashbook": {
+  "vow_paybook": {
     "allowed_crud": "insert_multiple",
     "build_order": 21,
     "idea_category": "vow",

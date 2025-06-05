@@ -92,8 +92,8 @@ from src.a15_vow_logic._test_util.a15_str import (
     hour_label_str,
     month_label_str,
     offi_time_str,
-    vow_cashbook_str,
     vow_dealunit_str,
+    vow_paybook_str,
     vow_timeline_hour_str,
     vow_timeline_month_str,
     vow_timeline_weekday_str,
@@ -539,7 +539,7 @@ def test_get_idea_config_dict_ReturnsObj():
     idea_config_dimens = set(x_idea_config.keys())
     assert vowunit_str() in idea_config_dimens
     assert vow_dealunit_str() in idea_config_dimens
-    assert vow_cashbook_str() in idea_config_dimens
+    assert vow_paybook_str() in idea_config_dimens
     assert vow_timeline_hour_str() in idea_config_dimens
     assert vow_timeline_month_str() in idea_config_dimens
     assert vow_timeline_weekday_str() in idea_config_dimens
@@ -607,7 +607,7 @@ def _validate_idea_config(x_idea_config: dict):
             assert idea_dict.get(allowed_crud_str()) == insert_one_time_str()
         elif idea_dimen in {
             vow_dealunit_str(),
-            vow_cashbook_str(),
+            vow_paybook_str(),
             vow_timeoffi_str(),
         }:
             assert idea_dict.get(allowed_crud_str()) == insert_multiple_str()
@@ -865,7 +865,7 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     # set_idea_config_json(plan_conceptunit_str(), 18)
     # set_idea_config_json(planunit_str(), 19)
     # set_idea_config_json(vow_dealunit_str(), 20)
-    # set_idea_config_json(vow_cashbook_str(), 21)
+    # set_idea_config_json(vow_paybook_str(), 21)
 
     x_idea_config = get_idea_config_dict()
 
@@ -889,7 +889,7 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     assert x_idea_config.get(plan_conceptunit_str()).get(bo) == 18
     assert x_idea_config.get(planunit_str()).get(bo) == 19
     assert x_idea_config.get(vow_dealunit_str()).get(bo) == 20
-    assert x_idea_config.get(vow_cashbook_str()).get(bo) == 21
+    assert x_idea_config.get(vow_paybook_str()).get(bo) == 21
 
 
 def test_get_quick_ideas_column_ref_ReturnsObj():

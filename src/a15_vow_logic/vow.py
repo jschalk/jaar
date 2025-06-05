@@ -73,7 +73,7 @@ class dealunit_Exception(Exception):
     pass
 
 
-class set_cashpurchase_Exception(Exception):
+class set_paypurchase_Exception(Exception):
     pass
 
 
@@ -97,7 +97,7 @@ class VowUnit:
     vow_mstr_dir: str = None
     timeline: TimeLineUnit = None
     brokerunits: dict[OwnerName, BrokerUnit] = None
-    cashbook: TranBook = None
+    paybook: TranBook = None
     offi_times: set[TimeLinePoint] = None
     bridge: str = None
     fund_iota: FundIota = None
@@ -307,7 +307,7 @@ class VowUnit:
         x_brokerunit = self.get_brokerunit(owner_name)
         return x_brokerunit.get_deal(deal_time)
 
-    def get_dict(self, include_cashbook: bool = True) -> dict:
+    def get_dict(self, include_paybook: bool = True) -> dict:
         x_dict = {
             "vow_label": self.vow_label,
             "bridge": self.bridge,
@@ -318,8 +318,8 @@ class VowUnit:
             "timeline": self.timeline.get_dict(),
             "offi_times": list(self.offi_times),
         }
-        if include_cashbook:
-            x_dict["cashbook"] = self.cashbook.get_dict()
+        if include_paybook:
+            x_dict["paybook"] = self.paybook.get_dict()
         return x_dict
 
     def get_json(self) -> str:
@@ -336,14 +336,14 @@ class VowUnit:
             all_dealunit_deal_times.update(x_brokerunit.get_deal_times())
         return all_dealunit_deal_times
 
-    def set_cashpurchase(self, x_cashpurchase: TranUnit):
-        self.cashbook.set_tranunit(
-            tranunit=x_cashpurchase,
+    def set_paypurchase(self, x_paypurchase: TranUnit):
+        self.paybook.set_tranunit(
+            tranunit=x_paypurchase,
             blocked_tran_times=self.get_brokerunits_deal_times(),
             _offi_time_max=self._offi_time_max,
         )
 
-    def add_cashpurchase(
+    def add_paypurchase(
         self,
         owner_name: OwnerName,
         acct_name: AcctName,
@@ -352,7 +352,7 @@ class VowUnit:
         blocked_tran_times: set[TimeLinePoint] = None,
         _offi_time_max: TimeLinePoint = None,
     ) -> None:
-        self.cashbook.add_tranunit(
+        self.paybook.add_tranunit(
             owner_name=owner_name,
             acct_name=acct_name,
             tran_time=tran_time,
@@ -361,20 +361,20 @@ class VowUnit:
             _offi_time_max=_offi_time_max,
         )
 
-    def cashpurchase_exists(
+    def paypurchase_exists(
         self, src: AcctName, dst: AcctName, x_tran_time: TimeLinePoint
     ) -> bool:
-        return self.cashbook.tranunit_exists(src, dst, x_tran_time)
+        return self.paybook.tranunit_exists(src, dst, x_tran_time)
 
-    def get_cashpurchase(
+    def get_paypurchase(
         self, src: AcctName, dst: AcctName, x_tran_time: TimeLinePoint
     ) -> TranUnit:
-        return self.cashbook.get_tranunit(src, dst, x_tran_time)
+        return self.paybook.get_tranunit(src, dst, x_tran_time)
 
-    def del_cashpurchase(
+    def del_paypurchase(
         self, src: AcctName, dst: AcctName, x_tran_time: TimeLinePoint
     ) -> TranUnit:
-        return self.cashbook.del_tranunit(src, dst, x_tran_time)
+        return self.paybook.del_tranunit(src, dst, x_tran_time)
 
     # def set_offi_time(self, offi_time: TimeLinePoint):
     #     self.offi_time = offi_time
@@ -382,9 +382,9 @@ class VowUnit:
     #         self._offi_time_max = self.offi_time
 
     def set_offi_time_max(self, x_offi_time_max: TimeLinePoint):
-        x_tran_times = self.cashbook.get_tran_times()
+        x_tran_times = self.paybook.get_tran_times()
         if x_tran_times != set() and max(x_tran_times) >= x_offi_time_max:
-            exception_str = f"Cannot set _offi_time_max {x_offi_time_max}, cashpurchase with greater tran_time exists"
+            exception_str = f"Cannot set _offi_time_max {x_offi_time_max}, paypurchase with greater tran_time exists"
             raise set_offi_time_max_Exception(exception_str)
         # if self.offi_time > x_offi_time_max:
         #     exception_str = f"Cannot set _offi_time_max={x_offi_time_max} because it is less than offi_time={self.offi_time}"
@@ -398,7 +398,7 @@ class VowUnit:
     #     self.set_offi_time_max(_offi_time_max)
 
     def set_all_tranbook(self) -> None:
-        x_tranunits = copy_deepcopy(self.cashbook.tranunits)
+        x_tranunits = copy_deepcopy(self.paybook.tranunits)
         x_tranbook = tranbook_shop(self.vow_label, x_tranunits)
         for owner_name, x_brokerunit in self.brokerunits.items():
             for x_deal_time, x_dealunit in x_brokerunit.deals.items():
@@ -479,7 +479,7 @@ def vowunit_shop(
         vow_mstr_dir=vow_mstr_dir,
         timeline=timeline,
         brokerunits={},
-        cashbook=tranbook_shop(vow_label),
+        paybook=tranbook_shop(vow_label),
         offi_times=get_empty_set_if_None(offi_times),
         bridge=default_bridge_if_None(bridge),
         fund_iota=default_fund_iota_if_None(fund_iota),
@@ -516,7 +516,7 @@ def get_from_dict(vow_dict: dict) -> VowUnit:
     else:
         x_vow.timeline = timelineunit_shop(None)
     x_vow.brokerunits = _get_brokerunits_from_dict(vow_dict.get("brokerunits"))
-    x_vow.cashbook = get_tranbook_from_dict(vow_dict.get("cashbook"))
+    x_vow.paybook = get_tranbook_from_dict(vow_dict.get("paybook"))
     return x_vow
 
 

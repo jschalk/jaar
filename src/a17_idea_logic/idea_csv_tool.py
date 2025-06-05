@@ -66,7 +66,7 @@ def add_vowunit_to_stance_csv_strs(
     br00005_csv = vow_csv_strs.get("br00005")
     br00000_csv = _add_vowunit_to_br00000_csv(br00000_csv, x_vow, csv_delimiter)
     br00001_csv = _add_dealunit_to_br00001_csv(br00001_csv, x_vow, csv_delimiter)
-    br00002_csv = _add_cashbook_to_br00002_csv(br00002_csv, x_vow, csv_delimiter)
+    br00002_csv = _add_paybook_to_br00002_csv(br00002_csv, x_vow, csv_delimiter)
     br00003_csv = _add_hours_to_br00003_csv(br00003_csv, x_vow, csv_delimiter)
     br00004_csv = _add_months_to_br00004_csv(br00004_csv, x_vow, csv_delimiter)
     br00005_csv = _add_weekdays_to_br00005_csv(br00005_csv, x_vow, csv_delimiter)
@@ -132,14 +132,14 @@ def _add_dealunit_to_br00001_csv(
     return x_csv
 
 
-def _add_cashbook_to_br00002_csv(
+def _add_paybook_to_br00002_csv(
     x_csv: str,
     x_vow: VowUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for owner_name, tranunit in x_vow.cashbook.tranunits.items():
+    for owner_name, tranunit in x_vow.paybook.tranunits.items():
         for acct_name, time_dict in tranunit.items():
             for tran_time, amount in time_dict.items():
                 vow_label = x_vow.vow_label

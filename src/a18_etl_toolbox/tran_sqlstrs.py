@@ -39,7 +39,7 @@ ALL_DIMEN_ABBV7 = {
 
 def get_dimen_abbv7(dimen: str) -> str:
     return {
-        "vow_cashbook": "VOWASH",
+        "vow_paybook": "VOWASH",
         "vow_dealunit": "FISDEAL",
         "vow_timeline_hour": "FISHOUR",
         "vow_timeline_month": "FISMONT",
@@ -77,7 +77,7 @@ def create_prime_tablename(
     """
 
     abbv_references = {
-        "VOWASH": "vow_cashbook",
+        "VOWASH": "vow_paybook",
         "FISDEAL": "vow_dealunit",
         "FISHOUR": "vow_timeline_hour",
         "FISMONT": "vow_timeline_month",
@@ -131,11 +131,11 @@ CREATE_PIDCORE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_ra
 CREATE_PIDCORE_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_agg (face_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_str TEXT)"""
 CREATE_PIDCORE_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_vld (face_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_str TEXT)"""
 
-CREATE_VOWASH_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS vow_cashbook_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
-CREATE_VOWASH_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS vow_cashbook_s_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
-CREATE_VOWASH_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS vow_cashbook_s_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
-CREATE_VOWASH_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS vow_cashbook_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, acct_name_otx TEXT, acct_name_inx TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
-CREATE_VOWASH_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS vow_cashbook_v_agg (vow_label TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
+CREATE_VOWASH_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS vow_paybook_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
+CREATE_VOWASH_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS vow_paybook_s_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
+CREATE_VOWASH_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS vow_paybook_s_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
+CREATE_VOWASH_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS vow_paybook_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, acct_name_otx TEXT, acct_name_inx TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
+CREATE_VOWASH_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS vow_paybook_v_agg (vow_label TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
 CREATE_FISDEAL_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS vow_dealunit_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT, error_message TEXT)"""
 CREATE_FISDEAL_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS vow_dealunit_s_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT, error_message TEXT)"""
 CREATE_FISDEAL_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS vow_dealunit_s_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT)"""
@@ -286,11 +286,11 @@ def get_prime_create_table_sqlstrs() -> dict[str:str]:
         "pidgin_core_s_raw": CREATE_PIDCORE_SOUND_RAW_SQLSTR,
         "pidgin_core_s_agg": CREATE_PIDCORE_SOUND_AGG_SQLSTR,
         "pidgin_core_s_vld": CREATE_PIDCORE_SOUND_VLD_SQLSTR,
-        "vow_cashbook_s_raw": CREATE_VOWASH_SOUND_RAW_SQLSTR,
-        "vow_cashbook_s_agg": CREATE_VOWASH_SOUND_AGG_SQLSTR,
-        "vow_cashbook_s_vld": CREATE_VOWASH_SOUND_VLD_SQLSTR,
-        "vow_cashbook_v_raw": CREATE_VOWASH_VOICE_RAW_SQLSTR,
-        "vow_cashbook_v_agg": CREATE_VOWASH_VOICE_AGG_SQLSTR,
+        "vow_paybook_s_raw": CREATE_VOWASH_SOUND_RAW_SQLSTR,
+        "vow_paybook_s_agg": CREATE_VOWASH_SOUND_AGG_SQLSTR,
+        "vow_paybook_s_vld": CREATE_VOWASH_SOUND_VLD_SQLSTR,
+        "vow_paybook_v_raw": CREATE_VOWASH_VOICE_RAW_SQLSTR,
+        "vow_paybook_v_agg": CREATE_VOWASH_VOICE_AGG_SQLSTR,
         "vow_dealunit_s_raw": CREATE_FISDEAL_SOUND_RAW_SQLSTR,
         "vow_dealunit_s_agg": CREATE_FISDEAL_SOUND_AGG_SQLSTR,
         "vow_dealunit_s_vld": CREATE_FISDEAL_SOUND_VLD_SQLSTR,
@@ -446,7 +446,7 @@ def get_vow_plan_sound_agg_tablenames():
         "plan_conceptunit_s_put_agg",
         "planunit_s_del_agg",
         "planunit_s_put_agg",
-        "vow_cashbook_s_agg",
+        "vow_paybook_s_agg",
         "vow_dealunit_s_agg",
         "vow_timeline_hour_s_agg",
         "vow_timeline_month_s_agg",
@@ -741,7 +741,7 @@ INSERT_PLANCONC_SOUND_VLD_DEL_SQLSTR = "INSERT INTO plan_conceptunit_s_del_vld (
 INSERT_PLANUNIT_SOUND_VLD_PUT_SQLSTR = "INSERT INTO planunit_s_put_vld (event_int, face_name, vow_label, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit) SELECT event_int, face_name, vow_label, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit FROM planunit_s_put_agg WHERE error_message IS NULL"
 INSERT_PLANUNIT_SOUND_VLD_DEL_SQLSTR = "INSERT INTO planunit_s_del_vld (event_int, face_name, vow_label, owner_name_ERASE) SELECT event_int, face_name, vow_label, owner_name_ERASE FROM planunit_s_del_agg WHERE error_message IS NULL"
 
-INSERT_VOWASH_SOUND_VLD_SQLSTR = "INSERT INTO vow_cashbook_s_vld (event_int, face_name, vow_label, owner_name, acct_name, tran_time, amount) SELECT event_int, face_name, vow_label, owner_name, acct_name, tran_time, amount FROM vow_cashbook_s_agg WHERE error_message IS NULL"
+INSERT_VOWASH_SOUND_VLD_SQLSTR = "INSERT INTO vow_paybook_s_vld (event_int, face_name, vow_label, owner_name, acct_name, tran_time, amount) SELECT event_int, face_name, vow_label, owner_name, acct_name, tran_time, amount FROM vow_paybook_s_agg WHERE error_message IS NULL"
 INSERT_FISDEAL_SOUND_VLD_SQLSTR = "INSERT INTO vow_dealunit_s_vld (event_int, face_name, vow_label, owner_name, deal_time, quota, celldepth) SELECT event_int, face_name, vow_label, owner_name, deal_time, quota, celldepth FROM vow_dealunit_s_agg WHERE error_message IS NULL"
 INSERT_FISHOUR_SOUND_VLD_SQLSTR = "INSERT INTO vow_timeline_hour_s_vld (event_int, face_name, vow_label, cumlative_minute, hour_label) SELECT event_int, face_name, vow_label, cumlative_minute, hour_label FROM vow_timeline_hour_s_agg WHERE error_message IS NULL"
 INSERT_FISMONT_SOUND_VLD_SQLSTR = "INSERT INTO vow_timeline_month_s_vld (event_int, face_name, vow_label, cumlative_day, month_label) SELECT event_int, face_name, vow_label, cumlative_day, month_label FROM vow_timeline_month_s_agg WHERE error_message IS NULL"
@@ -772,7 +772,7 @@ def get_insert_into_sound_vld_sqlstrs() -> dict[str, str]:
         "plan_conceptunit_s_del_vld": INSERT_PLANCONC_SOUND_VLD_DEL_SQLSTR,
         "planunit_s_put_vld": INSERT_PLANUNIT_SOUND_VLD_PUT_SQLSTR,
         "planunit_s_del_vld": INSERT_PLANUNIT_SOUND_VLD_DEL_SQLSTR,
-        "vow_cashbook_s_vld": INSERT_VOWASH_SOUND_VLD_SQLSTR,
+        "vow_paybook_s_vld": INSERT_VOWASH_SOUND_VLD_SQLSTR,
         "vow_dealunit_s_vld": INSERT_FISDEAL_SOUND_VLD_SQLSTR,
         "vow_timeline_hour_s_vld": INSERT_FISHOUR_SOUND_VLD_SQLSTR,
         "vow_timeline_month_s_vld": INSERT_FISMONT_SOUND_VLD_SQLSTR,
@@ -782,7 +782,7 @@ def get_insert_into_sound_vld_sqlstrs() -> dict[str, str]:
     }
 
 
-INSERT_VOWASH_VOICE_RAW_SQLSTR = "INSERT INTO vow_cashbook_v_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, acct_name_otx, tran_time, amount) SELECT event_int, face_name, vow_label, owner_name, acct_name, tran_time, amount FROM vow_cashbook_s_vld "
+INSERT_VOWASH_VOICE_RAW_SQLSTR = "INSERT INTO vow_paybook_v_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, acct_name_otx, tran_time, amount) SELECT event_int, face_name, vow_label, owner_name, acct_name, tran_time, amount FROM vow_paybook_s_vld "
 INSERT_FISDEAL_VOICE_RAW_SQLSTR = "INSERT INTO vow_dealunit_v_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, deal_time, quota, celldepth) SELECT event_int, face_name, vow_label, owner_name, deal_time, quota, celldepth FROM vow_dealunit_s_vld "
 INSERT_FISHOUR_VOICE_RAW_SQLSTR = "INSERT INTO vow_timeline_hour_v_raw (event_int, face_name_otx, vow_label_otx, cumlative_minute, hour_label_otx) SELECT event_int, face_name, vow_label, cumlative_minute, hour_label FROM vow_timeline_hour_s_vld "
 INSERT_FISMONT_VOICE_RAW_SQLSTR = "INSERT INTO vow_timeline_month_v_raw (event_int, face_name_otx, vow_label_otx, cumlative_day, month_label_otx) SELECT event_int, face_name, vow_label, cumlative_day, month_label FROM vow_timeline_month_s_vld "
@@ -814,7 +814,7 @@ INSERT_PLANUNIT_VOICE_RAW_DEL_SQLSTR = "INSERT INTO planunit_v_del_raw (event_in
 
 def get_insert_into_voice_raw_sqlstrs() -> dict[str, str]:
     return {
-        "vow_cashbook_v_raw": INSERT_VOWASH_VOICE_RAW_SQLSTR,
+        "vow_paybook_v_raw": INSERT_VOWASH_VOICE_RAW_SQLSTR,
         "vow_dealunit_v_raw": INSERT_FISDEAL_VOICE_RAW_SQLSTR,
         "vow_timeline_hour_v_raw": INSERT_FISHOUR_VOICE_RAW_SQLSTR,
         "vow_timeline_month_v_raw": INSERT_FISMONT_VOICE_RAW_SQLSTR,
@@ -893,9 +893,9 @@ WHERE {column_prefix}_inx IS NULL
 
 
 VOWASH_VOICE_AGG_INSERT_SQLSTR = """
-INSERT INTO vow_cashbook_v_agg (vow_label, owner_name, acct_name, tran_time, amount)
+INSERT INTO vow_paybook_v_agg (vow_label, owner_name, acct_name, tran_time, amount)
 SELECT vow_label_inx, owner_name_inx, acct_name_inx, tran_time, amount
-FROM vow_cashbook_v_raw
+FROM vow_paybook_v_raw
 GROUP BY vow_label_inx, owner_name_inx, acct_name_inx, tran_time, amount
 """
 FISDEAL_VOICE_AGG_INSERT_SQLSTR = """
@@ -1059,7 +1059,7 @@ GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_ERASE_inx
 
 def get_insert_voice_agg_sqlstrs() -> dict[str, str]:
     return {
-        "vow_cashbook": VOWASH_VOICE_AGG_INSERT_SQLSTR,
+        "vow_paybook": VOWASH_VOICE_AGG_INSERT_SQLSTR,
         "vow_dealunit": FISDEAL_VOICE_AGG_INSERT_SQLSTR,
         "vow_timeline_hour": FISHOUR_VOICE_AGG_INSERT_SQLSTR,
         "vow_timeline_month": FISMONT_VOICE_AGG_INSERT_SQLSTR,
@@ -1089,7 +1089,7 @@ def get_insert_voice_agg_sqlstrs() -> dict[str, str]:
     }
 
 
-VOWASH_FU2_SELECT_SQLSTR = "SELECT vow_label, owner_name, acct_name, tran_time, amount FROM vow_cashbook_v_agg WHERE vow_label = "
+VOWASH_FU2_SELECT_SQLSTR = "SELECT vow_label, owner_name, acct_name, tran_time, amount FROM vow_paybook_v_agg WHERE vow_label = "
 FISDEAL_FU2_SELECT_SQLSTR = "SELECT vow_label, owner_name, deal_time, quota, celldepth FROM vow_dealunit_v_agg WHERE vow_label = "
 FISHOUR_FU2_SELECT_SQLSTR = "SELECT vow_label, cumlative_minute, hour_label FROM vow_timeline_hour_v_agg WHERE vow_label = "
 FISMONT_FU2_SELECT_SQLSTR = "SELECT vow_label, cumlative_day, month_label FROM vow_timeline_month_v_agg WHERE vow_label = "
@@ -1104,7 +1104,7 @@ def get_vow_voice_select1_sqlstrs(vow_label: str) -> dict[str, str]:
     return {
         "vowunit": f"{FISUNIT_FU2_SELECT_SQLSTR}'{vow_label}'",
         "vow_dealunit": f"{FISDEAL_FU2_SELECT_SQLSTR}'{vow_label}'",
-        "vow_cashbook": f"{VOWASH_FU2_SELECT_SQLSTR}'{vow_label}'",
+        "vow_paybook": f"{VOWASH_FU2_SELECT_SQLSTR}'{vow_label}'",
         "vow_timeline_hour": f"{FISHOUR_FU2_SELECT_SQLSTR}'{vow_label}'",
         "vow_timeline_month": f"{FISMONT_FU2_SELECT_SQLSTR}'{vow_label}'",
         "vow_timeline_weekday": f"{FISWEEK_FU2_SELECT_SQLSTR}'{vow_label}'",
@@ -1116,7 +1116,7 @@ def get_idea_stageble_put_dimens() -> dict[str, list[str]]:
     return {
         "br00000": ["vowunit"],
         "br00001": ["planunit", "vow_dealunit", "vowunit"],
-        "br00002": ["plan_acctunit", "planunit", "vow_cashbook", "vowunit"],
+        "br00002": ["plan_acctunit", "planunit", "vow_paybook", "vowunit"],
         "br00003": ["vow_timeline_hour", "vowunit"],
         "br00004": ["vow_timeline_month", "vowunit"],
         "br00005": ["vow_timeline_weekday", "vowunit"],
@@ -1221,7 +1221,7 @@ INSERT INTO vow_event_time_agg (vow_label, event_int, agg_time)
 SELECT vow_label, event_int, agg_time
 FROM (
     SELECT vow_label, event_int, tran_time as agg_time
-    FROM vow_cashbook_raw
+    FROM vow_paybook_raw
     GROUP BY vow_label, event_int, tran_time
     UNION 
     SELECT vow_label, event_int, deal_time as agg_time

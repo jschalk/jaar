@@ -40,7 +40,7 @@ def test_VowUnit_Exists():
     assert not accord_vow.vow_label
     assert not accord_vow.timeline
     assert not accord_vow.brokerunits
-    assert not accord_vow.cashbook
+    assert not accord_vow.paybook
     assert not accord_vow.offi_times
     assert not accord_vow.bridge
     assert not accord_vow.fund_iota
@@ -67,7 +67,7 @@ def test_vowunit_shop_ReturnsVowUnit():
     assert a23_vow.vow_label == a23_str
     assert a23_vow.timeline == timelineunit_shop()
     assert a23_vow.brokerunits == {}
-    assert a23_vow.cashbook == tranbook_shop(a23_str)
+    assert a23_vow.paybook == tranbook_shop(a23_str)
     assert a23_vow.offi_times == set()
     assert a23_vow.bridge == default_bridge_if_None()
     assert a23_vow.fund_iota == default_fund_iota_if_None()

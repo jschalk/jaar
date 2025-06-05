@@ -38,8 +38,8 @@ from src.a15_vow_logic._test_util.a15_str import (
     hour_label_str,
     month_label_str,
     offi_time_str,
-    vow_cashbook_str,
     vow_dealunit_str,
+    vow_paybook_str,
     vow_timeline_hour_str,
     vow_timeline_month_str,
     vow_timeline_weekday_str,
@@ -78,7 +78,7 @@ def test_get_vow_config_dict_ReturnsObj():
     vow_config_dimens = set(vow_config.keys())
     assert vowunit_str() in vow_config_dimens
     assert vow_dealunit_str() in vow_config_dimens
-    assert vow_cashbook_str() in vow_config_dimens
+    assert vow_paybook_str() in vow_config_dimens
     assert vow_timeline_hour_str() in vow_config_dimens
     assert vow_timeline_month_str() in vow_config_dimens
     assert vow_timeline_weekday_str() in vow_config_dimens
@@ -87,14 +87,14 @@ def test_get_vow_config_dict_ReturnsObj():
     _validate_vow_config(vow_config)
     vowunit_dict = vow_config.get(vowunit_str())
     vow_dealunit_dict = vow_config.get(vow_dealunit_str())
-    vow_cashbook_dict = vow_config.get(vow_cashbook_str())
+    vow_paybook_dict = vow_config.get(vow_paybook_str())
     vow_timeline_hour_dict = vow_config.get(vow_timeline_hour_str())
     vow_timeline_month_dict = vow_config.get(vow_timeline_month_str())
     vow_timeline_weekday_dict = vow_config.get(vow_timeline_weekday_str())
     # vow_timeoffi_dict = vow_config.get(vow_timeoffi_str())
     assert len(vowunit_dict.get(jkeys_str())) == 1
     assert len(vow_dealunit_dict.get(jkeys_str())) == 3
-    assert len(vow_cashbook_dict.get(jkeys_str())) == 4
+    assert len(vow_paybook_dict.get(jkeys_str())) == 4
     assert len(vow_timeline_hour_dict.get(jkeys_str())) == 2
     assert len(vow_timeline_month_dict.get(jkeys_str())) == 2
     assert len(vow_timeline_weekday_dict.get(jkeys_str())) == 2
@@ -116,7 +116,7 @@ def test_get_vow_config_dict_ReturnsObj():
     assert gen_jvalues == x_vowunit_jvalues
     assert len(vowunit_dict.get(jvalues_str())) == 9
     assert len(vow_dealunit_dict.get(jvalues_str())) == 2
-    assert len(vow_cashbook_dict.get(jvalues_str())) == 1
+    assert len(vow_paybook_dict.get(jvalues_str())) == 1
     assert len(vow_timeline_hour_dict.get(jvalues_str())) == 1
     assert len(vow_timeline_month_dict.get(jvalues_str())) == 1
     assert len(vow_timeline_weekday_dict.get(jvalues_str())) == 1
@@ -162,7 +162,7 @@ def test_get_vow_dimens_ReturnsObj():
     # THEN
     assert vowunit_str() in vow_config_dimens
     assert vow_dealunit_str() in vow_config_dimens
-    assert vow_cashbook_str() in vow_config_dimens
+    assert vow_paybook_str() in vow_config_dimens
     assert vow_timeline_hour_str() in vow_config_dimens
     assert vow_timeline_month_str() in vow_config_dimens
     assert vow_timeline_weekday_str() in vow_config_dimens

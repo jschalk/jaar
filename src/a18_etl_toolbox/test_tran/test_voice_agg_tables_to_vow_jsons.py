@@ -9,8 +9,8 @@ from src.a00_data_toolbox.file_toolbox import open_file
 from src.a02_finance_logic._test_util.a02_str import vow_label_str
 from src.a12_hub_tools.hub_path import create_vow_json_path
 from src.a15_vow_logic._test_util.a15_str import (
-    vow_cashbook_str,
     vow_dealunit_str,
+    vow_paybook_str,
     vow_timeline_hour_str,
     vow_timeline_month_str,
     vow_timeline_weekday_str,
@@ -56,7 +56,7 @@ def test_get_vow_voice_select1_sqlstrs_ReturnsObj():
     fu2_select_sqlstrs = get_vow_voice_select1_sqlstrs(vow_label=a23_str)
 
     # THEN
-    gen_vowash_sqlstr = fu2_select_sqlstrs.get(vow_cashbook_str())
+    gen_vowash_sqlstr = fu2_select_sqlstrs.get(vow_paybook_str())
     gen_fisdeal_sqlstr = fu2_select_sqlstrs.get(vow_dealunit_str())
     gen_fishour_sqlstr = fu2_select_sqlstrs.get(vow_timeline_hour_str())
     gen_fismont_sqlstr = fu2_select_sqlstrs.get(vow_timeline_month_str())
@@ -66,7 +66,7 @@ def test_get_vow_voice_select1_sqlstrs_ReturnsObj():
     with sqlite3_connect(":memory:") as vow_db_conn:
         cursor = vow_db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        vowash_abbv7 = get_dimen_abbv7(vow_cashbook_str())
+        vowash_abbv7 = get_dimen_abbv7(vow_paybook_str())
         fisdeal_abbv7 = get_dimen_abbv7(vow_dealunit_str())
         fishour_abbv7 = get_dimen_abbv7(vow_timeline_hour_str())
         fismont_abbv7 = get_dimen_abbv7(vow_timeline_month_str())

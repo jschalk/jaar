@@ -27,8 +27,8 @@ from src.a09_pack_logic._test_util.a09_str import event_int_str
 from src.a10_plan_calc._test_util.a10_str import plan_groupunit_str
 from src.a12_hub_tools._test_util.a12_str import job_str
 from src.a15_vow_logic._test_util.a15_str import (
-    vow_cashbook_str,
     vow_dealunit_str,
+    vow_paybook_str,
     vow_timeline_hour_str,
     vow_timeline_month_str,
     vow_timeline_weekday_str,
@@ -82,7 +82,7 @@ def test_create_prime_tablename_ReturnsObj():
     planheal_dimen = plan_concept_healerlink_str()
     planfact_dimen = plan_concept_factunit_str()
     fisunit_dimen = vowunit_str()
-    vowash_dimen = vow_cashbook_str()
+    vowash_dimen = vow_paybook_str()
     fisdeal_dimen = vow_dealunit_str()
     fishour_dimen = vow_timeline_hour_str()
     fismont_dimen = vow_timeline_month_str()
@@ -332,7 +332,7 @@ INSERT INTO vow_event_time_agg ({vow_label_str()}, {event_int_str()}, agg_time)
 SELECT {vow_label_str()}, {event_int_str()}, agg_time
 FROM (
     SELECT {vow_label_str()}, {event_int_str()}, {tran_time_str()} as agg_time
-    FROM vow_cashbook_raw
+    FROM vow_paybook_raw
     GROUP BY {vow_label_str()}, {event_int_str()}, {tran_time_str()}
     UNION 
     SELECT {vow_label_str()}, {event_int_str()}, {deal_time_str()} as agg_time

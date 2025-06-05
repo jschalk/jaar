@@ -47,7 +47,7 @@ def get_vow_dict_from_sqlstrs(
     if bridge := vowunit_row[8]:
         vow_dict["bridge"] = bridge
 
-    cursor.execute(fu1_sqlstrs.get("vow_cashbook"))
+    cursor.execute(fu1_sqlstrs.get("vow_paybook"))
     _set_vow_dict_vowash(cursor, vow_dict, vow_label)
 
     cursor.execute(fu1_sqlstrs.get("vow_dealunit"))
@@ -77,8 +77,8 @@ def _set_vow_dict_vowash(cursor: sqlite3_Cursor, vow_dict: dict, x_vow_label: st
         row_amount = vowash_row[4]
         keylist = [row_owner_name, row_acct_name, row_tran_time]
         set_in_nested_dict(tranunits_dict, keylist, row_amount)
-    cashbook_dict = {"vow_label": x_vow_label, "tranunits": tranunits_dict}
-    vow_dict["cashbook"] = cashbook_dict
+    paybook_dict = {"vow_label": x_vow_label, "tranunits": tranunits_dict}
+    vow_dict["paybook"] = paybook_dict
 
 
 def _set_vow_dict_fisdeal(cursor: sqlite3_Cursor, vow_dict: dict):

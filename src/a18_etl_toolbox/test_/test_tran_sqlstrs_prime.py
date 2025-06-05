@@ -23,8 +23,8 @@ from src.a06_plan_logic._test_util.a06_str import (
 from src.a08_plan_atom_logic.atom_config import get_delete_key_name, get_plan_dimens
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a15_vow_logic._test_util.a15_str import (
-    vow_cashbook_str,
     vow_dealunit_str,
+    vow_paybook_str,
     vow_timeline_hour_str,
     vow_timeline_month_str,
     vow_timeline_weekday_str,

@@ -2,7 +2,7 @@ from sqlite3 import connect as sqlite3_connect
 from src.a02_finance_logic._test_util.a02_str import vow_label_str
 from src.a15_vow_logic._test_util.a15_str import (
     brokerunits_str,
-    cashbook_str,
+    paybook_str,
     timeline_str,
 )
 from src.a15_vow_logic.vow import get_from_dict as vowunit_get_from_dict
@@ -99,7 +99,7 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_With_fisunit_Attrs_Scenario1(
         vow_label_str(),
         "offi_times",
         timeline_str(),
-        cashbook_str(),
+        paybook_str(),
         brokerunits_str(),
     }
 
@@ -115,12 +115,12 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_With_vowash_Attrs_Scenario0()
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
         vowunit_v_agg_tablename = create_prime_tablename("fisunit", "v", "agg")
-        vowcash_v_agg_tablename = create_prime_tablename("vowash", "v", "agg")
+        vowpay_v_agg_tablename = create_prime_tablename("vowash", "v", "agg")
         vowunit_insert_sqlstr = (
             f"INSERT INTO {vowunit_v_agg_tablename} (vow_label) VALUES ('{a23_str}');"
         )
         cursor.execute(vowunit_insert_sqlstr)
-        vowash_insert_sqlstr = f"""INSERT INTO {vowcash_v_agg_tablename} (vow_label, owner_name, acct_name, tran_time, amount)
+        vowash_insert_sqlstr = f"""INSERT INTO {vowpay_v_agg_tablename} (vow_label, owner_name, acct_name, tran_time, amount)
 VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
 ;
 """
@@ -130,10 +130,10 @@ VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
         a23_dict = get_vow_dict_from_voice_tables(cursor, a23_str)
 
     # THEN
-    a23_cashbook_dict = a23_dict.get("cashbook")
-    assert a23_cashbook_dict
-    assert a23_cashbook_dict.get("vow_label") == a23_str
-    a23_tranunits_dict = a23_cashbook_dict.get("tranunits")
+    a23_paybook_dict = a23_dict.get("paybook")
+    assert a23_paybook_dict
+    assert a23_paybook_dict.get("vow_label") == a23_str
+    a23_tranunits_dict = a23_paybook_dict.get("tranunits")
     assert a23_tranunits_dict
     a23_trans_bob_dict = a23_tranunits_dict.get(bob_str)
     assert a23_trans_bob_dict
@@ -155,12 +155,12 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_With_vowash_Attrs_Scenario1()
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
         vowunit_v_agg_tablename = create_prime_tablename("fisunit", "v", "agg")
-        vowcash_v_agg_tablename = create_prime_tablename("vowash", "v", "agg")
+        vowpay_v_agg_tablename = create_prime_tablename("vowash", "v", "agg")
         vowunit_insert_sqlstr = (
             f"INSERT INTO {vowunit_v_agg_tablename} (vow_label) VALUES ('{a23_str}');"
         )
         cursor.execute(vowunit_insert_sqlstr)
-        vowash_insert_sqlstr = f"""INSERT INTO {vowcash_v_agg_tablename} (vow_label, owner_name, acct_name, tran_time, amount)
+        vowash_insert_sqlstr = f"""INSERT INTO {vowpay_v_agg_tablename} (vow_label, owner_name, acct_name, tran_time, amount)
 VALUES
   ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {a23_bob_sue_tp55_amount})
 , ('{a45_str}', '{bob_str}', '{sue_str}', {tp55}, {a45_bob_sue_tp55_amount})
@@ -172,10 +172,10 @@ VALUES
         a23_dict = get_vow_dict_from_voice_tables(cursor, a23_str)
 
     # THEN
-    a23_cashbook_dict = a23_dict.get("cashbook")
-    assert a23_cashbook_dict
-    assert a23_cashbook_dict.get("vow_label") == a23_str
-    a23_tranunits_dict = a23_cashbook_dict.get("tranunits")
+    a23_paybook_dict = a23_dict.get("paybook")
+    assert a23_paybook_dict
+    assert a23_paybook_dict.get("vow_label") == a23_str
+    a23_tranunits_dict = a23_paybook_dict.get("tranunits")
     assert a23_tranunits_dict
     a23_trans_bob_dict = a23_tranunits_dict.get(bob_str)
     assert a23_trans_bob_dict
@@ -433,12 +433,12 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_IsCorrectlyFormatted_Scenario
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
         vowunit_v_agg_tablename = create_prime_tablename("fisunit", "v", "agg")
-        vowcash_v_agg_tablename = create_prime_tablename("vowash", "v", "agg")
+        vowpay_v_agg_tablename = create_prime_tablename("vowash", "v", "agg")
         vowunit_insert_sqlstr = (
             f"INSERT INTO {vowunit_v_agg_tablename} (vow_label) VALUES ('{a23_str}');"
         )
         cursor.execute(vowunit_insert_sqlstr)
-        vowash_insert_sqlstr = f"""INSERT INTO {vowcash_v_agg_tablename} (vow_label, owner_name, acct_name, tran_time, amount)
+        vowash_insert_sqlstr = f"""INSERT INTO {vowpay_v_agg_tablename} (vow_label, owner_name, acct_name, tran_time, amount)
 VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
 ;
 """
@@ -450,8 +450,8 @@ VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
 
     # THEN
     assert a23_vowunit.vow_label == a23_str
-    assert a23_vowunit.cashbook.tranunits.get(bob_str)
-    bob_tranunit = a23_vowunit.cashbook.tranunits.get(bob_str)
+    assert a23_vowunit.paybook.tranunits.get(bob_str)
+    bob_tranunit = a23_vowunit.paybook.tranunits.get(bob_str)
     assert bob_tranunit == {sue_str: {tp55: bob_sue_tp55_amount}}
 
 

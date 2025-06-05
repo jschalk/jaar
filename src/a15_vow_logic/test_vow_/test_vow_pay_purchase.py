@@ -3,7 +3,7 @@ from src.a02_finance_logic.deal import tranbook_shop, tranunit_shop
 from src.a15_vow_logic.vow import vowunit_shop
 
 
-def test_VowUnit_set_cashpurchase_SetsAttr():
+def test_VowUnit_set_paypurchase_SetsAttr():
     # ESTABLISH
     t6606_offi_time_max = 6606
     x_vow = vowunit_shop("accord23")
@@ -13,16 +13,16 @@ def test_VowUnit_set_cashpurchase_SetsAttr():
     t55_t = 5505
     t55_amount = 37
     sue_bob_t55_tranunit = tranunit_shop(sue_str, bob_str, t55_t, t55_amount)
-    assert x_vow.cashbook.tranunit_exists(sue_str, bob_str, t55_t) is False
+    assert x_vow.paybook.tranunit_exists(sue_str, bob_str, t55_t) is False
 
     # WHEN
-    x_vow.set_cashpurchase(sue_bob_t55_tranunit)
+    x_vow.set_paypurchase(sue_bob_t55_tranunit)
 
     # THEN
-    assert x_vow.cashbook.tranunit_exists(sue_str, bob_str, t55_t)
+    assert x_vow.paybook.tranunit_exists(sue_str, bob_str, t55_t)
 
 
-def test_VowUnit_add_cashpurchase_SetsAttr():
+def test_VowUnit_add_paypurchase_SetsAttr():
     # ESTABLISH
     t6606_offi_time_max = 6606
     x_vow = vowunit_shop("accord23")
@@ -31,16 +31,16 @@ def test_VowUnit_add_cashpurchase_SetsAttr():
     bob_str = "Bob"
     t55_t = 5505
     t55_amount = 37
-    assert x_vow.cashbook.tranunit_exists(sue_str, bob_str, t55_t) is False
+    assert x_vow.paybook.tranunit_exists(sue_str, bob_str, t55_t) is False
 
     # WHEN
-    x_vow.add_cashpurchase(sue_str, bob_str, tran_time=t55_t, amount=t55_amount)
+    x_vow.add_paypurchase(sue_str, bob_str, tran_time=t55_t, amount=t55_amount)
 
     # THEN
-    assert x_vow.cashbook.tranunit_exists(sue_str, bob_str, t55_t)
+    assert x_vow.paybook.tranunit_exists(sue_str, bob_str, t55_t)
 
 
-def test_VowUnit_set_cashpurchase_RaisesErrorWhen_tranunit_tran_time_GreaterThanOrEqual_offi_time_max():
+def test_VowUnit_set_paypurchase_RaisesErrorWhen_tranunit_tran_time_GreaterThanOrEqual_offi_time_max():
     # ESTABLISH
     t6606_offi_time_max = 6606
     x_vow = vowunit_shop("accord23")
@@ -55,9 +55,9 @@ def test_VowUnit_set_cashpurchase_RaisesErrorWhen_tranunit_tran_time_GreaterThan
     assert sue_bob_t55_tranunit.tran_time < x_vow._offi_time_max
 
     # WHEN
-    x_vow.set_cashpurchase(sue_bob_t55_tranunit)
+    x_vow.set_paypurchase(sue_bob_t55_tranunit)
     # THEN
-    assert x_vow.cashbook.tranunit_exists(sue_str, bob_str, t55_t)
+    assert x_vow.paybook.tranunit_exists(sue_str, bob_str, t55_t)
 
     # ESTABLISH
     t77_t = 7707
@@ -66,19 +66,19 @@ def test_VowUnit_set_cashpurchase_RaisesErrorWhen_tranunit_tran_time_GreaterThan
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        x_vow.set_cashpurchase(sue_bob_t77_tranunit)
+        x_vow.set_paypurchase(sue_bob_t77_tranunit)
     exception_str = f"Cannot set tranunit for tran_time={t77_t}, TimeLinePoint is greater than current time={t6606_offi_time_max}"
     assert str(excinfo.value) == exception_str
 
     # WHEN / THEN
     sue_bob_t6606 = tranunit_shop(sue_str, bob_str, t6606_offi_time_max, t77_amount)
     with pytest_raises(Exception) as excinfo:
-        x_vow.set_cashpurchase(sue_bob_t6606)
+        x_vow.set_paypurchase(sue_bob_t6606)
     exception_str = f"Cannot set tranunit for tran_time={t6606_offi_time_max}, TimeLinePoint is greater than current time={t6606_offi_time_max}"
     assert str(excinfo.value) == exception_str
 
 
-def test_VowUnit_set_cashpurchase_RaisesErrorWhenDealUnitHas_tran_time():
+def test_VowUnit_set_paypurchase_RaisesErrorWhenDealUnitHas_tran_time():
     # ESTABLISH
     x_vow = vowunit_shop("accord23")
     x_vow._offi_time_max = 0
@@ -95,31 +95,31 @@ def test_VowUnit_set_cashpurchase_RaisesErrorWhenDealUnitHas_tran_time():
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        x_vow.set_cashpurchase(sue_bob_t55_tranunit)
+        x_vow.set_paypurchase(sue_bob_t55_tranunit)
     exception_str = (
         f"Cannot set tranunit for tran_time={t55_t}, TimeLinePoint is blocked"
     )
     assert str(excinfo.value) == exception_str
 
 
-def test_VowUnit_cashpurchase_exists_ReturnsObj():
+def test_VowUnit_paypurchase_exists_ReturnsObj():
     # ESTABLISH
     x_vow = vowunit_shop("accord23")
     x_vow._offi_time_max = 6606
     sue_str = "Sue"
     bob_str = "Bob"
     t55_t = 5505
-    assert x_vow.cashpurchase_exists(sue_str, bob_str, t55_t) is False
+    assert x_vow.paypurchase_exists(sue_str, bob_str, t55_t) is False
 
     # WHEN
     t55_amount = 37
-    x_vow.set_cashpurchase(tranunit_shop(sue_str, bob_str, t55_t, t55_amount))
+    x_vow.set_paypurchase(tranunit_shop(sue_str, bob_str, t55_t, t55_amount))
 
     # THEN
-    assert x_vow.cashpurchase_exists(sue_str, bob_str, t55_t)
+    assert x_vow.paypurchase_exists(sue_str, bob_str, t55_t)
 
 
-def test_VowUnit_get_cashpurchase_ReturnsObj():
+def test_VowUnit_get_paypurchase_ReturnsObj():
     # ESTABLISH
     x_vow = vowunit_shop("accord23")
     x_vow._offi_time_max = 6606
@@ -127,19 +127,19 @@ def test_VowUnit_get_cashpurchase_ReturnsObj():
     bob_str = "Bob"
     t55_t = 5505
     t55_amount = 37
-    x_vow.set_cashpurchase(tranunit_shop(sue_str, bob_str, t55_t, t55_amount))
-    assert x_vow.cashpurchase_exists(sue_str, bob_str, t55_t)
+    x_vow.set_paypurchase(tranunit_shop(sue_str, bob_str, t55_t, t55_amount))
+    assert x_vow.paypurchase_exists(sue_str, bob_str, t55_t)
 
     # WHEN
-    sue_gen_cashpurchase = x_vow.get_cashpurchase(sue_str, bob_str, t55_t)
+    sue_gen_paypurchase = x_vow.get_paypurchase(sue_str, bob_str, t55_t)
 
     # THEN
-    assert sue_gen_cashpurchase
+    assert sue_gen_paypurchase
     sue_bob_t55_tranunit = tranunit_shop(sue_str, bob_str, t55_t, t55_amount)
-    assert sue_gen_cashpurchase == sue_bob_t55_tranunit
+    assert sue_gen_paypurchase == sue_bob_t55_tranunit
 
 
-def test_VowUnit_del_cashpurchase_SetsAttr():
+def test_VowUnit_del_paypurchase_SetsAttr():
     # ESTABLISH
     x_vow = vowunit_shop("accord23")
     x_vow._offi_time_max = 6606
@@ -147,14 +147,14 @@ def test_VowUnit_del_cashpurchase_SetsAttr():
     bob_str = "Bob"
     t55_t = 5505
     t55_amount = 37
-    x_vow.set_cashpurchase(tranunit_shop(sue_str, bob_str, t55_t, t55_amount))
-    assert x_vow.cashpurchase_exists(sue_str, bob_str, t55_t)
+    x_vow.set_paypurchase(tranunit_shop(sue_str, bob_str, t55_t, t55_amount))
+    assert x_vow.paypurchase_exists(sue_str, bob_str, t55_t)
 
     # WHEN
-    x_vow.del_cashpurchase(sue_str, bob_str, t55_t)
+    x_vow.del_paypurchase(sue_str, bob_str, t55_t)
 
     # THEN
-    assert x_vow.cashpurchase_exists(sue_str, bob_str, t55_t) is False
+    assert x_vow.paypurchase_exists(sue_str, bob_str, t55_t) is False
 
 
 def test_VowUnit_set_offi_time_max_SetsAttr():
@@ -166,7 +166,7 @@ def test_VowUnit_set_offi_time_max_SetsAttr():
     bob_str = "Bob"
     t22_t = 2202
     t22_amount = 27
-    x_vow.set_cashpurchase(tranunit_shop(sue_str, bob_str, t22_t, t22_amount))
+    x_vow.set_paypurchase(tranunit_shop(sue_str, bob_str, t22_t, t22_amount))
     assert x_vow._offi_time_max == t6606_offi_time_max
 
     # WHEN
@@ -177,7 +177,7 @@ def test_VowUnit_set_offi_time_max_SetsAttr():
     assert x_vow._offi_time_max == t4404_offi_time_max
 
 
-def test_VowUnit_set_offi_time_max_RaisesErrorWhen_cashpurchase_ExistsWithGreatertran_time():
+def test_VowUnit_set_offi_time_max_RaisesErrorWhen_paypurchase_ExistsWithGreatertran_time():
     # ESTABLISH
     t6606_offi_time_max = 6606
     x_vow = vowunit_shop("accord23")
@@ -186,14 +186,14 @@ def test_VowUnit_set_offi_time_max_RaisesErrorWhen_cashpurchase_ExistsWithGreate
     bob_str = "Bob"
     t55_t = 5505
     t55_amount = 37
-    x_vow.set_cashpurchase(tranunit_shop(sue_str, bob_str, t55_t, t55_amount))
+    x_vow.set_paypurchase(tranunit_shop(sue_str, bob_str, t55_t, t55_amount))
     assert x_vow._offi_time_max == t6606_offi_time_max
 
     # WHEN / THEN
     t4404_offi_time_max = 4404
     with pytest_raises(Exception) as excinfo:
         x_vow.set_offi_time_max(t4404_offi_time_max)
-    exception_str = f"Cannot set _offi_time_max {t4404_offi_time_max}, cashpurchase with greater tran_time exists"
+    exception_str = f"Cannot set _offi_time_max {t4404_offi_time_max}, paypurchase with greater tran_time exists"
     assert str(excinfo.value) == exception_str
 
     # THEN
@@ -222,11 +222,11 @@ def test_VowUnit_set_all_tranbook_SetsAttr():
     t77_tranunit = tranunit_shop(yao_str, sue_str, t77_t, t77_amount)
     t88_tranunit = tranunit_shop(sue_str, yao_str, t88_t, t88_amount)
     t99_tranunit = tranunit_shop(bob_str, sue_str, t99_t, t99_amount)
-    x_vow.set_cashpurchase(t55_tranunit)
-    x_vow.set_cashpurchase(t66_tranunit)
-    x_vow.set_cashpurchase(t77_tranunit)
-    x_vow.set_cashpurchase(t88_tranunit)
-    x_vow.set_cashpurchase(t99_tranunit)
+    x_vow.set_paypurchase(t55_tranunit)
+    x_vow.set_paypurchase(t66_tranunit)
+    x_vow.set_paypurchase(t77_tranunit)
+    x_vow.set_paypurchase(t88_tranunit)
+    x_vow.set_paypurchase(t99_tranunit)
 
     x40000_tran_time = 40000
     x70000_tran_time = 70000
@@ -242,11 +242,11 @@ def test_VowUnit_set_all_tranbook_SetsAttr():
     sue_x70000_deal.set_deal_acct_net(zia_str, zia_deal_net)
 
     assert x_vow._all_tranbook == tranbook_shop(x_vow.vow_label)
-    assert x_vow.cashpurchase_exists(sue_str, bob_str, t55_t)
-    assert x_vow.cashpurchase_exists(yao_str, bob_str, t66_t)
-    assert x_vow.cashpurchase_exists(yao_str, sue_str, t77_t)
-    assert x_vow.cashpurchase_exists(sue_str, yao_str, t88_t)
-    assert x_vow.cashpurchase_exists(bob_str, sue_str, t99_t)
+    assert x_vow.paypurchase_exists(sue_str, bob_str, t55_t)
+    assert x_vow.paypurchase_exists(yao_str, bob_str, t66_t)
+    assert x_vow.paypurchase_exists(yao_str, sue_str, t77_t)
+    assert x_vow.paypurchase_exists(sue_str, yao_str, t88_t)
+    assert x_vow.paypurchase_exists(bob_str, sue_str, t99_t)
 
     assert sue_x40000_deal.deal_acct_net_exists(bob_str)
     assert sue_x70000_deal.deal_acct_net_exists(zia_str)

@@ -77,7 +77,7 @@ def test_vow_build_from_df_ReturnsObj_Scenario0_OneVowLabel(
         allow_prev_to_offi_time_max_entry=True,
         celldepth=5,
     )
-    expected_accord23_vowunit.add_cashpurchase(
+    expected_accord23_vowunit.add_paypurchase(
         owner_name="Zia",
         acct_name="Bob",
         tran_time=777,
@@ -91,11 +91,11 @@ def test_vow_build_from_df_ReturnsObj_Scenario0_OneVowLabel(
     assert gen_vowunit.vow_mstr_dir == x_vows_dir
     assert gen_vowunit.timeline == expected_accord23_vowunit.timeline
     assert gen_vowunit.brokerunits == expected_accord23_vowunit.brokerunits
-    a23_tranunits = expected_accord23_vowunit.cashbook.tranunits
-    assert gen_vowunit.cashbook.tranunits == a23_tranunits
+    a23_tranunits = expected_accord23_vowunit.paybook.tranunits
+    assert gen_vowunit.paybook.tranunits == a23_tranunits
     # print(f"{gen_vowunit.brokerunits=}")
     assert len(gen_vowunit.brokerunits) == 1
-    assert len(gen_vowunit.cashbook.tranunits) == 1
+    assert len(gen_vowunit.paybook.tranunits) == 1
     assert gen_vowunit == expected_accord23_vowunit
 
 
@@ -162,7 +162,7 @@ def test_vow_build_from_df_ReturnsObj_Scenario1_TwoVowLabels(
     assert creg_vowunit.vow_mstr_dir == x_vows_dir
     assert creg_vowunit.timeline == accord23_vowunit.timeline
     assert len(creg_vowunit.brokerunits) == 3
-    assert len(creg_vowunit.cashbook.tranunits) == 4
+    assert len(creg_vowunit.paybook.tranunits) == 4
     # assert creg_vowunit == accord23_vowunit
 
     five_vowunit = x_vowunits.get("jeffy45")
@@ -172,7 +172,7 @@ def test_vow_build_from_df_ReturnsObj_Scenario1_TwoVowLabels(
     assert five_vowunit.vow_label == "jeffy45"
     assert five_vowunit.vow_mstr_dir == x_vows_dir
     assert len(five_vowunit.brokerunits) == 2
-    assert len(five_vowunit.cashbook.tranunits) == 1
+    assert len(five_vowunit.paybook.tranunits) == 1
     jeffy45_timeline = jeffy45_vowunit.timeline
     assert five_vowunit.timeline.hours_config == jeffy45_timeline.hours_config
     assert five_vowunit.timeline.weekdays_config == jeffy45_timeline.weekdays_config

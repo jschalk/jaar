@@ -43,7 +43,7 @@ def get_ex1_br00001_df() -> DataFrame:
 
 
 def get_ex1_br00002_df() -> DataFrame:
-    """idea_format_00002_vow_cashbook_v0_0_0
+    """idea_format_00002_vow_paybook_v0_0_0
     acct_name,amount,vow_label,owner_name,tran_time"""
     x_df = DataFrame(
         columns=["acct_name", "amount", "vow_label", "owner_name", "tran_time"]
@@ -160,7 +160,7 @@ def get_ex2_br00001_df() -> DataFrame:
 
 
 def get_ex2_br00002_df() -> DataFrame:
-    """idea_format_00002_vow_cashbook_v0_0_0
+    """idea_format_00002_vow_paybook_v0_0_0
     acct_name,amount,vow_label,owner_name,tran_time"""
     x_df = DataFrame(
         columns=["acct_name", "amount", "vow_label", "owner_name", "tran_time"]

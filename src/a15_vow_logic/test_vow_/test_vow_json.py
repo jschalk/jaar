@@ -19,8 +19,8 @@ from src.a15_vow_logic._test_util.a15_env import (
 )
 from src.a15_vow_logic._test_util.a15_str import (
     brokerunits_str,
-    cashbook_str,
     offi_time_str,
+    paybook_str,
     timeline_str,
 )
 from src.a15_vow_logic.vow import (
@@ -31,7 +31,7 @@ from src.a15_vow_logic.vow import (
 )
 
 
-def test_VowUnit_get_dict_ReturnsObjWith_cashbook():
+def test_VowUnit_get_dict_ReturnsObjWith_paybook():
     # ESTABLISH
     vow_mstr_dir = get_module_temp_dir()
     a45_str = "accord45"
@@ -46,16 +46,16 @@ def test_VowUnit_get_dict_ReturnsObjWith_cashbook():
     sue_x4_quota = 55
     sue_x7_tran_time = 505
     sue_x7_quota = 66
-    cash_tran_time = 15
+    pay_tran_time = 15
     bob_sue_amount = 30000
     accord_vow.set_offi_time_max(accord_offi_time_max_int)
     accord_vow.add_dealunit(bob_str, bob_x0_tran_time, bob_x0_quota)
     accord_vow.add_dealunit(sue_str, sue_x4_tran_time, sue_x4_quota)
     accord_vow.add_dealunit(sue_str, sue_x7_tran_time, sue_x7_quota)
-    accord_vow.add_cashpurchase(
+    accord_vow.add_paypurchase(
         owner_name=bob_str,
         acct_name=sue_str,
-        tran_time=cash_tran_time,
+        tran_time=pay_tran_time,
         amount=bob_sue_amount,
     )
 
@@ -65,7 +65,7 @@ def test_VowUnit_get_dict_ReturnsObjWith_cashbook():
     # THEN
     offi_times_str = f"{offi_time_str()}s"
     print(f"{ accord_vow._get_brokerunits_dict()=}")
-    print(f"{ accord_vow.cashbook.get_dict()=}")
+    print(f"{ accord_vow.paybook.get_dict()=}")
     assert x_dict.get(vow_label_str()) == a45_str
     assert x_dict.get(timeline_str()) == get_default_timeline_config_dict()
     assert x_dict.get(offi_times_str) == list(a45_offi_times)
@@ -74,7 +74,7 @@ def test_VowUnit_get_dict_ReturnsObjWith_cashbook():
     assert x_dict.get(respect_bit_str()) == default_RespectBit_if_None()
     assert x_dict.get(penny_str()) == filter_penny()
     assert x_dict.get(brokerunits_str()) == accord_vow._get_brokerunits_dict()
-    assert x_dict.get(cashbook_str()) == accord_vow.cashbook.get_dict()
+    assert x_dict.get(paybook_str()) == accord_vow.paybook.get_dict()
     assert set(x_dict.keys()) == {
         vow_label_str(),
         timeline_str(),
@@ -84,20 +84,20 @@ def test_VowUnit_get_dict_ReturnsObjWith_cashbook():
         fund_iota_str(),
         respect_bit_str(),
         penny_str(),
-        cashbook_str(),
+        paybook_str(),
     }
 
 
-def test_VowUnit_get_dict_ReturnsObjWithOut_cashbook():
+def test_VowUnit_get_dict_ReturnsObjWithOut_paybook():
     # ESTABLISH
     accord45_str = "accord45"
     accord_vow = vowunit_shop(accord45_str, get_module_temp_dir())
 
     # WHEN
-    x_dict = accord_vow.get_dict(include_cashbook=False)
+    x_dict = accord_vow.get_dict(include_paybook=False)
 
     # THEN
-    assert not x_dict.get(cashbook_str())
+    assert not x_dict.get(paybook_str())
     assert set(x_dict.keys()) == {
         vow_label_str(),
         timeline_str(),
@@ -154,7 +154,7 @@ def test_get_from_dict_ReturnsVowUnit_Scenario0_WithParameters():
     sue_x4_quota = 55
     sue_x7_deal_time = 7
     sue_x7_quota = 66
-    cash_tran_time = 15
+    pay_tran_time = 15
     bob_sue_amount = 30000
     accord_vow.add_dealunit(bob_str, bob_x0_deal_time, bob_x0_quota)
     accord_vow.add_dealunit(sue_str, sue_x4_deal_time, sue_x4_quota)
@@ -163,10 +163,10 @@ def test_get_from_dict_ReturnsVowUnit_Scenario0_WithParameters():
     accord_vow.fund_iota = sue_fund_iota
     accord_vow.respect_bit = sue_respect_bit
     accord_vow.penny = sue_penny
-    accord_vow.add_cashpurchase(
+    accord_vow.add_paypurchase(
         owner_name=bob_str,
         acct_name=sue_str,
-        tran_time=cash_tran_time,
+        tran_time=pay_tran_time,
         amount=bob_sue_amount,
     )
     x_dict = accord_vow.get_dict()
@@ -183,7 +183,7 @@ def test_get_from_dict_ReturnsVowUnit_Scenario0_WithParameters():
     assert x_vow.respect_bit == sue_respect_bit
     assert x_vow.penny == sue_penny
     assert x_vow.brokerunits == accord_vow.brokerunits
-    assert x_vow.cashbook == accord_vow.cashbook
+    assert x_vow.paybook == accord_vow.paybook
     assert x_vow.vow_mstr_dir == accord_vow.vow_mstr_dir
     assert x_vow != accord_vow
     x_vow._offi_time_max = 0
@@ -215,7 +215,7 @@ def test_get_from_dict_ReturnsVowUnit_Scenario1_WithOutParameters():
     assert generated_vow.respect_bit == default_RespectBit_if_None()
     assert generated_vow.penny == 1
     assert generated_vow.brokerunits == accord_vow.brokerunits
-    assert generated_vow.cashbook == accord_vow.cashbook
+    assert generated_vow.paybook == accord_vow.paybook
     assert generated_vow.vow_mstr_dir == accord_vow.vow_mstr_dir
     assert generated_vow == accord_vow
 

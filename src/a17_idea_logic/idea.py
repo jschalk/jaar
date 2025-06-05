@@ -277,7 +277,7 @@ def vow_build_from_df(
         )
         vowunit_dict[x_vowunit.vow_label] = x_vowunit
         _add_dealunits_from_df(x_vowunit, br00001_df)
-        _add_cashpurchases_from_df(x_vowunit, br00002_df)
+        _add_paypurchases_from_df(x_vowunit, br00002_df)
     return vowunit_dict
 
 
@@ -329,10 +329,10 @@ def _add_dealunits_from_df(x_vowunit: VowUnit, br00001_df: DataFrame):
         )
 
 
-def _add_cashpurchases_from_df(x_vowunit: VowUnit, br00002_df: DataFrame):
+def _add_paypurchases_from_df(x_vowunit: VowUnit, br00002_df: DataFrame):
     query_str = f"vow_label == '{x_vowunit.vow_label}'"
     for index, row in br00002_df.query(query_str).iterrows():
-        x_vowunit.add_cashpurchase(
+        x_vowunit.add_paypurchase(
             owner_name=row["owner_name"],
             acct_name=row["acct_name"],
             tran_time=row["tran_time"],

@@ -6,10 +6,6 @@ def brokerunits_str() -> str:
     return "brokerunits"
 
 
-def cashbook_str() -> str:
-    return "cashbook"
-
-
 def cumlative_day_str() -> str:
     return "cumlative_day"
 
@@ -26,12 +22,16 @@ def month_label_str() -> str:
     return "month_label"
 
 
-def vow_cashbook_str() -> str:
-    return "vow_cashbook"
+def paybook_str() -> str:
+    return "paybook"
 
 
 def vow_dealunit_str() -> str:
     return "vow_dealunit"
+
+
+def vow_paybook_str() -> str:
+    return "vow_paybook"
 
 
 def vow_timeline_hour_str() -> str:

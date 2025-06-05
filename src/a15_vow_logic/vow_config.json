@@ -1,5 +1,5 @@
 {
-    "vow_cashbook": {
+    "vow_paybook": {
         "jkeys": {
             "acct_name": {
                 "class_type": "NameTerm"

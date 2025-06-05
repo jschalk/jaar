@@ -20,7 +20,7 @@ def get_vow_dimens() -> set[str]:
     return {
         "vowunit",
         "vow_dealunit",
-        "vow_cashbook",
+        "vow_paybook",
         "vow_timeline_hour",
         "vow_timeline_month",
         "vow_timeline_weekday",
