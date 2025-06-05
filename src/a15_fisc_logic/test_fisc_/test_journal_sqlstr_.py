@@ -5,10 +5,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     fcontext_str,
     fopen_str,
 )
-from src.a08_bud_atom_logic._test_util.a08_str import (
-    INSERT_str,
-    atom_hx_str,
-)
+from src.a08_bud_atom_logic._test_util.a08_str import INSERT_str, atom_hx_str
 from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a15_fisc_logic.journal_sqlstr import (
     get_atom2delta_table_create_sqlstr,

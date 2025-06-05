@@ -11,11 +11,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     pledge_str,
 )
 from src.a06_bud_logic.bud import budunit_shop
-from src.a08_bud_atom_logic._test_util.a08_str import (
-    DELETE_str,
-    INSERT_str,
-    UPDATE_str,
-)
+from src.a08_bud_atom_logic._test_util.a08_str import DELETE_str, INSERT_str, UPDATE_str
 from src.a08_bud_atom_logic.atom import budatom_shop
 from src.a09_pack_logic.delta import buddelta_shop
 from src.a09_pack_logic.legible import create_legible_list

@@ -69,6 +69,18 @@ def test_PythonFileImportsFormat():
 
 
 def test_StrFunctionsAreAssertTested():
+    """
+    Test that all string-related functions in each module directory are properly asserted and tested.
+    This test performs the following checks for each module:
+    - Retrieves all string functions and ensures they are sorted and not duplicated.
+    - Verifies that if string functions exist, a corresponding test file exists in the module's utility directory.
+    - Checks that the test file imports exactly one object and that imports are ordered.
+    - Ensures the test file contains a single test function named 'test_str_functions_ReturnsObj'.
+    - Validates that the test file includes the necessary assertions for all string functions.
+    Raises:
+        AssertionError: If any of the above conditions are not met.
+    """
+
     # sourcery skip: no-loop-in-tests
     # sourcery skip: no-conditionals-in-tests
     # ESTABLISH
