@@ -205,7 +205,7 @@ def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeConceptsOfZero_massScenario0
     casa_way = sue_bud.make_l1_way(casa_str)
     floor_str = "mop floor"
     floor_way = sue_bud.make_way(casa_way, floor_str)
-    floor_concept = conceptunit_shop(floor_str, pledge=True)
+    floor_concept = conceptunit_shop(floor_str, task=True)
     sue_bud.set_concept(floor_concept, casa_way)
     sue_bud.set_l1_concept(conceptunit_shop("unimportant"))
 
@@ -244,7 +244,7 @@ def test_BudUnit_settle_bud_Sets_fund_ratio_WithSomeConceptsOfZero_massScenario1
     casa_way = sue_bud.make_l1_way(casa_str)
     floor_str = "mop floor"
     floor_way = sue_bud.make_way(casa_way, floor_str)
-    floor_concept = conceptunit_shop(floor_str, pledge=True)
+    floor_concept = conceptunit_shop(floor_str, task=True)
     sue_bud.set_concept(floor_concept, casa_way)
     sue_bud.set_l1_concept(conceptunit_shop("unimportant"))
 
@@ -784,7 +784,7 @@ def test_BudUnit_settle_bud_CorrectlySetsGroupLinkBudCredAndDebt():
     )
     assert membership_debt_sum == 1.0 * default_fund_pool()
 
-    # ESTABLISH another pledge, check metrics are as expected
+    # ESTABLISH another task, check metrics are as expected
     xio_str = "Xio"
     yao_bud.set_acctunit(acctunit_shop(xio_str))
     yao_bud.conceptroot.set_awardlink(awardlink_shop(xio_str, 20, take_force=13))
@@ -877,7 +877,7 @@ def test_BudUnit_settle_bud_CorrectlySetsAcctUnitBud_fund():
         == 1.0 * default_fund_pool()
     )
 
-    # WHEN another pledge, check metrics are as expected
+    # WHEN another task, check metrics are as expected
     xio_str = "Xio"
     yao_bud.set_acctunit(acctunit_shop(xio_str))
     yao_bud.conceptroot.set_awardlink(awardlink_shop(xio_str, 20, take_force=10))

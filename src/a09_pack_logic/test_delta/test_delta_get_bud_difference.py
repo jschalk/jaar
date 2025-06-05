@@ -32,9 +32,9 @@ from src.a06_bud_logic._test_util.a06_str import (
     healer_name_str,
     labor_title_str,
     mass_str,
-    pledge_str,
     rconcept_active_requisite_str,
     take_force_str,
+    task_str,
 )
 from src.a06_bud_logic._test_util.example_buds import get_budunit_with_4_levels
 from src.a06_bud_logic.bud import budunit_shop
@@ -421,7 +421,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_insert():
     accord_begin = 34
     accord_close = 78
     accord_mass = 55
-    accord_pledge = True
+    accord_task = True
     accord_way = after_sue_bud.make_l1_way(accord45_str)
     after_sue_bud.set_l1_concept(
         conceptunit_shop(
@@ -429,7 +429,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_insert():
             begin=accord_begin,
             close=accord_close,
             mass=accord_mass,
-            pledge=accord_pledge,
+            task=accord_task,
         )
     )
 
@@ -451,7 +451,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_insert():
     assert ball_budatom.get_value(begin_str()) == accord_begin
     assert ball_budatom.get_value(close_str()) == accord_close
     assert ball_budatom.get_value(mass_str()) == accord_mass
-    assert ball_budatom.get_value(pledge_str()) == accord_pledge
+    assert ball_budatom.get_value(task_str()) == accord_task
 
     assert get_budatom_total_count(sue_buddelta) == 2
 
@@ -467,7 +467,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_update():
     before_accord_begin = 34
     before_accord_close = 78
     before_accord_mass = 55
-    before_accord_pledge = True
+    before_accord_task = True
     accord_way = before_sue_bud.make_l1_way(accord45_str)
     before_sue_bud.set_l1_concept(
         conceptunit_shop(
@@ -475,7 +475,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_update():
             begin=before_accord_begin,
             close=before_accord_close,
             mass=before_accord_mass,
-            pledge=before_accord_pledge,
+            task=before_accord_task,
         )
     )
 
@@ -483,13 +483,13 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_update():
     after_accord_begin = 99
     after_accord_close = 111
     after_accord_mass = 22
-    after_accord_pledge = False
+    after_accord_task = False
     after_sue_bud.edit_concept_attr(
         accord_way,
         begin=after_accord_begin,
         close=after_accord_close,
         mass=after_accord_mass,
-        pledge=after_accord_pledge,
+        task=after_accord_task,
     )
 
     # WHEN
@@ -505,7 +505,7 @@ def test_BudDelta_add_all_different_budatoms_Creates_BudAtom_concept_update():
     assert ball_budatom.get_value(begin_str()) == after_accord_begin
     assert ball_budatom.get_value(close_str()) == after_accord_close
     assert ball_budatom.get_value(mass_str()) == after_accord_mass
-    assert ball_budatom.get_value(pledge_str()) == after_accord_pledge
+    assert ball_budatom.get_value(task_str()) == after_accord_task
 
     assert get_budatom_total_count(sue_buddelta) == 1
 

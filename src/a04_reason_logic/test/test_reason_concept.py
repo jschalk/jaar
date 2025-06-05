@@ -345,7 +345,7 @@ def test_reasons_get_from_dict_ReturnsObj():
     assert reasonunits_dict.get(wkday_reasonunit.rcontext) == wkday_reasonunit
 
 
-def test_ReasonHeir_correctSetsPledgeState():
+def test_ReasonHeir_correctSetsTaskState():
     # ESTABLISH
     day_str = "ced_day"
     day_way = create_way(root_label(), day_str)

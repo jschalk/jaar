@@ -136,7 +136,7 @@ def test_set_listen_to_speaker_fact_SetsFact():
     yao_listener.set_acct_respect(20)
     yao_listener.set_concept(conceptunit_shop(clean_str), status_way)
     yao_listener.set_concept(conceptunit_shop(dirty_str), status_way)
-    yao_listener.set_concept(conceptunit_shop(sweep_str, pledge=True), casa_way)
+    yao_listener.set_concept(conceptunit_shop(sweep_str, task=True), casa_way)
     yao_listener.edit_concept_attr(
         sweep_way, reason_rcontext=status_way, reason_premise=dirty_way
     )
@@ -177,7 +177,7 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     yao_listener.set_concept(conceptunit_shop(running_str), fridge_way)
     yao_listener.set_concept(conceptunit_shop(clean_str), status_way)
     yao_listener.set_concept(conceptunit_shop(dirty_str), status_way)
-    yao_listener.set_concept(conceptunit_shop(sweep_str, pledge=True), casa_way)
+    yao_listener.set_concept(conceptunit_shop(sweep_str, task=True), casa_way)
     yao_listener.edit_concept_attr(
         sweep_way, reason_rcontext=status_way, reason_premise=dirty_way
     )
@@ -229,7 +229,7 @@ def test_migrate_all_facts_CorrectlyAddsConceptUnitsAndSetsFactUnits():
     yao_src.set_acct_respect(20)
     yao_src.set_concept(conceptunit_shop(clean_str), status_way)
     yao_src.set_concept(conceptunit_shop(dirty_str), status_way)
-    yao_src.set_concept(conceptunit_shop(sweep_str, pledge=True), casa_way)
+    yao_src.set_concept(conceptunit_shop(sweep_str, task=True), casa_way)
     yao_src.edit_reason(sweep_way, status_way, dirty_way)
     # missing_fact_fcontexts = list(yao_src.get_missing_fact_rcontexts().keys())
     yao_src.set_concept(conceptunit_shop(rain_str), weather_way)

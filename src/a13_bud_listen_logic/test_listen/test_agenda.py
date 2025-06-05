@@ -49,7 +49,7 @@ def test_listen_to_speaker_agenda_ReturnsSingleChoreBud():
     yao_acct_debtit_belief = 77
     before_yao_budunit.set_acct_respect(yao_acct_debtit_belief)
     clean_str = "clean"
-    zia_clean_conceptunit = conceptunit_shop(clean_str, pledge=True)
+    zia_clean_conceptunit = conceptunit_shop(clean_str, task=True)
     zia_clean_conceptunit.laborunit.set_laborlink(yao_str)
     zia_budunit = budunit_shop(zia_str)
     zia_budunit.add_acctunit(yao_str)
@@ -84,7 +84,7 @@ def test_listen_to_speaker_agenda_ReturnsLevel2ChoreBud():
     zia_budunit = budunit_shop(zia_str)
     zia_budunit.add_acctunit(yao_str)
     clean_str = "clean"
-    zia_clean_conceptunit = conceptunit_shop(clean_str, pledge=True)
+    zia_clean_conceptunit = conceptunit_shop(clean_str, task=True)
     zia_clean_conceptunit.laborunit.set_laborlink(yao_str)
     casa_way = zia_budunit.make_l1_way("casa")
     zia_budunit.set_concept(zia_clean_conceptunit, casa_way)
@@ -126,11 +126,11 @@ def test_listen_to_speaker_agenda_Returns2AgendaConceptsLevel2ChoreBud():
     clean_str = "clean"
     cook_str = "cook"
     fly_str = "fly"
-    yao_clean_conceptunit = conceptunit_shop(clean_str, pledge=True)
+    yao_clean_conceptunit = conceptunit_shop(clean_str, task=True)
     yao_clean_conceptunit.laborunit.set_laborlink(yao_str)
-    yao_cook_conceptunit = conceptunit_shop(cook_str, pledge=True)
+    yao_cook_conceptunit = conceptunit_shop(cook_str, task=True)
     yao_cook_conceptunit.laborunit.set_laborlink(yao_str)
-    yao_fly_conceptunit = conceptunit_shop(fly_str, pledge=True)
+    yao_fly_conceptunit = conceptunit_shop(fly_str, task=True)
     yao_fly_conceptunit.laborunit.set_laborlink(yao_str)
     casa_way = zia_budunit.make_l1_way("casa")
     fly_way = zia_budunit.make_l1_way(fly_str)
@@ -181,16 +181,16 @@ def test_listen_to_speaker_agenda_Returns2AgendaConceptsLevel2ChoreBudWhereAnCon
     dish_str = "dish"
     cook_str = "cook"
     fly_str = "fly"
-    yao_dish_conceptunit = conceptunit_shop(dish_str, pledge=True)
+    yao_dish_conceptunit = conceptunit_shop(dish_str, task=True)
     yao_dish_conceptunit.laborunit.set_laborlink(yao_str)
-    yao_cook_conceptunit = conceptunit_shop(cook_str, pledge=True)
+    yao_cook_conceptunit = conceptunit_shop(cook_str, task=True)
     yao_cook_conceptunit.laborunit.set_laborlink(yao_str)
-    yao_fly_conceptunit = conceptunit_shop(fly_str, pledge=True)
+    yao_fly_conceptunit = conceptunit_shop(fly_str, task=True)
     yao_fly_conceptunit.laborunit.set_laborlink(yao_str)
     casa_way = zia_budunit.make_l1_way("casa")
     dish_way = zia_budunit.make_way(casa_way, dish_str)
     fly_way = zia_budunit.make_l1_way(fly_str)
-    before_yao_dish_conceptunit = conceptunit_shop(dish_str, pledge=True)
+    before_yao_dish_conceptunit = conceptunit_shop(dish_str, task=True)
     before_yao_dish_conceptunit.laborunit.set_laborlink(yao_str)
     before_yao_budunit.set_concept(before_yao_dish_conceptunit, casa_way)
     before_yao_budunit.edit_concept_attr(dish_way, mass=1000)
@@ -245,7 +245,7 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalBud():
     sue_budunit.set_max_tree_traverse(6)
     vacuum_str = "vacuum"
     vacuum_way = sue_budunit.make_l1_way(vacuum_str)
-    sue_budunit.set_l1_concept(conceptunit_shop(vacuum_str, pledge=True))
+    sue_budunit.set_l1_concept(conceptunit_shop(vacuum_str, task=True))
     vacuum_conceptunit = sue_budunit.get_concept_obj(vacuum_way)
     vacuum_conceptunit.laborunit.set_laborlink(yao_str)
 
@@ -255,17 +255,17 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalBud():
     chicken_str = "chicken first"
     chicken_way = sue_budunit.make_l1_way(chicken_str)
     sue_budunit.set_l1_concept(conceptunit_shop(chicken_str))
-    # set egg pledge is True when chicken first is False
+    # set egg task is True when chicken first is False
     sue_budunit.edit_concept_attr(
         egg_way,
-        pledge=True,
+        task=True,
         reason_rcontext=chicken_way,
         reason_rconcept_active_requisite=True,
     )
-    # set chick pledge is True when egg first is False
+    # set chick task is True when egg first is False
     sue_budunit.edit_concept_attr(
         chicken_way,
-        pledge=True,
+        task=True,
         reason_rcontext=egg_way,
         reason_rconcept_active_requisite=False,
     )

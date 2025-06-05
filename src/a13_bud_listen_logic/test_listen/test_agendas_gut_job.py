@@ -47,8 +47,8 @@ def test_listen_to_agendas_jobs_into_job_AddsChoresToBudWhenNo_laborlinkIsSet(
     save_gut_file(vow_mstr_dir, yao_gut)
 
     zia_job = budunit_shop(zia_str, a23_str)
-    zia_job.set_concept(conceptunit_shop(clean_str(), pledge=True), casa_way())
-    zia_job.set_concept(conceptunit_shop(cook_str(), pledge=True), casa_way())
+    zia_job.set_concept(conceptunit_shop(clean_str(), task=True), casa_way())
+    zia_job.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
     zia_job.add_acctunit(yao_str, debtit_belief=12)
     save_job_file(vow_mstr_dir, zia_job)
 
@@ -79,8 +79,8 @@ def test_listen_to_agendas_jobs_into_job_AddsChoresToBud(env_dir_setup_cleanup):
     save_job_file(vow_mstr_dir, yao_gut)
 
     zia_job = budunit_shop(zia_str, a23_str)
-    zia_job.set_concept(conceptunit_shop(clean_str(), pledge=True), casa_way())
-    zia_job.set_concept(conceptunit_shop(cook_str(), pledge=True), casa_way())
+    zia_job.set_concept(conceptunit_shop(clean_str(), task=True), casa_way())
+    zia_job.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
     zia_job.add_acctunit(yao_str, debtit_belief=12)
     clean_conceptunit = zia_job.get_concept_obj(clean_way())
     cook_conceptunit = zia_job.get_concept_obj(cook_way())
@@ -182,8 +182,8 @@ def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalBud(env_dir_setup_cl
 
     zia_str = "Zia"
     zia_job = budunit_shop(zia_str, a23_str)
-    zia_job.set_concept(conceptunit_shop(clean_str(), pledge=True), casa_way())
-    zia_job.set_concept(conceptunit_shop(cook_str(), pledge=True), casa_way())
+    zia_job.set_concept(conceptunit_shop(clean_str(), task=True), casa_way())
+    zia_job.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
     zia_job.add_acctunit(yao_str, debtit_belief=12)
     clean_conceptunit = zia_job.get_concept_obj(clean_way())
     cook_conceptunit = zia_job.get_concept_obj(cook_way())
@@ -196,7 +196,7 @@ def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalBud(env_dir_setup_cl
     zia_job.add_acctunit(yao_str, debtit_belief=12)
     vacuum_str = "vacuum"
     vacuum_way = sue_job.make_l1_way(vacuum_str)
-    sue_job.set_l1_concept(conceptunit_shop(vacuum_str, pledge=True))
+    sue_job.set_l1_concept(conceptunit_shop(vacuum_str, task=True))
     vacuum_conceptunit = sue_job.get_concept_obj(vacuum_way)
     vacuum_conceptunit.laborunit.set_laborlink(yao_str)
 
@@ -206,17 +206,17 @@ def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalBud(env_dir_setup_cl
     chicken_str = "chicken first"
     chicken_way = sue_job.make_l1_way(chicken_str)
     sue_job.set_l1_concept(conceptunit_shop(chicken_str))
-    # set egg pledge is True when chicken first is False
+    # set egg task is True when chicken first is False
     sue_job.edit_concept_attr(
         egg_way,
-        pledge=True,
+        task=True,
         reason_rcontext=chicken_way,
         reason_rconcept_active_requisite=True,
     )
-    # set chick pledge is True when egg first is False
+    # set chick task is True when egg first is False
     sue_job.edit_concept_attr(
         chicken_way,
-        pledge=True,
+        task=True,
         reason_rcontext=egg_way,
         reason_rconcept_active_requisite=False,
     )
@@ -261,8 +261,8 @@ def test_listen_to_agendas_jobs_into_job_ProcessesMissingDebtorBud(
     save_gut_file(vow_mstr_dir, yao_gut)
 
     zia_job = budunit_shop(zia_str, a23_str)
-    zia_job.set_concept(conceptunit_shop(clean_str(), pledge=True), casa_way())
-    zia_job.set_concept(conceptunit_shop(cook_str(), pledge=True), casa_way())
+    zia_job.set_concept(conceptunit_shop(clean_str(), task=True), casa_way())
+    zia_job.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
     zia_job.add_acctunit(yao_str, debtit_belief=12)
     clean_conceptunit = zia_job.get_concept_obj(clean_way())
     cook_conceptunit = zia_job.get_concept_obj(cook_way())
@@ -309,8 +309,8 @@ def test_listen_to_agendas_jobs_into_job_ListensToOwner_gut_AndNotOwner_job(
     # Save Zia to job
     zia_str = "Zia"
     zia_job = budunit_shop(zia_str, a23_str)
-    zia_job.set_concept(conceptunit_shop(clean_str(), pledge=True), casa_way())
-    zia_job.set_concept(conceptunit_shop(cook_str(), pledge=True), casa_way())
+    zia_job.set_concept(conceptunit_shop(clean_str(), task=True), casa_way())
+    zia_job.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
     zia_job.add_acctunit(yao_str, debtit_belief=12)
     clean_conceptunit = zia_job.get_concept_obj(clean_way())
     cook_conceptunit = zia_job.get_concept_obj(cook_way())
@@ -322,7 +322,7 @@ def test_listen_to_agendas_jobs_into_job_ListensToOwner_gut_AndNotOwner_job(
     yao_old_job = budunit_shop(yao_str, a23_str)
     vacuum_str = "vacuum"
     vacuum_way = yao_old_job.make_l1_way(vacuum_str)
-    yao_old_job.set_l1_concept(conceptunit_shop(vacuum_str, pledge=True))
+    yao_old_job.set_l1_concept(conceptunit_shop(vacuum_str, task=True))
     vacuum_conceptunit = yao_old_job.get_concept_obj(vacuum_way)
     vacuum_conceptunit.laborunit.set_laborlink(yao_str)
     save_job_file(vow_mstr_dir, yao_old_job)

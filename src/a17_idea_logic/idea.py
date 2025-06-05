@@ -89,7 +89,7 @@ def create_idea_df(x_budunit: BudUnit, idea_name: str) -> DataFrame:
     x_owner_name = x_budunit.owner_name
     sorted_budatoms = _get_sorted_INSERT_str_budatoms(x_buddelta, x_idearef)
     d2_list = _create_d2_list(sorted_budatoms, x_idearef, x_vow_label, x_owner_name)
-    d2_list = _delta_all_pledge_values(d2_list, x_idearef)
+    d2_list = _delta_all_task_values(d2_list, x_idearef)
     x_idea = _generate_idea_dataframe(d2_list, idea_name)
     sorting_columns = x_idearef.get_headers_list()
     return _sort_dataframe(x_idea, sorting_columns)
@@ -124,16 +124,16 @@ def _create_d2_list(
     return d2_list
 
 
-def _delta_all_pledge_values(d2_list: list[list], x_idearef: IdeaRef) -> list[list]:
-    if "pledge" in x_idearef._attributes:
+def _delta_all_task_values(d2_list: list[list], x_idearef: IdeaRef) -> list[list]:
+    if "task" in x_idearef._attributes:
         for x_count, x_header in enumerate(x_idearef.get_headers_list()):
-            if x_header == "pledge":
-                pledge_column_number = x_count
+            if x_header == "task":
+                task_column_number = x_count
         for x_row in d2_list:
-            if x_row[pledge_column_number] is True:
-                x_row[pledge_column_number] = "Yes"
+            if x_row[task_column_number] is True:
+                x_row[task_column_number] = "Yes"
             else:
-                x_row[pledge_column_number] = ""
+                x_row[task_column_number] = ""
     return d2_list
 
 

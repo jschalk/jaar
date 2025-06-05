@@ -86,33 +86,33 @@ def test_BudUnit_settle_bud_ClearsDescendantAttributes():
     mon_str = "Monday"
     mon_way = sue_bud.make_way(wk_way, mon_str)
     mon_concept = sue_bud.get_concept_obj(mon_way)
-    assert sue_bud.conceptroot._descendant_pledge_count is None
+    assert sue_bud.conceptroot._descendant_task_count is None
     assert sue_bud.conceptroot._all_acct_cred is None
     assert sue_bud.conceptroot._all_acct_debt is None
-    assert casa_concept._descendant_pledge_count is None
+    assert casa_concept._descendant_task_count is None
     assert casa_concept._all_acct_cred is None
     assert casa_concept._all_acct_debt is None
-    assert mon_concept._descendant_pledge_count is None
+    assert mon_concept._descendant_task_count is None
     assert mon_concept._all_acct_cred is None
     assert mon_concept._all_acct_debt is None
 
-    sue_bud.conceptroot._descendant_pledge_count = -2
+    sue_bud.conceptroot._descendant_task_count = -2
     sue_bud.conceptroot._all_acct_cred = -2
     sue_bud.conceptroot._all_acct_debt = -2
-    casa_concept._descendant_pledge_count = -2
+    casa_concept._descendant_task_count = -2
     casa_concept._all_acct_cred = -2
     casa_concept._all_acct_debt = -2
-    mon_concept._descendant_pledge_count = -2
+    mon_concept._descendant_task_count = -2
     mon_concept._all_acct_cred = -2
     mon_concept._all_acct_debt = -2
 
-    assert sue_bud.conceptroot._descendant_pledge_count == -2
+    assert sue_bud.conceptroot._descendant_task_count == -2
     assert sue_bud.conceptroot._all_acct_cred == -2
     assert sue_bud.conceptroot._all_acct_debt == -2
-    assert casa_concept._descendant_pledge_count == -2
+    assert casa_concept._descendant_task_count == -2
     assert casa_concept._all_acct_cred == -2
     assert casa_concept._all_acct_debt == -2
-    assert mon_concept._descendant_pledge_count == -2
+    assert mon_concept._descendant_task_count == -2
     assert mon_concept._all_acct_cred == -2
     assert mon_concept._all_acct_debt == -2
 
@@ -120,9 +120,9 @@ def test_BudUnit_settle_bud_ClearsDescendantAttributes():
     sue_bud.settle_bud()
 
     # THEN
-    assert sue_bud.conceptroot._descendant_pledge_count == 2
-    assert casa_concept._descendant_pledge_count == 0
-    assert mon_concept._descendant_pledge_count == 0
+    assert sue_bud.conceptroot._descendant_task_count == 2
+    assert casa_concept._descendant_task_count == 0
+    assert mon_concept._descendant_task_count == 0
 
     assert mon_concept._all_acct_cred is True
     assert mon_concept._all_acct_debt is True
@@ -135,7 +135,7 @@ def test_BudUnit_settle_bud_ClearsDescendantAttributes():
 def test_BudUnit_settle_bud_RootOnlyCorrectlySetsDescendantAttributes():
     # ESTABLISH
     yao_bud = budunit_shop(owner_name="Yao")
-    assert yao_bud.conceptroot._descendant_pledge_count is None
+    assert yao_bud.conceptroot._descendant_task_count is None
     assert yao_bud.conceptroot._all_acct_cred is None
     assert yao_bud.conceptroot._all_acct_debt is None
 
@@ -143,7 +143,7 @@ def test_BudUnit_settle_bud_RootOnlyCorrectlySetsDescendantAttributes():
     yao_bud.settle_bud()
 
     # THEN
-    assert yao_bud.conceptroot._descendant_pledge_count == 0
+    assert yao_bud.conceptroot._descendant_task_count == 0
     assert yao_bud.conceptroot._all_acct_cred is True
     assert yao_bud.conceptroot._all_acct_debt is True
 
@@ -162,19 +162,19 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_1():
     mon_concept = sue_bud.get_concept_obj(mon_way)
 
     email_str = "email"
-    email_concept = conceptunit_shop(email_str, pledge=True)
+    email_concept = conceptunit_shop(email_str, task=True)
     sue_bud.set_concept(email_concept, parent_way=casa_way)
 
     # test root status:
     root_way = to_way(sue_bud.vow_label)
     x_conceptroot = sue_bud.get_concept_obj(root_way)
-    assert x_conceptroot._descendant_pledge_count is None
+    assert x_conceptroot._descendant_task_count is None
     assert x_conceptroot._all_acct_cred is None
     assert x_conceptroot._all_acct_debt is None
-    assert casa_concept._descendant_pledge_count is None
+    assert casa_concept._descendant_task_count is None
     assert casa_concept._all_acct_cred is None
     assert casa_concept._all_acct_debt is None
-    assert mon_concept._descendant_pledge_count is None
+    assert mon_concept._descendant_task_count is None
     assert mon_concept._all_acct_cred is None
     assert mon_concept._all_acct_debt is None
 
@@ -182,10 +182,10 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_1():
     sue_bud.settle_bud()
 
     # THEN
-    assert x_conceptroot._descendant_pledge_count == 3
-    assert casa_concept._descendant_pledge_count == 1
-    assert casa_concept._kids[email_str]._descendant_pledge_count == 0
-    assert mon_concept._descendant_pledge_count == 0
+    assert x_conceptroot._descendant_task_count == 3
+    assert casa_concept._descendant_task_count == 1
+    assert casa_concept._kids[email_str]._descendant_task_count == 0
+    assert mon_concept._descendant_task_count == 0
     assert x_conceptroot._all_acct_cred is True
     assert x_conceptroot._all_acct_debt is True
     assert casa_concept._all_acct_cred is True
@@ -206,9 +206,9 @@ def test_BudUnit_settle_bud_NLevelCorrectlySetsDescendantAttributes_2():
     sue_str = "Sue"
 
     casa_way = sue_bud.make_l1_way(casa_str)
-    email_concept = conceptunit_shop(email_str, pledge=True)
+    email_concept = conceptunit_shop(email_str, task=True)
     sue_bud.set_concept(email_concept, parent_way=casa_way)
-    vacuum_concept = conceptunit_shop(vacuum_str, pledge=True)
+    vacuum_concept = conceptunit_shop(vacuum_str, task=True)
     sue_bud.set_concept(vacuum_concept, parent_way=casa_way)
 
     sue_bud.add_acctunit(acct_name=sue_str)

@@ -29,10 +29,10 @@ from src.a06_bud_logic._test_util.a06_str import (
     group_title_str,
     healer_name_str,
     labor_title_str,
-    pledge_str,
     rconcept_active_requisite_str,
     stop_want_str,
     take_force_str,
+    task_str,
 )
 from src.a06_bud_logic.bud import budunit_shop
 from src.a08_bud_atom_logic._test_util.a08_str import DELETE_str, INSERT_str, UPDATE_str
@@ -361,7 +361,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_conceptunit():
     x_stop_want = 1700
     # x_denom = 17
     # x_numor = 10
-    x_pledge = True
+    x_task = True
     insert_disc_budatom = budatom_shop(bud_conceptunit_str(), INSERT_str())
     insert_disc_budatom.set_jkey(concept_way_str(), disc_way)
     # insert_disc_budatom.set_jvalue(addin_str(), x_addin)
@@ -369,7 +369,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_insert_conceptunit():
     # insert_disc_budatom.set_jvalue(close_str(), x_close)
     # insert_disc_budatom.set_jvalue(denom_str(), x_denom)
     # insert_disc_budatom.set_jvalue(numor_str(), x_numor)
-    insert_disc_budatom.set_jvalue(pledge_str(), x_pledge)
+    insert_disc_budatom.set_jvalue(task_str(), x_task)
     insert_disc_budatom.set_jvalue(gogo_want_str(), x_gogo_want)
     insert_disc_budatom.set_jvalue(stop_want_str(), x_stop_want)
 
@@ -403,7 +403,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_conceptunit_SimpleAtt
     # x_numor = 10
     x_gogo_want = 1222
     x_stop_want = 1333
-    x_pledge = True
+    x_task = True
     insert_disc_budatom = budatom_shop(bud_conceptunit_str(), UPDATE_str())
     insert_disc_budatom.set_jkey(concept_way_str(), ball_way)
     # insert_disc_budatom.set_jvalue(addin_str(), x_addin)
@@ -411,7 +411,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_conceptunit_SimpleAtt
     insert_disc_budatom.set_jvalue(close_str(), x_close)
     # insert_disc_budatom.set_jvalue(denom_str(), x_denom)
     # insert_disc_budatom.set_jvalue(numor_str(), x_numor)
-    insert_disc_budatom.set_jvalue(pledge_str(), x_pledge)
+    insert_disc_budatom.set_jvalue(task_str(), x_task)
     insert_disc_budatom.set_jvalue(gogo_want_str(), x_gogo_want)
     insert_disc_budatom.set_jvalue(stop_want_str(), x_stop_want)
 
@@ -420,7 +420,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_conceptunit_SimpleAtt
     sue_buddelta.set_budatom(insert_disc_budatom)
     assert before_sue_budunit.get_concept_obj(ball_way).begin is None
     assert before_sue_budunit.get_concept_obj(ball_way).close is None
-    assert before_sue_budunit.get_concept_obj(ball_way).pledge is False
+    assert before_sue_budunit.get_concept_obj(ball_way).task is False
     assert before_sue_budunit.get_concept_obj(ball_way).gogo_want is None
     assert before_sue_budunit.get_concept_obj(ball_way).stop_want is None
 
@@ -432,7 +432,7 @@ def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_update_conceptunit_SimpleAtt
     assert after_sue_budunit.get_concept_obj(ball_way).close == x_close
     assert after_sue_budunit.get_concept_obj(ball_way).gogo_want == x_gogo_want
     assert after_sue_budunit.get_concept_obj(ball_way).stop_want == x_stop_want
-    assert after_sue_budunit.get_concept_obj(ball_way).pledge
+    assert after_sue_budunit.get_concept_obj(ball_way).task
 
 
 def test_BudDelta_get_edited_bud_ReturnsObj_BudUnit_delete_concept_awardlink():

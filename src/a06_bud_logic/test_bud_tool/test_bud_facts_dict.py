@@ -104,7 +104,7 @@ def test_set_factunits_to_bud_ReturnsObj_Scenario1_Bud1FactsChanged():
     bob_bud.add_concept(floor_way)
     bob_bud.add_concept(clean_way)
     bob_bud.add_concept(dirty_way)
-    bob_bud.add_concept(mop_way, pledge=True)
+    bob_bud.add_concept(mop_way, task=True)
     bob_bud.edit_concept_attr(
         mop_way, reason_rcontext=floor_way, reason_premise=dirty_way
     )
@@ -138,7 +138,7 @@ def test_set_factunits_to_bud_ReturnsObj_Scenario2_FactUnit_rcontext_DoesNotExis
     bob_bud.add_concept(floor_way)
     # bob_bud.add_concept(clean_way)
     bob_bud.add_concept(dirty_way)
-    bob_bud.add_concept(mop_way, pledge=True)
+    bob_bud.add_concept(mop_way, task=True)
     bob_bud.edit_concept_attr(
         mop_way, reason_rcontext=floor_way, reason_premise=dirty_way
     )
@@ -173,7 +173,7 @@ def test_set_factunits_to_bud_ReturnsObj_Scenario3_FactUnit_rcontext_WithoutRcon
     bob_bud.add_concept(floor_way)
     # bob_bud.add_concept(clean_way)
     bob_bud.add_concept(dirty_way)
-    bob_bud.add_concept(mop_way, pledge=True)
+    bob_bud.add_concept(mop_way, task=True)
     bob_bud.edit_concept_attr(
         mop_way, reason_rcontext=floor_way, reason_premise=dirty_way
     )
@@ -217,7 +217,7 @@ def test_clear_factunits_from_bud_ReturnsObj_Scenario1_FactUnit_Exist():
     bob_bud.add_concept(floor_way)
     # bob_bud.add_concept(clean_way)
     bob_bud.add_concept(dirty_way)
-    bob_bud.add_concept(mop_way, pledge=True)
+    bob_bud.add_concept(mop_way, task=True)
     bob_bud.edit_concept_attr(
         mop_way, reason_rcontext=floor_way, reason_premise=dirty_way
     )

@@ -46,7 +46,7 @@ def _get_color_for_conceptunit_trace(x_conceptunit: ConceptUnit, mode: str) -> s
         else:
             return "Black"
     elif mode == "Chore":
-        return "Red" if x_conceptunit.pledge else "Pink"
+        return "Red" if x_conceptunit.task else "Pink"
     elif mode == "Keep":
         if (
             x_conceptunit.problem_bool
@@ -429,7 +429,7 @@ def budunit_graph2(graphics_bool) -> plotly_Figure:
             y=[3.75, 3.5, 3.25],
             text=[
                 "What Buds Are Made Of: Graph 1",
-                "Pledges are from Concepts",
+                "Tasks are from Concepts",
                 "All concepts build from one",
             ],
             mode="text",
@@ -459,7 +459,7 @@ def budunit_graph3(graphics_bool) -> plotly_Figure:
             y=[3.75, 3.5, 3.25],
             text=[
                 "What Buds Are Made Of: Graph 1",
-                "Pledges are from Concepts",
+                "Tasks are from Concepts",
                 "All concepts build from one",
             ],
             mode="text",
@@ -474,12 +474,12 @@ def budunit_graph4(graphics_bool) -> plotly_Figure:
     # Add shapes
     base_w = 0.1
     base_h = 0.125
-    create_concept_rect(fig, base_w, base_h, 2, 0.4, 0.7, "Premise against Pledge")
-    create_concept_rect(fig, base_w, base_h, 2, 0.1, 0.4, "Premise for Pledge")
+    create_concept_rect(fig, base_w, base_h, 2, 0.4, 0.7, "Premise against Task")
+    create_concept_rect(fig, base_w, base_h, 2, 0.1, 0.4, "Premise for Task")
     create_concept_rect(fig, base_w, base_h, 1, 0, 0.1, "Concept")
-    create_concept_rect(fig, base_w, base_h, 1, 0.1, 0.7, "Pledge Reason Base")
+    create_concept_rect(fig, base_w, base_h, 1, 0.1, 0.7, "Task Reason Base")
     create_concept_rect(fig, base_w, base_h, 0, 0, 1, "Root Concept")
-    create_concept_rect(fig, base_w, base_h, 1, 0.7, 1, "Pledge Itself", True)
+    create_concept_rect(fig, base_w, base_h, 1, 0.7, 1, "Task Itself", True)
     add_group_rect(fig, base_w, base_h, 1, 0, 1, "groups")
     add_people_rect(fig, base_w, base_h, 0, 0, 1, "people")
 
@@ -489,7 +489,7 @@ def budunit_graph4(graphics_bool) -> plotly_Figure:
             y=[3.75, 3.5, 3.25],
             text=[
                 "What Buds Are Made Of: Graph 1",
-                "Some Concepts are pledges, others are reasons for pledges",
+                "Some Concepts are tasks, others are reasons for tasks",
                 "All concepts build from one",
             ],
             mode="text",

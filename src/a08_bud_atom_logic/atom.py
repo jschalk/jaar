@@ -245,7 +245,7 @@ def _modify_bud_conceptunit_update(x_bud: BudUnit, x_atom: BudAtom):
         numor=x_atom.get_value("numor"),
         morph=x_atom.get_value("morph"),
         mass=x_atom.get_value("mass"),
-        pledge=x_atom.get_value("pledge"),
+        task=x_atom.get_value("task"),
     )
 
 
@@ -263,7 +263,7 @@ def _modify_bud_conceptunit_insert(x_bud: BudUnit, x_atom: BudAtom):
             stop_want=x_atom.get_value("stop_want"),
             denom=x_atom.get_value("denom"),
             numor=x_atom.get_value("numor"),
-            pledge=x_atom.get_value("pledge"),
+            task=x_atom.get_value("task"),
         ),
         parent_way=concept_parent_way,
         create_missing_concepts=False,
@@ -553,7 +553,7 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.numor != y_obj.numor
             or x_obj.morph != y_obj.morph
             or x_obj.mass != y_obj.mass
-            or x_obj.pledge != y_obj.pledge
+            or x_obj.task != y_obj.task
         )
     elif dimen == "bud_concept_factunit":
         return (
@@ -627,7 +627,7 @@ class AtomRow:
     popen: float = None
     penny: float = None
     fstate: WayTerm = None
-    pledge: bool = None
+    task: bool = None
     problem_bool: bool = None
     concept_way: WayTerm = None
     stop_want: float = None

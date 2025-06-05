@@ -39,7 +39,7 @@
         "owner_name": {
             "otx_key": true
         },
-        "pledge": {
+        "task": {
             "otx_key": false
         },
         "problem_bool": {

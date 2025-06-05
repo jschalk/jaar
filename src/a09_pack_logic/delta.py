@@ -328,7 +328,7 @@ class BudDelta:
             x_budatom.set_jvalue("numor", insert_conceptunit.numor)
             x_budatom.set_jvalue("morph", insert_conceptunit.morph)
             x_budatom.set_jvalue("mass", insert_conceptunit.mass)
-            x_budatom.set_jvalue("pledge", insert_conceptunit.pledge)
+            x_budatom.set_jvalue("task", insert_conceptunit.task)
             self.set_budatom(x_budatom)
 
             self.add_budatom_concept_factunit_inserts(
@@ -379,8 +379,8 @@ class BudDelta:
                     x_budatom.set_jvalue("morph", after_conceptunit.morph)
                 if before_conceptunit.mass != after_conceptunit.mass:
                     x_budatom.set_jvalue("mass", after_conceptunit.mass)
-                if before_conceptunit.pledge != after_conceptunit.pledge:
-                    x_budatom.set_jvalue("pledge", after_conceptunit.pledge)
+                if before_conceptunit.task != after_conceptunit.task:
+                    x_budatom.set_jvalue("task", after_conceptunit.task)
                 self.set_budatom(x_budatom)
 
             # insert / update / delete factunits

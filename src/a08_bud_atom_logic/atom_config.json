@@ -351,7 +351,7 @@
                 "column_order": 7,
                 "sqlite_datatype": "INTEGER"
             },
-            "pledge": {
+            "task": {
                 "class_type": "bool",
                 "column_order": 2,
                 "sqlite_datatype": "INTEGER"

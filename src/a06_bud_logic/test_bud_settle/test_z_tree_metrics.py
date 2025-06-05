@@ -80,7 +80,7 @@ def test_BudUnit_set_all_concept_uids_unique_SetsUIDsCorrectly():
     assert zia_bud.get_concept_obj(swim_way)._uid is not None
 
 
-def test_BudUnit_get_tree_metrics_ReturnsANone_pledge_ConceptWayTerm():
+def test_BudUnit_get_tree_metrics_ReturnsANone_task_ConceptWayTerm():
     # ESTABLISH
     nia_str = "Nia"
     nia_bud = budunit_shop(nia_str, tally=10)
@@ -89,10 +89,10 @@ def test_BudUnit_get_tree_metrics_ReturnsANone_pledge_ConceptWayTerm():
     tree_metrics_before = nia_bud.get_tree_metrics()
 
     # WHEN / THEN
-    assert tree_metrics_before.last_evaluated_pledge_concept_way is None
+    assert tree_metrics_before.last_evaluated_task_concept_way is None
 
 
-def test_BudUnit_get_tree_metrics_Returns_pledge_ConceptWayTerm():
+def test_BudUnit_get_tree_metrics_Returns_task_ConceptWayTerm():
     # ESTABLISH
     yao_bud = budunit_v001()
     yao_tree_metrics = yao_bud.get_tree_metrics()
@@ -107,7 +107,7 @@ def test_BudUnit_get_tree_metrics_Returns_pledge_ConceptWayTerm():
             "Accomplish Fall 2021 traaining",
         ]
     )
-    assert yao_tree_metrics.last_evaluated_pledge_concept_way == traain_way
+    assert yao_tree_metrics.last_evaluated_task_concept_way == traain_way
 
 
 def test_BudUnit_get_tree_metrics_TracksReasonsThatHaveNoFactRcontexts():

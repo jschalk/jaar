@@ -380,7 +380,7 @@
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "_descendant_pledge_count": {
+            "_descendant_task_count": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
@@ -458,7 +458,7 @@
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "pledge": {
+            "task": {
                 "class_type": "bool",
                 "sqlite_datatype": "INTEGER"
             },

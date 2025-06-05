@@ -592,7 +592,7 @@
                                 "_uid": 123,
                                 "concept_label": "Employee Intruction manuel.",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -623,7 +623,7 @@
                                         "_uid": 116,
                                         "concept_label": "Accomplish Fall 2021 traaining",
                                         "mass": 1,
-                                        "pledge": true,
+                                        "task": true,
                                         "reasonunits": {
                                             ";accord45;day_minute;": {
                                                 "premises": {
@@ -695,7 +695,7 @@
                                         "_uid": 119,
                                         "concept_label": "Accomplish Fall 2021 traaining",
                                         "mass": 1,
-                                        "pledge": true,
+                                        "task": true,
                                         "reasonunits": {
                                             ";accord45;day_minute;": {
                                                 "premises": {
@@ -745,7 +745,7 @@
                                         "_uid": 118,
                                         "concept_label": "Accomplish Fall 2021 traaining",
                                         "mass": 1,
-                                        "pledge": true,
+                                        "task": true,
                                         "reasonunits": {
                                             ";accord45;day_minute;": {
                                                 "premises": {
@@ -782,7 +782,7 @@
                                         "_uid": 121,
                                         "concept_label": "Accomplish Fall 2021 traaining",
                                         "mass": 1,
-                                        "pledge": true,
+                                        "task": true,
                                         "reasonunits": {
                                             ";accord45;day_minute;": {
                                                 "premises": {
@@ -819,7 +819,7 @@
                                         "_uid": 120,
                                         "concept_label": "Accomplish Fall 2021 traaining",
                                         "mass": 1,
-                                        "pledge": true,
+                                        "task": true,
                                         "reasonunits": {
                                             ";accord45;day_minute;": {
                                                 "premises": {
@@ -899,7 +899,7 @@
                                                 "_uid": 138,
                                                 "concept_label": "check emails",
                                                 "mass": 1,
-                                                "pledge": true,
+                                                "task": true,
                                                 "reasonunits": {
                                                     ";accord45;day_minute;": {
                                                         "premises": {
@@ -939,7 +939,7 @@
                                                 "_uid": 139,
                                                 "concept_label": "check mechanisms",
                                                 "mass": 1,
-                                                "pledge": true,
+                                                "task": true,
                                                 "reasonunits": {
                                                     ";accord45;day_minute;": {
                                                         "premises": {
@@ -974,7 +974,7 @@
                                         "_uid": 158,
                                         "concept_label": "dress to slightly impress",
                                         "mass": 1,
-                                        "pledge": true,
+                                        "task": true,
                                         "reasonunits": {
                                             ";accord45;day_minute;": {
                                                 "premises": {
@@ -993,7 +993,7 @@
                                         "_uid": 231,
                                         "concept_label": "go to employment",
                                         "mass": 1,
-                                        "pledge": true,
+                                        "task": true,
                                         "reasonunits": {
                                             ";accord45;day_minute;": {
                                                 "premises": {
@@ -1030,7 +1030,7 @@
                                         "_uid": 156,
                                         "concept_label": "Add to Azure DevOps",
                                         "mass": 1,
-                                        "pledge": true,
+                                        "task": true,
                                         "reasonunits": {
                                             ";accord45;day_minute;": {
                                                 "premises": {
@@ -1048,7 +1048,7 @@
                                         "_uid": 155,
                                         "concept_label": "consider management perspective",
                                         "mass": 1,
-                                        "pledge": true,
+                                        "task": true,
                                         "reasonunits": {
                                             ";accord45;day_minute;": {
                                                 "premises": {
@@ -1068,7 +1068,7 @@
                                                 "_uid": 142,
                                                 "concept_label": "Datawarehouse Expertise acquisition",
                                                 "mass": 1,
-                                                "pledge": true,
+                                                "task": true,
                                                 "reasonunits": {
                                                     ";accord45;day_minute;": {
                                                         "premises": {
@@ -1108,7 +1108,7 @@
                                                 "_uid": 157,
                                                 "concept_label": "dev quantification script \"TIMOTHY\"",
                                                 "mass": 1,
-                                                "pledge": true,
+                                                "task": true,
                                                 "reasonunits": {
                                                     ";accord45;day_minute;": {
                                                         "premises": {
@@ -1126,7 +1126,7 @@
                                                 "_uid": 232,
                                                 "concept_label": "go to daily meeting ",
                                                 "mass": 1,
-                                                "pledge": true,
+                                                "task": true,
                                                 "reasonunits": {
                                                     ";accord45;day_minute;": {
                                                         "premises": {
@@ -1166,7 +1166,7 @@
                                         "_uid": 151,
                                         "concept_label": "Keep track of Chatroom conversations",
                                         "mass": 1,
-                                        "pledge": true,
+                                        "task": true,
                                         "reasonunits": {
                                             ";accord45;day_minute;": {
                                                 "premises": {
@@ -1220,7 +1220,7 @@
                                 "_uid": 133,
                                 "concept_label": "IT DEPT regular hrs responsiblities",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -1548,7 +1548,7 @@
                         },
                         "concept_label": "call high school friend",
                         "mass": 1,
-                        "pledge": true,
+                        "task": true,
                         "reasonunits": {
                             ";accord45;day_minute;": {
                                 "premises": {
@@ -1602,7 +1602,7 @@
                                 },
                                 "concept_label": "check cat water",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -1636,7 +1636,7 @@
                                 "_uid": 159,
                                 "concept_label": "check humidifer",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -1669,7 +1669,7 @@
                                 },
                                 "concept_label": "clean baby seats",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -1713,7 +1713,7 @@
                                 },
                                 "concept_label": "clean bathroom",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -1746,7 +1746,7 @@
                                 },
                                 "concept_label": "clean cat poo",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -1787,7 +1787,7 @@
                                 },
                                 "concept_label": "clean humidifiers",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -1828,7 +1828,7 @@
                                 },
                                 "concept_label": "clean sheets couch blankets",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;ced_wk;": {
                                         "premises": {
@@ -1880,7 +1880,7 @@
                                 },
                                 "concept_label": "clean table",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -1921,7 +1921,7 @@
                                 },
                                 "concept_label": "deep clean play mat",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -1973,7 +1973,7 @@
                                 },
                                 "concept_label": "empty roomba",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -2014,7 +2014,7 @@
                                 },
                                 "concept_label": "empty roomba Friday",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -2055,7 +2055,7 @@
                                 },
                                 "concept_label": "laundry monday",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -2096,7 +2096,7 @@
                                 },
                                 "concept_label": "laundry saturday",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -2137,7 +2137,7 @@
                                 },
                                 "concept_label": "laundry wednesday",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -2203,7 +2203,7 @@
                                 },
                                 "concept_label": "prepare_bed clean bedroom",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -2236,7 +2236,7 @@
                                 },
                                 "concept_label": "roomba bedroom",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -2277,7 +2277,7 @@
                                 },
                                 "concept_label": "roomba bedroom Friday",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -2318,7 +2318,7 @@
                                 },
                                 "concept_label": "roomba living area",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -2359,7 +2359,7 @@
                                 },
                                 "concept_label": "roomba living area thur",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -2400,7 +2400,7 @@
                                 },
                                 "concept_label": "roomba maintenance",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -2441,7 +2441,7 @@
                                 },
                                 "concept_label": "wipe down play mat2",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -2499,7 +2499,7 @@
                                 },
                                 "concept_label": "5 push-ups",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -2524,7 +2524,7 @@
                                 },
                                 "concept_label": "check protein for wk is adequate",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -2549,7 +2549,7 @@
                                 },
                                 "concept_label": "clean ears",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -2585,7 +2585,7 @@
                                 },
                                 "concept_label": "clip nails",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -2618,7 +2618,7 @@
                                 },
                                 "concept_label": "cook veggies every morning",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -2663,7 +2663,7 @@
                                 },
                                 "concept_label": "daily exercise 20min",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -2705,7 +2705,7 @@
                                 },
                                 "concept_label": "flossing teeth",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -2743,7 +2743,7 @@
                                         },
                                         "concept_label": "bike or stuff",
                                         "mass": 1,
-                                        "pledge": true,
+                                        "task": true,
                                         "reasonunits": {
                                             ";accord45;day_minute;": {
                                                 "premises": {
@@ -2791,7 +2791,7 @@
                                         },
                                         "concept_label": "chest and arms (mon)",
                                         "mass": 1,
-                                        "pledge": true,
+                                        "task": true,
                                         "reasonunits": {
                                             ";accord45;day_minute;": {
                                                 "premises": {
@@ -2849,7 +2849,7 @@
                                         },
                                         "concept_label": "core lower back",
                                         "mass": 1,
-                                        "pledge": true,
+                                        "task": true,
                                         "reasonunits": {
                                             ";accord45;day_minute;": {
                                                 "premises": {
@@ -2920,7 +2920,7 @@
                                         },
                                         "concept_label": "shoulders and upper back",
                                         "mass": 1,
-                                        "pledge": true,
+                                        "task": true,
                                         "reasonunits": {
                                             ";accord45;day_minute;": {
                                                 "premises": {
@@ -2953,7 +2953,7 @@
                                         },
                                         "concept_label": "squats hamstrings and calves",
                                         "mass": 1,
-                                        "pledge": true,
+                                        "task": true,
                                         "reasonunits": {
                                             ";accord45;day_minute;": {
                                                 "premises": {
@@ -2991,7 +2991,7 @@
                                 },
                                 "concept_label": "morning multivitamin",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -3016,7 +3016,7 @@
                                 },
                                 "concept_label": "shampooing",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -3049,7 +3049,7 @@
                                 },
                                 "concept_label": "straight back for 45 secs",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -3074,7 +3074,7 @@
                                 },
                                 "concept_label": "trim beard",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -3115,7 +3115,7 @@
                                 },
                                 "concept_label": "be reponsible for rent",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -3148,7 +3148,7 @@
                                 },
                                 "concept_label": "be responsible for expenses card",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -3181,7 +3181,7 @@
                                 },
                                 "concept_label": "be responsible for utilities",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -3214,7 +3214,7 @@
                                 },
                                 "concept_label": "set resturant bucks for the wk",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -3391,7 +3391,7 @@
                                 },
                                 "concept_label": "clip fingernails",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;ced_wk;": {
                                         "premises": {
@@ -3443,7 +3443,7 @@
                                 },
                                 "concept_label": "get rid of toy get new toy",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -3480,7 +3480,7 @@
                                 "_uid": 145,
                                 "concept_label": "going to get them",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;day_minute;": {
                                         "premises": {
@@ -3528,7 +3528,7 @@
                         },
                         "concept_label": "say hi to birds",
                         "mass": 1,
-                        "pledge": true,
+                        "task": true,
                         "reasonunits": {
                             ";accord45;day_minute;": {
                                 "premises": {
@@ -3629,7 +3629,7 @@
                                 "_uid": 178,
                                 "concept_label": "test program",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;Aaron Donald objects effected by him;": {
                                         "premises": {
@@ -3695,7 +3695,7 @@
                                 },
                                 "concept_label": "donate to influential people that are pro-Climate Death",
                                 "mass": 1,
-                                "pledge": true,
+                                "task": true,
                                 "reasonunits": {
                                     ";accord45;Aaron Donald objects effected by him;": {
                                         "premises": {
@@ -3755,7 +3755,7 @@
                         "_uid": 149,
                         "concept_label": "late_evening_go_to_sleep",
                         "mass": 1,
-                        "pledge": true,
+                        "task": true,
                         "reasonunits": {
                             ";accord45;Aaron Donald objects effected by him;": {
                                 "premises": {
@@ -3783,7 +3783,7 @@
                                         },
                                         "concept_label": "be available for phone call",
                                         "mass": 1,
-                                        "pledge": true,
+                                        "task": true,
                                         "reasonunits": {
                                             ";accord45;Aaron Donald objects effected by him;": {
                                                 "premises": {
@@ -3821,7 +3821,7 @@
                                         },
                                         "concept_label": "call David and discuss methodology",
                                         "mass": 1,
-                                        "pledge": true,
+                                        "task": true,
                                         "reasonunits": {
                                             ";accord45;Aaron Donald objects effected by him;": {
                                                 "premises": {
@@ -3999,7 +3999,7 @@
                         "_uid": 104,
                         "concept_label": "Submit hrs on website",
                         "mass": 1,
-                        "pledge": true,
+                        "task": true,
                         "reasonunits": {
                             ";accord45;day_minute;": {
                                 "premises": {

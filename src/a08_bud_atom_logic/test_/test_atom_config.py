@@ -656,7 +656,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("popen") == "float"
     assert x_class_types.get(penny_str()) == "float"
     assert x_class_types.get("fstate") == WayTerm_str()
-    assert x_class_types.get("pledge") == "bool"
+    assert x_class_types.get("task") == "bool"
     assert x_class_types.get("problem_bool") == "bool"
     assert x_class_types.get(concept_way_str()) == WayTerm_str()
     assert x_class_types.get(stop_want_str()) == "float"

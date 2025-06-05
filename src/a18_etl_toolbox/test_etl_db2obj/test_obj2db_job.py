@@ -96,7 +96,7 @@ def test_create_budconc_metrics_insert_sqlstr_ReturnsObj():
     x__active = 1
     x__all_acct_cred = 2
     x__all_acct_debt = 3
-    x__descendant_pledge_count = 4
+    x__descendant_task_count = 4
     x__fund_cease = 5
     x_fund_iota = 6
     x__fund_onset = 7
@@ -116,7 +116,7 @@ def test_create_budconc_metrics_insert_sqlstr_ReturnsObj():
     x_morph = 22
     x_numor = 23
     x_way = 24
-    x_pledge = 25
+    x_task = 25
     x_problem_bool = 26
     x_stop_want = 27
     values_dict = {
@@ -125,7 +125,7 @@ def test_create_budconc_metrics_insert_sqlstr_ReturnsObj():
         "_active": x__active,
         "_all_acct_cred": x__all_acct_cred,
         "_all_acct_debt": x__all_acct_debt,
-        "_descendant_pledge_count": x__descendant_pledge_count,
+        "_descendant_task_count": x__descendant_task_count,
         "_fund_cease": x__fund_cease,
         "fund_iota": x_fund_iota,
         "_fund_onset": x__fund_onset,
@@ -145,7 +145,7 @@ def test_create_budconc_metrics_insert_sqlstr_ReturnsObj():
         "morph": x_morph,
         "numor": x_numor,
         "concept_way": x_way,
-        "pledge": x_pledge,
+        "task": x_task,
         "problem_bool": x_problem_bool,
         "stop_want": x_stop_want,
     }

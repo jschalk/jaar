@@ -37,7 +37,7 @@ def test_treemetrics_shop_ReturnsObj():
 
     # # could create tests for these methods?
     # def evaluate_label(
-    # def evaluate_pledge(self, pledge: bool, concept_way: WayTerm):
+    # def evaluate_task(self, task: bool, concept_way: WayTerm):
     # def evaluate_level(self, level):
     # def evaluate_reasonunits(self, reasons: dict[WayTerm, ReasonUnit]):
     # def evaluate_awardlinks(self, awardlinks: dict[GroupTitle, AwardLink]):
@@ -153,7 +153,7 @@ def test_BudUnit_set_concept_CreatesConceptUnitsUsedBy_reasonunits():
     casa_way = sue_bud.make_l1_way("casa")
     cleaning_way = sue_bud.make_way(casa_way, "cleaning")
     clean_cookery_str = "clean_cookery"
-    clean_cookery_concept = conceptunit_shop(clean_cookery_str, mass=40, pledge=True)
+    clean_cookery_concept = conceptunit_shop(clean_cookery_str, mass=40, task=True)
 
     buildings_str = "buildings"
     buildings_way = sue_bud.make_l1_way(buildings_str)

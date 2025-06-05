@@ -93,16 +93,16 @@ def create_example_vow3() -> VowUnit:
     bath_str = "clean bathroom"
     hall_str = "clean hall"
 
-    yao_gut_bud.set_concept(conceptunit_shop(clean_str, pledge=True), casa_way)
-    yao_gut_bud.set_concept(conceptunit_shop(bath_str, pledge=True), clean_way)
-    yao_gut_bud.set_concept(conceptunit_shop(hall_str, pledge=True), clean_way)
+    yao_gut_bud.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
+    yao_gut_bud.set_concept(conceptunit_shop(bath_str, task=True), clean_way)
+    yao_gut_bud.set_concept(conceptunit_shop(hall_str, task=True), clean_way)
 
-    wei_gut_bud.set_concept(conceptunit_shop(clean_str, pledge=True), casa_way)
-    wei_gut_bud.set_concept(conceptunit_shop(bath_str, pledge=True), clean_way)
+    wei_gut_bud.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
+    wei_gut_bud.set_concept(conceptunit_shop(bath_str, task=True), clean_way)
 
-    zia_gut_bud.set_concept(conceptunit_shop(clean_str, pledge=True), casa_way)
-    zia_gut_bud.set_concept(conceptunit_shop(bath_str, pledge=True), clean_way)
-    zia_gut_bud.set_concept(conceptunit_shop(hall_str, pledge=True), clean_way)
+    zia_gut_bud.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
+    zia_gut_bud.set_concept(conceptunit_shop(bath_str, task=True), clean_way)
+    zia_gut_bud.set_concept(conceptunit_shop(hall_str, task=True), clean_way)
 
     save_gut_file(x_vow_mstr_dir, yao_gut_bud)
     save_gut_file(x_vow_mstr_dir, wei_gut_bud)
@@ -136,16 +136,16 @@ def create_example_vow4() -> VowUnit:
     bath_str = "clean bathroom"
     hall_str = "clean hall"
 
-    yao_gut_bud.set_concept(conceptunit_shop(clean_str, pledge=True), casa_way)
-    yao_gut_bud.set_concept(conceptunit_shop(bath_str, pledge=True), clean_way)
-    yao_gut_bud.set_concept(conceptunit_shop(hall_str, pledge=True), clean_way)
+    yao_gut_bud.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
+    yao_gut_bud.set_concept(conceptunit_shop(bath_str, task=True), clean_way)
+    yao_gut_bud.set_concept(conceptunit_shop(hall_str, task=True), clean_way)
 
-    wei_gut_bud.set_concept(conceptunit_shop(clean_str, pledge=True), casa_way)
-    wei_gut_bud.set_concept(conceptunit_shop(bath_str, pledge=True), clean_way)
+    wei_gut_bud.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
+    wei_gut_bud.set_concept(conceptunit_shop(bath_str, task=True), clean_way)
 
-    zia_gut_bud.set_concept(conceptunit_shop(clean_str, pledge=True), casa_way)
-    zia_gut_bud.set_concept(conceptunit_shop(bath_str, pledge=True), clean_way)
-    zia_gut_bud.set_concept(conceptunit_shop(hall_str, pledge=True), clean_way)
+    zia_gut_bud.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
+    zia_gut_bud.set_concept(conceptunit_shop(bath_str, task=True), clean_way)
+    zia_gut_bud.set_concept(conceptunit_shop(hall_str, task=True), clean_way)
 
     yao_gut_bud.set_credor_respect(101)
     wei_gut_bud.set_credor_respect(75)
@@ -211,7 +211,7 @@ def get_bob_mop_without_reason_budunit_example() -> BudUnit:
     bob_bud.add_concept(floor_way, 1)
     bob_bud.add_concept(clean_way, 1)
     bob_bud.add_concept(dirty_way, 1)
-    bob_bud.add_concept(mop_way, 1, pledge=True)
+    bob_bud.add_concept(mop_way, 1, task=True)
     return bob_bud
 
 
@@ -259,8 +259,8 @@ def get_yao_run_with_reason_budunit_example() -> BudUnit:
     rain_way = yao_bud.make_way(weather_way, raining_str)
     snow_way = yao_bud.make_way(weather_way, snowng_str)
     yao_bud.add_concept(participate_way)
-    yao_bud.add_concept(ski_way, 5, pledge=True)
-    yao_bud.add_concept(run_way, 1, pledge=True)
+    yao_bud.add_concept(ski_way, 5, task=True)
+    yao_bud.add_concept(run_way, 1, task=True)
     yao_bud.add_concept(weather_way)
     yao_bud.add_concept(rain_way)
     yao_bud.add_concept(snow_way)

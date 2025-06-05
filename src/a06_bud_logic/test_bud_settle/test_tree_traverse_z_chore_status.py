@@ -165,7 +165,7 @@ def test_BudUnit_settle_bud_CorrectlySets_concept_dict():
     assert casa_concept.concept_label == casa_str
     assert casa_concept._level == 1
     assert casa_concept._active
-    assert casa_concept.pledge
+    assert casa_concept.task
     # print(f"{casa_concept._reasonheirs=}")
     nation_reasonheir = casa_concept._reasonheirs[nation_way]
     print(f"  {nation_reasonheir=}")
@@ -278,12 +278,12 @@ def test_BudUnit_get_agenda_dict_ReturnsObj():
     sue_budunit = get_budunit_with_4_levels_and_2reasons()
 
     # WHEN
-    pledge_concepts = sue_budunit.get_agenda_dict()
+    task_concepts = sue_budunit.get_agenda_dict()
 
     # THEN
-    assert pledge_concepts is not None
-    assert len(pledge_concepts) > 0
-    assert len(pledge_concepts) == 1
+    assert task_concepts is not None
+    assert len(task_concepts) > 0
+    assert len(task_concepts) == 1
 
 
 def test_BudUnit_settle_bud_CorrectlySetsData_budunit_v001():

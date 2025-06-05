@@ -14,7 +14,7 @@ def get_mop_with_no_reason_budunit_example() -> BudUnit:
     mop_str = "mop"
     casa_way = bob_bud.make_l1_way(casa_str)
     mop_way = bob_bud.make_way(casa_way, mop_str)
-    bob_bud.add_concept(mop_way, pledge=True)
+    bob_bud.add_concept(mop_way, task=True)
     return bob_bud
 
 
@@ -33,7 +33,7 @@ def get_bob_mop_with_reason_budunit_example() -> BudUnit:
     bob_bud.add_concept(floor_way)
     bob_bud.add_concept(clean_way)
     bob_bud.add_concept(dirty_way)
-    bob_bud.add_concept(mop_way, pledge=True)
+    bob_bud.add_concept(mop_way, task=True)
     bob_bud.edit_concept_attr(
         mop_way, reason_rcontext=floor_way, reason_premise=clean_way
     )

@@ -11,7 +11,7 @@ from src.a05_concept_logic._test_util.a05_str import (
     _all_acct_debt_str,
     _awardheirs_str,
     _awardlines_str,
-    _descendant_pledge_count_str,
+    _descendant_task_count_str,
     _factheirs_str,
     _fund_cease_str,
     _fund_onset_str,
@@ -36,9 +36,9 @@ from src.a05_concept_logic._test_util.a05_str import (
     mass_str,
     morph_str,
     numor_str,
-    pledge_str,
     problem_bool_str,
     stop_want_str,
+    task_str,
     vow_label_str,
 )
 from src.a05_concept_logic.concept import (
@@ -78,14 +78,14 @@ def test_ConceptUnit_Exists():
     assert x_conceptunit.morph is None
     assert x_conceptunit.gogo_want is None
     assert x_conceptunit.stop_want is None
-    assert x_conceptunit.pledge is None
+    assert x_conceptunit.task is None
     assert x_conceptunit.problem_bool is None
     assert x_conceptunit.healerlink is None
     # calculated_fields
     assert x_conceptunit._range_evaluated is None
     assert x_conceptunit._gogo_calc is None
     assert x_conceptunit._stop_calc is None
-    assert x_conceptunit._descendant_pledge_count is None
+    assert x_conceptunit._descendant_task_count is None
     assert x_conceptunit._is_expanded is None
     assert x_conceptunit._all_acct_cred is None
     assert x_conceptunit._all_acct_debt is None
@@ -107,7 +107,7 @@ def test_ConceptUnit_Exists():
         _all_acct_debt_str(),
         _awardheirs_str(),
         _awardlines_str(),
-        _descendant_pledge_count_str(),
+        _descendant_task_count_str(),
         _factheirs_str(),
         _fund_cease_str(),
         _fund_onset_str(),
@@ -140,7 +140,7 @@ def test_ConceptUnit_Exists():
         morph_str(),
         numor_str(),
         parent_way_str(),
-        pledge_str(),
+        task_str(),
         problem_bool_str(),
         "reasonunits",
         "root",
@@ -165,9 +165,9 @@ def test_conceptunit_shop_WithNoParametersReturnsObj():
     assert x_conceptunit.numor is None
     assert x_conceptunit.denom is None
     assert x_conceptunit.morph is None
-    assert x_conceptunit.pledge is False
+    assert x_conceptunit.task is False
     assert x_conceptunit.problem_bool is False
-    assert x_conceptunit._descendant_pledge_count is None
+    assert x_conceptunit._descendant_task_count is None
     assert x_conceptunit._awardlines == {}
     assert x_conceptunit.awardlinks == {}
     assert x_conceptunit._awardheirs == {}
@@ -313,37 +313,37 @@ def test_ConceptUnit_set_parent_way_SetsAttr():
     assert ball_concept.parent_way == sports_way
 
 
-def test_ConceptUnit_clear_descendant_pledge_count_ClearsCorrectly():
+def test_ConceptUnit_clear_descendant_task_count_ClearsCorrectly():
     # ESTABLISH
     ball_str = "ball"
-    ball_concept = conceptunit_shop(ball_str, _descendant_pledge_count=55)
-    assert ball_concept._descendant_pledge_count == 55
+    ball_concept = conceptunit_shop(ball_str, _descendant_task_count=55)
+    assert ball_concept._descendant_task_count == 55
 
     # WHEN
-    ball_concept.clear_descendant_pledge_count()
+    ball_concept.clear_descendant_task_count()
 
     # THEN
-    assert ball_concept._descendant_pledge_count is None
+    assert ball_concept._descendant_task_count is None
 
 
-def test_ConceptUnit_add_to_descendant_pledge_count_CorrectlyAdds():
+def test_ConceptUnit_add_to_descendant_task_count_CorrectlyAdds():
     # ESTABLISH
     ball_str = "ball"
-    ball_concept = conceptunit_shop(ball_str, _descendant_pledge_count=55)
-    ball_concept.clear_descendant_pledge_count()
-    assert ball_concept._descendant_pledge_count is None
+    ball_concept = conceptunit_shop(ball_str, _descendant_task_count=55)
+    ball_concept.clear_descendant_task_count()
+    assert ball_concept._descendant_task_count is None
 
     # WHEN
-    ball_concept.add_to_descendant_pledge_count(44)
+    ball_concept.add_to_descendant_task_count(44)
 
     # THEN
-    assert ball_concept._descendant_pledge_count == 44
+    assert ball_concept._descendant_task_count == 44
 
     # WHEN
-    ball_concept.add_to_descendant_pledge_count(33)
+    ball_concept.add_to_descendant_task_count(33)
 
     # THEN
-    assert ball_concept._descendant_pledge_count == 77
+    assert ball_concept._descendant_task_count == 77
 
 
 def test_ConceptUnit_is_math_ReturnsObj():

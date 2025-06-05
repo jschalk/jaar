@@ -42,7 +42,7 @@ def test_generate_perspective_agenda_CorrectlyGrabsAgendaChores():
     sweep_way = yao_speaker.make_way(casa_way, sweep_str)
     yao_speaker.set_concept(conceptunit_shop(clean_str), status_way)
     yao_speaker.set_concept(conceptunit_shop(dirty_str), status_way)
-    yao_speaker.set_concept(conceptunit_shop(sweep_str, pledge=True), casa_way)
+    yao_speaker.set_concept(conceptunit_shop(sweep_str, task=True), casa_way)
     yao_speaker.edit_concept_attr(
         sweep_way, reason_rcontext=status_way, reason_premise=dirty_way
     )
@@ -61,7 +61,7 @@ def test_generate_ingest_list_ReturnsCorrectList_v1():
     zia_str = "Zia"
     zia_budunit = budunit_shop(zia_str)
     clean_str = "clean"
-    zia_budunit.set_l1_concept(conceptunit_shop(clean_str, pledge=True))
+    zia_budunit.set_l1_concept(conceptunit_shop(clean_str, task=True))
     zia_debtor_pool = 78
     zia_resepect_bit = 2
     assert len(zia_budunit.get_agenda_dict()) == 1
@@ -87,8 +87,8 @@ def test_generate_ingest_list_ReturnsCorrectList_v2():
     zia_budunit = budunit_shop(zia_str)
     clean_str = "clean"
     cook_str = "cook"
-    zia_budunit.set_l1_concept(conceptunit_shop(clean_str, pledge=True))
-    zia_budunit.set_l1_concept(conceptunit_shop(cook_str, pledge=True))
+    zia_budunit.set_l1_concept(conceptunit_shop(clean_str, task=True))
+    zia_budunit.set_l1_concept(conceptunit_shop(cook_str, task=True))
     zia_debtor_pool = 32
     zia_resepect_bit = 2
     assert len(zia_budunit.get_agenda_dict()) == 2
@@ -118,8 +118,8 @@ def test_generate_ingest_list_ReturnsCorrectList_v3():
     zia_budunit = budunit_shop(zia_str)
     clean_str = "clean"
     cook_str = "cook"
-    zia_budunit.set_l1_concept(conceptunit_shop(clean_str, pledge=True))
-    zia_budunit.set_l1_concept(conceptunit_shop(cook_str, mass=3, pledge=True))
+    zia_budunit.set_l1_concept(conceptunit_shop(clean_str, task=True))
+    zia_budunit.set_l1_concept(conceptunit_shop(cook_str, mass=3, task=True))
     zia_debtor_pool = 32
     zia_resepect_bit = 2
     assert len(zia_budunit.get_agenda_dict()) == 2
@@ -147,8 +147,8 @@ def test_generate_ingest_list_ReturnsCorrectList_v4():
     zia_budunit = budunit_shop(zia_str)
     clean_str = "clean"
     cook_str = "cook"
-    zia_budunit.set_l1_concept(conceptunit_shop(clean_str, pledge=True))
-    zia_budunit.set_l1_concept(conceptunit_shop(cook_str, mass=2, pledge=True))
+    zia_budunit.set_l1_concept(conceptunit_shop(clean_str, task=True))
+    zia_budunit.set_l1_concept(conceptunit_shop(cook_str, mass=2, task=True))
     zia_debtor_pool = 32
     zia_resepect_bit = 2
     assert len(zia_budunit.get_agenda_dict()) == 2

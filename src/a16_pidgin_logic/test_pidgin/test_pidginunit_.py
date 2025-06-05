@@ -114,7 +114,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("popen") == "float"
     assert pidgin_args_class_types.get("penny") == "float"
     assert pidgin_args_class_types.get("fstate") == WayTerm_str()
-    assert pidgin_args_class_types.get("pledge") == "bool"
+    assert pidgin_args_class_types.get("task") == "bool"
     assert pidgin_args_class_types.get("problem_bool") == "bool"
     assert pidgin_args_class_types.get("quota") == "int"
     assert pidgin_args_class_types.get("respect_bit") == "float"

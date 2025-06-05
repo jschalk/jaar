@@ -299,7 +299,7 @@ def add_bud_conceptunit_insert_to_legible_list(
         _problem_bool_value = conceptunit_atom.get_value(_problem_bool_str)
         _morph_value = conceptunit_atom.get_value("morph")
         _mass_value = conceptunit_atom.get_value("mass")
-        pledge_value = conceptunit_atom.get_value("pledge")
+        task_value = conceptunit_atom.get_value("task")
         x_str = f"Created Concept '{way_value}'. "
         if _addin_value is not None:
             x_str += f"addin={_addin_value}."
@@ -317,8 +317,8 @@ def add_bud_conceptunit_insert_to_legible_list(
             x_str += f"morph={_morph_value}."
         if _mass_value is not None:
             x_str += f"mass={_mass_value}."
-        if pledge_value is not None:
-            x_str += f"pledge={pledge_value}."
+        if task_value is not None:
+            x_str += f"task={task_value}."
 
         legible_list.append(x_str)
 
@@ -337,7 +337,7 @@ def add_bud_conceptunit_update_to_legible_list(
         problem_bool_value = conceptunit_atom.get_value(_problem_bool_str)
         morph_value = conceptunit_atom.get_value("morph")
         mass_value = conceptunit_atom.get_value("mass")
-        pledge_value = conceptunit_atom.get_value("pledge")
+        task_value = conceptunit_atom.get_value("task")
         x_str = f"Concept '{way_value}' set these attributes: "
         if addin_value is not None:
             x_str += f"addin={addin_value}."
@@ -355,8 +355,8 @@ def add_bud_conceptunit_update_to_legible_list(
             x_str += f"morph={morph_value}."
         if mass_value is not None:
             x_str += f"mass={mass_value}."
-        if pledge_value is not None:
-            x_str += f"pledge={pledge_value}."
+        if task_value is not None:
+            x_str += f"task={task_value}."
 
         legible_list.append(x_str)
 

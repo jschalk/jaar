@@ -593,7 +593,7 @@
                     "_uid": 116,
                     "concept_label": "Accomplish Fall 2021 traaining",
                     "mass": 1,
-                    "pledge": true,
+                    "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "premises": {
@@ -642,7 +642,7 @@
                     "_uid": 118,
                     "concept_label": "Accomplish Fall 2021 traaining",
                     "mass": 1,
-                    "pledge": true,
+                    "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "premises": {
@@ -665,7 +665,7 @@
                 "_uid": 123,
                 "concept_label": "Know Employee Intruction manuel.",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -685,7 +685,7 @@
                     "_uid": 119,
                     "concept_label": "Accomplish Fall 2021 traaining",
                     "mass": 1,
-                    "pledge": true,
+                    "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "premises": {
@@ -710,7 +710,7 @@
                     "_uid": 121,
                     "concept_label": "Accomplish Fall 2021 traaining",
                     "mass": 1,
-                    "pledge": true,
+                    "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "premises": {
@@ -759,7 +759,7 @@
                     "_uid": 120,
                     "concept_label": "Accomplish Fall 2021 traaining",
                     "mass": 1,
-                    "pledge": true,
+                    "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "premises": {
@@ -818,7 +818,7 @@
                         "_uid": 138,
                         "concept_label": "check emails",
                         "mass": 1,
-                        "pledge": true,
+                        "task": true,
                         "reasonunits": {
                           "A;time;gregtime;": {
                             "premises": {
@@ -859,7 +859,7 @@
                         "_uid": 139,
                         "concept_label": "check mechanisms",
                         "mass": 1,
-                        "pledge": true,
+                        "task": true,
                         "reasonunits": {
                           "A;time;gregtime;": {
                             "premises": {
@@ -896,7 +896,7 @@
                     "_uid": 158,
                     "concept_label": "dress to slightly impress",
                     "mass": 1,
-                    "pledge": true,
+                    "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "premises": {
@@ -915,7 +915,7 @@
                     "_uid": 231,
                     "concept_label": "go to employment",
                     "mass": 1,
-                    "pledge": true,
+                    "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "premises": {
@@ -954,7 +954,7 @@
                     "_uid": 156,
                     "concept_label": "Add to Azure DevOps",
                     "mass": 1,
-                    "pledge": true,
+                    "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "premises": {
@@ -973,7 +973,7 @@
                     "_uid": 155,
                     "concept_label": "consider management perspective",
                     "mass": 1,
-                    "pledge": true,
+                    "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "premises": {
@@ -994,7 +994,7 @@
                         "_uid": 142,
                         "concept_label": "Datawarehouse Expertise acquisition",
                         "mass": 1,
-                        "pledge": true,
+                        "task": true,
                         "reasonunits": {
                           "A;time;gregtime;": {
                             "premises": {
@@ -1035,7 +1035,7 @@
                         "_uid": 157,
                         "concept_label": "dev quantification script \"T2R8\"",
                         "mass": 1,
-                        "pledge": true,
+                        "task": true,
                         "reasonunits": {
                           "A;time;gregtime;": {
                             "premises": {
@@ -1054,7 +1054,7 @@
                         "_uid": 232,
                         "concept_label": "go to daily meeting ",
                         "mass": 1,
-                        "pledge": true,
+                        "task": true,
                         "reasonunits": {
                           "A;time;gregtime;": {
                             "premises": {
@@ -1096,7 +1096,7 @@
                     "_uid": 151,
                     "concept_label": "Keep track of Chatroom conversations",
                     "mass": 1,
-                    "pledge": true,
+                    "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "premises": {
@@ -1154,7 +1154,7 @@
                 "concept_label": "IT DEPT regular hrs responsiblities",
                 "mass": 1,
                 "morph": false,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -1461,7 +1461,7 @@
                 "concept_label": "never fly a private G5",
                 "mass": 1,
                 "morph": false,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -1517,7 +1517,7 @@
             "concept_label": "call Crazy pete to say hi",
             "mass": 30,
             "morph": false,
-            "pledge": true,
+            "task": true,
             "reasonunits": {
               "A;time;gregtime;": {
                 "premises": {
@@ -1560,7 +1560,7 @@
                 },
                 "concept_label": "check cat water",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -1579,7 +1579,7 @@
                 "_uid": 159,
                 "concept_label": "check humidifer",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -1605,7 +1605,7 @@
                 },
                 "concept_label": "clean baby seats",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -1631,7 +1631,7 @@
                 },
                 "concept_label": "clean bathroom",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -1658,7 +1658,7 @@
                 "concept_label": "clean cat poo",
                 "mass": 1,
                 "morph": false,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -1684,7 +1684,7 @@
                 },
                 "concept_label": "clean humidifiers",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -1710,7 +1710,7 @@
                 },
                 "concept_label": "clean sheets couch blankets",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -1736,7 +1736,7 @@
                 },
                 "concept_label": "clean table",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -1762,7 +1762,7 @@
                 },
                 "concept_label": "deep clean play mat",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -1788,7 +1788,7 @@
                 },
                 "concept_label": "empty roomba",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -1814,7 +1814,7 @@
                 },
                 "concept_label": "empty roomba Friday",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -1857,7 +1857,7 @@
                 },
                 "concept_label": "laundry monday",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;casa;cleaning;laundry basket status;": {
                     "premises": {
@@ -1891,7 +1891,7 @@
                 },
                 "concept_label": "laundry saturday",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;casa;cleaning;laundry basket status;": {
                     "premises": {
@@ -1918,7 +1918,7 @@
                 "concept_label": "laundry thursday",
                 "mass": 1,
                 "morph": false,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;casa;cleaning;laundry basket status;": {
                     "premises": {
@@ -1952,7 +1952,7 @@
                 },
                 "concept_label": "laundry wednesday",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;casa;cleaning;laundry basket status;": {
                     "premises": {
@@ -2004,7 +2004,7 @@
                 },
                 "concept_label": "prepare_bed clean bedroom",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -2030,7 +2030,7 @@
                 },
                 "concept_label": "roomba bedroom",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -2056,7 +2056,7 @@
                 },
                 "concept_label": "roomba bedroom Friday",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -2082,7 +2082,7 @@
                 },
                 "concept_label": "roomba living area",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -2108,7 +2108,7 @@
                 },
                 "concept_label": "roomba living area thur",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -2134,7 +2134,7 @@
                 },
                 "concept_label": "roomba maintenance",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -2160,7 +2160,7 @@
                 },
                 "concept_label": "wipe down play mat2",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -2204,7 +2204,7 @@
                 },
                 "concept_label": "5 push-ups",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -2230,7 +2230,7 @@
                 },
                 "concept_label": "check protein for wk is adequate",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -2256,7 +2256,7 @@
                 },
                 "concept_label": "clean ears",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -2282,7 +2282,7 @@
                 },
                 "concept_label": "clip body nails",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -2308,7 +2308,7 @@
                 },
                 "concept_label": "cook veggies every morning",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -2352,7 +2352,7 @@
                 },
                 "concept_label": "flossing teeth",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -2380,7 +2380,7 @@
                     },
                     "concept_label": "bike or stuff",
                     "mass": 1,
-                    "pledge": true,
+                    "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "premises": {
@@ -2418,7 +2418,7 @@
                     },
                     "concept_label": "chest and arms (mon)",
                     "mass": 1,
-                    "pledge": true,
+                    "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "premises": {
@@ -2462,7 +2462,7 @@
                     },
                     "concept_label": "core lower back",
                     "mass": 1,
-                    "pledge": true,
+                    "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "premises": {
@@ -2509,14 +2509,14 @@
                         "concept_label": "shoulder exercises",
                         "mass": 1,
                         "morph": false,
-                        "pledge": true
+                        "task": true
                       },
                       "upper back exercises": {
                         "_uid": 132,
                         "concept_label": "upper back exercises",
                         "mass": 1,
                         "morph": false,
-                        "pledge": true
+                        "task": true
                       }
                     },
                     "_uid": 82,
@@ -2529,7 +2529,7 @@
                     },
                     "concept_label": "shoulders and upper back",
                     "mass": 1,
-                    "pledge": true,
+                    "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "premises": {
@@ -2555,7 +2555,7 @@
                     },
                     "concept_label": "squats hamstrings and calves",
                     "mass": 1,
-                    "pledge": true,
+                    "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "premises": {
@@ -2586,7 +2586,7 @@
                 },
                 "concept_label": "morning multivitamin",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -2612,7 +2612,7 @@
                 },
                 "concept_label": "shampooing",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -2638,7 +2638,7 @@
                 },
                 "concept_label": "straight back for 45 secs",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -2660,7 +2660,7 @@
                     "concept_label": "back",
                     "mass": 30,
                     "morph": false,
-                    "pledge": true,
+                    "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "premises": {
@@ -2679,7 +2679,7 @@
                     "concept_label": "legs",
                     "mass": 30,
                     "morph": false,
-                    "pledge": true,
+                    "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "premises": {
@@ -2698,13 +2698,13 @@
                     "concept_label": "waist",
                     "mass": 30,
                     "morph": false,
-                    "pledge": true
+                    "task": true
                   }
                 },
                 "concept_label": "stretch",
                 "mass": 30,
                 "morph": false,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -2730,7 +2730,7 @@
                 },
                 "concept_label": "trim beard",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -2764,7 +2764,7 @@
                 },
                 "concept_label": "be reponsible for rent",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -2789,7 +2789,7 @@
                 },
                 "concept_label": "be responsible for expenses card",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -2814,7 +2814,7 @@
                 },
                 "concept_label": "be responsible for utilities",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -2839,7 +2839,7 @@
                 },
                 "concept_label": "set aside a little bucks for fun the wk",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "premises": {
@@ -3007,7 +3007,7 @@
                 },
                 "concept_label": "clip oldest nails",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;Nation-States;": {
                     "premises": {
@@ -3041,7 +3041,7 @@
                 },
                 "concept_label": "get rid of toy get new toy",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;Nation-States;": {
                     "premises": {
@@ -3083,7 +3083,7 @@
             "concept_label": "say double hi to birds",
             "mass": 25,
             "morph": false,
-            "pledge": true,
+            "task": true,
             "reasonunits": {
               "A;time;gregtime;": {
                 "premises": {
@@ -3109,7 +3109,7 @@
             },
             "concept_label": "say hi to birds",
             "mass": 1,
-            "pledge": true,
+            "task": true,
             "reasonunits": {
               "A;time;gregtime;": {
                 "premises": {
@@ -3185,7 +3185,7 @@
                 "_uid": 178,
                 "concept_label": "test program",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;Aaron Donald objects effected by him;": {
                     "premises": {
@@ -3243,7 +3243,7 @@
                 },
                 "concept_label": "donate to influential people that are pro-Climate Death",
                 "mass": 1,
-                "pledge": true,
+                "task": true,
                 "reasonunits": {
                   "A;Aaron Donald objects effected by him;": {
                     "premises": {
@@ -3285,7 +3285,7 @@
             "_uid": 149,
             "concept_label": "late_evening_go_to_sleep",
             "mass": 1,
-            "pledge": true,
+            "task": true,
             "reasonunits": {
               "A;Aaron Donald objects effected by him;": {
                 "premises": {
@@ -3316,7 +3316,7 @@
                     "concept_label": "available for phone call",
                     "mass": 4,
                     "morph": false,
-                    "pledge": true,
+                    "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "premises": {
@@ -3354,7 +3354,7 @@
                     },
                     "concept_label": "be available for phone call",
                     "mass": 1,
-                    "pledge": true,
+                    "task": true,
                     "reasonunits": {
                       "A;Aaron Donald objects effected by him;": {
                         "premises": {
@@ -3393,7 +3393,7 @@
                     },
                     "concept_label": "call Aaron and discuss methodology",
                     "mass": 1,
-                    "pledge": true,
+                    "task": true,
                     "reasonunits": {
                       "A;Aaron Donald objects effected by him;": {
                         "premises": {

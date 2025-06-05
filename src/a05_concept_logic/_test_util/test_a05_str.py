@@ -4,7 +4,7 @@ from src.a05_concept_logic._test_util.a05_str import (
     _all_acct_debt_str,
     _awardheirs_str,
     _awardlines_str,
-    _descendant_pledge_count_str,
+    _descendant_task_count_str,
     _factheirs_str,
     _fund_cease_str,
     _fund_onset_str,
@@ -29,9 +29,9 @@ from src.a05_concept_logic._test_util.a05_str import (
     mass_str,
     morph_str,
     numor_str,
-    pledge_str,
     problem_bool_str,
     stop_want_str,
+    task_str,
 )
 
 
@@ -41,7 +41,7 @@ def test_str_functions_ReturnsObj():
     assert _all_acct_debt_str() == "_all_acct_debt"
     assert _awardheirs_str() == "_awardheirs"
     assert _awardlines_str() == "_awardlines"
-    assert _descendant_pledge_count_str() == "_descendant_pledge_count"
+    assert _descendant_task_count_str() == "_descendant_task_count"
     assert _factheirs_str() == "_factheirs"
     assert _fund_cease_str() == "_fund_cease"
     assert _fund_onset_str() == "_fund_onset"
@@ -65,7 +65,7 @@ def test_str_functions_ReturnsObj():
     assert mass_str() == "mass"
     assert morph_str() == "morph"
     assert numor_str() == "numor"
-    assert pledge_str() == "pledge"
+    assert task_str() == "task"
     assert problem_bool_str() == "problem_bool"
     assert stop_want_str() == "stop_want"
     assert healer_name_str() == "healer_name"

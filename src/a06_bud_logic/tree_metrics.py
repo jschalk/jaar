@@ -14,7 +14,7 @@ class TreeMetrics:
     uid_max: int = None
     uid_dict: dict[int, int] = None
     all_concept_uids_are_unique: bool = None
-    last_evaluated_pledge_concept_way: WayTerm = None
+    last_evaluated_task_concept_way: WayTerm = None
 
     def evaluate_label(
         self,
@@ -22,19 +22,19 @@ class TreeMetrics:
         reasons: dict[WayTerm, ReasonUnit],
         awardlinks: dict[GroupTitle, AwardLink],
         uid: int,
-        pledge: bool,
+        task: bool,
         concept_way: WayTerm,
     ):
         self.label_count += 1
-        self.evaluate_pledge(pledge=pledge, concept_way=concept_way)
+        self.evaluate_task(task=task, concept_way=concept_way)
         self.evaluate_level(level=level)
         self.evaluate_reasonunits(reasons=reasons)
         self.evaluate_awardlinks(awardlinks=awardlinks)
         self.evaluate_uid_max(uid=uid)
 
-    def evaluate_pledge(self, pledge: bool, concept_way: WayTerm):
-        if pledge:
-            self.last_evaluated_pledge_concept_way = concept_way
+    def evaluate_task(self, task: bool, concept_way: WayTerm):
+        if task:
+            self.last_evaluated_task_concept_way = concept_way
 
     def evaluate_level(self, level):
         if self.level_count.get(level) is None:

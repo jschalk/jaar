@@ -6,8 +6,8 @@ What does each one do?
 - **a01_term_logic**: Defines the terms and concepts used in the system for consistent understanding and processing.
 - **a02_finance_logic**: Defines financial rules and calculations to ensure accurate financial operations.
 - **a03_group_logic**: Defines accounts, account memberships, and groups. Groups will be produced from memberships.
-- **a04_reason_logic**: Describes what a reason and a fact is; if the reasons match the facts, then a pledge can be kept.
-- **a05_concept_logic**: A concept can be a pledge, and if its reasons match its facts, it should be kept.
+- **a04_reason_logic**: Describes what a reason and a fact is; if the reasons match the facts, then a task can be kept.
+- **a05_concept_logic**: A concept can be a task, and if its reasons match its facts, it should be kept.
 - **a06_bud_logic**: A bud is a budget, made of accounts and concepts. All concepts are connected to the axiom concept, which is given all the funds in a budget.
 - **a07_calendar_logic**: Allows arbitrary calendars to be defined for each budget with minimal configuration.
 - **a08_bud_atom_logic**: Defines the structure and behavior of budget atoms, which are single units of budget and concepts used in a budget.

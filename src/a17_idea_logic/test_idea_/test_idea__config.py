@@ -48,7 +48,6 @@ from src.a06_bud_logic._test_util.a06_str import (
     morph_str,
     numor_str,
     penny_str,
-    pledge_str,
     pnigh_str,
     popen_str,
     pstate_str,
@@ -57,6 +56,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     respect_bit_str,
     stop_want_str,
     take_force_str,
+    task_str,
 )
 from src.a07_calendar_logic._test_util.a07_str import (
     c400_number_str,
@@ -338,7 +338,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[116] == "pnigh"
     assert table_sorting_priority[117] == "popen"
     assert table_sorting_priority[118] == "pdivisor"
-    assert table_sorting_priority[119] == "pledge"
+    assert table_sorting_priority[119] == "task"
     assert table_sorting_priority[120] == "problem_bool"
     assert table_sorting_priority[121] == "take_force"
     assert table_sorting_priority[122] == "tally"
@@ -383,7 +383,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[161] == "_stop_calc"
     assert table_sorting_priority[162] == "_level"
     assert table_sorting_priority[163] == "_range_evaluated"
-    assert table_sorting_priority[164] == "_descendant_pledge_count"
+    assert table_sorting_priority[164] == "_descendant_task_count"
     assert table_sorting_priority[165] == "_healerlink_ratio"
     assert table_sorting_priority[166] == "_all_acct_cred"
     assert table_sorting_priority[167] == "_keeps_justified"
@@ -478,7 +478,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get("tally") == "INTEGER"
     assert sqlite_types.get(fund_iota_str()) == "REAL"
     assert sqlite_types.get(penny_str()) == "REAL"
-    assert sqlite_types.get(pledge_str()) == "INTEGER"
+    assert sqlite_types.get(task_str()) == "INTEGER"
     assert sqlite_types.get(respect_bit_str()) == "REAL"
     assert sqlite_types.get(amount_str()) == "REAL"
     assert sqlite_types.get(month_label_str()) == "TEXT"

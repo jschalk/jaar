@@ -76,7 +76,7 @@ def test_listen_to_facts_duty_plan_SetsSingleFactUnitWithDifferentChore(
     sue_texas_hubunit.save_duty_bud(yao_duty)
 
     zia_plan = get_example_zia_speaker()
-    zia_plan.set_concept(conceptunit_shop(clean_str(), pledge=True), casa_way())
+    zia_plan.set_concept(conceptunit_shop(clean_str(), task=True), casa_way())
     clean_conceptunit = zia_plan.get_concept_obj(clean_way())
     clean_conceptunit.laborunit.set_laborlink(yao_str)
     sue_texas_hubunit.save_plan_bud(zia_plan)
@@ -272,7 +272,7 @@ def test_listen_to_facts_duty_plan_ConfirmNoFactfstateedFromOwnersSpeakerDirBud_
 #     sue_speaker.set_acct_respect(20)
 #     sue_speaker.set_concept(conceptunit_shop(clean_str), status_way)
 #     sue_speaker.set_concept(conceptunit_shop(dirty_str), status_way)
-#     sue_speaker.set_concept(conceptunit_shop(sweep_str, pledge=True), casa_way)
+#     sue_speaker.set_concept(conceptunit_shop(sweep_str, task=True), casa_way)
 #     sue_speaker.edit_concept_attr(
 #         sweep_way, reason_rcontext=status_way, reason_premise=dirty_way
 #     )
@@ -326,7 +326,7 @@ def test_listen_to_facts_duty_plan_ConfirmNoFactfstateedFromOwnersSpeakerDirBud_
 #     yao_duty.set_concept(conceptunit_shop(running_str), fridge_way)
 #     yao_duty.set_concept(conceptunit_shop(clean_str), status_way)
 #     yao_duty.set_concept(conceptunit_shop(dirty_str), status_way)
-#     yao_duty.set_concept(conceptunit_shop(sweep_str, pledge=True), casa_way)
+#     yao_duty.set_concept(conceptunit_shop(sweep_str, task=True), casa_way)
 #     yao_duty.edit_concept_attr(
 #         sweep_way, reason_rcontext=status_way, reason_premise=dirty_way
 #     )

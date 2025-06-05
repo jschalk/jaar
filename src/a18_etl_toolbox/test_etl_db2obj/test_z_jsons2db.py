@@ -152,7 +152,7 @@ def test_insert_job_budconc_CreatesTableRowsFor_budconc_job():
     x_gogo_want = 11.0
     x_stop_want = 12.0
     x_mass = 13
-    x_pledge = 14
+    x_task = 14
     x_problem_bool = 15
     x__active = 16
     x__chore = 17
@@ -164,7 +164,7 @@ def test_insert_job_budconc_CreatesTableRowsFor_budconc_job():
     x__stop_calc = 23.0
     x__level = 24
     x__range_evaluated = 25
-    x__descendant_pledge_count = 26
+    x__descendant_task_count = 26
     x__healerlink_ratio = 27.0
     x__all_acct_cred = 28
     x__all_acct_debt = 29
@@ -181,7 +181,7 @@ def test_insert_job_budconc_CreatesTableRowsFor_budconc_job():
     x_concept.gogo_want = x_gogo_want
     x_concept.stop_want = x_stop_want
     x_concept.mass = x_mass
-    x_concept.pledge = x_pledge
+    x_concept.task = x_task
     x_concept.problem_bool = x_problem_bool
     x_concept._active = x__active
     x_concept._chore = x__chore
@@ -193,7 +193,7 @@ def test_insert_job_budconc_CreatesTableRowsFor_budconc_job():
     x_concept._stop_calc = x__stop_calc
     x_concept._level = x__level
     x_concept._range_evaluated = x__range_evaluated
-    x_concept._descendant_pledge_count = x__descendant_pledge_count
+    x_concept._descendant_task_count = x__descendant_task_count
     x_concept._healerlink_ratio = x__healerlink_ratio
     x_concept._all_acct_cred = x__all_acct_cred
     x_concept._all_acct_debt = x__all_acct_debt
@@ -206,7 +206,7 @@ def test_insert_job_budconc_CreatesTableRowsFor_budconc_job():
     x_concept.gogo_want = x_gogo_want
     x_concept.stop_want = x_stop_want
     x_concept.mass = x_mass
-    x_concept.pledge = x_pledge
+    x_concept.task = x_task
     x_concept.problem_bool = x_problem_bool
     x_concept._active = x__active
     x_concept._chore = x__chore
@@ -218,7 +218,7 @@ def test_insert_job_budconc_CreatesTableRowsFor_budconc_job():
     x_concept._stop_calc = x__stop_calc
     x_concept._level = x__level
     x_concept._range_evaluated = x__range_evaluated
-    x_concept._descendant_pledge_count = x__descendant_pledge_count
+    x_concept._descendant_task_count = x__descendant_task_count
     x_concept._healerlink_ratio = x__healerlink_ratio
     x_concept._all_acct_cred = x__all_acct_cred
     x_concept._all_acct_debt = x__all_acct_debt
@@ -252,7 +252,7 @@ def test_insert_job_budconc_CreatesTableRowsFor_budconc_job():
             x_gogo_want,
             x_stop_want,
             x_mass,
-            x_pledge,
+            x_task,
             x_problem_bool,
             x_fund_iota,
             x__active,
@@ -264,7 +264,7 @@ def test_insert_job_budconc_CreatesTableRowsFor_budconc_job():
             x__stop_calc,
             x__level,
             x__range_evaluated,
-            x__descendant_pledge_count,
+            x__descendant_task_count,
             x__healerlink_ratio,
             x__all_acct_cred,
             x__all_acct_debt,

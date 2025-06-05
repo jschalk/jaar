@@ -77,7 +77,7 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyVowUnit(
         "br00025": "vow_label,owner_name,concept_way,healer_name\n",
         "br00026": "vow_label,owner_name,concept_way,rcontext,pstate,pnigh,popen,pdivisor\n",
         "br00027": "vow_label,owner_name,concept_way,rcontext,rconcept_active_requisite\n",
-        "br00028": "vow_label,owner_name,concept_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool\n",
+        "br00028": "vow_label,owner_name,concept_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,task,problem_bool\n",
         "br00029": "vow_label,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_iota,penny,respect_bit\n",
         "br00042": "otx_title,inx_title,otx_bridge,inx_bridge,unknown_str\n",
         "br00043": "otx_name,inx_name,otx_bridge,inx_bridge,unknown_str\n",
@@ -513,7 +513,7 @@ def test_add_bud_to_br00028_csv_ReturnsObj():
     casa_gogo_want = 31
     casa_stop_want = 41
     casa_mass = 2
-    casa_pledge = False
+    casa_task = False
     casa_problem_bool = False
     bob_bud.add_concept(casa_way)
     bob_bud.add_concept(mop_way)
@@ -528,7 +528,7 @@ def test_add_bud_to_br00028_csv_ReturnsObj():
         gogo_want=casa_gogo_want,
         stop_want=casa_stop_want,
         mass=casa_mass,
-        pledge=casa_pledge,
+        task=casa_task,
         problem_bool=casa_problem_bool,
     )
     csv_header = x_ideas.get("br00028")
@@ -540,7 +540,7 @@ def test_add_bud_to_br00028_csv_ReturnsObj():
 
     # THEN
     root_row = f",,{a23_str},{bob_str},,{a23_way},,,,,,,,,1,False,False\n"
-    mop_row = f",,{a23_str},{bob_str},{mop_way},{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},{casa_gogo_want},{casa_stop_want},{casa_mass},{casa_pledge},{casa_problem_bool}\n"
+    mop_row = f",,{a23_str},{bob_str},{mop_way},{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},{casa_gogo_want},{casa_stop_want},{casa_mass},{casa_task},{casa_problem_bool}\n"
     casa_row = f",,{a23_str},{bob_str},{casa_way},,,,,,,,,0,False,False\n"
     # print(f"{mop_row=}")
     expected_csv = f"{csv_header}{mop_row}{casa_row}"
@@ -1050,7 +1050,7 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
     casa_gogo_want = 31
     casa_stop_want = 41
     casa_mass = 2
-    casa_pledge = False
+    casa_task = False
     casa_problem_bool = False
     bob_bud.add_concept(casa_way)
     bob_bud.add_concept(mop_way)
@@ -1065,7 +1065,7 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
         gogo_want=casa_gogo_want,
         stop_want=casa_stop_want,
         mass=casa_mass,
-        pledge=casa_pledge,
+        task=casa_task,
         problem_bool=casa_problem_bool,
     )
     bob_buddelta = buddelta_shop()
@@ -1082,8 +1082,8 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
 
     # THEN
     # root_row = f"{sue_str},{event7},{a23_str},{bob_str},,{bob_bud.vow_label},,,,,,,,,1,False,False\n"
-    # mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{bob_bud.vow_label},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},{casa_gogo_want},{casa_stop_want},{casa_mass},{casa_pledge},{casa_problem_bool}\n"
-    mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{a23_way},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},,,{casa_mass},{casa_pledge},\n"
+    # mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{bob_bud.vow_label},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},{casa_gogo_want},{casa_stop_want},{casa_mass},{casa_task},{casa_problem_bool}\n"
+    mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{a23_way},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},,,{casa_mass},{casa_task},\n"
     casa_row = (
         f"{sue_str},{event7},{a23_str},{bob_str},{a23_way},casa,,,,,,,,,0,False,\n"
     )

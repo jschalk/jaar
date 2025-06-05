@@ -45,8 +45,8 @@ def test_listen_to_agenda_duty_plan_agenda_AddsChoresToplan_BudWhenNo_laborlinkI
     yao_duty.set_acct_respect(zia_pool)
 
     zia_plan = budunit_shop(zia_str, a23_str)
-    zia_plan.set_concept(conceptunit_shop(clean_str(), pledge=True), casa_way())
-    zia_plan.set_concept(conceptunit_shop(cook_str(), pledge=True), casa_way())
+    zia_plan.set_concept(conceptunit_shop(clean_str(), task=True), casa_way())
+    zia_plan.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
     zia_plan.add_acctunit(yao_str, debtit_belief=12)
     yao_dakota_hubunit = hubunit_shop(env_dir(), a23_str, yao_str, get_dakota_way())
     yao_dakota_hubunit.save_plan_bud(zia_plan)
@@ -74,8 +74,8 @@ def test_listen_to_agenda_duty_plan_agenda_AddsChoresToplan_Bud(env_dir_setup_cl
     yao_duty.set_acct_respect(zia_pool)
 
     zia_plan = budunit_shop(zia_str, a23_str)
-    zia_plan.set_concept(conceptunit_shop(clean_str(), pledge=True), casa_way())
-    zia_plan.set_concept(conceptunit_shop(cook_str(), pledge=True), casa_way())
+    zia_plan.set_concept(conceptunit_shop(clean_str(), task=True), casa_way())
+    zia_plan.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
     zia_plan.add_acctunit(yao_str, debtit_belief=12)
     clean_conceptunit = zia_plan.get_concept_obj(clean_way())
     cook_conceptunit = zia_plan.get_concept_obj(cook_way())
@@ -179,8 +179,8 @@ def test_listen_to_agenda_duty_plan_agenda_ProcessesIrrationalBud(
 
     zia_str = "Zia"
     zia_plan = budunit_shop(zia_str, a23_str)
-    zia_plan.set_concept(conceptunit_shop(clean_str(), pledge=True), casa_way())
-    zia_plan.set_concept(conceptunit_shop(cook_str(), pledge=True), casa_way())
+    zia_plan.set_concept(conceptunit_shop(clean_str(), task=True), casa_way())
+    zia_plan.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
     zia_plan.add_acctunit(yao_str, debtit_belief=12)
     clean_conceptunit = zia_plan.get_concept_obj(clean_way())
     cook_conceptunit = zia_plan.get_concept_obj(cook_way())
@@ -193,7 +193,7 @@ def test_listen_to_agenda_duty_plan_agenda_ProcessesIrrationalBud(
     zia_plan.add_acctunit(yao_str, debtit_belief=12)
     vacuum_str = "vacuum"
     vacuum_way = sue_plan.make_l1_way(vacuum_str)
-    sue_plan.set_l1_concept(conceptunit_shop(vacuum_str, pledge=True))
+    sue_plan.set_l1_concept(conceptunit_shop(vacuum_str, task=True))
     vacuum_conceptunit = sue_plan.get_concept_obj(vacuum_way)
     vacuum_conceptunit.laborunit.set_laborlink(yao_str)
 
@@ -203,17 +203,17 @@ def test_listen_to_agenda_duty_plan_agenda_ProcessesIrrationalBud(
     chicken_str = "chicken first"
     chicken_way = sue_plan.make_l1_way(chicken_str)
     sue_plan.set_l1_concept(conceptunit_shop(chicken_str))
-    # set egg pledge is True when chicken first is False
+    # set egg task is True when chicken first is False
     sue_plan.edit_concept_attr(
         egg_way,
-        pledge=True,
+        task=True,
         reason_rcontext=chicken_way,
         reason_rconcept_active_requisite=True,
     )
-    # set chick pledge is True when egg first is False
+    # set chick task is True when egg first is False
     sue_plan.edit_concept_attr(
         chicken_way,
-        pledge=True,
+        task=True,
         reason_rcontext=egg_way,
         reason_rconcept_active_requisite=False,
     )
@@ -255,8 +255,8 @@ def test_listen_to_agenda_duty_plan_agenda_ProcessesMissingDebtorplanBud(
     yao_dakota_hubunit.save_duty_bud(yao_duty)
 
     zia_plan = budunit_shop(zia_str, a23_str)
-    zia_plan.set_concept(conceptunit_shop(clean_str(), pledge=True), casa_way())
-    zia_plan.set_concept(conceptunit_shop(cook_str(), pledge=True), casa_way())
+    zia_plan.set_concept(conceptunit_shop(clean_str(), task=True), casa_way())
+    zia_plan.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
     zia_plan.add_acctunit(yao_str, debtit_belief=12)
     clean_conceptunit = zia_plan.get_concept_obj(clean_way())
     cook_conceptunit = zia_plan.get_concept_obj(cook_way())
@@ -304,8 +304,8 @@ def test_listen_to_agenda_duty_plan_agenda_ListensToOwner_duty_AndNotOwner_plan(
     # Save Zia to plans
     zia_str = "Zia"
     zia_plan = budunit_shop(zia_str, a23_str)
-    zia_plan.set_concept(conceptunit_shop(clean_str(), pledge=True), casa_way())
-    zia_plan.set_concept(conceptunit_shop(cook_str(), pledge=True), casa_way())
+    zia_plan.set_concept(conceptunit_shop(clean_str(), task=True), casa_way())
+    zia_plan.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
     zia_plan.add_acctunit(yao_str, debtit_belief=12)
     clean_conceptunit = zia_plan.get_concept_obj(clean_way())
     cook_conceptunit = zia_plan.get_concept_obj(cook_way())
@@ -317,7 +317,7 @@ def test_listen_to_agenda_duty_plan_agenda_ListensToOwner_duty_AndNotOwner_plan(
     yao_old_plan = budunit_shop(yao_str, a23_str)
     vacuum_str = "vacuum"
     vacuum_way = yao_old_plan.make_l1_way(vacuum_str)
-    yao_old_plan.set_l1_concept(conceptunit_shop(vacuum_str, pledge=True))
+    yao_old_plan.set_l1_concept(conceptunit_shop(vacuum_str, task=True))
     vacuum_conceptunit = yao_old_plan.get_concept_obj(vacuum_way)
     vacuum_conceptunit.laborunit.set_laborlink(yao_str)
     yao_dakota_hubunit.save_plan_bud(yao_old_plan)
@@ -341,14 +341,14 @@ def test_listen_to_agenda_duty_plan_agenda_GetsAgendaFromSrcBudNotSpeakerSelf(
     yao_duty = get_example_yao_speaker()
     assert yao_duty.concept_exists(run_way()) is False
     assert yao_duty.concept_exists(clean_way()) is False
-    yao_duty.set_concept(conceptunit_shop(run_str(), pledge=True), casa_way())
+    yao_duty.set_concept(conceptunit_shop(run_str(), task=True), casa_way())
     sue_dakota_hubunit = get_dakota_hubunit()
     sue_dakota_hubunit.save_duty_bud(yao_duty)
 
     yao_old_plan = get_example_yao_speaker()
     assert yao_old_plan.concept_exists(run_way()) is False
     assert yao_old_plan.concept_exists(clean_way()) is False
-    yao_old_plan.set_concept(conceptunit_shop(clean_str(), pledge=True), casa_way())
+    yao_old_plan.set_concept(conceptunit_shop(clean_str(), task=True), casa_way())
     sue_dakota_hubunit.save_plan_bud(yao_old_plan)
 
     yao_new_plan = create_listen_basis(yao_duty)

@@ -222,7 +222,7 @@ CREATE TABLE IF NOT EXISTS atom_mstr (
 ;"""
     assert generated_sqlstr.find(begin_sqlstr) == 0
     assert generated_sqlstr.find(end_sqlstr) > 0
-    assert generated_sqlstr.find(end_sqlstr) == 5614
+    assert generated_sqlstr.find(end_sqlstr) == 5610
     example_concept_reasonunit_str = (
         "concept_reasonunit_UPDATE_rconcept_active_requisite INTEGER NULL"
     )

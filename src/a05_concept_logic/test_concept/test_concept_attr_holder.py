@@ -23,9 +23,9 @@ def test_ConceptAttrHolder_Exists():
     assert new_obj.numor is None
     assert new_obj.denom is None
     assert new_obj.morph is None
-    assert new_obj.pledge is None
+    assert new_obj.task is None
     assert new_obj.factunit is None
-    assert new_obj.descendant_pledge_count is None
+    assert new_obj.descendant_task_count is None
     assert new_obj.all_acct_cred is None
     assert new_obj.all_acct_debt is None
     assert new_obj.awardlink is None

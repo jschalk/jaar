@@ -22,8 +22,8 @@ def _awardlines_str() -> str:
     return "_awardlines"
 
 
-def _descendant_pledge_count_str() -> str:
-    return "_descendant_pledge_count"
+def _descendant_task_count_str() -> str:
+    return "_descendant_task_count"
 
 
 def _factheirs_str() -> str:
@@ -122,13 +122,13 @@ def numor_str() -> str:
     return "numor"
 
 
-def pledge_str() -> str:
-    return "pledge"
-
-
 def problem_bool_str() -> str:
     return "problem_bool"
 
 
 def stop_want_str() -> str:
     return "stop_want"
+
+
+def task_str() -> str:
+    return "task"

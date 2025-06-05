@@ -172,7 +172,7 @@ def listen_to_speaker_agenda(listener: BudUnit, speaker: BudUnit) -> BudUnit:
     if listener.owner_name != speaker.owner_name:
         agenda = generate_perspective_agenda(perspective_bud)
     else:
-        agenda = list(perspective_bud.get_all_pledges().values())
+        agenda = list(perspective_bud.get_all_tasks().values())
     if len(agenda) == 0:
         return _allocate_inallocable_debtit_belief(listener, speaker.owner_name)
     return _ingest_perspective_agenda(listener, agenda)

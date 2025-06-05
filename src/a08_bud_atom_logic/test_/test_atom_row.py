@@ -51,7 +51,7 @@ def test_AtomRow_exists():
     assert x_atomrow.popen is None
     assert x_atomrow.penny is None
     assert x_atomrow.fstate is None
-    assert x_atomrow.pledge is None
+    assert x_atomrow.task is None
     assert x_atomrow.problem_bool is None
     assert x_atomrow.concept_way is None
     assert x_atomrow.stop_want is None
@@ -229,11 +229,11 @@ def test_AtomRow_get_budatoms_ReturnsObjIfDimenIsCorrect():
     assert len(x_atomrow.get_budatoms()) == 1
 
 
-def test_AtomRow_get_budatoms_ReturnsObj_bud_conceptunit_INSERT_pledge_False_Scenario0():
+def test_AtomRow_get_budatoms_ReturnsObj_bud_conceptunit_INSERT_task_False_Scenario0():
     # ESTABLISH
     x_atomrow = atomrow_shop({bud_conceptunit_str()}, INSERT_str())
     x_atomrow.concept_way = create_way("accord78", "casa")
-    x_atomrow.pledge = False
+    x_atomrow.task = False
     assert len(x_atomrow.get_budatoms()) == 1
 
     # WHEN / THEN
@@ -242,18 +242,18 @@ def test_AtomRow_get_budatoms_ReturnsObj_bud_conceptunit_INSERT_pledge_False_Sce
     # THEN
     static_budatom = budatom_shop(bud_conceptunit_str(), INSERT_str())
     static_budatom.set_arg("concept_way", create_way("accord78", "casa"))
-    static_budatom.set_arg("pledge", False)
+    static_budatom.set_arg("task", False)
     print(static_budatom)
     print(x_budatom)
     assert x_budatom == static_budatom
 
 
-def test_AtomRow_get_budatoms_ReturnsObj_bud_conceptunit_INSERT_pledge_False_Scenario1():
+def test_AtomRow_get_budatoms_ReturnsObj_bud_conceptunit_INSERT_task_False_Scenario1():
     # ESTABLISH
     x_dimens = {bud_conceptunit_str(), bud_concept_healerlink_str()}
     x_atomrow = atomrow_shop(x_dimens, INSERT_str())
     x_atomrow.concept_way = create_way("accord78", "casa")
-    x_atomrow.pledge = False
+    x_atomrow.task = False
     x_atomrow.healer_name = "Bob"
 
     # WHEN / THEN
@@ -264,7 +264,7 @@ def test_AtomRow_get_budatoms_ReturnsObj_bud_conceptunit_INSERT_pledge_False_Sce
     y_concept_budatom = budatom_shop(bud_conceptunit_str(), INSERT_str())
     casa_way = create_way("accord78", "casa")
     y_concept_budatom.set_arg("concept_way", casa_way)
-    y_concept_budatom.set_arg("pledge", False)
+    y_concept_budatom.set_arg("task", False)
     assert y_concept_budatom in x_budatoms
     healerlink_budatom = budatom_shop(bud_concept_healerlink_str(), INSERT_str())
     healerlink_budatom.set_arg("concept_way", casa_way)

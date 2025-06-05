@@ -109,9 +109,9 @@ class ConceptAttrHolder:
     numor: float = None
     denom: float = None
     morph: bool = None
-    pledge: bool = None
+    task: bool = None
     factunit: FactUnit = None
-    descendant_pledge_count: int = None
+    descendant_task_count: int = None
     all_acct_cred: bool = None
     all_acct_debt: bool = None
     awardlink: AwardLink = None
@@ -156,9 +156,9 @@ def conceptattrholder_shop(
     numor: float = None,
     denom: float = None,
     morph: bool = None,
-    pledge: bool = None,
+    task: bool = None,
     factunit: FactUnit = None,
-    descendant_pledge_count: int = None,
+    descendant_task_count: int = None,
     all_acct_cred: bool = None,
     all_acct_debt: bool = None,
     awardlink: AwardLink = None,
@@ -188,9 +188,9 @@ def conceptattrholder_shop(
         numor=numor,
         denom=denom,
         morph=morph,
-        pledge=pledge,
+        task=task,
         factunit=factunit,
-        descendant_pledge_count=descendant_pledge_count,
+        descendant_task_count=descendant_task_count,
         all_acct_cred=all_acct_cred,
         all_acct_debt=all_acct_debt,
         awardlink=awardlink,
@@ -222,7 +222,7 @@ class ConceptUnit:
     morph: bool = None
     gogo_want: bool = None
     stop_want: bool = None
-    pledge: bool = None
+    task: bool = None
     problem_bool: bool = None
     bridge: str = None
     _is_expanded: bool = None
@@ -233,7 +233,7 @@ class ConceptUnit:
     _all_acct_debt: bool = None
     _awardheirs: dict[GroupTitle, AwardHeir] = None
     _awardlines: dict[GroupTitle, AwardLine] = None
-    _descendant_pledge_count: int = None
+    _descendant_task_count: int = None
     _factheirs: dict[WayTerm, FactHeir] = None
     _fund_ratio: float = None
     fund_iota: FundIota = None
@@ -250,7 +250,7 @@ class ConceptUnit:
 
     def is_agenda_concept(self, necessary_rcontext: WayTerm = None) -> bool:
         rcontext_reasonunit_exists = self.rcontext_reasonunit_exists(necessary_rcontext)
-        return self.pledge and self._active and rcontext_reasonunit_exists
+        return self.task and self._active and rcontext_reasonunit_exists
 
     def rcontext_reasonunit_exists(self, necessary_rcontext: WayTerm = None) -> bool:
         x_reasons = self.reasonunits.values()
@@ -389,16 +389,16 @@ class ConceptUnit:
         else:
             return create_way(self.parent_way, self.concept_label, bridge=self.bridge)
 
-    def clear_descendant_pledge_count(self):
-        self._descendant_pledge_count = None
+    def clear_descendant_task_count(self):
+        self._descendant_task_count = None
 
-    def set_descendant_pledge_count_zero_if_None(self):
-        if self._descendant_pledge_count is None:
-            self._descendant_pledge_count = 0
+    def set_descendant_task_count_zero_if_None(self):
+        if self._descendant_task_count is None:
+            self._descendant_task_count = 0
 
-    def add_to_descendant_pledge_count(self, x_int: int):
-        self.set_descendant_pledge_count_zero_if_None()
-        self._descendant_pledge_count += x_int
+    def add_to_descendant_task_count(self, x_int: int):
+        self.set_descendant_task_count_zero_if_None()
+        self._descendant_task_count += x_int
 
     def get_descendant_ways_from_kids(self) -> dict[WayTerm, int]:
         descendant_ways = {}
@@ -591,8 +591,8 @@ class ConceptUnit:
             self.denom = concept_attr.denom
         if concept_attr.morph is not None:
             self.morph = concept_attr.morph
-        if concept_attr.descendant_pledge_count is not None:
-            self._descendant_pledge_count = concept_attr.descendant_pledge_count
+        if concept_attr.descendant_task_count is not None:
+            self._descendant_task_count = concept_attr.descendant_task_count
         if concept_attr.all_acct_cred is not None:
             self._all_acct_cred = concept_attr.all_acct_cred
         if concept_attr.all_acct_debt is not None:
@@ -603,8 +603,8 @@ class ConceptUnit:
             self.del_awardlink(awardee_title=concept_attr.awardlink_del)
         if concept_attr.is_expanded is not None:
             self._is_expanded = concept_attr.is_expanded
-        if concept_attr.pledge is not None:
-            self.pledge = concept_attr.pledge
+        if concept_attr.task is not None:
+            self.task = concept_attr.task
         if concept_attr.factunit is not None:
             self.set_factunit(concept_attr.factunit)
         if concept_attr.problem_bool is not None:
@@ -775,7 +775,7 @@ class ConceptUnit:
 
     def _set_concept_chore(self):
         self._chore = False
-        if self.pledge and self._active and self._reasonheirs_satisfied():
+        if self.task and self._active and self._reasonheirs_satisfied():
             self._chore = True
 
     def _reasonheirs_satisfied(self) -> bool:
@@ -922,8 +922,8 @@ class ConceptUnit:
             x_dict["gogo_want"] = self.gogo_want
         if self.stop_want is not None:
             x_dict["stop_want"] = self.stop_want
-        if self.pledge:
-            x_dict["pledge"] = self.pledge
+        if self.task:
+            x_dict["task"] = self.task
         if self.problem_bool:
             x_dict["problem_bool"] = self.problem_bool
         if self.factunits not in [{}, None]:
@@ -989,7 +989,7 @@ def conceptunit_shop(
     denom: int = None,
     numor: int = None,
     morph: bool = None,
-    pledge: bool = None,
+    task: bool = None,
     root: bool = None,
     vow_label: VowLabel = None,
     problem_bool: bool = None,
@@ -1001,7 +1001,7 @@ def conceptunit_shop(
     _fund_cease: FundNum = None,
     _chore: bool = None,
     _active: bool = None,
-    _descendant_pledge_count: int = None,
+    _descendant_task_count: int = None,
     _all_acct_cred: bool = None,
     _all_acct_debt: bool = None,
     _is_expanded: bool = True,
@@ -1036,7 +1036,7 @@ def conceptunit_shop(
         denom=denom,
         numor=numor,
         morph=morph,
-        pledge=get_False_if_None(pledge),
+        task=get_False_if_None(task),
         problem_bool=get_False_if_None(problem_bool),
         root=get_False_if_None(root),
         vow_label=vow_label,
@@ -1048,7 +1048,7 @@ def conceptunit_shop(
         _fund_cease=_fund_cease,
         _chore=_chore,
         _active=_active,
-        _descendant_pledge_count=_descendant_pledge_count,
+        _descendant_task_count=_descendant_task_count,
         _all_acct_cred=_all_acct_cred,
         _all_acct_debt=_all_acct_debt,
         _is_expanded=_is_expanded,
@@ -1094,7 +1094,7 @@ def get_obj_from_concept_dict(x_dict: dict[str, dict], dict_key: str) -> any:
         )
     elif dict_key in {"_kids"}:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else {}
-    elif dict_key in {"pledge", "problem_bool"}:
+    elif dict_key in {"task", "problem_bool"}:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else False
     elif dict_key in {"_is_expanded"}:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else True

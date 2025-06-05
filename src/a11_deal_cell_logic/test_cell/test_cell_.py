@@ -131,7 +131,7 @@ def test_cellunit_shop_ReturnsObj_Scenario2_WithReasonRcontexts():
     mop_way = sue_bud.make_way(casa_way, "mop")
     clean_fact = clean_factunit()
     sue_bud.add_concept(clean_factunit().fstate)
-    sue_bud.add_concept(mop_way, pledge=True)
+    sue_bud.add_concept(mop_way, task=True)
     sue_bud.edit_reason(mop_way, clean_fact.fcontext, clean_fact.fstate)
 
     # WHEN
@@ -152,7 +152,7 @@ def test_cellunit_shop_ReturnsObj_Scenario3_clear_facts():
     mop_way = sue_bud.make_way(casa_way, "mop")
     clean_fact = clean_factunit()
     sue_bud.add_concept(clean_factunit().fstate)
-    sue_bud.add_concept(mop_way, pledge=True)
+    sue_bud.add_concept(mop_way, task=True)
     sue_bud.edit_reason(mop_way, clean_fact.fcontext, clean_fact.fstate)
     sue_bud.add_fact(clean_fact.fcontext, clean_fact.fstate)
     assert len(sue_bud.get_factunits_dict()) == 1
@@ -219,7 +219,7 @@ def test_CellUnit_eval_budevent_SetsAttr_Scenario1():
     mop_way = yao_bud.make_way(casa_way, "mop")
     clean_fact = clean_factunit()
     yao_bud.add_concept(clean_fact.fstate)
-    yao_bud.add_concept(mop_way, pledge=True)
+    yao_bud.add_concept(mop_way, task=True)
     yao_bud.edit_reason(mop_way, clean_fact.fcontext, clean_fact.fstate)
     yao_bud.add_fact(
         clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
@@ -841,7 +841,7 @@ def test_CellUnit_calc_acct_mandate_ledger_ReturnsObj_Scenario0():
     sue_bud.add_concept(dirty_fact.fstate)
     casa_way = sue_bud.make_l1_way("casa")
     mop_way = sue_bud.make_way(casa_way, "mop")
-    sue_bud.add_concept(mop_way, 1, pledge=True)
+    sue_bud.add_concept(mop_way, 1, task=True)
     sue_bud.edit_reason(mop_way, dirty_fact.fcontext, dirty_fact.fstate)
     sue_bud.add_fact(
         dirty_fact.fcontext, dirty_fact.fstate, create_missing_concepts=True
@@ -990,7 +990,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario2_boss_facts():
     mop_way = yao_bud.make_way(casa_way, "mop")
     clean_fact = clean_factunit()
     yao_bud.add_concept(casa_way, 1)
-    yao_bud.add_concept(mop_way, 1, pledge=True)
+    yao_bud.add_concept(mop_way, 1, task=True)
     yao_bud.add_concept(clean_fact.fstate)
     yao_bud.add_concept(dirty_fact.fstate)
     yao_bud.edit_reason(mop_way, dirty_fact.fcontext, dirty_fact.fstate)
@@ -1034,7 +1034,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
     sue_bud.add_concept(dirty_fact.fstate)
     casa_way = sue_bud.make_l1_way("casa")
     mop_way = sue_bud.make_way(casa_way, "mop")
-    sue_bud.add_concept(mop_way, 1, pledge=True)
+    sue_bud.add_concept(mop_way, 1, task=True)
     sue_bud.edit_reason(mop_way, dirty_fact.fcontext, dirty_fact.fstate)
     sue_bud.add_fact(
         dirty_fact.fcontext, dirty_fact.fstate, create_missing_concepts=True

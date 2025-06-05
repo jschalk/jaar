@@ -34,7 +34,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_concept_Scenario0():
     clean_str = "clean"
     clean_way = sue_budunit.make_way(casa_way, clean_str)
     sue_budunit.set_l1_concept(conceptunit_shop(casa_str))
-    sue_budunit.set_concept(conceptunit_shop(clean_str, pledge=True), casa_way)
+    sue_budunit.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
 
     # WHEN
     sue_agenda = sue_budunit.get_agenda_dict()
@@ -58,7 +58,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_concept_Scenario1():
     clean_str = "clean"
     clean_way = sue_budunit.make_way(casa_way, clean_str)
     sue_budunit.set_l1_concept(conceptunit_shop(casa_str))
-    sue_budunit.set_concept(conceptunit_shop(clean_str, pledge=True), casa_way)
+    sue_budunit.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
     sue_budunit.edit_concept_attr(
         clean_way,
         reason_rcontext=day_way,
@@ -92,7 +92,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_day_concept_Scenario2():
     clean_str = "clean"
     clean_way = sue_budunit.make_way(casa_way, clean_str)
     sue_budunit.set_l1_concept(conceptunit_shop(casa_str))
-    sue_budunit.set_concept(conceptunit_shop(clean_str, pledge=True), casa_way)
+    sue_budunit.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
     sue_budunit.edit_concept_attr(
         clean_way,
         reason_rcontext=day_way,
@@ -125,7 +125,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_days_concept_Scenario0():
     clean_str = "clean"
     clean_way = sue_budunit.make_way(casa_way, clean_str)
     sue_budunit.set_l1_concept(conceptunit_shop(casa_str))
-    sue_budunit.set_concept(conceptunit_shop(clean_str, pledge=True), casa_way)
+    sue_budunit.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
     sue_budunit.edit_concept_attr(
         clean_way,
         reason_rcontext=days_way,
@@ -161,7 +161,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_week_concept_Scenario0():
     clean_str = "clean"
     clean_way = sue_budunit.make_way(casa_way, clean_str)
     sue_budunit.set_l1_concept(conceptunit_shop(casa_str))
-    sue_budunit.set_concept(conceptunit_shop(clean_str, pledge=True), casa_way)
+    sue_budunit.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
     sue_budunit.edit_concept_attr(
         clean_way,
         reason_rcontext=week_way,
@@ -195,7 +195,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_week_concept_Scenario1():
     clean_str = "clean"
     clean_way = sue_budunit.make_way(casa_way, clean_str)
     sue_budunit.set_l1_concept(conceptunit_shop(casa_str))
-    sue_budunit.set_concept(conceptunit_shop(clean_str, pledge=True), casa_way)
+    sue_budunit.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
     sue_budunit.edit_concept_attr(
         clean_way,
         reason_rcontext=week_way,
@@ -229,7 +229,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_weeks_concept_Scenario0():
     clean_str = "clean"
     clean_way = sue_budunit.make_way(casa_way, clean_str)
     sue_budunit.set_l1_concept(conceptunit_shop(casa_str))
-    sue_budunit.set_concept(conceptunit_shop(clean_str, pledge=True), casa_way)
+    sue_budunit.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
     sue_budunit.edit_concept_attr(
         clean_way,
         reason_rcontext=weeks_way,
@@ -262,7 +262,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_concept_Scenario0():
     clean_str = "clean"
     clean_way = sue_budunit.make_way(casa_way, clean_str)
     sue_budunit.set_l1_concept(conceptunit_shop(casa_str))
-    sue_budunit.set_concept(conceptunit_shop(clean_str, pledge=True), casa_way)
+    sue_budunit.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
     sue_budunit.edit_concept_attr(
         clean_way,
         reason_rcontext=year_way,
@@ -305,7 +305,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_concept_Scenario1():
     clean_str = "clean"
     clean_way = sue_budunit.make_way(casa_way, clean_str)
     sue_budunit.set_l1_concept(conceptunit_shop(casa_str))
-    sue_budunit.set_concept(conceptunit_shop(clean_str, pledge=True), casa_way)
+    sue_budunit.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
     sue_budunit.edit_concept_attr(
         clean_way,
         reason_rcontext=year_way,
@@ -340,7 +340,7 @@ def test_BudUnit_get_agenda_dict_ReturnsDictWith_year_concept_Scenario2():
     clean_str = "clean"
     clean_way = sue_budunit.make_way(casa_way, clean_str)
     sue_budunit.set_l1_concept(conceptunit_shop(casa_str))
-    sue_budunit.set_concept(conceptunit_shop(clean_str, pledge=True), casa_way)
+    sue_budunit.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
     sue_budunit.edit_concept_attr(
         clean_way,
         reason_rcontext=year_way,
@@ -407,7 +407,7 @@ def test_BudUnit_add_time_creg_conceptunit_SyncsWeekDayAndYear_Wednesday_March1_
     clean_str = "clean"
     clean_way = sue_budunit.make_way(casa_way, clean_str)
     sue_budunit.set_l1_concept(conceptunit_shop(casa_str))
-    sue_budunit.set_concept(conceptunit_shop(clean_str, pledge=True), casa_way)
+    sue_budunit.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
     sue_budunit.edit_concept_attr(
         clean_way,
         reason_rcontext=wed_way,
@@ -534,7 +534,7 @@ def test_BudUnit_add_time_creg_conceptunit_SyncsWeekDayAndYear_Thursday_March2_2
     clean_str = "clean"
     clean_way = sue_budunit.make_way(casa_way, clean_str)
     sue_budunit.set_l1_concept(conceptunit_shop(casa_str))
-    sue_budunit.set_concept(conceptunit_shop(clean_str, pledge=True), casa_way)
+    sue_budunit.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
     sue_budunit.edit_concept_attr(
         clean_way,
         reason_rcontext=wed_way,

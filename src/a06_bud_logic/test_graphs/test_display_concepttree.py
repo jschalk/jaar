@@ -102,11 +102,11 @@ def test_BudUnit_fund_flow(graphics_bool):
     sue_bud.add_concept(hun_n_way, mass=30)
     sue_bud.add_concept(hun_y_way, mass=30)
     sue_bud.add_concept(clean_way, mass=30)
-    sue_bud.add_concept(sweep_way, mass=30, pledge=True)
-    sue_bud.add_concept(dish_way, mass=30, pledge=True)
+    sue_bud.add_concept(sweep_way, mass=30, task=True)
+    sue_bud.add_concept(dish_way, mass=30, task=True)
     dinner_str = "cat have dinner"
     dinner_way = sue_bud.make_l1_way(dinner_str)
-    sue_bud.add_concept(dinner_way, mass=30, pledge=True)
+    sue_bud.add_concept(dinner_way, mass=30, task=True)
 
     # WHEN / THEN
     fund_graph0(sue_bud, "Chore", graphics_bool)

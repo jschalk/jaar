@@ -45,7 +45,7 @@ from src.a04_reason_logic._test_util.a04_str import (
 from src.a05_concept_logic._test_util.a05_str import (
     _all_acct_cred_str,
     _all_acct_debt_str,
-    _descendant_pledge_count_str,
+    _descendant_task_count_str,
     _fund_cease_str,
     _fund_onset_str,
     _fund_ratio_str,
@@ -54,8 +54,8 @@ from src.a05_concept_logic._test_util.a05_str import (
     _range_evaluated_str,
     _stop_calc_str,
     mass_str,
-    pledge_str,
     problem_bool_str,
+    task_str,
 )
 from src.a06_bud_logic._test_util.a06_str import (
     LabelTerm_str,
@@ -269,7 +269,7 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
         "_active",
         "_all_acct_cred",
         "_all_acct_debt",
-        "_descendant_pledge_count",
+        "_descendant_task_count",
         "_fund_ratio",
         "fund_iota",
         "_fund_onset",
@@ -446,7 +446,7 @@ def test_get_bud_calc_dimen_args_ReturnsObj():
         owner_name_str(),
         morph_str(),
         denom_str(),
-        "pledge",
+        "task",
         close_str(),
         addin_str(),
         numor_str(),
@@ -457,7 +457,7 @@ def test_get_bud_calc_dimen_args_ReturnsObj():
         "_active",
         "_fund_onset",
         "_fund_cease",
-        "_descendant_pledge_count",
+        "_descendant_task_count",
         "_all_acct_cred",
         "_all_acct_debt",
         "_healerlink_ratio",
@@ -671,8 +671,8 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, budconc, jm, _all_acct_cred_str()) == "INTEGER"
     assert g_class_type(cfig, budconc, jm, _all_acct_debt_str()) == "int"
     assert g_sqlitetype(cfig, budconc, jm, _all_acct_debt_str()) == "INTEGER"
-    assert g_class_type(cfig, budconc, jm, _descendant_pledge_count_str()) == "int"
-    assert g_sqlitetype(cfig, budconc, jm, _descendant_pledge_count_str()) == "INTEGER"
+    assert g_class_type(cfig, budconc, jm, _descendant_task_count_str()) == "int"
+    assert g_sqlitetype(cfig, budconc, jm, _descendant_task_count_str()) == "INTEGER"
     assert g_class_type(cfig, budconc, jm, _fund_cease_str()) == "float"
     assert g_sqlitetype(cfig, budconc, jm, _fund_cease_str()) == "REAL"
     assert g_class_type(cfig, budconc, jm, fund_iota_str()) == "float"
@@ -709,8 +709,8 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, budconc, jv, morph_str()) == "INTEGER"
     assert g_class_type(cfig, budconc, jv, numor_str()) == "int"
     assert g_sqlitetype(cfig, budconc, jv, numor_str()) == "INTEGER"
-    assert g_class_type(cfig, budconc, jv, pledge_str()) == "bool"
-    assert g_sqlitetype(cfig, budconc, jv, pledge_str()) == "INTEGER"
+    assert g_class_type(cfig, budconc, jv, task_str()) == "bool"
+    assert g_sqlitetype(cfig, budconc, jv, task_str()) == "INTEGER"
     assert g_class_type(cfig, budconc, jv, problem_bool_str()) == "bool"
     assert g_sqlitetype(cfig, budconc, jv, problem_bool_str()) == "INTEGER"
     assert g_class_type(cfig, budconc, jv, stop_want_str()) == "float"
@@ -836,7 +836,7 @@ def test_get_bud_calc_args_type_dict_ReturnsObj():
     assert bud_calc_args_type_dict.get(mass_str()) == "int"
     assert bud_calc_args_type_dict.get(morph_str()) == "bool"
     assert bud_calc_args_type_dict.get(numor_str()) == "int"
-    assert bud_calc_args_type_dict.get(pledge_str()) == "bool"
+    assert bud_calc_args_type_dict.get(task_str()) == "bool"
     assert bud_calc_args_type_dict.get(problem_bool_str()) == "bool"
     assert bud_calc_args_type_dict.get(stop_want_str()) == "float"
     assert bud_calc_args_type_dict.get(awardee_title_str()) == TitleTerm_str()
@@ -861,7 +861,7 @@ def test_get_bud_calc_args_type_dict_ReturnsObj():
     assert bud_calc_args_type_dict.get("_active") == "int"
     assert bud_calc_args_type_dict.get(_all_acct_cred_str()) == "int"
     assert bud_calc_args_type_dict.get(_all_acct_debt_str()) == "int"
-    assert bud_calc_args_type_dict.get(_descendant_pledge_count_str()) == "int"
+    assert bud_calc_args_type_dict.get(_descendant_task_count_str()) == "int"
     assert bud_calc_args_type_dict.get(_fund_cease_str()) == "float"
     assert bud_calc_args_type_dict.get(_fund_onset_str()) == "float"
     assert bud_calc_args_type_dict.get(_fund_ratio_str()) == "float"

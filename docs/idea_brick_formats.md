@@ -9,7 +9,7 @@
 - [`br00006`](ideas/br00006.md): event_int, face_name, vow_label, offi_time
 - [`br00011`](ideas/br00011.md): event_int, face_name, vow_label, owner_name, acct_name
 - [`br00012`](ideas/br00012.md): event_int, face_name, vow_label, owner_name, acct_name, group_title
-- [`br00013`](ideas/br00013.md): event_int, face_name, vow_label, owner_name, concept_way, mass, pledge
+- [`br00013`](ideas/br00013.md): event_int, face_name, vow_label, owner_name, concept_way, mass, task
 - [`br00019`](ideas/br00019.md): event_int, face_name, vow_label, owner_name, concept_way, begin, close, addin, numor, denom, morph, gogo_want, stop_want
 - [`br00020`](ideas/br00020.md): event_int, face_name, vow_label, owner_name, acct_name, group_title, credit_vote, debtit_vote
 - [`br00021`](ideas/br00021.md): event_int, face_name, vow_label, owner_name, acct_name, credit_belief, debtit_belief
@@ -19,7 +19,7 @@
 - [`br00025`](ideas/br00025.md): event_int, face_name, vow_label, owner_name, concept_way, healer_name
 - [`br00026`](ideas/br00026.md): event_int, face_name, vow_label, owner_name, concept_way, rcontext, pstate, pnigh, popen, pdivisor
 - [`br00027`](ideas/br00027.md): event_int, face_name, vow_label, owner_name, concept_way, rcontext, rconcept_active_requisite
-- [`br00028`](ideas/br00028.md): event_int, face_name, vow_label, owner_name, concept_way, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool
+- [`br00028`](ideas/br00028.md): event_int, face_name, vow_label, owner_name, concept_way, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool
 - [`br00029`](ideas/br00029.md): event_int, face_name, vow_label, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit
 - [`br00036`](ideas/br00036.md): event_int, face_name, vow_label, owner_name, concept_way, healer_name, problem_bool
 - [`br00042`](ideas/br00042.md): event_int, face_name, otx_title, inx_title, otx_bridge, inx_bridge, unknown_str

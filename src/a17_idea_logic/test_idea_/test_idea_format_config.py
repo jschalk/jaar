@@ -19,8 +19,8 @@ from src.a06_bud_logic._test_util.a06_str import (
     mass_str,
     morph_str,
     numor_str,
-    pledge_str,
     stop_want_str,
+    task_str,
 )
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a15_vow_logic._test_util.a15_str import vowunit_str
@@ -263,7 +263,7 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00013_conceptunit_v0_0_0():
     assert headers_list[3] == owner_name_str()
     assert headers_list[4] == concept_way_str()
     assert headers_list[5] == mass_str()
-    assert headers_list[6] == pledge_str()
+    assert headers_list[6] == task_str()
 
 
 def test_get_idearef_obj_HasCorrectAttrs_idea_format_00019_conceptunit_v0_0_0():

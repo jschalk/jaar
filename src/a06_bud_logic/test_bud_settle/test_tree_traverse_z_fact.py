@@ -7,7 +7,7 @@ from src.a06_bud_logic._test_util.example_buds import (
 from src.a06_bud_logic.bud import budunit_shop
 
 
-def test_BudUnit_settle_bud_ChangesConceptUnit_pledge_chore():
+def test_BudUnit_settle_bud_ChangesConceptUnit_task_chore():
     # ESTABLISH
     yao_bud = get_budunit_1Chore_1CE0MinutesReason_1Fact()
     hr_str = "hr"
@@ -21,7 +21,7 @@ def test_BudUnit_settle_bud_ChangesConceptUnit_pledge_chore():
     concept_dict = yao_bud.get_concept_dict()
     mail_concept = concept_dict.get(mail_way)
     yao_bud.add_fact(fcontext=hr_way, fstate=hr_way, fopen=82, fnigh=95)
-    assert mail_concept.pledge is True
+    assert mail_concept.task is True
     assert mail_concept._chore is False
 
     # WHEN
@@ -29,7 +29,7 @@ def test_BudUnit_settle_bud_ChangesConceptUnit_pledge_chore():
 
     # THEN
     mail_concept = yao_bud.get_concept_obj(mail_way)
-    assert mail_concept.pledge
+    assert mail_concept.task
     assert mail_concept._chore
 
 
@@ -232,12 +232,12 @@ def test_BudUnit_settle_bud_SetsChoreAsComplete():
     hr_str = "hr"
     hr_way = yao_bud.make_l1_way(hr_str)
     yao_bud.add_fact(hr_way, hr_way, fopen=82, fnigh=85)
-    assert mail_concept.pledge
+    assert mail_concept.task
     assert mail_concept._chore
 
     # WHEN
     yao_bud.settle_bud()
 
     # THEN
-    assert mail_concept.pledge
+    assert mail_concept.task
     assert not mail_concept._chore

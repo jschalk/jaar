@@ -12,7 +12,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     debtit_vote_str,
     group_title_str,
     mass_str,
-    pledge_str,
+    task_str,
 )
 from src.a06_bud_logic._test_util.example_buds import budunit_v001
 from src.a06_bud_logic.bud import budunit_shop
@@ -155,7 +155,7 @@ def test_make_buddelta_Arg_idea_format_00013_conceptunit_v0_0_0():
     sue_budunit.set_l1_concept(conceptunit_shop(casa_str, mass=casa_mass))
     clean_str = "clean"
     clean_way = sue_budunit.make_way(casa_way, clean_str)
-    sue_budunit.set_concept(conceptunit_shop(clean_str, pledge=True), casa_way)
+    sue_budunit.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
     x_idea_name = idea_format_00013_conceptunit_v0_0_0()
     conceptunit_dataframe = create_idea_df(sue_budunit, x_idea_name)
     conceptunit_csv = conceptunit_dataframe.to_csv(index=False)
@@ -166,13 +166,13 @@ def test_make_buddelta_Arg_idea_format_00013_conceptunit_v0_0_0():
     # THEN
     casa_budatom = budatom_shop(bud_conceptunit_str(), INSERT_str())
     casa_budatom.set_arg(concept_way_str(), casa_way)
-    casa_budatom.set_arg(pledge_str(), False)
+    casa_budatom.set_arg(task_str(), False)
     casa_budatom.set_arg(mass_str(), casa_mass)
     print(f"{casa_budatom=}")
     assert casa_budatom.get_value(mass_str()) == casa_mass
     clean_budatom = budatom_shop(bud_conceptunit_str(), INSERT_str())
     clean_budatom.set_arg(concept_way_str(), clean_way)
-    clean_budatom.set_arg(pledge_str(), True)
+    clean_budatom.set_arg(task_str(), True)
     clean_budatom.set_arg(mass_str(), 1)
     assert conceptunit_changunit.budatom_exists(casa_budatom)
     assert conceptunit_changunit.budatom_exists(clean_budatom)
@@ -208,7 +208,7 @@ def test_make_buddelta_Arg_idea_format_00013_conceptunit_v0_0_0():
     sue_budunit.set_l1_concept(conceptunit_shop(casa_str, mass=casa_mass))
     clean_str = "clean"
     clean_way = sue_budunit.make_way(casa_way, clean_str)
-    sue_budunit.set_concept(conceptunit_shop(clean_str, pledge=True), casa_way)
+    sue_budunit.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
     x_idea_name = idea_format_00013_conceptunit_v0_0_0()
     conceptunit_dataframe = create_idea_df(sue_budunit, x_idea_name)
     conceptunit_csv = conceptunit_dataframe.to_csv(index=False)
@@ -219,13 +219,13 @@ def test_make_buddelta_Arg_idea_format_00013_conceptunit_v0_0_0():
     # THEN
     casa_budatom = budatom_shop(bud_conceptunit_str(), INSERT_str())
     casa_budatom.set_arg(concept_way_str(), casa_way)
-    casa_budatom.set_arg(pledge_str(), False)
+    casa_budatom.set_arg(task_str(), False)
     casa_budatom.set_arg(mass_str(), casa_mass)
     print(f"{casa_budatom=}")
     assert casa_budatom.get_value(mass_str()) == casa_mass
     clean_budatom = budatom_shop(bud_conceptunit_str(), INSERT_str())
     clean_budatom.set_arg(concept_way_str(), clean_way)
-    clean_budatom.set_arg(pledge_str(), True)
+    clean_budatom.set_arg(task_str(), True)
     clean_budatom.set_arg(mass_str(), 1)
     assert conceptunit_changunit.budatom_exists(casa_budatom)
     assert conceptunit_changunit.budatom_exists(clean_budatom)

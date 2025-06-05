@@ -52,9 +52,9 @@ def get_budunit_with_4_levels() -> BudUnit:
     a23_str = "accord23"
     sue_bud = budunit_shop("Sue", a23_str)
     casa_str = "casa"
-    sue_bud.set_l1_concept(conceptunit_shop(casa_str, mass=30, pledge=True))
+    sue_bud.set_l1_concept(conceptunit_shop(casa_str, mass=30, task=True))
     cat_str = "cat have dinner"
-    sue_bud.set_l1_concept(conceptunit_shop(cat_str, mass=30, pledge=True))
+    sue_bud.set_l1_concept(conceptunit_shop(cat_str, mass=30, task=True))
 
     wk_str = "wkdays"
     wk_way = sue_bud.make_l1_way(wk_str)
@@ -177,10 +177,10 @@ def get_budunit_with7amCleanTableReason() -> BudUnit:
     grab_str = "grab soap"
     grab_way = sue_bud.make_way(soap_way, grab_str)
     house_concept = conceptunit_shop(house_str)
-    clean_concept = conceptunit_shop(clean_str, pledge=True)
-    dish_concept = conceptunit_shop(dish_str, pledge=True)
-    soap_concept = conceptunit_shop(soap_str, pledge=True)
-    grab_concept = conceptunit_shop(grab_str, pledge=True)
+    clean_concept = conceptunit_shop(clean_str, task=True)
+    dish_concept = conceptunit_shop(dish_str, task=True)
+    soap_concept = conceptunit_shop(soap_str, task=True)
+    grab_concept = conceptunit_shop(grab_str, task=True)
 
     sue_bud.set_l1_concept(house_concept)
     sue_bud.set_concept(clean_concept, house_way)
@@ -216,7 +216,7 @@ def get_budunit_1Chore_1CE0MinutesReason_1Fact() -> BudUnit:
     yao_bud.add_fact(hr_way, hr_way, 85, 95)
     mail_str = "obtain mail"
     mail_way = yao_bud.make_l1_way(mail_str)
-    mail_concept = conceptunit_shop(mail_str, pledge=True)
+    mail_concept = conceptunit_shop(mail_str, task=True)
     yao_bud.set_l1_concept(mail_concept)
     yao_bud.edit_concept_attr(mail_way, reason=hr_reasonunit)
     return yao_bud
@@ -227,7 +227,7 @@ def get_budunit_x1_3levels_1reason_1facts() -> BudUnit:
     zia_bud = budunit_shop("Zia", vow_label=tiger_str)
     shave_str = "shave"
     shave_way = zia_bud.make_l1_way(shave_str)
-    concept_kid_shave = conceptunit_shop(shave_str, mass=30, pledge=True)
+    concept_kid_shave = conceptunit_shop(shave_str, mass=30, task=True)
     zia_bud.set_l1_concept(concept_kid_shave)
     wk_str = "wkdays"
     wk_way = zia_bud.make_l1_way(wk_str)
@@ -262,7 +262,7 @@ def get_budunit_rcontext_time_example() -> BudUnit:
 
 
 def get_budunit_irrational_example() -> BudUnit:
-    # this bud has no definitive agenda because 2 pledge concepts are in contradiction
+    # this bud has no definitive agenda because 2 task concepts are in contradiction
     # "egg first" is true when "chicken first" is false
     # "chicken first" is true when "egg first" is true
     # Step 0: if chicken._active is True, egg._active is set to False
@@ -285,18 +285,18 @@ def get_budunit_irrational_example() -> BudUnit:
     chicken_way = hatter_bud.make_l1_way(chicken_str)
     hatter_bud.set_l1_concept(conceptunit_shop(chicken_str))
 
-    # set egg pledge is True when chicken first is False
+    # set egg task is True when chicken first is False
     hatter_bud.edit_concept_attr(
         egg_way,
-        pledge=True,
+        task=True,
         reason_rcontext=chicken_way,
         reason_rconcept_active_requisite=True,
     )
 
-    # set chick pledge is True when egg first is False
+    # set chick task is True when egg first is False
     hatter_bud.edit_concept_attr(
         chicken_way,
-        pledge=True,
+        task=True,
         reason_rcontext=egg_way,
         reason_rconcept_active_requisite=False,
     )
@@ -310,7 +310,7 @@ def get_mop_with_reason_budunit_example1():
     casa_way = sue_bud.make_l1_way(casa_str)
     floor_str = "mop floor"
     floor_way = sue_bud.make_way(casa_way, floor_str)
-    floor_concept = conceptunit_shop(floor_str, pledge=True)
+    floor_concept = conceptunit_shop(floor_str, task=True)
     sue_bud.set_concept(floor_concept, casa_way)
     sue_bud.set_l1_concept(conceptunit_shop("unimportant"))
 
@@ -358,7 +358,7 @@ def get_budunit_laundry_example1() -> BudUnit:
     amos_bud.set_concept(conceptunit_shop(b_bare_str), basket_way)
     amos_bud.set_concept(conceptunit_shop(b_fine_str), basket_way)
     amos_bud.set_concept(conceptunit_shop(b_half_str), basket_way)
-    amos_bud.set_concept(conceptunit_shop(do_laundry_str, pledge=True), casa_way)
+    amos_bud.set_concept(conceptunit_shop(do_laundry_str, task=True), casa_way)
 
     # laundry requirement
     amos_bud.edit_concept_attr(

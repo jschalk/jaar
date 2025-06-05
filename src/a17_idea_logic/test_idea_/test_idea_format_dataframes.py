@@ -12,7 +12,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     debtit_vote_str,
     group_title_str,
     mass_str,
-    pledge_str,
+    task_str,
 )
 from src.a06_bud_logic.bud import budunit_shop
 from src.a07_calendar_logic._test_util.calendar_examples import (
@@ -154,7 +154,7 @@ def test_create_idea_df_Arg_idea_format_00013_conceptunit_v0_0_0():
     sue_budunit.set_l1_concept(conceptunit_shop(casa_str, mass=casa_mass))
     clean_str = "clean"
     clean_way = sue_budunit.make_way(casa_way, clean_str)
-    sue_budunit.set_concept(conceptunit_shop(clean_str, pledge=True), casa_way)
+    sue_budunit.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
 
     # WHEN
     x_idea_name = idea_format_00013_conceptunit_v0_0_0()
@@ -165,13 +165,13 @@ def test_create_idea_df_Arg_idea_format_00013_conceptunit_v0_0_0():
     assert array_headers == get_idearef_obj(x_idea_name).get_headers_list()
 
     assert conceptunit_format.loc[0, owner_name_str()] == sue_budunit.owner_name
-    assert conceptunit_format.loc[0, pledge_str()] == ""
+    assert conceptunit_format.loc[0, task_str()] == ""
     assert conceptunit_format.loc[0, vow_label_str()] == accord_vow_label
     assert conceptunit_format.loc[0, concept_way_str()] == casa_way
     assert conceptunit_format.loc[0, mass_str()] == casa_mass
 
     assert conceptunit_format.loc[1, owner_name_str()] == sue_budunit.owner_name
-    assert conceptunit_format.loc[1, pledge_str()] == "Yes"
+    assert conceptunit_format.loc[1, task_str()] == "Yes"
     assert conceptunit_format.loc[1, vow_label_str()] == accord_vow_label
     assert conceptunit_format.loc[1, concept_way_str()] == clean_way
     assert conceptunit_format.loc[1, mass_str()] == 1
@@ -267,7 +267,7 @@ def test_save_idea_csv_Arg_idea_format_00013_conceptunit_v0_0_0(
     sue_budunit.set_l1_concept(conceptunit_shop(casa_str, mass=casa_mass))
     clean_str = "clean"
     clean_way = sue_budunit.make_way(casa_way, clean_str)
-    sue_budunit.set_concept(conceptunit_shop(clean_str, pledge=True), casa_way)
+    sue_budunit.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
     x_idea_name = idea_format_00013_conceptunit_v0_0_0()
     conceptunit_format = create_idea_df(sue_budunit, x_idea_name)
     name_filename = f"{sue_str}_conceptunit_example_000.csv"

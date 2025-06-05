@@ -7,10 +7,10 @@ def get_budunit_with_4_levels() -> BudUnit:
     sue_bud = budunit_shop(owner_name="Sue", vow_label=a23_str, tally=10)
 
     casa = "casa"
-    sue_bud.set_l1_concept(conceptunit_shop(casa, mass=30, pledge=True))
+    sue_bud.set_l1_concept(conceptunit_shop(casa, mass=30, task=True))
 
     cat = "cat have dinner"
-    sue_bud.set_l1_concept(conceptunit_shop(cat, mass=30, pledge=True))
+    sue_bud.set_l1_concept(conceptunit_shop(cat, mass=30, task=True))
 
     week_str = "weekdays"
     week_way = sue_bud.make_l1_way(week_str)
@@ -84,11 +84,11 @@ def get_fund_breakdown_bud() -> BudUnit:
     sue_bud.set_concept(conceptunit_shop(hun_n_str, mass=30), cat_way)
     sue_bud.set_concept(conceptunit_shop(hun_y_str, mass=30), cat_way)
     sue_bud.set_concept(conceptunit_shop(clean_str, mass=30), casa_way)
-    sue_bud.set_concept(conceptunit_shop(sweep_str, mass=30, pledge=True), clean_way)
-    sue_bud.set_concept(conceptunit_shop(dish_str, mass=30, pledge=True), clean_way)
+    sue_bud.set_concept(conceptunit_shop(sweep_str, mass=30, task=True), clean_way)
+    sue_bud.set_concept(conceptunit_shop(dish_str, mass=30, task=True), clean_way)
 
     cat_str = "cat have dinner"
-    sue_bud.set_l1_concept(conceptunit_shop(cat_str, mass=30, pledge=True))
+    sue_bud.set_l1_concept(conceptunit_shop(cat_str, mass=30, task=True))
 
     # week_str = "weekdays"
     # week_way = sue_bud.make_l1_way(week_str)
@@ -143,7 +143,7 @@ def get_fund_breakdown_bud() -> BudUnit:
 
 
 def get_budunit_irrational_example() -> BudUnit:
-    # this bud has no definitive agenda because 2 pledge concepts are in contradiction
+    # this bud has no definitive agenda because 2 task concepts are in contradiction
     # "egg first" is true when "chicken first" is false
     # "chicken first" is true when "egg first" is true
     # Step 0: if chicken._active is True, egg._active is set to False
@@ -166,18 +166,18 @@ def get_budunit_irrational_example() -> BudUnit:
     chicken_way = hatter_bud.make_l1_way(chicken_str)
     hatter_bud.add_concept(chicken_way)
 
-    # set egg pledge is True when chicken first is False
+    # set egg task is True when chicken first is False
     hatter_bud.edit_concept_attr(
         egg_way,
-        pledge=True,
+        task=True,
         reason_rcontext=chicken_way,
         reason_rconcept_active_requisite=True,
     )
 
-    # set chick pledge is True when egg first is False
+    # set chick task is True when egg first is False
     hatter_bud.edit_concept_attr(
         chicken_way,
-        pledge=True,
+        task=True,
         reason_rcontext=egg_way,
         reason_rconcept_active_requisite=False,
     )

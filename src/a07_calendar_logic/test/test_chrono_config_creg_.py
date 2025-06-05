@@ -563,13 +563,13 @@ def test_add_time_creg_conceptunit_ReturnsObjWith_offset_ConceptUnits():
 #     assert len(sue_budunit.get_concept_ranged_kids(concept_way=week_way, begin=1440)) == 1
 
 
-def test_BudUnit_get_agenda_dict_DoesNotReturnPledgeConceptsOutsideRange():
+def test_BudUnit_get_agenda_dict_DoesNotReturnTaskConceptsOutsideRange():
     # ESTABLISH
     sue_str = "Sue"
     sue_bud = add_time_creg_conceptunit(budunit_shop(sue_str))
     clean_str = "clean"
     clean_way = sue_bud.make_l1_way(clean_str)
-    sue_bud.set_l1_concept(conceptunit_shop(clean_str, pledge=True))
+    sue_bud.set_l1_concept(conceptunit_shop(clean_str, task=True))
     time_way = sue_bud.make_l1_way("time")
     cregtime_way = sue_bud.make_way(time_way, creg_str())
     day_way = sue_bud.make_way(cregtime_way, "day")
@@ -656,7 +656,7 @@ def test_BudUnit_create_agenda_concept_CorrectlyCreatesAllBudAttributes():
     print(f"{sweep_concept.get_concept_way()=}")
 
     # ESTABLISH
-    sue_bud.set_dominate_pledge_concept(concept_kid=sweep_concept)
+    sue_bud.set_dominate_task_concept(concept_kid=sweep_concept)
 
     # THEN
     # for concept_kid in sue_bud.conceptroot._kids.keys():
@@ -665,7 +665,7 @@ def test_BudUnit_create_agenda_concept_CorrectlyCreatesAllBudAttributes():
     print(f"{sweep_concept.get_concept_way()=}")
     assert sue_bud.get_concept_obj(sweep_way) is not None
     assert sue_bud.get_concept_obj(sweep_way).concept_label == sweep_str
-    assert sue_bud.get_concept_obj(sweep_way).pledge
+    assert sue_bud.get_concept_obj(sweep_way).task
     assert len(sue_bud.get_concept_obj(sweep_way).reasonunits) == 2
     assert sue_bud.get_concept_obj(clean_way) is not None
     assert sue_bud.get_concept_obj(cookery_room_way) is not None
@@ -686,7 +686,7 @@ def test_ConceptCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingErro
     laundry_str = "do_laundry"
     laundry_way = sue_bud.make_way(casa_way, laundry_str)
     sue_bud.set_l1_concept(conceptunit_shop(casa_str))
-    sue_bud.set_concept(conceptunit_shop(laundry_str, pledge=True), casa_way)
+    sue_bud.set_concept(conceptunit_shop(laundry_str, task=True), casa_way)
     time_way = sue_bud.make_l1_way("time")
     cregtime_way = sue_bud.make_way(time_way, creg_str())
     sue_bud.edit_concept_attr(

@@ -154,7 +154,7 @@ def test_BudUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     sue_bud.set_l1_concept(time_concept)
 
     clean_str = "clean"
-    clean_concept = conceptunit_shop(clean_str, pledge=True)
+    clean_concept = conceptunit_shop(clean_str, task=True)
     sue_bud.set_l1_concept(clean_concept)
     c_way = sue_bud.make_l1_way(clean_str)
     time_way = sue_bud.make_l1_way(time_str)

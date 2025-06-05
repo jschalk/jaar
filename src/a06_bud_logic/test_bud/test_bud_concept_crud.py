@@ -118,7 +118,7 @@ def test_BudUnit_add_concept_SetsAttr_Scenario0():
     assert bob_budunit.concept_exists(casa_way)
     casa_conceptunit = bob_budunit.get_concept_obj(casa_way)
     assert casa_conceptunit.bridge == bob_budunit.bridge
-    assert not casa_conceptunit.pledge
+    assert not casa_conceptunit.task
 
 
 def test_BudUnit_add_concept_SetsAttr_Scenario1():
@@ -127,15 +127,15 @@ def test_BudUnit_add_concept_SetsAttr_Scenario1():
     bob_budunit = budunit_shop(bob_str)
     casa_way = bob_budunit.make_l1_way("casa")
     casa_mass = 13
-    casa_pledge = True
+    casa_task = True
 
     # WHEN
-    bob_budunit.add_concept(casa_way, mass=casa_mass, pledge=casa_pledge)
+    bob_budunit.add_concept(casa_way, mass=casa_mass, task=casa_task)
 
     # THEN
     casa_conceptunit = bob_budunit.get_concept_obj(casa_way)
     assert casa_conceptunit.mass == casa_mass
-    assert casa_conceptunit.pledge
+    assert casa_conceptunit.task
 
 
 def test_BudUnit_add_concept_ReturnsObj():
@@ -388,17 +388,15 @@ def test_BudUnit_edit_concept_attr_IsAbleToEditAnyAncestor_Concept():
         x_factunit.fcontext: x_factunit
     }
 
-    # _descendant_pledge_count: int = None,
-    sue_bud.conceptroot._kids[casa_str]._descendant_pledge_count = 81
-    x_descendant_pledge_count = sue_bud.conceptroot._kids[
+    # _descendant_task_count: int = None,
+    sue_bud.conceptroot._kids[casa_str]._descendant_task_count = 81
+    x_descendant_task_count = sue_bud.conceptroot._kids[casa_str]._descendant_task_count
+    assert x_descendant_task_count == 81
+    sue_bud.edit_concept_attr(casa_way, descendant_task_count=67)
+    _descendant_task_count_new = sue_bud.conceptroot._kids[
         casa_str
-    ]._descendant_pledge_count
-    assert x_descendant_pledge_count == 81
-    sue_bud.edit_concept_attr(casa_way, descendant_pledge_count=67)
-    _descendant_pledge_count_new = sue_bud.conceptroot._kids[
-        casa_str
-    ]._descendant_pledge_count
-    assert _descendant_pledge_count_new == 67
+    ]._descendant_task_count
+    assert _descendant_task_count_new == 67
 
     # _all_acct_cred: bool = None,
     sue_bud.conceptroot._kids[casa_str]._all_acct_cred = 74
@@ -435,12 +433,12 @@ def test_BudUnit_edit_concept_attr_IsAbleToEditAnyAncestor_Concept():
     sue_bud.edit_concept_attr(casa_way, is_expanded=True)
     assert sue_bud.conceptroot._kids[casa_str]._is_expanded is True
 
-    # pledge: dict = None,
-    sue_bud.conceptroot._kids[casa_str].pledge = "funfun3"
-    pledge = sue_bud.conceptroot._kids[casa_str].pledge
-    assert pledge == "funfun3"
-    sue_bud.edit_concept_attr(casa_way, pledge=True)
-    assert sue_bud.conceptroot._kids[casa_str].pledge is True
+    # task: dict = None,
+    sue_bud.conceptroot._kids[casa_str].task = "funfun3"
+    task = sue_bud.conceptroot._kids[casa_str].task
+    assert task == "funfun3"
+    sue_bud.edit_concept_attr(casa_way, task=True)
+    assert sue_bud.conceptroot._kids[casa_str].task is True
 
     # _healerlink:
     sue_bud.conceptroot._kids[casa_str].healerlink = "fun3rol"

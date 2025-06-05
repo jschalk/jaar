@@ -281,7 +281,7 @@ def test_get_acct_mandate_ledger_ReturnsObj_Scenario5_Zero_fund_agenda_give():
     sue_bud.add_concept(floor_way)
     sue_bud.add_concept(clean_way)
     sue_bud.add_concept(dirty_way)
-    sue_bud.add_concept(mop_way, pledge=True)
+    sue_bud.add_concept(mop_way, task=True)
     sue_bud.edit_concept_attr(
         mop_way, reason_rcontext=floor_way, reason_premise=clean_way
     )

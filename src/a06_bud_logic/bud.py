@@ -282,12 +282,10 @@ class BudUnit:
                         way_type="reasonunit_descendant",
                     )
 
-    def all_concepts_relevant_to_pledge_concept(self, way: WayTerm) -> bool:
-        pledge_concept_assoc_set = set(self._get_relevant_ways({way}))
+    def all_concepts_relevant_to_task_concept(self, way: WayTerm) -> bool:
+        task_concept_assoc_set = set(self._get_relevant_ways({way}))
         all_concepts_set = set(self.get_concept_tree_ordered_way_list())
-        return all_concepts_set == all_concepts_set.intersection(
-            pledge_concept_assoc_set
-        )
+        return all_concepts_set == all_concepts_set.intersection(task_concept_assoc_set)
 
     def get_awardlinks_metrics(self) -> dict[GroupTitle, AwardLink]:
         tree_metrics = self.get_tree_metrics()
@@ -513,7 +511,7 @@ class BudUnit:
             reasons=self.conceptroot.reasonunits,
             awardlinks=self.conceptroot.awardlinks,
             uid=self.conceptroot._uid,
-            pledge=self.conceptroot.pledge,
+            task=self.conceptroot.task,
             concept_way=self.conceptroot.get_concept_way(),
         )
 
@@ -535,7 +533,7 @@ class BudUnit:
             reasons=concept_kid.reasonunits,
             awardlinks=concept_kid.awardlinks,
             uid=concept_kid._uid,
-            pledge=concept_kid.pledge,
+            task=concept_kid.task,
             concept_way=concept_kid.get_concept_way(),
         )
         x_concept_list.append(concept_kid)
@@ -581,13 +579,13 @@ class BudUnit:
         return missing_rcontexts
 
     def add_concept(
-        self, concept_way: WayTerm, mass: float = None, pledge: bool = None
+        self, concept_way: WayTerm, mass: float = None, task: bool = None
     ) -> ConceptUnit:
         x_concept_label = get_tail_label(concept_way, self.bridge)
         x_parent_way = get_parent_way(concept_way, self.bridge)
         x_conceptunit = conceptunit_shop(x_concept_label, mass=mass)
-        if pledge:
-            x_conceptunit.pledge = True
+        if task:
+            x_conceptunit.task = True
         self.set_concept(x_conceptunit, x_parent_way)
         return x_conceptunit
 
@@ -823,9 +821,9 @@ class BudUnit:
         numor: float = None,
         denom: float = None,
         morph: bool = None,
-        pledge: bool = None,
+        task: bool = None,
         factunit: FactUnit = None,
-        descendant_pledge_count: int = None,
+        descendant_task_count: int = None,
         all_acct_cred: bool = None,
         all_acct_debt: bool = None,
         awardlink: AwardLink = None,
@@ -861,13 +859,13 @@ class BudUnit:
             numor=numor,
             denom=denom,
             morph=morph,
-            descendant_pledge_count=descendant_pledge_count,
+            descendant_task_count=descendant_task_count,
             all_acct_cred=all_acct_cred,
             all_acct_debt=all_acct_debt,
             awardlink=awardlink,
             awardlink_del=awardlink_del,
             is_expanded=is_expanded,
-            pledge=pledge,
+            task=task,
             factunit=factunit,
             problem_bool=problem_bool,
         )
@@ -886,18 +884,18 @@ class BudUnit:
             if x_concept.is_agenda_concept(necessary_rcontext)
         }
 
-    def get_all_pledges(self) -> dict[WayTerm, ConceptUnit]:
+    def get_all_tasks(self) -> dict[WayTerm, ConceptUnit]:
         self.settle_bud()
         all_concepts = self._concept_dict.values()
         return {
             x_concept.get_concept_way(): x_concept
             for x_concept in all_concepts
-            if x_concept.pledge
+            if x_concept.task
         }
 
     def set_agenda_chore_complete(self, chore_way: WayTerm, rcontext: WayTerm):
-        pledge_concept = self.get_concept_obj(chore_way)
-        pledge_concept.set_factunit_to_complete(self.conceptroot.factunits[rcontext])
+        task_concept = self.get_concept_obj(chore_way)
+        task_concept.set_factunit_to_complete(self.conceptroot.factunits[rcontext])
 
     def get_credit_ledger_debtit_ledger(
         self,
@@ -1117,15 +1115,15 @@ class BudUnit:
         for x_concept in self._concept_dict.values():
             x_concept.set_awardheirs_fund_give_fund_take()
             if x_concept.is_kidless():
-                self._set_ancestors_pledge_fund_keep_attrs(
+                self._set_ancestors_task_fund_keep_attrs(
                     x_concept.get_concept_way(), keep_exceptions
                 )
                 self._allot_fund_share(x_concept)
 
-    def _set_ancestors_pledge_fund_keep_attrs(
+    def _set_ancestors_task_fund_keep_attrs(
         self, way: WayTerm, keep_exceptions: bool = False
     ):
-        x_descendant_pledge_count = 0
+        x_descendant_task_count = 0
         child_awardlines = None
         group_everyone = None
         ancestor_ways = get_ancestor_ways(way, self.bridge)
@@ -1135,7 +1133,7 @@ class BudUnit:
         while ancestor_ways != []:
             youngest_way = ancestor_ways.pop(0)
             x_concept_obj = self.get_concept_obj(youngest_way)
-            x_concept_obj.add_to_descendant_pledge_count(x_descendant_pledge_count)
+            x_concept_obj.add_to_descendant_task_count(x_descendant_task_count)
             if x_concept_obj.is_kidless():
                 x_concept_obj.set_kidless_awardlines()
                 child_awardlines = x_concept_obj._awardlines
@@ -1143,7 +1141,7 @@ class BudUnit:
                 x_concept_obj.set_awardlines(child_awardlines)
 
             if x_concept_obj._chore:
-                x_descendant_pledge_count += 1
+                x_descendant_task_count += 1
 
             if (
                 group_everyone != False
@@ -1177,7 +1175,7 @@ class BudUnit:
     def _clear_concepttree_fund_and_active_status_attrs(self):
         for x_concept in self._concept_dict.values():
             x_concept.clear_awardlines()
-            x_concept.clear_descendant_pledge_count()
+            x_concept.clear_descendant_task_count()
             x_concept.clear_all_acct_cred_debt()
 
     def _set_kids_active_status_attrs(
@@ -1433,8 +1431,8 @@ class BudUnit:
     def get_json(self) -> str:
         return get_json_from_dict(self.get_dict())
 
-    def set_dominate_pledge_concept(self, concept_kid: ConceptUnit):
-        concept_kid.pledge = True
+    def set_dominate_task_concept(self, concept_kid: ConceptUnit):
+        concept_kid.task = True
         self.set_concept(
             concept_kid=concept_kid,
             parent_way=self.make_way(concept_kid.parent_way),
@@ -1587,7 +1585,7 @@ def create_conceptroot_kids_from_dict(x_bud: BudUnit, conceptroot_dict: dict):
             morph=get_obj_from_concept_dict(concept_dict, "morph"),
             gogo_want=get_obj_from_concept_dict(concept_dict, "gogo_want"),
             stop_want=get_obj_from_concept_dict(concept_dict, "stop_want"),
-            pledge=get_obj_from_concept_dict(concept_dict, "pledge"),
+            task=get_obj_from_concept_dict(concept_dict, "task"),
             problem_bool=get_obj_from_concept_dict(concept_dict, "problem_bool"),
             reasonunits=get_obj_from_concept_dict(concept_dict, "reasonunits"),
             laborunit=get_obj_from_concept_dict(concept_dict, "laborunit"),

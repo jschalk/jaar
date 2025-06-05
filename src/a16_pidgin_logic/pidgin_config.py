@@ -110,7 +110,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "owner_name": "NameTerm",
         "penny": "float",
         "job_listen_rotations": "int",
-        "pledge": "bool",
+        "task": "bool",
         "problem_bool": "bool",
         "quota": "int",
         "pstate": "WayTerm",

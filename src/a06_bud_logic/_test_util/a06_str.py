@@ -49,8 +49,8 @@ from src.a05_concept_logic._test_util.a05_str import (
     mass_str,
     morph_str,
     numor_str,
-    pledge_str,
     stop_want_str,
+    task_str,
 )
 
 

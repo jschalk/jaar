@@ -8,7 +8,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     mass_str,
     morph_str,
     numor_str,
-    pledge_str,
+    task_str,
 )
 from src.a06_bud_logic.bud import budunit_shop
 from src.a08_bud_atom_logic._test_util.a08_str import DELETE_str, INSERT_str, UPDATE_str
@@ -33,7 +33,7 @@ def test_create_legible_list_ReturnsObj_conceptunit_INSERT():
     problem_bool_value = False
     morph_value = 37
     mass_value = 43
-    pledge_value = False
+    task_value = False
     clean_budatom = budatom_shop(dimen, INSERT_str())
     clean_budatom.set_arg(concept_way_str(), clean_way)
     clean_budatom.set_arg(addin_str(), addin_value)
@@ -44,7 +44,7 @@ def test_create_legible_list_ReturnsObj_conceptunit_INSERT():
     clean_budatom.set_arg(_problem_bool_str, problem_bool_value)
     clean_budatom.set_arg(morph_str(), morph_value)
     clean_budatom.set_arg(mass_str(), mass_value)
-    clean_budatom.set_arg(pledge_str(), pledge_value)
+    clean_budatom.set_arg(task_str(), task_value)
 
     x_buddelta = buddelta_shop()
     x_buddelta.set_budatom(clean_budatom)
@@ -53,7 +53,7 @@ def test_create_legible_list_ReturnsObj_conceptunit_INSERT():
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"Created Concept '{clean_way}'. addin={addin_value}.begin={begin_value}.close={close_value}.denom={denom_value}.numor={numor_value}.problem_bool={problem_bool_value}.morph={morph_value}.mass={mass_value}.pledge={pledge_value}."
+    x_str = f"Created Concept '{clean_way}'. addin={addin_value}.begin={begin_value}.close={close_value}.denom={denom_value}.numor={numor_value}.problem_bool={problem_bool_value}.morph={morph_value}.mass={mass_value}.task={task_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -74,7 +74,7 @@ def test_create_legible_list_ReturnsObj_conceptunit_UPDATE():
     problem_bool_value = False
     morph_value = 37
     mass_value = 43
-    pledge_value = False
+    task_value = False
     clean_budatom = budatom_shop(dimen, UPDATE_str())
     clean_budatom.set_arg(concept_way_str(), clean_way)
     clean_budatom.set_arg(addin_str(), addin_value)
@@ -85,7 +85,7 @@ def test_create_legible_list_ReturnsObj_conceptunit_UPDATE():
     clean_budatom.set_arg(_problem_bool_str, problem_bool_value)
     clean_budatom.set_arg(morph_str(), morph_value)
     clean_budatom.set_arg(mass_str(), mass_value)
-    clean_budatom.set_arg(pledge_str(), pledge_value)
+    clean_budatom.set_arg(task_str(), task_value)
 
     x_buddelta = buddelta_shop()
     x_buddelta.set_budatom(clean_budatom)
@@ -94,7 +94,7 @@ def test_create_legible_list_ReturnsObj_conceptunit_UPDATE():
     legible_list = create_legible_list(x_buddelta, sue_bud)
 
     # THEN
-    x_str = f"Concept '{clean_way}' set these attributes: addin={addin_value}.begin={begin_value}.close={close_value}.denom={denom_value}.numor={numor_value}.problem_bool={problem_bool_value}.morph={morph_value}.mass={mass_value}.pledge={pledge_value}."
+    x_str = f"Concept '{clean_way}' set these attributes: addin={addin_value}.begin={begin_value}.close={close_value}.denom={denom_value}.numor={numor_value}.problem_bool={problem_bool_value}.morph={morph_value}.mass={mass_value}.task={task_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 

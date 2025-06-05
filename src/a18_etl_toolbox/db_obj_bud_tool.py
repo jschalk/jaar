@@ -264,7 +264,7 @@ def create_budconc_metrics_insert_sqlstr(values_dict: dict[str,]):
     gogo_want = values_dict.get("gogo_want")
     stop_want = values_dict.get("stop_want")
     mass = values_dict.get("mass")
-    pledge = values_dict.get("pledge")
+    task = values_dict.get("task")
     problem_bool = values_dict.get("problem_bool")
     _active = values_dict.get("_active")
     _chore = values_dict.get("_chore")
@@ -276,14 +276,14 @@ def create_budconc_metrics_insert_sqlstr(values_dict: dict[str,]):
     _stop_calc = values_dict.get("_stop_calc")
     _level = values_dict.get("_level")
     _range_evaluated = values_dict.get("_range_evaluated")
-    _descendant_pledge_count = values_dict.get("_descendant_pledge_count")
+    _descendant_task_count = values_dict.get("_descendant_task_count")
     _healerlink_ratio = values_dict.get("_healerlink_ratio")
     _all_acct_cred = values_dict.get("_all_acct_cred")
     _all_acct_debt = values_dict.get("_all_acct_debt")
     integer_str = "INTEGER"
     real_str = "REAL"
 
-    return f"""INSERT INTO bud_conceptunit_job (vow_label, owner_name, concept_way, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool, fund_iota, _active, _chore, _fund_onset, _fund_cease, _fund_ratio, _gogo_calc, _stop_calc, _level, _range_evaluated, _descendant_pledge_count, _healerlink_ratio, _all_acct_cred, _all_acct_debt)
+    return f"""INSERT INTO bud_conceptunit_job (vow_label, owner_name, concept_way, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool, fund_iota, _active, _chore, _fund_onset, _fund_cease, _fund_ratio, _gogo_calc, _stop_calc, _level, _range_evaluated, _descendant_task_count, _healerlink_ratio, _all_acct_cred, _all_acct_debt)
 VALUES (
   {sqlite_obj_str(vow_label, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
@@ -297,7 +297,7 @@ VALUES (
 , {sqlite_obj_str(gogo_want, real_str)}
 , {sqlite_obj_str(stop_want, real_str)}
 , {sqlite_obj_str(mass, real_str)}
-, {sqlite_obj_str(pledge, real_str)}
+, {sqlite_obj_str(task, real_str)}
 , {sqlite_obj_str(problem_bool, "INTEGER")}
 , {sqlite_obj_str(fund_iota, real_str)}
 , {sqlite_obj_str(_active, "INTEGER")}
@@ -309,7 +309,7 @@ VALUES (
 , {sqlite_obj_str(_stop_calc, real_str)}
 , {sqlite_obj_str(_level, "INTEGER")}
 , {sqlite_obj_str(_range_evaluated, "INTEGER")}
-, {sqlite_obj_str(_descendant_pledge_count, "INTEGER")}
+, {sqlite_obj_str(_descendant_task_count, "INTEGER")}
 , {sqlite_obj_str(_healerlink_ratio, real_str)}
 , {sqlite_obj_str(_all_acct_cred, real_str)}
 , {sqlite_obj_str(_all_acct_debt, real_str)}

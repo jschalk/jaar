@@ -429,7 +429,7 @@ def add_bud_to_br00028_csv(
                 if_none_str(conceptunit.gogo_want),
                 if_none_str(conceptunit.stop_want),
                 if_none_str(conceptunit.mass),
-                if_none_str(conceptunit.pledge),
+                if_none_str(conceptunit.task),
                 if_none_str(conceptunit.problem_bool),
             ]
             x_csv += csv_delimiter.join(x_row)
@@ -756,7 +756,7 @@ def add_pack_to_br00028_csv(
                 if_none_str(budatom.jvalues.get("gogo_want")),
                 if_none_str(budatom.jvalues.get("stop_want")),
                 if_none_str(budatom.jvalues.get("mass")),
-                if_none_str(budatom.jvalues.get("pledge")),
+                if_none_str(budatom.jvalues.get("task")),
                 if_none_str(budatom.jvalues.get("problem_bool")),
             ]
             x_csv += csv_delimiter.join(x_row)

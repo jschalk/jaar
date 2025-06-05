@@ -50,7 +50,7 @@ class ConceptTable(Base):
     problem_bool = Column(Integer)
     morph = Column(Integer)
     mass = Column(Integer)
-    pledge = Column(Integer)
+    task = Column(Integer)
     stop_want = Column(Float)
 
 

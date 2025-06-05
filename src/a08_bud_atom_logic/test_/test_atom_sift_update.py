@@ -31,11 +31,11 @@ from src.a06_bud_logic._test_util.a06_str import (
     morph_str,
     numor_str,
     parent_way_str,
-    pledge_str,
     rconcept_active_requisite_str,
     rcontext_str,
     stop_want_str,
     take_force_str,
+    task_str,
 )
 from src.a06_bud_logic.bud import budunit_shop
 from src.a06_bud_logic.bud_tool import (
@@ -167,7 +167,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_conceptunit():
     sue_mass = 67
     sue_morph = 79
     sue_numor = 83
-    sue_pledge = 97
+    sue_task = 97
     sue_problem_bool = True
     sue_stop_want = 107
     old_casa_atom = budatom_shop(bud_conceptunit_str(), INSERT_str())
@@ -180,7 +180,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_conceptunit():
     old_casa_atom.set_arg(mass_str(), sue_mass)
     old_casa_atom.set_arg(morph_str(), sue_morph)
     old_casa_atom.set_arg(numor_str(), sue_numor)
-    old_casa_atom.set_arg(pledge_str(), sue_pledge)
+    old_casa_atom.set_arg(task_str(), sue_task)
     old_casa_atom.set_arg("problem_bool", sue_problem_bool)
     old_casa_atom.set_arg(stop_want_str(), sue_stop_want)
     # THEN
@@ -199,7 +199,7 @@ def test_sift_atom_ReturnsObj_BudAtom_UPDATE_bud_conceptunit():
     assert zia_jvalues.get(mass_str()) == sue_mass
     assert zia_jvalues.get(morph_str()) == sue_morph
     assert zia_jvalues.get(numor_str()) == sue_numor
-    assert zia_jvalues.get(pledge_str()) == sue_pledge
+    assert zia_jvalues.get(task_str()) == sue_task
     assert zia_jvalues.get("problem_bool") == sue_problem_bool
     assert zia_jvalues.get(stop_want_str()) == sue_stop_want
 
