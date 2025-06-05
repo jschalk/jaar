@@ -1,8 +1,8 @@
 from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import x_is_json
-from src.a02_finance_logic._test_util.a02_str import fisc_label_str, owner_name_str
+from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
 from src.a03_group_logic.acct import acctunit_shop
-from src.a05_concept_logic.concept import get_default_fisc_label
+from src.a05_concept_logic.concept import get_default_vow_label
 from src.a06_bud_logic._test_util.a06_str import (
     acct_name_str,
     bud_acctunit_str,
@@ -45,7 +45,7 @@ def test_PackUnit_exists():
 
     # THEN
     assert not x_packunit.face_name
-    assert not x_packunit.fisc_label
+    assert not x_packunit.vow_label
     assert not x_packunit.owner_name
     assert not x_packunit._pack_id
     assert not x_packunit._buddelta
@@ -64,7 +64,7 @@ def test_packunit_shop_ReturnsObjEstablishWithEmptyArgs():
 
     # THEN
     assert not bob_packunit.face_name
-    assert bob_packunit.fisc_label == get_default_fisc_label()
+    assert bob_packunit.vow_label == get_default_vow_label()
     assert bob_packunit.owner_name == bob_str
     assert bob_packunit._pack_id == 0
     assert bob_packunit._buddelta == buddelta_shop()
@@ -90,7 +90,7 @@ def test_packunit_shop_ReturnsObjEstablishWithNonEmptyArgs():
     bob_packunit = packunit_shop(
         face_name=sue_str,
         owner_name=bob_str,
-        fisc_label=accord45_str,
+        vow_label=accord45_str,
         _pack_id=bob_pack_id,
         _buddelta=bob_buddelta,
         _delta_start=bob_delta_start,
@@ -102,7 +102,7 @@ def test_packunit_shop_ReturnsObjEstablishWithNonEmptyArgs():
     # THEN
     assert bob_packunit.face_name == sue_str
     assert bob_packunit.owner_name == bob_str
-    assert bob_packunit.fisc_label == accord45_str
+    assert bob_packunit.vow_label == accord45_str
     assert bob_packunit._pack_id == bob_pack_id
     assert bob_packunit._buddelta == bob_buddelta
     assert bob_packunit._delta_start == bob_delta_start
@@ -228,7 +228,7 @@ def test_PackUnit_get_step_dict_ReturnsObj_Simple():
     accord45_str = "accord45"
     accord45_e5_int = 5
     bob_packunit = packunit_shop(
-        fisc_label=accord45_str, owner_name=bob_str, event_int=accord45_e5_int
+        vow_label=accord45_str, owner_name=bob_str, event_int=accord45_e5_int
     )
     bob_packunit.set_face(sue_str)
 
@@ -236,8 +236,8 @@ def test_PackUnit_get_step_dict_ReturnsObj_Simple():
     x_dict = bob_packunit.get_step_dict()
 
     # THEN
-    assert x_dict.get(fisc_label_str()) is not None
-    assert x_dict.get(fisc_label_str()) == accord45_str
+    assert x_dict.get(vow_label_str()) is not None
+    assert x_dict.get(vow_label_str()) == accord45_str
     assert x_dict.get(owner_name_str()) is not None
     assert x_dict.get(owner_name_str()) == bob_str
     assert x_dict.get(face_name_str()) is not None
@@ -305,7 +305,7 @@ def test_PackUnit_get_serializable_dict_ReturnsObj_Simple():
     accord45_str = "accord45"
     accord45_e5_int = 5
     bob_packunit = packunit_shop(
-        fisc_label=accord45_str, owner_name=bob_str, event_int=accord45_e5_int
+        vow_label=accord45_str, owner_name=bob_str, event_int=accord45_e5_int
     )
     bob_packunit.set_face(sue_str)
 
@@ -313,8 +313,8 @@ def test_PackUnit_get_serializable_dict_ReturnsObj_Simple():
     total_dict = bob_packunit.get_serializable_dict()
 
     # THEN
-    assert total_dict.get(fisc_label_str()) is not None
-    assert total_dict.get(fisc_label_str()) == accord45_str
+    assert total_dict.get(vow_label_str()) is not None
+    assert total_dict.get(vow_label_str()) == accord45_str
     assert total_dict.get(owner_name_str()) is not None
     assert total_dict.get(owner_name_str()) == bob_str
     assert total_dict.get(face_name_str()) is not None
@@ -374,8 +374,8 @@ def test_PackUnit_get_json_ReturnsObj_WithBudDeltaPopulated():
   },
   "event_int": null,
   "face_name": null,
-  "fisc_label": "ZZ",
-  "owner_name": "Bob"
+  "owner_name": "Bob",
+  "vow_label": "ZZ"
 }"""
     assert generated_json == expected_json
 
@@ -393,7 +393,7 @@ def test_get_packunit_from_json_ReturnsObj_WithBudDeltaPopulated():
     assert generated_bob_packunit
     assert generated_bob_packunit.face_name == bob_packunit.face_name
     assert generated_bob_packunit.event_int == bob_packunit.event_int
-    assert generated_bob_packunit.fisc_label == bob_packunit.fisc_label
+    assert generated_bob_packunit.vow_label == bob_packunit.vow_label
     assert generated_bob_packunit._buddelta == bob_packunit._buddelta
     assert generated_bob_packunit == bob_packunit
 
@@ -542,10 +542,10 @@ def test_PackUnit_get_edited_bud_RaisesErrorWhenpackAttrsAndBudAttrsAreNotTheSam
     yao_str = "Yao"
     xia_str = "Xia"
     accord23_str = "accord23"
-    bob_packunit = packunit_shop(yao_str, xia_str, fisc_label=accord23_str)
+    bob_packunit = packunit_shop(yao_str, xia_str, vow_label=accord23_str)
     sue_str = "Sue"
     accord45_str = "accord45"
-    before_sue_budunit = budunit_shop(sue_str, fisc_label=accord45_str)
+    before_sue_budunit = budunit_shop(sue_str, vow_label=accord45_str)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:

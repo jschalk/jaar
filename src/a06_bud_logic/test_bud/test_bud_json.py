@@ -51,7 +51,7 @@ def test_BudUnit_get_dict_ReturnsObj_Scenario1_large_json():
     assert bud_dict is not None
     assert str(type(bud_dict)) == "<class 'dict'>"
     assert bud_dict["owner_name"] == yao_bud.owner_name
-    assert bud_dict["fisc_label"] == yao_bud.fisc_label
+    assert bud_dict["vow_label"] == yao_bud.vow_label
     assert bud_dict["tally"] == yao_bud.tally
     assert bud_dict["tally"] == bud_tally
     assert bud_dict["fund_pool"] == yao_fund_pool
@@ -68,7 +68,7 @@ def test_BudUnit_get_dict_ReturnsObj_Scenario1_large_json():
     x_conceptroot = yao_bud.conceptroot
     conceptroot_dict = bud_dict["conceptroot"]
     _kids = "_kids"
-    assert x_conceptroot.concept_label == yao_bud.fisc_label
+    assert x_conceptroot.concept_label == yao_bud.vow_label
     assert conceptroot_dict["concept_label"] == x_conceptroot.concept_label
     assert conceptroot_dict["mass"] == x_conceptroot.mass
     assert len(conceptroot_dict[_kids]) == len(x_conceptroot._kids)
@@ -90,7 +90,7 @@ def test_BudUnit_get_dict_ReturnsObj_Scenario2_conceptroot_laborunit():
     sue_bud = budunit_shop("Sue")
     x_laborunit = laborunit_shop()
     x_laborunit.set_laborlink(labor_title=run_str)
-    root_way = to_way(sue_bud.fisc_label)
+    root_way = to_way(sue_bud.vow_label)
     sue_bud.edit_concept_attr(root_way, laborunit=x_laborunit)
     root_concept = sue_bud.get_concept_obj(root_way)
     x_gogo_want = 5
@@ -119,7 +119,7 @@ def test_BudUnit_get_dict_ReturnsObj_Scenario3_With_conceptroot_healerlink():
     yao_acctunit.add_membership(run_str)
     run_healerlink = healerlink_shop()
     run_healerlink.set_healer_name(x_healer_name=run_str)
-    root_way = to_way(sue_bud.fisc_label)
+    root_way = to_way(sue_bud.vow_label)
     sue_bud.edit_concept_attr(root_way, healerlink=run_healerlink)
 
     # WHEN
@@ -177,7 +177,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     yao_acctunit = zia_bud.get_acct(yao_str)
     yao_acctunit.add_membership(run_str)
     run_healerlink = healerlink_shop({run_str})
-    root_way = to_way(zia_bud.fisc_label)
+    root_way = to_way(zia_bud.vow_label)
     zia_bud.edit_concept_attr(root_way, healerlink=run_healerlink)
     zia_bud.edit_concept_attr(root_way, problem_bool=True)
 
@@ -192,7 +192,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     bud_dict = get_dict_from_json(x_json)
 
     assert bud_dict["owner_name"] == zia_bud.owner_name
-    assert bud_dict["fisc_label"] == zia_bud.fisc_label
+    assert bud_dict["vow_label"] == zia_bud.vow_label
     assert bud_dict["tally"] == zia_bud.tally
     assert bud_dict["fund_pool"] == zia_bud.fund_pool
     assert bud_dict["fund_iota"] == zia_bud.fund_iota
@@ -248,7 +248,7 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     # THEN
     _kids = "_kids"
     assert bud_dict["owner_name"] == yao_bud.owner_name
-    assert bud_dict["fisc_label"] == yao_bud.fisc_label
+    assert bud_dict["vow_label"] == yao_bud.vow_label
     assert bud_dict["tally"] == yao_bud.tally
     assert bud_dict["max_tree_traverse"] == 2
     assert bud_dict["max_tree_traverse"] == yao_bud.max_tree_traverse
@@ -292,8 +292,8 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     # ESTABLISH
     zia_bud = get_budunit_x1_3levels_1reason_1facts()
     zia_bud.set_max_tree_traverse(23)
-    tiger_fisc_label = "tiger"
-    zia_bud.set_fisc_label(tiger_fisc_label)
+    tiger_vow_label = "tiger"
+    zia_bud.set_vow_label(tiger_vow_label)
     zia_fund_pool = 80000
     zia_bud.fund_pool = zia_fund_pool
     zia_fund_iota = 8
@@ -328,7 +328,7 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     xio_acctunit.add_membership(run_str)
     run_laborunit = laborunit_shop()
     run_laborunit.set_laborlink(labor_title=run_str)
-    root_way = to_way(zia_bud.fisc_label)
+    root_way = to_way(zia_bud.vow_label)
     zia_bud.edit_concept_attr(root_way, laborunit=run_laborunit)
     xio_laborunit = laborunit_shop()
     xio_laborunit.set_laborlink(labor_title=xio_str)
@@ -358,7 +358,7 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     assert str(type(json_bud)).find(".bud.BudUnit'>") > 0
     assert json_bud.owner_name is not None
     assert json_bud.owner_name == zia_bud.owner_name
-    assert json_bud.fisc_label == zia_bud.fisc_label
+    assert json_bud.vow_label == zia_bud.vow_label
     assert json_bud.fund_pool == zia_fund_pool
     assert json_bud.fund_pool == zia_bud.fund_pool
     assert json_bud.fund_iota == zia_fund_iota
@@ -424,7 +424,7 @@ def test_budunit_get_from_json_ReturnsCorrectConceptRoot():
     # ESTABLISH
     zia_bud = get_budunit_x1_3levels_1reason_1facts()
     zia_bud.set_max_tree_traverse(23)
-    # root_concept = zia_bud.get_concept_obj(zia_bud.get_concept_obj(zia_bud.fisc_label))
+    # root_concept = zia_bud.get_concept_obj(zia_bud.get_concept_obj(zia_bud.vow_label))
     root_concept = zia_bud.conceptroot
     zia_gogo_want = 75
     zia_stop_want = 77
@@ -437,7 +437,7 @@ def test_budunit_get_from_json_ReturnsCorrectConceptRoot():
     json_bud = budunit_get_from_json(x_bud_json=x_json)
 
     # THEN
-    json_conceptroot = json_bud.get_concept_obj(to_way(zia_bud.fisc_label))
+    json_conceptroot = json_bud.get_concept_obj(to_way(zia_bud.vow_label))
     assert json_conceptroot.gogo_want == zia_gogo_want
     assert json_conceptroot.stop_want == zia_stop_want
 
@@ -499,7 +499,7 @@ def test_budunit_get_from_json_ReturnsObj_Scenario7_conceptroot_bridge_IsCorrect
     slash_str = "/"
     run_str = "runners"
     sue_bud = budunit_shop("Sue", bridge=slash_str)
-    root_way = to_way(sue_bud.fisc_label, slash_str)
+    root_way = to_way(sue_bud.vow_label, slash_str)
     day_hr_str = "day_hr"
     day_hr_way = sue_bud.make_l1_way(day_hr_str)
     sue_bud.add_concept(day_hr_way)

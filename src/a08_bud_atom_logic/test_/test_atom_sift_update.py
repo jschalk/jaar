@@ -54,7 +54,7 @@ def test_sift_atom_ReturnsNoneIfGivenBudAtomIsUPDATE():
     casa_way = sue_bud.make_l1_way(casa_str)
     sue_bud.add_concept(casa_way)
     casa_atom = budatom_shop(bud_conceptunit_str(), UPDATE_str())
-    casa_atom.set_arg(parent_way_str(), sue_bud.fisc_label)
+    casa_atom.set_arg(parent_way_str(), sue_bud.vow_label)
     casa_atom.set_arg(concept_label_str(), casa_str)
     casa_atom.set_arg(mass_str(), 8)
     # THEN

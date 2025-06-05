@@ -816,18 +816,18 @@ def test_way_find_replace_way_key_dict_ReturnsCorrectPremisesUnit_Scenario1():
 
 def test_way_find_replace_way_key_dict_ReturnsCorrectPremisesUnit_Scenario2():
     # ESTABLISH
-    old_fisc_label = "El Paso"
+    old_vow_label = "El Paso"
     casa_str = "casa"
     seasons_str = "seasons"
-    old_casa_way = create_way(old_fisc_label, casa_str)
+    old_casa_way = create_way(old_vow_label, casa_str)
     old_seasons_way = create_way(old_casa_way, seasons_str)
     old_premiseunit = premiseunit_shop(pstate=old_seasons_way)
     old_premiseunits = {old_premiseunit.pstate: old_premiseunit}
     assert old_premiseunits.get(old_seasons_way) == old_premiseunit
 
     # WHEN
-    new_fisc_label = "Austin"
-    new_casa_way = create_way(new_fisc_label, casa_str)
+    new_vow_label = "Austin"
+    new_casa_way = create_way(new_vow_label, casa_str)
     new_seasons_way = create_way(new_casa_way, seasons_str)
     new_premise_ways = find_replace_way_key_dict(
         dict_x=old_premiseunits, old_way=old_seasons_way, new_way=new_seasons_way

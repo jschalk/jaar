@@ -1,6 +1,6 @@
 from pytest import raises as pytest_raises
 from src.a01_term_logic.way import default_bridge_if_None
-from src.a02_finance_logic._test_util.a02_str import fisc_label_str, owner_name_str
+from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
 from src.a06_bud_logic._test_util.a06_str import (
     LabelTerm_str,
     NameTerm_str,
@@ -28,12 +28,12 @@ from src.a08_bud_atom_logic.atom_config import (
     get_atom_args_class_types,
 )
 from src.a09_pack_logic._test_util.a09_str import face_name_str
-from src.a15_fisc_logic._test_util.a15_str import (
+from src.a15_vow_logic._test_util.a15_str import (
     hour_label_str,
     month_label_str,
     weekday_label_str,
 )
-from src.a15_fisc_logic.fisc_config import get_fisc_args_class_types
+from src.a15_vow_logic.vow_config import get_vow_args_class_types
 from src.a16_pidgin_logic._test_util.example_pidgins import (
     get_clean_labelmap,
     get_clean_waymap,
@@ -64,7 +64,7 @@ from src.a16_pidgin_logic.pidgin_config import (
 
 
 # The goal of the pidgin function is to allow a single command, pointing at a bunch of directories
-# initialize fiscunits and output acct metrics such as calendars, financial status, healer status
+# initialize vowunits and output acct metrics such as calendars, financial status, healer status
 def test_get_pidgin_args_class_types_ReturnsObj():
     # ESTABLISH / WHEN
     pidgin_args_class_types = get_pidgin_args_class_types()
@@ -91,7 +91,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("pdivisor") == "int"
     assert pidgin_args_class_types.get("face_name") == NameTerm_str()
     assert pidgin_args_class_types.get("fcontext") == WayTerm_str()
-    assert pidgin_args_class_types.get("fisc_label") == LabelTerm_str()
+    assert pidgin_args_class_types.get("vow_label") == LabelTerm_str()
     assert pidgin_args_class_types.get("fnigh") == "float"
     assert pidgin_args_class_types.get("fopen") == "float"
     assert pidgin_args_class_types.get("fund_iota") == "float"
@@ -132,20 +132,20 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("bridge") == "str"
     assert pidgin_args_class_types.get("yr1_jan1_offset") == "int"
 
-    # make sure it pidgin_arg_class_types has all fisc and all atom args
+    # make sure it pidgin_arg_class_types has all vow and all atom args
     pidgin_args = set(pidgin_args_class_types.keys())
     atom_args = set(get_atom_args_class_types().keys())
-    fisc_args = set(get_fisc_args_class_types().keys())
+    vow_args = set(get_vow_args_class_types().keys())
     assert atom_args.issubset(pidgin_args)
-    assert fisc_args.issubset(pidgin_args)
-    assert atom_args.intersection(fisc_args) == {
+    assert vow_args.issubset(pidgin_args)
+    assert atom_args.intersection(vow_args) == {
         acct_name_str(),
         fund_iota_str(),
         penny_str(),
         respect_bit_str(),
     }
-    assert atom_args.union(fisc_args) != pidgin_args
-    assert atom_args.union(fisc_args).union({"face_name"}) == pidgin_args
+    assert atom_args.union(vow_args) != pidgin_args
+    assert atom_args.union(vow_args).union({"face_name"}) == pidgin_args
     assert check_class_types_are_correct()
     # assert pidgin_args_class_types.keys() == get_atom_args_dimen_mapping().keys()
     # assert all_atom_args_class_types_are_correct(x_class_types)
@@ -154,7 +154,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
 def check_class_types_are_correct() -> bool:
     pidgin_args_class_types = get_pidgin_args_class_types()
     atom_args_class_types = get_atom_args_class_types()
-    fisc_args_class_types = get_fisc_args_class_types()
+    vow_args_class_types = get_vow_args_class_types()
     for pidgin_arg, pidgin_type in pidgin_args_class_types.items():
         print(f"check {pidgin_arg=} {pidgin_type=}")
         if atom_args_class_types.get(pidgin_arg) not in [None, pidgin_type]:
@@ -162,9 +162,9 @@ def check_class_types_are_correct() -> bool:
                 f"{pidgin_arg=} {pidgin_type=} {atom_args_class_types.get(pidgin_arg)=}"
             )
             return False
-        if fisc_args_class_types.get(pidgin_arg) not in [None, pidgin_type]:
+        if vow_args_class_types.get(pidgin_arg) not in [None, pidgin_type]:
             print(
-                f"{pidgin_arg=} {pidgin_type=} {fisc_args_class_types.get(pidgin_arg)=}"
+                f"{pidgin_arg=} {pidgin_type=} {vow_args_class_types.get(pidgin_arg)=}"
             )
             return False
     return True
@@ -209,7 +209,7 @@ def test_get_pidginable_args_ReturnsObj():
         rcontext_str(),
         face_name_str(),
         fcontext_str(),
-        fisc_label_str(),
+        vow_label_str(),
         fstate_str(),
         group_title_str(),
         healer_name_str(),
@@ -341,7 +341,7 @@ def test_get_pidgin_LabelTerm_args_ReturnsObj():
 
     # THEN
     assert pidgin_LabelTerm_args == {
-        fisc_label_str(),
+        vow_label_str(),
         hour_label_str(),
         month_label_str(),
         timeline_label_str(),

@@ -47,7 +47,7 @@ def test_treemetrics_shop_ReturnsObj():
 def test_BudUnit_set_concept_dict_Scenario0():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_way = to_way(yao_bud.fisc_label)
+    root_way = to_way(yao_bud.vow_label)
     root_concept = yao_bud.get_concept_obj(root_way)
     assert not root_concept.begin
     assert not root_concept.close
@@ -73,9 +73,9 @@ def test_BudUnit_set_concept_dict_Scenario1():
     yao_bud = budunit_shop("Yao")
     time0_begin = 7
     time0_close = 31
-    root_way = to_way(yao_bud.fisc_label)
+    root_way = to_way(yao_bud.vow_label)
     yao_bud.edit_concept_attr(root_way, begin=time0_begin, close=time0_close)
-    root_way = to_way(yao_bud.fisc_label)
+    root_way = to_way(yao_bud.vow_label)
     root_concept = yao_bud.get_concept_obj(root_way)
     assert root_concept.begin == time0_begin
     assert root_concept.close == time0_close
@@ -95,7 +95,7 @@ def test_BudUnit_set_concept_dict_Scenario1():
 def test_BudUnit_set_concept_dict_Clears_gogo_calc_stop_calc():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    root_way = to_way(sue_bud.fisc_label)
+    root_way = to_way(sue_bud.vow_label)
     root_concept = sue_bud.get_concept_obj(root_way)
     nation_str = "nation"
     nation_way = sue_bud.make_l1_way(nation_str)

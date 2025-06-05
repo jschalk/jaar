@@ -21,10 +21,6 @@ def deal_time_str() -> str:
     return "deal_time"
 
 
-def fisc_label_str() -> str:
-    return "fisc_label"
-
-
 def fund_iota_str() -> str:
     return "fund_iota"
 
@@ -55,3 +51,7 @@ def quota_str() -> str:
 
 def tran_time_str() -> str:
     return "tran_time"
+
+
+def vow_label_str() -> str:
+    return "vow_label"

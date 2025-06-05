@@ -6,7 +6,7 @@
         "face_name": {
             "otx_key": true
         },
-        "fisc_label": {
+        "vow_label": {
             "otx_key": true
         },
         "concept_way": {
@@ -21,7 +21,7 @@
     },
     "idea_number": "br00054",
     "dimens": [
-        "fiscunit",
+        "vowunit",
         "budunit",
         "bud_conceptunit",
         "bud_concept_laborlink"

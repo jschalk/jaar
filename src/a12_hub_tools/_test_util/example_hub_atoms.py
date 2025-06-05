@@ -1,11 +1,6 @@
-from src.a01_term_logic.way import (
-    FiscLabel,
-    WayTerm,
-    create_way,
-    create_way_from_labels,
-)
+from src.a01_term_logic.way import VowLabel, WayTerm, create_way, create_way_from_labels
 from src.a02_finance_logic.deal import DealUnit, dealunit_shop
-from src.a05_concept_logic.concept import get_default_fisc_label
+from src.a05_concept_logic.concept import get_default_vow_label
 from src.a06_bud_logic._test_util.a06_str import (
     acct_name_str,
     bud_acctunit_str,
@@ -25,22 +20,22 @@ from src.a12_hub_tools._test_util.a12_env import get_module_temp_dir
 from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop
 
 
-def get_atom_example_conceptunit_sports(fisc_label: FiscLabel = None) -> BudAtom:
-    if not fisc_label:
-        fisc_label = "accord23"
+def get_atom_example_conceptunit_sports(vow_label: VowLabel = None) -> BudAtom:
+    if not vow_label:
+        vow_label = "accord23"
     sports_str = "sports"
     x_dimen = bud_conceptunit_str()
-    sports_way = create_way(fisc_label, sports_str)
+    sports_way = create_way(vow_label, sports_str)
     insert_conceptunit_budatom = budatom_shop(x_dimen, INSERT_str())
     insert_conceptunit_budatom.set_jkey(concept_way_str(), sports_way)
     return insert_conceptunit_budatom
 
 
-def get_atom_example_conceptunit_ball(fisc_label: FiscLabel = None) -> BudAtom:
-    if not fisc_label:
-        fisc_label = "accord23"
+def get_atom_example_conceptunit_ball(vow_label: VowLabel = None) -> BudAtom:
+    if not vow_label:
+        vow_label = "accord23"
     sports_str = "sports"
-    sports_way = create_way(fisc_label, sports_str)
+    sports_way = create_way(vow_label, sports_str)
     ball_str = "basketball"
     x_dimen = bud_conceptunit_str()
     bball_way = create_way(sports_way, ball_str)
@@ -49,11 +44,11 @@ def get_atom_example_conceptunit_ball(fisc_label: FiscLabel = None) -> BudAtom:
     return insert_conceptunit_budatom
 
 
-def get_atom_example_conceptunit_knee(fisc_label: FiscLabel = None) -> BudAtom:
-    if not fisc_label:
-        fisc_label = "accord23"
+def get_atom_example_conceptunit_knee(vow_label: VowLabel = None) -> BudAtom:
+    if not vow_label:
+        vow_label = "accord23"
     sports_str = "sports"
-    sports_way = create_way(fisc_label, sports_str)
+    sports_way = create_way(vow_label, sports_str)
     knee_str = "knee"
     knee_begin = 1
     knee_close = 71
@@ -68,15 +63,15 @@ def get_atom_example_conceptunit_knee(fisc_label: FiscLabel = None) -> BudAtom:
     return insert_conceptunit_budatom
 
 
-def get_atom_example_factunit_knee(fisc_label: FiscLabel = None) -> BudAtom:
-    if not fisc_label:
-        fisc_label = "accord23"
+def get_atom_example_factunit_knee(vow_label: VowLabel = None) -> BudAtom:
+    if not vow_label:
+        vow_label = "accord23"
     sports_str = "sports"
-    sports_way = create_way(fisc_label, sports_str)
+    sports_way = create_way(vow_label, sports_str)
     ball_str = "basketball"
     ball_way = create_way(sports_way, ball_str)
     knee_str = "knee"
-    knee_way = create_way(fisc_label, knee_str)
+    knee_way = create_way(vow_label, knee_str)
     knee_fopen = 7
     knee_fnigh = 23
     x_dimen = bud_concept_factunit_str()
@@ -105,18 +100,18 @@ def get_buddelta_sue_example() -> BudDelta:
 
 
 def get_texas_way() -> WayTerm:
-    fisc_label = get_default_fisc_label()
+    vow_label = get_default_vow_label()
     nation_str = "nation"
     usa_str = "USA"
     texas_str = "Texas"
-    return create_way_from_labels([fisc_label, nation_str, usa_str, texas_str])
+    return create_way_from_labels([vow_label, nation_str, usa_str, texas_str])
 
 
 def get_texas_hubunit() -> HubUnit:
-    fisc_label = get_default_fisc_label()
+    vow_label = get_default_vow_label()
     return hubunit_shop(
         get_module_temp_dir(),
-        fisc_label,
+        vow_label,
         owner_name="Sue",
         keep_way=get_texas_way(),
         # pipeline_duty_plan_str(),

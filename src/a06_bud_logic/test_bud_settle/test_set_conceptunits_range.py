@@ -9,7 +9,7 @@ from src.a06_bud_logic.bud import budunit_shop
 def test_BudUnit_set_concepttree_range_attrs_SetsInitialConcept_gogo_calc_stop_calc_UnitDoesNotErrorWithEmptyBudUnit():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_way = to_way(yao_bud.fisc_label)
+    root_way = to_way(yao_bud.vow_label)
     root_concept = yao_bud.get_concept_obj(root_way)
     assert not root_concept.begin
     assert not root_concept.close
@@ -29,7 +29,7 @@ def test_BudUnit_set_concepttree_range_attrs_SetsInitialConcept_gogo_calc_stop_c
 def test_BudUnit_set_concepttree_range_attrs_SetsInitialConcept_gogo_calc_stop_calc_DoesNotErrorWhenNoMathLabels():
     # ESTABLISH
     yao_bud = get_budunit_with_4_levels_and_2reasons()
-    root_way = to_way(yao_bud.fisc_label)
+    root_way = to_way(yao_bud.vow_label)
     root_concept = yao_bud.get_concept_obj(root_way)
     assert not root_concept._gogo_calc
 
@@ -43,7 +43,7 @@ def test_BudUnit_set_concepttree_range_attrs_SetsInitialConcept_gogo_calc_stop_c
 def test_BudUnit_set_concepttree_range_attrs_SetsInitialConcept_gogo_calc_stop_calc_SimpleLabel():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_way = to_way(yao_bud.fisc_label)
+    root_way = to_way(yao_bud.vow_label)
     time0_begin = 7
     time0_close = 31
     yao_bud.edit_concept_attr(root_way, begin=time0_begin, close=time0_close)
@@ -67,7 +67,7 @@ def test_BudUnit_set_concepttree_range_attrs_SetsInitialConcept_gogo_calc_stop_c
 def test_BudUnit_set_concepttree_range_attrs_SetsInitialConcept_gogo_calc_stop_calc_LabelWith_denom():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_way = to_way(yao_bud.fisc_label)
+    root_way = to_way(yao_bud.vow_label)
     time0_begin = 6
     time0_close = 21
     time0_denom = 3
@@ -100,7 +100,7 @@ def test_BudUnit_set_concepttree_range_attrs_SetsInitialConcept_gogo_calc_stop_c
 def test_BudUnit_set_concepttree_range_attrs_SetsInitialConcept_gogo_calc_stop_calc_LabelWith_denom_numor():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_way = to_way(yao_bud.fisc_label)
+    root_way = to_way(yao_bud.vow_label)
     time0_begin = 6
     time0_close = 18
     time0_numor = 7
@@ -136,7 +136,7 @@ def test_BudUnit_set_concepttree_range_attrs_SetsInitialConcept_gogo_calc_stop_c
 def test_BudUnit_set_concepttree_range_attrs_SetsInitialConcept_gogo_calc_stop_calc_LabelWith_addin():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_way = to_way(yao_bud.fisc_label)
+    root_way = to_way(yao_bud.vow_label)
     time0_begin = 6
     time0_close = 18
     time0_addin = 7
@@ -169,7 +169,7 @@ def test_BudUnit_set_concepttree_range_attrs_SetsInitialConcept_gogo_calc_stop_c
 def test_BudUnit_set_concepttree_range_attrs_SetsInitialConcept_gogo_calc_stop_calc_LabelWith_denom_addin():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_way = to_way(yao_bud.fisc_label)
+    root_way = to_way(yao_bud.vow_label)
     time0_begin = 6
     time0_close = 18
     time0_denom = 3
@@ -205,7 +205,7 @@ def test_BudUnit_set_concepttree_range_attrs_SetsInitialConcept_gogo_calc_stop_c
 def test_BudUnit_set_concepttree_range_attrs_SetsDescendentConcept_gogo_calc_stop_calc_Simple0():
     # ESTABLISH
     yao_bud = budunit_shop("Yao")
-    root_way = to_way(yao_bud.fisc_label)
+    root_way = to_way(yao_bud.vow_label)
     time0_str = "time0"
     time0_way = yao_bud.make_l1_way(time0_str)
     time0_begin = 7
@@ -257,7 +257,7 @@ def test_BudUnit_set_concepttree_range_attrs_SetsDescendentConcept_gogo_calc_sto
     time1_way = yao_bud.make_way(time0_way, time1_str)
     yao_bud.set_concept(conceptunit_shop(time1_str, denom=time1_denom), time0_way)
     time1_concept = yao_bud.get_concept_obj(time1_way)
-    root_way = to_way(yao_bud.fisc_label)
+    root_way = to_way(yao_bud.vow_label)
     root_concept = yao_bud.get_concept_obj(root_way)
     yao_bud._set_concept_dict()
     assert not root_concept._gogo_calc
@@ -298,7 +298,7 @@ def test_BudUnit_set_concepttree_range_attrs_SetsDescendentConcept_gogo_calc_sto
     temp_concept = conceptunit_shop(time1_str, numor=time1_numor, denom=time1_denom)
     yao_bud.set_concept(temp_concept, time0_way)
     time1_concept = yao_bud.get_concept_obj(time1_way)
-    root_way = to_way(yao_bud.fisc_label)
+    root_way = to_way(yao_bud.vow_label)
     root_concept = yao_bud.get_concept_obj(root_way)
     yao_bud._set_concept_dict()
     assert not root_concept._gogo_calc
@@ -338,7 +338,7 @@ def test_BudUnit_set_concepttree_range_attrs_SetsDescendentConcept_gogo_calc_sto
     temp_concept = conceptunit_shop(time1_str, addin=time1_addin)
     yao_bud.set_concept(temp_concept, time0_way)
     time1_concept = yao_bud.get_concept_obj(time1_way)
-    root_way = to_way(yao_bud.fisc_label)
+    root_way = to_way(yao_bud.vow_label)
     root_concept = yao_bud.get_concept_obj(root_way)
     yao_bud._set_concept_dict()
     assert not root_concept._gogo_calc
@@ -382,7 +382,7 @@ def test_BudUnit_set_concepttree_range_attrs_Sets2LevelsDescendentConcept_gogo_c
     x_time2_concept = conceptunit_shop(time2_str, addin=time2_addin)
     yao_bud.set_concept(x_time2_concept, time1_way)
     time2_concept = yao_bud.get_concept_obj(time2_way)
-    root_way = to_way(yao_bud.fisc_label)
+    root_way = to_way(yao_bud.vow_label)
     root_concept = yao_bud.get_concept_obj(root_way)
     yao_bud._set_concept_dict()
     assert not root_concept._gogo_calc
@@ -426,7 +426,7 @@ def test_BudUnit_set_concepttree_range_attrs_SetsDescendentConcept_gogo_calc_sto
     temp_concept = conceptunit_shop(time1_str, denom=time1_denom, addin=time1_addin)
     yao_bud.set_concept(temp_concept, time0_way)
     time1_concept = yao_bud.get_concept_obj(time1_way)
-    root_way = to_way(yao_bud.fisc_label)
+    root_way = to_way(yao_bud.vow_label)
     root_concept = yao_bud.get_concept_obj(root_way)
     yao_bud._set_concept_dict()
     assert not root_concept._gogo_calc

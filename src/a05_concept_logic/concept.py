@@ -9,8 +9,8 @@ from src.a00_data_toolbox.dict_toolbox import (
 )
 from src.a01_term_logic.term import AcctName, GroupTitle, LabelTerm
 from src.a01_term_logic.way import (
-    FiscLabel,
     LabelTerm,
+    VowLabel,
     WayTerm,
     all_wayterms_between,
     create_way,
@@ -79,7 +79,7 @@ class ConceptGetDescendantsException(Exception):
     pass
 
 
-def get_default_fisc_label() -> FiscLabel:
+def get_default_vow_label() -> VowLabel:
     return "ZZ"
 
 
@@ -212,7 +212,7 @@ class ConceptUnit:
     parent_way: WayTerm = None
     root: bool = None
     _kids: dict[WayTerm,] = None
-    fisc_label: FiscLabel = None
+    vow_label: VowLabel = None
     _uid: int = None  # Calculated field?
     awardlinks: dict[GroupTitle, AwardLink] = None
     reasonunits: dict[WayTerm, ReasonUnit] = None
@@ -500,13 +500,13 @@ class ConceptUnit:
         if (
             self.root
             and concept_label is not None
-            and concept_label != self.fisc_label
-            and self.fisc_label is not None
+            and concept_label != self.vow_label
+            and self.vow_label is not None
         ):
             raise Concept_root_LabelNotEmptyException(
-                f"Cannot set conceptroot to string different than '{self.fisc_label}'"
+                f"Cannot set conceptroot to string different than '{self.vow_label}'"
             )
-        elif self.root and self.fisc_label is None:
+        elif self.root and self.vow_label is None:
             self.concept_label = root_label()
         # elif concept_label is not None:
         else:
@@ -1007,7 +1007,7 @@ def conceptunit_shop(
     pledge: bool = None,
     _originunit: OriginUnit = None,
     root: bool = None,
-    fisc_label: FiscLabel = None,
+    vow_label: VowLabel = None,
     problem_bool: bool = None,
     # Calculated fields
     _level: int = None,
@@ -1025,7 +1025,7 @@ def conceptunit_shop(
     bridge: str = None,
     _healerlink_ratio: float = None,
 ) -> ConceptUnit:
-    fisc_label = get_default_fisc_label() if fisc_label is None else fisc_label
+    vow_label = get_default_vow_label() if vow_label is None else vow_label
     x_healerlink = healerlink_shop() if healerlink is None else healerlink
 
     x_conceptkid = ConceptUnit(
@@ -1056,7 +1056,7 @@ def conceptunit_shop(
         problem_bool=get_False_if_None(problem_bool),
         _originunit=_originunit,
         root=get_False_if_None(root),
-        fisc_label=fisc_label,
+        vow_label=vow_label,
         # Calculated fields
         _level=_level,
         _fund_ratio=_fund_ratio,
@@ -1074,7 +1074,7 @@ def conceptunit_shop(
         _healerlink_ratio=get_0_if_None(_healerlink_ratio),
     )
     if x_conceptkid.root:
-        x_conceptkid.set_concept_label(concept_label=fisc_label)
+        x_conceptkid.set_concept_label(concept_label=vow_label)
     else:
         x_conceptkid.set_concept_label(concept_label=concept_label)
     x_conceptkid.set_laborunit_empty_if_None()

@@ -98,7 +98,7 @@ def test_bud_conceptunit_exists_ReturnsObj():
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
     sweep_way = sue_bud.make_way(clean_way, "sweep")
-    root_way = to_way(sue_bud.fisc_label)
+    root_way = to_way(sue_bud.vow_label)
     root_jkeys = {concept_way_str(): root_way}
     casa_jkeys = {concept_way_str(): casa_way}
     clean_jkeys = {concept_way_str(): clean_way}
@@ -138,9 +138,9 @@ def test_bud_concept_awardlink_exists_ReturnsObj():
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
-    root_way = to_way(sue_bud.fisc_label)
+    root_way = to_way(sue_bud.vow_label)
     swim_str = "Swim"
-    root_way = to_way(sue_bud.fisc_label)
+    root_way = to_way(sue_bud.vow_label)
     root_jkeys = {concept_way_str(): root_way, awardee_title_str(): swim_str}
     casa_jkeys = {concept_way_str(): casa_way, awardee_title_str(): swim_str}
     clean_jkeys = {concept_way_str(): clean_way, awardee_title_str(): swim_str}
@@ -168,7 +168,7 @@ def test_bud_concept_reasonunit_exists_ReturnsObj():
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
-    root_way = to_way(sue_bud.fisc_label)
+    root_way = to_way(sue_bud.vow_label)
     wk_str = "wk"
     wk_way = sue_bud.make_l1_way(wk_str)
     root_jkeys = {concept_way_str(): root_way, rcontext_str(): wk_way}
@@ -199,7 +199,7 @@ def test_bud_concept_reason_premiseunit_exists_ReturnsObj():
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
-    root_way = to_way(sue_bud.fisc_label)
+    root_way = to_way(sue_bud.vow_label)
     wk_str = "wk"
     wk_way = sue_bud.make_l1_way(wk_str)
     thur_way = sue_bud.make_way(wk_way, "thur")
@@ -254,7 +254,7 @@ def test_bud_concept_laborlink_exists_ReturnsObj():
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
-    root_way = to_way(sue_bud.fisc_label)
+    root_way = to_way(sue_bud.vow_label)
     swim_str = "Swim"
     root_jkeys = {concept_way_str(): root_way, labor_title_str(): swim_str}
     casa_jkeys = {concept_way_str(): casa_way, labor_title_str(): swim_str}
@@ -284,7 +284,7 @@ def test_bud_concept_healerlink_exists_ReturnsObj():
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
-    root_way = to_way(sue_bud.fisc_label)
+    root_way = to_way(sue_bud.vow_label)
     swim_str = "Swim"
     root_jkeys = {concept_way_str(): root_way, healer_name_str(): swim_str}
     casa_jkeys = {concept_way_str(): casa_way, healer_name_str(): swim_str}
@@ -313,7 +313,7 @@ def test_bud_concept_factunit_exists_ReturnsObj():
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
-    root_way = to_way(sue_bud.fisc_label)
+    root_way = to_way(sue_bud.vow_label)
     wk_str = "wk"
     wk_way = sue_bud.make_l1_way(wk_str)
     root_jkeys = {concept_way_str(): root_way, fcontext_str(): wk_way}
@@ -399,7 +399,7 @@ def test_bud_attr_exists_ReturnsObj_bud_conceptunit():
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
     sweep_way = sue_bud.make_way(clean_way, "sweep")
-    x_parent_way = to_way(sue_bud.fisc_label)
+    x_parent_way = to_way(sue_bud.vow_label)
     root_jkeys = {concept_way_str(): x_parent_way}
     casa_jkeys = {concept_way_str(): casa_way}
     clean_jkeys = {concept_way_str(): clean_way}
@@ -440,7 +440,7 @@ def test_bud_attr_exists_ReturnsObj_bud_concept_awardlink():
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
-    root_way = to_way(sue_bud.fisc_label)
+    root_way = to_way(sue_bud.vow_label)
     swim_str = "Swim"
     x_dimen = bud_concept_awardlink_str()
     root_jkeys = {concept_way_str(): root_way, awardee_title_str(): swim_str}
@@ -470,7 +470,7 @@ def test_bud_attr_exists_ReturnsObj_bud_concept_reasonunit():
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
-    root_way = to_way(sue_bud.fisc_label)
+    root_way = to_way(sue_bud.vow_label)
     wk_str = "wk"
     wk_way = sue_bud.make_l1_way(wk_str)
     x_dimen = bud_concept_reasonunit_str()
@@ -501,7 +501,7 @@ def test_bud_attr_exists_ReturnsObj_bud_concept_reason_premiseunit():
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
-    root_way = to_way(sue_bud.fisc_label)
+    root_way = to_way(sue_bud.vow_label)
     wk_str = "wk"
     wk_way = sue_bud.make_l1_way(wk_str)
     thur_way = sue_bud.make_way(wk_way, "thur")
@@ -555,7 +555,7 @@ def test_bud_attr_exists_ReturnsObj_bud_concept_laborlink():
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
-    root_way = to_way(sue_bud.fisc_label)
+    root_way = to_way(sue_bud.vow_label)
     swim_str = "Swim"
     x_dimen = bud_concept_laborlink_str()
     root_jkeys = {concept_way_str(): root_way, labor_title_str(): swim_str}
@@ -586,7 +586,7 @@ def test_bud_attr_exists_ReturnsObj_bud_concept_healerlink():
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
-    root_way = to_way(sue_bud.fisc_label)
+    root_way = to_way(sue_bud.vow_label)
     swim_str = "Swim"
     x_dimen = bud_concept_healerlink_str()
     root_jkeys = {concept_way_str(): root_way, healer_name_str(): swim_str}
@@ -616,7 +616,7 @@ def test_bud_attr_exists_ReturnsObj_bud_concept_factunit():
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
     clean_way = sue_bud.make_way(casa_way, clean_str)
-    root_way = to_way(sue_bud.fisc_label)
+    root_way = to_way(sue_bud.vow_label)
     wk_str = "wk"
     wk_way = sue_bud.make_l1_way(wk_str)
     x_dimen = bud_concept_factunit_str()

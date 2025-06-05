@@ -1,6 +1,6 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
-from src.a02_finance_logic._test_util.a02_str import fisc_label_str, owner_name_str
+from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
 from src.a06_bud_logic._test_util.a06_str import (
     acct_name_str,
     bud_acctunit_str,
@@ -8,7 +8,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     debtit_belief_str,
 )
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
-from src.a15_fisc_logic.fisc_config import get_fisc_dimens
+from src.a15_vow_logic.vow_config import get_vow_dimens
 from src.a17_idea_logic._test_util.a17_str import idea_category_str
 from src.a17_idea_logic.idea_config import get_default_sorted_list, get_idea_config_dict
 from src.a18_etl_toolbox.tran_sqlstrs import (
@@ -20,21 +20,21 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
 from src.a18_etl_toolbox.transformers import etl_voice_raw_tables_to_voice_agg_tables
 
 
-def test_get_insert_voice_agg_sqlstrs_ReturnsObj_CheckFiscDimen():
+def test_get_insert_voice_agg_sqlstrs_ReturnsObj_CheckVowDimen():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
     insert_voice_agg_sqlstrs = get_insert_voice_agg_sqlstrs()
 
     # THEN
-    assert get_fisc_dimens().issubset(set(insert_voice_agg_sqlstrs.keys()))
+    assert get_vow_dimens().issubset(set(insert_voice_agg_sqlstrs.keys()))
     idea_config = get_idea_config_dict()
     idea_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) == "fisc"
+        if dimen_config.get(idea_category_str()) == "vow"
     }
-    with sqlite3_connect(":memory:") as fisc_db_conn:
-        cursor = fisc_db_conn.cursor()
+    with sqlite3_connect(":memory:") as vow_db_conn:
+        cursor = vow_db_conn.cursor()
         create_sound_and_voice_tables(cursor)
 
         for x_dimen in idea_config:
@@ -156,7 +156,7 @@ def test_get_insert_voice_agg_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
         insert_into_clause = f"""INSERT INTO {budacct_v_raw_put_tablename} (
   {event_int_str()}
 , {face_name_str()}_inx
-, {fisc_label_str()}_inx
+, {vow_label_str()}_inx
 , {owner_name_str()}_inx
 , {acct_name_str()}_inx
 , {credit_belief_str()}
@@ -184,7 +184,7 @@ VALUES
         assert get_row_count(cursor, budacct_v_agg_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
-, {fisc_label_str()}
+, {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_belief_str()}
@@ -226,7 +226,7 @@ def test_etl_voice_raw_tables_to_voice_agg_tables_PopulatesTable_Scenario0():
         insert_into_clause = f"""INSERT INTO {budacct_v_raw_put_tablename} (
   {event_int_str()}
 , {face_name_str()}_inx
-, {fisc_label_str()}_inx
+, {vow_label_str()}_inx
 , {owner_name_str()}_inx
 , {acct_name_str()}_inx
 , {credit_belief_str()}
@@ -252,7 +252,7 @@ VALUES
         assert get_row_count(cursor, budacct_v_agg_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
-, {fisc_label_str()}
+, {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_belief_str()}

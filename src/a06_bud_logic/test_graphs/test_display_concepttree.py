@@ -24,7 +24,7 @@ def test_display_concepttree_Scenario0(graphics_bool):
     a_bud = get_budunit_with_4_levels()
     # a_bud = budunit_v001()
     a_bud.settle_bud()
-    print(f"Bud {a_bud.fisc_label}: Labels ({len(a_bud._concept_dict)})")
+    print(f"Bud {a_bud.vow_label}: Labels ({len(a_bud._concept_dict)})")
 
     # WHEN / THEN
     x_fig = display_concepttree(a_bud, graphics_bool)
@@ -39,7 +39,7 @@ def test_display_concepttree_Scenario1_shows_Tasks(graphics_bool):
     a_bud = get_budunit_laundry_example1()
     # a_bud = budunit_v001()
     a_bud.settle_bud()
-    print(f"Bud {a_bud.fisc_label}: Labels ({len(a_bud._concept_dict)})")
+    print(f"Bud {a_bud.vow_label}: Labels ({len(a_bud._concept_dict)})")
 
     # WHEN / THEN
     display_concepttree(a_bud, mode="Task", graphics_bool=graphics_bool)

@@ -22,16 +22,16 @@ from src.a06_bud_logic._test_util.a06_str import (
 )
 from src.a08_bud_atom_logic.atom_config import get_bud_dimens, get_delete_key_name
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
-from src.a15_fisc_logic._test_util.a15_str import (
-    fisc_cashbook_str,
-    fisc_dealunit_str,
-    fisc_timeline_hour_str,
-    fisc_timeline_month_str,
-    fisc_timeline_weekday_str,
-    fisc_timeoffi_str,
-    fiscunit_str,
+from src.a15_vow_logic._test_util.a15_str import (
+    vow_cashbook_str,
+    vow_dealunit_str,
+    vow_timeline_hour_str,
+    vow_timeline_month_str,
+    vow_timeline_weekday_str,
+    vow_timeoffi_str,
+    vowunit_str,
 )
-from src.a15_fisc_logic.fisc_config import get_fisc_dimens
+from src.a15_vow_logic.vow_config import get_vow_dimens
 from src.a16_pidgin_logic._test_util.a16_str import (
     inx_bridge_str,
     otx_bridge_str,
@@ -61,10 +61,10 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_sound_raw_update_inconsist_error_message_sqlstr,
     get_bud_voice_agg_tablenames,
     get_dimen_abbv7,
-    get_fisc_bud_sound_agg_tablenames,
     get_insert_into_sound_vld_sqlstrs,
     get_insert_into_voice_raw_sqlstrs,
     get_prime_create_table_sqlstrs,
+    get_vow_bud_sound_agg_tablenames,
 )
 
 BUD_PRIME_TABLENAMES = {
@@ -156,7 +156,7 @@ def create_pidgin_sound_agg_table_sqlstr(x_dimen):
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
-def create_fisc_sound_agg_table_sqlstr(x_dimen):
+def create_vow_sound_agg_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg")
     columns = get_all_dimen_columns_set(x_dimen)
     columns.add("error_message")
@@ -164,7 +164,7 @@ def create_fisc_sound_agg_table_sqlstr(x_dimen):
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
-def create_fisc_sound_vld_table_sqlstr(x_dimen):
+def create_vow_sound_vld_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "vld")
     columns = get_all_dimen_columns_set(x_dimen)
     columns = get_default_sorted_list(columns)
@@ -207,7 +207,7 @@ def create_pidgin_core_vld_table_sqlstr(x_dimen):
     return sqlstr
 
 
-def create_fisc_voice_raw_table_sqlstr(x_dimen):
+def create_vow_voice_raw_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "raw")
     columns = get_all_dimen_columns_set(x_dimen)
     columns = find_set_otx_inx_args(columns)
@@ -216,7 +216,7 @@ def create_fisc_voice_raw_table_sqlstr(x_dimen):
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
-def create_fisc_voice_agg_table_sqlstr(x_dimen: str):
+def create_vow_voice_agg_table_sqlstr(x_dimen: str):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "agg")
     columns = get_all_dimen_columns_set(x_dimen)
     columns.remove(event_int_str())
@@ -365,20 +365,20 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckPidginCoreDimens():
     assert expected_s_vld_sqlstr == create_table_sqlstrs.get(s_vld_tablename)
 
 
-def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckFiscDimens():
+def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckVowDimens():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
     create_table_sqlstrs = get_prime_create_table_sqlstrs()
 
     # THEN
     idea_config = get_idea_config_dict()
-    fisc_dimens_config = {
+    vow_dimens_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) == "fisc"
+        if dimen_config.get(idea_category_str()) == "vow"
     }
 
-    for x_dimen in fisc_dimens_config:
+    for x_dimen in vow_dimens_config:
         # print(f"{abbv7} {x_dimen} checking...")
         s_raw_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "raw")
         s_agg_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg")
@@ -386,10 +386,10 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckFiscDimens():
         v_raw_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "raw")
         v_agg_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "agg")
         expected_s_raw_sqlstr = create_pidgin_sound_raw_table_sqlstr(x_dimen)
-        expected_s_agg_sqlstr = create_fisc_sound_agg_table_sqlstr(x_dimen)
-        expected_s_vld_sqlstr = create_fisc_sound_vld_table_sqlstr(x_dimen)
-        expected_v_raw_sqlstr = create_fisc_voice_raw_table_sqlstr(x_dimen)
-        expected_v_agg_sqlstr = create_fisc_voice_agg_table_sqlstr(x_dimen)
+        expected_s_agg_sqlstr = create_vow_sound_agg_table_sqlstr(x_dimen)
+        expected_s_vld_sqlstr = create_vow_sound_vld_table_sqlstr(x_dimen)
+        expected_v_raw_sqlstr = create_vow_voice_raw_table_sqlstr(x_dimen)
+        expected_v_agg_sqlstr = create_vow_voice_agg_table_sqlstr(x_dimen)
         abbv7 = get_dimen_abbv7(x_dimen)
         print(f'CREATE_{abbv7.upper()}_SOUND_RAW_SQLSTR= """{expected_s_raw_sqlstr}"""')
         print(f'CREATE_{abbv7.upper()}_SOUND_AGG_SQLSTR= """{expected_s_agg_sqlstr}"""')
@@ -485,34 +485,34 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
     # THEN
     assert create_table_sqlstrs
     pidgin_dimens_count = len(get_pidgin_dimens()) * 3
-    fisc_dimens_count = len(get_fisc_dimens()) * 5
+    vow_dimens_count = len(get_vow_dimens()) * 5
     bud_dimens_count = len(get_bud_dimens()) * 10
     print(f"{pidgin_dimens_count=}")
-    print(f"{fisc_dimens_count=}")
+    print(f"{vow_dimens_count=}")
     print(f"{bud_dimens_count=}")
-    all_dimens_count = pidgin_dimens_count + fisc_dimens_count + bud_dimens_count
+    all_dimens_count = pidgin_dimens_count + vow_dimens_count + bud_dimens_count
     pidgin_core_count = 3
     all_dimens_count += pidgin_core_count
     assert len(create_table_sqlstrs) == all_dimens_count
 
 
-def test_get_fisc_bud_sound_agg_tablenames_ReturnsObj():
+def test_get_vow_bud_sound_agg_tablenames_ReturnsObj():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
-    fisc_bud_sound_agg_tablenames = get_fisc_bud_sound_agg_tablenames()
+    vow_bud_sound_agg_tablenames = get_vow_bud_sound_agg_tablenames()
 
     # THEN
-    assert fisc_bud_sound_agg_tablenames
+    assert vow_bud_sound_agg_tablenames
     expected_sound_agg_tablenames = set()
     for bud_dimen in get_bud_dimens():
         expected_sound_agg_tablenames.add(prime_tbl(bud_dimen, "s", "agg", "put"))
         expected_sound_agg_tablenames.add(prime_tbl(bud_dimen, "s", "agg", "del"))
-    for fisc_dimen in get_fisc_dimens():
-        expected_sound_agg_tablenames.add(prime_tbl(fisc_dimen, "s", "agg"))
+    for vow_dimen in get_vow_dimens():
+        expected_sound_agg_tablenames.add(prime_tbl(vow_dimen, "s", "agg"))
     print(sorted(list(expected_sound_agg_tablenames)))
-    assert expected_sound_agg_tablenames == fisc_bud_sound_agg_tablenames
-    agg_tablenames = fisc_bud_sound_agg_tablenames
-    assert len(agg_tablenames) == len(get_bud_dimens()) * 2 + len(get_fisc_dimens())
+    assert expected_sound_agg_tablenames == vow_bud_sound_agg_tablenames
+    agg_tablenames = vow_bud_sound_agg_tablenames
+    assert len(agg_tablenames) == len(get_bud_dimens()) * 2 + len(get_vow_dimens())
     assert agg_tablenames.issubset(set(get_prime_create_table_sqlstrs().keys()))
 
 
@@ -532,10 +532,10 @@ def test_get_bud_voice_agg_tablenames_ReturnsObj_BudDimens():
     assert agg_tablenames.issubset(set(get_prime_create_table_sqlstrs().keys()))
 
 
-def test_create_sound_and_voice_tables_CreatesFiscRawTables():
+def test_create_sound_and_voice_tables_CreatesVowRawTables():
     # ESTABLISH
-    with sqlite3_connect(":memory:") as fisc_db_conn:
-        cursor = fisc_db_conn.cursor()
+    with sqlite3_connect(":memory:") as vow_db_conn:
+        cursor = vow_db_conn.cursor()
         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
         assert cursor.fetchone()[0] == 0
         agg_str = "agg"
@@ -642,10 +642,10 @@ WHERE inconsistency_rows.event_int = pidgin_title_s_raw.event_int
         assert update_sqlstr == static_example_sqlstr
 
 
-def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scenario1_FiscDimen():
+def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scenario1_VowDimen():
     # sourcery skip: extract-method
     # ESTABLISH
-    dimen = fisc_timeline_hour_str()
+    dimen = vow_timeline_hour_str()
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
@@ -667,16 +667,16 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
         assert update_sqlstr == expected_update_sqlstr
 
         static_example_sqlstr = """WITH inconsistency_rows AS (
-SELECT fisc_label, cumlative_minute
-FROM fisc_timeline_hour_s_raw
-GROUP BY fisc_label, cumlative_minute
+SELECT vow_label, cumlative_minute
+FROM vow_timeline_hour_s_raw
+GROUP BY vow_label, cumlative_minute
 HAVING MIN(hour_label) != MAX(hour_label)
 )
-UPDATE fisc_timeline_hour_s_raw
+UPDATE vow_timeline_hour_s_raw
 SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
-WHERE inconsistency_rows.fisc_label = fisc_timeline_hour_s_raw.fisc_label
-    AND inconsistency_rows.cumlative_minute = fisc_timeline_hour_s_raw.cumlative_minute
+WHERE inconsistency_rows.vow_label = vow_timeline_hour_s_raw.vow_label
+    AND inconsistency_rows.cumlative_minute = vow_timeline_hour_s_raw.cumlative_minute
 ;
 """
         # print(update_sqlstr)
@@ -708,9 +708,9 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
         assert update_sqlstr == expected_update_sqlstr
 
         static_example_sqlstr = """WITH inconsistency_rows AS (
-SELECT event_int, face_name, fisc_label, owner_name, concept_way, awardee_title
+SELECT event_int, face_name, vow_label, owner_name, concept_way, awardee_title
 FROM bud_concept_awardlink_s_put_raw
-GROUP BY event_int, face_name, fisc_label, owner_name, concept_way, awardee_title
+GROUP BY event_int, face_name, vow_label, owner_name, concept_way, awardee_title
 HAVING MIN(give_force) != MAX(give_force)
     OR MIN(take_force) != MAX(take_force)
 )
@@ -719,7 +719,7 @@ SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.event_int = bud_concept_awardlink_s_put_raw.event_int
     AND inconsistency_rows.face_name = bud_concept_awardlink_s_put_raw.face_name
-    AND inconsistency_rows.fisc_label = bud_concept_awardlink_s_put_raw.fisc_label
+    AND inconsistency_rows.vow_label = bud_concept_awardlink_s_put_raw.vow_label
     AND inconsistency_rows.owner_name = bud_concept_awardlink_s_put_raw.owner_name
     AND inconsistency_rows.concept_way = bud_concept_awardlink_s_put_raw.concept_way
     AND inconsistency_rows.awardee_title = bud_concept_awardlink_s_put_raw.awardee_title
@@ -767,10 +767,10 @@ GROUP BY event_int, face_name, otx_title
         assert update_sqlstrs[0] == static_example_sqlstr
 
 
-def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario1_FiscDimen():
+def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario1_VowDimen():
     # sourcery skip: extract-method
     # ESTABLISH
-    dimen = fisc_timeline_hour_str()
+    dimen = vow_timeline_hour_str()
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
@@ -799,11 +799,11 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario1_FiscDimen():
         print(expected_insert_sqlstr)
         assert update_sqlstrs[0] == expected_insert_sqlstr
 
-        static_example_sqlstr = """INSERT INTO fisc_timeline_hour_s_agg (event_int, face_name, fisc_label, cumlative_minute, hour_label)
-SELECT event_int, face_name, fisc_label, cumlative_minute, MAX(hour_label)
-FROM fisc_timeline_hour_s_raw
+        static_example_sqlstr = """INSERT INTO vow_timeline_hour_s_agg (event_int, face_name, vow_label, cumlative_minute, hour_label)
+SELECT event_int, face_name, vow_label, cumlative_minute, MAX(hour_label)
+FROM vow_timeline_hour_s_raw
 WHERE error_message IS NULL
-GROUP BY event_int, face_name, fisc_label, cumlative_minute
+GROUP BY event_int, face_name, vow_label, cumlative_minute
 ;
 """
         print(update_sqlstrs[0])
@@ -837,11 +837,11 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario2_BudDimen():
         # print(put_expected_insert_sqlstr)
         assert update_sqlstrs[0] == put_expected_insert_sqlstr
 
-        static_example_put_sqlstr = """INSERT INTO bud_concept_awardlink_s_put_agg (event_int, face_name, fisc_label, owner_name, concept_way, awardee_title, give_force, take_force)
-SELECT event_int, face_name, fisc_label, owner_name, concept_way, awardee_title, MAX(give_force), MAX(take_force)
+        static_example_put_sqlstr = """INSERT INTO bud_concept_awardlink_s_put_agg (event_int, face_name, vow_label, owner_name, concept_way, awardee_title, give_force, take_force)
+SELECT event_int, face_name, vow_label, owner_name, concept_way, awardee_title, MAX(give_force), MAX(take_force)
 FROM bud_concept_awardlink_s_put_raw
 WHERE error_message IS NULL
-GROUP BY event_int, face_name, fisc_label, owner_name, concept_way, awardee_title
+GROUP BY event_int, face_name, vow_label, owner_name, concept_way, awardee_title
 ;
 """
         # print(update_sqlstrs[0])
@@ -868,10 +868,10 @@ GROUP BY event_int, face_name, fisc_label, owner_name, concept_way, awardee_titl
         print(update_sqlstrs[1])
         assert update_sqlstrs[1] == del_expected_insert_sqlstr
 
-        static_example_del_sqlstr = """INSERT INTO bud_concept_awardlink_s_del_agg (event_int, face_name, fisc_label, owner_name, concept_way, awardee_title_ERASE)
-SELECT event_int, face_name, fisc_label, owner_name, concept_way, awardee_title_ERASE
+        static_example_del_sqlstr = """INSERT INTO bud_concept_awardlink_s_del_agg (event_int, face_name, vow_label, owner_name, concept_way, awardee_title_ERASE)
+SELECT event_int, face_name, vow_label, owner_name, concept_way, awardee_title_ERASE
 FROM bud_concept_awardlink_s_del_raw
-GROUP BY event_int, face_name, fisc_label, owner_name, concept_way, awardee_title_ERASE
+GROUP BY event_int, face_name, vow_label, owner_name, concept_way, awardee_title_ERASE
 ;
 """
         assert update_sqlstrs[1] == static_example_del_sqlstr
@@ -1053,14 +1053,14 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_BudDimens():
             assert insert_s_vld_sqlstrs.get(s_del_vld_tbl) == s_del_vld_insert_select
 
 
-def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_FiscDimens():
+def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_VowDimens():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH
     idea_config = get_idea_config_dict()
-    fisc_dimens_config = {
+    vow_dimens_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) == "fisc"
+        if dimen_config.get(idea_category_str()) == "vow"
     }
 
     # WHEN
@@ -1071,10 +1071,10 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_FiscDimens():
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
 
-        for fisc_dimen in fisc_dimens_config:
-            # print(f"{fisc_dimen=}")
-            s_agg_tablename = prime_tbl(fisc_dimen, "s", "agg")
-            s_vld_tablename = prime_tbl(fisc_dimen, "s", "vld")
+        for vow_dimen in vow_dimens_config:
+            # print(f"{vow_dimen=}")
+            s_agg_tablename = prime_tbl(vow_dimen, "s", "agg")
+            s_vld_tablename = prime_tbl(vow_dimen, "s", "vld")
             s_agg_cols = get_table_columns(cursor, s_agg_tablename)
             s_agg_cols.remove("error_message")
             s_vld_cols = get_table_columns(cursor, s_vld_tablename)
@@ -1088,7 +1088,7 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_FiscDimens():
             s_agg_select_sql = f"{s_agg_select_sql}{where_clause}"
             s_vld_insert_select = f"{s_vld_insert_sql} {s_agg_select_sql}"
             # create_select_query(cursor=)
-            abbv7 = get_dimen_abbv7(fisc_dimen)
+            abbv7 = get_dimen_abbv7(vow_dimen)
             sqlstr_ref = f"INSERT_{abbv7.upper()}_SOUND_VLD_SQLSTR"
             print(f'{sqlstr_ref}= "{s_vld_insert_select}"')
             # print(f""""{s_vld_tablename}": {sqlstr_ref},""")
@@ -1157,14 +1157,14 @@ def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_BudDimens():
             assert insert_v_raw_sqlstrs.get(v_del_raw_tbl) == v_del_raw_insert_select
 
 
-def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_FiscDimens():
+def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_VowDimens():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH
     idea_config = get_idea_config_dict()
-    fisc_dimens_config = {
+    vow_dimens_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) == "fisc"
+        if dimen_config.get(idea_category_str()) == "vow"
     }
 
     # WHEN
@@ -1175,10 +1175,10 @@ def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_FiscDimens():
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
 
-        for fisc_dimen in fisc_dimens_config:
-            # print(f"{fisc_dimen=}")
-            s_vld_tablename = prime_tbl(fisc_dimen, "s", "vld")
-            v_raw_tablename = prime_tbl(fisc_dimen, "v", "raw")
+        for vow_dimen in vow_dimens_config:
+            # print(f"{vow_dimen=}")
+            s_vld_tablename = prime_tbl(vow_dimen, "s", "vld")
+            v_raw_tablename = prime_tbl(vow_dimen, "v", "raw")
             s_cols = get_table_columns(cursor, s_vld_tablename)
             v_raw_cols = get_table_columns(cursor, v_raw_tablename)
             v_raw_cols.remove("error_message")
@@ -1190,7 +1190,7 @@ def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_FiscDimens():
             s_vld_select_sql = get_select_sql(cursor, s_vld_tbl, s_cols, flat_bool=True)
             v_raw_insert_select = f"{v_raw_insert_sql} {s_vld_select_sql}"
             # create_select_query(cursor=)
-            abbv7 = get_dimen_abbv7(fisc_dimen)
+            abbv7 = get_dimen_abbv7(vow_dimen)
             sqlstr_ref = f"INSERT_{abbv7.upper()}_VOICE_RAW_SQLSTR"
             print(f'{sqlstr_ref}= "{v_raw_insert_select}"')
             # print(f""""{v_raw_tablename}": {sqlstr_ref},""")

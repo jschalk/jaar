@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import get_dir_file_strs
-from src.a02_finance_logic._test_util.a02_str import fisc_label_str, owner_name_str
+from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
 from src.a06_bud_logic._test_util.a06_str import (
     acct_name_str,
     acct_pool_str,
@@ -23,7 +23,7 @@ from src.a06_bud_logic._test_util.a06_str import (
     stop_want_str,
 )
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
-from src.a15_fisc_logic._test_util.a15_str import fiscunit_str
+from src.a15_vow_logic._test_util.a15_str import vowunit_str
 from src.a17_idea_logic._test_util.a17_env import src_module_dir
 from src.a17_idea_logic._test_util.a17_str import attributes_str
 from src.a17_idea_logic.idea import (
@@ -79,7 +79,11 @@ def test_get_idearef_obj_ReturnsObj():
 
     # THEN
     assert x_idearef.idea_name == idea_name_00021
-    assert set(x_idearef.dimens) == {bud_acctunit_str(), budunit_str(), fiscunit_str()}
+    assert set(x_idearef.dimens) == {
+        bud_acctunit_str(),
+        budunit_str(),
+        vowunit_str(),
+    }
     assert x_idearef._attributes != {}
     assert len(x_idearef._attributes) == 7
 
@@ -93,7 +97,7 @@ def test_get_headers_list_ReturnsObj():
     assert format_00021_headers == [
         event_int_str(),
         face_name_str(),
-        fisc_label_str(),
+        vow_label_str(),
         owner_name_str(),
         acct_name_str(),
         credit_belief_str(),
@@ -120,7 +124,7 @@ def test_get_sorted_headers_str_ReturnsObj():
     br00021_headers = get_sorted_headers_str(idea_format_00021_bud_acctunit_v0_0_0())
     # THEN
     assert (
-        br00021_headers == "fisc_label,owner_name,acct_name,credit_belief,debtit_belief"
+        br00021_headers == "vow_label,owner_name,acct_name,credit_belief,debtit_belief"
     )
 
     # ESTABLISH / WHEN
@@ -128,7 +132,7 @@ def test_get_sorted_headers_str_ReturnsObj():
 
     # THEN
     print(f"{br00019_headers=}")
-    concept_headers_str = "fisc_label,owner_name,concept_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want"
+    concept_headers_str = "vow_label,owner_name,concept_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want"
     assert br00019_headers == concept_headers_str
 
 
@@ -210,13 +214,13 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00021_bud_acctunit_v0_0_0()
         "debtit_belief": {"otx_key": False},
         "event_int": {"otx_key": True},
         "face_name": {"otx_key": True},
-        "fisc_label": {"otx_key": True},
+        "vow_label": {"otx_key": True},
         "owner_name": {"otx_key": True},
     }
     headers_list = format_00001_idearef.get_headers_list()
     assert headers_list[0] == event_int_str()
     assert headers_list[1] == face_name_str()
-    assert headers_list[2] == fisc_label_str()
+    assert headers_list[2] == vow_label_str()
     assert headers_list[3] == owner_name_str()
     assert headers_list[4] == acct_name_str()
     assert headers_list[5] == credit_belief_str()
@@ -235,7 +239,7 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00020_bud_acct_membership_v
     headers_list = format_00021_idearef.get_headers_list()
     assert headers_list[0] == event_int_str()
     assert headers_list[1] == face_name_str()
-    assert headers_list[2] == fisc_label_str()
+    assert headers_list[2] == vow_label_str()
     assert headers_list[3] == owner_name_str()
     assert headers_list[4] == acct_name_str()
     assert headers_list[5] == group_title_str()
@@ -255,7 +259,7 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00013_conceptunit_v0_0_0():
     headers_list = format_00003_idearef.get_headers_list()
     assert headers_list[0] == event_int_str()
     assert headers_list[1] == face_name_str()
-    assert headers_list[2] == fisc_label_str()
+    assert headers_list[2] == vow_label_str()
     assert headers_list[3] == owner_name_str()
     assert headers_list[4] == concept_way_str()
     assert headers_list[5] == mass_str()
@@ -274,7 +278,7 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00019_conceptunit_v0_0_0():
     headers_list = format_00019_idearef.get_headers_list()
     assert headers_list[0] == event_int_str()
     assert headers_list[1] == face_name_str()
-    assert headers_list[2] == fisc_label_str()
+    assert headers_list[2] == vow_label_str()
     assert headers_list[3] == owner_name_str()
     assert headers_list[4] == concept_way_str()
     assert headers_list[5] == begin_str()

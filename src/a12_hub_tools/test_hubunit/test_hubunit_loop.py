@@ -37,7 +37,7 @@ def test_HubUnit_get_dw_perspective_bud_ReturnsBudWith_owner_nameSetToHubUnit_ow
     bob_budunit = get_budunit_with_4_levels()
     bob_budunit.set_owner_name(bob_str)
     bob_hubunit = hubunit_shop(env_dir(), a23_str, bob_str)
-    save_job_file(bob_hubunit.fisc_mstr_dir, bob_budunit)
+    save_job_file(bob_hubunit.vow_mstr_dir, bob_budunit)
 
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)

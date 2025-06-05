@@ -4,7 +4,7 @@ from src.a06_bud_logic.bud import BudUnit, budunit_shop
 
 def get_budunit_with_4_levels() -> BudUnit:
     a23_str = "accord23"
-    sue_bud = budunit_shop(owner_name="Sue", fisc_label=a23_str, tally=10)
+    sue_bud = budunit_shop(owner_name="Sue", vow_label=a23_str, tally=10)
 
     casa = "casa"
     sue_bud.set_l1_concept(conceptunit_shop(casa, mass=30, pledge=True))

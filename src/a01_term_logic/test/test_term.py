@@ -6,13 +6,13 @@ from src.a01_term_logic.term import (
     BridgeTerm,
     EventInt,
     FaceName,
-    FiscLabel,
     GroupTitle,
     HealerName,
     LabelTerm,
     NameTerm,
     OwnerName,
     TitleTerm,
+    VowLabel,
     WayTerm,
     YawTerm,
     default_bridge_if_None,
@@ -204,12 +204,12 @@ def test_EventInt_Exists():
     assert EventInt(12.4) == 12
 
 
-def test_FiscLabel_Exists():
+def test_VowLabel_Exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_fisc = FiscLabel(empty_str)
+    x_vow = VowLabel(empty_str)
     # THEN
-    assert x_fisc == empty_str
-    doc_str = f"An AxiomLabel for a Fisc Moment. Cannot contain {bridge_str()}"
-    assert inspect_getdoc(x_fisc) == doc_str
+    assert x_vow == empty_str
+    doc_str = f"An AxiomLabel for a Vow Vow. Cannot contain {bridge_str()}"
+    assert inspect_getdoc(x_vow) == doc_str

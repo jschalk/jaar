@@ -24,7 +24,7 @@ def test_BudUnit_get_relevant_ways_EmptyWayTermReturnsEmpty():
 def test_BudUnit_get_relevant_ways_RootWayTermReturnsOnlyItself():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    root_way = to_way(sue_bud.fisc_label)
+    root_way = to_way(sue_bud.vow_label)
 
     # WHEN
     root_dict = {root_way: -1}
@@ -39,7 +39,7 @@ def test_BudUnit_get_relevant_ways_RootWayTermReturnsOnlyItself():
 def test_BudUnit_get_relevant_ways_SimpleReturnsOnlyAncestors():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    root_way = to_way(sue_bud.fisc_label)
+    root_way = to_way(sue_bud.vow_label)
 
     # WHEN
     wk_str = "wkdays"
@@ -68,7 +68,7 @@ def test_BudUnit_get_relevant_ways_ReturnsSimpleReasonUnitRcontext():
     unim_str = "unimportant"
     unim_way = sue_bud.make_l1_way(unim_str)
     unim_concept = conceptunit_shop(unim_str)
-    sue_bud.set_concept(unim_concept, parent_way=sue_bud.fisc_label)
+    sue_bud.set_concept(unim_concept, parent_way=sue_bud.vow_label)
 
     status_str = "cleaniness status"
     status_way = sue_bud.make_way(casa_way, status_str)
@@ -85,7 +85,7 @@ def test_BudUnit_get_relevant_ways_ReturnsSimpleReasonUnitRcontext():
     # THEN
     print(f"{relevant_ways=}")
     assert len(relevant_ways) == 4
-    root_way = to_way(sue_bud.fisc_label)
+    root_way = to_way(sue_bud.vow_label)
     assert relevant_ways == {root_way, casa_way, status_way, floor_way}
     assert unim_way not in relevant_ways
 
@@ -93,7 +93,7 @@ def test_BudUnit_get_relevant_ways_ReturnsSimpleReasonUnitRcontext():
 def test_BudUnit_get_relevant_ways_ReturnsReasonUnitRcontextAndDescendents():
     # ESTABLISH
     x_bud = get_mop_with_reason_budunit_example1()
-    root_way = to_way(x_bud.fisc_label)
+    root_way = to_way(x_bud.vow_label)
     casa_str = "casa"
     casa_way = x_bud.make_l1_way(casa_str)
     floor_str = "mop floor"
@@ -145,7 +145,7 @@ def test_BudUnit_get_relevant_ways_ReturnSimple():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(owner_name=yao_str)
-    root_way = to_way(yao_bud.fisc_label)
+    root_way = to_way(yao_bud.vow_label)
     min_range_x_str = "a_minute_range"
     min_range_x_way = yao_bud.make_l1_way(min_range_x_str)
     min_range_concept = conceptunit_shop(min_range_x_str, begin=0, close=2880)

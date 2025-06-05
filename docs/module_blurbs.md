@@ -13,13 +13,13 @@ What does each one do?
 - **a08_bud_atom_logic**: Defines the structure and behavior of budget atoms, which are single units of budget and concepts used in a budget.
 - **a09_pack_logic**: Manages the creation and organization of packs, which are collections of budget atoms for building complex budgets.
 - **a10_bud_calc**: Expresses the calculations performed when a budget is "settled" to determine final amounts for each concept and account.
-- **a11_deal_cell_logic**: When a fiscal system decides to empower a budget the funds must be distributed
+- **a11_deal_cell_logic**: When a vow system decides to empower a budget the funds must be distributed
 - **a12_hub_tools**: These tools are used to handle complex operations involving bud files, will be deprecated.
 - **a13_bud_listen_logic**: These tools describe how one budget listens to another
 - **a14_keep_logic**: Builds a simulation that describes how much credit a healer has earned 
-- **a15_fisc_logic**: A FiscUnit is a Fiscal system with the basic requirements: common system of time, acct tranactions ledger, etc. Importantly a Fiscal system must know the state of a owner's budget at any time in the past. 
+- **a15_vow_logic**: A VowUnit is a Vow system with the basic requirements: common system of time, acct tranactions ledger, etc. Importantly a Vow system must know the state of a owner's budget at any time in the past. 
 - **a16_pidgin_logic**: A tool that translates words from outside language to inside language.  
-- **a17_idea_logic**: idea bricks are tables of data that build fiscal systems and the budgets within them.
+- **a17_idea_logic**: idea bricks are tables of data that build vow systems and the budgets within them.
 - **a18_etl_toolbox**: 
 - **a19_world_logic**: *(description needed)*
 - **a20_lobby_logic**: *(description needed)*

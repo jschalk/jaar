@@ -88,7 +88,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "denom": "int",
         "face_name": "NameTerm",
         "fcontext": "WayTerm",
-        "fisc_label": "LabelTerm",
+        "vow_label": "LabelTerm",
         "fstate": "WayTerm",
         "fnigh": "float",
         "fopen": "float",
@@ -178,7 +178,7 @@ def get_pidginable_args() -> set:
         "awardee_title",
         "face_name",
         "fcontext",
-        "fisc_label",
+        "vow_label",
         "fstate",
         "group_title",
         "healer_name",
@@ -228,7 +228,7 @@ def get_pidgin_TitleTerm_args() -> set[str]:
 
 def get_pidgin_LabelTerm_args() -> set[str]:
     return {
-        "fisc_label",
+        "vow_label",
         "hour_label",
         "month_label",
         "timeline_label",

@@ -149,7 +149,7 @@ def get_bud_calc_args_sqlite_datatype_dict() -> dict[str, str]:
         "give_force": "REAL",
         "take_force": "REAL",
         "rcontext": "TEXT",
-        "fisc_label": "TEXT",
+        "vow_label": "TEXT",
         "fcontext": "TEXT",
         "fstate": "TEXT",
         "fnigh": "REAL",

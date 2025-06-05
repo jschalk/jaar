@@ -2,7 +2,7 @@ from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import x_is_json
 from src.a01_term_logic.way import create_way, to_way
 from src.a03_group_logic.acct import acctunit_shop
-from src.a05_concept_logic.concept import get_default_fisc_label as root_label
+from src.a05_concept_logic.concept import get_default_vow_label as root_label
 from src.a06_bud_logic._test_util.a06_str import (
     acct_name_str,
     awardee_title_str,
@@ -331,12 +331,12 @@ def test_BudDelta_get_sorted_budatoms_ReturnsObj():
 
 def test_BudDelta_get_sorted_budatoms_ReturnsObj_ConceptUnitsSorted():
     # ESTABLISH
-    x_fisc_label = root_label()
-    root_way = to_way(x_fisc_label)
+    x_vow_label = root_label()
+    root_way = to_way(x_vow_label)
     sports_str = "sports"
-    sports_way = create_way(x_fisc_label, sports_str)
+    sports_way = create_way(x_vow_label, sports_str)
     knee_str = "knee"
-    knee_way = create_way(x_fisc_label, knee_str)
+    knee_way = create_way(x_vow_label, knee_str)
     x_dimen = bud_conceptunit_str()
     sports_insert_conceptunit_budatom = budatom_shop(x_dimen, INSERT_str())
     sports_insert_conceptunit_budatom.set_jkey(concept_way_str(), sports_way)
@@ -364,9 +364,9 @@ def test_BudDelta_get_sorted_budatoms_ReturnsObj_ConceptUnitsSorted():
 
 def test_BudDelta_get_sorted_budatoms_ReturnsObj_Way_Sorted():
     # ESTABLISH
-    x_fisc_label = root_label()
+    x_vow_label = root_label()
     sports_str = "sports"
-    sports_way = create_way(x_fisc_label, sports_str)
+    sports_way = create_way(x_vow_label, sports_str)
     knee_str = "knee"
     knee_way = create_way(sports_way, knee_str)
     x_dimen = bud_concept_awardlink_str()

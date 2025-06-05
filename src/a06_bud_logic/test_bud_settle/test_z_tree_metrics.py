@@ -100,7 +100,7 @@ def test_BudUnit_get_tree_metrics_Returns_pledge_ConceptWayTerm():
     # WHEN / THEN
     traain_way = create_way_from_labels(
         [
-            yao_bud.fisc_label,
+            yao_bud.vow_label,
             "ACME",
             "ACME Employee Responsiblities",
             "Know Abuse Deterrence and Reporting guildlines",

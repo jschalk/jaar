@@ -1,7 +1,7 @@
 from pytest import raises as pytest_raises
 from src.a05_concept_logic.concept import (
     conceptunit_shop,
-    get_default_fisc_label as root_label,
+    get_default_vow_label as root_label,
 )
 
 
@@ -17,7 +17,7 @@ def test_conceptunit_shop_With_root_TrueReturnsObj():
     assert x_conceptroot.root is True
 
 
-def test_ConceptUnit_set_concept_label_get_default_fisc_label_DoesNotRaisesError():
+def test_ConceptUnit_set_concept_label_get_default_vow_label_DoesNotRaisesError():
     # ESTABLISH
     x_conceptroot = conceptunit_shop(root=True)
 
@@ -31,7 +31,7 @@ def test_ConceptUnit_set_concept_label_get_default_fisc_label_DoesNotRaisesError
 def test_ConceptUnit_set_concept_label_DoesNotRaisesError():
     # ESTABLISH
     el_paso_str = "El Paso"
-    x_conceptroot = conceptunit_shop(root=True, fisc_label=el_paso_str)
+    x_conceptroot = conceptunit_shop(root=True, vow_label=el_paso_str)
 
     # WHEN
     x_conceptroot.set_concept_label(concept_label=el_paso_str)
@@ -43,7 +43,7 @@ def test_ConceptUnit_set_concept_label_DoesNotRaisesError():
 def test_ConceptUnit_set_concept_label_DoesRaisesError():
     # ESTABLISH
     el_paso_str = "El Paso"
-    x_conceptroot = conceptunit_shop(root=True, fisc_label=el_paso_str)
+    x_conceptroot = conceptunit_shop(root=True, vow_label=el_paso_str)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -55,7 +55,7 @@ def test_ConceptUnit_set_concept_label_DoesRaisesError():
     )
 
 
-def test_ConceptUnit_set_concept_label_RaisesErrorWhenfisc_label_IsNone():
+def test_ConceptUnit_set_concept_label_RaisesErrorWhenvow_label_IsNone():
     # ESTABLISH
     x_conceptroot = conceptunit_shop(root=True)
 

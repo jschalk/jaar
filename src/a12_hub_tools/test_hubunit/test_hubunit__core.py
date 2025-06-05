@@ -11,7 +11,7 @@ from src.a02_finance_logic.finance_config import (
     filter_penny,
     validate_fund_pool,
 )
-from src.a05_concept_logic.concept import get_default_fisc_label as root_label
+from src.a05_concept_logic.concept import get_default_vow_label as root_label
 from src.a12_hub_tools._test_util.a12_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
@@ -25,8 +25,8 @@ def test_HubUnit_Exists():
     x_hubunit = HubUnit()
 
     # THEN
-    assert not x_hubunit.fisc_mstr_dir
-    assert not x_hubunit.fisc_label
+    assert not x_hubunit.vow_mstr_dir
+    assert not x_hubunit.vow_label
     assert not x_hubunit.owner_name
     assert not x_hubunit.keep_way
     assert not x_hubunit.bridge
@@ -56,8 +56,8 @@ def test_HubUnit_RaisesError_keep_way_DoesNotExist():
 
 def test_hubunit_shop_ReturnsObj():
     # ESTABLISH
-    x_fisc_mstr_dir = "src/a15_fisc_logic/_test_util"
-    x_fisc_label = "accord45"
+    x_vow_mstr_dir = "src/a15_vow_logic/_test_util"
+    x_vow_label = "accord45"
     sue_str = "Sue"
     x_bridge = "/"
     x_fund_pool = 13000
@@ -68,8 +68,8 @@ def test_hubunit_shop_ReturnsObj():
 
     # WHEN
     x_hubunit = hubunit_shop(
-        fisc_mstr_dir=x_fisc_mstr_dir,
-        fisc_label=x_fisc_label,
+        vow_mstr_dir=x_vow_mstr_dir,
+        vow_label=x_vow_label,
         owner_name=sue_str,
         keep_way=None,
         bridge=x_bridge,
@@ -81,8 +81,8 @@ def test_hubunit_shop_ReturnsObj():
     )
 
     # THEN
-    assert x_hubunit.fisc_mstr_dir == x_fisc_mstr_dir
-    assert x_hubunit.fisc_label == x_fisc_label
+    assert x_hubunit.vow_mstr_dir == x_vow_mstr_dir
+    assert x_hubunit.vow_label == x_vow_label
     assert x_hubunit.owner_name == sue_str
     assert x_hubunit.bridge == x_bridge
     assert x_hubunit.fund_pool == x_fund_pool
@@ -90,7 +90,7 @@ def test_hubunit_shop_ReturnsObj():
     assert x_hubunit.respect_bit == x_respect_bit
     assert x_hubunit.penny == x_penny
     assert x_hubunit.keep_point_magnitude == x_money_magnitude
-    sue_dir = create_owner_dir_path(x_fisc_mstr_dir, x_fisc_label, sue_str)
+    sue_dir = create_owner_dir_path(x_vow_mstr_dir, x_vow_label, sue_str)
     assert x_hubunit._keeps_dir == create_path(sue_dir, "keeps")
     assert x_hubunit._atoms_dir == create_path(sue_dir, "atoms")
     assert x_hubunit._packs_dir == create_path(sue_dir, "packs")
@@ -105,26 +105,26 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     usa_way = create_way(nation_way, usa_str)
     texas_str = "Texas"
     texas_way = create_way(usa_way, texas_str)
-    fisc_mstr_dir = get_module_temp_dir()
+    vow_mstr_dir = get_module_temp_dir()
     accord23_str = "accord23"
 
     # WHEN
-    sue_hubunit = hubunit_shop(fisc_mstr_dir, accord23_str, sue_str, texas_way)
+    sue_hubunit = hubunit_shop(vow_mstr_dir, accord23_str, sue_str, texas_way)
 
     # THEN
     x_dutys_path = create_path(sue_hubunit.keep_dir(), "dutys")
     x_plans_path = create_path(sue_hubunit.keep_dir(), "plans")
     x_grades_path = create_path(sue_hubunit.keep_dir(), "grades")
 
-    assert sue_hubunit.fisc_mstr_dir == fisc_mstr_dir
-    assert sue_hubunit.fisc_label == accord23_str
+    assert sue_hubunit.vow_mstr_dir == vow_mstr_dir
+    assert sue_hubunit.vow_label == accord23_str
     assert sue_hubunit.owner_name == sue_str
     assert sue_hubunit.bridge == default_bridge_if_None()
     assert sue_hubunit.fund_pool == validate_fund_pool()
     assert sue_hubunit.fund_iota == default_fund_iota_if_None()
     assert sue_hubunit.respect_bit == default_RespectBit_if_None()
     assert sue_hubunit.penny == filter_penny()
-    x_hubunit = hubunit_shop(fisc_mstr_dir, accord23_str, sue_str)
+    x_hubunit = hubunit_shop(vow_mstr_dir, accord23_str, sue_str)
     assert sue_hubunit.keep_way == texas_way
     assert sue_hubunit.keep_dir() == get_keep_path(x_hubunit, texas_way)
     bob_str = "Bob"
@@ -164,7 +164,7 @@ def test_get_keep_path_ReturnsObj():
     sue_str = "Sue"
     peru_str = "peru"
     sue_hubunit = hubunit_shop(
-        get_module_temp_dir(), fisc_label=peru_str, owner_name=sue_str
+        get_module_temp_dir(), vow_label=peru_str, owner_name=sue_str
     )
     texas_str = "texas"
     dallas_str = "dallas"

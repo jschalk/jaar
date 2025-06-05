@@ -3,7 +3,7 @@ from os import getcwd as os_getcwd
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a01_term_logic._test_util.a01_str import bridge_str
-from src.a02_finance_logic._test_util.a02_str import fisc_label_str, owner_name_str
+from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
 from src.a03_group_logic._test_util.a03_str import (
     _credor_pool_str,
     _debtor_pool_str,
@@ -195,7 +195,7 @@ def test_get_bud_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
                 if level2_key == jkeys_str():
                     atom_args = atom_dimen.get(jkeys_str())
                     dimen_keys = set(atom_args)
-                    dimen_keys.add(fisc_label_str())
+                    dimen_keys.add(vow_label_str())
                     dimen_keys.add(owner_name_str())
                     fm_aspect_keys = set(fm_aspect_dict.keys())
                     print(
@@ -425,7 +425,7 @@ def test_get_bud_calc_dimen_args_ReturnsObj():
     print(f"{bud_acctunit_args=}")
     print(f"{bud_groupunit_args=}")
     assert bud_acctunit_args == {
-        fisc_label_str(),
+        vow_label_str(),
         owner_name_str(),
         "_fund_agenda_give",
         "_credor_pool",
@@ -442,7 +442,7 @@ def test_get_bud_calc_dimen_args_ReturnsObj():
         "_irrational_debtit_belief",
     }
     assert bud_conceptunit_args == {
-        fisc_label_str(),
+        vow_label_str(),
         owner_name_str(),
         morph_str(),
         denom_str(),
@@ -472,7 +472,7 @@ def test_get_bud_calc_dimen_args_ReturnsObj():
         begin_str(),
     }
     assert bud_groupunit_args == {
-        fisc_label_str(),
+        vow_label_str(),
         owner_name_str(),
         "_debtor_pool",
         "_credor_pool",

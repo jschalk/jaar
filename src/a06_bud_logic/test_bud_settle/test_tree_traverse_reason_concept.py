@@ -426,7 +426,7 @@ def test_BudUnit_ReasonUnits_set_premiseConceptWithBeginCloseSetsPremisePopen_Pn
     rus_war = "rus_war"
     rus_war_way = sue_bud.make_way(time_way, rus_war)
     sue_bud.set_concept(
-        conceptunit_shop(time, begin=100, close=2000), sue_bud.fisc_label
+        conceptunit_shop(time, begin=100, close=2000), sue_bud.vow_label
     )
     sue_bud.set_concept(conceptunit_shop(rus_war, begin=22, close=34), time_way)
 
@@ -515,7 +515,7 @@ def test_BudUnit_edit_concept_attr_budIsAbleToEdit_rconcept_active_requisite_Any
 
     run_str = "run to casa"
     run_way = sue_bud.make_l1_way(run_str)
-    sue_bud.set_concept(conceptunit_shop(run_str), sue_bud.fisc_label)
+    sue_bud.set_concept(conceptunit_shop(run_str), sue_bud.vow_label)
     sue_bud.settle_bud()  # set tree metrics
     run_concept = sue_bud.get_concept_obj(run_way)
     assert len(run_concept.reasonunits) == 0
@@ -595,7 +595,7 @@ def test_BudUnit_ReasonUnits_ConceptUnit_active_InfluencesReasonUnitStatus():
     # 5.2. concept(...,casa).active = False
     run_str = "run to casa"
     run_way = sue_bud.make_l1_way(run_str)
-    sue_bud.set_concept(conceptunit_shop(run_str), sue_bud.fisc_label)
+    sue_bud.set_concept(conceptunit_shop(run_str), sue_bud.vow_label)
     sue_bud.edit_concept_attr(
         run_way,
         reason_rcontext=casa_way,

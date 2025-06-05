@@ -1,4 +1,4 @@
-from src.a01_term_logic.way import FiscLabel
+from src.a01_term_logic.way import VowLabel
 from src.a06_bud_logic._test_util.a06_str import (
     acct_name_str,
     bud_acctunit_str,
@@ -11,14 +11,14 @@ from src.a08_bud_atom_logic.atom import BudAtom, budatom_shop
 from src.a09_pack_logic.delta import BudDelta, buddelta_shop
 
 
-def get_atom_example_conceptunit_sports(fisc_label: FiscLabel = None) -> BudAtom:
-    if not fisc_label:
-        fisc_label = "accord23"
+def get_atom_example_conceptunit_sports(vow_label: VowLabel = None) -> BudAtom:
+    if not vow_label:
+        vow_label = "accord23"
     sports_str = "sports"
     x_dimen = bud_conceptunit_str()
     insert_conceptunit_budatom = budatom_shop(x_dimen, INSERT_str())
     insert_conceptunit_budatom.set_jkey(concept_label_str(), sports_str)
-    insert_conceptunit_budatom.set_jkey(parent_way_str(), fisc_label)
+    insert_conceptunit_budatom.set_jkey(parent_way_str(), vow_label)
     return insert_conceptunit_budatom
 
 

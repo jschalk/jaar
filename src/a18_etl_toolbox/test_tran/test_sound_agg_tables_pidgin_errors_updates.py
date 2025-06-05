@@ -1,5 +1,5 @@
 from sqlite3 import connect as sqlite3_connect
-from src.a02_finance_logic._test_util.a02_str import fisc_label_str, owner_name_str
+from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
 from src.a06_bud_logic._test_util.a06_str import acct_name_str, bud_acctunit_str
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic._test_util.a16_str import (
@@ -14,9 +14,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_bridge_exists_in_name_error_update_sqlstr,
     create_prime_tablename,
 )
-from src.a18_etl_toolbox.transformers import (
-    set_fisc_bud_sound_agg_bridge_errors,
-)
+from src.a18_etl_toolbox.transformers import set_vow_bud_sound_agg_bridge_errors
 
 
 def test_create_bridge_exists_in_name_error_update_sqlstr_ReturnsObj_PopulatesTable_Scenario0():
@@ -36,7 +34,7 @@ def test_create_bridge_exists_in_name_error_update_sqlstr_ReturnsObj_PopulatesTa
         budacct_dimen = bud_acctunit_str()
         budacct_s_agg_put = create_prime_tablename(budacct_dimen, "s", "agg", "put")
         insert_budacct_sqlstr = f"""INSERT INTO {budacct_s_agg_put} (
-  {event_int_str()}, {face_name_str()}, {fisc_label_str()}, {owner_name_str()}, {acct_name_str()})
+  {event_int_str()}, {face_name_str()}, {vow_label_str()}, {owner_name_str()}, {acct_name_str()})
 VALUES
   ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
 , ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{bob_str}')
@@ -94,7 +92,7 @@ def test_create_bridge_exists_in_label_error_update_sqlstr_ReturnsObj_PopulatesT
         budacct_dimen = bud_acctunit_str()
         budacct_s_agg_put = create_prime_tablename(budacct_dimen, "s", "agg", "put")
         insert_budacct_sqlstr = f"""INSERT INTO {budacct_s_agg_put} (
-  {event_int_str()}, {face_name_str()}, {fisc_label_str()}, {owner_name_str()}, {acct_name_str()})
+  {event_int_str()}, {face_name_str()}, {vow_label_str()}, {owner_name_str()}, {acct_name_str()})
 VALUES
   ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
 , ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{bob_str}')
@@ -119,7 +117,7 @@ VALUES
 
         # WHEN
         sqlstr = create_bridge_exists_in_label_error_update_sqlstr(
-            budacct_s_agg_put, fisc_label_str()
+            budacct_s_agg_put, vow_label_str()
         )
         print(f"{sqlstr=}")
         cursor.execute(sqlstr)
@@ -128,7 +126,7 @@ VALUES
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 1
         select_core_raw_sqlstr = f"SELECT * FROM {budacct_s_agg_put}"
         cursor.execute(select_core_raw_sqlstr)
-        label_bridge_str = f"Bridge cannot exist in LabelTerm column {fisc_label_str()}"
+        label_bridge_str = f"Bridge cannot exist in LabelTerm column {vow_label_str()}"
         assert cursor.fetchall() == [
             (event1, sue_str, a23_str, yao_str, yao_str, None, None, None),
             (event1, sue_str, a23_str, yao_str, bob_str, None, None, None),
@@ -136,7 +134,7 @@ VALUES
         ]
 
 
-def test_set_fisc_bud_sound_agg_bridge_errors_PopulatesTable_Scenario0():
+def test_set_vow_bud_sound_agg_bridge_errors_PopulatesTable_Scenario0():
     # ESTABLISH
     sue_str = "Sue"
     yao_str = "Yao"
@@ -155,7 +153,7 @@ def test_set_fisc_bud_sound_agg_bridge_errors_PopulatesTable_Scenario0():
         budacct_dimen = bud_acctunit_str()
         budacct_s_agg_put = create_prime_tablename(budacct_dimen, "s", "agg", "put")
         insert_budacct_sqlstr = f"""INSERT INTO {budacct_s_agg_put} (
-  {event_int_str()}, {face_name_str()}, {fisc_label_str()}, {owner_name_str()}, {acct_name_str()})
+  {event_int_str()}, {face_name_str()}, {vow_label_str()}, {owner_name_str()}, {acct_name_str()})
 VALUES
   ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
 , ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{bob_str}')
@@ -179,14 +177,14 @@ VALUES
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
-        set_fisc_bud_sound_agg_bridge_errors(cursor)
+        set_vow_bud_sound_agg_bridge_errors(cursor)
 
         # THEN
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 2
-        select_core_raw_sqlstr = f"SELECT * FROM {budacct_s_agg_put} ORDER BY {fisc_label_str()}, {owner_name_str()}, {acct_name_str()}"
+        select_core_raw_sqlstr = f"SELECT * FROM {budacct_s_agg_put} ORDER BY {vow_label_str()}, {owner_name_str()}, {acct_name_str()}"
         cursor.execute(select_core_raw_sqlstr)
         name_bridge_str = f"Bridge cannot exist in NameTerm column {acct_name_str()}"
-        label_bridge_str = f"Bridge cannot exist in LabelTerm column {fisc_label_str()}"
+        label_bridge_str = f"Bridge cannot exist in LabelTerm column {vow_label_str()}"
         rows = cursor.fetchall()
         print(f"{rows=}")
         assert rows == [

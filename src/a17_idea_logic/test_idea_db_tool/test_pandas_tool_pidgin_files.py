@@ -18,7 +18,7 @@ from src.a16_pidgin_logic.pidgin import pidginunit_shop
 from src.a16_pidgin_logic.pidgin_config import get_pidgin_filename
 from src.a17_idea_logic._test_util.a17_env import (
     env_dir_setup_cleanup,
-    idea_fiscs_dir as get_example_face_dir,
+    idea_vows_dir as get_example_face_dir,
 )
 from src.a17_idea_logic.idea_db_tool import (
     _get_pidgen_idea_format_filenames,

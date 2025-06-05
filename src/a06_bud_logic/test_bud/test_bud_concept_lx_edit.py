@@ -2,7 +2,7 @@ from pytest import raises as pytest_raises
 from src.a01_term_logic.way import to_way
 from src.a05_concept_logic.concept import (
     conceptunit_shop,
-    get_default_fisc_label as root_label,
+    get_default_vow_label as root_label,
 )
 from src.a06_bud_logic._test_util.example_buds import (
     get_budunit_with_4_levels_and_2reasons_2facts,
@@ -27,7 +27,7 @@ def test_BudUnit_edit_concept_label_FailsWhenConceptDoesNotExist():
     assert str(excinfo.value) == f"Concept old_way='{no_concept_way}' does not exist"
 
 
-def test_BudUnit_edit_concept_label_RaisesErrorForLevel0ConceptWhen_fisc_label_isNone():
+def test_BudUnit_edit_concept_label_RaisesErrorForLevel0ConceptWhen_vow_label_isNone():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(owner_name=yao_str)
@@ -39,11 +39,11 @@ def test_BudUnit_edit_concept_label_RaisesErrorForLevel0ConceptWhen_fisc_label_i
     yao_bud.set_l1_concept(conceptunit_shop(casa_str))
     yao_bud.set_concept(conceptunit_shop(swim_str), parent_way=casa_way)
     assert yao_bud.owner_name == yao_str
-    assert yao_bud.conceptroot.concept_label == yao_bud.fisc_label
+    assert yao_bud.conceptroot.concept_label == yao_bud.vow_label
     casa_concept = yao_bud.get_concept_obj(casa_way)
-    assert casa_concept.parent_way == to_way(yao_bud.fisc_label)
+    assert casa_concept.parent_way == to_way(yao_bud.vow_label)
     swim_concept = yao_bud.get_concept_obj(swim_way)
-    root_way = to_way(yao_bud.fisc_label)
+    root_way = to_way(yao_bud.vow_label)
     assert swim_concept.parent_way == casa_way
 
     # WHEN / THEN
@@ -52,14 +52,14 @@ def test_BudUnit_edit_concept_label_RaisesErrorForLevel0ConceptWhen_fisc_label_i
         yao_bud.edit_concept_label(old_way=root_way, new_concept_label=moon_str)
     assert (
         str(excinfo.value)
-        == f"Cannot set conceptroot to string different than '{yao_bud.fisc_label}'"
+        == f"Cannot set conceptroot to string different than '{yao_bud.vow_label}'"
     )
 
     assert yao_bud.conceptroot.concept_label != moon_str
-    assert yao_bud.conceptroot.concept_label == yao_bud.fisc_label
+    assert yao_bud.conceptroot.concept_label == yao_bud.vow_label
 
 
-def test_BudUnit_edit_concept_label_RaisesErrorForLevel0When_fisc_label_IsDifferent():
+def test_BudUnit_edit_concept_label_RaisesErrorForLevel0When_vow_label_IsDifferent():
     # ESTABLISH
     yao_str = "Yao"
     yao_bud = budunit_shop(owner_name=yao_str)
@@ -70,11 +70,11 @@ def test_BudUnit_edit_concept_label_RaisesErrorForLevel0When_fisc_label_IsDiffer
     yao_bud.set_l1_concept(conceptunit_shop(casa_str))
     yao_bud.set_concept(conceptunit_shop(swim_str), parent_way=casa_way)
     sun_str = "sun"
-    yao_bud.fisc_label = sun_str
-    yao_bud.conceptroot.fisc_label = sun_str
+    yao_bud.vow_label = sun_str
+    yao_bud.conceptroot.vow_label = sun_str
     assert yao_bud.owner_name == yao_str
-    assert yao_bud.fisc_label == sun_str
-    assert yao_bud.conceptroot.fisc_label == sun_str
+    assert yao_bud.vow_label == sun_str
+    assert yao_bud.conceptroot.vow_label == sun_str
     assert yao_bud.conceptroot.concept_label == root_label()
     casa_concept = yao_bud.get_concept_obj(casa_way)
     assert casa_concept.parent_way == to_way(root_label())
@@ -234,7 +234,7 @@ def test_bud_set_owner_name_CorrectlyModifiesBoth():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels_and_2reasons_2facts()
     assert sue_bud.owner_name == "Sue"
-    assert sue_bud.conceptroot.concept_label == sue_bud.fisc_label
+    assert sue_bud.conceptroot.concept_label == sue_bud.vow_label
     # mid_concept_label1 = "Yao"
     # sue_bud.edit_concept_label(old_way=old_concept_label, new_concept_label=mid_concept_label1)
     # assert sue_bud.owner_name == old_concept_label
@@ -246,7 +246,7 @@ def test_bud_set_owner_name_CorrectlyModifiesBoth():
 
     # THEN
     assert sue_bud.owner_name == bob_str
-    assert sue_bud.conceptroot.concept_label == sue_bud.fisc_label
+    assert sue_bud.conceptroot.concept_label == sue_bud.vow_label
 
 
 def test_bud_edit_concept_label_RaisesErrorIfbridgeIsInLabel():

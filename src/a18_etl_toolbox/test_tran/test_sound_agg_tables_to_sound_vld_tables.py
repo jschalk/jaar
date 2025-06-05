@@ -1,6 +1,6 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
-from src.a02_finance_logic._test_util.a02_str import fisc_label_str, owner_name_str
+from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
 from src.a06_bud_logic._test_util.a06_str import (
     acct_name_str,
     bud_acctunit_str,
@@ -13,9 +13,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_sound_and_voice_tables,
     get_insert_into_sound_vld_sqlstrs,
 )
-from src.a18_etl_toolbox.transformers import (
-    etl_sound_agg_tables_to_sound_vld_tables,
-)
+from src.a18_etl_toolbox.transformers import etl_sound_agg_tables_to_sound_vld_tables
 
 
 def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
@@ -42,7 +40,7 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_PopulatesTable_Scenario0()
         insert_into_clause = f"""INSERT INTO {budaacct_s_agg_put_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {fisc_label_str()}
+, {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_belief_str()}
@@ -70,7 +68,7 @@ VALUES
         assert get_row_count(cursor, budawar_v_vld_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
-, {fisc_label_str()}
+, {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_belief_str()}
@@ -112,7 +110,7 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario0_AddRowsToTable():
         insert_into_clause = f"""INSERT INTO {budacct_s_agg_put_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {fisc_label_str()}
+, {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_belief_str()}
@@ -138,7 +136,7 @@ VALUES
         assert get_row_count(cursor, budacct_v_vld_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
-, {fisc_label_str()}
+, {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_belief_str()}
@@ -179,7 +177,7 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario1_Populates_Columns():
         insert_into_clause = f"""INSERT INTO {budacct_s_agg_put_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {fisc_label_str()}
+, {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_belief_str()}
@@ -205,7 +203,7 @@ VALUES
         assert get_row_count(cursor, budacct_v_vld_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
-, {fisc_label_str()}
+, {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_belief_str()}
@@ -246,7 +244,7 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario2_DoesNotSelectWhere_e
         insert_into_clause = f"""INSERT INTO {budacct_s_agg_put_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {fisc_label_str()}
+, {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_belief_str()}
@@ -273,7 +271,7 @@ VALUES
         assert get_row_count(cursor, budacct_v_vld_put_tablename) == 3
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
-, {fisc_label_str()}
+, {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_belief_str()}

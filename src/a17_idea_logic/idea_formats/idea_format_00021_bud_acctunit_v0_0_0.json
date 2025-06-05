@@ -15,7 +15,7 @@
         "face_name": {
             "otx_key": true
         },
-        "fisc_label": {
+        "vow_label": {
             "otx_key": true
         },
         "owner_name": {
@@ -24,7 +24,7 @@
     },
     "idea_number": "br00021",
     "dimens": [
-        "fiscunit",
+        "vowunit",
         "budunit",
         "bud_acctunit"
     ]

@@ -7,7 +7,7 @@
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "group_title": {},
       "owner_name": {}
     },
@@ -24,7 +24,7 @@
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -41,7 +41,7 @@
       "concept_way": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -58,7 +58,7 @@
       "event_int": {},
       "face_name": {},
       "fcontext": {},
-      "fisc_label": {},
+      "vow_label": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -75,7 +75,7 @@
       "concept_way": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "healer_name": {},
       "owner_name": {}
     },
@@ -89,7 +89,7 @@
       "concept_way": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "labor_title": {},
       "owner_name": {}
     },
@@ -103,7 +103,7 @@
       "concept_way": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "owner_name": {},
       "pstate": {},
       "rcontext": {}
@@ -122,7 +122,7 @@
       "concept_way": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "owner_name": {},
       "rcontext": {}
     },
@@ -138,7 +138,7 @@
       "concept_way": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -162,7 +162,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -176,15 +176,15 @@
       "tally": {}
     }
   },
-  "fisc_cashbook": {
+  "vow_cashbook": {
     "allowed_crud": "insert_multiple",
     "build_order": 21,
-    "idea_category": "fisc",
+    "idea_category": "vow",
     "jkeys": {
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "owner_name": {},
       "tran_time": {}
     },
@@ -192,15 +192,15 @@
       "amount": {}
     }
   },
-  "fisc_dealunit": {
+  "vow_dealunit": {
     "allowed_crud": "insert_multiple",
     "build_order": 20,
-    "idea_category": "fisc",
+    "idea_category": "vow",
     "jkeys": {
       "deal_time": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -208,68 +208,68 @@
       "quota": {}
     }
   },
-  "fisc_timeline_hour": {
+  "vow_timeline_hour": {
     "allowed_crud": "insert_one_time",
     "build_order": 6,
-    "idea_category": "fisc",
+    "idea_category": "vow",
     "jkeys": {
       "cumlative_minute": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {}
+      "vow_label": {}
     },
     "jvalues": {
       "hour_label": {}
     }
   },
-  "fisc_timeline_month": {
+  "vow_timeline_month": {
     "allowed_crud": "insert_one_time",
     "build_order": 7,
-    "idea_category": "fisc",
+    "idea_category": "vow",
     "jkeys": {
       "cumlative_day": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {}
+      "vow_label": {}
     },
     "jvalues": {
       "month_label": {}
     }
   },
-  "fisc_timeline_weekday": {
+  "vow_timeline_weekday": {
     "allowed_crud": "insert_one_time",
     "build_order": 8,
-    "idea_category": "fisc",
+    "idea_category": "vow",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "weekday_order": {}
     },
     "jvalues": {
       "weekday_label": {}
     }
   },
-  "fisc_timeoffi": {
+  "vow_timeoffi": {
     "allowed_crud": "insert_multiple",
     "build_order": 8,
-    "idea_category": "fisc",
+    "idea_category": "vow",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "offi_time": {}
     },
     "jvalues": {}
   },
-  "fiscunit": {
+  "vowunit": {
     "allowed_crud": "insert_one_time",
     "build_order": 5,
-    "idea_category": "fisc",
+    "idea_category": "vow",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_label": {}
+      "vow_label": {}
     },
     "jvalues": {
       "bridge": {},

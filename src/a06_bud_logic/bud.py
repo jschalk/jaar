@@ -10,11 +10,11 @@ from src.a00_data_toolbox.dict_toolbox import (
 )
 from src.a01_term_logic.term import (
     AcctName,
-    FiscLabel,
     GroupTitle,
     HealerName,
     LabelTerm,
     OwnerName,
+    VowLabel,
     WayTerm,
 )
 from src.a01_term_logic.way import (
@@ -66,7 +66,7 @@ from src.a05_concept_logic.concept import (
     ConceptUnit,
     conceptattrholder_shop,
     conceptunit_shop,
-    get_default_fisc_label,
+    get_default_vow_label,
     get_obj_from_concept_dict,
 )
 from src.a05_concept_logic.healer import HealerLink
@@ -121,7 +121,7 @@ class _gogo_calc_stop_calc_Exception(Exception):
 
 @dataclass
 class BudUnit:
-    fisc_label: FiscLabel = None
+    vow_label: VowLabel = None
     owner_name: OwnerName = None
     accts: dict[AcctName, AcctUnit] = None
     conceptroot: ConceptUnit = None
@@ -197,7 +197,7 @@ class BudUnit:
         )
 
     def make_l1_way(self, l1_label: LabelTerm):
-        return self.make_way(self.fisc_label, l1_label)
+        return self.make_way(self.vow_label, l1_label)
 
     def set_bridge(self, new_bridge: str):
         self.settle_bud()
@@ -212,14 +212,14 @@ class BudUnit:
             for x_concept in self._concept_dict.values():
                 x_concept.set_bridge(self.bridge)
 
-    def set_fisc_label(self, fisc_label: str):
-        old_fisc_label = copy_deepcopy(self.fisc_label)
+    def set_vow_label(self, vow_label: str):
+        old_vow_label = copy_deepcopy(self.vow_label)
         self.settle_bud()
         for concept_obj in self._concept_dict.values():
-            concept_obj.fisc_label = fisc_label
-        self.fisc_label = fisc_label
+            concept_obj.vow_label = vow_label
+        self.vow_label = vow_label
         self.edit_concept_label(
-            old_way=to_way(old_fisc_label), new_concept_label=self.fisc_label
+            old_way=to_way(old_vow_label), new_concept_label=self.vow_label
         )
         self.settle_bud()
 
@@ -418,7 +418,7 @@ class BudUnit:
         return all_group_titles.difference(x_acctunit_group_titles)
 
     def _is_concept_rangeroot(self, concept_way: WayTerm) -> bool:
-        if self.fisc_label == concept_way:
+        if self.vow_label == concept_way:
             raise InvalidBudException(
                 "its difficult to foresee a scenario where conceptroot is rangeroot"
             )
@@ -449,7 +449,7 @@ class BudUnit:
             self._create_conceptkid_if_empty(way=fstate)
 
         fact_fcontext_concept = self.get_concept_obj(fcontext)
-        x_conceptroot = self.get_concept_obj(to_way(self.fisc_label))
+        x_conceptroot = self.get_concept_obj(to_way(self.vow_label))
         x_fopen = None
         if fnigh is not None and fopen is None:
             x_fopen = x_conceptroot.factunits.get(fcontext).fopen
@@ -608,7 +608,7 @@ class BudUnit:
     ):
         self.set_concept(
             concept_kid=concept_kid,
-            parent_way=self.fisc_label,
+            parent_way=self.vow_label,
             create_missing_concepts=create_missing_concepts,
             get_rid_of_missing_awardlinks_awardee_titles=get_rid_of_missing_awardlinks_awardee_titles,
             adoptees=adoptees,
@@ -637,8 +637,8 @@ class BudUnit:
             raise InvalidBudException(exception_str)
 
         concept_kid.bridge = self.bridge
-        if concept_kid.fisc_label != self.fisc_label:
-            concept_kid.fisc_label = self.fisc_label
+        if concept_kid.vow_label != self.vow_label:
+            concept_kid.vow_label = self.vow_label
         if concept_kid.fund_iota != self.fund_iota:
             concept_kid.fund_iota = self.fund_iota
         if not get_rid_of_missing_awardlinks_awardee_titles:
@@ -1070,7 +1070,7 @@ class BudUnit:
         return [self.get_concept_obj(x_concept_way) for x_concept_way in concept_ways]
 
     def _set_concept_dict(self):
-        concept_list = [self.get_concept_obj(to_way(self.fisc_label, self.bridge))]
+        concept_list = [self.get_concept_obj(to_way(self.vow_label, self.bridge))]
         while concept_list != []:
             x_concept = concept_list.pop()
             x_concept.clear_gogo_calc_stop_calc()
@@ -1423,7 +1423,7 @@ class BudUnit:
             "respect_bit": self.respect_bit,
             "penny": self.penny,
             "owner_name": self.owner_name,
-            "fisc_label": self.fisc_label,
+            "vow_label": self.vow_label,
             "max_tree_traverse": self.max_tree_traverse,
             "bridge": self.bridge,
             "conceptroot": self.conceptroot.get_dict(),
@@ -1458,7 +1458,7 @@ class BudUnit:
 
 def budunit_shop(
     owner_name: OwnerName = None,
-    fisc_label: FiscLabel = None,
+    vow_label: VowLabel = None,
     bridge: str = None,
     fund_pool: FundNum = None,
     fund_iota: FundIota = None,
@@ -1467,11 +1467,11 @@ def budunit_shop(
     tally: float = None,
 ) -> BudUnit:
     owner_name = "" if owner_name is None else owner_name
-    fisc_label = get_default_fisc_label() if fisc_label is None else fisc_label
+    vow_label = get_default_vow_label() if vow_label is None else vow_label
     x_bud = BudUnit(
         owner_name=owner_name,
         tally=get_1_if_None(tally),
-        fisc_label=fisc_label,
+        vow_label=vow_label,
         accts=get_empty_dict_if_None(),
         _groupunits={},
         bridge=default_bridge_if_None(bridge),
@@ -1495,7 +1495,7 @@ def budunit_shop(
         root=True,
         _uid=1,
         _level=0,
-        fisc_label=x_bud.fisc_label,
+        vow_label=x_bud.vow_label,
         bridge=x_bud.bridge,
         fund_iota=x_bud.fund_iota,
         parent_way="",
@@ -1515,8 +1515,8 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_bud.set_owner_name(obj_from_bud_dict(bud_dict, "owner_name"))
     x_bud.tally = obj_from_bud_dict(bud_dict, "tally")
     x_bud.set_max_tree_traverse(obj_from_bud_dict(bud_dict, "max_tree_traverse"))
-    x_bud.fisc_label = obj_from_bud_dict(bud_dict, "fisc_label")
-    x_bud.conceptroot.concept_label = obj_from_bud_dict(bud_dict, "fisc_label")
+    x_bud.vow_label = obj_from_bud_dict(bud_dict, "vow_label")
+    x_bud.conceptroot.concept_label = obj_from_bud_dict(bud_dict, "vow_label")
     bud_bridge = obj_from_bud_dict(bud_dict, "bridge")
     x_bud.bridge = default_bridge_if_None(bud_bridge)
     x_bud.fund_pool = validate_fund_pool(obj_from_bud_dict(bud_dict, "fund_pool"))
@@ -1543,7 +1543,7 @@ def create_conceptroot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
     conceptroot_dict = bud_dict.get("conceptroot")
     x_bud.conceptroot = conceptunit_shop(
         root=True,
-        concept_label=x_bud.fisc_label,
+        concept_label=x_bud.vow_label,
         parent_way="",
         _level=0,
         _uid=get_obj_from_concept_dict(conceptroot_dict, "_uid"),
@@ -1563,7 +1563,7 @@ def create_conceptroot_from_bud_dict(x_bud: BudUnit, bud_dict: dict):
         awardlinks=get_obj_from_concept_dict(conceptroot_dict, "awardlinks"),
         _is_expanded=get_obj_from_concept_dict(conceptroot_dict, "_is_expanded"),
         bridge=x_bud.bridge,
-        fisc_label=x_bud.fisc_label,
+        vow_label=x_bud.vow_label,
         fund_iota=default_fund_iota_if_None(x_bud.fund_iota),
     )
     create_conceptroot_kids_from_dict(x_bud, conceptroot_dict)
@@ -1574,7 +1574,7 @@ def create_conceptroot_kids_from_dict(x_bud: BudUnit, conceptroot_dict: dict):
     parent_way_str = "parent_way"
     # for every kid dict, set parent_way in dict, add to to_evaluate_list
     for x_dict in get_obj_from_concept_dict(conceptroot_dict, "_kids").values():
-        x_dict[parent_way_str] = x_bud.fisc_label
+        x_dict[parent_way_str] = x_bud.vow_label
         to_evaluate_concept_dicts.append(x_dict)
 
     while to_evaluate_concept_dicts != []:

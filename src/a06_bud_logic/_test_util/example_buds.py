@@ -224,7 +224,7 @@ def get_budunit_1Task_1CE0MinutesReason_1Fact() -> BudUnit:
 
 def get_budunit_x1_3levels_1reason_1facts() -> BudUnit:
     tiger_str = "tiger"
-    zia_bud = budunit_shop("Zia", fisc_label=tiger_str)
+    zia_bud = budunit_shop("Zia", vow_label=tiger_str)
     shave_str = "shave"
     shave_way = zia_bud.make_l1_way(shave_str)
     concept_kid_shave = conceptunit_shop(shave_str, mass=30, pledge=True)

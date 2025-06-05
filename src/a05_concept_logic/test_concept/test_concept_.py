@@ -1,6 +1,6 @@
 from src.a01_term_logic._test_util.a01_str import bridge_str, parent_way_str
 from src.a01_term_logic.way import create_way, default_bridge_if_None
-from src.a02_finance_logic._test_util.a02_str import fisc_label_str, fund_iota_str
+from src.a02_finance_logic._test_util.a02_str import fund_iota_str, vow_label_str
 from src.a02_finance_logic.finance_config import default_fund_iota_if_None
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic._test_util.a04_str import _task_str
@@ -31,7 +31,6 @@ from src.a05_concept_logic._test_util.a05_str import (
     close_str,
     concept_label_str,
     denom_str,
-    fisc_label_str,
     fund_iota_str,
     gogo_want_str,
     healerlink_str,
@@ -41,18 +40,19 @@ from src.a05_concept_logic._test_util.a05_str import (
     pledge_str,
     problem_bool_str,
     stop_want_str,
+    vow_label_str,
 )
 from src.a05_concept_logic.concept import (
     ConceptUnit,
     conceptunit_shop,
-    get_default_fisc_label,
+    get_default_vow_label,
 )
 from src.a05_concept_logic.healer import healerlink_shop
 from src.a05_concept_logic.origin import originunit_shop
 
 
-def test_get_default_fisc_label_ReturnsObj():
-    assert get_default_fisc_label() == "ZZ"
+def test_get_default_vow_label_ReturnsObj():
+    assert get_default_vow_label() == "ZZ"
 
 
 def test_ConceptUnit_Exists():
@@ -99,7 +99,7 @@ def test_ConceptUnit_Exists():
     assert x_conceptunit._fund_onset is None
     assert x_conceptunit._fund_cease is None
     assert x_conceptunit.root is None
-    assert x_conceptunit.fisc_label is None
+    assert x_conceptunit.vow_label is None
     assert x_conceptunit._healerlink_ratio is None
     obj_attrs = set(x_conceptunit.__dict__.keys())
     print(sorted(list(obj_attrs)))
@@ -135,7 +135,7 @@ def test_ConceptUnit_Exists():
         concept_label_str(),
         denom_str(),
         "factunits",
-        fisc_label_str(),
+        vow_label_str(),
         fund_iota_str(),
         gogo_want_str(),
         healerlink_str(),
@@ -161,7 +161,7 @@ def test_conceptunit_shop_WithNoParametersReturnsObj():
     assert x_conceptunit._kids == {}
     assert x_conceptunit.mass == 1
     assert x_conceptunit.concept_label is None
-    assert x_conceptunit.fisc_label == get_default_fisc_label()
+    assert x_conceptunit.vow_label == get_default_vow_label()
     assert x_conceptunit._uid is None
     assert x_conceptunit.begin is None
     assert x_conceptunit.close is None
@@ -276,7 +276,7 @@ def test_conceptunit_shop_ReturnsObjWithParameters():
 def test_ConceptUnit_get_obj_key_ReturnsObj():
     # ESTABLISH
     round_str = "round_stuff"
-    round_way = create_way(get_default_fisc_label(), round_str)
+    round_way = create_way(get_default_vow_label(), round_str)
     ball_str = "ball"
 
     # WHEN
@@ -290,7 +290,7 @@ def test_ConceptUnit_get_way_ReturnsObj():
     # ESTABLISH
     round_str = "round_stuff"
     slash_str = "/"
-    round_way = create_way(get_default_fisc_label(), round_str, bridge=slash_str)
+    round_way = create_way(get_default_vow_label(), round_str, bridge=slash_str)
     ball_str = "ball"
 
     # WHEN
@@ -305,13 +305,13 @@ def test_ConceptUnit_set_parent_way_SetsAttr():
     # ESTABLISH
     round_str = "round_stuff"
     slash_str = "/"
-    round_way = create_way(get_default_fisc_label(), round_str, bridge=slash_str)
+    round_way = create_way(get_default_vow_label(), round_str, bridge=slash_str)
     ball_str = "ball"
     ball_concept = conceptunit_shop(ball_str, parent_way=round_way, bridge=slash_str)
     assert ball_concept.parent_way == round_way
 
     # WHEN
-    sports_way = create_way(get_default_fisc_label(), "sports", bridge=slash_str)
+    sports_way = create_way(get_default_vow_label(), "sports", bridge=slash_str)
     ball_concept.set_parent_way(parent_way=sports_way)
 
     # THEN

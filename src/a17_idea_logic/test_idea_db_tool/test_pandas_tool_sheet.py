@@ -10,7 +10,7 @@ from pytest import fixture as pytest_fixture, raises as pytest_raises
 from src.a00_data_toolbox.file_toolbox import create_path, set_dir
 from src.a17_idea_logic._test_util.a17_env import (
     env_dir_setup_cleanup,
-    idea_fisc_mstr_dir,
+    idea_vow_mstr_dir,
 )
 from src.a17_idea_logic.idea_db_tool import (
     append_df_to_excel,
@@ -27,14 +27,14 @@ from src.a17_idea_logic.idea_db_tool import (
 
 def test_append_df_to_excel_CreatesSheet(env_dir_setup_cleanup):
     # ESTABLISH
-    test_file = create_path(idea_fisc_mstr_dir(), "test.xlsx")
+    test_file = create_path(idea_vow_mstr_dir(), "test.xlsx")
     append_data = {
         "Name": ["Alice", "Bob"],
         "Age": [25, 30],
         "City": ["New York", "Los Angeles"],
     }
     append_df = DataFrame(append_data)
-    set_dir(idea_fisc_mstr_dir())
+    set_dir(idea_vow_mstr_dir())
     assert os_path_exists(test_file) is False
 
     # WHEN
@@ -55,8 +55,8 @@ def test_append_df_to_excel_CreatesSheet(env_dir_setup_cleanup):
 
 def test_append_df_to_excel_AppendsToSheet(env_dir_setup_cleanup):
     # ESTABLISH
-    set_dir(idea_fisc_mstr_dir())
-    test_file = create_path(idea_fisc_mstr_dir(), "test.xlsx")
+    set_dir(idea_vow_mstr_dir())
+    test_file = create_path(idea_vow_mstr_dir(), "test.xlsx")
     initial_data = {
         "Name": ["John", "Doe"],
         "Age": [40, 50],
@@ -150,7 +150,7 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoPidgin(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = idea_fisc_mstr_dir()
+    env_dir = idea_vow_mstr_dir()
     x_dir = create_path(env_dir, "examples_folder")
     ex_filename = "fizzbuzz.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
@@ -175,7 +175,7 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_PidginSheetNames(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = idea_fisc_mstr_dir()
+    env_dir = idea_vow_mstr_dir()
     x_dir = create_path(env_dir, "examples_folder")
     ex_filename = "fizzbuzz.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
@@ -202,7 +202,7 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_PidginSheetNames(
 
 def test_sheet_exists_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = idea_fisc_mstr_dir()
+    env_dir = idea_vow_mstr_dir()
     x_dir = create_path(env_dir, "examples_folder")
     ex_filename = "fizzbuzz.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
@@ -374,7 +374,7 @@ def test_if_nan_return_None_ReturnsObj(env_dir_setup_cleanup):
     ex1_df = DataFrame([["yao", None]], columns=["face_name", "example_col"])
     ex1_sheet_name = "ex1"
     ex1_filename = "ex1.xlsx"
-    ex1_path = create_path(idea_fisc_mstr_dir(), ex1_filename)
+    ex1_path = create_path(idea_vow_mstr_dir(), ex1_filename)
     upsert_sheet(ex1_path, ex1_sheet_name, ex1_df)
     gen_df = pandas_read_excel(ex1_path, sheet_name=ex1_sheet_name)
     nan_example = gen_df["example_col"][0]
@@ -510,8 +510,8 @@ def test_update_all_face_name_event_int_columns_Scenario0_UpdatesValidSheet(
 ):
     # sourcery skip: no-loop-in-tests
     # ESTABLISH
-    excel_path = create_path(idea_fisc_mstr_dir(), "test_excel.xlsx")
-    set_dir(idea_fisc_mstr_dir())
+    excel_path = create_path(idea_vow_mstr_dir(), "test_excel.xlsx")
+    set_dir(idea_vow_mstr_dir())
     yao_str = "Yao"
     event3 = 3
     # A workbook with valid and invalid sheets
@@ -561,8 +561,8 @@ def test_update_all_face_name_event_int_columns_Scenario1_NoMatchingSheets(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH: A workbook with no matching headers
-    excel_path = create_path(idea_fisc_mstr_dir(), "test_excel.xlsx")
-    set_dir(idea_fisc_mstr_dir())
+    excel_path = create_path(idea_vow_mstr_dir(), "test_excel.xlsx")
+    set_dir(idea_vow_mstr_dir())
     workbook = openpyxl_Workbook()
     ws = workbook.active
     ws.append(["foo", "bar"])

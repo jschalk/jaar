@@ -1,5 +1,5 @@
 from src.a01_term_logic.way import LabelTerm, WayTerm, create_way
-from src.a05_concept_logic.concept import conceptunit_shop, get_default_fisc_label
+from src.a05_concept_logic.concept import conceptunit_shop, get_default_vow_label
 from src.a06_bud_logic.bud import BudUnit, budunit_shop
 from src.a12_hub_tools.hub_tool import (
     gut_file_exists,
@@ -60,7 +60,7 @@ def run_str() -> str:
 
 
 def casa_way() -> WayTerm:
-    return create_way(get_default_fisc_label(), casa_str())
+    return create_way(get_default_vow_label(), casa_str())
 
 
 def cook_way() -> WayTerm:
@@ -103,7 +103,7 @@ def get_example_yao_bud() -> BudUnit:
     yao_str = "Yao"
     zia_str = "Zia"
     bob_str = "Bob"
-    yao_speaker = budunit_shop(yao_str, get_default_fisc_label())
+    yao_speaker = budunit_shop(yao_str, get_default_vow_label())
     yao_speaker.set_concept(conceptunit_shop(run_str()), casa_way())
     yao_speaker.add_acctunit(yao_str, debtit_belief=10)
     yao_speaker.add_acctunit(zia_str, debtit_belief=30)
@@ -161,7 +161,7 @@ def get_example_yao_plan3_speaker() -> BudUnit:
 
 
 def get_usa_way() -> WayTerm:
-    return create_way(get_default_fisc_label(), "USA")
+    return create_way(get_default_vow_label(), "USA")
 
 
 def get_iowa_str() -> LabelTerm:
@@ -205,11 +205,11 @@ def get_utah_way() -> WayTerm:
 
 
 def get_swim_way() -> WayTerm:
-    return create_way(get_default_fisc_label(), get_swim_str())
+    return create_way(get_default_vow_label(), get_swim_str())
 
 
 def get_location_way() -> WayTerm:
-    return create_way(get_default_fisc_label(), get_location_str())
+    return create_way(get_default_vow_label(), get_location_str())
 
 
 def get_in_mer_way() -> WayTerm:
@@ -223,8 +223,8 @@ def get_on_land_way() -> WayTerm:
 def get_yao_ohio_hubunit() -> HubUnit:
     yao_bud = get_example_yao_bud()
     return hubunit_shop(
-        fisc_mstr_dir=env_dir(),
-        fisc_label=yao_bud.fisc_label,
+        vow_mstr_dir=env_dir(),
+        vow_label=yao_bud.vow_label,
         owner_name=yao_bud.owner_name,
         keep_way=get_ohio_way(),
         # pipeline_gut_job_str(),
@@ -234,8 +234,8 @@ def get_yao_ohio_hubunit() -> HubUnit:
 def get_yao_iowa_hubunit() -> HubUnit:
     yao_bud = get_example_yao_bud()
     return hubunit_shop(
-        fisc_mstr_dir=env_dir(),
-        fisc_label=yao_bud.fisc_label,
+        vow_mstr_dir=env_dir(),
+        vow_label=yao_bud.vow_label,
         owner_name=yao_bud.owner_name,
         keep_way=get_iowa_way(),
         # pipeline_gut_job_str(),
@@ -245,8 +245,8 @@ def get_yao_iowa_hubunit() -> HubUnit:
 def get_zia_utah_hubunit() -> HubUnit:
     yao_bud = get_example_yao_bud()
     return hubunit_shop(
-        fisc_mstr_dir=env_dir(),
-        fisc_label=yao_bud.fisc_label,
+        vow_mstr_dir=env_dir(),
+        vow_label=yao_bud.vow_label,
         owner_name="Zia",
         keep_way=get_utah_way(),
         # pipeline_gut_job_str(),
@@ -279,8 +279,8 @@ def test_listen_to_owner_plans_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItself
     # yao_plan1 with 1 task, fact that doesn't make that task active
     # yao_plan2 with 2 tasks, one is equal fact that makes task active
     # yao_plan3 with 1 new task, fact stays with it
-    fisc_mstr_dir = env_dir()
-    fisc_label = get_default_fisc_label()
+    vow_mstr_dir = env_dir()
+    vow_label = get_default_vow_label()
     yao_gut0 = get_example_yao_gut_with_3_healers()
     yao_gut0.set_l1_concept(conceptunit_shop(get_location_str()))
     yao_gut0.set_concept(conceptunit_shop(get_in_mer_str()), get_location_way())
@@ -305,8 +305,8 @@ def test_listen_to_owner_plans_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItself
     yao_ohio_hubunit = get_yao_ohio_hubunit()
     zia_utah_hubunit = get_zia_utah_hubunit()
     # delete_dir(yao_iowa_hubunit.owners_dir())
-    assert gut_file_exists(fisc_mstr_dir, fisc_label, yao_str) is False
-    assert job_file_exists(fisc_mstr_dir, fisc_label, yao_str) is False
+    assert gut_file_exists(vow_mstr_dir, vow_label, yao_str) is False
+    assert job_file_exists(vow_mstr_dir, vow_label, yao_str) is False
     assert yao_iowa_hubunit.plan_file_exists(yao_str) is False
     assert yao_ohio_hubunit.plan_file_exists(yao_str) is False
     assert zia_utah_hubunit.plan_file_exists(yao_str) is False
@@ -315,17 +315,17 @@ def test_listen_to_owner_plans_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItself
     # yao_iowa_hubunit.save_plan_bud(yao_plan1)
     # yao_ohio_hubunit.save_plan_bud(yao_plan2)
     # zia_utah_hubunit.save_plan_bud(yao_plan3)
-    assert gut_file_exists(fisc_mstr_dir, fisc_label, yao_str)
+    assert gut_file_exists(vow_mstr_dir, vow_label, yao_str)
     assert yao_iowa_hubunit.plan_file_exists(yao_str) is False
     assert yao_ohio_hubunit.plan_file_exists(yao_str) is False
     assert zia_utah_hubunit.plan_file_exists(yao_str) is False
 
     # WHEN
-    assert job_file_exists(fisc_mstr_dir, fisc_label, yao_str) is False
+    assert job_file_exists(vow_mstr_dir, vow_label, yao_str) is False
     listen_to_owner_plans(yao_iowa_hubunit)
-    assert job_file_exists(fisc_mstr_dir, fisc_label, yao_str)
+    assert job_file_exists(vow_mstr_dir, vow_label, yao_str)
 
-    yao_job = open_job_file(fisc_mstr_dir, fisc_label, yao_str)
+    yao_job = open_job_file(vow_mstr_dir, vow_label, yao_str)
     yao_job.settle_bud()
     assert yao_job.accts.keys() == yao_gut0.accts.keys()
     assert yao_job.get_acct(yao_str)._irrational_debtit_belief == 0

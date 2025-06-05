@@ -6,7 +6,7 @@
         "face_name": {
             "otx_key": true
         },
-        "fisc_label": {
+        "vow_label": {
             "otx_key": true
         },
         "concept_way_ERASE": {
@@ -20,6 +20,6 @@
     "dimens": [
         "bud_conceptunit",
         "budunit",
-        "fiscunit"
+        "vowunit"
     ]
 }

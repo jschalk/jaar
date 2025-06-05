@@ -631,7 +631,7 @@ def test_BudUnit_settle_bud_WithLevel3AwardLinkAndEmptyAncestorsSetsGroupUnit_fu
     x_bud.settle_bud()
 
     # THEN
-    x_conceptroot = x_bud.get_concept_obj(to_way(x_bud.fisc_label))
+    x_conceptroot = x_bud.get_concept_obj(to_way(x_bud.vow_label))
     with pytest_raises(Exception) as excinfo:
         x_conceptroot.awardlinks[yao_str]
     assert str(excinfo.value) == f"'{yao_str}'"
@@ -694,7 +694,7 @@ def test_BudUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkBudFund():
 
     # THEN
     print(f"{concept_dict.keys()=}")
-    concept_bob = concept_dict.get(to_way(sue_bud.fisc_label))
+    concept_bob = concept_dict.get(to_way(sue_bud.vow_label))
     assert len(concept_bob._awardheirs) == 3
 
     bheir_yao = concept_bob._awardheirs.get(yao_str)
@@ -742,7 +742,7 @@ def test_BudUnit_settle_bud_CorrectlySetsGroupLinkBudCredAndDebt():
     sue_awardlink = awardlink_shop(sue_str, 20, take_force=40)
     bob_awardlink = awardlink_shop(bob_str, 10, take_force=5)
     zia_awardlink = awardlink_shop(zia_str, 10, take_force=5)
-    root_way = to_way(yao_bud.fisc_label)
+    root_way = to_way(yao_bud.vow_label)
     yao_bud.edit_concept_attr(root_way, awardlink=sue_awardlink)
     yao_bud.edit_concept_attr(root_way, awardlink=bob_awardlink)
     yao_bud.edit_concept_attr(root_way, awardlink=zia_awardlink)

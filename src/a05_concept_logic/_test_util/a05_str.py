@@ -1,5 +1,5 @@
 from src.a01_term_logic._test_util.a01_str import bridge_str
-from src.a02_finance_logic._test_util.a02_str import fisc_label_str, fund_iota_str
+from src.a02_finance_logic._test_util.a02_str import fund_iota_str, vow_label_str
 
 
 def _active_hx_str() -> str:

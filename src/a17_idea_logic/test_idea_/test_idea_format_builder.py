@@ -1,7 +1,7 @@
 from json import loads as json_loads
 from pathlib import Path
 from src.a00_data_toolbox.file_toolbox import count_files, save_json
-from src.a02_finance_logic._test_util.a02_str import fisc_label_str, owner_name_str
+from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
 from src.a06_bud_logic._test_util.a06_str import (
     bud_conceptunit_str,
     concept_way_str,
@@ -23,7 +23,7 @@ def create_dimens_idea_format_dict() -> dict:
     for idea_dimen, dimen_dict in get_idea_config_dict().items():
         if dimen_dict.get("idea_category") == "bud":
             idea_filename = f"idea_format_{x_count:05}_{idea_dimen}_v0_0_0.json"
-            attributes_set = {fisc_label_str(), owner_name_str()}
+            attributes_set = {vow_label_str(), owner_name_str()}
             args_dict = get_atom_config_args(idea_dimen)
             attributes_set.update(set(args_dict.keys()))
 
@@ -46,7 +46,7 @@ def test_create_dimens_idea_format_dict_ReturnsObj(rebuild_bool):
     assert bud_conceptunit_dict.get(dimens_str()) == [bud_conceptunit_str()]
     assert bud_conceptunit_dict.get(attributes_str())
     bud_conceptunit_attributes = bud_conceptunit_dict.get(attributes_str())
-    assert fisc_label_str() in bud_conceptunit_attributes
+    assert vow_label_str() in bud_conceptunit_attributes
     assert owner_name_str() in bud_conceptunit_attributes
     assert concept_way_str() in bud_conceptunit_attributes
     assert gogo_want_str() in bud_conceptunit_attributes

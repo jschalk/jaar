@@ -12,7 +12,7 @@ def test_BudUnit_set_concept_RaisesErrorWhen_parent_way_IsInvalid():
     # ESTABLISH
     zia_bud = budunit_shop("Zia")
     invalid_rootlabel_swim_way = create_way("swimming")
-    assert invalid_rootlabel_swim_way != zia_bud.fisc_label
+    assert invalid_rootlabel_swim_way != zia_bud.vow_label
     casa_str = "casa"
 
     # WHEN / THEN
@@ -20,7 +20,7 @@ def test_BudUnit_set_concept_RaisesErrorWhen_parent_way_IsInvalid():
         zia_bud.set_concept(
             conceptunit_shop(casa_str), parent_way=invalid_rootlabel_swim_way
         )
-    exception_str = f"set_concept failed because parent_way '{invalid_rootlabel_swim_way}' has an invalid root label. Should be {zia_bud.fisc_label}."
+    exception_str = f"set_concept failed because parent_way '{invalid_rootlabel_swim_way}' has an invalid root label. Should be {zia_bud.vow_label}."
     assert str(excinfo.value) == exception_str
 
 
@@ -65,7 +65,7 @@ def test_BudUnit_set_concept_CorrectlySetsAttr():
 
     # WHEN
     zia_bud.set_concept(
-        conceptunit_shop(casa_str), parent_way=to_way(zia_bud.fisc_label)
+        conceptunit_shop(casa_str), parent_way=to_way(zia_bud.vow_label)
     )
 
     # THEN
@@ -82,7 +82,7 @@ def test_BudUnit_concept_exists_ReturnsObj():
 
     # WHEN
     zia_bud.set_concept(
-        conceptunit_shop(casa_str), parent_way=to_way(zia_bud.fisc_label)
+        conceptunit_shop(casa_str), parent_way=to_way(zia_bud.vow_label)
     )
 
     # THEN
@@ -202,7 +202,7 @@ def test_BudUnit_set_concept_CanCreateMissingConceptUnits():
 def test_BudUnit_del_concept_obj_Level0CannotBeDeleted():
     # ESTABLISH
     sue_bud = get_budunit_with_4_levels()
-    root_way = to_way(sue_bud.fisc_label)
+    root_way = to_way(sue_bud.vow_label)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -258,7 +258,7 @@ def test_BudUnit_del_concept_obj_Level1CanBeDeleted_ChildrenInherited():
     new_sunday_way = sue_bud.make_l1_way(sun_str)
     assert sue_bud.get_concept_obj(new_sunday_way)
     new_sunday_concept = sue_bud.get_concept_obj(new_sunday_way)
-    assert new_sunday_concept.parent_way == to_way(sue_bud.fisc_label)
+    assert new_sunday_concept.parent_way == to_way(sue_bud.vow_label)
 
 
 def test_BudUnit_del_concept_obj_LevelNCanBeDeleted_ChildrenInherited():
@@ -820,11 +820,11 @@ def test_BudUnit_get_concept_obj_ReturnsConcept():
     assert wk_concept.concept_label == wk_str
 
     # WHEN
-    root_concept = sue_bud.get_concept_obj(to_way(sue_bud.fisc_label))
+    root_concept = sue_bud.get_concept_obj(to_way(sue_bud.vow_label))
 
     # THEN
     assert root_concept is not None
-    assert root_concept.concept_label == sue_bud.fisc_label
+    assert root_concept.concept_label == sue_bud.vow_label
 
     # WHEN / THEN
     bobdylan_str = "bobdylan"
@@ -862,7 +862,7 @@ def test_BudUnit_concept_exists_ReturnsCorrectBool():
     # WHEN / THEN
     assert sue_bud.concept_exists("") is False
     assert sue_bud.concept_exists(None) is False
-    assert sue_bud.concept_exists(to_way(sue_bud.fisc_label))
+    assert sue_bud.concept_exists(to_way(sue_bud.vow_label))
     assert sue_bud.concept_exists(cat_way)
     assert sue_bud.concept_exists(wk_way)
     assert sue_bud.concept_exists(casa_way)
@@ -907,8 +907,8 @@ def test_BudUnit_set_offtrack_fund_ReturnsObj():
     casa_concept = conceptunit_shop(casa_str, _fund_onset=70, _fund_cease=170)
     wk_concept = conceptunit_shop(wk_str, _fund_onset=70, _fund_cease=75)
     wed_concept = conceptunit_shop(wed_str, _fund_onset=72, _fund_cease=75)
-    casa_concept.parent_way = bob_budunit.fisc_label
-    wk_concept.parent_way = bob_budunit.fisc_label
+    casa_concept.parent_way = bob_budunit.vow_label
+    wk_concept.parent_way = bob_budunit.vow_label
     wed_concept.parent_way = wk_way
     bob_budunit.set_l1_concept(casa_concept)
     bob_budunit.set_l1_concept(wk_concept)
@@ -964,8 +964,8 @@ def test_BudUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     casa_concept = conceptunit_shop(casa_str, _fund_onset=70, _fund_cease=170)
     wk_concept = conceptunit_shop(wk_str, _fund_onset=70, _fund_cease=75)
     wed_concept = conceptunit_shop(wed_str, _fund_onset=72, _fund_cease=75)
-    casa_concept.parent_way = bob_budunit.fisc_label
-    wk_concept.parent_way = bob_budunit.fisc_label
+    casa_concept.parent_way = bob_budunit.vow_label
+    wk_concept.parent_way = bob_budunit.vow_label
     wed_concept.parent_way = wk_way
     bob_budunit.set_l1_concept(casa_concept)
     bob_budunit.set_l1_concept(wk_concept)

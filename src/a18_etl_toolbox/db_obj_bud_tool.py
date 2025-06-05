@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from sqlite3 import Cursor as sqlite3_Cursor
 from src.a00_data_toolbox.db_toolbox import sqlite_obj_str
 from src.a01_term_logic.term import AcctName, GroupTitle, OwnerName, WayTerm
-from src.a02_finance_logic.deal import FiscLabel
+from src.a02_finance_logic.deal import VowLabel
 from src.a03_group_logic.acct import AcctUnit
 from src.a03_group_logic.group import AwardHeir, GroupUnit, MemberShip
 from src.a04_reason_logic.reason_concept import FactHeir, PremiseUnit, ReasonHeir
@@ -13,7 +13,7 @@ from src.a06_bud_logic.bud import BudUnit
 
 
 def create_budmemb_metrics_insert_sqlstr(values_dict: dict[str,]):
-    fisc_label = values_dict.get("fisc_label")
+    vow_label = values_dict.get("vow_label")
     owner_name = values_dict.get("owner_name")
     acct_name = values_dict.get("acct_name")
     group_title = values_dict.get("group_title")
@@ -28,9 +28,9 @@ def create_budmemb_metrics_insert_sqlstr(values_dict: dict[str,]):
     _fund_agenda_ratio_give = values_dict.get("_fund_agenda_ratio_give")
     _fund_agenda_ratio_take = values_dict.get("_fund_agenda_ratio_take")
     real_str = "REAL"
-    return f"""INSERT INTO bud_acct_membership_job (fisc_label, owner_name, acct_name, group_title, credit_vote, debtit_vote, _credor_pool, _debtor_pool, _fund_give, _fund_take, _fund_agenda_give, _fund_agenda_take, _fund_agenda_ratio_give, _fund_agenda_ratio_take)
+    return f"""INSERT INTO bud_acct_membership_job (vow_label, owner_name, acct_name, group_title, credit_vote, debtit_vote, _credor_pool, _debtor_pool, _fund_give, _fund_take, _fund_agenda_give, _fund_agenda_take, _fund_agenda_ratio_give, _fund_agenda_ratio_take)
 VALUES (
-  {sqlite_obj_str(fisc_label, "TEXT")}
+  {sqlite_obj_str(vow_label, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
 , {sqlite_obj_str(acct_name, "TEXT")}
 , {sqlite_obj_str(group_title, "TEXT")}
@@ -50,7 +50,7 @@ VALUES (
 
 
 def create_budacct_metrics_insert_sqlstr(values_dict: dict[str,]):
-    fisc_label = values_dict.get("fisc_label")
+    vow_label = values_dict.get("vow_label")
     owner_name = values_dict.get("owner_name")
     acct_name = values_dict.get("acct_name")
     credit_belief = values_dict.get("credit_belief")
@@ -66,9 +66,9 @@ def create_budacct_metrics_insert_sqlstr(values_dict: dict[str,]):
     _inallocable_debtit_belief = values_dict.get("_inallocable_debtit_belief")
     _irrational_debtit_belief = values_dict.get("_irrational_debtit_belief")
     real_str = "REAL"
-    return f"""INSERT INTO bud_acctunit_job (fisc_label, owner_name, acct_name, credit_belief, debtit_belief, _credor_pool, _debtor_pool, _fund_give, _fund_take, _fund_agenda_give, _fund_agenda_take, _fund_agenda_ratio_give, _fund_agenda_ratio_take, _inallocable_debtit_belief, _irrational_debtit_belief)
+    return f"""INSERT INTO bud_acctunit_job (vow_label, owner_name, acct_name, credit_belief, debtit_belief, _credor_pool, _debtor_pool, _fund_give, _fund_take, _fund_agenda_give, _fund_agenda_take, _fund_agenda_ratio_give, _fund_agenda_ratio_take, _inallocable_debtit_belief, _irrational_debtit_belief)
 VALUES (
-  {sqlite_obj_str(fisc_label, "TEXT")}
+  {sqlite_obj_str(vow_label, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
 , {sqlite_obj_str(acct_name, "TEXT")}
 , {sqlite_obj_str(credit_belief, real_str)}
@@ -89,7 +89,7 @@ VALUES (
 
 
 def create_budgrou_metrics_insert_sqlstr(values_dict: dict[str,]):
-    fisc_label = values_dict.get("fisc_label")
+    vow_label = values_dict.get("vow_label")
     owner_name = values_dict.get("owner_name")
     group_title = values_dict.get("group_title")
     _credor_pool = values_dict.get("_credor_pool")
@@ -101,9 +101,9 @@ def create_budgrou_metrics_insert_sqlstr(values_dict: dict[str,]):
     _fund_agenda_take = values_dict.get("_fund_agenda_take")
     bridge = values_dict.get("bridge")
     real_str = "REAL"
-    return f"""INSERT INTO bud_groupunit_job (fisc_label, owner_name, group_title, fund_iota, bridge, _credor_pool, _debtor_pool, _fund_give, _fund_take, _fund_agenda_give, _fund_agenda_take)
+    return f"""INSERT INTO bud_groupunit_job (vow_label, owner_name, group_title, fund_iota, bridge, _credor_pool, _debtor_pool, _fund_give, _fund_take, _fund_agenda_give, _fund_agenda_take)
 VALUES (
-  {sqlite_obj_str(fisc_label, "TEXT")}
+  {sqlite_obj_str(vow_label, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
 , {sqlite_obj_str(group_title, "TEXT")}
 , {sqlite_obj_str(fund_iota, real_str)}
@@ -120,7 +120,7 @@ VALUES (
 
 
 def create_budawar_metrics_insert_sqlstr(values_dict: dict[str,]):
-    fisc_label = values_dict.get("fisc_label")
+    vow_label = values_dict.get("vow_label")
     owner_name = values_dict.get("owner_name")
     way = values_dict.get("concept_way")
     awardee_title = values_dict.get("awardee_title")
@@ -128,9 +128,9 @@ def create_budawar_metrics_insert_sqlstr(values_dict: dict[str,]):
     take_force = values_dict.get("take_force")
     _fund_give = values_dict.get("_fund_give")
     _fund_take = values_dict.get("_fund_take")
-    return f"""INSERT INTO bud_concept_awardlink_job (fisc_label, owner_name, concept_way, awardee_title, give_force, take_force, _fund_give, _fund_take)
+    return f"""INSERT INTO bud_concept_awardlink_job (vow_label, owner_name, concept_way, awardee_title, give_force, take_force, _fund_give, _fund_take)
 VALUES (
-  {sqlite_obj_str(fisc_label, "TEXT")}
+  {sqlite_obj_str(vow_label, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
 , {sqlite_obj_str(way, "TEXT")}
 , {sqlite_obj_str(awardee_title, "TEXT")}
@@ -144,16 +144,16 @@ VALUES (
 
 
 def create_budfact_metrics_insert_sqlstr(values_dict: dict[str,]):
-    fisc_label = values_dict.get("fisc_label")
+    vow_label = values_dict.get("vow_label")
     owner_name = values_dict.get("owner_name")
     way = values_dict.get("concept_way")
     fcontext = values_dict.get("fcontext")
     fstate = values_dict.get("fstate")
     fopen = values_dict.get("fopen")
     fnigh = values_dict.get("fnigh")
-    return f"""INSERT INTO bud_concept_factunit_job (fisc_label, owner_name, concept_way, fcontext, fstate, fopen, fnigh)
+    return f"""INSERT INTO bud_concept_factunit_job (vow_label, owner_name, concept_way, fcontext, fstate, fopen, fnigh)
 VALUES (
-  {sqlite_obj_str(fisc_label, "TEXT")}
+  {sqlite_obj_str(vow_label, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
 , {sqlite_obj_str(way, "TEXT")}
 , {sqlite_obj_str(fcontext, "TEXT")}
@@ -166,13 +166,13 @@ VALUES (
 
 
 def create_budheal_metrics_insert_sqlstr(values_dict: dict[str,]):
-    fisc_label = values_dict.get("fisc_label")
+    vow_label = values_dict.get("vow_label")
     owner_name = values_dict.get("owner_name")
     way = values_dict.get("concept_way")
     healer_name = values_dict.get("healer_name")
-    return f"""INSERT INTO bud_concept_healerlink_job (fisc_label, owner_name, concept_way, healer_name)
+    return f"""INSERT INTO bud_concept_healerlink_job (vow_label, owner_name, concept_way, healer_name)
 VALUES (
-  {sqlite_obj_str(fisc_label, "TEXT")}
+  {sqlite_obj_str(vow_label, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
 , {sqlite_obj_str(way, "TEXT")}
 , {sqlite_obj_str(healer_name, "TEXT")}
@@ -182,7 +182,7 @@ VALUES (
 
 
 def create_budprem_metrics_insert_sqlstr(values_dict: dict[str,]):
-    fisc_label = values_dict.get("fisc_label")
+    vow_label = values_dict.get("vow_label")
     owner_name = values_dict.get("owner_name")
     way = values_dict.get("concept_way")
     rcontext = values_dict.get("rcontext")
@@ -192,9 +192,9 @@ def create_budprem_metrics_insert_sqlstr(values_dict: dict[str,]):
     pdivisor = values_dict.get("pdivisor")
     _task = values_dict.get("_task")
     _status = values_dict.get("_status")
-    return f"""INSERT INTO bud_concept_reason_premiseunit_job (fisc_label, owner_name, concept_way, rcontext, pstate, pnigh, popen, pdivisor, _task, _status)
+    return f"""INSERT INTO bud_concept_reason_premiseunit_job (vow_label, owner_name, concept_way, rcontext, pstate, pnigh, popen, pdivisor, _task, _status)
 VALUES (
-  {sqlite_obj_str(fisc_label, "TEXT")}
+  {sqlite_obj_str(vow_label, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
 , {sqlite_obj_str(way, "TEXT")}
 , {sqlite_obj_str(rcontext, "TEXT")}
@@ -210,7 +210,7 @@ VALUES (
 
 
 def create_budreas_metrics_insert_sqlstr(values_dict: dict[str,]):
-    fisc_label = values_dict.get("fisc_label")
+    vow_label = values_dict.get("vow_label")
     owner_name = values_dict.get("owner_name")
     way = values_dict.get("concept_way")
     rcontext = values_dict.get("rcontext")
@@ -218,9 +218,9 @@ def create_budreas_metrics_insert_sqlstr(values_dict: dict[str,]):
     _task = values_dict.get("_task")
     _status = values_dict.get("_status")
     _rconcept_active_value = values_dict.get("_rconcept_active_value")
-    return f"""INSERT INTO bud_concept_reasonunit_job (fisc_label, owner_name, concept_way, rcontext, rconcept_active_requisite, _task, _status, _rconcept_active_value)
+    return f"""INSERT INTO bud_concept_reasonunit_job (vow_label, owner_name, concept_way, rcontext, rconcept_active_requisite, _task, _status, _rconcept_active_value)
 VALUES (
-  {sqlite_obj_str(fisc_label, "TEXT")}
+  {sqlite_obj_str(vow_label, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
 , {sqlite_obj_str(way, "TEXT")}
 , {sqlite_obj_str(rcontext, "TEXT")}
@@ -234,14 +234,14 @@ VALUES (
 
 
 def create_budlabo_metrics_insert_sqlstr(values_dict: dict[str,]):
-    fisc_label = values_dict.get("fisc_label")
+    vow_label = values_dict.get("vow_label")
     owner_name = values_dict.get("owner_name")
     way = values_dict.get("concept_way")
     labor_title = values_dict.get("labor_title")
     _owner_name_labor = values_dict.get("_owner_name_labor")
-    return f"""INSERT INTO bud_concept_laborlink_job (fisc_label, owner_name, concept_way, labor_title, _owner_name_labor)
+    return f"""INSERT INTO bud_concept_laborlink_job (vow_label, owner_name, concept_way, labor_title, _owner_name_labor)
 VALUES (
-  {sqlite_obj_str(fisc_label, "TEXT")}
+  {sqlite_obj_str(vow_label, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
 , {sqlite_obj_str(way, "TEXT")}
 , {sqlite_obj_str(labor_title, "TEXT")}
@@ -252,7 +252,7 @@ VALUES (
 
 
 def create_budconc_metrics_insert_sqlstr(values_dict: dict[str,]):
-    fisc_label = values_dict.get("fisc_label")
+    vow_label = values_dict.get("vow_label")
     owner_name = values_dict.get("owner_name")
     way = values_dict.get("concept_way")
     begin = values_dict.get("begin")
@@ -283,9 +283,9 @@ def create_budconc_metrics_insert_sqlstr(values_dict: dict[str,]):
     integer_str = "INTEGER"
     real_str = "REAL"
 
-    return f"""INSERT INTO bud_conceptunit_job (fisc_label, owner_name, concept_way, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool, fund_iota, _active, _task, _fund_onset, _fund_cease, _fund_ratio, _gogo_calc, _stop_calc, _level, _range_evaluated, _descendant_pledge_count, _healerlink_ratio, _all_acct_cred, _all_acct_debt)
+    return f"""INSERT INTO bud_conceptunit_job (vow_label, owner_name, concept_way, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool, fund_iota, _active, _task, _fund_onset, _fund_cease, _fund_ratio, _gogo_calc, _stop_calc, _level, _range_evaluated, _descendant_pledge_count, _healerlink_ratio, _all_acct_cred, _all_acct_debt)
 VALUES (
-  {sqlite_obj_str(fisc_label, "TEXT")}
+  {sqlite_obj_str(vow_label, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
 , {sqlite_obj_str(way, "TEXT")}
 , {sqlite_obj_str(begin, real_str)}
@@ -319,7 +319,7 @@ VALUES (
 
 
 def create_budunit_metrics_insert_sqlstr(values_dict: dict[str,]):
-    fisc_label = values_dict.get("fisc_label")
+    vow_label = values_dict.get("vow_label")
     owner_name = values_dict.get("owner_name")
     integer_str = "INTEGER"
     real_str = "REAL"
@@ -338,9 +338,9 @@ def create_budunit_metrics_insert_sqlstr(values_dict: dict[str,]):
     respect_bit = values_dict.get("respect_bit")
     tally = values_dict.get("tally")
 
-    return f"""INSERT INTO budunit_job (fisc_label, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit, _rational, _keeps_justified, _offtrack_fund, _sum_healerlink_share, _keeps_buildable, _tree_traverse_count)
+    return f"""INSERT INTO budunit_job (vow_label, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit, _rational, _keeps_justified, _offtrack_fund, _sum_healerlink_share, _keeps_buildable, _tree_traverse_count)
 VALUES (
-  {sqlite_obj_str(fisc_label, "TEXT")}
+  {sqlite_obj_str(vow_label, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
 , {sqlite_obj_str(credor_respect, real_str)}
 , {sqlite_obj_str(debtor_respect, real_str)}
@@ -363,7 +363,7 @@ VALUES (
 
 @dataclass
 class ObjKeysHolder:
-    fisc_label: FiscLabel = None
+    vow_label: VowLabel = None
     owner_name: OwnerName = None
     way: WayTerm = None
     rcontext: WayTerm = None
@@ -379,7 +379,7 @@ def insert_job_budmemb(
     x_membership: MemberShip,
 ):
     x_dict = copy_deepcopy(x_membership.__dict__)
-    x_dict["fisc_label"] = x_objkeysholder.fisc_label
+    x_dict["vow_label"] = x_objkeysholder.vow_label
     x_dict["owner_name"] = x_objkeysholder.owner_name
     insert_sqlstr = create_budmemb_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
@@ -391,7 +391,7 @@ def insert_job_budacct(
     x_acct: AcctUnit,
 ):
     x_dict = copy_deepcopy(x_acct.__dict__)
-    x_dict["fisc_label"] = x_objkeysholder.fisc_label
+    x_dict["vow_label"] = x_objkeysholder.vow_label
     x_dict["owner_name"] = x_objkeysholder.owner_name
     insert_sqlstr = create_budacct_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
@@ -403,7 +403,7 @@ def insert_job_budgrou(
     x_groupunit: GroupUnit,
 ):
     x_dict = copy_deepcopy(x_groupunit.__dict__)
-    x_dict["fisc_label"] = x_objkeysholder.fisc_label
+    x_dict["vow_label"] = x_objkeysholder.vow_label
     x_dict["owner_name"] = x_objkeysholder.owner_name
     insert_sqlstr = create_budgrou_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
@@ -415,7 +415,7 @@ def insert_job_budawar(
     x_awardheir: AwardHeir,
 ):
     x_dict = copy_deepcopy(x_awardheir.__dict__)
-    x_dict["fisc_label"] = x_objkeysholder.fisc_label
+    x_dict["vow_label"] = x_objkeysholder.vow_label
     x_dict["owner_name"] = x_objkeysholder.owner_name
     x_dict["concept_way"] = x_objkeysholder.way
     insert_sqlstr = create_budawar_metrics_insert_sqlstr(x_dict)
@@ -428,7 +428,7 @@ def insert_job_budfact(
     x_factheir: FactHeir,
 ):
     x_dict = copy_deepcopy(x_factheir.__dict__)
-    x_dict["fisc_label"] = x_objkeysholder.fisc_label
+    x_dict["vow_label"] = x_objkeysholder.vow_label
     x_dict["owner_name"] = x_objkeysholder.owner_name
     x_dict["concept_way"] = x_objkeysholder.way
     insert_sqlstr = create_budfact_metrics_insert_sqlstr(x_dict)
@@ -441,7 +441,7 @@ def insert_job_budheal(
     x_healer: HealerLink,
 ):
     x_dict = {
-        "fisc_label": x_objkeysholder.fisc_label,
+        "vow_label": x_objkeysholder.vow_label,
         "owner_name": x_objkeysholder.owner_name,
         "concept_way": x_objkeysholder.way,
     }
@@ -457,7 +457,7 @@ def insert_job_budprem(
     x_premiseunit: PremiseUnit,
 ):
     x_dict = copy_deepcopy(x_premiseunit.__dict__)
-    x_dict["fisc_label"] = x_objkeysholder.fisc_label
+    x_dict["vow_label"] = x_objkeysholder.vow_label
     x_dict["owner_name"] = x_objkeysholder.owner_name
     x_dict["concept_way"] = x_objkeysholder.way
     x_dict["rcontext"] = x_objkeysholder.rcontext
@@ -471,7 +471,7 @@ def insert_job_budreas(
     x_reasonheir: ReasonHeir,
 ):
     x_dict = copy_deepcopy(x_reasonheir.__dict__)
-    x_dict["fisc_label"] = x_objkeysholder.fisc_label
+    x_dict["vow_label"] = x_objkeysholder.vow_label
     x_dict["owner_name"] = x_objkeysholder.owner_name
     x_dict["concept_way"] = x_objkeysholder.way
     insert_sqlstr = create_budreas_metrics_insert_sqlstr(x_dict)
@@ -484,7 +484,7 @@ def insert_job_budlabo(
     x_laborheir: LaborHeir,
 ):
     x_dict = copy_deepcopy(x_laborheir.__dict__)
-    x_dict["fisc_label"] = x_objkeysholder.fisc_label
+    x_dict["vow_label"] = x_objkeysholder.vow_label
     x_dict["owner_name"] = x_objkeysholder.owner_name
     x_dict["concept_way"] = x_objkeysholder.way
     for labor_title in sorted(x_laborheir._laborlinks):
@@ -513,7 +513,7 @@ def insert_job_budunit(
 
 def insert_job_obj(cursor: sqlite3_Cursor, job_bud: BudUnit):
     job_bud.settle_bud()
-    x_objkeysholder = ObjKeysHolder(job_bud.fisc_label, job_bud.owner_name)
+    x_objkeysholder = ObjKeysHolder(job_bud.vow_label, job_bud.owner_name)
     insert_job_budunit(cursor, x_objkeysholder, job_bud)
     for x_concept in job_bud.get_concept_dict().values():
         x_objkeysholder.way = x_concept.get_concept_way()

@@ -259,9 +259,9 @@ def test_way_get_root_label_from_way_ReturnsLabelTerm():
 def test_way_get_parent_way_ReturnsObj_Scenario0():
     # ESTABLISH
     x_s = default_bridge_if_None()
-    root_fisc_way = f"{x_s}{get_default_axiom_label()}{x_s}"
+    root_vow_way = f"{x_s}{get_default_axiom_label()}{x_s}"
     casa_str = "casa"
-    casa_way = f"{root_fisc_way}{casa_str}{x_s}"
+    casa_way = f"{root_vow_way}{casa_str}{x_s}"
     bloomers_str = "bloomers"
     bloomers_way = f"{casa_way}{bloomers_str}{x_s}"
     roses_str = "roses"
@@ -269,7 +269,7 @@ def test_way_get_parent_way_ReturnsObj_Scenario0():
 
     # WHEN / THENs
     assert get_parent_way(root_way(), x_s) == ""
-    assert get_parent_way(casa_way, x_s) == root_fisc_way
+    assert get_parent_way(casa_way, x_s) == root_vow_way
     assert get_parent_way(bloomers_way, x_s) == casa_way
     assert get_parent_way(roses_way, x_s) == bloomers_way
 
@@ -277,17 +277,17 @@ def test_way_get_parent_way_ReturnsObj_Scenario0():
 def test_way_get_parent_way_ReturnsObj_Scenario1():
     # ESTABLISH
     x_s = "/"
-    root_fisc_way = f"{x_s}{get_default_axiom_label()}{x_s}"
+    root_vow_way = f"{x_s}{get_default_axiom_label()}{x_s}"
     casa_str = "casa"
-    casa_way = f"{root_fisc_way}{casa_str}{x_s}"
+    casa_way = f"{root_vow_way}{casa_str}{x_s}"
     bloomers_str = "bloomers"
     bloomers_way = f"{casa_way}{bloomers_str}{x_s}"
     roses_str = "roses"
     roses_way = f"{bloomers_way}{roses_str}{x_s}"
 
     # WHEN / THENs
-    assert get_parent_way(root_fisc_way, x_s) == ""
-    assert get_parent_way(casa_way, x_s) == root_fisc_way
+    assert get_parent_way(root_vow_way, x_s) == ""
+    assert get_parent_way(casa_way, x_s) == root_vow_way
     assert get_parent_way(bloomers_way, x_s) == casa_way
     assert get_parent_way(roses_way, x_s) == bloomers_way
 
@@ -358,9 +358,9 @@ def test_way_get_ancestor_ways_ReturnsObj_Scenario0_default_bridge():
 def test_way_get_ancestor_ways_ReturnsObj_Scenario1_nondefault_bridge():
     # ESTABLISH
     x_s = "/"
-    root_fisc_way = f"{x_s}accord23{x_s}"
+    root_vow_way = f"{x_s}accord23{x_s}"
     nation_str = "nation"
-    nation_way = f"{root_fisc_way}{nation_str}{x_s}"
+    nation_way = f"{root_vow_way}{nation_str}{x_s}"
     usa_str = "USA"
     usa_way = f"{nation_way}{usa_str}{x_s}"
     texas_str = "Texas"
@@ -377,7 +377,7 @@ def test_way_get_ancestor_ways_ReturnsObj_Scenario1_nondefault_bridge():
         texas_way,
         usa_way,
         nation_way,
-        root_fisc_way,
+        root_vow_way,
     ]
     assert texas_anc_ways == texas_ancestor_ways
 

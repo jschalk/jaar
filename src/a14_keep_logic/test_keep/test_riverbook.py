@@ -1,6 +1,6 @@
 from src.a06_bud_logic.bud import budunit_shop
 from src.a12_hub_tools.hubunit import hubunit_shop
-from src.a14_keep_logic._test_util.a14_env import temp_fisc_mstr_dir
+from src.a14_keep_logic._test_util.a14_env import temp_vow_mstr_dir
 from src.a14_keep_logic.rivercycle import (
     RiverBook,
     create_riverbook,
@@ -22,8 +22,8 @@ def test_RiverBook_Exists():
 def test_riverbook_shop_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
-    x_fisc_mstr_dir = temp_fisc_mstr_dir()
-    yao_hubunit = hubunit_shop(x_fisc_mstr_dir, None, yao_str)
+    x_vow_mstr_dir = temp_vow_mstr_dir()
+    yao_hubunit = hubunit_shop(x_vow_mstr_dir, None, yao_str)
 
     # WHEN
     bob_str = "Bob"
@@ -42,8 +42,8 @@ def test_create_riverbook_ReturnsObj():
     yao_bud = budunit_shop(yao_str)
     yao_bud.add_acctunit(yao_str)
     yao_bud.add_acctunit(sue_str)
-    x_fisc_mstr_dir = temp_fisc_mstr_dir()
-    yao_hubunit = hubunit_shop(x_fisc_mstr_dir, None, yao_str)
+    x_vow_mstr_dir = temp_vow_mstr_dir()
+    yao_hubunit = hubunit_shop(x_vow_mstr_dir, None, yao_str)
     yao_book_point_amount = 500
 
     # WHEN

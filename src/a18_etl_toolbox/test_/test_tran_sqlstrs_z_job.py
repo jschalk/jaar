@@ -1,6 +1,6 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_create_table_sqlstr
-from src.a02_finance_logic._test_util.a02_str import fisc_label_str, owner_name_str
+from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
 from src.a06_bud_logic._test_util.a06_str import (
     bud_acct_membership_str,
     bud_acctunit_str,
@@ -38,7 +38,7 @@ def test_get_job_create_table_sqlstrs_ReturnsObj():
         x_config = bud_calc_config.get(x_dimen)
 
         job_table = prime_table(x_dimen, job_str(), None)
-        job_cols = {fisc_label_str(), owner_name_str()}
+        job_cols = {vow_label_str(), owner_name_str()}
         job_cols.update(set(x_config.get("jkeys").keys()))
         job_cols.update(set(x_config.get("jvalues").keys()))
         job_cols.update(set(x_config.get("jmetrics").keys()))
@@ -54,8 +54,8 @@ def test_get_job_create_table_sqlstrs_ReturnsObj():
 
 def test_create_job_tables_CreatesTables():
     # ESTABLISH
-    with sqlite3_connect(":memory:") as fisc_db_conn:
-        cursor = fisc_db_conn.cursor()
+    with sqlite3_connect(":memory:") as vow_db_conn:
+        cursor = vow_db_conn.cursor()
         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
         assert cursor.fetchone()[0] == 0
 

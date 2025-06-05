@@ -80,7 +80,7 @@ def test_sift_atom_ReturnsObj_BudAtom_DELETE_bud_acct_membership():
 def test_sift_atom_ReturnsObj_BudAtom_DELETE_bud_conceptunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    root_way = to_way(sue_bud.fisc_label)
+    root_way = to_way(sue_bud.vow_label)
     casa_str = "casa"
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"
@@ -121,7 +121,7 @@ def test_sift_atom_ReturnsObj_BudAtom_DELETE_bud_conceptunit():
 def test_sift_atom_SetsBudDeltaBudAtom_bud_conceptunit():
     # ESTABLISH
     sue_bud = budunit_shop("Sue")
-    root_way = to_way(sue_bud.fisc_label)
+    root_way = to_way(sue_bud.vow_label)
     casa_str = "casa"
     casa_way = sue_bud.make_l1_way(casa_str)
     clean_str = "clean"

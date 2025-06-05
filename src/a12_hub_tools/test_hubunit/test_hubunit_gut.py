@@ -38,7 +38,7 @@ def test_HubUnit_default_gut_bud_ReturnsObj():
     sue_default_gut = sue_hubunit.default_gut_bud()
 
     # THEN
-    assert sue_default_gut.fisc_label == sue_hubunit.fisc_label
+    assert sue_default_gut.vow_label == sue_hubunit.vow_label
     assert sue_default_gut.owner_name == sue_hubunit.owner_name
     assert sue_default_gut.bridge == sue_hubunit.bridge
     assert sue_default_gut.fund_pool == sue_hubunit.fund_pool
@@ -150,7 +150,7 @@ def test_HubUnit_initialize_pack_gut_files_CorrectlySavesgutFileAndPackFile(
 
     # THEN
     gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
-    assert gut_bud.fisc_label == "accord23"
+    assert gut_bud.vow_label == "accord23"
     assert gut_bud.owner_name == sue_str
     assert gut_bud.respect_bit == seven_int
     assert os_path_exists(init_pack_file_path)
@@ -176,7 +176,7 @@ def test_HubUnit_initialize_pack_gut_files_CorrectlySavesOnlygutFile(
 
     # THEN
     gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
-    assert gut_bud.fisc_label == "accord23"
+    assert gut_bud.vow_label == "accord23"
     assert gut_bud.owner_name == sue_str
     assert gut_bud.respect_bit == seven_int
     assert os_path_exists(init_pack_file_path)
@@ -203,7 +203,7 @@ def test_HubUnit_initialize_pack_gut_files_CorrectlySavesOnlyPackFile(
     sue_hubunit.initialize_pack_gut_files()
 
     # THEN
-    assert sue_gut_bud.fisc_label == "accord23"
+    assert sue_gut_bud.vow_label == "accord23"
     assert sue_gut_bud.owner_name == sue_str
     assert sue_gut_bud.respect_bit == seven_int
     assert sue_gut_bud.acct_exists(bob_str)

@@ -6,9 +6,9 @@ from src.a00_data_toolbox.file_toolbox import count_dirs_files, create_path, sav
 from src.a02_finance_logic._test_util.a02_str import (
     celldepth_str,
     deal_time_str,
-    fisc_label_str,
     owner_name_str,
     quota_str,
+    vow_label_str,
 )
 from src.a06_bud_logic._test_util.a06_str import acct_name_str
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
@@ -16,12 +16,12 @@ from src.a12_hub_tools.hub_path import (
     create_deal_acct_mandate_ledger_path as deal_mandate,
     create_event_all_pack_path,
     create_event_expressed_pack_path as expressed_path,
-    create_fisc_json_path,
-    create_fisc_ote1_csv_path,
     create_gut_path,
     create_job_path,
+    create_vow_json_path,
+    create_vow_ote1_csv_path,
 )
-from src.a15_fisc_logic._test_util.a15_str import cumlative_minute_str, hour_label_str
+from src.a15_vow_logic._test_util.a15_str import cumlative_minute_str, hour_label_str
 from src.a16_pidgin_logic._test_util.a16_str import inx_name_str, otx_name_str
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
@@ -47,7 +47,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
     br00113_columns = [
         face_name_str(),
         event_int_str(),
-        fisc_label_str(),
+        vow_label_str(),
         owner_name_str(),
         acct_name_str(),
         otx_name_str(),
@@ -64,8 +64,8 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
     br00113_valid = f"{br00113_str}_brick_valid"
     events_brick_agg_tablename = "events_brick_agg"
     events_brick_valid_tablename = "events_brick_valid"
-    fisc_event_time_agg_tablename = "fisc_event_time_agg"
-    fisc_ote1_agg_tablename = "fisc_ote1_agg"
+    vow_event_time_agg_tablename = "vow_event_time_agg"
+    vow_ote1_agg_tablename = "vow_ote1_agg"
     pidname_sound_raw = create_prime_tablename("pidname", "s", "raw")
     pidname_sound_agg = create_prime_tablename("pidname", "s", "agg")
     pidname_sound_vld = create_prime_tablename("pidname", "s", "vld")
@@ -87,8 +87,8 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
     budunit_voice_put_agg = create_prime_tablename("budunit", "v", "agg", "put")
     budacct_voice_put_raw = create_prime_tablename("budacct", "v", "raw", "put")
     budacct_voice_put_agg = create_prime_tablename("budacct", "v", "agg", "put")
-    mstr_dir = fizz_world._fisc_mstr_dir
-    a23_json_path = create_fisc_json_path(mstr_dir, a23_str)
+    mstr_dir = fizz_world._vow_mstr_dir
+    a23_json_path = create_vow_json_path(mstr_dir, a23_str)
     a23_e1_all_pack_path = create_event_all_pack_path(mstr_dir, a23_str, sue_inx, e3)
     a23_e1_expressed_pack_path = expressed_path(mstr_dir, a23_str, sue_inx, e3)
     a23_sue_gut_path = create_gut_path(mstr_dir, a23_str, sue_inx)
@@ -125,15 +125,15 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
         assert not os_path_exists(a23_e1_expressed_pack_path)
         assert not os_path_exists(a23_sue_gut_path)
         assert not os_path_exists(a23_sue_job_path)
-        assert not db_table_exists(cursor, fisc_event_time_agg_tablename)
-        assert not db_table_exists(cursor, fisc_ote1_agg_tablename)
+        assert not db_table_exists(cursor, vow_event_time_agg_tablename)
+        assert not db_table_exists(cursor, vow_ote1_agg_tablename)
         assert not db_table_exists(cursor, budacct_job)
 
         # # create budunits
         # self.bud_tables_to_event_bud_csvs(cursor)
 
-        # # create all fisc_job and mandate reports
-        # self.calc_fisc_deal_acct_mandate_net_ledgers()
+        # # create all vow_job and mandate reports
+        # self.calc_vow_deal_acct_mandate_net_ledgers()
 
         # WHEN
         fizz_world.mud_to_clarity_with_cursor(db_conn, cursor)
@@ -183,8 +183,8 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
         assert os_path_exists(a23_sue_gut_path)
         assert os_path_exists(a23_sue_job_path)
         assert get_row_count(cursor, budacct_job) == 1
-        # assert get_row_count(cursor, fisc_event_time_agg_tablename) == 0
-        # assert get_row_count(cursor, fisc_ote1_agg_tablename) == 0
+        # assert get_row_count(cursor, vow_event_time_agg_tablename) == 0
+        # assert get_row_count(cursor, vow_ote1_agg_tablename) == 0
 
 
 def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateDealCashRows(
@@ -202,7 +202,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateDealCashRows(
     br00113_columns = [
         face_name_str(),
         event_int_str(),
-        fisc_label_str(),
+        vow_label_str(),
         owner_name_str(),
         acct_name_str(),
         otx_name_str(),
@@ -219,7 +219,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateDealCashRows(
     br00001_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_label_str(),
+        vow_label_str(),
         owner_name_str(),
         deal_time_str(),
         quota_str(),
@@ -239,7 +239,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateDealCashRows(
     br00113_valid = f"{br00113_str}_brick_valid"
     events_brick_agg_tablename = "events_brick_agg"
     events_brick_valid_tablename = "events_brick_valid"
-    fisc_ote1_agg_tablename = "fisc_ote1_agg"
+    vow_ote1_agg_tablename = "vow_ote1_agg"
     pidname_sound_raw = create_prime_tablename("pidname", "s", "raw")
     pidname_sound_agg = create_prime_tablename("pidname", "s", "agg")
     pidname_sound_vld = create_prime_tablename("pidname", "s", "vld")
@@ -258,8 +258,8 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateDealCashRows(
     budunit_voice_put_agg = create_prime_tablename("budunit", "v", "agg", "put")
     budacct_voice_put_raw = create_prime_tablename("budacct", "v", "raw", "put")
     budacct_voice_put_agg = create_prime_tablename("budacct", "v", "agg", "put")
-    mstr_dir = fizz_world._fisc_mstr_dir
-    a23_json_path = create_fisc_json_path(mstr_dir, a23_str)
+    mstr_dir = fizz_world._vow_mstr_dir
+    a23_json_path = create_vow_json_path(mstr_dir, a23_str)
     a23_e1_all_pack_path = create_event_all_pack_path(mstr_dir, a23_str, sue_inx, e3)
     a23_e1_expressed_pack_path = expressed_path(mstr_dir, a23_str, sue_inx, e3)
     a23_sue_gut_path = create_gut_path(mstr_dir, a23_str, sue_inx)
@@ -294,15 +294,15 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateDealCashRows(
         assert not os_path_exists(a23_e1_expressed_pack_path)
         assert not os_path_exists(a23_sue_gut_path)
         assert not os_path_exists(a23_sue_job_path)
-        assert not db_table_exists(cursor, fisc_ote1_agg_tablename)
+        assert not db_table_exists(cursor, vow_ote1_agg_tablename)
         assert not os_path_exists(sue37_mandate_path)
-        # self.fisc_agg_tables_to_fisc_ote1_agg(cursor)
+        # self.vow_agg_tables_to_vow_ote1_agg(cursor)
 
         # # create budunits
         # self.bud_tables_to_event_bud_csvs(cursor)
 
-        # # create all fisc_job and mandate reports
-        # self.calc_fisc_deal_acct_mandate_net_ledgers()
+        # # create all vow_job and mandate reports
+        # self.calc_vow_deal_acct_mandate_net_ledgers()
 
         # WHEN
         fizz_world.mud_to_clarity_with_cursor(db_conn, cursor)
@@ -336,12 +336,12 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateDealCashRows(
         assert os_path_exists(a23_e1_expressed_pack_path)
         assert os_path_exists(a23_sue_gut_path)
         assert os_path_exists(a23_sue_job_path)
-        assert get_row_count(cursor, fisc_ote1_agg_tablename) == 1
+        assert get_row_count(cursor, vow_ote1_agg_tablename) == 1
         print(f"{sue37_mandate_path=}")
         assert os_path_exists(sue37_mandate_path)
 
 
-def test_WorldUnit_mud_to_clarity_with_cursor_Senario1_WhenNoFiscIdeas_ote1_IsStillCreated(
+def test_WorldUnit_mud_to_clarity_with_cursor_Senario1_WhenNoVowIdeas_ote1_IsStillCreated(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -355,15 +355,15 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Senario1_WhenNoFiscIdeas_ote1_IsSt
     br00011_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_label_str(),
+        vow_label_str(),
         owner_name_str(),
         acct_name_str(),
     ]
     br00011_rows = [[event2, sue_str, accord23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
-    fisc_mstr = fizz_world._fisc_mstr_dir
-    a23_ote1_csv_path = create_fisc_ote1_csv_path(fisc_mstr, accord23_str)
+    vow_mstr = fizz_world._vow_mstr_dir
+    a23_ote1_csv_path = create_vow_ote1_csv_path(vow_mstr, accord23_str)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         assert os_path_exists(a23_ote1_csv_path) is False
@@ -382,14 +382,14 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario2_DeletesPreviousFiles(
     fizz_str = "fizz"
     fizz_world = worldunit_shop(fizz_str, worlds_dir())
     print(f"{fizz_world.worlds_dir=}")
-    mstr_dir = fizz_world._fisc_mstr_dir
-    fiscs_dir = create_path(mstr_dir, "fiscs")
+    mstr_dir = fizz_world._vow_mstr_dir
+    vows_dir = create_path(mstr_dir, "vows")
     testing2_filename = "testing2.txt"
     testing3_filename = "testing3.txt"
     save_file(fizz_world.worlds_dir, testing2_filename, "")
-    save_file(fiscs_dir, testing3_filename, "")
+    save_file(vows_dir, testing3_filename, "")
     testing2_path = create_path(fizz_world.worlds_dir, testing2_filename)
-    testing3_path = create_path(fiscs_dir, testing3_filename)
+    testing3_path = create_path(vows_dir, testing3_filename)
     assert os_path_exists(testing2_path)
     assert os_path_exists(testing3_path)
     print(f"{testing3_path=}")
@@ -424,13 +424,13 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario3_CreatesFiles(
         event_int_str(),
         face_name_str(),
         cumlative_minute_str(),
-        fisc_label_str(),
+        vow_label_str(),
         hour_label_str(),
     ]
     br00001_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_label_str(),
+        vow_label_str(),
         owner_name_str(),
         deal_time_str(),
         quota_str(),
@@ -457,17 +457,17 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario3_CreatesFiles(
     br00011_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_label_str(),
+        vow_label_str(),
         owner_name_str(),
         acct_name_str(),
     ]
     br00011_rows = [[event2, sue_str, accord23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
-    mstr_dir = fizz_world._fisc_mstr_dir
-    wrong_a23_fisc_dir = create_path(mstr_dir, accord23_str)
-    assert os_path_exists(wrong_a23_fisc_dir) is False
-    a23_json_path = create_fisc_json_path(mstr_dir, accord23_str)
+    mstr_dir = fizz_world._vow_mstr_dir
+    wrong_a23_vow_dir = create_path(mstr_dir, accord23_str)
+    assert os_path_exists(wrong_a23_vow_dir) is False
+    a23_json_path = create_vow_json_path(mstr_dir, accord23_str)
     a23_sue_gut_path = create_gut_path(mstr_dir, accord23_str, sue_str)
     a23_sue_job_path = create_job_path(mstr_dir, accord23_str, sue_str)
     sue37_mandate_path = deal_mandate(mstr_dir, accord23_str, sue_str, tp37)
@@ -484,7 +484,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario3_CreatesFiles(
         fizz_world.mud_to_clarity_with_cursor(db_conn, cursor)
 
         # THEN
-        assert os_path_exists(wrong_a23_fisc_dir) is False
+        assert os_path_exists(wrong_a23_vow_dir) is False
         assert os_path_exists(mud_file_path)
         assert os_path_exists(a23_json_path)
         assert os_path_exists(a23_sue_gut_path)

@@ -159,7 +159,7 @@ def test_BudUnit_settle_bud_CorrectlySets_concept_dict():
     # THEN
     casa_concept = sue_budunit._concept_dict.get(casa_way)
     print(f"\nlook at {casa_concept.get_concept_way()=}")
-    assert casa_concept.parent_way == to_way(sue_budunit.fisc_label)
+    assert casa_concept.parent_way == to_way(sue_budunit.vow_label)
     assert casa_concept._kids == {}
     assert casa_concept.mass == 30
     assert casa_concept.concept_label == casa_str
@@ -290,7 +290,7 @@ def test_BudUnit_settle_bud_CorrectlySetsData_budunit_v001():
     # ESTABLISH
     yao_budunit = budunit_v001()
     print(f"{yao_budunit.get_reason_rcontexts()=}")
-    # day_hr = f"{yao_budunit.fisc_label},day_hr"
+    # day_hr = f"{yao_budunit.vow_label},day_hr"
     # yao_budunit.add_fact(fcontext=day_hr, fstate=day_hr, popen=0, pnigh=23)
     day_min_str = "day_minute"
     day_min_way = yao_budunit.make_l1_way(day_min_str)
@@ -407,7 +407,7 @@ def test_BudUnit_settle_bud_OptionWeekdaysReturnsObj_budunit_v001():
     }
     mt_reasonunit = reasonunit_shop(wk_way, premises=mt_premises)
     mt_reasonheir = reasonheir_shop(wk_way, premises=mt_premises, _status=False)
-    x_conceptroot = yao_budunit.get_concept_obj(to_way(yao_budunit.fisc_label))
+    x_conceptroot = yao_budunit.get_concept_obj(to_way(yao_budunit.vow_label))
     x_conceptroot.set_reasonunit(reason=mt_reasonunit)
     # print(f"{yao_budunit.reasonunits[wk_way].rcontext=}")
     # print(f"{yao_budunit.reasonunits[wk_way].premises[mon_way].pstate=}")
@@ -449,11 +449,11 @@ def test_BudUnit_settle_bud_OptionWeekdaysReturnsObj_budunit_v001():
 
     # assert YR.get_active(way=bird_concept, concept_dict=concept_dict) is True
 
-    # yao_budunit.add_fact(fcontext=f"{yao_budunit.fisc_label},wkdays", fstate=f"{yao_budunit.fisc_label},wkdays,Tuesday")
+    # yao_budunit.add_fact(fcontext=f"{yao_budunit.vow_label},wkdays", fstate=f"{yao_budunit.vow_label},wkdays,Tuesday")
     # concept_dict = yao_budunit.get_concept_dict()
     # assert YR.get_active(way=bird_concept, concept_dict=concept_dict) is True
 
-    # yao_budunit.add_fact(fcontext=f"{yao_budunit.fisc_label},wkdays", fstate=f"{yao_budunit.fisc_label},wkdays,Wednesday")
+    # yao_budunit.add_fact(fcontext=f"{yao_budunit.vow_label},wkdays", fstate=f"{yao_budunit.vow_label},wkdays,Wednesday")
     # concept_dict = yao_budunit.get_concept_dict()
     # assert YR.get_active(way=bird_concept, concept_dict=concept_dict) is False
 
