@@ -58,10 +58,6 @@ def _kids_str() -> str:
     return "_kids"
 
 
-def _originunit_str() -> str:
-    return "_originunit"
-
-
 def _range_evaluated_str() -> str:
     return "_range_evaluated"
 

@@ -4623,9 +4623,6 @@
     "vow_label": "accord45",
     "mass": 1,
     "max_tree_traverse": 2,
-    "originunit": {
-        "_originholds": {}
-    },
     "owner_name": "Yao",
     "penny": 1,
     "respect_bit": 1

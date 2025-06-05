@@ -20,7 +20,6 @@ from src.a05_concept_logic._test_util.a05_str import (
     _healerlink_ratio_str,
     _is_expanded_str,
     _kids_str,
-    _originunit_str,
     _range_evaluated_str,
     _reasonheirs_str,
     _stop_calc_str,
@@ -48,7 +47,6 @@ from src.a05_concept_logic.concept import (
     get_default_vow_label,
 )
 from src.a05_concept_logic.healer import healerlink_shop
-from src.a05_concept_logic.origin import originunit_shop
 
 
 def test_get_default_vow_label_ReturnsObj():
@@ -71,7 +69,6 @@ def test_ConceptUnit_Exists():
     assert x_conceptunit.awardlinks is None
     assert x_conceptunit._awardlines is None  # calculated field'
     assert x_conceptunit._awardheirs is None  # calculated field'
-    assert x_conceptunit._originunit is None
     assert x_conceptunit.bridge is None
     assert x_conceptunit.begin is None
     assert x_conceptunit.close is None
@@ -121,7 +118,6 @@ def test_ConceptUnit_Exists():
         _kids_str(),
         "_laborheir",
         "_level",
-        _originunit_str(),
         _range_evaluated_str(),
         _reasonheirs_str(),
         _stop_calc_str(),
@@ -191,7 +187,6 @@ def test_conceptunit_shop_WithNoParametersReturnsObj():
     assert x_conceptunit._reasonheirs == {}
     assert x_conceptunit.laborunit == laborunit_shop()
     assert x_conceptunit._laborheir is None
-    assert x_conceptunit._originunit == originunit_shop()
     assert x_conceptunit.bridge == default_bridge_if_None()
     assert x_conceptunit.root is False
     assert x_conceptunit._all_acct_cred is None

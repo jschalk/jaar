@@ -63,11 +63,6 @@ from src.a05_concept_logic.healer import (
     healerlink_get_from_dict,
     healerlink_shop,
 )
-from src.a05_concept_logic.origin import (
-    OriginUnit,
-    originunit_get_from_dict,
-    originunit_shop,
-)
 from src.a05_concept_logic.range_toolbox import RangeUnit, get_morphed_rangeunit
 
 
@@ -228,7 +223,6 @@ class ConceptUnit:
     gogo_want: bool = None
     stop_want: bool = None
     pledge: bool = None
-    _originunit: OriginUnit = None
     problem_bool: bool = None
     bridge: str = None
     _is_expanded: bool = None
@@ -550,13 +544,6 @@ class ConceptUnit:
             x_factunit.set_attr(fstate=new_fstate_way)
             new_factunits[new_rcontext_way] = x_factunit
         self.factunits = new_factunits
-
-    def set_originunit_empty_if_None(self):
-        if self._originunit is None:
-            self._originunit = originunit_shop()
-
-    def get_originunit_dict(self) -> dict[str, str]:
-        return self._originunit.get_dict()
 
     def _set_attrs_to_conceptunit(self, concept_attr: ConceptAttrHolder):
         if concept_attr.mass is not None:
@@ -919,8 +906,6 @@ class ConceptUnit:
             x_dict["healerlink"] = self.healerlink.get_dict()
         if self.awardlinks not in [{}, None]:
             x_dict["awardlinks"] = self.get_awardlinks_dict()
-        if self._originunit not in [None, originunit_shop()]:
-            x_dict["originunit"] = self.get_originunit_dict()
         if self.begin is not None:
             x_dict["begin"] = self.begin
         if self.close is not None:
@@ -1005,7 +990,6 @@ def conceptunit_shop(
     numor: int = None,
     morph: bool = None,
     pledge: bool = None,
-    _originunit: OriginUnit = None,
     root: bool = None,
     vow_label: VowLabel = None,
     problem_bool: bool = None,
@@ -1054,7 +1038,6 @@ def conceptunit_shop(
         morph=morph,
         pledge=get_False_if_None(pledge),
         problem_bool=get_False_if_None(problem_bool),
-        _originunit=_originunit,
         root=get_False_if_None(root),
         vow_label=vow_label,
         # Calculated fields
@@ -1078,7 +1061,6 @@ def conceptunit_shop(
     else:
         x_conceptkid.set_concept_label(concept_label=concept_label)
     x_conceptkid.set_laborunit_empty_if_None()
-    x_conceptkid.set_originunit_empty_if_None()
     return x_conceptkid
 
 
@@ -1100,12 +1082,6 @@ def get_obj_from_concept_dict(x_dict: dict[str, dict], dict_key: str) -> any:
             healerlink_get_from_dict(x_dict[dict_key])
             if x_dict.get(dict_key) is not None
             else healerlink_shop()
-        )
-    elif dict_key == "originunit":
-        return (
-            originunit_get_from_dict(x_dict[dict_key])
-            if x_dict.get(dict_key) is not None
-            else originunit_shop()
         )
     elif dict_key == "factunits":
         facts_dict = get_empty_dict_if_None(x_dict.get(dict_key))

@@ -14,7 +14,6 @@ from src.a02_finance_logic.finance_config import (
     validate_respect_num,
 )
 from src.a05_concept_logic.concept import get_default_vow_label as root_label
-from src.a05_concept_logic.origin import originunit_shop
 from src.a06_bud_logic._test_util.a06_str import (
     _keeps_buildable_str,
     _keeps_justified_str,
@@ -56,7 +55,6 @@ def test_BudUnit_Exists():
     assert x_bud.respect_bit is None
     assert x_bud.penny is None
     assert x_bud.last_pack_id is None
-    assert x_bud.originunit is None
     # calculated attr
     assert x_bud._concept_dict is None
     assert x_bud._keep_dict is None
@@ -97,7 +95,6 @@ def test_BudUnit_Exists():
         fund_pool_str(),
         last_pack_id_str(),
         max_tree_traverse_str(),
-        "originunit",
         owner_name_str(),
         penny_str(),
         respect_bit_str(),
@@ -142,7 +139,6 @@ def test_budunit_shop_ReturnsObjectWithFilledFields():
     assert x_bud.credor_respect == validate_respect_num()
     assert x_bud.debtor_respect == validate_respect_num()
     assert not x_bud.last_pack_id
-    assert x_bud.originunit == originunit_shop()
     # calculated attr
     assert x_bud._concept_dict == {}
     assert x_bud._keep_dict == {}

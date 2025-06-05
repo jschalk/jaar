@@ -13,7 +13,6 @@ from src.a05_concept_logic._test_util.a05_str import (
     _healerlink_ratio_str,
     _is_expanded_str,
     _kids_str,
-    _originunit_str,
     _range_evaluated_str,
     _reasonheirs_str,
     _stop_calc_str,
@@ -51,7 +50,6 @@ def test_str_functions_ReturnsObj():
     assert _healerlink_ratio_str() == "_healerlink_ratio"
     assert _is_expanded_str() == "_is_expanded"
     assert _kids_str() == "_kids"
-    assert _originunit_str() == "_originunit"
     assert _range_evaluated_str() == "_range_evaluated"
     assert _reasonheirs_str() == "_reasonheirs"
     assert _stop_calc_str() == "_stop_calc"

@@ -24,12 +24,10 @@ def test_BudUnit_get_dict_ReturnsObj_Scenario1_large_json():
     day_hr_str = "day_hr"
     day_hr_way = yao_bud.make_l1_way(day_hr_str)
     day_hr_concept = yao_bud.get_concept_obj(day_hr_way)
-    day_hr_concept._originunit.set_originhold(acct_name="Bob", importance=2)
     yao_bud.add_fact(fcontext=day_hr_way, fstate=day_hr_way, fopen=0, fnigh=23)
     time_minute = yao_bud.make_l1_way("day_minute")
     yao_bud.add_fact(fcontext=time_minute, fstate=time_minute, fopen=0, fnigh=1440)
     yao_str = "Yao"
-    yao_bud.originunit.set_originhold(yao_str, 1)
     yao_fund_pool = 23000
     yao_bud.fund_pool = yao_fund_pool
     yao_fund_iota = 23
@@ -72,16 +70,6 @@ def test_BudUnit_get_dict_ReturnsObj_Scenario1_large_json():
     assert conceptroot_dict["concept_label"] == x_conceptroot.concept_label
     assert conceptroot_dict["mass"] == x_conceptroot.mass
     assert len(conceptroot_dict[_kids]) == len(x_conceptroot._kids)
-
-    originunit_str = "originunit"
-    day_hr_originunit_dict = conceptroot_dict[_kids][day_hr_str][originunit_str]
-    assert day_hr_originunit_dict == day_hr_concept._originunit.get_dict()
-    originholds_str = "_originholds"
-    yao_bud_originhold = bud_dict[originunit_str][originholds_str][yao_str]
-    print(f"{yao_bud_originhold=}")
-    assert yao_bud_originhold
-    assert yao_bud_originhold["acct_name"] == yao_str
-    assert yao_bud_originhold["importance"] == 1
 
 
 def test_BudUnit_get_dict_ReturnsObj_Scenario2_conceptroot_laborunit():
@@ -240,7 +228,6 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     yao_bud.edit_concept_attr(x_factunit.fcontext, factunit=x_factunit)
     yao_bud.set_max_tree_traverse(2)
     yao_str = "Yao"
-    yao_bud.originunit.set_originhold(yao_str, 1)
 
     # WHEN
     bud_dict = get_dict_from_json(yao_bud.get_json())
@@ -277,9 +264,6 @@ def test_BudUnit_get_json_ReturnsCorrectJSON_BigExample():
     ulti_reasonunits_dict = conceptroot_dict[_kids][ulti_str][_reasonunits]
     assert len(cont_reasonunits_dict) == len(cont_concept.reasonunits)
     assert len(ulti_reasonunits_dict) == len(ulti_concept.reasonunits)
-    originunit_str = "originunit"
-    originholds_str = "_originholds"
-    assert len(bud_dict[originunit_str][originholds_str])
 
     anna_str = "Anna"
     anna_acctunit = yao_bud.get_acct(anna_str)
@@ -312,7 +296,6 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     shave_str = "shave"
     shave_way = zia_bud.make_l1_way(shave_str)
     shave_concept_y1 = zia_bud.get_concept_obj(shave_way)
-    shave_concept_y1._originunit.set_originhold(acct_name="Sue", importance=4.3)
     shave_concept_y1.problem_bool = True
     # print(f"{shave_way=}")
     # print(f"{json_shave_concept.concept_label=} {json_shave_concept.parent_way=}")
@@ -345,8 +328,6 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     shave_concept.gogo_want = zia_gogo_want
     shave_concept.stop_want = zia_stop_want
 
-    yao_str = "Yao"
-    zia_bud.originunit.set_originhold(yao_str, 1)
     override_str = "override"
 
     # WHEN
@@ -406,7 +387,6 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     assert len(json_shave_concept.reasonunits) == 1
     assert json_shave_concept.laborunit == zia_shave_concept.laborunit
     assert json_shave_concept.laborunit == xio_laborunit
-    assert json_shave_concept._originunit == zia_shave_concept._originunit
     print(f"{json_shave_concept.healerlink=}")
     assert json_shave_concept.healerlink == zia_shave_concept.healerlink
     assert len(json_shave_concept.awardlinks) == 2
@@ -415,9 +395,6 @@ def test_budunit_get_from_json_ReturnsObjSimpleExample():
     assert json_shave_concept.problem_bool == zia_shave_concept.problem_bool
     assert json_shave_concept.gogo_want == zia_shave_concept.gogo_want
     assert json_shave_concept.stop_want == zia_shave_concept.stop_want
-
-    assert len(json_bud.originunit._originholds) == 1
-    assert json_bud.originunit == zia_bud.originunit
 
 
 def test_budunit_get_from_json_ReturnsCorrectConceptRoot():
@@ -573,7 +550,6 @@ def test_get_dict_of_bud_from_dict_ReturnsDictOfBudUnits():
     assert ccn_bud3.get_dict() == x3_bud.get_dict()
 
     cc1_concept_root = ccn_dict_of_obj.get(x1_bud.owner_name).conceptroot
-    assert cc1_concept_root._originunit == x1_bud.conceptroot._originunit
     ccn_bud1 = ccn_dict_of_obj.get(x1_bud.owner_name)
     assert ccn_bud1._concept_dict == x1_bud._concept_dict
     philipa_str = "Philipa"

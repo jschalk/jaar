@@ -5425,9 +5425,6 @@
   "fund_iota": 1,
   "fund_pool": 1000000000.0,
   "max_tree_traverse": 20,
-  "originunit": {
-    "_originholds": {}
-  },
   "owner_name": "Bob",
   "penny": 1,
   "respect_bit": 1,

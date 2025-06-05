@@ -70,11 +70,6 @@ from src.a05_concept_logic.concept import (
     get_obj_from_concept_dict,
 )
 from src.a05_concept_logic.healer import HealerLink
-from src.a05_concept_logic.origin import (
-    OriginUnit,
-    originunit_get_from_dict,
-    originunit_shop,
-)
 from src.a06_bud_logic.bud_config import max_tree_traverse_default
 from src.a06_bud_logic.tree_metrics import TreeMetrics, treemetrics_shop
 
@@ -135,7 +130,6 @@ class BudUnit:
     bridge: str = None
     max_tree_traverse: int = None
     last_pack_id: int = None
-    originunit: OriginUnit = None  # In plan buds this shows source
     # settle_bud Calculated field begin
     _concept_dict: dict[WayTerm, ConceptUnit] = None
     _keep_dict: dict[WayTerm, ConceptUnit] = None
@@ -1416,7 +1410,6 @@ class BudUnit:
     def get_dict(self) -> dict[str, str]:
         x_dict = {
             "accts": self.get_acctunits_dict(),
-            "originunit": self.originunit.get_dict(),
             "tally": self.tally,
             "fund_pool": self.fund_pool,
             "fund_iota": self.fund_iota,
@@ -1502,7 +1495,6 @@ def budunit_shop(
     )
     x_bud.set_max_tree_traverse(3)
     x_bud._rational = False
-    x_bud.originunit = originunit_shop()
     return x_bud
 
 
@@ -1534,7 +1526,6 @@ def get_from_dict(bud_dict: dict) -> BudUnit:
     x_accts = obj_from_bud_dict(bud_dict, "accts", x_bridge).values()
     for x_acctunit in x_accts:
         x_bud.set_acctunit(x_acctunit)
-    x_bud.originunit = obj_from_bud_dict(bud_dict, "originunit")
     create_conceptroot_from_bud_dict(x_bud, bud_dict)
     return x_bud
 
@@ -1601,7 +1592,6 @@ def create_conceptroot_kids_from_dict(x_bud: BudUnit, conceptroot_dict: dict):
             reasonunits=get_obj_from_concept_dict(concept_dict, "reasonunits"),
             laborunit=get_obj_from_concept_dict(concept_dict, "laborunit"),
             healerlink=get_obj_from_concept_dict(concept_dict, "healerlink"),
-            _originunit=get_obj_from_concept_dict(concept_dict, "originunit"),
             awardlinks=get_obj_from_concept_dict(concept_dict, "awardlinks"),
             factunits=get_obj_from_concept_dict(concept_dict, "factunits"),
             _is_expanded=get_obj_from_concept_dict(concept_dict, "_is_expanded"),
@@ -1612,13 +1602,7 @@ def create_conceptroot_kids_from_dict(x_bud: BudUnit, conceptroot_dict: dict):
 def obj_from_bud_dict(
     x_dict: dict[str, dict], dict_key: str, _bridge: str = None
 ) -> any:
-    if dict_key == "originunit":
-        return (
-            originunit_get_from_dict(x_dict[dict_key])
-            if x_dict.get(dict_key) is not None
-            else originunit_shop()
-        )
-    elif dict_key == "accts":
+    if dict_key == "accts":
         return acctunits_get_from_dict(x_dict[dict_key], _bridge)
     elif dict_key == "_max_tree_traverse":
         return (
