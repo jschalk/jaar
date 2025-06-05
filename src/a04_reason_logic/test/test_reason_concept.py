@@ -173,7 +173,7 @@ def test_ReasonHeir_set_rconcept_active_value_Correctly():
     assert day_reason._rconcept_active_value
 
 
-def test_ReasonHeir_set_status_BudTrueCorrectlySetsStatusTrue():
+def test_ReasonHeir_set_status_PlanTrueCorrectlySetsStatusTrue():
     # ESTABLISH
     wkday_str = "wkday"
     wkday_way = create_way(root_label(), wkday_str)
@@ -188,7 +188,7 @@ def test_ReasonHeir_set_status_BudTrueCorrectlySetsStatusTrue():
     assert wk_reason._status is True
 
 
-def test_ReasonHeir_set_status_BudFalseCorrectlySetsStatusTrue():
+def test_ReasonHeir_set_status_PlanFalseCorrectlySetsStatusTrue():
     # ESTABLISH
     wkday_str = "wkday"
     wkday_way = create_way(root_label(), wkday_str)
@@ -203,7 +203,7 @@ def test_ReasonHeir_set_status_BudFalseCorrectlySetsStatusTrue():
     assert wkday_reason._status is True
 
 
-def test_ReasonHeir_set_status_BudTrueCorrectlySetsStatusFalse():
+def test_ReasonHeir_set_status_PlanTrueCorrectlySetsStatusFalse():
     # ESTABLISH
     wkday_str = "wkday"
     wkday_way = create_way(root_label(), wkday_str)
@@ -218,7 +218,7 @@ def test_ReasonHeir_set_status_BudTrueCorrectlySetsStatusFalse():
     assert wkday_reason._status is False
 
 
-def test_ReasonHeir_set_status_BudNoneCorrectlySetsStatusFalse():
+def test_ReasonHeir_set_status_PlanNoneCorrectlySetsStatusFalse():
     # ESTABLISH
     wkday_str = "wkday"
     wkday_way = create_way(root_label(), wkday_str)

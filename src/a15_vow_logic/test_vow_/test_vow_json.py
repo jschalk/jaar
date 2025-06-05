@@ -6,7 +6,7 @@ from src.a02_finance_logic.finance_config import (
     default_RespectBit_if_None,
     filter_penny,
 )
-from src.a06_bud_logic._test_util.a06_str import (
+from src.a06_plan_logic._test_util.a06_str import (
     fund_iota_str,
     penny_str,
     respect_bit_str,

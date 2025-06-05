@@ -1,8 +1,8 @@
 {
-  "bud_acct_membership": {
+  "plan_acct_membership": {
     "allowed_crud": "delete_insert_update",
     "build_order": 9,
-    "idea_category": "bud",
+    "idea_category": "plan",
     "jkeys": {
       "acct_name": {},
       "event_int": {},
@@ -16,10 +16,10 @@
       "debtit_vote": {}
     }
   },
-  "bud_acctunit": {
+  "plan_acctunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 10,
-    "idea_category": "bud",
+    "idea_category": "plan",
     "jkeys": {
       "acct_name": {},
       "event_int": {},
@@ -32,10 +32,10 @@
       "debtit_belief": {}
     }
   },
-  "bud_concept_awardlink": {
+  "plan_concept_awardlink": {
     "allowed_crud": "delete_insert_update",
     "build_order": 11,
-    "idea_category": "bud",
+    "idea_category": "plan",
     "jkeys": {
       "awardee_title": {},
       "concept_way": {},
@@ -49,10 +49,10 @@
       "take_force": {}
     }
   },
-  "bud_concept_factunit": {
+  "plan_concept_factunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 12,
-    "idea_category": "bud",
+    "idea_category": "plan",
     "jkeys": {
       "concept_way": {},
       "event_int": {},
@@ -67,10 +67,10 @@
       "fstate": {}
     }
   },
-  "bud_concept_healerlink": {
+  "plan_concept_healerlink": {
     "allowed_crud": "delete_insert",
     "build_order": 15,
-    "idea_category": "bud",
+    "idea_category": "plan",
     "jkeys": {
       "concept_way": {},
       "event_int": {},
@@ -81,10 +81,10 @@
     },
     "jvalues": {}
   },
-  "bud_concept_laborlink": {
+  "plan_concept_laborlink": {
     "allowed_crud": "delete_insert",
     "build_order": 14,
-    "idea_category": "bud",
+    "idea_category": "plan",
     "jkeys": {
       "concept_way": {},
       "event_int": {},
@@ -95,10 +95,10 @@
     },
     "jvalues": {}
   },
-  "bud_concept_reason_premiseunit": {
+  "plan_concept_reason_premiseunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 16,
-    "idea_category": "bud",
+    "idea_category": "plan",
     "jkeys": {
       "concept_way": {},
       "event_int": {},
@@ -114,10 +114,10 @@
       "popen": {}
     }
   },
-  "bud_concept_reasonunit": {
+  "plan_concept_reasonunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 17,
-    "idea_category": "bud",
+    "idea_category": "plan",
     "jkeys": {
       "concept_way": {},
       "event_int": {},
@@ -130,10 +130,10 @@
       "rconcept_active_requisite": {}
     }
   },
-  "bud_conceptunit": {
+  "plan_conceptunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 18,
-    "idea_category": "bud",
+    "idea_category": "plan",
     "jkeys": {
       "concept_way": {},
       "event_int": {},
@@ -155,10 +155,10 @@
       "stop_want": {}
     }
   },
-  "budunit": {
+  "planunit": {
     "allowed_crud": "UPDATE",
     "build_order": 19,
-    "idea_category": "bud",
+    "idea_category": "plan",
     "jkeys": {
       "event_int": {},
       "face_name": {},

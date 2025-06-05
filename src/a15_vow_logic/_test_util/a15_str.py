@@ -1,5 +1,5 @@
 from src.a02_finance_logic._test_util.a02_str import amount_str, offi_time_str
-from src.a06_bud_logic._test_util.a06_str import timeline_str
+from src.a06_plan_logic._test_util.a06_str import timeline_str
 
 
 def brokerunits_str() -> str:

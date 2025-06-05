@@ -10,7 +10,7 @@ from src.a02_finance_logic._test_util.a02_str import (
     quota_str,
     vow_label_str,
 )
-from src.a06_bud_logic._test_util.a06_str import acct_name_str
+from src.a06_plan_logic._test_util.a06_str import acct_name_str
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a12_hub_tools.hub_path import (
     create_deal_acct_mandate_ledger_path as deal_mandate,
@@ -75,25 +75,25 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
     fisunit_sound_raw = create_prime_tablename("fisunit", "s", "raw")
     fisunit_sound_agg = create_prime_tablename("fisunit", "s", "agg")
     fisunit_sound_vld = create_prime_tablename("fisunit", "s", "vld")
-    budunit_sound_put_raw = create_prime_tablename("budunit", "s", "raw", "put")
-    budunit_sound_put_agg = create_prime_tablename("budunit", "s", "agg", "put")
-    budunit_sound_put_vld = create_prime_tablename("budunit", "s", "vld", "put")
-    budacct_sound_put_raw = create_prime_tablename("budacct", "s", "raw", "put")
-    budacct_sound_put_agg = create_prime_tablename("budacct", "s", "agg", "put")
-    budacct_sound_put_vld = create_prime_tablename("budacct", "s", "vld", "put")
+    planunit_sound_put_raw = create_prime_tablename("planunit", "s", "raw", "put")
+    planunit_sound_put_agg = create_prime_tablename("planunit", "s", "agg", "put")
+    planunit_sound_put_vld = create_prime_tablename("planunit", "s", "vld", "put")
+    planacct_sound_put_raw = create_prime_tablename("planacct", "s", "raw", "put")
+    planacct_sound_put_agg = create_prime_tablename("planacct", "s", "agg", "put")
+    planacct_sound_put_vld = create_prime_tablename("planacct", "s", "vld", "put")
     fisunit_voice_raw = create_prime_tablename("fisunit", "v", "raw")
     fisunit_voice_agg = create_prime_tablename("fisunit", "v", "agg")
-    budunit_voice_put_raw = create_prime_tablename("budunit", "v", "raw", "put")
-    budunit_voice_put_agg = create_prime_tablename("budunit", "v", "agg", "put")
-    budacct_voice_put_raw = create_prime_tablename("budacct", "v", "raw", "put")
-    budacct_voice_put_agg = create_prime_tablename("budacct", "v", "agg", "put")
+    planunit_voice_put_raw = create_prime_tablename("planunit", "v", "raw", "put")
+    planunit_voice_put_agg = create_prime_tablename("planunit", "v", "agg", "put")
+    planacct_voice_put_raw = create_prime_tablename("planacct", "v", "raw", "put")
+    planacct_voice_put_agg = create_prime_tablename("planacct", "v", "agg", "put")
     mstr_dir = fizz_world._vow_mstr_dir
     a23_json_path = create_vow_json_path(mstr_dir, a23_str)
     a23_e1_all_pack_path = create_event_all_pack_path(mstr_dir, a23_str, sue_inx, e3)
     a23_e1_expressed_pack_path = expressed_path(mstr_dir, a23_str, sue_inx, e3)
     a23_sue_gut_path = create_gut_path(mstr_dir, a23_str, sue_inx)
     a23_sue_job_path = create_job_path(mstr_dir, a23_str, sue_inx)
-    budacct_job = create_prime_tablename("budacct", "job", None)
+    planacct_job = create_prime_tablename("planacct", "job", None)
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -107,19 +107,19 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
         assert not db_table_exists(cursor, fisunit_sound_raw)
         assert not db_table_exists(cursor, fisunit_sound_agg)
         assert not db_table_exists(cursor, fisunit_sound_vld)
-        assert not db_table_exists(cursor, budunit_sound_put_raw)
-        assert not db_table_exists(cursor, budunit_sound_put_agg)
-        assert not db_table_exists(cursor, budunit_sound_put_vld)
+        assert not db_table_exists(cursor, planunit_sound_put_raw)
+        assert not db_table_exists(cursor, planunit_sound_put_agg)
+        assert not db_table_exists(cursor, planunit_sound_put_vld)
         assert not db_table_exists(cursor, pidcore_sound_raw)
         assert not db_table_exists(cursor, pidcore_sound_agg)
         assert not db_table_exists(cursor, pidcore_sound_vld)
         assert not db_table_exists(cursor, pidname_sound_vld)
         assert not db_table_exists(cursor, fisunit_voice_raw)
         assert not db_table_exists(cursor, fisunit_voice_agg)
-        assert not db_table_exists(cursor, budunit_voice_put_raw)
-        assert not db_table_exists(cursor, budunit_voice_put_agg)
-        assert not db_table_exists(cursor, budacct_voice_put_raw)
-        assert not db_table_exists(cursor, budacct_voice_put_agg)
+        assert not db_table_exists(cursor, planunit_voice_put_raw)
+        assert not db_table_exists(cursor, planunit_voice_put_agg)
+        assert not db_table_exists(cursor, planacct_voice_put_raw)
+        assert not db_table_exists(cursor, planacct_voice_put_agg)
         assert not os_path_exists(a23_json_path)
         assert not os_path_exists(a23_e1_all_pack_path)
         assert not os_path_exists(a23_e1_expressed_pack_path)
@@ -127,10 +127,10 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
         assert not os_path_exists(a23_sue_job_path)
         assert not db_table_exists(cursor, vow_event_time_agg_tablename)
         assert not db_table_exists(cursor, vow_ote1_agg_tablename)
-        assert not db_table_exists(cursor, budacct_job)
+        assert not db_table_exists(cursor, planacct_job)
 
-        # # create budunits
-        # self.bud_tables_to_event_bud_csvs(cursor)
+        # # create planunits
+        # self.plan_tables_to_event_plan_csvs(cursor)
 
         # # create all vow_job and mandate reports
         # self.calc_vow_deal_acct_mandate_net_ledgers()
@@ -140,13 +140,13 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
 
         # THEN
         # select_pidgin_core = f"SELECT * FROM {pidcore_sound_vld}"
-        # select_budunit_put = f"SELECT * FROM {budunit_sound_put_agg}"
-        # select_budacct_put = f"SELECT * FROM {budacct_sound_put_agg}"
+        # select_planunit_put = f"SELECT * FROM {planunit_sound_put_agg}"
+        # select_planacct_put = f"SELECT * FROM {planacct_sound_put_agg}"
         # select_fisunit_put_raw = f"SELECT * FROM {fisunit_sound_raw}"
         # select_fisunit_put_agg = f"SELECT * FROM {fisunit_sound_agg}"
         # print(f"{cursor.execute(select_pidgin_core).fetchall()=}")
-        # print(f"{cursor.execute(select_budunit_put).fetchall()=}")
-        # print(f"{cursor.execute(select_budacct_put).fetchall()=}")
+        # print(f"{cursor.execute(select_planunit_put).fetchall()=}")
+        # print(f"{cursor.execute(select_planacct_put).fetchall()=}")
         # print(f"{cursor.execute(select_fisunit_put_raw).fetchall()=}")
         # print(f"{cursor.execute(select_fisunit_put_agg).fetchall()=}")
 
@@ -157,32 +157,32 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
         assert get_row_count(cursor, br00113_valid) == 1
         assert get_row_count(cursor, pidname_sound_raw) == 1
         assert get_row_count(cursor, fisunit_sound_raw) == 1
-        assert get_row_count(cursor, budunit_sound_put_raw) == 1
-        assert get_row_count(cursor, budacct_sound_put_raw) == 1
+        assert get_row_count(cursor, planunit_sound_put_raw) == 1
+        assert get_row_count(cursor, planacct_sound_put_raw) == 1
         assert get_row_count(cursor, pidname_sound_agg) == 1
         assert get_row_count(cursor, fisunit_sound_agg) == 1
-        assert get_row_count(cursor, budunit_sound_put_agg) == 1
-        assert get_row_count(cursor, budacct_sound_put_agg) == 1
+        assert get_row_count(cursor, planunit_sound_put_agg) == 1
+        assert get_row_count(cursor, planacct_sound_put_agg) == 1
         assert get_row_count(cursor, pidcore_sound_raw) == 1
         assert get_row_count(cursor, pidcore_sound_agg) == 1
         assert get_row_count(cursor, pidcore_sound_vld) == 1
         assert get_row_count(cursor, pidname_sound_vld) == 1
         assert get_row_count(cursor, fisunit_sound_vld) == 1
-        assert get_row_count(cursor, budunit_sound_put_vld) == 1
-        assert get_row_count(cursor, budacct_sound_put_vld) == 1
+        assert get_row_count(cursor, planunit_sound_put_vld) == 1
+        assert get_row_count(cursor, planacct_sound_put_vld) == 1
         assert get_row_count(cursor, fisunit_voice_raw) == 1
-        assert get_row_count(cursor, budunit_voice_put_raw) == 1
-        assert get_row_count(cursor, budacct_voice_put_raw) == 1
+        assert get_row_count(cursor, planunit_voice_put_raw) == 1
+        assert get_row_count(cursor, planacct_voice_put_raw) == 1
         assert get_row_count(cursor, fisunit_voice_agg) == 1
-        assert get_row_count(cursor, budunit_voice_put_agg) == 1
-        assert get_row_count(cursor, budacct_voice_put_agg) == 1
+        assert get_row_count(cursor, planunit_voice_put_agg) == 1
+        assert get_row_count(cursor, planacct_voice_put_agg) == 1
         assert os_path_exists(a23_json_path)
         print(f"{a23_e1_all_pack_path=}")
         assert os_path_exists(a23_e1_all_pack_path)
         assert os_path_exists(a23_e1_expressed_pack_path)
         assert os_path_exists(a23_sue_gut_path)
         assert os_path_exists(a23_sue_job_path)
-        assert get_row_count(cursor, budacct_job) == 1
+        assert get_row_count(cursor, planacct_job) == 1
         # assert get_row_count(cursor, vow_event_time_agg_tablename) == 0
         # assert get_row_count(cursor, vow_ote1_agg_tablename) == 0
 
@@ -248,16 +248,16 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateDealCashRows(
     pidcore_sound_vld = create_prime_tablename("pidcore", "s", "vld")
     fisunit_sound_raw = create_prime_tablename("fisunit", "s", "raw")
     fisunit_sound_agg = create_prime_tablename("fisunit", "s", "agg")
-    budunit_sound_put_raw = create_prime_tablename("budunit", "s", "raw", "put")
-    budunit_sound_put_agg = create_prime_tablename("budunit", "s", "agg", "put")
-    budacct_sound_put_raw = create_prime_tablename("budacct", "s", "raw", "put")
-    budacct_sound_put_agg = create_prime_tablename("budacct", "s", "agg", "put")
+    planunit_sound_put_raw = create_prime_tablename("planunit", "s", "raw", "put")
+    planunit_sound_put_agg = create_prime_tablename("planunit", "s", "agg", "put")
+    planacct_sound_put_raw = create_prime_tablename("planacct", "s", "raw", "put")
+    planacct_sound_put_agg = create_prime_tablename("planacct", "s", "agg", "put")
     fisunit_voice_raw = create_prime_tablename("fisunit", "v", "raw")
     fisunit_voice_agg = create_prime_tablename("fisunit", "v", "agg")
-    budunit_voice_put_raw = create_prime_tablename("budunit", "v", "raw", "put")
-    budunit_voice_put_agg = create_prime_tablename("budunit", "v", "agg", "put")
-    budacct_voice_put_raw = create_prime_tablename("budacct", "v", "raw", "put")
-    budacct_voice_put_agg = create_prime_tablename("budacct", "v", "agg", "put")
+    planunit_voice_put_raw = create_prime_tablename("planunit", "v", "raw", "put")
+    planunit_voice_put_agg = create_prime_tablename("planunit", "v", "agg", "put")
+    planacct_voice_put_raw = create_prime_tablename("planacct", "v", "raw", "put")
+    planacct_voice_put_agg = create_prime_tablename("planacct", "v", "agg", "put")
     mstr_dir = fizz_world._vow_mstr_dir
     a23_json_path = create_vow_json_path(mstr_dir, a23_str)
     a23_e1_all_pack_path = create_event_all_pack_path(mstr_dir, a23_str, sue_inx, e3)
@@ -277,18 +277,18 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateDealCashRows(
         assert not db_table_exists(cursor, pidname_sound_agg)
         assert not db_table_exists(cursor, fisunit_sound_raw)
         assert not db_table_exists(cursor, fisunit_sound_agg)
-        assert not db_table_exists(cursor, budunit_sound_put_raw)
-        assert not db_table_exists(cursor, budunit_sound_put_agg)
+        assert not db_table_exists(cursor, planunit_sound_put_raw)
+        assert not db_table_exists(cursor, planunit_sound_put_agg)
         assert not db_table_exists(cursor, pidcore_sound_raw)
         assert not db_table_exists(cursor, pidcore_sound_agg)
         assert not db_table_exists(cursor, pidcore_sound_vld)
         assert not db_table_exists(cursor, pidname_sound_vld)
         assert not db_table_exists(cursor, fisunit_voice_raw)
         assert not db_table_exists(cursor, fisunit_voice_agg)
-        assert not db_table_exists(cursor, budunit_voice_put_raw)
-        assert not db_table_exists(cursor, budunit_voice_put_agg)
-        assert not db_table_exists(cursor, budacct_voice_put_raw)
-        assert not db_table_exists(cursor, budacct_voice_put_agg)
+        assert not db_table_exists(cursor, planunit_voice_put_raw)
+        assert not db_table_exists(cursor, planunit_voice_put_agg)
+        assert not db_table_exists(cursor, planacct_voice_put_raw)
+        assert not db_table_exists(cursor, planacct_voice_put_agg)
         assert not os_path_exists(a23_json_path)
         assert not os_path_exists(a23_e1_all_pack_path)
         assert not os_path_exists(a23_e1_expressed_pack_path)
@@ -298,8 +298,8 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateDealCashRows(
         assert not os_path_exists(sue37_mandate_path)
         # self.vow_agg_tables_to_vow_ote1_agg(cursor)
 
-        # # create budunits
-        # self.bud_tables_to_event_bud_csvs(cursor)
+        # # create planunits
+        # self.plan_tables_to_event_plan_csvs(cursor)
 
         # # create all vow_job and mandate reports
         # self.calc_vow_deal_acct_mandate_net_ledgers()
@@ -315,22 +315,22 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateDealCashRows(
         assert get_row_count(cursor, br00113_valid) == 2
         assert get_row_count(cursor, pidname_sound_raw) == 2
         assert get_row_count(cursor, fisunit_sound_raw) == 4
-        assert get_row_count(cursor, budunit_sound_put_raw) == 4
-        assert get_row_count(cursor, budacct_sound_put_raw) == 2
+        assert get_row_count(cursor, planunit_sound_put_raw) == 4
+        assert get_row_count(cursor, planacct_sound_put_raw) == 2
         assert get_row_count(cursor, pidname_sound_agg) == 1
         assert get_row_count(cursor, fisunit_sound_agg) == 1
-        assert get_row_count(cursor, budunit_sound_put_agg) == 1
-        assert get_row_count(cursor, budacct_sound_put_agg) == 1
+        assert get_row_count(cursor, planunit_sound_put_agg) == 1
+        assert get_row_count(cursor, planacct_sound_put_agg) == 1
         assert get_row_count(cursor, pidcore_sound_raw) == 1
         assert get_row_count(cursor, pidcore_sound_agg) == 1
         assert get_row_count(cursor, pidcore_sound_vld) == 1
         assert get_row_count(cursor, pidname_sound_vld) == 1
         assert get_row_count(cursor, fisunit_voice_raw) == 1
-        assert get_row_count(cursor, budunit_voice_put_raw) == 1
-        assert get_row_count(cursor, budacct_voice_put_raw) == 1
+        assert get_row_count(cursor, planunit_voice_put_raw) == 1
+        assert get_row_count(cursor, planacct_voice_put_raw) == 1
         assert get_row_count(cursor, fisunit_voice_agg) == 1
-        assert get_row_count(cursor, budunit_voice_put_agg) == 1
-        assert get_row_count(cursor, budacct_voice_put_agg) == 1
+        assert get_row_count(cursor, planunit_voice_put_agg) == 1
+        assert get_row_count(cursor, planacct_voice_put_agg) == 1
         assert os_path_exists(a23_json_path)
         assert os_path_exists(a23_e1_all_pack_path)
         assert os_path_exists(a23_e1_expressed_pack_path)

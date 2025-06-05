@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, get_dir_file_strs
-from src.a06_bud_logic._test_util.a06_str import (
+from src.a06_plan_logic._test_util.a06_str import (
     LabelTerm_str,
     NameTerm_str,
     TitleTerm_str,

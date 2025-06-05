@@ -9,7 +9,7 @@ from src.a02_finance_logic.finance_config import (
 )
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a05_concept_logic.healer import healerlink_shop
-from src.a06_bud_logic.bud import budunit_shop
+from src.a06_plan_logic.plan import planunit_shop
 from src.a07_calendar_logic.chrono import timelineunit_shop
 from src.a12_hub_tools.hub_path import create_owner_dir_path, create_path
 from src.a12_hub_tools.hub_tool import (
@@ -175,7 +175,7 @@ def test_vowunit_shop_SetsvowsDirs(env_dir_setup_cleanup):
     assert a23_vow._owners_dir == create_path(a23_vow._vow_dir, "owners")
 
 
-def test_VowUnit_create_empty_bud_from_vow_ReturnsObj_Scenario0(
+def test_VowUnit_create_empty_plan_from_vow_ReturnsObj_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -196,13 +196,13 @@ def test_VowUnit_create_empty_bud_from_vow_ReturnsObj_Scenario0(
     sue_str = "Sue"
 
     # WHEN
-    generated_bud = a23_vow.create_empty_bud_from_vow(sue_str)
+    generated_plan = a23_vow.create_empty_plan_from_vow(sue_str)
 
     # THEN
-    assert generated_bud.bridge == slash_str
-    assert generated_bud.fund_iota == x_fund_iota
-    assert generated_bud.respect_bit == x_respect_bit
-    assert generated_bud.penny == x_penny
+    assert generated_plan.bridge == slash_str
+    assert generated_plan.fund_iota == x_fund_iota
+    assert generated_plan.respect_bit == x_respect_bit
+    assert generated_plan.penny == x_penny
 
 
 def test_VowUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario1_owner_dir_ExistsNoFile(
@@ -223,7 +223,7 @@ def test_VowUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario1_owner_dir_Exi
     # THEN
     print(f"{vow_mstr_dir=}")
     assert gut_file_exists(vow_mstr_dir, a23_str, sue_str)
-    expected_sue_gut = budunit_shop(sue_str, a23_str)
+    expected_sue_gut = planunit_shop(sue_str, a23_str)
     assert open_gut_file(vow_mstr_dir, a23_str, sue_str) == expected_sue_gut
 
 
@@ -273,7 +273,7 @@ def test_VowUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario3_FileExistsIsN
     a23_vow = vowunit_shop(a23_str, vow_mstr_dir)
     sue_str = "Sue"
     bob_str = "Bob"
-    sue_gut = budunit_shop(sue_str, a23_str)
+    sue_gut = planunit_shop(sue_str, a23_str)
     sue_gut.add_acctunit(bob_str)
     save_gut_file(vow_mstr_dir, sue_gut)
     sue_owner_dir = create_owner_dir_path(vow_mstr_dir, a23_str, sue_str)
@@ -336,7 +336,7 @@ def test_VowUnit_create_init_job_from_guts_Scenario1_ReplacesFile(
     )
     bob_str = "Bob"
     sue_str = "Sue"
-    x0_sue_job = budunit_shop(sue_str, a23_str)
+    x0_sue_job = planunit_shop(sue_str, a23_str)
     x0_sue_job.add_acctunit(bob_str)
     save_job_file(vow_mstr_dir, x0_sue_job)
     assert open_job_file(vow_mstr_dir, a23_str, sue_str).get_acct(bob_str)
@@ -368,7 +368,7 @@ def test_VowUnit_create_init_job_from_guts_Scenario2_job_Has_gut_Accts(
     bob_str = "Bob"
     sue_str = "Sue"
     a23_vow.create_init_job_from_guts(sue_str)
-    sue_gut = budunit_shop(sue_str, a23_str)
+    sue_gut = planunit_shop(sue_str, a23_str)
     sue_gut.add_acctunit(bob_str)
     save_gut_file(vow_mstr_dir, sue_gut)
     assert not open_job_file(vow_mstr_dir, a23_str, sue_str).get_acct(bob_str)
@@ -402,11 +402,11 @@ def test_VowUnit_create_init_job_from_guts_Scenario3_gut_FilesAreListenedTo(
 
     # create Sue gut
     bob_str = "Bob"
-    sue_gut = budunit_shop(sue_str, a23_str, bridge=slash_str)
+    sue_gut = planunit_shop(sue_str, a23_str, bridge=slash_str)
     sue_gut.add_acctunit(bob_str)
     save_gut_file(vow_mstr_dir, sue_gut)
     # create Bob gut with agenda concept for Sue
-    bob_gut = budunit_shop(bob_str, a23_str, bridge=slash_str)
+    bob_gut = planunit_shop(bob_str, a23_str, bridge=slash_str)
     bob_gut.add_acctunit(sue_str)
     casa_way = bob_gut.make_l1_way("casa")
     clean_way = bob_gut.make_way(casa_way, "clean")
@@ -436,33 +436,33 @@ def test_VowUnit__set_all_healer_dutys_CorrectlySetsdutys(
     yao_str = "Yao"
     a23_vow.create_init_job_from_guts(sue_str)
     a23_vow.create_init_job_from_guts(yao_str)
-    sue_gut_bud = open_gut_file(x_vow_mstr_dir, a23_str, sue_str)
-    yao_gut_bud = open_gut_file(x_vow_mstr_dir, a23_str, yao_str)
+    sue_gut_plan = open_gut_file(x_vow_mstr_dir, a23_str, sue_str)
+    yao_gut_plan = open_gut_file(x_vow_mstr_dir, a23_str, yao_str)
 
-    sue_gut_bud.add_acctunit(sue_str)
-    sue_gut_bud.add_acctunit(yao_str)
-    yao_gut_bud.add_acctunit(sue_str)
-    yao_gut_bud.add_acctunit(yao_str)
+    sue_gut_plan.add_acctunit(sue_str)
+    sue_gut_plan.add_acctunit(yao_str)
+    yao_gut_plan.add_acctunit(sue_str)
+    yao_gut_plan.add_acctunit(yao_str)
     texas_str = "Texas"
-    texas_way = sue_gut_bud.make_l1_way(texas_str)
-    sue_gut_bud.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
-    yao_gut_bud.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
+    texas_way = sue_gut_plan.make_l1_way(texas_str)
+    sue_gut_plan.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
+    yao_gut_plan.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
-    dallas_way = sue_gut_bud.make_way(texas_way, dallas_str)
+    dallas_way = sue_gut_plan.make_way(texas_way, dallas_str)
     dallas_healerlink = healerlink_shop({sue_str, yao_str})
     dallas_concept = conceptunit_shop(dallas_str, healerlink=dallas_healerlink)
     elpaso_str = "el paso"
-    elpaso_way = sue_gut_bud.make_way(texas_way, elpaso_str)
+    elpaso_way = sue_gut_plan.make_way(texas_way, elpaso_str)
     elpaso_healerlink = healerlink_shop({sue_str})
     elpaso_concept = conceptunit_shop(elpaso_str, healerlink=elpaso_healerlink)
 
-    sue_gut_bud.set_concept(dallas_concept, texas_way)
-    sue_gut_bud.set_concept(elpaso_concept, texas_way)
-    yao_gut_bud.set_concept(dallas_concept, texas_way)
-    yao_gut_bud.set_concept(elpaso_concept, texas_way)
+    sue_gut_plan.set_concept(dallas_concept, texas_way)
+    sue_gut_plan.set_concept(elpaso_concept, texas_way)
+    yao_gut_plan.set_concept(dallas_concept, texas_way)
+    yao_gut_plan.set_concept(elpaso_concept, texas_way)
 
-    save_gut_file(x_vow_mstr_dir, sue_gut_bud)
-    save_gut_file(x_vow_mstr_dir, yao_gut_bud)
+    save_gut_file(x_vow_mstr_dir, sue_gut_plan)
+    save_gut_file(x_vow_mstr_dir, yao_gut_plan)
     sue_filename = get_json_filename(sue_str)
     yao_filename = get_json_filename(yao_str)
     sue_dallas_hubunit = hubunit_shop(x_vow_mstr_dir, a23_str, sue_str, dallas_way)

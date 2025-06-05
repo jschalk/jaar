@@ -10,21 +10,21 @@ from src.a02_finance_logic._test_util.a02_str import (
     tran_time_str,
     vow_label_str,
 )
-from src.a06_bud_logic._test_util.a06_str import (
-    bud_acct_membership_str,
-    bud_acctunit_str,
-    bud_concept_awardlink_str,
-    bud_concept_factunit_str,
-    bud_concept_healerlink_str,
-    bud_concept_laborlink_str,
-    bud_concept_reason_premiseunit_str,
-    bud_concept_reasonunit_str,
-    bud_conceptunit_str,
-    budunit_str,
+from src.a06_plan_logic._test_util.a06_str import (
+    plan_acct_membership_str,
+    plan_acctunit_str,
+    plan_concept_awardlink_str,
+    plan_concept_factunit_str,
+    plan_concept_healerlink_str,
+    plan_concept_laborlink_str,
+    plan_concept_reason_premiseunit_str,
+    plan_concept_reasonunit_str,
+    plan_conceptunit_str,
+    planunit_str,
 )
-from src.a08_bud_atom_logic.atom_config import get_delete_key_name
+from src.a08_plan_atom_logic.atom_config import get_delete_key_name
 from src.a09_pack_logic._test_util.a09_str import event_int_str
-from src.a10_bud_calc._test_util.a10_str import bud_groupunit_str
+from src.a10_plan_calc._test_util.a10_str import plan_groupunit_str
 from src.a12_hub_tools._test_util.a12_str import job_str
 from src.a15_vow_logic._test_util.a15_str import (
     vow_cashbook_str,
@@ -70,17 +70,17 @@ def test_ALL_DIMEN_ABBV7_has_all_dimens():
 
 def test_create_prime_tablename_ReturnsObj():
     # ESTABLISH
-    budunit_dimen = budunit_str()
-    budacct_dimen = bud_acctunit_str()
-    budmemb_dimen = bud_acct_membership_str()
-    budgrou_dimen = bud_groupunit_str()
-    budconc_dimen = bud_conceptunit_str()
-    budawar_dimen = bud_concept_awardlink_str()
-    budreas_dimen = bud_concept_reasonunit_str()
-    budprem_dimen = bud_concept_reason_premiseunit_str()
-    budlabo_dimen = bud_concept_laborlink_str()
-    budheal_dimen = bud_concept_healerlink_str()
-    budfact_dimen = bud_concept_factunit_str()
+    planunit_dimen = planunit_str()
+    planacct_dimen = plan_acctunit_str()
+    planmemb_dimen = plan_acct_membership_str()
+    plangrou_dimen = plan_groupunit_str()
+    planconc_dimen = plan_conceptunit_str()
+    planawar_dimen = plan_concept_awardlink_str()
+    planreas_dimen = plan_concept_reasonunit_str()
+    planprem_dimen = plan_concept_reason_premiseunit_str()
+    planlabo_dimen = plan_concept_laborlink_str()
+    planheal_dimen = plan_concept_healerlink_str()
+    planfact_dimen = plan_concept_factunit_str()
     fisunit_dimen = vowunit_str()
     vowash_dimen = vow_cashbook_str()
     fisdeal_dimen = vow_dealunit_str()
@@ -100,17 +100,17 @@ def test_create_prime_tablename_ReturnsObj():
     del_str = "del"
 
     # WHEN
-    budunit_s_agg_table = create_prime_tablename("budunit", "s", agg_str, put_str)
-    budacct_s_agg_table = create_prime_tablename("budacct", "s", agg_str, put_str)
-    budmemb_s_agg_table = create_prime_tablename("budmemb", "s", agg_str, put_str)
-    budconc_s_agg_table = create_prime_tablename("budconc", "s", agg_str, put_str)
-    budawar_s_agg_table = create_prime_tablename("budawar", "s", agg_str, put_str)
-    budreas_s_agg_table = create_prime_tablename("budreas", "s", agg_str, put_str)
-    budprem_s_agg_table = create_prime_tablename("budprem", "s", agg_str, put_str)
-    budlabo_s_agg_table = create_prime_tablename("BUDLABO", "s", agg_str, put_str)
-    budheal_s_agg_table = create_prime_tablename("budheal", "s", agg_str, put_str)
-    budfact_s_agg_table = create_prime_tablename("budfact", "s", agg_str, put_str)
-    budfact_s_del_table = create_prime_tablename("budfact", "s", agg_str, del_str)
+    planunit_s_agg_table = create_prime_tablename("planunit", "s", agg_str, put_str)
+    planacct_s_agg_table = create_prime_tablename("planacct", "s", agg_str, put_str)
+    planmemb_s_agg_table = create_prime_tablename("planmemb", "s", agg_str, put_str)
+    planconc_s_agg_table = create_prime_tablename("planconc", "s", agg_str, put_str)
+    planawar_s_agg_table = create_prime_tablename("planawar", "s", agg_str, put_str)
+    planreas_s_agg_table = create_prime_tablename("planreas", "s", agg_str, put_str)
+    planprem_s_agg_table = create_prime_tablename("planprem", "s", agg_str, put_str)
+    planlabo_s_agg_table = create_prime_tablename("PLANLABO", "s", agg_str, put_str)
+    planheal_s_agg_table = create_prime_tablename("planheal", "s", agg_str, put_str)
+    planfact_s_agg_table = create_prime_tablename("planfact", "s", agg_str, put_str)
+    planfact_s_del_table = create_prime_tablename("planfact", "s", agg_str, del_str)
     fisunit_s_agg_table = create_prime_tablename("fisunit", "s", agg_str)
     vowash_s_agg_table = create_prime_tablename("vowash", "s", agg_str)
     fisdeal_s_agg_table = create_prime_tablename("fisdeal", "s", agg_str)
@@ -127,22 +127,22 @@ def test_create_prime_tablename_ReturnsObj():
     pidtitl_s_val_table = create_prime_tablename("pidtitl", "s", vld_str)
     pidcore_s_raw_table = create_prime_tablename("pidcore", "s", raw_str)
     pidcore_s_agg_table = create_prime_tablename("pidcore", "s", agg_str)
-    budacct_job_table = create_prime_tablename("budacct", job_str(), None)
-    x_budacct_raw = create_prime_tablename("budacct", "k", raw_str)
-    budgrou_job_table = create_prime_tablename("budgrou", job_str(), None)
+    planacct_job_table = create_prime_tablename("planacct", job_str(), None)
+    x_planacct_raw = create_prime_tablename("planacct", "k", raw_str)
+    plangrou_job_table = create_prime_tablename("plangrou", job_str(), None)
 
     # THEN
-    assert budunit_s_agg_table == f"{budunit_dimen}_s_put_agg"
-    assert budacct_s_agg_table == f"{budacct_dimen}_s_put_agg"
-    assert budmemb_s_agg_table == f"{budmemb_dimen}_s_put_agg"
-    assert budconc_s_agg_table == f"{budconc_dimen}_s_put_agg"
-    assert budawar_s_agg_table == f"{budawar_dimen}_s_put_agg"
-    assert budreas_s_agg_table == f"{budreas_dimen}_s_put_agg"
-    assert budprem_s_agg_table == f"{budprem_dimen}_s_put_agg"
-    assert budlabo_s_agg_table == f"{budlabo_dimen}_s_put_agg"
-    assert budheal_s_agg_table == f"{budheal_dimen}_s_put_agg"
-    assert budfact_s_agg_table == f"{budfact_dimen}_s_put_agg"
-    assert budfact_s_del_table == f"{budfact_dimen}_s_del_agg"
+    assert planunit_s_agg_table == f"{planunit_dimen}_s_put_agg"
+    assert planacct_s_agg_table == f"{planacct_dimen}_s_put_agg"
+    assert planmemb_s_agg_table == f"{planmemb_dimen}_s_put_agg"
+    assert planconc_s_agg_table == f"{planconc_dimen}_s_put_agg"
+    assert planawar_s_agg_table == f"{planawar_dimen}_s_put_agg"
+    assert planreas_s_agg_table == f"{planreas_dimen}_s_put_agg"
+    assert planprem_s_agg_table == f"{planprem_dimen}_s_put_agg"
+    assert planlabo_s_agg_table == f"{planlabo_dimen}_s_put_agg"
+    assert planheal_s_agg_table == f"{planheal_dimen}_s_put_agg"
+    assert planfact_s_agg_table == f"{planfact_dimen}_s_put_agg"
+    assert planfact_s_del_table == f"{planfact_dimen}_s_del_agg"
     assert fisunit_s_agg_table == f"{fisunit_dimen}_s_agg"
     assert vowash_s_agg_table == f"{vowash_dimen}_s_agg"
     assert fisdeal_s_agg_table == f"{fisdeal_dimen}_s_agg"
@@ -159,9 +159,9 @@ def test_create_prime_tablename_ReturnsObj():
     assert pidtitl_s_val_table == f"{pidtitl_dimen}_s_vld"
     assert pidcore_s_raw_table == f"{pidcore_dimen}_s_raw"
     assert pidcore_s_agg_table == f"{pidcore_dimen}_s_agg"
-    assert budacct_job_table == f"{budacct_dimen}_job"
-    assert budgrou_job_table == f"{budgrou_dimen}_job"
-    assert x_budacct_raw == "bud_acctunit_raw"
+    assert planacct_job_table == f"{planacct_dimen}_job"
+    assert plangrou_job_table == f"{plangrou_dimen}_job"
+    assert x_planacct_raw == "plan_acctunit_raw"
 
 
 def test_create_all_idea_tables_CreatesVowRawTables():

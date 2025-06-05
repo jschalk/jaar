@@ -9,8 +9,8 @@ DEALUNIT_FILENAME = "dealunit.json"
 DEAL_MANDATE_FILENAME = "deal_acct_mandate_ledger.json"
 CELLNODE_FILENAME = "cell.json"
 CELL_MANDATE_FILENAME = "cell_acct_mandate_ledger.json"
-BUDPOINT_FILENAME = "budpoint.json"
-BUDEVENT_FILENAME = "bud.json"
+PLANPOINT_FILENAME = "planpoint.json"
+PLANEVENT_FILENAME = "plan.json"
 EVENT_ALL_PACK_FILENAME = "all_pack.json"
 EVENT_EXPRESSED_PACK_FILENAME = "expressed_pack.json"
 
@@ -139,12 +139,12 @@ def create_deal_acct_mandate_ledger_path(
     return create_path(timepoint_dir, "deal_acct_mandate_ledger.json")
 
 
-def create_budpoint_path(
+def create_planpoint_path(
     vow_mstr_dir: str, vow_label: LabelTerm, owner_name: OwnerName, deal_time: int
 ) -> str:
-    """Returns path: vow_mstr_dir\\vows\\vow_label\\owners\\owner_name\\deals\n\\deal_time\\budpoint.json"""
+    """Returns path: vow_mstr_dir\\vows\\vow_label\\owners\\owner_name\\deals\n\\deal_time\\planpoint.json"""
     timepoint_dir = create_deal_dir_path(vow_mstr_dir, vow_label, owner_name, deal_time)
-    return create_path(timepoint_dir, "budpoint.json")
+    return create_path(timepoint_dir, "planpoint.json")
 
 
 def create_cell_dir_path(
@@ -205,15 +205,15 @@ def create_owner_event_dir_path(
     return create_path(vow_events_dir, event_int)
 
 
-def create_budevent_path(
+def create_planevent_path(
     vow_mstr_dir: str, vow_label: LabelTerm, owner_name: OwnerName, event_int: int
 ):
-    """Returns path: vow_mstr_dir\\vows\\vow_label\\owners\\owner_name\\events\\event_int\\bud.json"""
+    """Returns path: vow_mstr_dir\\vows\\vow_label\\owners\\owner_name\\events\\event_int\\plan.json"""
     owner_event_dir_path = create_owner_event_dir_path(
         vow_mstr_dir, vow_label, owner_name, event_int
     )
-    bud_filename = "bud.json"
-    return create_path(owner_event_dir_path, bud_filename)
+    plan_filename = "plan.json"
+    return create_path(owner_event_dir_path, plan_filename)
 
 
 def create_event_all_pack_path(

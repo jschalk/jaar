@@ -1,26 +1,26 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import create_insert_query
-from src.a10_bud_calc.bud_calc_config import get_bud_calc_dimen_args
-from src.a18_etl_toolbox.db_obj_bud_tool import (
-    create_budacct_metrics_insert_sqlstr,
-    create_budawar_metrics_insert_sqlstr,
-    create_budconc_metrics_insert_sqlstr,
-    create_budfact_metrics_insert_sqlstr,
-    create_budgrou_metrics_insert_sqlstr,
-    create_budheal_metrics_insert_sqlstr,
-    create_budlabo_metrics_insert_sqlstr,
-    create_budmemb_metrics_insert_sqlstr,
-    create_budprem_metrics_insert_sqlstr,
-    create_budreas_metrics_insert_sqlstr,
-    create_budunit_metrics_insert_sqlstr,
+from src.a10_plan_calc.plan_calc_config import get_plan_calc_dimen_args
+from src.a18_etl_toolbox.db_obj_plan_tool import (
+    create_planacct_metrics_insert_sqlstr,
+    create_planawar_metrics_insert_sqlstr,
+    create_planconc_metrics_insert_sqlstr,
+    create_planfact_metrics_insert_sqlstr,
+    create_plangrou_metrics_insert_sqlstr,
+    create_planheal_metrics_insert_sqlstr,
+    create_planlabo_metrics_insert_sqlstr,
+    create_planmemb_metrics_insert_sqlstr,
+    create_planprem_metrics_insert_sqlstr,
+    create_planreas_metrics_insert_sqlstr,
+    create_planunit_metrics_insert_sqlstr,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import create_job_tables
 
 
-def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
+def test_create_planunit_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_calc_dimen_args("budunit")
+    x_args = get_plan_calc_dimen_args("planunit")
     # for x_arg in sorted(x_args):
     #     print(f"{x_arg=}")
 
@@ -62,14 +62,14 @@ def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_budunit_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_planunit_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "budunit_job"
+        table_name = "planunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print(expected_sqlstr)
         print("")
@@ -77,10 +77,10 @@ def test_create_budunit_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_budconc_metrics_insert_sqlstr_ReturnsObj():
+def test_create_planconc_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_calc_dimen_args("bud_conceptunit")
+    x_args = get_plan_calc_dimen_args("plan_conceptunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -153,14 +153,14 @@ def test_create_budconc_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_budconc_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_planconc_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "bud_conceptunit_job"
+        table_name = "plan_conceptunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print(expected_sqlstr)
         print("")
@@ -168,10 +168,10 @@ def test_create_budconc_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
+def test_create_planreas_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_calc_dimen_args("bud_concept_reasonunit")
+    x_args = get_plan_calc_dimen_args("plan_concept_reasonunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -213,14 +213,14 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_budreas_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_planreas_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "bud_concept_reasonunit_job"
+        table_name = "plan_concept_reasonunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print(expected_sqlstr)
         print("")
@@ -228,10 +228,10 @@ def test_create_budreas_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
+def test_create_planprem_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_calc_dimen_args("bud_concept_reason_premiseunit")
+    x_args = get_plan_calc_dimen_args("plan_concept_reason_premiseunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -280,14 +280,14 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_budprem_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_planprem_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "bud_concept_reason_premiseunit_job"
+        table_name = "plan_concept_reason_premiseunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         # print(expected_sqlstr)
         print("")
@@ -295,10 +295,10 @@ def test_create_budprem_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
+def test_create_planawar_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_calc_dimen_args("bud_concept_awardlink")
+    x_args = get_plan_calc_dimen_args("plan_concept_awardlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -343,14 +343,14 @@ def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_budawar_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_planawar_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "bud_concept_awardlink_job"
+        table_name = "plan_concept_awardlink_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -358,10 +358,10 @@ def test_create_budawar_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
+def test_create_planfact_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_calc_dimen_args("bud_concept_factunit")
+    x_args = get_plan_calc_dimen_args("plan_concept_factunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -404,14 +404,14 @@ def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_budfact_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_planfact_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "bud_concept_factunit_job"
+        table_name = "plan_concept_factunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -419,10 +419,10 @@ def test_create_budfact_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_budheal_metrics_insert_sqlstr_ReturnsObj():
+def test_create_planheal_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_calc_dimen_args("bud_concept_healerlink")
+    x_args = get_plan_calc_dimen_args("plan_concept_healerlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -459,14 +459,14 @@ def test_create_budheal_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_budheal_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_planheal_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "bud_concept_healerlink_job"
+        table_name = "plan_concept_healerlink_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -474,10 +474,10 @@ def test_create_budheal_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_budlabo_metrics_insert_sqlstr_ReturnsObj():
+def test_create_planlabo_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_calc_dimen_args("bud_concept_laborlink")
+    x_args = get_plan_calc_dimen_args("plan_concept_laborlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -516,14 +516,14 @@ def test_create_budlabo_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_budlabo_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_planlabo_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "bud_concept_laborlink_job"
+        table_name = "plan_concept_laborlink_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -531,10 +531,10 @@ def test_create_budlabo_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_budacct_metrics_insert_sqlstr_ReturnsObj():
+def test_create_planacct_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_calc_dimen_args("bud_acctunit")
+    x_args = get_plan_calc_dimen_args("plan_acctunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -593,14 +593,14 @@ def test_create_budacct_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_budacct_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_planacct_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "bud_acctunit_job"
+        table_name = "plan_acctunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -608,10 +608,10 @@ def test_create_budacct_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_budmemb_metrics_insert_sqlstr_ReturnsObj():
+def test_create_planmemb_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_calc_dimen_args("bud_acct_membership")
+    x_args = get_plan_calc_dimen_args("plan_acct_membership")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -668,14 +668,14 @@ def test_create_budmemb_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_budmemb_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_planmemb_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "bud_acct_membership_job"
+        table_name = "plan_acct_membership_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -683,10 +683,10 @@ def test_create_budmemb_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
+def test_create_plangrou_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_bud_calc_dimen_args("bud_groupunit")
+    x_args = get_plan_calc_dimen_args("plan_groupunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -737,14 +737,14 @@ def test_create_budgrou_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_budgrou_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_plangrou_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "bud_groupunit_job"
+        table_name = "plan_groupunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)

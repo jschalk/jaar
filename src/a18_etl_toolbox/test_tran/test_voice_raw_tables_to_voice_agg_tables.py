@@ -1,11 +1,11 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
 from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
-from src.a06_bud_logic._test_util.a06_str import (
+from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
-    bud_acctunit_str,
     credit_belief_str,
     debtit_belief_str,
+    plan_acctunit_str,
 )
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a15_vow_logic.vow_config import get_vow_dimens
@@ -68,14 +68,14 @@ GROUP BY {raw_columns_str}
             assert gen_sqlstr == expected_table2table_agg_insert_sqlstr
 
 
-def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_BudDimens():
+def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_PlanDimens():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH
     idea_config = get_idea_config_dict()
-    bud_dimens_config = {
+    plan_dimens_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) == "bud"
+        if dimen_config.get(idea_category_str()) == "plan"
     }
 
     # WHEN
@@ -86,12 +86,12 @@ def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_BudDimens():
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
 
-        for bud_dimen in bud_dimens_config:
-            # print(f"{bud_dimen=}")
-            v_raw_put_tablename = prime_tbl(bud_dimen, "v", "raw", "put")
-            v_raw_del_tablename = prime_tbl(bud_dimen, "v", "raw", "del")
-            v_agg_put_tablename = prime_tbl(bud_dimen, "v", "agg", "put")
-            v_agg_del_tablename = prime_tbl(bud_dimen, "v", "agg", "del")
+        for plan_dimen in plan_dimens_config:
+            # print(f"{plan_dimen=}")
+            v_raw_put_tablename = prime_tbl(plan_dimen, "v", "raw", "put")
+            v_raw_del_tablename = prime_tbl(plan_dimen, "v", "raw", "del")
+            v_agg_put_tablename = prime_tbl(plan_dimen, "v", "agg", "put")
+            v_agg_del_tablename = prime_tbl(plan_dimen, "v", "agg", "del")
             v_raw_put_cols = get_table_columns(cursor, v_raw_put_tablename)
             v_raw_del_cols = get_table_columns(cursor, v_raw_del_tablename)
             v_agg_put_cols = get_table_columns(cursor, v_agg_put_tablename)
@@ -119,7 +119,7 @@ SELECT {v_raw_del_columns_str}
 FROM {v_raw_del_tablename}
 GROUP BY {v_raw_del_columns_str}
 """
-            abbv7 = get_dimen_abbv7(bud_dimen)
+            abbv7 = get_dimen_abbv7(plan_dimen)
             put_sqlstr_ref = f"INSERT_{abbv7.upper()}_VOICE_AGG_PUT_SQLSTR"
             del_sqlstr_ref = f"INSERT_{abbv7.upper()}_VOICE_AGG_DEL_SQLSTR"
             print(f'{put_sqlstr_ref}= """{expected_agg_put_insert_sqlstr}"""')
@@ -151,9 +151,9 @@ def test_get_insert_voice_agg_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budacct_v_raw_put_tablename = prime_tbl(bud_acctunit_str(), "v", "raw", "put")
-        print(f"{get_table_columns(cursor, budacct_v_raw_put_tablename)=}")
-        insert_into_clause = f"""INSERT INTO {budacct_v_raw_put_tablename} (
+        planacct_v_raw_put_tablename = prime_tbl(plan_acctunit_str(), "v", "raw", "put")
+        print(f"{get_table_columns(cursor, planacct_v_raw_put_tablename)=}")
+        insert_into_clause = f"""INSERT INTO {planacct_v_raw_put_tablename} (
   {event_int_str()}
 , {face_name_str()}_inx
 , {vow_label_str()}_inx
@@ -171,17 +171,17 @@ VALUES
 ;
 """
         cursor.execute(insert_into_clause)
-        assert get_row_count(cursor, budacct_v_raw_put_tablename) == 5
-        budacct_v_agg_put_tablename = prime_tbl(bud_acctunit_str(), "v", "agg", "put")
-        assert get_row_count(cursor, budacct_v_agg_put_tablename) == 0
+        assert get_row_count(cursor, planacct_v_raw_put_tablename) == 5
+        planacct_v_agg_put_tablename = prime_tbl(plan_acctunit_str(), "v", "agg", "put")
+        assert get_row_count(cursor, planacct_v_agg_put_tablename) == 0
 
         # WHEN
-        sqlstr = get_insert_voice_agg_sqlstrs().get(budacct_v_agg_put_tablename)
+        sqlstr = get_insert_voice_agg_sqlstrs().get(planacct_v_agg_put_tablename)
         print(sqlstr)
         cursor.execute(sqlstr)
 
         # THEN
-        assert get_row_count(cursor, budacct_v_agg_put_tablename) == 4
+        assert get_row_count(cursor, planacct_v_agg_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
 , {vow_label_str()}
@@ -189,7 +189,7 @@ VALUES
 , {acct_name_str()}
 , {credit_belief_str()}
 , {debtit_belief_str()}
-FROM {budacct_v_agg_put_tablename}
+FROM {planacct_v_agg_put_tablename}
 """
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
@@ -221,9 +221,9 @@ def test_etl_voice_raw_tables_to_voice_agg_tables_PopulatesTable_Scenario0():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budacct_v_raw_put_tablename = prime_tbl(bud_acctunit_str(), "v", "raw", "put")
-        print(f"{get_table_columns(cursor, budacct_v_raw_put_tablename)=}")
-        insert_into_clause = f"""INSERT INTO {budacct_v_raw_put_tablename} (
+        planacct_v_raw_put_tablename = prime_tbl(plan_acctunit_str(), "v", "raw", "put")
+        print(f"{get_table_columns(cursor, planacct_v_raw_put_tablename)=}")
+        insert_into_clause = f"""INSERT INTO {planacct_v_raw_put_tablename} (
   {event_int_str()}
 , {face_name_str()}_inx
 , {vow_label_str()}_inx
@@ -241,15 +241,15 @@ VALUES
 ;
 """
         cursor.execute(insert_into_clause)
-        assert get_row_count(cursor, budacct_v_raw_put_tablename) == 5
-        budacct_v_agg_put_tablename = prime_tbl(bud_acctunit_str(), "v", "agg", "put")
-        assert get_row_count(cursor, budacct_v_agg_put_tablename) == 0
+        assert get_row_count(cursor, planacct_v_raw_put_tablename) == 5
+        planacct_v_agg_put_tablename = prime_tbl(plan_acctunit_str(), "v", "agg", "put")
+        assert get_row_count(cursor, planacct_v_agg_put_tablename) == 0
 
         # WHEN
         etl_voice_raw_tables_to_voice_agg_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, budacct_v_agg_put_tablename) == 4
+        assert get_row_count(cursor, planacct_v_agg_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
 , {vow_label_str()}
@@ -257,7 +257,7 @@ VALUES
 , {acct_name_str()}
 , {credit_belief_str()}
 , {debtit_belief_str()}
-FROM {budacct_v_agg_put_tablename}
+FROM {planacct_v_agg_put_tablename}
 """
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()

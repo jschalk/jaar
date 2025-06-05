@@ -43,7 +43,7 @@
     "idea_number": "br00019",
     "dimens": [
         "vowunit",
-        "budunit",
-        "bud_conceptunit"
+        "planunit",
+        "plan_conceptunit"
     ]
 }

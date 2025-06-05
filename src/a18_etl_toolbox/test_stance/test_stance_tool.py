@@ -1,10 +1,10 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, open_file, save_file
-from src.a06_bud_logic.bud import budunit_shop
+from src.a06_plan_logic.plan import planunit_shop
 from src.a12_hub_tools.hub_path import create_gut_path, create_vow_json_path
 from src.a15_vow_logic.vow import vowunit_shop
 from src.a17_idea_logic.idea_csv_tool import (
-    add_budunit_to_stance_csv_strs,
+    add_planunit_to_stance_csv_strs,
     add_vowunit_to_stance_csv_strs,
     create_init_stance_idea_csv_strs,
 )
@@ -35,7 +35,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario0_NoVowUnits(
     assert gen_stance_csv_strs == expected_stance_csv_strs
 
 
-def test_collect_stance_csv_strs_ReturnsObj_Scenario1_SingleVowUnit_NoBudUnits(
+def test_collect_stance_csv_strs_ReturnsObj_Scenario1_SingleVowUnit_NoPlanUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -54,7 +54,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario1_SingleVowUnit_NoBudUnits(
     assert gen_stance_csv_strs == expected_stance_csv_strs
 
 
-def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BudUnits(
+def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_PlanUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -64,8 +64,8 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BudUnits(
     a23_vow = vowunit_shop(a23_str, vow_mstr_dir)
     vow_json_path = create_vow_json_path(vow_mstr_dir, a23_str)
     save_file(vow_json_path, None, a23_vow.get_json())
-    # create bud gut file
-    bob_gut = budunit_shop(bob_str, a23_str)
+    # create plan gut file
+    bob_gut = planunit_shop(bob_str, a23_str)
     bob_gut.add_acctunit("Yao", 44, 55)
     a23_bob_gut_path = create_gut_path(vow_mstr_dir, a23_str, bob_str)
     save_file(a23_bob_gut_path, None, bob_gut.get_json())
@@ -76,7 +76,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BudUnits(
     # THEN
     expected_stance_csv_strs = create_init_stance_idea_csv_strs()
     add_vowunit_to_stance_csv_strs(a23_vow, expected_stance_csv_strs, ",")
-    add_budunit_to_stance_csv_strs(bob_gut, expected_stance_csv_strs, ",")
+    add_planunit_to_stance_csv_strs(bob_gut, expected_stance_csv_strs, ",")
     assert gen_stance_csv_strs == expected_stance_csv_strs
 
 

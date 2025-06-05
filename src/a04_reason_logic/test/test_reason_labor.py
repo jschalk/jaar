@@ -159,7 +159,7 @@ def test_LaborHeir_set_owner_name_labor_CorrectlySetsAttribute_Emptyx_laborlinks
 
     # WHEN
     groupunits = {}
-    x_laborheir.set_owner_name_labor(groupunits, bud_owner_name="")
+    x_laborheir.set_owner_name_labor(groupunits, plan_owner_name="")
 
     # THEN
     assert x_laborheir._owner_name_labor
@@ -174,14 +174,14 @@ def test_LaborHeir_set_owner_name_labor_CorrectlySetsAttribute_NonEmptyx_laborli
     yao_groupunit.set_membership(membership_shop(yao_str, acct_name=yao_str))
     sue_groupunit.set_membership(membership_shop(sue_str, acct_name=sue_str))
     x_groupunits = {yao_str: yao_groupunit, sue_str: sue_groupunit}
-    bud_owner_name = yao_str
+    plan_owner_name = yao_str
 
     x_laborlinks = {yao_str}
     x_laborheir = laborheir_shop(_laborlinks=x_laborlinks)
     assert x_laborheir._owner_name_labor is False
 
     # WHEN
-    x_laborheir.set_owner_name_labor(x_groupunits, bud_owner_name)
+    x_laborheir.set_owner_name_labor(x_groupunits, plan_owner_name)
 
     # THEN
     assert x_laborheir._owner_name_labor
@@ -233,7 +233,7 @@ def test_LaborHeir_set_owner_name_labor_CorrectlySetsAttribute_NonEmptyx_laborli
     x_laborlinks = {swim_str}
     x_laborheir = laborheir_shop(_laborlinks=x_laborlinks)
     assert x_laborheir._owner_name_labor is False
-    x_laborheir.set_owner_name_labor(x_groupunits, bud_owner_name=yao_str)
+    x_laborheir.set_owner_name_labor(x_groupunits, plan_owner_name=yao_str)
     assert x_laborheir._owner_name_labor
 
     # WHEN

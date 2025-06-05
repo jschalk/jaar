@@ -1,8 +1,8 @@
 from pandas import DataFrame, concat as pandas_concat
 from plotly.graph_objects import Figure as plotly_Figure, Table as plotly_Table
-from src.a06_bud_logic.report import (
-    get_bud_acctunits_dataframe,
-    get_bud_agenda_dataframe,
+from src.a06_plan_logic.report import (
+    get_plan_acctunits_dataframe,
+    get_plan_agenda_dataframe,
 )
 from src.a12_hub_tools.hub_tool import open_gut_file, open_job_file
 from src.a15_vow_logic.vow import VowUnit
@@ -14,10 +14,10 @@ def get_vow_guts_accts_dataframe(x_vow: VowUnit) -> DataFrame:
     # for all owners get gut
     gut_dfs = []
     for owner_name in vow_owner_names:
-        gut_bud = open_gut_file(x_vow.vow_mstr_dir, x_vow.vow_label, owner_name)
-        gut_bud.settle_bud()
-        df = get_bud_acctunits_dataframe(gut_bud)
-        df.insert(0, "owner_name", gut_bud.owner_name)
+        gut_plan = open_gut_file(x_vow.vow_mstr_dir, x_vow.vow_label, owner_name)
+        gut_plan.settle_plan()
+        df = get_plan_acctunits_dataframe(gut_plan)
+        df.insert(0, "owner_name", gut_plan.owner_name)
         gut_dfs.append(df)
     return pandas_concat(gut_dfs, ignore_index=True)
 
@@ -71,8 +71,8 @@ def get_vow_jobs_accts_dataframe(x_vow: VowUnit) -> DataFrame:
     job_dfs = []
     for owner_name in vow_owner_names:
         job = open_job_file(x_vow.vow_mstr_dir, x_vow.vow_label, owner_name)
-        job.settle_bud()
-        job_df = get_bud_acctunits_dataframe(job)
+        job.settle_plan()
+        job_df = get_plan_acctunits_dataframe(job)
         job_df.insert(0, "owner_name", job.owner_name)
         job_dfs.append(job_df)
     return pandas_concat(job_dfs, ignore_index=True)
@@ -125,9 +125,9 @@ def get_vow_guts_agenda_dataframe(x_vow: VowUnit) -> DataFrame:
     # for all owners get gut
     gut_dfs = []
     for owner_name in vow_owner_names:
-        gut_bud = open_gut_file(x_vow.vow_mstr_dir, x_vow.vow_label, owner_name)
-        gut_bud.settle_bud()
-        df = get_bud_agenda_dataframe(gut_bud)
+        gut_plan = open_gut_file(x_vow.vow_mstr_dir, x_vow.vow_label, owner_name)
+        gut_plan.settle_plan()
+        df = get_plan_agenda_dataframe(gut_plan)
         gut_dfs.append(df)
     return pandas_concat(gut_dfs, ignore_index=True)
 
@@ -183,8 +183,8 @@ def get_vow_jobs_agenda_dataframe(x_vow: VowUnit) -> DataFrame:
     for x_owner_name in x_vow._get_owner_folder_names():
 
         job = open_job_file(x_vow.vow_mstr_dir, x_vow.vow_label, x_owner_name)
-        job.settle_bud()
-        job_df = get_bud_agenda_dataframe(job)
+        job.settle_plan()
+        job_df = get_plan_agenda_dataframe(job)
         job_dfs.append(job_df)
     return pandas_concat(job_dfs, ignore_index=True)
 

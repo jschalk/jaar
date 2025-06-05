@@ -37,7 +37,7 @@ def get_idea_formats_dir() -> str:
 
 
 def get_idea_elements_sort_order() -> list[str]:
-    """Contains the standard sort order for all idea and bud_calc columns"""
+    """Contains the standard sort order for all idea and plan_calc columns"""
     return [
         "world_id",
         "idea_number",
@@ -226,7 +226,7 @@ def get_default_sorted_list(
 
 
 def get_idea_sqlite_types() -> dict[str, str]:
-    """Contains the sqlite_type for all idea and bud_calc columns"""
+    """Contains the sqlite_type for all idea and plan_calc columns"""
 
     return {
         "world_id": "TEXT",
@@ -459,56 +459,56 @@ def idea_format_00019_conceptunit_v0_0_0() -> str:
     return "idea_format_00019_conceptunit_v0_0_0"
 
 
-# def idea_format_00020_bud_acct_membership_v0_0_0()-> str: return "idea_format_00020_bud_acct_membership_v0_0_0"
-# def idea_format_00021_bud_acctunit_v0_0_0()-> str: return "idea_format_00021_bud_acctunit_v0_0_0"
-# def idea_format_00022_bud_concept_awardlink_v0_0_0()-> str: return "idea_format_00022_bud_concept_awardlink_v0_0_0"
-# def idea_format_00023_bud_concept_factunit_v0_0_0()-> str: return "idea_format_00023_bud_concept_factunit_v0_0_0"
-# def idea_format_00024_bud_concept_laborlink_v0_0_0()-> str: return "idea_format_00024_bud_concept_laborlink_v0_0_0"
-# def idea_format_00025_bud_concept_healerlink_v0_0_0()-> str: return "idea_format_00025_bud_concept_healerlink_v0_0_0"
-# def idea_format_00026_bud_concept_reason_premiseunit_v0_0_0()-> str: return "idea_format_00026_bud_concept_reason_premiseunit_v0_0_0"
-# def idea_format_00027_bud_concept_reasonunit_v0_0_0()-> str: return "idea_format_00027_bud_concept_reasonunit_v0_0_0"
-# def idea_format_00028_bud_conceptunit_v0_0_0()-> str: return "idea_format_00028_bud_conceptunit_v0_0_0"
-# def idea_format_00029_budunit_v0_0_0()-> str: return "idea_format_00029_budunit_v0_0_0"
+# def idea_format_00020_plan_acct_membership_v0_0_0()-> str: return "idea_format_00020_plan_acct_membership_v0_0_0"
+# def idea_format_00021_plan_acctunit_v0_0_0()-> str: return "idea_format_00021_plan_acctunit_v0_0_0"
+# def idea_format_00022_plan_concept_awardlink_v0_0_0()-> str: return "idea_format_00022_plan_concept_awardlink_v0_0_0"
+# def idea_format_00023_plan_concept_factunit_v0_0_0()-> str: return "idea_format_00023_plan_concept_factunit_v0_0_0"
+# def idea_format_00024_plan_concept_laborlink_v0_0_0()-> str: return "idea_format_00024_plan_concept_laborlink_v0_0_0"
+# def idea_format_00025_plan_concept_healerlink_v0_0_0()-> str: return "idea_format_00025_plan_concept_healerlink_v0_0_0"
+# def idea_format_00026_plan_concept_reason_premiseunit_v0_0_0()-> str: return "idea_format_00026_plan_concept_reason_premiseunit_v0_0_0"
+# def idea_format_00027_plan_concept_reasonunit_v0_0_0()-> str: return "idea_format_00027_plan_concept_reasonunit_v0_0_0"
+# def idea_format_00028_plan_conceptunit_v0_0_0()-> str: return "idea_format_00028_plan_conceptunit_v0_0_0"
+# def idea_format_00029_planunit_v0_0_0()-> str: return "idea_format_00029_planunit_v0_0_0"
 
 
-def idea_format_00020_bud_acct_membership_v0_0_0() -> str:
-    return "idea_format_00020_bud_acct_membership_v0_0_0"
+def idea_format_00020_plan_acct_membership_v0_0_0() -> str:
+    return "idea_format_00020_plan_acct_membership_v0_0_0"
 
 
-def idea_format_00021_bud_acctunit_v0_0_0() -> str:
-    return "idea_format_00021_bud_acctunit_v0_0_0"
+def idea_format_00021_plan_acctunit_v0_0_0() -> str:
+    return "idea_format_00021_plan_acctunit_v0_0_0"
 
 
-def idea_format_00022_bud_concept_awardlink_v0_0_0() -> str:
-    return "idea_format_00022_bud_concept_awardlink_v0_0_0"
+def idea_format_00022_plan_concept_awardlink_v0_0_0() -> str:
+    return "idea_format_00022_plan_concept_awardlink_v0_0_0"
 
 
-def idea_format_00023_bud_concept_factunit_v0_0_0() -> str:
-    return "idea_format_00023_bud_concept_factunit_v0_0_0"
+def idea_format_00023_plan_concept_factunit_v0_0_0() -> str:
+    return "idea_format_00023_plan_concept_factunit_v0_0_0"
 
 
-def idea_format_00024_bud_concept_laborlink_v0_0_0() -> str:
-    return "idea_format_00024_bud_concept_laborlink_v0_0_0"
+def idea_format_00024_plan_concept_laborlink_v0_0_0() -> str:
+    return "idea_format_00024_plan_concept_laborlink_v0_0_0"
 
 
-def idea_format_00025_bud_concept_healerlink_v0_0_0() -> str:
-    return "idea_format_00025_bud_concept_healerlink_v0_0_0"
+def idea_format_00025_plan_concept_healerlink_v0_0_0() -> str:
+    return "idea_format_00025_plan_concept_healerlink_v0_0_0"
 
 
-def idea_format_00026_bud_concept_reason_premiseunit_v0_0_0() -> str:
-    return "idea_format_00026_bud_concept_reason_premiseunit_v0_0_0"
+def idea_format_00026_plan_concept_reason_premiseunit_v0_0_0() -> str:
+    return "idea_format_00026_plan_concept_reason_premiseunit_v0_0_0"
 
 
-def idea_format_00027_bud_concept_reasonunit_v0_0_0() -> str:
-    return "idea_format_00027_bud_concept_reasonunit_v0_0_0"
+def idea_format_00027_plan_concept_reasonunit_v0_0_0() -> str:
+    return "idea_format_00027_plan_concept_reasonunit_v0_0_0"
 
 
-def idea_format_00028_bud_conceptunit_v0_0_0() -> str:
-    return "idea_format_00028_bud_conceptunit_v0_0_0"
+def idea_format_00028_plan_conceptunit_v0_0_0() -> str:
+    return "idea_format_00028_plan_conceptunit_v0_0_0"
 
 
-def idea_format_00029_budunit_v0_0_0() -> str:
-    return "idea_format_00029_budunit_v0_0_0"
+def idea_format_00029_planunit_v0_0_0() -> str:
+    return "idea_format_00029_planunit_v0_0_0"
 
 
 def idea_format_00036_problem_healer_v0_0_0() -> str:
@@ -535,48 +535,48 @@ def idea_format_00045_pidgin_way_v0_0_0() -> str:
     return "idea_format_00045_pidgin_way_v0_0_0"
 
 
-def idea_format_00050_delete_bud_acct_membership_v0_0_0() -> str:
-    return "idea_format_00050_delete_bud_acct_membership_v0_0_0"
+def idea_format_00050_delete_plan_acct_membership_v0_0_0() -> str:
+    return "idea_format_00050_delete_plan_acct_membership_v0_0_0"
 
 
-def idea_format_00051_delete_bud_acctunit_v0_0_0() -> str:
-    return "idea_format_00051_delete_bud_acctunit_v0_0_0"
+def idea_format_00051_delete_plan_acctunit_v0_0_0() -> str:
+    return "idea_format_00051_delete_plan_acctunit_v0_0_0"
 
 
-def idea_format_00052_delete_bud_concept_awardlink_v0_0_0() -> str:
-    return "idea_format_00052_delete_bud_concept_awardlink_v0_0_0"
+def idea_format_00052_delete_plan_concept_awardlink_v0_0_0() -> str:
+    return "idea_format_00052_delete_plan_concept_awardlink_v0_0_0"
 
 
-def idea_format_00053_delete_bud_concept_factunit_v0_0_0() -> str:
-    return "idea_format_00053_delete_bud_concept_factunit_v0_0_0"
+def idea_format_00053_delete_plan_concept_factunit_v0_0_0() -> str:
+    return "idea_format_00053_delete_plan_concept_factunit_v0_0_0"
 
 
-def idea_format_00054_delete_bud_concept_laborlink_v0_0_0() -> str:
-    return "idea_format_00054_delete_bud_concept_laborlink_v0_0_0"
+def idea_format_00054_delete_plan_concept_laborlink_v0_0_0() -> str:
+    return "idea_format_00054_delete_plan_concept_laborlink_v0_0_0"
 
 
-def idea_format_00055_delete_bud_concept_healerlink_v0_0_0() -> str:
-    return "idea_format_00055_delete_bud_concept_healerlink_v0_0_0"
+def idea_format_00055_delete_plan_concept_healerlink_v0_0_0() -> str:
+    return "idea_format_00055_delete_plan_concept_healerlink_v0_0_0"
 
 
-def idea_format_00056_delete_bud_concept_reason_premiseunit_v0_0_0() -> str:
-    return "idea_format_00056_delete_bud_concept_reason_premiseunit_v0_0_0"
+def idea_format_00056_delete_plan_concept_reason_premiseunit_v0_0_0() -> str:
+    return "idea_format_00056_delete_plan_concept_reason_premiseunit_v0_0_0"
 
 
-def idea_format_00057_delete_bud_concept_reasonunit_v0_0_0() -> str:
-    return "idea_format_00057_delete_bud_concept_reasonunit_v0_0_0"
+def idea_format_00057_delete_plan_concept_reasonunit_v0_0_0() -> str:
+    return "idea_format_00057_delete_plan_concept_reasonunit_v0_0_0"
 
 
-def idea_format_00058_delete_bud_conceptunit_v0_0_0() -> str:
-    return "idea_format_00058_delete_bud_conceptunit_v0_0_0"
+def idea_format_00058_delete_plan_conceptunit_v0_0_0() -> str:
+    return "idea_format_00058_delete_plan_conceptunit_v0_0_0"
 
 
-def idea_format_00059_delete_budunit_v0_0_0() -> str:
-    return "idea_format_00059_delete_budunit_v0_0_0"
+def idea_format_00059_delete_planunit_v0_0_0() -> str:
+    return "idea_format_00059_delete_planunit_v0_0_0"
 
 
-def idea_format_00050_delete_bud_acct_membership_v0_0_0() -> str:
-    return "idea_format_00050_delete_bud_acct_membership_v0_0_0"
+def idea_format_00050_delete_plan_acct_membership_v0_0_0() -> str:
+    return "idea_format_00050_delete_plan_acct_membership_v0_0_0"
 
 
 def idea_format_00113_acct_map1_v0_0_0() -> str:
@@ -608,31 +608,31 @@ def get_idea_format_filenames() -> set[str]:
         idea_format_00012_membership_v0_0_0(),
         idea_format_00013_conceptunit_v0_0_0(),
         idea_format_00019_conceptunit_v0_0_0(),
-        idea_format_00020_bud_acct_membership_v0_0_0(),
-        idea_format_00021_bud_acctunit_v0_0_0(),
-        idea_format_00022_bud_concept_awardlink_v0_0_0(),
-        idea_format_00023_bud_concept_factunit_v0_0_0(),
-        idea_format_00024_bud_concept_laborlink_v0_0_0(),
-        idea_format_00025_bud_concept_healerlink_v0_0_0(),
-        idea_format_00026_bud_concept_reason_premiseunit_v0_0_0(),
-        idea_format_00027_bud_concept_reasonunit_v0_0_0(),
-        idea_format_00028_bud_conceptunit_v0_0_0(),
-        idea_format_00029_budunit_v0_0_0(),
+        idea_format_00020_plan_acct_membership_v0_0_0(),
+        idea_format_00021_plan_acctunit_v0_0_0(),
+        idea_format_00022_plan_concept_awardlink_v0_0_0(),
+        idea_format_00023_plan_concept_factunit_v0_0_0(),
+        idea_format_00024_plan_concept_laborlink_v0_0_0(),
+        idea_format_00025_plan_concept_healerlink_v0_0_0(),
+        idea_format_00026_plan_concept_reason_premiseunit_v0_0_0(),
+        idea_format_00027_plan_concept_reasonunit_v0_0_0(),
+        idea_format_00028_plan_conceptunit_v0_0_0(),
+        idea_format_00029_planunit_v0_0_0(),
         idea_format_00036_problem_healer_v0_0_0(),
         idea_format_00042_pidgin_title_v0_0_0(),
         idea_format_00043_pidgin_name_v0_0_0(),
         idea_format_00044_pidgin_label_v0_0_0(),
         idea_format_00045_pidgin_way_v0_0_0(),
-        idea_format_00050_delete_bud_acct_membership_v0_0_0(),
-        idea_format_00051_delete_bud_acctunit_v0_0_0(),
-        idea_format_00052_delete_bud_concept_awardlink_v0_0_0(),
-        idea_format_00053_delete_bud_concept_factunit_v0_0_0(),
-        idea_format_00054_delete_bud_concept_laborlink_v0_0_0(),
-        idea_format_00055_delete_bud_concept_healerlink_v0_0_0(),
-        idea_format_00056_delete_bud_concept_reason_premiseunit_v0_0_0(),
-        idea_format_00057_delete_bud_concept_reasonunit_v0_0_0(),
-        idea_format_00058_delete_bud_conceptunit_v0_0_0(),
-        idea_format_00059_delete_budunit_v0_0_0(),
+        idea_format_00050_delete_plan_acct_membership_v0_0_0(),
+        idea_format_00051_delete_plan_acctunit_v0_0_0(),
+        idea_format_00052_delete_plan_concept_awardlink_v0_0_0(),
+        idea_format_00053_delete_plan_concept_factunit_v0_0_0(),
+        idea_format_00054_delete_plan_concept_laborlink_v0_0_0(),
+        idea_format_00055_delete_plan_concept_healerlink_v0_0_0(),
+        idea_format_00056_delete_plan_concept_reason_premiseunit_v0_0_0(),
+        idea_format_00057_delete_plan_concept_reasonunit_v0_0_0(),
+        idea_format_00058_delete_plan_conceptunit_v0_0_0(),
+        idea_format_00059_delete_planunit_v0_0_0(),
         idea_format_00113_acct_map1_v0_0_0(),
         idea_format_00115_group_map1_v0_0_0(),
         idea_format_00116_label_map1_v0_0_0(),
@@ -705,31 +705,31 @@ def get_idea_format_headers() -> dict[str, list[str]]:
         "vow_label,owner_name,acct_name,group_title": idea_format_00012_membership_v0_0_0(),
         "vow_label,owner_name,concept_way,mass,task": idea_format_00013_conceptunit_v0_0_0(),
         "vow_label,owner_name,concept_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want": idea_format_00019_conceptunit_v0_0_0(),
-        "vow_label,owner_name,acct_name,group_title,credit_vote,debtit_vote": idea_format_00020_bud_acct_membership_v0_0_0(),
-        "vow_label,owner_name,acct_name,credit_belief,debtit_belief": idea_format_00021_bud_acctunit_v0_0_0(),
-        "vow_label,owner_name,concept_way,awardee_title,give_force,take_force": idea_format_00022_bud_concept_awardlink_v0_0_0(),
-        "vow_label,owner_name,concept_way,fcontext,fstate,fopen,fnigh": idea_format_00023_bud_concept_factunit_v0_0_0(),
-        "vow_label,owner_name,concept_way,labor_title": idea_format_00024_bud_concept_laborlink_v0_0_0(),
-        "vow_label,owner_name,concept_way,healer_name": idea_format_00025_bud_concept_healerlink_v0_0_0(),
-        "vow_label,owner_name,concept_way,rcontext,pstate,pnigh,popen,pdivisor": idea_format_00026_bud_concept_reason_premiseunit_v0_0_0(),
-        "vow_label,owner_name,concept_way,rcontext,rconcept_active_requisite": idea_format_00027_bud_concept_reasonunit_v0_0_0(),
-        "vow_label,owner_name,concept_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,task,problem_bool": idea_format_00028_bud_conceptunit_v0_0_0(),
-        "vow_label,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_iota,penny,respect_bit": idea_format_00029_budunit_v0_0_0(),
+        "vow_label,owner_name,acct_name,group_title,credit_vote,debtit_vote": idea_format_00020_plan_acct_membership_v0_0_0(),
+        "vow_label,owner_name,acct_name,credit_belief,debtit_belief": idea_format_00021_plan_acctunit_v0_0_0(),
+        "vow_label,owner_name,concept_way,awardee_title,give_force,take_force": idea_format_00022_plan_concept_awardlink_v0_0_0(),
+        "vow_label,owner_name,concept_way,fcontext,fstate,fopen,fnigh": idea_format_00023_plan_concept_factunit_v0_0_0(),
+        "vow_label,owner_name,concept_way,labor_title": idea_format_00024_plan_concept_laborlink_v0_0_0(),
+        "vow_label,owner_name,concept_way,healer_name": idea_format_00025_plan_concept_healerlink_v0_0_0(),
+        "vow_label,owner_name,concept_way,rcontext,pstate,pnigh,popen,pdivisor": idea_format_00026_plan_concept_reason_premiseunit_v0_0_0(),
+        "vow_label,owner_name,concept_way,rcontext,rconcept_active_requisite": idea_format_00027_plan_concept_reasonunit_v0_0_0(),
+        "vow_label,owner_name,concept_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,task,problem_bool": idea_format_00028_plan_conceptunit_v0_0_0(),
+        "vow_label,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_iota,penny,respect_bit": idea_format_00029_planunit_v0_0_0(),
         "vow_label,owner_name,concept_way,healer_name,problem_bool": idea_format_00036_problem_healer_v0_0_0(),
         "otx_title,inx_title,otx_bridge,inx_bridge,unknown_str": idea_format_00042_pidgin_title_v0_0_0(),
         "otx_name,inx_name,otx_bridge,inx_bridge,unknown_str": idea_format_00043_pidgin_name_v0_0_0(),
         "otx_label,inx_label,otx_bridge,inx_bridge,unknown_str": idea_format_00044_pidgin_label_v0_0_0(),
         "otx_way,inx_way,otx_bridge,inx_bridge,unknown_str": idea_format_00045_pidgin_way_v0_0_0(),
-        "vow_label,owner_name,acct_name,group_title_ERASE": idea_format_00050_delete_bud_acct_membership_v0_0_0(),
-        "vow_label,owner_name,acct_name_ERASE": idea_format_00051_delete_bud_acctunit_v0_0_0(),
-        "vow_label,owner_name,concept_way,awardee_title_ERASE": idea_format_00052_delete_bud_concept_awardlink_v0_0_0(),
-        "vow_label,owner_name,concept_way,fcontext_ERASE": idea_format_00053_delete_bud_concept_factunit_v0_0_0(),
-        "vow_label,owner_name,concept_way,labor_title_ERASE": idea_format_00054_delete_bud_concept_laborlink_v0_0_0(),
-        "vow_label,owner_name,concept_way,healer_name_ERASE": idea_format_00055_delete_bud_concept_healerlink_v0_0_0(),
-        "vow_label,owner_name,concept_way,rcontext,pstate_ERASE": idea_format_00056_delete_bud_concept_reason_premiseunit_v0_0_0(),
-        "vow_label,owner_name,concept_way,rcontext_ERASE": idea_format_00057_delete_bud_concept_reasonunit_v0_0_0(),
-        "vow_label,owner_name,concept_way_ERASE": idea_format_00058_delete_bud_conceptunit_v0_0_0(),
-        "vow_label,owner_name_ERASE": idea_format_00059_delete_budunit_v0_0_0(),
+        "vow_label,owner_name,acct_name,group_title_ERASE": idea_format_00050_delete_plan_acct_membership_v0_0_0(),
+        "vow_label,owner_name,acct_name_ERASE": idea_format_00051_delete_plan_acctunit_v0_0_0(),
+        "vow_label,owner_name,concept_way,awardee_title_ERASE": idea_format_00052_delete_plan_concept_awardlink_v0_0_0(),
+        "vow_label,owner_name,concept_way,fcontext_ERASE": idea_format_00053_delete_plan_concept_factunit_v0_0_0(),
+        "vow_label,owner_name,concept_way,labor_title_ERASE": idea_format_00054_delete_plan_concept_laborlink_v0_0_0(),
+        "vow_label,owner_name,concept_way,healer_name_ERASE": idea_format_00055_delete_plan_concept_healerlink_v0_0_0(),
+        "vow_label,owner_name,concept_way,rcontext,pstate_ERASE": idea_format_00056_delete_plan_concept_reason_premiseunit_v0_0_0(),
+        "vow_label,owner_name,concept_way,rcontext_ERASE": idea_format_00057_delete_plan_concept_reasonunit_v0_0_0(),
+        "vow_label,owner_name,concept_way_ERASE": idea_format_00058_delete_plan_conceptunit_v0_0_0(),
+        "vow_label,owner_name_ERASE": idea_format_00059_delete_planunit_v0_0_0(),
         "vow_label,owner_name,acct_name,otx_name,inx_name": idea_format_00113_acct_map1_v0_0_0(),
         "vow_label,owner_name,acct_name,otx_title,inx_title": idea_format_00115_group_map1_v0_0_0(),
         "vow_label,owner_name,acct_name,otx_label,inx_label": idea_format_00116_label_map1_v0_0_0(),
@@ -754,8 +754,8 @@ def get_quick_ideas_column_ref() -> dict[str, set[str]]:
 def get_idea_dimen_ref() -> dict[str, set[str]]:
     """dictionary with key=dimen and value=set of all idea_numbers with that dimen's data"""
     return {
-        "bud_acct_membership": {"br00012", "br00020", "br00050"},
-        "bud_acctunit": {
+        "plan_acct_membership": {"br00012", "br00020", "br00050"},
+        "plan_acctunit": {
             "br00002",
             "br00011",
             "br00012",
@@ -768,13 +768,13 @@ def get_idea_dimen_ref() -> dict[str, set[str]]:
             "br00116",
             "br00117",
         },
-        "bud_concept_awardlink": {"br00022", "br00052"},
-        "bud_concept_factunit": {"br00023", "br00053"},
-        "bud_concept_healerlink": {"br00025", "br00036", "br00055"},
-        "bud_concept_reason_premiseunit": {"br00026", "br00056"},
-        "bud_concept_reasonunit": {"br00026", "br00027", "br00056", "br00057"},
-        "bud_concept_laborlink": {"br00024", "br00054"},
-        "bud_conceptunit": {
+        "plan_concept_awardlink": {"br00022", "br00052"},
+        "plan_concept_factunit": {"br00023", "br00053"},
+        "plan_concept_healerlink": {"br00025", "br00036", "br00055"},
+        "plan_concept_reason_premiseunit": {"br00026", "br00056"},
+        "plan_concept_reasonunit": {"br00026", "br00027", "br00056", "br00057"},
+        "plan_concept_laborlink": {"br00024", "br00054"},
+        "plan_conceptunit": {
             "br00013",
             "br00019",
             "br00022",
@@ -793,7 +793,7 @@ def get_idea_dimen_ref() -> dict[str, set[str]]:
             "br00057",
             "br00058",
         },
-        "budunit": {
+        "planunit": {
             "br00001",
             "br00002",
             "br00011",

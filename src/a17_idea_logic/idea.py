@@ -10,10 +10,14 @@ from src.a00_data_toolbox.dict_toolbox import (
 )
 from src.a00_data_toolbox.file_toolbox import open_file
 from src.a01_term_logic.term import OwnerName, VowLabel
-from src.a06_bud_logic.bud import BudUnit
+from src.a06_plan_logic.plan import PlanUnit
 from src.a07_calendar_logic.chrono import timelineunit_shop
-from src.a08_bud_atom_logic.atom import BudAtom, atomrow_shop
-from src.a09_pack_logic.delta import BudDelta, buddelta_shop, get_dimens_cruds_buddelta
+from src.a08_plan_atom_logic.atom import PlanAtom, atomrow_shop
+from src.a09_pack_logic.delta import (
+    PlanDelta,
+    get_dimens_cruds_plandelta,
+    plandelta_shop,
+)
 from src.a09_pack_logic.pack import packunit_shop
 from src.a12_hub_tools.hub_tool import open_gut_file, save_gut_file
 from src.a12_hub_tools.hubunit import hubunit_shop
@@ -81,37 +85,37 @@ def _generate_idea_dataframe(d2_list: list[list[str]], idea_name: str) -> DataFr
     return DataFrame(d2_list, columns=_get_headers_list(idea_name))
 
 
-def create_idea_df(x_budunit: BudUnit, idea_name: str) -> DataFrame:
-    x_buddelta = buddelta_shop()
-    x_buddelta.add_all_budatoms(x_budunit)
+def create_idea_df(x_planunit: PlanUnit, idea_name: str) -> DataFrame:
+    x_plandelta = plandelta_shop()
+    x_plandelta.add_all_planatoms(x_planunit)
     x_idearef = get_idearef_obj(idea_name)
-    x_vow_label = x_budunit.vow_label
-    x_owner_name = x_budunit.owner_name
-    sorted_budatoms = _get_sorted_INSERT_str_budatoms(x_buddelta, x_idearef)
-    d2_list = _create_d2_list(sorted_budatoms, x_idearef, x_vow_label, x_owner_name)
+    x_vow_label = x_planunit.vow_label
+    x_owner_name = x_planunit.owner_name
+    sorted_planatoms = _get_sorted_INSERT_str_planatoms(x_plandelta, x_idearef)
+    d2_list = _create_d2_list(sorted_planatoms, x_idearef, x_vow_label, x_owner_name)
     d2_list = _delta_all_task_values(d2_list, x_idearef)
     x_idea = _generate_idea_dataframe(d2_list, idea_name)
     sorting_columns = x_idearef.get_headers_list()
     return _sort_dataframe(x_idea, sorting_columns)
 
 
-def _get_sorted_INSERT_str_budatoms(
-    x_buddelta: BudDelta, x_idearef: IdeaRef
-) -> list[BudAtom]:
+def _get_sorted_INSERT_str_planatoms(
+    x_plandelta: PlanDelta, x_idearef: IdeaRef
+) -> list[PlanAtom]:
     dimen_set = set(x_idearef.dimens)
     curd_set = {"INSERT"}
-    limited_delta = get_dimens_cruds_buddelta(x_buddelta, dimen_set, curd_set)
-    return limited_delta.get_dimen_sorted_budatoms_list()
+    limited_delta = get_dimens_cruds_plandelta(x_plandelta, dimen_set, curd_set)
+    return limited_delta.get_dimen_sorted_planatoms_list()
 
 
 def _create_d2_list(
-    sorted_budatoms: list[BudAtom],
+    sorted_planatoms: list[PlanAtom],
     x_idearef: IdeaRef,
     x_vow_label: VowLabel,
     x_owner_name: OwnerName,
 ):
     d2_list = []
-    for x_budatom in sorted_budatoms:
+    for x_planatom in sorted_planatoms:
         d1_list = []
         for x_attribute in x_idearef.get_headers_list():
             if x_attribute == "vow_label":
@@ -119,7 +123,7 @@ def _create_d2_list(
             elif x_attribute == "owner_name":
                 d1_list.append(x_owner_name)
             else:
-                d1_list.append(x_budatom.get_value(x_attribute))
+                d1_list.append(x_planatom.get_value(x_attribute))
         d2_list.append(d1_list)
     return d2_list
 
@@ -145,8 +149,8 @@ def _sort_dataframe(x_idea: DataFrame, sorting_columns: list[str]) -> DataFrame:
     return x_idea
 
 
-def save_idea_csv(x_ideaname: str, x_budunit: BudUnit, x_dir: str, x_filename: str):
-    x_dataframe = create_idea_df(x_budunit, x_ideaname)
+def save_idea_csv(x_ideaname: str, x_planunit: PlanUnit, x_dir: str, x_filename: str):
+    x_dataframe = create_idea_df(x_planunit, x_ideaname)
     save_dataframe_to_csv(x_dataframe, x_dir, x_filename)
 
 
@@ -160,9 +164,9 @@ def get_csv_idearef(header_row: list[str]) -> IdeaRef:
     return get_idearef_obj(x_ideaname)
 
 
-def _remove_non_bud_dimens_from_idearef(x_idearef: IdeaRef) -> IdeaRef:
+def _remove_non_plan_dimens_from_idearef(x_idearef: IdeaRef) -> IdeaRef:
     to_delete_dimen_set = {
-        dimen for dimen in x_idearef.dimens if not dimen.startswith("bud")
+        dimen for dimen in x_idearef.dimens if not dimen.startswith("plan")
     }
     dimens_set = set(x_idearef.dimens)
     for to_delete_dimen in to_delete_dimen_set:
@@ -172,13 +176,13 @@ def _remove_non_bud_dimens_from_idearef(x_idearef: IdeaRef) -> IdeaRef:
     return x_idearef
 
 
-def make_buddelta(x_csv: str) -> BudDelta:
+def make_plandelta(x_csv: str) -> PlanDelta:
     header_row, headerless_csv = extract_csv_headers(x_csv)
     x_idearef = get_csv_idearef(header_row)
-    _remove_non_bud_dimens_from_idearef(x_idearef)
+    _remove_non_plan_dimens_from_idearef(x_idearef)
     x_reader = csv_reader(headerless_csv.splitlines(), delimiter=",")
     x_dict = get_positional_dict(header_row)
-    x_buddelta = buddelta_shop()
+    x_plandelta = plandelta_shop()
 
     for row in x_reader:
         x_atomrow = atomrow_shop(x_idearef.dimens, "INSERT")
@@ -186,9 +190,9 @@ def make_buddelta(x_csv: str) -> BudDelta:
             if header_index := x_dict.get(x_header):
                 x_atomrow.__dict__[x_header] = row[header_index]
 
-        for x_budatom in x_atomrow.get_budatoms():
-            x_buddelta.set_budatom(x_budatom)
-    return x_buddelta
+        for x_planatom in x_atomrow.get_planatoms():
+            x_plandelta.set_planatom(x_planatom)
+    return x_plandelta
 
 
 def _load_individual_idea_csv(
@@ -199,10 +203,10 @@ def _load_individual_idea_csv(
 ):
     x_hubunit = hubunit_shop(vow_mstr_dir, x_vow_label, x_owner_name)
     x_hubunit.initialize_pack_gut_files()
-    x_buddelta = make_buddelta(complete_csv)
-    # x_buddelta = get_minimal_buddelta(x_buddelta, x_gut)
+    x_plandelta = make_plandelta(complete_csv)
+    # x_plandelta = get_minimal_plandelta(x_plandelta, x_gut)
     x_packunit = packunit_shop(x_owner_name, x_vow_label)
-    x_packunit.set_buddelta(x_buddelta)
+    x_packunit.set_plandelta(x_plandelta)
     x_hubunit.save_pack_file(x_packunit)
     x_hubunit._create_gut_from_packs()
 

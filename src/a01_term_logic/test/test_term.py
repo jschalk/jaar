@@ -95,7 +95,7 @@ def test_OwnerName_exists():
     bob_OwnerName_str = OwnerName(bob_str)
     # THEN
     assert bob_OwnerName_str == bob_str
-    doc_str = "A NameTerm used to identify a BudUnit's owner"
+    doc_str = "A NameTerm used to identify a PlanUnit's owner"
     assert inspect_getdoc(bob_OwnerName_str) == doc_str
 
 

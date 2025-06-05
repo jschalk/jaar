@@ -1,9 +1,9 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, get_level1_dirs
-from src.a12_hub_tools.hub_tool import open_bud_file
+from src.a12_hub_tools.hub_tool import open_plan_file
 from src.a15_vow_logic.vow import get_from_default_path as vowunit_get_from_default_path
 from src.a17_idea_logic.idea_csv_tool import (
-    add_budunit_to_stance_csv_strs,
+    add_planunit_to_stance_csv_strs,
     add_vowunit_to_stance_csv_strs,
     create_init_stance_idea_csv_strs,
 )
@@ -22,10 +22,10 @@ def collect_stance_csv_strs(vow_mstr_dir: str) -> dict[str, str]:
         for owner_name in get_level1_dirs(owners_dir):
             owner_dir = create_path(owners_dir, owner_name)
             gut_dir = create_path(owner_dir, "gut")
-            gut_bud_path = create_path(gut_dir, f"{owner_name}.json")
-            if os_path_exists(gut_bud_path):
-                gut_bud = open_bud_file(gut_bud_path)
-                add_budunit_to_stance_csv_strs(gut_bud, x_csv_strs, ",")
+            gut_plan_path = create_path(gut_dir, f"{owner_name}.json")
+            if os_path_exists(gut_plan_path):
+                gut_plan = open_plan_file(gut_plan_path)
+                add_planunit_to_stance_csv_strs(gut_plan, x_csv_strs, ",")
     return x_csv_strs
 
 

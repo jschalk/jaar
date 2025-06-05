@@ -1,6 +1,6 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_table_columns
-from src.a06_bud_logic._test_util.a06_str import bud_concept_awardlink_str
+from src.a06_plan_logic._test_util.a06_str import plan_concept_awardlink_str
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic._test_util.a16_str import (
     inx_name_str,
@@ -33,10 +33,10 @@ def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario0_
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budawar_dimen = bud_concept_awardlink_str()
-        budawar_v_raw_put_tablename = prime_tbl(budawar_dimen, "v", "raw", "put")
-        # print(f"{get_table_columns(cursor, budawar_v_raw_put_tablename)=}")
-        insert_face_name_only_sqlstr = f"""INSERT INTO {budawar_v_raw_put_tablename} 
+        planawar_dimen = plan_concept_awardlink_str()
+        planawar_v_raw_put_tablename = prime_tbl(planawar_dimen, "v", "raw", "put")
+        # print(f"{get_table_columns(cursor, planawar_v_raw_put_tablename)=}")
+        insert_face_name_only_sqlstr = f"""INSERT INTO {planawar_v_raw_put_tablename} 
         ({event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx)
         VALUES
           ({event1}, '{sue_otx}', NULL)
@@ -59,19 +59,19 @@ def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario0_
         """
         cursor.execute(insert_pidname_sqlstr)
 
-        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {budawar_v_raw_put_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
+        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {planawar_v_raw_put_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 0
 
         # WHEN
         update_sqlstr = create_update_voice_raw_existing_inx_col_sqlstr(
-            "name", budawar_v_raw_put_tablename, face_name_str()
+            "name", planawar_v_raw_put_tablename, face_name_str()
         )
         print(update_sqlstr)
         cursor.execute(update_sqlstr)
 
         # THEN
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 3
-        select_face_name_only_sqlstr = f"""SELECT {event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx FROM {budawar_v_raw_put_tablename}"""
+        select_face_name_only_sqlstr = f"""SELECT {event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx FROM {planawar_v_raw_put_tablename}"""
         cursor.execute(select_face_name_only_sqlstr)
         rows = cursor.fetchall()
         print(rows)
@@ -98,9 +98,9 @@ def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario1_
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budawar_dimen = bud_concept_awardlink_str()
-        budawar_v_raw_put_tablename = prime_tbl(budawar_dimen, "v", "raw", "put")
-        insert_face_name_only_sqlstr = f"""INSERT INTO {budawar_v_raw_put_tablename}
+        planawar_dimen = plan_concept_awardlink_str()
+        planawar_v_raw_put_tablename = prime_tbl(planawar_dimen, "v", "raw", "put")
+        insert_face_name_only_sqlstr = f"""INSERT INTO {planawar_v_raw_put_tablename}
         ({event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx)
         VALUES
           ({event1}, '{sue_otx}', NULL)
@@ -121,18 +121,18 @@ def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario1_
         """
         cursor.execute(insert_pidname_sqlstr)
 
-        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {budawar_v_raw_put_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
+        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {planawar_v_raw_put_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 0
 
         # WHEN
         update_sqlstr = create_update_voice_raw_existing_inx_col_sqlstr(
-            "name", budawar_v_raw_put_tablename, face_name_str()
+            "name", planawar_v_raw_put_tablename, face_name_str()
         )
         print(update_sqlstr)
         cursor.execute(update_sqlstr)
 
         # THEN
-        select_face_name_only_sqlstr = f"""SELECT {event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx FROM {budawar_v_raw_put_tablename}"""
+        select_face_name_only_sqlstr = f"""SELECT {event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx FROM {planawar_v_raw_put_tablename}"""
         cursor.execute(select_face_name_only_sqlstr)
         rows = cursor.fetchall()
         print(rows)
@@ -165,10 +165,10 @@ def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario2_
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budawar_dimen = bud_concept_awardlink_str()
-        budawar_v_raw_put_tablename = prime_tbl(budawar_dimen, "v", "raw", "put")
-        print(f"{get_table_columns(cursor, budawar_v_raw_put_tablename)=}")
-        insert_face_name_only_sqlstr = f"""INSERT INTO {budawar_v_raw_put_tablename}
+        planawar_dimen = plan_concept_awardlink_str()
+        planawar_v_raw_put_tablename = prime_tbl(planawar_dimen, "v", "raw", "put")
+        print(f"{get_table_columns(cursor, planawar_v_raw_put_tablename)=}")
+        insert_face_name_only_sqlstr = f"""INSERT INTO {planawar_v_raw_put_tablename}
         ({event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx)
         VALUES
           ({event0}, '{bob_otx}', NULL)
@@ -196,18 +196,18 @@ def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario2_
         """
         cursor.execute(insert_pidname_sqlstr)
 
-        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {budawar_v_raw_put_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
+        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {planawar_v_raw_put_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 0
 
         # WHEN
         update_sqlstr = create_update_voice_raw_existing_inx_col_sqlstr(
-            "name", budawar_v_raw_put_tablename, face_name_str()
+            "name", planawar_v_raw_put_tablename, face_name_str()
         )
         print(update_sqlstr)
         cursor.execute(update_sqlstr)
 
         # THEN
-        select_face_name_only_sqlstr = f"""SELECT {event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx FROM {budawar_v_raw_put_tablename}"""
+        select_face_name_only_sqlstr = f"""SELECT {event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx FROM {planawar_v_raw_put_tablename}"""
         cursor.execute(select_face_name_only_sqlstr)
         rows = cursor.fetchall()
         print(rows)
@@ -241,10 +241,10 @@ def test_create_update_voice_raw_empty_inx_col_sqlstr_UpdatesTable_Scenario0_Emp
         print(f"{pidname_s_vld_tablename=}")
         print(f"{get_table_columns(cursor, pidname_s_vld_tablename)=}")
 
-        budawar_dimen = bud_concept_awardlink_str()
-        budawar_v_raw_put_tablename = prime_tbl(budawar_dimen, "v", "raw", "put")
-        print(f"{get_table_columns(cursor, budawar_v_raw_put_tablename)=}")
-        insert_face_name_only_sqlstr = f"""INSERT INTO {budawar_v_raw_put_tablename} ({event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx)
+        planawar_dimen = plan_concept_awardlink_str()
+        planawar_v_raw_put_tablename = prime_tbl(planawar_dimen, "v", "raw", "put")
+        print(f"{get_table_columns(cursor, planawar_v_raw_put_tablename)=}")
+        insert_face_name_only_sqlstr = f"""INSERT INTO {planawar_v_raw_put_tablename} ({event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx)
 VALUES
   ({event1}, '{sue_otx}', '{sue_inx}')
 , ({event2}, '{yao_otx}', NULL)
@@ -253,19 +253,19 @@ VALUES
 ;
 """
         cursor.execute(insert_face_name_only_sqlstr)
-        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {budawar_v_raw_put_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
+        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {planawar_v_raw_put_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 2
 
         # WHEN
         update_sqlstr = create_update_voice_raw_empty_inx_col_sqlstr(
-            budawar_v_raw_put_tablename, face_name_str()
+            planawar_v_raw_put_tablename, face_name_str()
         )
         print(update_sqlstr)
         cursor.execute(update_sqlstr)
 
         # THEN
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 4
-        select_face_name_only_sqlstr = f"""SELECT {event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx FROM {budawar_v_raw_put_tablename}"""
+        select_face_name_only_sqlstr = f"""SELECT {event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx FROM {planawar_v_raw_put_tablename}"""
         cursor.execute(select_face_name_only_sqlstr)
         rows = cursor.fetchall()
         print(rows)
@@ -298,10 +298,10 @@ def test_set_all_voice_raw_inx_columns_Scenario0_empty_tables():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budawar_dimen = bud_concept_awardlink_str()
-        budawar_v_raw_put_tablename = prime_tbl(budawar_dimen, "v", "raw", "put")
-        print(f"{get_table_columns(cursor, budawar_v_raw_put_tablename)=}")
-        insert_face_name_only_sqlstr = f"""INSERT INTO {budawar_v_raw_put_tablename}
+        planawar_dimen = plan_concept_awardlink_str()
+        planawar_v_raw_put_tablename = prime_tbl(planawar_dimen, "v", "raw", "put")
+        print(f"{get_table_columns(cursor, planawar_v_raw_put_tablename)=}")
+        insert_face_name_only_sqlstr = f"""INSERT INTO {planawar_v_raw_put_tablename}
         ({event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx)
         VALUES
           ({event0}, '{bob_otx}', NULL)
@@ -329,14 +329,14 @@ def test_set_all_voice_raw_inx_columns_Scenario0_empty_tables():
         """
         cursor.execute(insert_pidname_sqlstr)
 
-        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {budawar_v_raw_put_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
+        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {planawar_v_raw_put_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 0
 
         # WHEN
         set_all_voice_raw_inx_columns(cursor)
 
         # THEN
-        select_face_name_only_sqlstr = f"""SELECT {event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx FROM {budawar_v_raw_put_tablename}"""
+        select_face_name_only_sqlstr = f"""SELECT {event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx FROM {planawar_v_raw_put_tablename}"""
         cursor.execute(select_face_name_only_sqlstr)
         rows = cursor.fetchall()
         print(rows)

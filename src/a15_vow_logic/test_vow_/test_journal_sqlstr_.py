@@ -1,12 +1,12 @@
 from src.a01_term_logic.way import create_way
-from src.a06_bud_logic._test_util.a06_str import (
-    bud_concept_factunit_str,
+from src.a06_plan_logic._test_util.a06_str import (
     concept_way_str,
     fcontext_str,
     fopen_str,
+    plan_concept_factunit_str,
 )
-from src.a08_bud_atom_logic._test_util.a08_str import INSERT_str, atom_hx_str
-from src.a08_bud_atom_logic.atom import budatom_shop
+from src.a08_plan_atom_logic._test_util.a08_str import INSERT_str, atom_hx_str
+from src.a08_plan_atom_logic.atom import planatom_shop
 from src.a15_vow_logic.journal_sqlstr import (
     get_atom2delta_table_create_sqlstr,
     get_atom_hx_table_create_sqlstr,
@@ -173,7 +173,7 @@ CREATE TABLE IF NOT EXISTS atom_hx (
         "concept_reasonunit_UPDATE_rconcept_active_requisite INTEGER NULL"
     )
     assert generated_sqlstr.find(example_concept_reasonunit_str) > 0
-    assert generated_sqlstr.find(example_concept_reasonunit_str) == 3949
+    assert generated_sqlstr.find(example_concept_reasonunit_str) == 4017
 
 
 def test_get_atom_hx_table_insert_sqlstr_ReturnsCorrectStr():
@@ -187,11 +187,11 @@ def test_get_atom_hx_table_insert_sqlstr_ReturnsCorrectStr():
     knee_fopen = 7
 
     # WHEN
-    x_dimen = bud_concept_factunit_str()
-    update_disc_budatom = budatom_shop(x_dimen, INSERT_str())
-    update_disc_budatom.set_jkey(concept_way_str(), ball_way)
-    update_disc_budatom.set_jkey(fcontext_str(), knee_way)
-    update_disc_budatom.set_jvalue(fopen_str(), knee_fopen)
+    x_dimen = plan_concept_factunit_str()
+    update_disc_planatom = planatom_shop(x_dimen, INSERT_str())
+    update_disc_planatom.set_jkey(concept_way_str(), ball_way)
+    update_disc_planatom.set_jkey(fcontext_str(), knee_way)
+    update_disc_planatom.set_jvalue(fopen_str(), knee_fopen)
 
     # THEN
     example_sqlstr = f"""
@@ -206,7 +206,7 @@ VALUES (
 , {knee_fopen}
 )
 ;"""
-    assert get_atom_hx_table_insert_sqlstr(update_disc_budatom) == example_sqlstr
+    assert get_atom_hx_table_insert_sqlstr(update_disc_planatom) == example_sqlstr
 
 
 def test_get_atom_mstr_table_create_sqlstr_ReturnsCorrectStr():
@@ -222,12 +222,12 @@ CREATE TABLE IF NOT EXISTS atom_mstr (
 ;"""
     assert generated_sqlstr.find(begin_sqlstr) == 0
     assert generated_sqlstr.find(end_sqlstr) > 0
-    assert generated_sqlstr.find(end_sqlstr) == 5610
+    assert generated_sqlstr.find(end_sqlstr) == 5713
     example_concept_reasonunit_str = (
         "concept_reasonunit_UPDATE_rconcept_active_requisite INTEGER NULL"
     )
     assert generated_sqlstr.find(example_concept_reasonunit_str) > 0
-    assert generated_sqlstr.find(example_concept_reasonunit_str) == 3981
+    assert generated_sqlstr.find(example_concept_reasonunit_str) == 4049
 
 
 def test_get_create_table_if_not_exist_sqlstrs_HasCorrectNumberOfNumber():

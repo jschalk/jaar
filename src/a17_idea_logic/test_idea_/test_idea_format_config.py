@@ -1,12 +1,10 @@
 from src.a00_data_toolbox.file_toolbox import get_dir_file_strs
 from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
-from src.a06_bud_logic._test_util.a06_str import (
+from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
     acct_pool_str,
     addin_str,
     begin_str,
-    bud_acctunit_str,
-    budunit_str,
     close_str,
     concept_way_str,
     credit_belief_str,
@@ -19,6 +17,8 @@ from src.a06_bud_logic._test_util.a06_str import (
     mass_str,
     morph_str,
     numor_str,
+    plan_acctunit_str,
+    planunit_str,
     stop_want_str,
     task_str,
 )
@@ -40,8 +40,8 @@ from src.a17_idea_logic.idea_config import (
     get_idearef_from_file,
     idea_format_00013_conceptunit_v0_0_0,
     idea_format_00019_conceptunit_v0_0_0,
-    idea_format_00020_bud_acct_membership_v0_0_0,
-    idea_format_00021_bud_acctunit_v0_0_0,
+    idea_format_00020_plan_acct_membership_v0_0_0,
+    idea_format_00021_plan_acctunit_v0_0_0,
 )
 
 
@@ -52,10 +52,10 @@ def test_config_str_functions_ReturnsObjs():
     assert credit_belief_str() == "credit_belief"
     assert debtit_vote_str() == "debtit_vote"
     assert credit_vote_str() == "credit_vote"
-    x00021_idea = "idea_format_00021_bud_acctunit_v0_0_0"
-    assert idea_format_00021_bud_acctunit_v0_0_0() == x00021_idea
-    x00020_idea = "idea_format_00020_bud_acct_membership_v0_0_0"
-    assert idea_format_00020_bud_acct_membership_v0_0_0() == x00020_idea
+    x00021_idea = "idea_format_00021_plan_acctunit_v0_0_0"
+    assert idea_format_00021_plan_acctunit_v0_0_0() == x00021_idea
+    x00020_idea = "idea_format_00020_plan_acct_membership_v0_0_0"
+    assert idea_format_00020_plan_acct_membership_v0_0_0() == x00020_idea
     x0003_idea = "idea_format_00013_conceptunit_v0_0_0"
     assert idea_format_00013_conceptunit_v0_0_0() == x0003_idea
 
@@ -72,7 +72,7 @@ def test_get_idea_formats_dir_ReturnsObj():
 
 def test_get_idearef_obj_ReturnsObj():
     # ESTABLISH
-    idea_name_00021 = idea_format_00021_bud_acctunit_v0_0_0()
+    idea_name_00021 = idea_format_00021_plan_acctunit_v0_0_0()
 
     # WHEN
     x_idearef = get_idearef_obj(idea_name_00021)
@@ -80,8 +80,8 @@ def test_get_idearef_obj_ReturnsObj():
     # THEN
     assert x_idearef.idea_name == idea_name_00021
     assert set(x_idearef.dimens) == {
-        bud_acctunit_str(),
-        budunit_str(),
+        plan_acctunit_str(),
+        planunit_str(),
         vowunit_str(),
     }
     assert x_idearef._attributes != {}
@@ -90,7 +90,7 @@ def test_get_idearef_obj_ReturnsObj():
 
 def test_get_headers_list_ReturnsObj():
     # ESTABLISH / WHEN
-    format_00021_headers = _get_headers_list(idea_format_00021_bud_acctunit_v0_0_0())
+    format_00021_headers = _get_headers_list(idea_format_00021_plan_acctunit_v0_0_0())
 
     # THEN
     # print(f"{format_00001_headers=}")
@@ -121,7 +121,7 @@ def get_sorted_headers_str(idea_filename):
 
 def test_get_sorted_headers_str_ReturnsObj():
     # ESTABLISH / WHEN
-    br00021_headers = get_sorted_headers_str(idea_format_00021_bud_acctunit_v0_0_0())
+    br00021_headers = get_sorted_headers_str(idea_format_00021_plan_acctunit_v0_0_0())
     # THEN
     assert (
         br00021_headers == "vow_label,owner_name,acct_name,credit_belief,debtit_belief"
@@ -162,9 +162,9 @@ def test__generate_idea_dataframe_ReturnsObj():
     # ESTABLISH
     empty_d2 = []
     # WHEN
-    x_df = _generate_idea_dataframe(empty_d2, idea_format_00021_bud_acctunit_v0_0_0())
+    x_df = _generate_idea_dataframe(empty_d2, idea_format_00021_plan_acctunit_v0_0_0())
     # THEN
-    headers_list = _get_headers_list(idea_format_00021_bud_acctunit_v0_0_0())
+    headers_list = _get_headers_list(idea_format_00021_plan_acctunit_v0_0_0())
     assert list(x_df.columns) == headers_list
 
 
@@ -199,9 +199,9 @@ def test_idea_FilesExist():
     assert len(idea_filenames) == len(get_idea_format_filenames())
 
 
-def test_get_idearef_obj_HasCorrectAttrs_idea_format_00021_bud_acctunit_v0_0_0():
+def test_get_idearef_obj_HasCorrectAttrs_idea_format_00021_plan_acctunit_v0_0_0():
     # ESTABLISH
-    idea_name = idea_format_00021_bud_acctunit_v0_0_0()
+    idea_name = idea_format_00021_plan_acctunit_v0_0_0()
 
     # WHEN
     format_00001_idearef = get_idearef_obj(idea_name)
@@ -227,9 +227,9 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00021_bud_acctunit_v0_0_0()
     assert headers_list[6] == debtit_belief_str()
 
 
-def test_get_idearef_obj_HasCorrectAttrs_idea_format_00020_bud_acct_membership_v0_0_0():
+def test_get_idearef_obj_HasCorrectAttrs_idea_format_00020_plan_acct_membership_v0_0_0():
     # ESTABLISH
-    idea_name = idea_format_00020_bud_acct_membership_v0_0_0()
+    idea_name = idea_format_00020_plan_acct_membership_v0_0_0()
 
     # WHEN
     format_00021_idearef = get_idearef_obj(idea_name)

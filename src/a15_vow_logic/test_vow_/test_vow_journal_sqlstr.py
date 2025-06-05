@@ -1,4 +1,4 @@
-# from src.a08_bud_atom_logic.atom import atom_hx_str
+# from src.a08_plan_atom_logic.atom import atom_hx_str
 # from src.a00_data_toolbox.sqlite import check_table_column_existence
 # from src.a15_vow_logic.journal_sqlstr import get_atom_hx_table_insert_sqlstr
 # from src.a15_vow_logic.vow import vowunit_shop

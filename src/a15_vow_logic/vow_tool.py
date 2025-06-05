@@ -19,10 +19,10 @@ from src.a12_hub_tools.hub_path import (
     CELL_MANDATE_FILENAME,
     CELLNODE_FILENAME,
     DEAL_MANDATE_FILENAME,
-    create_budevent_path,
     create_cell_dir_path,
     create_cell_json_path,
     create_deal_dir_path,
+    create_planevent_path,
     create_vow_json_path,
 )
 from src.a12_hub_tools.hub_tool import (
@@ -30,9 +30,9 @@ from src.a12_hub_tools.hub_tool import (
     cellunit_save_to_dir,
     collect_owner_event_dir_sets,
     create_cell_acct_mandate_ledger_json,
-    get_budevent_obj,
     get_owners_downhill_event_ints,
-    open_bud_file,
+    get_planevent_obj,
+    open_plan_file,
 )
 from src.a15_vow_logic.vow import get_from_dict as vowunit_get_from_dict
 
@@ -66,8 +66,8 @@ def _exists_create_cell_tree(vow_mstr_dir, vow_label, deal_owner_name, deal_time
         parent_cell = cells_to_evaluate.pop()
         cell_owner_name = parent_cell.get_cell_owner_name()
         e_int = parent_cell.event_int
-        budevent = get_budevent_obj(vow_mstr_dir, vow_label, cell_owner_name, e_int)
-        parent_cell.eval_budevent(budevent)
+        planevent = get_planevent_obj(vow_mstr_dir, vow_label, cell_owner_name, e_int)
+        parent_cell.eval_planevent(planevent)
         parent_cell_dir = create_cell_dir_path(
             vow_mstr_dir,
             vow_label,
@@ -76,7 +76,7 @@ def _exists_create_cell_tree(vow_mstr_dir, vow_label, deal_owner_name, deal_time
             parent_cell.ancestors,
         )
         cellunit_save_to_dir(parent_cell_dir, parent_cell)
-        parent_quota_ledger = parent_cell.get_budevents_quota_ledger()
+        parent_quota_ledger = parent_cell.get_planevents_quota_ledger()
         if parent_cell.celldepth > 0:
             child_celldepth = parent_cell.celldepth - 1
             parent_quota_owners = set(parent_quota_ledger.keys())
@@ -99,7 +99,7 @@ def _exists_create_cell_tree(vow_mstr_dir, vow_label, deal_owner_name, deal_time
                         cells_to_evaluate.append(child_cellunit)
 
 
-def load_cells_budevent(vow_mstr_dir: str, vow_label: LabelTerm):
+def load_cells_planevent(vow_mstr_dir: str, vow_label: LabelTerm):
     vows_dir = create_path(vow_mstr_dir, "vows")
     vow_dir = create_path(vows_dir, vow_label)
     owners_dir = create_path(vow_dir, "owners")
@@ -110,15 +110,15 @@ def load_cells_budevent(vow_mstr_dir: str, vow_label: LabelTerm):
             deal_time_dir = create_path(deals_dir, deal_time)
             for dirpath, dirnames, filenames in os_walk(deal_time_dir):
                 if CELLNODE_FILENAME in set(filenames):
-                    _load_cell_budevent(vow_mstr_dir, vow_label, dirpath)
+                    _load_cell_planevent(vow_mstr_dir, vow_label, dirpath)
 
 
-def _load_cell_budevent(vow_mstr_dir, vow_label, dirpath):
+def _load_cell_planevent(vow_mstr_dir, vow_label, dirpath):
     x_cellunit = cellunit_get_from_dir(dirpath)
     cell_owner_name = x_cellunit.get_cell_owner_name()
     event_int = x_cellunit.event_int
-    budevent = get_budevent_obj(vow_mstr_dir, vow_label, cell_owner_name, event_int)
-    x_cellunit.eval_budevent(budevent)
+    planevent = get_planevent_obj(vow_mstr_dir, vow_label, cell_owner_name, event_int)
+    x_cellunit.eval_planevent(planevent)
     cellunit_save_to_dir(dirpath, x_cellunit)
 
 
@@ -146,8 +146,8 @@ def _set_cell_found_facts(deal_time_dir: str, cell_dirs: list[str]):
         x_cell = cellunit_get_from_dir(dirpath)
         deal_path = dirpath.replace(deal_time_dir, "")
         cell_owners_tuple = tuple(deal_path.split(os_sep)[1:])
-        nodes_facts_dict[cell_owners_tuple] = x_cell.budevent_facts
-        nodes_quotas_dict[cell_owners_tuple] = x_cell.get_budevents_quota_ledger()
+        nodes_facts_dict[cell_owners_tuple] = x_cell.planevent_facts
+        nodes_quotas_dict[cell_owners_tuple] = x_cell.get_planevents_quota_ledger()
 
     nodes_wgt_facts = get_nodes_with_weighted_facts(nodes_facts_dict, nodes_quotas_dict)
     output_dir_facts = {
@@ -202,10 +202,10 @@ def set_cell_tree_decrees(
     # create root deal tree node
     # grab boss facts from parent_cell (does not apply to root)
     # grab found facts for that cell
-    # grab budevent for that cell
-    # add all found_facts that exist in budevent to budevent
-    # add all boss facts that exist in budevent to budevent
-    # calculate budadjust
+    # grab planevent for that cell
+    # add all found_facts that exist in planevent to planevent
+    # add all boss facts that exist in planevent to planevent
+    # calculate planadjust
     # grab acct_agenda_fund_agenda_give ledger
     # add nodes to to_evalute_cellnodes based on acct_agenda_fund_give owners
     root_cell = cellunit_get_from_dir(deal_time_dir)
@@ -287,20 +287,20 @@ def generate_cell_from_decree(
         ref_event_int=x_decree.event_int,
     )
     if downhill_event_int := owners_downhill_events_ints.get(cell_owner_name):
-        budevent_path = create_budevent_path(
+        planevent_path = create_planevent_path(
             mstr_dir, vow_label, cell_owner_name, downhill_event_int
         )
-        budevent = open_bud_file(budevent_path)
+        planevent = open_plan_file(planevent_path)
         x_cell = cellunit_shop(
             deal_owner_name=owner_name,
             ancestors=x_decree.get_child_cell_ancestors(cell_owner_name),
             event_int=downhill_event_int,
             celldepth=x_decree.cell_celldepth,
-            penny=budevent.penny,
+            penny=planevent.penny,
             quota=None,
             mandate=x_decree.cell_mandate,
         )
-        x_cell.eval_budevent(budevent)
+        x_cell.eval_planevent(planevent)
         return x_cell
 
 

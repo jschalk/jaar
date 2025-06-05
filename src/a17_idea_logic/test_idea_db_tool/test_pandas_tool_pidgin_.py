@@ -3,7 +3,7 @@ from pandas import DataFrame
 from pandas.testing import assert_frame_equal as pandas_assert_frame_equal
 from src.a01_term_logic.way import create_way, to_way
 from src.a02_finance_logic._test_util.a02_str import vow_label_str
-from src.a06_bud_logic._test_util.a06_str import (
+from src.a06_plan_logic._test_util.a06_str import (
     NameTerm_str,
     acct_name_str,
     credit_belief_str,

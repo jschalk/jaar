@@ -2,12 +2,12 @@ from json import loads as json_loads
 from pathlib import Path
 from src.a00_data_toolbox.file_toolbox import count_files, save_json
 from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
-from src.a06_bud_logic._test_util.a06_str import (
-    bud_conceptunit_str,
+from src.a06_plan_logic._test_util.a06_str import (
     concept_way_str,
     gogo_want_str,
+    plan_conceptunit_str,
 )
-from src.a08_bud_atom_logic.atom_config import get_atom_config_args
+from src.a08_plan_atom_logic.atom_config import get_atom_config_args
 from src.a17_idea_logic._test_util.a17_str import attributes_str, dimens_str
 from src.a17_idea_logic.idea_config import (
     get_default_sorted_list,
@@ -21,7 +21,7 @@ def create_dimens_idea_format_dict() -> dict:
     idea_format_files_dict = {}
     x_count = 20
     for idea_dimen, dimen_dict in get_idea_config_dict().items():
-        if dimen_dict.get("idea_category") == "bud":
+        if dimen_dict.get("idea_category") == "plan":
             idea_filename = f"idea_format_{x_count:05}_{idea_dimen}_v0_0_0.json"
             attributes_set = {vow_label_str(), owner_name_str()}
             args_dict = get_atom_config_args(idea_dimen)
@@ -40,16 +40,18 @@ def test_create_dimens_idea_format_dict_ReturnsObj(rebuild_bool):
 
     # THEN
     assert len(dimens_idea_format_dict) == 10
-    bud_conceptunit_filename = f"idea_format_00028_{bud_conceptunit_str()}_v0_0_0.json"
-    assert dimens_idea_format_dict.get(bud_conceptunit_filename)
-    bud_conceptunit_dict = dimens_idea_format_dict.get(bud_conceptunit_filename)
-    assert bud_conceptunit_dict.get(dimens_str()) == [bud_conceptunit_str()]
-    assert bud_conceptunit_dict.get(attributes_str())
-    bud_conceptunit_attributes = bud_conceptunit_dict.get(attributes_str())
-    assert vow_label_str() in bud_conceptunit_attributes
-    assert owner_name_str() in bud_conceptunit_attributes
-    assert concept_way_str() in bud_conceptunit_attributes
-    assert gogo_want_str() in bud_conceptunit_attributes
+    plan_conceptunit_filename = (
+        f"idea_format_00028_{plan_conceptunit_str()}_v0_0_0.json"
+    )
+    assert dimens_idea_format_dict.get(plan_conceptunit_filename)
+    plan_conceptunit_dict = dimens_idea_format_dict.get(plan_conceptunit_filename)
+    assert plan_conceptunit_dict.get(dimens_str()) == [plan_conceptunit_str()]
+    assert plan_conceptunit_dict.get(attributes_str())
+    plan_conceptunit_attributes = plan_conceptunit_dict.get(attributes_str())
+    assert vow_label_str() in plan_conceptunit_attributes
+    assert owner_name_str() in plan_conceptunit_attributes
+    assert concept_way_str() in plan_conceptunit_attributes
+    assert gogo_want_str() in plan_conceptunit_attributes
 
     rebuild_format_jsons(rebuild_bool)
 

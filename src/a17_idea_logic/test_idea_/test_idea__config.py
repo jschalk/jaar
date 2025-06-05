@@ -10,21 +10,11 @@ from src.a02_finance_logic._test_util.a02_str import (
     tran_time_str,
     vow_label_str,
 )
-from src.a06_bud_logic._test_util.a06_str import (
+from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
     addin_str,
     awardee_title_str,
     begin_str,
-    bud_acct_membership_str,
-    bud_acctunit_str,
-    bud_concept_awardlink_str,
-    bud_concept_factunit_str,
-    bud_concept_healerlink_str,
-    bud_concept_laborlink_str,
-    bud_concept_reason_premiseunit_str,
-    bud_concept_reasonunit_str,
-    bud_conceptunit_str,
-    budunit_str,
     close_str,
     concept_way_str,
     credit_belief_str,
@@ -48,6 +38,16 @@ from src.a06_bud_logic._test_util.a06_str import (
     morph_str,
     numor_str,
     penny_str,
+    plan_acct_membership_str,
+    plan_acctunit_str,
+    plan_concept_awardlink_str,
+    plan_concept_factunit_str,
+    plan_concept_healerlink_str,
+    plan_concept_laborlink_str,
+    plan_concept_reason_premiseunit_str,
+    plan_concept_reasonunit_str,
+    plan_conceptunit_str,
+    planunit_str,
     pnigh_str,
     popen_str,
     pstate_str,
@@ -64,7 +64,7 @@ from src.a07_calendar_logic._test_util.a07_str import (
     timeline_label_str,
     yr1_jan1_offset_str,
 )
-from src.a08_bud_atom_logic._test_util.a08_str import (
+from src.a08_plan_atom_logic._test_util.a08_str import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,
@@ -73,17 +73,17 @@ from src.a08_bud_atom_logic._test_util.a08_str import (
     jvalues_str,
     normal_specs_str,
 )
-from src.a08_bud_atom_logic.atom_config import (
-    get_all_bud_dimen_delete_keys,
+from src.a08_plan_atom_logic.atom_config import (
+    get_all_plan_dimen_delete_keys,
     get_atom_args_dimen_mapping,
     get_atom_config_dict,
-    get_bud_dimens,
     get_delete_key_name,
+    get_plan_dimens,
 )
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
-from src.a10_bud_calc.bud_calc_config import (
-    get_all_bud_calc_args,
-    get_bud_calc_args_sqlite_datatype_dict,
+from src.a10_plan_calc.plan_calc_config import (
+    get_all_plan_calc_args,
+    get_plan_calc_args_sqlite_datatype_dict,
 )
 from src.a15_vow_logic._test_util.a15_str import (
     amount_str,
@@ -163,8 +163,8 @@ from src.a17_idea_logic.idea_config import (
     get_idearef_from_file,
     get_quick_ideas_column_ref,
     idea_format_00013_conceptunit_v0_0_0,
-    idea_format_00020_bud_acct_membership_v0_0_0,
-    idea_format_00021_bud_acctunit_v0_0_0,
+    idea_format_00020_plan_acct_membership_v0_0_0,
+    idea_format_00021_plan_acctunit_v0_0_0,
 )
 
 
@@ -198,17 +198,17 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert vow_args.issubset(set(table_sorting_priority))
     pidgin_args = set(get_pidgin_args_dimen_mapping().keys())
     assert pidgin_args.issubset(set(table_sorting_priority))
-    all_bud_dimen_delete_keys = get_all_bud_dimen_delete_keys()
-    print(f"missing {all_bud_dimen_delete_keys.difference(table_sorting_priority)}")
-    assert all_bud_dimen_delete_keys.issubset(table_sorting_priority)
-    bud_calc_args = set(get_all_bud_calc_args().keys())
-    # for bud_calc_arg in bud_calc_args.difference(table_sorting_priority):
-    #     print(f"{bud_calc_arg=}")
-    print(f"{bud_calc_args.difference(table_sorting_priority)=}")
-    assert bud_calc_args.issubset(table_sorting_priority)
+    all_plan_dimen_delete_keys = get_all_plan_dimen_delete_keys()
+    print(f"missing {all_plan_dimen_delete_keys.difference(table_sorting_priority)}")
+    assert all_plan_dimen_delete_keys.issubset(table_sorting_priority)
+    plan_calc_args = set(get_all_plan_calc_args().keys())
+    # for plan_calc_arg in plan_calc_args.difference(table_sorting_priority):
+    #     print(f"{plan_calc_arg=}")
+    print(f"{plan_calc_args.difference(table_sorting_priority)=}")
+    assert plan_calc_args.issubset(table_sorting_priority)
     pidginable_otx_cols = {f"{pid_arg}_otx" for pid_arg in get_pidginable_args()}
     pidginable_inx_cols = {f"{pid_arg}_inx" for pid_arg in get_pidginable_args()}
-    x_delete_keys = all_bud_dimen_delete_keys
+    x_delete_keys = all_plan_dimen_delete_keys
     pidginable_delete_otx_cols = {f"{pid_arg}_otx" for pid_arg in x_delete_keys}
     pidginable_delete_inx_cols = {f"{pid_arg}_inx" for pid_arg in x_delete_keys}
     print(f"{pidginable_delete_otx_cols=}")
@@ -397,10 +397,10 @@ def test_get_idea_elements_sort_order_ReturnsObj():
 
     assert len(table_sorting_priority) == 175
     all_args = copy_copy(atom_args)
-    all_args.update(all_bud_dimen_delete_keys)
+    all_args.update(all_plan_dimen_delete_keys)
     all_args.update(vow_args)
     all_args.update(pidgin_args)
-    all_args.update(bud_calc_args)
+    all_args.update(plan_calc_args)
     all_args.update(pidginable_otx_cols)
     all_args.update(pidginable_inx_cols)
     all_args.update(pidginable_delete_otx_cols)
@@ -500,7 +500,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get("error_message") == "TEXT"
 
     # sourcery skip: no-loop-in-tests
-    for x_arg, datatype in get_bud_calc_args_sqlite_datatype_dict().items():
+    for x_arg, datatype in get_plan_calc_args_sqlite_datatype_dict().items():
         print(f"{x_arg=} {datatype=} {sqlite_types.get(x_arg)=}")
         assert sqlite_types.get(x_arg) == datatype
 
@@ -544,21 +544,21 @@ def test_get_idea_config_dict_ReturnsObj():
     assert vow_timeline_month_str() in idea_config_dimens
     assert vow_timeline_weekday_str() in idea_config_dimens
     assert vow_timeoffi_str() in idea_config_dimens
-    assert bud_acct_membership_str() in idea_config_dimens
-    assert bud_acctunit_str() in idea_config_dimens
-    assert bud_concept_awardlink_str() in idea_config_dimens
-    assert bud_concept_factunit_str() in idea_config_dimens
-    assert bud_concept_laborlink_str() in idea_config_dimens
-    assert bud_concept_healerlink_str() in idea_config_dimens
-    assert bud_concept_reason_premiseunit_str() in idea_config_dimens
-    assert bud_concept_reasonunit_str() in idea_config_dimens
-    assert bud_conceptunit_str() in idea_config_dimens
-    assert budunit_str() in idea_config_dimens
+    assert plan_acct_membership_str() in idea_config_dimens
+    assert plan_acctunit_str() in idea_config_dimens
+    assert plan_concept_awardlink_str() in idea_config_dimens
+    assert plan_concept_factunit_str() in idea_config_dimens
+    assert plan_concept_laborlink_str() in idea_config_dimens
+    assert plan_concept_healerlink_str() in idea_config_dimens
+    assert plan_concept_reason_premiseunit_str() in idea_config_dimens
+    assert plan_concept_reasonunit_str() in idea_config_dimens
+    assert plan_conceptunit_str() in idea_config_dimens
+    assert planunit_str() in idea_config_dimens
     assert pidgin_name_str() in idea_config_dimens
     assert pidgin_title_str() in idea_config_dimens
     assert pidgin_label_str() in idea_config_dimens
     assert pidgin_way_str() in idea_config_dimens
-    assert get_bud_dimens().issubset(idea_config_dimens)
+    assert get_plan_dimens().issubset(idea_config_dimens)
     assert get_vow_dimens().issubset(idea_config_dimens)
     assert get_pidgin_dimens().issubset(idea_config_dimens)
     assert len(x_idea_config) == 21
@@ -566,7 +566,7 @@ def test_get_idea_config_dict_ReturnsObj():
 
 
 def get_idea_categorys():
-    return {"bud", "vow", "pidgin"}
+    return {"plan", "vow", "pidgin"}
 
 
 def _validate_idea_config(x_idea_config: dict):
@@ -584,7 +584,7 @@ def _validate_idea_config(x_idea_config: dict):
         assert idea_dict.get(INSERT_str()) is None
         assert idea_dict.get(DELETE_str()) is None
         assert idea_dict.get(normal_specs_str()) is None
-        if idea_dict.get(idea_category_str()) == "bud":
+        if idea_dict.get(idea_category_str()) == "plan":
             sub_dimen = atom_config_dict.get(idea_dimen)
         elif idea_dict.get(idea_category_str()) == "vow":
             sub_dimen = vow_config_dict.get(idea_dimen)
@@ -665,7 +665,7 @@ def _validate_idea_config(x_idea_config: dict):
         assert event_int_str() in idea_jkeys_keys
         if idea_dict.get(idea_category_str()) != "pidgin":
             assert vow_label_str() in idea_jkeys_keys
-        if idea_dict.get(idea_category_str()) == "bud":
+        if idea_dict.get(idea_category_str()) == "plan":
             idea_jkeys_keys.remove(vow_label_str())
             idea_jkeys_keys.remove(owner_name_str())
         idea_jkeys_keys.remove(face_name_str())
@@ -720,8 +720,8 @@ def test_get_idea_format_filenames_ReturnsObj():
     # print(idea_filenames_sorted)
 
     # THEN
-    assert idea_format_00021_bud_acctunit_v0_0_0() in idea_filenames_set
-    assert idea_format_00020_bud_acct_membership_v0_0_0() in idea_filenames_set
+    assert idea_format_00021_plan_acctunit_v0_0_0() in idea_filenames_set
+    assert idea_format_00020_plan_acct_membership_v0_0_0() in idea_filenames_set
     assert idea_format_00013_conceptunit_v0_0_0() in idea_filenames_set
 
     # WHEN / THEN
@@ -735,7 +735,7 @@ def _validate_idea_format_files(idea_filenames: set[str]):
     }
 
     valid_idea_dimens = set()
-    valid_idea_dimens.update(get_bud_dimens())
+    valid_idea_dimens.update(get_plan_dimens())
     valid_idea_dimens.update(get_vow_dimens())
     valid_idea_dimens.update(get_pidgin_dimens())
     config_dict = get_idea_config_dict()
@@ -786,7 +786,7 @@ def _validate_idea_format_files(idea_filenames: set[str]):
             idea_attrs.add(delete_attr_without_erase)
 
         for x_dimen, dimen_keys in all_dimen_keys_dict.items():
-            # if x_dimen == bud_concept_factunit_str() and x_dimen in format_dimens:
+            # if x_dimen == plan_concept_factunit_str() and x_dimen in format_dimens:
             #     print(f"{idea_number_value}  {x_dimen=} {idea_attrs_list=}")
             if dimen_keys.issubset(idea_attrs):
                 if x_dimen not in format_dimens:
@@ -827,8 +827,8 @@ def test_get_idea_format_filename_ReturnsObj():
     br00013_filename = get_idea_format_filename(br00013_str)
 
     # THEN
-    assert br00021_filename == idea_format_00021_bud_acctunit_v0_0_0()
-    assert br00020_filename == idea_format_00020_bud_acct_membership_v0_0_0()
+    assert br00021_filename == idea_format_00021_plan_acctunit_v0_0_0()
+    assert br00020_filename == idea_format_00020_plan_acct_membership_v0_0_0()
     assert br00013_filename == idea_format_00013_conceptunit_v0_0_0()
 
     all_set = {get_idea_format_filename(br) for br in get_idea_numbers()}
@@ -854,16 +854,16 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     # set_idea_config_json(vow_timeline_hour_str(), 6)
     # set_idea_config_json(vow_timeline_month_str(), 7)
     # set_idea_config_json(vow_timeline_weekday_str(), 8)
-    # set_idea_config_json(bud_acct_membership_str(), 9)
-    # set_idea_config_json(bud_acctunit_str(), 10)
-    # set_idea_config_json(bud_concept_awardlink_str(), 11)
-    # set_idea_config_json(bud_concept_factunit_str(), 12)
-    # set_idea_config_json(bud_concept_laborlink_str(), 14)
-    # set_idea_config_json(bud_concept_healerlink_str(), 15)
-    # set_idea_config_json(bud_concept_reason_premiseunit_str(), 16)
-    # set_idea_config_json(bud_concept_reasonunit_str(), 17)
-    # set_idea_config_json(bud_conceptunit_str(), 18)
-    # set_idea_config_json(budunit_str(), 19)
+    # set_idea_config_json(plan_acct_membership_str(), 9)
+    # set_idea_config_json(plan_acctunit_str(), 10)
+    # set_idea_config_json(plan_concept_awardlink_str(), 11)
+    # set_idea_config_json(plan_concept_factunit_str(), 12)
+    # set_idea_config_json(plan_concept_laborlink_str(), 14)
+    # set_idea_config_json(plan_concept_healerlink_str(), 15)
+    # set_idea_config_json(plan_concept_reason_premiseunit_str(), 16)
+    # set_idea_config_json(plan_concept_reasonunit_str(), 17)
+    # set_idea_config_json(plan_conceptunit_str(), 18)
+    # set_idea_config_json(planunit_str(), 19)
     # set_idea_config_json(vow_dealunit_str(), 20)
     # set_idea_config_json(vow_cashbook_str(), 21)
 
@@ -878,16 +878,16 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     assert x_idea_config.get(vow_timeline_hour_str()).get(bo) == 6
     assert x_idea_config.get(vow_timeline_month_str()).get(bo) == 7
     assert x_idea_config.get(vow_timeline_weekday_str()).get(bo) == 8
-    assert x_idea_config.get(bud_acct_membership_str()).get(bo) == 9
-    assert x_idea_config.get(bud_acctunit_str()).get(bo) == 10
-    assert x_idea_config.get(bud_concept_awardlink_str()).get(bo) == 11
-    assert x_idea_config.get(bud_concept_factunit_str()).get(bo) == 12
-    assert x_idea_config.get(bud_concept_laborlink_str()).get(bo) == 14
-    assert x_idea_config.get(bud_concept_healerlink_str()).get(bo) == 15
-    assert x_idea_config.get(bud_concept_reason_premiseunit_str()).get(bo) == 16
-    assert x_idea_config.get(bud_concept_reasonunit_str()).get(bo) == 17
-    assert x_idea_config.get(bud_conceptunit_str()).get(bo) == 18
-    assert x_idea_config.get(budunit_str()).get(bo) == 19
+    assert x_idea_config.get(plan_acct_membership_str()).get(bo) == 9
+    assert x_idea_config.get(plan_acctunit_str()).get(bo) == 10
+    assert x_idea_config.get(plan_concept_awardlink_str()).get(bo) == 11
+    assert x_idea_config.get(plan_concept_factunit_str()).get(bo) == 12
+    assert x_idea_config.get(plan_concept_laborlink_str()).get(bo) == 14
+    assert x_idea_config.get(plan_concept_healerlink_str()).get(bo) == 15
+    assert x_idea_config.get(plan_concept_reason_premiseunit_str()).get(bo) == 16
+    assert x_idea_config.get(plan_concept_reasonunit_str()).get(bo) == 17
+    assert x_idea_config.get(plan_conceptunit_str()).get(bo) == 18
+    assert x_idea_config.get(planunit_str()).get(bo) == 19
     assert x_idea_config.get(vow_dealunit_str()).get(bo) == 20
     assert x_idea_config.get(vow_cashbook_str()).get(bo) == 21
 

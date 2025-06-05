@@ -9,7 +9,7 @@ from src.a02_finance_logic._test_util.a02_str import (
     tran_time_str,
     vow_label_str,
 )
-from src.a06_bud_logic._test_util.a06_str import (
+from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
     fund_iota_str,
     penny_str,
@@ -21,7 +21,7 @@ from src.a07_calendar_logic._test_util.a07_str import (
     timeline_label_str,
     yr1_jan1_offset_str,
 )
-from src.a08_bud_atom_logic._test_util.a08_str import (
+from src.a08_plan_atom_logic._test_util.a08_str import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,
@@ -30,7 +30,7 @@ from src.a08_bud_atom_logic._test_util.a08_str import (
     jvalues_str,
     normal_specs_str,
 )
-from src.a08_bud_atom_logic.atom_config import get_allowed_class_types
+from src.a08_plan_atom_logic.atom_config import get_allowed_class_types
 from src.a15_vow_logic._test_util.a15_str import (
     amount_str,
     cumlative_day_str,

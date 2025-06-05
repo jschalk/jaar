@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.file_toolbox import create_path, delete_dir
 from src.a05_concept_logic.concept import get_default_vow_label as root_label
-from src.a06_bud_logic.bud import budunit_shop
+from src.a06_plan_logic.plan import planunit_shop
 from src.a12_hub_tools._test_util.a12_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as env_dir,
@@ -15,11 +15,11 @@ def test_HubUnit_initialize_job_file_CorrectlySavesFile(env_dir_setup_cleanup):
     vow_mstr_dir = env_dir()
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(vow_mstr_dir, root_label(), sue_str, None)
-    sue_bud = budunit_shop(sue_str, root_label())
+    sue_plan = planunit_shop(sue_str, root_label())
     assert job_file_exists(vow_mstr_dir, root_label(), sue_str) is False
 
     # WHEN
-    sue_hubunit.initialize_job_file(sue_bud)
+    sue_hubunit.initialize_job_file(sue_plan)
 
     # THEN
     job = open_job_file(vow_mstr_dir, root_label(), sue_str)
@@ -29,14 +29,14 @@ def test_HubUnit_initialize_job_file_CorrectlySavesFile(env_dir_setup_cleanup):
     assert job.acct_exists(bob_str) is False
 
     # ESTABLISH
-    sue_bud = budunit_shop(sue_str)
-    sue_bud.add_acctunit(bob_str)
-    save_job_file(vow_mstr_dir, sue_bud)
+    sue_plan = planunit_shop(sue_str)
+    sue_plan.add_acctunit(bob_str)
+    save_job_file(vow_mstr_dir, sue_plan)
     job = open_job_file(vow_mstr_dir, root_label(), sue_str)
     assert job.get_acct(bob_str)
 
     # WHEN
-    sue_hubunit.initialize_job_file(sue_bud)
+    sue_hubunit.initialize_job_file(sue_plan)
 
     # THEN
     job = open_job_file(vow_mstr_dir, root_label(), sue_str)
@@ -62,14 +62,14 @@ def test_HubUnit_initialize_job_file_CorrectlyDoesNotOverwrite(
         fund_iota=sue_fund_iota,
         respect_bit=sue_bit,
     )
-    sue_bud = budunit_shop(
+    sue_plan = planunit_shop(
         sue_str,
         root_label(),
         fund_pool=sue_fund_pool,
         fund_iota=sue_fund_iota,
         respect_bit=sue_bit,
     )
-    sue_hubunit.initialize_job_file(sue_bud)
+    sue_hubunit.initialize_job_file(sue_plan)
     assert job_file_exists(vow_mstr_dir, root_label(), sue_str)
     sue_job_path = create_job_path(vow_mstr_dir, root_label(), sue_str)
     delete_dir(sue_job_path)
@@ -77,8 +77,8 @@ def test_HubUnit_initialize_job_file_CorrectlyDoesNotOverwrite(
 
     # WHEN
     bob_str = "Bob"
-    sue_bud.add_acctunit(bob_str)
-    sue_hubunit.initialize_job_file(sue_bud)
+    sue_plan.add_acctunit(bob_str)
+    sue_hubunit.initialize_job_file(sue_plan)
 
     # THEN
     assert job_file_exists(vow_mstr_dir, root_label(), sue_str)
@@ -100,8 +100,8 @@ def test_HubUnit_initialize_job_file_CreatesDirsAndFiles(env_dir_setup_cleanup):
     assert job_file_exists(vow_mstr_dir, root_label(), sue_str) is False
 
     # WHEN
-    sue_bud = budunit_shop(sue_str, root_label())
-    sue_hubunit.initialize_job_file(sue_bud)
+    sue_plan = planunit_shop(sue_str, root_label())
+    sue_hubunit.initialize_job_file(sue_plan)
 
     # THEN
     assert job_file_exists(vow_mstr_dir, root_label(), sue_str)

@@ -8,8 +8,6 @@ from src.a02_finance_logic._test_util.a02_str import (
 from src.a09_pack_logic._test_util.a09_str import event_int_str
 from src.a12_hub_tools.hub_path import (
     create_atoms_dir_path,
-    create_budevent_path,
-    create_budpoint_path,
     create_cell_acct_mandate_ledger_path,
     create_cell_dir_path,
     create_cell_json_path,
@@ -25,6 +23,8 @@ from src.a12_hub_tools.hub_path import (
     create_owner_dir_path,
     create_owner_event_dir_path,
     create_packs_dir_path,
+    create_planevent_path,
+    create_planpoint_path,
     create_vow_dir_path,
     create_vow_json_path,
     create_vow_ote1_csv_path,
@@ -234,9 +234,9 @@ def test_create_deal_acct_mandate_ledger_path_HasDocString():
     assert LINUX_OS or inspect_getdoc(create_deal_acct_mandate_ledger_path) == doc_str
 
 
-def test_create_budpoint_path_HasDocString():
+def test_create_planpoint_path_HasDocString():
     # ESTABLISH
-    doc_str = create_budpoint_path(
+    doc_str = create_planpoint_path(
         vow_mstr_dir="vow_mstr_dir",
         vow_label=vow_label_str(),
         owner_name=owner_name_str(),
@@ -245,7 +245,7 @@ def test_create_budpoint_path_HasDocString():
     doc_str = doc_str.replace("deals\\deal_time", "deals\n\\deal_time")
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_budpoint_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_planpoint_path) == doc_str
 
 
 def test_create_owner_event_dir_path_HasDocString():
@@ -261,9 +261,9 @@ def test_create_owner_event_dir_path_HasDocString():
     assert LINUX_OS or inspect_getdoc(create_owner_event_dir_path) == doc_str
 
 
-def test_create_budevent_path_HasDocString():
+def test_create_planevent_path_HasDocString():
     # ESTABLISH
-    doc_str = create_budevent_path(
+    doc_str = create_planevent_path(
         vow_mstr_dir="vow_mstr_dir",
         vow_label=vow_label_str(),
         owner_name=owner_name_str(),
@@ -271,7 +271,7 @@ def test_create_budevent_path_HasDocString():
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_budevent_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_planevent_path) == doc_str
 
 
 def test_create_event_all_pack_path_HasDocString():

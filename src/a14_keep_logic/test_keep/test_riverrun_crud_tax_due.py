@@ -1,4 +1,4 @@
-from src.a06_bud_logic.bud import budunit_shop
+from src.a06_plan_logic.plan import planunit_shop
 from src.a12_hub_tools.hubunit import hubunit_shop
 from src.a14_keep_logic._test_util.a14_env import temp_vow_mstr_dir
 from src.a14_keep_logic._test_util.example_credorledgers import example_yao_hubunit
@@ -14,13 +14,13 @@ def test_get_credorledger_ReturnsObj():
     yao_credit_belief = 8
     bob_credit_belief = 48
     sue_credit_belief = 66
-    yao_bud = budunit_shop(yao_str)
-    yao_bud.add_acctunit(bob_str, yao_credit_belief)
-    yao_bud.add_acctunit(sue_str, bob_credit_belief)
-    yao_bud.add_acctunit(yao_str, sue_credit_belief)
+    yao_plan = planunit_shop(yao_str)
+    yao_plan.add_acctunit(bob_str, yao_credit_belief)
+    yao_plan.add_acctunit(sue_str, bob_credit_belief)
+    yao_plan.add_acctunit(yao_str, sue_credit_belief)
 
     # WHEN
-    yao_credorledger = get_credorledger(yao_bud)
+    yao_credorledger = get_credorledger(yao_plan)
 
     # THEN
     assert len(yao_credorledger) == 3
@@ -37,13 +37,13 @@ def test_get_credorledger_ReturnsObjWithNoEmpty_credit_belief():
     yao_credit_belief = 8
     bob_credit_belief = 0
     sue_credit_belief = 66
-    yao_bud = budunit_shop(yao_str)
-    yao_bud.add_acctunit(bob_str, bob_credit_belief)
-    yao_bud.add_acctunit(sue_str, sue_credit_belief)
-    yao_bud.add_acctunit(yao_str, yao_credit_belief)
+    yao_plan = planunit_shop(yao_str)
+    yao_plan.add_acctunit(bob_str, bob_credit_belief)
+    yao_plan.add_acctunit(sue_str, sue_credit_belief)
+    yao_plan.add_acctunit(yao_str, yao_credit_belief)
 
     # WHEN
-    yao_credorledger = get_credorledger(yao_bud)
+    yao_credorledger = get_credorledger(yao_plan)
 
     # THEN
     assert yao_credorledger.get(bob_str) is None
@@ -60,13 +60,13 @@ def test_get_debtorledger_ReturnsObj():
     yao_debtit_belief = 8
     bob_debtit_belief = 48
     sue_debtit_belief = 66
-    yao_bud = budunit_shop(yao_str)
-    yao_bud.add_acctunit(bob_str, 2, bob_debtit_belief)
-    yao_bud.add_acctunit(sue_str, 2, sue_debtit_belief)
-    yao_bud.add_acctunit(yao_str, 2, yao_debtit_belief)
+    yao_plan = planunit_shop(yao_str)
+    yao_plan.add_acctunit(bob_str, 2, bob_debtit_belief)
+    yao_plan.add_acctunit(sue_str, 2, sue_debtit_belief)
+    yao_plan.add_acctunit(yao_str, 2, yao_debtit_belief)
 
     # WHEN
-    yao_debtorledger = get_debtorledger(yao_bud)
+    yao_debtorledger = get_debtorledger(yao_plan)
 
     # THEN
     assert len(yao_debtorledger) == 3
@@ -83,13 +83,13 @@ def test_get_debtorledger_ReturnsObjWithNoEmpty_debtit_belief():
     yao_debtit_belief = 8
     bob_debtit_belief = 48
     sue_debtit_belief = 0
-    yao_bud = budunit_shop(yao_str)
-    yao_bud.add_acctunit(bob_str, 2, bob_debtit_belief)
-    yao_bud.add_acctunit(sue_str, 2, sue_debtit_belief)
-    yao_bud.add_acctunit(yao_str, 2, yao_debtit_belief)
+    yao_plan = planunit_shop(yao_str)
+    yao_plan.add_acctunit(bob_str, 2, bob_debtit_belief)
+    yao_plan.add_acctunit(sue_str, 2, sue_debtit_belief)
+    yao_plan.add_acctunit(yao_str, 2, yao_debtit_belief)
 
     # WHEN
-    yao_debtorledger = get_debtorledger(yao_bud)
+    yao_debtorledger = get_debtorledger(yao_plan)
 
     # THEN
     assert yao_debtorledger.get(bob_str) == bob_debtit_belief
@@ -161,11 +161,11 @@ def test_RiverRun_set_tax_dues_CorrectlySetsAttr():
     bob_debtit_belief = 38
     sue_debtit_belief = 56
     yao_debtit_belief = 6
-    bob_bud = budunit_shop(bob_str)
-    bob_bud.add_acctunit(bob_str, 2, bob_debtit_belief)
-    bob_bud.add_acctunit(sue_str, 2, sue_debtit_belief)
-    bob_bud.add_acctunit(yao_str, 2, yao_debtit_belief)
-    bob_debtorledger = get_debtorledger(bob_bud)
+    bob_plan = planunit_shop(bob_str)
+    bob_plan.add_acctunit(bob_str, 2, bob_debtit_belief)
+    bob_plan.add_acctunit(sue_str, 2, sue_debtit_belief)
+    bob_plan.add_acctunit(yao_str, 2, yao_debtit_belief)
+    bob_debtorledger = get_debtorledger(bob_plan)
     assert bob_riverrun.tax_dues_unpaid() is False
 
     # WHEN
@@ -194,11 +194,11 @@ def test_RiverRun_acct_has_tax_due_ReturnsCorrectBool():
     yao_debtit_belief = 6
     bob_debtit_belief = 38
     sue_debtit_belief = 56
-    bob_bud = budunit_shop(bob_str)
-    bob_bud.add_acctunit(bob_str, 2, bob_debtit_belief)
-    bob_bud.add_acctunit(sue_str, 2, sue_debtit_belief)
-    bob_bud.add_acctunit(yao_str, 2, yao_debtit_belief)
-    bob_debtorledger = get_debtorledger(bob_bud)
+    bob_plan = planunit_shop(bob_str)
+    bob_plan.add_acctunit(bob_str, 2, bob_debtit_belief)
+    bob_plan.add_acctunit(sue_str, 2, sue_debtit_belief)
+    bob_plan.add_acctunit(yao_str, 2, yao_debtit_belief)
+    bob_debtorledger = get_debtorledger(bob_plan)
     assert bob_riverrun.acct_has_tax_due(bob_str) is False
     assert bob_riverrun.acct_has_tax_due(sue_str) is False
     assert bob_riverrun.acct_has_tax_due(yao_str) is False
@@ -249,11 +249,11 @@ def test_RiverRun_get_acct_tax_due_ReturnsObj():
     bob_debtit_belief = 38
     sue_debtit_belief = 56
     yao_debtit_belief = 6
-    bob_bud = budunit_shop(bob_str)
-    bob_bud.add_acctunit(bob_str, 2, bob_debtit_belief)
-    bob_bud.add_acctunit(sue_str, 2, sue_debtit_belief)
-    bob_bud.add_acctunit(yao_str, 2, yao_debtit_belief)
-    bob_debtorledger = get_debtorledger(bob_bud)
+    bob_plan = planunit_shop(bob_str)
+    bob_plan.add_acctunit(bob_str, 2, bob_debtit_belief)
+    bob_plan.add_acctunit(sue_str, 2, sue_debtit_belief)
+    bob_plan.add_acctunit(yao_str, 2, yao_debtit_belief)
+    bob_debtorledger = get_debtorledger(bob_plan)
     assert bob_riverrun.acct_has_tax_due(bob_str) is False
     assert bob_riverrun.get_acct_tax_due(bob_str) == 0
     assert bob_riverrun.acct_has_tax_due(zia_str) is False
@@ -283,11 +283,11 @@ def test_RiverRun_levy_tax_due_SetsAttr():
     bob_debtit_belief = 38
     sue_debtit_belief = 56
     yao_debtit_belief = 6
-    bob_bud = budunit_shop(bob_str)
-    bob_bud.add_acctunit(bob_str, 2, bob_debtit_belief)
-    bob_bud.add_acctunit(sue_str, 2, sue_debtit_belief)
-    bob_bud.add_acctunit(yao_str, 2, yao_debtit_belief)
-    bob_debtorledger = get_debtorledger(bob_bud)
+    bob_plan = planunit_shop(bob_str)
+    bob_plan.add_acctunit(bob_str, 2, bob_debtit_belief)
+    bob_plan.add_acctunit(sue_str, 2, sue_debtit_belief)
+    bob_plan.add_acctunit(yao_str, 2, yao_debtit_belief)
+    bob_debtorledger = get_debtorledger(bob_plan)
     bob_riverrun.set_tax_dues(bob_debtorledger)
     assert bob_riverrun.get_acct_tax_due(bob_str) == 380, 0
 

@@ -16,22 +16,22 @@ from src.a04_reason_logic.reason_concept import (
 from src.a04_reason_logic.reason_labor import laborheir_shop, laborunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a05_concept_logic.healer import healerlink_shop
-from src.a06_bud_logic.bud import budunit_shop
+from src.a06_plan_logic.plan import planunit_shop
 from src.a18_etl_toolbox._test_util.a18_env import env_dir_setup_cleanup
-from src.a18_etl_toolbox.db_obj_bud_tool import (
+from src.a18_etl_toolbox.db_obj_plan_tool import (
     ObjKeysHolder,
-    insert_job_budacct,
-    insert_job_budawar,
-    insert_job_budconc,
-    insert_job_budfact,
-    insert_job_budgrou,
-    insert_job_budheal,
-    insert_job_budlabo,
-    insert_job_budmemb,
-    insert_job_budprem,
-    insert_job_budreas,
-    insert_job_budunit,
     insert_job_obj,
+    insert_job_planacct,
+    insert_job_planawar,
+    insert_job_planconc,
+    insert_job_planfact,
+    insert_job_plangrou,
+    insert_job_planheal,
+    insert_job_planlabo,
+    insert_job_planmemb,
+    insert_job_planprem,
+    insert_job_planreas,
+    insert_job_planunit,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import create_job_tables
 
@@ -51,7 +51,7 @@ def test_ObjKeysHolder_Exists():
     assert not x_objkeyholder.fact_way
 
 
-def test_insert_job_budunit_CreatesTableRowsFor_budunit_job():
+def test_insert_job_planunit_CreatesTableRowsFor_planunit_job():
     # sourcery skip: extract-method
     # ESTABLISH
     x_vow_label = "accord23"
@@ -70,31 +70,31 @@ def test_insert_job_budunit_CreatesTableRowsFor_budunit_job():
     x_penny = 4.0
     x_respect_bit = 0.2
     x_tally = 6
-    sue_bud = budunit_shop(owner_name=x_owner_name, vow_label=x_vow_label)
-    sue_bud.fund_pool = x_fund_pool
-    sue_bud.fund_iota = x_fund_iota
-    sue_bud.penny = x_penny
-    sue_bud.tally = x_tally
-    sue_bud.respect_bit = x_respect_bit
-    sue_bud.max_tree_traverse = x_max_tree_traverse
-    sue_bud._keeps_buildable = x__keeps_buildable
-    sue_bud._keeps_justified = x__keeps_justified
-    sue_bud._offtrack_fund = x__offtrack_fund
-    sue_bud._rational = x__rational
-    sue_bud._sum_healerlink_share = x__sum_healerlink_share
-    sue_bud._tree_traverse_count = x__tree_traverse_count
-    sue_bud.credor_respect = x_credor_respect
-    sue_bud.debtor_respect = x_debtor_respect
+    sue_plan = planunit_shop(owner_name=x_owner_name, vow_label=x_vow_label)
+    sue_plan.fund_pool = x_fund_pool
+    sue_plan.fund_iota = x_fund_iota
+    sue_plan.penny = x_penny
+    sue_plan.tally = x_tally
+    sue_plan.respect_bit = x_respect_bit
+    sue_plan.max_tree_traverse = x_max_tree_traverse
+    sue_plan._keeps_buildable = x__keeps_buildable
+    sue_plan._keeps_justified = x__keeps_justified
+    sue_plan._offtrack_fund = x__offtrack_fund
+    sue_plan._rational = x__rational
+    sue_plan._sum_healerlink_share = x__sum_healerlink_share
+    sue_plan._tree_traverse_count = x__tree_traverse_count
+    sue_plan.credor_respect = x_credor_respect
+    sue_plan.debtor_respect = x_debtor_respect
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "budunit_job"
+        x_table_name = "planunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         objkeysholder = ObjKeysHolder()
 
         # WHEN
-        insert_job_budunit(cursor, objkeysholder, sue_bud)
+        insert_job_planunit(cursor, objkeysholder, sue_plan)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -123,10 +123,10 @@ def test_insert_job_budunit_CreatesTableRowsFor_budunit_job():
         assert rows == expected_data
 
 
-def test_insert_job_budconc_CreatesTableRowsFor_budconc_job():
+def test_insert_job_planconc_CreatesTableRowsFor_planconc_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_calc_dimen_args("bud_conceptunit")
+    # x_args = get_plan_calc_dimen_args("plan_conceptunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -226,12 +226,12 @@ def test_insert_job_budconc_CreatesTableRowsFor_budconc_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "bud_conceptunit_job"
+        x_table_name = "plan_conceptunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_vow_label, x_owner_name)
 
         # WHEN
-        insert_job_budconc(cursor, x_objkeysholder, x_concept)
+        insert_job_planconc(cursor, x_objkeysholder, x_concept)
 
         # THEN
         clean_way = create_way(casa_way, "clean")
@@ -273,10 +273,10 @@ def test_insert_job_budconc_CreatesTableRowsFor_budconc_job():
         assert rows == expected_data
 
 
-def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
+def test_insert_job_planreas_CreatesTableRowsFor_planreas_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_calc_dimen_args("bud_concept_reasonunit")
+    # x_args = get_plan_calc_dimen_args("plan_concept_reasonunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -307,12 +307,12 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "bud_concept_reasonunit_job"
+        x_table_name = "plan_concept_reasonunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_vow_label, x_owner_name, x_way)
 
         # WHEN
-        insert_job_budreas(cursor, x_objkeysholder, x_reasonheir)
+        insert_job_planreas(cursor, x_objkeysholder, x_reasonheir)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -333,10 +333,10 @@ def test_insert_job_budreas_CreatesTableRowsFor_budreas_job():
         assert rows == expected_data
 
 
-def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
+def test_insert_job_planprem_CreatesTableRowsFor_planprem_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_calc_dimen_args("bud_concept_reason_premiseunit")
+    # x_args = get_plan_calc_dimen_args("plan_concept_reason_premiseunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -369,12 +369,12 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "bud_concept_reason_premiseunit_job"
+        x_table_name = "plan_concept_reason_premiseunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_vow_label, x_owner_name, x_way, x_rcontext)
 
         # WHEN
-        insert_job_budprem(cursor, x_objkeysholder, x_premiseunit)
+        insert_job_planprem(cursor, x_objkeysholder, x_premiseunit)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -397,10 +397,10 @@ def test_insert_job_budprem_CreatesTableRowsFor_budprem_job():
         assert rows == expected_data
 
 
-def test_insert_job_budmemb_CreatesTableRowsFor_budmemb_job():
+def test_insert_job_planmemb_CreatesTableRowsFor_planmemb_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_calc_dimen_args("bud_acct_membership")
+    # x_args = get_plan_calc_dimen_args("plan_acct_membership")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -442,12 +442,12 @@ def test_insert_job_budmemb_CreatesTableRowsFor_budmemb_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "bud_acct_membership_job"
+        x_table_name = "plan_acct_membership_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_vow_label, x_owner_name)
 
         # WHEN
-        insert_job_budmemb(cursor, x_objkeysholder, x_membership)
+        insert_job_planmemb(cursor, x_objkeysholder, x_membership)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -474,10 +474,10 @@ def test_insert_job_budmemb_CreatesTableRowsFor_budmemb_job():
         assert rows == expected_data
 
 
-def test_insert_job_budacct_CreatesTableRowsFor_budacct_job():
+def test_insert_job_planacct_CreatesTableRowsFor_planacct_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_calc_dimen_args("bud_acctunit")
+    # x_args = get_plan_calc_dimen_args("plan_acctunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -522,12 +522,12 @@ def test_insert_job_budacct_CreatesTableRowsFor_budacct_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "bud_acctunit_job"
+        x_table_name = "plan_acctunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_vow_label, x_owner_name)
 
         # WHEN
-        insert_job_budacct(cursor, x_objkeysholder, x_acct)
+        insert_job_planacct(cursor, x_objkeysholder, x_acct)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -555,10 +555,10 @@ def test_insert_job_budacct_CreatesTableRowsFor_budacct_job():
         assert rows == expected_data
 
 
-def test_insert_job_budgrou_CreatesTableRowsFor_budgrou_job():
+def test_insert_job_plangrou_CreatesTableRowsFor_plangrou_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_calc_dimen_args("bud_groupunit")
+    # x_args = get_plan_calc_dimen_args("plan_groupunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -595,12 +595,12 @@ def test_insert_job_budgrou_CreatesTableRowsFor_budgrou_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "bud_groupunit_job"
+        x_table_name = "plan_groupunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_vow_label, x_owner_name)
 
         # WHEN
-        insert_job_budgrou(cursor, x_objkeysholder, x_group)
+        insert_job_plangrou(cursor, x_objkeysholder, x_group)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -624,10 +624,10 @@ def test_insert_job_budgrou_CreatesTableRowsFor_budgrou_job():
         assert rows == expected_data
 
 
-def test_insert_job_budawar_CreatesTableRowsFor_budawar_job():
+def test_insert_job_planawar_CreatesTableRowsFor_planawar_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_calc_dimen_args("bud_concept_awardlink")
+    # x_args = get_plan_calc_dimen_args("plan_concept_awardlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -657,12 +657,12 @@ def test_insert_job_budawar_CreatesTableRowsFor_budawar_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "bud_concept_awardlink_job"
+        x_table_name = "plan_concept_awardlink_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_vow_label, x_owner_name, x_way)
 
         # WHEN
-        insert_job_budawar(cursor, x_objkeysholder, x_awardheir)
+        insert_job_planawar(cursor, x_objkeysholder, x_awardheir)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -683,10 +683,10 @@ def test_insert_job_budawar_CreatesTableRowsFor_budawar_job():
         assert rows == expected_data
 
 
-def test_insert_job_budfact_CreatesTableRowsFor_budfact_job():
+def test_insert_job_planfact_CreatesTableRowsFor_planfact_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_calc_dimen_args("bud_concept_factunit")
+    # x_args = get_plan_calc_dimen_args("plan_concept_factunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -714,12 +714,12 @@ def test_insert_job_budfact_CreatesTableRowsFor_budfact_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "bud_concept_factunit_job"
+        x_table_name = "plan_concept_factunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_vow_label, x_owner_name, x_way)
 
         # WHEN
-        insert_job_budfact(cursor, x_objkeysholder, x_factheir)
+        insert_job_planfact(cursor, x_objkeysholder, x_factheir)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -739,10 +739,10 @@ def test_insert_job_budfact_CreatesTableRowsFor_budfact_job():
         assert rows == expected_data
 
 
-def test_insert_job_budheal_CreatesTableRowsFor_budheal_job():
+def test_insert_job_planheal_CreatesTableRowsFor_planheal_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_calc_dimen_args("bud_concept_healerlink")
+    # x_args = get_plan_calc_dimen_args("plan_concept_healerlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -766,12 +766,12 @@ def test_insert_job_budheal_CreatesTableRowsFor_budheal_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "bud_concept_healerlink_job"
+        x_table_name = "plan_concept_healerlink_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_vow_label, x_owner_name, x_way)
 
         # WHEN
-        insert_job_budheal(cursor, x_objkeysholder, x_healerlink)
+        insert_job_planheal(cursor, x_objkeysholder, x_healerlink)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 2
@@ -794,10 +794,10 @@ def test_insert_job_budheal_CreatesTableRowsFor_budheal_job():
         assert rows == expected_data
 
 
-def test_insert_job_budlabo_CreatesTableRowsFor_budlabo_job():
+def test_insert_job_planlabo_CreatesTableRowsFor_planlabo_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_bud_calc_dimen_args("bud_concept_laborlink")
+    # x_args = get_plan_calc_dimen_args("plan_concept_laborlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -822,12 +822,12 @@ def test_insert_job_budlabo_CreatesTableRowsFor_budlabo_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "bud_concept_laborlink_job"
+        x_table_name = "plan_concept_laborlink_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_vow_label, x_owner_name, x_way)
 
         # WHEN
-        insert_job_budlabo(cursor, x_objkeysholder, x_laborheir)
+        insert_job_planlabo(cursor, x_objkeysholder, x_laborheir)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 2
@@ -859,63 +859,63 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
     sue_str = "Sue"
     bob_str = "Bob"
     run_str = ";run"
-    sue_bud = budunit_shop(sue_str, a23_str)
-    sue_bud.add_acctunit(sue_str)
-    sue_bud.add_acctunit(bob_str)
-    sue_bud.get_acct(bob_str).add_membership(run_str)
-    casa_way = sue_bud.make_l1_way("casa")
-    status_way = sue_bud.make_l1_way("status")
-    clean_way = sue_bud.make_way(status_way, "clean")
-    dirty_way = sue_bud.make_way(status_way, "dirty")
-    sue_bud.add_concept(casa_way)
-    sue_bud.add_concept(clean_way)
-    sue_bud.add_concept(dirty_way)
-    sue_bud.edit_concept_attr(
+    sue_plan = planunit_shop(sue_str, a23_str)
+    sue_plan.add_acctunit(sue_str)
+    sue_plan.add_acctunit(bob_str)
+    sue_plan.get_acct(bob_str).add_membership(run_str)
+    casa_way = sue_plan.make_l1_way("casa")
+    status_way = sue_plan.make_l1_way("status")
+    clean_way = sue_plan.make_way(status_way, "clean")
+    dirty_way = sue_plan.make_way(status_way, "dirty")
+    sue_plan.add_concept(casa_way)
+    sue_plan.add_concept(clean_way)
+    sue_plan.add_concept(dirty_way)
+    sue_plan.edit_concept_attr(
         casa_way, reason_rcontext=status_way, reason_premise=dirty_way
     )
-    sue_bud.edit_concept_attr(casa_way, awardlink=awardlink_shop(run_str))
-    sue_bud.edit_concept_attr(casa_way, healerlink=healerlink_shop({bob_str}))
-    sue_bud.edit_concept_attr(casa_way, laborunit=laborunit_shop({sue_str}))
-    sue_bud.add_fact(status_way, clean_way)
+    sue_plan.edit_concept_attr(casa_way, awardlink=awardlink_shop(run_str))
+    sue_plan.edit_concept_attr(casa_way, healerlink=healerlink_shop({bob_str}))
+    sue_plan.edit_concept_attr(casa_way, laborunit=laborunit_shop({sue_str}))
+    sue_plan.add_fact(status_way, clean_way)
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        budmemb_job_table = "bud_acct_membership_job"
-        budacct_job_table = "bud_acctunit_job"
-        budgrou_job_table = "bud_groupunit_job"
-        budawar_job_table = "bud_concept_awardlink_job"
-        budfact_job_table = "bud_concept_factunit_job"
-        budheal_job_table = "bud_concept_healerlink_job"
-        budprem_job_table = "bud_concept_reason_premiseunit_job"
-        budreas_job_table = "bud_concept_reasonunit_job"
-        budlabo_job_table = "bud_concept_laborlink_job"
-        budconc_job_table = "bud_conceptunit_job"
-        budunit_job_table = "budunit_job"
-        assert get_row_count(cursor, budunit_job_table) == 0
-        assert get_row_count(cursor, budconc_job_table) == 0
-        assert get_row_count(cursor, budacct_job_table) == 0
-        assert get_row_count(cursor, budmemb_job_table) == 0
-        assert get_row_count(cursor, budgrou_job_table) == 0
-        assert get_row_count(cursor, budawar_job_table) == 0
-        assert get_row_count(cursor, budfact_job_table) == 0
-        assert get_row_count(cursor, budheal_job_table) == 0
-        assert get_row_count(cursor, budreas_job_table) == 0
-        assert get_row_count(cursor, budprem_job_table) == 0
-        assert get_row_count(cursor, budlabo_job_table) == 0
+        planmemb_job_table = "plan_acct_membership_job"
+        planacct_job_table = "plan_acctunit_job"
+        plangrou_job_table = "plan_groupunit_job"
+        planawar_job_table = "plan_concept_awardlink_job"
+        planfact_job_table = "plan_concept_factunit_job"
+        planheal_job_table = "plan_concept_healerlink_job"
+        planprem_job_table = "plan_concept_reason_premiseunit_job"
+        planreas_job_table = "plan_concept_reasonunit_job"
+        planlabo_job_table = "plan_concept_laborlink_job"
+        planconc_job_table = "plan_conceptunit_job"
+        planunit_job_table = "planunit_job"
+        assert get_row_count(cursor, planunit_job_table) == 0
+        assert get_row_count(cursor, planconc_job_table) == 0
+        assert get_row_count(cursor, planacct_job_table) == 0
+        assert get_row_count(cursor, planmemb_job_table) == 0
+        assert get_row_count(cursor, plangrou_job_table) == 0
+        assert get_row_count(cursor, planawar_job_table) == 0
+        assert get_row_count(cursor, planfact_job_table) == 0
+        assert get_row_count(cursor, planheal_job_table) == 0
+        assert get_row_count(cursor, planreas_job_table) == 0
+        assert get_row_count(cursor, planprem_job_table) == 0
+        assert get_row_count(cursor, planlabo_job_table) == 0
 
         # WHEN
-        insert_job_obj(cursor, sue_bud)
+        insert_job_obj(cursor, sue_plan)
 
         # THEN
-        assert get_row_count(cursor, budunit_job_table) == 1
-        assert get_row_count(cursor, budconc_job_table) == 5
-        assert get_row_count(cursor, budacct_job_table) == 2
-        assert get_row_count(cursor, budmemb_job_table) == 3
-        assert get_row_count(cursor, budgrou_job_table) == 3
-        assert get_row_count(cursor, budawar_job_table) == 1
-        assert get_row_count(cursor, budfact_job_table) == 1
-        assert get_row_count(cursor, budheal_job_table) == 1
-        assert get_row_count(cursor, budreas_job_table) == 1
-        assert get_row_count(cursor, budprem_job_table) == 1
-        assert get_row_count(cursor, budlabo_job_table) == 1
+        assert get_row_count(cursor, planunit_job_table) == 1
+        assert get_row_count(cursor, planconc_job_table) == 5
+        assert get_row_count(cursor, planacct_job_table) == 2
+        assert get_row_count(cursor, planmemb_job_table) == 3
+        assert get_row_count(cursor, plangrou_job_table) == 3
+        assert get_row_count(cursor, planawar_job_table) == 1
+        assert get_row_count(cursor, planfact_job_table) == 1
+        assert get_row_count(cursor, planheal_job_table) == 1
+        assert get_row_count(cursor, planreas_job_table) == 1
+        assert get_row_count(cursor, planprem_job_table) == 1
+        assert get_row_count(cursor, planlabo_job_table) == 1

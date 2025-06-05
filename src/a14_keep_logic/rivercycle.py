@@ -6,22 +6,22 @@ from src.a00_data_toolbox.dict_toolbox import (
 )
 from src.a01_term_logic.term import AcctName, OwnerName
 from src.a02_finance_logic.allot import allot_scale
-from src.a06_bud_logic.bud import BudUnit
+from src.a06_plan_logic.plan import PlanUnit
 from src.a12_hub_tools.hubunit import HubUnit
 
 
-def get_credorledger(x_bud: BudUnit) -> dict[AcctName, float]:
+def get_credorledger(x_plan: PlanUnit) -> dict[AcctName, float]:
     return {
         acctunit.acct_name: acctunit.credit_belief
-        for acctunit in x_bud.accts.values()
+        for acctunit in x_plan.accts.values()
         if acctunit.credit_belief > 0
     }
 
 
-def get_debtorledger(x_bud: BudUnit) -> dict[AcctName, float]:
+def get_debtorledger(x_plan: PlanUnit) -> dict[AcctName, float]:
     return {
         acctunit.acct_name: acctunit.debtit_belief
-        for acctunit in x_bud.accts.values()
+        for acctunit in x_plan.accts.values()
         if acctunit.debtit_belief > 0
     }
 

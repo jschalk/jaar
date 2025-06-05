@@ -2,7 +2,7 @@ from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import count_dirs_files, open_json, save_file
 from src.a02_finance_logic._test_util.a02_str import celldepth_str, quota_str
 from src.a02_finance_logic.deal import DEFAULT_CELLDEPTH
-from src.a06_bud_logic._test_util.a06_str import penny_str
+from src.a06_plan_logic._test_util.a06_str import penny_str
 from src.a09_pack_logic._test_util.a09_str import event_int_str
 from src.a11_deal_cell_logic._test_util.a11_str import (
     ancestors_str,
@@ -93,7 +93,7 @@ def test_VowUnit_create_deals_root_cells_Scenaro1_DealExists(
     assert cell_dict.get(event_int_str()) == event3
 
 
-def test_VowUnit_create_deals_root_cells_Scenaro2_DealExistsButNoBudExistsInEventsPast(
+def test_VowUnit_create_deals_root_cells_Scenaro2_DealExistsButNoPlanExistsInEventsPast(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

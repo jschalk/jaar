@@ -1,4 +1,4 @@
-from src.a06_bud_logic.bud import budunit_shop
+from src.a06_plan_logic.plan import planunit_shop
 from src.a12_hub_tools.hubunit import hubunit_shop
 from src.a14_keep_logic._test_util.a14_env import temp_vow_mstr_dir
 from src.a14_keep_logic._test_util.example_credorledgers import example_yao_hubunit
@@ -213,11 +213,11 @@ def test_RiverRun_levy_tax_due_SetsAttr():
     bob_tax_yield = 38
     sue_tax_yield = 56
     yao_tax_yield = 6
-    bob_bud = budunit_shop(bob_str)
-    bob_bud.add_acctunit(bob_str, 2, bob_tax_yield)
-    bob_bud.add_acctunit(sue_str, 2, sue_tax_yield)
-    bob_bud.add_acctunit(yao_str, 2, yao_tax_yield)
-    bob_debtorledger = get_debtorledger(bob_bud)
+    bob_plan = planunit_shop(bob_str)
+    bob_plan.add_acctunit(bob_str, 2, bob_tax_yield)
+    bob_plan.add_acctunit(sue_str, 2, sue_tax_yield)
+    bob_plan.add_acctunit(yao_str, 2, yao_tax_yield)
+    bob_debtorledger = get_debtorledger(bob_plan)
     bob_riverrun.set_tax_dues(bob_debtorledger)
     assert bob_riverrun.get_acct_tax_due(bob_str) == 380
     assert bob_riverrun.get_acct_tax_yield(bob_str) == 0

@@ -328,11 +328,11 @@ def test_PremiseUnitUnit_set_status_SetsAttr_status_WhenFactUnitIsNull():
     after_str = "afternoon"
     after_way = create_way(wkday_way, after_str)
     premise_2 = premiseunit_shop(pstate=after_way)
-    bud_fact_2 = None
+    plan_fact_2 = None
     assert premise_2._status is None
 
     # WHEN
-    premise_2.set_status(x_factheir=bud_fact_2)
+    premise_2.set_status(x_factheir=plan_fact_2)
 
     # ESTABLISH
     assert premise_2._status is False
@@ -345,11 +345,11 @@ def test_PremiseUnitUnit_set_status_SetsAttr_status_OfSimple():
     wed_str = "wednesday"
     wed_way = create_way(wkday_way, wed_str)
     wed_premise = premiseunit_shop(pstate=wed_way)
-    bud_fact = factheir_shop(fcontext=wkday_way, fstate=wed_way)
+    plan_fact = factheir_shop(fcontext=wkday_way, fstate=wed_way)
     assert wed_premise._status is None
 
     # WHEN
-    wed_premise.set_status(x_factheir=bud_fact)
+    wed_premise.set_status(x_factheir=plan_fact)
 
     # THEN
     assert wed_premise._status
@@ -610,8 +610,8 @@ def test_PremiseUnit_set_status_SetsAttrs_Scenario03():
     assert hr24_premise._status is None
 
     # WHEN
-    bud_fact = factheir_shop(fcontext=hr24_way, fstate=hr24_way, fopen=8, fnigh=10)
-    hr24_premise.set_status(x_factheir=bud_fact)
+    plan_fact = factheir_shop(fcontext=hr24_way, fstate=hr24_way, fopen=8, fnigh=10)
+    hr24_premise.set_status(x_factheir=plan_fact)
 
     # THEN
     assert hr24_premise._status is False
@@ -641,11 +641,11 @@ def test_PremiseUnit_set_status_CorrectlySetCEDWeekStatusTrue():
     wk_str = "ced_wk"
     wk_way = create_way(timetech_way, wk_str)
     wk_premise = premiseunit_shop(pstate=wk_way, pdivisor=6, popen=1, pnigh=1)
-    bud_fact = factheir_shop(fcontext=wk_way, fstate=wk_way, fopen=7, fnigh=7)
+    plan_fact = factheir_shop(fcontext=wk_way, fstate=wk_way, fopen=7, fnigh=7)
     assert wk_premise._status is None
 
     # WHEN
-    wk_premise.set_status(x_factheir=bud_fact)
+    wk_premise.set_status(x_factheir=plan_fact)
 
     # THEN
     assert wk_premise._status

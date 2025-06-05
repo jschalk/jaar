@@ -5,7 +5,7 @@ from src.a00_data_toolbox.file_toolbox import save_file
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a05_concept_logic.healer import healerlink_shop
-from src.a06_bud_logic.bud import budunit_shop
+from src.a06_plan_logic.plan import planunit_shop
 from src.a12_hub_tools._test_util.a12_str import job_str
 from src.a12_hub_tools.hub_path import create_job_path, create_vow_json_path
 from src.a12_hub_tools.hub_tool import save_job_file
@@ -28,68 +28,68 @@ def test_etl_vow_job_jsons_to_job_tables_PopulatesTables_Scenario0(
     sue_str = "Sue"
     bob_str = "Bob"
     run_str = ";run"
-    sue_bud = budunit_shop(sue_str, a23_str)
-    sue_bud.add_acctunit(sue_str)
-    sue_bud.add_acctunit(bob_str)
-    sue_bud.get_acct(bob_str).add_membership(run_str)
-    casa_way = sue_bud.make_l1_way("casa")
-    status_way = sue_bud.make_l1_way("status")
-    clean_way = sue_bud.make_way(status_way, "clean")
-    dirty_way = sue_bud.make_way(status_way, "dirty")
-    sue_bud.add_concept(casa_way)
-    sue_bud.add_concept(clean_way)
-    sue_bud.add_concept(dirty_way)
-    sue_bud.edit_concept_attr(
+    sue_plan = planunit_shop(sue_str, a23_str)
+    sue_plan.add_acctunit(sue_str)
+    sue_plan.add_acctunit(bob_str)
+    sue_plan.get_acct(bob_str).add_membership(run_str)
+    casa_way = sue_plan.make_l1_way("casa")
+    status_way = sue_plan.make_l1_way("status")
+    clean_way = sue_plan.make_way(status_way, "clean")
+    dirty_way = sue_plan.make_way(status_way, "dirty")
+    sue_plan.add_concept(casa_way)
+    sue_plan.add_concept(clean_way)
+    sue_plan.add_concept(dirty_way)
+    sue_plan.edit_concept_attr(
         casa_way, reason_rcontext=status_way, reason_premise=dirty_way
     )
-    sue_bud.edit_concept_attr(casa_way, awardlink=awardlink_shop(run_str))
-    sue_bud.edit_concept_attr(casa_way, healerlink=healerlink_shop({bob_str}))
-    sue_bud.edit_concept_attr(casa_way, laborunit=laborunit_shop({sue_str}))
-    sue_bud.add_fact(status_way, clean_way)
-    print(f"{sue_bud.get_concept_obj(casa_way).laborunit=}")
-    print(f"{sue_bud.get_concept_obj(casa_way).get_dict()=}")
-    save_job_file(m23_vow_mstr_dir, sue_bud)
+    sue_plan.edit_concept_attr(casa_way, awardlink=awardlink_shop(run_str))
+    sue_plan.edit_concept_attr(casa_way, healerlink=healerlink_shop({bob_str}))
+    sue_plan.edit_concept_attr(casa_way, laborunit=laborunit_shop({sue_str}))
+    sue_plan.add_fact(status_way, clean_way)
+    print(f"{sue_plan.get_concept_obj(casa_way).laborunit=}")
+    print(f"{sue_plan.get_concept_obj(casa_way).get_dict()=}")
+    save_job_file(m23_vow_mstr_dir, sue_plan)
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        budmemb_job_table = prime_table("budmemb", job_str(), None)
-        budacct_job_table = prime_table("budacct", job_str(), None)
-        budgrou_job_table = prime_table("budgrou", job_str(), None)
-        budawar_job_table = prime_table("budawar", job_str(), None)
-        budfact_job_table = prime_table("budfact", job_str(), None)
-        budheal_job_table = prime_table("budheal", job_str(), None)
-        budprem_job_table = prime_table("budprem", job_str(), None)
-        budreas_job_table = prime_table("budreas", job_str(), None)
-        budlabo_job_table = prime_table("budlabo", job_str(), None)
-        budconc_job_table = prime_table("budconc", job_str(), None)
-        budunit_job_table = prime_table("budunit", job_str(), None)
-        assert not db_table_exists(cursor, budunit_job_table)
-        assert not db_table_exists(cursor, budconc_job_table)
-        assert not db_table_exists(cursor, budacct_job_table)
-        assert not db_table_exists(cursor, budmemb_job_table)
-        assert not db_table_exists(cursor, budgrou_job_table)
-        assert not db_table_exists(cursor, budawar_job_table)
-        assert not db_table_exists(cursor, budfact_job_table)
-        assert not db_table_exists(cursor, budheal_job_table)
-        assert not db_table_exists(cursor, budreas_job_table)
-        assert not db_table_exists(cursor, budprem_job_table)
-        assert not db_table_exists(cursor, budlabo_job_table)
+        planmemb_job_table = prime_table("planmemb", job_str(), None)
+        planacct_job_table = prime_table("planacct", job_str(), None)
+        plangrou_job_table = prime_table("plangrou", job_str(), None)
+        planawar_job_table = prime_table("planawar", job_str(), None)
+        planfact_job_table = prime_table("planfact", job_str(), None)
+        planheal_job_table = prime_table("planheal", job_str(), None)
+        planprem_job_table = prime_table("planprem", job_str(), None)
+        planreas_job_table = prime_table("planreas", job_str(), None)
+        planlabo_job_table = prime_table("planlabo", job_str(), None)
+        planconc_job_table = prime_table("planconc", job_str(), None)
+        planunit_job_table = prime_table("planunit", job_str(), None)
+        assert not db_table_exists(cursor, planunit_job_table)
+        assert not db_table_exists(cursor, planconc_job_table)
+        assert not db_table_exists(cursor, planacct_job_table)
+        assert not db_table_exists(cursor, planmemb_job_table)
+        assert not db_table_exists(cursor, plangrou_job_table)
+        assert not db_table_exists(cursor, planawar_job_table)
+        assert not db_table_exists(cursor, planfact_job_table)
+        assert not db_table_exists(cursor, planheal_job_table)
+        assert not db_table_exists(cursor, planreas_job_table)
+        assert not db_table_exists(cursor, planprem_job_table)
+        assert not db_table_exists(cursor, planlabo_job_table)
 
         # WHEN
         etl_vow_job_jsons_to_job_tables(cursor, m23_vow_mstr_dir)
 
         # THEN
-        assert get_row_count(cursor, budunit_job_table) == 1
-        assert get_row_count(cursor, budconc_job_table) == 5
-        assert get_row_count(cursor, budacct_job_table) == 2
-        assert get_row_count(cursor, budmemb_job_table) == 3
-        assert get_row_count(cursor, budgrou_job_table) == 3
-        assert get_row_count(cursor, budawar_job_table) == 1
-        assert get_row_count(cursor, budfact_job_table) == 1
-        assert get_row_count(cursor, budheal_job_table) == 1
-        assert get_row_count(cursor, budreas_job_table) == 1
-        assert get_row_count(cursor, budprem_job_table) == 1
-        assert get_row_count(cursor, budlabo_job_table) == 1
+        assert get_row_count(cursor, planunit_job_table) == 1
+        assert get_row_count(cursor, planconc_job_table) == 5
+        assert get_row_count(cursor, planacct_job_table) == 2
+        assert get_row_count(cursor, planmemb_job_table) == 3
+        assert get_row_count(cursor, plangrou_job_table) == 3
+        assert get_row_count(cursor, planawar_job_table) == 1
+        assert get_row_count(cursor, planfact_job_table) == 1
+        assert get_row_count(cursor, planheal_job_table) == 1
+        assert get_row_count(cursor, planreas_job_table) == 1
+        assert get_row_count(cursor, planprem_job_table) == 1
+        assert get_row_count(cursor, planlabo_job_table) == 1
 
 
 def test_etl_vow_job_jsons_to_job_tables_PopulatesTables_Scenario1(
@@ -104,7 +104,7 @@ def test_etl_vow_job_jsons_to_job_tables_PopulatesTables_Scenario1(
     credit88 = 88
     a23_str = "accord23"
     vow_mstr_dir = get_module_temp_dir()
-    bob_job = budunit_shop(bob_inx, a23_str)
+    bob_job = planunit_shop(bob_inx, a23_str)
     bob_job.add_acctunit(bob_inx, credit77)
     bob_job.add_acctunit(yao_inx, credit44)
     bob_job.add_acctunit(bob_inx, credit77)
@@ -118,15 +118,15 @@ def test_etl_vow_job_jsons_to_job_tables_PopulatesTables_Scenario1(
     assert os_path_exists(a23_bob_job_path)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        budacct_job_tablename = prime_table("budacct", job_str(), None)
-        assert not db_table_exists(cursor, budacct_job_tablename)
+        planacct_job_tablename = prime_table("planacct", job_str(), None)
+        assert not db_table_exists(cursor, planacct_job_tablename)
 
         # WHEN
         etl_vow_job_jsons_to_job_tables(cursor, vow_mstr_dir)
 
         # THEN
-        assert get_row_count(cursor, budacct_job_tablename) == 3
-        rows = cursor.execute(f"SELECT * FROM {budacct_job_tablename}").fetchall()
+        assert get_row_count(cursor, planacct_job_tablename) == 3
+        rows = cursor.execute(f"SELECT * FROM {planacct_job_tablename}").fetchall()
         print(rows)
         assert rows == [
             (

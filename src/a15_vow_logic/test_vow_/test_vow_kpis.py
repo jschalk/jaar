@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
 from src.a02_finance_logic._test_util.a02_str import owner_name_str
-from src.a06_bud_logic._test_util.a06_str import (
+from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
     addin_str,
     begin_str,

@@ -1,6 +1,6 @@
 from src.a01_term_logic.way import WayTerm
-from src.a08_bud_atom_logic.atom import BudAtom
-from src.a08_bud_atom_logic.atom_config import get_flattened_atom_table_build
+from src.a08_plan_atom_logic.atom import PlanAtom
+from src.a08_plan_atom_logic.atom_config import get_flattened_atom_table_build
 
 
 def get_atom_hx_table_create_sqlstr() -> str:
@@ -19,12 +19,12 @@ CREATE TABLE IF NOT EXISTS atom_hx (
 ;"""
 
 
-def get_atom_hx_table_insert_sqlstr(x_atom: BudAtom) -> str:
+def get_atom_hx_table_insert_sqlstr(x_atom: PlanAtom) -> str:
     return x_atom.get_insert_sqlstr()
 
 
 def get_atom_mstr_table_create_sqlstr() -> str:
-    """Create table that holds budatoms."""
+    """Create table that holds planatoms."""
     x_str = """
 CREATE TABLE IF NOT EXISTS atom_mstr (
   owner_name VARCHAR(255) NOT NULL

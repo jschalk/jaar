@@ -766,10 +766,10 @@ class ConceptUnit:
         self,
         tree_traverse_count: int,
         groupunits: dict[GroupTitle, GroupUnit] = None,
-        bud_owner_name: AcctName = None,
+        plan_owner_name: AcctName = None,
     ):
         prev_to_now_active = deepcopy(self._active)
-        self._active = self._create_active_bool(groupunits, bud_owner_name)
+        self._active = self._create_active_bool(groupunits, plan_owner_name)
         self._set_concept_chore()
         self.record_active_hx(tree_traverse_count, prev_to_now_active, self._active)
 
@@ -785,28 +785,30 @@ class ConceptUnit:
         return any(x_reasonheir._chore for x_reasonheir in self._reasonheirs.values())
 
     def _create_active_bool(
-        self, groupunits: dict[GroupTitle, GroupUnit], bud_owner_name: AcctName
+        self, groupunits: dict[GroupTitle, GroupUnit], plan_owner_name: AcctName
     ) -> bool:
         self.set_reasonheirs_status()
         active_bool = self._are_all_reasonheir_active_true()
         if (
             active_bool
             and groupunits != {}
-            and bud_owner_name is not None
+            and plan_owner_name is not None
             and self._laborheir._laborlinks != {}
         ):
-            self._laborheir.set_owner_name_labor(groupunits, bud_owner_name)
+            self._laborheir.set_owner_name_labor(groupunits, plan_owner_name)
             if self._laborheir._owner_name_labor is False:
                 active_bool = False
         return active_bool
 
     def set_range_factheirs(
-        self, bud_concept_dict: dict[WayTerm,], range_inheritors: dict[WayTerm, WayTerm]
+        self,
+        plan_concept_dict: dict[WayTerm,],
+        range_inheritors: dict[WayTerm, WayTerm],
     ):
         for reason_rcontext in self._reasonheirs.keys():
             if range_root_way := range_inheritors.get(reason_rcontext):
                 all_concepts = all_concepts_between(
-                    bud_concept_dict, range_root_way, reason_rcontext
+                    plan_concept_dict, range_root_way, reason_rcontext
                 )
                 self._create_factheir(all_concepts, range_root_way, reason_rcontext)
 
@@ -841,7 +843,7 @@ class ConceptUnit:
         return new_reasonheirs
 
     def set_reasonheirs(
-        self, bud_concept_dict: dict[WayTerm,], reasonheirs: dict[WayTerm, ReasonCore]
+        self, plan_concept_dict: dict[WayTerm,], reasonheirs: dict[WayTerm, ReasonCore]
     ):
         coalesced_reasons = self._coalesce_with_reasonunits(reasonheirs)
         self._reasonheirs = {}
@@ -851,7 +853,7 @@ class ConceptUnit:
             new_reasonheir = reasonheir_shop(old_rcontext, None, old_active_requisite)
             new_reasonheir.inherit_from_reasonheir(old_reasonheir)
 
-            if rcontext_concept := bud_concept_dict.get(old_reasonheir.rcontext):
+            if rcontext_concept := plan_concept_dict.get(old_reasonheir.rcontext):
                 new_reasonheir.set_rconcept_active_value(rcontext_concept._active)
             self._reasonheirs[new_reasonheir.rcontext] = new_reasonheir
 
@@ -1103,12 +1105,12 @@ def get_obj_from_concept_dict(x_dict: dict[str, dict], dict_key: str) -> any:
 
 
 def all_concepts_between(
-    bud_concept_dict: dict[WayTerm, ConceptUnit],
+    plan_concept_dict: dict[WayTerm, ConceptUnit],
     src_way: WayTerm,
     dst_rcontext: WayTerm,
 ) -> list[ConceptUnit]:
     all_ways = all_wayterms_between(src_way, dst_rcontext)
-    return [bud_concept_dict.get(x_way) for x_way in all_ways]
+    return [plan_concept_dict.get(x_way) for x_way in all_ways]
 
 
 def concepts_calculated_range(

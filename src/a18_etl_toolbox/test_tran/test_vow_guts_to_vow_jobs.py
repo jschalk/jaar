@@ -1,6 +1,9 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import open_file, save_file
-from src.a06_bud_logic.bud import budunit_shop, get_from_json as budunit_get_from_json
+from src.a06_plan_logic.plan import (
+    get_from_json as planunit_get_from_json,
+    planunit_shop,
+)
 from src.a12_hub_tools.hub_path import (
     create_gut_path,
     create_job_path,
@@ -26,7 +29,7 @@ def test_etl_vow_guts_to_vow_jobs_SetsFiles_Scenario0(
     credit88 = 88
     a23_str = "accord23"
     vow_mstr_dir = get_module_temp_dir()
-    bob_gut = budunit_shop(bob_inx, a23_str)
+    bob_gut = planunit_shop(bob_inx, a23_str)
     bob_gut.add_acctunit(bob_inx, credit77)
     bob_gut.add_acctunit(yao_inx, credit44)
     bob_gut.add_acctunit(bob_inx, credit77)
@@ -47,8 +50,8 @@ def test_etl_vow_guts_to_vow_jobs_SetsFiles_Scenario0(
 
     # THEN
     assert os_path_exists(a23_bob_job_path)
-    generated_job = budunit_get_from_json(open_file(a23_bob_job_path))
-    expected_job = budunit_shop(bob_inx, a23_str)
+    generated_job = planunit_get_from_json(open_file(a23_bob_job_path))
+    expected_job = planunit_shop(bob_inx, a23_str)
     expected_job.add_acctunit(bob_inx, credit77)
     expected_job.add_acctunit(yao_inx, credit44)
     expected_job.add_acctunit(bob_inx, credit77)

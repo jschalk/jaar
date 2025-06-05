@@ -10,16 +10,19 @@ from src.a00_data_toolbox.file_toolbox import (
 )
 from src.a01_term_logic.term import FaceName, OwnerName, VowLabel
 from src.a05_concept_logic.concept import get_default_vow_label
-from src.a06_bud_logic.bud import BudUnit
-from src.a08_bud_atom_logic.atom import BudAtom, get_from_json as budatom_get_from_json
+from src.a06_plan_logic.plan import PlanUnit
+from src.a08_plan_atom_logic.atom import (
+    PlanAtom,
+    get_from_json as planatom_get_from_json,
+)
 from src.a09_pack_logic.delta import (
-    BudDelta,
-    buddelta_shop,
-    get_buddelta_from_ordered_dict,
+    PlanDelta,
+    get_plandelta_from_ordered_dict,
+    plandelta_shop,
 )
 
 
-class pack_bud_conflict_Exception(Exception):
+class pack_plan_conflict_Exception(Exception):
     pass
 
 
@@ -37,12 +40,12 @@ class PackUnit:
     vow_label: VowLabel = None
     owner_name: OwnerName = None
     _pack_id: int = None
-    _buddelta: BudDelta = None
+    _plandelta: PlanDelta = None
     _delta_start: int = None
     _packs_dir: str = None
     _atoms_dir: str = None
     event_int: int = None
-    """Represents a per vow_label/event_int BudDelta for a owner_name"""
+    """Represents a per vow_label/event_int PlanDelta for a owner_name"""
 
     def set_face(self, x_face_name: FaceName):
         self.face_name = x_face_name
@@ -50,17 +53,17 @@ class PackUnit:
     def del_face(self):
         self.face_name = None
 
-    def set_buddelta(self, x_buddelta: BudDelta):
-        self._buddelta = x_buddelta
+    def set_plandelta(self, x_plandelta: PlanDelta):
+        self._plandelta = x_plandelta
 
-    def del_buddelta(self):
-        self._buddelta = buddelta_shop()
+    def del_plandelta(self):
+        self._plandelta = plandelta_shop()
 
     def set_delta_start(self, x_delta_start: int):
         self._delta_start = get_init_pack_id_if_None(x_delta_start)
 
-    def budatom_exists(self, x_budatom: BudAtom):
-        return self._buddelta.budatom_exists(x_budatom)
+    def planatom_exists(self, x_planatom: PlanAtom):
+        return self._plandelta.planatom_exists(x_planatom)
 
     def get_step_dict(self) -> dict[str, any]:
         return {
@@ -68,12 +71,12 @@ class PackUnit:
             "vow_label": self.vow_label,
             "owner_name": self.owner_name,
             "event_int": self.event_int,
-            "delta": self._buddelta.get_ordered_budatoms(self._delta_start),
+            "delta": self._plandelta.get_ordered_planatoms(self._delta_start),
         }
 
     def get_serializable_dict(self) -> dict[str, dict]:
         total_dict = self.get_step_dict()
-        total_dict["delta"] = self._buddelta.get_ordered_dict()
+        total_dict["delta"] = self._plandelta.get_ordered_dict()
         return total_dict
 
     def get_json(self) -> str:
@@ -98,7 +101,7 @@ class PackUnit:
     def _get_num_filename(self, x_number: int) -> str:
         return get_json_filename(x_number)
 
-    def _save_atom_file(self, atom_number: int, x_atom: BudAtom):
+    def _save_atom_file(self, atom_number: int, x_atom: PlanAtom):
         x_filename = self._get_num_filename(atom_number)
         save_file(self._atoms_dir, x_filename, x_atom.get_json())
 
@@ -106,9 +109,9 @@ class PackUnit:
         x_filename = self._get_num_filename(atom_number)
         return os_path_exists(create_path(self._atoms_dir, x_filename))
 
-    def _open_atom_file(self, atom_number: int) -> BudAtom:
+    def _open_atom_file(self, atom_number: int) -> PlanAtom:
         x_json = open_file(self._atoms_dir, self._get_num_filename(atom_number))
-        return budatom_get_from_json(x_json)
+        return planatom_get_from_json(x_json)
 
     def _save_pack_file(self):
         x_filename = self._get_num_filename(self._pack_id)
@@ -120,42 +123,42 @@ class PackUnit:
 
     def _save_atom_files(self):
         step_dict = self.get_step_dict()
-        ordered_budatoms = step_dict.get("delta")
-        for order_int, budatom in ordered_budatoms.items():
-            self._save_atom_file(order_int, budatom)
+        ordered_planatoms = step_dict.get("delta")
+        for order_int, planatom in ordered_planatoms.items():
+            self._save_atom_file(order_int, planatom)
 
     def save_files(self):
         self._save_pack_file()
         self._save_atom_files()
 
-    def _create_buddelta_from_atom_files(self, atom_number_list: list) -> BudDelta:
-        x_buddelta = buddelta_shop()
+    def _create_plandelta_from_atom_files(self, atom_number_list: list) -> PlanDelta:
+        x_plandelta = plandelta_shop()
         for atom_number in atom_number_list:
-            x_budatom = self._open_atom_file(atom_number)
-            x_buddelta.set_budatom(x_budatom)
-        self._buddelta = x_buddelta
+            x_planatom = self._open_atom_file(atom_number)
+            x_plandelta.set_planatom(x_planatom)
+        self._plandelta = x_plandelta
 
-    def add_budatom(
+    def add_planatom(
         self,
         dimen: str,
         crud_str: str,
         jkeys: dict[str, str] = None,
         jvalues: dict[str, str] = None,
     ):
-        self._buddelta.add_budatom(dimen, crud_str, jkeys=jkeys, jvalues=jvalues)
+        self._plandelta.add_planatom(dimen, crud_str, jkeys=jkeys, jvalues=jvalues)
 
-    def get_edited_bud(self, before_bud: BudUnit) -> BudUnit:
+    def get_edited_plan(self, before_plan: PlanUnit) -> PlanUnit:
         if (
-            self.vow_label != before_bud.vow_label
-            or self.owner_name != before_bud.owner_name
+            self.vow_label != before_plan.vow_label
+            or self.owner_name != before_plan.owner_name
         ):
-            raise pack_bud_conflict_Exception(
-                f"pack bud conflict {self.vow_label} != {before_bud.vow_label} or {self.owner_name} != {before_bud.owner_name}"
+            raise pack_plan_conflict_Exception(
+                f"pack plan conflict {self.vow_label} != {before_plan.vow_label} or {self.owner_name} != {before_plan.owner_name}"
             )
-        return self._buddelta.get_edited_bud(before_bud)
+        return self._plandelta.get_edited_plan(before_plan)
 
     def is_empty(self) -> bool:
-        return self._buddelta.is_empty()
+        return self._plandelta.is_empty()
 
 
 def packunit_shop(
@@ -163,20 +166,20 @@ def packunit_shop(
     face_name: FaceName = None,
     vow_label: VowLabel = None,
     _pack_id: int = None,
-    _buddelta: BudDelta = None,
+    _plandelta: PlanDelta = None,
     _delta_start: int = None,
     _packs_dir: str = None,
     _atoms_dir: str = None,
     event_int: int = None,
 ) -> PackUnit:
-    _buddelta = buddelta_shop() if _buddelta is None else _buddelta
+    _plandelta = plandelta_shop() if _plandelta is None else _plandelta
     vow_label = get_default_vow_label() if vow_label is None else vow_label
     x_packunit = PackUnit(
         face_name=face_name,
         owner_name=owner_name,
         vow_label=vow_label,
         _pack_id=get_init_pack_id_if_None(_pack_id),
-        _buddelta=_buddelta,
+        _plandelta=_plandelta,
         _packs_dir=_packs_dir,
         _atoms_dir=_atoms_dir,
         event_int=event_int,
@@ -203,7 +206,7 @@ def create_packunit_from_files(
         _pack_id=pack_id,
         _atoms_dir=atoms_dir,
     )
-    x_packunit._create_buddelta_from_atom_files(delta_atom_numbers_list)
+    x_packunit._create_plandelta_from_atom_files(delta_atom_numbers_list)
     return x_packunit
 
 
@@ -221,6 +224,6 @@ def get_packunit_from_json(x_json: str) -> PackUnit:
         _atoms_dir=pack_dict.get("atoms_dir"),
         event_int=x_event_int,
     )
-    x_buddelta = get_buddelta_from_ordered_dict(pack_dict.get("delta"))
-    x_packunit.set_buddelta(x_buddelta)
+    x_plandelta = get_plandelta_from_ordered_dict(pack_dict.get("delta"))
+    x_packunit.set_plandelta(x_plandelta)
     return x_packunit

@@ -42,10 +42,10 @@ from src.a02_finance_logic.finance_config import (
     default_RespectBit_if_None,
     filter_penny,
 )
-from src.a06_bud_logic.bud import BudUnit, budunit_shop
+from src.a06_plan_logic.plan import PlanUnit, planunit_shop
 from src.a07_calendar_logic.chrono import TimeLineUnit, timelineunit_shop
 from src.a11_deal_cell_logic.cell import cellunit_shop
-from src.a12_hub_tools.basis_buds import create_listen_basis, get_default_job
+from src.a12_hub_tools.basis_plans import create_listen_basis, get_default_job
 from src.a12_hub_tools.hub_path import create_cell_dir_path, create_vow_json_path
 from src.a12_hub_tools.hub_tool import (
     cellunit_save_to_dir,
@@ -56,7 +56,7 @@ from src.a12_hub_tools.hub_tool import (
     save_job_file,
 )
 from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop
-from src.a13_bud_listen_logic.listen import (
+from src.a13_plan_listen_logic.listen import (
     create_vision_file_from_duty_file,
     listen_to_agendas_create_init_job_from_guts,
     listen_to_debtors_roll_jobs_into_job,
@@ -171,7 +171,7 @@ class VowUnit:
     # owner management
     def _set_all_healer_dutys(self, owner_name: OwnerName):
         x_gut = open_gut_file(self.vow_mstr_dir, self.vow_label, owner_name)
-        x_gut.settle_bud()
+        x_gut.settle_plan()
         for healer_name, healer_dict in x_gut._healers_dict.items():
             healer_hubunit = hubunit_shop(
                 self.vow_mstr_dir,
@@ -189,15 +189,15 @@ class VowUnit:
         self,
         healer_hubunit: HubUnit,
         keep_way: WayTerm,
-        gut_bud: BudUnit,
+        gut_plan: PlanUnit,
     ) -> None:
         healer_hubunit.keep_way = keep_way
         healer_hubunit.create_treasury_db_file()
-        healer_hubunit.save_duty_bud(gut_bud)
+        healer_hubunit.save_duty_plan(gut_plan)
 
     def generate_healers_authored_job(
-        self, owner_name: OwnerName, x_gut: BudUnit
-    ) -> BudUnit:
+        self, owner_name: OwnerName, x_gut: PlanUnit
+    ) -> PlanUnit:
         x_job = get_default_job(x_gut)
         for healer_name, healer_dict in x_gut._healers_dict.items():
             healer_hubunit = hubunit_shop(
@@ -219,15 +219,15 @@ class VowUnit:
                     bridge=self.bridge,
                     respect_bit=self.respect_bit,
                 )
-                keep_hubunit.save_duty_bud(x_gut)
+                keep_hubunit.save_duty_plan(x_gut)
                 create_vision_file_from_duty_file(keep_hubunit, owner_name)
-                x_vision = keep_hubunit.get_vision_bud(owner_name)
+                x_vision = keep_hubunit.get_vision_plan(owner_name)
                 x_job = listen_to_speaker_agenda(x_job, x_vision)
         return x_job
 
-    # job bud management
-    def create_empty_bud_from_vow(self, owner_name: OwnerName) -> BudUnit:
-        return budunit_shop(
+    # job plan management
+    def create_empty_plan_from_vow(self, owner_name: OwnerName) -> PlanUnit:
+        return planunit_shop(
             owner_name,
             self.vow_label,
             bridge=self.bridge,
@@ -238,8 +238,8 @@ class VowUnit:
 
     def create_gut_file_if_none(self, owner_name: OwnerName) -> None:
         if not gut_file_exists(self.vow_mstr_dir, self.vow_label, owner_name):
-            empty_bud = self.create_empty_bud_from_vow(owner_name)
-            save_gut_file(self.vow_mstr_dir, empty_bud)
+            empty_plan = self.create_empty_plan_from_vow(owner_name)
+            save_gut_file(self.vow_mstr_dir, empty_plan)
 
     def create_init_job_from_guts(self, owner_name: OwnerName) -> None:
         self.create_gut_file_if_none(owner_name)
@@ -248,13 +248,13 @@ class VowUnit:
         listen_to_agendas_create_init_job_from_guts(self.vow_mstr_dir, x_job)
         save_job_file(self.vow_mstr_dir, x_job)
 
-    def rotate_job(self, owner_name: OwnerName) -> BudUnit:
+    def rotate_job(self, owner_name: OwnerName) -> PlanUnit:
         x_job = open_job_file(self.vow_mstr_dir, self.vow_label, owner_name)
-        x_job.settle_bud()
-        # # if budunit has healers create job from healers.
+        x_job.settle_plan()
+        # # if planunit has healers create job from healers.
         # if len(x_gut._healers_dict) > 0:
         #     return self.generate_healers_authored_job(owner_name, x_gut)
-        # create budunit from debtors roll
+        # create planunit from debtors roll
         return listen_to_debtors_roll_jobs_into_job(
             self.vow_mstr_dir, self.vow_label, owner_name
         )
@@ -268,7 +268,7 @@ class VowUnit:
             for owner_name in owner_names:
                 save_job_file(self.vow_mstr_dir, self.rotate_job(owner_name))
 
-    def get_job_file_bud(self, owner_name: OwnerName) -> BudUnit:
+    def get_job_file_plan(self, owner_name: OwnerName) -> PlanUnit:
         return open_job_file(self.vow_mstr_dir, self.vow_label, owner_name)
 
     # brokerunits

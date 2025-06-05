@@ -166,7 +166,7 @@ def test_ConceptUnit_set_reasonheirs_CorrectlyAcceptsNewValues():
     assert ball_concept._reasonheirs == {}
 
     # WHEN
-    ball_concept.set_reasonheirs(reasonheirs=reasonheirs, bud_concept_dict={})
+    ball_concept.set_reasonheirs(reasonheirs=reasonheirs, plan_concept_dict={})
 
     # THEN
     assert ball_concept._reasonheirs == reasonheirs
@@ -187,7 +187,7 @@ def test_ConceptUnit_set_reasonheirs_CorrectlyRefusesNewValues():
     assert ball_concept.reasonunits != {}
 
     # WHEN
-    ball_concept.set_reasonheirs(reasonheirs={}, bud_concept_dict={})
+    ball_concept.set_reasonheirs(reasonheirs={}, plan_concept_dict={})
 
     # THEN
     reasonheir = reasonheir_shop(run_way, premises=run_premises)
@@ -201,7 +201,7 @@ def test_ConceptUnit_set_range_factheirs_SetsAttrNoParameters():
     assert ball_concept._factheirs == {}
 
     # WHEN
-    ball_concept.set_range_factheirs(bud_concept_dict={}, range_inheritors={})
+    ball_concept.set_range_factheirs(plan_concept_dict={}, range_inheritors={})
 
     # THEN
     assert ball_concept._factheirs == {}
@@ -225,11 +225,11 @@ def test_ConceptUnit_set_range_factheirs_SetsAttrNewFactHeir():
     ball_concept = conceptunit_shop(ball_str)
     ball_concept._set_factheir(wk_factheir)
     tue_reasonheirs = {tue_way: reasonheir_shop(tue_way, None, False)}
-    x_bud_concept_dict = {
+    x_plan_concept_dict = {
         wk_concept.get_concept_way(): wk_concept,
         tue_concept.get_concept_way(): tue_concept,
     }
-    ball_concept.set_reasonheirs(x_bud_concept_dict, tue_reasonheirs)
+    ball_concept.set_reasonheirs(x_plan_concept_dict, tue_reasonheirs)
 
     x_range_inheritors = {tue_way: wk_way}
     assert len(ball_concept._reasonheirs) == 1
@@ -239,7 +239,7 @@ def test_ConceptUnit_set_range_factheirs_SetsAttrNewFactHeir():
     assert ball_concept._factheirs.get(tue_way) is None
 
     # WHEN
-    ball_concept.set_range_factheirs(x_bud_concept_dict, x_range_inheritors)
+    ball_concept.set_range_factheirs(x_plan_concept_dict, x_range_inheritors)
 
     # THEN
     tue_popen = 113
@@ -302,7 +302,7 @@ def test_ConceptUnit_get_reasonheir_ReturnsObj():
     dirty_str = "dirty"
     x_reasonheir = reasonheir_shop(rcontext=dirty_str)
     x_reasonheirs = {x_reasonheir.rcontext: x_reasonheir}
-    clean_concept.set_reasonheirs(reasonheirs=x_reasonheirs, bud_concept_dict={})
+    clean_concept.set_reasonheirs(reasonheirs=x_reasonheirs, plan_concept_dict={})
 
     # WHEN
     z_reasonheir = clean_concept.get_reasonheir(rcontext=dirty_str)
@@ -319,7 +319,7 @@ def test_ConceptUnit_get_reasonheir_ReturnsNone():
     dirty_str = "dirty"
     x_reasonheir = reasonheir_shop(dirty_str)
     x_reasonheirs = {x_reasonheir.rcontext: x_reasonheir}
-    clean_concept.set_reasonheirs(reasonheirs=x_reasonheirs, bud_concept_dict={})
+    clean_concept.set_reasonheirs(reasonheirs=x_reasonheirs, plan_concept_dict={})
 
     # WHEN
     test6_str = "test6"

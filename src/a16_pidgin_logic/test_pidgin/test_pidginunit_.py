@@ -1,7 +1,7 @@
 from pytest import raises as pytest_raises
 from src.a01_term_logic.way import default_bridge_if_None
 from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
-from src.a06_bud_logic._test_util.a06_str import (
+from src.a06_plan_logic._test_util.a06_str import (
     LabelTerm_str,
     NameTerm_str,
     TitleTerm_str,
@@ -23,8 +23,8 @@ from src.a06_bud_logic._test_util.a06_str import (
     respect_bit_str,
 )
 from src.a07_calendar_logic._test_util.a07_str import timeline_label_str
-from src.a08_bud_atom_logic.atom_config import (
-    get_all_bud_dimen_delete_keys,
+from src.a08_plan_atom_logic.atom_config import (
+    get_all_plan_dimen_delete_keys,
     get_atom_args_class_types,
 )
 from src.a09_pack_logic._test_util.a09_str import face_name_str
@@ -241,17 +241,17 @@ def test_find_set_otx_inx_args_ReturnsObj_Scenario0_All_pidginable_args():
     assert otx_inx_args == expected_otx_inx_args
 
 
-def test_find_set_otx_inx_args_ReturnsObj_Scenario1_bud_dimen_delete_keys():
+def test_find_set_otx_inx_args_ReturnsObj_Scenario1_plan_dimen_delete_keys():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH
-    bud_dimen_delete_keys = get_all_bud_dimen_delete_keys()
+    plan_dimen_delete_keys = get_all_plan_dimen_delete_keys()
 
     # WHEN
-    otx_inx_args = find_set_otx_inx_args(bud_dimen_delete_keys)
+    otx_inx_args = find_set_otx_inx_args(plan_dimen_delete_keys)
 
     # THEN
     expected_otx_inx_args = set()
-    for pidginable_arg in bud_dimen_delete_keys:
+    for pidginable_arg in plan_dimen_delete_keys:
         expected_otx_inx_args.add(f"{pidginable_arg}_otx")
         expected_otx_inx_args.add(f"{pidginable_arg}_inx")
     print(f"{otx_inx_args=}")
@@ -262,15 +262,15 @@ def test_find_set_otx_inx_args_ReturnsObj_Scenario2_OtherArgsAreUntouched():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH
     run_str = "run"
-    given_bud_dimen_delete_keys = get_all_bud_dimen_delete_keys()
-    given_bud_dimen_delete_keys.add(run_str)
+    given_plan_dimen_delete_keys = get_all_plan_dimen_delete_keys()
+    given_plan_dimen_delete_keys.add(run_str)
 
     # WHEN
-    otx_inx_args = find_set_otx_inx_args(given_bud_dimen_delete_keys)
+    otx_inx_args = find_set_otx_inx_args(given_plan_dimen_delete_keys)
 
     # THEN
     expected_otx_inx_args = set()
-    for pidginable_arg in get_all_bud_dimen_delete_keys():
+    for pidginable_arg in get_all_plan_dimen_delete_keys():
         expected_otx_inx_args.add(f"{pidginable_arg}_otx")
         expected_otx_inx_args.add(f"{pidginable_arg}_inx")
     expected_otx_inx_args.add(run_str)
@@ -282,10 +282,10 @@ def test_find_set_otx_inx_args_ReturnsObj_Scenario3_PartialSets():
     # ESTABLISH
     healer_name_ERASE_str = f"{healer_name_str()}_ERASE"
     run_str = "run"
-    given_bud_dimen_delete_keys = {run_str, healer_name_ERASE_str}
+    given_plan_dimen_delete_keys = {run_str, healer_name_ERASE_str}
 
     # WHEN
-    otx_inx_args = find_set_otx_inx_args(given_bud_dimen_delete_keys)
+    otx_inx_args = find_set_otx_inx_args(given_plan_dimen_delete_keys)
 
     # THEN
     healer_name_ERASE_str = f"{healer_name_str()}_ERASE"

@@ -1,0 +1,42 @@
+{
+    "attributes": {
+        "concept_way": {
+            "otx_key": true
+        },
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "vow_label": {
+            "otx_key": true
+        },
+        "owner_name": {
+            "otx_key": true
+        },
+        "pdivisor": {
+            "otx_key": false
+        },
+        "pnigh": {
+            "otx_key": false
+        },
+        "popen": {
+            "otx_key": false
+        },
+        "pstate": {
+            "otx_key": true
+        },
+        "rcontext": {
+            "otx_key": true
+        }
+    },
+    "dimens": [
+        "vowunit",
+        "planunit",
+        "plan_conceptunit",
+        "plan_concept_reasonunit",
+        "plan_concept_reason_premiseunit"
+    ],
+    "idea_number": "br00026"
+}

@@ -1,4 +1,4 @@
-from src.a06_bud_logic.bud import budunit_shop
+from src.a06_plan_logic.plan import planunit_shop
 from src.a12_hub_tools.hubunit import hubunit_shop
 from src.a14_keep_logic._test_util.a14_env import temp_vow_mstr_dir
 from src.a14_keep_logic._test_util.example_credorledgers import (
@@ -133,9 +133,9 @@ def test_create_init_rivercycle_ReturnsObjScenarioOne_acctunit():
     yao_str = "Yao"
     x_vow_mstr_dir = temp_vow_mstr_dir()
     yao_hubunit = hubunit_shop(x_vow_mstr_dir, None, yao_str)
-    yao_bud = budunit_shop(yao_str)
-    yao_bud.add_acctunit(yao_str)
-    yao_credorledger = get_credorledger(yao_bud)
+    yao_plan = planunit_shop(yao_str)
+    yao_plan.add_acctunit(yao_str)
+    yao_credorledger = get_credorledger(yao_plan)
     keep_credorledgers = {yao_str: yao_credorledger}
 
     # WHEN
@@ -157,11 +157,11 @@ def test_create_init_rivercycle_ReturnsObjScenarioThree_acctunit():
     zia_credit_belief = 10
     x_vow_mstr_dir = temp_vow_mstr_dir()
     yao_hubunit = hubunit_shop(x_vow_mstr_dir, None, yao_str)
-    yao_bud = budunit_shop(yao_str)
-    yao_bud.add_acctunit(yao_str, yao_credit_belief)
-    yao_bud.add_acctunit(bob_str, bob_credit_belief)
-    yao_bud.add_acctunit(zia_str, zia_credit_belief)
-    yao_credorledger = get_credorledger(yao_bud)
+    yao_plan = planunit_shop(yao_str)
+    yao_plan.add_acctunit(yao_str, yao_credit_belief)
+    yao_plan.add_acctunit(bob_str, bob_credit_belief)
+    yao_plan.add_acctunit(zia_str, zia_credit_belief)
+    yao_credorledger = get_credorledger(yao_plan)
     keep_credorledgers = {yao_str: yao_credorledger}
     print(f"{keep_credorledgers=}")
 

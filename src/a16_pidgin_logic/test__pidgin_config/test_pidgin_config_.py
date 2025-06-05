@@ -1,6 +1,6 @@
 from os import getcwd as os_getcwd
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a08_bud_atom_logic._test_util.a08_str import (
+from src.a08_plan_atom_logic._test_util.a08_str import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,

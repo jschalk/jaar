@@ -1,7 +1,7 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
-from src.a06_bud_logic._test_util.a06_str import acct_name_str
+from src.a06_plan_logic._test_util.a06_str import acct_name_str
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic._test_util.a16_str import (
     inx_bridge_str,
@@ -98,16 +98,18 @@ VALUES
         assert get_row_count(cursor, br00117_valid_tablename) == 2
         assert get_row_count(cursor, br00045_valid_tablename) == 3
         pidwayy_s_raw_tablename = create_prime_tablename("PIDWAYY", "s", "raw")
-        budacct_s_put_raw_tblname = create_prime_tablename("BUDACCT", "s", "raw", "put")
+        planacct_s_put_raw_tblname = create_prime_tablename(
+            "PLANACCT", "s", "raw", "put"
+        )
         assert not db_table_exists(cursor, pidwayy_s_raw_tablename)
-        assert not db_table_exists(cursor, budacct_s_put_raw_tblname)
+        assert not db_table_exists(cursor, planacct_s_put_raw_tblname)
 
         # WHEN
         etl_brick_valid_tables_to_sound_raw_tables(cursor)
 
         # THEN
         assert get_row_count(cursor, pidwayy_s_raw_tablename) == 5
-        assert get_row_count(cursor, budacct_s_put_raw_tblname) == 2
+        assert get_row_count(cursor, planacct_s_put_raw_tblname) == 2
         b117 = "br00117"
         b045 = "br00045"
         ex_way0 = (b117, event1, sue_str, yao_str, yao_inx, None, None, None, None)
@@ -126,7 +128,7 @@ VALUES
         assert rows[3] == ex_way0
         assert rows[4] == ex_way1
 
-        select_agg_sqlstr = f"""SELECT * FROM {budacct_s_put_raw_tblname};"""
+        select_agg_sqlstr = f"""SELECT * FROM {planacct_s_put_raw_tblname};"""
         cursor.execute(select_agg_sqlstr)
         rows = cursor.fetchall()
         print(rows)
