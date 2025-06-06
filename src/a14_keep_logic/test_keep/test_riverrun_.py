@@ -113,7 +113,7 @@ def test_RiverRun_set_keep_credorledger_SetsAttr():
 
     # WHEN
     x_riverrun.set_keep_credorledger(
-        owner_name=yao_str, acct_name=yao_str, acct_credit_belief=yao_credit_belief
+        owner_name=yao_str, acct_name=yao_str, credit_ledger=yao_credit_belief
     )
 
     # THEN

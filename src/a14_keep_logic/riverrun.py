@@ -40,12 +40,12 @@ class RiverRun:
         self.cycle_max = get_positive_int(x_cycle_max)
 
     def set_keep_credorledger(
-        self, owner_name: OwnerName, acct_name: AcctName, acct_credit_belief: float
+        self, owner_name: OwnerName, acct_name: AcctName, credit_ledger: float
     ):
         set_in_nested_dict(
             x_dict=self.keep_credorledgers,
             x_keylist=[owner_name, acct_name],
-            x_obj=acct_credit_belief,
+            x_obj=credit_ledger,
         )
 
     def delete_keep_credorledgers_owner(self, owner_name: OwnerName):
