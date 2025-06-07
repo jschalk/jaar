@@ -77,9 +77,8 @@ def test_idea_brick_formats_MarkdownFileExists():
         # Basic validation
         assert "idea_number" in data, f"{json_path.name} missing 'idea_number'"
         assert "attributes" in data, f"{json_path.name} missing 'attributes'"
-        assert isinstance(
-            data["attributes"], dict
-        ), f"{json_path.name} has malformed 'attributes'"
+        assertion_fail_str = f"{json_path.name} has malformed 'attributes'"
+        assert isinstance(data["attributes"], dict), assertion_fail_str
 
         idea = data["idea_number"]
         attr_names = list(data["attributes"].keys())
@@ -104,6 +103,5 @@ def test_idea_brick_formats_MarkdownFileExists():
     output_path.write_text("# Idea Manifest\n\n" + "\n".join(manifest_lines))
     assert output_path.exists(), f"Failed to write manifest to {output_path}"
 
-    assert count_files(doc_ideas_dir) == len(
-        get_idea_numbers()
-    ), f"Expected {len(get_idea_numbers())} idea files, found {count_files(doc_ideas_dir)}"
+    assertion_fail_str = f"Expected {len(get_idea_numbers())} idea files, found {count_files(doc_ideas_dir)}"
+    assert count_files(doc_ideas_dir) == len(get_idea_numbers()), assertion_fail_str
