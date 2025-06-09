@@ -11,6 +11,37 @@ JAAR Version 0.0.0
 
 ## 0.0 About jaar
 
+'jaar' is a tool that helps me listen to the people important to me in my life.  I hope it can help you too. Let's assume I want to listen to you. If you give me a list of things that are important to you I want to be able to take your list, combine it with the lists of all the others I care about and get a output of a list of things I should do and metrics that describe my ability to do things . jaar does this for all   
+
+'jaar' is based on the philosohpy of Emmanuel Levinas (1906-1995) as expressed in his book "Totality and Infinity: An Essay on Exteriority" (translated by Lingis, 1969) and taught to me by Jules Simon PhD (born 1959) Professor at The University of Texas at El Paso (UTEP). I took Jules's course "Levinas: Phenomenology of the Ethical" in 2014 and am still working through the implications. The most important idea that motivated jaar was how Levinas describes murder as the act of not listening. It is painful to really listen, to listen in such a way as to not know what is going to be said. To take in the suffering of the other person and bring them into myself and change myself in ways that are by definition imaginable. Because if I could imagine them then they would not be a change. By definition I'm only listening if it changes me in ways I can't predict. 
+
+So how do I listen? jaar has an engine for converting the declarations (as data) into task lists. How to input the data? The most excessable method is using excel sheets. 
+
+  
+## 0.1 Short introduction to jaar excel sheets
+
+`jaar` is a python library for generating a calendar agenda based on the needs of my neighbors and in turn
+letting them know what I need. Needs can be expressed in Excel sheets that range in complexity from a simple
+five column single row (example below) to 10+ columns that include configuration options that are usually set
+to defaults.
+
+| event_int | face_name | vow_label | owner_name | acct_name |
+|-----------|-----------|-----------|------------|-----------|
+|    77     | Emmanuel  | OxboxDean |  Emmanuel  |    Dean   |
+
+A sheet with a single row like the example above can be processed by jaar. Jaar takes the sheet, creates a fiscal
+environemnt named "OxbowDean" and within that fiscal environment creates an owner named "Emmanuel" who has a plan.
+That plan involves listening to Dean. Consider this slightly more complex start:
+
+| event_int | face_name | vow_label | owner_name | acct_name | credit_belief | debtit_belief |
+|-----------|-----------|-----------|------------|-----------|---------------|---------------|
+|    77     | Emmanuel  | OxboxDean |  Emmanuel  |    Dean   |      100      |      15       |
+|    77     | Emmanuel  | OxboxDean |  Emmanuel  |  Emmanuel |       50      |      75       |
+|    78     |    Sue    | OxboxDean |     Sue    |     Sue   |       2       |       7       |
+|    78     |    Sue    | OxboxDean |     Sue    |     Sue   |       50      |      75       |
+
+
+
 `jaar` is a python library for listening to the climate of a community. Individual 
 positions are aggregated by a listener into a coherant agenda that can include tasks 
 to do and tasks of  of existence. Listening and acting on it.

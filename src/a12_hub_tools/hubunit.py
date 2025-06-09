@@ -187,7 +187,7 @@ class HubUnit:
     def pack_filename(self, pack_id: int) -> str:
         return get_json_filename(pack_id)
 
-    def pack_file_path(self, pack_id: int) -> bool:
+    def pack_file_path(self, pack_id: int) -> str:
         pack_filename = self.pack_filename(pack_id)
         return create_path(self._packs_dir, pack_filename)
 
