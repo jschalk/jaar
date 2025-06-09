@@ -1,125 +1,124 @@
-from src.a01_term_logic.way import (
-    FiscLabel,
-    WayTerm,
-    create_way,
-    create_way_from_labels,
-)
+from src.a01_term_logic.way import VowLabel, WayTerm, create_way, create_way_from_labels
 from src.a02_finance_logic.deal import DealUnit, dealunit_shop
-from src.a05_concept_logic.concept import get_default_fisc_label
-from src.a06_bud_logic._test_util.a06_str import (
+from src.a05_concept_logic.concept import get_default_vow_label
+from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
-    bud_acctunit_str,
-    bud_concept_factunit_str,
-    bud_conceptunit_str,
-    budunit_str,
     concept_way_str,
     fcontext_str,
     fnigh_str,
     fopen_str,
+    plan_acctunit_str,
+    plan_concept_factunit_str,
+    plan_conceptunit_str,
+    planunit_str,
 )
-from src.a08_bud_atom_logic._test_util.a08_str import DELETE_str, INSERT_str, UPDATE_str
-from src.a08_bud_atom_logic.atom import BudAtom, budatom_shop
-from src.a09_pack_logic.delta import BudDelta, buddelta_shop
+from src.a08_plan_atom_logic._test_util.a08_str import (
+    DELETE_str,
+    INSERT_str,
+    UPDATE_str,
+)
+from src.a08_plan_atom_logic.atom import PlanAtom, planatom_shop
+from src.a09_pack_logic.delta import PlanDelta, plandelta_shop
 from src.a09_pack_logic.pack import PackUnit, packunit_shop
 from src.a12_hub_tools._test_util.a12_env import get_module_temp_dir
 from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop
 
 
-def get_atom_example_conceptunit_sports(fisc_label: FiscLabel = None) -> BudAtom:
-    if not fisc_label:
-        fisc_label = "accord23"
+def get_atom_example_conceptunit_sports(vow_label: VowLabel = None) -> PlanAtom:
+    if not vow_label:
+        vow_label = "accord23"
     sports_str = "sports"
-    x_dimen = bud_conceptunit_str()
-    sports_way = create_way(fisc_label, sports_str)
-    insert_conceptunit_budatom = budatom_shop(x_dimen, INSERT_str())
-    insert_conceptunit_budatom.set_jkey(concept_way_str(), sports_way)
-    return insert_conceptunit_budatom
+    x_dimen = plan_conceptunit_str()
+    sports_way = create_way(vow_label, sports_str)
+    insert_conceptunit_planatom = planatom_shop(x_dimen, INSERT_str())
+    insert_conceptunit_planatom.set_jkey(concept_way_str(), sports_way)
+    return insert_conceptunit_planatom
 
 
-def get_atom_example_conceptunit_ball(fisc_label: FiscLabel = None) -> BudAtom:
-    if not fisc_label:
-        fisc_label = "accord23"
+def get_atom_example_conceptunit_ball(vow_label: VowLabel = None) -> PlanAtom:
+    if not vow_label:
+        vow_label = "accord23"
     sports_str = "sports"
-    sports_way = create_way(fisc_label, sports_str)
+    sports_way = create_way(vow_label, sports_str)
     ball_str = "basketball"
-    x_dimen = bud_conceptunit_str()
+    x_dimen = plan_conceptunit_str()
     bball_way = create_way(sports_way, ball_str)
-    insert_conceptunit_budatom = budatom_shop(x_dimen, INSERT_str())
-    insert_conceptunit_budatom.set_jkey(concept_way_str(), bball_way)
-    return insert_conceptunit_budatom
+    insert_conceptunit_planatom = planatom_shop(x_dimen, INSERT_str())
+    insert_conceptunit_planatom.set_jkey(concept_way_str(), bball_way)
+    return insert_conceptunit_planatom
 
 
-def get_atom_example_conceptunit_knee(fisc_label: FiscLabel = None) -> BudAtom:
-    if not fisc_label:
-        fisc_label = "accord23"
+def get_atom_example_conceptunit_knee(vow_label: VowLabel = None) -> PlanAtom:
+    if not vow_label:
+        vow_label = "accord23"
     sports_str = "sports"
-    sports_way = create_way(fisc_label, sports_str)
+    sports_way = create_way(vow_label, sports_str)
     knee_str = "knee"
     knee_begin = 1
     knee_close = 71
-    x_dimen = bud_conceptunit_str()
+    x_dimen = plan_conceptunit_str()
     begin_str = "begin"
     close_str = "close"
     knee_way = create_way(sports_way, knee_str)
-    insert_conceptunit_budatom = budatom_shop(x_dimen, INSERT_str())
-    insert_conceptunit_budatom.set_jkey(concept_way_str(), knee_way)
-    insert_conceptunit_budatom.set_jvalue(begin_str, knee_begin)
-    insert_conceptunit_budatom.set_jvalue(close_str, knee_close)
-    return insert_conceptunit_budatom
+    insert_conceptunit_planatom = planatom_shop(x_dimen, INSERT_str())
+    insert_conceptunit_planatom.set_jkey(concept_way_str(), knee_way)
+    insert_conceptunit_planatom.set_jvalue(begin_str, knee_begin)
+    insert_conceptunit_planatom.set_jvalue(close_str, knee_close)
+    return insert_conceptunit_planatom
 
 
-def get_atom_example_factunit_knee(fisc_label: FiscLabel = None) -> BudAtom:
-    if not fisc_label:
-        fisc_label = "accord23"
+def get_atom_example_factunit_knee(vow_label: VowLabel = None) -> PlanAtom:
+    if not vow_label:
+        vow_label = "accord23"
     sports_str = "sports"
-    sports_way = create_way(fisc_label, sports_str)
+    sports_way = create_way(vow_label, sports_str)
     ball_str = "basketball"
     ball_way = create_way(sports_way, ball_str)
     knee_str = "knee"
-    knee_way = create_way(fisc_label, knee_str)
+    knee_way = create_way(vow_label, knee_str)
     knee_fopen = 7
     knee_fnigh = 23
-    x_dimen = bud_concept_factunit_str()
-    insert_factunit_budatom = budatom_shop(x_dimen, INSERT_str())
-    insert_factunit_budatom.set_jkey(concept_way_str(), ball_way)
-    insert_factunit_budatom.set_jkey(fcontext_str(), knee_way)
-    insert_factunit_budatom.set_jvalue(fopen_str(), knee_fopen)
-    insert_factunit_budatom.set_jvalue(fnigh_str(), knee_fnigh)
-    return insert_factunit_budatom
+    x_dimen = plan_concept_factunit_str()
+    insert_factunit_planatom = planatom_shop(x_dimen, INSERT_str())
+    insert_factunit_planatom.set_jkey(concept_way_str(), ball_way)
+    insert_factunit_planatom.set_jkey(fcontext_str(), knee_way)
+    insert_factunit_planatom.set_jvalue(fopen_str(), knee_fopen)
+    insert_factunit_planatom.set_jvalue(fnigh_str(), knee_fnigh)
+    return insert_factunit_planatom
 
 
-def get_buddelta_sue_example() -> BudDelta:
-    sue_buddelta = buddelta_shop()
+def get_plandelta_sue_example() -> PlanDelta:
+    sue_plandelta = plandelta_shop()
 
-    pool_budatom = budatom_shop(budunit_str(), UPDATE_str())
+    pool_planatom = planatom_shop(planunit_str(), UPDATE_str())
     pool_attribute = "credor_respect"
-    pool_budatom.set_jvalue(pool_attribute, 77)
-    sue_buddelta.set_budatom(pool_budatom)
+    pool_planatom.set_jvalue(pool_attribute, 77)
+    sue_plandelta.set_planatom(pool_planatom)
 
-    dimen = bud_acctunit_str()
+    dimen = plan_acctunit_str()
     sue_str = "Sue"
-    sue_budatom = budatom_shop(dimen, DELETE_str())
-    sue_budatom.set_jkey(acct_name_str(), sue_str)
-    sue_buddelta.set_budatom(sue_budatom)
-    return sue_buddelta
+    sue_planatom = planatom_shop(dimen, DELETE_str())
+    sue_planatom.set_jkey(acct_name_str(), sue_str)
+    sue_plandelta.set_planatom(sue_planatom)
+    return sue_plandelta
 
 
 def get_texas_way() -> WayTerm:
-    fisc_label = get_default_fisc_label()
+    vow_label = get_default_vow_label()
     nation_str = "nation"
     usa_str = "USA"
     texas_str = "Texas"
-    return create_way_from_labels([fisc_label, nation_str, usa_str, texas_str])
+    return create_way_from_labels([vow_label, nation_str, usa_str, texas_str])
 
 
 def get_texas_hubunit() -> HubUnit:
-    fisc_label = get_default_fisc_label()
+    vow_label = get_default_vow_label()
     return hubunit_shop(
         get_module_temp_dir(),
-        fisc_label,
+        vow_label,
         owner_name="Sue",
         keep_way=get_texas_way(),
-        # pipeline_duty_plan_str(),
+        # pipeline_duty_vision_str(),
     )
 
 
@@ -127,33 +126,33 @@ def get_sue_packunit() -> PackUnit:
     return packunit_shop(owner_name="Sue", _pack_id=37, face_name="Yao")
 
 
-def sue_1budatoms_packunit() -> PackUnit:
+def sue_1planatoms_packunit() -> PackUnit:
     x_packunit = packunit_shop(owner_name="Sue", _pack_id=53, face_name="Yao")
-    x_packunit._buddelta.set_budatom(get_atom_example_conceptunit_sports())
+    x_packunit._plandelta.set_planatom(get_atom_example_conceptunit_sports())
     return x_packunit
 
 
-def sue_2budatoms_packunit() -> PackUnit:
+def sue_2planatoms_packunit() -> PackUnit:
     x_packunit = packunit_shop(owner_name="Sue", _pack_id=53, face_name="Yao")
-    x_packunit._buddelta.set_budatom(get_atom_example_conceptunit_knee())
-    x_packunit._buddelta.set_budatom(get_atom_example_conceptunit_sports())
+    x_packunit._plandelta.set_planatom(get_atom_example_conceptunit_knee())
+    x_packunit._plandelta.set_planatom(get_atom_example_conceptunit_sports())
     return x_packunit
 
 
-def sue_3budatoms_packunit() -> PackUnit:
+def sue_3planatoms_packunit() -> PackUnit:
     x_packunit = packunit_shop(owner_name="Sue", _pack_id=37, face_name="Yao")
-    x_packunit._buddelta.set_budatom(get_atom_example_factunit_knee())
-    x_packunit._buddelta.set_budatom(get_atom_example_conceptunit_ball())
-    x_packunit._buddelta.set_budatom(get_atom_example_conceptunit_knee())
+    x_packunit._plandelta.set_planatom(get_atom_example_factunit_knee())
+    x_packunit._plandelta.set_planatom(get_atom_example_conceptunit_ball())
+    x_packunit._plandelta.set_planatom(get_atom_example_conceptunit_knee())
     return x_packunit
 
 
-def sue_4budatoms_packunit() -> PackUnit:
+def sue_4planatoms_packunit() -> PackUnit:
     x_packunit = packunit_shop(owner_name="Sue", _pack_id=47, face_name="Yao")
-    x_packunit._buddelta.set_budatom(get_atom_example_factunit_knee())
-    x_packunit._buddelta.set_budatom(get_atom_example_conceptunit_ball())
-    x_packunit._buddelta.set_budatom(get_atom_example_conceptunit_knee())
-    x_packunit._buddelta.set_budatom(get_atom_example_conceptunit_sports())
+    x_packunit._plandelta.set_planatom(get_atom_example_factunit_knee())
+    x_packunit._plandelta.set_planatom(get_atom_example_conceptunit_ball())
+    x_packunit._plandelta.set_planatom(get_atom_example_conceptunit_knee())
+    x_packunit._plandelta.set_planatom(get_atom_example_conceptunit_sports())
     return x_packunit
 
 

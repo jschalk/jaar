@@ -1,11 +1,11 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
-from src.a02_finance_logic._test_util.a02_str import fisc_label_str, owner_name_str
-from src.a06_bud_logic._test_util.a06_str import (
+from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
+from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
-    bud_acctunit_str,
     credit_belief_str,
     debtit_belief_str,
+    plan_acctunit_str,
 )
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
@@ -13,9 +13,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_sound_and_voice_tables,
     get_insert_into_sound_vld_sqlstrs,
 )
-from src.a18_etl_toolbox.transformers import (
-    etl_sound_agg_tables_to_sound_vld_tables,
-)
+from src.a18_etl_toolbox.transformers import etl_sound_agg_tables_to_sound_vld_tables
 
 
 def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
@@ -37,12 +35,14 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_PopulatesTable_Scenario0()
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budaacct_s_agg_put_tablename = prime_tbl(bud_acctunit_str(), "s", "agg", "put")
-        print(f"{get_table_columns(cursor, budaacct_s_agg_put_tablename)=}")
-        insert_into_clause = f"""INSERT INTO {budaacct_s_agg_put_tablename} (
+        planaacct_s_agg_put_tablename = prime_tbl(
+            plan_acctunit_str(), "s", "agg", "put"
+        )
+        print(f"{get_table_columns(cursor, planaacct_s_agg_put_tablename)=}")
+        insert_into_clause = f"""INSERT INTO {planaacct_s_agg_put_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {fisc_label_str()}
+, {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_belief_str()}
@@ -57,25 +57,25 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        assert get_row_count(cursor, budaacct_s_agg_put_tablename) == 4
-        budawar_v_vld_put_tablename = prime_tbl(bud_acctunit_str(), "s", "vld", "put")
-        assert get_row_count(cursor, budawar_v_vld_put_tablename) == 0
+        assert get_row_count(cursor, planaacct_s_agg_put_tablename) == 4
+        planawar_v_vld_put_tablename = prime_tbl(plan_acctunit_str(), "s", "vld", "put")
+        assert get_row_count(cursor, planawar_v_vld_put_tablename) == 0
 
         # WHEN
-        sqlstr = get_insert_into_sound_vld_sqlstrs().get(budawar_v_vld_put_tablename)
+        sqlstr = get_insert_into_sound_vld_sqlstrs().get(planawar_v_vld_put_tablename)
         print(sqlstr)
         cursor.execute(sqlstr)
 
         # THEN
-        assert get_row_count(cursor, budawar_v_vld_put_tablename) == 4
+        assert get_row_count(cursor, planawar_v_vld_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
-, {fisc_label_str()}
+, {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_belief_str()}
 , {debtit_belief_str()}
-FROM {budawar_v_vld_put_tablename}
+FROM {planawar_v_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
@@ -107,12 +107,12 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario0_AddRowsToTable():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budacct_s_agg_put_tablename = prime_tbl(bud_acctunit_str(), "s", "agg", "put")
-        print(f"{get_table_columns(cursor, budacct_s_agg_put_tablename)=}")
-        insert_into_clause = f"""INSERT INTO {budacct_s_agg_put_tablename} (
+        planacct_s_agg_put_tablename = prime_tbl(plan_acctunit_str(), "s", "agg", "put")
+        print(f"{get_table_columns(cursor, planacct_s_agg_put_tablename)=}")
+        insert_into_clause = f"""INSERT INTO {planacct_s_agg_put_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {fisc_label_str()}
+, {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_belief_str()}
@@ -127,23 +127,23 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        assert get_row_count(cursor, budacct_s_agg_put_tablename) == 4
-        budacct_v_vld_put_tablename = prime_tbl(bud_acctunit_str(), "s", "vld", "put")
-        assert get_row_count(cursor, budacct_v_vld_put_tablename) == 0
+        assert get_row_count(cursor, planacct_s_agg_put_tablename) == 4
+        planacct_v_vld_put_tablename = prime_tbl(plan_acctunit_str(), "s", "vld", "put")
+        assert get_row_count(cursor, planacct_v_vld_put_tablename) == 0
 
         # WHEN
         etl_sound_agg_tables_to_sound_vld_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, budacct_v_vld_put_tablename) == 4
+        assert get_row_count(cursor, planacct_v_vld_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
-, {fisc_label_str()}
+, {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_belief_str()}
 , {debtit_belief_str()}
-FROM {budacct_v_vld_put_tablename}
+FROM {planacct_v_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
@@ -174,12 +174,12 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario1_Populates_Columns():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budacct_s_agg_put_tablename = prime_tbl(bud_acctunit_str(), "s", "agg", "put")
-        print(f"{get_table_columns(cursor, budacct_s_agg_put_tablename)=}")
-        insert_into_clause = f"""INSERT INTO {budacct_s_agg_put_tablename} (
+        planacct_s_agg_put_tablename = prime_tbl(plan_acctunit_str(), "s", "agg", "put")
+        print(f"{get_table_columns(cursor, planacct_s_agg_put_tablename)=}")
+        insert_into_clause = f"""INSERT INTO {planacct_s_agg_put_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {fisc_label_str()}
+, {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_belief_str()}
@@ -194,23 +194,23 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        assert get_row_count(cursor, budacct_s_agg_put_tablename) == 4
-        budacct_v_vld_put_tablename = prime_tbl(bud_acctunit_str(), "s", "vld", "put")
-        assert get_row_count(cursor, budacct_v_vld_put_tablename) == 0
+        assert get_row_count(cursor, planacct_s_agg_put_tablename) == 4
+        planacct_v_vld_put_tablename = prime_tbl(plan_acctunit_str(), "s", "vld", "put")
+        assert get_row_count(cursor, planacct_v_vld_put_tablename) == 0
 
         # WHEN
         etl_sound_agg_tables_to_sound_vld_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, budacct_v_vld_put_tablename) == 4
+        assert get_row_count(cursor, planacct_v_vld_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
-, {fisc_label_str()}
+, {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_belief_str()}
 , {debtit_belief_str()}
-FROM {budacct_v_vld_put_tablename}
+FROM {planacct_v_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
@@ -241,12 +241,12 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario2_DoesNotSelectWhere_e
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        budacct_s_agg_put_tablename = prime_tbl(bud_acctunit_str(), "s", "agg", "put")
-        print(f"{get_table_columns(cursor, budacct_s_agg_put_tablename)=}")
-        insert_into_clause = f"""INSERT INTO {budacct_s_agg_put_tablename} (
+        planacct_s_agg_put_tablename = prime_tbl(plan_acctunit_str(), "s", "agg", "put")
+        print(f"{get_table_columns(cursor, planacct_s_agg_put_tablename)=}")
+        insert_into_clause = f"""INSERT INTO {planacct_s_agg_put_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {fisc_label_str()}
+, {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_belief_str()}
@@ -262,23 +262,23 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        assert get_row_count(cursor, budacct_s_agg_put_tablename) == 4
-        budacct_v_vld_put_tablename = prime_tbl(bud_acctunit_str(), "s", "vld", "put")
-        assert get_row_count(cursor, budacct_v_vld_put_tablename) == 0
+        assert get_row_count(cursor, planacct_s_agg_put_tablename) == 4
+        planacct_v_vld_put_tablename = prime_tbl(plan_acctunit_str(), "s", "vld", "put")
+        assert get_row_count(cursor, planacct_v_vld_put_tablename) == 0
 
         # WHEN
         etl_sound_agg_tables_to_sound_vld_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, budacct_v_vld_put_tablename) == 3
+        assert get_row_count(cursor, planacct_v_vld_put_tablename) == 3
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
-, {fisc_label_str()}
+, {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_belief_str()}
 , {debtit_belief_str()}
-FROM {budacct_v_vld_put_tablename}
+FROM {planacct_v_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()

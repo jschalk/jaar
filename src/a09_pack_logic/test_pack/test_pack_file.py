@@ -3,7 +3,7 @@ from src.a00_data_toolbox.file_toolbox import create_path, open_json
 from src.a02_finance_logic._test_util.a02_str import owner_name_str
 from src.a09_pack_logic._test_util.a09_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir as fiscs_dir,
+    get_module_temp_dir as vows_dir,
 )
 from src.a09_pack_logic._test_util.a09_str import face_name_str
 from src.a09_pack_logic._test_util.example_atoms import (
@@ -11,14 +11,14 @@ from src.a09_pack_logic._test_util.example_atoms import (
     get_atom_example_conceptunit_knee,
     get_atom_example_conceptunit_sports,
 )
-from src.a09_pack_logic.delta import buddelta_shop
+from src.a09_pack_logic.delta import plandelta_shop
 from src.a09_pack_logic.pack import create_packunit_from_files, packunit_shop
 
 
 def test_PackUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
     # ESTABLISH
-    x_fisc_dir = create_path(fiscs_dir(), "accord23")
-    x_owners_dir = create_path(x_fisc_dir, "owners")
+    x_vow_dir = create_path(vows_dir(), "accord23")
+    x_owners_dir = create_path(x_vow_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = create_path(x_owners_dir, sue_str)
     sue_atoms_dir = create_path(sue_owner_dir, "atoms")
@@ -47,8 +47,8 @@ def test_PackUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
 
 def test_PackUnit_atom_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_fisc_dir = create_path(fiscs_dir(), "accord23")
-    x_owners_dir = create_path(x_fisc_dir, "owners")
+    x_vow_dir = create_path(vows_dir(), "accord23")
+    x_owners_dir = create_path(x_vow_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = create_path(x_owners_dir, sue_str)
     sue_atoms_dir = create_path(sue_owner_dir, "atoms")
@@ -74,8 +74,8 @@ def test_PackUnit_atom_file_exists_ReturnsObj(env_dir_setup_cleanup):
 
 def test_PackUnit_open_atom_file_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_fisc_dir = create_path(fiscs_dir(), "accord23")
-    x_owners_dir = create_path(x_fisc_dir, "owners")
+    x_vow_dir = create_path(vows_dir(), "accord23")
+    x_owners_dir = create_path(x_vow_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = create_path(x_owners_dir, sue_str)
     sue_atoms_dir = create_path(sue_owner_dir, "atoms")
@@ -101,8 +101,8 @@ def test_PackUnit_open_atom_file_ReturnsObj(env_dir_setup_cleanup):
 
 def test_PackUnit_save_pack_file_SavesCorrectFile(env_dir_setup_cleanup):
     # ESTABLISH
-    x_fisc_dir = create_path(fiscs_dir(), "accord23")
-    x_owners_dir = create_path(x_fisc_dir, "owners")
+    x_vow_dir = create_path(vows_dir(), "accord23")
+    x_owners_dir = create_path(x_vow_dir, "owners")
     sue_str = "Sue"
     sue_pack_id = 2
     sue_owner_dir = create_path(x_owners_dir, sue_str)
@@ -137,8 +137,8 @@ def test_PackUnit_save_pack_file_SavesCorrectFile(env_dir_setup_cleanup):
 
 def test_PackUnit_pack_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_fisc_dir = create_path(fiscs_dir(), "accord23")
-    x_owners_dir = create_path(x_fisc_dir, "owners")
+    x_vow_dir = create_path(vows_dir(), "accord23")
+    x_owners_dir = create_path(x_vow_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = create_path(x_owners_dir, sue_str)
     sue_packs_dir = create_path(sue_owner_dir, "packs")
@@ -163,8 +163,8 @@ def test_PackUnit_pack_file_exists_ReturnsObj(env_dir_setup_cleanup):
 
 def test_PackUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
     # ESTABLISH
-    x_fisc_dir = create_path(fiscs_dir(), "accord23")
-    x_owners_dir = create_path(x_fisc_dir, "owners")
+    x_vow_dir = create_path(vows_dir(), "accord23")
+    x_owners_dir = create_path(x_vow_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = create_path(x_owners_dir, sue_str)
     sue_atoms_dir = create_path(sue_owner_dir, "atoms")
@@ -183,8 +183,8 @@ def test_PackUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
     int5 = 5
     sports_atom = get_atom_example_conceptunit_sports()
     knee_atom = get_atom_example_conceptunit_knee()
-    sue_packunit._buddelta.set_budatom(sports_atom)
-    sue_packunit._buddelta.set_budatom(knee_atom)
+    sue_packunit._plandelta.set_planatom(sports_atom)
+    sue_packunit._plandelta.set_planatom(knee_atom)
     assert sue_packunit.pack_file_exists() is False
     assert sue_packunit.atom_file_exists(int4) is False
     assert sue_packunit.atom_file_exists(int5) is False
@@ -198,10 +198,10 @@ def test_PackUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
     assert sue_packunit.atom_file_exists(int5)
 
 
-def test_PackUnit_create_buddelta_from_atom_files_SetsAttr(env_dir_setup_cleanup):
+def test_PackUnit_create_plandelta_from_atom_files_SetsAttr(env_dir_setup_cleanup):
     # ESTABLISH
-    x_fisc_dir = create_path(fiscs_dir(), "accord23")
-    x_owners_dir = create_path(x_fisc_dir, "owners")
+    x_vow_dir = create_path(vows_dir(), "accord23")
+    x_owners_dir = create_path(x_vow_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = create_path(x_owners_dir, sue_str)
     sue_atoms_dir = create_path(sue_owner_dir, "atoms")
@@ -216,25 +216,25 @@ def test_PackUnit_create_buddelta_from_atom_files_SetsAttr(env_dir_setup_cleanup
     sue_packunit._save_atom_file(int4, spor_atom)
     sue_packunit._save_atom_file(int5, knee_atom)
     sue_packunit._save_atom_file(int9, ball_atom)
-    assert sue_packunit._buddelta == buddelta_shop()
+    assert sue_packunit._plandelta == plandelta_shop()
 
     # WHEN
     atoms_list = [int4, int5, int9]
-    sue_packunit._create_buddelta_from_atom_files(atoms_list)
+    sue_packunit._create_plandelta_from_atom_files(atoms_list)
 
     # THEN
-    static_buddelta = buddelta_shop()
-    static_buddelta.set_budatom(spor_atom)
-    static_buddelta.set_budatom(knee_atom)
-    static_buddelta.set_budatom(ball_atom)
-    assert sue_packunit._buddelta != buddelta_shop()
-    assert sue_packunit._buddelta == static_buddelta
+    static_plandelta = plandelta_shop()
+    static_plandelta.set_planatom(spor_atom)
+    static_plandelta.set_planatom(knee_atom)
+    static_plandelta.set_planatom(ball_atom)
+    assert sue_packunit._plandelta != plandelta_shop()
+    assert sue_packunit._plandelta == static_plandelta
 
 
 def test_create_packunit_from_files_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_fisc_dir = create_path(fiscs_dir(), "accord23")
-    x_owners_dir = create_path(x_fisc_dir, "owners")
+    x_vow_dir = create_path(vows_dir(), "accord23")
+    x_owners_dir = create_path(x_vow_dir, "owners")
     sue_str = "Sue"
     sue_owner_dir = create_path(x_owners_dir, sue_str)
     sue_atoms_dir = create_path(sue_owner_dir, "atoms")
@@ -250,9 +250,9 @@ def test_create_packunit_from_files_ReturnsObj(env_dir_setup_cleanup):
     sports_atom = get_atom_example_conceptunit_sports()
     knee_atom = get_atom_example_conceptunit_knee()
     ball_atom = get_atom_example_conceptunit_ball()
-    src_sue_packunit._buddelta.set_budatom(sports_atom)
-    src_sue_packunit._buddelta.set_budatom(knee_atom)
-    src_sue_packunit._buddelta.set_budatom(ball_atom)
+    src_sue_packunit._plandelta.set_planatom(sports_atom)
+    src_sue_packunit._plandelta.set_planatom(knee_atom)
+    src_sue_packunit._plandelta.set_planatom(ball_atom)
     src_sue_packunit.save_files()
 
     # WHEN
@@ -265,4 +265,4 @@ def test_create_packunit_from_files_ReturnsObj(env_dir_setup_cleanup):
     # THEN
     assert src_sue_packunit.owner_name == new_sue_packunit.owner_name
     assert src_sue_packunit.face_name == new_sue_packunit.face_name
-    assert src_sue_packunit._buddelta == new_sue_packunit._buddelta
+    assert src_sue_packunit._plandelta == new_sue_packunit._plandelta

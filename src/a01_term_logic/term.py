@@ -24,8 +24,8 @@ class AxiomLabel(LabelTerm):
     pass
 
 
-class FiscLabel(AxiomLabel):  # Created to help track the object class relations
-    """An AxiomLabel for a Fisc Moment. Cannot contain bridge"""
+class VowLabel(AxiomLabel):  # Created to help track the object class relations
+    """An AxiomLabel for a Vow Vow. Cannot contain bridge"""
 
     pass
 
@@ -41,7 +41,7 @@ class NameTerm(str):
 
 
 class OwnerName(NameTerm):
-    """A NameTerm used to identify a BudUnit's owner"""
+    """A NameTerm used to identify a PlanUnit's owner"""
 
     pass
 

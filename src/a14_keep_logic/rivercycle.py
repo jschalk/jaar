@@ -6,22 +6,22 @@ from src.a00_data_toolbox.dict_toolbox import (
 )
 from src.a01_term_logic.term import AcctName, OwnerName
 from src.a02_finance_logic.allot import allot_scale
-from src.a06_bud_logic.bud import BudUnit
+from src.a06_plan_logic.plan import PlanUnit
 from src.a12_hub_tools.hubunit import HubUnit
 
 
-def get_credorledger(x_bud: BudUnit) -> dict[AcctName, float]:
+def get_credorledger(x_plan: PlanUnit) -> dict[AcctName, float]:
     return {
         acctunit.acct_name: acctunit.credit_belief
-        for acctunit in x_bud.accts.values()
+        for acctunit in x_plan.accts.values()
         if acctunit.credit_belief > 0
     }
 
 
-def get_debtorledger(x_bud: BudUnit) -> dict[AcctName, float]:
+def get_debtorledger(x_plan: PlanUnit) -> dict[AcctName, float]:
     return {
         acctunit.acct_name: acctunit.debtit_belief
-        for acctunit in x_bud.accts.values()
+        for acctunit in x_plan.accts.values()
         if acctunit.debtit_belief > 0
     }
 
@@ -78,11 +78,11 @@ class RiverCycle:
     def create_cylceledger(self) -> dict[AcctName, float]:
         x_dict = {}
         for x_riverbook in self.riverbooks.values():
-            for payee, pay_amount in x_riverbook._rivergrants.items():
-                if x_dict.get(payee) is None:
-                    x_dict[payee] = pay_amount
+            for chargeee, charge_amount in x_riverbook._rivergrants.items():
+                if x_dict.get(chargeee) is None:
+                    x_dict[chargeee] = charge_amount
                 else:
-                    x_dict[payee] = x_dict[payee] + pay_amount
+                    x_dict[chargeee] = x_dict[chargeee] + charge_amount
         return x_dict
 
 
@@ -117,8 +117,8 @@ def create_next_rivercycle(
         number=prev_rivercycle.number + 1,
         keep_credorledgers=prev_rivercycle.keep_credorledgers,
     )
-    for payer_id, paying_amount in prev_cycle_cycleledger_post_tax.items():
-        next_rivercycle.set_riverbook(payer_id, paying_amount)
+    for chargeer_id, chargeing_amount in prev_cycle_cycleledger_post_tax.items():
+        next_rivercycle.set_riverbook(chargeer_id, chargeing_amount)
     return next_rivercycle
 
 
@@ -158,7 +158,7 @@ class RiverGrade:
 
     def get_dict(self) -> dict:
         return {
-            "fisc_label": self.hubunit.fisc_label,
+            "vow_label": self.hubunit.vow_label,
             "healer_name": self.hubunit.owner_name,
             "keep_way": self.hubunit.keep_way,
             "tax_bill_amount": self.tax_bill_amount,

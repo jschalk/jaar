@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, get_dir_file_strs
-from src.a06_bud_logic._test_util.a06_str import (
+from src.a06_plan_logic._test_util.a06_str import (
     LabelTerm_str,
     NameTerm_str,
     TitleTerm_str,
@@ -24,7 +24,7 @@ from src.a16_pidgin_logic._test_util.example_pidgins import (
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
 from src.a17_idea_logic._test_util.a17_env import (
     env_dir_setup_cleanup,
-    idea_fiscs_dir as get_example_face_dir,
+    idea_vows_dir as get_example_face_dir,
 )
 from src.a17_idea_logic.idea_db_tool import (
     get_idea_elements_sort_order as sorting_columns,

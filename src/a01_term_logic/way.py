@@ -2,8 +2,8 @@ from pathlib import Path as pathlib_Path
 from src.a00_data_toolbox.file_toolbox import is_path_valid
 from src.a01_term_logic.term import (
     AxiomLabel,
-    FiscLabel,
     LabelTerm,
+    VowLabel,
     WayTerm,
     YawTerm,
     default_bridge_if_None,

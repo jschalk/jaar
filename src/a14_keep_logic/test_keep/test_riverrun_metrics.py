@@ -243,15 +243,15 @@ def test_RiverRun_calc_metrics_EndsRiverCycleLoopIfNoDifferencesBetweenCycles():
     assert x_riverrun.get_acct_tax_due(yao_str) == 0
     assert x_riverrun.get_acct_tax_due(bob_str) == keep_money_amount
     assert x_riverrun._cycle_count == 0
-    assert x_riverrun._cycle_payees_prev == set()
-    assert x_riverrun._cycle_payees_curr == set()
+    assert x_riverrun._cycle_chargeees_prev == set()
+    assert x_riverrun._cycle_chargeees_curr == set()
 
     # WHEN
     x_riverrun.calc_metrics()
 
     # THEN
-    assert x_riverrun._cycle_payees_prev == {yao_str}
-    assert x_riverrun._cycle_payees_curr == {yao_str}
+    assert x_riverrun._cycle_chargeees_prev == {yao_str}
+    assert x_riverrun._cycle_chargeees_curr == {yao_str}
     assert x_riverrun.get_acct_tax_due(yao_str) == 0
     assert x_riverrun.get_acct_tax_due(bob_str) == keep_money_amount
     assert x_riverrun._cycle_count == 1

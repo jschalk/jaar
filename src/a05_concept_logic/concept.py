@@ -9,8 +9,8 @@ from src.a00_data_toolbox.dict_toolbox import (
 )
 from src.a01_term_logic.term import AcctName, GroupTitle, LabelTerm
 from src.a01_term_logic.way import (
-    FiscLabel,
     LabelTerm,
+    VowLabel,
     WayTerm,
     all_wayterms_between,
     create_way,
@@ -22,9 +22,9 @@ from src.a01_term_logic.way import (
 )
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import (
-    FundCoin,
+    FundIota,
     FundNum,
-    default_fund_coin_if_None,
+    default_fund_iota_if_None,
 )
 from src.a03_group_logic.group import (
     AwardHeir,
@@ -63,11 +63,6 @@ from src.a05_concept_logic.healer import (
     healerlink_get_from_dict,
     healerlink_shop,
 )
-from src.a05_concept_logic.origin import (
-    OriginUnit,
-    originunit_get_from_dict,
-    originunit_shop,
-)
 from src.a05_concept_logic.range_toolbox import RangeUnit, get_morphed_rangeunit
 
 
@@ -79,7 +74,7 @@ class ConceptGetDescendantsException(Exception):
     pass
 
 
-def get_default_fisc_label() -> FiscLabel:
+def get_default_vow_label() -> VowLabel:
     return "ZZ"
 
 
@@ -114,9 +109,9 @@ class ConceptAttrHolder:
     numor: float = None
     denom: float = None
     morph: bool = None
-    pledge: bool = None
+    task: bool = None
     factunit: FactUnit = None
-    descendant_pledge_count: int = None
+    descendant_task_count: int = None
     all_acct_cred: bool = None
     all_acct_debt: bool = None
     awardlink: AwardLink = None
@@ -161,9 +156,9 @@ def conceptattrholder_shop(
     numor: float = None,
     denom: float = None,
     morph: bool = None,
-    pledge: bool = None,
+    task: bool = None,
     factunit: FactUnit = None,
-    descendant_pledge_count: int = None,
+    descendant_task_count: int = None,
     all_acct_cred: bool = None,
     all_acct_debt: bool = None,
     awardlink: AwardLink = None,
@@ -193,9 +188,9 @@ def conceptattrholder_shop(
         numor=numor,
         denom=denom,
         morph=morph,
-        pledge=pledge,
+        task=task,
         factunit=factunit,
-        descendant_pledge_count=descendant_pledge_count,
+        descendant_task_count=descendant_task_count,
         all_acct_cred=all_acct_cred,
         all_acct_debt=all_acct_debt,
         awardlink=awardlink,
@@ -212,7 +207,7 @@ class ConceptUnit:
     parent_way: WayTerm = None
     root: bool = None
     _kids: dict[WayTerm,] = None
-    fisc_label: FiscLabel = None
+    vow_label: VowLabel = None
     _uid: int = None  # Calculated field?
     awardlinks: dict[GroupTitle, AwardLink] = None
     reasonunits: dict[WayTerm, ReasonUnit] = None
@@ -227,8 +222,7 @@ class ConceptUnit:
     morph: bool = None
     gogo_want: bool = None
     stop_want: bool = None
-    pledge: bool = None
-    _originunit: OriginUnit = None
+    task: bool = None
     problem_bool: bool = None
     bridge: str = None
     _is_expanded: bool = None
@@ -239,24 +233,24 @@ class ConceptUnit:
     _all_acct_debt: bool = None
     _awardheirs: dict[GroupTitle, AwardHeir] = None
     _awardlines: dict[GroupTitle, AwardLine] = None
-    _descendant_pledge_count: int = None
+    _descendant_task_count: int = None
     _factheirs: dict[WayTerm, FactHeir] = None
     _fund_ratio: float = None
-    fund_coin: FundCoin = None
+    fund_iota: FundIota = None
     _fund_onset: FundNum = None
     _fund_cease: FundNum = None
     _healerlink_ratio: float = None
     _level: int = None
     _range_evaluated: bool = None
     _reasonheirs: dict[WayTerm, ReasonHeir] = None
-    _task: bool = None
+    _chore: bool = None
     _laborheir: LaborHeir = None
     _gogo_calc: float = None
     _stop_calc: float = None
 
     def is_agenda_concept(self, necessary_rcontext: WayTerm = None) -> bool:
         rcontext_reasonunit_exists = self.rcontext_reasonunit_exists(necessary_rcontext)
-        return self.pledge and self._active and rcontext_reasonunit_exists
+        return self.task and self._active and rcontext_reasonunit_exists
 
     def rcontext_reasonunit_exists(self, necessary_rcontext: WayTerm = None) -> bool:
         x_reasons = self.reasonunits.values()
@@ -326,9 +320,9 @@ class ConceptUnit:
         return get_dict_from_factunits(self.factunits)
 
     def set_factunit_to_complete(self, fcontextunit: FactUnit):
-        # if a concept is considered a task then a factheir.fopen attribute can be increased to
-        # a number <= factheir.fnigh so the concept no longer is a task. This method finds
-        # the minimal factheir.fopen to modify concept._task is False. concept_core._factheir cannot be straight up manipulated
+        # if a concept is considered a chore then a factheir.fopen attribute can be increased to
+        # a number <= factheir.fnigh so the concept no longer is a chore. This method finds
+        # the minimal factheir.fopen to modify concept._chore is False. concept_core._factheir cannot be straight up manipulated
         # so it is mandatory that concept._factunit is different.
         # self.set_factunits(rcontext=fact, fact=rcontext, popen=pnigh, pnigh=fnigh)
         self.factunits[fcontextunit.fcontext] = factunit_shop(
@@ -395,16 +389,16 @@ class ConceptUnit:
         else:
             return create_way(self.parent_way, self.concept_label, bridge=self.bridge)
 
-    def clear_descendant_pledge_count(self):
-        self._descendant_pledge_count = None
+    def clear_descendant_task_count(self):
+        self._descendant_task_count = None
 
-    def set_descendant_pledge_count_zero_if_None(self):
-        if self._descendant_pledge_count is None:
-            self._descendant_pledge_count = 0
+    def set_descendant_task_count_zero_if_None(self):
+        if self._descendant_task_count is None:
+            self._descendant_task_count = 0
 
-    def add_to_descendant_pledge_count(self, x_int: int):
-        self.set_descendant_pledge_count_zero_if_None()
-        self._descendant_pledge_count += x_int
+    def add_to_descendant_task_count(self, x_int: int):
+        self.set_descendant_task_count_zero_if_None()
+        self._descendant_task_count += x_int
 
     def get_descendant_ways_from_kids(self) -> dict[WayTerm, int]:
         descendant_ways = {}
@@ -487,8 +481,8 @@ class ConceptUnit:
             give_ledger[x_awardee_title] = x_awardheir.give_force
             take_ledger[x_awardee_title] = x_awardheir.take_force
         x_fund_share = self.get_fund_share()
-        give_allot = allot_scale(give_ledger, x_fund_share, self.fund_coin)
-        take_allot = allot_scale(take_ledger, x_fund_share, self.fund_coin)
+        give_allot = allot_scale(give_ledger, x_fund_share, self.fund_iota)
+        take_allot = allot_scale(take_ledger, x_fund_share, self.fund_iota)
         for x_awardee_title, x_awardheir in self._awardheirs.items():
             x_awardheir._fund_give = give_allot.get(x_awardee_title)
             x_awardheir._fund_take = take_allot.get(x_awardee_title)
@@ -500,13 +494,13 @@ class ConceptUnit:
         if (
             self.root
             and concept_label is not None
-            and concept_label != self.fisc_label
-            and self.fisc_label is not None
+            and concept_label != self.vow_label
+            and self.vow_label is not None
         ):
             raise Concept_root_LabelNotEmptyException(
-                f"Cannot set conceptroot to string different than '{self.fisc_label}'"
+                f"Cannot set conceptroot to string different than '{self.vow_label}'"
             )
-        elif self.root and self.fisc_label is None:
+        elif self.root and self.vow_label is None:
             self.concept_label = root_label()
         # elif concept_label is not None:
         else:
@@ -550,13 +544,6 @@ class ConceptUnit:
             x_factunit.set_attr(fstate=new_fstate_way)
             new_factunits[new_rcontext_way] = x_factunit
         self.factunits = new_factunits
-
-    def set_originunit_empty_if_None(self):
-        if self._originunit is None:
-            self._originunit = originunit_shop()
-
-    def get_originunit_dict(self) -> dict[str, str]:
-        return self._originunit.get_dict()
 
     def _set_attrs_to_conceptunit(self, concept_attr: ConceptAttrHolder):
         if concept_attr.mass is not None:
@@ -604,8 +591,8 @@ class ConceptUnit:
             self.denom = concept_attr.denom
         if concept_attr.morph is not None:
             self.morph = concept_attr.morph
-        if concept_attr.descendant_pledge_count is not None:
-            self._descendant_pledge_count = concept_attr.descendant_pledge_count
+        if concept_attr.descendant_task_count is not None:
+            self._descendant_task_count = concept_attr.descendant_task_count
         if concept_attr.all_acct_cred is not None:
             self._all_acct_cred = concept_attr.all_acct_cred
         if concept_attr.all_acct_debt is not None:
@@ -616,8 +603,8 @@ class ConceptUnit:
             self.del_awardlink(awardee_title=concept_attr.awardlink_del)
         if concept_attr.is_expanded is not None:
             self._is_expanded = concept_attr.is_expanded
-        if concept_attr.pledge is not None:
-            self.pledge = concept_attr.pledge
+        if concept_attr.task is not None:
+            self.task = concept_attr.task
         if concept_attr.factunit is not None:
             self.set_factunit(concept_attr.factunit)
         if concept_attr.problem_bool is not None:
@@ -779,47 +766,49 @@ class ConceptUnit:
         self,
         tree_traverse_count: int,
         groupunits: dict[GroupTitle, GroupUnit] = None,
-        bud_owner_name: AcctName = None,
+        plan_owner_name: AcctName = None,
     ):
         prev_to_now_active = deepcopy(self._active)
-        self._active = self._create_active_bool(groupunits, bud_owner_name)
-        self._set_concept_task()
+        self._active = self._create_active_bool(groupunits, plan_owner_name)
+        self._set_concept_chore()
         self.record_active_hx(tree_traverse_count, prev_to_now_active, self._active)
 
-    def _set_concept_task(self):
-        self._task = False
-        if self.pledge and self._active and self._reasonheirs_satisfied():
-            self._task = True
+    def _set_concept_chore(self):
+        self._chore = False
+        if self.task and self._active and self._reasonheirs_satisfied():
+            self._chore = True
 
     def _reasonheirs_satisfied(self) -> bool:
-        return self._reasonheirs == {} or self._any_reasonheir_task_true()
+        return self._reasonheirs == {} or self._any_reasonheir_chore_true()
 
-    def _any_reasonheir_task_true(self) -> bool:
-        return any(x_reasonheir._task for x_reasonheir in self._reasonheirs.values())
+    def _any_reasonheir_chore_true(self) -> bool:
+        return any(x_reasonheir._chore for x_reasonheir in self._reasonheirs.values())
 
     def _create_active_bool(
-        self, groupunits: dict[GroupTitle, GroupUnit], bud_owner_name: AcctName
+        self, groupunits: dict[GroupTitle, GroupUnit], plan_owner_name: AcctName
     ) -> bool:
         self.set_reasonheirs_status()
         active_bool = self._are_all_reasonheir_active_true()
         if (
             active_bool
             and groupunits != {}
-            and bud_owner_name is not None
+            and plan_owner_name is not None
             and self._laborheir._laborlinks != {}
         ):
-            self._laborheir.set_owner_name_labor(groupunits, bud_owner_name)
+            self._laborheir.set_owner_name_labor(groupunits, plan_owner_name)
             if self._laborheir._owner_name_labor is False:
                 active_bool = False
         return active_bool
 
     def set_range_factheirs(
-        self, bud_concept_dict: dict[WayTerm,], range_inheritors: dict[WayTerm, WayTerm]
+        self,
+        plan_concept_dict: dict[WayTerm,],
+        range_inheritors: dict[WayTerm, WayTerm],
     ):
         for reason_rcontext in self._reasonheirs.keys():
             if range_root_way := range_inheritors.get(reason_rcontext):
                 all_concepts = all_concepts_between(
-                    bud_concept_dict, range_root_way, reason_rcontext
+                    plan_concept_dict, range_root_way, reason_rcontext
                 )
                 self._create_factheir(all_concepts, range_root_way, reason_rcontext)
 
@@ -854,7 +843,7 @@ class ConceptUnit:
         return new_reasonheirs
 
     def set_reasonheirs(
-        self, bud_concept_dict: dict[WayTerm,], reasonheirs: dict[WayTerm, ReasonCore]
+        self, plan_concept_dict: dict[WayTerm,], reasonheirs: dict[WayTerm, ReasonCore]
     ):
         coalesced_reasons = self._coalesce_with_reasonunits(reasonheirs)
         self._reasonheirs = {}
@@ -864,7 +853,7 @@ class ConceptUnit:
             new_reasonheir = reasonheir_shop(old_rcontext, None, old_active_requisite)
             new_reasonheir.inherit_from_reasonheir(old_reasonheir)
 
-            if rcontext_concept := bud_concept_dict.get(old_reasonheir.rcontext):
+            if rcontext_concept := plan_concept_dict.get(old_reasonheir.rcontext):
                 new_reasonheir.set_rconcept_active_value(rcontext_concept._active)
             self._reasonheirs[new_reasonheir.rcontext] = new_reasonheir
 
@@ -919,8 +908,6 @@ class ConceptUnit:
             x_dict["healerlink"] = self.healerlink.get_dict()
         if self.awardlinks not in [{}, None]:
             x_dict["awardlinks"] = self.get_awardlinks_dict()
-        if self._originunit not in [None, originunit_shop()]:
-            x_dict["originunit"] = self.get_originunit_dict()
         if self.begin is not None:
             x_dict["begin"] = self.begin
         if self.close is not None:
@@ -937,8 +924,8 @@ class ConceptUnit:
             x_dict["gogo_want"] = self.gogo_want
         if self.stop_want is not None:
             x_dict["stop_want"] = self.stop_want
-        if self.pledge:
-            x_dict["pledge"] = self.pledge
+        if self.task:
+            x_dict["task"] = self.task
         if self.problem_bool:
             x_dict["problem_bool"] = self.problem_bool
         if self.factunits not in [{}, None]:
@@ -1004,20 +991,19 @@ def conceptunit_shop(
     denom: int = None,
     numor: int = None,
     morph: bool = None,
-    pledge: bool = None,
-    _originunit: OriginUnit = None,
+    task: bool = None,
     root: bool = None,
-    fisc_label: FiscLabel = None,
+    vow_label: VowLabel = None,
     problem_bool: bool = None,
     # Calculated fields
     _level: int = None,
     _fund_ratio: float = None,
-    fund_coin: FundCoin = None,
+    fund_iota: FundIota = None,
     _fund_onset: FundNum = None,
     _fund_cease: FundNum = None,
-    _task: bool = None,
+    _chore: bool = None,
     _active: bool = None,
-    _descendant_pledge_count: int = None,
+    _descendant_task_count: int = None,
     _all_acct_cred: bool = None,
     _all_acct_debt: bool = None,
     _is_expanded: bool = True,
@@ -1025,7 +1011,7 @@ def conceptunit_shop(
     bridge: str = None,
     _healerlink_ratio: float = None,
 ) -> ConceptUnit:
-    fisc_label = get_default_fisc_label() if fisc_label is None else fisc_label
+    vow_label = get_default_vow_label() if vow_label is None else vow_label
     x_healerlink = healerlink_shop() if healerlink is None else healerlink
 
     x_conceptkid = ConceptUnit(
@@ -1052,20 +1038,19 @@ def conceptunit_shop(
         denom=denom,
         numor=numor,
         morph=morph,
-        pledge=get_False_if_None(pledge),
+        task=get_False_if_None(task),
         problem_bool=get_False_if_None(problem_bool),
-        _originunit=_originunit,
         root=get_False_if_None(root),
-        fisc_label=fisc_label,
+        vow_label=vow_label,
         # Calculated fields
         _level=_level,
         _fund_ratio=_fund_ratio,
-        fund_coin=default_fund_coin_if_None(fund_coin),
+        fund_iota=default_fund_iota_if_None(fund_iota),
         _fund_onset=_fund_onset,
         _fund_cease=_fund_cease,
-        _task=_task,
+        _chore=_chore,
         _active=_active,
-        _descendant_pledge_count=_descendant_pledge_count,
+        _descendant_task_count=_descendant_task_count,
         _all_acct_cred=_all_acct_cred,
         _all_acct_debt=_all_acct_debt,
         _is_expanded=_is_expanded,
@@ -1074,11 +1059,10 @@ def conceptunit_shop(
         _healerlink_ratio=get_0_if_None(_healerlink_ratio),
     )
     if x_conceptkid.root:
-        x_conceptkid.set_concept_label(concept_label=fisc_label)
+        x_conceptkid.set_concept_label(concept_label=vow_label)
     else:
         x_conceptkid.set_concept_label(concept_label=concept_label)
     x_conceptkid.set_laborunit_empty_if_None()
-    x_conceptkid.set_originunit_empty_if_None()
     return x_conceptkid
 
 
@@ -1101,12 +1085,6 @@ def get_obj_from_concept_dict(x_dict: dict[str, dict], dict_key: str) -> any:
             if x_dict.get(dict_key) is not None
             else healerlink_shop()
         )
-    elif dict_key == "originunit":
-        return (
-            originunit_get_from_dict(x_dict[dict_key])
-            if x_dict.get(dict_key) is not None
-            else originunit_shop()
-        )
     elif dict_key == "factunits":
         facts_dict = get_empty_dict_if_None(x_dict.get(dict_key))
         return factunits_get_from_dict(facts_dict)
@@ -1118,7 +1096,7 @@ def get_obj_from_concept_dict(x_dict: dict[str, dict], dict_key: str) -> any:
         )
     elif dict_key in {"_kids"}:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else {}
-    elif dict_key in {"pledge", "problem_bool"}:
+    elif dict_key in {"task", "problem_bool"}:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else False
     elif dict_key in {"_is_expanded"}:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else True
@@ -1127,12 +1105,12 @@ def get_obj_from_concept_dict(x_dict: dict[str, dict], dict_key: str) -> any:
 
 
 def all_concepts_between(
-    bud_concept_dict: dict[WayTerm, ConceptUnit],
+    plan_concept_dict: dict[WayTerm, ConceptUnit],
     src_way: WayTerm,
     dst_rcontext: WayTerm,
 ) -> list[ConceptUnit]:
     all_ways = all_wayterms_between(src_way, dst_rcontext)
-    return [bud_concept_dict.get(x_way) for x_way in all_ways]
+    return [plan_concept_dict.get(x_way) for x_way in all_ways]
 
 
 def concepts_calculated_range(

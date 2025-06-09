@@ -1,9 +1,9 @@
 from src.a01_term_logic._test_util.a01_str import bridge_str, parent_way_str
 from src.a01_term_logic.way import create_way, default_bridge_if_None
-from src.a02_finance_logic._test_util.a02_str import fisc_label_str, fund_coin_str
-from src.a02_finance_logic.finance_config import default_fund_coin_if_None
+from src.a02_finance_logic._test_util.a02_str import fund_iota_str, vow_label_str
+from src.a02_finance_logic.finance_config import default_fund_iota_if_None
 from src.a03_group_logic.group import awardlink_shop
-from src.a04_reason_logic._test_util.a04_str import _task_str
+from src.a04_reason_logic._test_util.a04_str import _chore_str
 from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a05_concept_logic._test_util.a05_str import (
     _active_hx_str,
@@ -11,7 +11,7 @@ from src.a05_concept_logic._test_util.a05_str import (
     _all_acct_debt_str,
     _awardheirs_str,
     _awardlines_str,
-    _descendant_pledge_count_str,
+    _descendant_task_count_str,
     _factheirs_str,
     _fund_cease_str,
     _fund_onset_str,
@@ -20,7 +20,6 @@ from src.a05_concept_logic._test_util.a05_str import (
     _healerlink_ratio_str,
     _is_expanded_str,
     _kids_str,
-    _originunit_str,
     _range_evaluated_str,
     _reasonheirs_str,
     _stop_calc_str,
@@ -31,28 +30,27 @@ from src.a05_concept_logic._test_util.a05_str import (
     close_str,
     concept_label_str,
     denom_str,
-    fisc_label_str,
-    fund_coin_str,
+    fund_iota_str,
     gogo_want_str,
     healerlink_str,
     mass_str,
     morph_str,
     numor_str,
-    pledge_str,
     problem_bool_str,
     stop_want_str,
+    task_str,
+    vow_label_str,
 )
 from src.a05_concept_logic.concept import (
     ConceptUnit,
     conceptunit_shop,
-    get_default_fisc_label,
+    get_default_vow_label,
 )
 from src.a05_concept_logic.healer import healerlink_shop
-from src.a05_concept_logic.origin import originunit_shop
 
 
-def test_get_default_fisc_label_ReturnsObj():
-    assert get_default_fisc_label() == "ZZ"
+def test_get_default_vow_label_ReturnsObj():
+    assert get_default_vow_label() == "ZZ"
 
 
 def test_ConceptUnit_Exists():
@@ -71,7 +69,6 @@ def test_ConceptUnit_Exists():
     assert x_conceptunit.awardlinks is None
     assert x_conceptunit._awardlines is None  # calculated field'
     assert x_conceptunit._awardheirs is None  # calculated field'
-    assert x_conceptunit._originunit is None
     assert x_conceptunit.bridge is None
     assert x_conceptunit.begin is None
     assert x_conceptunit.close is None
@@ -81,25 +78,25 @@ def test_ConceptUnit_Exists():
     assert x_conceptunit.morph is None
     assert x_conceptunit.gogo_want is None
     assert x_conceptunit.stop_want is None
-    assert x_conceptunit.pledge is None
+    assert x_conceptunit.task is None
     assert x_conceptunit.problem_bool is None
     assert x_conceptunit.healerlink is None
     # calculated_fields
     assert x_conceptunit._range_evaluated is None
     assert x_conceptunit._gogo_calc is None
     assert x_conceptunit._stop_calc is None
-    assert x_conceptunit._descendant_pledge_count is None
+    assert x_conceptunit._descendant_task_count is None
     assert x_conceptunit._is_expanded is None
     assert x_conceptunit._all_acct_cred is None
     assert x_conceptunit._all_acct_debt is None
     assert x_conceptunit._level is None
     assert x_conceptunit._active_hx is None
     assert x_conceptunit._fund_ratio is None
-    assert x_conceptunit.fund_coin is None
+    assert x_conceptunit.fund_iota is None
     assert x_conceptunit._fund_onset is None
     assert x_conceptunit._fund_cease is None
     assert x_conceptunit.root is None
-    assert x_conceptunit.fisc_label is None
+    assert x_conceptunit.vow_label is None
     assert x_conceptunit._healerlink_ratio is None
     obj_attrs = set(x_conceptunit.__dict__.keys())
     print(sorted(list(obj_attrs)))
@@ -110,7 +107,7 @@ def test_ConceptUnit_Exists():
         _all_acct_debt_str(),
         _awardheirs_str(),
         _awardlines_str(),
-        _descendant_pledge_count_str(),
+        _descendant_task_count_str(),
         _factheirs_str(),
         _fund_cease_str(),
         _fund_onset_str(),
@@ -121,11 +118,10 @@ def test_ConceptUnit_Exists():
         _kids_str(),
         "_laborheir",
         "_level",
-        _originunit_str(),
         _range_evaluated_str(),
         _reasonheirs_str(),
         _stop_calc_str(),
-        "_task",
+        "_chore",
         _uid_str(),
         addin_str(),
         "awardlinks",
@@ -135,8 +131,8 @@ def test_ConceptUnit_Exists():
         concept_label_str(),
         denom_str(),
         "factunits",
-        fisc_label_str(),
-        fund_coin_str(),
+        vow_label_str(),
+        fund_iota_str(),
         gogo_want_str(),
         healerlink_str(),
         "laborunit",
@@ -144,7 +140,7 @@ def test_ConceptUnit_Exists():
         morph_str(),
         numor_str(),
         parent_way_str(),
-        pledge_str(),
+        task_str(),
         problem_bool_str(),
         "reasonunits",
         "root",
@@ -161,7 +157,7 @@ def test_conceptunit_shop_WithNoParametersReturnsObj():
     assert x_conceptunit._kids == {}
     assert x_conceptunit.mass == 1
     assert x_conceptunit.concept_label is None
-    assert x_conceptunit.fisc_label == get_default_fisc_label()
+    assert x_conceptunit.vow_label == get_default_vow_label()
     assert x_conceptunit._uid is None
     assert x_conceptunit.begin is None
     assert x_conceptunit.close is None
@@ -169,9 +165,9 @@ def test_conceptunit_shop_WithNoParametersReturnsObj():
     assert x_conceptunit.numor is None
     assert x_conceptunit.denom is None
     assert x_conceptunit.morph is None
-    assert x_conceptunit.pledge is False
+    assert x_conceptunit.task is False
     assert x_conceptunit.problem_bool is False
-    assert x_conceptunit._descendant_pledge_count is None
+    assert x_conceptunit._descendant_task_count is None
     assert x_conceptunit._awardlines == {}
     assert x_conceptunit.awardlinks == {}
     assert x_conceptunit._awardheirs == {}
@@ -184,14 +180,13 @@ def test_conceptunit_shop_WithNoParametersReturnsObj():
     assert x_conceptunit._level is None
     assert x_conceptunit._active_hx == {}
     assert x_conceptunit._fund_ratio is None
-    assert x_conceptunit.fund_coin == default_fund_coin_if_None()
+    assert x_conceptunit.fund_iota == default_fund_iota_if_None()
     assert x_conceptunit._fund_onset is None
     assert x_conceptunit._fund_cease is None
     assert x_conceptunit.reasonunits == {}
     assert x_conceptunit._reasonheirs == {}
     assert x_conceptunit.laborunit == laborunit_shop()
     assert x_conceptunit._laborheir is None
-    assert x_conceptunit._originunit == originunit_shop()
     assert x_conceptunit.bridge == default_bridge_if_None()
     assert x_conceptunit.root is False
     assert x_conceptunit._all_acct_cred is None
@@ -222,17 +217,17 @@ def test_conceptunit_shop_NonNoneParametersReturnsObj():
     # ESTABLISH
     x_healerlink = healerlink_shop({"Sue", "Yao"})
     x_problem_bool = True
-    x_fund_coin = 88
+    x_fund_iota = 88
 
     # WHEN
     x_conceptunit = conceptunit_shop(
-        healerlink=x_healerlink, problem_bool=x_problem_bool, fund_coin=x_fund_coin
+        healerlink=x_healerlink, problem_bool=x_problem_bool, fund_iota=x_fund_iota
     )
 
     # THEN
     assert x_conceptunit.healerlink == x_healerlink
     assert x_conceptunit.problem_bool == x_problem_bool
-    assert x_conceptunit.fund_coin == x_fund_coin
+    assert x_conceptunit.fund_iota == x_fund_iota
 
 
 def test_conceptunit_shop_ReturnsObjWith_awardlinks():
@@ -276,7 +271,7 @@ def test_conceptunit_shop_ReturnsObjWithParameters():
 def test_ConceptUnit_get_obj_key_ReturnsObj():
     # ESTABLISH
     round_str = "round_stuff"
-    round_way = create_way(get_default_fisc_label(), round_str)
+    round_way = create_way(get_default_vow_label(), round_str)
     ball_str = "ball"
 
     # WHEN
@@ -290,7 +285,7 @@ def test_ConceptUnit_get_way_ReturnsObj():
     # ESTABLISH
     round_str = "round_stuff"
     slash_str = "/"
-    round_way = create_way(get_default_fisc_label(), round_str, bridge=slash_str)
+    round_way = create_way(get_default_vow_label(), round_str, bridge=slash_str)
     ball_str = "ball"
 
     # WHEN
@@ -305,50 +300,50 @@ def test_ConceptUnit_set_parent_way_SetsAttr():
     # ESTABLISH
     round_str = "round_stuff"
     slash_str = "/"
-    round_way = create_way(get_default_fisc_label(), round_str, bridge=slash_str)
+    round_way = create_way(get_default_vow_label(), round_str, bridge=slash_str)
     ball_str = "ball"
     ball_concept = conceptunit_shop(ball_str, parent_way=round_way, bridge=slash_str)
     assert ball_concept.parent_way == round_way
 
     # WHEN
-    sports_way = create_way(get_default_fisc_label(), "sports", bridge=slash_str)
+    sports_way = create_way(get_default_vow_label(), "sports", bridge=slash_str)
     ball_concept.set_parent_way(parent_way=sports_way)
 
     # THEN
     assert ball_concept.parent_way == sports_way
 
 
-def test_ConceptUnit_clear_descendant_pledge_count_ClearsCorrectly():
+def test_ConceptUnit_clear_descendant_task_count_ClearsCorrectly():
     # ESTABLISH
     ball_str = "ball"
-    ball_concept = conceptunit_shop(ball_str, _descendant_pledge_count=55)
-    assert ball_concept._descendant_pledge_count == 55
+    ball_concept = conceptunit_shop(ball_str, _descendant_task_count=55)
+    assert ball_concept._descendant_task_count == 55
 
     # WHEN
-    ball_concept.clear_descendant_pledge_count()
+    ball_concept.clear_descendant_task_count()
 
     # THEN
-    assert ball_concept._descendant_pledge_count is None
+    assert ball_concept._descendant_task_count is None
 
 
-def test_ConceptUnit_add_to_descendant_pledge_count_CorrectlyAdds():
+def test_ConceptUnit_add_to_descendant_task_count_CorrectlyAdds():
     # ESTABLISH
     ball_str = "ball"
-    ball_concept = conceptunit_shop(ball_str, _descendant_pledge_count=55)
-    ball_concept.clear_descendant_pledge_count()
-    assert ball_concept._descendant_pledge_count is None
+    ball_concept = conceptunit_shop(ball_str, _descendant_task_count=55)
+    ball_concept.clear_descendant_task_count()
+    assert ball_concept._descendant_task_count is None
 
     # WHEN
-    ball_concept.add_to_descendant_pledge_count(44)
+    ball_concept.add_to_descendant_task_count(44)
 
     # THEN
-    assert ball_concept._descendant_pledge_count == 44
+    assert ball_concept._descendant_task_count == 44
 
     # WHEN
-    ball_concept.add_to_descendant_pledge_count(33)
+    ball_concept.add_to_descendant_task_count(33)
 
     # THEN
-    assert ball_concept._descendant_pledge_count == 77
+    assert ball_concept._descendant_task_count == 77
 
 
 def test_ConceptUnit_is_math_ReturnsObj():

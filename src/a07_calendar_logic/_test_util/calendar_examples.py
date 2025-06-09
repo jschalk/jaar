@@ -3,7 +3,7 @@ from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scat
 from src.a00_data_toolbox.file_toolbox import open_json
 from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
 from src.a05_concept_logic.concept import ConceptUnit
-from src.a06_bud_logic.bud import BudUnit, budunit_shop
+from src.a06_plan_logic.plan import PlanUnit, planunit_shop
 from src.a07_calendar_logic._test_util.a07_env import get_module_examples_dir
 from src.a07_calendar_logic._test_util.a07_str import (
     c400_number_str,
@@ -94,16 +94,16 @@ def creg_hour_int_label(x_int: int) -> str:
     return creg_hours_list()[x_int][0]
 
 
-def add_time_creg_conceptunit(x_budunit: BudUnit) -> BudUnit:
-    return add_newtimeline_conceptunit(x_budunit, get_creg_config())
+def add_time_creg_conceptunit(x_planunit: PlanUnit) -> PlanUnit:
+    return add_newtimeline_conceptunit(x_planunit, get_creg_config())
 
 
-def add_time_five_conceptunit(x_budunit: BudUnit) -> BudUnit:
-    return add_newtimeline_conceptunit(x_budunit, get_five_config())
+def add_time_five_conceptunit(x_planunit: PlanUnit) -> PlanUnit:
+    return add_newtimeline_conceptunit(x_planunit, get_five_config())
 
 
-def add_time_squirt_conceptunit(x_budunit: BudUnit) -> BudUnit:
-    return add_newtimeline_conceptunit(x_budunit, get_squirt_config())
+def add_time_squirt_conceptunit(x_planunit: PlanUnit) -> PlanUnit:
+    return add_newtimeline_conceptunit(x_planunit, get_squirt_config())
 
 
 def get_creg_min_from_dt(dt: datetime) -> int:
@@ -149,16 +149,16 @@ def display_current_creg_five_min(graphics_bool: bool):
 def display_current_creg_five_time_attrs(graphics_bool: bool):
     if graphics_bool:
         current_datetime = datetime.now()
-        sue_bud = budunit_shop("Sue")
-        sue_bud = add_time_creg_conceptunit(sue_bud)
-        sue_bud = add_time_five_conceptunit(sue_bud)
-        time_way = sue_bud.make_l1_way("time")
-        creg_way = sue_bud.make_way(time_way, creg_str())
-        five_way = sue_bud.make_way(time_way, five_str())
+        sue_plan = planunit_shop("Sue")
+        sue_plan = add_time_creg_conceptunit(sue_plan)
+        sue_plan = add_time_five_conceptunit(sue_plan)
+        time_way = sue_plan.make_l1_way("time")
+        creg_way = sue_plan.make_way(time_way, creg_str())
+        five_way = sue_plan.make_way(time_way, five_str())
         creg_min = get_creg_min_from_dt(current_datetime)
         five_min = get_five_min_from_dt(current_datetime)
-        creg_chronounit = chronounit_shop(sue_bud, creg_way, creg_min)
-        five_chronounit = chronounit_shop(sue_bud, five_way, five_min)
+        creg_chronounit = chronounit_shop(sue_plan, creg_way, creg_min)
+        five_chronounit = chronounit_shop(sue_plan, five_way, five_min)
         creg_chronounit.calc_timeline()
         five_chronounit.calc_timeline()
         creg_blurb = f"<b>{creg_chronounit.get_blurb()}</b>"
@@ -186,20 +186,20 @@ def display_current_creg_five_time_attrs(graphics_bool: bool):
 def display_creg_five_squirt_time_attrs(graphics_bool: bool):
     if graphics_bool:
         current_datetime = datetime(2031, 2, 17, 7, 47)
-        sue_bud = budunit_shop("Sue")
-        sue_bud = add_time_creg_conceptunit(sue_bud)
-        sue_bud = add_time_five_conceptunit(sue_bud)
-        sue_bud = add_time_squirt_conceptunit(sue_bud)
-        time_way = sue_bud.make_l1_way("time")
-        creg_way = sue_bud.make_way(time_way, creg_str())
-        five_way = sue_bud.make_way(time_way, five_str())
-        squirt_way = sue_bud.make_way(time_way, "squirt")
+        sue_plan = planunit_shop("Sue")
+        sue_plan = add_time_creg_conceptunit(sue_plan)
+        sue_plan = add_time_five_conceptunit(sue_plan)
+        sue_plan = add_time_squirt_conceptunit(sue_plan)
+        time_way = sue_plan.make_l1_way("time")
+        creg_way = sue_plan.make_way(time_way, creg_str())
+        five_way = sue_plan.make_way(time_way, five_str())
+        squirt_way = sue_plan.make_way(time_way, "squirt")
         creg_min = get_creg_min_from_dt(current_datetime)
         five_min = get_five_min_from_dt(current_datetime)
         squirt_min = get_squirt_min_from_dt(current_datetime)
-        creg_chronounit = chronounit_shop(sue_bud, creg_way, creg_min)
-        five_chronounit = chronounit_shop(sue_bud, five_way, five_min)
-        squirt_chronounit = chronounit_shop(sue_bud, squirt_way, squirt_min)
+        creg_chronounit = chronounit_shop(sue_plan, creg_way, creg_min)
+        five_chronounit = chronounit_shop(sue_plan, five_way, five_min)
+        squirt_chronounit = chronounit_shop(sue_plan, squirt_way, squirt_min)
         creg_chronounit.calc_timeline()
         five_chronounit.calc_timeline()
         squirt_chronounit.calc_timeline()

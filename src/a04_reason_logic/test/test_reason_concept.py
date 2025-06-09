@@ -173,7 +173,7 @@ def test_ReasonHeir_set_rconcept_active_value_Correctly():
     assert day_reason._rconcept_active_value
 
 
-def test_ReasonHeir_set_status_BudTrueCorrectlySetsStatusTrue():
+def test_ReasonHeir_set_status_PlanTrueCorrectlySetsStatusTrue():
     # ESTABLISH
     wkday_str = "wkday"
     wkday_way = create_way(root_label(), wkday_str)
@@ -188,7 +188,7 @@ def test_ReasonHeir_set_status_BudTrueCorrectlySetsStatusTrue():
     assert wk_reason._status is True
 
 
-def test_ReasonHeir_set_status_BudFalseCorrectlySetsStatusTrue():
+def test_ReasonHeir_set_status_PlanFalseCorrectlySetsStatusTrue():
     # ESTABLISH
     wkday_str = "wkday"
     wkday_way = create_way(root_label(), wkday_str)
@@ -203,7 +203,7 @@ def test_ReasonHeir_set_status_BudFalseCorrectlySetsStatusTrue():
     assert wkday_reason._status is True
 
 
-def test_ReasonHeir_set_status_BudTrueCorrectlySetsStatusFalse():
+def test_ReasonHeir_set_status_PlanTrueCorrectlySetsStatusFalse():
     # ESTABLISH
     wkday_str = "wkday"
     wkday_way = create_way(root_label(), wkday_str)
@@ -218,7 +218,7 @@ def test_ReasonHeir_set_status_BudTrueCorrectlySetsStatusFalse():
     assert wkday_reason._status is False
 
 
-def test_ReasonHeir_set_status_BudNoneCorrectlySetsStatusFalse():
+def test_ReasonHeir_set_status_PlanNoneCorrectlySetsStatusFalse():
     # ESTABLISH
     wkday_str = "wkday"
     wkday_way = create_way(root_label(), wkday_str)
@@ -345,7 +345,7 @@ def test_reasons_get_from_dict_ReturnsObj():
     assert reasonunits_dict.get(wkday_reasonunit.rcontext) == wkday_reasonunit
 
 
-def test_ReasonHeir_correctSetsPledgeState():
+def test_ReasonHeir_correctSetsTaskState():
     # ESTABLISH
     day_str = "ced_day"
     day_way = create_way(root_label(), day_str)
@@ -360,7 +360,7 @@ def test_ReasonHeir_correctSetsPledgeState():
     range_3_to_6_reason.set_status(factheirs=range_5_to_8_facts)
     # THEN
     assert range_3_to_6_reason._status is True
-    assert range_3_to_6_reason._task is True
+    assert range_3_to_6_reason._chore is True
 
     # WHEN
     range_5_to_6_fact = factheir_shop(day_way, day_way, fopen=5, fnigh=6)
@@ -368,7 +368,7 @@ def test_ReasonHeir_correctSetsPledgeState():
     range_3_to_6_reason.set_status(factheirs=range_5_to_6_facts)
     # THEN
     assert range_3_to_6_reason._status is True
-    assert range_3_to_6_reason._task is False
+    assert range_3_to_6_reason._chore is False
 
     # WHEN
     range_0_to_1_fact = factheir_shop(day_way, day_way, fopen=0, fnigh=1)
@@ -376,7 +376,7 @@ def test_ReasonHeir_correctSetsPledgeState():
     range_3_to_6_reason.set_status(factheirs=range_0_to_1_facts)
     # THEN
     assert range_3_to_6_reason._status is False
-    assert range_3_to_6_reason._task is None
+    assert range_3_to_6_reason._chore is None
 
 
 def test_ReasonCore_get_premises_count():

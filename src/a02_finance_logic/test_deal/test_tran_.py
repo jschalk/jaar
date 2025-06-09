@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.a02_finance_logic._test_util.a02_str import acct_name_str, fisc_label_str
+from src.a02_finance_logic._test_util.a02_str import acct_name_str, vow_label_str
 from src.a02_finance_logic.deal import (
     TranBook,
     TranUnit,
@@ -46,7 +46,7 @@ def test_TranBook_Exists():
 
     # THEN
     assert x_tranbook
-    assert not x_tranbook.fisc_label
+    assert not x_tranbook.vow_label
     assert not x_tranbook.tranunits
     assert not x_tranbook._accts_net
 
@@ -65,7 +65,7 @@ def test_tranbook_shop_WithParametersReturnsObj():
 
     # THEN
     assert x_tranbook
-    assert x_tranbook.fisc_label == accord23_str
+    assert x_tranbook.vow_label == accord23_str
     assert x_tranbook.tranunits == x_tranunits
     assert x_tranbook._accts_net == {}
 
@@ -79,7 +79,7 @@ def test_tranbook_shop_WithoutParametersReturnsObj():
 
     # THEN
     assert x_tranbook
-    assert x_tranbook.fisc_label == accord23_str
+    assert x_tranbook.vow_label == accord23_str
     assert x_tranbook.tranunits == {}
     assert x_tranbook._accts_net == {}
 
@@ -619,8 +619,8 @@ def test_TranBook_get_dict_ReturnsObj():
     # THEN
     tranunits_str = "tranunits"
     assert x_dict
-    assert fisc_label_str() in x_dict.keys()
-    assert x_dict.get(fisc_label_str()) == accord23_str
+    assert vow_label_str() in x_dict.keys()
+    assert x_dict.get(vow_label_str()) == accord23_str
     assert tranunits_str in x_dict.keys()
     tranunits_dict = x_dict.get(tranunits_str)
     assert tranunits_dict.get(sue_str)
@@ -662,7 +662,7 @@ def test_get_tranbook_from_dict_ReturnsObj_Sccenario0():
 
     # THEN
     assert generated_tranbook
-    assert generated_tranbook.fisc_label == accord23_str
+    assert generated_tranbook.vow_label == accord23_str
     assert generated_tranbook.tranunits == accord23_tranbook.tranunits
     assert generated_tranbook == accord23_tranbook
 
@@ -687,7 +687,7 @@ def test_get_tranbook_from_dict_ReturnsObj_Sccenario1():
     accord23_tranbook.add_tranunit(yao_str, yao_str, t77_tran_time, t77_yao_amount)
 
     str_tran_time_accord23_dict = {
-        "fisc_label": accord23_str,
+        "vow_label": accord23_str,
         "tranunits": {
             sue_str: {
                 yao_str: {
@@ -705,7 +705,7 @@ def test_get_tranbook_from_dict_ReturnsObj_Sccenario1():
 
     # THEN
     assert generated_tranbook
-    assert generated_tranbook.fisc_label == accord23_str
+    assert generated_tranbook.vow_label == accord23_str
     assert generated_tranbook.tranunits == accord23_tranbook.tranunits
     assert generated_tranbook == accord23_tranbook
 

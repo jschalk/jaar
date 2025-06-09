@@ -1,22 +1,20 @@
 from src.a01_term_logic.term import AcctName, OwnerName
-from src.a06_bud_logic.bud import budunit_shop
+from src.a06_plan_logic.plan import planunit_shop
 from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop
 from src.a14_keep_logic._test_util.a14_env import (
     get_module_temp_dir,
     get_texas_way,
-    temp_fisc_label,
+    temp_vow_label,
 )
 from src.a14_keep_logic.rivercycle import get_credorledger
 
 
 def example_yao_hubunit() -> HubUnit:
-    return hubunit_shop(get_module_temp_dir(), temp_fisc_label(), "Yao")
+    return hubunit_shop(get_module_temp_dir(), temp_vow_label(), "Yao")
 
 
 def example_yao_texas_hubunit() -> HubUnit:
-    return hubunit_shop(
-        get_module_temp_dir(), temp_fisc_label(), "Yao", get_texas_way()
-    )
+    return hubunit_shop(get_module_temp_dir(), temp_vow_label(), "Yao", get_texas_way())
 
 
 def example_yao_credorledger() -> dict[str, float]:
@@ -26,11 +24,11 @@ def example_yao_credorledger() -> dict[str, float]:
     yao_credit_belief = 7
     bob_credit_belief = 3
     zia_credit_belief = 10
-    yao_bud = budunit_shop(yao_str)
-    yao_bud.add_acctunit(yao_str, yao_credit_belief)
-    yao_bud.add_acctunit(bob_str, bob_credit_belief)
-    yao_bud.add_acctunit(zia_str, zia_credit_belief)
-    return get_credorledger(yao_bud)
+    yao_plan = planunit_shop(yao_str)
+    yao_plan.add_acctunit(yao_str, yao_credit_belief)
+    yao_plan.add_acctunit(bob_str, bob_credit_belief)
+    yao_plan.add_acctunit(zia_str, zia_credit_belief)
+    return get_credorledger(yao_plan)
 
 
 def example_bob_credorledger() -> dict[str, float]:
@@ -40,11 +38,11 @@ def example_bob_credorledger() -> dict[str, float]:
     yao_credit_belief = 1
     bob_credit_belief = 7
     zia_credit_belief = 42
-    bob_bud = budunit_shop(bob_str)
-    bob_bud.add_acctunit(yao_str, yao_credit_belief)
-    bob_bud.add_acctunit(bob_str, bob_credit_belief)
-    bob_bud.add_acctunit(zia_str, zia_credit_belief)
-    return get_credorledger(bob_bud)
+    bob_plan = planunit_shop(bob_str)
+    bob_plan.add_acctunit(yao_str, yao_credit_belief)
+    bob_plan.add_acctunit(bob_str, bob_credit_belief)
+    bob_plan.add_acctunit(zia_str, zia_credit_belief)
+    return get_credorledger(bob_plan)
 
 
 def example_zia_credorledger() -> dict[str, float]:
@@ -54,11 +52,11 @@ def example_zia_credorledger() -> dict[str, float]:
     yao_credit_belief = 89
     bob_credit_belief = 150
     zia_credit_belief = 61
-    zia_bud = budunit_shop(zia_str)
-    zia_bud.add_acctunit(yao_str, yao_credit_belief)
-    zia_bud.add_acctunit(bob_str, bob_credit_belief)
-    zia_bud.add_acctunit(zia_str, zia_credit_belief)
-    return get_credorledger(zia_bud)
+    zia_plan = planunit_shop(zia_str)
+    zia_plan.add_acctunit(yao_str, yao_credit_belief)
+    zia_plan.add_acctunit(bob_str, bob_credit_belief)
+    zia_plan.add_acctunit(zia_str, zia_credit_belief)
+    return get_credorledger(zia_plan)
 
 
 def example_yao_bob_zia_credorledgers() -> dict[OwnerName : dict[AcctName, float]]:

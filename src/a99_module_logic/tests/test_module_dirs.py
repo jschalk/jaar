@@ -1,4 +1,5 @@
 from os.path import basename as os_path_basename, exists as os_path_exists
+from pathlib import Path as pathlib_Path
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a99_module_logic.module_eval import (
     check_if_module_str_funcs_is_sorted,
@@ -23,6 +24,7 @@ def test_ModuleStrFunctionsTestFileFormat():
     # WHEN / THEN
     # previous_module_number = -1
     for module_desc, module_dir in get_module_descs().items():
+        print(f"{module_desc=} {module_dir=}")
         module_number = int(module_desc[1:3])
         # assert module_number == previous_module_number + 1
         print(f"{module_desc=} {module_number=}")
@@ -69,6 +71,18 @@ def test_PythonFileImportsFormat():
 
 
 def test_StrFunctionsAreAssertTested():
+    """
+    Test that all string-related functions in each module directory are properly asserted and tested.
+    This test performs the following checks for each module:
+    - Retrieves all string functions and ensures they are sorted and not duplicated.
+    - Verifies that if string functions exist, a corresponding test file exists in the module's utility directory.
+    - Checks that the test file imports exactly one object and that imports are ordered.
+    - Ensures the test file contains a single test function named 'test_str_functions_ReturnsObj'.
+    - Validates that the test file includes the necessary assertions for all string functions.
+    Raises:
+        AssertionError: If any of the above conditions are not met.
+    """
+
     # sourcery skip: no-loop-in-tests
     # sourcery skip: no-conditionals-in-tests
     # ESTABLISH
@@ -128,3 +142,31 @@ def test_StrFunctionsAppearWhereTheyShould():
                         if x_str_func_name not in str_funcs_set:
                             print(f"missing {x_str=} {file_path=}")
                         assert x_str_func_name in str_funcs_set
+
+
+def test_str_funcs_MarkdownFileExists():
+    # Gather lines here
+    doc_main_dir = pathlib_Path("docs")
+    doc_main_dir.mkdir(parents=True, exist_ok=True)
+
+    func_lines = ["## Str Functions by Module"]
+    for module_desc, module_dir in get_module_descs().items():
+        desc_number_str = module_desc[1:3]
+        module_str_funcs = get_module_str_functions(module_dir, desc_number_str)
+        x_list = []
+        for str_func in module_str_funcs:
+            x_list.append(str_func[:-4])
+        _line = f"- {module_desc}: " + ", ".join(x_list)
+        func_lines.append(_line)
+
+    # Where the str function list
+    output_path = pathlib_Path(f"{doc_main_dir}/str_funcs.md")
+    str_func_markdown = "# String Functions by Module\n\n" + "\n".join(func_lines)
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(str_func_markdown)
+    assert output_path.exists(), f"Failed to write manifest to {output_path}"
+    # print(str_func_markdown)
+    # assert output_path.exists(), f"{output_path} does not exist"
+    # print(open(output_path).read())
+    assert open(output_path).read() == str_func_markdown

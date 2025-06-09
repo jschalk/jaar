@@ -362,12 +362,12 @@ def test_BrokerUnit_get_tranbook_ReturnsObj():
     }
 
     # WHEN
-    x_fisc_label = "fisc_label_x"
-    sue_tranbook = sue_brokerunit.get_tranbook(x_fisc_label)
+    x_vow_label = "vow_label_x"
+    sue_tranbook = sue_brokerunit.get_tranbook(x_vow_label)
 
     # THEN
     assert sue_tranbook
-    assert sue_tranbook.fisc_label == x_fisc_label
+    assert sue_tranbook.vow_label == x_vow_label
     assert sue_tranbook.tranunit_exists(sue_str, zia_str, x7_deal_time)
     assert sue_tranbook.tranunit_exists(sue_str, bob_str, x4_deal_time)
     assert sue_tranbook.get_amount(sue_str, zia_str, x7_deal_time) == zia_deal_acct_net

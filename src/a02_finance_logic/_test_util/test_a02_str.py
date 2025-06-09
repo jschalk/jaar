@@ -5,8 +5,7 @@ from src.a02_finance_logic._test_util.a02_str import (
     celldepth_str,
     deal_acct_nets_str,
     deal_time_str,
-    fisc_label_str,
-    fund_coin_str,
+    fund_iota_str,
     fund_pool_str,
     magnitude_str,
     offi_time_str,
@@ -14,6 +13,7 @@ from src.a02_finance_logic._test_util.a02_str import (
     penny_str,
     quota_str,
     tran_time_str,
+    vow_label_str,
 )
 
 
@@ -21,7 +21,7 @@ def test_str_functions_ReturnsObj():
     assert bridge_str() == "bridge"
     assert celldepth_str() == "celldepth"
     assert deal_time_str() == "deal_time"
-    assert fisc_label_str() == "fisc_label"
+    assert vow_label_str() == "vow_label"
     assert fund_pool_str() == "fund_pool"
     assert tran_time_str() == "tran_time"
     assert quota_str() == "quota"
@@ -31,5 +31,5 @@ def test_str_functions_ReturnsObj():
     assert owner_name_str() == "owner_name"
     assert offi_time_str() == "offi_time"
     assert amount_str() == "amount"
-    assert fund_coin_str() == "fund_coin"
+    assert fund_iota_str() == "fund_iota"
     assert penny_str() == "penny"

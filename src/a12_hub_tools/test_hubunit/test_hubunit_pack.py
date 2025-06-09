@@ -17,10 +17,10 @@ from src.a12_hub_tools._test_util.a12_env import (
 from src.a12_hub_tools._test_util.example_hub_atoms import (
     get_atom_example_conceptunit_knee,
     get_sue_packunit,
-    sue_1budatoms_packunit,
-    sue_2budatoms_packunit,
-    sue_3budatoms_packunit,
-    sue_4budatoms_packunit,
+    sue_1planatoms_packunit,
+    sue_2planatoms_packunit,
+    sue_3planatoms_packunit,
+    sue_4planatoms_packunit,
 )
 from src.a12_hub_tools.hub_tool import open_gut_file, save_gut_file
 from src.a12_hub_tools.hubunit import hubunit_shop
@@ -358,7 +358,7 @@ def test_HubUnit_get_packunit_RaisesExceptionWhenFileDoesNotExist(
     )
 
 
-def test_HubUnit_del_pack_file_DeletespackjsonAndNotBudAtomjsons(
+def test_HubUnit_del_pack_file_DeletespackjsonAndNotPlanAtomjsons(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -371,7 +371,7 @@ def test_HubUnit_del_pack_file_DeletespackjsonAndNotBudAtomjsons(
         _atoms_dir=sue_hubunit._atoms_dir,
         _packs_dir=sue_hubunit._packs_dir,
     )
-    sue_packunit._buddelta.set_budatom(get_atom_example_conceptunit_knee())
+    sue_packunit._plandelta.set_planatom(get_atom_example_conceptunit_knee())
     zero_int = 0
     assert sue_hubunit.pack_file_exists(six_int) is False
     assert sue_hubunit.atom_file_exists(zero_int) is False
@@ -405,9 +405,9 @@ def test_HubUnit_save_pack_file_CanCreateAndModify3packunits(
     assert len(get_dir_file_strs(sue_hubunit._atoms_dir)) == 0
 
     # WHEN
-    sue_hubunit.save_pack_file(sue_2budatoms_packunit())
-    sue_hubunit.save_pack_file(sue_3budatoms_packunit())
-    sue_hubunit.save_pack_file(sue_4budatoms_packunit())
+    sue_hubunit.save_pack_file(sue_2planatoms_packunit())
+    sue_hubunit.save_pack_file(sue_3planatoms_packunit())
+    sue_hubunit.save_pack_file(sue_4planatoms_packunit())
 
     # THEN
     assert len(get_dir_file_strs(sue_hubunit._packs_dir)) == 3
@@ -418,7 +418,7 @@ def test_HubUnit_save_pack_file_ReturnsValidObj(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
-    sue2_packunit = sue_2budatoms_packunit()
+    sue2_packunit = sue_2planatoms_packunit()
     sue2_packunit._atoms_dir = create_path(sue_hubunit._keeps_dir, "swimming")
     sue2_packunit._packs_dir = create_path(sue_hubunit._keeps_dir, "swimming")
     sue2_packunit.owner_name = "Bob"
@@ -455,11 +455,11 @@ def test_HubUnit_create_save_pack_file_SaveCorrectObj(env_dir_setup_cleanup):
     assert sue_hubunit.pack_file_exists(three_int) is False
 
     # WHEN
-    before_bud = sue_hubunit.default_gut_bud()
+    before_plan = sue_hubunit.default_gut_plan()
     bob_str = "Bob"
-    after_bud = copy_deepcopy(before_bud)
-    after_bud.add_acctunit(bob_str)
-    sue_hubunit.create_save_pack_file(before_bud, after_bud)
+    after_plan = copy_deepcopy(before_plan)
+    after_plan.add_acctunit(bob_str)
+    sue_hubunit.create_save_pack_file(before_plan, after_plan)
 
     # THEN
     assert sue_hubunit.pack_file_exists(three_int)
@@ -469,15 +469,15 @@ def test_HubUnit_merge_any_packs_ReturnsObjThatIsEqual(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
-    save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
-    gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
-    gut_bud.last_pack_id is None
+    save_gut_file(env_dir(), sue_hubunit.default_gut_plan())
+    gut_plan = open_gut_file(env_dir(), "accord23", sue_str)
+    gut_plan.last_pack_id is None
 
     # WHEN
-    new_bud = sue_hubunit._merge_any_packs(gut_bud)
+    new_plan = sue_hubunit._merge_any_packs(gut_plan)
 
     # THEN
-    assert new_bud == gut_bud
+    assert new_plan == gut_plan
 
 
 def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_1atom(
@@ -486,23 +486,23 @@ def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_1atom(
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
-    sue_hubunit.save_pack_file(sue_1budatoms_packunit())
-    save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
-    gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
-    print(f"{gut_bud.fisc_label=}")
-    print(f"{sue_hubunit.fisc_label=}")
+    sue_hubunit.save_pack_file(sue_1planatoms_packunit())
+    save_gut_file(env_dir(), sue_hubunit.default_gut_plan())
+    gut_plan = open_gut_file(env_dir(), "accord23", sue_str)
+    print(f"{gut_plan.vow_label=}")
+    print(f"{sue_hubunit.vow_label=}")
     sports_str = "sports"
-    sports_way = gut_bud.make_l1_way(sports_str)
+    sports_way = gut_plan.make_l1_way(sports_str)
     knee_str = "knee"
-    knee_way = gut_bud.make_way(sports_way, knee_str)
-    assert gut_bud.concept_exists(sports_way) is False
+    knee_way = gut_plan.make_way(sports_way, knee_str)
+    assert gut_plan.concept_exists(sports_way) is False
 
     # WHEN
-    new_bud = sue_hubunit._merge_any_packs(gut_bud)
+    new_plan = sue_hubunit._merge_any_packs(gut_plan)
 
     # THEN
-    assert new_bud != gut_bud
-    assert new_bud.concept_exists(sports_way)
+    assert new_plan != gut_plan
+    assert new_plan.concept_exists(sports_way)
 
 
 def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_2atoms(
@@ -511,21 +511,21 @@ def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_2atoms(
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), "accord23", sue_str)
-    sue_hubunit.save_pack_file(sue_2budatoms_packunit())
-    save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
-    gut_bud = open_gut_file(env_dir(), "accord23", sue_str)
-    print(f"{gut_bud.fisc_label=}")
+    sue_hubunit.save_pack_file(sue_2planatoms_packunit())
+    save_gut_file(env_dir(), sue_hubunit.default_gut_plan())
+    gut_plan = open_gut_file(env_dir(), "accord23", sue_str)
+    print(f"{gut_plan.vow_label=}")
     sports_str = "sports"
-    sports_way = gut_bud.make_l1_way(sports_str)
+    sports_way = gut_plan.make_l1_way(sports_str)
     knee_str = "knee"
-    knee_way = gut_bud.make_way(sports_way, knee_str)
-    assert gut_bud.concept_exists(sports_way) is False
-    assert gut_bud.concept_exists(knee_way) is False
+    knee_way = gut_plan.make_way(sports_way, knee_str)
+    assert gut_plan.concept_exists(sports_way) is False
+    assert gut_plan.concept_exists(knee_way) is False
 
     # WHEN
-    new_bud = sue_hubunit._merge_any_packs(gut_bud)
+    new_plan = sue_hubunit._merge_any_packs(gut_plan)
 
     # THEN
-    assert new_bud != gut_bud
-    assert new_bud.concept_exists(sports_way)
-    assert new_bud.concept_exists(knee_way)
+    assert new_plan != gut_plan
+    assert new_plan.concept_exists(sports_way)
+    assert new_plan.concept_exists(knee_way)

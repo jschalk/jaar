@@ -5,16 +5,16 @@ from src.a01_term_logic.way import WayTerm, create_way_from_labels
 from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop
 
 
-def temp_fisc_label():
+def temp_vow_label():
     return "ex_keep04"
 
 
-def temp_fisc_mstr_dir():
-    return "src\\a14_keep_logic\\_test_util\\fisc_mstr"
+def temp_vow_mstr_dir():
+    return "src\\a14_keep_logic\\_test_util\\vow_mstr"
 
 
 def get_module_temp_dir():
-    return "src\\a14_keep_logic\\_test_util\\fisc_mstr\\fiscs"
+    return "src\\a14_keep_logic\\_test_util\\vow_mstr\\vows"
 
 
 def temp_owner_name():
@@ -38,7 +38,7 @@ def get_texas_way() -> WayTerm:
 
 def get_texas_hubunit() -> HubUnit:
     return hubunit_shop(
-        get_module_temp_dir(), temp_fisc_label(), temp_owner_name(), get_texas_way()
+        get_module_temp_dir(), temp_vow_label(), temp_owner_name(), get_texas_way()
     )
 
 
@@ -46,13 +46,13 @@ class InvalidkeepCopyException(Exception):
     pass
 
 
-def copy_evaluation_keep(src_fisc_label: str, dest_fisc_label: str):
+def copy_evaluation_keep(src_vow_label: str, dest_vow_label: str):
     keeps_dir = "src\\keep\\_utils/keeps"
-    new_dir = create_path(keeps_dir, dest_fisc_label)
+    new_dir = create_path(keeps_dir, dest_vow_label)
     if os_path_exists(new_dir):
         raise InvalidkeepCopyException(
             f"Cannot copy keep to '{new_dir}' directory because '{new_dir}' exists."
         )
-    src_dir = create_path(keeps_dir, src_fisc_label)
-    dest_dir = create_path(keeps_dir, dest_fisc_label)
+    src_dir = create_path(keeps_dir, src_vow_label)
+    dest_dir = create_path(keeps_dir, dest_vow_label)
     copy_dir(src_dir=src_dir, dest_dir=dest_dir)

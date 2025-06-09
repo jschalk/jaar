@@ -6,7 +6,7 @@
         "face_name": {
             "otx_key": true
         },
-        "fisc_label": {
+        "vow_label": {
             "otx_key": true
         },
         "concept_way": {
@@ -18,14 +18,14 @@
         "owner_name": {
             "otx_key": true
         },
-        "pledge": {
+        "task": {
             "otx_key": false
         }
     },
     "idea_number": "br00013",
     "dimens": [
-        "fiscunit",
-        "budunit",
-        "bud_conceptunit"
+        "vowunit",
+        "planunit",
+        "plan_conceptunit"
     ]
 }

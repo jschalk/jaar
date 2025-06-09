@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from src.a00_data_toolbox.dict_toolbox import get_1_if_None, get_dict_from_json
 from src.a01_term_logic.term import AcctName, GroupTitle, default_bridge_if_None
 from src.a02_finance_logic.allot import allot_scale
-from src.a02_finance_logic.finance_config import FundCoin, default_fund_coin_if_None
+from src.a02_finance_logic.finance_config import FundIota, default_fund_iota_if_None
 
 
 class InvalidGroupException(Exception):
@@ -180,16 +180,16 @@ def awardline_shop(awardee_title: GroupTitle, _fund_give: float, _fund_take: flo
 
 @dataclass
 class GroupUnit(GroupCore):
-    _memberships: dict[AcctName, MemberShip] = None  # set by BudUnit.set_acctunit()
-    bridge: str = None  # calculated by BudUnit
-    # calculated by BudUnit.settle_bud()
+    _memberships: dict[AcctName, MemberShip] = None  # set by PlanUnit.set_acctunit()
+    bridge: str = None  # calculated by PlanUnit
+    # calculated by PlanUnit.settle_plan()
     _fund_give: float = None
     _fund_take: float = None
     _fund_agenda_give: float = None
     _fund_agenda_take: float = None
     _credor_pool: float = None
     _debtor_pool: float = None
-    fund_coin: FundCoin = None
+    fund_iota: FundIota = None
 
     def set_membership(self, x_membership: MemberShip):
         if x_membership.group_title != self.group_title:
@@ -234,22 +234,22 @@ class GroupUnit(GroupCore):
         for x_acct_name, x_membership in self._memberships.items():
             credit_ledger[x_acct_name] = x_membership.credit_vote
             debtit_ledger[x_acct_name] = x_membership.debtit_vote
-        fund_give_allot = allot_scale(credit_ledger, self._fund_give, self.fund_coin)
-        fund_take_allot = allot_scale(debtit_ledger, self._fund_take, self.fund_coin)
+        fund_give_allot = allot_scale(credit_ledger, self._fund_give, self.fund_iota)
+        fund_take_allot = allot_scale(debtit_ledger, self._fund_take, self.fund_iota)
         for acct_name, x_membership in self._memberships.items():
             x_membership._fund_give = fund_give_allot.get(acct_name)
             x_membership._fund_take = fund_take_allot.get(acct_name)
         x_a_give = self._fund_agenda_give
         x_a_take = self._fund_agenda_take
-        fund_agenda_give_allot = allot_scale(credit_ledger, x_a_give, self.fund_coin)
-        fund_agenda_take_allot = allot_scale(debtit_ledger, x_a_take, self.fund_coin)
+        fund_agenda_give_allot = allot_scale(credit_ledger, x_a_give, self.fund_iota)
+        fund_agenda_take_allot = allot_scale(debtit_ledger, x_a_take, self.fund_iota)
         for acct_name, x_membership in self._memberships.items():
             x_membership._fund_agenda_give = fund_agenda_give_allot.get(acct_name)
             x_membership._fund_agenda_take = fund_agenda_take_allot.get(acct_name)
 
 
 def groupunit_shop(
-    group_title: GroupTitle, bridge: str = None, fund_coin: FundCoin = None
+    group_title: GroupTitle, bridge: str = None, fund_iota: FundIota = None
 ) -> GroupUnit:
     return GroupUnit(
         group_title=group_title,
@@ -261,7 +261,7 @@ def groupunit_shop(
         _credor_pool=0,
         _debtor_pool=0,
         bridge=default_bridge_if_None(bridge),
-        fund_coin=default_fund_coin_if_None(fund_coin),
+        fund_iota=default_fund_iota_if_None(fund_iota),
     )
     # x_groupunit.set_group_title(group_title=group_title)
     # return x_groupunit

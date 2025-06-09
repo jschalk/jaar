@@ -6,7 +6,7 @@
         "face_name": {
             "otx_key": true
         },
-        "fisc_label": {
+        "vow_label": {
             "otx_key": true
         },
         "healer_name": {
@@ -27,9 +27,9 @@
     },
     "idea_number": "br00036",
     "dimens": [
-        "fiscunit",
-        "budunit",
-        "bud_conceptunit",
-        "bud_concept_healerlink"
+        "vowunit",
+        "planunit",
+        "plan_conceptunit",
+        "plan_concept_healerlink"
     ]
 }

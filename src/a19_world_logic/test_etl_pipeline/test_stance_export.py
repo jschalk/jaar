@@ -3,8 +3,8 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from pandas.testing import assert_frame_equal
 from shutil import copy2 as shutil_copy2
 from src.a00_data_toolbox.file_toolbox import create_path, set_dir
-from src.a02_finance_logic._test_util.a02_str import fisc_label_str, owner_name_str
-from src.a06_bud_logic._test_util.a06_str import acct_name_str
+from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
+from src.a06_plan_logic._test_util.a06_str import acct_name_str
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a17_idea_logic.idea_db_tool import get_sheet_names, upsert_sheet
 from src.a18_etl_toolbox.tran_path import (
@@ -25,7 +25,7 @@ def test_WorldUnit_create_stances_Senario0_EmptyWorld_CreatesFile(
     fizz_str = "fizz"
     fizz_world = worldunit_shop(fizz_str, worlds_dir())
     fizz_world.mud_to_clarity()
-    fizz_stance0001_path = create_stance0001_path(fizz_world._fisc_mstr_dir)
+    fizz_stance0001_path = create_stance0001_path(fizz_world._vow_mstr_dir)
     assert os_path_exists(fizz_stance0001_path) is False
 
     # WHEN
@@ -47,7 +47,7 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
     br00011_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_label_str(),
+        vow_label_str(),
         owner_name_str(),
         acct_name_str(),
     ]
@@ -55,7 +55,7 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
     fizz_world.mud_to_clarity()
-    fizz_stance0001_path = create_stance0001_path(fizz_world._fisc_mstr_dir)
+    fizz_stance0001_path = create_stance0001_path(fizz_world._vow_mstr_dir)
     assert os_path_exists(fizz_stance0001_path) is False
 
     # WHEN
@@ -79,7 +79,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
     br00011_columns = [
         event_int_str(),
         face_name_str(),
-        fisc_label_str(),
+        vow_label_str(),
         owner_name_str(),
         acct_name_str(),
     ]
@@ -87,18 +87,18 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
     fizz_world.mud_to_clarity()
-    fizz_stance0001_path = create_stance0001_path(fizz_world._fisc_mstr_dir)
+    fizz_stance0001_path = create_stance0001_path(fizz_world._vow_mstr_dir)
     fizz_world.create_stances()
     buzz_world = worldunit_shop("buzz", worlds_dir())
-    buzz_mud_st0001_path = create_path(buzz_world._fisc_mstr_dir, "buzz_mud.xlsx")
-    set_dir(create_stances_dir_path(buzz_world._fisc_mstr_dir))
+    buzz_mud_st0001_path = create_path(buzz_world._vow_mstr_dir, "buzz_mud.xlsx")
+    set_dir(create_stances_dir_path(buzz_world._vow_mstr_dir))
     shutil_copy2(fizz_stance0001_path, dst=buzz_mud_st0001_path)
     # print(f" {pandas_read_excel(fizz_stance0001_path)=}")
     # print(f"{pandas_read_excel(buzz_mud_st0001_path)=}")
     print(f"{buzz_mud_st0001_path=}")
     print(f"{get_sheet_names(buzz_mud_st0001_path)=}")
     buzz_world.mud_to_clarity()
-    buzz_stance0001_path = create_stance0001_path(buzz_world._fisc_mstr_dir)
+    buzz_stance0001_path = create_stance0001_path(buzz_world._vow_mstr_dir)
     assert os_path_exists(buzz_stance0001_path) is False
 
     # WHEN
@@ -135,13 +135,13 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
 #         face_name_str(),
 #         event_int_str(),
 #         cumlative_minute_str(),
-#         fisc_label_str(),
+#         vow_label_str(),
 #         hour_label_str(),
 #     ]
 #     br00001_columns = [
 #         face_name_str(),
 #         event_int_str(),
-#         fisc_label_str(),
+#         vow_label_str(),
 #         owner_name_str(),
 #         deal_time(),
 #         quota_str(),
@@ -168,17 +168,17 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
 #     br00011_columns = [
 #         face_name_str(),
 #         event_int_str(),
-#         fisc_label_str(),
+#         vow_label_str(),
 #         owner_name_str(),
 #         acct_name_str(),
 #     ]
 #     br00011_rows = [[event2, sue_str, accord23_str, sue_str, sue_str]]
 #     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
 #     upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
-#     mstr_dir = fizz_world._fisc_mstr_dir
-#     wrong_a23_fisc_dir = create_path(mstr_dir, accord23_str)
-#     assert os_path_exists(wrong_a23_fisc_dir) is False
-#     a23_json_path = create_fisc_json_path(mstr_dir, accord23_str)
+#     mstr_dir = fizz_world._vow_mstr_dir
+#     wrong_a23_vow_dir = create_path(mstr_dir, accord23_str)
+#     assert os_path_exists(wrong_a23_vow_dir) is False
+#     a23_json_path = create_vow_json_path(mstr_dir, accord23_str)
 #     a23_sue_gut_path = create_gut_path(mstr_dir, accord23_str, sue_str)
 #     a23_sue_job_path = create_job_path(mstr_dir, accord23_str, sue_str)
 #     sue37_mandate_path = deal_mandate(mstr_dir, accord23_str, sue_str, tp37)
@@ -193,7 +193,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
 #     fizz_world.mud_to_clarity()
 
 #     # THEN
-#     assert os_path_exists(wrong_a23_fisc_dir) is False
+#     assert os_path_exists(wrong_a23_vow_dir) is False
 #     brick_file_path = create_path(fizz_world._brick_dir, "br00003.xlsx")
 #     assert os_path_exists(mud_file_path)
 #     assert os_path_exists(brick_file_path)

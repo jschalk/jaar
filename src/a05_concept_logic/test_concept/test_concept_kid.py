@@ -2,7 +2,7 @@ from pytest import raises as pytest_raises
 from src.a01_term_logic.way import create_way
 from src.a05_concept_logic.concept import (
     conceptunit_shop,
-    get_default_fisc_label as root_label,
+    get_default_vow_label as root_label,
 )
 
 

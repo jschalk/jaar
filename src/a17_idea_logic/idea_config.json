@@ -1,13 +1,13 @@
 {
-  "bud_acct_membership": {
+  "plan_acct_membership": {
     "allowed_crud": "delete_insert_update",
     "build_order": 9,
-    "idea_category": "bud",
+    "idea_category": "plan",
     "jkeys": {
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "group_title": {},
       "owner_name": {}
     },
@@ -16,15 +16,15 @@
       "debtit_vote": {}
     }
   },
-  "bud_acctunit": {
+  "plan_acctunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 10,
-    "idea_category": "bud",
+    "idea_category": "plan",
     "jkeys": {
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -32,16 +32,16 @@
       "debtit_belief": {}
     }
   },
-  "bud_concept_awardlink": {
+  "plan_concept_awardlink": {
     "allowed_crud": "delete_insert_update",
     "build_order": 11,
-    "idea_category": "bud",
+    "idea_category": "plan",
     "jkeys": {
       "awardee_title": {},
       "concept_way": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -49,16 +49,16 @@
       "take_force": {}
     }
   },
-  "bud_concept_factunit": {
+  "plan_concept_factunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 12,
-    "idea_category": "bud",
+    "idea_category": "plan",
     "jkeys": {
       "concept_way": {},
       "event_int": {},
       "face_name": {},
       "fcontext": {},
-      "fisc_label": {},
+      "vow_label": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -67,43 +67,43 @@
       "fstate": {}
     }
   },
-  "bud_concept_healerlink": {
+  "plan_concept_healerlink": {
     "allowed_crud": "delete_insert",
     "build_order": 15,
-    "idea_category": "bud",
+    "idea_category": "plan",
     "jkeys": {
       "concept_way": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "healer_name": {},
       "owner_name": {}
     },
     "jvalues": {}
   },
-  "bud_concept_laborlink": {
+  "plan_concept_laborlink": {
     "allowed_crud": "delete_insert",
     "build_order": 14,
-    "idea_category": "bud",
+    "idea_category": "plan",
     "jkeys": {
       "concept_way": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "labor_title": {},
       "owner_name": {}
     },
     "jvalues": {}
   },
-  "bud_concept_reason_premiseunit": {
+  "plan_concept_reason_premiseunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 16,
-    "idea_category": "bud",
+    "idea_category": "plan",
     "jkeys": {
       "concept_way": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "owner_name": {},
       "pstate": {},
       "rcontext": {}
@@ -114,15 +114,15 @@
       "popen": {}
     }
   },
-  "bud_concept_reasonunit": {
+  "plan_concept_reasonunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 17,
-    "idea_category": "bud",
+    "idea_category": "plan",
     "jkeys": {
       "concept_way": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "owner_name": {},
       "rcontext": {}
     },
@@ -130,15 +130,15 @@
       "rconcept_active_requisite": {}
     }
   },
-  "bud_conceptunit": {
+  "plan_conceptunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 18,
-    "idea_category": "bud",
+    "idea_category": "plan",
     "jkeys": {
       "concept_way": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -150,25 +150,25 @@
       "mass": {},
       "morph": {},
       "numor": {},
-      "pledge": {},
+      "task": {},
       "problem_bool": {},
       "stop_want": {}
     }
   },
-  "budunit": {
+  "planunit": {
     "allowed_crud": "UPDATE",
     "build_order": 19,
-    "idea_category": "bud",
+    "idea_category": "plan",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "owner_name": {}
     },
     "jvalues": {
       "credor_respect": {},
       "debtor_respect": {},
-      "fund_coin": {},
+      "fund_iota": {},
       "fund_pool": {},
       "max_tree_traverse": {},
       "penny": {},
@@ -176,15 +176,15 @@
       "tally": {}
     }
   },
-  "fisc_cashbook": {
+  "vow_paybook": {
     "allowed_crud": "insert_multiple",
     "build_order": 21,
-    "idea_category": "fisc",
+    "idea_category": "vow",
     "jkeys": {
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "owner_name": {},
       "tran_time": {}
     },
@@ -192,15 +192,15 @@
       "amount": {}
     }
   },
-  "fisc_dealunit": {
+  "vow_dealunit": {
     "allowed_crud": "insert_multiple",
     "build_order": 20,
-    "idea_category": "fisc",
+    "idea_category": "vow",
     "jkeys": {
       "deal_time": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -208,73 +208,73 @@
       "quota": {}
     }
   },
-  "fisc_timeline_hour": {
+  "vow_timeline_hour": {
     "allowed_crud": "insert_one_time",
     "build_order": 6,
-    "idea_category": "fisc",
+    "idea_category": "vow",
     "jkeys": {
       "cumlative_minute": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {}
+      "vow_label": {}
     },
     "jvalues": {
       "hour_label": {}
     }
   },
-  "fisc_timeline_month": {
+  "vow_timeline_month": {
     "allowed_crud": "insert_one_time",
     "build_order": 7,
-    "idea_category": "fisc",
+    "idea_category": "vow",
     "jkeys": {
       "cumlative_day": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {}
+      "vow_label": {}
     },
     "jvalues": {
       "month_label": {}
     }
   },
-  "fisc_timeline_weekday": {
+  "vow_timeline_weekday": {
     "allowed_crud": "insert_one_time",
     "build_order": 8,
-    "idea_category": "fisc",
+    "idea_category": "vow",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "weekday_order": {}
     },
     "jvalues": {
       "weekday_label": {}
     }
   },
-  "fisc_timeoffi": {
+  "vow_timeoffi": {
     "allowed_crud": "insert_multiple",
     "build_order": 8,
-    "idea_category": "fisc",
+    "idea_category": "vow",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "vow_label": {},
       "offi_time": {}
     },
     "jvalues": {}
   },
-  "fiscunit": {
+  "vowunit": {
     "allowed_crud": "insert_one_time",
     "build_order": 5,
-    "idea_category": "fisc",
+    "idea_category": "vow",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_label": {}
+      "vow_label": {}
     },
     "jvalues": {
       "bridge": {},
       "c400_number": {},
-      "fund_coin": {},
+      "fund_iota": {},
       "job_listen_rotations": {},
       "monthday_distortion": {},
       "penny": {},

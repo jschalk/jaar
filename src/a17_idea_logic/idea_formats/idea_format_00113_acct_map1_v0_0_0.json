@@ -9,7 +9,7 @@
         "face_name": {
             "otx_key": true
         },
-        "fisc_label": {
+        "vow_label": {
             "otx_key": true
         },
         "inx_name": {
@@ -25,8 +25,8 @@
     "idea_number": "br00113",
     "dimens": [
         "pidgin_name",
-        "bud_acctunit",
-        "fiscunit",
-        "budunit"
+        "plan_acctunit",
+        "vowunit",
+        "planunit"
     ]
 }

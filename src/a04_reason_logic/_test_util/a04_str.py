@@ -1,12 +1,12 @@
 from src.a01_term_logic._test_util.a01_str import bridge_str
 
 
+def _chore_str() -> str:
+    return "_chore"
+
+
 def _status_str() -> str:
     return "_status"
-
-
-def _task_str() -> str:
-    return "_task"
 
 
 def fcontext_str() -> str:

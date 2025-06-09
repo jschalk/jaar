@@ -23,8 +23,8 @@ def test_RiverRun_Exists():
     assert x_riverrun._tax_got_prev is None
     assert x_riverrun._tax_got_curr is None
     assert x_riverrun._cycle_count is None
-    assert x_riverrun._cycle_payees_prev is None
-    assert x_riverrun._cycle_payees_curr is None
+    assert x_riverrun._cycle_chargeees_prev is None
+    assert x_riverrun._cycle_chargeees_curr is None
     assert x_riverrun._debtor_count is None
     assert x_riverrun._credor_count is None
 
@@ -80,8 +80,8 @@ def test_riverrun_shop_ReturnsObjWithArg():
     assert x_riverrun._tax_got_prev == 0
     assert x_riverrun._tax_got_curr == 0
     assert x_riverrun._cycle_count == 0
-    assert x_riverrun._cycle_payees_prev == set()
-    assert x_riverrun._cycle_payees_curr == set()
+    assert x_riverrun._cycle_chargeees_prev == set()
+    assert x_riverrun._cycle_chargeees_curr == set()
 
 
 def test_riverrun_shop_ReturnsObjWithoutArgs():
@@ -113,7 +113,7 @@ def test_RiverRun_set_keep_credorledger_SetsAttr():
 
     # WHEN
     x_riverrun.set_keep_credorledger(
-        owner_name=yao_str, acct_name=yao_str, acct_credit_belief=yao_credit_belief
+        owner_name=yao_str, acct_name=yao_str, credit_ledger=yao_credit_belief
     )
 
     # THEN

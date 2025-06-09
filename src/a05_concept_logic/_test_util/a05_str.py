@@ -1,5 +1,5 @@
 from src.a01_term_logic._test_util.a01_str import bridge_str
-from src.a02_finance_logic._test_util.a02_str import fisc_label_str, fund_coin_str
+from src.a02_finance_logic._test_util.a02_str import fund_iota_str, vow_label_str
 
 
 def _active_hx_str() -> str:
@@ -22,8 +22,8 @@ def _awardlines_str() -> str:
     return "_awardlines"
 
 
-def _descendant_pledge_count_str() -> str:
-    return "_descendant_pledge_count"
+def _descendant_task_count_str() -> str:
+    return "_descendant_task_count"
 
 
 def _factheirs_str() -> str:
@@ -56,10 +56,6 @@ def _is_expanded_str() -> str:
 
 def _kids_str() -> str:
     return "_kids"
-
-
-def _originunit_str() -> str:
-    return "_originunit"
 
 
 def _range_evaluated_str() -> str:
@@ -126,13 +122,13 @@ def numor_str() -> str:
     return "numor"
 
 
-def pledge_str() -> str:
-    return "pledge"
-
-
 def problem_bool_str() -> str:
     return "problem_bool"
 
 
 def stop_want_str() -> str:
     return "stop_want"
+
+
+def task_str() -> str:
+    return "task"

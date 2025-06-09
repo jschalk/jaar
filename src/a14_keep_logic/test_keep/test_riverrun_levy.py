@@ -54,19 +54,19 @@ def test_RiverRun_levy_tax_dues_Molds_cycleledger_Scenario02():
     assert tax_got == 322
 
 
-def test_RiverRun_cycle_payees_vary_ReturnsObj():
+def test_RiverRun_cycle_chargeees_vary_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     x_riverrun = riverrun_shop(example_yao_hubunit())
     # WHEN / THEN
-    assert x_riverrun._cycle_payees_vary() is False
+    assert x_riverrun._cycle_chargeees_vary() is False
 
-    x_riverrun._cycle_payees_prev = {yao_str}
-    assert x_riverrun._cycle_payees_prev == {yao_str}
-    assert x_riverrun._cycle_payees_curr == set()
+    x_riverrun._cycle_chargeees_prev = {yao_str}
+    assert x_riverrun._cycle_chargeees_prev == {yao_str}
+    assert x_riverrun._cycle_chargeees_curr == set()
 
     # WHEN / THEN
-    assert x_riverrun._cycle_payees_vary()
+    assert x_riverrun._cycle_chargeees_vary()
 
 
 def test_RiverRun_cycles_vary_ReturnsObj():
@@ -74,27 +74,27 @@ def test_RiverRun_cycles_vary_ReturnsObj():
     yao_str = "Yao"
     yao_tax_got = 5
     x_riverrun = riverrun_shop(example_yao_hubunit())
-    assert x_riverrun._cycle_payees_vary() is False
+    assert x_riverrun._cycle_chargeees_vary() is False
     assert x_riverrun._tax_gotten() is False
     assert x_riverrun.cycles_vary() is False
 
     # WHEN
-    x_riverrun._cycle_payees_prev = {yao_str}
+    x_riverrun._cycle_chargeees_prev = {yao_str}
     # THEN
-    assert x_riverrun._cycle_payees_vary()
+    assert x_riverrun._cycle_chargeees_vary()
     assert x_riverrun._tax_gotten() is False
     assert x_riverrun.cycles_vary()
 
     # WHEN
     x_riverrun._set_tax_got_attrs(yao_tax_got)
     # THEN
-    assert x_riverrun._cycle_payees_vary()
+    assert x_riverrun._cycle_chargeees_vary()
     assert x_riverrun._tax_gotten()
     assert x_riverrun.cycles_vary()
 
     # WHEN
-    x_riverrun._cycle_payees_curr = {yao_str}
+    x_riverrun._cycle_chargeees_curr = {yao_str}
     # THEN
-    assert x_riverrun._cycle_payees_vary() is False
+    assert x_riverrun._cycle_chargeees_vary() is False
     assert x_riverrun._tax_gotten()
     assert x_riverrun.cycles_vary()

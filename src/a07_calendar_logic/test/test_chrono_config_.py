@@ -2,7 +2,7 @@ from copy import deepcopy as copy_deepcopy
 from inspect import getdoc as inspect_getdoc
 from src.a01_term_logic._test_util.a01_str import bridge_str
 from src.a02_finance_logic.finance_config import TimeLinePoint
-from src.a06_bud_logic.bud import budunit_shop
+from src.a06_plan_logic.plan import planunit_shop
 from src.a07_calendar_logic._test_util.a07_str import (
     c100_str,
     c400_clean_str,
@@ -350,42 +350,42 @@ def test_timeline_config_shop_ReturnsObj_NoParameters():
 def test_get_year_way_ReturnsObj():
     # ESTABLISH
     fizz_str = "fizz34"
-    sue_budunit = budunit_shop("Sue")
-    time_way = sue_budunit.make_l1_way(time_str())
-    fizz_way = sue_budunit.make_way(time_way, fizz_str)
-    c400_leap_way = sue_budunit.make_way(fizz_way, c400_leap_str())
-    c400_clean_way = sue_budunit.make_way(c400_leap_way, c400_clean_str())
-    c100_way = sue_budunit.make_way(c400_clean_way, c100_str())
-    yr4_leap_way = sue_budunit.make_way(c100_way, yr4_leap_str())
-    yr4_clean_way = sue_budunit.make_way(yr4_leap_way, yr4_clean_str())
-    year_way = sue_budunit.make_way(yr4_clean_way, year_str())
+    sue_planunit = planunit_shop("Sue")
+    time_way = sue_planunit.make_l1_way(time_str())
+    fizz_way = sue_planunit.make_way(time_way, fizz_str)
+    c400_leap_way = sue_planunit.make_way(fizz_way, c400_leap_str())
+    c400_clean_way = sue_planunit.make_way(c400_leap_way, c400_clean_str())
+    c100_way = sue_planunit.make_way(c400_clean_way, c100_str())
+    yr4_leap_way = sue_planunit.make_way(c100_way, yr4_leap_str())
+    yr4_clean_way = sue_planunit.make_way(yr4_leap_way, yr4_clean_str())
+    year_way = sue_planunit.make_way(yr4_clean_way, year_str())
 
     # WHEN / THEN
-    assert year_way == get_year_way(sue_budunit, fizz_way)
+    assert year_way == get_year_way(sue_planunit, fizz_way)
 
 
 def test_get_week_way_ReturnsObj():
     # ESTABLISH
     fizz_str = "fizz34"
-    sue_budunit = budunit_shop("Sue")
-    time_way = sue_budunit.make_l1_way(time_str())
-    fizz_way = sue_budunit.make_way(time_way, fizz_str)
-    week_way = sue_budunit.make_way(fizz_way, week_str())
+    sue_planunit = planunit_shop("Sue")
+    time_way = sue_planunit.make_l1_way(time_str())
+    fizz_way = sue_planunit.make_way(time_way, fizz_str)
+    week_way = sue_planunit.make_way(fizz_way, week_str())
 
     # WHEN / THEN
-    assert week_way == get_week_way(sue_budunit, fizz_way)
+    assert week_way == get_week_way(sue_planunit, fizz_way)
 
 
 def test_get_day_way_ReturnsObj():
     # ESTABLISH
     fizz_str = "fizz34"
-    sue_budunit = budunit_shop("Sue")
-    time_way = sue_budunit.make_l1_way(time_str())
-    fizz_way = sue_budunit.make_way(time_way, fizz_str)
-    day_way = sue_budunit.make_way(fizz_way, day_str())
+    sue_planunit = planunit_shop("Sue")
+    time_way = sue_planunit.make_l1_way(time_str())
+    fizz_way = sue_planunit.make_way(time_way, fizz_str)
+    day_way = sue_planunit.make_way(fizz_way, day_str())
 
     # WHEN / THEN
-    assert day_way == get_day_way(sue_budunit, fizz_way)
+    assert day_way == get_day_way(sue_planunit, fizz_way)
 
 
 def test_TimeLineUnit_Exists():

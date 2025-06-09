@@ -1,6 +1,6 @@
 from pandas import DataFrame
 from src.a01_term_logic.way import create_way, default_bridge_if_None, to_way
-from src.a06_bud_logic._test_util.a06_str import (
+from src.a06_plan_logic._test_util.a06_str import (
     WayTerm_str,
     acct_name_str,
     rcontext_str,

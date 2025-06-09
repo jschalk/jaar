@@ -9,7 +9,7 @@
         "face_name": {
             "otx_key": true
         },
-        "fisc_label": {
+        "vow_label": {
             "otx_key": true
         },
         "group_title": {
@@ -21,9 +21,9 @@
     },
     "idea_number": "br00012",
     "dimens": [
-        "budunit",
-        "bud_acctunit",
-        "bud_acct_membership",
-        "fiscunit"
+        "planunit",
+        "plan_acctunit",
+        "plan_acct_membership",
+        "vowunit"
     ]
 }

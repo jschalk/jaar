@@ -47,14 +47,14 @@ class AcctUnit(AcctCore):
 
     credit_belief: int = None
     debtit_belief: int = None
-    # special attribute: static in bud json, in memory it is deleted after loading and recalculated during saving.
+    # special attribute: static in plan json, in memory it is deleted after loading and recalculated during saving.
     _memberships: dict[AcctName, MemberShip] = None
     # calculated fields
     _credor_pool: RespectNum = None
     _debtor_pool: RespectNum = None
     _irrational_debtit_belief: int = None  # set by listening process
     _inallocable_debtit_belief: int = None  # set by listening process
-    # set by Bud.settle_bud()
+    # set by Plan.settle_plan()
     _fund_give: float = None
     _fund_take: float = None
     _fund_agenda_give: float = None

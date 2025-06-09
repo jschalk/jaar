@@ -9,11 +9,10 @@ from src.a04_reason_logic.reason_concept import (
 from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a05_concept_logic.concept import (
     conceptunit_shop,
-    get_default_fisc_label as root_label,
+    get_default_vow_label as root_label,
     get_obj_from_concept_dict,
 )
 from src.a05_concept_logic.healer import healerlink_shop
-from src.a05_concept_logic.origin import originunit_shop
 
 
 def test_get_obj_from_concept_dict_ReturnsObj():
@@ -25,7 +24,7 @@ def test_get_obj_from_concept_dict_ReturnsObj():
     assert get_obj_from_concept_dict({field_str: False}, field_str) is False
 
     # ESTABLISH
-    field_str = "pledge"
+    field_str = "task"
     # WHEN / THEN
     assert get_obj_from_concept_dict({field_str: True}, field_str)
     assert get_obj_from_concept_dict({}, field_str) is False
@@ -144,13 +143,11 @@ def test_ConceptUnit_get_dict_ReturnsCorrectCompleteDict():
         laborunit=sue_laborunit,
         healerlink=yao_healerlink,
         _active=True,
-        pledge=True,
+        task=True,
         problem_bool=x_problem_bool,
     )
     x_factunit = factunit_shop(fcontext=wk_way, fstate=wk_way, fopen=5, fnigh=59)
     casa_concept.set_factunit(factunit=x_factunit)
-    casa_concept._originunit.set_originhold(acct_name="Ray", importance=None)
-    casa_concept._originunit.set_originhold(acct_name="Lei", importance=4)
     x_begin = 11
     x_close = 12
     x_addin = 13
@@ -182,7 +179,6 @@ def test_ConceptUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_dict["awardlinks"] == x1_awardlinks
     assert casa_dict["laborunit"] == sue_laborunit.get_dict()
     assert casa_dict["healerlink"] == yao_healerlink.get_dict()
-    assert casa_dict["originunit"] == casa_concept.get_originunit_dict()
     assert casa_dict["mass"] == casa_concept.mass
     assert casa_dict["concept_label"] == casa_concept.concept_label
     assert casa_dict["_uid"] == casa_concept._uid
@@ -193,7 +189,7 @@ def test_ConceptUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_dict["morph"] == casa_concept.morph
     assert casa_dict["gogo_want"] == casa_concept.gogo_want
     assert casa_dict["stop_want"] == casa_concept.stop_want
-    assert casa_dict["pledge"] == casa_concept.pledge
+    assert casa_dict["task"] == casa_concept.task
     assert casa_dict["problem_bool"] == casa_concept.problem_bool
     assert casa_dict["problem_bool"] == x_problem_bool
     assert casa_concept._is_expanded
@@ -217,7 +213,7 @@ def test_ConceptUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     # ESTABLISH
     casa_concept = conceptunit_shop()
     casa_concept._is_expanded = False
-    casa_concept.pledge = True
+    casa_concept.task = True
     ignore_str = "ignore"
 
     a_str = "a"
@@ -230,18 +226,14 @@ def test_ConceptUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     x_laborunit = casa_concept.laborunit
     x_laborunit.set_laborlink(labor_title=yao_str)
 
-    x_originunit = casa_concept._originunit
-    x_originunit.set_originhold(yao_str, 1)
-
     clean_str = "clean"
     casa_concept.add_kid(conceptunit_shop(clean_str))
 
     assert not casa_concept._is_expanded
-    assert casa_concept.pledge
+    assert casa_concept.task
     assert casa_concept.factunits is not None
     assert casa_concept.awardlinks is not None
     assert casa_concept.laborunit is not None
-    assert casa_concept._originunit is not None
     assert casa_concept._kids != {}
 
     # WHEN
@@ -249,11 +241,10 @@ def test_ConceptUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
 
     # THEN
     assert casa_dict.get("_is_expanded") is False
-    assert casa_dict.get("pledge")
+    assert casa_dict.get("task")
     assert casa_dict.get("factunits") is not None
     assert casa_dict.get("awardlinks") is not None
     assert casa_dict.get("laborunit") is not None
-    assert casa_dict.get("originunit") is not None
     assert casa_dict.get("_kids") is not None
 
 
@@ -261,12 +252,11 @@ def test_ConceptUnit_get_dict_ReturnsDictWithAttrsCorrectlyEmpty():
     # ESTABLISH
     casa_concept = conceptunit_shop()
     assert casa_concept._is_expanded
-    assert casa_concept.pledge is False
+    assert casa_concept.task is False
     assert casa_concept.factunits == {}
     assert casa_concept.awardlinks == {}
     assert casa_concept.laborunit == laborunit_shop()
     assert casa_concept.healerlink == healerlink_shop()
-    assert casa_concept._originunit == originunit_shop()
     assert casa_concept._kids == {}
 
     # WHEN
@@ -274,10 +264,9 @@ def test_ConceptUnit_get_dict_ReturnsDictWithAttrsCorrectlyEmpty():
 
     # THEN
     assert casa_dict.get("_is_expanded") is None
-    assert casa_dict.get("pledge") is None
+    assert casa_dict.get("task") is None
     assert casa_dict.get("factunits") is None
     assert casa_dict.get("awardlinks") is None
     assert casa_dict.get("laborunit") is None
     assert casa_dict.get("healerlink") is None
-    assert casa_dict.get("originunit") is None
     assert casa_dict.get("_kids") is None

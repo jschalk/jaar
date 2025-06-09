@@ -1,6 +1,6 @@
 from os import getcwd as os_getcwd
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a08_bud_atom_logic._test_util.a08_str import (
+from src.a08_plan_atom_logic._test_util.a08_str import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,
@@ -81,7 +81,7 @@ def test_get_pidgin_config_dict_ReturnsObj():
     # assert gen_jvalues == x_pidginunit_jvalues
     # assert len(pidginunit_dict.get(jvalues_str())) == 9
     # assert len(pidgin_dealunit_dict.get(jvalues_str())) == 1
-    # assert len(pidgin_cashbook_dict.get(jvalues_str())) == 1
+    # assert len(pidgin_paybook_dict.get(jvalues_str())) == 1
     # assert len(pidgin_timeline_hour_dict.get(jvalues_str())) == 0
     # assert len(pidgin_timeline_month_dict.get(jvalues_str())) == 0
     # assert len(pidgin_timeline_weekday_dict.get(jvalues_str())) == 0

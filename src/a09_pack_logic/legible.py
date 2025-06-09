@@ -1,183 +1,185 @@
 from src.a00_data_toolbox.dict_toolbox import get_from_nested_dict
-from src.a06_bud_logic.bud import BudUnit
-from src.a08_bud_atom_logic.atom import BudAtom
-from src.a09_pack_logic.delta import BudDelta
+from src.a06_plan_logic.plan import PlanUnit
+from src.a08_plan_atom_logic.atom import PlanAtom
+from src.a09_pack_logic.delta import PlanDelta
 
 
 def get_leg_obj(x_dict: dict, x_keylist) -> any:
     return get_from_nested_dict(x_dict, x_keylist, if_missing_return_None=True)
 
 
-def create_legible_list(x_delta: BudDelta, x_bud: BudUnit) -> list[str]:
-    atoms_dict = x_delta.budatoms
-    budunit_atom = get_leg_obj(atoms_dict, ["UPDATE", "budunit"])
+def create_legible_list(x_delta: PlanDelta, x_plan: PlanUnit) -> list[str]:
+    atoms_dict = x_delta.planatoms
+    planunit_atom = get_leg_obj(atoms_dict, ["UPDATE", "planunit"])
 
-    acctunit_insert_dict = get_leg_obj(atoms_dict, ["INSERT", "bud_acctunit"])
-    acctunit_update_dict = get_leg_obj(atoms_dict, ["UPDATE", "bud_acctunit"])
-    acctunit_delete_dict = get_leg_obj(atoms_dict, ["DELETE", "bud_acctunit"])
+    acctunit_insert_dict = get_leg_obj(atoms_dict, ["INSERT", "plan_acctunit"])
+    acctunit_update_dict = get_leg_obj(atoms_dict, ["UPDATE", "plan_acctunit"])
+    acctunit_delete_dict = get_leg_obj(atoms_dict, ["DELETE", "plan_acctunit"])
 
-    x_list = ["INSERT", "bud_acct_membership"]
+    x_list = ["INSERT", "plan_acct_membership"]
     acct_membership_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "bud_acct_membership"]
+    x_list = ["UPDATE", "plan_acct_membership"]
     acct_membership_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "bud_acct_membership"]
+    x_list = ["DELETE", "plan_acct_membership"]
     acct_membership_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "bud_conceptunit"]
-    bud_conceptunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "bud_conceptunit"]
-    bud_conceptunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "bud_conceptunit"]
-    bud_conceptunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "plan_conceptunit"]
+    plan_conceptunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "plan_conceptunit"]
+    plan_conceptunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "plan_conceptunit"]
+    plan_conceptunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "bud_concept_awardlink"]
-    bud_concept_awardlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "bud_concept_awardlink"]
-    bud_concept_awardlink_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "bud_concept_awardlink"]
-    bud_concept_awardlink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "plan_concept_awardlink"]
+    plan_concept_awardlink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "plan_concept_awardlink"]
+    plan_concept_awardlink_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "plan_concept_awardlink"]
+    plan_concept_awardlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "bud_concept_reasonunit"]
-    bud_concept_reasonunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "bud_concept_reasonunit"]
-    bud_concept_reasonunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "bud_concept_reasonunit"]
-    bud_concept_reasonunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "plan_concept_reasonunit"]
+    plan_concept_reasonunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "plan_concept_reasonunit"]
+    plan_concept_reasonunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "plan_concept_reasonunit"]
+    plan_concept_reasonunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "bud_concept_reason_premiseunit"]
-    bud_concept_reason_premiseunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "bud_concept_reason_premiseunit"]
-    bud_concept_reason_premiseunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "bud_concept_reason_premiseunit"]
-    bud_concept_reason_premiseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "plan_concept_reason_premiseunit"]
+    plan_concept_reason_premiseunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "plan_concept_reason_premiseunit"]
+    plan_concept_reason_premiseunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "plan_concept_reason_premiseunit"]
+    plan_concept_reason_premiseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "bud_concept_laborlink"]
-    bud_concept_laborlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "bud_concept_laborlink"]
-    bud_concept_laborlink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "plan_concept_laborlink"]
+    plan_concept_laborlink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "plan_concept_laborlink"]
+    plan_concept_laborlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "bud_concept_healerlink"]
-    bud_concept_healerlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "bud_concept_healerlink"]
-    bud_concept_healerlink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "plan_concept_healerlink"]
+    plan_concept_healerlink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "plan_concept_healerlink"]
+    plan_concept_healerlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "bud_concept_factunit"]
-    bud_concept_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "bud_concept_factunit"]
-    bud_concept_factunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "bud_concept_factunit"]
-    bud_concept_factunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "plan_concept_factunit"]
+    plan_concept_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "plan_concept_factunit"]
+    plan_concept_factunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "plan_concept_factunit"]
+    plan_concept_factunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     leg_list = []
-    if budunit_atom is not None:
-        add_budunit_legible_list(leg_list, budunit_atom, x_bud)
+    if planunit_atom is not None:
+        add_planunit_legible_list(leg_list, planunit_atom, x_plan)
     if acctunit_insert_dict is not None:
-        add_bud_acctunit_insert_to_legible_list(leg_list, acctunit_insert_dict, x_bud)
+        add_plan_acctunit_insert_to_legible_list(leg_list, acctunit_insert_dict, x_plan)
     if acctunit_update_dict is not None:
-        add_bud_acctunit_update_to_legible_list(leg_list, acctunit_update_dict, x_bud)
+        add_plan_acctunit_update_to_legible_list(leg_list, acctunit_update_dict, x_plan)
     if acctunit_delete_dict is not None:
-        add_bud_acctunit_delete_to_legible_list(leg_list, acctunit_delete_dict, x_bud)
+        add_plan_acctunit_delete_to_legible_list(leg_list, acctunit_delete_dict, x_plan)
 
     if acct_membership_insert_dict is not None:
-        add_bud_acct_membership_insert_to_legible_list(
-            leg_list, acct_membership_insert_dict, x_bud
+        add_plan_acct_membership_insert_to_legible_list(
+            leg_list, acct_membership_insert_dict, x_plan
         )
     if acct_membership_update_dict is not None:
-        add_bud_acct_membership_update_to_legible_list(
-            leg_list, acct_membership_update_dict, x_bud
+        add_plan_acct_membership_update_to_legible_list(
+            leg_list, acct_membership_update_dict, x_plan
         )
     if acct_membership_delete_dict is not None:
-        add_bud_acct_membership_delete_to_legible_list(
-            leg_list, acct_membership_delete_dict, x_bud
+        add_plan_acct_membership_delete_to_legible_list(
+            leg_list, acct_membership_delete_dict, x_plan
         )
 
-    if bud_conceptunit_insert_dict is not None:
-        add_bud_conceptunit_insert_to_legible_list(
-            leg_list, bud_conceptunit_insert_dict, x_bud
+    if plan_conceptunit_insert_dict is not None:
+        add_plan_conceptunit_insert_to_legible_list(
+            leg_list, plan_conceptunit_insert_dict, x_plan
         )
-    if bud_conceptunit_update_dict is not None:
-        add_bud_conceptunit_update_to_legible_list(
-            leg_list, bud_conceptunit_update_dict, x_bud
+    if plan_conceptunit_update_dict is not None:
+        add_plan_conceptunit_update_to_legible_list(
+            leg_list, plan_conceptunit_update_dict, x_plan
         )
-    if bud_conceptunit_delete_dict is not None:
-        add_bud_conceptunit_delete_to_legible_list(
-            leg_list, bud_conceptunit_delete_dict, x_bud
-        )
-
-    if bud_concept_awardlink_insert_dict is not None:
-        add_bud_concept_awardlink_insert_to_legible_list(
-            leg_list, bud_concept_awardlink_insert_dict, x_bud
-        )
-    if bud_concept_awardlink_update_dict is not None:
-        add_bud_concept_awardlink_update_to_legible_list(
-            leg_list, bud_concept_awardlink_update_dict, x_bud
-        )
-    if bud_concept_awardlink_delete_dict is not None:
-        add_bud_concept_awardlink_delete_to_legible_list(
-            leg_list, bud_concept_awardlink_delete_dict, x_bud
+    if plan_conceptunit_delete_dict is not None:
+        add_plan_conceptunit_delete_to_legible_list(
+            leg_list, plan_conceptunit_delete_dict, x_plan
         )
 
-    if bud_concept_reasonunit_insert_dict is not None:
-        add_bud_concept_reasonunit_insert_to_legible_list(
-            leg_list, bud_concept_reasonunit_insert_dict, x_bud
+    if plan_concept_awardlink_insert_dict is not None:
+        add_plan_concept_awardlink_insert_to_legible_list(
+            leg_list, plan_concept_awardlink_insert_dict, x_plan
         )
-    if bud_concept_reasonunit_update_dict is not None:
-        add_bud_concept_reasonunit_update_to_legible_list(
-            leg_list, bud_concept_reasonunit_update_dict, x_bud
+    if plan_concept_awardlink_update_dict is not None:
+        add_plan_concept_awardlink_update_to_legible_list(
+            leg_list, plan_concept_awardlink_update_dict, x_plan
         )
-    if bud_concept_reasonunit_delete_dict is not None:
-        add_bud_concept_reasonunit_delete_to_legible_list(
-            leg_list, bud_concept_reasonunit_delete_dict, x_bud
-        )
-
-    if bud_concept_reason_premiseunit_insert_dict is not None:
-        add_bud_reason_premiseunit_insert_to_legible_list(
-            leg_list, bud_concept_reason_premiseunit_insert_dict, x_bud
-        )
-    if bud_concept_reason_premiseunit_update_dict is not None:
-        add_bud_reason_premiseunit_update_to_legible_list(
-            leg_list, bud_concept_reason_premiseunit_update_dict, x_bud
-        )
-    if bud_concept_reason_premiseunit_delete_dict is not None:
-        add_bud_reason_premiseunit_delete_to_legible_list(
-            leg_list, bud_concept_reason_premiseunit_delete_dict, x_bud
+    if plan_concept_awardlink_delete_dict is not None:
+        add_plan_concept_awardlink_delete_to_legible_list(
+            leg_list, plan_concept_awardlink_delete_dict, x_plan
         )
 
-    if bud_concept_laborlink_insert_dict is not None:
-        add_bud_concept_laborlink_insert_to_legible_list(
-            leg_list, bud_concept_laborlink_insert_dict, x_bud
+    if plan_concept_reasonunit_insert_dict is not None:
+        add_plan_concept_reasonunit_insert_to_legible_list(
+            leg_list, plan_concept_reasonunit_insert_dict, x_plan
         )
-    if bud_concept_laborlink_delete_dict is not None:
-        add_bud_concept_laborlink_delete_to_legible_list(
-            leg_list, bud_concept_laborlink_delete_dict, x_bud
+    if plan_concept_reasonunit_update_dict is not None:
+        add_plan_concept_reasonunit_update_to_legible_list(
+            leg_list, plan_concept_reasonunit_update_dict, x_plan
         )
-
-    if bud_concept_healerlink_insert_dict is not None:
-        add_bud_concept_healerlink_insert_to_legible_list(
-            leg_list, bud_concept_healerlink_insert_dict, x_bud
-        )
-    if bud_concept_healerlink_delete_dict is not None:
-        add_bud_concept_healerlink_delete_to_legible_list(
-            leg_list, bud_concept_healerlink_delete_dict, x_bud
+    if plan_concept_reasonunit_delete_dict is not None:
+        add_plan_concept_reasonunit_delete_to_legible_list(
+            leg_list, plan_concept_reasonunit_delete_dict, x_plan
         )
 
-    if bud_concept_factunit_insert_dict is not None:
-        add_bud_concept_factunit_insert_to_legible_list(
-            leg_list, bud_concept_factunit_insert_dict, x_bud
+    if plan_concept_reason_premiseunit_insert_dict is not None:
+        add_plan_reason_premiseunit_insert_to_legible_list(
+            leg_list, plan_concept_reason_premiseunit_insert_dict, x_plan
         )
-    if bud_concept_factunit_update_dict is not None:
-        add_bud_concept_factunit_update_to_legible_list(
-            leg_list, bud_concept_factunit_update_dict, x_bud
+    if plan_concept_reason_premiseunit_update_dict is not None:
+        add_plan_reason_premiseunit_update_to_legible_list(
+            leg_list, plan_concept_reason_premiseunit_update_dict, x_plan
         )
-    if bud_concept_factunit_delete_dict is not None:
-        add_bud_concept_factunit_delete_to_legible_list(
-            leg_list, bud_concept_factunit_delete_dict, x_bud
+    if plan_concept_reason_premiseunit_delete_dict is not None:
+        add_plan_reason_premiseunit_delete_to_legible_list(
+            leg_list, plan_concept_reason_premiseunit_delete_dict, x_plan
+        )
+
+    if plan_concept_laborlink_insert_dict is not None:
+        add_plan_concept_laborlink_insert_to_legible_list(
+            leg_list, plan_concept_laborlink_insert_dict, x_plan
+        )
+    if plan_concept_laborlink_delete_dict is not None:
+        add_plan_concept_laborlink_delete_to_legible_list(
+            leg_list, plan_concept_laborlink_delete_dict, x_plan
+        )
+
+    if plan_concept_healerlink_insert_dict is not None:
+        add_plan_concept_healerlink_insert_to_legible_list(
+            leg_list, plan_concept_healerlink_insert_dict, x_plan
+        )
+    if plan_concept_healerlink_delete_dict is not None:
+        add_plan_concept_healerlink_delete_to_legible_list(
+            leg_list, plan_concept_healerlink_delete_dict, x_plan
+        )
+
+    if plan_concept_factunit_insert_dict is not None:
+        add_plan_concept_factunit_insert_to_legible_list(
+            leg_list, plan_concept_factunit_insert_dict, x_plan
+        )
+    if plan_concept_factunit_update_dict is not None:
+        add_plan_concept_factunit_update_to_legible_list(
+            leg_list, plan_concept_factunit_update_dict, x_plan
+        )
+    if plan_concept_factunit_delete_dict is not None:
+        add_plan_concept_factunit_delete_to_legible_list(
+            leg_list, plan_concept_factunit_delete_dict, x_plan
         )
 
     return leg_list
 
 
-def add_budunit_legible_list(legible_list: list[str], x_atom: BudAtom, x_bud: BudUnit):
+def add_planunit_legible_list(
+    legible_list: list[str], x_atom: PlanAtom, x_plan: PlanUnit
+):
     jvalues = x_atom.jvalues
     _tally_str = "tally"
     _max_tree_traverse_str = "max_tree_traverse"
@@ -187,28 +189,28 @@ def add_budunit_legible_list(legible_list: list[str], x_atom: BudAtom, x_bud: Bu
     _tally_value = jvalues.get(_tally_str)
 
     if _max_tree_traverse_value is not None:
-        x_str = f"{x_bud.owner_name}'s maximum number of Bud evaluations set to {_max_tree_traverse_value}"
+        x_str = f"{x_plan.owner_name}'s maximum number of Plan evaluations set to {_max_tree_traverse_value}"
         legible_list.append(x_str)
     if (
         credor_respect_value is not None
         and debtor_respect_value is not None
         and credor_respect_value == debtor_respect_value
     ):
-        x_str = f"{x_bud.owner_name}'s total pool is now {credor_respect_value}"
+        x_str = f"{x_plan.owner_name}'s total pool is now {credor_respect_value}"
         legible_list.append(x_str)
     elif credor_respect_value is not None:
-        x_str = f"{x_bud.owner_name}'s credor pool is now {credor_respect_value}"
+        x_str = f"{x_plan.owner_name}'s credor pool is now {credor_respect_value}"
         legible_list.append(x_str)
     elif debtor_respect_value is not None:
-        x_str = f"{x_bud.owner_name}'s debtor pool is now {debtor_respect_value}"
+        x_str = f"{x_plan.owner_name}'s debtor pool is now {debtor_respect_value}"
         legible_list.append(x_str)
     if _tally_value is not None:
-        x_str = f"{x_bud.owner_name}'s bud tally set to {_tally_value}"
+        x_str = f"{x_plan.owner_name}'s plan tally set to {_tally_value}"
         legible_list.append(x_str)
 
 
-def add_bud_acctunit_insert_to_legible_list(
-    legible_list: list[str], acctunit_dict: BudAtom, x_bud: BudUnit
+def add_plan_acctunit_insert_to_legible_list(
+    legible_list: list[str], acctunit_dict: PlanAtom, x_plan: PlanUnit
 ):
     for acctunit_atom in acctunit_dict.values():
         acct_name = acctunit_atom.get_value("acct_name")
@@ -218,8 +220,8 @@ def add_bud_acctunit_insert_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_bud_acctunit_update_to_legible_list(
-    legible_list: list[str], acctunit_dict: BudAtom, x_bud: BudUnit
+def add_plan_acctunit_update_to_legible_list(
+    legible_list: list[str], acctunit_dict: PlanAtom, x_plan: PlanUnit
 ):
     for acctunit_atom in acctunit_dict.values():
         acct_name = acctunit_atom.get_value("acct_name")
@@ -234,8 +236,8 @@ def add_bud_acctunit_update_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_bud_acctunit_delete_to_legible_list(
-    legible_list: list[str], acctunit_dict: BudAtom, x_bud: BudUnit
+def add_plan_acctunit_delete_to_legible_list(
+    legible_list: list[str], acctunit_dict: PlanAtom, x_plan: PlanUnit
 ):
     for acctunit_atom in acctunit_dict.values():
         acct_name = acctunit_atom.get_value("acct_name")
@@ -243,8 +245,8 @@ def add_bud_acctunit_delete_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_bud_acct_membership_insert_to_legible_list(
-    legible_list: list[str], acct_membership_insert_dict: dict, x_bud: BudUnit
+def add_plan_acct_membership_insert_to_legible_list(
+    legible_list: list[str], acct_membership_insert_dict: dict, x_plan: PlanUnit
 ):
     for acct_membership_dict in acct_membership_insert_dict.values():
         for acct_membership_atom in acct_membership_dict.values():
@@ -256,8 +258,8 @@ def add_bud_acct_membership_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_bud_acct_membership_update_to_legible_list(
-    legible_list: list[str], acct_membership_update_dict: dict, x_bud: BudUnit
+def add_plan_acct_membership_update_to_legible_list(
+    legible_list: list[str], acct_membership_update_dict: dict, x_plan: PlanUnit
 ):
     for acct_membership_dict in acct_membership_update_dict.values():
         for acct_membership_atom in acct_membership_dict.values():
@@ -274,8 +276,8 @@ def add_bud_acct_membership_update_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_bud_acct_membership_delete_to_legible_list(
-    legible_list: list[str], acct_membership_delete_dict: dict, x_bud: BudUnit
+def add_plan_acct_membership_delete_to_legible_list(
+    legible_list: list[str], acct_membership_delete_dict: dict, x_plan: PlanUnit
 ):
     for acct_membership_dict in acct_membership_delete_dict.values():
         for acct_membership_atom in acct_membership_dict.values():
@@ -285,8 +287,8 @@ def add_bud_acct_membership_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_bud_conceptunit_insert_to_legible_list(
-    legible_list: list[str], conceptunit_insert_dict: dict, x_bud: BudUnit
+def add_plan_conceptunit_insert_to_legible_list(
+    legible_list: list[str], conceptunit_insert_dict: dict, x_plan: PlanUnit
 ):
     _problem_bool_str = "problem_bool"
     for conceptunit_atom in conceptunit_insert_dict.values():
@@ -299,7 +301,7 @@ def add_bud_conceptunit_insert_to_legible_list(
         _problem_bool_value = conceptunit_atom.get_value(_problem_bool_str)
         _morph_value = conceptunit_atom.get_value("morph")
         _mass_value = conceptunit_atom.get_value("mass")
-        pledge_value = conceptunit_atom.get_value("pledge")
+        task_value = conceptunit_atom.get_value("task")
         x_str = f"Created Concept '{way_value}'. "
         if _addin_value is not None:
             x_str += f"addin={_addin_value}."
@@ -317,14 +319,14 @@ def add_bud_conceptunit_insert_to_legible_list(
             x_str += f"morph={_morph_value}."
         if _mass_value is not None:
             x_str += f"mass={_mass_value}."
-        if pledge_value is not None:
-            x_str += f"pledge={pledge_value}."
+        if task_value is not None:
+            x_str += f"task={task_value}."
 
         legible_list.append(x_str)
 
 
-def add_bud_conceptunit_update_to_legible_list(
-    legible_list: list[str], conceptunit_update_dict: dict, x_bud: BudUnit
+def add_plan_conceptunit_update_to_legible_list(
+    legible_list: list[str], conceptunit_update_dict: dict, x_plan: PlanUnit
 ):
     _problem_bool_str = "problem_bool"
     for conceptunit_atom in conceptunit_update_dict.values():
@@ -337,7 +339,7 @@ def add_bud_conceptunit_update_to_legible_list(
         problem_bool_value = conceptunit_atom.get_value(_problem_bool_str)
         morph_value = conceptunit_atom.get_value("morph")
         mass_value = conceptunit_atom.get_value("mass")
-        pledge_value = conceptunit_atom.get_value("pledge")
+        task_value = conceptunit_atom.get_value("task")
         x_str = f"Concept '{way_value}' set these attributes: "
         if addin_value is not None:
             x_str += f"addin={addin_value}."
@@ -355,14 +357,14 @@ def add_bud_conceptunit_update_to_legible_list(
             x_str += f"morph={morph_value}."
         if mass_value is not None:
             x_str += f"mass={mass_value}."
-        if pledge_value is not None:
-            x_str += f"pledge={pledge_value}."
+        if task_value is not None:
+            x_str += f"task={task_value}."
 
         legible_list.append(x_str)
 
 
-def add_bud_conceptunit_delete_to_legible_list(
-    legible_list: list[str], conceptunit_delete_dict: dict, x_bud: BudUnit
+def add_plan_conceptunit_delete_to_legible_list(
+    legible_list: list[str], conceptunit_delete_dict: dict, x_plan: PlanUnit
 ):
     for conceptunit_atom in conceptunit_delete_dict.values():
         way_value = conceptunit_atom.get_value("concept_way")
@@ -370,8 +372,8 @@ def add_bud_conceptunit_delete_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_bud_concept_awardlink_insert_to_legible_list(
-    legible_list: list[str], concept_awardlink_insert_dict: dict, x_bud: BudUnit
+def add_plan_concept_awardlink_insert_to_legible_list(
+    legible_list: list[str], concept_awardlink_insert_dict: dict, x_plan: PlanUnit
 ):
     for way_dict in concept_awardlink_insert_dict.values():
         for concept_awardlink_atom in way_dict.values():
@@ -383,8 +385,8 @@ def add_bud_concept_awardlink_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_bud_concept_awardlink_update_to_legible_list(
-    legible_list: list[str], concept_awardlink_update_dict: dict, x_bud: BudUnit
+def add_plan_concept_awardlink_update_to_legible_list(
+    legible_list: list[str], concept_awardlink_update_dict: dict, x_plan: PlanUnit
 ):
     for way_dict in concept_awardlink_update_dict.values():
         for concept_awardlink_atom in way_dict.values():
@@ -401,8 +403,8 @@ def add_bud_concept_awardlink_update_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_bud_concept_awardlink_delete_to_legible_list(
-    legible_list: list[str], concept_awardlink_delete_dict: dict, x_bud: BudUnit
+def add_plan_concept_awardlink_delete_to_legible_list(
+    legible_list: list[str], concept_awardlink_delete_dict: dict, x_plan: PlanUnit
 ):
     for way_dict in concept_awardlink_delete_dict.values():
         for concept_awardlink_atom in way_dict.values():
@@ -412,8 +414,8 @@ def add_bud_concept_awardlink_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_bud_concept_reasonunit_insert_to_legible_list(
-    legible_list: list[str], concept_reasonunit_insert_dict: dict, x_bud: BudUnit
+def add_plan_concept_reasonunit_insert_to_legible_list(
+    legible_list: list[str], concept_reasonunit_insert_dict: dict, x_plan: PlanUnit
 ):
     for way_dict in concept_reasonunit_insert_dict.values():
         for concept_reasonunit_atom in way_dict.values():
@@ -430,8 +432,8 @@ def add_bud_concept_reasonunit_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_bud_concept_reasonunit_update_to_legible_list(
-    legible_list: list[str], concept_reasonunit_update_dict: dict, x_bud: BudUnit
+def add_plan_concept_reasonunit_update_to_legible_list(
+    legible_list: list[str], concept_reasonunit_update_dict: dict, x_plan: PlanUnit
 ):
     for way_dict in concept_reasonunit_update_dict.values():
         for concept_reasonunit_atom in way_dict.values():
@@ -447,8 +449,8 @@ def add_bud_concept_reasonunit_update_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_bud_concept_reasonunit_delete_to_legible_list(
-    legible_list: list[str], concept_reasonunit_delete_dict: dict, x_bud: BudUnit
+def add_plan_concept_reasonunit_delete_to_legible_list(
+    legible_list: list[str], concept_reasonunit_delete_dict: dict, x_plan: PlanUnit
 ):
     for way_dict in concept_reasonunit_delete_dict.values():
         for concept_reasonunit_atom in way_dict.values():
@@ -458,10 +460,10 @@ def add_bud_concept_reasonunit_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_bud_reason_premiseunit_insert_to_legible_list(
+def add_plan_reason_premiseunit_insert_to_legible_list(
     legible_list: list[str],
     concept_reason_premiseunit_insert_dict: dict,
-    x_bud: BudUnit,
+    x_plan: PlanUnit,
 ):
     for way_dict in concept_reason_premiseunit_insert_dict.values():
         for rcontext_dict in way_dict.values():
@@ -482,10 +484,10 @@ def add_bud_reason_premiseunit_insert_to_legible_list(
                 legible_list.append(x_str)
 
 
-def add_bud_reason_premiseunit_update_to_legible_list(
+def add_plan_reason_premiseunit_update_to_legible_list(
     legible_list: list[str],
     concept_reason_premiseunit_update_dict: dict,
-    x_bud: BudUnit,
+    x_plan: PlanUnit,
 ):
     for way_dict in concept_reason_premiseunit_update_dict.values():
         for rcontext_dict in way_dict.values():
@@ -506,10 +508,10 @@ def add_bud_reason_premiseunit_update_to_legible_list(
                 legible_list.append(x_str)
 
 
-def add_bud_reason_premiseunit_delete_to_legible_list(
+def add_plan_reason_premiseunit_delete_to_legible_list(
     legible_list: list[str],
     concept_reason_premiseunit_delete_dict: dict,
-    x_bud: BudUnit,
+    x_plan: PlanUnit,
 ):
     for way_dict in concept_reason_premiseunit_delete_dict.values():
         for rcontext_dict in way_dict.values():
@@ -521,8 +523,8 @@ def add_bud_reason_premiseunit_delete_to_legible_list(
                 legible_list.append(x_str)
 
 
-def add_bud_concept_laborlink_insert_to_legible_list(
-    legible_list: list[str], concept_laborlink_insert_dict: dict, x_bud: BudUnit
+def add_plan_concept_laborlink_insert_to_legible_list(
+    legible_list: list[str], concept_laborlink_insert_dict: dict, x_plan: PlanUnit
 ):
     for way_dict in concept_laborlink_insert_dict.values():
         for concept_laborlink_atom in way_dict.values():
@@ -534,8 +536,8 @@ def add_bud_concept_laborlink_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_bud_concept_laborlink_delete_to_legible_list(
-    legible_list: list[str], concept_laborlink_delete_dict: dict, x_bud: BudUnit
+def add_plan_concept_laborlink_delete_to_legible_list(
+    legible_list: list[str], concept_laborlink_delete_dict: dict, x_plan: PlanUnit
 ):
     for way_dict in concept_laborlink_delete_dict.values():
         for concept_laborlink_atom in way_dict.values():
@@ -547,8 +549,8 @@ def add_bud_concept_laborlink_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_bud_concept_healerlink_insert_to_legible_list(
-    legible_list: list[str], concept_healerlink_insert_dict: dict, x_bud: BudUnit
+def add_plan_concept_healerlink_insert_to_legible_list(
+    legible_list: list[str], concept_healerlink_insert_dict: dict, x_plan: PlanUnit
 ):
     for way_dict in concept_healerlink_insert_dict.values():
         for concept_healerlink_atom in way_dict.values():
@@ -560,8 +562,8 @@ def add_bud_concept_healerlink_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_bud_concept_healerlink_delete_to_legible_list(
-    legible_list: list[str], concept_healerlink_delete_dict: dict, x_bud: BudUnit
+def add_plan_concept_healerlink_delete_to_legible_list(
+    legible_list: list[str], concept_healerlink_delete_dict: dict, x_plan: PlanUnit
 ):
     for way_dict in concept_healerlink_delete_dict.values():
         for concept_healerlink_atom in way_dict.values():
@@ -573,8 +575,8 @@ def add_bud_concept_healerlink_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_bud_concept_factunit_insert_to_legible_list(
-    legible_list: list[str], concept_factunit_insert_dict: dict, x_bud: BudUnit
+def add_plan_concept_factunit_insert_to_legible_list(
+    legible_list: list[str], concept_factunit_insert_dict: dict, x_plan: PlanUnit
 ):
     for way_dict in concept_factunit_insert_dict.values():
         for concept_factunit_atom in way_dict.values():
@@ -591,8 +593,8 @@ def add_bud_concept_factunit_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_bud_concept_factunit_update_to_legible_list(
-    legible_list: list[str], concept_factunit_update_dict: dict, x_bud: BudUnit
+def add_plan_concept_factunit_update_to_legible_list(
+    legible_list: list[str], concept_factunit_update_dict: dict, x_plan: PlanUnit
 ):
     for way_dict in concept_factunit_update_dict.values():
         for concept_factunit_atom in way_dict.values():
@@ -609,8 +611,8 @@ def add_bud_concept_factunit_update_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_bud_concept_factunit_delete_to_legible_list(
-    legible_list: list[str], concept_factunit_delete_dict: dict, x_bud: BudUnit
+def add_plan_concept_factunit_delete_to_legible_list(
+    legible_list: list[str], concept_factunit_delete_dict: dict, x_plan: PlanUnit
 ):
     for way_dict in concept_factunit_delete_dict.values():
         for concept_factunit_atom in way_dict.values():

@@ -11,7 +11,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_json_from_dict,
     set_in_nested_dict,
 )
-from src.a01_term_logic.term import AcctName, FiscLabel, OwnerName
+from src.a01_term_logic.term import AcctName, OwnerName, VowLabel
 from src.a02_finance_logic.finance_config import (
     FundNum,
     TimeLinePoint,
@@ -46,7 +46,7 @@ def tranunit_shop(
 
 @dataclass
 class TranBook:
-    fisc_label: FiscLabel = None
+    vow_label: VowLabel = None
     tranunits: dict[OwnerName, dict[AcctName, dict[TimeLinePoint, FundNum]]] = None
     _accts_net: dict[OwnerName, dict[AcctName, FundNum]] = None
 
@@ -158,16 +158,16 @@ class TranBook:
 
     def get_dict(
         self,
-    ) -> dict[FiscLabel, dict[OwnerName, dict[AcctName, dict[TimeLinePoint, FundNum]]]]:
-        return {"fisc_label": self.fisc_label, "tranunits": self.tranunits}
+    ) -> dict[VowLabel, dict[OwnerName, dict[AcctName, dict[TimeLinePoint, FundNum]]]]:
+        return {"vow_label": self.vow_label, "tranunits": self.tranunits}
 
 
 def tranbook_shop(
-    x_fisc_label: FiscLabel,
+    x_vow_label: VowLabel,
     x_tranunits: dict[OwnerName, dict[AcctName, dict[TimeLinePoint, FundNum]]] = None,
 ):
     return TranBook(
-        fisc_label=x_fisc_label,
+        vow_label=x_vow_label,
         tranunits=get_empty_dict_if_None(x_tranunits),
         _accts_net={},
     )
@@ -181,7 +181,7 @@ def get_tranbook_from_dict(x_dict: dict) -> TranBook:
             for x_tran_time, x_amount in x_tran_time_dict.items():
                 x_key_list = [x_owner_name, x_acct_name, int(x_tran_time)]
                 set_in_nested_dict(new_tranunits, x_key_list, x_amount)
-    return tranbook_shop(x_dict.get("fisc_label"), new_tranunits)
+    return tranbook_shop(x_dict.get("vow_label"), new_tranunits)
 
 
 @dataclass
@@ -295,8 +295,8 @@ class BrokerUnit:
     def get_deal_times(self) -> set[TimeLinePoint]:
         return set(self.deals.keys())
 
-    def get_tranbook(self, fisc_label: FiscLabel) -> TranBook:
-        x_tranbook = tranbook_shop(fisc_label)
+    def get_tranbook(self, vow_label: VowLabel) -> TranBook:
+        x_tranbook = tranbook_shop(vow_label)
         for x_deal_time, x_deal in self.deals.items():
             for dst_acct_name, x_quota in x_deal._deal_acct_nets.items():
                 x_tranbook.add_tranunit(

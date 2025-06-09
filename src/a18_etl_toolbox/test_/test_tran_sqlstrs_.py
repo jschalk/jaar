@@ -6,34 +6,34 @@ from src.a00_data_toolbox.db_toolbox import (
 )
 from src.a02_finance_logic._test_util.a02_str import (
     deal_time_str,
-    fisc_label_str,
     owner_name_str,
     tran_time_str,
+    vow_label_str,
 )
-from src.a06_bud_logic._test_util.a06_str import (
-    bud_acct_membership_str,
-    bud_acctunit_str,
-    bud_concept_awardlink_str,
-    bud_concept_factunit_str,
-    bud_concept_healerlink_str,
-    bud_concept_laborlink_str,
-    bud_concept_reason_premiseunit_str,
-    bud_concept_reasonunit_str,
-    bud_conceptunit_str,
-    budunit_str,
+from src.a06_plan_logic._test_util.a06_str import (
+    plan_acct_membership_str,
+    plan_acctunit_str,
+    plan_concept_awardlink_str,
+    plan_concept_factunit_str,
+    plan_concept_healerlink_str,
+    plan_concept_laborlink_str,
+    plan_concept_reason_premiseunit_str,
+    plan_concept_reasonunit_str,
+    plan_conceptunit_str,
+    planunit_str,
 )
-from src.a08_bud_atom_logic.atom_config import get_delete_key_name
+from src.a08_plan_atom_logic.atom_config import get_delete_key_name
 from src.a09_pack_logic._test_util.a09_str import event_int_str
-from src.a10_bud_calc._test_util.a10_str import bud_groupunit_str
+from src.a10_plan_calc._test_util.a10_str import plan_groupunit_str
 from src.a12_hub_tools._test_util.a12_str import job_str
-from src.a15_fisc_logic._test_util.a15_str import (
-    fisc_cashbook_str,
-    fisc_dealunit_str,
-    fisc_timeline_hour_str,
-    fisc_timeline_month_str,
-    fisc_timeline_weekday_str,
-    fisc_timeoffi_str,
-    fiscunit_str,
+from src.a15_vow_logic._test_util.a15_str import (
+    vow_dealunit_str,
+    vow_paybook_str,
+    vow_timeline_hour_str,
+    vow_timeline_month_str,
+    vow_timeline_weekday_str,
+    vow_timeoffi_str,
+    vowunit_str,
 )
 from src.a16_pidgin_logic._test_util.a16_str import (
     pidgin_core_str,
@@ -50,12 +50,12 @@ from src.a17_idea_logic.idea_db_tool import (
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
-    CREATE_FISC_EVENT_TIME_AGG_SQLSTR,
-    CREATE_FISC_OTE1_AGG_SQLSTR,
+    CREATE_VOW_EVENT_TIME_AGG_SQLSTR,
+    CREATE_VOW_OTE1_AGG_SQLSTR,
     IDEA_STAGEBLE_DEL_DIMENS,
-    INSERT_FISC_EVENT_TIME_AGG_SQLSTR,
-    INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR,
-    UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR,
+    INSERT_VOW_EVENT_TIME_AGG_SQLSTR,
+    INSERT_VOW_OTE1_AGG_FROM_VOICE_SQLSTR,
+    UPDATE_ERROR_MESSAGE_VOW_EVENT_TIME_AGG_SQLSTR,
     create_all_idea_tables,
     create_prime_tablename,
     create_sound_and_voice_tables,
@@ -70,24 +70,24 @@ def test_ALL_DIMEN_ABBV7_has_all_dimens():
 
 def test_create_prime_tablename_ReturnsObj():
     # ESTABLISH
-    budunit_dimen = budunit_str()
-    budacct_dimen = bud_acctunit_str()
-    budmemb_dimen = bud_acct_membership_str()
-    budgrou_dimen = bud_groupunit_str()
-    budconc_dimen = bud_conceptunit_str()
-    budawar_dimen = bud_concept_awardlink_str()
-    budreas_dimen = bud_concept_reasonunit_str()
-    budprem_dimen = bud_concept_reason_premiseunit_str()
-    budlabo_dimen = bud_concept_laborlink_str()
-    budheal_dimen = bud_concept_healerlink_str()
-    budfact_dimen = bud_concept_factunit_str()
-    fisunit_dimen = fiscunit_str()
-    fiscash_dimen = fisc_cashbook_str()
-    fisdeal_dimen = fisc_dealunit_str()
-    fishour_dimen = fisc_timeline_hour_str()
-    fismont_dimen = fisc_timeline_month_str()
-    fisweek_dimen = fisc_timeline_weekday_str()
-    fisoffi_dimen = fisc_timeoffi_str()
+    planunit_dimen = planunit_str()
+    planacct_dimen = plan_acctunit_str()
+    planmemb_dimen = plan_acct_membership_str()
+    plangrou_dimen = plan_groupunit_str()
+    planconc_dimen = plan_conceptunit_str()
+    planawar_dimen = plan_concept_awardlink_str()
+    planreas_dimen = plan_concept_reasonunit_str()
+    planprem_dimen = plan_concept_reason_premiseunit_str()
+    planlabo_dimen = plan_concept_laborlink_str()
+    planheal_dimen = plan_concept_healerlink_str()
+    planfact_dimen = plan_concept_factunit_str()
+    fisunit_dimen = vowunit_str()
+    vowash_dimen = vow_paybook_str()
+    fisdeal_dimen = vow_dealunit_str()
+    fishour_dimen = vow_timeline_hour_str()
+    fismont_dimen = vow_timeline_month_str()
+    fisweek_dimen = vow_timeline_weekday_str()
+    fisoffi_dimen = vow_timeoffi_str()
     pidname_dimen = pidgin_name_str()
     pidlabe_dimen = pidgin_label_str()
     pidwayy_dimen = pidgin_way_str()
@@ -100,19 +100,19 @@ def test_create_prime_tablename_ReturnsObj():
     del_str = "del"
 
     # WHEN
-    budunit_s_agg_table = create_prime_tablename("budunit", "s", agg_str, put_str)
-    budacct_s_agg_table = create_prime_tablename("budacct", "s", agg_str, put_str)
-    budmemb_s_agg_table = create_prime_tablename("budmemb", "s", agg_str, put_str)
-    budconc_s_agg_table = create_prime_tablename("budconc", "s", agg_str, put_str)
-    budawar_s_agg_table = create_prime_tablename("budawar", "s", agg_str, put_str)
-    budreas_s_agg_table = create_prime_tablename("budreas", "s", agg_str, put_str)
-    budprem_s_agg_table = create_prime_tablename("budprem", "s", agg_str, put_str)
-    budlabo_s_agg_table = create_prime_tablename("BUDLABO", "s", agg_str, put_str)
-    budheal_s_agg_table = create_prime_tablename("budheal", "s", agg_str, put_str)
-    budfact_s_agg_table = create_prime_tablename("budfact", "s", agg_str, put_str)
-    budfact_s_del_table = create_prime_tablename("budfact", "s", agg_str, del_str)
+    planunit_s_agg_table = create_prime_tablename("planunit", "s", agg_str, put_str)
+    planacct_s_agg_table = create_prime_tablename("planacct", "s", agg_str, put_str)
+    planmemb_s_agg_table = create_prime_tablename("planmemb", "s", agg_str, put_str)
+    planconc_s_agg_table = create_prime_tablename("planconc", "s", agg_str, put_str)
+    planawar_s_agg_table = create_prime_tablename("planawar", "s", agg_str, put_str)
+    planreas_s_agg_table = create_prime_tablename("planreas", "s", agg_str, put_str)
+    planprem_s_agg_table = create_prime_tablename("planprem", "s", agg_str, put_str)
+    planlabo_s_agg_table = create_prime_tablename("PLANLABO", "s", agg_str, put_str)
+    planheal_s_agg_table = create_prime_tablename("planheal", "s", agg_str, put_str)
+    planfact_s_agg_table = create_prime_tablename("planfact", "s", agg_str, put_str)
+    planfact_s_del_table = create_prime_tablename("planfact", "s", agg_str, del_str)
     fisunit_s_agg_table = create_prime_tablename("fisunit", "s", agg_str)
-    fiscash_s_agg_table = create_prime_tablename("fiscash", "s", agg_str)
+    vowash_s_agg_table = create_prime_tablename("vowash", "s", agg_str)
     fisdeal_s_agg_table = create_prime_tablename("fisdeal", "s", agg_str)
     fishour_s_agg_table = create_prime_tablename("fishour", "s", agg_str)
     fismont_s_agg_table = create_prime_tablename("fismont", "s", agg_str)
@@ -127,24 +127,24 @@ def test_create_prime_tablename_ReturnsObj():
     pidtitl_s_val_table = create_prime_tablename("pidtitl", "s", vld_str)
     pidcore_s_raw_table = create_prime_tablename("pidcore", "s", raw_str)
     pidcore_s_agg_table = create_prime_tablename("pidcore", "s", agg_str)
-    budacct_job_table = create_prime_tablename("budacct", job_str(), None)
-    x_budacct_raw = create_prime_tablename("budacct", "k", raw_str)
-    budgrou_job_table = create_prime_tablename("budgrou", job_str(), None)
+    planacct_job_table = create_prime_tablename("planacct", job_str(), None)
+    x_planacct_raw = create_prime_tablename("planacct", "k", raw_str)
+    plangrou_job_table = create_prime_tablename("plangrou", job_str(), None)
 
     # THEN
-    assert budunit_s_agg_table == f"{budunit_dimen}_s_put_agg"
-    assert budacct_s_agg_table == f"{budacct_dimen}_s_put_agg"
-    assert budmemb_s_agg_table == f"{budmemb_dimen}_s_put_agg"
-    assert budconc_s_agg_table == f"{budconc_dimen}_s_put_agg"
-    assert budawar_s_agg_table == f"{budawar_dimen}_s_put_agg"
-    assert budreas_s_agg_table == f"{budreas_dimen}_s_put_agg"
-    assert budprem_s_agg_table == f"{budprem_dimen}_s_put_agg"
-    assert budlabo_s_agg_table == f"{budlabo_dimen}_s_put_agg"
-    assert budheal_s_agg_table == f"{budheal_dimen}_s_put_agg"
-    assert budfact_s_agg_table == f"{budfact_dimen}_s_put_agg"
-    assert budfact_s_del_table == f"{budfact_dimen}_s_del_agg"
+    assert planunit_s_agg_table == f"{planunit_dimen}_s_put_agg"
+    assert planacct_s_agg_table == f"{planacct_dimen}_s_put_agg"
+    assert planmemb_s_agg_table == f"{planmemb_dimen}_s_put_agg"
+    assert planconc_s_agg_table == f"{planconc_dimen}_s_put_agg"
+    assert planawar_s_agg_table == f"{planawar_dimen}_s_put_agg"
+    assert planreas_s_agg_table == f"{planreas_dimen}_s_put_agg"
+    assert planprem_s_agg_table == f"{planprem_dimen}_s_put_agg"
+    assert planlabo_s_agg_table == f"{planlabo_dimen}_s_put_agg"
+    assert planheal_s_agg_table == f"{planheal_dimen}_s_put_agg"
+    assert planfact_s_agg_table == f"{planfact_dimen}_s_put_agg"
+    assert planfact_s_del_table == f"{planfact_dimen}_s_del_agg"
     assert fisunit_s_agg_table == f"{fisunit_dimen}_s_agg"
-    assert fiscash_s_agg_table == f"{fiscash_dimen}_s_agg"
+    assert vowash_s_agg_table == f"{vowash_dimen}_s_agg"
     assert fisdeal_s_agg_table == f"{fisdeal_dimen}_s_agg"
     assert fishour_s_agg_table == f"{fishour_dimen}_s_agg"
     assert fismont_s_agg_table == f"{fismont_dimen}_s_agg"
@@ -159,16 +159,16 @@ def test_create_prime_tablename_ReturnsObj():
     assert pidtitl_s_val_table == f"{pidtitl_dimen}_s_vld"
     assert pidcore_s_raw_table == f"{pidcore_dimen}_s_raw"
     assert pidcore_s_agg_table == f"{pidcore_dimen}_s_agg"
-    assert budacct_job_table == f"{budacct_dimen}_job"
-    assert budgrou_job_table == f"{budgrou_dimen}_job"
-    assert x_budacct_raw == "bud_acctunit_raw"
+    assert planacct_job_table == f"{planacct_dimen}_job"
+    assert plangrou_job_table == f"{plangrou_dimen}_job"
+    assert x_planacct_raw == "plan_acctunit_raw"
 
 
-def test_create_all_idea_tables_CreatesFiscRawTables():
+def test_create_all_idea_tables_CreatesVowRawTables():
     # ESTABLISH sourcery skip: no-loop-in-tests
     idea_numbers = get_idea_numbers()
-    with sqlite3_connect(":memory:") as fisc_db_conn:
-        cursor = fisc_db_conn.cursor()
+    with sqlite3_connect(":memory:") as vow_db_conn:
+        cursor = vow_db_conn.cursor()
         for idea_number in idea_numbers:
             assert db_table_exists(cursor, f"{idea_number}_raw") is False
 
@@ -190,10 +190,10 @@ def test_get_idea_stageble_put_dimens_HasAll_idea_numbersForAll_dimens():
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
         if dimen_config.get(idea_category_str()) != "pidgin"
-        # if dimen_config.get(idea_category_str()) == "fisc"
+        # if dimen_config.get(idea_category_str()) == "vow"
     }
-    with sqlite3_connect(":memory:") as fisc_db_conn:
-        cursor = fisc_db_conn.cursor()
+    with sqlite3_connect(":memory:") as vow_db_conn:
+        cursor = vow_db_conn.cursor()
         create_all_idea_tables(cursor)
         create_sound_and_voice_tables(cursor)
 
@@ -253,10 +253,10 @@ def test_IDEA_STAGEBLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
         if dimen_config.get(idea_category_str()) != "pidgin"
-        # if dimen_config.get(idea_category_str()) == "fisc"
+        # if dimen_config.get(idea_category_str()) == "vow"
     }
-    with sqlite3_connect(":memory:") as fisc_db_conn:
-        cursor = fisc_db_conn.cursor()
+    with sqlite3_connect(":memory:") as vow_db_conn:
+        cursor = vow_db_conn.cursor()
         create_all_idea_tables(cursor)
         create_sound_and_voice_tables(cursor)
 
@@ -310,11 +310,11 @@ def test_IDEA_STAGEBLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
     assert IDEA_STAGEBLE_DEL_DIMENS == expected_idea_slabelable_dimens
 
 
-def test_CREATE_FISC_EVENT_TIME_AGG_SQLSTR_Exists():
+def test_CREATE_VOW_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_create_table_sqlstr = f"""
-CREATE TABLE IF NOT EXISTS fisc_event_time_agg (
-  {fisc_label_str()} TEXT
+CREATE TABLE IF NOT EXISTS vow_event_time_agg (
+  {vow_label_str()} TEXT
 , {event_int_str()} INTEGER
 , agg_time INTEGER
 , error_message TEXT
@@ -322,59 +322,59 @@ CREATE TABLE IF NOT EXISTS fisc_event_time_agg (
 ;
 """
     # WHEN / THEN
-    assert CREATE_FISC_EVENT_TIME_AGG_SQLSTR == expected_create_table_sqlstr
+    assert CREATE_VOW_EVENT_TIME_AGG_SQLSTR == expected_create_table_sqlstr
 
 
-def test_INSERT_FISC_EVENT_TIME_AGG_SQLSTR_Exists():
+def test_INSERT_VOW_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_INSERT_sqlstr = f"""
-INSERT INTO fisc_event_time_agg ({fisc_label_str()}, {event_int_str()}, agg_time)
-SELECT {fisc_label_str()}, {event_int_str()}, agg_time
+INSERT INTO vow_event_time_agg ({vow_label_str()}, {event_int_str()}, agg_time)
+SELECT {vow_label_str()}, {event_int_str()}, agg_time
 FROM (
-    SELECT {fisc_label_str()}, {event_int_str()}, {tran_time_str()} as agg_time
-    FROM fisc_cashbook_raw
-    GROUP BY {fisc_label_str()}, {event_int_str()}, {tran_time_str()}
+    SELECT {vow_label_str()}, {event_int_str()}, {tran_time_str()} as agg_time
+    FROM vow_paybook_raw
+    GROUP BY {vow_label_str()}, {event_int_str()}, {tran_time_str()}
     UNION 
-    SELECT {fisc_label_str()}, {event_int_str()}, {deal_time_str()} as agg_time
-    FROM fisc_dealunit_raw
-    GROUP BY {fisc_label_str()}, {event_int_str()}, {deal_time_str()}
+    SELECT {vow_label_str()}, {event_int_str()}, {deal_time_str()} as agg_time
+    FROM vow_dealunit_raw
+    GROUP BY {vow_label_str()}, {event_int_str()}, {deal_time_str()}
 )
-ORDER BY {fisc_label_str()}, {event_int_str()}, agg_time
+ORDER BY {vow_label_str()}, {event_int_str()}, agg_time
 ;
 """
     # WHEN / THEN
-    assert INSERT_FISC_EVENT_TIME_AGG_SQLSTR == expected_INSERT_sqlstr
+    assert INSERT_VOW_EVENT_TIME_AGG_SQLSTR == expected_INSERT_sqlstr
 
 
-def test_UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR_Exists():
+def test_UPDATE_ERROR_MESSAGE_VOW_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_UPDATE_sqlstr = f"""
 WITH EventTimeOrdered AS (
-    SELECT {fisc_label_str()}, {event_int_str()}, agg_time,
-           LAG(agg_time) OVER (PARTITION BY {fisc_label_str()} ORDER BY {event_int_str()}) AS prev_agg_time
-    FROM fisc_event_time_agg
+    SELECT {vow_label_str()}, {event_int_str()}, agg_time,
+           LAG(agg_time) OVER (PARTITION BY {vow_label_str()} ORDER BY {event_int_str()}) AS prev_agg_time
+    FROM vow_event_time_agg
 )
-UPDATE fisc_event_time_agg
+UPDATE vow_event_time_agg
 SET error_message = CASE 
          WHEN EventTimeOrdered.prev_agg_time > EventTimeOrdered.agg_time
          THEN 'not sorted'
          ELSE 'sorted'
        END 
 FROM EventTimeOrdered
-WHERE EventTimeOrdered.{event_int_str()} = fisc_event_time_agg.{event_int_str()}
-    AND EventTimeOrdered.{fisc_label_str()} = fisc_event_time_agg.{fisc_label_str()}
-    AND EventTimeOrdered.agg_time = fisc_event_time_agg.agg_time
+WHERE EventTimeOrdered.{event_int_str()} = vow_event_time_agg.{event_int_str()}
+    AND EventTimeOrdered.{vow_label_str()} = vow_event_time_agg.{vow_label_str()}
+    AND EventTimeOrdered.agg_time = vow_event_time_agg.agg_time
 ;
 """
     # WHEN / THEN
-    assert UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR == expected_UPDATE_sqlstr
+    assert UPDATE_ERROR_MESSAGE_VOW_EVENT_TIME_AGG_SQLSTR == expected_UPDATE_sqlstr
 
 
-def test_CREATE_FISC_OTE1_AGG_SQLSTR_Exists():
+def test_CREATE_VOW_OTE1_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_create_table_sqlstr = f"""
-CREATE TABLE IF NOT EXISTS fisc_ote1_agg (
-  {fisc_label_str()} TEXT
+CREATE TABLE IF NOT EXISTS vow_ote1_agg (
+  {vow_label_str()} TEXT
 , {owner_name_str()} TEXT
 , {event_int_str()} INTEGER
 , {deal_time_str()} INTEGER
@@ -383,28 +383,28 @@ CREATE TABLE IF NOT EXISTS fisc_ote1_agg (
 ;
 """
     # WHEN / THEN
-    assert CREATE_FISC_OTE1_AGG_SQLSTR == expected_create_table_sqlstr
+    assert CREATE_VOW_OTE1_AGG_SQLSTR == expected_create_table_sqlstr
 
 
 # TODO create test to prove this insert should grab minimun event_int instead of just event_int
 # TODO create test to prove this insert should never grab when error message is not null in source table
-def test_INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR_Exists():
+def test_INSERT_VOW_OTE1_AGG_FROM_VOICE_SQLSTR_Exists():
     # ESTABLISH
-    fisdeal_v_raw_tablename = create_prime_tablename(fisc_dealunit_str(), "v", "raw")
+    fisdeal_v_raw_tablename = create_prime_tablename(vow_dealunit_str(), "v", "raw")
     expected_INSERT_sqlstr = f"""
-INSERT INTO fisc_ote1_agg ({fisc_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()})
-SELECT {fisc_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
+INSERT INTO vow_ote1_agg ({vow_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()})
+SELECT {vow_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
 FROM (
     SELECT 
-      {fisc_label_str()}_inx {fisc_label_str()}
+      {vow_label_str()}_inx {vow_label_str()}
     , {owner_name_str()}_inx {owner_name_str()}
     , {event_int_str()}
     , {deal_time_str()}
     FROM {fisdeal_v_raw_tablename}
-    GROUP BY {fisc_label_str()}_inx, {owner_name_str()}_inx, {event_int_str()}, {deal_time_str()}
+    GROUP BY {vow_label_str()}_inx, {owner_name_str()}_inx, {event_int_str()}, {deal_time_str()}
 )
-ORDER BY {fisc_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
+ORDER BY {vow_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
 ;
 """
     # WHEN / THEN
-    assert INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR == expected_INSERT_sqlstr
+    assert INSERT_VOW_OTE1_AGG_FROM_VOICE_SQLSTR == expected_INSERT_sqlstr

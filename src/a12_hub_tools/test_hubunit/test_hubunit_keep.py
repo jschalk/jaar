@@ -3,7 +3,7 @@ from pytest import raises as pytest_raises
 from src.a00_data_toolbox.file_toolbox import delete_dir, open_file, save_file
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a05_concept_logic.healer import healerlink_shop
-from src.a06_bud_logic.bud_graphics import display_concepttree
+from src.a06_plan_logic.plan_graphics import display_concepttree
 from src.a12_hub_tools._test_util.a12_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as env_dir,
@@ -22,27 +22,27 @@ def test_HubUnit_get_keep_ways_RaisesErrorWhen__keeps_justified_IsFalse(
     sue_str = "Sue"
     a23_str = "accord23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
-    save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
-    sue_gut_bud = open_gut_file(env_dir(), a23_str, sue_str)
-    sue_gut_bud.add_acctunit(sue_str)
+    save_gut_file(env_dir(), sue_hubunit.default_gut_plan())
+    sue_gut_plan = open_gut_file(env_dir(), a23_str, sue_str)
+    sue_gut_plan.add_acctunit(sue_str)
     texas_str = "Texas"
-    texas_way = sue_gut_bud.make_l1_way(texas_str)
+    texas_way = sue_gut_plan.make_l1_way(texas_str)
     dallas_str = "dallas"
-    dallas_way = sue_gut_bud.make_way(texas_way, dallas_str)
-    sue_gut_bud.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
-    sue_gut_bud.set_concept(conceptunit_shop(dallas_str), texas_way)
-    sue_gut_bud.edit_concept_attr(texas_way, healerlink=healerlink_shop({sue_str}))
-    sue_gut_bud.edit_concept_attr(dallas_way, healerlink=healerlink_shop({sue_str}))
-    sue_gut_bud.settle_bud()
-    assert sue_gut_bud._keeps_justified is False
-    save_gut_file(env_dir(), sue_gut_bud)
+    dallas_way = sue_gut_plan.make_way(texas_way, dallas_str)
+    sue_gut_plan.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
+    sue_gut_plan.set_concept(conceptunit_shop(dallas_str), texas_way)
+    sue_gut_plan.edit_concept_attr(texas_way, healerlink=healerlink_shop({sue_str}))
+    sue_gut_plan.edit_concept_attr(dallas_way, healerlink=healerlink_shop({sue_str}))
+    sue_gut_plan.settle_plan()
+    assert sue_gut_plan._keeps_justified is False
+    save_gut_file(env_dir(), sue_gut_plan)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_hubunit.get_keep_ways()
     assert (
         str(excinfo.value)
-        == f"Cannot get_keep_ways from '{sue_str}' gut bud because 'BudUnit._keeps_justified' is False."
+        == f"Cannot get_keep_ways from '{sue_str}' gut plan because 'PlanUnit._keeps_justified' is False."
     )
 
 
@@ -53,24 +53,24 @@ def test_HubUnit_get_keep_ways_RaisesErrorWhen__keeps_buildable_IsFalse(
     sue_str = "Sue"
     a23_str = "accord23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
-    save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
-    sue_gut_bud = open_gut_file(env_dir(), a23_str, sue_str)
-    sue_gut_bud.add_acctunit(sue_str)
+    save_gut_file(env_dir(), sue_hubunit.default_gut_plan())
+    sue_gut_plan = open_gut_file(env_dir(), a23_str, sue_str)
+    sue_gut_plan.add_acctunit(sue_str)
     texas_str = "Tex/as"
-    texas_way = sue_gut_bud.make_l1_way(texas_str)
-    sue_gut_bud.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
-    sue_gut_bud.edit_concept_attr(texas_way, healerlink=healerlink_shop({sue_str}))
-    sue_gut_bud.settle_bud()
-    assert sue_gut_bud._keeps_justified
-    assert sue_gut_bud._keeps_buildable is False
-    save_gut_file(env_dir(), sue_gut_bud)
+    texas_way = sue_gut_plan.make_l1_way(texas_str)
+    sue_gut_plan.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
+    sue_gut_plan.edit_concept_attr(texas_way, healerlink=healerlink_shop({sue_str}))
+    sue_gut_plan.settle_plan()
+    assert sue_gut_plan._keeps_justified
+    assert sue_gut_plan._keeps_buildable is False
+    save_gut_file(env_dir(), sue_gut_plan)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_hubunit.get_keep_ways()
     assert (
         str(excinfo.value)
-        == f"Cannot get_keep_ways from '{sue_str}' gut bud because 'BudUnit._keeps_buildable' is False."
+        == f"Cannot get_keep_ways from '{sue_str}' gut plan because 'PlanUnit._keeps_buildable' is False."
     )
 
 
@@ -79,23 +79,23 @@ def test_HubUnit_get_keep_ways_ReturnsObj(env_dir_setup_cleanup, graphics_bool):
     sue_str = "Sue"
     a23_str = "accord23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
-    save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
-    sue_gut_bud = open_gut_file(env_dir(), a23_str, sue_str)
-    sue_gut_bud.add_acctunit(sue_str)
+    save_gut_file(env_dir(), sue_hubunit.default_gut_plan())
+    sue_gut_plan = open_gut_file(env_dir(), a23_str, sue_str)
+    sue_gut_plan.add_acctunit(sue_str)
     texas_str = "Texas"
-    texas_way = sue_gut_bud.make_l1_way(texas_str)
-    sue_gut_bud.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
+    texas_way = sue_gut_plan.make_l1_way(texas_str)
+    sue_gut_plan.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
     elpaso_str = "el paso"
-    dallas_way = sue_gut_bud.make_way(texas_way, dallas_str)
-    elpaso_way = sue_gut_bud.make_way(texas_way, elpaso_str)
+    dallas_way = sue_gut_plan.make_way(texas_way, dallas_str)
+    elpaso_way = sue_gut_plan.make_way(texas_way, elpaso_str)
     dallas_concept = conceptunit_shop(dallas_str, healerlink=healerlink_shop({sue_str}))
     elpaso_concept = conceptunit_shop(elpaso_str, healerlink=healerlink_shop({sue_str}))
-    sue_gut_bud.set_concept(dallas_concept, texas_way)
-    sue_gut_bud.set_concept(elpaso_concept, texas_way)
-    sue_gut_bud.settle_bud()
-    display_concepttree(sue_gut_bud, mode="Keep", graphics_bool=graphics_bool)
-    save_gut_file(env_dir(), sue_gut_bud)
+    sue_gut_plan.set_concept(dallas_concept, texas_way)
+    sue_gut_plan.set_concept(elpaso_concept, texas_way)
+    sue_gut_plan.settle_plan()
+    display_concepttree(sue_gut_plan, mode="Keep", graphics_bool=graphics_bool)
+    save_gut_file(env_dir(), sue_gut_plan)
 
     # WHEN
     sue_keep_ways = sue_hubunit.get_keep_ways()
@@ -113,24 +113,24 @@ def test_HubUnit_save_all_gut_dutys_CorrectlySetsdutys(
     sue_str = "Sue"
     a23_str = "accord23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
-    save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
-    sue_gut_bud = open_gut_file(env_dir(), a23_str, sue_str)
-    sue_gut_bud.add_acctunit(sue_str)
+    save_gut_file(env_dir(), sue_hubunit.default_gut_plan())
+    sue_gut_plan = open_gut_file(env_dir(), a23_str, sue_str)
+    sue_gut_plan.add_acctunit(sue_str)
     bob_str = "Bob"
-    sue_gut_bud.add_acctunit(bob_str)
+    sue_gut_plan.add_acctunit(bob_str)
     texas_str = "Texas"
-    texas_way = sue_gut_bud.make_l1_way(texas_str)
-    sue_gut_bud.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
+    texas_way = sue_gut_plan.make_l1_way(texas_str)
+    sue_gut_plan.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
-    dallas_way = sue_gut_bud.make_way(texas_way, dallas_str)
+    dallas_way = sue_gut_plan.make_way(texas_way, dallas_str)
     dallas_concept = conceptunit_shop(dallas_str, healerlink=healerlink_shop({sue_str}))
-    sue_gut_bud.set_concept(dallas_concept, texas_way)
+    sue_gut_plan.set_concept(dallas_concept, texas_way)
     elpaso_str = "el paso"
-    elpaso_way = sue_gut_bud.make_way(texas_way, elpaso_str)
+    elpaso_way = sue_gut_plan.make_way(texas_way, elpaso_str)
     elpaso_concept = conceptunit_shop(elpaso_str, healerlink=healerlink_shop({sue_str}))
-    sue_gut_bud.set_concept(elpaso_concept, texas_way)
-    display_concepttree(sue_gut_bud, mode="Keep", graphics_bool=graphics_bool)
-    save_gut_file(env_dir(), sue_gut_bud)
+    sue_gut_plan.set_concept(elpaso_concept, texas_way)
+    display_concepttree(sue_gut_plan, mode="Keep", graphics_bool=graphics_bool)
+    save_gut_file(env_dir(), sue_gut_plan)
     sue_dallas_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, dallas_way)
     sue_elpaso_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, elpaso_way)
     assert os_path_exists(sue_dallas_hubunit.duty_path(sue_str)) is False
@@ -153,10 +153,10 @@ def test_HubUnit_create_treasury_db_file_CorrectlyCreatesDatabase(
     sue_str = "Sue"
     a23_str = "accord23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
-    save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
-    sue_gut_bud = open_gut_file(env_dir(), a23_str, sue_str)
+    save_gut_file(env_dir(), sue_hubunit.default_gut_plan())
+    sue_gut_plan = open_gut_file(env_dir(), a23_str, sue_str)
     texas_str = "Texas"
-    texas_way = sue_gut_bud.make_l1_way(texas_str)
+    texas_way = sue_gut_plan.make_l1_way(texas_str)
     sue_hubunit.keep_way = texas_way
     assert os_path_exists(sue_hubunit.treasury_db_path()) is False
 
@@ -201,10 +201,10 @@ def test_HubUnit_treasury_db_file_exists_ReturnsObj(env_dir_setup_cleanup):
     sue_str = "Sue"
     a23_str = "accord23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
-    save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
-    sue_gut_bud = open_gut_file(env_dir(), a23_str, sue_str)
+    save_gut_file(env_dir(), sue_hubunit.default_gut_plan())
+    sue_gut_plan = open_gut_file(env_dir(), a23_str, sue_str)
     texas_str = "Texas"
-    texas_way = sue_gut_bud.make_l1_way(texas_str)
+    texas_way = sue_gut_plan.make_l1_way(texas_str)
     sue_hubunit.keep_way = texas_way
     assert sue_hubunit.treasury_db_file_exists() is False
 
@@ -258,23 +258,23 @@ def test_HubUnit_create_gut_treasury_db_files_CreatesDatabases(
     sue_str = "Sue"
     a23_str = "accord23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
-    save_gut_file(env_dir(), sue_hubunit.default_gut_bud())
-    sue_gut_bud = open_gut_file(env_dir(), a23_str, sue_str)
-    sue_gut_bud.add_acctunit(sue_str)
+    save_gut_file(env_dir(), sue_hubunit.default_gut_plan())
+    sue_gut_plan = open_gut_file(env_dir(), a23_str, sue_str)
+    sue_gut_plan.add_acctunit(sue_str)
     texas_str = "Texas"
-    texas_way = sue_gut_bud.make_l1_way(texas_str)
-    sue_gut_bud.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
+    texas_way = sue_gut_plan.make_l1_way(texas_str)
+    sue_gut_plan.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
     elpaso_str = "el paso"
-    dallas_way = sue_gut_bud.make_way(texas_way, dallas_str)
-    elpaso_way = sue_gut_bud.make_way(texas_way, elpaso_str)
+    dallas_way = sue_gut_plan.make_way(texas_way, dallas_str)
+    elpaso_way = sue_gut_plan.make_way(texas_way, elpaso_str)
     dallas_concept = conceptunit_shop(dallas_str, healerlink=healerlink_shop({sue_str}))
     elpaso_concept = conceptunit_shop(elpaso_str, healerlink=healerlink_shop({sue_str}))
-    sue_gut_bud.set_concept(dallas_concept, texas_way)
-    sue_gut_bud.set_concept(elpaso_concept, texas_way)
-    sue_gut_bud.settle_bud()
-    display_concepttree(sue_gut_bud, mode="Keep", graphics_bool=graphics_bool)
-    save_gut_file(env_dir(), sue_gut_bud)
+    sue_gut_plan.set_concept(dallas_concept, texas_way)
+    sue_gut_plan.set_concept(elpaso_concept, texas_way)
+    sue_gut_plan.settle_plan()
+    display_concepttree(sue_gut_plan, mode="Keep", graphics_bool=graphics_bool)
+    save_gut_file(env_dir(), sue_gut_plan)
 
     dallas_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, dallas_way)
     elpaso_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, elpaso_way)
