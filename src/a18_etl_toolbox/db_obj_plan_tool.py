@@ -53,8 +53,8 @@ def create_planacct_metrics_insert_sqlstr(values_dict: dict[str,]):
     vow_label = values_dict.get("vow_label")
     owner_name = values_dict.get("owner_name")
     acct_name = values_dict.get("acct_name")
-    credit_belief = values_dict.get("credit_belief")
-    debtit_belief = values_dict.get("debtit_belief")
+    credit_score = values_dict.get("credit_score")
+    debtit_score = values_dict.get("debtit_score")
     _credor_pool = values_dict.get("_credor_pool")
     _debtor_pool = values_dict.get("_debtor_pool")
     _fund_give = values_dict.get("_fund_give")
@@ -63,16 +63,16 @@ def create_planacct_metrics_insert_sqlstr(values_dict: dict[str,]):
     _fund_agenda_take = values_dict.get("_fund_agenda_take")
     _fund_agenda_ratio_give = values_dict.get("_fund_agenda_ratio_give")
     _fund_agenda_ratio_take = values_dict.get("_fund_agenda_ratio_take")
-    _inallocable_debtit_belief = values_dict.get("_inallocable_debtit_belief")
-    _irrational_debtit_belief = values_dict.get("_irrational_debtit_belief")
+    _inallocable_debtit_score = values_dict.get("_inallocable_debtit_score")
+    _irrational_debtit_score = values_dict.get("_irrational_debtit_score")
     real_str = "REAL"
-    return f"""INSERT INTO plan_acctunit_job (vow_label, owner_name, acct_name, credit_belief, debtit_belief, _credor_pool, _debtor_pool, _fund_give, _fund_take, _fund_agenda_give, _fund_agenda_take, _fund_agenda_ratio_give, _fund_agenda_ratio_take, _inallocable_debtit_belief, _irrational_debtit_belief)
+    return f"""INSERT INTO plan_acctunit_job (vow_label, owner_name, acct_name, credit_score, debtit_score, _credor_pool, _debtor_pool, _fund_give, _fund_take, _fund_agenda_give, _fund_agenda_take, _fund_agenda_ratio_give, _fund_agenda_ratio_take, _inallocable_debtit_score, _irrational_debtit_score)
 VALUES (
   {sqlite_obj_str(vow_label, "TEXT")}
 , {sqlite_obj_str(owner_name, "TEXT")}
 , {sqlite_obj_str(acct_name, "TEXT")}
-, {sqlite_obj_str(credit_belief, real_str)}
-, {sqlite_obj_str(debtit_belief, real_str)}
+, {sqlite_obj_str(credit_score, real_str)}
+, {sqlite_obj_str(debtit_score, real_str)}
 , {sqlite_obj_str(_credor_pool, real_str)}
 , {sqlite_obj_str(_debtor_pool, real_str)}
 , {sqlite_obj_str(_fund_give, real_str)}
@@ -81,8 +81,8 @@ VALUES (
 , {sqlite_obj_str(_fund_agenda_take, real_str)}
 , {sqlite_obj_str(_fund_agenda_ratio_give, real_str)}
 , {sqlite_obj_str(_fund_agenda_ratio_take, real_str)}
-, {sqlite_obj_str(_inallocable_debtit_belief, real_str)}
-, {sqlite_obj_str(_irrational_debtit_belief, real_str)}
+, {sqlite_obj_str(_inallocable_debtit_score, real_str)}
+, {sqlite_obj_str(_irrational_debtit_score, real_str)}
 )
 ;
 """

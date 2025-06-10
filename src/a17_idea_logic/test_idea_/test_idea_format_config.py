@@ -7,9 +7,9 @@ from src.a06_plan_logic._test_util.a06_str import (
     begin_str,
     close_str,
     concept_way_str,
-    credit_belief_str,
+    credit_score_str,
     credit_vote_str,
-    debtit_belief_str,
+    debtit_score_str,
     debtit_vote_str,
     denom_str,
     gogo_want_str,
@@ -48,8 +48,8 @@ from src.a17_idea_logic.idea_config import (
 def test_config_str_functions_ReturnsObjs():
     # ESTABLISH / WHEN / THEN
     assert acct_pool_str() == "acct_pool"
-    assert debtit_belief_str() == "debtit_belief"
-    assert credit_belief_str() == "credit_belief"
+    assert debtit_score_str() == "debtit_score"
+    assert credit_score_str() == "credit_score"
     assert debtit_vote_str() == "debtit_vote"
     assert credit_vote_str() == "credit_vote"
     x00021_idea = "idea_format_00021_plan_acctunit_v0_0_0"
@@ -100,8 +100,8 @@ def test_get_headers_list_ReturnsObj():
         vow_label_str(),
         owner_name_str(),
         acct_name_str(),
-        credit_belief_str(),
-        debtit_belief_str(),
+        credit_score_str(),
+        debtit_score_str(),
     ]
 
 
@@ -123,9 +123,7 @@ def test_get_sorted_headers_str_ReturnsObj():
     # ESTABLISH / WHEN
     br00021_headers = get_sorted_headers_str(idea_format_00021_plan_acctunit_v0_0_0())
     # THEN
-    assert (
-        br00021_headers == "vow_label,owner_name,acct_name,credit_belief,debtit_belief"
-    )
+    assert br00021_headers == "vow_label,owner_name,acct_name,credit_score,debtit_score"
 
     # ESTABLISH / WHEN
     br00019_headers = get_sorted_headers_str(idea_format_00019_conceptunit_v0_0_0())
@@ -210,8 +208,8 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00021_plan_acctunit_v0_0_0(
     assert len(format_00001_idearef._attributes) == 7
     assert format_00001_idearef._attributes == {
         "acct_name": {"otx_key": True},
-        "credit_belief": {"otx_key": False},
-        "debtit_belief": {"otx_key": False},
+        "credit_score": {"otx_key": False},
+        "debtit_score": {"otx_key": False},
         "event_int": {"otx_key": True},
         "face_name": {"otx_key": True},
         "vow_label": {"otx_key": True},
@@ -223,8 +221,8 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00021_plan_acctunit_v0_0_0(
     assert headers_list[2] == vow_label_str()
     assert headers_list[3] == owner_name_str()
     assert headers_list[4] == acct_name_str()
-    assert headers_list[5] == credit_belief_str()
-    assert headers_list[6] == debtit_belief_str()
+    assert headers_list[5] == credit_score_str()
+    assert headers_list[6] == debtit_score_str()
 
 
 def test_get_idearef_obj_HasCorrectAttrs_idea_format_00020_plan_acct_membership_v0_0_0():

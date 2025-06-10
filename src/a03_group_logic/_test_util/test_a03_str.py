@@ -7,13 +7,13 @@ from src.a03_group_logic._test_util.a03_str import (
     _fund_agenda_take_str,
     _fund_give_str,
     _fund_take_str,
-    _inallocable_debtit_belief_str,
-    _irrational_debtit_belief_str,
+    _inallocable_debtit_score_str,
+    _irrational_debtit_score_str,
     _memberships_str,
     awardee_title_str,
-    credit_belief_str,
+    credit_score_str,
     credit_vote_str,
-    debtit_belief_str,
+    debtit_score_str,
     debtit_vote_str,
     fund_give_str,
     fund_take_str,
@@ -34,11 +34,11 @@ def test_str_functions_ReturnsObj():
     assert _fund_agenda_take_str() == "_fund_agenda_take"
     assert _fund_give_str() == "_fund_give"
     assert _fund_take_str() == "_fund_take"
-    assert _inallocable_debtit_belief_str() == "_inallocable_debtit_belief"
-    assert _irrational_debtit_belief_str() == "_irrational_debtit_belief"
+    assert _inallocable_debtit_score_str() == "_inallocable_debtit_score"
+    assert _irrational_debtit_score_str() == "_irrational_debtit_score"
     assert _memberships_str() == "_memberships"
-    assert credit_belief_str() == "credit_belief"
-    assert debtit_belief_str() == "debtit_belief"
+    assert credit_score_str() == "credit_score"
+    assert debtit_score_str() == "debtit_score"
     assert credit_vote_str() == "credit_vote"
     assert group_title_str() == "group_title"
     assert fund_take_str() == "fund_take"

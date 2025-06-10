@@ -12,13 +12,13 @@ def test_get_plan_acctunits_dataframe_ReturnsCorrectDataFrame():
     luca_plan.set_credor_respect(500)
     luca_plan.set_debtor_respect(400)
     yao_str = "Yao"
-    yao_credit_belief = 66
-    yao_debtit_belief = 77
-    luca_plan.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
+    yao_credit_score = 66
+    yao_debtit_score = 77
+    luca_plan.add_acctunit(yao_str, yao_credit_score, yao_debtit_score)
     sue_str = "Sue"
-    sue_credit_belief = 434
-    sue_debtit_belief = 323
-    luca_plan.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
+    sue_credit_score = 434
+    sue_debtit_score = 323
+    luca_plan.add_acctunit(sue_str, sue_credit_score, sue_debtit_score)
 
     # WHEN
     x_df = get_plan_acctunits_dataframe(luca_plan)
@@ -26,8 +26,8 @@ def test_get_plan_acctunits_dataframe_ReturnsCorrectDataFrame():
     # THEN
     acctunit_colums = {
         "acct_name",
-        "credit_belief",
-        "debtit_belief",
+        "credit_score",
+        "debtit_score",
         "_memberships",
         "_fund_give",
         "_fund_take",
@@ -52,8 +52,8 @@ def test_get_plan_acctunits_dataframe_ReturnsCorrectEmptyDataFrame():
     # THEN
     acctunit_colums = {
         "acct_name",
-        "credit_belief",
-        "debtit_belief",
+        "credit_score",
+        "debtit_score",
         "_fund_give",
         "_fund_take",
         "_fund_agenda_give",

@@ -47,7 +47,7 @@ emmanuel_stance.xlsx: sheet "br00000"
 That plan involves listening to Dean. Consider this slightly more complex start:
 
 
-| event_int | face_name | vow_label | owner_name | acct_name | credit_belief | debtit_belief |
+| event_int | face_name | vow_label | owner_name | acct_name | credit_score | debtit_score |
 |-----------|-----------|-----------|------------|-----------|---------------|---------------|
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |    Dean   |      100      |      15       |
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |  Emmanuel |       50      |      75       |

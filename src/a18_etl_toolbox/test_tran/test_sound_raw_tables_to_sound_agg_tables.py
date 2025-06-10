@@ -3,8 +3,8 @@ from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
 from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
 from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
-    credit_belief_str,
-    debtit_belief_str,
+    credit_score_str,
+    debtit_score_str,
     plan_acctunit_str,
 )
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
@@ -262,8 +262,8 @@ VALUES
 , {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
-, {credit_belief_str()}
-, {debtit_belief_str()}
+, {credit_score_str()}
+, {debtit_score_str()}
 , "error_message"
 )"""
         values_clause = f"""
@@ -438,8 +438,8 @@ VALUES
 , {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
-, {credit_belief_str()}
-, {debtit_belief_str()}
+, {credit_score_str()}
+, {debtit_score_str()}
 , "error_message"
 )"""
         values_clause = f"""

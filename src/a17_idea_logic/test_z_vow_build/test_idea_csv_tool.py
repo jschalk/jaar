@@ -70,7 +70,7 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyVowUnit(
         "br00005": "vow_label,weekday_order,weekday_label\n",
         # "br00006": "vow_label,offi_time,_offi_time_max\n",
         "br00020": "vow_label,owner_name,acct_name,group_title,credit_vote,debtit_vote\n",
-        "br00021": "vow_label,owner_name,acct_name,credit_belief,debtit_belief\n",
+        "br00021": "vow_label,owner_name,acct_name,credit_score,debtit_score\n",
         "br00022": "vow_label,owner_name,concept_way,awardee_title,give_force,take_force\n",
         "br00023": "vow_label,owner_name,concept_way,fcontext,fstate,fopen,fnigh\n",
         "br00024": "vow_label,owner_name,concept_way,labor_title\n",

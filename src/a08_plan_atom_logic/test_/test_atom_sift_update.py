@@ -8,7 +8,7 @@ from src.a06_plan_logic._test_util.a06_str import (
     close_str,
     concept_label_str,
     concept_way_str,
-    debtit_belief_str,
+    debtit_score_str,
     debtit_vote_str,
     denom_str,
     fcontext_str,
@@ -108,13 +108,13 @@ def test_sift_atom_ReturnsObj_PlanAtom_UPDATE_planunit():
 def test_sift_atom_ReturnsObj_PlanAtom_UPDATE_plan_acctunit():
     # ESTABLISH
     zia_str = "Zia"
-    zia_debtit_belief = 51
+    zia_debtit_score = 51
     sue_plan = planunit_shop("Sue")
     sue_plan.add_acctunit(zia_str)
 
     zia_atom = planatom_shop(plan_acctunit_str(), INSERT_str())
     zia_atom.set_arg(acct_name_str(), zia_str)
-    zia_atom.set_arg(debtit_belief_str(), zia_debtit_belief)
+    zia_atom.set_arg(debtit_score_str(), zia_debtit_score)
 
     # WHEN
     new_zia_planatom = sift_planatom(sue_plan, zia_atom)
@@ -124,7 +124,7 @@ def test_sift_atom_ReturnsObj_PlanAtom_UPDATE_plan_acctunit():
     assert new_zia_planatom.crud_str == UPDATE_str()
     assert new_zia_planatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_planatom.get_jvalues_dict()
-    assert zia_jvalues == {debtit_belief_str(): 51}
+    assert zia_jvalues == {debtit_score_str(): 51}
 
 
 def test_sift_atom_ReturnsObj_PlanAtom_UPDATE_plan_acct_membership():

@@ -24,8 +24,8 @@ class AcctUnitTable(Base):
     __tablename__ = "acctunit"
     uid = Column(Integer, primary_key=True)
     acct_name = Column(String)
-    credit_belief = Column(Float)
-    debtit_belief = Column(Float)
+    credit_score = Column(Float)
+    debtit_score = Column(Float)
 
 
 class MemberShipTable(Base):

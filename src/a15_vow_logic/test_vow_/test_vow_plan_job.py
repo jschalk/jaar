@@ -37,7 +37,7 @@ def test_VowUnit_rotate_job_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     assert sue_job.owner_name == example_plan.owner_name
 
 
-def test_VowUnit_rotate_job_ReturnsObj_Scenario2_EmptyAcctsCause_inallocable_debtit_belief(
+def test_VowUnit_rotate_job_ReturnsObj_Scenario2_EmptyAcctsCause_inallocable_debtit_score(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -64,8 +64,8 @@ def test_VowUnit_rotate_job_ReturnsObj_Scenario2_EmptyAcctsCause_inallocable_deb
     # THEN method should wipe over job plan
     assert rotated_sue_job.acct_exists(bob_str)
     assert rotated_sue_job.get_dict() != init_sue_job.get_dict()
-    assert init_sue_job.get_acct(bob_str)._inallocable_debtit_belief == 0
-    assert rotated_sue_job.get_acct(bob_str)._inallocable_debtit_belief == 1
+    assert init_sue_job.get_acct(bob_str)._inallocable_debtit_score == 0
+    assert rotated_sue_job.get_acct(bob_str)._inallocable_debtit_score == 1
 
 
 def a23_job(owner_name: str) -> PlanUnit:

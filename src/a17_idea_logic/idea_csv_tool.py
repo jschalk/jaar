@@ -255,8 +255,8 @@ def add_plan_to_br00021_csv(
             x_plan.vow_label,
             x_plan.owner_name,
             acctunit.acct_name,
-            if_none_str(acctunit.credit_belief),
-            if_none_str(acctunit.debtit_belief),
+            if_none_str(acctunit.credit_score),
+            if_none_str(acctunit.debtit_score),
         ]
         x_csv += csv_delimiter.join(x_row)
         x_csv += "\n"
@@ -610,8 +610,8 @@ def add_pack_to_br00021_csv(
                 x_packunit.vow_label,
                 x_packunit.owner_name,
                 planatom.jkeys.get("acct_name"),
-                if_none_str(planatom.jvalues.get("credit_belief")),
-                if_none_str(planatom.jvalues.get("debtit_belief")),
+                if_none_str(planatom.jvalues.get("credit_score")),
+                if_none_str(planatom.jvalues.get("debtit_score")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"

@@ -7,8 +7,8 @@ from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
     awardee_title_str,
     concept_way_str,
-    credit_belief_str,
-    debtit_belief_str,
+    credit_score_str,
+    debtit_score_str,
     group_title_str,
     plan_acct_membership_str,
     plan_acctunit_str,
@@ -182,11 +182,11 @@ def test_PlanDelta_add_planatom_CorrectlySets_PlanUnit_acctunits():
 
     # WHEN
     bob_str = "Bob"
-    bob_credit_belief = 55
-    bob_debtit_belief = 66
-    bob_acctunit = acctunit_shop(bob_str, bob_credit_belief, bob_debtit_belief)
-    cw_str = credit_belief_str()
-    dw_str = debtit_belief_str()
+    bob_credit_score = 55
+    bob_debtit_score = 66
+    bob_acctunit = acctunit_shop(bob_str, bob_credit_score, bob_debtit_score)
+    cw_str = credit_score_str()
+    dw_str = debtit_score_str()
     print(f"{bob_acctunit.get_dict()=}")
     bob_required_dict = {acct_name_str(): bob_acctunit.get_dict().get(acct_name_str())}
     bob_optional_dict = {cw_str: bob_acctunit.get_dict().get(cw_str)}
@@ -416,7 +416,7 @@ def test_plan_built_from_delta_is_valid_ReturnsObjEstablishWithNoPlan_scenario1(
     zia_str = "Zia"
     x_planatom = planatom_shop(dimen, INSERT_str())
     x_planatom.set_arg(acct_name_str(), zia_str)
-    x_planatom.set_arg(credit_belief_str(), "70 is the number")
+    x_planatom.set_arg(credit_score_str(), "70 is the number")
     sue_plandelta.set_planatom(x_planatom)
     print(f"{sue_plandelta=}")
 
@@ -431,7 +431,7 @@ def test_plan_built_from_delta_is_valid_ReturnsObjEstablishWithNoPlan_scenario2(
     yao_str = "Yao"
     x_planatom = planatom_shop(dimen, INSERT_str())
     x_planatom.set_arg(acct_name_str(), yao_str)
-    x_planatom.set_arg(credit_belief_str(), 30)
+    x_planatom.set_arg(credit_score_str(), 30)
     sue_plandelta.set_planatom(x_planatom)
 
     # THEN
@@ -441,7 +441,7 @@ def test_plan_built_from_delta_is_valid_ReturnsObjEstablishWithNoPlan_scenario2(
     bob_str = "Bob"
     x_planatom = planatom_shop(dimen, INSERT_str())
     x_planatom.set_arg(acct_name_str(), bob_str)
-    x_planatom.set_arg(credit_belief_str(), "70 is the number")
+    x_planatom.set_arg(credit_score_str(), "70 is the number")
     sue_plandelta.set_planatom(x_planatom)
 
     # THEN
@@ -459,14 +459,14 @@ def test_PlanDelta_get_ordered_planatoms_ReturnsObj_EstablishWithNoStartingNumbe
     zia_str = "Zia"
     zia_planatom = planatom_shop(dimen, INSERT_str())
     zia_planatom.set_arg(acct_name_str(), zia_str)
-    zia_planatom.set_arg(credit_belief_str(), 70)
+    zia_planatom.set_arg(credit_score_str(), 70)
     sue_plandelta.set_planatom(zia_planatom)
     sue_plan = planunit_shop("Sue")
     sue_plan.set_credor_respect(100)
     yao_str = "Yao"
     yao_planatom = planatom_shop(dimen, INSERT_str())
     yao_planatom.set_arg(acct_name_str(), yao_str)
-    yao_planatom.set_arg(credit_belief_str(), 30)
+    yao_planatom.set_arg(credit_score_str(), 30)
     sue_plandelta.set_planatom(yao_planatom)
 
     sue_plan = planunit_shop("Sue")
@@ -498,14 +498,14 @@ def test_PlanDelta_get_ordered_planatoms_ReturnsObj_EstablishWithStartingNumber(
     zia_str = "Zia"
     zia_planatom = planatom_shop(dimen, INSERT_str())
     zia_planatom.set_arg(acct_name_str(), zia_str)
-    zia_planatom.set_arg(credit_belief_str(), 70)
+    zia_planatom.set_arg(credit_score_str(), 70)
     sue_plandelta.set_planatom(zia_planatom)
     sue_plan = planunit_shop("Sue")
     sue_plan.set_credor_respect(100)
     yao_str = "Yao"
     yao_planatom = planatom_shop(dimen, INSERT_str())
     yao_planatom.set_arg(acct_name_str(), yao_str)
-    yao_planatom.set_arg(credit_belief_str(), 30)
+    yao_planatom.set_arg(credit_score_str(), 30)
     sue_plandelta.set_planatom(yao_planatom)
 
     sue_plan = planunit_shop("Sue")
@@ -537,14 +537,14 @@ def test_PlanDelta_get_ordered_dict_ReturnsObj_EstablishWithStartingNumber():
     zia_str = "Zia"
     zia_planatom = planatom_shop(dimen, INSERT_str())
     zia_planatom.set_arg(acct_name_str(), zia_str)
-    zia_planatom.set_arg(credit_belief_str(), 70)
+    zia_planatom.set_arg(credit_score_str(), 70)
     sue_plandelta.set_planatom(zia_planatom)
     sue_plan = planunit_shop("Sue")
     sue_plan.set_credor_respect(100)
     yao_str = "Yao"
     yao_planatom = planatom_shop(dimen, INSERT_str())
     yao_planatom.set_arg(acct_name_str(), yao_str)
-    yao_planatom.set_arg(credit_belief_str(), 30)
+    yao_planatom.set_arg(credit_score_str(), 30)
     sue_plandelta.set_planatom(yao_planatom)
 
     sue_plan = planunit_shop("Sue")
@@ -576,14 +576,14 @@ def test_get_plandelta_from_ordered_dict_ReturnsObj():
     zia_str = "Zia"
     zia_planatom = planatom_shop(dimen, INSERT_str())
     zia_planatom.set_arg(acct_name_str(), zia_str)
-    zia_planatom.set_arg(credit_belief_str(), 70)
+    zia_planatom.set_arg(credit_score_str(), 70)
     expected_plandelta.set_planatom(zia_planatom)
     sue_plan = planunit_shop("Sue")
     sue_plan.set_credor_respect(100)
     yao_str = "Yao"
     yao_planatom = planatom_shop(dimen, INSERT_str())
     yao_planatom.set_arg(acct_name_str(), yao_str)
-    yao_planatom.set_arg(credit_belief_str(), 30)
+    yao_planatom.set_arg(credit_score_str(), 30)
     expected_plandelta.set_planatom(yao_planatom)
     plandelta_dict = expected_plandelta.get_ordered_dict(5)
 
@@ -614,12 +614,12 @@ def test_PlanDelta_get_json_ReturnsObj():
     zia_str = "Zia"
     zia_planatom = planatom_shop(dimen, INSERT_str())
     zia_planatom.set_arg(acct_name_str(), zia_str)
-    zia_planatom.set_arg(credit_belief_str(), 70)
+    zia_planatom.set_arg(credit_score_str(), 70)
     sue_plandelta.set_planatom(zia_planatom)
     yao_str = "Yao"
     yao_planatom = planatom_shop(dimen, INSERT_str())
     yao_planatom.set_arg(acct_name_str(), yao_str)
-    yao_planatom.set_arg(credit_belief_str(), 30)
+    yao_planatom.set_arg(credit_score_str(), 30)
     sue_plandelta.set_planatom(yao_planatom)
 
     # WHEN
@@ -639,7 +639,7 @@ def test_PlanDelta_planatom_exists_ReturnsObj():
     zia_str = "Zia"
     zia_planatom = planatom_shop(dimen, INSERT_str())
     zia_planatom.set_arg(acct_name_str(), zia_str)
-    zia_planatom.set_arg(credit_belief_str(), 70)
+    zia_planatom.set_arg(credit_score_str(), 70)
     assert x_plandelta.planatom_exists(zia_planatom) is False
 
     # WHEN
@@ -658,7 +658,7 @@ def test_PlanDelta_is_empty_ReturnsObj():
     zia_str = "Zia"
     zia_planatom = planatom_shop(dimen, INSERT_str())
     zia_planatom.set_arg(acct_name_str(), zia_str)
-    zia_planatom.set_arg(credit_belief_str(), 70)
+    zia_planatom.set_arg(credit_score_str(), 70)
     assert x_plandelta.is_empty()
 
     # WHEN

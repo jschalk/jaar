@@ -3,8 +3,8 @@ from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_s
 from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
     concept_way_str,
-    credit_belief_str,
-    debtit_belief_str,
+    credit_score_str,
+    debtit_score_str,
     labor_title_str,
 )
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
@@ -81,8 +81,8 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_plan_acctunit():
             labor_title_str(),
             owner_name_str(),
             acct_name_str(),
-            credit_belief_str(),
-            debtit_belief_str(),
+            credit_score_str(),
+            debtit_score_str(),
             amount_str(),
         ]
         planacct_cat = "plan_acctunit"
@@ -104,7 +104,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_plan_acctunit():
         )
 
         # THEN
-        columns_str = "event_int, face_name, vow_label, owner_name, acct_name, credit_belief, debtit_belief"
+        columns_str = "event_int, face_name, vow_label, owner_name, acct_name, credit_score, debtit_score"
         expected_sqlstr = f"""INSERT INTO {planacct_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
@@ -131,7 +131,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_plan_acctunit():
             labor_title_str(),
             owner_name_str(),
             acct_name_str(),
-            credit_belief_str(),
+            credit_score_str(),
             amount_str(),
         ]
         planacct_cat = "plan_acctunit"
@@ -154,7 +154,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_plan_acctunit():
 
         # THEN
         columns_str = (
-            "event_int, face_name, vow_label, owner_name, acct_name, credit_belief"
+            "event_int, face_name, vow_label, owner_name, acct_name, credit_score"
         )
         expected_sqlstr = f"""INSERT INTO {planacct_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}

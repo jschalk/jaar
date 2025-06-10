@@ -160,10 +160,10 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_acct():
     dimen = plan_acctunit_str()
     x_planatom = planatom_shop(dimen, INSERT_str())
     x_planatom.set_jkey(acct_name_str(), zia_str)
-    x_credit_belief = 55
-    x_debtit_belief = 66
-    x_planatom.set_jvalue("credit_belief", x_credit_belief)
-    x_planatom.set_jvalue("debtit_belief", x_debtit_belief)
+    x_credit_score = 55
+    x_debtit_score = 66
+    x_planatom.set_jvalue("credit_score", x_credit_score)
+    x_planatom.set_jvalue("debtit_score", x_debtit_score)
     sue_plandelta.set_planatom(x_planatom)
     print(f"{sue_plandelta.planatoms.keys()=}")
     after_sue_planunit = sue_plandelta.get_edited_plan(before_sue_planunit)
@@ -173,8 +173,8 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_acct():
     zia_acctunit = after_sue_planunit.get_acct(zia_str)
     assert yao_acctunit is not None
     assert zia_acctunit is not None
-    assert zia_acctunit.credit_belief == x_credit_belief
-    assert zia_acctunit.debtit_belief == x_debtit_belief
+    assert zia_acctunit.credit_score == x_credit_score
+    assert zia_acctunit.debtit_score == x_debtit_score
 
 
 def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_acct():
@@ -185,21 +185,21 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_acct():
     before_sue_planunit = planunit_shop(sue_str)
     yao_str = "Yao"
     before_sue_planunit.add_acctunit(yao_str)
-    assert before_sue_planunit.get_acct(yao_str).credit_belief == 1
+    assert before_sue_planunit.get_acct(yao_str).credit_score == 1
 
     # WHEN
     dimen = plan_acctunit_str()
     x_planatom = planatom_shop(dimen, UPDATE_str())
     x_planatom.set_jkey(acct_name_str(), yao_str)
-    yao_credit_belief = 55
-    x_planatom.set_jvalue("credit_belief", yao_credit_belief)
+    yao_credit_score = 55
+    x_planatom.set_jvalue("credit_score", yao_credit_score)
     sue_plandelta.set_planatom(x_planatom)
     print(f"{sue_plandelta.planatoms.keys()=}")
     after_sue_planunit = sue_plandelta.get_edited_plan(before_sue_planunit)
 
     # THEN
     yao_acct = after_sue_planunit.get_acct(yao_str)
-    assert yao_acct.credit_belief == yao_credit_belief
+    assert yao_acct.credit_score == yao_credit_score
 
 
 def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_delete_membership():

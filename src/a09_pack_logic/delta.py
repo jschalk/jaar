@@ -174,10 +174,10 @@ class PlanDelta:
             insert_acctunit = after_plan.get_acct(insert_acct_name)
             x_planatom = planatom_shop("plan_acctunit", "INSERT")
             x_planatom.set_jkey("acct_name", insert_acctunit.acct_name)
-            if insert_acctunit.credit_belief is not None:
-                x_planatom.set_jvalue("credit_belief", insert_acctunit.credit_belief)
-            if insert_acctunit.debtit_belief is not None:
-                x_planatom.set_jvalue("debtit_belief", insert_acctunit.debtit_belief)
+            if insert_acctunit.credit_score is not None:
+                x_planatom.set_jvalue("credit_score", insert_acctunit.credit_score)
+            if insert_acctunit.debtit_score is not None:
+                x_planatom.set_jvalue("debtit_score", insert_acctunit.debtit_score)
             self.set_planatom(x_planatom)
             all_group_titles = set(insert_acctunit._memberships.keys())
             self.add_planatom_memberships_inserts(
@@ -194,10 +194,10 @@ class PlanDelta:
             if jvalues_different("plan_acctunit", after_acctunit, before_acctunit):
                 x_planatom = planatom_shop("plan_acctunit", "UPDATE")
                 x_planatom.set_jkey("acct_name", after_acctunit.acct_name)
-                if before_acctunit.credit_belief != after_acctunit.credit_belief:
-                    x_planatom.set_jvalue("credit_belief", after_acctunit.credit_belief)
-                if before_acctunit.debtit_belief != after_acctunit.debtit_belief:
-                    x_planatom.set_jvalue("debtit_belief", after_acctunit.debtit_belief)
+                if before_acctunit.credit_score != after_acctunit.credit_score:
+                    x_planatom.set_jvalue("credit_score", after_acctunit.credit_score)
+                if before_acctunit.debtit_score != after_acctunit.debtit_score:
+                    x_planatom.set_jvalue("debtit_score", after_acctunit.debtit_score)
                 self.set_planatom(x_planatom)
             self.add_planatom_acctunit_update_memberships(
                 after_acctunit=after_acctunit, before_acctunit=before_acctunit

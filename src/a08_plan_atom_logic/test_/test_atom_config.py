@@ -11,10 +11,10 @@ from src.a06_plan_logic._test_util.a06_str import (
     begin_str,
     close_str,
     concept_way_str,
-    credit_belief_str,
+    credit_score_str,
     credit_vote_str,
     credor_respect_str,
-    debtit_belief_str,
+    debtit_score_str,
     debtit_vote_str,
     debtor_respect_str,
     denom_str,
@@ -494,17 +494,17 @@ def test_get_normalized_plan_table_build_ReturnsObj():
     assert len(acctunit_columns) == 4
     assert acctunit_columns.get("uid") is not None
     assert acctunit_columns.get(acct_name_str()) is not None
-    assert acctunit_columns.get(credit_belief_str()) is not None
-    assert acctunit_columns.get(debtit_belief_str()) is not None
+    assert acctunit_columns.get(credit_score_str()) is not None
+    assert acctunit_columns.get(debtit_score_str()) is not None
 
     acct_name_dict = acctunit_columns.get(acct_name_str())
     assert len(acct_name_dict) == 2
     assert acct_name_dict.get(sqlite_datatype_str()) == "TEXT"
     assert acct_name_dict.get("nullable") is False
-    debtit_belief_dict = acctunit_columns.get("debtit_belief")
+    debtit_score_dict = acctunit_columns.get("debtit_score")
     assert len(acct_name_dict) == 2
-    assert debtit_belief_dict.get(sqlite_datatype_str()) == "REAL"
-    assert debtit_belief_dict.get("nullable") is True
+    assert debtit_score_dict.get(sqlite_datatype_str()) == "REAL"
+    assert debtit_score_dict.get("nullable") is True
 
     assert len(cat_concept) == 2
     concept_columns = cat_concept.get(columns_str)
@@ -631,10 +631,10 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(begin_str()) == "float"
     assert x_class_types.get(respect_bit_str()) == "float"
     assert x_class_types.get(close_str()) == "float"
-    assert x_class_types.get(credit_belief_str()) == "float"
+    assert x_class_types.get(credit_score_str()) == "float"
     assert x_class_types.get(credit_vote_str()) == "float"
     assert x_class_types.get(credor_respect_str()) == "float"
-    assert x_class_types.get(debtit_belief_str()) == "float"
+    assert x_class_types.get(debtit_score_str()) == "float"
     assert x_class_types.get(debtit_vote_str()) == "float"
     assert x_class_types.get(debtor_respect_str()) == "float"
     assert x_class_types.get(denom_str()) == "int"

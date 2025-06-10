@@ -190,15 +190,15 @@ def get_planunit_3_acct() -> PlanUnit:
     sue_str = "Sue"
     yao_str = "Yao"
     zia_str = "Zia"
-    sue_credit_belief = 5
-    yao_credit_belief = 2
-    zia_credit_belief = 33
-    sue_debtit_belief = 1
-    yao_debtit_belief = 7
-    zia_debtit_belief = 13
+    sue_credit_score = 5
+    yao_credit_score = 2
+    zia_credit_score = 33
+    sue_debtit_score = 1
+    yao_debtit_score = 7
+    zia_debtit_score = 13
     bob_plan = planunit_shop(bob_str)
-    bob_plan.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
-    bob_plan.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
-    bob_plan.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
+    bob_plan.add_acctunit(sue_str, sue_credit_score, sue_debtit_score)
+    bob_plan.add_acctunit(yao_str, yao_credit_score, yao_debtit_score)
+    bob_plan.add_acctunit(zia_str, zia_credit_score, zia_debtit_score)
 
     return bob_plan

@@ -405,8 +405,8 @@ def _modify_plan_acctunit_delete(x_plan: PlanUnit, x_atom: PlanAtom):
 def _modify_plan_acctunit_update(x_plan: PlanUnit, x_atom: PlanAtom):
     x_plan.edit_acctunit(
         acct_name=x_atom.get_value("acct_name"),
-        credit_belief=x_atom.get_value("credit_belief"),
-        debtit_belief=x_atom.get_value("debtit_belief"),
+        credit_score=x_atom.get_value("credit_score"),
+        debtit_score=x_atom.get_value("debtit_score"),
     )
 
 
@@ -414,8 +414,8 @@ def _modify_plan_acctunit_insert(x_plan: PlanUnit, x_atom: PlanAtom):
     x_plan.set_acctunit(
         acctunit_shop(
             acct_name=x_atom.get_value("acct_name"),
-            credit_belief=x_atom.get_value("credit_belief"),
-            debtit_belief=x_atom.get_value("debtit_belief"),
+            credit_score=x_atom.get_value("credit_score"),
+            debtit_score=x_atom.get_value("debtit_score"),
         )
     )
 
@@ -570,8 +570,8 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.pdivisor != y_obj.pdivisor
         )
     elif dimen == "plan_acctunit":
-        return (x_obj.credit_belief != y_obj.credit_belief) or (
-            x_obj.debtit_belief != y_obj.debtit_belief
+        return (x_obj.credit_score != y_obj.credit_score) or (
+            x_obj.debtit_score != y_obj.debtit_score
         )
 
 
@@ -601,10 +601,10 @@ class AtomRow:
     begin: float = None
     respect_bit: float = None
     close: float = None
-    credit_belief: int = None
+    credit_score: int = None
     credit_vote: int = None
     credor_respect: int = None
-    debtit_belief: int = None
+    debtit_score: int = None
     debtit_vote: int = None
     debtor_respect: int = None
     denom: int = None

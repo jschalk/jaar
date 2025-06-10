@@ -85,15 +85,15 @@ def test_PlanUnit_add_acctunit_CorrectlySets_accts():
     xio_str = "Xio"
 
     # WHEN
-    yao_plan.add_acctunit(zia_str, credit_belief=13, debtit_belief=8)
-    yao_plan.add_acctunit(sue_str, debtit_belief=5)
-    yao_plan.add_acctunit(xio_str, credit_belief=17)
+    yao_plan.add_acctunit(zia_str, credit_score=13, debtit_score=8)
+    yao_plan.add_acctunit(sue_str, debtit_score=5)
+    yao_plan.add_acctunit(xio_str, credit_score=17)
 
     # THEN
     assert len(yao_plan.accts) == 3
     assert len(yao_plan.get_acctunit_group_titles_dict()) == 3
-    assert yao_plan.accts.get(xio_str).credit_belief == 17
-    assert yao_plan.accts.get(sue_str).debtit_belief == 5
+    assert yao_plan.accts.get(xio_str).credit_score == 17
+    assert yao_plan.accts.get(sue_str).debtit_score == 5
     assert yao_plan.accts.get(xio_str).respect_bit == x_respect_bit
 
 
@@ -142,11 +142,11 @@ def test_PlanUnit_edit_acct_RaiseExceptionWhenAcctDoesNotExist():
     # ESTABLISH
     yao_plan = planunit_shop("Yao")
     zia_str = "Zia"
-    zia_credit_belief = 55
+    zia_credit_score = 55
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
-        yao_plan.edit_acctunit(zia_str, credit_belief=zia_credit_belief)
+        yao_plan.edit_acctunit(zia_str, credit_score=zia_credit_score)
     assert str(excinfo.value) == f"AcctUnit '{zia_str}' does not exist."
 
 
@@ -154,31 +154,31 @@ def test_PlanUnit_edit_acct_CorrectlyUpdatesObj():
     # ESTABLISH
     yao_plan = planunit_shop("Yao")
     zia_str = "Zia"
-    old_zia_credit_belief = 55
-    old_zia_debtit_belief = 66
+    old_zia_credit_score = 55
+    old_zia_debtit_score = 66
     yao_plan.set_acctunit(
         acctunit_shop(
             zia_str,
-            old_zia_credit_belief,
-            old_zia_debtit_belief,
+            old_zia_credit_score,
+            old_zia_debtit_score,
         )
     )
     zia_acctunit = yao_plan.get_acct(zia_str)
-    assert zia_acctunit.credit_belief == old_zia_credit_belief
-    assert zia_acctunit.debtit_belief == old_zia_debtit_belief
+    assert zia_acctunit.credit_score == old_zia_credit_score
+    assert zia_acctunit.debtit_score == old_zia_debtit_score
 
     # WHEN
-    new_zia_credit_belief = 22
-    new_zia_debtit_belief = 33
+    new_zia_credit_score = 22
+    new_zia_debtit_score = 33
     yao_plan.edit_acctunit(
         acct_name=zia_str,
-        credit_belief=new_zia_credit_belief,
-        debtit_belief=new_zia_debtit_belief,
+        credit_score=new_zia_credit_score,
+        debtit_score=new_zia_debtit_score,
     )
 
     # THEN
-    assert zia_acctunit.credit_belief == new_zia_credit_belief
-    assert zia_acctunit.debtit_belief == new_zia_debtit_belief
+    assert zia_acctunit.credit_score == new_zia_credit_score
+    assert zia_acctunit.debtit_score == new_zia_debtit_score
 
 
 def test_PlanUnit_get_acct_ReturnsObj():

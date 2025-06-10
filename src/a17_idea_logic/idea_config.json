@@ -28,8 +28,8 @@
       "owner_name": {}
     },
     "jvalues": {
-      "credit_belief": {},
-      "debtit_belief": {}
+      "credit_score": {},
+      "debtit_score": {}
     }
   },
   "plan_concept_awardlink": {

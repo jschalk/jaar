@@ -34,12 +34,12 @@ def _fund_take_str() -> str:
     return "_fund_take"
 
 
-def _inallocable_debtit_belief_str() -> str:
-    return "_inallocable_debtit_belief"
+def _inallocable_debtit_score_str() -> str:
+    return "_inallocable_debtit_score"
 
 
-def _irrational_debtit_belief_str() -> str:
-    return "_irrational_debtit_belief"
+def _irrational_debtit_score_str() -> str:
+    return "_irrational_debtit_score"
 
 
 def _memberships_str() -> str:
@@ -50,16 +50,16 @@ def awardee_title_str() -> str:
     return "awardee_title"
 
 
-def credit_belief_str() -> str:
-    return "credit_belief"
+def credit_score_str() -> str:
+    return "credit_score"
 
 
 def credit_vote_str() -> str:
     return "credit_vote"
 
 
-def debtit_belief_str() -> str:
-    return "debtit_belief"
+def debtit_score_str() -> str:
+    return "debtit_score"
 
 
 def debtit_vote_str() -> str:

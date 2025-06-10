@@ -6,8 +6,8 @@ from src.a06_plan_logic._test_util.a06_str import (
     begin_str,
     close_str,
     concept_label_str,
-    credit_belief_str,
-    debtit_belief_str,
+    credit_score_str,
+    debtit_score_str,
     denom_str,
     morph_str,
     numor_str,
@@ -42,8 +42,8 @@ def test_get_vow_guts_accts_dataframe_ReturnsObj(env_dir_setup_cleanup, graphics
     acctunit_colums = {
         owner_name_str(),
         acct_name_str(),
-        credit_belief_str(),
-        debtit_belief_str(),
+        credit_score_str(),
+        debtit_score_str(),
         "_memberships",
         "_fund_give",
         "_fund_take",
@@ -84,8 +84,8 @@ def test_get_vow_jobs_accts_dataframe_ReturnsObj(env_dir_setup_cleanup, graphics
     acctunit_colums = {
         owner_name_str(),
         acct_name_str(),
-        credit_belief_str(),
-        debtit_belief_str(),
+        credit_score_str(),
+        debtit_score_str(),
         "_memberships",
         "_fund_give",
         "_fund_take",
@@ -93,7 +93,7 @@ def test_get_vow_jobs_accts_dataframe_ReturnsObj(env_dir_setup_cleanup, graphics
         "_fund_agenda_take",
         "_fund_agenda_ratio_give",
         "_fund_agenda_ratio_take",
-        "_inallocable_debtit_belief",
+        "_inallocable_debtit_score",
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)

@@ -13,12 +13,12 @@ from src.a03_group_logic._test_util.a03_str import (
     _fund_agenda_take_str,
     _fund_give_str,
     _fund_take_str,
-    _inallocable_debtit_belief_str,
-    _irrational_debtit_belief_str,
+    _inallocable_debtit_score_str,
+    _irrational_debtit_score_str,
     awardee_title_str,
-    credit_belief_str,
+    credit_score_str,
     credit_vote_str,
-    debtit_belief_str,
+    debtit_score_str,
     debtit_vote_str,
     fund_give_str,
     fund_take_str,
@@ -72,10 +72,10 @@ from src.a06_plan_logic._test_util.a06_str import (
     begin_str,
     close_str,
     concept_way_str,
-    credit_belief_str,
+    credit_score_str,
     credit_vote_str,
     credor_respect_str,
-    debtit_belief_str,
+    debtit_score_str,
     debtit_vote_str,
     debtor_respect_str,
     denom_str,
@@ -246,8 +246,8 @@ def test_get_plan_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     expected_planacct_jmetrics_keys = {
         "_credor_pool",
         "_debtor_pool",
-        "_irrational_debtit_belief",
-        "_inallocable_debtit_belief",
+        "_irrational_debtit_score",
+        "_inallocable_debtit_score",
         "_fund_give",
         "_fund_take",
         "_fund_agenda_give",
@@ -432,16 +432,16 @@ def test_get_plan_calc_dimen_args_ReturnsObj():
         "_fund_agenda_give",
         "_credor_pool",
         "_fund_give",
-        credit_belief_str(),
+        credit_score_str(),
         acct_name_str(),
-        debtit_belief_str(),
+        debtit_score_str(),
         "_fund_agenda_ratio_take",
-        "_inallocable_debtit_belief",
+        "_inallocable_debtit_score",
         "_fund_agenda_ratio_give",
         "_fund_agenda_take",
         "_fund_take",
         "_debtor_pool",
-        "_irrational_debtit_belief",
+        "_irrational_debtit_score",
     }
     assert plan_conceptunit_args == {
         vow_label_str(),
@@ -579,14 +579,14 @@ def test_get_plan_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, planacct, jm, _fund_give_str()) == "REAL"
     assert g_class_type(cfig, planacct, jm, _fund_take_str()) == "float"
     assert g_sqlitetype(cfig, planacct, jm, _fund_take_str()) == "REAL"
-    assert g_class_type(cfig, planacct, jm, _inallocable_debtit_belief_str()) == "float"
-    assert g_sqlitetype(cfig, planacct, jm, _inallocable_debtit_belief_str()) == "REAL"
-    assert g_class_type(cfig, planacct, jm, _irrational_debtit_belief_str()) == "float"
-    assert g_sqlitetype(cfig, planacct, jm, _irrational_debtit_belief_str()) == "REAL"
-    assert g_class_type(cfig, planacct, jv, credit_belief_str()) == "float"
-    assert g_sqlitetype(cfig, planacct, jv, credit_belief_str()) == "REAL"
-    assert g_class_type(cfig, planacct, jv, debtit_belief_str()) == "float"
-    assert g_sqlitetype(cfig, planacct, jv, debtit_belief_str()) == "REAL"
+    assert g_class_type(cfig, planacct, jm, _inallocable_debtit_score_str()) == "float"
+    assert g_sqlitetype(cfig, planacct, jm, _inallocable_debtit_score_str()) == "REAL"
+    assert g_class_type(cfig, planacct, jm, _irrational_debtit_score_str()) == "float"
+    assert g_sqlitetype(cfig, planacct, jm, _irrational_debtit_score_str()) == "REAL"
+    assert g_class_type(cfig, planacct, jv, credit_score_str()) == "float"
+    assert g_sqlitetype(cfig, planacct, jv, credit_score_str()) == "REAL"
+    assert g_class_type(cfig, planacct, jv, debtit_score_str()) == "float"
+    assert g_sqlitetype(cfig, planacct, jv, debtit_score_str()) == "REAL"
 
     assert g_class_type(cfig, plangrou, jk, group_title_str()) == "TitleTerm"
     assert g_sqlitetype(cfig, plangrou, jk, group_title_str()) == "TEXT"
@@ -828,10 +828,10 @@ def test_get_plan_calc_args_type_dict_ReturnsObj():
     assert plan_calc_args_type_dict.get(_fund_take_str()) == "float"
     assert plan_calc_args_type_dict.get(credit_vote_str()) == "int"
     assert plan_calc_args_type_dict.get(debtit_vote_str()) == "int"
-    assert plan_calc_args_type_dict.get(_inallocable_debtit_belief_str()) == "float"
-    assert plan_calc_args_type_dict.get(_irrational_debtit_belief_str()) == "float"
-    assert plan_calc_args_type_dict.get(credit_belief_str()) == "float"
-    assert plan_calc_args_type_dict.get(debtit_belief_str()) == "float"
+    assert plan_calc_args_type_dict.get(_inallocable_debtit_score_str()) == "float"
+    assert plan_calc_args_type_dict.get(_irrational_debtit_score_str()) == "float"
+    assert plan_calc_args_type_dict.get(credit_score_str()) == "float"
+    assert plan_calc_args_type_dict.get(debtit_score_str()) == "float"
     assert plan_calc_args_type_dict.get(addin_str()) == "float"
     assert plan_calc_args_type_dict.get(begin_str()) == "float"
     assert plan_calc_args_type_dict.get(close_str()) == "float"
