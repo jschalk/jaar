@@ -14,9 +14,9 @@ from src.a02_finance_logic._test_util.a02_str import (
 )
 from src.a03_group_logic._test_util.a03_str import (
     awardee_title_str,
-    credit_belief_str,
+    credit_score_str,
     credit_vote_str,
-    debtit_belief_str,
+    debtit_score_str,
     debtit_vote_str,
     fund_give_str,
     fund_take_str,

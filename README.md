@@ -17,23 +17,37 @@ JAAR Version 0.0.0
 
 So how do I listen? jaar has an engine for converting the declarations (as data) into task lists. How to input the data? The most excessable method is using excel sheets. 
 
+# 0.0.1 "Vows" The foundation of jaar
+For Levinas all of reality is born from the face to face encounter. The same (me) welcomes the other person through the Face. The Face of the other tells me it's suffering and it's suffering becomes my suffering. I then VOW to change who I am to ease that suffering. The suffering is infinitly deep and beyond my complete understanding so when I vow to respond to that suffering I am acting with confidence that I understand what the suffering is and that I know how to respond. That confidence stops the listening process, the Vow cuts the infinite into the finite and is the foundation for a world. When that Vow is created it can create a world. Worlds can hold a infinite amount of human experience. A small subset of that is logical systems. Jaar is uses computers to build logic.
+
+A Vow can create a world or change a current world. Each person can only make one vow at a time so a world that has been built by multiple vows implies each vow is from a different time. jaar describes the passage of time by *event_ints*. *event_int* is always an integer. 
+
+For jaar all data must have *event_int*, *face_name*, *vow_label*
+
   
 ## 0.1 Short introduction to jaar excel sheets
 
-`jaar` is a python library for generating a calendar agenda based on the needs of my neighbors and in turn
-letting them know what I need. Needs can be expressed in Excel sheets that range in complexity from a simple
-five column single row (example below) to 10+ columns that include configuration options that are usually set
-to defaults.
+`jaar` is a python library for generating a calendar agenda based on the needs of my neighbors and in turn letting them know what I need. Needs can be expressed in Excel sheets that range in complexity from a simple five column single row (example below) to 10+ columns that include configuration options that are usually set to defaults.
 
-| event_int | face_name | vow_label | owner_name | acct_name |
-|-----------|-----------|-----------|------------|-----------|
-|    77     | Emmanuel  | OxboxDean |  Emmanuel  |    Dean   |
+# Example 0.1.0
+| event_int | face_name | vow_label | owner_name | acct_name | tran_time | amount |
+|-----------|-----------|-----------|------------|-----------|-----------|--------|
+|    77     | Emmanuel  | OxboxDean |  Emmanuel  |    Dean   |    891    |  7000  |
 
-A sheet with a single row like the example above can be processed by jaar. Jaar takes the sheet, creates a fiscal
-environemnt named "OxbowDean" and within that fiscal environment creates an owner named "Emmanuel" who has a plan.
+A sheet with a single row like the example above can be processed by jaar. Jaar takes the sheet, creates a fiscal environemnt named "OxbowDean" and within that fiscal environment creates an owner named "Emmanuel" who has a plan.
+
+Outputs (simplied):
+emmanuel_stance.xlsx: sheet "br00000"
+| event_int | face_name |  vow_label | ...
+|    78     | Emmanuel  |  OxboxDean |  Emmanuel  |    Dean   |      100      |      15       |
+
+
+
+
 That plan involves listening to Dean. Consider this slightly more complex start:
 
-| event_int | face_name | vow_label | owner_name | acct_name | credit_belief | debtit_belief |
+
+| event_int | face_name | vow_label | owner_name | acct_name | credit_score | debtit_score |
 |-----------|-----------|-----------|------------|-----------|---------------|---------------|
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |    Dean   |      100      |      15       |
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |  Emmanuel |       50      |      75       |

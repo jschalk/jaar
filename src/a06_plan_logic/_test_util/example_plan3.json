@@ -19,8 +19,8 @@
         }
       },
       "acct_name": "A a ron Jones",
-      "credit_belief": 1,
-      "debtit_belief": 1
+      "credit_score": 1,
+      "debtit_score": 1
     },
     "America": {
       "_memberships": {
@@ -46,8 +46,8 @@
         }
       },
       "acct_name": "America",
-      "credit_belief": 1,
-      "debtit_belief": 1
+      "credit_score": 1,
+      "debtit_score": 1
     },
     "Anna": {
       "_memberships": {
@@ -68,8 +68,8 @@
         }
       },
       "acct_name": "Anna",
-      "credit_belief": 1,
-      "debtit_belief": 1
+      "credit_score": 1,
+      "debtit_score": 1
     },
     "Benjamin Stoddert": {
       "_memberships": {
@@ -95,8 +95,8 @@
         }
       },
       "acct_name": "Benjamin Stoddert",
-      "credit_belief": 1,
-      "debtit_belief": 1
+      "credit_score": 1,
+      "debtit_score": 1
     },
     "Bob302": {
       "_memberships": {
@@ -122,8 +122,8 @@
         }
       },
       "acct_name": "Bob302",
-      "credit_belief": 1,
-      "debtit_belief": 1
+      "credit_score": 1,
+      "debtit_score": 1
     },
     "Chuck Lee": {
       "_memberships": {
@@ -149,8 +149,8 @@
         }
       },
       "acct_name": "Chuck Lee",
-      "credit_belief": 1,
-      "debtit_belief": 1
+      "credit_score": 1,
+      "debtit_score": 1
     },
     "Ernesto Chavez": {
       "_memberships": {
@@ -171,8 +171,8 @@
         }
       },
       "acct_name": "Ernesto Chavez",
-      "credit_belief": 1,
-      "debtit_belief": 1
+      "credit_score": 1,
+      "debtit_score": 1
     },
     "Jacque Chirac": {
       "_memberships": {
@@ -193,8 +193,8 @@
         }
       },
       "acct_name": "Jacque Chirac",
-      "credit_belief": 1,
-      "debtit_belief": 1
+      "credit_score": 1,
+      "debtit_score": 1
     },
     "Jane Randolph": {
       "_memberships": {
@@ -215,8 +215,8 @@
         }
       },
       "acct_name": "Jane Randolph",
-      "credit_belief": 1,
-      "debtit_belief": 1
+      "credit_score": 1,
+      "debtit_score": 1
     },
     "Maria Reynolds": {
       "_memberships": {
@@ -237,8 +237,8 @@
         }
       },
       "acct_name": "Maria Reynolds",
-      "credit_belief": 1,
-      "debtit_belief": 1
+      "credit_score": 1,
+      "debtit_score": 1
     },
     "Martha Doubs": {
       "_memberships": {
@@ -264,8 +264,8 @@
         }
       },
       "acct_name": "Martha Doubs",
-      "credit_belief": 1,
-      "debtit_belief": 1
+      "credit_score": 1,
+      "debtit_score": 1
     },
     "Mikayla": {
       "_memberships": {
@@ -291,8 +291,8 @@
         }
       },
       "acct_name": "Mikayla",
-      "credit_belief": 1,
-      "debtit_belief": 1
+      "credit_score": 1,
+      "debtit_score": 1
     },
     "Norberto": {
       "_memberships": {
@@ -313,8 +313,8 @@
         }
       },
       "acct_name": "Norberto",
-      "credit_belief": 1,
-      "debtit_belief": 1
+      "credit_score": 1,
+      "debtit_score": 1
     },
     "Perrison": {
       "_memberships": {
@@ -340,8 +340,8 @@
         }
       },
       "acct_name": "Perrison",
-      "credit_belief": 1,
-      "debtit_belief": 1
+      "credit_score": 1,
+      "debtit_score": 1
     },
     "Philipa": {
       "_memberships": {
@@ -367,8 +367,8 @@
         }
       },
       "acct_name": "Philipa",
-      "credit_belief": 1,
-      "debtit_belief": 1
+      "credit_score": 1,
+      "debtit_score": 1
     },
     "Prashant": {
       "_memberships": {
@@ -389,8 +389,8 @@
         }
       },
       "acct_name": "Prashant",
-      "credit_belief": 1,
-      "debtit_belief": 1
+      "credit_score": 1,
+      "debtit_score": 1
     },
     "Renee Elise Goldsberry": {
       "_memberships": {
@@ -441,8 +441,8 @@
         }
       },
       "acct_name": "Renee Elise Goldsberry",
-      "credit_belief": 1,
-      "debtit_belief": 1
+      "credit_score": 1,
+      "debtit_score": 1
     },
     "Sam zamora": {
       "_memberships": {
@@ -468,8 +468,8 @@
         }
       },
       "acct_name": "Sam zamora",
-      "credit_belief": 1,
-      "debtit_belief": 1
+      "credit_score": 1,
+      "debtit_score": 1
     },
     "Shadwell Harris": {
       "_memberships": {
@@ -490,8 +490,8 @@
         }
       },
       "acct_name": "Shadwell Harris",
-      "credit_belief": 1,
-      "debtit_belief": 1
+      "credit_score": 1,
+      "debtit_score": 1
     },
     "Thomas OSU": {
       "_memberships": {
@@ -512,8 +512,8 @@
         }
       },
       "acct_name": "Thomas OSU",
-      "credit_belief": 1,
-      "debtit_belief": 1
+      "credit_score": 1,
+      "debtit_score": 1
     },
     "Travis Fox": {
       "_memberships": {
@@ -534,8 +534,8 @@
         }
       },
       "acct_name": "Travis Fox",
-      "credit_belief": 1,
-      "debtit_belief": 1
+      "credit_score": 1,
+      "debtit_score": 1
     },
     "WIlliam Wellace": {
       "_memberships": {
@@ -556,8 +556,8 @@
         }
       },
       "acct_name": "WIlliam Wellace",
-      "credit_belief": 1,
-      "debtit_belief": 1
+      "credit_score": 1,
+      "debtit_score": 1
     }
   },
   "bridge": ";",

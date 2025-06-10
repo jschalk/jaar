@@ -1,27 +1,27 @@
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_plan_logic.plan import planunit_shop
 from src.a13_plan_listen_logic.listen import (
-    _allocate_irrational_debtit_belief,
+    _allocate_irrational_debtit_score,
     generate_ingest_list,
     generate_perspective_agenda,
 )
 
 
-def test_allocate_irrational_debtit_belief_CorrectlySetsPlanAttr():
+def test_allocate_irrational_debtit_score_CorrectlySetsPlanAttr():
     yao_str = "Yao"
     zia_str = "Zia"
-    zia_credit_belief = 47
-    zia_debtit_belief = 41
+    zia_credit_score = 47
+    zia_debtit_score = 41
     yao_plan = planunit_shop(yao_str)
-    yao_plan.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
+    yao_plan.add_acctunit(zia_str, zia_credit_score, zia_debtit_score)
     zia_acctunit = yao_plan.get_acct(zia_str)
-    assert zia_acctunit._irrational_debtit_belief == 0
+    assert zia_acctunit._irrational_debtit_score == 0
 
     # WHEN
-    _allocate_irrational_debtit_belief(yao_plan, zia_str)
+    _allocate_irrational_debtit_score(yao_plan, zia_str)
 
     # THEN
-    assert zia_acctunit._irrational_debtit_belief == zia_debtit_belief
+    assert zia_acctunit._irrational_debtit_score == zia_debtit_score
 
 
 def test_generate_perspective_agenda_CorrectlyGrabsAgendaChores():

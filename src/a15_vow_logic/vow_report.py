@@ -26,8 +26,8 @@ def get_vow_guts_accts_plotly_fig(x_vow: VowUnit) -> plotly_Figure:
     column_header_list = [
         "owner_name",
         "acct_name",
-        "credit_belief",
-        "debtit_belief",
+        "credit_score",
+        "debtit_score",
         "_fund_give",
         "_fund_take",
         "_fund_agenda_give",
@@ -43,8 +43,8 @@ def get_vow_guts_accts_plotly_fig(x_vow: VowUnit) -> plotly_Figure:
             values=[
                 df.owner_name,
                 df.acct_name,
-                df.credit_belief,
-                df.debtit_belief,
+                df.credit_score,
+                df.debtit_score,
                 df._fund_give,
                 df._fund_take,
                 df._fund_agenda_give,
@@ -82,8 +82,8 @@ def get_vow_jobs_accts_plotly_fig(x_vow: VowUnit) -> plotly_Figure:
     column_header_list = [
         "owner_name",
         "acct_name",
-        "credit_belief",
-        "debtit_belief",
+        "credit_score",
+        "debtit_score",
         "_fund_give",
         "_fund_take",
         "_fund_agenda_give",
@@ -99,8 +99,8 @@ def get_vow_jobs_accts_plotly_fig(x_vow: VowUnit) -> plotly_Figure:
             values=[
                 df.owner_name,
                 df.acct_name,
-                df.credit_belief,
-                df.debtit_belief,
+                df.credit_score,
+                df.debtit_score,
                 df._fund_give,
                 df._fund_take,
                 df._fund_agenda_give,

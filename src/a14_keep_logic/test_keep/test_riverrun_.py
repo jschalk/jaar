@@ -107,17 +107,17 @@ def test_RiverRun_set_keep_credorledger_SetsAttr():
     # ESTABLISH
     yao_hubunit = example_yao_hubunit()
     yao_str = "Yao"
-    yao_credit_belief = 500
+    yao_credit_score = 500
     x_riverrun = riverrun_shop(yao_hubunit)
     assert x_riverrun.keep_credorledgers == {}
 
     # WHEN
     x_riverrun.set_keep_credorledger(
-        owner_name=yao_str, acct_name=yao_str, credit_ledger=yao_credit_belief
+        owner_name=yao_str, acct_name=yao_str, credit_ledger=yao_credit_score
     )
 
     # THEN
-    assert x_riverrun.keep_credorledgers == {yao_str: {yao_str: yao_credit_belief}}
+    assert x_riverrun.keep_credorledgers == {yao_str: {yao_str: yao_credit_score}}
 
 
 def test_RiverRun_delete_keep_credorledgers_owner_SetsAttr():

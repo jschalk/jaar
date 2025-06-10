@@ -3,9 +3,9 @@ from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
     concept_way_str,
-    credit_belief_str,
+    credit_score_str,
     credit_vote_str,
-    debtit_belief_str,
+    debtit_score_str,
     debtit_vote_str,
     group_title_str,
     mass_str,
@@ -31,17 +31,17 @@ def test_make_plandelta_Arg_idea_format_00021_plan_acctunit_v0_0_0():
     sue_str = "Sue"
     bob_str = "Bob"
     yao_str = "Yao"
-    sue_credit_belief = 11
-    bob_credit_belief = 13
-    yao_credit_belief = 41
-    sue_debtit_belief = 23
-    bob_debtit_belief = 29
-    yao_debtit_belief = 37
+    sue_credit_score = 11
+    bob_credit_score = 13
+    yao_credit_score = 41
+    sue_debtit_score = 23
+    bob_debtit_score = 29
+    yao_debtit_score = 37
     accord_vow_label = "accord56"
     sue_planunit = planunit_shop(sue_str, accord_vow_label)
-    sue_planunit.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
-    sue_planunit.add_acctunit(bob_str, bob_credit_belief, bob_debtit_belief)
-    sue_planunit.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
+    sue_planunit.add_acctunit(sue_str, sue_credit_score, sue_debtit_score)
+    sue_planunit.add_acctunit(bob_str, bob_credit_score, bob_debtit_score)
+    sue_planunit.add_acctunit(yao_str, yao_credit_score, yao_debtit_score)
     x_idea_name = idea_format_00021_plan_acctunit_v0_0_0()
     acct_dataframe = create_idea_df(sue_planunit, x_idea_name)
     print(f"{acct_dataframe.columns=}")
@@ -54,13 +54,13 @@ def test_make_plandelta_Arg_idea_format_00021_plan_acctunit_v0_0_0():
     assert sue_acct_plandelta
     sue_planatom = planatom_shop(plan_acctunit_str(), INSERT_str())
     sue_planatom.set_arg(acct_name_str(), sue_str)
-    sue_planatom.set_arg(credit_belief_str(), sue_credit_belief)
-    sue_planatom.set_arg(debtit_belief_str(), sue_debtit_belief)
+    sue_planatom.set_arg(credit_score_str(), sue_credit_score)
+    sue_planatom.set_arg(debtit_score_str(), sue_debtit_score)
     sue_planatom.set_atom_order()
     bob_planatom = planatom_shop(plan_acctunit_str(), INSERT_str())
     bob_planatom.set_arg(acct_name_str(), bob_str)
-    bob_planatom.set_arg(credit_belief_str(), bob_credit_belief)
-    bob_planatom.set_arg(debtit_belief_str(), bob_debtit_belief)
+    bob_planatom.set_arg(credit_score_str(), bob_credit_score)
+    bob_planatom.set_arg(debtit_score_str(), bob_debtit_score)
     bob_planatom.set_atom_order()
     # print(f"{sue_acct_plandelta.get_ordered_dict()=}")
     # print(

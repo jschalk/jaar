@@ -1,8 +1,8 @@
 from src.a03_group_logic.acct import acctunit_shop
 from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
-    credit_belief_str,
-    debtit_belief_str,
+    credit_score_str,
+    debtit_score_str,
     group_title_str,
     plan_acct_membership_str,
     plan_acctunit_str,
@@ -27,11 +27,11 @@ def test_PlanAtom_exists():
 def test_planatom_shop_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
-    bob_credit_belief = 55
-    bob_debtit_belief = 66
-    bob_acctunit = acctunit_shop(bob_str, bob_credit_belief, bob_debtit_belief)
-    cw_str = "_credit_belief"
-    dw_str = "_debtit_belief"
+    bob_credit_score = 55
+    bob_debtit_score = 66
+    bob_acctunit = acctunit_shop(bob_str, bob_credit_score, bob_debtit_score)
+    cw_str = "_credit_score"
+    dw_str = "_debtit_score"
     bob_required_dict = {acct_name_str(): "huh"}
     bob_optional_dict = {cw_str: bob_acctunit.get_dict().get(cw_str)}
     bob_optional_dict[dw_str] = bob_acctunit.get_dict().get(dw_str)
@@ -99,13 +99,13 @@ def test_PlanAtom_is_jvalues_valid_ReturnsCorrectBoolean():
     assert bob_insert_planatom.is_jvalues_valid()
 
     # WHEN
-    bob_insert_planatom.set_jvalue(credit_belief_str(), 55)
+    bob_insert_planatom.set_jvalue(credit_score_str(), 55)
     # THEN
     assert len(bob_insert_planatom.jvalues) == 1
     assert bob_insert_planatom.is_jvalues_valid()
 
     # WHEN
-    bob_insert_planatom.set_jvalue(debtit_belief_str(), 66)
+    bob_insert_planatom.set_jvalue(debtit_score_str(), 66)
     # THEN
     assert len(bob_insert_planatom.jvalues) == 2
     assert bob_insert_planatom.is_jvalues_valid()
@@ -119,9 +119,9 @@ def test_PlanAtom_is_jvalues_valid_ReturnsCorrectBoolean():
 
 def test_PlanAtom_is_valid_ReturnsCorrectBoolean_AcctUnit_INSERT():
     bob_str = "Bob"
-    bob_credit_belief = 55
-    bob_debtit_belief = 66
-    bob_acctunit = acctunit_shop(bob_str, bob_credit_belief, bob_debtit_belief)
+    bob_credit_score = 55
+    bob_debtit_score = 66
+    bob_acctunit = acctunit_shop(bob_str, bob_credit_score, bob_debtit_score)
     acctunit_str = plan_acctunit_str()
 
     # WHEN
@@ -150,8 +150,8 @@ def test_PlanAtom_is_valid_ReturnsCorrectBoolean_AcctUnit_INSERT():
 
     # WHEN
     bob_insert_planatom.jvalues = {}
-    cw_str = credit_belief_str()
-    dw_str = debtit_belief_str()
+    cw_str = credit_score_str()
+    dw_str = debtit_score_str()
     bob_insert_planatom.set_jvalue(cw_str, bob_acctunit.get_dict().get(cw_str))
     bob_insert_planatom.set_jvalue(dw_str, bob_acctunit.get_dict().get(dw_str))
 
@@ -178,13 +178,13 @@ def test_PlanAtom_is_valid_ReturnsCorrectBoolean_AcctUnit_INSERT():
 def test_PlanAtom_get_value_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
-    bob_credit_belief = 55
-    bob_debtit_belief = 66
-    bob_acctunit = acctunit_shop(bob_str, bob_credit_belief, bob_debtit_belief)
+    bob_credit_score = 55
+    bob_debtit_score = 66
+    bob_acctunit = acctunit_shop(bob_str, bob_credit_score, bob_debtit_score)
     acctunit_str = plan_acctunit_str()
     bob_insert_planatom = planatom_shop(acctunit_str, INSERT_str())
-    cw_str = credit_belief_str()
-    dw_str = debtit_belief_str()
+    cw_str = credit_score_str()
+    dw_str = debtit_score_str()
     print(f"{bob_acctunit.get_dict()=}")
     # bob_acctunit_dict = {acct_name_str(): bob_acctunit.get_dict().get(acct_name_str())}
     # print(f"{bob_acctunit_dict=}")
@@ -194,8 +194,8 @@ def test_PlanAtom_get_value_ReturnsObj():
     assert bob_insert_planatom.is_valid()
 
     # WHEN / THEN
-    assert bob_insert_planatom.get_value(cw_str) == bob_credit_belief
-    assert bob_insert_planatom.get_value(dw_str) == bob_debtit_belief
+    assert bob_insert_planatom.get_value(cw_str) == bob_credit_score
+    assert bob_insert_planatom.get_value(dw_str) == bob_debtit_score
 
 
 def test_PlanAtom_is_valid_ReturnsCorrectBoolean_AcctUnit_DELETE():
@@ -237,41 +237,41 @@ def test_PlanAtom_is_valid_ReturnsCorrectBoolean_planunit():
 def test_PlanAtom_set_atom_order_SetCorrectAttr():
     # ESTABLISH
     bob_str = "Bob"
-    bob_credit_belief = 55
-    bob_debtit_belief = 66
+    bob_credit_score = 55
+    bob_debtit_score = 66
     acctunit_str = plan_acctunit_str()
     bob_insert_planatom = planatom_shop(acctunit_str, INSERT_str())
-    cw_str = credit_belief_str()
-    dw_str = debtit_belief_str()
+    cw_str = credit_score_str()
+    dw_str = debtit_score_str()
     bob_insert_planatom.set_jkey(acct_name_str(), bob_str)
-    bob_insert_planatom.set_jvalue(cw_str, bob_credit_belief)
-    bob_insert_planatom.set_jvalue(dw_str, bob_debtit_belief)
+    bob_insert_planatom.set_jvalue(cw_str, bob_credit_score)
+    bob_insert_planatom.set_jvalue(dw_str, bob_debtit_score)
     assert bob_insert_planatom.is_valid()
 
     # WHEN / THEN
-    assert bob_insert_planatom.get_value(cw_str) == bob_credit_belief
-    assert bob_insert_planatom.get_value(dw_str) == bob_debtit_belief
+    assert bob_insert_planatom.get_value(cw_str) == bob_credit_score
+    assert bob_insert_planatom.get_value(dw_str) == bob_debtit_score
 
 
 def test_PlanAtom_set_arg_SetsAny_jkey_jvalue():
     # ESTABLISH
     bob_str = "Bob"
-    bob_credit_belief = 55
-    bob_debtit_belief = 66
+    bob_credit_score = 55
+    bob_debtit_score = 66
     acctunit_str = plan_acctunit_str()
     bob_insert_planatom = planatom_shop(acctunit_str, INSERT_str())
-    cw_str = credit_belief_str()
-    dw_str = debtit_belief_str()
+    cw_str = credit_score_str()
+    dw_str = debtit_score_str()
 
     # WHEN
     bob_insert_planatom.set_arg(acct_name_str(), bob_str)
-    bob_insert_planatom.set_arg(cw_str, bob_credit_belief)
-    bob_insert_planatom.set_arg(dw_str, bob_debtit_belief)
+    bob_insert_planatom.set_arg(cw_str, bob_credit_score)
+    bob_insert_planatom.set_arg(dw_str, bob_debtit_score)
 
     # THEN
     assert bob_insert_planatom.get_value(acct_name_str()) == bob_str
-    assert bob_insert_planatom.get_value(cw_str) == bob_credit_belief
-    assert bob_insert_planatom.get_value(dw_str) == bob_debtit_belief
+    assert bob_insert_planatom.get_value(cw_str) == bob_credit_score
+    assert bob_insert_planatom.get_value(dw_str) == bob_debtit_score
     assert bob_insert_planatom.get_value(acct_name_str()) == bob_str
     assert bob_insert_planatom.is_valid()
 

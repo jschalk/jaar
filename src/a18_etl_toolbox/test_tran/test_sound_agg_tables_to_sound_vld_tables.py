@@ -3,8 +3,8 @@ from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
 from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
 from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
-    credit_belief_str,
-    debtit_belief_str,
+    credit_score_str,
+    debtit_score_str,
     plan_acctunit_str,
 )
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
@@ -45,8 +45,8 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_PopulatesTable_Scenario0()
 , {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
-, {credit_belief_str()}
-, {debtit_belief_str()}
+, {credit_score_str()}
+, {debtit_score_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -73,8 +73,8 @@ VALUES
 , {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
-, {credit_belief_str()}
-, {debtit_belief_str()}
+, {credit_score_str()}
+, {debtit_score_str()}
 FROM {planawar_v_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -115,8 +115,8 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario0_AddRowsToTable():
 , {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
-, {credit_belief_str()}
-, {debtit_belief_str()}
+, {credit_score_str()}
+, {debtit_score_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -141,8 +141,8 @@ VALUES
 , {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
-, {credit_belief_str()}
-, {debtit_belief_str()}
+, {credit_score_str()}
+, {debtit_score_str()}
 FROM {planacct_v_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -182,8 +182,8 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario1_Populates_Columns():
 , {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
-, {credit_belief_str()}
-, {debtit_belief_str()}
+, {credit_score_str()}
+, {debtit_score_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -208,8 +208,8 @@ VALUES
 , {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
-, {credit_belief_str()}
-, {debtit_belief_str()}
+, {credit_score_str()}
+, {debtit_score_str()}
 FROM {planacct_v_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -249,8 +249,8 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario2_DoesNotSelectWhere_e
 , {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
-, {credit_belief_str()}
-, {debtit_belief_str()}
+, {credit_score_str()}
+, {debtit_score_str()}
 , error_message
 )"""
         values_clause = f"""
@@ -276,8 +276,8 @@ VALUES
 , {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
-, {credit_belief_str()}
-, {debtit_belief_str()}
+, {credit_score_str()}
+, {debtit_score_str()}
 FROM {planacct_v_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)

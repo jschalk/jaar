@@ -4,7 +4,7 @@ from src.a00_data_toolbox.file_toolbox import create_path, open_file
 from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
 from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
-    credit_belief_str,
+    credit_score_str,
     plan_acctunit_str,
 )
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
@@ -30,8 +30,8 @@ def test_etl_voice_agg_to_event_plan_csvs_PopulatesPlanPulabelTables(
     event3 = 3
     event7 = 7
     accord23_str = "accord23"
-    yao_credit_belief5 = 5
-    sue_credit_belief7 = 7
+    yao_credit_score5 = 5
+    sue_credit_score7 = 7
     put_agg_tablename = create_prime_tablename(plan_acctunit_str(), "v", "agg", "put")
     put_agg_csv = f"{put_agg_tablename}.csv"
     x_vow_mstr_dir = get_module_temp_dir()
@@ -48,11 +48,11 @@ def test_etl_voice_agg_to_event_plan_csvs_PopulatesPlanPulabelTables(
         cursor = plan_db_conn.cursor()
         create_sound_and_voice_tables(cursor)
         insert_raw_sqlstr = f"""
-INSERT INTO {put_agg_tablename} ({event_int_str()},{face_name_str()},{vow_label_str()},{owner_name_str()},{acct_name_str()},{credit_belief_str()})
+INSERT INTO {put_agg_tablename} ({event_int_str()},{face_name_str()},{vow_label_str()},{owner_name_str()},{acct_name_str()},{credit_score_str()})
 VALUES
-  ({event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5})
-, ({event7},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_belief5})
-, ({event7},'{sue_inx}','{accord23_str}','{bob_inx}','{sue_inx}',{sue_credit_belief7})
+  ({event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_score5})
+, ({event7},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_score5})
+, ({event7},'{sue_inx}','{accord23_str}','{bob_inx}','{sue_inx}',{sue_credit_score7})
 ;
 """
         print(insert_raw_sqlstr)
@@ -70,10 +70,10 @@ VALUES
         e7_put_csv = open_file(a23_e7_planacct_put_path)
         print(f"{e3_put_csv=}")
         print(f"{e7_put_csv=}")
-        expected_e3_put_csv = """event_int,face_name,vow_label,owner_name,acct_name,credit_belief,debtit_belief
+        expected_e3_put_csv = """event_int,face_name,vow_label,owner_name,acct_name,credit_score,debtit_score
 3,Suzy,accord23,Bobby,Bobby,5.0,
 """
-        expected_e7_put_csv = """event_int,face_name,vow_label,owner_name,acct_name,credit_belief,debtit_belief
+        expected_e7_put_csv = """event_int,face_name,vow_label,owner_name,acct_name,credit_score,debtit_score
 7,Suzy,accord23,Bobby,Bobby,5.0,
 7,Suzy,accord23,Bobby,Suzy,7.0,
 """

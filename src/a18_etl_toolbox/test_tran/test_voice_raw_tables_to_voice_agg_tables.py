@@ -3,8 +3,8 @@ from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
 from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
 from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
-    credit_belief_str,
-    debtit_belief_str,
+    credit_score_str,
+    debtit_score_str,
     plan_acctunit_str,
 )
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
@@ -159,8 +159,8 @@ def test_get_insert_voice_agg_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
 , {vow_label_str()}_inx
 , {owner_name_str()}_inx
 , {acct_name_str()}_inx
-, {credit_belief_str()}
-, {debtit_belief_str()}
+, {credit_score_str()}
+, {debtit_score_str()}
 )
 VALUES
   ({event1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_inx}', {x44_credit}, {x22_debtit})
@@ -187,8 +187,8 @@ VALUES
 , {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
-, {credit_belief_str()}
-, {debtit_belief_str()}
+, {credit_score_str()}
+, {debtit_score_str()}
 FROM {planacct_v_agg_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -229,8 +229,8 @@ def test_etl_voice_raw_tables_to_voice_agg_tables_PopulatesTable_Scenario0():
 , {vow_label_str()}_inx
 , {owner_name_str()}_inx
 , {acct_name_str()}_inx
-, {credit_belief_str()}
-, {debtit_belief_str()}
+, {credit_score_str()}
+, {debtit_score_str()}
 )
 VALUES
   ({event1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_inx}', {x44_credit}, {x22_debtit})
@@ -255,8 +255,8 @@ VALUES
 , {vow_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
-, {credit_belief_str()}
-, {debtit_belief_str()}
+, {credit_score_str()}
+, {debtit_score_str()}
 FROM {planacct_v_agg_put_tablename}
 """
         cursor.execute(select_sqlstr)

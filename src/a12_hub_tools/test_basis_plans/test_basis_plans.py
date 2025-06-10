@@ -19,16 +19,16 @@ def test_create_empty_plan_from_plan_ReturnsObj():
     yao_gut = planunit_shop(yao_str, bridge=slash_str, penny=penny_float)
     yao_gut.set_l1_concept(conceptunit_shop("Iowa"))
     zia_str = "Zia"
-    zia_credit_belief = 47
-    zia_debtit_belief = 41
+    zia_credit_score = 47
+    zia_debtit_score = 41
     zia_credor_pool = 87
     zia_debtor_pool = 81
-    yao_gut.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
-    zia_irrational_debtit_belief = 11
-    zia_inallocable_debtit_belief = 22
+    yao_gut.add_acctunit(zia_str, zia_credit_score, zia_debtit_score)
+    zia_irrational_debtit_score = 11
+    zia_inallocable_debtit_score = 22
     duty_zia_acctunit = yao_gut.get_acct(zia_str)
-    duty_zia_acctunit.add_irrational_debtit_belief(zia_irrational_debtit_belief)
-    duty_zia_acctunit.add_inallocable_debtit_belief(zia_inallocable_debtit_belief)
+    duty_zia_acctunit.add_irrational_debtit_score(zia_irrational_debtit_score)
+    duty_zia_acctunit.add_inallocable_debtit_score(zia_inallocable_debtit_score)
     zia_acctunit = yao_gut.get_acct(zia_str)
     zia_acctunit.add_membership(f"{slash_str}swimmers")
     yao_gut.set_credor_respect(zia_credor_pool)
@@ -63,16 +63,16 @@ def test_create_listen_basis_ReturnsObj():
     yao_duty = planunit_shop(yao_str, bridge=slash_str)
     yao_duty.set_l1_concept(conceptunit_shop("Iowa"))
     zia_str = "Zia"
-    zia_credit_belief = 47
-    zia_debtit_belief = 41
+    zia_credit_score = 47
+    zia_debtit_score = 41
     zia_credor_pool = 8700
     zia_debtor_pool = 8100
-    yao_duty.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
-    zia_irrational_debtit_belief = 11
-    zia_inallocable_debtit_belief = 22
+    yao_duty.add_acctunit(zia_str, zia_credit_score, zia_debtit_score)
+    zia_irrational_debtit_score = 11
+    zia_inallocable_debtit_score = 22
     duty_zia_acctunit = yao_duty.get_acct(zia_str)
-    duty_zia_acctunit.add_irrational_debtit_belief(zia_irrational_debtit_belief)
-    duty_zia_acctunit.add_inallocable_debtit_belief(zia_inallocable_debtit_belief)
+    duty_zia_acctunit.add_irrational_debtit_score(zia_irrational_debtit_score)
+    duty_zia_acctunit.add_inallocable_debtit_score(zia_inallocable_debtit_score)
     zia_acctunit = yao_duty.get_acct(zia_str)
     zia_acctunit.add_membership(f"{slash_str}swimmers")
     yao_duty.set_credor_respect(zia_credor_pool)
@@ -100,8 +100,8 @@ def test_create_listen_basis_ReturnsObj():
         yao_basis_vision.get_acctunits_dict().keys()
         == yao_duty.get_acctunits_dict().keys()
     )
-    assert vision_zia_acctunit._irrational_debtit_belief == 0
-    assert vision_zia_acctunit._inallocable_debtit_belief == 0
+    assert vision_zia_acctunit._irrational_debtit_score == 0
+    assert vision_zia_acctunit._inallocable_debtit_score == 0
 
 
 def test_get_default_job_ReturnsObj():

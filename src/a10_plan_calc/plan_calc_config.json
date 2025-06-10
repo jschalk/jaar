@@ -113,21 +113,21 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_inallocable_debtit_belief": {
+            "_inallocable_debtit_score": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_irrational_debtit_belief": {
+            "_irrational_debtit_score": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }
         },
         "jvalues": {
-            "credit_belief": {
+            "credit_score": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "debtit_belief": {
+            "debtit_score": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }

@@ -20,7 +20,7 @@ class RespectNum(float):
 
 
 class BitNum(float):
-    """Smallest Unit of belief (RespectNum) ala 'the slightest bit of respect!'"""
+    """Smallest Unit of score (RespectNum) ala 'the slightest bit of respect!'"""
 
     pass
 

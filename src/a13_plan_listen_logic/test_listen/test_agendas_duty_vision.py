@@ -38,16 +38,16 @@ def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovision_PlanWhenNo_labor
     yao_str = "Yao"
     yao_duty = planunit_shop(yao_str, a23_str)
     zia_str = "Zia"
-    zia_credit_belief = 47
-    zia_debtit_belief = 41
+    zia_credit_score = 47
+    zia_debtit_score = 41
     zia_pool = 87
-    yao_duty.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
+    yao_duty.add_acctunit(zia_str, zia_credit_score, zia_debtit_score)
     yao_duty.set_acct_respect(zia_pool)
 
     zia_vision = planunit_shop(zia_str, a23_str)
     zia_vision.set_concept(conceptunit_shop(clean_str(), task=True), casa_way())
     zia_vision.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
-    zia_vision.add_acctunit(yao_str, debtit_belief=12)
+    zia_vision.add_acctunit(yao_str, debtit_score=12)
     yao_dakota_hubunit = hubunit_shop(env_dir(), a23_str, yao_str, get_dakota_way())
     yao_dakota_hubunit.save_vision_plan(zia_vision)
     new_yao_vision = create_listen_basis(yao_duty)
@@ -69,16 +69,16 @@ def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovision_Plan(
     yao_str = "Yao"
     yao_duty = planunit_shop(yao_str, a23_str)
     zia_str = "Zia"
-    zia_credit_belief = 47
-    zia_debtit_belief = 41
+    zia_credit_score = 47
+    zia_debtit_score = 41
     zia_pool = 87
-    yao_duty.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
+    yao_duty.add_acctunit(zia_str, zia_credit_score, zia_debtit_score)
     yao_duty.set_acct_respect(zia_pool)
 
     zia_vision = planunit_shop(zia_str, a23_str)
     zia_vision.set_concept(conceptunit_shop(clean_str(), task=True), casa_way())
     zia_vision.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
-    zia_vision.add_acctunit(yao_str, debtit_belief=12)
+    zia_vision.add_acctunit(yao_str, debtit_score=12)
     clean_conceptunit = zia_vision.get_concept_obj(clean_way())
     cook_conceptunit = zia_vision.get_concept_obj(cook_way())
     clean_conceptunit.laborunit.set_laborlink(yao_str)
@@ -99,7 +99,7 @@ def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovision_Plan(
     assert len(new_yao_vision.get_agenda_dict()) == 2
 
 
-def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovisionPlanWithDetailsDecidedBy_debtit_belief(
+def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovisionPlanWithDetailsDecidedBy_debtit_score(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -135,13 +135,13 @@ def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovisionPlanWithDetailsDe
     new_cook_concept = new_yao_job1.get_concept_obj(cook_way())
     zia_acctunit = new_yao_job1.get_acct(zia_str)
     bob_acctunit = new_yao_job1.get_acct(bob_str)
-    assert zia_acctunit.debtit_belief < bob_acctunit.debtit_belief
+    assert zia_acctunit.debtit_score < bob_acctunit.debtit_score
     assert new_cook_concept.get_reasonunit(eat_way()) is None
 
-    yao_zia_debtit_belief = 15
-    yao_bob_debtit_belief = 5
-    yao_duty.add_acctunit(zia_str, None, yao_zia_debtit_belief)
-    yao_duty.add_acctunit(bob_str, None, yao_bob_debtit_belief)
+    yao_zia_debtit_score = 15
+    yao_bob_debtit_score = 5
+    yao_duty.add_acctunit(zia_str, None, yao_zia_debtit_score)
+    yao_duty.add_acctunit(bob_str, None, yao_bob_debtit_score)
     yao_duty.set_acct_respect(100)
     new_yao_job2 = create_listen_basis(yao_duty)
     assert new_yao_job2.concept_exists(cook_way()) is False
@@ -154,7 +154,7 @@ def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovisionPlanWithDetailsDe
     new_cook_concept = new_yao_job2.get_concept_obj(cook_way())
     zia_acctunit = new_yao_job2.get_acct(zia_str)
     bob_acctunit = new_yao_job2.get_acct(bob_str)
-    assert zia_acctunit.debtit_belief > bob_acctunit.debtit_belief
+    assert zia_acctunit.debtit_score > bob_acctunit.debtit_score
     zia_eat_reasonunit = zia_cook_conceptunit.get_reasonunit(eat_way())
     assert new_cook_concept.get_reasonunit(eat_way()) == zia_eat_reasonunit
 
@@ -167,13 +167,13 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesIrrationalPlan(
     yao_str = "Yao"
     yao_duty = planunit_shop(yao_str, a23_str)
     zia_str = "Zia"
-    zia_credit_belief = 47
-    zia_debtit_belief = 41
+    zia_credit_score = 47
+    zia_debtit_score = 41
     sue_str = "Sue"
-    sue_credit_belief = 57
-    sue_debtit_belief = 51
-    yao_duty.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
-    yao_duty.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
+    sue_credit_score = 57
+    sue_debtit_score = 51
+    yao_duty.add_acctunit(zia_str, zia_credit_score, zia_debtit_score)
+    yao_duty.add_acctunit(sue_str, sue_credit_score, sue_debtit_score)
     yao_pool = 92
     yao_duty.set_acct_respect(yao_pool)
     yao_dakota_hubunit = hubunit_shop(env_dir(), a23_str, yao_str, get_dakota_way())
@@ -183,7 +183,7 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesIrrationalPlan(
     zia_vision = planunit_shop(zia_str, a23_str)
     zia_vision.set_concept(conceptunit_shop(clean_str(), task=True), casa_way())
     zia_vision.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
-    zia_vision.add_acctunit(yao_str, debtit_belief=12)
+    zia_vision.add_acctunit(yao_str, debtit_score=12)
     clean_conceptunit = zia_vision.get_concept_obj(clean_way())
     cook_conceptunit = zia_vision.get_concept_obj(cook_way())
     clean_conceptunit.laborunit.set_laborlink(yao_str)
@@ -192,7 +192,7 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesIrrationalPlan(
 
     sue_vision = planunit_shop(sue_str)
     sue_vision.set_max_tree_traverse(5)
-    zia_vision.add_acctunit(yao_str, debtit_belief=12)
+    zia_vision.add_acctunit(yao_str, debtit_score=12)
     vacuum_str = "vacuum"
     vacuum_way = sue_vision.make_l1_way(vacuum_str)
     sue_vision.set_l1_concept(conceptunit_shop(vacuum_str, task=True))
@@ -230,10 +230,10 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesIrrationalPlan(
     assert len(new_yao_vision.get_agenda_dict()) == 2
     zia_acctunit = new_yao_vision.get_acct(zia_str)
     sue_acctunit = new_yao_vision.get_acct(sue_str)
-    print(f"{sue_acctunit.debtit_belief=}")
-    print(f"{sue_acctunit._irrational_debtit_belief=}")
-    assert zia_acctunit._irrational_debtit_belief == 0
-    assert sue_acctunit._irrational_debtit_belief == 51
+    print(f"{sue_acctunit.debtit_score=}")
+    print(f"{sue_acctunit._irrational_debtit_score=}")
+    assert zia_acctunit._irrational_debtit_score == 0
+    assert sue_acctunit._irrational_debtit_score == 51
 
 
 def test_listen_to_agenda_duty_vision_agenda_ProcessesMissingDebtorvisionPlan(
@@ -245,12 +245,12 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesMissingDebtorvisionPlan(
     yao_duty = planunit_shop(yao_str, a23_str)
     zia_str = "Zia"
     sue_str = "Sue"
-    zia_credit_belief = 47
-    sue_credit_belief = 57
-    zia_debtit_belief = 41
-    sue_debtit_belief = 51
-    yao_duty.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
-    yao_duty.add_acctunit(sue_str, sue_credit_belief, sue_debtit_belief)
+    zia_credit_score = 47
+    sue_credit_score = 57
+    zia_debtit_score = 41
+    sue_debtit_score = 51
+    yao_duty.add_acctunit(zia_str, zia_credit_score, zia_debtit_score)
+    yao_duty.add_acctunit(sue_str, sue_credit_score, sue_debtit_score)
     yao_pool = 92
     yao_duty.set_acct_respect(yao_pool)
     yao_dakota_hubunit = hubunit_shop(env_dir(), a23_str, yao_str, get_dakota_way())
@@ -259,7 +259,7 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesMissingDebtorvisionPlan(
     zia_vision = planunit_shop(zia_str, a23_str)
     zia_vision.set_concept(conceptunit_shop(clean_str(), task=True), casa_way())
     zia_vision.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
-    zia_vision.add_acctunit(yao_str, debtit_belief=12)
+    zia_vision.add_acctunit(yao_str, debtit_score=12)
     clean_conceptunit = zia_vision.get_concept_obj(clean_way())
     cook_conceptunit = zia_vision.get_concept_obj(cook_way())
     clean_conceptunit.laborunit.set_laborlink(yao_str)
@@ -276,10 +276,10 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesMissingDebtorvisionPlan(
     assert len(new_yao_vision.get_agenda_dict()) == 2
     zia_acctunit = new_yao_vision.get_acct(zia_str)
     sue_acctunit = new_yao_vision.get_acct(sue_str)
-    print(f"{sue_acctunit.debtit_belief=}")
-    print(f"{sue_acctunit._inallocable_debtit_belief=}")
-    assert zia_acctunit._inallocable_debtit_belief == 0
-    assert sue_acctunit._inallocable_debtit_belief == 51
+    print(f"{sue_acctunit.debtit_score=}")
+    print(f"{sue_acctunit._inallocable_debtit_score=}")
+    assert zia_acctunit._inallocable_debtit_score == 0
+    assert sue_acctunit._inallocable_debtit_score == 51
 
 
 def test_listen_to_agenda_duty_vision_agenda_ListensToOwner_duty_AndNotOwner_vision(
@@ -290,13 +290,13 @@ def test_listen_to_agenda_duty_vision_agenda_ListensToOwner_duty_AndNotOwner_vis
     yao_str = "Yao"
     yao_duty = planunit_shop(yao_str, a23_str)
     yao_str = "Yao"
-    yao_credit_belief = 57
-    yao_debtit_belief = 51
-    yao_duty.add_acctunit(yao_str, yao_credit_belief, yao_debtit_belief)
+    yao_credit_score = 57
+    yao_debtit_score = 51
+    yao_duty.add_acctunit(yao_str, yao_credit_score, yao_debtit_score)
     zia_str = "Zia"
-    zia_credit_belief = 47
-    zia_debtit_belief = 41
-    yao_duty.add_acctunit(zia_str, zia_credit_belief, zia_debtit_belief)
+    zia_credit_score = 47
+    zia_debtit_score = 41
+    yao_duty.add_acctunit(zia_str, zia_credit_score, zia_debtit_score)
     yao_pool = 87
     yao_duty.set_acct_respect(yao_pool)
     # save yao without chore to dutys
@@ -308,7 +308,7 @@ def test_listen_to_agenda_duty_vision_agenda_ListensToOwner_duty_AndNotOwner_vis
     zia_vision = planunit_shop(zia_str, a23_str)
     zia_vision.set_concept(conceptunit_shop(clean_str(), task=True), casa_way())
     zia_vision.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
-    zia_vision.add_acctunit(yao_str, debtit_belief=12)
+    zia_vision.add_acctunit(yao_str, debtit_score=12)
     clean_conceptunit = zia_vision.get_concept_obj(clean_way())
     cook_conceptunit = zia_vision.get_concept_obj(cook_way())
     clean_conceptunit.laborunit.set_laborlink(yao_str)

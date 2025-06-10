@@ -54,12 +54,12 @@
             }
         },
         "jvalues": {
-            "credit_belief": {
+            "credit_score": {
                 "class_type": "float",
                 "column_order": 2,
                 "sqlite_datatype": "REAL"
             },
-            "debtit_belief": {
+            "debtit_score": {
                 "class_type": "float",
                 "column_order": 1,
                 "sqlite_datatype": "REAL"

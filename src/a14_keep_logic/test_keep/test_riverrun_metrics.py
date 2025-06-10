@@ -6,9 +6,9 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario01():
     # ESTABLISH / WHEN
     yao_hubunit = example_yao_hubunit()
     yao_str = "Yao"
-    yao_credit_belief = 500
+    yao_credit_score = 500
     x_riverrun = riverrun_shop(yao_hubunit)
-    x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_credit_belief)
+    x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_credit_score)
     assert x_riverrun.get_acct_tax_due(yao_str) == 0
 
     # WHEN
@@ -43,12 +43,12 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario02():
     # ESTABLISH / WHEN
     yao_hubunit = example_yao_hubunit()
     yao_str = "Yao"
-    yao_credit_belief = 500
+    yao_credit_score = 500
     bob_str = "Bob"
-    bob_debtit_belief = 350
+    bob_debtit_score = 350
     x_riverrun = riverrun_shop(yao_hubunit)
-    x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_credit_belief)
-    x_riverrun.set_tax_dues({bob_str: bob_debtit_belief})
+    x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_credit_score)
+    x_riverrun.set_tax_dues({bob_str: bob_debtit_score})
     assert x_riverrun.get_acct_tax_due(yao_str) == 0
     keep_money_amount = x_riverrun.hubunit.keep_point_magnitude
     assert x_riverrun.get_acct_tax_due(bob_str) == keep_money_amount
@@ -86,14 +86,14 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario03():
     # ESTABLISH / WHEN
     yao_hubunit = example_yao_hubunit()
     yao_str = "Yao"
-    yao_credit_belief = 500
+    yao_credit_score = 500
     bob_str = "Bob"
-    bob_debtit_belief = 25
+    bob_debtit_score = 25
     sue_str = "Sue"
-    sue_debtit_belief = 75
+    sue_debtit_score = 75
     x_riverrun = riverrun_shop(yao_hubunit)
-    x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_credit_belief)
-    debtorledger = {bob_str: bob_debtit_belief, sue_str: sue_debtit_belief}
+    x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_credit_score)
+    debtorledger = {bob_str: bob_debtit_score, sue_str: sue_debtit_score}
     x_riverrun.set_tax_dues(debtorledger)
     assert x_riverrun.get_acct_tax_due(yao_str) == 0
     keep_money_amount = x_riverrun.hubunit.keep_point_magnitude
@@ -134,16 +134,16 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario04():
     # ESTABLISH / WHEN
     yao_hubunit = example_yao_hubunit()
     yao_str = "Yao"
-    yao_yao_credit_belief = 500
-    yao_sue_credit_belief = 2000
+    yao_yao_credit_score = 500
+    yao_sue_credit_score = 2000
     bob_str = "Bob"
-    bob_debtit_belief = 25
+    bob_debtit_score = 25
     sue_str = "Sue"
-    sue_debtit_belief = 75
+    sue_debtit_score = 75
     x_riverrun = riverrun_shop(yao_hubunit)
-    x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_yao_credit_belief)
-    x_riverrun.set_keep_credorledger(yao_str, sue_str, yao_sue_credit_belief)
-    debtorledger = {bob_str: bob_debtit_belief, sue_str: sue_debtit_belief}
+    x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_yao_credit_score)
+    x_riverrun.set_keep_credorledger(yao_str, sue_str, yao_sue_credit_score)
+    debtorledger = {bob_str: bob_debtit_score, sue_str: sue_debtit_score}
     x_riverrun.set_tax_dues(debtorledger)
     assert x_riverrun.get_acct_tax_due(yao_str) == 0
     keep_money_amount = x_riverrun.hubunit.keep_point_magnitude
@@ -184,9 +184,9 @@ def test_RiverRun_calc_metrics_SetsAttrsScenario05():
     # ESTABLISH / WHEN
     yao_hubunit = example_yao_hubunit()
     yao_str = "Yao"
-    yao_credit_belief = 500
+    yao_credit_score = 500
     x_riverrun = riverrun_shop(yao_hubunit)
-    x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_credit_belief)
+    x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_credit_score)
     x_riverrun.set_tax_dues({yao_str: 1})
     keep_money_amount = yao_hubunit.keep_point_magnitude
     assert x_riverrun.get_acct_tax_due(yao_str) == keep_money_amount
@@ -215,9 +215,9 @@ def test_RiverRun_calc_metrics_EachTimeResets_tax_yield():
     # ESTABLISH / WHEN
     yao_hubunit = example_yao_hubunit()
     yao_str = "Yao"
-    yao_credit_belief = 500
+    yao_credit_score = 500
     x_riverrun = riverrun_shop(yao_hubunit)
-    x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_credit_belief)
+    x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_credit_score)
     x_riverrun.set_tax_dues({yao_str: 1})
     keep_money_amount = yao_hubunit.keep_point_magnitude
     x_riverrun.calc_metrics()

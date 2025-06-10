@@ -940,8 +940,8 @@ def test_PlanUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     sue_str = "Sue"
     bob_planunit = planunit_shop(bob_str)
     bob_planunit.add_acctunit(bob_str)
-    bob_planunit.add_acctunit(yao_str, credit_belief=2)
-    bob_planunit.add_acctunit(sue_str, debtit_belief=2)
+    bob_planunit.add_acctunit(yao_str, credit_score=2)
+    bob_planunit.add_acctunit(sue_str, debtit_score=2)
     bob_planunit.set_offtrack_fund()
     assert bob_planunit._offtrack_fund == 0
 

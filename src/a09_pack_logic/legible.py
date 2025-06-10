@@ -214,9 +214,9 @@ def add_plan_acctunit_insert_to_legible_list(
 ):
     for acctunit_atom in acctunit_dict.values():
         acct_name = acctunit_atom.get_value("acct_name")
-        credit_belief_value = acctunit_atom.get_value("credit_belief")
-        debtit_belief_value = acctunit_atom.get_value("debtit_belief")
-        x_str = f"{acct_name} was added with {credit_belief_value} belief credit and {debtit_belief_value} belief debtit"
+        credit_score_value = acctunit_atom.get_value("credit_score")
+        debtit_score_value = acctunit_atom.get_value("debtit_score")
+        x_str = f"{acct_name} was added with {credit_score_value} score credit and {debtit_score_value} score debtit"
         legible_list.append(x_str)
 
 
@@ -225,14 +225,14 @@ def add_plan_acctunit_update_to_legible_list(
 ):
     for acctunit_atom in acctunit_dict.values():
         acct_name = acctunit_atom.get_value("acct_name")
-        credit_belief_value = acctunit_atom.get_value("credit_belief")
-        debtit_belief_value = acctunit_atom.get_value("debtit_belief")
-        if credit_belief_value is not None and debtit_belief_value is not None:
-            x_str = f"{acct_name} now has {credit_belief_value} belief credit and {debtit_belief_value} belief debtit."
-        elif credit_belief_value is not None:
-            x_str = f"{acct_name} now has {credit_belief_value} belief credit."
-        elif debtit_belief_value is not None:
-            x_str = f"{acct_name} now has {debtit_belief_value} belief debtit."
+        credit_score_value = acctunit_atom.get_value("credit_score")
+        debtit_score_value = acctunit_atom.get_value("debtit_score")
+        if credit_score_value is not None and debtit_score_value is not None:
+            x_str = f"{acct_name} now has {credit_score_value} score credit and {debtit_score_value} score debtit."
+        elif credit_score_value is not None:
+            x_str = f"{acct_name} now has {credit_score_value} score credit."
+        elif debtit_score_value is not None:
+            x_str = f"{acct_name} now has {debtit_score_value} score debtit."
         legible_list.append(x_str)
 
 
@@ -241,7 +241,7 @@ def add_plan_acctunit_delete_to_legible_list(
 ):
     for acctunit_atom in acctunit_dict.values():
         acct_name = acctunit_atom.get_value("acct_name")
-        x_str = f"{acct_name} was removed from belief accts."
+        x_str = f"{acct_name} was removed from score accts."
         legible_list.append(x_str)
 
 

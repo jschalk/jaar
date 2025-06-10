@@ -155,9 +155,9 @@ def get_plan_accts_plotly_fig(x_plan: PlanUnit) -> plotly_Figure:
     column_header_list = [
         "acct_name",
         "_credor_respect",
-        "credit_belief",
+        "credit_score",
         "_debtor_respect",
-        "debtit_belief",
+        "debtit_score",
         "_fund_give",
         "_fund_take",
         "_fund_agenda_give",
@@ -175,9 +175,9 @@ def get_plan_accts_plotly_fig(x_plan: PlanUnit) -> plotly_Figure:
             values=[
                 df.acct_name,
                 df._credor_respect,
-                df.credit_belief,
+                df.credit_score,
                 df._debtor_respect,
-                df.debtit_belief,
+                df.debtit_score,
                 df._fund_give,
                 df._fund_take,
                 df._fund_agenda_give,
