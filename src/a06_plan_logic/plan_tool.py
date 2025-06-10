@@ -221,15 +221,17 @@ def get_acct_mandate_ledger(
     mandates = {x_acct.acct_name: x_acct._fund_agenda_give for x_acct in plan_accts}
     mandate_sum = sum(mandates.values())
     if mandate_sum == 0:
-        mandates = set_each_mandate_acct_to_penny_weight(mandates, x_plan.penny)
+        mandates = reset_mandates_to_minimum(mandates, x_plan.penny)
     if mandate_sum != x_plan.fund_pool:
         mandates = allot_scale(mandates, x_plan.fund_pool, x_plan.fund_iota)
     return mandates
 
 
-def set_each_mandate_acct_to_penny_weight(
+def reset_mandates_to_minimum(
     mandates: dict[AcctName, FundNum], penny: FundNum
 ) -> dict[AcctName, FundNum]:
+    """Reset all mandates to the minimum value (penny)."""
+
     acct_names = set(mandates.keys())
     for acct_name in acct_names:
         mandates[acct_name] = penny

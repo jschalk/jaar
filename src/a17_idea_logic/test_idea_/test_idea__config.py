@@ -414,7 +414,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     all_args.add("world_id")
     assert all_args == set(table_sorting_priority)
 
-    x_no_underscore_set = {x_arg.replace("_", "") for x_arg in table_sorting_priority}
+    x_no_underscoore_set = {x_arg.replace("_", "") for x_arg in table_sorting_priority}
     # x_dict = {}
     # for x_arg in sorted(table_sorting_priority):
     #     y_arg = x_arg.replace("_", "")
@@ -422,7 +422,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     #         x_dict[y_arg] = 0
     #     x_dict[y_arg] = x_dict.get(y_arg) + 1
     # print(f"{x_dict=}")
-    assert len(x_no_underscore_set) == len(table_sorting_priority)
+    assert len(x_no_underscoore_set) == len(table_sorting_priority)
 
 
 def test_get_idea_sqlite_types_ReturnsObj():
