@@ -24,7 +24,7 @@ def test_WorldUnit_create_stances_Senario0_EmptyWorld_CreatesFile(
     # ESTABLISH
     fizz_str = "fizz"
     fizz_world = worldunit_shop(fizz_str, worlds_dir())
-    fizz_world.mud_to_clarity()
+    fizz_world.mud_to_clarity_mstr()
     fizz_stance0001_path = create_stance0001_path(fizz_world._vow_mstr_dir)
     assert os_path_exists(fizz_stance0001_path) is False
 
@@ -54,7 +54,7 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
     br00011_rows = [[event2, sue_str, accord23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
-    fizz_world.mud_to_clarity()
+    fizz_world.mud_to_clarity_mstr()
     fizz_stance0001_path = create_stance0001_path(fizz_world._vow_mstr_dir)
     assert os_path_exists(fizz_stance0001_path) is False
 
@@ -86,7 +86,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
     br00011_rows = [[event2, sue_str, accord23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
-    fizz_world.mud_to_clarity()
+    fizz_world.mud_to_clarity_mstr()
     fizz_stance0001_path = create_stance0001_path(fizz_world._vow_mstr_dir)
     fizz_world.create_stances()
     buzz_world = worldunit_shop("buzz", worlds_dir())
@@ -97,7 +97,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
     # print(f"{pandas_read_excel(buzz_mud_st0001_path)=}")
     print(f"{buzz_mud_st0001_path=}")
     print(f"{get_sheet_names(buzz_mud_st0001_path)=}")
-    buzz_world.mud_to_clarity()
+    buzz_world.mud_to_clarity_mstr()
     buzz_stance0001_path = create_stance0001_path(buzz_world._vow_mstr_dir)
     assert os_path_exists(buzz_stance0001_path) is False
 
@@ -190,7 +190,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
 #     assert count_dirs_files(fizz_world.worlds_dir) == 7
 
 #     # WHEN
-#     fizz_world.mud_to_clarity()
+#     fizz_world.mud_to_clarity_mstr()
 
 #     # THEN
 #     assert os_path_exists(wrong_a23_vow_dir) is False
