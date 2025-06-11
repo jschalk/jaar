@@ -69,8 +69,8 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyVowUnit(
         "br00004": "vow_label,cumlative_day,month_label\n",
         "br00005": "vow_label,weekday_order,weekday_label\n",
         # "br00006": "vow_label,offi_time,_offi_time_max\n",
-        "br00020": "vow_label,owner_name,acct_name,group_title,credit_vote,debtit_vote\n",
-        "br00021": "vow_label,owner_name,acct_name,credit_score,debtit_score\n",
+        "br00020": "vow_label,owner_name,acct_name,group_title,credit_vote,debt_vote\n",
+        "br00021": "vow_label,owner_name,acct_name,credit_score,debt_score\n",
         "br00022": "vow_label,owner_name,concept_way,awardee_title,give_force,take_force\n",
         "br00023": "vow_label,owner_name,concept_way,fcontext,fstate,fopen,fnigh\n",
         "br00024": "vow_label,owner_name,concept_way,labor_title\n",
@@ -292,8 +292,8 @@ def test_add_plan_to_br00020_csv_ReturnsObj():
     bob_plan.add_acctunit(yao_str)
     run_str = ";Run"
     run_credit = 33
-    run_debtit = 55
-    bob_plan.get_acct(yao_str).add_membership(run_str, run_credit, run_debtit)
+    run_debt = 55
+    bob_plan.get_acct(yao_str).add_membership(run_str, run_credit, run_debt)
     csv_header = x_ideas.get("br00020")
 
     # WHEN
@@ -301,9 +301,7 @@ def test_add_plan_to_br00020_csv_ReturnsObj():
 
     # THEN
     yao_yao_row = f",,{a23_str},{bob_str},{yao_str},{yao_str},1,1\n"
-    yao_run_row = (
-        f",,{a23_str},{bob_str},{yao_str},{run_str},{run_credit},{run_debtit}\n"
-    )
+    yao_run_row = f",,{a23_str},{bob_str},{yao_str},{run_str},{run_credit},{run_debt}\n"
     print(f"{x_csv=}")
     print(f"{yao_run_row=}")
     assert x_csv == f"{csv_header}{yao_yao_row}{yao_run_row}"
@@ -316,17 +314,17 @@ def test_add_plan_to_br00021_csv_ReturnsObj():
     bob_str = "Bob"
     yao_str = "Yao"
     yao_credit = 33
-    yao_debtit = 55
+    yao_debt = 55
     a23_str = "accord23"
     bob_plan = planunit_shop(bob_str, a23_str)
-    bob_plan.add_acctunit(yao_str, yao_credit, yao_debtit)
+    bob_plan.add_acctunit(yao_str, yao_credit, yao_debt)
     csv_header = x_ideas.get("br00021")
 
     # WHEN
     x_csv = add_plan_to_br00021_csv(csv_header, bob_plan, csv_delimiter)
 
     # THEN
-    yao_row = f",,{a23_str},{bob_str},{yao_str},{yao_credit},{yao_debtit}\n"
+    yao_row = f",,{a23_str},{bob_str},{yao_str},{yao_credit},{yao_debt}\n"
     assert x_csv == f"{csv_header}{yao_row}"
 
 
@@ -779,8 +777,8 @@ def test_add_pack_to_br00020_csv_ReturnsObj():
     bob_plan.add_acctunit(yao_str)
     run_str = ";Run"
     run_credit = 33
-    run_debtit = 55
-    bob_plan.get_acct(yao_str).add_membership(run_str, run_credit, run_debtit)
+    run_debt = 55
+    bob_plan.get_acct(yao_str).add_membership(run_str, run_credit, run_debt)
     bob_plandelta = plandelta_shop()
     bob_plandelta.add_all_planatoms(bob_plan)
     sue_str = "Sue"
@@ -794,7 +792,7 @@ def test_add_pack_to_br00020_csv_ReturnsObj():
 
     # THEN
     yao_yao_row = f"{sue_str},{event7},{a23_str},{bob_str},{yao_str},{yao_str},1,1\n"
-    yao_run_row = f"{sue_str},{event7},{a23_str},{bob_str},{yao_str},{run_str},{run_credit},{run_debtit}\n"
+    yao_run_row = f"{sue_str},{event7},{a23_str},{bob_str},{yao_str},{run_str},{run_credit},{run_debt}\n"
     print(f"       {x_csv=}")
     expected_csv = f"{csv_header}{yao_run_row}{yao_yao_row}"
     print(f"{expected_csv=}")
@@ -808,10 +806,10 @@ def test_add_pack_to_br00021_csv_ReturnsObj():
     bob_str = "Bob"
     yao_str = "Yao"
     yao_credit = 33
-    yao_debtit = 55
+    yao_debt = 55
     a23_str = "accord23"
     bob_plan = planunit_shop(bob_str, a23_str)
-    bob_plan.add_acctunit(yao_str, yao_credit, yao_debtit)
+    bob_plan.add_acctunit(yao_str, yao_credit, yao_debt)
     bob_plandelta = plandelta_shop()
     bob_plandelta.add_all_planatoms(bob_plan)
     sue_str = "Sue"
@@ -825,7 +823,7 @@ def test_add_pack_to_br00021_csv_ReturnsObj():
 
     # THEN
     yao_row = (
-        f"{sue_str},{event7},{a23_str},{bob_str},{yao_str},{yao_credit},{yao_debtit}\n"
+        f"{sue_str},{event7},{a23_str},{bob_str},{yao_str},{yao_credit},{yao_debt}\n"
     )
     assert x_csv == f"{csv_header}{yao_row}"
 

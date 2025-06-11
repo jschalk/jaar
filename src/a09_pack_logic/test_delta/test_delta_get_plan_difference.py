@@ -102,8 +102,8 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_acctunit_insert(
     after_sue_plan = copy_deepcopy(before_sue_plan)
     xio_str = "Xio"
     xio_credit_score = 33
-    xio_debtit_score = 44
-    xio_acctunit = acctunit_shop(xio_str, xio_credit_score, xio_debtit_score)
+    xio_debt_score = 44
+    xio_acctunit = acctunit_shop(xio_str, xio_credit_score, xio_debt_score)
     after_sue_plan.set_acctunit(xio_acctunit, auto_set_membership=False)
 
     # WHEN
@@ -117,7 +117,7 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_acctunit_insert(
     xio_planatom = sue_acctunit_dict.get(xio_str)
     assert xio_planatom.get_value(acct_name_str()) == xio_str
     assert xio_planatom.get_value("credit_score") == xio_credit_score
-    assert xio_planatom.get_value("debtit_score") == xio_debtit_score
+    assert xio_planatom.get_value("debt_score") == xio_debt_score
 
     print(f"{get_planatom_total_count(sue_plandelta)=}")
     assert get_planatom_total_count(sue_plandelta) == 1
@@ -158,8 +158,8 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_acctunit_update(
     xio_str = "Xio"
     before_sue_plan.add_acctunit(xio_str)
     xio_credit_score = 33
-    xio_debtit_score = 44
-    after_sue_plan.add_acctunit(xio_str, xio_credit_score, xio_debtit_score)
+    xio_debt_score = 44
+    after_sue_plan.add_acctunit(xio_str, xio_credit_score, xio_debt_score)
 
     # WHEN
     sue_plandelta = plandelta_shop()
@@ -170,7 +170,7 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_acctunit_update(
     xio_planatom = get_from_nested_dict(sue_plandelta.planatoms, x_keylist)
     assert xio_planatom.get_value(acct_name_str()) == xio_str
     assert xio_planatom.get_value("credit_score") == xio_credit_score
-    assert xio_planatom.get_value("debtit_score") == xio_debtit_score
+    assert xio_planatom.get_value("debt_score") == xio_debt_score
 
     print(f"{get_planatom_total_count(sue_plandelta)=}")
     assert get_planatom_total_count(sue_plandelta) == 1
@@ -230,8 +230,8 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_acct_membership_
     after_zia_acctunit = after_sue_plan.get_acct(zia_str)
     run_str = ";runners"
     zia_run_credit_w = 77
-    zia_run_debtit_w = 88
-    after_zia_acctunit.add_membership(run_str, zia_run_credit_w, zia_run_debtit_w)
+    zia_run_debt_w = 88
+    after_zia_acctunit.add_membership(run_str, zia_run_credit_w, zia_run_debt_w)
     print(f"{after_sue_plan.get_acctunit_group_titles_dict()=}")
 
     # WHEN
@@ -259,7 +259,7 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_acct_membership_
     assert run_planatom.get_value(acct_name_str()) == zia_str
     assert run_planatom.get_value(group_title_str()) == run_str
     assert run_planatom.get_value("credit_vote") == zia_run_credit_w
-    assert run_planatom.get_value("debtit_vote") == zia_run_debtit_w
+    assert run_planatom.get_value("debt_vote") == zia_run_debt_w
 
     print_planatom_keys(sue_plandelta)
     print(f"{get_planatom_total_count(sue_plandelta)=}")
@@ -279,14 +279,14 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_acct_membership_
     before_sue_plan.add_acctunit(zia_str)
     run_str = ";runners"
     before_xio_credit_w = 77
-    before_xio_debtit_w = 88
+    before_xio_debt_w = 88
     before_xio_acct = before_sue_plan.get_acct(xio_str)
-    before_xio_acct.add_membership(run_str, before_xio_credit_w, before_xio_debtit_w)
+    before_xio_acct.add_membership(run_str, before_xio_credit_w, before_xio_debt_w)
     after_sue_plan = copy_deepcopy(before_sue_plan)
     after_xio_acctunit = after_sue_plan.get_acct(xio_str)
     after_xio_credit_w = 55
-    after_xio_debtit_w = 66
-    after_xio_acctunit.add_membership(run_str, after_xio_credit_w, after_xio_debtit_w)
+    after_xio_debt_w = 66
+    after_xio_acctunit.add_membership(run_str, after_xio_credit_w, after_xio_debt_w)
 
     # WHEN
     sue_plandelta = plandelta_shop()
@@ -304,7 +304,7 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_acct_membership_
     assert xio_planatom.get_value(acct_name_str()) == xio_str
     assert xio_planatom.get_value(group_title_str()) == run_str
     assert xio_planatom.get_value("credit_vote") == after_xio_credit_w
-    assert xio_planatom.get_value("debtit_vote") == after_xio_debtit_w
+    assert xio_planatom.get_value("debt_vote") == after_xio_debt_w
 
     print(f"{get_planatom_total_count(sue_plandelta)=}")
     assert get_planatom_total_count(sue_plandelta) == 1

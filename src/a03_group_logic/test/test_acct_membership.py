@@ -8,13 +8,13 @@ def test_AcctUnit_set_membership_SetsAttr_memberships():
     run_str = ";run"
     yao_str = "Yao"
     run_credit_vote = 66
-    run_debtit_vote = 85
+    run_debt_vote = 85
     yao_acctunit = acctunit_shop(yao_str)
     assert yao_acctunit._memberships == {}
 
     # WHEN
     yao_acctunit.set_membership(
-        membership_shop(run_str, run_credit_vote, run_debtit_vote)
+        membership_shop(run_str, run_credit_vote, run_debt_vote)
     )
 
     # THEN
@@ -22,7 +22,7 @@ def test_AcctUnit_set_membership_SetsAttr_memberships():
     run_membership = yao_acctunit._memberships.get(run_str)
     assert run_membership.group_title == run_str
     assert run_membership.credit_vote == run_credit_vote
-    assert run_membership.debtit_vote == run_debtit_vote
+    assert run_membership.debt_vote == run_debt_vote
     assert run_membership.acct_name == yao_str
 
 
@@ -30,8 +30,8 @@ def test_AcctUnit_set_membership_SetsMultipleAttr():
     # ESTABLISH
     run_str = ";run"
     fly_str = ";fly"
-    run_membership = membership_shop(run_str, credit_vote=13, debtit_vote=7)
-    fly_membership = membership_shop(fly_str, credit_vote=23, debtit_vote=5)
+    run_membership = membership_shop(run_str, credit_vote=13, debt_vote=7)
+    fly_membership = membership_shop(fly_str, credit_vote=23, debt_vote=5)
     yao_acctunit = acctunit_shop("Yao")
     assert yao_acctunit._memberships == {}
 
@@ -172,18 +172,18 @@ def test_AcctUnit_add_membership_SetsAttrCorrectly():
     # ESTABLISH
     run_str = ";run"
     run_credit_vote = 78
-    run_debtit_vote = 99
+    run_debt_vote = 99
     yao_acctunit = acctunit_shop("Yao")
     assert yao_acctunit.get_membership(run_str) is None
 
     # WHEN
-    yao_acctunit.add_membership(run_str, run_credit_vote, run_debtit_vote)
+    yao_acctunit.add_membership(run_str, run_credit_vote, run_debt_vote)
 
     # THEN
     assert yao_acctunit.get_membership(run_str) is not None
     run_membership = yao_acctunit.get_membership(run_str)
     assert run_membership.credit_vote == run_credit_vote
-    assert run_membership.debtit_vote == run_debtit_vote
+    assert run_membership.debt_vote == run_debt_vote
 
 
 def test_AcctUnit_set_credor_pool_SetAttr():
@@ -241,11 +241,11 @@ def test_AcctUnit_set_debtor_pool_Sets_memberships():
     # ESTABLISH
     ohio_str = ";Ohio"
     iowa_str = ";Iowa"
-    sue_debtit_vote = 1
-    yao_debtit_vote = 4
+    sue_debt_vote = 1
+    yao_debt_vote = 4
     bob_acctunit = acctunit_shop("Bob")
-    bob_acctunit.add_membership(ohio_str, 2, sue_debtit_vote)
-    bob_acctunit.add_membership(iowa_str, 2, yao_debtit_vote)
+    bob_acctunit.add_membership(ohio_str, 2, sue_debt_vote)
+    bob_acctunit.add_membership(iowa_str, 2, yao_debt_vote)
     assert bob_acctunit._debtor_pool == 0
     sue_membership = bob_acctunit.get_membership(ohio_str)
     yao_membership = bob_acctunit.get_membership(iowa_str)

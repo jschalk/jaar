@@ -20,9 +20,9 @@ def get_credorledger(x_plan: PlanUnit) -> dict[AcctName, float]:
 
 def get_debtorledger(x_plan: PlanUnit) -> dict[AcctName, float]:
     return {
-        acctunit.acct_name: acctunit.debtit_score
+        acctunit.acct_name: acctunit.debt_score
         for acctunit in x_plan.accts.values()
-        if acctunit.debtit_score > 0
+        if acctunit.debt_score > 0
     }
 
 

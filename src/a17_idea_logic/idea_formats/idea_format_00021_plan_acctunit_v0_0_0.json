@@ -6,7 +6,7 @@
         "credit_score": {
             "otx_key": false
         },
-        "debtit_score": {
+        "debt_score": {
             "otx_key": false
         },
         "event_int": {

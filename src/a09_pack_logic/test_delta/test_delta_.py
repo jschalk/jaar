@@ -8,7 +8,7 @@ from src.a06_plan_logic._test_util.a06_str import (
     awardee_title_str,
     concept_way_str,
     credit_score_str,
-    debtit_score_str,
+    debt_score_str,
     group_title_str,
     plan_acct_membership_str,
     plan_acctunit_str,
@@ -183,10 +183,10 @@ def test_PlanDelta_add_planatom_CorrectlySets_PlanUnit_acctunits():
     # WHEN
     bob_str = "Bob"
     bob_credit_score = 55
-    bob_debtit_score = 66
-    bob_acctunit = acctunit_shop(bob_str, bob_credit_score, bob_debtit_score)
+    bob_debt_score = 66
+    bob_acctunit = acctunit_shop(bob_str, bob_credit_score, bob_debt_score)
     cw_str = credit_score_str()
-    dw_str = debtit_score_str()
+    dw_str = debt_score_str()
     print(f"{bob_acctunit.get_dict()=}")
     bob_required_dict = {acct_name_str(): bob_acctunit.get_dict().get(acct_name_str())}
     bob_optional_dict = {cw_str: bob_acctunit.get_dict().get(cw_str)}

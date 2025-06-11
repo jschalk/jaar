@@ -213,18 +213,18 @@ def _modify_plan_acct_membership_update(x_plan: PlanUnit, x_atom: PlanAtom):
     x_acctunit = x_plan.get_acct(x_acct_name)
     x_membership = x_acctunit.get_membership(x_group_title)
     x_credit_vote = x_atom.get_value("credit_vote")
-    x_debtit_vote = x_atom.get_value("debtit_vote")
+    x_debt_vote = x_atom.get_value("debt_vote")
     x_membership.set_credit_vote(x_credit_vote)
-    x_membership.set_debtit_vote(x_debtit_vote)
+    x_membership.set_debt_vote(x_debt_vote)
 
 
 def _modify_plan_acct_membership_insert(x_plan: PlanUnit, x_atom: PlanAtom):
     x_acct_name = x_atom.get_value("acct_name")
     x_group_title = x_atom.get_value("group_title")
     x_credit_vote = x_atom.get_value("credit_vote")
-    x_debtit_vote = x_atom.get_value("debtit_vote")
+    x_debt_vote = x_atom.get_value("debt_vote")
     x_acctunit = x_plan.get_acct(x_acct_name)
-    x_acctunit.add_membership(x_group_title, x_credit_vote, x_debtit_vote)
+    x_acctunit.add_membership(x_group_title, x_credit_vote, x_debt_vote)
 
 
 def _modify_plan_conceptunit_delete(x_plan: PlanUnit, x_atom: PlanAtom):
@@ -406,7 +406,7 @@ def _modify_plan_acctunit_update(x_plan: PlanUnit, x_atom: PlanAtom):
     x_plan.edit_acctunit(
         acct_name=x_atom.get_value("acct_name"),
         credit_score=x_atom.get_value("credit_score"),
-        debtit_score=x_atom.get_value("debtit_score"),
+        debt_score=x_atom.get_value("debt_score"),
     )
 
 
@@ -415,7 +415,7 @@ def _modify_plan_acctunit_insert(x_plan: PlanUnit, x_atom: PlanAtom):
         acctunit_shop(
             acct_name=x_atom.get_value("acct_name"),
             credit_score=x_atom.get_value("credit_score"),
-            debtit_score=x_atom.get_value("debtit_score"),
+            debt_score=x_atom.get_value("debt_score"),
         )
     )
 
@@ -538,7 +538,7 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
         )
     elif dimen in {"plan_acct_membership"}:
         return (x_obj.credit_vote != y_obj.credit_vote) or (
-            x_obj.debtit_vote != y_obj.debtit_vote
+            x_obj.debt_vote != y_obj.debt_vote
         )
     elif dimen in {"plan_concept_awardlink"}:
         return (x_obj.give_force != y_obj.give_force) or (
@@ -571,7 +571,7 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
         )
     elif dimen == "plan_acctunit":
         return (x_obj.credit_score != y_obj.credit_score) or (
-            x_obj.debtit_score != y_obj.debtit_score
+            x_obj.debt_score != y_obj.debt_score
         )
 
 
@@ -604,8 +604,8 @@ class AtomRow:
     credit_score: int = None
     credit_vote: int = None
     credor_respect: int = None
-    debtit_score: int = None
-    debtit_vote: int = None
+    debt_score: int = None
+    debt_vote: int = None
     debtor_respect: int = None
     denom: int = None
     pdivisor: int = None

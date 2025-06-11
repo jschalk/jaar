@@ -301,7 +301,7 @@ def test_planunit_get_from_json_ReturnsObjSimpleExample():
     # print(f"{json_shave_concept.concept_label=} {json_shave_concept.parent_way=}")
 
     sue_str = "Sue"
-    zia_plan.add_acctunit(acct_name=sue_str, credit_score=199, debtit_score=199)
+    zia_plan.add_acctunit(acct_name=sue_str, credit_score=199, debt_score=199)
     xio_str = "Xio"
     zia_plan.add_acctunit(acct_name=xio_str)
     run_str = ";runners"

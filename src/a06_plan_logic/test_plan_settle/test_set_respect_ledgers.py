@@ -173,7 +173,7 @@ def test_PlanUnit_set_acctunit_groupunit_respect_ledgers_ResetAcctUnitsAttrs():
         fund_agenda_ratio_give_sum=zia_1,
         fund_agenda_ratio_take_sum=zia_2,
         acctunits_credit_score_sum=zia_3,
-        acctunits_debtit_score_sum=zia_4,
+        acctunits_debt_score_sum=zia_4,
     )
     yao_1 = 0.2
     yao_2 = 0.5
@@ -183,7 +183,7 @@ def test_PlanUnit_set_acctunit_groupunit_respect_ledgers_ResetAcctUnitsAttrs():
         fund_agenda_ratio_give_sum=yao_1,
         fund_agenda_ratio_take_sum=yao_2,
         acctunits_credit_score_sum=yao_3,
-        acctunits_debtit_score_sum=yao_4,
+        acctunits_debt_score_sum=yao_4,
     )
     assert zia_acctunit._fund_agenda_ratio_give == 0.125
     assert zia_acctunit._fund_agenda_ratio_take == 0.44

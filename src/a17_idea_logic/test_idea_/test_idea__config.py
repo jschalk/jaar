@@ -20,8 +20,8 @@ from src.a06_plan_logic._test_util.a06_str import (
     credit_score_str,
     credit_vote_str,
     credor_respect_str,
-    debtit_score_str,
-    debtit_vote_str,
+    debt_score_str,
+    debt_vote_str,
     debtor_respect_str,
     denom_str,
     fcontext_str,
@@ -324,9 +324,9 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[102] == "stop_want"
     assert table_sorting_priority[103] == "rconcept_active_requisite"
     assert table_sorting_priority[104] == "credit_score"
-    assert table_sorting_priority[105] == "debtit_score"
+    assert table_sorting_priority[105] == "debt_score"
     assert table_sorting_priority[106] == "credit_vote"
-    assert table_sorting_priority[107] == "debtit_vote"
+    assert table_sorting_priority[107] == "debt_vote"
     assert table_sorting_priority[108] == "credor_respect"
     assert table_sorting_priority[109] == "debtor_respect"
     assert table_sorting_priority[110] == "fopen"
@@ -378,7 +378,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[156] == "_fund_agenda_take"
     assert table_sorting_priority[157] == "_fund_agenda_ratio_give"
     assert table_sorting_priority[158] == "_fund_agenda_ratio_take"
-    assert table_sorting_priority[159] == "_inallocable_debtit_score"
+    assert table_sorting_priority[159] == "_inallocable_debt_score"
     assert table_sorting_priority[160] == "_gogo_calc"
     assert table_sorting_priority[161] == "_stop_calc"
     assert table_sorting_priority[162] == "_level"
@@ -389,7 +389,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[167] == "_keeps_justified"
     assert table_sorting_priority[168] == "_offtrack_fund"
     assert table_sorting_priority[169] == "_rconcept_active_value"
-    assert table_sorting_priority[170] == "_irrational_debtit_score"
+    assert table_sorting_priority[170] == "_irrational_debt_score"
     assert table_sorting_priority[171] == "_sum_healerlink_share"
     assert table_sorting_priority[172] == "_keeps_buildable"
     assert table_sorting_priority[173] == "_all_acct_debt"
@@ -459,9 +459,9 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(stop_want_str()) == "REAL"
     assert sqlite_types.get(rconcept_active_requisite_str()) == "INTEGER"
     assert sqlite_types.get(credit_score_str()) == "REAL"
-    assert sqlite_types.get(debtit_score_str()) == "REAL"
+    assert sqlite_types.get(debt_score_str()) == "REAL"
     assert sqlite_types.get(credit_vote_str()) == "REAL"
-    assert sqlite_types.get(debtit_vote_str()) == "REAL"
+    assert sqlite_types.get(debt_vote_str()) == "REAL"
     assert sqlite_types.get(credor_respect_str()) == "REAL"
     assert sqlite_types.get(debtor_respect_str()) == "REAL"
     assert sqlite_types.get(fopen_str()) == "REAL"

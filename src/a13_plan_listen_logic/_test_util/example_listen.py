@@ -68,7 +68,7 @@ def get_example_zia_speaker() -> PlanUnit:
     zia_speaker.set_concept(conceptunit_shop(hungry_str()), eat_way())
     zia_speaker.set_concept(conceptunit_shop(full_str()), eat_way())
     yao_str = "Yao"
-    zia_speaker.add_acctunit(yao_str, debtit_score=12)
+    zia_speaker.add_acctunit(yao_str, debt_score=12)
     cook_conceptunit = zia_speaker.get_concept_obj(cook_way())
     cook_conceptunit.laborunit.set_laborlink(yao_str)
     zia_speaker.edit_concept_attr(
@@ -87,7 +87,7 @@ def get_example_bob_speaker() -> PlanUnit:
     bob_speaker.set_concept(conceptunit_shop(hungry_str()), eat_way())
     bob_speaker.set_concept(conceptunit_shop(full_str()), eat_way())
     yao_str = "Yao"
-    bob_speaker.add_acctunit(yao_str, debtit_score=12)
+    bob_speaker.add_acctunit(yao_str, debt_score=12)
     cook_conceptunit = bob_speaker.get_concept_obj(cook_way())
     cook_conceptunit.laborunit.set_laborlink(yao_str)
     bob_speaker.edit_concept_attr(
@@ -104,9 +104,9 @@ def get_example_yao_speaker() -> PlanUnit:
     bob_str = "Bob"
     a23_str = "accord23"
     yao_speaker = planunit_shop(yao_str, a23_str)
-    yao_speaker.add_acctunit(yao_str, debtit_score=12)
-    yao_speaker.add_acctunit(zia_str, debtit_score=36)
-    yao_speaker.add_acctunit(bob_str, debtit_score=48)
+    yao_speaker.add_acctunit(yao_str, debt_score=12)
+    yao_speaker.add_acctunit(zia_str, debt_score=36)
+    yao_speaker.add_acctunit(bob_str, debt_score=48)
     yao_speaker.set_acct_respect(100)
     yao_speaker.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
     yao_speaker.set_concept(conceptunit_shop(hungry_str()), eat_way())

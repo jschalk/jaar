@@ -8,8 +8,8 @@ from src.a06_plan_logic._test_util.a06_str import (
     concept_way_str,
     credit_score_str,
     credit_vote_str,
-    debtit_score_str,
-    debtit_vote_str,
+    debt_score_str,
+    debt_vote_str,
     group_title_str,
     mass_str,
     task_str,
@@ -37,14 +37,14 @@ def test_create_idea_df_Arg_idea_format_00021_plan_acctunit_v0_0_0():
     sue_credit_score = 11
     bob_credit_score = 13
     yao_credit_score = 41
-    sue_debtit_score = 23
-    bob_debtit_score = 29
-    yao_debtit_score = 37
+    sue_debt_score = 23
+    bob_debt_score = 29
+    yao_debt_score = 37
     accord_vow_label = "accord56"
     sue_planunit = planunit_shop(sue_str, accord_vow_label)
-    sue_planunit.add_acctunit(sue_str, sue_credit_score, sue_debtit_score)
-    sue_planunit.add_acctunit(bob_str, bob_credit_score, bob_debtit_score)
-    sue_planunit.add_acctunit(yao_str, yao_credit_score, yao_debtit_score)
+    sue_planunit.add_acctunit(sue_str, sue_credit_score, sue_debt_score)
+    sue_planunit.add_acctunit(bob_str, bob_credit_score, bob_debt_score)
+    sue_planunit.add_acctunit(yao_str, yao_credit_score, yao_debt_score)
 
     # WHEN
     x_idea_name = idea_format_00021_plan_acctunit_v0_0_0()
@@ -57,19 +57,19 @@ def test_create_idea_df_Arg_idea_format_00021_plan_acctunit_v0_0_0():
     assert acct_dataframe.loc[0, vow_label_str()] == accord_vow_label
     assert acct_dataframe.loc[0, owner_name_str()] == sue_planunit.owner_name
     assert acct_dataframe.loc[0, acct_name_str()] == bob_str
-    assert acct_dataframe.loc[0, debtit_score_str()] == bob_debtit_score
+    assert acct_dataframe.loc[0, debt_score_str()] == bob_debt_score
     assert acct_dataframe.loc[0, credit_score_str()] == bob_credit_score
 
     assert acct_dataframe.loc[1, vow_label_str()] == accord_vow_label
     assert acct_dataframe.loc[1, owner_name_str()] == sue_planunit.owner_name
     assert acct_dataframe.loc[1, acct_name_str()] == sue_str
-    assert acct_dataframe.loc[1, debtit_score_str()] == sue_debtit_score
+    assert acct_dataframe.loc[1, debt_score_str()] == sue_debt_score
     assert acct_dataframe.loc[1, credit_score_str()] == sue_credit_score
 
     assert acct_dataframe.loc[2, vow_label_str()] == accord_vow_label
     assert acct_dataframe.loc[2, owner_name_str()] == sue_planunit.owner_name
     assert acct_dataframe.loc[2, acct_name_str()] == yao_str
-    assert acct_dataframe.loc[2, debtit_score_str()] == yao_debtit_score
+    assert acct_dataframe.loc[2, debt_score_str()] == yao_debt_score
     assert acct_dataframe.loc[2, credit_score_str()] == yao_credit_score
 
     assert len(acct_dataframe) == 3
@@ -89,19 +89,19 @@ def test_create_idea_df_Arg_idea_format_00020_plan_acct_membership_v0_0_0():
     sue_iowa_credit_w = 37
     bob_iowa_credit_w = 43
     yao_iowa_credit_w = 51
-    sue_iowa_debtit_w = 57
-    bob_iowa_debtit_w = 61
-    yao_iowa_debtit_w = 67
+    sue_iowa_debt_w = 57
+    bob_iowa_debt_w = 61
+    yao_iowa_debt_w = 67
     ohio_str = ";Ohio"
     yao_ohio_credit_w = 73
-    yao_ohio_debtit_w = 67
+    yao_ohio_debt_w = 67
     sue_acctunit = sue_planunit.get_acct(sue_str)
     bob_acctunit = sue_planunit.get_acct(bob_str)
     yao_acctunit = sue_planunit.get_acct(yao_str)
-    sue_acctunit.add_membership(iowa_str, sue_iowa_credit_w, sue_iowa_debtit_w)
-    bob_acctunit.add_membership(iowa_str, bob_iowa_credit_w, bob_iowa_debtit_w)
-    yao_acctunit.add_membership(iowa_str, yao_iowa_credit_w, yao_iowa_debtit_w)
-    yao_acctunit.add_membership(ohio_str, yao_ohio_credit_w, yao_ohio_debtit_w)
+    sue_acctunit.add_membership(iowa_str, sue_iowa_credit_w, sue_iowa_debt_w)
+    bob_acctunit.add_membership(iowa_str, bob_iowa_credit_w, bob_iowa_debt_w)
+    yao_acctunit.add_membership(iowa_str, yao_iowa_credit_w, yao_iowa_debt_w)
+    yao_acctunit.add_membership(ohio_str, yao_ohio_credit_w, yao_ohio_debt_w)
 
     # WHEN
     x_idea_name = idea_format_00020_plan_acct_membership_v0_0_0()
@@ -118,28 +118,28 @@ def test_create_idea_df_Arg_idea_format_00020_plan_acct_membership_v0_0_0():
     assert membership_dataframe.loc[0, acct_name_str()] == bob_str
     assert membership_dataframe.loc[0, group_title_str()] == iowa_str
     assert membership_dataframe.loc[0, credit_vote_str()] == bob_iowa_credit_w
-    assert membership_dataframe.loc[0, debtit_vote_str()] == bob_iowa_debtit_w
+    assert membership_dataframe.loc[0, debt_vote_str()] == bob_iowa_debt_w
 
     assert membership_dataframe.loc[3, vow_label_str()] == accord_vow_label
     assert membership_dataframe.loc[3, owner_name_str()] == sue_planunit.owner_name
     assert membership_dataframe.loc[3, acct_name_str()] == sue_str
     assert membership_dataframe.loc[3, group_title_str()] == iowa_str
     assert membership_dataframe.loc[3, credit_vote_str()] == sue_iowa_credit_w
-    assert membership_dataframe.loc[3, debtit_vote_str()] == sue_iowa_debtit_w
+    assert membership_dataframe.loc[3, debt_vote_str()] == sue_iowa_debt_w
 
     assert membership_dataframe.loc[4, vow_label_str()] == accord_vow_label
     assert membership_dataframe.loc[4, owner_name_str()] == sue_planunit.owner_name
     assert membership_dataframe.loc[4, acct_name_str()] == sue_str
     assert membership_dataframe.loc[4, group_title_str()] == sue_str
     assert membership_dataframe.loc[4, credit_vote_str()] == 1
-    assert membership_dataframe.loc[4, debtit_vote_str()] == 1
+    assert membership_dataframe.loc[4, debt_vote_str()] == 1
 
     assert membership_dataframe.loc[7, vow_label_str()] == accord_vow_label
     assert membership_dataframe.loc[7, owner_name_str()] == sue_planunit.owner_name
     assert membership_dataframe.loc[7, acct_name_str()] == yao_str
     assert membership_dataframe.loc[7, group_title_str()] == ohio_str
     assert membership_dataframe.loc[7, credit_vote_str()] == yao_ohio_credit_w
-    assert membership_dataframe.loc[7, debtit_vote_str()] == yao_ohio_debtit_w
+    assert membership_dataframe.loc[7, debt_vote_str()] == yao_ohio_debt_w
     assert len(membership_dataframe) == 10
 
 
@@ -208,14 +208,14 @@ def test_save_idea_csv_Arg_idea_format_00021_plan_acctunit_v0_0_0_SaveToCSV(
     sue_credit_score = 11
     bob_credit_score = 13
     yao_credit_score = 41
-    sue_debtit_score = 23
-    bob_debtit_score = 29
-    yao_debtit_score = 37
+    sue_debt_score = 23
+    bob_debt_score = 29
+    yao_debt_score = 37
     accord_vow_label = "accord56"
     sue_planunit = planunit_shop(sue_str, accord_vow_label)
-    sue_planunit.add_acctunit(sue_str, sue_credit_score, sue_debtit_score)
-    sue_planunit.add_acctunit(bob_str, bob_credit_score, bob_debtit_score)
-    sue_planunit.add_acctunit(yao_str, yao_credit_score, yao_debtit_score)
+    sue_planunit.add_acctunit(sue_str, sue_credit_score, sue_debt_score)
+    sue_planunit.add_acctunit(bob_str, bob_credit_score, bob_debt_score)
+    sue_planunit.add_acctunit(yao_str, yao_credit_score, yao_debt_score)
     j1_ideaname = idea_format_00021_plan_acctunit_v0_0_0()
     name_filename = f"{sue_str}_acct_example_00.csv"
     csv_example_path = create_path(idea_vows_dir(), name_filename)
@@ -227,7 +227,7 @@ def test_save_idea_csv_Arg_idea_format_00021_plan_acctunit_v0_0_0_SaveToCSV(
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue1_name_example_csv = """event_int,face_name,vow_label,owner_name,acct_name,credit_score,debtit_score
+    sue1_name_example_csv = """event_int,face_name,vow_label,owner_name,acct_name,credit_score,debt_score
 ,,accord56,Sue,Bob,13,29
 ,,accord56,Sue,Sue,11,23
 ,,accord56,Sue,Yao,41,37
@@ -244,7 +244,7 @@ def test_save_idea_csv_Arg_idea_format_00021_plan_acctunit_v0_0_0_SaveToCSV(
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue2_acct_example_csv = """event_int,face_name,vow_label,owner_name,acct_name,credit_score,debtit_score
+    sue2_acct_example_csv = """event_int,face_name,vow_label,owner_name,acct_name,credit_score,debt_score
 ,,accord56,Sue,Bob,13,29
 ,,accord56,Sue,Sue,11,23
 ,,accord56,Sue,Yao,41,37

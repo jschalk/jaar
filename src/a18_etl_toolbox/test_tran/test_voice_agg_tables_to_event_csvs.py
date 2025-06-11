@@ -70,10 +70,10 @@ VALUES
         e7_put_csv = open_file(a23_e7_planacct_put_path)
         print(f"{e3_put_csv=}")
         print(f"{e7_put_csv=}")
-        expected_e3_put_csv = """event_int,face_name,vow_label,owner_name,acct_name,credit_score,debtit_score
+        expected_e3_put_csv = """event_int,face_name,vow_label,owner_name,acct_name,credit_score,debt_score
 3,Suzy,accord23,Bobby,Bobby,5.0,
 """
-        expected_e7_put_csv = """event_int,face_name,vow_label,owner_name,acct_name,credit_score,debtit_score
+        expected_e7_put_csv = """event_int,face_name,vow_label,owner_name,acct_name,credit_score,debt_score
 7,Suzy,accord23,Bobby,Bobby,5.0,
 7,Suzy,accord23,Bobby,Suzy,7.0,
 """

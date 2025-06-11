@@ -1,7 +1,7 @@
 from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
     credit_vote_str,
-    debtit_vote_str,
+    debt_vote_str,
     group_title_str,
     plan_acct_membership_str,
 )
@@ -23,12 +23,12 @@ def test_create_legible_list_ReturnsObj_acct_membership_INSERT():
     swim_str = f"{sue_plan.bridge}Swimmers"
     yao_str = "Yao"
     credit_vote_value = 81
-    debtit_vote_value = 43
+    debt_vote_value = 43
     yao_planatom = planatom_shop(dimen, INSERT_str())
     yao_planatom.set_arg(group_title_str(), swim_str)
     yao_planatom.set_arg(acct_name_str(), yao_str)
     yao_planatom.set_arg(credit_vote_str(), credit_vote_value)
-    yao_planatom.set_arg(debtit_vote_str(), debtit_vote_value)
+    yao_planatom.set_arg(debt_vote_str(), debt_vote_value)
     # print(f"{yao_planatom=}")
     x_plandelta = plandelta_shop()
     x_plandelta.set_planatom(yao_planatom)
@@ -37,26 +37,26 @@ def test_create_legible_list_ReturnsObj_acct_membership_INSERT():
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"Group '{swim_str}' has new membership {yao_str} with credit_vote_value{credit_vote_value} and debtit_vote_value={debtit_vote_value}."
+    x_str = f"Group '{swim_str}' has new membership {yao_str} with credit_vote_value{credit_vote_value} and debt_vote_value={debt_vote_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote_debtit_vote():
+def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote_debt_vote():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     dimen = plan_acct_membership_str()
     credit_vote_str = "credit_vote"
-    debtit_vote_str = "debtit_vote"
+    debt_vote_str = "debt_vote"
     swim_str = f"{sue_plan.bridge}Swimmers"
     yao_str = "Yao"
     credit_vote_value = 81
-    debtit_vote_value = 43
+    debt_vote_value = 43
     yao_planatom = planatom_shop(dimen, UPDATE_str())
     yao_planatom.set_arg(group_title_str(), swim_str)
     yao_planatom.set_arg(acct_name_str(), yao_str)
     yao_planatom.set_arg(credit_vote_str, credit_vote_value)
-    yao_planatom.set_arg(debtit_vote_str, debtit_vote_value)
+    yao_planatom.set_arg(debt_vote_str, debt_vote_value)
     # print(f"{yao_planatom=}")
     x_plandelta = plandelta_shop()
     x_plandelta.set_planatom(yao_planatom)
@@ -65,7 +65,7 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote_debti
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"Group '{swim_str}' membership {yao_str} has new credit_vote_value{credit_vote_value} and debtit_vote_value={debtit_vote_value}."
+    x_str = f"Group '{swim_str}' membership {yao_str} has new credit_vote_value{credit_vote_value} and debt_vote_value={debt_vote_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -95,18 +95,18 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote():
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_debtit_vote():
+def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_debt_vote():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     dimen = plan_acct_membership_str()
-    debtit_vote_str = "debtit_vote"
+    debt_vote_str = "debt_vote"
     swim_str = f"{sue_plan.bridge}Swimmers"
     yao_str = "Yao"
-    debtit_vote_value = 43
+    debt_vote_value = 43
     yao_planatom = planatom_shop(dimen, UPDATE_str())
     yao_planatom.set_arg(group_title_str(), swim_str)
     yao_planatom.set_arg(acct_name_str(), yao_str)
-    yao_planatom.set_arg(debtit_vote_str, debtit_vote_value)
+    yao_planatom.set_arg(debt_vote_str, debt_vote_value)
     # print(f"{yao_planatom=}")
     x_plandelta = plandelta_shop()
     x_plandelta.set_planatom(yao_planatom)
@@ -115,7 +115,7 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_debtit_vote():
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"Group '{swim_str}' membership {yao_str} has new debtit_vote_value={debtit_vote_value}."
+    x_str = f"Group '{swim_str}' membership {yao_str} has new debt_vote_value={debt_vote_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 

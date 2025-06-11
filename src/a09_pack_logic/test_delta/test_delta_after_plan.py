@@ -9,7 +9,7 @@ from src.a06_plan_logic._test_util.a06_str import (
     close_str,
     concept_way_str,
     credit_vote_str,
-    debtit_vote_str,
+    debt_vote_str,
     fcontext_str,
     fnigh_str,
     fopen_str,
@@ -161,9 +161,9 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_acct():
     x_planatom = planatom_shop(dimen, INSERT_str())
     x_planatom.set_jkey(acct_name_str(), zia_str)
     x_credit_score = 55
-    x_debtit_score = 66
+    x_debt_score = 66
     x_planatom.set_jvalue("credit_score", x_credit_score)
-    x_planatom.set_jvalue("debtit_score", x_debtit_score)
+    x_planatom.set_jvalue("debt_score", x_debt_score)
     sue_plandelta.set_planatom(x_planatom)
     print(f"{sue_plandelta.planatoms.keys()=}")
     after_sue_planunit = sue_plandelta.get_edited_plan(before_sue_planunit)
@@ -174,7 +174,7 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_acct():
     assert yao_acctunit is not None
     assert zia_acctunit is not None
     assert zia_acctunit.credit_score == x_credit_score
-    assert zia_acctunit.debtit_score == x_debtit_score
+    assert zia_acctunit.debt_score == x_debt_score
 
 
 def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_acct():
@@ -294,16 +294,16 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_membership():
     before_yao_acctunit.add_membership(run_str, old_yao_run_credit_vote)
     yao_run_membership = before_yao_acctunit.get_membership(run_str)
     assert yao_run_membership.credit_vote == old_yao_run_credit_vote
-    assert yao_run_membership.debtit_vote == 1
+    assert yao_run_membership.debt_vote == 1
 
     # WHEN
     yao_planatom = planatom_shop(plan_acct_membership_str(), UPDATE_str())
     yao_planatom.set_jkey(group_title_str(), run_str)
     yao_planatom.set_jkey(acct_name_str(), yao_str)
     new_yao_run_credit_vote = 7
-    new_yao_run_debtit_vote = 11
+    new_yao_run_debt_vote = 11
     yao_planatom.set_jvalue(credit_vote_str(), new_yao_run_credit_vote)
-    yao_planatom.set_jvalue(debtit_vote_str(), new_yao_run_debtit_vote)
+    yao_planatom.set_jvalue(debt_vote_str(), new_yao_run_debt_vote)
     sue_plandelta = plandelta_shop()
     sue_plandelta.set_planatom(yao_planatom)
     after_sue_planunit = sue_plandelta.get_edited_plan(before_sue_planunit)
@@ -312,7 +312,7 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_membership():
     after_yao_acctunit = after_sue_planunit.get_acct(yao_str)
     after_yao_run_membership = after_yao_acctunit.get_membership(run_str)
     assert after_yao_run_membership.credit_vote == new_yao_run_credit_vote
-    assert after_yao_run_membership.debtit_vote == new_yao_run_debtit_vote
+    assert after_yao_run_membership.debt_vote == new_yao_run_debt_vote
 
 
 def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_delete_conceptunit():

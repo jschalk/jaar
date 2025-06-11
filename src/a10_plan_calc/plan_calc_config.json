@@ -58,7 +58,7 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "debtit_vote": {
+            "debt_vote": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }
@@ -113,11 +113,11 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_inallocable_debtit_score": {
+            "_inallocable_debt_score": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_irrational_debtit_score": {
+            "_irrational_debt_score": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }
@@ -127,7 +127,7 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "debtit_score": {
+            "debt_score": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }

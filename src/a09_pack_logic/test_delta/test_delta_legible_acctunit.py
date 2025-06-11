@@ -14,14 +14,14 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT():
     # ESTABLISH
     dimen = plan_acctunit_str()
     credit_score_str = "credit_score"
-    debtit_score_str = "debtit_score"
+    debt_score_str = "debt_score"
     credit_score_value = 81
-    debtit_score_value = 43
+    debt_score_value = 43
     yao_str = "Yao"
     yao_planatom = planatom_shop(dimen, INSERT_str())
     yao_planatom.set_arg(acct_name_str(), yao_str)
     yao_planatom.set_arg(credit_score_str, credit_score_value)
-    yao_planatom.set_arg(debtit_score_str, debtit_score_value)
+    yao_planatom.set_arg(debt_score_str, debt_score_value)
     # print(f"{yao_planatom=}")
     x_plandelta = plandelta_shop()
     x_plandelta.set_planatom(yao_planatom)
@@ -31,7 +31,7 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT():
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"{yao_str} was added with {credit_score_value} score credit and {debtit_score_value} score debtit"
+    x_str = f"{yao_str} was added with {credit_score_value} score credit and {debt_score_value} score debt"
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -40,14 +40,14 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT_score():
     # ESTABLISH
     dimen = plan_acctunit_str()
     credit_score_str = "credit_score"
-    debtit_score_str = "debtit_score"
+    debt_score_str = "debt_score"
     credit_score_value = 81
-    debtit_score_value = 43
+    debt_score_value = 43
     yao_str = "Yao"
     yao_planatom = planatom_shop(dimen, INSERT_str())
     yao_planatom.set_arg(acct_name_str(), yao_str)
     yao_planatom.set_arg(credit_score_str, credit_score_value)
-    yao_planatom.set_arg(debtit_score_str, debtit_score_value)
+    yao_planatom.set_arg(debt_score_str, debt_score_value)
     # print(f"{yao_planatom=}")
     x_plandelta = plandelta_shop()
     x_plandelta.set_planatom(yao_planatom)
@@ -57,23 +57,23 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT_score():
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"{yao_str} was added with {credit_score_value} score credit and {debtit_score_value} score debtit"
+    x_str = f"{yao_str} was added with {credit_score_value} score credit and {debt_score_value} score debt"
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credit_score_debtit_score():
+def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credit_score_debt_score():
     # ESTABLISH
     dimen = plan_acctunit_str()
     credit_score_str = "credit_score"
-    debtit_score_str = "debtit_score"
+    debt_score_str = "debt_score"
     credit_score_value = 81
-    debtit_score_value = 43
+    debt_score_value = 43
     yao_str = "Yao"
     yao_planatom = planatom_shop(dimen, UPDATE_str())
     yao_planatom.set_arg(acct_name_str(), yao_str)
     yao_planatom.set_arg(credit_score_str, credit_score_value)
-    yao_planatom.set_arg(debtit_score_str, debtit_score_value)
+    yao_planatom.set_arg(debt_score_str, debt_score_value)
     # print(f"{yao_planatom=}")
     x_plandelta = plandelta_shop()
     x_plandelta.set_planatom(yao_planatom)
@@ -83,7 +83,7 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credit_score_debtit_scor
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"{yao_str} now has {credit_score_value} score credit and {debtit_score_value} score debtit."
+    x_str = f"{yao_str} now has {credit_score_value} score credit and {debt_score_value} score debt."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -111,15 +111,15 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_credit_score():
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_acctunit_UPDATE_debtit_score():
+def test_create_legible_list_ReturnsObj_acctunit_UPDATE_debt_score():
     # ESTABLISH
     dimen = plan_acctunit_str()
-    debtit_score_str = "debtit_score"
-    debtit_score_value = 43
+    debt_score_str = "debt_score"
+    debt_score_value = 43
     yao_str = "Yao"
     yao_planatom = planatom_shop(dimen, UPDATE_str())
     yao_planatom.set_arg(acct_name_str(), yao_str)
-    yao_planatom.set_arg(debtit_score_str, debtit_score_value)
+    yao_planatom.set_arg(debt_score_str, debt_score_value)
     # print(f"{yao_planatom=}")
     x_plandelta = plandelta_shop()
     x_plandelta.set_planatom(yao_planatom)
@@ -129,7 +129,7 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_debtit_score():
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"{yao_str} now has {debtit_score_value} score debtit."
+    x_str = f"{yao_str} now has {debt_score_value} score debt."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 

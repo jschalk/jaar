@@ -167,24 +167,24 @@ CREATE_FISUNIT_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS vowunit_s_vld (e
 CREATE_FISUNIT_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS vowunit_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, timeline_label_otx TEXT, timeline_label_inx TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
 CREATE_FISUNIT_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS vowunit_v_agg (vow_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
 
-CREATE_PLANMEMB_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_acct_membership_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, group_title TEXT, credit_vote REAL, debtit_vote REAL, error_message TEXT)"
-CREATE_PLANMEMB_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_acct_membership_s_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, group_title TEXT, credit_vote REAL, debtit_vote REAL, error_message TEXT)"
-CREATE_PLANMEMB_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_acct_membership_s_put_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, group_title TEXT, credit_vote REAL, debtit_vote REAL)"
+CREATE_PLANMEMB_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_acct_membership_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, group_title TEXT, credit_vote REAL, debt_vote REAL, error_message TEXT)"
+CREATE_PLANMEMB_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_acct_membership_s_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, group_title TEXT, credit_vote REAL, debt_vote REAL, error_message TEXT)"
+CREATE_PLANMEMB_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_acct_membership_s_put_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, group_title TEXT, credit_vote REAL, debt_vote REAL)"
 CREATE_PLANMEMB_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_acct_membership_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, group_title_ERASE TEXT)"
 CREATE_PLANMEMB_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_acct_membership_s_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, group_title_ERASE TEXT, error_message TEXT)"
 CREATE_PLANMEMB_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_acct_membership_s_del_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, group_title_ERASE TEXT)"
-CREATE_PLANMEMB_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_acct_membership_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, acct_name_otx TEXT, acct_name_inx TEXT, group_title_otx TEXT, group_title_inx TEXT, credit_vote REAL, debtit_vote REAL)"
-CREATE_PLANMEMB_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_acct_membership_v_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, group_title TEXT, credit_vote REAL, debtit_vote REAL)"
+CREATE_PLANMEMB_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_acct_membership_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, acct_name_otx TEXT, acct_name_inx TEXT, group_title_otx TEXT, group_title_inx TEXT, credit_vote REAL, debt_vote REAL)"
+CREATE_PLANMEMB_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_acct_membership_v_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, group_title TEXT, credit_vote REAL, debt_vote REAL)"
 CREATE_PLANMEMB_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_acct_membership_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, acct_name_otx TEXT, acct_name_inx TEXT, group_title_ERASE_otx TEXT, group_title_ERASE_inx TEXT)"
 CREATE_PLANMEMB_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_acct_membership_v_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, group_title_ERASE TEXT)"
-CREATE_PLANACCT_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_acctunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, credit_score REAL, debtit_score REAL, error_message TEXT)"
-CREATE_PLANACCT_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_acctunit_s_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, credit_score REAL, debtit_score REAL, error_message TEXT)"
-CREATE_PLANACCT_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_acctunit_s_put_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, credit_score REAL, debtit_score REAL)"
+CREATE_PLANACCT_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_acctunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, credit_score REAL, debt_score REAL, error_message TEXT)"
+CREATE_PLANACCT_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_acctunit_s_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, credit_score REAL, debt_score REAL, error_message TEXT)"
+CREATE_PLANACCT_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_acctunit_s_put_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, credit_score REAL, debt_score REAL)"
 CREATE_PLANACCT_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_acctunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name_ERASE TEXT)"
 CREATE_PLANACCT_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_acctunit_s_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name_ERASE TEXT, error_message TEXT)"
 CREATE_PLANACCT_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_acctunit_s_del_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name_ERASE TEXT)"
-CREATE_PLANACCT_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_acctunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, acct_name_otx TEXT, acct_name_inx TEXT, credit_score REAL, debtit_score REAL)"
-CREATE_PLANACCT_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_acctunit_v_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, credit_score REAL, debtit_score REAL)"
+CREATE_PLANACCT_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_acctunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, acct_name_otx TEXT, acct_name_inx TEXT, credit_score REAL, debt_score REAL)"
+CREATE_PLANACCT_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_acctunit_v_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, credit_score REAL, debt_score REAL)"
 CREATE_PLANACCT_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_acctunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, acct_name_ERASE_otx TEXT, acct_name_ERASE_inx TEXT)"
 CREATE_PLANACCT_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_acctunit_v_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name_ERASE TEXT)"
 CREATE_PLANAWAR_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_awardlink_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, awardee_title TEXT, give_force REAL, take_force REAL, error_message TEXT)"
@@ -720,9 +720,9 @@ WHERE rowid IN (
 """
 
 
-INSERT_PLANMEMB_SOUND_VLD_PUT_SQLSTR = "INSERT INTO plan_acct_membership_s_put_vld (event_int, face_name, vow_label, owner_name, acct_name, group_title, credit_vote, debtit_vote) SELECT event_int, face_name, vow_label, owner_name, acct_name, group_title, credit_vote, debtit_vote FROM plan_acct_membership_s_put_agg WHERE error_message IS NULL"
+INSERT_PLANMEMB_SOUND_VLD_PUT_SQLSTR = "INSERT INTO plan_acct_membership_s_put_vld (event_int, face_name, vow_label, owner_name, acct_name, group_title, credit_vote, debt_vote) SELECT event_int, face_name, vow_label, owner_name, acct_name, group_title, credit_vote, debt_vote FROM plan_acct_membership_s_put_agg WHERE error_message IS NULL"
 INSERT_PLANMEMB_SOUND_VLD_DEL_SQLSTR = "INSERT INTO plan_acct_membership_s_del_vld (event_int, face_name, vow_label, owner_name, acct_name, group_title_ERASE) SELECT event_int, face_name, vow_label, owner_name, acct_name, group_title_ERASE FROM plan_acct_membership_s_del_agg WHERE error_message IS NULL"
-INSERT_PLANACCT_SOUND_VLD_PUT_SQLSTR = "INSERT INTO plan_acctunit_s_put_vld (event_int, face_name, vow_label, owner_name, acct_name, credit_score, debtit_score) SELECT event_int, face_name, vow_label, owner_name, acct_name, credit_score, debtit_score FROM plan_acctunit_s_put_agg WHERE error_message IS NULL"
+INSERT_PLANACCT_SOUND_VLD_PUT_SQLSTR = "INSERT INTO plan_acctunit_s_put_vld (event_int, face_name, vow_label, owner_name, acct_name, credit_score, debt_score) SELECT event_int, face_name, vow_label, owner_name, acct_name, credit_score, debt_score FROM plan_acctunit_s_put_agg WHERE error_message IS NULL"
 INSERT_PLANACCT_SOUND_VLD_DEL_SQLSTR = "INSERT INTO plan_acctunit_s_del_vld (event_int, face_name, vow_label, owner_name, acct_name_ERASE) SELECT event_int, face_name, vow_label, owner_name, acct_name_ERASE FROM plan_acctunit_s_del_agg WHERE error_message IS NULL"
 INSERT_PLANAWAR_SOUND_VLD_PUT_SQLSTR = "INSERT INTO plan_concept_awardlink_s_put_vld (event_int, face_name, vow_label, owner_name, concept_way, awardee_title, give_force, take_force) SELECT event_int, face_name, vow_label, owner_name, concept_way, awardee_title, give_force, take_force FROM plan_concept_awardlink_s_put_agg WHERE error_message IS NULL"
 INSERT_PLANAWAR_SOUND_VLD_DEL_SQLSTR = "INSERT INTO plan_concept_awardlink_s_del_vld (event_int, face_name, vow_label, owner_name, concept_way, awardee_title_ERASE) SELECT event_int, face_name, vow_label, owner_name, concept_way, awardee_title_ERASE FROM plan_concept_awardlink_s_del_agg WHERE error_message IS NULL"
@@ -790,9 +790,9 @@ INSERT_FISWEEK_VOICE_RAW_SQLSTR = "INSERT INTO vow_timeline_weekday_v_raw (event
 INSERT_FISOFFI_VOICE_RAW_SQLSTR = "INSERT INTO vow_timeoffi_v_raw (event_int, face_name_otx, vow_label_otx, offi_time) SELECT event_int, face_name, vow_label, offi_time FROM vow_timeoffi_s_vld "
 INSERT_FISUNIT_VOICE_RAW_SQLSTR = "INSERT INTO vowunit_v_raw (event_int, face_name_otx, vow_label_otx, timeline_label_otx, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, bridge, job_listen_rotations) SELECT event_int, face_name, vow_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, bridge, job_listen_rotations FROM vowunit_s_vld "
 
-INSERT_PLANMEMB_VOICE_RAW_PUT_SQLSTR = "INSERT INTO plan_acct_membership_v_put_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, acct_name_otx, group_title_otx, credit_vote, debtit_vote) SELECT event_int, face_name, vow_label, owner_name, acct_name, group_title, credit_vote, debtit_vote FROM plan_acct_membership_s_put_vld "
+INSERT_PLANMEMB_VOICE_RAW_PUT_SQLSTR = "INSERT INTO plan_acct_membership_v_put_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, acct_name_otx, group_title_otx, credit_vote, debt_vote) SELECT event_int, face_name, vow_label, owner_name, acct_name, group_title, credit_vote, debt_vote FROM plan_acct_membership_s_put_vld "
 INSERT_PLANMEMB_VOICE_RAW_DEL_SQLSTR = "INSERT INTO plan_acct_membership_v_del_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, acct_name_otx, group_title_ERASE_otx) SELECT event_int, face_name, vow_label, owner_name, acct_name, group_title_ERASE FROM plan_acct_membership_s_del_vld "
-INSERT_PLANACCT_VOICE_RAW_PUT_SQLSTR = "INSERT INTO plan_acctunit_v_put_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, acct_name_otx, credit_score, debtit_score) SELECT event_int, face_name, vow_label, owner_name, acct_name, credit_score, debtit_score FROM plan_acctunit_s_put_vld "
+INSERT_PLANACCT_VOICE_RAW_PUT_SQLSTR = "INSERT INTO plan_acctunit_v_put_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, acct_name_otx, credit_score, debt_score) SELECT event_int, face_name, vow_label, owner_name, acct_name, credit_score, debt_score FROM plan_acctunit_s_put_vld "
 INSERT_PLANACCT_VOICE_RAW_DEL_SQLSTR = "INSERT INTO plan_acctunit_v_del_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, acct_name_ERASE_otx) SELECT event_int, face_name, vow_label, owner_name, acct_name_ERASE FROM plan_acctunit_s_del_vld "
 INSERT_PLANAWAR_VOICE_RAW_PUT_SQLSTR = "INSERT INTO plan_concept_awardlink_v_put_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_way_otx, awardee_title_otx, give_force, take_force) SELECT event_int, face_name, vow_label, owner_name, concept_way, awardee_title, give_force, take_force FROM plan_concept_awardlink_s_put_vld "
 INSERT_PLANAWAR_VOICE_RAW_DEL_SQLSTR = "INSERT INTO plan_concept_awardlink_v_del_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_way_otx, awardee_title_ERASE_otx) SELECT event_int, face_name, vow_label, owner_name, concept_way, awardee_title_ERASE FROM plan_concept_awardlink_s_del_vld "
@@ -936,10 +936,10 @@ GROUP BY vow_label_inx, timeline_label_inx, c400_number, yr1_jan1_offset, monthd
 """
 
 INSERT_PLANMEMB_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO plan_acct_membership_v_put_agg (event_int, face_name, vow_label, owner_name, acct_name, group_title, credit_vote, debtit_vote)
-SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, acct_name_inx, group_title_inx, credit_vote, debtit_vote
+INSERT INTO plan_acct_membership_v_put_agg (event_int, face_name, vow_label, owner_name, acct_name, group_title, credit_vote, debt_vote)
+SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, acct_name_inx, group_title_inx, credit_vote, debt_vote
 FROM plan_acct_membership_v_put_raw
-GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, acct_name_inx, group_title_inx, credit_vote, debtit_vote
+GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, acct_name_inx, group_title_inx, credit_vote, debt_vote
 """
 INSERT_PLANMEMB_VOICE_AGG_DEL_SQLSTR = """
 INSERT INTO plan_acct_membership_v_del_agg (event_int, face_name, vow_label, owner_name, acct_name, group_title_ERASE)
@@ -948,10 +948,10 @@ FROM plan_acct_membership_v_del_raw
 GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, acct_name_inx, group_title_ERASE_inx
 """
 INSERT_PLANACCT_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO plan_acctunit_v_put_agg (event_int, face_name, vow_label, owner_name, acct_name, credit_score, debtit_score)
-SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, acct_name_inx, credit_score, debtit_score
+INSERT INTO plan_acctunit_v_put_agg (event_int, face_name, vow_label, owner_name, acct_name, credit_score, debt_score)
+SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, acct_name_inx, credit_score, debt_score
 FROM plan_acctunit_v_put_raw
-GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, acct_name_inx, credit_score, debtit_score
+GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, acct_name_inx, credit_score, debt_score
 """
 INSERT_PLANACCT_VOICE_AGG_DEL_SQLSTR = """
 INSERT INTO plan_acctunit_v_del_agg (event_int, face_name, vow_label, owner_name, acct_name_ERASE)
@@ -1278,8 +1278,8 @@ ORDER BY vow_label, owner_name, event_int, deal_time
 """
 
 
-CREATE_JOB_PLANMEMB_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_acct_membership_job (vow_label TEXT, owner_name TEXT, acct_name TEXT, group_title TEXT, credit_vote REAL, debtit_vote REAL, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL, _fund_agenda_ratio_give REAL, _fund_agenda_ratio_take REAL)"""
-CREATE_JOB_PLANACCT_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_acctunit_job (vow_label TEXT, owner_name TEXT, acct_name TEXT, credit_score REAL, debtit_score REAL, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL, _fund_agenda_ratio_give REAL, _fund_agenda_ratio_take REAL, _inallocable_debtit_score REAL, _irrational_debtit_score REAL)"""
+CREATE_JOB_PLANMEMB_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_acct_membership_job (vow_label TEXT, owner_name TEXT, acct_name TEXT, group_title TEXT, credit_vote REAL, debt_vote REAL, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL, _fund_agenda_ratio_give REAL, _fund_agenda_ratio_take REAL)"""
+CREATE_JOB_PLANACCT_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_acctunit_job (vow_label TEXT, owner_name TEXT, acct_name TEXT, credit_score REAL, debt_score REAL, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL, _fund_agenda_ratio_give REAL, _fund_agenda_ratio_take REAL, _inallocable_debt_score REAL, _irrational_debt_score REAL)"""
 CREATE_JOB_PLANGROU_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_groupunit_job (vow_label TEXT, owner_name TEXT, group_title TEXT, fund_iota REAL, bridge TEXT, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL)"""
 CREATE_JOB_PLANAWAR_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_concept_awardlink_job (vow_label TEXT, owner_name TEXT, concept_way TEXT, awardee_title TEXT, give_force REAL, take_force REAL, _fund_give REAL, _fund_take REAL)"""
 CREATE_JOB_PLANFACT_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_concept_factunit_job (vow_label TEXT, owner_name TEXT, concept_way TEXT, fcontext TEXT, fstate TEXT, fopen REAL, fnigh REAL)"""

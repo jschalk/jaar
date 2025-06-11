@@ -561,7 +561,7 @@ def test_create_planacct_metrics_insert_sqlstr_ReturnsObj():
     x_owner_name = "Sue"
     x_acct_name = 1
     x_credit_score = 2
-    x_debtit_score = 3
+    x_debt_score = 3
     x__credor_pool = 4
     x__debtor_pool = 5
     x__fund_give = 6
@@ -570,14 +570,14 @@ def test_create_planacct_metrics_insert_sqlstr_ReturnsObj():
     x__fund_agenda_take = 9
     x__fund_agenda_ratio_give = 10
     x__fund_agenda_ratio_take = 11
-    x__inallocable_debtit_score = 12
-    x__irrational_debtit_score = 13
+    x__inallocable_debt_score = 12
+    x__irrational_debt_score = 13
     values_dict = {
         "vow_label": x_vow_label,
         "owner_name": x_owner_name,
         "acct_name": x_acct_name,
         "credit_score": x_credit_score,
-        "debtit_score": x_debtit_score,
+        "debt_score": x_debt_score,
         "_credor_pool": x__credor_pool,
         "_debtor_pool": x__debtor_pool,
         "_fund_give": x__fund_give,
@@ -586,8 +586,8 @@ def test_create_planacct_metrics_insert_sqlstr_ReturnsObj():
         "_fund_agenda_take": x__fund_agenda_take,
         "_fund_agenda_ratio_give": x__fund_agenda_ratio_give,
         "_fund_agenda_ratio_take": x__fund_agenda_ratio_take,
-        "_inallocable_debtit_score": x__inallocable_debtit_score,
-        "_irrational_debtit_score": x__irrational_debtit_score,
+        "_inallocable_debt_score": x__inallocable_debt_score,
+        "_irrational_debt_score": x__irrational_debt_score,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())
@@ -639,7 +639,7 @@ def test_create_planmemb_metrics_insert_sqlstr_ReturnsObj():
     x_acct_name = 1
     x_group_title = 2
     x_credit_vote = 3
-    x_debtit_vote = 4
+    x_debt_vote = 4
     x__credor_pool = 5
     x__debtor_pool = 6
     x__fund_give = 7
@@ -654,7 +654,7 @@ def test_create_planmemb_metrics_insert_sqlstr_ReturnsObj():
         "acct_name": x_acct_name,
         "group_title": x_group_title,
         "credit_vote": x_credit_vote,
-        "debtit_vote": x_debtit_vote,
+        "debt_vote": x_debt_vote,
         "_credor_pool": x__credor_pool,
         "_debtor_pool": x__debtor_pool,
         "_fund_give": x__fund_give,

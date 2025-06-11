@@ -105,9 +105,9 @@ def get_example_yao_plan() -> PlanUnit:
     bob_str = "Bob"
     yao_speaker = planunit_shop(yao_str, get_default_vow_label())
     yao_speaker.set_concept(conceptunit_shop(run_str()), casa_way())
-    yao_speaker.add_acctunit(yao_str, debtit_score=10)
-    yao_speaker.add_acctunit(zia_str, debtit_score=30)
-    yao_speaker.add_acctunit(bob_str, debtit_score=40)
+    yao_speaker.add_acctunit(yao_str, debt_score=10)
+    yao_speaker.add_acctunit(zia_str, debt_score=30)
+    yao_speaker.add_acctunit(bob_str, debt_score=40)
     yao_speaker.set_acct_respect(80)
     return yao_speaker
 
@@ -328,7 +328,7 @@ def test_listen_to_owner_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItse
     yao_job = open_job_file(vow_mstr_dir, vow_label, yao_str)
     yao_job.settle_plan()
     assert yao_job.accts.keys() == yao_gut0.accts.keys()
-    assert yao_job.get_acct(yao_str)._irrational_debtit_score == 0
+    assert yao_job.get_acct(yao_str)._irrational_debt_score == 0
     yao_job_accts = yao_job.get_dict().get("accts")
     yao_gut0_accts = yao_gut0.get_dict().get("accts")
     yao_job_bob = yao_job_accts.get("Bob")

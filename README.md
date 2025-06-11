@@ -15,7 +15,7 @@ JAAR Version 0.0.0
 
 'jaar' is based on the philosohpy of Emmanuel Levinas (1906-1995) as expressed in his book "Totality and Infinity: An Essay on Exteriority" (translated by Lingis, 1969) and taught to me by Jules Simon PhD (born 1959) Professor at The University of Texas at El Paso (UTEP). I took Jules's course "Levinas: Phenomenology of the Ethical" in 2014 and am still working through the implications. The most important idea that motivated jaar was how Levinas describes murder as the act of not listening. It is painful to really listen, to listen in such a way as to not know what is going to be said. To take in the suffering of the other person and bring them into myself and change myself in ways that are by definition imaginable. Because if I could imagine them then they would not be a change. By definition I'm only listening if it changes me in ways I can't predict. 
 
-So how do I listen? jaar has an engine for converting the declarations (as data) into task lists. How to input the data? The most excessable method is using excel sheets. 
+So how do I listen? jaar has an engine for converting the declarations (as data) into task lists. How to input the data? The most accessible method is using excel sheets. 
 
 # 0.0.1 "Vows" The foundation of jaar
 For Levinas all of reality is born from the face to face encounter. The same (me) welcomes the other person through the Face. The Face of the other tells me it's suffering and it's suffering becomes my suffering. I then VOW to change who I am to ease that suffering. The suffering is infinitly deep and beyond my complete understanding so when I vow to respond to that suffering I am acting with confidence that I understand what the suffering is and that I know how to respond. That confidence stops the listening process, the Vow cuts the infinite into the finite and is the foundation for a world. When that Vow is created it can create a world. Worlds can hold a infinite amount of human experience. A small subset of that is logical systems. jaar is uses computers to build logic.
@@ -48,7 +48,7 @@ Output stance: emmanuel_stance.xlsx, sheet "br00000"
 
 
 <!-- # Input Example Excel file 0.1.2: fizz2.xlsx with sheet "br00000_buzz2" 
-| event_int | face_name | vow_label | owner_name | acct_name | credit_score | debtit_score |
+| event_int | face_name | vow_label | owner_name | acct_name | credit_score | debt_score |
 |-----------|-----------|-----------|------------|-----------|---------------|---------------|
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |    Dean   |      100      |      15       |
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |  Emmanuel |       50      |      75       |

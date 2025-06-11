@@ -9,7 +9,7 @@ def get_plan_acctunits_dataframe(x_plan: PlanUnit) -> DataFrame:
             columns=[
                 "acct_name",
                 "credit_score",
-                "debtit_score",
+                "debt_score",
                 "_fund_give",
                 "_fund_take",
                 "_fund_agenda_give",

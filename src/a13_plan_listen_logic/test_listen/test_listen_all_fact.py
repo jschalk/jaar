@@ -14,8 +14,8 @@ def test_get_debtors_roll_ReturnsObj():
     yao_duty = planunit_shop(yao_str)
     zia_str = "Zia"
     zia_credit_score = 47
-    zia_debtit_score = 41
-    yao_duty.add_acctunit(zia_str, zia_credit_score, zia_debtit_score)
+    zia_debt_score = 41
+    yao_duty.add_acctunit(zia_str, zia_credit_score, zia_debt_score)
     yao_duty.settle_plan()
 
     # WHEN
@@ -26,18 +26,18 @@ def test_get_debtors_roll_ReturnsObj():
     assert yao_roll == [zia_acctunit]
 
 
-def test_get_debtors_roll_ReturnsObjIgnoresZero_debtit_score():
+def test_get_debtors_roll_ReturnsObjIgnoresZero_debt_score():
     # ESTABLISH
     yao_str = "Yao"
     yao_duty = planunit_shop(yao_str)
     zia_str = "Zia"
     zia_credit_score = 47
-    zia_debtit_score = 41
+    zia_debt_score = 41
     wei_str = "Wei"
     wei_credit_score = 67
-    wei_debtit_score = 0
-    yao_duty.add_acctunit(zia_str, zia_credit_score, zia_debtit_score)
-    yao_duty.add_acctunit(wei_str, wei_credit_score, wei_debtit_score)
+    wei_debt_score = 0
+    yao_duty.add_acctunit(zia_str, zia_credit_score, zia_debt_score)
+    yao_duty.add_acctunit(wei_str, wei_credit_score, wei_debt_score)
     yao_duty.settle_plan()
 
     # WHEN
@@ -54,12 +54,12 @@ def test_get_ordered_debtors_roll_ReturnsObjsInOrder():
     yao_plan = planunit_shop(yao_str)
     zia_str = "Zia"
     zia_credit_score = 47
-    zia_debtit_score = 41
+    zia_debt_score = 41
     sue_str = "Sue"
     sue_credit_score = 57
-    sue_debtit_score = 51
-    yao_plan.add_acctunit(zia_str, zia_credit_score, zia_debtit_score)
-    yao_plan.add_acctunit(sue_str, sue_credit_score, sue_debtit_score)
+    sue_debt_score = 51
+    yao_plan.add_acctunit(zia_str, zia_credit_score, zia_debt_score)
+    yao_plan.add_acctunit(sue_str, sue_credit_score, sue_debt_score)
     yao_pool = 92
     yao_plan.set_acct_respect(yao_pool)
 
@@ -74,8 +74,8 @@ def test_get_ordered_debtors_roll_ReturnsObjsInOrder():
 
     # ESTABLISH
     bob_str = "Bob"
-    bob_debtit_score = 75
-    yao_plan.add_acctunit(bob_str, 0, bob_debtit_score)
+    bob_debt_score = 75
+    yao_plan.add_acctunit(bob_str, 0, bob_debt_score)
     bob_acct = yao_plan.get_acct(bob_str)
 
     # WHEN
@@ -86,22 +86,22 @@ def test_get_ordered_debtors_roll_ReturnsObjsInOrder():
     assert ordered_accts2 == [bob_acct, sue_acct, zia_acct]
 
 
-def test_get_ordered_debtors_roll_DoesNotReturnZero_debtit_score():
+def test_get_ordered_debtors_roll_DoesNotReturnZero_debt_score():
     # ESTABLISH
     yao_str = "Yao"
     yao_plan = planunit_shop(yao_str)
     zia_str = "Zia"
-    zia_debtit_score = 41
+    zia_debt_score = 41
     sue_str = "Sue"
-    sue_debtit_score = 51
+    sue_debt_score = 51
     yao_pool = 92
     yao_plan.set_acct_respect(yao_pool)
     bob_str = "Bob"
-    bob_debtit_score = 75
+    bob_debt_score = 75
     xio_str = "Xio"
-    yao_plan.add_acctunit(zia_str, 0, zia_debtit_score)
-    yao_plan.add_acctunit(sue_str, 0, sue_debtit_score)
-    yao_plan.add_acctunit(bob_str, 0, bob_debtit_score)
+    yao_plan.add_acctunit(zia_str, 0, zia_debt_score)
+    yao_plan.add_acctunit(sue_str, 0, sue_debt_score)
+    yao_plan.add_acctunit(bob_str, 0, bob_debt_score)
     yao_plan.add_acctunit(yao_str, 0, 0)
     yao_plan.add_acctunit(xio_str, 0, 0)
 

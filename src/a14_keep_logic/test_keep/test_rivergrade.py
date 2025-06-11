@@ -8,11 +8,11 @@ def test_RiverGrade_Exists():
     x_rivergrade = RiverGrade()
 
     # THEN
-    #: Healer gut get_acct._debtit_score (SELECT tax_due_amount FROM acct WHERE acct_name = bob_str)
+    #: Healer gut get_acct._debt_score (SELECT tax_due_amount FROM acct WHERE acct_name = bob_str)
     assert x_rivergrade.hubunit is None
     assert x_rivergrade.acct_name is None
     assert x_rivergrade.number is None
-    #: Healer gut get_acct._debtit_score (SELECT tax_due_amount FROM acct WHERE acct_name = bob_str)
+    #: Healer gut get_acct._debt_score (SELECT tax_due_amount FROM acct WHERE acct_name = bob_str)
     assert x_rivergrade.tax_bill_amount is None
     #: Healer gut get_acct._credit_score (SELECT grant_amount FROM acct WHERE acct_name = bob_str)
     assert x_rivergrade.grant_amount is None

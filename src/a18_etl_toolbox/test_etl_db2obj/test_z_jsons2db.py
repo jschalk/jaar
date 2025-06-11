@@ -417,7 +417,7 @@ def test_insert_job_planmemb_CreatesTableRowsFor_planmemb_job():
     x_acct_name = 3
     x_group_title = 4
     x_credit_vote = 5.0
-    x_debtit_vote = 6.0
+    x_debt_vote = 6.0
     x__credor_pool = 7.0
     x__debtor_pool = 8.0
     x__fund_give = 9.0
@@ -429,7 +429,7 @@ def test_insert_job_planmemb_CreatesTableRowsFor_planmemb_job():
     x_membership = membership_shop(x_group_title)
     x_membership.acct_name = x_acct_name
     x_membership.credit_vote = x_credit_vote
-    x_membership.debtit_vote = x_debtit_vote
+    x_membership.debt_vote = x_debt_vote
     x_membership._credor_pool = x__credor_pool
     x_membership._debtor_pool = x__debtor_pool
     x_membership._fund_give = x__fund_give
@@ -460,7 +460,7 @@ def test_insert_job_planmemb_CreatesTableRowsFor_planmemb_job():
             str(x_acct_name),
             str(x_group_title),
             x_credit_vote,
-            x_debtit_vote,
+            x_debt_vote,
             x__credor_pool,
             x__debtor_pool,
             x__fund_give,
@@ -493,7 +493,7 @@ def test_insert_job_planacct_CreatesTableRowsFor_planacct_job():
     x_owner_name = 2
     x_acct_name = 3
     x_credit_score = 4
-    x_debtit_score = 5
+    x_debt_score = 5
     x__credor_pool = 6
     x__debtor_pool = 7
     x__fund_give = 8
@@ -502,12 +502,12 @@ def test_insert_job_planacct_CreatesTableRowsFor_planacct_job():
     x__fund_agenda_take = 11
     x__fund_agenda_ratio_give = 12
     x__fund_agenda_ratio_take = 13
-    x__inallocable_debtit_score = 14
-    x__irrational_debtit_score = 15
+    x__inallocable_debt_score = 14
+    x__irrational_debt_score = 15
     x_acct = acctunit_shop(x_acct_name)
     x_acct.acct_name = x_acct_name
     x_acct.credit_score = x_credit_score
-    x_acct.debtit_score = x_debtit_score
+    x_acct.debt_score = x_debt_score
     x_acct._credor_pool = x__credor_pool
     x_acct._debtor_pool = x__debtor_pool
     x_acct._fund_give = x__fund_give
@@ -516,8 +516,8 @@ def test_insert_job_planacct_CreatesTableRowsFor_planacct_job():
     x_acct._fund_agenda_take = x__fund_agenda_take
     x_acct._fund_agenda_ratio_give = x__fund_agenda_ratio_give
     x_acct._fund_agenda_ratio_take = x__fund_agenda_ratio_take
-    x_acct._inallocable_debtit_score = x__inallocable_debtit_score
-    x_acct._irrational_debtit_score = x__irrational_debtit_score
+    x_acct._inallocable_debt_score = x__inallocable_debt_score
+    x_acct._irrational_debt_score = x__irrational_debt_score
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -539,7 +539,7 @@ def test_insert_job_planacct_CreatesTableRowsFor_planacct_job():
             str(x_owner_name),
             str(x_acct_name),
             x_credit_score,
-            x_debtit_score,
+            x_debt_score,
             x__credor_pool,
             x__debtor_pool,
             x__fund_give,
@@ -548,8 +548,8 @@ def test_insert_job_planacct_CreatesTableRowsFor_planacct_job():
             x__fund_agenda_take,
             x__fund_agenda_ratio_give,
             x__fund_agenda_ratio_take,
-            x__inallocable_debtit_score,
-            x__irrational_debtit_score,
+            x__inallocable_debt_score,
+            x__irrational_debt_score,
         )
         expected_data = [expected_row1]
         assert rows == expected_data

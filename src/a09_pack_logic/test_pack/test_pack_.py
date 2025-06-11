@@ -6,7 +6,7 @@ from src.a05_concept_logic.concept import get_default_vow_label
 from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
     credit_score_str,
-    debtit_score_str,
+    debt_score_str,
     plan_acctunit_str,
 )
 from src.a06_plan_logic.plan import planunit_shop
@@ -481,10 +481,10 @@ def test_PackUnit_add_planatom_CorrectlySets_PlanUnit_acctunits():
     bob_str = "Bob"
     bob_packunit = packunit_shop(bob_str)
     bob_credit_score = 55
-    bob_debtit_score = 66
-    bob_acctunit = acctunit_shop(bob_str, bob_credit_score, bob_debtit_score)
+    bob_debt_score = 66
+    bob_acctunit = acctunit_shop(bob_str, bob_credit_score, bob_debt_score)
     cw_str = credit_score_str()
-    dw_str = debtit_score_str()
+    dw_str = debt_score_str()
     print(f"{bob_acctunit.get_dict()=}")
     bob_required_dict = {acct_name_str(): bob_acctunit.get_dict().get(acct_name_str())}
     bob_optional_dict = {cw_str: bob_acctunit.get_dict().get(cw_str)}
@@ -525,9 +525,9 @@ def test_PackUnit_get_edited_plan_ReturnsObj_PlanUnit_insert_acct():
     x_planatom = planatom_shop(dimen, INSERT_str())
     x_planatom.set_jkey(acct_name_str(), zia_str)
     x_credit_score = 55
-    x_debtit_score = 66
+    x_debt_score = 66
     x_planatom.set_jvalue("credit_score", x_credit_score)
-    x_planatom.set_jvalue("debtit_score", x_debtit_score)
+    x_planatom.set_jvalue("debt_score", x_debt_score)
     sue_packunit._plandelta.set_planatom(x_planatom)
     print(f"{sue_packunit._plandelta.planatoms.keys()=}")
 
@@ -540,7 +540,7 @@ def test_PackUnit_get_edited_plan_ReturnsObj_PlanUnit_insert_acct():
     assert yao_acctunit is not None
     assert zia_acctunit is not None
     assert zia_acctunit.credit_score == x_credit_score
-    assert zia_acctunit.debtit_score == x_debtit_score
+    assert zia_acctunit.debt_score == x_debt_score
 
 
 def test_PackUnit_get_edited_plan_RaisesErrorWhenpackAttrsAndPlanAttrsAreNotTheSame():
@@ -564,10 +564,10 @@ def test_PackUnit_is_empty_ReturnsObj():
     bob_str = "Bob"
     bob_packunit = packunit_shop(bob_str)
     bob_credit_score = 55
-    bob_debtit_score = 66
-    bob_acctunit = acctunit_shop(bob_str, bob_credit_score, bob_debtit_score)
+    bob_debt_score = 66
+    bob_acctunit = acctunit_shop(bob_str, bob_credit_score, bob_debt_score)
     cw_str = credit_score_str()
-    dw_str = debtit_score_str()
+    dw_str = debt_score_str()
     print(f"{bob_acctunit.get_dict()=}")
     bob_required_dict = {acct_name_str(): bob_acctunit.get_dict().get(acct_name_str())}
     bob_optional_dict = {cw_str: bob_acctunit.get_dict().get(cw_str)}

@@ -253,7 +253,7 @@ def get_acct_agenda_net_ledger(
 
 
 def get_credit_ledger(x_plan: PlanUnit) -> dict[AcctUnit, RespectNum]:
-    credit_ledger, debtit_ledger = x_plan.get_credit_ledger_debtit_ledger()
+    credit_ledger, debt_ledger = x_plan.get_credit_ledger_debt_ledger()
     return credit_ledger
 
 

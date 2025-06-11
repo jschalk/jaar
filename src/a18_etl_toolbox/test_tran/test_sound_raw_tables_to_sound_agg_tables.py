@@ -4,7 +4,7 @@ from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_s
 from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
     credit_score_str,
-    debtit_score_str,
+    debt_score_str,
     plan_acctunit_str,
 )
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
@@ -263,7 +263,7 @@ VALUES
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_score_str()}
-, {debtit_score_str()}
+, {debt_score_str()}
 , "error_message"
 )"""
         values_clause = f"""
@@ -439,7 +439,7 @@ VALUES
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_score_str()}
-, {debtit_score_str()}
+, {debt_score_str()}
 , "error_message"
 )"""
         values_clause = f"""
