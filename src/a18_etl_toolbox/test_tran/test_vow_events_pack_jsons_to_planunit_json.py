@@ -3,7 +3,7 @@ from src.a00_data_toolbox.file_toolbox import create_path, open_file, save_file
 from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
     credit_score_str,
-    debtit_score_str,
+    debt_score_str,
     plan_acctunit_str,
 )
 from src.a06_plan_logic.plan import (
@@ -46,13 +46,13 @@ def test_etl_event_pack_json_to_event_inherited_planunits_SetsFiles_plan_json(
     a23_bob_e7_pack = packunit_shop(bob_inx, None, a23_str, event_int=event7)
     planacct_dimen = plan_acctunit_str()
     bob_jkeys = {acct_name_str(): bob_inx}
-    bob_jvalues = {credit_score_str(): credit77, debtit_score_str(): None}
+    bob_jvalues = {credit_score_str(): credit77, debt_score_str(): None}
     yao_jkeys = {acct_name_str(): yao_inx}
-    yao_jvalues = {credit_score_str(): credit44, debtit_score_str(): None}
+    yao_jvalues = {credit_score_str(): credit44, debt_score_str(): None}
     a23_bob_e3_pack.add_planatom(planacct_dimen, INSERT_str(), bob_jkeys, bob_jvalues)
     a23_bob_e3_pack.add_planatom(planacct_dimen, INSERT_str(), yao_jkeys, yao_jvalues)
     sue_jkeys = {acct_name_str(): sue_inx}
-    sue_jvalues = {credit_score_str(): credit88, debtit_score_str(): None}
+    sue_jvalues = {credit_score_str(): credit88, debt_score_str(): None}
     a23_bob_e7_pack.add_planatom(planacct_dimen, INSERT_str(), bob_jkeys, bob_jvalues)
     a23_bob_e7_pack.add_planatom(planacct_dimen, INSERT_str(), sue_jkeys, sue_jvalues)
     e3_all_pack_path = create_event_all_pack_path(

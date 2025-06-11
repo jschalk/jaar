@@ -13,7 +13,7 @@
     },
     "jvalues": {
       "credit_vote": {},
-      "debtit_vote": {}
+      "debt_vote": {}
     }
   },
   "plan_acctunit": {
@@ -29,7 +29,7 @@
     },
     "jvalues": {
       "credit_score": {},
-      "debtit_score": {}
+      "debt_score": {}
     }
   },
   "plan_concept_awardlink": {

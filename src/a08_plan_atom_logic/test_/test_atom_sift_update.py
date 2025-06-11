@@ -8,8 +8,8 @@ from src.a06_plan_logic._test_util.a06_str import (
     close_str,
     concept_label_str,
     concept_way_str,
-    debtit_score_str,
-    debtit_vote_str,
+    debt_score_str,
+    debt_vote_str,
     denom_str,
     fcontext_str,
     fopen_str,
@@ -108,13 +108,13 @@ def test_sift_atom_ReturnsObj_PlanAtom_UPDATE_planunit():
 def test_sift_atom_ReturnsObj_PlanAtom_UPDATE_plan_acctunit():
     # ESTABLISH
     zia_str = "Zia"
-    zia_debtit_score = 51
+    zia_debt_score = 51
     sue_plan = planunit_shop("Sue")
     sue_plan.add_acctunit(zia_str)
 
     zia_atom = planatom_shop(plan_acctunit_str(), INSERT_str())
     zia_atom.set_arg(acct_name_str(), zia_str)
-    zia_atom.set_arg(debtit_score_str(), zia_debtit_score)
+    zia_atom.set_arg(debt_score_str(), zia_debt_score)
 
     # WHEN
     new_zia_planatom = sift_planatom(sue_plan, zia_atom)
@@ -124,14 +124,14 @@ def test_sift_atom_ReturnsObj_PlanAtom_UPDATE_plan_acctunit():
     assert new_zia_planatom.crud_str == UPDATE_str()
     assert new_zia_planatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_planatom.get_jvalues_dict()
-    assert zia_jvalues == {debtit_score_str(): 51}
+    assert zia_jvalues == {debt_score_str(): 51}
 
 
 def test_sift_atom_ReturnsObj_PlanAtom_UPDATE_plan_acct_membership():
     # ESTABLISH
     zia_str = "Zia"
     run_str = ";run"
-    zia_run_debtit_vote = 76
+    zia_run_debt_vote = 76
     sue_plan = planunit_shop("Sue")
     sue_plan.add_acctunit(zia_str)
     sue_plan.get_acct(zia_str).add_membership(run_str)
@@ -139,7 +139,7 @@ def test_sift_atom_ReturnsObj_PlanAtom_UPDATE_plan_acct_membership():
     zia_atom = planatom_shop(plan_acct_membership_str(), INSERT_str())
     zia_atom.set_arg(acct_name_str(), zia_str)
     zia_atom.set_arg(group_title_str(), run_str)
-    zia_atom.set_arg(debtit_vote_str(), zia_run_debtit_vote)
+    zia_atom.set_arg(debt_vote_str(), zia_run_debt_vote)
 
     # WHEN
     new_zia_planatom = sift_planatom(sue_plan, zia_atom)
@@ -149,7 +149,7 @@ def test_sift_atom_ReturnsObj_PlanAtom_UPDATE_plan_acct_membership():
     assert new_zia_planatom.crud_str == UPDATE_str()
     assert new_zia_planatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_planatom.get_jvalues_dict()
-    assert zia_jvalues == {debtit_vote_str(): zia_run_debtit_vote}
+    assert zia_jvalues == {debt_vote_str(): zia_run_debt_vote}
 
 
 def test_sift_atom_ReturnsObj_PlanAtom_UPDATE_plan_conceptunit():

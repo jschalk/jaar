@@ -215,8 +215,8 @@ def add_plan_acctunit_insert_to_legible_list(
     for acctunit_atom in acctunit_dict.values():
         acct_name = acctunit_atom.get_value("acct_name")
         credit_score_value = acctunit_atom.get_value("credit_score")
-        debtit_score_value = acctunit_atom.get_value("debtit_score")
-        x_str = f"{acct_name} was added with {credit_score_value} score credit and {debtit_score_value} score debtit"
+        debt_score_value = acctunit_atom.get_value("debt_score")
+        x_str = f"{acct_name} was added with {credit_score_value} score credit and {debt_score_value} score debt"
         legible_list.append(x_str)
 
 
@@ -226,13 +226,13 @@ def add_plan_acctunit_update_to_legible_list(
     for acctunit_atom in acctunit_dict.values():
         acct_name = acctunit_atom.get_value("acct_name")
         credit_score_value = acctunit_atom.get_value("credit_score")
-        debtit_score_value = acctunit_atom.get_value("debtit_score")
-        if credit_score_value is not None and debtit_score_value is not None:
-            x_str = f"{acct_name} now has {credit_score_value} score credit and {debtit_score_value} score debtit."
+        debt_score_value = acctunit_atom.get_value("debt_score")
+        if credit_score_value is not None and debt_score_value is not None:
+            x_str = f"{acct_name} now has {credit_score_value} score credit and {debt_score_value} score debt."
         elif credit_score_value is not None:
             x_str = f"{acct_name} now has {credit_score_value} score credit."
-        elif debtit_score_value is not None:
-            x_str = f"{acct_name} now has {debtit_score_value} score debtit."
+        elif debt_score_value is not None:
+            x_str = f"{acct_name} now has {debt_score_value} score debt."
         legible_list.append(x_str)
 
 
@@ -253,8 +253,8 @@ def add_plan_acct_membership_insert_to_legible_list(
             group_title = acct_membership_atom.get_value("group_title")
             acct_name = acct_membership_atom.get_value("acct_name")
             credit_vote_value = acct_membership_atom.get_value("credit_vote")
-            debtit_vote_value = acct_membership_atom.get_value("debtit_vote")
-            x_str = f"Group '{group_title}' has new membership {acct_name} with credit_vote_value{credit_vote_value} and debtit_vote_value={debtit_vote_value}."
+            debt_vote_value = acct_membership_atom.get_value("debt_vote")
+            x_str = f"Group '{group_title}' has new membership {acct_name} with credit_vote_value{credit_vote_value} and debt_vote_value={debt_vote_value}."
             legible_list.append(x_str)
 
 
@@ -266,13 +266,13 @@ def add_plan_acct_membership_update_to_legible_list(
             group_title = acct_membership_atom.get_value("group_title")
             acct_name = acct_membership_atom.get_value("acct_name")
             credit_vote_value = acct_membership_atom.get_value("credit_vote")
-            debtit_vote_value = acct_membership_atom.get_value("debtit_vote")
-            if credit_vote_value is not None and debtit_vote_value is not None:
-                x_str = f"Group '{group_title}' membership {acct_name} has new credit_vote_value{credit_vote_value} and debtit_vote_value={debtit_vote_value}."
+            debt_vote_value = acct_membership_atom.get_value("debt_vote")
+            if credit_vote_value is not None and debt_vote_value is not None:
+                x_str = f"Group '{group_title}' membership {acct_name} has new credit_vote_value{credit_vote_value} and debt_vote_value={debt_vote_value}."
             elif credit_vote_value is not None:
                 x_str = f"Group '{group_title}' membership {acct_name} has new credit_vote_value{credit_vote_value}."
-            elif debtit_vote_value is not None:
-                x_str = f"Group '{group_title}' membership {acct_name} has new debtit_vote_value={debtit_vote_value}."
+            elif debt_vote_value is not None:
+                x_str = f"Group '{group_title}' membership {acct_name} has new debt_vote_value={debt_vote_value}."
             legible_list.append(x_str)
 
 

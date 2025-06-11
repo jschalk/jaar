@@ -28,8 +28,8 @@ def test_AtomRow_exists():
     assert x_atomrow.credit_score is None
     assert x_atomrow.credit_vote is None
     assert x_atomrow.credor_respect is None
-    assert x_atomrow.debtit_score is None
-    assert x_atomrow.debtit_vote is None
+    assert x_atomrow.debt_score is None
+    assert x_atomrow.debt_vote is None
     assert x_atomrow.debtor_respect is None
     assert x_atomrow.denom is None
     assert x_atomrow.pdivisor is None

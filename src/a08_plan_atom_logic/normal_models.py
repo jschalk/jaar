@@ -25,7 +25,7 @@ class AcctUnitTable(Base):
     uid = Column(Integer, primary_key=True)
     acct_name = Column(String)
     credit_score = Column(Float)
-    debtit_score = Column(Float)
+    debt_score = Column(Float)
 
 
 class MemberShipTable(Base):
@@ -34,7 +34,7 @@ class MemberShipTable(Base):
     group_title = Column(String)
     acct_name = Column(String)
     credit_vote = Column(Float)
-    debtit_vote = Column(Float)
+    debt_vote = Column(Float)
 
 
 class ConceptTable(Base):

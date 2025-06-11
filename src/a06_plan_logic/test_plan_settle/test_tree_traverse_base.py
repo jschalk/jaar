@@ -519,11 +519,11 @@ def test_PlanUnit_settle_plan_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     yao_plan = planunit_shop(yao_str)
     zia_str = "Zia"
     yao_credit_score = 3
-    yao_debtit_score = 2
+    yao_debt_score = 2
     zia_credit_score = 4
-    zia_debtit_score = 5
-    yao_plan.add_acctunit(yao_str, yao_credit_score, yao_debtit_score)
-    yao_plan.add_acctunit(zia_str, zia_credit_score, zia_debtit_score)
+    zia_debt_score = 5
+    yao_plan.add_acctunit(yao_str, yao_credit_score, yao_debt_score)
+    yao_plan.add_acctunit(zia_str, zia_credit_score, zia_debt_score)
     root_way = to_way(yao_plan.vow_label)
     x_conceptroot = yao_plan.get_concept_obj(root_way)
     x_conceptroot.set_awardlink(awardlink_shop(yao_str))
@@ -557,8 +557,8 @@ def test_PlanUnit_settle_plan_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     zia_membership = xio_groupunit.get_membership(zia_str)
     assert yao_membership.credit_vote == yao_credit_score
     assert zia_membership.credit_vote == zia_credit_score
-    assert yao_membership.debtit_vote == yao_debtit_score
-    assert zia_membership.debtit_vote == zia_debtit_score
+    assert yao_membership.debt_vote == yao_debt_score
+    assert zia_membership.debt_vote == zia_debt_score
 
 
 def test_PlanUnit_settle_plan_CreatesNewGroupUnitsWhenNeeded_Scenario1():

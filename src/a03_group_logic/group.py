@@ -21,7 +21,7 @@ class GroupCore:
 @dataclass
 class MemberShip(GroupCore):
     credit_vote: float = 1.0
-    debtit_vote: float = 1.0
+    debt_vote: float = 1.0
     # calculated fields
     _credor_pool: float = None
     _debtor_pool: float = None
@@ -37,15 +37,15 @@ class MemberShip(GroupCore):
         if x_credit_vote is not None:
             self.credit_vote = x_credit_vote
 
-    def set_debtit_vote(self, x_debtit_vote: float):
-        if x_debtit_vote is not None:
-            self.debtit_vote = x_debtit_vote
+    def set_debt_vote(self, x_debt_vote: float):
+        if x_debt_vote is not None:
+            self.debt_vote = x_debt_vote
 
     def get_dict(self) -> dict[str, str]:
         return {
             "group_title": self.group_title,
             "credit_vote": self.credit_vote,
-            "debtit_vote": self.debtit_vote,
+            "debt_vote": self.debt_vote,
         }
 
     def clear_fund_give_take(self):
@@ -60,13 +60,13 @@ class MemberShip(GroupCore):
 def membership_shop(
     group_title: GroupTitle,
     credit_vote: float = None,
-    debtit_vote: float = None,
+    debt_vote: float = None,
     acct_name: AcctName = None,
 ) -> MemberShip:
     return MemberShip(
         group_title=group_title,
         credit_vote=get_1_if_None(credit_vote),
-        debtit_vote=get_1_if_None(debtit_vote),
+        debt_vote=get_1_if_None(debt_vote),
         _credor_pool=0,
         _debtor_pool=0,
         acct_name=acct_name,
@@ -77,7 +77,7 @@ def membership_get_from_dict(x_dict: dict, x_acct_name: AcctName) -> MemberShip:
     return membership_shop(
         group_title=x_dict.get("group_title"),
         credit_vote=x_dict.get("credit_vote"),
-        debtit_vote=x_dict.get("debtit_vote"),
+        debt_vote=x_dict.get("debt_vote"),
         acct_name=x_acct_name,
     )
 
@@ -230,19 +230,19 @@ class GroupUnit(GroupCore):
 
     def _set_membership_fund_give_fund_take(self):
         credit_ledger = {}
-        debtit_ledger = {}
+        debt_ledger = {}
         for x_acct_name, x_membership in self._memberships.items():
             credit_ledger[x_acct_name] = x_membership.credit_vote
-            debtit_ledger[x_acct_name] = x_membership.debtit_vote
+            debt_ledger[x_acct_name] = x_membership.debt_vote
         fund_give_allot = allot_scale(credit_ledger, self._fund_give, self.fund_iota)
-        fund_take_allot = allot_scale(debtit_ledger, self._fund_take, self.fund_iota)
+        fund_take_allot = allot_scale(debt_ledger, self._fund_take, self.fund_iota)
         for acct_name, x_membership in self._memberships.items():
             x_membership._fund_give = fund_give_allot.get(acct_name)
             x_membership._fund_take = fund_take_allot.get(acct_name)
         x_a_give = self._fund_agenda_give
         x_a_take = self._fund_agenda_take
         fund_agenda_give_allot = allot_scale(credit_ledger, x_a_give, self.fund_iota)
-        fund_agenda_take_allot = allot_scale(debtit_ledger, x_a_take, self.fund_iota)
+        fund_agenda_take_allot = allot_scale(debt_ledger, x_a_take, self.fund_iota)
         for acct_name, x_membership in self._memberships.items():
             x_membership._fund_agenda_give = fund_agenda_give_allot.get(acct_name)
             x_membership._fund_agenda_take = fund_agenda_take_allot.get(acct_name)

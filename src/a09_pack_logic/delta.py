@@ -176,8 +176,8 @@ class PlanDelta:
             x_planatom.set_jkey("acct_name", insert_acctunit.acct_name)
             if insert_acctunit.credit_score is not None:
                 x_planatom.set_jvalue("credit_score", insert_acctunit.credit_score)
-            if insert_acctunit.debtit_score is not None:
-                x_planatom.set_jvalue("debtit_score", insert_acctunit.debtit_score)
+            if insert_acctunit.debt_score is not None:
+                x_planatom.set_jvalue("debt_score", insert_acctunit.debt_score)
             self.set_planatom(x_planatom)
             all_group_titles = set(insert_acctunit._memberships.keys())
             self.add_planatom_memberships_inserts(
@@ -196,8 +196,8 @@ class PlanDelta:
                 x_planatom.set_jkey("acct_name", after_acctunit.acct_name)
                 if before_acctunit.credit_score != after_acctunit.credit_score:
                     x_planatom.set_jvalue("credit_score", after_acctunit.credit_score)
-                if before_acctunit.debtit_score != after_acctunit.debtit_score:
-                    x_planatom.set_jvalue("debtit_score", after_acctunit.debtit_score)
+                if before_acctunit.debt_score != after_acctunit.debt_score:
+                    x_planatom.set_jvalue("debt_score", after_acctunit.debt_score)
                 self.set_planatom(x_planatom)
             self.add_planatom_acctunit_update_memberships(
                 after_acctunit=after_acctunit, before_acctunit=before_acctunit
@@ -274,8 +274,8 @@ class PlanDelta:
             x_planatom.set_jkey("group_title", after_membership.group_title)
             if after_membership.credit_vote is not None:
                 x_planatom.set_jvalue("credit_vote", after_membership.credit_vote)
-            if after_membership.debtit_vote is not None:
-                x_planatom.set_jvalue("debtit_vote", after_membership.debtit_vote)
+            if after_membership.debt_vote is not None:
+                x_planatom.set_jvalue("debt_vote", after_membership.debt_vote)
             self.set_planatom(x_planatom)
 
     def add_planatom_membership_update(
@@ -289,8 +289,8 @@ class PlanDelta:
         x_planatom.set_jkey("group_title", after_membership.group_title)
         if after_membership.credit_vote != before_membership.credit_vote:
             x_planatom.set_jvalue("credit_vote", after_membership.credit_vote)
-        if after_membership.debtit_vote != before_membership.debtit_vote:
-            x_planatom.set_jvalue("debtit_vote", after_membership.debtit_vote)
+        if after_membership.debt_vote != before_membership.debt_vote:
+            x_planatom.set_jvalue("debt_vote", after_membership.debt_vote)
         self.set_planatom(x_planatom)
 
     def add_planatom_memberships_delete(

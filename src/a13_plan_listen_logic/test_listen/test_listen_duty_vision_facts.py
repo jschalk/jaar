@@ -36,9 +36,9 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnit_v1(env_dir_setup_cleanup
     yao_duty = planunit_shop(yao_str, a23_str)
     zia_str = "Zia"
     zia_credit_score = 47
-    zia_debtit_score = 41
+    zia_debt_score = 41
     zia_pool = 87
-    yao_duty.add_acctunit(zia_str, zia_credit_score, zia_debtit_score)
+    yao_duty.add_acctunit(zia_str, zia_credit_score, zia_debt_score)
     yao_duty.set_acct_respect(zia_pool)
     sue_texas_hubunit = get_texas_hubunit()
     sue_texas_hubunit.save_duty_plan(yao_duty)
@@ -67,10 +67,10 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnitWithDifferentChore(
     yao_str = "Yao"
     yao_duty = planunit_shop(yao_str, a23_str)
     yao_credit_score = 47
-    yao_debtit_score = 41
+    yao_debt_score = 41
     yao_pool = 87
     zia_str = "Zia"
-    yao_duty.add_acctunit(zia_str, yao_credit_score, yao_debtit_score)
+    yao_duty.add_acctunit(zia_str, yao_credit_score, yao_debt_score)
     yao_duty.set_acct_respect(yao_pool)
     sue_texas_hubunit = get_texas_hubunit()
     sue_texas_hubunit.save_duty_plan(yao_duty)
@@ -228,16 +228,16 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfstateedFromOwnersSpeakerDirPl
     assert yao_duty.get_fact(eat_way()) is None
     zia_acctunit = new_yao_vision1.get_acct(zia_str)
     bob_acctunit = new_yao_vision1.get_acct(bob_str)
-    assert zia_acctunit.debtit_score < bob_acctunit.debtit_score
+    assert zia_acctunit.debt_score < bob_acctunit.debt_score
     assert bob_vision.get_fact(eat_way()).fstate == hungry_way()
     assert zia_vision.get_fact(eat_way()).fstate == eat_way()
     assert new_yao_vision1.get_fact(eat_way()).fstate == hungry_way()
 
     # WHEN
-    yao_zia_debtit_score = 15
-    yao_bob_debtit_score = 5
-    yao_duty.add_acctunit(zia_str, None, yao_zia_debtit_score)
-    yao_duty.add_acctunit(bob_str, None, yao_bob_debtit_score)
+    yao_zia_debt_score = 15
+    yao_bob_debt_score = 5
+    yao_duty.add_acctunit(zia_str, None, yao_zia_debt_score)
+    yao_duty.add_acctunit(bob_str, None, yao_bob_debt_score)
     yao_duty.set_acct_respect(100)
     new_yao_vision2 = create_listen_basis(yao_duty)
     listen_to_agendas_duty_vision(new_yao_vision2, sue_texas_hubunit)
@@ -246,7 +246,7 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfstateedFromOwnersSpeakerDirPl
     # THEN
     zia_acctunit = new_yao_vision2.get_acct(zia_str)
     bob_acctunit = new_yao_vision2.get_acct(bob_str)
-    assert zia_acctunit.debtit_score > bob_acctunit.debtit_score
+    assert zia_acctunit.debt_score > bob_acctunit.debt_score
     assert bob_vision.get_fact(eat_way()).fstate == hungry_way()
     assert zia_vision.get_fact(eat_way()).fstate == eat_way()
     assert new_yao_vision2.get_fact(eat_way()).fstate == eat_way()

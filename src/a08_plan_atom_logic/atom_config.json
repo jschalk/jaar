@@ -26,7 +26,7 @@
                 "column_order": 3,
                 "sqlite_datatype": "REAL"
             },
-            "debtit_vote": {
+            "debt_vote": {
                 "class_type": "float",
                 "column_order": 2,
                 "sqlite_datatype": "REAL"
@@ -59,7 +59,7 @@
                 "column_order": 2,
                 "sqlite_datatype": "REAL"
             },
-            "debtit_score": {
+            "debt_score": {
                 "class_type": "float",
                 "column_order": 1,
                 "sqlite_datatype": "REAL"

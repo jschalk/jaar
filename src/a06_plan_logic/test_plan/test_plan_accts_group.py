@@ -92,11 +92,11 @@ def test_PlanUnit_create_symmetry_groupunit_ReturnsObj():
     yao_plan = planunit_shop(yao_str)
     zia_str = "Zia"
     yao_credit_vote = 3
-    yao_debtit_vote = 2
+    yao_debt_vote = 2
     zia_credit_vote = 4
-    zia_debtit_vote = 5
-    yao_plan.add_acctunit(yao_str, yao_credit_vote, yao_debtit_vote)
-    yao_plan.add_acctunit(zia_str, zia_credit_vote, zia_debtit_vote)
+    zia_debt_vote = 5
+    yao_plan.add_acctunit(yao_str, yao_credit_vote, yao_debt_vote)
+    yao_plan.add_acctunit(zia_str, zia_credit_vote, zia_debt_vote)
 
     # WHEN
     xio_str = "Xio"
@@ -111,5 +111,5 @@ def test_PlanUnit_create_symmetry_groupunit_ReturnsObj():
     zia_groupunit = xio_groupunit.get_membership(zia_str)
     assert yao_groupunit.credit_vote == yao_credit_vote
     assert zia_groupunit.credit_vote == zia_credit_vote
-    assert yao_groupunit.debtit_vote == yao_debtit_vote
-    assert zia_groupunit.debtit_vote == zia_debtit_vote
+    assert yao_groupunit.debt_vote == yao_debt_vote
+    assert zia_groupunit.debt_vote == zia_debt_vote

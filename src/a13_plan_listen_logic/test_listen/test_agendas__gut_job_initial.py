@@ -40,16 +40,16 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlanWhenNo_labo
     yao_gut = planunit_shop(yao_str, a23_str)
     zia_str = "Zia"
     zia_credit_score = 47
-    zia_debtit_score = 41
+    zia_debt_score = 41
     zia_pool = 87
-    yao_gut.add_acctunit(zia_str, zia_credit_score, zia_debtit_score)
+    yao_gut.add_acctunit(zia_str, zia_credit_score, zia_debt_score)
     yao_gut.set_acct_respect(zia_pool)
     save_gut_file(vow_mstr_dir, yao_gut)
 
     zia_gut = planunit_shop(zia_str, a23_str)
     zia_gut.set_concept(conceptunit_shop(clean_str(), task=True), casa_way())
     zia_gut.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
-    zia_gut.add_acctunit(yao_str, debtit_score=12)
+    zia_gut.add_acctunit(yao_str, debt_score=12)
     save_gut_file(vow_mstr_dir, zia_gut)
 
     new_yao_job = create_listen_basis(yao_gut)
@@ -73,16 +73,16 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlan(
     yao_gut = planunit_shop(yao_str, a23_str)
     zia_str = "Zia"
     zia_credit_score = 47
-    zia_debtit_score = 41
+    zia_debt_score = 41
     zia_pool = 87
-    yao_gut.add_acctunit(zia_str, zia_credit_score, zia_debtit_score)
+    yao_gut.add_acctunit(zia_str, zia_credit_score, zia_debt_score)
     yao_gut.set_acct_respect(zia_pool)
     a23_str = "accord23"
     save_gut_file(vow_mstr_dir, yao_gut)
     zia_gut = planunit_shop(zia_str, a23_str)
     zia_gut.set_concept(conceptunit_shop(clean_str(), task=True), casa_way())
     zia_gut.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
-    zia_gut.add_acctunit(yao_str, debtit_score=12)
+    zia_gut.add_acctunit(yao_str, debt_score=12)
     clean_conceptunit = zia_gut.get_concept_obj(clean_way())
     cook_conceptunit = zia_gut.get_concept_obj(cook_way())
     clean_conceptunit.laborunit.set_laborlink(yao_str)
@@ -99,7 +99,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlan(
     assert len(new_yao_job.get_agenda_dict()) == 2
 
 
-def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlanWithDetailsDecidedBy_debtit_score(
+def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlanWithDetailsDecidedBy_debt_score(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -138,13 +138,13 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlanWithDetails
     new_cook_concept = new_yao_gut1.get_concept_obj(cook_way())
     zia_acctunit = new_yao_gut1.get_acct(zia_str)
     bob_acctunit = new_yao_gut1.get_acct(bob_str)
-    assert zia_acctunit.debtit_score < bob_acctunit.debtit_score
+    assert zia_acctunit.debt_score < bob_acctunit.debt_score
     assert new_cook_concept.get_reasonunit(eat_way()) is None
 
-    yao_zia_debtit_score = 15
-    yao_bob_debtit_score = 5
-    yao_gut.add_acctunit(zia_str, None, yao_zia_debtit_score)
-    yao_gut.add_acctunit(bob_str, None, yao_bob_debtit_score)
+    yao_zia_debt_score = 15
+    yao_bob_debt_score = 5
+    yao_gut.add_acctunit(zia_str, None, yao_zia_debt_score)
+    yao_gut.add_acctunit(bob_str, None, yao_bob_debt_score)
     yao_gut.set_acct_respect(100)
     new_yao_gut2 = create_listen_basis(yao_gut)
     assert new_yao_gut2.concept_exists(cook_way()) is False
@@ -157,7 +157,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlanWithDetails
     new_cook_concept = new_yao_gut2.get_concept_obj(cook_way())
     zia_acctunit = new_yao_gut2.get_acct(zia_str)
     bob_acctunit = new_yao_gut2.get_acct(bob_str)
-    assert zia_acctunit.debtit_score > bob_acctunit.debtit_score
+    assert zia_acctunit.debt_score > bob_acctunit.debt_score
     zia_eat_reasonunit = zia_cook_conceptunit.get_reasonunit(eat_way())
     assert new_cook_concept.get_reasonunit(eat_way()) == zia_eat_reasonunit
 
@@ -172,12 +172,12 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalPlan(
     yao_gut = planunit_shop(yao_str, a23_str)
     zia_str = "Zia"
     zia_credit_score = 47
-    zia_debtit_score = 41
+    zia_debt_score = 41
     sue_str = "Sue"
     sue_credit_score = 57
-    sue_debtit_score = 51
-    yao_gut.add_acctunit(zia_str, zia_credit_score, zia_debtit_score)
-    yao_gut.add_acctunit(sue_str, sue_credit_score, sue_debtit_score)
+    sue_debt_score = 51
+    yao_gut.add_acctunit(zia_str, zia_credit_score, zia_debt_score)
+    yao_gut.add_acctunit(sue_str, sue_credit_score, sue_debt_score)
     yao_pool = 92
     yao_gut.set_acct_respect(yao_pool)
     a23_str = "accord23"
@@ -187,7 +187,7 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalPlan(
     zia_gut = planunit_shop(zia_str, a23_str)
     zia_gut.set_concept(conceptunit_shop(clean_str(), task=True), casa_way())
     zia_gut.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
-    zia_gut.add_acctunit(yao_str, debtit_score=12)
+    zia_gut.add_acctunit(yao_str, debt_score=12)
     clean_conceptunit = zia_gut.get_concept_obj(clean_way())
     cook_conceptunit = zia_gut.get_concept_obj(cook_way())
     clean_conceptunit.laborunit.set_laborlink(yao_str)
@@ -196,7 +196,7 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalPlan(
 
     sue_gut = planunit_shop(sue_str, a23_str)
     sue_gut.set_max_tree_traverse(5)
-    zia_gut.add_acctunit(yao_str, debtit_score=12)
+    zia_gut.add_acctunit(yao_str, debt_score=12)
     vacuum_str = "vacuum"
     vacuum_way = sue_gut.make_l1_way(vacuum_str)
     sue_gut.set_l1_concept(conceptunit_shop(vacuum_str, task=True))
@@ -234,10 +234,10 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalPlan(
     assert len(new_yao_gut.get_agenda_dict()) == 2
     zia_acctunit = new_yao_gut.get_acct(zia_str)
     sue_acctunit = new_yao_gut.get_acct(sue_str)
-    print(f"{sue_acctunit.debtit_score=}")
-    print(f"{sue_acctunit._irrational_debtit_score=}")
-    assert zia_acctunit._irrational_debtit_score == 0
-    assert sue_acctunit._irrational_debtit_score == 51
+    print(f"{sue_acctunit.debt_score=}")
+    print(f"{sue_acctunit._irrational_debt_score=}")
+    assert zia_acctunit._irrational_debt_score == 0
+    assert sue_acctunit._irrational_debt_score == 51
 
 
 def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorPlan(
@@ -255,10 +255,10 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorPlan(
     sue_str = "Sue"
     zia_credit_score = 47
     sue_credit_score = 57
-    zia_debtit_score = 41
-    sue_debtit_score = 51
-    yao_gut.add_acctunit(zia_str, zia_credit_score, zia_debtit_score)
-    yao_gut.add_acctunit(sue_str, sue_credit_score, sue_debtit_score)
+    zia_debt_score = 41
+    sue_debt_score = 51
+    yao_gut.add_acctunit(zia_str, zia_credit_score, zia_debt_score)
+    yao_gut.add_acctunit(sue_str, sue_credit_score, sue_debt_score)
     yao_pool = 92
     yao_gut.set_acct_respect(yao_pool)
     save_gut_file(vow_mstr_dir, yao_gut)
@@ -266,7 +266,7 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorPlan(
     zia_gut = planunit_shop(zia_str, a23_str)
     zia_gut.set_concept(conceptunit_shop(clean_str(), task=True), casa_way())
     zia_gut.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
-    zia_gut.add_acctunit(yao_str, debtit_score=12)
+    zia_gut.add_acctunit(yao_str, debt_score=12)
     clean_conceptunit = zia_gut.get_concept_obj(clean_way())
     cook_conceptunit = zia_gut.get_concept_obj(cook_way())
     clean_conceptunit.laborunit.set_laborlink(yao_str)
@@ -282,7 +282,7 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorPlan(
     assert len(new_yao_gut.get_agenda_dict()) == 2
     zia_acctunit = new_yao_gut.get_acct(zia_str)
     sue_acctunit = new_yao_gut.get_acct(sue_str)
-    print(f"{sue_acctunit.debtit_score=}")
-    print(f"{sue_acctunit._inallocable_debtit_score=}")
-    assert zia_acctunit._inallocable_debtit_score == 0
-    assert sue_acctunit._inallocable_debtit_score == 51
+    print(f"{sue_acctunit.debt_score=}")
+    print(f"{sue_acctunit._inallocable_debt_score=}")
+    assert zia_acctunit._inallocable_debt_score == 0
+    assert sue_acctunit._inallocable_debt_score == 51

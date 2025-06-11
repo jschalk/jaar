@@ -6,7 +6,7 @@
         "credit_vote": {
             "otx_key": false
         },
-        "debtit_vote": {
+        "debt_vote": {
             "otx_key": false
         },
         "event_int": {

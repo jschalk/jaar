@@ -12,7 +12,7 @@ from src.a06_plan_logic._test_util.a06_str import (
     attributes_str,
     credit_score_str,
     credor_respect_str,
-    debtit_score_str,
+    debt_score_str,
     debtor_respect_str,
     dimen_str,
     dimens_str,
@@ -54,7 +54,7 @@ def test_str_functions_ReturnsObj():
     assert acct_pool_str() == "acct_pool"
     assert credit_score_str() == "credit_score"
     assert credor_respect_str() == "credor_respect"
-    assert debtit_score_str() == "debtit_score"
+    assert debt_score_str() == "debt_score"
     assert debtor_respect_str() == "debtor_respect"
     assert planunit_str() == "planunit"
     assert plan_acct_membership_str() == "plan_acct_membership"

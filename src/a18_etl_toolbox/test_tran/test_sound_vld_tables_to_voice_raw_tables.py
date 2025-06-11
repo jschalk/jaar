@@ -4,7 +4,7 @@ from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_s
 from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
     credit_score_str,
-    debtit_score_str,
+    debt_score_str,
     plan_acctunit_str,
 )
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
@@ -29,8 +29,8 @@ def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_PopulatesTable_Scenario0()
     event7 = 7
     x44_credit = 44
     x55_credit = 55
-    x22_debtit = 22
-    x66_debtit = 66
+    x22_debt = 22
+    x66_debt = 66
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -46,14 +46,14 @@ def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_PopulatesTable_Scenario0()
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_score_str()}
-, {debtit_score_str()}
+, {debt_score_str()}
 )"""
         values_clause = f"""
 VALUES
-  ({event1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_inx}', {x44_credit}, {x22_debtit})
-, ({event2}, '{yao_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debtit})
-, ({event5}, '{sue_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debtit})
-, ({event7}, '{bob_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x66_debtit})
+  ({event1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_inx}', {x44_credit}, {x22_debt})
+, ({event2}, '{yao_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
+, ({event5}, '{sue_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
+, ({event7}, '{bob_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x66_debt})
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -73,7 +73,7 @@ VALUES
 , {owner_name_str()}_otx
 , {acct_name_str()}_otx
 , {credit_score_str()}
-, {debtit_score_str()}
+, {debt_score_str()}
 FROM {planawar_v_raw_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -100,8 +100,8 @@ def test_etl_sound_vld_tables_to_voice_raw_tables_Scenario0_AddRowsToTable():
     event7 = 7
     x44_credit = 44
     x55_credit = 55
-    x22_debtit = 22
-    x66_debtit = 66
+    x22_debt = 22
+    x66_debt = 66
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -115,14 +115,14 @@ def test_etl_sound_vld_tables_to_voice_raw_tables_Scenario0_AddRowsToTable():
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_score_str()}
-, {debtit_score_str()}
+, {debt_score_str()}
 )"""
         values_clause = f"""
 VALUES
-  ({event1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_inx}', {x44_credit}, {x22_debtit})
-, ({event2}, '{yao_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debtit})
-, ({event5}, '{sue_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debtit})
-, ({event7}, '{bob_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x66_debtit})
+  ({event1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_inx}', {x44_credit}, {x22_debt})
+, ({event2}, '{yao_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
+, ({event5}, '{sue_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
+, ({event7}, '{bob_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x66_debt})
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -141,7 +141,7 @@ VALUES
 , {owner_name_str()}_otx
 , {acct_name_str()}_otx
 , {credit_score_str()}
-, {debtit_score_str()}
+, {debt_score_str()}
 FROM {planacct_v_raw_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -167,8 +167,8 @@ def test_etl_sound_vld_tables_to_voice_raw_tables_Scenario1_Populates_inx_Column
     event7 = 7
     x44_credit = 44
     x55_credit = 55
-    x22_debtit = 22
-    x66_debtit = 66
+    x22_debt = 22
+    x66_debt = 66
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -182,14 +182,14 @@ def test_etl_sound_vld_tables_to_voice_raw_tables_Scenario1_Populates_inx_Column
 , {owner_name_str()}
 , {acct_name_str()}
 , {credit_score_str()}
-, {debtit_score_str()}
+, {debt_score_str()}
 )"""
         values_clause = f"""
 VALUES
-  ({event1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_str}', {x44_credit}, {x22_debtit})
-, ({event2}, '{yao_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debtit})
-, ({event5}, '{sue_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debtit})
-, ({event7}, '{bob_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x66_debtit})
+  ({event1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_str}', {x44_credit}, {x22_debt})
+, ({event2}, '{yao_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
+, ({event5}, '{sue_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x22_debt})
+, ({event7}, '{bob_str}', '{a23_str}','{bob_str}', '{bob_str}', {x55_credit}, {x66_debt})
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -208,7 +208,7 @@ VALUES
 , {owner_name_str()}_inx
 , {acct_name_str()}_inx
 , {credit_score_str()}
-, {debtit_score_str()}
+, {debt_score_str()}
 FROM {planacct_v_raw_put_tablename}
 """
         cursor.execute(select_sqlstr)

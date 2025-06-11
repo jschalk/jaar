@@ -9,7 +9,7 @@ from src.a17_idea_logic.idea import (
 
 def test_extract_csv_headers_ReturnsObj():
     # ESTABLISH
-    x_csv = """vow_label,owner_name,acct_name,credit_score,debtit_score
+    x_csv = """vow_label,owner_name,acct_name,credit_score,debt_score
 accord56,Sue,Bob,13,29
 accord56,Sue,Sue,11,23
 accord56,Sue,Yao,41,37
@@ -20,19 +20,19 @@ accord56,Sue,Yao,41,37
 
     # THEN
     credit_score_str = "credit_score"
-    debtit_score_str = "debtit_score"
+    debt_score_str = "debt_score"
     assert x_headers == [
         vow_label_str(),
         owner_name_str(),
         acct_name_str(),
         credit_score_str,
-        debtit_score_str,
+        debt_score_str,
     ]
 
 
 def test_extract_csv_headers_RemovesHeaders_csv():
     # ESTABLISH
-    x_csv = """vow_label,owner_name,acct_name,credit_score,debtit_score
+    x_csv = """vow_label,owner_name,acct_name,credit_score,debt_score
 accord56,Sue,Bob,13,29
 accord56,Sue,Sue,11,23
 accord56,Sue,Yao,41,37
