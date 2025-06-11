@@ -51,5 +51,3 @@ def test_insert_tranunit_accts_net_PopulatesDatabase():
             (bob_str, t55_bob_amount),
             (yao_str, t55_yao_amount + t66_yao_amount + t77_yao_amount),
         ]
-
-    assert 1 == 2
