@@ -491,3 +491,109 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario3_CreatesFiles(
         assert os_path_exists(a23_sue_job_path)
         assert os_path_exists(sue37_mandate_path)
         assert count_dirs_files(fizz_world.worlds_dir) == 43
+
+
+def test_WorldUnit_mud_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH:
+    fizz_str = "fizz"
+    fizz_world = worldunit_shop(fizz_str, worlds_dir())
+    # delete_dir(fizz_world.worlds_dir)
+    sue_str = "Sue"
+    sue_inx = "Suzy"
+    e3 = 3
+    ex_filename = "fizzbuzz.xlsx"
+    mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
+    br00113_columns = [
+        face_name_str(),
+        event_int_str(),
+        vow_label_str(),
+        owner_name_str(),
+        acct_name_str(),
+        otx_name_str(),
+        inx_name_str(),
+    ]
+    a23_str = "accord23"
+    tp37 = 37
+    br00113_str = "br00113"
+    br00113row0 = [sue_str, e3, a23_str, sue_str, sue_str, sue_str, sue_inx]
+    br00113_df = DataFrame([br00113row0], columns=br00113_columns)
+    br00113_ex0_str = f"example0_{br00113_str}"
+    upsert_sheet(mud_file_path, br00113_ex0_str, br00113_df)
+
+    br00001_columns = [
+        event_int_str(),
+        face_name_str(),
+        vow_label_str(),
+        owner_name_str(),
+        deal_time_str(),
+        quota_str(),
+        celldepth_str(),
+    ]
+    tp37 = 37
+    sue_quota = 235
+    sue_celldepth = 3
+    br1row0 = [e3, sue_str, a23_str, sue_str, tp37, sue_quota, sue_celldepth]
+    br00001_1df = DataFrame([br1row0], columns=br00001_columns)
+    br00001_ex0_str = "example0_br00001"
+    upsert_sheet(mud_file_path, br00001_ex0_str, br00001_1df)
+    fizz_db_path = fizz_world.get_db_path()
+    assert not os_path_exists(fizz_db_path)
+
+    # WHEN
+    fizz_world.mud_to_clarity_mstr()
+
+    # THEN
+    assert os_path_exists(fizz_db_path)
+    with sqlite3_connect(fizz_db_path) as db_conn:
+        br00113_raw = f"{br00113_str}_brick_raw"
+        br00113_agg = f"{br00113_str}_brick_agg"
+        br00113_valid = f"{br00113_str}_brick_valid"
+        events_brick_agg_tablename = "events_brick_agg"
+        events_brick_valid_tablename = "events_brick_valid"
+        vow_ote1_agg_tablename = "vow_ote1_agg"
+        pidname_sound_raw = create_prime_tablename("pidname", "s", "raw")
+        pidname_sound_agg = create_prime_tablename("pidname", "s", "agg")
+        pidname_sound_vld = create_prime_tablename("pidname", "s", "vld")
+        pidcore_sound_raw = create_prime_tablename("pidcore", "s", "raw")
+        pidcore_sound_agg = create_prime_tablename("pidcore", "s", "agg")
+        pidcore_sound_vld = create_prime_tablename("pidcore", "s", "vld")
+        fisunit_sound_raw = create_prime_tablename("fisunit", "s", "raw")
+        fisunit_sound_agg = create_prime_tablename("fisunit", "s", "agg")
+        planunit_sound_put_raw = create_prime_tablename("planunit", "s", "raw", "put")
+        planunit_sound_put_agg = create_prime_tablename("planunit", "s", "agg", "put")
+        planacct_sound_put_raw = create_prime_tablename("planacct", "s", "raw", "put")
+        planacct_sound_put_agg = create_prime_tablename("planacct", "s", "agg", "put")
+        fisunit_voice_raw = create_prime_tablename("fisunit", "v", "raw")
+        fisunit_voice_agg = create_prime_tablename("fisunit", "v", "agg")
+        planunit_voice_put_raw = create_prime_tablename("planunit", "v", "raw", "put")
+        planunit_voice_put_agg = create_prime_tablename("planunit", "v", "agg", "put")
+        planacct_voice_put_raw = create_prime_tablename("planacct", "v", "raw", "put")
+        planacct_voice_put_agg = create_prime_tablename("planacct", "v", "agg", "put")
+
+        cursor = db_conn.cursor()
+        assert get_row_count(cursor, br00113_raw) == 1
+        assert get_row_count(cursor, br00113_agg) == 1
+        assert get_row_count(cursor, events_brick_agg_tablename) == 2
+        assert get_row_count(cursor, events_brick_valid_tablename) == 2
+        assert get_row_count(cursor, br00113_valid) == 2
+        assert get_row_count(cursor, pidname_sound_raw) == 2
+        assert get_row_count(cursor, fisunit_sound_raw) == 4
+        assert get_row_count(cursor, planunit_sound_put_raw) == 4
+        assert get_row_count(cursor, planacct_sound_put_raw) == 2
+        assert get_row_count(cursor, pidname_sound_agg) == 1
+        assert get_row_count(cursor, fisunit_sound_agg) == 1
+        assert get_row_count(cursor, planunit_sound_put_agg) == 1
+        assert get_row_count(cursor, planacct_sound_put_agg) == 1
+        assert get_row_count(cursor, pidcore_sound_raw) == 1
+        assert get_row_count(cursor, pidcore_sound_agg) == 1
+        assert get_row_count(cursor, pidcore_sound_vld) == 1
+        assert get_row_count(cursor, pidname_sound_vld) == 1
+        assert get_row_count(cursor, fisunit_voice_raw) == 1
+        assert get_row_count(cursor, planunit_voice_put_raw) == 1
+        assert get_row_count(cursor, planacct_voice_put_raw) == 1
+        assert get_row_count(cursor, fisunit_voice_agg) == 1
+        assert get_row_count(cursor, planunit_voice_put_agg) == 1
+        assert get_row_count(cursor, planacct_voice_put_agg) == 1
+        assert get_row_count(cursor, vow_ote1_agg_tablename) == 1

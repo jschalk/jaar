@@ -65,6 +65,9 @@ class WorldUnit:
     _events: dict[EventInt, FaceName] = None
     _pidgin_events: dict[FaceName, set[EventInt]] = None
 
+    def get_db_path(self) -> str:
+        return create_path(self._world_dir, "world.db")
+
     def set_event(self, event_int: EventInt, face_name: FaceName):
         self._events[event_int] = face_name
 
@@ -110,10 +113,11 @@ class WorldUnit:
         etl_set_cell_tree_cell_mandates(mstr_dir)
         etl_create_deal_mandate_ledgers(mstr_dir)
 
-    def mud_to_clarity(self, store_tracing_files: bool = False):
-        with sqlite3_connect(":memory:") as db_conn:
+    def mud_to_clarity_mstr(self, store_tracing_files: bool = False):
+        with sqlite3_connect(self.get_db_path()) as db_conn:
             cursor = db_conn.cursor()
             self.mud_to_clarity_with_cursor(db_conn, cursor, store_tracing_files)
+            db_conn.commit()
 
     def mud_to_clarity_with_cursor(
         self,

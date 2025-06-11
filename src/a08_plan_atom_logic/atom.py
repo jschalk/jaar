@@ -688,7 +688,6 @@ def sift_planatom(x_plan: PlanUnit, x_atom: PlanAtom) -> PlanAtom:
     x_atom_reqs = {x_key: x_atom.get_value(x_key) for x_key in config_keys}
 
     x_exists = plan_attr_exists(x_atom.dimen, x_plan, x_atom_reqs)
-    print(f"{x_exists=}")
 
     if x_atom.crud_str == "DELETE" and x_exists:
         return x_atom
