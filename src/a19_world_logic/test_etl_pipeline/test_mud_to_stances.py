@@ -341,7 +341,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateDealPayRows(
         assert os_path_exists(sue37_mandate_path)
 
 
-def test_WorldUnit_mud_to_clarity_with_cursor_Senario1_WhenNoVowIdeas_ote1_IsStillCreated(
+def test_WorldUnit_mud_to_clarity_with_cursor_Scenario3_WhenNoVowIdeas_ote1_IsStillCreated(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -375,7 +375,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Senario1_WhenNoVowIdeas_ote1_IsSti
     assert os_path_exists(a23_ote1_csv_path)
 
 
-def test_WorldUnit_mud_to_clarity_with_cursor_Scenario2_DeletesPreviousFiles(
+def test_WorldUnit_mud_to_clarity_with_cursor_Scenario4_DeletesPreviousFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -404,7 +404,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario2_DeletesPreviousFiles(
     assert os_path_exists(testing3_path) is False
 
 
-def test_WorldUnit_mud_to_clarity_with_cursor_Scenario3_CreatesFiles(
+def test_WorldUnit_mud_to_clarity_with_cursor_Scenario5_CreatesFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
