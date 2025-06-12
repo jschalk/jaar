@@ -13,7 +13,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
 )
 
 
-def test_get_vow_dict_from_voice_tables_ReturnsObj_With_fisunit_Attrs_Scenario0():
+def test_get_vow_dict_from_voice_tables_ReturnsObj_With_vowunit_Attrs_Scenario0():
     # ESTABLISH
     a23_str = "accord23"
     a23_timeline_label = "timeline88"
@@ -28,7 +28,7 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_With_fisunit_Attrs_Scenario0(
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
-        vowunit_v_agg_tablename = create_prime_tablename("fisunit", "v", "agg")
+        vowunit_v_agg_tablename = create_prime_tablename("vowunit", "v", "agg")
         vowunit_insert_sqlstr = f"""INSERT INTO {vowunit_v_agg_tablename} (
   vow_label
 , timeline_label
@@ -72,13 +72,13 @@ VALUES (
     assert a23_dict.get("bridge") == a23_bridge
 
 
-def test_get_vow_dict_from_voice_tables_ReturnsObj_With_fisunit_Attrs_Scenario1():
+def test_get_vow_dict_from_voice_tables_ReturnsObj_With_vowunit_Attrs_Scenario1():
     # ESTABLISH
     a23_str = "accord23"
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
-        vowunit_v_agg_tablename = create_prime_tablename("fisunit", "v", "agg")
+        vowunit_v_agg_tablename = create_prime_tablename("vowunit", "v", "agg")
         vowunit_insert_sqlstr = (
             f"INSERT INTO {vowunit_v_agg_tablename} (vow_label) VALUES ('{a23_str}');"
         )
@@ -104,7 +104,7 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_With_fisunit_Attrs_Scenario1(
     }
 
 
-def test_get_vow_dict_from_voice_tables_ReturnsObj_With_vowash_Attrs_Scenario0():
+def test_get_vow_dict_from_voice_tables_ReturnsObj_With_vowpayy_Attrs_Scenario0():
     # ESTABLISH
     a23_str = "accord23"
     bob_str = "Bob"
@@ -114,17 +114,17 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_With_vowash_Attrs_Scenario0()
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
-        vowunit_v_agg_tablename = create_prime_tablename("fisunit", "v", "agg")
-        vowpay_v_agg_tablename = create_prime_tablename("vowash", "v", "agg")
+        vowunit_v_agg_tablename = create_prime_tablename("vowunit", "v", "agg")
+        vowpay_v_agg_tablename = create_prime_tablename("vowpayy", "v", "agg")
         vowunit_insert_sqlstr = (
             f"INSERT INTO {vowunit_v_agg_tablename} (vow_label) VALUES ('{a23_str}');"
         )
         cursor.execute(vowunit_insert_sqlstr)
-        vowash_insert_sqlstr = f"""INSERT INTO {vowpay_v_agg_tablename} (vow_label, owner_name, acct_name, tran_time, amount)
+        vowpayy_insert_sqlstr = f"""INSERT INTO {vowpay_v_agg_tablename} (vow_label, owner_name, acct_name, tran_time, amount)
 VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
 ;
 """
-        cursor.execute(vowash_insert_sqlstr)
+        cursor.execute(vowpayy_insert_sqlstr)
 
         # WHEN
         a23_dict = get_vow_dict_from_voice_tables(cursor, a23_str)
@@ -142,7 +142,7 @@ VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
     assert a23_trans_bob_sue_dict.get(tp55) == bob_sue_tp55_amount
 
 
-def test_get_vow_dict_from_voice_tables_ReturnsObj_With_vowash_Attrs_Scenario1():
+def test_get_vow_dict_from_voice_tables_ReturnsObj_With_vowpayy_Attrs_Scenario1():
     # ESTABLISH
     a23_str = "accord23"
     a45_str = "accord45"
@@ -154,19 +154,19 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_With_vowash_Attrs_Scenario1()
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
-        vowunit_v_agg_tablename = create_prime_tablename("fisunit", "v", "agg")
-        vowpay_v_agg_tablename = create_prime_tablename("vowash", "v", "agg")
+        vowunit_v_agg_tablename = create_prime_tablename("vowunit", "v", "agg")
+        vowpay_v_agg_tablename = create_prime_tablename("vowpayy", "v", "agg")
         vowunit_insert_sqlstr = (
             f"INSERT INTO {vowunit_v_agg_tablename} (vow_label) VALUES ('{a23_str}');"
         )
         cursor.execute(vowunit_insert_sqlstr)
-        vowash_insert_sqlstr = f"""INSERT INTO {vowpay_v_agg_tablename} (vow_label, owner_name, acct_name, tran_time, amount)
+        vowpayy_insert_sqlstr = f"""INSERT INTO {vowpay_v_agg_tablename} (vow_label, owner_name, acct_name, tran_time, amount)
 VALUES
   ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {a23_bob_sue_tp55_amount})
 , ('{a45_str}', '{bob_str}', '{sue_str}', {tp55}, {a45_bob_sue_tp55_amount})
 ;
 """
-        cursor.execute(vowash_insert_sqlstr)
+        cursor.execute(vowpayy_insert_sqlstr)
 
         # WHEN
         a23_dict = get_vow_dict_from_voice_tables(cursor, a23_str)
@@ -184,7 +184,7 @@ VALUES
     assert a23_trans_bob_sue_dict == {tp55: a23_bob_sue_tp55_amount}
 
 
-def test_get_vow_dict_from_voice_tables_ReturnsObj_With_fisdeal_Attrs_Scenario0():
+def test_get_vow_dict_from_voice_tables_ReturnsObj_With_vowdeal_Attrs_Scenario0():
     # ESTABLISH
     a23_str = "accord23"
     bob_str = "Bob"
@@ -194,17 +194,17 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_With_fisdeal_Attrs_Scenario0(
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
-        vowunit_v_agg_tablename = create_prime_tablename("fisunit", "v", "agg")
-        vowdeal_v_agg_tablename = create_prime_tablename("fisdeal", "v", "agg")
+        vowunit_v_agg_tablename = create_prime_tablename("vowunit", "v", "agg")
+        vowdeal_v_agg_tablename = create_prime_tablename("vowdeal", "v", "agg")
         vowunit_insert_sqlstr = (
             f"INSERT INTO {vowunit_v_agg_tablename} (vow_label) VALUES ('{a23_str}');"
         )
         cursor.execute(vowunit_insert_sqlstr)
-        vowash_insert_sqlstr = f"""INSERT INTO {vowdeal_v_agg_tablename} (vow_label, owner_name, deal_time, quota, celldepth)
+        vowpayy_insert_sqlstr = f"""INSERT INTO {vowdeal_v_agg_tablename} (vow_label, owner_name, deal_time, quota, celldepth)
 VALUES ('{a23_str}', '{bob_str}', {tp55}, {bob_tp55_quota}, {bob_tp55_celldepth})
 ;
 """
-        cursor.execute(vowash_insert_sqlstr)
+        cursor.execute(vowpayy_insert_sqlstr)
 
         # WHEN
         a23_dict = get_vow_dict_from_voice_tables(cursor, a23_str)
@@ -227,7 +227,7 @@ VALUES ('{a23_str}', '{bob_str}', {tp55}, {bob_tp55_quota}, {bob_tp55_celldepth}
     assert a23_brokerunit_bob_tp55_dict == expected_a23_brokerunit_bob_tp55_dict
 
 
-def test_get_vow_dict_from_voice_tables_ReturnsObj_With_fishour_Attrs_Scenario0():
+def test_get_vow_dict_from_voice_tables_ReturnsObj_With_vowhour_Attrs_Scenario0():
     # ESTABLISH
     a23_str = "accord23"
     hour3_min = 300
@@ -237,19 +237,19 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_With_fishour_Attrs_Scenario0(
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
-        vowunit_v_agg_tablename = create_prime_tablename("fisunit", "v", "agg")
-        vowhour_v_agg_tablename = create_prime_tablename("fishour", "v", "agg")
+        vowunit_v_agg_tablename = create_prime_tablename("vowunit", "v", "agg")
+        vowhour_v_agg_tablename = create_prime_tablename("vowhour", "v", "agg")
         vowunit_insert_sqlstr = (
             f"INSERT INTO {vowunit_v_agg_tablename} (vow_label) VALUES ('{a23_str}');"
         )
         cursor.execute(vowunit_insert_sqlstr)
-        vowash_insert_sqlstr = f"""INSERT INTO {vowhour_v_agg_tablename} (vow_label, cumlative_minute, hour_label)
+        vowpayy_insert_sqlstr = f"""INSERT INTO {vowhour_v_agg_tablename} (vow_label, cumlative_minute, hour_label)
 VALUES
   ('{a23_str}', {hour3_min}, '{hour3_label}')
 , ('{a23_str}', {hour4_min}, '{hour4_label}')
 ;
 """
-        cursor.execute(vowash_insert_sqlstr)
+        cursor.execute(vowpayy_insert_sqlstr)
 
         # WHEN
         a23_dict = get_vow_dict_from_voice_tables(cursor, a23_str)
@@ -263,7 +263,7 @@ VALUES
     assert a23_hours_config_dict == [[hour3_label, hour3_min], [hour4_label, hour4_min]]
 
 
-def test_get_vow_dict_from_voice_tables_ReturnsObj_With_fismont_Attrs_Scenario0():
+def test_get_vow_dict_from_voice_tables_ReturnsObj_With_vowmont_Attrs_Scenario0():
     # ESTABLISH
     a23_str = "accord23"
     day111_min = 111
@@ -273,19 +273,19 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_With_fismont_Attrs_Scenario0(
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
-        vowunit_v_agg_tablename = create_prime_tablename("fisunit", "v", "agg")
-        vowmont_v_agg_tablename = create_prime_tablename("fismont", "v", "agg")
+        vowunit_v_agg_tablename = create_prime_tablename("vowunit", "v", "agg")
+        vowmont_v_agg_tablename = create_prime_tablename("vowmont", "v", "agg")
         vowunit_insert_sqlstr = (
             f"INSERT INTO {vowunit_v_agg_tablename} (vow_label) VALUES ('{a23_str}');"
         )
         cursor.execute(vowunit_insert_sqlstr)
-        vowash_insert_sqlstr = f"""INSERT INTO {vowmont_v_agg_tablename} (vow_label, cumlative_day, month_label)
+        vowpayy_insert_sqlstr = f"""INSERT INTO {vowmont_v_agg_tablename} (vow_label, cumlative_day, month_label)
 VALUES
   ('{a23_str}', {day111_min}, '{month111_label}')
 , ('{a23_str}', {day222_min}, '{month222_label}')
 ;
 """
-        cursor.execute(vowash_insert_sqlstr)
+        cursor.execute(vowpayy_insert_sqlstr)
 
         # WHEN
         a23_dict = get_vow_dict_from_voice_tables(cursor, a23_str)
@@ -300,7 +300,7 @@ VALUES
     ]
 
 
-def test_get_vow_dict_from_voice_tables_ReturnsObj_With_fisweek_Attrs_Scenario0():
+def test_get_vow_dict_from_voice_tables_ReturnsObj_With_vowweek_Attrs_Scenario0():
     # ESTABLISH
     a23_str = "accord23"
     ana_order = 1
@@ -310,19 +310,19 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_With_fisweek_Attrs_Scenario0(
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
-        vowunit_v_agg_tablename = create_prime_tablename("fisunit", "v", "agg")
-        vowweek_v_agg_tablename = create_prime_tablename("fisweek", "v", "agg")
+        vowunit_v_agg_tablename = create_prime_tablename("vowunit", "v", "agg")
+        vowweek_v_agg_tablename = create_prime_tablename("vowweek", "v", "agg")
         vowunit_insert_sqlstr = (
             f"INSERT INTO {vowunit_v_agg_tablename} (vow_label) VALUES ('{a23_str}');"
         )
         cursor.execute(vowunit_insert_sqlstr)
-        vowash_insert_sqlstr = f"""INSERT INTO {vowweek_v_agg_tablename} (vow_label, weekday_order, weekday_label)
+        vowpayy_insert_sqlstr = f"""INSERT INTO {vowweek_v_agg_tablename} (vow_label, weekday_order, weekday_label)
 VALUES
   ('{a23_str}', {ana_order}, '{ana_label}')
 , ('{a23_str}', {bee_order}, '{bee_label}')
 ;
 """
-        cursor.execute(vowash_insert_sqlstr)
+        cursor.execute(vowpayy_insert_sqlstr)
 
         # WHEN
         a23_dict = get_vow_dict_from_voice_tables(cursor, a23_str)
@@ -334,7 +334,7 @@ VALUES
     assert a23_weekdays_config_dict == [ana_label, bee_label]
 
 
-def test_get_vow_dict_from_voice_tables_ReturnsObj_With_fisoffi_Attrs_Scenario0():
+def test_get_vow_dict_from_voice_tables_ReturnsObj_With_vowoffi_Attrs_Scenario0():
     # sourcery skip: extract-method
     # ESTABLISH
     a23_str = "accord23"
@@ -343,19 +343,19 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_With_fisoffi_Attrs_Scenario0(
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
-        vowunit_v_agg_tablename = create_prime_tablename("fisunit", "v", "agg")
-        vowoffi_v_agg_tablename = create_prime_tablename("fisoffi", "v", "agg")
+        vowunit_v_agg_tablename = create_prime_tablename("vowunit", "v", "agg")
+        vowoffi_v_agg_tablename = create_prime_tablename("vowoffi", "v", "agg")
         vowunit_insert_sqlstr = (
             f"INSERT INTO {vowunit_v_agg_tablename} (vow_label) VALUES ('{a23_str}');"
         )
         cursor.execute(vowunit_insert_sqlstr)
-        vowash_insert_sqlstr = f"""INSERT INTO {vowoffi_v_agg_tablename} (vow_label, offi_time)
+        vowpayy_insert_sqlstr = f"""INSERT INTO {vowoffi_v_agg_tablename} (vow_label, offi_time)
 VALUES
   ('{a23_str}', {offi_time5})
 , ('{a23_str}', {offi_time7})
 ;
 """
-        cursor.execute(vowash_insert_sqlstr)
+        cursor.execute(vowpayy_insert_sqlstr)
 
         # WHEN
         a23_dict = get_vow_dict_from_voice_tables(cursor, a23_str)
@@ -381,7 +381,7 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_IsCorrectlyFormatted_Scenario
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
-        vowunit_v_agg_tablename = create_prime_tablename("fisunit", "v", "agg")
+        vowunit_v_agg_tablename = create_prime_tablename("vowunit", "v", "agg")
         vowunit_insert_sqlstr = f"""INSERT INTO {vowunit_v_agg_tablename} (
   vow_label
 , timeline_label
@@ -422,7 +422,7 @@ VALUES (
     assert a23_vowunit.bridge == a23_bridge
 
 
-def test_get_vow_dict_from_voice_tables_ReturnsObj_IsCorrectlyFormatted_Scenario1_vowash():
+def test_get_vow_dict_from_voice_tables_ReturnsObj_IsCorrectlyFormatted_Scenario1_vowpayy():
     # ESTABLISH
     a23_str = "accord23"
     bob_str = "Bob"
@@ -432,17 +432,17 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_IsCorrectlyFormatted_Scenario
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
-        vowunit_v_agg_tablename = create_prime_tablename("fisunit", "v", "agg")
-        vowpay_v_agg_tablename = create_prime_tablename("vowash", "v", "agg")
+        vowunit_v_agg_tablename = create_prime_tablename("vowunit", "v", "agg")
+        vowpay_v_agg_tablename = create_prime_tablename("vowpayy", "v", "agg")
         vowunit_insert_sqlstr = (
             f"INSERT INTO {vowunit_v_agg_tablename} (vow_label) VALUES ('{a23_str}');"
         )
         cursor.execute(vowunit_insert_sqlstr)
-        vowash_insert_sqlstr = f"""INSERT INTO {vowpay_v_agg_tablename} (vow_label, owner_name, acct_name, tran_time, amount)
+        vowpayy_insert_sqlstr = f"""INSERT INTO {vowpay_v_agg_tablename} (vow_label, owner_name, acct_name, tran_time, amount)
 VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
 ;
 """
-        cursor.execute(vowash_insert_sqlstr)
+        cursor.execute(vowpayy_insert_sqlstr)
         a23_dict = get_vow_dict_from_voice_tables(cursor, a23_str)
 
     # WHEN
@@ -455,7 +455,7 @@ VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
     assert bob_tranunit == {sue_str: {tp55: bob_sue_tp55_amount}}
 
 
-def test_get_vow_dict_from_voice_tables_ReturnsObj_IsCorrectlyFormatted_Scenario2_fisdeal():
+def test_get_vow_dict_from_voice_tables_ReturnsObj_IsCorrectlyFormatted_Scenario2_vowdeal():
     # ESTABLISH
     a23_str = "accord23"
     bob_str = "Bob"
@@ -465,17 +465,17 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_IsCorrectlyFormatted_Scenario
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
-        vowunit_v_agg_tablename = create_prime_tablename("fisunit", "v", "agg")
-        vowdeal_v_agg_tablename = create_prime_tablename("fisdeal", "v", "agg")
+        vowunit_v_agg_tablename = create_prime_tablename("vowunit", "v", "agg")
+        vowdeal_v_agg_tablename = create_prime_tablename("vowdeal", "v", "agg")
         vowunit_insert_sqlstr = (
             f"INSERT INTO {vowunit_v_agg_tablename} (vow_label) VALUES ('{a23_str}');"
         )
         cursor.execute(vowunit_insert_sqlstr)
-        vowash_insert_sqlstr = f"""INSERT INTO {vowdeal_v_agg_tablename} (vow_label, owner_name, deal_time, quota, celldepth)
+        vowpayy_insert_sqlstr = f"""INSERT INTO {vowdeal_v_agg_tablename} (vow_label, owner_name, deal_time, quota, celldepth)
 VALUES ('{a23_str}', '{bob_str}', {tp55}, {bob_tp55_quota}, {bob_tp55_celldepth})
 ;
 """
-        cursor.execute(vowash_insert_sqlstr)
+        cursor.execute(vowpayy_insert_sqlstr)
         a23_dict = get_vow_dict_from_voice_tables(cursor, a23_str)
 
     # WHEN
@@ -491,7 +491,7 @@ VALUES ('{a23_str}', '{bob_str}', {tp55}, {bob_tp55_quota}, {bob_tp55_celldepth}
     assert a23_bob_55_deal.celldepth == bob_tp55_celldepth
 
 
-def test_get_vow_dict_from_voice_tables_ReturnsObj_Scenario3_fishour():
+def test_get_vow_dict_from_voice_tables_ReturnsObj_Scenario3_vowhour():
     # ESTABLISH
     a23_str = "accord23"
     hour3_min = 300
@@ -501,19 +501,19 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_Scenario3_fishour():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
-        vowunit_v_agg_tablename = create_prime_tablename("fisunit", "v", "agg")
-        vowhour_v_agg_tablename = create_prime_tablename("fishour", "v", "agg")
+        vowunit_v_agg_tablename = create_prime_tablename("vowunit", "v", "agg")
+        vowhour_v_agg_tablename = create_prime_tablename("vowhour", "v", "agg")
         vowunit_insert_sqlstr = (
             f"INSERT INTO {vowunit_v_agg_tablename} (vow_label) VALUES ('{a23_str}');"
         )
         cursor.execute(vowunit_insert_sqlstr)
-        vowash_insert_sqlstr = f"""INSERT INTO {vowhour_v_agg_tablename} (vow_label, cumlative_minute, hour_label)
+        vowpayy_insert_sqlstr = f"""INSERT INTO {vowhour_v_agg_tablename} (vow_label, cumlative_minute, hour_label)
 VALUES
   ('{a23_str}', {hour3_min}, '{hour3_label}')
 , ('{a23_str}', {hour4_min}, '{hour4_label}')
 ;
 """
-        cursor.execute(vowash_insert_sqlstr)
+        cursor.execute(vowpayy_insert_sqlstr)
         a23_dict = get_vow_dict_from_voice_tables(cursor, a23_str)
 
     # WHEN
@@ -526,7 +526,7 @@ VALUES
     ]
 
 
-def test_get_vow_dict_from_voice_tables_ReturnsObj_Scenario4_fismont():
+def test_get_vow_dict_from_voice_tables_ReturnsObj_Scenario4_vowmont():
     # ESTABLISH
     a23_str = "accord23"
     day111_min = 111
@@ -536,19 +536,19 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_Scenario4_fismont():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
-        vowunit_v_agg_tablename = create_prime_tablename("fisunit", "v", "agg")
-        vowmont_v_agg_tablename = create_prime_tablename("fismont", "v", "agg")
+        vowunit_v_agg_tablename = create_prime_tablename("vowunit", "v", "agg")
+        vowmont_v_agg_tablename = create_prime_tablename("vowmont", "v", "agg")
         vowunit_insert_sqlstr = (
             f"INSERT INTO {vowunit_v_agg_tablename} (vow_label) VALUES ('{a23_str}');"
         )
         cursor.execute(vowunit_insert_sqlstr)
-        vowash_insert_sqlstr = f"""INSERT INTO {vowmont_v_agg_tablename} (vow_label, cumlative_day, month_label)
+        vowpayy_insert_sqlstr = f"""INSERT INTO {vowmont_v_agg_tablename} (vow_label, cumlative_day, month_label)
 VALUES
   ('{a23_str}', {day111_min}, '{month111_label}')
 , ('{a23_str}', {day222_min}, '{month222_label}')
 ;
 """
-        cursor.execute(vowash_insert_sqlstr)
+        cursor.execute(vowpayy_insert_sqlstr)
         a23_dict = get_vow_dict_from_voice_tables(cursor, a23_str)
 
     # WHEN
@@ -561,7 +561,7 @@ VALUES
     ]
 
 
-def test_get_vow_dict_from_voice_tables_ReturnsObj_Scenario5_fisweek():
+def test_get_vow_dict_from_voice_tables_ReturnsObj_Scenario5_vowweek():
     # ESTABLISH
     a23_str = "accord23"
     ana_order = 1
@@ -571,19 +571,19 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_Scenario5_fisweek():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
-        vowunit_v_agg_tablename = create_prime_tablename("fisunit", "v", "agg")
-        vowweek_v_agg_tablename = create_prime_tablename("fisweek", "v", "agg")
+        vowunit_v_agg_tablename = create_prime_tablename("vowunit", "v", "agg")
+        vowweek_v_agg_tablename = create_prime_tablename("vowweek", "v", "agg")
         vowunit_insert_sqlstr = (
             f"INSERT INTO {vowunit_v_agg_tablename} (vow_label) VALUES ('{a23_str}');"
         )
         cursor.execute(vowunit_insert_sqlstr)
-        vowash_insert_sqlstr = f"""INSERT INTO {vowweek_v_agg_tablename} (vow_label, weekday_order, weekday_label)
+        vowpayy_insert_sqlstr = f"""INSERT INTO {vowweek_v_agg_tablename} (vow_label, weekday_order, weekday_label)
 VALUES
   ('{a23_str}', {ana_order}, '{ana_label}')
 , ('{a23_str}', {bee_order}, '{bee_label}')
 ;
 """
-        cursor.execute(vowash_insert_sqlstr)
+        cursor.execute(vowpayy_insert_sqlstr)
         a23_dict = get_vow_dict_from_voice_tables(cursor, a23_str)
 
     # WHEN
@@ -593,7 +593,7 @@ VALUES
     assert a23_vowunit.timeline.weekdays_config == [ana_label, bee_label]
 
 
-def test_get_vow_dict_from_voice_tables_ReturnsObj_Scenario5_fisoffi():
+def test_get_vow_dict_from_voice_tables_ReturnsObj_Scenario5_vowoffi():
     # sourcery skip: extract-method
     # ESTABLISH
     a23_str = "accord23"
@@ -602,19 +602,19 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_Scenario5_fisoffi():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
-        vowunit_v_agg_tablename = create_prime_tablename("fisunit", "v", "agg")
-        vowoffi_v_agg_tablename = create_prime_tablename("fisoffi", "v", "agg")
+        vowunit_v_agg_tablename = create_prime_tablename("vowunit", "v", "agg")
+        vowoffi_v_agg_tablename = create_prime_tablename("vowoffi", "v", "agg")
         vowunit_insert_sqlstr = (
             f"INSERT INTO {vowunit_v_agg_tablename} (vow_label) VALUES ('{a23_str}');"
         )
         cursor.execute(vowunit_insert_sqlstr)
-        vowash_insert_sqlstr = f"""INSERT INTO {vowoffi_v_agg_tablename} (vow_label, offi_time)
+        vowpayy_insert_sqlstr = f"""INSERT INTO {vowoffi_v_agg_tablename} (vow_label, offi_time)
 VALUES
   ('{a23_str}', {offi_time5})
 , ('{a23_str}', {offi_time7})
 ;
 """
-        cursor.execute(vowash_insert_sqlstr)
+        cursor.execute(vowpayy_insert_sqlstr)
         a23_dict = get_vow_dict_from_voice_tables(cursor, a23_str)
 
     # WHEN

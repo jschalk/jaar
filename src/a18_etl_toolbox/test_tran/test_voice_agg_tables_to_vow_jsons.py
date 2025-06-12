@@ -57,63 +57,63 @@ def test_get_vow_voice_select1_sqlstrs_ReturnsObj():
     fu2_select_sqlstrs = get_vow_voice_select1_sqlstrs(vow_label=a23_str)
 
     # THEN
-    gen_vowash_sqlstr = fu2_select_sqlstrs.get(vow_paybook_str())
-    gen_fisdeal_sqlstr = fu2_select_sqlstrs.get(vow_dealunit_str())
-    gen_fishour_sqlstr = fu2_select_sqlstrs.get(vow_timeline_hour_str())
-    gen_fismont_sqlstr = fu2_select_sqlstrs.get(vow_timeline_month_str())
-    gen_fisweek_sqlstr = fu2_select_sqlstrs.get(vow_timeline_weekday_str())
-    gen_fisoffi_sqlstr = fu2_select_sqlstrs.get(vow_timeoffi_str())
-    gen_fisunit_sqlstr = fu2_select_sqlstrs.get(vowunit_str())
+    gen_vowpayy_sqlstr = fu2_select_sqlstrs.get(vow_paybook_str())
+    gen_vowdeal_sqlstr = fu2_select_sqlstrs.get(vow_dealunit_str())
+    gen_vowhour_sqlstr = fu2_select_sqlstrs.get(vow_timeline_hour_str())
+    gen_vowmont_sqlstr = fu2_select_sqlstrs.get(vow_timeline_month_str())
+    gen_vowweek_sqlstr = fu2_select_sqlstrs.get(vow_timeline_weekday_str())
+    gen_vowoffi_sqlstr = fu2_select_sqlstrs.get(vow_timeoffi_str())
+    gen_vowunit_sqlstr = fu2_select_sqlstrs.get(vowunit_str())
     with sqlite3_connect(":memory:") as vow_db_conn:
         cursor = vow_db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        vowash_abbv7 = get_dimen_abbv7(vow_paybook_str())
-        fisdeal_abbv7 = get_dimen_abbv7(vow_dealunit_str())
-        fishour_abbv7 = get_dimen_abbv7(vow_timeline_hour_str())
-        fismont_abbv7 = get_dimen_abbv7(vow_timeline_month_str())
-        fisweek_abbv7 = get_dimen_abbv7(vow_timeline_weekday_str())
-        fisoffi_abbv7 = get_dimen_abbv7(vow_timeoffi_str())
-        fisunit_abbv7 = get_dimen_abbv7(vowunit_str())
-        vowash_v_agg = create_prime_tablename(vowash_abbv7, "v", "agg")
-        fisdeal_v_agg = create_prime_tablename(fisdeal_abbv7, "v", "agg")
-        fishour_v_agg = create_prime_tablename(fishour_abbv7, "v", "agg")
-        fismont_v_agg = create_prime_tablename(fismont_abbv7, "v", "agg")
-        fisweek_v_agg = create_prime_tablename(fisweek_abbv7, "v", "agg")
-        fisoffi_v_agg = create_prime_tablename(fisoffi_abbv7, "v", "agg")
-        fisunit_v_agg = create_prime_tablename(fisunit_abbv7, "v", "agg")
+        vowpayy_abbv7 = get_dimen_abbv7(vow_paybook_str())
+        vowdeal_abbv7 = get_dimen_abbv7(vow_dealunit_str())
+        vowhour_abbv7 = get_dimen_abbv7(vow_timeline_hour_str())
+        vowmont_abbv7 = get_dimen_abbv7(vow_timeline_month_str())
+        vowweek_abbv7 = get_dimen_abbv7(vow_timeline_weekday_str())
+        vowoffi_abbv7 = get_dimen_abbv7(vow_timeoffi_str())
+        vowunit_abbv7 = get_dimen_abbv7(vowunit_str())
+        vowpayy_v_agg = create_prime_tablename(vowpayy_abbv7, "v", "agg")
+        vowdeal_v_agg = create_prime_tablename(vowdeal_abbv7, "v", "agg")
+        vowhour_v_agg = create_prime_tablename(vowhour_abbv7, "v", "agg")
+        vowmont_v_agg = create_prime_tablename(vowmont_abbv7, "v", "agg")
+        vowweek_v_agg = create_prime_tablename(vowweek_abbv7, "v", "agg")
+        vowoffi_v_agg = create_prime_tablename(vowoffi_abbv7, "v", "agg")
+        vowunit_v_agg = create_prime_tablename(vowunit_abbv7, "v", "agg")
         where_dict = {vow_label_str(): a23_str}
-        vowash_sql = create_select_query(cursor, vowash_v_agg, [], where_dict, True)
-        fisdeal_sql = create_select_query(cursor, fisdeal_v_agg, [], where_dict, True)
-        fishour_sql = create_select_query(cursor, fishour_v_agg, [], where_dict, True)
-        fismont_sql = create_select_query(cursor, fismont_v_agg, [], where_dict, True)
-        fisweek_sql = create_select_query(cursor, fisweek_v_agg, [], where_dict, True)
-        fisoffi_sql = create_select_query(cursor, fisoffi_v_agg, [], where_dict, True)
-        fisunit_sql = create_select_query(cursor, fisunit_v_agg, [], where_dict, True)
-        vowash_sqlstr_ref = f"{vowash_abbv7.upper()}_FU2_SELECT_SQLSTR"
-        fisdeal_sqlstr_ref = f"{fisdeal_abbv7.upper()}_FU2_SELECT_SQLSTR"
-        fishour_sqlstr_ref = f"{fishour_abbv7.upper()}_FU2_SELECT_SQLSTR"
-        fismont_sqlstr_ref = f"{fismont_abbv7.upper()}_FU2_SELECT_SQLSTR"
-        fisweek_sqlstr_ref = f"{fisweek_abbv7.upper()}_FU2_SELECT_SQLSTR"
-        fisoffi_sqlstr_ref = f"{fisoffi_abbv7.upper()}_FU2_SELECT_SQLSTR"
-        fisunit_sqlstr_ref = f"{fisunit_abbv7.upper()}_FU2_SELECT_SQLSTR"
+        vowpayy_sql = create_select_query(cursor, vowpayy_v_agg, [], where_dict, True)
+        vowdeal_sql = create_select_query(cursor, vowdeal_v_agg, [], where_dict, True)
+        vowhour_sql = create_select_query(cursor, vowhour_v_agg, [], where_dict, True)
+        vowmont_sql = create_select_query(cursor, vowmont_v_agg, [], where_dict, True)
+        vowweek_sql = create_select_query(cursor, vowweek_v_agg, [], where_dict, True)
+        vowoffi_sql = create_select_query(cursor, vowoffi_v_agg, [], where_dict, True)
+        vowunit_sql = create_select_query(cursor, vowunit_v_agg, [], where_dict, True)
+        vowpayy_sqlstr_ref = f"{vowpayy_abbv7.upper()}_FU2_SELECT_SQLSTR"
+        vowdeal_sqlstr_ref = f"{vowdeal_abbv7.upper()}_FU2_SELECT_SQLSTR"
+        vowhour_sqlstr_ref = f"{vowhour_abbv7.upper()}_FU2_SELECT_SQLSTR"
+        vowmont_sqlstr_ref = f"{vowmont_abbv7.upper()}_FU2_SELECT_SQLSTR"
+        vowweek_sqlstr_ref = f"{vowweek_abbv7.upper()}_FU2_SELECT_SQLSTR"
+        vowoffi_sqlstr_ref = f"{vowoffi_abbv7.upper()}_FU2_SELECT_SQLSTR"
+        vowunit_sqlstr_ref = f"{vowunit_abbv7.upper()}_FU2_SELECT_SQLSTR"
         qa23_str = "'accord23'"
         blank = ""
-        print(f"""{vowash_sqlstr_ref} = "{vowash_sql.replace(qa23_str, blank)}" """)
-        print(f"""{fisdeal_sqlstr_ref} = "{fisdeal_sql.replace(qa23_str, blank)}" """)
-        print(f"""{fishour_sqlstr_ref} = "{fishour_sql.replace(qa23_str, blank)}" """)
-        print(f"""{fismont_sqlstr_ref} = "{fismont_sql.replace(qa23_str, blank)}" """)
-        print(f"""{fisweek_sqlstr_ref} = "{fisweek_sql.replace(qa23_str, blank)}" """)
-        print(f"""{fisoffi_sqlstr_ref} = "{fisoffi_sql.replace(qa23_str, blank)}" """)
-        print(f"""{fisunit_sqlstr_ref} = "{fisunit_sql.replace(qa23_str, blank)}" """)
-        assert gen_vowash_sqlstr == vowash_sql
-        assert gen_fisdeal_sqlstr == fisdeal_sql
-        assert gen_fishour_sqlstr == fishour_sql
-        assert gen_fismont_sqlstr == fismont_sql
-        assert gen_fisweek_sqlstr == fisweek_sql
-        assert gen_fisoffi_sqlstr == fisoffi_sql
-        assert gen_fisunit_sqlstr == fisunit_sql
+        print(f"""{vowpayy_sqlstr_ref} = "{vowpayy_sql.replace(qa23_str, blank)}" """)
+        print(f"""{vowdeal_sqlstr_ref} = "{vowdeal_sql.replace(qa23_str, blank)}" """)
+        print(f"""{vowhour_sqlstr_ref} = "{vowhour_sql.replace(qa23_str, blank)}" """)
+        print(f"""{vowmont_sqlstr_ref} = "{vowmont_sql.replace(qa23_str, blank)}" """)
+        print(f"""{vowweek_sqlstr_ref} = "{vowweek_sql.replace(qa23_str, blank)}" """)
+        print(f"""{vowoffi_sqlstr_ref} = "{vowoffi_sql.replace(qa23_str, blank)}" """)
+        print(f"""{vowunit_sqlstr_ref} = "{vowunit_sql.replace(qa23_str, blank)}" """)
+        assert gen_vowpayy_sqlstr == vowpayy_sql
+        assert gen_vowdeal_sqlstr == vowdeal_sql
+        assert gen_vowhour_sqlstr == vowhour_sql
+        assert gen_vowmont_sqlstr == vowmont_sql
+        assert gen_vowweek_sqlstr == vowweek_sql
+        assert gen_vowoffi_sqlstr == vowoffi_sql
+        assert gen_vowunit_sqlstr == vowunit_sql
         static_example_sqlstr = f"SELECT vow_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, bridge, job_listen_rotations FROM vowunit_v_agg WHERE vow_label = '{a23_str}'"
-        assert gen_fisunit_sqlstr == static_example_sqlstr
+        assert gen_vowunit_sqlstr == static_example_sqlstr
 
 
 def test_etl_voice_agg_tables_to_vow_jsons_Scenario0_CreateFilesWithOnlyVowLabel(
@@ -123,20 +123,20 @@ def test_etl_voice_agg_tables_to_vow_jsons_Scenario0_CreateFilesWithOnlyVowLabel
     accord23_str = "accord23"
     accord45_str = "accord45"
     vow_mstr_dir = get_module_temp_dir()
-    fisunit_v_agg_tablename = create_prime_tablename(vowunit_str(), "v", "agg")
-    print(f"{fisunit_v_agg_tablename=}")
+    vowunit_v_agg_tablename = create_prime_tablename(vowunit_str(), "v", "agg")
+    print(f"{vowunit_v_agg_tablename=}")
 
     with sqlite3_connect(":memory:") as vow_db_conn:
         cursor = vow_db_conn.cursor()
         create_sound_and_voice_tables(cursor)
 
         insert_raw_sqlstr = f"""
-INSERT INTO {fisunit_v_agg_tablename} ({vow_label_str()})
+INSERT INTO {vowunit_v_agg_tablename} ({vow_label_str()})
 VALUES ('{accord23_str}'), ('{accord45_str}')
 ;
 """
         cursor.execute(insert_raw_sqlstr)
-        assert get_row_count(cursor, fisunit_v_agg_tablename) == 2
+        assert get_row_count(cursor, vowunit_v_agg_tablename) == 2
         assert db_table_exists(cursor, vow_event_time_agg_str()) is False
 
         accord23_json_path = create_vow_json_path(vow_mstr_dir, accord23_str)

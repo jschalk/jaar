@@ -82,13 +82,13 @@ def test_create_prime_tablename_ReturnsObj():
     planlabo_dimen = plan_concept_laborlink_str()
     planheal_dimen = plan_concept_healerlink_str()
     planfact_dimen = plan_concept_factunit_str()
-    fisunit_dimen = vowunit_str()
-    vowash_dimen = vow_paybook_str()
-    fisdeal_dimen = vow_dealunit_str()
-    fishour_dimen = vow_timeline_hour_str()
-    fismont_dimen = vow_timeline_month_str()
-    fisweek_dimen = vow_timeline_weekday_str()
-    fisoffi_dimen = vow_timeoffi_str()
+    vowunit_dimen = vowunit_str()
+    vowpayy_dimen = vow_paybook_str()
+    vowdeal_dimen = vow_dealunit_str()
+    vowhour_dimen = vow_timeline_hour_str()
+    vowmont_dimen = vow_timeline_month_str()
+    vowweek_dimen = vow_timeline_weekday_str()
+    vowoffi_dimen = vow_timeoffi_str()
     pidname_dimen = pidgin_name_str()
     pidlabe_dimen = pidgin_label_str()
     pidwayy_dimen = pidgin_way_str()
@@ -112,13 +112,13 @@ def test_create_prime_tablename_ReturnsObj():
     planheal_s_agg_table = create_prime_tablename("planheal", "s", agg_str, put_str)
     planfact_s_agg_table = create_prime_tablename("planfact", "s", agg_str, put_str)
     planfact_s_del_table = create_prime_tablename("planfact", "s", agg_str, del_str)
-    fisunit_s_agg_table = create_prime_tablename("fisunit", "s", agg_str)
-    vowash_s_agg_table = create_prime_tablename("vowash", "s", agg_str)
-    fisdeal_s_agg_table = create_prime_tablename("fisdeal", "s", agg_str)
-    fishour_s_agg_table = create_prime_tablename("fishour", "s", agg_str)
-    fismont_s_agg_table = create_prime_tablename("fismont", "s", agg_str)
-    fisweek_s_agg_table = create_prime_tablename("fisweek", "s", agg_str)
-    fisoffi_s_agg_table = create_prime_tablename("fisoffi", "s", agg_str)
+    vowunit_s_agg_table = create_prime_tablename("vowunit", "s", agg_str)
+    vowpayy_s_agg_table = create_prime_tablename("vowpayy", "s", agg_str)
+    vowdeal_s_agg_table = create_prime_tablename("vowdeal", "s", agg_str)
+    vowhour_s_agg_table = create_prime_tablename("vowhour", "s", agg_str)
+    vowmont_s_agg_table = create_prime_tablename("vowmont", "s", agg_str)
+    vowweek_s_agg_table = create_prime_tablename("vowweek", "s", agg_str)
+    vowoffi_s_agg_table = create_prime_tablename("vowoffi", "s", agg_str)
     pidname_s_agg_table = create_prime_tablename("pidname", "s", agg_str)
     pidlabe_s_agg_table = create_prime_tablename("pidlabe", "s", agg_str)
     pidwayy_s_agg_table = create_prime_tablename("pidwayy", "s", agg_str)
@@ -144,13 +144,13 @@ def test_create_prime_tablename_ReturnsObj():
     assert planheal_s_agg_table == f"{planheal_dimen}_s_put_agg"
     assert planfact_s_agg_table == f"{planfact_dimen}_s_put_agg"
     assert planfact_s_del_table == f"{planfact_dimen}_s_del_agg"
-    assert fisunit_s_agg_table == f"{fisunit_dimen}_s_agg"
-    assert vowash_s_agg_table == f"{vowash_dimen}_s_agg"
-    assert fisdeal_s_agg_table == f"{fisdeal_dimen}_s_agg"
-    assert fishour_s_agg_table == f"{fishour_dimen}_s_agg"
-    assert fismont_s_agg_table == f"{fismont_dimen}_s_agg"
-    assert fisweek_s_agg_table == f"{fisweek_dimen}_s_agg"
-    assert fisoffi_s_agg_table == f"{fisoffi_dimen}_s_agg"
+    assert vowunit_s_agg_table == f"{vowunit_dimen}_s_agg"
+    assert vowpayy_s_agg_table == f"{vowpayy_dimen}_s_agg"
+    assert vowdeal_s_agg_table == f"{vowdeal_dimen}_s_agg"
+    assert vowhour_s_agg_table == f"{vowhour_dimen}_s_agg"
+    assert vowmont_s_agg_table == f"{vowmont_dimen}_s_agg"
+    assert vowweek_s_agg_table == f"{vowweek_dimen}_s_agg"
+    assert vowoffi_s_agg_table == f"{vowoffi_dimen}_s_agg"
     assert pidname_s_agg_table == f"{pidname_dimen}_s_agg"
     assert pidlabe_s_agg_table == f"{pidlabe_dimen}_s_agg"
     assert pidwayy_s_agg_table == f"{pidwayy_dimen}_s_agg"
@@ -391,7 +391,7 @@ CREATE TABLE IF NOT EXISTS {vow_ote1_agg_str()} (
 # TODO create test to prove this insert should never grab when error message is not null in source table
 def test_INSERT_VOW_OTE1_AGG_FROM_VOICE_SQLSTR_Exists():
     # ESTABLISH
-    fisdeal_v_raw_tablename = create_prime_tablename(vow_dealunit_str(), "v", "raw")
+    vowdeal_v_raw_tablename = create_prime_tablename(vow_dealunit_str(), "v", "raw")
     expected_INSERT_sqlstr = f"""
 INSERT INTO {vow_ote1_agg_str()} ({vow_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()})
 SELECT {vow_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
@@ -401,7 +401,7 @@ FROM (
     , {owner_name_str()}_inx {owner_name_str()}
     , {event_int_str()}
     , {deal_time_str()}
-    FROM {fisdeal_v_raw_tablename}
+    FROM {vowdeal_v_raw_tablename}
     GROUP BY {vow_label_str()}_inx, {owner_name_str()}_inx, {event_int_str()}, {deal_time_str()}
 )
 ORDER BY {vow_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}

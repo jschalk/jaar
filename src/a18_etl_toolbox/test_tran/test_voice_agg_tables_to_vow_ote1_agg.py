@@ -30,9 +30,9 @@ def test_etl_voice_raw_tables_to_vow_ote1_agg_SetsTableAttr():
     with sqlite3_connect(":memory:") as vow_db_conn:
         cursor = vow_db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        fisdeal_v_raw_table = create_prime_tablename(vow_dealunit_str(), "v", "raw")
+        vowdeal_v_raw_table = create_prime_tablename(vow_dealunit_str(), "v", "raw")
         insert_raw_sqlstr = f"""
-INSERT INTO {fisdeal_v_raw_table} ({event_int_str()}, {vow_label_str()}_inx, {owner_name_str()}_inx, {deal_time_str()})
+INSERT INTO {vowdeal_v_raw_table} ({event_int_str()}, {vow_label_str()}_inx, {owner_name_str()}_inx, {deal_time_str()})
 VALUES
   ({event3}, '{accord23_str}', '{bob_str}', {timepoint55})
 , ({event3}, '{accord23_str}', '{bob_str}', {timepoint55})
@@ -41,7 +41,7 @@ VALUES
 ;
 """
         cursor.execute(insert_raw_sqlstr)
-        assert get_row_count(cursor, fisdeal_v_raw_table) == 4
+        assert get_row_count(cursor, vowdeal_v_raw_table) == 4
         assert db_table_exists(cursor, vow_ote1_agg_str()) is False
 
         # WHEN
