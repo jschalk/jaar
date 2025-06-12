@@ -65,7 +65,7 @@ def rebuild_format_jsons(x_rebuild_format_jsons: bool):
 def test_idea_brick_formats_MarkdownFileExists():
     # Gather lines here
     doc_main_dir = "docs"
-    doc_ideas_dir = Path(f"{doc_main_dir}/idea_brick_formats")
+    doc_ideas_dir = Path(f"{doc_main_dir}/a17_idea_brick_formats")
     doc_ideas_dir.mkdir(parents=True, exist_ok=True)
 
     manifest_lines = []
