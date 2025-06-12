@@ -3,6 +3,7 @@ from src.a15_vow_logic._test_util.a15_str import (
     cumlative_day_str,
     cumlative_minute_str,
     hour_label_str,
+    job_listen_rotations_str,
     month_label_str,
     paybook_str,
     vow_dealunit_str,
@@ -33,3 +34,4 @@ def test_str_functions_ReturnsObj():
     assert vow_timeline_month_str() == "vow_timeline_month"
     assert vow_timeline_weekday_str() == "vow_timeline_weekday"
     assert vow_timeoffi_str() == "vow_timeoffi"
+    assert job_listen_rotations_str() == "job_listen_rotations"

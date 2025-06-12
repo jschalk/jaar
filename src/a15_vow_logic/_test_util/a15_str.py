@@ -18,6 +18,10 @@ def hour_label_str() -> str:
     return "hour_label"
 
 
+def job_listen_rotations_str() -> str:
+    return "job_listen_rotations"
+
+
 def month_label_str() -> str:
     return "month_label"
 
