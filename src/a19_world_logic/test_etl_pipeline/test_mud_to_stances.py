@@ -4,10 +4,12 @@ from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.a00_data_toolbox.file_toolbox import count_dirs_files, create_path, save_file
 from src.a02_finance_logic._test_util.a02_str import (
+    amount_str,
     celldepth_str,
     deal_time_str,
     owner_name_str,
     quota_str,
+    tran_time_str,
     vow_label_str,
 )
 from src.a06_plan_logic._test_util.a06_str import acct_name_str
@@ -25,10 +27,12 @@ from src.a12_hub_tools.hub_path import (
 from src.a15_vow_logic._test_util.a15_str import cumlative_minute_str, hour_label_str
 from src.a16_pidgin_logic._test_util.a16_str import inx_name_str, otx_name_str
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
-from src.a18_etl_toolbox._test_util.a18_str import (  # vow_acct_nets_str,; vow_kpi001_acct_nets_str,
+from src.a18_etl_toolbox._test_util.a18_str import (
     events_brick_agg_str,
     events_brick_valid_str,
+    vow_acct_nets_str,
     vow_event_time_agg_str,
+    vow_kpi001_acct_nets_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a19_world_logic._test_util.a19_env import (
@@ -131,6 +135,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
         assert not db_table_exists(cursor, vow_event_time_agg_str())
         assert not db_table_exists(cursor, vow_ote1_agg_str())
         assert not db_table_exists(cursor, plnacct_job)
+        assert not db_table_exists(cursor, vow_acct_nets_str())
 
         # # create planunits
         # self.plan_tables_to_event_plan_csvs(cursor)
@@ -186,6 +191,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
         assert os_path_exists(a23_sue_gut_path)
         assert os_path_exists(a23_sue_job_path)
         assert get_row_count(cursor, plnacct_job) == 1
+        # assert get_row_count(cursor, vow_acct_nets_str()) == 1
         # assert get_row_count(cursor, vow_event_time_agg_str()) == 0
         # assert get_row_count(cursor, vow_ote1_agg_tablename) == 0
 
@@ -342,33 +348,34 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateDealPayRows(
         assert os_path_exists(sue37_mandate_path)
 
 
-# def test_WorldUnit_mud_to_clarity_with_cursor_Scenario2_PopulateVowTranBook(
-#     env_dir_setup_cleanup,
-# ):
-#     # ESTABLISH:
-#     fizz_str = "fizz"
-#     fizz_world = worldunit_shop(fizz_str, worlds_dir())
-#     # delete_dir(fizz_world.worlds_dir)
-#     sue_str = "Sue"
-#     sue_inx = "Suzy"
-#     e3 = 3
-#     ex_filename = "fizzbuzz.xlsx"
-#     mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
-#     br00113_columns = [
-#         face_name_str(),
-#         event_int_str(),
-#         vow_label_str(),
-#         owner_name_str(),
-#         acct_name_str(),
-#         otx_name_str(),
-#         inx_name_str(),
-#     ]
-#     a23_str = "accord23"
-#     br00113_str = "br00113"
-#     br00113row0 = [sue_str, e3, a23_str, sue_str, sue_str, sue_str, sue_inx]
-#     br00113_df = DataFrame([br00113row0], columns=br00113_columns)
-#     br00113_ex0_str = f"example0_{br00113_str}"
-#     upsert_sheet(mud_file_path, br00113_ex0_str, br00113_df)
+def test_WorldUnit_mud_to_clarity_with_cursor_Scenario2_PopulateVowTranBook(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH:
+    fizz_str = "fizz"
+    fizz_world = worldunit_shop(fizz_str, worlds_dir())
+    # delete_dir(fizz_world.worlds_dir)
+    sue_str = "Sue"
+    sue_inx = "Suzy"
+    e3 = 3
+    ex_filename = "fizzbuzz.xlsx"
+    mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
+    br00002_columns = [
+        event_int_str(),
+        face_name_str(),
+        vow_label_str(),
+        owner_name_str(),
+        acct_name_str(),
+        tran_time_str(),
+        amount_str(),
+    ]
+    a23_str = "accord23"
+    br00002_str = "br00002"
+    br00002row0 = [sue_str, e3, a23_str, sue_str, sue_str, sue_str, sue_inx]
+    br00002_df = DataFrame([br00002row0], columns=br00002_columns)
+    br00002_ex0_str = f"example0_{br00002_str}"
+    upsert_sheet(mud_file_path, br00002_ex0_str, br00002_df)
+
 
 #     br00001_columns = [
 #         event_int_str(),

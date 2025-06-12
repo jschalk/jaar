@@ -1310,3 +1310,6 @@ def get_job_create_table_sqlstrs() -> dict[str, str]:
 def create_job_tables(conn_or_cursor: sqlite3_Connection):
     for create_table_sqlstr in get_job_create_table_sqlstrs().values():
         conn_or_cursor.execute(create_table_sqlstr)
+
+
+CREATE_VOW_ACCT_NETS_SQLSTR = "CREATE TABLE IF NOT EXISTS vow_acct_nets (vow_label TEXT, owner_name TEXT, owner_net_amount REAL)"

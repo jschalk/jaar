@@ -1,6 +1,7 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import (
     db_table_exists,
+    get_create_table_sqlstr,
     get_table_columns,
     required_columns_exist,
 )
@@ -43,14 +44,23 @@ from src.a16_pidgin_logic._test_util.a16_str import (
     pidgin_way_str,
 )
 from src.a17_idea_logic._test_util.a17_str import idea_category_str
-from src.a17_idea_logic.idea_config import get_idea_config_dict, get_idea_numbers
+from src.a17_idea_logic.idea_config import (
+    get_idea_config_dict,
+    get_idea_numbers,
+    get_idea_sqlite_types,
+)
 from src.a17_idea_logic.idea_db_tool import (
     get_default_sorted_list,
     get_idea_into_dimen_raw_query,
 )
-from src.a18_etl_toolbox._test_util.a18_str import vow_event_time_agg_str
+from src.a18_etl_toolbox._test_util.a18_str import (
+    owner_net_amount_str,
+    vow_acct_nets_str,
+    vow_event_time_agg_str,
+)
 from src.a18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
+    CREATE_VOW_ACCT_NETS_SQLSTR,
     CREATE_VOW_EVENT_TIME_AGG_SQLSTR,
     CREATE_VOW_OTE1_AGG_SQLSTR,
     IDEA_STAGEBLE_DEL_DIMENS,
@@ -409,3 +419,17 @@ ORDER BY {vow_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_st
 """
     # WHEN / THEN
     assert INSERT_VOW_OTE1_AGG_FROM_VOICE_SQLSTR == expected_INSERT_sqlstr
+
+
+def test_CREATE_VOW_ACCT_NETS_SQLSTR_Exists():
+    # ESTABLISH
+    sqlite_types = get_idea_sqlite_types()
+    sqlite_types[owner_net_amount_str()] = "REAL"
+    expected_create_table_sqlstr = get_create_table_sqlstr(
+        tablename=vow_acct_nets_str(),
+        columns_list=[vow_label_str(), owner_name_str(), owner_net_amount_str()],
+        column_types=sqlite_types,
+    )
+
+    # WHEN / THEN
+    assert CREATE_VOW_ACCT_NETS_SQLSTR == expected_create_table_sqlstr

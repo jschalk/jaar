@@ -28,6 +28,7 @@ from src.a00_data_toolbox.file_toolbox import (
     save_json,
 )
 from src.a01_term_logic.term import EventInt, FaceName
+from src.a02_finance_logic.deal import TranBook
 from src.a06_plan_logic.plan import PlanUnit, planunit_shop
 from src.a08_plan_atom_logic.atom import planatom_shop
 from src.a08_plan_atom_logic.atom_config import get_plan_dimens
@@ -891,3 +892,18 @@ def etl_vow_job_jsons_to_job_tables(cursor: sqlite3_Cursor, vow_mstr_dir: str):
         for owner_name in get_level1_dirs(owners_dir):
             job_obj = open_job_file(vow_mstr_dir, vow_label, owner_name)
             insert_job_obj(cursor, job_obj)
+
+
+def insert_tranunit_accts_net(cursor: sqlite3_Cursor, tranbook: TranBook):
+    """
+    Insert the net amounts for each account in the tranbook into the specified table.
+
+    :param cursor: SQLite cursor object
+    :param tranbook: TranBook object containing transaction units
+    :param dst_tablename: Name of the destination table
+    """
+    accts_net_array = tranbook._get_accts_net_array()
+    cursor.executemany(
+        f"INSERT INTO vow_acct_nets (vow_label, owner_name, owner_net_amount) VALUES ('{tranbook.vow_label}', ?, ?)",
+        accts_net_array,
+    )
