@@ -62,8 +62,8 @@ def test_etl_vow_job_jsons_to_job_tables_PopulatesTables_Scenario0(
         plnreas_job_table = prime_table("plnreas", job_str(), None)
         plnlabo_job_table = prime_table("plnlabo", job_str(), None)
         plnconc_job_table = prime_table("plnconc", job_str(), None)
-        planunit_job_table = prime_table("planunit", job_str(), None)
-        assert not db_table_exists(cursor, planunit_job_table)
+        plnunit_job_table = prime_table("planunit", job_str(), None)
+        assert not db_table_exists(cursor, plnunit_job_table)
         assert not db_table_exists(cursor, plnconc_job_table)
         assert not db_table_exists(cursor, plnacct_job_table)
         assert not db_table_exists(cursor, plnmemb_job_table)
@@ -79,7 +79,7 @@ def test_etl_vow_job_jsons_to_job_tables_PopulatesTables_Scenario0(
         etl_vow_job_jsons_to_job_tables(cursor, m23_vow_mstr_dir)
 
         # THEN
-        assert get_row_count(cursor, planunit_job_table) == 1
+        assert get_row_count(cursor, plnunit_job_table) == 1
         assert get_row_count(cursor, plnconc_job_table) == 5
         assert get_row_count(cursor, plnacct_job_table) == 2
         assert get_row_count(cursor, plnmemb_job_table) == 3

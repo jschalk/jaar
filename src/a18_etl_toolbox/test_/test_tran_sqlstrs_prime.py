@@ -22,15 +22,7 @@ from src.a06_plan_logic._test_util.a06_str import (
 )
 from src.a08_plan_atom_logic.atom_config import get_delete_key_name, get_plan_dimens
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
-from src.a15_vow_logic._test_util.a15_str import (
-    vow_dealunit_str,
-    vow_paybook_str,
-    vow_timeline_hour_str,
-    vow_timeline_month_str,
-    vow_timeline_weekday_str,
-    vow_timeoffi_str,
-    vowunit_str,
-)
+from src.a15_vow_logic._test_util.a15_str import vow_timeline_hour_str
 from src.a15_vow_logic.vow_config import get_vow_dimens
 from src.a16_pidgin_logic._test_util.a16_str import (
     inx_bridge_str,
@@ -86,8 +78,8 @@ PLAN_PRIME_TABLENAMES = {
     f"{plan_concept_laborlink_str()}_sound_put_raw": "PLNLABO_PUT_RAW",
     f"{plan_conceptunit_str()}_sound_put_agg": "PLNCONC_PUT_AGG",
     f"{plan_conceptunit_str()}_sound_put_raw": "PLNCONC_PUT_RAW",
-    f"{planunit_str()}_sound_put_agg": "PLANUNIT_PUT_AGG",
-    f"{planunit_str()}_sound_put_raw": "PLANUNIT_PUT_RAW",
+    f"{planunit_str()}_sound_put_agg": "PLNUNIT_PUT_AGG",
+    f"{planunit_str()}_sound_put_raw": "PLNUNIT_PUT_RAW",
     f"{plan_acct_membership_str()}_sound_del_agg": "PLNMEMB_DEL_AGG",
     f"{plan_acct_membership_str()}_sound_del_raw": "PLNMEMB_DEL_RAW",
     f"{plan_acctunit_str()}_sound_del_agg": "PLNACCT_DEL_AGG",
@@ -106,8 +98,8 @@ PLAN_PRIME_TABLENAMES = {
     f"{plan_concept_laborlink_str()}_sound_del_raw": "PLNLABO_DEL_RAW",
     f"{plan_conceptunit_str()}_sound_del_agg": "PLNCONC_DEL_AGG",
     f"{plan_conceptunit_str()}_sound_del_raw": "PLNCONC_DEL_RAW",
-    f"{planunit_str()}_sound_del_agg": "PLANUNIT_DEL_AGG",
-    f"{planunit_str()}_sound_del_raw": "PLANUNIT_DEL_RAW",
+    f"{planunit_str()}_sound_del_agg": "PLNUNIT_DEL_AGG",
+    f"{planunit_str()}_sound_del_raw": "PLNUNIT_DEL_RAW",
 }
 
 
@@ -543,7 +535,7 @@ def test_create_sound_and_voice_tables_CreatesVowRawTables():
         vld_str = "vld"
         put_str = "put"
         del_str = "del"
-        planunit_s_put_agg_table = prime_tbl("planunit", "s", agg_str, put_str)
+        plnunit_s_put_agg_table = prime_tbl("planunit", "s", agg_str, put_str)
         plnacct_s_put_agg_table = prime_tbl("plnacct", "s", agg_str, put_str)
         plnmemb_s_put_agg_table = prime_tbl("plnmemb", "s", agg_str, put_str)
         plnfact_s_del_agg_table = prime_tbl("plnfact", "s", agg_str, del_str)
@@ -557,7 +549,7 @@ def test_create_sound_and_voice_tables_CreatesVowRawTables():
         pidcore_s_agg_table = prime_tbl("pidcore", "s", agg_str)
         pidcore_s_vld_table = prime_tbl("pidcore", "s", vld_str)
 
-        assert not db_table_exists(cursor, planunit_s_put_agg_table)
+        assert not db_table_exists(cursor, plnunit_s_put_agg_table)
         assert not db_table_exists(cursor, plnacct_s_put_agg_table)
         assert not db_table_exists(cursor, plnmemb_s_put_agg_table)
         assert not db_table_exists(cursor, plnfact_s_del_agg_table)
@@ -581,7 +573,7 @@ def test_create_sound_and_voice_tables_CreatesVowRawTables():
         # for x_row in cursor.fetchall():
         #     print(f"{x_count} {x_row[1]=}")
         #     x_count += 1
-        assert db_table_exists(cursor, planunit_s_put_agg_table)
+        assert db_table_exists(cursor, plnunit_s_put_agg_table)
         assert db_table_exists(cursor, plnacct_s_put_agg_table)
         assert db_table_exists(cursor, plnmemb_s_put_agg_table)
         assert db_table_exists(cursor, plnfact_s_del_agg_table)

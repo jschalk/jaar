@@ -526,7 +526,7 @@
         }
     },
     "planunit": {
-        "abbreviation": "planunit",
+        "abbreviation": "plnunit",
         "jkeys": {
             "vow_label": {
                 "class_type": "LabelTerm",

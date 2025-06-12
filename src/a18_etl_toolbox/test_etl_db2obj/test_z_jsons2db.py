@@ -891,8 +891,8 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         plnreas_job_table = "plan_concept_reasonunit_job"
         plnlabo_job_table = "plan_concept_laborlink_job"
         plnconc_job_table = "plan_conceptunit_job"
-        planunit_job_table = "planunit_job"
-        assert get_row_count(cursor, planunit_job_table) == 0
+        plnunit_job_table = "planunit_job"
+        assert get_row_count(cursor, plnunit_job_table) == 0
         assert get_row_count(cursor, plnconc_job_table) == 0
         assert get_row_count(cursor, plnacct_job_table) == 0
         assert get_row_count(cursor, plnmemb_job_table) == 0
@@ -908,7 +908,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         insert_job_obj(cursor, sue_plan)
 
         # THEN
-        assert get_row_count(cursor, planunit_job_table) == 1
+        assert get_row_count(cursor, plnunit_job_table) == 1
         assert get_row_count(cursor, plnconc_job_table) == 5
         assert get_row_count(cursor, plnacct_job_table) == 2
         assert get_row_count(cursor, plnmemb_job_table) == 3

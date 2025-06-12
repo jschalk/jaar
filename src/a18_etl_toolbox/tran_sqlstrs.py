@@ -29,7 +29,7 @@ ALL_DIMEN_ABBV7 = {
     "PLNREAS",
     "PLNLABO",
     "PLNCONC",
-    "PLANUNIT",
+    "PLNUNIT",
     "PIDTITL",
     "PIDNAME",
     "PIDWAYY",
@@ -55,7 +55,7 @@ def get_dimen_abbv7(dimen: str) -> str:
         "plan_concept_reasonunit": "PLNREAS",
         "plan_concept_laborlink": "PLNLABO",
         "plan_conceptunit": "PLNCONC",
-        "planunit": "PLANUNIT",
+        "planunit": "PLNUNIT",
         "pidgin_title": "PIDTITL",
         "pidgin_name": "PIDNAME",
         "pidgin_way": "PIDWAYY",
@@ -94,7 +94,7 @@ def create_prime_tablename(
         "PLNREAS": "plan_concept_reasonunit",
         "PLNLABO": "plan_concept_laborlink",
         "PLNCONC": "plan_conceptunit",
-        "PLANUNIT": "planunit",
+        "PLNUNIT": "planunit",
         "PIDTITL": "pidgin_title",
         "PIDNAME": "pidgin_name",
         "PIDWAYY": "pidgin_way",
@@ -257,16 +257,16 @@ CREATE_PLNCONC_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_conceptunit_
 CREATE_PLNCONC_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_conceptunit_v_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, task INTEGER, problem_bool INTEGER)"
 CREATE_PLNCONC_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_conceptunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_ERASE_otx TEXT, concept_way_ERASE_inx TEXT)"
 CREATE_PLNCONC_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_conceptunit_v_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way_ERASE TEXT)"
-CREATE_PLANUNIT_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS planunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, error_message TEXT)"
-CREATE_PLANUNIT_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS planunit_s_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, error_message TEXT)"
-CREATE_PLANUNIT_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS planunit_s_put_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL)"
-CREATE_PLANUNIT_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS planunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name_ERASE TEXT)"
-CREATE_PLANUNIT_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS planunit_s_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name_ERASE TEXT, error_message TEXT)"
-CREATE_PLANUNIT_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS planunit_s_del_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name_ERASE TEXT)"
-CREATE_PLANUNIT_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS planunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL)"
-CREATE_PLANUNIT_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS planunit_v_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL)"
-CREATE_PLANUNIT_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS planunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_ERASE_otx TEXT, owner_name_ERASE_inx TEXT)"
-CREATE_PLANUNIT_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS planunit_v_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name_ERASE TEXT)"
+CREATE_PLNUNIT_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS planunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, error_message TEXT)"
+CREATE_PLNUNIT_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS planunit_s_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, error_message TEXT)"
+CREATE_PLNUNIT_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS planunit_s_put_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL)"
+CREATE_PLNUNIT_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS planunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name_ERASE TEXT)"
+CREATE_PLNUNIT_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS planunit_s_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name_ERASE TEXT, error_message TEXT)"
+CREATE_PLNUNIT_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS planunit_s_del_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name_ERASE TEXT)"
+CREATE_PLNUNIT_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS planunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL)"
+CREATE_PLNUNIT_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS planunit_v_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL)"
+CREATE_PLNUNIT_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS planunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_ERASE_otx TEXT, owner_name_ERASE_inx TEXT)"
+CREATE_PLNUNIT_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS planunit_v_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name_ERASE TEXT)"
 
 
 def get_prime_create_table_sqlstrs() -> dict[str:str]:
@@ -411,16 +411,16 @@ def get_prime_create_table_sqlstrs() -> dict[str:str]:
         "plan_conceptunit_v_put_agg": CREATE_PLNCONC_VOICE_PUT_AGG_STR,
         "plan_conceptunit_v_del_raw": CREATE_PLNCONC_VOICE_DEL_RAW_STR,
         "plan_conceptunit_v_del_agg": CREATE_PLNCONC_VOICE_DEL_AGG_STR,
-        "planunit_s_put_raw": CREATE_PLANUNIT_SOUND_PUT_RAW_STR,
-        "planunit_s_put_agg": CREATE_PLANUNIT_SOUND_PUT_AGG_STR,
-        "planunit_s_put_vld": CREATE_PLANUNIT_SOUND_PUT_VLD_STR,
-        "planunit_s_del_raw": CREATE_PLANUNIT_SOUND_DEL_RAW_STR,
-        "planunit_s_del_agg": CREATE_PLANUNIT_SOUND_DEL_AGG_STR,
-        "planunit_s_del_vld": CREATE_PLANUNIT_SOUND_DEL_VLD_STR,
-        "planunit_v_put_raw": CREATE_PLANUNIT_VOICE_PUT_RAW_STR,
-        "planunit_v_put_agg": CREATE_PLANUNIT_VOICE_PUT_AGG_STR,
-        "planunit_v_del_raw": CREATE_PLANUNIT_VOICE_DEL_RAW_STR,
-        "planunit_v_del_agg": CREATE_PLANUNIT_VOICE_DEL_AGG_STR,
+        "planunit_s_put_raw": CREATE_PLNUNIT_SOUND_PUT_RAW_STR,
+        "planunit_s_put_agg": CREATE_PLNUNIT_SOUND_PUT_AGG_STR,
+        "planunit_s_put_vld": CREATE_PLNUNIT_SOUND_PUT_VLD_STR,
+        "planunit_s_del_raw": CREATE_PLNUNIT_SOUND_DEL_RAW_STR,
+        "planunit_s_del_agg": CREATE_PLNUNIT_SOUND_DEL_AGG_STR,
+        "planunit_s_del_vld": CREATE_PLNUNIT_SOUND_DEL_VLD_STR,
+        "planunit_v_put_raw": CREATE_PLNUNIT_VOICE_PUT_RAW_STR,
+        "planunit_v_put_agg": CREATE_PLNUNIT_VOICE_PUT_AGG_STR,
+        "planunit_v_del_raw": CREATE_PLNUNIT_VOICE_DEL_RAW_STR,
+        "planunit_v_del_agg": CREATE_PLNUNIT_VOICE_DEL_AGG_STR,
     }
 
 
@@ -738,8 +738,8 @@ INSERT_PLNLABO_SOUND_VLD_PUT_SQLSTR = "INSERT INTO plan_concept_laborlink_s_put_
 INSERT_PLNLABO_SOUND_VLD_DEL_SQLSTR = "INSERT INTO plan_concept_laborlink_s_del_vld (event_int, face_name, vow_label, owner_name, concept_way, labor_title_ERASE) SELECT event_int, face_name, vow_label, owner_name, concept_way, labor_title_ERASE FROM plan_concept_laborlink_s_del_agg WHERE error_message IS NULL"
 INSERT_PLNCONC_SOUND_VLD_PUT_SQLSTR = "INSERT INTO plan_conceptunit_s_put_vld (event_int, face_name, vow_label, owner_name, concept_way, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool) SELECT event_int, face_name, vow_label, owner_name, concept_way, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool FROM plan_conceptunit_s_put_agg WHERE error_message IS NULL"
 INSERT_PLNCONC_SOUND_VLD_DEL_SQLSTR = "INSERT INTO plan_conceptunit_s_del_vld (event_int, face_name, vow_label, owner_name, concept_way_ERASE) SELECT event_int, face_name, vow_label, owner_name, concept_way_ERASE FROM plan_conceptunit_s_del_agg WHERE error_message IS NULL"
-INSERT_PLANUNIT_SOUND_VLD_PUT_SQLSTR = "INSERT INTO planunit_s_put_vld (event_int, face_name, vow_label, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit) SELECT event_int, face_name, vow_label, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit FROM planunit_s_put_agg WHERE error_message IS NULL"
-INSERT_PLANUNIT_SOUND_VLD_DEL_SQLSTR = "INSERT INTO planunit_s_del_vld (event_int, face_name, vow_label, owner_name_ERASE) SELECT event_int, face_name, vow_label, owner_name_ERASE FROM planunit_s_del_agg WHERE error_message IS NULL"
+INSERT_PLNUNIT_SOUND_VLD_PUT_SQLSTR = "INSERT INTO planunit_s_put_vld (event_int, face_name, vow_label, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit) SELECT event_int, face_name, vow_label, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit FROM planunit_s_put_agg WHERE error_message IS NULL"
+INSERT_PLNUNIT_SOUND_VLD_DEL_SQLSTR = "INSERT INTO planunit_s_del_vld (event_int, face_name, vow_label, owner_name_ERASE) SELECT event_int, face_name, vow_label, owner_name_ERASE FROM planunit_s_del_agg WHERE error_message IS NULL"
 
 INSERT_VOWPAYY_SOUND_VLD_SQLSTR = "INSERT INTO vow_paybook_s_vld (event_int, face_name, vow_label, owner_name, acct_name, tran_time, amount) SELECT event_int, face_name, vow_label, owner_name, acct_name, tran_time, amount FROM vow_paybook_s_agg WHERE error_message IS NULL"
 INSERT_VOWDEAL_SOUND_VLD_SQLSTR = "INSERT INTO vow_dealunit_s_vld (event_int, face_name, vow_label, owner_name, deal_time, quota, celldepth) SELECT event_int, face_name, vow_label, owner_name, deal_time, quota, celldepth FROM vow_dealunit_s_agg WHERE error_message IS NULL"
@@ -770,8 +770,8 @@ def get_insert_into_sound_vld_sqlstrs() -> dict[str, str]:
         "plan_concept_laborlink_s_del_vld": INSERT_PLNLABO_SOUND_VLD_DEL_SQLSTR,
         "plan_conceptunit_s_put_vld": INSERT_PLNCONC_SOUND_VLD_PUT_SQLSTR,
         "plan_conceptunit_s_del_vld": INSERT_PLNCONC_SOUND_VLD_DEL_SQLSTR,
-        "planunit_s_put_vld": INSERT_PLANUNIT_SOUND_VLD_PUT_SQLSTR,
-        "planunit_s_del_vld": INSERT_PLANUNIT_SOUND_VLD_DEL_SQLSTR,
+        "planunit_s_put_vld": INSERT_PLNUNIT_SOUND_VLD_PUT_SQLSTR,
+        "planunit_s_del_vld": INSERT_PLNUNIT_SOUND_VLD_DEL_SQLSTR,
         "vow_paybook_s_vld": INSERT_VOWPAYY_SOUND_VLD_SQLSTR,
         "vow_dealunit_s_vld": INSERT_VOWDEAL_SOUND_VLD_SQLSTR,
         "vow_timeline_hour_s_vld": INSERT_VOWHOUR_SOUND_VLD_SQLSTR,
@@ -808,8 +808,8 @@ INSERT_PLNLABO_VOICE_RAW_PUT_SQLSTR = "INSERT INTO plan_concept_laborlink_v_put_
 INSERT_PLNLABO_VOICE_RAW_DEL_SQLSTR = "INSERT INTO plan_concept_laborlink_v_del_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_way_otx, labor_title_ERASE_otx) SELECT event_int, face_name, vow_label, owner_name, concept_way, labor_title_ERASE FROM plan_concept_laborlink_s_del_vld "
 INSERT_PLNCONC_VOICE_RAW_PUT_SQLSTR = "INSERT INTO plan_conceptunit_v_put_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_way_otx, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool) SELECT event_int, face_name, vow_label, owner_name, concept_way, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool FROM plan_conceptunit_s_put_vld "
 INSERT_PLNCONC_VOICE_RAW_DEL_SQLSTR = "INSERT INTO plan_conceptunit_v_del_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_way_ERASE_otx) SELECT event_int, face_name, vow_label, owner_name, concept_way_ERASE FROM plan_conceptunit_s_del_vld "
-INSERT_PLANUNIT_VOICE_RAW_PUT_SQLSTR = "INSERT INTO planunit_v_put_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit) SELECT event_int, face_name, vow_label, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit FROM planunit_s_put_vld "
-INSERT_PLANUNIT_VOICE_RAW_DEL_SQLSTR = "INSERT INTO planunit_v_del_raw (event_int, face_name_otx, vow_label_otx, owner_name_ERASE_otx) SELECT event_int, face_name, vow_label, owner_name_ERASE FROM planunit_s_del_vld "
+INSERT_PLNUNIT_VOICE_RAW_PUT_SQLSTR = "INSERT INTO planunit_v_put_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit) SELECT event_int, face_name, vow_label, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit FROM planunit_s_put_vld "
+INSERT_PLNUNIT_VOICE_RAW_DEL_SQLSTR = "INSERT INTO planunit_v_del_raw (event_int, face_name_otx, vow_label_otx, owner_name_ERASE_otx) SELECT event_int, face_name, vow_label, owner_name_ERASE FROM planunit_s_del_vld "
 
 
 def get_insert_into_voice_raw_sqlstrs() -> dict[str, str]:
@@ -839,8 +839,8 @@ def get_insert_into_voice_raw_sqlstrs() -> dict[str, str]:
         "plan_concept_laborlink_v_del_raw": INSERT_PLNLABO_VOICE_RAW_DEL_SQLSTR,
         "plan_conceptunit_v_put_raw": INSERT_PLNCONC_VOICE_RAW_PUT_SQLSTR,
         "plan_conceptunit_v_del_raw": INSERT_PLNCONC_VOICE_RAW_DEL_SQLSTR,
-        "planunit_v_put_raw": INSERT_PLANUNIT_VOICE_RAW_PUT_SQLSTR,
-        "planunit_v_del_raw": INSERT_PLANUNIT_VOICE_RAW_DEL_SQLSTR,
+        "planunit_v_put_raw": INSERT_PLNUNIT_VOICE_RAW_PUT_SQLSTR,
+        "planunit_v_del_raw": INSERT_PLNUNIT_VOICE_RAW_DEL_SQLSTR,
     }
 
 
@@ -1043,13 +1043,13 @@ SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_ERAS
 FROM plan_conceptunit_v_del_raw
 GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_ERASE_inx
 """
-INSERT_PLANUNIT_VOICE_AGG_PUT_SQLSTR = """
+INSERT_PLNUNIT_VOICE_AGG_PUT_SQLSTR = """
 INSERT INTO planunit_v_put_agg (event_int, face_name, vow_label, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit)
 SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit
 FROM planunit_v_put_raw
 GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit
 """
-INSERT_PLANUNIT_VOICE_AGG_DEL_SQLSTR = """
+INSERT_PLNUNIT_VOICE_AGG_DEL_SQLSTR = """
 INSERT INTO planunit_v_del_agg (event_int, face_name, vow_label, owner_name_ERASE)
 SELECT event_int, face_name_inx, vow_label_inx, owner_name_ERASE_inx
 FROM planunit_v_del_raw
@@ -1084,8 +1084,8 @@ def get_insert_voice_agg_sqlstrs() -> dict[str, str]:
         "plan_concept_laborlink_v_del_agg": INSERT_PLNLABO_VOICE_AGG_DEL_SQLSTR,
         "plan_conceptunit_v_put_agg": INSERT_PLNCONC_VOICE_AGG_PUT_SQLSTR,
         "plan_conceptunit_v_del_agg": INSERT_PLNCONC_VOICE_AGG_DEL_SQLSTR,
-        "planunit_v_put_agg": INSERT_PLANUNIT_VOICE_AGG_PUT_SQLSTR,
-        "planunit_v_del_agg": INSERT_PLANUNIT_VOICE_AGG_DEL_SQLSTR,
+        "planunit_v_put_agg": INSERT_PLNUNIT_VOICE_AGG_PUT_SQLSTR,
+        "planunit_v_del_agg": INSERT_PLNUNIT_VOICE_AGG_DEL_SQLSTR,
     }
 
 
@@ -1288,7 +1288,7 @@ CREATE_JOB_PLNPREM_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_concept_reason_pr
 CREATE_JOB_PLNREAS_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_concept_reasonunit_job (vow_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, rconcept_active_requisite INTEGER, _chore INTEGER, _status INTEGER, _rconcept_active_value INTEGER)"""
 CREATE_JOB_PLNLABO_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_concept_laborlink_job (vow_label TEXT, owner_name TEXT, concept_way TEXT, labor_title TEXT, _owner_name_labor INTEGER)"""
 CREATE_JOB_PLNCONC_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_conceptunit_job (vow_label TEXT, owner_name TEXT, concept_way TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, task INTEGER, problem_bool INTEGER, fund_iota REAL, _active INTEGER, _chore INTEGER, _fund_onset REAL, _fund_cease REAL, _fund_ratio REAL, _gogo_calc REAL, _stop_calc REAL, _level INTEGER, _range_evaluated INTEGER, _descendant_task_count INTEGER, _healerlink_ratio REAL, _all_acct_cred INTEGER, _all_acct_debt INTEGER)"""
-CREATE_JOB_PLANUNIT_SQLSTR = """CREATE TABLE IF NOT EXISTS planunit_job (vow_label TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, _rational INTEGER, _keeps_justified INTEGER, _offtrack_fund REAL, _sum_healerlink_share REAL, _keeps_buildable INTEGER, _tree_traverse_count INTEGER)"""
+CREATE_JOB_PLNUNIT_SQLSTR = """CREATE TABLE IF NOT EXISTS planunit_job (vow_label TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, _rational INTEGER, _keeps_justified INTEGER, _offtrack_fund REAL, _sum_healerlink_share REAL, _keeps_buildable INTEGER, _tree_traverse_count INTEGER)"""
 
 
 def get_job_create_table_sqlstrs() -> dict[str, str]:
@@ -1303,7 +1303,7 @@ def get_job_create_table_sqlstrs() -> dict[str, str]:
         "plan_concept_reasonunit_job": CREATE_JOB_PLNREAS_SQLSTR,
         "plan_concept_laborlink_job": CREATE_JOB_PLNLABO_SQLSTR,
         "plan_conceptunit_job": CREATE_JOB_PLNCONC_SQLSTR,
-        "planunit_job": CREATE_JOB_PLANUNIT_SQLSTR,
+        "planunit_job": CREATE_JOB_PLNUNIT_SQLSTR,
     }
 
 

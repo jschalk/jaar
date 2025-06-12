@@ -71,7 +71,7 @@ def test_create_job_tables_CreatesTables():
         planares_job_table = prime_table(plan_concept_reasonunit_str(), job_str(), None)
         plnlabo_job_table = prime_table(plan_concept_laborlink_str(), job_str(), None)
         plnconc_job_table = prime_table(plan_conceptunit_str(), job_str(), None)
-        planunit_job_table = prime_table(planunit_str(), job_str(), None)
+        plnunit_job_table = prime_table(planunit_str(), job_str(), None)
         # plnmemb_job_table = f"{plan_acct_membership_str()}_job"
         # plnacct_job_table = f"{plan_acctunit_str()}_job"
         # plngrou_job_table = f"{plan_groupunit_str()}_job"
@@ -82,7 +82,7 @@ def test_create_job_tables_CreatesTables():
         # planares_job_table = f"{plan_concept_reasonunit_str()}_job"
         # plnlabo_job_table = f"{plan_concept_laborlink_str()}_job"
         # plnconc_job_table = f"{plan_conceptunit_str()}_job"
-        # planunit_job_table = f"{planunit_str()}_job"
+        # plnunit_job_table = f"{planunit_str()}_job"
 
         assert db_table_exists(cursor, plnmemb_job_table) is False
         assert db_table_exists(cursor, plnacct_job_table) is False
@@ -94,7 +94,7 @@ def test_create_job_tables_CreatesTables():
         assert db_table_exists(cursor, planares_job_table) is False
         assert db_table_exists(cursor, plnlabo_job_table) is False
         assert db_table_exists(cursor, plnconc_job_table) is False
-        assert db_table_exists(cursor, planunit_job_table) is False
+        assert db_table_exists(cursor, plnunit_job_table) is False
 
         # WHEN
         create_job_tables(cursor)
@@ -116,6 +116,6 @@ def test_create_job_tables_CreatesTables():
         assert db_table_exists(cursor, planares_job_table)
         assert db_table_exists(cursor, plnlabo_job_table)
         assert db_table_exists(cursor, plnconc_job_table)
-        assert db_table_exists(cursor, planunit_job_table)
+        assert db_table_exists(cursor, plnunit_job_table)
         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
         assert cursor.fetchone()[0] == 11

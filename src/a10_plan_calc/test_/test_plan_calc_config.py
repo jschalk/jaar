@@ -210,7 +210,7 @@ def test_get_plan_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
                     fm_aspect_keys = set(fm_aspect_dict.keys())
                     assert fm_aspect_keys == dimen_keys
 
-    planunit_aspect = plan_calc_config.get(planunit_str())
+    plnunit_aspect = plan_calc_config.get(planunit_str())
     plnacct_aspect = plan_calc_config.get(plan_acctunit_str())
     plnmemb_aspect = plan_calc_config.get(plan_acct_membership_str())
     plnconc_aspect = plan_calc_config.get(plan_conceptunit_str())
@@ -222,7 +222,7 @@ def test_get_plan_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     plnfact_aspect = plan_calc_config.get(plan_concept_factunit_str())
     plngrou_aspect = plan_calc_config.get(plan_groupunit_str())
 
-    planunit_jmetrics_keys = set(planunit_aspect.get(jmetrics_str()))
+    plnunit_jmetrics_keys = set(plnunit_aspect.get(jmetrics_str()))
     plnacct_jmetrics_keys = set(plnacct_aspect.get(jmetrics_str()))
     plnmemb_jmetrics_keys = set(plnmemb_aspect.get(jmetrics_str()))
     plnconc_jmetrics_keys = set(plnconc_aspect.get(jmetrics_str()))
@@ -234,7 +234,7 @@ def test_get_plan_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     plnfact_jmetrics_keys = set(plnfact_aspect.get(jmetrics_str()))
     plngrou_jmetrics_keys = set(plngrou_aspect.get(jmetrics_str()))
 
-    expected_planunit_jmetrics_keys = {
+    expected_plnunit_jmetrics_keys = {
         "_tree_traverse_count",
         "_rational",
         "_keeps_justified",
@@ -242,7 +242,7 @@ def test_get_plan_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
         "_sum_healerlink_share",
         "_offtrack_fund",
     }
-    assert expected_planunit_jmetrics_keys == planunit_jmetrics_keys
+    assert expected_plnunit_jmetrics_keys == plnunit_jmetrics_keys
     expected_plnacct_jmetrics_keys = {
         "_credor_pool",
         "_debtor_pool",
@@ -307,7 +307,7 @@ def test_get_plan_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     }
     assert expected_plngrou_jmetrics_keys == plngrou_jmetrics_keys
 
-    assert planunit_jmetrics_keys  # Non-empty
+    assert plnunit_jmetrics_keys  # Non-empty
     assert plnacct_jmetrics_keys  # Non-empty
     assert plnmemb_jmetrics_keys  # Non-empty
     assert plnconc_jmetrics_keys  # Non-empty
@@ -325,7 +325,7 @@ def test_get_plan_calc_config_dict_ReturnsObj_CheckAbbreviations():
     plan_calc_config = get_plan_calc_config_dict()
 
     # THEN
-    planunit_aspect = plan_calc_config.get(planunit_str())
+    plnunit_aspect = plan_calc_config.get(planunit_str())
     plnacct_aspect = plan_calc_config.get(plan_acctunit_str())
     plnmemb_aspect = plan_calc_config.get(plan_acct_membership_str())
     plnconc_aspect = plan_calc_config.get(plan_conceptunit_str())
@@ -337,7 +337,7 @@ def test_get_plan_calc_config_dict_ReturnsObj_CheckAbbreviations():
     plnfact_aspect = plan_calc_config.get(plan_concept_factunit_str())
     plngrou_aspect = plan_calc_config.get(plan_groupunit_str())
     abbr_str = "abbreviation"
-    assert planunit_aspect.get(abbr_str) == "planunit"
+    assert plnunit_aspect.get(abbr_str) == "plnunit"
     assert plnacct_aspect.get(abbr_str) == "plnacct"
     assert plnmemb_aspect.get(abbr_str) == "plnmemb"
     assert plnconc_aspect.get(abbr_str) == "plnconc"
