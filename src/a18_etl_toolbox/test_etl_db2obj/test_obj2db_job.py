@@ -2,17 +2,17 @@ from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import create_insert_query
 from src.a10_plan_calc.plan_calc_config import get_plan_calc_dimen_args
 from src.a18_etl_toolbox.db_obj_plan_tool import (
-    create_planacct_metrics_insert_sqlstr,
-    create_planawar_metrics_insert_sqlstr,
-    create_planconc_metrics_insert_sqlstr,
-    create_planfact_metrics_insert_sqlstr,
-    create_plangrou_metrics_insert_sqlstr,
-    create_planheal_metrics_insert_sqlstr,
-    create_planlabo_metrics_insert_sqlstr,
-    create_planmemb_metrics_insert_sqlstr,
-    create_planprem_metrics_insert_sqlstr,
-    create_planreas_metrics_insert_sqlstr,
     create_planunit_metrics_insert_sqlstr,
+    create_plnacct_metrics_insert_sqlstr,
+    create_plnawar_metrics_insert_sqlstr,
+    create_plnconc_metrics_insert_sqlstr,
+    create_plnfact_metrics_insert_sqlstr,
+    create_plngrou_metrics_insert_sqlstr,
+    create_plnheal_metrics_insert_sqlstr,
+    create_plnlabo_metrics_insert_sqlstr,
+    create_plnmemb_metrics_insert_sqlstr,
+    create_plnprem_metrics_insert_sqlstr,
+    create_plnreas_metrics_insert_sqlstr,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import create_job_tables
 
@@ -77,7 +77,7 @@ def test_create_planunit_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_planconc_metrics_insert_sqlstr_ReturnsObj():
+def test_create_plnconc_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
     x_args = get_plan_calc_dimen_args("plan_conceptunit")
@@ -153,7 +153,7 @@ def test_create_planconc_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_planconc_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_plnconc_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
@@ -168,7 +168,7 @@ def test_create_planconc_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_planreas_metrics_insert_sqlstr_ReturnsObj():
+def test_create_plnreas_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
     x_args = get_plan_calc_dimen_args("plan_concept_reasonunit")
@@ -213,7 +213,7 @@ def test_create_planreas_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_planreas_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_plnreas_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
@@ -228,7 +228,7 @@ def test_create_planreas_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_planprem_metrics_insert_sqlstr_ReturnsObj():
+def test_create_plnprem_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
     x_args = get_plan_calc_dimen_args("plan_concept_reason_premiseunit")
@@ -280,7 +280,7 @@ def test_create_planprem_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_planprem_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_plnprem_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
@@ -295,7 +295,7 @@ def test_create_planprem_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_planawar_metrics_insert_sqlstr_ReturnsObj():
+def test_create_plnawar_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
     x_args = get_plan_calc_dimen_args("plan_concept_awardlink")
@@ -343,7 +343,7 @@ def test_create_planawar_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_planawar_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_plnawar_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
@@ -358,7 +358,7 @@ def test_create_planawar_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_planfact_metrics_insert_sqlstr_ReturnsObj():
+def test_create_plnfact_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
     x_args = get_plan_calc_dimen_args("plan_concept_factunit")
@@ -404,7 +404,7 @@ def test_create_planfact_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_planfact_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_plnfact_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
@@ -419,7 +419,7 @@ def test_create_planfact_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_planheal_metrics_insert_sqlstr_ReturnsObj():
+def test_create_plnheal_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
     x_args = get_plan_calc_dimen_args("plan_concept_healerlink")
@@ -459,7 +459,7 @@ def test_create_planheal_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_planheal_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_plnheal_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
@@ -474,7 +474,7 @@ def test_create_planheal_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_planlabo_metrics_insert_sqlstr_ReturnsObj():
+def test_create_plnlabo_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
     x_args = get_plan_calc_dimen_args("plan_concept_laborlink")
@@ -516,7 +516,7 @@ def test_create_planlabo_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_planlabo_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_plnlabo_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
@@ -531,7 +531,7 @@ def test_create_planlabo_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_planacct_metrics_insert_sqlstr_ReturnsObj():
+def test_create_plnacct_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
     x_args = get_plan_calc_dimen_args("plan_acctunit")
@@ -593,7 +593,7 @@ def test_create_planacct_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_planacct_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_plnacct_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
@@ -608,7 +608,7 @@ def test_create_planacct_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_planmemb_metrics_insert_sqlstr_ReturnsObj():
+def test_create_plnmemb_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
     x_args = get_plan_calc_dimen_args("plan_acct_membership")
@@ -668,7 +668,7 @@ def test_create_planmemb_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_planmemb_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_plnmemb_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
@@ -683,7 +683,7 @@ def test_create_planmemb_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_plangrou_metrics_insert_sqlstr_ReturnsObj():
+def test_create_plngrou_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
     x_args = get_plan_calc_dimen_args("plan_groupunit")
@@ -737,7 +737,7 @@ def test_create_plangrou_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_plangrou_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_plngrou_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr

@@ -9,7 +9,7 @@ from src.a16_pidgin_logic._test_util.a16_str import (
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_PIDCORE_SOUND_VLD_SQLSTR,
-    CREATE_PLANACCT_SOUND_PUT_AGG_STR,
+    CREATE_PLNACCT_SOUND_PUT_AGG_STR,
     create_bridge_exists_in_label_error_update_sqlstr,
     create_bridge_exists_in_name_error_update_sqlstr,
     create_prime_tablename,
@@ -30,17 +30,17 @@ def test_create_bridge_exists_in_name_error_update_sqlstr_ReturnsObj_PopulatesTa
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        cursor.execute(CREATE_PLANACCT_SOUND_PUT_AGG_STR)
-        planacct_dimen = plan_acctunit_str()
-        planacct_s_agg_put = create_prime_tablename(planacct_dimen, "s", "agg", "put")
-        insert_planacct_sqlstr = f"""INSERT INTO {planacct_s_agg_put} (
+        cursor.execute(CREATE_PLNACCT_SOUND_PUT_AGG_STR)
+        plnacct_dimen = plan_acctunit_str()
+        plnacct_s_agg_put = create_prime_tablename(plnacct_dimen, "s", "agg", "put")
+        insert_plnacct_sqlstr = f"""INSERT INTO {plnacct_s_agg_put} (
   {event_int_str()}, {face_name_str()}, {vow_label_str()}, {owner_name_str()}, {acct_name_str()})
 VALUES
   ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
 , ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{bob_str}')
 ;
 """
-        cursor.execute(insert_planacct_sqlstr)
+        cursor.execute(insert_plnacct_sqlstr)
         cursor.execute(CREATE_PIDCORE_SOUND_VLD_SQLSTR)
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_pidcore_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename} (
@@ -52,20 +52,20 @@ VALUES
 """
         cursor.execute(insert_pidcore_sqlstr)
         error_count_sqlstr = (
-            f"SELECT COUNT(*) FROM {planacct_s_agg_put} WHERE error_message IS NOT NULL"
+            f"SELECT COUNT(*) FROM {plnacct_s_agg_put} WHERE error_message IS NOT NULL"
         )
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
         sqlstr = create_bridge_exists_in_name_error_update_sqlstr(
-            planacct_s_agg_put, acct_name_str()
+            plnacct_s_agg_put, acct_name_str()
         )
         print(f"{sqlstr=}")
         cursor.execute(sqlstr)
 
         # THEN
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 1
-        select_core_raw_sqlstr = f"SELECT * FROM {planacct_s_agg_put}"
+        select_core_raw_sqlstr = f"SELECT * FROM {plnacct_s_agg_put}"
         cursor.execute(select_core_raw_sqlstr)
         name_bridge_str = f"Bridge cannot exist in NameTerm column {acct_name_str()}"
         assert cursor.fetchall() == [
@@ -88,10 +88,10 @@ def test_create_bridge_exists_in_label_error_update_sqlstr_ReturnsObj_PopulatesT
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        cursor.execute(CREATE_PLANACCT_SOUND_PUT_AGG_STR)
-        planacct_dimen = plan_acctunit_str()
-        planacct_s_agg_put = create_prime_tablename(planacct_dimen, "s", "agg", "put")
-        insert_planacct_sqlstr = f"""INSERT INTO {planacct_s_agg_put} (
+        cursor.execute(CREATE_PLNACCT_SOUND_PUT_AGG_STR)
+        plnacct_dimen = plan_acctunit_str()
+        plnacct_s_agg_put = create_prime_tablename(plnacct_dimen, "s", "agg", "put")
+        insert_plnacct_sqlstr = f"""INSERT INTO {plnacct_s_agg_put} (
   {event_int_str()}, {face_name_str()}, {vow_label_str()}, {owner_name_str()}, {acct_name_str()})
 VALUES
   ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
@@ -99,7 +99,7 @@ VALUES
 , ({event1}, '{sue_str}', '{a45_str}', '{yao_str}', '{bob_str}')
 ;
 """
-        cursor.execute(insert_planacct_sqlstr)
+        cursor.execute(insert_plnacct_sqlstr)
         cursor.execute(CREATE_PIDCORE_SOUND_VLD_SQLSTR)
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_pidcore_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename} (
@@ -111,20 +111,20 @@ VALUES
 """
         cursor.execute(insert_pidcore_sqlstr)
         error_count_sqlstr = (
-            f"SELECT COUNT(*) FROM {planacct_s_agg_put} WHERE error_message IS NOT NULL"
+            f"SELECT COUNT(*) FROM {plnacct_s_agg_put} WHERE error_message IS NOT NULL"
         )
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
         sqlstr = create_bridge_exists_in_label_error_update_sqlstr(
-            planacct_s_agg_put, vow_label_str()
+            plnacct_s_agg_put, vow_label_str()
         )
         print(f"{sqlstr=}")
         cursor.execute(sqlstr)
 
         # THEN
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 1
-        select_core_raw_sqlstr = f"SELECT * FROM {planacct_s_agg_put}"
+        select_core_raw_sqlstr = f"SELECT * FROM {plnacct_s_agg_put}"
         cursor.execute(select_core_raw_sqlstr)
         label_bridge_str = f"Bridge cannot exist in LabelTerm column {vow_label_str()}"
         assert cursor.fetchall() == [
@@ -149,10 +149,10 @@ def test_set_vow_plan_sound_agg_bridge_errors_PopulatesTable_Scenario0():
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        cursor.execute(CREATE_PLANACCT_SOUND_PUT_AGG_STR)
-        planacct_dimen = plan_acctunit_str()
-        planacct_s_agg_put = create_prime_tablename(planacct_dimen, "s", "agg", "put")
-        insert_planacct_sqlstr = f"""INSERT INTO {planacct_s_agg_put} (
+        cursor.execute(CREATE_PLNACCT_SOUND_PUT_AGG_STR)
+        plnacct_dimen = plan_acctunit_str()
+        plnacct_s_agg_put = create_prime_tablename(plnacct_dimen, "s", "agg", "put")
+        insert_plnacct_sqlstr = f"""INSERT INTO {plnacct_s_agg_put} (
   {event_int_str()}, {face_name_str()}, {vow_label_str()}, {owner_name_str()}, {acct_name_str()})
 VALUES
   ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
@@ -160,7 +160,7 @@ VALUES
 , ({event1}, '{sue_str}', '{a45_str}', '{yao_str}', '{yao_str}')
 ;
 """
-        cursor.execute(insert_planacct_sqlstr)
+        cursor.execute(insert_plnacct_sqlstr)
         cursor.execute(CREATE_PIDCORE_SOUND_VLD_SQLSTR)
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_pidcore_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename} (
@@ -172,7 +172,7 @@ VALUES
 """
         cursor.execute(insert_pidcore_sqlstr)
         error_count_sqlstr = (
-            f"SELECT COUNT(*) FROM {planacct_s_agg_put} WHERE error_message IS NOT NULL"
+            f"SELECT COUNT(*) FROM {plnacct_s_agg_put} WHERE error_message IS NOT NULL"
         )
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
@@ -181,7 +181,7 @@ VALUES
 
         # THEN
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 2
-        select_core_raw_sqlstr = f"SELECT * FROM {planacct_s_agg_put} ORDER BY {vow_label_str()}, {owner_name_str()}, {acct_name_str()}"
+        select_core_raw_sqlstr = f"SELECT * FROM {plnacct_s_agg_put} ORDER BY {vow_label_str()}, {owner_name_str()}, {acct_name_str()}"
         cursor.execute(select_core_raw_sqlstr)
         name_bridge_str = f"Bridge cannot exist in NameTerm column {acct_name_str()}"
         label_bridge_str = f"Bridge cannot exist in LabelTerm column {vow_label_str()}"

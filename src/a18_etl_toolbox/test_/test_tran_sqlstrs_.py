@@ -72,16 +72,16 @@ def test_ALL_DIMEN_ABBV7_has_all_dimens():
 def test_create_prime_tablename_ReturnsObj():
     # ESTABLISH
     planunit_dimen = planunit_str()
-    planacct_dimen = plan_acctunit_str()
-    planmemb_dimen = plan_acct_membership_str()
-    plangrou_dimen = plan_groupunit_str()
-    planconc_dimen = plan_conceptunit_str()
-    planawar_dimen = plan_concept_awardlink_str()
-    planreas_dimen = plan_concept_reasonunit_str()
-    planprem_dimen = plan_concept_reason_premiseunit_str()
-    planlabo_dimen = plan_concept_laborlink_str()
-    planheal_dimen = plan_concept_healerlink_str()
-    planfact_dimen = plan_concept_factunit_str()
+    plnacct_dimen = plan_acctunit_str()
+    plnmemb_dimen = plan_acct_membership_str()
+    plngrou_dimen = plan_groupunit_str()
+    plnconc_dimen = plan_conceptunit_str()
+    plnawar_dimen = plan_concept_awardlink_str()
+    plnreas_dimen = plan_concept_reasonunit_str()
+    plnprem_dimen = plan_concept_reason_premiseunit_str()
+    plnlabo_dimen = plan_concept_laborlink_str()
+    plnheal_dimen = plan_concept_healerlink_str()
+    plnfact_dimen = plan_concept_factunit_str()
     vowunit_dimen = vowunit_str()
     vowpayy_dimen = vow_paybook_str()
     vowdeal_dimen = vow_dealunit_str()
@@ -102,16 +102,16 @@ def test_create_prime_tablename_ReturnsObj():
 
     # WHEN
     planunit_s_agg_table = create_prime_tablename("planunit", "s", agg_str, put_str)
-    planacct_s_agg_table = create_prime_tablename("planacct", "s", agg_str, put_str)
-    planmemb_s_agg_table = create_prime_tablename("planmemb", "s", agg_str, put_str)
-    planconc_s_agg_table = create_prime_tablename("planconc", "s", agg_str, put_str)
-    planawar_s_agg_table = create_prime_tablename("planawar", "s", agg_str, put_str)
-    planreas_s_agg_table = create_prime_tablename("planreas", "s", agg_str, put_str)
-    planprem_s_agg_table = create_prime_tablename("planprem", "s", agg_str, put_str)
-    planlabo_s_agg_table = create_prime_tablename("PLANLABO", "s", agg_str, put_str)
-    planheal_s_agg_table = create_prime_tablename("planheal", "s", agg_str, put_str)
-    planfact_s_agg_table = create_prime_tablename("planfact", "s", agg_str, put_str)
-    planfact_s_del_table = create_prime_tablename("planfact", "s", agg_str, del_str)
+    plnacct_s_agg_table = create_prime_tablename("plnacct", "s", agg_str, put_str)
+    plnmemb_s_agg_table = create_prime_tablename("plnmemb", "s", agg_str, put_str)
+    plnconc_s_agg_table = create_prime_tablename("plnconc", "s", agg_str, put_str)
+    plnawar_s_agg_table = create_prime_tablename("plnawar", "s", agg_str, put_str)
+    plnreas_s_agg_table = create_prime_tablename("plnreas", "s", agg_str, put_str)
+    plnprem_s_agg_table = create_prime_tablename("plnprem", "s", agg_str, put_str)
+    plnlabo_s_agg_table = create_prime_tablename("PLNLABO", "s", agg_str, put_str)
+    plnheal_s_agg_table = create_prime_tablename("plnheal", "s", agg_str, put_str)
+    plnfact_s_agg_table = create_prime_tablename("plnfact", "s", agg_str, put_str)
+    plnfact_s_del_table = create_prime_tablename("plnfact", "s", agg_str, del_str)
     vowunit_s_agg_table = create_prime_tablename("vowunit", "s", agg_str)
     vowpayy_s_agg_table = create_prime_tablename("vowpayy", "s", agg_str)
     vowdeal_s_agg_table = create_prime_tablename("vowdeal", "s", agg_str)
@@ -128,22 +128,22 @@ def test_create_prime_tablename_ReturnsObj():
     pidtitl_s_val_table = create_prime_tablename("pidtitl", "s", vld_str)
     pidcore_s_raw_table = create_prime_tablename("pidcore", "s", raw_str)
     pidcore_s_agg_table = create_prime_tablename("pidcore", "s", agg_str)
-    planacct_job_table = create_prime_tablename("planacct", job_str(), None)
-    x_planacct_raw = create_prime_tablename("planacct", "k", raw_str)
-    plangrou_job_table = create_prime_tablename("plangrou", job_str(), None)
+    plnacct_job_table = create_prime_tablename("plnacct", job_str(), None)
+    x_plnacct_raw = create_prime_tablename("plnacct", "k", raw_str)
+    plngrou_job_table = create_prime_tablename("plngrou", job_str(), None)
 
     # THEN
     assert planunit_s_agg_table == f"{planunit_dimen}_s_put_agg"
-    assert planacct_s_agg_table == f"{planacct_dimen}_s_put_agg"
-    assert planmemb_s_agg_table == f"{planmemb_dimen}_s_put_agg"
-    assert planconc_s_agg_table == f"{planconc_dimen}_s_put_agg"
-    assert planawar_s_agg_table == f"{planawar_dimen}_s_put_agg"
-    assert planreas_s_agg_table == f"{planreas_dimen}_s_put_agg"
-    assert planprem_s_agg_table == f"{planprem_dimen}_s_put_agg"
-    assert planlabo_s_agg_table == f"{planlabo_dimen}_s_put_agg"
-    assert planheal_s_agg_table == f"{planheal_dimen}_s_put_agg"
-    assert planfact_s_agg_table == f"{planfact_dimen}_s_put_agg"
-    assert planfact_s_del_table == f"{planfact_dimen}_s_del_agg"
+    assert plnacct_s_agg_table == f"{plnacct_dimen}_s_put_agg"
+    assert plnmemb_s_agg_table == f"{plnmemb_dimen}_s_put_agg"
+    assert plnconc_s_agg_table == f"{plnconc_dimen}_s_put_agg"
+    assert plnawar_s_agg_table == f"{plnawar_dimen}_s_put_agg"
+    assert plnreas_s_agg_table == f"{plnreas_dimen}_s_put_agg"
+    assert plnprem_s_agg_table == f"{plnprem_dimen}_s_put_agg"
+    assert plnlabo_s_agg_table == f"{plnlabo_dimen}_s_put_agg"
+    assert plnheal_s_agg_table == f"{plnheal_dimen}_s_put_agg"
+    assert plnfact_s_agg_table == f"{plnfact_dimen}_s_put_agg"
+    assert plnfact_s_del_table == f"{plnfact_dimen}_s_del_agg"
     assert vowunit_s_agg_table == f"{vowunit_dimen}_s_agg"
     assert vowpayy_s_agg_table == f"{vowpayy_dimen}_s_agg"
     assert vowdeal_s_agg_table == f"{vowdeal_dimen}_s_agg"
@@ -160,9 +160,9 @@ def test_create_prime_tablename_ReturnsObj():
     assert pidtitl_s_val_table == f"{pidtitl_dimen}_s_vld"
     assert pidcore_s_raw_table == f"{pidcore_dimen}_s_raw"
     assert pidcore_s_agg_table == f"{pidcore_dimen}_s_agg"
-    assert planacct_job_table == f"{planacct_dimen}_job"
-    assert plangrou_job_table == f"{plangrou_dimen}_job"
-    assert x_planacct_raw == "plan_acctunit_raw"
+    assert plnacct_job_table == f"{plnacct_dimen}_job"
+    assert plngrou_job_table == f"{plngrou_dimen}_job"
+    assert x_plnacct_raw == "plan_acctunit_raw"
 
 
 def test_create_all_idea_tables_CreatesVowRawTables():

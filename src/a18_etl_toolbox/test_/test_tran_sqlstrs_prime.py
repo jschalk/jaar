@@ -68,44 +68,44 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
 )
 
 PLAN_PRIME_TABLENAMES = {
-    f"{plan_acct_membership_str()}_sound_put_agg": "PLANMEMB_PUT_AGG",
-    f"{plan_acct_membership_str()}_sound_put_raw": "PLANMEMB_PUT_RAW",
-    f"{plan_acctunit_str()}_sound_put_agg": "PLANACCT_PUT_AGG",
-    f"{plan_acctunit_str()}_sound_put_raw": "PLANACCT_PUT_RAW",
-    f"{plan_concept_awardlink_str()}_sound_put_agg": "PLANAWAR_PUT_AGG",
-    f"{plan_concept_awardlink_str()}_sound_put_raw": "PLANAWAR_PUT_RAW",
-    f"{plan_concept_factunit_str()}_sound_put_agg": "PLANFACT_PUT_AGG",
-    f"{plan_concept_factunit_str()}_sound_put_raw": "PLANFACT_PUT_RAW",
-    f"{plan_concept_healerlink_str()}_sound_put_agg": "PLANHEAL_PUT_AGG",
-    f"{plan_concept_healerlink_str()}_sound_put_raw": "PLANHEAL_PUT_RAW",
-    f"{plan_concept_reason_premiseunit_str()}_sound_put_agg": "PLANPREM_PUT_AGG",
-    f"{plan_concept_reason_premiseunit_str()}_sound_put_raw": "PLANPREM_PUT_RAW",
-    f"{plan_concept_reasonunit_str()}_sound_put_agg": "PLANREAS_PUT_AGG",
-    f"{plan_concept_reasonunit_str()}_sound_put_raw": "PLANREAS_PUT_RAW",
-    f"{plan_concept_laborlink_str()}_sound_put_agg": "PLANLABO_PUT_AGG",
-    f"{plan_concept_laborlink_str()}_sound_put_raw": "PLANLABO_PUT_RAW",
-    f"{plan_conceptunit_str()}_sound_put_agg": "PLANCONC_PUT_AGG",
-    f"{plan_conceptunit_str()}_sound_put_raw": "PLANCONC_PUT_RAW",
+    f"{plan_acct_membership_str()}_sound_put_agg": "PLNMEMB_PUT_AGG",
+    f"{plan_acct_membership_str()}_sound_put_raw": "PLNMEMB_PUT_RAW",
+    f"{plan_acctunit_str()}_sound_put_agg": "PLNACCT_PUT_AGG",
+    f"{plan_acctunit_str()}_sound_put_raw": "PLNACCT_PUT_RAW",
+    f"{plan_concept_awardlink_str()}_sound_put_agg": "PLNAWAR_PUT_AGG",
+    f"{plan_concept_awardlink_str()}_sound_put_raw": "PLNAWAR_PUT_RAW",
+    f"{plan_concept_factunit_str()}_sound_put_agg": "PLNFACT_PUT_AGG",
+    f"{plan_concept_factunit_str()}_sound_put_raw": "PLNFACT_PUT_RAW",
+    f"{plan_concept_healerlink_str()}_sound_put_agg": "PLNHEAL_PUT_AGG",
+    f"{plan_concept_healerlink_str()}_sound_put_raw": "PLNHEAL_PUT_RAW",
+    f"{plan_concept_reason_premiseunit_str()}_sound_put_agg": "PLNPREM_PUT_AGG",
+    f"{plan_concept_reason_premiseunit_str()}_sound_put_raw": "PLNPREM_PUT_RAW",
+    f"{plan_concept_reasonunit_str()}_sound_put_agg": "PLNREAS_PUT_AGG",
+    f"{plan_concept_reasonunit_str()}_sound_put_raw": "PLNREAS_PUT_RAW",
+    f"{plan_concept_laborlink_str()}_sound_put_agg": "PLNLABO_PUT_AGG",
+    f"{plan_concept_laborlink_str()}_sound_put_raw": "PLNLABO_PUT_RAW",
+    f"{plan_conceptunit_str()}_sound_put_agg": "PLNCONC_PUT_AGG",
+    f"{plan_conceptunit_str()}_sound_put_raw": "PLNCONC_PUT_RAW",
     f"{planunit_str()}_sound_put_agg": "PLANUNIT_PUT_AGG",
     f"{planunit_str()}_sound_put_raw": "PLANUNIT_PUT_RAW",
-    f"{plan_acct_membership_str()}_sound_del_agg": "PLANMEMB_DEL_AGG",
-    f"{plan_acct_membership_str()}_sound_del_raw": "PLANMEMB_DEL_RAW",
-    f"{plan_acctunit_str()}_sound_del_agg": "PLANACCT_DEL_AGG",
-    f"{plan_acctunit_str()}_sound_del_raw": "PLANACCT_DEL_RAW",
-    f"{plan_concept_awardlink_str()}_sound_del_agg": "PLANAWAR_DEL_AGG",
-    f"{plan_concept_awardlink_str()}_sound_del_raw": "PLANAWAR_DEL_RAW",
-    f"{plan_concept_factunit_str()}_sound_del_agg": "PLANFACT_DEL_AGG",
-    f"{plan_concept_factunit_str()}_sound_del_raw": "PLANFACT_DEL_RAW",
-    f"{plan_concept_healerlink_str()}_sound_del_agg": "PLANHEAL_DEL_AGG",
-    f"{plan_concept_healerlink_str()}_sound_del_raw": "PLANHEAL_DEL_RAW",
-    f"{plan_concept_reason_premiseunit_str()}_sound_del_agg": "PLANPREM_DEL_AGG",
-    f"{plan_concept_reason_premiseunit_str()}_sound_del_raw": "PLANPREM_DEL_RAW",
-    f"{plan_concept_reasonunit_str()}_sound_del_agg": "PLANREAS_DEL_AGG",
-    f"{plan_concept_reasonunit_str()}_sound_del_raw": "PLANREAS_DEL_RAW",
-    f"{plan_concept_laborlink_str()}_sound_del_agg": "PLANLABO_DEL_AGG",
-    f"{plan_concept_laborlink_str()}_sound_del_raw": "PLANLABO_DEL_RAW",
-    f"{plan_conceptunit_str()}_sound_del_agg": "PLANCONC_DEL_AGG",
-    f"{plan_conceptunit_str()}_sound_del_raw": "PLANCONC_DEL_RAW",
+    f"{plan_acct_membership_str()}_sound_del_agg": "PLNMEMB_DEL_AGG",
+    f"{plan_acct_membership_str()}_sound_del_raw": "PLNMEMB_DEL_RAW",
+    f"{plan_acctunit_str()}_sound_del_agg": "PLNACCT_DEL_AGG",
+    f"{plan_acctunit_str()}_sound_del_raw": "PLNACCT_DEL_RAW",
+    f"{plan_concept_awardlink_str()}_sound_del_agg": "PLNAWAR_DEL_AGG",
+    f"{plan_concept_awardlink_str()}_sound_del_raw": "PLNAWAR_DEL_RAW",
+    f"{plan_concept_factunit_str()}_sound_del_agg": "PLNFACT_DEL_AGG",
+    f"{plan_concept_factunit_str()}_sound_del_raw": "PLNFACT_DEL_RAW",
+    f"{plan_concept_healerlink_str()}_sound_del_agg": "PLNHEAL_DEL_AGG",
+    f"{plan_concept_healerlink_str()}_sound_del_raw": "PLNHEAL_DEL_RAW",
+    f"{plan_concept_reason_premiseunit_str()}_sound_del_agg": "PLNPREM_DEL_AGG",
+    f"{plan_concept_reason_premiseunit_str()}_sound_del_raw": "PLNPREM_DEL_RAW",
+    f"{plan_concept_reasonunit_str()}_sound_del_agg": "PLNREAS_DEL_AGG",
+    f"{plan_concept_reasonunit_str()}_sound_del_raw": "PLNREAS_DEL_RAW",
+    f"{plan_concept_laborlink_str()}_sound_del_agg": "PLNLABO_DEL_AGG",
+    f"{plan_concept_laborlink_str()}_sound_del_raw": "PLNLABO_DEL_RAW",
+    f"{plan_conceptunit_str()}_sound_del_agg": "PLNCONC_DEL_AGG",
+    f"{plan_conceptunit_str()}_sound_del_raw": "PLNCONC_DEL_RAW",
     f"{planunit_str()}_sound_del_agg": "PLANUNIT_DEL_AGG",
     f"{planunit_str()}_sound_del_raw": "PLANUNIT_DEL_RAW",
 }
@@ -544,10 +544,10 @@ def test_create_sound_and_voice_tables_CreatesVowRawTables():
         put_str = "put"
         del_str = "del"
         planunit_s_put_agg_table = prime_tbl("planunit", "s", agg_str, put_str)
-        planacct_s_put_agg_table = prime_tbl("planacct", "s", agg_str, put_str)
-        planmemb_s_put_agg_table = prime_tbl("planmemb", "s", agg_str, put_str)
-        planfact_s_del_agg_table = prime_tbl("planfact", "s", agg_str, del_str)
-        planfact_s_del_vld_table = prime_tbl("planfact", "s", vld_str, del_str)
+        plnacct_s_put_agg_table = prime_tbl("plnacct", "s", agg_str, put_str)
+        plnmemb_s_put_agg_table = prime_tbl("plnmemb", "s", agg_str, put_str)
+        plnfact_s_del_agg_table = prime_tbl("plnfact", "s", agg_str, del_str)
+        plnfact_s_del_vld_table = prime_tbl("plnfact", "s", vld_str, del_str)
         vowunit_s_agg_table = prime_tbl("vowunit", "s", agg_str)
         vowunit_s_vld_table = prime_tbl("vowunit", "s", vld_str)
         pidtitl_s_agg_table = prime_tbl("pidtitl", "s", agg_str)
@@ -558,10 +558,10 @@ def test_create_sound_and_voice_tables_CreatesVowRawTables():
         pidcore_s_vld_table = prime_tbl("pidcore", "s", vld_str)
 
         assert not db_table_exists(cursor, planunit_s_put_agg_table)
-        assert not db_table_exists(cursor, planacct_s_put_agg_table)
-        assert not db_table_exists(cursor, planmemb_s_put_agg_table)
-        assert not db_table_exists(cursor, planfact_s_del_agg_table)
-        assert not db_table_exists(cursor, planfact_s_del_vld_table)
+        assert not db_table_exists(cursor, plnacct_s_put_agg_table)
+        assert not db_table_exists(cursor, plnmemb_s_put_agg_table)
+        assert not db_table_exists(cursor, plnfact_s_del_agg_table)
+        assert not db_table_exists(cursor, plnfact_s_del_vld_table)
         assert not db_table_exists(cursor, vowunit_s_agg_table)
         assert not db_table_exists(cursor, vowunit_s_vld_table)
         assert not db_table_exists(cursor, pidtitl_s_agg_table)
@@ -582,10 +582,10 @@ def test_create_sound_and_voice_tables_CreatesVowRawTables():
         #     print(f"{x_count} {x_row[1]=}")
         #     x_count += 1
         assert db_table_exists(cursor, planunit_s_put_agg_table)
-        assert db_table_exists(cursor, planacct_s_put_agg_table)
-        assert db_table_exists(cursor, planmemb_s_put_agg_table)
-        assert db_table_exists(cursor, planfact_s_del_agg_table)
-        assert db_table_exists(cursor, planfact_s_del_vld_table)
+        assert db_table_exists(cursor, plnacct_s_put_agg_table)
+        assert db_table_exists(cursor, plnmemb_s_put_agg_table)
+        assert db_table_exists(cursor, plnfact_s_del_agg_table)
+        assert db_table_exists(cursor, plnfact_s_del_vld_table)
         assert db_table_exists(cursor, vowunit_s_agg_table)
         assert db_table_exists(cursor, vowunit_s_vld_table)
         assert db_table_exists(cursor, pidtitl_s_agg_table)
@@ -926,11 +926,11 @@ def test_create_insert_missing_face_name_into_pidgin_core_vld_sqlstr_ReturnsObj(
     # ESTABLISH
     default_bridge = "|"
     default_unknown_str = "unknown2"
-    planacct_s_agg_tablename = prime_tbl(plan_acctunit_str(), "s", "agg")
+    plnacct_s_agg_tablename = prime_tbl(plan_acctunit_str(), "s", "agg")
 
     # WHEN
     insert_sqlstr = create_insert_missing_face_name_into_pidgin_core_vld_sqlstr(
-        default_bridge, default_unknown_str, planacct_s_agg_tablename
+        default_bridge, default_unknown_str, plnacct_s_agg_tablename
     )
 
     # THEN
@@ -938,14 +938,14 @@ def test_create_insert_missing_face_name_into_pidgin_core_vld_sqlstr_ReturnsObj(
     pidgin_core_s_vld_tablename = prime_tbl(pidcore_dimen, "s", "vld")
     expected_sqlstr = f"""INSERT INTO {pidgin_core_s_vld_tablename} (face_name, otx_bridge, inx_bridge, unknown_str)
 SELECT
-  {planacct_s_agg_tablename}.face_name
+  {plnacct_s_agg_tablename}.face_name
 , '{default_bridge}'
 , '{default_bridge}'
 , '{default_unknown_str}'
-FROM {planacct_s_agg_tablename} 
-LEFT JOIN pidgin_core_s_vld ON pidgin_core_s_vld.face_name = {planacct_s_agg_tablename}.face_name
+FROM {plnacct_s_agg_tablename} 
+LEFT JOIN pidgin_core_s_vld ON pidgin_core_s_vld.face_name = {plnacct_s_agg_tablename}.face_name
 WHERE pidgin_core_s_vld.face_name IS NULL
-GROUP BY {planacct_s_agg_tablename}.face_name
+GROUP BY {plnacct_s_agg_tablename}.face_name
 ;
 """
     print(expected_sqlstr)

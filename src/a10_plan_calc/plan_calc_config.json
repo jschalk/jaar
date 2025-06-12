@@ -1,6 +1,6 @@
 {
     "plan_acct_membership": {
-        "abbreviation": "planmemb",
+        "abbreviation": "plnmemb",
         "jkeys": {
             "acct_name": {
                 "class_type": "NameTerm",
@@ -65,7 +65,7 @@
         }
     },
     "plan_acctunit": {
-        "abbreviation": "planacct",
+        "abbreviation": "plnacct",
         "jkeys": {
             "acct_name": {
                 "class_type": "NameTerm",
@@ -134,7 +134,7 @@
         }
     },
     "plan_concept_awardlink": {
-        "abbreviation": "planawar",
+        "abbreviation": "plnawar",
         "jkeys": {
             "awardee_title": {
                 "class_type": "TitleTerm",
@@ -175,7 +175,7 @@
         }
     },
     "plan_concept_factunit": {
-        "abbreviation": "planfact",
+        "abbreviation": "plnfact",
         "jkeys": {
             "concept_way": {
                 "class_type": "WayTerm",
@@ -211,7 +211,7 @@
         }
     },
     "plan_concept_healerlink": {
-        "abbreviation": "planheal",
+        "abbreviation": "plnheal",
         "jkeys": {
             "concept_way": {
                 "class_type": "WayTerm",
@@ -234,7 +234,7 @@
         "jvalues": {}
     },
     "plan_concept_laborlink": {
-        "abbreviation": "planlabo",
+        "abbreviation": "plnlabo",
         "jkeys": {
             "concept_way": {
                 "class_type": "WayTerm",
@@ -262,7 +262,7 @@
         "jvalues": {}
     },
     "plan_concept_reason_premiseunit": {
-        "abbreviation": "planprem",
+        "abbreviation": "plnprem",
         "jkeys": {
             "concept_way": {
                 "class_type": "WayTerm",
@@ -311,7 +311,7 @@
         }
     },
     "plan_concept_reasonunit": {
-        "abbreviation": "planreas",
+        "abbreviation": "plnreas",
         "jkeys": {
             "concept_way": {
                 "class_type": "WayTerm",
@@ -352,7 +352,7 @@
         }
     },
     "plan_conceptunit": {
-        "abbreviation": "planconc",
+        "abbreviation": "plnconc",
         "jkeys": {
             "concept_way": {
                 "class_type": "WayTerm",
@@ -473,7 +473,7 @@
         }
     },
     "plan_groupunit": {
-        "abbreviation": "plangrou",
+        "abbreviation": "plngrou",
         "jkeys": {
             "vow_label": {
                 "class_type": "LabelTerm",

@@ -12,7 +12,7 @@ from src.a05_concept_logic.concept import ConceptUnit, HealerLink
 from src.a06_plan_logic.plan import PlanUnit
 
 
-def create_planmemb_metrics_insert_sqlstr(values_dict: dict[str,]):
+def create_plnmemb_metrics_insert_sqlstr(values_dict: dict[str,]):
     vow_label = values_dict.get("vow_label")
     owner_name = values_dict.get("owner_name")
     acct_name = values_dict.get("acct_name")
@@ -49,7 +49,7 @@ VALUES (
 """
 
 
-def create_planacct_metrics_insert_sqlstr(values_dict: dict[str,]):
+def create_plnacct_metrics_insert_sqlstr(values_dict: dict[str,]):
     vow_label = values_dict.get("vow_label")
     owner_name = values_dict.get("owner_name")
     acct_name = values_dict.get("acct_name")
@@ -88,7 +88,7 @@ VALUES (
 """
 
 
-def create_plangrou_metrics_insert_sqlstr(values_dict: dict[str,]):
+def create_plngrou_metrics_insert_sqlstr(values_dict: dict[str,]):
     vow_label = values_dict.get("vow_label")
     owner_name = values_dict.get("owner_name")
     group_title = values_dict.get("group_title")
@@ -119,7 +119,7 @@ VALUES (
 """
 
 
-def create_planawar_metrics_insert_sqlstr(values_dict: dict[str,]):
+def create_plnawar_metrics_insert_sqlstr(values_dict: dict[str,]):
     vow_label = values_dict.get("vow_label")
     owner_name = values_dict.get("owner_name")
     way = values_dict.get("concept_way")
@@ -143,7 +143,7 @@ VALUES (
 """
 
 
-def create_planfact_metrics_insert_sqlstr(values_dict: dict[str,]):
+def create_plnfact_metrics_insert_sqlstr(values_dict: dict[str,]):
     vow_label = values_dict.get("vow_label")
     owner_name = values_dict.get("owner_name")
     way = values_dict.get("concept_way")
@@ -165,7 +165,7 @@ VALUES (
 """
 
 
-def create_planheal_metrics_insert_sqlstr(values_dict: dict[str,]):
+def create_plnheal_metrics_insert_sqlstr(values_dict: dict[str,]):
     vow_label = values_dict.get("vow_label")
     owner_name = values_dict.get("owner_name")
     way = values_dict.get("concept_way")
@@ -181,7 +181,7 @@ VALUES (
 """
 
 
-def create_planprem_metrics_insert_sqlstr(values_dict: dict[str,]):
+def create_plnprem_metrics_insert_sqlstr(values_dict: dict[str,]):
     vow_label = values_dict.get("vow_label")
     owner_name = values_dict.get("owner_name")
     way = values_dict.get("concept_way")
@@ -209,7 +209,7 @@ VALUES (
 """
 
 
-def create_planreas_metrics_insert_sqlstr(values_dict: dict[str,]):
+def create_plnreas_metrics_insert_sqlstr(values_dict: dict[str,]):
     vow_label = values_dict.get("vow_label")
     owner_name = values_dict.get("owner_name")
     way = values_dict.get("concept_way")
@@ -233,7 +233,7 @@ VALUES (
 """
 
 
-def create_planlabo_metrics_insert_sqlstr(values_dict: dict[str,]):
+def create_plnlabo_metrics_insert_sqlstr(values_dict: dict[str,]):
     vow_label = values_dict.get("vow_label")
     owner_name = values_dict.get("owner_name")
     way = values_dict.get("concept_way")
@@ -251,7 +251,7 @@ VALUES (
 """
 
 
-def create_planconc_metrics_insert_sqlstr(values_dict: dict[str,]):
+def create_plnconc_metrics_insert_sqlstr(values_dict: dict[str,]):
     vow_label = values_dict.get("vow_label")
     owner_name = values_dict.get("owner_name")
     way = values_dict.get("concept_way")
@@ -373,7 +373,7 @@ class ObjKeysHolder:
     fact_way: WayTerm = None
 
 
-def insert_job_planmemb(
+def insert_job_plnmemb(
     cursor: sqlite3_Cursor,
     x_objkeysholder: ObjKeysHolder,
     x_membership: MemberShip,
@@ -381,11 +381,11 @@ def insert_job_planmemb(
     x_dict = copy_deepcopy(x_membership.__dict__)
     x_dict["vow_label"] = x_objkeysholder.vow_label
     x_dict["owner_name"] = x_objkeysholder.owner_name
-    insert_sqlstr = create_planmemb_metrics_insert_sqlstr(x_dict)
+    insert_sqlstr = create_plnmemb_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
-def insert_job_planacct(
+def insert_job_plnacct(
     cursor: sqlite3_Cursor,
     x_objkeysholder: ObjKeysHolder,
     x_acct: AcctUnit,
@@ -393,11 +393,11 @@ def insert_job_planacct(
     x_dict = copy_deepcopy(x_acct.__dict__)
     x_dict["vow_label"] = x_objkeysholder.vow_label
     x_dict["owner_name"] = x_objkeysholder.owner_name
-    insert_sqlstr = create_planacct_metrics_insert_sqlstr(x_dict)
+    insert_sqlstr = create_plnacct_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
-def insert_job_plangrou(
+def insert_job_plngrou(
     cursor: sqlite3_Cursor,
     x_objkeysholder: ObjKeysHolder,
     x_groupunit: GroupUnit,
@@ -405,11 +405,11 @@ def insert_job_plangrou(
     x_dict = copy_deepcopy(x_groupunit.__dict__)
     x_dict["vow_label"] = x_objkeysholder.vow_label
     x_dict["owner_name"] = x_objkeysholder.owner_name
-    insert_sqlstr = create_plangrou_metrics_insert_sqlstr(x_dict)
+    insert_sqlstr = create_plngrou_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
-def insert_job_planawar(
+def insert_job_plnawar(
     cursor: sqlite3_Cursor,
     x_objkeysholder: ObjKeysHolder,
     x_awardheir: AwardHeir,
@@ -418,11 +418,11 @@ def insert_job_planawar(
     x_dict["vow_label"] = x_objkeysholder.vow_label
     x_dict["owner_name"] = x_objkeysholder.owner_name
     x_dict["concept_way"] = x_objkeysholder.way
-    insert_sqlstr = create_planawar_metrics_insert_sqlstr(x_dict)
+    insert_sqlstr = create_plnawar_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
-def insert_job_planfact(
+def insert_job_plnfact(
     cursor: sqlite3_Cursor,
     x_objkeysholder: ObjKeysHolder,
     x_factheir: FactHeir,
@@ -431,11 +431,11 @@ def insert_job_planfact(
     x_dict["vow_label"] = x_objkeysholder.vow_label
     x_dict["owner_name"] = x_objkeysholder.owner_name
     x_dict["concept_way"] = x_objkeysholder.way
-    insert_sqlstr = create_planfact_metrics_insert_sqlstr(x_dict)
+    insert_sqlstr = create_plnfact_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
-def insert_job_planheal(
+def insert_job_plnheal(
     cursor: sqlite3_Cursor,
     x_objkeysholder: ObjKeysHolder,
     x_healer: HealerLink,
@@ -447,11 +447,11 @@ def insert_job_planheal(
     }
     for healer_name in sorted(x_healer._healer_names):
         x_dict["healer_name"] = healer_name
-        insert_sqlstr = create_planheal_metrics_insert_sqlstr(x_dict)
+        insert_sqlstr = create_plnheal_metrics_insert_sqlstr(x_dict)
         cursor.execute(insert_sqlstr)
 
 
-def insert_job_planprem(
+def insert_job_plnprem(
     cursor: sqlite3_Cursor,
     x_objkeysholder: ObjKeysHolder,
     x_premiseunit: PremiseUnit,
@@ -461,11 +461,11 @@ def insert_job_planprem(
     x_dict["owner_name"] = x_objkeysholder.owner_name
     x_dict["concept_way"] = x_objkeysholder.way
     x_dict["rcontext"] = x_objkeysholder.rcontext
-    insert_sqlstr = create_planprem_metrics_insert_sqlstr(x_dict)
+    insert_sqlstr = create_plnprem_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
-def insert_job_planreas(
+def insert_job_plnreas(
     cursor: sqlite3_Cursor,
     x_objkeysholder: ObjKeysHolder,
     x_reasonheir: ReasonHeir,
@@ -474,11 +474,11 @@ def insert_job_planreas(
     x_dict["vow_label"] = x_objkeysholder.vow_label
     x_dict["owner_name"] = x_objkeysholder.owner_name
     x_dict["concept_way"] = x_objkeysholder.way
-    insert_sqlstr = create_planreas_metrics_insert_sqlstr(x_dict)
+    insert_sqlstr = create_plnreas_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
-def insert_job_planlabo(
+def insert_job_plnlabo(
     cursor: sqlite3_Cursor,
     x_objkeysholder: ObjKeysHolder,
     x_laborheir: LaborHeir,
@@ -489,17 +489,17 @@ def insert_job_planlabo(
     x_dict["concept_way"] = x_objkeysholder.way
     for labor_title in sorted(x_laborheir._laborlinks):
         x_dict["labor_title"] = labor_title
-        insert_sqlstr = create_planlabo_metrics_insert_sqlstr(x_dict)
+        insert_sqlstr = create_plnlabo_metrics_insert_sqlstr(x_dict)
         cursor.execute(insert_sqlstr)
 
 
-def insert_job_planconc(
+def insert_job_plnconc(
     cursor: sqlite3_Cursor, x_objkeysholder: ObjKeysHolder, x_concept: ConceptUnit
 ):
     x_dict = copy_deepcopy(x_concept.__dict__)
     x_dict["concept_way"] = x_concept.get_concept_way()
     x_dict["owner_name"] = x_objkeysholder.owner_name
-    insert_sqlstr = create_planconc_metrics_insert_sqlstr(x_dict)
+    insert_sqlstr = create_plnconc_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
@@ -519,25 +519,25 @@ def insert_job_obj(cursor: sqlite3_Cursor, job_plan: PlanUnit):
         x_objkeysholder.way = x_concept.get_concept_way()
         healerlink = x_concept.healerlink
         laborheir = x_concept._laborheir
-        insert_job_planconc(cursor, x_objkeysholder, x_concept)
-        insert_job_planheal(cursor, x_objkeysholder, healerlink)
-        insert_job_planlabo(cursor, x_objkeysholder, laborheir)
+        insert_job_plnconc(cursor, x_objkeysholder, x_concept)
+        insert_job_plnheal(cursor, x_objkeysholder, healerlink)
+        insert_job_plnlabo(cursor, x_objkeysholder, laborheir)
         for x_awardheir in x_concept._awardheirs.values():
-            insert_job_planawar(cursor, x_objkeysholder, x_awardheir)
+            insert_job_plnawar(cursor, x_objkeysholder, x_awardheir)
         for rcontext, reasonheir in x_concept._reasonheirs.items():
-            insert_job_planreas(cursor, x_objkeysholder, reasonheir)
+            insert_job_plnreas(cursor, x_objkeysholder, reasonheir)
             x_objkeysholder.rcontext = rcontext
             for prem in reasonheir.premises.values():
-                insert_job_planprem(cursor, x_objkeysholder, prem)
+                insert_job_plnprem(cursor, x_objkeysholder, prem)
 
     for x_acct in job_plan.accts.values():
-        insert_job_planacct(cursor, x_objkeysholder, x_acct)
+        insert_job_plnacct(cursor, x_objkeysholder, x_acct)
         for x_membership in x_acct._memberships.values():
-            insert_job_planmemb(cursor, x_objkeysholder, x_membership)
+            insert_job_plnmemb(cursor, x_objkeysholder, x_membership)
 
     for x_groupunit in job_plan._groupunits.values():
-        insert_job_plangrou(cursor, x_objkeysholder, x_groupunit)
+        insert_job_plngrou(cursor, x_objkeysholder, x_groupunit)
 
     for x_factheir in job_plan.conceptroot._factheirs.values():
         x_objkeysholder.fact_way = job_plan.conceptroot.get_concept_way()
-        insert_job_planfact(cursor, x_objkeysholder, x_factheir)
+        insert_job_plnfact(cursor, x_objkeysholder, x_factheir)

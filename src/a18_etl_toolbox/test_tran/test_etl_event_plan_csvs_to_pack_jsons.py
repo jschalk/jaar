@@ -72,8 +72,8 @@ def test_etl_event_plan_csvs_to_pack_json_CreatesFiles_Scenario1(
     credit88 = 88
     debt_empty = ""
     a23_str = "accord23"
-    planacct_str = plan_acctunit_str()
-    put_agg_tablename = create_prime_tablename(planacct_str, "v", "agg", "put")
+    plnacct_str = plan_acctunit_str()
+    put_agg_tablename = create_prime_tablename(plnacct_str, "v", "agg", "put")
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
     vow_mstr_dir = get_module_temp_dir()
     # a23_bob_dir = create_path(a23_dir, bob_inx)
@@ -113,21 +113,21 @@ def test_etl_event_plan_csvs_to_pack_json_CreatesFiles_Scenario1(
     # e7_pack = packunit_shop(bob_inx, sue_inx, a23_str, packs_dir, atoms_dir, event7)
     expected_e3_pack = packunit_shop(bob_inx, None, a23_str, event_int=event3)
     expected_e7_pack = packunit_shop(bob_inx, None, a23_str, event_int=event7)
-    planacct_dimen = plan_acctunit_str()
+    plnacct_dimen = plan_acctunit_str()
     expected_e3_pack._plandelta.add_planatom(
-        planacct_dimen,
+        plnacct_dimen,
         INSERT_str(),
         jkeys={acct_name_str(): bob_inx},
         jvalues={credit_score_str(): credit77, debt_score_str(): None},
     )
     expected_e7_pack._plandelta.add_planatom(
-        planacct_dimen,
+        plnacct_dimen,
         INSERT_str(),
         jkeys={acct_name_str(): bob_inx},
         jvalues={credit_score_str(): credit77, debt_score_str(): None},
     )
     expected_e7_pack._plandelta.add_planatom(
-        planacct_dimen,
+        plnacct_dimen,
         INSERT_str(),
         jkeys={acct_name_str(): sue_inx},
         jvalues={credit_score_str(): credit88, debt_score_str(): None},
@@ -145,9 +145,9 @@ def test_etl_event_plan_csvs_to_pack_json_CreatesFiles_Scenario1(
     expected_e7_insert = expected_e7_pack._plandelta.planatoms.get("INSERT")
     # print(e7_insert.get("plan_acctunit").keys())
     # print(expected_e7_insert.get("plan_acctunit").keys())
-    e7_planacct = e7_insert.get("plan_acctunit")
-    expected_e7_planacct = expected_e7_insert.get("plan_acctunit")
-    assert e7_planacct.keys() == expected_e7_planacct.keys()
+    e7_plnacct = e7_insert.get("plan_acctunit")
+    expected_e7_plnacct = expected_e7_insert.get("plan_acctunit")
+    assert e7_plnacct.keys() == expected_e7_plnacct.keys()
     # print(f"{expected_e7_insert.keys()=}")
     assert e7_insert == expected_e7_insert
     assert e7_packunit._plandelta == expected_e7_pack._plandelta

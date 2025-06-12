@@ -44,17 +44,17 @@ def test_etl_event_pack_json_to_event_inherited_planunits_SetsFiles_plan_json(
     a23_bob_e7_dir = create_owner_event_dir_path(vow_mstr_dir, a23_str, bob_inx, event7)
     a23_bob_e3_pack = packunit_shop(bob_inx, None, a23_str, event_int=event3)
     a23_bob_e7_pack = packunit_shop(bob_inx, None, a23_str, event_int=event7)
-    planacct_dimen = plan_acctunit_str()
+    plnacct_dimen = plan_acctunit_str()
     bob_jkeys = {acct_name_str(): bob_inx}
     bob_jvalues = {credit_score_str(): credit77, debt_score_str(): None}
     yao_jkeys = {acct_name_str(): yao_inx}
     yao_jvalues = {credit_score_str(): credit44, debt_score_str(): None}
-    a23_bob_e3_pack.add_planatom(planacct_dimen, INSERT_str(), bob_jkeys, bob_jvalues)
-    a23_bob_e3_pack.add_planatom(planacct_dimen, INSERT_str(), yao_jkeys, yao_jvalues)
+    a23_bob_e3_pack.add_planatom(plnacct_dimen, INSERT_str(), bob_jkeys, bob_jvalues)
+    a23_bob_e3_pack.add_planatom(plnacct_dimen, INSERT_str(), yao_jkeys, yao_jvalues)
     sue_jkeys = {acct_name_str(): sue_inx}
     sue_jvalues = {credit_score_str(): credit88, debt_score_str(): None}
-    a23_bob_e7_pack.add_planatom(planacct_dimen, INSERT_str(), bob_jkeys, bob_jvalues)
-    a23_bob_e7_pack.add_planatom(planacct_dimen, INSERT_str(), sue_jkeys, sue_jvalues)
+    a23_bob_e7_pack.add_planatom(plnacct_dimen, INSERT_str(), bob_jkeys, bob_jvalues)
+    a23_bob_e7_pack.add_planatom(plnacct_dimen, INSERT_str(), sue_jkeys, sue_jvalues)
     e3_all_pack_path = create_event_all_pack_path(
         vow_mstr_dir, a23_str, bob_inx, event3
     )
@@ -110,17 +110,17 @@ def test_etl_event_pack_json_to_event_inherited_planunits_SetsFiles_expressed_pa
     vow_mstr_dir = get_module_temp_dir()
     a23_bob_e3_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event3)
     a23_bob_e7_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event7)
-    planacct_dimen = plan_acctunit_str()
+    plnacct_dimen = plan_acctunit_str()
     bob_jkeys = {acct_name_str(): bob_inx}
     bob_jvalues = {credit_score_str(): credit77}
     yao_jkeys = {acct_name_str(): yao_inx}
     yao_jvalues = {credit_score_str(): credit44}
-    a23_bob_e3_pack.add_planatom(planacct_dimen, INSERT_str(), bob_jkeys, bob_jvalues)
-    a23_bob_e3_pack.add_planatom(planacct_dimen, INSERT_str(), yao_jkeys, yao_jvalues)
+    a23_bob_e3_pack.add_planatom(plnacct_dimen, INSERT_str(), bob_jkeys, bob_jvalues)
+    a23_bob_e3_pack.add_planatom(plnacct_dimen, INSERT_str(), yao_jkeys, yao_jvalues)
     sue_jkeys = {acct_name_str(): sue_inx}
     sue_jvalues = {credit_score_str(): credit88}
-    a23_bob_e7_pack.add_planatom(planacct_dimen, INSERT_str(), bob_jkeys, bob_jvalues)
-    a23_bob_e7_pack.add_planatom(planacct_dimen, INSERT_str(), sue_jkeys, sue_jvalues)
+    a23_bob_e7_pack.add_planatom(plnacct_dimen, INSERT_str(), bob_jkeys, bob_jvalues)
+    a23_bob_e7_pack.add_planatom(plnacct_dimen, INSERT_str(), sue_jkeys, sue_jvalues)
     a23_bob_e3_all_pack_path = create_event_all_pack_path(
         vow_mstr_dir, a23_str, bob_inx, event3
     )
@@ -151,13 +151,13 @@ def test_etl_event_pack_json_to_event_inherited_planunits_SetsFiles_expressed_pa
     expected_e3_bob_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event3)
     expected_e7_bob_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event7)
     expected_e3_bob_pack.add_planatom(
-        planacct_dimen, INSERT_str(), bob_jkeys, bob_jvalues
+        plnacct_dimen, INSERT_str(), bob_jkeys, bob_jvalues
     )
     expected_e3_bob_pack.add_planatom(
-        planacct_dimen, INSERT_str(), yao_jkeys, yao_jvalues
+        plnacct_dimen, INSERT_str(), yao_jkeys, yao_jvalues
     )
     expected_e7_bob_pack.add_planatom(
-        planacct_dimen, INSERT_str(), sue_jkeys, sue_jvalues
+        plnacct_dimen, INSERT_str(), sue_jkeys, sue_jvalues
     )
     assert expected_e3_bob_pack == a23_bob_e3_pack
     assert expected_e7_bob_pack._plandelta != a23_bob_e7_pack._plandelta

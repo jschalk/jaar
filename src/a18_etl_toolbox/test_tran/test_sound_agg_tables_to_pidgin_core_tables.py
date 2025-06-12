@@ -1250,14 +1250,12 @@ def test_populate_pidgin_core_vld_with_missing_face_names_Scenario0_Populates1Mi
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        planacct_str = plan_acctunit_str()
-        planacct_s_agg_tablename = create_prime_tablename(
-            planacct_str, "s", "agg", "put"
-        )
-        insert_planacct_sqlstr = f"""
-INSERT INTO {planacct_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {owner_name_str()}, {acct_name_str()})
+        plnacct_str = plan_acctunit_str()
+        plnacct_s_agg_tablename = create_prime_tablename(plnacct_str, "s", "agg", "put")
+        insert_plnacct_sqlstr = f"""
+INSERT INTO {plnacct_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {owner_name_str()}, {acct_name_str()})
 VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}');"""
-        cursor.execute(insert_planacct_sqlstr)
+        cursor.execute(insert_plnacct_sqlstr)
 
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         assert get_row_count(cursor, pidcore_s_vld_tablename) == 0
@@ -1287,14 +1285,12 @@ def test_populate_pidgin_core_vld_with_missing_face_names_Scenario1_PopulatesSom
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        planacct_str = plan_acctunit_str()
-        planacct_s_agg_tablename = create_prime_tablename(
-            planacct_str, "s", "agg", "put"
-        )
-        insert_planacct_sqlstr = f"""
-INSERT INTO {planacct_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {owner_name_str()}, {acct_name_str()})
+        plnacct_str = plan_acctunit_str()
+        plnacct_s_agg_tablename = create_prime_tablename(plnacct_str, "s", "agg", "put")
+        insert_plnacct_sqlstr = f"""
+INSERT INTO {plnacct_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {owner_name_str()}, {acct_name_str()})
 VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}'), ({event1}, '{yao_str}', '{yao_str}', '{yao_str}');"""
-        cursor.execute(insert_planacct_sqlstr)
+        cursor.execute(insert_plnacct_sqlstr)
 
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename} (
@@ -1332,14 +1328,12 @@ def test_etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables_Scenario2_Popula
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        planacct_str = plan_acctunit_str()
-        planacct_s_agg_tablename = create_prime_tablename(
-            planacct_str, "s", "agg", "put"
-        )
-        insert_planacct_sqlstr = f"""
-INSERT INTO {planacct_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {owner_name_str()}, {acct_name_str()})
+        plnacct_str = plan_acctunit_str()
+        plnacct_s_agg_tablename = create_prime_tablename(plnacct_str, "s", "agg", "put")
+        insert_plnacct_sqlstr = f"""
+INSERT INTO {plnacct_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {owner_name_str()}, {acct_name_str()})
 VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}');"""
-        cursor.execute(insert_planacct_sqlstr)
+        cursor.execute(insert_plnacct_sqlstr)
 
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         assert get_row_count(cursor, pidcore_s_vld_tablename) == 0
@@ -1369,14 +1363,12 @@ def test_etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables_Scenario3_Popula
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        planacct_str = plan_acctunit_str()
-        planacct_s_agg_tablename = create_prime_tablename(
-            planacct_str, "s", "agg", "put"
-        )
-        insert_planacct_sqlstr = f"""
-INSERT INTO {planacct_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {owner_name_str()}, {acct_name_str()})
+        plnacct_str = plan_acctunit_str()
+        plnacct_s_agg_tablename = create_prime_tablename(plnacct_str, "s", "agg", "put")
+        insert_plnacct_sqlstr = f"""
+INSERT INTO {plnacct_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {owner_name_str()}, {acct_name_str()})
 VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}'), ({event1}, '{yao_str}', '{yao_str}', '{yao_str}');"""
-        cursor.execute(insert_planacct_sqlstr)
+        cursor.execute(insert_plnacct_sqlstr)
 
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename} (
