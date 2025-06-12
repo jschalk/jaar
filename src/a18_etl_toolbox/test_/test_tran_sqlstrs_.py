@@ -25,7 +25,7 @@ from src.a06_plan_logic._test_util.a06_str import (
 from src.a08_plan_atom_logic.atom_config import get_delete_key_name
 from src.a09_pack_logic._test_util.a09_str import event_int_str
 from src.a10_plan_calc._test_util.a10_str import plan_groupunit_str
-from src.a12_hub_tools._test_util.a12_str import job_str
+from src.a12_hub_tools._test_util.a12_str import job_str, vow_ote1_agg_str
 from src.a15_vow_logic._test_util.a15_str import (
     vow_dealunit_str,
     vow_paybook_str,
@@ -48,6 +48,7 @@ from src.a17_idea_logic.idea_db_tool import (
     get_default_sorted_list,
     get_idea_into_dimen_raw_query,
 )
+from src.a18_etl_toolbox._test_util.a18_str import vow_event_time_agg_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
     CREATE_VOW_EVENT_TIME_AGG_SQLSTR,
@@ -313,7 +314,7 @@ def test_IDEA_STAGEBLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
 def test_CREATE_VOW_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_create_table_sqlstr = f"""
-CREATE TABLE IF NOT EXISTS vow_event_time_agg (
+CREATE TABLE IF NOT EXISTS {vow_event_time_agg_str()} (
   {vow_label_str()} TEXT
 , {event_int_str()} INTEGER
 , agg_time INTEGER
@@ -328,7 +329,7 @@ CREATE TABLE IF NOT EXISTS vow_event_time_agg (
 def test_INSERT_VOW_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_INSERT_sqlstr = f"""
-INSERT INTO vow_event_time_agg ({vow_label_str()}, {event_int_str()}, agg_time)
+INSERT INTO {vow_event_time_agg_str()} ({vow_label_str()}, {event_int_str()}, agg_time)
 SELECT {vow_label_str()}, {event_int_str()}, agg_time
 FROM (
     SELECT {vow_label_str()}, {event_int_str()}, {tran_time_str()} as agg_time
@@ -352,18 +353,18 @@ def test_UPDATE_ERROR_MESSAGE_VOW_EVENT_TIME_AGG_SQLSTR_Exists():
 WITH EventTimeOrdered AS (
     SELECT {vow_label_str()}, {event_int_str()}, agg_time,
            LAG(agg_time) OVER (PARTITION BY {vow_label_str()} ORDER BY {event_int_str()}) AS prev_agg_time
-    FROM vow_event_time_agg
+    FROM {vow_event_time_agg_str()}
 )
-UPDATE vow_event_time_agg
+UPDATE {vow_event_time_agg_str()}
 SET error_message = CASE 
          WHEN EventTimeOrdered.prev_agg_time > EventTimeOrdered.agg_time
          THEN 'not sorted'
          ELSE 'sorted'
        END 
 FROM EventTimeOrdered
-WHERE EventTimeOrdered.{event_int_str()} = vow_event_time_agg.{event_int_str()}
-    AND EventTimeOrdered.{vow_label_str()} = vow_event_time_agg.{vow_label_str()}
-    AND EventTimeOrdered.agg_time = vow_event_time_agg.agg_time
+WHERE EventTimeOrdered.{event_int_str()} = {vow_event_time_agg_str()}.{event_int_str()}
+    AND EventTimeOrdered.{vow_label_str()} = {vow_event_time_agg_str()}.{vow_label_str()}
+    AND EventTimeOrdered.agg_time = {vow_event_time_agg_str()}.agg_time
 ;
 """
     # WHEN / THEN
@@ -373,7 +374,7 @@ WHERE EventTimeOrdered.{event_int_str()} = vow_event_time_agg.{event_int_str()}
 def test_CREATE_VOW_OTE1_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_create_table_sqlstr = f"""
-CREATE TABLE IF NOT EXISTS vow_ote1_agg (
+CREATE TABLE IF NOT EXISTS {vow_ote1_agg_str()} (
   {vow_label_str()} TEXT
 , {owner_name_str()} TEXT
 , {event_int_str()} INTEGER
@@ -392,7 +393,7 @@ def test_INSERT_VOW_OTE1_AGG_FROM_VOICE_SQLSTR_Exists():
     # ESTABLISH
     fisdeal_v_raw_tablename = create_prime_tablename(vow_dealunit_str(), "v", "raw")
     expected_INSERT_sqlstr = f"""
-INSERT INTO vow_ote1_agg ({vow_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()})
+INSERT INTO {vow_ote1_agg_str()} ({vow_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()})
 SELECT {vow_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
 FROM (
     SELECT 

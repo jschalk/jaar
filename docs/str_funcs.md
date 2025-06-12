@@ -13,12 +13,12 @@
 - a09_pack_logic: event_int, face_name
 - a10_plan_calc: jmetrics, plan_groupunit
 - a11_deal_cell_logic: boss_facts, deal_owner_name, found_facts, planadjust, planevent_facts
-- a12_hub_tools: gut, job
+- a12_hub_tools: gut, job, vow_ote1_agg
 - a13_plan_listen_logic: 
 - a14_keep_logic: 
-- a15_vow_logic: brokerunits, cumlative_day, cumlative_minute, hour_label, month_label, paybook, vow_dealunit, vow_paybook, vow_timeline_hour, vow_timeline_month, vow_timeline_weekday, vow_timeoffi, vowunit, weekday_label, weekday_order
+- a15_vow_logic: brokerunits, cumlative_day, cumlative_minute, hour_label, job_listen_rotations, month_label, paybook, vow_dealunit, vow_paybook, vow_timeline_hour, vow_timeline_month, vow_timeline_weekday, vow_timeoffi, vowunit, weekday_label, weekday_order
 - a16_pidgin_logic: inx_bridge, inx_label, inx_name, inx_title, inx_way, map_otx2inx, otx2inx, otx_bridge, otx_key, otx_label, otx_name, otx_title, otx_way, pidgin_core, pidgin_label, pidgin_name, pidgin_title, pidgin_way, pidginunit, unknown_str
 - a17_idea_logic: allowed_crud, brick_agg, brick_raw, brick_valid, build_order, delete_insert, delete_insert_update, delete_update, idea_category, idea_number, insert_multiple, insert_one_time, insert_update, sound_agg, sound_raw, voice_agg, voice_raw, world_id
-- a18_etl_toolbox: 
+- a18_etl_toolbox: events_brick_agg, events_brick_valid, vow_event_time_agg
 - a19_world_logic: 
 - a20_lobby_logic: lobby_id, lobby_mstr_dir, lobbys

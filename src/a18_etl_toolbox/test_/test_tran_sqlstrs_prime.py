@@ -305,7 +305,7 @@ def create_plan_voice_del_agg_table_sqlstr(x_dimen: str) -> str:
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
-def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckPidginDimens():
+def test_get_prime_create_table_sqlstrs_ReturnsObj_PidginDimensCheck():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
     create_table_sqlstrs = get_prime_create_table_sqlstrs()
@@ -339,7 +339,7 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckPidginDimens():
         assert expected_s_vld_sqlstr == create_table_sqlstrs.get(s_vld_tablename)
 
 
-def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckPidginCoreDimens():
+def test_get_prime_create_table_sqlstrs_ReturnsObj_PidginCoreDimensPidgin():
     # ESTABLISH / WHEN
     create_table_sqlstrs = get_prime_create_table_sqlstrs()
 

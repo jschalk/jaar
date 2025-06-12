@@ -110,6 +110,7 @@ def test_get_vow_config_dict_ReturnsObj():
         timeline_label_str(),
         yr1_jan1_offset_str(),
         "job_listen_rotations",
+        # job_listen_rotations_str(),
     }
     print(f"{vowunit_dict.get(jvalues_str()).keys()=}")
     gen_jvalues = set(vowunit_dict.get(jvalues_str()).keys())
@@ -248,6 +249,7 @@ def test_get_vow_args_set_ReturnsObj():
         fund_iota_str(),
         month_label_str(),
         monthday_distortion_str(),
+        # job_listen_rotations_str(),
         "job_listen_rotations",
         penny_str(),
         owner_name_str(),

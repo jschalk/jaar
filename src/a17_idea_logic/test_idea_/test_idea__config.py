@@ -90,6 +90,7 @@ from src.a15_vow_logic._test_util.a15_str import (
     cumlative_day_str,
     cumlative_minute_str,
     hour_label_str,
+    job_listen_rotations_str,
     month_label_str,
     offi_time_str,
     vow_dealunit_str,
@@ -360,7 +361,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[138] == "unknown_str"
     assert table_sorting_priority[139] == "quota"
     assert table_sorting_priority[140] == "celldepth"
-    assert table_sorting_priority[141] == "job_listen_rotations"
+    assert table_sorting_priority[141] == job_listen_rotations_str()
     assert table_sorting_priority[142] == "error_message"
     assert table_sorting_priority[143] == "_owner_name_labor"
     assert table_sorting_priority[144] == "_active"
@@ -910,7 +911,7 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
         bridge_str(),
         timeline_label_str(),
         yr1_jan1_offset_str(),
-        "job_listen_rotations",
+        job_listen_rotations_str(),
     }
 
 

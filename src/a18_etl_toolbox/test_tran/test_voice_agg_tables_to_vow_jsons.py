@@ -23,6 +23,7 @@ from src.a18_etl_toolbox._test_util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
+from src.a18_etl_toolbox._test_util.a18_str import vow_event_time_agg_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
     get_dimen_abbv7,
@@ -136,8 +137,7 @@ VALUES ('{accord23_str}'), ('{accord45_str}')
 """
         cursor.execute(insert_raw_sqlstr)
         assert get_row_count(cursor, fisunit_v_agg_tablename) == 2
-        vow_event_time_agg_str = "vow_event_time_agg"
-        assert db_table_exists(cursor, vow_event_time_agg_str) is False
+        assert db_table_exists(cursor, vow_event_time_agg_str()) is False
 
         accord23_json_path = create_vow_json_path(vow_mstr_dir, accord23_str)
         accord45_json_path = create_vow_json_path(vow_mstr_dir, accord45_str)

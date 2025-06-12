@@ -9,6 +9,10 @@ from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a15_vow_logic._test_util.a15_str import cumlative_minute_str, hour_label_str
 from src.a17_idea_logic._test_util.a17_str import brick_agg_str, idea_number_str
 from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
+from src.a18_etl_toolbox._test_util.a18_str import (
+    events_brick_agg_str,
+    events_brick_valid_str,
+)
 from src.a18_etl_toolbox.transformers import (
     etl_brick_raw_tables_to_events_brick_agg_table,
     etl_events_brick_agg_db_to_event_dict,
@@ -56,7 +60,7 @@ VALUES
 """
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
         cursor.execute(insert_sqlstr)
-        brick_events_tablename = "events_brick_agg"
+        brick_events_tablename = events_brick_agg_str()
         assert get_row_count(cursor, agg_br00003_tablename) == 4
         assert not db_table_exists(cursor, brick_events_tablename)
 
@@ -131,7 +135,7 @@ VALUES
 """
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
         cursor.execute(insert_sqlstr)
-        brick_events_tablename = "events_brick_agg"
+        brick_events_tablename = events_brick_agg_str()
         assert get_row_count(cursor, agg_br00003_tablename) == 5
         assert not db_table_exists(cursor, brick_events_tablename)
 
@@ -171,8 +175,13 @@ def test_etl_events_brick_agg_table_to_events_brick_valid_table_PopulatesTables_
     event9 = 9
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        agg_events_tablename = "events_brick_agg"
-        agg_events_columns = ["idea_number", "event_int", "face_name", "error_message"]
+        agg_events_tablename = events_brick_agg_str()
+        agg_events_columns = [
+            idea_number_str(),
+            event_int_str(),
+            face_name_str(),
+            "error_message",
+        ]
         create_idea_sorted_table(cursor, agg_events_tablename, agg_events_columns)
         insert_into_clause = f"""INSERT INTO {agg_events_tablename} (
   {idea_number_str()}
@@ -192,7 +201,7 @@ VALUES
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
         cursor.execute(insert_sqlstr)
         assert get_row_count(cursor, agg_events_tablename) == 4
-        valid_events_tablename = "events_brick_valid"
+        valid_events_tablename = events_brick_valid_str()
         assert not db_table_exists(cursor, valid_events_tablename)
 
         # WHEN
@@ -227,7 +236,7 @@ def test_etl_events_brick_agg_db_to_event_dict_ReturnsObj_Scenario0():
     agg_columns = [face_name_str(), event_int_str(), "error_message"]
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        agg_events_tablename = "events_brick_agg"
+        agg_events_tablename = events_brick_agg_str()
         create_idea_sorted_table(cursor, agg_events_tablename, agg_columns)
         insert_into_clause = f"""
 INSERT INTO {agg_events_tablename} ({event_int_str()}, {face_name_str()}, error_message)

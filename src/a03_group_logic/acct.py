@@ -192,8 +192,8 @@ class AcctUnit(AcctCore):
             for x_membership in self._memberships.values()
         }
         allot_dict = allot_scale(ledger_dict, self._credor_pool, self.respect_bit)
-        for x_group_title, group_credor_pool in allot_dict.items():
-            self.get_membership(x_group_title)._credor_pool = group_credor_pool
+        for x_group_title, alloted_pool in allot_dict.items():
+            self.get_membership(x_group_title)._credor_pool = alloted_pool
 
     def set_debtor_pool(self, debtor_pool: RespectNum):
         self._debtor_pool = debtor_pool
@@ -202,8 +202,8 @@ class AcctUnit(AcctCore):
             for x_membership in self._memberships.values()
         }
         allot_dict = allot_scale(ledger_dict, self._debtor_pool, self.respect_bit)
-        for x_group_title, group_debtor_pool in allot_dict.items():
-            self.get_membership(x_group_title)._debtor_pool = group_debtor_pool
+        for x_group_title, alloted_pool in allot_dict.items():
+            self.get_membership(x_group_title)._debtor_pool = alloted_pool
 
     def get_memberships_dict(self) -> dict:
         return {

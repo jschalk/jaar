@@ -1,4 +1,29 @@
 from pandas import DataFrame
+from src.a02_finance_logic._test_util.a02_str import (
+    acct_name_str,
+    amount_str,
+    bridge_str,
+    celldepth_str,
+    deal_time_str,
+    fund_iota_str,
+    owner_name_str,
+    penny_str,
+    quota_str,
+    tran_time_str,
+    vow_label_str,
+)
+from src.a03_group_logic._test_util.a03_str import respect_bit_str
+from src.a07_calendar_logic._test_util.a07_str import (
+    c400_number_str,
+    monthday_distortion_str,
+    timeline_label_str,
+    yr1_jan1_offset_str,
+)
+from src.a15_vow_logic._test_util.a15_str import (
+    job_listen_rotations_str,
+    weekday_label_str,
+    weekday_order_str,
+)
 
 ACCORD23_STR = "accord23"
 JEFFY45_STR = "jeffy45"
@@ -10,16 +35,16 @@ def get_ex1_br00000_df() -> DataFrame:
     """
     x_df = DataFrame(
         columns=[
-            "c400_number",
-            "vow_label",
-            "fund_iota",
-            "monthday_distortion",
-            "penny",
-            "respect_bit",
-            "bridge",
-            "timeline_label",
-            "yr1_jan1_offset",
-            "job_listen_rotations",
+            c400_number_str(),
+            vow_label_str(),
+            fund_iota_str(),
+            monthday_distortion_str(),
+            penny_str(),
+            respect_bit_str(),
+            bridge_str(),
+            timeline_label_str(),
+            yr1_jan1_offset_str(),
+            job_listen_rotations_str(),
         ]
     )
     x_df.loc[0] = [7, ACCORD23_STR, 1, 1, 1, 1, "/", "creg", 440640, 7]
@@ -31,11 +56,11 @@ def get_ex1_br00001_df() -> DataFrame:
     vow_label,owner_name,quota,deal_time,celldepth"""
     x_df = DataFrame(
         columns=[
-            "vow_label",
-            "owner_name",
-            "quota",
-            "deal_time",
-            "celldepth",
+            vow_label_str(),
+            owner_name_str(),
+            quota_str(),
+            deal_time_str(),
+            celldepth_str(),
         ]
     )
     x_df.loc[0] = [ACCORD23_STR, "Sue", 445, 777, 5]
@@ -105,7 +130,9 @@ def get_ex1_br00004_df() -> DataFrame:
 def get_ex1_br00005_df() -> DataFrame:
     """idea_format_00005_vow_timeline_weekday_v0_0_0
     vow_label,weekday_label,weekday_order"""
-    x_df = DataFrame(columns=["vow_label", "weekday_label", "weekday_order"])
+    x_df = DataFrame(
+        columns=[vow_label_str(), weekday_label_str(), weekday_order_str()]
+    )
     x_df.loc[0] = [ACCORD23_STR, "Wednesday", 0]
     x_df.loc[1] = [ACCORD23_STR, "Thursday", 1]
     x_df.loc[2] = [ACCORD23_STR, "Friday", 2]
@@ -122,16 +149,16 @@ def get_ex2_br00000_df() -> DataFrame:
     """
     x_df = DataFrame(
         columns=[
-            "c400_number",
-            "vow_label",
-            "fund_iota",
-            "monthday_distortion",
-            "penny",
-            "respect_bit",
-            "bridge",
-            "timeline_label",
-            "yr1_jan1_offset",
-            "job_listen_rotations",
+            c400_number_str(),
+            vow_label_str(),
+            fund_iota_str(),
+            monthday_distortion_str(),
+            penny_str(),
+            respect_bit_str(),
+            bridge_str(),
+            timeline_label_str(),
+            yr1_jan1_offset_str(),
+            job_listen_rotations_str(),
         ]
     )
     x_df.loc[0] = [7, ACCORD23_STR, 1, 1, 1, 1, "/", "creg", 440640, 4]
@@ -144,11 +171,11 @@ def get_ex2_br00001_df() -> DataFrame:
     vow_label,owner_name,quota,deal_time"""
     x_df = DataFrame(
         columns=[
-            "vow_label",
-            "owner_name",
-            "quota",
-            "deal_time",
-            "celldepth",
+            vow_label_str(),
+            owner_name_str(),
+            quota_str(),
+            deal_time_str(),
+            celldepth_str(),
         ]
     )
     x_df.loc[0] = [ACCORD23_STR, "Bob", 332, 999, 3]
@@ -163,7 +190,13 @@ def get_ex2_br00002_df() -> DataFrame:
     """idea_format_00002_vow_paybook_v0_0_0
     acct_name,amount,vow_label,owner_name,tran_time"""
     x_df = DataFrame(
-        columns=["acct_name", "amount", "vow_label", "owner_name", "tran_time"]
+        columns=[
+            acct_name_str(),
+            amount_str(),
+            vow_label_str(),
+            owner_name_str(),
+            tran_time_str(),
+        ]
     )
     x_df.loc[0] = ["Zia", 888, ACCORD23_STR, "Bob", 777]
     x_df.loc[1] = ["Zia", 234, ACCORD23_STR, "Sue", 999]
