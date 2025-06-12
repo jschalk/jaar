@@ -19,6 +19,6 @@
 - a15_vow_logic: brokerunits, cumlative_day, cumlative_minute, hour_label, job_listen_rotations, month_label, paybook, vow_dealunit, vow_paybook, vow_timeline_hour, vow_timeline_month, vow_timeline_weekday, vow_timeoffi, vowunit, weekday_label, weekday_order
 - a16_pidgin_logic: inx_bridge, inx_label, inx_name, inx_title, inx_way, map_otx2inx, otx2inx, otx_bridge, otx_key, otx_label, otx_name, otx_title, otx_way, pidgin_core, pidgin_label, pidgin_name, pidgin_title, pidgin_way, pidginunit, unknown_str
 - a17_idea_logic: allowed_crud, brick_agg, brick_raw, brick_valid, build_order, delete_insert, delete_insert_update, delete_update, idea_category, idea_number, insert_multiple, insert_one_time, insert_update, sound_agg, sound_raw, voice_agg, voice_raw, world_id
-- a18_etl_toolbox: events_brick_agg, events_brick_valid, vow_acct_nets, vow_event_time_agg, vow_kpi001_acct_nets
+- a18_etl_toolbox: events_brick_agg, events_brick_valid, vow_event_time_agg
 - a19_world_logic: 
 - a20_lobby_logic: lobby_id, lobby_mstr_dir, lobbys
