@@ -6,6 +6,7 @@ from src.a02_finance_logic._test_util.a02_str import (
     vow_label_str,
 )
 from src.a09_pack_logic._test_util.a09_str import event_int_str
+from src.a12_hub_tools._test_util.a12_str import vow_ote1_agg_str
 from src.a15_vow_logic._test_util.a15_str import vow_dealunit_str
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a18_etl_toolbox.transformers import (
@@ -41,16 +42,15 @@ VALUES
 """
         cursor.execute(insert_raw_sqlstr)
         assert get_row_count(cursor, fisdeal_v_raw_table) == 4
-        vow_ote1_agg_str = "vow_ote1_agg"
-        assert db_table_exists(cursor, vow_ote1_agg_str) is False
+        assert db_table_exists(cursor, vow_ote1_agg_str()) is False
 
         # WHEN
         etl_voice_raw_tables_to_vow_ote1_agg(cursor)
 
         # THEN
-        assert db_table_exists(cursor, vow_ote1_agg_str)
-        assert get_row_count(cursor, vow_ote1_agg_str) == 3
-        cursor.execute(f"SELECT * FROM {vow_ote1_agg_str};")
+        assert db_table_exists(cursor, vow_ote1_agg_str())
+        assert get_row_count(cursor, vow_ote1_agg_str()) == 3
+        cursor.execute(f"SELECT * FROM {vow_ote1_agg_str()};")
         vowunit_agg_rows = cursor.fetchall()
         ex_row0 = (accord23_str, bob_str, event3, timepoint55, None)
         ex_row1 = (accord45_str, sue_str, event3, timepoint55, None)

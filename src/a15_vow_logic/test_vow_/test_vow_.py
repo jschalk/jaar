@@ -25,6 +25,17 @@ from src.a15_vow_logic._test_util.a15_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
+from src.a15_vow_logic._test_util.a15_str import (
+    bridge_str,
+    brokerunits_str,
+    fund_iota_str,
+    job_listen_rotations_str,
+    paybook_str,
+    penny_str,
+    respect_bit_str,
+    timeline_str,
+    vow_label_str,
+)
 from src.a15_vow_logic.vow import VowUnit, get_default_job_listen_count, vowunit_shop
 
 
@@ -54,6 +65,25 @@ def test_VowUnit_Exists():
     assert not accord_vow._journal_db
     assert not accord_vow._packs_dir
     assert not accord_vow._all_tranbook
+    assert set(accord_vow.__dict__) == {
+        vow_label_str(),
+        timeline_str(),
+        brokerunits_str(),
+        paybook_str(),
+        "offi_times",
+        bridge_str(),
+        fund_iota_str(),
+        respect_bit_str(),
+        penny_str(),
+        job_listen_rotations_str(),
+        "_vow_dir",
+        "vow_mstr_dir",
+        "_all_tranbook",
+        "_journal_db",
+        "_offi_time_max",
+        "_owners_dir",
+        "_packs_dir",
+    }
 
 
 def test_vowunit_shop_ReturnsVowUnit():
