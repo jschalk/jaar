@@ -32,14 +32,14 @@ from src.a18_etl_toolbox._test_util.a18_str import (
     events_brick_valid_str,
     vow_acct_nets_str,
     vow_event_time_agg_str,
-    vow_kpi001_acct_nets_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
-from src.a19_world_logic._test_util.a19_env import (
+from src.a19_kpi_toolbox._test_util.a19_str import vow_kpi001_acct_nets_str
+from src.a20_world_logic._test_util.a20_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as worlds_dir,
 )
-from src.a19_world_logic.world import worldunit_shop
+from src.a20_world_logic.world import worldunit_shop
 
 
 def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(

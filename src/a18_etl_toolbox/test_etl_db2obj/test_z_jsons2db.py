@@ -21,7 +21,6 @@ from src.a18_etl_toolbox._test_util.a18_env import env_dir_setup_cleanup
 from src.a18_etl_toolbox.db_obj_plan_tool import (
     ObjKeysHolder,
     insert_job_obj,
-    insert_job_planunit,
     insert_job_plnacct,
     insert_job_plnawar,
     insert_job_plnconc,
@@ -32,6 +31,7 @@ from src.a18_etl_toolbox.db_obj_plan_tool import (
     insert_job_plnmemb,
     insert_job_plnprem,
     insert_job_plnreas,
+    insert_job_plnunit,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import create_job_tables
 
@@ -51,7 +51,7 @@ def test_ObjKeysHolder_Exists():
     assert not x_objkeyholder.fact_way
 
 
-def test_insert_job_planunit_CreatesTableRowsFor_planunit_job():
+def test_insert_job_plnunit_CreatesTableRowsFor_planunit_job():
     # sourcery skip: extract-method
     # ESTABLISH
     x_vow_label = "accord23"
@@ -94,7 +94,7 @@ def test_insert_job_planunit_CreatesTableRowsFor_planunit_job():
         objkeysholder = ObjKeysHolder()
 
         # WHEN
-        insert_job_planunit(cursor, objkeysholder, sue_plan)
+        insert_job_plnunit(cursor, objkeysholder, sue_plan)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1

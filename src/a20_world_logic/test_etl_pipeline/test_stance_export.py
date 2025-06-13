@@ -11,11 +11,11 @@ from src.a18_etl_toolbox.tran_path import (
     create_stance0001_path,
     create_stances_dir_path,
 )
-from src.a19_world_logic._test_util.a19_env import (
+from src.a20_world_logic._test_util.a20_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as worlds_dir,
 )
-from src.a19_world_logic.world import worldunit_shop
+from src.a20_world_logic.world import worldunit_shop
 
 
 def test_WorldUnit_create_stances_Senario0_EmptyWorld_CreatesFile(

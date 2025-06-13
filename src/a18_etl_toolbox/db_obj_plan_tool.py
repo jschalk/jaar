@@ -503,7 +503,7 @@ def insert_job_plnconc(
     cursor.execute(insert_sqlstr)
 
 
-def insert_job_planunit(
+def insert_job_plnunit(
     cursor: sqlite3_Cursor, x_objkeysholder: ObjKeysHolder, x_plan: PlanUnit
 ):
     x_dict = copy_deepcopy(x_plan.__dict__)
@@ -514,7 +514,7 @@ def insert_job_planunit(
 def insert_job_obj(cursor: sqlite3_Cursor, job_plan: PlanUnit):
     job_plan.settle_plan()
     x_objkeysholder = ObjKeysHolder(job_plan.vow_label, job_plan.owner_name)
-    insert_job_planunit(cursor, x_objkeysholder, job_plan)
+    insert_job_plnunit(cursor, x_objkeysholder, job_plan)
     for x_concept in job_plan.get_concept_dict().values():
         x_objkeysholder.way = x_concept.get_concept_way()
         healerlink = x_concept.healerlink
