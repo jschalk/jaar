@@ -58,15 +58,15 @@ VALUES
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
         assert get_row_count(cursor, planaacct_s_vld_put_tablename) == 4
-        planawar_v_raw_put_tablename = prime_tbl(plan_acctunit_str(), "v", "raw", "put")
-        assert get_row_count(cursor, planawar_v_raw_put_tablename) == 0
+        plnawar_v_raw_put_tablename = prime_tbl(plan_acctunit_str(), "v", "raw", "put")
+        assert get_row_count(cursor, plnawar_v_raw_put_tablename) == 0
 
         # WHEN
-        sqlstr = get_insert_into_voice_raw_sqlstrs().get(planawar_v_raw_put_tablename)
+        sqlstr = get_insert_into_voice_raw_sqlstrs().get(plnawar_v_raw_put_tablename)
         cursor.execute(sqlstr)
 
         # THEN
-        assert get_row_count(cursor, planawar_v_raw_put_tablename) == 4
+        assert get_row_count(cursor, plnawar_v_raw_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}_otx
 , {vow_label_str()}_otx
@@ -74,7 +74,7 @@ VALUES
 , {acct_name_str()}_otx
 , {credit_score_str()}
 , {debt_score_str()}
-FROM {planawar_v_raw_put_tablename}
+FROM {plnawar_v_raw_put_tablename}
 """
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
@@ -106,9 +106,9 @@ def test_etl_sound_vld_tables_to_voice_raw_tables_Scenario0_AddRowsToTable():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        planacct_s_vld_put_tablename = prime_tbl(plan_acctunit_str(), "s", "vld", "put")
-        print(f"{get_table_columns(cursor, planacct_s_vld_put_tablename)=}")
-        insert_into_clause = f"""INSERT INTO {planacct_s_vld_put_tablename} (
+        plnacct_s_vld_put_tablename = prime_tbl(plan_acctunit_str(), "s", "vld", "put")
+        print(f"{get_table_columns(cursor, plnacct_s_vld_put_tablename)=}")
+        insert_into_clause = f"""INSERT INTO {plnacct_s_vld_put_tablename} (
   {event_int_str()}
 , {face_name_str()}
 , {vow_label_str()}
@@ -126,15 +126,15 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        assert get_row_count(cursor, planacct_s_vld_put_tablename) == 4
-        planacct_v_raw_put_tablename = prime_tbl(plan_acctunit_str(), "v", "raw", "put")
-        assert get_row_count(cursor, planacct_v_raw_put_tablename) == 0
+        assert get_row_count(cursor, plnacct_s_vld_put_tablename) == 4
+        plnacct_v_raw_put_tablename = prime_tbl(plan_acctunit_str(), "v", "raw", "put")
+        assert get_row_count(cursor, plnacct_v_raw_put_tablename) == 0
 
         # WHEN
         etl_sound_vld_tables_to_voice_raw_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, planacct_v_raw_put_tablename) == 4
+        assert get_row_count(cursor, plnacct_v_raw_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}_otx
 , {vow_label_str()}_otx
@@ -142,7 +142,7 @@ VALUES
 , {acct_name_str()}_otx
 , {credit_score_str()}
 , {debt_score_str()}
-FROM {planacct_v_raw_put_tablename}
+FROM {plnacct_v_raw_put_tablename}
 """
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
@@ -173,9 +173,9 @@ def test_etl_sound_vld_tables_to_voice_raw_tables_Scenario1_Populates_inx_Column
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        planacct_s_vld_put_tablename = prime_tbl(plan_acctunit_str(), "s", "vld", "put")
-        print(f"{get_table_columns(cursor, planacct_s_vld_put_tablename)=}")
-        insert_into_clause = f"""INSERT INTO {planacct_s_vld_put_tablename} (
+        plnacct_s_vld_put_tablename = prime_tbl(plan_acctunit_str(), "s", "vld", "put")
+        print(f"{get_table_columns(cursor, plnacct_s_vld_put_tablename)=}")
+        insert_into_clause = f"""INSERT INTO {plnacct_s_vld_put_tablename} (
   {event_int_str()}
 , {face_name_str()}
 , {vow_label_str()}
@@ -193,15 +193,15 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        assert get_row_count(cursor, planacct_s_vld_put_tablename) == 4
-        planacct_v_raw_put_tablename = prime_tbl(plan_acctunit_str(), "v", "raw", "put")
-        assert get_row_count(cursor, planacct_v_raw_put_tablename) == 0
+        assert get_row_count(cursor, plnacct_s_vld_put_tablename) == 4
+        plnacct_v_raw_put_tablename = prime_tbl(plan_acctunit_str(), "v", "raw", "put")
+        assert get_row_count(cursor, plnacct_v_raw_put_tablename) == 0
 
         # WHEN
         etl_sound_vld_tables_to_voice_raw_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, planacct_v_raw_put_tablename) == 4
+        assert get_row_count(cursor, plnacct_v_raw_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}_inx
 , {vow_label_str()}_inx
@@ -209,7 +209,7 @@ VALUES
 , {acct_name_str()}_inx
 , {credit_score_str()}
 , {debt_score_str()}
-FROM {planacct_v_raw_put_tablename}
+FROM {plnacct_v_raw_put_tablename}
 """
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()

@@ -4,7 +4,7 @@ from src.a06_plan_logic.plan import (
     get_from_json as planunit_get_from_json,
     planunit_shop,
 )
-from src.a12_hub_tools.hub_path import create_gut_path, create_owner_event_dir_path
+from src.a12_hub_toolbox.hub_path import create_gut_path, create_owner_event_dir_path
 from src.a18_etl_toolbox._test_util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,

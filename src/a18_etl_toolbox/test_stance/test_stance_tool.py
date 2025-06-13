@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, open_file, save_file
 from src.a06_plan_logic.plan import planunit_shop
-from src.a12_hub_tools.hub_path import create_gut_path, create_vow_json_path
+from src.a12_hub_toolbox.hub_path import create_gut_path, create_vow_json_path
 from src.a15_vow_logic.vow import vowunit_shop
 from src.a17_idea_logic.idea_csv_tool import (
     add_planunit_to_stance_csv_strs,

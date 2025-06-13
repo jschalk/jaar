@@ -98,18 +98,16 @@ VALUES
         assert get_row_count(cursor, br00117_valid_tablename) == 2
         assert get_row_count(cursor, br00045_valid_tablename) == 3
         pidwayy_s_raw_tablename = create_prime_tablename("PIDWAYY", "s", "raw")
-        planacct_s_put_raw_tblname = create_prime_tablename(
-            "PLANACCT", "s", "raw", "put"
-        )
+        plnacct_s_put_raw_tblname = create_prime_tablename("PLNACCT", "s", "raw", "put")
         assert not db_table_exists(cursor, pidwayy_s_raw_tablename)
-        assert not db_table_exists(cursor, planacct_s_put_raw_tblname)
+        assert not db_table_exists(cursor, plnacct_s_put_raw_tblname)
 
         # WHEN
         etl_brick_valid_tables_to_sound_raw_tables(cursor)
 
         # THEN
         assert get_row_count(cursor, pidwayy_s_raw_tablename) == 5
-        assert get_row_count(cursor, planacct_s_put_raw_tblname) == 2
+        assert get_row_count(cursor, plnacct_s_put_raw_tblname) == 2
         b117 = "br00117"
         b045 = "br00045"
         ex_way0 = (b117, event1, sue_str, yao_str, yao_inx, None, None, None, None)
@@ -128,7 +126,7 @@ VALUES
         assert rows[3] == ex_way0
         assert rows[4] == ex_way1
 
-        select_agg_sqlstr = f"""SELECT * FROM {planacct_s_put_raw_tblname};"""
+        select_agg_sqlstr = f"""SELECT * FROM {plnacct_s_put_raw_tblname};"""
         cursor.execute(select_agg_sqlstr)
         rows = cursor.fetchall()
         print(rows)

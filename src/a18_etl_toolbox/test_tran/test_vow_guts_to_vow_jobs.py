@@ -4,7 +4,7 @@ from src.a06_plan_logic.plan import (
     get_from_json as planunit_get_from_json,
     planunit_shop,
 )
-from src.a12_hub_tools.hub_path import (
+from src.a12_hub_toolbox.hub_path import (
     create_gut_path,
     create_job_path,
     create_vow_json_path,

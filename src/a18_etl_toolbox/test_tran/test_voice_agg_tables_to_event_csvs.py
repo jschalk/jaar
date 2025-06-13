@@ -8,7 +8,7 @@ from src.a06_plan_logic._test_util.a06_str import (
     plan_acctunit_str,
 )
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
-from src.a12_hub_tools.hub_path import create_owner_event_dir_path
+from src.a12_hub_toolbox.hub_path import create_owner_event_dir_path
 from src.a18_etl_toolbox._test_util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
@@ -41,8 +41,8 @@ def test_etl_voice_agg_to_event_plan_csvs_PopulatesPlanPulabelTables(
     a23_bob_e7_dir = create_owner_event_dir_path(
         x_vow_mstr_dir, accord23_str, bob_inx, event7
     )
-    a23_e3_planacct_put_path = create_path(a23_bob_e3_dir, put_agg_csv)
-    a23_e7_planacct_put_path = create_path(a23_bob_e7_dir, put_agg_csv)
+    a23_e3_plnacct_put_path = create_path(a23_bob_e3_dir, put_agg_csv)
+    a23_e7_plnacct_put_path = create_path(a23_bob_e7_dir, put_agg_csv)
 
     with sqlite3_connect(":memory:") as plan_db_conn:
         cursor = plan_db_conn.cursor()
@@ -57,17 +57,17 @@ VALUES
 """
         print(insert_raw_sqlstr)
         cursor.execute(insert_raw_sqlstr)
-        assert os_path_exists(a23_e3_planacct_put_path) is False
-        assert os_path_exists(a23_e7_planacct_put_path) is False
+        assert os_path_exists(a23_e3_plnacct_put_path) is False
+        assert os_path_exists(a23_e7_plnacct_put_path) is False
 
         # WHEN
         etl_voice_agg_to_event_plan_csvs(cursor, x_vow_mstr_dir)
 
         # THEN
-        assert os_path_exists(a23_e3_planacct_put_path)
-        assert os_path_exists(a23_e7_planacct_put_path)
-        e3_put_csv = open_file(a23_e3_planacct_put_path)
-        e7_put_csv = open_file(a23_e7_planacct_put_path)
+        assert os_path_exists(a23_e3_plnacct_put_path)
+        assert os_path_exists(a23_e7_plnacct_put_path)
+        e3_put_csv = open_file(a23_e3_plnacct_put_path)
+        e7_put_csv = open_file(a23_e7_plnacct_put_path)
         print(f"{e3_put_csv=}")
         print(f"{e7_put_csv=}")
         expected_e3_put_csv = """event_int,face_name,vow_label,owner_name,acct_name,credit_score,debt_score

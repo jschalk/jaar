@@ -48,47 +48,47 @@ def get_vow_dict_from_sqlstrs(
         vow_dict["bridge"] = bridge
 
     cursor.execute(fu1_sqlstrs.get("vow_paybook"))
-    _set_vow_dict_vowash(cursor, vow_dict, vow_label)
+    _set_vow_dict_vowpayy(cursor, vow_dict, vow_label)
 
     cursor.execute(fu1_sqlstrs.get("vow_dealunit"))
-    _set_vow_dict_fisdeal(cursor, vow_dict)
+    _set_vow_dict_vowdeal(cursor, vow_dict)
 
     cursor.execute(fu1_sqlstrs.get("vow_timeline_hour"))
-    _set_vow_dict_fishour(cursor, vow_dict)
+    _set_vow_dict_vowhour(cursor, vow_dict)
 
     cursor.execute(fu1_sqlstrs.get("vow_timeline_month"))
-    _set_vow_dict_fismont(cursor, vow_dict)
+    _set_vow_dict_vowmont(cursor, vow_dict)
 
     cursor.execute(fu1_sqlstrs.get("vow_timeline_weekday"))
-    _set_vow_dict_fisweek(cursor, vow_dict)
+    _set_vow_dict_vowweek(cursor, vow_dict)
 
     cursor.execute(fu1_sqlstrs.get("vow_timeoffi"))
     _set_vow_dict_timeoffi(cursor, vow_dict)
     return vow_dict
 
 
-def _set_vow_dict_vowash(cursor: sqlite3_Cursor, vow_dict: dict, x_vow_label: str):
+def _set_vow_dict_vowpayy(cursor: sqlite3_Cursor, vow_dict: dict, x_vow_label: str):
     tranunits_dict = {}
-    for vowash_row in cursor.fetchall():
-        row_vow_label = vowash_row[0]
-        row_owner_name = vowash_row[1]
-        row_acct_name = vowash_row[2]
-        row_tran_time = vowash_row[3]
-        row_amount = vowash_row[4]
+    for vowpayy_row in cursor.fetchall():
+        row_vow_label = vowpayy_row[0]
+        row_owner_name = vowpayy_row[1]
+        row_acct_name = vowpayy_row[2]
+        row_tran_time = vowpayy_row[3]
+        row_amount = vowpayy_row[4]
         keylist = [row_owner_name, row_acct_name, row_tran_time]
         set_in_nested_dict(tranunits_dict, keylist, row_amount)
     paybook_dict = {"vow_label": x_vow_label, "tranunits": tranunits_dict}
     vow_dict["paybook"] = paybook_dict
 
 
-def _set_vow_dict_fisdeal(cursor: sqlite3_Cursor, vow_dict: dict):
+def _set_vow_dict_vowdeal(cursor: sqlite3_Cursor, vow_dict: dict):
     brokerunits_dict = {}
-    for vowash_row in cursor.fetchall():
-        row_vow_label = vowash_row[0]
-        row_owner_name = vowash_row[1]
-        row_deal_time = vowash_row[2]
-        row_quota = vowash_row[3]
-        row_celldepth = vowash_row[4]
+    for vowpayy_row in cursor.fetchall():
+        row_vow_label = vowpayy_row[0]
+        row_owner_name = vowpayy_row[1]
+        row_deal_time = vowpayy_row[2]
+        row_quota = vowpayy_row[3]
+        row_celldepth = vowpayy_row[4]
         owner_keylist = [row_owner_name, "owner_name"]
         set_in_nested_dict(brokerunits_dict, owner_keylist, row_owner_name)
         keylist = [row_owner_name, "deals", row_deal_time]
@@ -101,34 +101,34 @@ def _set_vow_dict_fisdeal(cursor: sqlite3_Cursor, vow_dict: dict):
     vow_dict["brokerunits"] = brokerunits_dict
 
 
-def _set_vow_dict_fishour(cursor: sqlite3_Cursor, vow_dict: dict):
+def _set_vow_dict_vowhour(cursor: sqlite3_Cursor, vow_dict: dict):
     hours_config_list = []
-    for vowash_row in cursor.fetchall():
-        row_vow_label = vowash_row[0]
-        row_cumlative_minute = vowash_row[1]
-        row_hour_label = vowash_row[2]
+    for vowpayy_row in cursor.fetchall():
+        row_vow_label = vowpayy_row[0]
+        row_cumlative_minute = vowpayy_row[1]
+        row_hour_label = vowpayy_row[2]
         hours_config_list.append([row_hour_label, row_cumlative_minute])
     if hours_config_list:
         vow_dict["timeline"]["hours_config"] = hours_config_list
 
 
-def _set_vow_dict_fismont(cursor: sqlite3_Cursor, vow_dict: dict):
+def _set_vow_dict_vowmont(cursor: sqlite3_Cursor, vow_dict: dict):
     months_config_list = []
-    for vowash_row in cursor.fetchall():
-        row_vow_label = vowash_row[0]
-        row_cumlative_day = vowash_row[1]
-        row_month_label = vowash_row[2]
+    for vowpayy_row in cursor.fetchall():
+        row_vow_label = vowpayy_row[0]
+        row_cumlative_day = vowpayy_row[1]
+        row_month_label = vowpayy_row[2]
         months_config_list.append([row_month_label, row_cumlative_day])
     if months_config_list:
         vow_dict["timeline"]["months_config"] = months_config_list
 
 
-def _set_vow_dict_fisweek(cursor: sqlite3_Cursor, vow_dict: dict):
+def _set_vow_dict_vowweek(cursor: sqlite3_Cursor, vow_dict: dict):
     weekday_dict = {}
-    for vowash_row in cursor.fetchall():
-        row_vow_label = vowash_row[0]
-        row_weekday_order = vowash_row[1]
-        row_weekday_label = vowash_row[2]
+    for vowpayy_row in cursor.fetchall():
+        row_vow_label = vowpayy_row[0]
+        row_weekday_order = vowpayy_row[1]
+        row_weekday_label = vowpayy_row[2]
         weekday_dict[row_weekday_order] = row_weekday_label
     weekday_config_list = [weekday_dict[key] for key in sorted(weekday_dict.keys())]
     if weekday_dict:
@@ -137,8 +137,8 @@ def _set_vow_dict_fisweek(cursor: sqlite3_Cursor, vow_dict: dict):
 
 def _set_vow_dict_timeoffi(cursor: sqlite3_Cursor, vow_dict: dict):
     offi_times_set = set()
-    for vowash_row in cursor.fetchall():
-        row_vow_label = vowash_row[0]
-        row_offi_time = vowash_row[1]
+    for vowpayy_row in cursor.fetchall():
+        row_vow_label = vowpayy_row[0]
+        row_offi_time = vowpayy_row[1]
         offi_times_set.add(row_offi_time)
     vow_dict["offi_times"] = list(offi_times_set)

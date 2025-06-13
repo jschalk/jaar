@@ -1,6 +1,7 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import (
     db_table_exists,
+    get_create_table_sqlstr,
     get_table_columns,
     required_columns_exist,
 )
@@ -25,7 +26,7 @@ from src.a06_plan_logic._test_util.a06_str import (
 from src.a08_plan_atom_logic.atom_config import get_delete_key_name
 from src.a09_pack_logic._test_util.a09_str import event_int_str
 from src.a10_plan_calc._test_util.a10_str import plan_groupunit_str
-from src.a12_hub_tools._test_util.a12_str import job_str, vow_ote1_agg_str
+from src.a12_hub_toolbox._test_util.a12_str import job_str, vow_ote1_agg_str
 from src.a15_vow_logic._test_util.a15_str import (
     vow_dealunit_str,
     vow_paybook_str,
@@ -43,14 +44,23 @@ from src.a16_pidgin_logic._test_util.a16_str import (
     pidgin_way_str,
 )
 from src.a17_idea_logic._test_util.a17_str import idea_category_str
-from src.a17_idea_logic.idea_config import get_idea_config_dict, get_idea_numbers
+from src.a17_idea_logic.idea_config import (
+    get_idea_config_dict,
+    get_idea_numbers,
+    get_idea_sqlite_types,
+)
 from src.a17_idea_logic.idea_db_tool import (
     get_default_sorted_list,
     get_idea_into_dimen_raw_query,
 )
-from src.a18_etl_toolbox._test_util.a18_str import vow_event_time_agg_str
+from src.a18_etl_toolbox._test_util.a18_str import (
+    owner_net_amount_str,
+    vow_acct_nets_str,
+    vow_event_time_agg_str,
+)
 from src.a18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
+    CREATE_VOW_ACCT_NETS_SQLSTR,
     CREATE_VOW_EVENT_TIME_AGG_SQLSTR,
     CREATE_VOW_OTE1_AGG_SQLSTR,
     IDEA_STAGEBLE_DEL_DIMENS,
@@ -72,23 +82,23 @@ def test_ALL_DIMEN_ABBV7_has_all_dimens():
 def test_create_prime_tablename_ReturnsObj():
     # ESTABLISH
     planunit_dimen = planunit_str()
-    planacct_dimen = plan_acctunit_str()
-    planmemb_dimen = plan_acct_membership_str()
-    plangrou_dimen = plan_groupunit_str()
-    planconc_dimen = plan_conceptunit_str()
-    planawar_dimen = plan_concept_awardlink_str()
-    planreas_dimen = plan_concept_reasonunit_str()
-    planprem_dimen = plan_concept_reason_premiseunit_str()
-    planlabo_dimen = plan_concept_laborlink_str()
-    planheal_dimen = plan_concept_healerlink_str()
-    planfact_dimen = plan_concept_factunit_str()
-    fisunit_dimen = vowunit_str()
-    vowash_dimen = vow_paybook_str()
-    fisdeal_dimen = vow_dealunit_str()
-    fishour_dimen = vow_timeline_hour_str()
-    fismont_dimen = vow_timeline_month_str()
-    fisweek_dimen = vow_timeline_weekday_str()
-    fisoffi_dimen = vow_timeoffi_str()
+    plnacct_dimen = plan_acctunit_str()
+    plnmemb_dimen = plan_acct_membership_str()
+    plngrou_dimen = plan_groupunit_str()
+    plnconc_dimen = plan_conceptunit_str()
+    plnawar_dimen = plan_concept_awardlink_str()
+    plnreas_dimen = plan_concept_reasonunit_str()
+    plnprem_dimen = plan_concept_reason_premiseunit_str()
+    plnlabo_dimen = plan_concept_laborlink_str()
+    plnheal_dimen = plan_concept_healerlink_str()
+    plnfact_dimen = plan_concept_factunit_str()
+    vowunit_dimen = vowunit_str()
+    vowpayy_dimen = vow_paybook_str()
+    vowdeal_dimen = vow_dealunit_str()
+    vowhour_dimen = vow_timeline_hour_str()
+    vowmont_dimen = vow_timeline_month_str()
+    vowweek_dimen = vow_timeline_weekday_str()
+    vowoffi_dimen = vow_timeoffi_str()
     pidname_dimen = pidgin_name_str()
     pidlabe_dimen = pidgin_label_str()
     pidwayy_dimen = pidgin_way_str()
@@ -102,23 +112,23 @@ def test_create_prime_tablename_ReturnsObj():
 
     # WHEN
     planunit_s_agg_table = create_prime_tablename("planunit", "s", agg_str, put_str)
-    planacct_s_agg_table = create_prime_tablename("planacct", "s", agg_str, put_str)
-    planmemb_s_agg_table = create_prime_tablename("planmemb", "s", agg_str, put_str)
-    planconc_s_agg_table = create_prime_tablename("planconc", "s", agg_str, put_str)
-    planawar_s_agg_table = create_prime_tablename("planawar", "s", agg_str, put_str)
-    planreas_s_agg_table = create_prime_tablename("planreas", "s", agg_str, put_str)
-    planprem_s_agg_table = create_prime_tablename("planprem", "s", agg_str, put_str)
-    planlabo_s_agg_table = create_prime_tablename("PLANLABO", "s", agg_str, put_str)
-    planheal_s_agg_table = create_prime_tablename("planheal", "s", agg_str, put_str)
-    planfact_s_agg_table = create_prime_tablename("planfact", "s", agg_str, put_str)
-    planfact_s_del_table = create_prime_tablename("planfact", "s", agg_str, del_str)
-    fisunit_s_agg_table = create_prime_tablename("fisunit", "s", agg_str)
-    vowash_s_agg_table = create_prime_tablename("vowash", "s", agg_str)
-    fisdeal_s_agg_table = create_prime_tablename("fisdeal", "s", agg_str)
-    fishour_s_agg_table = create_prime_tablename("fishour", "s", agg_str)
-    fismont_s_agg_table = create_prime_tablename("fismont", "s", agg_str)
-    fisweek_s_agg_table = create_prime_tablename("fisweek", "s", agg_str)
-    fisoffi_s_agg_table = create_prime_tablename("fisoffi", "s", agg_str)
+    plnacct_s_agg_table = create_prime_tablename("plnacct", "s", agg_str, put_str)
+    plnmemb_s_agg_table = create_prime_tablename("plnmemb", "s", agg_str, put_str)
+    plnconc_s_agg_table = create_prime_tablename("plnconc", "s", agg_str, put_str)
+    plnawar_s_agg_table = create_prime_tablename("plnawar", "s", agg_str, put_str)
+    plnreas_s_agg_table = create_prime_tablename("plnreas", "s", agg_str, put_str)
+    plnprem_s_agg_table = create_prime_tablename("plnprem", "s", agg_str, put_str)
+    plnlabo_s_agg_table = create_prime_tablename("PLNLABO", "s", agg_str, put_str)
+    plnheal_s_agg_table = create_prime_tablename("plnheal", "s", agg_str, put_str)
+    plnfact_s_agg_table = create_prime_tablename("plnfact", "s", agg_str, put_str)
+    plnfact_s_del_table = create_prime_tablename("plnfact", "s", agg_str, del_str)
+    vowunit_s_agg_table = create_prime_tablename("vowunit", "s", agg_str)
+    vowpayy_s_agg_table = create_prime_tablename("vowpayy", "s", agg_str)
+    vowdeal_s_agg_table = create_prime_tablename("vowdeal", "s", agg_str)
+    vowhour_s_agg_table = create_prime_tablename("vowhour", "s", agg_str)
+    vowmont_s_agg_table = create_prime_tablename("vowmont", "s", agg_str)
+    vowweek_s_agg_table = create_prime_tablename("vowweek", "s", agg_str)
+    vowoffi_s_agg_table = create_prime_tablename("vowoffi", "s", agg_str)
     pidname_s_agg_table = create_prime_tablename("pidname", "s", agg_str)
     pidlabe_s_agg_table = create_prime_tablename("pidlabe", "s", agg_str)
     pidwayy_s_agg_table = create_prime_tablename("pidwayy", "s", agg_str)
@@ -128,29 +138,29 @@ def test_create_prime_tablename_ReturnsObj():
     pidtitl_s_val_table = create_prime_tablename("pidtitl", "s", vld_str)
     pidcore_s_raw_table = create_prime_tablename("pidcore", "s", raw_str)
     pidcore_s_agg_table = create_prime_tablename("pidcore", "s", agg_str)
-    planacct_job_table = create_prime_tablename("planacct", job_str(), None)
-    x_planacct_raw = create_prime_tablename("planacct", "k", raw_str)
-    plangrou_job_table = create_prime_tablename("plangrou", job_str(), None)
+    plnacct_job_table = create_prime_tablename("plnacct", job_str(), None)
+    x_plnacct_raw = create_prime_tablename("plnacct", "k", raw_str)
+    plngrou_job_table = create_prime_tablename("plngrou", job_str(), None)
 
     # THEN
     assert planunit_s_agg_table == f"{planunit_dimen}_s_put_agg"
-    assert planacct_s_agg_table == f"{planacct_dimen}_s_put_agg"
-    assert planmemb_s_agg_table == f"{planmemb_dimen}_s_put_agg"
-    assert planconc_s_agg_table == f"{planconc_dimen}_s_put_agg"
-    assert planawar_s_agg_table == f"{planawar_dimen}_s_put_agg"
-    assert planreas_s_agg_table == f"{planreas_dimen}_s_put_agg"
-    assert planprem_s_agg_table == f"{planprem_dimen}_s_put_agg"
-    assert planlabo_s_agg_table == f"{planlabo_dimen}_s_put_agg"
-    assert planheal_s_agg_table == f"{planheal_dimen}_s_put_agg"
-    assert planfact_s_agg_table == f"{planfact_dimen}_s_put_agg"
-    assert planfact_s_del_table == f"{planfact_dimen}_s_del_agg"
-    assert fisunit_s_agg_table == f"{fisunit_dimen}_s_agg"
-    assert vowash_s_agg_table == f"{vowash_dimen}_s_agg"
-    assert fisdeal_s_agg_table == f"{fisdeal_dimen}_s_agg"
-    assert fishour_s_agg_table == f"{fishour_dimen}_s_agg"
-    assert fismont_s_agg_table == f"{fismont_dimen}_s_agg"
-    assert fisweek_s_agg_table == f"{fisweek_dimen}_s_agg"
-    assert fisoffi_s_agg_table == f"{fisoffi_dimen}_s_agg"
+    assert plnacct_s_agg_table == f"{plnacct_dimen}_s_put_agg"
+    assert plnmemb_s_agg_table == f"{plnmemb_dimen}_s_put_agg"
+    assert plnconc_s_agg_table == f"{plnconc_dimen}_s_put_agg"
+    assert plnawar_s_agg_table == f"{plnawar_dimen}_s_put_agg"
+    assert plnreas_s_agg_table == f"{plnreas_dimen}_s_put_agg"
+    assert plnprem_s_agg_table == f"{plnprem_dimen}_s_put_agg"
+    assert plnlabo_s_agg_table == f"{plnlabo_dimen}_s_put_agg"
+    assert plnheal_s_agg_table == f"{plnheal_dimen}_s_put_agg"
+    assert plnfact_s_agg_table == f"{plnfact_dimen}_s_put_agg"
+    assert plnfact_s_del_table == f"{plnfact_dimen}_s_del_agg"
+    assert vowunit_s_agg_table == f"{vowunit_dimen}_s_agg"
+    assert vowpayy_s_agg_table == f"{vowpayy_dimen}_s_agg"
+    assert vowdeal_s_agg_table == f"{vowdeal_dimen}_s_agg"
+    assert vowhour_s_agg_table == f"{vowhour_dimen}_s_agg"
+    assert vowmont_s_agg_table == f"{vowmont_dimen}_s_agg"
+    assert vowweek_s_agg_table == f"{vowweek_dimen}_s_agg"
+    assert vowoffi_s_agg_table == f"{vowoffi_dimen}_s_agg"
     assert pidname_s_agg_table == f"{pidname_dimen}_s_agg"
     assert pidlabe_s_agg_table == f"{pidlabe_dimen}_s_agg"
     assert pidwayy_s_agg_table == f"{pidwayy_dimen}_s_agg"
@@ -160,9 +170,9 @@ def test_create_prime_tablename_ReturnsObj():
     assert pidtitl_s_val_table == f"{pidtitl_dimen}_s_vld"
     assert pidcore_s_raw_table == f"{pidcore_dimen}_s_raw"
     assert pidcore_s_agg_table == f"{pidcore_dimen}_s_agg"
-    assert planacct_job_table == f"{planacct_dimen}_job"
-    assert plangrou_job_table == f"{plangrou_dimen}_job"
-    assert x_planacct_raw == "plan_acctunit_raw"
+    assert plnacct_job_table == f"{plnacct_dimen}_job"
+    assert plngrou_job_table == f"{plngrou_dimen}_job"
+    assert x_plnacct_raw == "plan_acctunit_raw"
 
 
 def test_create_all_idea_tables_CreatesVowRawTables():
@@ -391,7 +401,7 @@ CREATE TABLE IF NOT EXISTS {vow_ote1_agg_str()} (
 # TODO create test to prove this insert should never grab when error message is not null in source table
 def test_INSERT_VOW_OTE1_AGG_FROM_VOICE_SQLSTR_Exists():
     # ESTABLISH
-    fisdeal_v_raw_tablename = create_prime_tablename(vow_dealunit_str(), "v", "raw")
+    vowdeal_v_raw_tablename = create_prime_tablename(vow_dealunit_str(), "v", "raw")
     expected_INSERT_sqlstr = f"""
 INSERT INTO {vow_ote1_agg_str()} ({vow_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()})
 SELECT {vow_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
@@ -401,7 +411,7 @@ FROM (
     , {owner_name_str()}_inx {owner_name_str()}
     , {event_int_str()}
     , {deal_time_str()}
-    FROM {fisdeal_v_raw_tablename}
+    FROM {vowdeal_v_raw_tablename}
     GROUP BY {vow_label_str()}_inx, {owner_name_str()}_inx, {event_int_str()}, {deal_time_str()}
 )
 ORDER BY {vow_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
@@ -409,3 +419,17 @@ ORDER BY {vow_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_st
 """
     # WHEN / THEN
     assert INSERT_VOW_OTE1_AGG_FROM_VOICE_SQLSTR == expected_INSERT_sqlstr
+
+
+def test_CREATE_VOW_ACCT_NETS_SQLSTR_Exists():
+    # ESTABLISH
+    sqlite_types = get_idea_sqlite_types()
+    sqlite_types[owner_net_amount_str()] = "REAL"
+    expected_create_table_sqlstr = get_create_table_sqlstr(
+        tablename=vow_acct_nets_str(),
+        columns_list=[vow_label_str(), owner_name_str(), owner_net_amount_str()],
+        column_types=sqlite_types,
+    )
+
+    # WHEN / THEN
+    assert CREATE_VOW_ACCT_NETS_SQLSTR == expected_create_table_sqlstr

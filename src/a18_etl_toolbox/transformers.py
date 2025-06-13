@@ -28,21 +28,23 @@ from src.a00_data_toolbox.file_toolbox import (
     save_json,
 )
 from src.a01_term_logic.term import EventInt, FaceName
+from src.a02_finance_logic.deal import TranBook
 from src.a06_plan_logic.plan import PlanUnit, planunit_shop
 from src.a08_plan_atom_logic.atom import planatom_shop
 from src.a08_plan_atom_logic.atom_config import get_plan_dimens
 from src.a09_pack_logic.delta import get_minimal_plandelta
 from src.a09_pack_logic.pack import PackUnit, get_packunit_from_json, packunit_shop
-from src.a12_hub_tools.hub_path import (
+from src.a12_hub_toolbox.hub_path import (
     create_event_all_pack_path,
     create_gut_path,
     create_job_path,
     create_owner_event_dir_path,
     create_planevent_path,
+    create_vow_json_path,
     create_vow_ote1_csv_path,
     create_vow_ote1_json_path,
 )
-from src.a12_hub_tools.hub_tool import (
+from src.a12_hub_toolbox.hub_tool import (
     collect_owner_event_dir_sets,
     get_owners_downhill_event_ints,
     open_job_file,
@@ -88,6 +90,7 @@ from src.a18_etl_toolbox.db_obj_plan_tool import insert_job_obj
 from src.a18_etl_toolbox.db_obj_vow_tool import get_vow_dict_from_voice_tables
 from src.a18_etl_toolbox.idea_collector import IdeaFileRef, get_all_idea_dataframes
 from src.a18_etl_toolbox.tran_sqlstrs import (
+    CREATE_VOW_ACCT_NETS_SQLSTR,
     CREATE_VOW_OTE1_AGG_SQLSTR,
     INSERT_VOW_OTE1_AGG_FROM_VOICE_SQLSTR,
     create_bridge_exists_in_label_error_update_sqlstr,
@@ -554,15 +557,13 @@ def etl_voice_raw_tables_to_voice_agg_tables(cursor: sqlite3_Cursor):
 
 
 def etl_voice_agg_tables_to_vow_jsons(cursor: sqlite3_Cursor, vow_mstr_dir: str):
-    vow_filename = "vow.json"
-    vows_dir = create_path(vow_mstr_dir, "vows")
     select_vow_label_sqlstr = """SELECT vow_label FROM vowunit_v_agg;"""
     cursor.execute(select_vow_label_sqlstr)
     for vow_label_set in cursor.fetchall():
         vow_label = vow_label_set[0]
         vow_dict = get_vow_dict_from_voice_tables(cursor, vow_label)
-        vowunit_dir = create_path(vows_dir, vow_label)
-        save_json(vowunit_dir, vow_filename, vow_dict)
+        vow_json_path = create_vow_json_path(vow_mstr_dir, vow_label)
+        save_json(vow_json_path, None, vow_dict)
 
 
 def etl_brick_valid_table_into_prime_table(
@@ -891,3 +892,29 @@ def etl_vow_job_jsons_to_job_tables(cursor: sqlite3_Cursor, vow_mstr_dir: str):
         for owner_name in get_level1_dirs(owners_dir):
             job_obj = open_job_file(vow_mstr_dir, vow_label, owner_name)
             insert_job_obj(cursor, job_obj)
+
+
+def insert_tranunit_accts_net(cursor: sqlite3_Cursor, tranbook: TranBook):
+    """
+    Insert the net amounts for each account in the tranbook into the specified table.
+
+    :param cursor: SQLite cursor object
+    :param tranbook: TranBook object containing transaction units
+    :param dst_tablename: Name of the destination table
+    """
+    accts_net_array = tranbook._get_accts_net_array()
+    cursor.executemany(
+        f"INSERT INTO vow_acct_nets (vow_label, owner_name, owner_net_amount) VALUES ('{tranbook.vow_label}', ?, ?)",
+        accts_net_array,
+    )
+
+
+def etl_vow_json_acct_nets_to_vow_acct_nets_table(
+    cursor: sqlite3_Cursor, vow_mstr_dir: str
+):
+    cursor.execute(CREATE_VOW_ACCT_NETS_SQLSTR)
+    vows_dir = create_path(vow_mstr_dir, "vows")
+    for vow_label in get_level1_dirs(vows_dir):
+        x_vowunit = vowunit_get_from_default_path(vow_mstr_dir, vow_label)
+        x_vowunit.set_all_tranbook()
+        insert_tranunit_accts_net(cursor, x_vowunit._all_tranbook)

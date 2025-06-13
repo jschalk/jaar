@@ -4,7 +4,7 @@ from src.a06_plan_logic.report import (
     get_plan_acctunits_dataframe,
     get_plan_agenda_dataframe,
 )
-from src.a12_hub_tools.hub_tool import open_gut_file, open_job_file
+from src.a12_hub_toolbox.hub_tool import open_gut_file, open_job_file
 from src.a15_vow_logic.vow import VowUnit
 
 

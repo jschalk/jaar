@@ -9,7 +9,7 @@ from src.a11_deal_cell_logic._test_util.a11_str import (
     celldepth_str,
     deal_owner_name_str,
 )
-from src.a12_hub_tools.hub_path import (
+from src.a12_hub_toolbox.hub_path import (
     create_cell_json_path,
     create_vow_json_path,
     create_vow_owners_dir_path,

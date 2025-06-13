@@ -6,7 +6,7 @@ from src.a06_plan_logic._test_util.a06_str import (
     debt_score_str,
 )
 from src.a06_plan_logic.plan import planunit_shop
-from src.a12_hub_tools.hub_tool import gut_file_exists, open_gut_file
+from src.a12_hub_toolbox.hub_tool import gut_file_exists, open_gut_file
 from src.a17_idea_logic._test_util.a17_env import (
     env_dir_setup_cleanup,
     idea_examples_dir,

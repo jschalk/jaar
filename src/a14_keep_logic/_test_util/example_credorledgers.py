@@ -1,6 +1,6 @@
 from src.a01_term_logic.term import AcctName, OwnerName
 from src.a06_plan_logic.plan import planunit_shop
-from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop
+from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.a14_keep_logic._test_util.a14_env import (
     get_module_temp_dir,
     get_texas_way,
