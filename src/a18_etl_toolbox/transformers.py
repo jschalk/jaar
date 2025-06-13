@@ -40,6 +40,7 @@ from src.a12_hub_tools.hub_path import (
     create_job_path,
     create_owner_event_dir_path,
     create_planevent_path,
+    create_vow_json_path,
     create_vow_ote1_csv_path,
     create_vow_ote1_json_path,
 )
@@ -89,6 +90,7 @@ from src.a18_etl_toolbox.db_obj_plan_tool import insert_job_obj
 from src.a18_etl_toolbox.db_obj_vow_tool import get_vow_dict_from_voice_tables
 from src.a18_etl_toolbox.idea_collector import IdeaFileRef, get_all_idea_dataframes
 from src.a18_etl_toolbox.tran_sqlstrs import (
+    CREATE_VOW_ACCT_NETS_SQLSTR,
     CREATE_VOW_OTE1_AGG_SQLSTR,
     INSERT_VOW_OTE1_AGG_FROM_VOICE_SQLSTR,
     create_bridge_exists_in_label_error_update_sqlstr,
@@ -555,15 +557,13 @@ def etl_voice_raw_tables_to_voice_agg_tables(cursor: sqlite3_Cursor):
 
 
 def etl_voice_agg_tables_to_vow_jsons(cursor: sqlite3_Cursor, vow_mstr_dir: str):
-    vow_filename = "vow.json"
-    vows_dir = create_path(vow_mstr_dir, "vows")
     select_vow_label_sqlstr = """SELECT vow_label FROM vowunit_v_agg;"""
     cursor.execute(select_vow_label_sqlstr)
     for vow_label_set in cursor.fetchall():
         vow_label = vow_label_set[0]
         vow_dict = get_vow_dict_from_voice_tables(cursor, vow_label)
-        vowunit_dir = create_path(vows_dir, vow_label)
-        save_json(vowunit_dir, vow_filename, vow_dict)
+        vow_json_path = create_vow_json_path(vow_mstr_dir, vow_label)
+        save_json(vow_json_path, None, vow_dict)
 
 
 def etl_brick_valid_table_into_prime_table(
@@ -907,3 +907,14 @@ def insert_tranunit_accts_net(cursor: sqlite3_Cursor, tranbook: TranBook):
         f"INSERT INTO vow_acct_nets (vow_label, owner_name, owner_net_amount) VALUES ('{tranbook.vow_label}', ?, ?)",
         accts_net_array,
     )
+
+
+def etl_vow_json_acct_nets_to_vow_acct_nets_table(
+    cursor: sqlite3_Cursor, vow_mstr_dir: str
+):
+    cursor.execute(CREATE_VOW_ACCT_NETS_SQLSTR)
+    vows_dir = create_path(vow_mstr_dir, "vows")
+    for vow_label in get_level1_dirs(vows_dir):
+        x_vowunit = vowunit_get_from_default_path(vow_mstr_dir, vow_label)
+        x_vowunit.set_all_tranbook()
+        insert_tranunit_accts_net(cursor, x_vowunit._all_tranbook)

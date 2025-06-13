@@ -36,6 +36,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_voice_raw_tables_to_vow_ote1_agg,
     etl_vow_guts_to_vow_jobs,
     etl_vow_job_jsons_to_job_tables,
+    etl_vow_json_acct_nets_to_vow_acct_nets_table,
     etl_vow_ote1_agg_csvs_to_jsons,
     etl_vow_ote1_agg_table_to_vow_ote1_agg_csvs,
     get_pidgin_events_by_dirs,
@@ -120,9 +121,8 @@ class WorldUnit:
         cursor: sqlite3_Cursor,
         store_tracing_files: bool = False,
     ):
-        vow_mstr_dir = create_path(self._world_dir, "vow_mstr")
-        delete_dir(vow_mstr_dir)
-        set_dir(vow_mstr_dir)
+        delete_dir(self._vow_mstr_dir)
+        set_dir(self._vow_mstr_dir)
         # collect excel file data into central location
         etl_mud_dfs_to_brick_raw_tables(db_conn, self._mud_dir)
         # brick raw to sound raw, check by event_ints
@@ -149,6 +149,7 @@ class WorldUnit:
         etl_vow_ote1_agg_csvs_to_jsons(self._vow_mstr_dir)
         self.calc_vow_deal_acct_mandate_net_ledgers()
         etl_vow_job_jsons_to_job_tables(cursor, self._vow_mstr_dir)
+        etl_vow_json_acct_nets_to_vow_acct_nets_table(cursor, self._vow_mstr_dir)
 
         # # create all vow_job and mandate reports
         # self.calc_vow_deal_acct_mandate_net_ledgers()
