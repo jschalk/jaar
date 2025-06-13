@@ -10,11 +10,11 @@ from src.a00_data_toolbox.file_toolbox import (
     set_dir,
 )
 from src.a09_pack_logic.pack import init_pack_id, packunit_shop
-from src.a12_hub_tools._test_util.a12_env import (
+from src.a12_hub_toolbox._test_util.a12_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as env_dir,
 )
-from src.a12_hub_tools._test_util.example_hub_atoms import (
+from src.a12_hub_toolbox._test_util.example_hub_atoms import (
     get_atom_example_conceptunit_knee,
     get_sue_packunit,
     sue_1planatoms_packunit,
@@ -22,8 +22,8 @@ from src.a12_hub_tools._test_util.example_hub_atoms import (
     sue_3planatoms_packunit,
     sue_4planatoms_packunit,
 )
-from src.a12_hub_tools.hub_tool import open_gut_file, save_gut_file
-from src.a12_hub_tools.hubunit import hubunit_shop
+from src.a12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
+from src.a12_hub_toolbox.hubunit import hubunit_shop
 
 
 def test_HubUnit_get_max_pack_file_number_ReturnsObj(env_dir_setup_cleanup):

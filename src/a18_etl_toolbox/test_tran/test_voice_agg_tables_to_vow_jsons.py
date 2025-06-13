@@ -7,7 +7,7 @@ from src.a00_data_toolbox.db_toolbox import (
 )
 from src.a00_data_toolbox.file_toolbox import open_file
 from src.a02_finance_logic._test_util.a02_str import vow_label_str
-from src.a12_hub_tools.hub_path import create_vow_json_path
+from src.a12_hub_toolbox.hub_path import create_vow_json_path
 from src.a15_vow_logic._test_util.a15_str import (
     vow_dealunit_str,
     vow_paybook_str,

@@ -12,7 +12,7 @@ from src.a06_plan_logic.plan import (
 )
 from src.a08_plan_atom_logic._test_util.a08_str import INSERT_str
 from src.a09_pack_logic.pack import get_packunit_from_json, packunit_shop
-from src.a12_hub_tools.hub_path import (
+from src.a12_hub_toolbox.hub_path import (
     create_event_all_pack_path,
     create_event_expressed_pack_path,
     create_owner_event_dir_path,

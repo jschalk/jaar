@@ -6,7 +6,7 @@ from src.a00_data_toolbox.file_toolbox import (
     save_json,
 )
 from src.a06_plan_logic.plan import planunit_shop
-from src.a12_hub_tools.hub_path import (
+from src.a12_hub_toolbox.hub_path import (
     create_deal_acct_mandate_ledger_path as deal_mandate_path,
     create_planevent_path,
     create_vow_json_path,

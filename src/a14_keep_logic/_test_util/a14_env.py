@@ -2,7 +2,7 @@ from os.path import exists as os_path_exists
 from pytest import fixture as pytest_fixture
 from src.a00_data_toolbox.file_toolbox import copy_dir, create_path, delete_dir
 from src.a01_term_logic.way import WayTerm, create_way_from_labels
-from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop
+from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 
 
 def temp_vow_label():

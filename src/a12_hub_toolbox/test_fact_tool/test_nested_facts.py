@@ -3,7 +3,7 @@ from src.a11_deal_cell_logic._test_util.example_factunits import (
     example_casa_dirty_factunit,
     example_sky_blue_factunit,
 )
-from src.a12_hub_tools.fact_tool import get_nodes_with_weighted_facts
+from src.a12_hub_toolbox.fact_tool import get_nodes_with_weighted_facts
 
 
 def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario00_RootOnly_NoFacts():

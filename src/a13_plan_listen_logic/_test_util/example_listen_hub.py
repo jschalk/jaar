@@ -1,6 +1,6 @@
 from src.a01_term_logic.way import WayTerm, create_way_from_labels
 from src.a05_concept_logic.concept import get_default_vow_label
-from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop
+from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.a13_plan_listen_logic._test_util.a13_env import get_module_temp_dir
 
 

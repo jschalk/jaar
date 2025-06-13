@@ -15,7 +15,7 @@ from src.a06_plan_logic._test_util.a06_str import (
 )
 from src.a10_plan_calc._test_util.a10_str import plan_groupunit_str
 from src.a10_plan_calc.plan_calc_config import get_plan_calc_config_dict
-from src.a12_hub_tools._test_util.a12_str import job_str
+from src.a12_hub_toolbox._test_util.a12_str import job_str
 from src.a17_idea_logic.idea_config import get_idea_sqlite_types
 from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
 from src.a18_etl_toolbox.tran_sqlstrs import (

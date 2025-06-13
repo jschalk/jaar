@@ -12,7 +12,7 @@ from src.a06_plan_logic._test_util.a06_str import (
     respect_bit_str,
 )
 from src.a07_calendar_logic.chrono import get_default_timeline_config_dict
-from src.a12_hub_tools.hub_path import create_vow_json_path
+from src.a12_hub_toolbox.hub_path import create_vow_json_path
 from src.a15_vow_logic._test_util.a15_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,

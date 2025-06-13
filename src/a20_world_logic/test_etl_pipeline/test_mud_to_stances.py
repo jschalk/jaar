@@ -14,8 +14,8 @@ from src.a02_finance_logic._test_util.a02_str import (
 )
 from src.a06_plan_logic._test_util.a06_str import acct_name_str
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
-from src.a12_hub_tools._test_util.a12_str import vow_ote1_agg_str
-from src.a12_hub_tools.hub_path import (
+from src.a12_hub_toolbox._test_util.a12_str import vow_ote1_agg_str
+from src.a12_hub_toolbox.hub_path import (
     create_deal_acct_mandate_ledger_path as deal_mandate,
     create_event_all_pack_path,
     create_event_expressed_pack_path as expressed_path,

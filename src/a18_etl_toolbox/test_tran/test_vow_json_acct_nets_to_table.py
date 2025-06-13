@@ -2,7 +2,7 @@ from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.a00_data_toolbox.file_toolbox import save_json
 from src.a02_finance_logic.deal import tranbook_shop
-from src.a12_hub_tools.hub_path import create_vow_json_path
+from src.a12_hub_toolbox.hub_path import create_vow_json_path
 from src.a15_vow_logic.vow import vowunit_shop
 from src.a18_etl_toolbox._test_util.a18_env import (
     env_dir_setup_cleanup,

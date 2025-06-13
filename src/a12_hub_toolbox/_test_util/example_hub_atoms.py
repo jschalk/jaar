@@ -20,8 +20,8 @@ from src.a08_plan_atom_logic._test_util.a08_str import (
 from src.a08_plan_atom_logic.atom import PlanAtom, planatom_shop
 from src.a09_pack_logic.delta import PlanDelta, plandelta_shop
 from src.a09_pack_logic.pack import PackUnit, packunit_shop
-from src.a12_hub_tools._test_util.a12_env import get_module_temp_dir
-from src.a12_hub_tools.hubunit import HubUnit, hubunit_shop
+from src.a12_hub_toolbox._test_util.a12_env import get_module_temp_dir
+from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 
 
 def get_atom_example_conceptunit_sports(vow_label: VowLabel = None) -> PlanAtom:

@@ -18,7 +18,7 @@ from src.a06_plan_logic.plan import (
     planunit_shop,
 )
 from src.a11_deal_cell_logic.cell import CellUnit, cellunit_get_from_dict, cellunit_shop
-from src.a12_hub_tools.hub_path import (
+from src.a12_hub_toolbox.hub_path import (
     CELLNODE_FILENAME,
     create_cell_dir_path,
     create_deals_dir_path,

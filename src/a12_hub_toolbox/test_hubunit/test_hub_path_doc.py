@@ -6,7 +6,7 @@ from src.a02_finance_logic._test_util.a02_str import (
     vow_label_str,
 )
 from src.a09_pack_logic._test_util.a09_str import event_int_str
-from src.a12_hub_tools.hub_path import (
+from src.a12_hub_toolbox.hub_path import (
     create_atoms_dir_path,
     create_cell_acct_mandate_ledger_path,
     create_cell_dir_path,

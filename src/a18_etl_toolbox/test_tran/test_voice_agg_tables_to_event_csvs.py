@@ -8,7 +8,7 @@ from src.a06_plan_logic._test_util.a06_str import (
     plan_acctunit_str,
 )
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
-from src.a12_hub_tools.hub_path import create_owner_event_dir_path
+from src.a12_hub_toolbox.hub_path import create_owner_event_dir_path
 from src.a18_etl_toolbox._test_util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,

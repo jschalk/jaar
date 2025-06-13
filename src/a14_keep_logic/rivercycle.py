@@ -7,7 +7,7 @@ from src.a00_data_toolbox.dict_toolbox import (
 from src.a01_term_logic.term import AcctName, OwnerName
 from src.a02_finance_logic.allot import allot_scale
 from src.a06_plan_logic.plan import PlanUnit
-from src.a12_hub_tools.hubunit import HubUnit
+from src.a12_hub_toolbox.hubunit import HubUnit
 
 
 def get_credorledger(x_plan: PlanUnit) -> dict[AcctName, float]:

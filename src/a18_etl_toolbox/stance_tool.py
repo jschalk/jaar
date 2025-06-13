@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, get_level1_dirs
-from src.a12_hub_tools.hub_tool import open_plan_file
+from src.a12_hub_toolbox.hub_tool import open_plan_file
 from src.a15_vow_logic.vow import get_from_default_path as vowunit_get_from_default_path
 from src.a17_idea_logic.idea_csv_tool import (
     add_planunit_to_stance_csv_strs,

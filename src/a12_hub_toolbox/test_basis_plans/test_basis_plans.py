@@ -4,7 +4,7 @@ from src.a02_finance_logic.finance_config import (
 )
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_plan_logic.plan import planunit_shop
-from src.a12_hub_tools.basis_plans import (
+from src.a12_hub_toolbox.basis_plans import (
     create_empty_plan_from_plan,
     create_listen_basis,
     get_default_job,

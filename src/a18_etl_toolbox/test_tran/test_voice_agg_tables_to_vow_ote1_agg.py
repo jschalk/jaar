@@ -6,7 +6,7 @@ from src.a02_finance_logic._test_util.a02_str import (
     vow_label_str,
 )
 from src.a09_pack_logic._test_util.a09_str import event_int_str
-from src.a12_hub_tools._test_util.a12_str import vow_ote1_agg_str
+from src.a12_hub_toolbox._test_util.a12_str import vow_ote1_agg_str
 from src.a15_vow_logic._test_util.a15_str import vow_dealunit_str
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a18_etl_toolbox.transformers import (
