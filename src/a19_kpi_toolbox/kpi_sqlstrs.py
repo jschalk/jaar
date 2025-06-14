@@ -7,8 +7,8 @@ CREATE TABLE vow_kpi001_acct_nets AS
 SELECT 
   vow_label
 , owner_name
-, NULL vow_fund_amount
-, NULL vow_fund_rank
-, NULL as vow_tasks
+, owner_net_amount AS funds
+, NULL AS fund_rank
+, NULL AS tasks_count
 FROM vow_acct_nets
 """
