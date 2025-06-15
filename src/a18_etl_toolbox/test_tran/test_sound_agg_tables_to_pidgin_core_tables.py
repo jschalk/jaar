@@ -822,7 +822,7 @@ def test_create_update_pidtitl_sound_agg_bridge_error_sqlstr_PopulatesTable_Scen
     event5 = 5
     event7 = 7
     event9 = 9
-    error_message = "Otx and inx titles must match bridge property."
+    error_message = "Otx and inx titles must match bridge."
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()

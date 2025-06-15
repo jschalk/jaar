@@ -654,7 +654,7 @@ def create_update_pidtitl_sound_agg_bridge_error_sqlstr() -> str:
     pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
     pidtitl_s_agg_tablename = create_prime_tablename("pidtitl", "s", "agg")
     return f"""UPDATE {pidtitl_s_agg_tablename}
-SET error_message = 'Otx and inx titles must match bridge property.'
+SET error_message = 'Otx and inx titles must match bridge.'
 WHERE rowid IN (
   SELECT title_agg.rowid
   FROM {pidtitl_s_agg_tablename} title_agg
