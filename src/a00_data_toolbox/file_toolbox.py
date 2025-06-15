@@ -96,7 +96,6 @@ def save_file(dest_dir: str, filename: str, file_str: str, replace: bool = True)
     if (os_path_exists(file_path) and replace) or os_path_exists(file_path) is False:
         with open(file_path, "w") as f:
             f.write(file_str)
-            f.close()
 
 
 class CouldNotOpenFileException(Exception):
@@ -110,7 +109,6 @@ def open_file(dest_dir: str, filename: str = None):
     try:
         with open(file_path, "r") as f:
             x_str = f.read()
-            f.close()
     except (PermissionError, FileNotFoundError, OSError) as e:
         raise CouldNotOpenFileException(
             f"Could not load file {file_path} {e.args}"
@@ -227,7 +225,7 @@ def is_path_valid(path: str) -> bool:
         return True
 
 
-def can_active_usser_edit_paths(path: str = None) -> bool:
+def can_usser_edit_paths(path: str = None) -> bool:
     """
     `True` if the active usser has sufficient permissions to create the passed
     path; `False` otherwise.
@@ -249,7 +247,7 @@ def is_path_existent_or_creatable(path: str) -> bool:
         # To circumvent "os" module calls from raising undesirable exceptions on
         # invalid path, is_path_valid() is explicitly called first.
         return is_path_valid(path) and (
-            os_path_exists(path) or can_active_usser_edit_paths(path)
+            os_path_exists(path) or can_usser_edit_paths(path)
         )
     # Report failure on non-fatal filesystem complaints (e.g., connection
     # timeouts, permissions issues) implying this path to be inaccessible. All
@@ -268,7 +266,7 @@ def is_path_probably_creatable(path: str = None) -> bool:
     # workinng directory (CWD) instead.
     dirname = os_getcwd() if path is None else os_path_dirname(path) or os_getcwd()
     try:
-        # For safety, explicitly close and hence delete this temporary file
+        # For safety, explicitly delete this temporary file
         # immediately after creating it in the passed path's parent directory.
         with tempfile_TemporaryFile(dir=dirname):
             pass

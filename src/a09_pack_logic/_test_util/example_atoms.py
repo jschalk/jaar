@@ -1,4 +1,5 @@
-from src.a01_term_logic.rope import VowLabel, create_rope
+from src.a01_term_logic.rope import create_rope
+from src.a01_term_logic.term import VowLabel
 from src.a06_plan_logic._test_util.a06_str import concept_rope_str, plan_conceptunit_str
 from src.a08_plan_atom_logic._test_util.a08_str import INSERT_str
 from src.a08_plan_atom_logic.atom import PlanAtom, planatom_shop

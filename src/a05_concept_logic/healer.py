@@ -19,7 +19,7 @@ class HealerLink:
     def del_healer_name(self, x_healer_name: GroupTitle):
         self._healer_names.remove(x_healer_name)
 
-    def get_dict(self):
+    def get_dict(self) -> dict[str, list[GroupTitle]]:
         return {"healerlink_healer_names": list(self._healer_names)}
 
 

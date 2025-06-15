@@ -61,6 +61,7 @@ def test_to_rope_ReturnsObj_WithParameter_knot():
 
 def test_get_default_axiom_label_ReturnsObj():
     assert get_default_axiom_label() == "YY"
+    assert get_default_axiom_label().is_label(default_knot_if_None())
 
 
 def test_get_default_axiom_rope_ReturnsObj():

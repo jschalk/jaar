@@ -1,4 +1,4 @@
-from src.a01_term_logic.rope import VowLabel
+from src.a01_term_logic.term import VowLabel
 from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
     concept_label_str,

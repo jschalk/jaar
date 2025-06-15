@@ -3,6 +3,7 @@ from src.a01_term_logic._test_util.a01_str import knot_str
 from src.a01_term_logic.term import (
     AcctName,
     AxiomLabel,
+    EporTerm,
     EventInt,
     FaceName,
     GroupTitle,
@@ -14,7 +15,6 @@ from src.a01_term_logic.term import (
     RopeTerm,
     TitleTerm,
     VowLabel,
-    YawTerm,
     default_knot_if_None,
 )
 
@@ -181,14 +181,14 @@ def test_RopeTerm_exists():
     assert inspect_getdoc(x_rope) == doc_str
 
 
-def test_YawTerm_exists():
+def test_EporTerm_exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_rope = YawTerm(empty_str)
+    x_rope = EporTerm(empty_str)
     # THEN
     assert x_rope == empty_str
-    doc_str = f"YawTerm is a RopeTerm in reverse direction. A string representation of a tree path. LabelTerms are seperated by rope {knot_str()}."
+    doc_str = f"EporTerm is a RopeTerm in reverse direction. A string representation of a tree path. LabelTerms are seperated by rope {knot_str()}."
     assert inspect_getdoc(x_rope) == doc_str
 
 

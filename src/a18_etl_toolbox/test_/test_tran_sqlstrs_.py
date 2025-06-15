@@ -77,6 +77,8 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
 def test_ALL_DIMEN_ABBV7_has_all_dimens():
     # ESTABLISH / WHEN / THEN
     assert len(ALL_DIMEN_ABBV7) == len(get_idea_config_dict())
+    x_set = {len(dimen) for dimen in ALL_DIMEN_ABBV7}
+    assert x_set == {7}
 
 
 def test_create_prime_tablename_ReturnsObj():
