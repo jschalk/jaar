@@ -273,17 +273,17 @@ def test_get_acct_mandate_ledger_ReturnsObj_Scenario5_Zero_fund_agenda_give():
     clean_str = "clean"
     dirty_str = "dirty"
     mop_str = "mop"
-    casa_way = sue_plan.make_l1_way(casa_str)
-    floor_way = sue_plan.make_way(casa_way, floor_str)
-    clean_way = sue_plan.make_way(floor_way, clean_str)
-    dirty_way = sue_plan.make_way(floor_way, dirty_str)
-    mop_way = sue_plan.make_way(casa_way, mop_str)
-    sue_plan.add_concept(floor_way)
-    sue_plan.add_concept(clean_way)
-    sue_plan.add_concept(dirty_way)
-    sue_plan.add_concept(mop_way, task=True)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
+    floor_rope = sue_plan.make_rope(casa_rope, floor_str)
+    clean_rope = sue_plan.make_rope(floor_rope, clean_str)
+    dirty_rope = sue_plan.make_rope(floor_rope, dirty_str)
+    mop_rope = sue_plan.make_rope(casa_rope, mop_str)
+    sue_plan.add_concept(floor_rope)
+    sue_plan.add_concept(clean_rope)
+    sue_plan.add_concept(dirty_rope)
+    sue_plan.add_concept(mop_rope, task=True)
     sue_plan.edit_concept_attr(
-        mop_way, reason_rcontext=floor_way, reason_premise=clean_way
+        mop_rope, reason_rcontext=floor_rope, reason_premise=clean_rope
     )
     yao_str = "Yao"
     sue_plan.add_acctunit(yao_str, 13, 5)

@@ -8,9 +8,9 @@ from src.a06_plan_logic.plan import planunit_shop
 def test_PlanUnit_set_fact_CorrectlyModifiesAttr_1():
     # ESTABLISH
     sue_plan = get_planunit_with_4_levels()
-    wkday_way = sue_plan.make_l1_way("wkdays")
-    sunday_way = sue_plan.make_way(wkday_way, "Sunday")
-    sunday_plan_fact = factunit_shop(fcontext=wkday_way, fstate=sunday_way)
+    wkday_rope = sue_plan.make_l1_rope("wkdays")
+    sunday_rope = sue_plan.make_rope(wkday_rope, "Sunday")
+    sunday_plan_fact = factunit_shop(fcontext=wkday_rope, fstate=sunday_rope)
     print(sunday_plan_fact)
     x_conceptroot = sue_plan.conceptroot
     x_conceptroot.factunits = {sunday_plan_fact.fcontext: sunday_plan_fact}
@@ -19,7 +19,7 @@ def test_PlanUnit_set_fact_CorrectlyModifiesAttr_1():
     assert not x_conceptroot.factunits
 
     # ESTABLISH
-    sue_plan.add_fact(fcontext=wkday_way, fstate=sunday_way)
+    sue_plan.add_fact(fcontext=wkday_rope, fstate=sunday_rope)
 
     # THEN
     assert x_conceptroot.factunits == {sunday_plan_fact.fcontext: sunday_plan_fact}
@@ -27,15 +27,15 @@ def test_PlanUnit_set_fact_CorrectlyModifiesAttr_1():
     # ESTABLISH
     x_conceptroot.factunits = {}
     assert not x_conceptroot.factunits
-    usa_wk_way = sue_plan.make_l1_way("nation")
-    usa_wk_fact = factunit_shop(usa_wk_way, usa_wk_way, fopen=608, fnigh=610)
+    usa_wk_rope = sue_plan.make_l1_rope("nation")
+    usa_wk_fact = factunit_shop(usa_wk_rope, usa_wk_rope, fopen=608, fnigh=610)
     x_conceptroot.factunits = {usa_wk_fact.fcontext: usa_wk_fact}
 
     x_conceptroot.factunits = {}
     assert not x_conceptroot.factunits
 
     # WHEN
-    sue_plan.add_fact(fcontext=usa_wk_way, fstate=usa_wk_way, fopen=608, fnigh=610)
+    sue_plan.add_fact(fcontext=usa_wk_rope, fstate=usa_wk_rope, fopen=608, fnigh=610)
 
     # THEN
     assert x_conceptroot.factunits is not None
@@ -45,14 +45,14 @@ def test_PlanUnit_set_fact_CorrectlyModifiesAttr_1():
 def test_PlanUnit_set_fact_CorrectlyModifiesAttr_2():
     # ESTABLISH
     sue_plan = get_planunit_with_4_levels()
-    wkday_way = sue_plan.make_l1_way("wkdays")
-    sunday_way = sue_plan.make_way(wkday_way, "Sunday")
+    wkday_rope = sue_plan.make_l1_rope("wkdays")
+    sunday_rope = sue_plan.make_rope(wkday_rope, "Sunday")
 
     # WHEN
-    sue_plan.add_fact(fcontext=wkday_way, fstate=sunday_way)
+    sue_plan.add_fact(fcontext=wkday_rope, fstate=sunday_rope)
 
     # THEN
-    sunday_plan_fact = factunit_shop(fcontext=wkday_way, fstate=sunday_way)
+    sunday_plan_fact = factunit_shop(fcontext=wkday_rope, fstate=sunday_rope)
     x_conceptroot = sue_plan.conceptroot
     assert x_conceptroot.factunits == {sunday_plan_fact.fcontext: sunday_plan_fact}
 
@@ -60,13 +60,13 @@ def test_PlanUnit_set_fact_CorrectlyModifiesAttr_2():
 def test_PlanUnit_set_fact_CorrectlyModifiesAttrWhen_fstate_IsNone():
     # ESTABLISH
     sue_plan = get_planunit_with_4_levels()
-    wkday_way = sue_plan.make_l1_way("wkdays")
+    wkday_rope = sue_plan.make_l1_rope("wkdays")
 
     # WHEN
-    sue_plan.add_fact(fcontext=wkday_way, fopen=5, fnigh=7)
+    sue_plan.add_fact(fcontext=wkday_rope, fopen=5, fnigh=7)
 
     # THEN
-    sunday_plan_fact = factunit_shop(wkday_way, wkday_way, 5, 7)
+    sunday_plan_fact = factunit_shop(wkday_rope, wkday_rope, 5, 7)
     x_conceptroot = sue_plan.conceptroot
     assert x_conceptroot.factunits == {sunday_plan_fact.fcontext: sunday_plan_fact}
 
@@ -74,18 +74,18 @@ def test_PlanUnit_set_fact_CorrectlyModifiesAttrWhen_fstate_IsNone():
 def test_PlanUnit_set_fact_CorrectlyModifiesAttrWhen_popen_IsNone():
     # ESTABLISH
     sue_plan = get_planunit_with_4_levels()
-    wkday_way = sue_plan.make_l1_way("wkdays")
-    sue_plan.add_fact(fcontext=wkday_way, fopen=5, fnigh=7)
+    wkday_rope = sue_plan.make_l1_rope("wkdays")
+    sue_plan.add_fact(fcontext=wkday_rope, fopen=5, fnigh=7)
     x_conceptroot = sue_plan.conceptroot
-    x7_factunit = factunit_shop(wkday_way, wkday_way, 5, 7)
-    assert x_conceptroot.factunits.get(wkday_way) == x7_factunit
+    x7_factunit = factunit_shop(wkday_rope, wkday_rope, 5, 7)
+    assert x_conceptroot.factunits.get(wkday_rope) == x7_factunit
 
     # WHEN
-    sue_plan.add_fact(fcontext=wkday_way, fnigh=10)
+    sue_plan.add_fact(fcontext=wkday_rope, fnigh=10)
 
     # THEN
-    x10_factunit = factunit_shop(wkday_way, wkday_way, 5, 10)
-    assert x_conceptroot.factunits.get(wkday_way) == x10_factunit
+    x10_factunit = factunit_shop(wkday_rope, wkday_rope, 5, 10)
+    assert x_conceptroot.factunits.get(wkday_rope) == x10_factunit
 
 
 def test_PlanUnit_set_fact_FailsToCreateWhenRcontextAndFactAreDifferenctAndFactConceptIsNot_RangeRoot():
@@ -94,36 +94,36 @@ def test_PlanUnit_set_fact_FailsToCreateWhenRcontextAndFactAreDifferenctAndFactC
     time_str = "time"
     time_concept = conceptunit_shop(time_str, begin=0, close=140)
     bob_plan.set_l1_concept(time_concept)
-    time_way = bob_plan.make_l1_way(time_str)
+    time_rope = bob_plan.make_l1_rope(time_str)
     a1st = "age1st"
-    a1st_way = bob_plan.make_way(time_way, a1st)
+    a1st_rope = bob_plan.make_rope(time_rope, a1st)
     a1st_concept = conceptunit_shop(a1st, begin=0, close=20)
-    bob_plan.set_concept(a1st_concept, parent_way=time_way)
+    bob_plan.set_concept(a1st_concept, parent_rope=time_rope)
     a1e1st_str = "a1_era1st"
     a1e1st_concept = conceptunit_shop(a1e1st_str, begin=20, close=30)
-    bob_plan.set_concept(a1e1st_concept, parent_way=a1st_way)
-    a1e1_way = bob_plan.make_way(a1st_way, a1e1st_str)
+    bob_plan.set_concept(a1e1st_concept, parent_rope=a1st_rope)
+    a1e1_rope = bob_plan.make_rope(a1st_rope, a1e1st_str)
     assert bob_plan.conceptroot.factunits in (None, {})
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        bob_plan.add_fact(fcontext=a1e1_way, fstate=a1e1_way, fopen=20, fnigh=23)
-    x_str = f"Non range-root fact:{a1e1_way} can only be set by range-root fact"
+        bob_plan.add_fact(fcontext=a1e1_rope, fstate=a1e1_rope, fopen=20, fnigh=23)
+    x_str = f"Non range-root fact:{a1e1_rope} can only be set by range-root fact"
     assert str(excinfo.value) == x_str
 
 
 def test_PlanUnit_del_fact_CorrectlyModifiesAttr():
     # ESTABLISH
     sue_plan = get_planunit_with_4_levels()
-    wkday_way = sue_plan.make_l1_way("wkdays")
-    sunday_way = sue_plan.make_way(wkday_way, "Sunday")
-    sue_plan.add_fact(fcontext=wkday_way, fstate=sunday_way)
-    sunday_plan_fact = factunit_shop(fcontext=wkday_way, fstate=sunday_way)
+    wkday_rope = sue_plan.make_l1_rope("wkdays")
+    sunday_rope = sue_plan.make_rope(wkday_rope, "Sunday")
+    sue_plan.add_fact(fcontext=wkday_rope, fstate=sunday_rope)
+    sunday_plan_fact = factunit_shop(fcontext=wkday_rope, fstate=sunday_rope)
     x_conceptroot = sue_plan.conceptroot
     assert x_conceptroot.factunits == {sunday_plan_fact.fcontext: sunday_plan_fact}
 
     # WHEN
-    sue_plan.del_fact(fcontext=wkday_way)
+    sue_plan.del_fact(fcontext=wkday_rope)
 
     # THEN
     assert x_conceptroot.factunits == {}
@@ -133,16 +133,16 @@ def test_PlanUnit_get_fact_ReturnsFactUnit():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     situations_str = "situations"
-    situations_way = sue_plan.make_l1_way(situations_str)
+    situations_rope = sue_plan.make_l1_rope(situations_str)
     climate_str = "climate"
-    climate_way = sue_plan.make_way(situations_way, climate_str)
-    sue_plan.add_fact(situations_way, climate_way, create_missing_concepts=True)
+    climate_rope = sue_plan.make_rope(situations_rope, climate_str)
+    sue_plan.add_fact(situations_rope, climate_rope, create_missing_concepts=True)
 
     # WHEN
-    generated_situations_rcontext = sue_plan.get_fact(situations_way)
+    generated_situations_rcontext = sue_plan.get_fact(situations_rope)
 
     # THEN
-    static_situations_rcontext = sue_plan.conceptroot.factunits.get(situations_way)
+    static_situations_rcontext = sue_plan.conceptroot.factunits.get(situations_rope)
     assert generated_situations_rcontext == static_situations_rcontext
 
 
@@ -156,11 +156,11 @@ def test_PlanUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     clean_str = "clean"
     clean_concept = conceptunit_shop(clean_str, task=True)
     sue_plan.set_l1_concept(clean_concept)
-    c_way = sue_plan.make_l1_way(clean_str)
-    time_way = sue_plan.make_l1_way(time_str)
-    # sue_plan.edit_concept_attr(c_way, reason_rcontext=time_way, reason_premise=time_way, popen=5, reason_pnigh=10)
+    c_rope = sue_plan.make_l1_rope(clean_str)
+    time_rope = sue_plan.make_l1_rope(time_str)
+    # sue_plan.edit_concept_attr(c_rope, reason_rcontext=time_rope, reason_premise=time_rope, popen=5, reason_pnigh=10)
 
-    sue_plan.add_fact(fcontext=time_way, fstate=time_way, fopen=5, fnigh=10)
+    sue_plan.add_fact(fcontext=time_rope, fstate=time_rope, fopen=5, fnigh=10)
     print(f"Establish a single ranged fact {sue_plan.conceptroot.factunits=}")
     assert len(sue_plan.conceptroot.factunits) == 1
 
@@ -171,8 +171,8 @@ def test_PlanUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     place_str = "place_x"
     place_concept = conceptunit_shop(place_str, begin=600, close=800)
     sue_plan.set_l1_concept(place_concept)
-    place_way = sue_plan.make_l1_way(place_str)
-    sue_plan.add_fact(fcontext=place_way, fstate=place_way, fopen=5, fnigh=10)
+    place_rope = sue_plan.make_l1_rope(place_str)
+    sue_plan.add_fact(fcontext=place_rope, fstate=place_rope, fopen=5, fnigh=10)
     print(f"When one ranged fact added {sue_plan.conceptroot.factunits=}")
     assert len(sue_plan.conceptroot.factunits) == 2
 
@@ -182,8 +182,8 @@ def test_PlanUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     # WHEN one non-ranged_fact added
     mood = "mood_x"
     sue_plan.set_l1_concept(conceptunit_shop(mood))
-    m_way = sue_plan.make_l1_way(mood)
-    sue_plan.add_fact(fcontext=m_way, fstate=m_way)
+    m_rope = sue_plan.make_l1_rope(mood)
+    sue_plan.add_fact(fcontext=m_rope, fstate=m_rope)
     print(f"When one non-ranged_fact added {sue_plan.conceptroot.factunits=}")
     assert len(sue_plan.conceptroot.factunits) == 3
 
@@ -196,16 +196,16 @@ def test_PlanUnit_get_rangeroot_factunits_ReturnsObjsScenario1():
     sue_plan = planunit_shop("Sue")
     time_str = "time"
     sue_plan.set_l1_concept(conceptunit_shop(time_str, begin=0, close=140))
-    time_way = sue_plan.make_l1_way(time_str)
+    time_rope = sue_plan.make_l1_rope(time_str)
     mood_x = "mood_x"
     sue_plan.set_l1_concept(conceptunit_shop(mood_x))
-    m_x_way = sue_plan.make_l1_way(mood_x)
+    m_x_rope = sue_plan.make_l1_rope(mood_x)
     happy = "happy"
     sad = "Sad"
-    sue_plan.set_concept(conceptunit_shop(happy), parent_way=m_x_way)
-    sue_plan.set_concept(conceptunit_shop(sad), parent_way=m_x_way)
-    sue_plan.add_fact(fcontext=time_way, fstate=time_way, fopen=5, fnigh=10)
-    sue_plan.add_fact(fcontext=m_x_way, fstate=sue_plan.make_way(m_x_way, happy))
+    sue_plan.set_concept(conceptunit_shop(happy), parent_rope=m_x_rope)
+    sue_plan.set_concept(conceptunit_shop(sad), parent_rope=m_x_rope)
+    sue_plan.add_fact(fcontext=time_rope, fstate=time_rope, fopen=5, fnigh=10)
+    sue_plan.add_fact(fcontext=m_x_rope, fstate=sue_plan.make_rope(m_x_rope, happy))
     print(
         f"Establish a root ranged fact and non-range fact:\n{sue_plan.conceptroot.factunits=}"
     )
@@ -213,22 +213,22 @@ def test_PlanUnit_get_rangeroot_factunits_ReturnsObjsScenario1():
 
     # WHEN / THEN
     assert len(sue_plan._get_rangeroot_factunits()) == 1
-    assert sue_plan._get_rangeroot_factunits()[0].fcontext == time_way
+    assert sue_plan._get_rangeroot_factunits()[0].fcontext == time_rope
 
 
 def test_PlanUnit_set_fact_create_missing_concepts_CreatesRcontextAndFact():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     situations_str = "situations"
-    situations_way = sue_plan.make_l1_way(situations_str)
+    situations_rope = sue_plan.make_l1_rope(situations_str)
     climate_str = "climate"
-    climate_way = sue_plan.make_way(situations_way, climate_str)
+    climate_rope = sue_plan.make_rope(situations_rope, climate_str)
     assert sue_plan.conceptroot.get_kid(situations_str) is None
 
     # WHEN
-    sue_plan.add_fact(situations_way, climate_way, create_missing_concepts=True)
+    sue_plan.add_fact(situations_rope, climate_rope, create_missing_concepts=True)
 
     # THEN
     assert sue_plan.conceptroot.get_kid(situations_str) is not None
-    assert sue_plan.get_concept_obj(situations_way) is not None
-    assert sue_plan.get_concept_obj(climate_way) is not None
+    assert sue_plan.get_concept_obj(situations_rope) is not None
+    assert sue_plan.get_concept_obj(climate_rope) is not None

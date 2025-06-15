@@ -12,10 +12,10 @@
         "vow_label": {
             "otx_key": true
         },
-        "inx_way": {
+        "inx_rope": {
             "otx_key": false
         },
-        "otx_way": {
+        "otx_rope": {
             "otx_key": true
         },
         "owner_name": {
@@ -24,7 +24,7 @@
     },
     "idea_number": "br00117",
     "dimens": [
-        "pidgin_way",
+        "pidgin_rope",
         "plan_acctunit",
         "planunit",
         "vowunit"

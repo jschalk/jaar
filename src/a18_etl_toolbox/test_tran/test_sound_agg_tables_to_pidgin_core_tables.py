@@ -4,25 +4,25 @@ from src.a02_finance_logic._test_util.a02_str import owner_name_str
 from src.a06_plan_logic._test_util.a06_str import acct_name_str, plan_acctunit_str
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic._test_util.a16_str import (
-    inx_bridge_str,
+    inx_knot_str,
     inx_label_str,
     inx_name_str,
+    inx_rope_str,
     inx_title_str,
-    inx_way_str,
-    otx_bridge_str,
+    otx_knot_str,
     otx_label_str,
     otx_name_str,
+    otx_rope_str,
     otx_title_str,
-    otx_way_str,
     pidgin_core_str,
     pidgin_label_str,
     pidgin_name_str,
+    pidgin_rope_str,
     pidgin_title_str,
-    pidgin_way_str,
     unknown_str_str,
 )
 from src.a16_pidgin_logic.pidgin import (
-    default_bridge_if_None,
+    default_knot_if_None,
     default_unknown_str_if_None,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
@@ -31,17 +31,17 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_PIDCORE_SOUND_VLD_SQLSTR,
     CREATE_PIDLABE_SOUND_AGG_SQLSTR,
     CREATE_PIDNAME_SOUND_AGG_SQLSTR,
+    CREATE_PIDROPE_SOUND_AGG_SQLSTR,
     CREATE_PIDTITL_SOUND_AGG_SQLSTR,
-    CREATE_PIDWAYY_SOUND_AGG_SQLSTR,
     create_insert_into_pidgin_core_raw_sqlstr,
     create_insert_pidgin_sound_vld_table_sqlstr,
     create_prime_tablename,
     create_sound_and_voice_tables,
     create_update_pidgin_sound_agg_inconsist_sqlstr,
-    create_update_pidlabe_sound_agg_bridge_error_sqlstr,
-    create_update_pidname_sound_agg_bridge_error_sqlstr,
-    create_update_pidtitl_sound_agg_bridge_error_sqlstr,
-    create_update_pidwayy_sound_agg_bridge_error_sqlstr,
+    create_update_pidlabe_sound_agg_knot_error_sqlstr,
+    create_update_pidname_sound_agg_knot_error_sqlstr,
+    create_update_pidrope_sound_agg_knot_error_sqlstr,
+    create_update_pidtitl_sound_agg_knot_error_sqlstr,
 )
 from src.a18_etl_toolbox.transformers import (
     etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables,
@@ -51,8 +51,8 @@ from src.a18_etl_toolbox.transformers import (
     insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table,
     populate_pidgin_core_vld_with_missing_face_names,
     update_inconsistency_pidgin_core_raw_table,
-    update_pidgin_sound_agg_bridge_errors,
     update_pidgin_sound_agg_inconsist_errors,
+    update_pidgin_sound_agg_knot_errors,
 )
 
 
@@ -73,16 +73,16 @@ def test_create_insert_into_pidgin_core_raw_sqlstr_ReturnsObj_PopulatesTable_Sce
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        cursor.execute(CREATE_PIDWAYY_SOUND_AGG_SQLSTR)
-        pidwayy_dimen = pidgin_way_str()
-        pidgin_way_s_agg_tablename = create_prime_tablename(pidwayy_dimen, "s", "agg")
-        insert_into_clause = f"""INSERT INTO {pidgin_way_s_agg_tablename} (
+        cursor.execute(CREATE_PIDROPE_SOUND_AGG_SQLSTR)
+        pidrope_dimen = pidgin_rope_str()
+        pidgin_rope_s_agg_tablename = create_prime_tablename(pidrope_dimen, "s", "agg")
+        insert_into_clause = f"""INSERT INTO {pidgin_rope_s_agg_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {otx_way_str()}
-, {inx_way_str()}
-, {otx_bridge_str()}
-, {inx_bridge_str()}
+, {otx_rope_str()}
+, {inx_rope_str()}
+, {otx_knot_str()}
+, {inx_knot_str()}
 , {unknown_str_str()}
 )"""
         values_clause = f"""
@@ -101,7 +101,7 @@ VALUES
         assert get_row_count(cursor, pidgin_core_s_raw_tablename) == 0
 
         # WHEN
-        sqlstr = create_insert_into_pidgin_core_raw_sqlstr(pidwayy_dimen)
+        sqlstr = create_insert_into_pidgin_core_raw_sqlstr(pidrope_dimen)
         print(f"{sqlstr=}")
         cursor.execute(sqlstr)
 
@@ -110,9 +110,9 @@ VALUES
         select_core_raw_sqlstr = f"SELECT * FROM {pidgin_core_s_raw_tablename}"
         cursor.execute(select_core_raw_sqlstr)
         assert cursor.fetchall() == [
-            (pidgin_way_s_agg_tablename, "Sue", None, None, None, None),
-            (pidgin_way_s_agg_tablename, "Sue", ":", ":", "Unknown", None),
-            (pidgin_way_s_agg_tablename, "Yao", ":", ":", "Unknown", None),
+            (pidgin_rope_s_agg_tablename, "Sue", None, None, None, None),
+            (pidgin_rope_s_agg_tablename, "Sue", ":", ":", "Unknown", None),
+            (pidgin_rope_s_agg_tablename, "Yao", ":", ":", "Unknown", None),
         ]
 
 
@@ -133,16 +133,16 @@ def test_insert_pidgin_sound_agg_into_pidgin_core_raw_table_PopulatesTable_Scena
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        cursor.execute(CREATE_PIDWAYY_SOUND_AGG_SQLSTR)
-        pidwayy_dimen = pidgin_way_str()
-        pidgin_way_s_agg_tablename = create_prime_tablename(pidwayy_dimen, "s", "agg")
-        insert_into_clause = f"""INSERT INTO {pidgin_way_s_agg_tablename} (
+        cursor.execute(CREATE_PIDROPE_SOUND_AGG_SQLSTR)
+        pidrope_dimen = pidgin_rope_str()
+        pidgin_rope_s_agg_tablename = create_prime_tablename(pidrope_dimen, "s", "agg")
+        insert_into_clause = f"""INSERT INTO {pidgin_rope_s_agg_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {otx_way_str()}
-, {inx_way_str()}
-, {otx_bridge_str()}
-, {inx_bridge_str()}
+, {otx_rope_str()}
+, {inx_rope_str()}
+, {otx_knot_str()}
+, {inx_knot_str()}
 , {unknown_str_str()}
 )"""
         values_clause = f"""
@@ -162,8 +162,8 @@ VALUES
 , {face_name_str()}
 , {otx_name_str()}
 , {inx_name_str()}
-, {otx_bridge_str()}
-, {inx_bridge_str()}
+, {otx_knot_str()}
+, {inx_knot_str()}
 , {unknown_str_str()}
 )"""
         values_clause = f"""
@@ -176,7 +176,7 @@ VALUES
 
         create_sound_and_voice_tables(cursor)
         pidgin_core_s_raw_tablename = create_prime_tablename("pidcore", "s", "raw")
-        assert get_row_count(cursor, pidgin_way_s_agg_tablename) == 3
+        assert get_row_count(cursor, pidgin_rope_s_agg_tablename) == 3
         assert get_row_count(cursor, pidgin_name_s_agg_tablename) == 2
         assert get_row_count(cursor, pidgin_core_s_raw_tablename) == 0
 
@@ -192,8 +192,8 @@ VALUES
         assert rows == [
             (pidgin_name_s_agg_tablename, "Bob", ":", ":", "Unknown", None),
             (pidgin_name_s_agg_tablename, "Sue", None, None, None, None),
-            (pidgin_way_s_agg_tablename, "Sue", None, None, None, None),
-            (pidgin_way_s_agg_tablename, "Yao", ":", ":", "Unknown", None),
+            (pidgin_rope_s_agg_tablename, "Sue", None, None, None, None),
+            (pidgin_rope_s_agg_tablename, "Yao", ":", ":", "Unknown", None),
         ]
 
 
@@ -205,14 +205,14 @@ def test_update_inconsistency_pidgin_core_raw_table_UpdatesTable_Scenario0():
     yao_inx = "Yaoito"
     bob_inx = "Bobito"
     rdx = ":"
-    other_bridge = "/"
+    other_knot = "/"
     ukx = "Unknown"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         cursor.execute(CREATE_PIDCORE_SOUND_RAW_SQLSTR)
-        pidwayy_dimen = pidgin_way_str()
-        pidgin_way_s_agg_tablename = create_prime_tablename(pidwayy_dimen, "s", "agg")
+        pidrope_dimen = pidgin_rope_str()
+        pidgin_rope_s_agg_tablename = create_prime_tablename(pidrope_dimen, "s", "agg")
         pidname_dimen = pidgin_name_str()
         pidgin_name_s_agg_tablename = create_prime_tablename(pidname_dimen, "s", "agg")
         pidcore_dimen = pidgin_core_str()
@@ -220,8 +220,8 @@ def test_update_inconsistency_pidgin_core_raw_table_UpdatesTable_Scenario0():
         insert_into_clause = f"""INSERT INTO {pidgin_core_s_raw_tablename} (
   source_dimen
 , {face_name_str()}
-, {otx_bridge_str()}
-, {inx_bridge_str()}
+, {otx_knot_str()}
+, {inx_knot_str()}
 , {unknown_str_str()}
 , error_message
 )"""
@@ -229,8 +229,8 @@ def test_update_inconsistency_pidgin_core_raw_table_UpdatesTable_Scenario0():
 VALUES
   ('{pidgin_name_s_agg_tablename}', "{bob_str}", "{rdx}", "{rdx}", "{ukx}", NULL)
 , ('{pidgin_name_s_agg_tablename}', "{sue_str}", NULL, NULL, '{rdx}', NULL)
-, ('{pidgin_way_s_agg_tablename}', "{sue_str}", NULL, NULL, '{other_bridge}', NULL)
-, ('{pidgin_way_s_agg_tablename}', "{yao_str}", "{rdx}", "{rdx}", "{ukx}", NULL)
+, ('{pidgin_rope_s_agg_tablename}', "{sue_str}", NULL, NULL, '{other_knot}', NULL)
+, ('{pidgin_rope_s_agg_tablename}', "{yao_str}", "{rdx}", "{rdx}", "{ukx}", NULL)
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -252,8 +252,8 @@ VALUES
         assert rows == [
             (pidgin_name_s_agg_tablename, "Bob", ":", ":", "Unknown", None),
             (pidgin_name_s_agg_tablename, "Sue", None, None, ":", error_message),
-            (pidgin_way_s_agg_tablename, "Sue", None, None, "/", error_message),
-            (pidgin_way_s_agg_tablename, "Yao", ":", ":", "Unknown", None),
+            (pidgin_rope_s_agg_tablename, "Sue", None, None, "/", error_message),
+            (pidgin_rope_s_agg_tablename, "Yao", ":", ":", "Unknown", None),
         ]
 
 
@@ -265,15 +265,15 @@ def test_insert_pidgin_core_raw_to_pidgin_core_agg_table_PopulatesTable_Scenario
     yao_inx = "Yaoito"
     bob_inx = "Bobito"
     rdx = ":"
-    other_bridge = "/"
+    other_knot = "/"
     ukx = "Unknown"
     error_message = "Inconsistent data"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         cursor.execute(CREATE_PIDCORE_SOUND_RAW_SQLSTR)
-        pidwayy_dimen = pidgin_way_str()
-        pidgin_way_s_agg_tablename = create_prime_tablename(pidwayy_dimen, "s", "agg")
+        pidrope_dimen = pidgin_rope_str()
+        pidgin_rope_s_agg_tablename = create_prime_tablename(pidrope_dimen, "s", "agg")
         pidname_dimen = pidgin_name_str()
         pidgin_name_s_agg_tablename = create_prime_tablename(pidname_dimen, "s", "agg")
         pidcore_dimen = pidgin_core_str()
@@ -281,8 +281,8 @@ def test_insert_pidgin_core_raw_to_pidgin_core_agg_table_PopulatesTable_Scenario
         insert_into_clause = f"""INSERT INTO {pidgin_core_s_raw_tablename} (
   source_dimen
 , {face_name_str()}
-, {otx_bridge_str()}
-, {inx_bridge_str()}
+, {otx_knot_str()}
+, {inx_knot_str()}
 , {unknown_str_str()}
 , error_message
 )"""
@@ -290,8 +290,8 @@ def test_insert_pidgin_core_raw_to_pidgin_core_agg_table_PopulatesTable_Scenario
 VALUES
   ('{pidgin_name_s_agg_tablename}', "{bob_str}", "{rdx}", "{rdx}", "{ukx}", NULL)
 , ('{pidgin_name_s_agg_tablename}', "{sue_str}", NULL, NULL, '{rdx}', '{error_message}')
-, ('{pidgin_way_s_agg_tablename}', "{sue_str}", NULL, NULL, '{other_bridge}', '{error_message}')
-, ('{pidgin_way_s_agg_tablename}', "{yao_str}", "{rdx}", "{rdx}", "{ukx}", NULL)
+, ('{pidgin_rope_s_agg_tablename}', "{sue_str}", NULL, NULL, '{other_knot}', '{error_message}')
+, ('{pidgin_rope_s_agg_tablename}', "{yao_str}", "{rdx}", "{rdx}", "{ukx}", NULL)
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -318,12 +318,12 @@ def test_insert_pidgin_core_agg_to_pidgin_core_vld_table_PopulatesTable_Scenario
     sue_str = "Sue"
     yao_str = "Yao"
     zia_str = "zia"
-    colon_bridge = ":"
-    slash_bridge = "/"
-    other_bridge = "="
+    colon_knot = ":"
+    slash_knot = "/"
+    other_knot = "="
     unknown_str = "Unknown"
     huh_str = "Huh"
-    default_bridge = default_bridge_if_None()
+    default_knot = default_knot_if_None()
     default_unknown = default_unknown_str_if_None()
 
     with sqlite3_connect(":memory:") as db_conn:
@@ -333,16 +333,16 @@ def test_insert_pidgin_core_agg_to_pidgin_core_vld_table_PopulatesTable_Scenario
         pidgin_core_s_agg_tablename = create_prime_tablename(pidcore_dimen, "s", "agg")
         insert_into_clause = f"""INSERT INTO {pidgin_core_s_agg_tablename} (
   {face_name_str()}
-, {otx_bridge_str()}
-, {inx_bridge_str()}
+, {otx_knot_str()}
+, {inx_knot_str()}
 , {unknown_str_str()}
 )"""
         values_clause = f"""
 VALUES
-  ("{bob_str}", "{colon_bridge}", "{slash_bridge}", "{unknown_str}")
+  ("{bob_str}", "{colon_knot}", "{slash_knot}", "{unknown_str}")
 , ("{sue_str}", NULL, NULL, NULL)
-, ("{yao_str}", NULL, '{colon_bridge}', '{huh_str}')
-, ("{zia_str}", "{colon_bridge}", "{colon_bridge}", "{huh_str}")
+, ("{yao_str}", NULL, '{colon_knot}', '{huh_str}')
+, ("{zia_str}", "{colon_knot}", "{colon_knot}", "{huh_str}")
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
@@ -360,10 +360,10 @@ VALUES
         rows = cursor.fetchall()
         print(f"{rows=}")
         assert rows == [
-            (bob_str, colon_bridge, slash_bridge, unknown_str),
-            (sue_str, default_bridge, default_bridge, default_unknown),
-            (yao_str, default_bridge, colon_bridge, huh_str),
-            (zia_str, colon_bridge, colon_bridge, huh_str),
+            (bob_str, colon_knot, slash_knot, unknown_str),
+            (sue_str, default_knot, default_knot, default_unknown),
+            (yao_str, default_knot, colon_knot, huh_str),
+            (zia_str, colon_knot, colon_knot, huh_str),
         ]
 
 
@@ -376,7 +376,7 @@ def test_create_update_pidgin_sound_agg_inconsist_sqlstr_PopulatesTable_Scenario
     yao_inx = "Yaoito"
     bob_inx = "Bobito"
     rdx = ":"
-    other_bridge = "/"
+    other_knot = "/"
     ukx = "Unknown"
     event1 = 1
     event2 = 2
@@ -386,23 +386,23 @@ def test_create_update_pidgin_sound_agg_inconsist_sqlstr_PopulatesTable_Scenario
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        cursor.execute(CREATE_PIDWAYY_SOUND_AGG_SQLSTR)
-        pidwayy_dimen = pidgin_way_str()
-        pidgin_way_s_agg_tablename = create_prime_tablename(pidwayy_dimen, "s", "agg")
-        insert_into_clause = f"""INSERT INTO {pidgin_way_s_agg_tablename} (
+        cursor.execute(CREATE_PIDROPE_SOUND_AGG_SQLSTR)
+        pidrope_dimen = pidgin_rope_str()
+        pidgin_rope_s_agg_tablename = create_prime_tablename(pidrope_dimen, "s", "agg")
+        insert_into_clause = f"""INSERT INTO {pidgin_rope_s_agg_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {otx_way_str()}
-, {inx_way_str()}
-, {otx_bridge_str()}
-, {inx_bridge_str()}
+, {otx_rope_str()}
+, {inx_rope_str()}
+, {otx_knot_str()}
+, {inx_knot_str()}
 , {unknown_str_str()}
 )"""
         values_clause = f"""
 VALUES
   ({event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
 , ({event1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
-, ({event1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_bridge}', NULL)
+, ({event1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_knot}', NULL)
 , ({event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
 , ({event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
 , ({event7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
@@ -414,8 +414,8 @@ VALUES
         pidgin_core_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_into_clause = f"""INSERT INTO {pidgin_core_s_vld_tablename} (
   {face_name_str()}
-, {otx_bridge_str()}
-, {inx_bridge_str()}
+, {otx_knot_str()}
+, {inx_knot_str()}
 , {unknown_str_str()}
 )"""
         values_clause = f"""
@@ -424,17 +424,17 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidgin_way_s_agg_tablename} WHERE error_message IS NOT NULL;"
+        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidgin_rope_s_agg_tablename} WHERE error_message IS NOT NULL;"
         assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
-        sqlstr = create_update_pidgin_sound_agg_inconsist_sqlstr(pidwayy_dimen)
+        sqlstr = create_update_pidgin_sound_agg_inconsist_sqlstr(pidrope_dimen)
         print(f"{sqlstr=}")
         cursor.execute(sqlstr)
 
         # THEN
         assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 5
-        select_core_raw_sqlstr = f"SELECT * FROM {pidgin_way_s_agg_tablename}"
+        select_core_raw_sqlstr = f"SELECT * FROM {pidgin_rope_s_agg_tablename}"
         cursor.execute(select_core_raw_sqlstr)
         rows = cursor.fetchall()
         print(rows)
@@ -456,7 +456,7 @@ def test_update_pidgin_sound_agg_inconsist_errors_PopulatesTable_Scenario1():
     yao_inx = "Yaoito"
     bob_inx = "Bobito"
     rdx = ":"
-    other_bridge = "/"
+    other_knot = "/"
     ukx = "Unknown"
     event1 = 1
     event2 = 2
@@ -467,22 +467,22 @@ def test_update_pidgin_sound_agg_inconsist_errors_PopulatesTable_Scenario1():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        pidwayy_dimen = pidgin_way_str()
-        pidgin_way_s_agg_tablename = create_prime_tablename(pidwayy_dimen, "s", "agg")
-        insert_into_clause = f"""INSERT INTO {pidgin_way_s_agg_tablename} (
+        pidrope_dimen = pidgin_rope_str()
+        pidgin_rope_s_agg_tablename = create_prime_tablename(pidrope_dimen, "s", "agg")
+        insert_into_clause = f"""INSERT INTO {pidgin_rope_s_agg_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {otx_way_str()}
-, {inx_way_str()}
-, {otx_bridge_str()}
-, {inx_bridge_str()}
+, {otx_rope_str()}
+, {inx_rope_str()}
+, {otx_knot_str()}
+, {inx_knot_str()}
 , {unknown_str_str()}
 )"""
         values_clause = f"""
 VALUES
   ({event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
 , ({event1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
-, ({event1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_bridge}', NULL)
+, ({event1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_knot}', NULL)
 , ({event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
 , ({event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
 , ({event7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}')
@@ -492,8 +492,8 @@ VALUES
         pidgin_core_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_into_clause = f"""INSERT INTO {pidgin_core_s_vld_tablename} (
   {face_name_str()}
-, {otx_bridge_str()}
-, {inx_bridge_str()}
+, {otx_knot_str()}
+, {inx_knot_str()}
 , {unknown_str_str()}
 )"""
         values_clause = f"""
@@ -502,7 +502,7 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidgin_way_s_agg_tablename} WHERE error_message IS NOT NULL;"
+        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidgin_rope_s_agg_tablename} WHERE error_message IS NOT NULL;"
         assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
@@ -510,7 +510,7 @@ VALUES
 
         # THEN
         assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 5
-        select_core_raw_sqlstr = f"SELECT * FROM {pidgin_way_s_agg_tablename}"
+        select_core_raw_sqlstr = f"SELECT * FROM {pidgin_rope_s_agg_tablename}"
         cursor.execute(select_core_raw_sqlstr)
         rows = cursor.fetchall()
         print(rows)
@@ -524,7 +524,7 @@ VALUES
         ]
 
 
-def test_create_update_pidlabe_sound_agg_bridge_error_sqlstr_PopulatesTable_Scenario0():
+def test_create_update_pidlabe_sound_agg_knot_error_sqlstr_PopulatesTable_Scenario0():
     # ESTABLISH
     bob_str = "Bob"
     yao_str = "Yao"
@@ -541,7 +541,7 @@ def test_create_update_pidlabe_sound_agg_bridge_error_sqlstr_PopulatesTable_Scen
     event5 = 5
     event7 = 7
     event9 = 9
-    error_message = "Bridge cannot exist in LabelTerm"
+    error_message = "Knot cannot exist in LabelTerm"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -568,8 +568,8 @@ VALUES
         pidgin_core_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_sqlstr = f"""INSERT INTO {pidgin_core_s_vld_tablename} (
   {face_name_str()}
-, {otx_bridge_str()}
-, {inx_bridge_str()}
+, {otx_knot_str()}
+, {inx_knot_str()}
 , {unknown_str_str()}
 )
 VALUES
@@ -584,15 +584,15 @@ VALUES
   SELECT label_agg.rowid, label_agg.otx_label, label_agg.inx_label, *
   FROM pidgin_label_s_agg label_agg
   JOIN pidgin_core_s_vld core_vld ON core_vld.face_name = label_agg.face_name
-  WHERE label_agg.otx_label LIKE '%' || core_vld.otx_bridge || '%'
-      OR label_agg.inx_label LIKE '%' || core_vld.inx_bridge || '%'
+  WHERE label_agg.otx_label LIKE '%' || core_vld.otx_knot || '%'
+      OR label_agg.inx_label LIKE '%' || core_vld.inx_knot || '%'
 """
         print(cursor.execute(testing_select_sqlstr).fetchall())
 
         assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
-        sqlstr = create_update_pidlabe_sound_agg_bridge_error_sqlstr()
+        sqlstr = create_update_pidlabe_sound_agg_knot_error_sqlstr()
         print(sqlstr)
         cursor.execute(sqlstr)
 
@@ -616,7 +616,7 @@ VALUES
         assert rows == [exp_row0, exp_row1, exp_row2, exp_row3, exp_row4]
 
 
-def test_create_update_pidwayy_sound_agg_bridge_error_sqlstr_PopulatesTable_Scenario0():
+def test_create_update_pidrope_sound_agg_knot_error_sqlstr_PopulatesTable_Scenario0():
     # ESTABLISH
     bob_str = "Bob"
     yao_str = "Yao"
@@ -633,18 +633,18 @@ def test_create_update_pidwayy_sound_agg_bridge_error_sqlstr_PopulatesTable_Scen
     event5 = 5
     event7 = 7
     event9 = 9
-    error_message = "Bridge must exist in WayTerm"
+    error_message = "Knot must exist in RopeTerm"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        cursor.execute(CREATE_PIDWAYY_SOUND_AGG_SQLSTR)
-        pidwayy_dimen = pidgin_way_str()
-        pidwayy_s_agg_tablename = create_prime_tablename(pidwayy_dimen, "s", "agg")
-        insert_into_clause = f"""INSERT INTO {pidwayy_s_agg_tablename} (
+        cursor.execute(CREATE_PIDROPE_SOUND_AGG_SQLSTR)
+        pidrope_dimen = pidgin_rope_str()
+        pidrope_s_agg_tablename = create_prime_tablename(pidrope_dimen, "s", "agg")
+        insert_into_clause = f"""INSERT INTO {pidrope_s_agg_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {otx_way_str()}
-, {inx_way_str()}
+, {otx_rope_str()}
+, {inx_rope_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -660,8 +660,8 @@ VALUES
         pidgin_core_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_sqlstr = f"""INSERT INTO {pidgin_core_s_vld_tablename} (
   {face_name_str()}
-, {otx_bridge_str()}
-, {inx_bridge_str()}
+, {otx_knot_str()}
+, {inx_knot_str()}
 , {unknown_str_str()}
 )
 VALUES
@@ -670,14 +670,14 @@ VALUES
 ;
 """
         cursor.execute(insert_sqlstr)
-        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidwayy_s_agg_tablename} WHERE error_message IS NOT NULL;"
+        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidrope_s_agg_tablename} WHERE error_message IS NOT NULL;"
 
         testing_select_sqlstr = """
-  SELECT way_agg.rowid, way_agg.otx_way, way_agg.inx_way
-  FROM pidgin_way_s_agg way_agg
-  JOIN pidgin_core_s_vld core_vld ON core_vld.face_name = way_agg.face_name
-  WHERE NOT way_agg.otx_way LIKE core_vld.otx_bridge || '%'
-     OR NOT way_agg.inx_way LIKE core_vld.inx_bridge || '%'
+  SELECT rope_agg.rowid, rope_agg.otx_rope, rope_agg.inx_rope
+  FROM pidgin_rope_s_agg rope_agg
+  JOIN pidgin_core_s_vld core_vld ON core_vld.face_name = rope_agg.face_name
+  WHERE NOT rope_agg.otx_rope LIKE core_vld.otx_knot || '%'
+     OR NOT rope_agg.inx_rope LIKE core_vld.inx_knot || '%'
   """
 
         print(cursor.execute(testing_select_sqlstr).fetchall())
@@ -685,13 +685,13 @@ VALUES
         assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
-        sqlstr = create_update_pidwayy_sound_agg_bridge_error_sqlstr()
+        sqlstr = create_update_pidrope_sound_agg_knot_error_sqlstr()
         print(sqlstr)
         cursor.execute(sqlstr)
 
         # THEN
         assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 4
-        select_core_raw_sqlstr = f"SELECT * FROM {pidwayy_s_agg_tablename}"
+        select_core_raw_sqlstr = f"SELECT * FROM {pidrope_s_agg_tablename}"
         cursor.execute(select_core_raw_sqlstr)
         rows = cursor.fetchall()
         print(rows)
@@ -709,7 +709,7 @@ VALUES
         assert rows == [exp_row0, exp_row1, exp_row2, exp_row3, exp_row4]
 
 
-def test_create_update_pidname_sound_agg_bridge_error_sqlstr_PopulatesTable_Scenario0():
+def test_create_update_pidname_sound_agg_knot_error_sqlstr_PopulatesTable_Scenario0():
     # ESTABLISH
     rdx = ":"
     bob_str = "Bob"
@@ -727,7 +727,7 @@ def test_create_update_pidname_sound_agg_bridge_error_sqlstr_PopulatesTable_Scen
     event5 = 5
     event7 = 7
     event9 = 9
-    error_message = "Bridge cannot exist in NameTerm"
+    error_message = "Knot cannot exist in NameTerm"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -754,8 +754,8 @@ VALUES
         pidgin_core_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_sqlstr = f"""INSERT INTO {pidgin_core_s_vld_tablename} (
   {face_name_str()}
-, {otx_bridge_str()}
-, {inx_bridge_str()}
+, {otx_knot_str()}
+, {inx_knot_str()}
 , {unknown_str_str()}
 )
 VALUES
@@ -770,8 +770,8 @@ VALUES
   SELECT name_agg.rowid, name_agg.otx_name, name_agg.inx_name
   FROM pidgin_name_s_agg name_agg
   JOIN pidgin_core_s_vld core_vld ON core_vld.face_name = name_agg.face_name
-  WHERE NOT name_agg.otx_name LIKE core_vld.otx_bridge || '%'
-     OR NOT name_agg.inx_name LIKE core_vld.inx_bridge || '%'
+  WHERE NOT name_agg.otx_name LIKE core_vld.otx_knot || '%'
+     OR NOT name_agg.inx_name LIKE core_vld.inx_knot || '%'
   """
 
         print(cursor.execute(testing_select_sqlstr).fetchall())
@@ -779,7 +779,7 @@ VALUES
         assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
-        sqlstr = create_update_pidname_sound_agg_bridge_error_sqlstr()
+        sqlstr = create_update_pidname_sound_agg_knot_error_sqlstr()
         print(sqlstr)
         cursor.execute(sqlstr)
 
@@ -803,7 +803,7 @@ VALUES
         assert rows == [exp_row0, exp_row1, exp_row2, exp_row3, exp_row4]
 
 
-def test_create_update_pidtitl_sound_agg_bridge_error_sqlstr_PopulatesTable_Scenario0():
+def test_create_update_pidtitl_sound_agg_knot_error_sqlstr_PopulatesTable_Scenario0():
     # ESTABLISH
     bob_str = "Bob"
     yao_str = "Yao"
@@ -822,7 +822,7 @@ def test_create_update_pidtitl_sound_agg_bridge_error_sqlstr_PopulatesTable_Scen
     event5 = 5
     event7 = 7
     event9 = 9
-    error_message = "Otx and inx titles must match bridge property."
+    error_message = "Otx and inx titles must match knot."
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -850,8 +850,8 @@ VALUES
         pidgin_core_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_sqlstr = f"""INSERT INTO {pidgin_core_s_vld_tablename} (
   {face_name_str()}
-, {otx_bridge_str()}
-, {inx_bridge_str()}
+, {otx_knot_str()}
+, {inx_knot_str()}
 , {unknown_str_str()}
 )
 VALUES
@@ -867,11 +867,11 @@ VALUES
   FROM pidgin_title_s_agg title_agg
   JOIN pidgin_core_s_vld core_vld ON core_vld.face_name = title_agg.face_name
   WHERE NOT ((
-            title_agg.otx_title LIKE core_vld.otx_bridge || '%' 
-        AND title_agg.inx_title LIKE core_vld.inx_bridge || '%') 
+            title_agg.otx_title LIKE core_vld.otx_knot || '%' 
+        AND title_agg.inx_title LIKE core_vld.inx_knot || '%') 
       OR (
-            NOT title_agg.otx_title LIKE core_vld.otx_bridge || '%'
-        AND NOT title_agg.inx_title LIKE core_vld.inx_bridge || '%'
+            NOT title_agg.otx_title LIKE core_vld.otx_knot || '%'
+        AND NOT title_agg.inx_title LIKE core_vld.inx_knot || '%'
         ))
         """
 
@@ -880,7 +880,7 @@ VALUES
         assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
-        sqlstr = create_update_pidtitl_sound_agg_bridge_error_sqlstr()
+        sqlstr = create_update_pidtitl_sound_agg_knot_error_sqlstr()
         print(sqlstr)
         cursor.execute(sqlstr)
 
@@ -906,7 +906,7 @@ VALUES
         assert rows == [exp_row0, exp_row1, exp_row2, exp_row3, exp_row4]
 
 
-def test_update_pidgin_sound_agg_bridge_errors_UpdatesTables_Scenario0():
+def test_update_pidgin_sound_agg_knot_errors_UpdatesTables_Scenario0():
     # ESTABLISH
     bob_str = "bob"
     casa_str = "Casa"
@@ -919,18 +919,18 @@ def test_update_pidgin_sound_agg_bridge_errors_UpdatesTables_Scenario0():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         cursor.execute(CREATE_PIDLABE_SOUND_AGG_SQLSTR)
-        cursor.execute(CREATE_PIDWAYY_SOUND_AGG_SQLSTR)
+        cursor.execute(CREATE_PIDROPE_SOUND_AGG_SQLSTR)
         cursor.execute(CREATE_PIDNAME_SOUND_AGG_SQLSTR)
         cursor.execute(CREATE_PIDTITL_SOUND_AGG_SQLSTR)
         pidlabe_s_agg_tablename = create_prime_tablename(pidgin_label_str(), "s", "agg")
-        pidwayy_s_agg_tablename = create_prime_tablename(pidgin_way_str(), "s", "agg")
+        pidrope_s_agg_tablename = create_prime_tablename(pidgin_rope_str(), "s", "agg")
         pidname_s_agg_tablename = create_prime_tablename(pidgin_name_str(), "s", "agg")
         pidtitl_s_agg_tablename = create_prime_tablename(pidgin_title_str(), "s", "agg")
         insert_pidlabe_sqlstr = f"""
 INSERT INTO {pidlabe_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {otx_label_str()}, {inx_label_str()})
 VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
-        insert_pidwayy_sqlstr = f"""
-INSERT INTO {pidwayy_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {otx_way_str()}, {inx_way_str()})
+        insert_pidrope_sqlstr = f"""
+INSERT INTO {pidrope_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {otx_rope_str()}, {inx_rope_str()})
 VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
         insert_pidname_sqlstr = f"""
 INSERT INTO {pidname_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {otx_name_str()}, {inx_name_str()})
@@ -939,31 +939,31 @@ VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
 INSERT INTO {pidtitl_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {otx_title_str()}, {inx_title_str()})
 VALUES ({event1}, '{bob_str}', '{bad_sue_otx}', '{sue_inx}');"""
         cursor.execute(insert_pidlabe_sqlstr)
-        cursor.execute(insert_pidwayy_sqlstr)
+        cursor.execute(insert_pidrope_sqlstr)
         cursor.execute(insert_pidname_sqlstr)
         cursor.execute(insert_pidtitl_sqlstr)
 
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         cursor.execute(CREATE_PIDCORE_SOUND_VLD_SQLSTR)
         insert_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename} (
-{face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_str_str()})
+{face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()})
 VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
         cursor.execute(insert_sqlstr)
         pidlabe_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidlabe_s_agg_tablename} WHERE error_message IS NOT NULL;"
-        pidwayy_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidwayy_s_agg_tablename} WHERE error_message IS NOT NULL;"
+        pidrope_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidrope_s_agg_tablename} WHERE error_message IS NOT NULL;"
         pidname_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidname_s_agg_tablename} WHERE error_message IS NOT NULL;"
         pidtitl_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidtitl_s_agg_tablename} WHERE error_message IS NOT NULL;"
         assert cursor.execute(pidlabe_error_count_sqlstr).fetchone()[0] == 0
-        assert cursor.execute(pidwayy_error_count_sqlstr).fetchone()[0] == 0
+        assert cursor.execute(pidrope_error_count_sqlstr).fetchone()[0] == 0
         assert cursor.execute(pidname_error_count_sqlstr).fetchone()[0] == 0
         assert cursor.execute(pidtitl_error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
-        update_pidgin_sound_agg_bridge_errors(cursor)
+        update_pidgin_sound_agg_knot_errors(cursor)
 
         # THEN
         assert cursor.execute(pidlabe_error_count_sqlstr).fetchone()[0] == 1
-        assert cursor.execute(pidwayy_error_count_sqlstr).fetchone()[0] == 1
+        assert cursor.execute(pidrope_error_count_sqlstr).fetchone()[0] == 1
         assert cursor.execute(pidname_error_count_sqlstr).fetchone()[0] == 1
         assert cursor.execute(pidtitl_error_count_sqlstr).fetchone()[0] == 1
         assert get_row_count(cursor, pidtitl_s_agg_tablename) == 1
@@ -983,7 +983,7 @@ def test_create_insert_pidgin_sound_vld_table_sqlstr_ReturnsObj_PopulatesTable_S
     yao_inx = "Yaoito"
     bob_inx = "Bobito"
     rdx = ":"
-    other_bridge = "/"
+    other_knot = "/"
     ukx = "Unknown"
     event1 = 1
     event2 = 2
@@ -994,15 +994,15 @@ def test_create_insert_pidgin_sound_vld_table_sqlstr_ReturnsObj_PopulatesTable_S
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        pidwayy_dimen = pidgin_way_str()
-        pidgin_way_s_agg_tablename = create_prime_tablename(pidwayy_dimen, "s", "agg")
-        insert_into_clause = f"""INSERT INTO {pidgin_way_s_agg_tablename} (
+        pidrope_dimen = pidgin_rope_str()
+        pidgin_rope_s_agg_tablename = create_prime_tablename(pidrope_dimen, "s", "agg")
+        insert_into_clause = f"""INSERT INTO {pidgin_rope_s_agg_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {otx_way_str()}
-, {inx_way_str()}
-, {otx_bridge_str()}
-, {inx_bridge_str()}
+, {otx_rope_str()}
+, {inx_rope_str()}
+, {otx_knot_str()}
+, {inx_knot_str()}
 , {unknown_str_str()}
 , error_message
 )"""
@@ -1010,7 +1010,7 @@ def test_create_insert_pidgin_sound_vld_table_sqlstr_ReturnsObj_PopulatesTable_S
 VALUES
   ({event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL, '{error_message}')
 , ({event1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL, '{error_message}')
-, ({event1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_bridge}', NULL, '{error_message}')
+, ({event1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_knot}', NULL, '{error_message}')
 , ({event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', '{error_message}')
 , ({event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}', '{error_message}')
 , ({event1}, '{yao_str}', '{yao_str}', '{yao_str}', '{rdx}', '{rdx}', '{ukx}', NULL)
@@ -1019,19 +1019,19 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        pidgin_way_s_vld_tablename = create_prime_tablename("pidwayy", "s", "vld")
-        assert get_row_count(cursor, pidgin_way_s_agg_tablename) == 8
-        assert get_row_count(cursor, pidgin_way_s_vld_tablename) == 0
+        pidgin_rope_s_vld_tablename = create_prime_tablename("pidrope", "s", "vld")
+        assert get_row_count(cursor, pidgin_rope_s_agg_tablename) == 8
+        assert get_row_count(cursor, pidgin_rope_s_vld_tablename) == 0
 
         # WHEN
-        sqlstr = create_insert_pidgin_sound_vld_table_sqlstr(pidwayy_dimen)
+        sqlstr = create_insert_pidgin_sound_vld_table_sqlstr(pidrope_dimen)
         print(sqlstr)
         cursor.execute(sqlstr)
 
         # THEN
-        assert get_row_count(cursor, pidgin_way_s_vld_tablename) == 3
-        select_pidgin_way_s_vld_sqlstr = f"SELECT * FROM {pidgin_way_s_vld_tablename}"
-        cursor.execute(select_pidgin_way_s_vld_sqlstr)
+        assert get_row_count(cursor, pidgin_rope_s_vld_tablename) == 3
+        select_pidgin_rope_s_vld_sqlstr = f"SELECT * FROM {pidgin_rope_s_vld_tablename}"
+        cursor.execute(select_pidgin_rope_s_vld_sqlstr)
         rows = cursor.fetchall()
         print(rows)
         assert rows == [
@@ -1049,7 +1049,7 @@ def test_insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table_PopulatesTable
     yao_inx = "Yaoito"
     bob_inx = "Bobito"
     rdx = ":"
-    other_bridge = "/"
+    other_knot = "/"
     ukx = "Unknown"
     event1 = 1
     event2 = 2
@@ -1060,15 +1060,15 @@ def test_insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table_PopulatesTable
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        pidwayy_dimen = pidgin_way_str()
-        pidgin_way_s_agg_tablename = create_prime_tablename(pidwayy_dimen, "s", "agg")
-        insert_into_clause = f"""INSERT INTO {pidgin_way_s_agg_tablename} (
+        pidrope_dimen = pidgin_rope_str()
+        pidgin_rope_s_agg_tablename = create_prime_tablename(pidrope_dimen, "s", "agg")
+        insert_into_clause = f"""INSERT INTO {pidgin_rope_s_agg_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {otx_way_str()}
-, {inx_way_str()}
-, {otx_bridge_str()}
-, {inx_bridge_str()}
+, {otx_rope_str()}
+, {inx_rope_str()}
+, {otx_knot_str()}
+, {inx_knot_str()}
 , {unknown_str_str()}
 , error_message
 )"""
@@ -1076,7 +1076,7 @@ def test_insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table_PopulatesTable
 VALUES
   ({event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL, '{error_message}')
 , ({event1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL, '{error_message}')
-, ({event1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_bridge}', NULL, '{error_message}')
+, ({event1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_knot}', NULL, '{error_message}')
 , ({event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', '{error_message}')
 , ({event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}', '{error_message}')
 , ({event1}, '{yao_str}', '{yao_str}', '{yao_str}', '{rdx}', '{rdx}', '{ukx}', NULL)
@@ -1085,17 +1085,17 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        pidgin_way_s_vld_tablename = create_prime_tablename("pidwayy", "s", "vld")
-        assert get_row_count(cursor, pidgin_way_s_agg_tablename) == 8
-        assert get_row_count(cursor, pidgin_way_s_vld_tablename) == 0
+        pidgin_rope_s_vld_tablename = create_prime_tablename("pidrope", "s", "vld")
+        assert get_row_count(cursor, pidgin_rope_s_agg_tablename) == 8
+        assert get_row_count(cursor, pidgin_rope_s_vld_tablename) == 0
 
         # WHEN
         insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor)
 
         # THEN
-        assert get_row_count(cursor, pidgin_way_s_vld_tablename) == 3
-        select_pidgin_way_s_vld_sqlstr = f"SELECT * FROM {pidgin_way_s_vld_tablename}"
-        cursor.execute(select_pidgin_way_s_vld_sqlstr)
+        assert get_row_count(cursor, pidgin_rope_s_vld_tablename) == 3
+        select_pidgin_rope_s_vld_sqlstr = f"SELECT * FROM {pidgin_rope_s_vld_tablename}"
+        cursor.execute(select_pidgin_rope_s_vld_sqlstr)
         rows = cursor.fetchall()
         print(rows)
         assert rows == [
@@ -1113,7 +1113,7 @@ def test_etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables_Scenario0_Popula
     yao_inx = "Yaoito"
     bob_inx = "Bobito"
     rdx = ":"
-    other_bridge = "/"
+    other_knot = "/"
     ukx = "Unknown"
     event1 = 1
     event2 = 2
@@ -1130,15 +1130,15 @@ def test_etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables_Scenario0_Popula
 , {face_name_str()}
 , {otx_name_str()}
 , {inx_name_str()}
-, {otx_bridge_str()}
-, {inx_bridge_str()}
+, {otx_knot_str()}
+, {inx_knot_str()}
 , {unknown_str_str()}
 )"""
         values_clause = f"""
 VALUES
   ({event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL)
 , ({event1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL)
-, ({event1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_bridge}', NULL)
+, ({event1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_knot}', NULL)
 , ({event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}')
 , ({event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}')
 , ({event1}, '{yao_str}', '{yao_str}', '{yao_str}', '{rdx}', '{rdx}', '{ukx}')
@@ -1196,31 +1196,31 @@ def test_etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables_Scenario1_Update
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
         pidlabe_s_agg_tablename = create_prime_tablename(pidgin_label_str(), "s", "agg")
-        pidwayy_s_agg_tablename = create_prime_tablename(pidgin_way_str(), "s", "agg")
+        pidrope_s_agg_tablename = create_prime_tablename(pidgin_rope_str(), "s", "agg")
         pidname_s_agg_tablename = create_prime_tablename(pidgin_name_str(), "s", "agg")
         insert_pidlabe_sqlstr = f"""
 INSERT INTO {pidlabe_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {otx_label_str()}, {inx_label_str()})
 VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
-        insert_pidwayy_sqlstr = f"""
-INSERT INTO {pidwayy_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {otx_way_str()}, {inx_way_str()})
+        insert_pidrope_sqlstr = f"""
+INSERT INTO {pidrope_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {otx_rope_str()}, {inx_rope_str()})
 VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
         insert_pidname_sqlstr = f"""
 INSERT INTO {pidname_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {otx_name_str()}, {inx_name_str()})
 VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
         cursor.execute(insert_pidlabe_sqlstr)
-        cursor.execute(insert_pidwayy_sqlstr)
+        cursor.execute(insert_pidrope_sqlstr)
         cursor.execute(insert_pidname_sqlstr)
 
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename} (
-{face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_str_str()})
+{face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()})
 VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
         cursor.execute(insert_sqlstr)
         pidlabe_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidlabe_s_agg_tablename} WHERE error_message IS NOT NULL;"
-        pidwayy_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidwayy_s_agg_tablename} WHERE error_message IS NOT NULL;"
+        pidrope_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidrope_s_agg_tablename} WHERE error_message IS NOT NULL;"
         pidname_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidname_s_agg_tablename} WHERE error_message IS NOT NULL;"
         assert cursor.execute(pidlabe_error_count_sqlstr).fetchone()[0] == 0
-        assert cursor.execute(pidwayy_error_count_sqlstr).fetchone()[0] == 0
+        assert cursor.execute(pidrope_error_count_sqlstr).fetchone()[0] == 0
         assert cursor.execute(pidname_error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
@@ -1228,7 +1228,7 @@ VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
 
         # THEN
         assert cursor.execute(pidlabe_error_count_sqlstr).fetchone()[0] == 1
-        assert cursor.execute(pidwayy_error_count_sqlstr).fetchone()[0] == 1
+        assert cursor.execute(pidrope_error_count_sqlstr).fetchone()[0] == 1
         assert cursor.execute(pidname_error_count_sqlstr).fetchone()[0] == 1
         select_core_raw_sqlstr = f"SELECT {event_int_str()}, {face_name_str()}, {otx_label_str()}, {inx_label_str()} FROM {pidlabe_s_agg_tablename}"
         cursor.execute(select_core_raw_sqlstr)
@@ -1265,11 +1265,11 @@ VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}');"""
 
         # THEN
         assert get_row_count(cursor, pidcore_s_vld_tablename) == 1
-        select_core_vld_sqlstr = f"SELECT {face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_str_str()} FROM {pidcore_s_vld_tablename}"
+        select_core_vld_sqlstr = f"SELECT {face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()} FROM {pidcore_s_vld_tablename}"
         cursor.execute(select_core_vld_sqlstr)
         rows = cursor.fetchall()
-        x_bridge = default_bridge_if_None()
-        exp_row0 = (bob_str, x_bridge, x_bridge, default_unknown_str_if_None())
+        x_knot = default_knot_if_None()
+        exp_row0 = (bob_str, x_knot, x_knot, default_unknown_str_if_None())
         assert rows[0] == exp_row0
         assert rows == [exp_row0]
 
@@ -1294,7 +1294,7 @@ VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}'), ({event1}, '{yao_str}'
 
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename} (
-{face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_str_str()})
+{face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()})
 VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
         cursor.execute(insert_sqlstr)
         assert get_row_count(cursor, pidcore_s_vld_tablename) == 1
@@ -1304,13 +1304,13 @@ VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
 
         # THEN
         assert get_row_count(cursor, pidcore_s_vld_tablename) == 2
-        select_core_vld_sqlstr = f"SELECT {face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_str_str()} FROM {pidcore_s_vld_tablename} ORDER BY {face_name_str()}"
+        select_core_vld_sqlstr = f"SELECT {face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()} FROM {pidcore_s_vld_tablename} ORDER BY {face_name_str()}"
         cursor.execute(select_core_vld_sqlstr)
         rows = cursor.fetchall()
-        default_bridge = default_bridge_if_None()
+        default_knot = default_knot_if_None()
         default_unknown = default_unknown_str_if_None()
         exp_row0 = (bob_str, rdx, rdx, ukx)
-        exp_row1 = (yao_str, default_bridge, default_bridge, default_unknown)
+        exp_row1 = (yao_str, default_knot, default_knot, default_unknown)
         assert rows[0] == exp_row0
         assert rows[1] == exp_row1
         assert rows == [exp_row0, exp_row1]
@@ -1346,8 +1346,8 @@ VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}');"""
         select_core_vld_sqlstr = f"SELECT * FROM {pidcore_s_vld_tablename}"
         cursor.execute(select_core_vld_sqlstr)
         rows = cursor.fetchall()
-        x_bridge = default_bridge_if_None()
-        exp_row0 = (bob_str, x_bridge, x_bridge, default_unknown_str_if_None())
+        x_knot = default_knot_if_None()
+        exp_row0 = (bob_str, x_knot, x_knot, default_unknown_str_if_None())
         assert rows[0] == exp_row0
         assert rows == [exp_row0]
 
@@ -1372,7 +1372,7 @@ VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}'), ({event1}, '{yao_str}'
 
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename} (
-{face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_str_str()})
+{face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()})
 VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
         cursor.execute(insert_sqlstr)
         assert get_row_count(cursor, pidcore_s_vld_tablename) == 1
@@ -1385,10 +1385,10 @@ VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
         select_core_vld_sqlstr = f"SELECT * FROM {pidcore_s_vld_tablename}"
         cursor.execute(select_core_vld_sqlstr)
         rows = cursor.fetchall()
-        default_bridge = default_bridge_if_None()
+        default_knot = default_knot_if_None()
         default_unknown = default_unknown_str_if_None()
         exp_row0 = (bob_str, rdx, rdx, ukx)
-        exp_row1 = (yao_str, default_bridge, default_bridge, default_unknown)
+        exp_row1 = (yao_str, default_knot, default_knot, default_unknown)
         assert rows[0] == exp_row0
         assert rows[1] == exp_row1
         assert rows == [exp_row0, exp_row1]

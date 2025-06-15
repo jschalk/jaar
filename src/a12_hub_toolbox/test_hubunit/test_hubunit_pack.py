@@ -492,17 +492,17 @@ def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_1atom(
     print(f"{gut_plan.vow_label=}")
     print(f"{sue_hubunit.vow_label=}")
     sports_str = "sports"
-    sports_way = gut_plan.make_l1_way(sports_str)
+    sports_rope = gut_plan.make_l1_rope(sports_str)
     knee_str = "knee"
-    knee_way = gut_plan.make_way(sports_way, knee_str)
-    assert gut_plan.concept_exists(sports_way) is False
+    knee_rope = gut_plan.make_rope(sports_rope, knee_str)
+    assert gut_plan.concept_exists(sports_rope) is False
 
     # WHEN
     new_plan = sue_hubunit._merge_any_packs(gut_plan)
 
     # THEN
     assert new_plan != gut_plan
-    assert new_plan.concept_exists(sports_way)
+    assert new_plan.concept_exists(sports_rope)
 
 
 def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_2atoms(
@@ -516,16 +516,16 @@ def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_2atoms(
     gut_plan = open_gut_file(env_dir(), "accord23", sue_str)
     print(f"{gut_plan.vow_label=}")
     sports_str = "sports"
-    sports_way = gut_plan.make_l1_way(sports_str)
+    sports_rope = gut_plan.make_l1_rope(sports_str)
     knee_str = "knee"
-    knee_way = gut_plan.make_way(sports_way, knee_str)
-    assert gut_plan.concept_exists(sports_way) is False
-    assert gut_plan.concept_exists(knee_way) is False
+    knee_rope = gut_plan.make_rope(sports_rope, knee_str)
+    assert gut_plan.concept_exists(sports_rope) is False
+    assert gut_plan.concept_exists(knee_rope) is False
 
     # WHEN
     new_plan = sue_hubunit._merge_any_packs(gut_plan)
 
     # THEN
     assert new_plan != gut_plan
-    assert new_plan.concept_exists(sports_way)
-    assert new_plan.concept_exists(knee_way)
+    assert new_plan.concept_exists(sports_rope)
+    assert new_plan.concept_exists(knee_rope)

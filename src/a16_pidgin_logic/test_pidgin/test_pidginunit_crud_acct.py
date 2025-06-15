@@ -24,7 +24,7 @@ def test_PidginUnit_set_namemap_SetsAttrWhenAttrIs_float_nan():
     sue_pidginunit = pidginunit_shop(sue_str)
     x_nan = float("nan")
     x_namemap = namemap_shop(
-        face_name=sue_str, otx_bridge=x_nan, inx_bridge=x_nan, unknown_str=x_nan
+        face_name=sue_str, otx_knot=x_nan, inx_knot=x_nan, unknown_str=x_nan
     )
     x_namemap.set_otx2inx("Bob", "Bob of Portland")
     assert sue_pidginunit.namemap != x_namemap
@@ -36,35 +36,35 @@ def test_PidginUnit_set_namemap_SetsAttrWhenAttrIs_float_nan():
     assert sue_pidginunit.namemap == x_namemap
 
 
-def test_PidginUnit_set_namemap_RaisesErrorIf_namemap_otx_bridge_IsNotSame():
+def test_PidginUnit_set_namemap_RaisesErrorIf_namemap_otx_knot_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    slash_otx_bridge = "/"
-    x_namemap = namemap_shop(otx_bridge=slash_otx_bridge, face_name=sue_str)
-    assert sue_pidginunit.otx_bridge != x_namemap.otx_bridge
+    slash_otx_knot = "/"
+    x_namemap = namemap_shop(otx_knot=slash_otx_knot, face_name=sue_str)
+    assert sue_pidginunit.otx_knot != x_namemap.otx_knot
     assert sue_pidginunit.namemap != x_namemap
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_pidginunit.set_namemap(x_namemap)
-    exception_str = f"set_mapcore Error: PidginUnit otx_bridge is '{sue_pidginunit.otx_bridge}', MapCore is '{slash_otx_bridge}'."
+    exception_str = f"set_mapcore Error: PidginUnit otx_knot is '{sue_pidginunit.otx_knot}', MapCore is '{slash_otx_knot}'."
     assert str(excinfo.value) == exception_str
 
 
-def test_PidginUnit_set_namemap_RaisesErrorIf_namemap_inx_bridge_IsNotSame():
+def test_PidginUnit_set_namemap_RaisesErrorIf_namemap_inx_knot_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    slash_inx_bridge = "/"
-    x_namemap = namemap_shop(inx_bridge=slash_inx_bridge, face_name=sue_str)
-    assert sue_pidginunit.inx_bridge != x_namemap.inx_bridge
+    slash_inx_knot = "/"
+    x_namemap = namemap_shop(inx_knot=slash_inx_knot, face_name=sue_str)
+    assert sue_pidginunit.inx_knot != x_namemap.inx_knot
     assert sue_pidginunit.namemap != x_namemap
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_pidginunit.set_namemap(x_namemap)
-    exception_str = f"set_mapcore Error: PidginUnit inx_bridge is '{sue_pidginunit.inx_bridge}', MapCore is '{slash_inx_bridge}'."
+    exception_str = f"set_mapcore Error: PidginUnit inx_knot is '{sue_pidginunit.inx_knot}', MapCore is '{slash_inx_knot}'."
     assert str(excinfo.value) == exception_str
 
 

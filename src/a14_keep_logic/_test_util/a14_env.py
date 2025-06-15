@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
 from pytest import fixture as pytest_fixture
 from src.a00_data_toolbox.file_toolbox import copy_dir, create_path, delete_dir
-from src.a01_term_logic.way import WayTerm, create_way_from_labels
+from src.a01_term_logic.rope import RopeTerm, create_rope_from_labels
 from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 
 
@@ -29,16 +29,16 @@ def env_dir_setup_cleanup():
     delete_dir(env_dir)
 
 
-def get_texas_way() -> WayTerm:
+def get_texas_rope() -> RopeTerm:
     naton_str = "nation"
     usa_str = "usa"
     texas_str = "texas"
-    return create_way_from_labels([naton_str, usa_str, texas_str])
+    return create_rope_from_labels([naton_str, usa_str, texas_str])
 
 
 def get_texas_hubunit() -> HubUnit:
     return hubunit_shop(
-        get_module_temp_dir(), temp_vow_label(), temp_owner_name(), get_texas_way()
+        get_module_temp_dir(), temp_vow_label(), temp_owner_name(), get_texas_rope()
     )
 
 

@@ -2,7 +2,7 @@ from src.a06_plan_logic._test_util.a06_str import (
     addin_str,
     begin_str,
     close_str,
-    concept_way_str,
+    concept_rope_str,
     denom_str,
     mass_str,
     morph_str,
@@ -27,8 +27,8 @@ def test_create_legible_list_ReturnsObj_conceptunit_INSERT():
     dimen = plan_conceptunit_str()
     _problem_bool_str = "problem_bool"
     clean_label = "clean fridge"
-    casa_way = sue_plan.make_l1_way("casa")
-    clean_way = sue_plan.make_way(casa_way, clean_label)
+    casa_rope = sue_plan.make_l1_rope("casa")
+    clean_rope = sue_plan.make_rope(casa_rope, clean_label)
     addin_value = 7
     begin_value = 13
     close_value = 17
@@ -39,7 +39,7 @@ def test_create_legible_list_ReturnsObj_conceptunit_INSERT():
     mass_value = 43
     task_value = False
     clean_planatom = planatom_shop(dimen, INSERT_str())
-    clean_planatom.set_arg(concept_way_str(), clean_way)
+    clean_planatom.set_arg(concept_rope_str(), clean_rope)
     clean_planatom.set_arg(addin_str(), addin_value)
     clean_planatom.set_arg(begin_str(), begin_value)
     clean_planatom.set_arg(close_str(), close_value)
@@ -57,7 +57,7 @@ def test_create_legible_list_ReturnsObj_conceptunit_INSERT():
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"Created Concept '{clean_way}'. addin={addin_value}.begin={begin_value}.close={close_value}.denom={denom_value}.numor={numor_value}.problem_bool={problem_bool_value}.morph={morph_value}.mass={mass_value}.task={task_value}."
+    x_str = f"Created Concept '{clean_rope}'. addin={addin_value}.begin={begin_value}.close={close_value}.denom={denom_value}.numor={numor_value}.problem_bool={problem_bool_value}.morph={morph_value}.mass={mass_value}.task={task_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -68,8 +68,8 @@ def test_create_legible_list_ReturnsObj_conceptunit_UPDATE():
     dimen = plan_conceptunit_str()
     _problem_bool_str = "problem_bool"
     clean_label = "clean fridge"
-    casa_way = sue_plan.make_l1_way("casa")
-    clean_way = sue_plan.make_way(casa_way, clean_label)
+    casa_rope = sue_plan.make_l1_rope("casa")
+    clean_rope = sue_plan.make_rope(casa_rope, clean_label)
     addin_value = 7
     begin_value = 13
     close_value = 17
@@ -80,7 +80,7 @@ def test_create_legible_list_ReturnsObj_conceptunit_UPDATE():
     mass_value = 43
     task_value = False
     clean_planatom = planatom_shop(dimen, UPDATE_str())
-    clean_planatom.set_arg(concept_way_str(), clean_way)
+    clean_planatom.set_arg(concept_rope_str(), clean_rope)
     clean_planatom.set_arg(addin_str(), addin_value)
     clean_planatom.set_arg(begin_str(), begin_value)
     clean_planatom.set_arg(close_str(), close_value)
@@ -98,7 +98,7 @@ def test_create_legible_list_ReturnsObj_conceptunit_UPDATE():
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"Concept '{clean_way}' set these attributes: addin={addin_value}.begin={begin_value}.close={close_value}.denom={denom_value}.numor={numor_value}.problem_bool={problem_bool_value}.morph={morph_value}.mass={mass_value}.task={task_value}."
+    x_str = f"Concept '{clean_rope}' set these attributes: addin={addin_value}.begin={begin_value}.close={close_value}.denom={denom_value}.numor={numor_value}.problem_bool={problem_bool_value}.morph={morph_value}.mass={mass_value}.task={task_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -108,10 +108,10 @@ def test_create_legible_list_ReturnsObj_conceptunit_DELETE():
     sue_plan = planunit_shop("Sue")
     dimen = plan_conceptunit_str()
     clean_label = "clean fridge"
-    casa_way = sue_plan.make_l1_way("casa")
-    clean_way = sue_plan.make_way(casa_way, clean_label)
+    casa_rope = sue_plan.make_l1_rope("casa")
+    clean_rope = sue_plan.make_rope(casa_rope, clean_label)
     clean_planatom = planatom_shop(dimen, DELETE_str())
-    clean_planatom.set_arg(concept_way_str(), clean_way)
+    clean_planatom.set_arg(concept_rope_str(), clean_rope)
 
     x_plandelta = plandelta_shop()
     x_plandelta.set_planatom(clean_planatom)
@@ -120,6 +120,6 @@ def test_create_legible_list_ReturnsObj_conceptunit_DELETE():
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"Concept '{clean_way}' was deleted."
+    x_str = f"Concept '{clean_rope}' was deleted."
     print(f"{x_str=}")
     assert legible_list[0] == x_str

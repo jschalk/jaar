@@ -1,12 +1,12 @@
 from src.a02_finance_logic._test_util.a02_str import (
     acct_name_str,
     amount_str,
-    bridge_str,
     celldepth_str,
     deal_acct_nets_str,
     deal_time_str,
     fund_iota_str,
     fund_pool_str,
+    knot_str,
     magnitude_str,
     offi_time_str,
     owner_name_str,
@@ -18,7 +18,7 @@ from src.a02_finance_logic._test_util.a02_str import (
 
 
 def test_str_functions_ReturnsObj():
-    assert bridge_str() == "bridge"
+    assert knot_str() == "knot"
     assert celldepth_str() == "celldepth"
     assert deal_time_str() == "deal_time"
     assert vow_label_str() == "vow_label"

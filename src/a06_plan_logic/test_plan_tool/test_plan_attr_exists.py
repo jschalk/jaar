@@ -1,10 +1,10 @@
-from src.a01_term_logic.way import to_way
+from src.a01_term_logic.rope import to_rope
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import factunit_shop, reasonunit_shop
 from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
     awardee_title_str,
-    concept_way_str,
+    concept_rope_str,
     fcontext_str,
     group_title_str,
     healer_name_str,
@@ -94,15 +94,15 @@ def test_plan_conceptunit_exists_ReturnsObj():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_way = sue_plan.make_way(casa_way, clean_str)
-    sweep_way = sue_plan.make_way(clean_way, "sweep")
-    root_way = to_way(sue_plan.vow_label)
-    root_jkeys = {concept_way_str(): root_way}
-    casa_jkeys = {concept_way_str(): casa_way}
-    clean_jkeys = {concept_way_str(): clean_way}
-    sweep_jkeys = {concept_way_str(): sweep_way}
+    clean_rope = sue_plan.make_rope(casa_rope, clean_str)
+    sweep_rope = sue_plan.make_rope(clean_rope, "sweep")
+    root_rope = to_rope(sue_plan.vow_label)
+    root_jkeys = {concept_rope_str(): root_rope}
+    casa_jkeys = {concept_rope_str(): casa_rope}
+    clean_jkeys = {concept_rope_str(): clean_rope}
+    sweep_jkeys = {concept_rope_str(): sweep_rope}
 
     # WHEN / THEN
     assert not plan_conceptunit_exists(None, {})
@@ -113,7 +113,7 @@ def test_plan_conceptunit_exists_ReturnsObj():
     assert not plan_conceptunit_exists(sue_plan, sweep_jkeys)
 
     # WHEN
-    sue_plan.add_concept(casa_way)
+    sue_plan.add_concept(casa_rope)
     # THEN
     assert not plan_conceptunit_exists(sue_plan, {})
     assert plan_conceptunit_exists(sue_plan, root_jkeys)
@@ -122,7 +122,7 @@ def test_plan_conceptunit_exists_ReturnsObj():
     assert not plan_conceptunit_exists(sue_plan, sweep_jkeys)
 
     # WHEN
-    sue_plan.add_concept(clean_way)
+    sue_plan.add_concept(clean_rope)
     # THEN
     assert not plan_conceptunit_exists(sue_plan, {})
     assert plan_conceptunit_exists(sue_plan, root_jkeys)
@@ -135,15 +135,15 @@ def test_plan_concept_awardlink_exists_ReturnsObj():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_way = sue_plan.make_way(casa_way, clean_str)
-    root_way = to_way(sue_plan.vow_label)
+    clean_rope = sue_plan.make_rope(casa_rope, clean_str)
+    root_rope = to_rope(sue_plan.vow_label)
     swim_str = "Swim"
-    root_way = to_way(sue_plan.vow_label)
-    root_jkeys = {concept_way_str(): root_way, awardee_title_str(): swim_str}
-    casa_jkeys = {concept_way_str(): casa_way, awardee_title_str(): swim_str}
-    clean_jkeys = {concept_way_str(): clean_way, awardee_title_str(): swim_str}
+    root_rope = to_rope(sue_plan.vow_label)
+    root_jkeys = {concept_rope_str(): root_rope, awardee_title_str(): swim_str}
+    casa_jkeys = {concept_rope_str(): casa_rope, awardee_title_str(): swim_str}
+    clean_jkeys = {concept_rope_str(): clean_rope, awardee_title_str(): swim_str}
 
     # WHEN / THEN
     assert not plan_concept_awardlink_exists(None, {})
@@ -165,15 +165,15 @@ def test_plan_concept_awardlink_exists_ReturnsObj():
 def test_plan_concept_reasonunit_exists_ReturnsObj():
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_way = sue_plan.make_way(casa_way, clean_str)
-    root_way = to_way(sue_plan.vow_label)
+    clean_rope = sue_plan.make_rope(casa_rope, clean_str)
+    root_rope = to_rope(sue_plan.vow_label)
     wk_str = "wk"
-    wk_way = sue_plan.make_l1_way(wk_str)
-    root_jkeys = {concept_way_str(): root_way, rcontext_str(): wk_way}
-    casa_jkeys = {concept_way_str(): casa_way, rcontext_str(): wk_way}
-    clean_jkeys = {concept_way_str(): clean_way, rcontext_str(): wk_way}
+    wk_rope = sue_plan.make_l1_rope(wk_str)
+    root_jkeys = {concept_rope_str(): root_rope, rcontext_str(): wk_rope}
+    casa_jkeys = {concept_rope_str(): casa_rope, rcontext_str(): wk_rope}
+    clean_jkeys = {concept_rope_str(): clean_rope, rcontext_str(): wk_rope}
 
     # WHEN / THEN
     assert not plan_concept_reasonunit_exists(None, {})
@@ -183,8 +183,8 @@ def test_plan_concept_reasonunit_exists_ReturnsObj():
     assert not plan_concept_reasonunit_exists(sue_plan, clean_jkeys)
 
     # WHEN
-    sue_plan.add_concept(wk_way)
-    sue_plan.conceptroot.set_reasonunit(reasonunit_shop(wk_way))
+    sue_plan.add_concept(wk_rope)
+    sue_plan.conceptroot.set_reasonunit(reasonunit_shop(wk_rope))
 
     # THEN
     assert not plan_concept_reasonunit_exists(sue_plan, {})
@@ -196,27 +196,27 @@ def test_plan_concept_reasonunit_exists_ReturnsObj():
 def test_plan_concept_reason_premiseunit_exists_ReturnsObj():
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_way = sue_plan.make_way(casa_way, clean_str)
-    root_way = to_way(sue_plan.vow_label)
+    clean_rope = sue_plan.make_rope(casa_rope, clean_str)
+    root_rope = to_rope(sue_plan.vow_label)
     wk_str = "wk"
-    wk_way = sue_plan.make_l1_way(wk_str)
-    thur_way = sue_plan.make_way(wk_way, "thur")
+    wk_rope = sue_plan.make_l1_rope(wk_str)
+    thur_rope = sue_plan.make_rope(wk_rope, "thur")
     root_jkeys = {
-        concept_way_str(): root_way,
-        rcontext_str(): wk_way,
-        pstate_str(): thur_way,
+        concept_rope_str(): root_rope,
+        rcontext_str(): wk_rope,
+        pstate_str(): thur_rope,
     }
     casa_jkeys = {
-        concept_way_str(): casa_way,
-        rcontext_str(): wk_way,
-        pstate_str(): thur_way,
+        concept_rope_str(): casa_rope,
+        rcontext_str(): wk_rope,
+        pstate_str(): thur_rope,
     }
     clean_jkeys = {
-        concept_way_str(): clean_way,
-        rcontext_str(): wk_way,
-        pstate_str(): thur_way,
+        concept_rope_str(): clean_rope,
+        rcontext_str(): wk_rope,
+        pstate_str(): thur_rope,
     }
 
     # WHEN / THEN
@@ -227,8 +227,8 @@ def test_plan_concept_reason_premiseunit_exists_ReturnsObj():
     assert not premiseunit_exists(sue_plan, clean_jkeys)
 
     # WHEN
-    sue_plan.add_concept(wk_way)
-    sue_plan.conceptroot.set_reasonunit(reasonunit_shop(wk_way))
+    sue_plan.add_concept(wk_rope)
+    sue_plan.conceptroot.set_reasonunit(reasonunit_shop(wk_rope))
 
     # THEN
     assert not premiseunit_exists(sue_plan, {})
@@ -237,8 +237,8 @@ def test_plan_concept_reason_premiseunit_exists_ReturnsObj():
     assert not premiseunit_exists(sue_plan, clean_jkeys)
 
     # WHEN
-    sue_plan.add_concept(thur_way)
-    sue_plan.conceptroot.get_reasonunit(wk_way).set_premise(thur_way)
+    sue_plan.add_concept(thur_rope)
+    sue_plan.conceptroot.get_reasonunit(wk_rope).set_premise(thur_rope)
 
     # THEN
     assert not premiseunit_exists(sue_plan, {})
@@ -251,14 +251,14 @@ def test_plan_concept_laborlink_exists_ReturnsObj():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_way = sue_plan.make_way(casa_way, clean_str)
-    root_way = to_way(sue_plan.vow_label)
+    clean_rope = sue_plan.make_rope(casa_rope, clean_str)
+    root_rope = to_rope(sue_plan.vow_label)
     swim_str = "Swim"
-    root_jkeys = {concept_way_str(): root_way, labor_title_str(): swim_str}
-    casa_jkeys = {concept_way_str(): casa_way, labor_title_str(): swim_str}
-    clean_jkeys = {concept_way_str(): clean_way, labor_title_str(): swim_str}
+    root_jkeys = {concept_rope_str(): root_rope, labor_title_str(): swim_str}
+    casa_jkeys = {concept_rope_str(): casa_rope, labor_title_str(): swim_str}
+    clean_jkeys = {concept_rope_str(): clean_rope, labor_title_str(): swim_str}
 
     # WHEN / THEN
     assert not plan_concept_laborlink_exists(None, {})
@@ -281,14 +281,14 @@ def test_plan_concept_healerlink_exists_ReturnsObj():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_way = sue_plan.make_way(casa_way, clean_str)
-    root_way = to_way(sue_plan.vow_label)
+    clean_rope = sue_plan.make_rope(casa_rope, clean_str)
+    root_rope = to_rope(sue_plan.vow_label)
     swim_str = "Swim"
-    root_jkeys = {concept_way_str(): root_way, healer_name_str(): swim_str}
-    casa_jkeys = {concept_way_str(): casa_way, healer_name_str(): swim_str}
-    clean_jkeys = {concept_way_str(): clean_way, healer_name_str(): swim_str}
+    root_jkeys = {concept_rope_str(): root_rope, healer_name_str(): swim_str}
+    casa_jkeys = {concept_rope_str(): casa_rope, healer_name_str(): swim_str}
+    clean_jkeys = {concept_rope_str(): clean_rope, healer_name_str(): swim_str}
 
     # WHEN / THEN
     assert not plan_concept_healerlink_exists(None, {})
@@ -310,15 +310,15 @@ def test_plan_concept_healerlink_exists_ReturnsObj():
 def test_plan_concept_factunit_exists_ReturnsObj():
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_way = sue_plan.make_way(casa_way, clean_str)
-    root_way = to_way(sue_plan.vow_label)
+    clean_rope = sue_plan.make_rope(casa_rope, clean_str)
+    root_rope = to_rope(sue_plan.vow_label)
     wk_str = "wk"
-    wk_way = sue_plan.make_l1_way(wk_str)
-    root_jkeys = {concept_way_str(): root_way, fcontext_str(): wk_way}
-    casa_jkeys = {concept_way_str(): casa_way, fcontext_str(): wk_way}
-    clean_jkeys = {concept_way_str(): clean_way, fcontext_str(): wk_way}
+    wk_rope = sue_plan.make_l1_rope(wk_str)
+    root_jkeys = {concept_rope_str(): root_rope, fcontext_str(): wk_rope}
+    casa_jkeys = {concept_rope_str(): casa_rope, fcontext_str(): wk_rope}
+    clean_jkeys = {concept_rope_str(): clean_rope, fcontext_str(): wk_rope}
 
     # WHEN / THEN
     assert not plan_concept_factunit_exists(None, {})
@@ -328,8 +328,8 @@ def test_plan_concept_factunit_exists_ReturnsObj():
     assert not plan_concept_factunit_exists(sue_plan, clean_jkeys)
 
     # WHEN
-    sue_plan.add_concept(wk_way)
-    sue_plan.conceptroot.set_factunit(factunit_shop(wk_way))
+    sue_plan.add_concept(wk_rope)
+    sue_plan.conceptroot.set_factunit(factunit_shop(wk_rope))
 
     # THEN
     assert not plan_concept_factunit_exists(sue_plan, {})
@@ -395,15 +395,15 @@ def test_plan_attr_exists_ReturnsObj_plan_conceptunit():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_way = sue_plan.make_way(casa_way, clean_str)
-    sweep_way = sue_plan.make_way(clean_way, "sweep")
-    x_parent_way = to_way(sue_plan.vow_label)
-    root_jkeys = {concept_way_str(): x_parent_way}
-    casa_jkeys = {concept_way_str(): casa_way}
-    clean_jkeys = {concept_way_str(): clean_way}
-    sweep_jkeys = {concept_way_str(): sweep_way}
+    clean_rope = sue_plan.make_rope(casa_rope, clean_str)
+    sweep_rope = sue_plan.make_rope(clean_rope, "sweep")
+    x_parent_rope = to_rope(sue_plan.vow_label)
+    root_jkeys = {concept_rope_str(): x_parent_rope}
+    casa_jkeys = {concept_rope_str(): casa_rope}
+    clean_jkeys = {concept_rope_str(): clean_rope}
+    sweep_jkeys = {concept_rope_str(): sweep_rope}
     x_dimen = plan_conceptunit_str()
 
     # WHEN / THEN
@@ -415,7 +415,7 @@ def test_plan_attr_exists_ReturnsObj_plan_conceptunit():
     assert not plan_attr_exists(x_dimen, sue_plan, sweep_jkeys)
 
     # WHEN
-    sue_plan.add_concept(casa_way)
+    sue_plan.add_concept(casa_rope)
     # THEN
     assert not plan_attr_exists(x_dimen, sue_plan, {})
     assert plan_attr_exists(x_dimen, sue_plan, root_jkeys)
@@ -424,7 +424,7 @@ def test_plan_attr_exists_ReturnsObj_plan_conceptunit():
     assert not plan_attr_exists(x_dimen, sue_plan, sweep_jkeys)
 
     # WHEN
-    sue_plan.add_concept(clean_way)
+    sue_plan.add_concept(clean_rope)
     # THEN
     assert not plan_attr_exists(x_dimen, sue_plan, {})
     assert plan_attr_exists(x_dimen, sue_plan, root_jkeys)
@@ -437,15 +437,15 @@ def test_plan_attr_exists_ReturnsObj_plan_concept_awardlink():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_way = sue_plan.make_way(casa_way, clean_str)
-    root_way = to_way(sue_plan.vow_label)
+    clean_rope = sue_plan.make_rope(casa_rope, clean_str)
+    root_rope = to_rope(sue_plan.vow_label)
     swim_str = "Swim"
     x_dimen = plan_concept_awardlink_str()
-    root_jkeys = {concept_way_str(): root_way, awardee_title_str(): swim_str}
-    casa_jkeys = {concept_way_str(): casa_way, awardee_title_str(): swim_str}
-    clean_jkeys = {concept_way_str(): clean_way, awardee_title_str(): swim_str}
+    root_jkeys = {concept_rope_str(): root_rope, awardee_title_str(): swim_str}
+    casa_jkeys = {concept_rope_str(): casa_rope, awardee_title_str(): swim_str}
+    clean_jkeys = {concept_rope_str(): clean_rope, awardee_title_str(): swim_str}
 
     # WHEN / THEN
     assert not plan_attr_exists(x_dimen, None, {})
@@ -467,16 +467,16 @@ def test_plan_attr_exists_ReturnsObj_plan_concept_awardlink():
 def test_plan_attr_exists_ReturnsObj_plan_concept_reasonunit():
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_way = sue_plan.make_way(casa_way, clean_str)
-    root_way = to_way(sue_plan.vow_label)
+    clean_rope = sue_plan.make_rope(casa_rope, clean_str)
+    root_rope = to_rope(sue_plan.vow_label)
     wk_str = "wk"
-    wk_way = sue_plan.make_l1_way(wk_str)
+    wk_rope = sue_plan.make_l1_rope(wk_str)
     x_dimen = plan_concept_reasonunit_str()
-    root_jkeys = {concept_way_str(): root_way, rcontext_str(): wk_way}
-    casa_jkeys = {concept_way_str(): casa_way, rcontext_str(): wk_way}
-    clean_jkeys = {concept_way_str(): clean_way, rcontext_str(): wk_way}
+    root_jkeys = {concept_rope_str(): root_rope, rcontext_str(): wk_rope}
+    casa_jkeys = {concept_rope_str(): casa_rope, rcontext_str(): wk_rope}
+    clean_jkeys = {concept_rope_str(): clean_rope, rcontext_str(): wk_rope}
 
     # WHEN / THEN
     assert not plan_attr_exists(x_dimen, None, {})
@@ -486,8 +486,8 @@ def test_plan_attr_exists_ReturnsObj_plan_concept_reasonunit():
     assert not plan_attr_exists(x_dimen, sue_plan, clean_jkeys)
 
     # WHEN
-    sue_plan.add_concept(wk_way)
-    sue_plan.conceptroot.set_reasonunit(reasonunit_shop(wk_way))
+    sue_plan.add_concept(wk_rope)
+    sue_plan.conceptroot.set_reasonunit(reasonunit_shop(wk_rope))
 
     # THEN
     assert plan_attr_exists(x_dimen, sue_plan, root_jkeys)
@@ -498,28 +498,28 @@ def test_plan_attr_exists_ReturnsObj_plan_concept_reasonunit():
 def test_plan_attr_exists_ReturnsObj_plan_concept_reason_premiseunit():
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_way = sue_plan.make_way(casa_way, clean_str)
-    root_way = to_way(sue_plan.vow_label)
+    clean_rope = sue_plan.make_rope(casa_rope, clean_str)
+    root_rope = to_rope(sue_plan.vow_label)
     wk_str = "wk"
-    wk_way = sue_plan.make_l1_way(wk_str)
-    thur_way = sue_plan.make_way(wk_way, "thur")
+    wk_rope = sue_plan.make_l1_rope(wk_str)
+    thur_rope = sue_plan.make_rope(wk_rope, "thur")
     x_dimen = plan_concept_reason_premiseunit_str()
     root_jkeys = {
-        concept_way_str(): root_way,
-        rcontext_str(): wk_way,
-        pstate_str(): thur_way,
+        concept_rope_str(): root_rope,
+        rcontext_str(): wk_rope,
+        pstate_str(): thur_rope,
     }
     casa_jkeys = {
-        concept_way_str(): casa_way,
-        rcontext_str(): wk_way,
-        pstate_str(): thur_way,
+        concept_rope_str(): casa_rope,
+        rcontext_str(): wk_rope,
+        pstate_str(): thur_rope,
     }
     clean_jkeys = {
-        concept_way_str(): clean_way,
-        rcontext_str(): wk_way,
-        pstate_str(): thur_way,
+        concept_rope_str(): clean_rope,
+        rcontext_str(): wk_rope,
+        pstate_str(): thur_rope,
     }
 
     # WHEN / THEN
@@ -530,8 +530,8 @@ def test_plan_attr_exists_ReturnsObj_plan_concept_reason_premiseunit():
     assert not plan_attr_exists(x_dimen, sue_plan, clean_jkeys)
 
     # WHEN
-    sue_plan.add_concept(wk_way)
-    sue_plan.conceptroot.set_reasonunit(reasonunit_shop(wk_way))
+    sue_plan.add_concept(wk_rope)
+    sue_plan.conceptroot.set_reasonunit(reasonunit_shop(wk_rope))
 
     # THEN
     assert not plan_attr_exists(x_dimen, sue_plan, root_jkeys)
@@ -539,8 +539,8 @@ def test_plan_attr_exists_ReturnsObj_plan_concept_reason_premiseunit():
     assert not plan_attr_exists(x_dimen, sue_plan, clean_jkeys)
 
     # WHEN
-    sue_plan.add_concept(thur_way)
-    sue_plan.conceptroot.get_reasonunit(wk_way).set_premise(thur_way)
+    sue_plan.add_concept(thur_rope)
+    sue_plan.conceptroot.get_reasonunit(wk_rope).set_premise(thur_rope)
 
     # THEN
     assert plan_attr_exists(x_dimen, sue_plan, root_jkeys)
@@ -552,15 +552,15 @@ def test_plan_attr_exists_ReturnsObj_plan_concept_laborlink():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_way = sue_plan.make_way(casa_way, clean_str)
-    root_way = to_way(sue_plan.vow_label)
+    clean_rope = sue_plan.make_rope(casa_rope, clean_str)
+    root_rope = to_rope(sue_plan.vow_label)
     swim_str = "Swim"
     x_dimen = plan_concept_laborlink_str()
-    root_jkeys = {concept_way_str(): root_way, labor_title_str(): swim_str}
-    casa_jkeys = {concept_way_str(): casa_way, labor_title_str(): swim_str}
-    clean_jkeys = {concept_way_str(): clean_way, labor_title_str(): swim_str}
+    root_jkeys = {concept_rope_str(): root_rope, labor_title_str(): swim_str}
+    casa_jkeys = {concept_rope_str(): casa_rope, labor_title_str(): swim_str}
+    clean_jkeys = {concept_rope_str(): clean_rope, labor_title_str(): swim_str}
 
     # WHEN / THEN
     assert not plan_attr_exists(x_dimen, None, {})
@@ -583,15 +583,15 @@ def test_plan_attr_exists_ReturnsObj_plan_concept_healerlink():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_way = sue_plan.make_way(casa_way, clean_str)
-    root_way = to_way(sue_plan.vow_label)
+    clean_rope = sue_plan.make_rope(casa_rope, clean_str)
+    root_rope = to_rope(sue_plan.vow_label)
     swim_str = "Swim"
     x_dimen = plan_concept_healerlink_str()
-    root_jkeys = {concept_way_str(): root_way, healer_name_str(): swim_str}
-    casa_jkeys = {concept_way_str(): casa_way, healer_name_str(): swim_str}
-    clean_jkeys = {concept_way_str(): clean_way, healer_name_str(): swim_str}
+    root_jkeys = {concept_rope_str(): root_rope, healer_name_str(): swim_str}
+    casa_jkeys = {concept_rope_str(): casa_rope, healer_name_str(): swim_str}
+    clean_jkeys = {concept_rope_str(): clean_rope, healer_name_str(): swim_str}
 
     # WHEN / THEN
     assert not plan_attr_exists(x_dimen, None, {})
@@ -613,16 +613,16 @@ def test_plan_attr_exists_ReturnsObj_plan_concept_healerlink():
 def test_plan_attr_exists_ReturnsObj_plan_concept_factunit():
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_way = sue_plan.make_way(casa_way, clean_str)
-    root_way = to_way(sue_plan.vow_label)
+    clean_rope = sue_plan.make_rope(casa_rope, clean_str)
+    root_rope = to_rope(sue_plan.vow_label)
     wk_str = "wk"
-    wk_way = sue_plan.make_l1_way(wk_str)
+    wk_rope = sue_plan.make_l1_rope(wk_str)
     x_dimen = plan_concept_factunit_str()
-    root_jkeys = {concept_way_str(): root_way, fcontext_str(): wk_way}
-    casa_jkeys = {concept_way_str(): casa_way, fcontext_str(): wk_way}
-    clean_jkeys = {concept_way_str(): clean_way, fcontext_str(): wk_way}
+    root_jkeys = {concept_rope_str(): root_rope, fcontext_str(): wk_rope}
+    casa_jkeys = {concept_rope_str(): casa_rope, fcontext_str(): wk_rope}
+    clean_jkeys = {concept_rope_str(): clean_rope, fcontext_str(): wk_rope}
 
     # WHEN / THEN
     assert not plan_attr_exists(x_dimen, None, {})
@@ -632,8 +632,8 @@ def test_plan_attr_exists_ReturnsObj_plan_concept_factunit():
     assert not plan_attr_exists(x_dimen, sue_plan, clean_jkeys)
 
     # WHEN
-    sue_plan.add_concept(wk_way)
-    sue_plan.conceptroot.set_factunit(factunit_shop(wk_way))
+    sue_plan.add_concept(wk_rope)
+    sue_plan.conceptroot.set_factunit(factunit_shop(wk_rope))
 
     # THEN
     assert plan_attr_exists(x_dimen, sue_plan, root_jkeys)

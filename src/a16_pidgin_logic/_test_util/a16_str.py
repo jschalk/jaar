@@ -1,5 +1,5 @@
-def inx_bridge_str() -> str:
-    return "inx_bridge"
+def inx_knot_str() -> str:
+    return "inx_knot"
 
 
 def inx_label_str() -> str:
@@ -10,12 +10,12 @@ def inx_name_str() -> str:
     return "inx_name"
 
 
+def inx_rope_str() -> str:
+    return "inx_rope"
+
+
 def inx_title_str() -> str:
     return "inx_title"
-
-
-def inx_way_str() -> str:
-    return "inx_way"
 
 
 def map_otx2inx_str() -> str:
@@ -26,12 +26,12 @@ def otx2inx_str() -> str:
     return "otx2inx"
 
 
-def otx_bridge_str() -> str:
-    return "otx_bridge"
-
-
 def otx_key_str() -> str:
     return "otx_key"
+
+
+def otx_knot_str() -> str:
+    return "otx_knot"
 
 
 def otx_label_str() -> str:
@@ -42,12 +42,12 @@ def otx_name_str() -> str:
     return "otx_name"
 
 
+def otx_rope_str() -> str:
+    return "otx_rope"
+
+
 def otx_title_str() -> str:
     return "otx_title"
-
-
-def otx_way_str() -> str:
-    return "otx_way"
 
 
 def pidgin_core_str() -> str:
@@ -62,12 +62,12 @@ def pidgin_name_str() -> str:
     return "pidgin_name"
 
 
+def pidgin_rope_str() -> str:
+    return "pidgin_rope"
+
+
 def pidgin_title_str() -> str:
     return "pidgin_title"
-
-
-def pidgin_way_str() -> str:
-    return "pidgin_way"
 
 
 def pidginunit_str() -> str:

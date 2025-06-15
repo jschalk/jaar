@@ -23,7 +23,7 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_With_vowunit_Attrs_Scenario0(
     a23_fund_iota = 13
     a23_penny = 17
     a23_respect_bit = 23
-    a23_bridge = "."
+    a23_knot = "."
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -38,7 +38,7 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_With_vowunit_Attrs_Scenario0(
 , fund_iota
 , penny
 , respect_bit
-, bridge
+, knot
 )
 VALUES (
   '{a23_str}'
@@ -49,7 +49,7 @@ VALUES (
 , {a23_fund_iota}
 , {a23_penny}
 , {a23_respect_bit}
-, '{a23_bridge}'
+, '{a23_knot}'
 )
 ;"""
         cursor.execute(vowunit_insert_sqlstr)
@@ -69,7 +69,7 @@ VALUES (
     assert a23_dict.get("fund_iota") == a23_fund_iota
     assert a23_dict.get("penny") == a23_penny
     assert a23_dict.get("respect_bit") == a23_respect_bit
-    assert a23_dict.get("bridge") == a23_bridge
+    assert a23_dict.get("knot") == a23_knot
 
 
 def test_get_vow_dict_from_voice_tables_ReturnsObj_With_vowunit_Attrs_Scenario1():
@@ -94,7 +94,7 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_With_vowunit_Attrs_Scenario1(
     assert a23_dict.get("fund_iota") is None
     assert a23_dict.get("penny") is None
     assert a23_dict.get("respect_bit") is None
-    assert a23_dict.get("bridge") is None
+    assert a23_dict.get("knot") is None
     assert set(a23_dict.keys()) == {
         vow_label_str(),
         "offi_times",
@@ -376,7 +376,7 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_IsCorrectlyFormatted_Scenario
     a23_fund_iota = 13
     a23_penny = 17
     a23_respect_bit = 23
-    a23_bridge = "."
+    a23_knot = "."
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -391,7 +391,7 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_IsCorrectlyFormatted_Scenario
 , fund_iota
 , penny
 , respect_bit
-, bridge
+, knot
 )
 VALUES (
   '{a23_str}'
@@ -402,7 +402,7 @@ VALUES (
 , {a23_fund_iota}
 , {a23_penny}
 , {a23_respect_bit}
-, '{a23_bridge}'
+, '{a23_knot}'
 )
 ;"""
         cursor.execute(vowunit_insert_sqlstr)
@@ -419,7 +419,7 @@ VALUES (
     assert a23_vowunit.fund_iota == a23_fund_iota
     assert a23_vowunit.penny == a23_penny
     assert a23_vowunit.respect_bit == a23_respect_bit
-    assert a23_vowunit.bridge == a23_bridge
+    assert a23_vowunit.knot == a23_knot
 
 
 def test_get_vow_dict_from_voice_tables_ReturnsObj_IsCorrectlyFormatted_Scenario1_vowpayy():

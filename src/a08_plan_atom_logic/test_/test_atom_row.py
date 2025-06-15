@@ -1,4 +1,4 @@
-from src.a01_term_logic.way import create_way, to_way
+from src.a01_term_logic.rope import create_rope, to_rope
 from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
     plan_acct_membership_str,
@@ -53,7 +53,7 @@ def test_AtomRow_exists():
     assert x_atomrow.fstate is None
     assert x_atomrow.task is None
     assert x_atomrow.problem_bool is None
-    assert x_atomrow.concept_way is None
+    assert x_atomrow.concept_rope is None
     assert x_atomrow.stop_want is None
     assert x_atomrow.take_force is None
     assert x_atomrow.tally is None
@@ -125,16 +125,16 @@ def test_AtomRow_set_class_types_SetsAttr():
     # ESTABLISH
     x_atomrow = atomrow_shop({}, INSERT_str())
     x_atomrow.close = "4"
-    x_parent_way = "fizz_buzz"
+    x_parent_rope = "fizz_buzz"
     x_concept_label = "buzzziy"
     x_morph_str = "True"
     x_morph_bool = True
-    x_way = create_way(x_parent_way, x_concept_label)
-    x_atomrow.concept_way = x_way
+    x_rope = create_rope(x_parent_rope, x_concept_label)
+    x_atomrow.concept_rope = x_rope
     x_atomrow.morph = x_morph_str
     four_int = 4
     assert x_atomrow.close != four_int
-    assert x_atomrow.concept_way == x_way
+    assert x_atomrow.concept_rope == x_rope
     assert x_atomrow.morph == x_morph_str
 
     # WHEN
@@ -142,7 +142,7 @@ def test_AtomRow_set_class_types_SetsAttr():
 
     # THEN
     assert x_atomrow.close == four_int
-    assert x_atomrow.concept_way == x_way
+    assert x_atomrow.concept_rope == x_rope
     assert x_atomrow.morph == x_morph_bool
 
 
@@ -232,7 +232,7 @@ def test_AtomRow_get_planatoms_ReturnsObjIfDimenIsCorrect():
 def test_AtomRow_get_planatoms_ReturnsObj_plan_conceptunit_INSERT_task_False_Scenario0():
     # ESTABLISH
     x_atomrow = atomrow_shop({plan_conceptunit_str()}, INSERT_str())
-    x_atomrow.concept_way = create_way("accord78", "casa")
+    x_atomrow.concept_rope = create_rope("accord78", "casa")
     x_atomrow.task = False
     assert len(x_atomrow.get_planatoms()) == 1
 
@@ -241,7 +241,7 @@ def test_AtomRow_get_planatoms_ReturnsObj_plan_conceptunit_INSERT_task_False_Sce
 
     # THEN
     static_planatom = planatom_shop(plan_conceptunit_str(), INSERT_str())
-    static_planatom.set_arg("concept_way", create_way("accord78", "casa"))
+    static_planatom.set_arg("concept_rope", create_rope("accord78", "casa"))
     static_planatom.set_arg("task", False)
     print(static_planatom)
     print(x_planatom)
@@ -252,7 +252,7 @@ def test_AtomRow_get_planatoms_ReturnsObj_plan_conceptunit_INSERT_task_False_Sce
     # ESTABLISH
     x_dimens = {plan_conceptunit_str(), plan_concept_healerlink_str()}
     x_atomrow = atomrow_shop(x_dimens, INSERT_str())
-    x_atomrow.concept_way = create_way("accord78", "casa")
+    x_atomrow.concept_rope = create_rope("accord78", "casa")
     x_atomrow.task = False
     x_atomrow.healer_name = "Bob"
 
@@ -262,11 +262,11 @@ def test_AtomRow_get_planatoms_ReturnsObj_plan_conceptunit_INSERT_task_False_Sce
     # THEN
     assert len(x_planatoms) == 2
     y_concept_planatom = planatom_shop(plan_conceptunit_str(), INSERT_str())
-    casa_way = create_way("accord78", "casa")
-    y_concept_planatom.set_arg("concept_way", casa_way)
+    casa_rope = create_rope("accord78", "casa")
+    y_concept_planatom.set_arg("concept_rope", casa_rope)
     y_concept_planatom.set_arg("task", False)
     assert y_concept_planatom in x_planatoms
     healerlink_planatom = planatom_shop(plan_concept_healerlink_str(), INSERT_str())
-    healerlink_planatom.set_arg("concept_way", casa_way)
+    healerlink_planatom.set_arg("concept_rope", casa_rope)
     healerlink_planatom.set_arg("healer_name", "Bob")
     assert healerlink_planatom in x_planatoms

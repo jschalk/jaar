@@ -16,105 +16,107 @@ def test_PlanUnit_ReasonUnits_create():
     # ESTABLISH
     sue_plan = get_planunit_with_4_levels()
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     wkday_str = "wkdays"
-    wkday_way = sue_plan.make_l1_way(wkday_str)
+    wkday_rope = sue_plan.make_l1_rope(wkday_str)
     wed_str = "Wednesday"
-    wed_way = sue_plan.make_way(wkday_way, wed_str)
+    wed_rope = sue_plan.make_rope(wkday_rope, wed_str)
 
-    wed_premise = premiseunit_shop(pstate=wed_way)
-    casa_wk_reason = reasonunit_shop(wkday_way, {wed_premise.pstate: wed_premise})
+    wed_premise = premiseunit_shop(pstate=wed_rope)
+    casa_wk_reason = reasonunit_shop(wkday_rope, {wed_premise.pstate: wed_premise})
     print(f"{type(casa_wk_reason.rcontext)=}")
     print(f"{casa_wk_reason.rcontext=}")
 
     # WHEN
-    sue_plan.edit_concept_attr(casa_way, reason=casa_wk_reason)
+    sue_plan.edit_concept_attr(casa_rope, reason=casa_wk_reason)
 
     # THEN
-    casa_concept = sue_plan.get_concept_obj(casa_way)
+    casa_concept = sue_plan.get_concept_obj(casa_rope)
     assert casa_concept.reasonunits is not None
     print(casa_concept.reasonunits)
-    assert casa_concept.reasonunits[wkday_way] is not None
-    assert casa_concept.reasonunits[wkday_way] == casa_wk_reason
+    assert casa_concept.reasonunits[wkday_rope] is not None
+    assert casa_concept.reasonunits[wkday_rope] == casa_wk_reason
 
 
-def test_PlanUnit_edit_concept_attr_reasonunit_CorrectlySets_bridge():
+def test_PlanUnit_edit_concept_attr_reasonunit_CorrectlySets_knot():
     # ESTABLISH
     sue_plan = get_planunit_with_4_levels()
-    casa_way = sue_plan.make_l1_way("casa")
-    wk_way = sue_plan.make_l1_way("wkdays")
-    wed_way = sue_plan.make_way(wk_way, "Wednesday")
+    casa_rope = sue_plan.make_l1_rope("casa")
+    wk_rope = sue_plan.make_l1_rope("wkdays")
+    wed_rope = sue_plan.make_rope(wk_rope, "Wednesday")
 
     slash_str = "/"
-    before_wk_reason = reasonunit_shop(wk_way, bridge=slash_str)
-    before_wk_reason.set_premise(wed_way)
-    assert before_wk_reason.bridge == slash_str
+    before_wk_reason = reasonunit_shop(wk_rope, knot=slash_str)
+    before_wk_reason.set_premise(wed_rope)
+    assert before_wk_reason.knot == slash_str
 
     # WHEN
-    sue_plan.edit_concept_attr(casa_way, reason=before_wk_reason)
+    sue_plan.edit_concept_attr(casa_rope, reason=before_wk_reason)
 
     # THEN
-    casa_concept = sue_plan.get_concept_obj(casa_way)
-    wk_reasonunit = casa_concept.reasonunits.get(wk_way)
-    assert wk_reasonunit.bridge != slash_str
-    assert wk_reasonunit.bridge == sue_plan.bridge
+    casa_concept = sue_plan.get_concept_obj(casa_rope)
+    wk_reasonunit = casa_concept.reasonunits.get(wk_rope)
+    assert wk_reasonunit.knot != slash_str
+    assert wk_reasonunit.knot == sue_plan.knot
 
 
-def test_PlanUnit_edit_concept_attr_reason_rcontext_CorrectlySets_bridge():
+def test_PlanUnit_edit_concept_attr_reason_rcontext_CorrectlySets_knot():
     # ESTABLISH
     slash_str = "/"
-    bob_plan = planunit_shop("Bob", bridge=slash_str)
+    bob_plan = planunit_shop("Bob", knot=slash_str)
     casa_str = "casa"
     wk_str = "wk"
     wed_str = "Wednesday"
-    casa_way = bob_plan.make_l1_way(casa_str)
-    wk_way = bob_plan.make_l1_way(wk_str)
-    wed_way = bob_plan.make_way(wk_way, wed_str)
+    casa_rope = bob_plan.make_l1_rope(casa_str)
+    wk_rope = bob_plan.make_l1_rope(wk_str)
+    wed_rope = bob_plan.make_rope(wk_rope, wed_str)
     bob_plan.set_l1_concept(conceptunit_shop(casa_str))
     bob_plan.set_l1_concept(conceptunit_shop(wk_str))
-    bob_plan.set_concept(conceptunit_shop(wed_str), wk_way)
+    bob_plan.set_concept(conceptunit_shop(wed_str), wk_rope)
     print(f"{bob_plan.conceptroot._kids.keys()=}")
-    wed_concept = bob_plan.get_concept_obj(wed_way)
-    assert wed_concept.bridge == slash_str
-    assert wed_concept.bridge == bob_plan.bridge
+    wed_concept = bob_plan.get_concept_obj(wed_rope)
+    assert wed_concept.knot == slash_str
+    assert wed_concept.knot == bob_plan.knot
 
     # WHEN
-    bob_plan.edit_concept_attr(casa_way, reason_rcontext=wk_way, reason_premise=wed_way)
+    bob_plan.edit_concept_attr(
+        casa_rope, reason_rcontext=wk_rope, reason_premise=wed_rope
+    )
 
     # THEN
-    casa_concept = bob_plan.get_concept_obj(casa_way)
-    assert casa_concept.bridge == slash_str
-    wk_reasonunit = casa_concept.reasonunits.get(wk_way)
-    assert wk_reasonunit.bridge != ","
-    assert wk_reasonunit.bridge == bob_plan.bridge
+    casa_concept = bob_plan.get_concept_obj(casa_rope)
+    assert casa_concept.knot == slash_str
+    wk_reasonunit = casa_concept.reasonunits.get(wk_rope)
+    assert wk_reasonunit.knot != ","
+    assert wk_reasonunit.knot == bob_plan.knot
 
 
 def test_PlanUnit_set_reasonunits_status():
     # ESTABLISH
     sue_plan = get_planunit_with_4_levels()
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     wkday_str = "wkdays"
-    wkday_way = sue_plan.make_l1_way(wkday_str)
+    wkday_rope = sue_plan.make_l1_rope(wkday_str)
     wed_str = "Wednesday"
-    wed_way = sue_plan.make_way(wkday_way, wed_str)
+    wed_rope = sue_plan.make_rope(wkday_rope, wed_str)
 
-    wed_premise = premiseunit_shop(pstate=wed_way)
+    wed_premise = premiseunit_shop(pstate=wed_rope)
     casa_wk_reason = reasonunit_shop(
-        rcontext=wkday_way, premises={wed_premise.pstate: wed_premise}
+        rcontext=wkday_rope, premises={wed_premise.pstate: wed_premise}
     )
     print(f"{type(casa_wk_reason.rcontext)=}")
     print(f"{casa_wk_reason.rcontext=}")
 
     # WHEN
-    sue_plan.edit_concept_attr(casa_way, reason=casa_wk_reason)
+    sue_plan.edit_concept_attr(casa_rope, reason=casa_wk_reason)
 
     # THEN
-    casa_concept = sue_plan.get_concept_obj(casa_way)
+    casa_concept = sue_plan.get_concept_obj(casa_rope)
     assert casa_concept.reasonunits is not None
     print(casa_concept.reasonunits)
-    assert casa_concept.reasonunits[wkday_way] is not None
-    assert casa_concept.reasonunits[wkday_way] == casa_wk_reason
+    assert casa_concept.reasonunits[wkday_rope] is not None
+    assert casa_concept.reasonunits[wkday_rope] == casa_wk_reason
 
 
 def test_agenda_returned_WhenNoReasonsExist():
@@ -125,41 +127,41 @@ def test_agenda_returned_WhenNoReasonsExist():
     sue_plan.settle_plan()
 
     # THEN
-    casa_way = sue_plan.make_l1_way("casa")
-    assert sue_plan.get_concept_obj(casa_way)._chore is True
-    cat_way = sue_plan.make_l1_way("cat have dinner")
-    assert sue_plan.get_concept_obj(cat_way)._chore is True
+    casa_rope = sue_plan.make_l1_rope("casa")
+    assert sue_plan.get_concept_obj(casa_rope)._chore is True
+    cat_rope = sue_plan.make_l1_rope("cat have dinner")
+    assert sue_plan.get_concept_obj(cat_rope)._chore is True
 
 
 def test_PlanUnit_reasonheirs_AreCorrectlyInherited_v1():
     # ESTABLISH
     sue_plan = get_planunit_with_4_levels()
-    casa_way = sue_plan.make_l1_way("casa")
-    wk_way = sue_plan.make_l1_way("wkdays")
-    tue_way = sue_plan.make_way(wk_way, "Tuesday")
-    casa_wk_build_reasonunit = reasonunit_shop(wk_way)
-    casa_wk_build_reasonunit.set_premise(tue_way)
-    sue_plan.edit_concept_attr(casa_way, reason=casa_wk_build_reasonunit)
-    casa_concept = sue_plan.get_concept_obj(casa_way)
+    casa_rope = sue_plan.make_l1_rope("casa")
+    wk_rope = sue_plan.make_l1_rope("wkdays")
+    tue_rope = sue_plan.make_rope(wk_rope, "Tuesday")
+    casa_wk_build_reasonunit = reasonunit_shop(wk_rope)
+    casa_wk_build_reasonunit.set_premise(tue_rope)
+    sue_plan.edit_concept_attr(casa_rope, reason=casa_wk_build_reasonunit)
+    casa_concept = sue_plan.get_concept_obj(casa_rope)
     assert casa_concept.reasonunits != {}
-    assert casa_concept.get_reasonunit(wk_way)
-    assert casa_concept.get_reasonunit(wk_way) == casa_wk_build_reasonunit
-    assert not casa_concept.get_reasonheir(wk_way)
+    assert casa_concept.get_reasonunit(wk_rope)
+    assert casa_concept.get_reasonunit(wk_rope) == casa_wk_build_reasonunit
+    assert not casa_concept.get_reasonheir(wk_rope)
 
     # WHEN
     sue_plan.settle_plan()
 
     # THEN
-    assert casa_concept.get_reasonheir(wk_way)
-    assert len(casa_concept.get_reasonheir(wk_way).premises) == 1
-    assert casa_concept.get_reasonheir(wk_way).get_premise(tue_way)
-    premise_tue = casa_concept.get_reasonheir(wk_way).get_premise(tue_way)
-    tue_premise = premiseunit_shop(pstate=tue_way)
+    assert casa_concept.get_reasonheir(wk_rope)
+    assert len(casa_concept.get_reasonheir(wk_rope).premises) == 1
+    assert casa_concept.get_reasonheir(wk_rope).get_premise(tue_rope)
+    premise_tue = casa_concept.get_reasonheir(wk_rope).get_premise(tue_rope)
+    tue_premise = premiseunit_shop(pstate=tue_rope)
     tue_premise._status = False
     tue_premise._chore = False
     premises = {tue_premise.pstate: tue_premise}
     built_wk_reasonheir = reasonheir_shop(
-        rcontext=wk_way,
+        rcontext=wk_rope,
         premises=premises,
         _status=False,
         _rconcept_active_value=True,
@@ -167,42 +169,42 @@ def test_PlanUnit_reasonheirs_AreCorrectlyInherited_v1():
     tue_chore = built_wk_reasonheir.premises.get(premise_tue.pstate)._chore
     assert premise_tue._chore == tue_chore
     assert premise_tue == built_wk_reasonheir.premises[premise_tue.pstate]
-    wk_reasonheir = casa_concept.get_reasonheir(wk_way)
+    wk_reasonheir = casa_concept.get_reasonheir(wk_rope)
     assert wk_reasonheir.premises == built_wk_reasonheir.premises
-    assert casa_concept.get_reasonheir(wk_way) == built_wk_reasonheir
+    assert casa_concept.get_reasonheir(wk_rope) == built_wk_reasonheir
 
 
 def test_PlanUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
     # ESTABLISH
     a4_plan = get_planunit_with_4_levels()
     casa_str = "casa"
-    casa_way = a4_plan.make_l1_way(casa_str)
+    casa_rope = a4_plan.make_l1_rope(casa_str)
     wk_str = "wkdays"
-    wk_way = a4_plan.make_l1_way(wk_str)
+    wk_rope = a4_plan.make_l1_rope(wk_str)
     wed_str = "Wednesday"
-    wed_way = a4_plan.make_way(wk_way, wed_str)
+    wed_rope = a4_plan.make_rope(wk_rope, wed_str)
 
-    wed_premise = premiseunit_shop(pstate=wed_way)
+    wed_premise = premiseunit_shop(pstate=wed_rope)
     wed_premise._status = False
     wed_premise._chore = False
 
     premises_x = {wed_premise.pstate: wed_premise}
-    casa_wk_build_reasonunit = reasonunit_shop(rcontext=wk_way, premises=premises_x)
+    casa_wk_build_reasonunit = reasonunit_shop(rcontext=wk_rope, premises=premises_x)
     casa_wk_built_reasonheir = reasonheir_shop(
-        rcontext=wk_way,
+        rcontext=wk_rope,
         premises=premises_x,
         _status=False,
         _rconcept_active_value=True,
     )
-    a4_plan.edit_concept_attr(casa_way, reason=casa_wk_build_reasonunit)
+    a4_plan.edit_concept_attr(casa_rope, reason=casa_wk_build_reasonunit)
 
     # WHEN
     rla_str = "hp"
-    rla_way = a4_plan.make_way(casa_way, rla_str)
-    a4_plan.set_concept(conceptunit_shop(rla_str), parent_way=rla_way)
+    rla_rope = a4_plan.make_rope(casa_rope, rla_str)
+    a4_plan.set_concept(conceptunit_shop(rla_str), parent_rope=rla_rope)
     cost_str = "cost_quantification"
-    cost_way = a4_plan.make_way(rla_way, cost_str)
-    a4_plan.set_concept(conceptunit_shop(cost_str), parent_way=cost_way)
+    cost_rope = a4_plan.make_rope(rla_rope, cost_str)
+    a4_plan.set_concept(conceptunit_shop(cost_str), parent_rope=cost_rope)
     a4_plan.settle_plan()
 
     # THEN
@@ -211,11 +213,11 @@ def test_PlanUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
     cost_concept = rla_concept._kids[cost_str]
 
     # 1
-    casa_wk_calc_reasonheir = casa_concept._reasonheirs[wk_way]
+    casa_wk_calc_reasonheir = casa_concept._reasonheirs[wk_rope]
     assert casa_wk_calc_reasonheir == casa_wk_built_reasonheir
 
     # 2
-    rla_wk_reasonheir = rla_concept._reasonheirs[wk_way]
+    rla_wk_reasonheir = rla_concept._reasonheirs[wk_rope]
     assert rla_wk_reasonheir.rcontext == casa_wk_built_reasonheir.rcontext
     assert rla_wk_reasonheir.premises == casa_wk_built_reasonheir.premises
     assert (
@@ -228,7 +230,7 @@ def test_PlanUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
     assert rla_wk_reasonheir._rconcept_active_value != casa_wk_built_reasonheir
 
     # 3
-    cost_wk_reasonheir = cost_concept._reasonheirs[wk_way]
+    cost_wk_reasonheir = cost_concept._reasonheirs[wk_rope]
     assert cost_wk_reasonheir.rcontext == casa_wk_built_reasonheir.rcontext
     assert cost_wk_reasonheir.premises == casa_wk_built_reasonheir.premises
     assert (
@@ -244,30 +246,30 @@ def test_PlanUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
 def test_PlanUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
     a4_plan = get_planunit_with_4_levels()
     casa_str = "casa"
-    casa_way = a4_plan.make_l1_way(casa_str)
+    casa_rope = a4_plan.make_l1_rope(casa_str)
     wk_concept_label = "wkdays"
-    wk_way = a4_plan.make_l1_way(wk_concept_label)
+    wk_rope = a4_plan.make_l1_rope(wk_concept_label)
     wed_str = "Wednesday"
-    wed_way = a4_plan.make_way(wk_way, wed_str)
+    wed_rope = a4_plan.make_rope(wk_rope, wed_str)
 
-    wed_premise = premiseunit_shop(pstate=wed_way)
+    wed_premise = premiseunit_shop(pstate=wed_rope)
     wed_premise._status = False
     wed_premise._chore = False
     premises = {wed_premise.pstate: wed_premise}
-    casa_wk_build_reasonunit = reasonunit_shop(wk_way, premises=premises)
+    casa_wk_build_reasonunit = reasonunit_shop(wk_rope, premises=premises)
     casa_wk_built_reasonheir = reasonheir_shop(
-        rcontext=wk_way,
+        rcontext=wk_rope,
         premises=premises,
         _status=False,
         _rconcept_active_value=True,
     )
-    a4_plan.edit_concept_attr(casa_way, reason=casa_wk_build_reasonunit)
+    a4_plan.edit_concept_attr(casa_rope, reason=casa_wk_build_reasonunit)
     rla_str = "hp"
-    rla_way = a4_plan.make_way(casa_way, rla_str)
-    a4_plan.set_concept(conceptunit_shop(rla_str), parent_way=rla_way)
+    rla_rope = a4_plan.make_rope(casa_rope, rla_str)
+    a4_plan.set_concept(conceptunit_shop(rla_str), parent_rope=rla_rope)
     cost_str = "cost_quantification"
-    cost_way = a4_plan.make_way(rla_way, cost_str)
-    a4_plan.set_concept(conceptunit_shop(cost_str), parent_way=cost_way)
+    cost_rope = a4_plan.make_rope(rla_rope, cost_str)
+    a4_plan.set_concept(conceptunit_shop(cost_str), parent_rope=cost_rope)
 
     casa_concept = a4_plan.conceptroot.get_kid(casa_str)
     rla_concept = casa_concept.get_kid(rla_str)
@@ -285,10 +287,10 @@ def test_PlanUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
     assert a4_plan.conceptroot._reasonheirs == {}  # casa_wk_built_reasonheir
 
     # 1
-    assert casa_concept._reasonheirs[wk_way] == casa_wk_built_reasonheir
+    assert casa_concept._reasonheirs[wk_rope] == casa_wk_built_reasonheir
 
     # 2
-    rla_wk_reasonheir = rla_concept._reasonheirs[wk_way]
+    rla_wk_reasonheir = rla_concept._reasonheirs[wk_rope]
     assert rla_wk_reasonheir.rcontext == casa_wk_built_reasonheir.rcontext
     assert rla_wk_reasonheir.premises == casa_wk_built_reasonheir.premises
     assert (
@@ -301,7 +303,7 @@ def test_PlanUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
     assert rla_wk_reasonheir._rconcept_active_value != casa_wk_built_reasonheir
 
     # 3
-    cost_wk_reasonheir = cost_concept._reasonheirs[wk_way]
+    cost_wk_reasonheir = cost_concept._reasonheirs[wk_rope]
     assert cost_wk_reasonheir.rcontext == casa_wk_built_reasonheir.rcontext
     assert cost_wk_reasonheir.premises == casa_wk_built_reasonheir.premises
     assert (
@@ -318,28 +320,30 @@ def test_PlanUnit_ReasonUnits_set_UnCoupledMethod():
     # ESTABLISH
     sue_plan = get_planunit_with_4_levels()
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     wk_str = "wkdays"
-    wk_way = sue_plan.make_l1_way(wk_str)
+    wk_rope = sue_plan.make_l1_rope(wk_str)
     wed_str = "Wednesday"
-    wed_way = sue_plan.make_way(wk_way, wed_str)
+    wed_rope = sue_plan.make_rope(wk_rope, wed_str)
 
     # WHEN
-    sue_plan.edit_concept_attr(casa_way, reason_rcontext=wk_way, reason_premise=wed_way)
+    sue_plan.edit_concept_attr(
+        casa_rope, reason_rcontext=wk_rope, reason_premise=wed_rope
+    )
 
     # THEN
-    casa_concept1 = sue_plan.get_concept_obj(casa_way)
+    casa_concept1 = sue_plan.get_concept_obj(casa_rope)
     assert casa_concept1.reasonunits is not None
     print(casa_concept1.reasonunits)
-    assert casa_concept1.reasonunits[wk_way] is not None
-    assert casa_concept1.reasonunits[wk_way].premises[wed_way].popen is None
-    assert casa_concept1.reasonunits[wk_way].premises[wed_way].pnigh is None
+    assert casa_concept1.reasonunits[wk_rope] is not None
+    assert casa_concept1.reasonunits[wk_rope].premises[wed_rope].popen is None
+    assert casa_concept1.reasonunits[wk_rope].premises[wed_rope].pnigh is None
 
-    casa_wk_reason1 = reasonunit_shop(wk_way)
-    casa_wk_reason1.set_premise(premise=wed_way)
+    casa_wk_reason1 = reasonunit_shop(wk_rope)
+    casa_wk_reason1.set_premise(premise=wed_rope)
     print(f" {type(casa_wk_reason1.rcontext)=}")
     print(f" {casa_wk_reason1.rcontext=}")
-    assert casa_concept1.reasonunits[wk_way] == casa_wk_reason1
+    assert casa_concept1.reasonunits[wk_rope] == casa_wk_reason1
 
     # ESTABLISH
     pdivisor_x = 34
@@ -348,161 +352,161 @@ def test_PlanUnit_ReasonUnits_set_UnCoupledMethod():
 
     # WHEN
     sue_plan.edit_concept_attr(
-        casa_way,
-        reason_rcontext=wk_way,
-        reason_premise=wed_way,
+        casa_rope,
+        reason_rcontext=wk_rope,
+        reason_premise=wed_rope,
         pdivisor=pdivisor_x,
         popen=x_popen,
         reason_pnigh=x_pnigh,
     )
 
     # THEN
-    assert casa_concept1.reasonunits[wk_way].premises[wed_way].popen == 12
-    assert casa_concept1.reasonunits[wk_way].premises[wed_way].pnigh == 12
+    assert casa_concept1.reasonunits[wk_rope].premises[wed_rope].popen == 12
+    assert casa_concept1.reasonunits[wk_rope].premises[wed_rope].pnigh == 12
 
     wed_premise2 = premiseunit_shop(
-        wed_way, pdivisor=pdivisor_x, popen=x_popen, pnigh=x_pnigh
+        wed_rope, pdivisor=pdivisor_x, popen=x_popen, pnigh=x_pnigh
     )
     casa_wk_reason2 = reasonunit_shop(
-        rcontext=wk_way, premises={wed_premise2.pstate: wed_premise2}
+        rcontext=wk_rope, premises={wed_premise2.pstate: wed_premise2}
     )
     print(f"{type(casa_wk_reason2.rcontext)=}")
     print(f"{casa_wk_reason2.rcontext=}")
-    assert casa_concept1.reasonunits[wk_way] == casa_wk_reason2
+    assert casa_concept1.reasonunits[wk_rope] == casa_wk_reason2
 
     # WHEN
     thu_str = "Thursday"
-    thu_way = sue_plan.make_way(wk_way, thu_str)
+    thu_rope = sue_plan.make_rope(wk_rope, thu_str)
     sue_plan.edit_concept_attr(
-        casa_way,
-        reason_rcontext=wk_way,
-        reason_premise=thu_way,
+        casa_rope,
+        reason_rcontext=wk_rope,
+        reason_premise=thu_rope,
         pdivisor=pdivisor_x,
         popen=x_popen,
         reason_pnigh=x_pnigh,
     )
 
     # THEN
-    assert len(casa_concept1.reasonunits[wk_way].premises) == 2
+    assert len(casa_concept1.reasonunits[wk_rope].premises) == 2
 
 
 def test_PlanUnit_ReasonUnits_set_premiseConceptWithDenomSetsPremiseDivision():
     # ESTABLISH
     sue_plan = get_planunit_with_4_levels()
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     time_str = "time"
-    time_way = sue_plan.make_l1_way(time_str)
+    time_rope = sue_plan.make_l1_rope(time_str)
     wk_str = "wk"
-    wk_way = sue_plan.make_way(time_way, wk_str)
+    wk_rope = sue_plan.make_rope(time_rope, wk_str)
     sue_plan.set_l1_concept(conceptunit_shop(time_str, begin=100, close=2000))
-    sue_plan.set_concept(conceptunit_shop(wk_str, denom=7), parent_way=time_way)
+    sue_plan.set_concept(conceptunit_shop(wk_str, denom=7), parent_rope=time_rope)
 
     # WHEN
     sue_plan.edit_concept_attr(
-        casa_way,
-        reason_rcontext=time_way,
-        reason_premise=wk_way,
+        casa_rope,
+        reason_rcontext=time_rope,
+        reason_premise=wk_rope,
         popen=2,
         reason_pnigh=5,
         pdivisor=None,
     )
 
     # THEN
-    casa_concept1 = sue_plan.get_concept_obj(casa_way)
-    assert casa_concept1.reasonunits[time_way] is not None
-    assert casa_concept1.reasonunits[time_way].premises[wk_way].pdivisor == 7
-    assert casa_concept1.reasonunits[time_way].premises[wk_way].popen == 2
-    assert casa_concept1.reasonunits[time_way].premises[wk_way].pnigh == 5
+    casa_concept1 = sue_plan.get_concept_obj(casa_rope)
+    assert casa_concept1.reasonunits[time_rope] is not None
+    assert casa_concept1.reasonunits[time_rope].premises[wk_rope].pdivisor == 7
+    assert casa_concept1.reasonunits[time_rope].premises[wk_rope].popen == 2
+    assert casa_concept1.reasonunits[time_rope].premises[wk_rope].pnigh == 5
 
 
 def test_PlanUnit_ReasonUnits_set_premiseConceptWithBeginCloseSetsPremisePopen_Pnigh():
     # ESTABLISH
     sue_plan = get_planunit_with_4_levels()
     casa = "casa"
-    casa_way = sue_plan.make_l1_way(casa)
+    casa_rope = sue_plan.make_l1_rope(casa)
     time = "time"
-    time_way = sue_plan.make_l1_way(time)
+    time_rope = sue_plan.make_l1_rope(time)
     rus_war = "rus_war"
-    rus_war_way = sue_plan.make_way(time_way, rus_war)
+    rus_war_rope = sue_plan.make_rope(time_rope, rus_war)
     sue_plan.set_concept(
         conceptunit_shop(time, begin=100, close=2000), sue_plan.vow_label
     )
-    sue_plan.set_concept(conceptunit_shop(rus_war, begin=22, close=34), time_way)
+    sue_plan.set_concept(conceptunit_shop(rus_war, begin=22, close=34), time_rope)
 
     # WHEN
     sue_plan.edit_concept_attr(
-        casa_way,
-        reason_rcontext=time_way,
-        reason_premise=rus_war_way,
+        casa_rope,
+        reason_rcontext=time_rope,
+        reason_premise=rus_war_rope,
         popen=None,
         reason_pnigh=None,
         pdivisor=None,
     )
 
     # THEN
-    casa_concept1 = sue_plan.get_concept_obj(casa_way)
-    assert casa_concept1.reasonunits[time_way] is not None
-    assert casa_concept1.reasonunits[time_way].premises[rus_war_way].pdivisor is None
-    assert casa_concept1.reasonunits[time_way].premises[rus_war_way].popen == 22
-    assert casa_concept1.reasonunits[time_way].premises[rus_war_way].pnigh == 34
+    casa_concept1 = sue_plan.get_concept_obj(casa_rope)
+    assert casa_concept1.reasonunits[time_rope] is not None
+    assert casa_concept1.reasonunits[time_rope].premises[rus_war_rope].pdivisor is None
+    assert casa_concept1.reasonunits[time_rope].premises[rus_war_rope].popen == 22
+    assert casa_concept1.reasonunits[time_rope].premises[rus_war_rope].pnigh == 34
 
 
 def test_PlanUnit_ReasonUnits_edit_concept_attr_CorrectlyDeletes_ReasonUnits_And_PremiseUnits():
     # ESTABLISH
     sue_plan = get_planunit_with_4_levels()
-    casa_way = sue_plan.make_l1_way("casa")
-    wkday_way = sue_plan.make_l1_way("wkdays")
-    wed_way = sue_plan.make_way(wkday_way, "Wednesday")
+    casa_rope = sue_plan.make_l1_rope("casa")
+    wkday_rope = sue_plan.make_l1_rope("wkdays")
+    wed_rope = sue_plan.make_rope(wkday_rope, "Wednesday")
 
     sue_plan.edit_concept_attr(
-        casa_way, reason_rcontext=wkday_way, reason_premise=wed_way
+        casa_rope, reason_rcontext=wkday_rope, reason_premise=wed_rope
     )
-    thu_way = sue_plan.make_way(wkday_way, "Thursday")
+    thu_rope = sue_plan.make_rope(wkday_rope, "Thursday")
     sue_plan.edit_concept_attr(
-        casa_way,
-        reason_rcontext=wkday_way,
-        reason_premise=thu_way,
+        casa_rope,
+        reason_rcontext=wkday_rope,
+        reason_premise=thu_rope,
     )
-    casa_concept1 = sue_plan.get_concept_obj(casa_way)
-    assert len(casa_concept1.reasonunits[wkday_way].premises) == 2
+    casa_concept1 = sue_plan.get_concept_obj(casa_rope)
+    assert len(casa_concept1.reasonunits[wkday_rope].premises) == 2
 
     # WHEN
     sue_plan.edit_concept_attr(
-        casa_way,
-        reason_del_premise_rcontext=wkday_way,
-        reason_del_premise_pstate=thu_way,
+        casa_rope,
+        reason_del_premise_rcontext=wkday_rope,
+        reason_del_premise_pstate=thu_rope,
     )
 
     # THEN
-    assert len(casa_concept1.reasonunits[wkday_way].premises) == 1
+    assert len(casa_concept1.reasonunits[wkday_rope].premises) == 1
 
     # WHEN
     sue_plan.edit_concept_attr(
-        casa_way,
-        reason_del_premise_rcontext=wkday_way,
-        reason_del_premise_pstate=wed_way,
+        casa_rope,
+        reason_del_premise_rcontext=wkday_rope,
+        reason_del_premise_pstate=wed_rope,
     )
 
     # THEN
     with pytest_raises(KeyError) as excinfo:
-        casa_concept1.reasonunits[wkday_way]
-    assert str(excinfo.value) == f"'{wkday_way}'"
+        casa_concept1.reasonunits[wkday_rope]
+    assert str(excinfo.value) == f"'{wkday_rope}'"
     assert casa_concept1.reasonunits == {}
 
 
 def test_PlanUnit_ReasonUnits_del_reason_premise_UncoupledMethod2():
     # ESTABLISH
     sue_plan = get_planunit_with_4_levels()
-    casa_way = sue_plan.make_l1_way("casa")
-    wkdays_way = sue_plan.make_l1_way("wkdays")
-    casa_concept1 = sue_plan.get_concept_obj(casa_way)
+    casa_rope = sue_plan.make_l1_rope("casa")
+    wkdays_rope = sue_plan.make_l1_rope("wkdays")
+    casa_concept1 = sue_plan.get_concept_obj(casa_rope)
     assert len(casa_concept1.reasonunits) == 0
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
-        casa_concept1.del_reasonunit_rcontext(wkdays_way)
-    assert str(excinfo.value) == f"No ReasonUnit at '{wkdays_way}'"
+        casa_concept1.del_reasonunit_rcontext(wkdays_rope)
+    assert str(excinfo.value) == f"No ReasonUnit at '{wkdays_rope}'"
 
 
 def test_PlanUnit_edit_concept_attr_planIsAbleToEdit_rconcept_active_requisite_AnyConceptIfInvaildThrowsError():
@@ -511,54 +515,54 @@ def test_PlanUnit_edit_concept_attr_planIsAbleToEdit_rconcept_active_requisite_A
     # ESTABLISH
     sue_plan = get_planunit_with_4_levels()
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
 
     run_str = "run to casa"
-    run_way = sue_plan.make_l1_way(run_str)
+    run_rope = sue_plan.make_l1_rope(run_str)
     sue_plan.set_concept(conceptunit_shop(run_str), sue_plan.vow_label)
     sue_plan.settle_plan()  # set tree metrics
-    run_concept = sue_plan.get_concept_obj(run_way)
+    run_concept = sue_plan.get_concept_obj(run_rope)
     assert len(run_concept.reasonunits) == 0
 
     # WHEN
     sue_plan.edit_concept_attr(
-        run_way,
-        reason_rcontext=casa_way,
+        run_rope,
+        reason_rcontext=casa_rope,
         reason_rconcept_active_requisite=True,
     )
 
     # THEN
     assert len(run_concept.reasonunits) == 1
-    reasonunit_casa = run_concept.reasonunits.get(casa_way)
-    assert reasonunit_casa.rcontext == casa_way
+    reasonunit_casa = run_concept.reasonunits.get(casa_rope)
+    assert reasonunit_casa.rcontext == casa_rope
     assert len(reasonunit_casa.premises) == 0
     assert reasonunit_casa.rconcept_active_requisite is True
 
     # WHEN
     sue_plan.edit_concept_attr(
-        run_way,
-        reason_rcontext=casa_way,
+        run_rope,
+        reason_rcontext=casa_rope,
         reason_rconcept_active_requisite=False,
     )
 
     # THEN
     assert len(run_concept.reasonunits) == 1
-    reasonunit_casa = run_concept.reasonunits.get(casa_way)
-    assert reasonunit_casa.rcontext == casa_way
+    reasonunit_casa = run_concept.reasonunits.get(casa_rope)
+    assert reasonunit_casa.rcontext == casa_rope
     assert len(reasonunit_casa.premises) == 0
     assert reasonunit_casa.rconcept_active_requisite is False
 
     # WHEN
     sue_plan.edit_concept_attr(
-        run_way,
-        reason_rcontext=casa_way,
+        run_rope,
+        reason_rcontext=casa_rope,
         reason_rconcept_active_requisite="Set to Ignore",
     )
 
     # THEN
     assert len(run_concept.reasonunits) == 1
-    reasonunit_casa = run_concept.reasonunits.get(casa_way)
-    assert reasonunit_casa.rcontext == casa_way
+    reasonunit_casa = run_concept.reasonunits.get(casa_rope)
+    assert reasonunit_casa.rcontext == casa_rope
     assert len(reasonunit_casa.premises) == 0
     assert reasonunit_casa.rconcept_active_requisite is None
 
@@ -570,43 +574,43 @@ def test_PlanUnit_ReasonUnits_ConceptUnit_active_InfluencesReasonUnitStatus():
     # 3. concept(...,wkdays,thursday) exists
     sue_plan = get_planunit_with_4_levels()
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     wkdays_str = "wkdays"
-    wkdays_way = sue_plan.make_l1_way(wkdays_str)
+    wkdays_rope = sue_plan.make_l1_rope(wkdays_str)
     wed_str = "Wednesday"
-    wed_way = sue_plan.make_way(wkdays_way, wed_str)
+    wed_rope = sue_plan.make_rope(wkdays_rope, wed_str)
     thu_str = "Thursday"
-    thu_way = sue_plan.make_way(wkdays_way, thu_str)
+    thu_rope = sue_plan.make_rope(wkdays_rope, thu_str)
 
     # 4. concept(...,casa) with
-    # 4.1 ReasonUnit: rcontext=wkdays_way, pstate=thu_way
+    # 4.1 ReasonUnit: rcontext=wkdays_rope, pstate=thu_rope
     # 4.2 .active = False
     sue_plan.edit_concept_attr(
-        casa_way,
-        reason_rcontext=wkdays_way,
-        reason_premise=thu_way,
+        casa_rope,
+        reason_rcontext=wkdays_rope,
+        reason_premise=thu_rope,
     )
     sue_plan.settle_plan()  # set tree metrics
-    casa_concept = sue_plan.get_concept_obj(casa_way)
+    casa_concept = sue_plan.get_concept_obj(casa_rope)
     assert casa_concept._active is False
 
     # 5. concept(...,run to casa) with
     # 5.1. ReasonUnit: concept(rcontext=...,casa) has .rconcept_active_requisite = True
     # 5.2. concept(...,casa).active = False
     run_str = "run to casa"
-    run_way = sue_plan.make_l1_way(run_str)
+    run_rope = sue_plan.make_l1_rope(run_str)
     sue_plan.set_concept(conceptunit_shop(run_str), sue_plan.vow_label)
     sue_plan.edit_concept_attr(
-        run_way,
-        reason_rcontext=casa_way,
+        run_rope,
+        reason_rcontext=casa_rope,
         reason_rconcept_active_requisite=True,
     )
-    run_concept = sue_plan.get_concept_obj(run_way)
+    run_concept = sue_plan.get_concept_obj(run_rope)
     sue_plan.settle_plan()
     assert run_concept._active is False
 
     # Fact: rcontext: (...,wkdays) fstate: (...,wkdays,wednesday)
-    sue_plan.add_fact(fcontext=wkdays_way, fstate=wed_way)
+    sue_plan.add_fact(fcontext=wkdays_rope, fstate=wed_rope)
     sue_plan.settle_plan()
 
     assert casa_concept._active is False
@@ -614,7 +618,7 @@ def test_PlanUnit_ReasonUnits_ConceptUnit_active_InfluencesReasonUnitStatus():
 
     # WHEN
     print("before changing fact")
-    sue_plan.add_fact(fcontext=wkdays_way, fstate=thu_way)
+    sue_plan.add_fact(fcontext=wkdays_rope, fstate=thu_rope)
     print("after changing fact")
     sue_plan.settle_plan()
     assert casa_concept._active is True

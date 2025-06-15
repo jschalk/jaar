@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from src.a00_data_toolbox.dict_toolbox import get_1_if_None, get_dict_from_json
-from src.a01_term_logic.term import AcctName, GroupTitle, default_bridge_if_None
+from src.a01_term_logic.term import AcctName, GroupTitle, default_knot_if_None
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import FundIota, default_fund_iota_if_None
 
@@ -181,7 +181,7 @@ def awardline_shop(awardee_title: GroupTitle, _fund_give: float, _fund_take: flo
 @dataclass
 class GroupUnit(GroupCore):
     _memberships: dict[AcctName, MemberShip] = None  # set by PlanUnit.set_acctunit()
-    bridge: str = None  # calculated by PlanUnit
+    knot: str = None  # calculated by PlanUnit
     # calculated by PlanUnit.settle_plan()
     _fund_give: float = None
     _fund_take: float = None
@@ -249,7 +249,7 @@ class GroupUnit(GroupCore):
 
 
 def groupunit_shop(
-    group_title: GroupTitle, bridge: str = None, fund_iota: FundIota = None
+    group_title: GroupTitle, knot: str = None, fund_iota: FundIota = None
 ) -> GroupUnit:
     return GroupUnit(
         group_title=group_title,
@@ -260,7 +260,7 @@ def groupunit_shop(
         _fund_agenda_take=0,
         _credor_pool=0,
         _debtor_pool=0,
-        bridge=default_bridge_if_None(bridge),
+        knot=default_knot_if_None(knot),
         fund_iota=default_fund_iota_if_None(fund_iota),
     )
     # x_groupunit.set_group_title(group_title=group_title)

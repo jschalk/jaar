@@ -85,10 +85,10 @@ def _add_vowunit_to_br00000_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    if x_vow.bridge == csv_delimiter:
-        x_bridge = f"""\"{str(x_vow.bridge)}\""""
+    if x_vow.knot == csv_delimiter:
+        x_knot = f"""\"{str(x_vow.knot)}\""""
     else:
-        x_bridge = x_vow.bridge
+        x_knot = x_vow.knot
 
     x_row = [
         if_none_str(face_name),
@@ -101,7 +101,7 @@ def _add_vowunit_to_br00000_csv(
         str(x_vow.fund_iota),
         str(x_vow.penny),
         str(x_vow.respect_bit),
-        x_bridge,
+        x_knot,
         str(x_vow.job_listen_rotations),
     ]
     x_csv += csv_delimiter.join(x_row)
@@ -277,7 +277,7 @@ def add_plan_to_br00022_csv(
                 if_none_str(event_int),
                 x_plan.vow_label,
                 x_plan.owner_name,
-                conceptunit.get_concept_way(),
+                conceptunit.get_concept_rope(),
                 awardlink.awardee_title,
                 if_none_str(awardlink.give_force),
                 if_none_str(awardlink.take_force),
@@ -300,7 +300,7 @@ def add_plan_to_br00023_csv(
             if_none_str(event_int),
             x_plan.vow_label,
             x_plan.owner_name,
-            x_plan.conceptroot.get_concept_way(),
+            x_plan.conceptroot.get_concept_rope(),
             factunit.fcontext,
             factunit.fstate,
             if_none_str(factunit.fopen),
@@ -325,7 +325,7 @@ def add_plan_to_br00024_csv(
                 if_none_str(event_int),
                 x_plan.vow_label,
                 x_plan.owner_name,
-                conceptunit.get_concept_way(),
+                conceptunit.get_concept_rope(),
                 group_title,
             ]
             x_csv += csv_delimiter.join(x_row)
@@ -347,7 +347,7 @@ def add_plan_to_br00025_csv(
                 if_none_str(event_int),
                 x_plan.vow_label,
                 x_plan.owner_name,
-                conceptunit.get_concept_way(),
+                conceptunit.get_concept_rope(),
                 group_title,
             ]
             x_csv += csv_delimiter.join(x_row)
@@ -370,7 +370,7 @@ def add_plan_to_br00026_csv(
                     if_none_str(event_int),
                     x_plan.vow_label,
                     x_plan.owner_name,
-                    conceptunit.get_concept_way(),
+                    conceptunit.get_concept_rope(),
                     reasonunit.rcontext,
                     premiseunit.pstate,
                     if_none_str(premiseunit.popen),
@@ -396,7 +396,7 @@ def add_plan_to_br00027_csv(
                 if_none_str(event_int),
                 x_plan.vow_label,
                 x_plan.owner_name,
-                conceptunit.get_concept_way(),
+                conceptunit.get_concept_rope(),
                 reasonunit.rcontext,
                 if_none_str(reasonunit.rconcept_active_requisite),
             ]
@@ -419,7 +419,7 @@ def add_plan_to_br00028_csv(
                 if_none_str(event_int),
                 x_plan.vow_label,
                 x_plan.owner_name,
-                conceptunit.get_concept_way(),
+                conceptunit.get_concept_rope(),
                 if_none_str(conceptunit.begin),
                 if_none_str(conceptunit.close),
                 if_none_str(conceptunit.addin),
@@ -504,9 +504,9 @@ def add_to_br00042_csv(x_csv: str, x_pidginunit: PidginUnit, csv_delimiter: str)
             x_pidginunit.face_name,
             str(x_pidginunit.event_int),
             x_otx,
-            x_pidginunit.otx_bridge,
+            x_pidginunit.otx_knot,
             x_inx,
-            x_pidginunit.inx_bridge,
+            x_pidginunit.inx_knot,
             x_pidginunit.unknown_str,
         ]
         x_csv += csv_delimiter.join(x_row)
@@ -520,9 +520,9 @@ def add_to_br00043_csv(x_csv: str, x_pidginunit: PidginUnit, csv_delimiter: str)
             x_pidginunit.face_name,
             str(x_pidginunit.event_int),
             x_otx,
-            x_pidginunit.otx_bridge,
+            x_pidginunit.otx_knot,
             x_inx,
-            x_pidginunit.inx_bridge,
+            x_pidginunit.inx_knot,
             x_pidginunit.unknown_str,
         ]
         x_csv += csv_delimiter.join(x_row)
@@ -536,9 +536,9 @@ def add_to_br00044_csv(x_csv: str, x_pidginunit: PidginUnit, csv_delimiter: str)
             x_pidginunit.face_name,
             str(x_pidginunit.event_int),
             x_otx,
-            x_pidginunit.otx_bridge,
+            x_pidginunit.otx_knot,
             x_inx,
-            x_pidginunit.inx_bridge,
+            x_pidginunit.inx_knot,
             x_pidginunit.unknown_str,
         ]
         x_csv += csv_delimiter.join(x_row)
@@ -547,14 +547,14 @@ def add_to_br00044_csv(x_csv: str, x_pidginunit: PidginUnit, csv_delimiter: str)
 
 
 def add_to_br00045_csv(x_csv: str, x_pidginunit: PidginUnit, csv_delimiter: str) -> str:
-    for x_otx, x_inx in x_pidginunit.waymap.otx2inx.items():
+    for x_otx, x_inx in x_pidginunit.ropemap.otx2inx.items():
         x_row = [
             x_pidginunit.face_name,
             str(x_pidginunit.event_int),
             x_otx,
-            x_pidginunit.otx_bridge,
+            x_pidginunit.otx_knot,
             x_inx,
-            x_pidginunit.inx_bridge,
+            x_pidginunit.inx_knot,
             x_pidginunit.unknown_str,
         ]
         x_csv += csv_delimiter.join(x_row)
@@ -628,7 +628,7 @@ def add_pack_to_br00022_csv(
                 str(x_packunit.event_int),
                 x_packunit.vow_label,
                 x_packunit.owner_name,
-                planatom.jkeys.get("concept_way"),
+                planatom.jkeys.get("concept_rope"),
                 planatom.jkeys.get("awardee_title"),
                 if_none_str(planatom.jvalues.get("give_force")),
                 if_none_str(planatom.jvalues.get("take_force")),
@@ -648,7 +648,7 @@ def add_pack_to_br00023_csv(
                 str(x_packunit.event_int),
                 x_packunit.vow_label,
                 x_packunit.owner_name,
-                planatom.jkeys.get("concept_way"),
+                planatom.jkeys.get("concept_rope"),
                 planatom.jkeys.get("fcontext"),
                 if_none_str(planatom.jvalues.get("fstate")),
                 if_none_str(planatom.jvalues.get("fopen")),
@@ -669,7 +669,7 @@ def add_pack_to_br00024_csv(
                 str(x_packunit.event_int),
                 x_packunit.vow_label,
                 x_packunit.owner_name,
-                planatom.jkeys.get("concept_way"),
+                planatom.jkeys.get("concept_rope"),
                 planatom.jkeys.get("labor_title"),
             ]
             x_csv += csv_delimiter.join(x_row)
@@ -687,7 +687,7 @@ def add_pack_to_br00025_csv(
                 str(x_packunit.event_int),
                 x_packunit.vow_label,
                 x_packunit.owner_name,
-                planatom.jkeys.get("concept_way"),
+                planatom.jkeys.get("concept_rope"),
                 planatom.jkeys.get("healer_name"),
             ]
             x_csv += csv_delimiter.join(x_row)
@@ -705,7 +705,7 @@ def add_pack_to_br00026_csv(
                 str(x_packunit.event_int),
                 x_packunit.vow_label,
                 x_packunit.owner_name,
-                planatom.jkeys.get("concept_way"),
+                planatom.jkeys.get("concept_rope"),
                 planatom.jkeys.get("rcontext"),
                 planatom.jkeys.get("pstate"),
                 if_none_str(planatom.jvalues.get("popen")),
@@ -727,7 +727,7 @@ def add_pack_to_br00027_csv(
                 str(x_packunit.event_int),
                 x_packunit.vow_label,
                 x_packunit.owner_name,
-                planatom.jkeys.get("concept_way"),
+                planatom.jkeys.get("concept_rope"),
                 planatom.jkeys.get("rcontext"),
                 if_none_str(planatom.jvalues.get("rconcept_active_requisite")),
             ]
@@ -746,7 +746,7 @@ def add_pack_to_br00028_csv(
                 str(x_packunit.event_int),
                 x_packunit.vow_label,
                 x_packunit.owner_name,
-                planatom.jkeys.get("concept_way"),
+                planatom.jkeys.get("concept_rope"),
                 if_none_str(planatom.jvalues.get("begin")),
                 if_none_str(planatom.jvalues.get("close")),
                 if_none_str(planatom.jvalues.get("addin")),

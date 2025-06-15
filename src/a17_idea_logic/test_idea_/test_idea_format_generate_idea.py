@@ -1,8 +1,8 @@
-from src.a01_term_logic.way import to_way
+from src.a01_term_logic.rope import to_rope
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
-    concept_way_str,
+    concept_rope_str,
     credit_score_str,
     credit_vote_str,
     debt_score_str,
@@ -150,12 +150,12 @@ def test_make_plandelta_Arg_idea_format_00013_conceptunit_v0_0_0():
     accord_vow_label = "accord56"
     sue_planunit = planunit_shop(sue_str, accord_vow_label)
     casa_str = "casa"
-    casa_way = sue_planunit.make_l1_way(casa_str)
+    casa_rope = sue_planunit.make_l1_rope(casa_str)
     casa_mass = 31
     sue_planunit.set_l1_concept(conceptunit_shop(casa_str, mass=casa_mass))
     clean_str = "clean"
-    clean_way = sue_planunit.make_way(casa_way, clean_str)
-    sue_planunit.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
+    clean_rope = sue_planunit.make_rope(casa_rope, clean_str)
+    sue_planunit.set_concept(conceptunit_shop(clean_str, task=True), casa_rope)
     x_idea_name = idea_format_00013_conceptunit_v0_0_0()
     conceptunit_dataframe = create_idea_df(sue_planunit, x_idea_name)
     conceptunit_csv = conceptunit_dataframe.to_csv(index=False)
@@ -165,13 +165,13 @@ def test_make_plandelta_Arg_idea_format_00013_conceptunit_v0_0_0():
 
     # THEN
     casa_planatom = planatom_shop(plan_conceptunit_str(), INSERT_str())
-    casa_planatom.set_arg(concept_way_str(), casa_way)
+    casa_planatom.set_arg(concept_rope_str(), casa_rope)
     casa_planatom.set_arg(task_str(), False)
     casa_planatom.set_arg(mass_str(), casa_mass)
     print(f"{casa_planatom=}")
     assert casa_planatom.get_value(mass_str()) == casa_mass
     clean_planatom = planatom_shop(plan_conceptunit_str(), INSERT_str())
-    clean_planatom.set_arg(concept_way_str(), clean_way)
+    clean_planatom.set_arg(concept_rope_str(), clean_rope)
     clean_planatom.set_arg(task_str(), True)
     clean_planatom.set_arg(mass_str(), 1)
     assert conceptunit_changunit.planatom_exists(casa_planatom)
@@ -203,12 +203,12 @@ def test_make_plandelta_Arg_idea_format_00013_conceptunit_v0_0_0():
     accord_vow_label = "accord56"
     sue_planunit = planunit_shop(sue_str, accord_vow_label)
     casa_str = "casa"
-    casa_way = sue_planunit.make_l1_way(casa_str)
+    casa_rope = sue_planunit.make_l1_rope(casa_str)
     casa_mass = 31
     sue_planunit.set_l1_concept(conceptunit_shop(casa_str, mass=casa_mass))
     clean_str = "clean"
-    clean_way = sue_planunit.make_way(casa_way, clean_str)
-    sue_planunit.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
+    clean_rope = sue_planunit.make_rope(casa_rope, clean_str)
+    sue_planunit.set_concept(conceptunit_shop(clean_str, task=True), casa_rope)
     x_idea_name = idea_format_00013_conceptunit_v0_0_0()
     conceptunit_dataframe = create_idea_df(sue_planunit, x_idea_name)
     conceptunit_csv = conceptunit_dataframe.to_csv(index=False)
@@ -218,13 +218,13 @@ def test_make_plandelta_Arg_idea_format_00013_conceptunit_v0_0_0():
 
     # THEN
     casa_planatom = planatom_shop(plan_conceptunit_str(), INSERT_str())
-    casa_planatom.set_arg(concept_way_str(), casa_way)
+    casa_planatom.set_arg(concept_rope_str(), casa_rope)
     casa_planatom.set_arg(task_str(), False)
     casa_planatom.set_arg(mass_str(), casa_mass)
     print(f"{casa_planatom=}")
     assert casa_planatom.get_value(mass_str()) == casa_mass
     clean_planatom = planatom_shop(plan_conceptunit_str(), INSERT_str())
-    clean_planatom.set_arg(concept_way_str(), clean_way)
+    clean_planatom.set_arg(concept_rope_str(), clean_rope)
     clean_planatom.set_arg(task_str(), True)
     clean_planatom.set_arg(mass_str(), 1)
     assert conceptunit_changunit.planatom_exists(casa_planatom)

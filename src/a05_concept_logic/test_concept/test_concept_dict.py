@@ -1,4 +1,4 @@
-from src.a01_term_logic.way import create_way
+from src.a01_term_logic.rope import create_rope
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import (
     factunit_shop,
@@ -69,28 +69,28 @@ def test_get_obj_from_concept_dict_ReturnsCorrect_HealerLink():
 def test_ConceptUnit_get_dict_ReturnsCorrectCompleteDict():
     # ESTABLISH
     wk_str = "wkdays"
-    wk_way = create_way(root_label(), wk_str)
+    wk_rope = create_rope(root_label(), wk_str)
     wed_str = "Wednesday"
-    wed_way = create_way(wk_way, wed_str)
+    wed_rope = create_rope(wk_rope, wed_str)
     nation_str = "nation"
-    nation_way = create_way(root_label(), nation_str)
+    nation_rope = create_rope(root_label(), nation_str)
     usa_str = "USA"
-    usa_way = create_way(nation_way, usa_str)
+    usa_rope = create_rope(nation_rope, usa_str)
 
-    wed_premise = premiseunit_shop(pstate=wed_way)
+    wed_premise = premiseunit_shop(pstate=wed_rope)
     wed_premise._status = True
-    usa_premise = premiseunit_shop(pstate=usa_way)
+    usa_premise = premiseunit_shop(pstate=usa_rope)
     usa_premise._status = False
 
     x1_reasonunits = {
-        wk_way: reasonunit_shop(wk_way, premises={wed_premise.pstate: wed_premise}),
-        nation_way: reasonunit_shop(nation_way, {usa_premise.pstate: usa_premise}),
+        wk_rope: reasonunit_shop(wk_rope, premises={wed_premise.pstate: wed_premise}),
+        nation_rope: reasonunit_shop(nation_rope, {usa_premise.pstate: usa_premise}),
     }
     wed_premises = {wed_premise.pstate: wed_premise}
     usa_premises = {usa_premise.pstate: usa_premise}
     x1_reasonheirs = {
-        wk_way: reasonheir_shop(wk_way, wed_premises, _status=True),
-        nation_way: reasonheir_shop(nation_way, usa_premises, _status=False),
+        wk_rope: reasonheir_shop(wk_rope, wed_premises, _status=True),
+        nation_rope: reasonheir_shop(nation_rope, usa_premises, _status=False),
     }
     biker_awardee_title = "bikers"
     biker_give_force = 3.0
@@ -129,10 +129,10 @@ def test_ConceptUnit_get_dict_ReturnsCorrectCompleteDict():
     sue_laborunit = laborunit_shop({sue_str: -1, yao_str: -1})
     yao_healerlink = healerlink_shop({yao_str})
     casa_str = "casa"
-    casa_way = create_way(root_label(), casa_str)
+    casa_rope = create_rope(root_label(), casa_str)
     x_problem_bool = True
     casa_concept = conceptunit_shop(
-        parent_way=casa_way,
+        parent_rope=casa_rope,
         _kids=None,
         awardlinks=biker_and_flyer_awardlinks,
         mass=30,
@@ -146,7 +146,7 @@ def test_ConceptUnit_get_dict_ReturnsCorrectCompleteDict():
         task=True,
         problem_bool=x_problem_bool,
     )
-    x_factunit = factunit_shop(fcontext=wk_way, fstate=wk_way, fopen=5, fnigh=59)
+    x_factunit = factunit_shop(fcontext=wk_rope, fstate=wk_rope, fopen=5, fnigh=59)
     casa_concept.set_factunit(factunit=x_factunit)
     x_begin = 11
     x_close = 12
@@ -217,8 +217,8 @@ def test_ConceptUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     ignore_str = "ignore"
 
     a_str = "a"
-    a_way = create_way(root_label(), a_str)
-    casa_concept.set_factunit(factunit_shop(a_way, a_way))
+    a_rope = create_rope(root_label(), a_str)
+    casa_concept.set_factunit(factunit_shop(a_rope, a_rope))
 
     yao_str = "Yao"
     casa_concept.set_awardlink(awardlink_shop(yao_str))

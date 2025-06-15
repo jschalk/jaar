@@ -35,7 +35,7 @@ def test_ConceptAttrHolder_Exists():
 
 def test_ConceptAttrHolder_CorrectlyCalculatesPremiseRanges():
     # ESTABLISH
-    concept_attr = ConceptAttrHolder(reason_premise="some_way")
+    concept_attr = ConceptAttrHolder(reason_premise="some_rope")
     assert concept_attr.popen is None
     assert concept_attr.reason_pnigh is None
     # assert concept_attr.reason_premise_numor is None

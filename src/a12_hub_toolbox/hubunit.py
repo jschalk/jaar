@@ -18,14 +18,18 @@ from src.a00_data_toolbox.file_toolbox import (
     save_json,
     set_dir,
 )
+from src.a01_term_logic.rope import (
+    get_all_rope_labels,
+    rebuild_rope,
+    validate_labelterm,
+)
 from src.a01_term_logic.term import (
     LabelTerm,
     OwnerName,
+    RopeTerm,
     VowLabel,
-    WayTerm,
-    default_bridge_if_None,
+    default_knot_if_None,
 )
-from src.a01_term_logic.way import get_all_way_labels, rebuild_way, validate_labelterm
 from src.a02_finance_logic.finance_config import (
     default_fund_iota_if_None,
     default_money_magnitude_if_None,
@@ -74,11 +78,11 @@ class PackFileMissingException(Exception):
     pass
 
 
-class get_keep_waysException(Exception):
+class get_keep_ropesException(Exception):
     pass
 
 
-class _keep_wayMissingException(Exception):
+class _keep_ropeMissingException(Exception):
     pass
 
 
@@ -99,8 +103,8 @@ class HubUnit:
     owner_name: OwnerName = None
     vow_mstr_dir: str = None
     vow_label: str = None
-    keep_way: WayTerm = None
-    bridge: str = None
+    keep_rope: RopeTerm = None
+    knot: str = None
     fund_pool: float = None
     fund_iota: float = None
     respect_bit: float = None
@@ -122,7 +126,7 @@ class HubUnit:
         x_planunit = planunit_shop(
             owner_name=self.owner_name,
             vow_label=self.vow_label,
-            bridge=self.bridge,
+            knot=self.knot,
             fund_pool=self.fund_pool,
             fund_iota=self.fund_iota,
             respect_bit=self.respect_bit,
@@ -324,11 +328,11 @@ class HubUnit:
 
     # keep management
     def keep_dir(self) -> str:
-        if self.keep_way is None:
-            raise _keep_wayMissingException(
-                f"HubUnit '{self.owner_name}' cannot save to keep_dir because it does not have keep_way."
+        if self.keep_rope is None:
+            raise _keep_ropeMissingException(
+                f"HubUnit '{self.owner_name}' cannot save to keep_dir because it does not have keep_rope."
             )
-        return get_keep_path(self, self.keep_way)
+        return get_keep_path(self, self.keep_rope)
 
     def create_keep_dir_if_missing(self):
         set_dir(self.keep_dir())
@@ -416,8 +420,8 @@ class HubUnit:
             vow_mstr_dir=self.vow_mstr_dir,
             vow_label=self.vow_label,
             owner_name=healer_name,
-            keep_way=self.keep_way,
-            bridge=self.bridge,
+            keep_rope=self.keep_rope,
+            knot=self.knot,
             respect_bit=self.respect_bit,
         )
         return speaker_hubunit.get_vision_plan(speaker_id)
@@ -428,27 +432,27 @@ class HubUnit:
         speaker_vision = self.rj_speaker_plan(healer_name, speaker_id)
         return self.get_perspective_plan(speaker_vision)
 
-    def get_keep_ways(self) -> set[WayTerm]:
+    def get_keep_ropes(self) -> set[RopeTerm]:
         x_gut_plan = open_gut_file(self.vow_mstr_dir, self.vow_label, self.owner_name)
         x_gut_plan.settle_plan()
         if x_gut_plan._keeps_justified is False:
-            x_str = f"Cannot get_keep_ways from '{self.owner_name}' gut plan because 'PlanUnit._keeps_justified' is False."
-            raise get_keep_waysException(x_str)
+            x_str = f"Cannot get_keep_ropes from '{self.owner_name}' gut plan because 'PlanUnit._keeps_justified' is False."
+            raise get_keep_ropesException(x_str)
         if x_gut_plan._keeps_buildable is False:
-            x_str = f"Cannot get_keep_ways from '{self.owner_name}' gut plan because 'PlanUnit._keeps_buildable' is False."
-            raise get_keep_waysException(x_str)
+            x_str = f"Cannot get_keep_ropes from '{self.owner_name}' gut plan because 'PlanUnit._keeps_buildable' is False."
+            raise get_keep_ropesException(x_str)
         owner_healer_dict = x_gut_plan._healers_dict.get(self.owner_name)
         if owner_healer_dict is None:
             return get_empty_set_if_None()
-        keep_ways = x_gut_plan._healers_dict.get(self.owner_name).keys()
-        return get_empty_set_if_None(keep_ways)
+        keep_ropes = x_gut_plan._healers_dict.get(self.owner_name).keys()
+        return get_empty_set_if_None(keep_ropes)
 
     def save_all_gut_dutys(self):
         gut = open_gut_file(self.vow_mstr_dir, self.vow_label, self.owner_name)
-        for x_keep_way in self.get_keep_ways():
-            self.keep_way = x_keep_way
+        for x_keep_rope in self.get_keep_ropes():
+            self.keep_rope = x_keep_rope
             self.save_duty_plan(gut)
-        self.keep_way = None
+        self.keep_rope = None
 
     def create_treasury_db_file(self) -> None:
         self.create_keep_dir_if_missing()
@@ -460,27 +464,27 @@ class HubUnit:
         return os_path_exists(self.treasury_db_path())
 
     def treasury_db_file_conn(self) -> Connection:
-        if self.keep_way is None:
-            raise _keep_wayMissingException(
-                f"hubunit cannot connect to treasury_db_file because keep_way is {self.keep_way}"
+        if self.keep_rope is None:
+            raise _keep_ropeMissingException(
+                f"hubunit cannot connect to treasury_db_file because keep_rope is {self.keep_rope}"
             )
         if self.treasury_db_file_exists() is False:
             self.create_treasury_db_file()
         return sqlite_connection(self.treasury_db_path())
 
     def create_gut_treasury_db_files(self):
-        for x_keep_way in self.get_keep_ways():
-            self.keep_way = x_keep_way
+        for x_keep_rope in self.get_keep_ropes():
+            self.keep_rope = x_keep_rope
             self.create_treasury_db_file()
-        self.keep_way = None
+        self.keep_rope = None
 
 
 def hubunit_shop(
     vow_mstr_dir: str,
     vow_label: VowLabel,
     owner_name: OwnerName = None,
-    keep_way: WayTerm = None,
-    bridge: str = None,
+    keep_rope: RopeTerm = None,
+    knot: str = None,
     fund_pool: float = None,
     fund_iota: float = None,
     respect_bit: float = None,
@@ -490,9 +494,9 @@ def hubunit_shop(
     x_hubunit = HubUnit(
         vow_mstr_dir=vow_mstr_dir,
         vow_label=vow_label,
-        owner_name=validate_labelterm(owner_name, bridge),
-        keep_way=keep_way,
-        bridge=default_bridge_if_None(bridge),
+        owner_name=validate_labelterm(owner_name, knot),
+        keep_rope=keep_rope,
+        knot=default_knot_if_None(knot),
         fund_pool=validate_fund_pool(fund_pool),
         fund_iota=default_fund_iota_if_None(fund_iota),
         respect_bit=default_RespectBit_if_None(respect_bit),
@@ -503,9 +507,9 @@ def hubunit_shop(
     return x_hubunit
 
 
-def get_keep_path(x_hubunit: HubUnit, x_way: LabelTerm) -> str:
+def get_keep_path(x_hubunit: HubUnit, x_rope: LabelTerm) -> str:
     keep_root = "conceptroot"
-    x_way = rebuild_way(x_way, x_hubunit.vow_label, keep_root)
-    x_list = get_all_way_labels(x_way, x_hubunit.bridge)
+    x_rope = rebuild_rope(x_rope, x_hubunit.vow_label, keep_root)
+    x_list = get_all_rope_labels(x_rope, x_hubunit.knot)
     keep_sub_path = get_directory_path(x_list=[*x_list])
     return create_path(x_hubunit._keeps_dir, keep_sub_path)

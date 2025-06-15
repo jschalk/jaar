@@ -7,7 +7,7 @@ from src.a06_plan_logic._test_util.a06_str import (
     begin_str,
     close_str,
     concept_label_str,
-    concept_way_str,
+    concept_rope_str,
     debt_score_str,
     debt_vote_str,
     denom_str,
@@ -20,7 +20,7 @@ from src.a06_plan_logic._test_util.a06_str import (
     mass_str,
     morph_str,
     numor_str,
-    parent_way_str,
+    parent_rope_str,
     plan_acct_membership_str,
     plan_acctunit_str,
     plan_concept_awardlink_str,
@@ -51,10 +51,10 @@ def test_sift_atom_ReturnsNoneIfGivenPlanAtomIsUPDATE():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
-    sue_plan.add_concept(casa_way)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
+    sue_plan.add_concept(casa_rope)
     casa_atom = planatom_shop(plan_conceptunit_str(), UPDATE_str())
-    casa_atom.set_arg(parent_way_str(), sue_plan.vow_label)
+    casa_atom.set_arg(parent_rope_str(), sue_plan.vow_label)
     casa_atom.set_arg(concept_label_str(), casa_str)
     casa_atom.set_arg(mass_str(), 8)
     # THEN
@@ -156,8 +156,8 @@ def test_sift_atom_ReturnsObj_PlanAtom_UPDATE_plan_conceptunit():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
-    sue_plan.add_concept(casa_way)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
+    sue_plan.add_concept(casa_rope)
 
     sue_addin = 23
     sue_begin = 37
@@ -171,7 +171,7 @@ def test_sift_atom_ReturnsObj_PlanAtom_UPDATE_plan_conceptunit():
     sue_problem_bool = True
     sue_stop_want = 107
     old_casa_atom = planatom_shop(plan_conceptunit_str(), INSERT_str())
-    old_casa_atom.set_arg(concept_way_str(), casa_way)
+    old_casa_atom.set_arg(concept_rope_str(), casa_rope)
     old_casa_atom.set_arg(addin_str(), sue_addin)
     old_casa_atom.set_arg(begin_str(), sue_begin)
     old_casa_atom.set_arg(close_str(), sue_close)
@@ -208,15 +208,15 @@ def test_sift_atom_ReturnsObj_PlanAtom_UPDATE_plan_concept_awardlink():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
-    sue_plan.add_concept(casa_way)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
+    sue_plan.add_concept(casa_rope)
     run_str = ";run"
     zia_run_give_force = 72
     zia_run_take_force = 76
-    sue_plan.get_concept_obj(casa_way).set_awardlink(awardlink_shop(run_str, 2, 3))
+    sue_plan.get_concept_obj(casa_rope).set_awardlink(awardlink_shop(run_str, 2, 3))
 
     zia_atom = planatom_shop(plan_concept_awardlink_str(), INSERT_str())
-    zia_atom.set_arg(concept_way_str(), casa_way)
+    zia_atom.set_arg(concept_rope_str(), casa_rope)
     zia_atom.set_arg(awardee_title_str(), run_str)
     zia_atom.set_arg(give_force_str(), zia_run_give_force)
     zia_atom.set_arg(take_force_str(), zia_run_take_force)
@@ -237,16 +237,16 @@ def test_sift_atom_ReturnsObj_PlanAtom_UPDATE_plan_concept_reasonunit():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     week_str = "week"
-    week_way = sue_plan.make_l1_way(casa_str)
-    sue_plan.add_concept(casa_way)
-    sue_plan.get_concept_obj(casa_way).set_reasonunit(reasonunit_shop(week_way))
+    week_rope = sue_plan.make_l1_rope(casa_str)
+    sue_plan.add_concept(casa_rope)
+    sue_plan.get_concept_obj(casa_rope).set_reasonunit(reasonunit_shop(week_rope))
 
     new_rconcept_active_requisite = True
     casa_atom = planatom_shop(plan_concept_reasonunit_str(), INSERT_str())
-    casa_atom.set_arg(concept_way_str(), casa_way)
-    casa_atom.set_arg(rcontext_str(), week_way)
+    casa_atom.set_arg(concept_rope_str(), casa_rope)
+    casa_atom.set_arg(rcontext_str(), week_rope)
     casa_atom.set_arg(rconcept_active_requisite_str(), new_rconcept_active_requisite)
     casa_jkeys = casa_atom.get_jkeys_dict()
     casa_reasonunit = plan_concept_reasonunit_get_obj(sue_plan, casa_jkeys)
@@ -269,24 +269,24 @@ def test_sift_atom_ReturnsObj_PlanAtom_UPDATE_plan_concept_reason_premiseunit():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_way = sue_plan.make_way(casa_way, clean_str)
+    clean_rope = sue_plan.make_rope(casa_rope, clean_str)
     week_str = "week"
-    week_way = sue_plan.make_l1_way(week_str)
+    week_rope = sue_plan.make_l1_rope(week_str)
     thur_str = "thur"
-    thur_way = sue_plan.make_way(week_way, thur_str)
-    sue_plan.add_concept(clean_way)
-    sue_plan.get_concept_obj(casa_way).set_reasonunit(reasonunit_shop(week_way))
-    clean_concept = sue_plan.get_concept_obj(clean_way)
-    clean_concept.set_reasonunit(reasonunit_shop(week_way))
-    clean_concept.get_reasonunit(week_way).set_premise(thur_way)
+    thur_rope = sue_plan.make_rope(week_rope, thur_str)
+    sue_plan.add_concept(clean_rope)
+    sue_plan.get_concept_obj(casa_rope).set_reasonunit(reasonunit_shop(week_rope))
+    clean_concept = sue_plan.get_concept_obj(clean_rope)
+    clean_concept.set_reasonunit(reasonunit_shop(week_rope))
+    clean_concept.get_reasonunit(week_rope).set_premise(thur_rope)
 
     thur_pdivisor = 39
     thur_atom = planatom_shop(plan_concept_reason_premiseunit_str(), INSERT_str())
-    thur_atom.set_arg(concept_way_str(), clean_way)
-    thur_atom.set_arg(rcontext_str(), week_way)
-    thur_atom.set_arg("pstate", thur_way)
+    thur_atom.set_arg(concept_rope_str(), clean_rope)
+    thur_atom.set_arg(rcontext_str(), week_rope)
+    thur_atom.set_arg("pstate", thur_rope)
     assert thur_atom.is_valid()
     thur_atom.set_arg("pdivisor", thur_pdivisor)
     thur_jkeys = thur_atom.get_jkeys_dict()
@@ -309,16 +309,16 @@ def test_sift_atom_ReturnsObj_PlanAtom_UPDATE_plan_concept_factunit():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     week_str = "week"
-    week_way = sue_plan.make_l1_way(casa_str)
-    sue_plan.add_concept(casa_way)
-    sue_plan.get_concept_obj(casa_way).set_factunit(factunit_shop(week_way))
+    week_rope = sue_plan.make_l1_rope(casa_str)
+    sue_plan.add_concept(casa_rope)
+    sue_plan.get_concept_obj(casa_rope).set_factunit(factunit_shop(week_rope))
 
     casa_fopen = 32
     casa_atom = planatom_shop(plan_concept_factunit_str(), INSERT_str())
-    casa_atom.set_arg(concept_way_str(), casa_way)
-    casa_atom.set_arg(fcontext_str(), week_way)
+    casa_atom.set_arg(concept_rope_str(), casa_rope)
+    casa_atom.set_arg(fcontext_str(), week_rope)
     casa_atom.set_arg(fopen_str(), casa_fopen)
     casa_jkeys = casa_atom.get_jkeys_dict()
     casa_factunit = plan_concept_factunit_get_obj(sue_plan, casa_jkeys)

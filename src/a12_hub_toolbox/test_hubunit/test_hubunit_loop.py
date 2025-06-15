@@ -1,4 +1,4 @@
-from src.a01_term_logic.way import create_way
+from src.a01_term_logic.rope import create_rope
 from src.a06_plan_logic._test_util.example_plans import get_planunit_with_4_levels
 from src.a12_hub_toolbox._test_util.a12_env import (
     env_dir_setup_cleanup,
@@ -57,8 +57,8 @@ def test_HubUnit_rj_perspective_plan_ReturnsPlanWith_owner_nameSetToHubUnit_owne
 ):
     # ESTABLISH
     nation_str = "nation"
-    nation_way = create_way("accord23", nation_str)
-    iowa_way = create_way(nation_way, "Iowa")
+    nation_rope = create_rope("accord23", nation_str)
+    iowa_rope = create_rope(nation_rope, "Iowa")
     a23_str = "accord23"
 
     bob_str = "Bob"
@@ -66,11 +66,11 @@ def test_HubUnit_rj_perspective_plan_ReturnsPlanWith_owner_nameSetToHubUnit_owne
     yao_planunit = get_planunit_with_4_levels()
     yao_planunit.set_owner_name(yao_str)
 
-    bob_iowa_hubunit = hubunit_shop(env_dir(), a23_str, bob_str, iowa_way)
+    bob_iowa_hubunit = hubunit_shop(env_dir(), a23_str, bob_str, iowa_rope)
     bob_iowa_hubunit.save_vision_plan(yao_planunit)
 
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, iowa_way)
+    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, iowa_rope)
 
     # WHEN
     perspective_planunit = sue_hubunit.rj_perspective_plan(bob_str, yao_str)

@@ -88,9 +88,9 @@ def test_VowUnit_rotate_job_ReturnsObj_Scenario3_job_ChangesFromRotation(
     init_yao_job = planunit_shop(yao_str, a23_str)
     init_yao_job.add_acctunit(bob_str)
     init_bob_job = planunit_shop(bob_str, a23_str)
-    casa_way = init_bob_job.make_l1_way("casa")
-    clean_way = init_bob_job.make_way(casa_way, "clean")
-    init_bob_job.add_concept(clean_way, task=True)
+    casa_rope = init_bob_job.make_l1_rope("casa")
+    clean_rope = init_bob_job.make_rope(casa_rope, "clean")
+    init_bob_job.add_concept(clean_rope, task=True)
     save_job_file(vow_mstr_dir, init_sue_job)
     save_job_file(vow_mstr_dir, init_yao_job)
     save_job_file(vow_mstr_dir, init_bob_job)
@@ -120,9 +120,9 @@ def test_VowUnit_rotate_job_ReturnsObj_Scenario4_job_SelfReferenceWorks(
     init_sue_job.add_acctunit(yao_str)
     init_yao_job = planunit_shop(yao_str, a23_str)
     init_yao_job.add_acctunit(bob_str)
-    casa_way = init_bob_job.make_l1_way("casa")
-    clean_way = init_bob_job.make_way(casa_way, "clean")
-    init_bob_job.add_concept(clean_way, task=True)
+    casa_rope = init_bob_job.make_l1_rope("casa")
+    clean_rope = init_bob_job.make_rope(casa_rope, "clean")
+    init_bob_job.add_concept(clean_rope, task=True)
     save_job_file(vow_mstr_dir, init_sue_job)
     save_job_file(vow_mstr_dir, init_yao_job)
     save_job_file(vow_mstr_dir, init_bob_job)
@@ -179,12 +179,12 @@ def test_VowUnit_rotate_job_ReturnsObj_Scenario4_job_SelfReferenceWorks(
 #     bob_gut_plan.add_acctunit(bob_str)
 #     bob_gut_plan.set_acct_respect(100)
 #     texas_str = "Texas"
-#     texas_way = bob_gut_plan.make_l1_way(texas_str)
+#     texas_rope = bob_gut_plan.make_l1_rope(texas_str)
 #     elpaso_str = "el paso"
-#     elpaso_way = bob_gut_plan.make_way(texas_way, elpaso_str)
+#     elpaso_rope = bob_gut_plan.make_rope(texas_rope, elpaso_str)
 #     elpaso_concept = conceptunit_shop(elpaso_str, healerlink=healerlink_shop({bob_str}))
 #     bob_gut_plan.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
-#     bob_gut_plan.set_concept(elpaso_concept, texas_way)
+#     bob_gut_plan.set_concept(elpaso_concept, texas_rope)
 #     save_gut_file(a23_vow.vow_mstr_dir, bob_gut_plan)
 
 #     after_bob_job = a23_vow.rotate_job(bob_str)
@@ -256,13 +256,13 @@ def test_VowUnit_rotate_job_ReturnsObj_Scenario4_job_SelfReferenceWorks(
 #     a23_vow = vowunit_shop(a23_str, vow_mstr_dir)
 #     sue_str = "Sue"
 #     sue_plan = planunit_shop(sue_str, a23_str)
-#     casa_way = sue_plan.make_l1_way("casa")
-#     dirty_way = sue_plan.make_way(casa_way, "dirty")
-#     mop_way = sue_plan.make_way(casa_way, "mop")
-#     sue_plan.add_concept(mop_way, task=True)
-#     sue_plan.add_concept(dirty_way)
-#     sue_plan.edit_reason(mop_way, casa_way, dirty_way)
-#     sue_plan.add_fact(casa_way, dirty_way)
+#     casa_rope = sue_plan.make_l1_rope("casa")
+#     dirty_rope = sue_plan.make_rope(casa_rope, "dirty")
+#     mop_rope = sue_plan.make_rope(casa_rope, "mop")
+#     sue_plan.add_concept(mop_rope, task=True)
+#     sue_plan.add_concept(dirty_rope)
+#     sue_plan.edit_reason(mop_rope, casa_rope, dirty_rope)
+#     sue_plan.add_fact(casa_rope, dirty_rope)
 #     save_gut_file(vow_mstr_dir, sue_plan)
 #     sue_gut = open_gut_file(vow_mstr_dir, a23_str, sue_str)
 #     assert len(sue_gut.get_acctunits_dict()) == 0
@@ -272,10 +272,10 @@ def test_VowUnit_rotate_job_ReturnsObj_Scenario4_job_SelfReferenceWorks(
 
 #     # THEN
 #     expected_job = planunit_shop(sue_str, a23_str)
-#     expected_job.add_concept(mop_way, task=True)
-#     expected_job.add_concept(dirty_way)
-#     expected_job.edit_reason(mop_way, casa_way, dirty_way)
-#     expected_job.add_fact(casa_way, dirty_way)
+#     expected_job.add_concept(mop_rope, task=True)
+#     expected_job.add_concept(dirty_rope)
+#     expected_job.edit_reason(mop_rope, casa_rope, dirty_rope)
+#     expected_job.add_fact(casa_rope, dirty_rope)
 #     assert sue_job.vow_label == expected_job.vow_label
 #     assert sue_job.owner_name == expected_job.owner_name
 #     assert sue_job.get_agenda_dict() == expected_job.get_agenda_dict()
@@ -291,14 +291,14 @@ def test_VowUnit_rotate_job_ReturnsObj_Scenario4_job_SelfReferenceWorks(
 #     a23_vow = vowunit_shop(a23_str, vow_mstr_dir)
 #     sue_str = "Sue"
 #     sue_plan = planunit_shop(sue_str, a23_str)
-#     casa_way = sue_plan.make_l1_way("casa")
-#     clean_way = sue_plan.make_way(casa_way, "clean")
-#     dirty_way = sue_plan.make_way(casa_way, "dirty")
-#     mop_way = sue_plan.make_way(casa_way, "mop")
-#     sue_plan.add_concept(mop_way, task=True)
-#     sue_plan.add_concept(dirty_way)
-#     sue_plan.edit_reason(mop_way, casa_way, dirty_way)
-#     sue_plan.add_fact(casa_way, clean_way, create_missing_concepts=True)
+#     casa_rope = sue_plan.make_l1_rope("casa")
+#     clean_rope = sue_plan.make_rope(casa_rope, "clean")
+#     dirty_rope = sue_plan.make_rope(casa_rope, "dirty")
+#     mop_rope = sue_plan.make_rope(casa_rope, "mop")
+#     sue_plan.add_concept(mop_rope, task=True)
+#     sue_plan.add_concept(dirty_rope)
+#     sue_plan.edit_reason(mop_rope, casa_rope, dirty_rope)
+#     sue_plan.add_fact(casa_rope, clean_rope, create_missing_concepts=True)
 #     save_gut_file(vow_mstr_dir, sue_plan)
 #     sue_gut = open_gut_file(vow_mstr_dir, a23_str, sue_str)
 #     assert len(sue_gut.get_acctunits_dict()) == 0
@@ -308,7 +308,7 @@ def test_VowUnit_rotate_job_ReturnsObj_Scenario4_job_SelfReferenceWorks(
 
 #     # THEN
 #     expected_job = planunit_shop(sue_str, a23_str)
-#     expected_job.add_fact(casa_way, clean_way, create_missing_concepts=True)
+#     expected_job.add_fact(casa_rope, clean_rope, create_missing_concepts=True)
 #     assert sue_job.vow_label == expected_job.vow_label
 #     assert sue_job.owner_name == expected_job.owner_name
 #     assert sue_job.get_factunits_dict() == expected_job.get_factunits_dict()
@@ -356,9 +356,9 @@ def test_VowUnit_generate_all_jobs_Scenario1_jobs_rotated(
     bob_gut = planunit_shop(bob_str, a23_str)
     bob_gut.add_acctunit(bob_str)
     bob_gut.add_acctunit(sue_str)
-    casa_way = bob_gut.make_l1_way("casa")
-    clean_way = bob_gut.make_way(casa_way, "clean")
-    bob_gut.add_concept(clean_way, task=True)
+    casa_rope = bob_gut.make_l1_rope("casa")
+    clean_rope = bob_gut.make_rope(casa_rope, "clean")
+    bob_gut.add_concept(clean_rope, task=True)
 
     sue_gut = planunit_shop(sue_str, a23_str)
     sue_gut.add_acctunit(sue_str)
@@ -408,9 +408,9 @@ def test_VowUnit_generate_all_jobs_Scenario2_jobs_rotated_InSortedOrder(
 
     zia_gut = planunit_shop(zia_str, a23_str)
     zia_gut.add_acctunit(zia_str)
-    casa_way = zia_gut.make_l1_way("casa")
-    clean_way = zia_gut.make_way(casa_way, "clean")
-    zia_gut.add_concept(clean_way, task=True)
+    casa_rope = zia_gut.make_l1_rope("casa")
+    clean_rope = zia_gut.make_rope(casa_rope, "clean")
+    zia_gut.add_concept(clean_rope, task=True)
     save_gut_file(vow_mstr_dir, bob_gut)
     save_gut_file(vow_mstr_dir, sue_gut)
     save_gut_file(vow_mstr_dir, yao_gut)
@@ -457,9 +457,9 @@ def test_VowUnit_generate_all_jobs_Scenario3_job_listen_rotation_AffectsJobs(
 
     zia_gut = planunit_shop(zia_str, a23_str)
     zia_gut.add_acctunit(zia_str)
-    casa_way = zia_gut.make_l1_way("casa")
-    clean_way = zia_gut.make_way(casa_way, "clean")
-    zia_gut.add_concept(clean_way, task=True)
+    casa_rope = zia_gut.make_l1_rope("casa")
+    clean_rope = zia_gut.make_rope(casa_rope, "clean")
+    zia_gut.add_concept(clean_rope, task=True)
     save_gut_file(vow_mstr_dir, bob_gut)
     save_gut_file(vow_mstr_dir, sue_gut)
     save_gut_file(vow_mstr_dir, yao_gut)
@@ -511,22 +511,22 @@ def test_VowUnit_generate_all_jobs_Scenario3_job_listen_rotation_AffectsJobs(
 #     sue_gut_plan = a23_vow.rotate_job(sue_str)
 
 #     texas_str = "Texas"
-#     texas_way = bob_gut_plan.make_l1_way(texas_str)
+#     texas_rope = bob_gut_plan.make_l1_rope(texas_str)
 #     elpaso_str = "el paso"
-#     elpaso_way = bob_gut_plan.make_way(texas_way, elpaso_str)
+#     elpaso_rope = bob_gut_plan.make_rope(texas_rope, elpaso_str)
 #     elpaso_concept = conceptunit_shop(elpaso_str, healerlink=healerlink_shop({bob_str}))
 
 #     bob_gut_plan = open_gut_file(vow_mstr_dir, a23_str, bob_str)
 #     bob_gut_plan.add_acctunit(bob_str)
 #     bob_gut_plan.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
-#     bob_gut_plan.set_concept(elpaso_concept, texas_way)
+#     bob_gut_plan.set_concept(elpaso_concept, texas_rope)
 #     save_gut_file(a23_vow.vow_mstr_dir, bob_gut_plan)
 
 #     sue_gut_plan = open_gut_file(vow_mstr_dir, a23_str, sue_str)
 #     sue_gut_plan.add_acctunit(sue_str)
 #     sue_gut_plan.add_acctunit(bob_str)
 #     sue_gut_plan.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
-#     sue_gut_plan.set_concept(elpaso_concept, texas_way)
+#     sue_gut_plan.set_concept(elpaso_concept, texas_rope)
 #     save_gut_file(a23_vow.vow_mstr_dir, sue_gut_plan)
 
 #     before_bob_job = a23_vow.get_job_file_plan(bob_str)

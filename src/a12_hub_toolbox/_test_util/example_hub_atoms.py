@@ -1,9 +1,14 @@
-from src.a01_term_logic.way import VowLabel, WayTerm, create_way, create_way_from_labels
+from src.a01_term_logic.rope import (
+    RopeTerm,
+    VowLabel,
+    create_rope,
+    create_rope_from_labels,
+)
 from src.a02_finance_logic.deal import DealUnit, dealunit_shop
 from src.a05_concept_logic.concept import get_default_vow_label
 from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
-    concept_way_str,
+    concept_rope_str,
     fcontext_str,
     fnigh_str,
     fopen_str,
@@ -29,9 +34,9 @@ def get_atom_example_conceptunit_sports(vow_label: VowLabel = None) -> PlanAtom:
         vow_label = "accord23"
     sports_str = "sports"
     x_dimen = plan_conceptunit_str()
-    sports_way = create_way(vow_label, sports_str)
+    sports_rope = create_rope(vow_label, sports_str)
     insert_conceptunit_planatom = planatom_shop(x_dimen, INSERT_str())
-    insert_conceptunit_planatom.set_jkey(concept_way_str(), sports_way)
+    insert_conceptunit_planatom.set_jkey(concept_rope_str(), sports_rope)
     return insert_conceptunit_planatom
 
 
@@ -39,12 +44,12 @@ def get_atom_example_conceptunit_ball(vow_label: VowLabel = None) -> PlanAtom:
     if not vow_label:
         vow_label = "accord23"
     sports_str = "sports"
-    sports_way = create_way(vow_label, sports_str)
+    sports_rope = create_rope(vow_label, sports_str)
     ball_str = "basketball"
     x_dimen = plan_conceptunit_str()
-    bball_way = create_way(sports_way, ball_str)
+    bball_rope = create_rope(sports_rope, ball_str)
     insert_conceptunit_planatom = planatom_shop(x_dimen, INSERT_str())
-    insert_conceptunit_planatom.set_jkey(concept_way_str(), bball_way)
+    insert_conceptunit_planatom.set_jkey(concept_rope_str(), bball_rope)
     return insert_conceptunit_planatom
 
 
@@ -52,16 +57,16 @@ def get_atom_example_conceptunit_knee(vow_label: VowLabel = None) -> PlanAtom:
     if not vow_label:
         vow_label = "accord23"
     sports_str = "sports"
-    sports_way = create_way(vow_label, sports_str)
+    sports_rope = create_rope(vow_label, sports_str)
     knee_str = "knee"
     knee_begin = 1
     knee_close = 71
     x_dimen = plan_conceptunit_str()
     begin_str = "begin"
     close_str = "close"
-    knee_way = create_way(sports_way, knee_str)
+    knee_rope = create_rope(sports_rope, knee_str)
     insert_conceptunit_planatom = planatom_shop(x_dimen, INSERT_str())
-    insert_conceptunit_planatom.set_jkey(concept_way_str(), knee_way)
+    insert_conceptunit_planatom.set_jkey(concept_rope_str(), knee_rope)
     insert_conceptunit_planatom.set_jvalue(begin_str, knee_begin)
     insert_conceptunit_planatom.set_jvalue(close_str, knee_close)
     return insert_conceptunit_planatom
@@ -71,17 +76,17 @@ def get_atom_example_factunit_knee(vow_label: VowLabel = None) -> PlanAtom:
     if not vow_label:
         vow_label = "accord23"
     sports_str = "sports"
-    sports_way = create_way(vow_label, sports_str)
+    sports_rope = create_rope(vow_label, sports_str)
     ball_str = "basketball"
-    ball_way = create_way(sports_way, ball_str)
+    ball_rope = create_rope(sports_rope, ball_str)
     knee_str = "knee"
-    knee_way = create_way(vow_label, knee_str)
+    knee_rope = create_rope(vow_label, knee_str)
     knee_fopen = 7
     knee_fnigh = 23
     x_dimen = plan_concept_factunit_str()
     insert_factunit_planatom = planatom_shop(x_dimen, INSERT_str())
-    insert_factunit_planatom.set_jkey(concept_way_str(), ball_way)
-    insert_factunit_planatom.set_jkey(fcontext_str(), knee_way)
+    insert_factunit_planatom.set_jkey(concept_rope_str(), ball_rope)
+    insert_factunit_planatom.set_jkey(fcontext_str(), knee_rope)
     insert_factunit_planatom.set_jvalue(fopen_str(), knee_fopen)
     insert_factunit_planatom.set_jvalue(fnigh_str(), knee_fnigh)
     return insert_factunit_planatom
@@ -103,12 +108,12 @@ def get_plandelta_sue_example() -> PlanDelta:
     return sue_plandelta
 
 
-def get_texas_way() -> WayTerm:
+def get_texas_rope() -> RopeTerm:
     vow_label = get_default_vow_label()
     nation_str = "nation"
     usa_str = "USA"
     texas_str = "Texas"
-    return create_way_from_labels([vow_label, nation_str, usa_str, texas_str])
+    return create_rope_from_labels([vow_label, nation_str, usa_str, texas_str])
 
 
 def get_texas_hubunit() -> HubUnit:
@@ -117,7 +122,7 @@ def get_texas_hubunit() -> HubUnit:
         get_module_temp_dir(),
         vow_label,
         owner_name="Sue",
-        keep_way=get_texas_way(),
+        keep_rope=get_texas_rope(),
         # pipeline_duty_vision_str(),
     )
 

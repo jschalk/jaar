@@ -1,5 +1,5 @@
 from src.a06_plan_logic._test_util.a06_str import (
-    concept_way_str,
+    concept_rope_str,
     plan_concept_reason_premiseunit_str,
     pnigh_str,
     popen_str,
@@ -21,13 +21,13 @@ def test_create_legible_list_ReturnsObj_concept_reason_premiseunit_INSERT_WithOu
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     dimen = plan_concept_reason_premiseunit_str()
-    casa_way = sue_plan.make_l1_way("casa")
-    way_value = sue_plan.make_way(casa_way, "clean fridge")
-    casa_way = sue_plan.make_l1_way("casa")
-    rcontext_value = sue_plan.make_way(casa_way, "fridge status")
-    pstate_value = sue_plan.make_way(rcontext_value, "dirty")
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rope_value = sue_plan.make_rope(casa_rope, "clean fridge")
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rcontext_value = sue_plan.make_rope(casa_rope, "fridge status")
+    pstate_value = sue_plan.make_rope(rcontext_value, "dirty")
     swim_planatom = planatom_shop(dimen, INSERT_str())
-    swim_planatom.set_arg(concept_way_str(), way_value)
+    swim_planatom.set_arg(concept_rope_str(), rope_value)
     swim_planatom.set_arg(rcontext_str(), rcontext_value)
     swim_planatom.set_arg(pstate_str(), pstate_value)
     # print(f"{swim_planatom=}")
@@ -38,7 +38,7 @@ def test_create_legible_list_ReturnsObj_concept_reason_premiseunit_INSERT_WithOu
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"PremiseUnit '{pstate_value}' created for reason '{rcontext_value}' for concept '{way_value}'."
+    x_str = f"PremiseUnit '{pstate_value}' created for reason '{rcontext_value}' for concept '{rope_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -47,16 +47,16 @@ def test_create_legible_list_ReturnsObj_concept_reason_premiseunit_INSERT_WithNu
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     dimen = plan_concept_reason_premiseunit_str()
-    casa_way = sue_plan.make_l1_way("casa")
-    way_value = sue_plan.make_way(casa_way, "clean fridge")
-    casa_way = sue_plan.make_l1_way("casa")
-    rcontext_value = sue_plan.make_way(casa_way, "fridge status")
-    pstate_value = sue_plan.make_way(rcontext_value, "dirty")
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rope_value = sue_plan.make_rope(casa_rope, "clean fridge")
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rcontext_value = sue_plan.make_rope(casa_rope, "fridge status")
+    pstate_value = sue_plan.make_rope(rcontext_value, "dirty")
     pdivisor_value = 7
     pnigh_value = 13
     popen_value = 17
     swim_planatom = planatom_shop(dimen, INSERT_str())
-    swim_planatom.set_arg(concept_way_str(), way_value)
+    swim_planatom.set_arg(concept_rope_str(), rope_value)
     swim_planatom.set_arg(rcontext_str(), rcontext_value)
     swim_planatom.set_arg(pstate_str(), pstate_value)
     swim_planatom.set_arg("pdivisor", pdivisor_value)
@@ -70,7 +70,7 @@ def test_create_legible_list_ReturnsObj_concept_reason_premiseunit_INSERT_WithNu
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"PremiseUnit '{pstate_value}' created for reason '{rcontext_value}' for concept '{way_value}'. Popen={popen_value}. Pnigh={pnigh_value}. Pdivisor={pdivisor_value}."
+    x_str = f"PremiseUnit '{pstate_value}' created for reason '{rcontext_value}' for concept '{rope_value}'. Popen={popen_value}. Pnigh={pnigh_value}. Pdivisor={pdivisor_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -79,13 +79,13 @@ def test_create_legible_list_ReturnsObj_concept_reason_premiseunit_UPDATE_WithOu
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     dimen = plan_concept_reason_premiseunit_str()
-    casa_way = sue_plan.make_l1_way("casa")
-    way_value = sue_plan.make_way(casa_way, "clean fridge")
-    casa_way = sue_plan.make_l1_way("casa")
-    rcontext_value = sue_plan.make_way(casa_way, "fridge status")
-    pstate_value = sue_plan.make_way(rcontext_value, "dirty")
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rope_value = sue_plan.make_rope(casa_rope, "clean fridge")
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rcontext_value = sue_plan.make_rope(casa_rope, "fridge status")
+    pstate_value = sue_plan.make_rope(rcontext_value, "dirty")
     swim_planatom = planatom_shop(dimen, UPDATE_str())
-    swim_planatom.set_arg(concept_way_str(), way_value)
+    swim_planatom.set_arg(concept_rope_str(), rope_value)
     swim_planatom.set_arg(rcontext_str(), rcontext_value)
     swim_planatom.set_arg(pstate_str(), pstate_value)
     # print(f"{swim_planatom=}")
@@ -96,7 +96,7 @@ def test_create_legible_list_ReturnsObj_concept_reason_premiseunit_UPDATE_WithOu
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"PremiseUnit '{pstate_value}' updated for reason '{rcontext_value}' for concept '{way_value}'."
+    x_str = f"PremiseUnit '{pstate_value}' updated for reason '{rcontext_value}' for concept '{rope_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -105,16 +105,16 @@ def test_create_legible_list_ReturnsObj_concept_reason_premiseunit_UPDATE_WithNu
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     dimen = plan_concept_reason_premiseunit_str()
-    casa_way = sue_plan.make_l1_way("casa")
-    way_value = sue_plan.make_way(casa_way, "clean fridge")
-    casa_way = sue_plan.make_l1_way("casa")
-    rcontext_value = sue_plan.make_way(casa_way, "fridge status")
-    pstate_value = sue_plan.make_way(rcontext_value, "dirty")
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rope_value = sue_plan.make_rope(casa_rope, "clean fridge")
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rcontext_value = sue_plan.make_rope(casa_rope, "fridge status")
+    pstate_value = sue_plan.make_rope(rcontext_value, "dirty")
     pdivisor_value = 7
     pnigh_value = 13
     popen_value = 17
     swim_planatom = planatom_shop(dimen, UPDATE_str())
-    swim_planatom.set_arg(concept_way_str(), way_value)
+    swim_planatom.set_arg(concept_rope_str(), rope_value)
     swim_planatom.set_arg(rcontext_str(), rcontext_value)
     swim_planatom.set_arg(pstate_str(), pstate_value)
     swim_planatom.set_arg("pdivisor", pdivisor_value)
@@ -128,7 +128,7 @@ def test_create_legible_list_ReturnsObj_concept_reason_premiseunit_UPDATE_WithNu
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"PremiseUnit '{pstate_value}' updated for reason '{rcontext_value}' for concept '{way_value}'. Popen={popen_value}. Pnigh={pnigh_value}. Pdivisor={pdivisor_value}."
+    x_str = f"PremiseUnit '{pstate_value}' updated for reason '{rcontext_value}' for concept '{rope_value}'. Popen={popen_value}. Pnigh={pnigh_value}. Pdivisor={pdivisor_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -137,13 +137,13 @@ def test_create_legible_list_ReturnsObj_concept_reason_premiseunit_DELETE():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     dimen = plan_concept_reason_premiseunit_str()
-    casa_way = sue_plan.make_l1_way("casa")
-    way_value = sue_plan.make_way(casa_way, "clean fridge")
-    casa_way = sue_plan.make_l1_way("casa")
-    rcontext_value = sue_plan.make_way(casa_way, "fridge status")
-    pstate_value = sue_plan.make_way(rcontext_value, "dirty")
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rope_value = sue_plan.make_rope(casa_rope, "clean fridge")
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rcontext_value = sue_plan.make_rope(casa_rope, "fridge status")
+    pstate_value = sue_plan.make_rope(rcontext_value, "dirty")
     swim_planatom = planatom_shop(dimen, DELETE_str())
-    swim_planatom.set_arg(concept_way_str(), way_value)
+    swim_planatom.set_arg(concept_rope_str(), rope_value)
     swim_planatom.set_arg(rcontext_str(), rcontext_value)
     swim_planatom.set_arg(pstate_str(), pstate_value)
     # print(f"{swim_planatom=}")
@@ -154,6 +154,6 @@ def test_create_legible_list_ReturnsObj_concept_reason_premiseunit_DELETE():
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"PremiseUnit '{pstate_value}' deleted from reason '{rcontext_value}' for concept '{way_value}'."
+    x_str = f"PremiseUnit '{pstate_value}' deleted from reason '{rcontext_value}' for concept '{rope_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str

@@ -1,7 +1,7 @@
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
-from src.a01_term_logic.term import OwnerName, WayTerm
-from src.a01_term_logic.way import get_ancestor_ways, get_root_label_from_way
+from src.a01_term_logic.rope import get_ancestor_ropes, get_root_label_from_rope
+from src.a01_term_logic.term import OwnerName, RopeTerm
 from src.a02_finance_logic.allot import allot_scale
 from src.a05_concept_logic.concept import ConceptUnit
 from src.a06_plan_logic.plan import AcctUnit, PlanUnit
@@ -59,21 +59,21 @@ def generate_ingest_list(
     concept_list: list[ConceptUnit], debtor_amount: float, respect_bit: float
 ) -> list[ConceptUnit]:
     concept_ledger = {
-        x_concept.get_concept_way(): x_concept.mass for x_concept in concept_list
+        x_concept.get_concept_rope(): x_concept.mass for x_concept in concept_list
     }
     mass_allot = allot_scale(concept_ledger, debtor_amount, respect_bit)
     for x_conceptunit in concept_list:
-        x_conceptunit.mass = mass_allot.get(x_conceptunit.get_concept_way())
+        x_conceptunit.mass = mass_allot.get(x_conceptunit.get_concept_rope())
     return concept_list
 
 
 def _ingest_single_conceptunit(listener: PlanUnit, ingest_conceptunit: ConceptUnit):
-    mass_data = _create_mass_data(listener, ingest_conceptunit.get_concept_way())
+    mass_data = _create_mass_data(listener, ingest_conceptunit.get_concept_rope())
 
-    if listener.concept_exists(ingest_conceptunit.get_concept_way()) is False:
-        x_parent_way = ingest_conceptunit.parent_way
+    if listener.concept_exists(ingest_conceptunit.get_concept_rope()) is False:
+        x_parent_rope = ingest_conceptunit.parent_rope
         listener.set_concept(
-            ingest_conceptunit, x_parent_way, create_missing_concepts=True
+            ingest_conceptunit, x_parent_rope, create_missing_concepts=True
         )
 
     _add_and_replace_conceptunit_masss(
@@ -90,31 +90,31 @@ class MassReplaceOrAddData:
     replace_mass_list: list = None
 
 
-def _create_mass_data(listener: PlanUnit, x_way: WayTerm) -> list:
+def _create_mass_data(listener: PlanUnit, x_rope: RopeTerm) -> list:
     mass_data = MassReplaceOrAddData()
     mass_data.add_to_mass_list = []
     mass_data.replace_mass_list = []
-    ancestor_ways = get_ancestor_ways(x_way, listener.bridge)
-    root_way = get_root_label_from_way(x_way, listener.bridge)
-    for ancestor_way in ancestor_ways:
-        if ancestor_way != root_way:
-            if listener.concept_exists(ancestor_way):
-                mass_data.add_to_mass_list.append(ancestor_way)
+    ancestor_ropes = get_ancestor_ropes(x_rope, listener.knot)
+    root_rope = get_root_label_from_rope(x_rope, listener.knot)
+    for ancestor_rope in ancestor_ropes:
+        if ancestor_rope != root_rope:
+            if listener.concept_exists(ancestor_rope):
+                mass_data.add_to_mass_list.append(ancestor_rope)
             else:
-                mass_data.replace_mass_list.append(ancestor_way)
+                mass_data.replace_mass_list.append(ancestor_rope)
     return mass_data
 
 
 def _add_and_replace_conceptunit_masss(
     listener: PlanUnit,
-    replace_mass_list: list[WayTerm],
-    add_to_mass_list: list[WayTerm],
+    replace_mass_list: list[RopeTerm],
+    add_to_mass_list: list[RopeTerm],
     x_mass: float,
 ) -> None:
-    for concept_way in replace_mass_list:
-        listener.edit_concept_attr(concept_way, mass=x_mass)
-    for concept_way in add_to_mass_list:
-        x_conceptunit = listener.get_concept_obj(concept_way)
+    for concept_rope in replace_mass_list:
+        listener.edit_concept_attr(concept_rope, mass=x_mass)
+    for concept_rope in add_to_mass_list:
+        x_conceptunit = listener.get_concept_obj(concept_rope)
         x_conceptunit.mass += x_mass
 
 
@@ -132,21 +132,21 @@ def get_ordered_debtors_roll(x_plan: PlanUnit) -> list[AcctUnit]:
 
 def migrate_all_facts(src_listener: PlanUnit, dst_listener: PlanUnit):
     for x_factunit in src_listener.conceptroot.factunits.values():
-        fcontext_way = x_factunit.fcontext
-        fstate_way = x_factunit.fstate
-        if dst_listener.concept_exists(fcontext_way) is False:
-            rcontext_concept = src_listener.get_concept_obj(fcontext_way)
-            dst_listener.set_concept(rcontext_concept, rcontext_concept.parent_way)
-        if dst_listener.concept_exists(fstate_way) is False:
-            fstate_concept = src_listener.get_concept_obj(fstate_way)
-            dst_listener.set_concept(fstate_concept, fstate_concept.parent_way)
-        dst_listener.add_fact(fcontext_way, fstate_way)
+        fcontext_rope = x_factunit.fcontext
+        fstate_rope = x_factunit.fstate
+        if dst_listener.concept_exists(fcontext_rope) is False:
+            rcontext_concept = src_listener.get_concept_obj(fcontext_rope)
+            dst_listener.set_concept(rcontext_concept, rcontext_concept.parent_rope)
+        if dst_listener.concept_exists(fstate_rope) is False:
+            fstate_concept = src_listener.get_concept_obj(fstate_rope)
+            dst_listener.set_concept(fstate_concept, fstate_concept.parent_rope)
+        dst_listener.add_fact(fcontext_rope, fstate_rope)
 
 
 def listen_to_speaker_fact(
     listener: PlanUnit,
     speaker: PlanUnit,
-    missing_fact_rcontexts: list[WayTerm] = None,
+    missing_fact_rcontexts: list[RopeTerm] = None,
 ) -> PlanUnit:
     if missing_fact_rcontexts is None:
         missing_fact_rcontexts = list(listener.get_missing_fact_rcontexts())
@@ -292,12 +292,12 @@ def listen_to_owner_visions(listener_hubunit: HubUnit) -> None:
 
 def _fstate_keep_visions_and_listen(
     listener_id: OwnerName,
-    keep_dict: dict[WayTerm],
+    keep_dict: dict[RopeTerm],
     healer_hubunit: HubUnit,
     new_job: PlanUnit,
 ):
     for keep_path in keep_dict:
-        healer_hubunit.keep_way = keep_path
+        healer_hubunit.keep_rope = keep_path
         fstate_keep_vision_and_listen(listener_id, healer_hubunit, new_job)
 
 
@@ -314,11 +314,11 @@ def fstate_keep_vision_and_listen(
 
 def listen_to_vision_agenda(listener: PlanUnit, vision: PlanUnit):
     for x_concept in vision._concept_dict.values():
-        if listener.concept_exists(x_concept.get_concept_way()) is False:
-            listener.set_concept(x_concept, x_concept.parent_way)
-        if listener.get_fact(x_concept.get_concept_way()) is False:
-            listener.set_concept(x_concept, x_concept.parent_way)
-    for x_fact_way, x_fact_unit in vision.conceptroot.factunits.items():
+        if listener.concept_exists(x_concept.get_concept_rope()) is False:
+            listener.set_concept(x_concept, x_concept.parent_rope)
+        if listener.get_fact(x_concept.get_concept_rope()) is False:
+            listener.set_concept(x_concept, x_concept.parent_rope)
+    for x_fact_rope, x_fact_unit in vision.conceptroot.factunits.items():
         listener.conceptroot.set_factunit(x_fact_unit)
     listener.settle_plan()
 

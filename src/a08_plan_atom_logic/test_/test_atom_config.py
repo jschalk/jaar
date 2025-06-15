@@ -2,15 +2,15 @@ from src.a00_data_toolbox.dict_toolbox import get_from_nested_dict
 from src.a06_plan_logic._test_util.a06_str import (
     LabelTerm_str,
     NameTerm_str,
+    RopeTerm_str,
     TitleTerm_str,
-    WayTerm_str,
     acct_name_str,
     acct_pool_str,
     addin_str,
     awardee_title_str,
     begin_str,
     close_str,
-    concept_way_str,
+    concept_rope_str,
     credit_score_str,
     credit_vote_str,
     credor_respect_str,
@@ -28,7 +28,7 @@ from src.a06_plan_logic._test_util.a06_str import (
     labor_title_str,
     morph_str,
     numor_str,
-    parent_way_str,
+    parent_rope_str,
     penny_str,
     plan_acct_membership_str,
     plan_acctunit_str,
@@ -343,8 +343,8 @@ def unique_jkeys():
     jkey_key_count = 0
     for atom_dimen in get_atom_config_dict().keys():
         new_jkey_keys = _get_atom_config_jkey_keys(atom_dimen)
-        if concept_way_str() in new_jkey_keys:
-            new_jkey_keys.remove(concept_way_str())
+        if concept_rope_str() in new_jkey_keys:
+            new_jkey_keys.remove(concept_rope_str())
         if rcontext_str() in new_jkey_keys:
             new_jkey_keys.remove(rcontext_str())
         if acct_name_str() in new_jkey_keys:
@@ -385,7 +385,7 @@ def test_get_sorted_jkey_keys_ReturnsObj_plan_concept_reason_premiseunit():
     x_sorted_jkey_keys = get_sorted_jkey_keys(x_dimen)
 
     # THEN
-    assert x_sorted_jkey_keys == [concept_way_str(), rcontext_str(), "pstate"]
+    assert x_sorted_jkey_keys == [concept_rope_str(), rcontext_str(), "pstate"]
 
 
 def test_get_flattened_atom_table_build_ReturnsObj():
@@ -510,7 +510,7 @@ def test_get_normalized_plan_table_build_ReturnsObj():
     concept_columns = cat_concept.get(columns_str)
     assert len(concept_columns) == 13
     assert concept_columns.get("uid") is not None
-    assert concept_columns.get(concept_way_str()) is not None
+    assert concept_columns.get(concept_rope_str()) is not None
     assert concept_columns.get(begin_str()) is not None
     assert concept_columns.get(close_str()) is not None
 
@@ -532,11 +532,11 @@ def test_get_atom_args_dimen_mapping_ReturnsObj():
     assert x_atom_args_dimen_mapping
     assert x_atom_args_dimen_mapping.get(stop_want_str())
     assert x_atom_args_dimen_mapping.get(stop_want_str()) == {plan_conceptunit_str()}
-    assert x_atom_args_dimen_mapping.get(concept_way_str())
-    way_dimens = x_atom_args_dimen_mapping.get(concept_way_str())
-    assert plan_concept_factunit_str() in way_dimens
-    assert plan_concept_laborlink_str() in way_dimens
-    assert len(way_dimens) == 7
+    assert x_atom_args_dimen_mapping.get(concept_rope_str())
+    rope_dimens = x_atom_args_dimen_mapping.get(concept_rope_str())
+    assert plan_concept_factunit_str() in rope_dimens
+    assert plan_concept_laborlink_str() in rope_dimens
+    assert len(rope_dimens) == 7
     assert len(x_atom_args_dimen_mapping) == 41
 
 
@@ -566,7 +566,7 @@ def test_get_allowed_class_types_ReturnsObj():
         NameTerm_str(),
         TitleTerm_str(),
         LabelTerm_str(),
-        WayTerm_str(),
+        RopeTerm_str(),
         "float",
         "bool",
         "TimeLinePoint",
@@ -626,7 +626,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(acct_name_str()) == NameTerm_str()
     assert x_class_types.get(addin_str()) == "float"
     assert x_class_types.get(awardee_title_str()) == TitleTerm_str()
-    assert x_class_types.get(rcontext_str()) == WayTerm_str()
+    assert x_class_types.get(rcontext_str()) == RopeTerm_str()
     assert x_class_types.get("rconcept_active_requisite") == "bool"
     assert x_class_types.get(begin_str()) == "float"
     assert x_class_types.get(respect_bit_str()) == "float"
@@ -639,7 +639,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(debtor_respect_str()) == "float"
     assert x_class_types.get(denom_str()) == "int"
     assert x_class_types.get("pdivisor") == "int"
-    assert x_class_types.get(fcontext_str()) == WayTerm_str()
+    assert x_class_types.get(fcontext_str()) == RopeTerm_str()
     assert x_class_types.get(fnigh_str()) == "float"
     assert x_class_types.get(fopen_str()) == "float"
     assert x_class_types.get(fund_iota_str()) == "float"
@@ -651,15 +651,15 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("mass") == "int"
     assert x_class_types.get("max_tree_traverse") == "int"
     assert x_class_types.get(morph_str()) == "bool"
-    assert x_class_types.get("pstate") == WayTerm_str()
+    assert x_class_types.get("pstate") == RopeTerm_str()
     assert x_class_types.get("pnigh") == "float"
     assert x_class_types.get(numor_str()) == "int"
     assert x_class_types.get("popen") == "float"
     assert x_class_types.get(penny_str()) == "float"
-    assert x_class_types.get("fstate") == WayTerm_str()
+    assert x_class_types.get("fstate") == RopeTerm_str()
     assert x_class_types.get("task") == "bool"
     assert x_class_types.get("problem_bool") == "bool"
-    assert x_class_types.get(concept_way_str()) == WayTerm_str()
+    assert x_class_types.get(concept_rope_str()) == RopeTerm_str()
     assert x_class_types.get(stop_want_str()) == "float"
     assert x_class_types.get("take_force") == "float"
     assert x_class_types.get("tally") == "int"

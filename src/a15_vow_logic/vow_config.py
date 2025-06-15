@@ -61,7 +61,7 @@ def get_vow_args_class_types() -> dict[str, str]:
     return {
         "acct_name": "NameTerm",
         "amount": "float",
-        "bridge": "str",
+        "knot": "str",
         "celldepth": "int",
         "c400_number": "int",
         "cumlative_day": "int",
@@ -90,7 +90,7 @@ def get_vow_args_set() -> set[str]:
     return {
         "acct_name",
         "amount",
-        "bridge",
+        "knot",
         "c400_number",
         "celldepth",
         "cumlative_day",

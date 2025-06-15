@@ -1,8 +1,8 @@
 from pytest import raises as pytest_raises
-from src.a01_term_logic.way import default_bridge_if_None
+from src.a01_term_logic.rope import default_knot_if_None
 from src.a02_finance_logic._test_util.a02_str import (
-    bridge_str,
     fund_pool_str,
+    knot_str,
     owner_name_str,
     vow_label_str,
 )
@@ -49,7 +49,7 @@ def test_PlanUnit_Exists():
     assert x_plan.credor_respect is None
     assert x_plan.debtor_respect is None
     assert x_plan.max_tree_traverse is None
-    assert x_plan.bridge is None
+    assert x_plan.knot is None
     assert x_plan.fund_pool is None
     assert x_plan.fund_iota is None
     assert x_plan.respect_bit is None
@@ -85,7 +85,7 @@ def test_PlanUnit_Exists():
         _sum_healerlink_share_str(),
         _tree_traverse_count_str(),
         "accts",
-        bridge_str(),
+        knot_str(),
         "conceptroot",
         credor_respect_str(),
         debtor_respect_str(),
@@ -106,7 +106,7 @@ def test_planunit_shop_ReturnsObjectWithFilledFields():
     # ESTABLISH
     sue_str = "Sue"
     iowa_vow_label = "Iowa"
-    slash_bridge = "/"
+    slash_knot = "/"
     x_fund_pool = 555
     x_fund_iota = 7
     x_respect_bit = 5
@@ -116,7 +116,7 @@ def test_planunit_shop_ReturnsObjectWithFilledFields():
     x_plan = planunit_shop(
         owner_name=sue_str,
         vow_label=iowa_vow_label,
-        bridge=slash_bridge,
+        knot=slash_knot,
         fund_pool=x_fund_pool,
         fund_iota=x_fund_iota,
         respect_bit=x_respect_bit,
@@ -131,7 +131,7 @@ def test_planunit_shop_ReturnsObjectWithFilledFields():
     assert x_plan.accts == {}
     assert x_plan.conceptroot is not None
     assert x_plan.max_tree_traverse == 3
-    assert x_plan.bridge == slash_bridge
+    assert x_plan.knot == slash_knot
     assert x_plan.fund_pool == x_fund_pool
     assert x_plan.fund_iota == x_fund_iota
     assert x_plan.respect_bit == x_respect_bit
@@ -163,19 +163,19 @@ def test_planunit_shop_ReturnsObjectWithCorrectEmptyField():
     # THEN
     assert x_plan.owner_name == ""
     assert x_plan.vow_label == root_label()
-    assert x_plan.bridge == default_bridge_if_None()
+    assert x_plan.knot == default_knot_if_None()
     assert x_plan.fund_pool == validate_fund_pool()
     assert x_plan.fund_iota == default_fund_iota_if_None()
     assert x_plan.respect_bit == default_RespectBit_if_None()
     assert x_plan.penny == filter_penny()
     assert x_plan.conceptroot.fund_iota == x_plan.fund_iota
-    assert x_plan.conceptroot.bridge == x_plan.bridge
+    assert x_plan.conceptroot.knot == x_plan.knot
     assert x_plan.conceptroot.root
     assert x_plan.conceptroot._uid == 1
     assert x_plan.conceptroot._level == 0
     assert x_plan.conceptroot.vow_label == x_plan.vow_label
-    assert x_plan.conceptroot.bridge == x_plan.bridge
-    assert x_plan.conceptroot.parent_way == ""
+    assert x_plan.conceptroot.knot == x_plan.knot
+    assert x_plan.conceptroot.parent_rope == ""
 
 
 def test_PlanUnit_set_max_tree_traverse_CorrectlySetsInt():
@@ -223,20 +223,20 @@ def test_PlanUnit_set_max_tree_traverse_CorrectlyRaisesError():
     )
 
 
-def test_PlanUnit_make_way_ReturnsObj():
+def test_PlanUnit_make_rope_ReturnsObj():
     # ESTABLISH
     x_vow_label = "accord45"
-    slash_bridge = "/"
+    slash_knot = "/"
     sue_str = "Sue"
-    sue_plan = planunit_shop(sue_str, x_vow_label, bridge=slash_bridge)
+    sue_plan = planunit_shop(sue_str, x_vow_label, knot=slash_knot)
     casa_str = "casa"
-    v1_casa_way = sue_plan.make_l1_way(casa_str)
+    v1_casa_rope = sue_plan.make_l1_rope(casa_str)
 
     # WHEN
-    v2_casa_way = sue_plan.make_l1_way(casa_str)
+    v2_casa_rope = sue_plan.make_l1_rope(casa_str)
 
     # THEN
-    assert v1_casa_way == v2_casa_way
+    assert v1_casa_rope == v2_casa_rope
 
 
 def test_PlanUnit_set_last_pack_id_SetsAttrCorrectly():

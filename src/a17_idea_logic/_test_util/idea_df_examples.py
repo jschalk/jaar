@@ -2,10 +2,10 @@ from pandas import DataFrame
 from src.a02_finance_logic._test_util.a02_str import (
     acct_name_str,
     amount_str,
-    bridge_str,
     celldepth_str,
     deal_time_str,
     fund_iota_str,
+    knot_str,
     owner_name_str,
     penny_str,
     quota_str,
@@ -31,7 +31,7 @@ JEFFY45_STR = "jeffy45"
 
 def get_ex1_br00000_df() -> DataFrame:
     """idea_format_00000_vowunit_v0_0_0
-    c400_number,vow_label,fund_iota,monthday_distortion,penny,respect_bit,bridge,timeline_label,yr1_jan1_offset
+    c400_number,vow_label,fund_iota,monthday_distortion,penny,respect_bit,knot,timeline_label,yr1_jan1_offset
     """
     x_df = DataFrame(
         columns=[
@@ -41,7 +41,7 @@ def get_ex1_br00000_df() -> DataFrame:
             monthday_distortion_str(),
             penny_str(),
             respect_bit_str(),
-            bridge_str(),
+            knot_str(),
             timeline_label_str(),
             yr1_jan1_offset_str(),
             job_listen_rotations_str(),
@@ -145,7 +145,7 @@ def get_ex1_br00005_df() -> DataFrame:
 
 def get_ex2_br00000_df() -> DataFrame:
     """idea_format_00000_vowunit_v0_0_0
-    c400_number,vow_label,fund_iota,monthday_distortion,penny,respect_bit,bridge,timeline_label,yr1_jan1_offset,job_listen_rotations
+    c400_number,vow_label,fund_iota,monthday_distortion,penny,respect_bit,knot,timeline_label,yr1_jan1_offset,job_listen_rotations
     """
     x_df = DataFrame(
         columns=[
@@ -155,7 +155,7 @@ def get_ex2_br00000_df() -> DataFrame:
             monthday_distortion_str(),
             penny_str(),
             respect_bit_str(),
-            bridge_str(),
+            knot_str(),
             timeline_label_str(),
             yr1_jan1_offset_str(),
             job_listen_rotations_str(),

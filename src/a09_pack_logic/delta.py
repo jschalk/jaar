@@ -8,7 +8,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_json_from_dict,
     set_in_nested_dict,
 )
-from src.a01_term_logic.term import TitleTerm, WayTerm
+from src.a01_term_logic.term import RopeTerm, TitleTerm
 from src.a03_group_logic.acct import AcctName, AcctUnit, MemberShip
 from src.a03_group_logic.group import MemberShip
 from src.a04_reason_logic.reason_concept import FactUnit, ReasonUnit
@@ -49,8 +49,8 @@ class PlanDelta:
 
         ordered_list = []
         for x_list in atom_order_key_dict.values():
-            if x_list[0].jkeys.get("concept_way") is not None:
-                x_list = sorted(x_list, key=lambda x: x.jkeys.get("concept_way"))
+            if x_list[0].jkeys.get("concept_rope") is not None:
+                x_list = sorted(x_list, key=lambda x: x.jkeys.get("concept_rope"))
             ordered_list.extend(x_list)
         return ordered_list
 
@@ -303,30 +303,30 @@ class PlanDelta:
             self.set_planatom(x_planatom)
 
     def add_planatoms_concepts(self, before_plan: PlanUnit, after_plan: PlanUnit):
-        before_concept_ways = set(before_plan._concept_dict.keys())
-        after_concept_ways = set(after_plan._concept_dict.keys())
+        before_concept_ropes = set(before_plan._concept_dict.keys())
+        after_concept_ropes = set(after_plan._concept_dict.keys())
 
         self.add_planatom_concept_inserts(
             after_plan=after_plan,
-            insert_concept_ways=after_concept_ways.difference(before_concept_ways),
+            insert_concept_ropes=after_concept_ropes.difference(before_concept_ropes),
         )
         self.add_planatom_concept_deletes(
             before_plan=before_plan,
-            delete_concept_ways=before_concept_ways.difference(after_concept_ways),
+            delete_concept_ropes=before_concept_ropes.difference(after_concept_ropes),
         )
         self.add_planatom_concept_updates(
             before_plan=before_plan,
             after_plan=after_plan,
-            update_ways=before_concept_ways.intersection(after_concept_ways),
+            update_ropes=before_concept_ropes.intersection(after_concept_ropes),
         )
 
     def add_planatom_concept_inserts(
-        self, after_plan: PlanUnit, insert_concept_ways: set
+        self, after_plan: PlanUnit, insert_concept_ropes: set
     ):
-        for insert_concept_way in insert_concept_ways:
-            insert_conceptunit = after_plan.get_concept_obj(insert_concept_way)
+        for insert_concept_rope in insert_concept_ropes:
+            insert_conceptunit = after_plan.get_concept_obj(insert_concept_rope)
             x_planatom = planatom_shop("plan_conceptunit", "INSERT")
-            x_planatom.set_jkey("concept_way", insert_conceptunit.get_concept_way())
+            x_planatom.set_jkey("concept_rope", insert_conceptunit.get_concept_rope())
             x_planatom.set_jvalue("addin", insert_conceptunit.addin)
             x_planatom.set_jvalue("begin", insert_conceptunit.begin)
             x_planatom.set_jvalue("close", insert_conceptunit.close)
@@ -352,25 +352,27 @@ class PlanDelta:
                 insert_reasonunit_rcontexts=set(insert_conceptunit.reasonunits.keys()),
             )
             self.add_planatom_concept_laborlink_insert(
-                concept_way=insert_concept_way,
+                concept_rope=insert_concept_rope,
                 insert_laborlink_labor_titles=insert_conceptunit.laborunit._laborlinks,
             )
             self.add_planatom_concept_healerlink_insert(
-                concept_way=insert_concept_way,
+                concept_rope=insert_concept_rope,
                 insert_healerlink_healer_names=insert_conceptunit.healerlink._healer_names,
             )
 
     def add_planatom_concept_updates(
-        self, before_plan: PlanUnit, after_plan: PlanUnit, update_ways: set
+        self, before_plan: PlanUnit, after_plan: PlanUnit, update_ropes: set
     ):
-        for concept_way in update_ways:
-            after_conceptunit = after_plan.get_concept_obj(concept_way)
-            before_conceptunit = before_plan.get_concept_obj(concept_way)
+        for concept_rope in update_ropes:
+            after_conceptunit = after_plan.get_concept_obj(concept_rope)
+            before_conceptunit = before_plan.get_concept_obj(concept_rope)
             if jvalues_different(
                 "plan_conceptunit", before_conceptunit, after_conceptunit
             ):
                 x_planatom = planatom_shop("plan_conceptunit", "UPDATE")
-                x_planatom.set_jkey("concept_way", after_conceptunit.get_concept_way())
+                x_planatom.set_jkey(
+                    "concept_rope", after_conceptunit.get_concept_rope()
+                )
                 if before_conceptunit.addin != after_conceptunit.addin:
                     x_planatom.set_jvalue("addin", after_conceptunit.addin)
                 if before_conceptunit.begin != after_conceptunit.begin:
@@ -406,7 +408,7 @@ class PlanDelta:
                 ),
             )
             self.add_planatom_concept_factunit_deletes(
-                concept_way=concept_way,
+                concept_rope=concept_rope,
                 delete_factunit_rcontexts=before_factunit_rcontexts.difference(
                     after_factunit_rcontexts
                 ),
@@ -429,7 +431,7 @@ class PlanDelta:
                 ),
             )
             self.add_planatom_concept_awardlink_deletes(
-                concept_way=concept_way,
+                concept_rope=concept_rope,
                 delete_awardlink_awardee_titles=before_awardlinks_awardee_titles.difference(
                     after_awardlinks_awardee_titles
                 ),
@@ -468,13 +470,13 @@ class PlanDelta:
             )
             after_laborlinks_labor_titles = set(after_conceptunit.laborunit._laborlinks)
             self.add_planatom_concept_laborlink_insert(
-                concept_way=concept_way,
+                concept_rope=concept_rope,
                 insert_laborlink_labor_titles=after_laborlinks_labor_titles.difference(
                     before_laborlinks_labor_titles
                 ),
             )
             self.add_planatom_concept_laborlink_deletes(
-                concept_way=concept_way,
+                concept_rope=concept_rope,
                 delete_laborlink_labor_titles=before_laborlinks_labor_titles.difference(
                     after_laborlinks_labor_titles
                 ),
@@ -488,34 +490,34 @@ class PlanDelta:
                 after_conceptunit.healerlink._healer_names
             )
             self.add_planatom_concept_healerlink_insert(
-                concept_way=concept_way,
+                concept_rope=concept_rope,
                 insert_healerlink_healer_names=after_healerlinks_healer_names.difference(
                     before_healerlinks_healer_names
                 ),
             )
             self.add_planatom_concept_healerlink_deletes(
-                concept_way=concept_way,
+                concept_rope=concept_rope,
                 delete_healerlink_healer_names=before_healerlinks_healer_names.difference(
                     after_healerlinks_healer_names
                 ),
             )
 
     def add_planatom_concept_deletes(
-        self, before_plan: PlanUnit, delete_concept_ways: set
+        self, before_plan: PlanUnit, delete_concept_ropes: set
     ):
-        for delete_concept_way in delete_concept_ways:
+        for delete_concept_rope in delete_concept_ropes:
             x_planatom = planatom_shop("plan_conceptunit", "DELETE")
-            x_planatom.set_jkey("concept_way", delete_concept_way)
+            x_planatom.set_jkey("concept_rope", delete_concept_rope)
             self.set_planatom(x_planatom)
 
-            delete_conceptunit = before_plan.get_concept_obj(delete_concept_way)
+            delete_conceptunit = before_plan.get_concept_obj(delete_concept_rope)
             self.add_planatom_concept_factunit_deletes(
-                concept_way=delete_concept_way,
+                concept_rope=delete_concept_rope,
                 delete_factunit_rcontexts=set(delete_conceptunit.factunits.keys()),
             )
 
             self.add_planatom_concept_awardlink_deletes(
-                concept_way=delete_concept_way,
+                concept_rope=delete_concept_rope,
                 delete_awardlink_awardee_titles=set(
                     delete_conceptunit.awardlinks.keys()
                 ),
@@ -525,11 +527,11 @@ class PlanDelta:
                 delete_reasonunit_rcontexts=set(delete_conceptunit.reasonunits.keys()),
             )
             self.add_planatom_concept_laborlink_deletes(
-                concept_way=delete_concept_way,
+                concept_rope=delete_concept_rope,
                 delete_laborlink_labor_titles=delete_conceptunit.laborunit._laborlinks,
             )
             self.add_planatom_concept_healerlink_deletes(
-                concept_way=delete_concept_way,
+                concept_rope=delete_concept_rope,
                 delete_healerlink_healer_names=delete_conceptunit.healerlink._healer_names,
             )
 
@@ -541,7 +543,7 @@ class PlanDelta:
                 insert_reasonunit_rcontext
             )
             x_planatom = planatom_shop("plan_concept_reasonunit", "INSERT")
-            x_planatom.set_jkey("concept_way", after_conceptunit.get_concept_way())
+            x_planatom.set_jkey("concept_rope", after_conceptunit.get_concept_rope())
             x_planatom.set_jkey("rcontext", after_reasonunit.rcontext)
             if after_reasonunit.rconcept_active_requisite is not None:
                 x_planatom.set_jvalue(
@@ -551,7 +553,7 @@ class PlanDelta:
             self.set_planatom(x_planatom)
 
             self.add_planatom_concept_reason_premiseunit_inserts(
-                concept_way=after_conceptunit.get_concept_way(),
+                concept_rope=after_conceptunit.get_concept_rope(),
                 after_reasonunit=after_reasonunit,
                 insert_premise_pstates=set(after_reasonunit.premises.keys()),
             )
@@ -573,7 +575,9 @@ class PlanDelta:
                 "plan_concept_reasonunit", before_reasonunit, after_reasonunit
             ):
                 x_planatom = planatom_shop("plan_concept_reasonunit", "UPDATE")
-                x_planatom.set_jkey("concept_way", before_conceptunit.get_concept_way())
+                x_planatom.set_jkey(
+                    "concept_rope", before_conceptunit.get_concept_rope()
+                )
                 x_planatom.set_jkey("rcontext", after_reasonunit.rcontext)
                 if (
                     before_reasonunit.rconcept_active_requisite
@@ -588,14 +592,14 @@ class PlanDelta:
             before_premise_pstates = set(before_reasonunit.premises.keys())
             after_premise_pstates = set(after_reasonunit.premises.keys())
             self.add_planatom_concept_reason_premiseunit_inserts(
-                concept_way=before_conceptunit.get_concept_way(),
+                concept_rope=before_conceptunit.get_concept_rope(),
                 after_reasonunit=after_reasonunit,
                 insert_premise_pstates=after_premise_pstates.difference(
                     before_premise_pstates
                 ),
             )
             self.add_planatom_concept_reason_premiseunit_updates(
-                concept_way=before_conceptunit.get_concept_way(),
+                concept_rope=before_conceptunit.get_concept_rope(),
                 before_reasonunit=before_reasonunit,
                 after_reasonunit=after_reasonunit,
                 update_premise_pstates=after_premise_pstates.intersection(
@@ -603,7 +607,7 @@ class PlanDelta:
                 ),
             )
             self.add_planatom_concept_reason_premiseunit_deletes(
-                concept_way=before_conceptunit.get_concept_way(),
+                concept_rope=before_conceptunit.get_concept_rope(),
                 reasonunit_rcontext=update_reasonunit_rcontext,
                 delete_premise_pstates=before_premise_pstates.difference(
                     after_premise_pstates
@@ -615,7 +619,7 @@ class PlanDelta:
     ):
         for delete_reasonunit_rcontext in delete_reasonunit_rcontexts:
             x_planatom = planatom_shop("plan_concept_reasonunit", "DELETE")
-            x_planatom.set_jkey("concept_way", before_conceptunit.get_concept_way())
+            x_planatom.set_jkey("concept_rope", before_conceptunit.get_concept_rope())
             x_planatom.set_jkey("rcontext", delete_reasonunit_rcontext)
             self.set_planatom(x_planatom)
 
@@ -623,21 +627,21 @@ class PlanDelta:
                 delete_reasonunit_rcontext
             )
             self.add_planatom_concept_reason_premiseunit_deletes(
-                concept_way=before_conceptunit.get_concept_way(),
+                concept_rope=before_conceptunit.get_concept_rope(),
                 reasonunit_rcontext=delete_reasonunit_rcontext,
                 delete_premise_pstates=set(before_reasonunit.premises.keys()),
             )
 
     def add_planatom_concept_reason_premiseunit_inserts(
         self,
-        concept_way: WayTerm,
+        concept_rope: RopeTerm,
         after_reasonunit: ReasonUnit,
         insert_premise_pstates: set,
     ):
         for insert_premise_pstate in insert_premise_pstates:
             after_premiseunit = after_reasonunit.get_premise(insert_premise_pstate)
             x_planatom = planatom_shop("plan_concept_reason_premiseunit", "INSERT")
-            x_planatom.set_jkey("concept_way", concept_way)
+            x_planatom.set_jkey("concept_rope", concept_rope)
             x_planatom.set_jkey("rcontext", after_reasonunit.rcontext)
             x_planatom.set_jkey("pstate", after_premiseunit.pstate)
             if after_premiseunit.popen is not None:
@@ -650,7 +654,7 @@ class PlanDelta:
 
     def add_planatom_concept_reason_premiseunit_updates(
         self,
-        concept_way: WayTerm,
+        concept_rope: RopeTerm,
         before_reasonunit: ReasonUnit,
         after_reasonunit: ReasonUnit,
         update_premise_pstates: set,
@@ -664,7 +668,7 @@ class PlanDelta:
                 after_premiseunit,
             ):
                 x_planatom = planatom_shop("plan_concept_reason_premiseunit", "UPDATE")
-                x_planatom.set_jkey("concept_way", concept_way)
+                x_planatom.set_jkey("concept_rope", concept_rope)
                 x_planatom.set_jkey("rcontext", before_reasonunit.rcontext)
                 x_planatom.set_jkey("pstate", after_premiseunit.pstate)
                 if after_premiseunit.popen != before_premiseunit.popen:
@@ -677,50 +681,50 @@ class PlanDelta:
 
     def add_planatom_concept_reason_premiseunit_deletes(
         self,
-        concept_way: WayTerm,
-        reasonunit_rcontext: WayTerm,
+        concept_rope: RopeTerm,
+        reasonunit_rcontext: RopeTerm,
         delete_premise_pstates: set,
     ):
         for delete_premise_pstate in delete_premise_pstates:
             x_planatom = planatom_shop("plan_concept_reason_premiseunit", "DELETE")
-            x_planatom.set_jkey("concept_way", concept_way)
+            x_planatom.set_jkey("concept_rope", concept_rope)
             x_planatom.set_jkey("rcontext", reasonunit_rcontext)
             x_planatom.set_jkey("pstate", delete_premise_pstate)
             self.set_planatom(x_planatom)
 
     def add_planatom_concept_laborlink_insert(
-        self, concept_way: WayTerm, insert_laborlink_labor_titles: set
+        self, concept_rope: RopeTerm, insert_laborlink_labor_titles: set
     ):
         for insert_laborlink_labor_title in insert_laborlink_labor_titles:
             x_planatom = planatom_shop("plan_concept_laborlink", "INSERT")
-            x_planatom.set_jkey("concept_way", concept_way)
+            x_planatom.set_jkey("concept_rope", concept_rope)
             x_planatom.set_jkey("labor_title", insert_laborlink_labor_title)
             self.set_planatom(x_planatom)
 
     def add_planatom_concept_laborlink_deletes(
-        self, concept_way: WayTerm, delete_laborlink_labor_titles: set
+        self, concept_rope: RopeTerm, delete_laborlink_labor_titles: set
     ):
         for delete_laborlink_labor_title in delete_laborlink_labor_titles:
             x_planatom = planatom_shop("plan_concept_laborlink", "DELETE")
-            x_planatom.set_jkey("concept_way", concept_way)
+            x_planatom.set_jkey("concept_rope", concept_rope)
             x_planatom.set_jkey("labor_title", delete_laborlink_labor_title)
             self.set_planatom(x_planatom)
 
     def add_planatom_concept_healerlink_insert(
-        self, concept_way: WayTerm, insert_healerlink_healer_names: set
+        self, concept_rope: RopeTerm, insert_healerlink_healer_names: set
     ):
         for insert_healerlink_healer_name in insert_healerlink_healer_names:
             x_planatom = planatom_shop("plan_concept_healerlink", "INSERT")
-            x_planatom.set_jkey("concept_way", concept_way)
+            x_planatom.set_jkey("concept_rope", concept_rope)
             x_planatom.set_jkey("healer_name", insert_healerlink_healer_name)
             self.set_planatom(x_planatom)
 
     def add_planatom_concept_healerlink_deletes(
-        self, concept_way: WayTerm, delete_healerlink_healer_names: set
+        self, concept_rope: RopeTerm, delete_healerlink_healer_names: set
     ):
         for delete_healerlink_healer_name in delete_healerlink_healer_names:
             x_planatom = planatom_shop("plan_concept_healerlink", "DELETE")
-            x_planatom.set_jkey("concept_way", concept_way)
+            x_planatom.set_jkey("concept_rope", concept_rope)
             x_planatom.set_jkey("healer_name", delete_healerlink_healer_name)
             self.set_planatom(x_planatom)
 
@@ -732,7 +736,7 @@ class PlanDelta:
                 after_awardlink_awardee_title
             )
             x_planatom = planatom_shop("plan_concept_awardlink", "INSERT")
-            x_planatom.set_jkey("concept_way", after_conceptunit.get_concept_way())
+            x_planatom.set_jkey("concept_rope", after_conceptunit.get_concept_rope())
             x_planatom.set_jkey("awardee_title", after_awardlink.awardee_title)
             x_planatom.set_jvalue("give_force", after_awardlink.give_force)
             x_planatom.set_jvalue("take_force", after_awardlink.take_force)
@@ -755,7 +759,9 @@ class PlanDelta:
                 "plan_concept_awardlink", before_awardlink, after_awardlink
             ):
                 x_planatom = planatom_shop("plan_concept_awardlink", "UPDATE")
-                x_planatom.set_jkey("concept_way", before_conceptunit.get_concept_way())
+                x_planatom.set_jkey(
+                    "concept_rope", before_conceptunit.get_concept_rope()
+                )
                 x_planatom.set_jkey("awardee_title", after_awardlink.awardee_title)
                 if before_awardlink.give_force != after_awardlink.give_force:
                     x_planatom.set_jvalue("give_force", after_awardlink.give_force)
@@ -764,11 +770,11 @@ class PlanDelta:
                 self.set_planatom(x_planatom)
 
     def add_planatom_concept_awardlink_deletes(
-        self, concept_way: WayTerm, delete_awardlink_awardee_titles: set
+        self, concept_rope: RopeTerm, delete_awardlink_awardee_titles: set
     ):
         for delete_awardlink_awardee_title in delete_awardlink_awardee_titles:
             x_planatom = planatom_shop("plan_concept_awardlink", "DELETE")
-            x_planatom.set_jkey("concept_way", concept_way)
+            x_planatom.set_jkey("concept_rope", concept_rope)
             x_planatom.set_jkey("awardee_title", delete_awardlink_awardee_title)
             self.set_planatom(x_planatom)
 
@@ -778,7 +784,7 @@ class PlanDelta:
         for insert_factunit_rcontext in insert_factunit_rcontexts:
             insert_factunit = conceptunit.factunits.get(insert_factunit_rcontext)
             x_planatom = planatom_shop("plan_concept_factunit", "INSERT")
-            x_planatom.set_jkey("concept_way", conceptunit.get_concept_way())
+            x_planatom.set_jkey("concept_rope", conceptunit.get_concept_rope())
             x_planatom.set_jkey("fcontext", insert_factunit.fcontext)
             if insert_factunit.fstate is not None:
                 x_planatom.set_jvalue("fstate", insert_factunit.fstate)
@@ -801,7 +807,9 @@ class PlanDelta:
                 "plan_concept_factunit", before_factunit, after_factunit
             ):
                 x_planatom = planatom_shop("plan_concept_factunit", "UPDATE")
-                x_planatom.set_jkey("concept_way", before_conceptunit.get_concept_way())
+                x_planatom.set_jkey(
+                    "concept_rope", before_conceptunit.get_concept_rope()
+                )
                 x_planatom.set_jkey("fcontext", after_factunit.fcontext)
                 if before_factunit.fstate != after_factunit.fstate:
                     x_planatom.set_jvalue("fstate", after_factunit.fstate)
@@ -812,11 +820,11 @@ class PlanDelta:
                 self.set_planatom(x_planatom)
 
     def add_planatom_concept_factunit_deletes(
-        self, concept_way: WayTerm, delete_factunit_rcontexts: FactUnit
+        self, concept_rope: RopeTerm, delete_factunit_rcontexts: FactUnit
     ):
         for delete_factunit_rcontext in delete_factunit_rcontexts:
             x_planatom = planatom_shop("plan_concept_factunit", "DELETE")
-            x_planatom.set_jkey("concept_way", concept_way)
+            x_planatom.set_jkey("concept_rope", concept_rope)
             x_planatom.set_jkey("fcontext", delete_factunit_rcontext)
             self.set_planatom(x_planatom)
 

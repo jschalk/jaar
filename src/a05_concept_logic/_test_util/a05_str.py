@@ -1,4 +1,4 @@
-from src.a01_term_logic._test_util.a01_str import bridge_str
+from src.a01_term_logic._test_util.a01_str import knot_str
 from src.a02_finance_logic._test_util.a02_str import fund_iota_str, vow_label_str
 
 
@@ -90,8 +90,8 @@ def concept_label_str() -> str:
     return "concept_label"
 
 
-def concept_way_str() -> str:
-    return "concept_way"
+def concept_rope_str() -> str:
+    return "concept_rope"
 
 
 def denom_str() -> str:

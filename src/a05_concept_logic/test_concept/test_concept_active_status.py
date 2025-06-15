@@ -1,4 +1,4 @@
-from src.a01_term_logic.way import create_way
+from src.a01_term_logic.rope import create_rope
 from src.a03_group_logic.group import awardheir_shop, awardlink_shop
 from src.a04_reason_logic.reason_concept import (
     factheir_shop,
@@ -155,13 +155,13 @@ def test_ConceptUnit_set_awardheirs_fund_give_fund_take_ReturnsObj_NoValues():
 def test_ConceptUnit_set_reasonheirs_CorrectlyAcceptsNewValues():
     # ESTABLISH
     ball_str = "ball"
-    ball_way = create_way(ball_str)
+    ball_rope = create_rope(ball_str)
     run_str = "run"
-    run_way = create_way(ball_way, run_str)
+    run_rope = create_rope(ball_rope, run_str)
     ball_concept = conceptunit_shop(ball_str)
-    run_premise = premiseunit_shop(pstate=run_way, popen=0, pnigh=7)
+    run_premise = premiseunit_shop(pstate=run_rope, popen=0, pnigh=7)
     run_premises = {run_premise.pstate: run_premise}
-    reasonheir = reasonheir_shop(run_way, premises=run_premises)
+    reasonheir = reasonheir_shop(run_rope, premises=run_premises)
     reasonheirs = {reasonheir.rcontext: reasonheir}
     assert ball_concept._reasonheirs == {}
 
@@ -176,12 +176,12 @@ def test_ConceptUnit_set_reasonheirs_CorrectlyAcceptsNewValues():
 def test_ConceptUnit_set_reasonheirs_CorrectlyRefusesNewValues():
     # ESTABLISH
     ball_str = "ball"
-    ball_way = create_way(ball_str)
+    ball_rope = create_rope(ball_str)
     run_str = "run"
-    run_way = create_way(ball_way, run_str)
-    run_premise = premiseunit_shop(pstate=run_way, popen=0, pnigh=7)
+    run_rope = create_rope(ball_rope, run_str)
+    run_premise = premiseunit_shop(pstate=run_rope, popen=0, pnigh=7)
     run_premises = {run_premise.pstate: run_premise}
-    run_reasonunit = reasonunit_shop(rcontext=run_way, premises=run_premises)
+    run_reasonunit = reasonunit_shop(rcontext=run_rope, premises=run_premises)
     run_reasonunits = {run_reasonunit.rcontext: run_reasonunit}
     ball_concept = conceptunit_shop(ball_str, reasonunits=run_reasonunits)
     assert ball_concept.reasonunits != {}
@@ -190,7 +190,7 @@ def test_ConceptUnit_set_reasonheirs_CorrectlyRefusesNewValues():
     ball_concept.set_reasonheirs(reasonheirs={}, plan_concept_dict={})
 
     # THEN
-    reasonheir = reasonheir_shop(run_way, premises=run_premises)
+    reasonheir = reasonheir_shop(run_rope, premises=run_premises)
     reasonheirs = {reasonheir.rcontext: reasonheir}
     assert ball_concept._reasonheirs == reasonheirs
 
@@ -210,33 +210,33 @@ def test_ConceptUnit_set_range_factheirs_SetsAttrNoParameters():
 def test_ConceptUnit_set_range_factheirs_SetsAttrNewFactHeir():
     # ESTABLISH
     wk_str = "wk"
-    wk_way = create_way(root_label(), wk_str)
+    wk_rope = create_rope(root_label(), wk_str)
     wk_popen = 3
     wk_pnigh = 7
     wk_addin = 10
-    wk_concept = conceptunit_shop(wk_str, parent_way=root_label(), addin=wk_addin)
-    wk_factheir = factheir_shop(wk_way, wk_way, wk_popen, wk_pnigh)
+    wk_concept = conceptunit_shop(wk_str, parent_rope=root_label(), addin=wk_addin)
+    wk_factheir = factheir_shop(wk_rope, wk_rope, wk_popen, wk_pnigh)
     tue_str = "Tue"
-    tue_way = create_way(wk_way, tue_str)
+    tue_rope = create_rope(wk_rope, tue_str)
     tue_addin = 100
-    tue_concept = conceptunit_shop(tue_str, parent_way=wk_way, addin=tue_addin)
+    tue_concept = conceptunit_shop(tue_str, parent_rope=wk_rope, addin=tue_addin)
     ball_str = "ball"
-    ball_way = create_way(root_label(), ball_str)
+    ball_rope = create_rope(root_label(), ball_str)
     ball_concept = conceptunit_shop(ball_str)
     ball_concept._set_factheir(wk_factheir)
-    tue_reasonheirs = {tue_way: reasonheir_shop(tue_way, None, False)}
+    tue_reasonheirs = {tue_rope: reasonheir_shop(tue_rope, None, False)}
     x_plan_concept_dict = {
-        wk_concept.get_concept_way(): wk_concept,
-        tue_concept.get_concept_way(): tue_concept,
+        wk_concept.get_concept_rope(): wk_concept,
+        tue_concept.get_concept_rope(): tue_concept,
     }
     ball_concept.set_reasonheirs(x_plan_concept_dict, tue_reasonheirs)
 
-    x_range_inheritors = {tue_way: wk_way}
+    x_range_inheritors = {tue_rope: wk_rope}
     assert len(ball_concept._reasonheirs) == 1
-    assert ball_concept._factheirs == {wk_way: wk_factheir}
-    assert ball_concept._factheirs.get(wk_way)
+    assert ball_concept._factheirs == {wk_rope: wk_factheir}
+    assert ball_concept._factheirs.get(wk_rope)
     assert len(ball_concept._factheirs) == 1
-    assert ball_concept._factheirs.get(tue_way) is None
+    assert ball_concept._factheirs.get(tue_rope) is None
 
     # WHEN
     ball_concept.set_range_factheirs(x_plan_concept_dict, x_range_inheritors)
@@ -244,9 +244,9 @@ def test_ConceptUnit_set_range_factheirs_SetsAttrNewFactHeir():
     # THEN
     tue_popen = 113
     tue_pnigh = 117
-    tue_factheir = factheir_shop(tue_way, tue_way, tue_popen, tue_pnigh)
+    tue_factheir = factheir_shop(tue_rope, tue_rope, tue_popen, tue_pnigh)
     assert len(ball_concept._factheirs) == 2
-    assert ball_concept._factheirs == {tue_way: tue_factheir, wk_way: wk_factheir}
+    assert ball_concept._factheirs == {tue_rope: tue_factheir, wk_rope: wk_factheir}
 
 
 def test_ConceptUnit_set_reasonunit_SetsAttr():

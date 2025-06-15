@@ -188,11 +188,11 @@ def test_AcctUnit_get_dict_ReturnsDictWith__irrational_debt_score_ValuesIsNone()
     assert len(x_dict.keys()) == 10
 
 
-def test_acctunit_get_from_dict_ReturnsObjWith_bridge():
+def test_acctunit_get_from_dict_ReturnsObjWith_knot():
     # ESTABLISH
     yao_str = ",Yao"
     slash_str = "/"
-    before_yao_acctunit = acctunit_shop(yao_str, bridge=slash_str)
+    before_yao_acctunit = acctunit_shop(yao_str, knot=slash_str)
     yao_dict = before_yao_acctunit.get_dict()
 
     # WHEN
@@ -200,14 +200,14 @@ def test_acctunit_get_from_dict_ReturnsObjWith_bridge():
 
     # THEN
     assert before_yao_acctunit == after_yao_acctunit
-    assert after_yao_acctunit.bridge == slash_str
+    assert after_yao_acctunit.knot == slash_str
 
 
 def test_acctunit_get_from_dict_Returns_memberships():
     # ESTABLISH
     yao_str = ",Yao"
     slash_str = "/"
-    before_yao_acctunit = acctunit_shop(yao_str, bridge=slash_str)
+    before_yao_acctunit = acctunit_shop(yao_str, knot=slash_str)
     ohio_str = f"{slash_str}ohio"
     iowa_str = f"{slash_str}iowa"
     ohio_credit_vote = 90
@@ -226,14 +226,14 @@ def test_acctunit_get_from_dict_Returns_memberships():
     # THEN
     assert before_yao_acctunit._memberships == after_yao_acctunit._memberships
     assert before_yao_acctunit == after_yao_acctunit
-    assert after_yao_acctunit.bridge == slash_str
+    assert after_yao_acctunit.knot == slash_str
 
 
-def test_acctunits_get_from_dict_ReturnsObjWith_bridge():
+def test_acctunits_get_from_dict_ReturnsObjWith_knot():
     # ESTABLISH
     yao_str = ",Yao"
     slash_str = "/"
-    yao_acctunit = acctunit_shop(yao_str, bridge=slash_str)
+    yao_acctunit = acctunit_shop(yao_str, knot=slash_str)
     yao_dict = yao_acctunit.get_dict()
     x_acctunits_dict = {yao_str: yao_dict}
 
@@ -242,7 +242,7 @@ def test_acctunits_get_from_dict_ReturnsObjWith_bridge():
 
     # THEN
     assert x_acctunits_objs.get(yao_str) == yao_acctunit
-    assert x_acctunits_objs.get(yao_str).bridge == slash_str
+    assert x_acctunits_objs.get(yao_str).knot == slash_str
 
 
 def test_acctunits_get_from_json_ReturnsObj_SimpleExampleWith_IncompleteData():

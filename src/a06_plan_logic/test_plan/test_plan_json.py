@@ -1,6 +1,6 @@
 from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import get_dict_from_json, x_is_json
-from src.a01_term_logic.way import default_bridge_if_None, to_way
+from src.a01_term_logic.rope import default_knot_if_None, to_rope
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import factunit_shop
 from src.a04_reason_logic.reason_labor import laborunit_shop
@@ -22,10 +22,10 @@ def test_PlanUnit_get_dict_ReturnsObj_Scenario1_large_json():
     # ESTABLISH
     yao_plan = planunit_v001()
     day_hr_str = "day_hr"
-    day_hr_way = yao_plan.make_l1_way(day_hr_str)
-    day_hr_concept = yao_plan.get_concept_obj(day_hr_way)
-    yao_plan.add_fact(fcontext=day_hr_way, fstate=day_hr_way, fopen=0, fnigh=23)
-    time_minute = yao_plan.make_l1_way("day_minute")
+    day_hr_rope = yao_plan.make_l1_rope(day_hr_str)
+    day_hr_concept = yao_plan.get_concept_obj(day_hr_rope)
+    yao_plan.add_fact(fcontext=day_hr_rope, fstate=day_hr_rope, fopen=0, fnigh=23)
+    time_minute = yao_plan.make_l1_rope("day_minute")
     yao_plan.add_fact(fcontext=time_minute, fstate=time_minute, fopen=0, fnigh=1440)
     yao_str = "Yao"
     yao_fund_pool = 23000
@@ -55,7 +55,7 @@ def test_PlanUnit_get_dict_ReturnsObj_Scenario1_large_json():
     assert plan_dict["fund_pool"] == yao_fund_pool
     assert plan_dict["fund_iota"] == yao_fund_iota
     assert plan_dict["max_tree_traverse"] == yao_plan.max_tree_traverse
-    assert plan_dict["bridge"] == yao_plan.bridge
+    assert plan_dict["knot"] == yao_plan.knot
     assert plan_dict["credor_respect"] == yao_plan.credor_respect
     assert plan_dict["debtor_respect"] == yao_plan.debtor_respect
     assert plan_dict["last_pack_id"] == yao_plan.last_pack_id
@@ -78,9 +78,9 @@ def test_PlanUnit_get_dict_ReturnsObj_Scenario2_conceptroot_laborunit():
     sue_plan = planunit_shop("Sue")
     x_laborunit = laborunit_shop()
     x_laborunit.set_laborlink(labor_title=run_str)
-    root_way = to_way(sue_plan.vow_label)
-    sue_plan.edit_concept_attr(root_way, laborunit=x_laborunit)
-    root_concept = sue_plan.get_concept_obj(root_way)
+    root_rope = to_rope(sue_plan.vow_label)
+    sue_plan.edit_concept_attr(root_rope, laborunit=x_laborunit)
+    root_concept = sue_plan.get_concept_obj(root_rope)
     x_gogo_want = 5
     x_stop_want = 11
     root_concept.gogo_want = x_gogo_want
@@ -107,8 +107,8 @@ def test_PlanUnit_get_dict_ReturnsObj_Scenario3_With_conceptroot_healerlink():
     yao_acctunit.add_membership(run_str)
     run_healerlink = healerlink_shop()
     run_healerlink.set_healer_name(x_healer_name=run_str)
-    root_way = to_way(sue_plan.vow_label)
-    sue_plan.edit_concept_attr(root_way, healerlink=run_healerlink)
+    root_rope = to_rope(sue_plan.vow_label)
+    sue_plan.edit_concept_attr(root_rope, healerlink=run_healerlink)
 
     # WHEN
     plan_dict = sue_plan.get_dict()
@@ -128,11 +128,11 @@ def test_PlanUnit_get_dict_ReturnsObj_Scenario4_conceptkid_LaborUnit():
     yao_acctunit.add_membership(run_str)
 
     morn_str = "morning"
-    morn_way = sue_plan.make_l1_way(morn_str)
+    morn_rope = sue_plan.make_l1_rope(morn_str)
     sue_plan.set_l1_concept(conceptunit_shop(morn_str))
     x_laborunit = laborunit_shop()
     x_laborunit.set_laborlink(labor_title=run_str)
-    sue_plan.edit_concept_attr(morn_way, laborunit=x_laborunit)
+    sue_plan.edit_concept_attr(morn_rope, laborunit=x_laborunit)
 
     # WHEN
     plan_dict = sue_plan.get_dict()
@@ -165,9 +165,9 @@ def test_PlanUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     yao_acctunit = zia_plan.get_acct(yao_str)
     yao_acctunit.add_membership(run_str)
     run_healerlink = healerlink_shop({run_str})
-    root_way = to_way(zia_plan.vow_label)
-    zia_plan.edit_concept_attr(root_way, healerlink=run_healerlink)
-    zia_plan.edit_concept_attr(root_way, problem_bool=True)
+    root_rope = to_rope(zia_plan.vow_label)
+    zia_plan.edit_concept_attr(root_rope, healerlink=run_healerlink)
+    zia_plan.edit_concept_attr(root_rope, problem_bool=True)
 
     # WHEN
     x_json = zia_plan.get_json()
@@ -219,12 +219,12 @@ def test_PlanUnit_get_json_ReturnsCorrectJSON_BigExample():
     # ESTABLISH
     yao_plan = planunit_v001()
     day_hr_str = "day_hr"
-    day_hr_way = yao_plan.make_l1_way(day_hr_str)
-    yao_plan.add_fact(fcontext=day_hr_way, fstate=day_hr_way, fopen=0, fnigh=23)
+    day_hr_rope = yao_plan.make_l1_rope(day_hr_str)
+    yao_plan.add_fact(fcontext=day_hr_rope, fstate=day_hr_rope, fopen=0, fnigh=23)
     day_min_str = "day_minute"
-    day_min_way = yao_plan.make_l1_way(day_min_str)
-    yao_plan.add_fact(fcontext=day_min_way, fstate=day_min_way, fopen=0, fnigh=59)
-    x_factunit = factunit_shop(day_min_way, day_min_way, 5, 59)
+    day_min_rope = yao_plan.make_l1_rope(day_min_str)
+    yao_plan.add_fact(fcontext=day_min_rope, fstate=day_min_rope, fopen=0, fnigh=59)
+    x_factunit = factunit_shop(day_min_rope, day_min_rope, 5, 59)
     yao_plan.edit_concept_attr(x_factunit.fcontext, factunit=x_factunit)
     yao_plan.set_max_tree_traverse(2)
     yao_str = "Yao"
@@ -239,7 +239,7 @@ def test_PlanUnit_get_json_ReturnsCorrectJSON_BigExample():
     assert plan_dict["tally"] == yao_plan.tally
     assert plan_dict["max_tree_traverse"] == 2
     assert plan_dict["max_tree_traverse"] == yao_plan.max_tree_traverse
-    assert plan_dict["bridge"] == yao_plan.bridge
+    assert plan_dict["knot"] == yao_plan.knot
 
     x_conceptroot = yao_plan.conceptroot
     conceptroot_dict = plan_dict.get("conceptroot")
@@ -248,7 +248,7 @@ def test_PlanUnit_get_json_ReturnsCorrectJSON_BigExample():
     kids = conceptroot_dict[_kids]
     day_min_dict = kids[day_min_str]
     day_min_factunits_dict = day_min_dict["factunits"]
-    day_min_concept_x = yao_plan.get_concept_obj(day_min_way)
+    day_min_concept_x = yao_plan.get_concept_obj(day_min_rope)
     print(f"{day_min_factunits_dict=}")
     assert len(day_min_factunits_dict) == 1
     assert len(day_min_factunits_dict) == len(day_min_concept_x.factunits)
@@ -256,10 +256,10 @@ def test_PlanUnit_get_json_ReturnsCorrectJSON_BigExample():
     _reasonunits = "reasonunits"
     cont_str = "Freelancing"
     ulti_str = "Ultimate Frisbee"
-    cont_way = yao_plan.make_l1_way(cont_str)
-    ulti_way = yao_plan.make_l1_way(ulti_str)
-    cont_concept = yao_plan.get_concept_obj(cont_way)
-    ulti_concept = yao_plan.get_concept_obj(ulti_way)
+    cont_rope = yao_plan.make_l1_rope(cont_str)
+    ulti_rope = yao_plan.make_l1_rope(ulti_str)
+    cont_concept = yao_plan.get_concept_obj(cont_rope)
+    ulti_concept = yao_plan.get_concept_obj(ulti_rope)
     cont_reasonunits_dict = conceptroot_dict[_kids][cont_str][_reasonunits]
     ulti_reasonunits_dict = conceptroot_dict[_kids][ulti_str][_reasonunits]
     assert len(cont_reasonunits_dict) == len(cont_concept.reasonunits)
@@ -294,11 +294,11 @@ def test_planunit_get_from_json_ReturnsObjSimpleExample():
     zia_plan.set_last_pack_id(zia_last_pack_id)
 
     shave_str = "shave"
-    shave_way = zia_plan.make_l1_way(shave_str)
-    shave_concept_y1 = zia_plan.get_concept_obj(shave_way)
+    shave_rope = zia_plan.make_l1_rope(shave_str)
+    shave_concept_y1 = zia_plan.get_concept_obj(shave_rope)
     shave_concept_y1.problem_bool = True
-    # print(f"{shave_way=}")
-    # print(f"{json_shave_concept.concept_label=} {json_shave_concept.parent_way=}")
+    # print(f"{shave_rope=}")
+    # print(f"{json_shave_concept.concept_label=} {json_shave_concept.parent_rope=}")
 
     sue_str = "Sue"
     zia_plan.add_acctunit(acct_name=sue_str, credit_score=199, debt_score=199)
@@ -311,18 +311,18 @@ def test_planunit_get_from_json_ReturnsObjSimpleExample():
     xio_acctunit.add_membership(run_str)
     run_laborunit = laborunit_shop()
     run_laborunit.set_laborlink(labor_title=run_str)
-    root_way = to_way(zia_plan.vow_label)
-    zia_plan.edit_concept_attr(root_way, laborunit=run_laborunit)
+    root_rope = to_rope(zia_plan.vow_label)
+    zia_plan.edit_concept_attr(root_rope, laborunit=run_laborunit)
     xio_laborunit = laborunit_shop()
     xio_laborunit.set_laborlink(labor_title=xio_str)
-    zia_plan.edit_concept_attr(shave_way, laborunit=xio_laborunit)
-    zia_plan.edit_concept_attr(shave_way, awardlink=awardlink_shop(xio_str))
-    zia_plan.edit_concept_attr(shave_way, awardlink=awardlink_shop(sue_str))
-    zia_plan.edit_concept_attr(root_way, awardlink=awardlink_shop(sue_str))
+    zia_plan.edit_concept_attr(shave_rope, laborunit=xio_laborunit)
+    zia_plan.edit_concept_attr(shave_rope, awardlink=awardlink_shop(xio_str))
+    zia_plan.edit_concept_attr(shave_rope, awardlink=awardlink_shop(sue_str))
+    zia_plan.edit_concept_attr(root_rope, awardlink=awardlink_shop(sue_str))
     # add healerlink to shave conceptunit
     run_healerlink = healerlink_shop({run_str})
-    zia_plan.edit_concept_attr(shave_way, healerlink=run_healerlink)
-    shave_concept = zia_plan.get_concept_obj(shave_way)
+    zia_plan.edit_concept_attr(shave_rope, healerlink=run_healerlink)
+    shave_concept = zia_plan.get_concept_obj(shave_rope)
     zia_gogo_want = 75
     zia_stop_want = 77
     shave_concept.gogo_want = zia_gogo_want
@@ -350,7 +350,7 @@ def test_planunit_get_from_json_ReturnsObjSimpleExample():
     assert json_plan.penny == zia_plan.penny
     assert json_plan.max_tree_traverse == 23
     assert json_plan.max_tree_traverse == zia_plan.max_tree_traverse
-    assert json_plan.bridge == zia_plan.bridge
+    assert json_plan.knot == zia_plan.knot
     assert json_plan.credor_respect == zia_plan.credor_respect
     assert json_plan.debtor_respect == zia_plan.debtor_respect
     assert json_plan.credor_respect == zia_credor_respect
@@ -360,8 +360,8 @@ def test_planunit_get_from_json_ReturnsObjSimpleExample():
     # assert json_plan._groups == zia_plan._groups
 
     json_conceptroot = json_plan.conceptroot
-    assert json_conceptroot.parent_way == ""
-    assert json_conceptroot.parent_way == zia_plan.conceptroot.parent_way
+    assert json_conceptroot.parent_rope == ""
+    assert json_conceptroot.parent_rope == zia_plan.conceptroot.parent_rope
     assert json_conceptroot.reasonunits == {}
     assert json_conceptroot.laborunit == zia_plan.conceptroot.laborunit
     assert json_conceptroot.laborunit == run_laborunit
@@ -373,17 +373,17 @@ def test_planunit_get_from_json_ReturnsObjSimpleExample():
     assert len(json_plan.conceptroot._kids) == 2
 
     wkday_str = "wkdays"
-    wkday_way = json_plan.make_l1_way(wkday_str)
-    wkday_concept_x = json_plan.get_concept_obj(wkday_way)
+    wkday_rope = json_plan.make_l1_rope(wkday_str)
+    wkday_concept_x = json_plan.get_concept_obj(wkday_rope)
     assert len(wkday_concept_x._kids) == 2
 
     sunday_str = "Sunday"
-    sunday_way = json_plan.make_way(wkday_way, sunday_str)
-    sunday_concept = json_plan.get_concept_obj(sunday_way)
+    sunday_rope = json_plan.make_rope(wkday_rope, sunday_str)
+    sunday_concept = json_plan.get_concept_obj(sunday_rope)
     assert sunday_concept.mass == 20
 
-    json_shave_concept = json_plan.get_concept_obj(shave_way)
-    zia_shave_concept = zia_plan.get_concept_obj(shave_way)
+    json_shave_concept = json_plan.get_concept_obj(shave_rope)
+    zia_shave_concept = zia_plan.get_concept_obj(shave_rope)
     assert len(json_shave_concept.reasonunits) == 1
     assert json_shave_concept.laborunit == zia_shave_concept.laborunit
     assert json_shave_concept.laborunit == xio_laborunit
@@ -414,31 +414,31 @@ def test_planunit_get_from_json_ReturnsCorrectConceptRoot():
     json_plan = planunit_get_from_json(x_plan_json=x_json)
 
     # THEN
-    json_conceptroot = json_plan.get_concept_obj(to_way(zia_plan.vow_label))
+    json_conceptroot = json_plan.get_concept_obj(to_rope(zia_plan.vow_label))
     assert json_conceptroot.gogo_want == zia_gogo_want
     assert json_conceptroot.stop_want == zia_stop_want
 
 
-def test_planunit_get_from_json_ReturnsObj_bridge_Example():
+def test_planunit_get_from_json_ReturnsObj_knot_Example():
     # ESTABLISH
-    slash_bridge = "/"
-    before_bob_plan = planunit_shop("Bob", bridge=slash_bridge)
-    assert before_bob_plan.bridge != default_bridge_if_None()
+    slash_knot = "/"
+    before_bob_plan = planunit_shop("Bob", knot=slash_knot)
+    assert before_bob_plan.knot != default_knot_if_None()
 
     # WHEN
     bob_json = before_bob_plan.get_json()
     after_bob_plan = planunit_get_from_json(bob_json)
 
     # THEN
-    assert after_bob_plan.bridge != default_bridge_if_None()
-    assert after_bob_plan.bridge == slash_bridge
-    assert after_bob_plan.bridge == before_bob_plan.bridge
+    assert after_bob_plan.knot != default_knot_if_None()
+    assert after_bob_plan.knot == slash_knot
+    assert after_bob_plan.knot == before_bob_plan.knot
 
 
-def test_planunit_get_from_json_ReturnsObj_bridge_AcctExample():
+def test_planunit_get_from_json_ReturnsObj_knot_AcctExample():
     # ESTABLISH
-    slash_bridge = "/"
-    before_bob_plan = planunit_shop("Bob", bridge=slash_bridge)
+    slash_knot = "/"
+    before_bob_plan = planunit_shop("Bob", knot=slash_knot)
     bob_str = ",Bob"
     before_bob_plan.add_acctunit(bob_str)
     assert before_bob_plan.acct_exists(bob_str)
@@ -449,15 +449,15 @@ def test_planunit_get_from_json_ReturnsObj_bridge_AcctExample():
 
     # THEN
     after_bob_acctunit = after_bob_plan.get_acct(bob_str)
-    assert after_bob_acctunit.bridge == slash_bridge
+    assert after_bob_acctunit.knot == slash_knot
 
 
-def test_planunit_get_from_json_ReturnsObj_bridge_GroupExample():
+def test_planunit_get_from_json_ReturnsObj_knot_GroupExample():
     # ESTABLISH
-    slash_bridge = "/"
-    before_bob_plan = planunit_shop("Bob", bridge=slash_bridge)
+    slash_knot = "/"
+    before_bob_plan = planunit_shop("Bob", knot=slash_knot)
     yao_str = "Yao"
-    swim_str = f"{slash_bridge}Swimmers"
+    swim_str = f"{slash_knot}Swimmers"
     before_bob_plan.add_acctunit(yao_str)
     yao_acctunit = before_bob_plan.get_acct(yao_str)
     yao_acctunit.add_membership(swim_str)
@@ -468,29 +468,29 @@ def test_planunit_get_from_json_ReturnsObj_bridge_GroupExample():
 
     # THEN
     after_yao_acctunit = after_bob_plan.get_acct(yao_str)
-    assert after_yao_acctunit.bridge == slash_bridge
+    assert after_yao_acctunit.knot == slash_knot
 
 
-def test_planunit_get_from_json_ReturnsObj_Scenario7_conceptroot_bridge_IsCorrectlySet():
+def test_planunit_get_from_json_ReturnsObj_Scenario7_conceptroot_knot_IsCorrectlySet():
     # ESTABLISH
     slash_str = "/"
     run_str = "runners"
-    sue_plan = planunit_shop("Sue", bridge=slash_str)
-    root_way = to_way(sue_plan.vow_label, slash_str)
+    sue_plan = planunit_shop("Sue", knot=slash_str)
+    root_rope = to_rope(sue_plan.vow_label, slash_str)
     day_hr_str = "day_hr"
-    day_hr_way = sue_plan.make_l1_way(day_hr_str)
-    sue_plan.add_concept(day_hr_way)
-    assert sue_plan.bridge == slash_str
-    assert sue_plan.get_concept_obj(root_way).bridge == slash_str
-    assert sue_plan.get_concept_obj(day_hr_way).bridge == slash_str
+    day_hr_rope = sue_plan.make_l1_rope(day_hr_str)
+    sue_plan.add_concept(day_hr_rope)
+    assert sue_plan.knot == slash_str
+    assert sue_plan.get_concept_obj(root_rope).knot == slash_str
+    assert sue_plan.get_concept_obj(day_hr_rope).knot == slash_str
 
     # WHEN
     after_bob_plan = planunit_get_from_json(sue_plan.get_json())
 
     # THEN
-    assert after_bob_plan.bridge == slash_str
-    assert after_bob_plan.get_concept_obj(root_way).bridge == slash_str
-    assert after_bob_plan.get_concept_obj(day_hr_way).bridge == slash_str
+    assert after_bob_plan.knot == slash_str
+    assert after_bob_plan.get_concept_obj(root_rope).knot == slash_str
+    assert after_bob_plan.get_concept_obj(day_hr_rope).knot == slash_str
 
 
 def test_planunit_get_from_json_ExportsPlanUnit_mass():
@@ -537,12 +537,12 @@ def test_get_dict_of_plan_from_dict_ReturnsDictOfPlanUnits():
 
     ccn2_plan = ccn_dict_of_obj.get(x2_plan.owner_name)
     assert ccn2_plan.conceptroot.concept_label == x2_plan.conceptroot.concept_label
-    assert ccn2_plan.conceptroot.parent_way == x2_plan.conceptroot.parent_way
+    assert ccn2_plan.conceptroot.parent_rope == x2_plan.conceptroot.parent_rope
     assert ccn2_plan.conceptroot.fund_iota == x2_plan.conceptroot.fund_iota
-    shave_way = ccn2_plan.make_l1_way("shave")
-    wk_way = ccn2_plan.make_l1_way("wkdays")
-    # assert ccn2_plan.get_concept_obj(shave_way) == x2_plan.get_concept_obj(shave_way)
-    # assert ccn2_plan.get_concept_obj(wk_way) == x2_plan.get_concept_obj(wk_way)
+    shave_rope = ccn2_plan.make_l1_rope("shave")
+    wk_rope = ccn2_plan.make_l1_rope("wkdays")
+    # assert ccn2_plan.get_concept_obj(shave_rope) == x2_plan.get_concept_obj(shave_rope)
+    # assert ccn2_plan.get_concept_obj(wk_rope) == x2_plan.get_concept_obj(wk_rope)
     # assert ccn2_plan.conceptroot == x2_plan.conceptroot
     assert ccn2_plan.get_dict() == x2_plan.get_dict()
 

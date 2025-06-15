@@ -2,7 +2,7 @@
 from os import getcwd as os_getcwd
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a01_term_logic._test_util.a01_str import bridge_str
+from src.a01_term_logic._test_util.a01_str import knot_str
 from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
 from src.a03_group_logic._test_util.a03_str import (
     _credor_pool_str,
@@ -60,8 +60,8 @@ from src.a05_concept_logic._test_util.a05_str import (
 from src.a06_plan_logic._test_util.a06_str import (
     LabelTerm_str,
     NameTerm_str,
+    RopeTerm_str,
     TitleTerm_str,
-    WayTerm_str,
     _offtrack_fund_str,
     _rational_str,
     _sum_healerlink_share_str,
@@ -71,7 +71,7 @@ from src.a06_plan_logic._test_util.a06_str import (
     awardee_title_str,
     begin_str,
     close_str,
-    concept_way_str,
+    concept_rope_str,
     credit_score_str,
     credit_vote_str,
     credor_respect_str,
@@ -357,7 +357,7 @@ def test_get_all_plan_calc_args_ReturnsObj():
     # THEN
     assert all_plan_calc_args
     assert stop_want_str() in all_plan_calc_args
-    assert concept_way_str() in all_plan_calc_args
+    assert concept_rope_str() in all_plan_calc_args
     assert "_fund_give" in all_plan_calc_args
     assert all_plan_calc_args.get("_fund_give") == {
         "plan_concept_awardlink",
@@ -369,10 +369,10 @@ def test_get_all_plan_calc_args_ReturnsObj():
     # plan_calc_config = get_plan_calc_config_dict()
     # plan_acctunit_aspects = plan_calc_config.get("plan_acctunit")
     # plnacct_jmetrics_dict = plan_acctunit_aspects.get("jmetrics")
-    # way_plan_calc_aspects = plnacct_jmetrics_dict.get("_fund_give")
-    # assert plan_concept_factunit_str() in way_plan_calc_aspects
-    # assert plan_concept_laborlink_str() in way_plan_calc_aspects
-    # assert len(way_plan_calc_aspects) == 6
+    # rope_plan_calc_aspects = plnacct_jmetrics_dict.get("_fund_give")
+    # assert plan_concept_factunit_str() in rope_plan_calc_aspects
+    # assert plan_concept_laborlink_str() in rope_plan_calc_aspects
+    # assert len(rope_plan_calc_aspects) == 6
     assert len(all_plan_calc_args) == 76
 
 
@@ -470,7 +470,7 @@ def test_get_plan_calc_dimen_args_ReturnsObj():
         "_range_evaluated",
         "problem_bool",
         gogo_want_str(),
-        concept_way_str(),
+        concept_rope_str(),
         begin_str(),
     }
     assert plan_groupunit_args == {
@@ -480,7 +480,7 @@ def test_get_plan_calc_dimen_args_ReturnsObj():
         "_credor_pool",
         "_fund_give",
         "group_title",
-        "bridge",
+        "knot",
         "_fund_agenda_give",
         "_fund_agenda_take",
         "_fund_take",
@@ -590,8 +590,8 @@ def test_get_plan_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
 
     assert g_class_type(cfig, plngrou, jk, group_title_str()) == "TitleTerm"
     assert g_sqlitetype(cfig, plngrou, jk, group_title_str()) == "TEXT"
-    assert g_class_type(cfig, plngrou, jv, bridge_str()) == "str"
-    assert g_sqlitetype(cfig, plngrou, jv, bridge_str()) == "TEXT"
+    assert g_class_type(cfig, plngrou, jv, knot_str()) == "str"
+    assert g_sqlitetype(cfig, plngrou, jv, knot_str()) == "TEXT"
     assert g_class_type(cfig, plngrou, jm, _debtor_pool_str()) == "float"
     assert g_sqlitetype(cfig, plngrou, jm, _debtor_pool_str()) == "REAL"
     assert g_class_type(cfig, plngrou, jm, _credor_pool_str()) == "float"
@@ -609,8 +609,8 @@ def test_get_plan_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
 
     assert g_class_type(cfig, plnawar, jk, awardee_title_str()) == TitleTerm_str()
     assert g_sqlitetype(cfig, plnawar, jk, awardee_title_str()) == "TEXT"
-    assert g_class_type(cfig, plnawar, jk, concept_way_str()) == WayTerm_str()
-    assert g_sqlitetype(cfig, plnawar, jk, concept_way_str()) == "TEXT"
+    assert g_class_type(cfig, plnawar, jk, concept_rope_str()) == RopeTerm_str()
+    assert g_sqlitetype(cfig, plnawar, jk, concept_rope_str()) == "TEXT"
     assert g_class_type(cfig, plnawar, jm, _fund_give_str()) == "float"
     assert g_sqlitetype(cfig, plnawar, jm, _fund_give_str()) == "REAL"
     assert g_class_type(cfig, plnawar, jm, _fund_take_str()) == "float"
@@ -619,26 +619,26 @@ def test_get_plan_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, plnawar, jv, give_force_str()) == "REAL"
     assert g_class_type(cfig, plnawar, jv, take_force_str()) == "float"
     assert g_sqlitetype(cfig, plnawar, jv, take_force_str()) == "REAL"
-    assert g_class_type(cfig, plnfact, jk, fcontext_str()) == WayTerm_str()
+    assert g_class_type(cfig, plnfact, jk, fcontext_str()) == RopeTerm_str()
     assert g_sqlitetype(cfig, plnfact, jk, fcontext_str()) == "TEXT"
-    assert g_class_type(cfig, plnfact, jk, concept_way_str()) == WayTerm_str()
-    assert g_sqlitetype(cfig, plnfact, jk, concept_way_str()) == "TEXT"
+    assert g_class_type(cfig, plnfact, jk, concept_rope_str()) == RopeTerm_str()
+    assert g_sqlitetype(cfig, plnfact, jk, concept_rope_str()) == "TEXT"
     assert g_class_type(cfig, plnfact, jv, fnigh_str()) == "float"
     assert g_sqlitetype(cfig, plnfact, jv, fnigh_str()) == "REAL"
     assert g_class_type(cfig, plnfact, jv, fopen_str()) == "float"
     assert g_sqlitetype(cfig, plnfact, jv, fopen_str()) == "REAL"
-    assert g_class_type(cfig, plnfact, jv, fstate_str()) == WayTerm_str()
+    assert g_class_type(cfig, plnfact, jv, fstate_str()) == RopeTerm_str()
     assert g_sqlitetype(cfig, plnfact, jv, fstate_str()) == "TEXT"
     assert g_class_type(cfig, plnheal, jk, healer_name_str()) == NameTerm_str()
     assert g_sqlitetype(cfig, plnheal, jk, healer_name_str()) == "TEXT"
-    assert g_class_type(cfig, plnheal, jk, concept_way_str()) == WayTerm_str()
-    assert g_sqlitetype(cfig, plnheal, jk, concept_way_str()) == "TEXT"
-    assert g_class_type(cfig, plnprem, jk, rcontext_str()) == WayTerm_str()
+    assert g_class_type(cfig, plnheal, jk, concept_rope_str()) == RopeTerm_str()
+    assert g_sqlitetype(cfig, plnheal, jk, concept_rope_str()) == "TEXT"
+    assert g_class_type(cfig, plnprem, jk, rcontext_str()) == RopeTerm_str()
     assert g_sqlitetype(cfig, plnprem, jk, rcontext_str()) == "TEXT"
-    assert g_class_type(cfig, plnprem, jk, pstate_str()) == WayTerm_str()
+    assert g_class_type(cfig, plnprem, jk, pstate_str()) == RopeTerm_str()
     assert g_sqlitetype(cfig, plnprem, jk, pstate_str()) == "TEXT"
-    assert g_class_type(cfig, plnprem, jk, concept_way_str()) == WayTerm_str()
-    assert g_sqlitetype(cfig, plnprem, jk, concept_way_str()) == "TEXT"
+    assert g_class_type(cfig, plnprem, jk, concept_rope_str()) == RopeTerm_str()
+    assert g_sqlitetype(cfig, plnprem, jk, concept_rope_str()) == "TEXT"
     assert g_class_type(cfig, plnprem, jm, _status_str()) == "int"
     assert g_sqlitetype(cfig, plnprem, jm, _status_str()) == "INTEGER"
     assert g_class_type(cfig, plnprem, jm, _chore_str()) == "int"
@@ -649,10 +649,10 @@ def test_get_plan_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, plnprem, jv, pnigh_str()) == "REAL"
     assert g_class_type(cfig, plnprem, jv, popen_str()) == "float"
     assert g_sqlitetype(cfig, plnprem, jv, popen_str()) == "REAL"
-    assert g_class_type(cfig, plnreas, jk, rcontext_str()) == WayTerm_str()
+    assert g_class_type(cfig, plnreas, jk, rcontext_str()) == RopeTerm_str()
     assert g_sqlitetype(cfig, plnreas, jk, rcontext_str()) == "TEXT"
-    assert g_class_type(cfig, plnreas, jk, concept_way_str()) == WayTerm_str()
-    assert g_sqlitetype(cfig, plnreas, jk, concept_way_str()) == "TEXT"
+    assert g_class_type(cfig, plnreas, jk, concept_rope_str()) == RopeTerm_str()
+    assert g_sqlitetype(cfig, plnreas, jk, concept_rope_str()) == "TEXT"
     assert g_class_type(cfig, plnreas, jm, "_rconcept_active_value") == "int"
     assert g_sqlitetype(cfig, plnreas, jm, "_rconcept_active_value") == "INTEGER"
     assert g_class_type(cfig, plnreas, jm, _status_str()) == "int"
@@ -661,8 +661,8 @@ def test_get_plan_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, plnreas, jm, _chore_str()) == "INTEGER"
     assert g_class_type(cfig, plnreas, jv, rconcept_active_requisite_str()) == "bool"
     assert g_sqlitetype(cfig, plnreas, jv, rconcept_active_requisite_str()) == "INTEGER"
-    assert g_class_type(cfig, plnlabo, jk, concept_way_str()) == WayTerm_str()
-    assert g_sqlitetype(cfig, plnlabo, jk, concept_way_str()) == "TEXT"
+    assert g_class_type(cfig, plnlabo, jk, concept_rope_str()) == RopeTerm_str()
+    assert g_sqlitetype(cfig, plnlabo, jk, concept_rope_str()) == "TEXT"
     assert g_class_type(cfig, plnlabo, jk, labor_title_str()) == TitleTerm_str()
     assert g_sqlitetype(cfig, plnlabo, jk, labor_title_str()) == "TEXT"
     assert g_class_type(cfig, plnlabo, jm, "_owner_name_labor") == "int"
@@ -842,15 +842,15 @@ def test_get_plan_calc_args_type_dict_ReturnsObj():
     assert plan_calc_args_type_dict.get(problem_bool_str()) == "bool"
     assert plan_calc_args_type_dict.get(stop_want_str()) == "float"
     assert plan_calc_args_type_dict.get(awardee_title_str()) == TitleTerm_str()
-    assert plan_calc_args_type_dict.get(concept_way_str()) == WayTerm_str()
+    assert plan_calc_args_type_dict.get(concept_rope_str()) == RopeTerm_str()
     assert plan_calc_args_type_dict.get(give_force_str()) == "float"
     assert plan_calc_args_type_dict.get(take_force_str()) == "float"
-    assert plan_calc_args_type_dict.get(rcontext_str()) == WayTerm_str()
+    assert plan_calc_args_type_dict.get(rcontext_str()) == RopeTerm_str()
     assert plan_calc_args_type_dict.get(fnigh_str()) == "float"
     assert plan_calc_args_type_dict.get(fopen_str()) == "float"
-    assert plan_calc_args_type_dict.get(fstate_str()) == WayTerm_str()
+    assert plan_calc_args_type_dict.get(fstate_str()) == RopeTerm_str()
     assert plan_calc_args_type_dict.get(healer_name_str()) == NameTerm_str()
-    assert plan_calc_args_type_dict.get(pstate_str()) == WayTerm_str()
+    assert plan_calc_args_type_dict.get(pstate_str()) == RopeTerm_str()
     assert plan_calc_args_type_dict.get("_status") == "int"
     assert plan_calc_args_type_dict.get("_chore") == "int"
     assert plan_calc_args_type_dict.get(pdivisor_str()) == "int"

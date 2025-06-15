@@ -1,4 +1,4 @@
-from src.a01_term_logic.way import to_way
+from src.a01_term_logic.rope import to_rope
 from src.a02_finance_logic.finance_config import default_fund_pool
 from src.a04_reason_logic.reason_concept import (
     premiseunit_shop,
@@ -21,18 +21,18 @@ def test_PlanUnit_settle_plan_SetsStatus_active_WhenFactSaysNo():
     # ESTABLISH
     sue_planunit = get_planunit_with_4_levels_and_2reasons()
     wk_str = "wkdays"
-    wk_way = sue_planunit.make_l1_way(wk_str)
+    wk_rope = sue_planunit.make_l1_rope(wk_str)
     sun_str = "Sunday"
-    sun_way = sue_planunit.make_way(wk_way, sun_str)
+    sun_rope = sue_planunit.make_rope(wk_rope, sun_str)
 
     # for concept in sue_planunit._concept_dict.values():
-    #     print(f"{casa_way=} {concept.get_concept_way()=}")
+    #     print(f"{casa_rope=} {concept.get_concept_rope()=}")
     casa_str = "casa"
-    casa_way = sue_planunit.make_l1_way(casa_str)
-    assert sue_planunit.get_concept_obj(casa_way)._active is None
+    casa_rope = sue_planunit.make_l1_rope(casa_str)
+    assert sue_planunit.get_concept_obj(casa_rope)._active is None
 
     # WHEN
-    sue_planunit.add_fact(fcontext=wk_way, fstate=sun_way)
+    sue_planunit.add_fact(fcontext=wk_rope, fstate=sun_rope)
     sue_planunit.settle_plan()
 
     # THEN
@@ -40,71 +40,71 @@ def test_PlanUnit_settle_plan_SetsStatus_active_WhenFactSaysNo():
     assert len(sue_planunit._concept_dict) == 17
 
     # for concept in sue_planunit._concept_dict.values():
-    #     print(f"{casa_way=} {concept.get_concept_way()=}")
-    assert sue_planunit.get_concept_obj(casa_way)._active is False
+    #     print(f"{casa_rope=} {concept.get_concept_rope()=}")
+    assert sue_planunit.get_concept_obj(casa_rope)._active is False
 
 
 def test_PlanUnit_settle_plan_SetsStatus_active_WhenFactModifies():
     # ESTABLISH
     sue_planunit = get_planunit_with_4_levels_and_2reasons()
     wk_str = "wkdays"
-    wk_way = sue_planunit.make_l1_way(wk_str)
+    wk_rope = sue_planunit.make_l1_rope(wk_str)
     sun_str = "Wednesday"
-    sun_way = sue_planunit.make_way(wk_way, sun_str)
+    sun_rope = sue_planunit.make_rope(wk_rope, sun_str)
     casa_str = "casa"
-    casa_way = sue_planunit.make_l1_way(casa_str)
+    casa_rope = sue_planunit.make_l1_rope(casa_str)
 
     # WHEN
-    sue_planunit.add_fact(fcontext=wk_way, fstate=sun_way)
+    sue_planunit.add_fact(fcontext=wk_rope, fstate=sun_rope)
 
     # THEN
     sue_planunit.settle_plan()
     assert sue_planunit._concept_dict
     assert len(sue_planunit._concept_dict) == 17
-    assert sue_planunit._concept_dict.get(casa_way)._active is False
+    assert sue_planunit._concept_dict.get(casa_rope)._active is False
 
     # WHEN
     nation_str = "nation"
-    nation_way = sue_planunit.make_l1_way(nation_str)
+    nation_rope = sue_planunit.make_l1_rope(nation_str)
     usa_str = "USA"
-    usa_way = sue_planunit.make_way(nation_way, usa_str)
-    sue_planunit.add_fact(fcontext=nation_way, fstate=usa_way)
+    usa_rope = sue_planunit.make_rope(nation_rope, usa_str)
+    sue_planunit.add_fact(fcontext=nation_rope, fstate=usa_rope)
 
     # THEN
     sue_planunit.settle_plan()
     assert sue_planunit._concept_dict
     assert len(sue_planunit._concept_dict) == 17
-    assert sue_planunit._concept_dict.get(casa_way)._active
+    assert sue_planunit._concept_dict.get(casa_rope)._active
 
     # WHEN
     france_str = "France"
-    france_way = sue_planunit.make_way(nation_way, france_str)
-    sue_planunit.add_fact(fcontext=nation_way, fstate=france_way)
+    france_rope = sue_planunit.make_rope(nation_rope, france_str)
+    sue_planunit.add_fact(fcontext=nation_rope, fstate=france_rope)
 
     # THEN
     sue_planunit.settle_plan()
     assert sue_planunit._concept_dict
     assert len(sue_planunit._concept_dict) == 17
-    assert sue_planunit._concept_dict.get(casa_way)._active is False
+    assert sue_planunit._concept_dict.get(casa_rope)._active is False
 
 
 def test_PlanUnit_settle_plan_CorrectlySets_concept_dict():
     # ESTABLISH
     sue_planunit = get_planunit_with_4_levels_and_2reasons()
     wk_str = "wkdays"
-    wk_way = sue_planunit.make_l1_way(wk_str)
+    wk_rope = sue_planunit.make_l1_rope(wk_str)
     wed_str = "Wednesday"
-    wed_way = sue_planunit.make_way(wk_way, wed_str)
+    wed_rope = sue_planunit.make_rope(wk_rope, wed_str)
     nation_str = "nation"
-    nation_way = sue_planunit.make_l1_way(nation_str)
+    nation_rope = sue_planunit.make_l1_rope(nation_str)
     france_str = "France"
-    france_way = sue_planunit.make_way(nation_way, france_str)
-    sue_planunit.add_fact(fcontext=wk_way, fstate=wed_way)
-    sue_planunit.add_fact(fcontext=nation_way, fstate=france_way)
+    france_rope = sue_planunit.make_rope(nation_rope, france_str)
+    sue_planunit.add_fact(fcontext=wk_rope, fstate=wed_rope)
+    sue_planunit.add_fact(fcontext=nation_rope, fstate=france_rope)
 
     casa_str = "casa"
-    casa_way = sue_planunit.make_l1_way(casa_str)
-    casa_concept = sue_planunit.get_concept_obj(casa_way)
+    casa_rope = sue_planunit.make_l1_rope(casa_str)
+    casa_concept = sue_planunit.get_concept_obj(casa_rope)
     print(f"{sue_planunit.owner_name=} {len(casa_concept.reasonunits)=}")
     # print(f"{casa_concept.reasonunits=}")
     print(f"{sue_planunit.owner_name=} {len(sue_planunit.conceptroot.factunits)=}")
@@ -115,28 +115,28 @@ def test_PlanUnit_settle_plan_CorrectlySets_concept_dict():
     assert len(sue_planunit._concept_dict) == 17
 
     usa_str = "USA"
-    usa_way = sue_planunit.make_way(nation_way, usa_str)
+    usa_rope = sue_planunit.make_rope(nation_rope, usa_str)
     oregon_str = "Oregon"
-    oregon_way = sue_planunit.make_way(usa_way, oregon_str)
+    oregon_rope = sue_planunit.make_rope(usa_rope, oregon_str)
 
-    wed = premiseunit_shop(pstate=wed_way)
+    wed = premiseunit_shop(pstate=wed_rope)
     wed._status = True
     wed._chore = False
-    usa = premiseunit_shop(pstate=usa_way)
+    usa = premiseunit_shop(pstate=usa_rope)
     usa._status = True
     usa._chore = False
 
-    wed_lu = reasonunit_shop(wk_way, premises={wed.pstate: wed})
-    sta_lu = reasonunit_shop(nation_way, premises={usa.pstate: usa})
+    wed_lu = reasonunit_shop(wk_rope, premises={wed.pstate: wed})
+    sta_lu = reasonunit_shop(nation_rope, premises={usa.pstate: usa})
     wed_lh = reasonheir_shop(
-        rcontext=wk_way,
+        rcontext=wk_rope,
         premises={wed.pstate: wed},
         _status=True,
         _chore=False,
         _rconcept_active_value=True,
     )
     sta_lh = reasonheir_shop(
-        rcontext=nation_way,
+        rcontext=nation_rope,
         premises={usa.pstate: usa},
         _status=True,
         _chore=False,
@@ -153,13 +153,13 @@ def test_PlanUnit_settle_plan_CorrectlySets_concept_dict():
     }
 
     # WHEN
-    sue_planunit.add_fact(fcontext=nation_way, fstate=oregon_way)
+    sue_planunit.add_fact(fcontext=nation_rope, fstate=oregon_rope)
     sue_planunit.settle_plan()
 
     # THEN
-    casa_concept = sue_planunit._concept_dict.get(casa_way)
-    print(f"\nlook at {casa_concept.get_concept_way()=}")
-    assert casa_concept.parent_way == to_way(sue_planunit.vow_label)
+    casa_concept = sue_planunit._concept_dict.get(casa_rope)
+    print(f"\nlook at {casa_concept.get_concept_rope()=}")
+    assert casa_concept.parent_rope == to_rope(sue_planunit.vow_label)
     assert casa_concept._kids == {}
     assert casa_concept.mass == 30
     assert casa_concept.concept_label == casa_str
@@ -167,21 +167,21 @@ def test_PlanUnit_settle_plan_CorrectlySets_concept_dict():
     assert casa_concept._active
     assert casa_concept.task
     # print(f"{casa_concept._reasonheirs=}")
-    nation_reasonheir = casa_concept._reasonheirs[nation_way]
+    nation_reasonheir = casa_concept._reasonheirs[nation_rope]
     print(f"  {nation_reasonheir=}")
     print(f"  {nation_reasonheir._status=}\n")
     # assert casa_concept._reasonheirs == x1_reasonheirs
 
     assert len(casa_concept._reasonheirs) == len(x1_reasonheirs)
-    wk_reasonheir = casa_concept._reasonheirs.get(wk_way)
-    # usa_premise = wk_reasonheir.premises.get(usa_way)
+    wk_reasonheir = casa_concept._reasonheirs.get(wk_rope)
+    # usa_premise = wk_reasonheir.premises.get(usa_rope)
     print(f"    {casa_concept.concept_label=}")
     # print(f"    {usa_premise.rcontext=}")
     # print(f"    {usa_premise._chore=}")
     # print(f"    {usa_premise._chore=}")
     assert wk_reasonheir._chore is False
     # print(f"      premises: {w=}")
-    # w_state = usa_premise.premises[wed_way].pstate
+    # w_state = usa_premise.premises[wed_rope].pstate
     # print(f"      {w_state=}")
     # assert usa_premise._chore == w_state._chore
     # assert usa_premise._status == w_state._status
@@ -226,18 +226,18 @@ def test_PlanUnit_settle_plan_CorrectlyCalculatesRangeAttributes():
     sue_planunit = get_planunit_with7amCleanTableReason()
     sue_planunit.settle_plan()
     house_str = "housemanagement"
-    house_way = sue_planunit.make_l1_way(house_str)
+    house_rope = sue_planunit.make_l1_rope(house_str)
     clean_str = "clean table"
-    clean_way = sue_planunit.make_way(house_way, clean_str)
-    assert sue_planunit._concept_dict.get(clean_way)._active is False
+    clean_rope = sue_planunit.make_rope(house_rope, clean_str)
+    assert sue_planunit._concept_dict.get(clean_rope)._active is False
 
     # set facts as midevening to 8am
     time_str = "timetech"
-    time_way = sue_planunit.make_l1_way(time_str)
+    time_rope = sue_planunit.make_l1_rope(time_str)
     day24hr_str = "24hr day"
-    day24hr_way = sue_planunit.make_way(time_way, day24hr_str)
-    day24hr_rcontext = day24hr_way
-    day24hr_fstate = day24hr_way
+    day24hr_rope = sue_planunit.make_rope(time_rope, day24hr_str)
+    day24hr_rcontext = day24hr_rope
+    day24hr_fstate = day24hr_rope
     day24hr_popen = 0.0
     day24hr_pnigh = 8.0
 
@@ -251,26 +251,26 @@ def test_PlanUnit_settle_plan_CorrectlyCalculatesRangeAttributes():
 
     # THEN
     sue_planunit.settle_plan()
-    assert sue_planunit._concept_dict.get(clean_way)._active
+    assert sue_planunit._concept_dict.get(clean_rope)._active
 
     # WHEN
     # set facts as 8am to 10am
     day24hr_popen = 8.0
     day24hr_pnigh = 10.0
-    print(sue_planunit.conceptroot.factunits[day24hr_way])
+    print(sue_planunit.conceptroot.factunits[day24hr_rope])
     sue_planunit.add_fact(
         day24hr_rcontext,
         fstate=day24hr_fstate,
         fopen=day24hr_popen,
         fnigh=day24hr_pnigh,
     )
-    print(sue_planunit.conceptroot.factunits[day24hr_way])
+    print(sue_planunit.conceptroot.factunits[day24hr_rope])
     print(sue_planunit.conceptroot._kids[house_str]._kids[clean_str].reasonunits)
     # sue_planunit.conceptroot._kids["housemanagement"]._kids[clean_str]._active = None
 
     # THEN
     sue_planunit.settle_plan()
-    assert sue_planunit._concept_dict.get(clean_way)._active is False
+    assert sue_planunit._concept_dict.get(clean_rope)._active is False
 
 
 def test_PlanUnit_get_agenda_dict_ReturnsObj():
@@ -293,25 +293,27 @@ def test_PlanUnit_settle_plan_CorrectlySetsData_planunit_v001():
     # day_hr = f"{yao_planunit.vow_label},day_hr"
     # yao_planunit.add_fact(fcontext=day_hr, fstate=day_hr, popen=0, pnigh=23)
     day_min_str = "day_minute"
-    day_min_way = yao_planunit.make_l1_way(day_min_str)
-    yao_planunit.add_fact(fcontext=day_min_way, fstate=day_min_way, fopen=0, fnigh=1439)
+    day_min_rope = yao_planunit.make_l1_rope(day_min_str)
+    yao_planunit.add_fact(
+        fcontext=day_min_rope, fstate=day_min_rope, fopen=0, fnigh=1439
+    )
 
     mood_str = "Moods"
-    mood_way = yao_planunit.make_l1_way(mood_str)
-    yao_planunit.add_fact(fcontext=mood_way, fstate=mood_way)
+    mood_rope = yao_planunit.make_l1_rope(mood_str)
+    yao_planunit.add_fact(fcontext=mood_rope, fstate=mood_rope)
     print(f"{yao_planunit.get_reason_rcontexts()=}")
 
     yr_mon_str = "yr_month"
-    yr_mon_way = yao_planunit.make_l1_way(yr_mon_str)
-    yao_planunit.add_fact(fcontext=yr_mon_way, fstate=yr_mon_way)
+    yr_mon_rope = yao_planunit.make_l1_rope(yr_mon_str)
+    yao_planunit.add_fact(fcontext=yr_mon_rope, fstate=yr_mon_rope)
     inter_str = "Interweb"
-    inter_way = yao_planunit.make_l1_way(inter_str)
-    yao_planunit.add_fact(fcontext=inter_way, fstate=inter_way)
+    inter_rope = yao_planunit.make_l1_rope(inter_str)
+    yao_planunit.add_fact(fcontext=inter_rope, fstate=inter_rope)
     assert yao_planunit is not None
     # print(f"{yao_planunit.owner_name=}")
     # print(f"{len(yao_planunit.conceptroot._kids)=}")
     ulty_str = "Ultimate Frisbee"
-    ulty_way = yao_planunit.make_l1_way(ulty_str)
+    ulty_rope = yao_planunit.make_l1_rope(ulty_str)
 
     # if yao_planunit.conceptroot._kids["Ultimate Frisbee"].concept_label == "Ultimate Frisbee":
     assert yao_planunit.conceptroot._kids[ulty_str].reasonunits is not None
@@ -327,9 +329,9 @@ def test_PlanUnit_settle_plan_CorrectlySetsData_planunit_v001():
     # print(f"{str(type(concept))=}")
     # print(f"{len(concept_dict)=}")
     laundry_str = "laundry monday"
-    casa_way = yao_planunit.make_l1_way("casa")
-    cleaning_way = yao_planunit.make_way(casa_way, "cleaning")
-    laundry_way = yao_planunit.make_way(cleaning_way, laundry_str)
+    casa_rope = yao_planunit.make_l1_rope("casa")
+    cleaning_rope = yao_planunit.make_rope(casa_rope, "cleaning")
+    laundry_rope = yao_planunit.make_rope(cleaning_rope, laundry_str)
 
     # for concept in concept_dict:
     #     assert (
@@ -341,18 +343,18 @@ def test_PlanUnit_settle_plan_CorrectlySetsData_planunit_v001():
     #         for reason in concept.reasonunits.values():
     #             print(f"{concept.concept_label=} {reason.rcontext=}")  # {reason.premises=}")
     # assert concept._active is False
-    assert yao_planunit._concept_dict.get(laundry_way)._active is False
+    assert yao_planunit._concept_dict.get(laundry_rope)._active is False
 
     # WHEN
     wk_str = "wkdays"
-    wk_way = yao_planunit.make_l1_way(wk_str)
+    wk_rope = yao_planunit.make_l1_rope(wk_str)
     mon_str = "Monday"
-    mon_way = yao_planunit.make_way(wk_way, mon_str)
-    yao_planunit.add_fact(fcontext=wk_way, fstate=mon_way)
+    mon_rope = yao_planunit.make_rope(wk_rope, mon_str)
+    yao_planunit.add_fact(fcontext=wk_rope, fstate=mon_rope)
     yao_planunit.settle_plan()
 
     # THEN
-    assert yao_planunit._concept_dict.get(laundry_way)._active is False
+    assert yao_planunit._concept_dict.get(laundry_rope)._active is False
 
 
 def test_PlanUnit_settle_plan_OptionWeekdaysReturnsObj_planunit_v001():
@@ -360,29 +362,29 @@ def test_PlanUnit_settle_plan_OptionWeekdaysReturnsObj_planunit_v001():
     yao_planunit = planunit_v001()
 
     day_hr_str = "day_hr"
-    day_hr_way = yao_planunit.make_l1_way(day_hr_str)
-    yao_planunit.add_fact(fcontext=day_hr_way, fstate=day_hr_way, fopen=0, fnigh=23)
+    day_hr_rope = yao_planunit.make_l1_rope(day_hr_str)
+    yao_planunit.add_fact(fcontext=day_hr_rope, fstate=day_hr_rope, fopen=0, fnigh=23)
     day_min_str = "day_minute"
-    day_min_way = yao_planunit.make_l1_way(day_min_str)
-    yao_planunit.add_fact(fcontext=day_min_way, fstate=day_min_way, fopen=0, fnigh=59)
+    day_min_rope = yao_planunit.make_l1_rope(day_min_str)
+    yao_planunit.add_fact(fcontext=day_min_rope, fstate=day_min_rope, fopen=0, fnigh=59)
     mon_wk_str = "month_wk"
-    mon_wk_way = yao_planunit.make_l1_way(mon_wk_str)
-    yao_planunit.add_fact(fcontext=mon_wk_way, fstate=mon_wk_way)
+    mon_wk_rope = yao_planunit.make_l1_rope(mon_wk_str)
+    yao_planunit.add_fact(fcontext=mon_wk_rope, fstate=mon_wk_rope)
     nation_str = "Nation-States"
-    nation_way = yao_planunit.make_l1_way(nation_str)
-    yao_planunit.add_fact(fcontext=nation_way, fstate=nation_way)
+    nation_rope = yao_planunit.make_l1_rope(nation_str)
+    yao_planunit.add_fact(fcontext=nation_rope, fstate=nation_rope)
     mood_str = "Moods"
-    mood_way = yao_planunit.make_l1_way(mood_str)
-    yao_planunit.add_fact(fcontext=mood_way, fstate=mood_way)
+    mood_rope = yao_planunit.make_l1_rope(mood_str)
+    yao_planunit.add_fact(fcontext=mood_rope, fstate=mood_rope)
     aaron_str = "Aaron Donald objects effected by him"
-    aaron_way = yao_planunit.make_l1_way(aaron_str)
-    yao_planunit.add_fact(fcontext=aaron_way, fstate=aaron_way)
+    aaron_rope = yao_planunit.make_l1_rope(aaron_str)
+    yao_planunit.add_fact(fcontext=aaron_rope, fstate=aaron_rope)
     inter_str = "Interweb"
-    inter_way = yao_planunit.make_l1_way(inter_str)
-    yao_planunit.add_fact(fcontext=inter_way, fstate=inter_way)
+    inter_rope = yao_planunit.make_l1_rope(inter_str)
+    yao_planunit.add_fact(fcontext=inter_rope, fstate=inter_rope)
     yr_mon_str = "yr_month"
-    yr_mon_way = yao_planunit.make_l1_way(yr_mon_str)
-    yao_planunit.add_fact(fcontext=yr_mon_way, fstate=yr_mon_way, fopen=0, fnigh=1000)
+    yr_mon_rope = yao_planunit.make_l1_rope(yr_mon_str)
+    yao_planunit.add_fact(fcontext=yr_mon_rope, fstate=yr_mon_rope, fopen=0, fnigh=1000)
 
     yao_planunit.settle_plan()
     missing_facts = yao_planunit.get_missing_fact_rcontexts()
@@ -390,32 +392,32 @@ def test_PlanUnit_settle_plan_OptionWeekdaysReturnsObj_planunit_v001():
     #     print(f"{missing_fact=} {count=}")
 
     wk_str = "wkdays"
-    wk_way = yao_planunit.make_l1_way(wk_str)
+    wk_rope = yao_planunit.make_l1_rope(wk_str)
     mon_str = "Monday"
-    mon_way = yao_planunit.make_way(wk_way, mon_str)
+    mon_rope = yao_planunit.make_rope(wk_rope, mon_str)
     tue_str = "Tuesday"
-    tue_way = yao_planunit.make_way(wk_way, tue_str)
-    mon_premise_x = premiseunit_shop(pstate=mon_way)
+    tue_rope = yao_planunit.make_rope(wk_rope, tue_str)
+    mon_premise_x = premiseunit_shop(pstate=mon_rope)
     mon_premise_x._status = False
     mon_premise_x._chore = False
-    tue_premise_x = premiseunit_shop(pstate=tue_way)
+    tue_premise_x = premiseunit_shop(pstate=tue_rope)
     tue_premise_x._status = False
     tue_premise_x._chore = False
     mt_premises = {
         mon_premise_x.pstate: mon_premise_x,
         tue_premise_x.pstate: tue_premise_x,
     }
-    mt_reasonunit = reasonunit_shop(wk_way, premises=mt_premises)
-    mt_reasonheir = reasonheir_shop(wk_way, premises=mt_premises, _status=False)
-    x_conceptroot = yao_planunit.get_concept_obj(to_way(yao_planunit.vow_label))
+    mt_reasonunit = reasonunit_shop(wk_rope, premises=mt_premises)
+    mt_reasonheir = reasonheir_shop(wk_rope, premises=mt_premises, _status=False)
+    x_conceptroot = yao_planunit.get_concept_obj(to_rope(yao_planunit.vow_label))
     x_conceptroot.set_reasonunit(reason=mt_reasonunit)
-    # print(f"{yao_planunit.reasonunits[wk_way].rcontext=}")
-    # print(f"{yao_planunit.reasonunits[wk_way].premises[mon_way].pstate=}")
-    # print(f"{yao_planunit.reasonunits[wk_way].premises[tue_way].pstate=}")
-    wk_reasonunit = x_conceptroot.reasonunits[wk_way]
+    # print(f"{yao_planunit.reasonunits[wk_rope].rcontext=}")
+    # print(f"{yao_planunit.reasonunits[wk_rope].premises[mon_rope].pstate=}")
+    # print(f"{yao_planunit.reasonunits[wk_rope].premises[tue_rope].pstate=}")
+    wk_reasonunit = x_conceptroot.reasonunits[wk_rope]
     print(f"{wk_reasonunit.premises=}")
-    premise_mon = wk_reasonunit.premises.get(mon_way)
-    premise_tue = wk_reasonunit.premises.get(tue_way)
+    premise_mon = wk_reasonunit.premises.get(mon_rope)
+    premise_tue = wk_reasonunit.premises.get(tue_rope)
     assert premise_mon
     assert premise_mon == mt_reasonunit.premises[premise_mon.pstate]
     assert premise_tue
@@ -426,20 +428,20 @@ def test_PlanUnit_settle_plan_OptionWeekdaysReturnsObj_planunit_v001():
     concept_dict = yao_planunit.get_concept_dict()
 
     # THEN
-    gen_wk_reasonheir = x_conceptroot.get_reasonheir(wk_way)
-    gen_mon_premise = gen_wk_reasonheir.premises.get(mon_way)
-    assert gen_mon_premise._status == mt_reasonheir.premises.get(mon_way)._status
-    assert gen_mon_premise == mt_reasonheir.premises.get(mon_way)
+    gen_wk_reasonheir = x_conceptroot.get_reasonheir(wk_rope)
+    gen_mon_premise = gen_wk_reasonheir.premises.get(mon_rope)
+    assert gen_mon_premise._status == mt_reasonheir.premises.get(mon_rope)._status
+    assert gen_mon_premise == mt_reasonheir.premises.get(mon_rope)
     assert gen_wk_reasonheir.premises == mt_reasonheir.premises
     assert gen_wk_reasonheir == mt_reasonheir
 
     casa_str = "casa"
-    casa_way = yao_planunit.make_l1_way(casa_str)
+    casa_rope = yao_planunit.make_l1_rope(casa_str)
     bird_str = "say hi to birds"
-    bird_way = yao_planunit.make_way(casa_way, bird_str)
-    assert from_list_get_active(bird_way, concept_dict) is False
+    bird_rope = yao_planunit.make_rope(casa_rope, bird_str)
+    assert from_list_get_active(bird_rope, concept_dict) is False
 
-    # yao_planunit.add_fact(fcontext=wk_way, fstate=mon_way)
+    # yao_planunit.add_fact(fcontext=wk_rope, fstate=mon_rope)
     # concept_dict = yao_planunit.get_concept_dict()
     # casa_concept = x_conceptroot._kids[casa_str]
     # twee_concept = casa_concept._kids[bird_str]
@@ -447,42 +449,44 @@ def test_PlanUnit_settle_plan_OptionWeekdaysReturnsObj_planunit_v001():
     # print(f"{len(casa_concept._reasonheirs)=}")
     # print(f"{len(twee_concept._reasonheirs)=}")
 
-    # assert YR.get_active(way=bird_concept, concept_dict=concept_dict) is True
+    # assert YR.get_active(rope=bird_concept, concept_dict=concept_dict) is True
 
     # yao_planunit.add_fact(fcontext=f"{yao_planunit.vow_label},wkdays", fstate=f"{yao_planunit.vow_label},wkdays,Tuesday")
     # concept_dict = yao_planunit.get_concept_dict()
-    # assert YR.get_active(way=bird_concept, concept_dict=concept_dict) is True
+    # assert YR.get_active(rope=bird_concept, concept_dict=concept_dict) is True
 
     # yao_planunit.add_fact(fcontext=f"{yao_planunit.vow_label},wkdays", fstate=f"{yao_planunit.vow_label},wkdays,Wednesday")
     # concept_dict = yao_planunit.get_concept_dict()
-    # assert YR.get_active(way=bird_concept, concept_dict=concept_dict) is False
+    # assert YR.get_active(rope=bird_concept, concept_dict=concept_dict) is False
 
 
 def test_PlanUnit_settle_plan_CorrectlySetsConceptUnitsActiveWithEvery6WeeksReason_planunit_v001():
     # ESTABLISH
     yao_planunit = planunit_v001()
     day_str = "day_hr"
-    day_way = yao_planunit.make_l1_way(day_str)
+    day_rope = yao_planunit.make_l1_rope(day_str)
     min_str = "day_minute"
-    min_way = yao_planunit.make_l1_way(day_str)
+    min_rope = yao_planunit.make_l1_rope(day_str)
 
     # WHEN
-    yao_planunit.add_fact(fcontext=day_way, fstate=day_way, fopen=0, fnigh=23)
-    yao_planunit.add_fact(fcontext=min_way, fstate=min_way, fopen=0, fnigh=59)
+    yao_planunit.add_fact(fcontext=day_rope, fstate=day_rope, fopen=0, fnigh=23)
+    yao_planunit.add_fact(fcontext=min_rope, fstate=min_rope, fopen=0, fnigh=59)
     yao_planunit.settle_plan()
 
     # THEN
-    ced_wk_rcontext = yao_planunit.make_l1_way("ced_wk")
+    ced_wk_rcontext = yao_planunit.make_l1_rope("ced_wk")
 
     pdivisor = None
     popen = None
     pnigh = None
     print(f"{len(yao_planunit._concept_dict)=}")
 
-    casa_way = yao_planunit.make_l1_way("casa")
-    cleaning_way = yao_planunit.make_way(casa_way, "cleaning")
-    clean_couch_way = yao_planunit.make_way(cleaning_way, "clean sheets couch blankets")
-    clean_sheet_concept = yao_planunit.get_concept_obj(clean_couch_way)
+    casa_rope = yao_planunit.make_l1_rope("casa")
+    cleaning_rope = yao_planunit.make_rope(casa_rope, "cleaning")
+    clean_couch_rope = yao_planunit.make_rope(
+        cleaning_rope, "clean sheets couch blankets"
+    )
+    clean_sheet_concept = yao_planunit.get_concept_obj(clean_couch_rope)
     # print(f"{clean_sheet_concept.reasonunits.values()=}")
     ced_wk_reason = clean_sheet_concept.reasonunits.get(ced_wk_rcontext)
     ced_wk_premise = ced_wk_reason.premises.get(ced_wk_rcontext)
@@ -497,9 +501,9 @@ def test_PlanUnit_settle_plan_CorrectlySetsConceptUnitsActiveWithEvery6WeeksReas
     assert clean_sheet_concept._active is False
 
     # for concept in concept_dict:
-    #     # print(f"{concept.parent_way=}")
+    #     # print(f"{concept.parent_rope=}")
     #     if concept.concept_label == "clean sheets couch blankets":
-    #         print(f"{concept.get_concept_way()=}")
+    #         print(f"{concept.get_concept_rope()=}")
 
     assert pdivisor == 6
     assert popen == 1
@@ -517,8 +521,8 @@ def test_PlanUnit_settle_plan_CorrectlySetsConceptUnitsActiveWithEvery6WeeksReas
         fnigh=ced_wk_popen,
     )
     nation_str = "Nation-States"
-    nation_way = yao_planunit.make_l1_way(nation_str)
-    yao_planunit.add_fact(fcontext=nation_way, fstate=nation_way)
+    nation_rope = yao_planunit.make_l1_rope(nation_str)
+    yao_planunit.add_fact(fcontext=nation_rope, fstate=nation_rope)
     print(
         f"Nation set and also fact set: {ced_wk_rcontext=} with {ced_wk_popen=} and {ced_wk_popen=}"
     )
@@ -527,14 +531,14 @@ def test_PlanUnit_settle_plan_CorrectlySetsConceptUnitsActiveWithEvery6WeeksReas
 
     # THEN
     wk_str = "ced_wk"
-    wk_way = yao_planunit.make_l1_way(wk_str)
-    casa_way = yao_planunit.make_l1_way("casa")
-    cleaning_way = yao_planunit.make_way(casa_way, "cleaning")
+    wk_rope = yao_planunit.make_l1_rope(wk_str)
+    casa_rope = yao_planunit.make_l1_rope("casa")
+    cleaning_rope = yao_planunit.make_rope(casa_rope, "cleaning")
     clean_couch_str = "clean sheets couch blankets"
-    clean_couch_way = yao_planunit.make_way(cleaning_way, clean_couch_str)
-    clean_couch_concept = yao_planunit.get_concept_obj(way=clean_couch_way)
-    wk_reason = clean_couch_concept.reasonunits.get(wk_way)
-    wk_premise = wk_reason.premises.get(wk_way)
+    clean_couch_rope = yao_planunit.make_rope(cleaning_rope, clean_couch_str)
+    clean_couch_concept = yao_planunit.get_concept_obj(rope=clean_couch_rope)
+    wk_reason = clean_couch_concept.reasonunits.get(wk_rope)
+    wk_premise = wk_reason.premises.get(wk_rope)
     print(f"{clean_couch_concept.concept_label=} {wk_reason.rcontext=} {wk_premise=}")
     assert wk_premise.pdivisor == 6 and wk_premise.popen == 1
 
@@ -584,50 +588,50 @@ def test_PlanUnit_settle_plan_EveryTwoMonthReturnsObj_planunit_v001():
     # ESTABLISH
     yao_planunit = planunit_v001()
     minute_str = "day_minute"
-    minute_way = yao_planunit.make_l1_way(minute_str)
-    yao_planunit.add_fact(fcontext=minute_way, fstate=minute_way, fopen=0, fnigh=1399)
+    minute_rope = yao_planunit.make_l1_rope(minute_str)
+    yao_planunit.add_fact(fcontext=minute_rope, fstate=minute_rope, fopen=0, fnigh=1399)
     month_str = "month_wk"
-    month_way = yao_planunit.make_l1_way(month_str)
-    yao_planunit.add_fact(fcontext=month_way, fstate=month_way)
+    month_rope = yao_planunit.make_l1_rope(month_str)
+    yao_planunit.add_fact(fcontext=month_rope, fstate=month_rope)
     nations_str = "Nation-States"
-    nations_way = yao_planunit.make_l1_way(nations_str)
-    yao_planunit.add_fact(fcontext=nations_way, fstate=nations_way)
+    nations_rope = yao_planunit.make_l1_rope(nations_str)
+    yao_planunit.add_fact(fcontext=nations_rope, fstate=nations_rope)
     mood_str = "Moods"
-    mood_way = yao_planunit.make_l1_way(mood_str)
-    yao_planunit.add_fact(fcontext=mood_way, fstate=mood_way)
+    mood_rope = yao_planunit.make_l1_rope(mood_str)
+    yao_planunit.add_fact(fcontext=mood_rope, fstate=mood_rope)
     aaron_str = "Aaron Donald objects effected by him"
-    aaron_way = yao_planunit.make_l1_way(aaron_str)
-    yao_planunit.add_fact(fcontext=aaron_way, fstate=aaron_way)
+    aaron_rope = yao_planunit.make_l1_rope(aaron_str)
+    yao_planunit.add_fact(fcontext=aaron_rope, fstate=aaron_rope)
     interweb_str = "Interweb"
-    interweb_way = yao_planunit.make_l1_way(interweb_str)
-    yao_planunit.add_fact(fcontext=interweb_way, fstate=interweb_way)
+    interweb_rope = yao_planunit.make_l1_rope(interweb_str)
+    yao_planunit.add_fact(fcontext=interweb_rope, fstate=interweb_rope)
     wkdays_str = "wkdays"
-    wkdays_way = yao_planunit.make_l1_way(wkdays_str)
-    yao_planunit.add_fact(fcontext=wkdays_way, fstate=wkdays_way)
+    wkdays_rope = yao_planunit.make_l1_rope(wkdays_str)
+    yao_planunit.add_fact(fcontext=wkdays_rope, fstate=wkdays_rope)
     concept_dict = yao_planunit.get_concept_dict()
     print(f"{len(concept_dict)=}")
 
     casa_str = "casa"
-    casa_way = yao_planunit.make_l1_way(casa_str)
+    casa_rope = yao_planunit.make_l1_rope(casa_str)
     clean_str = "cleaning"
-    clean_way = yao_planunit.make_way(casa_way, clean_str)
+    clean_rope = yao_planunit.make_rope(casa_rope, clean_str)
     mat_concept_label = "deep clean play mat"
-    mat_way = yao_planunit.make_way(clean_way, mat_concept_label)
-    assert from_list_get_active(mat_way, concept_dict) is False
+    mat_rope = yao_planunit.make_rope(clean_rope, mat_concept_label)
+    assert from_list_get_active(mat_rope, concept_dict) is False
 
-    yr_month_rcontext = yao_planunit.make_l1_way("yr_month")
+    yr_month_rcontext = yao_planunit.make_l1_rope("yr_month")
     print(f"{yr_month_rcontext=}, {yr_month_rcontext=}")
 
     # WHEN
     yao_planunit.add_fact(yr_month_rcontext, fstate=yr_month_rcontext, fopen=0, fnigh=8)
-    ced_wk = yao_planunit.make_l1_way("ced_wk")
+    ced_wk = yao_planunit.make_l1_rope("ced_wk")
     yao_planunit.add_fact(fcontext=ced_wk, fstate=ced_wk, fopen=0, fnigh=4)
     yao_planunit.settle_plan()
 
     # THEN
     print(f"{len(concept_dict)=}")
     print(f"{len(yao_planunit.conceptroot.factunits)=}")
-    assert from_list_get_active(mat_way, yao_planunit._concept_dict)
+    assert from_list_get_active(mat_rope, yao_planunit._concept_dict)
 
 
 def test_PlanUnit_settle_plan_CorrectlySetsEmpty_sum_healerlink_share():
@@ -649,14 +653,14 @@ def test_PlanUnit_settle_plan_CorrectlySets_sum_healerlink_share(graphics_bool):
     sue_planunit = get_planunit_with_4_levels_and_2reasons()
     sue_planunit.add_acctunit("Sue")
     sue_planunit.settle_plan()
-    nation_way = sue_planunit.make_l1_way("nation")
-    usa_way = sue_planunit.make_way(nation_way, "USA")
-    oregon_way = sue_planunit.make_way(usa_way, "Oregon")
+    nation_rope = sue_planunit.make_l1_rope("nation")
+    usa_rope = sue_planunit.make_rope(nation_rope, "USA")
+    oregon_rope = sue_planunit.make_rope(usa_rope, "Oregon")
     sue_healerlink = healerlink_shop({"Sue"})
     sue_planunit.edit_concept_attr(
-        oregon_way, problem_bool=True, healerlink=sue_healerlink
+        oregon_rope, problem_bool=True, healerlink=sue_healerlink
     )
-    oregon_concept = sue_planunit.get_concept_obj(oregon_way)
+    oregon_concept = sue_planunit.get_concept_obj(oregon_rope)
     print(f"{oregon_concept._fund_ratio=}")
     assert sue_planunit._sum_healerlink_share == 0
     assert oregon_concept._healerlink_ratio == 0
@@ -668,11 +672,11 @@ def test_PlanUnit_settle_plan_CorrectlySets_sum_healerlink_share(graphics_bool):
     assert oregon_concept._healerlink_ratio == 1
 
     # WHEN
-    wk_way = sue_planunit.make_l1_way("wkdays")
-    sue_planunit.edit_concept_attr(wk_way, problem_bool=True)
-    mon_way = sue_planunit.make_way(wk_way, "Monday")
-    sue_planunit.edit_concept_attr(mon_way, healerlink=sue_healerlink)
-    mon_concept = sue_planunit.get_concept_obj(mon_way)
+    wk_rope = sue_planunit.make_l1_rope("wkdays")
+    sue_planunit.edit_concept_attr(wk_rope, problem_bool=True)
+    mon_rope = sue_planunit.make_rope(wk_rope, "Monday")
+    sue_planunit.edit_concept_attr(mon_rope, healerlink=sue_healerlink)
+    mon_concept = sue_planunit.get_concept_obj(mon_rope)
     # print(f"{mon_concept.problem_bool=} {mon_concept._fund_ratio=}")
     sue_planunit.settle_plan()
     # THEN
@@ -682,12 +686,12 @@ def test_PlanUnit_settle_plan_CorrectlySets_sum_healerlink_share(graphics_bool):
     assert mon_concept._healerlink_ratio == 0.4444444428395062
 
     # WHEN
-    tue_way = sue_planunit.make_way(wk_way, "Tuesday")
-    sue_planunit.edit_concept_attr(tue_way, healerlink=sue_healerlink)
-    tue_concept = sue_planunit.get_concept_obj(tue_way)
+    tue_rope = sue_planunit.make_rope(wk_rope, "Tuesday")
+    sue_planunit.edit_concept_attr(tue_rope, healerlink=sue_healerlink)
+    tue_concept = sue_planunit.get_concept_obj(tue_rope)
     # print(f"{tue_concept.problem_bool=} {tue_concept._fund_ratio=}")
-    # sat_way = sue_planunit.make_way(wk_way, "Saturday")
-    # sat_concept = sue_planunit.get_concept_obj(sat_way)
+    # sat_rope = sue_planunit.make_rope(wk_rope, "Saturday")
+    # sat_concept = sue_planunit.get_concept_obj(sat_rope)
     # print(f"{sat_concept.problem_bool=} {sat_concept._fund_ratio=}")
     sue_planunit.settle_plan()
 
@@ -701,8 +705,8 @@ def test_PlanUnit_settle_plan_CorrectlySets_sum_healerlink_share(graphics_bool):
     assert tue_concept._healerlink_ratio == 0.3076923069230769
 
     # WHEN
-    sue_planunit.edit_concept_attr(wk_way, healerlink=sue_healerlink)
-    wk_concept = sue_planunit.get_concept_obj(wk_way)
+    sue_planunit.edit_concept_attr(wk_rope, healerlink=sue_healerlink)
+    wk_concept = sue_planunit.get_concept_obj(wk_rope)
     print(
         f"{wk_concept.concept_label=} {wk_concept.problem_bool=} {wk_concept._fund_ratio=}"
     )
@@ -720,54 +724,54 @@ def test_PlanUnit_settle_plan_CorrectlySets_keep_dict_v1(graphics_bool):
     sue_planunit = get_planunit_with_4_levels_and_2reasons()
     sue_planunit.add_acctunit("Sue")
     sue_planunit.settle_plan()
-    nation_way = sue_planunit.make_l1_way("nation")
-    usa_way = sue_planunit.make_way(nation_way, "USA")
-    oregon_way = sue_planunit.make_way(usa_way, "Oregon")
+    nation_rope = sue_planunit.make_l1_rope("nation")
+    usa_rope = sue_planunit.make_rope(nation_rope, "USA")
+    oregon_rope = sue_planunit.make_rope(usa_rope, "Oregon")
     sue_healerlink = healerlink_shop({"Sue"})
     sue_planunit.edit_concept_attr(
-        oregon_way, problem_bool=True, healerlink=sue_healerlink
+        oregon_rope, problem_bool=True, healerlink=sue_healerlink
     )
     assert len(sue_planunit._keep_dict) == 0
-    assert sue_planunit._keep_dict.get(oregon_way) is None
+    assert sue_planunit._keep_dict.get(oregon_rope) is None
 
     # WHEN
     sue_planunit.settle_plan()
     # THEN
     assert len(sue_planunit._keep_dict) == 1
-    assert sue_planunit._keep_dict.get(oregon_way) is not None
+    assert sue_planunit._keep_dict.get(oregon_rope) is not None
 
     # WHEN
-    wk_way = sue_planunit.make_l1_way("wkdays")
-    sue_planunit.edit_concept_attr(wk_way, problem_bool=True)
-    mon_way = sue_planunit.make_way(wk_way, "Monday")
-    sue_planunit.edit_concept_attr(mon_way, healerlink=sue_healerlink)
-    # mon_concept = sue_planunit.get_concept_obj(mon_way)
+    wk_rope = sue_planunit.make_l1_rope("wkdays")
+    sue_planunit.edit_concept_attr(wk_rope, problem_bool=True)
+    mon_rope = sue_planunit.make_rope(wk_rope, "Monday")
+    sue_planunit.edit_concept_attr(mon_rope, healerlink=sue_healerlink)
+    # mon_concept = sue_planunit.get_concept_obj(mon_rope)
     # print(f"{mon_concept.problem_bool=} {mon_concept._fund_ratio=}")
     sue_planunit.settle_plan()
     # THEN
     assert len(sue_planunit._keep_dict) == 2
-    assert sue_planunit._keep_dict.get(oregon_way) is not None
-    assert sue_planunit._keep_dict.get(mon_way) is not None
+    assert sue_planunit._keep_dict.get(oregon_rope) is not None
+    assert sue_planunit._keep_dict.get(mon_rope) is not None
 
     # WHEN
-    tue_way = sue_planunit.make_way(wk_way, "Tuesday")
-    sue_planunit.edit_concept_attr(tue_way, healerlink=sue_healerlink)
-    # tue_concept = sue_planunit.get_concept_obj(tue_way)
+    tue_rope = sue_planunit.make_rope(wk_rope, "Tuesday")
+    sue_planunit.edit_concept_attr(tue_rope, healerlink=sue_healerlink)
+    # tue_concept = sue_planunit.get_concept_obj(tue_rope)
     # print(f"{tue_concept.problem_bool=} {tue_concept._fund_ratio=}")
-    # sat_way = sue_planunit.make_way(wk_way, "Saturday")
-    # sat_concept = sue_planunit.get_concept_obj(sat_way)
+    # sat_rope = sue_planunit.make_rope(wk_rope, "Saturday")
+    # sat_concept = sue_planunit.get_concept_obj(sat_rope)
     # print(f"{sat_concept.problem_bool=} {sat_concept._fund_ratio=}")
     sue_planunit.settle_plan()
 
     # THEN
     assert len(sue_planunit._keep_dict) == 3
-    assert sue_planunit._keep_dict.get(oregon_way) is not None
-    assert sue_planunit._keep_dict.get(mon_way) is not None
-    assert sue_planunit._keep_dict.get(tue_way) is not None
+    assert sue_planunit._keep_dict.get(oregon_rope) is not None
+    assert sue_planunit._keep_dict.get(mon_rope) is not None
+    assert sue_planunit._keep_dict.get(tue_rope) is not None
 
     # WHEN
-    sue_planunit.edit_concept_attr(wk_way, healerlink=sue_healerlink)
-    wk_concept = sue_planunit.get_concept_obj(wk_way)
+    sue_planunit.edit_concept_attr(wk_rope, healerlink=sue_healerlink)
+    wk_concept = sue_planunit.get_concept_obj(wk_rope)
     print(
         f"{wk_concept.concept_label=} {wk_concept.problem_bool=} {wk_concept._fund_ratio=}"
     )
@@ -793,17 +797,19 @@ def test_PlanUnit_settle_plan_CorrectlySets_healers_dict():
     assert sue_planunit._healers_dict == {}
 
     # ESTABLISH
-    nation_way = sue_planunit.make_l1_way("nation")
-    usa_way = sue_planunit.make_way(nation_way, "USA")
-    oregon_way = sue_planunit.make_way(usa_way, "Oregon")
+    nation_rope = sue_planunit.make_l1_rope("nation")
+    usa_rope = sue_planunit.make_rope(nation_rope, "USA")
+    oregon_rope = sue_planunit.make_rope(usa_rope, "Oregon")
     sue_healerlink = healerlink_shop({sue_str})
     sue_planunit.edit_concept_attr(
-        oregon_way, problem_bool=True, healerlink=sue_healerlink
+        oregon_rope, problem_bool=True, healerlink=sue_healerlink
     )
 
-    wk_way = sue_planunit.make_l1_way("wkdays")
+    wk_rope = sue_planunit.make_l1_rope("wkdays")
     bob_healerlink = healerlink_shop({bob_str})
-    sue_planunit.edit_concept_attr(wk_way, problem_bool=True, healerlink=bob_healerlink)
+    sue_planunit.edit_concept_attr(
+        wk_rope, problem_bool=True, healerlink=bob_healerlink
+    )
     assert sue_planunit._healers_dict == {}
 
     # WHEN
@@ -811,10 +817,10 @@ def test_PlanUnit_settle_plan_CorrectlySets_healers_dict():
 
     # THEN
     assert len(sue_planunit._healers_dict) == 2
-    wk_concept = sue_planunit.get_concept_obj(wk_way)
-    assert sue_planunit._healers_dict.get(bob_str) == {wk_way: wk_concept}
-    oregon_concept = sue_planunit.get_concept_obj(oregon_way)
-    assert sue_planunit._healers_dict.get(sue_str) == {oregon_way: oregon_concept}
+    wk_concept = sue_planunit.get_concept_obj(wk_rope)
+    assert sue_planunit._healers_dict.get(bob_str) == {wk_rope: wk_concept}
+    oregon_concept = sue_planunit.get_concept_obj(oregon_rope)
+    assert sue_planunit._healers_dict.get(sue_str) == {oregon_rope: oregon_concept}
 
 
 def test_PlanUnit_settle_plan_CorrectlySets_keeps_buildable_True():
@@ -832,17 +838,19 @@ def test_PlanUnit_settle_plan_CorrectlySets_keeps_buildable_True():
     assert sue_planunit._keeps_buildable
 
     # ESTABLISH
-    nation_way = sue_planunit.make_l1_way("nation")
-    usa_way = sue_planunit.make_way(nation_way, "USA")
-    oregon_way = sue_planunit.make_way(usa_way, "Oregon")
+    nation_rope = sue_planunit.make_l1_rope("nation")
+    usa_rope = sue_planunit.make_rope(nation_rope, "USA")
+    oregon_rope = sue_planunit.make_rope(usa_rope, "Oregon")
     sue_healerlink = healerlink_shop({sue_str})
     sue_planunit.edit_concept_attr(
-        oregon_way, problem_bool=True, healerlink=sue_healerlink
+        oregon_rope, problem_bool=True, healerlink=sue_healerlink
     )
 
-    wk_way = sue_planunit.make_l1_way("wkdays")
+    wk_rope = sue_planunit.make_l1_rope("wkdays")
     bob_healerlink = healerlink_shop({bob_str})
-    sue_planunit.edit_concept_attr(wk_way, problem_bool=True, healerlink=bob_healerlink)
+    sue_planunit.edit_concept_attr(
+        wk_rope, problem_bool=True, healerlink=bob_healerlink
+    )
 
     # WHEN
     sue_planunit.settle_plan()
@@ -865,15 +873,15 @@ def test_PlanUnit_settle_plan_CorrectlySets_keeps_buildable_False():
     assert sue_planunit._keeps_buildable
 
     # ESTABLISH
-    nation_way = sue_planunit.make_l1_way("nation")
-    usa_way = sue_planunit.make_way(nation_way, "USA")
-    oregon_way = sue_planunit.make_way(usa_way, "Oregon")
+    nation_rope = sue_planunit.make_l1_rope("nation")
+    usa_rope = sue_planunit.make_rope(nation_rope, "USA")
+    oregon_rope = sue_planunit.make_rope(usa_rope, "Oregon")
     bend_str = "Be/nd"
-    bend_way = sue_planunit.make_way(oregon_way, bend_str)
-    sue_planunit.set_concept(conceptunit_shop(bend_str), oregon_way)
+    bend_rope = sue_planunit.make_rope(oregon_rope, bend_str)
+    sue_planunit.set_concept(conceptunit_shop(bend_str), oregon_rope)
     sue_healerlink = healerlink_shop({sue_str})
     sue_planunit.edit_concept_attr(
-        bend_way, problem_bool=True, healerlink=sue_healerlink
+        bend_rope, problem_bool=True, healerlink=sue_healerlink
     )
     assert sue_planunit._keeps_buildable
 

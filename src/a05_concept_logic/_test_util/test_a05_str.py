@@ -21,7 +21,7 @@ from src.a05_concept_logic._test_util.a05_str import (
     begin_str,
     close_str,
     concept_label_str,
-    concept_way_str,
+    concept_rope_str,
     denom_str,
     gogo_want_str,
     healer_name_str,
@@ -58,7 +58,7 @@ def test_str_functions_ReturnsObj():
     assert begin_str() == "begin"
     assert close_str() == "close"
     assert concept_label_str() == "concept_label"
-    assert concept_way_str() == "concept_way"
+    assert concept_rope_str() == "concept_rope"
     assert denom_str() == "denom"
     assert gogo_want_str() == "gogo_want"
     assert healerlink_str() == "healerlink"

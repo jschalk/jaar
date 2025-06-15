@@ -7,7 +7,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_empty_list_if_None,
     get_json_from_dict,
 )
-from src.a01_term_logic.term import EventInt, OwnerName, WayTerm
+from src.a01_term_logic.term import EventInt, OwnerName, RopeTerm
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import FundNum, PennyNum
 from src.a04_reason_logic.reason_concept import (
@@ -40,10 +40,10 @@ class CellUnit:
     quota: float = None
     mandate: float = None
     planadjust: PlanUnit = None
-    planevent_facts: dict[WayTerm, FactUnit] = None
-    found_facts: dict[WayTerm, FactUnit] = None
-    boss_facts: dict[WayTerm, FactUnit] = None
-    _reason_rcontexts: set[WayTerm] = None
+    planevent_facts: dict[RopeTerm, FactUnit] = None
+    found_facts: dict[RopeTerm, FactUnit] = None
+    boss_facts: dict[RopeTerm, FactUnit] = None
+    _reason_rcontexts: set[RopeTerm] = None
     _acct_mandate_ledger: dict[OwnerName, FundNum] = None
 
     def get_cell_owner_name(self) -> OwnerName:
@@ -74,10 +74,10 @@ class CellUnit:
         credit_ledger = self.get_planevents_credit_ledger()
         return allot_scale(credit_ledger, self.quota, self.penny)
 
-    def set_planevent_facts_from_dict(self, fact_dict: dict[WayTerm, dict]):
+    def set_planevent_facts_from_dict(self, fact_dict: dict[RopeTerm, dict]):
         self.planevent_facts = factunits_get_from_dict(fact_dict)
 
-    def set_found_facts_from_dict(self, fact_dict: dict[WayTerm, dict]):
+    def set_found_facts_from_dict(self, fact_dict: dict[RopeTerm, dict]):
         self.found_facts = factunits_get_from_dict(fact_dict)
 
     def set_boss_facts_from_other_facts(self):
@@ -160,9 +160,9 @@ def cellunit_shop(
     penny: PennyNum = None,
     quota: float = None,
     planadjust: PlanUnit = None,
-    planevent_facts: dict[WayTerm, FactUnit] = None,
-    found_facts: dict[WayTerm, FactUnit] = None,
-    boss_facts: dict[WayTerm, FactUnit] = None,
+    planevent_facts: dict[RopeTerm, FactUnit] = None,
+    found_facts: dict[RopeTerm, FactUnit] = None,
+    boss_facts: dict[RopeTerm, FactUnit] = None,
     mandate: float = None,
 ) -> CellUnit:
     if quota is None:

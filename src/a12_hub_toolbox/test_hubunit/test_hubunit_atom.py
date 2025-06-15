@@ -162,7 +162,7 @@ def test_HubUnit_get_plan_from_atom_files_ReturnsFileWithZeroAtoms(
     # THEN
     assert yao_plan.owner_name == yao_str
     assert yao_plan.vow_label == yao_hubunit.vow_label
-    assert yao_plan.bridge == yao_hubunit.bridge
+    assert yao_plan.knot == yao_hubunit.knot
     assert yao_plan.fund_pool == yao_hubunit.fund_pool
     assert yao_plan.fund_iota == yao_hubunit.fund_iota
     assert yao_plan.respect_bit == yao_hubunit.respect_bit
@@ -185,11 +185,11 @@ def test_HubUnit_get_plan_from_atom_files_ReturnsCorrectFile_SimpleConcept(
     # THEN
     assert yao_plan.owner_name == yao_str
     assert yao_plan.vow_label == yao_hubunit.vow_label
-    assert yao_plan.bridge == yao_hubunit.bridge
+    assert yao_plan.knot == yao_hubunit.knot
     sports_str = "sports"
-    sports_way = yao_plan.make_l1_way(sports_str)
+    sports_rope = yao_plan.make_l1_rope(sports_str)
 
-    assert yao_plan.concept_exists(sports_way)
+    assert yao_plan.concept_exists(sports_rope)
 
 
 def test_HubUnit_get_plan_from_atom_files_ReturnsCorrectFile_WithFactUnit(
@@ -213,8 +213,8 @@ def test_HubUnit_get_plan_from_atom_files_ReturnsCorrectFile_WithFactUnit(
     # THEN
     assert yao_plan.owner_name == yao_str
     assert yao_plan.vow_label == yao_hubunit.vow_label
-    assert yao_plan.bridge == yao_hubunit.bridge
+    assert yao_plan.knot == yao_hubunit.knot
     sports_str = "sports"
-    sports_way = yao_plan.make_l1_way(sports_str)
+    sports_rope = yao_plan.make_l1_rope(sports_str)
 
-    assert yao_plan.concept_exists(sports_way)
+    assert yao_plan.concept_exists(sports_rope)

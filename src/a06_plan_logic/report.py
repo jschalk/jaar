@@ -1,5 +1,5 @@
 from pandas import DataFrame
-from src.a01_term_logic.way import WayTerm
+from src.a01_term_logic.rope import RopeTerm
 from src.a06_plan_logic.plan import PlanUnit
 
 
@@ -22,7 +22,7 @@ def get_plan_acctunits_dataframe(x_plan: PlanUnit) -> DataFrame:
     return DataFrame(x_acctunits_list)
 
 
-def get_plan_agenda_dataframe(x_plan: PlanUnit, rcontext: WayTerm = None) -> DataFrame:
+def get_plan_agenda_dataframe(x_plan: PlanUnit, rcontext: RopeTerm = None) -> DataFrame:
     agenda_dict = x_plan.get_agenda_dict(necessary_rcontext=rcontext)
     if agenda_dict == {}:
         return DataFrame(
@@ -30,7 +30,7 @@ def get_plan_agenda_dataframe(x_plan: PlanUnit, rcontext: WayTerm = None) -> Dat
                 "owner_name",
                 "fund_ratio",
                 "concept_label",
-                "parent_way",
+                "parent_rope",
                 "begin",
                 "close",
                 "addin",
@@ -45,7 +45,7 @@ def get_plan_agenda_dataframe(x_plan: PlanUnit, rcontext: WayTerm = None) -> Dat
             "owner_name": x_plan.owner_name,
             "fund_ratio": x_concept._fund_ratio,
             "concept_label": x_concept.concept_label,
-            "parent_way": x_concept.parent_way,
+            "parent_rope": x_concept.parent_rope,
             "begin": x_concept.begin,
             "close": x_concept.close,
             "addin": x_concept.addin,

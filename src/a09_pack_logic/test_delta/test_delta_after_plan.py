@@ -1,4 +1,4 @@
-from src.a01_term_logic.way import get_parent_way, get_tail_label
+from src.a01_term_logic.rope import get_parent_rope, get_tail_label
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import factunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
@@ -7,7 +7,7 @@ from src.a06_plan_logic._test_util.a06_str import (
     awardee_title_str,
     begin_str,
     close_str,
-    concept_way_str,
+    concept_rope_str,
     credit_vote_str,
     debt_vote_str,
     fcontext_str,
@@ -320,29 +320,29 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_delete_conceptunit():
     sue_str = "Sue"
     before_sue_planunit = planunit_shop(sue_str)
     sports_str = "sports"
-    sports_way = before_sue_planunit.make_l1_way(sports_str)
+    sports_rope = before_sue_planunit.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_planunit.make_way(sports_way, ball_str)
+    ball_rope = before_sue_planunit.make_rope(sports_rope, ball_str)
     disc_str = "Ultimate Disc"
-    disc_way = before_sue_planunit.make_way(sports_way, disc_str)
-    before_sue_planunit.set_concept(conceptunit_shop(ball_str), sports_way)
-    before_sue_planunit.set_concept(conceptunit_shop(disc_str), sports_way)
+    disc_rope = before_sue_planunit.make_rope(sports_rope, disc_str)
+    before_sue_planunit.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_sue_planunit.set_concept(conceptunit_shop(disc_str), sports_rope)
     delete_disc_planatom = planatom_shop(plan_conceptunit_str(), DELETE_str())
-    delete_disc_planatom.set_jkey(concept_way_str(), disc_way)
-    print(f"{disc_way=}")
-    delete_disc_planatom.set_jkey(concept_way_str(), disc_way)
+    delete_disc_planatom.set_jkey(concept_rope_str(), disc_rope)
+    print(f"{disc_rope=}")
+    delete_disc_planatom.set_jkey(concept_rope_str(), disc_rope)
     print(f"{delete_disc_planatom=}")
     sue_plandelta = plandelta_shop()
     sue_plandelta.set_planatom(delete_disc_planatom)
-    assert before_sue_planunit.concept_exists(ball_way)
-    assert before_sue_planunit.concept_exists(disc_way)
+    assert before_sue_planunit.concept_exists(ball_rope)
+    assert before_sue_planunit.concept_exists(disc_rope)
 
     # WHEN
     after_sue_planunit = sue_plandelta.get_edited_plan(before_sue_planunit)
 
     # THEN
-    assert after_sue_planunit.concept_exists(ball_way)
-    assert after_sue_planunit.concept_exists(disc_way) is False
+    assert after_sue_planunit.concept_exists(ball_rope)
+    assert after_sue_planunit.concept_exists(disc_rope) is False
 
 
 def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_conceptunit():
@@ -350,14 +350,14 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_conceptunit():
     sue_str = "Sue"
     before_sue_planunit = planunit_shop(sue_str)
     sports_str = "sports"
-    sports_way = before_sue_planunit.make_l1_way(sports_str)
+    sports_rope = before_sue_planunit.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_planunit.make_way(sports_way, ball_str)
+    ball_rope = before_sue_planunit.make_rope(sports_rope, ball_str)
     disc_str = "Ultimate Disc"
-    disc_way = before_sue_planunit.make_way(sports_way, disc_str)
-    before_sue_planunit.set_concept(conceptunit_shop(ball_str), sports_way)
-    assert before_sue_planunit.concept_exists(ball_way)
-    assert before_sue_planunit.concept_exists(disc_way) is False
+    disc_rope = before_sue_planunit.make_rope(sports_rope, disc_str)
+    before_sue_planunit.set_concept(conceptunit_shop(ball_str), sports_rope)
+    assert before_sue_planunit.concept_exists(ball_rope)
+    assert before_sue_planunit.concept_exists(disc_rope) is False
 
     # WHEN
     # x_addin = 140
@@ -367,7 +367,7 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_conceptunit():
     # x_numor = 10
     x_task = True
     insert_disc_planatom = planatom_shop(plan_conceptunit_str(), INSERT_str())
-    insert_disc_planatom.set_jkey(concept_way_str(), disc_way)
+    insert_disc_planatom.set_jkey(concept_rope_str(), disc_rope)
     # insert_disc_planatom.set_jvalue(addin_str(), x_addin)
     # insert_disc_planatom.set_jvalue(begin_str(), x_begin)
     # insert_disc_planatom.set_jvalue(close_str(), x_close)
@@ -383,9 +383,9 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_conceptunit():
     after_sue_planunit = sue_plandelta.get_edited_plan(before_sue_planunit)
 
     # THEN
-    assert after_sue_planunit.concept_exists(ball_way)
-    assert after_sue_planunit.concept_exists(disc_way)
-    disc_concept = after_sue_planunit.get_concept_obj(disc_way)
+    assert after_sue_planunit.concept_exists(ball_rope)
+    assert after_sue_planunit.concept_exists(disc_rope)
+    disc_concept = after_sue_planunit.get_concept_obj(disc_rope)
     assert disc_concept.gogo_want == x_gogo_want
     assert disc_concept.stop_want == x_stop_want
 
@@ -395,10 +395,10 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_conceptunit_Simple
     sue_str = "Sue"
     before_sue_planunit = planunit_shop(sue_str)
     sports_str = "sports"
-    sports_way = before_sue_planunit.make_l1_way(sports_str)
+    sports_rope = before_sue_planunit.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_planunit.make_way(sports_way, ball_str)
-    before_sue_planunit.set_concept(conceptunit_shop(ball_str), sports_way)
+    ball_rope = before_sue_planunit.make_rope(sports_rope, ball_str)
+    before_sue_planunit.set_concept(conceptunit_shop(ball_str), sports_rope)
 
     # x_addin = 140
     x_begin = 1000
@@ -409,7 +409,7 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_conceptunit_Simple
     x_stop_want = 1333
     x_task = True
     insert_disc_planatom = planatom_shop(plan_conceptunit_str(), UPDATE_str())
-    insert_disc_planatom.set_jkey(concept_way_str(), ball_way)
+    insert_disc_planatom.set_jkey(concept_rope_str(), ball_rope)
     # insert_disc_planatom.set_jvalue(addin_str(), x_addin)
     insert_disc_planatom.set_jvalue(begin_str(), x_begin)
     insert_disc_planatom.set_jvalue(close_str(), x_close)
@@ -422,21 +422,21 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_conceptunit_Simple
     print(f"{insert_disc_planatom=}")
     sue_plandelta = plandelta_shop()
     sue_plandelta.set_planatom(insert_disc_planatom)
-    assert before_sue_planunit.get_concept_obj(ball_way).begin is None
-    assert before_sue_planunit.get_concept_obj(ball_way).close is None
-    assert before_sue_planunit.get_concept_obj(ball_way).task is False
-    assert before_sue_planunit.get_concept_obj(ball_way).gogo_want is None
-    assert before_sue_planunit.get_concept_obj(ball_way).stop_want is None
+    assert before_sue_planunit.get_concept_obj(ball_rope).begin is None
+    assert before_sue_planunit.get_concept_obj(ball_rope).close is None
+    assert before_sue_planunit.get_concept_obj(ball_rope).task is False
+    assert before_sue_planunit.get_concept_obj(ball_rope).gogo_want is None
+    assert before_sue_planunit.get_concept_obj(ball_rope).stop_want is None
 
     # WHEN
     after_sue_planunit = sue_plandelta.get_edited_plan(before_sue_planunit)
 
     # THEN
-    assert after_sue_planunit.get_concept_obj(ball_way).begin == x_begin
-    assert after_sue_planunit.get_concept_obj(ball_way).close == x_close
-    assert after_sue_planunit.get_concept_obj(ball_way).gogo_want == x_gogo_want
-    assert after_sue_planunit.get_concept_obj(ball_way).stop_want == x_stop_want
-    assert after_sue_planunit.get_concept_obj(ball_way).task
+    assert after_sue_planunit.get_concept_obj(ball_rope).begin == x_begin
+    assert after_sue_planunit.get_concept_obj(ball_rope).close == x_close
+    assert after_sue_planunit.get_concept_obj(ball_rope).gogo_want == x_gogo_want
+    assert after_sue_planunit.get_concept_obj(ball_rope).stop_want == x_stop_want
+    assert after_sue_planunit.get_concept_obj(ball_rope).task
 
 
 def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_delete_concept_awardlink():
@@ -461,23 +461,23 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_delete_concept_awardlink(
     bob_acctunit.add_membership(fly_str)
 
     sports_str = "sports"
-    sports_way = before_sue_planunit.make_l1_way(sports_str)
+    sports_rope = before_sue_planunit.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_planunit.make_way(sports_way, ball_str)
+    ball_rope = before_sue_planunit.make_rope(sports_rope, ball_str)
     disc_str = "Ultimate Disc"
-    disc_way = before_sue_planunit.make_way(sports_way, disc_str)
-    before_sue_planunit.set_concept(conceptunit_shop(ball_str), sports_way)
-    before_sue_planunit.set_concept(conceptunit_shop(disc_str), sports_way)
-    before_sue_planunit.edit_concept_attr(ball_way, awardlink=awardlink_shop(run_str))
-    before_sue_planunit.edit_concept_attr(ball_way, awardlink=awardlink_shop(fly_str))
-    before_sue_planunit.edit_concept_attr(disc_way, awardlink=awardlink_shop(run_str))
-    before_sue_planunit.edit_concept_attr(disc_way, awardlink=awardlink_shop(fly_str))
-    assert len(before_sue_planunit.get_concept_obj(ball_way).awardlinks) == 2
-    assert len(before_sue_planunit.get_concept_obj(disc_way).awardlinks) == 2
+    disc_rope = before_sue_planunit.make_rope(sports_rope, disc_str)
+    before_sue_planunit.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_sue_planunit.set_concept(conceptunit_shop(disc_str), sports_rope)
+    before_sue_planunit.edit_concept_attr(ball_rope, awardlink=awardlink_shop(run_str))
+    before_sue_planunit.edit_concept_attr(ball_rope, awardlink=awardlink_shop(fly_str))
+    before_sue_planunit.edit_concept_attr(disc_rope, awardlink=awardlink_shop(run_str))
+    before_sue_planunit.edit_concept_attr(disc_rope, awardlink=awardlink_shop(fly_str))
+    assert len(before_sue_planunit.get_concept_obj(ball_rope).awardlinks) == 2
+    assert len(before_sue_planunit.get_concept_obj(disc_rope).awardlinks) == 2
 
     # WHEN
     delete_disc_planatom = planatom_shop(plan_concept_awardlink_str(), DELETE_str())
-    delete_disc_planatom.set_jkey(concept_way_str(), disc_way)
+    delete_disc_planatom.set_jkey(concept_rope_str(), disc_rope)
     delete_disc_planatom.set_jkey(awardee_title_str(), fly_str)
     print(f"{delete_disc_planatom=}")
     sue_plandelta = plandelta_shop()
@@ -485,8 +485,8 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_delete_concept_awardlink(
     after_sue_planunit = sue_plandelta.get_edited_plan(before_sue_planunit)
 
     # THEN
-    assert len(after_sue_planunit.get_concept_obj(ball_way).awardlinks) == 2
-    assert len(after_sue_planunit.get_concept_obj(disc_way).awardlinks) == 1
+    assert len(after_sue_planunit.get_concept_obj(ball_rope).awardlinks) == 2
+    assert len(after_sue_planunit.get_concept_obj(disc_rope).awardlinks) == 1
 
 
 def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_concept_awardlink():
@@ -502,12 +502,12 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_concept_awardlink(
     yao_acctunit.add_membership(run_str)
 
     sports_str = "sports"
-    sports_way = before_sue_planunit.make_l1_way(sports_str)
+    sports_rope = before_sue_planunit.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_planunit.make_way(sports_way, ball_str)
-    before_sue_planunit.set_concept(conceptunit_shop(ball_str), sports_way)
-    before_sue_planunit.edit_concept_attr(ball_way, awardlink=awardlink_shop(run_str))
-    run_awardlink = before_sue_planunit.get_concept_obj(ball_way).awardlinks.get(
+    ball_rope = before_sue_planunit.make_rope(sports_rope, ball_str)
+    before_sue_planunit.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_sue_planunit.edit_concept_attr(ball_rope, awardlink=awardlink_shop(run_str))
+    run_awardlink = before_sue_planunit.get_concept_obj(ball_rope).awardlinks.get(
         run_str
     )
     assert run_awardlink.give_force == 1
@@ -517,7 +517,7 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_concept_awardlink(
     x_give_force = 55
     x_take_force = 66
     update_disc_planatom = planatom_shop(plan_concept_awardlink_str(), UPDATE_str())
-    update_disc_planatom.set_jkey(concept_way_str(), ball_way)
+    update_disc_planatom.set_jkey(concept_rope_str(), ball_rope)
     update_disc_planatom.set_jkey(awardee_title_str(), run_str)
     update_disc_planatom.set_jvalue(give_force_str(), x_give_force)
     update_disc_planatom.set_jvalue(take_force_str(), x_take_force)
@@ -527,7 +527,7 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_concept_awardlink(
     after_sue_au = sue_plandelta.get_edited_plan(before_sue_planunit)
 
     # THEN
-    run_awardlink = after_sue_au.get_concept_obj(ball_way).awardlinks.get(run_str)
+    run_awardlink = after_sue_au.get_concept_obj(ball_rope).awardlinks.get(run_str)
     print(f"{run_awardlink.give_force=}")
     assert run_awardlink.give_force == x_give_force
     assert run_awardlink.take_force == x_take_force
@@ -545,18 +545,18 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_concept_awardlink(
     yao_acctunit = before_sue_planunit.get_acct(yao_str)
     yao_acctunit.add_membership(run_str)
     sports_str = "sports"
-    sports_way = before_sue_planunit.make_l1_way(sports_str)
+    sports_rope = before_sue_planunit.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_planunit.make_way(sports_way, ball_str)
-    before_sue_planunit.set_concept(conceptunit_shop(ball_str), sports_way)
-    before_ball_concept = before_sue_planunit.get_concept_obj(ball_way)
+    ball_rope = before_sue_planunit.make_rope(sports_rope, ball_str)
+    before_sue_planunit.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_ball_concept = before_sue_planunit.get_concept_obj(ball_rope)
     assert before_ball_concept.awardlinks.get(run_str) is None
 
     # WHEN
     x_give_force = 55
     x_take_force = 66
     update_disc_planatom = planatom_shop(plan_concept_awardlink_str(), INSERT_str())
-    update_disc_planatom.set_jkey(concept_way_str(), ball_way)
+    update_disc_planatom.set_jkey(concept_rope_str(), ball_rope)
     update_disc_planatom.set_jkey(awardee_title_str(), run_str)
     update_disc_planatom.set_jvalue(give_force_str(), x_give_force)
     update_disc_planatom.set_jvalue(take_force_str(), x_take_force)
@@ -566,7 +566,7 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_concept_awardlink(
     after_sue_au = sue_plandelta.get_edited_plan(before_sue_planunit)
 
     # THEN
-    after_ball_concept = after_sue_au.get_concept_obj(ball_way)
+    after_ball_concept = after_sue_au.get_concept_obj(ball_rope)
     assert after_ball_concept.awardlinks.get(run_str) is not None
 
 
@@ -575,26 +575,26 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_concept_factunit()
     sue_str = "Sue"
     before_sue_au = planunit_shop(sue_str)
     sports_str = "sports"
-    sports_way = before_sue_au.make_l1_way(sports_str)
+    sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_au.make_way(sports_way, ball_str)
-    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_way)
+    ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
+    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_rope)
     knee_str = "knee"
-    knee_way = before_sue_au.make_l1_way(knee_str)
+    knee_rope = before_sue_au.make_l1_rope(knee_str)
     damaged_str = "damaged mcl"
-    damaged_way = before_sue_au.make_way(knee_way, damaged_str)
+    damaged_rope = before_sue_au.make_rope(knee_rope, damaged_str)
     before_sue_au.set_l1_concept(conceptunit_shop(knee_str))
-    before_sue_au.set_concept(conceptunit_shop(damaged_str), knee_way)
-    before_ball_concept = before_sue_au.get_concept_obj(ball_way)
+    before_sue_au.set_concept(conceptunit_shop(damaged_str), knee_rope)
+    before_ball_concept = before_sue_au.get_concept_obj(ball_rope)
     assert before_ball_concept.factunits == {}
 
     # WHEN
     damaged_fopen = 55
     damaged_fnigh = 66
     update_disc_planatom = planatom_shop(plan_concept_factunit_str(), INSERT_str())
-    update_disc_planatom.set_jkey(concept_way_str(), ball_way)
-    update_disc_planatom.set_jkey(fcontext_str(), knee_way)
-    update_disc_planatom.set_jvalue(fstate_str(), damaged_way)
+    update_disc_planatom.set_jkey(concept_rope_str(), ball_rope)
+    update_disc_planatom.set_jkey(fcontext_str(), knee_rope)
+    update_disc_planatom.set_jvalue(fstate_str(), damaged_rope)
     update_disc_planatom.set_jvalue(fopen_str(), damaged_fopen)
     update_disc_planatom.set_jvalue(fnigh_str(), damaged_fnigh)
     # print(f"{update_disc_planatom=}")
@@ -603,13 +603,13 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_concept_factunit()
     after_sue_au = sue_plandelta.get_edited_plan(before_sue_au)
 
     # THEN
-    after_ball_concept = after_sue_au.get_concept_obj(ball_way)
+    after_ball_concept = after_sue_au.get_concept_obj(ball_rope)
     assert after_ball_concept.factunits != {}
-    assert after_ball_concept.factunits.get(knee_way) is not None
-    assert after_ball_concept.factunits.get(knee_way).fcontext == knee_way
-    assert after_ball_concept.factunits.get(knee_way).fstate == damaged_way
-    assert after_ball_concept.factunits.get(knee_way).fopen == damaged_fopen
-    assert after_ball_concept.factunits.get(knee_way).fnigh == damaged_fnigh
+    assert after_ball_concept.factunits.get(knee_rope) is not None
+    assert after_ball_concept.factunits.get(knee_rope).fcontext == knee_rope
+    assert after_ball_concept.factunits.get(knee_rope).fstate == damaged_rope
+    assert after_ball_concept.factunits.get(knee_rope).fopen == damaged_fopen
+    assert after_ball_concept.factunits.get(knee_rope).fnigh == damaged_fnigh
 
 
 def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_delete_concept_factunit():
@@ -617,34 +617,34 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_delete_concept_factunit()
     sue_str = "Sue"
     before_sue_au = planunit_shop(sue_str)
     sports_str = "sports"
-    sports_way = before_sue_au.make_l1_way(sports_str)
+    sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_au.make_way(sports_way, ball_str)
-    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_way)
+    ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
+    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_rope)
     knee_str = "knee"
-    knee_way = before_sue_au.make_l1_way(knee_str)
+    knee_rope = before_sue_au.make_l1_rope(knee_str)
     damaged_str = "damaged mcl"
-    damaged_way = before_sue_au.make_way(knee_way, damaged_str)
+    damaged_rope = before_sue_au.make_rope(knee_rope, damaged_str)
     before_sue_au.set_l1_concept(conceptunit_shop(knee_str))
-    before_sue_au.set_concept(conceptunit_shop(damaged_str), knee_way)
+    before_sue_au.set_concept(conceptunit_shop(damaged_str), knee_rope)
     before_sue_au.edit_concept_attr(
-        ball_way, factunit=factunit_shop(fcontext=knee_way, fstate=damaged_way)
+        ball_rope, factunit=factunit_shop(fcontext=knee_rope, fstate=damaged_rope)
     )
-    before_ball_concept = before_sue_au.get_concept_obj(ball_way)
+    before_ball_concept = before_sue_au.get_concept_obj(ball_rope)
     assert before_ball_concept.factunits != {}
-    assert before_ball_concept.factunits.get(knee_way) is not None
+    assert before_ball_concept.factunits.get(knee_rope) is not None
 
     # WHEN
     update_disc_planatom = planatom_shop(plan_concept_factunit_str(), DELETE_str())
-    update_disc_planatom.set_jkey(concept_way_str(), ball_way)
-    update_disc_planatom.set_jkey(fcontext_str(), knee_way)
+    update_disc_planatom.set_jkey(concept_rope_str(), ball_rope)
+    update_disc_planatom.set_jkey(fcontext_str(), knee_rope)
     # print(f"{update_disc_planatom=}")
     sue_plandelta = plandelta_shop()
     sue_plandelta.set_planatom(update_disc_planatom)
     after_sue_au = sue_plandelta.get_edited_plan(before_sue_au)
 
     # THEN
-    after_ball_concept = after_sue_au.get_concept_obj(ball_way)
+    after_ball_concept = after_sue_au.get_concept_obj(ball_rope)
     assert after_ball_concept.factunits == {}
 
 
@@ -653,35 +653,35 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_concept_factunit()
     sue_str = "Sue"
     before_sue_au = planunit_shop(sue_str)
     sports_str = "sports"
-    sports_way = before_sue_au.make_l1_way(sports_str)
+    sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_au.make_way(sports_way, ball_str)
-    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_way)
+    ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
+    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_rope)
     knee_str = "knee"
-    knee_way = before_sue_au.make_l1_way(knee_str)
+    knee_rope = before_sue_au.make_l1_rope(knee_str)
     damaged_str = "damaged mcl"
-    damaged_way = before_sue_au.make_way(knee_way, damaged_str)
+    damaged_rope = before_sue_au.make_rope(knee_rope, damaged_str)
     medical_str = "get medical attention"
-    medical_way = before_sue_au.make_way(knee_way, medical_str)
+    medical_rope = before_sue_au.make_rope(knee_rope, medical_str)
     before_sue_au.set_l1_concept(conceptunit_shop(knee_str))
-    before_sue_au.set_concept(conceptunit_shop(damaged_str), knee_way)
-    before_sue_au.set_concept(conceptunit_shop(medical_str), knee_way)
-    before_knee_factunit = factunit_shop(knee_way, damaged_way)
-    before_sue_au.edit_concept_attr(ball_way, factunit=before_knee_factunit)
-    before_ball_concept = before_sue_au.get_concept_obj(ball_way)
+    before_sue_au.set_concept(conceptunit_shop(damaged_str), knee_rope)
+    before_sue_au.set_concept(conceptunit_shop(medical_str), knee_rope)
+    before_knee_factunit = factunit_shop(knee_rope, damaged_rope)
+    before_sue_au.edit_concept_attr(ball_rope, factunit=before_knee_factunit)
+    before_ball_concept = before_sue_au.get_concept_obj(ball_rope)
     assert before_ball_concept.factunits != {}
-    assert before_ball_concept.factunits.get(knee_way) is not None
-    assert before_ball_concept.factunits.get(knee_way).fstate == damaged_way
-    assert before_ball_concept.factunits.get(knee_way).fopen is None
-    assert before_ball_concept.factunits.get(knee_way).fnigh is None
+    assert before_ball_concept.factunits.get(knee_rope) is not None
+    assert before_ball_concept.factunits.get(knee_rope).fstate == damaged_rope
+    assert before_ball_concept.factunits.get(knee_rope).fopen is None
+    assert before_ball_concept.factunits.get(knee_rope).fnigh is None
 
     # WHEN
     medical_fopen = 45
     medical_fnigh = 77
     update_disc_planatom = planatom_shop(plan_concept_factunit_str(), UPDATE_str())
-    update_disc_planatom.set_jkey(concept_way_str(), ball_way)
-    update_disc_planatom.set_jkey(fcontext_str(), knee_way)
-    update_disc_planatom.set_jvalue(fstate_str(), medical_way)
+    update_disc_planatom.set_jkey(concept_rope_str(), ball_rope)
+    update_disc_planatom.set_jkey(fcontext_str(), knee_rope)
+    update_disc_planatom.set_jvalue(fstate_str(), medical_rope)
     update_disc_planatom.set_jvalue(fopen_str(), medical_fopen)
     update_disc_planatom.set_jvalue(fnigh_str(), medical_fnigh)
     # print(f"{update_disc_planatom=}")
@@ -690,12 +690,12 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_concept_factunit()
     after_sue_au = sue_plandelta.get_edited_plan(before_sue_au)
 
     # THEN
-    after_ball_concept = after_sue_au.get_concept_obj(ball_way)
+    after_ball_concept = after_sue_au.get_concept_obj(ball_rope)
     assert after_ball_concept.factunits != {}
-    assert after_ball_concept.factunits.get(knee_way) is not None
-    assert after_ball_concept.factunits.get(knee_way).fstate == medical_way
-    assert after_ball_concept.factunits.get(knee_way).fopen == medical_fopen
-    assert after_ball_concept.factunits.get(knee_way).fnigh == medical_fnigh
+    assert after_ball_concept.factunits.get(knee_rope) is not None
+    assert after_ball_concept.factunits.get(knee_rope).fstate == medical_rope
+    assert after_ball_concept.factunits.get(knee_rope).fopen == medical_fopen
+    assert after_ball_concept.factunits.get(knee_rope).fnigh == medical_fnigh
 
 
 def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_concept_reason_premiseunit():
@@ -703,25 +703,25 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_concept_reason_pre
     sue_str = "Sue"
     before_sue_au = planunit_shop(sue_str)
     sports_str = "sports"
-    sports_way = before_sue_au.make_l1_way(sports_str)
+    sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_au.make_way(sports_way, ball_str)
-    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_way)
+    ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
+    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_rope)
     knee_str = "knee"
-    knee_way = before_sue_au.make_l1_way(knee_str)
+    knee_rope = before_sue_au.make_l1_rope(knee_str)
     damaged_str = "damaged mcl"
-    damaged_way = before_sue_au.make_way(knee_way, damaged_str)
+    damaged_rope = before_sue_au.make_rope(knee_rope, damaged_str)
     before_sue_au.set_l1_concept(conceptunit_shop(knee_str))
-    before_sue_au.set_concept(conceptunit_shop(damaged_str), knee_way)
+    before_sue_au.set_concept(conceptunit_shop(damaged_str), knee_rope)
     before_sue_au.edit_concept_attr(
-        ball_way, reason_rcontext=knee_way, reason_premise=damaged_way
+        ball_rope, reason_rcontext=knee_rope, reason_premise=damaged_rope
     )
-    before_ball_concept = before_sue_au.get_concept_obj(ball_way)
+    before_ball_concept = before_sue_au.get_concept_obj(ball_rope)
     assert before_ball_concept.reasonunits != {}
-    before_knee_reasonunit = before_ball_concept.get_reasonunit(knee_way)
+    before_knee_reasonunit = before_ball_concept.get_reasonunit(knee_rope)
     assert before_knee_reasonunit is not None
-    damaged_premiseunit = before_knee_reasonunit.get_premise(damaged_way)
-    assert damaged_premiseunit.pstate == damaged_way
+    damaged_premiseunit = before_knee_reasonunit.get_premise(damaged_rope)
+    assert damaged_premiseunit.pstate == damaged_rope
     assert damaged_premiseunit.popen is None
     assert damaged_premiseunit.pnigh is None
     assert damaged_premiseunit.pdivisor is None
@@ -733,9 +733,9 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_concept_reason_pre
     update_disc_planatom = planatom_shop(
         plan_concept_reason_premiseunit_str(), UPDATE_str()
     )
-    update_disc_planatom.set_jkey(concept_way_str(), ball_way)
-    update_disc_planatom.set_jkey("rcontext", knee_way)
-    update_disc_planatom.set_jkey("pstate", damaged_way)
+    update_disc_planatom.set_jkey(concept_rope_str(), ball_rope)
+    update_disc_planatom.set_jkey("rcontext", knee_rope)
+    update_disc_planatom.set_jkey("pstate", damaged_rope)
     update_disc_planatom.set_jvalue("popen", damaged_popen)
     update_disc_planatom.set_jvalue("pnigh", damaged_pnigh)
     update_disc_planatom.set_jvalue("pdivisor", damaged_pdivisor)
@@ -745,11 +745,11 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_concept_reason_pre
     after_sue_au = sue_plandelta.get_edited_plan(before_sue_au)
 
     # THEN
-    after_ball_concept = after_sue_au.get_concept_obj(ball_way)
-    after_knee_reasonunit = after_ball_concept.get_reasonunit(knee_way)
+    after_ball_concept = after_sue_au.get_concept_obj(ball_rope)
+    after_knee_reasonunit = after_ball_concept.get_reasonunit(knee_rope)
     assert after_knee_reasonunit is not None
-    after_damaged_premiseunit = after_knee_reasonunit.get_premise(damaged_way)
-    assert after_damaged_premiseunit.pstate == damaged_way
+    after_damaged_premiseunit = after_knee_reasonunit.get_premise(damaged_rope)
+    assert after_damaged_premiseunit.pstate == damaged_rope
     assert after_damaged_premiseunit.popen == damaged_popen
     assert after_damaged_premiseunit.pnigh == damaged_pnigh
     assert after_damaged_premiseunit.pdivisor == damaged_pdivisor
@@ -760,26 +760,26 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_concept_reason_pre
     sue_str = "Sue"
     before_sue_au = planunit_shop(sue_str)
     sports_str = "sports"
-    sports_way = before_sue_au.make_l1_way(sports_str)
+    sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_au.make_way(sports_way, ball_str)
-    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_way)
+    ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
+    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_rope)
     knee_str = "knee"
-    knee_way = before_sue_au.make_l1_way(knee_str)
+    knee_rope = before_sue_au.make_l1_rope(knee_str)
     damaged_str = "damaged mcl"
-    damaged_way = before_sue_au.make_way(knee_way, damaged_str)
+    damaged_rope = before_sue_au.make_rope(knee_rope, damaged_str)
     medical_str = "get medical attention"
-    medical_way = before_sue_au.make_way(knee_way, medical_str)
+    medical_rope = before_sue_au.make_rope(knee_rope, medical_str)
     before_sue_au.set_l1_concept(conceptunit_shop(knee_str))
-    before_sue_au.set_concept(conceptunit_shop(damaged_str), knee_way)
-    before_sue_au.set_concept(conceptunit_shop(medical_str), knee_way)
+    before_sue_au.set_concept(conceptunit_shop(damaged_str), knee_rope)
+    before_sue_au.set_concept(conceptunit_shop(medical_str), knee_rope)
     before_sue_au.edit_concept_attr(
-        ball_way, reason_rcontext=knee_way, reason_premise=damaged_way
+        ball_rope, reason_rcontext=knee_rope, reason_premise=damaged_rope
     )
-    before_ball_concept = before_sue_au.get_concept_obj(ball_way)
-    before_knee_reasonunit = before_ball_concept.get_reasonunit(knee_way)
-    assert before_knee_reasonunit.get_premise(damaged_way) is not None
-    assert before_knee_reasonunit.get_premise(medical_way) is None
+    before_ball_concept = before_sue_au.get_concept_obj(ball_rope)
+    before_knee_reasonunit = before_ball_concept.get_reasonunit(knee_rope)
+    assert before_knee_reasonunit.get_premise(damaged_rope) is not None
+    assert before_knee_reasonunit.get_premise(medical_rope) is None
 
     # WHEN
     medical_popen = 45
@@ -788,9 +788,9 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_concept_reason_pre
     update_disc_planatom = planatom_shop(
         plan_concept_reason_premiseunit_str(), INSERT_str()
     )
-    update_disc_planatom.set_jkey(concept_way_str(), ball_way)
-    update_disc_planatom.set_jkey("rcontext", knee_way)
-    update_disc_planatom.set_jkey("pstate", medical_way)
+    update_disc_planatom.set_jkey(concept_rope_str(), ball_rope)
+    update_disc_planatom.set_jkey("rcontext", knee_rope)
+    update_disc_planatom.set_jkey("pstate", medical_rope)
     update_disc_planatom.set_jvalue("popen", medical_popen)
     update_disc_planatom.set_jvalue("pnigh", medical_pnigh)
     update_disc_planatom.set_jvalue("pdivisor", medical_pdivisor)
@@ -800,11 +800,11 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_concept_reason_pre
     after_sue_au = sue_plandelta.get_edited_plan(before_sue_au)
 
     # THEN
-    after_ball_concept = after_sue_au.get_concept_obj(ball_way)
-    after_knee_reasonunit = after_ball_concept.get_reasonunit(knee_way)
-    after_medical_premiseunit = after_knee_reasonunit.get_premise(medical_way)
+    after_ball_concept = after_sue_au.get_concept_obj(ball_rope)
+    after_knee_reasonunit = after_ball_concept.get_reasonunit(knee_rope)
+    after_medical_premiseunit = after_knee_reasonunit.get_premise(medical_rope)
     assert after_medical_premiseunit is not None
-    assert after_medical_premiseunit.pstate == medical_way
+    assert after_medical_premiseunit.pstate == medical_rope
     assert after_medical_premiseunit.popen == medical_popen
     assert after_medical_premiseunit.pnigh == medical_pnigh
     assert after_medical_premiseunit.pdivisor == medical_pdivisor
@@ -815,46 +815,46 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_delete_concept_reason_pre
     sue_str = "Sue"
     before_sue_au = planunit_shop(sue_str)
     sports_str = "sports"
-    sports_way = before_sue_au.make_l1_way(sports_str)
+    sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_au.make_way(sports_way, ball_str)
-    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_way)
+    ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
+    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_rope)
     knee_str = "knee"
-    knee_way = before_sue_au.make_l1_way(knee_str)
+    knee_rope = before_sue_au.make_l1_rope(knee_str)
     damaged_str = "damaged mcl"
-    damaged_way = before_sue_au.make_way(knee_way, damaged_str)
+    damaged_rope = before_sue_au.make_rope(knee_rope, damaged_str)
     medical_str = "get medical attention"
-    medical_way = before_sue_au.make_way(knee_way, medical_str)
+    medical_rope = before_sue_au.make_rope(knee_rope, medical_str)
     before_sue_au.set_l1_concept(conceptunit_shop(knee_str))
-    before_sue_au.set_concept(conceptunit_shop(damaged_str), knee_way)
-    before_sue_au.set_concept(conceptunit_shop(medical_str), knee_way)
+    before_sue_au.set_concept(conceptunit_shop(damaged_str), knee_rope)
+    before_sue_au.set_concept(conceptunit_shop(medical_str), knee_rope)
     before_sue_au.edit_concept_attr(
-        ball_way, reason_rcontext=knee_way, reason_premise=damaged_way
+        ball_rope, reason_rcontext=knee_rope, reason_premise=damaged_rope
     )
     before_sue_au.edit_concept_attr(
-        ball_way, reason_rcontext=knee_way, reason_premise=medical_way
+        ball_rope, reason_rcontext=knee_rope, reason_premise=medical_rope
     )
-    before_ball_concept = before_sue_au.get_concept_obj(ball_way)
-    before_knee_reasonunit = before_ball_concept.get_reasonunit(knee_way)
-    assert before_knee_reasonunit.get_premise(damaged_way) is not None
-    assert before_knee_reasonunit.get_premise(medical_way) is not None
+    before_ball_concept = before_sue_au.get_concept_obj(ball_rope)
+    before_knee_reasonunit = before_ball_concept.get_reasonunit(knee_rope)
+    assert before_knee_reasonunit.get_premise(damaged_rope) is not None
+    assert before_knee_reasonunit.get_premise(medical_rope) is not None
 
     # WHEN
     update_disc_planatom = planatom_shop(
         plan_concept_reason_premiseunit_str(), DELETE_str()
     )
-    update_disc_planatom.set_jkey(concept_way_str(), ball_way)
-    update_disc_planatom.set_jkey("rcontext", knee_way)
-    update_disc_planatom.set_jkey("pstate", medical_way)
+    update_disc_planatom.set_jkey(concept_rope_str(), ball_rope)
+    update_disc_planatom.set_jkey("rcontext", knee_rope)
+    update_disc_planatom.set_jkey("pstate", medical_rope)
     sue_plandelta = plandelta_shop()
     sue_plandelta.set_planatom(update_disc_planatom)
     after_sue_au = sue_plandelta.get_edited_plan(before_sue_au)
 
     # THEN
-    after_ball_concept = after_sue_au.get_concept_obj(ball_way)
-    after_knee_reasonunit = after_ball_concept.get_reasonunit(knee_way)
-    assert after_knee_reasonunit.get_premise(damaged_way) is not None
-    assert after_knee_reasonunit.get_premise(medical_way) is None
+    after_ball_concept = after_sue_au.get_concept_obj(ball_rope)
+    after_knee_reasonunit = after_ball_concept.get_reasonunit(knee_rope)
+    assert after_knee_reasonunit.get_premise(damaged_rope) is not None
+    assert after_knee_reasonunit.get_premise(medical_rope) is None
 
 
 def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_concept_reasonunit():
@@ -862,24 +862,24 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_concept_reasonunit
     sue_str = "Sue"
     before_sue_au = planunit_shop(sue_str)
     sports_str = "sports"
-    sports_way = before_sue_au.make_l1_way(sports_str)
+    sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_au.make_way(sports_way, ball_str)
-    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_way)
+    ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
+    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_rope)
     knee_str = "knee"
-    knee_way = before_sue_au.make_l1_way(knee_str)
+    knee_rope = before_sue_au.make_l1_rope(knee_str)
     medical_str = "get medical attention"
-    medical_way = before_sue_au.make_way(knee_way, medical_str)
+    medical_rope = before_sue_au.make_rope(knee_rope, medical_str)
     before_sue_au.set_l1_concept(conceptunit_shop(knee_str))
-    before_sue_au.set_concept(conceptunit_shop(medical_str), knee_way)
-    before_ball_concept = before_sue_au.get_concept_obj(ball_way)
-    assert before_ball_concept.get_reasonunit(knee_way) is None
+    before_sue_au.set_concept(conceptunit_shop(medical_str), knee_rope)
+    before_ball_concept = before_sue_au.get_concept_obj(ball_rope)
+    assert before_ball_concept.get_reasonunit(knee_rope) is None
 
     # WHEN
     medical_rconcept_active_requisite = True
     update_disc_planatom = planatom_shop(plan_concept_reasonunit_str(), INSERT_str())
-    update_disc_planatom.set_jkey(concept_way_str(), ball_way)
-    update_disc_planatom.set_jkey("rcontext", knee_way)
+    update_disc_planatom.set_jkey(concept_rope_str(), ball_rope)
+    update_disc_planatom.set_jkey("rcontext", knee_rope)
     update_disc_planatom.set_jvalue(
         rconcept_active_requisite_str(),
         medical_rconcept_active_requisite,
@@ -890,10 +890,10 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_concept_reasonunit
     after_sue_au = sue_plandelta.get_edited_plan(before_sue_au)
 
     # THEN
-    after_ball_concept = after_sue_au.get_concept_obj(ball_way)
-    after_knee_reasonunit = after_ball_concept.get_reasonunit(knee_way)
+    after_ball_concept = after_sue_au.get_concept_obj(ball_rope)
+    after_knee_reasonunit = after_ball_concept.get_reasonunit(knee_rope)
     assert after_knee_reasonunit is not None
-    assert after_knee_reasonunit.get_premise(medical_way) is None
+    assert after_knee_reasonunit.get_premise(medical_rope) is None
     assert (
         after_knee_reasonunit.rconcept_active_requisite
         == medical_rconcept_active_requisite
@@ -905,24 +905,24 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_concept_reasonunit
     sue_str = "Sue"
     before_sue_au = planunit_shop(sue_str)
     sports_str = "sports"
-    sports_way = before_sue_au.make_l1_way(sports_str)
+    sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_au.make_way(sports_way, ball_str)
-    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_way)
+    ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
+    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_rope)
     knee_str = "knee"
-    knee_way = before_sue_au.make_l1_way(knee_str)
+    knee_rope = before_sue_au.make_l1_rope(knee_str)
     medical_str = "get medical attention"
-    medical_way = before_sue_au.make_way(knee_way, medical_str)
+    medical_rope = before_sue_au.make_rope(knee_rope, medical_str)
     before_medical_rconcept_active_requisite = False
     before_sue_au.set_l1_concept(conceptunit_shop(knee_str))
-    before_sue_au.set_concept(conceptunit_shop(medical_str), knee_way)
+    before_sue_au.set_concept(conceptunit_shop(medical_str), knee_rope)
     before_sue_au.edit_concept_attr(
-        ball_way,
-        reason_rcontext=knee_way,
+        ball_rope,
+        reason_rcontext=knee_rope,
         reason_rconcept_active_requisite=before_medical_rconcept_active_requisite,
     )
-    before_ball_concept = before_sue_au.get_concept_obj(ball_way)
-    before_ball_reasonunit = before_ball_concept.get_reasonunit(knee_way)
+    before_ball_concept = before_sue_au.get_concept_obj(ball_rope)
+    before_ball_reasonunit = before_ball_concept.get_reasonunit(knee_rope)
     assert before_ball_reasonunit is not None
     assert (
         before_ball_reasonunit.rconcept_active_requisite
@@ -932,8 +932,8 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_concept_reasonunit
     # WHEN
     after_medical_rconcept_active_requisite = True
     update_disc_planatom = planatom_shop(plan_concept_reasonunit_str(), UPDATE_str())
-    update_disc_planatom.set_jkey(concept_way_str(), ball_way)
-    update_disc_planatom.set_jkey("rcontext", knee_way)
+    update_disc_planatom.set_jkey(concept_rope_str(), ball_rope)
+    update_disc_planatom.set_jkey("rcontext", knee_rope)
     update_disc_planatom.set_jvalue(
         rconcept_active_requisite_str(),
         after_medical_rconcept_active_requisite,
@@ -944,10 +944,10 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_concept_reasonunit
     after_sue_au = sue_plandelta.get_edited_plan(before_sue_au)
 
     # THEN
-    after_ball_concept = after_sue_au.get_concept_obj(ball_way)
-    after_knee_reasonunit = after_ball_concept.get_reasonunit(knee_way)
+    after_ball_concept = after_sue_au.get_concept_obj(ball_rope)
+    after_knee_reasonunit = after_ball_concept.get_reasonunit(knee_rope)
     assert after_knee_reasonunit is not None
-    assert after_knee_reasonunit.get_premise(medical_way) is None
+    assert after_knee_reasonunit.get_premise(medical_rope) is None
     assert (
         after_knee_reasonunit.rconcept_active_requisite
         == after_medical_rconcept_active_requisite
@@ -959,33 +959,33 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_delete_concept_reasonunit
     sue_str = "Sue"
     before_sue_au = planunit_shop(sue_str)
     sports_str = "sports"
-    sports_way = before_sue_au.make_l1_way(sports_str)
+    sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_au.make_way(sports_way, ball_str)
-    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_way)
+    ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
+    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_rope)
     knee_str = "knee"
-    knee_way = before_sue_au.make_l1_way(knee_str)
+    knee_rope = before_sue_au.make_l1_rope(knee_str)
     medical_rconcept_active_requisite = False
     before_sue_au.set_l1_concept(conceptunit_shop(knee_str))
     before_sue_au.edit_concept_attr(
-        ball_way,
-        reason_rcontext=knee_way,
+        ball_rope,
+        reason_rcontext=knee_rope,
         reason_rconcept_active_requisite=medical_rconcept_active_requisite,
     )
-    before_ball_concept = before_sue_au.get_concept_obj(ball_way)
-    assert before_ball_concept.get_reasonunit(knee_way) is not None
+    before_ball_concept = before_sue_au.get_concept_obj(ball_rope)
+    assert before_ball_concept.get_reasonunit(knee_rope) is not None
 
     # WHEN
     update_disc_planatom = planatom_shop(plan_concept_reasonunit_str(), DELETE_str())
-    update_disc_planatom.set_jkey(concept_way_str(), ball_way)
-    update_disc_planatom.set_jkey("rcontext", knee_way)
+    update_disc_planatom.set_jkey(concept_rope_str(), ball_rope)
+    update_disc_planatom.set_jkey("rcontext", knee_rope)
     sue_plandelta = plandelta_shop()
     sue_plandelta.set_planatom(update_disc_planatom)
     after_sue_au = sue_plandelta.get_edited_plan(before_sue_au)
 
     # THEN
-    after_ball_concept = after_sue_au.get_concept_obj(ball_way)
-    assert after_ball_concept.get_reasonunit(knee_way) is None
+    after_ball_concept = after_sue_au.get_concept_obj(ball_rope)
+    assert after_ball_concept.get_reasonunit(knee_rope) is None
 
 
 def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_concept_laborlink():
@@ -995,23 +995,23 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_concept_laborlink(
     yao_str = "Yao"
     before_sue_au.add_acctunit(yao_str)
     sports_str = "sports"
-    sports_way = before_sue_au.make_l1_way(sports_str)
+    sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_au.make_way(sports_way, ball_str)
-    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_way)
-    before_ball_conceptunit = before_sue_au.get_concept_obj(ball_way)
+    ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
+    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_ball_conceptunit = before_sue_au.get_concept_obj(ball_rope)
     assert before_ball_conceptunit.laborunit._laborlinks == set()
 
     # WHEN
     update_disc_planatom = planatom_shop(plan_concept_laborlink_str(), INSERT_str())
-    update_disc_planatom.set_jkey(concept_way_str(), ball_way)
+    update_disc_planatom.set_jkey(concept_rope_str(), ball_rope)
     update_disc_planatom.set_jkey(labor_title_str(), yao_str)
     sue_plandelta = plandelta_shop()
     sue_plandelta.set_planatom(update_disc_planatom)
     after_sue_au = sue_plandelta.get_edited_plan(before_sue_au)
 
     # THEN
-    after_ball_conceptunit = after_sue_au.get_concept_obj(ball_way)
+    after_ball_conceptunit = after_sue_au.get_concept_obj(ball_rope)
     assert after_ball_conceptunit.laborunit._laborlinks != set()
     assert after_ball_conceptunit.laborunit.get_laborlink(yao_str) is not None
 
@@ -1023,26 +1023,26 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_delete_concept_laborlink(
     yao_str = "Yao"
     before_sue_au.add_acctunit(yao_str)
     sports_str = "sports"
-    sports_way = before_sue_au.make_l1_way(sports_str)
+    sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_au.make_way(sports_way, ball_str)
-    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_way)
-    before_ball_conceptunit = before_sue_au.get_concept_obj(ball_way)
+    ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
+    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_ball_conceptunit = before_sue_au.get_concept_obj(ball_rope)
     before_ball_conceptunit.laborunit.set_laborlink(yao_str)
     assert before_ball_conceptunit.laborunit._laborlinks != set()
     assert before_ball_conceptunit.laborunit.get_laborlink(yao_str) is not None
 
     # WHEN
     update_disc_planatom = planatom_shop(plan_concept_laborlink_str(), DELETE_str())
-    update_disc_planatom.set_jkey(concept_way_str(), ball_way)
+    update_disc_planatom.set_jkey(concept_rope_str(), ball_rope)
     update_disc_planatom.set_jkey(labor_title_str(), yao_str)
     sue_plandelta = plandelta_shop()
     sue_plandelta.set_planatom(update_disc_planatom)
-    print(f"{before_sue_au.get_concept_obj(ball_way).laborunit=}")
+    print(f"{before_sue_au.get_concept_obj(ball_rope).laborunit=}")
     after_sue_au = sue_plandelta.get_edited_plan(before_sue_au)
 
     # THEN
-    after_ball_conceptunit = after_sue_au.get_concept_obj(ball_way)
+    after_ball_conceptunit = after_sue_au.get_concept_obj(ball_rope)
     assert after_ball_conceptunit.laborunit._laborlinks == set()
 
 
@@ -1053,17 +1053,17 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_concept_healerlink
     yao_str = "Yao"
     before_sue_au.add_acctunit(yao_str)
     sports_str = "sports"
-    sports_way = before_sue_au.make_l1_way(sports_str)
+    sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_au.make_way(sports_way, ball_str)
-    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_way)
-    before_ball_conceptunit = before_sue_au.get_concept_obj(ball_way)
+    ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
+    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_ball_conceptunit = before_sue_au.get_concept_obj(ball_rope)
     assert before_ball_conceptunit.healerlink._healer_names == set()
     assert not before_ball_conceptunit.healerlink.healer_name_exists(yao_str)
 
     # WHEN
     x_planatom = planatom_shop(plan_concept_healerlink_str(), INSERT_str())
-    x_planatom.set_jkey(concept_way_str(), ball_way)
+    x_planatom.set_jkey(concept_rope_str(), ball_rope)
     x_planatom.set_jkey(healer_name_str(), yao_str)
     print(f"{x_planatom=}")
     sue_plandelta = plandelta_shop()
@@ -1071,7 +1071,7 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_concept_healerlink
     after_sue_au = sue_plandelta.get_edited_plan(before_sue_au)
 
     # THEN
-    after_ball_conceptunit = after_sue_au.get_concept_obj(ball_way)
+    after_ball_conceptunit = after_sue_au.get_concept_obj(ball_rope)
     assert after_ball_conceptunit.healerlink._healer_names != set()
     assert after_ball_conceptunit.healerlink.healer_name_exists(yao_str)
 
@@ -1083,26 +1083,26 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_delete_concept_healerlink
     yao_str = "Yao"
     before_sue_au.add_acctunit(yao_str)
     sports_str = "sports"
-    sports_way = before_sue_au.make_l1_way(sports_str)
+    sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_au.make_way(sports_way, ball_str)
-    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_way)
-    before_ball_conceptunit = before_sue_au.get_concept_obj(ball_way)
+    ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
+    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_ball_conceptunit = before_sue_au.get_concept_obj(ball_rope)
     before_ball_conceptunit.healerlink.set_healer_name(yao_str)
     assert before_ball_conceptunit.healerlink._healer_names != set()
     assert before_ball_conceptunit.healerlink.healer_name_exists(yao_str)
 
     # WHEN
     x_planatom = planatom_shop(plan_concept_healerlink_str(), DELETE_str())
-    x_planatom.set_jkey(concept_way_str(), ball_way)
+    x_planatom.set_jkey(concept_rope_str(), ball_rope)
     x_planatom.set_jkey(healer_name_str(), yao_str)
     sue_plandelta = plandelta_shop()
     sue_plandelta.set_planatom(x_planatom)
-    print(f"{before_sue_au.get_concept_obj(ball_way).laborunit=}")
+    print(f"{before_sue_au.get_concept_obj(ball_rope).laborunit=}")
     after_sue_au = sue_plandelta.get_edited_plan(before_sue_au)
 
     # THEN
-    after_ball_conceptunit = after_sue_au.get_concept_obj(ball_way)
+    after_ball_conceptunit = after_sue_au.get_concept_obj(ball_rope)
     assert after_ball_conceptunit.healerlink._healer_names == set()
     assert not after_ball_conceptunit.healerlink.healer_name_exists(yao_str)
 

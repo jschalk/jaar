@@ -10,7 +10,7 @@ from src.a00_data_toolbox.file_toolbox import (
     save_json,
     set_dir,
 )
-from src.a01_term_logic.term import EventInt, LabelTerm, OwnerName, WayTerm
+from src.a01_term_logic.term import EventInt, LabelTerm, OwnerName, RopeTerm
 from src.a02_finance_logic.deal import DealUnit, TimeLinePoint, get_dealunit_from_dict
 from src.a06_plan_logic.plan import (
     PlanUnit,
@@ -134,7 +134,7 @@ def save_arbitrary_planevent(
     owner_name: str,
     event_int: int,
     accts: list[list] = None,
-    facts: list[tuple[WayTerm, WayTerm, float, float]] = None,
+    facts: list[tuple[RopeTerm, RopeTerm, float, float]] = None,
 ) -> str:
     accts = get_empty_list_if_None(accts)
     facts = get_empty_list_if_None(facts)

@@ -59,15 +59,15 @@ from src.a15_vow_logic.vow_tool import (
     set_cell_trees_found_facts,
 )
 from src.a16_pidgin_logic.pidgin import (
-    default_bridge_if_None,
+    default_knot_if_None,
     default_unknown_str_if_None,
 )
 from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_args_class_types,
     get_pidgin_LabelTerm_args,
     get_pidgin_NameTerm_args,
+    get_pidgin_RopeTerm_args,
     get_pidgin_TitleTerm_args,
-    get_pidgin_WayTerm_args,
     get_quick_pidgens_column_ref,
 )
 from src.a17_idea_logic.idea import get_idearef_obj
@@ -93,22 +93,22 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_VOW_ACCT_NETS_SQLSTR,
     CREATE_VOW_OTE1_AGG_SQLSTR,
     INSERT_VOW_OTE1_AGG_FROM_VOICE_SQLSTR,
-    create_bridge_exists_in_label_error_update_sqlstr,
-    create_bridge_exists_in_name_error_update_sqlstr,
     create_insert_into_pidgin_core_raw_sqlstr,
     create_insert_missing_face_name_into_pidgin_core_vld_sqlstr,
     create_insert_pidgin_core_agg_into_vld_sqlstr,
     create_insert_pidgin_sound_vld_table_sqlstr,
     create_job_tables,
+    create_knot_exists_in_label_error_update_sqlstr,
+    create_knot_exists_in_name_error_update_sqlstr,
     create_prime_tablename,
     create_sound_agg_insert_sqlstrs,
     create_sound_and_voice_tables,
     create_sound_raw_update_inconsist_error_message_sqlstr,
     create_update_pidgin_sound_agg_inconsist_sqlstr,
-    create_update_pidlabe_sound_agg_bridge_error_sqlstr,
-    create_update_pidname_sound_agg_bridge_error_sqlstr,
-    create_update_pidtitl_sound_agg_bridge_error_sqlstr,
-    create_update_pidwayy_sound_agg_bridge_error_sqlstr,
+    create_update_pidlabe_sound_agg_knot_error_sqlstr,
+    create_update_pidname_sound_agg_knot_error_sqlstr,
+    create_update_pidrope_sound_agg_knot_error_sqlstr,
+    create_update_pidtitl_sound_agg_knot_error_sqlstr,
     create_update_voice_raw_empty_inx_col_sqlstr,
     create_update_voice_raw_existing_inx_col_sqlstr,
     get_insert_into_sound_vld_sqlstrs,
@@ -390,9 +390,9 @@ def insert_pidgin_sound_agg_into_pidgin_core_raw_table(cursor: sqlite3_Cursor):
 
 
 def insert_pidgin_core_agg_to_pidgin_core_vld_table(cursor: sqlite3_Cursor):
-    bridge = default_bridge_if_None()
+    knot = default_knot_if_None()
     unknown = default_unknown_str_if_None()
-    insert_sqlstr = create_insert_pidgin_core_agg_into_vld_sqlstr(bridge, unknown)
+    insert_sqlstr = create_insert_pidgin_core_agg_into_vld_sqlstr(knot, unknown)
     cursor.execute(insert_sqlstr)
 
 
@@ -408,8 +408,8 @@ def insert_pidgin_core_raw_to_pidgin_core_agg_table(cursor: sqlite3_Cursor):
     pidgin_core_s_raw_tablename = create_prime_tablename("pidcore", "s", "raw")
     pidgin_core_s_agg_tablename = create_prime_tablename("pidcore", "s", "agg")
     sqlstr = f"""
-INSERT INTO {pidgin_core_s_agg_tablename} (face_name, otx_bridge, inx_bridge, unknown_str)
-SELECT face_name, MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_str)
+INSERT INTO {pidgin_core_s_agg_tablename} (face_name, otx_knot, inx_knot, unknown_str)
+SELECT face_name, MAX(otx_knot), MAX(inx_knot), MAX(unknown_str)
 FROM {pidgin_core_s_raw_tablename}
 WHERE error_message IS NULL
 GROUP BY face_name
@@ -422,11 +422,11 @@ def update_pidgin_sound_agg_inconsist_errors(cursor: sqlite3_Cursor):
         cursor.execute(create_update_pidgin_sound_agg_inconsist_sqlstr(dimen))
 
 
-def update_pidgin_sound_agg_bridge_errors(cursor: sqlite3_Cursor):
-    cursor.execute(create_update_pidlabe_sound_agg_bridge_error_sqlstr())
-    cursor.execute(create_update_pidwayy_sound_agg_bridge_error_sqlstr())
-    cursor.execute(create_update_pidname_sound_agg_bridge_error_sqlstr())
-    cursor.execute(create_update_pidtitl_sound_agg_bridge_error_sqlstr())
+def update_pidgin_sound_agg_knot_errors(cursor: sqlite3_Cursor):
+    cursor.execute(create_update_pidlabe_sound_agg_knot_error_sqlstr())
+    cursor.execute(create_update_pidrope_sound_agg_knot_error_sqlstr())
+    cursor.execute(create_update_pidname_sound_agg_knot_error_sqlstr())
+    cursor.execute(create_update_pidtitl_sound_agg_knot_error_sqlstr())
 
 
 def insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor: sqlite3_Cursor):
@@ -434,24 +434,24 @@ def insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor: sqlite3_Cur
         cursor.execute(create_insert_pidgin_sound_vld_table_sqlstr(dimen))
 
 
-def set_vow_plan_sound_agg_bridge_errors(cursor: sqlite3_Cursor):
+def set_vow_plan_sound_agg_knot_errors(cursor: sqlite3_Cursor):
     pidgin_label_args = get_pidgin_LabelTerm_args()
     pidgin_name_args = get_pidgin_NameTerm_args()
     pidgin_title_args = get_pidgin_TitleTerm_args()
-    pidgin_way_args = get_pidgin_WayTerm_args()
+    pidgin_rope_args = get_pidgin_RopeTerm_args()
     pidgin_args = copy_copy(pidgin_label_args)
     pidgin_args.update(pidgin_name_args)
     pidgin_args.update(pidgin_title_args)
-    pidgin_args.update(pidgin_way_args)
+    pidgin_args.update(pidgin_rope_args)
     pidginable_tuples = get_vow_plan_sound_agg_pidginable_columns(cursor, pidgin_args)
     for voice_raw_tablename, pidginable_columnname in pidginable_tuples:
         error_update_sqlstr = None
         if pidginable_columnname in pidgin_label_args:
-            error_update_sqlstr = create_bridge_exists_in_label_error_update_sqlstr(
+            error_update_sqlstr = create_knot_exists_in_label_error_update_sqlstr(
                 voice_raw_tablename, pidginable_columnname
             )
         if pidginable_columnname in pidgin_name_args:
-            error_update_sqlstr = create_bridge_exists_in_name_error_update_sqlstr(
+            error_update_sqlstr = create_knot_exists_in_name_error_update_sqlstr(
                 voice_raw_tablename, pidginable_columnname
             )
         if error_update_sqlstr:
@@ -474,7 +474,7 @@ def get_vow_plan_sound_agg_pidginable_columns(
 def populate_pidgin_core_vld_with_missing_face_names(cursor: sqlite3_Cursor):
     for agg_tablename in get_vow_plan_sound_agg_tablenames():
         insert_sqlstr = create_insert_missing_face_name_into_pidgin_core_vld_sqlstr(
-            default_bridge=default_bridge_if_None(),
+            default_knot=default_knot_if_None(),
             default_unknown=default_unknown_str_if_None(),
             vow_plan_sound_agg_tablename=agg_tablename,
         )
@@ -488,7 +488,7 @@ def etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor: sqlite3_Curso
     insert_pidgin_core_agg_to_pidgin_core_vld_table(cursor)
     populate_pidgin_core_vld_with_missing_face_names(cursor)
     update_pidgin_sound_agg_inconsist_errors(cursor)
-    update_pidgin_sound_agg_bridge_errors(cursor)
+    update_pidgin_sound_agg_knot_errors(cursor)
     insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor)
 
 
@@ -531,7 +531,7 @@ def set_voice_raw_inx_column(
     column_without_otx: str,
     arg_class_type: str,
 ):
-    if arg_class_type in {"NameTerm", "TitleTerm", "LabelTerm", "WayTerm"}:
+    if arg_class_type in {"NameTerm", "TitleTerm", "LabelTerm", "RopeTerm"}:
         pidgin_type_abbv = ""
         if arg_class_type == "NameTerm":
             pidgin_type_abbv = "name"
@@ -539,8 +539,8 @@ def set_voice_raw_inx_column(
             pidgin_type_abbv = "title"
         elif arg_class_type == "LabelTerm":
             pidgin_type_abbv = "label"
-        elif arg_class_type == "WayTerm":
-            pidgin_type_abbv = "way"
+        elif arg_class_type == "RopeTerm":
+            pidgin_type_abbv = "rope"
         update_calc_inx_sqlstr = create_update_voice_raw_existing_inx_col_sqlstr(
             pidgin_type_abbv, voice_raw_tablename, column_without_otx
         )

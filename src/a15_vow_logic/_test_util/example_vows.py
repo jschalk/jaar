@@ -1,4 +1,4 @@
-from src.a01_term_logic.way import create_way
+from src.a01_term_logic.rope import create_rope
 from src.a04_reason_logic.reason_concept import FactUnit, factunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a05_concept_logic.healer import healerlink_shop
@@ -39,25 +39,25 @@ def create_example_vow2() -> VowUnit:
     zia_gut_plan.add_acctunit(yao_str, 14, 100)
     zia_gut_plan.add_acctunit(zia_str, 38, 400)
     texas_str = "Texas"
-    texas_way = yao_gut_plan.make_l1_way(texas_str)
+    texas_rope = yao_gut_plan.make_l1_rope(texas_str)
     yao_gut_plan.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
     wei_gut_plan.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
     zia_gut_plan.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
-    dallas_way = yao_gut_plan.make_way(texas_way, dallas_str)
+    dallas_rope = yao_gut_plan.make_rope(texas_rope, dallas_str)
     dallas_healerlink = healerlink_shop({yao_str, zia_str})
     dallas_concept = conceptunit_shop(dallas_str, healerlink=dallas_healerlink)
     elpaso_str = "el paso"
-    elpaso_way = yao_gut_plan.make_way(texas_way, elpaso_str)
+    elpaso_rope = yao_gut_plan.make_rope(texas_rope, elpaso_str)
     elpaso_healerlink = healerlink_shop({yao_str})
     elpaso_concept = conceptunit_shop(elpaso_str, healerlink=elpaso_healerlink)
 
-    yao_gut_plan.set_concept(dallas_concept, texas_way)
-    yao_gut_plan.set_concept(elpaso_concept, texas_way)
-    wei_gut_plan.set_concept(dallas_concept, texas_way)
-    wei_gut_plan.set_concept(elpaso_concept, texas_way)
-    zia_gut_plan.set_concept(dallas_concept, texas_way)
-    zia_gut_plan.set_concept(elpaso_concept, texas_way)
+    yao_gut_plan.set_concept(dallas_concept, texas_rope)
+    yao_gut_plan.set_concept(elpaso_concept, texas_rope)
+    wei_gut_plan.set_concept(dallas_concept, texas_rope)
+    wei_gut_plan.set_concept(elpaso_concept, texas_rope)
+    zia_gut_plan.set_concept(dallas_concept, texas_rope)
+    zia_gut_plan.set_concept(elpaso_concept, texas_rope)
     save_gut_file(x_vow_mstr_dir, yao_gut_plan)
     save_gut_file(x_vow_mstr_dir, wei_gut_plan)
     save_gut_file(x_vow_mstr_dir, zia_gut_plan)
@@ -84,25 +84,25 @@ def create_example_vow3() -> VowUnit:
     zia_gut_plan = open_gut_file(x_vow_mstr_dir, a45_str, zia_str)
 
     casa_str = "casa"
-    casa_way = yao_gut_plan.make_l1_way(casa_str)
+    casa_rope = yao_gut_plan.make_l1_rope(casa_str)
     yao_gut_plan.set_l1_concept(conceptunit_shop(casa_str))
     wei_gut_plan.set_l1_concept(conceptunit_shop(casa_str))
     zia_gut_plan.set_l1_concept(conceptunit_shop(casa_str))
     clean_str = "clean"
-    clean_way = yao_gut_plan.make_way(casa_way, clean_str)
+    clean_rope = yao_gut_plan.make_rope(casa_rope, clean_str)
     bath_str = "clean bathroom"
     hall_str = "clean hall"
 
-    yao_gut_plan.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
-    yao_gut_plan.set_concept(conceptunit_shop(bath_str, task=True), clean_way)
-    yao_gut_plan.set_concept(conceptunit_shop(hall_str, task=True), clean_way)
+    yao_gut_plan.set_concept(conceptunit_shop(clean_str, task=True), casa_rope)
+    yao_gut_plan.set_concept(conceptunit_shop(bath_str, task=True), clean_rope)
+    yao_gut_plan.set_concept(conceptunit_shop(hall_str, task=True), clean_rope)
 
-    wei_gut_plan.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
-    wei_gut_plan.set_concept(conceptunit_shop(bath_str, task=True), clean_way)
+    wei_gut_plan.set_concept(conceptunit_shop(clean_str, task=True), casa_rope)
+    wei_gut_plan.set_concept(conceptunit_shop(bath_str, task=True), clean_rope)
 
-    zia_gut_plan.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
-    zia_gut_plan.set_concept(conceptunit_shop(bath_str, task=True), clean_way)
-    zia_gut_plan.set_concept(conceptunit_shop(hall_str, task=True), clean_way)
+    zia_gut_plan.set_concept(conceptunit_shop(clean_str, task=True), casa_rope)
+    zia_gut_plan.set_concept(conceptunit_shop(bath_str, task=True), clean_rope)
+    zia_gut_plan.set_concept(conceptunit_shop(hall_str, task=True), clean_rope)
 
     save_gut_file(x_vow_mstr_dir, yao_gut_plan)
     save_gut_file(x_vow_mstr_dir, wei_gut_plan)
@@ -127,25 +127,25 @@ def create_example_vow4() -> VowUnit:
     zia_gut_plan = open_gut_file(x_vow_mstr_dir, a45_str, zia_str)
 
     casa_str = "casa"
-    casa_way = yao_gut_plan.make_l1_way(casa_str)
+    casa_rope = yao_gut_plan.make_l1_rope(casa_str)
     yao_gut_plan.set_l1_concept(conceptunit_shop(casa_str))
     wei_gut_plan.set_l1_concept(conceptunit_shop(casa_str))
     zia_gut_plan.set_l1_concept(conceptunit_shop(casa_str))
     clean_str = "clean"
-    clean_way = yao_gut_plan.make_way(casa_way, clean_str)
+    clean_rope = yao_gut_plan.make_rope(casa_rope, clean_str)
     bath_str = "clean bathroom"
     hall_str = "clean hall"
 
-    yao_gut_plan.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
-    yao_gut_plan.set_concept(conceptunit_shop(bath_str, task=True), clean_way)
-    yao_gut_plan.set_concept(conceptunit_shop(hall_str, task=True), clean_way)
+    yao_gut_plan.set_concept(conceptunit_shop(clean_str, task=True), casa_rope)
+    yao_gut_plan.set_concept(conceptunit_shop(bath_str, task=True), clean_rope)
+    yao_gut_plan.set_concept(conceptunit_shop(hall_str, task=True), clean_rope)
 
-    wei_gut_plan.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
-    wei_gut_plan.set_concept(conceptunit_shop(bath_str, task=True), clean_way)
+    wei_gut_plan.set_concept(conceptunit_shop(clean_str, task=True), casa_rope)
+    wei_gut_plan.set_concept(conceptunit_shop(bath_str, task=True), clean_rope)
 
-    zia_gut_plan.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
-    zia_gut_plan.set_concept(conceptunit_shop(bath_str, task=True), clean_way)
-    zia_gut_plan.set_concept(conceptunit_shop(hall_str, task=True), clean_way)
+    zia_gut_plan.set_concept(conceptunit_shop(clean_str, task=True), casa_rope)
+    zia_gut_plan.set_concept(conceptunit_shop(bath_str, task=True), clean_rope)
+    zia_gut_plan.set_concept(conceptunit_shop(hall_str, task=True), clean_rope)
 
     yao_gut_plan.set_credor_respect(101)
     wei_gut_plan.set_credor_respect(75)
@@ -176,18 +176,18 @@ def create_example_vow4() -> VowUnit:
 
 def example_casa_clean_factunit() -> FactUnit:
     a23_str = "accord23"
-    casa_way = create_way(a23_str, "casa")
-    floor_way = create_way(casa_way, "floor status")
-    clean_way = create_way(floor_way, "clean")
-    return factunit_shop(floor_way, clean_way)
+    casa_rope = create_rope(a23_str, "casa")
+    floor_rope = create_rope(casa_rope, "floor status")
+    clean_rope = create_rope(floor_rope, "clean")
+    return factunit_shop(floor_rope, clean_rope)
 
 
 def example_casa_dirty_factunit() -> FactUnit:
     a23_str = "accord23"
-    casa_way = create_way(a23_str, "casa")
-    floor_way = create_way(casa_way, "floor status")
-    dirty_way = create_way(floor_way, "dirty")
-    return factunit_shop(floor_way, dirty_way)
+    casa_rope = create_rope(a23_str, "casa")
+    floor_rope = create_rope(casa_rope, "floor status")
+    dirty_rope = create_rope(floor_rope, "dirty")
+    return factunit_shop(floor_rope, dirty_rope)
 
 
 def _example_empty_bob_planunit() -> PlanUnit:
@@ -202,16 +202,16 @@ def get_bob_mop_without_reason_planunit_example() -> PlanUnit:
     clean_str = "clean"
     dirty_str = "dirty"
     mop_str = "mop"
-    casa_way = bob_plan.make_l1_way(casa_str)
-    floor_way = bob_plan.make_way(casa_way, floor_str)
-    clean_way = bob_plan.make_way(floor_way, clean_str)
-    dirty_way = bob_plan.make_way(floor_way, dirty_str)
-    mop_way = bob_plan.make_way(casa_way, mop_str)
-    bob_plan.add_concept(casa_way, 1)
-    bob_plan.add_concept(floor_way, 1)
-    bob_plan.add_concept(clean_way, 1)
-    bob_plan.add_concept(dirty_way, 1)
-    bob_plan.add_concept(mop_way, 1, task=True)
+    casa_rope = bob_plan.make_l1_rope(casa_str)
+    floor_rope = bob_plan.make_rope(casa_rope, floor_str)
+    clean_rope = bob_plan.make_rope(floor_rope, clean_str)
+    dirty_rope = bob_plan.make_rope(floor_rope, dirty_str)
+    mop_rope = bob_plan.make_rope(casa_rope, mop_str)
+    bob_plan.add_concept(casa_rope, 1)
+    bob_plan.add_concept(floor_rope, 1)
+    bob_plan.add_concept(clean_rope, 1)
+    bob_plan.add_concept(dirty_rope, 1)
+    bob_plan.add_concept(mop_rope, 1, task=True)
     return bob_plan
 
 
@@ -222,12 +222,12 @@ def get_bob_mop_with_reason_planunit_example() -> PlanUnit:
     floor_str = "floor status"
     dirty_str = "dirty"
     mop_str = "mop"
-    casa_way = bob_plan.make_l1_way(casa_str)
-    floor_way = bob_plan.make_way(casa_way, floor_str)
-    dirty_way = bob_plan.make_way(floor_way, dirty_str)
-    mop_way = bob_plan.make_way(casa_way, mop_str)
+    casa_rope = bob_plan.make_l1_rope(casa_str)
+    floor_rope = bob_plan.make_rope(casa_rope, floor_str)
+    dirty_rope = bob_plan.make_rope(floor_rope, dirty_str)
+    mop_rope = bob_plan.make_rope(casa_rope, mop_str)
     bob_plan.edit_concept_attr(
-        mop_way, reason_rcontext=floor_way, reason_premise=dirty_way
+        mop_rope, reason_rcontext=floor_rope, reason_premise=dirty_rope
     )
     return bob_plan
 
@@ -235,10 +235,10 @@ def get_bob_mop_with_reason_planunit_example() -> PlanUnit:
 def get_bob_mop_fact_clean_planunit_example() -> PlanUnit:
     bob_plan = get_bob_mop_with_reason_planunit_example()
     bob_plan.add_acctunit("Bob")
-    casa_way = bob_plan.make_l1_way("casa")
-    floor_way = bob_plan.make_way(casa_way, "floor status")
-    clean_way = bob_plan.make_way(floor_way, "clean")
-    bob_plan.add_fact(floor_way, clean_way)
+    casa_rope = bob_plan.make_l1_rope("casa")
+    floor_rope = bob_plan.make_rope(casa_rope, "floor status")
+    clean_rope = bob_plan.make_rope(floor_rope, "clean")
+    bob_plan.add_fact(floor_rope, clean_rope)
     return bob_plan
 
 
@@ -251,31 +251,31 @@ def get_yao_run_with_reason_planunit_example() -> PlanUnit:
     weather_str = "weather"
     raining_str = "raining"
     snowng_str = "snowng"
-    sport_way = yao_plan.make_l1_way(sport_str)
-    participate_way = yao_plan.make_way(sport_way, participate_str)
-    ski_way = yao_plan.make_way(participate_way, ski_str)
-    run_way = yao_plan.make_way(participate_way, run_str)
-    weather_way = yao_plan.make_l1_way(weather_str)
-    rain_way = yao_plan.make_way(weather_way, raining_str)
-    snow_way = yao_plan.make_way(weather_way, snowng_str)
-    yao_plan.add_concept(participate_way)
-    yao_plan.add_concept(ski_way, 5, task=True)
-    yao_plan.add_concept(run_way, 1, task=True)
-    yao_plan.add_concept(weather_way)
-    yao_plan.add_concept(rain_way)
-    yao_plan.add_concept(snow_way)
+    sport_rope = yao_plan.make_l1_rope(sport_str)
+    participate_rope = yao_plan.make_rope(sport_rope, participate_str)
+    ski_rope = yao_plan.make_rope(participate_rope, ski_str)
+    run_rope = yao_plan.make_rope(participate_rope, run_str)
+    weather_rope = yao_plan.make_l1_rope(weather_str)
+    rain_rope = yao_plan.make_rope(weather_rope, raining_str)
+    snow_rope = yao_plan.make_rope(weather_rope, snowng_str)
+    yao_plan.add_concept(participate_rope)
+    yao_plan.add_concept(ski_rope, 5, task=True)
+    yao_plan.add_concept(run_rope, 1, task=True)
+    yao_plan.add_concept(weather_rope)
+    yao_plan.add_concept(rain_rope)
+    yao_plan.add_concept(snow_rope)
     yao_plan.edit_concept_attr(
-        ski_way, reason_rcontext=weather_way, reason_premise=snow_way
+        ski_rope, reason_rcontext=weather_rope, reason_premise=snow_rope
     )
     yao_plan.edit_concept_attr(
-        run_way, reason_rcontext=weather_way, reason_premise=rain_way
+        run_rope, reason_rcontext=weather_rope, reason_premise=rain_rope
     )
     return yao_plan
 
 
 def get_yao_run_rain_fact_planunit_example() -> PlanUnit:
     yao_plan = get_yao_run_with_reason_planunit_example()
-    weather_way = yao_plan.make_l1_way("weather")
-    rain_way = yao_plan.make_way(weather_way, "raining")
-    yao_plan.add_fact(weather_way, rain_way)
+    weather_rope = yao_plan.make_l1_rope("weather")
+    rain_rope = yao_plan.make_rope(weather_rope, "raining")
+    yao_plan.add_fact(weather_rope, rain_rope)
     return yao_plan

@@ -16,7 +16,7 @@ def test_create_empty_plan_from_plan_ReturnsObj():
     yao_str = "Yao"
     slash_str = "/"
     penny_float = 0.7
-    yao_gut = planunit_shop(yao_str, bridge=slash_str, penny=penny_float)
+    yao_gut = planunit_shop(yao_str, knot=slash_str, penny=penny_float)
     yao_gut.set_l1_concept(conceptunit_shop("Iowa"))
     zia_str = "Zia"
     zia_credit_score = 47
@@ -43,7 +43,7 @@ def test_create_empty_plan_from_plan_ReturnsObj():
     assert yao_empty_vision.vow_label == yao_gut.vow_label
     assert yao_empty_vision.last_pack_id is None
     assert yao_empty_vision.get_acctunits_dict() == {}
-    assert yao_empty_vision.bridge == yao_gut.bridge
+    assert yao_empty_vision.knot == yao_gut.knot
     assert yao_empty_vision.fund_pool == yao_gut.fund_pool
     assert yao_empty_vision.fund_iota == yao_gut.fund_iota
     assert yao_empty_vision.respect_bit == yao_gut.respect_bit
@@ -60,7 +60,7 @@ def test_create_listen_basis_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     slash_str = "/"
-    yao_duty = planunit_shop(yao_str, bridge=slash_str)
+    yao_duty = planunit_shop(yao_str, knot=slash_str)
     yao_duty.set_l1_concept(conceptunit_shop("Iowa"))
     zia_str = "Zia"
     zia_credit_score = 47
@@ -86,7 +86,7 @@ def test_create_listen_basis_ReturnsObj():
     assert yao_basis_vision.vow_label == yao_duty.vow_label
     assert yao_basis_vision.last_pack_id == yao_duty.last_pack_id
     assert yao_basis_vision.get_acctunits_dict() == yao_duty.get_acctunits_dict()
-    assert yao_basis_vision.bridge == yao_duty.bridge
+    assert yao_basis_vision.knot == yao_duty.knot
     assert yao_basis_vision.fund_pool == yao_duty.fund_pool
     assert yao_basis_vision.fund_iota == yao_duty.fund_iota
     assert yao_basis_vision.respect_bit == yao_duty.respect_bit
@@ -137,7 +137,7 @@ def test_get_default_job_ReturnsObj():
     assert default_job.owner_name == sue_str
     assert default_job.vow_label == sue_planunit.vow_label
     assert default_job.vow_label == blue_str
-    assert default_job.bridge == slash_str
+    assert default_job.knot == slash_str
     assert default_job.fund_pool == sue_acct_pool
     assert default_job.fund_iota == x_fund_iota
     assert default_job.respect_bit == x_respect_bit

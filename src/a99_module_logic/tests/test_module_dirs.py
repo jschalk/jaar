@@ -72,7 +72,7 @@ def test_PythonFileImportsFormat():
 
 def test_StrFunctionsAreAssertTested():
     """
-    Test that all string-related functions in each module directory are properly asserted and tested.
+    Test that all string-related functions in each module directory are asserted and tested.
     This test performs the following checks for each module:
     - Retrieves all string functions and ensures they are sorted and not duplicated.
     - Verifies that if string functions exist, a corresponding test file exists in the module's utility directory.

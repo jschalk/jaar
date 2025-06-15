@@ -99,7 +99,7 @@ FROM {vow_kpi001_acct_nets_tablename}
 # , ('{a23_str}', '{yao_str}', {yao_acct_net})
 # """
 #         cursor.execute(insert_sqlstr)
-# vow_label, owner_name, concept_way, task, _active INTEGER, _chore INTEGER
+# vow_label, owner_name, concept_rope, task, _active INTEGER, _chore INTEGER
 
 #         vow_kpi001_acct_nets_tablename = vow_kpi001_acct_nets_str()
 #         assert not db_table_exists(cursor, vow_kpi001_acct_nets_tablename)

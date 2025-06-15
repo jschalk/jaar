@@ -115,7 +115,7 @@ def test_create_plnconc_metrics_insert_sqlstr_ReturnsObj():
     x_mass = 21
     x_morph = 22
     x_numor = 23
-    x_way = 24
+    x_rope = 24
     x_task = 25
     x_problem_bool = 26
     x_stop_want = 27
@@ -144,7 +144,7 @@ def test_create_plnconc_metrics_insert_sqlstr_ReturnsObj():
         "mass": x_mass,
         "morph": x_morph,
         "numor": x_numor,
-        "concept_way": x_way,
+        "concept_rope": x_rope,
         "task": x_task,
         "problem_bool": x_problem_bool,
         "stop_want": x_stop_want,
@@ -193,7 +193,7 @@ def test_create_plnreas_metrics_insert_sqlstr_ReturnsObj():
 
     x_vow_label = "accord23"
     x_owner_name = "Sue"
-    x_way = 1
+    x_rope = 1
     x_rcontext = 2
     x_rconcept_active_requisite = 3
     x__chore = 4
@@ -202,7 +202,7 @@ def test_create_plnreas_metrics_insert_sqlstr_ReturnsObj():
     values_dict = {
         "vow_label": x_vow_label,
         "owner_name": x_owner_name,
-        "concept_way": x_way,
+        "concept_rope": x_rope,
         "rcontext": x_rcontext,
         "rconcept_active_requisite": x_rconcept_active_requisite,
         "_chore": x__chore,
@@ -256,7 +256,7 @@ def test_create_plnprem_metrics_insert_sqlstr_ReturnsObj():
 
     x_vow_label = "accord23"
     x_owner_name = "Sue"
-    x_way = 1
+    x_rope = 1
     x_rcontext = 2
     x_pstate = 3
     x_pnigh = 4
@@ -267,7 +267,7 @@ def test_create_plnprem_metrics_insert_sqlstr_ReturnsObj():
     values_dict = {
         "vow_label": x_vow_label,
         "owner_name": x_owner_name,
-        "concept_way": x_way,
+        "concept_rope": x_rope,
         "rcontext": x_rcontext,
         "pstate": x_pstate,
         "pnigh": x_pnigh,
@@ -323,7 +323,7 @@ def test_create_plnawar_metrics_insert_sqlstr_ReturnsObj():
 
     x_vow_label = "accord23"
     x_owner_name = "Sue"
-    x_way = 1
+    x_rope = 1
     x_awardee_title = 2
     x_give_force = 3
     x_take_force = 4
@@ -332,7 +332,7 @@ def test_create_plnawar_metrics_insert_sqlstr_ReturnsObj():
     values_dict = {
         "vow_label": x_vow_label,
         "owner_name": x_owner_name,
-        "concept_way": x_way,
+        "concept_rope": x_rope,
         "awardee_title": x_awardee_title,
         "give_force": x_give_force,
         "take_force": x_take_force,
@@ -386,7 +386,7 @@ def test_create_plnfact_metrics_insert_sqlstr_ReturnsObj():
 
     x_vow_label = "accord23"
     x_owner_name = "Sue"
-    x_way = 1
+    x_rope = 1
     x_fcontext = 2
     x_fstate = 3
     x_fopen = 4
@@ -394,7 +394,7 @@ def test_create_plnfact_metrics_insert_sqlstr_ReturnsObj():
     values_dict = {
         "vow_label": x_vow_label,
         "owner_name": x_owner_name,
-        "concept_way": x_way,
+        "concept_rope": x_rope,
         "fcontext": x_fcontext,
         "fstate": x_fstate,
         "fopen": x_fopen,
@@ -447,12 +447,12 @@ def test_create_plnheal_metrics_insert_sqlstr_ReturnsObj():
 
     x_vow_label = "accord23"
     x_owner_name = "Sue"
-    x_way = 1
+    x_rope = 1
     x_healer_name = 2
     values_dict = {
         "vow_label": x_vow_label,
         "owner_name": x_owner_name,
-        "concept_way": x_way,
+        "concept_rope": x_rope,
         "healer_name": x_healer_name,
     }
     # all args included in values dict
@@ -502,13 +502,13 @@ def test_create_plnlabo_metrics_insert_sqlstr_ReturnsObj():
 
     x_vow_label = "accord23"
     x_owner_name = "Sue"
-    x_way = 1
+    x_rope = 1
     x_labor_title = 2
     x__owner_name_labor = 3
     values_dict = {
         "vow_label": x_vow_label,
         "owner_name": x_owner_name,
-        "concept_way": x_way,
+        "concept_rope": x_rope,
         "labor_title": x_labor_title,
         "_owner_name_labor": x__owner_name_labor,
     }
@@ -719,7 +719,7 @@ def test_create_plngrou_metrics_insert_sqlstr_ReturnsObj():
     x__fund_take = 6
     x__fund_agenda_give = 7
     x__fund_agenda_take = 8
-    x_bridge = 9
+    x_knot = 9
     values_dict = {
         "vow_label": x_vow_label,
         "owner_name": x_owner_name,
@@ -731,7 +731,7 @@ def test_create_plngrou_metrics_insert_sqlstr_ReturnsObj():
         "_fund_take": x__fund_take,
         "_fund_agenda_give": x__fund_agenda_give,
         "_fund_agenda_take": x__fund_agenda_take,
-        "bridge": x_bridge,
+        "knot": x_knot,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())

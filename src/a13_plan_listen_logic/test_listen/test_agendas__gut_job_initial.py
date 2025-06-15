@@ -10,19 +10,19 @@ from src.a13_plan_listen_logic._test_util.a13_env import (
     get_module_temp_dir as env_dir,
 )
 from src.a13_plan_listen_logic._test_util.example_listen import (
-    casa_way,
+    casa_rope,
+    clean_rope,
     clean_str,
-    clean_way,
+    cook_rope,
     cook_str,
-    cook_way,
-    eat_way,
-    full_way,
+    eat_rope,
+    full_rope,
     get_example_bob_speaker,
     get_example_yao_speaker,
     get_example_zia_speaker,
-    hungry_way,
+    hungry_rope,
+    run_rope,
     run_str,
-    run_way,
 )
 from src.a13_plan_listen_logic.listen import (
     create_listen_basis,
@@ -47,8 +47,8 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlanWhenNo_labo
     save_gut_file(vow_mstr_dir, yao_gut)
 
     zia_gut = planunit_shop(zia_str, a23_str)
-    zia_gut.set_concept(conceptunit_shop(clean_str(), task=True), casa_way())
-    zia_gut.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
+    zia_gut.set_concept(conceptunit_shop(clean_str(), task=True), casa_rope())
+    zia_gut.set_concept(conceptunit_shop(cook_str(), task=True), casa_rope())
     zia_gut.add_acctunit(yao_str, debt_score=12)
     save_gut_file(vow_mstr_dir, zia_gut)
 
@@ -80,11 +80,11 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlan(
     a23_str = "accord23"
     save_gut_file(vow_mstr_dir, yao_gut)
     zia_gut = planunit_shop(zia_str, a23_str)
-    zia_gut.set_concept(conceptunit_shop(clean_str(), task=True), casa_way())
-    zia_gut.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
+    zia_gut.set_concept(conceptunit_shop(clean_str(), task=True), casa_rope())
+    zia_gut.set_concept(conceptunit_shop(cook_str(), task=True), casa_rope())
     zia_gut.add_acctunit(yao_str, debt_score=12)
-    clean_conceptunit = zia_gut.get_concept_obj(clean_way())
-    cook_conceptunit = zia_gut.get_concept_obj(cook_way())
+    clean_conceptunit = zia_gut.get_concept_obj(clean_rope())
+    cook_conceptunit = zia_gut.get_concept_obj(cook_rope())
     clean_conceptunit.laborunit.set_laborlink(yao_str)
     cook_conceptunit.laborunit.set_laborlink(yao_str)
     save_gut_file(vow_mstr_dir, zia_gut)
@@ -107,12 +107,12 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlanWithDetails
     zia_gut = get_example_zia_speaker()
     bob_gut = get_example_bob_speaker()
     bob_gut.edit_concept_attr(
-        cook_way(),
-        reason_del_premise_rcontext=eat_way(),
-        reason_del_premise_pstate=hungry_way(),
+        cook_rope(),
+        reason_del_premise_rcontext=eat_rope(),
+        reason_del_premise_pstate=hungry_rope(),
     )
-    bob_cook_conceptunit = bob_gut.get_concept_obj(cook_way())
-    zia_cook_conceptunit = zia_gut.get_concept_obj(cook_way())
+    bob_cook_conceptunit = bob_gut.get_concept_obj(cook_rope())
+    zia_cook_conceptunit = zia_gut.get_concept_obj(cook_rope())
     assert bob_cook_conceptunit != zia_cook_conceptunit
     assert len(zia_cook_conceptunit.reasonunits) == 1
     assert len(bob_cook_conceptunit.reasonunits) == 0
@@ -127,19 +127,19 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlanWithDetails
     save_gut_file(vow_mstr_dir, yao_gut)
 
     new_yao_gut1 = create_listen_basis(yao_gut)
-    assert new_yao_gut1.concept_exists(cook_way()) is False
+    assert new_yao_gut1.concept_exists(cook_rope()) is False
 
     # WHEN
     yao_hubunit = hubunit_shop(vow_mstr_dir, a23_str, yao_str)
     listen_to_agendas_create_init_job_from_guts(vow_mstr_dir, new_yao_gut1)
 
     # THEN
-    assert new_yao_gut1.concept_exists(cook_way())
-    new_cook_concept = new_yao_gut1.get_concept_obj(cook_way())
+    assert new_yao_gut1.concept_exists(cook_rope())
+    new_cook_concept = new_yao_gut1.get_concept_obj(cook_rope())
     zia_acctunit = new_yao_gut1.get_acct(zia_str)
     bob_acctunit = new_yao_gut1.get_acct(bob_str)
     assert zia_acctunit.debt_score < bob_acctunit.debt_score
-    assert new_cook_concept.get_reasonunit(eat_way()) is None
+    assert new_cook_concept.get_reasonunit(eat_rope()) is None
 
     yao_zia_debt_score = 15
     yao_bob_debt_score = 5
@@ -147,19 +147,19 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlanWithDetails
     yao_gut.add_acctunit(bob_str, None, yao_bob_debt_score)
     yao_gut.set_acct_respect(100)
     new_yao_gut2 = create_listen_basis(yao_gut)
-    assert new_yao_gut2.concept_exists(cook_way()) is False
+    assert new_yao_gut2.concept_exists(cook_rope()) is False
 
     # WHEN
     listen_to_agendas_create_init_job_from_guts(vow_mstr_dir, new_yao_gut2)
 
     # THEN
-    assert new_yao_gut2.concept_exists(cook_way())
-    new_cook_concept = new_yao_gut2.get_concept_obj(cook_way())
+    assert new_yao_gut2.concept_exists(cook_rope())
+    new_cook_concept = new_yao_gut2.get_concept_obj(cook_rope())
     zia_acctunit = new_yao_gut2.get_acct(zia_str)
     bob_acctunit = new_yao_gut2.get_acct(bob_str)
     assert zia_acctunit.debt_score > bob_acctunit.debt_score
-    zia_eat_reasonunit = zia_cook_conceptunit.get_reasonunit(eat_way())
-    assert new_cook_concept.get_reasonunit(eat_way()) == zia_eat_reasonunit
+    zia_eat_reasonunit = zia_cook_conceptunit.get_reasonunit(eat_rope())
+    assert new_cook_concept.get_reasonunit(eat_rope()) == zia_eat_reasonunit
 
 
 def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalPlan(
@@ -185,11 +185,11 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalPlan(
 
     zia_str = "Zia"
     zia_gut = planunit_shop(zia_str, a23_str)
-    zia_gut.set_concept(conceptunit_shop(clean_str(), task=True), casa_way())
-    zia_gut.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
+    zia_gut.set_concept(conceptunit_shop(clean_str(), task=True), casa_rope())
+    zia_gut.set_concept(conceptunit_shop(cook_str(), task=True), casa_rope())
     zia_gut.add_acctunit(yao_str, debt_score=12)
-    clean_conceptunit = zia_gut.get_concept_obj(clean_way())
-    cook_conceptunit = zia_gut.get_concept_obj(cook_way())
+    clean_conceptunit = zia_gut.get_concept_obj(clean_rope())
+    cook_conceptunit = zia_gut.get_concept_obj(cook_rope())
     clean_conceptunit.laborunit.set_laborlink(yao_str)
     cook_conceptunit.laborunit.set_laborlink(yao_str)
     save_gut_file(vow_mstr_dir, zia_gut)
@@ -198,29 +198,29 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalPlan(
     sue_gut.set_max_tree_traverse(5)
     zia_gut.add_acctunit(yao_str, debt_score=12)
     vacuum_str = "vacuum"
-    vacuum_way = sue_gut.make_l1_way(vacuum_str)
+    vacuum_rope = sue_gut.make_l1_rope(vacuum_str)
     sue_gut.set_l1_concept(conceptunit_shop(vacuum_str, task=True))
-    vacuum_conceptunit = sue_gut.get_concept_obj(vacuum_way)
+    vacuum_conceptunit = sue_gut.get_concept_obj(vacuum_rope)
     vacuum_conceptunit.laborunit.set_laborlink(yao_str)
 
     egg_str = "egg first"
-    egg_way = sue_gut.make_l1_way(egg_str)
+    egg_rope = sue_gut.make_l1_rope(egg_str)
     sue_gut.set_l1_concept(conceptunit_shop(egg_str))
     chicken_str = "chicken first"
-    chicken_way = sue_gut.make_l1_way(chicken_str)
+    chicken_rope = sue_gut.make_l1_rope(chicken_str)
     sue_gut.set_l1_concept(conceptunit_shop(chicken_str))
     # set egg task is True when chicken first is False
     sue_gut.edit_concept_attr(
-        egg_way,
+        egg_rope,
         task=True,
-        reason_rcontext=chicken_way,
+        reason_rcontext=chicken_rope,
         reason_rconcept_active_requisite=True,
     )
     # set chick task is True when egg first is False
     sue_gut.edit_concept_attr(
-        chicken_way,
+        chicken_rope,
         task=True,
-        reason_rcontext=egg_way,
+        reason_rcontext=egg_rope,
         reason_rconcept_active_requisite=False,
     )
     save_gut_file(vow_mstr_dir, sue_gut)
@@ -264,11 +264,11 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorPlan(
     save_gut_file(vow_mstr_dir, yao_gut)
 
     zia_gut = planunit_shop(zia_str, a23_str)
-    zia_gut.set_concept(conceptunit_shop(clean_str(), task=True), casa_way())
-    zia_gut.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
+    zia_gut.set_concept(conceptunit_shop(clean_str(), task=True), casa_rope())
+    zia_gut.set_concept(conceptunit_shop(cook_str(), task=True), casa_rope())
     zia_gut.add_acctunit(yao_str, debt_score=12)
-    clean_conceptunit = zia_gut.get_concept_obj(clean_way())
-    cook_conceptunit = zia_gut.get_concept_obj(cook_way())
+    clean_conceptunit = zia_gut.get_concept_obj(clean_rope())
+    cook_conceptunit = zia_gut.get_concept_obj(cook_rope())
     clean_conceptunit.laborunit.set_laborlink(yao_str)
     cook_conceptunit.laborunit.set_laborlink(yao_str)
     save_gut_file(vow_mstr_dir, zia_gut)

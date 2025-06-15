@@ -66,7 +66,7 @@ def test_vow_build_from_df_ReturnsObj_Scenario0_OneVowLabel(
         fund_iota=x_fund_iota,
         penny=x_penny,
         respect_bit=x_respect_bit,
-        bridge=slash_str,
+        knot=slash_str,
         timeline=creg_timelineunit,
         job_listen_rotations=x_job_listen_rotations,
     )
@@ -139,7 +139,7 @@ def test_vow_build_from_df_ReturnsObj_Scenario1_TwoVowLabels(
         fund_iota=x_fund_iota,
         penny=x_penny,
         respect_bit=x_respect_bit,
-        bridge=slash_str,
+        knot=slash_str,
         timeline=creg_timelineunit,
     )
     five_timelineunit = timelineunit_shop(get_five_config())
@@ -149,7 +149,7 @@ def test_vow_build_from_df_ReturnsObj_Scenario1_TwoVowLabels(
         fund_iota=x_fund_iota,
         penny=x_penny,
         respect_bit=x_respect_bit,
-        bridge=",",
+        knot=",",
         timeline=five_timelineunit,
     )
     assert x_vowunits

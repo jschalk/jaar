@@ -3,7 +3,7 @@ from datetime import datetime
 from os import getcwd as os_getcwd
 from src.a00_data_toolbox.dict_toolbox import get_1_if_None
 from src.a00_data_toolbox.file_toolbox import create_path, open_json
-from src.a01_term_logic.way import LabelTerm, WayTerm
+from src.a01_term_logic.rope import LabelTerm, RopeTerm
 from src.a05_concept_logic.concept import (
     ConceptUnit,
     all_concepts_between as all_between,
@@ -14,7 +14,7 @@ from src.a06_plan_logic.plan import PlanUnit
 
 
 class TimeLineLabel(LabelTerm):
-    "TimeLineLabel is required for every TimeLineUnit. It is a LabelTerm that must not contain the bridge."
+    "TimeLineLabel is required for every TimeLineUnit. It is a LabelTerm that must not contain the knot."
 
     pass
 
@@ -167,86 +167,90 @@ def add_newtimeline_conceptunit(x_planunit: PlanUnit, timeline_config: dict):
     x_wkdays_list = timeline_config.get("weekdays_config")
     x_yr1_jan1_offset = timeline_config.get("yr1_jan1_offset")
 
-    time_way = x_planunit.make_l1_way("time")
-    new_way = x_planunit.make_way(time_way, x_concept_label)
-    day_way = x_planunit.make_way(new_way, "day")
-    week_way = x_planunit.make_way(new_way, "week")
-    year_way = get_year_way(x_planunit, new_way)
+    time_rope = x_planunit.make_l1_rope("time")
+    new_rope = x_planunit.make_rope(time_rope, x_concept_label)
+    day_rope = x_planunit.make_rope(new_rope, "day")
+    week_rope = x_planunit.make_rope(new_rope, "week")
+    year_rope = get_year_rope(x_planunit, new_rope)
 
-    add_stan_conceptunits(x_planunit, time_way, x_concept_label, x_c400_number)
-    add_conceptunits(x_planunit, day_way, create_hour_conceptunits(x_hours_list))
-    add_conceptunits(x_planunit, new_way, create_week_conceptunits(x_wkdays_list))
-    add_conceptunits(x_planunit, week_way, create_weekday_conceptunits(x_wkdays_list))
-    add_conceptunits(x_planunit, year_way, create_month_conceptunits(x_months, x_mday))
+    add_stan_conceptunits(x_planunit, time_rope, x_concept_label, x_c400_number)
+    add_conceptunits(x_planunit, day_rope, create_hour_conceptunits(x_hours_list))
+    add_conceptunits(x_planunit, new_rope, create_week_conceptunits(x_wkdays_list))
+    add_conceptunits(x_planunit, week_rope, create_weekday_conceptunits(x_wkdays_list))
+    add_conceptunits(x_planunit, year_rope, create_month_conceptunits(x_months, x_mday))
     offset_concept = conceptunit_shop("yr1_jan1_offset", addin=x_yr1_jan1_offset)
-    x_planunit.set_concept(offset_concept, new_way)
+    x_planunit.set_concept(offset_concept, new_rope)
     return x_planunit
 
 
 def add_conceptunits(
-    x_planunit: PlanUnit, parent_way: WayTerm, config_dict: dict[str, ConceptUnit]
+    x_planunit: PlanUnit, parent_rope: RopeTerm, config_dict: dict[str, ConceptUnit]
 ):
     for x_time_conceptunit in config_dict.values():
-        x_planunit.set_concept(x_time_conceptunit, parent_way)
+        x_planunit.set_concept(x_time_conceptunit, parent_rope)
 
 
 def add_stan_conceptunits(
     x_planunit: PlanUnit,
-    time_way: WayTerm,
+    time_rope: RopeTerm,
     timeline_label: TimeLineLabel,
     timeline_c400_number: int,
 ):
-    time_way = x_planunit.make_l1_way("time")
-    new_way = x_planunit.make_way(time_way, timeline_label)
-    c400_leap_way = x_planunit.make_way(new_way, "c400_leap")
-    c400_clean_way = x_planunit.make_way(c400_leap_way, "c400_clean")
-    c100_way = x_planunit.make_way(c400_clean_way, "c100")
-    yr4_leap_way = x_planunit.make_way(c100_way, "yr4_leap")
-    yr4_clean_way = x_planunit.make_way(yr4_leap_way, "yr4_clean")
+    time_rope = x_planunit.make_l1_rope("time")
+    new_rope = x_planunit.make_rope(time_rope, timeline_label)
+    c400_leap_rope = x_planunit.make_rope(new_rope, "c400_leap")
+    c400_clean_rope = x_planunit.make_rope(c400_leap_rope, "c400_clean")
+    c100_rope = x_planunit.make_rope(c400_clean_rope, "c100")
+    yr4_leap_rope = x_planunit.make_rope(c100_rope, "yr4_leap")
+    yr4_clean_rope = x_planunit.make_rope(yr4_leap_rope, "yr4_clean")
 
-    if not x_planunit.concept_exists(time_way):
+    if not x_planunit.concept_exists(time_rope):
         x_planunit.set_l1_concept(conceptunit_shop("time"))
     timeline_conceptunit = new_timeline_conceptunit(
         timeline_label, timeline_c400_number
     )
-    x_planunit.set_concept(timeline_conceptunit, time_way)
-    x_planunit.set_concept(stan_c400_leap_conceptunit(), new_way)
-    x_planunit.set_concept(stan_c400_clean_conceptunit(), c400_leap_way)
-    x_planunit.set_concept(stan_c100_conceptunit(), c400_clean_way)
-    x_planunit.set_concept(stan_yr4_leap_conceptunit(), c100_way)
-    x_planunit.set_concept(stan_yr4_clean_conceptunit(), yr4_leap_way)
-    x_planunit.set_concept(stan_year_conceptunit(), yr4_clean_way)
-    x_planunit.set_concept(stan_day_conceptunit(), new_way)
-    x_planunit.set_concept(stan_days_conceptunit(), new_way)
+    x_planunit.set_concept(timeline_conceptunit, time_rope)
+    x_planunit.set_concept(stan_c400_leap_conceptunit(), new_rope)
+    x_planunit.set_concept(stan_c400_clean_conceptunit(), c400_leap_rope)
+    x_planunit.set_concept(stan_c100_conceptunit(), c400_clean_rope)
+    x_planunit.set_concept(stan_yr4_leap_conceptunit(), c100_rope)
+    x_planunit.set_concept(stan_yr4_clean_conceptunit(), yr4_leap_rope)
+    x_planunit.set_concept(stan_year_conceptunit(), yr4_clean_rope)
+    x_planunit.set_concept(stan_day_conceptunit(), new_rope)
+    x_planunit.set_concept(stan_days_conceptunit(), new_rope)
 
 
-def get_c400_clean_way(x_planunit: PlanUnit, time_range_root_way: WayTerm) -> WayTerm:
-    c400_leap_way = x_planunit.make_way(time_range_root_way, "c400_leap")
-    return x_planunit.make_way(c400_leap_way, "c400_clean")
+def get_c400_clean_rope(
+    x_planunit: PlanUnit, time_range_root_rope: RopeTerm
+) -> RopeTerm:
+    c400_leap_rope = x_planunit.make_rope(time_range_root_rope, "c400_leap")
+    return x_planunit.make_rope(c400_leap_rope, "c400_clean")
 
 
-def get_c100_way(x_planunit: PlanUnit, time_range_root_way: WayTerm) -> WayTerm:
-    c400_clean_way = get_c400_clean_way(x_planunit, time_range_root_way)
-    return x_planunit.make_way(c400_clean_way, "c100")
+def get_c100_rope(x_planunit: PlanUnit, time_range_root_rope: RopeTerm) -> RopeTerm:
+    c400_clean_rope = get_c400_clean_rope(x_planunit, time_range_root_rope)
+    return x_planunit.make_rope(c400_clean_rope, "c100")
 
 
-def get_yr4_clean_way(x_planunit: PlanUnit, time_range_root_way: WayTerm) -> WayTerm:
-    c100_way = get_c100_way(x_planunit, time_range_root_way)
-    yr4_leap_way = x_planunit.make_way(c100_way, "yr4_leap")
-    return x_planunit.make_way(yr4_leap_way, "yr4_clean")
+def get_yr4_clean_rope(
+    x_planunit: PlanUnit, time_range_root_rope: RopeTerm
+) -> RopeTerm:
+    c100_rope = get_c100_rope(x_planunit, time_range_root_rope)
+    yr4_leap_rope = x_planunit.make_rope(c100_rope, "yr4_leap")
+    return x_planunit.make_rope(yr4_leap_rope, "yr4_clean")
 
 
-def get_year_way(x_planunit: PlanUnit, time_range_root_way: WayTerm) -> WayTerm:
-    yr4_clean_way = get_yr4_clean_way(x_planunit, time_range_root_way)
-    return x_planunit.make_way(yr4_clean_way, "year")
+def get_year_rope(x_planunit: PlanUnit, time_range_root_rope: RopeTerm) -> RopeTerm:
+    yr4_clean_rope = get_yr4_clean_rope(x_planunit, time_range_root_rope)
+    return x_planunit.make_rope(yr4_clean_rope, "year")
 
 
-def get_week_way(x_planunit: PlanUnit, time_range_root_way: WayTerm) -> WayTerm:
-    return x_planunit.make_way(time_range_root_way, "week")
+def get_week_rope(x_planunit: PlanUnit, time_range_root_rope: RopeTerm) -> RopeTerm:
+    return x_planunit.make_rope(time_range_root_rope, "week")
 
 
-def get_day_way(x_planunit: PlanUnit, time_range_root_way: WayTerm) -> WayTerm:
-    return x_planunit.make_way(time_range_root_way, "day")
+def get_day_rope(x_planunit: PlanUnit, time_range_root_rope: RopeTerm) -> RopeTerm:
+    return x_planunit.make_rope(time_range_root_rope, "day")
 
 
 def validate_timeline_config(config_dict: dict) -> bool:
@@ -404,10 +408,10 @@ def get_min_from_dt_offset(dt: datetime, yr1_jan1_offset: int) -> int:
 
 
 def get_min_from_dt(
-    x_plan: PlanUnit, timeline_way: WayTerm, x_datetime: datetime
+    x_plan: PlanUnit, timeline_rope: RopeTerm, x_datetime: datetime
 ) -> int:
-    offset_way = x_plan.make_way(timeline_way, "yr1_jan1_offset")
-    offset_concept = x_plan.get_concept_obj(offset_way)
+    offset_rope = x_plan.make_rope(timeline_rope, "yr1_jan1_offset")
+    offset_concept = x_plan.get_concept_obj(offset_rope)
     offset_amount = offset_concept.addin
     return get_min_from_dt_offset(x_datetime, offset_amount)
 
@@ -421,7 +425,7 @@ def get_timeline_min_difference(timeline_config0: dict, timeline_config1: dict) 
 @dataclass
 class ChronoUnit:
     x_planunit: PlanUnit = None
-    time_range_root_way: WayTerm = None
+    time_range_root_rope: RopeTerm = None
     x_min: int = None
     # calculated fields
     _timeline_concept: ConceptUnit = None
@@ -438,12 +442,12 @@ class ChronoUnit:
 
     def _set_timeline_concept(self):
         self._timeline_concept = self.x_planunit.get_concept_obj(
-            self.time_range_root_way
+            self.time_range_root_rope
         )
 
     def _set_weekday(self):
-        week_way = get_week_way(self.x_planunit, self.time_range_root_way)
-        week_concept = self.x_planunit.get_concept_obj(week_way)
+        week_rope = get_week_rope(self.x_planunit, self.time_range_root_rope)
+        week_concept = self.x_planunit.get_concept_obj(week_rope)
         x_concept_list = [self._timeline_concept, week_concept]
         popen_rangeunit = calc_range(x_concept_list, self.x_min, self.x_min)
         popen_weekday_dict = week_concept.get_kids_in_range(popen_rangeunit.gogo)
@@ -451,10 +455,10 @@ class ChronoUnit:
             self._weekday = x_weekday
 
     def _set_month(self):
-        year_way = get_year_way(self.x_planunit, self.time_range_root_way)
-        year_concept = self.x_planunit.get_concept_obj(year_way)
+        year_rope = get_year_rope(self.x_planunit, self.time_range_root_rope)
+        year_concept = self.x_planunit.get_concept_obj(year_rope)
         x_concept_dict = self.x_planunit._concept_dict
-        concept_list = all_between(x_concept_dict, self.time_range_root_way, year_way)
+        concept_list = all_between(x_concept_dict, self.time_range_root_rope, year_rope)
         popen_rangeunit = calc_range(concept_list, self.x_min, self.x_min)
         gogo_month_dict = year_concept.get_kids_in_range(popen_rangeunit.gogo)
         month_concept = None
@@ -468,8 +472,8 @@ class ChronoUnit:
         self._monthday = self._monthday // 1440
 
     def _set_hour(self):
-        day_way = get_day_way(self.x_planunit, self.time_range_root_way)
-        day_concept = self.x_planunit.get_concept_obj(day_way)
+        day_rope = get_day_rope(self.x_planunit, self.time_range_root_rope)
+        day_concept = self.x_planunit.get_concept_obj(day_rope)
         x_concept_list = [self._timeline_concept, day_concept]
         rangeunit = calc_range(x_concept_list, self.x_min, self.x_min)
         hour_dict = day_concept.get_kids_in_range(rangeunit.gogo)
@@ -481,28 +485,28 @@ class ChronoUnit:
 
     def _set_year(self):
         c400_constants = get_c400_constants()
-        x_time_way = self.time_range_root_way
+        x_time_rope = self.time_range_root_rope
         x_concept_dict = self.x_planunit._concept_dict
         # count 400 year blocks
         self._c400_number = self.x_min // c400_constants.c400_leap_length
 
         # count 100 year blocks
-        c400_clean_way = get_c400_clean_way(self.x_planunit, x_time_way)
+        c400_clean_rope = get_c400_clean_rope(self.x_planunit, x_time_rope)
         c400_clean_concept_list = all_between(
-            x_concept_dict, x_time_way, c400_clean_way
+            x_concept_dict, x_time_rope, c400_clean_rope
         )
         c400_clean_range = calc_range(c400_clean_concept_list, self.x_min, self.x_min)
         self._c100_count = c400_clean_range.gogo // c400_constants.c100_length
 
         # count 4 year blocks
-        c100_way = get_c100_way(self.x_planunit, x_time_way)
-        c100_concept_list = all_between(x_concept_dict, x_time_way, c100_way)
+        c100_rope = get_c100_rope(self.x_planunit, x_time_rope)
+        c100_concept_list = all_between(x_concept_dict, x_time_rope, c100_rope)
         c100_range = calc_range(c100_concept_list, self.x_min, self.x_min)
         self._yr4_count = c100_range.gogo // c400_constants.yr4_leap_length
 
         # count 1 year blocks
-        yr4_clean_way = get_yr4_clean_way(self.x_planunit, x_time_way)
-        yr4_clean_concepts = all_between(x_concept_dict, x_time_way, yr4_clean_way)
+        yr4_clean_rope = get_yr4_clean_rope(self.x_planunit, x_time_rope)
+        yr4_clean_concepts = all_between(x_concept_dict, x_time_rope, yr4_clean_rope)
         yr4_clean_range = calc_range(yr4_clean_concepts, self.x_min, self.x_min)
         self._year_count = yr4_clean_range.gogo // c400_constants.year_length
 
@@ -529,8 +533,8 @@ class ChronoUnit:
         return x_str
 
 
-def chronounit_shop(x_planunit: PlanUnit, time_range_root_way: str, x_min: int):
-    return ChronoUnit(x_planunit, time_range_root_way, x_min=x_min)
+def chronounit_shop(x_planunit: PlanUnit, time_range_root_rope: str, x_min: int):
+    return ChronoUnit(x_planunit, time_range_root_rope, x_min=x_min)
 
 
 def config_file_dir() -> str:

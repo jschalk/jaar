@@ -1,11 +1,11 @@
-from src.a01_term_logic.way import to_way
+from src.a01_term_logic.rope import to_rope
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import factunit_shop, reasonunit_shop
 from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
     awardee_title_str,
     concept_label_str,
-    concept_way_str,
+    concept_rope_str,
     fcontext_str,
     group_title_str,
     healer_name_str,
@@ -80,29 +80,29 @@ def test_sift_atom_ReturnsObj_PlanAtom_DELETE_plan_acct_membership():
 def test_sift_atom_ReturnsObj_PlanAtom_DELETE_plan_conceptunit():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
-    root_way = to_way(sue_plan.vow_label)
+    root_rope = to_rope(sue_plan.vow_label)
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_way = sue_plan.make_way(casa_way, clean_str)
+    clean_rope = sue_plan.make_rope(casa_rope, clean_str)
     sweep_str = "sweep"
-    sweep_way = sue_plan.make_way(clean_way, sweep_str)
+    sweep_rope = sue_plan.make_rope(clean_rope, sweep_str)
 
     root_atom = planatom_shop(plan_conceptunit_str(), DELETE_str())
-    root_atom.set_arg(concept_way_str(), root_way)
+    root_atom.set_arg(concept_rope_str(), root_rope)
     casa_atom = planatom_shop(plan_conceptunit_str(), DELETE_str())
-    casa_atom.set_arg(concept_way_str(), casa_way)
+    casa_atom.set_arg(concept_rope_str(), casa_rope)
     clean_atom = planatom_shop(plan_conceptunit_str(), DELETE_str())
-    clean_atom.set_arg(concept_way_str(), clean_way)
+    clean_atom.set_arg(concept_rope_str(), clean_rope)
     sweep_atom = planatom_shop(plan_conceptunit_str(), DELETE_str())
-    sweep_atom.set_arg(concept_way_str(), sweep_way)
+    sweep_atom.set_arg(concept_rope_str(), sweep_rope)
     assert sift_planatom(sue_plan, root_atom)
     assert not sift_planatom(sue_plan, casa_atom)
     assert not sift_planatom(sue_plan, clean_atom)
     assert not sift_planatom(sue_plan, sweep_atom)
 
     # WHEN
-    sue_plan.add_concept(casa_way)
+    sue_plan.add_concept(casa_rope)
     # THEN
     assert sift_planatom(sue_plan, root_atom)
     assert sift_planatom(sue_plan, casa_atom)
@@ -110,7 +110,7 @@ def test_sift_atom_ReturnsObj_PlanAtom_DELETE_plan_conceptunit():
     assert not sift_planatom(sue_plan, sweep_atom)
 
     # WHEN
-    sue_plan.add_concept(clean_way)
+    sue_plan.add_concept(clean_rope)
     # THEN
     assert sift_planatom(sue_plan, root_atom)
     assert sift_planatom(sue_plan, casa_atom)
@@ -121,33 +121,33 @@ def test_sift_atom_ReturnsObj_PlanAtom_DELETE_plan_conceptunit():
 def test_sift_atom_SetsPlanDeltaPlanAtom_plan_conceptunit():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
-    root_way = to_way(sue_plan.vow_label)
+    root_rope = to_rope(sue_plan.vow_label)
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_way = sue_plan.make_way(casa_way, clean_str)
+    clean_rope = sue_plan.make_rope(casa_rope, clean_str)
     sweep_str = "sweep"
-    sweep_way = sue_plan.make_way(clean_way, sweep_str)
+    sweep_rope = sue_plan.make_rope(clean_rope, sweep_str)
 
     casa_atom = planatom_shop(plan_conceptunit_str(), DELETE_str())
-    casa_atom.set_arg(concept_way_str(), casa_way)
+    casa_atom.set_arg(concept_rope_str(), casa_rope)
     clean_atom = planatom_shop(plan_conceptunit_str(), DELETE_str())
-    clean_atom.set_arg(concept_way_str(), clean_way)
+    clean_atom.set_arg(concept_rope_str(), clean_rope)
     sweep_atom = planatom_shop(plan_conceptunit_str(), DELETE_str())
-    sweep_atom.set_arg(concept_way_str(), sweep_way)
+    sweep_atom.set_arg(concept_rope_str(), sweep_rope)
     assert not sift_planatom(sue_plan, casa_atom)
     assert not sift_planatom(sue_plan, clean_atom)
     assert not sift_planatom(sue_plan, sweep_atom)
 
     # WHEN
-    sue_plan.add_concept(casa_way)
+    sue_plan.add_concept(casa_rope)
     # THEN
     assert sift_planatom(sue_plan, casa_atom)
     assert not sift_planatom(sue_plan, clean_atom)
     assert not sift_planatom(sue_plan, sweep_atom)
 
     # WHEN
-    sue_plan.add_concept(clean_way)
+    sue_plan.add_concept(clean_rope)
     # THEN
     assert sift_planatom(sue_plan, casa_atom)
     assert sift_planatom(sue_plan, clean_atom)
@@ -158,31 +158,31 @@ def test_sift_atom_SetsPlanDeltaPlanAtom_plan_concept_awardlink():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_way = sue_plan.make_way(casa_way, clean_str)
+    clean_rope = sue_plan.make_rope(casa_rope, clean_str)
     swim_str = "Swim"
 
     casa_swim_atom = planatom_shop(plan_concept_awardlink_str(), DELETE_str())
-    casa_swim_atom.set_arg(concept_way_str(), casa_way)
+    casa_swim_atom.set_arg(concept_rope_str(), casa_rope)
     casa_swim_atom.set_arg(awardee_title_str(), swim_str)
     clean_swim_atom = planatom_shop(plan_concept_awardlink_str(), DELETE_str())
-    clean_swim_atom.set_arg(concept_way_str(), clean_way)
+    clean_swim_atom.set_arg(concept_rope_str(), clean_rope)
     clean_swim_atom.set_arg(awardee_title_str(), swim_str)
-    sue_plan.add_concept(casa_way)
-    sue_plan.add_concept(clean_way)
+    sue_plan.add_concept(casa_rope)
+    sue_plan.add_concept(clean_rope)
     assert not sift_planatom(sue_plan, casa_swim_atom)
     assert not sift_planatom(sue_plan, clean_swim_atom)
 
     # WHEN
-    sue_plan.get_concept_obj(casa_way).set_awardlink(awardlink_shop(swim_str))
+    sue_plan.get_concept_obj(casa_rope).set_awardlink(awardlink_shop(swim_str))
 
     # THEN
     assert sift_planatom(sue_plan, casa_swim_atom)
     assert not sift_planatom(sue_plan, clean_swim_atom)
 
     # WHEN
-    sue_plan.get_concept_obj(clean_way).set_awardlink(awardlink_shop(swim_str))
+    sue_plan.get_concept_obj(clean_rope).set_awardlink(awardlink_shop(swim_str))
     # THEN
     assert sift_planatom(sue_plan, casa_swim_atom)
     assert sift_planatom(sue_plan, clean_swim_atom)
@@ -192,32 +192,32 @@ def test_sift_atom_SetsPlanDeltaPlanAtom_plan_concept_reasonunit():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_way = sue_plan.make_way(casa_way, clean_str)
+    clean_rope = sue_plan.make_rope(casa_rope, clean_str)
     week_str = "week"
-    week_way = sue_plan.make_l1_way(week_str)
+    week_rope = sue_plan.make_l1_rope(week_str)
 
     casa_week_atom = planatom_shop(plan_concept_reasonunit_str(), DELETE_str())
-    casa_week_atom.set_arg(concept_way_str(), casa_way)
-    casa_week_atom.set_arg(rcontext_str(), week_way)
+    casa_week_atom.set_arg(concept_rope_str(), casa_rope)
+    casa_week_atom.set_arg(rcontext_str(), week_rope)
     clean_week_atom = planatom_shop(plan_concept_reasonunit_str(), DELETE_str())
-    clean_week_atom.set_arg(concept_way_str(), clean_way)
-    clean_week_atom.set_arg(rcontext_str(), week_way)
-    sue_plan.add_concept(casa_way)
-    sue_plan.add_concept(clean_way)
+    clean_week_atom.set_arg(concept_rope_str(), clean_rope)
+    clean_week_atom.set_arg(rcontext_str(), week_rope)
+    sue_plan.add_concept(casa_rope)
+    sue_plan.add_concept(clean_rope)
     assert not sift_planatom(sue_plan, casa_week_atom)
     assert not sift_planatom(sue_plan, clean_week_atom)
 
     # WHEN
-    sue_plan.get_concept_obj(casa_way).set_reasonunit(reasonunit_shop(week_way))
+    sue_plan.get_concept_obj(casa_rope).set_reasonunit(reasonunit_shop(week_rope))
 
     # THEN
     assert sift_planatom(sue_plan, casa_week_atom)
     assert not sift_planatom(sue_plan, clean_week_atom)
 
     # WHEN
-    sue_plan.get_concept_obj(clean_way).set_reasonunit(reasonunit_shop(week_way))
+    sue_plan.get_concept_obj(clean_rope).set_reasonunit(reasonunit_shop(week_rope))
     # THEN
     assert sift_planatom(sue_plan, casa_week_atom)
     assert sift_planatom(sue_plan, clean_week_atom)
@@ -227,40 +227,40 @@ def test_sift_atom_SetsPlanDeltaPlanAtom_plan_concept_reason_premiseunit_exists(
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_way = sue_plan.make_way(casa_way, clean_str)
+    clean_rope = sue_plan.make_rope(casa_rope, clean_str)
     week_str = "week"
-    week_way = sue_plan.make_l1_way(week_str)
+    week_rope = sue_plan.make_l1_rope(week_str)
     thur_str = "thur"
-    thur_way = sue_plan.make_way(week_way, thur_str)
+    thur_rope = sue_plan.make_rope(week_rope, thur_str)
 
     casa_week_atom = planatom_shop(plan_concept_reason_premiseunit_str(), DELETE_str())
-    casa_week_atom.set_arg(concept_way_str(), casa_way)
-    casa_week_atom.set_arg(rcontext_str(), week_way)
-    casa_week_atom.set_arg("pstate", thur_way)
+    casa_week_atom.set_arg(concept_rope_str(), casa_rope)
+    casa_week_atom.set_arg(rcontext_str(), week_rope)
+    casa_week_atom.set_arg("pstate", thur_rope)
     clean_week_atom = planatom_shop(plan_concept_reason_premiseunit_str(), DELETE_str())
-    clean_week_atom.set_arg(concept_way_str(), clean_way)
-    clean_week_atom.set_arg(rcontext_str(), week_way)
-    clean_week_atom.set_arg("pstate", thur_way)
-    sue_plan.add_concept(casa_way)
-    sue_plan.add_concept(clean_way)
-    casa_concept = sue_plan.get_concept_obj(casa_way)
-    clean_concept = sue_plan.get_concept_obj(clean_way)
-    casa_concept.set_reasonunit(reasonunit_shop(week_way))
-    clean_concept.set_reasonunit(reasonunit_shop(week_way))
+    clean_week_atom.set_arg(concept_rope_str(), clean_rope)
+    clean_week_atom.set_arg(rcontext_str(), week_rope)
+    clean_week_atom.set_arg("pstate", thur_rope)
+    sue_plan.add_concept(casa_rope)
+    sue_plan.add_concept(clean_rope)
+    casa_concept = sue_plan.get_concept_obj(casa_rope)
+    clean_concept = sue_plan.get_concept_obj(clean_rope)
+    casa_concept.set_reasonunit(reasonunit_shop(week_rope))
+    clean_concept.set_reasonunit(reasonunit_shop(week_rope))
     assert not sift_planatom(sue_plan, casa_week_atom)
     assert not sift_planatom(sue_plan, clean_week_atom)
 
     # WHEN
-    casa_concept.get_reasonunit(week_way).set_premise(thur_way)
+    casa_concept.get_reasonunit(week_rope).set_premise(thur_rope)
 
     # THEN
     assert sift_planatom(sue_plan, casa_week_atom)
     assert not sift_planatom(sue_plan, clean_week_atom)
 
     # WHEN
-    clean_concept.get_reasonunit(week_way).set_premise(thur_way)
+    clean_concept.get_reasonunit(week_rope).set_premise(thur_rope)
 
     # THEN
     assert sift_planatom(sue_plan, casa_week_atom)
@@ -271,31 +271,31 @@ def test_sift_atom_SetsPlanDeltaPlanAtom_plan_concept_laborlink():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_way = sue_plan.make_way(casa_way, clean_str)
+    clean_rope = sue_plan.make_rope(casa_rope, clean_str)
     swim_str = "Swim"
 
     casa_swim_atom = planatom_shop(plan_concept_laborlink_str(), DELETE_str())
-    casa_swim_atom.set_arg(concept_way_str(), casa_way)
+    casa_swim_atom.set_arg(concept_rope_str(), casa_rope)
     casa_swim_atom.set_arg(labor_title_str(), swim_str)
     clean_swim_atom = planatom_shop(plan_concept_laborlink_str(), DELETE_str())
-    clean_swim_atom.set_arg(concept_way_str(), clean_way)
+    clean_swim_atom.set_arg(concept_rope_str(), clean_rope)
     clean_swim_atom.set_arg(labor_title_str(), swim_str)
-    sue_plan.add_concept(casa_way)
-    sue_plan.add_concept(clean_way)
+    sue_plan.add_concept(casa_rope)
+    sue_plan.add_concept(clean_rope)
     assert not sift_planatom(sue_plan, casa_swim_atom)
     assert not sift_planatom(sue_plan, clean_swim_atom)
 
     # WHEN
-    sue_plan.get_concept_obj(casa_way).laborunit.set_laborlink(swim_str)
+    sue_plan.get_concept_obj(casa_rope).laborunit.set_laborlink(swim_str)
 
     # THEN
     assert sift_planatom(sue_plan, casa_swim_atom)
     assert not sift_planatom(sue_plan, clean_swim_atom)
 
     # WHEN
-    sue_plan.get_concept_obj(clean_way).laborunit.set_laborlink(swim_str)
+    sue_plan.get_concept_obj(clean_rope).laborunit.set_laborlink(swim_str)
     # THEN
     assert sift_planatom(sue_plan, casa_swim_atom)
     assert sift_planatom(sue_plan, clean_swim_atom)
@@ -305,31 +305,31 @@ def test_sift_atom_SetsPlanDeltaPlanAtom_plan_concept_healerlink():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_way = sue_plan.make_way(casa_way, clean_str)
+    clean_rope = sue_plan.make_rope(casa_rope, clean_str)
     swim_str = "Swim"
 
     casa_swim_atom = planatom_shop(plan_concept_healerlink_str(), DELETE_str())
-    casa_swim_atom.set_arg(concept_way_str(), casa_way)
+    casa_swim_atom.set_arg(concept_rope_str(), casa_rope)
     casa_swim_atom.set_arg(healer_name_str(), swim_str)
     clean_swim_atom = planatom_shop(plan_concept_healerlink_str(), DELETE_str())
-    clean_swim_atom.set_arg(concept_way_str(), clean_way)
+    clean_swim_atom.set_arg(concept_rope_str(), clean_rope)
     clean_swim_atom.set_arg(healer_name_str(), swim_str)
-    sue_plan.add_concept(casa_way)
-    sue_plan.add_concept(clean_way)
+    sue_plan.add_concept(casa_rope)
+    sue_plan.add_concept(clean_rope)
     assert not sift_planatom(sue_plan, casa_swim_atom)
     assert not sift_planatom(sue_plan, clean_swim_atom)
 
     # WHEN
-    sue_plan.get_concept_obj(casa_way).healerlink.set_healer_name(swim_str)
+    sue_plan.get_concept_obj(casa_rope).healerlink.set_healer_name(swim_str)
 
     # THEN
     assert sift_planatom(sue_plan, casa_swim_atom)
     assert not sift_planatom(sue_plan, clean_swim_atom)
 
     # WHEN
-    sue_plan.get_concept_obj(clean_way).healerlink.set_healer_name(swim_str)
+    sue_plan.get_concept_obj(clean_rope).healerlink.set_healer_name(swim_str)
     # THEN
     assert sift_planatom(sue_plan, casa_swim_atom)
     assert sift_planatom(sue_plan, clean_swim_atom)
@@ -339,32 +339,32 @@ def test_sift_atom_SetsPlanDeltaPlanAtom_plan_concept_factunit():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_way = sue_plan.make_way(casa_way, clean_str)
+    clean_rope = sue_plan.make_rope(casa_rope, clean_str)
     week_str = "week"
-    week_way = sue_plan.make_l1_way(week_str)
+    week_rope = sue_plan.make_l1_rope(week_str)
 
     casa_week_atom = planatom_shop(plan_concept_factunit_str(), DELETE_str())
-    casa_week_atom.set_arg(concept_way_str(), casa_way)
-    casa_week_atom.set_arg(fcontext_str(), week_way)
+    casa_week_atom.set_arg(concept_rope_str(), casa_rope)
+    casa_week_atom.set_arg(fcontext_str(), week_rope)
     clean_week_atom = planatom_shop(plan_concept_factunit_str(), DELETE_str())
-    clean_week_atom.set_arg(concept_way_str(), clean_way)
-    clean_week_atom.set_arg(fcontext_str(), week_way)
-    sue_plan.add_concept(casa_way)
-    sue_plan.add_concept(clean_way)
+    clean_week_atom.set_arg(concept_rope_str(), clean_rope)
+    clean_week_atom.set_arg(fcontext_str(), week_rope)
+    sue_plan.add_concept(casa_rope)
+    sue_plan.add_concept(clean_rope)
     assert not sift_planatom(sue_plan, casa_week_atom)
     assert not sift_planatom(sue_plan, clean_week_atom)
 
     # WHEN
-    sue_plan.get_concept_obj(casa_way).set_factunit(factunit_shop(week_way))
+    sue_plan.get_concept_obj(casa_rope).set_factunit(factunit_shop(week_rope))
 
     # THEN
     assert sift_planatom(sue_plan, casa_week_atom)
     assert not sift_planatom(sue_plan, clean_week_atom)
 
     # WHEN
-    sue_plan.get_concept_obj(clean_way).set_factunit(factunit_shop(week_way))
+    sue_plan.get_concept_obj(clean_rope).set_factunit(factunit_shop(week_rope))
     # THEN
     assert sift_planatom(sue_plan, casa_week_atom)
     assert sift_planatom(sue_plan, clean_week_atom)

@@ -1,7 +1,7 @@
 from copy import deepcopy as copy_deepcopy
 from pandas import DataFrame
 from pandas.testing import assert_frame_equal as pandas_assert_frame_equal
-from src.a01_term_logic.way import create_way, to_way
+from src.a01_term_logic.rope import create_rope, to_rope
 from src.a02_finance_logic._test_util.a02_str import vow_label_str
 from src.a06_plan_logic._test_util.a06_str import (
     NameTerm_str,
@@ -12,8 +12,8 @@ from src.a06_plan_logic._test_util.a06_str import (
 from src.a16_pidgin_logic._test_util.example_pidgins import (
     get_casa_maison_pidginunit_set_by_label,
     get_casa_maison_pidginunit_set_by_otx2inx,
-    get_casa_maison_way_inx_dt,
-    get_casa_maison_way_otx_dt,
+    get_casa_maison_rope_inx_dt,
+    get_casa_maison_rope_otx_dt,
 )
 from src.a16_pidgin_logic.map import namemap_shop
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
@@ -210,38 +210,38 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_g
     # ESTABLISH
     otx_accord45_str = "accord45"
     inx_accord87_str = "accord87"
-    otx_accord45_way = to_way(otx_accord45_str)
-    inx_accord87_way = to_way(inx_accord87_str)
+    otx_accord45_rope = to_rope(otx_accord45_str)
+    inx_accord87_rope = to_rope(inx_accord87_str)
     casa_otx_str = "casa"
     casa_inx_str = "maison"
-    casa_otx_way = create_way(otx_accord45_str, casa_otx_str)
-    casa_inx_way = create_way(inx_accord87_str, casa_inx_str)
+    casa_otx_rope = create_rope(otx_accord45_str, casa_otx_str)
+    casa_inx_rope = create_rope(inx_accord87_str, casa_inx_str)
     clean_otx_str = "clean"
     clean_inx_str = "propre"
-    clean_otx_way = create_way(casa_otx_way, clean_otx_str)
-    clean_inx_way = create_way(casa_inx_way, clean_inx_str)
+    clean_otx_rope = create_rope(casa_otx_rope, clean_otx_str)
+    clean_inx_rope = create_rope(casa_inx_rope, clean_inx_str)
     sweep_str = "sweep"
-    sweep_otx_way = create_way(clean_otx_way, sweep_str)
-    sweep_inx_way = create_way(clean_inx_way, sweep_str)
+    sweep_otx_rope = create_rope(clean_otx_rope, sweep_str)
+    sweep_inx_rope = create_rope(clean_inx_rope, sweep_str)
     yao_pidginunit = get_casa_maison_pidginunit_set_by_otx2inx()
-    otx_dt = get_casa_maison_way_otx_dt()
+    otx_dt = get_casa_maison_rope_otx_dt()
     old_otx_dt = copy_deepcopy(otx_dt)
-    assert otx_dt.iloc[0][rcontext_str()] == otx_accord45_way
-    assert otx_dt.iloc[1][rcontext_str()] == casa_otx_way
-    assert otx_dt.iloc[2][rcontext_str()] == clean_otx_way
-    assert otx_dt.iloc[3][rcontext_str()] == sweep_otx_way
+    assert otx_dt.iloc[0][rcontext_str()] == otx_accord45_rope
+    assert otx_dt.iloc[1][rcontext_str()] == casa_otx_rope
+    assert otx_dt.iloc[2][rcontext_str()] == clean_otx_rope
+    assert otx_dt.iloc[3][rcontext_str()] == sweep_otx_rope
     print(f"{otx_dt=}")
 
     # WHEN
     translate_all_columns_dataframe(otx_dt, yao_pidginunit)
 
     # THEN
-    assert otx_dt.iloc[0][rcontext_str()] == inx_accord87_way
-    assert otx_dt.iloc[1][rcontext_str()] == casa_inx_way
-    assert otx_dt.iloc[2][rcontext_str()] == clean_inx_way
-    assert otx_dt.iloc[3][rcontext_str()] == sweep_inx_way
+    assert otx_dt.iloc[0][rcontext_str()] == inx_accord87_rope
+    assert otx_dt.iloc[1][rcontext_str()] == casa_inx_rope
+    assert otx_dt.iloc[2][rcontext_str()] == clean_inx_rope
+    assert otx_dt.iloc[3][rcontext_str()] == sweep_inx_rope
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
-    inx_dt = get_casa_maison_way_inx_dt()
+    inx_dt = get_casa_maison_rope_inx_dt()
     print(f"{str(otx_dt.to_csv())=}")
     print(f"{str(inx_dt.to_csv())=}")
     assert otx_dt.to_csv() == inx_dt.to_csv()
@@ -252,27 +252,27 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario3_RodeUnit_g
     # ESTABLISH
     otx_accord45_str = "accord45"
     inx_accord87_str = "accord87"
-    otx_accord45_way = to_way(otx_accord45_str)
-    inx_accord87_way = to_way(inx_accord87_str)
+    otx_accord45_rope = to_rope(otx_accord45_str)
+    inx_accord87_rope = to_rope(inx_accord87_str)
     casa_otx_str = "casa"
     casa_inx_str = "maison"
-    casa_otx_way = create_way(otx_accord45_str, casa_otx_str)
-    casa_inx_way = create_way(inx_accord87_str, casa_inx_str)
+    casa_otx_rope = create_rope(otx_accord45_str, casa_otx_str)
+    casa_inx_rope = create_rope(inx_accord87_str, casa_inx_str)
     clean_otx_str = "clean"
     clean_inx_str = "propre"
-    clean_otx_way = create_way(casa_otx_way, clean_otx_str)
-    clean_inx_way = create_way(casa_inx_way, clean_inx_str)
+    clean_otx_rope = create_rope(casa_otx_rope, clean_otx_str)
+    clean_inx_rope = create_rope(casa_inx_rope, clean_inx_str)
     sweep_str = "sweep"
-    sweep_otx_way = create_way(clean_otx_way, sweep_str)
-    sweep_inx_way = create_way(clean_inx_way, sweep_str)
+    sweep_otx_rope = create_rope(clean_otx_rope, sweep_str)
+    sweep_inx_rope = create_rope(clean_inx_rope, sweep_str)
     yao_pidginunit = get_casa_maison_pidginunit_set_by_label()
     # print(f"{yao_pidginunit=}")
-    otx_dt = get_casa_maison_way_otx_dt()
+    otx_dt = get_casa_maison_rope_otx_dt()
     old_otx_dt = copy_deepcopy(otx_dt)
-    assert otx_dt.iloc[0][rcontext_str()] == otx_accord45_way
-    assert otx_dt.iloc[1][rcontext_str()] == casa_otx_way
-    assert otx_dt.iloc[2][rcontext_str()] == clean_otx_way
-    assert otx_dt.iloc[3][rcontext_str()] == sweep_otx_way
+    assert otx_dt.iloc[0][rcontext_str()] == otx_accord45_rope
+    assert otx_dt.iloc[1][rcontext_str()] == casa_otx_rope
+    assert otx_dt.iloc[2][rcontext_str()] == clean_otx_rope
+    assert otx_dt.iloc[3][rcontext_str()] == sweep_otx_rope
     print(f"Before {otx_dt=}")
     print("")
 
@@ -282,12 +282,12 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario3_RodeUnit_g
     # THEN
     print("")
     print(f"after  {otx_dt=}")
-    assert otx_dt.iloc[0][rcontext_str()] == inx_accord87_way
-    assert otx_dt.iloc[1][rcontext_str()] == casa_inx_way
-    assert otx_dt.iloc[2][rcontext_str()] == clean_inx_way
-    assert otx_dt.iloc[3][rcontext_str()] == sweep_inx_way
+    assert otx_dt.iloc[0][rcontext_str()] == inx_accord87_rope
+    assert otx_dt.iloc[1][rcontext_str()] == casa_inx_rope
+    assert otx_dt.iloc[2][rcontext_str()] == clean_inx_rope
+    assert otx_dt.iloc[3][rcontext_str()] == sweep_inx_rope
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
-    inx_dt = get_casa_maison_way_inx_dt()
+    inx_dt = get_casa_maison_rope_inx_dt()
     print(f"{str(otx_dt.to_csv())=}")
     print(f"{str(inx_dt.to_csv())=}")
     assert otx_dt.to_csv() == inx_dt.to_csv()

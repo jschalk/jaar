@@ -1,9 +1,9 @@
 from src.a01_term_logic._test_util.a01_str import (
     LabelTerm_str,
     NameTerm_str,
+    RopeTerm_str,
     TitleTerm_str,
-    WayTerm_str,
-    parent_way_str,
+    parent_rope_str,
 )
 from src.a02_finance_logic._test_util.a02_str import (
     acct_name_str,
@@ -42,7 +42,7 @@ from src.a05_concept_logic._test_util.a05_str import (
     begin_str,
     close_str,
     concept_label_str,
-    concept_way_str,
+    concept_rope_str,
     denom_str,
     gogo_want_str,
     healer_name_str,

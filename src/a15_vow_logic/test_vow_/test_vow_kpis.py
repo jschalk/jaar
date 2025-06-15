@@ -11,7 +11,7 @@ from src.a06_plan_logic._test_util.a06_str import (
     denom_str,
     morph_str,
     numor_str,
-    parent_way_str,
+    parent_rope_str,
 )
 from src.a15_vow_logic._test_util.a15_env import env_dir_setup_cleanup
 from src.a15_vow_logic._test_util.example_vows import (
@@ -128,7 +128,7 @@ def test_get_vow_guts_agenda_dataframe_ReturnsObj(env_dir_setup_cleanup, graphic
         owner_name_str(),
         "fund_ratio",
         concept_label_str(),
-        parent_way_str(),
+        parent_rope_str(),
         begin_str(),
         close_str(),
         addin_str(),
@@ -169,7 +169,7 @@ def test_get_vow_jobs_agenda_dataframe_ReturnsObj(env_dir_setup_cleanup):
         owner_name_str(),
         "fund_ratio",
         "concept_label",
-        parent_way_str(),
+        parent_rope_str(),
         begin_str(),
         close_str(),
         addin_str(),

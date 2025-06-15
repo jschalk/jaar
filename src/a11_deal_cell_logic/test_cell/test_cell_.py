@@ -1,5 +1,5 @@
 from copy import deepcopy as copy_deepcopy
-from src.a01_term_logic.way import create_way
+from src.a01_term_logic.rope import create_rope
 from src.a04_reason_logic.reason_concept import factunit_shop
 from src.a06_plan_logic.plan import planunit_shop
 from src.a11_deal_cell_logic._test_util.a11_str import (
@@ -127,12 +127,12 @@ def test_cellunit_shop_ReturnsObj_Scenario2_WithReasonRcontexts():
     bob_str = "Bob"
     sue_str = "Sue"
     sue_plan = planunit_shop(sue_str, "accord23")
-    casa_way = sue_plan.make_l1_way("casa")
-    mop_way = sue_plan.make_way(casa_way, "mop")
+    casa_rope = sue_plan.make_l1_rope("casa")
+    mop_rope = sue_plan.make_rope(casa_rope, "mop")
     clean_fact = clean_factunit()
     sue_plan.add_concept(clean_factunit().fstate)
-    sue_plan.add_concept(mop_way, task=True)
-    sue_plan.edit_reason(mop_way, clean_fact.fcontext, clean_fact.fstate)
+    sue_plan.add_concept(mop_rope, task=True)
+    sue_plan.edit_reason(mop_rope, clean_fact.fcontext, clean_fact.fstate)
 
     # WHEN
     x_cellunit = cellunit_shop(sue_str, planadjust=sue_plan)
@@ -148,12 +148,12 @@ def test_cellunit_shop_ReturnsObj_Scenario3_clear_facts():
     # ESTABLISH
     sue_str = "Sue"
     sue_plan = planunit_shop(sue_str, "accord23")
-    casa_way = sue_plan.make_l1_way("casa")
-    mop_way = sue_plan.make_way(casa_way, "mop")
+    casa_rope = sue_plan.make_l1_rope("casa")
+    mop_rope = sue_plan.make_rope(casa_rope, "mop")
     clean_fact = clean_factunit()
     sue_plan.add_concept(clean_factunit().fstate)
-    sue_plan.add_concept(mop_way, task=True)
-    sue_plan.edit_reason(mop_way, clean_fact.fcontext, clean_fact.fstate)
+    sue_plan.add_concept(mop_rope, task=True)
+    sue_plan.edit_reason(mop_rope, clean_fact.fcontext, clean_fact.fstate)
     sue_plan.add_fact(clean_fact.fcontext, clean_fact.fstate)
     assert len(sue_plan.get_factunits_dict()) == 1
 
@@ -215,12 +215,12 @@ def test_CellUnit_eval_planevent_SetsAttr_Scenario1():
     yao_str = "Yao"
     clean_fact = clean_factunit()
     yao_plan = planunit_shop(yao_str, "accord23")
-    casa_way = yao_plan.make_l1_way("casa")
-    mop_way = yao_plan.make_way(casa_way, "mop")
+    casa_rope = yao_plan.make_l1_rope("casa")
+    mop_rope = yao_plan.make_rope(casa_rope, "mop")
     clean_fact = clean_factunit()
     yao_plan.add_concept(clean_fact.fstate)
-    yao_plan.add_concept(mop_way, task=True)
-    yao_plan.edit_reason(mop_way, clean_fact.fcontext, clean_fact.fstate)
+    yao_plan.add_concept(mop_rope, task=True)
+    yao_plan.edit_reason(mop_rope, clean_fact.fcontext, clean_fact.fstate)
     yao_plan.add_fact(
         clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
     )
@@ -479,8 +479,8 @@ def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario2_planevent_fac
     yao_plan.add_fact(
         clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
     )
-    run_way = yao_plan.make_l1_way("run")
-    run_fact = factunit_shop(run_way, run_way)
+    run_rope = yao_plan.make_l1_rope("run")
+    run_fact = factunit_shop(run_rope, run_rope)
     run_facts = {run_fact.fcontext: run_fact}
     yao_planevent_fact_dict = {sky_fact.fcontext: sky_fact.get_dict()}
     yao_found_fact_dict = {clean_fact.fcontext: clean_fact.get_dict()}
@@ -489,7 +489,7 @@ def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario2_planevent_fac
     yao_cellunit.set_found_facts_from_dict(yao_found_fact_dict)
     yao_cellunit.boss_facts = run_facts
     assert len(yao_cellunit.found_facts) == 1
-    assert set(yao_cellunit.boss_facts.keys()) == {run_way}
+    assert set(yao_cellunit.boss_facts.keys()) == {run_rope}
 
     # WHEN
     yao_cellunit.add_other_facts_to_boss_facts()
@@ -510,10 +510,10 @@ def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario3_boss_facts_Ar
     # ESTABLISH
     yao_str = "Yao"
     yao_plan = planunit_shop(yao_str, "accord23")
-    run_way = yao_plan.make_l1_way("run")
-    fast_way = yao_plan.make_way(run_way, "fast")
-    run_fact = factunit_shop(run_way, run_way)
-    fast_fact = factunit_shop(run_way, fast_way)
+    run_rope = yao_plan.make_l1_rope("run")
+    fast_rope = yao_plan.make_rope(run_rope, "fast")
+    run_fact = factunit_shop(run_rope, run_rope)
+    fast_fact = factunit_shop(run_rope, fast_rope)
     run_facts = {run_fact.fcontext: run_fact}
 
     yao_planevent_fact_dict = {fast_fact.fcontext: fast_fact.get_dict()}
@@ -523,7 +523,7 @@ def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario3_boss_facts_Ar
     yao_cellunit.set_found_facts_from_dict(yao_found_fact_dict)
     yao_cellunit.boss_facts = run_facts
     assert len(yao_cellunit.found_facts) == 1
-    assert set(yao_cellunit.boss_facts.keys()) == {run_way}
+    assert set(yao_cellunit.boss_facts.keys()) == {run_rope}
 
     # WHEN
     yao_cellunit.add_other_facts_to_boss_facts()
@@ -658,8 +658,8 @@ def test_CellUnit_set_planadjust_facts_ReturnsObj_Scenario1():
     assert sue_cell.planadjust.get_factunits_dict() != {}
     sue_plan_facts = sue_cell.planadjust.get_factunits_dict()
     a23_str = "accord23"
-    casa_way = create_way(a23_str, "casa")
-    sue_plan_casa_fact_dict = sue_plan_facts.get(casa_way)
+    casa_rope = create_rope(a23_str, "casa")
+    sue_plan_casa_fact_dict = sue_plan_facts.get(casa_rope)
     assert sue_plan_casa_fact_dict.get("fstate") == casa_clean_fact.fstate
 
 
@@ -700,8 +700,8 @@ def test_CellUnit_set_planadjust_facts_ReturnsObj_Scenario2():
     assert sue_cell.planadjust.get_factunits_dict() != {}
     sue_plan_facts = sue_cell.planadjust.get_factunits_dict()
     a23_str = "accord23"
-    casa_way = create_way(a23_str, "casa")
-    sue_plan_casa_fact_dict = sue_plan_facts.get(casa_way)
+    casa_rope = create_rope(a23_str, "casa")
+    sue_plan_casa_fact_dict = sue_plan_facts.get(casa_rope)
     assert sue_plan_casa_fact_dict.get("fstate") == casa_dirty_fact.fstate
 
 
@@ -746,8 +746,8 @@ def test_CellUnit_set_planadjust_facts_ReturnsObj_Scenario3():
     assert sue_cell.planadjust.get_factunits_dict() != {}
     sue_plan_facts = sue_cell.planadjust.get_factunits_dict()
     a23_str = "accord23"
-    casa_way = create_way(a23_str, "casa")
-    sue_plan_casa_fact_dict = sue_plan_facts.get(casa_way)
+    casa_rope = create_rope(a23_str, "casa")
+    sue_plan_casa_fact_dict = sue_plan_facts.get(casa_rope)
     assert sue_plan_casa_fact_dict.get("fstate") == casa_grimy_fact.fstate
 
 
@@ -839,10 +839,10 @@ def test_CellUnit_calc_acct_mandate_ledger_ReturnsObj_Scenario0():
     dirty_fact = dirty_factunit()
     sue_plan.add_concept(clean_fact.fstate)
     sue_plan.add_concept(dirty_fact.fstate)
-    casa_way = sue_plan.make_l1_way("casa")
-    mop_way = sue_plan.make_way(casa_way, "mop")
-    sue_plan.add_concept(mop_way, 1, task=True)
-    sue_plan.edit_reason(mop_way, dirty_fact.fcontext, dirty_fact.fstate)
+    casa_rope = sue_plan.make_l1_rope("casa")
+    mop_rope = sue_plan.make_rope(casa_rope, "mop")
+    sue_plan.add_concept(mop_rope, 1, task=True)
+    sue_plan.edit_reason(mop_rope, dirty_fact.fcontext, dirty_fact.fstate)
     sue_plan.add_fact(
         dirty_fact.fcontext, dirty_fact.fstate, create_missing_concepts=True
     )
@@ -878,8 +878,8 @@ def test_CellUnit_calc_acct_mandate_ledger_ReturnsObj_Scenario0():
     assert sue_cell.planadjust.get_factunits_dict() != {}
     assert set(sue_cell.planadjust.get_factunits_dict().keys()) == {clean_fact.fcontext}
     # concept_dict = sue_cell.planadjust.get_concept_dict()
-    # for concept_way, concept_obj in concept_dict.items():
-    #     print(f"{concept_way=} {concept_obj._fund_onset=} {concept_obj._fund_cease}")
+    # for concept_rope, concept_obj in concept_dict.items():
+    #     print(f"{concept_rope=} {concept_obj._fund_onset=} {concept_obj._fund_cease}")
     assert sue_cell._acct_mandate_ledger != {}
     assert sue_cell._acct_mandate_ledger == {yao_str: 311, sue_str: 133}
 
@@ -986,14 +986,14 @@ def test_create_child_cellunits_ReturnsObj_Scenario2_boss_facts():
     yao_plan.add_acctunit(sue_str, 3, 5)
     yao_plan.add_acctunit(yao_str, 7, 2)
     yao_plan.add_acctunit(bob_str, 0, 2)
-    casa_way = yao_plan.make_l1_way("casa")
-    mop_way = yao_plan.make_way(casa_way, "mop")
+    casa_rope = yao_plan.make_l1_rope("casa")
+    mop_rope = yao_plan.make_rope(casa_rope, "mop")
     clean_fact = clean_factunit()
-    yao_plan.add_concept(casa_way, 1)
-    yao_plan.add_concept(mop_way, 1, task=True)
+    yao_plan.add_concept(casa_rope, 1)
+    yao_plan.add_concept(mop_rope, 1, task=True)
     yao_plan.add_concept(clean_fact.fstate)
     yao_plan.add_concept(dirty_fact.fstate)
-    yao_plan.edit_reason(mop_way, dirty_fact.fcontext, dirty_fact.fstate)
+    yao_plan.edit_reason(mop_rope, dirty_fact.fcontext, dirty_fact.fstate)
     yao_cell = cellunit_shop(
         yao_str, celldepth=yao_celldepth, quota=yao_quota, planadjust=yao_plan
     )
@@ -1032,10 +1032,10 @@ def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
     dirty_fact = dirty_factunit()
     sue_plan.add_concept(clean_fact.fstate)
     sue_plan.add_concept(dirty_fact.fstate)
-    casa_way = sue_plan.make_l1_way("casa")
-    mop_way = sue_plan.make_way(casa_way, "mop")
-    sue_plan.add_concept(mop_way, 1, task=True)
-    sue_plan.edit_reason(mop_way, dirty_fact.fcontext, dirty_fact.fstate)
+    casa_rope = sue_plan.make_l1_rope("casa")
+    mop_rope = sue_plan.make_rope(casa_rope, "mop")
+    sue_plan.add_concept(mop_rope, 1, task=True)
+    sue_plan.edit_reason(mop_rope, dirty_fact.fcontext, dirty_fact.fstate)
     sue_plan.add_fact(
         dirty_fact.fcontext, dirty_fact.fstate, create_missing_concepts=True
     )
@@ -1073,8 +1073,8 @@ def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
     assert sue_cell.planadjust.get_factunits_dict() != {}
     assert set(sue_cell.planadjust.get_factunits_dict().keys()) == {dirty_fact.fcontext}
     # concept_dict = sue_cell.planadjust.get_concept_dict()
-    # for concept_way, concept_obj in concept_dict.items():
-    #     print(f"{concept_way=} {concept_obj._fund_onset=} {concept_obj._fund_cease}")
+    # for concept_rope, concept_obj in concept_dict.items():
+    #     print(f"{concept_rope=} {concept_obj._fund_onset=} {concept_obj._fund_cease}")
     assert sue_cell._acct_mandate_ledger != {}
     assert sue_cell._acct_mandate_ledger == {yao_str: 311, sue_str: 133}
 

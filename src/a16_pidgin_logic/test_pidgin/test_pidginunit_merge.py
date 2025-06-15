@@ -2,7 +2,7 @@ from pytest import raises as pytest_raises
 from src.a06_plan_logic._test_util.a06_str import NameTerm_str
 from src.a16_pidgin_logic._test_util.example_pidgins import (
     get_clean_labelmap,
-    get_clean_waymap,
+    get_clean_ropemap,
     get_suita_namemap,
     get_swim_titlemap,
 )
@@ -23,11 +23,11 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario0_EmptyPidginUnits():
     assert merged_pidginunit == new_pidginunit
 
 
-def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario1_RaiseErrorWhenDifferent_otx_bridge():
+def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario1_RaiseErrorWhenDifferent_otx_knot():
     # ESTABLISH
     sue_str = "Sue"
-    slash_otx_bridge = "/"
-    old_pidginunit = pidginunit_shop(sue_str, 0, otx_bridge=slash_otx_bridge)
+    slash_otx_knot = "/"
+    old_pidginunit = pidginunit_shop(sue_str, 0, otx_knot=slash_otx_knot)
     new_pidginunit = pidginunit_shop(sue_str, 1)
 
     with pytest_raises(Exception) as excinfo:
@@ -35,11 +35,11 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario1_RaiseErrorWhenDiffer
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
-def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_bridge():
+def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_knot():
     # ESTABLISH
     sue_str = "Sue"
-    slash_otx_bridge = "/"
-    old_pidginunit = pidginunit_shop(sue_str, 0, inx_bridge=slash_otx_bridge)
+    slash_otx_knot = "/"
+    old_pidginunit = pidginunit_shop(sue_str, 0, inx_knot=slash_otx_knot)
     new_pidginunit = pidginunit_shop(sue_str, 1)
 
     with pytest_raises(Exception) as excinfo:
@@ -90,7 +90,7 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario6_namemap_Inherited():
     old_pidginunit.set_namemap(get_suita_namemap())
     old_pidginunit.set_titlemap(get_swim_titlemap())
     old_pidginunit.set_labelmap(get_clean_labelmap())
-    old_pidginunit.set_waymap(get_clean_waymap())
+    old_pidginunit.set_ropemap(get_clean_ropemap())
     new_pidginunit = pidginunit_shop(sue_str, event1)
     assert new_pidginunit.namemap != get_suita_namemap()
 
@@ -108,10 +108,10 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario6_namemap_Inherited():
     merged_labelbrigde = get_clean_labelmap()
     merged_labelbrigde.event_int = event1
     assert merged_pidginunit.labelmap == merged_labelbrigde
-    merged_waybrigde = get_clean_waymap()
-    merged_waybrigde.event_int = event1
-    merged_waybrigde.labelmap = merged_labelbrigde
-    assert merged_pidginunit.waymap == merged_waybrigde
+    merged_ropebrigde = get_clean_ropemap()
+    merged_ropebrigde.event_int = event1
+    merged_ropebrigde.labelmap = merged_labelbrigde
+    assert merged_pidginunit.ropemap == merged_ropebrigde
 
 
 def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario7_namemap_Inherited():

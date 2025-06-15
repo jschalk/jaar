@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from pytest import raises as pytest_raises
-from src.a01_term_logic.way import WayTerm, to_way
+from src.a01_term_logic.rope import RopeTerm, to_rope
 from src.a02_finance_logic.finance_config import default_fund_pool
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import awardline_shop, awardlink_shop
@@ -17,26 +17,26 @@ from src.a06_plan_logic.plan import PlanUnit, planunit_shop
 def test_PlanUnit_settle_plan_Sets_conceptunit_fund_onset_fund_cease_Scenario0():
     # ESTABLISH
     x_planunit = get_planunit_with7amCleanTableReason()
-    casa_way = x_planunit.make_l1_way("casa")
-    catt_way = x_planunit.make_l1_way("cat have dinner")
-    wk_way = x_planunit.make_l1_way("wkdays")
+    casa_rope = x_planunit.make_l1_rope("casa")
+    catt_rope = x_planunit.make_l1_rope("cat have dinner")
+    wk_rope = x_planunit.make_l1_rope("wkdays")
     x_planunit.conceptroot._fund_onset = 13
     x_planunit.conceptroot._fund_cease = 13
-    x_planunit.get_concept_obj(casa_way)._fund_onset = 13
-    x_planunit.get_concept_obj(casa_way)._fund_cease = 13
-    x_planunit.get_concept_obj(catt_way)._fund_onset = 13
-    x_planunit.get_concept_obj(catt_way)._fund_cease = 13
-    x_planunit.get_concept_obj(wk_way)._fund_onset = 13
-    x_planunit.get_concept_obj(wk_way)._fund_cease = 13
+    x_planunit.get_concept_obj(casa_rope)._fund_onset = 13
+    x_planunit.get_concept_obj(casa_rope)._fund_cease = 13
+    x_planunit.get_concept_obj(catt_rope)._fund_onset = 13
+    x_planunit.get_concept_obj(catt_rope)._fund_cease = 13
+    x_planunit.get_concept_obj(wk_rope)._fund_onset = 13
+    x_planunit.get_concept_obj(wk_rope)._fund_cease = 13
 
     assert x_planunit.conceptroot._fund_onset == 13
     assert x_planunit.conceptroot._fund_cease == 13
-    assert x_planunit.get_concept_obj(casa_way)._fund_onset == 13
-    assert x_planunit.get_concept_obj(casa_way)._fund_cease == 13
-    assert x_planunit.get_concept_obj(catt_way)._fund_onset == 13
-    assert x_planunit.get_concept_obj(catt_way)._fund_cease == 13
-    assert x_planunit.get_concept_obj(wk_way)._fund_onset == 13
-    assert x_planunit.get_concept_obj(wk_way)._fund_cease == 13
+    assert x_planunit.get_concept_obj(casa_rope)._fund_onset == 13
+    assert x_planunit.get_concept_obj(casa_rope)._fund_cease == 13
+    assert x_planunit.get_concept_obj(catt_rope)._fund_onset == 13
+    assert x_planunit.get_concept_obj(catt_rope)._fund_cease == 13
+    assert x_planunit.get_concept_obj(wk_rope)._fund_onset == 13
+    assert x_planunit.get_concept_obj(wk_rope)._fund_cease == 13
 
     # WHEN
     x_planunit.settle_plan()
@@ -44,12 +44,12 @@ def test_PlanUnit_settle_plan_Sets_conceptunit_fund_onset_fund_cease_Scenario0()
     # THEN
     assert x_planunit.conceptroot._fund_onset != 13
     assert x_planunit.conceptroot._fund_cease != 13
-    assert x_planunit.get_concept_obj(casa_way)._fund_onset != 13
-    assert x_planunit.get_concept_obj(casa_way)._fund_cease != 13
-    assert x_planunit.get_concept_obj(catt_way)._fund_onset != 13
-    assert x_planunit.get_concept_obj(catt_way)._fund_cease != 13
-    assert x_planunit.get_concept_obj(wk_way)._fund_onset != 13
-    assert x_planunit.get_concept_obj(wk_way)._fund_cease != 13
+    assert x_planunit.get_concept_obj(casa_rope)._fund_onset != 13
+    assert x_planunit.get_concept_obj(casa_rope)._fund_cease != 13
+    assert x_planunit.get_concept_obj(catt_rope)._fund_onset != 13
+    assert x_planunit.get_concept_obj(catt_rope)._fund_cease != 13
+    assert x_planunit.get_concept_obj(wk_rope)._fund_onset != 13
+    assert x_planunit.get_concept_obj(wk_rope)._fund_cease != 13
 
 
 def test_PlanUnit_settle_plan_Sets_conceptunit_fund_onset_fund_cease_Scenario1():
@@ -57,40 +57,40 @@ def test_PlanUnit_settle_plan_Sets_conceptunit_fund_onset_fund_cease_Scenario1()
     yao_planunit = planunit_shop("Yao", tally=10)
 
     auto_str = "auto"
-    auto_way = yao_planunit.make_l1_way(auto_str)
+    auto_rope = yao_planunit.make_l1_rope(auto_str)
     auto_concept = conceptunit_shop(auto_str, mass=10)
     yao_planunit.set_l1_concept(auto_concept)
 
     carn_str = "carn"
-    carn_way = yao_planunit.make_l1_way(carn_str)
+    carn_rope = yao_planunit.make_l1_rope(carn_str)
     carn_concept = conceptunit_shop(carn_str, mass=60)
     yao_planunit.set_l1_concept(carn_concept)
     lamb_str = "lambs"
-    lamb_way = yao_planunit.make_way(carn_way, lamb_str)
+    lamb_rope = yao_planunit.make_rope(carn_rope, lamb_str)
     lamb_concept = conceptunit_shop(lamb_str, mass=1)
-    yao_planunit.set_concept(lamb_concept, parent_way=carn_way)
+    yao_planunit.set_concept(lamb_concept, parent_rope=carn_rope)
     duck_str = "ducks"
-    duck_way = yao_planunit.make_way(carn_way, duck_str)
+    duck_rope = yao_planunit.make_rope(carn_rope, duck_str)
     duck_concept = conceptunit_shop(duck_str, mass=2)
-    yao_planunit.set_concept(duck_concept, parent_way=carn_way)
+    yao_planunit.set_concept(duck_concept, parent_rope=carn_rope)
 
     coal_str = "coal"
-    coal_way = yao_planunit.make_l1_way(coal_str)
+    coal_rope = yao_planunit.make_l1_rope(coal_str)
     coal_concept = conceptunit_shop(coal_str, mass=30)
     yao_planunit.set_l1_concept(coal_concept)
 
     assert yao_planunit.conceptroot._fund_onset is None
     assert yao_planunit.conceptroot._fund_cease is None
-    assert yao_planunit.get_concept_obj(auto_way)._fund_onset is None
-    assert yao_planunit.get_concept_obj(auto_way)._fund_cease is None
-    assert yao_planunit.get_concept_obj(carn_way)._fund_onset is None
-    assert yao_planunit.get_concept_obj(carn_way)._fund_cease is None
-    assert yao_planunit.get_concept_obj(coal_way)._fund_onset is None
-    assert yao_planunit.get_concept_obj(coal_way)._fund_cease is None
-    lamb_before = yao_planunit.get_concept_obj(way=lamb_way)
+    assert yao_planunit.get_concept_obj(auto_rope)._fund_onset is None
+    assert yao_planunit.get_concept_obj(auto_rope)._fund_cease is None
+    assert yao_planunit.get_concept_obj(carn_rope)._fund_onset is None
+    assert yao_planunit.get_concept_obj(carn_rope)._fund_cease is None
+    assert yao_planunit.get_concept_obj(coal_rope)._fund_onset is None
+    assert yao_planunit.get_concept_obj(coal_rope)._fund_cease is None
+    lamb_before = yao_planunit.get_concept_obj(rope=lamb_rope)
     assert lamb_before._fund_onset is None
     assert lamb_before._fund_cease is None
-    duck_before = yao_planunit.get_concept_obj(way=duck_way)
+    duck_before = yao_planunit.get_concept_obj(rope=duck_rope)
     assert duck_before._fund_onset is None
     assert duck_before._fund_cease is None
 
@@ -100,27 +100,27 @@ def test_PlanUnit_settle_plan_Sets_conceptunit_fund_onset_fund_cease_Scenario1()
     # THEN
     assert yao_planunit.conceptroot._fund_onset == 0.0
     assert yao_planunit.conceptroot._fund_cease == default_fund_pool()
-    assert yao_planunit.get_concept_obj(auto_way)._fund_onset == 0.0
+    assert yao_planunit.get_concept_obj(auto_rope)._fund_onset == 0.0
     assert (
-        yao_planunit.get_concept_obj(auto_way)._fund_cease == default_fund_pool() * 0.1
+        yao_planunit.get_concept_obj(auto_rope)._fund_cease == default_fund_pool() * 0.1
     )
     assert (
-        yao_planunit.get_concept_obj(carn_way)._fund_onset == default_fund_pool() * 0.1
+        yao_planunit.get_concept_obj(carn_rope)._fund_onset == default_fund_pool() * 0.1
     )
     assert (
-        yao_planunit.get_concept_obj(carn_way)._fund_cease == default_fund_pool() * 0.7
+        yao_planunit.get_concept_obj(carn_rope)._fund_cease == default_fund_pool() * 0.7
     )
     assert (
-        yao_planunit.get_concept_obj(coal_way)._fund_onset == default_fund_pool() * 0.7
+        yao_planunit.get_concept_obj(coal_rope)._fund_onset == default_fund_pool() * 0.7
     )
     assert (
-        yao_planunit.get_concept_obj(coal_way)._fund_cease == default_fund_pool() * 1.0
+        yao_planunit.get_concept_obj(coal_rope)._fund_cease == default_fund_pool() * 1.0
     )
 
-    duck_after = yao_planunit.get_concept_obj(way=duck_way)
+    duck_after = yao_planunit.get_concept_obj(rope=duck_rope)
     assert duck_after._fund_onset == default_fund_pool() * 0.1
     assert duck_after._fund_cease == default_fund_pool() * 0.5
-    lamb_after = yao_planunit.get_concept_obj(way=lamb_way)
+    lamb_after = yao_planunit.get_concept_obj(rope=lamb_rope)
     assert lamb_after._fund_onset == default_fund_pool() * 0.5
     assert lamb_after._fund_cease == default_fund_pool() * 0.7
 
@@ -130,40 +130,40 @@ def test_PlanUnit_settle_plan_Sets_conceptunit_fund_onset_fund_cease_Scenario2_D
     yao_planunit = planunit_shop("Yao", tally=10)
 
     auto_str = "auto"
-    auto_way = yao_planunit.make_l1_way(auto_str)
+    auto_rope = yao_planunit.make_l1_rope(auto_str)
     auto_concept = conceptunit_shop(auto_str, mass=10)
     yao_planunit.set_l1_concept(auto_concept)
 
     yarn_str = "yarn"
-    yarn_way = yao_planunit.make_l1_way(yarn_str)
+    yarn_rope = yao_planunit.make_l1_rope(yarn_str)
     yarn_concept = conceptunit_shop(yarn_str, mass=60)
     yao_planunit.set_l1_concept(yarn_concept)
     lamb_str = "lambs"
-    lamb_way = yao_planunit.make_way(yarn_way, lamb_str)
+    lamb_rope = yao_planunit.make_rope(yarn_rope, lamb_str)
     lamb_concept = conceptunit_shop(lamb_str, mass=1)
-    yao_planunit.set_concept(lamb_concept, parent_way=yarn_way)
+    yao_planunit.set_concept(lamb_concept, parent_rope=yarn_rope)
     duck_str = "ducks"
-    duck_way = yao_planunit.make_way(yarn_way, duck_str)
+    duck_rope = yao_planunit.make_rope(yarn_rope, duck_str)
     duck_concept = conceptunit_shop(duck_str, mass=2)
-    yao_planunit.set_concept(duck_concept, parent_way=yarn_way)
+    yao_planunit.set_concept(duck_concept, parent_rope=yarn_rope)
 
     coal_str = "coal"
-    coal_way = yao_planunit.make_l1_way(coal_str)
+    coal_rope = yao_planunit.make_l1_rope(coal_str)
     coal_concept = conceptunit_shop(coal_str, mass=30)
     yao_planunit.set_l1_concept(coal_concept)
 
     assert yao_planunit.conceptroot._fund_onset is None
     assert yao_planunit.conceptroot._fund_cease is None
-    assert yao_planunit.get_concept_obj(auto_way)._fund_onset is None
-    assert yao_planunit.get_concept_obj(auto_way)._fund_cease is None
-    assert yao_planunit.get_concept_obj(yarn_way)._fund_onset is None
-    assert yao_planunit.get_concept_obj(yarn_way)._fund_cease is None
-    assert yao_planunit.get_concept_obj(coal_way)._fund_onset is None
-    assert yao_planunit.get_concept_obj(coal_way)._fund_cease is None
-    lamb_before = yao_planunit.get_concept_obj(way=lamb_way)
+    assert yao_planunit.get_concept_obj(auto_rope)._fund_onset is None
+    assert yao_planunit.get_concept_obj(auto_rope)._fund_cease is None
+    assert yao_planunit.get_concept_obj(yarn_rope)._fund_onset is None
+    assert yao_planunit.get_concept_obj(yarn_rope)._fund_cease is None
+    assert yao_planunit.get_concept_obj(coal_rope)._fund_onset is None
+    assert yao_planunit.get_concept_obj(coal_rope)._fund_cease is None
+    lamb_before = yao_planunit.get_concept_obj(rope=lamb_rope)
     assert lamb_before._fund_onset is None
     assert lamb_before._fund_cease is None
-    duck_before = yao_planunit.get_concept_obj(way=duck_way)
+    duck_before = yao_planunit.get_concept_obj(rope=duck_rope)
     assert duck_before._fund_onset is None
     assert duck_before._fund_cease is None
 
@@ -173,27 +173,27 @@ def test_PlanUnit_settle_plan_Sets_conceptunit_fund_onset_fund_cease_Scenario2_D
     # THEN
     assert yao_planunit.conceptroot._fund_onset == 0.0
     assert yao_planunit.conceptroot._fund_cease == default_fund_pool()
-    assert yao_planunit.get_concept_obj(auto_way)._fund_onset == 0.0
+    assert yao_planunit.get_concept_obj(auto_rope)._fund_onset == 0.0
     assert (
-        yao_planunit.get_concept_obj(auto_way)._fund_cease == default_fund_pool() * 0.1
+        yao_planunit.get_concept_obj(auto_rope)._fund_cease == default_fund_pool() * 0.1
     )
     assert (
-        yao_planunit.get_concept_obj(coal_way)._fund_onset == default_fund_pool() * 0.1
+        yao_planunit.get_concept_obj(coal_rope)._fund_onset == default_fund_pool() * 0.1
     )
     assert (
-        yao_planunit.get_concept_obj(coal_way)._fund_cease == default_fund_pool() * 0.4
+        yao_planunit.get_concept_obj(coal_rope)._fund_cease == default_fund_pool() * 0.4
     )
     assert (
-        yao_planunit.get_concept_obj(yarn_way)._fund_onset == default_fund_pool() * 0.4
+        yao_planunit.get_concept_obj(yarn_rope)._fund_onset == default_fund_pool() * 0.4
     )
     assert (
-        yao_planunit.get_concept_obj(yarn_way)._fund_cease == default_fund_pool() * 1.0
+        yao_planunit.get_concept_obj(yarn_rope)._fund_cease == default_fund_pool() * 1.0
     )
 
-    duck_after = yao_planunit.get_concept_obj(way=duck_way)
+    duck_after = yao_planunit.get_concept_obj(rope=duck_rope)
     assert duck_after._fund_onset == default_fund_pool() * 0.4
     assert duck_after._fund_cease == default_fund_pool() * 0.8
-    lamb_after = yao_planunit.get_concept_obj(way=lamb_way)
+    lamb_after = yao_planunit.get_concept_obj(rope=lamb_rope)
     assert lamb_after._fund_onset == default_fund_pool() * 0.8
     assert lamb_after._fund_cease == default_fund_pool() * 1.0
 
@@ -202,94 +202,94 @@ def test_PlanUnit_settle_plan_Sets_fund_ratio_WithSomeConceptsOfZero_massScenari
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     floor_str = "mop floor"
-    floor_way = sue_plan.make_way(casa_way, floor_str)
+    floor_rope = sue_plan.make_rope(casa_rope, floor_str)
     floor_concept = conceptunit_shop(floor_str, task=True)
-    sue_plan.set_concept(floor_concept, casa_way)
+    sue_plan.set_concept(floor_concept, casa_rope)
     sue_plan.set_l1_concept(conceptunit_shop("unimportant"))
 
     status_str = "cleaniness status"
-    status_way = sue_plan.make_way(casa_way, status_str)
-    sue_plan.set_concept(conceptunit_shop(status_str, mass=0), casa_way)
+    status_rope = sue_plan.make_rope(casa_rope, status_str)
+    sue_plan.set_concept(conceptunit_shop(status_str, mass=0), casa_rope)
 
     non_str = "not clean"
     yes_str = "yes clean"
-    non_way = sue_plan.make_way(status_way, non_str)
-    yes_way = sue_plan.make_way(status_way, yes_str)
-    sue_plan.set_concept(conceptunit_shop(non_str), status_way)
-    sue_plan.set_concept(conceptunit_shop(yes_str, mass=2), status_way)
+    non_rope = sue_plan.make_rope(status_rope, non_str)
+    yes_rope = sue_plan.make_rope(status_rope, yes_str)
+    sue_plan.set_concept(conceptunit_shop(non_str), status_rope)
+    sue_plan.set_concept(conceptunit_shop(yes_str, mass=2), status_rope)
 
-    assert sue_plan.get_concept_obj(casa_way)._fund_ratio is None
-    assert sue_plan.get_concept_obj(floor_way)._fund_ratio is None
-    assert sue_plan.get_concept_obj(status_way)._fund_ratio is None
-    assert sue_plan.get_concept_obj(non_way)._fund_ratio is None
-    assert sue_plan.get_concept_obj(yes_way)._fund_ratio is None
+    assert sue_plan.get_concept_obj(casa_rope)._fund_ratio is None
+    assert sue_plan.get_concept_obj(floor_rope)._fund_ratio is None
+    assert sue_plan.get_concept_obj(status_rope)._fund_ratio is None
+    assert sue_plan.get_concept_obj(non_rope)._fund_ratio is None
+    assert sue_plan.get_concept_obj(yes_rope)._fund_ratio is None
 
     # WHEN
     sue_plan.settle_plan()
 
     # THEN
     print(f"{sue_plan.fund_pool=}")
-    assert sue_plan.get_concept_obj(casa_way)._fund_ratio == 0.5
-    assert sue_plan.get_concept_obj(floor_way)._fund_ratio == 0.5
-    assert sue_plan.get_concept_obj(status_way)._fund_ratio == 0.0
-    assert sue_plan.get_concept_obj(non_way)._fund_ratio == 0.0
-    assert sue_plan.get_concept_obj(yes_way)._fund_ratio == 0.0
+    assert sue_plan.get_concept_obj(casa_rope)._fund_ratio == 0.5
+    assert sue_plan.get_concept_obj(floor_rope)._fund_ratio == 0.5
+    assert sue_plan.get_concept_obj(status_rope)._fund_ratio == 0.0
+    assert sue_plan.get_concept_obj(non_rope)._fund_ratio == 0.0
+    assert sue_plan.get_concept_obj(yes_rope)._fund_ratio == 0.0
 
 
 def test_PlanUnit_settle_plan_Sets_fund_ratio_WithSomeConceptsOfZero_massScenario1():
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     floor_str = "mop floor"
-    floor_way = sue_plan.make_way(casa_way, floor_str)
+    floor_rope = sue_plan.make_rope(casa_rope, floor_str)
     floor_concept = conceptunit_shop(floor_str, task=True)
-    sue_plan.set_concept(floor_concept, casa_way)
+    sue_plan.set_concept(floor_concept, casa_rope)
     sue_plan.set_l1_concept(conceptunit_shop("unimportant"))
 
     status_str = "cleaniness status"
-    status_way = sue_plan.make_way(casa_way, status_str)
-    sue_plan.set_concept(conceptunit_shop(status_str), casa_way)
+    status_rope = sue_plan.make_rope(casa_rope, status_str)
+    sue_plan.set_concept(conceptunit_shop(status_str), casa_rope)
 
-    status_concept = sue_plan.get_concept_obj(status_way)
+    status_concept = sue_plan.get_concept_obj(status_rope)
     print(f"{status_concept.mass=}")
     print("This should raise error: 'Conceptunit._'")
 
     clean_str = "clean"
-    clean_way = sue_plan.make_way(status_way, clean_str)
+    clean_rope = sue_plan.make_rope(status_rope, clean_str)
     very_str = "very_much"
     mod_str = "moderately"
     dirty_str = "dirty"
 
-    sue_plan.set_concept(conceptunit_shop(clean_str, mass=0), status_way)
-    sue_plan.set_concept(conceptunit_shop(very_str), clean_way)
-    sue_plan.set_concept(conceptunit_shop(mod_str, mass=2), clean_way)
-    sue_plan.set_concept(conceptunit_shop(dirty_str), clean_way)
+    sue_plan.set_concept(conceptunit_shop(clean_str, mass=0), status_rope)
+    sue_plan.set_concept(conceptunit_shop(very_str), clean_rope)
+    sue_plan.set_concept(conceptunit_shop(mod_str, mass=2), clean_rope)
+    sue_plan.set_concept(conceptunit_shop(dirty_str), clean_rope)
 
-    very_way = sue_plan.make_way(clean_way, very_str)
-    mod_way = sue_plan.make_way(clean_way, mod_str)
-    dirty_way = sue_plan.make_way(clean_way, dirty_str)
-    assert sue_plan.get_concept_obj(casa_way)._fund_ratio is None
-    assert sue_plan.get_concept_obj(floor_way)._fund_ratio is None
-    assert sue_plan.get_concept_obj(status_way)._fund_ratio is None
-    assert sue_plan.get_concept_obj(clean_way)._fund_ratio is None
-    assert sue_plan.get_concept_obj(very_way)._fund_ratio is None
-    assert sue_plan.get_concept_obj(mod_way)._fund_ratio is None
-    assert sue_plan.get_concept_obj(dirty_way)._fund_ratio is None
+    very_rope = sue_plan.make_rope(clean_rope, very_str)
+    mod_rope = sue_plan.make_rope(clean_rope, mod_str)
+    dirty_rope = sue_plan.make_rope(clean_rope, dirty_str)
+    assert sue_plan.get_concept_obj(casa_rope)._fund_ratio is None
+    assert sue_plan.get_concept_obj(floor_rope)._fund_ratio is None
+    assert sue_plan.get_concept_obj(status_rope)._fund_ratio is None
+    assert sue_plan.get_concept_obj(clean_rope)._fund_ratio is None
+    assert sue_plan.get_concept_obj(very_rope)._fund_ratio is None
+    assert sue_plan.get_concept_obj(mod_rope)._fund_ratio is None
+    assert sue_plan.get_concept_obj(dirty_rope)._fund_ratio is None
 
     # WHEN
     sue_plan.settle_plan()
 
     # THEN
     print(f"{sue_plan.fund_pool=}")
-    assert sue_plan.get_concept_obj(casa_way)._fund_ratio == 0.5
-    assert sue_plan.get_concept_obj(floor_way)._fund_ratio == 0.25
-    assert sue_plan.get_concept_obj(status_way)._fund_ratio == 0.25
-    assert sue_plan.get_concept_obj(clean_way)._fund_ratio == 0
-    assert sue_plan.get_concept_obj(very_way)._fund_ratio == 0
-    assert sue_plan.get_concept_obj(mod_way)._fund_ratio == 0
-    assert sue_plan.get_concept_obj(dirty_way)._fund_ratio == 0
+    assert sue_plan.get_concept_obj(casa_rope)._fund_ratio == 0.5
+    assert sue_plan.get_concept_obj(floor_rope)._fund_ratio == 0.25
+    assert sue_plan.get_concept_obj(status_rope)._fund_ratio == 0.25
+    assert sue_plan.get_concept_obj(clean_rope)._fund_ratio == 0
+    assert sue_plan.get_concept_obj(very_rope)._fund_ratio == 0
+    assert sue_plan.get_concept_obj(mod_rope)._fund_ratio == 0
+    assert sue_plan.get_concept_obj(dirty_rope)._fund_ratio == 0
 
 
 def test_PlanUnit_settle_plan_WhenConceptUnitHasFundsBut_kidsHaveNoMassDistributeFundsToAcctUnits_scenario0():
@@ -297,36 +297,36 @@ def test_PlanUnit_settle_plan_WhenConceptUnitHasFundsBut_kidsHaveNoMassDistribut
     yao_str = "Yao"
     sue_planunit.add_acctunit(yao_str)
     casa_str = "casa"
-    casa_way = sue_planunit.make_l1_way(casa_str)
+    casa_rope = sue_planunit.make_l1_rope(casa_str)
     casa_concept = conceptunit_shop(casa_str, mass=1)
 
     swim_str = "swimming"
-    swim_way = sue_planunit.make_way(casa_way, swim_str)
+    swim_rope = sue_planunit.make_rope(casa_rope, swim_str)
     swim_concept = conceptunit_shop(swim_str, mass=8)
 
     clean_str = "cleaning"
-    clean_way = sue_planunit.make_way(casa_way, clean_str)
+    clean_rope = sue_planunit.make_rope(casa_rope, clean_str)
     clean_concept = conceptunit_shop(clean_str, mass=2)
-    sue_planunit.set_concept(conceptunit_shop(clean_str), casa_way)
+    sue_planunit.set_concept(conceptunit_shop(clean_str), casa_rope)
 
     sweep_str = "sweep"
-    sweep_way = sue_planunit.make_way(clean_way, sweep_str)
+    sweep_rope = sue_planunit.make_rope(clean_rope, sweep_str)
     sweep_concept = conceptunit_shop(sweep_str, mass=0)
     vaccum_str = "vaccum"
-    vaccum_way = sue_planunit.make_way(clean_way, vaccum_str)
+    vaccum_rope = sue_planunit.make_rope(clean_rope, vaccum_str)
     vaccum_concept = conceptunit_shop(vaccum_str, mass=0)
 
     sue_planunit.set_l1_concept(casa_concept)
-    sue_planunit.set_concept(swim_concept, casa_way)
-    sue_planunit.set_concept(clean_concept, casa_way)
-    sue_planunit.set_concept(sweep_concept, clean_way)  # _mass=0
-    sue_planunit.set_concept(vaccum_concept, clean_way)  # _mass=0
+    sue_planunit.set_concept(swim_concept, casa_rope)
+    sue_planunit.set_concept(clean_concept, casa_rope)
+    sue_planunit.set_concept(sweep_concept, clean_rope)  # _mass=0
+    sue_planunit.set_concept(vaccum_concept, clean_rope)  # _mass=0
 
-    assert sue_planunit.get_concept_obj(casa_way)._fund_ratio is None
-    assert sue_planunit.get_concept_obj(swim_way)._fund_ratio is None
-    assert sue_planunit.get_concept_obj(clean_way)._fund_ratio is None
-    assert sue_planunit.get_concept_obj(sweep_way)._fund_ratio is None
-    assert sue_planunit.get_concept_obj(vaccum_way)._fund_ratio is None
+    assert sue_planunit.get_concept_obj(casa_rope)._fund_ratio is None
+    assert sue_planunit.get_concept_obj(swim_rope)._fund_ratio is None
+    assert sue_planunit.get_concept_obj(clean_rope)._fund_ratio is None
+    assert sue_planunit.get_concept_obj(sweep_rope)._fund_ratio is None
+    assert sue_planunit.get_concept_obj(vaccum_rope)._fund_ratio is None
     assert sue_planunit.get_groupunit(yao_str) is None
 
     assert not sue_planunit._offtrack_fund
@@ -339,11 +339,11 @@ def test_PlanUnit_settle_plan_WhenConceptUnitHasFundsBut_kidsHaveNoMassDistribut
     # THEN
     print(f"{sue_planunit.fund_pool=}")
     clean_fund_ratio = 0.2
-    assert sue_planunit.get_concept_obj(casa_way)._fund_ratio == 1
-    assert sue_planunit.get_concept_obj(swim_way)._fund_ratio == 0.8
-    assert sue_planunit.get_concept_obj(clean_way)._fund_ratio == clean_fund_ratio
-    assert sue_planunit.get_concept_obj(sweep_way)._fund_ratio == 0
-    assert sue_planunit.get_concept_obj(vaccum_way)._fund_ratio == 0
+    assert sue_planunit.get_concept_obj(casa_rope)._fund_ratio == 1
+    assert sue_planunit.get_concept_obj(swim_rope)._fund_ratio == 0.8
+    assert sue_planunit.get_concept_obj(clean_rope)._fund_ratio == clean_fund_ratio
+    assert sue_planunit.get_concept_obj(sweep_rope)._fund_ratio == 0
+    assert sue_planunit.get_concept_obj(vaccum_rope)._fund_ratio == 0
     assert sue_planunit.get_groupunit(yao_str)._fund_give == 0
     assert sue_planunit.get_groupunit(yao_str)._fund_take == 0
 
@@ -374,21 +374,21 @@ def test_PlanUnit_settle_plan_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
     assert sue_plan.conceptroot._awardheirs.get(sue_str) is not None
     assert sue_plan.conceptroot._awardheirs.get(sue_str).awardee_title == sue_str
     assert sue_plan.conceptroot._awardlines != {}
-    root_way = to_way(sue_plan.conceptroot.concept_label)
-    root_concept = sue_plan.get_concept_obj(way=root_way)
+    root_rope = to_rope(sue_plan.conceptroot.concept_label)
+    root_concept = sue_plan.get_concept_obj(rope=root_rope)
     sue_awardline = sue_plan.conceptroot._awardlines.get(sue_str)
     print(f"{sue_awardline._fund_give=} {root_concept._fund_ratio=} ")
     print(f"  {sue_awardline._fund_take=} {root_concept._fund_ratio=} ")
     sum_x = 0
-    cat_way = sue_plan.make_l1_way("cat have dinner")
-    cat_concept = sue_plan.get_concept_obj(cat_way)
-    wk_way = sue_plan.make_l1_way(wk_str)
-    wk_concept = sue_plan.get_concept_obj(wk_way)
+    cat_rope = sue_plan.make_l1_rope("cat have dinner")
+    cat_concept = sue_plan.get_concept_obj(cat_rope)
+    wk_rope = sue_plan.make_l1_rope(wk_str)
+    wk_concept = sue_plan.get_concept_obj(wk_rope)
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
-    casa_concept = sue_plan.get_concept_obj(casa_way)
-    nation_way = sue_plan.make_l1_way(nation_str)
-    nation_concept = sue_plan.get_concept_obj(nation_way)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
+    casa_concept = sue_plan.get_concept_obj(casa_rope)
+    nation_rope = sue_plan.make_l1_rope(nation_str)
+    nation_concept = sue_plan.get_concept_obj(nation_rope)
     sum_x = cat_concept._fund_ratio
     print(f"{cat_concept._fund_ratio=} {sum_x} ")
     sum_x += wk_concept._fund_ratio
@@ -402,7 +402,7 @@ def test_PlanUnit_settle_plan_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
 
     # for kid_concept in root_concept._kids.values():
     #     sum_x += kid_concept._fund_ratio
-    #     print(f"  {kid_concept._fund_ratio=} {sum_x=} {kid_concept.get_concept_way()=}")
+    #     print(f"  {kid_concept._fund_ratio=} {sum_x=} {kid_concept.get_concept_rope()=}")
     assert round(sue_awardline._fund_give, 15) == default_fund_pool()
     assert round(sue_awardline._fund_take, 15) == default_fund_pool()
     x_awardline = awardline_shop(sue_str, default_fund_pool(), default_fund_pool())
@@ -415,8 +415,8 @@ def test_PlanUnit_settle_plan_TreeTraverseSets_awardlines_ToRootConceptUnitFromN
     sue_plan.settle_plan()
     sue_str = "Sue"
     sue_plan.add_acctunit(sue_str)
-    casa_way = sue_plan.make_l1_way("casa")
-    sue_plan.get_concept_obj(casa_way).set_awardlink(
+    casa_rope = sue_plan.make_l1_rope("casa")
+    sue_plan.get_concept_obj(casa_rope).set_awardlink(
         awardlink_shop(awardee_title=sue_str)
     )
     assert sue_plan.conceptroot._awardlines == {}
@@ -433,7 +433,7 @@ def test_PlanUnit_settle_plan_TreeTraverseSets_awardlines_ToRootConceptUnitFromN
         _fund_take=0.230769231 * default_fund_pool(),
     )
     assert sue_plan.conceptroot._awardlines == {x_awardline.awardee_title: x_awardline}
-    casa_conceptunit = sue_plan.get_concept_obj(casa_way)
+    casa_conceptunit = sue_plan.get_concept_obj(casa_rope)
     assert casa_conceptunit._awardlines != {}
     assert casa_conceptunit._awardlines == {x_awardline.awardee_title: x_awardline}
 
@@ -451,8 +451,8 @@ def test_PlanUnit_settle_plan_WithRootLevelAwardLinkSetsGroupUnit_fund_give_fund
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_str, give_force=10)
-    root_way = to_way(sue_plan.conceptroot.concept_label)
-    x_conceptroot = sue_plan.get_concept_obj(root_way)
+    root_rope = to_rope(sue_plan.conceptroot.concept_label)
+    x_conceptroot = sue_plan.get_concept_obj(root_rope)
     x_conceptroot.set_awardlink(awardlink=yao_awardlink)
     x_conceptroot.set_awardlink(awardlink=zia_awardlink)
     x_conceptroot.set_awardlink(awardlink=xio_awardlink)
@@ -514,7 +514,7 @@ def test_PlanUnit_settle_plan_WithLevel3AwardLinkSetsGroupUnit_fund_give_fund_ta
     bob_str = "Bob"
     x_plan = planunit_shop(bob_str)
     swim_str = "swim"
-    swim_way = x_plan.make_l1_way(swim_str)
+    swim_rope = x_plan.make_l1_rope(swim_str)
     x_plan.set_l1_concept(conceptunit_shop(swim_str))
 
     yao_str = "Yao"
@@ -526,7 +526,7 @@ def test_PlanUnit_settle_plan_WithLevel3AwardLinkSetsGroupUnit_fund_give_fund_ta
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_str, give_force=10)
-    swim_concept = x_plan.get_concept_obj(swim_way)
+    swim_concept = x_plan.get_concept_obj(swim_rope)
     swim_concept.set_awardlink(yao_awardlink)
     swim_concept.set_awardlink(zia_awardlink)
     swim_concept.set_awardlink(xio_awardlink)
@@ -560,7 +560,7 @@ def test_PlanUnit_settle_plan_CreatesNewGroupUnitAndSets_fund_give_fund_take():
     yao_str = "Yao"
     x_plan = planunit_shop(yao_str)
     swim_str = "swim"
-    swim_way = x_plan.make_l1_way(swim_str)
+    swim_rope = x_plan.make_l1_rope(swim_str)
     x_plan.set_l1_concept(conceptunit_shop(swim_str))
 
     yao_str = "Yao"
@@ -572,7 +572,7 @@ def test_PlanUnit_settle_plan_CreatesNewGroupUnitAndSets_fund_give_fund_take():
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_str, give_force=10)
-    swim_concept = x_plan.get_concept_obj(swim_way)
+    swim_concept = x_plan.get_concept_obj(swim_rope)
     swim_concept.set_awardlink(yao_awardlink)
     swim_concept.set_awardlink(zia_awardlink)
     swim_concept.set_awardlink(xio_awardlink)
@@ -607,7 +607,7 @@ def test_PlanUnit_settle_plan_WithLevel3AwardLinkAndEmptyAncestorsSetsGroupUnit_
     yao_str = "Yao"
     x_plan = planunit_shop(yao_str)
     swim_str = "swim"
-    swim_way = x_plan.make_l1_way(swim_str)
+    swim_rope = x_plan.make_l1_rope(swim_str)
     x_plan.set_l1_concept(conceptunit_shop(swim_str))
 
     yao_str = "Yao"
@@ -619,7 +619,7 @@ def test_PlanUnit_settle_plan_WithLevel3AwardLinkAndEmptyAncestorsSetsGroupUnit_
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_str, give_force=10)
-    swim_concept = x_plan.get_concept_obj(swim_way)
+    swim_concept = x_plan.get_concept_obj(swim_rope)
     swim_concept.set_awardlink(yao_awardlink)
     swim_concept.set_awardlink(zia_awardlink)
     swim_concept.set_awardlink(xio_awardlink)
@@ -631,7 +631,7 @@ def test_PlanUnit_settle_plan_WithLevel3AwardLinkAndEmptyAncestorsSetsGroupUnit_
     x_plan.settle_plan()
 
     # THEN
-    x_conceptroot = x_plan.get_concept_obj(to_way(x_plan.vow_label))
+    x_conceptroot = x_plan.get_concept_obj(to_rope(x_plan.vow_label))
     with pytest_raises(Exception) as excinfo:
         x_conceptroot.awardlinks[yao_str]
     assert str(excinfo.value) == f"'{yao_str}'"
@@ -694,7 +694,7 @@ def test_PlanUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkPlanFund():
 
     # THEN
     print(f"{concept_dict.keys()=}")
-    concept_bob = concept_dict.get(to_way(sue_plan.vow_label))
+    concept_bob = concept_dict.get(to_rope(sue_plan.vow_label))
     assert len(concept_bob._awardheirs) == 3
 
     bheir_yao = concept_bob._awardheirs.get(yao_str)
@@ -742,10 +742,10 @@ def test_PlanUnit_settle_plan_CorrectlySetsGroupLinkPlanCredAndDebt():
     sue_awardlink = awardlink_shop(sue_str, 20, take_force=40)
     bob_awardlink = awardlink_shop(bob_str, 10, take_force=5)
     zia_awardlink = awardlink_shop(zia_str, 10, take_force=5)
-    root_way = to_way(yao_plan.vow_label)
-    yao_plan.edit_concept_attr(root_way, awardlink=sue_awardlink)
-    yao_plan.edit_concept_attr(root_way, awardlink=bob_awardlink)
-    yao_plan.edit_concept_attr(root_way, awardlink=zia_awardlink)
+    root_rope = to_rope(yao_plan.vow_label)
+    yao_plan.edit_concept_attr(root_rope, awardlink=sue_awardlink)
+    yao_plan.edit_concept_attr(root_rope, awardlink=bob_awardlink)
+    yao_plan.edit_concept_attr(root_rope, awardlink=zia_awardlink)
 
     sue_acctunit = yao_plan.get_acct(sue_str)
     bob_acctunit = yao_plan.get_acct(bob_str)
@@ -831,7 +831,7 @@ def test_PlanUnit_settle_plan_CorrectlySetsAcctUnitPlan_fund():
     # ESTABLISH
     yao_plan = planunit_shop("Yao")
     swim_str = "swim"
-    swim_way = yao_plan.make_l1_way(swim_str)
+    swim_rope = yao_plan.make_l1_rope(swim_str)
     yao_plan.set_l1_concept(conceptunit_shop(swim_str))
     sue_str = "Sue"
     bob_str = "Bob"
@@ -842,9 +842,9 @@ def test_PlanUnit_settle_plan_CorrectlySetsAcctUnitPlan_fund():
     bl_sue = awardlink_shop(sue_str, 20, take_force=40)
     bl_bob = awardlink_shop(bob_str, 10, take_force=5)
     bl_zia = awardlink_shop(zia_str, 10, take_force=5)
-    yao_plan.get_concept_obj(swim_way).set_awardlink(bl_sue)
-    yao_plan.get_concept_obj(swim_way).set_awardlink(bl_bob)
-    yao_plan.get_concept_obj(swim_way).set_awardlink(bl_zia)
+    yao_plan.get_concept_obj(swim_rope).set_awardlink(bl_sue)
+    yao_plan.get_concept_obj(swim_rope).set_awardlink(bl_bob)
+    yao_plan.get_concept_obj(swim_rope).set_awardlink(bl_zia)
 
     sue_acctunit = yao_plan.get_acct(sue_str)
     bob_acctunit = yao_plan.get_acct(bob_str)
@@ -923,7 +923,7 @@ def test_PlanUnit_settle_plan_CorrectlySetsPartGroupedLWAcctUnitPlan_fund():
     # ESTABLISH
     yao_plan = planunit_shop("Yao")
     swim_str = "swim"
-    swim_way = yao_plan.make_l1_way(swim_str)
+    swim_rope = yao_plan.make_l1_rope(swim_str)
     yao_plan.set_l1_concept(conceptunit_shop(swim_str))
     sue_str = "Sue"
     bob_str = "Bob"
@@ -934,7 +934,7 @@ def test_PlanUnit_settle_plan_CorrectlySetsPartGroupedLWAcctUnitPlan_fund():
     sue_awardlink = awardlink_shop(sue_str, 20, take_force=40)
     bob_awardlink = awardlink_shop(bob_str, 10, take_force=5)
     zia_awardlink = awardlink_shop(zia_str, 10, take_force=5)
-    swim_concept = yao_plan.get_concept_obj(swim_way)
+    swim_concept = yao_plan.get_concept_obj(swim_rope)
     swim_concept.set_awardlink(sue_awardlink)
     swim_concept.set_awardlink(bob_awardlink)
     swim_concept.set_awardlink(zia_awardlink)
@@ -991,7 +991,7 @@ def test_PlanUnit_settle_plan_CreatesNewGroupUnitAndSets_fund_give_fund_take():
     bob_str = "Bob"
     bob_plan = planunit_shop(bob_str)
     swim_str = "swim"
-    swim_way = bob_plan.make_l1_way(swim_str)
+    swim_rope = bob_plan.make_l1_rope(swim_str)
     bob_plan.set_l1_concept(conceptunit_shop(swim_str))
 
     yao_str = "Yao"
@@ -1003,7 +1003,7 @@ def test_PlanUnit_settle_plan_CreatesNewGroupUnitAndSets_fund_give_fund_take():
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_str, give_force=10)
-    swim_concept = bob_plan.get_concept_obj(swim_way)
+    swim_concept = bob_plan.get_concept_obj(swim_rope)
     swim_concept.set_awardlink(yao_awardlink)
     swim_concept.set_awardlink(zia_awardlink)
     swim_concept.set_awardlink(xio_awardlink)
@@ -1111,7 +1111,7 @@ class AwardAgendaMetrics:
     agenda_no_plan_i_sum = 0
     agenda_yes_plan_i_sum = 0
 
-    def set_sums(self, agenda_dict: dict[WayTerm, ConceptUnit]):
+    def set_sums(self, agenda_dict: dict[RopeTerm, ConceptUnit]):
         for agenda_concept in agenda_dict.values():
             self.sum_plan_agenda_share += agenda_concept.get_fund_share()
             if agenda_concept._awardlines == {}:
@@ -1145,8 +1145,8 @@ def test_PlanUnit_agenda_cred_debt_IsCorrectlySet():
 
     # WHEN
     agenda_dict = yao_plan.get_agenda_dict()
-    # for concept_way in yao_plan._concept_dict.keys():
-    #     print(f"{concept_way=}")
+    # for concept_rope in yao_plan._concept_dict.keys():
+    #     print(f"{concept_rope=}")
     # for x_acct in yao_plan.accts.values():
     #     for x_membership in x_acct._memberships.values():
     #         print(f"{x_membership.group_title=}")
@@ -1310,7 +1310,7 @@ def test_PlanUnit_settle_plan_CreatesGroupUnitWith_planunit_v001():
 
     # THEN
     # print(f"{len(concept_dict)=}")
-    db_concept = concept_dict.get(yao_plan.make_l1_way("D&B"))
+    db_concept = concept_dict.get(yao_plan.make_l1_rope("D&B"))
     assert len(db_concept.awardlinks) == 3
     # for concept_key in concept_dict:
     #     print(f"{concept_key=}")

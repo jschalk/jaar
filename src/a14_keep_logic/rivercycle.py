@@ -160,7 +160,7 @@ class RiverGrade:
         return {
             "vow_label": self.hubunit.vow_label,
             "healer_name": self.hubunit.owner_name,
-            "keep_way": self.hubunit.keep_way,
+            "keep_rope": self.hubunit.keep_rope,
             "tax_bill_amount": self.tax_bill_amount,
             "grant_amount": self.grant_amount,
             "debtor_rank_num": self.debtor_rank_num,

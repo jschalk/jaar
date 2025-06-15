@@ -38,7 +38,7 @@
     "idea_category": "plan",
     "jkeys": {
       "awardee_title": {},
-      "concept_way": {},
+      "concept_rope": {},
       "event_int": {},
       "face_name": {},
       "vow_label": {},
@@ -54,7 +54,7 @@
     "build_order": 12,
     "idea_category": "plan",
     "jkeys": {
-      "concept_way": {},
+      "concept_rope": {},
       "event_int": {},
       "face_name": {},
       "fcontext": {},
@@ -72,7 +72,7 @@
     "build_order": 15,
     "idea_category": "plan",
     "jkeys": {
-      "concept_way": {},
+      "concept_rope": {},
       "event_int": {},
       "face_name": {},
       "vow_label": {},
@@ -86,7 +86,7 @@
     "build_order": 14,
     "idea_category": "plan",
     "jkeys": {
-      "concept_way": {},
+      "concept_rope": {},
       "event_int": {},
       "face_name": {},
       "vow_label": {},
@@ -100,7 +100,7 @@
     "build_order": 16,
     "idea_category": "plan",
     "jkeys": {
-      "concept_way": {},
+      "concept_rope": {},
       "event_int": {},
       "face_name": {},
       "vow_label": {},
@@ -119,7 +119,7 @@
     "build_order": 17,
     "idea_category": "plan",
     "jkeys": {
-      "concept_way": {},
+      "concept_rope": {},
       "event_int": {},
       "face_name": {},
       "vow_label": {},
@@ -135,7 +135,7 @@
     "build_order": 18,
     "idea_category": "plan",
     "jkeys": {
-      "concept_way": {},
+      "concept_rope": {},
       "event_int": {},
       "face_name": {},
       "vow_label": {},
@@ -272,7 +272,7 @@
       "vow_label": {}
     },
     "jvalues": {
-      "bridge": {},
+      "knot": {},
       "c400_number": {},
       "fund_iota": {},
       "job_listen_rotations": {},
@@ -293,9 +293,9 @@
       "otx_label": {}
     },
     "jvalues": {
-      "inx_bridge": {},
+      "inx_knot": {},
       "inx_label": {},
-      "otx_bridge": {},
+      "otx_knot": {},
       "unknown_str": {}
     }
   },
@@ -309,9 +309,9 @@
       "otx_name": {}
     },
     "jvalues": {
-      "inx_bridge": {},
+      "inx_knot": {},
       "inx_name": {},
-      "otx_bridge": {},
+      "otx_knot": {},
       "unknown_str": {}
     }
   },
@@ -325,25 +325,25 @@
       "otx_title": {}
     },
     "jvalues": {
-      "inx_bridge": {},
+      "inx_knot": {},
       "inx_title": {},
-      "otx_bridge": {},
+      "otx_knot": {},
       "unknown_str": {}
     }
   },
-  "pidgin_way": {
+  "pidgin_rope": {
     "allowed_crud": "insert_one_time",
     "build_order": 3,
     "idea_category": "pidgin",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "otx_way": {}
+      "otx_rope": {}
     },
     "jvalues": {
-      "inx_bridge": {},
-      "inx_way": {},
-      "otx_bridge": {},
+      "inx_knot": {},
+      "inx_rope": {},
+      "otx_knot": {},
       "unknown_str": {}
     }
   }

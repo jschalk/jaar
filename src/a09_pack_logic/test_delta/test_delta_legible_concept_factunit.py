@@ -1,5 +1,5 @@
 from src.a06_plan_logic._test_util.a06_str import (
-    concept_way_str,
+    concept_rope_str,
     fcontext_str,
     fnigh_str,
     fopen_str,
@@ -21,13 +21,13 @@ def test_create_legible_list_ReturnsObj_concept_factunit_INSERT_WithOutNumberArg
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     dimen = plan_concept_factunit_str()
-    casa_way = sue_plan.make_l1_way("casa")
-    way_value = sue_plan.make_way(casa_way, "clean fridge")
-    casa_way = sue_plan.make_l1_way("casa")
-    fcontext_value = sue_plan.make_way(casa_way, "fridge status")
-    fstate_value = sue_plan.make_way(fcontext_value, "dirty")
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rope_value = sue_plan.make_rope(casa_rope, "clean fridge")
+    casa_rope = sue_plan.make_l1_rope("casa")
+    fcontext_value = sue_plan.make_rope(casa_rope, "fridge status")
+    fstate_value = sue_plan.make_rope(fcontext_value, "dirty")
     swim_planatom = planatom_shop(dimen, INSERT_str())
-    swim_planatom.set_arg(concept_way_str(), way_value)
+    swim_planatom.set_arg(concept_rope_str(), rope_value)
     swim_planatom.set_arg(fcontext_str(), fcontext_value)
     swim_planatom.set_arg(fstate_str(), fstate_value)
     # print(f"{swim_planatom=}")
@@ -38,7 +38,7 @@ def test_create_legible_list_ReturnsObj_concept_factunit_INSERT_WithOutNumberArg
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"FactUnit '{fstate_value}' created for rcontext '{fcontext_value}' for concept '{way_value}'."
+    x_str = f"FactUnit '{fstate_value}' created for rcontext '{fcontext_value}' for concept '{rope_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -47,15 +47,15 @@ def test_create_legible_list_ReturnsObj_concept_factunit_INSERT_WithNumberArgs()
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     dimen = plan_concept_factunit_str()
-    casa_way = sue_plan.make_l1_way("casa")
-    way_value = sue_plan.make_way(casa_way, "clean fridge")
-    casa_way = sue_plan.make_l1_way("casa")
-    rcontext_value = sue_plan.make_way(casa_way, "fridge status")
-    fstate_value = sue_plan.make_way(rcontext_value, "dirty")
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rope_value = sue_plan.make_rope(casa_rope, "clean fridge")
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rcontext_value = sue_plan.make_rope(casa_rope, "fridge status")
+    fstate_value = sue_plan.make_rope(rcontext_value, "dirty")
     fnigh_value = 13
     fopen_value = 17
     swim_planatom = planatom_shop(dimen, INSERT_str())
-    swim_planatom.set_arg(concept_way_str(), way_value)
+    swim_planatom.set_arg(concept_rope_str(), rope_value)
     swim_planatom.set_arg(fcontext_str(), rcontext_value)
     swim_planatom.set_arg(fstate_str(), fstate_value)
     swim_planatom.set_arg(fnigh_str(), fnigh_value)
@@ -68,7 +68,7 @@ def test_create_legible_list_ReturnsObj_concept_factunit_INSERT_WithNumberArgs()
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"FactUnit '{fstate_value}' created for rcontext '{rcontext_value}' for concept '{way_value}'. fopen={fopen_value}. fnigh={fnigh_value}."
+    x_str = f"FactUnit '{fstate_value}' created for rcontext '{rcontext_value}' for concept '{rope_value}'. fopen={fopen_value}. fnigh={fnigh_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -77,13 +77,13 @@ def test_create_legible_list_ReturnsObj_concept_factunit_UPDATE_WithOutNumberArg
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     dimen = plan_concept_factunit_str()
-    casa_way = sue_plan.make_l1_way("casa")
-    way_value = sue_plan.make_way(casa_way, "clean fridge")
-    casa_way = sue_plan.make_l1_way("casa")
-    rcontext_value = sue_plan.make_way(casa_way, "fridge status")
-    fstate_value = sue_plan.make_way(rcontext_value, "dirty")
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rope_value = sue_plan.make_rope(casa_rope, "clean fridge")
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rcontext_value = sue_plan.make_rope(casa_rope, "fridge status")
+    fstate_value = sue_plan.make_rope(rcontext_value, "dirty")
     swim_planatom = planatom_shop(dimen, UPDATE_str())
-    swim_planatom.set_arg(concept_way_str(), way_value)
+    swim_planatom.set_arg(concept_rope_str(), rope_value)
     swim_planatom.set_arg(fcontext_str(), rcontext_value)
     swim_planatom.set_arg(fstate_str(), fstate_value)
     # print(f"{swim_planatom=}")
@@ -94,7 +94,7 @@ def test_create_legible_list_ReturnsObj_concept_factunit_UPDATE_WithOutNumberArg
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"FactUnit '{fstate_value}' updated for rcontext '{rcontext_value}' for concept '{way_value}'."
+    x_str = f"FactUnit '{fstate_value}' updated for rcontext '{rcontext_value}' for concept '{rope_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -103,15 +103,15 @@ def test_create_legible_list_ReturnsObj_concept_factunit_UPDATE_WithNumberArgs()
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     dimen = plan_concept_factunit_str()
-    casa_way = sue_plan.make_l1_way("casa")
-    way_value = sue_plan.make_way(casa_way, "clean fridge")
-    casa_way = sue_plan.make_l1_way("casa")
-    rcontext_value = sue_plan.make_way(casa_way, "fridge status")
-    fstate_value = sue_plan.make_way(rcontext_value, "dirty")
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rope_value = sue_plan.make_rope(casa_rope, "clean fridge")
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rcontext_value = sue_plan.make_rope(casa_rope, "fridge status")
+    fstate_value = sue_plan.make_rope(rcontext_value, "dirty")
     fnigh_value = 13
     fopen_value = 17
     swim_planatom = planatom_shop(dimen, UPDATE_str())
-    swim_planatom.set_arg(concept_way_str(), way_value)
+    swim_planatom.set_arg(concept_rope_str(), rope_value)
     swim_planatom.set_arg(fcontext_str(), rcontext_value)
     swim_planatom.set_arg(fstate_str(), fstate_value)
     swim_planatom.set_arg(fnigh_str(), fnigh_value)
@@ -124,7 +124,7 @@ def test_create_legible_list_ReturnsObj_concept_factunit_UPDATE_WithNumberArgs()
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"FactUnit '{fstate_value}' updated for rcontext '{rcontext_value}' for concept '{way_value}'. fopen={fopen_value}. fnigh={fnigh_value}."
+    x_str = f"FactUnit '{fstate_value}' updated for rcontext '{rcontext_value}' for concept '{rope_value}'. fopen={fopen_value}. fnigh={fnigh_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -133,12 +133,12 @@ def test_create_legible_list_ReturnsObj_concept_factunit_DELETE():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     dimen = plan_concept_factunit_str()
-    casa_way = sue_plan.make_l1_way("casa")
-    way_value = sue_plan.make_way(casa_way, "clean fridge")
-    casa_way = sue_plan.make_l1_way("casa")
-    rcontext_value = sue_plan.make_way(casa_way, "fridge status")
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rope_value = sue_plan.make_rope(casa_rope, "clean fridge")
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rcontext_value = sue_plan.make_rope(casa_rope, "fridge status")
     swim_planatom = planatom_shop(dimen, DELETE_str())
-    swim_planatom.set_arg(concept_way_str(), way_value)
+    swim_planatom.set_arg(concept_rope_str(), rope_value)
     swim_planatom.set_arg(fcontext_str(), rcontext_value)
     # print(f"{swim_planatom=}")
     x_plandelta = plandelta_shop()
@@ -148,6 +148,6 @@ def test_create_legible_list_ReturnsObj_concept_factunit_DELETE():
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"FactUnit rcontext '{rcontext_value}' deleted for concept '{way_value}'."
+    x_str = f"FactUnit rcontext '{rcontext_value}' deleted for concept '{rope_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str

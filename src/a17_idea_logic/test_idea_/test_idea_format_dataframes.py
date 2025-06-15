@@ -1,11 +1,11 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, open_file
-from src.a01_term_logic.way import to_way
+from src.a01_term_logic.rope import to_rope
 from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
-    concept_way_str,
+    concept_rope_str,
     credit_score_str,
     credit_vote_str,
     debt_score_str,
@@ -149,12 +149,12 @@ def test_create_idea_df_Arg_idea_format_00013_conceptunit_v0_0_0():
     accord_vow_label = "accord56"
     sue_planunit = planunit_shop(sue_str, accord_vow_label)
     casa_str = "casa"
-    casa_way = sue_planunit.make_l1_way(casa_str)
+    casa_rope = sue_planunit.make_l1_rope(casa_str)
     casa_mass = 31
     sue_planunit.set_l1_concept(conceptunit_shop(casa_str, mass=casa_mass))
     clean_str = "clean"
-    clean_way = sue_planunit.make_way(casa_way, clean_str)
-    sue_planunit.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
+    clean_rope = sue_planunit.make_rope(casa_rope, clean_str)
+    sue_planunit.set_concept(conceptunit_shop(clean_str, task=True), casa_rope)
 
     # WHEN
     x_idea_name = idea_format_00013_conceptunit_v0_0_0()
@@ -167,13 +167,13 @@ def test_create_idea_df_Arg_idea_format_00013_conceptunit_v0_0_0():
     assert conceptunit_format.loc[0, owner_name_str()] == sue_planunit.owner_name
     assert conceptunit_format.loc[0, task_str()] == ""
     assert conceptunit_format.loc[0, vow_label_str()] == accord_vow_label
-    assert conceptunit_format.loc[0, concept_way_str()] == casa_way
+    assert conceptunit_format.loc[0, concept_rope_str()] == casa_rope
     assert conceptunit_format.loc[0, mass_str()] == casa_mass
 
     assert conceptunit_format.loc[1, owner_name_str()] == sue_planunit.owner_name
     assert conceptunit_format.loc[1, task_str()] == "Yes"
     assert conceptunit_format.loc[1, vow_label_str()] == accord_vow_label
-    assert conceptunit_format.loc[1, concept_way_str()] == clean_way
+    assert conceptunit_format.loc[1, concept_rope_str()] == clean_rope
     assert conceptunit_format.loc[1, mass_str()] == 1
     assert len(conceptunit_format) == 2
 
@@ -262,12 +262,12 @@ def test_save_idea_csv_Arg_idea_format_00013_conceptunit_v0_0_0(
     accord_vow_label = "accord56"
     sue_planunit = planunit_shop(sue_str, accord_vow_label)
     casa_str = "casa"
-    casa_way = sue_planunit.make_l1_way(casa_str)
+    casa_rope = sue_planunit.make_l1_rope(casa_str)
     casa_mass = 31
     sue_planunit.set_l1_concept(conceptunit_shop(casa_str, mass=casa_mass))
     clean_str = "clean"
-    clean_way = sue_planunit.make_way(casa_way, clean_str)
-    sue_planunit.set_concept(conceptunit_shop(clean_str, task=True), casa_way)
+    clean_rope = sue_planunit.make_rope(casa_rope, clean_str)
+    sue_planunit.set_concept(conceptunit_shop(clean_str, task=True), casa_rope)
     x_idea_name = idea_format_00013_conceptunit_v0_0_0()
     conceptunit_format = create_idea_df(sue_planunit, x_idea_name)
     name_filename = f"{sue_str}_conceptunit_example_000.csv"

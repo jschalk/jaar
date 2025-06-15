@@ -1,10 +1,10 @@
 from pytest import raises as pytest_raises
-from src.a01_term_logic.way import default_bridge_if_None
+from src.a01_term_logic.rope import default_knot_if_None
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic._test_util.a16_str import (
-    inx_bridge_str,
+    inx_knot_str,
     otx2inx_str,
-    otx_bridge_str,
+    otx_knot_str,
     unknown_str_str,
 )
 from src.a16_pidgin_logic.map import (
@@ -26,8 +26,8 @@ def test_TitleMap_Exists():
     assert not x_titlemap.event_int
     assert not x_titlemap.otx2inx
     assert not x_titlemap.unknown_str
-    assert not x_titlemap.otx_bridge
-    assert not x_titlemap.inx_bridge
+    assert not x_titlemap.otx_knot
+    assert not x_titlemap.inx_knot
 
 
 def test_titlemap_shop_ReturnsObj_scenario0_NoParameters():
@@ -39,8 +39,8 @@ def test_titlemap_shop_ReturnsObj_scenario0_NoParameters():
     assert x_titlemap.event_int == 0
     assert x_titlemap.otx2inx == {}
     assert x_titlemap.unknown_str == default_unknown_str_if_None()
-    assert x_titlemap.otx_bridge == default_bridge_if_None()
-    assert x_titlemap.inx_bridge == default_bridge_if_None()
+    assert x_titlemap.otx_knot == default_knot_if_None()
+    assert x_titlemap.inx_knot == default_knot_if_None()
 
 
 def test_titlemap_shop_ReturnsObj_scenario1_WithParameters():
@@ -51,8 +51,8 @@ def test_titlemap_shop_ReturnsObj_scenario1_WithParameters():
     event7 = 7
     otx2inx = {xio_str: sue_str}
     x_unknown_str = "UnknownTerm"
-    slash_otx_bridge = "/"
-    colon_inx_bridge = ":"
+    slash_otx_knot = "/"
+    colon_inx_knot = ":"
 
     # WHEN
     x_titlemap = titlemap_shop(
@@ -60,8 +60,8 @@ def test_titlemap_shop_ReturnsObj_scenario1_WithParameters():
         event_int=event7,
         otx2inx=otx2inx,
         unknown_str=x_unknown_str,
-        otx_bridge=slash_otx_bridge,
-        inx_bridge=colon_inx_bridge,
+        otx_knot=slash_otx_knot,
+        inx_knot=colon_inx_knot,
     )
 
     # THEN
@@ -69,8 +69,8 @@ def test_titlemap_shop_ReturnsObj_scenario1_WithParameters():
     assert x_titlemap.event_int == event7
     assert x_titlemap.otx2inx == otx2inx
     assert x_titlemap.unknown_str == x_unknown_str
-    assert x_titlemap.otx_bridge == slash_otx_bridge
-    assert x_titlemap.inx_bridge == colon_inx_bridge
+    assert x_titlemap.otx_knot == slash_otx_knot
+    assert x_titlemap.inx_knot == colon_inx_knot
 
 
 def test_titlemap_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_float_nan():
@@ -88,8 +88,8 @@ def test_titlemap_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_fl
         event_int=event7,
         otx2inx=otx2inx,
         unknown_str=x_nan,
-        otx_bridge=x_nan,
-        inx_bridge=x_nan,
+        otx_knot=x_nan,
+        inx_knot=x_nan,
     )
 
     # THEN
@@ -97,8 +97,8 @@ def test_titlemap_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_fl
     assert x_titlemap.event_int == event7
     assert x_titlemap.otx2inx == otx2inx
     assert x_titlemap.unknown_str == default_unknown_str_if_None()
-    assert x_titlemap.otx_bridge == default_bridge_if_None()
-    assert x_titlemap.inx_bridge == default_bridge_if_None()
+    assert x_titlemap.otx_knot == default_knot_if_None()
+    assert x_titlemap.inx_knot == default_knot_if_None()
 
 
 def test_TitleMap_set_all_otx2inx_SetsAttr():
@@ -275,16 +275,16 @@ def test_TitleMap_unknown_str_in_otx2inx_ReturnsObj():
 
 def test_TitleMap_reveal_inx_ReturnsObjAndSetsAttr_group_title():
     # ESTABLISH
-    inx_r_bridge = ":"
-    otx_r_bridge = "/"
-    swim_otx = f"swim{otx_r_bridge}"
-    climb_otx = f"climb{otx_r_bridge}_{inx_r_bridge}"
-    x_titlemap = titlemap_shop(otx_bridge=otx_r_bridge, inx_bridge=inx_r_bridge)
+    inx_r_knot = ":"
+    otx_r_knot = "/"
+    swim_otx = f"swim{otx_r_knot}"
+    climb_otx = f"climb{otx_r_knot}_{inx_r_knot}"
+    x_titlemap = titlemap_shop(otx_knot=otx_r_knot, inx_knot=inx_r_knot)
     x_titlemap.otx_exists(swim_otx) is False
     x_titlemap.otx_exists(climb_otx) is False
 
     # WHEN
-    swim_inx = f"swim{inx_r_bridge}"
+    swim_inx = f"swim{inx_r_knot}"
     assert x_titlemap.reveal_inx(swim_otx) == swim_inx
 
     # THEN
@@ -304,35 +304,35 @@ def test_TitleMap_get_dict_ReturnsObj():
     clean_otx = "clean"
     clean_inx = "propre"
     sue_str = "Sue"
-    slash_otx_bridge = "/"
-    colon_inx_bridge = ":"
+    slash_otx_knot = "/"
+    colon_inx_knot = ":"
     x_titlemap = titlemap_shop(
-        otx_bridge=slash_otx_bridge,
-        inx_bridge=colon_inx_bridge,
+        otx_knot=slash_otx_knot,
+        inx_knot=colon_inx_knot,
         face_name=sue_str,
     )
-    x1_way_map_dict = {
-        otx_bridge_str(): x_titlemap.otx_bridge,
-        inx_bridge_str(): x_titlemap.inx_bridge,
+    x1_rope_map_dict = {
+        otx_knot_str(): x_titlemap.otx_knot,
+        inx_knot_str(): x_titlemap.inx_knot,
         unknown_str_str(): x_titlemap.unknown_str,
         otx2inx_str(): {},
         event_int_str(): x_titlemap.event_int,
         face_name_str(): x_titlemap.face_name,
     }
-    assert x_titlemap.get_dict() == x1_way_map_dict
+    assert x_titlemap.get_dict() == x1_rope_map_dict
 
     # WHEN
     x_titlemap.set_otx2inx(clean_otx, clean_inx)
     # THEN
-    x2_way_map_dict = {
-        otx_bridge_str(): x_titlemap.otx_bridge,
-        inx_bridge_str(): x_titlemap.inx_bridge,
+    x2_rope_map_dict = {
+        otx_knot_str(): x_titlemap.otx_knot,
+        inx_knot_str(): x_titlemap.inx_knot,
         unknown_str_str(): x_titlemap.unknown_str,
         otx2inx_str(): {clean_otx: clean_inx},
         event_int_str(): x_titlemap.event_int,
         face_name_str(): sue_str,
     }
-    assert x_titlemap.get_dict() == x2_way_map_dict
+    assert x_titlemap.get_dict() == x2_rope_map_dict
 
 
 def test_TitleMap_get_json_ReturnsObj():
@@ -343,37 +343,37 @@ def test_TitleMap_get_json_ReturnsObj():
     casa_otx = "casa1"
     casa_inx = "casa2"
     event7 = 7
-    slash_otx_bridge = "/"
-    x_titlemap = titlemap_shop(sue_str, otx_bridge=slash_otx_bridge)
-    x1_way_map_json = f"""{{
+    slash_otx_knot = "/"
+    x_titlemap = titlemap_shop(sue_str, otx_knot=slash_otx_knot)
+    x1_rope_map_json = f"""{{
   "{event_int_str()}": 0,
   "{face_name_str()}": "{sue_str}",
-  "{inx_bridge_str()}": "{x_titlemap.inx_bridge}",
+  "{inx_knot_str()}": "{x_titlemap.inx_knot}",
   "{otx2inx_str()}": {{}},
-  "{otx_bridge_str()}": "{x_titlemap.otx_bridge}",
+  "{otx_knot_str()}": "{x_titlemap.otx_knot}",
   "{unknown_str_str()}": "{x_titlemap.unknown_str}"
 }}"""
-    print(f"           {x1_way_map_json=}")
+    print(f"           {x1_rope_map_json=}")
     print(f"{x_titlemap.get_json()=}")
-    assert x_titlemap.get_json() == x1_way_map_json
+    assert x_titlemap.get_json() == x1_rope_map_json
 
     # WHEN
     x_titlemap.set_otx2inx(clean_otx, clean_inx)
     x_titlemap.event_int = event7
     # THEN
-    x2_way_map_json = f"""{{
+    x2_rope_map_json = f"""{{
   "{event_int_str()}": {event7},
   "{face_name_str()}": "{sue_str}",
-  "{inx_bridge_str()}": "{x_titlemap.inx_bridge}",
+  "{inx_knot_str()}": "{x_titlemap.inx_knot}",
   "{otx2inx_str()}": {{
     "{clean_otx}": "{clean_inx}"
   }},
-  "{otx_bridge_str()}": "{x_titlemap.otx_bridge}",
+  "{otx_knot_str()}": "{x_titlemap.otx_knot}",
   "{unknown_str_str()}": "{x_titlemap.unknown_str}"
 }}"""
-    print(f"           {x2_way_map_json=}")
+    print(f"           {x2_rope_map_json=}")
     print(f"{x_titlemap.get_json()=}")
-    assert x_titlemap.get_json() == x2_way_map_json
+    assert x_titlemap.get_json() == x2_rope_map_json
 
 
 def test_get_titlemap_from_dict_ReturnsObj():
@@ -382,8 +382,8 @@ def test_get_titlemap_from_dict_ReturnsObj():
     clean_otx = "clean"
     clean_inx = "propre"
     event7 = 7
-    slash_otx_bridge = "/"
-    x_titlemap = titlemap_shop(sue_str, event7, otx_bridge=slash_otx_bridge)
+    slash_otx_knot = "/"
+    x_titlemap = titlemap_shop(sue_str, event7, otx_knot=slash_otx_knot)
     x_titlemap.set_otx2inx(clean_otx, clean_inx)
 
     # WHEN
@@ -400,8 +400,8 @@ def test_get_titlemap_from_json_ReturnsObj():
     # ESTABLISH
     clean_otx = "clean"
     clean_inx = "propre"
-    slash_otx_bridge = "/"
-    x_titlemap = titlemap_shop(slash_otx_bridge)
+    slash_otx_knot = "/"
+    x_titlemap = titlemap_shop(slash_otx_knot)
     x_titlemap.set_otx2inx(clean_otx, clean_inx)
 
     # WHEN
@@ -411,57 +411,57 @@ def test_get_titlemap_from_json_ReturnsObj():
     assert x_titlemap == x_titlemap
 
 
-def test_TitleMap_is_inx_bridge_inclusion_correct_ReturnsObj():
+def test_TitleMap_is_inx_knot_inclusion_correct_ReturnsObj():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
-    inx_bridge = "/"
+    inx_knot = "/"
     zia_otx = "Zia"
-    zia_inx = f"Zia{inx_bridge}"
-    x_titlemap = titlemap_shop(inx_bridge=inx_bridge)
-    assert x_titlemap._is_inx_bridge_inclusion_correct()
+    zia_inx = f"Zia{inx_knot}"
+    x_titlemap = titlemap_shop(inx_knot=inx_knot)
+    assert x_titlemap._is_inx_knot_inclusion_correct()
 
     # WHEN
     x_titlemap.set_otx2inx(zia_otx, zia_inx)
     # THEN
-    assert x_titlemap._is_inx_bridge_inclusion_correct()
+    assert x_titlemap._is_inx_knot_inclusion_correct()
 
     # WHEN
     x_titlemap.set_otx2inx(xio_str, sue_str)
     # THEN
-    assert x_titlemap._is_inx_bridge_inclusion_correct() is False
+    assert x_titlemap._is_inx_knot_inclusion_correct() is False
 
 
-def test_TitleMap_is_otx_bridge_inclusion_correct_ReturnsObj():
+def test_TitleMap_is_otx_knot_inclusion_correct_ReturnsObj():
     # ESTABLISH
     xio_str = "Xio"
     sue_str = "Sue"
-    otx_bridge = "/"
+    otx_knot = "/"
     zia_inx = "Zia"
-    zia_otx = f"Zia{otx_bridge}"
-    x_titlemap = titlemap_shop(otx_bridge=otx_bridge)
-    assert x_titlemap._is_otx_bridge_inclusion_correct()
+    zia_otx = f"Zia{otx_knot}"
+    x_titlemap = titlemap_shop(otx_knot=otx_knot)
+    assert x_titlemap._is_otx_knot_inclusion_correct()
 
     # WHEN
     x_titlemap.set_otx2inx(zia_otx, zia_inx)
     # THEN
-    assert x_titlemap._is_otx_bridge_inclusion_correct()
+    assert x_titlemap._is_otx_knot_inclusion_correct()
 
     # WHEN
     x_titlemap.set_otx2inx(xio_str, sue_str)
     # THEN
-    assert x_titlemap._is_otx_bridge_inclusion_correct() is False
+    assert x_titlemap._is_otx_knot_inclusion_correct() is False
 
 
 def test_TitleMap_is_valid_ReturnsObj():
     # ESTABLISH
-    otx_bridge = ":"
-    inx_bridge = "/"
-    sue_otx = f"Xio{otx_bridge}"
-    sue_inx = f"Sue{inx_bridge}"
+    otx_knot = ":"
+    inx_knot = "/"
+    sue_otx = f"Xio{otx_knot}"
+    sue_inx = f"Sue{inx_knot}"
     zia_otx = "Zia"
-    zia_inx = f"Zia{inx_bridge}"
-    x_titlemap = titlemap_shop(otx_bridge=otx_bridge, inx_bridge=inx_bridge)
+    zia_inx = f"Zia{inx_knot}"
+    x_titlemap = titlemap_shop(otx_knot=otx_knot, inx_knot=inx_knot)
     assert x_titlemap.is_valid()
 
     # WHEN
@@ -488,11 +488,11 @@ def test_inherit_titlemap_ReturnsObj_Scenario0():
     assert new_titlemap == titlemap_shop(zia_str, 5)
 
 
-def test_inherit_titlemap_ReturnsObj_Scenario1_RaiseErrorWhenDifferent_otx_bridge():
+def test_inherit_titlemap_ReturnsObj_Scenario1_RaiseErrorWhenDifferent_otx_knot():
     # ESTABLISH
     sue_str = "Sue"
-    slash_otx_bridge = "/"
-    old_titlemap = titlemap_shop(sue_str, 0, otx_bridge=slash_otx_bridge)
+    slash_otx_knot = "/"
+    old_titlemap = titlemap_shop(sue_str, 0, otx_knot=slash_otx_knot)
     new_titlemap = titlemap_shop(sue_str, 1)
 
     with pytest_raises(Exception) as excinfo:
@@ -500,11 +500,11 @@ def test_inherit_titlemap_ReturnsObj_Scenario1_RaiseErrorWhenDifferent_otx_bridg
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
-def test_inherit_titlemap_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_bridge():
+def test_inherit_titlemap_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_knot():
     # ESTABLISH
     sue_str = "Sue"
-    slash_otx_bridge = "/"
-    old_titlemap = titlemap_shop(sue_str, 0, inx_bridge=slash_otx_bridge)
+    slash_otx_knot = "/"
+    old_titlemap = titlemap_shop(sue_str, 0, inx_knot=slash_otx_knot)
     new_titlemap = titlemap_shop(sue_str, 1)
 
     with pytest_raises(Exception) as excinfo:

@@ -6,7 +6,7 @@ from src.a06_plan_logic._test_util.a06_str import (
     addin_str,
     begin_str,
     close_str,
-    concept_way_str,
+    concept_rope_str,
     credit_score_str,
     credit_vote_str,
     debt_score_str,
@@ -130,7 +130,7 @@ def test_get_sorted_headers_str_ReturnsObj():
 
     # THEN
     print(f"{br00019_headers=}")
-    concept_headers_str = "vow_label,owner_name,concept_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want"
+    concept_headers_str = "vow_label,owner_name,concept_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want"
     assert br00019_headers == concept_headers_str
 
 
@@ -167,7 +167,7 @@ def test__generate_idea_dataframe_ReturnsObj():
 
 
 def for_all_ideas__generate_idea_dataframe():
-    # Catching bway exceptions can make debugging difficult. Consider catching more specific exceptions or at least logging the exception details.
+    # Catching brope exceptions can make debugging difficult. Consider catching more specific exceptions or at least logging the exception details.
     empty_d2 = []
     for x_filename in get_idea_format_filenames():
         try:
@@ -259,7 +259,7 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00013_conceptunit_v0_0_0():
     assert headers_list[1] == face_name_str()
     assert headers_list[2] == vow_label_str()
     assert headers_list[3] == owner_name_str()
-    assert headers_list[4] == concept_way_str()
+    assert headers_list[4] == concept_rope_str()
     assert headers_list[5] == mass_str()
     assert headers_list[6] == task_str()
 
@@ -278,7 +278,7 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00019_conceptunit_v0_0_0():
     assert headers_list[1] == face_name_str()
     assert headers_list[2] == vow_label_str()
     assert headers_list[3] == owner_name_str()
-    assert headers_list[4] == concept_way_str()
+    assert headers_list[4] == concept_rope_str()
     assert headers_list[5] == begin_str()
     assert headers_list[6] == close_str()
     assert headers_list[7] == addin_str()

@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.file_toolbox import create_path, save_file
-from src.a01_term_logic.way import default_bridge_if_None
-from src.a02_finance_logic._test_util.a02_str import bridge_str, vow_label_str
+from src.a01_term_logic.rope import default_knot_if_None
+from src.a02_finance_logic._test_util.a02_str import knot_str, vow_label_str
 from src.a02_finance_logic.finance_config import (
     default_fund_iota_if_None,
     default_RespectBit_if_None,
@@ -69,7 +69,7 @@ def test_VowUnit_get_dict_ReturnsObjWith_paybook():
     assert x_dict.get(vow_label_str()) == a45_str
     assert x_dict.get(timeline_str()) == get_default_timeline_config_dict()
     assert x_dict.get(offi_times_str) == list(a45_offi_times)
-    assert x_dict.get(bridge_str()) == default_bridge_if_None()
+    assert x_dict.get(knot_str()) == default_knot_if_None()
     assert x_dict.get(fund_iota_str()) == default_fund_iota_if_None()
     assert x_dict.get(respect_bit_str()) == default_RespectBit_if_None()
     assert x_dict.get(penny_str()) == filter_penny()
@@ -80,7 +80,7 @@ def test_VowUnit_get_dict_ReturnsObjWith_paybook():
         timeline_str(),
         offi_times_str,
         brokerunits_str(),
-        bridge_str(),
+        knot_str(),
         fund_iota_str(),
         respect_bit_str(),
         penny_str(),
@@ -103,7 +103,7 @@ def test_VowUnit_get_dict_ReturnsObjWithOut_paybook():
         timeline_str(),
         f"{offi_time_str()}s",
         brokerunits_str(),
-        bridge_str(),
+        knot_str(),
         fund_iota_str(),
         respect_bit_str(),
         penny_str(),
@@ -142,7 +142,7 @@ def test_get_from_dict_ReturnsVowUnit_Scenario0_WithParameters():
     accord_vow = vowunit_shop(accord45_str, offi_times=a45_offi_times)
     sue_timeline_label = "sue casa"
     accord_vow.timeline.timeline_label = sue_timeline_label
-    sue_bridge = "/"
+    sue_knot = "/"
     sue_fund_iota = 0.3
     sue_respect_bit = 2
     sue_penny = 3
@@ -159,7 +159,7 @@ def test_get_from_dict_ReturnsVowUnit_Scenario0_WithParameters():
     accord_vow.add_dealunit(bob_str, bob_x0_deal_time, bob_x0_quota)
     accord_vow.add_dealunit(sue_str, sue_x4_deal_time, sue_x4_quota)
     accord_vow.add_dealunit(sue_str, sue_x7_deal_time, sue_x7_quota)
-    accord_vow.bridge = sue_bridge
+    accord_vow.knot = sue_knot
     accord_vow.fund_iota = sue_fund_iota
     accord_vow.respect_bit = sue_respect_bit
     accord_vow.penny = sue_penny
@@ -178,7 +178,7 @@ def test_get_from_dict_ReturnsVowUnit_Scenario0_WithParameters():
     assert x_vow.vow_label == accord45_str
     assert x_vow.timeline.timeline_label == sue_timeline_label
     assert x_vow.offi_times == a45_offi_times
-    assert x_vow.bridge == sue_bridge
+    assert x_vow.knot == sue_knot
     assert x_vow.fund_iota == sue_fund_iota
     assert x_vow.respect_bit == sue_respect_bit
     assert x_vow.penny == sue_penny
@@ -196,7 +196,7 @@ def test_get_from_dict_ReturnsVowUnit_Scenario1_WithOutParameters():
     accord_vow = vowunit_shop(accord45_str)
     x_dict = accord_vow.get_dict()
     x_dict["timeline"] = {}
-    x_dict.pop("bridge")
+    x_dict.pop("knot")
     x_dict.pop("fund_iota")
     x_dict.pop("respect_bit")
     x_dict.pop("penny")
@@ -210,7 +210,7 @@ def test_get_from_dict_ReturnsVowUnit_Scenario1_WithOutParameters():
     print(f"   {accord_vow.timeline=}")
     assert generated_vow.timeline == accord_vow.timeline
     assert generated_vow.offi_times == set()
-    assert generated_vow.bridge == default_bridge_if_None()
+    assert generated_vow.knot == default_knot_if_None()
     assert generated_vow.fund_iota == default_fund_iota_if_None()
     assert generated_vow.respect_bit == default_RespectBit_if_None()
     assert generated_vow.penny == 1
@@ -227,7 +227,7 @@ def test_get_from_json_ReturnsVowUnit():
     sue_timeline_label = "sue casa"
     accord_vow.timeline.timeline_label = sue_timeline_label
     sue_offi_time_max = 23
-    sue_bridge = "/"
+    sue_knot = "/"
     sue_fund_iota = 0.3
     sue_respect_bit = 2
     sue_penny = 3
@@ -242,7 +242,7 @@ def test_get_from_json_ReturnsVowUnit():
     accord_vow.add_dealunit(bob_str, bob_x0_deal_time, bob_x0_quota)
     accord_vow.add_dealunit(sue_str, sue_x4_deal_time, sue_x4_quota)
     accord_vow.add_dealunit(sue_str, sue_x7_deal_time, sue_x7_quota)
-    accord_vow.bridge = sue_bridge
+    accord_vow.knot = sue_knot
     accord_vow.fund_iota = sue_fund_iota
     accord_vow.respect_bit = sue_respect_bit
     accord_vow.penny = sue_penny
@@ -254,7 +254,7 @@ def test_get_from_json_ReturnsVowUnit():
     # THEN
     assert x_vow.vow_label == accord45_str
     assert x_vow.timeline.timeline_label == sue_timeline_label
-    assert x_vow.bridge == sue_bridge
+    assert x_vow.knot == sue_knot
     assert x_vow.fund_iota == sue_fund_iota
     assert x_vow.respect_bit == sue_respect_bit
     assert x_vow.penny == sue_penny

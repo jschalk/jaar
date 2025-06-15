@@ -12,7 +12,7 @@ from src.a06_plan_logic._test_util.a06_str import (
     awardee_title_str,
     begin_str,
     close_str,
-    concept_way_str,
+    concept_rope_str,
     fcontext_str,
     fnigh_str,
     fopen_str,
@@ -368,21 +368,21 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_delete()
     sue_str = "Sue"
     before_sue_plan = planunit_shop(sue_str)
     sports_str = "sports"
-    sports_way = before_sue_plan.make_l1_way(sports_str)
+    sports_rope = before_sue_plan.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_plan.make_way(sports_way, ball_str)
-    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_way)
+    ball_rope = before_sue_plan.make_rope(sports_rope, ball_str)
+    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_rope)
     street_str = "street ball"
-    street_way = before_sue_plan.make_way(ball_way, street_str)
-    before_sue_plan.set_concept(conceptunit_shop(street_str), ball_way)
+    street_rope = before_sue_plan.make_rope(ball_rope, street_str)
+    before_sue_plan.set_concept(conceptunit_shop(street_str), ball_rope)
     disc_str = "Ultimate Disc"
-    disc_way = before_sue_plan.make_way(sports_way, disc_str)
+    disc_rope = before_sue_plan.make_rope(sports_rope, disc_str)
     accord45_str = "accord45"
     before_sue_plan.set_l1_concept(conceptunit_shop(accord45_str))
-    before_sue_plan.set_concept(conceptunit_shop(disc_str), sports_way)
+    before_sue_plan.set_concept(conceptunit_shop(disc_str), sports_rope)
     # create after without ball_concept and street_concept
     after_sue_plan = copy_deepcopy(before_sue_plan)
-    after_sue_plan.del_concept_obj(ball_way)
+    after_sue_plan.del_concept_obj(ball_rope)
 
     # WHEN
     sue_plandelta = plandelta_shop()
@@ -392,13 +392,13 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_delete()
     x_dimen = plan_conceptunit_str()
     print(f"{sue_plandelta.planatoms.get(DELETE_str()).get(x_dimen).keys()=}")
 
-    x_keylist = [DELETE_str(), plan_conceptunit_str(), street_way]
+    x_keylist = [DELETE_str(), plan_conceptunit_str(), street_rope]
     street_planatom = get_from_nested_dict(sue_plandelta.planatoms, x_keylist)
-    assert street_planatom.get_value(concept_way_str()) == street_way
+    assert street_planatom.get_value(concept_rope_str()) == street_rope
 
-    x_keylist = [DELETE_str(), plan_conceptunit_str(), ball_way]
+    x_keylist = [DELETE_str(), plan_conceptunit_str(), ball_rope]
     ball_planatom = get_from_nested_dict(sue_plandelta.planatoms, x_keylist)
-    assert ball_planatom.get_value(concept_way_str()) == ball_way
+    assert ball_planatom.get_value(concept_rope_str()) == ball_rope
 
     print(f"{get_planatom_total_count(sue_plandelta)=}")
     assert get_planatom_total_count(sue_plandelta) == 2
@@ -409,24 +409,24 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_insert()
     sue_str = "Sue"
     before_sue_plan = planunit_shop(sue_str)
     sports_str = "sports"
-    sports_way = before_sue_plan.make_l1_way(sports_str)
+    sports_rope = before_sue_plan.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_plan.make_way(sports_way, ball_str)
-    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_way)
+    ball_rope = before_sue_plan.make_rope(sports_rope, ball_str)
+    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_rope)
     street_str = "street ball"
-    street_way = before_sue_plan.make_way(ball_way, street_str)
-    before_sue_plan.set_concept(conceptunit_shop(street_str), ball_way)
+    street_rope = before_sue_plan.make_rope(ball_rope, street_str)
+    before_sue_plan.set_concept(conceptunit_shop(street_str), ball_rope)
 
     after_sue_plan = copy_deepcopy(before_sue_plan)
     disc_str = "Ultimate Disc"
-    disc_way = after_sue_plan.make_way(sports_way, disc_str)
-    after_sue_plan.set_concept(conceptunit_shop(disc_str), sports_way)
+    disc_rope = after_sue_plan.make_rope(sports_rope, disc_str)
+    after_sue_plan.set_concept(conceptunit_shop(disc_str), sports_rope)
     accord45_str = "accord45"
     accord_begin = 34
     accord_close = 78
     accord_mass = 55
     accord_task = True
-    accord_way = after_sue_plan.make_l1_way(accord45_str)
+    accord_rope = after_sue_plan.make_l1_rope(accord45_str)
     after_sue_plan.set_l1_concept(
         conceptunit_shop(
             accord45_str,
@@ -444,14 +444,14 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_insert()
     # THEN
     print_planatom_keys(sue_plandelta)
 
-    x_keylist = [INSERT_str(), plan_conceptunit_str(), disc_way]
+    x_keylist = [INSERT_str(), plan_conceptunit_str(), disc_rope]
     street_planatom = get_from_nested_dict(sue_plandelta.planatoms, x_keylist)
-    assert street_planatom.get_value(concept_way_str()) == disc_way
+    assert street_planatom.get_value(concept_rope_str()) == disc_rope
 
-    a45_way = after_sue_plan.make_l1_way(accord45_str)
-    x_keylist = [INSERT_str(), plan_conceptunit_str(), a45_way]
+    a45_rope = after_sue_plan.make_l1_rope(accord45_str)
+    x_keylist = [INSERT_str(), plan_conceptunit_str(), a45_rope]
     ball_planatom = get_from_nested_dict(sue_plandelta.planatoms, x_keylist)
-    assert ball_planatom.get_value(concept_way_str()) == a45_way
+    assert ball_planatom.get_value(concept_rope_str()) == a45_rope
     assert ball_planatom.get_value(begin_str()) == accord_begin
     assert ball_planatom.get_value(close_str()) == accord_close
     assert ball_planatom.get_value(mass_str()) == accord_mass
@@ -465,14 +465,14 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_update()
     sue_str = "Sue"
     before_sue_plan = planunit_shop(sue_str)
     sports_str = "sports"
-    sports_way = before_sue_plan.make_l1_way(sports_str)
+    sports_rope = before_sue_plan.make_l1_rope(sports_str)
     accord45_str = "accord45"
-    accord45_way = before_sue_plan.make_l1_way(accord45_str)
+    accord45_rope = before_sue_plan.make_l1_rope(accord45_str)
     before_accord_begin = 34
     before_accord_close = 78
     before_accord_mass = 55
     before_accord_task = True
-    accord_way = before_sue_plan.make_l1_way(accord45_str)
+    accord_rope = before_sue_plan.make_l1_rope(accord45_str)
     before_sue_plan.set_l1_concept(
         conceptunit_shop(
             accord45_str,
@@ -489,7 +489,7 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_update()
     after_accord_mass = 22
     after_accord_task = False
     after_sue_plan.edit_concept_attr(
-        accord_way,
+        accord_rope,
         begin=after_accord_begin,
         close=after_accord_close,
         mass=after_accord_mass,
@@ -503,9 +503,9 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_update()
     # THEN
     print_planatom_keys(sue_plandelta)
 
-    x_keylist = [UPDATE_str(), plan_conceptunit_str(), accord45_way]
+    x_keylist = [UPDATE_str(), plan_conceptunit_str(), accord45_rope]
     ball_planatom = get_from_nested_dict(sue_plandelta.planatoms, x_keylist)
-    assert ball_planatom.get_value(concept_way_str()) == accord45_way
+    assert ball_planatom.get_value(concept_rope_str()) == accord45_rope
     assert ball_planatom.get_value(begin_str()) == after_accord_begin
     assert ball_planatom.get_value(close_str()) == after_accord_close
     assert ball_planatom.get_value(mass_str()) == after_accord_mass
@@ -535,20 +535,20 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_awardlin
     zia_acctunit.add_membership(fly_str)
     bob_acctunit.add_membership(fly_str)
     sports_str = "sports"
-    sports_way = before_sue_au.make_l1_way(sports_str)
+    sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_au.make_way(sports_way, ball_str)
+    ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
     disc_str = "Ultimate Disc"
-    disc_way = before_sue_au.make_way(sports_way, disc_str)
-    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_way)
-    before_sue_au.set_concept(conceptunit_shop(disc_str), sports_way)
-    before_sue_au.edit_concept_attr(ball_way, awardlink=awardlink_shop(run_str))
-    before_sue_au.edit_concept_attr(ball_way, awardlink=awardlink_shop(fly_str))
-    before_sue_au.edit_concept_attr(disc_way, awardlink=awardlink_shop(run_str))
-    before_sue_au.edit_concept_attr(disc_way, awardlink=awardlink_shop(fly_str))
+    disc_rope = before_sue_au.make_rope(sports_rope, disc_str)
+    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_sue_au.set_concept(conceptunit_shop(disc_str), sports_rope)
+    before_sue_au.edit_concept_attr(ball_rope, awardlink=awardlink_shop(run_str))
+    before_sue_au.edit_concept_attr(ball_rope, awardlink=awardlink_shop(fly_str))
+    before_sue_au.edit_concept_attr(disc_rope, awardlink=awardlink_shop(run_str))
+    before_sue_au.edit_concept_attr(disc_rope, awardlink=awardlink_shop(fly_str))
 
     after_sue_plan = copy_deepcopy(before_sue_au)
-    after_sue_plan.edit_concept_attr(disc_way, awardlink_del=run_str)
+    after_sue_plan.edit_concept_attr(disc_rope, awardlink_del=run_str)
 
     # WHEN
     sue_plandelta = plandelta_shop()
@@ -557,9 +557,9 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_awardlin
     # THEN
     print(f"{print_planatom_keys(sue_plandelta)=}")
 
-    x_keylist = [DELETE_str(), plan_concept_awardlink_str(), disc_way, run_str]
+    x_keylist = [DELETE_str(), plan_concept_awardlink_str(), disc_rope, run_str]
     run_planatom = get_from_nested_dict(sue_plandelta.planatoms, x_keylist)
-    assert run_planatom.get_value(concept_way_str()) == disc_way
+    assert run_planatom.get_value(concept_rope_str()) == disc_rope
     assert run_planatom.get_value(awardee_title_str()) == run_str
 
     assert get_planatom_total_count(sue_plandelta) == 1
@@ -586,21 +586,21 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_awardlin
     zia_acctunit.add_membership(fly_str)
     bob_acctunit.add_membership(fly_str)
     sports_str = "sports"
-    sports_way = before_sue_au.make_l1_way(sports_str)
+    sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_au.make_way(sports_way, ball_str)
+    ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
     disc_str = "Ultimate Disc"
-    disc_way = before_sue_au.make_way(sports_way, disc_str)
-    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_way)
-    before_sue_au.set_concept(conceptunit_shop(disc_str), sports_way)
-    before_sue_au.edit_concept_attr(ball_way, awardlink=awardlink_shop(run_str))
-    before_sue_au.edit_concept_attr(disc_way, awardlink=awardlink_shop(fly_str))
+    disc_rope = before_sue_au.make_rope(sports_rope, disc_str)
+    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_sue_au.set_concept(conceptunit_shop(disc_str), sports_rope)
+    before_sue_au.edit_concept_attr(ball_rope, awardlink=awardlink_shop(run_str))
+    before_sue_au.edit_concept_attr(disc_rope, awardlink=awardlink_shop(fly_str))
     after_sue_au = copy_deepcopy(before_sue_au)
-    after_sue_au.edit_concept_attr(ball_way, awardlink=awardlink_shop(fly_str))
+    after_sue_au.edit_concept_attr(ball_rope, awardlink=awardlink_shop(fly_str))
     after_run_give_force = 44
     after_run_take_force = 66
     x_awardlink = awardlink_shop(run_str, after_run_give_force, after_run_take_force)
-    after_sue_au.edit_concept_attr(disc_way, awardlink=x_awardlink)
+    after_sue_au.edit_concept_attr(disc_rope, awardlink=x_awardlink)
 
     # WHEN
     sue_plandelta = plandelta_shop()
@@ -609,11 +609,11 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_awardlin
     # THEN
     print(f"{print_planatom_keys(sue_plandelta)=}")
 
-    x_keylist = [INSERT_str(), plan_concept_awardlink_str(), disc_way, run_str]
+    x_keylist = [INSERT_str(), plan_concept_awardlink_str(), disc_rope, run_str]
     run_planatom = get_from_nested_dict(sue_plandelta.planatoms, x_keylist)
-    assert run_planatom.get_value(concept_way_str()) == disc_way
+    assert run_planatom.get_value(concept_rope_str()) == disc_rope
     assert run_planatom.get_value(awardee_title_str()) == run_str
-    assert run_planatom.get_value(concept_way_str()) == disc_way
+    assert run_planatom.get_value(concept_rope_str()) == disc_rope
     assert run_planatom.get_value(awardee_title_str()) == run_str
     assert run_planatom.get_value(give_force_str()) == after_run_give_force
     assert run_planatom.get_value(take_force_str()) == after_run_take_force
@@ -633,18 +633,18 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_awardlin
     run_str = ";runners"
     xio_acctunit.add_membership(run_str)
     sports_str = "sports"
-    sports_way = before_sue_au.make_l1_way(sports_str)
+    sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_au.make_way(sports_way, ball_str)
-    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_way)
-    before_sue_au.edit_concept_attr(ball_way, awardlink=awardlink_shop(run_str))
-    run_awardlink = before_sue_au.get_concept_obj(ball_way).awardlinks.get(run_str)
+    ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
+    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_sue_au.edit_concept_attr(ball_rope, awardlink=awardlink_shop(run_str))
+    run_awardlink = before_sue_au.get_concept_obj(ball_rope).awardlinks.get(run_str)
 
     after_sue_plan = copy_deepcopy(before_sue_au)
     after_give_force = 55
     after_take_force = 66
     after_sue_plan.edit_concept_attr(
-        ball_way,
+        ball_rope,
         awardlink=awardlink_shop(
             awardee_title=run_str,
             give_force=after_give_force,
@@ -658,9 +658,9 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_awardlin
     # THEN
     print(f"{print_planatom_keys(sue_plandelta)=}")
 
-    x_keylist = [UPDATE_str(), plan_concept_awardlink_str(), ball_way, run_str]
+    x_keylist = [UPDATE_str(), plan_concept_awardlink_str(), ball_rope, run_str]
     ball_planatom = get_from_nested_dict(sue_plandelta.planatoms, x_keylist)
-    assert ball_planatom.get_value(concept_way_str()) == ball_way
+    assert ball_planatom.get_value(concept_rope_str()) == ball_rope
     assert ball_planatom.get_value(awardee_title_str()) == run_str
     assert ball_planatom.get_value(give_force_str()) == after_give_force
     assert ball_planatom.get_value(take_force_str()) == after_take_force
@@ -672,29 +672,29 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_factunit
     sue_str = "Sue"
     before_sue_plan = planunit_shop(sue_str)
     sports_str = "sports"
-    sports_way = before_sue_plan.make_l1_way(sports_str)
+    sports_rope = before_sue_plan.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_plan.make_way(sports_way, ball_str)
-    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_way)
+    ball_rope = before_sue_plan.make_rope(sports_rope, ball_str)
+    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_rope)
     knee_str = "knee"
-    knee_way = before_sue_plan.make_l1_way(knee_str)
+    knee_rope = before_sue_plan.make_l1_rope(knee_str)
     bend_str = "bendable"
-    bend_way = before_sue_plan.make_way(knee_way, bend_str)
-    before_sue_plan.set_concept(conceptunit_shop(bend_str), knee_way)
+    bend_rope = before_sue_plan.make_rope(knee_rope, bend_str)
+    before_sue_plan.set_concept(conceptunit_shop(bend_str), knee_rope)
     damaged_str = "damaged mcl"
-    damaged_way = before_sue_plan.make_way(knee_way, damaged_str)
+    damaged_rope = before_sue_plan.make_rope(knee_rope, damaged_str)
     before_sue_plan.set_l1_concept(conceptunit_shop(knee_str))
-    before_sue_plan.set_concept(conceptunit_shop(damaged_str), knee_way)
+    before_sue_plan.set_concept(conceptunit_shop(damaged_str), knee_rope)
     before_fopen = 11
     before_fnigh = 22
-    before_fact = factunit_shop(knee_way, bend_way, before_fopen, before_fnigh)
-    before_sue_plan.edit_concept_attr(ball_way, factunit=before_fact)
+    before_fact = factunit_shop(knee_rope, bend_rope, before_fopen, before_fnigh)
+    before_sue_plan.edit_concept_attr(ball_rope, factunit=before_fact)
 
     after_sue_plan = copy_deepcopy(before_sue_plan)
     after_fopen = 55
     after_fnigh = 66
-    knee_fact = factunit_shop(knee_way, damaged_way, after_fopen, after_fnigh)
-    after_sue_plan.edit_concept_attr(ball_way, factunit=knee_fact)
+    knee_fact = factunit_shop(knee_rope, damaged_rope, after_fopen, after_fnigh)
+    after_sue_plan.edit_concept_attr(ball_rope, factunit=knee_fact)
 
     # WHEN
     sue_plandelta = plandelta_shop()
@@ -703,11 +703,11 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_factunit
     # THEN
     print(f"{print_planatom_keys(sue_plandelta)=}")
 
-    x_keylist = [UPDATE_str(), plan_concept_factunit_str(), ball_way, knee_way]
+    x_keylist = [UPDATE_str(), plan_concept_factunit_str(), ball_rope, knee_rope]
     ball_planatom = get_from_nested_dict(sue_plandelta.planatoms, x_keylist)
-    assert ball_planatom.get_value(concept_way_str()) == ball_way
-    assert ball_planatom.get_value(fcontext_str()) == knee_way
-    assert ball_planatom.get_value(fstate_str()) == damaged_way
+    assert ball_planatom.get_value(concept_rope_str()) == ball_rope
+    assert ball_planatom.get_value(fcontext_str()) == knee_rope
+    assert ball_planatom.get_value(fstate_str()) == damaged_rope
     assert ball_planatom.get_value(fopen_str()) == after_fopen
     assert ball_planatom.get_value(fnigh_str()) == after_fnigh
     assert get_planatom_total_count(sue_plandelta) == 1
@@ -718,22 +718,22 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_factunit
     sue_str = "Sue"
     before_sue_plan = planunit_shop(sue_str)
     sports_str = "sports"
-    sports_way = before_sue_plan.make_l1_way(sports_str)
+    sports_rope = before_sue_plan.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_plan.make_way(sports_way, ball_str)
-    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_way)
+    ball_rope = before_sue_plan.make_rope(sports_rope, ball_str)
+    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_rope)
     knee_str = "knee"
-    knee_way = before_sue_plan.make_l1_way(knee_str)
+    knee_rope = before_sue_plan.make_l1_rope(knee_str)
     damaged_str = "damaged mcl"
-    damaged_way = before_sue_plan.make_way(knee_way, damaged_str)
+    damaged_rope = before_sue_plan.make_rope(knee_rope, damaged_str)
     before_sue_plan.set_l1_concept(conceptunit_shop(knee_str))
-    before_sue_plan.set_concept(conceptunit_shop(damaged_str), knee_way)
+    before_sue_plan.set_concept(conceptunit_shop(damaged_str), knee_rope)
 
     after_sue_plan = copy_deepcopy(before_sue_plan)
     after_fopen = 55
     after_fnigh = 66
-    after_fact = factunit_shop(knee_way, damaged_way, after_fopen, after_fnigh)
-    after_sue_plan.edit_concept_attr(ball_way, factunit=after_fact)
+    after_fact = factunit_shop(knee_rope, damaged_rope, after_fopen, after_fnigh)
+    after_sue_plan.edit_concept_attr(ball_rope, factunit=after_fact)
 
     # WHEN
     sue_plandelta = plandelta_shop()
@@ -741,12 +741,12 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_factunit
 
     # THEN
     print(f"{print_planatom_keys(sue_plandelta)=}")
-    x_keylist = [INSERT_str(), plan_concept_factunit_str(), ball_way, knee_way]
+    x_keylist = [INSERT_str(), plan_concept_factunit_str(), ball_rope, knee_rope]
     ball_planatom = get_from_nested_dict(sue_plandelta.planatoms, x_keylist)
     print(f"{ball_planatom=}")
-    assert ball_planatom.get_value(concept_way_str()) == ball_way
-    assert ball_planatom.get_value(fcontext_str()) == knee_way
-    assert ball_planatom.get_value(fstate_str()) == damaged_way
+    assert ball_planatom.get_value(concept_rope_str()) == ball_rope
+    assert ball_planatom.get_value(fcontext_str()) == knee_rope
+    assert ball_planatom.get_value(fstate_str()) == damaged_rope
     assert ball_planatom.get_value(fopen_str()) == after_fopen
     assert ball_planatom.get_value(fnigh_str()) == after_fnigh
     assert get_planatom_total_count(sue_plandelta) == 1
@@ -757,27 +757,27 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_factunit
     sue_str = "Sue"
     before_sue_plan = planunit_shop(sue_str)
     sports_str = "sports"
-    sports_way = before_sue_plan.make_l1_way(sports_str)
+    sports_rope = before_sue_plan.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_plan.make_way(sports_way, ball_str)
-    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_way)
+    ball_rope = before_sue_plan.make_rope(sports_rope, ball_str)
+    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_rope)
     knee_str = "knee"
-    knee_way = before_sue_plan.make_l1_way(knee_str)
+    knee_rope = before_sue_plan.make_l1_rope(knee_str)
     damaged_str = "damaged mcl"
-    damaged_way = before_sue_plan.make_way(knee_way, damaged_str)
+    damaged_rope = before_sue_plan.make_rope(knee_rope, damaged_str)
     before_sue_plan.set_l1_concept(conceptunit_shop(knee_str))
-    before_sue_plan.set_concept(conceptunit_shop(damaged_str), knee_way)
+    before_sue_plan.set_concept(conceptunit_shop(damaged_str), knee_rope)
 
     after_sue_plan = copy_deepcopy(before_sue_plan)
     before_damaged_popen = 55
     before_damaged_pnigh = 66
     before_fact = factunit_shop(
-        fcontext=knee_way,
-        fstate=damaged_way,
+        fcontext=knee_rope,
+        fstate=damaged_rope,
         fopen=before_damaged_popen,
         fnigh=before_damaged_pnigh,
     )
-    before_sue_plan.edit_concept_attr(ball_way, factunit=before_fact)
+    before_sue_plan.edit_concept_attr(ball_rope, factunit=before_fact)
 
     # WHEN
     sue_plandelta = plandelta_shop()
@@ -785,10 +785,10 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_factunit
 
     # THEN
     print(f"{print_planatom_keys(sue_plandelta)=}")
-    x_keylist = [DELETE_str(), plan_concept_factunit_str(), ball_way, knee_way]
+    x_keylist = [DELETE_str(), plan_concept_factunit_str(), ball_rope, knee_rope]
     ball_planatom = get_from_nested_dict(sue_plandelta.planatoms, x_keylist)
-    assert ball_planatom.get_value(concept_way_str()) == ball_way
-    assert ball_planatom.get_value(fcontext_str()) == knee_way
+    assert ball_planatom.get_value(concept_rope_str()) == ball_rope
+    assert ball_planatom.get_value(fcontext_str()) == knee_rope
     assert get_planatom_total_count(sue_plandelta) == 1
 
 
@@ -797,21 +797,21 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_reason_p
     sue_str = "Sue"
     before_sue_plan = planunit_shop(sue_str)
     sports_str = "sports"
-    sports_way = before_sue_plan.make_l1_way(sports_str)
+    sports_rope = before_sue_plan.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_plan.make_way(sports_way, ball_str)
-    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_way)
+    ball_rope = before_sue_plan.make_rope(sports_rope, ball_str)
+    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_rope)
     knee_str = "knee"
-    knee_way = before_sue_plan.make_l1_way(knee_str)
+    knee_rope = before_sue_plan.make_l1_rope(knee_str)
     before_sue_plan.set_l1_concept(conceptunit_shop(knee_str))
     damaged_str = "damaged mcl"
-    damaged_way = before_sue_plan.make_way(knee_way, damaged_str)
-    before_sue_plan.set_concept(conceptunit_shop(damaged_str), knee_way)
+    damaged_rope = before_sue_plan.make_rope(knee_rope, damaged_str)
+    before_sue_plan.set_concept(conceptunit_shop(damaged_str), knee_rope)
     bend_str = "bend"
-    bend_way = before_sue_plan.make_way(knee_way, bend_str)
-    before_sue_plan.set_concept(conceptunit_shop(bend_str), knee_way)
+    bend_rope = before_sue_plan.make_rope(knee_rope, bend_str)
+    before_sue_plan.set_concept(conceptunit_shop(bend_str), knee_rope)
     before_sue_plan.edit_concept_attr(
-        ball_way, reason_rcontext=knee_way, reason_premise=bend_way
+        ball_rope, reason_rcontext=knee_rope, reason_premise=bend_rope
     )
 
     after_sue_plan = copy_deepcopy(before_sue_plan)
@@ -819,9 +819,9 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_reason_p
     damaged_pnigh = 77
     damaged_pdivisor = 3
     after_sue_plan.edit_concept_attr(
-        ball_way,
-        reason_rcontext=knee_way,
-        reason_premise=damaged_way,
+        ball_rope,
+        reason_rcontext=knee_rope,
+        reason_premise=damaged_rope,
         popen=damaged_popen,
         reason_pnigh=damaged_pnigh,
         pdivisor=damaged_pdivisor,
@@ -836,14 +836,14 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_reason_p
     x_keylist = [
         INSERT_str(),
         plan_concept_reason_premiseunit_str(),
-        ball_way,
-        knee_way,
-        damaged_way,
+        ball_rope,
+        knee_rope,
+        damaged_rope,
     ]
     ball_planatom = get_from_nested_dict(sue_plandelta.planatoms, x_keylist)
-    assert ball_planatom.get_value(concept_way_str()) == ball_way
-    assert ball_planatom.get_value("rcontext") == knee_way
-    assert ball_planatom.get_value("pstate") == damaged_way
+    assert ball_planatom.get_value(concept_rope_str()) == ball_rope
+    assert ball_planatom.get_value("rcontext") == knee_rope
+    assert ball_planatom.get_value("pstate") == damaged_rope
     assert ball_planatom.get_value("popen") == damaged_popen
     assert ball_planatom.get_value("pnigh") == damaged_pnigh
     assert ball_planatom.get_value("pdivisor") == damaged_pdivisor
@@ -855,38 +855,38 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_reason_p
     sue_str = "Sue"
     before_sue_plan = planunit_shop(sue_str)
     sports_str = "sports"
-    sports_way = before_sue_plan.make_l1_way(sports_str)
+    sports_rope = before_sue_plan.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_plan.make_way(sports_way, ball_str)
-    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_way)
+    ball_rope = before_sue_plan.make_rope(sports_rope, ball_str)
+    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_rope)
     knee_str = "knee"
-    knee_way = before_sue_plan.make_l1_way(knee_str)
+    knee_rope = before_sue_plan.make_l1_rope(knee_str)
     before_sue_plan.set_l1_concept(conceptunit_shop(knee_str))
     damaged_str = "damaged mcl"
-    damaged_way = before_sue_plan.make_way(knee_way, damaged_str)
-    before_sue_plan.set_concept(conceptunit_shop(damaged_str), knee_way)
+    damaged_rope = before_sue_plan.make_rope(knee_rope, damaged_str)
+    before_sue_plan.set_concept(conceptunit_shop(damaged_str), knee_rope)
     bend_str = "bend"
-    bend_way = before_sue_plan.make_way(knee_way, bend_str)
-    before_sue_plan.set_concept(conceptunit_shop(bend_str), knee_way)
+    bend_rope = before_sue_plan.make_rope(knee_rope, bend_str)
+    before_sue_plan.set_concept(conceptunit_shop(bend_str), knee_rope)
     before_sue_plan.edit_concept_attr(
-        ball_way, reason_rcontext=knee_way, reason_premise=bend_way
+        ball_rope, reason_rcontext=knee_rope, reason_premise=bend_rope
     )
     damaged_popen = 45
     damaged_pnigh = 77
     damaged_pdivisor = 3
     before_sue_plan.edit_concept_attr(
-        ball_way,
-        reason_rcontext=knee_way,
-        reason_premise=damaged_way,
+        ball_rope,
+        reason_rcontext=knee_rope,
+        reason_premise=damaged_rope,
         popen=damaged_popen,
         reason_pnigh=damaged_pnigh,
         pdivisor=damaged_pdivisor,
     )
     after_sue_plan = copy_deepcopy(before_sue_plan)
     after_sue_plan.edit_concept_attr(
-        ball_way,
-        reason_del_premise_rcontext=knee_way,
-        reason_del_premise_pstate=damaged_way,
+        ball_rope,
+        reason_del_premise_rcontext=knee_rope,
+        reason_del_premise_pstate=damaged_rope,
     )
 
     # WHEN
@@ -898,14 +898,14 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_reason_p
     x_keylist = [
         DELETE_str(),
         plan_concept_reason_premiseunit_str(),
-        ball_way,
-        knee_way,
-        damaged_way,
+        ball_rope,
+        knee_rope,
+        damaged_rope,
     ]
     ball_planatom = get_from_nested_dict(sue_plandelta.planatoms, x_keylist)
-    assert ball_planatom.get_value(concept_way_str()) == ball_way
-    assert ball_planatom.get_value("rcontext") == knee_way
-    assert ball_planatom.get_value("pstate") == damaged_way
+    assert ball_planatom.get_value(concept_rope_str()) == ball_rope
+    assert ball_planatom.get_value("rcontext") == knee_rope
+    assert ball_planatom.get_value("pstate") == damaged_rope
     assert get_planatom_total_count(sue_plandelta) == 1
 
 
@@ -914,29 +914,29 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_reason_p
     sue_str = "Sue"
     before_sue_plan = planunit_shop(sue_str)
     sports_str = "sports"
-    sports_way = before_sue_plan.make_l1_way(sports_str)
+    sports_rope = before_sue_plan.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_plan.make_way(sports_way, ball_str)
-    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_way)
+    ball_rope = before_sue_plan.make_rope(sports_rope, ball_str)
+    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_rope)
     knee_str = "knee"
-    knee_way = before_sue_plan.make_l1_way(knee_str)
+    knee_rope = before_sue_plan.make_l1_rope(knee_str)
     before_sue_plan.set_l1_concept(conceptunit_shop(knee_str))
     damaged_str = "damaged mcl"
-    damaged_way = before_sue_plan.make_way(knee_way, damaged_str)
-    before_sue_plan.set_concept(conceptunit_shop(damaged_str), knee_way)
+    damaged_rope = before_sue_plan.make_rope(knee_rope, damaged_str)
+    before_sue_plan.set_concept(conceptunit_shop(damaged_str), knee_rope)
     bend_str = "bend"
-    bend_way = before_sue_plan.make_way(knee_way, bend_str)
-    before_sue_plan.set_concept(conceptunit_shop(bend_str), knee_way)
+    bend_rope = before_sue_plan.make_rope(knee_rope, bend_str)
+    before_sue_plan.set_concept(conceptunit_shop(bend_str), knee_rope)
     before_sue_plan.edit_concept_attr(
-        ball_way, reason_rcontext=knee_way, reason_premise=bend_way
+        ball_rope, reason_rcontext=knee_rope, reason_premise=bend_rope
     )
     before_damaged_popen = 111
     before_damaged_pnigh = 777
     before_damaged_pdivisor = 13
     before_sue_plan.edit_concept_attr(
-        ball_way,
-        reason_rcontext=knee_way,
-        reason_premise=damaged_way,
+        ball_rope,
+        reason_rcontext=knee_rope,
+        reason_premise=damaged_rope,
         popen=before_damaged_popen,
         reason_pnigh=before_damaged_pnigh,
         pdivisor=before_damaged_pdivisor,
@@ -947,9 +947,9 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_reason_p
     after_damaged_pnigh = 555
     after_damaged_pdivisor = 78
     after_sue_plan.edit_concept_attr(
-        ball_way,
-        reason_rcontext=knee_way,
-        reason_premise=damaged_way,
+        ball_rope,
+        reason_rcontext=knee_rope,
+        reason_premise=damaged_rope,
         popen=after_damaged_popen,
         reason_pnigh=after_damaged_pnigh,
         pdivisor=after_damaged_pdivisor,
@@ -964,14 +964,14 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_reason_p
     x_keylist = [
         UPDATE_str(),
         plan_concept_reason_premiseunit_str(),
-        ball_way,
-        knee_way,
-        damaged_way,
+        ball_rope,
+        knee_rope,
+        damaged_rope,
     ]
     ball_planatom = get_from_nested_dict(sue_plandelta.planatoms, x_keylist)
-    assert ball_planatom.get_value(concept_way_str()) == ball_way
-    assert ball_planatom.get_value("rcontext") == knee_way
-    assert ball_planatom.get_value("pstate") == damaged_way
+    assert ball_planatom.get_value(concept_rope_str()) == ball_rope
+    assert ball_planatom.get_value("rcontext") == knee_rope
+    assert ball_planatom.get_value("pstate") == damaged_rope
     assert ball_planatom.get_value("popen") == after_damaged_popen
     assert ball_planatom.get_value("pnigh") == after_damaged_pnigh
     assert ball_planatom.get_value("pdivisor") == after_damaged_pdivisor
@@ -983,22 +983,22 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_reasonun
     sue_str = "Sue"
     before_sue_plan = planunit_shop(sue_str)
     sports_str = "sports"
-    sports_way = before_sue_plan.make_l1_way(sports_str)
+    sports_rope = before_sue_plan.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_plan.make_way(sports_way, ball_str)
-    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_way)
+    ball_rope = before_sue_plan.make_rope(sports_rope, ball_str)
+    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_rope)
     knee_str = "knee"
-    knee_way = before_sue_plan.make_l1_way(knee_str)
+    knee_rope = before_sue_plan.make_l1_rope(knee_str)
     medical_str = "get medical attention"
-    medical_way = before_sue_plan.make_way(knee_way, medical_str)
+    medical_rope = before_sue_plan.make_rope(knee_rope, medical_str)
     before_sue_plan.set_l1_concept(conceptunit_shop(knee_str))
-    before_sue_plan.set_concept(conceptunit_shop(medical_str), knee_way)
+    before_sue_plan.set_concept(conceptunit_shop(medical_str), knee_rope)
 
     after_sue_plan = copy_deepcopy(before_sue_plan)
     after_medical_rconcept_active_requisite = False
     after_sue_plan.edit_concept_attr(
-        ball_way,
-        reason_rcontext=medical_way,
+        ball_rope,
+        reason_rcontext=medical_rope,
         reason_rconcept_active_requisite=after_medical_rconcept_active_requisite,
     )
 
@@ -1010,12 +1010,12 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_reasonun
     x_keylist = [
         INSERT_str(),
         plan_concept_reasonunit_str(),
-        ball_way,
-        medical_way,
+        ball_rope,
+        medical_rope,
     ]
     ball_planatom = get_from_nested_dict(sue_plandelta.planatoms, x_keylist)
-    assert ball_planatom.get_value(concept_way_str()) == ball_way
-    assert ball_planatom.get_value("rcontext") == medical_way
+    assert ball_planatom.get_value(concept_rope_str()) == ball_rope
+    assert ball_planatom.get_value("rcontext") == medical_rope
     assert (
         ball_planatom.get_value(rconcept_active_requisite_str())
         == after_medical_rconcept_active_requisite
@@ -1028,28 +1028,28 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_reasonun
     sue_str = "Sue"
     before_sue_plan = planunit_shop(sue_str)
     sports_str = "sports"
-    sports_way = before_sue_plan.make_l1_way(sports_str)
+    sports_rope = before_sue_plan.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_plan.make_way(sports_way, ball_str)
-    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_way)
+    ball_rope = before_sue_plan.make_rope(sports_rope, ball_str)
+    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_rope)
     knee_str = "knee"
-    knee_way = before_sue_plan.make_l1_way(knee_str)
+    knee_rope = before_sue_plan.make_l1_rope(knee_str)
     medical_str = "get medical attention"
-    medical_way = before_sue_plan.make_way(knee_way, medical_str)
+    medical_rope = before_sue_plan.make_rope(knee_rope, medical_str)
     before_sue_plan.set_l1_concept(conceptunit_shop(knee_str))
-    before_sue_plan.set_concept(conceptunit_shop(medical_str), knee_way)
+    before_sue_plan.set_concept(conceptunit_shop(medical_str), knee_rope)
     before_medical_rconcept_active_requisite = True
     before_sue_plan.edit_concept_attr(
-        ball_way,
-        reason_rcontext=medical_way,
+        ball_rope,
+        reason_rcontext=medical_rope,
         reason_rconcept_active_requisite=before_medical_rconcept_active_requisite,
     )
 
     after_sue_plan = copy_deepcopy(before_sue_plan)
     after_medical_rconcept_active_requisite = False
     after_sue_plan.edit_concept_attr(
-        ball_way,
-        reason_rcontext=medical_way,
+        ball_rope,
+        reason_rcontext=medical_rope,
         reason_rconcept_active_requisite=after_medical_rconcept_active_requisite,
     )
 
@@ -1062,12 +1062,12 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_reasonun
     x_keylist = [
         UPDATE_str(),
         plan_concept_reasonunit_str(),
-        ball_way,
-        medical_way,
+        ball_rope,
+        medical_rope,
     ]
     ball_planatom = get_from_nested_dict(sue_plandelta.planatoms, x_keylist)
-    assert ball_planatom.get_value(concept_way_str()) == ball_way
-    assert ball_planatom.get_value("rcontext") == medical_way
+    assert ball_planatom.get_value(concept_rope_str()) == ball_rope
+    assert ball_planatom.get_value("rcontext") == medical_rope
     assert (
         ball_planatom.get_value(rconcept_active_requisite_str())
         == after_medical_rconcept_active_requisite
@@ -1080,26 +1080,26 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_reasonun
     sue_str = "Sue"
     before_sue_plan = planunit_shop(sue_str)
     sports_str = "sports"
-    sports_way = before_sue_plan.make_l1_way(sports_str)
+    sports_rope = before_sue_plan.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_plan.make_way(sports_way, ball_str)
-    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_way)
+    ball_rope = before_sue_plan.make_rope(sports_rope, ball_str)
+    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_rope)
     knee_str = "knee"
-    knee_way = before_sue_plan.make_l1_way(knee_str)
+    knee_rope = before_sue_plan.make_l1_rope(knee_str)
     medical_str = "get medical attention"
-    medical_way = before_sue_plan.make_way(knee_way, medical_str)
+    medical_rope = before_sue_plan.make_rope(knee_rope, medical_str)
     before_sue_plan.set_l1_concept(conceptunit_shop(knee_str))
-    before_sue_plan.set_concept(conceptunit_shop(medical_str), knee_way)
+    before_sue_plan.set_concept(conceptunit_shop(medical_str), knee_rope)
     before_medical_rconcept_active_requisite = True
     before_sue_plan.edit_concept_attr(
-        ball_way,
-        reason_rcontext=medical_way,
+        ball_rope,
+        reason_rcontext=medical_rope,
         reason_rconcept_active_requisite=before_medical_rconcept_active_requisite,
     )
 
     after_sue_plan = copy_deepcopy(before_sue_plan)
-    after_ball_concept = after_sue_plan.get_concept_obj(ball_way)
-    after_ball_concept.del_reasonunit_rcontext(medical_way)
+    after_ball_concept = after_sue_plan.get_concept_obj(ball_rope)
+    after_ball_concept.del_reasonunit_rcontext(medical_rope)
 
     # WHEN
     sue_plandelta = plandelta_shop()
@@ -1110,12 +1110,12 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_reasonun
     x_keylist = [
         DELETE_str(),
         plan_concept_reasonunit_str(),
-        ball_way,
-        medical_way,
+        ball_rope,
+        medical_rope,
     ]
     ball_planatom = get_from_nested_dict(sue_plandelta.planatoms, x_keylist)
-    assert ball_planatom.get_value(concept_way_str()) == ball_way
-    assert ball_planatom.get_value("rcontext") == medical_way
+    assert ball_planatom.get_value(concept_rope_str()) == ball_rope
+    assert ball_planatom.get_value("rcontext") == medical_rope
     assert get_planatom_total_count(sue_plandelta) == 1
 
 
@@ -1126,13 +1126,13 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_laborlin
     xio_str = "Xio"
     before_sue_plan.add_acctunit(xio_str)
     sports_str = "sports"
-    sports_way = before_sue_plan.make_l1_way(sports_str)
+    sports_rope = before_sue_plan.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_plan.make_way(sports_way, ball_str)
-    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_way)
+    ball_rope = before_sue_plan.make_rope(sports_rope, ball_str)
+    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_rope)
 
     after_sue_plan = copy_deepcopy(before_sue_plan)
-    after_ball_conceptunit = after_sue_plan.get_concept_obj(ball_way)
+    after_ball_conceptunit = after_sue_plan.get_concept_obj(ball_rope)
     after_ball_conceptunit.laborunit.set_laborlink(xio_str)
 
     # WHEN
@@ -1144,11 +1144,11 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_laborlin
     x_keylist = [
         INSERT_str(),
         plan_concept_laborlink_str(),
-        ball_way,
+        ball_rope,
         xio_str,
     ]
     ball_planatom = get_from_nested_dict(sue_plandelta.planatoms, x_keylist)
-    assert ball_planatom.get_value(concept_way_str()) == ball_way
+    assert ball_planatom.get_value(concept_rope_str()) == ball_rope
     assert ball_planatom.get_value(labor_title_str()) == xio_str
     assert get_planatom_total_count(sue_plandelta) == 1
 
@@ -1160,15 +1160,15 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_laborlin
     xio_str = "Xio"
     before_sue_plan.add_acctunit(xio_str)
     sports_str = "sports"
-    sports_way = before_sue_plan.make_l1_way(sports_str)
+    sports_rope = before_sue_plan.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_plan.make_way(sports_way, ball_str)
-    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_way)
-    before_ball_conceptunit = before_sue_plan.get_concept_obj(ball_way)
+    ball_rope = before_sue_plan.make_rope(sports_rope, ball_str)
+    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_ball_conceptunit = before_sue_plan.get_concept_obj(ball_rope)
     before_ball_conceptunit.laborunit.set_laborlink(xio_str)
 
     after_sue_plan = copy_deepcopy(before_sue_plan)
-    after_ball_conceptunit = after_sue_plan.get_concept_obj(ball_way)
+    after_ball_conceptunit = after_sue_plan.get_concept_obj(ball_rope)
     after_ball_conceptunit.laborunit.del_laborlink(xio_str)
 
     # WHEN
@@ -1180,11 +1180,11 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_laborlin
     x_keylist = [
         DELETE_str(),
         plan_concept_laborlink_str(),
-        ball_way,
+        ball_rope,
         xio_str,
     ]
     ball_planatom = get_from_nested_dict(sue_plandelta.planatoms, x_keylist)
-    assert ball_planatom.get_value(concept_way_str()) == ball_way
+    assert ball_planatom.get_value(concept_rope_str()) == ball_rope
     assert ball_planatom.get_value(labor_title_str()) == xio_str
     assert get_planatom_total_count(sue_plandelta) == 1
 
@@ -1196,13 +1196,13 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_healerli
     xio_str = "Xio"
     before_sue_plan.add_acctunit(xio_str)
     sports_str = "sports"
-    sports_way = before_sue_plan.make_l1_way(sports_str)
+    sports_rope = before_sue_plan.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_plan.make_way(sports_way, ball_str)
-    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_way)
+    ball_rope = before_sue_plan.make_rope(sports_rope, ball_str)
+    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_rope)
 
     after_sue_plan = copy_deepcopy(before_sue_plan)
-    after_ball_conceptunit = after_sue_plan.get_concept_obj(ball_way)
+    after_ball_conceptunit = after_sue_plan.get_concept_obj(ball_rope)
     after_ball_conceptunit.healerlink.set_healer_name(xio_str)
 
     # WHEN
@@ -1214,11 +1214,11 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_healerli
     x_keylist = [
         INSERT_str(),
         plan_concept_healerlink_str(),
-        ball_way,
+        ball_rope,
         xio_str,
     ]
     ball_planatom = get_from_nested_dict(sue_plandelta.planatoms, x_keylist)
-    assert ball_planatom.get_value(concept_way_str()) == ball_way
+    assert ball_planatom.get_value(concept_rope_str()) == ball_rope
     assert ball_planatom.get_value(healer_name_str()) == xio_str
     assert get_planatom_total_count(sue_plandelta) == 1
 
@@ -1232,11 +1232,11 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_healerli
 
     after_sue_plan = copy_deepcopy(before_sue_plan)
     sports_str = "sports"
-    sports_way = before_sue_plan.make_l1_way(sports_str)
+    sports_rope = before_sue_plan.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_plan.make_way(sports_way, ball_str)
-    after_sue_plan.set_concept(conceptunit_shop(ball_str), sports_way)
-    after_ball_conceptunit = after_sue_plan.get_concept_obj(ball_way)
+    ball_rope = before_sue_plan.make_rope(sports_rope, ball_str)
+    after_sue_plan.set_concept(conceptunit_shop(ball_str), sports_rope)
+    after_ball_conceptunit = after_sue_plan.get_concept_obj(ball_rope)
     after_ball_conceptunit.healerlink.set_healer_name(xio_str)
 
     # WHEN
@@ -1248,12 +1248,12 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_healerli
     x_keylist = [
         INSERT_str(),
         plan_concept_healerlink_str(),
-        ball_way,
+        ball_rope,
         xio_str,
     ]
     ball_planatom = get_from_nested_dict(sue_plandelta.planatoms, x_keylist, True)
     assert ball_planatom
-    assert ball_planatom.get_value(concept_way_str()) == ball_way
+    assert ball_planatom.get_value(concept_rope_str()) == ball_rope
     assert ball_planatom.get_value(healer_name_str()) == xio_str
     assert get_planatom_total_count(sue_plandelta) == 3
 
@@ -1265,15 +1265,15 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_healerli
     xio_str = "Xio"
     before_sue_plan.add_acctunit(xio_str)
     sports_str = "sports"
-    sports_way = before_sue_plan.make_l1_way(sports_str)
+    sports_rope = before_sue_plan.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_plan.make_way(sports_way, ball_str)
-    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_way)
-    before_ball_conceptunit = before_sue_plan.get_concept_obj(ball_way)
+    ball_rope = before_sue_plan.make_rope(sports_rope, ball_str)
+    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_ball_conceptunit = before_sue_plan.get_concept_obj(ball_rope)
     before_ball_conceptunit.healerlink.set_healer_name(xio_str)
 
     after_sue_plan = copy_deepcopy(before_sue_plan)
-    after_ball_conceptunit = after_sue_plan.get_concept_obj(ball_way)
+    after_ball_conceptunit = after_sue_plan.get_concept_obj(ball_rope)
     after_ball_conceptunit.healerlink.del_healer_name(xio_str)
 
     # WHEN
@@ -1285,14 +1285,14 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_healerli
     x_keylist = [
         DELETE_str(),
         plan_concept_healerlink_str(),
-        ball_way,
+        ball_rope,
         xio_str,
     ]
     ball_planatom = get_from_nested_dict(
         sue_plandelta.planatoms, x_keylist, if_missing_return_None=True
     )
     assert ball_planatom
-    assert ball_planatom.get_value(concept_way_str()) == ball_way
+    assert ball_planatom.get_value(concept_rope_str()) == ball_rope
     assert ball_planatom.get_value(healer_name_str()) == xio_str
     assert get_planatom_total_count(sue_plandelta) == 1
 
@@ -1304,15 +1304,15 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_healerli
     xio_str = "Xio"
     before_sue_plan.add_acctunit(xio_str)
     sports_str = "sports"
-    sports_way = before_sue_plan.make_l1_way(sports_str)
+    sports_rope = before_sue_plan.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = before_sue_plan.make_way(sports_way, ball_str)
-    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_way)
-    before_ball_conceptunit = before_sue_plan.get_concept_obj(ball_way)
+    ball_rope = before_sue_plan.make_rope(sports_rope, ball_str)
+    before_sue_plan.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_ball_conceptunit = before_sue_plan.get_concept_obj(ball_rope)
     before_ball_conceptunit.healerlink.set_healer_name(xio_str)
 
     after_sue_plan = copy_deepcopy(before_sue_plan)
-    after_sue_plan.del_concept_obj(ball_way)
+    after_sue_plan.del_concept_obj(ball_rope)
 
     # WHEN
     sue_plandelta = plandelta_shop()
@@ -1323,14 +1323,14 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_healerli
     x_keylist = [
         DELETE_str(),
         plan_concept_healerlink_str(),
-        ball_way,
+        ball_rope,
         xio_str,
     ]
     ball_planatom = get_from_nested_dict(
         sue_plandelta.planatoms, x_keylist, if_missing_return_None=True
     )
     assert ball_planatom
-    assert ball_planatom.get_value(concept_way_str()) == ball_way
+    assert ball_planatom.get_value(concept_rope_str()) == ball_rope
     assert ball_planatom.get_value(healer_name_str()) == xio_str
     assert get_planatom_total_count(sue_plandelta) == 2
 
@@ -1344,11 +1344,11 @@ def test_PlanDelta_add_all_planatoms_CorrectlyCreates_PlanAtoms():
     temp_xio_acctunit = acctunit_shop(xio_str)
     after_sue_plan.set_acctunit(temp_xio_acctunit, auto_set_membership=False)
     sports_str = "sports"
-    sports_way = after_sue_plan.make_l1_way(sports_str)
+    sports_rope = after_sue_plan.make_l1_rope(sports_str)
     ball_str = "basketball"
-    ball_way = after_sue_plan.make_way(sports_way, ball_str)
-    after_sue_plan.set_concept(conceptunit_shop(ball_str), sports_way)
-    after_ball_conceptunit = after_sue_plan.get_concept_obj(ball_way)
+    ball_rope = after_sue_plan.make_rope(sports_rope, ball_str)
+    after_sue_plan.set_concept(conceptunit_shop(ball_str), sports_rope)
+    after_ball_conceptunit = after_sue_plan.get_concept_obj(ball_rope)
     after_ball_conceptunit.laborunit.set_laborlink(xio_str)
 
     before_sue_plan = planunit_shop(sue_str)

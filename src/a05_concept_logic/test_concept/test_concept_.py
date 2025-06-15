@@ -1,5 +1,5 @@
-from src.a01_term_logic._test_util.a01_str import bridge_str, parent_way_str
-from src.a01_term_logic.way import create_way, default_bridge_if_None
+from src.a01_term_logic._test_util.a01_str import knot_str, parent_rope_str
+from src.a01_term_logic.rope import create_rope, default_knot_if_None
 from src.a02_finance_logic._test_util.a02_str import fund_iota_str, vow_label_str
 from src.a02_finance_logic.finance_config import default_fund_iota_if_None
 from src.a03_group_logic.group import awardlink_shop
@@ -26,13 +26,13 @@ from src.a05_concept_logic._test_util.a05_str import (
     _uid_str,
     addin_str,
     begin_str,
-    bridge_str,
     close_str,
     concept_label_str,
     denom_str,
     fund_iota_str,
     gogo_want_str,
     healerlink_str,
+    knot_str,
     mass_str,
     morph_str,
     numor_str,
@@ -69,7 +69,7 @@ def test_ConceptUnit_Exists():
     assert x_conceptunit.awardlinks is None
     assert x_conceptunit._awardlines is None  # calculated field'
     assert x_conceptunit._awardheirs is None  # calculated field'
-    assert x_conceptunit.bridge is None
+    assert x_conceptunit.knot is None
     assert x_conceptunit.begin is None
     assert x_conceptunit.close is None
     assert x_conceptunit.addin is None
@@ -126,7 +126,7 @@ def test_ConceptUnit_Exists():
         addin_str(),
         "awardlinks",
         begin_str(),
-        bridge_str(),
+        knot_str(),
         close_str(),
         concept_label_str(),
         denom_str(),
@@ -139,7 +139,7 @@ def test_ConceptUnit_Exists():
         mass_str(),
         morph_str(),
         numor_str(),
-        parent_way_str(),
+        parent_rope_str(),
         task_str(),
         problem_bool_str(),
         "reasonunits",
@@ -187,7 +187,7 @@ def test_conceptunit_shop_WithNoParametersReturnsObj():
     assert x_conceptunit._reasonheirs == {}
     assert x_conceptunit.laborunit == laborunit_shop()
     assert x_conceptunit._laborheir is None
-    assert x_conceptunit.bridge == default_bridge_if_None()
+    assert x_conceptunit.knot == default_knot_if_None()
     assert x_conceptunit.root is False
     assert x_conceptunit._all_acct_cred is None
     assert x_conceptunit._all_acct_debt is None
@@ -271,46 +271,46 @@ def test_conceptunit_shop_ReturnsObjWithParameters():
 def test_ConceptUnit_get_obj_key_ReturnsObj():
     # ESTABLISH
     round_str = "round_stuff"
-    round_way = create_way(get_default_vow_label(), round_str)
+    round_rope = create_rope(get_default_vow_label(), round_str)
     ball_str = "ball"
 
     # WHEN
-    ball_concept = conceptunit_shop(concept_label=ball_str, parent_way=round_way)
+    ball_concept = conceptunit_shop(concept_label=ball_str, parent_rope=round_rope)
 
     # THEN
     assert ball_concept.get_obj_key() == ball_str
 
 
-def test_ConceptUnit_get_way_ReturnsObj():
+def test_ConceptUnit_get_rope_ReturnsObj():
     # ESTABLISH
     round_str = "round_stuff"
     slash_str = "/"
-    round_way = create_way(get_default_vow_label(), round_str, bridge=slash_str)
+    round_rope = create_rope(get_default_vow_label(), round_str, knot=slash_str)
     ball_str = "ball"
 
     # WHEN
-    ball_concept = conceptunit_shop(ball_str, parent_way=round_way, bridge=slash_str)
+    ball_concept = conceptunit_shop(ball_str, parent_rope=round_rope, knot=slash_str)
 
     # THEN
-    ball_way = create_way(round_way, ball_str, bridge=slash_str)
-    assert ball_concept.get_concept_way() == ball_way
+    ball_rope = create_rope(round_rope, ball_str, knot=slash_str)
+    assert ball_concept.get_concept_rope() == ball_rope
 
 
-def test_ConceptUnit_set_parent_way_SetsAttr():
+def test_ConceptUnit_set_parent_rope_SetsAttr():
     # ESTABLISH
     round_str = "round_stuff"
     slash_str = "/"
-    round_way = create_way(get_default_vow_label(), round_str, bridge=slash_str)
+    round_rope = create_rope(get_default_vow_label(), round_str, knot=slash_str)
     ball_str = "ball"
-    ball_concept = conceptunit_shop(ball_str, parent_way=round_way, bridge=slash_str)
-    assert ball_concept.parent_way == round_way
+    ball_concept = conceptunit_shop(ball_str, parent_rope=round_rope, knot=slash_str)
+    assert ball_concept.parent_rope == round_rope
 
     # WHEN
-    sports_way = create_way(get_default_vow_label(), "sports", bridge=slash_str)
-    ball_concept.set_parent_way(parent_way=sports_way)
+    sports_rope = create_rope(get_default_vow_label(), "sports", knot=slash_str)
+    ball_concept.set_parent_rope(parent_rope=sports_rope)
 
     # THEN
-    assert ball_concept.parent_way == sports_way
+    assert ball_concept.parent_rope == sports_rope
 
 
 def test_ConceptUnit_clear_descendant_task_count_ClearsCorrectly():

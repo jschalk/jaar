@@ -1,13 +1,13 @@
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 from src.a00_data_toolbox.dict_toolbox import get_empty_dict_if_None
-from src.a01_term_logic.way import (
-    WayTerm,
-    default_bridge_if_None,
-    find_replace_way_key_dict,
-    is_heir_way,
-    rebuild_way,
-    replace_bridge,
+from src.a01_term_logic.rope import (
+    RopeTerm,
+    default_knot_if_None,
+    find_replace_rope_key_dict,
+    is_heir_rope,
+    rebuild_rope,
+    replace_knot,
 )
 
 
@@ -17,8 +17,8 @@ class InvalidReasonException(Exception):
 
 @dataclass
 class FactCore:
-    fcontext: WayTerm = None
-    fstate: WayTerm = None
+    fcontext: RopeTerm = None
+    fstate: RopeTerm = None
     fopen: float = None
     fnigh: float = None
 
@@ -38,7 +38,7 @@ class FactCore:
         self.fnigh = None
 
     def set_attr(
-        self, fstate: WayTerm = None, fopen: float = None, fnigh: float = None
+        self, fstate: RopeTerm = None, fopen: float = None, fnigh: float = None
     ):
         if fstate is not None:
             self.fstate = fstate
@@ -52,14 +52,14 @@ class FactCore:
         self.fopen = None
         self.fnigh = None
 
-    def find_replace_way(self, old_way: WayTerm, new_way: WayTerm):
-        self.fcontext = rebuild_way(self.fcontext, old_way, new_way)
-        self.fstate = rebuild_way(self.fstate, old_way, new_way)
+    def find_replace_rope(self, old_rope: RopeTerm, new_rope: RopeTerm):
+        self.fcontext = rebuild_rope(self.fcontext, old_rope, new_rope)
+        self.fstate = rebuild_rope(self.fstate, old_rope, new_rope)
 
-    def get_obj_key(self) -> WayTerm:
+    def get_obj_key(self) -> RopeTerm:
         return self.fcontext
 
-    def get_tuple(self) -> tuple[WayTerm, WayTerm, float, float]:
+    def get_tuple(self) -> tuple[RopeTerm, RopeTerm, float, float]:
         return (self.fcontext, self.fstate, self.fopen, self.fnigh)
 
 
@@ -69,15 +69,15 @@ class FactUnit(FactCore):
 
 
 def factunit_shop(
-    fcontext: WayTerm = None,
-    fstate: WayTerm = None,
+    fcontext: RopeTerm = None,
+    fstate: RopeTerm = None,
     fopen: float = None,
     fnigh: float = None,
 ) -> FactUnit:
     return FactUnit(fcontext=fcontext, fstate=fstate, fopen=fopen, fnigh=fnigh)
 
 
-def factunits_get_from_dict(x_dict: dict) -> dict[WayTerm, FactUnit]:
+def factunits_get_from_dict(x_dict: dict) -> dict[RopeTerm, FactUnit]:
     facts = {}
     for fact_dict in x_dict.values():
         x_fcontext = fact_dict["fcontext"]
@@ -104,14 +104,14 @@ def factunits_get_from_dict(x_dict: dict) -> dict[WayTerm, FactUnit]:
 
 
 def get_factunit_from_tuple(
-    fact_tuple: tuple[WayTerm, WayTerm, float, float],
+    fact_tuple: tuple[RopeTerm, RopeTerm, float, float],
 ) -> FactUnit:
     return factunit_shop(fact_tuple[0], fact_tuple[1], fact_tuple[2], fact_tuple[3])
 
 
 def get_dict_from_factunits(
-    factunits: dict[WayTerm, FactUnit],
-) -> dict[WayTerm, dict[str,]]:
+    factunits: dict[RopeTerm, FactUnit],
+) -> dict[RopeTerm, dict[str,]]:
     return {fact.fcontext: fact.get_dict() for fact in factunits.values()}
 
 
@@ -127,8 +127,8 @@ class FactHeir(FactCore):
 
 
 def factheir_shop(
-    fcontext: WayTerm = None,
-    fstate: WayTerm = None,
+    fcontext: RopeTerm = None,
+    fstate: RopeTerm = None,
     fopen: float = None,
     fnigh: float = None,
 ) -> FactHeir:
@@ -294,13 +294,13 @@ def premisestatusfinder_shop(
 
 @dataclass
 class PremiseUnit:
-    pstate: WayTerm
+    pstate: RopeTerm
     popen: float = None
     pnigh: float = None
     pdivisor: int = None
     _status: bool = None
     _chore: bool = None
-    bridge: str = None
+    knot: str = None
 
     def get_obj_key(self):
         return self.pstate
@@ -320,17 +320,17 @@ class PremiseUnit:
     def clear_status(self):
         self._status = None
 
-    def set_bridge(self, new_bridge: str):
-        old_bridge = copy_deepcopy(self.bridge)
-        self.bridge = new_bridge
-        self.pstate = replace_bridge(
-            way=self.pstate, old_bridge=old_bridge, new_bridge=self.bridge
+    def set_knot(self, new_knot: str):
+        old_knot = copy_deepcopy(self.knot)
+        self.knot = new_knot
+        self.pstate = replace_knot(
+            rope=self.pstate, old_knot=old_knot, new_knot=self.knot
         )
 
-    def is_in_lineage(self, fact_fstate: WayTerm):
-        return is_heir_way(
-            src=self.pstate, heir=fact_fstate, bridge=self.bridge
-        ) or is_heir_way(src=fact_fstate, heir=self.pstate, bridge=self.bridge)
+    def is_in_lineage(self, fact_fstate: RopeTerm):
+        return is_heir_rope(
+            src=self.pstate, heir=fact_fstate, knot=self.knot
+        ) or is_heir_rope(src=fact_fstate, heir=self.pstate, knot=self.knot)
 
     def set_status(self, x_factheir: FactHeir):
         self._status = self._get_active(factheir=x_factheir)
@@ -412,24 +412,24 @@ class PremiseUnit:
             or (self.popen >= factheir.fopen and self.pnigh < factheir.fnigh)
         )
 
-    def find_replace_way(self, old_way: WayTerm, new_way: WayTerm):
-        self.pstate = rebuild_way(self.pstate, old_way, new_way)
+    def find_replace_rope(self, old_rope: RopeTerm, new_rope: RopeTerm):
+        self.pstate = rebuild_rope(self.pstate, old_rope, new_rope)
 
 
 # class premisesshop:
 def premiseunit_shop(
-    pstate: WayTerm,
+    pstate: RopeTerm,
     popen: float = None,
     pnigh: float = None,
     pdivisor: float = None,
-    bridge: str = None,
+    knot: str = None,
 ) -> PremiseUnit:
     return PremiseUnit(
         pstate=pstate,
         popen=popen,
         pnigh=pnigh,
         pdivisor=pdivisor,
-        bridge=default_bridge_if_None(bridge),
+        knot=default_knot_if_None(knot),
     )
 
 
@@ -461,25 +461,25 @@ def premises_get_from_dict(x_dict: dict) -> dict[str, PremiseUnit]:
 
 @dataclass
 class ReasonCore:
-    rcontext: WayTerm
-    premises: dict[WayTerm, PremiseUnit]
+    rcontext: RopeTerm
+    premises: dict[RopeTerm, PremiseUnit]
     rconcept_active_requisite: bool = None
-    bridge: str = None
+    knot: str = None
 
-    def set_bridge(self, new_bridge: str):
-        old_bridge = copy_deepcopy(self.bridge)
-        self.bridge = new_bridge
-        self.rcontext = replace_bridge(self.rcontext, old_bridge, new_bridge)
+    def set_knot(self, new_knot: str):
+        old_knot = copy_deepcopy(self.knot)
+        self.knot = new_knot
+        self.rcontext = replace_knot(self.rcontext, old_knot, new_knot)
 
         new_premises = {}
-        for premise_way, premise_obj in self.premises.items():
-            new_premise_way = replace_bridge(
-                way=premise_way,
-                old_bridge=old_bridge,
-                new_bridge=self.bridge,
+        for premise_rope, premise_obj in self.premises.items():
+            new_premise_rope = replace_knot(
+                rope=premise_rope,
+                old_knot=old_knot,
+                new_knot=self.knot,
             )
-            premise_obj.set_bridge(self.bridge)
-            new_premises[new_premise_way] = premise_obj
+            premise_obj.set_knot(self.knot)
+            new_premises[new_premise_rope] = premise_obj
         self.premises = new_premises
 
     def get_obj_key(self):
@@ -490,7 +490,7 @@ class ReasonCore:
 
     def set_premise(
         self,
-        premise: WayTerm,
+        premise: RopeTerm,
         popen: float = None,
         pnigh: float = None,
         pdivisor: int = None,
@@ -500,39 +500,39 @@ class ReasonCore:
             popen=popen,
             pnigh=pnigh,
             pdivisor=pdivisor,
-            bridge=self.bridge,
+            knot=self.knot,
         )
 
-    def premise_exists(self, pstate: WayTerm) -> bool:
+    def premise_exists(self, pstate: RopeTerm) -> bool:
         return self.premises.get(pstate) != None
 
-    def get_premise(self, premise: WayTerm) -> PremiseUnit:
+    def get_premise(self, premise: RopeTerm) -> PremiseUnit:
         return self.premises.get(premise)
 
-    def del_premise(self, premise: WayTerm):
+    def del_premise(self, premise: RopeTerm):
         try:
             self.premises.pop(premise)
         except KeyError as e:
             raise InvalidReasonException(f"Reason unable to delete premise {e}") from e
 
-    def find_replace_way(self, old_way: WayTerm, new_way: WayTerm):
-        self.rcontext = rebuild_way(self.rcontext, old_way, new_way)
-        self.premises = find_replace_way_key_dict(
-            dict_x=self.premises, old_way=old_way, new_way=new_way
+    def find_replace_rope(self, old_rope: RopeTerm, new_rope: RopeTerm):
+        self.rcontext = rebuild_rope(self.rcontext, old_rope, new_rope)
+        self.premises = find_replace_rope_key_dict(
+            dict_x=self.premises, old_rope=old_rope, new_rope=new_rope
         )
 
 
 def reasoncore_shop(
-    rcontext: WayTerm,
-    premises: dict[WayTerm, PremiseUnit] = None,
+    rcontext: RopeTerm,
+    premises: dict[RopeTerm, PremiseUnit] = None,
     rconcept_active_requisite: bool = None,
-    bridge: str = None,
+    knot: str = None,
 ):
     return ReasonCore(
         rcontext=rcontext,
         premises=get_empty_dict_if_None(premises),
         rconcept_active_requisite=rconcept_active_requisite,
-        bridge=default_bridge_if_None(bridge),
+        knot=default_knot_if_None(knot),
     )
 
 
@@ -540,8 +540,8 @@ def reasoncore_shop(
 class ReasonUnit(ReasonCore):
     def get_dict(self) -> dict[str, str]:
         premises_dict = {
-            premise_way: premise.get_dict()
-            for premise_way, premise in self.premises.items()
+            premise_rope: premise.get_dict()
+            for premise_rope, premise in self.premises.items()
         }
         x_dict = {"rcontext": self.rcontext}
         if premises_dict != {}:
@@ -552,16 +552,16 @@ class ReasonUnit(ReasonCore):
 
 
 def reasonunit_shop(
-    rcontext: WayTerm,
-    premises: dict[WayTerm, PremiseUnit] = None,
+    rcontext: RopeTerm,
+    premises: dict[RopeTerm, PremiseUnit] = None,
     rconcept_active_requisite: bool = None,
-    bridge: str = None,
+    knot: str = None,
 ):
     return ReasonUnit(
         rcontext=rcontext,
         premises=get_empty_dict_if_None(premises),
         rconcept_active_requisite=rconcept_active_requisite,
-        bridge=default_bridge_if_None(bridge),
+        knot=default_knot_if_None(knot),
     )
 
 
@@ -592,7 +592,7 @@ class ReasonHeir(ReasonCore):
         for premise in self.premises.values():
             premise.set_status(factheir)
 
-    def _get_fcontext(self, factheirs: dict[WayTerm, FactHeir]) -> FactHeir:
+    def _get_fcontext(self, factheirs: dict[RopeTerm, FactHeir]) -> FactHeir:
         fcontext = None
         factheirs = get_empty_dict_if_None(factheirs)
         for y_factheir in factheirs.values():
@@ -629,7 +629,7 @@ class ReasonHeir(ReasonCore):
         if self._status and self._chore is None:
             self._chore = False
 
-    def set_status(self, factheirs: dict[WayTerm, FactHeir]):
+    def set_status(self, factheirs: dict[RopeTerm, FactHeir]):
         self.clear_status()
         self._set_premise_status(self._get_fcontext(factheirs))
         any_premise_true, any_chore_true = self.is_any_premise_true()
@@ -638,13 +638,13 @@ class ReasonHeir(ReasonCore):
 
 
 def reasonheir_shop(
-    rcontext: WayTerm,
-    premises: dict[WayTerm, PremiseUnit] = None,
+    rcontext: RopeTerm,
+    premises: dict[RopeTerm, PremiseUnit] = None,
     rconcept_active_requisite: bool = None,
     _status: bool = None,
     _chore: bool = None,
     _rconcept_active_value: bool = None,
-    bridge: str = None,
+    knot: str = None,
 ):
     return ReasonHeir(
         rcontext=rcontext,
@@ -653,12 +653,12 @@ def reasonheir_shop(
         _status=_status,
         _chore=_chore,
         _rconcept_active_value=_rconcept_active_value,
-        bridge=default_bridge_if_None(bridge),
+        knot=default_knot_if_None(knot),
     )
 
 
 # class Reasonsshop:
-def reasons_get_from_dict(reasons_dict: dict) -> dict[WayTerm, ReasonUnit]:
+def reasons_get_from_dict(reasons_dict: dict) -> dict[RopeTerm, ReasonUnit]:
     x_dict = {}
     for reason_dict in reasons_dict.values():
         x_reasonunit = reasonunit_shop(rcontext=reason_dict["rcontext"])

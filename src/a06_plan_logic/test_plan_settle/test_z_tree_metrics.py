@@ -1,4 +1,4 @@
-from src.a01_term_logic.way import create_way_from_labels
+from src.a01_term_logic.rope import create_rope_from_labels
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import awardlink_shop
 from src.a05_concept_logic.concept import conceptunit_shop
@@ -70,17 +70,17 @@ def test_PlanUnit_set_all_concept_uids_unique_SetsUIDsCorrectly():
     sports_str = "sports"
     zia_plan.set_l1_concept(conceptunit_shop(swim_str, _uid=None))
     zia_plan.set_l1_concept(conceptunit_shop(sports_str, _uid=2))
-    swim_way = zia_plan.make_l1_way(swim_str)
-    assert zia_plan.get_concept_obj(swim_way)._uid is None
+    swim_rope = zia_plan.make_l1_rope(swim_str)
+    assert zia_plan.get_concept_obj(swim_rope)._uid is None
 
     # WHEN
     zia_plan.set_all_concept_uids_unique()
 
     # THEN
-    assert zia_plan.get_concept_obj(swim_way)._uid is not None
+    assert zia_plan.get_concept_obj(swim_rope)._uid is not None
 
 
-def test_PlanUnit_get_tree_metrics_ReturnsANone_task_ConceptWayTerm():
+def test_PlanUnit_get_tree_metrics_ReturnsANone_task_ConceptRopeTerm():
     # ESTABLISH
     nia_str = "Nia"
     nia_plan = planunit_shop(nia_str, tally=10)
@@ -89,16 +89,16 @@ def test_PlanUnit_get_tree_metrics_ReturnsANone_task_ConceptWayTerm():
     tree_metrics_before = nia_plan.get_tree_metrics()
 
     # WHEN / THEN
-    assert tree_metrics_before.last_evaluated_task_concept_way is None
+    assert tree_metrics_before.last_evaluated_task_concept_rope is None
 
 
-def test_PlanUnit_get_tree_metrics_Returns_task_ConceptWayTerm():
+def test_PlanUnit_get_tree_metrics_Returns_task_ConceptRopeTerm():
     # ESTABLISH
     yao_plan = planunit_v001()
     yao_tree_metrics = yao_plan.get_tree_metrics()
 
     # WHEN / THEN
-    traain_way = create_way_from_labels(
+    traain_rope = create_rope_from_labels(
         [
             yao_plan.vow_label,
             "ACME",
@@ -107,7 +107,7 @@ def test_PlanUnit_get_tree_metrics_Returns_task_ConceptWayTerm():
             "Accomplish Fall 2021 traaining",
         ]
     )
-    assert yao_tree_metrics.last_evaluated_task_concept_way == traain_way
+    assert yao_tree_metrics.last_evaluated_task_concept_rope == traain_rope
 
 
 def test_PlanUnit_get_tree_metrics_TracksReasonsThatHaveNoFactRcontexts():
@@ -136,8 +136,8 @@ def test_PlanUnit_get_missing_fact_rcontexts_ReturnsAllRcontextsNotCoveredByFact
     assert len(missing_rcontexts) == 11
 
     yao_planunit.add_fact(
-        yao_planunit.make_l1_way("day_minute"),
-        fstate=yao_planunit.make_l1_way("day_minute"),
+        yao_planunit.make_l1_rope("day_minute"),
+        fstate=yao_planunit.make_l1_rope("day_minute"),
         fopen=0,
         fnigh=1439,
     )

@@ -31,22 +31,22 @@ def test_generate_perspective_agenda_CorrectlyGrabsAgendaChores():
     yao_speaker.add_acctunit(yao_str)
     yao_speaker.set_acct_respect(20)
     casa_str = "casa"
-    casa_way = yao_speaker.make_l1_way(casa_str)
+    casa_rope = yao_speaker.make_l1_rope(casa_str)
     status_str = "status"
-    status_way = yao_speaker.make_way(casa_way, status_str)
+    status_rope = yao_speaker.make_rope(casa_rope, status_str)
     clean_str = "clean"
-    clean_way = yao_speaker.make_way(status_way, clean_str)
+    clean_rope = yao_speaker.make_rope(status_rope, clean_str)
     dirty_str = "dirty"
-    dirty_way = yao_speaker.make_way(status_way, dirty_str)
+    dirty_rope = yao_speaker.make_rope(status_rope, dirty_str)
     sweep_str = "sweep"
-    sweep_way = yao_speaker.make_way(casa_way, sweep_str)
-    yao_speaker.set_concept(conceptunit_shop(clean_str), status_way)
-    yao_speaker.set_concept(conceptunit_shop(dirty_str), status_way)
-    yao_speaker.set_concept(conceptunit_shop(sweep_str, task=True), casa_way)
+    sweep_rope = yao_speaker.make_rope(casa_rope, sweep_str)
+    yao_speaker.set_concept(conceptunit_shop(clean_str), status_rope)
+    yao_speaker.set_concept(conceptunit_shop(dirty_str), status_rope)
+    yao_speaker.set_concept(conceptunit_shop(sweep_str, task=True), casa_rope)
     yao_speaker.edit_concept_attr(
-        sweep_way, reason_rcontext=status_way, reason_premise=dirty_way
+        sweep_rope, reason_rcontext=status_rope, reason_premise=dirty_rope
     )
-    yao_speaker.add_fact(status_way, clean_way)
+    yao_speaker.add_fact(status_rope, clean_rope)
     assert len(yao_speaker.get_agenda_dict()) == 0
 
     # WHEN
@@ -74,9 +74,9 @@ def test_generate_ingest_list_ReturnsCorrectList_v1():
     )
 
     # THEN
-    # clean_way = zia_planunit.make_l1_way(clean_str)
-    clean_way = zia_planunit.make_l1_way(clean_str)
-    clean_conceptunit = zia_planunit.get_concept_obj(clean_way)
+    # clean_rope = zia_planunit.make_l1_rope(clean_str)
+    clean_rope = zia_planunit.make_l1_rope(clean_str)
+    clean_conceptunit = zia_planunit.get_concept_obj(clean_rope)
     assert ingested_list[0] == clean_conceptunit
     assert ingested_list[0].mass == zia_debtor_pool
 
@@ -101,12 +101,12 @@ def test_generate_ingest_list_ReturnsCorrectList_v2():
     )
 
     # THEN
-    # clean_way = zia_planunit.make_l1_way(clean_str)
+    # clean_rope = zia_planunit.make_l1_rope(clean_str)
     assert len(ingested_list) == 2
-    clean_way = zia_planunit.make_l1_way(clean_str)
-    cook_way = zia_planunit.make_l1_way(cook_str)
-    clean_conceptunit = zia_planunit.get_concept_obj(clean_way)
-    cook_conceptunit = zia_planunit.get_concept_obj(cook_way)
+    clean_rope = zia_planunit.make_l1_rope(clean_str)
+    cook_rope = zia_planunit.make_l1_rope(cook_str)
+    clean_conceptunit = zia_planunit.get_concept_obj(clean_rope)
+    cook_conceptunit = zia_planunit.get_concept_obj(cook_rope)
     assert ingested_list[0] == cook_conceptunit
     assert ingested_list[0].mass == 16.0
     assert ingested_list == [cook_conceptunit, clean_conceptunit]
@@ -132,10 +132,10 @@ def test_generate_ingest_list_ReturnsCorrectList_v3():
     )
 
     # THEN
-    clean_way = zia_planunit.make_l1_way(clean_str)
-    cook_way = zia_planunit.make_l1_way(cook_str)
-    clean_conceptunit = zia_planunit.get_concept_obj(clean_way)
-    cook_conceptunit = zia_planunit.get_concept_obj(cook_way)
+    clean_rope = zia_planunit.make_l1_rope(clean_str)
+    cook_rope = zia_planunit.make_l1_rope(cook_str)
+    clean_conceptunit = zia_planunit.get_concept_obj(clean_rope)
+    cook_conceptunit = zia_planunit.get_concept_obj(cook_rope)
     assert ingested_list == [cook_conceptunit, clean_conceptunit]
     assert ingested_list[0].mass == 24.0
     assert ingested_list[1].mass == 8.0
@@ -161,10 +161,10 @@ def test_generate_ingest_list_ReturnsCorrectList_v4():
     )
 
     # THEN
-    clean_way = zia_planunit.make_l1_way(clean_str)
-    cook_way = zia_planunit.make_l1_way(cook_str)
-    clean_conceptunit = zia_planunit.get_concept_obj(clean_way)
-    cook_conceptunit = zia_planunit.get_concept_obj(cook_way)
+    clean_rope = zia_planunit.make_l1_rope(clean_str)
+    cook_rope = zia_planunit.make_l1_rope(cook_str)
+    clean_conceptunit = zia_planunit.get_concept_obj(clean_rope)
+    cook_conceptunit = zia_planunit.get_concept_obj(cook_rope)
     assert ingested_list[0].mass == 22
     assert ingested_list[1].mass == 10
     assert ingested_list == [cook_conceptunit, clean_conceptunit]
