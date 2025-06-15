@@ -1,6 +1,10 @@
 from src.a01_term_logic._test_util.a01_str import knot_str
 
 
+def _active_str() -> str:
+    return "_active"
+
+
 def _chore_str() -> str:
     return "_chore"
 

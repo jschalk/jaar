@@ -2,10 +2,9 @@ from pathlib import Path as pathlib_Path
 from src.a00_data_toolbox.file_toolbox import is_path_valid
 from src.a01_term_logic.term import (
     AxiomLabel,
+    EporTerm,
     LabelTerm,
     RopeTerm,
-    VowLabel,
-    YawTerm,
     default_knot_if_None,
 )
 
@@ -15,7 +14,7 @@ class knot_not_in_parent_rope_Exception(Exception):
 
 
 def get_default_axiom_label() -> AxiomLabel:
-    return "YY"
+    return LabelTerm("YY")
 
 
 def to_rope(label: LabelTerm, knot: str = None) -> LabelTerm:
@@ -235,11 +234,11 @@ def ropeterm_valid_dir_path(x_ropeterm: RopeTerm, knot: str) -> bool:
     return False if len(parts) != len(x_rope_labels) else is_path_valid(x_rope_os_path)
 
 
-def get_rope_from_yaw(x_yawterm: YawTerm, knot: str = None) -> RopeTerm:
+def get_rope_from_epor(x_eporterm: EporTerm, knot: str = None) -> RopeTerm:
     x_knot = default_knot_if_None(knot)
-    yaw_labels = get_all_rope_labels(x_yawterm, x_knot)
-    return RopeTerm(create_rope_from_labels(yaw_labels[::-1], x_knot))
+    epor_labels = get_all_rope_labels(x_eporterm, x_knot)
+    return RopeTerm(create_rope_from_labels(epor_labels[::-1], x_knot))
 
 
-def get_yaw_from_rope(x_ropeterm: RopeTerm, knot: str = None) -> YawTerm:
-    return YawTerm(get_rope_from_yaw(x_ropeterm, knot))
+def get_epor_from_rope(x_ropeterm: RopeTerm, knot: str = None) -> EporTerm:
+    return EporTerm(get_rope_from_epor(x_ropeterm, knot))

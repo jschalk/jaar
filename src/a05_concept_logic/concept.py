@@ -8,18 +8,21 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_positive_int,
 )
 from src.a01_term_logic.rope import (
-    LabelTerm,
-    RopeTerm,
-    VowLabel,
     all_ropeterms_between,
     create_rope,
-    default_knot_if_None,
     find_replace_rope_key_dict,
     is_sub_rope,
     rebuild_rope,
     replace_knot,
 )
-from src.a01_term_logic.term import AcctName, GroupTitle, LabelTerm
+from src.a01_term_logic.term import (
+    AcctName,
+    GroupTitle,
+    LabelTerm,
+    RopeTerm,
+    VowLabel,
+    default_knot_if_None,
+)
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import (
     FundIota,

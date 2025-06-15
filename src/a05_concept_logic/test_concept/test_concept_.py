@@ -7,6 +7,7 @@ from src.a04_reason_logic._test_util.a04_str import _chore_str
 from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a05_concept_logic._test_util.a05_str import (
     _active_hx_str,
+    _active_str,
     _all_acct_cred_str,
     _all_acct_debt_str,
     _awardheirs_str,
@@ -101,7 +102,7 @@ def test_ConceptUnit_Exists():
     obj_attrs = set(x_conceptunit.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
-        "_active",
+        _active_str(),
         _active_hx_str(),
         _all_acct_cred_str(),
         _all_acct_debt_str(),
@@ -121,7 +122,7 @@ def test_ConceptUnit_Exists():
         _range_evaluated_str(),
         _reasonheirs_str(),
         _stop_calc_str(),
-        "_chore",
+        _chore_str(),
         _uid_str(),
         addin_str(),
         "awardlinks",

@@ -8,7 +8,7 @@ from src.a00_data_toolbox._test_util.a00_env import (
 )
 from src.a00_data_toolbox.dict_toolbox import get_dict_from_json
 from src.a00_data_toolbox.file_toolbox import (
-    can_active_usser_edit_paths,
+    can_usser_edit_paths,
     count_files,
     create_path,
     get_all_dirs_with_file,
@@ -498,10 +498,10 @@ def test_is_path_valid_ReturnsObj():
     assert is_path_valid("run//trail////")
 
 
-def test_can_active_usser_edit_paths_ReturnsObj():
+def test_can_usser_edit_paths_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     """I am not able to test this correctly. For now make sure it runs."""
-    assert can_active_usser_edit_paths()
+    assert can_usser_edit_paths()
 
 
 def test_is_path_existent_or_creatable_ReturnsObj():

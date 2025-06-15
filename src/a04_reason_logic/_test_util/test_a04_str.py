@@ -1,4 +1,5 @@
 from src.a04_reason_logic._test_util.a04_str import (
+    _active_str,
     _chore_str,
     _status_str,
     fcontext_str,
@@ -16,6 +17,7 @@ from src.a04_reason_logic._test_util.a04_str import (
 
 
 def test_str_functions_ReturnsObj():
+    assert _active_str() == "_active"
     assert _status_str() == "_status"
     assert _chore_str() == "_chore"
     assert fcontext_str() == "fcontext"

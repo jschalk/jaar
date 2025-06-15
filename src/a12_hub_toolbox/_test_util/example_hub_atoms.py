@@ -1,9 +1,5 @@
-from src.a01_term_logic.rope import (
-    RopeTerm,
-    VowLabel,
-    create_rope,
-    create_rope_from_labels,
-)
+from src.a01_term_logic.rope import RopeTerm, create_rope, create_rope_from_labels
+from src.a01_term_logic.term import VowLabel
 from src.a02_finance_logic.deal import DealUnit, dealunit_shop
 from src.a05_concept_logic.concept import get_default_vow_label
 from src.a06_plan_logic._test_util.a06_str import (

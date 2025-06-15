@@ -1,5 +1,6 @@
 from src.a01_term_logic._test_util.a01_str import knot_str
 from src.a02_finance_logic._test_util.a02_str import fund_iota_str, vow_label_str
+from src.a04_reason_logic._test_util.a04_str import _active_str
 
 
 def _active_hx_str() -> str:

@@ -227,7 +227,7 @@ def is_path_valid(path: str) -> bool:
         return True
 
 
-def can_active_usser_edit_paths(path: str = None) -> bool:
+def can_usser_edit_paths(path: str = None) -> bool:
     """
     `True` if the active usser has sufficient permissions to create the passed
     path; `False` otherwise.
@@ -249,7 +249,7 @@ def is_path_existent_or_creatable(path: str) -> bool:
         # To circumvent "os" module calls from raising undesirable exceptions on
         # invalid path, is_path_valid() is explicitly called first.
         return is_path_valid(path) and (
-            os_path_exists(path) or can_active_usser_edit_paths(path)
+            os_path_exists(path) or can_usser_edit_paths(path)
         )
     # Report failure on non-fatal filesystem complaints (e.g., connection
     # timeouts, permissions issues) implying this path to be inaccessible. All

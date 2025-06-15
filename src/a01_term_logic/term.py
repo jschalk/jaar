@@ -64,8 +64,8 @@ class RopeTerm(str):
     pass
 
 
-class YawTerm(str):
-    """YawTerm is a RopeTerm in reverse direction. A string representation of a tree path. LabelTerms are seperated by rope knot."""
+class EporTerm(str):
+    """EporTerm is a RopeTerm in reverse direction. A string representation of a tree path. LabelTerms are seperated by rope knot."""
 
     pass
 
