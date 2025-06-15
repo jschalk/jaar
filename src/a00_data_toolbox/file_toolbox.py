@@ -96,7 +96,6 @@ def save_file(dest_dir: str, filename: str, file_str: str, replace: bool = True)
     if (os_path_exists(file_path) and replace) or os_path_exists(file_path) is False:
         with open(file_path, "w") as f:
             f.write(file_str)
-            f.close()
 
 
 class CouldNotOpenFileException(Exception):
@@ -110,7 +109,6 @@ def open_file(dest_dir: str, filename: str = None):
     try:
         with open(file_path, "r") as f:
             x_str = f.read()
-            f.close()
     except (PermissionError, FileNotFoundError, OSError) as e:
         raise CouldNotOpenFileException(
             f"Could not load file {file_path} {e.args}"
