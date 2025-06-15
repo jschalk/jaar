@@ -202,6 +202,68 @@ def conceptattrholder_shop(
 
 @dataclass
 class ConceptUnit:
+    """
+    Represents a conceptual unit within jaar. Can represent a task, a chore, a different concept's
+    reason or fact, a parent concept of other concepts.
+    Funds: Funds come from the parent concept and go to the child concepts.
+    Awards: Desribes whom the funding comes from and whome it goes to.
+    Tasks: A concept can declare itself a task. It can be active or not active.
+      Task Reason: A concept can require that all reasons be active to be active. (No reasons=active)
+      Task Fact: Each reason checks facts to determine if it is active.
+
+
+    funding, and hierarchical relationships.
+
+    Attributes
+    ----------
+    concept_label : LabelTerm of concept.
+    parent_way : WayTerm that this concept stems from. Empty string for root concepts.
+    root : bool at Indicates whether this is a root concept.
+    vow_label : VowLabel that is root concept LabelTerm.
+    bridge : str Identifier or label for bridging concepts.
+    optional:
+    mass : int weight that is arbitrary used by parent concept to calculated relative importance.
+    _kids : dict[WayTerm], Internal mapping of child concepts by their LabelTerm
+    _uid : int Unique identifier, forgot how I use this.
+    awardlinks : dict[GroupTitle, AwardLink] that describe who funds and who is funded
+    reasonunits : dict[WayTerm, ReasonUnit] that stores all reasons
+    laborunit : LaborUnit that describes whom this task is for
+    factunits : dict[WayTerm, FactUnit] that stores all facts
+    healerlink : HealerLink, if a ancestor concept is a problem, this can donote a healing concept.
+    begin : float that describes the begin of a numberical range if it exists
+    close : float that describes the close of a numberical range if it exists
+    addin : float that describes addition to parent range calculations
+    denom : int that describes denominator to parent range calculations
+    numor : int that describes numerator to parent range calculations
+    morph : bool that describes how to change parent range in calculations.
+    gogo_want : bool
+    stop_want : bool
+    task : bool that describes if the concept is a task.
+    problem_bool : bool that describes if the concept is a problem.
+    _is_expanded : bool Internal flag for whether the concept is expanded.
+
+    _active : bool that describes if the concept task is active, calculated by VowUnit.
+    _active_hx : dict[int, bool] Historical record of active state, used to calcualte if changes have occured
+    _all_acct_cred : bool Flag indicating there are not explicitley defined awardlinks
+    _all_acct_debt : bool Flag indicating there are not explicitley defined awardlinks
+    _awardheirs : dict[GroupTitle, AwardHeir] parent concept provided awards.
+    _awardlines : dict[GroupTitle, AwardLine] child concept provided awards.
+    _descendant_task_count : int Count of descendant concepts marked as tasks.
+    _factheirs : dict[WayTerm, FactHeir] parent concept provided facts.
+    _fund_ratio : float
+    fund_iota : FundIota Smallest indivisible funding component.
+    _fund_onset : FundNum Point at which funding onsets inside VowUnit funding range
+    _fund_cease : FundNum Point at which funding ceases inside VowUnit funding range
+    _healerlink_ratio : float
+    _level : int that describes Depth level in concept hierarchy.
+    _range_evaluated : bool Flag indicating whether range has been evaluated.
+    _reasonheirs : dict[WayTerm, ReasonHeir] parent concept provided reasoning branches.
+    _chore : bool describes if a unit can be changed to inactive with fact range change.
+    _laborheir : LaborHeir parent concept provided labor relationships
+    _gogo_calc : float
+    _stop_calc : float
+    """
+
     concept_label: LabelTerm = None
     mass: int = None
     parent_way: WayTerm = None
@@ -220,8 +282,8 @@ class ConceptUnit:
     denom: int = None
     numor: int = None
     morph: bool = None
-    gogo_want: bool = None
-    stop_want: bool = None
+    gogo_want: float = None
+    stop_want: float = None
     task: bool = None
     problem_bool: bool = None
     bridge: str = None
@@ -500,9 +562,6 @@ class ConceptUnit:
             raise Concept_root_LabelNotEmptyException(
                 f"Cannot set conceptroot to string different than '{self.vow_label}'"
             )
-        elif self.root and self.vow_label is None:
-            self.concept_label = root_label()
-        # elif concept_label is not None:
         else:
             self.concept_label = concept_label
 
