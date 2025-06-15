@@ -8,6 +8,7 @@ from sqlite3 import (
     connect as sqlite3_connect,
 )
 from src.a00_data_toolbox.file_toolbox import create_path, set_dir
+from typing import Any, Generator
 
 
 def sqlite_obj_str(x_obj: any, sqlite_datatype: str):
@@ -208,7 +209,7 @@ def check_table_column_existence(
 
 
 @contextmanager
-def sqlite_connection(db_name):
+def sqlite_connection(db_name) -> Generator[sqlite3_Connection, Any, None]:
     conn = sqlite3_connect(db_name)
     conn.row_factory = dict_factory
     try:

@@ -88,11 +88,8 @@ def stan_days_conceptunit() -> ConceptUnit:
     return conceptunit_shop("days", denom=x_denom)
 
 
-def _get_morph_concept(x_str: str, x_denom: int) -> ConceptUnit:
-    return conceptunit_shop(x_str, denom=x_denom, morph=True)
-
-
 def week_length(x_int: int) -> int:
+    """Return the length of a week in minutes."""
     return day_length() * x_int
 
 

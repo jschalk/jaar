@@ -266,7 +266,7 @@ def is_path_probably_creatable(path: str = None) -> bool:
     # workinng directory (CWD) instead.
     dirname = os_getcwd() if path is None else os_path_dirname(path) or os_getcwd()
     try:
-        # For safety, explicitly close and hence delete this temporary file
+        # For safety, explicitly delete this temporary file
         # immediately after creating it in the passed path's parent directory.
         with tempfile_TemporaryFile(dir=dirname):
             pass
