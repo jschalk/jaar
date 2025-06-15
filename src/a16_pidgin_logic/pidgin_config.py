@@ -87,9 +87,9 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "debtor_respect": "float",
         "denom": "int",
         "face_name": "NameTerm",
-        "fcontext": "WayTerm",
+        "fcontext": "RopeTerm",
         "vow_label": "LabelTerm",
-        "fstate": "WayTerm",
+        "fstate": "RopeTerm",
         "fnigh": "float",
         "fopen": "float",
         "fund_iota": "float",
@@ -99,7 +99,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "group_title": "TitleTerm",
         "healer_name": "NameTerm",
         "hour_label": "LabelTerm",
-        "concept_way": "WayTerm",
+        "concept_rope": "RopeTerm",
         "mass": "int",
         "max_tree_traverse": "int",
         "month_label": "LabelTerm",
@@ -113,11 +113,11 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "task": "bool",
         "problem_bool": "bool",
         "quota": "int",
-        "pstate": "WayTerm",
+        "pstate": "RopeTerm",
         "pdivisor": "int",
         "popen": "float",
         "pnigh": "float",
-        "rcontext": "WayTerm",
+        "rcontext": "RopeTerm",
         "rconcept_active_requisite": "bool",
         "respect_bit": "float",
         "stop_want": "float",
@@ -129,7 +129,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "timeline_label": "LabelTerm",
         "weekday_label": "LabelTerm",
         "weekday_order": "int",
-        "bridge": "str",
+        "knot": "str",
         "yr1_jan1_offset": "int",
     }
 
@@ -140,36 +140,36 @@ def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
         "pidgin_title": {
             "inx_title",
             "otx_title",
-            "inx_bridge",
-            "otx_bridge",
+            "inx_knot",
+            "otx_knot",
             "unknown_str",
         },
         "pidgin_name": {
             "inx_name",
             "otx_name",
-            "inx_bridge",
-            "otx_bridge",
+            "inx_knot",
+            "otx_knot",
             "unknown_str",
         },
         "pidgin_label": {
             "inx_label",
             "otx_label",
-            "inx_bridge",
-            "otx_bridge",
+            "inx_knot",
+            "otx_knot",
             "unknown_str",
         },
-        "pidgin_way": {
-            "inx_way",
-            "otx_way",
-            "inx_bridge",
-            "otx_bridge",
+        "pidgin_rope": {
+            "inx_rope",
+            "otx_rope",
+            "inx_knot",
+            "otx_knot",
             "unknown_str",
         },
     }
 
 
 def pidginable_class_types() -> set:
-    return {"NameTerm", "TitleTerm", "LabelTerm", "WayTerm"}
+    return {"NameTerm", "TitleTerm", "LabelTerm", "RopeTerm"}
 
 
 def get_pidginable_args() -> set:
@@ -183,7 +183,7 @@ def get_pidginable_args() -> set:
         "group_title",
         "healer_name",
         "hour_label",
-        "concept_way",
+        "concept_rope",
         "month_label",
         "owner_name",
         "pstate",
@@ -236,11 +236,11 @@ def get_pidgin_LabelTerm_args() -> set[str]:
     }
 
 
-def get_pidgin_WayTerm_args() -> set[str]:
+def get_pidgin_RopeTerm_args() -> set[str]:
     return {
         "fstate",
         "fcontext",
-        "concept_way",
+        "concept_rope",
         "pstate",
         "rcontext",
     }

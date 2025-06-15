@@ -140,8 +140,8 @@
                 "class_type": "TitleTerm",
                 "sqlite_datatype": "TEXT"
             },
-            "concept_way": {
-                "class_type": "WayTerm",
+            "concept_rope": {
+                "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
             "vow_label": {
@@ -177,12 +177,12 @@
     "plan_concept_factunit": {
         "abbreviation": "plnfact",
         "jkeys": {
-            "concept_way": {
-                "class_type": "WayTerm",
+            "concept_rope": {
+                "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
             "fcontext": {
-                "class_type": "WayTerm",
+                "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
             "vow_label": {
@@ -205,7 +205,7 @@
                 "sqlite_datatype": "REAL"
             },
             "fstate": {
-                "class_type": "WayTerm",
+                "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             }
         }
@@ -213,8 +213,8 @@
     "plan_concept_healerlink": {
         "abbreviation": "plnheal",
         "jkeys": {
-            "concept_way": {
-                "class_type": "WayTerm",
+            "concept_rope": {
+                "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
             "vow_label": {
@@ -236,8 +236,8 @@
     "plan_concept_laborlink": {
         "abbreviation": "plnlabo",
         "jkeys": {
-            "concept_way": {
-                "class_type": "WayTerm",
+            "concept_rope": {
+                "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
             "vow_label": {
@@ -264,8 +264,8 @@
     "plan_concept_reason_premiseunit": {
         "abbreviation": "plnprem",
         "jkeys": {
-            "concept_way": {
-                "class_type": "WayTerm",
+            "concept_rope": {
+                "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
             "vow_label": {
@@ -277,11 +277,11 @@
                 "sqlite_datatype": "TEXT"
             },
             "pstate": {
-                "class_type": "WayTerm",
+                "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
             "rcontext": {
-                "class_type": "WayTerm",
+                "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             }
         },
@@ -313,8 +313,8 @@
     "plan_concept_reasonunit": {
         "abbreviation": "plnreas",
         "jkeys": {
-            "concept_way": {
-                "class_type": "WayTerm",
+            "concept_rope": {
+                "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
             "vow_label": {
@@ -326,7 +326,7 @@
                 "sqlite_datatype": "TEXT"
             },
             "rcontext": {
-                "class_type": "WayTerm",
+                "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             }
         },
@@ -354,8 +354,8 @@
     "plan_conceptunit": {
         "abbreviation": "plnconc",
         "jkeys": {
-            "concept_way": {
-                "class_type": "WayTerm",
+            "concept_rope": {
+                "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
             "vow_label": {
@@ -519,7 +519,7 @@
             }
         },
         "jvalues": {
-            "bridge": {
+            "knot": {
                 "class_type": "str",
                 "sqlite_datatype": "TEXT"
             }

@@ -2,39 +2,39 @@ from dataclasses import dataclass
 from src.a00_data_toolbox.dict_toolbox import get_0_if_None, get_empty_dict_if_None
 from src.a01_term_logic.term import GroupTitle
 from src.a03_group_logic.group import AwardLink
-from src.a04_reason_logic.reason_concept import ReasonUnit, WayTerm
+from src.a04_reason_logic.reason_concept import ReasonUnit, RopeTerm
 
 
 @dataclass
 class TreeMetrics:
     label_count: int = None
     level_count: dict[int, int] = None
-    reason_rcontexts: dict[WayTerm, int] = None
+    reason_rcontexts: dict[RopeTerm, int] = None
     awardlinks_metrics: dict[GroupTitle, AwardLink] = None
     uid_max: int = None
     uid_dict: dict[int, int] = None
     all_concept_uids_are_unique: bool = None
-    last_evaluated_task_concept_way: WayTerm = None
+    last_evaluated_task_concept_rope: RopeTerm = None
 
     def evaluate_label(
         self,
         level: int,
-        reasons: dict[WayTerm, ReasonUnit],
+        reasons: dict[RopeTerm, ReasonUnit],
         awardlinks: dict[GroupTitle, AwardLink],
         uid: int,
         task: bool,
-        concept_way: WayTerm,
+        concept_rope: RopeTerm,
     ):
         self.label_count += 1
-        self.evaluate_task(task=task, concept_way=concept_way)
+        self.evaluate_task(task=task, concept_rope=concept_rope)
         self.evaluate_level(level=level)
         self.evaluate_reasonunits(reasons=reasons)
         self.evaluate_awardlinks(awardlinks=awardlinks)
         self.evaluate_uid_max(uid=uid)
 
-    def evaluate_task(self, task: bool, concept_way: WayTerm):
+    def evaluate_task(self, task: bool, concept_rope: RopeTerm):
         if task:
-            self.last_evaluated_task_concept_way = concept_way
+            self.last_evaluated_task_concept_rope = concept_rope
 
     def evaluate_level(self, level):
         if self.level_count.get(level) is None:
@@ -42,7 +42,7 @@ class TreeMetrics:
         else:
             self.level_count[level] = self.level_count[level] + 1
 
-    def evaluate_reasonunits(self, reasons: dict[WayTerm, ReasonUnit]):
+    def evaluate_reasonunits(self, reasons: dict[RopeTerm, ReasonUnit]):
         reasons = {} if reasons is None else reasons
         for reason in reasons.values():
             if self.reason_rcontexts.get(reason.rcontext) is None:
@@ -71,7 +71,7 @@ class TreeMetrics:
 def treemetrics_shop(
     label_count: int = None,
     level_count: dict[int, int] = None,
-    reason_rcontexts: dict[WayTerm, int] = None,
+    reason_rcontexts: dict[RopeTerm, int] = None,
     awardlinks_metrics: dict[GroupTitle, AwardLink] = None,
     uid_max: int = None,
     uid_dict: dict[int, int] = None,

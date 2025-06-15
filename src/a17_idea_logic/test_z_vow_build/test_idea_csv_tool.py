@@ -1,6 +1,6 @@
 from copy import deepcopy as copy_deepcopy
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a01_term_logic.way import to_way
+from src.a01_term_logic.rope import to_rope
 from src.a03_group_logic.group import awardlink_shop
 from src.a06_plan_logic.plan import planunit_shop
 from src.a09_pack_logic.delta import plandelta_shop
@@ -62,7 +62,7 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyVowUnit(
 
     # THEN
     expected_stance_csv_strs = {
-        "br00000": "vow_label,timeline_label,c400_number,yr1_jan1_offset,monthday_distortion,fund_iota,penny,respect_bit,bridge,job_listen_rotations\n",
+        "br00000": "vow_label,timeline_label,c400_number,yr1_jan1_offset,monthday_distortion,fund_iota,penny,respect_bit,knot,job_listen_rotations\n",
         "br00001": "vow_label,owner_name,deal_time,quota,celldepth\n",
         "br00002": "vow_label,owner_name,acct_name,tran_time,amount\n",
         "br00003": "vow_label,cumlative_minute,hour_label\n",
@@ -71,18 +71,18 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyVowUnit(
         # "br00006": "vow_label,offi_time,_offi_time_max\n",
         "br00020": "vow_label,owner_name,acct_name,group_title,credit_vote,debt_vote\n",
         "br00021": "vow_label,owner_name,acct_name,credit_score,debt_score\n",
-        "br00022": "vow_label,owner_name,concept_way,awardee_title,give_force,take_force\n",
-        "br00023": "vow_label,owner_name,concept_way,fcontext,fstate,fopen,fnigh\n",
-        "br00024": "vow_label,owner_name,concept_way,labor_title\n",
-        "br00025": "vow_label,owner_name,concept_way,healer_name\n",
-        "br00026": "vow_label,owner_name,concept_way,rcontext,pstate,pnigh,popen,pdivisor\n",
-        "br00027": "vow_label,owner_name,concept_way,rcontext,rconcept_active_requisite\n",
-        "br00028": "vow_label,owner_name,concept_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,task,problem_bool\n",
+        "br00022": "vow_label,owner_name,concept_rope,awardee_title,give_force,take_force\n",
+        "br00023": "vow_label,owner_name,concept_rope,fcontext,fstate,fopen,fnigh\n",
+        "br00024": "vow_label,owner_name,concept_rope,labor_title\n",
+        "br00025": "vow_label,owner_name,concept_rope,healer_name\n",
+        "br00026": "vow_label,owner_name,concept_rope,rcontext,pstate,pnigh,popen,pdivisor\n",
+        "br00027": "vow_label,owner_name,concept_rope,rcontext,rconcept_active_requisite\n",
+        "br00028": "vow_label,owner_name,concept_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,task,problem_bool\n",
         "br00029": "vow_label,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_iota,penny,respect_bit\n",
-        "br00042": "otx_title,inx_title,otx_bridge,inx_bridge,unknown_str\n",
-        "br00043": "otx_name,inx_name,otx_bridge,inx_bridge,unknown_str\n",
-        "br00044": "otx_label,inx_label,otx_bridge,inx_bridge,unknown_str\n",
-        "br00045": "otx_way,inx_way,otx_bridge,inx_bridge,unknown_str\n",
+        "br00042": "otx_title,inx_title,otx_knot,inx_knot,unknown_str\n",
+        "br00043": "otx_name,inx_name,otx_knot,inx_knot,unknown_str\n",
+        "br00044": "otx_label,inx_label,otx_knot,inx_knot,unknown_str\n",
+        "br00045": "otx_rope,inx_rope,otx_knot,inx_knot,unknown_str\n",
     }
     expected_br00000_csv = expected_stance_csv_strs.get("br00000")
     expected_br00001_csv = expected_stance_csv_strs.get("br00001")
@@ -335,13 +335,13 @@ def test_add_plan_to_br00022_csv_ReturnsObj():
     bob_str = "Bob"
     a23_str = "accord23"
     bob_plan = planunit_shop(bob_str, a23_str)
-    casa_way = bob_plan.make_l1_way("casa")
+    casa_rope = bob_plan.make_l1_rope("casa")
     yao_str = "Yao"
     yao_give_force = 55
     yao_take_force = 77
     casa_awardlink = awardlink_shop(yao_str, yao_give_force, yao_take_force)
-    bob_plan.add_concept(casa_way)
-    bob_plan.edit_concept_attr(casa_way, awardlink=casa_awardlink)
+    bob_plan.add_concept(casa_rope)
+    bob_plan.edit_concept_attr(casa_rope, awardlink=casa_awardlink)
     csv_header = x_ideas.get("br00022")
     print(f"{csv_header=}")
 
@@ -350,7 +350,7 @@ def test_add_plan_to_br00022_csv_ReturnsObj():
     x_csv = add_plan_to_br00022_csv(csv_header, bob_plan, csv_delimiter)
 
     # THEN
-    yao_award_row = f",,{a23_str},{bob_str},{casa_way},{yao_str},{yao_give_force},{yao_take_force}\n"
+    yao_award_row = f",,{a23_str},{bob_str},{casa_rope},{yao_str},{yao_give_force},{yao_take_force}\n"
     assert x_csv == f"{csv_header}{yao_award_row}"
 
 
@@ -360,15 +360,15 @@ def test_add_plan_to_br00023_csv_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
-    a23_way = to_way(a23_str)
+    a23_rope = to_rope(a23_str)
     bob_plan = planunit_shop(bob_str, a23_str)
-    casa_way = bob_plan.make_l1_way("casa")
-    clean_way = bob_plan.make_way(casa_way, "clean")
+    casa_rope = bob_plan.make_l1_rope("casa")
+    clean_rope = bob_plan.make_rope(casa_rope, "clean")
     clean_fopen = 55
     clean_fnigh = 77
-    bob_plan.add_concept(casa_way)
-    bob_plan.add_concept(clean_way)
-    bob_plan.add_fact(casa_way, clean_way, clean_fopen, clean_fnigh)
+    bob_plan.add_concept(casa_rope)
+    bob_plan.add_concept(clean_rope)
+    bob_plan.add_fact(casa_rope, clean_rope, clean_fopen, clean_fnigh)
     csv_header = x_ideas.get("br00023")
     print(f"{csv_header=}")
 
@@ -376,7 +376,7 @@ def test_add_plan_to_br00023_csv_ReturnsObj():
     x_csv = add_plan_to_br00023_csv(csv_header, bob_plan, csv_delimiter)
 
     # THEN
-    clean_row = f",,{a23_str},{bob_str},{a23_way},{casa_way},{clean_way},{clean_fopen},{clean_fnigh}\n"
+    clean_row = f",,{a23_str},{bob_str},{a23_rope},{casa_rope},{clean_rope},{clean_fopen},{clean_fnigh}\n"
     assert x_csv == f"{csv_header}{clean_row}"
 
 
@@ -387,9 +387,9 @@ def test_add_plan_to_br00024_csv_ReturnsObj():
     bob_str = "Bob"
     a23_str = "accord23"
     bob_plan = planunit_shop(bob_str, a23_str)
-    casa_way = bob_plan.make_l1_way("casa")
-    bob_plan.add_concept(casa_way)
-    casa_concept = bob_plan.get_concept_obj(casa_way)
+    casa_rope = bob_plan.make_l1_rope("casa")
+    bob_plan.add_concept(casa_rope)
+    casa_concept = bob_plan.get_concept_obj(casa_rope)
     cleaners_str = "cleaners"
     casa_concept.laborunit.set_laborlink(cleaners_str)
     csv_header = x_ideas.get("br00024")
@@ -400,7 +400,7 @@ def test_add_plan_to_br00024_csv_ReturnsObj():
     x_csv = add_plan_to_br00024_csv(csv_header, bob_plan, csv_delimiter)
 
     # THEN
-    cleaners_row = f",,{a23_str},{bob_str},{casa_way},{cleaners_str}\n"
+    cleaners_row = f",,{a23_str},{bob_str},{casa_rope},{cleaners_str}\n"
     assert x_csv == f"{csv_header}{cleaners_row}"
 
 
@@ -411,9 +411,9 @@ def test_add_plan_to_br00025_csv_ReturnsObj():
     bob_str = "Bob"
     a23_str = "accord23"
     bob_plan = planunit_shop(bob_str, a23_str)
-    casa_way = bob_plan.make_l1_way("casa")
-    bob_plan.add_concept(casa_way)
-    casa_concept = bob_plan.get_concept_obj(casa_way)
+    casa_rope = bob_plan.make_l1_rope("casa")
+    bob_plan.add_concept(casa_rope)
+    casa_concept = bob_plan.get_concept_obj(casa_rope)
     cleaners_str = "cleaners"
     casa_concept.healerlink.set_healer_name(cleaners_str)
     csv_header = x_ideas.get("br00025")
@@ -424,7 +424,7 @@ def test_add_plan_to_br00025_csv_ReturnsObj():
     x_csv = add_plan_to_br00025_csv(csv_header, bob_plan, csv_delimiter)
 
     # THEN
-    cleaners_row = f",,{a23_str},{bob_str},{casa_way},{cleaners_str}\n"
+    cleaners_row = f",,{a23_str},{bob_str},{casa_rope},{cleaners_str}\n"
     assert x_csv == f"{csv_header}{cleaners_row}"
 
 
@@ -435,19 +435,19 @@ def test_add_plan_to_br00026_csv_ReturnsObj():
     bob_str = "Bob"
     a23_str = "accord23"
     bob_plan = planunit_shop(bob_str, a23_str)
-    mop_way = bob_plan.make_l1_way("mop")
-    casa_way = bob_plan.make_l1_way("casa")
-    clean_way = bob_plan.make_way(casa_way, "clean")
+    mop_rope = bob_plan.make_l1_rope("mop")
+    casa_rope = bob_plan.make_l1_rope("casa")
+    clean_rope = bob_plan.make_rope(casa_rope, "clean")
     clean_popen = 22
     clean_pnigh = 55
     clean_pdivisor = 77
-    bob_plan.add_concept(mop_way)
-    bob_plan.add_concept(casa_way)
-    bob_plan.add_concept(clean_way)
+    bob_plan.add_concept(mop_rope)
+    bob_plan.add_concept(casa_rope)
+    bob_plan.add_concept(clean_rope)
     bob_plan.edit_concept_attr(
-        mop_way,
-        reason_rcontext=casa_way,
-        reason_premise=clean_way,
+        mop_rope,
+        reason_rcontext=casa_rope,
+        reason_premise=clean_rope,
         popen=clean_popen,
         reason_pnigh=clean_pnigh,
         pdivisor=clean_pdivisor,
@@ -460,7 +460,7 @@ def test_add_plan_to_br00026_csv_ReturnsObj():
     x_csv = add_plan_to_br00026_csv(csv_header, bob_plan, csv_delimiter)
 
     # THEN
-    mop_row = f",,{a23_str},{bob_str},{mop_way},{casa_way},{clean_way},{clean_popen},{clean_pnigh},{clean_pdivisor}\n"
+    mop_row = f",,{a23_str},{bob_str},{mop_rope},{casa_rope},{clean_rope},{clean_popen},{clean_pnigh},{clean_pdivisor}\n"
     assert x_csv == f"{csv_header}{mop_row}"
 
 
@@ -471,13 +471,13 @@ def test_add_plan_to_br00027_csv_ReturnsObj():
     bob_str = "Bob"
     a23_str = "accord23"
     bob_plan = planunit_shop(bob_str, a23_str)
-    mop_way = bob_plan.make_l1_way("mop")
-    casa_way = bob_plan.make_l1_way("casa")
-    bob_plan.add_concept(mop_way)
-    bob_plan.add_concept(casa_way)
+    mop_rope = bob_plan.make_l1_rope("mop")
+    casa_rope = bob_plan.make_l1_rope("casa")
+    bob_plan.add_concept(mop_rope)
+    bob_plan.add_concept(casa_rope)
     bob_plan.edit_concept_attr(
-        mop_way,
-        reason_rcontext=casa_way,
+        mop_rope,
+        reason_rcontext=casa_rope,
         reason_rconcept_active_requisite=True,
     )
     csv_header = x_ideas.get("br00027")
@@ -488,7 +488,7 @@ def test_add_plan_to_br00027_csv_ReturnsObj():
     x_csv = add_plan_to_br00027_csv(csv_header, bob_plan, csv_delimiter)
 
     # THEN
-    casa_row = f",,{a23_str},{bob_str},{mop_way},{casa_way},True\n"
+    casa_row = f",,{a23_str},{bob_str},{mop_rope},{casa_rope},True\n"
     assert x_csv == f"{csv_header}{casa_row}"
 
 
@@ -498,10 +498,10 @@ def test_add_plan_to_br00028_csv_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
-    a23_way = to_way(a23_str)
+    a23_rope = to_rope(a23_str)
     bob_plan = planunit_shop(bob_str, a23_str)
-    mop_way = bob_plan.make_l1_way("mop")
-    casa_way = bob_plan.make_l1_way("casa")
+    mop_rope = bob_plan.make_l1_rope("mop")
+    casa_rope = bob_plan.make_l1_rope("casa")
     casa_begin = 3
     casa_close = 5
     casa_addin = 7
@@ -513,10 +513,10 @@ def test_add_plan_to_br00028_csv_ReturnsObj():
     casa_mass = 2
     casa_task = False
     casa_problem_bool = False
-    bob_plan.add_concept(casa_way)
-    bob_plan.add_concept(mop_way)
+    bob_plan.add_concept(casa_rope)
+    bob_plan.add_concept(mop_rope)
     bob_plan.edit_concept_attr(
-        mop_way,
+        mop_rope,
         begin=casa_begin,
         close=casa_close,
         addin=casa_addin,
@@ -537,9 +537,9 @@ def test_add_plan_to_br00028_csv_ReturnsObj():
     x_csv = add_plan_to_br00028_csv(csv_header, bob_plan, csv_delimiter)
 
     # THEN
-    root_row = f",,{a23_str},{bob_str},,{a23_way},,,,,,,,,1,False,False\n"
-    mop_row = f",,{a23_str},{bob_str},{mop_way},{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},{casa_gogo_want},{casa_stop_want},{casa_mass},{casa_task},{casa_problem_bool}\n"
-    casa_row = f",,{a23_str},{bob_str},{casa_way},,,,,,,,,0,False,False\n"
+    root_row = f",,{a23_str},{bob_str},,{a23_rope},,,,,,,,,1,False,False\n"
+    mop_row = f",,{a23_str},{bob_str},{mop_rope},{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},{casa_gogo_want},{casa_stop_want},{casa_mass},{casa_task},{casa_problem_bool}\n"
+    casa_row = f",,{a23_str},{bob_str},{casa_rope},,,,,,,,,0,False,False\n"
     # print(f"{mop_row=}")
     expected_csv = f"{csv_header}{mop_row}{casa_row}"
     print(f"       {x_csv=}")
@@ -582,18 +582,18 @@ def test_add_planunit_to_stance_csv_strs_ReturnsObj():
     a23_str = "accord23"
     bob_plan = planunit_shop(bob_str, a23_str)
     bob_plan.add_acctunit(yao_str)
-    mop_way = bob_plan.make_l1_way("mop")
-    casa_way = bob_plan.make_l1_way("casa")
-    clean_way = bob_plan.make_way(casa_way, "clean")
-    bob_plan.add_concept(mop_way)
-    bob_plan.add_concept(casa_way)
-    bob_plan.add_concept(clean_way)
+    mop_rope = bob_plan.make_l1_rope("mop")
+    casa_rope = bob_plan.make_l1_rope("casa")
+    clean_rope = bob_plan.make_rope(casa_rope, "clean")
+    bob_plan.add_concept(mop_rope)
+    bob_plan.add_concept(casa_rope)
+    bob_plan.add_concept(clean_rope)
     bob_plan.edit_concept_attr(
-        mop_way, reason_rcontext=casa_way, reason_premise=clean_way
+        mop_rope, reason_rcontext=casa_rope, reason_premise=clean_rope
     )
-    bob_plan.add_concept(casa_way)
-    bob_plan.edit_concept_attr(casa_way, awardlink=awardlink_shop(yao_str))
-    bob_plan.add_fact(casa_way, clean_way)
+    bob_plan.add_concept(casa_rope)
+    bob_plan.edit_concept_attr(casa_rope, awardlink=awardlink_shop(yao_str))
+    bob_plan.add_fact(casa_rope, clean_rope)
 
     br00020_header = x_ideas.get("br00020")
     br00021_header = x_ideas.get("br00021")
@@ -629,11 +629,11 @@ def test_add_to_br00042_csv_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     event7 = 7
-    bob_otx_bridge = ";"
-    bob_inx_bridge = "/"
+    bob_otx_knot = ";"
+    bob_inx_knot = "/"
     bob_unknown_str = "UNKNOWN"
     bob7_pidginunit = pidginunit_shop(
-        bob_str, event7, bob_otx_bridge, bob_inx_bridge, bob_unknown_str
+        bob_str, event7, bob_otx_knot, bob_inx_knot, bob_unknown_str
     )
     run_otx = "run"
     run_inx = "cours"
@@ -645,7 +645,7 @@ def test_add_to_br00042_csv_ReturnsObj():
     x_csv = add_to_br00042_csv(csv_header, bob7_pidginunit, csv_delimiter)
 
     # THEN
-    run_row = f"{bob_str},{event7},{run_otx},{bob_otx_bridge},{run_inx},{bob_inx_bridge},{bob_unknown_str}\n"
+    run_row = f"{bob_str},{event7},{run_otx},{bob_otx_knot},{run_inx},{bob_inx_knot},{bob_unknown_str}\n"
     assert x_csv == f"{csv_header}{run_row}"
 
 
@@ -655,11 +655,11 @@ def test_add_to_br00043_csv_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     event7 = 7
-    bob_otx_bridge = ";"
-    bob_inx_bridge = "/"
+    bob_otx_knot = ";"
+    bob_inx_knot = "/"
     bob_unknown_str = "UNKNOWN"
     bob7_pidginunit = pidginunit_shop(
-        bob_str, event7, bob_otx_bridge, bob_inx_bridge, bob_unknown_str
+        bob_str, event7, bob_otx_knot, bob_inx_knot, bob_unknown_str
     )
     yao_otx = "Yao"
     yao_inx = "YaoMing"
@@ -671,7 +671,7 @@ def test_add_to_br00043_csv_ReturnsObj():
     x_csv = add_to_br00043_csv(csv_header, bob7_pidginunit, csv_delimiter)
 
     # THEN
-    bob_row = f"{bob_str},{event7},{yao_otx},{bob_otx_bridge},{yao_inx},{bob_inx_bridge},{bob_unknown_str}\n"
+    bob_row = f"{bob_str},{event7},{yao_otx},{bob_otx_knot},{yao_inx},{bob_inx_knot},{bob_unknown_str}\n"
     assert x_csv == f"{csv_header}{bob_row}"
 
 
@@ -681,11 +681,11 @@ def test_add_to_br00044_csv_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     event7 = 7
-    bob_otx_bridge = ";"
-    bob_inx_bridge = "/"
+    bob_otx_knot = ";"
+    bob_inx_knot = "/"
     bob_unknown_str = "UNKNOWN"
     bob7_pidginunit = pidginunit_shop(
-        bob_str, event7, bob_otx_bridge, bob_inx_bridge, bob_unknown_str
+        bob_str, event7, bob_otx_knot, bob_inx_knot, bob_unknown_str
     )
     clean_otx = "clean"
     clean_inx = "limpia"
@@ -697,7 +697,7 @@ def test_add_to_br00044_csv_ReturnsObj():
     x_csv = add_to_br00044_csv(csv_header, bob7_pidginunit, csv_delimiter)
 
     # THEN
-    bob_row = f"{bob_str},{event7},{clean_otx},{bob_otx_bridge},{clean_inx},{bob_inx_bridge},{bob_unknown_str}\n"
+    bob_row = f"{bob_str},{event7},{clean_otx},{bob_otx_knot},{clean_inx},{bob_inx_knot},{bob_unknown_str}\n"
     assert x_csv == f"{csv_header}{bob_row}"
 
 
@@ -707,15 +707,15 @@ def test_add_to_br00045_csv_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     event7 = 7
-    bob_otx_bridge = ";"
-    bob_inx_bridge = "/"
+    bob_otx_knot = ";"
+    bob_inx_knot = "/"
     bob_unknown_str = "UNKNOWN"
     bob7_pidginunit = pidginunit_shop(
-        bob_str, event7, bob_otx_bridge, bob_inx_bridge, bob_unknown_str
+        bob_str, event7, bob_otx_knot, bob_inx_knot, bob_unknown_str
     )
     clean_otx = "clean"
     clean_inx = "limpia"
-    bob7_pidginunit.set_otx2inx("WayTerm", clean_otx, clean_inx)
+    bob7_pidginunit.set_otx2inx("RopeTerm", clean_otx, clean_inx)
     csv_header = x_ideas.get("br00045")
     print(f"{csv_header=}")
 
@@ -723,7 +723,7 @@ def test_add_to_br00045_csv_ReturnsObj():
     x_csv = add_to_br00045_csv(csv_header, bob7_pidginunit, csv_delimiter)
 
     # THEN
-    bob_row = f"{bob_str},{event7},{clean_otx},{bob_otx_bridge},{clean_inx},{bob_inx_bridge},{bob_unknown_str}\n"
+    bob_row = f"{bob_str},{event7},{clean_otx},{bob_otx_knot},{clean_inx},{bob_inx_knot},{bob_unknown_str}\n"
     assert x_csv == f"{csv_header}{bob_row}"
 
 
@@ -733,15 +733,15 @@ def test_add_pidginunit_to_stance_csv_strs_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     event7 = 7
-    bob_otx_bridge = ";"
-    bob_inx_bridge = "/"
+    bob_otx_knot = ";"
+    bob_inx_knot = "/"
     bob_unknown_str = "UNKNOWN"
     bob7_pidginunit = pidginunit_shop(
-        bob_str, event7, bob_otx_bridge, bob_inx_bridge, bob_unknown_str
+        bob_str, event7, bob_otx_knot, bob_inx_knot, bob_unknown_str
     )
     clean_otx = "clean"
     clean_inx = "limpia"
-    bob7_pidginunit.set_otx2inx("WayTerm", clean_otx, clean_inx)
+    bob7_pidginunit.set_otx2inx("RopeTerm", clean_otx, clean_inx)
     yao_otx = "Yao"
     yao_inx = "YaoMing"
     bob7_pidginunit.set_otx2inx("NameTerm", yao_otx, yao_inx)
@@ -835,13 +835,13 @@ def test_add_pack_to_br00022_csv_ReturnsObj():
     bob_str = "Bob"
     a23_str = "accord23"
     bob_plan = planunit_shop(bob_str, a23_str)
-    casa_way = bob_plan.make_l1_way("casa")
+    casa_rope = bob_plan.make_l1_rope("casa")
     yao_str = "Yao"
     yao_give_force = 55
     yao_take_force = 77
     casa_awardlink = awardlink_shop(yao_str, yao_give_force, yao_take_force)
-    bob_plan.add_concept(casa_way)
-    bob_plan.edit_concept_attr(casa_way, awardlink=casa_awardlink)
+    bob_plan.add_concept(casa_rope)
+    bob_plan.edit_concept_attr(casa_rope, awardlink=casa_awardlink)
     bob_plandelta = plandelta_shop()
     bob_plandelta.add_all_planatoms(bob_plan)
     sue_str = "Sue"
@@ -855,7 +855,7 @@ def test_add_pack_to_br00022_csv_ReturnsObj():
     x_csv = add_pack_to_br00022_csv(csv_header, sue7_pack, csv_delimiter)
 
     # THEN
-    yao_award_row = f"{sue_str},{event7},{a23_str},{bob_str},{casa_way},{yao_str},{yao_give_force},{yao_take_force}\n"
+    yao_award_row = f"{sue_str},{event7},{a23_str},{bob_str},{casa_rope},{yao_str},{yao_give_force},{yao_take_force}\n"
     assert x_csv == f"{csv_header}{yao_award_row}"
 
 
@@ -865,15 +865,15 @@ def test_add_pack_to_br00023_csv_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
-    a23_way = to_way(a23_str)
+    a23_rope = to_rope(a23_str)
     bob_plan = planunit_shop(bob_str, a23_str)
-    casa_way = bob_plan.make_l1_way("casa")
-    clean_way = bob_plan.make_way(casa_way, "clean")
+    casa_rope = bob_plan.make_l1_rope("casa")
+    clean_rope = bob_plan.make_rope(casa_rope, "clean")
     clean_fopen = 55
     clean_fnigh = 77
-    bob_plan.add_concept(casa_way)
-    bob_plan.add_concept(clean_way)
-    bob_plan.add_fact(casa_way, clean_way, clean_fopen, clean_fnigh)
+    bob_plan.add_concept(casa_rope)
+    bob_plan.add_concept(clean_rope)
+    bob_plan.add_fact(casa_rope, clean_rope, clean_fopen, clean_fnigh)
     bob_plandelta = plandelta_shop()
     bob_plandelta.add_all_planatoms(bob_plan)
     sue_str = "Sue"
@@ -887,7 +887,7 @@ def test_add_pack_to_br00023_csv_ReturnsObj():
     x_csv = add_pack_to_br00023_csv(csv_header, sue7_pack, csv_delimiter)
 
     # THEN
-    clean_row = f"{sue_str},{event7},{a23_str},{bob_str},{a23_way},{casa_way},{clean_way},{clean_fopen},{clean_fnigh}\n"
+    clean_row = f"{sue_str},{event7},{a23_str},{bob_str},{a23_rope},{casa_rope},{clean_rope},{clean_fopen},{clean_fnigh}\n"
     expected_csv = f"{csv_header}{clean_row}"
     print(f"       {x_csv=}")
     print(f"{expected_csv=}")
@@ -901,9 +901,9 @@ def test_add_pack_to_br00024_csv_ReturnsObj():
     bob_str = "Bob"
     a23_str = "accord23"
     bob_plan = planunit_shop(bob_str, a23_str)
-    casa_way = bob_plan.make_l1_way("casa")
-    bob_plan.add_concept(casa_way)
-    casa_concept = bob_plan.get_concept_obj(casa_way)
+    casa_rope = bob_plan.make_l1_rope("casa")
+    bob_plan.add_concept(casa_rope)
+    casa_concept = bob_plan.get_concept_obj(casa_rope)
     cleaners_str = "cleaners"
     casa_concept.laborunit.set_laborlink(cleaners_str)
     bob_plandelta = plandelta_shop()
@@ -919,7 +919,9 @@ def test_add_pack_to_br00024_csv_ReturnsObj():
     x_csv = add_pack_to_br00024_csv(csv_header, sue7_pack, csv_delimiter)
 
     # THEN
-    cleaners_row = f"{sue_str},{event7},{a23_str},{bob_str},{casa_way},{cleaners_str}\n"
+    cleaners_row = (
+        f"{sue_str},{event7},{a23_str},{bob_str},{casa_rope},{cleaners_str}\n"
+    )
     expected_csv = f"{csv_header}{cleaners_row}"
     print(f"       {x_csv=}")
     print(f"{expected_csv=}")
@@ -933,9 +935,9 @@ def test_add_pack_to_br00025_csv_ReturnsObj():
     bob_str = "Bob"
     a23_str = "accord23"
     bob_plan = planunit_shop(bob_str, a23_str)
-    casa_way = bob_plan.make_l1_way("casa")
-    bob_plan.add_concept(casa_way)
-    casa_concept = bob_plan.get_concept_obj(casa_way)
+    casa_rope = bob_plan.make_l1_rope("casa")
+    bob_plan.add_concept(casa_rope)
+    casa_concept = bob_plan.get_concept_obj(casa_rope)
     cleaners_str = "cleaners"
     casa_concept.healerlink.set_healer_name(cleaners_str)
     bob_plandelta = plandelta_shop()
@@ -951,7 +953,9 @@ def test_add_pack_to_br00025_csv_ReturnsObj():
     x_csv = add_pack_to_br00025_csv(csv_header, sue7_pack, csv_delimiter)
 
     # THEN
-    cleaners_row = f"{sue_str},{event7},{a23_str},{bob_str},{casa_way},{cleaners_str}\n"
+    cleaners_row = (
+        f"{sue_str},{event7},{a23_str},{bob_str},{casa_rope},{cleaners_str}\n"
+    )
     assert x_csv == f"{csv_header}{cleaners_row}"
 
 
@@ -962,19 +966,19 @@ def test_add_pack_to_br00026_csv_ReturnsObj():
     bob_str = "Bob"
     a23_str = "accord23"
     bob_plan = planunit_shop(bob_str, a23_str)
-    mop_way = bob_plan.make_l1_way("mop")
-    casa_way = bob_plan.make_l1_way("casa")
-    clean_way = bob_plan.make_way(casa_way, "clean")
+    mop_rope = bob_plan.make_l1_rope("mop")
+    casa_rope = bob_plan.make_l1_rope("casa")
+    clean_rope = bob_plan.make_rope(casa_rope, "clean")
     clean_popen = 22
     clean_pnigh = 55
     clean_pdivisor = 77
-    bob_plan.add_concept(mop_way)
-    bob_plan.add_concept(casa_way)
-    bob_plan.add_concept(clean_way)
+    bob_plan.add_concept(mop_rope)
+    bob_plan.add_concept(casa_rope)
+    bob_plan.add_concept(clean_rope)
     bob_plan.edit_concept_attr(
-        mop_way,
-        reason_rcontext=casa_way,
-        reason_premise=clean_way,
+        mop_rope,
+        reason_rcontext=casa_rope,
+        reason_premise=clean_rope,
         popen=clean_popen,
         reason_pnigh=clean_pnigh,
         pdivisor=clean_pdivisor,
@@ -992,7 +996,7 @@ def test_add_pack_to_br00026_csv_ReturnsObj():
     x_csv = add_pack_to_br00026_csv(csv_header, sue7_pack, csv_delimiter)
 
     # THEN
-    mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{mop_way},{casa_way},{clean_way},{clean_popen},{clean_pnigh},{clean_pdivisor}\n"
+    mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{mop_rope},{casa_rope},{clean_rope},{clean_popen},{clean_pnigh},{clean_pdivisor}\n"
     assert x_csv == f"{csv_header}{mop_row}"
 
 
@@ -1003,13 +1007,13 @@ def test_add_pack_to_br00027_csv_ReturnsObj():
     bob_str = "Bob"
     a23_str = "accord23"
     bob_plan = planunit_shop(bob_str, a23_str)
-    mop_way = bob_plan.make_l1_way("mop")
-    casa_way = bob_plan.make_l1_way("casa")
-    bob_plan.add_concept(mop_way)
-    bob_plan.add_concept(casa_way)
+    mop_rope = bob_plan.make_l1_rope("mop")
+    casa_rope = bob_plan.make_l1_rope("casa")
+    bob_plan.add_concept(mop_rope)
+    bob_plan.add_concept(casa_rope)
     bob_plan.edit_concept_attr(
-        mop_way,
-        reason_rcontext=casa_way,
+        mop_rope,
+        reason_rcontext=casa_rope,
         reason_rconcept_active_requisite=True,
     )
     bob_plandelta = plandelta_shop()
@@ -1025,7 +1029,7 @@ def test_add_pack_to_br00027_csv_ReturnsObj():
     x_csv = add_pack_to_br00027_csv(csv_header, sue7_pack, csv_delimiter)
 
     # THEN
-    casa_row = f"{sue_str},{event7},{a23_str},{bob_str},{mop_way},{casa_way},True\n"
+    casa_row = f"{sue_str},{event7},{a23_str},{bob_str},{mop_rope},{casa_rope},True\n"
     assert x_csv == f"{csv_header}{casa_row}"
 
 
@@ -1035,10 +1039,10 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "accord23"
-    a23_way = to_way(a23_str)
+    a23_rope = to_rope(a23_str)
     bob_plan = planunit_shop(bob_str, a23_str)
-    mop_way = bob_plan.make_l1_way("mop")
-    casa_way = bob_plan.make_l1_way("casa")
+    mop_rope = bob_plan.make_l1_rope("mop")
+    casa_rope = bob_plan.make_l1_rope("casa")
     casa_begin = 3
     casa_close = 5
     casa_addin = 7
@@ -1050,10 +1054,10 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
     casa_mass = 2
     casa_task = False
     casa_problem_bool = False
-    bob_plan.add_concept(casa_way)
-    bob_plan.add_concept(mop_way)
+    bob_plan.add_concept(casa_rope)
+    bob_plan.add_concept(mop_rope)
     bob_plan.edit_concept_attr(
-        mop_way,
+        mop_rope,
         begin=casa_begin,
         close=casa_close,
         addin=casa_addin,
@@ -1081,9 +1085,9 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
     # THEN
     # root_row = f"{sue_str},{event7},{a23_str},{bob_str},,{bob_plan.vow_label},,,,,,,,,1,False,False\n"
     # mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{bob_plan.vow_label},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},{casa_gogo_want},{casa_stop_want},{casa_mass},{casa_task},{casa_problem_bool}\n"
-    mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{a23_way},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},,,{casa_mass},{casa_task},\n"
+    mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{a23_rope},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},,,{casa_mass},{casa_task},\n"
     casa_row = (
-        f"{sue_str},{event7},{a23_str},{bob_str},{a23_way},casa,,,,,,,,,0,False,\n"
+        f"{sue_str},{event7},{a23_str},{bob_str},{a23_rope},casa,,,,,,,,,0,False,\n"
     )
     # print(f"{mop_row=}")
     expected_csv = f"{csv_header}{casa_row}{mop_row}"
@@ -1133,18 +1137,18 @@ def test_add_packunit_to_stance_csv_strs_ReturnsObj():
     a23_str = "accord23"
     bob_plan = planunit_shop(bob_str, a23_str)
     bob_plan.add_acctunit(yao_str)
-    mop_way = bob_plan.make_l1_way("mop")
-    casa_way = bob_plan.make_l1_way("casa")
-    clean_way = bob_plan.make_way(casa_way, "clean")
-    bob_plan.add_concept(mop_way)
-    bob_plan.add_concept(casa_way)
-    bob_plan.add_concept(clean_way)
+    mop_rope = bob_plan.make_l1_rope("mop")
+    casa_rope = bob_plan.make_l1_rope("casa")
+    clean_rope = bob_plan.make_rope(casa_rope, "clean")
+    bob_plan.add_concept(mop_rope)
+    bob_plan.add_concept(casa_rope)
+    bob_plan.add_concept(clean_rope)
     bob_plan.edit_concept_attr(
-        mop_way, reason_rcontext=casa_way, reason_premise=clean_way
+        mop_rope, reason_rcontext=casa_rope, reason_premise=clean_rope
     )
-    bob_plan.add_concept(casa_way)
-    bob_plan.edit_concept_attr(casa_way, awardlink=awardlink_shop(yao_str))
-    bob_plan.add_fact(casa_way, clean_way)
+    bob_plan.add_concept(casa_rope)
+    bob_plan.edit_concept_attr(casa_rope, awardlink=awardlink_shop(yao_str))
+    bob_plan.add_fact(casa_rope, clean_rope)
     bob_plan.credor_respect = 444
     bob_plan.debtor_respect = 556
     bob_plan.fund_pool = 999

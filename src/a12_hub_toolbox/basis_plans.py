@@ -11,7 +11,7 @@ def create_empty_plan_from_plan(
     ref_plan: PlanUnit, x_owner_name: OwnerName = None
 ) -> PlanUnit:
     x_owner_name = ref_plan.owner_name if x_owner_name is None else x_owner_name
-    x_bridge = ref_plan.bridge
+    x_knot = ref_plan.knot
     x_fund_pool = ref_plan.fund_pool
     x_fund_iota = ref_plan.fund_iota
     x_respect_bit = ref_plan.respect_bit
@@ -19,7 +19,7 @@ def create_empty_plan_from_plan(
     return planunit_shop(
         owner_name=x_owner_name,
         vow_label=ref_plan.vow_label,
-        bridge=x_bridge,
+        knot=x_knot,
         fund_pool=x_fund_pool,
         fund_iota=x_fund_iota,
         respect_bit=x_respect_bit,

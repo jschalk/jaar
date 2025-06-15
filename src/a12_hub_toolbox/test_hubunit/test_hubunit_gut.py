@@ -26,8 +26,8 @@ def test_HubUnit_default_gut_plan_ReturnsObj():
         env_dir(),
         "accord23",
         sue_str,
-        keep_way=None,
-        bridge=slash_str,
+        keep_rope=None,
+        knot=slash_str,
         fund_pool=x_fund_pool,
         fund_iota=pnine_float,
         respect_bit=pnine_float,
@@ -40,7 +40,7 @@ def test_HubUnit_default_gut_plan_ReturnsObj():
     # THEN
     assert sue_default_gut.vow_label == sue_hubunit.vow_label
     assert sue_default_gut.owner_name == sue_hubunit.owner_name
-    assert sue_default_gut.bridge == sue_hubunit.bridge
+    assert sue_default_gut.knot == sue_hubunit.knot
     assert sue_default_gut.fund_pool == sue_hubunit.fund_pool
     assert sue_default_gut.fund_iota == sue_hubunit.fund_iota
     assert sue_default_gut.respect_bit == sue_hubunit.respect_bit
@@ -219,18 +219,18 @@ def test_HubUnit_append_packs_to_gut_file_AddsPacksTogutFile(
     sue_hubunit.initialize_pack_gut_files()
     sue_hubunit.save_pack_file(sue_2planatoms_packunit())
     gut_plan = open_gut_file(env_dir(), "accord23", sue_str)
-    # gut_plan.add_concept(gut_plan.make_l1_way("sports"))
+    # gut_plan.add_concept(gut_plan.make_l1_rope("sports"))
     sports_str = "sports"
-    sports_way = gut_plan.make_l1_way(sports_str)
+    sports_rope = gut_plan.make_l1_rope(sports_str)
     knee_str = "knee"
-    knee_way = gut_plan.make_way(sports_way, knee_str)
-    assert gut_plan.concept_exists(sports_way) is False
-    assert gut_plan.concept_exists(knee_way) is False
+    knee_rope = gut_plan.make_rope(sports_rope, knee_str)
+    assert gut_plan.concept_exists(sports_rope) is False
+    assert gut_plan.concept_exists(knee_rope) is False
 
     # WHEN
     new_plan = sue_hubunit.append_packs_to_gut_file()
 
     # THEN
     assert new_plan != gut_plan
-    assert new_plan.concept_exists(sports_way)
-    assert new_plan.concept_exists(knee_way)
+    assert new_plan.concept_exists(sports_rope)
+    assert new_plan.concept_exists(knee_rope)

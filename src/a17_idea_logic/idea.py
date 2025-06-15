@@ -269,7 +269,7 @@ def vow_build_from_df(
             vow_mstr_dir=x_vows_dir,
             timeline=x_timeline,
             # in_memory_journal=row["in_memory_journal"],
-            bridge=row["bridge"],
+            knot=row["knot"],
             fund_iota=x_fund_iota,
             respect_bit=x_respect_bit,
             penny=x_penny,

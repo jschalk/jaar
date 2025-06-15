@@ -64,8 +64,8 @@ def test_listen_to_speaker_agenda_ReturnsSingleChorePlan():
     after_yao_planunit = listen_to_speaker_agenda(before_yao_planunit, zia_planunit)
 
     # THEN
-    clean_way = zia_planunit.make_l1_way(clean_str)
-    yao_clean_conceptunit = after_yao_planunit.get_concept_obj(clean_way)
+    clean_rope = zia_planunit.make_l1_rope(clean_str)
+    yao_clean_conceptunit = after_yao_planunit.get_concept_obj(clean_rope)
     print(f"{yao_clean_conceptunit.mass=}")
     assert yao_clean_conceptunit.mass != zia_clean_conceptunit.mass
     assert yao_clean_conceptunit.mass == yao_acct_debt_score
@@ -86,8 +86,8 @@ def test_listen_to_speaker_agenda_ReturnsLevel2ChorePlan():
     clean_str = "clean"
     zia_clean_conceptunit = conceptunit_shop(clean_str, task=True)
     zia_clean_conceptunit.laborunit.set_laborlink(yao_str)
-    casa_way = zia_planunit.make_l1_way("casa")
-    zia_planunit.set_concept(zia_clean_conceptunit, casa_way)
+    casa_rope = zia_planunit.make_l1_rope("casa")
+    zia_planunit.set_concept(zia_clean_conceptunit, casa_rope)
     assert len(zia_planunit.get_agenda_dict()) == 0
     zia_yao_planunit = copy_deepcopy(zia_planunit)
     zia_yao_planunit.set_owner_name(yao_str)
@@ -98,12 +98,12 @@ def test_listen_to_speaker_agenda_ReturnsLevel2ChorePlan():
     after_yao_planunit = listen_to_speaker_agenda(before_yao_planunit, zia_planunit)
 
     # THEN
-    clean_way = zia_planunit.make_way(casa_way, clean_str)
-    yao_clean_conceptunit = after_yao_planunit.get_concept_obj(clean_way)
+    clean_rope = zia_planunit.make_rope(casa_rope, clean_str)
+    yao_clean_conceptunit = after_yao_planunit.get_concept_obj(clean_rope)
     print(f"{yao_clean_conceptunit.mass=}")
     assert yao_clean_conceptunit.mass != zia_clean_conceptunit.mass
     assert yao_clean_conceptunit.mass == yao_debt_score
-    after_casa_conceptunit = after_yao_planunit.get_concept_obj(casa_way)
+    after_casa_conceptunit = after_yao_planunit.get_concept_obj(casa_rope)
     print(f"{after_casa_conceptunit.mass=}")
     assert after_casa_conceptunit.mass != 1
     assert after_casa_conceptunit.mass == yao_debt_score
@@ -132,10 +132,10 @@ def test_listen_to_speaker_agenda_Returns2AgendaConceptsLevel2ChorePlan():
     yao_cook_conceptunit.laborunit.set_laborlink(yao_str)
     yao_fly_conceptunit = conceptunit_shop(fly_str, task=True)
     yao_fly_conceptunit.laborunit.set_laborlink(yao_str)
-    casa_way = zia_planunit.make_l1_way("casa")
-    fly_way = zia_planunit.make_l1_way(fly_str)
-    zia_planunit.set_concept(yao_clean_conceptunit, casa_way)
-    zia_planunit.set_concept(yao_cook_conceptunit, casa_way)
+    casa_rope = zia_planunit.make_l1_rope("casa")
+    fly_rope = zia_planunit.make_l1_rope(fly_str)
+    zia_planunit.set_concept(yao_clean_conceptunit, casa_rope)
+    zia_planunit.set_concept(yao_cook_conceptunit, casa_rope)
     zia_planunit.set_l1_concept(yao_fly_conceptunit)
     assert len(zia_planunit.get_agenda_dict()) == 0
     zia_yao_planunit = copy_deepcopy(zia_planunit)
@@ -146,12 +146,12 @@ def test_listen_to_speaker_agenda_Returns2AgendaConceptsLevel2ChorePlan():
     after_yao_planunit = listen_to_speaker_agenda(before_yao_planunit, zia_planunit)
 
     # THEN
-    clean_way = zia_planunit.make_way(casa_way, clean_str)
-    cook_way = zia_planunit.make_way(casa_way, cook_str)
-    after_cook_conceptunit = after_yao_planunit.get_concept_obj(cook_way)
-    after_clean_conceptunit = after_yao_planunit.get_concept_obj(clean_way)
-    after_casa_conceptunit = after_yao_planunit.get_concept_obj(casa_way)
-    after_fly_conceptunit = after_yao_planunit.get_concept_obj(fly_way)
+    clean_rope = zia_planunit.make_rope(casa_rope, clean_str)
+    cook_rope = zia_planunit.make_rope(casa_rope, cook_str)
+    after_cook_conceptunit = after_yao_planunit.get_concept_obj(cook_rope)
+    after_clean_conceptunit = after_yao_planunit.get_concept_obj(clean_rope)
+    after_casa_conceptunit = after_yao_planunit.get_concept_obj(casa_rope)
+    after_fly_conceptunit = after_yao_planunit.get_concept_obj(fly_rope)
     print(f"{after_clean_conceptunit.mass=}")
     assert after_clean_conceptunit.mass != yao_clean_conceptunit.mass
     assert after_clean_conceptunit.mass == 19
@@ -187,15 +187,15 @@ def test_listen_to_speaker_agenda_Returns2AgendaConceptsLevel2ChorePlanWhereAnCo
     yao_cook_conceptunit.laborunit.set_laborlink(yao_str)
     yao_fly_conceptunit = conceptunit_shop(fly_str, task=True)
     yao_fly_conceptunit.laborunit.set_laborlink(yao_str)
-    casa_way = zia_planunit.make_l1_way("casa")
-    dish_way = zia_planunit.make_way(casa_way, dish_str)
-    fly_way = zia_planunit.make_l1_way(fly_str)
+    casa_rope = zia_planunit.make_l1_rope("casa")
+    dish_rope = zia_planunit.make_rope(casa_rope, dish_str)
+    fly_rope = zia_planunit.make_l1_rope(fly_str)
     before_yao_dish_conceptunit = conceptunit_shop(dish_str, task=True)
     before_yao_dish_conceptunit.laborunit.set_laborlink(yao_str)
-    before_yao_planunit.set_concept(before_yao_dish_conceptunit, casa_way)
-    before_yao_planunit.edit_concept_attr(dish_way, mass=1000)
-    zia_planunit.set_concept(yao_dish_conceptunit, casa_way)
-    zia_planunit.set_concept(yao_cook_conceptunit, casa_way)
+    before_yao_planunit.set_concept(before_yao_dish_conceptunit, casa_rope)
+    before_yao_planunit.edit_concept_attr(dish_rope, mass=1000)
+    zia_planunit.set_concept(yao_dish_conceptunit, casa_rope)
+    zia_planunit.set_concept(yao_cook_conceptunit, casa_rope)
     zia_planunit.set_l1_concept(yao_fly_conceptunit)
     assert len(zia_planunit.get_agenda_dict()) == 0
     zia_yao_planunit = copy_deepcopy(zia_planunit)
@@ -206,11 +206,11 @@ def test_listen_to_speaker_agenda_Returns2AgendaConceptsLevel2ChorePlanWhereAnCo
     after_yao_planunit = listen_to_speaker_agenda(before_yao_planunit, zia_planunit)
 
     # THEN
-    cook_way = zia_planunit.make_way(casa_way, cook_str)
-    after_cook_conceptunit = after_yao_planunit.get_concept_obj(cook_way)
-    after_dish_conceptunit = after_yao_planunit.get_concept_obj(dish_way)
-    after_casa_conceptunit = after_yao_planunit.get_concept_obj(casa_way)
-    after_fly_conceptunit = after_yao_planunit.get_concept_obj(fly_way)
+    cook_rope = zia_planunit.make_rope(casa_rope, cook_str)
+    after_cook_conceptunit = after_yao_planunit.get_concept_obj(cook_rope)
+    after_dish_conceptunit = after_yao_planunit.get_concept_obj(dish_rope)
+    after_casa_conceptunit = after_yao_planunit.get_concept_obj(casa_rope)
+    after_fly_conceptunit = after_yao_planunit.get_concept_obj(fly_rope)
     print(f"{after_dish_conceptunit.mass=}")
     assert after_dish_conceptunit.mass != yao_dish_conceptunit.mass
     assert after_dish_conceptunit.mass == 1018
@@ -244,29 +244,29 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalPlan():
     sue_planunit = planunit_shop(sue_str)
     sue_planunit.set_max_tree_traverse(6)
     vacuum_str = "vacuum"
-    vacuum_way = sue_planunit.make_l1_way(vacuum_str)
+    vacuum_rope = sue_planunit.make_l1_rope(vacuum_str)
     sue_planunit.set_l1_concept(conceptunit_shop(vacuum_str, task=True))
-    vacuum_conceptunit = sue_planunit.get_concept_obj(vacuum_way)
+    vacuum_conceptunit = sue_planunit.get_concept_obj(vacuum_rope)
     vacuum_conceptunit.laborunit.set_laborlink(yao_str)
 
     egg_str = "egg first"
-    egg_way = sue_planunit.make_l1_way(egg_str)
+    egg_rope = sue_planunit.make_l1_rope(egg_str)
     sue_planunit.set_l1_concept(conceptunit_shop(egg_str))
     chicken_str = "chicken first"
-    chicken_way = sue_planunit.make_l1_way(chicken_str)
+    chicken_rope = sue_planunit.make_l1_rope(chicken_str)
     sue_planunit.set_l1_concept(conceptunit_shop(chicken_str))
     # set egg task is True when chicken first is False
     sue_planunit.edit_concept_attr(
-        egg_way,
+        egg_rope,
         task=True,
-        reason_rcontext=chicken_way,
+        reason_rcontext=chicken_rope,
         reason_rconcept_active_requisite=True,
     )
     # set chick task is True when egg first is False
     sue_planunit.edit_concept_attr(
-        chicken_way,
+        chicken_rope,
         task=True,
-        reason_rcontext=egg_way,
+        reason_rcontext=egg_rope,
         reason_rconcept_active_requisite=False,
     )
     sue_planunit.settle_plan()

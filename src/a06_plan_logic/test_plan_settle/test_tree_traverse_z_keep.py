@@ -70,10 +70,12 @@ def test_PlanUnit_settle_plan_CorrectlySets_keeps_justified_WhenKeepIsLevelAbove
     yao_healerlink = healerlink_shop({yao_str})
 
     texas_str = "Texas"
-    texas_way = sue_plan.make_l1_way(texas_str)
+    texas_rope = sue_plan.make_l1_rope(texas_str)
     sue_plan.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
     ep_str = "El Paso"
-    sue_plan.set_concept(conceptunit_shop(ep_str, healerlink=yao_healerlink), texas_way)
+    sue_plan.set_concept(
+        conceptunit_shop(ep_str, healerlink=yao_healerlink), texas_rope
+    )
     assert sue_plan._keeps_justified is False
 
     # WHEN
@@ -87,10 +89,10 @@ def test_PlanUnit_settle_plan_CorrectlySets_keeps_justified_WhenKeepIsLevelBelow
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     texas_str = "Texas"
-    texas_way = sue_plan.make_l1_way(texas_str)
+    texas_rope = sue_plan.make_l1_rope(texas_str)
     yao_healerlink = healerlink_shop({"Yao"})
     sue_plan.set_l1_concept(conceptunit_shop(texas_str, healerlink=yao_healerlink))
-    sue_plan.set_concept(conceptunit_shop("El Paso", problem_bool=True), texas_way)
+    sue_plan.set_concept(conceptunit_shop("El Paso", problem_bool=True), texas_rope)
     assert sue_plan._keeps_justified is False
 
     # WHEN
@@ -104,12 +106,12 @@ def test_PlanUnit_settle_plan_CorrectlyRaisesErrorWhenKeepIsLevelBelowProblem():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     texas_str = "Texas"
-    texas_way = sue_plan.make_l1_way(texas_str)
+    texas_rope = sue_plan.make_l1_rope(texas_str)
     yao_healerlink = healerlink_shop({"Yao"})
     texas_concept = conceptunit_shop(texas_str, healerlink=yao_healerlink)
     sue_plan.set_l1_concept(texas_concept)
     elpaso_concept = conceptunit_shop("El Paso", problem_bool=True)
-    sue_plan.set_concept(elpaso_concept, texas_way)
+    sue_plan.set_concept(elpaso_concept, texas_rope)
     assert sue_plan._keeps_justified is False
 
     # WHEN
@@ -117,7 +119,7 @@ def test_PlanUnit_settle_plan_CorrectlyRaisesErrorWhenKeepIsLevelBelowProblem():
         sue_plan.settle_plan(keep_exceptions=True)
     assert (
         str(excinfo.value)
-        == f"ConceptUnit '{elpaso_concept.get_concept_way()}' cannot sponsor ancestor keeps."
+        == f"ConceptUnit '{elpaso_concept.get_concept_rope()}' cannot sponsor ancestor keeps."
     )
 
 
@@ -126,7 +128,7 @@ def test_PlanUnit_settle_plan_CorrectlySets_keeps_justified_WhenTwoKeepsAre_OnTh
     sue_plan = planunit_shop("Sue")
     yao_healerlink = healerlink_shop({"Yao"})
     texas_str = "Texas"
-    texas_way = sue_plan.make_l1_way(texas_str)
+    texas_rope = sue_plan.make_l1_rope(texas_str)
     texas_concept = conceptunit_shop(
         texas_str, healerlink=yao_healerlink, problem_bool=True
     )
@@ -134,7 +136,7 @@ def test_PlanUnit_settle_plan_CorrectlySets_keeps_justified_WhenTwoKeepsAre_OnTh
     elpaso_concept = conceptunit_shop(
         "El Paso", healerlink=yao_healerlink, problem_bool=True
     )
-    sue_plan.set_concept(elpaso_concept, texas_way)
+    sue_plan.set_concept(elpaso_concept, texas_rope)
     assert sue_plan._keeps_justified is False
 
     # WHEN
@@ -149,7 +151,7 @@ def test_PlanUnit_get_concept_dict_RaisesErrorWhen_keeps_justified_IsFalse():
     sue_plan = planunit_shop("Sue")
     yao_healerlink = healerlink_shop({"Yao"})
     texas_str = "Texas"
-    texas_way = sue_plan.make_l1_way(texas_str)
+    texas_rope = sue_plan.make_l1_rope(texas_str)
     texas_concept = conceptunit_shop(
         texas_str, healerlink=yao_healerlink, problem_bool=True
     )
@@ -157,7 +159,7 @@ def test_PlanUnit_get_concept_dict_RaisesErrorWhen_keeps_justified_IsFalse():
     elpaso_concept = conceptunit_shop(
         "El Paso", healerlink=yao_healerlink, problem_bool=True
     )
-    sue_plan.set_concept(elpaso_concept, texas_way)
+    sue_plan.set_concept(elpaso_concept, texas_rope)
     sue_plan.settle_plan()
     assert sue_plan._keeps_justified is False
 

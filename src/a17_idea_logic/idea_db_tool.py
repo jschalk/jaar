@@ -165,7 +165,7 @@ def _get_pidgen_idea_format_filenames() -> set[str]:
     idea_numbers = set(get_idea_dimen_ref().get("pidgin_name"))
     idea_numbers.update(set(get_idea_dimen_ref().get("pidgin_title")))
     idea_numbers.update(set(get_idea_dimen_ref().get("pidgin_label")))
-    idea_numbers.update(set(get_idea_dimen_ref().get("pidgin_way")))
+    idea_numbers.update(set(get_idea_dimen_ref().get("pidgin_rope")))
     return {f"{idea_number}.xlsx" for idea_number in idea_numbers}
 
 

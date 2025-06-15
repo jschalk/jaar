@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
 from pytest import raises as pytest_raises
 from src.a00_data_toolbox.file_toolbox import create_path, open_json, set_dir
-from src.a01_term_logic.way import create_way
+from src.a01_term_logic.rope import create_rope
 from src.a02_finance_logic._test_util.a02_str import quota_str
 from src.a06_plan_logic._test_util.a06_str import penny_str
 from src.a06_plan_logic._test_util.example_plans import (
@@ -256,11 +256,11 @@ def test_save_arbitrary_planevent_SetsFile_Scenario1_includes_facts(
     event5 = 5
     sue_str = "Sue"
     planevent_path = create_planevent_path(vow_mstr_dir, a23_str, sue_str, event5)
-    casa_way = create_way(a23_str, "casa")
-    clean_way = create_way(casa_way, "clean")
+    casa_rope = create_rope(a23_str, "casa")
+    clean_rope = create_rope(casa_rope, "clean")
     clean_fopen = 11
     clean_fnigh = 16
-    x_facts = [(casa_way, clean_way, clean_fopen, clean_fnigh)]
+    x_facts = [(casa_rope, clean_rope, clean_fopen, clean_fnigh)]
     assert os_path_exists(planevent_path) is False
 
     # WHEN
@@ -269,7 +269,7 @@ def test_save_arbitrary_planevent_SetsFile_Scenario1_includes_facts(
     # THEN
     assert os_path_exists(planevent_path)
     expected_sue_plan = planunit_shop(sue_str, a23_str)
-    expected_sue_plan.add_fact(casa_way, clean_way, clean_fopen, clean_fnigh, True)
+    expected_sue_plan.add_fact(casa_rope, clean_rope, clean_fopen, clean_fnigh, True)
     gen_sue_plan = open_plan_file(planevent_path)
     assert gen_sue_plan.get_factunits_dict() == expected_sue_plan.get_factunits_dict()
     assert gen_sue_plan.get_dict() == expected_sue_plan.get_dict()
@@ -294,10 +294,10 @@ def test_get_planevent_obj_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup
     t3 = 3
     t3_json_path = create_planevent_path(vow_mstr_dir, a23_str, sue_str, t3)
     sue_plan = planunit_shop(sue_str, a23_str)
-    casa_way = sue_plan.make_l1_way("case")
-    clean_way = sue_plan.make_l1_way("clean")
-    dirty_way = sue_plan.make_l1_way("dirty")
-    sue_plan.add_fact(casa_way, dirty_way, create_missing_concepts=True)
+    casa_rope = sue_plan.make_l1_rope("case")
+    clean_rope = sue_plan.make_l1_rope("clean")
+    dirty_rope = sue_plan.make_l1_rope("dirty")
+    sue_plan.add_fact(casa_rope, dirty_rope, create_missing_concepts=True)
     save_plan_file(t3_json_path, None, sue_plan)
 
     # WHEN
@@ -661,10 +661,10 @@ def test_create_cell_acct_mandate_ledger_json_CreatesFile_Scenario1(
     dirty_fact = dirty_factunit()
     sue_plan.add_concept(clean_fact.fstate)
     sue_plan.add_concept(dirty_fact.fstate)
-    casa_way = sue_plan.make_l1_way("casa")
-    mop_way = sue_plan.make_way(casa_way, "mop")
-    sue_plan.add_concept(mop_way, 1, task=True)
-    sue_plan.edit_reason(mop_way, dirty_fact.fcontext, dirty_fact.fstate)
+    casa_rope = sue_plan.make_l1_rope("casa")
+    mop_rope = sue_plan.make_rope(casa_rope, "mop")
+    sue_plan.add_concept(mop_rope, 1, task=True)
+    sue_plan.edit_reason(mop_rope, dirty_fact.fcontext, dirty_fact.fstate)
     sue_plan.add_fact(
         dirty_fact.fcontext, dirty_fact.fstate, create_missing_concepts=True
     )

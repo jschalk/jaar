@@ -1,6 +1,6 @@
 from src.a01_term_logic.term import GroupTitle
 from src.a03_group_logic.group import groupunit_shop, membership_shop
-from src.a04_reason_logic._test_util.a04_str import bridge_str
+from src.a04_reason_logic._test_util.a04_str import knot_str
 from src.a04_reason_logic.reason_labor import (
     LaborHeir,
     LaborUnit,

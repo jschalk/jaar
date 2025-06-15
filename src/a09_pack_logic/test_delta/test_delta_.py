@@ -1,12 +1,12 @@
 from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import x_is_json
-from src.a01_term_logic.way import create_way, to_way
+from src.a01_term_logic.rope import create_rope, to_rope
 from src.a03_group_logic.acct import acctunit_shop
 from src.a05_concept_logic.concept import get_default_vow_label as root_label
 from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
     awardee_title_str,
-    concept_way_str,
+    concept_rope_str,
     credit_score_str,
     debt_score_str,
     group_title_str,
@@ -230,7 +230,7 @@ def test_PlanDelta_get_crud_planatoms_list_ReturnsObj():
     #         print(f"{x_atom.dimen=}")
 
 
-def test_PlanDelta_get_dimen_sorted_planatoms_list_ReturnsObj_Scenario0_way():
+def test_PlanDelta_get_dimen_sorted_planatoms_list_ReturnsObj_Scenario0_rope():
     # ESTABLISH
     ex1_plandelta = get_plandelta_example1()
     update_dict = ex1_plandelta.planatoms.get(UPDATE_str())
@@ -255,7 +255,7 @@ def test_PlanDelta_get_dimen_sorted_planatoms_list_ReturnsObj_Scenario0_way():
 
 # def test_PlanDelta_add_planatom_CorrectlySets_PlanUnit_max_tree_traverse():
 #     # ESTABLISH
-#     ex1_plandelta = plandelta_shop(get_sue_way())
+#     ex1_plandelta = plandelta_shop(get_sue_rope())
 #     assert ex1_plandelta.planatoms == {}
 
 #     # WHEN
@@ -338,16 +338,16 @@ def test_PlanDelta_get_sorted_planatoms_ReturnsObj():
 def test_PlanDelta_get_sorted_planatoms_ReturnsObj_ConceptUnitsSorted():
     # ESTABLISH
     x_vow_label = root_label()
-    root_way = to_way(x_vow_label)
+    root_rope = to_rope(x_vow_label)
     sports_str = "sports"
-    sports_way = create_way(x_vow_label, sports_str)
+    sports_rope = create_rope(x_vow_label, sports_str)
     knee_str = "knee"
-    knee_way = create_way(x_vow_label, knee_str)
+    knee_rope = create_rope(x_vow_label, knee_str)
     x_dimen = plan_conceptunit_str()
     sports_insert_conceptunit_planatom = planatom_shop(x_dimen, INSERT_str())
-    sports_insert_conceptunit_planatom.set_jkey(concept_way_str(), sports_way)
+    sports_insert_conceptunit_planatom.set_jkey(concept_rope_str(), sports_rope)
     knee_insert_conceptunit_planatom = planatom_shop(x_dimen, INSERT_str())
-    knee_insert_conceptunit_planatom.set_jkey(concept_way_str(), knee_way)
+    knee_insert_conceptunit_planatom.set_jkey(concept_rope_str(), knee_rope)
     x_plandelta = plandelta_shop()
     x_plandelta.set_planatom(knee_insert_conceptunit_planatom)
     x_plandelta.set_planatom(sports_insert_conceptunit_planatom)
@@ -368,21 +368,21 @@ def test_PlanDelta_get_sorted_planatoms_ReturnsObj_ConceptUnitsSorted():
     #         print(f"{x_atom.dimen=}")
 
 
-def test_PlanDelta_get_sorted_planatoms_ReturnsObj_Way_Sorted():
+def test_PlanDelta_get_sorted_planatoms_ReturnsObj_Rope_Sorted():
     # ESTABLISH
     x_vow_label = root_label()
     sports_str = "sports"
-    sports_way = create_way(x_vow_label, sports_str)
+    sports_rope = create_rope(x_vow_label, sports_str)
     knee_str = "knee"
-    knee_way = create_way(sports_way, knee_str)
+    knee_rope = create_rope(sports_rope, knee_str)
     x_dimen = plan_concept_awardlink_str()
     swimmers_str = ",Swimmers"
     sports_awardlink_planatom = planatom_shop(x_dimen, INSERT_str())
     sports_awardlink_planatom.set_jkey(awardee_title_str(), swimmers_str)
-    sports_awardlink_planatom.set_jkey(concept_way_str(), sports_way)
+    sports_awardlink_planatom.set_jkey(concept_rope_str(), sports_rope)
     knee_awardlink_planatom = planatom_shop(x_dimen, INSERT_str())
     knee_awardlink_planatom.set_jkey(awardee_title_str(), swimmers_str)
-    knee_awardlink_planatom.set_jkey(concept_way_str(), knee_way)
+    knee_awardlink_planatom.set_jkey(concept_rope_str(), knee_rope)
     x_plandelta = plandelta_shop()
     x_plandelta.set_planatom(knee_awardlink_planatom)
     x_plandelta.set_planatom(sports_awardlink_planatom)

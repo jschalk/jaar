@@ -20,7 +20,7 @@ def test_create_legible_list_ReturnsObj_acct_membership_INSERT():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     dimen = plan_acct_membership_str()
-    swim_str = f"{sue_plan.bridge}Swimmers"
+    swim_str = f"{sue_plan.knot}Swimmers"
     yao_str = "Yao"
     credit_vote_value = 81
     debt_vote_value = 43
@@ -48,7 +48,7 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote_debt_
     dimen = plan_acct_membership_str()
     credit_vote_str = "credit_vote"
     debt_vote_str = "debt_vote"
-    swim_str = f"{sue_plan.bridge}Swimmers"
+    swim_str = f"{sue_plan.knot}Swimmers"
     yao_str = "Yao"
     credit_vote_value = 81
     debt_vote_value = 43
@@ -75,7 +75,7 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote():
     sue_plan = planunit_shop("Sue")
     dimen = plan_acct_membership_str()
     credit_vote_str = "credit_vote"
-    swim_str = f"{sue_plan.bridge}Swimmers"
+    swim_str = f"{sue_plan.knot}Swimmers"
     yao_str = "Yao"
     credit_vote_value = 81
     yao_planatom = planatom_shop(dimen, UPDATE_str())
@@ -100,7 +100,7 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_debt_vote():
     sue_plan = planunit_shop("Sue")
     dimen = plan_acct_membership_str()
     debt_vote_str = "debt_vote"
-    swim_str = f"{sue_plan.bridge}Swimmers"
+    swim_str = f"{sue_plan.knot}Swimmers"
     yao_str = "Yao"
     debt_vote_value = 43
     yao_planatom = planatom_shop(dimen, UPDATE_str())
@@ -124,7 +124,7 @@ def test_create_legible_list_ReturnsObj_acct_membership_DELETE():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     dimen = plan_acct_membership_str()
-    swim_str = f"{sue_plan.bridge}Swimmers"
+    swim_str = f"{sue_plan.knot}Swimmers"
     yao_str = "Yao"
     yao_planatom = planatom_shop(dimen, DELETE_str())
     yao_planatom.set_arg(group_title_str(), swim_str)

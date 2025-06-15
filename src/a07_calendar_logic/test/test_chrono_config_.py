@@ -1,6 +1,6 @@
 from copy import deepcopy as copy_deepcopy
 from inspect import getdoc as inspect_getdoc
-from src.a01_term_logic._test_util.a01_str import bridge_str
+from src.a01_term_logic._test_util.a01_str import knot_str
 from src.a02_finance_logic.finance_config import TimeLinePoint
 from src.a06_plan_logic.plan import planunit_shop
 from src.a07_calendar_logic._test_util.a07_str import (
@@ -34,10 +34,10 @@ from src.a07_calendar_logic.chrono import (
     TimeLineUnit,
     day_length,
     get_c400_constants,
-    get_day_way,
+    get_day_rope,
     get_default_timeline_config_dict,
-    get_week_way,
-    get_year_way,
+    get_week_rope,
+    get_year_rope,
     timeline_config_shop,
     timelineunit_shop,
     validate_timeline_config,
@@ -51,7 +51,7 @@ def test_TimeLineLabel_exists():
     x_timelinelabel = TimeLineLabel(empty_str)
     # THEN
     assert x_timelinelabel == empty_str
-    doc_str = f"TimeLineLabel is required for every TimeLineUnit. It is a LabelTerm that must not contain the {bridge_str()}."
+    doc_str = f"TimeLineLabel is required for every TimeLineUnit. It is a LabelTerm that must not contain the {knot_str()}."
     assert inspect_getdoc(x_timelinelabel) == doc_str
 
 
@@ -347,45 +347,45 @@ def test_timeline_config_shop_ReturnsObj_NoParameters():
     assert validate_timeline_config(generated_dict)
 
 
-def test_get_year_way_ReturnsObj():
+def test_get_year_rope_ReturnsObj():
     # ESTABLISH
     fizz_str = "fizz34"
     sue_planunit = planunit_shop("Sue")
-    time_way = sue_planunit.make_l1_way(time_str())
-    fizz_way = sue_planunit.make_way(time_way, fizz_str)
-    c400_leap_way = sue_planunit.make_way(fizz_way, c400_leap_str())
-    c400_clean_way = sue_planunit.make_way(c400_leap_way, c400_clean_str())
-    c100_way = sue_planunit.make_way(c400_clean_way, c100_str())
-    yr4_leap_way = sue_planunit.make_way(c100_way, yr4_leap_str())
-    yr4_clean_way = sue_planunit.make_way(yr4_leap_way, yr4_clean_str())
-    year_way = sue_planunit.make_way(yr4_clean_way, year_str())
+    time_rope = sue_planunit.make_l1_rope(time_str())
+    fizz_rope = sue_planunit.make_rope(time_rope, fizz_str)
+    c400_leap_rope = sue_planunit.make_rope(fizz_rope, c400_leap_str())
+    c400_clean_rope = sue_planunit.make_rope(c400_leap_rope, c400_clean_str())
+    c100_rope = sue_planunit.make_rope(c400_clean_rope, c100_str())
+    yr4_leap_rope = sue_planunit.make_rope(c100_rope, yr4_leap_str())
+    yr4_clean_rope = sue_planunit.make_rope(yr4_leap_rope, yr4_clean_str())
+    year_rope = sue_planunit.make_rope(yr4_clean_rope, year_str())
 
     # WHEN / THEN
-    assert year_way == get_year_way(sue_planunit, fizz_way)
+    assert year_rope == get_year_rope(sue_planunit, fizz_rope)
 
 
-def test_get_week_way_ReturnsObj():
+def test_get_week_rope_ReturnsObj():
     # ESTABLISH
     fizz_str = "fizz34"
     sue_planunit = planunit_shop("Sue")
-    time_way = sue_planunit.make_l1_way(time_str())
-    fizz_way = sue_planunit.make_way(time_way, fizz_str)
-    week_way = sue_planunit.make_way(fizz_way, week_str())
+    time_rope = sue_planunit.make_l1_rope(time_str())
+    fizz_rope = sue_planunit.make_rope(time_rope, fizz_str)
+    week_rope = sue_planunit.make_rope(fizz_rope, week_str())
 
     # WHEN / THEN
-    assert week_way == get_week_way(sue_planunit, fizz_way)
+    assert week_rope == get_week_rope(sue_planunit, fizz_rope)
 
 
-def test_get_day_way_ReturnsObj():
+def test_get_day_rope_ReturnsObj():
     # ESTABLISH
     fizz_str = "fizz34"
     sue_planunit = planunit_shop("Sue")
-    time_way = sue_planunit.make_l1_way(time_str())
-    fizz_way = sue_planunit.make_way(time_way, fizz_str)
-    day_way = sue_planunit.make_way(fizz_way, day_str())
+    time_rope = sue_planunit.make_l1_rope(time_str())
+    fizz_rope = sue_planunit.make_rope(time_rope, fizz_str)
+    day_rope = sue_planunit.make_rope(fizz_rope, day_str())
 
     # WHEN / THEN
-    assert day_way == get_day_way(sue_planunit, fizz_way)
+    assert day_rope == get_day_rope(sue_planunit, fizz_rope)
 
 
 def test_TimeLineUnit_Exists():

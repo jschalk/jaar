@@ -18,35 +18,35 @@ def test_PidginUnit_set_titlemap_SetsAttr():
     assert sue_pidginunit.titlemap == x_titlemap
 
 
-def test_PidginUnit_set_titlemap_RaisesErrorIf_titlemap_otx_bridge_IsNotSame():
+def test_PidginUnit_set_titlemap_RaisesErrorIf_titlemap_otx_knot_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    slash_otx_bridge = "/"
-    x_titlemap = titlemap_shop(otx_bridge=slash_otx_bridge, face_name=sue_str)
-    assert sue_pidginunit.otx_bridge != x_titlemap.otx_bridge
+    slash_otx_knot = "/"
+    x_titlemap = titlemap_shop(otx_knot=slash_otx_knot, face_name=sue_str)
+    assert sue_pidginunit.otx_knot != x_titlemap.otx_knot
     assert sue_pidginunit.titlemap != x_titlemap
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_pidginunit.set_titlemap(x_titlemap)
-    exception_str = f"set_mapcore Error: PidginUnit otx_bridge is '{sue_pidginunit.otx_bridge}', MapCore is '{slash_otx_bridge}'."
+    exception_str = f"set_mapcore Error: PidginUnit otx_knot is '{sue_pidginunit.otx_knot}', MapCore is '{slash_otx_knot}'."
     assert str(excinfo.value) == exception_str
 
 
-def test_PidginUnit_set_titlemap_RaisesErrorIf_titlemap_inx_bridge_IsNotSame():
+def test_PidginUnit_set_titlemap_RaisesErrorIf_titlemap_inx_knot_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    slash_inx_bridge = "/"
-    x_titlemap = titlemap_shop(inx_bridge=slash_inx_bridge, face_name=sue_str)
-    assert sue_pidginunit.inx_bridge != x_titlemap.inx_bridge
+    slash_inx_knot = "/"
+    x_titlemap = titlemap_shop(inx_knot=slash_inx_knot, face_name=sue_str)
+    assert sue_pidginunit.inx_knot != x_titlemap.inx_knot
     assert sue_pidginunit.titlemap != x_titlemap
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_pidginunit.set_titlemap(x_titlemap)
-    exception_str = f"set_mapcore Error: PidginUnit inx_bridge is '{sue_pidginunit.inx_bridge}', MapCore is '{slash_inx_bridge}'."
+    exception_str = f"set_mapcore Error: PidginUnit inx_knot is '{sue_pidginunit.inx_knot}', MapCore is '{slash_inx_knot}'."
     assert str(excinfo.value) == exception_str
 
 

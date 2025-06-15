@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.a01_term_logic.way import default_bridge_if_None
+from src.a01_term_logic.rope import default_knot_if_None
 from src.a02_finance_logic.finance_config import default_fund_iota_if_None
 from src.a03_group_logic.group import GroupUnit, groupunit_shop, membership_shop
 
@@ -19,7 +19,7 @@ def test_GroupUnit_exists():
     assert swim_groupunit._fund_agenda_take is None
     assert swim_groupunit._credor_pool is None
     assert swim_groupunit._debtor_pool is None
-    assert swim_groupunit.bridge is None
+    assert swim_groupunit.knot is None
     assert swim_groupunit.fund_iota is None
 
 
@@ -42,11 +42,11 @@ def test_groupunit_shop_ReturnsObj():
     assert swim_groupunit._fund_agenda_take == 0
     assert swim_groupunit._credor_pool == 0
     assert swim_groupunit._debtor_pool == 0
-    assert swim_groupunit.bridge == default_bridge_if_None()
+    assert swim_groupunit.knot == default_knot_if_None()
     assert swim_groupunit.fund_iota == default_fund_iota_if_None()
 
 
-def test_groupunit_shop_ReturnsObj_bridge():
+def test_groupunit_shop_ReturnsObj_knot():
     # ESTABLISH
     swim_str = "/swimmers"
     slash_str = "/"
@@ -54,25 +54,25 @@ def test_groupunit_shop_ReturnsObj_bridge():
 
     # WHEN
     swim_groupunit = groupunit_shop(
-        group_title=swim_str, bridge=slash_str, fund_iota=x_fund_iota
+        group_title=swim_str, knot=slash_str, fund_iota=x_fund_iota
     )
 
     # THEN
-    assert swim_groupunit.bridge == slash_str
+    assert swim_groupunit.knot == slash_str
     assert swim_groupunit.fund_iota == x_fund_iota
 
 
-# def test_GroupUnit_set_group_title_RaisesErrorIfParameterContains_bridge_And_acct_mirror_True():
+# def test_GroupUnit_set_group_title_RaisesErrorIfParameterContains_knot_And_acct_mirror_True():
 #     # ESTABLISH
 #     slash_str = "/"
 #     bob_str = f"Bob{slash_str}Texas"
 
 #     # WHEN / THEN
 #     with pytest_raises(Exception) as excinfo:
-#         groupunit_shop(bob_str, _acct_mirror=True, bridge=slash_str)
+#         groupunit_shop(bob_str, _acct_mirror=True, knot=slash_str)
 #     assert (
 #         str(excinfo.value)
-#         == f"'{bob_str}' needs to be a LabelTerm. Cannot contain bridge: '{slash_str}'"
+#         == f"'{bob_str}' needs to be a LabelTerm. Cannot contain knot: '{slash_str}'"
 #     )
 
 

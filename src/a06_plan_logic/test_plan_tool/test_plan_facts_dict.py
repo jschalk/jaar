@@ -1,5 +1,5 @@
 from copy import deepcopy as copy_deepcopy
-from src.a01_term_logic.way import create_way
+from src.a01_term_logic.rope import create_rope
 from src.a06_plan_logic.plan import planunit_shop
 from src.a06_plan_logic.plan_tool import (
     clear_factunits_from_plan,
@@ -21,20 +21,20 @@ def test_get_plan_root_facts_dict_ReturnsObj_Scenario1_factunits_Exist():
     # ESTABLISH
     sue_str = "Sue"
     sue_plan = planunit_shop(sue_str)
-    casa_way = sue_plan.make_l1_way("case")
-    clean_way = sue_plan.make_l1_way("clean")
-    dirty_way = sue_plan.make_l1_way("dirty")
-    sue_plan.add_fact(casa_way, dirty_way, create_missing_concepts=True)
+    casa_rope = sue_plan.make_l1_rope("case")
+    clean_rope = sue_plan.make_l1_rope("clean")
+    dirty_rope = sue_plan.make_l1_rope("dirty")
+    sue_plan.add_fact(casa_rope, dirty_rope, create_missing_concepts=True)
 
     # WHEN
     sue_fact_dict = get_plan_root_facts_dict(sue_plan)
 
     # THEN
-    assert sue_fact_dict.get(casa_way) != None
-    casa_fact_dict = sue_fact_dict.get(casa_way)
-    assert casa_fact_dict.get("fcontext") == casa_way
-    assert casa_fact_dict.get("fstate") == dirty_way
-    expected_sue_fact_dict = {casa_way: {"fcontext": casa_way, "fstate": dirty_way}}
+    assert sue_fact_dict.get(casa_rope) != None
+    casa_fact_dict = sue_fact_dict.get(casa_rope)
+    assert casa_fact_dict.get("fcontext") == casa_rope
+    assert casa_fact_dict.get("fstate") == dirty_rope
+    expected_sue_fact_dict = {casa_rope: {"fcontext": casa_rope, "fstate": dirty_rope}}
     print(f"{sue_fact_dict=}")
     print(f"{expected_sue_fact_dict=}")
     assert sue_fact_dict == expected_sue_fact_dict
@@ -44,27 +44,27 @@ def test_get_plan_root_facts_dict_ReturnsObj_Scenario2_factunits_Exist():
     # ESTABLISH
     sue_str = "Sue"
     sue_plan = planunit_shop(sue_str)
-    casa_way = sue_plan.make_l1_way("case")
-    clean_way = sue_plan.make_l1_way("clean")
-    dirty_way = sue_plan.make_l1_way("dirty")
+    casa_rope = sue_plan.make_l1_rope("case")
+    clean_rope = sue_plan.make_l1_rope("clean")
+    dirty_rope = sue_plan.make_l1_rope("dirty")
     dirty_popen = 10
     dirty_pnigh = 13
-    sue_plan.add_fact(casa_way, dirty_way, dirty_popen, dirty_pnigh, True)
+    sue_plan.add_fact(casa_rope, dirty_rope, dirty_popen, dirty_pnigh, True)
 
     # WHEN
     sue_fact_dict = get_plan_root_facts_dict(sue_plan)
 
     # THEN
-    assert sue_fact_dict.get(casa_way) != None
-    casa_fact_dict = sue_fact_dict.get(casa_way)
-    assert casa_fact_dict.get("fcontext") == casa_way
-    assert casa_fact_dict.get("fstate") == dirty_way
+    assert sue_fact_dict.get(casa_rope) != None
+    casa_fact_dict = sue_fact_dict.get(casa_rope)
+    assert casa_fact_dict.get("fcontext") == casa_rope
+    assert casa_fact_dict.get("fstate") == dirty_rope
     assert casa_fact_dict.get("fopen") == dirty_popen
     assert casa_fact_dict.get("fnigh") == dirty_pnigh
     expected_sue_fact_dict = {
-        casa_way: {
-            "fcontext": casa_way,
-            "fstate": dirty_way,
+        casa_rope: {
+            "fcontext": casa_rope,
+            "fstate": dirty_rope,
             "fopen": dirty_popen,
             "fnigh": dirty_pnigh,
         }
@@ -96,19 +96,19 @@ def test_set_factunits_to_plan_ReturnsObj_Scenario1_Plan1FactsChanged():
     clean_str = "clean"
     dirty_str = "dirty"
     mop_str = "mop"
-    casa_way = bob_plan.make_l1_way(casa_str)
-    floor_way = bob_plan.make_way(casa_way, floor_str)
-    clean_way = bob_plan.make_way(floor_way, clean_str)
-    dirty_way = bob_plan.make_way(floor_way, dirty_str)
-    mop_way = bob_plan.make_way(casa_way, mop_str)
-    bob_plan.add_concept(floor_way)
-    bob_plan.add_concept(clean_way)
-    bob_plan.add_concept(dirty_way)
-    bob_plan.add_concept(mop_way, task=True)
+    casa_rope = bob_plan.make_l1_rope(casa_str)
+    floor_rope = bob_plan.make_rope(casa_rope, floor_str)
+    clean_rope = bob_plan.make_rope(floor_rope, clean_str)
+    dirty_rope = bob_plan.make_rope(floor_rope, dirty_str)
+    mop_rope = bob_plan.make_rope(casa_rope, mop_str)
+    bob_plan.add_concept(floor_rope)
+    bob_plan.add_concept(clean_rope)
+    bob_plan.add_concept(dirty_rope)
+    bob_plan.add_concept(mop_rope, task=True)
     bob_plan.edit_concept_attr(
-        mop_way, reason_rcontext=floor_way, reason_premise=dirty_way
+        mop_rope, reason_rcontext=floor_rope, reason_premise=dirty_rope
     )
-    dirty_facts_dict = {floor_way: {"fcontext": floor_way, "fstate": dirty_way}}
+    dirty_facts_dict = {floor_rope: {"fcontext": floor_rope, "fstate": dirty_rope}}
     before_bob_plan = copy_deepcopy(bob_plan)
     assert bob_plan.get_factunits_dict() != dirty_facts_dict
     assert bob_plan.get_factunits_dict() == {}
@@ -130,19 +130,19 @@ def test_set_factunits_to_plan_ReturnsObj_Scenario2_FactUnit_rcontext_DoesNotExi
     clean_str = "clean"
     dirty_str = "dirty"
     mop_str = "mop"
-    casa_way = bob_plan.make_l1_way(casa_str)
-    floor_way = bob_plan.make_way(casa_way, floor_str)
-    clean_way = bob_plan.make_way(floor_way, clean_str)
-    dirty_way = bob_plan.make_way(floor_way, dirty_str)
-    mop_way = bob_plan.make_way(casa_way, mop_str)
-    bob_plan.add_concept(floor_way)
-    # bob_plan.add_concept(clean_way)
-    bob_plan.add_concept(dirty_way)
-    bob_plan.add_concept(mop_way, task=True)
+    casa_rope = bob_plan.make_l1_rope(casa_str)
+    floor_rope = bob_plan.make_rope(casa_rope, floor_str)
+    clean_rope = bob_plan.make_rope(floor_rope, clean_str)
+    dirty_rope = bob_plan.make_rope(floor_rope, dirty_str)
+    mop_rope = bob_plan.make_rope(casa_rope, mop_str)
+    bob_plan.add_concept(floor_rope)
+    # bob_plan.add_concept(clean_rope)
+    bob_plan.add_concept(dirty_rope)
+    bob_plan.add_concept(mop_rope, task=True)
     bob_plan.edit_concept_attr(
-        mop_way, reason_rcontext=floor_way, reason_premise=dirty_way
+        mop_rope, reason_rcontext=floor_rope, reason_premise=dirty_rope
     )
-    clean_facts_dict = {floor_way: {"fcontext": floor_way, "fstate": clean_way}}
+    clean_facts_dict = {floor_rope: {"fcontext": floor_rope, "fstate": clean_rope}}
     before_bob_plan = copy_deepcopy(bob_plan)
     assert bob_plan.get_factunits_dict() != clean_facts_dict
     assert bob_plan.get_factunits_dict() == {}
@@ -154,7 +154,7 @@ def test_set_factunits_to_plan_ReturnsObj_Scenario2_FactUnit_rcontext_DoesNotExi
     # THEN
     assert bob_plan.get_dict() != before_bob_plan.get_dict()
     assert bob_plan.get_factunits_dict() == clean_facts_dict
-    assert bob_plan.get_concept_obj(clean_way)
+    assert bob_plan.get_concept_obj(clean_rope)
 
 
 def test_set_factunits_to_plan_ReturnsObj_Scenario3_FactUnit_rcontext_WithoutRcontextNotAddedToPlan():
@@ -165,27 +165,27 @@ def test_set_factunits_to_plan_ReturnsObj_Scenario3_FactUnit_rcontext_WithoutRco
     clean_str = "clean"
     dirty_str = "dirty"
     mop_str = "mop"
-    casa_way = bob_plan.make_l1_way(casa_str)
-    floor_way = bob_plan.make_way(casa_way, floor_str)
-    clean_way = bob_plan.make_way(floor_way, clean_str)
-    dirty_way = bob_plan.make_way(floor_way, dirty_str)
-    mop_way = bob_plan.make_way(casa_way, mop_str)
-    bob_plan.add_concept(floor_way)
-    # bob_plan.add_concept(clean_way)
-    bob_plan.add_concept(dirty_way)
-    bob_plan.add_concept(mop_way, task=True)
+    casa_rope = bob_plan.make_l1_rope(casa_str)
+    floor_rope = bob_plan.make_rope(casa_rope, floor_str)
+    clean_rope = bob_plan.make_rope(floor_rope, clean_str)
+    dirty_rope = bob_plan.make_rope(floor_rope, dirty_str)
+    mop_rope = bob_plan.make_rope(casa_rope, mop_str)
+    bob_plan.add_concept(floor_rope)
+    # bob_plan.add_concept(clean_rope)
+    bob_plan.add_concept(dirty_rope)
+    bob_plan.add_concept(mop_rope, task=True)
     bob_plan.edit_concept_attr(
-        mop_way, reason_rcontext=floor_way, reason_premise=dirty_way
+        mop_rope, reason_rcontext=floor_rope, reason_premise=dirty_rope
     )
 
     weather_str = "weather"
     raining_str = "raining"
-    weather_way = bob_plan.make_l1_way(weather_str)
-    rain_way = bob_plan.make_way(weather_way, raining_str)
+    weather_rope = bob_plan.make_l1_rope(weather_str)
+    rain_rope = bob_plan.make_rope(weather_rope, raining_str)
 
     two_facts_dict = {
-        floor_way: {"fcontext": floor_way, "fstate": clean_way},
-        weather_way: {"fcontext": weather_way, "fstate": rain_way},
+        floor_rope: {"fcontext": floor_rope, "fstate": clean_rope},
+        weather_rope: {"fcontext": weather_rope, "fstate": rain_rope},
     }
     before_bob_plan = copy_deepcopy(bob_plan)
     assert bob_plan.get_factunits_dict() != two_facts_dict
@@ -196,8 +196,8 @@ def test_set_factunits_to_plan_ReturnsObj_Scenario3_FactUnit_rcontext_WithoutRco
     set_factunits_to_plan(bob_plan, two_facts_dict)
 
     # THEN
-    assert floor_way in set(bob_plan.get_factunits_dict().keys())
-    assert weather_way not in set(bob_plan.get_factunits_dict().keys())
+    assert floor_rope in set(bob_plan.get_factunits_dict().keys())
+    assert weather_rope not in set(bob_plan.get_factunits_dict().keys())
     assert bob_plan.get_dict() != before_bob_plan.get_dict()
 
 
@@ -209,20 +209,20 @@ def test_clear_factunits_from_plan_ReturnsObj_Scenario1_FactUnit_Exist():
     clean_str = "clean"
     dirty_str = "dirty"
     mop_str = "mop"
-    casa_way = bob_plan.make_l1_way(casa_str)
-    floor_way = bob_plan.make_way(casa_way, floor_str)
-    clean_way = bob_plan.make_way(floor_way, clean_str)
-    dirty_way = bob_plan.make_way(floor_way, dirty_str)
-    mop_way = bob_plan.make_way(casa_way, mop_str)
-    bob_plan.add_concept(floor_way)
-    # bob_plan.add_concept(clean_way)
-    bob_plan.add_concept(dirty_way)
-    bob_plan.add_concept(mop_way, task=True)
+    casa_rope = bob_plan.make_l1_rope(casa_str)
+    floor_rope = bob_plan.make_rope(casa_rope, floor_str)
+    clean_rope = bob_plan.make_rope(floor_rope, clean_str)
+    dirty_rope = bob_plan.make_rope(floor_rope, dirty_str)
+    mop_rope = bob_plan.make_rope(casa_rope, mop_str)
+    bob_plan.add_concept(floor_rope)
+    # bob_plan.add_concept(clean_rope)
+    bob_plan.add_concept(dirty_rope)
+    bob_plan.add_concept(mop_rope, task=True)
     bob_plan.edit_concept_attr(
-        mop_way, reason_rcontext=floor_way, reason_premise=dirty_way
+        mop_rope, reason_rcontext=floor_rope, reason_premise=dirty_rope
     )
-    bob_plan.add_fact(floor_way, dirty_way)
-    floor_facts_dict = {floor_way: {"fcontext": floor_way, "fstate": dirty_way}}
+    bob_plan.add_fact(floor_rope, dirty_rope)
+    floor_facts_dict = {floor_rope: {"fcontext": floor_rope, "fstate": dirty_rope}}
     assert bob_plan.get_factunits_dict() == floor_facts_dict
     assert bob_plan.get_factunits_dict() != {}
 

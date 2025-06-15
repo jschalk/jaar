@@ -6,16 +6,16 @@
         "face_name": {
             "otx_key": true
         },
-        "inx_bridge": {
+        "inx_knot": {
             "otx_key": false
         },
-        "inx_way": {
+        "inx_rope": {
             "otx_key": false
         },
-        "otx_bridge": {
+        "otx_knot": {
             "otx_key": false
         },
-        "otx_way": {
+        "otx_rope": {
             "otx_key": true
         },
         "unknown_str": {
@@ -24,6 +24,6 @@
     },
     "idea_number": "br00045",
     "dimens": [
-        "pidgin_way"
+        "pidgin_rope"
     ]
 }

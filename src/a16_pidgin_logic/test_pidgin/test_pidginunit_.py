@@ -1,15 +1,15 @@
 from pytest import raises as pytest_raises
-from src.a01_term_logic.way import default_bridge_if_None
+from src.a01_term_logic.rope import default_knot_if_None
 from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
 from src.a06_plan_logic._test_util.a06_str import (
     LabelTerm_str,
     NameTerm_str,
+    RopeTerm_str,
     TitleTerm_str,
-    WayTerm_str,
     acct_name_str,
     awardee_title_str,
     concept_label_str,
-    concept_way_str,
+    concept_rope_str,
     fcontext_str,
     fopen_str,
     fstate_str,
@@ -36,18 +36,18 @@ from src.a15_vow_logic._test_util.a15_str import (
 from src.a15_vow_logic.vow_config import get_vow_args_class_types
 from src.a16_pidgin_logic._test_util.example_pidgins import (
     get_clean_labelmap,
-    get_clean_waymap,
+    get_clean_ropemap,
     get_invalid_namemap,
+    get_invalid_ropemap,
     get_invalid_titlemap,
-    get_invalid_waymap,
     get_suita_namemap,
     get_swim_titlemap,
 )
 from src.a16_pidgin_logic.map import (
     labelmap_shop,
     namemap_shop,
+    ropemap_shop,
     titlemap_shop,
-    waymap_shop,
 )
 from src.a16_pidgin_logic.pidgin import PidginUnit, pidginunit_shop
 from src.a16_pidgin_logic.pidgin_config import (
@@ -56,8 +56,8 @@ from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_args_class_types,
     get_pidgin_LabelTerm_args,
     get_pidgin_NameTerm_args,
+    get_pidgin_RopeTerm_args,
     get_pidgin_TitleTerm_args,
-    get_pidgin_WayTerm_args,
     get_pidginable_args,
     pidginable_class_types,
 )
@@ -74,7 +74,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("addin") == "float"
     assert pidgin_args_class_types.get("amount") == "float"
     assert pidgin_args_class_types.get("awardee_title") == TitleTerm_str()
-    assert pidgin_args_class_types.get("rcontext") == WayTerm_str()
+    assert pidgin_args_class_types.get("rcontext") == RopeTerm_str()
     assert pidgin_args_class_types.get("rconcept_active_requisite") == "bool"
     assert pidgin_args_class_types.get("begin") == "float"
     assert pidgin_args_class_types.get("c400_number") == "int"
@@ -90,7 +90,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("denom") == "int"
     assert pidgin_args_class_types.get("pdivisor") == "int"
     assert pidgin_args_class_types.get("face_name") == NameTerm_str()
-    assert pidgin_args_class_types.get("fcontext") == WayTerm_str()
+    assert pidgin_args_class_types.get("fcontext") == RopeTerm_str()
     assert pidgin_args_class_types.get("vow_label") == LabelTerm_str()
     assert pidgin_args_class_types.get("fnigh") == "float"
     assert pidgin_args_class_types.get("fopen") == "float"
@@ -106,19 +106,19 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("month_label") == LabelTerm_str()
     assert pidgin_args_class_types.get("monthday_distortion") == "int"
     assert pidgin_args_class_types.get("morph") == "bool"
-    assert pidgin_args_class_types.get("pstate") == WayTerm_str()
+    assert pidgin_args_class_types.get("pstate") == RopeTerm_str()
     assert pidgin_args_class_types.get("pnigh") == "float"
     assert pidgin_args_class_types.get("numor") == "int"
     assert pidgin_args_class_types.get("offi_time") == "TimeLinePoint"
     assert pidgin_args_class_types.get("owner_name") == NameTerm_str()
     assert pidgin_args_class_types.get("popen") == "float"
     assert pidgin_args_class_types.get("penny") == "float"
-    assert pidgin_args_class_types.get("fstate") == WayTerm_str()
+    assert pidgin_args_class_types.get("fstate") == RopeTerm_str()
     assert pidgin_args_class_types.get("task") == "bool"
     assert pidgin_args_class_types.get("problem_bool") == "bool"
     assert pidgin_args_class_types.get("quota") == "int"
     assert pidgin_args_class_types.get("respect_bit") == "float"
-    assert pidgin_args_class_types.get("concept_way") == WayTerm_str()
+    assert pidgin_args_class_types.get("concept_rope") == RopeTerm_str()
     assert pidgin_args_class_types.get("celldepth") == "int"
     assert pidgin_args_class_types.get("stop_want") == "float"
     assert pidgin_args_class_types.get("take_force") == "float"
@@ -129,7 +129,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("timeline_label") == LabelTerm_str()
     assert pidgin_args_class_types.get("weekday_label") == LabelTerm_str()
     assert pidgin_args_class_types.get("weekday_order") == "int"
-    assert pidgin_args_class_types.get("bridge") == "str"
+    assert pidgin_args_class_types.get("knot") == "str"
     assert pidgin_args_class_types.get("yr1_jan1_offset") == "int"
 
     # make sure it pidgin_arg_class_types has all vow and all atom args
@@ -180,7 +180,7 @@ def test_pidginable_class_types_ReturnsObj():
         NameTerm_str(),
         TitleTerm_str(),
         LabelTerm_str(),
-        WayTerm_str(),
+        RopeTerm_str(),
     }
     print(f"{set(get_atom_args_class_types().values())=}")
     all_atom_class_types = set(get_atom_args_class_types().values())
@@ -217,7 +217,7 @@ def test_get_pidginable_args_ReturnsObj():
         month_label_str(),
         pstate_str(),
         owner_name_str(),
-        concept_way_str(),
+        concept_rope_str(),
         labor_title_str(),
         timeline_label_str(),
         weekday_label_str(),
@@ -355,24 +355,24 @@ def test_get_pidgin_LabelTerm_args_ReturnsObj():
     assert pidgin_LabelTerm_args == expected_args
 
 
-def test_get_pidgin_WayTerm_args_ReturnsObj():
+def test_get_pidgin_RopeTerm_args_ReturnsObj():
     # ESTABLISH / WHEN
-    pidgin_WayTerm_args = get_pidgin_WayTerm_args()
+    pidgin_RopeTerm_args = get_pidgin_RopeTerm_args()
 
     # THEN
-    assert pidgin_WayTerm_args == {
+    assert pidgin_RopeTerm_args == {
         fstate_str(),
         fcontext_str(),
-        concept_way_str(),
+        concept_rope_str(),
         rcontext_str(),
         pstate_str(),
     }
     expected_args = {
         x_arg
         for x_arg, class_type in get_pidgin_args_class_types().items()
-        if class_type == WayTerm_str()
+        if class_type == RopeTerm_str()
     }
-    assert pidgin_WayTerm_args == expected_args
+    assert pidgin_RopeTerm_args == expected_args
 
 
 def test_PidginUnit_Exists():
@@ -384,10 +384,10 @@ def test_PidginUnit_Exists():
     assert not x_pidginunit.titlemap
     assert not x_pidginunit.namemap
     assert not x_pidginunit.labelmap
-    assert not x_pidginunit.waymap
+    assert not x_pidginunit.ropemap
     assert not x_pidginunit.unknown_str
-    assert not x_pidginunit.otx_bridge
-    assert not x_pidginunit.inx_bridge
+    assert not x_pidginunit.otx_knot
+    assert not x_pidginunit.inx_knot
     assert not x_pidginunit.face_name
 
 
@@ -402,28 +402,28 @@ def test_pidginunit_shop_ReturnsObj_scenario0():
     assert sue_pidginunit.face_name == sue_str
     assert sue_pidginunit.event_int == 0
     assert sue_pidginunit.unknown_str == default_unknown_str_if_None()
-    assert sue_pidginunit.otx_bridge == default_bridge_if_None()
-    assert sue_pidginunit.inx_bridge == default_bridge_if_None()
+    assert sue_pidginunit.otx_knot == default_knot_if_None()
+    assert sue_pidginunit.inx_knot == default_knot_if_None()
     assert sue_pidginunit.titlemap == titlemap_shop(face_name=sue_str)
     assert sue_pidginunit.namemap == namemap_shop(face_name=sue_str)
     assert sue_pidginunit.labelmap == labelmap_shop(face_name=sue_str)
-    assert sue_pidginunit.waymap == waymap_shop(face_name=sue_str)
+    assert sue_pidginunit.ropemap == ropemap_shop(face_name=sue_str)
     assert sue_pidginunit.namemap.event_int == 0
     assert sue_pidginunit.namemap.unknown_str == default_unknown_str_if_None()
-    assert sue_pidginunit.namemap.otx_bridge == default_bridge_if_None()
-    assert sue_pidginunit.namemap.inx_bridge == default_bridge_if_None()
+    assert sue_pidginunit.namemap.otx_knot == default_knot_if_None()
+    assert sue_pidginunit.namemap.inx_knot == default_knot_if_None()
     assert sue_pidginunit.titlemap.event_int == 0
     assert sue_pidginunit.titlemap.unknown_str == default_unknown_str_if_None()
-    assert sue_pidginunit.titlemap.otx_bridge == default_bridge_if_None()
-    assert sue_pidginunit.titlemap.inx_bridge == default_bridge_if_None()
+    assert sue_pidginunit.titlemap.otx_knot == default_knot_if_None()
+    assert sue_pidginunit.titlemap.inx_knot == default_knot_if_None()
     assert sue_pidginunit.labelmap.event_int == 0
     assert sue_pidginunit.labelmap.unknown_str == default_unknown_str_if_None()
-    assert sue_pidginunit.labelmap.otx_bridge == default_bridge_if_None()
-    assert sue_pidginunit.labelmap.inx_bridge == default_bridge_if_None()
-    assert sue_pidginunit.waymap.event_int == 0
-    assert sue_pidginunit.waymap.unknown_str == default_unknown_str_if_None()
-    assert sue_pidginunit.waymap.otx_bridge == default_bridge_if_None()
-    assert sue_pidginunit.waymap.inx_bridge == default_bridge_if_None()
+    assert sue_pidginunit.labelmap.otx_knot == default_knot_if_None()
+    assert sue_pidginunit.labelmap.inx_knot == default_knot_if_None()
+    assert sue_pidginunit.ropemap.event_int == 0
+    assert sue_pidginunit.ropemap.unknown_str == default_unknown_str_if_None()
+    assert sue_pidginunit.ropemap.otx_knot == default_knot_if_None()
+    assert sue_pidginunit.ropemap.inx_knot == default_knot_if_None()
 
 
 def test_pidginunit_shop_ReturnsObj_scenario1():
@@ -431,53 +431,53 @@ def test_pidginunit_shop_ReturnsObj_scenario1():
     sue_str = "Sue"
     five_event_int = 5
     y_uk = "UnknownTerm"
-    slash_otx_bridge = "/"
-    colon_inx_bridge = ":"
+    slash_otx_knot = "/"
+    colon_inx_knot = ":"
 
     # WHEN
     sue_pidginunit = pidginunit_shop(
-        sue_str, five_event_int, slash_otx_bridge, colon_inx_bridge, y_uk
+        sue_str, five_event_int, slash_otx_knot, colon_inx_knot, y_uk
     )
 
     # THEN
     assert sue_pidginunit.event_int == five_event_int
     assert sue_pidginunit.unknown_str == y_uk
-    assert sue_pidginunit.otx_bridge == slash_otx_bridge
-    assert sue_pidginunit.inx_bridge == colon_inx_bridge
+    assert sue_pidginunit.otx_knot == slash_otx_knot
+    assert sue_pidginunit.inx_knot == colon_inx_knot
 
     # x_titlemap = titlemap_shop(
-    #     slash_otx_bridge, colon_inx_bridge, {}, y_uk, sue_str, five_event_int
+    #     slash_otx_knot, colon_inx_knot, {}, y_uk, sue_str, five_event_int
     # )
     # x_namemap = namemap_shop(
-    #     slash_otx_bridge, colon_inx_bridge, {}, y_uk, sue_str, five_event_int
+    #     slash_otx_knot, colon_inx_knot, {}, y_uk, sue_str, five_event_int
     # )
-    # x_waymap = waymap_shop(
-    #     slash_otx_bridge, colon_inx_bridge, None, {}, y_uk, sue_str, five_event_int
+    # x_ropemap = ropemap_shop(
+    #     slash_otx_knot, colon_inx_knot, None, {}, y_uk, sue_str, five_event_int
     # )
     # assert sue_pidginunit.titlemap == x_titlemap
     # assert sue_pidginunit.namemap == x_namemap
-    # assert sue_pidginunit.waymap == x_waymap
+    # assert sue_pidginunit.ropemap == x_ropemap
 
     assert sue_pidginunit.namemap.face_name == sue_str
     assert sue_pidginunit.namemap.event_int == five_event_int
     assert sue_pidginunit.namemap.unknown_str == y_uk
-    assert sue_pidginunit.namemap.otx_bridge == slash_otx_bridge
-    assert sue_pidginunit.namemap.inx_bridge == colon_inx_bridge
+    assert sue_pidginunit.namemap.otx_knot == slash_otx_knot
+    assert sue_pidginunit.namemap.inx_knot == colon_inx_knot
     assert sue_pidginunit.titlemap.face_name == sue_str
     assert sue_pidginunit.titlemap.event_int == five_event_int
     assert sue_pidginunit.titlemap.unknown_str == y_uk
-    assert sue_pidginunit.titlemap.otx_bridge == slash_otx_bridge
-    assert sue_pidginunit.titlemap.inx_bridge == colon_inx_bridge
+    assert sue_pidginunit.titlemap.otx_knot == slash_otx_knot
+    assert sue_pidginunit.titlemap.inx_knot == colon_inx_knot
     assert sue_pidginunit.labelmap.face_name == sue_str
     assert sue_pidginunit.labelmap.event_int == five_event_int
     assert sue_pidginunit.labelmap.unknown_str == y_uk
-    assert sue_pidginunit.labelmap.otx_bridge == slash_otx_bridge
-    assert sue_pidginunit.labelmap.inx_bridge == colon_inx_bridge
-    assert sue_pidginunit.waymap.face_name == sue_str
-    assert sue_pidginunit.waymap.event_int == five_event_int
-    assert sue_pidginunit.waymap.unknown_str == y_uk
-    assert sue_pidginunit.waymap.otx_bridge == slash_otx_bridge
-    assert sue_pidginunit.waymap.inx_bridge == colon_inx_bridge
+    assert sue_pidginunit.labelmap.otx_knot == slash_otx_knot
+    assert sue_pidginunit.labelmap.inx_knot == colon_inx_knot
+    assert sue_pidginunit.ropemap.face_name == sue_str
+    assert sue_pidginunit.ropemap.event_int == five_event_int
+    assert sue_pidginunit.ropemap.unknown_str == y_uk
+    assert sue_pidginunit.ropemap.otx_knot == slash_otx_knot
+    assert sue_pidginunit.ropemap.inx_knot == colon_inx_knot
 
 
 def test_pidginunit_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_float_nan():
@@ -494,16 +494,16 @@ def test_pidginunit_shop_ReturnsObj_scenario2_PidginCoreAttrAreDefaultWhenGiven_
         face_name=bob_str,
         event_int=event7,
         unknown_str=x_nan,
-        otx_bridge=x_nan,
-        inx_bridge=x_nan,
+        otx_knot=x_nan,
+        inx_knot=x_nan,
     )
 
     # THEN
     assert x_pidginunit.face_name == bob_str
     assert x_pidginunit.event_int == event7
     assert x_pidginunit.unknown_str == default_unknown_str_if_None()
-    assert x_pidginunit.otx_bridge == default_bridge_if_None()
-    assert x_pidginunit.inx_bridge == default_bridge_if_None()
+    assert x_pidginunit.otx_knot == default_knot_if_None()
+    assert x_pidginunit.inx_knot == default_knot_if_None()
 
 
 def test_PidginUnit_set_mapunit_SetsAttr():
@@ -521,50 +521,50 @@ def test_PidginUnit_set_mapunit_SetsAttr():
     assert sue_pidginunit.namemap == namemap
 
 
-def test_PidginUnit_set_mapunit_SetsAttr_SpecialCase_WayTerm():
+def test_PidginUnit_set_mapunit_SetsAttr_SpecialCase_RopeTerm():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    waymap = waymap_shop(face_name=sue_str)
-    waymap.set_otx2inx("Bob", "Bob of Portland")
-    assert sue_pidginunit.waymap != waymap
+    ropemap = ropemap_shop(face_name=sue_str)
+    ropemap.set_otx2inx("Bob", "Bob of Portland")
+    assert sue_pidginunit.ropemap != ropemap
 
     # WHEN
-    sue_pidginunit.set_waymap(waymap)
+    sue_pidginunit.set_ropemap(ropemap)
 
     # THEN
-    assert sue_pidginunit.waymap == waymap
+    assert sue_pidginunit.ropemap == ropemap
 
 
-def test_PidginUnit_set_mapunit_RaisesErrorIf_mapunit_otx_bridge_IsNotSame():
+def test_PidginUnit_set_mapunit_RaisesErrorIf_mapunit_otx_knot_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    slash_otx_bridge = "/"
-    namemap = namemap_shop(otx_bridge=slash_otx_bridge, face_name=sue_str)
-    assert sue_pidginunit.otx_bridge != namemap.otx_bridge
+    slash_otx_knot = "/"
+    namemap = namemap_shop(otx_knot=slash_otx_knot, face_name=sue_str)
+    assert sue_pidginunit.otx_knot != namemap.otx_knot
     assert sue_pidginunit.namemap != namemap
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_pidginunit.set_namemap(namemap)
-    exception_str = f"set_mapcore Error: PidginUnit otx_bridge is '{sue_pidginunit.otx_bridge}', MapCore is '{slash_otx_bridge}'."
+    exception_str = f"set_mapcore Error: PidginUnit otx_knot is '{sue_pidginunit.otx_knot}', MapCore is '{slash_otx_knot}'."
     assert str(excinfo.value) == exception_str
 
 
-def test_PidginUnit_set_mapunit_RaisesErrorIf_mapunit_inx_bridge_IsNotSame():
+def test_PidginUnit_set_mapunit_RaisesErrorIf_mapunit_inx_knot_IsNotSame():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
-    slash_inx_bridge = "/"
-    namemap = namemap_shop(inx_bridge=slash_inx_bridge, face_name=sue_str)
-    assert sue_pidginunit.inx_bridge != namemap.inx_bridge
+    slash_inx_knot = "/"
+    namemap = namemap_shop(inx_knot=slash_inx_knot, face_name=sue_str)
+    assert sue_pidginunit.inx_knot != namemap.inx_knot
     assert sue_pidginunit.namemap != namemap
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_pidginunit.set_namemap(namemap)
-    exception_str = f"set_mapcore Error: PidginUnit inx_bridge is '{sue_pidginunit.inx_bridge}', MapCore is '{slash_inx_bridge}'."
+    exception_str = f"set_mapcore Error: PidginUnit inx_knot is '{sue_pidginunit.inx_knot}', MapCore is '{slash_inx_knot}'."
     assert str(excinfo.value) == exception_str
 
 
@@ -612,21 +612,21 @@ def test_PidginUnit_get_mapunit_ReturnsObj():
     assert sue_pu.get_mapunit(NameTerm_str()) == sue_pu.namemap
     assert sue_pu.get_mapunit(TitleTerm_str()) == sue_pu.titlemap
     assert sue_pu.get_mapunit(LabelTerm_str()) == sue_pu.labelmap
-    assert sue_pu.get_mapunit(WayTerm_str()) == sue_pu.waymap
+    assert sue_pu.get_mapunit(RopeTerm_str()) == sue_pu.ropemap
 
-    assert sue_pu.get_mapunit(NameTerm_str()) != sue_pu.waymap
-    assert sue_pu.get_mapunit(TitleTerm_str()) != sue_pu.waymap
-    assert sue_pu.get_mapunit(LabelTerm_str()) != sue_pu.waymap
+    assert sue_pu.get_mapunit(NameTerm_str()) != sue_pu.ropemap
+    assert sue_pu.get_mapunit(TitleTerm_str()) != sue_pu.ropemap
+    assert sue_pu.get_mapunit(LabelTerm_str()) != sue_pu.ropemap
 
 
 def test_PidginUnit_is_valid_ReturnsObj():
     # ESTABLISH
     invalid_namemap = get_invalid_namemap()
     invalid_titlemap = get_invalid_titlemap()
-    invalid_labelmap = get_invalid_waymap()
+    invalid_labelmap = get_invalid_ropemap()
     valid_namemap = get_suita_namemap()
     valid_titlemap = get_swim_titlemap()
-    valid_labelmap = get_clean_waymap()
+    valid_labelmap = get_clean_ropemap()
     assert valid_namemap.is_valid()
     assert valid_titlemap.is_valid()
     assert valid_labelmap.is_valid()
@@ -639,7 +639,7 @@ def test_PidginUnit_is_valid_ReturnsObj():
     assert sue_pidginunit.is_valid()
     sue_pidginunit.set_namemap(valid_namemap)
     sue_pidginunit.set_titlemap(valid_titlemap)
-    sue_pidginunit.set_waymap(valid_labelmap)
+    sue_pidginunit.set_ropemap(valid_labelmap)
     assert sue_pidginunit.is_valid()
 
     # WHEN / THEN
@@ -655,9 +655,9 @@ def test_PidginUnit_is_valid_ReturnsObj():
     assert sue_pidginunit.is_valid()
 
     # WHEN / THEN
-    sue_pidginunit.set_waymap(invalid_labelmap)
+    sue_pidginunit.set_ropemap(invalid_labelmap)
     assert sue_pidginunit.is_valid() is False
-    sue_pidginunit.set_waymap(valid_labelmap)
+    sue_pidginunit.set_ropemap(valid_labelmap)
     assert sue_pidginunit.is_valid()
 
 
@@ -677,20 +677,20 @@ def test_PidginUnit_set_otx2inx_SetsAttr_Scenario0_NameTerm_str():
     assert namemap.otx2inx_exists(sue_otx, sue_inx)
 
 
-def test_PidginUnit_set_otx2inx_SetsAttr_Scenario1_WayTerm_str():
+def test_PidginUnit_set_otx2inx_SetsAttr_Scenario1_RopeTerm_str():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    waymap = zia_pidginunit.get_waymap()
-    assert waymap.otx2inx_exists(sue_otx, sue_inx) is False
+    ropemap = zia_pidginunit.get_ropemap()
+    assert ropemap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_otx2inx(WayTerm_str(), sue_otx, sue_inx)
+    zia_pidginunit.set_otx2inx(RopeTerm_str(), sue_otx, sue_inx)
 
     # THEN
-    assert waymap.otx2inx_exists(sue_otx, sue_inx)
+    assert ropemap.otx2inx_exists(sue_otx, sue_inx)
 
 
 def test_PidginUnit_set_otx2inx_SetsAttr_Scenario2_LabelTerm_str():
@@ -699,14 +699,14 @@ def test_PidginUnit_set_otx2inx_SetsAttr_Scenario2_LabelTerm_str():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    waymap = zia_pidginunit.get_labelmap()
-    assert waymap.otx2inx_exists(sue_otx, sue_inx) is False
+    ropemap = zia_pidginunit.get_labelmap()
+    assert ropemap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
     zia_pidginunit.set_otx2inx(LabelTerm_str(), sue_otx, sue_inx)
 
     # THEN
-    assert waymap.otx2inx_exists(sue_otx, sue_inx)
+    assert ropemap.otx2inx_exists(sue_otx, sue_inx)
 
 
 def test_PidginUnit_otx2inx_exists_ReturnsObj():
@@ -715,14 +715,14 @@ def test_PidginUnit_otx2inx_exists_ReturnsObj():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    way_type = LabelTerm_str()
-    assert zia_pidginunit.otx2inx_exists(way_type, sue_otx, sue_inx) is False
+    rope_type = LabelTerm_str()
+    assert zia_pidginunit.otx2inx_exists(rope_type, sue_otx, sue_inx) is False
 
     # WHEN
     zia_pidginunit.set_otx2inx(LabelTerm_str(), sue_otx, sue_inx)
 
     # THEN
-    assert zia_pidginunit.otx2inx_exists(way_type, sue_otx, sue_inx)
+    assert zia_pidginunit.otx2inx_exists(rope_type, sue_otx, sue_inx)
 
 
 def test_PidginUnit_get_inx_value_ReturnsObj():
@@ -746,34 +746,34 @@ def test_PidginUnit_del_otx2inx_ReturnsObj():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    way_type = LabelTerm_str()
+    rope_type = LabelTerm_str()
     zia_pidginunit.set_otx2inx(LabelTerm_str(), sue_otx, sue_inx)
     zia_pidginunit.set_otx2inx(LabelTerm_str(), zia_str, zia_str)
-    assert zia_pidginunit.otx2inx_exists(way_type, sue_otx, sue_inx)
-    assert zia_pidginunit.otx2inx_exists(way_type, zia_str, zia_str)
+    assert zia_pidginunit.otx2inx_exists(rope_type, sue_otx, sue_inx)
+    assert zia_pidginunit.otx2inx_exists(rope_type, zia_str, zia_str)
 
     # WHEN
-    zia_pidginunit.del_otx2inx(way_type, sue_otx)
+    zia_pidginunit.del_otx2inx(rope_type, sue_otx)
 
     # THEN
-    assert zia_pidginunit.otx2inx_exists(way_type, sue_otx, sue_inx) is False
-    assert zia_pidginunit.otx2inx_exists(way_type, zia_str, zia_str)
+    assert zia_pidginunit.otx2inx_exists(rope_type, sue_otx, sue_inx) is False
+    assert zia_pidginunit.otx2inx_exists(rope_type, zia_str, zia_str)
 
 
-def test_PidginUnit_set_label_SetsAttr_Scenario1_WayTerm_str():
+def test_PidginUnit_set_label_SetsAttr_Scenario1_RopeTerm_str():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    waymap = zia_pidginunit.get_waymap()
-    assert waymap.label_exists(sue_otx, sue_inx) is False
+    ropemap = zia_pidginunit.get_ropemap()
+    assert ropemap.label_exists(sue_otx, sue_inx) is False
 
     # WHEN
     zia_pidginunit.set_label(sue_otx, sue_inx)
 
     # THEN
-    assert waymap.label_exists(sue_otx, sue_inx)
+    assert ropemap.label_exists(sue_otx, sue_inx)
 
 
 def test_PidginUnit_label_exists_ReturnsObj():

@@ -560,7 +560,7 @@
             "debt_score": 1
         }
     },
-    "bridge": ";",
+    "knot": ";",
     "conceptroot": {
         "_kids": {
             "Aaron Donald objects effected by him": {
@@ -1298,7 +1298,7 @@
                                                             }
                                                         }
                                                     },
-                                                    "go for parent_way": {
+                                                    "go for parent_rope": {
                                                         "_kids": {
                                                             "maybe watch a video": {
                                                                 "_uid": 218,
@@ -1317,7 +1317,7 @@
                                                             }
                                                         },
                                                         "_uid": 214,
-                                                        "concept_label": "go for parent_way",
+                                                        "concept_label": "go for parent_rope",
                                                         "mass": 1,
                                                         "reasonunits": {
                                                             ";accord45;Nation-States;": {

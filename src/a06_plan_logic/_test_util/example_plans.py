@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import open_file
-from src.a01_term_logic.way import WayTerm
+from src.a01_term_logic.rope import RopeTerm
 from src.a04_reason_logic.reason_concept import factunit_shop, reasonunit_shop
 from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
@@ -18,28 +18,28 @@ def planunit_v001() -> PlanUnit:
 
 def planunit_v001_with_large_agenda() -> PlanUnit:
     yao_plan = planunit_v001()
-    day_minute_way = yao_plan.make_l1_way("day_minute")
-    month_wk_way = yao_plan.make_l1_way("month_wk")
-    nations_way = yao_plan.make_l1_way("Nation-States")
-    mood_way = yao_plan.make_l1_way("Moods")
-    aaron_way = yao_plan.make_l1_way("Aaron Donald objects effected by him")
-    yr_month_way = yao_plan.make_l1_way("yr_month")
-    season_way = yao_plan.make_l1_way("Seasons")
-    ced_wk_way = yao_plan.make_l1_way("ced_wk")
-    wkdays_way = yao_plan.make_l1_way("wkdays")
+    day_minute_rope = yao_plan.make_l1_rope("day_minute")
+    month_wk_rope = yao_plan.make_l1_rope("month_wk")
+    nations_rope = yao_plan.make_l1_rope("Nation-States")
+    mood_rope = yao_plan.make_l1_rope("Moods")
+    aaron_rope = yao_plan.make_l1_rope("Aaron Donald objects effected by him")
+    yr_month_rope = yao_plan.make_l1_rope("yr_month")
+    season_rope = yao_plan.make_l1_rope("Seasons")
+    ced_wk_rope = yao_plan.make_l1_rope("ced_wk")
+    wkdays_rope = yao_plan.make_l1_rope("wkdays")
 
-    yao_plan.add_fact(aaron_way, aaron_way)
-    yao_plan.add_fact(ced_wk_way, ced_wk_way, fopen=0, fnigh=53)
-    yao_plan.add_fact(day_minute_way, day_minute_way, fopen=0, fnigh=1399)
+    yao_plan.add_fact(aaron_rope, aaron_rope)
+    yao_plan.add_fact(ced_wk_rope, ced_wk_rope, fopen=0, fnigh=53)
+    yao_plan.add_fact(day_minute_rope, day_minute_rope, fopen=0, fnigh=1399)
     # yao_plan.add_fact(interweb, interweb)
-    yao_plan.add_fact(month_wk_way, month_wk_way, fopen=0, fnigh=5)
-    yao_plan.add_fact(mood_way, mood_way)
+    yao_plan.add_fact(month_wk_rope, month_wk_rope, fopen=0, fnigh=5)
+    yao_plan.add_fact(mood_rope, mood_rope)
     # yao_plan.add_fact(movie, movie)
-    yao_plan.add_fact(nations_way, nations_way)
-    yao_plan.add_fact(season_way, season_way)
-    yao_plan.add_fact(yr_month_way, yr_month_way, fopen=0, fnigh=12)
+    yao_plan.add_fact(nations_rope, nations_rope)
+    yao_plan.add_fact(season_rope, season_rope)
+    yao_plan.add_fact(yr_month_rope, yr_month_rope, fopen=0, fnigh=12)
     # yao_plan.add_fact(water, water)
-    yao_plan.add_fact(wkdays_way, wkdays_way)
+    yao_plan.add_fact(wkdays_rope, wkdays_rope)
     return yao_plan
 
 
@@ -57,7 +57,7 @@ def get_planunit_with_4_levels() -> PlanUnit:
     sue_plan.set_l1_concept(conceptunit_shop(cat_str, mass=30, task=True))
 
     wk_str = "wkdays"
-    wk_way = sue_plan.make_l1_way(wk_str)
+    wk_rope = sue_plan.make_l1_rope(wk_str)
     concept_kid_wkdays = conceptunit_shop(wk_str, mass=40)
     sue_plan.set_l1_concept(concept_kid_wkdays)
     sun_str = "Sunday"
@@ -67,72 +67,72 @@ def get_planunit_with_4_levels() -> PlanUnit:
     thu_str = "Thursday"
     fri_str = "Friday"
     sat_str = "Saturday"
-    sue_plan.set_concept(conceptunit_shop(sun_str, mass=20), wk_way)
-    sue_plan.set_concept(conceptunit_shop(mon_str, mass=20), wk_way)
-    sue_plan.set_concept(conceptunit_shop(tue_str, mass=20), wk_way)
-    sue_plan.set_concept(conceptunit_shop(wed_str, mass=20), wk_way)
-    sue_plan.set_concept(conceptunit_shop(thu_str, mass=30), wk_way)
-    sue_plan.set_concept(conceptunit_shop(fri_str, mass=40), wk_way)
-    sue_plan.set_concept(conceptunit_shop(sat_str, mass=50), wk_way)
+    sue_plan.set_concept(conceptunit_shop(sun_str, mass=20), wk_rope)
+    sue_plan.set_concept(conceptunit_shop(mon_str, mass=20), wk_rope)
+    sue_plan.set_concept(conceptunit_shop(tue_str, mass=20), wk_rope)
+    sue_plan.set_concept(conceptunit_shop(wed_str, mass=20), wk_rope)
+    sue_plan.set_concept(conceptunit_shop(thu_str, mass=30), wk_rope)
+    sue_plan.set_concept(conceptunit_shop(fri_str, mass=40), wk_rope)
+    sue_plan.set_concept(conceptunit_shop(sat_str, mass=50), wk_rope)
 
     nation_str = "nation"
-    nation_way = sue_plan.make_l1_way(nation_str)
+    nation_rope = sue_plan.make_l1_rope(nation_str)
     concept_kid_nation = conceptunit_shop(nation_str, mass=30)
     sue_plan.set_l1_concept(concept_kid_nation)
     usa_str = "USA"
-    usa_way = sue_plan.make_way(nation_way, usa_str)
+    usa_rope = sue_plan.make_rope(nation_rope, usa_str)
     france_str = "France"
     brazil_str = "Brazil"
     concept_grandkid_usa = conceptunit_shop(usa_str, mass=50)
     concept_grandkid_france = conceptunit_shop(france_str, mass=50)
     concept_grandkid_brazil = conceptunit_shop(brazil_str, mass=50)
-    sue_plan.set_concept(concept_grandkid_france, nation_way)
-    sue_plan.set_concept(concept_grandkid_brazil, nation_way)
-    sue_plan.set_concept(concept_grandkid_usa, nation_way)
+    sue_plan.set_concept(concept_grandkid_france, nation_rope)
+    sue_plan.set_concept(concept_grandkid_brazil, nation_rope)
+    sue_plan.set_concept(concept_grandkid_usa, nation_rope)
     texas_str = "Texas"
     oregon_str = "Oregon"
     concept_grandgrandkid_usa_texas = conceptunit_shop(texas_str, mass=50)
     concept_grandgrandkid_usa_oregon = conceptunit_shop(oregon_str, mass=50)
-    sue_plan.set_concept(concept_grandgrandkid_usa_texas, usa_way)
-    sue_plan.set_concept(concept_grandgrandkid_usa_oregon, usa_way)
+    sue_plan.set_concept(concept_grandgrandkid_usa_texas, usa_rope)
+    sue_plan.set_concept(concept_grandgrandkid_usa_oregon, usa_rope)
     return sue_plan
 
 
 def get_planunit_with_4_levels_and_2reasons() -> PlanUnit:
     sue_plan = get_planunit_with_4_levels()
     wk_str = "wkdays"
-    wk_way = sue_plan.make_l1_way(wk_str)
+    wk_rope = sue_plan.make_l1_rope(wk_str)
     wed_str = "Wednesday"
-    wed_way = sue_plan.make_way(wk_way, wed_str)
-    wk_reason = reasonunit_shop(wk_way)
-    wk_reason.set_premise(wed_way)
+    wed_rope = sue_plan.make_rope(wk_rope, wed_str)
+    wk_reason = reasonunit_shop(wk_rope)
+    wk_reason.set_premise(wed_rope)
 
     nation_str = "nation"
-    nation_way = sue_plan.make_l1_way(nation_str)
+    nation_rope = sue_plan.make_l1_rope(nation_str)
     usa_str = "USA"
-    usa_way = sue_plan.make_way(nation_way, usa_str)
-    nation_reason = reasonunit_shop(nation_way)
-    nation_reason.set_premise(usa_way)
+    usa_rope = sue_plan.make_rope(nation_rope, usa_str)
+    nation_reason = reasonunit_shop(nation_rope)
+    nation_reason.set_premise(usa_rope)
 
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
-    sue_plan.edit_concept_attr(casa_way, reason=wk_reason)
-    sue_plan.edit_concept_attr(casa_way, reason=nation_reason)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
+    sue_plan.edit_concept_attr(casa_rope, reason=wk_reason)
+    sue_plan.edit_concept_attr(casa_rope, reason=nation_reason)
     return sue_plan
 
 
 def get_planunit_with_4_levels_and_2reasons_2facts() -> PlanUnit:
     sue_plan = get_planunit_with_4_levels_and_2reasons()
     wk_str = "wkdays"
-    wk_way = sue_plan.make_l1_way(wk_str)
+    wk_rope = sue_plan.make_l1_rope(wk_str)
     wed_str = "Wednesday"
-    wed_way = sue_plan.make_way(wk_way, wed_str)
+    wed_rope = sue_plan.make_rope(wk_rope, wed_str)
     nation_str = "nation"
-    nation_way = sue_plan.make_l1_way(nation_str)
+    nation_rope = sue_plan.make_l1_rope(nation_str)
     usa_str = "USA"
-    usa_way = sue_plan.make_way(nation_way, usa_str)
-    sue_plan.add_fact(fcontext=wk_way, fstate=wed_way)
-    sue_plan.add_fact(fcontext=nation_way, fstate=usa_way)
+    usa_rope = sue_plan.make_rope(nation_rope, usa_str)
+    sue_plan.add_fact(fcontext=wk_rope, fstate=wed_rope)
+    sue_plan.add_fact(fcontext=nation_rope, fstate=usa_rope)
     return sue_plan
 
 
@@ -140,15 +140,15 @@ def get_planunit_with7amCleanTableReason() -> PlanUnit:
     sue_plan = get_planunit_with_4_levels_and_2reasons_2facts()
 
     time_str = "timetech"
-    time_way = sue_plan.make_l1_way(time_str)
+    time_rope = sue_plan.make_l1_rope(time_str)
     time_concept = conceptunit_shop(time_str)
 
     day24hr_str = "24hr day"
-    day24hr_way = sue_plan.make_way(time_way, day24hr_str)
+    day24hr_rope = sue_plan.make_rope(time_rope, day24hr_str)
     day24hr_concept = conceptunit_shop(day24hr_str, begin=0.0, close=24.0)
 
     am_str = "am"
-    am_way = sue_plan.make_way(day24hr_way, am_str)
+    am_rope = sue_plan.make_rope(day24hr_rope, am_str)
     pm_str = "pm"
     n1_str = "1"
     n2_str = "2"
@@ -160,22 +160,22 @@ def get_planunit_with7amCleanTableReason() -> PlanUnit:
     n3_concept = conceptunit_shop(n3_str, gogo_want=3, stop_want=4)
 
     sue_plan.set_l1_concept(time_concept)
-    sue_plan.set_concept(day24hr_concept, time_way)
-    sue_plan.set_concept(am_concept, day24hr_way)
-    sue_plan.set_concept(pm_concept, day24hr_way)
-    sue_plan.set_concept(n1_concept, am_way)  # concept_am
-    sue_plan.set_concept(n2_concept, am_way)  # concept_am
-    sue_plan.set_concept(n3_concept, am_way)  # concept_am
+    sue_plan.set_concept(day24hr_concept, time_rope)
+    sue_plan.set_concept(am_concept, day24hr_rope)
+    sue_plan.set_concept(pm_concept, day24hr_rope)
+    sue_plan.set_concept(n1_concept, am_rope)  # concept_am
+    sue_plan.set_concept(n2_concept, am_rope)  # concept_am
+    sue_plan.set_concept(n3_concept, am_rope)  # concept_am
 
     house_str = "housemanagement"
-    house_way = sue_plan.make_l1_way(house_str)
+    house_rope = sue_plan.make_l1_rope(house_str)
     clean_str = "clean table"
-    clean_way = sue_plan.make_way(house_way, clean_str)
+    clean_rope = sue_plan.make_rope(house_rope, clean_str)
     dish_str = "remove dishs"
     soap_str = "get soap"
-    soap_way = sue_plan.make_way(clean_way, soap_str)
+    soap_rope = sue_plan.make_rope(clean_rope, soap_str)
     grab_str = "grab soap"
-    grab_way = sue_plan.make_way(soap_way, grab_str)
+    grab_rope = sue_plan.make_rope(soap_rope, grab_str)
     house_concept = conceptunit_shop(house_str)
     clean_concept = conceptunit_shop(clean_str, task=True)
     dish_concept = conceptunit_shop(dish_str, task=True)
@@ -183,25 +183,25 @@ def get_planunit_with7amCleanTableReason() -> PlanUnit:
     grab_concept = conceptunit_shop(grab_str, task=True)
 
     sue_plan.set_l1_concept(house_concept)
-    sue_plan.set_concept(clean_concept, house_way)
-    sue_plan.set_concept(dish_concept, clean_way)
-    sue_plan.set_concept(soap_concept, clean_way)
-    sue_plan.set_concept(grab_concept, soap_way)
+    sue_plan.set_concept(clean_concept, house_rope)
+    sue_plan.set_concept(dish_concept, clean_rope)
+    sue_plan.set_concept(soap_concept, clean_rope)
+    sue_plan.set_concept(grab_concept, soap_rope)
 
-    clean_table_7am_rcontext = day24hr_way
-    clean_table_7am_premise_way = day24hr_way
+    clean_table_7am_rcontext = day24hr_rope
+    clean_table_7am_premise_rope = day24hr_rope
     clean_table_7am_popen = 7.0
     clean_table_7am_pnigh = 7.0
     clean_table_7am_reason = reasonunit_shop(clean_table_7am_rcontext)
     clean_table_7am_reason.set_premise(
-        premise=clean_table_7am_premise_way,
+        premise=clean_table_7am_premise_rope,
         popen=clean_table_7am_popen,
         pnigh=clean_table_7am_pnigh,
     )
-    sue_plan.edit_concept_attr(clean_way, reason=clean_table_7am_reason)
+    sue_plan.edit_concept_attr(clean_rope, reason=clean_table_7am_reason)
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
-    sue_plan.edit_concept_attr(casa_way, reason=clean_table_7am_reason)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
+    sue_plan.edit_concept_attr(casa_rope, reason=clean_table_7am_reason)
     return sue_plan
 
 
@@ -209,16 +209,16 @@ def get_planunit_1Chore_1CE0MinutesReason_1Fact() -> PlanUnit:
     yao_plan = planunit_shop("Yao")
     hr_min_str = "hr"
     hr_min_concept = conceptunit_shop(hr_min_str)
-    hr_way = yao_plan.make_l1_way(hr_min_str)
-    hr_reasonunit = reasonunit_shop(hr_way)
-    hr_reasonunit.set_premise(hr_way, popen=80, pnigh=90)
+    hr_rope = yao_plan.make_l1_rope(hr_min_str)
+    hr_reasonunit = reasonunit_shop(hr_rope)
+    hr_reasonunit.set_premise(hr_rope, popen=80, pnigh=90)
     yao_plan.set_l1_concept(hr_min_concept)
-    yao_plan.add_fact(hr_way, hr_way, 85, 95)
+    yao_plan.add_fact(hr_rope, hr_rope, 85, 95)
     mail_str = "obtain mail"
-    mail_way = yao_plan.make_l1_way(mail_str)
+    mail_rope = yao_plan.make_l1_rope(mail_str)
     mail_concept = conceptunit_shop(mail_str, task=True)
     yao_plan.set_l1_concept(mail_concept)
-    yao_plan.edit_concept_attr(mail_way, reason=hr_reasonunit)
+    yao_plan.edit_concept_attr(mail_rope, reason=hr_reasonunit)
     return yao_plan
 
 
@@ -226,32 +226,32 @@ def get_planunit_x1_3levels_1reason_1facts() -> PlanUnit:
     tiger_str = "tiger"
     zia_plan = planunit_shop("Zia", vow_label=tiger_str)
     shave_str = "shave"
-    shave_way = zia_plan.make_l1_way(shave_str)
+    shave_rope = zia_plan.make_l1_rope(shave_str)
     concept_kid_shave = conceptunit_shop(shave_str, mass=30, task=True)
     zia_plan.set_l1_concept(concept_kid_shave)
     wk_str = "wkdays"
-    wk_way = zia_plan.make_l1_way(wk_str)
+    wk_rope = zia_plan.make_l1_rope(wk_str)
     wk_concept = conceptunit_shop(wk_str, mass=40)
     zia_plan.set_l1_concept(wk_concept)
 
     sun_str = "Sunday"
-    sun_way = zia_plan.make_way(wk_way, sun_str)
+    sun_rope = zia_plan.make_rope(wk_rope, sun_str)
     church_str = "Church"
-    church_way = zia_plan.make_way(sun_way, church_str)
+    church_rope = zia_plan.make_rope(sun_rope, church_str)
     mon_str = "Monday"
-    mon_way = zia_plan.make_way(wk_way, mon_str)
+    mon_rope = zia_plan.make_rope(wk_rope, mon_str)
     concept_grandkidU = conceptunit_shop(sun_str, mass=20)
     concept_grandkidM = conceptunit_shop(mon_str, mass=20)
-    zia_plan.set_concept(concept_grandkidU, wk_way)
-    zia_plan.set_concept(concept_grandkidM, wk_way)
+    zia_plan.set_concept(concept_grandkidU, wk_rope)
+    zia_plan.set_concept(concept_grandkidM, wk_rope)
 
-    shave_reason = reasonunit_shop(wk_way)
-    shave_reason.set_premise(mon_way)
+    shave_reason = reasonunit_shop(wk_rope)
+    shave_reason.set_premise(mon_rope)
 
-    zia_plan.edit_concept_attr(shave_way, reason=shave_reason)
-    zia_plan.add_fact(fcontext=wk_way, fstate=sun_way)
-    x_factunit = factunit_shop(fcontext=wk_way, fstate=church_way)
-    zia_plan.edit_concept_attr(shave_way, factunit=x_factunit)
+    zia_plan.edit_concept_attr(shave_rope, reason=shave_reason)
+    zia_plan.add_fact(fcontext=wk_rope, fstate=sun_rope)
+    x_factunit = factunit_shop(fcontext=wk_rope, fstate=church_rope)
+    zia_plan.edit_concept_attr(shave_rope, factunit=x_factunit)
     return zia_plan
 
 
@@ -278,26 +278,26 @@ def get_planunit_irrational_example() -> PlanUnit:
     hatter_plan.set_max_tree_traverse(3)
 
     egg_str = "egg first"
-    egg_way = hatter_plan.make_l1_way(egg_str)
+    egg_rope = hatter_plan.make_l1_rope(egg_str)
     hatter_plan.set_l1_concept(conceptunit_shop(egg_str))
 
     chicken_str = "chicken first"
-    chicken_way = hatter_plan.make_l1_way(chicken_str)
+    chicken_rope = hatter_plan.make_l1_rope(chicken_str)
     hatter_plan.set_l1_concept(conceptunit_shop(chicken_str))
 
     # set egg task is True when chicken first is False
     hatter_plan.edit_concept_attr(
-        egg_way,
+        egg_rope,
         task=True,
-        reason_rcontext=chicken_way,
+        reason_rcontext=chicken_rope,
         reason_rconcept_active_requisite=True,
     )
 
     # set chick task is True when egg first is False
     hatter_plan.edit_concept_attr(
-        chicken_way,
+        chicken_rope,
         task=True,
-        reason_rcontext=egg_way,
+        reason_rcontext=egg_rope,
         reason_rconcept_active_requisite=False,
     )
 
@@ -307,27 +307,27 @@ def get_planunit_irrational_example() -> PlanUnit:
 def get_mop_with_reason_planunit_example1():
     sue_plan = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     floor_str = "mop floor"
-    floor_way = sue_plan.make_way(casa_way, floor_str)
+    floor_rope = sue_plan.make_rope(casa_rope, floor_str)
     floor_concept = conceptunit_shop(floor_str, task=True)
-    sue_plan.set_concept(floor_concept, casa_way)
+    sue_plan.set_concept(floor_concept, casa_rope)
     sue_plan.set_l1_concept(conceptunit_shop("unimportant"))
 
     status_str = "cleaniness status"
-    status_way = sue_plan.make_way(casa_way, status_str)
-    sue_plan.set_concept(conceptunit_shop(status_str), casa_way)
+    status_rope = sue_plan.make_rope(casa_rope, status_str)
+    sue_plan.set_concept(conceptunit_shop(status_str), casa_rope)
 
     clean_str = "clean"
-    clean_way = sue_plan.make_way(status_way, clean_str)
-    sue_plan.set_concept(conceptunit_shop(clean_str), status_way)
-    sue_plan.set_concept(conceptunit_shop("very_much"), clean_way)
-    sue_plan.set_concept(conceptunit_shop("moderately"), clean_way)
-    sue_plan.set_concept(conceptunit_shop("dirty"), status_way)
+    clean_rope = sue_plan.make_rope(status_rope, clean_str)
+    sue_plan.set_concept(conceptunit_shop(clean_str), status_rope)
+    sue_plan.set_concept(conceptunit_shop("very_much"), clean_rope)
+    sue_plan.set_concept(conceptunit_shop("moderately"), clean_rope)
+    sue_plan.set_concept(conceptunit_shop("dirty"), status_rope)
 
-    floor_reason = reasonunit_shop(status_way)
-    floor_reason.set_premise(premise=status_way)
-    sue_plan.edit_concept_attr(floor_way, reason=floor_reason)
+    floor_reason = reasonunit_shop(status_rope)
+    floor_reason.set_premise(premise=status_rope)
+    sue_plan.edit_concept_attr(floor_rope, reason=floor_reason)
     return sue_plan
 
 
@@ -346,39 +346,39 @@ def get_planunit_laundry_example1() -> PlanUnit:
     b_fine_str = "fine"
     b_half_str = "half full"
     do_laundry_str = "do_laundry"
-    casa_way = amos_plan.make_l1_way(casa_str)
-    basket_way = amos_plan.make_way(casa_way, basket_str)
-    b_full_way = amos_plan.make_way(basket_way, b_full_str)
-    b_smel_way = amos_plan.make_way(basket_way, b_smel_str)
-    laundry_chore_way = amos_plan.make_way(casa_way, do_laundry_str)
+    casa_rope = amos_plan.make_l1_rope(casa_str)
+    basket_rope = amos_plan.make_rope(casa_rope, basket_str)
+    b_full_rope = amos_plan.make_rope(basket_rope, b_full_str)
+    b_smel_rope = amos_plan.make_rope(basket_rope, b_smel_str)
+    laundry_chore_rope = amos_plan.make_rope(casa_rope, do_laundry_str)
     amos_plan.set_l1_concept(conceptunit_shop(casa_str))
-    amos_plan.set_concept(conceptunit_shop(basket_str), casa_way)
-    amos_plan.set_concept(conceptunit_shop(b_full_str), basket_way)
-    amos_plan.set_concept(conceptunit_shop(b_smel_str), basket_way)
-    amos_plan.set_concept(conceptunit_shop(b_bare_str), basket_way)
-    amos_plan.set_concept(conceptunit_shop(b_fine_str), basket_way)
-    amos_plan.set_concept(conceptunit_shop(b_half_str), basket_way)
-    amos_plan.set_concept(conceptunit_shop(do_laundry_str, task=True), casa_way)
+    amos_plan.set_concept(conceptunit_shop(basket_str), casa_rope)
+    amos_plan.set_concept(conceptunit_shop(b_full_str), basket_rope)
+    amos_plan.set_concept(conceptunit_shop(b_smel_str), basket_rope)
+    amos_plan.set_concept(conceptunit_shop(b_bare_str), basket_rope)
+    amos_plan.set_concept(conceptunit_shop(b_fine_str), basket_rope)
+    amos_plan.set_concept(conceptunit_shop(b_half_str), basket_rope)
+    amos_plan.set_concept(conceptunit_shop(do_laundry_str, task=True), casa_rope)
 
     # laundry requirement
     amos_plan.edit_concept_attr(
-        laundry_chore_way, reason_rcontext=basket_way, reason_premise=b_full_way
+        laundry_chore_rope, reason_rcontext=basket_rope, reason_premise=b_full_rope
     )
     # laundry requirement
     amos_plan.edit_concept_attr(
-        laundry_chore_way, reason_rcontext=basket_way, reason_premise=b_smel_way
+        laundry_chore_rope, reason_rcontext=basket_rope, reason_premise=b_smel_rope
     )
     cali_laborunit = laborunit_shop()
     cali_laborunit.set_laborlink(cali_str)
-    amos_plan.edit_concept_attr(laundry_chore_way, laborunit=cali_laborunit)
-    amos_plan.add_fact(fcontext=basket_way, fstate=b_full_way)
+    amos_plan.edit_concept_attr(laundry_chore_rope, laborunit=cali_laborunit)
+    amos_plan.add_fact(fcontext=basket_rope, fstate=b_full_rope)
 
     return amos_plan
 
 
 # class YR:
 def from_list_get_active(
-    way: WayTerm, concept_dict: dict, asse_bool: bool = None
+    rope: RopeTerm, concept_dict: dict, asse_bool: bool = None
 ) -> bool:
     active = None
     temp_concept = None
@@ -386,10 +386,10 @@ def from_list_get_active(
     active_true_count = 0
     active_false_count = 0
     for concept in concept_dict.values():
-        if concept.get_concept_way() == way:
+        if concept.get_concept_rope() == rope:
             temp_concept = concept
             print(
-                f"s for ConceptUnit {temp_concept.get_concept_way()}  {temp_concept._active=}"
+                f"s for ConceptUnit {temp_concept.get_concept_rope()}  {temp_concept._active=}"
             )
 
         if concept._active:

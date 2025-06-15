@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.a01_term_logic.way import default_bridge_if_None
+from src.a01_term_logic.rope import default_knot_if_None
 from src.a02_finance_logic.finance_config import default_RespectBit_if_None
 from src.a03_group_logic._test_util.a03_str import (
     _credor_pool_str,
@@ -14,9 +14,9 @@ from src.a03_group_logic._test_util.a03_str import (
     _irrational_debt_score_str,
     _memberships_str,
     acct_name_str,
-    bridge_str,
     credit_score_str,
     debt_score_str,
+    knot_str,
     respect_bit_str,
 )
 from src.a03_group_logic.acct import AcctUnit, acctunit_shop
@@ -46,7 +46,7 @@ def test_AcctUnit_exists():
     assert not bob_acctunit._fund_take
     assert not bob_acctunit._fund_agenda_give
     assert not bob_acctunit._fund_agenda_take
-    assert not bob_acctunit.bridge
+    assert not bob_acctunit.knot
     assert not bob_acctunit.respect_bit
     obj_attrs = set(bob_acctunit.__dict__.keys())
     print(sorted(list(obj_attrs)))
@@ -64,7 +64,7 @@ def test_AcctUnit_exists():
         _memberships_str(),
         respect_bit_str(),
         acct_name_str(),
-        bridge_str(),
+        knot_str(),
         credit_score_str(),
         debt_score_str(),
     }
@@ -82,17 +82,17 @@ def test_AcctUnit_set_nameterm_CorrectlySetsAttr():
     assert x_acctunit.acct_name == bob_str
 
 
-def test_AcctUnit_set_nameterm_RaisesErrorIfParameterContains_bridge():
+def test_AcctUnit_set_nameterm_RaisesErrorIfParameterContains_knot():
     # ESTABLISH
     slash_str = "/"
     texas_str = f"Texas{slash_str}Arkansas"
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        acctunit_shop(acct_name=texas_str, bridge=slash_str)
+        acctunit_shop(acct_name=texas_str, knot=slash_str)
     assert (
         str(excinfo.value)
-        == f"'{texas_str}' needs to be a LabelTerm. Cannot contain {bridge_str()}: '{slash_str}'"
+        == f"'{texas_str}' needs to be a LabelTerm. Cannot contain {knot_str()}: '{slash_str}'"
     )
 
 
@@ -119,19 +119,19 @@ def test_acctunit_shop_CorrectlySetsAttributes():
     assert yao_acctunit._fund_agenda_take == 0
     assert yao_acctunit._fund_agenda_ratio_give == 0
     assert yao_acctunit._fund_agenda_ratio_take == 0
-    assert yao_acctunit.bridge == default_bridge_if_None()
+    assert yao_acctunit.knot == default_knot_if_None()
     assert yao_acctunit.respect_bit == default_RespectBit_if_None()
 
 
-def test_acctunit_shop_CorrectlySetsAttributes_bridge():
+def test_acctunit_shop_CorrectlySetsAttributes_knot():
     # ESTABLISH
     slash_str = "/"
 
     # WHEN
-    yao_acctunit = acctunit_shop("Yao", bridge=slash_str)
+    yao_acctunit = acctunit_shop("Yao", knot=slash_str)
 
     # THEN
-    assert yao_acctunit.bridge == slash_str
+    assert yao_acctunit.knot == slash_str
 
 
 def test_acctunit_shop_CorrectlySetsAttributes_respect_bit():

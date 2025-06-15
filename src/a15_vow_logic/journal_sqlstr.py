@@ -1,4 +1,4 @@
-from src.a01_term_logic.way import WayTerm
+from src.a01_term_logic.rope import RopeTerm
 from src.a08_plan_atom_logic.atom import PlanAtom
 from src.a08_plan_atom_logic.atom_config import get_flattened_atom_table_build
 
@@ -109,31 +109,31 @@ CREATE TABLE owner_mstr
 ;"""
 
 
-def get_way_ref_table_create_sqlstr() -> str:
+def get_rope_ref_table_create_sqlstr() -> str:
     return """
-CREATE TABLE IF NOT EXISTS way_ref (
-  way VARCHAR(255) NOT NULL
-, bridge VARCHAR(255) NOT NULL
-, UNIQUE(way, bridge)
+CREATE TABLE IF NOT EXISTS rope_ref (
+  rope VARCHAR(255) NOT NULL
+, knot VARCHAR(255) NOT NULL
+, UNIQUE(rope, knot)
 )
 ;"""
 
 
-def get_way_ref_table_single_insert_sqlstr(way: WayTerm, bridge: str) -> str:
+def get_rope_ref_table_single_insert_sqlstr(rope: RopeTerm, knot: str) -> str:
     return f"""
-INSERT OR IGNORE INTO way_ref (way, bridge) 
+INSERT OR IGNORE INTO rope_ref (rope, knot) 
 VALUES (
-  '{way}'
-, '{bridge}'
+  '{rope}'
+, '{knot}'
 )
 ;"""
 
 
-def get_way_ref_table_row_id_select_sqlstr(way: WayTerm, bridge: str) -> str:
+def get_rope_ref_table_row_id_select_sqlstr(rope: RopeTerm, knot: str) -> str:
     return f"""
-SELECT rowid FROM way_ref  
-WHERE way = '{way}' 
-  AND bridge = '{bridge}'
+SELECT rowid FROM rope_ref  
+WHERE rope = '{rope}' 
+  AND knot = '{knot}'
 )
 ;"""
 
@@ -147,7 +147,7 @@ def get_create_table_if_not_exist_sqlstrs() -> list[str]:
     list_x.append(get_pack_table_create_sqlstr())
     list_x.append(get_pack2owner_table_create_sqlstr())
     list_x.append(get_owner_mstr_table_create_sqlstr())
-    list_x.append(get_way_ref_table_create_sqlstr())
+    list_x.append(get_rope_ref_table_create_sqlstr())
     return list_x
 
 

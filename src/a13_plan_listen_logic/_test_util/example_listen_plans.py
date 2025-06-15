@@ -13,7 +13,7 @@ def get_planunit_with_4_levels() -> PlanUnit:
     sue_plan.set_l1_concept(conceptunit_shop(cat, mass=30, task=True))
 
     week_str = "weekdays"
-    week_way = sue_plan.make_l1_way(week_str)
+    week_rope = sue_plan.make_l1_rope(week_str)
     concept_kid_weekdays = conceptunit_shop(week_str, mass=40)
     sue_plan.set_l1_concept(concept_kid_weekdays)
 
@@ -33,36 +33,36 @@ def get_planunit_with_4_levels() -> PlanUnit:
     concept_grandkidF = conceptunit_shop(fri_str, mass=40)
     concept_grandkidA = conceptunit_shop(sat_str, mass=50)
 
-    sue_plan.set_concept(concept_grandkidU, week_way)
-    sue_plan.set_concept(concept_grandkidM, week_way)
-    sue_plan.set_concept(concept_grandkidT, week_way)
-    sue_plan.set_concept(concept_grandkidW, week_way)
-    sue_plan.set_concept(concept_grandkidR, week_way)
-    sue_plan.set_concept(concept_grandkidF, week_way)
-    sue_plan.set_concept(concept_grandkidA, week_way)
+    sue_plan.set_concept(concept_grandkidU, week_rope)
+    sue_plan.set_concept(concept_grandkidM, week_rope)
+    sue_plan.set_concept(concept_grandkidT, week_rope)
+    sue_plan.set_concept(concept_grandkidW, week_rope)
+    sue_plan.set_concept(concept_grandkidR, week_rope)
+    sue_plan.set_concept(concept_grandkidF, week_rope)
+    sue_plan.set_concept(concept_grandkidA, week_rope)
 
     nation_str = "nation"
-    nation_way = sue_plan.make_l1_way(nation_str)
+    nation_rope = sue_plan.make_l1_rope(nation_str)
     concept_kid_nation = conceptunit_shop(nation_str, mass=30)
     sue_plan.set_l1_concept(concept_kid_nation)
 
     usa_str = "USA"
-    usa_way = sue_plan.make_way(nation_way, usa_str)
+    usa_rope = sue_plan.make_rope(nation_rope, usa_str)
     france_str = "France"
     brazil_str = "Brazil"
     concept_grandkid_usa = conceptunit_shop(usa_str, mass=50)
     concept_grandkid_france = conceptunit_shop(france_str, mass=50)
     concept_grandkid_brazil = conceptunit_shop(brazil_str, mass=50)
-    sue_plan.set_concept(concept_grandkid_france, nation_way)
-    sue_plan.set_concept(concept_grandkid_brazil, nation_way)
-    sue_plan.set_concept(concept_grandkid_usa, nation_way)
+    sue_plan.set_concept(concept_grandkid_france, nation_rope)
+    sue_plan.set_concept(concept_grandkid_brazil, nation_rope)
+    sue_plan.set_concept(concept_grandkid_usa, nation_rope)
 
     texas_str = "Texas"
     oregon_str = "Oregon"
     concept_grandgrandkid_usa_texas = conceptunit_shop(texas_str, mass=50)
     concept_grandgrandkid_usa_oregon = conceptunit_shop(oregon_str, mass=50)
-    sue_plan.set_concept(concept_grandgrandkid_usa_texas, usa_way)
-    sue_plan.set_concept(concept_grandgrandkid_usa_oregon, usa_way)
+    sue_plan.set_concept(concept_grandgrandkid_usa_texas, usa_rope)
+    sue_plan.set_concept(concept_grandgrandkid_usa_oregon, usa_rope)
     return sue_plan
 
 
@@ -70,28 +70,28 @@ def get_fund_breakdown_plan() -> PlanUnit:
     sue_plan = planunit_shop(owner_name="Sue")
 
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     cat_str = "cat status"
-    cat_way = sue_plan.make_way(casa_way, cat_str)
+    cat_rope = sue_plan.make_rope(casa_rope, cat_str)
     hun_n_str = "not hungry"
     hun_y_str = "hungry"
     clean_str = "cleaning"
-    clean_way = sue_plan.make_way(casa_way, clean_str)
+    clean_rope = sue_plan.make_rope(casa_rope, clean_str)
     sweep_str = "sweep floor"
     dish_str = "clean dishes"
     sue_plan.set_l1_concept(conceptunit_shop(casa_str, mass=30))
-    sue_plan.set_concept(conceptunit_shop(cat_str, mass=30), casa_way)
-    sue_plan.set_concept(conceptunit_shop(hun_n_str, mass=30), cat_way)
-    sue_plan.set_concept(conceptunit_shop(hun_y_str, mass=30), cat_way)
-    sue_plan.set_concept(conceptunit_shop(clean_str, mass=30), casa_way)
-    sue_plan.set_concept(conceptunit_shop(sweep_str, mass=30, task=True), clean_way)
-    sue_plan.set_concept(conceptunit_shop(dish_str, mass=30, task=True), clean_way)
+    sue_plan.set_concept(conceptunit_shop(cat_str, mass=30), casa_rope)
+    sue_plan.set_concept(conceptunit_shop(hun_n_str, mass=30), cat_rope)
+    sue_plan.set_concept(conceptunit_shop(hun_y_str, mass=30), cat_rope)
+    sue_plan.set_concept(conceptunit_shop(clean_str, mass=30), casa_rope)
+    sue_plan.set_concept(conceptunit_shop(sweep_str, mass=30, task=True), clean_rope)
+    sue_plan.set_concept(conceptunit_shop(dish_str, mass=30, task=True), clean_rope)
 
     cat_str = "cat have dinner"
     sue_plan.set_l1_concept(conceptunit_shop(cat_str, mass=30, task=True))
 
     # week_str = "weekdays"
-    # week_way = sue_plan.make_l1_way(week_str)
+    # week_rope = sue_plan.make_l1_rope(week_str)
     # concept_kid_weekdays = conceptunit_shop(week_str, mass=25)
     # sue_plan.set_l1_concept(concept_kid_weekdays)
 
@@ -109,36 +109,36 @@ def get_fund_breakdown_plan() -> PlanUnit:
     # concept_grandkidR = conceptunit_shop(thu_str, mass=30)
     # concept_grandkidF = conceptunit_shop(fri_str, mass=40)
     # concept_grandkidA = conceptunit_shop(sat_str, mass=50)
-    # sue_plan.set_concept(concept_grandkidU, week_way)
-    # sue_plan.set_concept(concept_grandkidM, week_way)
-    # sue_plan.set_concept(concept_grandkidT, week_way)
-    # sue_plan.set_concept(concept_grandkidW, week_way)
-    # sue_plan.set_concept(concept_grandkidR, week_way)
-    # sue_plan.set_concept(concept_grandkidF, week_way)
-    # sue_plan.set_concept(concept_grandkidA, week_way)
+    # sue_plan.set_concept(concept_grandkidU, week_rope)
+    # sue_plan.set_concept(concept_grandkidM, week_rope)
+    # sue_plan.set_concept(concept_grandkidT, week_rope)
+    # sue_plan.set_concept(concept_grandkidW, week_rope)
+    # sue_plan.set_concept(concept_grandkidR, week_rope)
+    # sue_plan.set_concept(concept_grandkidF, week_rope)
+    # sue_plan.set_concept(concept_grandkidA, week_rope)
 
     # nation_str = "nation"
-    # nation_way = sue_plan.make_l1_way(nation_str)
+    # nation_rope = sue_plan.make_l1_rope(nation_str)
     # concept_kid_nation = conceptunit_shop(nation_str, mass=30)
     # sue_plan.set_l1_concept(concept_kid_nation)
 
     # usa_str = "USA"
-    # usa_way = sue_plan.make_way(nation_way, usa_str)
+    # usa_rope = sue_plan.make_rope(nation_rope, usa_str)
     # france_str = "France"
     # brazil_str = "Brazil"
     # concept_grandkid_usa = conceptunit_shop(usa_str, mass=50)
     # concept_grandkid_france = conceptunit_shop(france_str, mass=50)
     # concept_grandkid_brazil = conceptunit_shop(brazil_str, mass=50)
-    # sue_plan.set_concept(concept_grandkid_france, nation_way)
-    # sue_plan.set_concept(concept_grandkid_brazil, nation_way)
-    # sue_plan.set_concept(concept_grandkid_usa, nation_way)
+    # sue_plan.set_concept(concept_grandkid_france, nation_rope)
+    # sue_plan.set_concept(concept_grandkid_brazil, nation_rope)
+    # sue_plan.set_concept(concept_grandkid_usa, nation_rope)
 
     # texas_str = "Texas"
     # oregon_str = "Oregon"
     # concept_grandgrandkid_usa_texas = conceptunit_shop(texas_str, mass=50)
     # concept_grandgrandkid_usa_oregon = conceptunit_shop(oregon_str, mass=50)
-    # sue_plan.set_concept(concept_grandgrandkid_usa_texas, usa_way)
-    # sue_plan.set_concept(concept_grandgrandkid_usa_oregon, usa_way)
+    # sue_plan.set_concept(concept_grandgrandkid_usa_texas, usa_rope)
+    # sue_plan.set_concept(concept_grandgrandkid_usa_oregon, usa_rope)
     return sue_plan
 
 
@@ -159,26 +159,26 @@ def get_planunit_irrational_example() -> PlanUnit:
     hatter_plan.set_max_tree_traverse(3)
 
     egg_str = "egg first"
-    egg_way = hatter_plan.make_l1_way(egg_str)
-    hatter_plan.add_concept(egg_way)
+    egg_rope = hatter_plan.make_l1_rope(egg_str)
+    hatter_plan.add_concept(egg_rope)
 
     chicken_str = "chicken first"
-    chicken_way = hatter_plan.make_l1_way(chicken_str)
-    hatter_plan.add_concept(chicken_way)
+    chicken_rope = hatter_plan.make_l1_rope(chicken_str)
+    hatter_plan.add_concept(chicken_rope)
 
     # set egg task is True when chicken first is False
     hatter_plan.edit_concept_attr(
-        egg_way,
+        egg_rope,
         task=True,
-        reason_rcontext=chicken_way,
+        reason_rcontext=chicken_rope,
         reason_rconcept_active_requisite=True,
     )
 
     # set chick task is True when egg first is False
     hatter_plan.edit_concept_attr(
-        chicken_way,
+        chicken_rope,
         task=True,
-        reason_rcontext=egg_way,
+        reason_rcontext=egg_rope,
         reason_rconcept_active_requisite=False,
     )
 

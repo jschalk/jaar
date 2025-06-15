@@ -1,6 +1,6 @@
-from src.a01_term_logic.way import create_way
+from src.a01_term_logic.rope import create_rope
 from src.a06_plan_logic._test_util.a06_str import (
-    concept_way_str,
+    concept_rope_str,
     fcontext_str,
     fopen_str,
     plan_concept_factunit_str,
@@ -18,9 +18,9 @@ from src.a15_vow_logic.journal_sqlstr import (
     get_owner_mstr_table_create_sqlstr,
     get_pack2owner_table_create_sqlstr,
     get_pack_table_create_sqlstr,
-    get_way_ref_table_create_sqlstr,
-    get_way_ref_table_row_id_select_sqlstr,
-    get_way_ref_table_single_insert_sqlstr,
+    get_rope_ref_table_create_sqlstr,
+    get_rope_ref_table_row_id_select_sqlstr,
+    get_rope_ref_table_single_insert_sqlstr,
 )
 
 
@@ -105,52 +105,52 @@ CREATE TABLE owner_mstr
     assert example_sqlstr == get_owner_mstr_table_create_sqlstr()
 
 
-def test_get_way_ref_table_create_sqlstr_ReturnsCorrectStr():
+def test_get_rope_ref_table_create_sqlstr_ReturnsCorrectStr():
     # ESTABLISH / WHEN / THEN
     example_sqlstr = """
-CREATE TABLE IF NOT EXISTS way_ref (
-  way VARCHAR(255) NOT NULL
-, bridge VARCHAR(255) NOT NULL
-, UNIQUE(way, bridge)
+CREATE TABLE IF NOT EXISTS rope_ref (
+  rope VARCHAR(255) NOT NULL
+, knot VARCHAR(255) NOT NULL
+, UNIQUE(rope, knot)
 )
 ;"""
-    assert example_sqlstr == get_way_ref_table_create_sqlstr()
+    assert example_sqlstr == get_rope_ref_table_create_sqlstr()
 
 
-def test_get_way_ref_table_single_insert_sqlstr_ReturnsCorrectStr():
+def test_get_rope_ref_table_single_insert_sqlstr_ReturnsCorrectStr():
     # ESTABLISH
     accord45_str = "accord45"
     slash_str = "/"
-    texas_way = create_way(accord45_str, "texas", bridge=slash_str)
+    texas_rope = create_rope(accord45_str, "texas", knot=slash_str)
 
     # WHEN
-    generate_sqlstr = get_way_ref_table_single_insert_sqlstr(texas_way, slash_str)
+    generate_sqlstr = get_rope_ref_table_single_insert_sqlstr(texas_rope, slash_str)
 
     # THEN
     example_sqlstr = f"""
-INSERT OR IGNORE INTO way_ref (way, bridge) 
+INSERT OR IGNORE INTO rope_ref (rope, knot) 
 VALUES (
-  '{texas_way}'
+  '{texas_rope}'
 , '{slash_str}'
 )
 ;"""
     assert example_sqlstr == generate_sqlstr
 
 
-def test_get_way_ref_table_row_id_select_sqlstr_ReturnsCorrectStr():
+def test_get_rope_ref_table_row_id_select_sqlstr_ReturnsCorrectStr():
     # ESTABLISH
     accord45_str = "accord45"
     slash_str = "/"
-    texas_way = create_way(accord45_str, "texas", bridge=slash_str)
+    texas_rope = create_rope(accord45_str, "texas", knot=slash_str)
 
     # WHEN
-    generate_sqlstr = get_way_ref_table_row_id_select_sqlstr(texas_way, slash_str)
+    generate_sqlstr = get_rope_ref_table_row_id_select_sqlstr(texas_rope, slash_str)
 
     # THEN
     example_sqlstr = f"""
-SELECT rowid FROM way_ref  
-WHERE way = '{texas_way}' 
-  AND bridge = '{slash_str}'
+SELECT rowid FROM rope_ref  
+WHERE rope = '{texas_rope}' 
+  AND knot = '{slash_str}'
 )
 ;"""
     assert example_sqlstr == generate_sqlstr
@@ -173,36 +173,36 @@ CREATE TABLE IF NOT EXISTS atom_hx (
         "concept_reasonunit_UPDATE_rconcept_active_requisite INTEGER NULL"
     )
     assert generated_sqlstr.find(example_concept_reasonunit_str) > 0
-    assert generated_sqlstr.find(example_concept_reasonunit_str) == 4005
+    assert generated_sqlstr.find(example_concept_reasonunit_str) == 4020
 
 
 def test_get_atom_hx_table_insert_sqlstr_ReturnsCorrectStr():
     # WHEN
     sports_str = "sports"
-    sports_way = create_way("a", sports_str)
+    sports_rope = create_rope("a", sports_str)
     ball_str = "basketball"
-    ball_way = create_way(sports_way, ball_str)
+    ball_rope = create_rope(sports_rope, ball_str)
     knee_str = "knee"
-    knee_way = create_way("a", knee_str)
+    knee_rope = create_rope("a", knee_str)
     knee_fopen = 7
 
     # WHEN
     x_dimen = plan_concept_factunit_str()
     update_disc_planatom = planatom_shop(x_dimen, INSERT_str())
-    update_disc_planatom.set_jkey(concept_way_str(), ball_way)
-    update_disc_planatom.set_jkey(fcontext_str(), knee_way)
+    update_disc_planatom.set_jkey(concept_rope_str(), ball_rope)
+    update_disc_planatom.set_jkey(fcontext_str(), knee_rope)
     update_disc_planatom.set_jvalue(fopen_str(), knee_fopen)
 
     # THEN
     example_sqlstr = f"""
 INSERT INTO {atom_hx_str()} (
-  {x_dimen}_{INSERT_str()}_{concept_way_str()}
+  {x_dimen}_{INSERT_str()}_{concept_rope_str()}
 , {x_dimen}_{INSERT_str()}_{fcontext_str()}
 , {x_dimen}_{INSERT_str()}_{fopen_str()}
 )
 VALUES (
-  '{ball_way}'
-, '{knee_way}'
+  '{ball_rope}'
+, '{knee_rope}'
 , {knee_fopen}
 )
 ;"""
@@ -222,12 +222,12 @@ CREATE TABLE IF NOT EXISTS atom_mstr (
 ;"""
     assert generated_sqlstr.find(begin_sqlstr) == 0
     assert generated_sqlstr.find(end_sqlstr) > 0
-    assert generated_sqlstr.find(end_sqlstr) == 5701
+    assert generated_sqlstr.find(end_sqlstr) == 5720
     example_concept_reasonunit_str = (
         "concept_reasonunit_UPDATE_rconcept_active_requisite INTEGER NULL"
     )
     assert generated_sqlstr.find(example_concept_reasonunit_str) > 0
-    assert generated_sqlstr.find(example_concept_reasonunit_str) == 4037
+    assert generated_sqlstr.find(example_concept_reasonunit_str) == 4052
 
 
 def test_get_create_table_if_not_exist_sqlstrs_HasCorrectNumberOfNumber():

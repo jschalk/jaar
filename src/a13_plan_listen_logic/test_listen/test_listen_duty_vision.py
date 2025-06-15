@@ -1,4 +1,4 @@
-from src.a01_term_logic.way import LabelTerm, WayTerm, create_way
+from src.a01_term_logic.rope import LabelTerm, RopeTerm, create_rope
 from src.a05_concept_logic.concept import conceptunit_shop, get_default_vow_label
 from src.a06_plan_logic.plan import PlanUnit, planunit_shop
 from src.a12_hub_toolbox.hub_tool import (
@@ -59,44 +59,44 @@ def run_str() -> str:
     return "run"
 
 
-def casa_way() -> WayTerm:
-    return create_way(get_default_vow_label(), casa_str())
+def casa_rope() -> RopeTerm:
+    return create_rope(get_default_vow_label(), casa_str())
 
 
-def cook_way() -> WayTerm:
-    return create_way(casa_way(), cook_str())
+def cook_rope() -> RopeTerm:
+    return create_rope(casa_rope(), cook_str())
 
 
-def eat_way() -> WayTerm:
-    return create_way(casa_way(), eat_str())
+def eat_rope() -> RopeTerm:
+    return create_rope(casa_rope(), eat_str())
 
 
-def hungry_way() -> WayTerm:
-    return create_way(eat_way(), hungry_str())
+def hungry_rope() -> RopeTerm:
+    return create_rope(eat_rope(), hungry_str())
 
 
-def full_way() -> WayTerm:
-    return create_way(eat_way(), full_str())
+def full_rope() -> RopeTerm:
+    return create_rope(eat_rope(), full_str())
 
 
-def sanitation_way() -> WayTerm:
-    return create_way(casa_way(), sanitation_str())
+def sanitation_rope() -> RopeTerm:
+    return create_rope(casa_rope(), sanitation_str())
 
 
-def clean_way() -> WayTerm:
-    return create_way(sanitation_way(), clean_str())
+def clean_rope() -> RopeTerm:
+    return create_rope(sanitation_rope(), clean_str())
 
 
-def dirty_way() -> WayTerm:
-    return create_way(sanitation_way(), dirty_str())
+def dirty_rope() -> RopeTerm:
+    return create_rope(sanitation_rope(), dirty_str())
 
 
-def sweep_way() -> WayTerm:
-    return create_way(casa_way(), sweep_str())
+def sweep_rope() -> RopeTerm:
+    return create_rope(casa_rope(), sweep_str())
 
 
-def run_way() -> WayTerm:
-    return create_way(casa_way(), run_str())
+def run_rope() -> RopeTerm:
+    return create_rope(casa_rope(), run_str())
 
 
 def get_example_yao_plan() -> PlanUnit:
@@ -104,7 +104,7 @@ def get_example_yao_plan() -> PlanUnit:
     zia_str = "Zia"
     bob_str = "Bob"
     yao_speaker = planunit_shop(yao_str, get_default_vow_label())
-    yao_speaker.set_concept(conceptunit_shop(run_str()), casa_way())
+    yao_speaker.set_concept(conceptunit_shop(run_str()), casa_rope())
     yao_speaker.add_acctunit(yao_str, debt_score=10)
     yao_speaker.add_acctunit(zia_str, debt_score=30)
     yao_speaker.add_acctunit(bob_str, debt_score=40)
@@ -115,53 +115,53 @@ def get_example_yao_plan() -> PlanUnit:
 def get_example_yao_vision1_speaker() -> PlanUnit:
     yao_str = "Yao"
     yao_speaker = get_example_yao_plan()
-    yao_speaker.del_concept_obj(run_way())
+    yao_speaker.del_concept_obj(run_rope())
     yao_speaker.set_acct_respect(40)
-    yao_speaker.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
-    yao_speaker.set_concept(conceptunit_shop(hungry_str()), eat_way())
-    yao_speaker.set_concept(conceptunit_shop(full_str()), eat_way())
-    cook_conceptunit = yao_speaker.get_concept_obj(cook_way())
+    yao_speaker.set_concept(conceptunit_shop(cook_str(), task=True), casa_rope())
+    yao_speaker.set_concept(conceptunit_shop(hungry_str()), eat_rope())
+    yao_speaker.set_concept(conceptunit_shop(full_str()), eat_rope())
+    cook_conceptunit = yao_speaker.get_concept_obj(cook_rope())
     cook_conceptunit.laborunit.set_laborlink(yao_str)
-    yao_speaker.edit_reason(cook_way(), eat_way(), hungry_way())
-    yao_speaker.add_fact(eat_way(), hungry_way())
+    yao_speaker.edit_reason(cook_rope(), eat_rope(), hungry_rope())
+    yao_speaker.add_fact(eat_rope(), hungry_rope())
     return yao_speaker
 
 
 def get_example_yao_vision2_speaker() -> PlanUnit:
     yao_str = "Yao"
     yao_speaker = get_example_yao_plan()
-    yao_speaker.del_concept_obj(run_way())
+    yao_speaker.del_concept_obj(run_rope())
     yao_speaker.set_acct_respect(30)
-    yao_speaker.set_concept(conceptunit_shop(cook_str(), task=True), casa_way())
-    yao_speaker.set_concept(conceptunit_shop(hungry_str()), eat_way())
-    yao_speaker.set_concept(conceptunit_shop(full_str()), eat_way())
-    cook_conceptunit = yao_speaker.get_concept_obj(cook_way())
+    yao_speaker.set_concept(conceptunit_shop(cook_str(), task=True), casa_rope())
+    yao_speaker.set_concept(conceptunit_shop(hungry_str()), eat_rope())
+    yao_speaker.set_concept(conceptunit_shop(full_str()), eat_rope())
+    cook_conceptunit = yao_speaker.get_concept_obj(cook_rope())
     cook_conceptunit.laborunit.set_laborlink(yao_str)
-    yao_speaker.edit_reason(cook_way(), eat_way(), hungry_way())
-    yao_speaker.add_fact(eat_way(), hungry_way())
+    yao_speaker.edit_reason(cook_rope(), eat_rope(), hungry_rope())
+    yao_speaker.add_fact(eat_rope(), hungry_rope())
 
-    yao_speaker.set_concept(conceptunit_shop(sweep_str(), task=True), casa_way())
-    yao_speaker.set_concept(conceptunit_shop(dirty_str()), sanitation_way())
-    yao_speaker.set_concept(conceptunit_shop(clean_str()), sanitation_way())
-    yao_speaker.edit_reason(sweep_way(), sanitation_way(), dirty_way())
-    yao_speaker.add_fact(sweep_way(), dirty_way())
+    yao_speaker.set_concept(conceptunit_shop(sweep_str(), task=True), casa_rope())
+    yao_speaker.set_concept(conceptunit_shop(dirty_str()), sanitation_rope())
+    yao_speaker.set_concept(conceptunit_shop(clean_str()), sanitation_rope())
+    yao_speaker.edit_reason(sweep_rope(), sanitation_rope(), dirty_rope())
+    yao_speaker.add_fact(sweep_rope(), dirty_rope())
     return yao_speaker
 
 
 def get_example_yao_vision3_speaker() -> PlanUnit:
     yao_speaker = get_example_yao_plan()
-    yao_speaker.del_concept_obj(run_way())
+    yao_speaker.del_concept_obj(run_rope())
     yao_speaker.set_acct_respect(10)
-    yao_speaker.set_concept(conceptunit_shop(sweep_str(), task=True), casa_way())
-    yao_speaker.set_concept(conceptunit_shop(dirty_str()), sanitation_way())
-    yao_speaker.set_concept(conceptunit_shop(clean_str()), sanitation_way())
-    yao_speaker.edit_reason(sweep_way(), sanitation_way(), dirty_way())
-    yao_speaker.add_fact(sweep_way(), dirty_way())
+    yao_speaker.set_concept(conceptunit_shop(sweep_str(), task=True), casa_rope())
+    yao_speaker.set_concept(conceptunit_shop(dirty_str()), sanitation_rope())
+    yao_speaker.set_concept(conceptunit_shop(clean_str()), sanitation_rope())
+    yao_speaker.edit_reason(sweep_rope(), sanitation_rope(), dirty_rope())
+    yao_speaker.add_fact(sweep_rope(), dirty_rope())
     return yao_speaker
 
 
-def get_usa_way() -> WayTerm:
-    return create_way(get_default_vow_label(), "USA")
+def get_usa_rope() -> RopeTerm:
+    return create_rope(get_default_vow_label(), "USA")
 
 
 def get_iowa_str() -> LabelTerm:
@@ -192,32 +192,32 @@ def get_on_land_str() -> LabelTerm:
     return "on_land"
 
 
-def get_iowa_way() -> WayTerm:
-    return create_way(get_usa_way(), get_iowa_str())
+def get_iowa_rope() -> RopeTerm:
+    return create_rope(get_usa_rope(), get_iowa_str())
 
 
-def get_ohio_way() -> WayTerm:
-    return create_way(get_usa_way(), get_ohio_str())
+def get_ohio_rope() -> RopeTerm:
+    return create_rope(get_usa_rope(), get_ohio_str())
 
 
-def get_utah_way() -> WayTerm:
-    return create_way(get_usa_way(), get_utah_str())
+def get_utah_rope() -> RopeTerm:
+    return create_rope(get_usa_rope(), get_utah_str())
 
 
-def get_swim_way() -> WayTerm:
-    return create_way(get_default_vow_label(), get_swim_str())
+def get_swim_rope() -> RopeTerm:
+    return create_rope(get_default_vow_label(), get_swim_str())
 
 
-def get_location_way() -> WayTerm:
-    return create_way(get_default_vow_label(), get_location_str())
+def get_location_rope() -> RopeTerm:
+    return create_rope(get_default_vow_label(), get_location_str())
 
 
-def get_in_mer_way() -> WayTerm:
-    return create_way(get_location_way(), get_in_mer_str())
+def get_in_mer_rope() -> RopeTerm:
+    return create_rope(get_location_rope(), get_in_mer_str())
 
 
-def get_on_land_way() -> WayTerm:
-    return create_way(get_location_way(), get_on_land_str())
+def get_on_land_rope() -> RopeTerm:
+    return create_rope(get_location_rope(), get_on_land_str())
 
 
 def get_yao_ohio_hubunit() -> HubUnit:
@@ -226,7 +226,7 @@ def get_yao_ohio_hubunit() -> HubUnit:
         vow_mstr_dir=env_dir(),
         vow_label=yao_plan.vow_label,
         owner_name=yao_plan.owner_name,
-        keep_way=get_ohio_way(),
+        keep_rope=get_ohio_rope(),
         # pipeline_gut_job_str(),
     )
 
@@ -237,7 +237,7 @@ def get_yao_iowa_hubunit() -> HubUnit:
         vow_mstr_dir=env_dir(),
         vow_label=yao_plan.vow_label,
         owner_name=yao_plan.owner_name,
-        keep_way=get_iowa_way(),
+        keep_rope=get_iowa_rope(),
         # pipeline_gut_job_str(),
     )
 
@@ -248,7 +248,7 @@ def get_zia_utah_hubunit() -> HubUnit:
         vow_mstr_dir=env_dir(),
         vow_label=yao_plan.vow_label,
         owner_name="Zia",
-        keep_way=get_utah_way(),
+        keep_rope=get_utah_rope(),
         # pipeline_gut_job_str(),
     )
 
@@ -264,9 +264,9 @@ def get_example_yao_gut_with_3_healers():
     iowa_concept.healerlink.set_healer_name(get_yao_iowa_hubunit().owner_name)
     ohio_concept.healerlink.set_healer_name(get_yao_ohio_hubunit().owner_name)
     utah_concept.healerlink.set_healer_name(get_zia_utah_hubunit().owner_name)
-    yao_gut.set_concept(iowa_concept, get_usa_way())
-    yao_gut.set_concept(ohio_concept, get_usa_way())
-    yao_gut.set_concept(utah_concept, get_usa_way())
+    yao_gut.set_concept(iowa_concept, get_usa_rope())
+    yao_gut.set_concept(ohio_concept, get_usa_rope())
+    yao_gut.set_concept(utah_concept, get_usa_rope())
 
     return yao_gut
 
@@ -283,16 +283,16 @@ def test_listen_to_owner_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItse
     vow_label = get_default_vow_label()
     yao_gut0 = get_example_yao_gut_with_3_healers()
     yao_gut0.set_l1_concept(conceptunit_shop(get_location_str()))
-    yao_gut0.set_concept(conceptunit_shop(get_in_mer_str()), get_location_way())
-    yao_gut0.set_concept(conceptunit_shop(get_on_land_str()), get_location_way())
+    yao_gut0.set_concept(conceptunit_shop(get_in_mer_str()), get_location_rope())
+    yao_gut0.set_concept(conceptunit_shop(get_on_land_str()), get_location_rope())
     yao_gut0.set_l1_concept(conceptunit_shop(get_swim_str(), task=True))
-    yao_gut0.edit_reason(get_swim_way(), get_location_way(), get_in_mer_way())
-    yao_gut0.add_fact(get_location_way(), get_in_mer_way())
-    print(f"{yao_gut0.get_fact(get_location_way())=}")
-    yao_gut0.del_concept_obj(run_way())
-    assert yao_gut0._keep_dict.get(get_iowa_way())
-    assert yao_gut0._keep_dict.get(get_ohio_way())
-    assert yao_gut0._keep_dict.get(get_utah_way())
+    yao_gut0.edit_reason(get_swim_rope(), get_location_rope(), get_in_mer_rope())
+    yao_gut0.add_fact(get_location_rope(), get_in_mer_rope())
+    print(f"{yao_gut0.get_fact(get_location_rope())=}")
+    yao_gut0.del_concept_obj(run_rope())
+    assert yao_gut0._keep_dict.get(get_iowa_rope())
+    assert yao_gut0._keep_dict.get(get_ohio_rope())
+    assert yao_gut0._keep_dict.get(get_utah_rope())
     yao_gut0.settle_plan()
     assert len(yao_gut0._keep_dict) == 3
     # print(f"{yao_gut0._concept_dict.keys()=}")
@@ -310,7 +310,7 @@ def test_listen_to_owner_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItse
     assert yao_iowa_hubunit.vision_file_exists(yao_str) is False
     assert yao_ohio_hubunit.vision_file_exists(yao_str) is False
     assert zia_utah_hubunit.vision_file_exists(yao_str) is False
-    print(f"{yao_gut0.get_fact(get_location_way())=}")
+    print(f"{yao_gut0.get_fact(get_location_rope())=}")
     save_gut_file(env_dir(), yao_gut0)
     # yao_iowa_hubunit.save_vision_plan(yao_vision1)
     # yao_ohio_hubunit.save_vision_plan(yao_vision2)
@@ -342,14 +342,14 @@ def test_listen_to_owner_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItse
     assert len(yao_job._concept_dict) == 4
     print(f"{yao_job._concept_dict.keys()=}")
     print(f"{yao_job.get_factunits_dict().keys()=}")
-    assert yao_job.concept_exists(cook_way()) is False
-    assert yao_job.concept_exists(clean_way()) is False
-    assert yao_job.concept_exists(run_way()) is False
-    assert yao_job.concept_exists(get_swim_way())
-    assert yao_job.concept_exists(get_in_mer_way())
-    assert yao_job.concept_exists(get_on_land_way()) is False
-    assert yao_job.get_fact(get_location_way()) is not None
-    assert yao_job.get_fact(get_location_way()).fstate == get_in_mer_way()
+    assert yao_job.concept_exists(cook_rope()) is False
+    assert yao_job.concept_exists(clean_rope()) is False
+    assert yao_job.concept_exists(run_rope()) is False
+    assert yao_job.concept_exists(get_swim_rope())
+    assert yao_job.concept_exists(get_in_mer_rope())
+    assert yao_job.concept_exists(get_on_land_rope()) is False
+    assert yao_job.get_fact(get_location_rope()) is not None
+    assert yao_job.get_fact(get_location_rope()).fstate == get_in_mer_rope()
     assert len(yao_job.get_agenda_dict()) == 1
     assert len(yao_job.conceptroot.factunits) == 1
     assert yao_job != yao_gut0

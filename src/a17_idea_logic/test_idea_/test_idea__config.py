@@ -2,9 +2,9 @@ from copy import copy as copy_copy
 from os import getcwd as os_getcwd
 from src.a00_data_toolbox.file_toolbox import create_path, save_json
 from src.a02_finance_logic._test_util.a02_str import (
-    bridge_str,
     celldepth_str,
     deal_time_str,
+    knot_str,
     owner_name_str,
     quota_str,
     tran_time_str,
@@ -16,7 +16,7 @@ from src.a06_plan_logic._test_util.a06_str import (
     awardee_title_str,
     begin_str,
     close_str,
-    concept_way_str,
+    concept_rope_str,
     credit_score_str,
     credit_vote_str,
     credor_respect_str,
@@ -109,22 +109,22 @@ from src.a15_vow_logic.vow_config import (
     get_vow_dimens,
 )
 from src.a16_pidgin_logic._test_util.a16_str import (
-    inx_bridge_str,
+    inx_knot_str,
     inx_label_str,
     inx_name_str,
+    inx_rope_str,
     inx_title_str,
-    inx_way_str,
     map_otx2inx_str,
-    otx_bridge_str,
     otx_key_str,
+    otx_knot_str,
     otx_label_str,
     otx_name_str,
+    otx_rope_str,
     otx_title_str,
-    otx_way_str,
     pidgin_label_str,
     pidgin_name_str,
+    pidgin_rope_str,
     pidgin_title_str,
-    pidgin_way_str,
     pidginunit_str,
     unknown_str_str,
 )
@@ -268,12 +268,12 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[45] == "group_title_ERASE"
     assert table_sorting_priority[46] == "group_title_ERASE_otx"
     assert table_sorting_priority[47] == "group_title_ERASE_inx"
-    assert table_sorting_priority[48] == "concept_way"
-    assert table_sorting_priority[49] == "concept_way_otx"
-    assert table_sorting_priority[50] == "concept_way_inx"
-    assert table_sorting_priority[51] == "concept_way_ERASE"
-    assert table_sorting_priority[52] == "concept_way_ERASE_otx"
-    assert table_sorting_priority[53] == "concept_way_ERASE_inx"
+    assert table_sorting_priority[48] == "concept_rope"
+    assert table_sorting_priority[49] == "concept_rope_otx"
+    assert table_sorting_priority[50] == "concept_rope_inx"
+    assert table_sorting_priority[51] == "concept_rope_ERASE"
+    assert table_sorting_priority[52] == "concept_rope_ERASE_otx"
+    assert table_sorting_priority[53] == "concept_rope_ERASE_inx"
     assert table_sorting_priority[54] == "rcontext"
     assert table_sorting_priority[55] == "rcontext_otx"
     assert table_sorting_priority[56] == "rcontext_inx"
@@ -349,15 +349,15 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[126] == "amount"
     assert table_sorting_priority[127] == "otx_label"
     assert table_sorting_priority[128] == "inx_label"
-    assert table_sorting_priority[129] == "otx_way"
-    assert table_sorting_priority[130] == "inx_way"
+    assert table_sorting_priority[129] == "otx_rope"
+    assert table_sorting_priority[130] == "inx_rope"
     assert table_sorting_priority[131] == "otx_name"
     assert table_sorting_priority[132] == "inx_name"
     assert table_sorting_priority[133] == "otx_title"
     assert table_sorting_priority[134] == "inx_title"
-    assert table_sorting_priority[135] == "otx_bridge"
-    assert table_sorting_priority[136] == "inx_bridge"
-    assert table_sorting_priority[137] == "bridge"
+    assert table_sorting_priority[135] == "otx_knot"
+    assert table_sorting_priority[136] == "inx_knot"
+    assert table_sorting_priority[137] == "knot"
     assert table_sorting_priority[138] == "unknown_str"
     assert table_sorting_priority[139] == "quota"
     assert table_sorting_priority[140] == "celldepth"
@@ -440,7 +440,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(owner_name_str()) == "TEXT"
     assert sqlite_types.get(acct_name_str()) == "TEXT"
     assert sqlite_types.get(group_title_str()) == "TEXT"
-    assert sqlite_types.get(concept_way_str()) == "TEXT"
+    assert sqlite_types.get(concept_rope_str()) == "TEXT"
     assert sqlite_types.get(rcontext_str()) == "TEXT"
     assert sqlite_types.get("pstate") == "TEXT"
     assert sqlite_types.get("fstate") == "TEXT"
@@ -488,10 +488,10 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(cumlative_day_str()) == "INTEGER"
     assert sqlite_types.get(weekday_label_str()) == "TEXT"
     assert sqlite_types.get(weekday_order_str()) == "INTEGER"
-    assert sqlite_types.get(otx_bridge_str()) == "TEXT"
-    assert sqlite_types.get(inx_bridge_str()) == "TEXT"
+    assert sqlite_types.get(otx_knot_str()) == "TEXT"
+    assert sqlite_types.get(inx_knot_str()) == "TEXT"
     assert sqlite_types.get(unknown_str_str()) == "TEXT"
-    assert sqlite_types.get(bridge_str()) == "TEXT"
+    assert sqlite_types.get(knot_str()) == "TEXT"
     assert sqlite_types.get(c400_number_str()) == "INTEGER"
     assert sqlite_types.get(yr1_jan1_offset_str()) == "INTEGER"
     assert sqlite_types.get(quota_str()) == "REAL"
@@ -558,7 +558,7 @@ def test_get_idea_config_dict_ReturnsObj():
     assert pidgin_name_str() in idea_config_dimens
     assert pidgin_title_str() in idea_config_dimens
     assert pidgin_label_str() in idea_config_dimens
-    assert pidgin_way_str() in idea_config_dimens
+    assert pidgin_rope_str() in idea_config_dimens
     assert get_plan_dimens().issubset(idea_config_dimens)
     assert get_vow_dimens().issubset(idea_config_dimens)
     assert get_pidgin_dimens().issubset(idea_config_dimens)
@@ -603,7 +603,7 @@ def _validate_idea_config(x_idea_config: dict):
             pidgin_title_str(),
             pidgin_name_str(),
             pidgin_label_str(),
-            pidgin_way_str(),
+            pidgin_rope_str(),
         }:
             assert idea_dict.get(allowed_crud_str()) == insert_one_time_str()
         elif idea_dimen in {
@@ -850,7 +850,7 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     # set_idea_config_json(pidgin_name_str(), 0)
     # set_idea_config_json(pidgin_title_str(), 1)
     # set_idea_config_json(pidgin_label_str(), 2)
-    # set_idea_config_json(pidgin_way_str(), 3)
+    # set_idea_config_json(pidgin_rope_str(), 3)
     # set_idea_config_json(vowunit_str(), 5)
     # set_idea_config_json(vow_timeline_hour_str(), 6)
     # set_idea_config_json(vow_timeline_month_str(), 7)
@@ -874,7 +874,7 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     assert x_idea_config.get(pidgin_name_str()).get(bo) == 0
     assert x_idea_config.get(pidgin_title_str()).get(bo) == 1
     assert x_idea_config.get(pidgin_label_str()).get(bo) == 2
-    assert x_idea_config.get(pidgin_way_str()).get(bo) == 3
+    assert x_idea_config.get(pidgin_rope_str()).get(bo) == 3
     assert x_idea_config.get(vowunit_str()).get(bo) == 5
     assert x_idea_config.get(vow_timeline_hour_str()).get(bo) == 6
     assert x_idea_config.get(vow_timeline_month_str()).get(bo) == 7
@@ -908,7 +908,7 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
         monthday_distortion_str(),
         penny_str(),
         respect_bit_str(),
-        bridge_str(),
+        knot_str(),
         timeline_label_str(),
         yr1_jan1_offset_str(),
         job_listen_rotations_str(),

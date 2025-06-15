@@ -3,7 +3,7 @@ from pathlib import Path
 from src.a00_data_toolbox.file_toolbox import count_files, save_json
 from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
 from src.a06_plan_logic._test_util.a06_str import (
-    concept_way_str,
+    concept_rope_str,
     gogo_want_str,
     plan_conceptunit_str,
 )
@@ -50,7 +50,7 @@ def test_create_dimens_idea_format_dict_ReturnsObj(rebuild_bool):
     plan_conceptunit_attributes = plan_conceptunit_dict.get(attributes_str())
     assert vow_label_str() in plan_conceptunit_attributes
     assert owner_name_str() in plan_conceptunit_attributes
-    assert concept_way_str() in plan_conceptunit_attributes
+    assert concept_rope_str() in plan_conceptunit_attributes
     assert gogo_want_str() in plan_conceptunit_attributes
 
     rebuild_format_jsons(rebuild_bool)

@@ -1,8 +1,8 @@
-from src.a01_term_logic.way import VowLabel
+from src.a01_term_logic.rope import VowLabel
 from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
     concept_label_str,
-    parent_way_str,
+    parent_rope_str,
     plan_acctunit_str,
     plan_conceptunit_str,
 )
@@ -22,7 +22,7 @@ def get_atom_example_conceptunit_sports(vow_label: VowLabel = None) -> PlanAtom:
     x_dimen = plan_conceptunit_str()
     insert_conceptunit_planatom = planatom_shop(x_dimen, INSERT_str())
     insert_conceptunit_planatom.set_jkey(concept_label_str(), sports_str)
-    insert_conceptunit_planatom.set_jkey(parent_way_str(), vow_label)
+    insert_conceptunit_planatom.set_jkey(parent_rope_str(), vow_label)
     return insert_conceptunit_planatom
 
 

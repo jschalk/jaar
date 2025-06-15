@@ -18,9 +18,9 @@ from src.a01_term_logic.term import (
     AcctName,
     EventInt,
     OwnerName,
+    RopeTerm,
     VowLabel,
-    WayTerm,
-    default_bridge_if_None,
+    default_knot_if_None,
 )
 from src.a02_finance_logic.deal import (
     BrokerUnit,
@@ -99,7 +99,7 @@ class VowUnit:
     brokerunits: dict[OwnerName, BrokerUnit] = None
     paybook: TranBook = None
     offi_times: set[TimeLinePoint] = None
-    bridge: str = None
+    knot: str = None
     fund_iota: FundIota = None
     respect_bit: BitNum = None
     penny: PennyNum = None
@@ -177,21 +177,21 @@ class VowUnit:
                 self.vow_mstr_dir,
                 self.vow_label,
                 healer_name,
-                keep_way=None,
+                keep_rope=None,
                 # "duty_vision",
-                bridge=self.bridge,
+                knot=self.knot,
                 respect_bit=self.respect_bit,
             )
-            for keep_way in healer_dict.keys():
-                self._set_owner_duty(healer_hubunit, keep_way, x_gut)
+            for keep_rope in healer_dict.keys():
+                self._set_owner_duty(healer_hubunit, keep_rope, x_gut)
 
     def _set_owner_duty(
         self,
         healer_hubunit: HubUnit,
-        keep_way: WayTerm,
+        keep_rope: RopeTerm,
         gut_plan: PlanUnit,
     ) -> None:
-        healer_hubunit.keep_way = keep_way
+        healer_hubunit.keep_rope = keep_rope
         healer_hubunit.create_treasury_db_file()
         healer_hubunit.save_duty_plan(gut_plan)
 
@@ -204,19 +204,19 @@ class VowUnit:
                 vow_mstr_dir=self.vow_mstr_dir,
                 vow_label=self.vow_label,
                 owner_name=healer_name,
-                keep_way=None,
-                bridge=self.bridge,
+                keep_rope=None,
+                knot=self.knot,
                 respect_bit=self.respect_bit,
             )
             healer_hubunit.create_gut_treasury_db_files()
-            for keep_way in healer_dict.keys():
+            for keep_rope in healer_dict.keys():
                 keep_hubunit = hubunit_shop(
                     vow_mstr_dir=self.vow_mstr_dir,
                     vow_label=self.vow_label,
                     owner_name=healer_name,
-                    keep_way=keep_way,
+                    keep_rope=keep_rope,
                     # "duty_vision",
-                    bridge=self.bridge,
+                    knot=self.knot,
                     respect_bit=self.respect_bit,
                 )
                 keep_hubunit.save_duty_plan(x_gut)
@@ -230,7 +230,7 @@ class VowUnit:
         return planunit_shop(
             owner_name,
             self.vow_label,
-            bridge=self.bridge,
+            knot=self.knot,
             fund_iota=self.fund_iota,
             respect_bit=self.respect_bit,
             penny=self.penny,
@@ -310,7 +310,7 @@ class VowUnit:
     def get_dict(self, include_paybook: bool = True) -> dict:
         x_dict = {
             "vow_label": self.vow_label,
-            "bridge": self.bridge,
+            "knot": self.knot,
             "fund_iota": self.fund_iota,
             "penny": self.penny,
             "brokerunits": self._get_brokerunits_dict(),
@@ -462,7 +462,7 @@ def vowunit_shop(
     timeline: TimeLineUnit = None,
     offi_times: set[TimeLinePoint] = None,
     in_memory_journal: bool = None,
-    bridge: str = None,
+    knot: str = None,
     fund_iota: float = None,
     respect_bit: float = None,
     penny: float = None,
@@ -481,7 +481,7 @@ def vowunit_shop(
         brokerunits={},
         paybook=tranbook_shop(vow_label),
         offi_times=get_empty_set_if_None(offi_times),
-        bridge=default_bridge_if_None(bridge),
+        knot=default_knot_if_None(knot),
         fund_iota=default_fund_iota_if_None(fund_iota),
         respect_bit=default_RespectBit_if_None(respect_bit),
         penny=filter_penny(penny),
@@ -505,7 +505,7 @@ def get_from_dict(vow_dict: dict) -> VowUnit:
         vow_label=x_vow_label,
         vow_mstr_dir=None,
         offi_times=set(vow_dict.get("offi_times")),
-        bridge=vow_dict.get("bridge"),
+        knot=vow_dict.get("knot"),
         fund_iota=vow_dict.get("fund_iota"),
         respect_bit=vow_dict.get("respect_bit"),
         penny=vow_dict.get("penny"),

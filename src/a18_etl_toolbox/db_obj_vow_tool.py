@@ -44,8 +44,8 @@ def get_vow_dict_from_sqlstrs(
         vow_dict["penny"] = penny
     if respect_bit := vowunit_row[7]:
         vow_dict["respect_bit"] = respect_bit
-    if bridge := vowunit_row[8]:
-        vow_dict["bridge"] = bridge
+    if knot := vowunit_row[8]:
+        vow_dict["knot"] = knot
 
     cursor.execute(fu1_sqlstrs.get("vow_paybook"))
     _set_vow_dict_vowpayy(cursor, vow_dict, vow_label)

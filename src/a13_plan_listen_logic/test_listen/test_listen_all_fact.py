@@ -122,29 +122,29 @@ def test_set_listen_to_speaker_fact_SetsFact():
     yao_str = "Yao"
     yao_listener = planunit_shop(yao_str)
     casa_str = "casa"
-    casa_way = yao_listener.make_l1_way(casa_str)
+    casa_rope = yao_listener.make_l1_rope(casa_str)
     status_str = "status"
-    status_way = yao_listener.make_way(casa_way, status_str)
+    status_rope = yao_listener.make_rope(casa_rope, status_str)
     clean_str = "clean"
-    clean_way = yao_listener.make_way(status_way, clean_str)
+    clean_rope = yao_listener.make_rope(status_rope, clean_str)
     dirty_str = "dirty"
-    dirty_way = yao_listener.make_way(status_way, dirty_str)
+    dirty_rope = yao_listener.make_rope(status_rope, dirty_str)
     sweep_str = "sweep"
-    sweep_way = yao_listener.make_way(casa_way, sweep_str)
+    sweep_rope = yao_listener.make_rope(casa_rope, sweep_str)
 
     yao_listener.add_acctunit(yao_str)
     yao_listener.set_acct_respect(20)
-    yao_listener.set_concept(conceptunit_shop(clean_str), status_way)
-    yao_listener.set_concept(conceptunit_shop(dirty_str), status_way)
-    yao_listener.set_concept(conceptunit_shop(sweep_str, task=True), casa_way)
+    yao_listener.set_concept(conceptunit_shop(clean_str), status_rope)
+    yao_listener.set_concept(conceptunit_shop(dirty_str), status_rope)
+    yao_listener.set_concept(conceptunit_shop(sweep_str, task=True), casa_rope)
     yao_listener.edit_concept_attr(
-        sweep_way, reason_rcontext=status_way, reason_premise=dirty_way
+        sweep_rope, reason_rcontext=status_rope, reason_premise=dirty_rope
     )
     missing_fact_fcontexts = list(yao_listener.get_missing_fact_rcontexts().keys())
 
     yao_speaker = planunit_shop(yao_str)
-    yao_speaker.add_fact(status_way, clean_way, create_missing_concepts=True)
-    assert yao_listener.get_missing_fact_rcontexts().keys() == {status_way}
+    yao_speaker.add_fact(status_rope, clean_rope, create_missing_concepts=True)
+    assert yao_listener.get_missing_fact_rcontexts().keys() == {status_rope}
 
     # WHEN
     listen_to_speaker_fact(yao_listener, yao_speaker, missing_fact_fcontexts)
@@ -160,48 +160,48 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     yao_listener.add_acctunit(yao_str)
     yao_listener.set_acct_respect(20)
     casa_str = "casa"
-    casa_way = yao_listener.make_l1_way(casa_str)
+    casa_rope = yao_listener.make_l1_rope(casa_str)
     status_str = "status"
-    status_way = yao_listener.make_way(casa_way, status_str)
+    status_rope = yao_listener.make_rope(casa_rope, status_str)
     clean_str = "clean"
-    clean_way = yao_listener.make_way(status_way, clean_str)
+    clean_rope = yao_listener.make_rope(status_rope, clean_str)
     dirty_str = "dirty"
-    dirty_way = yao_listener.make_way(status_way, dirty_str)
+    dirty_rope = yao_listener.make_rope(status_rope, dirty_str)
     sweep_str = "sweep"
-    sweep_way = yao_listener.make_way(casa_way, sweep_str)
+    sweep_rope = yao_listener.make_rope(casa_rope, sweep_str)
     fridge_str = "fridge"
-    fridge_way = yao_listener.make_way(casa_way, fridge_str)
+    fridge_rope = yao_listener.make_rope(casa_rope, fridge_str)
     running_str = "running"
-    running_way = yao_listener.make_way(fridge_way, running_str)
+    running_rope = yao_listener.make_rope(fridge_rope, running_str)
 
-    yao_listener.set_concept(conceptunit_shop(running_str), fridge_way)
-    yao_listener.set_concept(conceptunit_shop(clean_str), status_way)
-    yao_listener.set_concept(conceptunit_shop(dirty_str), status_way)
-    yao_listener.set_concept(conceptunit_shop(sweep_str, task=True), casa_way)
+    yao_listener.set_concept(conceptunit_shop(running_str), fridge_rope)
+    yao_listener.set_concept(conceptunit_shop(clean_str), status_rope)
+    yao_listener.set_concept(conceptunit_shop(dirty_str), status_rope)
+    yao_listener.set_concept(conceptunit_shop(sweep_str, task=True), casa_rope)
     yao_listener.edit_concept_attr(
-        sweep_way, reason_rcontext=status_way, reason_premise=dirty_way
+        sweep_rope, reason_rcontext=status_rope, reason_premise=dirty_rope
     )
     yao_listener.edit_concept_attr(
-        sweep_way, reason_rcontext=fridge_way, reason_premise=running_way
+        sweep_rope, reason_rcontext=fridge_rope, reason_premise=running_rope
     )
     assert len(yao_listener.get_missing_fact_rcontexts()) == 2
-    yao_listener.add_fact(status_way, dirty_way)
+    yao_listener.add_fact(status_rope, dirty_rope)
     assert len(yao_listener.get_missing_fact_rcontexts()) == 1
-    assert yao_listener.get_fact(status_way).fstate == dirty_way
+    assert yao_listener.get_fact(status_rope).fstate == dirty_rope
 
     # WHEN
     yao_speaker = planunit_shop(yao_str)
-    yao_speaker.add_fact(status_way, clean_way, create_missing_concepts=True)
-    yao_speaker.add_fact(fridge_way, running_way, create_missing_concepts=True)
+    yao_speaker.add_fact(status_rope, clean_rope, create_missing_concepts=True)
+    yao_speaker.add_fact(fridge_rope, running_rope, create_missing_concepts=True)
     missing_fact_fcontexts = list(yao_listener.get_missing_fact_rcontexts().keys())
     listen_to_speaker_fact(yao_listener, yao_speaker, missing_fact_fcontexts)
 
     # THEN
     assert len(yao_listener.get_missing_fact_rcontexts()) == 0
     # did not grab speaker's factunit
-    assert yao_listener.get_fact(status_way).fstate == dirty_way
+    assert yao_listener.get_fact(status_rope).fstate == dirty_rope
     # grabed speaker's factunit
-    assert yao_listener.get_fact(fridge_way).fstate == running_way
+    assert yao_listener.get_fact(fridge_rope).fstate == running_rope
 
 
 def test_migrate_all_facts_CorrectlyAddsConceptUnitsAndSetsFactUnits():
@@ -209,52 +209,52 @@ def test_migrate_all_facts_CorrectlyAddsConceptUnitsAndSetsFactUnits():
     yao_str = "Yao"
     yao_src = planunit_shop(yao_str)
     casa_str = "casa"
-    casa_way = yao_src.make_l1_way(casa_str)
+    casa_rope = yao_src.make_l1_rope(casa_str)
     status_str = "status"
-    status_way = yao_src.make_way(casa_way, status_str)
+    status_rope = yao_src.make_rope(casa_rope, status_str)
     clean_str = "clean"
-    clean_way = yao_src.make_way(status_way, clean_str)
+    clean_rope = yao_src.make_rope(status_rope, clean_str)
     dirty_str = "dirty"
-    dirty_way = yao_src.make_way(status_way, dirty_str)
+    dirty_rope = yao_src.make_rope(status_rope, dirty_str)
     sweep_str = "sweep"
-    sweep_way = yao_src.make_way(casa_way, sweep_str)
+    sweep_rope = yao_src.make_rope(casa_rope, sweep_str)
     weather_str = "weather"
-    weather_way = yao_src.make_l1_way(weather_str)
+    weather_rope = yao_src.make_l1_rope(weather_str)
     rain_str = "raining"
-    rain_way = yao_src.make_way(weather_way, rain_str)
+    rain_rope = yao_src.make_rope(weather_rope, rain_str)
     snow_str = "snow"
-    snow_way = yao_src.make_way(weather_way, snow_str)
+    snow_rope = yao_src.make_rope(weather_rope, snow_str)
 
     yao_src.add_acctunit(yao_str)
     yao_src.set_acct_respect(20)
-    yao_src.set_concept(conceptunit_shop(clean_str), status_way)
-    yao_src.set_concept(conceptunit_shop(dirty_str), status_way)
-    yao_src.set_concept(conceptunit_shop(sweep_str, task=True), casa_way)
-    yao_src.edit_reason(sweep_way, status_way, dirty_way)
+    yao_src.set_concept(conceptunit_shop(clean_str), status_rope)
+    yao_src.set_concept(conceptunit_shop(dirty_str), status_rope)
+    yao_src.set_concept(conceptunit_shop(sweep_str, task=True), casa_rope)
+    yao_src.edit_reason(sweep_rope, status_rope, dirty_rope)
     # missing_fact_fcontexts = list(yao_src.get_missing_fact_rcontexts().keys())
-    yao_src.set_concept(conceptunit_shop(rain_str), weather_way)
-    yao_src.set_concept(conceptunit_shop(snow_str), weather_way)
-    yao_src.add_fact(weather_way, rain_way)
-    yao_src.add_fact(status_way, clean_way)
+    yao_src.set_concept(conceptunit_shop(rain_str), weather_rope)
+    yao_src.set_concept(conceptunit_shop(snow_str), weather_rope)
+    yao_src.add_fact(weather_rope, rain_rope)
+    yao_src.add_fact(status_rope, clean_rope)
     yao_src.settle_plan()
 
     yao_dst = planunit_shop(yao_str)
-    assert yao_dst.concept_exists(clean_way) is False
-    assert yao_dst.concept_exists(dirty_way) is False
-    assert yao_dst.concept_exists(rain_way) is False
-    assert yao_dst.concept_exists(snow_way) is False
-    assert yao_dst.get_fact(weather_way) is None
-    assert yao_dst.get_fact(status_way) is None
+    assert yao_dst.concept_exists(clean_rope) is False
+    assert yao_dst.concept_exists(dirty_rope) is False
+    assert yao_dst.concept_exists(rain_rope) is False
+    assert yao_dst.concept_exists(snow_rope) is False
+    assert yao_dst.get_fact(weather_rope) is None
+    assert yao_dst.get_fact(status_rope) is None
 
     # WHEN
     migrate_all_facts(yao_src, yao_dst)
 
     # THEN
-    assert yao_dst.concept_exists(clean_way)
-    assert yao_dst.concept_exists(dirty_way)
-    assert yao_dst.concept_exists(rain_way)
-    assert yao_dst.concept_exists(snow_way)
-    assert yao_dst.get_fact(weather_way) is not None
-    assert yao_dst.get_fact(status_way) is not None
-    assert yao_dst.get_fact(weather_way).fstate == rain_way
-    assert yao_dst.get_fact(status_way).fstate == clean_way
+    assert yao_dst.concept_exists(clean_rope)
+    assert yao_dst.concept_exists(dirty_rope)
+    assert yao_dst.concept_exists(rain_rope)
+    assert yao_dst.concept_exists(snow_rope)
+    assert yao_dst.get_fact(weather_rope) is not None
+    assert yao_dst.get_fact(status_rope) is not None
+    assert yao_dst.get_fact(weather_rope).fstate == rain_rope
+    assert yao_dst.get_fact(status_rope).fstate == clean_rope

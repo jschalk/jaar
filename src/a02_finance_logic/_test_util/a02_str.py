@@ -1,4 +1,4 @@
-from src.a01_term_logic._test_util.a01_str import bridge_str
+from src.a01_term_logic._test_util.a01_str import knot_str
 
 
 def acct_name_str() -> str:

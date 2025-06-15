@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.dict_toolbox import create_csv
-from src.a01_term_logic.term import AcctName, VowLabel, WayTerm
+from src.a01_term_logic.term import AcctName, RopeTerm, VowLabel
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import FundNum, RespectNum, get_net
 from src.a03_group_logic.acct import AcctUnit
@@ -33,37 +33,37 @@ def plan_acct_membership_exists(x_plan: PlanUnit, jkeys: dict[str, any]) -> bool
 
 
 def plan_conceptunit_exists(x_plan: PlanUnit, jkeys: dict[str, any]) -> bool:
-    x_way = jkeys.get("concept_way")
-    return False if x_plan is None else bool(x_plan.concept_exists(x_way))
+    x_rope = jkeys.get("concept_rope")
+    return False if x_plan is None else bool(x_plan.concept_exists(x_rope))
 
 
 def plan_concept_awardlink_exists(x_plan: PlanUnit, jkeys: dict[str, any]) -> bool:
     x_awardee_title = jkeys.get("awardee_title")
-    x_way = jkeys.get("concept_way")
+    x_rope = jkeys.get("concept_rope")
     return bool(
         plan_conceptunit_exists(x_plan, jkeys)
-        and x_plan.get_concept_obj(x_way).awardlink_exists(x_awardee_title)
+        and x_plan.get_concept_obj(x_rope).awardlink_exists(x_awardee_title)
     )
 
 
 def plan_concept_reasonunit_exists(x_plan: PlanUnit, jkeys: dict[str, any]) -> bool:
-    x_way = jkeys.get("concept_way")
+    x_rope = jkeys.get("concept_rope")
     x_rcontext = jkeys.get("rcontext")
     return bool(
         plan_conceptunit_exists(x_plan, jkeys)
-        and x_plan.get_concept_obj(x_way).reasonunit_exists(x_rcontext)
+        and x_plan.get_concept_obj(x_rope).reasonunit_exists(x_rcontext)
     )
 
 
 def plan_concept_reason_premiseunit_exists(
     x_plan: PlanUnit, jkeys: dict[str, any]
 ) -> bool:
-    x_way = jkeys.get("concept_way")
+    x_rope = jkeys.get("concept_rope")
     x_rcontext = jkeys.get("rcontext")
     x_pstate = jkeys.get("pstate")
     return bool(
         plan_concept_reasonunit_exists(x_plan, jkeys)
-        and x_plan.get_concept_obj(x_way)
+        and x_plan.get_concept_obj(x_rope)
         .get_reasonunit(x_rcontext)
         .premise_exists(x_pstate)
     )
@@ -71,28 +71,28 @@ def plan_concept_reason_premiseunit_exists(
 
 def plan_concept_laborlink_exists(x_plan: PlanUnit, jkeys: dict[str, any]) -> bool:
     x_labor_title = jkeys.get("labor_title")
-    x_way = jkeys.get("concept_way")
+    x_rope = jkeys.get("concept_rope")
     return bool(
         plan_conceptunit_exists(x_plan, jkeys)
-        and x_plan.get_concept_obj(x_way).laborunit.laborlink_exists(x_labor_title)
+        and x_plan.get_concept_obj(x_rope).laborunit.laborlink_exists(x_labor_title)
     )
 
 
 def plan_concept_healerlink_exists(x_plan: PlanUnit, jkeys: dict[str, any]) -> bool:
     x_healer_name = jkeys.get("healer_name")
-    x_way = jkeys.get("concept_way")
+    x_rope = jkeys.get("concept_rope")
     return bool(
         plan_conceptunit_exists(x_plan, jkeys)
-        and x_plan.get_concept_obj(x_way).healerlink.healer_name_exists(x_healer_name)
+        and x_plan.get_concept_obj(x_rope).healerlink.healer_name_exists(x_healer_name)
     )
 
 
 def plan_concept_factunit_exists(x_plan: PlanUnit, jkeys: dict[str, any]) -> bool:
-    x_way = jkeys.get("concept_way")
+    x_rope = jkeys.get("concept_rope")
     x_fcontext = jkeys.get("fcontext")
     return bool(
         plan_conceptunit_exists(x_plan, jkeys)
-        and x_plan.get_concept_obj(x_way).factunit_exists(x_fcontext)
+        and x_plan.get_concept_obj(x_rope).factunit_exists(x_fcontext)
     )
 
 
@@ -131,43 +131,43 @@ def plan_acct_membership_get_obj(x_plan: PlanUnit, jkeys: dict[str, any]) -> Mem
 
 
 def plan_conceptunit_get_obj(x_plan: PlanUnit, jkeys: dict[str, any]) -> ConceptUnit:
-    x_way = jkeys.get("concept_way")
-    return x_plan.get_concept_obj(x_way)
+    x_rope = jkeys.get("concept_rope")
+    return x_plan.get_concept_obj(x_rope)
 
 
 def plan_concept_awardlink_get_obj(
     x_plan: PlanUnit, jkeys: dict[str, any]
 ) -> AwardLink:
-    x_way = jkeys.get("concept_way")
+    x_rope = jkeys.get("concept_rope")
     x_awardee_title = jkeys.get("awardee_title")
-    return x_plan.get_concept_obj(x_way).get_awardlink(x_awardee_title)
+    return x_plan.get_concept_obj(x_rope).get_awardlink(x_awardee_title)
 
 
 def plan_concept_reasonunit_get_obj(
     x_plan: PlanUnit, jkeys: dict[str, any]
 ) -> ReasonUnit:
-    x_way = jkeys.get("concept_way")
+    x_rope = jkeys.get("concept_rope")
     x_rcontext = jkeys.get("rcontext")
-    return x_plan.get_concept_obj(x_way).get_reasonunit(x_rcontext)
+    return x_plan.get_concept_obj(x_rope).get_reasonunit(x_rcontext)
 
 
 def plan_concept_reason_premiseunit_get_obj(
     x_plan: PlanUnit, jkeys: dict[str, any]
 ) -> PremiseUnit:
-    x_way = jkeys.get("concept_way")
+    x_rope = jkeys.get("concept_rope")
     x_rcontext = jkeys.get("rcontext")
     x_pstate = jkeys.get("pstate")
     return (
-        x_plan.get_concept_obj(x_way).get_reasonunit(x_rcontext).get_premise(x_pstate)
+        x_plan.get_concept_obj(x_rope).get_reasonunit(x_rcontext).get_premise(x_pstate)
     )
 
 
 def plan_concept_factunit_get_obj(x_plan: PlanUnit, jkeys: dict[str, any]) -> FactUnit:
-    x_way = jkeys.get("concept_way")
+    x_rope = jkeys.get("concept_rope")
     x_fcontext = jkeys.get("fcontext")
     print(f"{x_fcontext=}")
-    print(f"{x_plan.get_concept_obj(x_way).factunits=}")
-    return x_plan.get_concept_obj(x_way).factunits.get(x_fcontext)
+    print(f"{x_plan.get_concept_obj(x_rope).factunits=}")
+    return x_plan.get_concept_obj(x_rope).factunits.get(x_fcontext)
 
 
 def plan_get_obj(x_dimen: str, x_plan: PlanUnit, jkeys: dict[str, any]) -> any:
@@ -257,11 +257,11 @@ def get_credit_ledger(x_plan: PlanUnit) -> dict[AcctUnit, RespectNum]:
     return credit_ledger
 
 
-def get_plan_root_facts_dict(x_plan: PlanUnit) -> dict[WayTerm, dict[str,]]:
+def get_plan_root_facts_dict(x_plan: PlanUnit) -> dict[RopeTerm, dict[str,]]:
     return x_plan.get_factunits_dict()
 
 
-def set_factunits_to_plan(x_plan: PlanUnit, x_facts_dict: dict[WayTerm, dict]):
+def set_factunits_to_plan(x_plan: PlanUnit, x_facts_dict: dict[RopeTerm, dict]):
     factunits_dict = factunits_get_from_dict(x_facts_dict)
     missing_fact_rcontexts = set(x_plan.get_missing_fact_rcontexts().keys())
     not_missing_fact_rcontexts = set(x_plan.get_factunits_dict().keys())

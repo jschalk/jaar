@@ -19,7 +19,7 @@ def test_ChronoUnit_Exists():
 
     # THEN
     assert not x_chronounit.x_planunit
-    assert not x_chronounit.time_range_root_way
+    assert not x_chronounit.time_range_root_rope
     assert not x_chronounit.x_min
     assert not x_chronounit._timeline_concept
     assert not x_chronounit._weekday
@@ -36,20 +36,20 @@ def test_ChronoUnit_Exists():
 
 def test_ChronoUnit_shop_ReturnsObj():
     # ESTABLISH
-    x_time_range_root_way = "fizz07"
+    x_time_range_root_rope = "fizz07"
     x_timeline_min = 890000
     sue_plan = planunit_shop("Sue")
 
     # WHEN
     x_chronounit = chronounit_shop(
         x_planunit=sue_plan,
-        time_range_root_way=x_time_range_root_way,
+        time_range_root_rope=x_time_range_root_rope,
         x_min=x_timeline_min,
     )
 
     # THEN
     assert x_chronounit.x_planunit == sue_plan
-    assert x_chronounit.time_range_root_way == x_time_range_root_way
+    assert x_chronounit.time_range_root_rope == x_time_range_root_rope
     assert x_chronounit.x_min == x_timeline_min
 
 
@@ -58,9 +58,9 @@ def test_ChronoUnit_set_timeline_concept_SetsAttr():
     sue_plan = planunit_shop("Sue")
     sue_plan = add_time_creg_conceptunit(sue_plan)
     sue_plan.settle_plan()
-    time_way = sue_plan.make_l1_way("time")
-    creg_way = sue_plan.make_way(time_way, creg_str())
-    x_chronounit = chronounit_shop(sue_plan, creg_way, 10000000)
+    time_rope = sue_plan.make_l1_rope("time")
+    creg_rope = sue_plan.make_rope(time_rope, creg_str())
+    x_chronounit = chronounit_shop(sue_plan, creg_rope, 10000000)
     assert not x_chronounit._timeline_concept
 
     # WHEN
@@ -75,9 +75,9 @@ def test_ChronoUnit_set_weekday_SetsAttr():
     sue_plan = planunit_shop("Sue")
     sue_plan = add_time_creg_conceptunit(sue_plan)
     sue_plan.settle_plan()
-    time_way = sue_plan.make_l1_way("time")
-    creg_way = sue_plan.make_way(time_way, creg_str())
-    x_chronounit = chronounit_shop(sue_plan, creg_way, 10001440)
+    time_rope = sue_plan.make_l1_rope("time")
+    creg_rope = sue_plan.make_rope(time_rope, creg_str())
+    x_chronounit = chronounit_shop(sue_plan, creg_rope, 10001440)
     x_chronounit._set_timeline_concept()
     assert not x_chronounit._weekday
 
@@ -93,9 +93,9 @@ def test_ChronoUnit_set_month_SetsAttr():
     sue_plan = planunit_shop("Sue")
     sue_plan = add_time_creg_conceptunit(sue_plan)
     sue_plan.settle_plan()
-    time_way = sue_plan.make_l1_way("time")
-    creg_way = sue_plan.make_way(time_way, creg_str())
-    x_chronounit = chronounit_shop(sue_plan, creg_way, 10060000)
+    time_rope = sue_plan.make_l1_rope("time")
+    creg_rope = sue_plan.make_rope(time_rope, creg_str())
+    x_chronounit = chronounit_shop(sue_plan, creg_rope, 10060000)
     x_chronounit._set_timeline_concept()
     assert not x_chronounit._month
     assert not x_chronounit._monthday
@@ -114,9 +114,9 @@ def test_ChronoUnit_set_hour_SetsAttr():
     sue_plan = planunit_shop("Sue")
     sue_plan = add_time_creg_conceptunit(sue_plan)
     sue_plan.settle_plan()
-    time_way = sue_plan.make_l1_way("time")
-    creg_way = sue_plan.make_way(time_way, creg_str())
-    x_chronounit = chronounit_shop(sue_plan, creg_way, 10000001)
+    time_rope = sue_plan.make_l1_rope("time")
+    creg_rope = sue_plan.make_rope(time_rope, creg_str())
+    x_chronounit = chronounit_shop(sue_plan, creg_rope, 10000001)
     x_chronounit._set_timeline_concept()
     assert not x_chronounit._hour
     assert not x_chronounit._hour
@@ -135,9 +135,9 @@ def test_ChronoUnit_set_year_SetsAttr():
     sue_plan = planunit_shop("Sue")
     sue_plan = add_time_creg_conceptunit(sue_plan)
     sue_plan.settle_plan()
-    time_way = sue_plan.make_l1_way("time")
-    creg_way = sue_plan.make_way(time_way, creg_str())
-    x_chronounit = chronounit_shop(sue_plan, creg_way, 1030600100)
+    time_rope = sue_plan.make_l1_rope("time")
+    creg_rope = sue_plan.make_rope(time_rope, creg_str())
+    x_chronounit = chronounit_shop(sue_plan, creg_rope, 1030600100)
     x_chronounit._set_timeline_concept()
     assert not x_chronounit._c400_number
     assert not x_chronounit._c100_count
@@ -161,9 +161,9 @@ def test_ChronoUnit_calc_timeline_SetsAttrs():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     sue_plan = add_time_creg_conceptunit(sue_plan)
-    time_way = sue_plan.make_l1_way("time")
-    creg_way = sue_plan.make_way(time_way, creg_str())
-    x_chronounit = chronounit_shop(sue_plan, creg_way, 1030600102)
+    time_rope = sue_plan.make_l1_rope("time")
+    creg_rope = sue_plan.make_rope(time_rope, creg_str())
+    x_chronounit = chronounit_shop(sue_plan, creg_rope, 1030600102)
     assert not x_chronounit._timeline_concept
     assert not x_chronounit._weekday
     assert not x_chronounit._monthday
@@ -189,9 +189,9 @@ def test_ChronoUnit_get_blurb_ReturnsObj():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     sue_plan = add_time_creg_conceptunit(sue_plan)
-    time_way = sue_plan.make_l1_way("time")
-    creg_way = sue_plan.make_way(time_way, creg_str())
-    x_chronounit = chronounit_shop(sue_plan, creg_way, 1030600102)
+    time_rope = sue_plan.make_l1_rope("time")
+    creg_rope = sue_plan.make_rope(time_rope, creg_str())
+    x_chronounit = chronounit_shop(sue_plan, creg_rope, 1030600102)
     x_chronounit.calc_timeline()
     assert x_chronounit._timeline_concept
     assert x_chronounit._weekday
@@ -219,14 +219,14 @@ def test_calc_timeline_SetsAttrFiveTimeLine(graphics_bool):
     sue_plan = planunit_shop("Sue")
     sue_plan = add_time_creg_conceptunit(sue_plan)
     sue_plan = add_time_five_conceptunit(sue_plan)
-    time_way = sue_plan.make_l1_way("time")
-    creg_way = sue_plan.make_way(time_way, creg_str())
-    five_way = sue_plan.make_way(time_way, five_str())
+    time_rope = sue_plan.make_l1_rope("time")
+    creg_rope = sue_plan.make_rope(time_rope, creg_str())
+    five_rope = sue_plan.make_rope(time_rope, five_str())
     mar1_2000_datetime = datetime(2000, 3, 1)
     creg_min = get_creg_min_from_dt(mar1_2000_datetime)
     five_min = get_five_min_from_dt(mar1_2000_datetime)
-    creg_chronounit = chronounit_shop(sue_plan, creg_way, creg_min)
-    five_chronounit = chronounit_shop(sue_plan, five_way, five_min)
+    creg_chronounit = chronounit_shop(sue_plan, creg_rope, creg_min)
+    five_chronounit = chronounit_shop(sue_plan, five_rope, five_min)
     assert not creg_chronounit._weekday
     assert not creg_chronounit._monthday
     assert not creg_chronounit._month
@@ -263,10 +263,10 @@ def test_calc_timeline_SetsAttrFiveTimeLine(graphics_bool):
 
 
 def check_creg_timeline_attr(x_plan: PlanUnit, x_datetime: datetime):
-    time_way = x_plan.make_l1_way("time")
-    creg_way = x_plan.make_way(time_way, creg_str())
+    time_rope = x_plan.make_l1_rope("time")
+    creg_rope = x_plan.make_rope(time_rope, creg_str())
     creg_min = get_creg_min_from_dt(x_datetime)
-    creg_chronounit = chronounit_shop(x_plan, creg_way, creg_min)
+    creg_chronounit = chronounit_shop(x_plan, creg_rope, creg_min)
     creg_chronounit.calc_timeline()
     dt_hour = x_datetime.strftime("%H")
     dt_minute = x_datetime.strftime("%M")

@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.a01_term_logic.way import create_way
+from src.a01_term_logic.rope import create_rope
 from src.a05_concept_logic.concept import (
     conceptunit_shop,
     get_default_vow_label as root_label,
@@ -53,73 +53,73 @@ def test_get_kids_in_range_EmptyParametersReturnsAll_kids():
     assert len(mon_concept.get_kids_in_range()) == 3
 
 
-def test_ConceptUnit_get_descendants_ReturnsNoWayTerms():
+def test_ConceptUnit_get_descendants_ReturnsNoRopeTerms():
     # ESTABLISH
     nation_str = "nation"
-    nation_concept = conceptunit_shop(nation_str, parent_way=root_label())
+    nation_concept = conceptunit_shop(nation_str, parent_rope=root_label())
 
     # WHEN
-    nation_descendants = nation_concept.get_descendant_ways_from_kids()
+    nation_descendants = nation_concept.get_descendant_ropes_from_kids()
 
     # THEN
     assert nation_descendants == {}
 
 
-def test_ConceptUnit_get_descendants_Returns3DescendantsWayTerms():
+def test_ConceptUnit_get_descendants_Returns3DescendantsRopeTerms():
     # ESTABLISH
     nation_str = "nation"
-    nation_way = create_way(root_label(), nation_str)
-    nation_concept = conceptunit_shop(nation_str, parent_way=root_label())
+    nation_rope = create_rope(root_label(), nation_str)
+    nation_concept = conceptunit_shop(nation_str, parent_rope=root_label())
 
     usa_str = "USA"
-    usa_way = create_way(nation_way, usa_str)
-    usa_concept = conceptunit_shop(usa_str, parent_way=nation_way)
+    usa_rope = create_rope(nation_rope, usa_str)
+    usa_concept = conceptunit_shop(usa_str, parent_rope=nation_rope)
     nation_concept.add_kid(usa_concept)
 
     texas_str = "Texas"
-    texas_way = create_way(usa_way, texas_str)
-    texas_concept = conceptunit_shop(texas_str, parent_way=usa_way)
+    texas_rope = create_rope(usa_rope, texas_str)
+    texas_concept = conceptunit_shop(texas_str, parent_rope=usa_rope)
     usa_concept.add_kid(texas_concept)
 
     iowa_str = "Iowa"
-    iowa_way = create_way(usa_way, iowa_str)
-    iowa_concept = conceptunit_shop(iowa_str, parent_way=usa_way)
+    iowa_rope = create_rope(usa_rope, iowa_str)
+    iowa_concept = conceptunit_shop(iowa_str, parent_rope=usa_rope)
     usa_concept.add_kid(iowa_concept)
 
     # WHEN
-    nation_descendants = nation_concept.get_descendant_ways_from_kids()
+    nation_descendants = nation_concept.get_descendant_ropes_from_kids()
 
     # THEN
     assert len(nation_descendants) == 3
-    assert nation_descendants.get(usa_way) is not None
-    assert nation_descendants.get(texas_way) is not None
-    assert nation_descendants.get(iowa_way) is not None
+    assert nation_descendants.get(usa_rope) is not None
+    assert nation_descendants.get(texas_rope) is not None
+    assert nation_descendants.get(iowa_rope) is not None
 
 
 def test_ConceptUnit_get_descendants_ErrorRaisedIfInfiniteLoop():
     # ESTABLISH
     nation_str = "nation"
-    nation_way = create_way(root_label(), nation_str)
-    nation_concept = conceptunit_shop(nation_str, parent_way=root_label())
+    nation_rope = create_rope(root_label(), nation_str)
+    nation_concept = conceptunit_shop(nation_str, parent_rope=root_label())
     nation_concept.add_kid(nation_concept)
     max_count = 1000
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        nation_concept.get_descendant_ways_from_kids()
+        nation_concept.get_descendant_ropes_from_kids()
     assert (
         str(excinfo.value)
-        == f"Concept '{nation_concept.get_concept_way()}' either has an infinite loop or more than {max_count} descendants."
+        == f"Concept '{nation_concept.get_concept_rope()}' either has an infinite loop or more than {max_count} descendants."
     )
 
 
 def test_ConceptUnit_clear_kids_CorrectlySetsAttr():
     # ESTABLISH
     nation_str = "nation"
-    nation_way = create_way(root_label(), nation_str)
-    nation_concept = conceptunit_shop(nation_str, parent_way=root_label())
-    nation_concept.add_kid(conceptunit_shop("USA", parent_way=nation_way))
-    nation_concept.add_kid(conceptunit_shop("France", parent_way=nation_way))
+    nation_rope = create_rope(root_label(), nation_str)
+    nation_concept = conceptunit_shop(nation_str, parent_rope=root_label())
+    nation_concept.add_kid(conceptunit_shop("USA", parent_rope=nation_rope))
+    nation_concept.add_kid(conceptunit_shop("France", parent_rope=nation_rope))
     assert len(nation_concept._kids) == 2
 
     # WHEN
@@ -132,16 +132,16 @@ def test_ConceptUnit_clear_kids_CorrectlySetsAttr():
 def test_ConceptUnit_get_kid_ReturnsObj():
     # ESTABLISH
     nation_str = "nation"
-    nation_way = create_way(root_label(), nation_str)
-    nation_concept = conceptunit_shop(nation_str, parent_way=root_label())
+    nation_rope = create_rope(root_label(), nation_str)
+    nation_concept = conceptunit_shop(nation_str, parent_rope=root_label())
 
     usa_str = "USA"
-    usa_way = create_way(nation_way, usa_str)
-    nation_concept.add_kid(conceptunit_shop(usa_str, parent_way=nation_way))
+    usa_rope = create_rope(nation_rope, usa_str)
+    nation_concept.add_kid(conceptunit_shop(usa_str, parent_rope=nation_rope))
 
     france_str = "France"
-    france_way = create_way(nation_way, france_str)
-    nation_concept.add_kid(conceptunit_shop(france_str, parent_way=nation_way))
+    france_rope = create_rope(nation_rope, france_str)
+    nation_concept.add_kid(conceptunit_shop(france_str, parent_rope=nation_rope))
     assert len(nation_concept._kids) == 2
 
     # WHEN
@@ -154,16 +154,16 @@ def test_ConceptUnit_get_kid_ReturnsObj():
 def test_ConceptUnit_del_kid_CorrectModifiesAttr():
     # ESTABLISH
     nation_str = "nation"
-    nation_way = create_way(root_label(), nation_str)
-    nation_concept = conceptunit_shop(nation_str, parent_way=root_label())
+    nation_rope = create_rope(root_label(), nation_str)
+    nation_concept = conceptunit_shop(nation_str, parent_rope=root_label())
 
     usa_str = "USA"
-    usa_way = create_way(nation_way, usa_str)
-    nation_concept.add_kid(conceptunit_shop(usa_str, parent_way=nation_way))
+    usa_rope = create_rope(nation_rope, usa_str)
+    nation_concept.add_kid(conceptunit_shop(usa_str, parent_rope=nation_rope))
 
     france_str = "France"
-    france_way = create_way(nation_way, france_str)
-    nation_concept.add_kid(conceptunit_shop(france_str, parent_way=nation_way))
+    france_rope = create_rope(nation_rope, france_str)
+    nation_concept.add_kid(conceptunit_shop(france_str, parent_rope=nation_rope))
     assert len(nation_concept._kids) == 2
 
     # WHEN
@@ -176,13 +176,13 @@ def test_ConceptUnit_del_kid_CorrectModifiesAttr():
 def test_ConceptUnit_get_kids_mass_sum_ReturnsObj_Scenario0():
     # ESTABLISH
     nation_str = "nation"
-    nation_way = create_way(root_label(), nation_str)
-    nation_concept = conceptunit_shop(nation_str, parent_way=root_label())
+    nation_rope = create_rope(root_label(), nation_str)
+    nation_concept = conceptunit_shop(nation_str, parent_rope=root_label())
     usa_str = "USA"
-    usa_concept = conceptunit_shop(usa_str, parent_way=nation_way)
+    usa_concept = conceptunit_shop(usa_str, parent_rope=nation_rope)
     nation_concept.add_kid(usa_concept)
     france_str = "France"
-    france_concept = conceptunit_shop(france_str, parent_way=nation_way)
+    france_concept = conceptunit_shop(france_str, parent_rope=nation_rope)
     nation_concept.add_kid(france_concept)
 
     # WHEN / THEN
@@ -192,13 +192,13 @@ def test_ConceptUnit_get_kids_mass_sum_ReturnsObj_Scenario0():
 def test_ConceptUnit_get_kids_mass_sum_ReturnsObj_Scenario1():
     # ESTABLISH
     nation_str = "nation"
-    nation_way = create_way(root_label(), nation_str)
-    nation_concept = conceptunit_shop(nation_str, parent_way=root_label())
+    nation_rope = create_rope(root_label(), nation_str)
+    nation_concept = conceptunit_shop(nation_str, parent_rope=root_label())
     usa_str = "USA"
-    usa_concept = conceptunit_shop(usa_str, mass=0, parent_way=nation_way)
+    usa_concept = conceptunit_shop(usa_str, mass=0, parent_rope=nation_rope)
     nation_concept.add_kid(usa_concept)
     france_str = "France"
-    france_concept = conceptunit_shop(france_str, mass=0, parent_way=nation_way)
+    france_concept = conceptunit_shop(france_str, mass=0, parent_rope=nation_rope)
     nation_concept.add_kid(france_concept)
 
     # WHEN / THEN
@@ -206,7 +206,7 @@ def test_ConceptUnit_get_kids_mass_sum_ReturnsObj_Scenario1():
 
     # WHEN
     france_str = "France"
-    france_concept = conceptunit_shop(france_str, mass=3, parent_way=nation_way)
+    france_concept = conceptunit_shop(france_str, mass=3, parent_rope=nation_rope)
     nation_concept.add_kid(france_concept)
 
     # WHEN / THEN

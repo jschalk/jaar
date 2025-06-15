@@ -40,7 +40,7 @@ class MemberShipTable(Base):
 class ConceptTable(Base):
     __tablename__ = "concept"
     uid = Column(Integer, primary_key=True)
-    concept_way = Column(String)
+    concept_rope = Column(String)
     addin = Column(Float)
     begin = Column(Float)
     close = Column(Float)
@@ -58,7 +58,7 @@ class AwardLinkTable(Base):
     __tablename__ = "awardlink"
     uid = Column(Integer, primary_key=True)
     awardee_title = Column(String)
-    concept_way = Column(String)
+    concept_rope = Column(String)
     give_force = Column(Float)
     take_force = Column(Float)
 
@@ -67,7 +67,7 @@ class ReasonTable(Base):
     __tablename__ = "reason"
     uid = Column(Integer, primary_key=True)
     rcontext = Column(String)
-    concept_way = Column(String)
+    concept_rope = Column(String)
     rconcept_active_requisite = Column(Integer)
 
 
@@ -76,7 +76,7 @@ class PremiseTable(Base):
     uid = Column(Integer, primary_key=True)
     rcontext = Column(String)
     pstate = Column(String)
-    concept_way = Column(String)
+    concept_rope = Column(String)
     pdivisor = Column(Integer)
     pnigh = Column(Float)
     popen = Column(Float)
@@ -86,21 +86,21 @@ class LaborLinkTable(Base):
     __tablename__ = "laborlink"
     uid = Column(Integer, primary_key=True)
     labor_title = Column(String)
-    concept_way = Column(String)
+    concept_rope = Column(String)
 
 
 class HealerLinkTable(Base):
     __tablename__ = "healerlink"
     uid = Column(Integer, primary_key=True)
     healer_name = Column(String)
-    concept_way = Column(String)
+    concept_rope = Column(String)
 
 
 class FactTable(Base):
     __tablename__ = "fact"
     uid = Column(Integer, primary_key=True)
     fcontext = Column(String)
-    concept_way = Column(String)
+    concept_rope = Column(String)
     fnigh = Column(Float)
     fopen = Column(Float)
     fstate = Column(String)

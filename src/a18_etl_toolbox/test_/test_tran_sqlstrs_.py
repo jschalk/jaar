@@ -40,8 +40,8 @@ from src.a16_pidgin_logic._test_util.a16_str import (
     pidgin_core_str,
     pidgin_label_str,
     pidgin_name_str,
+    pidgin_rope_str,
     pidgin_title_str,
-    pidgin_way_str,
 )
 from src.a17_idea_logic._test_util.a17_str import idea_category_str
 from src.a17_idea_logic.idea_config import (
@@ -101,7 +101,7 @@ def test_create_prime_tablename_ReturnsObj():
     vowoffi_dimen = vow_timeoffi_str()
     pidname_dimen = pidgin_name_str()
     pidlabe_dimen = pidgin_label_str()
-    pidwayy_dimen = pidgin_way_str()
+    pidrope_dimen = pidgin_rope_str()
     pidtitl_dimen = pidgin_title_str()
     pidcore_dimen = pidgin_core_str()
     raw_str = "raw"
@@ -131,7 +131,7 @@ def test_create_prime_tablename_ReturnsObj():
     vowoffi_s_agg_table = create_prime_tablename("vowoffi", "s", agg_str)
     pidname_s_agg_table = create_prime_tablename("pidname", "s", agg_str)
     pidlabe_s_agg_table = create_prime_tablename("pidlabe", "s", agg_str)
-    pidwayy_s_agg_table = create_prime_tablename("pidwayy", "s", agg_str)
+    pidrope_s_agg_table = create_prime_tablename("pidrope", "s", agg_str)
     pidtitl_s_agg_table = create_prime_tablename("pidtitl", "s", agg_str)
     pidtitl_v_agg_table = create_prime_tablename("pidtitl", "v", agg_str)
     pidtitl_s_raw_table = create_prime_tablename("pidtitl", "s", raw_str)
@@ -163,7 +163,7 @@ def test_create_prime_tablename_ReturnsObj():
     assert vowoffi_s_agg_table == f"{vowoffi_dimen}_s_agg"
     assert pidname_s_agg_table == f"{pidname_dimen}_s_agg"
     assert pidlabe_s_agg_table == f"{pidlabe_dimen}_s_agg"
-    assert pidwayy_s_agg_table == f"{pidwayy_dimen}_s_agg"
+    assert pidrope_s_agg_table == f"{pidrope_dimen}_s_agg"
     assert pidtitl_s_agg_table == f"{pidtitl_dimen}_s_agg"
     assert pidtitl_v_agg_table == f"{pidtitl_dimen}_v_agg"
     assert pidtitl_s_raw_table == f"{pidtitl_dimen}_s_raw"

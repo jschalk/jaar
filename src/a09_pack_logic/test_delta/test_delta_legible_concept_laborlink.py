@@ -1,5 +1,5 @@
 from src.a06_plan_logic._test_util.a06_str import (
-    concept_way_str,
+    concept_rope_str,
     labor_title_str,
     plan_concept_laborlink_str,
 )
@@ -14,11 +14,11 @@ def test_create_legible_list_ReturnsObj_concept_laborlink_INSERT():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     dimen = plan_concept_laborlink_str()
-    casa_way = sue_plan.make_l1_way("casa")
-    way_value = sue_plan.make_way(casa_way, "clean fridge")
-    labor_title_value = f"{sue_plan.bridge}Swimmers"
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rope_value = sue_plan.make_rope(casa_rope, "clean fridge")
+    labor_title_value = f"{sue_plan.knot}Swimmers"
     swim_planatom = planatom_shop(dimen, INSERT_str())
-    swim_planatom.set_arg(concept_way_str(), way_value)
+    swim_planatom.set_arg(concept_rope_str(), rope_value)
     swim_planatom.set_arg(labor_title_str(), labor_title_value)
     # print(f"{swim_planatom=}")
     x_plandelta = plandelta_shop()
@@ -28,7 +28,7 @@ def test_create_legible_list_ReturnsObj_concept_laborlink_INSERT():
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"laborlink '{labor_title_value}' created for concept '{way_value}'."
+    x_str = f"laborlink '{labor_title_value}' created for concept '{rope_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -37,11 +37,11 @@ def test_create_legible_list_ReturnsObj_concept_laborlink_DELETE():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     dimen = plan_concept_laborlink_str()
-    casa_way = sue_plan.make_l1_way("casa")
-    way_value = sue_plan.make_way(casa_way, "clean fridge")
-    labor_title_value = f"{sue_plan.bridge}Swimmers"
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rope_value = sue_plan.make_rope(casa_rope, "clean fridge")
+    labor_title_value = f"{sue_plan.knot}Swimmers"
     swim_planatom = planatom_shop(dimen, DELETE_str())
-    swim_planatom.set_arg(concept_way_str(), way_value)
+    swim_planatom.set_arg(concept_rope_str(), rope_value)
     swim_planatom.set_arg(labor_title_str(), labor_title_value)
     # print(f"{swim_planatom=}")
     x_plandelta = plandelta_shop()
@@ -51,6 +51,6 @@ def test_create_legible_list_ReturnsObj_concept_laborlink_DELETE():
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"laborlink '{labor_title_value}' deleted for concept '{way_value}'."
+    x_str = f"laborlink '{labor_title_value}' deleted for concept '{rope_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str

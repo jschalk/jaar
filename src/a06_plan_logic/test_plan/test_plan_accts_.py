@@ -11,16 +11,16 @@ def test_PlanUnit_set_acctunit_SetObjCorrectly():
     yao_acctunit.add_membership(yao_str)
     deepcopy_yao_acctunit = copy_deepcopy(yao_acctunit)
     slash_str = "/"
-    bob_plan = planunit_shop("Bob", bridge=slash_str)
+    bob_plan = planunit_shop("Bob", knot=slash_str)
 
     # WHEN
     bob_plan.set_acctunit(yao_acctunit)
 
     # THEN
-    assert bob_plan.accts.get(yao_str).bridge == slash_str
+    assert bob_plan.accts.get(yao_str).knot == slash_str
     x_accts = {yao_acctunit.acct_name: deepcopy_yao_acctunit}
     assert bob_plan.accts != x_accts
-    deepcopy_yao_acctunit.bridge = bob_plan.bridge
+    deepcopy_yao_acctunit.knot = bob_plan.knot
     assert bob_plan.accts == x_accts
 
 

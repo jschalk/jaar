@@ -1,9 +1,9 @@
 from os import getcwd as os_getcwd
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a02_finance_logic._test_util.a02_str import (
-    bridge_str,
     celldepth_str,
     deal_time_str,
+    knot_str,
     owner_name_str,
     quota_str,
     tran_time_str,
@@ -106,7 +106,7 @@ def test_get_vow_config_dict_ReturnsObj():
         monthday_distortion_str(),
         penny_str(),
         respect_bit_str(),
-        bridge_str(),
+        knot_str(),
         timeline_label_str(),
         yr1_jan1_offset_str(),
         "job_listen_rotations",
@@ -240,7 +240,7 @@ def test_get_vow_args_set_ReturnsObj():
     expected_vow_args_set = {
         acct_name_str(),
         amount_str(),
-        bridge_str(),
+        knot_str(),
         c400_number_str(),
         cumlative_day_str(),
         cumlative_minute_str(),

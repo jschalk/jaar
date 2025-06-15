@@ -32,7 +32,7 @@ ALL_DIMEN_ABBV7 = {
     "PLNUNIT",
     "PIDTITL",
     "PIDNAME",
-    "PIDWAYY",
+    "PIDROPE",
     "PIDLABE",
 }
 
@@ -58,7 +58,7 @@ def get_dimen_abbv7(dimen: str) -> str:
         "planunit": "PLNUNIT",
         "pidgin_title": "PIDTITL",
         "pidgin_name": "PIDNAME",
-        "pidgin_way": "PIDWAYY",
+        "pidgin_rope": "PIDROPE",
         "pidgin_label": "PIDLABE",
         "pidgin_core": "PIDCORE",
     }.get(dimen)
@@ -97,7 +97,7 @@ def create_prime_tablename(
         "PLNUNIT": "planunit",
         "PIDTITL": "pidgin_title",
         "PIDNAME": "pidgin_name",
-        "PIDWAYY": "pidgin_way",
+        "PIDROPE": "pidgin_rope",
         "PIDLABE": "pidgin_label",
         "PIDCORE": "pidgin_core",
     }
@@ -114,22 +114,22 @@ def create_prime_tablename(
     return f"{tablename}_{put_del}_{stage}" if put_del else f"{tablename}_{stage}"
 
 
-CREATE_PIDTITL_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_title_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_title TEXT, inx_title TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_str TEXT, error_message TEXT)"""
-CREATE_PIDTITL_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_title_s_agg (event_int INTEGER, face_name TEXT, otx_title TEXT, inx_title TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_PIDTITL_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_title_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_title TEXT, inx_title TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_PIDTITL_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_title_s_agg (event_int INTEGER, face_name TEXT, otx_title TEXT, inx_title TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
 CREATE_PIDTITL_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_title_s_vld (event_int INTEGER, face_name TEXT, otx_title TEXT, inx_title TEXT)"""
-CREATE_PIDNAME_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_str TEXT, error_message TEXT)"""
-CREATE_PIDNAME_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_s_agg (event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_PIDNAME_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_PIDNAME_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_s_agg (event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
 CREATE_PIDNAME_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_s_vld (event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT)"""
-CREATE_PIDWAYY_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_way_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_way TEXT, inx_way TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_str TEXT, error_message TEXT)"""
-CREATE_PIDWAYY_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_way_s_agg (event_int INTEGER, face_name TEXT, otx_way TEXT, inx_way TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_str TEXT, error_message TEXT)"""
-CREATE_PIDWAYY_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_way_s_vld (event_int INTEGER, face_name TEXT, otx_way TEXT, inx_way TEXT)"""
-CREATE_PIDLABE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_str TEXT, error_message TEXT)"""
-CREATE_PIDLABE_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_s_agg (event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_PIDROPE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_rope_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_rope TEXT, inx_rope TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_PIDROPE_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_rope_s_agg (event_int INTEGER, face_name TEXT, otx_rope TEXT, inx_rope TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_PIDROPE_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_rope_s_vld (event_int INTEGER, face_name TEXT, otx_rope TEXT, inx_rope TEXT)"""
+CREATE_PIDLABE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_PIDLABE_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_s_agg (event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
 CREATE_PIDLABE_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_s_vld (event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT)"""
 
-CREATE_PIDCORE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_raw (source_dimen TEXT, face_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_str TEXT, error_message TEXT)"""
-CREATE_PIDCORE_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_agg (face_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_str TEXT)"""
-CREATE_PIDCORE_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_vld (face_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_str TEXT)"""
+CREATE_PIDCORE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_raw (source_dimen TEXT, face_name TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_PIDCORE_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_agg (face_name TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT)"""
+CREATE_PIDCORE_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_vld (face_name TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT)"""
 
 CREATE_VOWPAYY_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS vow_paybook_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
 CREATE_VOWPAYY_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS vow_paybook_s_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
@@ -161,11 +161,11 @@ CREATE_VOWOFFI_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS vow_timeoffi_s_a
 CREATE_VOWOFFI_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS vow_timeoffi_s_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, offi_time INTEGER)"""
 CREATE_VOWOFFI_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS vow_timeoffi_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, offi_time INTEGER, error_message TEXT)"""
 CREATE_VOWOFFI_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS vow_timeoffi_v_agg (vow_label TEXT, offi_time INTEGER)"""
-CREATE_VOWUNIT_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS vowunit_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
-CREATE_VOWUNIT_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS vowunit_s_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
-CREATE_VOWUNIT_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS vowunit_s_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
-CREATE_VOWUNIT_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS vowunit_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, timeline_label_otx TEXT, timeline_label_inx TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
-CREATE_VOWUNIT_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS vowunit_v_agg (vow_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
+CREATE_VOWUNIT_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS vowunit_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
+CREATE_VOWUNIT_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS vowunit_s_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
+CREATE_VOWUNIT_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS vowunit_s_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER)"""
+CREATE_VOWUNIT_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS vowunit_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, timeline_label_otx TEXT, timeline_label_inx TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
+CREATE_VOWUNIT_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS vowunit_v_agg (vow_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER)"""
 
 CREATE_PLNMEMB_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_acct_membership_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, group_title TEXT, credit_vote REAL, debt_vote REAL, error_message TEXT)"
 CREATE_PLNMEMB_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_acct_membership_s_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, group_title TEXT, credit_vote REAL, debt_vote REAL, error_message TEXT)"
@@ -187,76 +187,76 @@ CREATE_PLNACCT_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_acctunit_v_p
 CREATE_PLNACCT_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_acctunit_v_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name TEXT, credit_score REAL, debt_score REAL)"
 CREATE_PLNACCT_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_acctunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, acct_name_ERASE_otx TEXT, acct_name_ERASE_inx TEXT)"
 CREATE_PLNACCT_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_acctunit_v_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, acct_name_ERASE TEXT)"
-CREATE_PLNAWAR_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_awardlink_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, awardee_title TEXT, give_force REAL, take_force REAL, error_message TEXT)"
-CREATE_PLNAWAR_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_awardlink_s_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, awardee_title TEXT, give_force REAL, take_force REAL, error_message TEXT)"
-CREATE_PLNAWAR_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_concept_awardlink_s_put_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, awardee_title TEXT, give_force REAL, take_force REAL)"
-CREATE_PLNAWAR_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_awardlink_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, awardee_title_ERASE TEXT)"
-CREATE_PLNAWAR_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_awardlink_s_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, awardee_title_ERASE TEXT, error_message TEXT)"
-CREATE_PLNAWAR_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_concept_awardlink_s_del_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, awardee_title_ERASE TEXT)"
-CREATE_PLNAWAR_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_awardlink_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, awardee_title_otx TEXT, awardee_title_inx TEXT, give_force REAL, take_force REAL)"
-CREATE_PLNAWAR_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_awardlink_v_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, awardee_title TEXT, give_force REAL, take_force REAL)"
-CREATE_PLNAWAR_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_awardlink_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, awardee_title_ERASE_otx TEXT, awardee_title_ERASE_inx TEXT)"
-CREATE_PLNAWAR_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_awardlink_v_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, awardee_title_ERASE TEXT)"
-CREATE_PLNFACT_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_factunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, fcontext TEXT, fstate TEXT, fopen REAL, fnigh REAL, error_message TEXT)"
-CREATE_PLNFACT_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_factunit_s_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, fcontext TEXT, fstate TEXT, fopen REAL, fnigh REAL, error_message TEXT)"
-CREATE_PLNFACT_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_concept_factunit_s_put_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, fcontext TEXT, fstate TEXT, fopen REAL, fnigh REAL)"
-CREATE_PLNFACT_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_factunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, fcontext_ERASE TEXT)"
-CREATE_PLNFACT_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_factunit_s_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, fcontext_ERASE TEXT, error_message TEXT)"
-CREATE_PLNFACT_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_concept_factunit_s_del_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, fcontext_ERASE TEXT)"
-CREATE_PLNFACT_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_factunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, fcontext_otx TEXT, fcontext_inx TEXT, fstate_otx TEXT, fstate_inx TEXT, fopen REAL, fnigh REAL)"
-CREATE_PLNFACT_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_factunit_v_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, fcontext TEXT, fstate TEXT, fopen REAL, fnigh REAL)"
-CREATE_PLNFACT_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_factunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, fcontext_ERASE_otx TEXT, fcontext_ERASE_inx TEXT)"
-CREATE_PLNFACT_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_factunit_v_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, fcontext_ERASE TEXT)"
-CREATE_PLNHEAL_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_healerlink_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, healer_name TEXT, error_message TEXT)"
-CREATE_PLNHEAL_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_healerlink_s_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, healer_name TEXT, error_message TEXT)"
-CREATE_PLNHEAL_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_concept_healerlink_s_put_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, healer_name TEXT)"
-CREATE_PLNHEAL_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_healerlink_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, healer_name_ERASE TEXT)"
-CREATE_PLNHEAL_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_healerlink_s_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, healer_name_ERASE TEXT, error_message TEXT)"
-CREATE_PLNHEAL_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_concept_healerlink_s_del_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, healer_name_ERASE TEXT)"
-CREATE_PLNHEAL_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_healerlink_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, healer_name_otx TEXT, healer_name_inx TEXT)"
-CREATE_PLNHEAL_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_healerlink_v_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, healer_name TEXT)"
-CREATE_PLNHEAL_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_healerlink_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, healer_name_ERASE_otx TEXT, healer_name_ERASE_inx TEXT)"
-CREATE_PLNHEAL_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_healerlink_v_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, healer_name_ERASE TEXT)"
-CREATE_PLNPREM_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reason_premiseunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate TEXT, pnigh REAL, popen REAL, pdivisor INTEGER, error_message TEXT)"
-CREATE_PLNPREM_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reason_premiseunit_s_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate TEXT, pnigh REAL, popen REAL, pdivisor INTEGER, error_message TEXT)"
-CREATE_PLNPREM_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reason_premiseunit_s_put_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate TEXT, pnigh REAL, popen REAL, pdivisor INTEGER)"
-CREATE_PLNPREM_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reason_premiseunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate_ERASE TEXT)"
-CREATE_PLNPREM_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reason_premiseunit_s_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate_ERASE TEXT, error_message TEXT)"
-CREATE_PLNPREM_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reason_premiseunit_s_del_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate_ERASE TEXT)"
-CREATE_PLNPREM_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reason_premiseunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, rcontext_otx TEXT, rcontext_inx TEXT, pstate_otx TEXT, pstate_inx TEXT, pnigh REAL, popen REAL, pdivisor INTEGER)"
-CREATE_PLNPREM_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reason_premiseunit_v_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate TEXT, pnigh REAL, popen REAL, pdivisor INTEGER)"
-CREATE_PLNPREM_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reason_premiseunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, rcontext_otx TEXT, rcontext_inx TEXT, pstate_ERASE_otx TEXT, pstate_ERASE_inx TEXT)"
-CREATE_PLNPREM_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reason_premiseunit_v_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate_ERASE TEXT)"
-CREATE_PLNREAS_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reasonunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, rconcept_active_requisite INTEGER, error_message TEXT)"
-CREATE_PLNREAS_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reasonunit_s_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, rconcept_active_requisite INTEGER, error_message TEXT)"
-CREATE_PLNREAS_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reasonunit_s_put_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, rconcept_active_requisite INTEGER)"
-CREATE_PLNREAS_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reasonunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, rcontext_ERASE TEXT)"
-CREATE_PLNREAS_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reasonunit_s_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, rcontext_ERASE TEXT, error_message TEXT)"
-CREATE_PLNREAS_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reasonunit_s_del_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, rcontext_ERASE TEXT)"
-CREATE_PLNREAS_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reasonunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, rcontext_otx TEXT, rcontext_inx TEXT, rconcept_active_requisite INTEGER)"
-CREATE_PLNREAS_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reasonunit_v_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, rconcept_active_requisite INTEGER)"
-CREATE_PLNREAS_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reasonunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, rcontext_ERASE_otx TEXT, rcontext_ERASE_inx TEXT)"
-CREATE_PLNREAS_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reasonunit_v_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, rcontext_ERASE TEXT)"
-CREATE_PLNLABO_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_laborlink_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, labor_title TEXT, error_message TEXT)"
-CREATE_PLNLABO_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_laborlink_s_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, labor_title TEXT, error_message TEXT)"
-CREATE_PLNLABO_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_concept_laborlink_s_put_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, labor_title TEXT)"
-CREATE_PLNLABO_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_laborlink_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, labor_title_ERASE TEXT)"
-CREATE_PLNLABO_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_laborlink_s_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, labor_title_ERASE TEXT, error_message TEXT)"
-CREATE_PLNLABO_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_concept_laborlink_s_del_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, labor_title_ERASE TEXT)"
-CREATE_PLNLABO_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_laborlink_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, labor_title_otx TEXT, labor_title_inx TEXT)"
-CREATE_PLNLABO_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_laborlink_v_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, labor_title TEXT)"
-CREATE_PLNLABO_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_laborlink_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, labor_title_ERASE_otx TEXT, labor_title_ERASE_inx TEXT)"
-CREATE_PLNLABO_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_laborlink_v_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, labor_title_ERASE TEXT)"
-CREATE_PLNCONC_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_conceptunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, task INTEGER, problem_bool INTEGER, error_message TEXT)"
-CREATE_PLNCONC_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_conceptunit_s_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, task INTEGER, problem_bool INTEGER, error_message TEXT)"
-CREATE_PLNCONC_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_conceptunit_s_put_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, task INTEGER, problem_bool INTEGER)"
-CREATE_PLNCONC_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_conceptunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way_ERASE TEXT)"
-CREATE_PLNCONC_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_conceptunit_s_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way_ERASE TEXT, error_message TEXT)"
-CREATE_PLNCONC_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_conceptunit_s_del_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way_ERASE TEXT)"
-CREATE_PLNCONC_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_conceptunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, task INTEGER, problem_bool INTEGER)"
-CREATE_PLNCONC_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_conceptunit_v_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, task INTEGER, problem_bool INTEGER)"
-CREATE_PLNCONC_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_conceptunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_ERASE_otx TEXT, concept_way_ERASE_inx TEXT)"
-CREATE_PLNCONC_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_conceptunit_v_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_way_ERASE TEXT)"
+CREATE_PLNAWAR_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_awardlink_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, awardee_title TEXT, give_force REAL, take_force REAL, error_message TEXT)"
+CREATE_PLNAWAR_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_awardlink_s_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, awardee_title TEXT, give_force REAL, take_force REAL, error_message TEXT)"
+CREATE_PLNAWAR_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_concept_awardlink_s_put_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, awardee_title TEXT, give_force REAL, take_force REAL)"
+CREATE_PLNAWAR_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_awardlink_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, awardee_title_ERASE TEXT)"
+CREATE_PLNAWAR_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_awardlink_s_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, awardee_title_ERASE TEXT, error_message TEXT)"
+CREATE_PLNAWAR_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_concept_awardlink_s_del_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, awardee_title_ERASE TEXT)"
+CREATE_PLNAWAR_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_awardlink_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_rope_otx TEXT, concept_rope_inx TEXT, awardee_title_otx TEXT, awardee_title_inx TEXT, give_force REAL, take_force REAL)"
+CREATE_PLNAWAR_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_awardlink_v_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, awardee_title TEXT, give_force REAL, take_force REAL)"
+CREATE_PLNAWAR_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_awardlink_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_rope_otx TEXT, concept_rope_inx TEXT, awardee_title_ERASE_otx TEXT, awardee_title_ERASE_inx TEXT)"
+CREATE_PLNAWAR_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_awardlink_v_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, awardee_title_ERASE TEXT)"
+CREATE_PLNFACT_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_factunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, fcontext TEXT, fstate TEXT, fopen REAL, fnigh REAL, error_message TEXT)"
+CREATE_PLNFACT_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_factunit_s_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, fcontext TEXT, fstate TEXT, fopen REAL, fnigh REAL, error_message TEXT)"
+CREATE_PLNFACT_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_concept_factunit_s_put_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, fcontext TEXT, fstate TEXT, fopen REAL, fnigh REAL)"
+CREATE_PLNFACT_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_factunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, fcontext_ERASE TEXT)"
+CREATE_PLNFACT_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_factunit_s_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, fcontext_ERASE TEXT, error_message TEXT)"
+CREATE_PLNFACT_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_concept_factunit_s_del_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, fcontext_ERASE TEXT)"
+CREATE_PLNFACT_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_factunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_rope_otx TEXT, concept_rope_inx TEXT, fcontext_otx TEXT, fcontext_inx TEXT, fstate_otx TEXT, fstate_inx TEXT, fopen REAL, fnigh REAL)"
+CREATE_PLNFACT_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_factunit_v_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, fcontext TEXT, fstate TEXT, fopen REAL, fnigh REAL)"
+CREATE_PLNFACT_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_factunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_rope_otx TEXT, concept_rope_inx TEXT, fcontext_ERASE_otx TEXT, fcontext_ERASE_inx TEXT)"
+CREATE_PLNFACT_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_factunit_v_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, fcontext_ERASE TEXT)"
+CREATE_PLNHEAL_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_healerlink_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, healer_name TEXT, error_message TEXT)"
+CREATE_PLNHEAL_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_healerlink_s_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, healer_name TEXT, error_message TEXT)"
+CREATE_PLNHEAL_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_concept_healerlink_s_put_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, healer_name TEXT)"
+CREATE_PLNHEAL_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_healerlink_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, healer_name_ERASE TEXT)"
+CREATE_PLNHEAL_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_healerlink_s_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, healer_name_ERASE TEXT, error_message TEXT)"
+CREATE_PLNHEAL_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_concept_healerlink_s_del_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, healer_name_ERASE TEXT)"
+CREATE_PLNHEAL_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_healerlink_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_rope_otx TEXT, concept_rope_inx TEXT, healer_name_otx TEXT, healer_name_inx TEXT)"
+CREATE_PLNHEAL_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_healerlink_v_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, healer_name TEXT)"
+CREATE_PLNHEAL_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_healerlink_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_rope_otx TEXT, concept_rope_inx TEXT, healer_name_ERASE_otx TEXT, healer_name_ERASE_inx TEXT)"
+CREATE_PLNHEAL_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_healerlink_v_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, healer_name_ERASE TEXT)"
+CREATE_PLNPREM_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reason_premiseunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, rcontext TEXT, pstate TEXT, pnigh REAL, popen REAL, pdivisor INTEGER, error_message TEXT)"
+CREATE_PLNPREM_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reason_premiseunit_s_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, rcontext TEXT, pstate TEXT, pnigh REAL, popen REAL, pdivisor INTEGER, error_message TEXT)"
+CREATE_PLNPREM_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reason_premiseunit_s_put_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, rcontext TEXT, pstate TEXT, pnigh REAL, popen REAL, pdivisor INTEGER)"
+CREATE_PLNPREM_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reason_premiseunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, rcontext TEXT, pstate_ERASE TEXT)"
+CREATE_PLNPREM_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reason_premiseunit_s_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, rcontext TEXT, pstate_ERASE TEXT, error_message TEXT)"
+CREATE_PLNPREM_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reason_premiseunit_s_del_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, rcontext TEXT, pstate_ERASE TEXT)"
+CREATE_PLNPREM_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reason_premiseunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_rope_otx TEXT, concept_rope_inx TEXT, rcontext_otx TEXT, rcontext_inx TEXT, pstate_otx TEXT, pstate_inx TEXT, pnigh REAL, popen REAL, pdivisor INTEGER)"
+CREATE_PLNPREM_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reason_premiseunit_v_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, rcontext TEXT, pstate TEXT, pnigh REAL, popen REAL, pdivisor INTEGER)"
+CREATE_PLNPREM_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reason_premiseunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_rope_otx TEXT, concept_rope_inx TEXT, rcontext_otx TEXT, rcontext_inx TEXT, pstate_ERASE_otx TEXT, pstate_ERASE_inx TEXT)"
+CREATE_PLNPREM_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reason_premiseunit_v_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, rcontext TEXT, pstate_ERASE TEXT)"
+CREATE_PLNREAS_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reasonunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, rcontext TEXT, rconcept_active_requisite INTEGER, error_message TEXT)"
+CREATE_PLNREAS_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reasonunit_s_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, rcontext TEXT, rconcept_active_requisite INTEGER, error_message TEXT)"
+CREATE_PLNREAS_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reasonunit_s_put_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, rcontext TEXT, rconcept_active_requisite INTEGER)"
+CREATE_PLNREAS_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reasonunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, rcontext_ERASE TEXT)"
+CREATE_PLNREAS_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reasonunit_s_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, rcontext_ERASE TEXT, error_message TEXT)"
+CREATE_PLNREAS_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reasonunit_s_del_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, rcontext_ERASE TEXT)"
+CREATE_PLNREAS_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reasonunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_rope_otx TEXT, concept_rope_inx TEXT, rcontext_otx TEXT, rcontext_inx TEXT, rconcept_active_requisite INTEGER)"
+CREATE_PLNREAS_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reasonunit_v_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, rcontext TEXT, rconcept_active_requisite INTEGER)"
+CREATE_PLNREAS_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reasonunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_rope_otx TEXT, concept_rope_inx TEXT, rcontext_ERASE_otx TEXT, rcontext_ERASE_inx TEXT)"
+CREATE_PLNREAS_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_reasonunit_v_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, rcontext_ERASE TEXT)"
+CREATE_PLNLABO_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_laborlink_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, labor_title TEXT, error_message TEXT)"
+CREATE_PLNLABO_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_laborlink_s_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, labor_title TEXT, error_message TEXT)"
+CREATE_PLNLABO_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_concept_laborlink_s_put_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, labor_title TEXT)"
+CREATE_PLNLABO_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_laborlink_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, labor_title_ERASE TEXT)"
+CREATE_PLNLABO_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_laborlink_s_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, labor_title_ERASE TEXT, error_message TEXT)"
+CREATE_PLNLABO_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_concept_laborlink_s_del_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, labor_title_ERASE TEXT)"
+CREATE_PLNLABO_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_laborlink_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_rope_otx TEXT, concept_rope_inx TEXT, labor_title_otx TEXT, labor_title_inx TEXT)"
+CREATE_PLNLABO_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_laborlink_v_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, labor_title TEXT)"
+CREATE_PLNLABO_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_concept_laborlink_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_rope_otx TEXT, concept_rope_inx TEXT, labor_title_ERASE_otx TEXT, labor_title_ERASE_inx TEXT)"
+CREATE_PLNLABO_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_concept_laborlink_v_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, labor_title_ERASE TEXT)"
+CREATE_PLNCONC_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_conceptunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, task INTEGER, problem_bool INTEGER, error_message TEXT)"
+CREATE_PLNCONC_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_conceptunit_s_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, task INTEGER, problem_bool INTEGER, error_message TEXT)"
+CREATE_PLNCONC_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_conceptunit_s_put_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, task INTEGER, problem_bool INTEGER)"
+CREATE_PLNCONC_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_conceptunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope_ERASE TEXT)"
+CREATE_PLNCONC_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_conceptunit_s_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope_ERASE TEXT, error_message TEXT)"
+CREATE_PLNCONC_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS plan_conceptunit_s_del_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope_ERASE TEXT)"
+CREATE_PLNCONC_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_conceptunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_rope_otx TEXT, concept_rope_inx TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, task INTEGER, problem_bool INTEGER)"
+CREATE_PLNCONC_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_conceptunit_v_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, task INTEGER, problem_bool INTEGER)"
+CREATE_PLNCONC_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS plan_conceptunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, vow_label_otx TEXT, vow_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_rope_ERASE_otx TEXT, concept_rope_ERASE_inx TEXT)"
+CREATE_PLNCONC_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS plan_conceptunit_v_del_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, concept_rope_ERASE TEXT)"
 CREATE_PLNUNIT_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS planunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, error_message TEXT)"
 CREATE_PLNUNIT_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS planunit_s_put_agg (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, error_message TEXT)"
 CREATE_PLNUNIT_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS planunit_s_put_vld (event_int INTEGER, face_name TEXT, vow_label TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL)"
@@ -277,9 +277,9 @@ def get_prime_create_table_sqlstrs() -> dict[str:str]:
         "pidgin_name_s_raw": CREATE_PIDNAME_SOUND_RAW_SQLSTR,
         "pidgin_name_s_agg": CREATE_PIDNAME_SOUND_AGG_SQLSTR,
         "pidgin_name_s_vld": CREATE_PIDNAME_SOUND_VLD_SQLSTR,
-        "pidgin_way_s_raw": CREATE_PIDWAYY_SOUND_RAW_SQLSTR,
-        "pidgin_way_s_agg": CREATE_PIDWAYY_SOUND_AGG_SQLSTR,
-        "pidgin_way_s_vld": CREATE_PIDWAYY_SOUND_VLD_SQLSTR,
+        "pidgin_rope_s_raw": CREATE_PIDROPE_SOUND_RAW_SQLSTR,
+        "pidgin_rope_s_agg": CREATE_PIDROPE_SOUND_AGG_SQLSTR,
+        "pidgin_rope_s_vld": CREATE_PIDROPE_SOUND_VLD_SQLSTR,
         "pidgin_label_s_raw": CREATE_PIDLABE_SOUND_RAW_SQLSTR,
         "pidgin_label_s_agg": CREATE_PIDLABE_SOUND_AGG_SQLSTR,
         "pidgin_label_s_vld": CREATE_PIDLABE_SOUND_VLD_SQLSTR,
@@ -548,22 +548,22 @@ def create_sound_agg_insert_sqlstrs(
 def create_insert_into_pidgin_core_raw_sqlstr(dimen: str) -> str:
     pidgin_core_s_raw_tablename = create_prime_tablename("pidcore", "s", "raw")
     pidgin_s_agg_tablename = create_prime_tablename(dimen, "s", "agg")
-    return f"""INSERT INTO {pidgin_core_s_raw_tablename} (source_dimen, face_name, otx_bridge, inx_bridge, unknown_str)
-SELECT '{pidgin_s_agg_tablename}', face_name, otx_bridge, inx_bridge, unknown_str
+    return f"""INSERT INTO {pidgin_core_s_raw_tablename} (source_dimen, face_name, otx_knot, inx_knot, unknown_str)
+SELECT '{pidgin_s_agg_tablename}', face_name, otx_knot, inx_knot, unknown_str
 FROM {pidgin_s_agg_tablename}
-GROUP BY face_name, otx_bridge, inx_bridge, unknown_str
+GROUP BY face_name, otx_knot, inx_knot, unknown_str
 ;
 """
 
 
 def create_insert_pidgin_core_agg_into_vld_sqlstr(
-    default_bridge: str, default_unknown: str
+    default_knot: str, default_unknown: str
 ):
-    return f"""INSERT INTO pidgin_core_s_vld (face_name, otx_bridge, inx_bridge, unknown_str)
+    return f"""INSERT INTO pidgin_core_s_vld (face_name, otx_knot, inx_knot, unknown_str)
 SELECT
   face_name
-, IFNULL(otx_bridge, '{default_bridge}')
-, IFNULL(inx_bridge, '{default_bridge}')
+, IFNULL(otx_knot, '{default_knot}')
+, IFNULL(inx_knot, '{default_knot}')
 , IFNULL(unknown_str, '{default_unknown}')
 FROM pidgin_core_s_agg
 ;
@@ -571,13 +571,13 @@ FROM pidgin_core_s_agg
 
 
 def create_insert_missing_face_name_into_pidgin_core_vld_sqlstr(
-    default_bridge: str, default_unknown: str, vow_plan_sound_agg_tablename: str
+    default_knot: str, default_unknown: str, vow_plan_sound_agg_tablename: str
 ):
-    return f"""INSERT INTO pidgin_core_s_vld (face_name, otx_bridge, inx_bridge, unknown_str)
+    return f"""INSERT INTO pidgin_core_s_vld (face_name, otx_knot, inx_knot, unknown_str)
 SELECT
   {vow_plan_sound_agg_tablename}.face_name
-, '{default_bridge}'
-, '{default_bridge}'
+, '{default_knot}'
+, '{default_knot}'
 , '{default_unknown}'
 FROM {vow_plan_sound_agg_tablename} 
 LEFT JOIN pidgin_core_s_vld ON pidgin_core_s_vld.face_name = {vow_plan_sound_agg_tablename}.face_name
@@ -602,69 +602,69 @@ WHERE face_name IN (
 """
 
 
-def create_update_pidlabe_sound_agg_bridge_error_sqlstr() -> str:
+def create_update_pidlabe_sound_agg_knot_error_sqlstr() -> str:
     pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
     pidlabe_s_agg_tablename = create_prime_tablename("pidlabe", "s", "agg")
     return f"""UPDATE {pidlabe_s_agg_tablename}
-SET error_message = 'Bridge cannot exist in LabelTerm'
+SET error_message = 'Knot cannot exist in LabelTerm'
 WHERE rowid IN (
     SELECT label_agg.rowid
     FROM {pidlabe_s_agg_tablename} label_agg
     JOIN {pidcore_s_vld_tablename} core_vld ON core_vld.face_name = label_agg.face_name
-    WHERE label_agg.otx_label LIKE '%' || core_vld.otx_bridge || '%'
-      OR label_agg.inx_label LIKE '%' || core_vld.inx_bridge || '%'
+    WHERE label_agg.otx_label LIKE '%' || core_vld.otx_knot || '%'
+      OR label_agg.inx_label LIKE '%' || core_vld.inx_knot || '%'
 )
 ;
 """
 
 
-def create_update_pidwayy_sound_agg_bridge_error_sqlstr() -> str:
+def create_update_pidrope_sound_agg_knot_error_sqlstr() -> str:
     pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
-    pidwayy_s_agg_tablename = create_prime_tablename("pidwayy", "s", "agg")
-    return f"""UPDATE {pidwayy_s_agg_tablename}
-SET error_message = 'Bridge must exist in WayTerm'
+    pidrope_s_agg_tablename = create_prime_tablename("pidrope", "s", "agg")
+    return f"""UPDATE {pidrope_s_agg_tablename}
+SET error_message = 'Knot must exist in RopeTerm'
 WHERE rowid IN (
-    SELECT way_agg.rowid
-    FROM {pidwayy_s_agg_tablename} way_agg
-    JOIN {pidcore_s_vld_tablename} core_vld ON core_vld.face_name = way_agg.face_name
-    WHERE NOT way_agg.otx_way LIKE core_vld.otx_bridge || '%'
-        OR NOT way_agg.inx_way LIKE core_vld.inx_bridge || '%'
+    SELECT rope_agg.rowid
+    FROM {pidrope_s_agg_tablename} rope_agg
+    JOIN {pidcore_s_vld_tablename} core_vld ON core_vld.face_name = rope_agg.face_name
+    WHERE NOT rope_agg.otx_rope LIKE core_vld.otx_knot || '%'
+        OR NOT rope_agg.inx_rope LIKE core_vld.inx_knot || '%'
 )
 ;
 """
 
 
-def create_update_pidname_sound_agg_bridge_error_sqlstr() -> str:
+def create_update_pidname_sound_agg_knot_error_sqlstr() -> str:
     pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
     pidname_s_agg_tablename = create_prime_tablename("pidname", "s", "agg")
     return f"""UPDATE {pidname_s_agg_tablename}
-SET error_message = 'Bridge cannot exist in NameTerm'
+SET error_message = 'Knot cannot exist in NameTerm'
 WHERE rowid IN (
     SELECT name_agg.rowid
     FROM {pidname_s_agg_tablename} name_agg
     JOIN {pidcore_s_vld_tablename} core_vld ON core_vld.face_name = name_agg.face_name
-    WHERE name_agg.otx_name LIKE '%' || core_vld.otx_bridge || '%'
-      OR name_agg.inx_name LIKE '%' || core_vld.inx_bridge || '%'
+    WHERE name_agg.otx_name LIKE '%' || core_vld.otx_knot || '%'
+      OR name_agg.inx_name LIKE '%' || core_vld.inx_knot || '%'
 )
 ;
 """
 
 
-def create_update_pidtitl_sound_agg_bridge_error_sqlstr() -> str:
+def create_update_pidtitl_sound_agg_knot_error_sqlstr() -> str:
     pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
     pidtitl_s_agg_tablename = create_prime_tablename("pidtitl", "s", "agg")
     return f"""UPDATE {pidtitl_s_agg_tablename}
-SET error_message = 'Otx and inx titles must match bridge.'
+SET error_message = 'Otx and inx titles must match knot.'
 WHERE rowid IN (
   SELECT title_agg.rowid
   FROM {pidtitl_s_agg_tablename} title_agg
   JOIN {pidcore_s_vld_tablename} core_vld ON core_vld.face_name = title_agg.face_name
   WHERE NOT ((
-            title_agg.otx_title LIKE core_vld.otx_bridge || '%' 
-        AND title_agg.inx_title LIKE core_vld.inx_bridge || '%') 
+            title_agg.otx_title LIKE core_vld.otx_knot || '%' 
+        AND title_agg.inx_title LIKE core_vld.inx_knot || '%') 
       OR (
-            NOT title_agg.otx_title LIKE core_vld.otx_bridge || '%'
-        AND NOT title_agg.inx_title LIKE core_vld.inx_bridge || '%'
+            NOT title_agg.otx_title LIKE core_vld.otx_knot || '%'
+        AND NOT title_agg.inx_title LIKE core_vld.inx_knot || '%'
         ))
 )
 ;
@@ -678,7 +678,7 @@ def create_insert_pidgin_sound_vld_table_sqlstr(dimen: str) -> str:
         "pidgin_name": "name",
         "pidgin_title": "title",
         "pidgin_label": "label",
-        "pidgin_way": "way",
+        "pidgin_rope": "rope",
     }
     otx_str = f"otx_{dimen_otx_inx_obj_names.get(dimen, dimen)}"
     inx_str = f"inx_{dimen_otx_inx_obj_names.get(dimen, dimen)}"
@@ -692,29 +692,29 @@ GROUP BY event_int, face_name
 """
 
 
-def create_bridge_exists_in_name_error_update_sqlstr(table: str, column: str) -> str:
+def create_knot_exists_in_name_error_update_sqlstr(table: str, column: str) -> str:
     pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
     return f"""UPDATE {table}
-SET error_message = 'Bridge cannot exist in NameTerm column {column}'
+SET error_message = 'Knot cannot exist in NameTerm column {column}'
 WHERE rowid IN (
     SELECT sound_agg.rowid
     FROM {table} sound_agg
     JOIN {pidcore_s_vld_tablename} core_vld ON core_vld.face_name = sound_agg.face_name
-    WHERE sound_agg.{column} LIKE '%' || core_vld.otx_bridge || '%'
+    WHERE sound_agg.{column} LIKE '%' || core_vld.otx_knot || '%'
 )
 ;
 """
 
 
-def create_bridge_exists_in_label_error_update_sqlstr(table: str, column: str) -> str:
+def create_knot_exists_in_label_error_update_sqlstr(table: str, column: str) -> str:
     pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
     return f"""UPDATE {table}
-SET error_message = 'Bridge cannot exist in LabelTerm column {column}'
+SET error_message = 'Knot cannot exist in LabelTerm column {column}'
 WHERE rowid IN (
     SELECT sound_agg.rowid
     FROM {table} sound_agg
     JOIN {pidcore_s_vld_tablename} core_vld ON core_vld.face_name = sound_agg.face_name
-    WHERE sound_agg.{column} LIKE '%' || core_vld.otx_bridge || '%'
+    WHERE sound_agg.{column} LIKE '%' || core_vld.otx_knot || '%'
 )
 ;
 """
@@ -724,20 +724,20 @@ INSERT_PLNMEMB_SOUND_VLD_PUT_SQLSTR = "INSERT INTO plan_acct_membership_s_put_vl
 INSERT_PLNMEMB_SOUND_VLD_DEL_SQLSTR = "INSERT INTO plan_acct_membership_s_del_vld (event_int, face_name, vow_label, owner_name, acct_name, group_title_ERASE) SELECT event_int, face_name, vow_label, owner_name, acct_name, group_title_ERASE FROM plan_acct_membership_s_del_agg WHERE error_message IS NULL"
 INSERT_PLNACCT_SOUND_VLD_PUT_SQLSTR = "INSERT INTO plan_acctunit_s_put_vld (event_int, face_name, vow_label, owner_name, acct_name, credit_score, debt_score) SELECT event_int, face_name, vow_label, owner_name, acct_name, credit_score, debt_score FROM plan_acctunit_s_put_agg WHERE error_message IS NULL"
 INSERT_PLNACCT_SOUND_VLD_DEL_SQLSTR = "INSERT INTO plan_acctunit_s_del_vld (event_int, face_name, vow_label, owner_name, acct_name_ERASE) SELECT event_int, face_name, vow_label, owner_name, acct_name_ERASE FROM plan_acctunit_s_del_agg WHERE error_message IS NULL"
-INSERT_PLNAWAR_SOUND_VLD_PUT_SQLSTR = "INSERT INTO plan_concept_awardlink_s_put_vld (event_int, face_name, vow_label, owner_name, concept_way, awardee_title, give_force, take_force) SELECT event_int, face_name, vow_label, owner_name, concept_way, awardee_title, give_force, take_force FROM plan_concept_awardlink_s_put_agg WHERE error_message IS NULL"
-INSERT_PLNAWAR_SOUND_VLD_DEL_SQLSTR = "INSERT INTO plan_concept_awardlink_s_del_vld (event_int, face_name, vow_label, owner_name, concept_way, awardee_title_ERASE) SELECT event_int, face_name, vow_label, owner_name, concept_way, awardee_title_ERASE FROM plan_concept_awardlink_s_del_agg WHERE error_message IS NULL"
-INSERT_PLNFACT_SOUND_VLD_PUT_SQLSTR = "INSERT INTO plan_concept_factunit_s_put_vld (event_int, face_name, vow_label, owner_name, concept_way, fcontext, fstate, fopen, fnigh) SELECT event_int, face_name, vow_label, owner_name, concept_way, fcontext, fstate, fopen, fnigh FROM plan_concept_factunit_s_put_agg WHERE error_message IS NULL"
-INSERT_PLNFACT_SOUND_VLD_DEL_SQLSTR = "INSERT INTO plan_concept_factunit_s_del_vld (event_int, face_name, vow_label, owner_name, concept_way, fcontext_ERASE) SELECT event_int, face_name, vow_label, owner_name, concept_way, fcontext_ERASE FROM plan_concept_factunit_s_del_agg WHERE error_message IS NULL"
-INSERT_PLNHEAL_SOUND_VLD_PUT_SQLSTR = "INSERT INTO plan_concept_healerlink_s_put_vld (event_int, face_name, vow_label, owner_name, concept_way, healer_name) SELECT event_int, face_name, vow_label, owner_name, concept_way, healer_name FROM plan_concept_healerlink_s_put_agg WHERE error_message IS NULL"
-INSERT_PLNHEAL_SOUND_VLD_DEL_SQLSTR = "INSERT INTO plan_concept_healerlink_s_del_vld (event_int, face_name, vow_label, owner_name, concept_way, healer_name_ERASE) SELECT event_int, face_name, vow_label, owner_name, concept_way, healer_name_ERASE FROM plan_concept_healerlink_s_del_agg WHERE error_message IS NULL"
-INSERT_PLNPREM_SOUND_VLD_PUT_SQLSTR = "INSERT INTO plan_concept_reason_premiseunit_s_put_vld (event_int, face_name, vow_label, owner_name, concept_way, rcontext, pstate, pnigh, popen, pdivisor) SELECT event_int, face_name, vow_label, owner_name, concept_way, rcontext, pstate, pnigh, popen, pdivisor FROM plan_concept_reason_premiseunit_s_put_agg WHERE error_message IS NULL"
-INSERT_PLNPREM_SOUND_VLD_DEL_SQLSTR = "INSERT INTO plan_concept_reason_premiseunit_s_del_vld (event_int, face_name, vow_label, owner_name, concept_way, rcontext, pstate_ERASE) SELECT event_int, face_name, vow_label, owner_name, concept_way, rcontext, pstate_ERASE FROM plan_concept_reason_premiseunit_s_del_agg WHERE error_message IS NULL"
-INSERT_PLNREAS_SOUND_VLD_PUT_SQLSTR = "INSERT INTO plan_concept_reasonunit_s_put_vld (event_int, face_name, vow_label, owner_name, concept_way, rcontext, rconcept_active_requisite) SELECT event_int, face_name, vow_label, owner_name, concept_way, rcontext, rconcept_active_requisite FROM plan_concept_reasonunit_s_put_agg WHERE error_message IS NULL"
-INSERT_PLNREAS_SOUND_VLD_DEL_SQLSTR = "INSERT INTO plan_concept_reasonunit_s_del_vld (event_int, face_name, vow_label, owner_name, concept_way, rcontext_ERASE) SELECT event_int, face_name, vow_label, owner_name, concept_way, rcontext_ERASE FROM plan_concept_reasonunit_s_del_agg WHERE error_message IS NULL"
-INSERT_PLNLABO_SOUND_VLD_PUT_SQLSTR = "INSERT INTO plan_concept_laborlink_s_put_vld (event_int, face_name, vow_label, owner_name, concept_way, labor_title) SELECT event_int, face_name, vow_label, owner_name, concept_way, labor_title FROM plan_concept_laborlink_s_put_agg WHERE error_message IS NULL"
-INSERT_PLNLABO_SOUND_VLD_DEL_SQLSTR = "INSERT INTO plan_concept_laborlink_s_del_vld (event_int, face_name, vow_label, owner_name, concept_way, labor_title_ERASE) SELECT event_int, face_name, vow_label, owner_name, concept_way, labor_title_ERASE FROM plan_concept_laborlink_s_del_agg WHERE error_message IS NULL"
-INSERT_PLNCONC_SOUND_VLD_PUT_SQLSTR = "INSERT INTO plan_conceptunit_s_put_vld (event_int, face_name, vow_label, owner_name, concept_way, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool) SELECT event_int, face_name, vow_label, owner_name, concept_way, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool FROM plan_conceptunit_s_put_agg WHERE error_message IS NULL"
-INSERT_PLNCONC_SOUND_VLD_DEL_SQLSTR = "INSERT INTO plan_conceptunit_s_del_vld (event_int, face_name, vow_label, owner_name, concept_way_ERASE) SELECT event_int, face_name, vow_label, owner_name, concept_way_ERASE FROM plan_conceptunit_s_del_agg WHERE error_message IS NULL"
+INSERT_PLNAWAR_SOUND_VLD_PUT_SQLSTR = "INSERT INTO plan_concept_awardlink_s_put_vld (event_int, face_name, vow_label, owner_name, concept_rope, awardee_title, give_force, take_force) SELECT event_int, face_name, vow_label, owner_name, concept_rope, awardee_title, give_force, take_force FROM plan_concept_awardlink_s_put_agg WHERE error_message IS NULL"
+INSERT_PLNAWAR_SOUND_VLD_DEL_SQLSTR = "INSERT INTO plan_concept_awardlink_s_del_vld (event_int, face_name, vow_label, owner_name, concept_rope, awardee_title_ERASE) SELECT event_int, face_name, vow_label, owner_name, concept_rope, awardee_title_ERASE FROM plan_concept_awardlink_s_del_agg WHERE error_message IS NULL"
+INSERT_PLNFACT_SOUND_VLD_PUT_SQLSTR = "INSERT INTO plan_concept_factunit_s_put_vld (event_int, face_name, vow_label, owner_name, concept_rope, fcontext, fstate, fopen, fnigh) SELECT event_int, face_name, vow_label, owner_name, concept_rope, fcontext, fstate, fopen, fnigh FROM plan_concept_factunit_s_put_agg WHERE error_message IS NULL"
+INSERT_PLNFACT_SOUND_VLD_DEL_SQLSTR = "INSERT INTO plan_concept_factunit_s_del_vld (event_int, face_name, vow_label, owner_name, concept_rope, fcontext_ERASE) SELECT event_int, face_name, vow_label, owner_name, concept_rope, fcontext_ERASE FROM plan_concept_factunit_s_del_agg WHERE error_message IS NULL"
+INSERT_PLNHEAL_SOUND_VLD_PUT_SQLSTR = "INSERT INTO plan_concept_healerlink_s_put_vld (event_int, face_name, vow_label, owner_name, concept_rope, healer_name) SELECT event_int, face_name, vow_label, owner_name, concept_rope, healer_name FROM plan_concept_healerlink_s_put_agg WHERE error_message IS NULL"
+INSERT_PLNHEAL_SOUND_VLD_DEL_SQLSTR = "INSERT INTO plan_concept_healerlink_s_del_vld (event_int, face_name, vow_label, owner_name, concept_rope, healer_name_ERASE) SELECT event_int, face_name, vow_label, owner_name, concept_rope, healer_name_ERASE FROM plan_concept_healerlink_s_del_agg WHERE error_message IS NULL"
+INSERT_PLNPREM_SOUND_VLD_PUT_SQLSTR = "INSERT INTO plan_concept_reason_premiseunit_s_put_vld (event_int, face_name, vow_label, owner_name, concept_rope, rcontext, pstate, pnigh, popen, pdivisor) SELECT event_int, face_name, vow_label, owner_name, concept_rope, rcontext, pstate, pnigh, popen, pdivisor FROM plan_concept_reason_premiseunit_s_put_agg WHERE error_message IS NULL"
+INSERT_PLNPREM_SOUND_VLD_DEL_SQLSTR = "INSERT INTO plan_concept_reason_premiseunit_s_del_vld (event_int, face_name, vow_label, owner_name, concept_rope, rcontext, pstate_ERASE) SELECT event_int, face_name, vow_label, owner_name, concept_rope, rcontext, pstate_ERASE FROM plan_concept_reason_premiseunit_s_del_agg WHERE error_message IS NULL"
+INSERT_PLNREAS_SOUND_VLD_PUT_SQLSTR = "INSERT INTO plan_concept_reasonunit_s_put_vld (event_int, face_name, vow_label, owner_name, concept_rope, rcontext, rconcept_active_requisite) SELECT event_int, face_name, vow_label, owner_name, concept_rope, rcontext, rconcept_active_requisite FROM plan_concept_reasonunit_s_put_agg WHERE error_message IS NULL"
+INSERT_PLNREAS_SOUND_VLD_DEL_SQLSTR = "INSERT INTO plan_concept_reasonunit_s_del_vld (event_int, face_name, vow_label, owner_name, concept_rope, rcontext_ERASE) SELECT event_int, face_name, vow_label, owner_name, concept_rope, rcontext_ERASE FROM plan_concept_reasonunit_s_del_agg WHERE error_message IS NULL"
+INSERT_PLNLABO_SOUND_VLD_PUT_SQLSTR = "INSERT INTO plan_concept_laborlink_s_put_vld (event_int, face_name, vow_label, owner_name, concept_rope, labor_title) SELECT event_int, face_name, vow_label, owner_name, concept_rope, labor_title FROM plan_concept_laborlink_s_put_agg WHERE error_message IS NULL"
+INSERT_PLNLABO_SOUND_VLD_DEL_SQLSTR = "INSERT INTO plan_concept_laborlink_s_del_vld (event_int, face_name, vow_label, owner_name, concept_rope, labor_title_ERASE) SELECT event_int, face_name, vow_label, owner_name, concept_rope, labor_title_ERASE FROM plan_concept_laborlink_s_del_agg WHERE error_message IS NULL"
+INSERT_PLNCONC_SOUND_VLD_PUT_SQLSTR = "INSERT INTO plan_conceptunit_s_put_vld (event_int, face_name, vow_label, owner_name, concept_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool) SELECT event_int, face_name, vow_label, owner_name, concept_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool FROM plan_conceptunit_s_put_agg WHERE error_message IS NULL"
+INSERT_PLNCONC_SOUND_VLD_DEL_SQLSTR = "INSERT INTO plan_conceptunit_s_del_vld (event_int, face_name, vow_label, owner_name, concept_rope_ERASE) SELECT event_int, face_name, vow_label, owner_name, concept_rope_ERASE FROM plan_conceptunit_s_del_agg WHERE error_message IS NULL"
 INSERT_PLNUNIT_SOUND_VLD_PUT_SQLSTR = "INSERT INTO planunit_s_put_vld (event_int, face_name, vow_label, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit) SELECT event_int, face_name, vow_label, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit FROM planunit_s_put_agg WHERE error_message IS NULL"
 INSERT_PLNUNIT_SOUND_VLD_DEL_SQLSTR = "INSERT INTO planunit_s_del_vld (event_int, face_name, vow_label, owner_name_ERASE) SELECT event_int, face_name, vow_label, owner_name_ERASE FROM planunit_s_del_agg WHERE error_message IS NULL"
 
@@ -747,7 +747,7 @@ INSERT_VOWHOUR_SOUND_VLD_SQLSTR = "INSERT INTO vow_timeline_hour_s_vld (event_in
 INSERT_VOWMONT_SOUND_VLD_SQLSTR = "INSERT INTO vow_timeline_month_s_vld (event_int, face_name, vow_label, cumlative_day, month_label) SELECT event_int, face_name, vow_label, cumlative_day, month_label FROM vow_timeline_month_s_agg WHERE error_message IS NULL"
 INSERT_VOWWEEK_SOUND_VLD_SQLSTR = "INSERT INTO vow_timeline_weekday_s_vld (event_int, face_name, vow_label, weekday_order, weekday_label) SELECT event_int, face_name, vow_label, weekday_order, weekday_label FROM vow_timeline_weekday_s_agg WHERE error_message IS NULL"
 INSERT_VOWOFFI_SOUND_VLD_SQLSTR = "INSERT INTO vow_timeoffi_s_vld (event_int, face_name, vow_label, offi_time) SELECT event_int, face_name, vow_label, offi_time FROM vow_timeoffi_s_agg WHERE error_message IS NULL"
-INSERT_VOWUNIT_SOUND_VLD_SQLSTR = "INSERT INTO vowunit_s_vld (event_int, face_name, vow_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, bridge, job_listen_rotations) SELECT event_int, face_name, vow_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, bridge, job_listen_rotations FROM vowunit_s_agg WHERE error_message IS NULL"
+INSERT_VOWUNIT_SOUND_VLD_SQLSTR = "INSERT INTO vowunit_s_vld (event_int, face_name, vow_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations) SELECT event_int, face_name, vow_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations FROM vowunit_s_agg WHERE error_message IS NULL"
 
 
 def get_insert_into_sound_vld_sqlstrs() -> dict[str, str]:
@@ -788,26 +788,26 @@ INSERT_VOWHOUR_VOICE_RAW_SQLSTR = "INSERT INTO vow_timeline_hour_v_raw (event_in
 INSERT_VOWMONT_VOICE_RAW_SQLSTR = "INSERT INTO vow_timeline_month_v_raw (event_int, face_name_otx, vow_label_otx, cumlative_day, month_label_otx) SELECT event_int, face_name, vow_label, cumlative_day, month_label FROM vow_timeline_month_s_vld "
 INSERT_VOWWEEK_VOICE_RAW_SQLSTR = "INSERT INTO vow_timeline_weekday_v_raw (event_int, face_name_otx, vow_label_otx, weekday_order, weekday_label_otx) SELECT event_int, face_name, vow_label, weekday_order, weekday_label FROM vow_timeline_weekday_s_vld "
 INSERT_VOWOFFI_VOICE_RAW_SQLSTR = "INSERT INTO vow_timeoffi_v_raw (event_int, face_name_otx, vow_label_otx, offi_time) SELECT event_int, face_name, vow_label, offi_time FROM vow_timeoffi_s_vld "
-INSERT_VOWUNIT_VOICE_RAW_SQLSTR = "INSERT INTO vowunit_v_raw (event_int, face_name_otx, vow_label_otx, timeline_label_otx, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, bridge, job_listen_rotations) SELECT event_int, face_name, vow_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, bridge, job_listen_rotations FROM vowunit_s_vld "
+INSERT_VOWUNIT_VOICE_RAW_SQLSTR = "INSERT INTO vowunit_v_raw (event_int, face_name_otx, vow_label_otx, timeline_label_otx, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations) SELECT event_int, face_name, vow_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations FROM vowunit_s_vld "
 
 INSERT_PLNMEMB_VOICE_RAW_PUT_SQLSTR = "INSERT INTO plan_acct_membership_v_put_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, acct_name_otx, group_title_otx, credit_vote, debt_vote) SELECT event_int, face_name, vow_label, owner_name, acct_name, group_title, credit_vote, debt_vote FROM plan_acct_membership_s_put_vld "
 INSERT_PLNMEMB_VOICE_RAW_DEL_SQLSTR = "INSERT INTO plan_acct_membership_v_del_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, acct_name_otx, group_title_ERASE_otx) SELECT event_int, face_name, vow_label, owner_name, acct_name, group_title_ERASE FROM plan_acct_membership_s_del_vld "
 INSERT_PLNACCT_VOICE_RAW_PUT_SQLSTR = "INSERT INTO plan_acctunit_v_put_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, acct_name_otx, credit_score, debt_score) SELECT event_int, face_name, vow_label, owner_name, acct_name, credit_score, debt_score FROM plan_acctunit_s_put_vld "
 INSERT_PLNACCT_VOICE_RAW_DEL_SQLSTR = "INSERT INTO plan_acctunit_v_del_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, acct_name_ERASE_otx) SELECT event_int, face_name, vow_label, owner_name, acct_name_ERASE FROM plan_acctunit_s_del_vld "
-INSERT_PLNAWAR_VOICE_RAW_PUT_SQLSTR = "INSERT INTO plan_concept_awardlink_v_put_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_way_otx, awardee_title_otx, give_force, take_force) SELECT event_int, face_name, vow_label, owner_name, concept_way, awardee_title, give_force, take_force FROM plan_concept_awardlink_s_put_vld "
-INSERT_PLNAWAR_VOICE_RAW_DEL_SQLSTR = "INSERT INTO plan_concept_awardlink_v_del_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_way_otx, awardee_title_ERASE_otx) SELECT event_int, face_name, vow_label, owner_name, concept_way, awardee_title_ERASE FROM plan_concept_awardlink_s_del_vld "
-INSERT_PLNFACT_VOICE_RAW_PUT_SQLSTR = "INSERT INTO plan_concept_factunit_v_put_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_way_otx, fcontext_otx, fstate_otx, fopen, fnigh) SELECT event_int, face_name, vow_label, owner_name, concept_way, fcontext, fstate, fopen, fnigh FROM plan_concept_factunit_s_put_vld "
-INSERT_PLNFACT_VOICE_RAW_DEL_SQLSTR = "INSERT INTO plan_concept_factunit_v_del_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_way_otx, fcontext_ERASE_otx) SELECT event_int, face_name, vow_label, owner_name, concept_way, fcontext_ERASE FROM plan_concept_factunit_s_del_vld "
-INSERT_PLNHEAL_VOICE_RAW_PUT_SQLSTR = "INSERT INTO plan_concept_healerlink_v_put_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_way_otx, healer_name_otx) SELECT event_int, face_name, vow_label, owner_name, concept_way, healer_name FROM plan_concept_healerlink_s_put_vld "
-INSERT_PLNHEAL_VOICE_RAW_DEL_SQLSTR = "INSERT INTO plan_concept_healerlink_v_del_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_way_otx, healer_name_ERASE_otx) SELECT event_int, face_name, vow_label, owner_name, concept_way, healer_name_ERASE FROM plan_concept_healerlink_s_del_vld "
-INSERT_PLNPREM_VOICE_RAW_PUT_SQLSTR = "INSERT INTO plan_concept_reason_premiseunit_v_put_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_way_otx, rcontext_otx, pstate_otx, pnigh, popen, pdivisor) SELECT event_int, face_name, vow_label, owner_name, concept_way, rcontext, pstate, pnigh, popen, pdivisor FROM plan_concept_reason_premiseunit_s_put_vld "
-INSERT_PLNPREM_VOICE_RAW_DEL_SQLSTR = "INSERT INTO plan_concept_reason_premiseunit_v_del_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_way_otx, rcontext_otx, pstate_ERASE_otx) SELECT event_int, face_name, vow_label, owner_name, concept_way, rcontext, pstate_ERASE FROM plan_concept_reason_premiseunit_s_del_vld "
-INSERT_PLNREAS_VOICE_RAW_PUT_SQLSTR = "INSERT INTO plan_concept_reasonunit_v_put_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_way_otx, rcontext_otx, rconcept_active_requisite) SELECT event_int, face_name, vow_label, owner_name, concept_way, rcontext, rconcept_active_requisite FROM plan_concept_reasonunit_s_put_vld "
-INSERT_PLNREAS_VOICE_RAW_DEL_SQLSTR = "INSERT INTO plan_concept_reasonunit_v_del_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_way_otx, rcontext_ERASE_otx) SELECT event_int, face_name, vow_label, owner_name, concept_way, rcontext_ERASE FROM plan_concept_reasonunit_s_del_vld "
-INSERT_PLNLABO_VOICE_RAW_PUT_SQLSTR = "INSERT INTO plan_concept_laborlink_v_put_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_way_otx, labor_title_otx) SELECT event_int, face_name, vow_label, owner_name, concept_way, labor_title FROM plan_concept_laborlink_s_put_vld "
-INSERT_PLNLABO_VOICE_RAW_DEL_SQLSTR = "INSERT INTO plan_concept_laborlink_v_del_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_way_otx, labor_title_ERASE_otx) SELECT event_int, face_name, vow_label, owner_name, concept_way, labor_title_ERASE FROM plan_concept_laborlink_s_del_vld "
-INSERT_PLNCONC_VOICE_RAW_PUT_SQLSTR = "INSERT INTO plan_conceptunit_v_put_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_way_otx, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool) SELECT event_int, face_name, vow_label, owner_name, concept_way, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool FROM plan_conceptunit_s_put_vld "
-INSERT_PLNCONC_VOICE_RAW_DEL_SQLSTR = "INSERT INTO plan_conceptunit_v_del_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_way_ERASE_otx) SELECT event_int, face_name, vow_label, owner_name, concept_way_ERASE FROM plan_conceptunit_s_del_vld "
+INSERT_PLNAWAR_VOICE_RAW_PUT_SQLSTR = "INSERT INTO plan_concept_awardlink_v_put_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_rope_otx, awardee_title_otx, give_force, take_force) SELECT event_int, face_name, vow_label, owner_name, concept_rope, awardee_title, give_force, take_force FROM plan_concept_awardlink_s_put_vld "
+INSERT_PLNAWAR_VOICE_RAW_DEL_SQLSTR = "INSERT INTO plan_concept_awardlink_v_del_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_rope_otx, awardee_title_ERASE_otx) SELECT event_int, face_name, vow_label, owner_name, concept_rope, awardee_title_ERASE FROM plan_concept_awardlink_s_del_vld "
+INSERT_PLNFACT_VOICE_RAW_PUT_SQLSTR = "INSERT INTO plan_concept_factunit_v_put_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_rope_otx, fcontext_otx, fstate_otx, fopen, fnigh) SELECT event_int, face_name, vow_label, owner_name, concept_rope, fcontext, fstate, fopen, fnigh FROM plan_concept_factunit_s_put_vld "
+INSERT_PLNFACT_VOICE_RAW_DEL_SQLSTR = "INSERT INTO plan_concept_factunit_v_del_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_rope_otx, fcontext_ERASE_otx) SELECT event_int, face_name, vow_label, owner_name, concept_rope, fcontext_ERASE FROM plan_concept_factunit_s_del_vld "
+INSERT_PLNHEAL_VOICE_RAW_PUT_SQLSTR = "INSERT INTO plan_concept_healerlink_v_put_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_rope_otx, healer_name_otx) SELECT event_int, face_name, vow_label, owner_name, concept_rope, healer_name FROM plan_concept_healerlink_s_put_vld "
+INSERT_PLNHEAL_VOICE_RAW_DEL_SQLSTR = "INSERT INTO plan_concept_healerlink_v_del_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_rope_otx, healer_name_ERASE_otx) SELECT event_int, face_name, vow_label, owner_name, concept_rope, healer_name_ERASE FROM plan_concept_healerlink_s_del_vld "
+INSERT_PLNPREM_VOICE_RAW_PUT_SQLSTR = "INSERT INTO plan_concept_reason_premiseunit_v_put_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_rope_otx, rcontext_otx, pstate_otx, pnigh, popen, pdivisor) SELECT event_int, face_name, vow_label, owner_name, concept_rope, rcontext, pstate, pnigh, popen, pdivisor FROM plan_concept_reason_premiseunit_s_put_vld "
+INSERT_PLNPREM_VOICE_RAW_DEL_SQLSTR = "INSERT INTO plan_concept_reason_premiseunit_v_del_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_rope_otx, rcontext_otx, pstate_ERASE_otx) SELECT event_int, face_name, vow_label, owner_name, concept_rope, rcontext, pstate_ERASE FROM plan_concept_reason_premiseunit_s_del_vld "
+INSERT_PLNREAS_VOICE_RAW_PUT_SQLSTR = "INSERT INTO plan_concept_reasonunit_v_put_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_rope_otx, rcontext_otx, rconcept_active_requisite) SELECT event_int, face_name, vow_label, owner_name, concept_rope, rcontext, rconcept_active_requisite FROM plan_concept_reasonunit_s_put_vld "
+INSERT_PLNREAS_VOICE_RAW_DEL_SQLSTR = "INSERT INTO plan_concept_reasonunit_v_del_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_rope_otx, rcontext_ERASE_otx) SELECT event_int, face_name, vow_label, owner_name, concept_rope, rcontext_ERASE FROM plan_concept_reasonunit_s_del_vld "
+INSERT_PLNLABO_VOICE_RAW_PUT_SQLSTR = "INSERT INTO plan_concept_laborlink_v_put_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_rope_otx, labor_title_otx) SELECT event_int, face_name, vow_label, owner_name, concept_rope, labor_title FROM plan_concept_laborlink_s_put_vld "
+INSERT_PLNLABO_VOICE_RAW_DEL_SQLSTR = "INSERT INTO plan_concept_laborlink_v_del_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_rope_otx, labor_title_ERASE_otx) SELECT event_int, face_name, vow_label, owner_name, concept_rope, labor_title_ERASE FROM plan_concept_laborlink_s_del_vld "
+INSERT_PLNCONC_VOICE_RAW_PUT_SQLSTR = "INSERT INTO plan_conceptunit_v_put_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_rope_otx, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool) SELECT event_int, face_name, vow_label, owner_name, concept_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool FROM plan_conceptunit_s_put_vld "
+INSERT_PLNCONC_VOICE_RAW_DEL_SQLSTR = "INSERT INTO plan_conceptunit_v_del_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, concept_rope_ERASE_otx) SELECT event_int, face_name, vow_label, owner_name, concept_rope_ERASE FROM plan_conceptunit_s_del_vld "
 INSERT_PLNUNIT_VOICE_RAW_PUT_SQLSTR = "INSERT INTO planunit_v_put_raw (event_int, face_name_otx, vow_label_otx, owner_name_otx, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit) SELECT event_int, face_name, vow_label, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit FROM planunit_s_put_vld "
 INSERT_PLNUNIT_VOICE_RAW_DEL_SQLSTR = "INSERT INTO planunit_v_del_raw (event_int, face_name_otx, vow_label_otx, owner_name_ERASE_otx) SELECT event_int, face_name, vow_label, owner_name_ERASE FROM planunit_s_del_vld "
 
@@ -929,10 +929,10 @@ FROM vow_timeoffi_v_raw
 GROUP BY vow_label_inx, offi_time
 """
 VOWUNIT_VOICE_AGG_INSERT_SQLSTR = """
-INSERT INTO vowunit_v_agg (vow_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, bridge, job_listen_rotations)
-SELECT vow_label_inx, timeline_label_inx, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, bridge, job_listen_rotations
+INSERT INTO vowunit_v_agg (vow_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations)
+SELECT vow_label_inx, timeline_label_inx, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations
 FROM vowunit_v_raw
-GROUP BY vow_label_inx, timeline_label_inx, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, bridge, job_listen_rotations
+GROUP BY vow_label_inx, timeline_label_inx, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations
 """
 
 INSERT_PLNMEMB_VOICE_AGG_PUT_SQLSTR = """
@@ -960,88 +960,88 @@ FROM plan_acctunit_v_del_raw
 GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, acct_name_ERASE_inx
 """
 INSERT_PLNAWAR_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO plan_concept_awardlink_v_put_agg (event_int, face_name, vow_label, owner_name, concept_way, awardee_title, give_force, take_force)
-SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, awardee_title_inx, give_force, take_force
+INSERT INTO plan_concept_awardlink_v_put_agg (event_int, face_name, vow_label, owner_name, concept_rope, awardee_title, give_force, take_force)
+SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, awardee_title_inx, give_force, take_force
 FROM plan_concept_awardlink_v_put_raw
-GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, awardee_title_inx, give_force, take_force
+GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, awardee_title_inx, give_force, take_force
 """
 INSERT_PLNAWAR_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO plan_concept_awardlink_v_del_agg (event_int, face_name, vow_label, owner_name, concept_way, awardee_title_ERASE)
-SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, awardee_title_ERASE_inx
+INSERT INTO plan_concept_awardlink_v_del_agg (event_int, face_name, vow_label, owner_name, concept_rope, awardee_title_ERASE)
+SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, awardee_title_ERASE_inx
 FROM plan_concept_awardlink_v_del_raw
-GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, awardee_title_ERASE_inx
+GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, awardee_title_ERASE_inx
 """
 INSERT_PLNFACT_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO plan_concept_factunit_v_put_agg (event_int, face_name, vow_label, owner_name, concept_way, fcontext, fstate, fopen, fnigh)
-SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, fcontext_inx, fstate_inx, fopen, fnigh
+INSERT INTO plan_concept_factunit_v_put_agg (event_int, face_name, vow_label, owner_name, concept_rope, fcontext, fstate, fopen, fnigh)
+SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, fcontext_inx, fstate_inx, fopen, fnigh
 FROM plan_concept_factunit_v_put_raw
-GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, fcontext_inx, fstate_inx, fopen, fnigh
+GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, fcontext_inx, fstate_inx, fopen, fnigh
 """
 INSERT_PLNFACT_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO plan_concept_factunit_v_del_agg (event_int, face_name, vow_label, owner_name, concept_way, fcontext_ERASE)
-SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, fcontext_ERASE_inx
+INSERT INTO plan_concept_factunit_v_del_agg (event_int, face_name, vow_label, owner_name, concept_rope, fcontext_ERASE)
+SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, fcontext_ERASE_inx
 FROM plan_concept_factunit_v_del_raw
-GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, fcontext_ERASE_inx
+GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, fcontext_ERASE_inx
 """
 INSERT_PLNHEAL_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO plan_concept_healerlink_v_put_agg (event_int, face_name, vow_label, owner_name, concept_way, healer_name)
-SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, healer_name_inx
+INSERT INTO plan_concept_healerlink_v_put_agg (event_int, face_name, vow_label, owner_name, concept_rope, healer_name)
+SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, healer_name_inx
 FROM plan_concept_healerlink_v_put_raw
-GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, healer_name_inx
+GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, healer_name_inx
 """
 INSERT_PLNHEAL_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO plan_concept_healerlink_v_del_agg (event_int, face_name, vow_label, owner_name, concept_way, healer_name_ERASE)
-SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, healer_name_ERASE_inx
+INSERT INTO plan_concept_healerlink_v_del_agg (event_int, face_name, vow_label, owner_name, concept_rope, healer_name_ERASE)
+SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, healer_name_ERASE_inx
 FROM plan_concept_healerlink_v_del_raw
-GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, healer_name_ERASE_inx
+GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, healer_name_ERASE_inx
 """
 INSERT_PLNPREM_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO plan_concept_reason_premiseunit_v_put_agg (event_int, face_name, vow_label, owner_name, concept_way, rcontext, pstate, pnigh, popen, pdivisor)
-SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, pstate_inx, pnigh, popen, pdivisor
+INSERT INTO plan_concept_reason_premiseunit_v_put_agg (event_int, face_name, vow_label, owner_name, concept_rope, rcontext, pstate, pnigh, popen, pdivisor)
+SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, rcontext_inx, pstate_inx, pnigh, popen, pdivisor
 FROM plan_concept_reason_premiseunit_v_put_raw
-GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, pstate_inx, pnigh, popen, pdivisor
+GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, rcontext_inx, pstate_inx, pnigh, popen, pdivisor
 """
 INSERT_PLNPREM_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO plan_concept_reason_premiseunit_v_del_agg (event_int, face_name, vow_label, owner_name, concept_way, rcontext, pstate_ERASE)
-SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, pstate_ERASE_inx
+INSERT INTO plan_concept_reason_premiseunit_v_del_agg (event_int, face_name, vow_label, owner_name, concept_rope, rcontext, pstate_ERASE)
+SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, rcontext_inx, pstate_ERASE_inx
 FROM plan_concept_reason_premiseunit_v_del_raw
-GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, pstate_ERASE_inx
+GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, rcontext_inx, pstate_ERASE_inx
 """
 INSERT_PLNREAS_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO plan_concept_reasonunit_v_put_agg (event_int, face_name, vow_label, owner_name, concept_way, rcontext, rconcept_active_requisite)
-SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, rconcept_active_requisite
+INSERT INTO plan_concept_reasonunit_v_put_agg (event_int, face_name, vow_label, owner_name, concept_rope, rcontext, rconcept_active_requisite)
+SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, rcontext_inx, rconcept_active_requisite
 FROM plan_concept_reasonunit_v_put_raw
-GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, rconcept_active_requisite
+GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, rcontext_inx, rconcept_active_requisite
 """
 INSERT_PLNREAS_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO plan_concept_reasonunit_v_del_agg (event_int, face_name, vow_label, owner_name, concept_way, rcontext_ERASE)
-SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, rcontext_ERASE_inx
+INSERT INTO plan_concept_reasonunit_v_del_agg (event_int, face_name, vow_label, owner_name, concept_rope, rcontext_ERASE)
+SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, rcontext_ERASE_inx
 FROM plan_concept_reasonunit_v_del_raw
-GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, rcontext_ERASE_inx
+GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, rcontext_ERASE_inx
 """
 INSERT_PLNLABO_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO plan_concept_laborlink_v_put_agg (event_int, face_name, vow_label, owner_name, concept_way, labor_title)
-SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, labor_title_inx
+INSERT INTO plan_concept_laborlink_v_put_agg (event_int, face_name, vow_label, owner_name, concept_rope, labor_title)
+SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, labor_title_inx
 FROM plan_concept_laborlink_v_put_raw
-GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, labor_title_inx
+GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, labor_title_inx
 """
 INSERT_PLNLABO_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO plan_concept_laborlink_v_del_agg (event_int, face_name, vow_label, owner_name, concept_way, labor_title_ERASE)
-SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, labor_title_ERASE_inx
+INSERT INTO plan_concept_laborlink_v_del_agg (event_int, face_name, vow_label, owner_name, concept_rope, labor_title_ERASE)
+SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, labor_title_ERASE_inx
 FROM plan_concept_laborlink_v_del_raw
-GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, labor_title_ERASE_inx
+GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, labor_title_ERASE_inx
 """
 INSERT_PLNCONC_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO plan_conceptunit_v_put_agg (event_int, face_name, vow_label, owner_name, concept_way, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool)
-SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool
+INSERT INTO plan_conceptunit_v_put_agg (event_int, face_name, vow_label, owner_name, concept_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool)
+SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool
 FROM plan_conceptunit_v_put_raw
-GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_inx, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool
+GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_inx, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool
 """
 INSERT_PLNCONC_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO plan_conceptunit_v_del_agg (event_int, face_name, vow_label, owner_name, concept_way_ERASE)
-SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_ERASE_inx
+INSERT INTO plan_conceptunit_v_del_agg (event_int, face_name, vow_label, owner_name, concept_rope_ERASE)
+SELECT event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_ERASE_inx
 FROM plan_conceptunit_v_del_raw
-GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_way_ERASE_inx
+GROUP BY event_int, face_name_inx, vow_label_inx, owner_name_inx, concept_rope_ERASE_inx
 """
 INSERT_PLNUNIT_VOICE_AGG_PUT_SQLSTR = """
 INSERT INTO planunit_v_put_agg (event_int, face_name, vow_label, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit)
@@ -1097,7 +1097,7 @@ VOWWEEK_FU2_SELECT_SQLSTR = "SELECT vow_label, weekday_order, weekday_label FROM
 VOWOFFI_FU2_SELECT_SQLSTR = (
     "SELECT vow_label, offi_time FROM vow_timeoffi_v_agg WHERE vow_label = "
 )
-VOWUNIT_FU2_SELECT_SQLSTR = "SELECT vow_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, bridge, job_listen_rotations FROM vowunit_v_agg WHERE vow_label = "
+VOWUNIT_FU2_SELECT_SQLSTR = "SELECT vow_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations FROM vowunit_v_agg WHERE vow_label = "
 
 
 def get_vow_voice_select1_sqlstrs(vow_label: str) -> dict[str, str]:
@@ -1280,14 +1280,14 @@ ORDER BY vow_label, owner_name, event_int, deal_time
 
 CREATE_JOB_PLNMEMB_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_acct_membership_job (vow_label TEXT, owner_name TEXT, acct_name TEXT, group_title TEXT, credit_vote REAL, debt_vote REAL, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL, _fund_agenda_ratio_give REAL, _fund_agenda_ratio_take REAL)"""
 CREATE_JOB_PLNACCT_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_acctunit_job (vow_label TEXT, owner_name TEXT, acct_name TEXT, credit_score REAL, debt_score REAL, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL, _fund_agenda_ratio_give REAL, _fund_agenda_ratio_take REAL, _inallocable_debt_score REAL, _irrational_debt_score REAL)"""
-CREATE_JOB_PLNGROU_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_groupunit_job (vow_label TEXT, owner_name TEXT, group_title TEXT, fund_iota REAL, bridge TEXT, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL)"""
-CREATE_JOB_PLNAWAR_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_concept_awardlink_job (vow_label TEXT, owner_name TEXT, concept_way TEXT, awardee_title TEXT, give_force REAL, take_force REAL, _fund_give REAL, _fund_take REAL)"""
-CREATE_JOB_PLNFACT_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_concept_factunit_job (vow_label TEXT, owner_name TEXT, concept_way TEXT, fcontext TEXT, fstate TEXT, fopen REAL, fnigh REAL)"""
-CREATE_JOB_PLNHEAL_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_concept_healerlink_job (vow_label TEXT, owner_name TEXT, concept_way TEXT, healer_name TEXT)"""
-CREATE_JOB_PLNPREM_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_concept_reason_premiseunit_job (vow_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate TEXT, pnigh REAL, popen REAL, pdivisor INTEGER, _chore INTEGER, _status INTEGER)"""
-CREATE_JOB_PLNREAS_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_concept_reasonunit_job (vow_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, rconcept_active_requisite INTEGER, _chore INTEGER, _status INTEGER, _rconcept_active_value INTEGER)"""
-CREATE_JOB_PLNLABO_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_concept_laborlink_job (vow_label TEXT, owner_name TEXT, concept_way TEXT, labor_title TEXT, _owner_name_labor INTEGER)"""
-CREATE_JOB_PLNCONC_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_conceptunit_job (vow_label TEXT, owner_name TEXT, concept_way TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, task INTEGER, problem_bool INTEGER, fund_iota REAL, _active INTEGER, _chore INTEGER, _fund_onset REAL, _fund_cease REAL, _fund_ratio REAL, _gogo_calc REAL, _stop_calc REAL, _level INTEGER, _range_evaluated INTEGER, _descendant_task_count INTEGER, _healerlink_ratio REAL, _all_acct_cred INTEGER, _all_acct_debt INTEGER)"""
+CREATE_JOB_PLNGROU_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_groupunit_job (vow_label TEXT, owner_name TEXT, group_title TEXT, fund_iota REAL, knot TEXT, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL)"""
+CREATE_JOB_PLNAWAR_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_concept_awardlink_job (vow_label TEXT, owner_name TEXT, concept_rope TEXT, awardee_title TEXT, give_force REAL, take_force REAL, _fund_give REAL, _fund_take REAL)"""
+CREATE_JOB_PLNFACT_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_concept_factunit_job (vow_label TEXT, owner_name TEXT, concept_rope TEXT, fcontext TEXT, fstate TEXT, fopen REAL, fnigh REAL)"""
+CREATE_JOB_PLNHEAL_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_concept_healerlink_job (vow_label TEXT, owner_name TEXT, concept_rope TEXT, healer_name TEXT)"""
+CREATE_JOB_PLNPREM_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_concept_reason_premiseunit_job (vow_label TEXT, owner_name TEXT, concept_rope TEXT, rcontext TEXT, pstate TEXT, pnigh REAL, popen REAL, pdivisor INTEGER, _chore INTEGER, _status INTEGER)"""
+CREATE_JOB_PLNREAS_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_concept_reasonunit_job (vow_label TEXT, owner_name TEXT, concept_rope TEXT, rcontext TEXT, rconcept_active_requisite INTEGER, _chore INTEGER, _status INTEGER, _rconcept_active_value INTEGER)"""
+CREATE_JOB_PLNLABO_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_concept_laborlink_job (vow_label TEXT, owner_name TEXT, concept_rope TEXT, labor_title TEXT, _owner_name_labor INTEGER)"""
+CREATE_JOB_PLNCONC_SQLSTR = """CREATE TABLE IF NOT EXISTS plan_conceptunit_job (vow_label TEXT, owner_name TEXT, concept_rope TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, task INTEGER, problem_bool INTEGER, fund_iota REAL, _active INTEGER, _chore INTEGER, _fund_onset REAL, _fund_cease REAL, _fund_ratio REAL, _gogo_calc REAL, _stop_calc REAL, _level INTEGER, _range_evaluated INTEGER, _descendant_task_count INTEGER, _healerlink_ratio REAL, _all_acct_cred INTEGER, _all_acct_debt INTEGER)"""
 CREATE_JOB_PLNUNIT_SQLSTR = """CREATE TABLE IF NOT EXISTS planunit_job (vow_label TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, _rational INTEGER, _keeps_justified INTEGER, _offtrack_fund REAL, _sum_healerlink_share REAL, _keeps_buildable INTEGER, _tree_traverse_count INTEGER)"""
 
 

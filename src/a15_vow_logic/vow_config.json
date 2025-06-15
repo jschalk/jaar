@@ -110,7 +110,7 @@
             }
         },
         "jvalues": {
-            "bridge": {
+            "knot": {
                 "class_type": "str"
             },
             "c400_number": {

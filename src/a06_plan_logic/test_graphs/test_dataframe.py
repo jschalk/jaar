@@ -71,7 +71,7 @@ def test_get_plan_agenda_dataframe_ReturnsCorrectDataFrame():
     # ESTABLISH
     yao_plan = planunit_v001_with_large_agenda()
     wk_str = "wkdays"
-    wk_way = yao_plan.make_l1_way(wk_str)
+    wk_rope = yao_plan.make_l1_rope(wk_str)
     assert len(yao_plan.get_agenda_dict()) == 63
 
     # WHEN
@@ -83,7 +83,7 @@ def test_get_plan_agenda_dataframe_ReturnsCorrectDataFrame():
         "owner_name",
         "fund_ratio",
         "concept_label",
-        "parent_way",
+        "parent_rope",
         "begin",
         "close",
         "addin",
@@ -111,7 +111,7 @@ def test_get_plan_agenda_dataframe_ReturnsCorrectEmptyDataFrame():
         "owner_name",
         "fund_ratio",
         "concept_label",
-        "parent_way",
+        "parent_rope",
         "begin",
         "close",
         "addin",

@@ -1,6 +1,6 @@
 from src.a06_plan_logic._test_util.a06_str import (
     awardee_title_str,
-    concept_way_str,
+    concept_rope_str,
     give_force_str,
     plan_concept_awardlink_str,
     take_force_str,
@@ -20,13 +20,13 @@ def test_create_legible_list_ReturnsObj_concept_awardlink_INSERT():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     dimen = plan_concept_awardlink_str()
-    casa_way = sue_plan.make_l1_way("casa")
-    way_value = sue_plan.make_way(casa_way, "clean fridge")
-    awardee_title_value = f"{sue_plan.bridge}Swimmers"
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rope_value = sue_plan.make_rope(casa_rope, "clean fridge")
+    awardee_title_value = f"{sue_plan.knot}Swimmers"
     give_force_value = 81
     take_force_value = 43
     swim_planatom = planatom_shop(dimen, INSERT_str())
-    swim_planatom.set_arg(concept_way_str(), way_value)
+    swim_planatom.set_arg(concept_rope_str(), rope_value)
     swim_planatom.set_arg(awardee_title_str(), awardee_title_value)
     swim_planatom.set_arg(give_force_str(), give_force_value)
     swim_planatom.set_arg(take_force_str(), take_force_value)
@@ -38,7 +38,7 @@ def test_create_legible_list_ReturnsObj_concept_awardlink_INSERT():
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"Awardlink created for group {awardee_title_value} for concept '{way_value}' with give_force={give_force_value} and take_force={take_force_value}."
+    x_str = f"Awardlink created for group {awardee_title_value} for concept '{rope_value}' with give_force={give_force_value} and take_force={take_force_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -48,13 +48,13 @@ def test_create_legible_list_ReturnsObj_concept_awardlink_UPDATE_give_force_take
     sue_plan = planunit_shop("Sue")
 
     dimen = plan_concept_awardlink_str()
-    awardee_title_value = f"{sue_plan.bridge}Swimmers"
-    casa_way = sue_plan.make_l1_way("casa")
-    way_value = sue_plan.make_way(casa_way, "clean fridge")
+    awardee_title_value = f"{sue_plan.knot}Swimmers"
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rope_value = sue_plan.make_rope(casa_rope, "clean fridge")
     give_force_value = 81
     take_force_value = 43
     swim_planatom = planatom_shop(dimen, UPDATE_str())
-    swim_planatom.set_arg(concept_way_str(), way_value)
+    swim_planatom.set_arg(concept_rope_str(), rope_value)
     swim_planatom.set_arg(awardee_title_str(), awardee_title_value)
     swim_planatom.set_arg(give_force_str(), give_force_value)
     swim_planatom.set_arg(take_force_str(), take_force_value)
@@ -66,7 +66,7 @@ def test_create_legible_list_ReturnsObj_concept_awardlink_UPDATE_give_force_take
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"Awardlink has been set for group {awardee_title_value} for concept '{way_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
+    x_str = f"Awardlink has been set for group {awardee_title_value} for concept '{rope_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -75,12 +75,12 @@ def test_create_legible_list_ReturnsObj_concept_awardlink_UPDATE_give_force():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     dimen = plan_concept_awardlink_str()
-    awardee_title_value = f"{sue_plan.bridge}Swimmers"
-    casa_way = sue_plan.make_l1_way("casa")
-    way_value = sue_plan.make_way(casa_way, "clean fridge")
+    awardee_title_value = f"{sue_plan.knot}Swimmers"
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rope_value = sue_plan.make_rope(casa_rope, "clean fridge")
     give_force_value = 81
     swim_planatom = planatom_shop(dimen, UPDATE_str())
-    swim_planatom.set_arg(concept_way_str(), way_value)
+    swim_planatom.set_arg(concept_rope_str(), rope_value)
     swim_planatom.set_arg(awardee_title_str(), awardee_title_value)
     swim_planatom.set_arg(give_force_str(), give_force_value)
     # print(f"{swim_planatom=}")
@@ -91,7 +91,7 @@ def test_create_legible_list_ReturnsObj_concept_awardlink_UPDATE_give_force():
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"Awardlink has been set for group {awardee_title_value} for concept '{way_value}'. Now give_force={give_force_value}."
+    x_str = f"Awardlink has been set for group {awardee_title_value} for concept '{rope_value}'. Now give_force={give_force_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -100,13 +100,13 @@ def test_create_legible_list_ReturnsObj_concept_awardlink_UPDATE_take_force():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     dimen = plan_concept_awardlink_str()
-    awardee_title_value = f"{sue_plan.bridge}Swimmers"
-    casa_way = sue_plan.make_l1_way("casa")
-    way_value = sue_plan.make_way(casa_way, "clean fridge")
+    awardee_title_value = f"{sue_plan.knot}Swimmers"
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rope_value = sue_plan.make_rope(casa_rope, "clean fridge")
 
     take_force_value = 81
     swim_planatom = planatom_shop(dimen, UPDATE_str())
-    swim_planatom.set_arg(concept_way_str(), way_value)
+    swim_planatom.set_arg(concept_rope_str(), rope_value)
     swim_planatom.set_arg(awardee_title_str(), awardee_title_value)
     swim_planatom.set_arg(take_force_str(), take_force_value)
     # print(f"{swim_planatom=}")
@@ -117,7 +117,7 @@ def test_create_legible_list_ReturnsObj_concept_awardlink_UPDATE_take_force():
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"Awardlink has been set for group {awardee_title_value} for concept '{way_value}'. Now take_force={take_force_value}."
+    x_str = f"Awardlink has been set for group {awardee_title_value} for concept '{rope_value}'. Now take_force={take_force_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -126,11 +126,11 @@ def test_create_legible_list_ReturnsObj_concept_awardlink_DELETE():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     dimen = plan_concept_awardlink_str()
-    casa_way = sue_plan.make_l1_way("casa")
-    way_value = sue_plan.make_way(casa_way, "clean fridge")
-    awardee_title_value = f"{sue_plan.bridge}Swimmers"
+    casa_rope = sue_plan.make_l1_rope("casa")
+    rope_value = sue_plan.make_rope(casa_rope, "clean fridge")
+    awardee_title_value = f"{sue_plan.knot}Swimmers"
     swim_planatom = planatom_shop(dimen, DELETE_str())
-    swim_planatom.set_arg(concept_way_str(), way_value)
+    swim_planatom.set_arg(concept_rope_str(), rope_value)
     swim_planatom.set_arg(awardee_title_str(), awardee_title_value)
     # print(f"{swim_planatom=}")
     x_plandelta = plandelta_shop()
@@ -140,6 +140,6 @@ def test_create_legible_list_ReturnsObj_concept_awardlink_DELETE():
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"Awardlink for group {awardee_title_value}, concept '{way_value}' has been deleted."
+    x_str = f"Awardlink for group {awardee_title_value}, concept '{rope_value}' has been deleted."
     print(f"{x_str=}")
     assert legible_list[0] == x_str

@@ -9,7 +9,7 @@ from src.a00_data_toolbox.plotly_toolbox import (
     add_simp_rect,
     conditional_fig_show,
 )
-from src.a01_term_logic.way import WayTerm, get_parent_way, is_sub_way
+from src.a01_term_logic.rope import RopeTerm, get_parent_rope, is_sub_rope
 from src.a05_concept_logic.concept import ConceptUnit
 from src.a06_plan_logic.plan import PlanUnit
 from src.a06_plan_logic.report import (
@@ -24,9 +24,9 @@ def _get_dot_diameter(x_ratio: float):
 
 def _get_parent_y(
     x_concept: ConceptUnit, conceptunit_y_coordinate_dict: dict
-) -> WayTerm:
-    parent_way = get_parent_way(x_concept.get_concept_way())
-    return conceptunit_y_coordinate_dict.get(parent_way)
+) -> RopeTerm:
+    parent_rope = get_parent_rope(x_concept.get_concept_rope())
+    return conceptunit_y_coordinate_dict.get(parent_rope)
 
 
 def _get_color_for_conceptunit_trace(x_conceptunit: ConceptUnit, mode: str) -> str:
@@ -93,11 +93,11 @@ def _create_conceptunit_traces(
 ):
     concepts = [x_plan.conceptroot]
     y_conceptunit_y_coordinate_dict = {None: 0}
-    prev_way = x_plan.conceptroot.get_concept_way()
+    prev_rope = x_plan.conceptroot.get_concept_rope()
     source_y = 0
     while concepts != []:
         x_concept = concepts.pop(-1)
-        if is_sub_way(x_concept.get_concept_way(), prev_way) is False:
+        if is_sub_rope(x_concept.get_concept_rope(), prev_rope) is False:
             source_y -= 1
         _add_individual_trace(
             trace_list=trace_list,
@@ -108,8 +108,8 @@ def _create_conceptunit_traces(
             mode=mode,
         )
         concepts.extend(iter(x_concept._kids.values()))
-        y_conceptunit_y_coordinate_dict[x_concept.get_concept_way()] = source_y
-        prev_way = x_concept.get_concept_way()
+        y_conceptunit_y_coordinate_dict[x_concept.get_concept_rope()] = source_y
+        prev_rope = x_concept.get_concept_rope()
 
 
 def _update_layout_fig(x_fig: plotly_Figure, mode: str, x_plan: PlanUnit):
@@ -202,7 +202,7 @@ def get_plan_agenda_plotly_fig(x_plan: PlanUnit) -> plotly_Figure:
         "owner_name",
         "fund_ratio",
         "concept_label",
-        "parent_way",
+        "parent_rope",
     ]
     df = get_plan_agenda_dataframe(x_plan)
     header_dict = dict(
@@ -215,7 +215,7 @@ def get_plan_agenda_plotly_fig(x_plan: PlanUnit) -> plotly_Figure:
                 df.owner_name,
                 df.fund_ratio,
                 df.concept_label,
-                df.parent_way,
+                df.parent_rope,
             ],
             fill_color="lavender",
             align="left",

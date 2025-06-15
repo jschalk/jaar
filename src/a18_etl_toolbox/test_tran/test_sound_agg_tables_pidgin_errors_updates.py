@@ -3,21 +3,21 @@ from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_s
 from src.a06_plan_logic._test_util.a06_str import acct_name_str, plan_acctunit_str
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic._test_util.a16_str import (
-    inx_bridge_str,
-    otx_bridge_str,
+    inx_knot_str,
+    otx_knot_str,
     unknown_str_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_PIDCORE_SOUND_VLD_SQLSTR,
     CREATE_PLNACCT_SOUND_PUT_AGG_STR,
-    create_bridge_exists_in_label_error_update_sqlstr,
-    create_bridge_exists_in_name_error_update_sqlstr,
+    create_knot_exists_in_label_error_update_sqlstr,
+    create_knot_exists_in_name_error_update_sqlstr,
     create_prime_tablename,
 )
-from src.a18_etl_toolbox.transformers import set_vow_plan_sound_agg_bridge_errors
+from src.a18_etl_toolbox.transformers import set_vow_plan_sound_agg_knot_errors
 
 
-def test_create_bridge_exists_in_name_error_update_sqlstr_ReturnsObj_PopulatesTable_Scenario0():
+def test_create_knot_exists_in_name_error_update_sqlstr_ReturnsObj_PopulatesTable_Scenario0():
     # ESTABLISH
     a23_str = "accord23"
     sue_str = "Sue"
@@ -44,7 +44,7 @@ VALUES
         cursor.execute(CREATE_PIDCORE_SOUND_VLD_SQLSTR)
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_pidcore_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename} (
-  {face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_str_str()})
+  {face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()})
 VALUES
   ('{sue_str}', '{colon}', '{colon}', '{ukx}')
 , ('{yao_str}', '{comma}', '{comma}', '{ukx}')
@@ -57,7 +57,7 @@ VALUES
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
-        sqlstr = create_bridge_exists_in_name_error_update_sqlstr(
+        sqlstr = create_knot_exists_in_name_error_update_sqlstr(
             plnacct_s_agg_put, acct_name_str()
         )
         print(f"{sqlstr=}")
@@ -67,14 +67,14 @@ VALUES
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 1
         select_core_raw_sqlstr = f"SELECT * FROM {plnacct_s_agg_put}"
         cursor.execute(select_core_raw_sqlstr)
-        name_bridge_str = f"Bridge cannot exist in NameTerm column {acct_name_str()}"
+        name_knot_str = f"Knot cannot exist in NameTerm column {acct_name_str()}"
         assert cursor.fetchall() == [
             (event1, sue_str, a23_str, yao_str, yao_str, None, None, None),
-            (event1, sue_str, a23_str, yao_str, bob_str, None, None, name_bridge_str),
+            (event1, sue_str, a23_str, yao_str, bob_str, None, None, name_knot_str),
         ]
 
 
-def test_create_bridge_exists_in_label_error_update_sqlstr_ReturnsObj_PopulatesTable_Scenario0():
+def test_create_knot_exists_in_label_error_update_sqlstr_ReturnsObj_PopulatesTable_Scenario0():
     # ESTABLISH
     sue_str = "Sue"
     yao_str = "Yao"
@@ -103,7 +103,7 @@ VALUES
         cursor.execute(CREATE_PIDCORE_SOUND_VLD_SQLSTR)
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_pidcore_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename} (
-  {face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_str_str()})
+  {face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()})
 VALUES
   ('{sue_str}', '{colon}', '{colon}', '{ukx}')
 , ('{yao_str}', '{comma}', '{comma}', '{ukx}')
@@ -116,7 +116,7 @@ VALUES
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
-        sqlstr = create_bridge_exists_in_label_error_update_sqlstr(
+        sqlstr = create_knot_exists_in_label_error_update_sqlstr(
             plnacct_s_agg_put, vow_label_str()
         )
         print(f"{sqlstr=}")
@@ -126,15 +126,15 @@ VALUES
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 1
         select_core_raw_sqlstr = f"SELECT * FROM {plnacct_s_agg_put}"
         cursor.execute(select_core_raw_sqlstr)
-        label_bridge_str = f"Bridge cannot exist in LabelTerm column {vow_label_str()}"
+        label_knot_str = f"Knot cannot exist in LabelTerm column {vow_label_str()}"
         assert cursor.fetchall() == [
             (event1, sue_str, a23_str, yao_str, yao_str, None, None, None),
             (event1, sue_str, a23_str, yao_str, bob_str, None, None, None),
-            (event1, sue_str, a45_str, yao_str, bob_str, None, None, label_bridge_str),
+            (event1, sue_str, a45_str, yao_str, bob_str, None, None, label_knot_str),
         ]
 
 
-def test_set_vow_plan_sound_agg_bridge_errors_PopulatesTable_Scenario0():
+def test_set_vow_plan_sound_agg_knot_errors_PopulatesTable_Scenario0():
     # ESTABLISH
     sue_str = "Sue"
     yao_str = "Yao"
@@ -164,7 +164,7 @@ VALUES
         cursor.execute(CREATE_PIDCORE_SOUND_VLD_SQLSTR)
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_pidcore_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename} (
-  {face_name_str()}, {otx_bridge_str()}, {inx_bridge_str()}, {unknown_str_str()})
+  {face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()})
 VALUES
   ('{sue_str}', '{colon}', '{colon}', '{ukx}')
 , ('{yao_str}', '{comma}', '{comma}', '{ukx}')
@@ -177,18 +177,18 @@ VALUES
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
-        set_vow_plan_sound_agg_bridge_errors(cursor)
+        set_vow_plan_sound_agg_knot_errors(cursor)
 
         # THEN
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 2
         select_core_raw_sqlstr = f"SELECT * FROM {plnacct_s_agg_put} ORDER BY {vow_label_str()}, {owner_name_str()}, {acct_name_str()}"
         cursor.execute(select_core_raw_sqlstr)
-        name_bridge_str = f"Bridge cannot exist in NameTerm column {acct_name_str()}"
-        label_bridge_str = f"Bridge cannot exist in LabelTerm column {vow_label_str()}"
+        name_knot_str = f"Knot cannot exist in NameTerm column {acct_name_str()}"
+        label_knot_str = f"Knot cannot exist in LabelTerm column {vow_label_str()}"
         rows = cursor.fetchall()
         print(f"{rows=}")
         assert rows == [
-            (event1, sue_str, a45_str, yao_str, yao_str, None, None, label_bridge_str),
-            (event1, sue_str, a23_str, yao_str, bob_str, None, None, name_bridge_str),
+            (event1, sue_str, a45_str, yao_str, yao_str, None, None, label_knot_str),
+            (event1, sue_str, a23_str, yao_str, bob_str, None, None, name_knot_str),
             (event1, sue_str, a23_str, yao_str, yao_str, None, None, None),
         ]

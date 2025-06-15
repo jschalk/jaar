@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.a01_term_logic.way import to_way
+from src.a01_term_logic.rope import to_rope
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import factheir_shop
 from src.a05_concept_logic.concept import conceptunit_shop
@@ -39,7 +39,7 @@ def test_PlanUnit_clear_concept_dict_and_plan_obj_settle_attrs_CorrectlySetsAttr
     assert sue_plan._tree_traverse_count == 0
     assert sue_plan._concept_dict != x_concept_dict
     assert sue_plan._concept_dict == {
-        sue_plan.conceptroot.get_concept_way(): sue_plan.conceptroot
+        sue_plan.conceptroot.get_concept_rope(): sue_plan.conceptroot
     }
     assert sue_plan._offtrack_kids_mass_set == set()
     assert not sue_plan._reason_rcontexts
@@ -79,13 +79,13 @@ def test_PlanUnit_settle_plan_ClearsDescendantAttributes():
     sue_plan = get_planunit_with_4_levels()
     # test root status:
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
-    casa_concept = sue_plan.get_concept_obj(casa_way)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
+    casa_concept = sue_plan.get_concept_obj(casa_rope)
     wk_str = "wkdays"
-    wk_way = sue_plan.make_l1_way(wk_str)
+    wk_rope = sue_plan.make_l1_rope(wk_str)
     mon_str = "Monday"
-    mon_way = sue_plan.make_way(wk_way, mon_str)
-    mon_concept = sue_plan.get_concept_obj(mon_way)
+    mon_rope = sue_plan.make_rope(wk_rope, mon_str)
+    mon_concept = sue_plan.get_concept_obj(mon_rope)
     assert sue_plan.conceptroot._descendant_task_count is None
     assert sue_plan.conceptroot._all_acct_cred is None
     assert sue_plan.conceptroot._all_acct_debt is None
@@ -152,22 +152,22 @@ def test_PlanUnit_settle_plan_NLevelCorrectlySetsDescendantAttributes_1():
     # ESTABLISH
     sue_plan = get_planunit_with_4_levels()
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
-    casa_concept = sue_plan.get_concept_obj(casa_way)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
+    casa_concept = sue_plan.get_concept_obj(casa_rope)
     wk_str = "wkdays"
-    wk_way = sue_plan.make_l1_way(wk_str)
-    wk_concept = sue_plan.get_concept_obj(wk_way)
+    wk_rope = sue_plan.make_l1_rope(wk_str)
+    wk_concept = sue_plan.get_concept_obj(wk_rope)
     mon_str = "Monday"
-    mon_way = sue_plan.make_way(wk_way, mon_str)
-    mon_concept = sue_plan.get_concept_obj(mon_way)
+    mon_rope = sue_plan.make_rope(wk_rope, mon_str)
+    mon_concept = sue_plan.get_concept_obj(mon_rope)
 
     email_str = "email"
     email_concept = conceptunit_shop(email_str, task=True)
-    sue_plan.set_concept(email_concept, parent_way=casa_way)
+    sue_plan.set_concept(email_concept, parent_rope=casa_rope)
 
     # test root status:
-    root_way = to_way(sue_plan.vow_label)
-    x_conceptroot = sue_plan.get_concept_obj(root_way)
+    root_rope = to_rope(sue_plan.vow_label)
+    x_conceptroot = sue_plan.get_concept_obj(root_rope)
     assert x_conceptroot._descendant_task_count is None
     assert x_conceptroot._all_acct_cred is None
     assert x_conceptroot._all_acct_debt is None
@@ -205,11 +205,11 @@ def test_PlanUnit_settle_plan_NLevelCorrectlySetsDescendantAttributes_2():
     vacuum_str = "vacuum"
     sue_str = "Sue"
 
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     email_concept = conceptunit_shop(email_str, task=True)
-    sue_plan.set_concept(email_concept, parent_way=casa_way)
+    sue_plan.set_concept(email_concept, parent_rope=casa_rope)
     vacuum_concept = conceptunit_shop(vacuum_str, task=True)
-    sue_plan.set_concept(vacuum_concept, parent_way=casa_way)
+    sue_plan.set_concept(vacuum_concept, parent_rope=casa_rope)
 
     sue_plan.add_acctunit(acct_name=sue_str)
     x_awardlink = awardlink_shop(awardee_title=sue_str)
@@ -262,13 +262,13 @@ def test_PlanUnit_settle_plan_SetsConceptUnitAttr_awardlinks():
     awardlink_yao = awardlink_shop(yao_str, give_force=10)
     awardlink_zia = awardlink_shop(zia_str, give_force=10)
     awardlink_Xio = awardlink_shop(Xio_str, give_force=10)
-    swim_way = sue_plan.make_l1_way(swim_str)
-    sue_plan.edit_concept_attr(swim_way, awardlink=awardlink_yao)
-    sue_plan.edit_concept_attr(swim_way, awardlink=awardlink_zia)
-    sue_plan.edit_concept_attr(swim_way, awardlink=awardlink_Xio)
+    swim_rope = sue_plan.make_l1_rope(swim_str)
+    sue_plan.edit_concept_attr(swim_rope, awardlink=awardlink_yao)
+    sue_plan.edit_concept_attr(swim_rope, awardlink=awardlink_zia)
+    sue_plan.edit_concept_attr(swim_rope, awardlink=awardlink_Xio)
 
     street_str = "streets"
-    sue_plan.set_concept(conceptunit_shop(street_str), parent_way=swim_way)
+    sue_plan.set_concept(conceptunit_shop(street_str), parent_rope=swim_rope)
     assert sue_plan.conceptroot.awardlinks in (None, {})
     assert len(sue_plan.conceptroot._kids[swim_str].awardlinks) == 3
 
@@ -277,8 +277,10 @@ def test_PlanUnit_settle_plan_SetsConceptUnitAttr_awardlinks():
 
     # THEN
     print(f"{sue_plan._concept_dict.keys()=} ")
-    swim_concept = sue_plan._concept_dict.get(swim_way)
-    street_concept = sue_plan._concept_dict.get(sue_plan.make_way(swim_way, street_str))
+    swim_concept = sue_plan._concept_dict.get(swim_rope)
+    street_concept = sue_plan._concept_dict.get(
+        sue_plan.make_rope(swim_rope, street_str)
+    )
 
     assert len(swim_concept.awardlinks) == 3
     assert len(swim_concept._awardheirs) == 3
@@ -330,17 +332,17 @@ def test_PlanUnit_settle_plan_DoesNotKeepUnneeded_awardheirs():
     yao_plan.add_acctunit(Xio_str)
 
     swim_str = "swim"
-    swim_way = yao_plan.make_l1_way(swim_str)
+    swim_rope = yao_plan.make_l1_rope(swim_str)
 
     yao_plan.set_l1_concept(conceptunit_shop(swim_str))
     awardlink_yao = awardlink_shop(yao_str, give_force=10)
     awardlink_zia = awardlink_shop(zia_str, give_force=10)
     awardlink_Xio = awardlink_shop(Xio_str, give_force=10)
 
-    swim_concept = yao_plan.get_concept_obj(swim_way)
-    yao_plan.edit_concept_attr(swim_way, awardlink=awardlink_yao)
-    yao_plan.edit_concept_attr(swim_way, awardlink=awardlink_zia)
-    yao_plan.edit_concept_attr(swim_way, awardlink=awardlink_Xio)
+    swim_concept = yao_plan.get_concept_obj(swim_rope)
+    yao_plan.edit_concept_attr(swim_rope, awardlink=awardlink_yao)
+    yao_plan.edit_concept_attr(swim_rope, awardlink=awardlink_zia)
+    yao_plan.edit_concept_attr(swim_rope, awardlink=awardlink_Xio)
 
     assert len(swim_concept.awardlinks) == 3
     assert len(swim_concept._awardheirs) == 0
@@ -351,7 +353,7 @@ def test_PlanUnit_settle_plan_DoesNotKeepUnneeded_awardheirs():
     # THEN
     assert len(swim_concept.awardlinks) == 3
     assert len(swim_concept._awardheirs) == 3
-    yao_plan.edit_concept_attr(swim_way, awardlink_del=yao_str)
+    yao_plan.edit_concept_attr(swim_rope, awardlink_del=yao_str)
     assert len(swim_concept.awardlinks) == 2
     assert len(swim_concept._awardheirs) == 3
 
@@ -363,46 +365,46 @@ def test_PlanUnit_settle_plan_DoesNotKeepUnneeded_awardheirs():
     assert len(swim_concept._awardheirs) == 2
 
 
-def test_PlanUnit_get_concept_tree_ordered_way_list_ReturnsObj():
+def test_PlanUnit_get_concept_tree_ordered_rope_list_ReturnsObj():
     # ESTABLISH
     sue_plan = get_planunit_with_4_levels()
     wk_str = "wkdays"
-    assert sue_plan.get_concept_tree_ordered_way_list()
+    assert sue_plan.get_concept_tree_ordered_rope_list()
 
     # WHEN
-    ordered_label_list = sue_plan.get_concept_tree_ordered_way_list()
+    ordered_label_list = sue_plan.get_concept_tree_ordered_rope_list()
 
     # THEN
     assert len(ordered_label_list) == 17
-    x_1st_way_in_ordered_list = sue_plan.get_concept_tree_ordered_way_list()[0]
-    root_way = to_way(sue_plan.vow_label)
-    assert x_1st_way_in_ordered_list == root_way
-    x_8th_way_in_ordered_list = sue_plan.get_concept_tree_ordered_way_list()[9]
-    assert x_8th_way_in_ordered_list == sue_plan.make_l1_way(wk_str)
+    x_1st_rope_in_ordered_list = sue_plan.get_concept_tree_ordered_rope_list()[0]
+    root_rope = to_rope(sue_plan.vow_label)
+    assert x_1st_rope_in_ordered_list == root_rope
+    x_8th_rope_in_ordered_list = sue_plan.get_concept_tree_ordered_rope_list()[9]
+    assert x_8th_rope_in_ordered_list == sue_plan.make_l1_rope(wk_str)
 
     # WHEN
     y_plan = planunit_shop(vow_label="accord23")
 
     # THEN
-    y_1st_way_in_ordered_list = y_plan.get_concept_tree_ordered_way_list()[0]
-    assert y_1st_way_in_ordered_list == root_way
+    y_1st_rope_in_ordered_list = y_plan.get_concept_tree_ordered_rope_list()[0]
+    assert y_1st_rope_in_ordered_list == root_rope
 
 
-def test_PlanUnit_get_concept_tree_ordered_way_list_CorrectlyCleansRangedConceptWayTerms():
+def test_PlanUnit_get_concept_tree_ordered_rope_list_CorrectlyCleansRangedConceptRopeTerms():
     # ESTABLISH
     yao_plan = planunit_shop("Yao")
 
     # WHEN
     time_str = "timeline"
-    time_way = yao_plan.make_l1_way(time_str)
+    time_rope = yao_plan.make_l1_rope(time_str)
     yao_plan.set_l1_concept(conceptunit_shop(time_str, begin=0, close=700))
     wks_str = "wks"
-    yao_plan.set_concept(conceptunit_shop(wks_str, denom=7), time_way)
+    yao_plan.set_concept(conceptunit_shop(wks_str, denom=7), time_rope)
 
     # THEN
-    assert len(yao_plan.get_concept_tree_ordered_way_list()) == 3
+    assert len(yao_plan.get_concept_tree_ordered_rope_list()) == 3
     assert (
-        len(yao_plan.get_concept_tree_ordered_way_list(no_range_descendants=True)) == 2
+        len(yao_plan.get_concept_tree_ordered_rope_list(no_range_descendants=True)) == 2
     )
 
 
@@ -419,10 +421,10 @@ def test_PlanUnit_get_concept_dict_ReturnsObjWhenSingle():
 
     # THEN
     assert sue_plan._keeps_justified
-    texas_way = sue_plan.make_l1_way(texas_str)
-    texas_concept = sue_plan.get_concept_obj(texas_way)
+    texas_rope = sue_plan.make_l1_rope(texas_str)
+    texas_concept = sue_plan.get_concept_obj(texas_rope)
     assert len(problems_dict) == 1
-    assert problems_dict == {texas_way: texas_concept}
+    assert problems_dict == {texas_rope: texas_concept}
 
 
 def test_PlanUnit_settle_plan_CreatesFullyPopulated_concept_dict():
@@ -455,7 +457,7 @@ def test_PlanUnit_settle_plan_WhenConceptRootHas_massButAll_kidsHaveZero_massAdd
     # ESTABLISH
     sue_planunit = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_planunit.make_l1_way(casa_str)
+    casa_rope = sue_planunit.make_l1_rope(casa_str)
     casa_concept = conceptunit_shop(casa_str, mass=0)
     sue_planunit.set_l1_concept(casa_concept)
     assert sue_planunit._offtrack_kids_mass_set == set()
@@ -464,11 +466,11 @@ def test_PlanUnit_settle_plan_WhenConceptRootHas_massButAll_kidsHaveZero_massAdd
     sue_planunit.settle_plan()
 
     # THEN
-    root_way = to_way(sue_planunit.vow_label)
-    assert sue_planunit._offtrack_kids_mass_set == {root_way}
+    root_rope = to_rope(sue_planunit.vow_label)
+    assert sue_planunit._offtrack_kids_mass_set == {root_rope}
 
     # WHEN
-    sue_planunit.edit_concept_attr(casa_way, mass=2)
+    sue_planunit.edit_concept_attr(casa_rope, mass=2)
     sue_planunit.settle_plan()
 
     # THEN
@@ -479,30 +481,30 @@ def test_PlanUnit_settle_plan_WhenConceptUnitHas_massButAll_kidsHaveZero_massAdd
     # ESTABLISH
     sue_planunit = planunit_shop("Sue")
     casa_str = "casa"
-    casa_way = sue_planunit.make_l1_way(casa_str)
+    casa_rope = sue_planunit.make_l1_rope(casa_str)
     casa_concept = conceptunit_shop(casa_str, mass=1)
 
     swim_str = "swimming"
-    swim_way = sue_planunit.make_way(casa_way, swim_str)
+    swim_rope = sue_planunit.make_rope(casa_rope, swim_str)
     swim_concept = conceptunit_shop(swim_str, mass=8)
 
     clean_str = "cleaning"
-    clean_way = sue_planunit.make_way(casa_way, clean_str)
+    clean_rope = sue_planunit.make_rope(casa_rope, clean_str)
     clean_concept = conceptunit_shop(clean_str, mass=2)
-    sue_planunit.set_concept(conceptunit_shop(clean_str), casa_way)
+    sue_planunit.set_concept(conceptunit_shop(clean_str), casa_rope)
 
     sweep_str = "sweep"
-    sweep_way = sue_planunit.make_way(clean_way, sweep_str)
+    sweep_rope = sue_planunit.make_rope(clean_rope, sweep_str)
     sweep_concept = conceptunit_shop(sweep_str, mass=0)
     vaccum_str = "vaccum"
-    vaccum_way = sue_planunit.make_way(clean_way, vaccum_str)
+    vaccum_rope = sue_planunit.make_rope(clean_rope, vaccum_str)
     vaccum_concept = conceptunit_shop(vaccum_str, mass=0)
 
     sue_planunit.set_l1_concept(casa_concept)
-    sue_planunit.set_concept(swim_concept, casa_way)
-    sue_planunit.set_concept(clean_concept, casa_way)
-    sue_planunit.set_concept(sweep_concept, clean_way)  # _mass=0
-    sue_planunit.set_concept(vaccum_concept, clean_way)  # _mass=0
+    sue_planunit.set_concept(swim_concept, casa_rope)
+    sue_planunit.set_concept(clean_concept, casa_rope)
+    sue_planunit.set_concept(sweep_concept, clean_rope)  # _mass=0
+    sue_planunit.set_concept(vaccum_concept, clean_rope)  # _mass=0
 
     assert sue_planunit._offtrack_kids_mass_set == set()
 
@@ -510,7 +512,7 @@ def test_PlanUnit_settle_plan_WhenConceptUnitHas_massButAll_kidsHaveZero_massAdd
     sue_planunit.settle_plan()
 
     # THEN
-    assert sue_planunit._offtrack_kids_mass_set == {clean_way}
+    assert sue_planunit._offtrack_kids_mass_set == {clean_rope}
 
 
 def test_PlanUnit_settle_plan_CreatesNewGroupUnitsWhenNeeded_Scenario0():
@@ -524,8 +526,8 @@ def test_PlanUnit_settle_plan_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     zia_debt_score = 5
     yao_plan.add_acctunit(yao_str, yao_credit_score, yao_debt_score)
     yao_plan.add_acctunit(zia_str, zia_credit_score, zia_debt_score)
-    root_way = to_way(yao_plan.vow_label)
-    x_conceptroot = yao_plan.get_concept_obj(root_way)
+    root_rope = to_rope(yao_plan.vow_label)
+    x_conceptroot = yao_plan.get_concept_obj(root_rope)
     x_conceptroot.set_awardlink(awardlink_shop(yao_str))
     x_conceptroot.set_awardlink(awardlink_shop(zia_str))
     xio_str = "Xio"
@@ -566,12 +568,12 @@ def test_PlanUnit_settle_plan_CreatesNewGroupUnitsWhenNeeded_Scenario1():
     yao_str = "Yao"
     yao_plan = planunit_shop(yao_str)
     swim_str = "swim"
-    swim_way = yao_plan.make_l1_way(swim_str)
+    swim_rope = yao_plan.make_l1_rope(swim_str)
     yao_plan.set_l1_concept(conceptunit_shop(swim_str))
     zia_str = "Zia"
     yao_plan.add_acctunit(yao_str)
     yao_plan.add_acctunit(zia_str)
-    swim_concept = yao_plan.get_concept_obj(swim_way)
+    swim_concept = yao_plan.get_concept_obj(swim_rope)
     swim_concept.set_awardlink(awardlink_shop(yao_str))
     swim_concept.set_awardlink(awardlink_shop(zia_str))
     xio_str = "Xio"
@@ -606,12 +608,12 @@ def test_PlanUnit_get_tree_traverse_generated_groupunits_ReturnsObj():
     yao_str = "Yao"
     yao_plan = planunit_shop(yao_str)
     swim_str = "swim"
-    swim_way = yao_plan.make_l1_way(swim_str)
+    swim_rope = yao_plan.make_l1_rope(swim_str)
     yao_plan.set_l1_concept(conceptunit_shop(swim_str))
     zia_str = "Zia"
     yao_plan.add_acctunit(yao_str)
     yao_plan.add_acctunit(zia_str)
-    swim_concept = yao_plan.get_concept_obj(swim_way)
+    swim_concept = yao_plan.get_concept_obj(swim_rope)
     swim_concept.set_awardlink(awardlink_shop(yao_str))
     swim_concept.set_awardlink(awardlink_shop(zia_str))
     xio_str = "Xio"
@@ -650,51 +652,51 @@ def test_PlanUnit_settle_plan_Sets_conceptroot_factheir_With_range_factheirs():
     yao_str = "Yao"
     yao_plan = planunit_shop(yao_str)
     wk_str = "wk"
-    wk_way = yao_plan.make_l1_way(wk_str)
+    wk_rope = yao_plan.make_l1_rope(wk_str)
     wk_addin = 10
     wk_concept = conceptunit_shop(wk_str, begin=10, close=15, addin=wk_addin)
     yao_plan.set_l1_concept(wk_concept)
     tue_str = "Tue"
-    tue_way = yao_plan.make_way(wk_way, tue_str)
+    tue_rope = yao_plan.make_rope(wk_rope, tue_str)
     tue_addin = 100
-    yao_plan.set_concept(conceptunit_shop(tue_str, addin=tue_addin), wk_way)
-    root_way = to_way(yao_plan.vow_label)
+    yao_plan.set_concept(conceptunit_shop(tue_str, addin=tue_addin), wk_rope)
+    root_rope = to_rope(yao_plan.vow_label)
     yao_plan.edit_concept_attr(
-        root_way, reason_rcontext=tue_way, reason_premise=tue_way
+        root_rope, reason_rcontext=tue_rope, reason_premise=tue_rope
     )
 
     wk_popen = 3
     wk_pnigh = 7
-    yao_plan.add_fact(wk_way, wk_way, wk_popen, wk_pnigh)
+    yao_plan.add_fact(wk_rope, wk_rope, wk_popen, wk_pnigh)
 
     # assert len(ball_concept._reasonheirs) == 1
-    # assert ball_concept._factheirs == {wk_way: wk_factheir}
-    # assert ball_concept._factheirs.get(wk_way)
+    # assert ball_concept._factheirs == {wk_rope: wk_factheir}
+    # assert ball_concept._factheirs.get(wk_rope)
     # assert len(ball_concept._factheirs) == 1
-    # assert ball_concept._factheirs.get(tue_way) is None
+    # assert ball_concept._factheirs.get(tue_rope) is None
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
         yao_plan.settle_plan()
-    exception_str = f"Cannot have fact for range inheritor '{tue_way}'. A ranged fact concept must have _begin, _close"
+    exception_str = f"Cannot have fact for range inheritor '{tue_rope}'. A ranged fact concept must have _begin, _close"
     assert str(excinfo.value) == exception_str
 
     # THEN
-    # wk_factunit = factunit_shop(wk_way, wk_way, wk_popen, wk_pnigh)
-    # tue_reasonheirs = {tue_way: reasonheir_shop(tue_way, None, False)}
-    # x_plan_concept_dict = {wk_concept.get_concept_way(): wk_concept, tue_concept.get_concept_way(): tue_concept}
+    # wk_factunit = factunit_shop(wk_rope, wk_rope, wk_popen, wk_pnigh)
+    # tue_reasonheirs = {tue_rope: reasonheir_shop(tue_rope, None, False)}
+    # x_plan_concept_dict = {wk_concept.get_concept_rope(): wk_concept, tue_concept.get_concept_rope(): tue_concept}
     # ball_concept.set_reasonheirs(x_plan_concept_dict, tue_reasonheirs)
-    # x_range_inheritors = {tue_way: wk_way}
-    # wk_factheir = factheir_shop(wk_way, wk_way, wk_popen, wk_pnigh)
+    # x_range_inheritors = {tue_rope: wk_rope}
+    # wk_factheir = factheir_shop(wk_rope, wk_rope, wk_popen, wk_pnigh)
 
     # tue_popen = 113
     # tue_pnigh = 117
-    # tue_factheir = factheir_shop(tue_way, tue_way, tue_popen, tue_pnigh)
-    # root_concept = yao_plan.get_concept_obj(root_way)
-    # print(f"{wk_way=} {root_concept._factheirs.keys()=}")
-    # assert root_concept._factheirs.get(wk_way) == wk_factheir
+    # tue_factheir = factheir_shop(tue_rope, tue_rope, tue_popen, tue_pnigh)
+    # root_concept = yao_plan.get_concept_obj(root_rope)
+    # print(f"{wk_rope=} {root_concept._factheirs.keys()=}")
+    # assert root_concept._factheirs.get(wk_rope) == wk_factheir
     # assert len(root_concept._factheirs) == 2
-    # assert root_concept._factheirs == {tue_way: tue_factheir, wk_way: wk_factheir}
+    # assert root_concept._factheirs == {tue_rope: tue_factheir, wk_rope: wk_factheir}
 
 
 def test_PlanUnit_settle_plan_SetsConceptUnit_factheir_With_range_factheirs():
@@ -702,47 +704,47 @@ def test_PlanUnit_settle_plan_SetsConceptUnit_factheir_With_range_factheirs():
     yao_str = "Yao"
     yao_plan = planunit_shop(yao_str)
     wk_str = "wk"
-    wk_way = yao_plan.make_l1_way(wk_str)
+    wk_rope = yao_plan.make_l1_rope(wk_str)
     wk_addin = 10
     wk_concept = conceptunit_shop(wk_str, begin=10, close=15, addin=wk_addin)
     yao_plan.set_l1_concept(wk_concept)
     tue_str = "Tue"
-    tue_way = yao_plan.make_way(wk_way, tue_str)
+    tue_rope = yao_plan.make_rope(wk_rope, tue_str)
     tue_addin = 100
-    yao_plan.set_concept(conceptunit_shop(tue_str, addin=tue_addin), wk_way)
+    yao_plan.set_concept(conceptunit_shop(tue_str, addin=tue_addin), wk_rope)
     ball_str = "ball"
-    ball_way = yao_plan.make_l1_way(ball_str)
+    ball_rope = yao_plan.make_l1_rope(ball_str)
     yao_plan.set_l1_concept(conceptunit_shop(ball_str))
     yao_plan.edit_concept_attr(
-        ball_way, reason_rcontext=tue_way, reason_premise=tue_way
+        ball_rope, reason_rcontext=tue_rope, reason_premise=tue_rope
     )
 
     wk_popen = 3
     wk_pnigh = 7
-    yao_plan.add_fact(wk_way, wk_way, wk_popen, wk_pnigh)
+    yao_plan.add_fact(wk_rope, wk_rope, wk_popen, wk_pnigh)
 
     # assert len(ball_concept._reasonheirs) == 1
-    # assert ball_concept._factheirs == {wk_way: wk_factheir}
-    # assert ball_concept._factheirs.get(wk_way)
+    # assert ball_concept._factheirs == {wk_rope: wk_factheir}
+    # assert ball_concept._factheirs.get(wk_rope)
     # assert len(ball_concept._factheirs) == 1
-    # assert ball_concept._factheirs.get(tue_way) is None
+    # assert ball_concept._factheirs.get(tue_rope) is None
 
     # WHEN
     yao_plan.settle_plan()
 
     # THEN
-    # wk_factunit = factunit_shop(wk_way, wk_way, wk_popen, wk_pnigh)
-    # tue_reasonheirs = {tue_way: reasonheir_shop(tue_way, None, False)}
-    # x_plan_concept_dict = {wk_concept.get_concept_way(): wk_concept, tue_concept.get_concept_way(): tue_concept}
+    # wk_factunit = factunit_shop(wk_rope, wk_rope, wk_popen, wk_pnigh)
+    # tue_reasonheirs = {tue_rope: reasonheir_shop(tue_rope, None, False)}
+    # x_plan_concept_dict = {wk_concept.get_concept_rope(): wk_concept, tue_concept.get_concept_rope(): tue_concept}
     # ball_concept.set_reasonheirs(x_plan_concept_dict, tue_reasonheirs)
-    x_range_inheritors = {tue_way: wk_way}
-    wk_factheir = factheir_shop(wk_way, wk_way, wk_popen, wk_pnigh)
+    x_range_inheritors = {tue_rope: wk_rope}
+    wk_factheir = factheir_shop(wk_rope, wk_rope, wk_popen, wk_pnigh)
 
     tue_popen = 113
     tue_pnigh = 117
-    tue_factheir = factheir_shop(tue_way, tue_way, tue_popen, tue_pnigh)
-    ball_concept = yao_plan.get_concept_obj(ball_way)
-    print(f"{wk_way=} {ball_concept._factheirs.keys()=}")
-    assert ball_concept._factheirs.get(wk_way) == wk_factheir
+    tue_factheir = factheir_shop(tue_rope, tue_rope, tue_popen, tue_pnigh)
+    ball_concept = yao_plan.get_concept_obj(ball_rope)
+    print(f"{wk_rope=} {ball_concept._factheirs.keys()=}")
+    assert ball_concept._factheirs.get(wk_rope) == wk_factheir
     assert len(ball_concept._factheirs) == 2
-    assert ball_concept._factheirs == {tue_way: tue_factheir, wk_way: wk_factheir}
+    assert ball_concept._factheirs == {tue_rope: tue_factheir, wk_rope: wk_factheir}

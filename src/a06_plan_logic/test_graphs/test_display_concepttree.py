@@ -70,7 +70,7 @@ def test_get_plan_agenda_plotly_fig_DisplaysCorrectInfo(graphics_bool):
     # ESTABLISH
     yao_plan = planunit_v001_with_large_agenda()
     wk_str = "wkdays"
-    wk_way = yao_plan.make_l1_way(wk_str)
+    wk_rope = yao_plan.make_l1_rope(wk_str)
     assert len(yao_plan.get_agenda_dict()) == 63
 
     # WHEN
@@ -84,29 +84,29 @@ def test_PlanUnit_fund_flow(graphics_bool):
     # ESTABLISH
     sue_plan = planunit_shop(owner_name="Sue")
     casa_str = "casa"
-    casa_way = sue_plan.make_l1_way(casa_str)
+    casa_rope = sue_plan.make_l1_rope(casa_str)
     cat_str = "cat status"
-    cat_way = sue_plan.make_way(casa_way, cat_str)
+    cat_rope = sue_plan.make_rope(casa_rope, cat_str)
     hun_n_str = "not hungry"
-    hun_n_way = sue_plan.make_way(cat_way, hun_n_str)
+    hun_n_rope = sue_plan.make_rope(cat_rope, hun_n_str)
     hun_y_str = "hungry"
-    hun_y_way = sue_plan.make_way(cat_way, hun_y_str)
+    hun_y_rope = sue_plan.make_rope(cat_rope, hun_y_str)
     clean_str = "cleaning"
-    clean_way = sue_plan.make_way(casa_way, clean_str)
+    clean_rope = sue_plan.make_rope(casa_rope, clean_str)
     sweep_str = "sweep floor"
-    sweep_way = sue_plan.make_way(clean_way, sweep_str)
+    sweep_rope = sue_plan.make_rope(clean_rope, sweep_str)
     dish_str = "clean dishes"
-    dish_way = sue_plan.make_way(clean_way, dish_str)
-    sue_plan.add_concept(casa_way, mass=30)
-    sue_plan.add_concept(cat_way, mass=30)
-    sue_plan.add_concept(hun_n_way, mass=30)
-    sue_plan.add_concept(hun_y_way, mass=30)
-    sue_plan.add_concept(clean_way, mass=30)
-    sue_plan.add_concept(sweep_way, mass=30, task=True)
-    sue_plan.add_concept(dish_way, mass=30, task=True)
+    dish_rope = sue_plan.make_rope(clean_rope, dish_str)
+    sue_plan.add_concept(casa_rope, mass=30)
+    sue_plan.add_concept(cat_rope, mass=30)
+    sue_plan.add_concept(hun_n_rope, mass=30)
+    sue_plan.add_concept(hun_y_rope, mass=30)
+    sue_plan.add_concept(clean_rope, mass=30)
+    sue_plan.add_concept(sweep_rope, mass=30, task=True)
+    sue_plan.add_concept(dish_rope, mass=30, task=True)
     dinner_str = "cat have dinner"
-    dinner_way = sue_plan.make_l1_way(dinner_str)
-    sue_plan.add_concept(dinner_way, mass=30, task=True)
+    dinner_rope = sue_plan.make_l1_rope(dinner_str)
+    sue_plan.add_concept(dinner_rope, mass=30, task=True)
 
     # WHEN / THEN
     fund_graph0(sue_plan, "Chore", graphics_bool)

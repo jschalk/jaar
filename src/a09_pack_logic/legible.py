@@ -292,7 +292,7 @@ def add_plan_conceptunit_insert_to_legible_list(
 ):
     _problem_bool_str = "problem_bool"
     for conceptunit_atom in conceptunit_insert_dict.values():
-        way_value = conceptunit_atom.get_value("concept_way")
+        rope_value = conceptunit_atom.get_value("concept_rope")
         _addin_value = conceptunit_atom.get_value("addin")
         _begin_value = conceptunit_atom.get_value("begin")
         _close_value = conceptunit_atom.get_value("close")
@@ -302,7 +302,7 @@ def add_plan_conceptunit_insert_to_legible_list(
         _morph_value = conceptunit_atom.get_value("morph")
         _mass_value = conceptunit_atom.get_value("mass")
         task_value = conceptunit_atom.get_value("task")
-        x_str = f"Created Concept '{way_value}'. "
+        x_str = f"Created Concept '{rope_value}'. "
         if _addin_value is not None:
             x_str += f"addin={_addin_value}."
         if _begin_value is not None:
@@ -330,7 +330,7 @@ def add_plan_conceptunit_update_to_legible_list(
 ):
     _problem_bool_str = "problem_bool"
     for conceptunit_atom in conceptunit_update_dict.values():
-        way_value = conceptunit_atom.get_value("concept_way")
+        rope_value = conceptunit_atom.get_value("concept_rope")
         addin_value = conceptunit_atom.get_value("addin")
         begin_value = conceptunit_atom.get_value("begin")
         close_value = conceptunit_atom.get_value("close")
@@ -340,7 +340,7 @@ def add_plan_conceptunit_update_to_legible_list(
         morph_value = conceptunit_atom.get_value("morph")
         mass_value = conceptunit_atom.get_value("mass")
         task_value = conceptunit_atom.get_value("task")
-        x_str = f"Concept '{way_value}' set these attributes: "
+        x_str = f"Concept '{rope_value}' set these attributes: "
         if addin_value is not None:
             x_str += f"addin={addin_value}."
         if begin_value is not None:
@@ -367,64 +367,64 @@ def add_plan_conceptunit_delete_to_legible_list(
     legible_list: list[str], conceptunit_delete_dict: dict, x_plan: PlanUnit
 ):
     for conceptunit_atom in conceptunit_delete_dict.values():
-        way_value = conceptunit_atom.get_value("concept_way")
-        x_str = f"Concept '{way_value}' was deleted."
+        rope_value = conceptunit_atom.get_value("concept_rope")
+        x_str = f"Concept '{rope_value}' was deleted."
         legible_list.append(x_str)
 
 
 def add_plan_concept_awardlink_insert_to_legible_list(
     legible_list: list[str], concept_awardlink_insert_dict: dict, x_plan: PlanUnit
 ):
-    for way_dict in concept_awardlink_insert_dict.values():
-        for concept_awardlink_atom in way_dict.values():
+    for rope_dict in concept_awardlink_insert_dict.values():
+        for concept_awardlink_atom in rope_dict.values():
             awardee_title_value = concept_awardlink_atom.get_value("awardee_title")
-            way_value = concept_awardlink_atom.get_value("concept_way")
+            rope_value = concept_awardlink_atom.get_value("concept_rope")
             give_force_value = concept_awardlink_atom.get_value("give_force")
             take_force_value = concept_awardlink_atom.get_value("take_force")
-            x_str = f"Awardlink created for group {awardee_title_value} for concept '{way_value}' with give_force={give_force_value} and take_force={take_force_value}."
+            x_str = f"Awardlink created for group {awardee_title_value} for concept '{rope_value}' with give_force={give_force_value} and take_force={take_force_value}."
             legible_list.append(x_str)
 
 
 def add_plan_concept_awardlink_update_to_legible_list(
     legible_list: list[str], concept_awardlink_update_dict: dict, x_plan: PlanUnit
 ):
-    for way_dict in concept_awardlink_update_dict.values():
-        for concept_awardlink_atom in way_dict.values():
+    for rope_dict in concept_awardlink_update_dict.values():
+        for concept_awardlink_atom in rope_dict.values():
             awardee_title_value = concept_awardlink_atom.get_value("awardee_title")
-            way_value = concept_awardlink_atom.get_value("concept_way")
+            rope_value = concept_awardlink_atom.get_value("concept_rope")
             give_force_value = concept_awardlink_atom.get_value("give_force")
             take_force_value = concept_awardlink_atom.get_value("take_force")
             if give_force_value is not None and take_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_title_value} for concept '{way_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
+                x_str = f"Awardlink has been set for group {awardee_title_value} for concept '{rope_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
             elif give_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_title_value} for concept '{way_value}'. Now give_force={give_force_value}."
+                x_str = f"Awardlink has been set for group {awardee_title_value} for concept '{rope_value}'. Now give_force={give_force_value}."
             elif take_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_title_value} for concept '{way_value}'. Now take_force={take_force_value}."
+                x_str = f"Awardlink has been set for group {awardee_title_value} for concept '{rope_value}'. Now take_force={take_force_value}."
             legible_list.append(x_str)
 
 
 def add_plan_concept_awardlink_delete_to_legible_list(
     legible_list: list[str], concept_awardlink_delete_dict: dict, x_plan: PlanUnit
 ):
-    for way_dict in concept_awardlink_delete_dict.values():
-        for concept_awardlink_atom in way_dict.values():
+    for rope_dict in concept_awardlink_delete_dict.values():
+        for concept_awardlink_atom in rope_dict.values():
             awardee_title_value = concept_awardlink_atom.get_value("awardee_title")
-            way_value = concept_awardlink_atom.get_value("concept_way")
-            x_str = f"Awardlink for group {awardee_title_value}, concept '{way_value}' has been deleted."
+            rope_value = concept_awardlink_atom.get_value("concept_rope")
+            x_str = f"Awardlink for group {awardee_title_value}, concept '{rope_value}' has been deleted."
             legible_list.append(x_str)
 
 
 def add_plan_concept_reasonunit_insert_to_legible_list(
     legible_list: list[str], concept_reasonunit_insert_dict: dict, x_plan: PlanUnit
 ):
-    for way_dict in concept_reasonunit_insert_dict.values():
-        for concept_reasonunit_atom in way_dict.values():
-            way_value = concept_reasonunit_atom.get_value("concept_way")
+    for rope_dict in concept_reasonunit_insert_dict.values():
+        for concept_reasonunit_atom in rope_dict.values():
+            rope_value = concept_reasonunit_atom.get_value("concept_rope")
             rcontext_value = concept_reasonunit_atom.get_value("rcontext")
             rconcept_active_requisite_value = concept_reasonunit_atom.get_value(
                 "rconcept_active_requisite"
             )
-            x_str = f"ReasonUnit created for concept '{way_value}' with rcontext '{rcontext_value}'."
+            x_str = f"ReasonUnit created for concept '{rope_value}' with rcontext '{rcontext_value}'."
             if rconcept_active_requisite_value is not None:
                 x_str += (
                     f" rconcept_active_requisite={rconcept_active_requisite_value}."
@@ -435,28 +435,28 @@ def add_plan_concept_reasonunit_insert_to_legible_list(
 def add_plan_concept_reasonunit_update_to_legible_list(
     legible_list: list[str], concept_reasonunit_update_dict: dict, x_plan: PlanUnit
 ):
-    for way_dict in concept_reasonunit_update_dict.values():
-        for concept_reasonunit_atom in way_dict.values():
-            way_value = concept_reasonunit_atom.get_value("concept_way")
+    for rope_dict in concept_reasonunit_update_dict.values():
+        for concept_reasonunit_atom in rope_dict.values():
+            rope_value = concept_reasonunit_atom.get_value("concept_rope")
             rcontext_value = concept_reasonunit_atom.get_value("rcontext")
             rconcept_active_requisite_value = concept_reasonunit_atom.get_value(
                 "rconcept_active_requisite"
             )
             if rconcept_active_requisite_value is not None:
-                x_str = f"ReasonUnit rcontext='{rcontext_value}' for concept '{way_value}' set with rconcept_active_requisite={rconcept_active_requisite_value}."
+                x_str = f"ReasonUnit rcontext='{rcontext_value}' for concept '{rope_value}' set with rconcept_active_requisite={rconcept_active_requisite_value}."
             else:
-                x_str = f"ReasonUnit rcontext='{rcontext_value}' for concept '{way_value}' and no longer checks rcontext active mode."
+                x_str = f"ReasonUnit rcontext='{rcontext_value}' for concept '{rope_value}' and no longer checks rcontext active mode."
             legible_list.append(x_str)
 
 
 def add_plan_concept_reasonunit_delete_to_legible_list(
     legible_list: list[str], concept_reasonunit_delete_dict: dict, x_plan: PlanUnit
 ):
-    for way_dict in concept_reasonunit_delete_dict.values():
-        for concept_reasonunit_atom in way_dict.values():
-            way_value = concept_reasonunit_atom.get_value("concept_way")
+    for rope_dict in concept_reasonunit_delete_dict.values():
+        for concept_reasonunit_atom in rope_dict.values():
+            rope_value = concept_reasonunit_atom.get_value("concept_rope")
             rcontext_value = concept_reasonunit_atom.get_value("rcontext")
-            x_str = f"ReasonUnit rcontext='{rcontext_value}' for concept '{way_value}' has been deleted."
+            x_str = f"ReasonUnit rcontext='{rcontext_value}' for concept '{rope_value}' has been deleted."
             legible_list.append(x_str)
 
 
@@ -465,16 +465,16 @@ def add_plan_reason_premiseunit_insert_to_legible_list(
     concept_reason_premiseunit_insert_dict: dict,
     x_plan: PlanUnit,
 ):
-    for way_dict in concept_reason_premiseunit_insert_dict.values():
-        for rcontext_dict in way_dict.values():
+    for rope_dict in concept_reason_premiseunit_insert_dict.values():
+        for rcontext_dict in rope_dict.values():
             for concept_reason_premiseunit_atom in rcontext_dict.values():
-                way_value = concept_reason_premiseunit_atom.get_value("concept_way")
+                rope_value = concept_reason_premiseunit_atom.get_value("concept_rope")
                 rcontext_value = concept_reason_premiseunit_atom.get_value("rcontext")
                 pstate_value = concept_reason_premiseunit_atom.get_value("pstate")
                 pdivisor_value = concept_reason_premiseunit_atom.get_value("pdivisor")
                 pnigh_value = concept_reason_premiseunit_atom.get_value("pnigh")
                 popen_value = concept_reason_premiseunit_atom.get_value("popen")
-                x_str = f"PremiseUnit '{pstate_value}' created for reason '{rcontext_value}' for concept '{way_value}'."
+                x_str = f"PremiseUnit '{pstate_value}' created for reason '{rcontext_value}' for concept '{rope_value}'."
                 if popen_value is not None:
                     x_str += f" Popen={popen_value}."
                 if pnigh_value is not None:
@@ -489,16 +489,16 @@ def add_plan_reason_premiseunit_update_to_legible_list(
     concept_reason_premiseunit_update_dict: dict,
     x_plan: PlanUnit,
 ):
-    for way_dict in concept_reason_premiseunit_update_dict.values():
-        for rcontext_dict in way_dict.values():
+    for rope_dict in concept_reason_premiseunit_update_dict.values():
+        for rcontext_dict in rope_dict.values():
             for concept_reason_premiseunit_atom in rcontext_dict.values():
-                way_value = concept_reason_premiseunit_atom.get_value("concept_way")
+                rope_value = concept_reason_premiseunit_atom.get_value("concept_rope")
                 rcontext_value = concept_reason_premiseunit_atom.get_value("rcontext")
                 pstate_value = concept_reason_premiseunit_atom.get_value("pstate")
                 pdivisor_value = concept_reason_premiseunit_atom.get_value("pdivisor")
                 pnigh_value = concept_reason_premiseunit_atom.get_value("pnigh")
                 popen_value = concept_reason_premiseunit_atom.get_value("popen")
-                x_str = f"PremiseUnit '{pstate_value}' updated for reason '{rcontext_value}' for concept '{way_value}'."
+                x_str = f"PremiseUnit '{pstate_value}' updated for reason '{rcontext_value}' for concept '{rope_value}'."
                 if popen_value is not None:
                     x_str += f" Popen={popen_value}."
                 if pnigh_value is not None:
@@ -513,25 +513,25 @@ def add_plan_reason_premiseunit_delete_to_legible_list(
     concept_reason_premiseunit_delete_dict: dict,
     x_plan: PlanUnit,
 ):
-    for way_dict in concept_reason_premiseunit_delete_dict.values():
-        for rcontext_dict in way_dict.values():
+    for rope_dict in concept_reason_premiseunit_delete_dict.values():
+        for rcontext_dict in rope_dict.values():
             for concept_reason_premiseunit_atom in rcontext_dict.values():
-                way_value = concept_reason_premiseunit_atom.get_value("concept_way")
+                rope_value = concept_reason_premiseunit_atom.get_value("concept_rope")
                 rcontext_value = concept_reason_premiseunit_atom.get_value("rcontext")
                 pstate_value = concept_reason_premiseunit_atom.get_value("pstate")
-                x_str = f"PremiseUnit '{pstate_value}' deleted from reason '{rcontext_value}' for concept '{way_value}'."
+                x_str = f"PremiseUnit '{pstate_value}' deleted from reason '{rcontext_value}' for concept '{rope_value}'."
                 legible_list.append(x_str)
 
 
 def add_plan_concept_laborlink_insert_to_legible_list(
     legible_list: list[str], concept_laborlink_insert_dict: dict, x_plan: PlanUnit
 ):
-    for way_dict in concept_laborlink_insert_dict.values():
-        for concept_laborlink_atom in way_dict.values():
+    for rope_dict in concept_laborlink_insert_dict.values():
+        for concept_laborlink_atom in rope_dict.values():
             labor_title_value = concept_laborlink_atom.get_value("labor_title")
-            way_value = concept_laborlink_atom.get_value("concept_way")
+            rope_value = concept_laborlink_atom.get_value("concept_rope")
             x_str = (
-                f"laborlink '{labor_title_value}' created for concept '{way_value}'."
+                f"laborlink '{labor_title_value}' created for concept '{rope_value}'."
             )
             legible_list.append(x_str)
 
@@ -539,12 +539,12 @@ def add_plan_concept_laborlink_insert_to_legible_list(
 def add_plan_concept_laborlink_delete_to_legible_list(
     legible_list: list[str], concept_laborlink_delete_dict: dict, x_plan: PlanUnit
 ):
-    for way_dict in concept_laborlink_delete_dict.values():
-        for concept_laborlink_atom in way_dict.values():
+    for rope_dict in concept_laborlink_delete_dict.values():
+        for concept_laborlink_atom in rope_dict.values():
             labor_title_value = concept_laborlink_atom.get_value("labor_title")
-            way_value = concept_laborlink_atom.get_value("concept_way")
+            rope_value = concept_laborlink_atom.get_value("concept_rope")
             x_str = (
-                f"laborlink '{labor_title_value}' deleted for concept '{way_value}'."
+                f"laborlink '{labor_title_value}' deleted for concept '{rope_value}'."
             )
             legible_list.append(x_str)
 
@@ -552,12 +552,12 @@ def add_plan_concept_laborlink_delete_to_legible_list(
 def add_plan_concept_healerlink_insert_to_legible_list(
     legible_list: list[str], concept_healerlink_insert_dict: dict, x_plan: PlanUnit
 ):
-    for way_dict in concept_healerlink_insert_dict.values():
-        for concept_healerlink_atom in way_dict.values():
+    for rope_dict in concept_healerlink_insert_dict.values():
+        for concept_healerlink_atom in rope_dict.values():
             healer_name_value = concept_healerlink_atom.get_value("healer_name")
-            way_value = concept_healerlink_atom.get_value("concept_way")
+            rope_value = concept_healerlink_atom.get_value("concept_rope")
             x_str = (
-                f"HealerLink '{healer_name_value}' created for concept '{way_value}'."
+                f"HealerLink '{healer_name_value}' created for concept '{rope_value}'."
             )
             legible_list.append(x_str)
 
@@ -565,12 +565,12 @@ def add_plan_concept_healerlink_insert_to_legible_list(
 def add_plan_concept_healerlink_delete_to_legible_list(
     legible_list: list[str], concept_healerlink_delete_dict: dict, x_plan: PlanUnit
 ):
-    for way_dict in concept_healerlink_delete_dict.values():
-        for concept_healerlink_atom in way_dict.values():
+    for rope_dict in concept_healerlink_delete_dict.values():
+        for concept_healerlink_atom in rope_dict.values():
             healer_name_value = concept_healerlink_atom.get_value("healer_name")
-            way_value = concept_healerlink_atom.get_value("concept_way")
+            rope_value = concept_healerlink_atom.get_value("concept_rope")
             x_str = (
-                f"HealerLink '{healer_name_value}' deleted for concept '{way_value}'."
+                f"HealerLink '{healer_name_value}' deleted for concept '{rope_value}'."
             )
             legible_list.append(x_str)
 
@@ -578,14 +578,14 @@ def add_plan_concept_healerlink_delete_to_legible_list(
 def add_plan_concept_factunit_insert_to_legible_list(
     legible_list: list[str], concept_factunit_insert_dict: dict, x_plan: PlanUnit
 ):
-    for way_dict in concept_factunit_insert_dict.values():
-        for concept_factunit_atom in way_dict.values():
-            way_value = concept_factunit_atom.get_value("concept_way")
+    for rope_dict in concept_factunit_insert_dict.values():
+        for concept_factunit_atom in rope_dict.values():
+            rope_value = concept_factunit_atom.get_value("concept_rope")
             fcontext_value = concept_factunit_atom.get_value("fcontext")
             fstate_value = concept_factunit_atom.get_value("fstate")
             fnigh_value = concept_factunit_atom.get_value("fnigh")
             fopen_value = concept_factunit_atom.get_value("fopen")
-            x_str = f"FactUnit '{fstate_value}' created for rcontext '{fcontext_value}' for concept '{way_value}'."
+            x_str = f"FactUnit '{fstate_value}' created for rcontext '{fcontext_value}' for concept '{rope_value}'."
             if fopen_value is not None:
                 x_str += f" fopen={fopen_value}."
             if fnigh_value is not None:
@@ -596,14 +596,14 @@ def add_plan_concept_factunit_insert_to_legible_list(
 def add_plan_concept_factunit_update_to_legible_list(
     legible_list: list[str], concept_factunit_update_dict: dict, x_plan: PlanUnit
 ):
-    for way_dict in concept_factunit_update_dict.values():
-        for concept_factunit_atom in way_dict.values():
-            way_value = concept_factunit_atom.get_value("concept_way")
+    for rope_dict in concept_factunit_update_dict.values():
+        for concept_factunit_atom in rope_dict.values():
+            rope_value = concept_factunit_atom.get_value("concept_rope")
             fcontext_value = concept_factunit_atom.get_value("fcontext")
             fstate_value = concept_factunit_atom.get_value("fstate")
             fnigh_value = concept_factunit_atom.get_value("fnigh")
             fopen_value = concept_factunit_atom.get_value("fopen")
-            x_str = f"FactUnit '{fstate_value}' updated for rcontext '{fcontext_value}' for concept '{way_value}'."
+            x_str = f"FactUnit '{fstate_value}' updated for rcontext '{fcontext_value}' for concept '{rope_value}'."
             if fopen_value is not None:
                 x_str += f" fopen={fopen_value}."
             if fnigh_value is not None:
@@ -614,10 +614,10 @@ def add_plan_concept_factunit_update_to_legible_list(
 def add_plan_concept_factunit_delete_to_legible_list(
     legible_list: list[str], concept_factunit_delete_dict: dict, x_plan: PlanUnit
 ):
-    for way_dict in concept_factunit_delete_dict.values():
-        for concept_factunit_atom in way_dict.values():
-            way_value = concept_factunit_atom.get_value("concept_way")
+    for rope_dict in concept_factunit_delete_dict.values():
+        for concept_factunit_atom in rope_dict.values():
+            rope_value = concept_factunit_atom.get_value("concept_rope")
             fcontext_value = concept_factunit_atom.get_value("fcontext")
             fstate_value = concept_factunit_atom.get_value("fstate")
-            x_str = f"FactUnit rcontext '{fcontext_value}' deleted for concept '{way_value}'."
+            x_str = f"FactUnit rcontext '{fcontext_value}' deleted for concept '{rope_value}'."
             legible_list.append(x_str)

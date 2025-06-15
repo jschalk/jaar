@@ -4,12 +4,12 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_1_if_None,
     get_dict_from_json,
 )
-from src.a01_term_logic.term import AcctName
-from src.a01_term_logic.way import (
-    default_bridge_if_None,
+from src.a01_term_logic.rope import (
+    default_knot_if_None,
     is_labelterm,
     validate_labelterm,
 )
+from src.a01_term_logic.term import AcctName
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import RespectNum, default_RespectBit_if_None
 from src.a03_group_logic.group import (
@@ -31,11 +31,11 @@ class Bad_acct_nameMemberShipException(Exception):
 @dataclass
 class AcctCore:
     acct_name: AcctName = None
-    bridge: str = None
+    knot: str = None
     respect_bit: float = None
 
     def set_nameterm(self, x_acct_name: AcctName):
-        self.acct_name = validate_labelterm(x_acct_name, self.bridge)
+        self.acct_name = validate_labelterm(x_acct_name, self.knot)
 
 
 @dataclass
@@ -161,7 +161,7 @@ class AcctUnit(AcctCore):
 
     def set_membership(self, x_membership: MemberShip):
         x_group_title = x_membership.group_title
-        group_title_is_acct_name = is_labelterm(x_group_title, self.bridge)
+        group_title_is_acct_name = is_labelterm(x_group_title, self.knot)
         if group_title_is_acct_name and self.acct_name != x_group_title:
             raise Bad_acct_nameMemberShipException(
                 f"AcctUnit with acct_name='{self.acct_name}' cannot have link to '{x_group_title}'."
@@ -241,20 +241,20 @@ def acctunits_get_from_json(acctunits_json: str) -> dict[str, AcctUnit]:
     return acctunits_get_from_dict(x_dict=acctunits_dict)
 
 
-def acctunits_get_from_dict(x_dict: dict, _bridge: str = None) -> dict[str, AcctUnit]:
+def acctunits_get_from_dict(x_dict: dict, _knot: str = None) -> dict[str, AcctUnit]:
     acctunits = {}
     for acctunit_dict in x_dict.values():
-        x_acctunit = acctunit_get_from_dict(acctunit_dict, _bridge)
+        x_acctunit = acctunit_get_from_dict(acctunit_dict, _knot)
         acctunits[x_acctunit.acct_name] = x_acctunit
     return acctunits
 
 
-def acctunit_get_from_dict(acctunit_dict: dict, _bridge: str) -> AcctUnit:
+def acctunit_get_from_dict(acctunit_dict: dict, _knot: str) -> AcctUnit:
     x_acct_name = acctunit_dict["acct_name"]
     x_credit_score = acctunit_dict["credit_score"]
     x_debt_score = acctunit_dict["debt_score"]
     x_memberships_dict = acctunit_dict["_memberships"]
-    x_acctunit = acctunit_shop(x_acct_name, x_credit_score, x_debt_score, _bridge)
+    x_acctunit = acctunit_shop(x_acct_name, x_credit_score, x_debt_score, _knot)
     x_acctunit._memberships = memberships_get_from_dict(x_memberships_dict, x_acct_name)
     _irrational_debt_score = acctunit_dict.get("_irrational_debt_score", 0)
     _inallocable_debt_score = acctunit_dict.get("_inallocable_debt_score", 0)
@@ -268,7 +268,7 @@ def acctunit_shop(
     acct_name: AcctName,
     credit_score: int = None,
     debt_score: int = None,
-    bridge: str = None,
+    knot: str = None,
     respect_bit: float = None,
 ) -> AcctUnit:
     x_acctunit = AcctUnit(
@@ -285,7 +285,7 @@ def acctunit_shop(
         _fund_agenda_take=0,
         _fund_agenda_ratio_give=0,
         _fund_agenda_ratio_take=0,
-        bridge=default_bridge_if_None(bridge),
+        knot=default_knot_if_None(knot),
         respect_bit=default_RespectBit_if_None(respect_bit),
     )
     x_acctunit.set_nameterm(x_acct_name=acct_name)

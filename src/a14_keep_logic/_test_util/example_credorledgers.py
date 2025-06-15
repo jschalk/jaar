@@ -3,7 +3,7 @@ from src.a06_plan_logic.plan import planunit_shop
 from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.a14_keep_logic._test_util.a14_env import (
     get_module_temp_dir,
-    get_texas_way,
+    get_texas_rope,
     temp_vow_label,
 )
 from src.a14_keep_logic.rivercycle import get_credorledger
@@ -14,7 +14,9 @@ def example_yao_hubunit() -> HubUnit:
 
 
 def example_yao_texas_hubunit() -> HubUnit:
-    return hubunit_shop(get_module_temp_dir(), temp_vow_label(), "Yao", get_texas_way())
+    return hubunit_shop(
+        get_module_temp_dir(), temp_vow_label(), "Yao", get_texas_rope()
+    )
 
 
 def example_yao_credorledger() -> dict[str, float]:

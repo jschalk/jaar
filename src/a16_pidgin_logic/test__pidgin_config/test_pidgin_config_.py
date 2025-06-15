@@ -9,23 +9,23 @@ from src.a08_plan_atom_logic._test_util.a08_str import (
     normal_specs_str,
 )
 from src.a16_pidgin_logic._test_util.a16_str import (
-    inx_bridge_str,
+    inx_knot_str,
     inx_label_str,
     inx_name_str,
+    inx_rope_str,
     inx_title_str,
-    inx_way_str,
     map_otx2inx_str,
     otx2inx_str,
-    otx_bridge_str,
+    otx_knot_str,
     otx_label_str,
     otx_name_str,
+    otx_rope_str,
     otx_title_str,
-    otx_way_str,
     pidgin_core_str,
     pidgin_label_str,
     pidgin_name_str,
+    pidgin_rope_str,
     pidgin_title_str,
-    pidgin_way_str,
     pidginunit_str,
     unknown_str_str,
 )
@@ -67,15 +67,15 @@ def test_get_pidgin_config_dict_ReturnsObj():
     assert pidgin_name_str() in pidgin_config_dimens
     assert pidgin_title_str() in pidgin_config_dimens
     assert pidgin_label_str() in pidgin_config_dimens
-    assert pidgin_way_str() in pidgin_config_dimens
+    assert pidgin_rope_str() in pidgin_config_dimens
     assert len(pidgin_config) == 4
 
     _validate_pidgin_config(pidgin_config)
-    pidgin_way_dict = pidgin_config.get(pidgin_way_str())
+    pidgin_rope_dict = pidgin_config.get(pidgin_rope_str())
     pidgin_label_dict = pidgin_config.get(pidgin_label_str())
-    assert len(pidgin_way_dict.get(jkeys_str())) == 1
+    assert len(pidgin_rope_dict.get(jkeys_str())) == 1
     assert len(pidgin_label_dict.get(jkeys_str())) == 1
-    assert len(pidgin_way_dict.get(jvalues_str())) == 4
+    assert len(pidgin_rope_dict.get(jvalues_str())) == 4
     assert len(pidgin_label_dict.get(jvalues_str())) == 4
 
     # assert gen_jvalues == x_pidginunit_jvalues
@@ -89,16 +89,16 @@ def test_get_pidgin_config_dict_ReturnsObj():
 
 def _validate_pidgin_config(pidgin_config: dict):
     x_possible_args = {
-        inx_bridge_str(),
-        otx_bridge_str(),
+        inx_knot_str(),
+        otx_knot_str(),
         inx_title_str(),
         otx_title_str(),
         inx_name_str(),
         otx_name_str(),
         inx_label_str(),
         otx_label_str(),
-        inx_way_str(),
-        otx_way_str(),
+        inx_rope_str(),
+        otx_rope_str(),
         unknown_str_str(),
     }
 
@@ -130,7 +130,7 @@ def test_get_pidgin_dimens_ReturnsObj():
     assert pidgin_name_str() in pidgin_config_dimens
     assert pidgin_title_str() in pidgin_config_dimens
     assert pidgin_label_str() in pidgin_config_dimens
-    assert pidgin_way_str() in pidgin_config_dimens
+    assert pidgin_rope_str() in pidgin_config_dimens
     assert len(pidgin_config_dimens) == 4
 
 
@@ -141,11 +141,11 @@ def test_get_pidgin_args_dimen_mapping_ReturnsObj():
 
     # THEN
     assert x_pidgin_args_dimen_mapping
-    assert x_pidgin_args_dimen_mapping.get(otx_way_str())
-    x_dimens = {pidgin_way_str()}
-    assert x_pidgin_args_dimen_mapping.get(otx_way_str()) == x_dimens
-    assert x_pidgin_args_dimen_mapping.get(inx_bridge_str())
-    pidgin_id_dimens = x_pidgin_args_dimen_mapping.get(inx_bridge_str())
+    assert x_pidgin_args_dimen_mapping.get(otx_rope_str())
+    x_dimens = {pidgin_rope_str()}
+    assert x_pidgin_args_dimen_mapping.get(otx_rope_str()) == x_dimens
+    assert x_pidgin_args_dimen_mapping.get(inx_knot_str())
+    pidgin_id_dimens = x_pidgin_args_dimen_mapping.get(inx_knot_str())
     assert len(pidgin_id_dimens) == 4
     assert len(x_pidgin_args_dimen_mapping) == 11
 
@@ -167,7 +167,7 @@ def test_get_quick_pidgens_column_ref_ReturnsObj():
     # print(f"{all_pidgen_config_attrs=}")
 
     # WHEN / THEN
-    assert pidgin_way_str() in set(get_quick_pidgens_column_ref().keys())
+    assert pidgin_rope_str() in set(get_quick_pidgens_column_ref().keys())
     assert len(get_quick_pidgens_column_ref().keys()) == 4
     assert get_quick_pidgens_column_ref() == all_pidgen_config_attrs
 

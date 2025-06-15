@@ -86,8 +86,8 @@
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
-            "concept_way": {
-                "class_type": "WayTerm",
+            "concept_rope": {
+                "class_type": "RopeTerm",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
@@ -120,14 +120,14 @@
             "atom_order": 6
         },
         "jkeys": {
-            "concept_way": {
-                "class_type": "WayTerm",
+            "concept_rope": {
+                "class_type": "RopeTerm",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
             "fcontext": {
-                "class_type": "WayTerm",
+                "class_type": "RopeTerm",
                 "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
@@ -145,7 +145,7 @@
                 "sqlite_datatype": "REAL"
             },
             "fstate": {
-                "class_type": "WayTerm",
+                "class_type": "RopeTerm",
                 "column_order": 2,
                 "sqlite_datatype": "TEXT"
             }
@@ -165,8 +165,8 @@
             "atom_order": 5
         },
         "jkeys": {
-            "concept_way": {
-                "class_type": "WayTerm",
+            "concept_rope": {
+                "class_type": "RopeTerm",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
@@ -191,8 +191,8 @@
             "atom_order": 4
         },
         "jkeys": {
-            "concept_way": {
-                "class_type": "WayTerm",
+            "concept_rope": {
+                "class_type": "RopeTerm",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
@@ -217,20 +217,20 @@
             "atom_order": 8
         },
         "jkeys": {
-            "concept_way": {
-                "class_type": "WayTerm",
+            "concept_rope": {
+                "class_type": "RopeTerm",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
             "pstate": {
-                "class_type": "WayTerm",
+                "class_type": "RopeTerm",
                 "column_order": 2,
                 "nesting_order": 2,
                 "sqlite_datatype": "TEXT"
             },
             "rcontext": {
-                "class_type": "WayTerm",
+                "class_type": "RopeTerm",
                 "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
@@ -268,14 +268,14 @@
             "atom_order": 7
         },
         "jkeys": {
-            "concept_way": {
-                "class_type": "WayTerm",
+            "concept_rope": {
+                "class_type": "RopeTerm",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
             "rcontext": {
-                "class_type": "WayTerm",
+                "class_type": "RopeTerm",
                 "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
@@ -303,8 +303,8 @@
             "atom_order": 2
         },
         "jkeys": {
-            "concept_way": {
-                "class_type": "WayTerm",
+            "concept_rope": {
+                "class_type": "RopeTerm",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"

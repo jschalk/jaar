@@ -25,13 +25,13 @@ from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a15_vow_logic._test_util.a15_str import vow_timeline_hour_str
 from src.a15_vow_logic.vow_config import get_vow_dimens
 from src.a16_pidgin_logic._test_util.a16_str import (
-    inx_bridge_str,
-    otx_bridge_str,
+    inx_knot_str,
+    otx_knot_str,
     pidgin_core_str,
     pidgin_label_str,
     pidgin_name_str,
+    pidgin_rope_str,
     pidgin_title_str,
-    pidgin_way_str,
     unknown_str_str,
 )
 from src.a16_pidgin_logic.pidgin_config import find_set_otx_inx_args, get_pidgin_dimens
@@ -113,8 +113,8 @@ def get_all_dimen_columns_set(x_dimen: str) -> set[str]:
         return {
             event_int_str(),
             face_name_str(),
-            otx_bridge_str(),
-            inx_bridge_str(),
+            otx_knot_str(),
+            inx_knot_str(),
             unknown_str_str(),
         }
     x_config = get_idea_config_dict().get(x_dimen)
@@ -166,8 +166,8 @@ def create_vow_sound_vld_table_sqlstr(x_dimen):
 def create_pidgin_sound_vld_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "vld")
     columns = get_all_dimen_columns_set(x_dimen)
-    columns.remove(otx_bridge_str())
-    columns.remove(inx_bridge_str())
+    columns.remove(otx_knot_str())
+    columns.remove(inx_knot_str())
     columns.remove(unknown_str_str())
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
@@ -618,8 +618,8 @@ SELECT event_int, face_name, otx_title
 FROM pidgin_title_s_raw
 GROUP BY event_int, face_name, otx_title
 HAVING MIN(inx_title) != MAX(inx_title)
-    OR MIN(otx_bridge) != MAX(otx_bridge)
-    OR MIN(inx_bridge) != MAX(inx_bridge)
+    OR MIN(otx_knot) != MAX(otx_knot)
+    OR MIN(inx_knot) != MAX(inx_knot)
     OR MIN(unknown_str) != MAX(unknown_str)
 )
 UPDATE pidgin_title_s_raw
@@ -700,9 +700,9 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
         assert update_sqlstr == expected_update_sqlstr
 
         static_example_sqlstr = """WITH inconsistency_rows AS (
-SELECT event_int, face_name, vow_label, owner_name, concept_way, awardee_title
+SELECT event_int, face_name, vow_label, owner_name, concept_rope, awardee_title
 FROM plan_concept_awardlink_s_put_raw
-GROUP BY event_int, face_name, vow_label, owner_name, concept_way, awardee_title
+GROUP BY event_int, face_name, vow_label, owner_name, concept_rope, awardee_title
 HAVING MIN(give_force) != MAX(give_force)
     OR MIN(take_force) != MAX(take_force)
 )
@@ -713,7 +713,7 @@ WHERE inconsistency_rows.event_int = plan_concept_awardlink_s_put_raw.event_int
     AND inconsistency_rows.face_name = plan_concept_awardlink_s_put_raw.face_name
     AND inconsistency_rows.vow_label = plan_concept_awardlink_s_put_raw.vow_label
     AND inconsistency_rows.owner_name = plan_concept_awardlink_s_put_raw.owner_name
-    AND inconsistency_rows.concept_way = plan_concept_awardlink_s_put_raw.concept_way
+    AND inconsistency_rows.concept_rope = plan_concept_awardlink_s_put_raw.concept_rope
     AND inconsistency_rows.awardee_title = plan_concept_awardlink_s_put_raw.awardee_title
 ;
 """
@@ -748,8 +748,8 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario0_PidginDimen():
         # print(expected_insert_sqlstr)
         assert update_sqlstrs[0] == expected_insert_sqlstr
 
-        static_example_sqlstr = """INSERT INTO pidgin_title_s_agg (event_int, face_name, otx_title, inx_title, otx_bridge, inx_bridge, unknown_str)
-SELECT event_int, face_name, otx_title, MAX(inx_title), MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_str)
+        static_example_sqlstr = """INSERT INTO pidgin_title_s_agg (event_int, face_name, otx_title, inx_title, otx_knot, inx_knot, unknown_str)
+SELECT event_int, face_name, otx_title, MAX(inx_title), MAX(otx_knot), MAX(inx_knot), MAX(unknown_str)
 FROM pidgin_title_s_raw
 WHERE error_message IS NULL
 GROUP BY event_int, face_name, otx_title
@@ -829,11 +829,11 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario2_PlanDimen():
         # print(put_expected_insert_sqlstr)
         assert update_sqlstrs[0] == put_expected_insert_sqlstr
 
-        static_example_put_sqlstr = """INSERT INTO plan_concept_awardlink_s_put_agg (event_int, face_name, vow_label, owner_name, concept_way, awardee_title, give_force, take_force)
-SELECT event_int, face_name, vow_label, owner_name, concept_way, awardee_title, MAX(give_force), MAX(take_force)
+        static_example_put_sqlstr = """INSERT INTO plan_concept_awardlink_s_put_agg (event_int, face_name, vow_label, owner_name, concept_rope, awardee_title, give_force, take_force)
+SELECT event_int, face_name, vow_label, owner_name, concept_rope, awardee_title, MAX(give_force), MAX(take_force)
 FROM plan_concept_awardlink_s_put_raw
 WHERE error_message IS NULL
-GROUP BY event_int, face_name, vow_label, owner_name, concept_way, awardee_title
+GROUP BY event_int, face_name, vow_label, owner_name, concept_rope, awardee_title
 ;
 """
         # print(update_sqlstrs[0])
@@ -860,10 +860,10 @@ GROUP BY event_int, face_name, vow_label, owner_name, concept_way, awardee_title
         print(update_sqlstrs[1])
         assert update_sqlstrs[1] == del_expected_insert_sqlstr
 
-        static_example_del_sqlstr = """INSERT INTO plan_concept_awardlink_s_del_agg (event_int, face_name, vow_label, owner_name, concept_way, awardee_title_ERASE)
-SELECT event_int, face_name, vow_label, owner_name, concept_way, awardee_title_ERASE
+        static_example_del_sqlstr = """INSERT INTO plan_concept_awardlink_s_del_agg (event_int, face_name, vow_label, owner_name, concept_rope, awardee_title_ERASE)
+SELECT event_int, face_name, vow_label, owner_name, concept_rope, awardee_title_ERASE
 FROM plan_concept_awardlink_s_del_raw
-GROUP BY event_int, face_name, vow_label, owner_name, concept_way, awardee_title_ERASE
+GROUP BY event_int, face_name, vow_label, owner_name, concept_rope, awardee_title_ERASE
 ;
 """
         assert update_sqlstrs[1] == static_example_del_sqlstr
@@ -871,41 +871,41 @@ GROUP BY event_int, face_name, vow_label, owner_name, concept_way, awardee_title
 
 def test_create_insert_into_pidgin_core_raw_sqlstr_ReturnsObj():
     # ESTABLISH
-    dimen = pidgin_way_str()
+    dimen = pidgin_rope_str()
     # WHEN
-    way_sqlstr = create_insert_into_pidgin_core_raw_sqlstr(dimen)
+    rope_sqlstr = create_insert_into_pidgin_core_raw_sqlstr(dimen)
 
     # THEN
     pidgin_s_agg_tablename = prime_tbl(dimen, "s", "agg")
     pidgin_core_s_raw_tablename = prime_tbl("PIDCORE", "s", "raw")
-    expected_sqlstr = f"""INSERT INTO {pidgin_core_s_raw_tablename} (source_dimen, face_name, otx_bridge, inx_bridge, unknown_str)
-SELECT '{pidgin_s_agg_tablename}', face_name, otx_bridge, inx_bridge, unknown_str
+    expected_sqlstr = f"""INSERT INTO {pidgin_core_s_raw_tablename} (source_dimen, face_name, otx_knot, inx_knot, unknown_str)
+SELECT '{pidgin_s_agg_tablename}', face_name, otx_knot, inx_knot, unknown_str
 FROM {pidgin_s_agg_tablename}
-GROUP BY face_name, otx_bridge, inx_bridge, unknown_str
+GROUP BY face_name, otx_knot, inx_knot, unknown_str
 ;
 """
-    assert way_sqlstr == expected_sqlstr
+    assert rope_sqlstr == expected_sqlstr
 
 
 def test_create_insert_pidgin_core_agg_into_vld_sqlstr_ReturnsObj():
     # ESTABLISH
-    default_bridge = "|"
+    default_knot = "|"
     default_unknown_str = "unknown2"
 
     # WHEN
     insert_sqlstr = create_insert_pidgin_core_agg_into_vld_sqlstr(
-        default_bridge, default_unknown_str
+        default_knot, default_unknown_str
     )
 
     # THEN
     pidcore_dimen = "PIDCORE"
     pidgin_core_s_agg_tablename = prime_tbl(pidcore_dimen, "s", "agg")
     pidgin_core_s_vld_tablename = prime_tbl(pidcore_dimen, "s", "vld")
-    expected_sqlstr = f"""INSERT INTO {pidgin_core_s_vld_tablename} (face_name, otx_bridge, inx_bridge, unknown_str)
+    expected_sqlstr = f"""INSERT INTO {pidgin_core_s_vld_tablename} (face_name, otx_knot, inx_knot, unknown_str)
 SELECT
   face_name
-, IFNULL(otx_bridge, '{default_bridge}')
-, IFNULL(inx_bridge, '{default_bridge}')
+, IFNULL(otx_knot, '{default_knot}')
+, IFNULL(inx_knot, '{default_knot}')
 , IFNULL(unknown_str, '{default_unknown_str}')
 FROM {pidgin_core_s_agg_tablename}
 ;
@@ -916,23 +916,23 @@ FROM {pidgin_core_s_agg_tablename}
 
 def test_create_insert_missing_face_name_into_pidgin_core_vld_sqlstr_ReturnsObj():
     # ESTABLISH
-    default_bridge = "|"
+    default_knot = "|"
     default_unknown_str = "unknown2"
     plnacct_s_agg_tablename = prime_tbl(plan_acctunit_str(), "s", "agg")
 
     # WHEN
     insert_sqlstr = create_insert_missing_face_name_into_pidgin_core_vld_sqlstr(
-        default_bridge, default_unknown_str, plnacct_s_agg_tablename
+        default_knot, default_unknown_str, plnacct_s_agg_tablename
     )
 
     # THEN
     pidcore_dimen = "PIDCORE"
     pidgin_core_s_vld_tablename = prime_tbl(pidcore_dimen, "s", "vld")
-    expected_sqlstr = f"""INSERT INTO {pidgin_core_s_vld_tablename} (face_name, otx_bridge, inx_bridge, unknown_str)
+    expected_sqlstr = f"""INSERT INTO {pidgin_core_s_vld_tablename} (face_name, otx_knot, inx_knot, unknown_str)
 SELECT
   {plnacct_s_agg_tablename}.face_name
-, '{default_bridge}'
-, '{default_bridge}'
+, '{default_knot}'
+, '{default_knot}'
 , '{default_unknown_str}'
 FROM {plnacct_s_agg_tablename} 
 LEFT JOIN pidgin_core_s_vld ON pidgin_core_s_vld.face_name = {plnacct_s_agg_tablename}.face_name
@@ -944,25 +944,25 @@ GROUP BY {plnacct_s_agg_tablename}.face_name
     assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_insert_pidgin_sound_vld_table_sqlstr_ReturnsObj_pidgin_way():
+def test_create_insert_pidgin_sound_vld_table_sqlstr_ReturnsObj_pidgin_rope():
     # ESTABLISH
-    dimen = pidgin_way_str()
+    dimen = pidgin_rope_str()
     # WHEN
-    way_sqlstr = create_insert_pidgin_sound_vld_table_sqlstr(dimen)
+    rope_sqlstr = create_insert_pidgin_sound_vld_table_sqlstr(dimen)
 
     # THEN
     pidgin_dimen_s_agg_tablename = prime_tbl(dimen, "s", "agg")
     pidgin_dimen_s_vld_tablename = prime_tbl(dimen, "s", "vld")
-    expected_way_sqlstr = f"""
-INSERT INTO {pidgin_dimen_s_vld_tablename} (event_int, face_name, otx_way, inx_way)
-SELECT event_int, face_name, MAX(otx_way), MAX(inx_way)
+    expected_rope_sqlstr = f"""
+INSERT INTO {pidgin_dimen_s_vld_tablename} (event_int, face_name, otx_rope, inx_rope)
+SELECT event_int, face_name, MAX(otx_rope), MAX(inx_rope)
 FROM {pidgin_dimen_s_agg_tablename}
 WHERE error_message IS NULL
 GROUP BY event_int, face_name
 ;
 """
-    print(expected_way_sqlstr)
-    assert way_sqlstr == expected_way_sqlstr
+    print(expected_rope_sqlstr)
+    assert rope_sqlstr == expected_rope_sqlstr
 
 
 def test_create_insert_pidgin_sound_vld_table_sqlstr_ReturnsObj_pidgin_label():

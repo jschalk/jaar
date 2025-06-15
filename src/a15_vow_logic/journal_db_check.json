@@ -28,10 +28,10 @@
                 "owner_name": {}
             }
         },
-        "way_ref": {
+        "rope_ref": {
             "columns": {
-                "bridge": {},
-                "concept_way": {}
+                "knot": {},
+                "concept_rope": {}
             }
         }
     }

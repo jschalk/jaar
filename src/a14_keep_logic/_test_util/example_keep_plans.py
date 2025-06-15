@@ -25,7 +25,7 @@ def get_2label_plan(vow_label: VowLabel = None) -> PlanUnit:
     x_plan = planunit_shop(owner_name=a_str)
     x_plan.set_vow_label(vow_label)
     concept_b = conceptunit_shop(b_str)
-    x_plan.set_concept(concept_b, parent_way=temp_vow_label())
+    x_plan.set_concept(concept_b, parent_rope=temp_vow_label())
     x_plan.settle_plan()
     return x_plan
 
@@ -55,10 +55,10 @@ def get_6label_plan() -> PlanUnit:
     x_plan.set_vow_label(temp_vow_label())
     x_plan.set_l1_concept(conceptunit_shop("B"))
     x_plan.set_l1_concept(conceptunit_shop("C"))
-    c_way = x_plan.make_l1_way("C")
-    x_plan.set_concept(conceptunit_shop("D"), c_way)
-    x_plan.set_concept(conceptunit_shop("E"), c_way)
-    x_plan.set_concept(conceptunit_shop("F"), c_way)
+    c_rope = x_plan.make_l1_rope("C")
+    x_plan.set_concept(conceptunit_shop("D"), c_rope)
+    x_plan.set_concept(conceptunit_shop("E"), c_rope)
+    x_plan.set_concept(conceptunit_shop("F"), c_rope)
     x_plan.settle_plan()
     return x_plan
 
@@ -68,11 +68,11 @@ def get_7labelInsertH_plan() -> PlanUnit:
     x_plan.set_vow_label(temp_vow_label())
     x_plan.set_l1_concept(conceptunit_shop("B"))
     x_plan.set_l1_concept(conceptunit_shop("C"))
-    c_way = x_plan.make_l1_way("C")
-    x_plan.set_concept(conceptunit_shop("H"), c_way)
-    x_plan.set_concept(conceptunit_shop("D"), c_way)
-    x_plan.set_concept(conceptunit_shop("E"), c_way)
-    x_plan.set_concept(conceptunit_shop("F"), x_plan.make_way(c_way, "H"))
+    c_rope = x_plan.make_l1_rope("C")
+    x_plan.set_concept(conceptunit_shop("H"), c_rope)
+    x_plan.set_concept(conceptunit_shop("D"), c_rope)
+    x_plan.set_concept(conceptunit_shop("E"), c_rope)
+    x_plan.set_concept(conceptunit_shop("F"), x_plan.make_rope(c_rope, "H"))
     x_plan.settle_plan()
     return x_plan
 
@@ -82,9 +82,9 @@ def get_5labelHG_plan() -> PlanUnit:
     x_plan.set_vow_label(temp_vow_label())
     x_plan.set_l1_concept(conceptunit_shop("B"))
     x_plan.set_l1_concept(conceptunit_shop("C"))
-    c_way = x_plan.make_l1_way("C")
-    x_plan.set_concept(conceptunit_shop("H"), c_way)
-    x_plan.set_concept(conceptunit_shop("G"), c_way)
+    c_rope = x_plan.make_l1_rope("C")
+    x_plan.set_concept(conceptunit_shop("H"), c_rope)
+    x_plan.set_concept(conceptunit_shop("G"), c_rope)
     x_plan.settle_plan()
     return x_plan
 
@@ -94,12 +94,12 @@ def get_7labelJRoot_plan() -> PlanUnit:
     x_plan.set_vow_label(temp_vow_label())
     x_plan.set_l1_concept(conceptunit_shop("A"))
 
-    a_way = x_plan.make_l1_way("A")
-    x_plan.set_concept(conceptunit_shop("B"), a_way)
-    x_plan.set_concept(conceptunit_shop("C"), a_way)
-    c_way = x_plan.make_l1_way("C")
-    x_plan.set_concept(conceptunit_shop("D"), c_way)
-    x_plan.set_concept(conceptunit_shop("E"), c_way)
-    x_plan.set_concept(conceptunit_shop("F"), c_way)
+    a_rope = x_plan.make_l1_rope("A")
+    x_plan.set_concept(conceptunit_shop("B"), a_rope)
+    x_plan.set_concept(conceptunit_shop("C"), a_rope)
+    c_rope = x_plan.make_l1_rope("C")
+    x_plan.set_concept(conceptunit_shop("D"), c_rope)
+    x_plan.set_concept(conceptunit_shop("E"), c_rope)
+    x_plan.set_concept(conceptunit_shop("F"), c_rope)
     x_plan.settle_plan()
     return x_plan

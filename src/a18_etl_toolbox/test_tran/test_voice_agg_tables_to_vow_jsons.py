@@ -112,7 +112,7 @@ def test_get_vow_voice_select1_sqlstrs_ReturnsObj():
         assert gen_vowweek_sqlstr == vowweek_sql
         assert gen_vowoffi_sqlstr == vowoffi_sql
         assert gen_vowunit_sqlstr == vowunit_sql
-        static_example_sqlstr = f"SELECT vow_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, bridge, job_listen_rotations FROM vowunit_v_agg WHERE vow_label = '{a23_str}'"
+        static_example_sqlstr = f"SELECT vow_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations FROM vowunit_v_agg WHERE vow_label = '{a23_str}'"
         assert gen_vowunit_sqlstr == static_example_sqlstr
 
 

@@ -9,16 +9,16 @@ from src.a06_plan_logic._test_util.a06_str import (
 )
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic._test_util.a16_str import (
-    inx_bridge_str,
-    inx_way_str,
-    otx_bridge_str,
-    otx_way_str,
-    pidgin_way_str,
+    inx_knot_str,
+    inx_rope_str,
+    otx_knot_str,
+    otx_rope_str,
+    pidgin_rope_str,
     unknown_str_str,
 )
 from src.a17_idea_logic._test_util.a17_str import idea_number_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
-    CREATE_PIDWAYY_SOUND_RAW_SQLSTR,
+    CREATE_PIDROPE_SOUND_RAW_SQLSTR,
     create_prime_tablename,
     create_sound_and_voice_tables,
     create_sound_raw_update_inconsist_error_message_sqlstr,
@@ -47,17 +47,17 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ExecutedSqlUpdat
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        cursor.execute(CREATE_PIDWAYY_SOUND_RAW_SQLSTR)
-        pidwayy_str = "pidgin_way"
-        pidwayy_s_raw_tablename = create_prime_tablename(pidwayy_str, "s", "raw")
-        insert_into_clause = f"""INSERT INTO {pidwayy_s_raw_tablename} (
+        cursor.execute(CREATE_PIDROPE_SOUND_RAW_SQLSTR)
+        pidrope_str = "pidgin_rope"
+        pidrope_s_raw_tablename = create_prime_tablename(pidrope_str, "s", "raw")
+        insert_into_clause = f"""INSERT INTO {pidrope_s_raw_tablename} (
   {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
-, {otx_way_str()}
-, {inx_way_str()}
-, {otx_bridge_str()}
-, {inx_bridge_str()}
+, {otx_rope_str()}
+, {inx_rope_str()}
+, {otx_knot_str()}
+, {inx_knot_str()}
 , {unknown_str_str()}
 , "error_message"
 )"""
@@ -75,12 +75,12 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        error_count_sqlstr = f"SELECT COUNT(*) FROM {pidwayy_s_raw_tablename} WHERE error_message IS NOT NULL"
+        error_count_sqlstr = f"SELECT COUNT(*) FROM {pidrope_s_raw_tablename} WHERE error_message IS NOT NULL"
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
         sqlstr = create_sound_raw_update_inconsist_error_message_sqlstr(
-            cursor, pidwayy_str
+            cursor, pidrope_str
         )
         cursor.execute(sqlstr)
 
@@ -106,15 +106,15 @@ def test_set_sound_raw_tables_error_message_UpdatesTableCorrectly_Scenario0():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        pidwayy_s_raw_tablename = create_prime_tablename(pidgin_way_str(), "s", "raw")
-        insert_into_clause = f"""INSERT INTO {pidwayy_s_raw_tablename} (
+        pidrope_s_raw_tablename = create_prime_tablename(pidgin_rope_str(), "s", "raw")
+        insert_into_clause = f"""INSERT INTO {pidrope_s_raw_tablename} (
   {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
-, {otx_way_str()}
-, {inx_way_str()}
-, {otx_bridge_str()}
-, {inx_bridge_str()}
+, {otx_rope_str()}
+, {inx_rope_str()}
+, {otx_knot_str()}
+, {inx_knot_str()}
 , {unknown_str_str()}
 , "error_message"
 )"""
@@ -132,7 +132,7 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        error_count_sqlstr = f"SELECT COUNT(*) FROM {pidwayy_s_raw_tablename} WHERE error_message IS NOT NULL"
+        error_count_sqlstr = f"SELECT COUNT(*) FROM {pidrope_s_raw_tablename} WHERE error_message IS NOT NULL"
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
@@ -140,7 +140,7 @@ VALUES
 
         # THEN
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 2
-        error_select_sqlstr = f"SELECT idea_number, event_int FROM {pidwayy_s_raw_tablename} WHERE error_message IS NOT NULL"
+        error_select_sqlstr = f"SELECT idea_number, event_int FROM {pidrope_s_raw_tablename} WHERE error_message IS NOT NULL"
         cursor.execute(error_select_sqlstr)
         assert cursor.fetchall() == [("br00117", 1), ("br00077", 1)]
 
@@ -224,15 +224,15 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        pidwayy_s_raw_tablename = create_prime_tablename("PIDWAYY", "s", "raw")
-        insert_into_clause = f"""INSERT INTO {pidwayy_s_raw_tablename} (
+        pidrope_s_raw_tablename = create_prime_tablename("PIDROPE", "s", "raw")
+        insert_into_clause = f"""INSERT INTO {pidrope_s_raw_tablename} (
   {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
-, {otx_way_str()}
-, {inx_way_str()}
-, {otx_bridge_str()}
-, {inx_bridge_str()}
+, {otx_rope_str()}
+, {inx_rope_str()}
+, {otx_knot_str()}
+, {inx_knot_str()}
 , {unknown_str_str()}
 , "error_message"
 )"""
@@ -275,21 +275,21 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        pidwayy_s_agg_tablename = create_prime_tablename("PIDWAYY", "s", "agg")
+        pidrope_s_agg_tablename = create_prime_tablename("PIDROPE", "s", "agg")
         plnacct_s_put_agg_tblname = create_prime_tablename("PLNACCT", "s", "agg", "put")
-        assert get_row_count(cursor, pidwayy_s_raw_tablename) == 7
+        assert get_row_count(cursor, pidrope_s_raw_tablename) == 7
         assert get_row_count(cursor, plnacct_s_put_raw_tblname) == 6
-        assert get_row_count(cursor, pidwayy_s_agg_tablename) == 0
+        assert get_row_count(cursor, pidrope_s_agg_tablename) == 0
         assert get_row_count(cursor, plnacct_s_put_agg_tblname) == 0
 
         # WHEN
         insert_sound_raw_selects_into_sound_agg_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, pidwayy_s_agg_tablename) == 2
+        assert get_row_count(cursor, pidrope_s_agg_tablename) == 2
         assert get_row_count(cursor, plnacct_s_put_agg_tblname) == 2
 
-        select_agg_sqlstr = f"""SELECT * FROM {pidwayy_s_agg_tablename};"""
+        select_agg_sqlstr = f"""SELECT * FROM {pidrope_s_agg_tablename};"""
         cursor.execute(select_agg_sqlstr)
         rows = cursor.fetchall()
         print(rows)
@@ -391,15 +391,15 @@ def test_etl_sound_raw_tables_to_sound_agg_tables_PopulatesValidTable_Scenario0(
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        pidwayy_s_raw_tablename = create_prime_tablename("PIDWAYY", "s", "raw")
-        insert_into_clause = f"""INSERT INTO {pidwayy_s_raw_tablename} (
+        pidrope_s_raw_tablename = create_prime_tablename("PIDROPE", "s", "raw")
+        insert_into_clause = f"""INSERT INTO {pidrope_s_raw_tablename} (
   {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
-, {otx_way_str()}
-, {inx_way_str()}
-, {otx_bridge_str()}
-, {inx_bridge_str()}
+, {otx_rope_str()}
+, {inx_rope_str()}
+, {otx_knot_str()}
+, {inx_knot_str()}
 , {unknown_str_str()}
 , "error_message"
 )"""
@@ -444,21 +444,21 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        pidwayy_s_agg_tablename = create_prime_tablename("PIDWAYY", "s", "agg")
+        pidrope_s_agg_tablename = create_prime_tablename("PIDROPE", "s", "agg")
         plnacct_s_put_agg_tblname = create_prime_tablename("PLNACCT", "s", "agg", "put")
-        assert get_row_count(cursor, pidwayy_s_raw_tablename) == 8
+        assert get_row_count(cursor, pidrope_s_raw_tablename) == 8
         assert get_row_count(cursor, plnacct_s_put_raw_tblname) == 7
-        assert get_row_count(cursor, pidwayy_s_agg_tablename) == 0
+        assert get_row_count(cursor, pidrope_s_agg_tablename) == 0
         assert get_row_count(cursor, plnacct_s_put_agg_tblname) == 0
 
         # WHEN
         etl_sound_raw_tables_to_sound_agg_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, pidwayy_s_agg_tablename) == 4
+        assert get_row_count(cursor, pidrope_s_agg_tablename) == 4
         assert get_row_count(cursor, plnacct_s_put_agg_tblname) == 3
 
-        select_agg_sqlstr = f"""SELECT * FROM {pidwayy_s_agg_tablename};"""
+        select_agg_sqlstr = f"""SELECT * FROM {pidrope_s_agg_tablename};"""
         cursor.execute(select_agg_sqlstr)
         rows = cursor.fetchall()
         print(rows)

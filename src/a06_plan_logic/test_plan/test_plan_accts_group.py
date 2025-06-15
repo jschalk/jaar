@@ -47,7 +47,7 @@ def test_PlanUnit_set_groupunit_SetsAttr_Scenario0():
     assert bob_plan._groupunits.get(run_str)
 
 
-def test_PlanUnit_set_groupunit_Sets_way_fund_iota():
+def test_PlanUnit_set_groupunit_Sets_rope_fund_iota():
     # ESTABLISH
     x_fund_iota = 5
     bob_plan = planunit_shop("Bob", fund_iota=x_fund_iota)

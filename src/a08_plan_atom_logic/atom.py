@@ -5,8 +5,8 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_empty_dict_if_None,
     get_json_from_dict,
 )
-from src.a01_term_logic.term import AcctName, LabelTerm, TitleTerm, WayTerm
-from src.a01_term_logic.way import create_way, get_parent_way, get_tail_label
+from src.a01_term_logic.rope import create_rope, get_parent_rope, get_tail_label
+from src.a01_term_logic.term import AcctName, LabelTerm, RopeTerm, TitleTerm
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import factunit_shop
@@ -228,14 +228,14 @@ def _modify_plan_acct_membership_insert(x_plan: PlanUnit, x_atom: PlanAtom):
 
 
 def _modify_plan_conceptunit_delete(x_plan: PlanUnit, x_atom: PlanAtom):
-    concept_way = create_way(x_atom.get_value("concept_way"), bridge=x_plan.bridge)
-    x_plan.del_concept_obj(concept_way, del_children=x_atom.get_value("del_children"))
+    concept_rope = create_rope(x_atom.get_value("concept_rope"), knot=x_plan.knot)
+    x_plan.del_concept_obj(concept_rope, del_children=x_atom.get_value("del_children"))
 
 
 def _modify_plan_conceptunit_update(x_plan: PlanUnit, x_atom: PlanAtom):
-    concept_way = create_way(x_atom.get_value("concept_way"), bridge=x_plan.bridge)
+    concept_rope = create_rope(x_atom.get_value("concept_rope"), knot=x_plan.knot)
     x_plan.edit_concept_attr(
-        concept_way,
+        concept_rope,
         addin=x_atom.get_value("addin"),
         begin=x_atom.get_value("begin"),
         gogo_want=x_atom.get_value("gogo_want"),
@@ -250,9 +250,9 @@ def _modify_plan_conceptunit_update(x_plan: PlanUnit, x_atom: PlanAtom):
 
 
 def _modify_plan_conceptunit_insert(x_plan: PlanUnit, x_atom: PlanAtom):
-    concept_way = x_atom.get_value("concept_way")
-    concept_label = get_tail_label(concept_way)
-    concept_parent_way = get_parent_way(concept_way)
+    concept_rope = x_atom.get_value("concept_rope")
+    concept_label = get_tail_label(concept_rope)
+    concept_parent_rope = get_parent_rope(concept_rope)
     x_plan.set_concept(
         concept_kid=conceptunit_shop(
             concept_label=concept_label,
@@ -265,7 +265,7 @@ def _modify_plan_conceptunit_insert(x_plan: PlanUnit, x_atom: PlanAtom):
             numor=x_atom.get_value("numor"),
             task=x_atom.get_value("task"),
         ),
-        parent_way=concept_parent_way,
+        parent_rope=concept_parent_rope,
         create_missing_concepts=False,
         get_rid_of_missing_awardlinks_awardee_titles=False,
         create_missing_ancestors=True,
@@ -274,13 +274,13 @@ def _modify_plan_conceptunit_insert(x_plan: PlanUnit, x_atom: PlanAtom):
 
 def _modify_plan_concept_awardlink_delete(x_plan: PlanUnit, x_atom: PlanAtom):
     x_plan.edit_concept_attr(
-        x_atom.get_value("concept_way"),
+        x_atom.get_value("concept_rope"),
         awardlink_del=x_atom.get_value("awardee_title"),
     )
 
 
 def _modify_plan_concept_awardlink_update(x_plan: PlanUnit, x_atom: PlanAtom):
-    x_concept = x_plan.get_concept_obj(x_atom.get_value("concept_way"))
+    x_concept = x_plan.get_concept_obj(x_atom.get_value("concept_rope"))
     x_awardlink = x_concept.awardlinks.get(x_atom.get_value("awardee_title"))
     x_give_force = x_atom.get_value("give_force")
     if x_give_force is not None and x_awardlink.give_force != x_give_force:
@@ -288,7 +288,7 @@ def _modify_plan_concept_awardlink_update(x_plan: PlanUnit, x_atom: PlanAtom):
     x_take_force = x_atom.get_value("take_force")
     if x_take_force is not None and x_awardlink.take_force != x_take_force:
         x_awardlink.take_force = x_take_force
-    x_plan.edit_concept_attr(x_atom.get_value("concept_way"), awardlink=x_awardlink)
+    x_plan.edit_concept_attr(x_atom.get_value("concept_rope"), awardlink=x_awardlink)
 
 
 def _modify_plan_concept_awardlink_insert(x_plan: PlanUnit, x_atom: PlanAtom):
@@ -297,16 +297,16 @@ def _modify_plan_concept_awardlink_insert(x_plan: PlanUnit, x_atom: PlanAtom):
         give_force=x_atom.get_value("give_force"),
         take_force=x_atom.get_value("take_force"),
     )
-    x_plan.edit_concept_attr(x_atom.get_value("concept_way"), awardlink=x_awardlink)
+    x_plan.edit_concept_attr(x_atom.get_value("concept_rope"), awardlink=x_awardlink)
 
 
 def _modify_plan_concept_factunit_delete(x_plan: PlanUnit, x_atom: PlanAtom):
-    x_conceptunit = x_plan.get_concept_obj(x_atom.get_value("concept_way"))
+    x_conceptunit = x_plan.get_concept_obj(x_atom.get_value("concept_rope"))
     x_conceptunit.del_factunit(x_atom.get_value("fcontext"))
 
 
 def _modify_plan_concept_factunit_update(x_plan: PlanUnit, x_atom: PlanAtom):
-    x_conceptunit = x_plan.get_concept_obj(x_atom.get_value("concept_way"))
+    x_conceptunit = x_plan.get_concept_obj(x_atom.get_value("concept_rope"))
     x_factunit = x_conceptunit.factunits.get(x_atom.get_value("fcontext"))
     x_factunit.set_attr(
         fstate=x_atom.get_value("fstate"),
@@ -317,7 +317,7 @@ def _modify_plan_concept_factunit_update(x_plan: PlanUnit, x_atom: PlanAtom):
 
 def _modify_plan_concept_factunit_insert(x_plan: PlanUnit, x_atom: PlanAtom):
     x_plan.edit_concept_attr(
-        x_atom.get_value("concept_way"),
+        x_atom.get_value("concept_rope"),
         factunit=factunit_shop(
             fcontext=x_atom.get_value("fcontext"),
             fstate=x_atom.get_value("fstate"),
@@ -328,13 +328,13 @@ def _modify_plan_concept_factunit_insert(x_plan: PlanUnit, x_atom: PlanAtom):
 
 
 def _modify_plan_concept_reasonunit_delete(x_plan: PlanUnit, x_atom: PlanAtom):
-    x_conceptunit = x_plan.get_concept_obj(x_atom.get_value("concept_way"))
+    x_conceptunit = x_plan.get_concept_obj(x_atom.get_value("concept_rope"))
     x_conceptunit.del_reasonunit_rcontext(x_atom.get_value("rcontext"))
 
 
 def _modify_plan_concept_reasonunit_update(x_plan: PlanUnit, x_atom: PlanAtom):
     x_plan.edit_concept_attr(
-        x_atom.get_value("concept_way"),
+        x_atom.get_value("concept_rope"),
         reason_rcontext=x_atom.get_value("rcontext"),
         reason_rconcept_active_requisite=x_atom.get_value("rconcept_active_requisite"),
     )
@@ -342,7 +342,7 @@ def _modify_plan_concept_reasonunit_update(x_plan: PlanUnit, x_atom: PlanAtom):
 
 def _modify_plan_concept_reasonunit_insert(x_plan: PlanUnit, x_atom: PlanAtom):
     x_plan.edit_concept_attr(
-        x_atom.get_value("concept_way"),
+        x_atom.get_value("concept_rope"),
         reason_rcontext=x_atom.get_value("rcontext"),
         reason_rconcept_active_requisite=x_atom.get_value("rconcept_active_requisite"),
     )
@@ -350,7 +350,7 @@ def _modify_plan_concept_reasonunit_insert(x_plan: PlanUnit, x_atom: PlanAtom):
 
 def _modify_plan_concept_reason_premiseunit_delete(x_plan: PlanUnit, x_atom: PlanAtom):
     x_plan.edit_concept_attr(
-        x_atom.get_value("concept_way"),
+        x_atom.get_value("concept_rope"),
         reason_del_premise_rcontext=x_atom.get_value("rcontext"),
         reason_del_premise_pstate=x_atom.get_value("pstate"),
     )
@@ -358,7 +358,7 @@ def _modify_plan_concept_reason_premiseunit_delete(x_plan: PlanUnit, x_atom: Pla
 
 def _modify_plan_concept_reason_premiseunit_update(x_plan: PlanUnit, x_atom: PlanAtom):
     x_plan.edit_concept_attr(
-        x_atom.get_value("concept_way"),
+        x_atom.get_value("concept_rope"),
         reason_rcontext=x_atom.get_value("rcontext"),
         reason_premise=x_atom.get_value("pstate"),
         popen=x_atom.get_value("popen"),
@@ -368,7 +368,7 @@ def _modify_plan_concept_reason_premiseunit_update(x_plan: PlanUnit, x_atom: Pla
 
 
 def _modify_plan_concept_reason_premiseunit_insert(x_plan: PlanUnit, x_atom: PlanAtom):
-    x_conceptunit = x_plan.get_concept_obj(x_atom.get_value("concept_way"))
+    x_conceptunit = x_plan.get_concept_obj(x_atom.get_value("concept_rope"))
     x_conceptunit.set_reason_premise(
         rcontext=x_atom.get_value("rcontext"),
         premise=x_atom.get_value("pstate"),
@@ -379,22 +379,22 @@ def _modify_plan_concept_reason_premiseunit_insert(x_plan: PlanUnit, x_atom: Pla
 
 
 def _modify_plan_concept_laborlink_delete(x_plan: PlanUnit, x_atom: PlanAtom):
-    x_conceptunit = x_plan.get_concept_obj(x_atom.get_value("concept_way"))
+    x_conceptunit = x_plan.get_concept_obj(x_atom.get_value("concept_rope"))
     x_conceptunit.laborunit.del_laborlink(labor_title=x_atom.get_value("labor_title"))
 
 
 def _modify_plan_concept_laborlink_insert(x_plan: PlanUnit, x_atom: PlanAtom):
-    x_conceptunit = x_plan.get_concept_obj(x_atom.get_value("concept_way"))
+    x_conceptunit = x_plan.get_concept_obj(x_atom.get_value("concept_rope"))
     x_conceptunit.laborunit.set_laborlink(labor_title=x_atom.get_value("labor_title"))
 
 
 def _modify_plan_concept_healerlink_delete(x_plan: PlanUnit, x_atom: PlanAtom):
-    x_conceptunit = x_plan.get_concept_obj(x_atom.get_value("concept_way"))
+    x_conceptunit = x_plan.get_concept_obj(x_atom.get_value("concept_rope"))
     x_conceptunit.healerlink.del_healer_name(x_atom.get_value("healer_name"))
 
 
 def _modify_plan_concept_healerlink_insert(x_plan: PlanUnit, x_atom: PlanAtom):
-    x_conceptunit = x_plan.get_concept_obj(x_atom.get_value("concept_way"))
+    x_conceptunit = x_plan.get_concept_obj(x_atom.get_value("concept_rope"))
     x_conceptunit.healerlink.set_healer_name(x_atom.get_value("healer_name"))
 
 
@@ -596,7 +596,7 @@ class AtomRow:
     acct_name: AcctName = None
     addin: float = None
     awardee_title: TitleTerm = None
-    rcontext: WayTerm = None
+    rcontext: RopeTerm = None
     rconcept_active_requisite: bool = None
     begin: float = None
     respect_bit: float = None
@@ -609,7 +609,7 @@ class AtomRow:
     debtor_respect: int = None
     denom: int = None
     pdivisor: int = None
-    fcontext: WayTerm = None
+    fcontext: RopeTerm = None
     fnigh: float = None
     fopen: float = None
     fund_iota: float = None
@@ -621,15 +621,15 @@ class AtomRow:
     mass: int = None
     max_tree_traverse: int = None
     morph: bool = None
-    pstate: WayTerm = None
+    pstate: RopeTerm = None
     pnigh: float = None
     numor: int = None
     popen: float = None
     penny: float = None
-    fstate: WayTerm = None
+    fstate: RopeTerm = None
     task: bool = None
     problem_bool: bool = None
-    concept_way: WayTerm = None
+    concept_rope: RopeTerm = None
     stop_want: float = None
     take_force: float = None
     tally: int = None
@@ -652,8 +652,8 @@ class AtomRow:
                     self.__dict__[x_arg] = AcctName(x_value)
                 elif class_type == "TitleTerm":
                     self.__dict__[x_arg] = TitleTerm(x_value)
-                elif class_type == "WayTerm":
-                    self.__dict__[x_arg] = WayTerm(x_value)
+                elif class_type == "RopeTerm":
+                    self.__dict__[x_arg] = RopeTerm(x_value)
                 elif class_type == "LabelTerm":
                     self.__dict__[x_arg] = LabelTerm(x_value)
                 elif class_type == "str":
