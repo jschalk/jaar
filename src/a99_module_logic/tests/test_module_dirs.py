@@ -145,26 +145,27 @@ def test_StrFunctionsAppearWhereTheyShould():
 
 
 def test_str_funcs_MarkdownFileExists():
-    # Gather lines here
+    # sourcery skip: no-loop-in-tests
+    # ESTALBLISH Gather lines here
     doc_main_dir = pathlib_Path("docs")
     doc_main_dir.mkdir(parents=True, exist_ok=True)
 
+    # WHEN
     func_lines = ["## Str Functions by Module"]
     for module_desc, module_dir in get_module_descs().items():
         desc_number_str = module_desc[1:3]
         module_str_funcs = get_module_str_functions(module_dir, desc_number_str)
-        x_list = []
-        for str_func in module_str_funcs:
-            x_list.append(str_func[:-4])
+        x_list = [str_func[:-4] for str_func in module_str_funcs]
         _line = f"- {module_desc}: " + ", ".join(x_list)
         func_lines.append(_line)
 
-    # Where the str function list
     output_path = pathlib_Path(f"{doc_main_dir}/str_funcs.md")
     str_func_markdown = "# String Functions by Module\n\n" + "\n".join(func_lines)
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(str_func_markdown)
+
+    # THEN
     assert output_path.exists(), f"Failed to write manifest to {output_path}"
     # print(str_func_markdown)
     # assert output_path.exists(), f"{output_path} does not exist"
