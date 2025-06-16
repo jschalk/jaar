@@ -192,12 +192,12 @@
       "amount": {}
     }
   },
-  "vow_dealunit": {
+  "vow_budunit": {
     "allowed_crud": "insert_multiple",
     "build_order": 20,
     "idea_category": "vow",
     "jkeys": {
-      "deal_time": {},
+      "bud_time": {},
       "event_int": {},
       "face_name": {},
       "vow_label": {},

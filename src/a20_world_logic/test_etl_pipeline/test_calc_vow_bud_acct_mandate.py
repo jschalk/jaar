@@ -7,7 +7,7 @@ from src.a00_data_toolbox.file_toolbox import (
 )
 from src.a06_plan_logic.plan import planunit_shop
 from src.a12_hub_toolbox.hub_path import (
-    create_deal_acct_mandate_ledger_path as deal_mandate_path,
+    create_bud_acct_mandate_ledger_path as bud_mandate_path,
     create_planevent_path,
     create_vow_json_path,
     create_vow_ote1_json_path,
@@ -25,7 +25,7 @@ from src.a20_world_logic._test_util.example_worlds import (
 from src.a20_world_logic.world import worldunit_shop
 
 
-def test_WorldUnit_calc_vow_deal_acct_mandate_net_ledgers_Scenaro0_DealEmpty(
+def test_WorldUnit_calc_vow_bud_acct_mandate_net_ledgers_Scenaro0_BudEmpty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -40,13 +40,13 @@ def test_WorldUnit_calc_vow_deal_acct_mandate_net_ledgers_Scenaro0_DealEmpty(
     assert count_dirs_files(a23_owners_path) == 0
 
     # WHEN
-    fizz_world.calc_vow_deal_acct_mandate_net_ledgers()
+    fizz_world.calc_vow_bud_acct_mandate_net_ledgers()
 
     # THEN
     assert count_dirs_files(a23_owners_path) == 0
 
 
-def test_WorldUnit_calc_vow_deal_acct_mandate_net_ledgers_Scenaro1_SimpleDeal(
+def test_WorldUnit_calc_vow_bud_acct_mandate_net_ledgers_Scenaro1_SimpleBud(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -56,30 +56,30 @@ def test_WorldUnit_calc_vow_deal_acct_mandate_net_ledgers_Scenaro1_SimpleDeal(
     accord23_vow = vowunit_shop(a23_str, mstr_dir)
     bob_str = "Bob"
     tp37 = 37
-    deal1_quota = 450
+    bud1_quota = 450
     x_celldepth = 2
-    accord23_vow.add_dealunit(bob_str, tp37, deal1_quota, celldepth=x_celldepth)
+    accord23_vow.add_budunit(bob_str, tp37, bud1_quota, celldepth=x_celldepth)
     a23_json_path = create_vow_json_path(mstr_dir, a23_str)
     save_file(a23_json_path, None, accord23_vow.get_json())
     # Create empty ote1 file
     a23_ote1_json_path = create_vow_ote1_json_path(mstr_dir, a23_str)
     save_json(a23_ote1_json_path, None, {})
-    bob37_deal_mandate_path = deal_mandate_path(mstr_dir, a23_str, bob_str, tp37)
-    assert os_path_exists(bob37_deal_mandate_path) is False
+    bob37_bud_mandate_path = bud_mandate_path(mstr_dir, a23_str, bob_str, tp37)
+    assert os_path_exists(bob37_bud_mandate_path) is False
 
     # WHEN
-    fizz_world.calc_vow_deal_acct_mandate_net_ledgers()
+    fizz_world.calc_vow_bud_acct_mandate_net_ledgers()
 
     # THEN
-    assert os_path_exists(bob37_deal_mandate_path)
-    expected_deal_acct_nets = {bob_str: deal1_quota}
-    assert open_json(bob37_deal_mandate_path) == expected_deal_acct_nets
+    assert os_path_exists(bob37_bud_mandate_path)
+    expected_bud_acct_nets = {bob_str: bud1_quota}
+    assert open_json(bob37_bud_mandate_path) == expected_bud_acct_nets
     gen_a23_vowunit = vowunit_get_from_dict(open_json(a23_json_path))
-    gen_bob37_dealunit = gen_a23_vowunit.get_dealunit(bob_str, tp37)
-    assert gen_bob37_dealunit._deal_acct_nets == expected_deal_acct_nets
+    gen_bob37_budunit = gen_a23_vowunit.get_budunit(bob_str, tp37)
+    assert gen_bob37_budunit._bud_acct_nets == expected_bud_acct_nets
 
 
-def test_WorldUnit_calc_vow_deal_acct_mandate_net_ledgers_Scenaro2_DealExists(
+def test_WorldUnit_calc_vow_bud_acct_mandate_net_ledgers_Scenaro2_BudExists(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -87,7 +87,7 @@ def test_WorldUnit_calc_vow_deal_acct_mandate_net_ledgers_Scenaro2_DealExists(
     mstr_dir = fizz_world._vow_mstr_dir
     a23_str = "accord23"
 
-    # Create VowUnit with bob deal at time 37
+    # Create VowUnit with bob bud at time 37
     accord23_vow = vowunit_shop(a23_str, mstr_dir)
     a23_str = "accord23"
     sue_str = "Sue"
@@ -95,9 +95,9 @@ def test_WorldUnit_calc_vow_deal_acct_mandate_net_ledgers_Scenaro2_DealExists(
     yao_str = "Yao"
     zia_str = "Zia"
     tp37 = 37
-    deal1_quota = 450
+    bud1_quota = 450
     x_celldepth = 2
-    accord23_vow.add_dealunit(bob_str, tp37, deal1_quota, celldepth=x_celldepth)
+    accord23_vow.add_budunit(bob_str, tp37, bud1_quota, celldepth=x_celldepth)
     a23_json_path = create_vow_json_path(mstr_dir, a23_str)
     save_file(a23_json_path, None, accord23_vow.get_json())
 
@@ -136,17 +136,17 @@ def test_WorldUnit_calc_vow_deal_acct_mandate_net_ledgers_Scenaro2_DealExists(
     a23_ote1_json_path = create_vow_ote1_json_path(mstr_dir, a23_str)
     save_json(a23_ote1_json_path, None, a23_ote1_dict)
 
-    # create output deal_acct_mandate_ledger file
-    bob37_deal_mandate_path = deal_mandate_path(mstr_dir, a23_str, bob_str, tp37)
-    assert os_path_exists(bob37_deal_mandate_path) is False
+    # create output bud_acct_mandate_ledger file
+    bob37_bud_mandate_path = bud_mandate_path(mstr_dir, a23_str, bob_str, tp37)
+    assert os_path_exists(bob37_bud_mandate_path) is False
 
     # WHEN
-    fizz_world.calc_vow_deal_acct_mandate_net_ledgers()
+    fizz_world.calc_vow_bud_acct_mandate_net_ledgers()
 
     # THEN
-    assert os_path_exists(bob37_deal_mandate_path)
-    expected_deal_acct_nets = {zia_str: deal1_quota}
-    assert open_json(bob37_deal_mandate_path) == expected_deal_acct_nets
+    assert os_path_exists(bob37_bud_mandate_path)
+    expected_bud_acct_nets = {zia_str: bud1_quota}
+    assert open_json(bob37_bud_mandate_path) == expected_bud_acct_nets
     gen_a23_vowunit = vowunit_get_from_dict(open_json(a23_json_path))
-    gen_bob37_dealunit = gen_a23_vowunit.get_dealunit(bob_str, tp37)
-    assert gen_bob37_dealunit._deal_acct_nets == expected_deal_acct_nets
+    gen_bob37_budunit = gen_a23_vowunit.get_budunit(bob_str, tp37)
+    assert gen_bob37_budunit._bud_acct_nets == expected_bud_acct_nets

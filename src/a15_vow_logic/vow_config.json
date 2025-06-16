@@ -21,9 +21,9 @@
         },
         "vow_static": "True"
     },
-    "vow_dealunit": {
+    "vow_budunit": {
         "jkeys": {
-            "deal_time": {
+            "bud_time": {
                 "class_type": "TimeLinePoint"
             },
             "vow_label": {

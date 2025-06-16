@@ -19,7 +19,7 @@ def get_vow_config_dict() -> dict:
 def get_vow_dimens() -> set[str]:
     return {
         "vowunit",
-        "vow_dealunit",
+        "vow_budunit",
         "vow_paybook",
         "vow_timeline_hour",
         "vow_timeline_month",
@@ -66,7 +66,7 @@ def get_vow_args_class_types() -> dict[str, str]:
         "c400_number": "int",
         "cumlative_day": "int",
         "cumlative_minute": "int",
-        "deal_time": "TimeLinePoint",
+        "bud_time": "TimeLinePoint",
         "hour_label": "LabelTerm",
         "vow_label": "LabelTerm",
         "fund_iota": "float",
@@ -95,7 +95,7 @@ def get_vow_args_set() -> set[str]:
         "celldepth",
         "cumlative_day",
         "cumlative_minute",
-        "deal_time",
+        "bud_time",
         "hour_label",
         "vow_label",
         "fund_iota",

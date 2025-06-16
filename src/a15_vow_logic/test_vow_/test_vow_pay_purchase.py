@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.a02_finance_logic.deal import tranbook_shop, tranunit_shop
+from src.a02_finance_logic.bud import tranbook_shop, tranunit_shop
 from src.a15_vow_logic.vow import vowunit_shop
 
 
@@ -78,7 +78,7 @@ def test_VowUnit_set_paypurchase_RaisesErrorWhen_tranunit_tran_time_GreaterThanO
     assert str(excinfo.value) == exception_str
 
 
-def test_VowUnit_set_paypurchase_RaisesErrorWhenDealUnitHas_tran_time():
+def test_VowUnit_set_paypurchase_RaisesErrorWhenBudUnitHas_tran_time():
     # ESTABLISH
     x_vow = vowunit_shop("accord23")
     x_vow._offi_time_max = 0
@@ -87,7 +87,7 @@ def test_VowUnit_set_paypurchase_RaisesErrorWhenDealUnitHas_tran_time():
     bob_str = "Bob"
     t55_t = 5505
     t55_quota = 100
-    x_vow.add_dealunit("yao", t55_t, t55_quota)
+    x_vow.add_budunit("yao", t55_t, t55_quota)
     t55_amount = 37
     t6606_offi_time_max = 6606
     x_vow._offi_time_max = t6606_offi_time_max
@@ -230,16 +230,16 @@ def test_VowUnit_set_all_tranbook_SetsAttr():
 
     x40000_tran_time = 40000
     x70000_tran_time = 70000
-    x_vow.add_dealunit(sue_str, x40000_tran_time, 1)
-    x_vow.add_dealunit(sue_str, x70000_tran_time, 1)
+    x_vow.add_budunit(sue_str, x40000_tran_time, 1)
+    x_vow.add_budunit(sue_str, x70000_tran_time, 1)
     bob_str = "Bob"
     zia_str = "Zia"
-    zia_deal_net = 887
-    bob_deal_net = 445
-    sue_x40000_deal = x_vow.get_brokerunit(sue_str).get_deal(x40000_tran_time)
-    sue_x70000_deal = x_vow.get_brokerunit(sue_str).get_deal(x70000_tran_time)
-    sue_x40000_deal.set_deal_acct_net(bob_str, bob_deal_net)
-    sue_x70000_deal.set_deal_acct_net(zia_str, zia_deal_net)
+    zia_bud_net = 887
+    bob_bud_net = 445
+    sue_x40000_bud = x_vow.get_brokerunit(sue_str).get_bud(x40000_tran_time)
+    sue_x70000_bud = x_vow.get_brokerunit(sue_str).get_bud(x70000_tran_time)
+    sue_x40000_bud.set_bud_acct_net(bob_str, bob_bud_net)
+    sue_x70000_bud.set_bud_acct_net(zia_str, zia_bud_net)
 
     assert x_vow._all_tranbook == tranbook_shop(x_vow.vow_label)
     assert x_vow.paypurchase_exists(sue_str, bob_str, t55_t)
@@ -248,9 +248,9 @@ def test_VowUnit_set_all_tranbook_SetsAttr():
     assert x_vow.paypurchase_exists(sue_str, yao_str, t88_t)
     assert x_vow.paypurchase_exists(bob_str, sue_str, t99_t)
 
-    assert sue_x40000_deal.deal_acct_net_exists(bob_str)
-    assert sue_x70000_deal.deal_acct_net_exists(zia_str)
-    # x_vow.add_dealunit()
+    assert sue_x40000_bud.bud_acct_net_exists(bob_str)
+    assert sue_x70000_bud.bud_acct_net_exists(zia_str)
+    # x_vow.add_budunit()
 
     # WHEN
     x_vow.set_all_tranbook()

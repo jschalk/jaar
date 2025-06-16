@@ -6,7 +6,7 @@ from src.a00_data_toolbox.db_toolbox import (
     required_columns_exist,
 )
 from src.a02_finance_logic._test_util.a02_str import (
-    deal_time_str,
+    bud_time_str,
     owner_name_str,
     tran_time_str,
     vow_label_str,
@@ -28,7 +28,7 @@ from src.a09_pack_logic._test_util.a09_str import event_int_str
 from src.a10_plan_calc._test_util.a10_str import plan_groupunit_str
 from src.a12_hub_toolbox._test_util.a12_str import job_str, vow_ote1_agg_str
 from src.a15_vow_logic._test_util.a15_str import (
-    vow_dealunit_str,
+    vow_budunit_str,
     vow_paybook_str,
     vow_timeline_hour_str,
     vow_timeline_month_str,
@@ -96,7 +96,7 @@ def test_create_prime_tablename_ReturnsObj():
     plnfact_dimen = plan_concept_factunit_str()
     vowunit_dimen = vowunit_str()
     vowpayy_dimen = vow_paybook_str()
-    vowdeal_dimen = vow_dealunit_str()
+    vowbudd_dimen = vow_budunit_str()
     vowhour_dimen = vow_timeline_hour_str()
     vowmont_dimen = vow_timeline_month_str()
     vowweek_dimen = vow_timeline_weekday_str()
@@ -126,7 +126,7 @@ def test_create_prime_tablename_ReturnsObj():
     plnfact_s_del_table = create_prime_tablename("plnfact", "s", agg_str, del_str)
     vowunit_s_agg_table = create_prime_tablename("vowunit", "s", agg_str)
     vowpayy_s_agg_table = create_prime_tablename("vowpayy", "s", agg_str)
-    vowdeal_s_agg_table = create_prime_tablename("vowdeal", "s", agg_str)
+    vowbudd_s_agg_table = create_prime_tablename("vowbudd", "s", agg_str)
     vowhour_s_agg_table = create_prime_tablename("vowhour", "s", agg_str)
     vowmont_s_agg_table = create_prime_tablename("vowmont", "s", agg_str)
     vowweek_s_agg_table = create_prime_tablename("vowweek", "s", agg_str)
@@ -158,7 +158,7 @@ def test_create_prime_tablename_ReturnsObj():
     assert plnfact_s_del_table == f"{plnfact_dimen}_s_del_agg"
     assert vowunit_s_agg_table == f"{vowunit_dimen}_s_agg"
     assert vowpayy_s_agg_table == f"{vowpayy_dimen}_s_agg"
-    assert vowdeal_s_agg_table == f"{vowdeal_dimen}_s_agg"
+    assert vowbudd_s_agg_table == f"{vowbudd_dimen}_s_agg"
     assert vowhour_s_agg_table == f"{vowhour_dimen}_s_agg"
     assert vowmont_s_agg_table == f"{vowmont_dimen}_s_agg"
     assert vowweek_s_agg_table == f"{vowweek_dimen}_s_agg"
@@ -348,9 +348,9 @@ FROM (
     FROM vow_paybook_raw
     GROUP BY {vow_label_str()}, {event_int_str()}, {tran_time_str()}
     UNION 
-    SELECT {vow_label_str()}, {event_int_str()}, {deal_time_str()} as agg_time
-    FROM vow_dealunit_raw
-    GROUP BY {vow_label_str()}, {event_int_str()}, {deal_time_str()}
+    SELECT {vow_label_str()}, {event_int_str()}, {bud_time_str()} as agg_time
+    FROM vow_budunit_raw
+    GROUP BY {vow_label_str()}, {event_int_str()}, {bud_time_str()}
 )
 ORDER BY {vow_label_str()}, {event_int_str()}, agg_time
 ;
@@ -390,7 +390,7 @@ CREATE TABLE IF NOT EXISTS {vow_ote1_agg_str()} (
   {vow_label_str()} TEXT
 , {owner_name_str()} TEXT
 , {event_int_str()} INTEGER
-, {deal_time_str()} INTEGER
+, {bud_time_str()} INTEGER
 , error_message TEXT
 )
 ;
@@ -403,20 +403,20 @@ CREATE TABLE IF NOT EXISTS {vow_ote1_agg_str()} (
 # TODO create test to prove this insert should never grab when error message is not null in source table
 def test_INSERT_VOW_OTE1_AGG_FROM_VOICE_SQLSTR_Exists():
     # ESTABLISH
-    vowdeal_v_raw_tablename = create_prime_tablename(vow_dealunit_str(), "v", "raw")
+    vowbud_v_raw_tablename = create_prime_tablename(vow_budunit_str(), "v", "raw")
     expected_INSERT_sqlstr = f"""
-INSERT INTO {vow_ote1_agg_str()} ({vow_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()})
-SELECT {vow_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
+INSERT INTO {vow_ote1_agg_str()} ({vow_label_str()}, {owner_name_str()}, {event_int_str()}, {bud_time_str()})
+SELECT {vow_label_str()}, {owner_name_str()}, {event_int_str()}, {bud_time_str()}
 FROM (
     SELECT 
       {vow_label_str()}_inx {vow_label_str()}
     , {owner_name_str()}_inx {owner_name_str()}
     , {event_int_str()}
-    , {deal_time_str()}
-    FROM {vowdeal_v_raw_tablename}
-    GROUP BY {vow_label_str()}_inx, {owner_name_str()}_inx, {event_int_str()}, {deal_time_str()}
+    , {bud_time_str()}
+    FROM {vowbud_v_raw_tablename}
+    GROUP BY {vow_label_str()}_inx, {owner_name_str()}_inx, {event_int_str()}, {bud_time_str()}
 )
-ORDER BY {vow_label_str()}, {owner_name_str()}, {event_int_str()}, {deal_time_str()}
+ORDER BY {vow_label_str()}, {owner_name_str()}, {event_int_str()}, {bud_time_str()}
 ;
 """
     # WHEN / THEN

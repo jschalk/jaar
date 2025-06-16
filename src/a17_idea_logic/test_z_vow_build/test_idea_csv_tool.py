@@ -63,7 +63,7 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyVowUnit(
     # THEN
     expected_stance_csv_strs = {
         "br00000": "vow_label,timeline_label,c400_number,yr1_jan1_offset,monthday_distortion,fund_iota,penny,respect_bit,knot,job_listen_rotations\n",
-        "br00001": "vow_label,owner_name,deal_time,quota,celldepth\n",
+        "br00001": "vow_label,owner_name,bud_time,quota,celldepth\n",
         "br00002": "vow_label,owner_name,acct_name,tran_time,amount\n",
         "br00003": "vow_label,cumlative_minute,hour_label\n",
         "br00004": "vow_label,cumlative_day,month_label\n",

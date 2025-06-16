@@ -35,7 +35,7 @@ class CellUnit:
     ancestors: list[OwnerName] = None
     event_int: EventInt = None
     celldepth: int = None
-    deal_owner_name: OwnerName = None
+    bud_owner_name: OwnerName = None
     penny: PennyNum = None
     quota: float = None
     mandate: float = None
@@ -47,7 +47,7 @@ class CellUnit:
     _acct_mandate_ledger: dict[OwnerName, FundNum] = None
 
     def get_cell_owner_name(self) -> OwnerName:
-        return self.deal_owner_name if self.ancestors == [] else self.ancestors[-1]
+        return self.bud_owner_name if self.ancestors == [] else self.ancestors[-1]
 
     def eval_planevent(self, x_plan: PlanUnit):
         if not x_plan:
@@ -138,7 +138,7 @@ class CellUnit:
             "ancestors": self.ancestors,
             "event_int": self.event_int,
             "celldepth": self.celldepth,
-            "deal_owner_name": self.deal_owner_name,
+            "bud_owner_name": self.bud_owner_name,
             "penny": self.penny,
             "quota": self.quota,
             "mandate": self.mandate,
@@ -153,7 +153,7 @@ class CellUnit:
 
 
 def cellunit_shop(
-    deal_owner_name: OwnerName,
+    bud_owner_name: OwnerName,
     ancestors: list[OwnerName] = None,
     event_int: EventInt = None,
     celldepth: int = None,
@@ -170,7 +170,7 @@ def cellunit_shop(
     if mandate is None:
         mandate = CELLNODE_QUOTA_DEFAULT
     if planadjust is None:
-        planadjust = planunit_shop(deal_owner_name)
+        planadjust = planunit_shop(bud_owner_name)
     reason_rcontexts = planadjust.get_reason_rcontexts() if planadjust else set()
     if planadjust:
         planadjust = copy_deepcopy(planadjust)
@@ -180,7 +180,7 @@ def cellunit_shop(
         ancestors=get_empty_list_if_None(ancestors),
         event_int=event_int,
         celldepth=get_0_if_None(celldepth),
-        deal_owner_name=deal_owner_name,
+        bud_owner_name=bud_owner_name,
         penny=get_1_if_None(penny),
         quota=quota,
         mandate=mandate,
@@ -194,7 +194,7 @@ def cellunit_shop(
 
 
 def cellunit_get_from_dict(x_dict: dict) -> CellUnit:
-    deal_owner_name = x_dict.get("deal_owner_name")
+    bud_owner_name = x_dict.get("bud_owner_name")
     ancestors = x_dict.get("ancestors")
     event_int = x_dict.get("event_int")
     celldepth = x_dict.get("celldepth")
@@ -213,7 +213,7 @@ def cellunit_get_from_dict(x_dict: dict) -> CellUnit:
     found_facts = factunits_get_from_dict(found_fact_dict)
     boss_facts = factunits_get_from_dict(boss_fact_dict)
     return cellunit_shop(
-        deal_owner_name=deal_owner_name,
+        bud_owner_name=bud_owner_name,
         ancestors=ancestors,
         event_int=event_int,
         celldepth=celldepth,
@@ -237,7 +237,7 @@ def create_child_cellunits(parent_cell: CellUnit) -> list[CellUnit]:
             child_ancestors.append(child_owner_name)
             boss_facts = factunits_get_from_dict(get_facts_dict(parent_cell.planadjust))
             child_cell = cellunit_shop(
-                deal_owner_name=parent_cell.deal_owner_name,
+                bud_owner_name=parent_cell.bud_owner_name,
                 ancestors=child_ancestors,
                 event_int=parent_cell.event_int,
                 celldepth=parent_cell.celldepth - 1,

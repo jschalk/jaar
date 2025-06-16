@@ -28,7 +28,7 @@ from src.a00_data_toolbox.file_toolbox import (
     save_json,
 )
 from src.a01_term_logic.term import EventInt, FaceName
-from src.a02_finance_logic.deal import TranBook
+from src.a02_finance_logic.bud import TranBook
 from src.a06_plan_logic.plan import PlanUnit, planunit_shop
 from src.a08_plan_atom_logic.atom import planatom_shop
 from src.a08_plan_atom_logic.atom_config import get_plan_dimens
@@ -52,7 +52,7 @@ from src.a12_hub_toolbox.hub_tool import (
 )
 from src.a15_vow_logic.vow import get_from_default_path as vowunit_get_from_default_path
 from src.a15_vow_logic.vow_tool import (
-    create_deal_mandate_ledgers,
+    create_bud_mandate_ledgers,
     create_vow_owners_cell_trees,
     set_cell_tree_cell_mandates,
     set_cell_trees_decrees,
@@ -666,7 +666,7 @@ def etl_voice_raw_tables_to_vow_ote1_agg(conn_or_cursor: sqlite3_Connection):
 def etl_vow_ote1_agg_table_to_vow_ote1_agg_csvs(
     conn_or_cursor: sqlite3_Connection, vow_mstr_dir: str
 ):
-    empty_ote1_csv_str = """vow_label,owner_name,event_int,deal_time,error_message
+    empty_ote1_csv_str = """vow_label,owner_name,event_int,bud_time,error_message
 """
     vows_dir = create_path(vow_mstr_dir, "vows")
     for vow_label in get_level1_dirs(vows_dir):
@@ -687,16 +687,16 @@ def etl_vow_ote1_agg_csvs_to_jsons(vow_mstr_dir: str):
         for row in csv_arrays:
             owner_name = row[1]
             event_int = row[2]
-            deal_time = row[3]
+            bud_time = row[3]
             if x_dict.get(owner_name) is None:
                 x_dict[owner_name] = {}
             owner_dict = x_dict.get(owner_name)
-            owner_dict[int(deal_time)] = event_int
+            owner_dict[int(bud_time)] = event_int
         json_path = create_vow_ote1_json_path(vow_mstr_dir, vow_label)
         save_json(json_path, None, x_dict)
 
 
-def etl_create_deals_root_cells(vow_mstr_dir: str):
+def etl_create_buds_root_cells(vow_mstr_dir: str):
     vows_dir = create_path(vow_mstr_dir, "vows")
     for vow_label in get_level1_dirs(vows_dir):
         vow_dir = create_path(vows_dir, vow_label)
@@ -704,7 +704,7 @@ def etl_create_deals_root_cells(vow_mstr_dir: str):
         if os_path_exists(ote1_json_path):
             ote1_dict = open_json(ote1_json_path)
             x_vowunit = vowunit_get_from_default_path(vow_mstr_dir, vow_label)
-            x_vowunit.create_deals_root_cells(ote1_dict)
+            x_vowunit.create_buds_root_cells(ote1_dict)
 
 
 def etl_create_vow_cell_trees(vow_mstr_dir: str):
@@ -731,10 +731,10 @@ def etl_set_cell_tree_cell_mandates(vow_mstr_dir: str):
         set_cell_tree_cell_mandates(vow_mstr_dir, vow_label)
 
 
-def etl_create_deal_mandate_ledgers(vow_mstr_dir: str):
+def etl_create_bud_mandate_ledgers(vow_mstr_dir: str):
     vows_dir = create_path(vow_mstr_dir, "vows")
     for vow_label in get_level1_dirs(vows_dir):
-        create_deal_mandate_ledgers(vow_mstr_dir, vow_label)
+        create_bud_mandate_ledgers(vow_mstr_dir, vow_label)
 
 
 def etl_voice_agg_to_event_plan_csvs(

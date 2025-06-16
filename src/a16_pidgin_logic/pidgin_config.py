@@ -125,7 +125,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "tally": "int",
         "labor_title": "TitleTerm",
         "tran_time": "TimeLinePoint",
-        "deal_time": "TimeLinePoint",
+        "bud_time": "TimeLinePoint",
         "timeline_label": "LabelTerm",
         "weekday_label": "LabelTerm",
         "weekday_order": "int",

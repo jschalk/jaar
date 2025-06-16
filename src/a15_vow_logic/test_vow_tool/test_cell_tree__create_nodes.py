@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a11_deal_cell_logic.cell import cellunit_shop
+from src.a11_bud_cell_logic.cell import cellunit_shop
 from src.a12_hub_toolbox.hub_path import (
     create_cell_dir_path as cell_dir,
     create_cell_json_path as node_path,
@@ -42,10 +42,10 @@ def test_create_cell_tree_Scenaro1_LedgerDepth0(env_dir_setup_cleanup):
     bob_str = "Bob"
     yao_str = "Yao"
     tp37 = 37  # timepoint
-    deal1_quota = 450
-    deal1_celldepth = 0
+    bud1_quota = 450
+    bud1_celldepth = 0
     event56 = 56
-    x_cell = cellunit_shop(bob_str, [], event56, deal1_celldepth, quota=deal1_quota)
+    x_cell = cellunit_shop(bob_str, [], event56, bud1_celldepth, quota=bud1_quota)
     bob37_root_cell_dir = cell_dir(vow_mstr_dir, a23_str, bob_str, tp37, [])
     cellunit_save_to_dir(bob37_root_cell_dir, x_cell)
     save_planevent(vow_mstr_dir, a23_str, bob_str, event56, [[yao_str], [bob_str]])
@@ -116,25 +116,25 @@ def test_create_cell_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
     assert bob37_cell.ancestors == []
     assert bob37_cell.event_int == 56
     assert bob37_cell.celldepth == 1
-    assert bob37_cell.deal_owner_name == bob_str
+    assert bob37_cell.bud_owner_name == bob_str
     assert bob37_cell.penny == 1
     assert bob37_cell.quota == 450
     assert bob37_bob_cell.ancestors == [bob_str]
     assert bob37_bob_cell.event_int == 56
     assert bob37_bob_cell.celldepth == 0
-    assert bob37_bob_cell.deal_owner_name == bob_str
+    assert bob37_bob_cell.bud_owner_name == bob_str
     assert bob37_bob_cell.penny == 1
     assert bob37_bob_cell.quota == 150
     assert bob37_yao_cell.ancestors == [yao_str]
     assert bob37_yao_cell.event_int == 56
     assert bob37_yao_cell.celldepth == 0
-    assert bob37_yao_cell.deal_owner_name == bob_str
+    assert bob37_yao_cell.bud_owner_name == bob_str
     assert bob37_yao_cell.penny == 1
     assert bob37_yao_cell.quota == 150
     assert bob37_zia_cell.ancestors == [zia_str]
     assert bob37_zia_cell.event_int == 56
     assert bob37_zia_cell.celldepth == 0
-    assert bob37_zia_cell.deal_owner_name == bob_str
+    assert bob37_zia_cell.bud_owner_name == bob_str
     assert bob37_zia_cell.penny == 1
     assert bob37_zia_cell.quota == 150
     gen_bob37_quota_ledger = bob37_cell.get_planevents_quota_ledger()
@@ -203,25 +203,25 @@ def test_create_cell_tree_Scenaro3_LedgerDepth1_MostRecentEvent(env_dir_setup_cl
     assert bob37_cell.ancestors == []
     assert bob37_cell.event_int == 55
     assert bob37_cell.celldepth == 1
-    assert bob37_cell.deal_owner_name == bob_str
+    assert bob37_cell.bud_owner_name == bob_str
     assert bob37_cell.penny == 1
     assert bob37_cell.quota == 450
     assert bob37_bob_cell.ancestors == [bob_str]
     assert bob37_bob_cell.event_int == 55
     assert bob37_bob_cell.celldepth == 0
-    assert bob37_bob_cell.deal_owner_name == bob_str
+    assert bob37_bob_cell.bud_owner_name == bob_str
     assert bob37_bob_cell.penny == 1
     assert bob37_bob_cell.quota == 150
     assert bob37_yao_cell.ancestors == [yao_str]
     assert bob37_yao_cell.event_int == 44
     assert bob37_yao_cell.celldepth == 0
-    assert bob37_yao_cell.deal_owner_name == bob_str
+    assert bob37_yao_cell.bud_owner_name == bob_str
     assert bob37_yao_cell.penny == 1
     assert bob37_yao_cell.quota == 150
     assert bob37_zia_cell.ancestors == [zia_str]
     assert bob37_zia_cell.event_int == 33
     assert bob37_zia_cell.celldepth == 0
-    assert bob37_zia_cell.deal_owner_name == bob_str
+    assert bob37_zia_cell.bud_owner_name == bob_str
     assert bob37_zia_cell.penny == 1
     assert bob37_zia_cell.quota == 150
     gen_bob37_quota_ledger = bob37_cell.get_planevents_quota_ledger()
@@ -292,13 +292,13 @@ def test_create_cell_tree_Scenaro4_LedgerDepth1_OneOwnerHasNoPast_planevent(
     assert bob37_bob_cell.ancestors == [bob_str]
     assert bob37_bob_cell.event_int == 55
     assert bob37_bob_cell.celldepth == 0
-    assert bob37_bob_cell.deal_owner_name == bob_str
+    assert bob37_bob_cell.bud_owner_name == bob_str
     assert bob37_bob_cell.penny == 1
     assert bob37_bob_cell.quota == 150
     assert bob37_yao_cell.ancestors == [yao_str]
     assert bob37_yao_cell.event_int == 44
     assert bob37_yao_cell.celldepth == 0
-    assert bob37_yao_cell.deal_owner_name == bob_str
+    assert bob37_yao_cell.bud_owner_name == bob_str
     assert bob37_yao_cell.penny == 1
     assert bob37_yao_cell.quota == 150
     gen_bob37_quota_ledger = bob37_cell.get_planevents_quota_ledger()

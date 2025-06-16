@@ -49,9 +49,9 @@ def test_VowUnit_get_dict_ReturnsObjWith_paybook():
     pay_tran_time = 15
     bob_sue_amount = 30000
     accord_vow.set_offi_time_max(accord_offi_time_max_int)
-    accord_vow.add_dealunit(bob_str, bob_x0_tran_time, bob_x0_quota)
-    accord_vow.add_dealunit(sue_str, sue_x4_tran_time, sue_x4_quota)
-    accord_vow.add_dealunit(sue_str, sue_x7_tran_time, sue_x7_quota)
+    accord_vow.add_budunit(bob_str, bob_x0_tran_time, bob_x0_quota)
+    accord_vow.add_budunit(sue_str, sue_x4_tran_time, sue_x4_quota)
+    accord_vow.add_budunit(sue_str, sue_x7_tran_time, sue_x7_quota)
     accord_vow.add_paypurchase(
         owner_name=bob_str,
         acct_name=sue_str,
@@ -115,16 +115,16 @@ def test_VowUnit_get_json_ReturnsObj():
     accord45_str = "accord45"
     accord_vow = vowunit_shop(accord45_str, get_module_temp_dir())
     bob_str = "Bob"
-    bob_x0_deal_time = 702
+    bob_x0_bud_time = 702
     bob_x0_quota = 33
     sue_str = "Sue"
-    sue_x4_deal_time = 4
+    sue_x4_bud_time = 4
     sue_x4_quota = 55
-    sue_x7_deal_time = 7
+    sue_x7_bud_time = 7
     sue_x7_quota = 66
-    accord_vow.add_dealunit(bob_str, bob_x0_deal_time, bob_x0_quota)
-    accord_vow.add_dealunit(sue_str, sue_x4_deal_time, sue_x4_quota)
-    accord_vow.add_dealunit(sue_str, sue_x7_deal_time, sue_x7_quota)
+    accord_vow.add_budunit(bob_str, bob_x0_bud_time, bob_x0_quota)
+    accord_vow.add_budunit(sue_str, sue_x4_bud_time, sue_x4_quota)
+    accord_vow.add_budunit(sue_str, sue_x7_bud_time, sue_x7_quota)
 
     # WHEN
     x_json = accord_vow.get_json()
@@ -147,18 +147,18 @@ def test_get_from_dict_ReturnsVowUnit_Scenario0_WithParameters():
     sue_respect_bit = 2
     sue_penny = 3
     bob_str = "Bob"
-    bob_x0_deal_time = 702
+    bob_x0_bud_time = 702
     bob_x0_quota = 33
     sue_str = "Sue"
-    sue_x4_deal_time = 4
+    sue_x4_bud_time = 4
     sue_x4_quota = 55
-    sue_x7_deal_time = 7
+    sue_x7_bud_time = 7
     sue_x7_quota = 66
     pay_tran_time = 15
     bob_sue_amount = 30000
-    accord_vow.add_dealunit(bob_str, bob_x0_deal_time, bob_x0_quota)
-    accord_vow.add_dealunit(sue_str, sue_x4_deal_time, sue_x4_quota)
-    accord_vow.add_dealunit(sue_str, sue_x7_deal_time, sue_x7_quota)
+    accord_vow.add_budunit(bob_str, bob_x0_bud_time, bob_x0_quota)
+    accord_vow.add_budunit(sue_str, sue_x4_bud_time, sue_x4_quota)
+    accord_vow.add_budunit(sue_str, sue_x7_bud_time, sue_x7_quota)
     accord_vow.knot = sue_knot
     accord_vow.fund_iota = sue_fund_iota
     accord_vow.respect_bit = sue_respect_bit
@@ -232,16 +232,16 @@ def test_get_from_json_ReturnsVowUnit():
     sue_respect_bit = 2
     sue_penny = 3
     bob_str = "Bob"
-    bob_x0_deal_time = 702
+    bob_x0_bud_time = 702
     bob_x0_quota = 33
     sue_str = "Sue"
-    sue_x4_deal_time = 4
+    sue_x4_bud_time = 4
     sue_x4_quota = 55
-    sue_x7_deal_time = 7
+    sue_x7_bud_time = 7
     sue_x7_quota = 66
-    accord_vow.add_dealunit(bob_str, bob_x0_deal_time, bob_x0_quota)
-    accord_vow.add_dealunit(sue_str, sue_x4_deal_time, sue_x4_quota)
-    accord_vow.add_dealunit(sue_str, sue_x7_deal_time, sue_x7_quota)
+    accord_vow.add_budunit(bob_str, bob_x0_bud_time, bob_x0_quota)
+    accord_vow.add_budunit(sue_str, sue_x4_bud_time, sue_x4_quota)
+    accord_vow.add_budunit(sue_str, sue_x7_bud_time, sue_x7_quota)
     accord_vow.knot = sue_knot
     accord_vow.fund_iota = sue_fund_iota
     accord_vow.respect_bit = sue_respect_bit

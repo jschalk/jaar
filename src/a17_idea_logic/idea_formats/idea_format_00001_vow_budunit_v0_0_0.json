@@ -3,7 +3,7 @@
         "celldepth": {
             "otx_key": false
         },
-        "deal_time": {
+        "bud_time": {
             "otx_key": true
         },
         "event_int": {
@@ -24,7 +24,7 @@
     },
     "idea_number": "br00001",
     "dimens": [
-        "vow_dealunit",
+        "vow_budunit",
         "vowunit",
         "planunit"
     ]

@@ -132,7 +132,7 @@ def get_idea_elements_sort_order() -> list[str]:
         "healer_name_ERASE",
         "healer_name_ERASE_otx",
         "healer_name_ERASE_inx",
-        "deal_time",
+        "bud_time",
         "tran_time",
         "begin",
         "close",
@@ -303,7 +303,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "healer_name_ERASE": "TEXT",
         "healer_name_ERASE_otx": "TEXT",
         "healer_name_ERASE_inx": "TEXT",
-        "deal_time": "INTEGER",
+        "bud_time": "INTEGER",
         "tran_time": "INTEGER",
         "offi_time": "INTEGER",
         "begin": "REAL",
@@ -408,7 +408,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
 
 
 # def idea_format_00000_vowunit_v0_0_0()->str: return "idea_format_00000_vowunit_v0_0_0"
-# def idea_format_00001_vow_dealunit_v0_0_0()->str: return "idea_format_00001_vow_dealunit_v0_0_0"
+# def idea_format_00001_vow_budunit_v0_0_0()->str: return "idea_format_00001_vow_budunit_v0_0_0"
 # def idea_format_00002_vow_paybook_v0_0_0()->str: return "idea_format_00002_vow_paybook_v0_0_0"
 # def idea_format_00003_vow_timeline_hour_v0_0_0()->str: return "idea_format_00003_vow_timeline_hour_v0_0_0"
 # def idea_format_00004_vow_timeline_month_v0_0_0()->str: return "idea_format_00004_vow_timeline_month_v0_0_0"
@@ -419,8 +419,8 @@ def idea_format_00000_vowunit_v0_0_0() -> str:
     return "idea_format_00000_vowunit_v0_0_0"
 
 
-def idea_format_00001_vow_dealunit_v0_0_0() -> str:
-    return "idea_format_00001_vow_dealunit_v0_0_0"
+def idea_format_00001_vow_budunit_v0_0_0() -> str:
+    return "idea_format_00001_vow_budunit_v0_0_0"
 
 
 def idea_format_00002_vow_paybook_v0_0_0() -> str:
@@ -598,7 +598,7 @@ def idea_format_00117_rope_map1_v0_0_0() -> str:
 def get_idea_format_filenames() -> set[str]:
     return {
         idea_format_00000_vowunit_v0_0_0(),
-        idea_format_00001_vow_dealunit_v0_0_0(),
+        idea_format_00001_vow_budunit_v0_0_0(),
         idea_format_00002_vow_paybook_v0_0_0(),
         idea_format_00003_vow_timeline_hour_v0_0_0(),
         idea_format_00004_vow_timeline_month_v0_0_0(),
@@ -695,7 +695,7 @@ def get_idea_format_filename(idea_number: str) -> str:
 def get_idea_format_headers() -> dict[str, list[str]]:
     return {
         "vow_label,timeline_label,c400_number,yr1_jan1_offset,monthday_distortion,fund_iota,penny,respect_bit,knot,job_listen_rotations": idea_format_00000_vowunit_v0_0_0(),
-        "vow_label,owner_name,deal_time,quota,celldepth": idea_format_00001_vow_dealunit_v0_0_0(),
+        "vow_label,owner_name,bud_time,quota,celldepth": idea_format_00001_vow_budunit_v0_0_0(),
         "vow_label,owner_name,acct_name,tran_time,amount": idea_format_00002_vow_paybook_v0_0_0(),
         "vow_label,cumlative_minute,hour_label": idea_format_00003_vow_timeline_hour_v0_0_0(),
         "vow_label,cumlative_day,month_label": idea_format_00004_vow_timeline_month_v0_0_0(),
@@ -827,7 +827,7 @@ def get_idea_dimen_ref() -> dict[str, set[str]]:
             "br00117",
         },
         "vow_paybook": {"br00002"},
-        "vow_dealunit": {"br00001"},
+        "vow_budunit": {"br00001"},
         "vow_timeline_hour": {"br00003"},
         "vow_timeline_month": {"br00004"},
         "vow_timeline_weekday": {"br00005"},

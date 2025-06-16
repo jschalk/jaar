@@ -1,13 +1,13 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.a02_finance_logic._test_util.a02_str import (
-    deal_time_str,
+    bud_time_str,
     owner_name_str,
     vow_label_str,
 )
 from src.a09_pack_logic._test_util.a09_str import event_int_str
 from src.a12_hub_toolbox._test_util.a12_str import vow_ote1_agg_str
-from src.a15_vow_logic._test_util.a15_str import vow_dealunit_str
+from src.a15_vow_logic._test_util.a15_str import vow_budunit_str
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a18_etl_toolbox.transformers import (
     create_sound_and_voice_tables,
@@ -30,9 +30,9 @@ def test_etl_voice_raw_tables_to_vow_ote1_agg_SetsTableAttr():
     with sqlite3_connect(":memory:") as vow_db_conn:
         cursor = vow_db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        vowdeal_v_raw_table = create_prime_tablename(vow_dealunit_str(), "v", "raw")
+        vowbud_v_raw_table = create_prime_tablename(vow_budunit_str(), "v", "raw")
         insert_raw_sqlstr = f"""
-INSERT INTO {vowdeal_v_raw_table} ({event_int_str()}, {vow_label_str()}_inx, {owner_name_str()}_inx, {deal_time_str()})
+INSERT INTO {vowbud_v_raw_table} ({event_int_str()}, {vow_label_str()}_inx, {owner_name_str()}_inx, {bud_time_str()})
 VALUES
   ({event3}, '{accord23_str}', '{bob_str}', {timepoint55})
 , ({event3}, '{accord23_str}', '{bob_str}', {timepoint55})
@@ -41,7 +41,7 @@ VALUES
 ;
 """
         cursor.execute(insert_raw_sqlstr)
-        assert get_row_count(cursor, vowdeal_v_raw_table) == 4
+        assert get_row_count(cursor, vowbud_v_raw_table) == 4
         assert db_table_exists(cursor, vow_ote1_agg_str()) is False
 
         # WHEN

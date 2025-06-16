@@ -9,16 +9,16 @@ def amount_str() -> str:
     return "amount"
 
 
+def bud_acct_nets_str() -> str:
+    return "bud_acct_nets"
+
+
+def bud_time_str() -> str:
+    return "bud_time"
+
+
 def celldepth_str() -> str:
     return "celldepth"
-
-
-def deal_acct_nets_str() -> str:
-    return "deal_acct_nets"
-
-
-def deal_time_str() -> str:
-    return "deal_time"
 
 
 def fund_iota_str() -> str:

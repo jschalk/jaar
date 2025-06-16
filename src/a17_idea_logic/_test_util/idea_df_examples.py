@@ -2,8 +2,8 @@ from pandas import DataFrame
 from src.a02_finance_logic._test_util.a02_str import (
     acct_name_str,
     amount_str,
+    bud_time_str,
     celldepth_str,
-    deal_time_str,
     fund_iota_str,
     knot_str,
     owner_name_str,
@@ -52,14 +52,14 @@ def get_ex1_br00000_df() -> DataFrame:
 
 
 def get_ex1_br00001_df() -> DataFrame:
-    """idea_format_00001_vow_dealunit_v0_0_0
-    vow_label,owner_name,quota,deal_time,celldepth"""
+    """idea_format_00001_vow_budunit_v0_0_0
+    vow_label,owner_name,quota,bud_time,celldepth"""
     x_df = DataFrame(
         columns=[
             vow_label_str(),
             owner_name_str(),
             quota_str(),
-            deal_time_str(),
+            bud_time_str(),
             celldepth_str(),
         ]
     )
@@ -167,14 +167,14 @@ def get_ex2_br00000_df() -> DataFrame:
 
 
 def get_ex2_br00001_df() -> DataFrame:
-    """idea_format_00001_vow_dealunit_v0_0_0
-    vow_label,owner_name,quota,deal_time"""
+    """idea_format_00001_vow_budunit_v0_0_0
+    vow_label,owner_name,quota,bud_time"""
     x_df = DataFrame(
         columns=[
             vow_label_str(),
             owner_name_str(),
             quota_str(),
-            deal_time_str(),
+            bud_time_str(),
             celldepth_str(),
         ]
     )

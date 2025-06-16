@@ -10,31 +10,31 @@ from src.a06_plan_logic._test_util.example_plans import (
 )
 from src.a06_plan_logic.plan import planunit_shop
 from src.a09_pack_logic._test_util.a09_str import event_int_str
-from src.a11_deal_cell_logic._test_util.a11_str import (
+from src.a11_bud_cell_logic._test_util.a11_str import (
     ancestors_str,
+    bud_owner_name_str,
     celldepth_str,
-    deal_owner_name_str,
 )
-from src.a11_deal_cell_logic._test_util.example_factunits import (
+from src.a11_bud_cell_logic._test_util.example_factunits import (
     example_casa_clean_factunit as clean_factunit,
     example_casa_dirty_factunit as dirty_factunit,
     example_casa_grimy_factunit as grimy_factunit,
     example_sky_blue_factunit as sky_blue_factunit,
 )
-from src.a11_deal_cell_logic.cell import CELLNODE_QUOTA_DEFAULT, cellunit_shop
+from src.a11_bud_cell_logic.cell import CELLNODE_QUOTA_DEFAULT, cellunit_shop
 from src.a12_hub_toolbox._test_util.a12_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
 from src.a12_hub_toolbox._test_util.example_hub_atoms import (
-    get_dealunit_55_example,
-    get_dealunit_invalid_example,
+    get_budunit_55_example,
+    get_budunit_invalid_example,
 )
 from src.a12_hub_toolbox.hub_path import (
+    create_budunit_json_path,
     create_cell_acct_mandate_ledger_path,
     create_cell_dir_path,
     create_cell_json_path as node_path,
-    create_dealunit_json_path,
     create_gut_path,
     create_job_path,
     create_owner_event_dir_path,
@@ -42,25 +42,25 @@ from src.a12_hub_toolbox.hub_path import (
     create_planpoint_path,
 )
 from src.a12_hub_toolbox.hub_tool import (
+    bud_file_exists,
     cellunit_add_json_file,
     cellunit_get_from_dir,
     cellunit_save_to_dir,
     collect_owner_event_dir_sets,
     create_cell_acct_mandate_ledger_json,
-    deal_file_exists,
     get_owners_downhill_event_ints,
     get_planevent_obj,
     get_timepoint_dirs,
     gut_file_exists,
     job_file_exists,
-    open_deal_file,
+    open_bud_file,
     open_gut_file,
     open_job_file,
     open_plan_file,
     open_planpoint_file,
     planpoint_file_exists,
     save_arbitrary_planevent,
-    save_deal_file,
+    save_bud_file,
     save_gut_file,
     save_job_file,
     save_plan_file,
@@ -499,12 +499,12 @@ def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
         vow_mstr_dir=vow_mstr_dir,
         vow_label=a23_str,
         time_owner_name=sue_str,
-        deal_time=time7,
+        bud_time=time7,
         quota=quota500,
         event_int=event3,
         celldepth=celldepth4,
         penny=penny6,
-        deal_ancestors=das,
+        bud_ancestors=das,
     )
 
     # THEN
@@ -514,7 +514,7 @@ def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
     assert generated_cell_dict.get(ancestors_str()) == das
     assert generated_cell_dict.get(event_int_str()) == event3
     assert generated_cell_dict.get(celldepth_str()) == celldepth4
-    assert generated_cell_dict.get(deal_owner_name_str()) == sue_str
+    assert generated_cell_dict.get(bud_owner_name_str()) == sue_str
     assert generated_cell_dict.get(penny_str()) == penny6
     assert generated_cell_dict.get(quota_str()) == quota500
 
@@ -535,7 +535,7 @@ def test_cellunit_add_json_file_SetsFile_Scenario1_ManyParametersEmpty(
 
     # WHEN
     cellunit_add_json_file(
-        vow_mstr_dir, a23_str, sue_str, time7, event3, deal_ancestors=das
+        vow_mstr_dir, a23_str, sue_str, time7, event3, bud_ancestors=das
     )
 
     # THEN
@@ -545,7 +545,7 @@ def test_cellunit_add_json_file_SetsFile_Scenario1_ManyParametersEmpty(
     assert generated_cell_dict.get(ancestors_str()) == das
     assert generated_cell_dict.get(event_int_str()) == event3
     assert generated_cell_dict.get(celldepth_str()) == 0
-    assert generated_cell_dict.get(deal_owner_name_str()) == sue_str
+    assert generated_cell_dict.get(bud_owner_name_str()) == sue_str
     assert generated_cell_dict.get(penny_str()) == 1
     assert generated_cell_dict.get(quota_str()) == CELLNODE_QUOTA_DEFAULT
 
@@ -562,7 +562,7 @@ def test_cellunit_get_from_dir_ReturnsObj_Scenario0_NoFileExists(env_dir_setup_c
     event3 = 3
     assert os_path_exists(sue7_cell_path) is False
     cell_dir = create_cell_dir_path(
-        vow_mstr_dir, a23_str, sue_str, time7, deal_ancestors=das
+        vow_mstr_dir, a23_str, sue_str, time7, bud_ancestors=das
     )
 
     # WHEN / THEN
@@ -581,10 +581,10 @@ def test_cellunit_get_from_dir_ReturnsObj_Scenario1_FileExists(env_dir_setup_cle
     event3 = 3
     assert os_path_exists(sue7_cell_path) is False
     cellunit_add_json_file(
-        vow_mstr_dir, a23_str, sue_str, time7, event3, deal_ancestors=das
+        vow_mstr_dir, a23_str, sue_str, time7, event3, bud_ancestors=das
     )
     cell_dir = create_cell_dir_path(
-        vow_mstr_dir, a23_str, sue_str, time7, deal_ancestors=das
+        vow_mstr_dir, a23_str, sue_str, time7, bud_ancestors=das
     )
 
     # WHEN
@@ -673,7 +673,7 @@ def test_create_cell_acct_mandate_ledger_json_CreatesFile_Scenario1(
     sue_found_factunits = {dirty_fact.fcontext: dirty_fact}
     sue_boss_factunits = {sky_blue_fact.fcontext: sky_blue_fact}
     sue_cell = cellunit_shop(
-        deal_owner_name=yao_str,
+        bud_owner_name=yao_str,
         ancestors=sue_ancestors,
         event_int=sue_event7,
         celldepth=sue_celldepth3,
@@ -703,79 +703,79 @@ def test_create_cell_acct_mandate_ledger_json_CreatesFile_Scenario1(
     assert open_json(sue_acct_mandate_ledger_path) == {yao_str: 311, sue_str: 133}
 
 
-def test_save_valid_deal_file_Scenario0_SavesFile(env_dir_setup_cleanup):
+def test_save_valid_bud_file_Scenario0_SavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     yao_str = "Yao"
-    t55_deal = get_dealunit_55_example()
-    t55_deal_time = t55_deal.deal_time
-    t55_deal_path = create_dealunit_json_path(mstr_dir, a23_str, yao_str, t55_deal_time)
-    assert os_path_exists(t55_deal_path) is False
+    t55_bud = get_budunit_55_example()
+    t55_bud_time = t55_bud.bud_time
+    t55_bud_path = create_budunit_json_path(mstr_dir, a23_str, yao_str, t55_bud_time)
+    assert os_path_exists(t55_bud_path) is False
 
     # WHEN
-    save_deal_file(mstr_dir, a23_str, yao_str, t55_deal)
+    save_bud_file(mstr_dir, a23_str, yao_str, t55_bud)
 
     # THEN
-    assert os_path_exists(t55_deal_path)
+    assert os_path_exists(t55_bud_path)
 
 
-def test_save_valid_deal_file_Scenario1_RaisesError(env_dir_setup_cleanup):
+def test_save_valid_bud_file_Scenario1_RaisesError(env_dir_setup_cleanup):
     # ESTABLISH
     mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     yao_str = "Yao"
-    invalid_deal = get_dealunit_invalid_example()
+    invalid_bud = get_budunit_invalid_example()
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        save_deal_file(mstr_dir, a23_str, yao_str, invalid_deal)
+        save_bud_file(mstr_dir, a23_str, yao_str, invalid_bud)
     exception_str = (
-        "magnitude cannot be calculated: debt_deal_acct_net=-5, cred_deal_acct_net=3"
+        "magnitude cannot be calculated: debt_bud_acct_net=-5, cred_bud_acct_net=3"
     )
     assert str(excinfo.value) == exception_str
 
 
-def test_deal_file_exists_ReturnsObj(env_dir_setup_cleanup):
+def test_bud_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     yao_str = "Yao"
-    t55_deal = get_dealunit_55_example()
-    assert not deal_file_exists(mstr_dir, a23_str, yao_str, t55_deal.deal_time)
+    t55_bud = get_budunit_55_example()
+    assert not bud_file_exists(mstr_dir, a23_str, yao_str, t55_bud.bud_time)
 
     # WHEN
-    save_deal_file(mstr_dir, a23_str, yao_str, t55_deal)
+    save_bud_file(mstr_dir, a23_str, yao_str, t55_bud)
 
     # THEN
-    assert deal_file_exists(mstr_dir, a23_str, yao_str, t55_deal.deal_time)
+    assert bud_file_exists(mstr_dir, a23_str, yao_str, t55_bud.bud_time)
 
 
-def test_open_deal_file_ReturnsObj_Scenario0_NoFileExists(env_dir_setup_cleanup):
+def test_open_bud_file_ReturnsObj_Scenario0_NoFileExists(env_dir_setup_cleanup):
     # ESTABLISH
     mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     yao_str = "Yao"
-    t55_deal = get_dealunit_55_example()
-    t55_deal_time = t55_deal.deal_time
-    assert not deal_file_exists(mstr_dir, a23_str, yao_str, t55_deal_time)
+    t55_bud = get_budunit_55_example()
+    t55_bud_time = t55_bud.bud_time
+    assert not bud_file_exists(mstr_dir, a23_str, yao_str, t55_bud_time)
 
     # WHEN / THEN
-    assert not open_deal_file(mstr_dir, a23_str, yao_str, t55_deal_time)
+    assert not open_bud_file(mstr_dir, a23_str, yao_str, t55_bud_time)
 
 
-def test_open_deal_file_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
+def test_open_bud_file_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
     # ESTABLISH
     mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     yao_str = "Yao"
-    t55_deal = get_dealunit_55_example()
-    t55_deal_time = t55_deal.deal_time
-    save_deal_file(mstr_dir, a23_str, yao_str, t55_deal)
-    assert deal_file_exists(mstr_dir, a23_str, yao_str, t55_deal_time)
+    t55_bud = get_budunit_55_example()
+    t55_bud_time = t55_bud.bud_time
+    save_bud_file(mstr_dir, a23_str, yao_str, t55_bud)
+    assert bud_file_exists(mstr_dir, a23_str, yao_str, t55_bud_time)
 
     # WHEN / THEN
-    assert open_deal_file(mstr_dir, a23_str, yao_str, t55_deal_time) == t55_deal
+    assert open_bud_file(mstr_dir, a23_str, yao_str, t55_bud_time) == t55_bud
 
 
 def test_save_planpoint_file_SavesFile(env_dir_setup_cleanup):
@@ -784,17 +784,15 @@ def test_save_planpoint_file_SavesFile(env_dir_setup_cleanup):
     a23_str = "accord23"
     sue_str = "Sue"
     t55_planpoint = get_planunit_with_4_levels()
-    t55_deal_time = 55
-    t55_planpoint_path = create_planpoint_path(
-        mstr_dir, a23_str, sue_str, t55_deal_time
-    )
+    t55_bud_time = 55
+    t55_planpoint_path = create_planpoint_path(mstr_dir, a23_str, sue_str, t55_bud_time)
     print(f"{t55_planpoint.vow_label=}")
     print(f"               {mstr_dir=}")
     print(f"      {t55_planpoint_path=}")
     assert os_path_exists(t55_planpoint_path) is False
 
     # WHEN
-    save_planpoint_file(mstr_dir, t55_planpoint, t55_deal_time)
+    save_planpoint_file(mstr_dir, t55_planpoint, t55_bud_time)
 
     # THEN
     assert os_path_exists(t55_planpoint_path)
@@ -804,11 +802,11 @@ def test_save_planpoint_file_RaisesError(env_dir_setup_cleanup):
     # ESTABLISH
     mstr_dir = get_module_temp_dir()
     irrational_planpoint = get_planunit_irrational_example()
-    t55_deal_time = 55
+    t55_bud_time = 55
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        save_planpoint_file(mstr_dir, irrational_planpoint, t55_deal_time)
+        save_planpoint_file(mstr_dir, irrational_planpoint, t55_bud_time)
     exception_str = "PlanPoint could not be saved PlanUnit._rational is False"
     assert str(excinfo.value) == exception_str
 
@@ -818,15 +816,15 @@ def test_planpoint_file_exists_ReturnsObj(env_dir_setup_cleanup):
     mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     sue_str = "Sue"
-    t55_deal_time = 55
-    assert planpoint_file_exists(mstr_dir, a23_str, sue_str, t55_deal_time) is False
+    t55_bud_time = 55
+    assert planpoint_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time) is False
 
     # WHEN
     t55_planpoint = get_planunit_with_4_levels()
-    save_planpoint_file(mstr_dir, t55_planpoint, t55_deal_time)
+    save_planpoint_file(mstr_dir, t55_planpoint, t55_bud_time)
 
     # THEN
-    assert planpoint_file_exists(mstr_dir, a23_str, sue_str, t55_deal_time)
+    assert planpoint_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time)
 
 
 def test_open_planpoint_file_ReturnsObj_Scenario0_NoFileExists(env_dir_setup_cleanup):
@@ -834,11 +832,11 @@ def test_open_planpoint_file_ReturnsObj_Scenario0_NoFileExists(env_dir_setup_cle
     mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     sue_str = "Sue"
-    t55_deal_time = 55
-    assert not planpoint_file_exists(mstr_dir, a23_str, sue_str, t55_deal_time)
+    t55_bud_time = 55
+    assert not planpoint_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time)
 
     # WHEN / THEN
-    assert not open_planpoint_file(mstr_dir, a23_str, sue_str, t55_deal_time)
+    assert not open_planpoint_file(mstr_dir, a23_str, sue_str, t55_bud_time)
 
 
 def test_open_planpoint_file_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
@@ -846,13 +844,13 @@ def test_open_planpoint_file_ReturnsObj_Scenario1_FileExists(env_dir_setup_clean
     mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     sue_str = "Sue"
-    t55_deal_time = 55
+    t55_bud_time = 55
     t55_planpoint = get_planunit_with_4_levels()
-    save_planpoint_file(mstr_dir, t55_planpoint, t55_deal_time)
-    assert planpoint_file_exists(mstr_dir, a23_str, sue_str, t55_deal_time)
+    save_planpoint_file(mstr_dir, t55_planpoint, t55_bud_time)
+    assert planpoint_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time)
 
     # WHEN
-    file_planpoint = open_planpoint_file(mstr_dir, a23_str, sue_str, t55_deal_time)
+    file_planpoint = open_planpoint_file(mstr_dir, a23_str, sue_str, t55_bud_time)
 
     # THEN
     assert file_planpoint.get_dict() == t55_planpoint.get_dict()
@@ -863,14 +861,14 @@ def test_get_timepoint_dirs_ReturnsObj_Scenario0(env_dir_setup_cleanup):
     mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     sue_str = "Sue"
-    t55_deal_time = 55
-    t77_deal_time = 77
+    t55_bud_time = 55
+    t77_bud_time = 77
     planpoint = get_planunit_with_4_levels()
-    save_planpoint_file(mstr_dir, planpoint, t55_deal_time)
-    save_planpoint_file(mstr_dir, planpoint, t77_deal_time)
+    save_planpoint_file(mstr_dir, planpoint, t55_bud_time)
+    save_planpoint_file(mstr_dir, planpoint, t77_bud_time)
 
     # WHEN
     timepoint_dirs = get_timepoint_dirs(mstr_dir, a23_str, sue_str)
 
     # THEN
-    assert timepoint_dirs == [t55_deal_time, t77_deal_time]
+    assert timepoint_dirs == [t55_bud_time, t77_bud_time]

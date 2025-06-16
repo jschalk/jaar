@@ -65,7 +65,7 @@ def add_vowunit_to_stance_csv_strs(
     br00004_csv = vow_csv_strs.get("br00004")
     br00005_csv = vow_csv_strs.get("br00005")
     br00000_csv = _add_vowunit_to_br00000_csv(br00000_csv, x_vow, csv_delimiter)
-    br00001_csv = _add_dealunit_to_br00001_csv(br00001_csv, x_vow, csv_delimiter)
+    br00001_csv = _add_budunit_to_br00001_csv(br00001_csv, x_vow, csv_delimiter)
     br00002_csv = _add_paybook_to_br00002_csv(br00002_csv, x_vow, csv_delimiter)
     br00003_csv = _add_hours_to_br00003_csv(br00003_csv, x_vow, csv_delimiter)
     br00004_csv = _add_months_to_br00004_csv(br00004_csv, x_vow, csv_delimiter)
@@ -109,7 +109,7 @@ def _add_vowunit_to_br00000_csv(
     return x_csv
 
 
-def _add_dealunit_to_br00001_csv(
+def _add_budunit_to_br00001_csv(
     x_csv: str,
     x_vow: VowUnit,
     csv_delimiter: str,
@@ -117,15 +117,15 @@ def _add_dealunit_to_br00001_csv(
     event_int: int = None,
 ) -> str:
     for broker_owner_name, brokerunits in x_vow.brokerunits.items():
-        for deal_time, dealunit in brokerunits.deals.items():
+        for bud_time, budunit in brokerunits.buds.items():
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
                 x_vow.vow_label,
                 broker_owner_name,
-                str(deal_time),
-                str(dealunit.quota),
-                str(dealunit.celldepth),
+                str(bud_time),
+                str(budunit.quota),
+                str(budunit.celldepth),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"

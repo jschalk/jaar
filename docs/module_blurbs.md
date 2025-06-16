@@ -13,7 +13,7 @@ What does each one do?
 - **a08_plan_atom_logic**: Defines the structure and behavior of planget atoms, which are single units of planget and concepts used in a planget.
 - **a09_pack_logic**: Manages the creation and organization of packs, which are collections of planget atoms for building complex plangets.
 - **a10_plan_calc**: Expresses the calculations performed when a planget is "settled" to determine final amounts for each concept and account.
-- **a11_deal_cell_logic**: When a vow system decides to empower a planget the funds must be distributed
+- **a11_bud_cell_logic**: When a vow system decides to empower a planget the funds must be distributed
 - **a12_hub_tools**: These tools are used to handle complex operations involving plan files, will be deprecated.
 - **a13_plan_listen_logic**: These tools describe how one planget listens to another
 - **a14_keep_logic**: Builds a simulation that describes how much credit a healer has earned 
