@@ -2,8 +2,8 @@ from copy import copy as copy_copy
 from os import getcwd as os_getcwd
 from src.a00_data_toolbox.file_toolbox import create_path, save_json
 from src.a02_finance_logic._test_util.a02_str import (
+    bud_time_str,
     celldepth_str,
-    deal_time_str,
     knot_str,
     owner_name_str,
     quota_str,
@@ -93,7 +93,7 @@ from src.a15_vow_logic._test_util.a15_str import (
     job_listen_rotations_str,
     month_label_str,
     offi_time_str,
-    vow_dealunit_str,
+    vow_budunit_str,
     vow_paybook_str,
     vow_timeline_hour_str,
     vow_timeline_month_str,
@@ -313,7 +313,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[90] == "healer_name_ERASE"
     assert table_sorting_priority[91] == "healer_name_ERASE_otx"
     assert table_sorting_priority[92] == "healer_name_ERASE_inx"
-    assert table_sorting_priority[93] == "deal_time"
+    assert table_sorting_priority[93] == "bud_time"
     assert table_sorting_priority[94] == "tran_time"
     assert table_sorting_priority[95] == "begin"
     assert table_sorting_priority[96] == "close"
@@ -448,7 +448,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(awardee_title_str()) == "TEXT"
     assert sqlite_types.get(healer_name_str()) == "TEXT"
     assert sqlite_types.get(offi_time_str()) == "INTEGER"
-    assert sqlite_types.get(deal_time_str()) == "INTEGER"
+    assert sqlite_types.get(bud_time_str()) == "INTEGER"
     assert sqlite_types.get(tran_time_str()) == "INTEGER"
     assert sqlite_types.get(begin_str()) == "REAL"
     assert sqlite_types.get(close_str()) == "REAL"
@@ -539,7 +539,7 @@ def test_get_idea_config_dict_ReturnsObj():
     assert x_idea_config
     idea_config_dimens = set(x_idea_config.keys())
     assert vowunit_str() in idea_config_dimens
-    assert vow_dealunit_str() in idea_config_dimens
+    assert vow_budunit_str() in idea_config_dimens
     assert vow_paybook_str() in idea_config_dimens
     assert vow_timeline_hour_str() in idea_config_dimens
     assert vow_timeline_month_str() in idea_config_dimens
@@ -607,7 +607,7 @@ def _validate_idea_config(x_idea_config: dict):
         }:
             assert idea_dict.get(allowed_crud_str()) == insert_one_time_str()
         elif idea_dimen in {
-            vow_dealunit_str(),
+            vow_budunit_str(),
             vow_paybook_str(),
             vow_timeoffi_str(),
         }:
@@ -865,7 +865,7 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     # set_idea_config_json(plan_concept_reasonunit_str(), 17)
     # set_idea_config_json(plan_conceptunit_str(), 18)
     # set_idea_config_json(planunit_str(), 19)
-    # set_idea_config_json(vow_dealunit_str(), 20)
+    # set_idea_config_json(vow_budunit_str(), 20)
     # set_idea_config_json(vow_paybook_str(), 21)
 
     x_idea_config = get_idea_config_dict()
@@ -889,7 +889,7 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     assert x_idea_config.get(plan_concept_reasonunit_str()).get(bo) == 17
     assert x_idea_config.get(plan_conceptunit_str()).get(bo) == 18
     assert x_idea_config.get(planunit_str()).get(bo) == 19
-    assert x_idea_config.get(vow_dealunit_str()).get(bo) == 20
+    assert x_idea_config.get(vow_budunit_str()).get(bo) == 20
     assert x_idea_config.get(vow_paybook_str()).get(bo) == 21
 
 

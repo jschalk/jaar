@@ -70,9 +70,9 @@ def test_vow_build_from_df_ReturnsObj_Scenario0_OneVowLabel(
         timeline=creg_timelineunit,
         job_listen_rotations=x_job_listen_rotations,
     )
-    expected_accord23_vowunit.add_dealunit(
+    expected_accord23_vowunit.add_budunit(
         owner_name="Sue",
-        deal_time=777,
+        bud_time=777,
         quota=445,
         allow_prev_to_offi_time_max_entry=True,
         celldepth=5,

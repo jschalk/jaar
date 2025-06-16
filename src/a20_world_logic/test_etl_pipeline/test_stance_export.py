@@ -143,7 +143,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
 #         event_int_str(),
 #         vow_label_str(),
 #         owner_name_str(),
-#         deal_time(),
+#         bud_time(),
 #         quota_str(),
 #         celldepth_str(),
 #     ]
@@ -181,7 +181,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
 #     a23_json_path = create_vow_json_path(mstr_dir, accord23_str)
 #     a23_sue_gut_path = create_gut_path(mstr_dir, accord23_str, sue_str)
 #     a23_sue_job_path = create_job_path(mstr_dir, accord23_str, sue_str)
-#     sue37_mandate_path = deal_mandate(mstr_dir, accord23_str, sue_str, tp37)
+#     sue37_mandate_path = bud_mandate(mstr_dir, accord23_str, sue_str, tp37)
 #     assert os_path_exists(mud_file_path)
 #     assert os_path_exists(a23_json_path) is False
 #     assert os_path_exists(a23_sue_gut_path) is False

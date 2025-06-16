@@ -9,7 +9,7 @@ from src.a00_data_toolbox.file_toolbox import open_file
 from src.a02_finance_logic._test_util.a02_str import vow_label_str
 from src.a12_hub_toolbox.hub_path import create_vow_json_path
 from src.a15_vow_logic._test_util.a15_str import (
-    vow_dealunit_str,
+    vow_budunit_str,
     vow_paybook_str,
     vow_timeline_hour_str,
     vow_timeline_month_str,
@@ -58,7 +58,7 @@ def test_get_vow_voice_select1_sqlstrs_ReturnsObj():
 
     # THEN
     gen_vowpayy_sqlstr = fu2_select_sqlstrs.get(vow_paybook_str())
-    gen_vowdeal_sqlstr = fu2_select_sqlstrs.get(vow_dealunit_str())
+    gen_vowbud_sqlstr = fu2_select_sqlstrs.get(vow_budunit_str())
     gen_vowhour_sqlstr = fu2_select_sqlstrs.get(vow_timeline_hour_str())
     gen_vowmont_sqlstr = fu2_select_sqlstrs.get(vow_timeline_month_str())
     gen_vowweek_sqlstr = fu2_select_sqlstrs.get(vow_timeline_weekday_str())
@@ -68,14 +68,14 @@ def test_get_vow_voice_select1_sqlstrs_ReturnsObj():
         cursor = vow_db_conn.cursor()
         create_sound_and_voice_tables(cursor)
         vowpayy_abbv7 = get_dimen_abbv7(vow_paybook_str())
-        vowdeal_abbv7 = get_dimen_abbv7(vow_dealunit_str())
+        vowbud_abbv7 = get_dimen_abbv7(vow_budunit_str())
         vowhour_abbv7 = get_dimen_abbv7(vow_timeline_hour_str())
         vowmont_abbv7 = get_dimen_abbv7(vow_timeline_month_str())
         vowweek_abbv7 = get_dimen_abbv7(vow_timeline_weekday_str())
         vowoffi_abbv7 = get_dimen_abbv7(vow_timeoffi_str())
         vowunit_abbv7 = get_dimen_abbv7(vowunit_str())
         vowpayy_v_agg = create_prime_tablename(vowpayy_abbv7, "v", "agg")
-        vowdeal_v_agg = create_prime_tablename(vowdeal_abbv7, "v", "agg")
+        vowbud_v_agg = create_prime_tablename(vowbud_abbv7, "v", "agg")
         vowhour_v_agg = create_prime_tablename(vowhour_abbv7, "v", "agg")
         vowmont_v_agg = create_prime_tablename(vowmont_abbv7, "v", "agg")
         vowweek_v_agg = create_prime_tablename(vowweek_abbv7, "v", "agg")
@@ -83,14 +83,14 @@ def test_get_vow_voice_select1_sqlstrs_ReturnsObj():
         vowunit_v_agg = create_prime_tablename(vowunit_abbv7, "v", "agg")
         where_dict = {vow_label_str(): a23_str}
         vowpayy_sql = create_select_query(cursor, vowpayy_v_agg, [], where_dict, True)
-        vowdeal_sql = create_select_query(cursor, vowdeal_v_agg, [], where_dict, True)
+        vowbud_sql = create_select_query(cursor, vowbud_v_agg, [], where_dict, True)
         vowhour_sql = create_select_query(cursor, vowhour_v_agg, [], where_dict, True)
         vowmont_sql = create_select_query(cursor, vowmont_v_agg, [], where_dict, True)
         vowweek_sql = create_select_query(cursor, vowweek_v_agg, [], where_dict, True)
         vowoffi_sql = create_select_query(cursor, vowoffi_v_agg, [], where_dict, True)
         vowunit_sql = create_select_query(cursor, vowunit_v_agg, [], where_dict, True)
         vowpayy_sqlstr_ref = f"{vowpayy_abbv7.upper()}_FU2_SELECT_SQLSTR"
-        vowdeal_sqlstr_ref = f"{vowdeal_abbv7.upper()}_FU2_SELECT_SQLSTR"
+        vowbud_sqlstr_ref = f"{vowbud_abbv7.upper()}_FU2_SELECT_SQLSTR"
         vowhour_sqlstr_ref = f"{vowhour_abbv7.upper()}_FU2_SELECT_SQLSTR"
         vowmont_sqlstr_ref = f"{vowmont_abbv7.upper()}_FU2_SELECT_SQLSTR"
         vowweek_sqlstr_ref = f"{vowweek_abbv7.upper()}_FU2_SELECT_SQLSTR"
@@ -99,14 +99,14 @@ def test_get_vow_voice_select1_sqlstrs_ReturnsObj():
         qa23_str = "'accord23'"
         blank = ""
         print(f"""{vowpayy_sqlstr_ref} = "{vowpayy_sql.replace(qa23_str, blank)}" """)
-        print(f"""{vowdeal_sqlstr_ref} = "{vowdeal_sql.replace(qa23_str, blank)}" """)
+        print(f"""{vowbud_sqlstr_ref} = "{vowbud_sql.replace(qa23_str, blank)}" """)
         print(f"""{vowhour_sqlstr_ref} = "{vowhour_sql.replace(qa23_str, blank)}" """)
         print(f"""{vowmont_sqlstr_ref} = "{vowmont_sql.replace(qa23_str, blank)}" """)
         print(f"""{vowweek_sqlstr_ref} = "{vowweek_sql.replace(qa23_str, blank)}" """)
         print(f"""{vowoffi_sqlstr_ref} = "{vowoffi_sql.replace(qa23_str, blank)}" """)
         print(f"""{vowunit_sqlstr_ref} = "{vowunit_sql.replace(qa23_str, blank)}" """)
         assert gen_vowpayy_sqlstr == vowpayy_sql
-        assert gen_vowdeal_sqlstr == vowdeal_sql
+        assert gen_vowbud_sqlstr == vowbud_sql
         assert gen_vowhour_sqlstr == vowhour_sql
         assert gen_vowmont_sqlstr == vowmont_sql
         assert gen_vowweek_sqlstr == vowweek_sql

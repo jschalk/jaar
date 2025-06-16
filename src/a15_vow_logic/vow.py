@@ -22,9 +22,9 @@ from src.a01_term_logic.term import (
     VowLabel,
     default_knot_if_None,
 )
-from src.a02_finance_logic.deal import (
+from src.a02_finance_logic.bud import (
     BrokerUnit,
-    DealUnit,
+    BudUnit,
     TranBook,
     TranUnit,
     brokerunit_shop,
@@ -44,7 +44,7 @@ from src.a02_finance_logic.finance_config import (
 )
 from src.a06_plan_logic.plan import PlanUnit, planunit_shop
 from src.a07_calendar_logic.chrono import TimeLineUnit, timelineunit_shop
-from src.a11_deal_cell_logic.cell import cellunit_shop
+from src.a11_bud_cell_logic.cell import cellunit_shop
 from src.a12_hub_toolbox.basis_plans import create_listen_basis, get_default_job
 from src.a12_hub_toolbox.hub_path import create_cell_dir_path, create_vow_json_path
 from src.a12_hub_toolbox.hub_tool import (
@@ -69,7 +69,7 @@ def get_default_job_listen_count() -> int:
     return 3
 
 
-class dealunit_Exception(Exception):
+class budunit_Exception(Exception):
     pass
 
 
@@ -284,28 +284,28 @@ class VowUnit:
     def del_brokerunit(self, x_owner_name: OwnerName) -> None:
         self.brokerunits.pop(x_owner_name)
 
-    def add_dealunit(
+    def add_budunit(
         self,
         owner_name: OwnerName,
-        deal_time: TimeLinePoint,
+        bud_time: TimeLinePoint,
         quota: int,
         allow_prev_to_offi_time_max_entry: bool = False,
         celldepth: int = None,
     ):
         self._offi_time_max = get_0_if_None(self._offi_time_max)
-        if deal_time < self._offi_time_max and not allow_prev_to_offi_time_max_entry:
-            exception_str = f"Cannot set dealunit because deal_time {deal_time} is less than VowUnit._offi_time_max {self._offi_time_max}."
-            raise dealunit_Exception(exception_str)
+        if bud_time < self._offi_time_max and not allow_prev_to_offi_time_max_entry:
+            exception_str = f"Cannot set budunit because bud_time {bud_time} is less than VowUnit._offi_time_max {self._offi_time_max}."
+            raise budunit_Exception(exception_str)
         if self.brokerunit_exists(owner_name) is False:
             self.set_brokerunit(brokerunit_shop(owner_name))
         x_brokerunit = self.get_brokerunit(owner_name)
-        x_brokerunit.add_deal(deal_time, quota, celldepth)
+        x_brokerunit.add_bud(bud_time, quota, celldepth)
 
-    def get_dealunit(self, owner_name: OwnerName, deal_time: TimeLinePoint) -> DealUnit:
+    def get_budunit(self, owner_name: OwnerName, bud_time: TimeLinePoint) -> BudUnit:
         if not self.get_brokerunit(owner_name):
             return None
         x_brokerunit = self.get_brokerunit(owner_name)
-        return x_brokerunit.get_deal(deal_time)
+        return x_brokerunit.get_bud(bud_time)
 
     def get_dict(self, include_paybook: bool = True) -> dict:
         x_dict = {
@@ -327,19 +327,19 @@ class VowUnit:
 
     def _get_brokerunits_dict(self) -> dict[OwnerName, dict]:
         return {
-            x_deal.owner_name: x_deal.get_dict() for x_deal in self.brokerunits.values()
+            x_bud.owner_name: x_bud.get_dict() for x_bud in self.brokerunits.values()
         }
 
-    def get_brokerunits_deal_times(self) -> set[TimeLinePoint]:
-        all_dealunit_deal_times = set()
+    def get_brokerunits_bud_times(self) -> set[TimeLinePoint]:
+        all_budunit_bud_times = set()
         for x_brokerunit in self.brokerunits.values():
-            all_dealunit_deal_times.update(x_brokerunit.get_deal_times())
-        return all_dealunit_deal_times
+            all_budunit_bud_times.update(x_brokerunit.get_bud_times())
+        return all_budunit_bud_times
 
     def set_paypurchase(self, x_paypurchase: TranUnit):
         self.paybook.set_tranunit(
             tranunit=x_paypurchase,
-            blocked_tran_times=self.get_brokerunits_deal_times(),
+            blocked_tran_times=self.get_brokerunits_bud_times(),
             _offi_time_max=self._offi_time_max,
         )
 
@@ -401,52 +401,50 @@ class VowUnit:
         x_tranunits = copy_deepcopy(self.paybook.tranunits)
         x_tranbook = tranbook_shop(self.vow_label, x_tranunits)
         for owner_name, x_brokerunit in self.brokerunits.items():
-            for x_deal_time, x_dealunit in x_brokerunit.deals.items():
-                for acct_name, x_amount in x_dealunit._deal_acct_nets.items():
-                    x_tranbook.add_tranunit(
-                        owner_name, acct_name, x_deal_time, x_amount
-                    )
+            for x_bud_time, x_budunit in x_brokerunit.buds.items():
+                for acct_name, x_amount in x_budunit._bud_acct_nets.items():
+                    x_tranbook.add_tranunit(owner_name, acct_name, x_bud_time, x_amount)
         self._all_tranbook = x_tranbook
 
-    def create_deals_root_cells(
+    def create_buds_root_cells(
         self,
         ote1_dict: dict[OwnerName, dict[TimeLinePoint, EventInt]],
     ) -> None:
         for owner_name, brokerunit in self.brokerunits.items():
-            for deal_time in brokerunit.deals.keys():
-                self._create_deal_root_cell(owner_name, ote1_dict, deal_time)
+            for bud_time in brokerunit.buds.keys():
+                self._create_bud_root_cell(owner_name, ote1_dict, bud_time)
 
-    def _create_deal_root_cell(
+    def _create_bud_root_cell(
         self,
         owner_name: OwnerName,
         ote1_dict: dict[OwnerName, dict[TimeLinePoint, EventInt]],
-        deal_time: TimeLinePoint,
+        bud_time: TimeLinePoint,
     ) -> None:
-        past_event_int = _get_ote1_max_past_event_int(owner_name, ote1_dict, deal_time)
-        dealunit = self.get_dealunit(owner_name, deal_time)
+        past_event_int = _get_ote1_max_past_event_int(owner_name, ote1_dict, bud_time)
+        budunit = self.get_budunit(owner_name, bud_time)
         cellunit = cellunit_shop(
-            deal_owner_name=owner_name,
+            bud_owner_name=owner_name,
             ancestors=[],
             event_int=past_event_int,
-            celldepth=dealunit.celldepth,
-            quota=dealunit.quota,
+            celldepth=budunit.celldepth,
+            quota=budunit.quota,
             penny=self.penny,
         )
         root_cell_dir = create_cell_dir_path(
-            self.vow_mstr_dir, self.vow_label, owner_name, deal_time, []
+            self.vow_mstr_dir, self.vow_label, owner_name, bud_time, []
         )
         cellunit_save_to_dir(root_cell_dir, cellunit)
 
 
 def _get_ote1_max_past_event_int(
-    owner_name: str, ote1_dict: dict[str, dict[str, int]], deal_time: int
+    owner_name: str, ote1_dict: dict[str, dict[str, int]], bud_time: int
 ) -> EventInt:
-    """Using the vow_ote1_agg grab most recent event int before a given deal_time"""
+    """Using the vow_ote1_agg grab most recent event int before a given bud_time"""
     ote1_owner_dict = ote1_dict.get(owner_name)
     if not ote1_owner_dict:
         return None
     event_timepoints = set(ote1_owner_dict.keys())
-    if past_timepoints := {tp for tp in event_timepoints if int(tp) <= deal_time}:
+    if past_timepoints := {tp for tp in event_timepoints if int(tp) <= bud_time}:
         max_past_timepoint = max(past_timepoints)
         return ote1_owner_dict.get(max_past_timepoint)
 

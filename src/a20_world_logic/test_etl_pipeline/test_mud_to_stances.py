@@ -6,7 +6,7 @@ from src.a00_data_toolbox.file_toolbox import count_dirs_files, create_path, sav
 from src.a02_finance_logic._test_util.a02_str import (
     amount_str,
     celldepth_str,
-    deal_time_str,
+    bud_time_str,
     owner_name_str,
     quota_str,
     tran_time_str,
@@ -16,7 +16,7 @@ from src.a06_plan_logic._test_util.a06_str import acct_name_str
 from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
 from src.a12_hub_toolbox._test_util.a12_str import vow_ote1_agg_str
 from src.a12_hub_toolbox.hub_path import (
-    create_deal_acct_mandate_ledger_path as deal_mandate,
+    create_bud_acct_mandate_ledger_path as bud_mandate,
     create_event_all_pack_path,
     create_event_expressed_pack_path as expressed_path,
     create_gut_path,
@@ -141,7 +141,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
         # self.plan_tables_to_event_plan_csvs(cursor)
 
         # # create all vow_job and mandate reports
-        # self.calc_vow_deal_acct_mandate_net_ledgers()
+        # self.calc_vow_bud_acct_mandate_net_ledgers()
 
         # WHEN
         fizz_world.mud_to_clarity_with_cursor(db_conn, cursor)
@@ -196,7 +196,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
         # assert get_row_count(cursor, vow_ote1_agg_tablename) == 0
 
 
-def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateDealPayRows(
+def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH:
@@ -230,7 +230,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateDealPayRows(
         face_name_str(),
         vow_label_str(),
         owner_name_str(),
-        deal_time_str(),
+        bud_time_str(),
         quota_str(),
         celldepth_str(),
     ]
@@ -271,7 +271,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateDealPayRows(
     a23_e1_expressed_pack_path = expressed_path(mstr_dir, a23_str, sue_inx, e3)
     a23_sue_gut_path = create_gut_path(mstr_dir, a23_str, sue_inx)
     a23_sue_job_path = create_job_path(mstr_dir, a23_str, sue_inx)
-    sue37_mandate_path = deal_mandate(mstr_dir, a23_str, sue_inx, tp37)
+    sue37_mandate_path = bud_mandate(mstr_dir, a23_str, sue_inx, tp37)
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -310,7 +310,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateDealPayRows(
         # self.plan_tables_to_event_plan_csvs(cursor)
 
         # # create all vow_job and mandate reports
-        # self.calc_vow_deal_acct_mandate_net_ledgers()
+        # self.calc_vow_bud_acct_mandate_net_ledgers()
 
         # WHEN
         fizz_world.mud_to_clarity_with_cursor(db_conn, cursor)
@@ -482,7 +482,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario5_CreatesFiles(
         face_name_str(),
         vow_label_str(),
         owner_name_str(),
-        deal_time_str(),
+        bud_time_str(),
         quota_str(),
         celldepth_str(),
     ]
@@ -520,7 +520,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario5_CreatesFiles(
     a23_json_path = create_vow_json_path(mstr_dir, accord23_str)
     a23_sue_gut_path = create_gut_path(mstr_dir, accord23_str, sue_str)
     a23_sue_job_path = create_job_path(mstr_dir, accord23_str, sue_str)
-    sue37_mandate_path = deal_mandate(mstr_dir, accord23_str, sue_str, tp37)
+    sue37_mandate_path = bud_mandate(mstr_dir, accord23_str, sue_str, tp37)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         assert os_path_exists(mud_file_path)
@@ -577,7 +577,7 @@ def test_WorldUnit_mud_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         face_name_str(),
         vow_label_str(),
         owner_name_str(),
-        deal_time_str(),
+        bud_time_str(),
         quota_str(),
         celldepth_str(),
     ]

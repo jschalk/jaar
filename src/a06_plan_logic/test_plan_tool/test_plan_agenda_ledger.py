@@ -152,18 +152,18 @@ def test_get_acct_mandate_ledger_ReturnsObj_Scenario0_MultipleAcctUnit():
     sue_plan.get_acct(bob_str)._fund_agenda_take = bob_fund_agenda_take
 
     # WHEN
-    plan_deal_net_dict = get_acct_mandate_ledger(sue_plan)
+    plan_bud_net_dict = get_acct_mandate_ledger(sue_plan)
 
     # THEN
-    print(f"{plan_deal_net_dict=}")
+    print(f"{plan_bud_net_dict=}")
     print("")
-    example_deal_net_dict = {
+    example_bud_net_dict = {
         bob_str: 58,
         yao_str: 142,
         zia_str: 0,
     }
-    print(f"{example_deal_net_dict=}")
-    assert example_deal_net_dict == plan_deal_net_dict
+    print(f"{example_bud_net_dict=}")
+    assert example_bud_net_dict == plan_bud_net_dict
 
 
 def test_get_acct_mandate_ledger_ReturnsObj_Scenario1_settle_plan_True():
@@ -193,18 +193,18 @@ def test_get_acct_mandate_ledger_ReturnsObj_Scenario1_settle_plan_True():
     assert sue_plan_settle_net_dict != pre_settle_acct_mandate_ledger
     print(f"{sue_plan_settle_net_dict=}")
     print("")
-    example_deal_net_dict = {
+    example_bud_net_dict = {
         yao_str: 650000000,
         bob_str: 250000000,
         xio_str: 100000000,
         zia_str: 0,
     }
-    print(f"{example_deal_net_dict=}")
+    print(f"{example_bud_net_dict=}")
     assert sue_plan_settle_net_dict.get(yao_str) != None
     assert sue_plan_settle_net_dict.get(bob_str) != None
     assert sue_plan_settle_net_dict.get(xio_str) != None
     assert sue_plan_settle_net_dict.get(zia_str) != None
-    assert sue_plan_settle_net_dict == example_deal_net_dict
+    assert sue_plan_settle_net_dict == example_bud_net_dict
 
 
 def test_get_acct_mandate_ledger_ReturnsObj_Scenario2_No_acctunits():
@@ -249,18 +249,18 @@ def test_get_acct_mandate_ledger_ReturnsObj_Scenario4_MandateSumEqual_fund_pool(
     assert sue_plan_settle_net_dict != pre_settle_acct_mandate_ledger
     print(f"{sue_plan_settle_net_dict=}")
     print("")
-    example_deal_net_dict = {
+    example_bud_net_dict = {
         yao_str: 650000000,
         bob_str: 250000000,
         xio_str: 100000000,
         zia_str: 0,
     }
-    print(f"{example_deal_net_dict=}")
+    print(f"{example_bud_net_dict=}")
     assert sue_plan_settle_net_dict.get(yao_str) != None
     assert sue_plan_settle_net_dict.get(bob_str) != None
     assert sue_plan_settle_net_dict.get(xio_str) != None
     assert sue_plan_settle_net_dict.get(zia_str) != None
-    assert sue_plan_settle_net_dict == example_deal_net_dict
+    assert sue_plan_settle_net_dict == example_bud_net_dict
 
 
 def test_get_acct_mandate_ledger_ReturnsObj_Scenario5_Zero_fund_agenda_give():
@@ -314,17 +314,17 @@ def test_get_acct_agenda_net_ledger_ReturnsObj_ScenarioMultipleAcctUnit():
     sue_plan.get_acct(bob_str)._fund_agenda_take = bob_fund_agenda_take
 
     # WHEN
-    plan_deal_net_dict = get_acct_agenda_net_ledger(sue_plan)
+    plan_bud_net_dict = get_acct_agenda_net_ledger(sue_plan)
 
     # THEN
-    print(f"{plan_deal_net_dict=}")
+    print(f"{plan_bud_net_dict=}")
     print("")
-    example_deal_net_dict = {
+    example_bud_net_dict = {
         bob_str: bob_fund_agenda_give - bob_fund_agenda_take,
         yao_str: yao_fund_agenda_give - yao_fund_agenda_take,
     }
-    print(f"{example_deal_net_dict=}")
-    assert example_deal_net_dict == plan_deal_net_dict
+    print(f"{example_bud_net_dict=}")
+    assert example_bud_net_dict == plan_bud_net_dict
 
 
 def test_get_acct_agenda_net_ledger_ReturnsObj_settle_plan_True():
@@ -346,17 +346,17 @@ def test_get_acct_agenda_net_ledger_ReturnsObj_settle_plan_True():
     # THEN
     print(f"{sue_plan_settle_net_dict=}")
     print("")
-    example_deal_net_dict = {
+    example_bud_net_dict = {
         bob_str: -216666667,
         yao_str: 316666667,
         xio_str: -100000000,
     }
-    print(f"{example_deal_net_dict=}")
+    print(f"{example_bud_net_dict=}")
     assert sue_plan_settle_net_dict.get(yao_str) != None
     assert sue_plan_settle_net_dict.get(bob_str) != None
     assert sue_plan_settle_net_dict.get(xio_str) != None
     assert sue_plan_settle_net_dict.get(zia_str) is None
-    assert sue_plan_settle_net_dict == example_deal_net_dict
+    assert sue_plan_settle_net_dict == example_bud_net_dict
 
 
 def test_get_credit_ledger_ReturnsObj_Scenario0_No_acctunits():

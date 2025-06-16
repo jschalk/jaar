@@ -185,38 +185,38 @@ def get_tranbook_from_dict(x_dict: dict) -> TranBook:
 
 
 @dataclass
-class DealUnit:
-    deal_time: TimeLinePoint = None
+class BudUnit:
+    bud_time: TimeLinePoint = None
     quota: FundNum = None
     celldepth: int = None  # non-negative
     _magnitude: FundNum = None  # how much of the actual quota is distributed
-    _deal_acct_nets: dict[AcctName, FundNum] = None  # ledger of deal outcome
+    _bud_acct_nets: dict[AcctName, FundNum] = None  # ledger of bud outcome
 
-    def set_deal_acct_net(self, x_acct_name: AcctName, deal_acct_net: FundNum):
-        self._deal_acct_nets[x_acct_name] = deal_acct_net
+    def set_bud_acct_net(self, x_acct_name: AcctName, bud_acct_net: FundNum):
+        self._bud_acct_nets[x_acct_name] = bud_acct_net
 
-    def deal_acct_net_exists(self, x_acct_name: AcctName) -> bool:
-        return self._deal_acct_nets.get(x_acct_name) != None
+    def bud_acct_net_exists(self, x_acct_name: AcctName) -> bool:
+        return self._bud_acct_nets.get(x_acct_name) != None
 
-    def get_deal_acct_net(self, x_acct_name: AcctName) -> FundNum:
-        return self._deal_acct_nets.get(x_acct_name)
+    def get_bud_acct_net(self, x_acct_name: AcctName) -> FundNum:
+        return self._bud_acct_nets.get(x_acct_name)
 
-    def del_deal_acct_net(self, x_acct_name: AcctName):
-        self._deal_acct_nets.pop(x_acct_name)
+    def del_bud_acct_net(self, x_acct_name: AcctName):
+        self._bud_acct_nets.pop(x_acct_name)
 
     def calc_magnitude(self):
-        deal_acct_nets = self._deal_acct_nets.values()
-        x_cred_sum = sum(da_net for da_net in deal_acct_nets if da_net > 0)
-        x_debt_sum = sum(da_net for da_net in deal_acct_nets if da_net < 0)
+        bud_acct_nets = self._bud_acct_nets.values()
+        x_cred_sum = sum(da_net for da_net in bud_acct_nets if da_net > 0)
+        x_debt_sum = sum(da_net for da_net in bud_acct_nets if da_net < 0)
         if x_cred_sum + x_debt_sum != 0:
-            exception_str = f"magnitude cannot be calculated: debt_deal_acct_net={x_debt_sum}, cred_deal_acct_net={x_cred_sum}"
+            exception_str = f"magnitude cannot be calculated: debt_bud_acct_net={x_debt_sum}, cred_bud_acct_net={x_cred_sum}"
             raise calc_magnitudeException(exception_str)
         self._magnitude = x_cred_sum
 
     def get_dict(self) -> dict[str,]:
-        x_dict = {"deal_time": self.deal_time, "quota": self.quota}
-        if self._deal_acct_nets:
-            x_dict["deal_acct_nets"] = self._deal_acct_nets
+        x_dict = {"bud_time": self.bud_time, "quota": self.quota}
+        if self._bud_acct_nets:
+            x_dict["bud_acct_nets"] = self._bud_acct_nets
         if self._magnitude:
             x_dict["magnitude"] = self._magnitude
         if self.celldepth != DEFAULT_CELLDEPTH:
@@ -227,23 +227,23 @@ class DealUnit:
         return get_json_from_dict(self.get_dict())
 
 
-def dealunit_shop(
-    deal_time: TimeLinePoint,
+def budunit_shop(
+    bud_time: TimeLinePoint,
     quota: FundNum = None,
-    deal_acct_nets: dict[AcctName, FundNum] = None,
+    bud_acct_nets: dict[AcctName, FundNum] = None,
     magnitude: FundNum = None,
     celldepth: int = None,
-) -> DealUnit:
+) -> BudUnit:
     if quota is None:
         quota = default_fund_pool()
     if celldepth is None:
         celldepth = DEFAULT_CELLDEPTH
 
-    return DealUnit(
-        deal_time=deal_time,
+    return BudUnit(
+        bud_time=bud_time,
         quota=quota,
         celldepth=celldepth,
-        _deal_acct_nets=get_empty_dict_if_None(deal_acct_nets),
+        _bud_acct_nets=get_empty_dict_if_None(bud_acct_nets),
         _magnitude=get_0_if_None(magnitude),
     )
 
@@ -251,92 +251,90 @@ def dealunit_shop(
 @dataclass
 class BrokerUnit:
     owner_name: OwnerName = None
-    deals: dict[TimeLinePoint, DealUnit] = None
-    _sum_dealunit_quota: FundNum = None
-    _sum_acct_deal_nets: int = None
-    _deal_time_min: TimeLinePoint = None
-    _deal_time_max: TimeLinePoint = None
+    buds: dict[TimeLinePoint, BudUnit] = None
+    _sum_budunit_quota: FundNum = None
+    _sum_acct_bud_nets: int = None
+    _bud_time_min: TimeLinePoint = None
+    _bud_time_max: TimeLinePoint = None
 
-    def set_deal(self, x_deal: DealUnit):
-        self.deals[x_deal.deal_time] = x_deal
+    def set_bud(self, x_bud: BudUnit):
+        self.buds[x_bud.bud_time] = x_bud
 
-    def add_deal(
-        self, x_deal_time: TimeLinePoint, x_quota: FundNum, celldepth: int = None
+    def add_bud(
+        self, x_bud_time: TimeLinePoint, x_quota: FundNum, celldepth: int = None
     ):
-        dealunit = dealunit_shop(
-            deal_time=x_deal_time, quota=x_quota, celldepth=celldepth
-        )
-        self.set_deal(dealunit)
+        budunit = budunit_shop(bud_time=x_bud_time, quota=x_quota, celldepth=celldepth)
+        self.set_bud(budunit)
 
-    def deal_exists(self, x_deal_time: TimeLinePoint) -> bool:
-        return self.deals.get(x_deal_time) != None
+    def bud_exists(self, x_bud_time: TimeLinePoint) -> bool:
+        return self.buds.get(x_bud_time) != None
 
-    def get_deal(self, x_deal_time: TimeLinePoint) -> DealUnit:
-        return self.deals.get(x_deal_time)
+    def get_bud(self, x_bud_time: TimeLinePoint) -> BudUnit:
+        return self.buds.get(x_bud_time)
 
-    def del_deal(self, x_deal_time: TimeLinePoint):
-        self.deals.pop(x_deal_time)
+    def del_bud(self, x_bud_time: TimeLinePoint):
+        self.buds.pop(x_bud_time)
 
     def get_2d_array(self) -> list[list]:
         return [
-            [self.owner_name, x_deal.deal_time, x_deal.quota]
-            for x_deal in self.deals.values()
+            [self.owner_name, x_bud.bud_time, x_bud.quota]
+            for x_bud in self.buds.values()
         ]
 
     def get_headers(self) -> list:
-        return ["owner_name", "deal_time", "quota"]
+        return ["owner_name", "bud_time", "quota"]
 
     def get_dict(self) -> dict:
-        return {"owner_name": self.owner_name, "deals": self._get_deals_dict()}
+        return {"owner_name": self.owner_name, "buds": self._get_buds_dict()}
 
-    def _get_deals_dict(self) -> dict:
-        return {x_deal.deal_time: x_deal.get_dict() for x_deal in self.deals.values()}
+    def _get_buds_dict(self) -> dict:
+        return {x_bud.bud_time: x_bud.get_dict() for x_bud in self.buds.values()}
 
-    def get_deal_times(self) -> set[TimeLinePoint]:
-        return set(self.deals.keys())
+    def get_bud_times(self) -> set[TimeLinePoint]:
+        return set(self.buds.keys())
 
     def get_tranbook(self, vow_label: VowLabel) -> TranBook:
         x_tranbook = tranbook_shop(vow_label)
-        for x_deal_time, x_deal in self.deals.items():
-            for dst_acct_name, x_quota in x_deal._deal_acct_nets.items():
+        for x_bud_time, x_bud in self.buds.items():
+            for dst_acct_name, x_quota in x_bud._bud_acct_nets.items():
                 x_tranbook.add_tranunit(
                     owner_name=self.owner_name,
                     acct_name=dst_acct_name,
-                    tran_time=x_deal_time,
+                    tran_time=x_bud_time,
                     amount=x_quota,
                 )
         return x_tranbook
 
 
 def brokerunit_shop(owner_name: OwnerName) -> BrokerUnit:
-    return BrokerUnit(owner_name=owner_name, deals={}, _sum_acct_deal_nets={})
+    return BrokerUnit(owner_name=owner_name, buds={}, _sum_acct_bud_nets={})
 
 
-def get_dealunit_from_dict(x_dict: dict) -> DealUnit:
-    x_deal_time = x_dict.get("deal_time")
+def get_budunit_from_dict(x_dict: dict) -> BudUnit:
+    x_bud_time = x_dict.get("bud_time")
     x_quota = x_dict.get("quota")
-    x_deal_net = x_dict.get("deal_acct_nets")
+    x_bud_net = x_dict.get("bud_acct_nets")
     x_magnitude = x_dict.get("magnitude")
     x_celldepth = x_dict.get("celldepth")
-    return dealunit_shop(
-        x_deal_time, x_quota, x_deal_net, x_magnitude, celldepth=x_celldepth
+    return budunit_shop(
+        x_bud_time, x_quota, x_bud_net, x_magnitude, celldepth=x_celldepth
     )
 
 
-def get_dealunit_from_json(x_json: str) -> DealUnit:
-    return get_dealunit_from_dict(get_dict_from_json(x_json))
+def get_budunit_from_json(x_json: str) -> BudUnit:
+    return get_budunit_from_dict(get_dict_from_json(x_json))
 
 
 def get_brokerunit_from_dict(x_dict: dict) -> BrokerUnit:
     x_owner_name = x_dict.get("owner_name")
     x_brokerunit = brokerunit_shop(x_owner_name)
-    x_brokerunit.deals = get_deals_from_dict(x_dict.get("deals"))
+    x_brokerunit.buds = get_buds_from_dict(x_dict.get("buds"))
     return x_brokerunit
 
 
-def get_deals_from_dict(deals_dict: dict) -> dict[TimeLinePoint, DealUnit]:
+def get_buds_from_dict(buds_dict: dict) -> dict[TimeLinePoint, BudUnit]:
     x_dict = {}
-    for x_deal_dict in deals_dict.values():
-        x_dealunit = get_dealunit_from_dict(x_deal_dict)
-        x_dict[x_dealunit.deal_time] = x_dealunit
+    for x_bud_dict in buds_dict.values():
+        x_budunit = get_budunit_from_dict(x_bud_dict)
+        x_dict[x_budunit.bud_time] = x_budunit
     return x_dict

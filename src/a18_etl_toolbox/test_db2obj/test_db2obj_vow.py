@@ -184,7 +184,7 @@ VALUES
     assert a23_trans_bob_sue_dict == {tp55: a23_bob_sue_tp55_amount}
 
 
-def test_get_vow_dict_from_voice_tables_ReturnsObj_With_vowdeal_Attrs_Scenario0():
+def test_get_vow_dict_from_voice_tables_ReturnsObj_With_vowbud_Attrs_Scenario0():
     # ESTABLISH
     a23_str = "accord23"
     bob_str = "Bob"
@@ -195,12 +195,12 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_With_vowdeal_Attrs_Scenario0(
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
         vowunit_v_agg_tablename = create_prime_tablename("vowunit", "v", "agg")
-        vowdeal_v_agg_tablename = create_prime_tablename("vowdeal", "v", "agg")
+        vowbud_v_agg_tablename = create_prime_tablename("vowbudd", "v", "agg")
         vowunit_insert_sqlstr = (
             f"INSERT INTO {vowunit_v_agg_tablename} (vow_label) VALUES ('{a23_str}');"
         )
         cursor.execute(vowunit_insert_sqlstr)
-        vowpayy_insert_sqlstr = f"""INSERT INTO {vowdeal_v_agg_tablename} (vow_label, owner_name, deal_time, quota, celldepth)
+        vowpayy_insert_sqlstr = f"""INSERT INTO {vowbud_v_agg_tablename} (vow_label, owner_name, bud_time, quota, celldepth)
 VALUES ('{a23_str}', '{bob_str}', {tp55}, {bob_tp55_quota}, {bob_tp55_celldepth})
 ;
 """
@@ -215,12 +215,12 @@ VALUES ('{a23_str}', '{bob_str}', {tp55}, {bob_tp55_quota}, {bob_tp55_celldepth}
     assert a23_brokerunit_dict
     a23_brokerunit_bob_dict = a23_brokerunit_dict.get(bob_str)
     assert a23_brokerunit_bob_dict
-    a23_bob_deals_dict = a23_brokerunit_bob_dict.get("deals")
-    assert a23_bob_deals_dict
-    a23_brokerunit_bob_tp55_dict = a23_bob_deals_dict.get(tp55)
+    a23_bob_buds_dict = a23_brokerunit_bob_dict.get("buds")
+    assert a23_bob_buds_dict
+    a23_brokerunit_bob_tp55_dict = a23_bob_buds_dict.get(tp55)
     assert a23_brokerunit_bob_tp55_dict
     expected_a23_brokerunit_bob_tp55_dict = {
-        "deal_time": 55,
+        "bud_time": 55,
         "quota": bob_tp55_quota,
         "celldepth": bob_tp55_celldepth,
     }
@@ -455,7 +455,7 @@ VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
     assert bob_tranunit == {sue_str: {tp55: bob_sue_tp55_amount}}
 
 
-def test_get_vow_dict_from_voice_tables_ReturnsObj_IsCorrectlyFormatted_Scenario2_vowdeal():
+def test_get_vow_dict_from_voice_tables_ReturnsObj_IsCorrectlyFormatted_Scenario2_vowbud():
     # ESTABLISH
     a23_str = "accord23"
     bob_str = "Bob"
@@ -466,12 +466,12 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_IsCorrectlyFormatted_Scenario
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
         vowunit_v_agg_tablename = create_prime_tablename("vowunit", "v", "agg")
-        vowdeal_v_agg_tablename = create_prime_tablename("vowdeal", "v", "agg")
+        vowbud_v_agg_tablename = create_prime_tablename("vowbudd", "v", "agg")
         vowunit_insert_sqlstr = (
             f"INSERT INTO {vowunit_v_agg_tablename} (vow_label) VALUES ('{a23_str}');"
         )
         cursor.execute(vowunit_insert_sqlstr)
-        vowpayy_insert_sqlstr = f"""INSERT INTO {vowdeal_v_agg_tablename} (vow_label, owner_name, deal_time, quota, celldepth)
+        vowpayy_insert_sqlstr = f"""INSERT INTO {vowbud_v_agg_tablename} (vow_label, owner_name, bud_time, quota, celldepth)
 VALUES ('{a23_str}', '{bob_str}', {tp55}, {bob_tp55_quota}, {bob_tp55_celldepth})
 ;
 """
@@ -485,10 +485,10 @@ VALUES ('{a23_str}', '{bob_str}', {tp55}, {bob_tp55_quota}, {bob_tp55_celldepth}
     a23_bob_brokerunit = a23_vowunit.get_brokerunit(bob_str)
     print(f"{a23_bob_brokerunit=}")
     assert a23_bob_brokerunit
-    a23_bob_55_deal = a23_bob_brokerunit.get_deal(tp55)
-    assert a23_bob_55_deal.deal_time == tp55
-    assert a23_bob_55_deal.quota == bob_tp55_quota
-    assert a23_bob_55_deal.celldepth == bob_tp55_celldepth
+    a23_bob_55_bud = a23_bob_brokerunit.get_bud(tp55)
+    assert a23_bob_55_bud.bud_time == tp55
+    assert a23_bob_55_bud.quota == bob_tp55_quota
+    assert a23_bob_55_bud.celldepth == bob_tp55_celldepth
 
 
 def test_get_vow_dict_from_voice_tables_ReturnsObj_Scenario3_vowhour():

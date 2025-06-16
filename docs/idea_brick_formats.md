@@ -1,7 +1,7 @@
 # Idea Manifest
 
 - [`br00000`](ideas/br00000.md): event_int, face_name, vow_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations
-- [`br00001`](ideas/br00001.md): event_int, face_name, vow_label, owner_name, deal_time, quota, celldepth
+- [`br00001`](ideas/br00001.md): event_int, face_name, vow_label, owner_name, bud_time, quota, celldepth
 - [`br00002`](ideas/br00002.md): event_int, face_name, vow_label, owner_name, acct_name, tran_time, amount
 - [`br00003`](ideas/br00003.md): event_int, face_name, vow_label, cumlative_minute, hour_label
 - [`br00004`](ideas/br00004.md): event_int, face_name, vow_label, cumlative_day, month_label

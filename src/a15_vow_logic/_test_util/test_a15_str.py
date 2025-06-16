@@ -6,7 +6,7 @@ from src.a15_vow_logic._test_util.a15_str import (
     job_listen_rotations_str,
     month_label_str,
     paybook_str,
-    vow_dealunit_str,
+    vow_budunit_str,
     vow_paybook_str,
     vow_timeline_hour_str,
     vow_timeline_month_str,
@@ -28,7 +28,7 @@ def test_str_functions_ReturnsObj():
     assert weekday_label_str() == "weekday_label"
     assert weekday_order_str() == "weekday_order"
     assert vowunit_str() == "vowunit"
-    assert vow_dealunit_str() == "vow_dealunit"
+    assert vow_budunit_str() == "vow_budunit"
     assert vow_paybook_str() == "vow_paybook"
     assert vow_timeline_hour_str() == "vow_timeline_hour"
     assert vow_timeline_month_str() == "vow_timeline_month"

@@ -2,23 +2,23 @@ from copy import deepcopy as copy_deepcopy
 from src.a01_term_logic.rope import create_rope
 from src.a04_reason_logic.reason_concept import factunit_shop
 from src.a06_plan_logic.plan import planunit_shop
-from src.a11_deal_cell_logic._test_util.a11_str import (
+from src.a11_bud_cell_logic._test_util.a11_str import (
     ancestors_str,
     boss_facts_str,
+    bud_owner_name_str,
     celldepth_str,
-    deal_owner_name_str,
     found_facts_str,
     mandate_str,
     planadjust_str,
     planevent_facts_str,
 )
-from src.a11_deal_cell_logic._test_util.example_factunits import (
+from src.a11_bud_cell_logic._test_util.example_factunits import (
     example_casa_clean_factunit as clean_factunit,
     example_casa_dirty_factunit as dirty_factunit,
     example_casa_grimy_factunit as grimy_factunit,
     example_sky_blue_factunit as sky_blue_factunit,
 )
-from src.a11_deal_cell_logic.cell import (
+from src.a11_bud_cell_logic.cell import (
     CELLNODE_QUOTA_DEFAULT,
     CellUnit,
     cellunit_shop,
@@ -38,7 +38,7 @@ def test_CellUnit_Exists():
     assert not x_cellunit.ancestors
     assert not x_cellunit.event_int
     assert not x_cellunit.celldepth
-    assert not x_cellunit.deal_owner_name
+    assert not x_cellunit.bud_owner_name
     assert not x_cellunit.penny
     assert not x_cellunit.quota
     assert not x_cellunit.mandate
@@ -56,7 +56,7 @@ def test_cellunit_shop_ReturnsObj_Scenario0_WithoutParameters():
     # WHEN
     x_cellunit = cellunit_shop(bob_str)
     # THEN
-    assert x_cellunit.deal_owner_name == bob_str
+    assert x_cellunit.bud_owner_name == bob_str
     assert x_cellunit.ancestors == []
     assert not x_cellunit.event_int
     assert x_cellunit.celldepth == 0
@@ -78,7 +78,7 @@ def test_cellunit_shop_ReturnsObj_Scenario1_WithParameters():
     sue_str = "Sue"
     bob_sue_ancestors = [bob_str, sue_str]
     bob_sue_event7 = 7
-    bob_sue_deal_owner = yao_str
+    bob_sue_bud_owner = yao_str
     bob_sue_celldepth3 = 3
     bob_sue_penny2 = 2
     bob_sue_quota300 = 300
@@ -94,7 +94,7 @@ def test_cellunit_shop_ReturnsObj_Scenario1_WithParameters():
 
     # WHEN
     x_cellunit = cellunit_shop(
-        bob_sue_deal_owner,
+        bob_sue_bud_owner,
         bob_sue_ancestors,
         bob_sue_event7,
         bob_sue_celldepth3,
@@ -111,7 +111,7 @@ def test_cellunit_shop_ReturnsObj_Scenario1_WithParameters():
     assert x_cellunit.ancestors == bob_sue_ancestors
     assert x_cellunit.event_int == bob_sue_event7
     assert x_cellunit.celldepth == bob_sue_celldepth3
-    assert x_cellunit.deal_owner_name == bob_sue_deal_owner
+    assert x_cellunit.bud_owner_name == bob_sue_bud_owner
     assert x_cellunit.penny == bob_sue_penny2
     assert x_cellunit.quota == bob_sue_quota300
     assert x_cellunit.mandate == bob_sue_mandate
@@ -138,7 +138,7 @@ def test_cellunit_shop_ReturnsObj_Scenario2_WithReasonRcontexts():
     x_cellunit = cellunit_shop(sue_str, planadjust=sue_plan)
 
     # THEN
-    assert x_cellunit.deal_owner_name == sue_str
+    assert x_cellunit.bud_owner_name == sue_str
     assert x_cellunit.planadjust == sue_plan
     assert x_cellunit._reason_rcontexts == sue_plan.get_reason_rcontexts()
     assert len(x_cellunit._reason_rcontexts) == 1
@@ -180,8 +180,8 @@ def test_Cellunit_get_cell_owner_name_ReturnsObj_Scenario1_WithAncestors():
     bob_str = "Bob"
     sue_str = "Sue"
     bob_sue_ancestors = [bob_str, sue_str]
-    bob_sue_deal_owner = yao_str
-    bob_sue_cellunit = cellunit_shop(bob_sue_deal_owner, bob_sue_ancestors)
+    bob_sue_bud_owner = yao_str
+    bob_sue_cellunit = cellunit_shop(bob_sue_bud_owner, bob_sue_ancestors)
 
     # WHEN
     bob_sue_cell_owner_name = bob_sue_cellunit.get_cell_owner_name()
@@ -542,7 +542,7 @@ def test_CellUnit_filter_facts_by_reason_rcontexts_ReturnsObj_Scenario1():
     sue_str = "Sue"
     sue_ancestors = [sue_str]
     sue_event7 = 7
-    sue_deal_owner = yao_str
+    sue_bud_owner = yao_str
     sue_celldepth3 = 3
     sue_penny2 = 2
     sue_quota300 = 300
@@ -553,7 +553,7 @@ def test_CellUnit_filter_facts_by_reason_rcontexts_ReturnsObj_Scenario1():
     sue_found_factunits = {dirty_fact.fcontext: dirty_fact}
     sue_boss_factunits = {sky_blue_fact.fcontext: sky_blue_fact}
     sue_cell = cellunit_shop(
-        sue_deal_owner,
+        sue_bud_owner,
         sue_ancestors,
         sue_event7,
         sue_celldepth3,
@@ -602,13 +602,13 @@ def test_CellUnit_set_planadjust_facts_ReturnsObj_Scenario0():
     sue_str = "Sue"
     sue_ancestors = [sue_str]
     sue_event7 = 7
-    sue_deal_owner = yao_str
+    sue_bud_owner = yao_str
     sue_celldepth3 = 3
     sue_penny2 = 2
     sue_quota300 = 300
     sue_plan = planunit_shop(sue_str, "accord23")
     sue_cell = cellunit_shop(
-        sue_deal_owner,
+        sue_bud_owner,
         sue_ancestors,
         sue_event7,
         sue_celldepth3,
@@ -631,7 +631,7 @@ def test_CellUnit_set_planadjust_facts_ReturnsObj_Scenario1():
     sue_str = "Sue"
     sue_ancestors = [sue_str]
     sue_event7 = 7
-    sue_deal_owner = yao_str
+    sue_bud_owner = yao_str
     sue_celldepth3 = 3
     sue_penny2 = 2
     sue_quota300 = 300
@@ -640,7 +640,7 @@ def test_CellUnit_set_planadjust_facts_ReturnsObj_Scenario1():
     sue_plan = planunit_shop(sue_str, "accord23")
     sue_plan.add_concept(casa_clean_fact.fstate)
     sue_cell = cellunit_shop(
-        sue_deal_owner,
+        sue_bud_owner,
         sue_ancestors,
         sue_event7,
         sue_celldepth3,
@@ -669,7 +669,7 @@ def test_CellUnit_set_planadjust_facts_ReturnsObj_Scenario2():
     sue_str = "Sue"
     sue_ancestors = [sue_str]
     sue_event7 = 7
-    sue_deal_owner = yao_str
+    sue_bud_owner = yao_str
     sue_celldepth3 = 3
     sue_penny2 = 2
     sue_quota300 = 300
@@ -681,7 +681,7 @@ def test_CellUnit_set_planadjust_facts_ReturnsObj_Scenario2():
     sue_plan.add_concept(casa_clean_fact.fstate)
     sue_plan.add_concept(casa_dirty_fact.fstate)
     sue_cell = cellunit_shop(
-        sue_deal_owner,
+        sue_bud_owner,
         sue_ancestors,
         sue_event7,
         sue_celldepth3,
@@ -711,7 +711,7 @@ def test_CellUnit_set_planadjust_facts_ReturnsObj_Scenario3():
     sue_str = "Sue"
     sue_ancestors = [sue_str]
     sue_event7 = 7
-    sue_deal_owner = yao_str
+    sue_bud_owner = yao_str
     sue_celldepth3 = 3
     sue_penny2 = 2
     sue_quota300 = 300
@@ -726,7 +726,7 @@ def test_CellUnit_set_planadjust_facts_ReturnsObj_Scenario3():
     sue_plan.add_concept(casa_dirty_fact.fstate)
     sue_plan.add_concept(casa_grimy_fact.fstate)
     sue_cell = cellunit_shop(
-        sue_deal_owner,
+        sue_bud_owner,
         sue_ancestors,
         sue_event7,
         sue_celldepth3,
@@ -916,7 +916,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario0():
     # THEN
     assert len(sue_child_cellunits) == 2
     sue_sue_cell = sue_child_cellunits[0]
-    assert sue_sue_cell.deal_owner_name == yao_str
+    assert sue_sue_cell.bud_owner_name == yao_str
     assert sue_sue_cell.ancestors == [sue_str, sue_str]
     assert sue_sue_cell.event_int == sue_event7
     assert sue_sue_cell.celldepth == sue_celldepth3 - 1
@@ -928,7 +928,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario0():
     assert sue_sue_cell.boss_facts == {}
 
     sue_yao_cell = sue_child_cellunits[1]
-    assert sue_yao_cell.deal_owner_name == yao_str
+    assert sue_yao_cell.bud_owner_name == yao_str
     assert sue_yao_cell.ancestors == [sue_str, yao_str]
     assert sue_yao_cell.event_int == sue_event7
     assert sue_yao_cell.celldepth == sue_celldepth3 - 1
@@ -940,7 +940,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario0():
     assert sue_yao_cell.boss_facts == {}
 
 
-def test_create_child_cellunits_ReturnsObj_Scenario1_DealDepth0():
+def test_create_child_cellunits_ReturnsObj_Scenario1_BudDepth0():
     # ESTABLISH
     # ESTABLISH
     yao_str = "Yao"

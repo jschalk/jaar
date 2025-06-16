@@ -124,7 +124,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("take_force") == "float"
     assert pidgin_args_class_types.get("tally") == "int"
     assert pidgin_args_class_types.get("labor_title") == TitleTerm_str()
-    assert pidgin_args_class_types.get("deal_time") == "TimeLinePoint"
+    assert pidgin_args_class_types.get("bud_time") == "TimeLinePoint"
     assert pidgin_args_class_types.get("tran_time") == "TimeLinePoint"
     assert pidgin_args_class_types.get("timeline_label") == LabelTerm_str()
     assert pidgin_args_class_types.get("weekday_label") == LabelTerm_str()

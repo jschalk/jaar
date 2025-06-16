@@ -6,8 +6,8 @@ def boss_facts_str() -> str:
     return "boss_facts"
 
 
-def deal_owner_name_str() -> str:
-    return "deal_owner_name"
+def bud_owner_name_str() -> str:
+    return "bud_owner_name"
 
 
 def found_facts_str() -> str:

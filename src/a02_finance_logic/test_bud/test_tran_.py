@@ -1,6 +1,6 @@
 from pytest import raises as pytest_raises
 from src.a02_finance_logic._test_util.a02_str import acct_name_str, vow_label_str
-from src.a02_finance_logic.deal import (
+from src.a02_finance_logic.bud import (
     TranBook,
     TranUnit,
     get_tranbook_from_dict,
@@ -714,8 +714,8 @@ def test_get_tranbook_from_dict_ReturnsObj_Sccenario1():
 #     # ESTABLISH
 #     x_tran_time = 4
 #     x_amount = 55
-#     x_deal_nets = {"Sue": -57}
-#     x_tranbook = tranbook_shop(x_tran_time, x_amount, x_deal_nets)
+#     x_bud_nets = {"Sue": -57}
+#     x_tranbook = tranbook_shop(x_tran_time, x_amount, x_bud_nets)
 #     x_json = x_tranbook.get_json()
 
 #     # WHEN
@@ -725,5 +725,5 @@ def test_get_tranbook_from_dict_ReturnsObj_Sccenario1():
 #     assert x_tranbook
 #     assert x_tranbook.tran_time == x_tran_time
 #     assert x_tranbook.amount == x_amount
-#     assert x_tranbook._deal_nets == x_deal_nets
+#     assert x_tranbook._bud_nets == x_bud_nets
 #     assert x_tranbook == x_tranbook

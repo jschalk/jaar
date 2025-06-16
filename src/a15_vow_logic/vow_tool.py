@@ -10,18 +10,18 @@ from src.a00_data_toolbox.file_toolbox import (
 )
 from src.a01_term_logic.term import LabelTerm, OwnerName
 from src.a02_finance_logic.allot import allot_nested_scale
-from src.a02_finance_logic.deal import VowLabel
+from src.a02_finance_logic.bud import VowLabel
 from src.a02_finance_logic.finance_config import FundNum, TimeLinePoint
 from src.a04_reason_logic.reason_concept import get_dict_from_factunits
-from src.a11_deal_cell_logic.cell import CellUnit, cellunit_shop
+from src.a11_bud_cell_logic.cell import CellUnit, cellunit_shop
 from src.a12_hub_toolbox.fact_tool import get_nodes_with_weighted_facts
 from src.a12_hub_toolbox.hub_path import (
+    BUD_MANDATE_FILENAME,
     CELL_MANDATE_FILENAME,
     CELLNODE_FILENAME,
-    DEAL_MANDATE_FILENAME,
+    create_bud_dir_path,
     create_cell_dir_path,
     create_cell_json_path,
-    create_deal_dir_path,
     create_planevent_path,
     create_vow_json_path,
 )
@@ -43,22 +43,22 @@ def create_vow_owners_cell_trees(vow_mstr_dir, vow_label):
     owners_dir = create_path(vow_dir, "owners")
     for owner_name in get_level1_dirs(owners_dir):
         owner_dir = create_path(owners_dir, owner_name)
-        deals_dir = create_path(owner_dir, "deals")
-        for deal_time in get_level1_dirs(deals_dir):
-            create_cell_tree(vow_mstr_dir, vow_label, owner_name, deal_time)
+        buds_dir = create_path(owner_dir, "buds")
+        for bud_time in get_level1_dirs(buds_dir):
+            create_cell_tree(vow_mstr_dir, vow_label, owner_name, bud_time)
 
 
-def create_cell_tree(vow_mstr_dir, vow_label, deal_owner_name, deal_time):
+def create_cell_tree(vow_mstr_dir, vow_label, bud_owner_name, bud_time):
     root_cell_json_path = create_cell_json_path(
-        vow_mstr_dir, vow_label, deal_owner_name, deal_time
+        vow_mstr_dir, vow_label, bud_owner_name, bud_time
     )
     if os_path_exists(root_cell_json_path):
-        _exists_create_cell_tree(vow_mstr_dir, vow_label, deal_owner_name, deal_time)
+        _exists_create_cell_tree(vow_mstr_dir, vow_label, bud_owner_name, bud_time)
 
 
-def _exists_create_cell_tree(vow_mstr_dir, vow_label, deal_owner_name, deal_time):
+def _exists_create_cell_tree(vow_mstr_dir, vow_label, bud_owner_name, bud_time):
     root_cell_dir = create_cell_dir_path(
-        vow_mstr_dir, vow_label, deal_owner_name, deal_time, []
+        vow_mstr_dir, vow_label, bud_owner_name, bud_time, []
     )
     cells_to_evaluate = [cellunit_get_from_dir(root_cell_dir)]
     owner_events_sets = collect_owner_event_dir_sets(vow_mstr_dir, vow_label)
@@ -71,8 +71,8 @@ def _exists_create_cell_tree(vow_mstr_dir, vow_label, deal_owner_name, deal_time
         parent_cell_dir = create_cell_dir_path(
             vow_mstr_dir,
             vow_label,
-            deal_owner_name,
-            deal_time,
+            bud_owner_name,
+            bud_time,
             parent_cell.ancestors,
         )
         cellunit_save_to_dir(parent_cell_dir, parent_cell)
@@ -92,7 +92,7 @@ def _exists_create_cell_tree(vow_mstr_dir, vow_label, deal_owner_name, deal_time
                             ancestors=child_ancestors,
                             event_int=downhill_event_int,
                             celldepth=child_celldepth,
-                            deal_owner_name=deal_owner_name,
+                            bud_owner_name=bud_owner_name,
                             penny=parent_cell.penny,
                             quota=quota_amount,
                         )
@@ -105,10 +105,10 @@ def load_cells_planevent(vow_mstr_dir: str, vow_label: LabelTerm):
     owners_dir = create_path(vow_dir, "owners")
     for owner_name in get_level1_dirs(owners_dir):
         owner_dir = create_path(owners_dir, owner_name)
-        deals_dir = create_path(owner_dir, "deals")
-        for deal_time in get_level1_dirs(deals_dir):
-            deal_time_dir = create_path(deals_dir, deal_time)
-            for dirpath, dirnames, filenames in os_walk(deal_time_dir):
+        buds_dir = create_path(owner_dir, "buds")
+        for bud_time in get_level1_dirs(buds_dir):
+            bud_time_dir = create_path(buds_dir, bud_time)
+            for dirpath, dirnames, filenames in os_walk(bud_time_dir):
                 if CELLNODE_FILENAME in set(filenames):
                     _load_cell_planevent(vow_mstr_dir, vow_label, dirpath)
 
@@ -128,30 +128,30 @@ def set_cell_trees_found_facts(vow_mstr_dir: str, vow_label: LabelTerm):
     owners_dir = create_path(vow_dir, "owners")
     for owner_name in get_level1_dirs(owners_dir):
         owner_dir = create_path(owners_dir, owner_name)
-        deals_dir = create_path(owner_dir, "deals")
-        for deal_time in get_level1_dirs(deals_dir):
-            deal_time_dir = create_path(deals_dir, deal_time)
+        buds_dir = create_path(owner_dir, "buds")
+        for bud_time in get_level1_dirs(buds_dir):
+            bud_time_dir = create_path(buds_dir, bud_time)
             cell_dirs = [
                 dirpath
-                for dirpath, dirnames, filenames in os_walk(deal_time_dir)
+                for dirpath, dirnames, filenames in os_walk(bud_time_dir)
                 if CELLNODE_FILENAME in set(filenames)
             ]
-            _set_cell_found_facts(deal_time_dir, cell_dirs)
+            _set_cell_found_facts(bud_time_dir, cell_dirs)
 
 
-def _set_cell_found_facts(deal_time_dir: str, cell_dirs: list[str]):
+def _set_cell_found_facts(bud_time_dir: str, cell_dirs: list[str]):
     nodes_facts_dict = {}
     nodes_quotas_dict = {}
     for dirpath in cell_dirs:
         x_cell = cellunit_get_from_dir(dirpath)
-        deal_path = dirpath.replace(deal_time_dir, "")
-        cell_owners_tuple = tuple(deal_path.split(os_sep)[1:])
+        bud_path = dirpath.replace(bud_time_dir, "")
+        cell_owners_tuple = tuple(bud_path.split(os_sep)[1:])
         nodes_facts_dict[cell_owners_tuple] = x_cell.planevent_facts
         nodes_quotas_dict[cell_owners_tuple] = x_cell.get_planevents_quota_ledger()
 
     nodes_wgt_facts = get_nodes_with_weighted_facts(nodes_facts_dict, nodes_quotas_dict)
     output_dir_facts = {
-        os_path_join(deal_time_dir, *node_addr): get_dict_from_factunits(facts)
+        os_path_join(bud_time_dir, *node_addr): get_dict_from_factunits(facts)
         for node_addr, facts in nodes_wgt_facts.items()
     }
     for output_dir, output_facts_dict in output_dir_facts.items():
@@ -166,11 +166,11 @@ def set_cell_trees_decrees(vow_mstr_dir: str, vow_label: str):
     owners_dir = create_path(vow_dir, "owners")
     for owner_name in get_level1_dirs(owners_dir):
         owner_dir = create_path(owners_dir, owner_name)
-        deals_dir = create_path(owner_dir, "deals")
-        for deal_time in get_level1_dirs(deals_dir):
-            deal_time_dir = create_path(deals_dir, deal_time)
+        buds_dir = create_path(owner_dir, "buds")
+        for bud_time in get_level1_dirs(buds_dir):
+            bud_time_dir = create_path(buds_dir, bud_time)
             set_cell_tree_decrees(
-                vow_mstr_dir, vow_label, owner_name, deal_time, deal_time_dir
+                vow_mstr_dir, vow_label, owner_name, bud_time, bud_time_dir
             )
 
 
@@ -195,11 +195,11 @@ def set_cell_tree_decrees(
     mstr_dir: str,
     vow_label: VowLabel,
     owner_name: OwnerName,
-    deal_time: TimeLinePoint,
-    deal_time_dir: str,
+    bud_time: TimeLinePoint,
+    bud_time_dir: str,
 ):
     # clear all current child directorys
-    # create root deal tree node
+    # create root bud tree node
     # grab boss facts from parent_cell (does not apply to root)
     # grab found facts for that cell
     # grab planevent for that cell
@@ -208,8 +208,8 @@ def set_cell_tree_decrees(
     # calculate planadjust
     # grab acct_agenda_fund_agenda_give ledger
     # add nodes to to_evalute_cellnodes based on acct_agenda_fund_give owners
-    root_cell = cellunit_get_from_dir(deal_time_dir)
-    root_cell_dir = create_cell_dir_path(mstr_dir, vow_label, owner_name, deal_time, [])
+    root_cell = cellunit_get_from_dir(bud_time_dir)
+    root_cell_dir = create_cell_dir_path(mstr_dir, vow_label, owner_name, bud_time, [])
     root_decree = DecreeUnit(
         parent_cell_dir=None,
         cell_dir=root_cell_dir,
@@ -239,7 +239,7 @@ def set_cell_tree_decrees(
                     mstr_dir=mstr_dir,
                     vow_label=vow_label,
                     owner_name=owner_name,
-                    deal_time=deal_time,
+                    bud_time=bud_time,
                 )
 
 
@@ -250,12 +250,12 @@ def _add_child_decrees(
     mstr_dir,
     vow_label: str,
     owner_name: str,
-    deal_time: int,
+    bud_time: int,
 ):
     for child_owner_name, child_mandate in x_cell._acct_mandate_ledger.items():
         child_cell_ancestors = x_decree.get_child_cell_ancestors(child_owner_name)
         child_dir = create_cell_dir_path(
-            mstr_dir, vow_label, owner_name, deal_time, child_cell_ancestors
+            mstr_dir, vow_label, owner_name, bud_time, child_cell_ancestors
         )
         child_decreeunit = DecreeUnit(
             parent_cell_dir=x_decree.cell_dir,
@@ -292,7 +292,7 @@ def generate_cell_from_decree(
         )
         planevent = open_plan_file(planevent_path)
         x_cell = cellunit_shop(
-            deal_owner_name=owner_name,
+            bud_owner_name=owner_name,
             ancestors=x_decree.get_child_cell_ancestors(cell_owner_name),
             event_int=downhill_event_int,
             celldepth=x_decree.cell_celldepth,
@@ -310,33 +310,33 @@ def set_cell_tree_cell_mandates(vow_mstr_dir: str, vow_label: str):
     owners_dir = create_path(vow_dir, "owners")
     for owner_name in get_level1_dirs(owners_dir):
         owner_dir = create_path(owners_dir, owner_name)
-        deals_dir = create_path(owner_dir, "deals")
-        for deal_time in get_level1_dirs(deals_dir):
-            deal_time_dir = create_path(deals_dir, deal_time)
-            for dirpath, dirnames, filenames in os_walk(deal_time_dir):
+        buds_dir = create_path(owner_dir, "buds")
+        for bud_time in get_level1_dirs(buds_dir):
+            bud_time_dir = create_path(buds_dir, bud_time)
+            for dirpath, dirnames, filenames in os_walk(bud_time_dir):
                 if CELLNODE_FILENAME in set(filenames):
                     create_cell_acct_mandate_ledger_json(dirpath)
 
 
-def create_deal_mandate_ledgers(vow_mstr_dir: str, vow_label: str):
+def create_bud_mandate_ledgers(vow_mstr_dir: str, vow_label: str):
     vow_json_path = create_vow_json_path(vow_mstr_dir, vow_label)
     vowunit = vowunit_get_from_dict(open_json(vow_json_path))
     for brokerunit in vowunit.brokerunits.values():
-        for dealunit in brokerunit.deals.values():
-            deal_root_dir = create_deal_dir_path(
+        for budunit in brokerunit.buds.values():
+            bud_root_dir = create_bud_dir_path(
                 vow_mstr_dir,
                 vow_label,
                 owner_name=brokerunit.owner_name,
-                deal_time=dealunit.deal_time,
+                bud_time=budunit.bud_time,
             )
-            deal_acct_mandate_ledger = allot_nested_scale(
-                deal_root_dir,
+            bud_acct_mandate_ledger = allot_nested_scale(
+                bud_root_dir,
                 src_filename=CELL_MANDATE_FILENAME,
-                scale_number=dealunit.quota,
+                scale_number=budunit.quota,
                 grain_unit=vowunit.penny,
-                depth=dealunit.celldepth,
-                dst_filename=DEAL_MANDATE_FILENAME,
+                depth=budunit.celldepth,
+                dst_filename=BUD_MANDATE_FILENAME,
             )
-            save_json(deal_root_dir, DEAL_MANDATE_FILENAME, deal_acct_mandate_ledger)
-            dealunit._deal_acct_nets = deal_acct_mandate_ledger
+            save_json(bud_root_dir, BUD_MANDATE_FILENAME, bud_acct_mandate_ledger)
+            budunit._bud_acct_nets = bud_acct_mandate_ledger
     save_json(vow_json_path, None, vowunit.get_dict())

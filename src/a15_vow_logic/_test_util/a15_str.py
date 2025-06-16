@@ -38,8 +38,8 @@ def paybook_str() -> str:
     return "paybook"
 
 
-def vow_dealunit_str() -> str:
-    return "vow_dealunit"
+def vow_budunit_str() -> str:
+    return "vow_budunit"
 
 
 def vow_paybook_str() -> str:

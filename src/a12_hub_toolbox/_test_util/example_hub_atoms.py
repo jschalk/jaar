@@ -1,6 +1,6 @@
 from src.a01_term_logic.rope import RopeTerm, create_rope, create_rope_from_labels
 from src.a01_term_logic.term import VowLabel
-from src.a02_finance_logic.deal import DealUnit, dealunit_shop
+from src.a02_finance_logic.bud import BudUnit, budunit_shop
 from src.a05_concept_logic.concept import get_default_vow_label
 from src.a06_plan_logic._test_util.a06_str import (
     acct_name_str,
@@ -157,29 +157,29 @@ def sue_4planatoms_packunit() -> PackUnit:
     return x_packunit
 
 
-def get_dealunit_55_example() -> DealUnit:
-    x_deal_time = 55
-    return dealunit_shop(x_deal_time)
+def get_budunit_55_example() -> BudUnit:
+    x_bud_time = 55
+    return budunit_shop(x_bud_time)
 
 
-def get_dealunit_66_example() -> DealUnit:
-    t66_deal_time = 66
-    t66_dealunit = dealunit_shop(t66_deal_time)
-    t66_dealunit.set_deal_acct_net("Sue", -5)
-    t66_dealunit.set_deal_acct_net("Bob", 5)
-    return t66_dealunit
+def get_budunit_66_example() -> BudUnit:
+    t66_bud_time = 66
+    t66_budunit = budunit_shop(t66_bud_time)
+    t66_budunit.set_bud_acct_net("Sue", -5)
+    t66_budunit.set_bud_acct_net("Bob", 5)
+    return t66_budunit
 
 
-def get_dealunit_88_example() -> DealUnit:
-    t88_deal_time = 88
-    t88_dealunit = dealunit_shop(t88_deal_time)
-    t88_dealunit.quota = 800
-    return t88_dealunit
+def get_budunit_88_example() -> BudUnit:
+    t88_bud_time = 88
+    t88_budunit = budunit_shop(t88_bud_time)
+    t88_budunit.quota = 800
+    return t88_budunit
 
 
-def get_dealunit_invalid_example() -> DealUnit:
-    t55_deal_time = 55
-    t55_dealunit = dealunit_shop(t55_deal_time)
-    t55_dealunit.set_deal_acct_net("Sue", -5)
-    t55_dealunit.set_deal_acct_net("Bob", 3)
-    return t55_dealunit
+def get_budunit_invalid_example() -> BudUnit:
+    t55_bud_time = 55
+    t55_budunit = budunit_shop(t55_bud_time)
+    t55_budunit.set_bud_acct_net("Sue", -5)
+    t55_budunit.set_bud_acct_net("Bob", 3)
+    return t55_budunit

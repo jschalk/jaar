@@ -1,6 +1,6 @@
 from sqlite3 import Cursor as sqlite3_Cursor
 from src.a00_data_toolbox.dict_toolbox import set_in_nested_dict
-from src.a02_finance_logic.deal import VowLabel
+from src.a02_finance_logic.bud import VowLabel
 from src.a18_etl_toolbox.tran_sqlstrs import get_vow_voice_select1_sqlstrs
 
 
@@ -50,8 +50,8 @@ def get_vow_dict_from_sqlstrs(
     cursor.execute(fu1_sqlstrs.get("vow_paybook"))
     _set_vow_dict_vowpayy(cursor, vow_dict, vow_label)
 
-    cursor.execute(fu1_sqlstrs.get("vow_dealunit"))
-    _set_vow_dict_vowdeal(cursor, vow_dict)
+    cursor.execute(fu1_sqlstrs.get("vow_budunit"))
+    _set_vow_dict_vowbud(cursor, vow_dict)
 
     cursor.execute(fu1_sqlstrs.get("vow_timeline_hour"))
     _set_vow_dict_vowhour(cursor, vow_dict)
@@ -81,23 +81,23 @@ def _set_vow_dict_vowpayy(cursor: sqlite3_Cursor, vow_dict: dict, x_vow_label: s
     vow_dict["paybook"] = paybook_dict
 
 
-def _set_vow_dict_vowdeal(cursor: sqlite3_Cursor, vow_dict: dict):
+def _set_vow_dict_vowbud(cursor: sqlite3_Cursor, vow_dict: dict):
     brokerunits_dict = {}
     for vowpayy_row in cursor.fetchall():
         row_vow_label = vowpayy_row[0]
         row_owner_name = vowpayy_row[1]
-        row_deal_time = vowpayy_row[2]
+        row_bud_time = vowpayy_row[2]
         row_quota = vowpayy_row[3]
         row_celldepth = vowpayy_row[4]
         owner_keylist = [row_owner_name, "owner_name"]
         set_in_nested_dict(brokerunits_dict, owner_keylist, row_owner_name)
-        keylist = [row_owner_name, "deals", row_deal_time]
-        deal_timepoint_dict = {
-            "deal_time": row_deal_time,
+        keylist = [row_owner_name, "buds", row_bud_time]
+        bud_timepoint_dict = {
+            "bud_time": row_bud_time,
             "quota": row_quota,
             "celldepth": row_celldepth,
         }
-        set_in_nested_dict(brokerunits_dict, keylist, deal_timepoint_dict)
+        set_in_nested_dict(brokerunits_dict, keylist, bud_timepoint_dict)
     vow_dict["brokerunits"] = brokerunits_dict
 
 

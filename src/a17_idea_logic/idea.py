@@ -276,7 +276,7 @@ def vow_build_from_df(
             job_listen_rotations=row["job_listen_rotations"],
         )
         vowunit_dict[x_vowunit.vow_label] = x_vowunit
-        _add_dealunits_from_df(x_vowunit, br00001_df)
+        _add_budunits_from_df(x_vowunit, br00001_df)
         _add_paypurchases_from_df(x_vowunit, br00002_df)
     return vowunit_dict
 
@@ -317,12 +317,12 @@ def _get_vow_weekdays_dict(br00005_df: DataFrame) -> dict[str, list[str, str]]:
     return vow_weekdays_dict
 
 
-def _add_dealunits_from_df(x_vowunit: VowUnit, br00001_df: DataFrame):
+def _add_budunits_from_df(x_vowunit: VowUnit, br00001_df: DataFrame):
     query_str = f"vow_label == '{x_vowunit.vow_label}'"
     for index, row in br00001_df.query(query_str).iterrows():
-        x_vowunit.add_dealunit(
+        x_vowunit.add_budunit(
             owner_name=row["owner_name"],
-            deal_time=row["deal_time"],
+            bud_time=row["bud_time"],
             quota=row["quota"],
             celldepth=if_nan_return_None(row["celldepth"]),
             allow_prev_to_offi_time_max_entry=True,

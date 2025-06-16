@@ -12,8 +12,8 @@ from src.a18_etl_toolbox._test_util.a18_env import (
 from src.a18_etl_toolbox.transformers import etl_event_inherited_planunits_to_vow_gut
 
 # create test where event create_owner_event_dir_path()
-# test that dealunit with depth 0 is able to create
-# test that dealunit with depth 1 is able to create nested planunits directories and populate with event relevant
+# test that budunit with depth 0 is able to create
+# test that budunit with depth 1 is able to create nested planunits directories and populate with event relevant
 
 
 def test_etl_event_inherited_planunits_to_vow_gut_SetsFiles_Scenario0(
