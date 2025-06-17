@@ -234,7 +234,7 @@ def test_allot_nested_scale_SetsFiles_Scenario0(env_dir_setup_cleanup):
     assert sue_yao_alloted_dict == {sue_str: 24, yao_str: 24, xio_str: 72}
 
 
-def test_allot_nested_scale_SetsFiles_Scenario1_Custom_output_filename(
+def test_allot_nested_scale_SetsFiles_Scenario1_Custom_dst_filename(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -261,17 +261,17 @@ def test_allot_nested_scale_SetsFiles_Scenario1_Custom_output_filename(
     save_json(sue_yao_dir, x_filename, sue_yao_ledger)
     x_scale = 200
     x_grain = 1
-    output_filename = "outputed_alloted.json"
-    x_output_path = create_path(x_dir, output_filename)
-    bob_output_path = create_path(bob_dir, output_filename)
-    sue_output_path = create_path(sue_dir, output_filename)
-    bob_yao_output_path = create_path(bob_yao_dir, output_filename)
-    sue_yao_output_path = create_path(sue_yao_dir, output_filename)
-    assert os_path_exists(x_output_path) is False
-    assert os_path_exists(bob_output_path) is False
-    assert os_path_exists(sue_output_path) is False
-    assert os_path_exists(bob_yao_output_path) is False
-    assert os_path_exists(sue_yao_output_path) is False
+    dst_filename = "dst_alloted.json"
+    x_dst_path = create_path(x_dir, dst_filename)
+    bob_dst_path = create_path(bob_dir, dst_filename)
+    sue_dst_path = create_path(sue_dir, dst_filename)
+    bob_yao_dst_path = create_path(bob_yao_dir, dst_filename)
+    sue_yao_dst_path = create_path(sue_yao_dir, dst_filename)
+    assert os_path_exists(x_dst_path) is False
+    assert os_path_exists(bob_dst_path) is False
+    assert os_path_exists(sue_dst_path) is False
+    assert os_path_exists(bob_yao_dst_path) is False
+    assert os_path_exists(sue_yao_dst_path) is False
 
     # WHEN
     allot_nested_scale(
@@ -280,17 +280,17 @@ def test_allot_nested_scale_SetsFiles_Scenario1_Custom_output_filename(
         scale_number=x_scale,
         grain_unit=x_grain,
         depth=3,
-        dst_filename=output_filename,
+        dst_filename=dst_filename,
     )
 
     # THEN
-    assert os_path_exists(x_output_path)
-    assert os_path_exists(bob_output_path)
-    assert os_path_exists(sue_output_path)
-    assert os_path_exists(bob_yao_output_path)
-    assert os_path_exists(sue_yao_output_path)
-    assert open_json(x_output_path) == {sue_str: 160, bob_str: 40}
-    assert open_json(bob_output_path) == {sue_str: 20, yao_str: 20}
-    assert open_json(sue_output_path) == {sue_str: 40, yao_str: 120}
-    assert open_json(bob_yao_output_path) == {sue_str: 4, yao_str: 4, zia_str: 12}
-    assert open_json(sue_yao_output_path) == {sue_str: 24, yao_str: 24, xio_str: 72}
+    assert os_path_exists(x_dst_path)
+    assert os_path_exists(bob_dst_path)
+    assert os_path_exists(sue_dst_path)
+    assert os_path_exists(bob_yao_dst_path)
+    assert os_path_exists(sue_yao_dst_path)
+    assert open_json(x_dst_path) == {sue_str: 160, bob_str: 40}
+    assert open_json(bob_dst_path) == {sue_str: 20, yao_str: 20}
+    assert open_json(sue_dst_path) == {sue_str: 40, yao_str: 120}
+    assert open_json(bob_yao_dst_path) == {sue_str: 4, yao_str: 4, zia_str: 12}
+    assert open_json(sue_yao_dst_path) == {sue_str: 24, yao_str: 24, xio_str: 72}

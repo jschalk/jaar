@@ -63,8 +63,6 @@ from src.a16_pidgin_logic.pidgin_config import (
 )
 
 
-# The goal of the pidgin function is to allow a single command, pointing at a bunch of directories
-# initialize vowunits and output acct metrics such as calendars, financial status, healer status
 def test_get_pidgin_args_class_types_ReturnsObj():
     # ESTABLISH / WHEN
     pidgin_args_class_types = get_pidgin_args_class_types()

@@ -246,31 +246,31 @@ def sample_excel_file(tmp_path):
 
 
 @pytest_fixture
-def output_dir(tmp_path):
-    """Fixture to provide a temporary output directory."""
-    return tmp_path / "output"
+def dst_dir(tmp_path):
+    """Fixture to provide a temporary destination directory."""
+    return tmp_path / "destination"
 
 
 def test_split_excel_into_dirs_RaisesErrorWhenColumnIsInvalid(
-    sample_excel_file, output_dir
+    sample_excel_file, dst_dir
 ):
     """Test handling of an invalid column."""
     # ESTABLISH / WHEN / THEN
     with pytest_raises(ValueError, match="Column 'InvalidColumn' does not exist"):
         split_excel_into_dirs(
-            sample_excel_file, output_dir, "InvalidColumn", "filename", "sheet5"
+            sample_excel_file, dst_dir, "InvalidColumn", "filename", "sheet5"
         )
 
 
 def test_split_excel_into_dirs_CreatesFilesWhenColumnIsValid(
-    sample_excel_file, output_dir
+    sample_excel_file, dst_dir
 ):
     """Test splitting an Excel file by a valid column."""
     # ESTABLISH
     x_filename = "fizz"
-    a_dir = create_path(output_dir, "A")
-    b_dir = create_path(output_dir, "B")
-    c_dir = create_path(output_dir, "C")
+    a_dir = create_path(dst_dir, "A")
+    b_dir = create_path(dst_dir, "B")
+    c_dir = create_path(dst_dir, "C")
     a_file_path = create_path(a_dir, f"{x_filename}.xlsx")
     b_file_path = create_path(b_dir, f"{x_filename}.xlsx")
     c_file_path = create_path(c_dir, f"{x_filename}.xlsx")
@@ -279,7 +279,7 @@ def test_split_excel_into_dirs_CreatesFilesWhenColumnIsValid(
     assert os_path_exists(c_file_path) is False
 
     # WHEN
-    split_excel_into_dirs(sample_excel_file, output_dir, "Dimen", x_filename, "sheet5")
+    split_excel_into_dirs(sample_excel_file, dst_dir, "Dimen", x_filename, "sheet5")
 
     # Verify files are created for each unique value in "Dimen"
     assert os_path_exists(a_file_path)
@@ -300,7 +300,7 @@ def test_split_excel_into_dirs_CreatesFilesWhenColumnIsValid(
     pandas_testing_assert_frame_equal(c_df, c_expected)
 
 
-def test_split_excel_into_dirs_DoesNotChangeIfColumnIsEmpty(tmp_path, output_dir):
+def test_split_excel_into_dirs_DoesNotChangeIfColumnIsEmpty(tmp_path, dst_dir):
     """Test handling of an empty column."""
     # ESTABLISH Create an Excel file with an empty column
     data = {
@@ -314,10 +314,10 @@ def test_split_excel_into_dirs_DoesNotChangeIfColumnIsEmpty(tmp_path, output_dir
 
     # WHEN
     x_filename = "fizz"
-    split_excel_into_dirs(file_path, output_dir, "Dimen", x_filename, "sheet5")
+    split_excel_into_dirs(file_path, dst_dir, "Dimen", x_filename, "sheet5")
 
     # THEN Verify that no files are created
-    created_files = list(output_dir.iterdir())
+    created_files = list(dst_dir.iterdir())
     print(f"{created_files=}")
     assert not created_files
 
@@ -325,21 +325,21 @@ def test_split_excel_into_dirs_DoesNotChangeIfColumnIsEmpty(tmp_path, output_dir
 def test_split_excel_into_dirs_DoesCreateDirectoryIfColumnEmpty(
     sample_excel_file, tmp_path
 ):
-    """Test if the output directory is created automatically."""
+    """Test if the destination directory is created automatically."""
     # ESTABLISH
-    output_dir = tmp_path / "nonexistent_output"
+    dst_dir = tmp_path / "nonexistent_destination"
     x_filename = "fizz"
 
     # WHEN
-    split_excel_into_dirs(sample_excel_file, output_dir, "Dimen", x_filename, "sheet5")
+    split_excel_into_dirs(sample_excel_file, dst_dir, "Dimen", x_filename, "sheet5")
 
     # THEN
-    assert output_dir.exists()
-    print(f"{list(output_dir.iterdir())=}")
-    assert list(output_dir.iterdir())
+    assert dst_dir.exists()
+    print(f"{list(dst_dir.iterdir())=}")
+    assert list(dst_dir.iterdir())
 
 
-def test_split_excel_into_dirs_SavesToCorrectFileNames(tmp_path, output_dir):
+def test_split_excel_into_dirs_SavesToCorrectFileNames(tmp_path, dst_dir):
     """Test handling of invalid characters in unique values for filenames."""
     # ESTABLISH Create a DataFrame with special characters in the splitting column
     data = {
@@ -351,15 +351,15 @@ def test_split_excel_into_dirs_SavesToCorrectFileNames(tmp_path, output_dir):
     file_path = tmp_path / "special_chars.xlsx"
     df.to_excel(file_path, index=False, sheet_name="sheet5")
     x_filename = "fizz"
-    ab_dir = create_path(output_dir, "A_B")
-    cd_dir = create_path(output_dir, "C_D")
+    ab_dir = create_path(dst_dir, "A_B")
+    cd_dir = create_path(dst_dir, "C_D")
     b_file_path = create_path(ab_dir, f"{x_filename}.xlsx")
     c_file_path = create_path(cd_dir, f"{x_filename}.xlsx")
     assert os_path_exists(b_file_path) is False
     assert os_path_exists(c_file_path) is False
 
     # WHEN
-    split_excel_into_dirs(file_path, output_dir, "Dimen", x_filename, "sheet5")
+    split_excel_into_dirs(file_path, dst_dir, "Dimen", x_filename, "sheet5")
 
     # THEN
     assert os_path_exists(b_file_path)

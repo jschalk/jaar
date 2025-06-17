@@ -98,10 +98,10 @@ def test_idea_brick_formats_MarkdownFileExists():
         idea_md_path.write_text("\n".join(idea_md_lines) + "\n")
 
     # Where the Markdown manifest will be written
-    output_path = Path(f"{doc_main_dir}/idea_brick_formats.md")
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text("# Idea Manifest\n\n" + "\n".join(manifest_lines))
-    assert output_path.exists(), f"Failed to write manifest to {output_path}"
+    dst_path = Path(f"{doc_main_dir}/idea_brick_formats.md")
+    dst_path.parent.mkdir(parents=True, exist_ok=True)
+    dst_path.write_text("# Idea Manifest\n\n" + "\n".join(manifest_lines))
+    assert dst_path.exists(), f"Failed to write manifest to {dst_path}"
 
     assertion_fail_str = f"Expected {len(get_idea_numbers())} idea files, found {count_files(doc_ideas_dir)}"
     assert count_files(doc_ideas_dir) == len(get_idea_numbers()), assertion_fail_str

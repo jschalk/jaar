@@ -17,9 +17,6 @@ from src.a16_pidgin_logic.map import (
 )
 from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
 
-# The goal of the pidgin function is to allow a single command, pointing at a bunch of directories
-# initialize vowunits and output acct metrics such as calendars, financial status, healer status
-
 
 def test_default_unknown_str_if_None_ReturnsObj():
     # ESTABLISH / WHEN / THEN

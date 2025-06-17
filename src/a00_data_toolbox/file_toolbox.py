@@ -93,6 +93,7 @@ def save_file(dest_dir: str, filename: str, file_str: str, replace: bool = True)
         set_dir(os_path_dirname(dest_dir))
     file_path = create_path(dest_dir, filename) if filename else dest_dir
     file_path = os_path_abspath(file_path)
+    print(f"{file_path=}")
     if (os_path_exists(file_path) and replace) or os_path_exists(file_path) is False:
         with open(file_path, "w") as f:
             f.write(file_str)
@@ -125,6 +126,8 @@ def open_json(dest_dir: str, filename: str = None):
 
 
 def count_files(dir_path: str) -> int:
+    """Return number of first level files and directories"""
+
     return (
         sum(bool(path_x.is_file()) for path_x in os_scandir(dir_path))
         if os_path_exists(path=dir_path)

@@ -41,6 +41,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_vow_ote1_agg_table_to_vow_ote1_agg_csvs,
     get_pidgin_events_by_dirs,
 )
+from src.a19_kpi_toolbox.kpi_mstr import create_kpi_csvs, populate_kpi_bundle
 
 
 class WorldID(str):
@@ -150,6 +151,7 @@ class WorldUnit:
         self.calc_vow_bud_acct_mandate_net_ledgers()
         etl_vow_job_jsons_to_job_tables(cursor, self._vow_mstr_dir)
         etl_vow_json_acct_nets_to_vow_acct_nets_table(cursor, self._vow_mstr_dir)
+        populate_kpi_bundle(cursor)
 
         # # create all vow_job and mandate reports
         # self.calc_vow_bud_acct_mandate_net_ledgers()
@@ -158,6 +160,10 @@ class WorldUnit:
 
     def create_stances(self):
         create_stance0001_file(self._vow_mstr_dir)
+
+    def create_kpi_csvs(self):
+        kpi_dir = create_path(self._vow_mstr_dir, "stances")
+        create_kpi_csvs(self.get_db_path(), kpi_dir)
 
     def get_dict(self) -> dict:
         return {

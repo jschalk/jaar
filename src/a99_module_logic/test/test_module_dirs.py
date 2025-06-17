@@ -111,7 +111,7 @@ def test_StrFunctionsAreAssertTested():
             )
 
 
-def test_TestAreInCorrectFolderStructure():
+def test_TestsAreInCorrectFolderStructure():
     # sourcery skip: no-loop-in-tests
     # sourcery skip: no-conditionals-in-tests
     # ESTABLISH / WHEN / THEN
@@ -218,15 +218,15 @@ def test_str_funcs_MarkdownFileExists():
         _line = f"- {module_desc}: " + ", ".join(x_list)
         func_lines.append(_line)
 
-    output_path = pathlib_Path(f"{doc_main_dir}/str_funcs.md")
+    dst_path = pathlib_Path(f"{doc_main_dir}/str_funcs.md")
     str_func_markdown = "# String Functions by Module\n\n" + "\n".join(func_lines)
 
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(str_func_markdown)
+    dst_path.parent.mkdir(parents=True, exist_ok=True)
+    dst_path.write_text(str_func_markdown)
 
     # THEN
-    assert output_path.exists(), f"Failed to write manifest to {output_path}"
+    assert dst_path.exists(), f"Failed to write manifest to {dst_path}"
     # print(str_func_markdown)
-    # assert output_path.exists(), f"{output_path} does not exist"
-    # print(open(output_path).read())
-    assert open(output_path).read() == str_func_markdown
+    # assert dst_path.exists(), f"{dst_path} does not exist"
+    # print(open(dst_path).read())
+    assert open(dst_path).read() == str_func_markdown

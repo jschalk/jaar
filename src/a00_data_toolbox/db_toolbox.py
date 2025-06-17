@@ -547,7 +547,7 @@ def save_to_split_csvs(
     conn_or_cursor: sqlite3_Connection,
     tablename,
     key_columns,
-    output_dir,
+    dst_dir,
     col1_prefix=None,
     col2_prefix=None,
 ):
@@ -557,7 +557,7 @@ def save_to_split_csvs(
     :param db_path: Path to the SQLite database file.
     :param tablename: Name of the table to query.
     :param key_columns: List of columns to use as keys for filtering rows.
-    :param output_dir: Directory to save the resulting CSVs.
+    :param dst_dir: Directory to save the resulting CSVs.
     """
     # Fetch all rows from the table
     column_names = get_table_columns(conn_or_cursor, tablename)
@@ -590,11 +590,11 @@ def save_to_split_csvs(
             key_values = new_key_values
 
         key_path_part = get_key_part(key_values)
-        csv_path = create_path(output_dir, key_path_part)
+        csv_path = create_path(dst_dir, key_path_part)
         set_dir(csv_path)
-        output_file = os_path_join(csv_path, f"{tablename}.csv")
+        dst_file = os_path_join(csv_path, f"{tablename}.csv")
         # Write to CSV
-        with open(output_file, mode="w", newline="", encoding="utf-8") as csv_file:
+        with open(dst_file, mode="w", newline="", encoding="utf-8") as csv_file:
             writer = csv_writer(csv_file)
             writer.writerow(column_names)
             writer.writerows(collection)

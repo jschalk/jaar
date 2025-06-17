@@ -136,7 +136,7 @@ def test_WorldUnit_calc_vow_bud_acct_mandate_net_ledgers_Scenaro2_BudExists(
     a23_ote1_json_path = create_vow_ote1_json_path(mstr_dir, a23_str)
     save_json(a23_ote1_json_path, None, a23_ote1_dict)
 
-    # create output bud_acct_mandate_ledger file
+    # create result bud_acct_mandate_ledger file
     bob37_bud_mandate_path = bud_mandate_path(mstr_dir, a23_str, bob_str, tp37)
     assert os_path_exists(bob37_bud_mandate_path) is False
 

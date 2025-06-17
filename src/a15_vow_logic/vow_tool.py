@@ -150,14 +150,14 @@ def _set_cell_found_facts(bud_time_dir: str, cell_dirs: list[str]):
         nodes_quotas_dict[cell_owners_tuple] = x_cell.get_planevents_quota_ledger()
 
     nodes_wgt_facts = get_nodes_with_weighted_facts(nodes_facts_dict, nodes_quotas_dict)
-    output_dir_facts = {
+    dst_dir_facts = {
         os_path_join(bud_time_dir, *node_addr): get_dict_from_factunits(facts)
         for node_addr, facts in nodes_wgt_facts.items()
     }
-    for output_dir, output_facts_dict in output_dir_facts.items():
-        output_cell = cellunit_get_from_dir(output_dir)
-        output_cell.set_found_facts_from_dict(output_facts_dict)
-        cellunit_save_to_dir(output_dir, output_cell)
+    for dst_dir, dst_facts_dict in dst_dir_facts.items():
+        dst_cell = cellunit_get_from_dir(dst_dir)
+        dst_cell.set_found_facts_from_dict(dst_facts_dict)
+        cellunit_save_to_dir(dst_dir, dst_cell)
 
 
 def set_cell_trees_decrees(vow_mstr_dir: str, vow_label: str):
