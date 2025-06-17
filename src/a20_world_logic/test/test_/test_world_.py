@@ -11,9 +11,6 @@ from src.a20_world_logic.world import (
     worldunit_shop,
 )
 
-# The goal of the world function is to allow a single command, pointing at a bunch of directories
-# initialize vowunits and output acct metrics such as calendars, financial status, healer status
-
 
 def test_WorldID_Exists():
     # ESTABLISH / WHEN / THEN

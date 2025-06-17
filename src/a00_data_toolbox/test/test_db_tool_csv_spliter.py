@@ -191,7 +191,7 @@ def test_save_to_split_csvs_CreatesFiles_Scenario1_add_col2_prefix():
             conn_or_cursor=conn,
             tablename=x_tablename,
             key_columns=key_columns,
-            output_dir=x_dir,
+            dst_dir=x_dir,
             col1_prefix=hairs_str,
             col2_prefix=y_ints_str,
         )

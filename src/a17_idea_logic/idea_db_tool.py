@@ -263,7 +263,7 @@ def sheet_exists(file_path: str, sheet_name: str):
 
 
 def split_excel_into_dirs(
-    input_file: str, output_dir: str, column_name: str, filename: str, sheet_name: str
+    input_file: str, dst_dir: str, column_name: str, filename: str, sheet_name: str
 ):
     """
     Splits an Excel file into multiple Excel files, each containing rows
@@ -271,11 +271,11 @@ def split_excel_into_dirs(
 
     Args:
         input_file (str): Path to the input Excel file.
-        output_dir (str): Directory where the output files will be saved.
+        dst_dir (str): Directory where the files will be saved.
         column_name (str): Column to split by unique values.
     """
-    # Create the output directory if it doesn't exist
-    set_dir(output_dir)
+    # Create the destination directory if it doesn't exist
+    set_dir(dst_dir)
     df = pandas_read_excel(input_file, sheet_name=sheet_name)
 
     # Check if the column exists
@@ -292,12 +292,12 @@ def split_excel_into_dirs(
 
             # Create a safe subdirectory name for the unique value
             safe_value = str(value).replace("/", "_").replace("\\", "_")
-            subdirectory = create_path(output_dir, safe_value)
+            subdirectory = create_path(dst_dir, safe_value)
             # Create the subdirectory if it doesn't exist
             set_dir(subdirectory)
-            # Define the output file path
-            output_file = create_path(subdirectory, f"{filename}.xlsx")
-            upsert_sheet(output_file, sheet_name, filtered_df)
+            # Define the destination file path
+            dst_file = create_path(subdirectory, f"{filename}.xlsx")
+            upsert_sheet(dst_file, sheet_name, filtered_df)
 
 
 def if_nan_return_None(x_obj: any) -> any:
@@ -405,14 +405,14 @@ def csv_dict_to_excel(csv_dict: dict[str, str], dir: str, filename: str):
     """
     set_dir(dir)
     file_path = create_path(dir, filename)
-    output = ExcelWriter(file_path, engine="xlsxwriter")
+    x_excelwriter = ExcelWriter(file_path, engine="xlsxwriter")
 
     for sheet_name, csv_str in csv_dict.items():
         df = pandas_read_csv(io_StringIO(csv_str))  # Convert CSV string to DataFrame
         # Excel sheet names max length is 31 chars
-        df.to_excel(output, sheet_name=sheet_name[:31], index=False)
+        df.to_excel(x_excelwriter, sheet_name=sheet_name[:31], index=False)
 
-    output.close()
+    x_excelwriter.close()
 
 
 def set_dataframe_first_two_columns(df: DataFrame, value_col1, value_col2) -> DataFrame:

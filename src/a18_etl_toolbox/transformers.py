@@ -747,7 +747,7 @@ def etl_voice_agg_to_event_plan_csvs(
                 conn_or_cursor=conn_or_cursor,
                 tablename=plan_table,
                 key_columns=["vow_label", "owner_name", "event_int"],
-                output_dir=vows_dir,
+                dst_dir=vows_dir,
                 col1_prefix="owners",
                 col2_prefix="events",
             )
