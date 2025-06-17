@@ -1,27 +1,14 @@
-from sqlite3 import connect as sqlite3_connect
-from src.a00_data_toolbox.db_toolbox import (
-    db_table_exists,
-    get_row_count,
-    get_table_columns,
-)
-from src.a01_term_logic.rope import create_rope
-from src.a02_finance_logic._util.a02_str import owner_name_str, vow_label_str
-from src.a04_reason_logic._util.a04_str import _active_str, _chore_str
-from src.a05_concept_logic._util.a05_str import concept_rope_str, task_str
-from src.a06_plan_logic._util.a06_str import plan_conceptunit_str
-from src.a18_etl_toolbox._util.a18_str import owner_net_amount_str, vow_acct_nets_str
-from src.a18_etl_toolbox.tran_sqlstrs import (
-    CREATE_JOB_PLNCONC_SQLSTR,
-    CREATE_VOW_ACCT_NETS_SQLSTR,
-    create_prime_tablename,
-)
+from src.a00_data_toolbox.file_toolbox import create_path
+from src.a18_etl_toolbox.tran_path import create_stances_dir_path
 from src.a19_kpi_toolbox._util.a19_str import vow_kpi001_acct_nets_str
 from src.a19_kpi_toolbox.kpi_mstr import (
+    KPI_EXCEL_FILENAME,
     create_populate_kpi001_table,
     get_all_kpi_functions,
     get_bundles_config,
     get_default_kpi_bundle,
     get_kpi_set_from_bundle,
+    get_kpi_xlsx_path,
 )
 
 
@@ -66,3 +53,21 @@ def test_get_kpi_set_from_bundle_ReturnsObj_Scenario1_NoBundleGiven():
     # THEN
     assert kpi_set == {vow_kpi001_acct_nets_str()}
     assert kpi_set == default_kpi_set
+
+
+def test_KPI_EXCEL_FILENAME_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
+    assert KPI_EXCEL_FILENAME == "kpis.xlsx"
+
+
+def test_get_kpi_xlsx_path_ReturnsObj():
+    # ESTABLISH
+    vow_mstr_dir = "worlds/vow_mstr_dir"
+
+    # WHEN
+    kpi_excel_path = get_kpi_xlsx_path(vow_mstr_dir)
+
+    # THEN
+    stances_dir = create_stances_dir_path(vow_mstr_dir)
+    expected_kpi_excel_path = create_path(stances_dir, KPI_EXCEL_FILENAME)
+    assert kpi_excel_path == expected_kpi_excel_path

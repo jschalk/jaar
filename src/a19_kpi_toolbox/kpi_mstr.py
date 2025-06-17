@@ -1,4 +1,5 @@
 from sqlite3 import Cursor as sqlite3_Cursor
+from src.a00_data_toolbox.file_toolbox import create_path
 from src.a19_kpi_toolbox.kpi_sqlstrs import get_vow_kpi001_acct_nets_sqlstr
 
 
@@ -43,3 +44,11 @@ def populate_kpi_bundle(cursor: sqlite3_Cursor, bundle_id: str = None):
     for kpi_id in bundle_kpi_ids:
         if kpi_id == "vow_kpi001_acct_nets":
             create_populate_kpi001_table(cursor)
+
+
+KPI_EXCEL_FILENAME = "kpis.xlsx"
+
+
+def get_kpi_xlsx_path(vow_mstr_dir: str) -> str:
+    stances_dir = create_path(vow_mstr_dir, "stances")
+    return create_path(stances_dir, KPI_EXCEL_FILENAME)

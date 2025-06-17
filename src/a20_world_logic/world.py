@@ -4,6 +4,8 @@ from sqlite3 import (
     Cursor as sqlite3_Cursor,
     connect as sqlite3_connect,
 )
+
+# from src.a00_data_toolbox.db_toolbox import get_db_tables
 from src.a00_data_toolbox.dict_toolbox import get_0_if_None, get_empty_set_if_None
 from src.a00_data_toolbox.file_toolbox import create_path, delete_dir, set_dir
 from src.a01_term_logic.term import EventInt, FaceName, VowLabel
@@ -160,6 +162,13 @@ class WorldUnit:
 
     def create_stances(self):
         create_stance0001_file(self._vow_mstr_dir)
+
+    # def create_kpi_file(self):
+    #     with sqlite3_connect(self.get_db_path()) as db_conn:
+    #         cursor = db_conn.cursor()
+    #         kpi_tables = get_db_tables(db_conn, "kpi")
+    #         for kpi_table in kpi_tables:
+    #             print(f"{kpi_table=}")
 
     def get_dict(self) -> dict:
         return {

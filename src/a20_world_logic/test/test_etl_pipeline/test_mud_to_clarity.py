@@ -549,7 +549,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario5_CreatesFiles(
 
 def test_WorldUnit_mud_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     env_dir_setup_cleanup,
-):
+):  # sourcery skip: extract-method
     # ESTABLISH:
     fizz_str = "fizz"
     fizz_world = worldunit_shop(fizz_str, worlds_dir())
