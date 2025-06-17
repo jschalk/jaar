@@ -1,6 +1,6 @@
 from os.path import basename as os_path_basename, exists as os_path_exists
 from pathlib import Path as pathlib_Path
-from src.a00_data_toolbox.file_toolbox import create_path
+from src.a00_data_toolbox.file_toolbox import create_path, get_level1_dirs
 from src.a99_module_logic.module_eval import (
     check_if_module_str_funcs_is_sorted,
     check_import_objs_are_ordered,
@@ -68,6 +68,63 @@ def test_PythonFileImportsFormat():
                     if str(file_import[0]).endswith("_str"):
                         print(f"{module_desc} {filename} {file_import[0]=}")
                     assert not str(file_import[0]).endswith("_str")
+
+
+def test_StrFunctionsAreAssertTested():
+    """
+    Test that all string-related functions in each module directory are asserted and tested.
+    This test performs the following checks for each module:
+    - Retrieves all string functions and ensures they are sorted and not duplicated.
+    - Verifies that if string functions exist, a corresponding test file exists in the module's utility directory.
+    - Checks that the test file imports exactly one object and that imports are ordered.
+    - Ensures the test file contains a single test function named 'test_str_functions_ReturnsObj'.
+    - Validates that the test file includes the necessary assertions for all string functions.
+    Raises:
+        AssertionError: If any of the above conditions are not met.
+    """
+
+    # sourcery skip: no-loop-in-tests
+    # sourcery skip: no-conditionals-in-tests
+    # ESTABLISH
+
+    # WHEN / THEN
+    running_str_functions = set()
+    for module_desc, module_dir in get_module_descs().items():
+        desc_number_str = module_desc[1:3]
+        util_dir = create_path(module_dir, "_util")
+        print(f"{util_dir}")
+        module_str_funcs = get_module_str_functions(module_dir, desc_number_str)
+        check_if_module_str_funcs_is_sorted(module_str_funcs)
+        check_str_funcs_are_not_duplicated(module_str_funcs, running_str_functions)
+        running_str_functions.update(set(module_str_funcs))
+
+        if len(module_str_funcs) > 0:
+            test_file_path = create_path(util_dir, f"test_a{desc_number_str}_str.py")
+            assert os_path_exists(test_file_path)
+            test_file_imports = get_imports_from_file(test_file_path)
+            assert len(test_file_imports) == 1
+            check_import_objs_are_ordered(test_file_imports, test_file_path)
+            test_functions = get_function_names_from_file(test_file_path)
+            assert test_functions == ["test_str_functions_ReturnsObj"]
+            check_str_func_test_file_has_needed_asserts(
+                module_str_funcs, test_file_path, util_dir, desc_number_str
+            )
+
+
+def test_TestAreInCorrectFolderStructure():
+    # sourcery skip: no-loop-in-tests
+    # sourcery skip: no-conditionals-in-tests
+    # ESTABLISH / WHEN / THEN
+    for module_desc, module_dir in get_module_descs().items():
+        desc_number = int(module_desc[1:3])
+        level1_dirs = get_level1_dirs(module_dir)
+        print(f"{desc_number} {level1_dirs=}")
+        test_str = "test"
+        for level1_dir in level1_dirs:
+            if level1_dir.find(test_str) > -1:
+                if level1_dir != test_str:
+                    print(f"{desc_number=} {level1_dir=}")
+                assert level1_dir == test_str
 
 
 def test_StrFunctionsAreAssertTested():
