@@ -19,10 +19,10 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
 )
 from src.a19_kpi_toolbox._test_util.a19_str import vow_kpi001_acct_nets_str
-from src.a19_kpi_toolbox.kpi_mstr import create_populate_kpi001_table
+from src.a19_kpi_toolbox.kpi_mstr import create_kpi001_table
 
 
-def test_etl_vow_json_acct_nets_to_vow_acct_nets_table_PopulatesTable_Scenario0_NoTasks():
+def test_create_kpi001_table_PopulatesTable_Scenario0_NoTasks():
     # ESTABLISH
     a23_str = "accord23"
     yao_str = "Yao"
@@ -46,7 +46,7 @@ VALUES
         assert not db_table_exists(cursor, vow_kpi001_acct_nets_tablename)
 
         # WHEN
-        create_populate_kpi001_table(cursor)
+        create_kpi001_table(cursor)
 
         # THEN
         assert get_table_columns(cursor, vow_kpi001_acct_nets_tablename) == [
@@ -75,7 +75,7 @@ FROM {vow_kpi001_acct_nets_tablename}
         ]
 
 
-def test_etl_vow_json_acct_nets_to_vow_acct_nets_table_PopulatesTable_Scenario1_1task():
+def test_create_kpi001_table_PopulatesTable_Scenario1_1task():
     # ESTABLISH
     a23_str = "accord23"
     yao_str = "Yao"
@@ -107,7 +107,7 @@ VALUES ('{a23_str}', '{bob_str}', '{casa_rope}', 1)
         assert not db_table_exists(cursor, vow_kpi001_acct_nets_tablename)
 
         # WHEN
-        create_populate_kpi001_table(cursor)
+        create_kpi001_table(cursor)
 
         # THEN
         assert get_row_count(cursor, vow_kpi001_acct_nets_tablename)

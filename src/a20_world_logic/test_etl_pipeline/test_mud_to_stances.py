@@ -5,8 +5,8 @@ from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.a00_data_toolbox.file_toolbox import count_dirs_files, create_path, save_file
 from src.a02_finance_logic._test_util.a02_str import (
     amount_str,
-    celldepth_str,
     bud_time_str,
+    celldepth_str,
     owner_name_str,
     quota_str,
     tran_time_str,
@@ -136,6 +136,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
         assert not db_table_exists(cursor, vow_ote1_agg_str())
         assert not db_table_exists(cursor, plnacct_job)
         assert not db_table_exists(cursor, vow_acct_nets_str())
+        assert not db_table_exists(cursor, vow_kpi001_acct_nets_str())
 
         # # create planunits
         # self.plan_tables_to_event_plan_csvs(cursor)
@@ -194,6 +195,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
         assert get_row_count(cursor, vow_acct_nets_str()) == 0
         # assert get_row_count(cursor, vow_event_time_agg_str()) == 0
         # assert get_row_count(cursor, vow_ote1_agg_tablename) == 0
+        # assert get_row_count(cursor, vow_kpi001_acct_nets_str()) == 1
 
 
 def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
@@ -304,6 +306,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
         assert not db_table_exists(cursor, vow_ote1_agg_str())
         assert not os_path_exists(sue37_mandate_path)
         assert not db_table_exists(cursor, vow_acct_nets_str())
+        assert not db_table_exists(cursor, vow_kpi001_acct_nets_str())
         # self.vow_agg_tables_to_vow_ote1_agg(cursor)
 
         # # create planunits
@@ -348,6 +351,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
         print(f"{sue37_mandate_path=}")
         assert os_path_exists(sue37_mandate_path)
         assert get_row_count(cursor, vow_acct_nets_str()) == 1
+        # assert get_row_count(cursor, vow_kpi001_acct_nets_str()) == 1
 
 
 def test_WorldUnit_mud_to_clarity_with_cursor_Scenario2_PopulateVowTranBook(
