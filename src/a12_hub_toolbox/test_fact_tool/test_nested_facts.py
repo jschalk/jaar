@@ -1,4 +1,4 @@
-from src.a11_bud_cell_logic._test_util.example_factunits import (
+from src.a11_bud_cell_logic._util.example_factunits import (
     example_casa_clean_factunit,
     example_casa_dirty_factunit,
     example_sky_blue_factunit,

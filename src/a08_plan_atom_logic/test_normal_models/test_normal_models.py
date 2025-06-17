@@ -1,5 +1,5 @@
 from sqlalchemy import inspect
-from src.a06_plan_logic._test_util.a06_str import (
+from src.a06_plan_logic._util.a06_str import (
     plan_acct_membership_str,
     plan_acctunit_str,
     plan_concept_awardlink_str,
@@ -11,7 +11,7 @@ from src.a06_plan_logic._test_util.a06_str import (
     plan_conceptunit_str,
     planunit_str,
 )
-from src.a08_plan_atom_logic._test_util.a08_str import (
+from src.a08_plan_atom_logic._util.a08_str import (
     normal_specs_str,
     normal_table_name_str,
     sqlite_datatype_str,

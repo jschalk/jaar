@@ -1,7 +1,7 @@
 from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import default_knot_if_None
 from src.a02_finance_logic.finance_config import default_RespectBit_if_None
-from src.a03_group_logic._test_util.a03_str import (
+from src.a03_group_logic._util.a03_str import (
     _credor_pool_str,
     _debtor_pool_str,
     _fund_agenda_give_str,

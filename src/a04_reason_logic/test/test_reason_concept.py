@@ -3,7 +3,7 @@ from src.a01_term_logic.rope import (
     default_knot_if_None,
     get_default_axiom_label as root_label,
 )
-from src.a04_reason_logic._test_util.a04_str import (
+from src.a04_reason_logic._util.a04_str import (
     knot_str,
     rconcept_active_requisite_str,
     rcontext_str,

@@ -1,18 +1,18 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, get_dir_file_strs
-from src.a06_plan_logic._test_util.a06_str import (
+from src.a06_plan_logic._util.a06_str import (
     LabelTerm_str,
     NameTerm_str,
     RopeTerm_str,
     TitleTerm_str,
 )
-from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
-from src.a16_pidgin_logic._test_util.a16_str import (
+from src.a09_pack_logic._util.a09_str import event_int_str, face_name_str
+from src.a16_pidgin_logic._util.a16_str import (
     inx_knot_str,
     otx_knot_str,
     unknown_str_str,
 )
-from src.a16_pidgin_logic._test_util.example_pidgins import (
+from src.a16_pidgin_logic._util.example_pidgins import (
     get_casa_maison_label_dt,
     get_casa_maison_pidginunit_set_by_label,
     get_casa_maison_pidginunit_set_by_otx2inx,
@@ -22,7 +22,7 @@ from src.a16_pidgin_logic._test_util.example_pidgins import (
     get_sue_pidginunit,
 )
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
-from src.a17_idea_logic._test_util.a17_env import (
+from src.a17_idea_logic._util.a17_env import (
     env_dir_setup_cleanup,
     idea_vows_dir as get_example_face_dir,
 )

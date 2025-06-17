@@ -1,4 +1,4 @@
-from src.a06_plan_logic._test_util.a06_str import (
+from src.a06_plan_logic._util.a06_str import (
     concept_rope_str,
     plan_concept_reason_premiseunit_str,
     pnigh_str,
@@ -7,11 +7,7 @@ from src.a06_plan_logic._test_util.a06_str import (
     rcontext_str,
 )
 from src.a06_plan_logic.plan import planunit_shop
-from src.a08_plan_atom_logic._test_util.a08_str import (
-    DELETE_str,
-    INSERT_str,
-    UPDATE_str,
-)
+from src.a08_plan_atom_logic._util.a08_str import DELETE_str, INSERT_str, UPDATE_str
 from src.a08_plan_atom_logic.atom import planatom_shop
 from src.a09_pack_logic.delta import plandelta_shop
 from src.a09_pack_logic.legible import create_legible_list

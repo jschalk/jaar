@@ -2,7 +2,7 @@ from os.path import exists as os_path_exists
 from pathlib import Path
 from pytest import fixture as pytest_fixture
 from shutil import rmtree as shutil_rmtree
-from src.a00_data_toolbox._test_util.a00_env import (
+from src.a00_data_toolbox._util.a00_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )

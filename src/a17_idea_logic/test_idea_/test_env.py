@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a17_idea_logic._test_util.a17_env import (
+from src.a17_idea_logic._util.a17_env import (
     get_module_temp_dir,
     idea_examples_dir,
     idea_vows_dir,
@@ -10,8 +10,8 @@ from src.a17_idea_logic._test_util.a17_env import (
 def test_get_module_temp_dir_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     print(f"{src_module_dir()=}")
-    print(create_path(src_module_dir(), "_test_util"))
-    assert get_module_temp_dir() == f"{src_module_dir()}/_test_util"
+    print(create_path(src_module_dir(), "_util"))
+    assert get_module_temp_dir() == f"{src_module_dir()}/_util"
 
 
 def test_idea_examples_dir_ReturnsObj():

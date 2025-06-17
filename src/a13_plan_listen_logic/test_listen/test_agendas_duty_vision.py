@@ -1,11 +1,11 @@
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_plan_logic.plan import planunit_shop
 from src.a12_hub_toolbox.hubunit import hubunit_shop
-from src.a13_plan_listen_logic._test_util.a13_env import (
+from src.a13_plan_listen_logic._util.a13_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as env_dir,
 )
-from src.a13_plan_listen_logic._test_util.example_listen import (
+from src.a13_plan_listen_logic._util.example_listen import (
     casa_rope,
     clean_rope,
     clean_str,
@@ -20,7 +20,7 @@ from src.a13_plan_listen_logic._test_util.example_listen import (
     run_rope,
     run_str,
 )
-from src.a13_plan_listen_logic._test_util.example_listen_hub import (
+from src.a13_plan_listen_logic._util.example_listen_hub import (
     get_dakota_hubunit,
     get_dakota_rope,
 )

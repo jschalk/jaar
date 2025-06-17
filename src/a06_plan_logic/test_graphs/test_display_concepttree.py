@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
-from src.a06_plan_logic._test_util.example_plans import (
+from src.a06_plan_logic._util.example_plans import (
     get_planunit_laundry_example1,
     get_planunit_with_4_levels,
     get_planunit_with_4_levels_and_2reasons,

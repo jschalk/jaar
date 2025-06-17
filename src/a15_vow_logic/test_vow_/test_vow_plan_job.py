@@ -11,10 +11,7 @@ from src.a12_hub_toolbox.hub_tool import (
     save_gut_file,
     save_job_file,
 )
-from src.a15_vow_logic._test_util.a15_env import (
-    env_dir_setup_cleanup,
-    get_module_temp_dir,
-)
+from src.a15_vow_logic._util.a15_env import env_dir_setup_cleanup, get_module_temp_dir
 from src.a15_vow_logic.vow import vowunit_shop
 
 

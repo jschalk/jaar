@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.dict_toolbox import get_from_nested_dict
-from src.a06_plan_logic._test_util.a06_str import (
+from src.a06_plan_logic._util.a06_str import (
     LabelTerm_str,
     NameTerm_str,
     RopeTerm_str,
@@ -44,7 +44,7 @@ from src.a06_plan_logic._test_util.a06_str import (
     respect_bit_str,
     stop_want_str,
 )
-from src.a08_plan_atom_logic._test_util.a08_str import (
+from src.a08_plan_atom_logic._util.a08_str import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,

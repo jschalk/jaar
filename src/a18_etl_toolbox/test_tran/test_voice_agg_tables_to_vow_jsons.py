@@ -6,9 +6,9 @@ from src.a00_data_toolbox.db_toolbox import (
     get_row_count,
 )
 from src.a00_data_toolbox.file_toolbox import open_file
-from src.a02_finance_logic._test_util.a02_str import vow_label_str
+from src.a02_finance_logic._util.a02_str import vow_label_str
 from src.a12_hub_toolbox.hub_path import create_vow_json_path
-from src.a15_vow_logic._test_util.a15_str import (
+from src.a15_vow_logic._util.a15_str import (
     vow_budunit_str,
     vow_paybook_str,
     vow_timeline_hour_str,
@@ -19,11 +19,8 @@ from src.a15_vow_logic._test_util.a15_str import (
 )
 from src.a15_vow_logic.vow import get_from_json as vowunit_get_from_json
 from src.a15_vow_logic.vow_config import get_vow_dimens
-from src.a18_etl_toolbox._test_util.a18_env import (
-    env_dir_setup_cleanup,
-    get_module_temp_dir,
-)
-from src.a18_etl_toolbox._test_util.a18_str import vow_event_time_agg_str
+from src.a18_etl_toolbox._util.a18_env import env_dir_setup_cleanup, get_module_temp_dir
+from src.a18_etl_toolbox._util.a18_str import vow_event_time_agg_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
     get_dimen_abbv7,

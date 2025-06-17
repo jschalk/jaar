@@ -1,4 +1,4 @@
-from src.a06_plan_logic._test_util.example_plans import planunit_v001_with_large_agenda
+from src.a06_plan_logic._util.example_plans import planunit_v001_with_large_agenda
 from src.a06_plan_logic.plan import planunit_shop
 from src.a06_plan_logic.report import (
     get_plan_acctunits_dataframe,

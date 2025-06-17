@@ -5,7 +5,7 @@ from src.a02_finance_logic.finance_config import default_fund_pool
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import awardline_shop, awardlink_shop
 from src.a05_concept_logic.concept import ConceptUnit, conceptunit_shop
-from src.a06_plan_logic._test_util.example_plans import (
+from src.a06_plan_logic._util.example_plans import (
     get_planunit_with7amCleanTableReason,
     get_planunit_with_4_levels,
     planunit_v001,

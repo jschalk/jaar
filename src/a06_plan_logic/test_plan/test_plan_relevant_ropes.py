@@ -1,7 +1,7 @@
 from src.a01_term_logic.rope import to_rope
 from src.a04_reason_logic.reason_concept import reasonunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
-from src.a06_plan_logic._test_util.example_plans import (
+from src.a06_plan_logic._util.example_plans import (
     get_mop_with_reason_planunit_example1,
     get_planunit_with_4_levels,
 )

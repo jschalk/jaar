@@ -2,7 +2,7 @@ from os.path import exists as os_path_exist, join as os_path_join
 from pathlib import Path as pathlib_Path
 from platform import system as platform_system
 from pytest import raises as pytest_raises
-from src.a00_data_toolbox._test_util.a00_env import (
+from src.a00_data_toolbox._util.a00_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )

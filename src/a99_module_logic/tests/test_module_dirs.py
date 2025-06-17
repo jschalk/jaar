@@ -28,7 +28,7 @@ def test_ModuleStrFunctionsTestFileFormat():
         module_number = int(module_desc[1:3])
         # assert module_number == previous_module_number + 1
         print(f"{module_desc=} {module_number=}")
-        utils_dir = create_path(module_dir, "_test_util")
+        utils_dir = create_path(module_dir, "_util")
         assert os_path_exists(utils_dir)
         str_func_path = create_path(utils_dir, f"a{module_desc[1:3]}_str.py")
         assert os_path_exists(str_func_path)
@@ -63,7 +63,7 @@ def test_PythonFileImportsFormat():
             filename = str(os_path_basename(file_path))
             file_path = str(file_path)
             print(f"{file_path=}")
-            if not filename.startswith("test") and "_test_util" not in file_path:
+            if not filename.startswith("test") and "_util" not in file_path:
                 for file_import in file_imports:
                     if str(file_import[0]).endswith("_str"):
                         print(f"{module_desc} {filename} {file_import[0]=}")
@@ -91,7 +91,7 @@ def test_StrFunctionsAreAssertTested():
     running_str_functions = set()
     for module_desc, module_dir in get_module_descs().items():
         desc_number_str = module_desc[1:3]
-        util_dir = create_path(module_dir, "_test_util")
+        util_dir = create_path(module_dir, "_util")
         print(f"{util_dir}")
         module_str_funcs = get_module_str_functions(module_dir, desc_number_str)
         check_if_module_str_funcs_is_sorted(module_str_funcs)
@@ -121,14 +121,16 @@ def test_StrFunctionsAppearWhereTheyShould():
     excluded_strs = {"close", "time", "day", "days"}
 
     # WHEN / THEN
+
     for module_desc, module_dir in get_module_descs().items():
         desc_number_str = module_desc[1:3]
         module_files = list(get_python_files_with_flag(module_dir).keys())
         module_files.extend(list(get_json_files(module_dir)))
         module_files = sorted(module_files)
         str_funcs_set = set(get_module_str_functions(module_dir, desc_number_str))
+        print(f"{desc_number_str} {str_funcs_set=}")
         for file_path in module_files:
-            if file_path.find("_test_util") == -1:
+            if file_path.find("_util") == -1:
                 first_ref_missing_strs = {
                     str_function[:-4]
                     for str_function in str_first_ref

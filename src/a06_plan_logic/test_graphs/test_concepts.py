@@ -1,4 +1,4 @@
-from src.a06_plan_logic._test_util.example_plans import (
+from src.a06_plan_logic._util.example_plans import (
     get_planunit_with_4_levels,
     get_planunit_with_4_levels_and_2reasons,
     get_planunit_x1_3levels_1reason_1facts,

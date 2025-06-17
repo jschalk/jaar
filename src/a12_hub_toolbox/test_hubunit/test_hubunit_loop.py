@@ -1,6 +1,6 @@
 from src.a01_term_logic.rope import create_rope
-from src.a06_plan_logic._test_util.example_plans import get_planunit_with_4_levels
-from src.a12_hub_toolbox._test_util.a12_env import (
+from src.a06_plan_logic._util.example_plans import get_planunit_with_4_levels
+from src.a12_hub_toolbox._util.a12_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as env_dir,
 )

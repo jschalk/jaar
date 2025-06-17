@@ -1,6 +1,6 @@
 from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import default_knot_if_None
-from src.a02_finance_logic._test_util.a02_str import (
+from src.a02_finance_logic._util.a02_str import (
     fund_pool_str,
     knot_str,
     owner_name_str,
@@ -14,7 +14,7 @@ from src.a02_finance_logic.finance_config import (
     validate_respect_num,
 )
 from src.a05_concept_logic.concept import get_default_vow_label as root_label
-from src.a06_plan_logic._test_util.a06_str import (
+from src.a06_plan_logic._util.a06_str import (
     _keeps_buildable_str,
     _keeps_justified_str,
     _offtrack_fund_str,

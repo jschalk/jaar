@@ -1,9 +1,9 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, open_file
 from src.a01_term_logic.rope import to_rope
-from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
+from src.a02_finance_logic._util.a02_str import owner_name_str, vow_label_str
 from src.a05_concept_logic.concept import conceptunit_shop
-from src.a06_plan_logic._test_util.a06_str import (
+from src.a06_plan_logic._util.a06_str import (
     acct_name_str,
     concept_rope_str,
     credit_score_str,
@@ -15,11 +15,11 @@ from src.a06_plan_logic._test_util.a06_str import (
     task_str,
 )
 from src.a06_plan_logic.plan import planunit_shop
-from src.a07_calendar_logic._test_util.calendar_examples import (
+from src.a07_calendar_logic._util.calendar_examples import (
     add_time_creg_conceptunit,
     add_time_five_conceptunit,
 )
-from src.a17_idea_logic._test_util.a17_env import env_dir_setup_cleanup, idea_vows_dir
+from src.a17_idea_logic._util.a17_env import env_dir_setup_cleanup, idea_vows_dir
 from src.a17_idea_logic.idea import create_idea_df, get_idearef_obj, save_idea_csv
 from src.a17_idea_logic.idea_config import (
     idea_format_00013_conceptunit_v0_0_0,

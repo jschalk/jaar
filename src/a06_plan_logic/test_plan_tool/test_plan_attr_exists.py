@@ -1,7 +1,7 @@
 from src.a01_term_logic.rope import to_rope
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import factunit_shop, reasonunit_shop
-from src.a06_plan_logic._test_util.a06_str import (
+from src.a06_plan_logic._util.a06_str import (
     acct_name_str,
     awardee_title_str,
     concept_rope_str,

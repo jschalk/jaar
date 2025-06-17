@@ -1,7 +1,7 @@
 from copy import copy as copy_copy
 from os import getcwd as os_getcwd
 from src.a00_data_toolbox.file_toolbox import create_path, save_json
-from src.a02_finance_logic._test_util.a02_str import (
+from src.a02_finance_logic._util.a02_str import (
     bud_time_str,
     celldepth_str,
     knot_str,
@@ -10,7 +10,7 @@ from src.a02_finance_logic._test_util.a02_str import (
     tran_time_str,
     vow_label_str,
 )
-from src.a06_plan_logic._test_util.a06_str import (
+from src.a06_plan_logic._util.a06_str import (
     acct_name_str,
     addin_str,
     awardee_title_str,
@@ -58,13 +58,13 @@ from src.a06_plan_logic._test_util.a06_str import (
     take_force_str,
     task_str,
 )
-from src.a07_calendar_logic._test_util.a07_str import (
+from src.a07_calendar_logic._util.a07_str import (
     c400_number_str,
     monthday_distortion_str,
     timeline_label_str,
     yr1_jan1_offset_str,
 )
-from src.a08_plan_atom_logic._test_util.a08_str import (
+from src.a08_plan_atom_logic._util.a08_str import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,
@@ -80,12 +80,12 @@ from src.a08_plan_atom_logic.atom_config import (
     get_delete_key_name,
     get_plan_dimens,
 )
-from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
+from src.a09_pack_logic._util.a09_str import event_int_str, face_name_str
 from src.a10_plan_calc.plan_calc_config import (
     get_all_plan_calc_args,
     get_plan_calc_args_sqlite_datatype_dict,
 )
-from src.a15_vow_logic._test_util.a15_str import (
+from src.a15_vow_logic._util.a15_str import (
     amount_str,
     cumlative_day_str,
     cumlative_minute_str,
@@ -108,7 +108,7 @@ from src.a15_vow_logic.vow_config import (
     get_vow_config_dict,
     get_vow_dimens,
 )
-from src.a16_pidgin_logic._test_util.a16_str import (
+from src.a16_pidgin_logic._util.a16_str import (
     inx_knot_str,
     inx_label_str,
     inx_name_str,
@@ -134,7 +134,7 @@ from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_dimens,
     get_pidginable_args,
 )
-from src.a17_idea_logic._test_util.a17_str import (
+from src.a17_idea_logic._util.a17_str import (
     allowed_crud_str,
     attributes_str,
     build_order_str,

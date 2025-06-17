@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
-from src.a02_finance_logic._test_util.a02_str import owner_name_str
-from src.a06_plan_logic._test_util.a06_str import (
+from src.a02_finance_logic._util.a02_str import owner_name_str
+from src.a06_plan_logic._util.a06_str import (
     acct_name_str,
     addin_str,
     begin_str,
@@ -13,8 +13,8 @@ from src.a06_plan_logic._test_util.a06_str import (
     numor_str,
     parent_rope_str,
 )
-from src.a15_vow_logic._test_util.a15_env import env_dir_setup_cleanup
-from src.a15_vow_logic._test_util.example_vows import (
+from src.a15_vow_logic._util.a15_env import env_dir_setup_cleanup
+from src.a15_vow_logic._util.example_vows import (
     create_example_vow2,
     create_example_vow3,
     create_example_vow4,

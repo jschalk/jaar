@@ -1,6 +1,6 @@
 from src.a01_term_logic.rope import to_rope
 from src.a05_concept_logic.concept import conceptunit_shop
-from src.a06_plan_logic._test_util.a06_str import (
+from src.a06_plan_logic._util.a06_str import (
     acct_name_str,
     concept_rope_str,
     credit_score_str,
@@ -14,9 +14,9 @@ from src.a06_plan_logic._test_util.a06_str import (
     plan_conceptunit_str,
     task_str,
 )
-from src.a06_plan_logic._test_util.example_plans import planunit_v001
+from src.a06_plan_logic._util.example_plans import planunit_v001
 from src.a06_plan_logic.plan import planunit_shop
-from src.a08_plan_atom_logic._test_util.a08_str import INSERT_str
+from src.a08_plan_atom_logic._util.a08_str import INSERT_str
 from src.a08_plan_atom_logic.atom import planatom_shop
 from src.a17_idea_logic.idea import create_idea_df, get_idearef_obj, make_plandelta
 from src.a17_idea_logic.idea_config import (

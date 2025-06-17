@@ -8,10 +8,7 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
 from pytest import fixture as pytest_fixture, raises as pytest_raises
 from src.a00_data_toolbox.file_toolbox import create_path, set_dir
-from src.a17_idea_logic._test_util.a17_env import (
-    env_dir_setup_cleanup,
-    idea_vow_mstr_dir,
-)
+from src.a17_idea_logic._util.a17_env import env_dir_setup_cleanup, idea_vow_mstr_dir
 from src.a17_idea_logic.idea_db_tool import (
     append_df_to_excel,
     check_dataframe_column_names,

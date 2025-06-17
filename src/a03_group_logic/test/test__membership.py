@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.dict_toolbox import get_json_from_dict, x_is_json
-from src.a03_group_logic._test_util.a03_str import (
+from src.a03_group_logic._util.a03_str import (
     _credor_pool_str,
     _debtor_pool_str,
     _fund_agenda_give_str,

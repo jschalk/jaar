@@ -2,7 +2,7 @@
 # from src.a00_data_toolbox.sqlite import check_table_column_existence
 # from src.a15_vow_logic.journal_sqlstr import get_atom_hx_table_insert_sqlstr
 # from src.a15_vow_logic.vow import vowunit_shop
-# from src.a15_vow_logic._test_util.vow_env import (
+# from src.a15_vow_logic._util.vow_env import (
 #     env_dir_setup_cleanup,
 # )
 # from src.a00_data_toolbox.sqlite import get_row_count

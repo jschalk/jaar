@@ -2,7 +2,7 @@ from src.a01_term_logic.rope import create_rope_from_labels
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import awardlink_shop
 from src.a05_concept_logic.concept import conceptunit_shop
-from src.a06_plan_logic._test_util.example_plans import planunit_v001
+from src.a06_plan_logic._util.example_plans import planunit_v001
 from src.a06_plan_logic.plan import planunit_shop
 
 

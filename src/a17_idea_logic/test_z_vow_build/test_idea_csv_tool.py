@@ -6,8 +6,8 @@ from src.a06_plan_logic.plan import planunit_shop
 from src.a09_pack_logic.delta import plandelta_shop
 from src.a09_pack_logic.pack import packunit_shop
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
-from src.a17_idea_logic._test_util.a17_env import env_dir_setup_cleanup, idea_vows_dir
-from src.a17_idea_logic._test_util.idea_df_examples import (  # get_ex2_br00006_df,
+from src.a17_idea_logic._util.a17_env import env_dir_setup_cleanup, idea_vows_dir
+from src.a17_idea_logic._util.idea_df_examples import (  # get_ex2_br00006_df,
     get_ex2_br00000_df,
     get_ex2_br00001_df,
     get_ex2_br00002_df,

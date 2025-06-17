@@ -1,13 +1,13 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
-from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
-from src.a06_plan_logic._test_util.a06_str import (
+from src.a02_finance_logic._util.a02_str import owner_name_str, vow_label_str
+from src.a06_plan_logic._util.a06_str import (
     acct_name_str,
     credit_score_str,
     debt_score_str,
     plan_acctunit_str,
 )
-from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
+from src.a09_pack_logic._util.a09_str import event_int_str, face_name_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
     create_sound_and_voice_tables,
