@@ -7,9 +7,10 @@ from src.a00_data_toolbox.db_toolbox import (
 from src.a02_finance_logic._util.a02_str import vow_label_str
 from src.a09_pack_logic._util.a09_str import event_int_str, face_name_str
 from src.a15_vow_logic._util.a15_str import cumlative_minute_str, hour_label_str
-from src.a17_idea_logic._util.a17_str import brick_agg_str, idea_number_str
+from src.a17_idea_logic._util.a17_str import idea_number_str
 from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
 from src.a18_etl_toolbox._util.a18_str import (
+    brick_agg_str,
     events_brick_agg_str,
     events_brick_valid_str,
 )

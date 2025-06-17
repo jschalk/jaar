@@ -10,8 +10,8 @@ from src.a16_pidgin_logic._util.a16_str import (
     otx_rope_str,
     unknown_str_str,
 )
-from src.a17_idea_logic._util.a17_str import brick_valid_str
 from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
+from src.a18_etl_toolbox._util.a18_str import brick_valid_str
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a18_etl_toolbox.transformers import etl_brick_valid_tables_to_sound_raw_tables
 

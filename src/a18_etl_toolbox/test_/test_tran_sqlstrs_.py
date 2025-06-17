@@ -43,7 +43,7 @@ from src.a16_pidgin_logic._util.a16_str import (
     pidgin_rope_str,
     pidgin_title_str,
 )
-from src.a17_idea_logic._util.a17_str import brick_raw, idea_category_str
+from src.a17_idea_logic._util.a17_str import idea_category_str
 from src.a17_idea_logic.idea_config import (
     get_idea_config_dict,
     get_idea_numbers,
