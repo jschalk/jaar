@@ -395,8 +395,11 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[172] == "_keeps_buildable"
     assert table_sorting_priority[173] == "_all_acct_debt"
     assert table_sorting_priority[174] == "_tree_traverse_count"
+    assert table_sorting_priority[175] == "funds"
+    assert table_sorting_priority[176] == "fund_rank"
+    assert table_sorting_priority[177] == "tasks_count"
 
-    assert len(table_sorting_priority) == 175
+    assert len(table_sorting_priority) == 178
     all_args = copy_copy(atom_args)
     all_args.update(all_plan_dimen_delete_keys)
     all_args.update(vow_args)
@@ -413,6 +416,9 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     all_args.add("pidgin_event_int")
     all_args.add("error_message")
     all_args.add("world_id")
+    all_args.add("funds")  # kpi columns
+    all_args.add("fund_rank")  # kpi columns
+    all_args.add("tasks_count")  # kpi columns
     assert all_args == set(table_sorting_priority)
 
     x_no_underscoore_set = {x_arg.replace("_", "") for x_arg in table_sorting_priority}

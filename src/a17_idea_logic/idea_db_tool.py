@@ -343,14 +343,16 @@ def get_pragma_table_fetchall(table_columns):
     return pragma_table_attrs
 
 
-def save_table_to_csv(conn_or_cursor: sqlite3_Connection, vow_mstr_dir: str, tablename):
-    vowunit_sqlstr = f"""SELECT * FROM {tablename};"""
-    vowunit_rows = conn_or_cursor.execute(vowunit_sqlstr).fetchall()
-    vowunit_columns = get_table_columns(conn_or_cursor, tablename)
+def save_table_to_csv(conn_or_cursor: sqlite3_Connection, dst_dir: str, tablename: str):
+    """given a cursor object, a directory, a tablename create csv of tablename"""
+
+    select_sqlstr = f"""SELECT * FROM {tablename};"""
+    tables_rows = conn_or_cursor.execute(select_sqlstr).fetchall()
+    tables_columns = get_table_columns(conn_or_cursor, tablename)
     # vowunit_columns = [desc[0] for desc in cursor.description]
-    vowunit_df = DataFrame(vowunit_rows, columns=vowunit_columns)
-    vowunit_filename = f"{tablename}.csv"
-    save_dataframe_to_csv(vowunit_df, vow_mstr_dir, vowunit_filename)
+    table_df = DataFrame(tables_rows, columns=tables_columns)
+    table_filename = f"{tablename}.csv"
+    save_dataframe_to_csv(table_df, dst_dir, table_filename)
 
 
 def create_idea_sorted_table(

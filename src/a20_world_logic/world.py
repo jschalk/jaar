@@ -4,8 +4,6 @@ from sqlite3 import (
     Cursor as sqlite3_Cursor,
     connect as sqlite3_connect,
 )
-
-# from src.a00_data_toolbox.db_toolbox import get_db_tables
 from src.a00_data_toolbox.dict_toolbox import get_0_if_None, get_empty_set_if_None
 from src.a00_data_toolbox.file_toolbox import create_path, delete_dir, set_dir
 from src.a01_term_logic.term import EventInt, FaceName, VowLabel
@@ -43,7 +41,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_vow_ote1_agg_table_to_vow_ote1_agg_csvs,
     get_pidgin_events_by_dirs,
 )
-from src.a19_kpi_toolbox.kpi_mstr import populate_kpi_bundle
+from src.a19_kpi_toolbox.kpi_mstr import create_kpi_csvs, populate_kpi_bundle
 
 
 class WorldID(str):
@@ -163,12 +161,9 @@ class WorldUnit:
     def create_stances(self):
         create_stance0001_file(self._vow_mstr_dir)
 
-    # def create_kpi_file(self):
-    #     with sqlite3_connect(self.get_db_path()) as db_conn:
-    #         cursor = db_conn.cursor()
-    #         kpi_tables = get_db_tables(db_conn, "kpi")
-    #         for kpi_table in kpi_tables:
-    #             print(f"{kpi_table=}")
+    def create_kpi_csvs(self):
+        kpi_dir = create_path(self._vow_mstr_dir, "stances")
+        create_kpi_csvs(self.get_db_path(), kpi_dir)
 
     def get_dict(self) -> dict:
         return {

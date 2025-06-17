@@ -1,5 +1,7 @@
-from sqlite3 import Cursor as sqlite3_Cursor
+from sqlite3 import Cursor as sqlite3_Cursor, connect as sqlite3_connect
+from src.a00_data_toolbox.db_toolbox import get_db_tables
 from src.a00_data_toolbox.file_toolbox import create_path
+from src.a17_idea_logic.idea_db_tool import save_table_to_csv
 from src.a19_kpi_toolbox.kpi_sqlstrs import get_vow_kpi001_acct_nets_sqlstr
 
 
@@ -46,9 +48,13 @@ def populate_kpi_bundle(cursor: sqlite3_Cursor, bundle_id: str = None):
             create_populate_kpi001_table(cursor)
 
 
-KPI_EXCEL_FILENAME = "kpis.xlsx"
+def get_kpi_dir(vow_mstr_dir: str) -> str:
+    return create_path(vow_mstr_dir, "stances")
 
 
-def get_kpi_xlsx_path(vow_mstr_dir: str) -> str:
-    stances_dir = create_path(vow_mstr_dir, "stances")
-    return create_path(stances_dir, KPI_EXCEL_FILENAME)
+def create_kpi_csvs(db_path: str, dst_dir: str):
+    with sqlite3_connect(db_path) as db_conn:
+        cursor = db_conn.cursor()
+        kpi_tables = get_db_tables(db_conn, "kpi")
+        for kpi_table in kpi_tables:
+            save_table_to_csv(cursor, dst_dir, kpi_table)
