@@ -1,5 +1,5 @@
-from src.a02_finance_logic._test_util.a02_str import vow_label_str
-from src.a14_keep_logic._test_util.example_credorledgers import example_yao_hubunit
+from src.a02_finance_logic._util.a02_str import vow_label_str
+from src.a14_keep_logic._util.example_credorledgers import example_yao_hubunit
 from src.a14_keep_logic.rivercycle import RiverGrade, rivergrade_shop
 
 

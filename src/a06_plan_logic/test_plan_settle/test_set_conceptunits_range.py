@@ -1,6 +1,6 @@
 from src.a01_term_logic.rope import to_rope
 from src.a05_concept_logic.concept import conceptunit_shop
-from src.a06_plan_logic._test_util.example_plans import (
+from src.a06_plan_logic._util.example_plans import (
     get_planunit_with_4_levels_and_2reasons,
 )
 from src.a06_plan_logic.plan import planunit_shop

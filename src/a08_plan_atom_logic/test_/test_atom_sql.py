@@ -1,18 +1,14 @@
 from pytest import raises as pytest_raises
 from src.a00_data_toolbox.db_toolbox import get_rowdata, sqlite_connection
 from src.a01_term_logic.rope import create_rope
-from src.a06_plan_logic._test_util.a06_str import (
+from src.a06_plan_logic._util.a06_str import (
     concept_rope_str,
     fcontext_str,
     fopen_str,
     plan_concept_factunit_str,
     planunit_str,
 )
-from src.a08_plan_atom_logic._test_util.a08_str import (
-    INSERT_str,
-    UPDATE_str,
-    atom_hx_str,
-)
+from src.a08_plan_atom_logic._util.a08_str import INSERT_str, UPDATE_str, atom_hx_str
 from src.a08_plan_atom_logic.atom import get_planatom_from_rowdata, planatom_shop
 
 

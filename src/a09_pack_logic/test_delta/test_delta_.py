@@ -3,7 +3,7 @@ from src.a00_data_toolbox.dict_toolbox import x_is_json
 from src.a01_term_logic.rope import create_rope, to_rope
 from src.a03_group_logic.acct import acctunit_shop
 from src.a05_concept_logic.concept import get_default_vow_label as root_label
-from src.a06_plan_logic._test_util.a06_str import (
+from src.a06_plan_logic._util.a06_str import (
     acct_name_str,
     awardee_title_str,
     concept_rope_str,
@@ -17,13 +17,9 @@ from src.a06_plan_logic._test_util.a06_str import (
     planunit_str,
 )
 from src.a06_plan_logic.plan import planunit_shop
-from src.a08_plan_atom_logic._test_util.a08_str import (
-    DELETE_str,
-    INSERT_str,
-    UPDATE_str,
-)
+from src.a08_plan_atom_logic._util.a08_str import DELETE_str, INSERT_str, UPDATE_str
 from src.a08_plan_atom_logic.atom import planatom_shop
-from src.a09_pack_logic._test_util.example_deltas import (
+from src.a09_pack_logic._util.example_deltas import (
     get_plandelta_example1,
     get_plandelta_sue_example,
 )

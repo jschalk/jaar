@@ -12,11 +12,8 @@ from src.a12_hub_toolbox.hub_tool import (
     cellunit_save_to_dir,
     save_plan_file,
 )
-from src.a15_vow_logic._test_util.a15_env import (
-    env_dir_setup_cleanup,
-    get_module_temp_dir,
-)
-from src.a15_vow_logic._test_util.example_vows import (
+from src.a15_vow_logic._util.a15_env import env_dir_setup_cleanup, get_module_temp_dir
+from src.a15_vow_logic._util.example_vows import (
     example_casa_clean_factunit,
     example_casa_dirty_factunit,
     get_bob_mop_with_reason_planunit_example,

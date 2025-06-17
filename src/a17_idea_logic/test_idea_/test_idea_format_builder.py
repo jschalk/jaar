@@ -1,14 +1,14 @@
 from json import loads as json_loads
 from pathlib import Path
 from src.a00_data_toolbox.file_toolbox import count_files, save_json
-from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
-from src.a06_plan_logic._test_util.a06_str import (
+from src.a02_finance_logic._util.a02_str import owner_name_str, vow_label_str
+from src.a06_plan_logic._util.a06_str import (
     concept_rope_str,
     gogo_want_str,
     plan_conceptunit_str,
 )
 from src.a08_plan_atom_logic.atom_config import get_atom_config_args
-from src.a17_idea_logic._test_util.a17_str import attributes_str, dimens_str
+from src.a17_idea_logic._util.a17_str import attributes_str, dimens_str
 from src.a17_idea_logic.idea_config import (
     get_default_sorted_list,
     get_idea_config_dict,

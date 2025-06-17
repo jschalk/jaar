@@ -1,14 +1,14 @@
 from sqlite3 import connect as sqlite3_connect
-from src.a02_finance_logic._test_util.a02_str import owner_name_str, vow_label_str
-from src.a06_plan_logic._test_util.a06_str import (
+from src.a02_finance_logic._util.a02_str import owner_name_str, vow_label_str
+from src.a06_plan_logic._util.a06_str import (
     acct_name_str,
     concept_rope_str,
     credit_score_str,
     debt_score_str,
     labor_title_str,
 )
-from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
-from src.a15_vow_logic._test_util.a15_str import amount_str
+from src.a09_pack_logic._util.a09_str import event_int_str, face_name_str
+from src.a15_vow_logic._util.a15_str import amount_str
 from src.a17_idea_logic.idea_config import get_idea_config_dict
 from src.a17_idea_logic.idea_db_tool import (
     create_idea_sorted_table,

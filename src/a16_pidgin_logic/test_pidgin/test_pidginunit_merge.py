@@ -1,6 +1,6 @@
 from pytest import raises as pytest_raises
-from src.a06_plan_logic._test_util.a06_str import NameTerm_str
-from src.a16_pidgin_logic._test_util.example_pidgins import (
+from src.a06_plan_logic._util.a06_str import NameTerm_str
+from src.a16_pidgin_logic._util.example_pidgins import (
     get_clean_labelmap,
     get_clean_ropemap,
     get_suita_namemap,

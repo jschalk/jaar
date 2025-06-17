@@ -1,12 +1,12 @@
 # from src.a06_plan_logic.plan_tool import pass
-from src.a06_plan_logic._test_util.a06_str import (
+from src.a06_plan_logic._util.a06_str import (
     acct_name_str,
     group_title_str,
     plan_acct_membership_str,
     plan_acctunit_str,
 )
 from src.a06_plan_logic.plan import planunit_shop
-from src.a08_plan_atom_logic._test_util.a08_str import DELETE_str
+from src.a08_plan_atom_logic._util.a08_str import DELETE_str
 from src.a08_plan_atom_logic.atom import planatom_shop
 from src.a09_pack_logic.delta import get_minimal_plandelta, plandelta_shop
 

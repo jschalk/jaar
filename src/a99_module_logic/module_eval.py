@@ -123,7 +123,7 @@ def check_module_imports_are_ordered(imports: list[list], file_path: str, desc_n
 
 
 def get_module_str_functions(module_dir, desc_number_str) -> list[str]:
-    util_dir = create_path(module_dir, "_test_util")
+    util_dir = create_path(module_dir, "_util")
     str_util_path = create_path(util_dir, f"a{desc_number_str}_str.py")
     return get_function_names_from_file(str_util_path)
 
@@ -132,7 +132,7 @@ def get_all_str_functions() -> list:
     all_str_functions = []
     for module_desc, module_dir in get_module_descs().items():
         desc_number_str = module_desc[1:3]
-        util_dir = create_path(module_dir, "_test_util")
+        util_dir = create_path(module_dir, "_util")
         str_util_path = create_path(util_dir, f"a{desc_number_str}_str.py")
         str_functions = get_function_names_from_file(str_util_path)
         if len(str_functions) > 0:

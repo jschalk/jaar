@@ -451,7 +451,7 @@ def _get_ote1_max_past_event_int(
 
 # TODO get rid of this function
 def get_module_temp_dir():
-    return "src/a15_vow_logic/_test_util/vow_mstr"
+    return "src/a15_vow_logic/_util/vow_mstr"
 
 
 def vowunit_shop(

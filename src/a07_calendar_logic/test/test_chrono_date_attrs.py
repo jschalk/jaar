@@ -1,6 +1,6 @@
 from datetime import datetime
 from src.a06_plan_logic.plan import PlanUnit, planunit_shop
-from src.a07_calendar_logic._test_util.calendar_examples import (
+from src.a07_calendar_logic._util.calendar_examples import (
     add_time_creg_conceptunit,
     add_time_five_conceptunit,
     creg_str,

@@ -12,10 +12,7 @@ from src.a02_finance_logic.finance_config import (
     validate_fund_pool,
 )
 from src.a05_concept_logic.concept import get_default_vow_label as root_label
-from src.a12_hub_toolbox._test_util.a12_env import (
-    env_dir_setup_cleanup,
-    get_module_temp_dir,
-)
+from src.a12_hub_toolbox._util.a12_env import env_dir_setup_cleanup, get_module_temp_dir
 from src.a12_hub_toolbox.hub_path import create_owner_dir_path
 from src.a12_hub_toolbox.hubunit import HubUnit, get_keep_path, hubunit_shop
 
@@ -56,7 +53,7 @@ def test_HubUnit_RaisesError_keep_rope_DoesNotExist():
 
 def test_hubunit_shop_ReturnsObj():
     # ESTABLISH
-    x_vow_mstr_dir = "src/a15_vow_logic/_test_util"
+    x_vow_mstr_dir = "src/a15_vow_logic/_util"
     x_vow_label = "accord45"
     sue_str = "Sue"
     x_knot = "/"

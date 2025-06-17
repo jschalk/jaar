@@ -1,7 +1,7 @@
 from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import default_knot_if_None
-from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
-from src.a16_pidgin_logic._test_util.a16_str import (
+from src.a09_pack_logic._util.a09_str import event_int_str, face_name_str
+from src.a16_pidgin_logic._util.a16_str import (
     inx_knot_str,
     otx2inx_str,
     otx_knot_str,

@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a21_lobby_logic._test_util.a21_env import get_module_temp_dir
-from src.a21_lobby_logic._test_util.a21_str import (
+from src.a21_lobby_logic._util.a21_env import get_module_temp_dir
+from src.a21_lobby_logic._util.a21_str import (
     lobby_id_str,
     lobby_mstr_dir_str,
     lobbys_str,

@@ -1,6 +1,6 @@
 from os import getcwd as os_getcwd
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a08_plan_atom_logic._test_util.a08_str import (
+from src.a08_plan_atom_logic._util.a08_str import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,
@@ -8,7 +8,7 @@ from src.a08_plan_atom_logic._test_util.a08_str import (
     jvalues_str,
     normal_specs_str,
 )
-from src.a16_pidgin_logic._test_util.a16_str import (
+from src.a16_pidgin_logic._util.a16_str import (
     inx_knot_str,
     inx_label_str,
     inx_name_str,

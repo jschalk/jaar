@@ -2,8 +2,8 @@ from os.path import exists as os_path_exists
 from pandas import DataFrame
 from src.a00_data_toolbox.file_toolbox import create_path, save_file
 from src.a01_term_logic.rope import create_rope, to_rope
-from src.a06_plan_logic._test_util.a06_str import acct_name_str, rcontext_str
-from src.a16_pidgin_logic._test_util.example_pidgins import (
+from src.a06_plan_logic._util.a06_str import acct_name_str, rcontext_str
+from src.a16_pidgin_logic._util.example_pidgins import (
     get_casa_maison_pidginunit_set_by_label,
     get_casa_maison_rope_inx_dt,
     get_casa_maison_rope_otx_dt,
@@ -16,7 +16,7 @@ from src.a16_pidgin_logic._test_util.example_pidgins import (
 )
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
 from src.a16_pidgin_logic.pidgin_config import get_pidgin_filename
-from src.a17_idea_logic._test_util.a17_env import (
+from src.a17_idea_logic._util.a17_env import (
     env_dir_setup_cleanup,
     idea_vows_dir as get_example_face_dir,
 )

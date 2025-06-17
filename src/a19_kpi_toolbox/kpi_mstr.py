@@ -2,5 +2,38 @@ from sqlite3 import Cursor as sqlite3_Cursor
 from src.a19_kpi_toolbox.kpi_sqlstrs import get_vow_kpi001_acct_nets_sqlstr
 
 
-def create_populate_kpi001_table(cursor: sqlite3_Cursor):
+def create_kpi001_table(cursor: sqlite3_Cursor):
     cursor.execute(get_vow_kpi001_acct_nets_sqlstr())
+
+
+def get_default_kpi_bundle() -> str:
+    return "default_kpi_bundle"
+
+
+def get_all_kpi_functions() -> dict[str,]:
+    """
+    Returns a dict of all KPI ids and their functions.
+    """
+    return {"vow_kpi001_acct_nets": create_kpi001_table}
+
+
+def get_bundles_config() -> dict[str]:
+    """
+    Returns a set of all KPI strings.
+    """
+    return {"default_kpi_bundle": {"vow_kpi001_acct_nets"}}
+
+
+def get_kpi_set_from_bundle(bundle_id: str = None) -> set[str]:
+    """
+    Returns a set of KPI strings from the specified bundle.
+    """
+    bundles_config = get_bundles_config()
+    if bundle_id is None:
+        bundle_id = "default_kpi_bundle"
+
+    return bundles_config.get(bundle_id, set())
+
+
+def create_populate_kpi_bundle(cursor: sqlite3_Cursor, bundle_id: str):
+    pass

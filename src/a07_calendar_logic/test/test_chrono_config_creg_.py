@@ -4,7 +4,7 @@ from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import reasonunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_plan_logic.plan import planunit_shop
-from src.a07_calendar_logic._test_util.a07_str import (
+from src.a07_calendar_logic._util.a07_str import (
     c100_str,
     c400_clean_str,
     c400_leap_str,
@@ -20,7 +20,7 @@ from src.a07_calendar_logic._test_util.a07_str import (
     yr4_clean_str,
     yr4_leap_str,
 )
-from src.a07_calendar_logic._test_util.calendar_examples import (
+from src.a07_calendar_logic._util.calendar_examples import (
     add_time_creg_conceptunit,
     add_time_five_conceptunit,
     creg_hour_int_label,

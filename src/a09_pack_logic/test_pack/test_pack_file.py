@@ -1,12 +1,12 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, open_json
-from src.a02_finance_logic._test_util.a02_str import owner_name_str
-from src.a09_pack_logic._test_util.a09_env import (
+from src.a02_finance_logic._util.a02_str import owner_name_str
+from src.a09_pack_logic._util.a09_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as vows_dir,
 )
-from src.a09_pack_logic._test_util.a09_str import face_name_str
-from src.a09_pack_logic._test_util.example_atoms import (
+from src.a09_pack_logic._util.a09_str import face_name_str
+from src.a09_pack_logic._util.example_atoms import (
     get_atom_example_conceptunit_ball,
     get_atom_example_conceptunit_knee,
     get_atom_example_conceptunit_sports,

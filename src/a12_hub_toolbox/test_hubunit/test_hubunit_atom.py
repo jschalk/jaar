@@ -1,11 +1,11 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, get_dir_file_strs
 from src.a05_concept_logic.concept import get_default_vow_label as vow_label
-from src.a12_hub_toolbox._test_util.a12_env import (
+from src.a12_hub_toolbox._util.a12_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as vow_mstr_dir,
 )
-from src.a12_hub_toolbox._test_util.example_hub_atoms import (
+from src.a12_hub_toolbox._util.example_hub_atoms import (
     get_atom_example_conceptunit_ball,
     get_atom_example_conceptunit_knee,
     get_atom_example_conceptunit_sports,

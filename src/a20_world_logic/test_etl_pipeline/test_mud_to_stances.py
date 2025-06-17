@@ -3,18 +3,18 @@ from pandas import DataFrame
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.a00_data_toolbox.file_toolbox import count_dirs_files, create_path, save_file
-from src.a02_finance_logic._test_util.a02_str import (
+from src.a02_finance_logic._util.a02_str import (
     amount_str,
-    celldepth_str,
     bud_time_str,
+    celldepth_str,
     owner_name_str,
     quota_str,
     tran_time_str,
     vow_label_str,
 )
-from src.a06_plan_logic._test_util.a06_str import acct_name_str
-from src.a09_pack_logic._test_util.a09_str import event_int_str, face_name_str
-from src.a12_hub_toolbox._test_util.a12_str import vow_ote1_agg_str
+from src.a06_plan_logic._util.a06_str import acct_name_str
+from src.a09_pack_logic._util.a09_str import event_int_str, face_name_str
+from src.a12_hub_toolbox._util.a12_str import vow_ote1_agg_str
 from src.a12_hub_toolbox.hub_path import (
     create_bud_acct_mandate_ledger_path as bud_mandate,
     create_event_all_pack_path,
@@ -24,18 +24,18 @@ from src.a12_hub_toolbox.hub_path import (
     create_vow_json_path,
     create_vow_ote1_csv_path,
 )
-from src.a15_vow_logic._test_util.a15_str import cumlative_minute_str, hour_label_str
-from src.a16_pidgin_logic._test_util.a16_str import inx_name_str, otx_name_str
+from src.a15_vow_logic._util.a15_str import cumlative_minute_str, hour_label_str
+from src.a16_pidgin_logic._util.a16_str import inx_name_str, otx_name_str
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
-from src.a18_etl_toolbox._test_util.a18_str import (
+from src.a18_etl_toolbox._util.a18_str import (
     events_brick_agg_str,
     events_brick_valid_str,
     vow_acct_nets_str,
     vow_event_time_agg_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
-from src.a19_kpi_toolbox._test_util.a19_str import vow_kpi001_acct_nets_str
-from src.a20_world_logic._test_util.a20_env import (
+from src.a19_kpi_toolbox._util.a19_str import vow_kpi001_acct_nets_str
+from src.a20_world_logic._util.a20_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as worlds_dir,
 )
@@ -136,6 +136,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
         assert not db_table_exists(cursor, vow_ote1_agg_str())
         assert not db_table_exists(cursor, plnacct_job)
         assert not db_table_exists(cursor, vow_acct_nets_str())
+        assert not db_table_exists(cursor, vow_kpi001_acct_nets_str())
 
         # # create planunits
         # self.plan_tables_to_event_plan_csvs(cursor)
@@ -194,6 +195,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
         assert get_row_count(cursor, vow_acct_nets_str()) == 0
         # assert get_row_count(cursor, vow_event_time_agg_str()) == 0
         # assert get_row_count(cursor, vow_ote1_agg_tablename) == 0
+        # assert get_row_count(cursor, vow_kpi001_acct_nets_str()) == 1
 
 
 def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
@@ -304,6 +306,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
         assert not db_table_exists(cursor, vow_ote1_agg_str())
         assert not os_path_exists(sue37_mandate_path)
         assert not db_table_exists(cursor, vow_acct_nets_str())
+        assert not db_table_exists(cursor, vow_kpi001_acct_nets_str())
         # self.vow_agg_tables_to_vow_ote1_agg(cursor)
 
         # # create planunits
@@ -348,6 +351,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
         print(f"{sue37_mandate_path=}")
         assert os_path_exists(sue37_mandate_path)
         assert get_row_count(cursor, vow_acct_nets_str()) == 1
+        # assert get_row_count(cursor, vow_kpi001_acct_nets_str()) == 1
 
 
 def test_WorldUnit_mud_to_clarity_with_cursor_Scenario2_PopulateVowTranBook(

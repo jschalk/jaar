@@ -7,7 +7,7 @@ from src.a04_reason_logic.reason_concept import (
 )
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a05_concept_logic.healer import healerlink_shop
-from src.a06_plan_logic._test_util.example_plans import (
+from src.a06_plan_logic._util.example_plans import (
     from_list_get_active,
     get_planunit_with7amCleanTableReason,
     get_planunit_with_4_levels_and_2reasons,

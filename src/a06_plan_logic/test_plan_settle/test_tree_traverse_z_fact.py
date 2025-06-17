@@ -1,7 +1,7 @@
 from pytest import raises as pytest_raises
 from src.a04_reason_logic.reason_concept import factheir_shop, factunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
-from src.a06_plan_logic._test_util.example_plans import (
+from src.a06_plan_logic._util.example_plans import (
     get_planunit_1Chore_1CE0MinutesReason_1Fact,
 )
 from src.a06_plan_logic.plan import planunit_shop

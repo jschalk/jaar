@@ -14,10 +14,7 @@ from src.a00_data_toolbox.file_toolbox import (
     open_json,
     save_file,
 )
-from src.a15_vow_logic._test_util.a15_env import (
-    env_dir_setup_cleanup,
-    get_module_temp_dir,
-)
+from src.a15_vow_logic._util.a15_env import env_dir_setup_cleanup, get_module_temp_dir
 from src.a15_vow_logic.vow import VowUnit, vowunit_shop
 
 
