@@ -17,7 +17,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
 )
 from src.a19_kpi_toolbox._util.a19_str import vow_kpi001_acct_nets_str
 from src.a19_kpi_toolbox.kpi_mstr import (
-    create_kpi001_table,
+    create_populate_kpi001_table,
     get_all_kpi_functions,
     get_bundles_config,
     get_default_kpi_bundle,
@@ -35,7 +35,9 @@ def test_get_all_kpi_functions_ReturnsObj():
 
     assert get_all_kpi_functions() is not None, "all_kpi_set should be defined"
     assert len(get_all_kpi_functions()) == 1
-    assert get_all_kpi_functions() == {vow_kpi001_acct_nets_str(): create_kpi001_table}
+    assert get_all_kpi_functions() == {
+        vow_kpi001_acct_nets_str(): create_populate_kpi001_table
+    }
 
 
 def test_get_bundles_config_ReturnsObj():

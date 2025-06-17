@@ -195,7 +195,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
         assert get_row_count(cursor, vow_acct_nets_str()) == 0
         # assert get_row_count(cursor, vow_event_time_agg_str()) == 0
         # assert get_row_count(cursor, vow_ote1_agg_tablename) == 0
-        # assert get_row_count(cursor, vow_kpi001_acct_nets_str()) == 1
+        assert get_row_count(cursor, vow_kpi001_acct_nets_str()) == 0
 
 
 def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
@@ -351,7 +351,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
         print(f"{sue37_mandate_path=}")
         assert os_path_exists(sue37_mandate_path)
         assert get_row_count(cursor, vow_acct_nets_str()) == 1
-        # assert get_row_count(cursor, vow_kpi001_acct_nets_str()) == 1
+        assert get_row_count(cursor, vow_kpi001_acct_nets_str()) == 1
 
 
 def test_WorldUnit_mud_to_clarity_with_cursor_Scenario2_PopulateVowTranBook(

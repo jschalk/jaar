@@ -111,7 +111,7 @@ def test_StrFunctionsAreAssertTested():
             )
 
 
-def test_TestAreInCorrectFolderStructure():
+def test_TestsAreInCorrectFolderStructure():
     # sourcery skip: no-loop-in-tests
     # sourcery skip: no-conditionals-in-tests
     # ESTABLISH / WHEN / THEN
