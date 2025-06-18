@@ -3,11 +3,20 @@ from src.a07_calendar_logic.calendar_markdown import (
     CalendarGrid,
     MonthGridRow,
     MonthGridUnit,
+    center_word,
 )
 from src.a07_calendar_logic.chrono import (
     get_default_timeline_config_dict,
     timelineunit_shop,
 )
+
+
+def test_center_word_ReturnObj():
+    # ESTABLISH / WHEN / THEN
+    assert center_word(10, "fizz") == "   fizz   "
+    assert center_word(15, "fizz") == "      fizz     "
+    assert center_word(6, "fizz") == " fizz "
+    assert center_word(6, "fizzbuzz") == "fizzbu"
 
 
 def test_MonthGridUnit_Exists():

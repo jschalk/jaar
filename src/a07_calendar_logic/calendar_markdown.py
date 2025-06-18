@@ -1,7 +1,10 @@
 from copy import copy as copy_copy
 from dataclasses import dataclass
-from math import ceil as roundup_math
 from src.a07_calendar_logic.chrono import TimeLineUnit, timelineunit_shop
+
+
+def center_word(length, word):
+    return word[:length] if len(word) > length else word.center(length)
 
 
 @dataclass
@@ -143,9 +146,3 @@ class CalendarGrid:
             markdown_str += monthgridrow.markdown_str()
             markdown_str += "\n"
         return markdown_str[:-1]
-
-
-def center_word(length, word):
-    if len(word) > length:
-        raise ValueError("Word is longer than the specified length.")
-    return word.center(length)
