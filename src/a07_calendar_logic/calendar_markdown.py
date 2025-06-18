@@ -84,31 +84,26 @@ class CalendarGrid:
     week_length: int = None
     monthgridrow_length: int = None
     month_char_width: int = None
-    max_md_width: int = 84
+    max_md_width: int = 84  # default width
     display_md_width: int = None
 
     def create_2char_weekday_list(self, display_init_day: str) -> list[str]:
         orig_weekdays = copy_copy(self.timelineunit.weekdays_config)
-        display_index = 0
-        for x_count, weekday in enumerate(orig_weekdays):
-            if weekday == display_init_day:
-                display_index = x_count
-
-        weekday_list = [
-            orig_weekdays[weekday_index]
-            for weekday_index in range(display_index, len(orig_weekdays))
-        ]
-        weekday_list.extend(
-            orig_weekdays[weekday_index] for weekday_index in range(display_index)
-        )
-
-        return [weekday[:2] for weekday in weekday_list]
+        display_index = orig_weekdays.index(display_init_day)
+        back_range = range(display_index, len(orig_weekdays))
+        front_range = range(display_index)
+        new_weekdays = [orig_weekdays[weekday_index] for weekday_index in back_range]
+        new_weekdays.extend(orig_weekdays[wd_index] for wd_index in front_range)
+        return [weekday[:2] for weekday in new_weekdays]
 
     def set_timelineunit(self, display_init_day: str, year_init_weekday: str):
         self.timelineunit = timelineunit_shop(self.timeline_config)
         self.week_length = len(self.timelineunit.weekdays_config)
+        # set the expected month_char_width with 5 extra charcters for space
         self.month_char_width = (self.week_length * 3) + 5
         self.monthgridrow_length = int(self.max_md_width / self.month_char_width)
+        # set the display_md_width to month_char_width * columns minus unnessary spaces on right
+        # substract 6 spaces because intermediary distance is 5 and each month number has additional space
         self.display_md_width = self.monthgridrow_length * self.month_char_width - 6
         self.monthgridrows = []
         x_monthgridrow = MonthGridRow([])
