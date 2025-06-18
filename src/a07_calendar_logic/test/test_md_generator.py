@@ -277,6 +277,7 @@ def test_CalendarGrid_Exists():
     assert not x_calendargrid.month_char_width
     assert not x_calendargrid.monthgridrow_length
     assert not x_calendargrid.display_md_width
+    assert not x_calendargrid.display_init_day
     assert x_calendargrid.max_md_width == 84
 
 
@@ -284,11 +285,11 @@ def test_CalendarGrid_create_2char_weekday_list_ReturnObj():
     # ESTABLISH
     creg_config = get_default_timeline_config_dict()
     creg_calendergrid = CalendarGrid(timeline_config=creg_config)
-    creg_calendergrid.set_timelineunit("Monday", "Tuesday")
-    display_init_day = "Monday"
+    creg_calendergrid.display_init_day = "Monday"
+    creg_calendergrid.set_timelineunit("Tuesday")
 
     # WHEN
-    weekday_2char_list = creg_calendergrid.create_2char_weekday_list(display_init_day)
+    weekday_2char_list = creg_calendergrid.create_2char_weekday_list()
 
     # THEN
     expected_weekday_2char_abvs = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
@@ -299,12 +300,13 @@ def test_CalendarGrid_set_timelineunit_SetsAttr():
     # ESTABLISH
     creg_config = get_default_timeline_config_dict()
     creg_calendergrid = CalendarGrid(timeline_config=creg_config)
-    x_weekday_2char_abvs = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
     monday_str = "Monday"
+    creg_calendergrid.display_init_day = monday_str
+    x_weekday_2char_abvs = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
     assert not creg_calendergrid.timelineunit
 
     # WHEN
-    creg_calendergrid.set_timelineunit(monday_str, "Tuesday")
+    creg_calendergrid.set_timelineunit("Tuesday")
 
     # THEN
     expected_timelineunit = timelineunit_shop(creg_config)
@@ -337,7 +339,7 @@ def test_CalendarGrid_create_markdown_ReturnsObj_Scernario0_creg_config():
     # ESTABLISH
     creg_config = get_default_timeline_config_dict()
     creg_calendergrid = CalendarGrid(timeline_config=creg_config)
-    creg_calendergrid.set_timelineunit("Monday", "Tuesday")
+    creg_calendergrid.display_init_day = "Monday"
     year_int = 2024
 
     # WHEN
@@ -350,45 +352,44 @@ def test_CalendarGrid_create_markdown_ReturnsObj_Scernario0_creg_config():
 
        March                     April                      May         
 Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su
-    1  2  3  4  5  6                   1  2  3                         1
- 7  8  9 10 11 12 13       4  5  6  7  8  9 10       2  3  4  5  6  7  8
-14 15 16 17 18 19 20      11 12 13 14 15 16 17       9 10 11 12 13 14 15
-21 22 23 24 25 26 27      18 19 20 21 22 23 24      16 17 18 19 20 21 22
-28 29 30 31               25 26 27 28 29 30         23 24 25 26 27 28 29
-                                                    30 31               
+             1  2  3       1  2  3  4  5  6  7             1  2  3  4  5
+ 4  5  6  7  8  9 10       8  9 10 11 12 13 14       6  7  8  9 10 11 12
+11 12 13 14 15 16 17      15 16 17 18 19 20 21      13 14 15 16 17 18 19
+18 19 20 21 22 23 24      22 23 24 25 26 27 28      20 21 22 23 24 25 26
+25 26 27 28 29 30 31      29 30                     27 28 29 30 31      
 
         June                      July                     August       
 Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su
-       1  2  3  4  5                   1  2  3       1  2  3  4  5  6  7
- 6  7  8  9 10 11 12       4  5  6  7  8  9 10       8  9 10 11 12 13 14
-13 14 15 16 17 18 19      11 12 13 14 15 16 17      15 16 17 18 19 20 21
-20 21 22 23 24 25 26      18 19 20 21 22 23 24      22 23 24 25 26 27 28
-27 28 29 30               25 26 27 28 29 30 31      29 30 31            
+                1  2       1  2  3  4  5  6  7                1  2  3  4
+ 3  4  5  6  7  8  9       8  9 10 11 12 13 14       5  6  7  8  9 10 11
+10 11 12 13 14 15 16      15 16 17 18 19 20 21      12 13 14 15 16 17 18
+17 18 19 20 21 22 23      22 23 24 25 26 27 28      19 20 21 22 23 24 25
+24 25 26 27 28 29 30      29 30 31                  26 27 28 29 30 31   
 
      September                  October                   November      
 Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su
-          1  2  3  4                      1  2          1  2  3  4  5  6
- 5  6  7  8  9 10 11       3  4  5  6  7  8  9       7  8  9 10 11 12 13
-12 13 14 15 16 17 18      10 11 12 13 14 15 16      14 15 16 17 18 19 20
-19 20 21 22 23 24 25      17 18 19 20 21 22 23      21 22 23 24 25 26 27
-26 27 28 29 30            24 25 26 27 28 29 30      28 29 30            
-                          31                                            
+                   1          1  2  3  4  5  6                   1  2  3
+ 2  3  4  5  6  7  8       7  8  9 10 11 12 13       4  5  6  7  8  9 10
+ 9 10 11 12 13 14 15      14 15 16 17 18 19 20      11 12 13 14 15 16 17
+16 17 18 19 20 21 22      21 22 23 24 25 26 27      18 19 20 21 22 23 24
+23 24 25 26 27 28 29      28 29 30 31               25 26 27 28 29 30   
+30                                                                      
 
       December                  January                   February      
 Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su
-          1  2  3  4                         1             1  2  3  4  5
- 5  6  7  8  9 10 11       2  3  4  5  6  7  8       6  7  8  9 10 11 12
-12 13 14 15 16 17 18       9 10 11 12 13 14 15      13 14 15 16 17 18 19
-19 20 21 22 23 24 25      16 17 18 19 20 21 22      20 21 22 23 24 25 26
-26 27 28 29 30 31         23 24 25 26 27 28 29      27 28               
-                          30 31                                         """
+                   1             1  2  3  4  5                      1  2
+ 2  3  4  5  6  7  8       6  7  8  9 10 11 12       3  4  5  6  7  8  9
+ 9 10 11 12 13 14 15      13 14 15 16 17 18 19      10 11 12 13 14 15 16
+16 17 18 19 20 21 22      20 21 22 23 24 25 26      17 18 19 20 21 22 23
+23 24 25 26 27 28 29      27 28 29 30 31            24 25 26 27 28      
+30 31                                                                   """
     assert cal_markdown == expected_calendar_markdown
 
 
 def test_CalendarGrid_create_markdown_ReturnsObj_Scernario1_five_config():
     # ESTABLISH
     five_calendergrid = CalendarGrid(timeline_config=get_five_config())
-    five_calendergrid.set_timelineunit("Anaday", "Chiday")
+    five_calendergrid.display_init_day = "Anaday"
     year_int = 5224
 
     # WHEN

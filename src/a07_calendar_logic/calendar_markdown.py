@@ -1,6 +1,10 @@
 from copy import copy as copy_copy
 from dataclasses import dataclass
-from src.a07_calendar_logic.chrono import TimeLineUnit, timelineunit_shop
+from src.a07_calendar_logic.chrono import (
+    TimeLineUnit,
+    get_first_weekday_index_of_year,
+    timelineunit_shop,
+)
 
 
 def center_word(length, word):
@@ -89,17 +93,18 @@ class CalendarGrid:
     month_char_width: int = None
     max_md_width: int = 84  # default width
     display_md_width: int = None
+    display_init_day: str = None
 
-    def create_2char_weekday_list(self, display_init_day: str) -> list[str]:
+    def create_2char_weekday_list(self) -> list[str]:
         orig_weekdays = copy_copy(self.timelineunit.weekdays_config)
-        display_index = orig_weekdays.index(display_init_day)
+        display_index = orig_weekdays.index(self.display_init_day)
         back_range = range(display_index, len(orig_weekdays))
         front_range = range(display_index)
         new_weekdays = [orig_weekdays[weekday_index] for weekday_index in back_range]
         new_weekdays.extend(orig_weekdays[wd_index] for wd_index in front_range)
         return [weekday[:2] for weekday in new_weekdays]
 
-    def set_timelineunit(self, display_init_day: str, year_init_weekday: str):
+    def set_timelineunit(self, year_init_weekday: str):
         self.timelineunit = timelineunit_shop(self.timeline_config)
         self.week_length = len(self.timelineunit.weekdays_config)
         # set the expected month_char_width with 5 extra charcters for space
@@ -112,7 +117,7 @@ class CalendarGrid:
         x_monthgridrow = MonthGridRow([])
         previous_cumulative_days = 0
         x_monthday_distortion = self.timelineunit.monthday_distortion
-        x_weekday_2char_list = self.create_2char_weekday_list(display_init_day)
+        x_weekday_2char_list = self.create_2char_weekday_list()
         year_init_2char = year_init_weekday[:2]
         month_first_weekday_index = x_weekday_2char_list.index(year_init_2char)
 
@@ -139,6 +144,11 @@ class CalendarGrid:
             x_monthgridrow = MonthGridRow([])
 
     def create_markdown(self, year: int) -> str:
+        self.timelineunit = timelineunit_shop(self.timeline_config)
+        self.week_length = len(self.timelineunit.weekdays_config)
+        first_weekday_index = get_first_weekday_index_of_year(self.week_length, year)
+        first_weekday_str = self.timelineunit.weekdays_config[first_weekday_index]
+        self.set_timelineunit(first_weekday_str)
         markdown_str = f"""
 {center_word(self.display_md_width, f"Year {year}")}
 """
