@@ -239,7 +239,7 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_With_vowhour_Attrs_Scenario0(
             f"INSERT INTO {vowunit_v_agg_tablename} (vow_label) VALUES ('{a23_str}');"
         )
         cursor.execute(vowunit_insert_sqlstr)
-        vowpayy_insert_sqlstr = f"""INSERT INTO {vowhour_v_agg_tablename} (vow_label, cumlative_minute, hour_label)
+        vowpayy_insert_sqlstr = f"""INSERT INTO {vowhour_v_agg_tablename} (vow_label, cumulative_minute, hour_label)
 VALUES
   ('{a23_str}', {hour3_min}, '{hour3_label}')
 , ('{a23_str}', {hour4_min}, '{hour4_label}')
@@ -275,7 +275,7 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_With_vowmont_Attrs_Scenario0(
             f"INSERT INTO {vowunit_v_agg_tablename} (vow_label) VALUES ('{a23_str}');"
         )
         cursor.execute(vowunit_insert_sqlstr)
-        vowpayy_insert_sqlstr = f"""INSERT INTO {vowmont_v_agg_tablename} (vow_label, cumlative_day, month_label)
+        vowpayy_insert_sqlstr = f"""INSERT INTO {vowmont_v_agg_tablename} (vow_label, cumulative_day, month_label)
 VALUES
   ('{a23_str}', {day111_min}, '{month111_label}')
 , ('{a23_str}', {day222_min}, '{month222_label}')
@@ -503,7 +503,7 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_Scenario3_vowhour():
             f"INSERT INTO {vowunit_v_agg_tablename} (vow_label) VALUES ('{a23_str}');"
         )
         cursor.execute(vowunit_insert_sqlstr)
-        vowpayy_insert_sqlstr = f"""INSERT INTO {vowhour_v_agg_tablename} (vow_label, cumlative_minute, hour_label)
+        vowpayy_insert_sqlstr = f"""INSERT INTO {vowhour_v_agg_tablename} (vow_label, cumulative_minute, hour_label)
 VALUES
   ('{a23_str}', {hour3_min}, '{hour3_label}')
 , ('{a23_str}', {hour4_min}, '{hour4_label}')
@@ -538,7 +538,7 @@ def test_get_vow_dict_from_voice_tables_ReturnsObj_Scenario4_vowmont():
             f"INSERT INTO {vowunit_v_agg_tablename} (vow_label) VALUES ('{a23_str}');"
         )
         cursor.execute(vowunit_insert_sqlstr)
-        vowpayy_insert_sqlstr = f"""INSERT INTO {vowmont_v_agg_tablename} (vow_label, cumlative_day, month_label)
+        vowpayy_insert_sqlstr = f"""INSERT INTO {vowmont_v_agg_tablename} (vow_label, cumulative_day, month_label)
 VALUES
   ('{a23_str}', {day111_min}, '{month111_label}')
 , ('{a23_str}', {day222_min}, '{month222_label}')

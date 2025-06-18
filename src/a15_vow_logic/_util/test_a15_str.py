@@ -1,6 +1,6 @@
 from src.a15_vow_logic._util.a15_str import (
     brokerunits_str,
-    cumlative_minute_str,
+    cumulative_minute_str,
     hour_label_str,
     job_listen_rotations_str,
     month_label_str,
@@ -22,7 +22,7 @@ def test_str_functions_ReturnsObj():
     assert paybook_str() == "paybook"
     assert month_label_str() == "month_label"
     assert hour_label_str() == "hour_label"
-    assert cumlative_minute_str() == "cumlative_minute"
+    assert cumulative_minute_str() == "cumulative_minute"
     assert weekday_label_str() == "weekday_label"
     assert weekday_order_str() == "weekday_order"
     assert vowunit_str() == "vowunit"

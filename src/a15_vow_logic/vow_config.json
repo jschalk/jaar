@@ -45,7 +45,7 @@
     },
     "vow_timeline_hour": {
         "jkeys": {
-            "cumlative_minute": {
+            "cumulative_minute": {
                 "class_type": "int"
             },
             "vow_label": {
@@ -61,7 +61,7 @@
     },
     "vow_timeline_month": {
         "jkeys": {
-            "cumlative_day": {
+            "cumulative_day": {
                 "class_type": "int"
             },
             "vow_label": {

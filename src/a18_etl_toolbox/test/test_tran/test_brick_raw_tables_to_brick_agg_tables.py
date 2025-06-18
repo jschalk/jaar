@@ -6,7 +6,7 @@ from src.a00_data_toolbox.db_toolbox import (
 )
 from src.a02_finance_logic._util.a02_str import vow_label_str
 from src.a09_pack_logic._util.a09_str import event_int_str, face_name_str
-from src.a15_vow_logic._util.a15_str import cumlative_minute_str, hour_label_str
+from src.a15_vow_logic._util.a15_str import cumulative_minute_str, hour_label_str
 from src.a17_idea_logic._util.a17_str import brick_raw_str
 from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
 from src.a18_etl_toolbox._util.a18_str import brick_agg_str
@@ -27,7 +27,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario0_Gr
         event_int_str(),
         face_name_str(),
         vow_label_str(),
-        cumlative_minute_str(),
+        cumulative_minute_str(),
         hour_label_str(),
     ]
     with sqlite3_connect(":memory:") as db_conn:
@@ -37,7 +37,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario0_Gr
   {event_int_str()}
 , {face_name_str()}
 , {vow_label_str()}
-, {cumlative_minute_str()}
+, {cumulative_minute_str()}
 , {hour_label_str()}
 )"""
         values_clause = f"""
@@ -70,7 +70,7 @@ VALUES
         select_agg_sqlstr = f"""
 SELECT * 
 FROM {agg_br00003_tablename} 
-ORDER BY {event_int_str()}, {cumlative_minute_str()};"""
+ORDER BY {event_int_str()}, {cumulative_minute_str()};"""
         cursor.execute(select_agg_sqlstr)
 
         rows = cursor.fetchall()
@@ -102,7 +102,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario1_Gr
         event_int_str(),
         face_name_str(),
         vow_label_str(),
-        cumlative_minute_str(),
+        cumulative_minute_str(),
         hour_label_str(),
     ]
     with sqlite3_connect(":memory:") as db_conn:
@@ -112,7 +112,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario1_Gr
   {event_int_str()}
 , {face_name_str()}
 , {vow_label_str()}
-, {cumlative_minute_str()}
+, {cumulative_minute_str()}
 , {hour_label_str()}
 )"""
         values_clause = f"""

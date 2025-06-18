@@ -18,8 +18,8 @@ def creg_str() -> str:
     return "creg"
 
 
-def cumlative_day_str() -> str:
-    return "cumlative_day"
+def cumulative_day_str() -> str:
+    return "cumulative_day"
 
 
 def day_str() -> str:

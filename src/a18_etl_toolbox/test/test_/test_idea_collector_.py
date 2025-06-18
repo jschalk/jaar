@@ -2,7 +2,7 @@ from pandas import DataFrame
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a02_finance_logic._util.a02_str import vow_label_str
 from src.a09_pack_logic._util.a09_str import event_int_str, face_name_str
-from src.a15_vow_logic._util.a15_str import cumlative_minute_str, hour_label_str
+from src.a15_vow_logic._util.a15_str import cumulative_minute_str, hour_label_str
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
 from src.a18_etl_toolbox._util.a18_env import env_dir_setup_cleanup, get_module_temp_dir
 from src.a18_etl_toolbox.idea_collector import (
@@ -116,7 +116,7 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
     idea_columns = [
         event_int_str(),
         face_name_str(),
-        cumlative_minute_str(),
+        cumulative_minute_str(),
         vow_label_str(),
         hour_label_str(),
     ]
@@ -155,7 +155,7 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     idea_columns = [
         event_int_str(),
         face_name_str(),
-        cumlative_minute_str(),
+        cumulative_minute_str(),
         vow_label_str(),
         hour_label_str(),
     ]
@@ -164,7 +164,7 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     incomplete_idea_columns = [
         event_int_str(),
         face_name_str(),
-        cumlative_minute_str(),
+        cumulative_minute_str(),
         vow_label_str(),
     ]
     incom_row1 = [event1, sue_str, minute_360, accord23_str]

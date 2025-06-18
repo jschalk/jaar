@@ -7,7 +7,7 @@ from src.a07_calendar_logic.chrono import TimeLineUnit, timelineunit_shop
 @dataclass
 class MonthGridUnit:
     name: str = None
-    cumlative_days: str = None
+    cumulative_days: str = None
     first_weekday: int = None
     week_length: int = None
     month_days_int: int = None
@@ -112,23 +112,25 @@ class CalendarGrid:
         self.display_md_width = self.monthgridrow_length * self.month_char_width - 6
         self.monthgridrows = []
         x_monthgridrow = MonthGridRow([])
-        previous_cumlative_days = 0
+        previous_cumulative_days = 0
         x_monthday_distortion = self.timelineunit.monthday_distortion
         x_weekday_2char_list = self.create_2char_weekday_list(display_init_day)
         year_init_2char = year_init_weekday[:2]
         month_first_weekday_index = x_weekday_2char_list.index(year_init_2char)
 
-        for month_cumlative_list in self.timelineunit.months_config:
-            month_str = month_cumlative_list[0]
-            cumlative_days = month_cumlative_list[1]
-            new_monthgridunit = MonthGridUnit(month_str, cumlative_days)
+        for month_cumulative_list in self.timelineunit.months_config:
+            month_str = month_cumulative_list[0]
+            cumulative_days = month_cumulative_list[1]
+            new_monthgridunit = MonthGridUnit(month_str, cumulative_days)
             new_monthgridunit.week_length = self.week_length
-            new_monthgridunit.month_days_int = cumlative_days - previous_cumlative_days
+            new_monthgridunit.month_days_int = (
+                cumulative_days - previous_cumulative_days
+            )
             new_monthgridunit.monthday_distortion = x_monthday_distortion
             new_monthgridunit.weekday_2char_abvs = x_weekday_2char_list
             new_monthgridunit.first_weekday = month_first_weekday_index
             month_first_weekday_index = new_monthgridunit.get_next_month_first_weekday()
-            previous_cumlative_days = cumlative_days
+            previous_cumulative_days = cumulative_days
             # new_monthgridunit.week_length = self.week_length
             x_monthgridrow.months.append(new_monthgridunit)
             if len(x_monthgridrow.months) == self.monthgridrow_length:

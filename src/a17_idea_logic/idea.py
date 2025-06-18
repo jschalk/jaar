@@ -286,7 +286,7 @@ def _get_vow_hours_dict(br00003_df: DataFrame) -> dict[str, list[str, str]]:
     for y_vow_label in br00003_df.vow_label.unique():
         query_str = f"vow_label == '{y_vow_label}'"
         x_hours_list = [
-            [row["hour_label"], row["cumlative_minute"]]
+            [row["hour_label"], row["cumulative_minute"]]
             for index, row in br00003_df.query(query_str).iterrows()
         ]
         vow_hours_dict[y_vow_label] = x_hours_list
@@ -298,7 +298,7 @@ def _get_vow_months_dict(br00004_df: DataFrame) -> dict[str, list[str, str]]:
     for y_vow_label in br00004_df.vow_label.unique():
         query_str = f"vow_label == '{y_vow_label}'"
         x_months_list = [
-            [row["month_label"], row["cumlative_day"]]
+            [row["month_label"], row["cumulative_day"]]
             for index, row in br00004_df.query(query_str).iterrows()
         ]
         vow_months_dict[y_vow_label] = x_months_list

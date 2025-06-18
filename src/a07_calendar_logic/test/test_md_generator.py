@@ -16,7 +16,7 @@ def test_MonthGridUnit_Exists():
 
     # THEN
     assert not x_monthgridunit.name
-    assert not x_monthgridunit.cumlative_days
+    assert not x_monthgridunit.cumulative_days
     assert not x_monthgridunit.first_weekday
     assert not x_monthgridunit.week_length
     assert not x_monthgridunit.month_days_int
@@ -308,7 +308,7 @@ def test_CalendarGrid_set_timelineunit_SetsAttr():
     assert len(creg_calendergrid.monthgridrows[0].months) == 3
     monthgridunit0 = creg_calendergrid.monthgridrows[0].months[0]
     assert monthgridunit0.name == "March"
-    assert monthgridunit0.cumlative_days == 31
+    assert monthgridunit0.cumulative_days == 31
     assert monthgridunit0.month_days_int == 31
     assert monthgridunit0.week_length == 7
     assert monthgridunit0.monthday_distortion == 1
@@ -316,7 +316,7 @@ def test_CalendarGrid_set_timelineunit_SetsAttr():
     assert monthgridunit0.first_weekday == 1
     monthgridunit7 = creg_calendergrid.monthgridrows[2].months[0]
     assert monthgridunit7.name == "September"
-    assert monthgridunit7.cumlative_days == 214
+    assert monthgridunit7.cumulative_days == 214
     assert monthgridunit7.month_days_int == 30
     assert monthgridunit7.week_length == 7
     assert monthgridunit7.monthday_distortion == 1

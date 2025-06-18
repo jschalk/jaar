@@ -1,6 +1,6 @@
 {
     "attributes": {
-        "cumlative_day": {
+        "cumulative_day": {
             "otx_key": true
         },
         "event_int": {

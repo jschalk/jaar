@@ -1,6 +1,6 @@
 {
     "attributes": {
-        "cumlative_minute": {
+        "cumulative_minute": {
             "otx_key": true
         },
         "event_int": {
