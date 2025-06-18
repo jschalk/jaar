@@ -4,6 +4,7 @@ from src.a07_calendar_logic._util.a07_str import (
     c400_leap_str,
     c400_number_str,
     creg_str,
+    cumlative_day_str,
     day_str,
     days_str,
     five_str,
@@ -30,6 +31,7 @@ def test_str_functions_ReturnsObj():
     assert c400_clean_str() == "c400_clean"
     assert c400_number_str() == "c400_number"
     assert creg_str() == "creg"
+    assert cumlative_day_str() == "cumlative_day"
     assert day_str() == "day"
     assert days_str() == "days"
     assert five_str() == "five"

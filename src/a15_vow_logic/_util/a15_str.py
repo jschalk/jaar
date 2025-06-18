@@ -8,14 +8,11 @@ from src.a02_finance_logic._util.a02_str import (
 )
 from src.a03_group_logic._util.a03_str import respect_bit_str
 from src.a06_plan_logic._util.a06_str import timeline_str
+from src.a07_calendar_logic._util.a07_str import cumlative_day_str
 
 
 def brokerunits_str() -> str:
     return "brokerunits"
-
-
-def cumlative_day_str() -> str:
-    return "cumlative_day"
 
 
 def cumlative_minute_str() -> str:
