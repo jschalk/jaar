@@ -24,7 +24,7 @@ from src.a12_hub_toolbox.hub_path import (
     create_vow_json_path,
     create_vow_ote1_csv_path,
 )
-from src.a15_vow_logic._util.a15_str import cumlative_minute_str, hour_label_str
+from src.a15_vow_logic._util.a15_str import cumulative_minute_str, hour_label_str
 from src.a16_pidgin_logic._util.a16_str import inx_name_str, otx_name_str
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
 from src.a18_etl_toolbox._util.a18_str import (
@@ -477,7 +477,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario5_CreatesFiles(
     br00003_columns = [
         event_int_str(),
         face_name_str(),
-        cumlative_minute_str(),
+        cumulative_minute_str(),
         vow_label_str(),
         hour_label_str(),
     ]

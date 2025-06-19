@@ -421,6 +421,8 @@ def get_timeline_min_difference(timeline_config0: dict, timeline_config1: dict) 
 
 @dataclass
 class ChronoUnit:
+    """Creates readable time blurb from PlanUnit, time_range_root_rope, and minute."""
+
     x_planunit: PlanUnit = None
     time_range_root_rope: RopeTerm = None
     x_min: int = None
@@ -596,3 +598,10 @@ def timelineunit_shop(timeline_config: dict = None) -> TimeLineUnit:
         weekdays_config=timeline_config.get("weekdays_config"),
         yr1_jan1_offset=timeline_config.get("yr1_jan1_offset"),
     )
+
+
+def get_first_weekday_index_of_year(week_length, year: int) -> int:
+    # Count leap years between year 0 and year N - 1
+    leaps = (year // 4) - (year // 100) + (year // 400)
+    total_days = (year - leaps) * 365 + leaps * 366
+    return total_days % week_length

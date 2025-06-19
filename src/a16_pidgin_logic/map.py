@@ -403,10 +403,8 @@ class RopeMap:
 
     def all_otx_parent_ropes_exist(self) -> bool:
         for x_rope in self.otx2inx.keys():
-            print(f"{x_rope=}")
             parent_rope = get_parent_rope(x_rope, self.otx_knot)
             if parent_rope and self.otx_exists(parent_rope) is False:
-                print("false")
                 return False
         return True
 

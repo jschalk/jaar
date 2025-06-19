@@ -165,8 +165,6 @@ def plan_concept_reason_premiseunit_get_obj(
 def plan_concept_factunit_get_obj(x_plan: PlanUnit, jkeys: dict[str, any]) -> FactUnit:
     x_rope = jkeys.get("concept_rope")
     x_fcontext = jkeys.get("fcontext")
-    print(f"{x_fcontext=}")
-    print(f"{x_plan.get_concept_obj(x_rope).factunits=}")
     return x_plan.get_concept_obj(x_rope).factunits.get(x_fcontext)
 
 

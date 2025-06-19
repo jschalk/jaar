@@ -87,8 +87,8 @@ from src.a10_plan_calc.plan_calc_config import (
 )
 from src.a15_vow_logic._util.a15_str import (
     amount_str,
-    cumlative_day_str,
-    cumlative_minute_str,
+    cumulative_day_str,
+    cumulative_minute_str,
     hour_label_str,
     job_listen_rotations_str,
     month_label_str,
@@ -238,11 +238,11 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[15] == "c400_number"
     assert table_sorting_priority[16] == "yr1_jan1_offset"
     assert table_sorting_priority[17] == "monthday_distortion"
-    assert table_sorting_priority[18] == "cumlative_day"
+    assert table_sorting_priority[18] == "cumulative_day"
     assert table_sorting_priority[19] == "month_label"
     assert table_sorting_priority[20] == "month_label_otx"
     assert table_sorting_priority[21] == "month_label_inx"
-    assert table_sorting_priority[22] == "cumlative_minute"
+    assert table_sorting_priority[22] == "cumulative_minute"
     assert table_sorting_priority[23] == "hour_label"
     assert table_sorting_priority[24] == "hour_label_otx"
     assert table_sorting_priority[25] == "hour_label_inx"
@@ -490,8 +490,8 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(amount_str()) == "REAL"
     assert sqlite_types.get(month_label_str()) == "TEXT"
     assert sqlite_types.get(hour_label_str()) == "TEXT"
-    assert sqlite_types.get(cumlative_minute_str()) == "INTEGER"
-    assert sqlite_types.get(cumlative_day_str()) == "INTEGER"
+    assert sqlite_types.get(cumulative_minute_str()) == "INTEGER"
+    assert sqlite_types.get(cumulative_day_str()) == "INTEGER"
     assert sqlite_types.get(weekday_label_str()) == "TEXT"
     assert sqlite_types.get(weekday_order_str()) == "INTEGER"
     assert sqlite_types.get(otx_knot_str()) == "TEXT"

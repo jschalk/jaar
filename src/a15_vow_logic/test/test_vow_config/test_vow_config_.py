@@ -33,8 +33,8 @@ from src.a08_plan_atom_logic._util.a08_str import (
 from src.a08_plan_atom_logic.atom_config import get_allowed_class_types
 from src.a15_vow_logic._util.a15_str import (
     amount_str,
-    cumlative_day_str,
-    cumlative_minute_str,
+    cumulative_day_str,
+    cumulative_minute_str,
     hour_label_str,
     month_label_str,
     offi_time_str,
@@ -179,7 +179,7 @@ def test_get_vow_args_dimen_mapping_ReturnsObj():
     # THEN
     assert x_vow_args_dimen_mapping
     x_hour = {vow_timeline_hour_str()}
-    assert x_vow_args_dimen_mapping.get(cumlative_minute_str()) == x_hour
+    assert x_vow_args_dimen_mapping.get(cumulative_minute_str()) == x_hour
     assert x_vow_args_dimen_mapping.get(fund_iota_str())
     vow_label_dimens = x_vow_args_dimen_mapping.get(vow_label_str())
     assert vow_timeline_hour_str() in vow_label_dimens
@@ -242,8 +242,8 @@ def test_get_vow_args_set_ReturnsObj():
         amount_str(),
         knot_str(),
         c400_number_str(),
-        cumlative_day_str(),
-        cumlative_minute_str(),
+        cumulative_day_str(),
+        cumulative_minute_str(),
         hour_label_str(),
         vow_label_str(),
         fund_iota_str(),

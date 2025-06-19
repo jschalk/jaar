@@ -79,8 +79,8 @@ def get_ex1_br00002_df() -> DataFrame:
 
 def get_ex1_br00003_df() -> DataFrame:
     """idea_format_00003_vow_timeline_hour_v0_0_0
-    cumlative_minute,vow_label,hour_label"""
-    x_df = DataFrame(columns=["vow_label", "hour_label", "cumlative_minute"])
+    cumulative_minute,vow_label,hour_label"""
+    x_df = DataFrame(columns=["vow_label", "hour_label", "cumulative_minute"])
     x_df.loc[0] = [ACCORD23_STR, "0-12am", 60]
     x_df.loc[1] = [ACCORD23_STR, "1-1am", 120]
     x_df.loc[2] = [ACCORD23_STR, "2-2am", 180]
@@ -110,8 +110,8 @@ def get_ex1_br00003_df() -> DataFrame:
 
 def get_ex1_br00004_df() -> DataFrame:
     """idea_format_00004_vow_timeline_month_v0_0_0
-    cumlative_day,vow_label,month_label"""
-    x_df = DataFrame(columns=["vow_label", "month_label", "cumlative_day"])
+    cumulative_day,vow_label,month_label"""
+    x_df = DataFrame(columns=["vow_label", "month_label", "cumulative_day"])
     x_df.loc[0] = [ACCORD23_STR, "March", 31]
     x_df.loc[1] = [ACCORD23_STR, "April", 61]
     x_df.loc[2] = [ACCORD23_STR, "May", 92]
@@ -208,8 +208,8 @@ def get_ex2_br00002_df() -> DataFrame:
 
 def get_ex2_br00003_df() -> DataFrame:
     """idea_format_00003_vow_timeline_hour_v0_0_0
-    cumlative_minute,vow_label,hour_label"""
-    x_df = DataFrame(columns=["vow_label", "hour_label", "cumlative_minute"])
+    cumulative_minute,vow_label,hour_label"""
+    x_df = DataFrame(columns=["vow_label", "hour_label", "cumulative_minute"])
     x_df.loc[0] = [ACCORD23_STR, "0-12am", 60]
     x_df.loc[1] = [ACCORD23_STR, "1-1am", 120]
     x_df.loc[2] = [ACCORD23_STR, "2-2am", 180]
@@ -259,8 +259,8 @@ def get_ex2_br00003_df() -> DataFrame:
 
 def get_ex2_br00004_df() -> DataFrame:
     """idea_format_00004_vow_timeline_month_v0_0_0
-    cumlative_day,vow_label,month_label"""
-    x_df = DataFrame(columns=["vow_label", "month_label", "cumlative_day"])
+    cumulative_day,vow_label,month_label"""
+    x_df = DataFrame(columns=["vow_label", "month_label", "cumulative_day"])
     x_df.loc[0] = [ACCORD23_STR, "March", 31]
     x_df.loc[1] = [ACCORD23_STR, "April", 61]
     x_df.loc[2] = [ACCORD23_STR, "May", 92]

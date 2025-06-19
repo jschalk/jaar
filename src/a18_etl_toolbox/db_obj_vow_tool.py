@@ -105,9 +105,9 @@ def _set_vow_dict_vowhour(cursor: sqlite3_Cursor, vow_dict: dict):
     hours_config_list = []
     for vowpayy_row in cursor.fetchall():
         row_vow_label = vowpayy_row[0]
-        row_cumlative_minute = vowpayy_row[1]
+        row_cumulative_minute = vowpayy_row[1]
         row_hour_label = vowpayy_row[2]
-        hours_config_list.append([row_hour_label, row_cumlative_minute])
+        hours_config_list.append([row_hour_label, row_cumulative_minute])
     if hours_config_list:
         vow_dict["timeline"]["hours_config"] = hours_config_list
 
@@ -116,9 +116,9 @@ def _set_vow_dict_vowmont(cursor: sqlite3_Cursor, vow_dict: dict):
     months_config_list = []
     for vowpayy_row in cursor.fetchall():
         row_vow_label = vowpayy_row[0]
-        row_cumlative_day = vowpayy_row[1]
+        row_cumulative_day = vowpayy_row[1]
         row_month_label = vowpayy_row[2]
-        months_config_list.append([row_month_label, row_cumlative_day])
+        months_config_list.append([row_month_label, row_cumulative_day])
     if months_config_list:
         vow_dict["timeline"]["months_config"] = months_config_list
 

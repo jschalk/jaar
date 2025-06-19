@@ -180,9 +180,7 @@ def get_forefather_ropes(rope: RopeTerm) -> dict[RopeTerm]:
 
 
 def create_rope_from_labels(labels: list[LabelTerm], knot: str = None) -> RopeTerm:
-    if not labels:
-        return ""
-    return to_rope(default_knot_if_None(knot).join(labels), knot)
+    return to_rope(default_knot_if_None(knot).join(labels), knot) if labels else ""
 
 
 class InvalidknotReplaceException(Exception):

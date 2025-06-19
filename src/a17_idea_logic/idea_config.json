@@ -213,7 +213,7 @@
     "build_order": 6,
     "idea_category": "vow",
     "jkeys": {
-      "cumlative_minute": {},
+      "cumulative_minute": {},
       "event_int": {},
       "face_name": {},
       "vow_label": {}
@@ -227,7 +227,7 @@
     "build_order": 7,
     "idea_category": "vow",
     "jkeys": {
-      "cumlative_day": {},
+      "cumulative_day": {},
       "event_int": {},
       "face_name": {},
       "vow_label": {}

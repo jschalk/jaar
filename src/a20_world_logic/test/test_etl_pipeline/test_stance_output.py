@@ -134,7 +134,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
 #     br00003_columns = [
 #         face_name_str(),
 #         event_int_str(),
-#         cumlative_minute_str(),
+#         cumulative_minute_str(),
 #         vow_label_str(),
 #         hour_label_str(),
 #     ]

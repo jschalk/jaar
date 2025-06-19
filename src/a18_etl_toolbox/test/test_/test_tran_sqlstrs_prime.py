@@ -659,16 +659,16 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
         assert update_sqlstr == expected_update_sqlstr
 
         static_example_sqlstr = """WITH inconsistency_rows AS (
-SELECT vow_label, cumlative_minute
+SELECT vow_label, cumulative_minute
 FROM vow_timeline_hour_s_raw
-GROUP BY vow_label, cumlative_minute
+GROUP BY vow_label, cumulative_minute
 HAVING MIN(hour_label) != MAX(hour_label)
 )
 UPDATE vow_timeline_hour_s_raw
 SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.vow_label = vow_timeline_hour_s_raw.vow_label
-    AND inconsistency_rows.cumlative_minute = vow_timeline_hour_s_raw.cumlative_minute
+    AND inconsistency_rows.cumulative_minute = vow_timeline_hour_s_raw.cumulative_minute
 ;
 """
         # print(update_sqlstr)
@@ -791,11 +791,11 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario1_VowDimen():
         print(expected_insert_sqlstr)
         assert update_sqlstrs[0] == expected_insert_sqlstr
 
-        static_example_sqlstr = """INSERT INTO vow_timeline_hour_s_agg (event_int, face_name, vow_label, cumlative_minute, hour_label)
-SELECT event_int, face_name, vow_label, cumlative_minute, MAX(hour_label)
+        static_example_sqlstr = """INSERT INTO vow_timeline_hour_s_agg (event_int, face_name, vow_label, cumulative_minute, hour_label)
+SELECT event_int, face_name, vow_label, cumulative_minute, MAX(hour_label)
 FROM vow_timeline_hour_s_raw
 WHERE error_message IS NULL
-GROUP BY event_int, face_name, vow_label, cumlative_minute
+GROUP BY event_int, face_name, vow_label, cumulative_minute
 ;
 """
         print(update_sqlstrs[0])
