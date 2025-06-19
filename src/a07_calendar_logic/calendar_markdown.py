@@ -13,7 +13,7 @@ def center_word(length, word):
 
 @dataclass
 class MonthGridUnit:
-    name: str = None
+    label: str = None
     cumulative_days: str = None
     first_weekday: int = None
     week_length: int = None
@@ -21,10 +21,16 @@ class MonthGridUnit:
     monthday_distortion: int = None
     weekday_2char_abvs: list[str] = None
     max_monthday_rows: int = None
+    year: int = None
+    offset_year: bool = None
 
-    def markdown_name(self) -> str:
+    def markdown_label(self) -> str:
         char_width = (self.week_length * 3) - 1
-        return center_word(char_width, self.name)
+        if not self.offset_year:
+            return center_word(char_width, self.label)
+        add1year = self.year + 1
+        x_str = f"{self.label} ({add1year})"
+        return center_word(char_width, x_str)
 
     def markdown_weekdays(self) -> str:
         x_str = "".join(f"{abv} " for abv in self.weekday_2char_abvs)
@@ -70,7 +76,7 @@ class MonthGridRow:
     def markdown_str(self) -> str:
         x_str = "\n"
         for monthgridunit in self.months:
-            x_str += f"{monthgridunit.markdown_name()}      "
+            x_str += f"{monthgridunit.markdown_label()}      "
         x_str = f"{x_str[:-6]}\n"
         for monthgridunit in self.months:
             x_str += f"{monthgridunit.markdown_weekdays()}      "
@@ -94,6 +100,7 @@ class CalendarGrid:
     max_md_width: int = 84  # default width
     display_md_width: int = None
     display_init_day: str = None
+    yr1_jan1_offset_days: str = None
 
     def create_2char_weekday_list(self) -> list[str]:
         orig_weekdays = copy_copy(self.timelineunit.weekdays_config)
@@ -104,7 +111,7 @@ class CalendarGrid:
         new_weekdays.extend(orig_weekdays[wd_index] for wd_index in front_range)
         return [weekday[:2] for weekday in new_weekdays]
 
-    def set_timelineunit(self, year_init_weekday: str):
+    def set_monthgridrows(self, year_init_weekday: str, year: int):
         self.timelineunit = timelineunit_shop(self.timeline_config)
         self.week_length = len(self.timelineunit.weekdays_config)
         # set the expected month_char_width with 5 extra charcters for space
@@ -117,6 +124,7 @@ class CalendarGrid:
         x_monthgridrow = MonthGridRow([])
         previous_cumulative_days = 0
         x_monthday_distortion = self.timelineunit.monthday_distortion
+        self.yr1_jan1_offset_days = self.timelineunit.yr1_jan1_offset / 1440
         x_weekday_2char_list = self.create_2char_weekday_list()
         year_init_2char = year_init_weekday[:2]
         month_first_weekday_index = x_weekday_2char_list.index(year_init_2char)
@@ -131,10 +139,15 @@ class CalendarGrid:
             )
             new_monthgridunit.monthday_distortion = x_monthday_distortion
             new_monthgridunit.weekday_2char_abvs = x_weekday_2char_list
+
             new_monthgridunit.first_weekday = month_first_weekday_index
             month_first_weekday_index = new_monthgridunit.get_next_month_first_weekday()
             previous_cumulative_days = cumulative_days
-            # new_monthgridunit.week_length = self.week_length
+
+            new_monthgridunit.year = year
+            if new_monthgridunit.cumulative_days > self.yr1_jan1_offset_days:
+                new_monthgridunit.offset_year = True
+
             x_monthgridrow.months.append(new_monthgridunit)
             if len(x_monthgridrow.months) == self.monthgridrow_length:
                 self.monthgridrows.append(x_monthgridrow)
@@ -148,7 +161,7 @@ class CalendarGrid:
         self.week_length = len(self.timelineunit.weekdays_config)
         first_weekday_index = get_first_weekday_index_of_year(self.week_length, year)
         first_weekday_str = self.timelineunit.weekdays_config[first_weekday_index]
-        self.set_timelineunit(first_weekday_str)
+        self.set_monthgridrows(first_weekday_str, year)
         markdown_str = f"""
 {center_word(self.display_md_width, f"Year {year}")}
 """

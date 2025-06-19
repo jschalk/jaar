@@ -24,7 +24,7 @@ def test_MonthGridUnit_Exists():
     x_monthgridunit = MonthGridUnit()
 
     # THEN
-    assert not x_monthgridunit.name
+    assert not x_monthgridunit.label
     assert not x_monthgridunit.cumulative_days
     assert not x_monthgridunit.first_weekday
     assert not x_monthgridunit.week_length
@@ -32,18 +32,35 @@ def test_MonthGridUnit_Exists():
     assert not x_monthgridunit.monthday_distortion
     assert not x_monthgridunit.weekday_2char_abvs
     assert not x_monthgridunit.max_monthday_rows
+    assert not x_monthgridunit.year
+    assert not x_monthgridunit.offset_year
 
 
-def test_MonthGridUnit_markdown_name_ReturnsObj():
+def test_MonthGridUnit_markdown_label_ReturnsObj_Scenario0_No_offset_year():
     # ESTABLISH
     jan_monthgridunit = MonthGridUnit("January", None, 5, 7, 31, 1)
+    jan_monthgridunit.year = 1999
 
     # WHEN
-    markdown_name = jan_monthgridunit.markdown_name()
+    markdown_label = jan_monthgridunit.markdown_label()
 
     # THEN
-    assert markdown_name == "      January       "
-    assert len(markdown_name) == 3 * 7 - 1
+    assert markdown_label == "      January       "
+    assert len(markdown_label) == 3 * 7 - 1
+
+
+def test_MonthGridUnit_markdown_label_ReturnsObj_Scenario1_Yes_offset_year():
+    # ESTABLISH
+    jan_monthgridunit = MonthGridUnit("January", None, 5, 7, 31, 1)
+    jan_monthgridunit.offset_year = True
+    jan_monthgridunit.year = 1999
+
+    # WHEN
+    markdown_label = jan_monthgridunit.markdown_label()
+
+    # THEN
+    assert markdown_label == "   January (2000)   "
+    assert len(markdown_label) == 3 * 7 - 1
 
 
 def test_MonthGridUnit_markdown_weekdays_ReturnsObj():
@@ -278,6 +295,7 @@ def test_CalendarGrid_Exists():
     assert not x_calendargrid.monthgridrow_length
     assert not x_calendargrid.display_md_width
     assert not x_calendargrid.display_init_day
+    assert not x_calendargrid.yr1_jan1_offset_days
     assert x_calendargrid.max_md_width == 84
 
 
@@ -286,7 +304,7 @@ def test_CalendarGrid_create_2char_weekday_list_ReturnObj():
     creg_config = get_default_timeline_config_dict()
     creg_calendergrid = CalendarGrid(timeline_config=creg_config)
     creg_calendergrid.display_init_day = "Monday"
-    creg_calendergrid.set_timelineunit("Tuesday")
+    creg_calendergrid.set_monthgridrows("Tuesday", 1997)
 
     # WHEN
     weekday_2char_list = creg_calendergrid.create_2char_weekday_list()
@@ -296,17 +314,18 @@ def test_CalendarGrid_create_2char_weekday_list_ReturnObj():
     assert weekday_2char_list == expected_weekday_2char_abvs
 
 
-def test_CalendarGrid_set_timelineunit_SetsAttr():
+def test_CalendarGrid_set_monthgridrows_SetsAttr():
     # ESTABLISH
     creg_config = get_default_timeline_config_dict()
     creg_calendergrid = CalendarGrid(timeline_config=creg_config)
     monday_str = "Monday"
     creg_calendergrid.display_init_day = monday_str
     x_weekday_2char_abvs = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
+    yr1997_int = 1997
     assert not creg_calendergrid.timelineunit
 
     # WHEN
-    creg_calendergrid.set_timelineunit("Tuesday")
+    creg_calendergrid.set_monthgridrows("Tuesday", yr1997_int)
 
     # THEN
     expected_timelineunit = timelineunit_shop(creg_config)
@@ -318,20 +337,29 @@ def test_CalendarGrid_set_timelineunit_SetsAttr():
     assert len(creg_calendergrid.monthgridrows) == 4
     assert len(creg_calendergrid.monthgridrows[0].months) == 3
     monthgridunit0 = creg_calendergrid.monthgridrows[0].months[0]
-    assert monthgridunit0.name == "March"
+    assert monthgridunit0.label == "March"
     assert monthgridunit0.cumulative_days == 31
     assert monthgridunit0.month_days_int == 31
     assert monthgridunit0.week_length == 7
     assert monthgridunit0.monthday_distortion == 1
     assert monthgridunit0.weekday_2char_abvs == x_weekday_2char_abvs
     assert monthgridunit0.first_weekday == 1
+    assert monthgridunit0.year == yr1997_int
+    assert not monthgridunit0.offset_year
     monthgridunit7 = creg_calendergrid.monthgridrows[2].months[0]
-    assert monthgridunit7.name == "September"
+    assert monthgridunit7.label == "September"
     assert monthgridunit7.cumulative_days == 214
     assert monthgridunit7.month_days_int == 30
     assert monthgridunit7.week_length == 7
     assert monthgridunit7.monthday_distortion == 1
     assert monthgridunit7.weekday_2char_abvs == x_weekday_2char_abvs
+    assert monthgridunit7.first_weekday == 3
+    assert monthgridunit7.year == yr1997_int
+    assert not monthgridunit7.offset_year
+    monthgridunit11 = creg_calendergrid.monthgridrows[3].months[1]
+    assert monthgridunit11.label == "January"
+    assert monthgridunit11.year == yr1997_int
+    assert monthgridunit11.offset_year
     # assert monthgridunit7.first_weekday == 4
 
 
@@ -375,7 +403,7 @@ Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su
 23 24 25 26 27 28 29      28 29 30 31               25 26 27 28 29 30   
 30                                                                      
 
-      December                  January                   February      
+      December               January (2025)           February (2025)   
 Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su
                    1             1  2  3  4  5                      1  2
  2  3  4  5  6  7  8       6  7  8  9 10 11 12       3  4  5  6  7  8  9
