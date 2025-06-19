@@ -1,8 +1,8 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_table_columns
-from src.a06_plan_logic._util.a06_str import plan_concept_awardlink_str
-from src.a09_pack_logic._util.a09_str import event_int_str, face_name_str
-from src.a16_pidgin_logic._util.a16_str import (
+from src.a06_plan_logic.test._util.a06_str import plan_concept_awardlink_str
+from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
+from src.a16_pidgin_logic.test._util.a16_str import (
     inx_name_str,
     otx_name_str,
     pidgin_name_str,

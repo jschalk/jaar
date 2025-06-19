@@ -7,14 +7,14 @@ from src.a04_reason_logic.reason_concept import (
 )
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a05_concept_logic.healer import healerlink_shop
-from src.a06_plan_logic._util.example_plans import (
+from src.a06_plan_logic.plan import planunit_shop
+from src.a06_plan_logic.plan_graphics import display_concepttree
+from src.a06_plan_logic.test._util.example_plans import (
     from_list_get_active,
     get_planunit_with7amCleanTableReason,
     get_planunit_with_4_levels_and_2reasons,
     planunit_v001,
 )
-from src.a06_plan_logic.plan import planunit_shop
-from src.a06_plan_logic.plan_graphics import display_concepttree
 
 
 def test_PlanUnit_settle_plan_SetsStatus_active_WhenFactSaysNo():

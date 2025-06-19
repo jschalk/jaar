@@ -7,7 +7,8 @@ from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import factunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
-from src.a06_plan_logic._util.a06_str import (
+from src.a06_plan_logic.plan import planunit_shop
+from src.a06_plan_logic.test._util.a06_str import (
     acct_name_str,
     awardee_title_str,
     begin_str,
@@ -36,9 +37,12 @@ from src.a06_plan_logic._util.a06_str import (
     take_force_str,
     task_str,
 )
-from src.a06_plan_logic._util.example_plans import get_planunit_with_4_levels
-from src.a06_plan_logic.plan import planunit_shop
-from src.a08_plan_atom_logic._util.a08_str import DELETE_str, INSERT_str, UPDATE_str
+from src.a06_plan_logic.test._util.example_plans import get_planunit_with_4_levels
+from src.a08_plan_atom_logic.test._util.a08_str import (
+    DELETE_str,
+    INSERT_str,
+    UPDATE_str,
+)
 from src.a09_pack_logic.delta import PlanDelta, plandelta_shop
 
 

@@ -1,11 +1,17 @@
-from src.a01_term_logic._util.a01_str import knot_str, parent_rope_str
 from src.a01_term_logic.rope import create_rope, default_knot_if_None
-from src.a02_finance_logic._util.a02_str import fund_iota_str, vow_label_str
+from src.a01_term_logic.test._util.a01_str import knot_str, parent_rope_str
 from src.a02_finance_logic.finance_config import default_fund_iota_if_None
+from src.a02_finance_logic.test._util.a02_str import fund_iota_str, vow_label_str
 from src.a03_group_logic.group import awardlink_shop
-from src.a04_reason_logic._util.a04_str import _chore_str
 from src.a04_reason_logic.reason_labor import laborunit_shop
-from src.a05_concept_logic._util.a05_str import (
+from src.a04_reason_logic.test._util.a04_str import _chore_str
+from src.a05_concept_logic.concept import (
+    ConceptUnit,
+    conceptunit_shop,
+    get_default_vow_label,
+)
+from src.a05_concept_logic.healer import healerlink_shop
+from src.a05_concept_logic.test._util.a05_str import (
     _active_hx_str,
     _active_str,
     _all_acct_cred_str,
@@ -42,12 +48,6 @@ from src.a05_concept_logic._util.a05_str import (
     task_str,
     vow_label_str,
 )
-from src.a05_concept_logic.concept import (
-    ConceptUnit,
-    conceptunit_shop,
-    get_default_vow_label,
-)
-from src.a05_concept_logic.healer import healerlink_shop
 
 
 def test_get_default_vow_label_ReturnsObj():

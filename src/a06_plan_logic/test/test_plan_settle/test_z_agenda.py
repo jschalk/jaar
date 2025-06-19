@@ -1,7 +1,11 @@
 from src.a01_term_logic.rope import RopeTerm
 from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a05_concept_logic.concept import ConceptUnit, conceptunit_shop
-from src.a06_plan_logic._util.example_plans import (
+from src.a06_plan_logic.plan import (
+    get_from_json as planunit_get_from_json,
+    planunit_shop,
+)
+from src.a06_plan_logic.test._util.example_plans import (
     get_planunit_with7amCleanTableReason,
     get_planunit_with_4_levels,
     get_planunit_with_4_levels_and_2reasons,
@@ -9,10 +13,6 @@ from src.a06_plan_logic._util.example_plans import (
     planunit_v001,
     planunit_v001_with_large_agenda,
     planunit_v002,
-)
-from src.a06_plan_logic.plan import (
-    get_from_json as planunit_get_from_json,
-    planunit_shop,
 )
 
 

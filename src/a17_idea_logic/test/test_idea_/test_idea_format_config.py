@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.file_toolbox import get_dir_file_strs
-from src.a02_finance_logic._util.a02_str import owner_name_str, vow_label_str
-from src.a06_plan_logic._util.a06_str import (
+from src.a02_finance_logic.test._util.a02_str import owner_name_str, vow_label_str
+from src.a06_plan_logic.test._util.a06_str import (
     acct_name_str,
     acct_pool_str,
     addin_str,
@@ -22,10 +22,8 @@ from src.a06_plan_logic._util.a06_str import (
     stop_want_str,
     task_str,
 )
-from src.a09_pack_logic._util.a09_str import event_int_str, face_name_str
-from src.a15_vow_logic._util.a15_str import vowunit_str
-from src.a17_idea_logic._util.a17_env import src_module_dir
-from src.a17_idea_logic._util.a17_str import attributes_str
+from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
+from src.a15_vow_logic.test._util.a15_str import vowunit_str
 from src.a17_idea_logic.idea import (
     _generate_idea_dataframe,
     _get_headers_list,
@@ -43,6 +41,8 @@ from src.a17_idea_logic.idea_config import (
     idea_format_00020_plan_acct_membership_v0_0_0,
     idea_format_00021_plan_acctunit_v0_0_0,
 )
+from src.a17_idea_logic.test._util.a17_env import src_module_dir
+from src.a17_idea_logic.test._util.a17_str import attributes_str
 
 
 def test_config_str_functions_ReturnsObjs():

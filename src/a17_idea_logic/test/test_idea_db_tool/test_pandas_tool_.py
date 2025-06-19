@@ -1,13 +1,22 @@
 from os.path import exists as os_path_exists
 from pandas import DataFrame
 from src.a00_data_toolbox.file_toolbox import create_path, open_file
-from src.a06_plan_logic._util.a06_str import (
+from src.a06_plan_logic.test._util.a06_str import (
     acct_name_str,
     credor_respect_str,
     group_title_str,
 )
-from src.a17_idea_logic._util.a17_env import env_dir_setup_cleanup, idea_examples_dir
-from src.a17_idea_logic._util.example_pandas import (
+from src.a17_idea_logic.idea_db_tool import (
+    get_brick_raw_grouping_with_all_values_equal_df,
+    get_ordered_csv,
+    get_relevant_columns_dataframe,
+    save_dataframe_to_csv,
+)
+from src.a17_idea_logic.test._util.a17_env import (
+    env_dir_setup_cleanup,
+    idea_examples_dir,
+)
+from src.a17_idea_logic.test._util.example_pandas import (
     get_empty_dataframe,
     get_ex01_dataframe,
     get_ex01_ordered_by_count_buzz_csv,
@@ -19,12 +28,6 @@ from src.a17_idea_logic._util.example_pandas import (
     get_ex02_atom_dataframe,
     get_small_example01_csv,
     get_small_example01_dataframe,
-)
-from src.a17_idea_logic.idea_db_tool import (
-    get_brick_raw_grouping_with_all_values_equal_df,
-    get_ordered_csv,
-    get_relevant_columns_dataframe,
-    save_dataframe_to_csv,
 )
 
 

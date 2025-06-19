@@ -1,10 +1,12 @@
-from src.a13_plan_listen_logic._util.example_listen_plans import get_fund_breakdown_plan
 from src.a13_plan_listen_logic.listen_graphic import (
     fund_graph0,
     get_listen_structures0_fig,
     get_listen_structures1_fig,
     get_listen_structures2_fig,
     get_listen_structures3_fig,
+)
+from src.a13_plan_listen_logic.test._util.example_listen_plans import (
+    get_fund_breakdown_plan,
 )
 
 

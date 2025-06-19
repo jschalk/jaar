@@ -1,17 +1,17 @@
 from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
-from src.a06_plan_logic._util.example_plans import (
-    get_planunit_laundry_example1,
-    get_planunit_with_4_levels,
-    get_planunit_with_4_levels_and_2reasons,
-    get_planunit_x1_3levels_1reason_1facts,
-    planunit_v001_with_large_agenda,
-)
 from src.a06_plan_logic.plan import planunit_shop
 from src.a06_plan_logic.plan_graphics import (
     display_concepttree,
     fund_graph0,
     get_plan_accts_plotly_fig,
     get_plan_agenda_plotly_fig,
+)
+from src.a06_plan_logic.test._util.example_plans import (
+    get_planunit_laundry_example1,
+    get_planunit_with_4_levels,
+    get_planunit_with_4_levels_and_2reasons,
+    get_planunit_x1_3levels_1reason_1facts,
+    planunit_v001_with_large_agenda,
 )
 
 

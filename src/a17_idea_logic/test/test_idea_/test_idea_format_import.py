@@ -1,13 +1,12 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a02_finance_logic._util.a02_str import owner_name_str, vow_label_str
-from src.a06_plan_logic._util.a06_str import (
+from src.a02_finance_logic.test._util.a02_str import owner_name_str, vow_label_str
+from src.a06_plan_logic.plan import planunit_shop
+from src.a06_plan_logic.test._util.a06_str import (
     acct_name_str,
     credit_score_str,
     debt_score_str,
 )
-from src.a06_plan_logic.plan import planunit_shop
 from src.a12_hub_toolbox.hub_tool import gut_file_exists, open_gut_file
-from src.a17_idea_logic._util.a17_env import env_dir_setup_cleanup, idea_examples_dir
 from src.a17_idea_logic.idea import get_idearef_obj, load_idea_csv, save_idea_csv
 from src.a17_idea_logic.idea_config import (
     idea_format_00012_membership_v0_0_0,
@@ -15,6 +14,10 @@ from src.a17_idea_logic.idea_config import (
     idea_format_00021_plan_acctunit_v0_0_0,
 )
 from src.a17_idea_logic.idea_db_tool import open_csv
+from src.a17_idea_logic.test._util.a17_env import (
+    env_dir_setup_cleanup,
+    idea_examples_dir,
+)
 
 
 def test_open_csv_ReturnsObjWhenFileExists(env_dir_setup_cleanup):

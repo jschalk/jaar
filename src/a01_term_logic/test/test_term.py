@@ -1,5 +1,4 @@
 from inspect import getdoc as inspect_getdoc
-from src.a01_term_logic._util.a01_str import knot_str
 from src.a01_term_logic.term import (
     AcctName,
     AxiomLabel,
@@ -17,6 +16,7 @@ from src.a01_term_logic.term import (
     VowLabel,
     default_knot_if_None,
 )
+from src.a01_term_logic.test._util.a01_str import knot_str
 
 
 def test_KnotTerm_Exists():

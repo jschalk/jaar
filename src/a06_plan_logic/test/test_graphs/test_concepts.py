@@ -1,8 +1,3 @@
-from src.a06_plan_logic._util.example_plans import (
-    get_planunit_with_4_levels,
-    get_planunit_with_4_levels_and_2reasons,
-    get_planunit_x1_3levels_1reason_1facts,
-)
 from src.a06_plan_logic.plan_graphics import (
     display_concepttree,
     planunit_graph0,
@@ -10,6 +5,11 @@ from src.a06_plan_logic.plan_graphics import (
     planunit_graph2,
     planunit_graph3,
     planunit_graph4,
+)
+from src.a06_plan_logic.test._util.example_plans import (
+    get_planunit_with_4_levels,
+    get_planunit_with_4_levels_and_2reasons,
+    get_planunit_x1_3levels_1reason_1facts,
 )
 
 

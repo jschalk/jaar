@@ -1,10 +1,4 @@
 from src.a01_term_logic.rope import create_rope, get_default_axiom_label as root_label
-from src.a04_reason_logic._util.a04_str import (
-    fcontext_str,
-    fnigh_str,
-    fopen_str,
-    fstate_str,
-)
 from src.a04_reason_logic.reason_concept import (
     FactCore,
     FactUnit,
@@ -12,6 +6,12 @@ from src.a04_reason_logic.reason_concept import (
     factunit_shop,
     factunits_get_from_dict,
     get_factunit_from_tuple,
+)
+from src.a04_reason_logic.test._util.a04_str import (
+    fcontext_str,
+    fnigh_str,
+    fopen_str,
+    fstate_str,
 )
 
 

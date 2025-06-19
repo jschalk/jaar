@@ -4,10 +4,10 @@ from src.a05_concept_logic.concept import (
     conceptunit_shop,
     get_default_vow_label as root_label,
 )
-from src.a06_plan_logic._util.example_plans import (
+from src.a06_plan_logic.plan import planunit_shop
+from src.a06_plan_logic.test._util.example_plans import (
     get_planunit_with_4_levels_and_2reasons_2facts,
 )
-from src.a06_plan_logic.plan import planunit_shop
 
 
 def test_PlanUnit_edit_concept_label_FailsWhenConceptDoesNotExist():

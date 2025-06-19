@@ -29,13 +29,14 @@ def test_ModuleStrFunctionsTestFileFormat():
         module_number = int(module_desc[1:3])
         # assert module_number == previous_module_number + 1
         print(f"{module_desc=} {module_number=}")
-        utils_dir = create_path(module_dir, "_util")
-        assert os_path_exists(utils_dir)
-        str_func_path = create_path(utils_dir, f"a{module_desc[1:3]}_str.py")
+        test_dir = create_path(module_dir, "test")
+        util_dir = create_path(test_dir, "_util")
+        assert os_path_exists(util_dir)
+        str_func_path = create_path(util_dir, f"a{module_desc[1:3]}_str.py")
         assert os_path_exists(str_func_path)
         # str_func_test_path = create_path(utils_dir, f"test_a{module_desc[1:3]}_str.py")
         # assert os_path_exists(str_func_test_path)
-        env_files = get_python_files_with_flag(utils_dir, "env")
+        env_files = get_python_files_with_flag(util_dir, "env")
         if len(env_files) > 0:
             print(f"{env_files=}")
             assert len(env_files) == 1
@@ -92,7 +93,8 @@ def test_StrFunctionsAreAssertTested():
     running_str_functions = set()
     for module_desc, module_dir in get_module_descs().items():
         desc_number_str = module_desc[1:3]
-        util_dir = create_path(module_dir, "_util")
+        test_dir = create_path(module_dir, "test")
+        util_dir = create_path(test_dir, "_util")
         print(f"{util_dir}")
         module_str_funcs = get_module_str_functions(module_dir, desc_number_str)
         check_if_module_str_funcs_is_sorted(module_str_funcs)
@@ -149,7 +151,8 @@ def test_StrFunctionsAreAssertTested():
     running_str_functions = set()
     for module_desc, module_dir in get_module_descs().items():
         desc_number_str = module_desc[1:3]
-        util_dir = create_path(module_dir, "_util")
+        test_dir = create_path(module_dir, "test")
+        util_dir = create_path(test_dir, "_util")
         print(f"{util_dir}")
         module_str_funcs = get_module_str_functions(module_dir, desc_number_str)
         check_if_module_str_funcs_is_sorted(module_str_funcs)

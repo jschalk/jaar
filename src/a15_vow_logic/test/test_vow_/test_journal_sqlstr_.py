@@ -1,12 +1,12 @@
 from src.a01_term_logic.rope import create_rope
-from src.a06_plan_logic._util.a06_str import (
+from src.a06_plan_logic.test._util.a06_str import (
     concept_rope_str,
     fcontext_str,
     fopen_str,
     plan_concept_factunit_str,
 )
-from src.a08_plan_atom_logic._util.a08_str import INSERT_str, atom_hx_str
 from src.a08_plan_atom_logic.atom import planatom_shop
+from src.a08_plan_atom_logic.test._util.a08_str import INSERT_str, atom_hx_str
 from src.a15_vow_logic.journal_sqlstr import (
     get_atom2delta_table_create_sqlstr,
     get_atom_hx_table_create_sqlstr,

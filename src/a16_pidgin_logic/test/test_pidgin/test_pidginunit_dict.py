@@ -1,11 +1,17 @@
 from src.a01_term_logic.rope import default_knot_if_None
-from src.a09_pack_logic._util.a09_str import event_int_str, face_name_str
-from src.a16_pidgin_logic._util.a16_str import (
+from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
+from src.a16_pidgin_logic.pidgin import (
+    get_pidginunit_from_dict,
+    get_pidginunit_from_json,
+    pidginunit_shop,
+)
+from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
+from src.a16_pidgin_logic.test._util.a16_str import (
     inx_knot_str,
     otx_knot_str,
     unknown_str_str,
 )
-from src.a16_pidgin_logic._util.example_pidgins import (
+from src.a16_pidgin_logic.test._util.example_pidgins import (
     get_clean_labelmap,
     get_clean_ropemap,
     get_slash_labelmap,
@@ -15,12 +21,6 @@ from src.a16_pidgin_logic._util.example_pidgins import (
     get_suita_namemap,
     get_swim_titlemap,
 )
-from src.a16_pidgin_logic.pidgin import (
-    get_pidginunit_from_dict,
-    get_pidginunit_from_json,
-    pidginunit_shop,
-)
-from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
 
 
 def _get_rid_of_pidgin_core_keys(map_dict: dict) -> dict:

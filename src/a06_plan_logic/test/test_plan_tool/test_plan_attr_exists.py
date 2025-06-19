@@ -1,7 +1,21 @@
 from src.a01_term_logic.rope import to_rope
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import factunit_shop, reasonunit_shop
-from src.a06_plan_logic._util.a06_str import (
+from src.a06_plan_logic.plan import planunit_shop
+from src.a06_plan_logic.plan_tool import (
+    plan_acct_membership_exists,
+    plan_acctunit_exists,
+    plan_attr_exists,
+    plan_concept_awardlink_exists,
+    plan_concept_factunit_exists,
+    plan_concept_healerlink_exists,
+    plan_concept_laborlink_exists,
+    plan_concept_reason_premiseunit_exists as premiseunit_exists,
+    plan_concept_reasonunit_exists,
+    plan_conceptunit_exists,
+    planunit_exists,
+)
+from src.a06_plan_logic.test._util.a06_str import (
     acct_name_str,
     awardee_title_str,
     concept_rope_str,
@@ -21,20 +35,6 @@ from src.a06_plan_logic._util.a06_str import (
     planunit_str,
     pstate_str,
     rcontext_str,
-)
-from src.a06_plan_logic.plan import planunit_shop
-from src.a06_plan_logic.plan_tool import (
-    plan_acct_membership_exists,
-    plan_acctunit_exists,
-    plan_attr_exists,
-    plan_concept_awardlink_exists,
-    plan_concept_factunit_exists,
-    plan_concept_healerlink_exists,
-    plan_concept_laborlink_exists,
-    plan_concept_reason_premiseunit_exists as premiseunit_exists,
-    plan_concept_reasonunit_exists,
-    plan_conceptunit_exists,
-    planunit_exists,
 )
 
 

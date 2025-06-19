@@ -3,11 +3,6 @@ from src.a01_term_logic.rope import (
     default_knot_if_None,
     get_default_axiom_label as root_label,
 )
-from src.a04_reason_logic._util.a04_str import (
-    knot_str,
-    rconcept_active_requisite_str,
-    rcontext_str,
-)
 from src.a04_reason_logic.reason_concept import (
     ReasonCore,
     factheir_shop,
@@ -16,6 +11,11 @@ from src.a04_reason_logic.reason_concept import (
     reasonheir_shop,
     reasons_get_from_dict,
     reasonunit_shop,
+)
+from src.a04_reason_logic.test._util.a04_str import (
+    knot_str,
+    rconcept_active_requisite_str,
+    rcontext_str,
 )
 
 

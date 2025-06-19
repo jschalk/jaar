@@ -4,15 +4,18 @@ from src.a00_data_toolbox.db_toolbox import (
     get_db_tables,
     get_row_count,
 )
-from src.a02_finance_logic._util.a02_str import owner_name_str, vow_label_str
-from src.a18_etl_toolbox._util.a18_str import owner_net_amount_str, vow_acct_nets_str
+from src.a02_finance_logic.test._util.a02_str import owner_name_str, vow_label_str
+from src.a18_etl_toolbox.test._util.a18_str import (
+    owner_net_amount_str,
+    vow_acct_nets_str,
+)
 from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_JOB_PLNCONC_SQLSTR,
     CREATE_VOW_ACCT_NETS_SQLSTR,
     create_prime_tablename,
 )
-from src.a19_kpi_toolbox._util.a19_str import vow_kpi001_acct_nets_str
 from src.a19_kpi_toolbox.kpi_mstr import get_default_kpi_bundle, populate_kpi_bundle
+from src.a19_kpi_toolbox.test._util.a19_str import vow_kpi001_acct_nets_str
 
 
 def test_populate_kpi_bundle_PopulatesTable_Scenario0_GivenDefaultBundleID():

@@ -2,8 +2,10 @@ from os.path import exists as os_path_exists
 from pandas import DataFrame
 from src.a00_data_toolbox.file_toolbox import create_path, save_file
 from src.a01_term_logic.rope import create_rope, to_rope
-from src.a06_plan_logic._util.a06_str import acct_name_str, rcontext_str
-from src.a16_pidgin_logic._util.example_pidgins import (
+from src.a06_plan_logic.test._util.a06_str import acct_name_str, rcontext_str
+from src.a16_pidgin_logic.pidgin import pidginunit_shop
+from src.a16_pidgin_logic.pidgin_config import get_pidgin_filename
+from src.a16_pidgin_logic.test._util.example_pidgins import (
     get_casa_maison_pidginunit_set_by_label,
     get_casa_maison_rope_inx_dt,
     get_casa_maison_rope_otx_dt,
@@ -14,17 +16,15 @@ from src.a16_pidgin_logic._util.example_pidgins import (
     get_suita_namemap,
     get_swim_titlemap,
 )
-from src.a16_pidgin_logic.pidgin import pidginunit_shop
-from src.a16_pidgin_logic.pidgin_config import get_pidgin_filename
-from src.a17_idea_logic._util.a17_env import (
-    env_dir_setup_cleanup,
-    idea_vows_dir as get_example_face_dir,
-)
 from src.a17_idea_logic.idea_db_tool import (
     _get_pidgen_idea_format_filenames,
     move_otx_csvs_to_pidgin_inx,
     open_csv,
     save_dataframe_to_csv,
+)
+from src.a17_idea_logic.test._util.a17_env import (
+    env_dir_setup_cleanup,
+    idea_vows_dir as get_example_face_dir,
 )
 
 

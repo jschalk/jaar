@@ -1,15 +1,18 @@
 from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.file_toolbox import create_path, open_file
-from src.a02_finance_logic._util.a02_str import owner_name_str, vow_label_str
-from src.a06_plan_logic._util.a06_str import (
+from src.a02_finance_logic.test._util.a02_str import owner_name_str, vow_label_str
+from src.a06_plan_logic.test._util.a06_str import (
     acct_name_str,
     credit_score_str,
     plan_acctunit_str,
 )
-from src.a09_pack_logic._util.a09_str import event_int_str, face_name_str
+from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a12_hub_toolbox.hub_path import create_owner_event_dir_path
-from src.a18_etl_toolbox._util.a18_env import env_dir_setup_cleanup, get_module_temp_dir
+from src.a18_etl_toolbox.test._util.a18_env import (
+    env_dir_setup_cleanup,
+    get_module_temp_dir,
+)
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
     create_sound_and_voice_tables,

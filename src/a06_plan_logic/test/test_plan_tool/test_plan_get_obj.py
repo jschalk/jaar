@@ -1,6 +1,17 @@
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import factunit_shop, reasonunit_shop
-from src.a06_plan_logic._util.a06_str import (
+from src.a06_plan_logic.plan import planunit_shop
+from src.a06_plan_logic.plan_tool import (
+    plan_acct_membership_get_obj,
+    plan_acctunit_get_obj,
+    plan_concept_awardlink_get_obj,
+    plan_concept_factunit_get_obj,
+    plan_concept_reason_premiseunit_get_obj as premiseunit_get_obj,
+    plan_concept_reasonunit_get_obj,
+    plan_conceptunit_get_obj,
+    plan_get_obj,
+)
+from src.a06_plan_logic.test._util.a06_str import (
     concept_rope_str,
     fcontext_str,
     fstate_str,
@@ -16,17 +27,6 @@ from src.a06_plan_logic._util.a06_str import (
     planunit_str,
     pstate_str,
     rcontext_str,
-)
-from src.a06_plan_logic.plan import planunit_shop
-from src.a06_plan_logic.plan_tool import (
-    plan_acct_membership_get_obj,
-    plan_acctunit_get_obj,
-    plan_concept_awardlink_get_obj,
-    plan_concept_factunit_get_obj,
-    plan_concept_reason_premiseunit_get_obj as premiseunit_get_obj,
-    plan_concept_reasonunit_get_obj,
-    plan_conceptunit_get_obj,
-    plan_get_obj,
 )
 
 

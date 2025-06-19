@@ -4,8 +4,11 @@ from pandas.testing import assert_frame_equal
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.file_toolbox import count_files, create_path, set_dir
 from src.a17_idea_logic.idea_db_tool import open_csv
-from src.a19_kpi_toolbox._util.a19_env import env_dir_setup_cleanup, get_module_temp_dir
 from src.a19_kpi_toolbox.kpi_mstr import create_kpi_csvs
+from src.a19_kpi_toolbox.test._util.a19_env import (
+    env_dir_setup_cleanup,
+    get_module_temp_dir,
+)
 
 
 def test_create_kpi_csvs_Scenario0_NotCreateFileWhenNoKPITables(env_dir_setup_cleanup):

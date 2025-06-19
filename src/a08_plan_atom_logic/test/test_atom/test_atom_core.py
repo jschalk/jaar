@@ -1,5 +1,5 @@
 from src.a03_group_logic.acct import acctunit_shop
-from src.a06_plan_logic._util.a06_str import (
+from src.a06_plan_logic.test._util.a06_str import (
     acct_name_str,
     credit_score_str,
     debt_score_str,
@@ -8,8 +8,8 @@ from src.a06_plan_logic._util.a06_str import (
     plan_acctunit_str,
     planunit_str,
 )
-from src.a08_plan_atom_logic._util.a08_str import DELETE_str, INSERT_str
 from src.a08_plan_atom_logic.atom import PlanAtom, planatom_shop
+from src.a08_plan_atom_logic.test._util.a08_str import DELETE_str, INSERT_str
 
 
 def test_PlanAtom_exists():

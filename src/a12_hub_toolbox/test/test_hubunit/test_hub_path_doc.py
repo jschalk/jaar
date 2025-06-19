@@ -1,11 +1,11 @@
 from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
-from src.a02_finance_logic._util.a02_str import (
+from src.a02_finance_logic.test._util.a02_str import (
     bud_time_str,
     owner_name_str,
     vow_label_str,
 )
-from src.a09_pack_logic._util.a09_str import event_int_str
+from src.a09_pack_logic.test._util.a09_str import event_int_str
 from src.a12_hub_toolbox.hub_path import (
     create_atoms_dir_path,
     create_bud_acct_mandate_ledger_path,

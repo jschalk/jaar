@@ -1,14 +1,14 @@
 from src.a01_term_logic.rope import create_rope, to_rope
-from src.a06_plan_logic._util.a06_str import (
+from src.a06_plan_logic.test._util.a06_str import (
     acct_name_str,
     plan_acct_membership_str,
     plan_acctunit_str,
     plan_concept_healerlink_str,
     plan_conceptunit_str,
 )
-from src.a08_plan_atom_logic._util.a08_str import DELETE_str, INSERT_str
 from src.a08_plan_atom_logic.atom import AtomRow, atomrow_shop, planatom_shop
 from src.a08_plan_atom_logic.atom_config import get_atom_args_class_types
+from src.a08_plan_atom_logic.test._util.a08_str import DELETE_str, INSERT_str
 
 
 def test_AtomRow_exists():

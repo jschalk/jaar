@@ -6,15 +6,15 @@ from src.a04_reason_logic.reason_concept import factunit_shop
 from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a05_concept_logic.healer import healerlink_shop
-from src.a06_plan_logic._util.example_plans import (
-    get_planunit_rcontext_time_example,
-    get_planunit_x1_3levels_1reason_1facts,
-    planunit_v001,
-)
 from src.a06_plan_logic.plan import (
     get_dict_of_plan_from_dict,
     get_from_json as planunit_get_from_json,
     planunit_shop,
+)
+from src.a06_plan_logic.test._util.example_plans import (
+    get_planunit_rcontext_time_example,
+    get_planunit_x1_3levels_1reason_1facts,
+    planunit_v001,
 )
 
 

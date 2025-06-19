@@ -1,18 +1,19 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, get_dir_file_strs
-from src.a06_plan_logic._util.a06_str import (
+from src.a06_plan_logic.test._util.a06_str import (
     LabelTerm_str,
     NameTerm_str,
     RopeTerm_str,
     TitleTerm_str,
 )
-from src.a09_pack_logic._util.a09_str import event_int_str, face_name_str
-from src.a16_pidgin_logic._util.a16_str import (
+from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
+from src.a16_pidgin_logic.pidgin import pidginunit_shop
+from src.a16_pidgin_logic.test._util.a16_str import (
     inx_knot_str,
     otx_knot_str,
     unknown_str_str,
 )
-from src.a16_pidgin_logic._util.example_pidgins import (
+from src.a16_pidgin_logic.test._util.example_pidgins import (
     get_casa_maison_label_dt,
     get_casa_maison_pidginunit_set_by_label,
     get_casa_maison_pidginunit_set_by_otx2inx,
@@ -20,11 +21,6 @@ from src.a16_pidgin_logic._util.example_pidgins import (
     get_pidgin_core_attrs_are_none_namemap,
     get_slash_namemap,
     get_sue_pidginunit,
-)
-from src.a16_pidgin_logic.pidgin import pidginunit_shop
-from src.a17_idea_logic._util.a17_env import (
-    env_dir_setup_cleanup,
-    idea_vows_dir as get_example_face_dir,
 )
 from src.a17_idea_logic.idea_db_tool import (
     get_idea_elements_sort_order as sorting_columns,
@@ -47,6 +43,10 @@ from src.a17_idea_logic.pidgin_toolbox import (
     get_pidgin_title_dt_columns,
     init_pidginunit_from_dir,
     save_all_csvs_from_pidginunit,
+)
+from src.a17_idea_logic.test._util.a17_env import (
+    env_dir_setup_cleanup,
+    idea_vows_dir as get_example_face_dir,
 )
 
 
