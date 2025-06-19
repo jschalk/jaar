@@ -14,7 +14,7 @@ from src.a18_etl_toolbox._util.a18_env import env_dir_setup_cleanup, get_module_
 from src.a18_etl_toolbox.transformers import etl_vow_ote1_agg_csvs_to_jsons
 
 
-def test_WorldUnit_vow_ote1_agg_csvs2jsons_CreatesFile_Scenaro0(
+def test_etl_vow_ote1_agg_csvs_to_jsons_CreatesFile_Scenaro0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
