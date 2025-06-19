@@ -25,6 +25,7 @@ def test_WorldUnit_Exists():
     # THEN
     assert not x_world.world_id
     assert not x_world.worlds_dir
+    assert not x_world.output_dir
     assert not x_world.world_time_pnigh
     assert not x_world._events
     assert not x_world._syntax_otz_dir
@@ -42,22 +43,22 @@ def test_WorldUnit_set_mud_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     x_example_dir = create_path(worlds_dir(), "example_dir")
     x_mud_dir = create_path(x_example_dir, "mud")
 
-    assert fizz_world._world_dir is None
-    assert fizz_world._syntax_otz_dir is None
-    assert fizz_world._mud_dir is None
-    assert fizz_world._brick_dir is None
-    assert fizz_world._vow_mstr_dir is None
+    assert not fizz_world._world_dir
+    assert not fizz_world._syntax_otz_dir
+    assert not fizz_world._mud_dir
+    assert not fizz_world._brick_dir
+    assert not fizz_world._vow_mstr_dir
     assert os_path_exists(x_mud_dir) is False
 
     # WHEN
     fizz_world.set_mud_dir(x_mud_dir)
 
     # THEN
-    assert fizz_world._world_dir is None
-    assert fizz_world._syntax_otz_dir is None
+    assert not fizz_world._world_dir
+    assert not fizz_world._syntax_otz_dir
     assert fizz_world._mud_dir == x_mud_dir
-    assert fizz_world._brick_dir is None
-    assert fizz_world._vow_mstr_dir is None
+    assert not fizz_world._brick_dir
+    assert not fizz_world._vow_mstr_dir
     assert os_path_exists(x_mud_dir)
 
 
@@ -97,10 +98,11 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     assert os_path_exists(x_vow_mstr_dir)
 
 
-def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
+def test_worldunit_shop_ReturnsObj_Scenario0_WithParameters(env_dir_setup_cleanup):
     # ESTABLISH
     worlds2_dir = create_path(worlds_dir(), "worlds2")
     example_mud_dir = create_path(worlds_dir(), "example_mud")
+    output_dir = create_path(worlds_dir(), "output")
     five_world_id = "five"
     world2_time_pnigh = 55
     world2_vowunits = {"accord45"}
@@ -109,6 +111,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     x_world = worldunit_shop(
         world_id=five_world_id,
         worlds_dir=worlds2_dir,
+        output_dir=output_dir,
         mud_dir=example_mud_dir,
         world_time_pnigh=world2_time_pnigh,
         _vowunits=world2_vowunits,
@@ -118,6 +121,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     world_dir = create_path(worlds2_dir, x_world.world_id)
     assert x_world.world_id == five_world_id
     assert x_world.worlds_dir == worlds2_dir
+    assert x_world.output_dir == output_dir
     assert x_world._mud_dir == example_mud_dir
     assert x_world.world_time_pnigh == world2_time_pnigh
     assert x_world._events == {}
@@ -126,7 +130,7 @@ def test_worldunit_shop_ReturnsObj_WithParameters(env_dir_setup_cleanup):
     assert x_world._pidgin_events == {}
 
 
-def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
+def test_worldunit_shop_ReturnsObj_Scenario1_WithoutParameters(env_dir_setup_cleanup):
     # ESTABLISH
     a23_str = "accord23"
 
@@ -137,11 +141,28 @@ def test_worldunit_shop_ReturnsObj_WithoutParameters(env_dir_setup_cleanup):
     world_dir = create_path(worlds_dir(), x_world.world_id)
     assert x_world.world_id == a23_str
     assert x_world.worlds_dir == worlds_dir()
+    assert not x_world.output_dir
     assert x_world.world_time_pnigh == 0
     assert x_world._events == {}
     assert x_world._mud_dir == create_path(x_world._world_dir, "mud")
     assert x_world._syntax_otz_dir == create_path(world_dir, "syntax_otz")
     assert x_world._vowunits == set()
+
+
+def test_worldunit_shop_ReturnsObj_Scenario2_ThirdParameterIs_output_dir(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    a23_str = "accord23"
+    output_dir = create_path(worlds_dir(), "output")
+
+    # WHEN
+    x_world = worldunit_shop(a23_str, worlds_dir(), output_dir)
+
+    # THEN
+    assert x_world.world_id == a23_str
+    assert x_world.worlds_dir == worlds_dir()
+    assert x_world.output_dir == output_dir
 
 
 # def test_WorldUnit_popen_event_from_files_ReturnsObj(env_dir_setup_cleanup):
