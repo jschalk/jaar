@@ -421,6 +421,8 @@ def get_timeline_min_difference(timeline_config0: dict, timeline_config1: dict) 
 
 @dataclass
 class ChronoUnit:
+    """Creates readable time blurb from PlanUnit, time_range_root_rope, and minute."""
+
     x_planunit: PlanUnit = None
     time_range_root_rope: RopeTerm = None
     x_min: int = None
