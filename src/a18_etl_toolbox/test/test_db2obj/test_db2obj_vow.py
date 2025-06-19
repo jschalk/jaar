@@ -69,6 +69,7 @@ VALUES (
 
 
 def test_get_vow_dict_from_voice_tables_ReturnsObj_With_vowunit_Attrs_Scenario1():
+    # sourcery skip: extract-method, inline-immediately-returned-variable
     # ESTABLISH
     a23_str = "accord23"
     with sqlite3_connect(":memory:") as conn:
