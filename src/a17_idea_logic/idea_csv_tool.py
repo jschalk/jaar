@@ -769,7 +769,6 @@ def add_pack_to_br00029_csv(
 ) -> str:
     for planatom in x_packunit._plandelta.get_ordered_planatoms().values():
         if planatom.dimen == "planunit":
-            print(f"{planatom=} {x_packunit.owner_name=}")
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),

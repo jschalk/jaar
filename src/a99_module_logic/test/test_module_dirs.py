@@ -1,3 +1,4 @@
+from os import listdir as os_listdir
 from os.path import basename as os_path_basename, exists as os_path_exists
 from pathlib import Path as pathlib_Path
 from src.a00_data_toolbox.file_toolbox import create_path, get_level1_dirs
@@ -201,6 +202,24 @@ def test_StrFunctionsAppearWhereTheyShould():
                         if x_str_func_name not in str_funcs_set:
                             print(f"missing {x_str=} {file_path=}")
                         assert x_str_func_name in str_funcs_set
+
+
+def test_NoPrintStatmentsInModuleNonTestFiles():
+    # sourcery skip: no-loop-in-tests
+    # sourcery skip: no-conditionals-in-tests
+    # ESTABLISH
+    print_str = "print"
+
+    # WHEN / THEN
+    for module_desc, module_dir in get_module_descs().items():
+        desc_number_str = module_desc[1:3]
+        py_files = [f for f in os_listdir(module_dir) if f.endswith(".py")]
+        for py_file in py_files:
+            py_file_path = create_path(module_dir, py_file)
+            py_file_str = open(py_file_path).read()
+            if py_file_str.find(print_str) > -1:
+                print(f"Module {module_desc} file {py_file_path} has print statement")
+            assert py_file_str.find(print_str) == -1
 
 
 def test_str_funcs_MarkdownFileExists():

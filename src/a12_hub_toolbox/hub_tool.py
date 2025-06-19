@@ -249,7 +249,6 @@ def save_planpoint_file(
     planpoint_json_path = create_planpoint_path(
         vow_mstr_dir, x_planpoint.vow_label, x_planpoint.owner_name, x_bud_time
     )
-    print(f"{x_planpoint.vow_label=} {planpoint_json_path=}")
     save_plan_file(planpoint_json_path, None, x_planpoint)
 
 

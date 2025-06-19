@@ -195,13 +195,13 @@ def check_table_column_existence(
     # # for table_name, table_dict in tables_dict.items():
     # for table_name in tables_dict:
     #     if db_tables.get(table_name) is None:
-    #         # print(f"Table {table_name} is missing")
+    #         # (f"Table {table_name} is missing")
     #         return False
 
     #     # db_columns = set(db_tables_columns.get(table_name).keys())
     #     # config_columns = set(table_dict.get("columns").keys())
     #     # diff_columns = db_columns.symmetric_difference(config_columns)
-    #     # print(f"Table: {table_name} Column differences: {diff_columns}")
+    #     # (f"Table: {table_name} Column differences: {diff_columns}")
 
     #     # if diff_columns:
     #     #     return False
@@ -267,6 +267,10 @@ def get_grouping_with_all_values_equal_sql_query(
     return f"{_get_grouping_select_clause(groupby_columns, value_columns)} FROM {x_table} {_get_grouping_groupby_clause(groupby_columns)} {_get_having_equal_value_clause(value_columns)}"
 
 
+class insert_csv_Exception(Exception):
+    pass
+
+
 def insert_csv(csv_file_path: str, conn_or_cursor: sqlite3_Connection, table_name: str):
     """
     Inserts data from a CSV file into a specified SQLite database table.
@@ -295,10 +299,10 @@ def insert_csv(csv_file_path: str, conn_or_cursor: sqlite3_Connection, table_nam
                 conn_or_cursor.execute(insert_query, row)
 
     except sqlite3_Error as e:
-        print(f"SQLite error: {e}")
+        raise insert_csv_Exception(f"SQLite error: {e}") from e
 
     except Exception as e:
-        print(f"Error: {e}")
+        raise insert_csv_Exception(f"Error: {e}") from e
 
 
 class sqlite3_Error_Exception(Exception):
