@@ -420,7 +420,7 @@ def get_timeline_min_difference(timeline_config0: dict, timeline_config1: dict) 
 
 
 @dataclass
-class ChronoUnit:
+class CalendarStrGenerator:
     """Creates readable time blurb from PlanUnit, time_range_root_rope, and minute."""
 
     x_planunit: PlanUnit = None
@@ -532,8 +532,8 @@ class ChronoUnit:
         return x_str
 
 
-def chronounit_shop(x_planunit: PlanUnit, time_range_root_rope: str, x_min: int):
-    return ChronoUnit(x_planunit, time_range_root_rope, x_min=x_min)
+def calendarstr_shop(x_planunit: PlanUnit, time_range_root_rope: str, x_min: int):
+    return CalendarStrGenerator(x_planunit, time_range_root_rope, x_min=x_min)
 
 
 def config_file_dir() -> str:

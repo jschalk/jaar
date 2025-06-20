@@ -6,7 +6,7 @@ from src.a05_concept_logic.concept import ConceptUnit
 from src.a06_plan_logic.plan import PlanUnit, planunit_shop
 from src.a07_calendar_logic.chrono import (
     add_newtimeline_conceptunit,
-    chronounit_shop,
+    calendarstr_shop,
     create_weekday_conceptunits,
     get_min_from_dt_offset,
     new_timeline_conceptunit,
@@ -157,12 +157,12 @@ def display_current_creg_five_time_attrs(graphics_bool: bool):
         five_rope = sue_plan.make_rope(time_rope, five_str())
         creg_min = get_creg_min_from_dt(current_datetime)
         five_min = get_five_min_from_dt(current_datetime)
-        creg_chronounit = chronounit_shop(sue_plan, creg_rope, creg_min)
-        five_chronounit = chronounit_shop(sue_plan, five_rope, five_min)
-        creg_chronounit.calc_timeline()
-        five_chronounit.calc_timeline()
-        creg_blurb = f"<b>{creg_chronounit.get_blurb()}</b>"
-        five_blurb = f"<b>{five_chronounit.get_blurb()}</b>"
+        creg_calendarstr = calendarstr_shop(sue_plan, creg_rope, creg_min)
+        five_calendarstr = calendarstr_shop(sue_plan, five_rope, five_min)
+        creg_calendarstr.calc_timeline()
+        five_calendarstr.calc_timeline()
+        creg_blurb = f"<b>{creg_calendarstr.get_blurb()}</b>"
+        five_blurb = f"<b>{five_calendarstr.get_blurb()}</b>"
 
         datetime_str = current_datetime.strftime("%H:%M, %A, %d %B, %Y")
         dt_str = f"python : {datetime_str}"
@@ -197,15 +197,15 @@ def display_creg_five_squirt_time_attrs(graphics_bool: bool):
         creg_min = get_creg_min_from_dt(current_datetime)
         five_min = get_five_min_from_dt(current_datetime)
         squirt_min = get_squirt_min_from_dt(current_datetime)
-        creg_chronounit = chronounit_shop(sue_plan, creg_rope, creg_min)
-        five_chronounit = chronounit_shop(sue_plan, five_rope, five_min)
-        squirt_chronounit = chronounit_shop(sue_plan, squirt_rope, squirt_min)
-        creg_chronounit.calc_timeline()
-        five_chronounit.calc_timeline()
-        squirt_chronounit.calc_timeline()
-        creg_blurb = f"<b>{creg_chronounit.get_blurb()}</b>"
-        five_blurb = f"<b>{five_chronounit.get_blurb()}</b>"
-        squirt_blurb = f"<b>{squirt_chronounit.get_blurb()}</b>"
+        creg_calendarstr = calendarstr_shop(sue_plan, creg_rope, creg_min)
+        five_calendarstr = calendarstr_shop(sue_plan, five_rope, five_min)
+        squirt_calendarstr = calendarstr_shop(sue_plan, squirt_rope, squirt_min)
+        creg_calendarstr.calc_timeline()
+        five_calendarstr.calc_timeline()
+        squirt_calendarstr.calc_timeline()
+        creg_blurb = f"<b>{creg_calendarstr.get_blurb()}</b>"
+        five_blurb = f"<b>{five_calendarstr.get_blurb()}</b>"
+        squirt_blurb = f"<b>{squirt_calendarstr.get_blurb()}</b>"
 
         datetime_str = current_datetime.strftime("%H:%M, %A, %d %B, %Y")
         dt_str = f"python : {datetime_str}"

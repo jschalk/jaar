@@ -1,6 +1,6 @@
 from datetime import datetime
 from src.a06_plan_logic.plan import PlanUnit, planunit_shop
-from src.a07_calendar_logic.chrono import ChronoUnit, chronounit_shop
+from src.a07_calendar_logic.chrono import CalendarStrGenerator, calendarstr_shop
 from src.a07_calendar_logic.test._util.calendar_examples import (
     add_time_creg_conceptunit,
     add_time_five_conceptunit,
@@ -13,204 +13,204 @@ from src.a07_calendar_logic.test._util.calendar_examples import (
 )
 
 
-def test_ChronoUnit_Exists():
+def test_CalendarStrGenerator_Exists():
     # ESTABLISH / WHEN
-    x_chronounit = ChronoUnit()
+    x_calendarstr = CalendarStrGenerator()
 
     # THEN
-    assert not x_chronounit.x_planunit
-    assert not x_chronounit.time_range_root_rope
-    assert not x_chronounit.x_min
-    assert not x_chronounit._timeline_concept
-    assert not x_chronounit._weekday
-    assert not x_chronounit._monthday
-    assert not x_chronounit._month
-    assert not x_chronounit._hour
-    assert not x_chronounit._minute
-    assert not x_chronounit._c400_number
-    assert not x_chronounit._c100_count
-    assert not x_chronounit._yr4_count
-    assert not x_chronounit._year_count
-    assert not x_chronounit._year_num
+    assert not x_calendarstr.x_planunit
+    assert not x_calendarstr.time_range_root_rope
+    assert not x_calendarstr.x_min
+    assert not x_calendarstr._timeline_concept
+    assert not x_calendarstr._weekday
+    assert not x_calendarstr._monthday
+    assert not x_calendarstr._month
+    assert not x_calendarstr._hour
+    assert not x_calendarstr._minute
+    assert not x_calendarstr._c400_number
+    assert not x_calendarstr._c100_count
+    assert not x_calendarstr._yr4_count
+    assert not x_calendarstr._year_count
+    assert not x_calendarstr._year_num
 
 
-def test_ChronoUnit_shop_ReturnsObj():
+def test_CalendarStrGenerator_shop_ReturnsObj():
     # ESTABLISH
     x_time_range_root_rope = "fizz07"
     x_timeline_min = 890000
     sue_plan = planunit_shop("Sue")
 
     # WHEN
-    x_chronounit = chronounit_shop(
+    x_calendarstr = calendarstr_shop(
         x_planunit=sue_plan,
         time_range_root_rope=x_time_range_root_rope,
         x_min=x_timeline_min,
     )
 
     # THEN
-    assert x_chronounit.x_planunit == sue_plan
-    assert x_chronounit.time_range_root_rope == x_time_range_root_rope
-    assert x_chronounit.x_min == x_timeline_min
+    assert x_calendarstr.x_planunit == sue_plan
+    assert x_calendarstr.time_range_root_rope == x_time_range_root_rope
+    assert x_calendarstr.x_min == x_timeline_min
 
 
-def test_ChronoUnit_set_timeline_concept_SetsAttr():
+def test_CalendarStrGenerator_set_timeline_concept_SetsAttr():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     sue_plan = add_time_creg_conceptunit(sue_plan)
     sue_plan.settle_plan()
     time_rope = sue_plan.make_l1_rope("time")
     creg_rope = sue_plan.make_rope(time_rope, creg_str())
-    x_chronounit = chronounit_shop(sue_plan, creg_rope, 10000000)
-    assert not x_chronounit._timeline_concept
+    x_calendarstr = calendarstr_shop(sue_plan, creg_rope, 10000000)
+    assert not x_calendarstr._timeline_concept
 
     # WHEN
-    x_chronounit._set_timeline_concept()
+    x_calendarstr._set_timeline_concept()
 
     # THEN
-    assert x_chronounit._timeline_concept
+    assert x_calendarstr._timeline_concept
 
 
-def test_ChronoUnit_set_weekday_SetsAttr():
+def test_CalendarStrGenerator_set_weekday_SetsAttr():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     sue_plan = add_time_creg_conceptunit(sue_plan)
     sue_plan.settle_plan()
     time_rope = sue_plan.make_l1_rope("time")
     creg_rope = sue_plan.make_rope(time_rope, creg_str())
-    x_chronounit = chronounit_shop(sue_plan, creg_rope, 10001440)
-    x_chronounit._set_timeline_concept()
-    assert not x_chronounit._weekday
+    x_calendarstr = calendarstr_shop(sue_plan, creg_rope, 10001440)
+    x_calendarstr._set_timeline_concept()
+    assert not x_calendarstr._weekday
 
     # WHEN
-    x_chronounit._set_weekday()
+    x_calendarstr._set_weekday()
 
     # THEN
-    assert x_chronounit._weekday == "Thursday"
+    assert x_calendarstr._weekday == "Thursday"
 
 
-def test_ChronoUnit_set_month_SetsAttr():
+def test_CalendarStrGenerator_set_month_SetsAttr():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     sue_plan = add_time_creg_conceptunit(sue_plan)
     sue_plan.settle_plan()
     time_rope = sue_plan.make_l1_rope("time")
     creg_rope = sue_plan.make_rope(time_rope, creg_str())
-    x_chronounit = chronounit_shop(sue_plan, creg_rope, 10060000)
-    x_chronounit._set_timeline_concept()
-    assert not x_chronounit._month
-    assert not x_chronounit._monthday
+    x_calendarstr = calendarstr_shop(sue_plan, creg_rope, 10060000)
+    x_calendarstr._set_timeline_concept()
+    assert not x_calendarstr._month
+    assert not x_calendarstr._monthday
 
     # WHEN
-    x_chronounit._set_month()
+    x_calendarstr._set_month()
 
     # THEN
-    assert x_chronounit._month == "April"
-    # assert x_chronounit._monthday == 16
-    assert x_chronounit._monthday == 17
+    assert x_calendarstr._month == "April"
+    # assert x_calendarstr._monthday == 16
+    assert x_calendarstr._monthday == 17
 
 
-def test_ChronoUnit_set_hour_SetsAttr():
+def test_CalendarStrGenerator_set_hour_SetsAttr():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     sue_plan = add_time_creg_conceptunit(sue_plan)
     sue_plan.settle_plan()
     time_rope = sue_plan.make_l1_rope("time")
     creg_rope = sue_plan.make_rope(time_rope, creg_str())
-    x_chronounit = chronounit_shop(sue_plan, creg_rope, 10000001)
-    x_chronounit._set_timeline_concept()
-    assert not x_chronounit._hour
-    assert not x_chronounit._hour
-    assert not x_chronounit._minute
+    x_calendarstr = calendarstr_shop(sue_plan, creg_rope, 10000001)
+    x_calendarstr._set_timeline_concept()
+    assert not x_calendarstr._hour
+    assert not x_calendarstr._hour
+    assert not x_calendarstr._minute
 
     # WHEN
-    x_chronounit._set_hour()
+    x_calendarstr._set_hour()
 
     # THEN
-    assert x_chronounit._hour == "10-10am"
-    assert x_chronounit._minute == 41
+    assert x_calendarstr._hour == "10-10am"
+    assert x_calendarstr._minute == 41
 
 
-def test_ChronoUnit_set_year_SetsAttr():
+def test_CalendarStrGenerator_set_year_SetsAttr():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     sue_plan = add_time_creg_conceptunit(sue_plan)
     sue_plan.settle_plan()
     time_rope = sue_plan.make_l1_rope("time")
     creg_rope = sue_plan.make_rope(time_rope, creg_str())
-    x_chronounit = chronounit_shop(sue_plan, creg_rope, 1030600100)
-    x_chronounit._set_timeline_concept()
-    assert not x_chronounit._c400_number
-    assert not x_chronounit._c100_count
-    assert not x_chronounit._yr4_count
-    assert not x_chronounit._year_count
-    assert not x_chronounit._year_num
+    x_calendarstr = calendarstr_shop(sue_plan, creg_rope, 1030600100)
+    x_calendarstr._set_timeline_concept()
+    assert not x_calendarstr._c400_number
+    assert not x_calendarstr._c100_count
+    assert not x_calendarstr._yr4_count
+    assert not x_calendarstr._year_count
+    assert not x_calendarstr._year_num
 
     # WHEN
-    x_chronounit._set_year()
+    x_calendarstr._set_year()
 
     # THEN
-    print(f"{x_chronounit._year_num=}")
-    assert x_chronounit._c400_number == 4
-    assert x_chronounit._c100_count == 3
-    assert x_chronounit._yr4_count == 14
-    assert x_chronounit._year_count == 3
-    assert x_chronounit._year_num == 1959
+    print(f"{x_calendarstr._year_num=}")
+    assert x_calendarstr._c400_number == 4
+    assert x_calendarstr._c100_count == 3
+    assert x_calendarstr._yr4_count == 14
+    assert x_calendarstr._year_count == 3
+    assert x_calendarstr._year_num == 1959
 
 
-def test_ChronoUnit_calc_timeline_SetsAttrs():
+def test_CalendarStrGenerator_calc_timeline_SetsAttrs():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     sue_plan = add_time_creg_conceptunit(sue_plan)
     time_rope = sue_plan.make_l1_rope("time")
     creg_rope = sue_plan.make_rope(time_rope, creg_str())
-    x_chronounit = chronounit_shop(sue_plan, creg_rope, 1030600102)
-    assert not x_chronounit._timeline_concept
-    assert not x_chronounit._weekday
-    assert not x_chronounit._monthday
-    assert not x_chronounit._month
-    assert not x_chronounit._hour
-    assert not x_chronounit._minute
-    assert not x_chronounit._year_num
+    x_calendarstr = calendarstr_shop(sue_plan, creg_rope, 1030600102)
+    assert not x_calendarstr._timeline_concept
+    assert not x_calendarstr._weekday
+    assert not x_calendarstr._monthday
+    assert not x_calendarstr._month
+    assert not x_calendarstr._hour
+    assert not x_calendarstr._minute
+    assert not x_calendarstr._year_num
 
     # WHEN
-    x_chronounit.calc_timeline()
+    x_calendarstr.calc_timeline()
 
     # THEN
-    assert x_chronounit._timeline_concept
-    assert x_chronounit._weekday
-    assert x_chronounit._monthday
-    assert x_chronounit._month
-    assert x_chronounit._hour
-    assert x_chronounit._minute
-    assert x_chronounit._year_num
+    assert x_calendarstr._timeline_concept
+    assert x_calendarstr._weekday
+    assert x_calendarstr._monthday
+    assert x_calendarstr._month
+    assert x_calendarstr._hour
+    assert x_calendarstr._minute
+    assert x_calendarstr._year_num
 
 
-def test_ChronoUnit_get_blurb_ReturnsObj():
+def test_CalendarStrGenerator_get_blurb_ReturnsObj():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     sue_plan = add_time_creg_conceptunit(sue_plan)
     time_rope = sue_plan.make_l1_rope("time")
     creg_rope = sue_plan.make_rope(time_rope, creg_str())
-    x_chronounit = chronounit_shop(sue_plan, creg_rope, 1030600102)
-    x_chronounit.calc_timeline()
-    assert x_chronounit._timeline_concept
-    assert x_chronounit._weekday
-    assert x_chronounit._monthday
-    assert x_chronounit._month
-    assert x_chronounit._hour
-    assert x_chronounit._minute
-    assert x_chronounit._year_num
+    x_calendarstr = calendarstr_shop(sue_plan, creg_rope, 1030600102)
+    x_calendarstr.calc_timeline()
+    assert x_calendarstr._timeline_concept
+    assert x_calendarstr._weekday
+    assert x_calendarstr._monthday
+    assert x_calendarstr._month
+    assert x_calendarstr._hour
+    assert x_calendarstr._minute
+    assert x_calendarstr._year_num
 
     # WHEN
-    timeline_blurb = x_chronounit.get_blurb()
+    timeline_blurb = x_calendarstr.get_blurb()
 
     # THEN
-    x_str = f"{x_chronounit._hour}"
-    x_str += f":{x_chronounit._minute}"
-    x_str += f", {x_chronounit._weekday}"
-    x_str += f", {x_chronounit._monthday}"
-    x_str += f" {x_chronounit._month}"
-    x_str += f", {x_chronounit._year_num}"
+    x_str = f"{x_calendarstr._hour}"
+    x_str += f":{x_calendarstr._minute}"
+    x_str += f", {x_calendarstr._weekday}"
+    x_str += f", {x_calendarstr._monthday}"
+    x_str += f" {x_calendarstr._month}"
+    x_str += f", {x_calendarstr._year_num}"
     assert timeline_blurb == x_str
 
 
@@ -225,38 +225,38 @@ def test_calc_timeline_SetsAttrFiveTimeLine(graphics_bool):
     mar1_2000_datetime = datetime(2000, 3, 1)
     creg_min = get_creg_min_from_dt(mar1_2000_datetime)
     five_min = get_five_min_from_dt(mar1_2000_datetime)
-    creg_chronounit = chronounit_shop(sue_plan, creg_rope, creg_min)
-    five_chronounit = chronounit_shop(sue_plan, five_rope, five_min)
-    assert not creg_chronounit._weekday
-    assert not creg_chronounit._monthday
-    assert not creg_chronounit._month
-    assert not creg_chronounit._hour
-    assert not creg_chronounit._minute
-    assert not creg_chronounit._year_num
-    assert not five_chronounit._weekday
-    assert not five_chronounit._monthday
-    assert not five_chronounit._month
-    assert not five_chronounit._hour
-    assert not five_chronounit._minute
-    assert not five_chronounit._year_num
+    creg_calendarstr = calendarstr_shop(sue_plan, creg_rope, creg_min)
+    five_calendarstr = calendarstr_shop(sue_plan, five_rope, five_min)
+    assert not creg_calendarstr._weekday
+    assert not creg_calendarstr._monthday
+    assert not creg_calendarstr._month
+    assert not creg_calendarstr._hour
+    assert not creg_calendarstr._minute
+    assert not creg_calendarstr._year_num
+    assert not five_calendarstr._weekday
+    assert not five_calendarstr._monthday
+    assert not five_calendarstr._month
+    assert not five_calendarstr._hour
+    assert not five_calendarstr._minute
+    assert not five_calendarstr._year_num
 
     # WHEN
-    creg_chronounit.calc_timeline()
-    five_chronounit.calc_timeline()
+    creg_calendarstr.calc_timeline()
+    five_calendarstr.calc_timeline()
 
     # THEN
-    assert creg_chronounit._weekday == "Wednesday"
-    assert creg_chronounit._month == "March"
-    assert creg_chronounit._monthday == 1
-    assert creg_chronounit._hour == "0-12am"
-    assert creg_chronounit._minute == 0
-    assert creg_chronounit._year_num == 2000
-    assert five_chronounit._weekday == "Baileyday"
-    assert five_chronounit._monthday == 0
-    assert five_chronounit._month == "Fredrick"
-    assert five_chronounit._hour == "0hr"
-    assert five_chronounit._minute == 0
-    assert five_chronounit._year_num == 5200
+    assert creg_calendarstr._weekday == "Wednesday"
+    assert creg_calendarstr._month == "March"
+    assert creg_calendarstr._monthday == 1
+    assert creg_calendarstr._hour == "0-12am"
+    assert creg_calendarstr._minute == 0
+    assert creg_calendarstr._year_num == 2000
+    assert five_calendarstr._weekday == "Baileyday"
+    assert five_calendarstr._monthday == 0
+    assert five_calendarstr._month == "Fredrick"
+    assert five_calendarstr._hour == "0hr"
+    assert five_calendarstr._minute == 0
+    assert five_calendarstr._year_num == 5200
 
     display_current_creg_five_time_attrs(graphics_bool)
     display_creg_five_squirt_time_attrs(graphics_bool)
@@ -266,8 +266,8 @@ def check_creg_timeline_attr(x_plan: PlanUnit, x_datetime: datetime):
     time_rope = x_plan.make_l1_rope("time")
     creg_rope = x_plan.make_rope(time_rope, creg_str())
     creg_min = get_creg_min_from_dt(x_datetime)
-    creg_chronounit = chronounit_shop(x_plan, creg_rope, creg_min)
-    creg_chronounit.calc_timeline()
+    creg_calendarstr = calendarstr_shop(x_plan, creg_rope, creg_min)
+    creg_calendarstr.calc_timeline()
     dt_hour = x_datetime.strftime("%H")
     dt_minute = x_datetime.strftime("%M")
     dt_weekday = x_datetime.strftime("%A")
@@ -285,15 +285,15 @@ def check_creg_timeline_attr(x_plan: PlanUnit, x_datetime: datetime):
     else:
         hour_str = f"{hour_int}-{hour_int%12}pm"
     print(x_datetime.strftime("%H:%M, %A, %d %B, %Y"))
-    if creg_chronounit._month in {"January", "February"}:
+    if creg_calendarstr._month in {"January", "February"}:
         dt_year = int(dt_year) - 1
-    assert creg_chronounit._weekday == dt_weekday
-    assert creg_chronounit._month == dt_month
-    # assert creg_chronounit._monthday == int(dt_monthday) - 1
-    assert creg_chronounit._monthday == int(dt_monthday)
-    assert creg_chronounit._hour == hour_str
-    assert creg_chronounit._minute == int(dt_minute)
-    assert creg_chronounit._year_num == int(dt_year)
+    assert creg_calendarstr._weekday == dt_weekday
+    assert creg_calendarstr._month == dt_month
+    # assert creg_calendarstr._monthday == int(dt_monthday) - 1
+    assert creg_calendarstr._monthday == int(dt_monthday)
+    assert creg_calendarstr._hour == hour_str
+    assert creg_calendarstr._minute == int(dt_minute)
+    assert creg_calendarstr._year_num == int(dt_year)
 
 
 def test_check_creg_timeline():
