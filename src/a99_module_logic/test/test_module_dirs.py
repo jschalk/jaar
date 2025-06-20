@@ -227,6 +227,7 @@ def test_NoPrintStatmentsInModuleNonTestFiles():
 
 def test_ModulesDoNotHaveEmptyDirectories():
     # sourcery skip: no-loop-in-tests
+    # sourcery skip: no-conditionals-in-tests
     # ESTABLISH
     print_str = "print"
 
