@@ -31,7 +31,7 @@ def test_RiverRun_save_rivergrade_file_CorrectlySavesFile(env_dir_setup_cleanup)
 
 def test_RiverRun_save_rivergrade_files_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH / WHEN
-    delete_dir(get_module_temp_dir)
+    delete_dir(get_module_temp_dir())
     github_error_path1 = "src\\a14_keep_logic\\test\\_util\\vow_mstr\\vows/vows/ex_keep04/owners/Yao/keeps/nation/usa/texas/grades/Yao.json"
     assert os_path_exists(github_error_path1) is False
     yao_hubunit = example_yao_texas_hubunit()
