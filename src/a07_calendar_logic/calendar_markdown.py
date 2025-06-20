@@ -1,6 +1,6 @@
 from copy import copy as copy_copy
 from dataclasses import dataclass
-from src.a07_calendar_logic.chrono import (
+from src.a07_calendar_logic.timeline import (
     TimeLineUnit,
     get_first_weekday_index_of_year,
     timelineunit_shop,

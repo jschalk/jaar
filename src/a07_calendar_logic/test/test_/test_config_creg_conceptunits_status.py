@@ -1,7 +1,6 @@
 from datetime import datetime
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_plan_logic.plan import planunit_shop
-from src.a07_calendar_logic.chrono import get_year_rope
 from src.a07_calendar_logic.test._util.a07_str import (
     day_str,
     days_str,
@@ -17,6 +16,7 @@ from src.a07_calendar_logic.test._util.calendar_examples import (
     get_thu,
     get_wed,
 )
+from src.a07_calendar_logic.timeline import get_year_rope
 
 
 def test_PlanUnit_get_agenda_dict_ReturnsDictWith_day_concept_Scenario0():

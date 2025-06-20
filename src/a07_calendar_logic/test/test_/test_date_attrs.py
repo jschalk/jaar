@@ -1,6 +1,5 @@
 from datetime import datetime
 from src.a06_plan_logic.plan import PlanUnit, planunit_shop
-from src.a07_calendar_logic.chrono import CalendarStrGenerator, calendarstr_shop
 from src.a07_calendar_logic.test._util.calendar_examples import (
     add_time_creg_conceptunit,
     add_time_five_conceptunit,
@@ -11,6 +10,7 @@ from src.a07_calendar_logic.test._util.calendar_examples import (
     get_creg_min_from_dt,
     get_five_min_from_dt,
 )
+from src.a07_calendar_logic.timeline import CalendarStrGenerator, calendarstr_shop
 
 
 def test_CalendarStrGenerator_Exists():

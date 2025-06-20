@@ -1,9 +1,9 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a07_calendar_logic.chrono import (
+from src.a07_calendar_logic.test._util.calendar_examples import get_five_config
+from src.a07_calendar_logic.timeline import (
     get_default_timeline_config_dict,
     timelineunit_shop,
 )
-from src.a07_calendar_logic.test._util.calendar_examples import get_five_config
 from src.a15_vow_logic.vow import vowunit_shop
 from src.a17_idea_logic.idea import vow_build_from_df
 from src.a17_idea_logic.test._util.a17_env import env_dir_setup_cleanup, idea_vows_dir

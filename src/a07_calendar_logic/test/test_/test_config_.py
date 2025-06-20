@@ -3,20 +3,6 @@ from inspect import getdoc as inspect_getdoc
 from src.a01_term_logic.test._util.a01_str import knot_str
 from src.a02_finance_logic.finance_config import TimeLinePoint
 from src.a06_plan_logic.plan import planunit_shop
-from src.a07_calendar_logic.chrono import (
-    C400Constants,
-    TimeLineLabel,
-    TimeLineUnit,
-    day_length,
-    get_c400_constants,
-    get_day_rope,
-    get_default_timeline_config_dict,
-    get_week_rope,
-    get_year_rope,
-    timeline_config_shop,
-    timelineunit_shop,
-    validate_timeline_config,
-)
 from src.a07_calendar_logic.test._util.a07_str import (
     c100_str,
     c400_clean_str,
@@ -41,6 +27,20 @@ from src.a07_calendar_logic.test._util.calendar_examples import (
     get_example_timeline_config,
     get_five_config,
     get_squirt_config,
+)
+from src.a07_calendar_logic.timeline import (
+    C400Constants,
+    TimeLineLabel,
+    TimeLineUnit,
+    day_length,
+    get_c400_constants,
+    get_day_rope,
+    get_default_timeline_config_dict,
+    get_week_rope,
+    get_year_rope,
+    timeline_config_shop,
+    timelineunit_shop,
+    validate_timeline_config,
 )
 
 

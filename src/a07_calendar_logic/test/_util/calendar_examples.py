@@ -4,13 +4,6 @@ from src.a00_data_toolbox.file_toolbox import open_json
 from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
 from src.a05_concept_logic.concept import ConceptUnit
 from src.a06_plan_logic.plan import PlanUnit, planunit_shop
-from src.a07_calendar_logic.chrono import (
-    add_newtimeline_conceptunit,
-    calendarstr_shop,
-    create_weekday_conceptunits,
-    get_min_from_dt_offset,
-    new_timeline_conceptunit,
-)
 from src.a07_calendar_logic.test._util.a07_env import get_module_examples_dir
 from src.a07_calendar_logic.test._util.a07_str import (
     c400_number_str,
@@ -21,6 +14,13 @@ from src.a07_calendar_logic.test._util.a07_str import (
     timeline_label_str,
     weekdays_config_str,
     yr1_jan1_offset_str,
+)
+from src.a07_calendar_logic.timeline import (
+    add_newtimeline_conceptunit,
+    calendarstr_shop,
+    create_weekday_conceptunits,
+    get_min_from_dt_offset,
+    new_timeline_conceptunit,
 )
 
 
