@@ -22,7 +22,7 @@ from src.a06_plan_logic.test._util.a06_str import (
     rcontext_str,
     respect_bit_str,
 )
-from src.a07_calendar_logic.test._util.a07_str import timeline_label_str
+from src.a07_timeline_logic.test._util.a07_str import timeline_label_str
 from src.a08_plan_atom_logic.atom_config import (
     get_all_plan_dimen_delete_keys,
     get_atom_args_class_types,

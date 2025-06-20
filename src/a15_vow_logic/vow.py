@@ -43,7 +43,7 @@ from src.a02_finance_logic.finance_config import (
     filter_penny,
 )
 from src.a06_plan_logic.plan import PlanUnit, planunit_shop
-from src.a07_calendar_logic.timeline import TimeLineUnit, timelineunit_shop
+from src.a07_timeline_logic.timeline import TimeLineUnit, timelineunit_shop
 from src.a11_bud_cell_logic.cell import cellunit_shop
 from src.a12_hub_toolbox.basis_plans import create_listen_basis, get_default_job
 from src.a12_hub_toolbox.hub_path import create_cell_dir_path, create_vow_json_path

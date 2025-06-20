@@ -1,11 +1,11 @@
-from src.a07_calendar_logic.calendar_markdown import (
+from src.a07_timeline_logic.calendar_markdown import (
     CalendarMarkDown,
     MonthMarkDownRow,
     MonthMarkDownUnit,
     center_word,
 )
-from src.a07_calendar_logic.test._util.calendar_examples import get_five_config
-from src.a07_calendar_logic.timeline import (
+from src.a07_timeline_logic.test._util.calendar_examples import get_five_config
+from src.a07_timeline_logic.timeline import (
     get_default_timeline_config_dict,
     timelineunit_shop,
 )

@@ -15,7 +15,7 @@ from src.a06_plan_logic.test._util.a06_str import (
     penny_str,
     respect_bit_str,
 )
-from src.a07_calendar_logic.test._util.a07_str import (
+from src.a07_timeline_logic.test._util.a07_str import (
     c400_number_str,
     monthday_distortion_str,
     timeline_label_str,

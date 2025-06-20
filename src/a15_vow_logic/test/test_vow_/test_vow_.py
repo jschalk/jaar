@@ -10,7 +10,7 @@ from src.a02_finance_logic.finance_config import (
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a05_concept_logic.healer import healerlink_shop
 from src.a06_plan_logic.plan import planunit_shop
-from src.a07_calendar_logic.timeline import timelineunit_shop
+from src.a07_timeline_logic.timeline import timelineunit_shop
 from src.a12_hub_toolbox.hub_path import create_owner_dir_path, create_path
 from src.a12_hub_toolbox.hub_tool import (
     gut_file_exists,

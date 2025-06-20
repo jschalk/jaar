@@ -11,7 +11,7 @@ from src.a06_plan_logic.test._util.a06_str import (
     penny_str,
     respect_bit_str,
 )
-from src.a07_calendar_logic.timeline import get_default_timeline_config_dict
+from src.a07_timeline_logic.timeline import get_default_timeline_config_dict
 from src.a12_hub_toolbox.hub_path import create_vow_json_path
 from src.a15_vow_logic.test._util.a15_env import (
     env_dir_setup_cleanup,

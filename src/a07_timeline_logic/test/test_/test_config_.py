@@ -3,7 +3,7 @@ from inspect import getdoc as inspect_getdoc
 from src.a01_term_logic.test._util.a01_str import knot_str
 from src.a02_finance_logic.finance_config import TimeLinePoint
 from src.a06_plan_logic.plan import planunit_shop
-from src.a07_calendar_logic.test._util.a07_str import (
+from src.a07_timeline_logic.test._util.a07_str import (
     c100_str,
     c400_clean_str,
     c400_leap_str,
@@ -21,14 +21,14 @@ from src.a07_calendar_logic.test._util.a07_str import (
     yr4_clean_str,
     yr4_leap_str,
 )
-from src.a07_calendar_logic.test._util.calendar_examples import (
+from src.a07_timeline_logic.test._util.calendar_examples import (
     five_str,
     get_creg_config,
     get_example_timeline_config,
     get_five_config,
     get_squirt_config,
 )
-from src.a07_calendar_logic.timeline import (
+from src.a07_timeline_logic.timeline import (
     C400Constants,
     TimeLineLabel,
     TimeLineUnit,

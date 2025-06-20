@@ -8,7 +8,7 @@ from src.a02_finance_logic.test._util.a02_str import (
 )
 from src.a03_group_logic.test._util.a03_str import respect_bit_str
 from src.a06_plan_logic.test._util.a06_str import timeline_str
-from src.a07_calendar_logic.test._util.a07_str import cumulative_day_str
+from src.a07_timeline_logic.test._util.a07_str import cumulative_day_str
 from src.a12_hub_toolbox.test._util.a12_str import vow_mstr_dir_str
 
 

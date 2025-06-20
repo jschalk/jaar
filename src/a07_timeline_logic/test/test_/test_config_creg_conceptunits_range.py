@@ -1,5 +1,5 @@
 from src.a06_plan_logic.plan import planunit_shop
-from src.a07_calendar_logic.test._util.a07_str import (
+from src.a07_timeline_logic.test._util.a07_str import (
     c100_str,
     c400_clean_str,
     c400_leap_str,
@@ -12,7 +12,7 @@ from src.a07_calendar_logic.test._util.a07_str import (
     yr4_clean_str,
     yr4_leap_str,
 )
-from src.a07_calendar_logic.test._util.calendar_examples import (
+from src.a07_timeline_logic.test._util.calendar_examples import (
     add_time_creg_conceptunit,
     get_cregtime_str,
     get_fri,

@@ -11,7 +11,7 @@ from src.a00_data_toolbox.dict_toolbox import (
 from src.a00_data_toolbox.file_toolbox import open_file
 from src.a01_term_logic.term import OwnerName, VowLabel
 from src.a06_plan_logic.plan import PlanUnit
-from src.a07_calendar_logic.timeline import timelineunit_shop
+from src.a07_timeline_logic.timeline import timelineunit_shop
 from src.a08_plan_atom_logic.atom import PlanAtom, atomrow_shop
 from src.a09_pack_logic.delta import (
     PlanDelta,
