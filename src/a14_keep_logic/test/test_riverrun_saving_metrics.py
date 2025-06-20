@@ -33,6 +33,9 @@ def test_RiverRun_save_rivergrade_files_CorrectlySavesFile(env_dir_setup_cleanup
     sue_str = "Sue"
     yao_credit_score = 500
     x_riverrun = riverrun_shop(yao_hubunit)
+    assert os_path_exists(x_riverrun.hubunit.grade_path(yao_str)) is False
+    assert os_path_exists(x_riverrun.hubunit.grade_path(bob_str)) is False
+    assert os_path_exists(x_riverrun.hubunit.grade_path(sue_str)) is False
     x_riverrun.set_keep_credorledger(yao_str, yao_str, yao_credit_score)
     x_riverrun.set_keep_credorledger(yao_str, bob_str, 1)
     x_riverrun.set_tax_dues({yao_str: 1, sue_str: 1})
