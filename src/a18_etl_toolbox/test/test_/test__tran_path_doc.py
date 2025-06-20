@@ -1,7 +1,7 @@
 from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
-from src.a02_finance_logic._util.a02_str import owner_name_str
-from src.a09_pack_logic._util.a09_str import event_int_str, face_name_str
+from src.a02_finance_logic.test._util.a02_str import owner_name_str
+from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a18_etl_toolbox.tran_path import (
     create_stance0001_path,
     create_stances_dir_path,

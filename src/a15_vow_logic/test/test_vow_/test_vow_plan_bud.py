@@ -1,6 +1,6 @@
 from pytest import raises as pytest_raises
 from src.a02_finance_logic.bud import brokerunit_shop
-from src.a15_vow_logic._util.a15_env import get_module_temp_dir
+from src.a15_vow_logic.test._util.a15_env import get_module_temp_dir
 from src.a15_vow_logic.vow import vowunit_shop
 
 

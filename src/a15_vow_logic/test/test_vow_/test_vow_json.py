@@ -1,20 +1,28 @@
 from src.a00_data_toolbox.file_toolbox import create_path, save_file
 from src.a01_term_logic.rope import default_knot_if_None
-from src.a02_finance_logic._util.a02_str import knot_str, vow_label_str
 from src.a02_finance_logic.finance_config import (
     default_fund_iota_if_None,
     default_RespectBit_if_None,
     filter_penny,
 )
-from src.a06_plan_logic._util.a06_str import fund_iota_str, penny_str, respect_bit_str
+from src.a02_finance_logic.test._util.a02_str import knot_str, vow_label_str
+from src.a06_plan_logic.test._util.a06_str import (
+    fund_iota_str,
+    penny_str,
+    respect_bit_str,
+)
 from src.a07_calendar_logic.chrono import get_default_timeline_config_dict
 from src.a12_hub_toolbox.hub_path import create_vow_json_path
-from src.a15_vow_logic._util.a15_env import env_dir_setup_cleanup, get_module_temp_dir
-from src.a15_vow_logic._util.a15_str import (
+from src.a15_vow_logic.test._util.a15_env import (
+    env_dir_setup_cleanup,
+    get_module_temp_dir,
+)
+from src.a15_vow_logic.test._util.a15_str import (
     brokerunits_str,
     offi_time_str,
     paybook_str,
     timeline_str,
+    vow_mstr_dir_str,
 )
 from src.a15_vow_logic.vow import (
     get_from_default_path as vowunit_get_from_default_path,
@@ -26,7 +34,7 @@ from src.a15_vow_logic.vow import (
 
 def test_VowUnit_get_dict_ReturnsObjWith_paybook():
     # ESTABLISH
-    vow_mstr_dir = get_module_temp_dir()
+    vow_mstr_dir = create_path(get_module_temp_dir(), "temp1")
     a45_str = "accord45"
     a45_offi_times = {17, 37}
     accord_vow = vowunit_shop(a45_str, vow_mstr_dir, offi_times=a45_offi_times)
@@ -60,6 +68,7 @@ def test_VowUnit_get_dict_ReturnsObjWith_paybook():
     print(f"{ accord_vow._get_brokerunits_dict()=}")
     print(f"{ accord_vow.paybook.get_dict()=}")
     assert x_dict.get(vow_label_str()) == a45_str
+    assert x_dict.get(vow_mstr_dir_str()) == vow_mstr_dir
     assert x_dict.get(timeline_str()) == get_default_timeline_config_dict()
     assert x_dict.get(offi_times_str) == list(a45_offi_times)
     assert x_dict.get(knot_str()) == default_knot_if_None()
@@ -70,6 +79,7 @@ def test_VowUnit_get_dict_ReturnsObjWith_paybook():
     assert x_dict.get(paybook_str()) == accord_vow.paybook.get_dict()
     assert set(x_dict.keys()) == {
         vow_label_str(),
+        vow_mstr_dir_str(),
         timeline_str(),
         offi_times_str,
         brokerunits_str(),
@@ -93,6 +103,7 @@ def test_VowUnit_get_dict_ReturnsObjWithOut_paybook():
     assert not x_dict.get(paybook_str())
     assert set(x_dict.keys()) == {
         vow_label_str(),
+        vow_mstr_dir_str(),
         timeline_str(),
         f"{offi_time_str()}s",
         brokerunits_str(),
@@ -131,8 +142,9 @@ def test_VowUnit_get_json_ReturnsObj():
 def test_get_from_dict_ReturnsVowUnit_Scenario0_WithParameters():
     # ESTABLISH
     accord45_str = "accord45"
+    vow_mstr_dir = create_path(get_module_temp_dir(), "temp1")
     a45_offi_times = {17, 37}
-    accord_vow = vowunit_shop(accord45_str, offi_times=a45_offi_times)
+    accord_vow = vowunit_shop(accord45_str, vow_mstr_dir, offi_times=a45_offi_times)
     sue_timeline_label = "sue casa"
     accord_vow.timeline.timeline_label = sue_timeline_label
     sue_knot = "/"
@@ -169,6 +181,7 @@ def test_get_from_dict_ReturnsVowUnit_Scenario0_WithParameters():
 
     # THEN
     assert x_vow.vow_label == accord45_str
+    assert x_vow.vow_mstr_dir == vow_mstr_dir
     assert x_vow.timeline.timeline_label == sue_timeline_label
     assert x_vow.offi_times == a45_offi_times
     assert x_vow.knot == sue_knot
@@ -186,7 +199,7 @@ def test_get_from_dict_ReturnsVowUnit_Scenario0_WithParameters():
 def test_get_from_dict_ReturnsVowUnit_Scenario1_WithOutParameters():
     # ESTABLISH
     accord45_str = "accord45"
-    accord_vow = vowunit_shop(accord45_str)
+    accord_vow = vowunit_shop(accord45_str, get_module_temp_dir())
     x_dict = accord_vow.get_dict()
     x_dict["timeline"] = {}
     x_dict.pop("knot")
@@ -216,7 +229,8 @@ def test_get_from_dict_ReturnsVowUnit_Scenario1_WithOutParameters():
 def test_get_from_json_ReturnsVowUnit():
     # ESTABLISH
     accord45_str = "accord45"
-    accord_vow = vowunit_shop(accord45_str)
+    temp_vow_mstr_dir = create_path(get_module_temp_dir(), "temp")
+    accord_vow = vowunit_shop(accord45_str, temp_vow_mstr_dir)
     sue_timeline_label = "sue casa"
     accord_vow.timeline.timeline_label = sue_timeline_label
     sue_offi_time_max = 23
@@ -246,6 +260,7 @@ def test_get_from_json_ReturnsVowUnit():
 
     # THEN
     assert x_vow.vow_label == accord45_str
+    assert x_vow.vow_mstr_dir == temp_vow_mstr_dir
     assert x_vow.timeline.timeline_label == sue_timeline_label
     assert x_vow.knot == sue_knot
     assert x_vow.fund_iota == sue_fund_iota
@@ -261,7 +276,7 @@ def test_get_from_json_ReturnsVowUnit():
 def test_get_from_file_ReturnsVowUnitWith_vow_mstr_dir(env_dir_setup_cleanup):
     # ESTABLISH
     accord45_str = "accord45"
-    accord45_vow = vowunit_shop(accord45_str)
+    accord45_vow = vowunit_shop(accord45_str, get_module_temp_dir())
     sue_timeline_label = "sue casa"
     accord45_vow.timeline.timeline_label = sue_timeline_label
     sue_respect_bit = 2

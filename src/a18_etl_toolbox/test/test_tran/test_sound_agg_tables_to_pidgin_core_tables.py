@@ -1,9 +1,13 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_row_count
-from src.a02_finance_logic._util.a02_str import owner_name_str
-from src.a06_plan_logic._util.a06_str import acct_name_str, plan_acctunit_str
-from src.a09_pack_logic._util.a09_str import event_int_str, face_name_str
-from src.a16_pidgin_logic._util.a16_str import (
+from src.a02_finance_logic.test._util.a02_str import owner_name_str
+from src.a06_plan_logic.test._util.a06_str import acct_name_str, plan_acctunit_str
+from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
+from src.a16_pidgin_logic.pidgin import (
+    default_knot_if_None,
+    default_unknown_str_if_None,
+)
+from src.a16_pidgin_logic.test._util.a16_str import (
     inx_knot_str,
     inx_label_str,
     inx_name_str,
@@ -20,10 +24,6 @@ from src.a16_pidgin_logic._util.a16_str import (
     pidgin_rope_str,
     pidgin_title_str,
     unknown_str_str,
-)
-from src.a16_pidgin_logic.pidgin import (
-    default_knot_if_None,
-    default_unknown_str_if_None,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_PIDCORE_SOUND_AGG_SQLSTR,

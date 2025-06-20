@@ -1,4 +1,3 @@
-from src.a07_calendar_logic._util.calendar_examples import get_five_config
 from src.a07_calendar_logic.calendar_markdown import (
     CalendarMarkDown,
     MonthMarkDownRow,
@@ -9,6 +8,7 @@ from src.a07_calendar_logic.chrono import (
     get_default_timeline_config_dict,
     timelineunit_shop,
 )
+from src.a07_calendar_logic.test._util.calendar_examples import get_five_config
 
 
 def test_center_word_ReturnObj():

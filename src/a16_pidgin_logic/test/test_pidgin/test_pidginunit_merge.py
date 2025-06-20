@@ -1,12 +1,12 @@
 from pytest import raises as pytest_raises
-from src.a06_plan_logic._util.a06_str import NameTerm_str
-from src.a16_pidgin_logic._util.example_pidgins import (
+from src.a06_plan_logic.test._util.a06_str import NameTerm_str
+from src.a16_pidgin_logic.pidgin import inherit_pidginunit, pidginunit_shop
+from src.a16_pidgin_logic.test._util.example_pidgins import (
     get_clean_labelmap,
     get_clean_ropemap,
     get_suita_namemap,
     get_swim_titlemap,
 )
-from src.a16_pidgin_logic.pidgin import inherit_pidginunit, pidginunit_shop
 
 
 def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario0_EmptyPidginUnits():

@@ -8,7 +8,7 @@ from src.a00_data_toolbox.db_toolbox import (
     get_create_table_sqlstr,
     get_table_columns,
 )
-from src.a06_plan_logic._util.a06_str import (
+from src.a06_plan_logic.test._util.a06_str import (
     plan_acct_membership_str,
     plan_acctunit_str,
     plan_concept_awardlink_str,
@@ -21,10 +21,11 @@ from src.a06_plan_logic._util.a06_str import (
     planunit_str,
 )
 from src.a08_plan_atom_logic.atom_config import get_delete_key_name, get_plan_dimens
-from src.a09_pack_logic._util.a09_str import event_int_str, face_name_str
-from src.a15_vow_logic._util.a15_str import vow_timeline_hour_str
+from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
+from src.a15_vow_logic.test._util.a15_str import vow_timeline_hour_str
 from src.a15_vow_logic.vow_config import get_vow_dimens
-from src.a16_pidgin_logic._util.a16_str import (
+from src.a16_pidgin_logic.pidgin_config import find_set_otx_inx_args, get_pidgin_dimens
+from src.a16_pidgin_logic.test._util.a16_str import (
     inx_knot_str,
     otx_knot_str,
     pidgin_core_str,
@@ -34,13 +35,12 @@ from src.a16_pidgin_logic._util.a16_str import (
     pidgin_title_str,
     unknown_str_str,
 )
-from src.a16_pidgin_logic.pidgin_config import find_set_otx_inx_args, get_pidgin_dimens
-from src.a17_idea_logic._util.a17_str import idea_category_str, idea_number_str
 from src.a17_idea_logic.idea_config import (
     get_default_sorted_list,
     get_idea_config_dict,
     get_idea_sqlite_types,
 )
+from src.a17_idea_logic.test._util.a17_str import idea_category_str, idea_number_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
     create_insert_into_pidgin_core_raw_sqlstr,

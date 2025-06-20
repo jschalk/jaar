@@ -1,10 +1,10 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, open_json, save_json
-from src.a02_finance_logic._util.a02_env import (
+from src.a02_finance_logic.allot import allot_nested_scale
+from src.a02_finance_logic.test._util.a02_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
-from src.a02_finance_logic.allot import allot_nested_scale
 
 
 def test_allot_nested_scale_ReturnsObj_Scenari0_depth0(

@@ -2,9 +2,9 @@
 from os import getcwd as os_getcwd
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a01_term_logic._util.a01_str import knot_str
-from src.a02_finance_logic._util.a02_str import owner_name_str, vow_label_str
-from src.a03_group_logic._util.a03_str import (
+from src.a01_term_logic.test._util.a01_str import knot_str
+from src.a02_finance_logic.test._util.a02_str import owner_name_str, vow_label_str
+from src.a03_group_logic.test._util.a03_str import (
     _credor_pool_str,
     _debtor_pool_str,
     _fund_agenda_give_str,
@@ -27,7 +27,7 @@ from src.a03_group_logic._util.a03_str import (
     respect_bit_str,
     take_force_str,
 )
-from src.a04_reason_logic._util.a04_str import (
+from src.a04_reason_logic.test._util.a04_str import (
     _chore_str,
     _status_str,
     fcontext_str,
@@ -42,7 +42,7 @@ from src.a04_reason_logic._util.a04_str import (
     rconcept_active_requisite_str,
     rcontext_str,
 )
-from src.a05_concept_logic._util.a05_str import (
+from src.a05_concept_logic.test._util.a05_str import (
     _all_acct_cred_str,
     _all_acct_debt_str,
     _descendant_task_count_str,
@@ -57,7 +57,7 @@ from src.a05_concept_logic._util.a05_str import (
     problem_bool_str,
     task_str,
 )
-from src.a06_plan_logic._util.a06_str import (
+from src.a06_plan_logic.test._util.a06_str import (
     LabelTerm_str,
     NameTerm_str,
     RopeTerm_str,
@@ -109,14 +109,13 @@ from src.a06_plan_logic._util.a06_str import (
     stop_want_str,
     tally_str,
 )
-from src.a08_plan_atom_logic._util.a08_str import (
+from src.a08_plan_atom_logic.atom_config import get_atom_config_dict
+from src.a08_plan_atom_logic.test._util.a08_str import (
     class_type_str,
     jkeys_str,
     jvalues_str,
     sqlite_datatype_str,
 )
-from src.a08_plan_atom_logic.atom_config import get_atom_config_dict
-from src.a10_plan_calc._util.a10_str import jmetrics_str, plan_groupunit_str
 from src.a10_plan_calc.plan_calc_config import (
     config_file_path,
     get_all_plan_calc_args,
@@ -127,6 +126,7 @@ from src.a10_plan_calc.plan_calc_config import (
     get_plan_calc_dimen_args,
     get_plan_calc_dimens,
 )
+from src.a10_plan_calc.test._util.a10_str import jmetrics_str, plan_groupunit_str
 
 
 def test_get_plan_calc_config_dict_Exists():

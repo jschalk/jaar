@@ -5,13 +5,13 @@ from src.a00_data_toolbox.db_toolbox import (
     get_table_columns,
     required_columns_exist,
 )
-from src.a02_finance_logic._util.a02_str import (
+from src.a02_finance_logic.test._util.a02_str import (
     bud_time_str,
     owner_name_str,
     tran_time_str,
     vow_label_str,
 )
-from src.a06_plan_logic._util.a06_str import (
+from src.a06_plan_logic.test._util.a06_str import (
     plan_acct_membership_str,
     plan_acctunit_str,
     plan_concept_awardlink_str,
@@ -24,10 +24,10 @@ from src.a06_plan_logic._util.a06_str import (
     planunit_str,
 )
 from src.a08_plan_atom_logic.atom_config import get_delete_key_name
-from src.a09_pack_logic._util.a09_str import event_int_str
-from src.a10_plan_calc._util.a10_str import plan_groupunit_str
-from src.a12_hub_toolbox._util.a12_str import job_str, vow_ote1_agg_str
-from src.a15_vow_logic._util.a15_str import (
+from src.a09_pack_logic.test._util.a09_str import event_int_str
+from src.a10_plan_calc.test._util.a10_str import plan_groupunit_str
+from src.a12_hub_toolbox.test._util.a12_str import job_str, vow_ote1_agg_str
+from src.a15_vow_logic.test._util.a15_str import (
     vow_budunit_str,
     vow_paybook_str,
     vow_timeline_hour_str,
@@ -36,14 +36,13 @@ from src.a15_vow_logic._util.a15_str import (
     vow_timeoffi_str,
     vowunit_str,
 )
-from src.a16_pidgin_logic._util.a16_str import (
+from src.a16_pidgin_logic.test._util.a16_str import (
     pidgin_core_str,
     pidgin_label_str,
     pidgin_name_str,
     pidgin_rope_str,
     pidgin_title_str,
 )
-from src.a17_idea_logic._util.a17_str import idea_category_str
 from src.a17_idea_logic.idea_config import (
     get_idea_config_dict,
     get_idea_numbers,
@@ -53,7 +52,8 @@ from src.a17_idea_logic.idea_db_tool import (
     get_default_sorted_list,
     get_idea_into_dimen_raw_query,
 )
-from src.a18_etl_toolbox._util.a18_str import (
+from src.a17_idea_logic.test._util.a17_str import idea_category_str
+from src.a18_etl_toolbox.test._util.a18_str import (
     owner_net_amount_str,
     vow_acct_nets_str,
     vow_event_time_agg_str,

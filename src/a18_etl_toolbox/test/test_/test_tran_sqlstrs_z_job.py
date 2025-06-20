@@ -1,7 +1,7 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_create_table_sqlstr
-from src.a02_finance_logic._util.a02_str import owner_name_str, vow_label_str
-from src.a06_plan_logic._util.a06_str import (
+from src.a02_finance_logic.test._util.a02_str import owner_name_str, vow_label_str
+from src.a06_plan_logic.test._util.a06_str import (
     plan_acct_membership_str,
     plan_acctunit_str,
     plan_concept_awardlink_str,
@@ -13,9 +13,9 @@ from src.a06_plan_logic._util.a06_str import (
     plan_conceptunit_str,
     planunit_str,
 )
-from src.a10_plan_calc._util.a10_str import plan_groupunit_str
 from src.a10_plan_calc.plan_calc_config import get_plan_calc_config_dict
-from src.a12_hub_toolbox._util.a12_str import job_str
+from src.a10_plan_calc.test._util.a10_str import plan_groupunit_str
+from src.a12_hub_toolbox.test._util.a12_str import job_str
 from src.a17_idea_logic.idea_config import get_idea_sqlite_types
 from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
 from src.a18_etl_toolbox.tran_sqlstrs import (

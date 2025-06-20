@@ -1,20 +1,21 @@
 from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import x_is_json
-from src.a02_finance_logic._util.a02_str import owner_name_str, vow_label_str
+from src.a02_finance_logic.test._util.a02_str import owner_name_str, vow_label_str
 from src.a03_group_logic.acct import acctunit_shop
 from src.a05_concept_logic.concept import get_default_vow_label
-from src.a06_plan_logic._util.a06_str import (
+from src.a06_plan_logic.plan import planunit_shop
+from src.a06_plan_logic.test._util.a06_str import (
     acct_name_str,
     credit_score_str,
     debt_score_str,
     plan_acctunit_str,
 )
-from src.a06_plan_logic.plan import planunit_shop
-from src.a08_plan_atom_logic._util.a08_str import DELETE_str, INSERT_str, UPDATE_str
 from src.a08_plan_atom_logic.atom import planatom_shop
-from src.a09_pack_logic._util.a09_str import event_int_str, face_name_str
-from src.a09_pack_logic._util.example_atoms import get_atom_example_conceptunit_sports
-from src.a09_pack_logic._util.example_deltas import get_plandelta_sue_example
+from src.a08_plan_atom_logic.test._util.a08_str import (
+    DELETE_str,
+    INSERT_str,
+    UPDATE_str,
+)
 from src.a09_pack_logic.delta import plandelta_shop
 from src.a09_pack_logic.pack import (
     PackUnit,
@@ -23,6 +24,11 @@ from src.a09_pack_logic.pack import (
     init_pack_id,
     packunit_shop,
 )
+from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
+from src.a09_pack_logic.test._util.example_atoms import (
+    get_atom_example_conceptunit_sports,
+)
+from src.a09_pack_logic.test._util.example_deltas import get_plandelta_sue_example
 
 
 def test_init_pack_id_ReturnsObj():

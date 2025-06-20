@@ -6,15 +6,6 @@ from src.a06_plan_logic.plan import planunit_shop
 from src.a09_pack_logic.delta import plandelta_shop
 from src.a09_pack_logic.pack import packunit_shop
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
-from src.a17_idea_logic._util.a17_env import env_dir_setup_cleanup, idea_vows_dir
-from src.a17_idea_logic._util.idea_df_examples import (  # get_ex2_br00006_df,
-    get_ex2_br00000_df,
-    get_ex2_br00001_df,
-    get_ex2_br00002_df,
-    get_ex2_br00003_df,
-    get_ex2_br00004_df,
-    get_ex2_br00005_df,
-)
 from src.a17_idea_logic.idea import vow_build_from_df
 from src.a17_idea_logic.idea_csv_tool import (
     add_pack_to_br00020_csv,
@@ -49,6 +40,15 @@ from src.a17_idea_logic.idea_csv_tool import (
     create_init_stance_idea_csv_strs,
 )
 from src.a17_idea_logic.idea_db_tool import get_ordered_csv
+from src.a17_idea_logic.test._util.a17_env import env_dir_setup_cleanup, idea_vows_dir
+from src.a17_idea_logic.test._util.idea_df_examples import (  # get_ex2_br00006_df,
+    get_ex2_br00000_df,
+    get_ex2_br00001_df,
+    get_ex2_br00002_df,
+    get_ex2_br00003_df,
+    get_ex2_br00004_df,
+    get_ex2_br00005_df,
+)
 
 
 def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyVowUnit(

@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.dict_toolbox import get_from_nested_dict
-from src.a06_plan_logic._util.a06_str import (
+from src.a06_plan_logic.test._util.a06_str import (
     LabelTerm_str,
     NameTerm_str,
     RopeTerm_str,
@@ -44,21 +44,6 @@ from src.a06_plan_logic._util.a06_str import (
     respect_bit_str,
     stop_want_str,
 )
-from src.a08_plan_atom_logic._util.a08_str import (
-    DELETE_str,
-    INSERT_str,
-    UPDATE_str,
-    class_type_str,
-    column_order_str,
-    crud_str,
-    dimen_str,
-    jkeys_str,
-    jvalues_str,
-    nesting_order_str,
-    normal_specs_str,
-    normal_table_name_str,
-    sqlite_datatype_str,
-)
 from src.a08_plan_atom_logic.atom_config import (
     get_all_plan_dimen_delete_keys,
     get_all_plan_dimen_keys,
@@ -74,6 +59,21 @@ from src.a08_plan_atom_logic.atom_config import (
     get_sorted_jkey_keys,
     is_plan_dimen,
     set_mog,
+)
+from src.a08_plan_atom_logic.test._util.a08_str import (
+    DELETE_str,
+    INSERT_str,
+    UPDATE_str,
+    class_type_str,
+    column_order_str,
+    crud_str,
+    dimen_str,
+    jkeys_str,
+    jvalues_str,
+    nesting_order_str,
+    normal_specs_str,
+    normal_table_name_str,
+    sqlite_datatype_str,
 )
 
 

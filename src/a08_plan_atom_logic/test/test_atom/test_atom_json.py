@@ -1,22 +1,22 @@
 from src.a00_data_toolbox.dict_toolbox import x_is_json
 from src.a01_term_logic.rope import create_rope
-from src.a06_plan_logic._util.a06_str import (
+from src.a06_plan_logic.test._util.a06_str import (
     concept_rope_str,
     fcontext_str,
     fnigh_str,
     fopen_str,
     plan_concept_factunit_str,
 )
-from src.a08_plan_atom_logic._util.a08_str import (
+from src.a08_plan_atom_logic.atom import (
+    get_from_json as planatom_get_from_json,
+    planatom_shop,
+)
+from src.a08_plan_atom_logic.test._util.a08_str import (
     INSERT_str,
     crud_str,
     dimen_str,
     jkeys_str,
     jvalues_str,
-)
-from src.a08_plan_atom_logic.atom import (
-    get_from_json as planatom_get_from_json,
-    planatom_shop,
 )
 
 

@@ -1,11 +1,5 @@
 from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import default_knot_if_None
-from src.a02_finance_logic._util.a02_str import (
-    fund_pool_str,
-    knot_str,
-    owner_name_str,
-    vow_label_str,
-)
 from src.a02_finance_logic.finance_config import (
     default_fund_iota_if_None,
     default_RespectBit_if_None,
@@ -13,8 +7,15 @@ from src.a02_finance_logic.finance_config import (
     validate_fund_pool,
     validate_respect_num,
 )
+from src.a02_finance_logic.test._util.a02_str import (
+    fund_pool_str,
+    knot_str,
+    owner_name_str,
+    vow_label_str,
+)
 from src.a05_concept_logic.concept import get_default_vow_label as root_label
-from src.a06_plan_logic._util.a06_str import (
+from src.a06_plan_logic.plan import PlanUnit, planunit_shop
+from src.a06_plan_logic.test._util.a06_str import (
     _keeps_buildable_str,
     _keeps_justified_str,
     _offtrack_fund_str,
@@ -32,7 +33,6 @@ from src.a06_plan_logic._util.a06_str import (
     respect_bit_str,
     tally_str,
 )
-from src.a06_plan_logic.plan import PlanUnit, planunit_shop
 
 
 def test_PlanUnit_Exists():

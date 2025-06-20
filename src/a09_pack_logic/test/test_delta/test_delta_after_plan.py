@@ -2,7 +2,8 @@ from src.a01_term_logic.rope import get_parent_rope, get_tail_label
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import factunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
-from src.a06_plan_logic._util.a06_str import (
+from src.a06_plan_logic.plan import planunit_shop
+from src.a06_plan_logic.test._util.a06_str import (
     acct_name_str,
     awardee_title_str,
     begin_str,
@@ -34,11 +35,14 @@ from src.a06_plan_logic._util.a06_str import (
     take_force_str,
     task_str,
 )
-from src.a06_plan_logic.plan import planunit_shop
-from src.a08_plan_atom_logic._util.a08_str import DELETE_str, INSERT_str, UPDATE_str
 from src.a08_plan_atom_logic.atom import planatom_shop
-from src.a09_pack_logic._util.example_deltas import get_plandelta_example1
+from src.a08_plan_atom_logic.test._util.a08_str import (
+    DELETE_str,
+    INSERT_str,
+    UPDATE_str,
+)
 from src.a09_pack_logic.delta import plandelta_shop
+from src.a09_pack_logic.test._util.example_deltas import get_plandelta_example1
 
 
 def test_PlanDelta_get_edited_plan_ReturnsObj_SimplestScenario():

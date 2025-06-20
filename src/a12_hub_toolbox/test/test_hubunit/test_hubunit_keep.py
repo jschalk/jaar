@@ -4,14 +4,14 @@ from src.a00_data_toolbox.file_toolbox import delete_dir, open_file, save_file
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a05_concept_logic.healer import healerlink_shop
 from src.a06_plan_logic.plan_graphics import display_concepttree
-from src.a12_hub_toolbox._util.a12_env import (
-    env_dir_setup_cleanup,
-    get_module_temp_dir as env_dir,
-)
-from src.a12_hub_toolbox._util.example_hub_atoms import get_texas_rope
 from src.a12_hub_toolbox.hub_path import treasury_filename
 from src.a12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
 from src.a12_hub_toolbox.hubunit import hubunit_shop
+from src.a12_hub_toolbox.test._util.a12_env import (
+    env_dir_setup_cleanup,
+    get_module_temp_dir as env_dir,
+)
+from src.a12_hub_toolbox.test._util.example_hub_atoms import get_texas_rope
 
 
 def test_HubUnit_get_keep_ropes_RaisesErrorWhen__keeps_justified_IsFalse(

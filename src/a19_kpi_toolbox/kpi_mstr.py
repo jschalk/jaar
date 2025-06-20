@@ -48,10 +48,6 @@ def populate_kpi_bundle(cursor: sqlite3_Cursor, bundle_id: str = None):
             create_populate_kpi001_table(cursor)
 
 
-def get_kpi_dir(vow_mstr_dir: str) -> str:
-    return create_path(vow_mstr_dir, "stances")
-
-
 def create_kpi_csvs(db_path: str, dst_dir: str):
     with sqlite3_connect(db_path) as db_conn:
         cursor = db_conn.cursor()

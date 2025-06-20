@@ -1,9 +1,9 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
-from src.a02_finance_logic._util.a02_str import owner_name_str, vow_label_str
-from src.a06_plan_logic._util.a06_str import acct_name_str
-from src.a09_pack_logic._util.a09_str import event_int_str, face_name_str
-from src.a16_pidgin_logic._util.a16_str import (
+from src.a02_finance_logic.test._util.a02_str import owner_name_str, vow_label_str
+from src.a06_plan_logic.test._util.a06_str import acct_name_str
+from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
+from src.a16_pidgin_logic.test._util.a16_str import (
     inx_knot_str,
     inx_rope_str,
     otx_knot_str,
@@ -11,7 +11,7 @@ from src.a16_pidgin_logic._util.a16_str import (
     unknown_str_str,
 )
 from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
-from src.a18_etl_toolbox._util.a18_str import brick_valid_str
+from src.a18_etl_toolbox.test._util.a18_str import brick_valid_str
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a18_etl_toolbox.transformers import etl_brick_valid_tables_to_sound_raw_tables
 

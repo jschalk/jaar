@@ -1,14 +1,13 @@
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a18_etl_toolbox.tran_path import create_stances_dir_path
-from src.a19_kpi_toolbox._util.a19_str import vow_kpi001_acct_nets_str
 from src.a19_kpi_toolbox.kpi_mstr import (
     create_populate_kpi001_table,
     get_all_kpi_functions,
     get_bundles_config,
     get_default_kpi_bundle,
-    get_kpi_dir,
     get_kpi_set_from_bundle,
 )
+from src.a19_kpi_toolbox.test._util.a19_str import vow_kpi001_acct_nets_str
 
 
 def test_get_default_kpi_bundle_ReturnsObj():
@@ -52,14 +51,3 @@ def test_get_kpi_set_from_bundle_ReturnsObj_Scenario1_NoBundleGiven():
     # THEN
     assert kpi_set == {vow_kpi001_acct_nets_str()}
     assert kpi_set == default_kpi_set
-
-
-def test_get_kpi_dir_ReturnsObj():
-    # ESTABLISH
-    vow_mstr_dir = "worlds/vow_mstr_dir"
-
-    # WHEN
-    kpi_dir = get_kpi_dir(vow_mstr_dir)
-
-    # THEN
-    assert kpi_dir == create_stances_dir_path(vow_mstr_dir)

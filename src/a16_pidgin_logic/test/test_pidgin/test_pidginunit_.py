@@ -1,7 +1,7 @@
 from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import default_knot_if_None
-from src.a02_finance_logic._util.a02_str import owner_name_str, vow_label_str
-from src.a06_plan_logic._util.a06_str import (
+from src.a02_finance_logic.test._util.a02_str import owner_name_str, vow_label_str
+from src.a06_plan_logic.test._util.a06_str import (
     LabelTerm_str,
     NameTerm_str,
     RopeTerm_str,
@@ -22,27 +22,18 @@ from src.a06_plan_logic._util.a06_str import (
     rcontext_str,
     respect_bit_str,
 )
-from src.a07_calendar_logic._util.a07_str import timeline_label_str
+from src.a07_calendar_logic.test._util.a07_str import timeline_label_str
 from src.a08_plan_atom_logic.atom_config import (
     get_all_plan_dimen_delete_keys,
     get_atom_args_class_types,
 )
-from src.a09_pack_logic._util.a09_str import face_name_str
-from src.a15_vow_logic._util.a15_str import (
+from src.a09_pack_logic.test._util.a09_str import face_name_str
+from src.a15_vow_logic.test._util.a15_str import (
     hour_label_str,
     month_label_str,
     weekday_label_str,
 )
 from src.a15_vow_logic.vow_config import get_vow_args_class_types
-from src.a16_pidgin_logic._util.example_pidgins import (
-    get_clean_labelmap,
-    get_clean_ropemap,
-    get_invalid_namemap,
-    get_invalid_ropemap,
-    get_invalid_titlemap,
-    get_suita_namemap,
-    get_swim_titlemap,
-)
 from src.a16_pidgin_logic.map import (
     labelmap_shop,
     namemap_shop,
@@ -60,6 +51,15 @@ from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_TitleTerm_args,
     get_pidginable_args,
     pidginable_class_types,
+)
+from src.a16_pidgin_logic.test._util.example_pidgins import (
+    get_clean_labelmap,
+    get_clean_ropemap,
+    get_invalid_namemap,
+    get_invalid_ropemap,
+    get_invalid_titlemap,
+    get_suita_namemap,
+    get_swim_titlemap,
 )
 
 

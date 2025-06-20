@@ -1,13 +1,7 @@
 from numpy import int64 as numpy_int64
 from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import default_knot_if_None
-from src.a09_pack_logic._util.a09_str import event_int_str, face_name_str
-from src.a16_pidgin_logic._util.a16_str import (
-    inx_knot_str,
-    otx2inx_str,
-    otx_knot_str,
-    unknown_str_str,
-)
+from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic.map import (
     NameMap,
     get_namemap_from_dict,
@@ -16,6 +10,12 @@ from src.a16_pidgin_logic.map import (
     namemap_shop,
 )
 from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
+from src.a16_pidgin_logic.test._util.a16_str import (
+    inx_knot_str,
+    otx2inx_str,
+    otx_knot_str,
+    unknown_str_str,
+)
 
 
 def test_NameMap_Exists():

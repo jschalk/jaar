@@ -52,6 +52,7 @@ class WorldID(str):
 class WorldUnit:
     world_id: WorldID = None
     worlds_dir: str = None
+    output_dir: str = None
     world_time_pnigh: TimeLinePoint = None
     _syntax_otz_dir: str = None
     _world_dir: str = None
@@ -162,8 +163,7 @@ class WorldUnit:
         create_stance0001_file(self._vow_mstr_dir)
 
     def create_kpi_csvs(self):
-        kpi_dir = create_path(self._vow_mstr_dir, "stances")
-        create_kpi_csvs(self.get_db_path(), kpi_dir)
+        create_kpi_csvs(self.get_db_path(), self.output_dir)
 
     def get_dict(self) -> dict:
         return {
@@ -175,6 +175,7 @@ class WorldUnit:
 def worldunit_shop(
     world_id: WorldID,
     worlds_dir: str,
+    output_dir: str = None,
     mud_dir: str = None,
     world_time_pnigh: TimeLinePoint = None,
     _vowunits: set[VowLabel] = None,
@@ -182,6 +183,7 @@ def worldunit_shop(
     x_worldunit = WorldUnit(
         world_id=world_id,
         worlds_dir=worlds_dir,
+        output_dir=output_dir,
         world_time_pnigh=get_0_if_None(world_time_pnigh),
         _events={},
         _vowunits=get_empty_set_if_None(_vowunits),

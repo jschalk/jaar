@@ -1,9 +1,12 @@
-from src.a02_finance_logic._util.a02_str import owner_name_str, vow_label_str
-from src.a06_plan_logic._util.a06_str import plan_conceptunit_str, task_str
-from src.a18_etl_toolbox._util.a18_str import owner_net_amount_str, vow_acct_nets_str
+from src.a02_finance_logic.test._util.a02_str import owner_name_str, vow_label_str
+from src.a06_plan_logic.test._util.a06_str import plan_conceptunit_str, task_str
+from src.a18_etl_toolbox.test._util.a18_str import (
+    owner_net_amount_str,
+    vow_acct_nets_str,
+)
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
-from src.a19_kpi_toolbox._util.a19_str import vow_kpi001_acct_nets_str
 from src.a19_kpi_toolbox.kpi_sqlstrs import get_vow_kpi001_acct_nets_sqlstr
+from src.a19_kpi_toolbox.test._util.a19_str import vow_kpi001_acct_nets_str
 
 
 def test_get_vow_kpi001_acct_nets_sqlstr_ReturnsObj():

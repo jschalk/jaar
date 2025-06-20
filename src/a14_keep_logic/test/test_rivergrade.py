@@ -1,6 +1,6 @@
-from src.a02_finance_logic._util.a02_str import vow_label_str
-from src.a14_keep_logic._util.example_credorledgers import example_yao_hubunit
+from src.a02_finance_logic.test._util.a02_str import vow_label_str
 from src.a14_keep_logic.rivercycle import RiverGrade, rivergrade_shop
+from src.a14_keep_logic.test._util.example_credorledgers import example_yao_hubunit
 
 
 def test_RiverGrade_Exists():

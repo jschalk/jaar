@@ -33,7 +33,7 @@ if __name__ == "__main__":
     delete_dir(output_directory)
     delete_dir(working_directory)
 
-    x_worldunt = worldunit_shop(
+    x_worldunit = worldunit_shop(
         "x_world", worlds_dir=working_directory, mud_dir=input_directory
     )
-    x_worldunt.mud_to_clarity_mstr()
+    x_worldunit.mud_to_clarity_mstr()

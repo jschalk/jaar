@@ -1,6 +1,10 @@
 from sqlite3 import connect as sqlite3_connect
-from src.a02_finance_logic._util.a02_str import vow_label_str
-from src.a15_vow_logic._util.a15_str import brokerunits_str, paybook_str, timeline_str
+from src.a02_finance_logic.test._util.a02_str import vow_label_str
+from src.a15_vow_logic.test._util.a15_str import (
+    brokerunits_str,
+    paybook_str,
+    timeline_str,
+)
 from src.a15_vow_logic.vow import get_from_dict as vowunit_get_from_dict
 from src.a18_etl_toolbox.db_obj_vow_tool import get_vow_dict_from_voice_tables
 from src.a18_etl_toolbox.tran_sqlstrs import (

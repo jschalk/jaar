@@ -1,7 +1,7 @@
-from src.a06_plan_logic._util.a06_str import planunit_str
 from src.a06_plan_logic.plan import planunit_shop
-from src.a08_plan_atom_logic._util.a08_str import UPDATE_str
+from src.a06_plan_logic.test._util.a06_str import planunit_str
 from src.a08_plan_atom_logic.atom import planatom_shop
+from src.a08_plan_atom_logic.test._util.a08_str import UPDATE_str
 from src.a09_pack_logic.delta import plandelta_shop
 from src.a09_pack_logic.legible import create_legible_list
 

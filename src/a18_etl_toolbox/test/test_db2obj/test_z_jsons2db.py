@@ -17,7 +17,6 @@ from src.a04_reason_logic.reason_labor import laborheir_shop, laborunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a05_concept_logic.healer import healerlink_shop
 from src.a06_plan_logic.plan import planunit_shop
-from src.a18_etl_toolbox._util.a18_env import env_dir_setup_cleanup
 from src.a18_etl_toolbox.db_obj_plan_tool import (
     ObjKeysHolder,
     insert_job_obj,
@@ -33,6 +32,7 @@ from src.a18_etl_toolbox.db_obj_plan_tool import (
     insert_job_plnreas,
     insert_job_plnunit,
 )
+from src.a18_etl_toolbox.test._util.a18_env import env_dir_setup_cleanup
 from src.a18_etl_toolbox.tran_sqlstrs import create_job_tables
 
 
