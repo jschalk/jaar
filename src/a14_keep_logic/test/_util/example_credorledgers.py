@@ -14,9 +14,8 @@ def example_yao_hubunit() -> HubUnit:
 
 
 def example_yao_texas_hubunit() -> HubUnit:
-    return hubunit_shop(
-        get_module_temp_dir(), temp_vow_label(), "Yao", get_texas_rope()
-    )
+    vow_mstr_dir = get_module_temp_dir()
+    return hubunit_shop(vow_mstr_dir, temp_vow_label(), "Yao", get_texas_rope())
 
 
 def example_yao_credorledger() -> dict[str, float]:
