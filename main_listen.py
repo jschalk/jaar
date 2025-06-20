@@ -1,4 +1,4 @@
-from src.a00_data_toolbox.file_toolbox import delete_dir, set_dir
+from src.a00_data_toolbox.file_toolbox import count_dirs_files, delete_dir, set_dir
 from src.a20_world_logic.world import WorldUnit, worldunit_shop
 from sys import argv as sys_argv
 
@@ -34,6 +34,16 @@ if __name__ == "__main__":
     delete_dir(working_directory)
 
     x_worldunit = worldunit_shop(
-        "x_world", worlds_dir=working_directory, mud_dir=input_directory
+        world_id="x_world",
+        worlds_dir=working_directory,
+        output_dir=output_directory,
+        mud_dir=input_directory,
     )
+    print(f"{x_worldunit.worlds_dir=}")
+    print(f"{x_worldunit.output_dir=}")
+    print(f"{x_worldunit._mud_dir=}")
+    print(f"before output_dir file/dir count= {count_dirs_files(output_directory)}")
     x_worldunit.mud_to_clarity_mstr()
+    x_worldunit.create_stances()
+    x_worldunit.create_kpi_csvs()
+    print(f"after  output_dir file/dir count= {count_dirs_files(output_directory)}")
