@@ -9,8 +9,6 @@ from src.a17_idea_logic.test._util.a17_env import (
 
 def test_get_module_temp_dir_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    print(f"{src_module_dir()=}")
-    print(create_path(src_module_dir(), "_util"))
     assert get_module_temp_dir() == f"{src_module_dir()}/test/_util"
 
 

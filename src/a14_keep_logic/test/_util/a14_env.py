@@ -10,11 +10,11 @@ def temp_vow_label():
 
 
 def temp_vow_mstr_dir():
-    return "src\\a14_keep_logic\\_util\\vow_mstr"
+    return "src\\a14_keep_logic\\test\\_util\\vow_mstr"
 
 
 def get_module_temp_dir():
-    return "src\\a14_keep_logic\\_util\\vow_mstr\\vows"
+    return "src\\a14_keep_logic\\test\\_util\\vow_mstr\\vows"
 
 
 def temp_owner_name():
@@ -23,7 +23,7 @@ def temp_owner_name():
 
 @pytest_fixture()
 def env_dir_setup_cleanup():
-    env_dir = get_module_temp_dir()
+    env_dir = temp_vow_mstr_dir()
     delete_dir(env_dir)
     yield env_dir
     delete_dir(env_dir)

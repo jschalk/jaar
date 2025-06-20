@@ -3,7 +3,7 @@ from src.a00_data_toolbox.file_toolbox import delete_dir
 
 
 def get_module_temp_dir():
-    return "src\\a12_hub_toolbox\\_util\\temp"
+    return "src\\a12_hub_toolbox\\test\\_util\\temp"
 
 
 @pytest_fixture()

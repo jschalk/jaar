@@ -91,7 +91,7 @@ def test_vowunit_shop_ReturnsVowUnit():
     a23_str = "accord23"
 
     # WHEN
-    a23_vow = vowunit_shop(a23_str)
+    a23_vow = vowunit_shop(a23_str, get_module_temp_dir())
 
     # THEN
     assert a23_vow.vow_label == a23_str

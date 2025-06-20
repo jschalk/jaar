@@ -3,7 +3,7 @@ from src.a00_data_toolbox.file_toolbox import delete_dir
 
 
 def get_module_temp_dir():
-    return "src\\a18_etl_toolbox\\_util\\etls"
+    return "src\\a18_etl_toolbox\\test\\_util\\etls"
 
 
 @pytest_fixture()

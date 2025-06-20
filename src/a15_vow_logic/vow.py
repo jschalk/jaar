@@ -310,6 +310,7 @@ class VowUnit:
     def get_dict(self, include_paybook: bool = True) -> dict:
         x_dict = {
             "vow_label": self.vow_label,
+            "vow_mstr_dir": self.vow_mstr_dir,
             "knot": self.knot,
             "fund_iota": self.fund_iota,
             "penny": self.penny,
@@ -449,14 +450,9 @@ def _get_ote1_max_past_event_int(
         return ote1_owner_dict.get(max_past_timepoint)
 
 
-# TODO get rid of this function
-def get_module_temp_dir():
-    return "src/a15_vow_logic/test/_util/vow_mstr"
-
-
 def vowunit_shop(
     vow_label: VowLabel,
-    vow_mstr_dir: str = None,
+    vow_mstr_dir: str,
     timeline: TimeLineUnit = None,
     offi_times: set[TimeLinePoint] = None,
     in_memory_journal: bool = None,
@@ -468,8 +464,6 @@ def vowunit_shop(
 ) -> VowUnit:
     if timeline is None:
         timeline = timelineunit_shop()
-    if vow_mstr_dir is None:
-        vow_mstr_dir = get_module_temp_dir()
     if not job_listen_rotations:
         job_listen_rotations = get_default_job_listen_count()
     x_vowunit = VowUnit(
@@ -501,7 +495,7 @@ def get_from_dict(vow_dict: dict) -> VowUnit:
     x_vow_label = vow_dict.get("vow_label")
     x_vow = vowunit_shop(
         vow_label=x_vow_label,
-        vow_mstr_dir=None,
+        vow_mstr_dir=vow_dict.get("vow_mstr_dir"),
         offi_times=set(vow_dict.get("offi_times")),
         knot=vow_dict.get("knot"),
         fund_iota=vow_dict.get("fund_iota"),

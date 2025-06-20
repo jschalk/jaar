@@ -1,4 +1,4 @@
-from os import listdir as os_listdir
+from os import listdir as os_listdir, walk as os_walk
 from os.path import basename as os_path_basename, exists as os_path_exists
 from pathlib import Path as pathlib_Path
 from src.a00_data_toolbox.file_toolbox import create_path, get_level1_dirs
@@ -223,6 +223,21 @@ def test_NoPrintStatmentsInModuleNonTestFiles():
             if py_file_str.find(print_str) > -1:
                 print(f"Module {module_desc} file {py_file_path} has print statement")
             assert py_file_str.find(print_str) == -1
+
+
+def test_ModulesDoNotHaveEmptyDirectories():
+    # sourcery skip: no-loop-in-tests
+    # sourcery skip: no-conditionals-in-tests
+    # ESTABLISH
+    print_str = "print"
+
+    # WHEN / THEN
+    for module_desc, module_dir in get_module_descs().items():
+        for dirpath, dirnames, filenames in os_walk(module_dir):
+            assert_fail_str = f"{module_desc} Empty directory found: {dirpath}"
+            # print(f"{dirnames=}")
+            # print(f"{filenames=}")
+            assert dirnames or filenames, assert_fail_str
 
 
 def test_str_funcs_MarkdownFileExists():
