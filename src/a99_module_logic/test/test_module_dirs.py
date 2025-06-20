@@ -234,6 +234,9 @@ def test_ModulesDoNotHaveEmptyDirectories():
     for module_desc, module_dir in get_module_descs().items():
         for dirpath, dirnames, filenames in os_walk(module_dir):
             assert_fail_str = f"{module_desc} Empty directory found: {dirpath}"
+            if dirnames == ["__pycache__"] and filenames == []:
+                print(f"{dirnames} {dirpath}")
+                dirnames = []
             # print(f"{dirnames=}")
             # print(f"{filenames=}")
             assert dirnames or filenames, assert_fail_str
