@@ -268,7 +268,6 @@ def vow_build_from_df(
             vow_label=x_vow_label,
             vow_mstr_dir=x_vows_dir,
             timeline=x_timeline,
-            # in_memory_journal=row["in_memory_journal"],
             knot=row["knot"],
             fund_iota=x_fund_iota,
             respect_bit=x_respect_bit,

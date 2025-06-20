@@ -62,7 +62,6 @@ from src.a13_plan_listen_logic.listen import (
     listen_to_debtors_roll_jobs_into_job,
     listen_to_speaker_agenda,
 )
-from src.a15_vow_logic.journal_sqlstr import get_create_table_if_not_exist_sqlstrs
 
 
 def get_default_job_listen_count() -> int:
@@ -107,12 +106,11 @@ class VowUnit:
     _offi_time_max: TimeLinePoint = None
     _vow_dir: str = None
     _owners_dir: str = None
-    _journal_db: str = None
     _packs_dir: str = None
     _all_tranbook: TranBook = None
 
     # directory setup
-    def _set_vow_dirs(self, in_memory_journal: bool = None):
+    def _set_vow_dirs(self):
         vows_dir = create_path(self.vow_mstr_dir, "vows")
         self._vow_dir = create_path(vows_dir, self.vow_label)
         self._owners_dir = create_path(self._vow_dir, "owners")
@@ -120,7 +118,6 @@ class VowUnit:
         set_dir(x_path=self._vow_dir)
         set_dir(x_path=self._owners_dir)
         set_dir(x_path=self._packs_dir)
-        self._create_journal_db(in_memory=in_memory_journal)
 
     def _get_owner_dir(self, owner_name):
         return create_path(self._owners_dir, owner_name)
@@ -130,43 +127,6 @@ class VowUnit:
             self._owners_dir, include_dirs=True, include_files=False
         )
         return sorted(list(owners.keys()))
-
-    # database
-    def get_journal_db_path(self) -> str:
-        vows_dir = create_path(self.vow_mstr_dir, "vows")
-        vow_dir = create_path(vows_dir, self.vow_label)
-        return create_path(vow_dir, "journal.db")
-
-    def _create_journal_db(
-        self, in_memory: bool = None, overwrite: bool = None
-    ) -> None:
-        journal_file_new = False
-        if overwrite:
-            journal_file_new = True
-            self._delete_journal()
-
-        if in_memory:
-            if self._journal_db is None:
-                journal_file_new = True
-            self._journal_db = sqlite3_connect(":memory:")
-        else:
-            conn = sqlite3_connect(self.get_journal_db_path())
-            conn.close()
-
-        if journal_file_new:
-            with self.get_journal_conn() as journal_conn:
-                for sqlstr in get_create_table_if_not_exist_sqlstrs():
-                    journal_conn.execute(sqlstr)
-
-    def _delete_journal(self):
-        self._journal_db = None
-        delete_dir(dir=self.get_journal_db_path())
-
-    def get_journal_conn(self) -> Connection:
-        if self._journal_db is None:
-            return sqlite3_connect(self.get_journal_db_path())
-        else:
-            return self._journal_db
 
     # owner management
     def _set_all_healer_dutys(self, owner_name: OwnerName):
@@ -455,7 +415,6 @@ def vowunit_shop(
     vow_mstr_dir: str,
     timeline: TimeLineUnit = None,
     offi_times: set[TimeLinePoint] = None,
-    in_memory_journal: bool = None,
     knot: str = None,
     fund_iota: float = None,
     respect_bit: float = None,
@@ -480,7 +439,7 @@ def vowunit_shop(
         _all_tranbook=tranbook_shop(vow_label),
         job_listen_rotations=job_listen_rotations,
     )
-    x_vowunit._set_vow_dirs(in_memory_journal=in_memory_journal)
+    x_vowunit._set_vow_dirs()
     return x_vowunit
 
 

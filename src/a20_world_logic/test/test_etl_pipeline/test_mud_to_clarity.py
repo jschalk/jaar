@@ -544,7 +544,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario5_CreatesFiles(
         assert os_path_exists(a23_sue_gut_path)
         assert os_path_exists(a23_sue_job_path)
         assert os_path_exists(sue37_mandate_path)
-        assert count_dirs_files(fizz_world.worlds_dir) == 43
+        assert count_dirs_files(fizz_world.worlds_dir) == 42
 
 
 def test_WorldUnit_mud_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
