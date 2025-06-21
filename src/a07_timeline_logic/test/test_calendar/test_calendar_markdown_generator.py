@@ -5,7 +5,12 @@ from src.a07_timeline_logic.calendar_markdown import (
     center_word,
     get_calendarmarkdown_str,
 )
-from src.a07_timeline_logic.test._util.calendar_examples import get_five_config
+from src.a07_timeline_logic.test._util.calendar_examples import (
+    get_expected_creg_2024_markdown,
+    get_expected_creg_year0_markdown,
+    get_expected_five_5524_markdown,
+    get_five_config,
+)
 from src.a07_timeline_logic.timeline import (
     get_default_timeline_config_dict,
     timelineunit_shop,
@@ -401,84 +406,10 @@ def test_CalendarMarkDown_create_markdown_ReturnsObj_Scernario0_creg_config():
 
     # THEN
     print(cal_markdown)
-    expected_calendar_markdown = """
-                               Year 2024                                
-
-       March                     April                      May         
-Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su
-             1  2  3       1  2  3  4  5  6  7             1  2  3  4  5
- 4  5  6  7  8  9 10       8  9 10 11 12 13 14       6  7  8  9 10 11 12
-11 12 13 14 15 16 17      15 16 17 18 19 20 21      13 14 15 16 17 18 19
-18 19 20 21 22 23 24      22 23 24 25 26 27 28      20 21 22 23 24 25 26
-25 26 27 28 29 30 31      29 30                     27 28 29 30 31      
-
-        June                      July                     August       
-Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su
-                1  2       1  2  3  4  5  6  7                1  2  3  4
- 3  4  5  6  7  8  9       8  9 10 11 12 13 14       5  6  7  8  9 10 11
-10 11 12 13 14 15 16      15 16 17 18 19 20 21      12 13 14 15 16 17 18
-17 18 19 20 21 22 23      22 23 24 25 26 27 28      19 20 21 22 23 24 25
-24 25 26 27 28 29 30      29 30 31                  26 27 28 29 30 31   
-
-     September                  October                   November      
-Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su
-                   1          1  2  3  4  5  6                   1  2  3
- 2  3  4  5  6  7  8       7  8  9 10 11 12 13       4  5  6  7  8  9 10
- 9 10 11 12 13 14 15      14 15 16 17 18 19 20      11 12 13 14 15 16 17
-16 17 18 19 20 21 22      21 22 23 24 25 26 27      18 19 20 21 22 23 24
-23 24 25 26 27 28 29      28 29 30 31               25 26 27 28 29 30   
-30                                                                      
-
-      December               January (2025)           February (2025)   
-Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su
-                   1             1  2  3  4  5                      1  2
- 2  3  4  5  6  7  8       6  7  8  9 10 11 12       3  4  5  6  7  8  9
- 9 10 11 12 13 14 15      13 14 15 16 17 18 19      10 11 12 13 14 15 16
-16 17 18 19 20 21 22      20 21 22 23 24 25 26      17 18 19 20 21 22 23
-23 24 25 26 27 28 29      27 28 29 30 31            24 25 26 27 28      
-30 31                                                                   """
+    expected_calendar_markdown = get_expected_creg_2024_markdown()
+    print("")
+    print(expected_calendar_markdown)
     assert cal_markdown == expected_calendar_markdown
-
-
-def get_expected_five_5524_markdown() -> str:
-    return """
-                                Year 5224                                 
-
-   Fredrick              Geo               Holocene             Iguana    
-An Ba Ch Da Ea      An Ba Ch Da Ea      An Ba Ch Da Ea      An Ba Ch Da Ea
-       0  1  2             0  1  2             0  1  2             0  1  2
- 3  4  5  6  7       3  4  5  6  7       3  4  5  6  7       3  4  5  6  7
- 8  9 10 11 12       8  9 10 11 12       8  9 10 11 12       8  9 10 11 12
-13 14 15 16 17      13 14 15 16 17      13 14 15 16 17      13 14 15 16 17
-18 19 20 21 22      18 19 20 21 22      18 19 20 21 22      18 19 20 21 22
-23 24               23 24               23 24               23 24         
-
-    Jesus                Keel               LeBron             Mikayla    
-An Ba Ch Da Ea      An Ba Ch Da Ea      An Ba Ch Da Ea      An Ba Ch Da Ea
-       0  1  2             0  1  2             0  1  2             0  1  2
- 3  4  5  6  7       3  4  5  6  7       3  4  5  6  7       3  4  5  6  7
- 8  9 10 11 12       8  9 10 11 12       8  9 10 11 12       8  9 10 11 12
-13 14 15 16 17      13 14 15 16 17      13 14 15 16 17      13 14 15 16 17
-18 19 20 21 22      18 19 20 21 22      18 19 20 21 22      18 19 20 21 22
-23 24               23 24               23 24               23 24         
-
-    Ninon               Obama              Preston              Quorum    
-An Ba Ch Da Ea      An Ba Ch Da Ea      An Ba Ch Da Ea      An Ba Ch Da Ea
-       0  1  2             0  1  2             0  1  2             0  1  2
- 3  4  5  6  7       3  4  5  6  7       3  4  5  6  7       3  4  5  6  7
- 8  9 10 11 12       8  9 10 11 12       8  9 10 11 12       8  9 10 11 12
-13 14 15 16 17      13 14 15 16 17      13 14 15 16 17      13 14 15 16 17
-18 19 20 21 22      18 19 20 21 22      18 19 20 21 22      18 19 20 21 22
-23 24               23 24               23 24               23 24         
-
-  RioGrande             Simon               Trump     
-An Ba Ch Da Ea      An Ba Ch Da Ea      An Ba Ch Da Ea
-       0  1  2             0  1  2             0  1  2
- 3  4  5  6  7       3  4  5  6  7       3  4  5  6  7
- 8  9 10 11 12       8  9 10 11 12       8  9 10 11 12
-13 14 15 16 17      13 14 15 16 17      13 14         
-18 19 20 21 22      18 19 20 21 22                    
-23 24               23 24                             """
 
 
 def test_CalendarMarkDown_create_markdown_ReturnsObj_Scernario1_five_config():
@@ -491,8 +422,11 @@ def test_CalendarMarkDown_create_markdown_ReturnsObj_Scernario1_five_config():
     cal_markdown = five_calendermarkdown.create_markdown(year_int)
 
     # THEN
-    # print(cal_markdown)
-    assert cal_markdown == get_expected_five_5524_markdown()
+    print(cal_markdown)
+    expected_calendar_markdown = get_expected_five_5524_markdown()
+    print("")
+    print(expected_calendar_markdown)
+    assert cal_markdown == expected_calendar_markdown
 
 
 def test_get_calendarmarkdown_str_ReturnsObj_Scenario0_display_init_day_ParameterNotPassed():
@@ -518,3 +452,14 @@ def test_get_calendarmarkdown_str_ReturnsObj_Scenario1_display_init_day_Paramete
     # WHEN / THEN
     assert expected_str != get_calendarmarkdown_str(five_config, yr5524, chiday_str)
     assert expected_str == get_calendarmarkdown_str(five_config, yr5524, anaday_str)
+
+
+def test_get_calendarmarkdown_str_ReturnsObj_Scenario2_AllDefaults():
+    # ESTABLIS
+    creg_config = get_default_timeline_config_dict()
+    year = 0
+    expected_creg_year0_markdow = get_expected_creg_year0_markdown()
+
+    # WHEN / THEN
+    print(get_calendarmarkdown_str(creg_config, year))
+    assert expected_creg_year0_markdow == get_calendarmarkdown_str(creg_config, year)
