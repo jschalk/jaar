@@ -23,9 +23,10 @@ def test_WorldUnit_create_stances_Senario0_EmptyWorld_CreatesFile(
 ):
     # ESTABLISH
     fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str, worlds_dir())
+    output_dir = create_path(worlds_dir(), "output")
+    fizz_world = worldunit_shop(fizz_str, worlds_dir(), output_dir)
     fizz_world.mud_to_clarity_mstr()
-    fizz_stance0001_path = create_stance0001_path(fizz_world._vow_mstr_dir)
+    fizz_stance0001_path = create_stance0001_path(fizz_world.output_dir)
     assert os_path_exists(fizz_stance0001_path) is False
 
     # WHEN
@@ -38,7 +39,8 @@ def test_WorldUnit_create_stances_Senario0_EmptyWorld_CreatesFile(
 def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str, worlds_dir())
+    output_dir = create_path(worlds_dir(), "output")
+    fizz_world = worldunit_shop(fizz_str, worlds_dir(), output_dir)
     sue_str = "Sue"
     event2 = 2
     ex_filename = "fizzbuzz.xlsx"
@@ -55,7 +57,7 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
     fizz_world.mud_to_clarity_mstr()
-    fizz_stance0001_path = create_stance0001_path(fizz_world._vow_mstr_dir)
+    fizz_stance0001_path = create_stance0001_path(fizz_world.output_dir)
     assert os_path_exists(fizz_stance0001_path) is False
 
     # WHEN
@@ -70,7 +72,8 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
 ):
     # ESTABLISH
     fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str, worlds_dir())
+    fizz_output_dir = create_path(worlds_dir(), "fizz_output")
+    fizz_world = worldunit_shop(fizz_str, worlds_dir(), fizz_output_dir)
     sue_str = "Sue"
     event2 = 2
     ex_filename = "fizzbuzz.xlsx"
@@ -87,9 +90,10 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
     fizz_world.mud_to_clarity_mstr()
-    fizz_stance0001_path = create_stance0001_path(fizz_world._vow_mstr_dir)
+    fizz_stance0001_path = create_stance0001_path(fizz_world.output_dir)
     fizz_world.create_stances()
-    buzz_world = worldunit_shop("buzz", worlds_dir())
+    buzz_output_dir = create_path(worlds_dir(), "buzz_output")
+    buzz_world = worldunit_shop("buzz", worlds_dir(), buzz_output_dir)
     buzz_mud_st0001_path = create_path(buzz_world._vow_mstr_dir, "buzz_mud.xlsx")
     set_dir(create_stances_dir_path(buzz_world._vow_mstr_dir))
     shutil_copy2(fizz_stance0001_path, dst=buzz_mud_st0001_path)
@@ -98,7 +102,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
     print(f"{buzz_mud_st0001_path=}")
     print(f"{get_sheet_names(buzz_mud_st0001_path)=}")
     buzz_world.mud_to_clarity_mstr()
-    buzz_stance0001_path = create_stance0001_path(buzz_world._vow_mstr_dir)
+    buzz_stance0001_path = create_stance0001_path(buzz_world.output_dir)
     assert os_path_exists(buzz_stance0001_path) is False
 
     # WHEN
@@ -115,6 +119,41 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
         #     print(f"{fizz_sheet_df=}")
         #     print(f"{buzz_sheet_df=}")
         assert_frame_equal(fizz_sheet_df, buzz_sheet_df)
+
+
+def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fizz_str = "fizz"
+    output_dir = create_path(worlds_dir(), "output")
+    fizz_world = worldunit_shop(fizz_str, worlds_dir(), output_dir)
+    sue_str = "Sue"
+    event2 = 2
+    ex_filename = "fizzbuzz.xlsx"
+    mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
+    a23_str = "accord23"
+    br00011_columns = [
+        event_int_str(),
+        face_name_str(),
+        vow_label_str(),
+        owner_name_str(),
+        acct_name_str(),
+    ]
+    br00011_rows = [[event2, sue_str, a23_str, sue_str, sue_str]]
+    br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
+    upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
+    fizz_world.mud_to_clarity_mstr()
+
+    a23_calendar_md_path = create_path(output_dir, f"{a23_str}_calendar.md")
+    print(f"      {a23_calendar_md_path=}")
+    assert not os_path_exists(a23_calendar_md_path)
+
+    # WHEN
+    fizz_world.create_stances()
+
+    # THEN
+    assert os_path_exists(a23_calendar_md_path)
 
 
 # def test_WorldUnit_mud_to_clarity_CreatesFiles(env_dir_setup_cleanup):

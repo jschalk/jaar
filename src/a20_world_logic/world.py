@@ -165,6 +165,7 @@ class WorldUnit:
 
     def create_stances(self):
         create_stance0001_file(self._vow_mstr_dir, self.output_dir)
+        create_calendar_markdown_files(self._vow_mstr_dir, self.output_dir)
 
     def create_kpi_csvs(self):
         create_kpi_csvs(self.get_db_path(), self.output_dir)

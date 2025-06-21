@@ -31,7 +31,7 @@ def test_create_stances_owner_dir_path_HasDocString():
 
 def test_create_stance0001_path_HasDocString():
     # ESTABLISH
-    doc_str = create_stance0001_path(vow_mstr_dir="vow_mstr_dir")
+    doc_str = create_stance0001_path(output_dir="output_dir")
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_stance0001_path) == doc_str

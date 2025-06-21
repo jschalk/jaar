@@ -44,12 +44,11 @@ def test_create_stances_owner_dir_path_ReturnsObj():
 
 def test_create_stance0001_path_ReturnsObj():
     # ESTABLISH
-    x_vow_mstr_dir = get_module_temp_dir()
+    output_dir = get_module_temp_dir()
 
     # WHEN
-    gen_stance0001_xlsx_path = create_stance0001_path(x_vow_mstr_dir)
+    gen_stance0001_xlsx_path = create_stance0001_path(output_dir)
 
     # THEN
-    stances_dir = create_stances_dir_path(x_vow_mstr_dir)
-    expected_stance000001_path = create_path(stances_dir, STANCE0001_FILENAME)
+    expected_stance000001_path = create_path(output_dir, STANCE0001_FILENAME)
     assert gen_stance0001_xlsx_path == expected_stance000001_path
