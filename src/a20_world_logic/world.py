@@ -164,8 +164,6 @@ class WorldUnit:
         # if store_tracing_files:
 
     def create_stances(self):
-        print(f"{self.output_dir=}")
-        print(f"{self._vow_mstr_dir=}")
         create_stance0001_file(self._vow_mstr_dir, self.output_dir)
         create_calendar_markdown_files(self._vow_mstr_dir, self.output_dir)
 
