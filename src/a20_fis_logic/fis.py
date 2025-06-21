@@ -170,9 +170,6 @@ class FisUnit:
     def create_kpi_csvs(self):
         create_kpi_csvs(self.get_db_path(), self.output_dir)
 
-    def create_calendar_markdown_files(self):
-        create_calendar_markdown_files(self._bank_mstr_dir, self.output_dir)
-
     def get_dict(self) -> dict:
         return {
             "fis_id": self.fis_id,

@@ -37,7 +37,7 @@ def test_create_calendar_markdown_files_Senario0_NoFileIfFisIsEmpty(
     assert count_files(output_dir) == 0
 
 
-def test_create_calendar_markdown_files_Senario1_Add_CreatesFile(
+def test_create_calendar_markdown_files_Senario1_CreatesFileFromBankUnitJSON(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
