@@ -178,6 +178,7 @@ class CalendarMarkDown:
 def get_calendarmarkdown_str(
     timeline_config: dict, year: int, display_init_day: str = None
 ) -> str:
-    calendermarkdown = CalendarMarkDown(timeline_config)
-    calendermarkdown.display_init_day = display_init_day
+    calendermarkdown = CalendarMarkDown(
+        timeline_config, display_init_day=display_init_day
+    )
     return calendermarkdown.create_markdown(year)

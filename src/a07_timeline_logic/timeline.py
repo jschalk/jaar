@@ -420,8 +420,20 @@ def get_timeline_min_difference(timeline_config0: dict, timeline_config1: dict) 
 
 
 @dataclass
-class CalendarStrGenerator:
-    """Creates readable time blurb from PlanUnit, time_range_root_rope, and minute."""
+class PlanTimelinePoint:
+    """Given plan, timeline_rope, and TimelinePoint, returns time technology attrs
+    _c400_number: count of 400 year cycles
+    _c100_count: count of 100 year cycles after _c400_number years removed
+    _hour
+    _minute
+    _monthday
+    _month
+    _yr4_count: 4 year cycles after _c100_count, _c100 years removed
+    _year_count:  1 year after _c100_count, _c100_count, _yr4_count years removed
+    _year_num: calculated year from c400, c100, yr4, year_count
+    _weekday
+    _timeline_concept ConceptUnit
+    readable time blurb from PlanUnit, time_range_root_rope, and minute integer."""
 
     x_planunit: PlanUnit = None
     time_range_root_rope: RopeTerm = None
@@ -532,8 +544,8 @@ class CalendarStrGenerator:
         return x_str
 
 
-def calendarstr_shop(x_planunit: PlanUnit, time_range_root_rope: str, x_min: int):
-    return CalendarStrGenerator(x_planunit, time_range_root_rope, x_min=x_min)
+def plantimelinepoint_shop(x_planunit: PlanUnit, time_range_root_rope: str, x_min: int):
+    return PlanTimelinePoint(x_planunit, time_range_root_rope, x_min=x_min)
 
 
 def config_file_dir() -> str:

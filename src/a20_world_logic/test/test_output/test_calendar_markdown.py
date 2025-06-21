@@ -1,20 +1,19 @@
-# from os.path import exists as os_path_exists
-# from pandas import DataFrame
-# from src.a00_data_toolbox.file_toolbox import create_path
-# from src.a02_finance_logic.test._util.a02_str import owner_name_str, vow_label_str
-# from src.a06_plan_logic.test._util.a06_str import acct_name_str
-# from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-# from src.a07_timeline_logic.calendar_markdown import CalendarMarkDown
-# from src.a17_idea_logic.idea_db_tool import upsert_sheet
-# from src.a19_kpi_toolbox.test._util.a19_str import vow_kpi001_acct_nets_str
-# from src.a20_world_logic.test._util.a20_env import (
-#     env_dir_setup_cleanup,
-#     get_module_temp_dir as worlds_dir,
-# )
-# from src.a20_world_logic.world import worldunit_shop
+from os.path import exists as os_path_exists
+from pandas import DataFrame
+from src.a00_data_toolbox.file_toolbox import create_path
+from src.a02_finance_logic.test._util.a02_str import owner_name_str, vow_label_str
+from src.a06_plan_logic.test._util.a06_str import acct_name_str
+from src.a07_timeline_logic.calendar_markdown import CalendarMarkDown
+from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
+from src.a17_idea_logic.idea_db_tool import upsert_sheet
+from src.a19_kpi_toolbox.test._util.a19_str import vow_kpi001_acct_nets_str
+from src.a20_world_logic.test._util.a20_env import (
+    env_dir_setup_cleanup,
+    get_module_temp_dir as worlds_dir,
+)
+from src.a20_world_logic.world import worldunit_shop
 
-
-# def test_WorldUnit_create_kpi_csvs_Senario0_EmptyWorld_CreatesFile(
+# def test_WorldUnit_create_calendar_markdown_files_Senario0_EmptyWorld_CreatesFile(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -26,13 +25,15 @@
 #     assert not os_path_exists(kpi001_csv_path)
 
 #     # WHEN
-#     fizz_world.create_kpi_csvs()
+#     fizz_world.create_calendar_markdown_files()
 
 #     # THEN
 #     assert os_path_exists(kpi001_csv_path)
 
 
-# def test_WorldUnit_create_kpi_csvs_Senario1_Add_CreatesFile(env_dir_setup_cleanup):
+# def test_WorldUnit_create_calendar_markdown_files_Senario1_Add_CreatesFile(
+#     env_dir_setup_cleanup,
+# ):
 #     # ESTABLISH
 #     fizz_str = "fizz"
 #     output_dir = create_path(worlds_dir(), "output")
@@ -58,7 +59,7 @@
 #     assert not os_path_exists(kpi001_csv_path)
 
 #     # WHEN
-#     fizz_world.create_kpi_csvs()
+#     fizz_world.create_calendar_markdown_files()
 
 #     # THEN
 #     assert os_path_exists(kpi001_csv_path)
