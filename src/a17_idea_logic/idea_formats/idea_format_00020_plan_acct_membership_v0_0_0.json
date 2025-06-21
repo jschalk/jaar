@@ -15,7 +15,7 @@
         "face_name": {
             "otx_key": true
         },
-        "vow_label": {
+        "bank_label": {
             "otx_key": true
         },
         "group_title": {
@@ -30,6 +30,6 @@
         "plan_acctunit",
         "plan_acct_membership",
         "planunit",
-        "vowunit"
+        "bankunit"
     ]
 }

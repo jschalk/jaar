@@ -24,7 +24,7 @@ def test_PlanUnit_get_relevant_ropes_EmptyRopeTermReturnsEmpty():
 def test_PlanUnit_get_relevant_ropes_RootRopeTermReturnsOnlyItself():
     # ESTABLISH
     sue_plan = get_planunit_with_4_levels()
-    root_rope = to_rope(sue_plan.vow_label)
+    root_rope = to_rope(sue_plan.bank_label)
 
     # WHEN
     root_dict = {root_rope: -1}
@@ -39,7 +39,7 @@ def test_PlanUnit_get_relevant_ropes_RootRopeTermReturnsOnlyItself():
 def test_PlanUnit_get_relevant_ropes_SimpleReturnsOnlyAncestors():
     # ESTABLISH
     sue_plan = get_planunit_with_4_levels()
-    root_rope = to_rope(sue_plan.vow_label)
+    root_rope = to_rope(sue_plan.bank_label)
 
     # WHEN
     wk_str = "wkdays"
@@ -68,7 +68,7 @@ def test_PlanUnit_get_relevant_ropes_ReturnsSimpleReasonUnitRcontext():
     unim_str = "unimportant"
     unim_rope = sue_plan.make_l1_rope(unim_str)
     unim_concept = conceptunit_shop(unim_str)
-    sue_plan.set_concept(unim_concept, parent_rope=sue_plan.vow_label)
+    sue_plan.set_concept(unim_concept, parent_rope=sue_plan.bank_label)
 
     status_str = "cleaniness status"
     status_rope = sue_plan.make_rope(casa_rope, status_str)
@@ -85,7 +85,7 @@ def test_PlanUnit_get_relevant_ropes_ReturnsSimpleReasonUnitRcontext():
     # THEN
     print(f"{relevant_ropes=}")
     assert len(relevant_ropes) == 4
-    root_rope = to_rope(sue_plan.vow_label)
+    root_rope = to_rope(sue_plan.bank_label)
     assert relevant_ropes == {root_rope, casa_rope, status_rope, floor_rope}
     assert unim_rope not in relevant_ropes
 
@@ -93,7 +93,7 @@ def test_PlanUnit_get_relevant_ropes_ReturnsSimpleReasonUnitRcontext():
 def test_PlanUnit_get_relevant_ropes_ReturnsReasonUnitRcontextAndDescendents():
     # ESTABLISH
     x_plan = get_mop_with_reason_planunit_example1()
-    root_rope = to_rope(x_plan.vow_label)
+    root_rope = to_rope(x_plan.bank_label)
     casa_str = "casa"
     casa_rope = x_plan.make_l1_rope(casa_str)
     floor_str = "mop floor"
@@ -145,7 +145,7 @@ def test_PlanUnit_get_relevant_ropes_ReturnSimple():
     # ESTABLISH
     yao_str = "Yao"
     yao_plan = planunit_shop(owner_name=yao_str)
-    root_rope = to_rope(yao_plan.vow_label)
+    root_rope = to_rope(yao_plan.bank_label)
     min_range_x_str = "a_minute_range"
     min_range_x_rope = yao_plan.make_l1_rope(min_range_x_str)
     min_range_concept = conceptunit_shop(min_range_x_str, begin=0, close=2880)

@@ -3,34 +3,34 @@ from src.a01_term_logic.rope import create_rope, to_rope
 from src.a04_reason_logic.reason_concept import factunit_shop, reasonunit_shop
 from src.a05_concept_logic.concept import (
     conceptunit_shop,
-    get_default_vow_label as root_label,
+    get_default_bank_label as root_label,
 )
 from src.a06_plan_logic.plan import planunit_shop
 from src.a06_plan_logic.test._util.example_plans import get_planunit_with_4_levels
 
 
-def test_PlanUnit_set_vow_label_CorrectlySetsAttr():
+def test_PlanUnit_set_bank_label_CorrectlySetsAttr():
     # ESTABLISH
-    x_vow_label = "accord45"
+    x_bank_label = "accord45"
     sue_str = "Sue"
     sue_plan = planunit_shop(sue_str)
-    assert sue_plan.vow_label == root_label()
+    assert sue_plan.bank_label == root_label()
 
     # WHEN
-    sue_plan.set_vow_label(vow_label=x_vow_label)
+    sue_plan.set_bank_label(bank_label=x_bank_label)
 
     # THEN
-    assert sue_plan.vow_label == x_vow_label
+    assert sue_plan.bank_label == x_bank_label
 
 
-def test_PlanUnit_set_concept_CorrectlySetsvow_label_AND_fund_iota():
+def test_PlanUnit_set_concept_CorrectlySetsbank_label_AND_fund_iota():
     # ESTABLISH'
     x_fund_iota = 500
     sue_plan = get_planunit_with_4_levels()
     sue_plan.fund_iota = x_fund_iota
-    plan_vow_label = "Texas"
-    sue_plan.set_vow_label(plan_vow_label)
-    assert sue_plan.vow_label == plan_vow_label
+    plan_bank_label = "Texas"
+    sue_plan.set_bank_label(plan_bank_label)
+    assert sue_plan.bank_label == plan_bank_label
 
     casa_rope = sue_plan.make_l1_rope("casa")
     clean_rope = sue_plan.make_rope(casa_rope, "cleaning")
@@ -42,11 +42,11 @@ def test_PlanUnit_set_concept_CorrectlySetsvow_label_AND_fund_iota():
 
     # THEN
     cookery_concept = sue_plan.get_concept_obj(cookery_rope)
-    assert cookery_concept.vow_label == plan_vow_label
+    assert cookery_concept.bank_label == plan_bank_label
     assert cookery_concept.fund_iota == x_fund_iota
 
 
-def test_plan_set_vow_label_CorrectlySetsAttr():
+def test_plan_set_bank_label_CorrectlySetsAttr():
     # ESTABLISH
     yao_str = "Yao"
     yao_plan = planunit_shop(owner_name=yao_str)
@@ -57,25 +57,25 @@ def test_plan_set_vow_label_CorrectlySetsAttr():
     yao_plan.set_l1_concept(conceptunit_shop(casa_str))
     yao_plan.set_concept(conceptunit_shop(swim_str), parent_rope=old_casa_rope)
     assert yao_plan.owner_name == yao_str
-    assert yao_plan.conceptroot.concept_label == yao_plan.vow_label
+    assert yao_plan.conceptroot.concept_label == yao_plan.bank_label
     casa_concept = yao_plan.get_concept_obj(old_casa_rope)
-    assert casa_concept.parent_rope == to_rope(yao_plan.vow_label)
+    assert casa_concept.parent_rope == to_rope(yao_plan.bank_label)
     swim_concept = yao_plan.get_concept_obj(old_swim_rope)
     assert swim_concept.parent_rope == old_casa_rope
-    assert yao_plan.vow_label == yao_plan.vow_label
+    assert yao_plan.bank_label == yao_plan.bank_label
 
     # WHEN
-    x_vow_label = "accord45"
-    yao_plan.set_vow_label(vow_label=x_vow_label)
+    x_bank_label = "accord45"
+    yao_plan.set_bank_label(bank_label=x_bank_label)
 
     # THEN
     new_casa_rope = yao_plan.make_l1_rope(casa_str)
     swim_str = "swim"
     new_swim_rope = yao_plan.make_rope(new_casa_rope, swim_str)
-    assert yao_plan.vow_label == x_vow_label
-    assert yao_plan.conceptroot.concept_label == x_vow_label
+    assert yao_plan.bank_label == x_bank_label
+    assert yao_plan.conceptroot.concept_label == x_bank_label
     casa_concept = yao_plan.get_concept_obj(new_casa_rope)
-    assert casa_concept.parent_rope == to_rope(x_vow_label)
+    assert casa_concept.parent_rope == to_rope(x_bank_label)
     swim_concept = yao_plan.get_concept_obj(new_swim_rope)
     assert swim_concept.parent_rope == new_casa_rope
 
@@ -115,7 +115,7 @@ def test_plan_set_knot_CorrectlyModifies_parent_rope():
     semicolon_str = ";"
     assert zia_plan.knot == semicolon_str
     semicolon_cook_rope = zia_plan.make_rope(semicolon_casa_rope, cook_str)
-    # print(f"{zia_plan.vow_label=} {zia_plan.conceptroot.concept_label=} {casa_rope=}")
+    # print(f"{zia_plan.bank_label=} {zia_plan.conceptroot.concept_label=} {casa_rope=}")
     # print(f"{cook_concept.parent_rope=} {cook_concept.concept_label=}")
     # semicolon_casa_concept = zia_plan.get_concept_obj(semicolon_casa_rope)
     # print(f"{semicolon_casa_concept.parent_rope=} {semicolon_casa_concept.concept_label=}")
@@ -127,8 +127,8 @@ def test_plan_set_knot_CorrectlyModifies_parent_rope():
 
     # THEN
     assert cook_concept.get_concept_rope() != semicolon_cook_rope
-    zia_vow_label = zia_plan.vow_label
-    slash_casa_rope = create_rope(zia_vow_label, casa_str, knot=slash_str)
+    zia_bank_label = zia_plan.bank_label
+    slash_casa_rope = create_rope(zia_bank_label, casa_str, knot=slash_str)
     slash_cook_rope = create_rope(slash_casa_rope, cook_str, knot=slash_str)
     assert cook_concept.get_concept_rope() == slash_cook_rope
 
@@ -212,10 +212,10 @@ def test_plan_set_knot_CorrectlyModifiesFactUnit():
 
 def test_PlanUnit_set_knot_CorrectlySetsAttr():
     # ESTABLISH
-    x_vow_label = "accord45"
+    x_bank_label = "accord45"
     slash_knot = "/"
     sue_str = "Sue"
-    sue_plan = planunit_shop(sue_str, x_vow_label, knot=slash_knot)
+    sue_plan = planunit_shop(sue_str, x_bank_label, knot=slash_knot)
     assert sue_plan.knot == slash_knot
 
     # WHEN

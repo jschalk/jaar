@@ -1,4 +1,4 @@
-from src.a02_finance_logic.test._util.a02_str import vow_label_str
+from src.a02_finance_logic.test._util.a02_str import bank_label_str
 from src.a14_keep_logic.rivercycle import RiverGrade, rivergrade_shop
 from src.a14_keep_logic.test._util.example_credorledgers import example_yao_hubunit
 
@@ -173,7 +173,7 @@ def test_RiverGrade_get_dict_ReturnsObj():
     rivergrade_dict = x_rivergrade.get_dict()
 
     # THEN
-    assert rivergrade_dict.get(vow_label_str()) == yao_hubunit.vow_label
+    assert rivergrade_dict.get(bank_label_str()) == yao_hubunit.bank_label
     assert rivergrade_dict.get("healer_name") == yao_hubunit.owner_name
     assert rivergrade_dict.get("keep_rope") == yao_hubunit.keep_rope
     assert rivergrade_dict.get("tax_bill_amount") == x_tax_bill_amount
@@ -208,6 +208,7 @@ def test_RiverGrade_get_json_ReturnsObj():
 
     # THEN
     static_json = """{
+  "bank_label": "ex_keep04",
   "credor_count": 103,
   "credor_rank_num": null,
   "credor_rank_percent": null,
@@ -223,8 +224,7 @@ def test_RiverGrade_get_json_ReturnsObj():
   "tax_paid_amount": null,
   "tax_paid_bool": null,
   "tax_paid_rank_num": null,
-  "tax_paid_rank_percent": null,
-  "vow_label": "ex_keep04"
+  "tax_paid_rank_percent": null
 }"""
 
     assert rivergrade_json == static_json

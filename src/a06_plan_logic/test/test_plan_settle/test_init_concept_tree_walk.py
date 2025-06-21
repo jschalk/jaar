@@ -47,7 +47,7 @@ def test_treemetrics_shop_ReturnsObj():
 def test_PlanUnit_set_concept_dict_Scenario0():
     # ESTABLISH
     yao_plan = planunit_shop("Yao")
-    root_rope = to_rope(yao_plan.vow_label)
+    root_rope = to_rope(yao_plan.bank_label)
     root_concept = yao_plan.get_concept_obj(root_rope)
     assert not root_concept.begin
     assert not root_concept.close
@@ -73,9 +73,9 @@ def test_PlanUnit_set_concept_dict_Scenario1():
     yao_plan = planunit_shop("Yao")
     time0_begin = 7
     time0_close = 31
-    root_rope = to_rope(yao_plan.vow_label)
+    root_rope = to_rope(yao_plan.bank_label)
     yao_plan.edit_concept_attr(root_rope, begin=time0_begin, close=time0_close)
-    root_rope = to_rope(yao_plan.vow_label)
+    root_rope = to_rope(yao_plan.bank_label)
     root_concept = yao_plan.get_concept_obj(root_rope)
     assert root_concept.begin == time0_begin
     assert root_concept.close == time0_close
@@ -95,7 +95,7 @@ def test_PlanUnit_set_concept_dict_Scenario1():
 def test_PlanUnit_set_concept_dict_Clears_gogo_calc_stop_calc():
     # ESTABLISH
     sue_plan = get_planunit_with_4_levels()
-    root_rope = to_rope(sue_plan.vow_label)
+    root_rope = to_rope(sue_plan.bank_label)
     root_concept = sue_plan.get_concept_obj(root_rope)
     nation_str = "nation"
     nation_rope = sue_plan.make_l1_rope(nation_str)

@@ -17,12 +17,12 @@ JAAR Version 0.0.0
 
 So how do I listen? jaar has an engine for converting the declarations (as data) into task lists. How to input the data? The most accessible method is using excel sheets. 
 
-# 0.0.1 "Vows" The foundation of jaar
-For Levinas all of reality is born from the face to face encounter. The same (me) welcomes the other person through the Face. The Face of the other tells me it's suffering and it's suffering becomes my suffering. I then VOW to change who I am to ease that suffering. The suffering is infinitly deep and beyond my complete understanding so when I vow to respond to that suffering I am acting with confidence that I understand what the suffering is and that I know how to respond. That confidence stops the listening process, the Vow cuts the infinite into the finite and is the foundation for a world. When that Vow is created it can create a world. Worlds can hold a infinite amount of human experience. A small subset of that is logical systems. jaar is uses computers to build logic.
+# 0.0.1 "Banks" The foundation of jaar
+For Levinas all of reality is born from the face to face encounter. The same (me) welcomes the other person through the Face. The Face of the other tells me it's suffering and it's suffering becomes my suffering. I then BANK to change who I am to ease that suffering. The suffering is infinitly deep and beyond my complete understanding so when I bank to respond to that suffering I am acting with confidence that I understand what the suffering is and that I know how to respond. That confidence stops the listening process, the Bank cuts the infinite into the finite and is the foundation for a world. When that Bank is created it can create a world. Worlds can hold a infinite amount of human experience. A small subset of that is logical systems. jaar is uses computers to build logic.
 
-A Vow can create a world or change a current world. Each person can only make one vow at a time so a world that has been built by multiple vows implies each vow is from a different time. jaar describes the passage of time by *event_ints*. *event_int* is alropes an integer. 
+A Bank can create a world or change a current world. Each person can only make one bank at a time so a world that has been built by multiple banks implies each bank is from a different time. jaar describes the passage of time by *event_ints*. *event_int* is alropes an integer. 
 
-For jaar all data must have *event_int*, *face_name*, *vow_label*. These are the required keys.
+For jaar all data must have *event_int*, *face_name*, *bank_label*. These are the required keys.
 
   
 ## 0.1 Short introduction to jaar excel sheets
@@ -30,25 +30,25 @@ For jaar all data must have *event_int*, *face_name*, *vow_label*. These are the
 `jaar` is a python library for listening to the needs of my neighbors and in turn letting them know what I need. Needs can be expressed in Excel sheets that range in complexity from a simple five column single row (example below) to 10+ columns that include configuration options that are usually set to defaults. Each row is interpreted and used to build the "clarity" data set. Even sheet with a single row like the example 0.1.0 below can be processed by jaar. 
 
 # Input Example Excel file 0.1.0: fizz0.xlsx with sheet "br00000_buzz" 
-| event_int | face_name | vow_label | owner_name | acct_name | tran_time | amount |
+| event_int | face_name | bank_label | owner_name | acct_name | tran_time | amount |
 |-----------|-----------|-----------|------------|-----------|-----------|--------|
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |    Dean   |    891    |  7000  |
 
-When jaar processes example 0.1.0 it creates a Vow labeled "OxboxDean" that contains owners Emmanuel and Dean and a single transaction of 7000 OxboxDean coins from Emmanuel to Dean. Here's the status metrics:
-| vow_label | owner_name | vow_fund_amount | vow_fund_rank | vow_tasks |
+When jaar processes example 0.1.0 it creates a Bank labeled "OxboxDean" that contains owners Emmanuel and Dean and a single transaction of 7000 OxboxDean coins from Emmanuel to Dean. Here's the status metrics:
+| bank_label | owner_name | bank_fund_amount | bank_fund_rank | bank_tasks |
 |-----------|------------|-----------------|---------------|-----------|
 | OxboxDean |  Emmanuel  |     -7000       |       2       |     0     |
 | OxboxDean |    Dean    |      7000       |       1       |     0     |
 
 
 Output stance: emmanuel_stance.xlsx, sheet "br00000"
-| event_int | face_name | vow_label | owner_name | acct_name | tran_time | amount |
+| event_int | face_name | bank_label | owner_name | acct_name | tran_time | amount |
 |-----------|-----------|-----------|------------|-----------|-----------|--------|
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |    Dean   |    891    |  7000  |
 
 
 <!-- # Input Example Excel file 0.1.2: fizz2.xlsx with sheet "br00000_buzz2" 
-| event_int | face_name | vow_label | owner_name | acct_name | credit_score | debt_score |
+| event_int | face_name | bank_label | owner_name | acct_name | credit_score | debt_score |
 |-----------|-----------|-----------|------------|-----------|---------------|---------------|
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |    Dean   |      100      |      15       |
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |  Emmanuel |       50      |      75       |

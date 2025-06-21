@@ -9,7 +9,7 @@
         "face_name": {
             "otx_key": true
         },
-        "vow_label": {
+        "bank_label": {
             "otx_key": true
         },
         "owner_name": {
@@ -18,7 +18,7 @@
     },
     "idea_number": "br00011",
     "dimens": [
-        "vowunit",
+        "bankunit",
         "planunit",
         "plan_acctunit"
     ]

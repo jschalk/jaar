@@ -9,6 +9,10 @@ def amount_str() -> str:
     return "amount"
 
 
+def bank_label_str() -> str:
+    return "bank_label"
+
+
 def bud_acct_nets_str() -> str:
     return "bud_acct_nets"
 
@@ -51,7 +55,3 @@ def quota_str() -> str:
 
 def tran_time_str() -> str:
     return "tran_time"
-
-
-def vow_label_str() -> str:
-    return "vow_label"

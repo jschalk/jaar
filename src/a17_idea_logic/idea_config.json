@@ -7,7 +7,7 @@
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "vow_label": {},
+      "bank_label": {},
       "group_title": {},
       "owner_name": {}
     },
@@ -24,7 +24,7 @@
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "vow_label": {},
+      "bank_label": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -41,7 +41,7 @@
       "concept_rope": {},
       "event_int": {},
       "face_name": {},
-      "vow_label": {},
+      "bank_label": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -58,7 +58,7 @@
       "event_int": {},
       "face_name": {},
       "fcontext": {},
-      "vow_label": {},
+      "bank_label": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -75,7 +75,7 @@
       "concept_rope": {},
       "event_int": {},
       "face_name": {},
-      "vow_label": {},
+      "bank_label": {},
       "healer_name": {},
       "owner_name": {}
     },
@@ -89,7 +89,7 @@
       "concept_rope": {},
       "event_int": {},
       "face_name": {},
-      "vow_label": {},
+      "bank_label": {},
       "labor_title": {},
       "owner_name": {}
     },
@@ -103,7 +103,7 @@
       "concept_rope": {},
       "event_int": {},
       "face_name": {},
-      "vow_label": {},
+      "bank_label": {},
       "owner_name": {},
       "pstate": {},
       "rcontext": {}
@@ -122,7 +122,7 @@
       "concept_rope": {},
       "event_int": {},
       "face_name": {},
-      "vow_label": {},
+      "bank_label": {},
       "owner_name": {},
       "rcontext": {}
     },
@@ -138,7 +138,7 @@
       "concept_rope": {},
       "event_int": {},
       "face_name": {},
-      "vow_label": {},
+      "bank_label": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -162,7 +162,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "vow_label": {},
+      "bank_label": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -176,15 +176,15 @@
       "tally": {}
     }
   },
-  "vow_paybook": {
+  "bank_paybook": {
     "allowed_crud": "insert_multiple",
     "build_order": 21,
-    "idea_category": "vow",
+    "idea_category": "bank",
     "jkeys": {
       "acct_name": {},
       "event_int": {},
       "face_name": {},
-      "vow_label": {},
+      "bank_label": {},
       "owner_name": {},
       "tran_time": {}
     },
@@ -192,15 +192,15 @@
       "amount": {}
     }
   },
-  "vow_budunit": {
+  "bank_budunit": {
     "allowed_crud": "insert_multiple",
     "build_order": 20,
-    "idea_category": "vow",
+    "idea_category": "bank",
     "jkeys": {
       "bud_time": {},
       "event_int": {},
       "face_name": {},
-      "vow_label": {},
+      "bank_label": {},
       "owner_name": {}
     },
     "jvalues": {
@@ -208,68 +208,68 @@
       "quota": {}
     }
   },
-  "vow_timeline_hour": {
+  "bank_timeline_hour": {
     "allowed_crud": "insert_one_time",
     "build_order": 6,
-    "idea_category": "vow",
+    "idea_category": "bank",
     "jkeys": {
       "cumulative_minute": {},
       "event_int": {},
       "face_name": {},
-      "vow_label": {}
+      "bank_label": {}
     },
     "jvalues": {
       "hour_label": {}
     }
   },
-  "vow_timeline_month": {
+  "bank_timeline_month": {
     "allowed_crud": "insert_one_time",
     "build_order": 7,
-    "idea_category": "vow",
+    "idea_category": "bank",
     "jkeys": {
       "cumulative_day": {},
       "event_int": {},
       "face_name": {},
-      "vow_label": {}
+      "bank_label": {}
     },
     "jvalues": {
       "month_label": {}
     }
   },
-  "vow_timeline_weekday": {
+  "bank_timeline_weekday": {
     "allowed_crud": "insert_one_time",
     "build_order": 8,
-    "idea_category": "vow",
+    "idea_category": "bank",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "vow_label": {},
+      "bank_label": {},
       "weekday_order": {}
     },
     "jvalues": {
       "weekday_label": {}
     }
   },
-  "vow_timeoffi": {
+  "bank_timeoffi": {
     "allowed_crud": "insert_multiple",
     "build_order": 8,
-    "idea_category": "vow",
+    "idea_category": "bank",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "vow_label": {},
+      "bank_label": {},
       "offi_time": {}
     },
     "jvalues": {}
   },
-  "vowunit": {
+  "bankunit": {
     "allowed_crud": "insert_one_time",
     "build_order": 5,
-    "idea_category": "vow",
+    "idea_category": "bank",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "vow_label": {}
+      "bank_label": {}
     },
     "jvalues": {
       "knot": {},

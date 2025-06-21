@@ -34,7 +34,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlanWhenNo_labo
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    vow_mstr_dir = env_dir()
+    bank_mstr_dir = env_dir()
     a23_str = "accord23"
     yao_str = "Yao"
     yao_gut = planunit_shop(yao_str, a23_str)
@@ -44,20 +44,20 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlanWhenNo_labo
     zia_pool = 87
     yao_gut.add_acctunit(zia_str, zia_credit_score, zia_debt_score)
     yao_gut.set_acct_respect(zia_pool)
-    save_gut_file(vow_mstr_dir, yao_gut)
+    save_gut_file(bank_mstr_dir, yao_gut)
 
     zia_gut = planunit_shop(zia_str, a23_str)
     zia_gut.set_concept(conceptunit_shop(clean_str(), task=True), casa_rope())
     zia_gut.set_concept(conceptunit_shop(cook_str(), task=True), casa_rope())
     zia_gut.add_acctunit(yao_str, debt_score=12)
-    save_gut_file(vow_mstr_dir, zia_gut)
+    save_gut_file(bank_mstr_dir, zia_gut)
 
     new_yao_job = create_listen_basis(yao_gut)
     assert len(new_yao_job.get_agenda_dict()) == 0
 
     # WHEN
     print(f"{len(new_yao_job.get_concept_dict())=}")
-    listen_to_agendas_create_init_job_from_guts(vow_mstr_dir, new_yao_job)
+    listen_to_agendas_create_init_job_from_guts(bank_mstr_dir, new_yao_job)
 
     # THEN
     assert len(new_yao_job.get_agenda_dict()) == 2
@@ -67,7 +67,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlan(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    vow_mstr_dir = env_dir()
+    bank_mstr_dir = env_dir()
     a23_str = "accord23"
     yao_str = "Yao"
     yao_gut = planunit_shop(yao_str, a23_str)
@@ -78,7 +78,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlan(
     yao_gut.add_acctunit(zia_str, zia_credit_score, zia_debt_score)
     yao_gut.set_acct_respect(zia_pool)
     a23_str = "accord23"
-    save_gut_file(vow_mstr_dir, yao_gut)
+    save_gut_file(bank_mstr_dir, yao_gut)
     zia_gut = planunit_shop(zia_str, a23_str)
     zia_gut.set_concept(conceptunit_shop(clean_str(), task=True), casa_rope())
     zia_gut.set_concept(conceptunit_shop(cook_str(), task=True), casa_rope())
@@ -87,13 +87,13 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlan(
     cook_conceptunit = zia_gut.get_concept_obj(cook_rope())
     clean_conceptunit.laborunit.set_laborlink(yao_str)
     cook_conceptunit.laborunit.set_laborlink(yao_str)
-    save_gut_file(vow_mstr_dir, zia_gut)
+    save_gut_file(bank_mstr_dir, zia_gut)
     new_yao_job = create_listen_basis(yao_gut)
     assert len(new_yao_job.get_agenda_dict()) == 0
 
     # WHEN
     print(f"{len(new_yao_job.get_concept_dict())=}")
-    listen_to_agendas_create_init_job_from_guts(vow_mstr_dir, new_yao_job)
+    listen_to_agendas_create_init_job_from_guts(bank_mstr_dir, new_yao_job)
 
     # THEN
     assert len(new_yao_job.get_agenda_dict()) == 2
@@ -103,7 +103,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlanWithDetails
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    vow_mstr_dir = env_dir()
+    bank_mstr_dir = env_dir()
     zia_gut = get_example_zia_speaker()
     bob_gut = get_example_bob_speaker()
     bob_gut.edit_concept_attr(
@@ -119,19 +119,19 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlanWithDetails
     zia_str = zia_gut.owner_name
     bob_str = bob_gut.owner_name
     a23_str = "accord23"
-    save_gut_file(vow_mstr_dir, zia_gut)
-    save_gut_file(vow_mstr_dir, bob_gut)
+    save_gut_file(bank_mstr_dir, zia_gut)
+    save_gut_file(bank_mstr_dir, bob_gut)
 
     yao_gut = get_example_yao_speaker()
     yao_str = yao_gut.owner_name
-    save_gut_file(vow_mstr_dir, yao_gut)
+    save_gut_file(bank_mstr_dir, yao_gut)
 
     new_yao_gut1 = create_listen_basis(yao_gut)
     assert new_yao_gut1.concept_exists(cook_rope()) is False
 
     # WHEN
-    yao_hubunit = hubunit_shop(vow_mstr_dir, a23_str, yao_str)
-    listen_to_agendas_create_init_job_from_guts(vow_mstr_dir, new_yao_gut1)
+    yao_hubunit = hubunit_shop(bank_mstr_dir, a23_str, yao_str)
+    listen_to_agendas_create_init_job_from_guts(bank_mstr_dir, new_yao_gut1)
 
     # THEN
     assert new_yao_gut1.concept_exists(cook_rope())
@@ -150,7 +150,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlanWithDetails
     assert new_yao_gut2.concept_exists(cook_rope()) is False
 
     # WHEN
-    listen_to_agendas_create_init_job_from_guts(vow_mstr_dir, new_yao_gut2)
+    listen_to_agendas_create_init_job_from_guts(bank_mstr_dir, new_yao_gut2)
 
     # THEN
     assert new_yao_gut2.concept_exists(cook_rope())
@@ -166,7 +166,7 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalPlan(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    vow_mstr_dir = env_dir()
+    bank_mstr_dir = env_dir()
     a23_str = "accord23"
     yao_str = "Yao"
     yao_gut = planunit_shop(yao_str, a23_str)
@@ -181,7 +181,7 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalPlan(
     yao_pool = 92
     yao_gut.set_acct_respect(yao_pool)
     a23_str = "accord23"
-    save_gut_file(vow_mstr_dir, yao_gut)
+    save_gut_file(bank_mstr_dir, yao_gut)
 
     zia_str = "Zia"
     zia_gut = planunit_shop(zia_str, a23_str)
@@ -192,7 +192,7 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalPlan(
     cook_conceptunit = zia_gut.get_concept_obj(cook_rope())
     clean_conceptunit.laborunit.set_laborlink(yao_str)
     cook_conceptunit.laborunit.set_laborlink(yao_str)
-    save_gut_file(vow_mstr_dir, zia_gut)
+    save_gut_file(bank_mstr_dir, zia_gut)
 
     sue_gut = planunit_shop(sue_str, a23_str)
     sue_gut.set_max_tree_traverse(5)
@@ -223,11 +223,11 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalPlan(
         reason_rcontext=egg_rope,
         reason_rconcept_active_requisite=False,
     )
-    save_gut_file(vow_mstr_dir, sue_gut)
+    save_gut_file(bank_mstr_dir, sue_gut)
 
     # WHEN
     new_yao_gut = create_listen_basis(yao_gut)
-    listen_to_agendas_create_init_job_from_guts(vow_mstr_dir, new_yao_gut)
+    listen_to_agendas_create_init_job_from_guts(bank_mstr_dir, new_yao_gut)
 
     # THEN irrational plan is ignored
     assert len(new_yao_gut.get_agenda_dict()) != 3
@@ -244,10 +244,10 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorPlan(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    vow_mstr_dir = env_dir()
+    bank_mstr_dir = env_dir()
     yao_str = "Yao"
     a23_str = "accord23"
-    yao_gut_path = create_gut_path(vow_mstr_dir, a23_str, yao_str)
+    yao_gut_path = create_gut_path(bank_mstr_dir, a23_str, yao_str)
     delete_dir(yao_gut_path)  # don't know why I have to do this...
     print(f"{os_path_exists(yao_gut_path)=}")
     yao_gut = planunit_shop(yao_str, a23_str)
@@ -261,7 +261,7 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorPlan(
     yao_gut.add_acctunit(sue_str, sue_credit_score, sue_debt_score)
     yao_pool = 92
     yao_gut.set_acct_respect(yao_pool)
-    save_gut_file(vow_mstr_dir, yao_gut)
+    save_gut_file(bank_mstr_dir, yao_gut)
 
     zia_gut = planunit_shop(zia_str, a23_str)
     zia_gut.set_concept(conceptunit_shop(clean_str(), task=True), casa_rope())
@@ -271,11 +271,11 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorPlan(
     cook_conceptunit = zia_gut.get_concept_obj(cook_rope())
     clean_conceptunit.laborunit.set_laborlink(yao_str)
     cook_conceptunit.laborunit.set_laborlink(yao_str)
-    save_gut_file(vow_mstr_dir, zia_gut)
+    save_gut_file(bank_mstr_dir, zia_gut)
 
     # WHEN
     new_yao_gut = create_listen_basis(yao_gut)
-    listen_to_agendas_create_init_job_from_guts(vow_mstr_dir, new_yao_gut)
+    listen_to_agendas_create_init_job_from_guts(bank_mstr_dir, new_yao_gut)
 
     # THEN irrational plan is ignored
     assert len(new_yao_gut.get_agenda_dict()) != 3

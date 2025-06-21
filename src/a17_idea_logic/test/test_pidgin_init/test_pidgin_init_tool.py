@@ -46,7 +46,7 @@ from src.a17_idea_logic.pidgin_toolbox import (
 )
 from src.a17_idea_logic.test._util.a17_env import (
     env_dir_setup_cleanup,
-    idea_vows_dir as get_example_face_dir,
+    idea_banks_dir as get_example_face_dir,
 )
 
 

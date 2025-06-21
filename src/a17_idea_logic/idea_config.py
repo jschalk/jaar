@@ -47,9 +47,9 @@ def get_idea_elements_sort_order() -> list[str]:
         "face_name",
         "face_name_otx",
         "face_name_inx",
-        "vow_label",
-        "vow_label_otx",
-        "vow_label_inx",
+        "bank_label",
+        "bank_label_otx",
+        "bank_label_inx",
         "timeline_label",
         "timeline_label_otx",
         "timeline_label_inx",
@@ -240,9 +240,9 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "source_dimen": "TEXT",
         "pidgin_event_int": "INTEGER",
         "event_int": "INTEGER",
-        "vow_label": "TEXT",
-        "vow_label_otx": "TEXT",
-        "vow_label_inx": "TEXT",
+        "bank_label": "TEXT",
+        "bank_label_otx": "TEXT",
+        "bank_label_inx": "TEXT",
         "owner_name": "TEXT",
         "owner_name_otx": "TEXT",
         "owner_name_inx": "TEXT",
@@ -413,40 +413,40 @@ def get_idea_sqlite_types() -> dict[str, str]:
     }
 
 
-# def idea_format_00000_vowunit_v0_0_0()->str: return "idea_format_00000_vowunit_v0_0_0"
-# def idea_format_00001_vow_budunit_v0_0_0()->str: return "idea_format_00001_vow_budunit_v0_0_0"
-# def idea_format_00002_vow_paybook_v0_0_0()->str: return "idea_format_00002_vow_paybook_v0_0_0"
-# def idea_format_00003_vow_timeline_hour_v0_0_0()->str: return "idea_format_00003_vow_timeline_hour_v0_0_0"
-# def idea_format_00004_vow_timeline_month_v0_0_0()->str: return "idea_format_00004_vow_timeline_month_v0_0_0"
-# def idea_format_00005_vow_timeline_weekday_v0_0_0()->str: return "idea_format_00005_vow_timeline_weekday_v0_0_0"
+# def idea_format_00000_bankunit_v0_0_0()->str: return "idea_format_00000_bankunit_v0_0_0"
+# def idea_format_00001_bank_budunit_v0_0_0()->str: return "idea_format_00001_bank_budunit_v0_0_0"
+# def idea_format_00002_bank_paybook_v0_0_0()->str: return "idea_format_00002_bank_paybook_v0_0_0"
+# def idea_format_00003_bank_timeline_hour_v0_0_0()->str: return "idea_format_00003_bank_timeline_hour_v0_0_0"
+# def idea_format_00004_bank_timeline_month_v0_0_0()->str: return "idea_format_00004_bank_timeline_month_v0_0_0"
+# def idea_format_00005_bank_timeline_weekday_v0_0_0()->str: return "idea_format_00005_bank_timeline_weekday_v0_0_0"
 
 
-def idea_format_00000_vowunit_v0_0_0() -> str:
-    return "idea_format_00000_vowunit_v0_0_0"
+def idea_format_00000_bankunit_v0_0_0() -> str:
+    return "idea_format_00000_bankunit_v0_0_0"
 
 
-def idea_format_00001_vow_budunit_v0_0_0() -> str:
-    return "idea_format_00001_vow_budunit_v0_0_0"
+def idea_format_00001_bank_budunit_v0_0_0() -> str:
+    return "idea_format_00001_bank_budunit_v0_0_0"
 
 
-def idea_format_00002_vow_paybook_v0_0_0() -> str:
-    return "idea_format_00002_vow_paybook_v0_0_0"
+def idea_format_00002_bank_paybook_v0_0_0() -> str:
+    return "idea_format_00002_bank_paybook_v0_0_0"
 
 
-def idea_format_00003_vow_timeline_hour_v0_0_0() -> str:
-    return "idea_format_00003_vow_timeline_hour_v0_0_0"
+def idea_format_00003_bank_timeline_hour_v0_0_0() -> str:
+    return "idea_format_00003_bank_timeline_hour_v0_0_0"
 
 
-def idea_format_00004_vow_timeline_month_v0_0_0() -> str:
-    return "idea_format_00004_vow_timeline_month_v0_0_0"
+def idea_format_00004_bank_timeline_month_v0_0_0() -> str:
+    return "idea_format_00004_bank_timeline_month_v0_0_0"
 
 
-def idea_format_00005_vow_timeline_weekday_v0_0_0() -> str:
-    return "idea_format_00005_vow_timeline_weekday_v0_0_0"
+def idea_format_00005_bank_timeline_weekday_v0_0_0() -> str:
+    return "idea_format_00005_bank_timeline_weekday_v0_0_0"
 
 
-def idea_format_00006_vow_timeoffi_v0_0_0() -> str:
-    return "idea_format_00006_vow_timeoffi_v0_0_0"
+def idea_format_00006_bank_timeoffi_v0_0_0() -> str:
+    return "idea_format_00006_bank_timeoffi_v0_0_0"
 
 
 def idea_format_00011_acct_v0_0_0() -> str:
@@ -603,13 +603,13 @@ def idea_format_00117_rope_map1_v0_0_0() -> str:
 
 def get_idea_format_filenames() -> set[str]:
     return {
-        idea_format_00000_vowunit_v0_0_0(),
-        idea_format_00001_vow_budunit_v0_0_0(),
-        idea_format_00002_vow_paybook_v0_0_0(),
-        idea_format_00003_vow_timeline_hour_v0_0_0(),
-        idea_format_00004_vow_timeline_month_v0_0_0(),
-        idea_format_00005_vow_timeline_weekday_v0_0_0(),
-        idea_format_00006_vow_timeoffi_v0_0_0(),
+        idea_format_00000_bankunit_v0_0_0(),
+        idea_format_00001_bank_budunit_v0_0_0(),
+        idea_format_00002_bank_paybook_v0_0_0(),
+        idea_format_00003_bank_timeline_hour_v0_0_0(),
+        idea_format_00004_bank_timeline_month_v0_0_0(),
+        idea_format_00005_bank_timeline_weekday_v0_0_0(),
+        idea_format_00006_bank_timeoffi_v0_0_0(),
         idea_format_00011_acct_v0_0_0(),
         idea_format_00012_membership_v0_0_0(),
         idea_format_00013_conceptunit_v0_0_0(),
@@ -700,46 +700,46 @@ def get_idea_format_filename(idea_number: str) -> str:
 
 def get_idea_format_headers() -> dict[str, list[str]]:
     return {
-        "vow_label,timeline_label,c400_number,yr1_jan1_offset,monthday_distortion,fund_iota,penny,respect_bit,knot,job_listen_rotations": idea_format_00000_vowunit_v0_0_0(),
-        "vow_label,owner_name,bud_time,quota,celldepth": idea_format_00001_vow_budunit_v0_0_0(),
-        "vow_label,owner_name,acct_name,tran_time,amount": idea_format_00002_vow_paybook_v0_0_0(),
-        "vow_label,cumulative_minute,hour_label": idea_format_00003_vow_timeline_hour_v0_0_0(),
-        "vow_label,cumulative_day,month_label": idea_format_00004_vow_timeline_month_v0_0_0(),
-        "vow_label,weekday_order,weekday_label": idea_format_00005_vow_timeline_weekday_v0_0_0(),
-        "vow_label,offi_time": idea_format_00006_vow_timeoffi_v0_0_0(),
-        "vow_label,owner_name,acct_name": idea_format_00011_acct_v0_0_0(),
-        "vow_label,owner_name,acct_name,group_title": idea_format_00012_membership_v0_0_0(),
-        "vow_label,owner_name,concept_rope,mass,task": idea_format_00013_conceptunit_v0_0_0(),
-        "vow_label,owner_name,concept_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want": idea_format_00019_conceptunit_v0_0_0(),
-        "vow_label,owner_name,acct_name,group_title,credit_vote,debt_vote": idea_format_00020_plan_acct_membership_v0_0_0(),
-        "vow_label,owner_name,acct_name,credit_score,debt_score": idea_format_00021_plan_acctunit_v0_0_0(),
-        "vow_label,owner_name,concept_rope,awardee_title,give_force,take_force": idea_format_00022_plan_concept_awardlink_v0_0_0(),
-        "vow_label,owner_name,concept_rope,fcontext,fstate,fopen,fnigh": idea_format_00023_plan_concept_factunit_v0_0_0(),
-        "vow_label,owner_name,concept_rope,labor_title": idea_format_00024_plan_concept_laborlink_v0_0_0(),
-        "vow_label,owner_name,concept_rope,healer_name": idea_format_00025_plan_concept_healerlink_v0_0_0(),
-        "vow_label,owner_name,concept_rope,rcontext,pstate,pnigh,popen,pdivisor": idea_format_00026_plan_concept_reason_premiseunit_v0_0_0(),
-        "vow_label,owner_name,concept_rope,rcontext,rconcept_active_requisite": idea_format_00027_plan_concept_reasonunit_v0_0_0(),
-        "vow_label,owner_name,concept_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,task,problem_bool": idea_format_00028_plan_conceptunit_v0_0_0(),
-        "vow_label,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_iota,penny,respect_bit": idea_format_00029_planunit_v0_0_0(),
-        "vow_label,owner_name,concept_rope,healer_name,problem_bool": idea_format_00036_problem_healer_v0_0_0(),
+        "bank_label,timeline_label,c400_number,yr1_jan1_offset,monthday_distortion,fund_iota,penny,respect_bit,knot,job_listen_rotations": idea_format_00000_bankunit_v0_0_0(),
+        "bank_label,owner_name,bud_time,quota,celldepth": idea_format_00001_bank_budunit_v0_0_0(),
+        "bank_label,owner_name,acct_name,tran_time,amount": idea_format_00002_bank_paybook_v0_0_0(),
+        "bank_label,cumulative_minute,hour_label": idea_format_00003_bank_timeline_hour_v0_0_0(),
+        "bank_label,cumulative_day,month_label": idea_format_00004_bank_timeline_month_v0_0_0(),
+        "bank_label,weekday_order,weekday_label": idea_format_00005_bank_timeline_weekday_v0_0_0(),
+        "bank_label,offi_time": idea_format_00006_bank_timeoffi_v0_0_0(),
+        "bank_label,owner_name,acct_name": idea_format_00011_acct_v0_0_0(),
+        "bank_label,owner_name,acct_name,group_title": idea_format_00012_membership_v0_0_0(),
+        "bank_label,owner_name,concept_rope,mass,task": idea_format_00013_conceptunit_v0_0_0(),
+        "bank_label,owner_name,concept_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want": idea_format_00019_conceptunit_v0_0_0(),
+        "bank_label,owner_name,acct_name,group_title,credit_vote,debt_vote": idea_format_00020_plan_acct_membership_v0_0_0(),
+        "bank_label,owner_name,acct_name,credit_score,debt_score": idea_format_00021_plan_acctunit_v0_0_0(),
+        "bank_label,owner_name,concept_rope,awardee_title,give_force,take_force": idea_format_00022_plan_concept_awardlink_v0_0_0(),
+        "bank_label,owner_name,concept_rope,fcontext,fstate,fopen,fnigh": idea_format_00023_plan_concept_factunit_v0_0_0(),
+        "bank_label,owner_name,concept_rope,labor_title": idea_format_00024_plan_concept_laborlink_v0_0_0(),
+        "bank_label,owner_name,concept_rope,healer_name": idea_format_00025_plan_concept_healerlink_v0_0_0(),
+        "bank_label,owner_name,concept_rope,rcontext,pstate,pnigh,popen,pdivisor": idea_format_00026_plan_concept_reason_premiseunit_v0_0_0(),
+        "bank_label,owner_name,concept_rope,rcontext,rconcept_active_requisite": idea_format_00027_plan_concept_reasonunit_v0_0_0(),
+        "bank_label,owner_name,concept_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,task,problem_bool": idea_format_00028_plan_conceptunit_v0_0_0(),
+        "bank_label,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_iota,penny,respect_bit": idea_format_00029_planunit_v0_0_0(),
+        "bank_label,owner_name,concept_rope,healer_name,problem_bool": idea_format_00036_problem_healer_v0_0_0(),
         "otx_title,inx_title,otx_knot,inx_knot,unknown_str": idea_format_00042_pidgin_title_v0_0_0(),
         "otx_name,inx_name,otx_knot,inx_knot,unknown_str": idea_format_00043_pidgin_name_v0_0_0(),
         "otx_label,inx_label,otx_knot,inx_knot,unknown_str": idea_format_00044_pidgin_label_v0_0_0(),
         "otx_rope,inx_rope,otx_knot,inx_knot,unknown_str": idea_format_00045_pidgin_rope_v0_0_0(),
-        "vow_label,owner_name,acct_name,group_title_ERASE": idea_format_00050_delete_plan_acct_membership_v0_0_0(),
-        "vow_label,owner_name,acct_name_ERASE": idea_format_00051_delete_plan_acctunit_v0_0_0(),
-        "vow_label,owner_name,concept_rope,awardee_title_ERASE": idea_format_00052_delete_plan_concept_awardlink_v0_0_0(),
-        "vow_label,owner_name,concept_rope,fcontext_ERASE": idea_format_00053_delete_plan_concept_factunit_v0_0_0(),
-        "vow_label,owner_name,concept_rope,labor_title_ERASE": idea_format_00054_delete_plan_concept_laborlink_v0_0_0(),
-        "vow_label,owner_name,concept_rope,healer_name_ERASE": idea_format_00055_delete_plan_concept_healerlink_v0_0_0(),
-        "vow_label,owner_name,concept_rope,rcontext,pstate_ERASE": idea_format_00056_delete_plan_concept_reason_premiseunit_v0_0_0(),
-        "vow_label,owner_name,concept_rope,rcontext_ERASE": idea_format_00057_delete_plan_concept_reasonunit_v0_0_0(),
-        "vow_label,owner_name,concept_rope_ERASE": idea_format_00058_delete_plan_conceptunit_v0_0_0(),
-        "vow_label,owner_name_ERASE": idea_format_00059_delete_planunit_v0_0_0(),
-        "vow_label,owner_name,acct_name,otx_name,inx_name": idea_format_00113_acct_map1_v0_0_0(),
-        "vow_label,owner_name,acct_name,otx_title,inx_title": idea_format_00115_group_map1_v0_0_0(),
-        "vow_label,owner_name,acct_name,otx_label,inx_label": idea_format_00116_label_map1_v0_0_0(),
-        "vow_label,owner_name,acct_name,otx_rope,inx_rope": idea_format_00117_rope_map1_v0_0_0(),
+        "bank_label,owner_name,acct_name,group_title_ERASE": idea_format_00050_delete_plan_acct_membership_v0_0_0(),
+        "bank_label,owner_name,acct_name_ERASE": idea_format_00051_delete_plan_acctunit_v0_0_0(),
+        "bank_label,owner_name,concept_rope,awardee_title_ERASE": idea_format_00052_delete_plan_concept_awardlink_v0_0_0(),
+        "bank_label,owner_name,concept_rope,fcontext_ERASE": idea_format_00053_delete_plan_concept_factunit_v0_0_0(),
+        "bank_label,owner_name,concept_rope,labor_title_ERASE": idea_format_00054_delete_plan_concept_laborlink_v0_0_0(),
+        "bank_label,owner_name,concept_rope,healer_name_ERASE": idea_format_00055_delete_plan_concept_healerlink_v0_0_0(),
+        "bank_label,owner_name,concept_rope,rcontext,pstate_ERASE": idea_format_00056_delete_plan_concept_reason_premiseunit_v0_0_0(),
+        "bank_label,owner_name,concept_rope,rcontext_ERASE": idea_format_00057_delete_plan_concept_reasonunit_v0_0_0(),
+        "bank_label,owner_name,concept_rope_ERASE": idea_format_00058_delete_plan_conceptunit_v0_0_0(),
+        "bank_label,owner_name_ERASE": idea_format_00059_delete_planunit_v0_0_0(),
+        "bank_label,owner_name,acct_name,otx_name,inx_name": idea_format_00113_acct_map1_v0_0_0(),
+        "bank_label,owner_name,acct_name,otx_title,inx_title": idea_format_00115_group_map1_v0_0_0(),
+        "bank_label,owner_name,acct_name,otx_label,inx_label": idea_format_00116_label_map1_v0_0_0(),
+        "bank_label,owner_name,acct_name,otx_rope,inx_rope": idea_format_00117_rope_map1_v0_0_0(),
     }
 
 
@@ -832,13 +832,13 @@ def get_idea_dimen_ref() -> dict[str, set[str]]:
             "br00116",
             "br00117",
         },
-        "vow_paybook": {"br00002"},
-        "vow_budunit": {"br00001"},
-        "vow_timeline_hour": {"br00003"},
-        "vow_timeline_month": {"br00004"},
-        "vow_timeline_weekday": {"br00005"},
-        "vow_timeoffi": {"br00006"},
-        "vowunit": {
+        "bank_paybook": {"br00002"},
+        "bank_budunit": {"br00001"},
+        "bank_timeline_hour": {"br00003"},
+        "bank_timeline_month": {"br00004"},
+        "bank_timeline_weekday": {"br00005"},
+        "bank_timeoffi": {"br00006"},
+        "bankunit": {
             "br00000",
             "br00001",
             "br00002",

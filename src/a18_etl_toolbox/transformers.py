@@ -35,14 +35,14 @@ from src.a08_plan_atom_logic.atom_config import get_plan_dimens
 from src.a09_pack_logic.delta import get_minimal_plandelta
 from src.a09_pack_logic.pack import PackUnit, get_packunit_from_json, packunit_shop
 from src.a12_hub_toolbox.hub_path import (
+    create_bank_json_path,
+    create_bank_ote1_csv_path,
+    create_bank_ote1_json_path,
     create_event_all_pack_path,
     create_gut_path,
     create_job_path,
     create_owner_event_dir_path,
     create_planevent_path,
-    create_vow_json_path,
-    create_vow_ote1_csv_path,
-    create_vow_ote1_json_path,
 )
 from src.a12_hub_toolbox.hub_tool import (
     collect_owner_event_dir_sets,
@@ -50,10 +50,12 @@ from src.a12_hub_toolbox.hub_tool import (
     open_job_file,
     open_plan_file,
 )
-from src.a15_vow_logic.vow import get_from_default_path as vowunit_get_from_default_path
-from src.a15_vow_logic.vow_cell import (
+from src.a15_bank_logic.bank import (
+    get_from_default_path as bankunit_get_from_default_path,
+)
+from src.a15_bank_logic.bank_cell import (
+    create_bank_owners_cell_trees,
     create_bud_mandate_ledgers,
-    create_vow_owners_cell_trees,
     set_cell_tree_cell_mandates,
     set_cell_trees_decrees,
     set_cell_trees_found_facts,
@@ -86,13 +88,13 @@ from src.a17_idea_logic.idea_db_tool import (
     upsert_sheet,
 )
 from src.a17_idea_logic.pidgin_toolbox import init_pidginunit_from_dir
+from src.a18_etl_toolbox.db_obj_bank_tool import get_bank_dict_from_voice_tables
 from src.a18_etl_toolbox.db_obj_plan_tool import insert_job_obj
-from src.a18_etl_toolbox.db_obj_vow_tool import get_vow_dict_from_voice_tables
 from src.a18_etl_toolbox.idea_collector import IdeaFileRef, get_all_idea_dataframes
 from src.a18_etl_toolbox.tran_sqlstrs import (
-    CREATE_VOW_ACCT_NETS_SQLSTR,
-    CREATE_VOW_OTE1_AGG_SQLSTR,
-    INSERT_VOW_OTE1_AGG_FROM_VOICE_SQLSTR,
+    CREATE_BANK_ACCT_NETS_SQLSTR,
+    CREATE_BANK_OTE1_AGG_SQLSTR,
+    INSERT_BANK_OTE1_AGG_FROM_VOICE_SQLSTR,
     create_insert_into_pidgin_core_raw_sqlstr,
     create_insert_missing_face_name_into_pidgin_core_vld_sqlstr,
     create_insert_pidgin_core_agg_into_vld_sqlstr,
@@ -111,11 +113,11 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_update_pidtitl_sound_agg_knot_error_sqlstr,
     create_update_voice_raw_empty_inx_col_sqlstr,
     create_update_voice_raw_existing_inx_col_sqlstr,
+    get_bank_plan_sound_agg_tablenames,
     get_insert_into_sound_vld_sqlstrs,
     get_insert_into_voice_raw_sqlstrs,
     get_insert_voice_agg_sqlstrs,
     get_plan_voice_agg_tablenames,
-    get_vow_plan_sound_agg_tablenames,
 )
 
 
@@ -434,7 +436,7 @@ def insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor: sqlite3_Cur
         cursor.execute(create_insert_pidgin_sound_vld_table_sqlstr(dimen))
 
 
-def set_vow_plan_sound_agg_knot_errors(cursor: sqlite3_Cursor):
+def set_bank_plan_sound_agg_knot_errors(cursor: sqlite3_Cursor):
     pidgin_label_args = get_pidgin_LabelTerm_args()
     pidgin_name_args = get_pidgin_NameTerm_args()
     pidgin_title_args = get_pidgin_TitleTerm_args()
@@ -443,7 +445,7 @@ def set_vow_plan_sound_agg_knot_errors(cursor: sqlite3_Cursor):
     pidgin_args.update(pidgin_name_args)
     pidgin_args.update(pidgin_title_args)
     pidgin_args.update(pidgin_rope_args)
-    pidginable_tuples = get_vow_plan_sound_agg_pidginable_columns(cursor, pidgin_args)
+    pidginable_tuples = get_bank_plan_sound_agg_pidginable_columns(cursor, pidgin_args)
     for voice_raw_tablename, pidginable_columnname in pidginable_tuples:
         error_update_sqlstr = None
         if pidginable_columnname in pidgin_label_args:
@@ -458,7 +460,7 @@ def set_vow_plan_sound_agg_knot_errors(cursor: sqlite3_Cursor):
             cursor.execute(error_update_sqlstr)
 
 
-def get_vow_plan_sound_agg_pidginable_columns(
+def get_bank_plan_sound_agg_pidginable_columns(
     cursor: sqlite3_Cursor, pidgin_args: set[str]
 ) -> set[tuple[str, str]]:
     pidgin_columns = set()
@@ -472,11 +474,11 @@ def get_vow_plan_sound_agg_pidginable_columns(
 
 
 def populate_pidgin_core_vld_with_missing_face_names(cursor: sqlite3_Cursor):
-    for agg_tablename in get_vow_plan_sound_agg_tablenames():
+    for agg_tablename in get_bank_plan_sound_agg_tablenames():
         insert_sqlstr = create_insert_missing_face_name_into_pidgin_core_vld_sqlstr(
             default_knot=default_knot_if_None(),
             default_unknown=default_unknown_str_if_None(),
-            vow_plan_sound_agg_tablename=agg_tablename,
+            bank_plan_sound_agg_tablename=agg_tablename,
         )
         cursor.execute(insert_sqlstr)
 
@@ -556,14 +558,14 @@ def etl_voice_raw_tables_to_voice_agg_tables(cursor: sqlite3_Cursor):
         cursor.execute(insert_voice_agg_sqlstr)
 
 
-def etl_voice_agg_tables_to_vow_jsons(cursor: sqlite3_Cursor, vow_mstr_dir: str):
-    select_vow_label_sqlstr = """SELECT vow_label FROM vowunit_v_agg;"""
-    cursor.execute(select_vow_label_sqlstr)
-    for vow_label_set in cursor.fetchall():
-        vow_label = vow_label_set[0]
-        vow_dict = get_vow_dict_from_voice_tables(cursor, vow_label)
-        vow_json_path = create_vow_json_path(vow_mstr_dir, vow_label)
-        save_json(vow_json_path, None, vow_dict)
+def etl_voice_agg_tables_to_bank_jsons(cursor: sqlite3_Cursor, bank_mstr_dir: str):
+    select_bank_label_sqlstr = """SELECT bank_label FROM bankunit_v_agg;"""
+    cursor.execute(select_bank_label_sqlstr)
+    for bank_label_set in cursor.fetchall():
+        bank_label = bank_label_set[0]
+        bank_dict = get_bank_dict_from_voice_tables(cursor, bank_label)
+        bank_json_path = create_bank_json_path(bank_mstr_dir, bank_label)
+        save_json(bank_json_path, None, bank_dict)
 
 
 def etl_brick_valid_table_into_prime_table(
@@ -658,29 +660,29 @@ def get_most_recent_event_int(
     return max(recent_event_ints, default=None)
 
 
-def etl_voice_raw_tables_to_vow_ote1_agg(conn_or_cursor: sqlite3_Connection):
-    conn_or_cursor.execute(CREATE_VOW_OTE1_AGG_SQLSTR)
-    conn_or_cursor.execute(INSERT_VOW_OTE1_AGG_FROM_VOICE_SQLSTR)
+def etl_voice_raw_tables_to_bank_ote1_agg(conn_or_cursor: sqlite3_Connection):
+    conn_or_cursor.execute(CREATE_BANK_OTE1_AGG_SQLSTR)
+    conn_or_cursor.execute(INSERT_BANK_OTE1_AGG_FROM_VOICE_SQLSTR)
 
 
-def etl_vow_ote1_agg_table_to_vow_ote1_agg_csvs(
-    conn_or_cursor: sqlite3_Connection, vow_mstr_dir: str
+def etl_bank_ote1_agg_table_to_bank_ote1_agg_csvs(
+    conn_or_cursor: sqlite3_Connection, bank_mstr_dir: str
 ):
-    empty_ote1_csv_str = """vow_label,owner_name,event_int,bud_time,error_message
+    empty_ote1_csv_str = """bank_label,owner_name,event_int,bud_time,error_message
 """
-    vows_dir = create_path(vow_mstr_dir, "vows")
-    for vow_label in get_level1_dirs(vows_dir):
-        ote1_csv_path = create_vow_ote1_csv_path(vow_mstr_dir, vow_label)
+    banks_dir = create_path(bank_mstr_dir, "banks")
+    for bank_label in get_level1_dirs(banks_dir):
+        ote1_csv_path = create_bank_ote1_csv_path(bank_mstr_dir, bank_label)
         save_file(ote1_csv_path, None, empty_ote1_csv_str)
 
-    save_to_split_csvs(conn_or_cursor, "vow_ote1_agg", ["vow_label"], vows_dir)
+    save_to_split_csvs(conn_or_cursor, "bank_ote1_agg", ["bank_label"], banks_dir)
 
 
-def etl_vow_ote1_agg_csvs_to_jsons(vow_mstr_dir: str):
+def etl_bank_ote1_agg_csvs_to_jsons(bank_mstr_dir: str):
     idea_types = get_idea_sqlite_types()
-    vows_dir = create_path(vow_mstr_dir, "vows")
-    for vow_label in get_level1_dirs(vows_dir):
-        csv_path = create_vow_ote1_csv_path(vow_mstr_dir, vow_label)
+    banks_dir = create_path(bank_mstr_dir, "banks")
+    for bank_label in get_level1_dirs(banks_dir):
+        csv_path = create_bank_ote1_csv_path(bank_mstr_dir, bank_label)
         csv_arrays = open_csv_with_types(csv_path, idea_types)
         x_dict = {}
         header_row = csv_arrays.pop(0)
@@ -692,72 +694,72 @@ def etl_vow_ote1_agg_csvs_to_jsons(vow_mstr_dir: str):
                 x_dict[owner_name] = {}
             owner_dict = x_dict.get(owner_name)
             owner_dict[int(bud_time)] = event_int
-        json_path = create_vow_ote1_json_path(vow_mstr_dir, vow_label)
+        json_path = create_bank_ote1_json_path(bank_mstr_dir, bank_label)
         save_json(json_path, None, x_dict)
 
 
-def etl_create_buds_root_cells(vow_mstr_dir: str):
-    vows_dir = create_path(vow_mstr_dir, "vows")
-    for vow_label in get_level1_dirs(vows_dir):
-        vow_dir = create_path(vows_dir, vow_label)
-        ote1_json_path = create_path(vow_dir, "vow_ote1_agg.json")
+def etl_create_buds_root_cells(bank_mstr_dir: str):
+    banks_dir = create_path(bank_mstr_dir, "banks")
+    for bank_label in get_level1_dirs(banks_dir):
+        bank_dir = create_path(banks_dir, bank_label)
+        ote1_json_path = create_path(bank_dir, "bank_ote1_agg.json")
         if os_path_exists(ote1_json_path):
             ote1_dict = open_json(ote1_json_path)
-            x_vowunit = vowunit_get_from_default_path(vow_mstr_dir, vow_label)
-            x_vowunit.create_buds_root_cells(ote1_dict)
+            x_bankunit = bankunit_get_from_default_path(bank_mstr_dir, bank_label)
+            x_bankunit.create_buds_root_cells(ote1_dict)
 
 
-def etl_create_vow_cell_trees(vow_mstr_dir: str):
-    vows_dir = create_path(vow_mstr_dir, "vows")
-    for vow_label in get_level1_dirs(vows_dir):
-        create_vow_owners_cell_trees(vow_mstr_dir, vow_label)
+def etl_create_bank_cell_trees(bank_mstr_dir: str):
+    banks_dir = create_path(bank_mstr_dir, "banks")
+    for bank_label in get_level1_dirs(banks_dir):
+        create_bank_owners_cell_trees(bank_mstr_dir, bank_label)
 
 
-def etl_set_cell_trees_found_facts(vow_mstr_dir: str):
-    vows_dir = create_path(vow_mstr_dir, "vows")
-    for vow_label in get_level1_dirs(vows_dir):
-        set_cell_trees_found_facts(vow_mstr_dir, vow_label)
+def etl_set_cell_trees_found_facts(bank_mstr_dir: str):
+    banks_dir = create_path(bank_mstr_dir, "banks")
+    for bank_label in get_level1_dirs(banks_dir):
+        set_cell_trees_found_facts(bank_mstr_dir, bank_label)
 
 
-def etl_set_cell_trees_decrees(vow_mstr_dir: str):
-    vows_dir = create_path(vow_mstr_dir, "vows")
-    for vow_label in get_level1_dirs(vows_dir):
-        set_cell_trees_decrees(vow_mstr_dir, vow_label)
+def etl_set_cell_trees_decrees(bank_mstr_dir: str):
+    banks_dir = create_path(bank_mstr_dir, "banks")
+    for bank_label in get_level1_dirs(banks_dir):
+        set_cell_trees_decrees(bank_mstr_dir, bank_label)
 
 
-def etl_set_cell_tree_cell_mandates(vow_mstr_dir: str):
-    vows_dir = create_path(vow_mstr_dir, "vows")
-    for vow_label in get_level1_dirs(vows_dir):
-        set_cell_tree_cell_mandates(vow_mstr_dir, vow_label)
+def etl_set_cell_tree_cell_mandates(bank_mstr_dir: str):
+    banks_dir = create_path(bank_mstr_dir, "banks")
+    for bank_label in get_level1_dirs(banks_dir):
+        set_cell_tree_cell_mandates(bank_mstr_dir, bank_label)
 
 
-def etl_create_bud_mandate_ledgers(vow_mstr_dir: str):
-    vows_dir = create_path(vow_mstr_dir, "vows")
-    for vow_label in get_level1_dirs(vows_dir):
-        create_bud_mandate_ledgers(vow_mstr_dir, vow_label)
+def etl_create_bud_mandate_ledgers(bank_mstr_dir: str):
+    banks_dir = create_path(bank_mstr_dir, "banks")
+    for bank_label in get_level1_dirs(banks_dir):
+        create_bud_mandate_ledgers(bank_mstr_dir, bank_label)
 
 
 def etl_voice_agg_to_event_plan_csvs(
-    conn_or_cursor: sqlite3_Connection, vow_mstr_dir: str
+    conn_or_cursor: sqlite3_Connection, bank_mstr_dir: str
 ):
-    vows_dir = create_path(vow_mstr_dir, "vows")
+    banks_dir = create_path(bank_mstr_dir, "banks")
     for plan_table in get_plan_voice_agg_tablenames():
         if get_row_count(conn_or_cursor, plan_table) > 0:
             save_to_split_csvs(
                 conn_or_cursor=conn_or_cursor,
                 tablename=plan_table,
-                key_columns=["vow_label", "owner_name", "event_int"],
-                dst_dir=vows_dir,
+                key_columns=["bank_label", "owner_name", "event_int"],
+                dst_dir=banks_dir,
                 col1_prefix="owners",
                 col2_prefix="events",
             )
 
 
-def etl_event_plan_csvs_to_pack_json(vow_mstr_dir: str):
-    vows_dir = create_path(vow_mstr_dir, "vows")
-    for vow_label in get_level1_dirs(vows_dir):
-        vow_path = create_path(vows_dir, vow_label)
-        owners_path = create_path(vow_path, "owners")
+def etl_event_plan_csvs_to_pack_json(bank_mstr_dir: str):
+    banks_dir = create_path(bank_mstr_dir, "banks")
+    for bank_label in get_level1_dirs(banks_dir):
+        bank_path = create_path(banks_dir, bank_label)
+        owners_path = create_path(bank_path, "owners")
         for owner_name in get_level1_dirs(owners_path):
             owner_path = create_path(owners_path, owner_name)
             events_path = create_path(owner_path, "events")
@@ -765,13 +767,13 @@ def etl_event_plan_csvs_to_pack_json(vow_mstr_dir: str):
                 event_pack = packunit_shop(
                     owner_name=owner_name,
                     face_name=None,
-                    vow_label=vow_label,
+                    bank_label=bank_label,
                     event_int=event_int,
                 )
                 event_dir = create_path(events_path, event_int)
                 add_planatoms_from_csv(event_pack, event_dir)
                 event_all_pack_path = create_event_all_pack_path(
-                    vow_mstr_dir, vow_label, owner_name, event_int
+                    bank_mstr_dir, bank_label, owner_name, event_int
                 )
                 save_file(event_all_pack_path, None, event_pack.get_json())
 
@@ -796,7 +798,7 @@ def add_planatoms_from_csv(event_pack: PackUnit, event_dir: str):
                     if col_name not in {
                         "face_name",
                         "event_int",
-                        "vow_label",
+                        "bank_label",
                         "owner_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
@@ -811,35 +813,35 @@ def add_planatoms_from_csv(event_pack: PackUnit, event_dir: str):
                     if col_name not in {
                         "face_name",
                         "event_int",
-                        "vow_label",
+                        "bank_label",
                         "owner_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
                 event_pack._plandelta.set_planatom(x_atom)
 
 
-def etl_event_pack_json_to_event_inherited_planunits(vow_mstr_dir: str):
-    vows_dir = create_path(vow_mstr_dir, "vows")
-    for vow_label in get_level1_dirs(vows_dir):
-        vow_path = create_path(vows_dir, vow_label)
-        owners_dir = create_path(vow_path, "owners")
+def etl_event_pack_json_to_event_inherited_planunits(bank_mstr_dir: str):
+    banks_dir = create_path(bank_mstr_dir, "banks")
+    for bank_label in get_level1_dirs(banks_dir):
+        bank_path = create_path(banks_dir, bank_label)
+        owners_dir = create_path(bank_path, "owners")
         for owner_name in get_level1_dirs(owners_dir):
             owner_dir = create_path(owners_dir, owner_name)
             events_dir = create_path(owner_dir, "events")
             prev_event_int = None
             for event_int in get_level1_dirs(events_dir):
                 prev_plan = _get_prev_event_int_planunit(
-                    vow_mstr_dir, vow_label, owner_name, prev_event_int
+                    bank_mstr_dir, bank_label, owner_name, prev_event_int
                 )
                 planevent_path = create_planevent_path(
-                    vow_mstr_dir, vow_label, owner_name, event_int
+                    bank_mstr_dir, bank_label, owner_name, event_int
                 )
                 event_dir = create_owner_event_dir_path(
-                    vow_mstr_dir, vow_label, owner_name, event_int
+                    bank_mstr_dir, bank_label, owner_name, event_int
                 )
 
                 event_all_pack_path = create_event_all_pack_path(
-                    vow_mstr_dir, vow_label, owner_name, event_int
+                    bank_mstr_dir, bank_label, owner_name, event_int
                 )
                 event_pack = get_packunit_from_json(open_file(event_all_pack_path))
                 sift_delta = get_minimal_plandelta(event_pack._plandelta, prev_plan)
@@ -852,45 +854,45 @@ def etl_event_pack_json_to_event_inherited_planunits(vow_mstr_dir: str):
 
 
 def _get_prev_event_int_planunit(
-    vow_mstr_dir, vow_label, owner_name, prev_event_int
+    bank_mstr_dir, bank_label, owner_name, prev_event_int
 ) -> PlanUnit:
     if prev_event_int is None:
-        return planunit_shop(owner_name, vow_label)
+        return planunit_shop(owner_name, bank_label)
     prev_planevent_path = create_planevent_path(
-        vow_mstr_dir, vow_label, owner_name, prev_event_int
+        bank_mstr_dir, bank_label, owner_name, prev_event_int
     )
     return open_plan_file(prev_planevent_path)
 
 
-def etl_event_inherited_planunits_to_vow_gut(vow_mstr_dir: str):
-    vows_dir = create_path(vow_mstr_dir, "vows")
-    for vow_label in get_level1_dirs(vows_dir):
-        owner_events = collect_owner_event_dir_sets(vow_mstr_dir, vow_label)
+def etl_event_inherited_planunits_to_bank_gut(bank_mstr_dir: str):
+    banks_dir = create_path(bank_mstr_dir, "banks")
+    for bank_label in get_level1_dirs(banks_dir):
+        owner_events = collect_owner_event_dir_sets(bank_mstr_dir, bank_label)
         owners_max_event_int_dict = get_owners_downhill_event_ints(owner_events)
         for owner_name, max_event_int in owners_max_event_int_dict.items():
             max_planevent_path = create_planevent_path(
-                vow_mstr_dir, vow_label, owner_name, max_event_int
+                bank_mstr_dir, bank_label, owner_name, max_event_int
             )
             max_event_plan_json = open_file(max_planevent_path)
-            gut_path = create_gut_path(vow_mstr_dir, vow_label, owner_name)
+            gut_path = create_gut_path(bank_mstr_dir, bank_label, owner_name)
             save_file(gut_path, None, max_event_plan_json)
 
 
-def etl_vow_guts_to_vow_jobs(vow_mstr_dir: str):
-    vows_dir = create_path(vow_mstr_dir, "vows")
-    for vow_label in get_level1_dirs(vows_dir):
-        x_vowunit = vowunit_get_from_default_path(vow_mstr_dir, vow_label)
-        x_vowunit.generate_all_jobs()
+def etl_bank_guts_to_bank_jobs(bank_mstr_dir: str):
+    banks_dir = create_path(bank_mstr_dir, "banks")
+    for bank_label in get_level1_dirs(banks_dir):
+        x_bankunit = bankunit_get_from_default_path(bank_mstr_dir, bank_label)
+        x_bankunit.generate_all_jobs()
 
 
-def etl_vow_job_jsons_to_job_tables(cursor: sqlite3_Cursor, vow_mstr_dir: str):
+def etl_bank_job_jsons_to_job_tables(cursor: sqlite3_Cursor, bank_mstr_dir: str):
     create_job_tables(cursor)
-    vows_dir = create_path(vow_mstr_dir, "vows")
-    for vow_label in get_level1_dirs(vows_dir):
-        vow_path = create_path(vows_dir, vow_label)
-        owners_dir = create_path(vow_path, "owners")
+    banks_dir = create_path(bank_mstr_dir, "banks")
+    for bank_label in get_level1_dirs(banks_dir):
+        bank_path = create_path(banks_dir, bank_label)
+        owners_dir = create_path(bank_path, "owners")
         for owner_name in get_level1_dirs(owners_dir):
-            job_obj = open_job_file(vow_mstr_dir, vow_label, owner_name)
+            job_obj = open_job_file(bank_mstr_dir, bank_label, owner_name)
             insert_job_obj(cursor, job_obj)
 
 
@@ -904,17 +906,17 @@ def insert_tranunit_accts_net(cursor: sqlite3_Cursor, tranbook: TranBook):
     """
     accts_net_array = tranbook._get_accts_net_array()
     cursor.executemany(
-        f"INSERT INTO vow_acct_nets (vow_label, owner_name, owner_net_amount) VALUES ('{tranbook.vow_label}', ?, ?)",
+        f"INSERT INTO bank_acct_nets (bank_label, owner_name, owner_net_amount) VALUES ('{tranbook.bank_label}', ?, ?)",
         accts_net_array,
     )
 
 
-def etl_vow_json_acct_nets_to_vow_acct_nets_table(
-    cursor: sqlite3_Cursor, vow_mstr_dir: str
+def etl_bank_json_acct_nets_to_bank_acct_nets_table(
+    cursor: sqlite3_Cursor, bank_mstr_dir: str
 ):
-    cursor.execute(CREATE_VOW_ACCT_NETS_SQLSTR)
-    vows_dir = create_path(vow_mstr_dir, "vows")
-    for vow_label in get_level1_dirs(vows_dir):
-        x_vowunit = vowunit_get_from_default_path(vow_mstr_dir, vow_label)
-        x_vowunit.set_all_tranbook()
-        insert_tranunit_accts_net(cursor, x_vowunit._all_tranbook)
+    cursor.execute(CREATE_BANK_ACCT_NETS_SQLSTR)
+    banks_dir = create_path(bank_mstr_dir, "banks")
+    for bank_label in get_level1_dirs(banks_dir):
+        x_bankunit = bankunit_get_from_default_path(bank_mstr_dir, bank_label)
+        x_bankunit.set_all_tranbook()
+        insert_tranunit_accts_net(cursor, x_bankunit._all_tranbook)

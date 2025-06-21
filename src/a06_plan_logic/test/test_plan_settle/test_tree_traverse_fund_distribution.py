@@ -631,7 +631,7 @@ def test_PlanUnit_settle_plan_WithLevel3AwardLinkAndEmptyAncestorsSetsGroupUnit_
     x_plan.settle_plan()
 
     # THEN
-    x_conceptroot = x_plan.get_concept_obj(to_rope(x_plan.vow_label))
+    x_conceptroot = x_plan.get_concept_obj(to_rope(x_plan.bank_label))
     with pytest_raises(Exception) as excinfo:
         x_conceptroot.awardlinks[yao_str]
     assert str(excinfo.value) == f"'{yao_str}'"
@@ -694,7 +694,7 @@ def test_PlanUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkPlanFund():
 
     # THEN
     print(f"{concept_dict.keys()=}")
-    concept_bob = concept_dict.get(to_rope(sue_plan.vow_label))
+    concept_bob = concept_dict.get(to_rope(sue_plan.bank_label))
     assert len(concept_bob._awardheirs) == 3
 
     bheir_yao = concept_bob._awardheirs.get(yao_str)
@@ -742,7 +742,7 @@ def test_PlanUnit_settle_plan_CorrectlySetsGroupLinkPlanCredAndDebt():
     sue_awardlink = awardlink_shop(sue_str, 20, take_force=40)
     bob_awardlink = awardlink_shop(bob_str, 10, take_force=5)
     zia_awardlink = awardlink_shop(zia_str, 10, take_force=5)
-    root_rope = to_rope(yao_plan.vow_label)
+    root_rope = to_rope(yao_plan.bank_label)
     yao_plan.edit_concept_attr(root_rope, awardlink=sue_awardlink)
     yao_plan.edit_concept_attr(root_rope, awardlink=bob_awardlink)
     yao_plan.edit_concept_attr(root_rope, awardlink=zia_awardlink)

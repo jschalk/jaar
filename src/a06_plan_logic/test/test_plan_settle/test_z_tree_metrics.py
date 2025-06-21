@@ -100,7 +100,7 @@ def test_PlanUnit_get_tree_metrics_Returns_task_ConceptRopeTerm():
     # WHEN / THEN
     traain_rope = create_rope_from_labels(
         [
-            yao_plan.vow_label,
+            yao_plan.bank_label,
             "ACME",
             "ACME Employee Responsiblities",
             "Know Abuse Deterrence and Reporting guildlines",

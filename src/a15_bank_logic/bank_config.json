@@ -1,0 +1,143 @@
+{
+    "bank_paybook": {
+        "jkeys": {
+            "acct_name": {
+                "class_type": "NameTerm"
+            },
+            "bank_label": {
+                "class_type": "LabelTerm"
+            },
+            "owner_name": {
+                "class_type": "NameTerm"
+            },
+            "tran_time": {
+                "class_type": "TimeLinePoint"
+            }
+        },
+        "jvalues": {
+            "amount": {
+                "class_type": "float"
+            }
+        },
+        "bank_static": "True"
+    },
+    "bank_budunit": {
+        "jkeys": {
+            "bud_time": {
+                "class_type": "TimeLinePoint"
+            },
+            "bank_label": {
+                "class_type": "LabelTerm"
+            },
+            "owner_name": {
+                "class_type": "NameTerm"
+            }
+        },
+        "jvalues": {
+            "celldepth": {
+                "class_type": "int"
+            },
+            "quota": {
+                "class_type": "int"
+            }
+        },
+        "bank_static": "True"
+    },
+    "bank_timeline_hour": {
+        "jkeys": {
+            "cumulative_minute": {
+                "class_type": "int"
+            },
+            "bank_label": {
+                "class_type": "LabelTerm"
+            }
+        },
+        "jvalues": {
+            "hour_label": {
+                "class_type": "LabelTerm"
+            }
+        },
+        "bank_static": "True"
+    },
+    "bank_timeline_month": {
+        "jkeys": {
+            "cumulative_day": {
+                "class_type": "int"
+            },
+            "bank_label": {
+                "class_type": "LabelTerm"
+            }
+        },
+        "jvalues": {
+            "month_label": {
+                "class_type": "LabelTerm"
+            }
+        },
+        "bank_static": "True"
+    },
+    "bank_timeline_weekday": {
+        "jkeys": {
+            "bank_label": {
+                "class_type": "LabelTerm"
+            },
+            "weekday_order": {
+                "class_type": "int"
+            }
+        },
+        "jvalues": {
+            "weekday_label": {
+                "class_type": "LabelTerm"
+            }
+        },
+        "bank_static": "True"
+    },
+    "bank_timeoffi": {
+        "jkeys": {
+            "bank_label": {
+                "class_type": "LabelTerm"
+            },
+            "offi_time": {
+                "class_type": "TimeLinePoint"
+            }
+        },
+        "jvalues": {},
+        "bank_static": "False"
+    },
+    "bankunit": {
+        "jkeys": {
+            "bank_label": {
+                "class_type": "LabelTerm"
+            }
+        },
+        "jvalues": {
+            "knot": {
+                "class_type": "str"
+            },
+            "c400_number": {
+                "class_type": "int"
+            },
+            "fund_iota": {
+                "class_type": "float"
+            },
+            "job_listen_rotations": {
+                "class_type": "int"
+            },
+            "monthday_distortion": {
+                "class_type": "int"
+            },
+            "penny": {
+                "class_type": "float"
+            },
+            "respect_bit": {
+                "class_type": "float"
+            },
+            "timeline_label": {
+                "class_type": "LabelTerm"
+            },
+            "yr1_jan1_offset": {
+                "class_type": "int"
+            }
+        },
+        "bank_static": "True"
+    }
+}

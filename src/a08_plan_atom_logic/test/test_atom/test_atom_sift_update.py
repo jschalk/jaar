@@ -54,7 +54,7 @@ def test_sift_atom_ReturnsNoneIfGivenPlanAtomIsUPDATE():
     casa_rope = sue_plan.make_l1_rope(casa_str)
     sue_plan.add_concept(casa_rope)
     casa_atom = planatom_shop(plan_conceptunit_str(), UPDATE_str())
-    casa_atom.set_arg(parent_rope_str(), sue_plan.vow_label)
+    casa_atom.set_arg(parent_rope_str(), sue_plan.bank_label)
     casa_atom.set_arg(concept_label_str(), casa_str)
     casa_atom.set_arg(mass_str(), 8)
     # THEN

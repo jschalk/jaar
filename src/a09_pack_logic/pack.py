@@ -8,8 +8,8 @@ from src.a00_data_toolbox.file_toolbox import (
     open_json,
     save_file,
 )
-from src.a01_term_logic.term import FaceName, OwnerName, VowLabel
-from src.a05_concept_logic.concept import get_default_vow_label
+from src.a01_term_logic.term import BankLabel, FaceName, OwnerName
+from src.a05_concept_logic.concept import get_default_bank_label
 from src.a06_plan_logic.plan import PlanUnit
 from src.a08_plan_atom_logic.atom import (
     PlanAtom,
@@ -37,7 +37,7 @@ def get_init_pack_id_if_None(x_pack_id: int = None) -> int:
 @dataclass
 class PackUnit:
     face_name: FaceName = None
-    vow_label: VowLabel = None
+    bank_label: BankLabel = None
     owner_name: OwnerName = None
     _pack_id: int = None
     _plandelta: PlanDelta = None
@@ -45,7 +45,7 @@ class PackUnit:
     _packs_dir: str = None
     _atoms_dir: str = None
     event_int: int = None
-    """Represents a per vow_label/event_int PlanDelta for a owner_name"""
+    """Represents a per bank_label/event_int PlanDelta for a owner_name"""
 
     def set_face(self, x_face_name: FaceName):
         self.face_name = x_face_name
@@ -68,7 +68,7 @@ class PackUnit:
     def get_step_dict(self) -> dict[str, any]:
         return {
             "face_name": self.face_name,
-            "vow_label": self.vow_label,
+            "bank_label": self.bank_label,
             "owner_name": self.owner_name,
             "event_int": self.event_int,
             "delta": self._plandelta.get_ordered_planatoms(self._delta_start),
@@ -149,11 +149,11 @@ class PackUnit:
 
     def get_edited_plan(self, before_plan: PlanUnit) -> PlanUnit:
         if (
-            self.vow_label != before_plan.vow_label
+            self.bank_label != before_plan.bank_label
             or self.owner_name != before_plan.owner_name
         ):
             raise pack_plan_conflict_Exception(
-                f"pack plan conflict {self.vow_label} != {before_plan.vow_label} or {self.owner_name} != {before_plan.owner_name}"
+                f"pack plan conflict {self.bank_label} != {before_plan.bank_label} or {self.owner_name} != {before_plan.owner_name}"
             )
         return self._plandelta.get_edited_plan(before_plan)
 
@@ -164,7 +164,7 @@ class PackUnit:
 def packunit_shop(
     owner_name: OwnerName,
     face_name: FaceName = None,
-    vow_label: VowLabel = None,
+    bank_label: BankLabel = None,
     _pack_id: int = None,
     _plandelta: PlanDelta = None,
     _delta_start: int = None,
@@ -173,11 +173,11 @@ def packunit_shop(
     event_int: int = None,
 ) -> PackUnit:
     _plandelta = plandelta_shop() if _plandelta is None else _plandelta
-    vow_label = get_default_vow_label() if vow_label is None else vow_label
+    bank_label = get_default_bank_label() if bank_label is None else bank_label
     x_packunit = PackUnit(
         face_name=face_name,
         owner_name=owner_name,
-        vow_label=vow_label,
+        bank_label=bank_label,
         _pack_id=get_init_pack_id_if_None(_pack_id),
         _plandelta=_plandelta,
         _packs_dir=_packs_dir,
@@ -196,13 +196,13 @@ def create_packunit_from_files(
     pack_filename = get_json_filename(pack_id)
     pack_dict = open_json(packs_dir, pack_filename)
     x_owner_name = pack_dict.get("owner_name")
-    x_vow_label = pack_dict.get("vow_label")
+    x_bank_label = pack_dict.get("bank_label")
     x_face_name = pack_dict.get("face_name")
     delta_atom_numbers_list = pack_dict.get("delta_atom_numbers")
     x_packunit = packunit_shop(
         face_name=x_face_name,
         owner_name=x_owner_name,
-        vow_label=x_vow_label,
+        bank_label=x_bank_label,
         _pack_id=pack_id,
         _atoms_dir=atoms_dir,
     )
@@ -219,7 +219,7 @@ def get_packunit_from_json(x_json: str) -> PackUnit:
     x_packunit = packunit_shop(
         face_name=pack_dict.get("face_name"),
         owner_name=pack_dict.get("owner_name"),
-        vow_label=pack_dict.get("vow_label"),
+        bank_label=pack_dict.get("bank_label"),
         _pack_id=pack_dict.get("pack_id"),
         _atoms_dir=pack_dict.get("atoms_dir"),
         event_int=x_event_int,

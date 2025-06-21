@@ -4,9 +4,9 @@ from src.a00_data_toolbox.db_toolbox import (
     get_row_count,
     get_table_columns,
 )
-from src.a02_finance_logic.test._util.a02_str import vow_label_str
+from src.a02_finance_logic.test._util.a02_str import bank_label_str
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a15_vow_logic.test._util.a15_str import cumulative_minute_str, hour_label_str
+from src.a15_bank_logic.test._util.a15_str import cumulative_minute_str, hour_label_str
 from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
 from src.a17_idea_logic.test._util.a17_str import brick_raw_str
 from src.a18_etl_toolbox.test._util.a18_str import brick_agg_str
@@ -26,7 +26,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario0_Gr
     raw_br00003_columns = [
         event_int_str(),
         face_name_str(),
-        vow_label_str(),
+        bank_label_str(),
         cumulative_minute_str(),
         hour_label_str(),
     ]
@@ -36,7 +36,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario0_Gr
         insert_into_clause = f"""INSERT INTO {raw_br00003_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {vow_label_str()}
+, {bank_label_str()}
 , {cumulative_minute_str()}
 , {hour_label_str()}
 )"""
@@ -101,7 +101,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario1_Gr
     raw_br00003_columns = [
         event_int_str(),
         face_name_str(),
-        vow_label_str(),
+        bank_label_str(),
         cumulative_minute_str(),
         hour_label_str(),
     ]
@@ -111,7 +111,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario1_Gr
         insert_into_clause = f"""INSERT INTO {raw_br00003_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {vow_label_str()}
+, {bank_label_str()}
 , {cumulative_minute_str()}
 , {hour_label_str()}
 )"""

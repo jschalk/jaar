@@ -2,6 +2,7 @@ from inspect import getdoc as inspect_getdoc
 from src.a01_term_logic.term import (
     AcctName,
     AxiomLabel,
+    BankLabel,
     EporTerm,
     EventInt,
     FaceName,
@@ -13,7 +14,6 @@ from src.a01_term_logic.term import (
     OwnerName,
     RopeTerm,
     TitleTerm,
-    VowLabel,
     default_knot_if_None,
 )
 from src.a01_term_logic.test._util.a01_str import knot_str
@@ -206,12 +206,12 @@ def test_EventInt_Exists():
     assert EventInt(12.4) == 12
 
 
-def test_VowLabel_Exists():
+def test_BankLabel_Exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_vow = VowLabel(empty_str)
+    x_bank = BankLabel(empty_str)
     # THEN
-    assert x_vow == empty_str
-    doc_str = f"An AxiomLabel for a Vow Vow. Cannot contain {knot_str()}"
-    assert inspect_getdoc(x_vow) == doc_str
+    assert x_bank == empty_str
+    doc_str = f"An AxiomLabel for a Bank Bank. Cannot contain {knot_str()}"
+    assert inspect_getdoc(x_bank) == doc_str

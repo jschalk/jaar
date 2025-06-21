@@ -18,7 +18,9 @@ def test_create_kpi_csvs_Scenario0_NotCreateFileWhenNoKPITables(env_dir_setup_cl
     set_dir(temp_dir)
     with sqlite3_connect(db_path) as db_conn:
         cursor = db_conn.cursor()
-        create_populate_table = "CREATE TABLE test_table AS SELECT 'fizz' as vow_label;"
+        create_populate_table = (
+            "CREATE TABLE test_table AS SELECT 'fizz' as bank_label;"
+        )
         cursor.execute(create_populate_table)
     assert count_files(temp_dir) == 1
 
@@ -37,8 +39,8 @@ def test_create_kpi_csvs_Scenario1_CreateFile(env_dir_setup_cleanup):
     kpi_tablename = "test_kpi_table"
     with sqlite3_connect(db_path) as db_conn:
         cursor = db_conn.cursor()
-        cursor.execute("CREATE TABLE test_table AS SELECT 'fizz' as vow_label;")
-        cursor.execute(f"CREATE TABLE {kpi_tablename} AS SELECT 'fizz' as vow_label;")
+        cursor.execute("CREATE TABLE test_table AS SELECT 'fizz' as bank_label;")
+        cursor.execute(f"CREATE TABLE {kpi_tablename} AS SELECT 'fizz' as bank_label;")
     kpi_csv_path = create_path(temp_dir, f"{kpi_tablename}.csv")
     assert not os_path_exists(kpi_csv_path)
 
@@ -47,5 +49,5 @@ def test_create_kpi_csvs_Scenario1_CreateFile(env_dir_setup_cleanup):
 
     # THEN
     assert os_path_exists(kpi_csv_path)
-    expected_df = DataFrame(["fizz"], columns=["vow_label"])
+    expected_df = DataFrame(["fizz"], columns=["bank_label"])
     assert_frame_equal(open_csv(kpi_csv_path), expected_df)

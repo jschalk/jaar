@@ -117,7 +117,7 @@ class PlanDelta:
         return get_from_nested_dict(self.planatoms, x_keylist)
 
     def add_all_planatoms(self, after_plan: PlanUnit):
-        before_plan = planunit_shop(after_plan.owner_name, after_plan.vow_label)
+        before_plan = planunit_shop(after_plan.owner_name, after_plan.bank_label)
         self.add_all_different_planatoms(before_plan, after_plan)
 
     def add_all_different_planatoms(self, before_plan: PlanUnit, after_plan: PlanUnit):

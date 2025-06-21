@@ -430,7 +430,7 @@ def test_PlanUnit_ReasonUnits_set_premiseConceptWithBeginCloseSetsPremisePopen_P
     rus_war = "rus_war"
     rus_war_rope = sue_plan.make_rope(time_rope, rus_war)
     sue_plan.set_concept(
-        conceptunit_shop(time, begin=100, close=2000), sue_plan.vow_label
+        conceptunit_shop(time, begin=100, close=2000), sue_plan.bank_label
     )
     sue_plan.set_concept(conceptunit_shop(rus_war, begin=22, close=34), time_rope)
 
@@ -519,7 +519,7 @@ def test_PlanUnit_edit_concept_attr_planIsAbleToEdit_rconcept_active_requisite_A
 
     run_str = "run to casa"
     run_rope = sue_plan.make_l1_rope(run_str)
-    sue_plan.set_concept(conceptunit_shop(run_str), sue_plan.vow_label)
+    sue_plan.set_concept(conceptunit_shop(run_str), sue_plan.bank_label)
     sue_plan.settle_plan()  # set tree metrics
     run_concept = sue_plan.get_concept_obj(run_rope)
     assert len(run_concept.reasonunits) == 0
@@ -599,7 +599,7 @@ def test_PlanUnit_ReasonUnits_ConceptUnit_active_InfluencesReasonUnitStatus():
     # 5.2. concept(...,casa).active = False
     run_str = "run to casa"
     run_rope = sue_plan.make_l1_rope(run_str)
-    sue_plan.set_concept(conceptunit_shop(run_str), sue_plan.vow_label)
+    sue_plan.set_concept(conceptunit_shop(run_str), sue_plan.bank_label)
     sue_plan.edit_concept_attr(
         run_rope,
         reason_rcontext=casa_rope,

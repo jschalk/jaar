@@ -182,23 +182,23 @@ def listen_to_speaker_agenda(listener: PlanUnit, speaker: PlanUnit) -> PlanUnit:
 
 
 def listen_to_agendas_create_init_job_from_guts(
-    vow_mstr_dir: str, listener_job: PlanUnit
+    bank_mstr_dir: str, listener_job: PlanUnit
 ):
-    vow_label = listener_job.vow_label
+    bank_label = listener_job.bank_label
     for x_acctunit in get_ordered_debtors_roll(listener_job):
         speaker_id = x_acctunit.acct_name
-        speaker_gut = open_gut_file(vow_mstr_dir, vow_label, speaker_id)
+        speaker_gut = open_gut_file(bank_mstr_dir, bank_label, speaker_id)
         if speaker_gut is None:
             speaker_gut = create_empty_plan_from_plan(listener_job, speaker_id)
         if speaker_gut:
             listen_to_speaker_agenda(listener_job, speaker_gut)
 
 
-def listen_to_agendas_jobs_into_job(vow_mstr_dir: str, listener_job: PlanUnit):
-    vow_label = listener_job.vow_label
+def listen_to_agendas_jobs_into_job(bank_mstr_dir: str, listener_job: PlanUnit):
+    bank_label = listener_job.bank_label
     for x_acctunit in get_ordered_debtors_roll(listener_job):
         speaker_id = x_acctunit.acct_name
-        speaker_job = open_job_file(vow_mstr_dir, vow_label, speaker_id)
+        speaker_job = open_job_file(bank_mstr_dir, bank_label, speaker_id)
         if speaker_job is None:
             speaker_job = create_empty_plan_from_plan(listener_job, speaker_id)
         listen_to_speaker_agenda(listener_job, speaker_job)
@@ -231,25 +231,25 @@ def listen_to_facts_duty_vision(new_vision: PlanUnit, healer_hubunit: HubUnit):
                 listen_to_speaker_fact(new_vision, speaker_vision)
 
 
-def listen_to_facts_gut_job(vow_mstr_dir: str, new_job: PlanUnit):
-    vow_label = new_job.vow_label
-    old_job = open_job_file(vow_mstr_dir, vow_label, new_job.owner_name)
+def listen_to_facts_gut_job(bank_mstr_dir: str, new_job: PlanUnit):
+    bank_label = new_job.bank_label
+    old_job = open_job_file(bank_mstr_dir, bank_label, new_job.owner_name)
     for x_acctunit in get_ordered_debtors_roll(old_job):
         speaker_id = x_acctunit.acct_name
-        speaker_job = open_job_file(vow_mstr_dir, vow_label, speaker_id)
+        speaker_job = open_job_file(bank_mstr_dir, bank_label, speaker_id)
         if speaker_job is not None:
             listen_to_speaker_fact(new_job, speaker_job)
 
 
 def listen_to_debtors_roll_jobs_into_job(
-    vow_mstr_dir: str, vow_label: str, owner_name: OwnerName
+    bank_mstr_dir: str, bank_label: str, owner_name: OwnerName
 ) -> PlanUnit:
-    old_job = open_job_file(vow_mstr_dir, vow_label, owner_name)
+    old_job = open_job_file(bank_mstr_dir, bank_label, owner_name)
     new_job = create_listen_basis(old_job)
     if old_job.debtor_respect is None:
         return new_job
-    listen_to_agendas_jobs_into_job(vow_mstr_dir, new_job)
-    listen_to_facts_gut_job(vow_mstr_dir, new_job)
+    listen_to_agendas_jobs_into_job(bank_mstr_dir, new_job)
+    listen_to_facts_gut_job(bank_mstr_dir, new_job)
     return new_job
 
 
@@ -267,8 +267,8 @@ def listen_to_debtors_roll_duty_vision(
 
 def listen_to_owner_visions(listener_hubunit: HubUnit) -> None:
     gut = open_gut_file(
-        listener_hubunit.vow_mstr_dir,
-        listener_hubunit.vow_label,
+        listener_hubunit.bank_mstr_dir,
+        listener_hubunit.bank_label,
         listener_hubunit.owner_name,
     )
     new_job = create_listen_basis(gut)
@@ -287,7 +287,7 @@ def listen_to_owner_visions(listener_hubunit: HubUnit) -> None:
         _ingest_perspective_agenda(new_job, agenda)
         listen_to_speaker_fact(new_job, gut)
 
-    save_job_file(listener_hubunit.vow_mstr_dir, new_job)
+    save_job_file(listener_hubunit.bank_mstr_dir, new_job)
 
 
 def _fstate_keep_visions_and_listen(

@@ -166,7 +166,7 @@ def test_PlanUnit_settle_plan_NLevelCorrectlySetsDescendantAttributes_1():
     sue_plan.set_concept(email_concept, parent_rope=casa_rope)
 
     # test root status:
-    root_rope = to_rope(sue_plan.vow_label)
+    root_rope = to_rope(sue_plan.bank_label)
     x_conceptroot = sue_plan.get_concept_obj(root_rope)
     assert x_conceptroot._descendant_task_count is None
     assert x_conceptroot._all_acct_cred is None
@@ -377,13 +377,13 @@ def test_PlanUnit_get_concept_tree_ordered_rope_list_ReturnsObj():
     # THEN
     assert len(ordered_label_list) == 17
     x_1st_rope_in_ordered_list = sue_plan.get_concept_tree_ordered_rope_list()[0]
-    root_rope = to_rope(sue_plan.vow_label)
+    root_rope = to_rope(sue_plan.bank_label)
     assert x_1st_rope_in_ordered_list == root_rope
     x_8th_rope_in_ordered_list = sue_plan.get_concept_tree_ordered_rope_list()[9]
     assert x_8th_rope_in_ordered_list == sue_plan.make_l1_rope(wk_str)
 
     # WHEN
-    y_plan = planunit_shop(vow_label="accord23")
+    y_plan = planunit_shop(bank_label="accord23")
 
     # THEN
     y_1st_rope_in_ordered_list = y_plan.get_concept_tree_ordered_rope_list()[0]
@@ -466,7 +466,7 @@ def test_PlanUnit_settle_plan_WhenConceptRootHas_massButAll_kidsHaveZero_massAdd
     sue_planunit.settle_plan()
 
     # THEN
-    root_rope = to_rope(sue_planunit.vow_label)
+    root_rope = to_rope(sue_planunit.bank_label)
     assert sue_planunit._offtrack_kids_mass_set == {root_rope}
 
     # WHEN
@@ -526,7 +526,7 @@ def test_PlanUnit_settle_plan_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     zia_debt_score = 5
     yao_plan.add_acctunit(yao_str, yao_credit_score, yao_debt_score)
     yao_plan.add_acctunit(zia_str, zia_credit_score, zia_debt_score)
-    root_rope = to_rope(yao_plan.vow_label)
+    root_rope = to_rope(yao_plan.bank_label)
     x_conceptroot = yao_plan.get_concept_obj(root_rope)
     x_conceptroot.set_awardlink(awardlink_shop(yao_str))
     x_conceptroot.set_awardlink(awardlink_shop(zia_str))
@@ -660,7 +660,7 @@ def test_PlanUnit_settle_plan_Sets_conceptroot_factheir_With_range_factheirs():
     tue_rope = yao_plan.make_rope(wk_rope, tue_str)
     tue_addin = 100
     yao_plan.set_concept(conceptunit_shop(tue_str, addin=tue_addin), wk_rope)
-    root_rope = to_rope(yao_plan.vow_label)
+    root_rope = to_rope(yao_plan.bank_label)
     yao_plan.edit_concept_attr(
         root_rope, reason_rcontext=tue_rope, reason_premise=tue_rope
     )

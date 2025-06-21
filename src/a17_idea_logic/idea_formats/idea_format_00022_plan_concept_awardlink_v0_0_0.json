@@ -9,7 +9,7 @@
         "face_name": {
             "otx_key": true
         },
-        "vow_label": {
+        "bank_label": {
             "otx_key": true
         },
         "give_force": {
@@ -27,7 +27,7 @@
     },
     "idea_number": "br00022",
     "dimens": [
-        "vowunit",
+        "bankunit",
         "planunit",
         "plan_conceptunit",
         "plan_concept_awardlink"

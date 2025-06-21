@@ -159,7 +159,7 @@ def test_PlanUnit_settle_plan_CorrectlySets_concept_dict():
     # THEN
     casa_concept = sue_planunit._concept_dict.get(casa_rope)
     print(f"\nlook at {casa_concept.get_concept_rope()=}")
-    assert casa_concept.parent_rope == to_rope(sue_planunit.vow_label)
+    assert casa_concept.parent_rope == to_rope(sue_planunit.bank_label)
     assert casa_concept._kids == {}
     assert casa_concept.mass == 30
     assert casa_concept.concept_label == casa_str
@@ -290,7 +290,7 @@ def test_PlanUnit_settle_plan_CorrectlySetsData_planunit_v001():
     # ESTABLISH
     yao_planunit = planunit_v001()
     print(f"{yao_planunit.get_reason_rcontexts()=}")
-    # day_hr = f"{yao_planunit.vow_label},day_hr"
+    # day_hr = f"{yao_planunit.bank_label},day_hr"
     # yao_planunit.add_fact(fcontext=day_hr, fstate=day_hr, popen=0, pnigh=23)
     day_min_str = "day_minute"
     day_min_rope = yao_planunit.make_l1_rope(day_min_str)
@@ -409,7 +409,7 @@ def test_PlanUnit_settle_plan_OptionWeekdaysReturnsObj_planunit_v001():
     }
     mt_reasonunit = reasonunit_shop(wk_rope, premises=mt_premises)
     mt_reasonheir = reasonheir_shop(wk_rope, premises=mt_premises, _status=False)
-    x_conceptroot = yao_planunit.get_concept_obj(to_rope(yao_planunit.vow_label))
+    x_conceptroot = yao_planunit.get_concept_obj(to_rope(yao_planunit.bank_label))
     x_conceptroot.set_reasonunit(reason=mt_reasonunit)
     # print(f"{yao_planunit.reasonunits[wk_rope].rcontext=}")
     # print(f"{yao_planunit.reasonunits[wk_rope].premises[mon_rope].pstate=}")
@@ -451,11 +451,11 @@ def test_PlanUnit_settle_plan_OptionWeekdaysReturnsObj_planunit_v001():
 
     # assert YR.get_active(rope=bird_concept, concept_dict=concept_dict) is True
 
-    # yao_planunit.add_fact(fcontext=f"{yao_planunit.vow_label},wkdays", fstate=f"{yao_planunit.vow_label},wkdays,Tuesday")
+    # yao_planunit.add_fact(fcontext=f"{yao_planunit.bank_label},wkdays", fstate=f"{yao_planunit.bank_label},wkdays,Tuesday")
     # concept_dict = yao_planunit.get_concept_dict()
     # assert YR.get_active(rope=bird_concept, concept_dict=concept_dict) is True
 
-    # yao_planunit.add_fact(fcontext=f"{yao_planunit.vow_label},wkdays", fstate=f"{yao_planunit.vow_label},wkdays,Wednesday")
+    # yao_planunit.add_fact(fcontext=f"{yao_planunit.bank_label},wkdays", fstate=f"{yao_planunit.bank_label},wkdays,Wednesday")
     # concept_dict = yao_planunit.get_concept_dict()
     # assert YR.get_active(rope=bird_concept, concept_dict=concept_dict) is False
 

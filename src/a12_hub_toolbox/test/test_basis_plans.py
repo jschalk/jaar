@@ -40,7 +40,7 @@ def test_create_empty_plan_from_plan_ReturnsObj():
     # THEN
     assert yao_empty_vision.owner_name != yao_gut.owner_name
     assert yao_empty_vision.owner_name == zia_str
-    assert yao_empty_vision.vow_label == yao_gut.vow_label
+    assert yao_empty_vision.bank_label == yao_gut.bank_label
     assert yao_empty_vision.last_pack_id is None
     assert yao_empty_vision.get_acctunits_dict() == {}
     assert yao_empty_vision.knot == yao_gut.knot
@@ -83,7 +83,7 @@ def test_create_listen_basis_ReturnsObj():
 
     # THEN
     assert yao_basis_vision.owner_name == yao_duty.owner_name
-    assert yao_basis_vision.vow_label == yao_duty.vow_label
+    assert yao_basis_vision.bank_label == yao_duty.bank_label
     assert yao_basis_vision.last_pack_id == yao_duty.last_pack_id
     assert yao_basis_vision.get_acctunits_dict() == yao_duty.get_acctunits_dict()
     assert yao_basis_vision.knot == yao_duty.knot
@@ -135,8 +135,8 @@ def test_get_default_job_ReturnsObj():
     default_job.settle_plan()
     assert default_job.owner_name == sue_planunit.owner_name
     assert default_job.owner_name == sue_str
-    assert default_job.vow_label == sue_planunit.vow_label
-    assert default_job.vow_label == blue_str
+    assert default_job.bank_label == sue_planunit.bank_label
+    assert default_job.bank_label == blue_str
     assert default_job.knot == slash_str
     assert default_job.fund_pool == sue_acct_pool
     assert default_job.fund_iota == x_fund_iota

@@ -5,16 +5,16 @@ from src.a01_term_logic.rope import RopeTerm, create_rope_from_labels
 from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 
 
-def temp_vow_label():
+def temp_bank_label():
     return "ex_keep04"
 
 
-def temp_vow_mstr_dir():
-    return "src\\a14_keep_logic\\test\\_util\\vow_mstr"
+def temp_bank_mstr_dir():
+    return "src\\a14_keep_logic\\test\\_util\\bank_mstr"
 
 
 def get_module_temp_dir():
-    return "src\\a14_keep_logic\\test\\_util\\vow_mstr\\vows"
+    return "src\\a14_keep_logic\\test\\_util\\bank_mstr\\banks"
 
 
 def temp_owner_name():
@@ -23,7 +23,7 @@ def temp_owner_name():
 
 @pytest_fixture()
 def env_dir_setup_cleanup():
-    env_dir = temp_vow_mstr_dir()
+    env_dir = temp_bank_mstr_dir()
     delete_dir(env_dir)
     yield env_dir
     delete_dir(env_dir)
@@ -38,7 +38,7 @@ def get_texas_rope() -> RopeTerm:
 
 def get_texas_hubunit() -> HubUnit:
     return hubunit_shop(
-        get_module_temp_dir(), temp_vow_label(), temp_owner_name(), get_texas_rope()
+        get_module_temp_dir(), temp_bank_label(), temp_owner_name(), get_texas_rope()
     )
 
 
@@ -46,13 +46,13 @@ class InvalidkeepCopyException(Exception):
     pass
 
 
-def copy_evaluation_keep(src_vow_label: str, dest_vow_label: str):
+def copy_evaluation_keep(src_bank_label: str, dest_bank_label: str):
     keeps_dir = "src\\keep\\_utils/keeps"
-    new_dir = create_path(keeps_dir, dest_vow_label)
+    new_dir = create_path(keeps_dir, dest_bank_label)
     if os_path_exists(new_dir):
         raise InvalidkeepCopyException(
             f"Cannot copy keep to '{new_dir}' directory because '{new_dir}' exists."
         )
-    src_dir = create_path(keeps_dir, src_vow_label)
-    dest_dir = create_path(keeps_dir, dest_vow_label)
+    src_dir = create_path(keeps_dir, src_bank_label)
+    dest_dir = create_path(keeps_dir, dest_bank_label)
     copy_dir(src_dir=src_dir, dest_dir=dest_dir)

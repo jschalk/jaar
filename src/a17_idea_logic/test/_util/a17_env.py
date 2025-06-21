@@ -15,12 +15,12 @@ def idea_examples_dir() -> str:
     return "src/a17_idea_logic/test/_util/idea_examples"
 
 
-def idea_vow_mstr_dir() -> str:
-    return "src/a17_idea_logic/test/_util/idea_examples/vow_mstr"
+def idea_bank_mstr_dir() -> str:
+    return "src/a17_idea_logic/test/_util/idea_examples/bank_mstr"
 
 
-def idea_vows_dir() -> str:
-    return "src/a17_idea_logic/test/_util/idea_examples/vow_mstr/vows"
+def idea_banks_dir() -> str:
+    return "src/a17_idea_logic/test/_util/idea_examples/bank_mstr/banks"
 
 
 @pytest_fixture()

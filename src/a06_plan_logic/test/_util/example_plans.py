@@ -224,7 +224,7 @@ def get_planunit_1Chore_1CE0MinutesReason_1Fact() -> PlanUnit:
 
 def get_planunit_x1_3levels_1reason_1facts() -> PlanUnit:
     tiger_str = "tiger"
-    zia_plan = planunit_shop("Zia", vow_label=tiger_str)
+    zia_plan = planunit_shop("Zia", bank_label=tiger_str)
     shave_str = "shave"
     shave_rope = zia_plan.make_l1_rope(shave_str)
     concept_kid_shave = conceptunit_shop(shave_str, mass=30, task=True)

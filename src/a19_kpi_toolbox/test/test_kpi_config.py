@@ -7,7 +7,7 @@ from src.a19_kpi_toolbox.kpi_mstr import (
     get_default_kpi_bundle,
     get_kpi_set_from_bundle,
 )
-from src.a19_kpi_toolbox.test._util.a19_str import vow_kpi001_acct_nets_str
+from src.a19_kpi_toolbox.test._util.a19_str import bank_kpi001_acct_nets_str
 
 
 def test_get_default_kpi_bundle_ReturnsObj():
@@ -21,7 +21,7 @@ def test_get_all_kpi_functions_ReturnsObj():
     assert get_all_kpi_functions() is not None, "all_kpi_set should be defined"
     assert len(get_all_kpi_functions()) == 1
     assert get_all_kpi_functions() == {
-        vow_kpi001_acct_nets_str(): create_populate_kpi001_table
+        bank_kpi001_acct_nets_str(): create_populate_kpi001_table
     }
 
 
@@ -30,7 +30,7 @@ def test_get_bundles_config_ReturnsObj():
 
     assert get_bundles_config() is not None, "bundles_config should be defined"
     assert len(get_bundles_config()) == 1
-    assert get_bundles_config() == {"default_kpi_bundle": {vow_kpi001_acct_nets_str()}}
+    assert get_bundles_config() == {"default_kpi_bundle": {bank_kpi001_acct_nets_str()}}
 
 
 def test_get_kpi_set_from_bundle_ReturnsObj_Scenario0_BundleGiven():
@@ -49,5 +49,5 @@ def test_get_kpi_set_from_bundle_ReturnsObj_Scenario1_NoBundleGiven():
     kpi_set = get_kpi_set_from_bundle()
 
     # THEN
-    assert kpi_set == {vow_kpi001_acct_nets_str()}
+    assert kpi_set == {bank_kpi001_acct_nets_str()}
     assert kpi_set == default_kpi_set

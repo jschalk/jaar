@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.a01_term_logic.rope import create_rope
-from src.a05_concept_logic.concept import get_default_vow_label as root_label
+from src.a05_concept_logic.concept import get_default_bank_label as root_label
 from src.a06_plan_logic.test._util.example_plans import get_planunit_with_4_levels
 from src.a12_hub_toolbox.hubunit import hubunit_shop
 from src.a12_hub_toolbox.test._util.a12_env import (
