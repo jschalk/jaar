@@ -11,7 +11,7 @@ from src.a15_vow_logic.test._util.a15_env import (
     get_module_temp_dir,
 )
 from src.a15_vow_logic.test._util.example_vows import example_casa_clean_factunit
-from src.a15_vow_logic.vow_tool import load_cells_planevent
+from src.a15_vow_logic.vow_cell import load_cells_planevent
 
 
 def test_load_cells_planevent_SetsFiles_Scenario0_NoFacts(

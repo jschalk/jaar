@@ -350,6 +350,7 @@ def get_max_file_number(x_dir: str) -> int:
 
 
 def count_dirs_files(x_dir: str) -> int:
+    """Return count of all files and directories"""
     # path = pathlib_Path(x_dir)
     # if not path.is_dir():
     #     raise ValueError(f"'{x_dir}' is not a valid directory.")

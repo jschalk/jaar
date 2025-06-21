@@ -1,6 +1,6 @@
 from copy import copy as copy_copy
 from dataclasses import dataclass
-from src.a07_calendar_logic.chrono import (
+from src.a07_timeline_logic.timeline import (
     TimeLineUnit,
     get_first_weekday_index_of_year,
     timelineunit_shop,
@@ -104,6 +104,8 @@ class CalendarMarkDown:
 
     def create_2char_weekday_list(self) -> list[str]:
         orig_weekdays = copy_copy(self.timelineunit.weekdays_config)
+        if self.display_init_day is None:
+            self.display_init_day = list(self.timelineunit.weekdays_config)[0]
         display_index = orig_weekdays.index(self.display_init_day)
         back_range = range(display_index, len(orig_weekdays))
         front_range = range(display_index)
@@ -171,3 +173,12 @@ class CalendarMarkDown:
             markdown_str += monthmarkdownrow.markdown_str()
             markdown_str += "\n"
         return markdown_str[:-1]
+
+
+def get_calendarmarkdown_str(
+    timeline_config: dict, year: int, display_init_day: str = None
+) -> str:
+    calendermarkdown = CalendarMarkDown(
+        timeline_config, display_init_day=display_init_day
+    )
+    return calendermarkdown.create_markdown(year)

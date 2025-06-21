@@ -4,13 +4,7 @@ from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_concept import reasonunit_shop
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_plan_logic.plan import planunit_shop
-from src.a07_calendar_logic.chrono import (
-    get_c400_constants,
-    get_min_from_dt,
-    get_timeline_min_difference,
-    get_year_rope,
-)
-from src.a07_calendar_logic.test._util.a07_str import (
+from src.a07_timeline_logic.test._util.a07_str import (
     c100_str,
     c400_clean_str,
     c400_leap_str,
@@ -26,7 +20,7 @@ from src.a07_calendar_logic.test._util.a07_str import (
     yr4_clean_str,
     yr4_leap_str,
 )
-from src.a07_calendar_logic.test._util.calendar_examples import (
+from src.a07_timeline_logic.test._util.calendar_examples import (
     add_time_creg_conceptunit,
     add_time_five_conceptunit,
     creg_hour_int_label,
@@ -47,6 +41,12 @@ from src.a07_calendar_logic.test._util.calendar_examples import (
     get_thu,
     get_tue,
     get_wed,
+)
+from src.a07_timeline_logic.timeline import (
+    get_c400_constants,
+    get_min_from_dt,
+    get_timeline_min_difference,
+    get_year_rope,
 )
 
 

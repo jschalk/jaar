@@ -1,14 +1,20 @@
-from src.a07_calendar_logic.calendar_markdown import (
+from src.a07_timeline_logic.calendar_markdown import (
     CalendarMarkDown,
     MonthMarkDownRow,
     MonthMarkDownUnit,
     center_word,
+    get_calendarmarkdown_str,
 )
-from src.a07_calendar_logic.chrono import (
+from src.a07_timeline_logic.test._util.calendar_examples import (
+    get_expected_creg_2024_markdown,
+    get_expected_creg_year0_markdown,
+    get_expected_five_5524_markdown,
+    get_five_config,
+)
+from src.a07_timeline_logic.timeline import (
     get_default_timeline_config_dict,
     timelineunit_shop,
 )
-from src.a07_calendar_logic.test._util.calendar_examples import get_five_config
 
 
 def test_center_word_ReturnObj():
@@ -301,7 +307,6 @@ def test_CalendarMarkDown_Exists():
     assert not x_calendarmarkdown.timelineunit
     assert not x_calendarmarkdown.timeline_config
     assert not x_calendarmarkdown.monthmarkdownrows
-    assert not x_calendarmarkdown.timelineunit
     assert not x_calendarmarkdown.week_length
     assert not x_calendarmarkdown.month_char_width
     assert not x_calendarmarkdown.monthmarkdownrow_length
@@ -311,44 +316,58 @@ def test_CalendarMarkDown_Exists():
     assert x_calendarmarkdown.max_md_width == 84
 
 
-def test_CalendarMarkDown_create_2char_weekday_list_ReturnObj():
+def test_CalendarMarkDown_create_2char_weekday_list_ReturnObj_Scenario0_display_init_day_ParameterPassed():
     # ESTABLISH
     creg_config = get_default_timeline_config_dict()
-    creg_calendergrid = CalendarMarkDown(timeline_config=creg_config)
-    creg_calendergrid.display_init_day = "Monday"
-    creg_calendergrid.set_monthmarkdownrows("Tuesday", 1997)
+    creg_calendermarkdown = CalendarMarkDown(timeline_config=creg_config)
+    creg_calendermarkdown.display_init_day = "Monday"
+    creg_calendermarkdown.set_monthmarkdownrows("Tuesday", 1997)
 
     # WHEN
-    weekday_2char_list = creg_calendergrid.create_2char_weekday_list()
+    weekday_2char_list = creg_calendermarkdown.create_2char_weekday_list()
 
     # THEN
     expected_weekday_2char_abvs = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
     assert weekday_2char_list == expected_weekday_2char_abvs
 
 
+def test_CalendarMarkDown_create_2char_weekday_list_ReturnObj_Scenario1_display_init_day_ParameterNotPassed():
+    # ESTABLISH
+    creg_config = get_default_timeline_config_dict()
+    creg_calendermarkdown = CalendarMarkDown(timeline_config=creg_config)
+    creg_calendermarkdown.set_monthmarkdownrows("Tuesday", 1997)
+
+    # WHEN
+    weekday_2char_list = creg_calendermarkdown.create_2char_weekday_list()
+
+    # THEN
+    expected_weekday_2char_abvs = ["We", "Th", "Fr", "Sa", "Su", "Mo", "Tu"]
+    assert weekday_2char_list == expected_weekday_2char_abvs
+
+
 def test_CalendarMarkDown_set_monthmarkdownrows_SetsAttr():
     # ESTABLISH
     creg_config = get_default_timeline_config_dict()
-    creg_calendergrid = CalendarMarkDown(timeline_config=creg_config)
+    creg_calendermarkdown = CalendarMarkDown(timeline_config=creg_config)
     monday_str = "Monday"
-    creg_calendergrid.display_init_day = monday_str
+    creg_calendermarkdown.display_init_day = monday_str
     x_weekday_2char_abvs = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
     yr1997_int = 1997
-    assert not creg_calendergrid.timelineunit
+    assert not creg_calendermarkdown.timelineunit
 
     # WHEN
-    creg_calendergrid.set_monthmarkdownrows("Tuesday", yr1997_int)
+    creg_calendermarkdown.set_monthmarkdownrows("Tuesday", yr1997_int)
 
     # THEN
     expected_timelineunit = timelineunit_shop(creg_config)
-    assert creg_calendergrid.timelineunit == expected_timelineunit
-    assert creg_calendergrid.week_length == 7
-    assert creg_calendergrid.month_char_width == 26
-    assert creg_calendergrid.monthmarkdownrow_length == 3
-    assert creg_calendergrid.display_md_width == 72
-    assert len(creg_calendergrid.monthmarkdownrows) == 4
-    assert len(creg_calendergrid.monthmarkdownrows[0].months) == 3
-    monthmarkdownunit0 = creg_calendergrid.monthmarkdownrows[0].months[0]
+    assert creg_calendermarkdown.timelineunit == expected_timelineunit
+    assert creg_calendermarkdown.week_length == 7
+    assert creg_calendermarkdown.month_char_width == 26
+    assert creg_calendermarkdown.monthmarkdownrow_length == 3
+    assert creg_calendermarkdown.display_md_width == 72
+    assert len(creg_calendermarkdown.monthmarkdownrows) == 4
+    assert len(creg_calendermarkdown.monthmarkdownrows[0].months) == 3
+    monthmarkdownunit0 = creg_calendermarkdown.monthmarkdownrows[0].months[0]
     assert monthmarkdownunit0.label == "March"
     assert monthmarkdownunit0.cumulative_days == 31
     assert monthmarkdownunit0.month_days_int == 31
@@ -358,7 +377,7 @@ def test_CalendarMarkDown_set_monthmarkdownrows_SetsAttr():
     assert monthmarkdownunit0.first_weekday == 1
     assert monthmarkdownunit0.year == yr1997_int
     assert not monthmarkdownunit0.offset_year
-    monthmarkdownunit7 = creg_calendergrid.monthmarkdownrows[2].months[0]
+    monthmarkdownunit7 = creg_calendermarkdown.monthmarkdownrows[2].months[0]
     assert monthmarkdownunit7.label == "September"
     assert monthmarkdownunit7.cumulative_days == 214
     assert monthmarkdownunit7.month_days_int == 30
@@ -368,7 +387,7 @@ def test_CalendarMarkDown_set_monthmarkdownrows_SetsAttr():
     assert monthmarkdownunit7.first_weekday == 3
     assert monthmarkdownunit7.year == yr1997_int
     assert not monthmarkdownunit7.offset_year
-    monthmarkdownunit11 = creg_calendergrid.monthmarkdownrows[3].months[1]
+    monthmarkdownunit11 = creg_calendermarkdown.monthmarkdownrows[3].months[1]
     assert monthmarkdownunit11.label == "January"
     assert monthmarkdownunit11.year == yr1997_int
     assert monthmarkdownunit11.offset_year
@@ -378,101 +397,69 @@ def test_CalendarMarkDown_set_monthmarkdownrows_SetsAttr():
 def test_CalendarMarkDown_create_markdown_ReturnsObj_Scernario0_creg_config():
     # ESTABLISH
     creg_config = get_default_timeline_config_dict()
-    creg_calendergrid = CalendarMarkDown(timeline_config=creg_config)
-    creg_calendergrid.display_init_day = "Monday"
+    creg_calendermarkdown = CalendarMarkDown(timeline_config=creg_config)
+    creg_calendermarkdown.display_init_day = "Monday"
     year_int = 2024
 
     # WHEN
-    cal_markdown = creg_calendergrid.create_markdown(year_int)
+    cal_markdown = creg_calendermarkdown.create_markdown(year_int)
 
     # THEN
     print(cal_markdown)
-    expected_calendar_markdown = """
-                               Year 2024                                
-
-       March                     April                      May         
-Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su
-             1  2  3       1  2  3  4  5  6  7             1  2  3  4  5
- 4  5  6  7  8  9 10       8  9 10 11 12 13 14       6  7  8  9 10 11 12
-11 12 13 14 15 16 17      15 16 17 18 19 20 21      13 14 15 16 17 18 19
-18 19 20 21 22 23 24      22 23 24 25 26 27 28      20 21 22 23 24 25 26
-25 26 27 28 29 30 31      29 30                     27 28 29 30 31      
-
-        June                      July                     August       
-Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su
-                1  2       1  2  3  4  5  6  7                1  2  3  4
- 3  4  5  6  7  8  9       8  9 10 11 12 13 14       5  6  7  8  9 10 11
-10 11 12 13 14 15 16      15 16 17 18 19 20 21      12 13 14 15 16 17 18
-17 18 19 20 21 22 23      22 23 24 25 26 27 28      19 20 21 22 23 24 25
-24 25 26 27 28 29 30      29 30 31                  26 27 28 29 30 31   
-
-     September                  October                   November      
-Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su
-                   1          1  2  3  4  5  6                   1  2  3
- 2  3  4  5  6  7  8       7  8  9 10 11 12 13       4  5  6  7  8  9 10
- 9 10 11 12 13 14 15      14 15 16 17 18 19 20      11 12 13 14 15 16 17
-16 17 18 19 20 21 22      21 22 23 24 25 26 27      18 19 20 21 22 23 24
-23 24 25 26 27 28 29      28 29 30 31               25 26 27 28 29 30   
-30                                                                      
-
-      December               January (2025)           February (2025)   
-Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su      Mo Tu We Th Fr Sa Su
-                   1             1  2  3  4  5                      1  2
- 2  3  4  5  6  7  8       6  7  8  9 10 11 12       3  4  5  6  7  8  9
- 9 10 11 12 13 14 15      13 14 15 16 17 18 19      10 11 12 13 14 15 16
-16 17 18 19 20 21 22      20 21 22 23 24 25 26      17 18 19 20 21 22 23
-23 24 25 26 27 28 29      27 28 29 30 31            24 25 26 27 28      
-30 31                                                                   """
+    expected_calendar_markdown = get_expected_creg_2024_markdown()
+    print("")
+    print(expected_calendar_markdown)
     assert cal_markdown == expected_calendar_markdown
 
 
 def test_CalendarMarkDown_create_markdown_ReturnsObj_Scernario1_five_config():
     # ESTABLISH
-    five_calendergrid = CalendarMarkDown(timeline_config=get_five_config())
-    five_calendergrid.display_init_day = "Anaday"
+    five_calendermarkdown = CalendarMarkDown(timeline_config=get_five_config())
+    five_calendermarkdown.display_init_day = "Anaday"
     year_int = 5224
 
     # WHEN
-    cal_markdown = five_calendergrid.create_markdown(year_int)
+    cal_markdown = five_calendermarkdown.create_markdown(year_int)
 
     # THEN
-    # print(cal_markdown)
-    expected_calendar_markdown = """
-                                Year 5224                                 
-
-   Fredrick              Geo               Holocene             Iguana    
-An Ba Ch Da Ea      An Ba Ch Da Ea      An Ba Ch Da Ea      An Ba Ch Da Ea
-       0  1  2             0  1  2             0  1  2             0  1  2
- 3  4  5  6  7       3  4  5  6  7       3  4  5  6  7       3  4  5  6  7
- 8  9 10 11 12       8  9 10 11 12       8  9 10 11 12       8  9 10 11 12
-13 14 15 16 17      13 14 15 16 17      13 14 15 16 17      13 14 15 16 17
-18 19 20 21 22      18 19 20 21 22      18 19 20 21 22      18 19 20 21 22
-23 24               23 24               23 24               23 24         
-
-    Jesus                Keel               LeBron             Mikayla    
-An Ba Ch Da Ea      An Ba Ch Da Ea      An Ba Ch Da Ea      An Ba Ch Da Ea
-       0  1  2             0  1  2             0  1  2             0  1  2
- 3  4  5  6  7       3  4  5  6  7       3  4  5  6  7       3  4  5  6  7
- 8  9 10 11 12       8  9 10 11 12       8  9 10 11 12       8  9 10 11 12
-13 14 15 16 17      13 14 15 16 17      13 14 15 16 17      13 14 15 16 17
-18 19 20 21 22      18 19 20 21 22      18 19 20 21 22      18 19 20 21 22
-23 24               23 24               23 24               23 24         
-
-    Ninon               Obama              Preston              Quorum    
-An Ba Ch Da Ea      An Ba Ch Da Ea      An Ba Ch Da Ea      An Ba Ch Da Ea
-       0  1  2             0  1  2             0  1  2             0  1  2
- 3  4  5  6  7       3  4  5  6  7       3  4  5  6  7       3  4  5  6  7
- 8  9 10 11 12       8  9 10 11 12       8  9 10 11 12       8  9 10 11 12
-13 14 15 16 17      13 14 15 16 17      13 14 15 16 17      13 14 15 16 17
-18 19 20 21 22      18 19 20 21 22      18 19 20 21 22      18 19 20 21 22
-23 24               23 24               23 24               23 24         
-
-  RioGrande             Simon               Trump     
-An Ba Ch Da Ea      An Ba Ch Da Ea      An Ba Ch Da Ea
-       0  1  2             0  1  2             0  1  2
- 3  4  5  6  7       3  4  5  6  7       3  4  5  6  7
- 8  9 10 11 12       8  9 10 11 12       8  9 10 11 12
-13 14 15 16 17      13 14 15 16 17      13 14         
-18 19 20 21 22      18 19 20 21 22                    
-23 24               23 24                             """
+    print(cal_markdown)
+    expected_calendar_markdown = get_expected_five_5524_markdown()
+    print("")
+    print(expected_calendar_markdown)
     assert cal_markdown == expected_calendar_markdown
+
+
+def test_get_calendarmarkdown_str_ReturnsObj_Scenario0_display_init_day_ParameterNotPassed():
+    # ESTABLISH
+    five_timeline_config = get_five_config()
+    yr5524 = 5224
+
+    # WHEN
+    five_calendarmarkdown_str = get_calendarmarkdown_str(five_timeline_config, yr5524)
+
+    # THEN
+    assert five_calendarmarkdown_str == get_expected_five_5524_markdown()
+
+
+def test_get_calendarmarkdown_str_ReturnsObj_Scenario1_display_init_day_ParameterPassed():
+    # ESTABLISH
+    five_config = get_five_config()
+    yr5524 = 5224
+    chiday_str = "Chiday"
+    anaday_str = "Anaday"
+    expected_str = get_expected_five_5524_markdown()
+
+    # WHEN / THEN
+    assert expected_str != get_calendarmarkdown_str(five_config, yr5524, chiday_str)
+    assert expected_str == get_calendarmarkdown_str(five_config, yr5524, anaday_str)
+
+
+def test_get_calendarmarkdown_str_ReturnsObj_Scenario2_AllDefaults():
+    # ESTABLIS
+    creg_config = get_default_timeline_config_dict()
+    year = 0
+    expected_creg_year0_markdow = get_expected_creg_year0_markdown()
+
+    # WHEN / THEN
+    print(get_calendarmarkdown_str(creg_config, year))
+    assert expected_creg_year0_markdow == get_calendarmarkdown_str(creg_config, year)

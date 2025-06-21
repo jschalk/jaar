@@ -29,7 +29,8 @@ def collect_stance_csv_strs(vow_mstr_dir: str) -> dict[str, str]:
     return x_csv_strs
 
 
-def create_stance0001_file(vow_mstr_dir: str):
+def create_stance0001_file(vow_mstr_dir: str, output_dir: str = None):
     stance_csv_strs = collect_stance_csv_strs(vow_mstr_dir)
-    stance_dir = create_stances_dir_path(vow_mstr_dir)
-    csv_dict_to_excel(stance_csv_strs, stance_dir, STANCE0001_FILENAME)
+    if not output_dir:
+        output_dir = create_stances_dir_path(vow_mstr_dir)
+    csv_dict_to_excel(stance_csv_strs, output_dir, STANCE0001_FILENAME)

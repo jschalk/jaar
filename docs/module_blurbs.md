@@ -9,7 +9,7 @@ What does each one do?
 - **a04_reason_logic**: Describes what a reason and a fact is; if the reasons match the facts, then a task can be kept.
 - **a05_concept_logic**: A concept can be a task, and if its reasons match its facts, it should be kept.
 - **a06_plan_logic**: A plan is a planget, made of accounts and concepts. All concepts are connected to the axiom concept, which is given all the funds in a planget.
-- **a07_calendar_logic**: Allows arbitrary calendars to be defined for each planget with minimal configuration.
+- **a07_timeline_logic**: Allows arbitrary calendars to be defined for each planget with minimal configuration.
 - **a08_plan_atom_logic**: Defines the structure and behavior of planget atoms, which are single units of planget and concepts used in a planget.
 - **a09_pack_logic**: Manages the creation and organization of packs, which are collections of planget atoms for building complex plangets.
 - **a10_plan_calc**: Expresses the calculations performed when a planget is "settled" to determine final amounts for each concept and account.

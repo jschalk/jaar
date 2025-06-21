@@ -14,7 +14,7 @@ from src.a15_vow_logic.test._util.a15_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
-from src.a15_vow_logic.vow_tool import create_cell_tree
+from src.a15_vow_logic.vow_cell import create_cell_tree
 
 
 def test_create_cell_tree_Scenaro0_timepoint_Empty(env_dir_setup_cleanup):

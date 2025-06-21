@@ -10,7 +10,7 @@ from src.a02_finance_logic.finance_config import (
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a05_concept_logic.healer import healerlink_shop
 from src.a06_plan_logic.plan import planunit_shop
-from src.a07_calendar_logic.chrono import timelineunit_shop
+from src.a07_timeline_logic.timeline import timelineunit_shop
 from src.a12_hub_toolbox.hub_path import create_owner_dir_path, create_path
 from src.a12_hub_toolbox.hub_tool import (
     gut_file_exists,
@@ -62,7 +62,6 @@ def test_VowUnit_Exists():
     # Calculated fields
     assert not accord_vow._offi_time_max
     assert not accord_vow._owners_dir
-    assert not accord_vow._journal_db
     assert not accord_vow._packs_dir
     assert not accord_vow._all_tranbook
     assert set(accord_vow.__dict__) == {
@@ -79,7 +78,6 @@ def test_VowUnit_Exists():
         "_vow_dir",
         "vow_mstr_dir",
         "_all_tranbook",
-        "_journal_db",
         "_offi_time_max",
         "_owners_dir",
         "_packs_dir",
@@ -140,7 +138,6 @@ def test_vowunit_shop_ReturnsVowUnitWith_knot(env_dir_setup_cleanup):
         vow_label=a23_str,
         vow_mstr_dir=get_module_temp_dir(),
         offi_times=a45_offi_times,
-        in_memory_journal=True,
         knot=slash_str,
         fund_iota=x_fund_iota,
         respect_bit=x_respect_bit,
@@ -165,8 +162,6 @@ def test_VowUnit_set_vow_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     x_vow_dir = create_path(x_vows_dir, a23_str)
     x_owners_dir = create_path(x_vow_dir, "owners")
     x_packs_dir = create_path(x_vow_dir, "packs")
-    journal_filename = "journal.db"
-    journal_file_path = create_path(x_vow_dir, journal_filename)
 
     assert not accord_vow._vow_dir
     assert not accord_vow._owners_dir
@@ -175,7 +170,6 @@ def test_VowUnit_set_vow_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     assert os_path_isdir(x_vow_dir) is False
     assert os_path_exists(x_owners_dir) is False
     assert os_path_exists(x_packs_dir) is False
-    assert os_path_exists(journal_file_path) is False
 
     # WHEN
     accord_vow._set_vow_dirs()
@@ -188,7 +182,6 @@ def test_VowUnit_set_vow_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     assert os_path_isdir(x_vow_dir)
     assert os_path_exists(x_owners_dir)
     assert os_path_exists(x_packs_dir)
-    assert os_path_exists(journal_file_path)
 
 
 def test_vowunit_shop_SetsvowsDirs(env_dir_setup_cleanup):
@@ -196,7 +189,7 @@ def test_vowunit_shop_SetsvowsDirs(env_dir_setup_cleanup):
     a23_str = "accord23"
 
     # WHEN
-    a23_vow = vowunit_shop(a23_str, get_module_temp_dir(), in_memory_journal=True)
+    a23_vow = vowunit_shop(a23_str, get_module_temp_dir())
 
     # THEN
     assert a23_vow.vow_label == a23_str
@@ -334,7 +327,6 @@ def test_VowUnit_create_init_job_from_guts_Scenario0_CreatesFile(
         knot=slash_str,
         fund_iota=x_fund_iota,
         respect_bit=x_respect_bit,
-        in_memory_journal=True,
     )
     sue_str = "Sue"
     assert not job_file_exists(vow_mstr_dir, a23_str, sue_str)
@@ -362,7 +354,6 @@ def test_VowUnit_create_init_job_from_guts_Scenario1_ReplacesFile(
         knot=slash_str,
         fund_iota=x_fund_iota,
         respect_bit=x_respect_bit,
-        in_memory_journal=True,
     )
     bob_str = "Bob"
     sue_str = "Sue"
@@ -393,7 +384,6 @@ def test_VowUnit_create_init_job_from_guts_Scenario2_job_Has_gut_Accts(
         knot=slash_str,
         fund_iota=x_fund_iota,
         respect_bit=x_respect_bit,
-        in_memory_journal=True,
     )
     bob_str = "Bob"
     sue_str = "Sue"
@@ -425,7 +415,6 @@ def test_VowUnit_create_init_job_from_guts_Scenario3_gut_FilesAreListenedTo(
         knot=slash_str,
         fund_iota=x_fund_iota,
         respect_bit=x_respect_bit,
-        in_memory_journal=True,
     )
     sue_str = "Sue"
     a23_vow.create_init_job_from_guts(sue_str)
@@ -461,7 +450,7 @@ def test_VowUnit__set_all_healer_dutys_CorrectlySetsdutys(
     # ESTABLISH
     a23_str = "accord23"
     x_vow_mstr_dir = get_module_temp_dir()
-    a23_vow = vowunit_shop(a23_str, x_vow_mstr_dir, in_memory_journal=True)
+    a23_vow = vowunit_shop(a23_str, x_vow_mstr_dir)
     sue_str = "Sue"
     yao_str = "Yao"
     a23_vow.create_init_job_from_guts(sue_str)

@@ -12,7 +12,7 @@ def create_example_vow2() -> VowUnit:
     # ESTABLISH
     x_vow_mstr_dir = get_module_temp_dir()
     a45_str = "accord45"
-    accord_vow = vowunit_shop(a45_str, x_vow_mstr_dir, in_memory_journal=True)
+    accord_vow = vowunit_shop(a45_str, x_vow_mstr_dir)
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"
@@ -115,7 +115,7 @@ def create_example_vow4() -> VowUnit:
     # ESTABLISH
     x_vow_mstr_dir = get_module_temp_dir()
     a45_str = "accord45"
-    accord_vow = vowunit_shop(a45_str, x_vow_mstr_dir, in_memory_journal=True)
+    accord_vow = vowunit_shop(a45_str, x_vow_mstr_dir)
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"

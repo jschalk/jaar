@@ -1,23 +1,10 @@
 from copy import deepcopy as copy_deepcopy
 from inspect import getdoc as inspect_getdoc
+from src.a01_term_logic.rope import create_rope, default_knot_if_None
 from src.a01_term_logic.test._util.a01_str import knot_str
 from src.a02_finance_logic.finance_config import TimeLinePoint
 from src.a06_plan_logic.plan import planunit_shop
-from src.a07_calendar_logic.chrono import (
-    C400Constants,
-    TimeLineLabel,
-    TimeLineUnit,
-    day_length,
-    get_c400_constants,
-    get_day_rope,
-    get_default_timeline_config_dict,
-    get_week_rope,
-    get_year_rope,
-    timeline_config_shop,
-    timelineunit_shop,
-    validate_timeline_config,
-)
-from src.a07_calendar_logic.test._util.a07_str import (
+from src.a07_timeline_logic.test._util.a07_str import (
     c100_str,
     c400_clean_str,
     c400_leap_str,
@@ -35,12 +22,27 @@ from src.a07_calendar_logic.test._util.a07_str import (
     yr4_clean_str,
     yr4_leap_str,
 )
-from src.a07_calendar_logic.test._util.calendar_examples import (
+from src.a07_timeline_logic.test._util.calendar_examples import (
     five_str,
     get_creg_config,
     get_example_timeline_config,
     get_five_config,
     get_squirt_config,
+)
+from src.a07_timeline_logic.timeline import (
+    C400Constants,
+    TimeLineLabel,
+    TimeLineUnit,
+    day_length,
+    get_c400_constants,
+    get_day_rope,
+    get_default_timeline_config_dict,
+    get_timeline_rope,
+    get_week_rope,
+    get_year_rope,
+    timeline_config_shop,
+    timelineunit_shop,
+    validate_timeline_config,
 )
 
 
@@ -58,6 +60,39 @@ def test_TimeLineLabel_exists():
 def test_TimeLinePoint_Exists():
     # ESTABLISH / WHEN / THEN
     assert TimeLinePoint(4) == 4
+
+
+def test_get_timeline_rope_ReturnsObj_Scenario0_default_knot():
+    # ESTABLISH
+    fizz_vow_label = "fizz"
+    buzz_timeline_label = "buzz_time3"
+    default_knot = default_knot_if_None()
+
+    # WHEN
+    buzz_rope = get_timeline_rope(fizz_vow_label, buzz_timeline_label, default_knot)
+
+    # THEN
+    assert buzz_rope
+    time_rope = create_rope(fizz_vow_label, "time")
+    expected_buzz_rope = create_rope(time_rope, buzz_timeline_label)
+    assert buzz_rope == expected_buzz_rope
+
+
+def test_get_timeline_rope_ReturnsObj_Scenario1_slash_knot():
+    # ESTABLISH
+    fizz_vow_label = "fizz"
+    buzz_timeline_label = "buzz_time3"
+    slash_knot = "/"
+    assert slash_knot != default_knot_if_None()
+
+    # WHEN
+    buzz_rope = get_timeline_rope(fizz_vow_label, buzz_timeline_label, slash_knot)
+
+    # THEN
+    assert buzz_rope
+    time_rope = create_rope(fizz_vow_label, "time", slash_knot)
+    expected_buzz_rope = create_rope(time_rope, buzz_timeline_label, slash_knot)
+    assert buzz_rope == expected_buzz_rope
 
 
 def test_C400Constants_Exists():

@@ -15,7 +15,7 @@ from src.a06_plan_logic.test._util.a06_str import (
     mass_str,
     task_str,
 )
-from src.a07_calendar_logic.test._util.calendar_examples import (
+from src.a07_timeline_logic.test._util.calendar_examples import (
     add_time_creg_conceptunit,
     add_time_five_conceptunit,
 )
