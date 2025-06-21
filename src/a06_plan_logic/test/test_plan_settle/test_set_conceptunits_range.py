@@ -458,3 +458,46 @@ def test_PlanUnit_set_concepttree_range_attrs_SetsDescendentConcept_gogo_calc_st
     )
     assert time1_concept._gogo_calc == 13
     assert time1_concept._stop_calc == 15
+
+
+def test_PlanUnit_set_concepttree_range_attrs_SetsDescendentConcept_When_knot_IsNonDefault():
+    # ESTABLISH
+    slash_str = "/"
+    yao_plan = planunit_shop("Yao", knot=slash_str)
+    root_rope = to_rope(yao_plan.bank_label, knot=slash_str)
+    time0_str = "time0"
+    time0_rope = yao_plan.make_l1_rope(time0_str)
+    time0_begin = 7
+    time0_close = 31
+    time0_concept = conceptunit_shop(
+        time0_str, begin=time0_begin, close=time0_close, knot=slash_str
+    )
+    yao_plan.set_l1_concept(time0_concept)
+
+    time1_str = "time1"
+    time1_rope = yao_plan.make_rope(time0_rope, time1_str)
+    yao_plan.set_concept(conceptunit_shop(time1_str), time0_rope)
+    time1_concept = yao_plan.get_concept_obj(time1_rope)
+    root_concept = yao_plan.get_concept_obj(root_rope)
+    yao_plan._set_concept_dict()
+    assert not root_concept._gogo_calc
+    assert not root_concept._stop_calc
+    assert time0_concept.begin == time0_begin
+    assert time0_concept.close == time0_close
+    assert time1_concept.begin != time0_begin
+    assert time1_concept.close != time0_close
+    assert not time1_concept._gogo_calc
+    assert not time1_concept._stop_calc
+    assert yao_plan._range_inheritors == {}
+
+    # WHEN
+    yao_plan._set_concepttree_range_attrs()
+
+    # THEN
+    assert time1_concept.begin != time0_begin
+    assert time1_concept.close != time0_close
+    assert not time1_concept.begin
+    assert not time1_concept.close
+    assert time1_concept._gogo_calc == time0_begin
+    assert time1_concept._stop_calc == time0_close
+    assert yao_plan._range_inheritors == {time1_rope: time0_rope}

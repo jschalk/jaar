@@ -6,7 +6,7 @@ from src.a00_data_toolbox.file_toolbox import create_path, open_json
 from src.a01_term_logic.rope import LabelTerm, RopeTerm, create_rope
 from src.a05_concept_logic.concept import (
     ConceptUnit,
-    all_concepts_between as all_between,
+    all_concepts_between,
     concepts_calculated_range as calc_range,
     conceptunit_shop,
 )
@@ -480,7 +480,12 @@ class PlanTimelinePoint:
         year_rope = get_year_rope(self.x_planunit, self.time_range_root_rope)
         year_concept = self.x_planunit.get_concept_obj(year_rope)
         x_concept_dict = self.x_planunit._concept_dict
-        concept_list = all_between(x_concept_dict, self.time_range_root_rope, year_rope)
+        concept_list = all_concepts_between(
+            x_concept_dict,
+            self.time_range_root_rope,
+            year_rope,
+            knot=self.x_planunit.knot,
+        )
         popen_rangeunit = calc_range(concept_list, self.x_min, self.x_min)
         gogo_month_dict = year_concept.get_kids_in_range(popen_rangeunit.gogo)
         month_concept = None
@@ -514,21 +519,25 @@ class PlanTimelinePoint:
 
         # count 100 year blocks
         c400_clean_rope = get_c400_clean_rope(self.x_planunit, x_time_rope)
-        c400_clean_concept_list = all_between(
-            x_concept_dict, x_time_rope, c400_clean_rope
+        c400_clean_concept_list = all_concepts_between(
+            x_concept_dict, x_time_rope, c400_clean_rope, knot=self.x_planunit.knot
         )
         c400_clean_range = calc_range(c400_clean_concept_list, self.x_min, self.x_min)
         self._c100_count = c400_clean_range.gogo // c400_constants.c100_length
 
         # count 4 year blocks
         c100_rope = get_c100_rope(self.x_planunit, x_time_rope)
-        c100_concept_list = all_between(x_concept_dict, x_time_rope, c100_rope)
+        c100_concept_list = all_concepts_between(
+            x_concept_dict, x_time_rope, c100_rope, knot=self.x_planunit.knot
+        )
         c100_range = calc_range(c100_concept_list, self.x_min, self.x_min)
         self._yr4_count = c100_range.gogo // c400_constants.yr4_leap_length
 
         # count 1 year blocks
         yr4_clean_rope = get_yr4_clean_rope(self.x_planunit, x_time_rope)
-        yr4_clean_concepts = all_between(x_concept_dict, x_time_rope, yr4_clean_rope)
+        yr4_clean_concepts = all_concepts_between(
+            x_concept_dict, x_time_rope, yr4_clean_rope, knot=self.x_planunit.knot
+        )
         yr4_clean_range = calc_range(yr4_clean_concepts, self.x_min, self.x_min)
         self._year_count = yr4_clean_range.gogo // c400_constants.year_length
 

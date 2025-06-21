@@ -625,7 +625,7 @@ def test_ropeterm_valid_dir_path_ReturnsObjWhereSlashNotknotEdgeCases():
     assert ropeterm_valid_dir_path(lap_rope, knot=",") is False
 
 
-def test_all_ropeterms_between_ReturnsObj():
+def test_all_ropeterms_between_ReturnsObj_Scenario0_Default_knot():
     casa_str = "casa"
     sport_str = "sport"
     run_str = "run/swim"
@@ -637,6 +637,28 @@ def test_all_ropeterms_between_ReturnsObj():
     assert all_ropeterms_between(sport_rope, sport_rope) == [sport_rope]
     assert all_ropeterms_between(sport_rope, run_rope) == [sport_rope, run_rope]
     assert all_ropeterms_between(sport_rope, lap_rope) == [
+        sport_rope,
+        run_rope,
+        lap_rope,
+    ]
+
+
+def test_all_ropeterms_between_ReturnsObj_Scenario1_NonDefault_knot():
+    casa_str = "casa"
+    sport_str = "sport"
+    run_str = "run,swim"
+    lap_str = "lap"
+    slash_str = "/"
+    sport_rope = create_rope(casa_str, sport_str, knot=slash_str)
+    run_rope = create_rope(sport_rope, run_str, knot=slash_str)
+    lap_rope = create_rope(run_rope, lap_str, knot=slash_str)
+
+    assert all_ropeterms_between(sport_rope, sport_rope, slash_str) == [sport_rope]
+    assert all_ropeterms_between(sport_rope, run_rope, slash_str) == [
+        sport_rope,
+        run_rope,
+    ]
+    assert all_ropeterms_between(sport_rope, lap_rope, slash_str) == [
         sport_rope,
         run_rope,
         lap_rope,

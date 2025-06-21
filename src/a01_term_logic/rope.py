@@ -155,9 +155,11 @@ def get_ancestor_ropes(rope: RopeTerm, knot: str = None) -> list[RopeTerm]:
     return x_ropes
 
 
-def all_ropeterms_between(src_rope, dst_rope) -> list[RopeTerm]:
+def all_ropeterms_between(
+    src_rope: str, dst_rope: str, knot: str = None
+) -> list[RopeTerm]:
     x_list = []
-    anc_ropes = get_ancestor_ropes(dst_rope)
+    anc_ropes = get_ancestor_ropes(dst_rope, knot)
     while anc_ropes != []:
         anc_rope = anc_ropes.pop()
         if is_sub_rope(anc_rope, src_rope):

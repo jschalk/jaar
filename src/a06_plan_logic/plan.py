@@ -1098,7 +1098,9 @@ class PlanUnit:
                 r_concept._gogo_calc = r_concept.begin
                 r_concept._stop_calc = r_concept.close
             else:
-                parent_rope = get_parent_rope(r_concept.get_concept_rope())
+                parent_rope = get_parent_rope(
+                    rope=r_concept.get_concept_rope(), knot=r_concept.knot
+                )
                 parent_concept = self.get_concept_obj(parent_rope)
                 r_concept._gogo_calc = parent_concept._gogo_calc
                 r_concept._stop_calc = parent_concept._stop_calc
@@ -1106,7 +1108,6 @@ class PlanUnit:
                     math_concept.get_concept_rope()
                 )
             r_concept._mold_gogo_calc_stop_calc()
-
             single_range_concept_list.extend(iter(r_concept._kids.values()))
 
     def _set_concepttree_range_attrs(self):

@@ -18,6 +18,9 @@ def get_bank_plantimelinepoint(bankunit: BankUnit) -> PlanTimelinePoint:
         owner_name="for_plantimelinepoint_calculation",
         bank_label=bankunit.bank_label,
         knot=bankunit.knot,
+        fund_iota=bankunit.fund_iota,
+        respect_bit=bankunit.respect_bit,
+        penny=bankunit.penny,
     )
     timeline_rope = get_timeline_rope(
         bank_label=bankunit.bank_label,
