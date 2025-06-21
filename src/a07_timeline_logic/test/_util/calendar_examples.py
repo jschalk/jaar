@@ -95,14 +95,17 @@ def creg_hour_int_label(x_int: int) -> str:
 
 
 def add_time_creg_conceptunit(x_planunit: PlanUnit) -> PlanUnit:
+    """Add creg timeline conceptunit to planunit"""
     return add_newtimeline_conceptunit(x_planunit, get_creg_config())
 
 
 def add_time_five_conceptunit(x_planunit: PlanUnit) -> PlanUnit:
+    """Add five timeline conceptunit to planunit"""
     return add_newtimeline_conceptunit(x_planunit, get_five_config())
 
 
 def add_time_squirt_conceptunit(x_planunit: PlanUnit) -> PlanUnit:
+    """Add squirt timeline conceptunit to planunit"""
     return add_newtimeline_conceptunit(x_planunit, get_squirt_config())
 
 

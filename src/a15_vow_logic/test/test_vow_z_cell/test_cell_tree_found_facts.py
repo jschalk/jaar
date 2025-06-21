@@ -7,7 +7,7 @@ from src.a15_vow_logic.test._util.a15_env import (
     get_module_temp_dir,
 )
 from src.a15_vow_logic.test._util.example_vows import example_casa_clean_factunit
-from src.a15_vow_logic.vow_tool import set_cell_trees_found_facts
+from src.a15_vow_logic.vow_cell import set_cell_trees_found_facts
 
 
 def test_set_cell_trees_found_facts_Scenario0_RootOnly_NoFacts(

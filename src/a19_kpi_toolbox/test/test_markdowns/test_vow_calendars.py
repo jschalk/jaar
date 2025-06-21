@@ -13,50 +13,49 @@ from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a12_hub_toolbox.hub_path import create_vow_json_path
 from src.a15_vow_logic.vow import vowunit_shop
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
-from src.a19_kpi_toolbox.test._util.a19_str import vow_kpi001_acct_nets_str
-from src.a20_world_logic.test._util.a20_env import (
+from src.a19_kpi_toolbox.kpi_mstr import create_calendar_markdown_files
+from src.a19_kpi_toolbox.test._util.a19_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir as worlds_dir,
+    get_module_temp_dir,
 )
-from src.a20_world_logic.world import worldunit_shop
 
 
-def test_WorldUnit_create_calendar_markdown_files_Senario0_NoFileIfWorldIsEmpty(
+def test_create_calendar_markdown_files_Senario0_NoFileIfWorldIsEmpty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_str = "fizz"
-    output_dir = create_path(worlds_dir(), "output")
-    fizz_world = worldunit_shop(fizz_str, worlds_dir(), output_dir)
-    fizz_world.mud_to_clarity_mstr()
+    temp_dir = get_module_temp_dir()
+    vow_mstr_dir = create_path(temp_dir, "vow_mstr")
+    output_dir = create_path(temp_dir, "output")
     assert not os_path_exists(output_dir)
 
     # WHEN
-    fizz_world.create_calendar_markdown_files()
+    create_calendar_markdown_files(vow_mstr_dir, output_dir)
 
     # THEN
     assert os_path_exists(output_dir)
     assert count_files(output_dir) == 0
 
 
-def test_WorldUnit_create_calendar_markdown_files_Senario1_Add_CreatesFile(
+def test_create_calendar_markdown_files_Senario1_Add_CreatesFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     fizz_str = "fizz"
-    output_dir = create_path(worlds_dir(), "output")
-    fizz_world = worldunit_shop(fizz_str, worlds_dir(), output_dir)
+    temp_dir = get_module_temp_dir()
+    vow_mstr_dir = create_path(temp_dir, "vow_mstr")
+    output_dir = create_path(temp_dir, "output")
     a23_str = "accord23"
-    a23_vow_path = create_vow_json_path(fizz_world._vow_mstr_dir, a23_str)
-    a23_vowunit = vowunit_shop(a23_str, fizz_world._vow_mstr_dir)
+    a23_vow_path = create_vow_json_path(vow_mstr_dir, a23_str)
+    a23_vowunit = vowunit_shop(a23_str, vow_mstr_dir)
     assert a23_vowunit.timeline == timelineunit_shop(get_creg_config())
     save_json(a23_vow_path, None, a23_vowunit.get_dict())
     a23_calendar_md_path = create_path(output_dir, f"{a23_str}_calendar.md")
-    print(f"      {a23_calendar_md_path=}")
+    print(f"{a23_calendar_md_path=}")
     assert not os_path_exists(a23_calendar_md_path)
 
     # WHEN
-    fizz_world.create_calendar_markdown_files()
+    create_calendar_markdown_files(vow_mstr_dir, output_dir)
 
     # THEN
     assert os_path_exists(a23_calendar_md_path)
@@ -64,13 +63,13 @@ def test_WorldUnit_create_calendar_markdown_files_Senario1_Add_CreatesFile(
     assert open(a23_calendar_md_path).read() == expected_csv_str
 
 
-# def test_WorldUnit_create_calendar_markdown_files_Senario1_Add_CreatesFile(
+# def test_create_calendar_markdown_files_Senario1_Add_CreatesFile(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
 #     fizz_str = "fizz"
 #     output_dir = create_path(worlds_dir(), "output")
-#     fizz_world = worldunit_shop(fizz_str, worlds_dir(), output_dir)
+#     fizz_world = shop(fizz_str, worlds_dir(), output_dir)
 #     sue_str = "Sue"
 #     event2 = 2
 #     ex_filename = "fizzbuzz.xlsx"

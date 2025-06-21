@@ -11,7 +11,7 @@ from src.a15_vow_logic.test._util.a15_env import (
     get_module_temp_dir,
 )
 from src.a15_vow_logic.vow import get_from_dict as vowunit_get_from_dict, vowunit_shop
-from src.a15_vow_logic.vow_tool import create_bud_mandate_ledgers
+from src.a15_vow_logic.vow_cell import create_bud_mandate_ledgers
 
 
 def test_create_bud_mandate_ledgers_Scenaro0_BudEmpty(env_dir_setup_cleanup):

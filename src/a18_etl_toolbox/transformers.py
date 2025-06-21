@@ -51,7 +51,7 @@ from src.a12_hub_toolbox.hub_tool import (
     open_plan_file,
 )
 from src.a15_vow_logic.vow import get_from_default_path as vowunit_get_from_default_path
-from src.a15_vow_logic.vow_tool import (
+from src.a15_vow_logic.vow_cell import (
     create_bud_mandate_ledgers,
     create_vow_owners_cell_trees,
     set_cell_tree_cell_mandates,

@@ -19,7 +19,7 @@ from src.a15_vow_logic.test._util.example_vows import (
     get_bob_mop_with_reason_planunit_example,
     get_bob_mop_without_reason_planunit_example,
 )
-from src.a15_vow_logic.vow_tool import DecreeUnit, set_cell_trees_decrees
+from src.a15_vow_logic.vow_cell import DecreeUnit, set_cell_trees_decrees
 
 
 def test_DecreeUnit_Exists():

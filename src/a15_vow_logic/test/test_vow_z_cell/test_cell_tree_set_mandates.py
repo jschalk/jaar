@@ -21,7 +21,7 @@ from src.a15_vow_logic.test._util.example_vows import (
     example_casa_dirty_factunit,
     get_bob_mop_with_reason_planunit_example,
 )
-from src.a15_vow_logic.vow_tool import set_cell_tree_cell_mandates
+from src.a15_vow_logic.vow_cell import set_cell_tree_cell_mandates
 
 
 def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(

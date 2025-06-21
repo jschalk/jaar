@@ -41,7 +41,11 @@ from src.a18_etl_toolbox.transformers import (
     etl_vow_ote1_agg_table_to_vow_ote1_agg_csvs,
     get_pidgin_events_by_dirs,
 )
-from src.a19_kpi_toolbox.kpi_mstr import create_kpi_csvs, populate_kpi_bundle
+from src.a19_kpi_toolbox.kpi_mstr import (
+    create_calendar_markdown_files,
+    create_kpi_csvs,
+    populate_kpi_bundle,
+)
 
 
 class WorldID(str):
@@ -164,6 +168,9 @@ class WorldUnit:
 
     def create_kpi_csvs(self):
         create_kpi_csvs(self.get_db_path(), self.output_dir)
+
+    def create_calendar_markdown_files(self):
+        create_calendar_markdown_files(self._vow_mstr_dir, self.output_dir)
 
     def get_dict(self) -> dict:
         return {
