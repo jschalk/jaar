@@ -17,44 +17,44 @@ from src.a15_bank_logic.bank import (
     bankunit_shop,
     get_from_dict as bankunit_get_from_dict,
 )
-from src.a20_world_logic.test._util.a20_env import (
+from src.a20_fis_logic.fis import fisunit_shop
+from src.a20_fis_logic.test._util.a20_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir as worlds_dir,
+    get_module_temp_dir as fiss_dir,
 )
-from src.a20_world_logic.test._util.example_worlds import (
+from src.a20_fis_logic.test._util.example_fiss import (
     example_casa_clean_factunit,
     get_bob_mop_with_reason_planunit_example,
 )
-from src.a20_world_logic.world import worldunit_shop
 
 
-def test_WorldUnit_calc_bank_bud_acct_mandate_net_ledgers_Scenaro0_BudEmpty(
+def test_FisUnit_calc_bank_bud_acct_mandate_net_ledgers_Scenaro0_BudEmpty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz", worlds_dir())
+    fizz_fis = fisunit_shop("fizz", fiss_dir())
     a23_str = "accord23"
-    bank_mstr_dir = fizz_world._bank_mstr_dir
+    bank_mstr_dir = fizz_fis._bank_mstr_dir
     accord23_bank = bankunit_shop(a23_str, bank_mstr_dir)
-    a23_json_path = create_bank_json_path(fizz_world._bank_mstr_dir, a23_str)
+    a23_json_path = create_bank_json_path(fizz_fis._bank_mstr_dir, a23_str)
     save_file(a23_json_path, None, accord23_bank.get_json())
     print(f"{a23_json_path=}")
-    a23_owners_path = create_bank_owners_dir_path(fizz_world._bank_mstr_dir, a23_str)
+    a23_owners_path = create_bank_owners_dir_path(fizz_fis._bank_mstr_dir, a23_str)
     assert count_dirs_files(a23_owners_path) == 0
 
     # WHEN
-    fizz_world.calc_bank_bud_acct_mandate_net_ledgers()
+    fizz_fis.calc_bank_bud_acct_mandate_net_ledgers()
 
     # THEN
     assert count_dirs_files(a23_owners_path) == 0
 
 
-def test_WorldUnit_calc_bank_bud_acct_mandate_net_ledgers_Scenaro1_SimpleBud(
+def test_FisUnit_calc_bank_bud_acct_mandate_net_ledgers_Scenaro1_SimpleBud(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz", worlds_dir())
-    mstr_dir = fizz_world._bank_mstr_dir
+    fizz_fis = fisunit_shop("fizz", fiss_dir())
+    mstr_dir = fizz_fis._bank_mstr_dir
     a23_str = "accord23"
     accord23_bank = bankunit_shop(a23_str, mstr_dir)
     bob_str = "Bob"
@@ -71,7 +71,7 @@ def test_WorldUnit_calc_bank_bud_acct_mandate_net_ledgers_Scenaro1_SimpleBud(
     assert os_path_exists(bob37_bud_mandate_path) is False
 
     # WHEN
-    fizz_world.calc_bank_bud_acct_mandate_net_ledgers()
+    fizz_fis.calc_bank_bud_acct_mandate_net_ledgers()
 
     # THEN
     assert os_path_exists(bob37_bud_mandate_path)
@@ -82,12 +82,12 @@ def test_WorldUnit_calc_bank_bud_acct_mandate_net_ledgers_Scenaro1_SimpleBud(
     assert gen_bob37_budunit._bud_acct_nets == expected_bud_acct_nets
 
 
-def test_WorldUnit_calc_bank_bud_acct_mandate_net_ledgers_Scenaro2_BudExists(
+def test_FisUnit_calc_bank_bud_acct_mandate_net_ledgers_Scenaro2_BudExists(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz", worlds_dir())
-    mstr_dir = fizz_world._bank_mstr_dir
+    fizz_fis = fisunit_shop("fizz", fiss_dir())
+    mstr_dir = fizz_fis._bank_mstr_dir
     a23_str = "accord23"
 
     # Create BankUnit with bob bud at time 37
@@ -144,7 +144,7 @@ def test_WorldUnit_calc_bank_bud_acct_mandate_net_ledgers_Scenaro2_BudExists(
     assert os_path_exists(bob37_bud_mandate_path) is False
 
     # WHEN
-    fizz_world.calc_bank_bud_acct_mandate_net_ledgers()
+    fizz_fis.calc_bank_bud_acct_mandate_net_ledgers()
 
     # THEN
     assert os_path_exists(bob37_bud_mandate_path)

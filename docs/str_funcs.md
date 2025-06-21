@@ -18,8 +18,8 @@
 - a14_keep_logic: 
 - a15_bank_logic: bank_budunit, bank_paybook, bank_timeline_hour, bank_timeline_month, bank_timeline_weekday, bank_timeoffi, bankunit, brokerunits, cumulative_minute, hour_label, job_listen_rotations, month_label, paybook, weekday_label, weekday_order
 - a16_pidgin_logic: inx_knot, inx_label, inx_name, inx_rope, inx_title, map_otx2inx, otx2inx, otx_key, otx_knot, otx_label, otx_name, otx_rope, otx_title, pidgin_core, pidgin_label, pidgin_name, pidgin_rope, pidgin_title, pidginunit, unknown_str
-- a17_idea_logic: allowed_crud, brick_raw, build_order, delete_insert, delete_insert_update, delete_update, idea_category, idea_number, insert_multiple, insert_one_time, insert_update, world_id
+- a17_idea_logic: allowed_crud, brick_raw, build_order, delete_insert, delete_insert_update, delete_update, fis_id, idea_category, idea_number, insert_multiple, insert_one_time, insert_update
 - a18_etl_toolbox: bank_acct_nets, bank_event_time_agg, brick_agg, brick_valid, events_brick_agg, events_brick_valid, owner_net_amount, sound_agg, sound_raw, voice_agg, voice_raw
 - a19_kpi_toolbox: bank_kpi001_acct_nets
-- a20_world_logic: 
+- a20_fis_logic: 
 - a21_lobby_logic: lobby_id, lobby_mstr_dir, lobbys

@@ -51,7 +51,7 @@ def test_DecreeUnit_get_child_cell_ancestors_ReturnsObj_Scenario0():
     assert x_decreeunit.cell_ancestors != child_cell_ancestors
 
 
-# create a world with, cell.json, found facts and plan events
+# create a fis with, cell.json, found facts and plan events
 # for every found_fact change planevent to that fact
 # create agenda (different than if found_fact was not applied)
 def test_set_cell_trees_decrees_SetsRootAttr_Scenario0_Depth0NoFacts(

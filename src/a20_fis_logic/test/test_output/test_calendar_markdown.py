@@ -14,41 +14,41 @@ from src.a12_hub_toolbox.hub_path import create_bank_json_path
 from src.a15_bank_logic.bank import bankunit_shop
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
 from src.a19_kpi_toolbox.test._util.a19_str import bank_kpi001_acct_nets_str
-from src.a20_world_logic.test._util.a20_env import (
+from src.a20_fis_logic.fis import fisunit_shop
+from src.a20_fis_logic.test._util.a20_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir as worlds_dir,
+    get_module_temp_dir as fiss_dir,
 )
-from src.a20_world_logic.world import worldunit_shop
 
 
-def test_WorldUnit_create_calendar_markdown_files_Senario0_NoFileIfWorldIsEmpty(
+def test_FisUnit_create_calendar_markdown_files_Senario0_NoFileIfFisIsEmpty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     fizz_str = "fizz"
-    output_dir = create_path(worlds_dir(), "output")
-    fizz_world = worldunit_shop(fizz_str, worlds_dir(), output_dir)
-    fizz_world.mud_to_clarity_mstr()
+    output_dir = create_path(fiss_dir(), "output")
+    fizz_fis = fisunit_shop(fizz_str, fiss_dir(), output_dir)
+    fizz_fis.mud_to_clarity_mstr()
     assert not os_path_exists(output_dir)
 
     # WHEN
-    fizz_world.create_calendar_markdown_files()
+    fizz_fis.create_calendar_markdown_files()
 
     # THEN
     assert os_path_exists(output_dir)
     assert count_files(output_dir) == 0
 
 
-def test_WorldUnit_create_calendar_markdown_files_Senario1_FromBankUnitJsonCreateFile(
+def test_FisUnit_create_calendar_markdown_files_Senario1_FromBankUnitJsonCreateFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     fizz_str = "fizz"
-    output_dir = create_path(worlds_dir(), "output")
-    fizz_world = worldunit_shop(fizz_str, worlds_dir(), output_dir)
+    output_dir = create_path(fiss_dir(), "output")
+    fizz_fis = fisunit_shop(fizz_str, fiss_dir(), output_dir)
     a23_str = "accord23"
-    a23_bank_path = create_bank_json_path(fizz_world._bank_mstr_dir, a23_str)
-    a23_bankunit = bankunit_shop(a23_str, fizz_world._bank_mstr_dir)
+    a23_bank_path = create_bank_json_path(fizz_fis._bank_mstr_dir, a23_str)
+    a23_bankunit = bankunit_shop(a23_str, fizz_fis._bank_mstr_dir)
     assert a23_bankunit.timeline == timelineunit_shop(get_creg_config())
     save_json(a23_bank_path, None, a23_bankunit.get_dict())
     a23_calendar_md_path = create_path(output_dir, f"{a23_str}_calendar.md")
@@ -56,7 +56,7 @@ def test_WorldUnit_create_calendar_markdown_files_Senario1_FromBankUnitJsonCreat
     assert not os_path_exists(a23_calendar_md_path)
 
     # WHEN
-    fizz_world.create_calendar_markdown_files()
+    fizz_fis.create_calendar_markdown_files()
 
     # THEN
     assert os_path_exists(a23_calendar_md_path)
@@ -64,17 +64,17 @@ def test_WorldUnit_create_calendar_markdown_files_Senario1_FromBankUnitJsonCreat
     assert open(a23_calendar_md_path).read() == expected_csv_str
 
 
-def test_WorldUnit_create_calendar_markdown_files_Senario2_CreatesFileAfter_mud_to_clarity_mstr(
+def test_FisUnit_create_calendar_markdown_files_Senario2_CreatesFileAfter_mud_to_clarity_mstr(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     fizz_str = "fizz"
-    output_dir = create_path(worlds_dir(), "output")
-    fizz_world = worldunit_shop(fizz_str, worlds_dir(), output_dir)
+    output_dir = create_path(fiss_dir(), "output")
+    fizz_fis = fisunit_shop(fizz_str, fiss_dir(), output_dir)
     sue_str = "Sue"
     event2 = 2
     ex_filename = "fizzbuzz.xlsx"
-    mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
+    mud_file_path = create_path(fizz_fis._mud_dir, ex_filename)
     a23_str = "accord23"
     br00011_columns = [
         event_int_str(),
@@ -86,14 +86,14 @@ def test_WorldUnit_create_calendar_markdown_files_Senario2_CreatesFileAfter_mud_
     br00011_rows = [[event2, sue_str, a23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
-    fizz_world.mud_to_clarity_mstr()
+    fizz_fis.mud_to_clarity_mstr()
 
     a23_calendar_md_path = create_path(output_dir, f"{a23_str}_calendar.md")
     print(f"      {a23_calendar_md_path=}")
     assert not os_path_exists(a23_calendar_md_path)
 
     # WHEN
-    fizz_world.create_calendar_markdown_files()
+    fizz_fis.create_calendar_markdown_files()
 
     # THEN
     assert os_path_exists(a23_calendar_md_path)
