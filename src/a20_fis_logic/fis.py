@@ -48,18 +48,18 @@ from src.a19_kpi_toolbox.kpi_mstr import (
 )
 
 
-class WorldID(str):
+class FisID(str):
     pass
 
 
 @dataclass
-class WorldUnit:
-    world_id: WorldID = None
-    worlds_dir: str = None
+class FisUnit:
+    fis_id: FisID = None
+    fiss_dir: str = None
     output_dir: str = None
-    world_time_pnigh: TimeLinePoint = None
+    fis_time_pnigh: TimeLinePoint = None
     _syntax_otz_dir: str = None
-    _world_dir: str = None
+    _fis_dir: str = None
     _mud_dir: str = None
     _brick_dir: str = None
     _bank_mstr_dir: str = None
@@ -68,7 +68,7 @@ class WorldUnit:
     _pidgin_events: dict[FaceName, set[EventInt]] = None
 
     def get_db_path(self) -> str:
-        return create_path(self._world_dir, "world.db")
+        return create_path(self._fis_dir, "fis.db")
 
     def set_event(self, event_int: EventInt, face_name: FaceName):
         self._events[event_int] = face_name
@@ -90,12 +90,12 @@ class WorldUnit:
         self._mud_dir = x_dir
         set_dir(self._mud_dir)
 
-    def _set_world_dirs(self):
-        self._world_dir = create_path(self.worlds_dir, self.world_id)
-        self._syntax_otz_dir = create_path(self._world_dir, "syntax_otz")
-        self._brick_dir = create_path(self._world_dir, "brick")
-        self._bank_mstr_dir = create_path(self._world_dir, "bank_mstr")
-        set_dir(self._world_dir)
+    def _set_fis_dirs(self):
+        self._fis_dir = create_path(self.fiss_dir, self.fis_id)
+        self._syntax_otz_dir = create_path(self._fis_dir, "syntax_otz")
+        self._brick_dir = create_path(self._fis_dir, "brick")
+        self._bank_mstr_dir = create_path(self._fis_dir, "bank_mstr")
+        set_dir(self._fis_dir)
         set_dir(self._syntax_otz_dir)
         set_dir(self._brick_dir)
         set_dir(self._bank_mstr_dir)
@@ -175,33 +175,33 @@ class WorldUnit:
 
     def get_dict(self) -> dict:
         return {
-            "world_id": self.world_id,
-            "world_time_pnigh": self.world_time_pnigh,
+            "fis_id": self.fis_id,
+            "fis_time_pnigh": self.fis_time_pnigh,
         }
 
 
-def worldunit_shop(
-    world_id: WorldID,
-    worlds_dir: str,
+def fisunit_shop(
+    fis_id: FisID,
+    fiss_dir: str,
     output_dir: str = None,
     mud_dir: str = None,
-    world_time_pnigh: TimeLinePoint = None,
+    fis_time_pnigh: TimeLinePoint = None,
     _bankunits: set[BankLabel] = None,
-) -> WorldUnit:
-    x_worldunit = WorldUnit(
-        world_id=world_id,
-        worlds_dir=worlds_dir,
+) -> FisUnit:
+    x_fisunit = FisUnit(
+        fis_id=fis_id,
+        fiss_dir=fiss_dir,
         output_dir=output_dir,
-        world_time_pnigh=get_0_if_None(world_time_pnigh),
+        fis_time_pnigh=get_0_if_None(fis_time_pnigh),
         _events={},
         _bankunits=get_empty_set_if_None(_bankunits),
         _mud_dir=mud_dir,
         _pidgin_events={},
     )
-    x_worldunit._set_world_dirs()
-    if not x_worldunit._mud_dir:
-        x_worldunit.set_mud_dir(create_path(x_worldunit._world_dir, "mud"))
-    return x_worldunit
+    x_fisunit._set_fis_dirs()
+    if not x_fisunit._mud_dir:
+        x_fisunit.set_mud_dir(create_path(x_fisunit._fis_dir, "mud"))
+    return x_fisunit
 
 
 def init_bankunits_from_dirs(x_dirs: list[str]) -> list[BankUnit]:
