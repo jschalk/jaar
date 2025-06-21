@@ -39,7 +39,7 @@ def test_WorldUnit_create_calendar_markdown_files_Senario0_NoFileIfWorldIsEmpty(
     assert count_files(output_dir) == 0
 
 
-def test_WorldUnit_create_calendar_markdown_files_Senario1_Add_CreatesFile(
+def test_WorldUnit_create_calendar_markdown_files_Senario1_FromVowUnitJsonCreateFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -64,38 +64,38 @@ def test_WorldUnit_create_calendar_markdown_files_Senario1_Add_CreatesFile(
     assert open(a23_calendar_md_path).read() == expected_csv_str
 
 
-# def test_WorldUnit_create_calendar_markdown_files_Senario1_Add_CreatesFile(
-#     env_dir_setup_cleanup,
-# ):
-#     # ESTABLISH
-#     fizz_str = "fizz"
-#     output_dir = create_path(worlds_dir(), "output")
-#     fizz_world = worldunit_shop(fizz_str, worlds_dir(), output_dir)
-#     sue_str = "Sue"
-#     event2 = 2
-#     ex_filename = "fizzbuzz.xlsx"
-#     mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
-#     a23_str = "accord23"
-#     br00011_columns = [
-#         event_int_str(),
-#         face_name_str(),
-#         vow_label_str(),
-#         owner_name_str(),
-#         acct_name_str()
-#     ]
-#     br00011_rows = [[event2, sue_str, a23_str, sue_str, sue_str]]
-#     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
-#     upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
-#     fizz_world.mud_to_clarity_mstr()
+def test_WorldUnit_create_calendar_markdown_files_Senario2_CreatesFileAfter_mud_to_clarity_mstr(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fizz_str = "fizz"
+    output_dir = create_path(worlds_dir(), "output")
+    fizz_world = worldunit_shop(fizz_str, worlds_dir(), output_dir)
+    sue_str = "Sue"
+    event2 = 2
+    ex_filename = "fizzbuzz.xlsx"
+    mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
+    a23_str = "accord23"
+    br00011_columns = [
+        event_int_str(),
+        face_name_str(),
+        vow_label_str(),
+        owner_name_str(),
+        acct_name_str(),
+    ]
+    br00011_rows = [[event2, sue_str, a23_str, sue_str, sue_str]]
+    br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
+    upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
+    fizz_world.mud_to_clarity_mstr()
 
-#     a23_calendar_md_path = create_path(output_dir, f"{a23_str}_calendar.md")
-#     print(f"      {a23_calendar_md_path=}")
-#     assert not os_path_exists(a23_calendar_md_path)
+    a23_calendar_md_path = create_path(output_dir, f"{a23_str}_calendar.md")
+    print(f"      {a23_calendar_md_path=}")
+    assert not os_path_exists(a23_calendar_md_path)
 
-#     # WHEN
-#     fizz_world.create_calendar_markdown_files()
+    # WHEN
+    fizz_world.create_calendar_markdown_files()
 
-#     # THEN
-#     assert os_path_exists(a23_calendar_md_path)
-#     expected_csv_str = "vow_label,owner_name,funds,fund_rank,tasks_count\n"
-#     assert open(a23_calendar_md_path).read() == expected_csv_str
+    # THEN
+    assert os_path_exists(a23_calendar_md_path)
+    expected_csv_str = get_expected_creg_year0_markdown()
+    assert open(a23_calendar_md_path).read() == expected_csv_str

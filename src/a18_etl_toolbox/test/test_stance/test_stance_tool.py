@@ -84,12 +84,13 @@ def test_create_stance0001_file_CreatesFile_Scenario0_NoVowUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    vow_mstr_dir = get_module_temp_dir()
-    stance0001_path = create_stance0001_path(vow_mstr_dir)
+    vow_mstr_dir = create_path(get_module_temp_dir(), "vow_mstr")
+    output_dir = create_path(get_module_temp_dir(), "output")
+    stance0001_path = create_stance0001_path(output_dir)
     assert os_path_exists(stance0001_path) is False
 
     # WHEN
-    create_stance0001_file(vow_mstr_dir)
+    create_stance0001_file(vow_mstr_dir, output_dir)
 
     # THEN
     assert os_path_exists(stance0001_path)
