@@ -3,7 +3,7 @@ from os import remove as os_remove
 from os.path import exists as os_path_exists
 from pytest import fixture as pytest_fixture
 from sqlite3 import Connection as sqlite3_Connection, connect as sqlite3_connect
-from src.a02_finance_logic.test._util.a02_str import owner_name_str, vow_label_str
+from src.a02_finance_logic.test._util.a02_str import bank_label_str, owner_name_str
 from src.a06_plan_logic.test._util.a06_str import (
     acct_name_str,
     gogo_want_str,
@@ -35,7 +35,7 @@ def setup_database_and_csv() -> tuple[sqlite3_Connection, str, str]:  # type: ig
     #     CREATE TABLE {test_table} (
     #         face_name TEXT,
     #         event_int INTEGER,
-    #         vow_label TEXT,
+    #         bank_label TEXT,
     #         owner_name TEXT,
     #         acct_name TEXT,
     #         group_title TEXT,
@@ -48,7 +48,7 @@ def setup_database_and_csv() -> tuple[sqlite3_Connection, str, str]:  # type: ig
     # Create a test CSV file
     with open(test_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write(
-            f"{event_int_str()},{face_name_str()},{vow_label_str()},{owner_name_str()},{acct_name_str()},{group_title_str()},{gogo_want_str()}\n"
+            f"{event_int_str()},{face_name_str()},{bank_label_str()},{owner_name_str()},{acct_name_str()},{group_title_str()},{gogo_want_str()}\n"
         )
         csv_file.write("3,Sue,Accord43,Bob,Bob,;runners,6.5\n")
         csv_file.write("3,Sue,Accord43,Yao,Bob,;runners,7.5\n")
@@ -88,7 +88,7 @@ def test_create_idea_table_from_csv_ChangesDBState(
     expected_columns = [
         (0, event_int_str(), "INTEGER", 0, None, 0),
         (1, face_name_str(), "TEXT", 0, None, 0),
-        (2, vow_label_str(), "TEXT", 0, None, 0),
+        (2, bank_label_str(), "TEXT", 0, None, 0),
         (3, owner_name_str(), "TEXT", 0, None, 0),
         (4, acct_name_str(), "TEXT", 0, None, 0),
         (5, group_title_str(), "TEXT", 0, None, 0),
@@ -99,7 +99,7 @@ def test_create_idea_table_from_csv_ChangesDBState(
     get_idea_sqlite_types_columns = [
         (0, event_int_str(), column_types.get(event_int_str()), 0, None, 0),
         (1, face_name_str(), column_types.get(face_name_str()), 0, None, 0),
-        (2, vow_label_str(), column_types.get(vow_label_str()), 0, None, 0),
+        (2, bank_label_str(), column_types.get(bank_label_str()), 0, None, 0),
         (3, owner_name_str(), column_types.get(owner_name_str()), 0, None, 0),
         (4, acct_name_str(), column_types.get(acct_name_str()), 0, None, 0),
         (5, group_title_str(), column_types.get(group_title_str()), 0, None, 0),
@@ -143,7 +143,7 @@ def test_insert_idea_csv_ChangesDBState_CorrectlyInserts(
     zia_csv_filepath = "zia_brXXXXX.csv"
     with open(zia_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write(
-            f"{event_int_str()},{face_name_str()},{vow_label_str()},{owner_name_str()},{acct_name_str()},{group_title_str()},{gogo_want_str()}\n"
+            f"{event_int_str()},{face_name_str()},{bank_label_str()},{owner_name_str()},{acct_name_str()},{group_title_str()},{gogo_want_str()}\n"
         )
         csv_file.write("7,Zia,Accord55,Yao,Zia,;swimmers,10.2\n")
         csv_file.write("8,Zia,Accord43,Zia,Bob,;runners,11.1\n")
@@ -187,7 +187,7 @@ def test_insert_idea_csv_ChangesDBState_CanCreateTable(
     zia_csv_filepath = "zia_brXXXXX.csv"
     with open(zia_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write(
-            f"{event_int_str()},{face_name_str()},{vow_label_str()},{owner_name_str()},{acct_name_str()},{group_title_str()},{gogo_want_str()}\n"
+            f"{event_int_str()},{face_name_str()},{bank_label_str()},{owner_name_str()},{acct_name_str()},{group_title_str()},{gogo_want_str()}\n"
         )
         csv_file.write("7,Zia,Accord55,Yao,Zia,;swimmers,10.2\n")
         csv_file.write("8,Zia,Accord43,Zia,Bob,;runners,11.1\n")

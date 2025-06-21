@@ -64,33 +64,33 @@ def test_TimeLinePoint_Exists():
 
 def test_get_timeline_rope_ReturnsObj_Scenario0_default_knot():
     # ESTABLISH
-    fizz_vow_label = "fizz"
+    fizz_bank_label = "fizz"
     buzz_timeline_label = "buzz_time3"
     default_knot = default_knot_if_None()
 
     # WHEN
-    buzz_rope = get_timeline_rope(fizz_vow_label, buzz_timeline_label, default_knot)
+    buzz_rope = get_timeline_rope(fizz_bank_label, buzz_timeline_label, default_knot)
 
     # THEN
     assert buzz_rope
-    time_rope = create_rope(fizz_vow_label, "time")
+    time_rope = create_rope(fizz_bank_label, "time")
     expected_buzz_rope = create_rope(time_rope, buzz_timeline_label)
     assert buzz_rope == expected_buzz_rope
 
 
 def test_get_timeline_rope_ReturnsObj_Scenario1_slash_knot():
     # ESTABLISH
-    fizz_vow_label = "fizz"
+    fizz_bank_label = "fizz"
     buzz_timeline_label = "buzz_time3"
     slash_knot = "/"
     assert slash_knot != default_knot_if_None()
 
     # WHEN
-    buzz_rope = get_timeline_rope(fizz_vow_label, buzz_timeline_label, slash_knot)
+    buzz_rope = get_timeline_rope(fizz_bank_label, buzz_timeline_label, slash_knot)
 
     # THEN
     assert buzz_rope
-    time_rope = create_rope(fizz_vow_label, "time", slash_knot)
+    time_rope = create_rope(fizz_bank_label, "time", slash_knot)
     expected_buzz_rope = create_rope(time_rope, buzz_timeline_label, slash_knot)
     assert buzz_rope == expected_buzz_rope
 

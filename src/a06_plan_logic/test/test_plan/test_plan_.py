@@ -8,12 +8,12 @@ from src.a02_finance_logic.finance_config import (
     validate_respect_num,
 )
 from src.a02_finance_logic.test._util.a02_str import (
+    bank_label_str,
     fund_pool_str,
     knot_str,
     owner_name_str,
-    vow_label_str,
 )
-from src.a05_concept_logic.concept import get_default_vow_label as root_label
+from src.a05_concept_logic.concept import get_default_bank_label as root_label
 from src.a06_plan_logic.plan import PlanUnit, planunit_shop
 from src.a06_plan_logic.test._util.a06_str import (
     _keeps_buildable_str,
@@ -41,7 +41,7 @@ def test_PlanUnit_Exists():
 
     # THEN
     assert x_plan
-    assert x_plan.vow_label is None
+    assert x_plan.bank_label is None
     assert x_plan.owner_name is None
     assert x_plan.tally is None
     assert x_plan.accts is None
@@ -90,7 +90,7 @@ def test_PlanUnit_Exists():
         credor_respect_str(),
         debtor_respect_str(),
         "_groupunits",
-        vow_label_str(),
+        bank_label_str(),
         fund_iota_str(),
         fund_pool_str(),
         last_pack_id_str(),
@@ -105,7 +105,7 @@ def test_PlanUnit_Exists():
 def test_planunit_shop_ReturnsObjectWithFilledFields():
     # ESTABLISH
     sue_str = "Sue"
-    iowa_vow_label = "Iowa"
+    iowa_bank_label = "Iowa"
     slash_knot = "/"
     x_fund_pool = 555
     x_fund_iota = 7
@@ -115,7 +115,7 @@ def test_planunit_shop_ReturnsObjectWithFilledFields():
     # WHEN
     x_plan = planunit_shop(
         owner_name=sue_str,
-        vow_label=iowa_vow_label,
+        bank_label=iowa_bank_label,
         knot=slash_knot,
         fund_pool=x_fund_pool,
         fund_iota=x_fund_iota,
@@ -126,7 +126,7 @@ def test_planunit_shop_ReturnsObjectWithFilledFields():
     # THEN
     assert x_plan
     assert x_plan.owner_name == sue_str
-    assert x_plan.vow_label == iowa_vow_label
+    assert x_plan.bank_label == iowa_bank_label
     assert x_plan.tally == 1
     assert x_plan.accts == {}
     assert x_plan.conceptroot is not None
@@ -162,7 +162,7 @@ def test_planunit_shop_ReturnsObjectWithCorrectEmptyField():
 
     # THEN
     assert x_plan.owner_name == ""
-    assert x_plan.vow_label == root_label()
+    assert x_plan.bank_label == root_label()
     assert x_plan.knot == default_knot_if_None()
     assert x_plan.fund_pool == validate_fund_pool()
     assert x_plan.fund_iota == default_fund_iota_if_None()
@@ -173,7 +173,7 @@ def test_planunit_shop_ReturnsObjectWithCorrectEmptyField():
     assert x_plan.conceptroot.root
     assert x_plan.conceptroot._uid == 1
     assert x_plan.conceptroot._level == 0
-    assert x_plan.conceptroot.vow_label == x_plan.vow_label
+    assert x_plan.conceptroot.bank_label == x_plan.bank_label
     assert x_plan.conceptroot.knot == x_plan.knot
     assert x_plan.conceptroot.parent_rope == ""
 
@@ -225,10 +225,10 @@ def test_PlanUnit_set_max_tree_traverse_CorrectlyRaisesError():
 
 def test_PlanUnit_make_rope_ReturnsObj():
     # ESTABLISH
-    x_vow_label = "accord45"
+    x_bank_label = "accord45"
     slash_knot = "/"
     sue_str = "Sue"
-    sue_plan = planunit_shop(sue_str, x_vow_label, knot=slash_knot)
+    sue_plan = planunit_shop(sue_str, x_bank_label, knot=slash_knot)
     casa_str = "casa"
     v1_casa_rope = sue_plan.make_l1_rope(casa_str)
 

@@ -18,7 +18,7 @@ def create_empty_plan_from_plan(
     x_penny = ref_plan.penny
     return planunit_shop(
         owner_name=x_owner_name,
-        vow_label=ref_plan.vow_label,
+        bank_label=ref_plan.bank_label,
         knot=x_knot,
         fund_pool=x_fund_pool,
         fund_iota=x_fund_iota,

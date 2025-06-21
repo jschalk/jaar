@@ -6,7 +6,7 @@
                 "class_type": "NameTerm",
                 "sqlite_datatype": "TEXT"
             },
-            "vow_label": {
+            "bank_label": {
                 "class_type": "LabelTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -71,7 +71,7 @@
                 "class_type": "NameTerm",
                 "sqlite_datatype": "TEXT"
             },
-            "vow_label": {
+            "bank_label": {
                 "class_type": "LabelTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -144,7 +144,7 @@
                 "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
-            "vow_label": {
+            "bank_label": {
                 "class_type": "LabelTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -185,7 +185,7 @@
                 "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
-            "vow_label": {
+            "bank_label": {
                 "class_type": "LabelTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -217,7 +217,7 @@
                 "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
-            "vow_label": {
+            "bank_label": {
                 "class_type": "LabelTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -240,7 +240,7 @@
                 "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
-            "vow_label": {
+            "bank_label": {
                 "class_type": "LabelTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -268,7 +268,7 @@
                 "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
-            "vow_label": {
+            "bank_label": {
                 "class_type": "LabelTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -317,7 +317,7 @@
                 "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
-            "vow_label": {
+            "bank_label": {
                 "class_type": "LabelTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -358,7 +358,7 @@
                 "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
-            "vow_label": {
+            "bank_label": {
                 "class_type": "LabelTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -475,7 +475,7 @@
     "plan_groupunit": {
         "abbreviation": "plngrou",
         "jkeys": {
-            "vow_label": {
+            "bank_label": {
                 "class_type": "LabelTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -528,7 +528,7 @@
     "planunit": {
         "abbreviation": "plnunit",
         "jkeys": {
-            "vow_label": {
+            "bank_label": {
                 "class_type": "LabelTerm",
                 "sqlite_datatype": "TEXT"
             },

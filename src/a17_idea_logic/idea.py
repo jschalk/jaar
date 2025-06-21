@@ -9,7 +9,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_positional_dict,
 )
 from src.a00_data_toolbox.file_toolbox import open_file
-from src.a01_term_logic.term import OwnerName, VowLabel
+from src.a01_term_logic.term import BankLabel, OwnerName
 from src.a06_plan_logic.plan import PlanUnit
 from src.a07_timeline_logic.timeline import timelineunit_shop
 from src.a08_plan_atom_logic.atom import PlanAtom, atomrow_shop
@@ -21,7 +21,7 @@ from src.a09_pack_logic.delta import (
 from src.a09_pack_logic.pack import packunit_shop
 from src.a12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
 from src.a12_hub_toolbox.hubunit import hubunit_shop
-from src.a15_vow_logic.vow import VowUnit, vowunit_shop
+from src.a15_bank_logic.bank import BankUnit, bankunit_shop
 from src.a17_idea_logic.idea_config import (
     get_idea_format_headers,
     get_idearef_from_file,
@@ -89,10 +89,10 @@ def create_idea_df(x_planunit: PlanUnit, idea_name: str) -> DataFrame:
     x_plandelta = plandelta_shop()
     x_plandelta.add_all_planatoms(x_planunit)
     x_idearef = get_idearef_obj(idea_name)
-    x_vow_label = x_planunit.vow_label
+    x_bank_label = x_planunit.bank_label
     x_owner_name = x_planunit.owner_name
     sorted_planatoms = _get_sorted_INSERT_str_planatoms(x_plandelta, x_idearef)
-    d2_list = _create_d2_list(sorted_planatoms, x_idearef, x_vow_label, x_owner_name)
+    d2_list = _create_d2_list(sorted_planatoms, x_idearef, x_bank_label, x_owner_name)
     d2_list = _delta_all_task_values(d2_list, x_idearef)
     x_idea = _generate_idea_dataframe(d2_list, idea_name)
     sorting_columns = x_idearef.get_headers_list()
@@ -111,15 +111,15 @@ def _get_sorted_INSERT_str_planatoms(
 def _create_d2_list(
     sorted_planatoms: list[PlanAtom],
     x_idearef: IdeaRef,
-    x_vow_label: VowLabel,
+    x_bank_label: BankLabel,
     x_owner_name: OwnerName,
 ):
     d2_list = []
     for x_planatom in sorted_planatoms:
         d1_list = []
         for x_attribute in x_idearef.get_headers_list():
-            if x_attribute == "vow_label":
-                d1_list.append(x_vow_label)
+            if x_attribute == "bank_label":
+                d1_list.append(x_bank_label)
             elif x_attribute == "owner_name":
                 d1_list.append(x_owner_name)
             else:
@@ -197,45 +197,45 @@ def make_plandelta(x_csv: str) -> PlanDelta:
 
 def _load_individual_idea_csv(
     complete_csv: str,
-    vow_mstr_dir: str,
-    x_vow_label: VowLabel,
+    bank_mstr_dir: str,
+    x_bank_label: BankLabel,
     x_owner_name: OwnerName,
 ):
-    x_hubunit = hubunit_shop(vow_mstr_dir, x_vow_label, x_owner_name)
+    x_hubunit = hubunit_shop(bank_mstr_dir, x_bank_label, x_owner_name)
     x_hubunit.initialize_pack_gut_files()
     x_plandelta = make_plandelta(complete_csv)
     # x_plandelta = get_minimal_plandelta(x_plandelta, x_gut)
-    x_packunit = packunit_shop(x_owner_name, x_vow_label)
+    x_packunit = packunit_shop(x_owner_name, x_bank_label)
     x_packunit.set_plandelta(x_plandelta)
     x_hubunit.save_pack_file(x_packunit)
     x_hubunit._create_gut_from_packs()
 
 
-def load_idea_csv(vow_mstr_dir: str, x_file_dir: str, x_filename: str):
+def load_idea_csv(bank_mstr_dir: str, x_file_dir: str, x_filename: str):
     x_csv = open_file(x_file_dir, x_filename)
     headers_list, headerless_csv = extract_csv_headers(x_csv)
-    nested_csv = vow_label_owner_name_nested_csv_dict(headerless_csv, delimiter=",")
-    for x_vow_label, vow_dict in nested_csv.items():
-        for x_owner_name, owner_csv in vow_dict.items():
+    nested_csv = bank_label_owner_name_nested_csv_dict(headerless_csv, delimiter=",")
+    for x_bank_label, bank_dict in nested_csv.items():
+        for x_owner_name, owner_csv in bank_dict.items():
             complete_csv = add_headers_to_csv(headers_list, owner_csv)
             _load_individual_idea_csv(
-                complete_csv, vow_mstr_dir, x_vow_label, x_owner_name
+                complete_csv, bank_mstr_dir, x_bank_label, x_owner_name
             )
 
 
-def get_csv_vow_label_owner_name_metrics(
+def get_csv_bank_label_owner_name_metrics(
     headerless_csv: str, delimiter: str = None
-) -> dict[VowLabel, dict[OwnerName, int]]:
+) -> dict[BankLabel, dict[OwnerName, int]]:
     return get_csv_column1_column2_metrics(headerless_csv, delimiter)
 
 
-def vow_label_owner_name_nested_csv_dict(
+def bank_label_owner_name_nested_csv_dict(
     headerless_csv: str, delimiter: str = None
-) -> dict[VowLabel, dict[OwnerName, str]]:
+) -> dict[BankLabel, dict[OwnerName, str]]:
     return create_l2nested_csv_dict(headerless_csv, delimiter)
 
 
-def vow_build_from_df(
+def bank_build_from_df(
     br00000_df: DataFrame,
     br00001_df: DataFrame,
     br00002_df: DataFrame,
@@ -245,28 +245,28 @@ def vow_build_from_df(
     x_fund_iota: float,
     x_respect_bit: float,
     x_penny: float,
-    x_vows_dir: str,
-) -> dict[VowLabel, VowUnit]:
-    vow_hours_dict = _get_vow_hours_dict(br00003_df)
-    vow_months_dict = _get_vow_months_dict(br00004_df)
-    vow_weekdays_dict = _get_vow_weekdays_dict(br00005_df)
+    x_banks_dir: str,
+) -> dict[BankLabel, BankUnit]:
+    bank_hours_dict = _get_bank_hours_dict(br00003_df)
+    bank_months_dict = _get_bank_months_dict(br00004_df)
+    bank_weekdays_dict = _get_bank_weekdays_dict(br00005_df)
 
-    vowunit_dict = {}
+    bankunit_dict = {}
     for index, row in br00000_df.iterrows():
-        x_vow_label = row["vow_label"]
+        x_bank_label = row["bank_label"]
         x_timeline_config = {
             "c400_number": row["c400_number"],
-            "hours_config": vow_hours_dict.get(x_vow_label),
-            "months_config": vow_months_dict.get(x_vow_label),
+            "hours_config": bank_hours_dict.get(x_bank_label),
+            "months_config": bank_months_dict.get(x_bank_label),
             "monthday_distortion": row["monthday_distortion"],
             "timeline_label": row["timeline_label"],
-            "weekdays_config": vow_weekdays_dict.get(x_vow_label),
+            "weekdays_config": bank_weekdays_dict.get(x_bank_label),
             "yr1_jan1_offset": row["yr1_jan1_offset"],
         }
         x_timeline = timelineunit_shop(x_timeline_config)
-        x_vowunit = vowunit_shop(
-            vow_label=x_vow_label,
-            vow_mstr_dir=x_vows_dir,
+        x_bankunit = bankunit_shop(
+            bank_label=x_bank_label,
+            bank_mstr_dir=x_banks_dir,
             timeline=x_timeline,
             knot=row["knot"],
             fund_iota=x_fund_iota,
@@ -274,52 +274,52 @@ def vow_build_from_df(
             penny=x_penny,
             job_listen_rotations=row["job_listen_rotations"],
         )
-        vowunit_dict[x_vowunit.vow_label] = x_vowunit
-        _add_budunits_from_df(x_vowunit, br00001_df)
-        _add_paypurchases_from_df(x_vowunit, br00002_df)
-    return vowunit_dict
+        bankunit_dict[x_bankunit.bank_label] = x_bankunit
+        _add_budunits_from_df(x_bankunit, br00001_df)
+        _add_paypurchases_from_df(x_bankunit, br00002_df)
+    return bankunit_dict
 
 
-def _get_vow_hours_dict(br00003_df: DataFrame) -> dict[str, list[str, str]]:
-    vow_hours_dict = {}
-    for y_vow_label in br00003_df.vow_label.unique():
-        query_str = f"vow_label == '{y_vow_label}'"
+def _get_bank_hours_dict(br00003_df: DataFrame) -> dict[str, list[str, str]]:
+    bank_hours_dict = {}
+    for y_bank_label in br00003_df.bank_label.unique():
+        query_str = f"bank_label == '{y_bank_label}'"
         x_hours_list = [
             [row["hour_label"], row["cumulative_minute"]]
             for index, row in br00003_df.query(query_str).iterrows()
         ]
-        vow_hours_dict[y_vow_label] = x_hours_list
-    return vow_hours_dict
+        bank_hours_dict[y_bank_label] = x_hours_list
+    return bank_hours_dict
 
 
-def _get_vow_months_dict(br00004_df: DataFrame) -> dict[str, list[str, str]]:
-    vow_months_dict = {}
-    for y_vow_label in br00004_df.vow_label.unique():
-        query_str = f"vow_label == '{y_vow_label}'"
+def _get_bank_months_dict(br00004_df: DataFrame) -> dict[str, list[str, str]]:
+    bank_months_dict = {}
+    for y_bank_label in br00004_df.bank_label.unique():
+        query_str = f"bank_label == '{y_bank_label}'"
         x_months_list = [
             [row["month_label"], row["cumulative_day"]]
             for index, row in br00004_df.query(query_str).iterrows()
         ]
-        vow_months_dict[y_vow_label] = x_months_list
-    return vow_months_dict
+        bank_months_dict[y_bank_label] = x_months_list
+    return bank_months_dict
 
 
-def _get_vow_weekdays_dict(br00005_df: DataFrame) -> dict[str, list[str, str]]:
-    vow_weekdays_dict = {}
-    for y_vow_label in br00005_df.vow_label.unique():
-        query_str = f"vow_label == '{y_vow_label}'"
+def _get_bank_weekdays_dict(br00005_df: DataFrame) -> dict[str, list[str, str]]:
+    bank_weekdays_dict = {}
+    for y_bank_label in br00005_df.bank_label.unique():
+        query_str = f"bank_label == '{y_bank_label}'"
         x_weekdays_list = [
             row["weekday_label"]
             for index, row in br00005_df.query(query_str).iterrows()
         ]
-        vow_weekdays_dict[y_vow_label] = x_weekdays_list
-    return vow_weekdays_dict
+        bank_weekdays_dict[y_bank_label] = x_weekdays_list
+    return bank_weekdays_dict
 
 
-def _add_budunits_from_df(x_vowunit: VowUnit, br00001_df: DataFrame):
-    query_str = f"vow_label == '{x_vowunit.vow_label}'"
+def _add_budunits_from_df(x_bankunit: BankUnit, br00001_df: DataFrame):
+    query_str = f"bank_label == '{x_bankunit.bank_label}'"
     for index, row in br00001_df.query(query_str).iterrows():
-        x_vowunit.add_budunit(
+        x_bankunit.add_budunit(
             owner_name=row["owner_name"],
             bud_time=row["bud_time"],
             quota=row["quota"],
@@ -328,10 +328,10 @@ def _add_budunits_from_df(x_vowunit: VowUnit, br00001_df: DataFrame):
         )
 
 
-def _add_paypurchases_from_df(x_vowunit: VowUnit, br00002_df: DataFrame):
-    query_str = f"vow_label == '{x_vowunit.vow_label}'"
+def _add_paypurchases_from_df(x_bankunit: BankUnit, br00002_df: DataFrame):
+    query_str = f"bank_label == '{x_bankunit.bank_label}'"
     for index, row in br00002_df.query(query_str).iterrows():
-        x_vowunit.add_paypurchase(
+        x_bankunit.add_paypurchase(
             owner_name=row["owner_name"],
             acct_name=row["acct_name"],
             tran_time=row["tran_time"],
@@ -339,7 +339,7 @@ def _add_paypurchases_from_df(x_vowunit: VowUnit, br00002_df: DataFrame):
         )
 
 
-def _add_time_offi_units_from_df(x_vowunit: VowUnit, br00006_df: DataFrame):
-    query_str = f"vow_label == '{x_vowunit.vow_label}'"
+def _add_time_offi_units_from_df(x_bankunit: BankUnit, br00006_df: DataFrame):
+    query_str = f"bank_label == '{x_bankunit.bank_label}'"
     for index, row in br00006_df.query(query_str).iterrows():
-        x_vowunit.offi_times.add(row["offi_time"])
+        x_bankunit.offi_times.add(row["offi_time"])

@@ -489,8 +489,8 @@ def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_1atom(
     sue_hubunit.save_pack_file(sue_1planatoms_packunit())
     save_gut_file(env_dir(), sue_hubunit.default_gut_plan())
     gut_plan = open_gut_file(env_dir(), "accord23", sue_str)
-    print(f"{gut_plan.vow_label=}")
-    print(f"{sue_hubunit.vow_label=}")
+    print(f"{gut_plan.bank_label=}")
+    print(f"{sue_hubunit.bank_label=}")
     sports_str = "sports"
     sports_rope = gut_plan.make_l1_rope(sports_str)
     knee_str = "knee"
@@ -514,7 +514,7 @@ def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_2atoms(
     sue_hubunit.save_pack_file(sue_2planatoms_packunit())
     save_gut_file(env_dir(), sue_hubunit.default_gut_plan())
     gut_plan = open_gut_file(env_dir(), "accord23", sue_str)
-    print(f"{gut_plan.vow_label=}")
+    print(f"{gut_plan.bank_label=}")
     sports_str = "sports"
     sports_rope = gut_plan.make_l1_rope(sports_str)
     knee_str = "knee"

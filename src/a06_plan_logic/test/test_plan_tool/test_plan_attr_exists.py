@@ -98,7 +98,7 @@ def test_plan_conceptunit_exists_ReturnsObj():
     clean_str = "clean"
     clean_rope = sue_plan.make_rope(casa_rope, clean_str)
     sweep_rope = sue_plan.make_rope(clean_rope, "sweep")
-    root_rope = to_rope(sue_plan.vow_label)
+    root_rope = to_rope(sue_plan.bank_label)
     root_jkeys = {concept_rope_str(): root_rope}
     casa_jkeys = {concept_rope_str(): casa_rope}
     clean_jkeys = {concept_rope_str(): clean_rope}
@@ -138,9 +138,9 @@ def test_plan_concept_awardlink_exists_ReturnsObj():
     casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_plan.make_rope(casa_rope, clean_str)
-    root_rope = to_rope(sue_plan.vow_label)
+    root_rope = to_rope(sue_plan.bank_label)
     swim_str = "Swim"
-    root_rope = to_rope(sue_plan.vow_label)
+    root_rope = to_rope(sue_plan.bank_label)
     root_jkeys = {concept_rope_str(): root_rope, awardee_title_str(): swim_str}
     casa_jkeys = {concept_rope_str(): casa_rope, awardee_title_str(): swim_str}
     clean_jkeys = {concept_rope_str(): clean_rope, awardee_title_str(): swim_str}
@@ -168,7 +168,7 @@ def test_plan_concept_reasonunit_exists_ReturnsObj():
     casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_plan.make_rope(casa_rope, clean_str)
-    root_rope = to_rope(sue_plan.vow_label)
+    root_rope = to_rope(sue_plan.bank_label)
     wk_str = "wk"
     wk_rope = sue_plan.make_l1_rope(wk_str)
     root_jkeys = {concept_rope_str(): root_rope, rcontext_str(): wk_rope}
@@ -199,7 +199,7 @@ def test_plan_concept_reason_premiseunit_exists_ReturnsObj():
     casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_plan.make_rope(casa_rope, clean_str)
-    root_rope = to_rope(sue_plan.vow_label)
+    root_rope = to_rope(sue_plan.bank_label)
     wk_str = "wk"
     wk_rope = sue_plan.make_l1_rope(wk_str)
     thur_rope = sue_plan.make_rope(wk_rope, "thur")
@@ -254,7 +254,7 @@ def test_plan_concept_laborlink_exists_ReturnsObj():
     casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_plan.make_rope(casa_rope, clean_str)
-    root_rope = to_rope(sue_plan.vow_label)
+    root_rope = to_rope(sue_plan.bank_label)
     swim_str = "Swim"
     root_jkeys = {concept_rope_str(): root_rope, labor_title_str(): swim_str}
     casa_jkeys = {concept_rope_str(): casa_rope, labor_title_str(): swim_str}
@@ -284,7 +284,7 @@ def test_plan_concept_healerlink_exists_ReturnsObj():
     casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_plan.make_rope(casa_rope, clean_str)
-    root_rope = to_rope(sue_plan.vow_label)
+    root_rope = to_rope(sue_plan.bank_label)
     swim_str = "Swim"
     root_jkeys = {concept_rope_str(): root_rope, healer_name_str(): swim_str}
     casa_jkeys = {concept_rope_str(): casa_rope, healer_name_str(): swim_str}
@@ -313,7 +313,7 @@ def test_plan_concept_factunit_exists_ReturnsObj():
     casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_plan.make_rope(casa_rope, clean_str)
-    root_rope = to_rope(sue_plan.vow_label)
+    root_rope = to_rope(sue_plan.bank_label)
     wk_str = "wk"
     wk_rope = sue_plan.make_l1_rope(wk_str)
     root_jkeys = {concept_rope_str(): root_rope, fcontext_str(): wk_rope}
@@ -399,7 +399,7 @@ def test_plan_attr_exists_ReturnsObj_plan_conceptunit():
     clean_str = "clean"
     clean_rope = sue_plan.make_rope(casa_rope, clean_str)
     sweep_rope = sue_plan.make_rope(clean_rope, "sweep")
-    x_parent_rope = to_rope(sue_plan.vow_label)
+    x_parent_rope = to_rope(sue_plan.bank_label)
     root_jkeys = {concept_rope_str(): x_parent_rope}
     casa_jkeys = {concept_rope_str(): casa_rope}
     clean_jkeys = {concept_rope_str(): clean_rope}
@@ -440,7 +440,7 @@ def test_plan_attr_exists_ReturnsObj_plan_concept_awardlink():
     casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_plan.make_rope(casa_rope, clean_str)
-    root_rope = to_rope(sue_plan.vow_label)
+    root_rope = to_rope(sue_plan.bank_label)
     swim_str = "Swim"
     x_dimen = plan_concept_awardlink_str()
     root_jkeys = {concept_rope_str(): root_rope, awardee_title_str(): swim_str}
@@ -470,7 +470,7 @@ def test_plan_attr_exists_ReturnsObj_plan_concept_reasonunit():
     casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_plan.make_rope(casa_rope, clean_str)
-    root_rope = to_rope(sue_plan.vow_label)
+    root_rope = to_rope(sue_plan.bank_label)
     wk_str = "wk"
     wk_rope = sue_plan.make_l1_rope(wk_str)
     x_dimen = plan_concept_reasonunit_str()
@@ -501,7 +501,7 @@ def test_plan_attr_exists_ReturnsObj_plan_concept_reason_premiseunit():
     casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_plan.make_rope(casa_rope, clean_str)
-    root_rope = to_rope(sue_plan.vow_label)
+    root_rope = to_rope(sue_plan.bank_label)
     wk_str = "wk"
     wk_rope = sue_plan.make_l1_rope(wk_str)
     thur_rope = sue_plan.make_rope(wk_rope, "thur")
@@ -555,7 +555,7 @@ def test_plan_attr_exists_ReturnsObj_plan_concept_laborlink():
     casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_plan.make_rope(casa_rope, clean_str)
-    root_rope = to_rope(sue_plan.vow_label)
+    root_rope = to_rope(sue_plan.bank_label)
     swim_str = "Swim"
     x_dimen = plan_concept_laborlink_str()
     root_jkeys = {concept_rope_str(): root_rope, labor_title_str(): swim_str}
@@ -586,7 +586,7 @@ def test_plan_attr_exists_ReturnsObj_plan_concept_healerlink():
     casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_plan.make_rope(casa_rope, clean_str)
-    root_rope = to_rope(sue_plan.vow_label)
+    root_rope = to_rope(sue_plan.bank_label)
     swim_str = "Swim"
     x_dimen = plan_concept_healerlink_str()
     root_jkeys = {concept_rope_str(): root_rope, healer_name_str(): swim_str}
@@ -616,7 +616,7 @@ def test_plan_attr_exists_ReturnsObj_plan_concept_factunit():
     casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_plan.make_rope(casa_rope, clean_str)
-    root_rope = to_rope(sue_plan.vow_label)
+    root_rope = to_rope(sue_plan.bank_label)
     wk_str = "wk"
     wk_rope = sue_plan.make_l1_rope(wk_str)
     x_dimen = plan_concept_factunit_str()

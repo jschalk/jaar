@@ -9,7 +9,7 @@
         "face_name": {
             "otx_key": true
         },
-        "vow_label": {
+        "bank_label": {
             "otx_key": true
         },
         "inx_rope": {
@@ -27,6 +27,6 @@
         "pidgin_rope",
         "plan_acctunit",
         "planunit",
-        "vowunit"
+        "bankunit"
     ]
 }

@@ -1,7 +1,7 @@
 from src.a01_term_logic.rope import RopeTerm, create_rope, create_rope_from_labels
-from src.a01_term_logic.term import VowLabel
+from src.a01_term_logic.term import BankLabel
 from src.a02_finance_logic.bud import BudUnit, budunit_shop
-from src.a05_concept_logic.concept import get_default_vow_label
+from src.a05_concept_logic.concept import get_default_bank_label
 from src.a06_plan_logic.test._util.a06_str import (
     acct_name_str,
     concept_rope_str,
@@ -25,22 +25,22 @@ from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.a12_hub_toolbox.test._util.a12_env import get_module_temp_dir
 
 
-def get_atom_example_conceptunit_sports(vow_label: VowLabel = None) -> PlanAtom:
-    if not vow_label:
-        vow_label = "accord23"
+def get_atom_example_conceptunit_sports(bank_label: BankLabel = None) -> PlanAtom:
+    if not bank_label:
+        bank_label = "accord23"
     sports_str = "sports"
     x_dimen = plan_conceptunit_str()
-    sports_rope = create_rope(vow_label, sports_str)
+    sports_rope = create_rope(bank_label, sports_str)
     insert_conceptunit_planatom = planatom_shop(x_dimen, INSERT_str())
     insert_conceptunit_planatom.set_jkey(concept_rope_str(), sports_rope)
     return insert_conceptunit_planatom
 
 
-def get_atom_example_conceptunit_ball(vow_label: VowLabel = None) -> PlanAtom:
-    if not vow_label:
-        vow_label = "accord23"
+def get_atom_example_conceptunit_ball(bank_label: BankLabel = None) -> PlanAtom:
+    if not bank_label:
+        bank_label = "accord23"
     sports_str = "sports"
-    sports_rope = create_rope(vow_label, sports_str)
+    sports_rope = create_rope(bank_label, sports_str)
     ball_str = "basketball"
     x_dimen = plan_conceptunit_str()
     bball_rope = create_rope(sports_rope, ball_str)
@@ -49,11 +49,11 @@ def get_atom_example_conceptunit_ball(vow_label: VowLabel = None) -> PlanAtom:
     return insert_conceptunit_planatom
 
 
-def get_atom_example_conceptunit_knee(vow_label: VowLabel = None) -> PlanAtom:
-    if not vow_label:
-        vow_label = "accord23"
+def get_atom_example_conceptunit_knee(bank_label: BankLabel = None) -> PlanAtom:
+    if not bank_label:
+        bank_label = "accord23"
     sports_str = "sports"
-    sports_rope = create_rope(vow_label, sports_str)
+    sports_rope = create_rope(bank_label, sports_str)
     knee_str = "knee"
     knee_begin = 1
     knee_close = 71
@@ -68,15 +68,15 @@ def get_atom_example_conceptunit_knee(vow_label: VowLabel = None) -> PlanAtom:
     return insert_conceptunit_planatom
 
 
-def get_atom_example_factunit_knee(vow_label: VowLabel = None) -> PlanAtom:
-    if not vow_label:
-        vow_label = "accord23"
+def get_atom_example_factunit_knee(bank_label: BankLabel = None) -> PlanAtom:
+    if not bank_label:
+        bank_label = "accord23"
     sports_str = "sports"
-    sports_rope = create_rope(vow_label, sports_str)
+    sports_rope = create_rope(bank_label, sports_str)
     ball_str = "basketball"
     ball_rope = create_rope(sports_rope, ball_str)
     knee_str = "knee"
-    knee_rope = create_rope(vow_label, knee_str)
+    knee_rope = create_rope(bank_label, knee_str)
     knee_fopen = 7
     knee_fnigh = 23
     x_dimen = plan_concept_factunit_str()
@@ -105,18 +105,18 @@ def get_plandelta_sue_example() -> PlanDelta:
 
 
 def get_texas_rope() -> RopeTerm:
-    vow_label = get_default_vow_label()
+    bank_label = get_default_bank_label()
     nation_str = "nation"
     usa_str = "USA"
     texas_str = "Texas"
-    return create_rope_from_labels([vow_label, nation_str, usa_str, texas_str])
+    return create_rope_from_labels([bank_label, nation_str, usa_str, texas_str])
 
 
 def get_texas_hubunit() -> HubUnit:
-    vow_label = get_default_vow_label()
+    bank_label = get_default_bank_label()
     return hubunit_shop(
         get_module_temp_dir(),
-        vow_label,
+        bank_label,
         owner_name="Sue",
         keep_rope=get_texas_rope(),
         # pipeline_duty_vision_str(),

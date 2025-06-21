@@ -1,0 +1,21 @@
+{
+    "attributes": {
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "bank_label": {
+            "otx_key": true
+        },
+        "offi_time": {
+            "otx_key": true
+        }
+    },
+    "idea_number": "br00006",
+    "dimens": [
+        "bankunit",
+        "bank_timeoffi"
+    ]
+}

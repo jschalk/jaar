@@ -2,7 +2,7 @@ from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import to_rope
 from src.a05_concept_logic.concept import (
     conceptunit_shop,
-    get_default_vow_label as root_label,
+    get_default_bank_label as root_label,
 )
 from src.a06_plan_logic.plan import planunit_shop
 from src.a06_plan_logic.test._util.example_plans import (
@@ -27,7 +27,7 @@ def test_PlanUnit_edit_concept_label_FailsWhenConceptDoesNotExist():
     assert str(excinfo.value) == f"Concept old_rope='{no_concept_rope}' does not exist"
 
 
-def test_PlanUnit_edit_concept_label_RaisesErrorForLevel0ConceptWhen_vow_label_isNone():
+def test_PlanUnit_edit_concept_label_RaisesErrorForLevel0ConceptWhen_bank_label_isNone():
     # ESTABLISH
     yao_str = "Yao"
     yao_plan = planunit_shop(owner_name=yao_str)
@@ -39,11 +39,11 @@ def test_PlanUnit_edit_concept_label_RaisesErrorForLevel0ConceptWhen_vow_label_i
     yao_plan.set_l1_concept(conceptunit_shop(casa_str))
     yao_plan.set_concept(conceptunit_shop(swim_str), parent_rope=casa_rope)
     assert yao_plan.owner_name == yao_str
-    assert yao_plan.conceptroot.concept_label == yao_plan.vow_label
+    assert yao_plan.conceptroot.concept_label == yao_plan.bank_label
     casa_concept = yao_plan.get_concept_obj(casa_rope)
-    assert casa_concept.parent_rope == to_rope(yao_plan.vow_label)
+    assert casa_concept.parent_rope == to_rope(yao_plan.bank_label)
     swim_concept = yao_plan.get_concept_obj(swim_rope)
-    root_rope = to_rope(yao_plan.vow_label)
+    root_rope = to_rope(yao_plan.bank_label)
     assert swim_concept.parent_rope == casa_rope
 
     # WHEN / THEN
@@ -52,14 +52,14 @@ def test_PlanUnit_edit_concept_label_RaisesErrorForLevel0ConceptWhen_vow_label_i
         yao_plan.edit_concept_label(old_rope=root_rope, new_concept_label=moon_str)
     assert (
         str(excinfo.value)
-        == f"Cannot set conceptroot to string different than '{yao_plan.vow_label}'"
+        == f"Cannot set conceptroot to string different than '{yao_plan.bank_label}'"
     )
 
     assert yao_plan.conceptroot.concept_label != moon_str
-    assert yao_plan.conceptroot.concept_label == yao_plan.vow_label
+    assert yao_plan.conceptroot.concept_label == yao_plan.bank_label
 
 
-def test_PlanUnit_edit_concept_label_RaisesErrorForLevel0When_vow_label_IsDifferent():
+def test_PlanUnit_edit_concept_label_RaisesErrorForLevel0When_bank_label_IsDifferent():
     # ESTABLISH
     yao_str = "Yao"
     yao_plan = planunit_shop(owner_name=yao_str)
@@ -70,11 +70,11 @@ def test_PlanUnit_edit_concept_label_RaisesErrorForLevel0When_vow_label_IsDiffer
     yao_plan.set_l1_concept(conceptunit_shop(casa_str))
     yao_plan.set_concept(conceptunit_shop(swim_str), parent_rope=casa_rope)
     sun_str = "sun"
-    yao_plan.vow_label = sun_str
-    yao_plan.conceptroot.vow_label = sun_str
+    yao_plan.bank_label = sun_str
+    yao_plan.conceptroot.bank_label = sun_str
     assert yao_plan.owner_name == yao_str
-    assert yao_plan.vow_label == sun_str
-    assert yao_plan.conceptroot.vow_label == sun_str
+    assert yao_plan.bank_label == sun_str
+    assert yao_plan.conceptroot.bank_label == sun_str
     assert yao_plan.conceptroot.concept_label == root_label()
     casa_concept = yao_plan.get_concept_obj(casa_rope)
     assert casa_concept.parent_rope == to_rope(root_label())
@@ -242,7 +242,7 @@ def test_plan_set_owner_name_CorrectlyModifiesBoth():
     # ESTABLISH
     sue_plan = get_planunit_with_4_levels_and_2reasons_2facts()
     assert sue_plan.owner_name == "Sue"
-    assert sue_plan.conceptroot.concept_label == sue_plan.vow_label
+    assert sue_plan.conceptroot.concept_label == sue_plan.bank_label
     # mid_concept_label1 = "Yao"
     # sue_plan.edit_concept_label(old_rope=old_concept_label, new_concept_label=mid_concept_label1)
     # assert sue_plan.owner_name == old_concept_label
@@ -254,7 +254,7 @@ def test_plan_set_owner_name_CorrectlyModifiesBoth():
 
     # THEN
     assert sue_plan.owner_name == bob_str
-    assert sue_plan.conceptroot.concept_label == sue_plan.vow_label
+    assert sue_plan.conceptroot.concept_label == sue_plan.bank_label
 
 
 def test_plan_edit_concept_label_RaisesErrorIfknotIsInLabel():

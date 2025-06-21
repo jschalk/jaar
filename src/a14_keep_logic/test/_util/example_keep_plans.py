@@ -1,31 +1,31 @@
-from src.a06_plan_logic.plan import PlanUnit, VowLabel, conceptunit_shop, planunit_shop
-from src.a14_keep_logic.test._util.a14_env import temp_vow_label
+from src.a06_plan_logic.plan import BankLabel, PlanUnit, conceptunit_shop, planunit_shop
+from src.a14_keep_logic.test._util.a14_env import temp_bank_label
 
 
 def get_1label_plan() -> PlanUnit:
     x_plan = planunit_shop("A")
-    x_plan.set_vow_label(temp_vow_label())
+    x_plan.set_bank_label(temp_bank_label())
     x_plan.settle_plan()
     return x_plan
 
 
 def get_Jlabel2label_plan() -> PlanUnit:
     x_plan = planunit_shop("J")
-    x_plan.set_vow_label(temp_vow_label())
+    x_plan.set_bank_label(temp_bank_label())
     x_plan.set_l1_concept(conceptunit_shop("A"))
     x_plan.settle_plan()
     return x_plan
 
 
-def get_2label_plan(vow_label: VowLabel = None) -> PlanUnit:
-    if vow_label is None:
-        vow_label = temp_vow_label()
+def get_2label_plan(bank_label: BankLabel = None) -> PlanUnit:
+    if bank_label is None:
+        bank_label = temp_bank_label()
     a_str = "A"
     b_str = "B"
     x_plan = planunit_shop(owner_name=a_str)
-    x_plan.set_vow_label(vow_label)
+    x_plan.set_bank_label(bank_label)
     concept_b = conceptunit_shop(b_str)
-    x_plan.set_concept(concept_b, parent_rope=temp_vow_label())
+    x_plan.set_concept(concept_b, parent_rope=temp_bank_label())
     x_plan.settle_plan()
     return x_plan
 
@@ -33,7 +33,7 @@ def get_2label_plan(vow_label: VowLabel = None) -> PlanUnit:
 def get_3label_plan() -> PlanUnit:
     a_str = "A"
     x_plan = planunit_shop(a_str)
-    x_plan.set_vow_label(temp_vow_label())
+    x_plan.set_bank_label(temp_bank_label())
     x_plan.set_l1_concept(conceptunit_shop("B"))
     x_plan.set_l1_concept(conceptunit_shop("C"))
     x_plan.settle_plan()
@@ -43,7 +43,7 @@ def get_3label_plan() -> PlanUnit:
 def get_3label_D_E_F_plan() -> PlanUnit:
     d_str = "D"
     x_plan = planunit_shop(d_str)
-    x_plan.set_vow_label(temp_vow_label())
+    x_plan.set_bank_label(temp_bank_label())
     x_plan.set_l1_concept(conceptunit_shop("E"))
     x_plan.set_l1_concept(conceptunit_shop("F"))
     x_plan.settle_plan()
@@ -52,7 +52,7 @@ def get_3label_D_E_F_plan() -> PlanUnit:
 
 def get_6label_plan() -> PlanUnit:
     x_plan = planunit_shop("A")
-    x_plan.set_vow_label(temp_vow_label())
+    x_plan.set_bank_label(temp_bank_label())
     x_plan.set_l1_concept(conceptunit_shop("B"))
     x_plan.set_l1_concept(conceptunit_shop("C"))
     c_rope = x_plan.make_l1_rope("C")
@@ -65,7 +65,7 @@ def get_6label_plan() -> PlanUnit:
 
 def get_7labelInsertH_plan() -> PlanUnit:
     x_plan = planunit_shop("A")
-    x_plan.set_vow_label(temp_vow_label())
+    x_plan.set_bank_label(temp_bank_label())
     x_plan.set_l1_concept(conceptunit_shop("B"))
     x_plan.set_l1_concept(conceptunit_shop("C"))
     c_rope = x_plan.make_l1_rope("C")
@@ -79,7 +79,7 @@ def get_7labelInsertH_plan() -> PlanUnit:
 
 def get_5labelHG_plan() -> PlanUnit:
     x_plan = planunit_shop("A")
-    x_plan.set_vow_label(temp_vow_label())
+    x_plan.set_bank_label(temp_bank_label())
     x_plan.set_l1_concept(conceptunit_shop("B"))
     x_plan.set_l1_concept(conceptunit_shop("C"))
     c_rope = x_plan.make_l1_rope("C")
@@ -91,7 +91,7 @@ def get_5labelHG_plan() -> PlanUnit:
 
 def get_7labelJRoot_plan() -> PlanUnit:
     x_plan = planunit_shop("J")
-    x_plan.set_vow_label(temp_vow_label())
+    x_plan.set_bank_label(temp_bank_label())
     x_plan.set_l1_concept(conceptunit_shop("A"))
 
     a_rope = x_plan.make_l1_rope("A")

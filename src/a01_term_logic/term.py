@@ -24,8 +24,8 @@ class AxiomLabel(LabelTerm):
     pass
 
 
-class VowLabel(AxiomLabel):  # Created to help track the object class relations
-    """An AxiomLabel for a Vow Vow. Cannot contain knot"""
+class BankLabel(AxiomLabel):  # Created to help track the object class relations
+    """An AxiomLabel for a Bank Bank. Cannot contain knot"""
 
     pass
 

@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
 from pandas import DataFrame
 from src.a00_data_toolbox.file_toolbox import count_files, create_path, save_json
-from src.a02_finance_logic.test._util.a02_str import owner_name_str, vow_label_str
+from src.a02_finance_logic.test._util.a02_str import bank_label_str, owner_name_str
 from src.a06_plan_logic.test._util.a06_str import acct_name_str
 from src.a07_timeline_logic.calendar_markdown import get_calendarmarkdown_str
 from src.a07_timeline_logic.test._util.calendar_examples import (
@@ -10,10 +10,10 @@ from src.a07_timeline_logic.test._util.calendar_examples import (
 )
 from src.a07_timeline_logic.timeline import timelineunit_shop
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a12_hub_toolbox.hub_path import create_vow_json_path
-from src.a15_vow_logic.vow import vowunit_shop
+from src.a12_hub_toolbox.hub_path import create_bank_json_path
+from src.a15_bank_logic.bank import bankunit_shop
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
-from src.a19_kpi_toolbox.test._util.a19_str import vow_kpi001_acct_nets_str
+from src.a19_kpi_toolbox.test._util.a19_str import bank_kpi001_acct_nets_str
 from src.a20_world_logic.test._util.a20_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as worlds_dir,
@@ -39,7 +39,7 @@ def test_WorldUnit_create_calendar_markdown_files_Senario0_NoFileIfWorldIsEmpty(
     assert count_files(output_dir) == 0
 
 
-def test_WorldUnit_create_calendar_markdown_files_Senario1_FromVowUnitJsonCreateFile(
+def test_WorldUnit_create_calendar_markdown_files_Senario1_FromBankUnitJsonCreateFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -47,10 +47,10 @@ def test_WorldUnit_create_calendar_markdown_files_Senario1_FromVowUnitJsonCreate
     output_dir = create_path(worlds_dir(), "output")
     fizz_world = worldunit_shop(fizz_str, worlds_dir(), output_dir)
     a23_str = "accord23"
-    a23_vow_path = create_vow_json_path(fizz_world._vow_mstr_dir, a23_str)
-    a23_vowunit = vowunit_shop(a23_str, fizz_world._vow_mstr_dir)
-    assert a23_vowunit.timeline == timelineunit_shop(get_creg_config())
-    save_json(a23_vow_path, None, a23_vowunit.get_dict())
+    a23_bank_path = create_bank_json_path(fizz_world._bank_mstr_dir, a23_str)
+    a23_bankunit = bankunit_shop(a23_str, fizz_world._bank_mstr_dir)
+    assert a23_bankunit.timeline == timelineunit_shop(get_creg_config())
+    save_json(a23_bank_path, None, a23_bankunit.get_dict())
     a23_calendar_md_path = create_path(output_dir, f"{a23_str}_calendar.md")
     print(f"      {a23_calendar_md_path=}")
     assert not os_path_exists(a23_calendar_md_path)
@@ -79,7 +79,7 @@ def test_WorldUnit_create_calendar_markdown_files_Senario2_CreatesFileAfter_mud_
     br00011_columns = [
         event_int_str(),
         face_name_str(),
-        vow_label_str(),
+        bank_label_str(),
         owner_name_str(),
         acct_name_str(),
     ]

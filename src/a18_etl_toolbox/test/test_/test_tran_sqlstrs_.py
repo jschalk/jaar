@@ -6,10 +6,10 @@ from src.a00_data_toolbox.db_toolbox import (
     required_columns_exist,
 )
 from src.a02_finance_logic.test._util.a02_str import (
+    bank_label_str,
     bud_time_str,
     owner_name_str,
     tran_time_str,
-    vow_label_str,
 )
 from src.a06_plan_logic.test._util.a06_str import (
     plan_acct_membership_str,
@@ -26,15 +26,15 @@ from src.a06_plan_logic.test._util.a06_str import (
 from src.a08_plan_atom_logic.atom_config import get_delete_key_name
 from src.a09_pack_logic.test._util.a09_str import event_int_str
 from src.a10_plan_calc.test._util.a10_str import plan_groupunit_str
-from src.a12_hub_toolbox.test._util.a12_str import job_str, vow_ote1_agg_str
-from src.a15_vow_logic.test._util.a15_str import (
-    vow_budunit_str,
-    vow_paybook_str,
-    vow_timeline_hour_str,
-    vow_timeline_month_str,
-    vow_timeline_weekday_str,
-    vow_timeoffi_str,
-    vowunit_str,
+from src.a12_hub_toolbox.test._util.a12_str import bank_ote1_agg_str, job_str
+from src.a15_bank_logic.test._util.a15_str import (
+    bank_budunit_str,
+    bank_paybook_str,
+    bank_timeline_hour_str,
+    bank_timeline_month_str,
+    bank_timeline_weekday_str,
+    bank_timeoffi_str,
+    bankunit_str,
 )
 from src.a16_pidgin_logic.test._util.a16_str import (
     pidgin_core_str,
@@ -54,19 +54,19 @@ from src.a17_idea_logic.idea_db_tool import (
 )
 from src.a17_idea_logic.test._util.a17_str import idea_category_str
 from src.a18_etl_toolbox.test._util.a18_str import (
+    bank_acct_nets_str,
+    bank_event_time_agg_str,
     owner_net_amount_str,
-    vow_acct_nets_str,
-    vow_event_time_agg_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
-    CREATE_VOW_ACCT_NETS_SQLSTR,
-    CREATE_VOW_EVENT_TIME_AGG_SQLSTR,
-    CREATE_VOW_OTE1_AGG_SQLSTR,
+    CREATE_BANK_ACCT_NETS_SQLSTR,
+    CREATE_BANK_EVENT_TIME_AGG_SQLSTR,
+    CREATE_BANK_OTE1_AGG_SQLSTR,
     IDEA_STAGEBLE_DEL_DIMENS,
-    INSERT_VOW_EVENT_TIME_AGG_SQLSTR,
-    INSERT_VOW_OTE1_AGG_FROM_VOICE_SQLSTR,
-    UPDATE_ERROR_MESSAGE_VOW_EVENT_TIME_AGG_SQLSTR,
+    INSERT_BANK_EVENT_TIME_AGG_SQLSTR,
+    INSERT_BANK_OTE1_AGG_FROM_VOICE_SQLSTR,
+    UPDATE_ERROR_MESSAGE_BANK_EVENT_TIME_AGG_SQLSTR,
     create_all_idea_tables,
     create_prime_tablename,
     create_sound_and_voice_tables,
@@ -94,13 +94,13 @@ def test_create_prime_tablename_ReturnsObj():
     plnlabo_dimen = plan_concept_laborlink_str()
     plnheal_dimen = plan_concept_healerlink_str()
     plnfact_dimen = plan_concept_factunit_str()
-    vowunit_dimen = vowunit_str()
-    vowpayy_dimen = vow_paybook_str()
-    vowbudd_dimen = vow_budunit_str()
-    vowhour_dimen = vow_timeline_hour_str()
-    vowmont_dimen = vow_timeline_month_str()
-    vowweek_dimen = vow_timeline_weekday_str()
-    vowoffi_dimen = vow_timeoffi_str()
+    bankunit_dimen = bankunit_str()
+    bnkpayy_dimen = bank_paybook_str()
+    bnkbudd_dimen = bank_budunit_str()
+    bnkhour_dimen = bank_timeline_hour_str()
+    bnkmont_dimen = bank_timeline_month_str()
+    bnkweek_dimen = bank_timeline_weekday_str()
+    bnkoffi_dimen = bank_timeoffi_str()
     pidname_dimen = pidgin_name_str()
     pidlabe_dimen = pidgin_label_str()
     pidrope_dimen = pidgin_rope_str()
@@ -124,13 +124,13 @@ def test_create_prime_tablename_ReturnsObj():
     plnheal_s_agg_table = create_prime_tablename("plnheal", "s", agg_str, put_str)
     plnfact_s_agg_table = create_prime_tablename("plnfact", "s", agg_str, put_str)
     plnfact_s_del_table = create_prime_tablename("plnfact", "s", agg_str, del_str)
-    vowunit_s_agg_table = create_prime_tablename("vowunit", "s", agg_str)
-    vowpayy_s_agg_table = create_prime_tablename("vowpayy", "s", agg_str)
-    vowbudd_s_agg_table = create_prime_tablename("vowbudd", "s", agg_str)
-    vowhour_s_agg_table = create_prime_tablename("vowhour", "s", agg_str)
-    vowmont_s_agg_table = create_prime_tablename("vowmont", "s", agg_str)
-    vowweek_s_agg_table = create_prime_tablename("vowweek", "s", agg_str)
-    vowoffi_s_agg_table = create_prime_tablename("vowoffi", "s", agg_str)
+    bankunit_s_agg_table = create_prime_tablename("bankunit", "s", agg_str)
+    bnkpayy_s_agg_table = create_prime_tablename("bnkpayy", "s", agg_str)
+    bnkbudd_s_agg_table = create_prime_tablename("bnkbudd", "s", agg_str)
+    bnkhour_s_agg_table = create_prime_tablename("bnkhour", "s", agg_str)
+    bnkmont_s_agg_table = create_prime_tablename("bnkmont", "s", agg_str)
+    bnkweek_s_agg_table = create_prime_tablename("bnkweek", "s", agg_str)
+    bnkoffi_s_agg_table = create_prime_tablename("bnkoffi", "s", agg_str)
     pidname_s_agg_table = create_prime_tablename("pidname", "s", agg_str)
     pidlabe_s_agg_table = create_prime_tablename("pidlabe", "s", agg_str)
     pidrope_s_agg_table = create_prime_tablename("pidrope", "s", agg_str)
@@ -156,13 +156,13 @@ def test_create_prime_tablename_ReturnsObj():
     assert plnheal_s_agg_table == f"{plnheal_dimen}_s_put_agg"
     assert plnfact_s_agg_table == f"{plnfact_dimen}_s_put_agg"
     assert plnfact_s_del_table == f"{plnfact_dimen}_s_del_agg"
-    assert vowunit_s_agg_table == f"{vowunit_dimen}_s_agg"
-    assert vowpayy_s_agg_table == f"{vowpayy_dimen}_s_agg"
-    assert vowbudd_s_agg_table == f"{vowbudd_dimen}_s_agg"
-    assert vowhour_s_agg_table == f"{vowhour_dimen}_s_agg"
-    assert vowmont_s_agg_table == f"{vowmont_dimen}_s_agg"
-    assert vowweek_s_agg_table == f"{vowweek_dimen}_s_agg"
-    assert vowoffi_s_agg_table == f"{vowoffi_dimen}_s_agg"
+    assert bankunit_s_agg_table == f"{bankunit_dimen}_s_agg"
+    assert bnkpayy_s_agg_table == f"{bnkpayy_dimen}_s_agg"
+    assert bnkbudd_s_agg_table == f"{bnkbudd_dimen}_s_agg"
+    assert bnkhour_s_agg_table == f"{bnkhour_dimen}_s_agg"
+    assert bnkmont_s_agg_table == f"{bnkmont_dimen}_s_agg"
+    assert bnkweek_s_agg_table == f"{bnkweek_dimen}_s_agg"
+    assert bnkoffi_s_agg_table == f"{bnkoffi_dimen}_s_agg"
     assert pidname_s_agg_table == f"{pidname_dimen}_s_agg"
     assert pidlabe_s_agg_table == f"{pidlabe_dimen}_s_agg"
     assert pidrope_s_agg_table == f"{pidrope_dimen}_s_agg"
@@ -177,11 +177,11 @@ def test_create_prime_tablename_ReturnsObj():
     assert x_plnacct_raw == "plan_acctunit_raw"
 
 
-def test_create_all_idea_tables_CreatesVowRawTables():
+def test_create_all_idea_tables_CreatesBankRawTables():
     # ESTABLISH sourcery skip: no-loop-in-tests
     idea_numbers = get_idea_numbers()
-    with sqlite3_connect(":memory:") as vow_db_conn:
-        cursor = vow_db_conn.cursor()
+    with sqlite3_connect(":memory:") as bank_db_conn:
+        cursor = bank_db_conn.cursor()
         for idea_number in idea_numbers:
             assert db_table_exists(cursor, f"{idea_number}_raw") is False
 
@@ -203,10 +203,10 @@ def test_get_idea_stageble_put_dimens_HasAll_idea_numbersForAll_dimens():
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
         if dimen_config.get(idea_category_str()) != "pidgin"
-        # if dimen_config.get(idea_category_str()) == "vow"
+        # if dimen_config.get(idea_category_str()) == "bank"
     }
-    with sqlite3_connect(":memory:") as vow_db_conn:
-        cursor = vow_db_conn.cursor()
+    with sqlite3_connect(":memory:") as bank_db_conn:
+        cursor = bank_db_conn.cursor()
         create_all_idea_tables(cursor)
         create_sound_and_voice_tables(cursor)
 
@@ -251,7 +251,7 @@ def test_get_idea_stageble_put_dimens_HasAll_idea_numbersForAll_dimens():
                     assert generated_sqlstr != ""
 
     idea_stageble_dimen_list = sorted(list(expected_idea_slabelable_dimens))
-    print(f"{expected_idea_slabelable_dimens=}")
+    print(expected_idea_slabelable_dimens)
     assert idea_dimen_combo_checked_count == 680
     assert idea_raw2dimen_count == 109
     assert get_idea_stageble_put_dimens() == expected_idea_slabelable_dimens
@@ -266,10 +266,10 @@ def test_IDEA_STAGEBLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
         if dimen_config.get(idea_category_str()) != "pidgin"
-        # if dimen_config.get(idea_category_str()) == "vow"
+        # if dimen_config.get(idea_category_str()) == "bank"
     }
-    with sqlite3_connect(":memory:") as vow_db_conn:
-        cursor = vow_db_conn.cursor()
+    with sqlite3_connect(":memory:") as bank_db_conn:
+        cursor = bank_db_conn.cursor()
         create_all_idea_tables(cursor)
         create_sound_and_voice_tables(cursor)
 
@@ -323,11 +323,11 @@ def test_IDEA_STAGEBLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
     assert IDEA_STAGEBLE_DEL_DIMENS == expected_idea_slabelable_dimens
 
 
-def test_CREATE_VOW_EVENT_TIME_AGG_SQLSTR_Exists():
+def test_CREATE_BANK_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_create_table_sqlstr = f"""
-CREATE TABLE IF NOT EXISTS {vow_event_time_agg_str()} (
-  {vow_label_str()} TEXT
+CREATE TABLE IF NOT EXISTS {bank_event_time_agg_str()} (
+  {bank_label_str()} TEXT
 , {event_int_str()} INTEGER
 , agg_time INTEGER
 , error_message TEXT
@@ -335,59 +335,59 @@ CREATE TABLE IF NOT EXISTS {vow_event_time_agg_str()} (
 ;
 """
     # WHEN / THEN
-    assert CREATE_VOW_EVENT_TIME_AGG_SQLSTR == expected_create_table_sqlstr
+    assert CREATE_BANK_EVENT_TIME_AGG_SQLSTR == expected_create_table_sqlstr
 
 
-def test_INSERT_VOW_EVENT_TIME_AGG_SQLSTR_Exists():
+def test_INSERT_BANK_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_INSERT_sqlstr = f"""
-INSERT INTO {vow_event_time_agg_str()} ({vow_label_str()}, {event_int_str()}, agg_time)
-SELECT {vow_label_str()}, {event_int_str()}, agg_time
+INSERT INTO {bank_event_time_agg_str()} ({bank_label_str()}, {event_int_str()}, agg_time)
+SELECT {bank_label_str()}, {event_int_str()}, agg_time
 FROM (
-    SELECT {vow_label_str()}, {event_int_str()}, {tran_time_str()} as agg_time
-    FROM vow_paybook_raw
-    GROUP BY {vow_label_str()}, {event_int_str()}, {tran_time_str()}
+    SELECT {bank_label_str()}, {event_int_str()}, {tran_time_str()} as agg_time
+    FROM bank_paybook_raw
+    GROUP BY {bank_label_str()}, {event_int_str()}, {tran_time_str()}
     UNION 
-    SELECT {vow_label_str()}, {event_int_str()}, {bud_time_str()} as agg_time
-    FROM vow_budunit_raw
-    GROUP BY {vow_label_str()}, {event_int_str()}, {bud_time_str()}
+    SELECT {bank_label_str()}, {event_int_str()}, {bud_time_str()} as agg_time
+    FROM bank_budunit_raw
+    GROUP BY {bank_label_str()}, {event_int_str()}, {bud_time_str()}
 )
-ORDER BY {vow_label_str()}, {event_int_str()}, agg_time
+ORDER BY {bank_label_str()}, {event_int_str()}, agg_time
 ;
 """
     # WHEN / THEN
-    assert INSERT_VOW_EVENT_TIME_AGG_SQLSTR == expected_INSERT_sqlstr
+    assert INSERT_BANK_EVENT_TIME_AGG_SQLSTR == expected_INSERT_sqlstr
 
 
-def test_UPDATE_ERROR_MESSAGE_VOW_EVENT_TIME_AGG_SQLSTR_Exists():
+def test_UPDATE_ERROR_MESSAGE_BANK_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_UPDATE_sqlstr = f"""
 WITH EventTimeOrdered AS (
-    SELECT {vow_label_str()}, {event_int_str()}, agg_time,
-           LAG(agg_time) OVER (PARTITION BY {vow_label_str()} ORDER BY {event_int_str()}) AS prev_agg_time
-    FROM {vow_event_time_agg_str()}
+    SELECT {bank_label_str()}, {event_int_str()}, agg_time,
+           LAG(agg_time) OVER (PARTITION BY {bank_label_str()} ORDER BY {event_int_str()}) AS prev_agg_time
+    FROM {bank_event_time_agg_str()}
 )
-UPDATE {vow_event_time_agg_str()}
+UPDATE {bank_event_time_agg_str()}
 SET error_message = CASE 
          WHEN EventTimeOrdered.prev_agg_time > EventTimeOrdered.agg_time
          THEN 'not sorted'
          ELSE 'sorted'
        END 
 FROM EventTimeOrdered
-WHERE EventTimeOrdered.{event_int_str()} = {vow_event_time_agg_str()}.{event_int_str()}
-    AND EventTimeOrdered.{vow_label_str()} = {vow_event_time_agg_str()}.{vow_label_str()}
-    AND EventTimeOrdered.agg_time = {vow_event_time_agg_str()}.agg_time
+WHERE EventTimeOrdered.{event_int_str()} = {bank_event_time_agg_str()}.{event_int_str()}
+    AND EventTimeOrdered.{bank_label_str()} = {bank_event_time_agg_str()}.{bank_label_str()}
+    AND EventTimeOrdered.agg_time = {bank_event_time_agg_str()}.agg_time
 ;
 """
     # WHEN / THEN
-    assert UPDATE_ERROR_MESSAGE_VOW_EVENT_TIME_AGG_SQLSTR == expected_UPDATE_sqlstr
+    assert UPDATE_ERROR_MESSAGE_BANK_EVENT_TIME_AGG_SQLSTR == expected_UPDATE_sqlstr
 
 
-def test_CREATE_VOW_OTE1_AGG_SQLSTR_Exists():
+def test_CREATE_BANK_OTE1_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_create_table_sqlstr = f"""
-CREATE TABLE IF NOT EXISTS {vow_ote1_agg_str()} (
-  {vow_label_str()} TEXT
+CREATE TABLE IF NOT EXISTS {bank_ote1_agg_str()} (
+  {bank_label_str()} TEXT
 , {owner_name_str()} TEXT
 , {event_int_str()} INTEGER
 , {bud_time_str()} INTEGER
@@ -396,42 +396,42 @@ CREATE TABLE IF NOT EXISTS {vow_ote1_agg_str()} (
 ;
 """
     # WHEN / THEN
-    assert CREATE_VOW_OTE1_AGG_SQLSTR == expected_create_table_sqlstr
+    assert CREATE_BANK_OTE1_AGG_SQLSTR == expected_create_table_sqlstr
 
 
 # TODO create test to prove this insert should grab minimun event_int instead of just event_int
 # TODO create test to prove this insert should never grab when error message is not null in source table
-def test_INSERT_VOW_OTE1_AGG_FROM_VOICE_SQLSTR_Exists():
+def test_INSERT_BANK_OTE1_AGG_FROM_VOICE_SQLSTR_Exists():
     # ESTABLISH
-    vowbud_v_raw_tablename = create_prime_tablename(vow_budunit_str(), "v", "raw")
+    bankbud_v_raw_tablename = create_prime_tablename(bank_budunit_str(), "v", "raw")
     expected_INSERT_sqlstr = f"""
-INSERT INTO {vow_ote1_agg_str()} ({vow_label_str()}, {owner_name_str()}, {event_int_str()}, {bud_time_str()})
-SELECT {vow_label_str()}, {owner_name_str()}, {event_int_str()}, {bud_time_str()}
+INSERT INTO {bank_ote1_agg_str()} ({bank_label_str()}, {owner_name_str()}, {event_int_str()}, {bud_time_str()})
+SELECT {bank_label_str()}, {owner_name_str()}, {event_int_str()}, {bud_time_str()}
 FROM (
     SELECT 
-      {vow_label_str()}_inx {vow_label_str()}
+      {bank_label_str()}_inx {bank_label_str()}
     , {owner_name_str()}_inx {owner_name_str()}
     , {event_int_str()}
     , {bud_time_str()}
-    FROM {vowbud_v_raw_tablename}
-    GROUP BY {vow_label_str()}_inx, {owner_name_str()}_inx, {event_int_str()}, {bud_time_str()}
+    FROM {bankbud_v_raw_tablename}
+    GROUP BY {bank_label_str()}_inx, {owner_name_str()}_inx, {event_int_str()}, {bud_time_str()}
 )
-ORDER BY {vow_label_str()}, {owner_name_str()}, {event_int_str()}, {bud_time_str()}
+ORDER BY {bank_label_str()}, {owner_name_str()}, {event_int_str()}, {bud_time_str()}
 ;
 """
     # WHEN / THEN
-    assert INSERT_VOW_OTE1_AGG_FROM_VOICE_SQLSTR == expected_INSERT_sqlstr
+    assert INSERT_BANK_OTE1_AGG_FROM_VOICE_SQLSTR == expected_INSERT_sqlstr
 
 
-def test_CREATE_VOW_ACCT_NETS_SQLSTR_Exists():
+def test_CREATE_BANK_ACCT_NETS_SQLSTR_Exists():
     # ESTABLISH
     sqlite_types = get_idea_sqlite_types()
     sqlite_types[owner_net_amount_str()] = "REAL"
     expected_create_table_sqlstr = get_create_table_sqlstr(
-        tablename=vow_acct_nets_str(),
-        columns_list=[vow_label_str(), owner_name_str(), owner_net_amount_str()],
+        tablename=bank_acct_nets_str(),
+        columns_list=[bank_label_str(), owner_name_str(), owner_net_amount_str()],
         column_types=sqlite_types,
     )
 
     # WHEN / THEN
-    assert CREATE_VOW_ACCT_NETS_SQLSTR == expected_create_table_sqlstr
+    assert CREATE_BANK_ACCT_NETS_SQLSTR == expected_create_table_sqlstr

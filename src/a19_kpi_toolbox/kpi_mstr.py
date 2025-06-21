@@ -7,14 +7,16 @@ from src.a00_data_toolbox.file_toolbox import (
     set_dir,
 )
 from src.a07_timeline_logic.calendar_markdown import get_calendarmarkdown_str
-from src.a15_vow_logic.vow import get_from_default_path as vowunit_get_from_default_path
-from src.a15_vow_logic.vow_timeline import get_vow_plantimelinepoint
+from src.a15_bank_logic.bank import (
+    get_from_default_path as bankunit_get_from_default_path,
+)
+from src.a15_bank_logic.bank_timeline import get_bank_plantimelinepoint
 from src.a17_idea_logic.idea_db_tool import save_table_to_csv
-from src.a19_kpi_toolbox.kpi_sqlstrs import get_vow_kpi001_acct_nets_sqlstr
+from src.a19_kpi_toolbox.kpi_sqlstrs import get_bank_kpi001_acct_nets_sqlstr
 
 
 def create_populate_kpi001_table(cursor: sqlite3_Cursor):
-    cursor.execute(get_vow_kpi001_acct_nets_sqlstr())
+    cursor.execute(get_bank_kpi001_acct_nets_sqlstr())
 
 
 def get_default_kpi_bundle() -> str:
@@ -25,14 +27,14 @@ def get_all_kpi_functions() -> dict[str,]:
     """
     Returns a dict of all KPI ids and their functions.
     """
-    return {"vow_kpi001_acct_nets": create_populate_kpi001_table}
+    return {"bank_kpi001_acct_nets": create_populate_kpi001_table}
 
 
 def get_bundles_config() -> dict[str]:
     """
     Returns a set of all KPI strings.
     """
-    return {"default_kpi_bundle": {"vow_kpi001_acct_nets"}}
+    return {"default_kpi_bundle": {"bank_kpi001_acct_nets"}}
 
 
 def get_kpi_set_from_bundle(bundle_id: str = None) -> set[str]:
@@ -52,7 +54,7 @@ def populate_kpi_bundle(cursor: sqlite3_Cursor, bundle_id: str = None):
     bundle_kpi_ids = get_kpi_set_from_bundle(bundle_id)
     kpi_functions = get_all_kpi_functions()
     for kpi_id in bundle_kpi_ids:
-        if kpi_id == "vow_kpi001_acct_nets":
+        if kpi_id == "bank_kpi001_acct_nets":
             create_populate_kpi001_table(cursor)
 
 
@@ -64,16 +66,18 @@ def create_kpi_csvs(db_path: str, dst_dir: str):
             save_table_to_csv(cursor, dst_dir, kpi_table)
 
 
-def create_calendar_markdown_files(vow_mstr_dir: str, output_dir: str):
+def create_calendar_markdown_files(bank_mstr_dir: str, output_dir: str):
     set_dir(output_dir)
-    vows_dir = create_path(vow_mstr_dir, "vows")
-    for vow_label in get_level1_dirs(vows_dir):
-        vow_calendar_md_path = create_path(output_dir, f"{vow_label}_calendar.md")
-        x_vowunit = vowunit_get_from_default_path(vow_mstr_dir, vow_label)
-        vow_plantimelinepoint = get_vow_plantimelinepoint(x_vowunit)
-        vow_year_num = vow_plantimelinepoint._year_num
-        vow_timeline_config = x_vowunit.timeline.get_dict()
-        x_calendarmarkdown = get_calendarmarkdown_str(vow_timeline_config, vow_year_num)
-        save_file(vow_calendar_md_path, None, x_calendarmarkdown)
+    banks_dir = create_path(bank_mstr_dir, "banks")
+    for bank_label in get_level1_dirs(banks_dir):
+        bank_calendar_md_path = create_path(output_dir, f"{bank_label}_calendar.md")
+        x_bankunit = bankunit_get_from_default_path(bank_mstr_dir, bank_label)
+        bank_plantimelinepoint = get_bank_plantimelinepoint(x_bankunit)
+        bank_year_num = bank_plantimelinepoint._year_num
+        bank_timeline_config = x_bankunit.timeline.get_dict()
+        x_calendarmarkdown = get_calendarmarkdown_str(
+            bank_timeline_config, bank_year_num
+        )
+        save_file(bank_calendar_md_path, None, x_calendarmarkdown)
 
     # a23_calendar_md_path = create_path(output_dir, f"{a23_str}_calendar.md")

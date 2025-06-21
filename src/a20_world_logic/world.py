@@ -6,19 +6,24 @@ from sqlite3 import (
 )
 from src.a00_data_toolbox.dict_toolbox import get_0_if_None, get_empty_set_if_None
 from src.a00_data_toolbox.file_toolbox import create_path, delete_dir, set_dir
-from src.a01_term_logic.term import EventInt, FaceName, VowLabel
+from src.a01_term_logic.term import BankLabel, EventInt, FaceName
 from src.a02_finance_logic.bud import TimeLinePoint
-from src.a15_vow_logic.vow import VowUnit
+from src.a15_bank_logic.bank import BankUnit
 from src.a18_etl_toolbox.stance_tool import create_stance0001_file
 from src.a18_etl_toolbox.transformers import (
+    etl_bank_guts_to_bank_jobs,
+    etl_bank_job_jsons_to_job_tables,
+    etl_bank_json_acct_nets_to_bank_acct_nets_table,
+    etl_bank_ote1_agg_csvs_to_jsons,
+    etl_bank_ote1_agg_table_to_bank_ote1_agg_csvs,
     etl_brick_agg_tables_to_brick_valid_tables,
     etl_brick_raw_tables_to_brick_agg_tables,
     etl_brick_raw_tables_to_events_brick_agg_table,
     etl_brick_valid_tables_to_sound_raw_tables,
+    etl_create_bank_cell_trees,
     etl_create_bud_mandate_ledgers,
     etl_create_buds_root_cells,
-    etl_create_vow_cell_trees,
-    etl_event_inherited_planunits_to_vow_gut,
+    etl_event_inherited_planunits_to_bank_gut,
     etl_event_pack_json_to_event_inherited_planunits,
     etl_event_plan_csvs_to_pack_json,
     etl_events_brick_agg_table_to_events_brick_valid_table,
@@ -30,15 +35,10 @@ from src.a18_etl_toolbox.transformers import (
     etl_sound_agg_tables_to_sound_vld_tables,
     etl_sound_raw_tables_to_sound_agg_tables,
     etl_sound_vld_tables_to_voice_raw_tables,
-    etl_voice_agg_tables_to_vow_jsons,
+    etl_voice_agg_tables_to_bank_jsons,
     etl_voice_agg_to_event_plan_csvs,
+    etl_voice_raw_tables_to_bank_ote1_agg,
     etl_voice_raw_tables_to_voice_agg_tables,
-    etl_voice_raw_tables_to_vow_ote1_agg,
-    etl_vow_guts_to_vow_jobs,
-    etl_vow_job_jsons_to_job_tables,
-    etl_vow_json_acct_nets_to_vow_acct_nets_table,
-    etl_vow_ote1_agg_csvs_to_jsons,
-    etl_vow_ote1_agg_table_to_vow_ote1_agg_csvs,
     get_pidgin_events_by_dirs,
 )
 from src.a19_kpi_toolbox.kpi_mstr import (
@@ -62,8 +62,8 @@ class WorldUnit:
     _world_dir: str = None
     _mud_dir: str = None
     _brick_dir: str = None
-    _vow_mstr_dir: str = None
-    _vowunits: set[VowLabel] = None
+    _bank_mstr_dir: str = None
+    _bankunits: set[BankLabel] = None
     _events: dict[EventInt, FaceName] = None
     _pidgin_events: dict[FaceName, set[EventInt]] = None
 
@@ -94,22 +94,22 @@ class WorldUnit:
         self._world_dir = create_path(self.worlds_dir, self.world_id)
         self._syntax_otz_dir = create_path(self._world_dir, "syntax_otz")
         self._brick_dir = create_path(self._world_dir, "brick")
-        self._vow_mstr_dir = create_path(self._world_dir, "vow_mstr")
+        self._bank_mstr_dir = create_path(self._world_dir, "bank_mstr")
         set_dir(self._world_dir)
         set_dir(self._syntax_otz_dir)
         set_dir(self._brick_dir)
-        set_dir(self._vow_mstr_dir)
+        set_dir(self._bank_mstr_dir)
 
     def mud_dfs_to_brick_raw_tables(self, conn: sqlite3_Connection):
         etl_mud_dfs_to_brick_raw_tables(conn, self._mud_dir)
 
     def event_pack_json_to_event_inherited_planunits(self):
-        etl_event_pack_json_to_event_inherited_planunits(self._vow_mstr_dir)
+        etl_event_pack_json_to_event_inherited_planunits(self._bank_mstr_dir)
 
-    def calc_vow_bud_acct_mandate_net_ledgers(self):
-        mstr_dir = self._vow_mstr_dir
+    def calc_bank_bud_acct_mandate_net_ledgers(self):
+        mstr_dir = self._bank_mstr_dir
         etl_create_buds_root_cells(mstr_dir)
-        etl_create_vow_cell_trees(mstr_dir)
+        etl_create_bank_cell_trees(mstr_dir)
         etl_set_cell_trees_found_facts(mstr_dir)
         etl_set_cell_trees_decrees(mstr_dir)
         etl_set_cell_tree_cell_mandates(mstr_dir)
@@ -127,8 +127,8 @@ class WorldUnit:
         cursor: sqlite3_Cursor,
         store_tracing_files: bool = False,
     ):
-        delete_dir(self._vow_mstr_dir)
-        set_dir(self._vow_mstr_dir)
+        delete_dir(self._bank_mstr_dir)
+        set_dir(self._bank_mstr_dir)
         # collect excel file data into central location
         etl_mud_dfs_to_brick_raw_tables(db_conn, self._mud_dir)
         # brick raw to sound raw, check by event_ints
@@ -142,36 +142,36 @@ class WorldUnit:
         etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor)
         etl_sound_agg_tables_to_sound_vld_tables(cursor)
         etl_sound_vld_tables_to_voice_raw_tables(cursor)
-        # voice raw to vow/plan jsons
+        # voice raw to bank/plan jsons
         etl_voice_raw_tables_to_voice_agg_tables(cursor)
-        etl_voice_agg_tables_to_vow_jsons(cursor, self._vow_mstr_dir)
-        etl_voice_agg_to_event_plan_csvs(cursor, self._vow_mstr_dir)
-        etl_event_plan_csvs_to_pack_json(self._vow_mstr_dir)
-        etl_event_pack_json_to_event_inherited_planunits(self._vow_mstr_dir)
-        etl_event_inherited_planunits_to_vow_gut(self._vow_mstr_dir)
-        etl_vow_guts_to_vow_jobs(self._vow_mstr_dir)
-        etl_voice_raw_tables_to_vow_ote1_agg(cursor)
-        etl_vow_ote1_agg_table_to_vow_ote1_agg_csvs(cursor, self._vow_mstr_dir)
-        etl_vow_ote1_agg_csvs_to_jsons(self._vow_mstr_dir)
-        self.calc_vow_bud_acct_mandate_net_ledgers()
-        etl_vow_job_jsons_to_job_tables(cursor, self._vow_mstr_dir)
-        etl_vow_json_acct_nets_to_vow_acct_nets_table(cursor, self._vow_mstr_dir)
+        etl_voice_agg_tables_to_bank_jsons(cursor, self._bank_mstr_dir)
+        etl_voice_agg_to_event_plan_csvs(cursor, self._bank_mstr_dir)
+        etl_event_plan_csvs_to_pack_json(self._bank_mstr_dir)
+        etl_event_pack_json_to_event_inherited_planunits(self._bank_mstr_dir)
+        etl_event_inherited_planunits_to_bank_gut(self._bank_mstr_dir)
+        etl_bank_guts_to_bank_jobs(self._bank_mstr_dir)
+        etl_voice_raw_tables_to_bank_ote1_agg(cursor)
+        etl_bank_ote1_agg_table_to_bank_ote1_agg_csvs(cursor, self._bank_mstr_dir)
+        etl_bank_ote1_agg_csvs_to_jsons(self._bank_mstr_dir)
+        self.calc_bank_bud_acct_mandate_net_ledgers()
+        etl_bank_job_jsons_to_job_tables(cursor, self._bank_mstr_dir)
+        etl_bank_json_acct_nets_to_bank_acct_nets_table(cursor, self._bank_mstr_dir)
         populate_kpi_bundle(cursor)
 
-        # # create all vow_job and mandate reports
-        # self.calc_vow_bud_acct_mandate_net_ledgers()
+        # # create all bank_job and mandate reports
+        # self.calc_bank_bud_acct_mandate_net_ledgers()
 
         # if store_tracing_files:
 
     def create_stances(self):
-        create_stance0001_file(self._vow_mstr_dir, self.output_dir)
-        create_calendar_markdown_files(self._vow_mstr_dir, self.output_dir)
+        create_stance0001_file(self._bank_mstr_dir, self.output_dir)
+        create_calendar_markdown_files(self._bank_mstr_dir, self.output_dir)
 
     def create_kpi_csvs(self):
         create_kpi_csvs(self.get_db_path(), self.output_dir)
 
     def create_calendar_markdown_files(self):
-        create_calendar_markdown_files(self._vow_mstr_dir, self.output_dir)
+        create_calendar_markdown_files(self._bank_mstr_dir, self.output_dir)
 
     def get_dict(self) -> dict:
         return {
@@ -186,7 +186,7 @@ def worldunit_shop(
     output_dir: str = None,
     mud_dir: str = None,
     world_time_pnigh: TimeLinePoint = None,
-    _vowunits: set[VowLabel] = None,
+    _bankunits: set[BankLabel] = None,
 ) -> WorldUnit:
     x_worldunit = WorldUnit(
         world_id=world_id,
@@ -194,7 +194,7 @@ def worldunit_shop(
         output_dir=output_dir,
         world_time_pnigh=get_0_if_None(world_time_pnigh),
         _events={},
-        _vowunits=get_empty_set_if_None(_vowunits),
+        _bankunits=get_empty_set_if_None(_bankunits),
         _mud_dir=mud_dir,
         _pidgin_events={},
     )
@@ -204,5 +204,5 @@ def worldunit_shop(
     return x_worldunit
 
 
-def init_vowunits_from_dirs(x_dirs: list[str]) -> list[VowUnit]:
+def init_bankunits_from_dirs(x_dirs: list[str]) -> list[BankUnit]:
     return []

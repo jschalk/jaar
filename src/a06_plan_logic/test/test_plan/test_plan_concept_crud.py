@@ -12,7 +12,7 @@ def test_PlanUnit_set_concept_RaisesErrorWhen_parent_rope_IsInvalid():
     # ESTABLISH
     zia_plan = planunit_shop("Zia")
     invalid_rootlabel_swim_rope = create_rope("swimming")
-    assert invalid_rootlabel_swim_rope != zia_plan.vow_label
+    assert invalid_rootlabel_swim_rope != zia_plan.bank_label
     casa_str = "casa"
 
     # WHEN / THEN
@@ -20,7 +20,7 @@ def test_PlanUnit_set_concept_RaisesErrorWhen_parent_rope_IsInvalid():
         zia_plan.set_concept(
             conceptunit_shop(casa_str), parent_rope=invalid_rootlabel_swim_rope
         )
-    exception_str = f"set_concept failed because parent_rope '{invalid_rootlabel_swim_rope}' has an invalid root label. Should be {zia_plan.vow_label}."
+    exception_str = f"set_concept failed because parent_rope '{invalid_rootlabel_swim_rope}' has an invalid root label. Should be {zia_plan.bank_label}."
     assert str(excinfo.value) == exception_str
 
 
@@ -65,7 +65,7 @@ def test_PlanUnit_set_concept_CorrectlySetsAttr():
 
     # WHEN
     zia_plan.set_concept(
-        conceptunit_shop(casa_str), parent_rope=to_rope(zia_plan.vow_label)
+        conceptunit_shop(casa_str), parent_rope=to_rope(zia_plan.bank_label)
     )
 
     # THEN
@@ -82,7 +82,7 @@ def test_PlanUnit_concept_exists_ReturnsObj():
 
     # WHEN
     zia_plan.set_concept(
-        conceptunit_shop(casa_str), parent_rope=to_rope(zia_plan.vow_label)
+        conceptunit_shop(casa_str), parent_rope=to_rope(zia_plan.bank_label)
     )
 
     # THEN
@@ -204,7 +204,7 @@ def test_PlanUnit_set_concept_CanCreateMissingConceptUnits():
 def test_PlanUnit_del_concept_obj_Level0CannotBeDeleted():
     # ESTABLISH
     sue_plan = get_planunit_with_4_levels()
-    root_rope = to_rope(sue_plan.vow_label)
+    root_rope = to_rope(sue_plan.bank_label)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -260,7 +260,7 @@ def test_PlanUnit_del_concept_obj_Level1CanBeDeleted_ChildrenInherited():
     new_sunday_rope = sue_plan.make_l1_rope(sun_str)
     assert sue_plan.get_concept_obj(new_sunday_rope)
     new_sunday_concept = sue_plan.get_concept_obj(new_sunday_rope)
-    assert new_sunday_concept.parent_rope == to_rope(sue_plan.vow_label)
+    assert new_sunday_concept.parent_rope == to_rope(sue_plan.bank_label)
 
 
 def test_PlanUnit_del_concept_obj_LevelNCanBeDeleted_ChildrenInherited():
@@ -827,11 +827,11 @@ def test_PlanUnit_get_concept_obj_ReturnsConcept():
     assert wk_concept.concept_label == wk_str
 
     # WHEN
-    root_concept = sue_plan.get_concept_obj(to_rope(sue_plan.vow_label))
+    root_concept = sue_plan.get_concept_obj(to_rope(sue_plan.bank_label))
 
     # THEN
     assert root_concept is not None
-    assert root_concept.concept_label == sue_plan.vow_label
+    assert root_concept.concept_label == sue_plan.bank_label
 
     # WHEN / THEN
     bobdylan_str = "bobdylan"
@@ -869,7 +869,7 @@ def test_PlanUnit_concept_exists_ReturnsCorrectBool():
     # WHEN / THEN
     assert sue_plan.concept_exists("") is False
     assert sue_plan.concept_exists(None) is False
-    assert sue_plan.concept_exists(to_rope(sue_plan.vow_label))
+    assert sue_plan.concept_exists(to_rope(sue_plan.bank_label))
     assert sue_plan.concept_exists(cat_rope)
     assert sue_plan.concept_exists(wk_rope)
     assert sue_plan.concept_exists(casa_rope)
@@ -914,8 +914,8 @@ def test_PlanUnit_set_offtrack_fund_ReturnsObj():
     casa_concept = conceptunit_shop(casa_str, _fund_onset=70, _fund_cease=170)
     wk_concept = conceptunit_shop(wk_str, _fund_onset=70, _fund_cease=75)
     wed_concept = conceptunit_shop(wed_str, _fund_onset=72, _fund_cease=75)
-    casa_concept.parent_rope = bob_planunit.vow_label
-    wk_concept.parent_rope = bob_planunit.vow_label
+    casa_concept.parent_rope = bob_planunit.bank_label
+    wk_concept.parent_rope = bob_planunit.bank_label
     wed_concept.parent_rope = wk_rope
     bob_planunit.set_l1_concept(casa_concept)
     bob_planunit.set_l1_concept(wk_concept)
@@ -971,8 +971,8 @@ def test_PlanUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     casa_concept = conceptunit_shop(casa_str, _fund_onset=70, _fund_cease=170)
     wk_concept = conceptunit_shop(wk_str, _fund_onset=70, _fund_cease=75)
     wed_concept = conceptunit_shop(wed_str, _fund_onset=72, _fund_cease=75)
-    casa_concept.parent_rope = bob_planunit.vow_label
-    wk_concept.parent_rope = bob_planunit.vow_label
+    casa_concept.parent_rope = bob_planunit.bank_label
+    wk_concept.parent_rope = bob_planunit.bank_label
     wed_concept.parent_rope = wk_rope
     bob_planunit.set_l1_concept(casa_concept)
     bob_planunit.set_l1_concept(wk_concept)

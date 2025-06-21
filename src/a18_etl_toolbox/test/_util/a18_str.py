@@ -1,6 +1,15 @@
 from typing import Literal
 
 
+def bank_acct_nets_str() -> Literal["bank_acct_nets"]:
+    """Table name for the account net amounts."""
+    return "bank_acct_nets"
+
+
+def bank_event_time_agg_str() -> Literal["bank_event_time_agg"]:
+    return "bank_event_time_agg"
+
+
 def brick_agg_str() -> str:
     return "brick_agg"
 
@@ -36,12 +45,3 @@ def voice_agg_str() -> str:
 
 def voice_raw_str() -> str:
     return "voice_raw"
-
-
-def vow_acct_nets_str() -> Literal["vow_acct_nets"]:
-    """Table name for the account net amounts."""
-    return "vow_acct_nets"
-
-
-def vow_event_time_agg_str() -> Literal["vow_event_time_agg"]:
-    return "vow_event_time_agg"

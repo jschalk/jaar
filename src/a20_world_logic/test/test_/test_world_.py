@@ -7,7 +7,7 @@ from src.a20_world_logic.test._util.a20_env import (
 from src.a20_world_logic.world import (
     WorldID,
     WorldUnit,
-    init_vowunits_from_dirs,
+    init_bankunits_from_dirs,
     worldunit_shop,
 )
 
@@ -32,8 +32,8 @@ def test_WorldUnit_Exists():
     assert not x_world._world_dir
     assert not x_world._mud_dir
     assert not x_world._brick_dir
-    assert not x_world._vow_mstr_dir
-    assert not x_world._vowunits
+    assert not x_world._bank_mstr_dir
+    assert not x_world._bankunits
     assert not x_world._pidgin_events
 
 
@@ -47,7 +47,7 @@ def test_WorldUnit_set_mud_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     assert not fizz_world._syntax_otz_dir
     assert not fizz_world._mud_dir
     assert not fizz_world._brick_dir
-    assert not fizz_world._vow_mstr_dir
+    assert not fizz_world._bank_mstr_dir
     assert os_path_exists(x_mud_dir) is False
 
     # WHEN
@@ -58,7 +58,7 @@ def test_WorldUnit_set_mud_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     assert not fizz_world._syntax_otz_dir
     assert fizz_world._mud_dir == x_mud_dir
     assert not fizz_world._brick_dir
-    assert not fizz_world._vow_mstr_dir
+    assert not fizz_world._bank_mstr_dir
     assert os_path_exists(x_mud_dir)
 
 
@@ -70,18 +70,18 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     x_syntax_otz_dir = create_path(x_world_dir, "syntax_otz")
     x_mud_dir = create_path(x_world_dir, "mud")
     x_brick_dir = create_path(x_world_dir, "brick")
-    x_vow_mstr_dir = create_path(x_world_dir, "vow_mstr")
+    x_bank_mstr_dir = create_path(x_world_dir, "bank_mstr")
 
     assert not fizz_world._world_dir
     assert not fizz_world._syntax_otz_dir
     assert not fizz_world._mud_dir
     assert not fizz_world._brick_dir
-    assert not fizz_world._vow_mstr_dir
+    assert not fizz_world._bank_mstr_dir
     assert os_path_exists(x_world_dir) is False
     assert os_path_exists(x_syntax_otz_dir) is False
     assert os_path_exists(x_mud_dir) is False
     assert os_path_exists(x_brick_dir) is False
-    assert os_path_exists(x_vow_mstr_dir) is False
+    assert os_path_exists(x_bank_mstr_dir) is False
 
     # WHEN
     fizz_world._set_world_dirs()
@@ -95,7 +95,7 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     assert os_path_exists(x_syntax_otz_dir)
     assert os_path_exists(x_mud_dir) is False
     assert os_path_exists(x_brick_dir)
-    assert os_path_exists(x_vow_mstr_dir)
+    assert os_path_exists(x_bank_mstr_dir)
 
 
 def test_worldunit_shop_ReturnsObj_Scenario0_WithParameters(env_dir_setup_cleanup):
@@ -105,7 +105,7 @@ def test_worldunit_shop_ReturnsObj_Scenario0_WithParameters(env_dir_setup_cleanu
     output_dir = create_path(worlds_dir(), "output")
     five_world_id = "five"
     world2_time_pnigh = 55
-    world2_vowunits = {"accord45"}
+    world2_bankunits = {"accord45"}
 
     # WHEN
     x_world = worldunit_shop(
@@ -114,7 +114,7 @@ def test_worldunit_shop_ReturnsObj_Scenario0_WithParameters(env_dir_setup_cleanu
         output_dir=output_dir,
         mud_dir=example_mud_dir,
         world_time_pnigh=world2_time_pnigh,
-        _vowunits=world2_vowunits,
+        _bankunits=world2_bankunits,
     )
 
     # THEN
@@ -126,7 +126,7 @@ def test_worldunit_shop_ReturnsObj_Scenario0_WithParameters(env_dir_setup_cleanu
     assert x_world.world_time_pnigh == world2_time_pnigh
     assert x_world._events == {}
     assert x_world._syntax_otz_dir == create_path(world_dir, "syntax_otz")
-    assert x_world._vowunits == world2_vowunits
+    assert x_world._bankunits == world2_bankunits
     assert x_world._pidgin_events == {}
 
 
@@ -146,7 +146,7 @@ def test_worldunit_shop_ReturnsObj_Scenario1_WithoutParameters(env_dir_setup_cle
     assert x_world._events == {}
     assert x_world._mud_dir == create_path(x_world._world_dir, "mud")
     assert x_world._syntax_otz_dir == create_path(world_dir, "syntax_otz")
-    assert x_world._vowunits == set()
+    assert x_world._bankunits == set()
 
 
 def test_worldunit_shop_ReturnsObj_Scenario2_ThirdParameterIs_output_dir(
@@ -219,15 +219,15 @@ def test_worldunit_shop_ReturnsObj_Scenario2_ThirdParameterIs_output_dir(
 #     assert x_world.pidgins_empty() is False
 
 
-def test_init_vowunits_from_dirs_ReturnsObj_Scenario0(env_dir_setup_cleanup):
+def test_init_bankunits_from_dirs_ReturnsObj_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
     x_dir = worlds_dir()
 
     # WHEN
-    x_vowunits = init_vowunits_from_dirs([])
+    x_bankunits = init_bankunits_from_dirs([])
 
     # THEN
-    assert x_vowunits == []
+    assert x_bankunits == []
 
 
 def test_WorldUnit_set_event_SetsAttr_Scenario0(env_dir_setup_cleanup):

@@ -9,7 +9,7 @@
         "face_name": {
             "otx_key": true
         },
-        "vow_label": {
+        "bank_label": {
             "otx_key": true
         },
         "group_title_ERASE": {
@@ -21,7 +21,7 @@
     },
     "idea_number": "br00050",
     "dimens": [
-        "vowunit",
+        "bankunit",
         "planunit",
         "plan_acctunit",
         "plan_acct_membership"

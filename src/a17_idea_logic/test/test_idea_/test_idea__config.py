@@ -2,13 +2,13 @@ from copy import copy as copy_copy
 from os import getcwd as os_getcwd
 from src.a00_data_toolbox.file_toolbox import create_path, save_json
 from src.a02_finance_logic.test._util.a02_str import (
+    bank_label_str,
     bud_time_str,
     celldepth_str,
     knot_str,
     owner_name_str,
     quota_str,
     tran_time_str,
-    vow_label_str,
 )
 from src.a06_plan_logic.test._util.a06_str import (
     acct_name_str,
@@ -85,28 +85,28 @@ from src.a10_plan_calc.plan_calc_config import (
     get_all_plan_calc_args,
     get_plan_calc_args_sqlite_datatype_dict,
 )
-from src.a15_vow_logic.test._util.a15_str import (
+from src.a15_bank_logic.bank_config import (
+    get_bank_args_dimen_mapping,
+    get_bank_config_dict,
+    get_bank_dimens,
+)
+from src.a15_bank_logic.test._util.a15_str import (
     amount_str,
+    bank_budunit_str,
+    bank_paybook_str,
+    bank_timeline_hour_str,
+    bank_timeline_month_str,
+    bank_timeline_weekday_str,
+    bank_timeoffi_str,
+    bankunit_str,
     cumulative_day_str,
     cumulative_minute_str,
     hour_label_str,
     job_listen_rotations_str,
     month_label_str,
     offi_time_str,
-    vow_budunit_str,
-    vow_paybook_str,
-    vow_timeline_hour_str,
-    vow_timeline_month_str,
-    vow_timeline_weekday_str,
-    vow_timeoffi_str,
-    vowunit_str,
     weekday_label_str,
     weekday_order_str,
-)
-from src.a15_vow_logic.vow_config import (
-    get_vow_args_dimen_mapping,
-    get_vow_config_dict,
-    get_vow_dimens,
 )
 from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_args_dimen_mapping,
@@ -193,10 +193,10 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     # THEN
     atom_args = set(get_atom_args_dimen_mapping().keys())
     assert atom_args.issubset(set(table_sorting_priority))
-    vow_args = set(get_vow_args_dimen_mapping().keys())
-    print(f"{vow_args=}")
-    print(f"{vow_args.difference(set(table_sorting_priority))=}")
-    assert vow_args.issubset(set(table_sorting_priority))
+    bank_args = set(get_bank_args_dimen_mapping().keys())
+    print(f"{bank_args=}")
+    print(f"{bank_args.difference(set(table_sorting_priority))=}")
+    assert bank_args.issubset(set(table_sorting_priority))
     pidgin_args = set(get_pidgin_args_dimen_mapping().keys())
     assert pidgin_args.issubset(set(table_sorting_priority))
     all_plan_dimen_delete_keys = get_all_plan_dimen_delete_keys()
@@ -228,9 +228,9 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[5] == "face_name"
     assert table_sorting_priority[6] == "face_name_otx"
     assert table_sorting_priority[7] == "face_name_inx"
-    assert table_sorting_priority[8] == "vow_label"
-    assert table_sorting_priority[9] == "vow_label_otx"
-    assert table_sorting_priority[10] == "vow_label_inx"
+    assert table_sorting_priority[8] == "bank_label"
+    assert table_sorting_priority[9] == "bank_label_otx"
+    assert table_sorting_priority[10] == "bank_label_inx"
     assert table_sorting_priority[11] == "timeline_label"
     assert table_sorting_priority[12] == "timeline_label_otx"
     assert table_sorting_priority[13] == "timeline_label_inx"
@@ -402,7 +402,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert len(table_sorting_priority) == 178
     all_args = copy_copy(atom_args)
     all_args.update(all_plan_dimen_delete_keys)
-    all_args.update(vow_args)
+    all_args.update(bank_args)
     all_args.update(pidgin_args)
     all_args.update(plan_calc_args)
     all_args.update(pidginable_otx_cols)
@@ -442,7 +442,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(face_name_str()) == "TEXT"
     assert sqlite_types.get("pidgin_event_int") == "INTEGER"
     assert sqlite_types.get(event_int_str()) == "INTEGER"
-    assert sqlite_types.get(vow_label_str()) == "TEXT"
+    assert sqlite_types.get(bank_label_str()) == "TEXT"
     assert sqlite_types.get(owner_name_str()) == "TEXT"
     assert sqlite_types.get(acct_name_str()) == "TEXT"
     assert sqlite_types.get(group_title_str()) == "TEXT"
@@ -544,13 +544,13 @@ def test_get_idea_config_dict_ReturnsObj():
     # THEN
     assert x_idea_config
     idea_config_dimens = set(x_idea_config.keys())
-    assert vowunit_str() in idea_config_dimens
-    assert vow_budunit_str() in idea_config_dimens
-    assert vow_paybook_str() in idea_config_dimens
-    assert vow_timeline_hour_str() in idea_config_dimens
-    assert vow_timeline_month_str() in idea_config_dimens
-    assert vow_timeline_weekday_str() in idea_config_dimens
-    assert vow_timeoffi_str() in idea_config_dimens
+    assert bankunit_str() in idea_config_dimens
+    assert bank_budunit_str() in idea_config_dimens
+    assert bank_paybook_str() in idea_config_dimens
+    assert bank_timeline_hour_str() in idea_config_dimens
+    assert bank_timeline_month_str() in idea_config_dimens
+    assert bank_timeline_weekday_str() in idea_config_dimens
+    assert bank_timeoffi_str() in idea_config_dimens
     assert plan_acct_membership_str() in idea_config_dimens
     assert plan_acctunit_str() in idea_config_dimens
     assert plan_concept_awardlink_str() in idea_config_dimens
@@ -566,19 +566,19 @@ def test_get_idea_config_dict_ReturnsObj():
     assert pidgin_label_str() in idea_config_dimens
     assert pidgin_rope_str() in idea_config_dimens
     assert get_plan_dimens().issubset(idea_config_dimens)
-    assert get_vow_dimens().issubset(idea_config_dimens)
+    assert get_bank_dimens().issubset(idea_config_dimens)
     assert get_pidgin_dimens().issubset(idea_config_dimens)
     assert len(x_idea_config) == 21
     _validate_idea_config(x_idea_config)
 
 
 def get_idea_categorys():
-    return {"plan", "vow", "pidgin"}
+    return {"plan", "bank", "pidgin"}
 
 
 def _validate_idea_config(x_idea_config: dict):
     atom_config_dict = get_atom_config_dict()
-    vow_config_dict = get_vow_config_dict()
+    bank_config_dict = get_bank_config_dict()
     pidgin_config_dict = get_pidgin_config_dict()
     # for every idea_format file there exists a unique idea_number with leading zeros to make 5 digits
     for idea_dimen, idea_dict in x_idea_config.items():
@@ -593,18 +593,18 @@ def _validate_idea_config(x_idea_config: dict):
         assert idea_dict.get(normal_specs_str()) is None
         if idea_dict.get(idea_category_str()) == "plan":
             sub_dimen = atom_config_dict.get(idea_dimen)
-        elif idea_dict.get(idea_category_str()) == "vow":
-            sub_dimen = vow_config_dict.get(idea_dimen)
+        elif idea_dict.get(idea_category_str()) == "bank":
+            sub_dimen = bank_config_dict.get(idea_dimen)
         elif idea_dict.get(idea_category_str()) == "pidgin":
             sub_dimen = pidgin_config_dict.get(idea_dimen)
 
         assert idea_dict.get(allowed_crud_str()) in get_allowed_curds()
 
         if idea_dimen in {
-            vow_timeline_hour_str(),
-            vow_timeline_month_str(),
-            vow_timeline_weekday_str(),
-            vowunit_str(),
+            bank_timeline_hour_str(),
+            bank_timeline_month_str(),
+            bank_timeline_weekday_str(),
+            bankunit_str(),
             map_otx2inx_str(),
             pidgin_title_str(),
             pidgin_name_str(),
@@ -613,9 +613,9 @@ def _validate_idea_config(x_idea_config: dict):
         }:
             assert idea_dict.get(allowed_crud_str()) == insert_one_time_str()
         elif idea_dimen in {
-            vow_budunit_str(),
-            vow_paybook_str(),
-            vow_timeoffi_str(),
+            bank_budunit_str(),
+            bank_paybook_str(),
+            bank_timeoffi_str(),
         }:
             assert idea_dict.get(allowed_crud_str()) == insert_multiple_str()
         elif (
@@ -671,9 +671,9 @@ def _validate_idea_config(x_idea_config: dict):
         assert face_name_str() in idea_jkeys_keys
         assert event_int_str() in idea_jkeys_keys
         if idea_dict.get(idea_category_str()) != "pidgin":
-            assert vow_label_str() in idea_jkeys_keys
+            assert bank_label_str() in idea_jkeys_keys
         if idea_dict.get(idea_category_str()) == "plan":
-            idea_jkeys_keys.remove(vow_label_str())
+            idea_jkeys_keys.remove(bank_label_str())
             idea_jkeys_keys.remove(owner_name_str())
         idea_jkeys_keys.remove(face_name_str())
         idea_jkeys_keys.remove(event_int_str())
@@ -681,8 +681,8 @@ def _validate_idea_config(x_idea_config: dict):
 
         sub_jvalues_keys = set(sub_dimen.get(jvalues_str()).keys())
         print(f"  {sub_jvalues_keys=}")
-        if vow_label_str() in sub_jvalues_keys:
-            sub_jvalues_keys.remove(vow_label_str())
+        if bank_label_str() in sub_jvalues_keys:
+            sub_jvalues_keys.remove(bank_label_str())
 
         idea_jvalues_dict = idea_dict.get(jvalues_str())
         idea_jvalues_keys = set(idea_jvalues_dict.keys())
@@ -690,7 +690,7 @@ def _validate_idea_config(x_idea_config: dict):
         # print(f"{idea_jvalues_keys=}")
         assert sub_jvalues_keys == idea_jvalues_keys
 
-        assert vow_label_str() not in idea_jvalues_keys
+        assert bank_label_str() not in idea_jvalues_keys
 
         # sort_list = get_idea_elements_sort_order()
         # x_count = 0
@@ -743,7 +743,7 @@ def _validate_idea_format_files(idea_filenames: set[str]):
 
     valid_idea_dimens = set()
     valid_idea_dimens.update(get_plan_dimens())
-    valid_idea_dimens.update(get_vow_dimens())
+    valid_idea_dimens.update(get_bank_dimens())
     valid_idea_dimens.update(get_pidgin_dimens())
     config_dict = get_idea_config_dict()
 
@@ -857,10 +857,10 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     # set_idea_config_json(pidgin_title_str(), 1)
     # set_idea_config_json(pidgin_label_str(), 2)
     # set_idea_config_json(pidgin_rope_str(), 3)
-    # set_idea_config_json(vowunit_str(), 5)
-    # set_idea_config_json(vow_timeline_hour_str(), 6)
-    # set_idea_config_json(vow_timeline_month_str(), 7)
-    # set_idea_config_json(vow_timeline_weekday_str(), 8)
+    # set_idea_config_json(bankunit_str(), 5)
+    # set_idea_config_json(bank_timeline_hour_str(), 6)
+    # set_idea_config_json(bank_timeline_month_str(), 7)
+    # set_idea_config_json(bank_timeline_weekday_str(), 8)
     # set_idea_config_json(plan_acct_membership_str(), 9)
     # set_idea_config_json(plan_acctunit_str(), 10)
     # set_idea_config_json(plan_concept_awardlink_str(), 11)
@@ -871,8 +871,8 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     # set_idea_config_json(plan_concept_reasonunit_str(), 17)
     # set_idea_config_json(plan_conceptunit_str(), 18)
     # set_idea_config_json(planunit_str(), 19)
-    # set_idea_config_json(vow_budunit_str(), 20)
-    # set_idea_config_json(vow_paybook_str(), 21)
+    # set_idea_config_json(bank_budunit_str(), 20)
+    # set_idea_config_json(bank_paybook_str(), 21)
 
     x_idea_config = get_idea_config_dict()
 
@@ -881,10 +881,10 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     assert x_idea_config.get(pidgin_title_str()).get(bo) == 1
     assert x_idea_config.get(pidgin_label_str()).get(bo) == 2
     assert x_idea_config.get(pidgin_rope_str()).get(bo) == 3
-    assert x_idea_config.get(vowunit_str()).get(bo) == 5
-    assert x_idea_config.get(vow_timeline_hour_str()).get(bo) == 6
-    assert x_idea_config.get(vow_timeline_month_str()).get(bo) == 7
-    assert x_idea_config.get(vow_timeline_weekday_str()).get(bo) == 8
+    assert x_idea_config.get(bankunit_str()).get(bo) == 5
+    assert x_idea_config.get(bank_timeline_hour_str()).get(bo) == 6
+    assert x_idea_config.get(bank_timeline_month_str()).get(bo) == 7
+    assert x_idea_config.get(bank_timeline_weekday_str()).get(bo) == 8
     assert x_idea_config.get(plan_acct_membership_str()).get(bo) == 9
     assert x_idea_config.get(plan_acctunit_str()).get(bo) == 10
     assert x_idea_config.get(plan_concept_awardlink_str()).get(bo) == 11
@@ -895,8 +895,8 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     assert x_idea_config.get(plan_concept_reasonunit_str()).get(bo) == 17
     assert x_idea_config.get(plan_conceptunit_str()).get(bo) == 18
     assert x_idea_config.get(planunit_str()).get(bo) == 19
-    assert x_idea_config.get(vow_budunit_str()).get(bo) == 20
-    assert x_idea_config.get(vow_paybook_str()).get(bo) == 21
+    assert x_idea_config.get(bank_budunit_str()).get(bo) == 20
+    assert x_idea_config.get(bank_paybook_str()).get(bo) == 21
 
 
 def test_get_quick_ideas_column_ref_ReturnsObj():
@@ -909,7 +909,7 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
         event_int_str(),
         face_name_str(),
         c400_number_str(),
-        vow_label_str(),
+        bank_label_str(),
         fund_iota_str(),
         monthday_distortion_str(),
         penny_str(),

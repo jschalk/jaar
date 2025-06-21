@@ -18,26 +18,26 @@ def test_hub_path_constants_are_values():
 
 def test_create_stances_dir_path_ReturnsObj():
     # ESTABLISH
-    x_vow_mstr_dir = get_module_temp_dir()
+    x_bank_mstr_dir = get_module_temp_dir()
 
     # WHEN
-    gen_bob_stance_dir = create_stances_dir_path(x_vow_mstr_dir)
+    gen_bob_stance_dir = create_stances_dir_path(x_bank_mstr_dir)
 
     # THEN
-    expected_stances_dir = create_path(x_vow_mstr_dir, "stances")
+    expected_stances_dir = create_path(x_bank_mstr_dir, "stances")
     assert gen_bob_stance_dir == expected_stances_dir
 
 
 def test_create_stances_owner_dir_path_ReturnsObj():
     # ESTABLISH
-    x_vow_mstr_dir = get_module_temp_dir()
+    x_bank_mstr_dir = get_module_temp_dir()
     bob_str = "Bob"
 
     # WHEN
-    gen_bob_stance_dir = create_stances_owner_dir_path(x_vow_mstr_dir, bob_str)
+    gen_bob_stance_dir = create_stances_owner_dir_path(x_bank_mstr_dir, bob_str)
 
     # THEN
-    stances_dir = create_stances_dir_path(x_vow_mstr_dir)
+    stances_dir = create_stances_dir_path(x_bank_mstr_dir)
     expected_bob_stance_dir = create_path(stances_dir, bob_str)
     assert gen_bob_stance_dir == expected_bob_stance_dir
 
