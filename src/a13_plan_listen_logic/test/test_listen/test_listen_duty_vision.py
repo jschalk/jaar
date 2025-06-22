@@ -105,9 +105,9 @@ def get_example_yao_plan() -> PlanUnit:
     bob_str = "Bob"
     yao_speaker = planunit_shop(yao_str, get_default_bank_label())
     yao_speaker.set_concept(conceptunit_shop(run_str()), casa_rope())
-    yao_speaker.add_acctunit(yao_str, debt_score=10)
-    yao_speaker.add_acctunit(zia_str, debt_score=30)
-    yao_speaker.add_acctunit(bob_str, debt_score=40)
+    yao_speaker.add_acctunit(yao_str, acct_debt_points=10)
+    yao_speaker.add_acctunit(zia_str, acct_debt_points=30)
+    yao_speaker.add_acctunit(bob_str, acct_debt_points=40)
     yao_speaker.set_acct_respect(80)
     return yao_speaker
 
@@ -275,7 +275,7 @@ def test_listen_to_owner_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItse
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    # yao0_gut with 3 debotors of different credit_scores
+    # yao0_gut with 3 debotors of different acct_cred_pointss
     # yao_vision1 with 1 chore, fact that doesn't make that chore active
     # yao_vision2 with 2 chores, one is equal fact that makes chore active
     # yao_vision3 with 1 new chore, fact stays with it
@@ -328,7 +328,7 @@ def test_listen_to_owner_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItse
     yao_job = open_job_file(bank_mstr_dir, bank_label, yao_str)
     yao_job.settle_plan()
     assert yao_job.accts.keys() == yao_gut0.accts.keys()
-    assert yao_job.get_acct(yao_str)._irrational_debt_score == 0
+    assert yao_job.get_acct(yao_str)._irrational_acct_debt_points == 0
     yao_job_accts = yao_job.get_dict().get("accts")
     yao_gut0_accts = yao_gut0.get_dict().get("accts")
     yao_job_bob = yao_job_accts.get("Bob")

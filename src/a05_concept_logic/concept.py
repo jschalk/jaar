@@ -870,7 +870,7 @@ class ConceptUnit:
         for reason_rcontext in self._reasonheirs.keys():
             if range_root_rope := range_inheritors.get(reason_rcontext):
                 all_concepts = all_concepts_between(
-                    plan_concept_dict, range_root_rope, reason_rcontext
+                    plan_concept_dict, range_root_rope, reason_rcontext, self.knot
                 )
                 self._create_factheir(all_concepts, range_root_rope, reason_rcontext)
 
@@ -1172,8 +1172,9 @@ def all_concepts_between(
     plan_concept_dict: dict[RopeTerm, ConceptUnit],
     src_rope: RopeTerm,
     dst_rcontext: RopeTerm,
+    knot: str,
 ) -> list[ConceptUnit]:
-    all_ropes = all_ropeterms_between(src_rope, dst_rcontext)
+    all_ropes = all_ropeterms_between(src_rope, dst_rcontext, knot)
     return [plan_concept_dict.get(x_rope) for x_rope in all_ropes]
 
 

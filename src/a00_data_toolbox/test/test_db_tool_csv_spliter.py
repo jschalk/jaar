@@ -9,7 +9,7 @@ from src.a00_data_toolbox.test._util.a00_env import (
 )
 
 
-def test_save_to_split_csvs_CreatesFiles_Scenario0():
+def test_save_to_split_csvs_CreatesFiles_Scenario0(env_dir_setup_cleanup):
     # sourcery skip: extract-method
     # ESTABLISH
     x_tablename = "test_table56"
@@ -83,10 +83,12 @@ VALUES
         assert C4_csv[2] == expected_C4_1_row
 
 
-def test_save_to_split_csvs_CreatesFiles_Scenario1_add_col1_prefix():
+def test_save_to_split_csvs_CreatesFiles_Scenario1_add_col1_prefix(
+    env_dir_setup_cleanup,
+):
     # sourcery skip: extract-method
     # ESTABLISH
-    x_tablename = "test_table56"
+    x_tablename = "test_table567"
     key_columns = ["user", "hair"]
     x_column_types = {"hair": "INTEGER", "user": "TEXT", "y_int": "INTEGER"}
 
@@ -161,10 +163,12 @@ VALUES
         assert C4_csv[2] == expected_C4_1_row
 
 
-def test_save_to_split_csvs_CreatesFiles_Scenario1_add_col2_prefix():
+def test_save_to_split_csvs_CreatesFiles_Scenario1_add_col2_prefix(
+    env_dir_setup_cleanup,
+):
     # sourcery skip: extract-method
     # ESTABLISH
-    x_tablename = "test_table56"
+    x_tablename = "test_table568"
     key_columns = ["user", "hair", "y_int"]
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()

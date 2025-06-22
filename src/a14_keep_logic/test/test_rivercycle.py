@@ -152,15 +152,15 @@ def test_create_init_rivercycle_ReturnsObjScenarioThree_acctunit():
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
-    yao_credit_score = 7
-    bob_credit_score = 3
-    zia_credit_score = 10
+    yao_acct_cred_points = 7
+    bob_acct_cred_points = 3
+    zia_acct_cred_points = 10
     x_bank_mstr_dir = temp_bank_mstr_dir()
     yao_hubunit = hubunit_shop(x_bank_mstr_dir, None, yao_str)
     yao_plan = planunit_shop(yao_str)
-    yao_plan.add_acctunit(yao_str, yao_credit_score)
-    yao_plan.add_acctunit(bob_str, bob_credit_score)
-    yao_plan.add_acctunit(zia_str, zia_credit_score)
+    yao_plan.add_acctunit(yao_str, yao_acct_cred_points)
+    yao_plan.add_acctunit(bob_str, bob_acct_cred_points)
+    yao_plan.add_acctunit(zia_str, zia_acct_cred_points)
     yao_credorledger = get_credorledger(yao_plan)
     keep_credorledgers = {yao_str: yao_credorledger}
     print(f"{keep_credorledgers=}")

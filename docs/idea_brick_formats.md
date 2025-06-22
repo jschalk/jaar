@@ -11,8 +11,8 @@
 - [`br00012`](ideas/br00012.md): event_int, face_name, bank_label, owner_name, acct_name, group_title
 - [`br00013`](ideas/br00013.md): event_int, face_name, bank_label, owner_name, concept_rope, mass, task
 - [`br00019`](ideas/br00019.md): event_int, face_name, bank_label, owner_name, concept_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want
-- [`br00020`](ideas/br00020.md): event_int, face_name, bank_label, owner_name, acct_name, group_title, credit_vote, debt_vote
-- [`br00021`](ideas/br00021.md): event_int, face_name, bank_label, owner_name, acct_name, credit_score, debt_score
+- [`br00020`](ideas/br00020.md): event_int, face_name, bank_label, owner_name, acct_name, group_title, group_cred_points, group_debt_points
+- [`br00021`](ideas/br00021.md): event_int, face_name, bank_label, owner_name, acct_name, acct_cred_points, acct_debt_points
 - [`br00022`](ideas/br00022.md): event_int, face_name, bank_label, owner_name, concept_rope, awardee_title, give_force, take_force
 - [`br00023`](ideas/br00023.md): event_int, face_name, bank_label, owner_name, concept_rope, fcontext, fstate, fopen, fnigh
 - [`br00024`](ideas/br00024.md): event_int, face_name, bank_label, owner_name, concept_rope, labor_title

@@ -437,7 +437,8 @@ def bankunit_shop(
         _all_tranbook=tranbook_shop(bank_label),
         job_listen_rotations=job_listen_rotations,
     )
-    x_bankunit._set_bank_dirs()
+    if x_bankunit.bank_mstr_dir:
+        x_bankunit._set_bank_dirs()
     return x_bankunit
 
 

@@ -11,13 +11,17 @@ from src.a03_group_logic.group import membership_shop
 def test_AcctUnit_get_memberships_dict_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
-    sue_credit_vote = 11
-    sue_debt_vote = 13
+    sue_group_cred_points = 11
+    sue_group_debt_points = 13
     run_str = ";Run"
-    run_credit_vote = 17
-    run_debt_vote = 23
-    sue_membership = membership_shop(sue_str, sue_credit_vote, sue_debt_vote)
-    run_membership = membership_shop(run_str, run_credit_vote, run_debt_vote)
+    run_group_cred_points = 17
+    run_group_debt_points = 23
+    sue_membership = membership_shop(
+        sue_str, sue_group_cred_points, sue_group_debt_points
+    )
+    run_membership = membership_shop(
+        run_str, run_group_cred_points, run_group_debt_points
+    )
     sue_acctunit = acctunit_shop(sue_str)
     sue_acctunit.set_membership(sue_membership)
     sue_acctunit.set_membership(run_membership)
@@ -32,13 +36,13 @@ def test_AcctUnit_get_memberships_dict_ReturnsObj():
     run_membership_dict = sue_memberships_dict.get(run_str)
     assert sue_membership_dict == {
         "group_title": sue_str,
-        "credit_vote": sue_credit_vote,
-        "debt_vote": sue_debt_vote,
+        "group_cred_points": sue_group_cred_points,
+        "group_debt_points": sue_group_debt_points,
     }
     assert run_membership_dict == {
         "group_title": run_str,
-        "credit_vote": run_credit_vote,
-        "debt_vote": run_debt_vote,
+        "group_cred_points": run_group_cred_points,
+        "group_debt_points": run_group_debt_points,
     }
 
 
@@ -47,10 +51,10 @@ def test_AcctUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
     bob_str = "Bob"
     bob_acctunit = acctunit_shop(bob_str)
 
-    bob_credit_score = 13
-    bob_debt_score = 17
-    bob_acctunit.set_credit_score(bob_credit_score)
-    bob_acctunit.set_debt_score(bob_debt_score)
+    bob_acct_cred_points = 13
+    bob_acct_debt_points = 17
+    bob_acctunit.set_acct_cred_points(bob_acct_cred_points)
+    bob_acctunit.set_acct_debt_points(bob_acct_debt_points)
 
     print(f"{bob_str}")
 
@@ -67,11 +71,19 @@ def test_AcctUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
     assert x_dict is not None
     assert x_dict == {
         "acct_name": bob_str,
-        "credit_score": bob_credit_score,
-        "debt_score": bob_debt_score,
+        "acct_cred_points": bob_acct_cred_points,
+        "acct_debt_points": bob_acct_debt_points,
         "_memberships": {
-            bob_str: {"group_title": bob_str, "credit_vote": 1, "debt_vote": 1},
-            run_str: {"group_title": run_str, "credit_vote": 1, "debt_vote": 1},
+            bob_str: {
+                "group_title": bob_str,
+                "group_cred_points": 1,
+                "group_debt_points": 1,
+            },
+            run_str: {
+                "group_title": run_str,
+                "group_cred_points": 1,
+                "group_debt_points": 1,
+            },
         },
     }
 
@@ -81,14 +93,14 @@ def test_AcctUnit_get_dict_ReturnsDictWithAllAttrDataForJSON():
     bob_str = "Bob"
     bob_acctunit = acctunit_shop(bob_str)
 
-    bob_credit_score = 13
-    bob_debt_score = 17
-    bob_acctunit.set_credit_score(bob_credit_score)
-    bob_acctunit.set_debt_score(bob_debt_score)
-    bob_irrational_debt_score = 87
-    bob_inallocable_debt_score = 97
-    bob_acctunit.add_irrational_debt_score(bob_irrational_debt_score)
-    bob_acctunit.add_inallocable_debt_score(bob_inallocable_debt_score)
+    bob_acct_cred_points = 13
+    bob_acct_debt_points = 17
+    bob_acctunit.set_acct_cred_points(bob_acct_cred_points)
+    bob_acctunit.set_acct_debt_points(bob_acct_debt_points)
+    bob_irrational_acct_debt_points = 87
+    bob_inallocable_acct_debt_points = 97
+    bob_acctunit.add_irrational_acct_debt_points(bob_irrational_acct_debt_points)
+    bob_acctunit.add_inallocable_acct_debt_points(bob_inallocable_acct_debt_points)
 
     bob_fund_give = 55
     bob_fund_take = 47
@@ -118,11 +130,11 @@ def test_AcctUnit_get_dict_ReturnsDictWithAllAttrDataForJSON():
     assert x_dict is not None
     assert x_dict == {
         "acct_name": bob_str,
-        "credit_score": bob_credit_score,
-        "debt_score": bob_debt_score,
+        "acct_cred_points": bob_acct_cred_points,
+        "acct_debt_points": bob_acct_debt_points,
         "_memberships": bob_acctunit.get_memberships_dict(),
-        "_irrational_debt_score": bob_irrational_debt_score,
-        "_inallocable_debt_score": bob_inallocable_debt_score,
+        "_irrational_acct_debt_points": bob_irrational_acct_debt_points,
+        "_inallocable_acct_debt_points": bob_inallocable_acct_debt_points,
         "_fund_give": bob_fund_give,
         "_fund_take": bob_fund_take,
         "_fund_agenda_give": bob_fund_agenda_give,
@@ -132,59 +144,61 @@ def test_AcctUnit_get_dict_ReturnsDictWithAllAttrDataForJSON():
     }
 
 
-def test_AcctUnit_get_dict_ReturnsDictWith__irrational_debt_score_ValuesIsZero():
+def test_AcctUnit_get_dict_ReturnsDictWith__irrational_acct_debt_points_ValuesIsZero():
     # ESTABLISH
     bob_str = "Bob"
     bob_acctunit = acctunit_shop(bob_str)
-    assert bob_acctunit._irrational_debt_score == 0
-    assert bob_acctunit._inallocable_debt_score == 0
+    assert bob_acctunit._irrational_acct_debt_points == 0
+    assert bob_acctunit._inallocable_acct_debt_points == 0
 
     # WHEN
     x_dict = bob_acctunit.get_dict(all_attrs=True)
 
     # THEN
-    x_irrational_debt_score = "_irrational_debt_score"
-    x_inallocable_debt_score = "_inallocable_debt_score"
-    assert x_dict.get(x_irrational_debt_score) is None
-    assert x_dict.get(x_inallocable_debt_score) is None
+    x_irrational_acct_debt_points = "_irrational_acct_debt_points"
+    x_inallocable_acct_debt_points = "_inallocable_acct_debt_points"
+    assert x_dict.get(x_irrational_acct_debt_points) is None
+    assert x_dict.get(x_inallocable_acct_debt_points) is None
     assert len(x_dict.keys()) == 10
 
 
-def test_AcctUnit_get_dict_ReturnsDictWith__irrational_debt_score_ValuesIsNumber():
+def test_AcctUnit_get_dict_ReturnsDictWith__irrational_acct_debt_points_ValuesIsNumber():
     # ESTABLISH
     bob_str = "Bob"
     bob_acctunit = acctunit_shop(bob_str)
-    bob_irrational_debt_score = 87
-    bob_inallocable_debt_score = 97
-    bob_acctunit.add_irrational_debt_score(bob_irrational_debt_score)
-    bob_acctunit.add_inallocable_debt_score(bob_inallocable_debt_score)
+    bob_irrational_acct_debt_points = 87
+    bob_inallocable_acct_debt_points = 97
+    bob_acctunit.add_irrational_acct_debt_points(bob_irrational_acct_debt_points)
+    bob_acctunit.add_inallocable_acct_debt_points(bob_inallocable_acct_debt_points)
 
     # WHEN
     x_dict = bob_acctunit.get_dict(all_attrs=True)
 
     # THEN
-    x_irrational_debt_score = "_irrational_debt_score"
-    x_inallocable_debt_score = "_inallocable_debt_score"
-    assert x_dict.get(x_irrational_debt_score) == bob_irrational_debt_score
-    assert x_dict.get(x_inallocable_debt_score) == bob_inallocable_debt_score
+    x_irrational_acct_debt_points = "_irrational_acct_debt_points"
+    x_inallocable_acct_debt_points = "_inallocable_acct_debt_points"
+    assert x_dict.get(x_irrational_acct_debt_points) == bob_irrational_acct_debt_points
+    assert (
+        x_dict.get(x_inallocable_acct_debt_points) == bob_inallocable_acct_debt_points
+    )
     assert len(x_dict.keys()) == 12
 
 
-def test_AcctUnit_get_dict_ReturnsDictWith__irrational_debt_score_ValuesIsNone():
+def test_AcctUnit_get_dict_ReturnsDictWith__irrational_acct_debt_points_ValuesIsNone():
     # ESTABLISH
     bob_str = "Bob"
     bob_acctunit = acctunit_shop(bob_str)
-    bob_acctunit._irrational_debt_score = None
-    bob_acctunit._inallocable_debt_score = None
+    bob_acctunit._irrational_acct_debt_points = None
+    bob_acctunit._inallocable_acct_debt_points = None
 
     # WHEN
     x_dict = bob_acctunit.get_dict(all_attrs=True)
 
     # THEN
-    x_irrational_debt_score = "_irrational_debt_score"
-    x_inallocable_debt_score = "_inallocable_debt_score"
-    assert x_dict.get(x_irrational_debt_score) is None
-    assert x_dict.get(x_inallocable_debt_score) is None
+    x_irrational_acct_debt_points = "_irrational_acct_debt_points"
+    x_inallocable_acct_debt_points = "_inallocable_acct_debt_points"
+    assert x_dict.get(x_irrational_acct_debt_points) is None
+    assert x_dict.get(x_inallocable_acct_debt_points) is None
     assert len(x_dict.keys()) == 10
 
 
@@ -210,12 +224,16 @@ def test_acctunit_get_from_dict_Returns_memberships():
     before_yao_acctunit = acctunit_shop(yao_str, knot=slash_str)
     ohio_str = f"{slash_str}ohio"
     iowa_str = f"{slash_str}iowa"
-    ohio_credit_vote = 90
-    ohio_debt_vote = 901
-    iowa_credit_vote = 902
-    iowa_debt_vote = 903
-    ohio_membership = membership_shop(ohio_str, ohio_credit_vote, ohio_debt_vote)
-    iowa_membership = membership_shop(iowa_str, iowa_credit_vote, iowa_debt_vote)
+    ohio_group_cred_points = 90
+    ohio_group_debt_points = 901
+    iowa_group_cred_points = 902
+    iowa_group_debt_points = 903
+    ohio_membership = membership_shop(
+        ohio_str, ohio_group_cred_points, ohio_group_debt_points
+    )
+    iowa_membership = membership_shop(
+        iowa_str, iowa_group_cred_points, iowa_group_debt_points
+    )
     before_yao_acctunit.set_membership(ohio_membership)
     before_yao_acctunit.set_membership(iowa_membership)
     yao_dict = before_yao_acctunit.get_dict()
@@ -248,18 +266,18 @@ def test_acctunits_get_from_dict_ReturnsObjWith_knot():
 def test_acctunits_get_from_json_ReturnsObj_SimpleExampleWith_IncompleteData():
     # ESTABLISH
     yao_str = "Yao"
-    yao_credit_score = 13
-    yao_debt_score = 17
-    yao_irrational_debt_score = 87
-    yao_inallocable_debt_score = 97
+    yao_acct_cred_points = 13
+    yao_acct_debt_points = 17
+    yao_irrational_acct_debt_points = 87
+    yao_inallocable_acct_debt_points = 97
     yao_json_dict = {
         yao_str: {
             "acct_name": yao_str,
-            "credit_score": yao_credit_score,
-            "debt_score": yao_debt_score,
+            "acct_cred_points": yao_acct_cred_points,
+            "acct_debt_points": yao_acct_debt_points,
             "_memberships": {},
-            "_irrational_debt_score": yao_irrational_debt_score,
-            "_inallocable_debt_score": yao_inallocable_debt_score,
+            "_irrational_acct_debt_points": yao_irrational_acct_debt_points,
+            "_inallocable_acct_debt_points": yao_inallocable_acct_debt_points,
         }
     }
     yao_json_str = get_json_from_dict(yao_json_dict)
@@ -273,7 +291,9 @@ def test_acctunits_get_from_json_ReturnsObj_SimpleExampleWith_IncompleteData():
     yao_acctunit = yao_obj_dict[yao_str]
 
     assert yao_acctunit.acct_name == yao_str
-    assert yao_acctunit.credit_score == yao_credit_score
-    assert yao_acctunit.debt_score == yao_debt_score
-    assert yao_acctunit._irrational_debt_score == yao_irrational_debt_score
-    assert yao_acctunit._inallocable_debt_score == yao_inallocable_debt_score
+    assert yao_acctunit.acct_cred_points == yao_acct_cred_points
+    assert yao_acctunit.acct_debt_points == yao_acct_debt_points
+    assert yao_acctunit._irrational_acct_debt_points == yao_irrational_acct_debt_points
+    assert (
+        yao_acctunit._inallocable_acct_debt_points == yao_inallocable_acct_debt_points
+    )

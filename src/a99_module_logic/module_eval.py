@@ -148,9 +148,22 @@ def check_if_module_str_funcs_is_sorted(module_str_funcs: list[str]):
         for module_str_func in sorted(module_str_funcs):
             module_str_func = module_str_func.replace("'", "")
             module_str_func = module_str_func.replace("_str", "")
-    if module_str_funcs != sorted(module_str_funcs):
-        print(f"Bad Order     {module_str_funcs}")
-        print(f"Correct order {sorted(module_str_funcs)}")
+    sorted_module_str_funcs = sorted(module_str_funcs)
+    if module_str_funcs != sorted_module_str_funcs:
+        first_wrong_index = None
+        for x in range(0, len(module_str_funcs)):
+            # print(f"{module_str_funcs[x]}")
+            if (
+                not first_wrong_index
+                and module_str_funcs[x] != sorted_module_str_funcs[x]
+            ):
+                first_wrong_index = (
+                    f"{module_str_funcs[x]} should be {sorted_module_str_funcs[x]}"
+                )
+
+        print(f"{first_wrong_index=}")
+        # print(f"Bad Order     {module_str_funcs}")
+        # print(f"Correct order {sorted(module_str_funcs)}")
     assert module_str_funcs == sorted(module_str_funcs)
 
 

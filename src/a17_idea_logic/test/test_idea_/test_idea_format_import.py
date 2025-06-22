@@ -2,9 +2,9 @@ from src.a00_data_toolbox.file_toolbox import create_path
 from src.a02_finance_logic.test._util.a02_str import bank_label_str, owner_name_str
 from src.a06_plan_logic.plan import planunit_shop
 from src.a06_plan_logic.test._util.a06_str import (
+    acct_cred_points_str,
+    acct_debt_points_str,
     acct_name_str,
-    credit_score_str,
-    debt_score_str,
 )
 from src.a12_hub_toolbox.hub_tool import gut_file_exists, open_gut_file
 from src.a17_idea_logic.idea import get_idearef_obj, load_idea_csv, save_idea_csv
@@ -25,17 +25,17 @@ def test_open_csv_ReturnsObjWhenFileExists(env_dir_setup_cleanup):
     sue_str = "Sue"
     bob_str = "Bob"
     yao_str = "Yao"
-    sue_credit_score = 11
-    bob_credit_score = 13
-    yao_credit_score = 41
-    sue_debt_score = 23
-    bob_debt_score = 29
-    yao_debt_score = 37
+    sue_acct_cred_points = 11
+    bob_acct_cred_points = 13
+    yao_acct_cred_points = 41
+    sue_acct_debt_points = 23
+    bob_acct_debt_points = 29
+    yao_acct_debt_points = 37
     accord_bank_label = "accord56"
     sue_planunit = planunit_shop(sue_str, accord_bank_label)
-    sue_planunit.add_acctunit(sue_str, sue_credit_score, sue_debt_score)
-    sue_planunit.add_acctunit(bob_str, bob_credit_score, bob_debt_score)
-    sue_planunit.add_acctunit(yao_str, yao_credit_score, yao_debt_score)
+    sue_planunit.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
+    sue_planunit.add_acctunit(bob_str, bob_acct_cred_points, bob_acct_debt_points)
+    sue_planunit.add_acctunit(yao_str, yao_acct_cred_points, yao_acct_debt_points)
     j1_ideaname = idea_format_00021_plan_acctunit_v0_0_0()
     name_filename = f"{sue_str}_acct_example_01.csv"
     save_idea_csv(j1_ideaname, sue_planunit, idea_examples_dir(), name_filename)
@@ -50,20 +50,20 @@ def test_open_csv_ReturnsObjWhenFileExists(env_dir_setup_cleanup):
     assert acct_dataframe.loc[0, bank_label_str()] == accord_bank_label
     assert acct_dataframe.loc[0, owner_name_str()] == sue_planunit.owner_name
     assert acct_dataframe.loc[0, acct_name_str()] == bob_str
-    assert acct_dataframe.loc[0, credit_score_str()] == bob_credit_score
-    assert acct_dataframe.loc[0, debt_score_str()] == bob_debt_score
+    assert acct_dataframe.loc[0, acct_cred_points_str()] == bob_acct_cred_points
+    assert acct_dataframe.loc[0, acct_debt_points_str()] == bob_acct_debt_points
 
     assert acct_dataframe.loc[1, bank_label_str()] == accord_bank_label
     assert acct_dataframe.loc[1, owner_name_str()] == sue_planunit.owner_name
     assert acct_dataframe.loc[1, acct_name_str()] == sue_str
-    assert acct_dataframe.loc[1, credit_score_str()] == sue_credit_score
-    assert acct_dataframe.loc[1, debt_score_str()] == sue_debt_score
+    assert acct_dataframe.loc[1, acct_cred_points_str()] == sue_acct_cred_points
+    assert acct_dataframe.loc[1, acct_debt_points_str()] == sue_acct_debt_points
 
     assert acct_dataframe.loc[2, bank_label_str()] == accord_bank_label
     assert acct_dataframe.loc[2, owner_name_str()] == sue_planunit.owner_name
     assert acct_dataframe.loc[2, acct_name_str()] == yao_str
-    assert acct_dataframe.loc[2, credit_score_str()] == yao_credit_score
-    assert acct_dataframe.loc[2, debt_score_str()] == yao_debt_score
+    assert acct_dataframe.loc[2, acct_cred_points_str()] == yao_acct_cred_points
+    assert acct_dataframe.loc[2, acct_debt_points_str()] == yao_acct_debt_points
 
     assert len(acct_dataframe) == 3
 
@@ -87,17 +87,17 @@ def test_load_idea_csv_Arg_idea_format_00021_plan_acctunit_v0_0_0_csvTo_job(
     sue_str = "Sue"
     bob_str = "Bob"
     yao_str = "Yao"
-    sue_credit_score = 11
-    bob_credit_score = 13
-    yao_credit_score = 41
-    sue_debt_score = 23
-    bob_debt_score = 29
-    yao_debt_score = 37
+    sue_acct_cred_points = 11
+    bob_acct_cred_points = 13
+    yao_acct_cred_points = 41
+    sue_acct_debt_points = 23
+    bob_acct_debt_points = 29
+    yao_acct_debt_points = 37
     accord_bank_label = "accord56"
     sue_planunit = planunit_shop(sue_str, accord_bank_label)
-    sue_planunit.add_acctunit(sue_str, sue_credit_score, sue_debt_score)
-    sue_planunit.add_acctunit(bob_str, bob_credit_score, bob_debt_score)
-    sue_planunit.add_acctunit(yao_str, yao_credit_score, yao_debt_score)
+    sue_planunit.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
+    sue_planunit.add_acctunit(bob_str, bob_acct_cred_points, bob_acct_debt_points)
+    sue_planunit.add_acctunit(yao_str, yao_acct_cred_points, yao_acct_debt_points)
     j1_ideaname = idea_format_00021_plan_acctunit_v0_0_0()
     name_filename = f"{sue_str}_acct_example_02.csv"
     bank_mstr_dir = idea_examples_dir()
@@ -119,17 +119,17 @@ def test_load_idea_csv_Arg_idea_format_00021_plan_acctunit_v0_0_0_csvTo_job(
     assert sue_gut.acct_exists(sue_str)
     assert sue_gut.acct_exists(bob_str)
     assert sue_gut.acct_exists(yao_str)
-    # assert gut Planunit acctunit.credit_score is correct
+    # assert gut Planunit acctunit.acct_cred_points is correct
     sue_acctunit = sue_gut.get_acct(sue_str)
     bob_acctunit = sue_gut.get_acct(bob_str)
     yao_acctunit = sue_gut.get_acct(yao_str)
-    # assert gut Planunit acctunit.credit_score is correct
-    assert sue_acctunit.credit_score == sue_credit_score
-    assert bob_acctunit.credit_score == bob_credit_score
-    assert yao_acctunit.credit_score == yao_credit_score
-    assert sue_acctunit.debt_score == sue_debt_score
-    assert bob_acctunit.debt_score == bob_debt_score
-    assert yao_acctunit.debt_score == yao_debt_score
+    # assert gut Planunit acctunit.acct_cred_points is correct
+    assert sue_acctunit.acct_cred_points == sue_acct_cred_points
+    assert bob_acctunit.acct_cred_points == bob_acct_cred_points
+    assert yao_acctunit.acct_cred_points == yao_acct_cred_points
+    assert sue_acctunit.acct_debt_points == sue_acct_debt_points
+    assert bob_acctunit.acct_debt_points == bob_acct_debt_points
+    assert yao_acctunit.acct_debt_points == yao_acct_debt_points
 
 
 def test_load_idea_csv_csvTo_job(
@@ -139,17 +139,17 @@ def test_load_idea_csv_csvTo_job(
     sue_str = "Sue"
     bob_str = "Bob"
     yao_str = "Yao"
-    sue_credit_score = 11
-    bob_credit_score = 13
-    yao_credit_score = 41
-    sue_debt_score = 23
-    bob_debt_score = 29
-    yao_debt_score = 37
+    sue_acct_cred_points = 11
+    bob_acct_cred_points = 13
+    yao_acct_cred_points = 41
+    sue_acct_debt_points = 23
+    bob_acct_debt_points = 29
+    yao_acct_debt_points = 37
     accord_bank_label = "accord56"
     sue_planunit = planunit_shop(sue_str, accord_bank_label)
-    sue_planunit.add_acctunit(sue_str, sue_credit_score, sue_debt_score)
-    sue_planunit.add_acctunit(bob_str, bob_credit_score, bob_debt_score)
-    sue_planunit.add_acctunit(yao_str, yao_credit_score, yao_debt_score)
+    sue_planunit.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
+    sue_planunit.add_acctunit(bob_str, bob_acct_cred_points, bob_acct_debt_points)
+    sue_planunit.add_acctunit(yao_str, yao_acct_cred_points, yao_acct_debt_points)
     j1_ideaname = idea_format_00021_plan_acctunit_v0_0_0()
     name_filename = f"{sue_str}_acct_example_02.csv"
     csv_example_path = create_path(idea_examples_dir(), name_filename)
@@ -170,14 +170,14 @@ def test_load_idea_csv_csvTo_job(
     assert sue_gut.acct_exists(sue_str)
     assert sue_gut.acct_exists(bob_str)
     assert sue_gut.acct_exists(yao_str)
-    # assert gut Planunit acctunit.credit_score is correct
+    # assert gut Planunit acctunit.acct_cred_points is correct
     sue_acctunit = sue_gut.get_acct(sue_str)
     bob_acctunit = sue_gut.get_acct(bob_str)
     yao_acctunit = sue_gut.get_acct(yao_str)
-    # assert gut Planunit acctunit.credit_score is correct
-    assert sue_acctunit.credit_score == sue_credit_score
-    assert bob_acctunit.credit_score == bob_credit_score
-    assert yao_acctunit.credit_score == yao_credit_score
-    assert sue_acctunit.debt_score == sue_debt_score
-    assert bob_acctunit.debt_score == bob_debt_score
-    assert yao_acctunit.debt_score == yao_debt_score
+    # assert gut Planunit acctunit.acct_cred_points is correct
+    assert sue_acctunit.acct_cred_points == sue_acct_cred_points
+    assert bob_acctunit.acct_cred_points == bob_acct_cred_points
+    assert yao_acctunit.acct_cred_points == yao_acct_cred_points
+    assert sue_acctunit.acct_debt_points == sue_acct_debt_points
+    assert bob_acctunit.acct_debt_points == bob_acct_debt_points
+    assert yao_acctunit.acct_debt_points == yao_acct_debt_points

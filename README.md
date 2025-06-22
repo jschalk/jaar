@@ -48,7 +48,7 @@ Output stance: emmanuel_stance.xlsx, sheet "br00000"
 
 
 <!-- # Input Example Excel file 0.1.2: fizz2.xlsx with sheet "br00000_buzz2" 
-| event_int | face_name | bank_label | owner_name | acct_name | credit_score | debt_score |
+| event_int | face_name | bank_label | owner_name | acct_name | acct_cred_points | acct_debt_points |
 |-----------|-----------|-----------|------------|-----------|---------------|---------------|
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |    Dean   |      100      |      15       |
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |  Emmanuel |       50      |      75       |

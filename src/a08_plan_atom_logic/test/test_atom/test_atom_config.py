@@ -4,6 +4,8 @@ from src.a06_plan_logic.test._util.a06_str import (
     NameTerm_str,
     RopeTerm_str,
     TitleTerm_str,
+    acct_cred_points_str,
+    acct_debt_points_str,
     acct_name_str,
     acct_pool_str,
     addin_str,
@@ -11,11 +13,7 @@ from src.a06_plan_logic.test._util.a06_str import (
     begin_str,
     close_str,
     concept_rope_str,
-    credit_score_str,
-    credit_vote_str,
     credor_respect_str,
-    debt_score_str,
-    debt_vote_str,
     debtor_respect_str,
     denom_str,
     fcontext_str,
@@ -23,6 +21,8 @@ from src.a06_plan_logic.test._util.a06_str import (
     fopen_str,
     fund_iota_str,
     gogo_want_str,
+    group_cred_points_str,
+    group_debt_points_str,
     group_title_str,
     healer_name_str,
     labor_title_str,
@@ -494,17 +494,17 @@ def test_get_normalized_plan_table_build_ReturnsObj():
     assert len(acctunit_columns) == 4
     assert acctunit_columns.get("uid") is not None
     assert acctunit_columns.get(acct_name_str()) is not None
-    assert acctunit_columns.get(credit_score_str()) is not None
-    assert acctunit_columns.get(debt_score_str()) is not None
+    assert acctunit_columns.get(acct_cred_points_str()) is not None
+    assert acctunit_columns.get(acct_debt_points_str()) is not None
 
     acct_name_dict = acctunit_columns.get(acct_name_str())
     assert len(acct_name_dict) == 2
     assert acct_name_dict.get(sqlite_datatype_str()) == "TEXT"
     assert acct_name_dict.get("nullable") is False
-    debt_score_dict = acctunit_columns.get("debt_score")
+    acct_debt_points_dict = acctunit_columns.get("acct_debt_points")
     assert len(acct_name_dict) == 2
-    assert debt_score_dict.get(sqlite_datatype_str()) == "REAL"
-    assert debt_score_dict.get("nullable") is True
+    assert acct_debt_points_dict.get(sqlite_datatype_str()) == "REAL"
+    assert acct_debt_points_dict.get("nullable") is True
 
     assert len(cat_concept) == 2
     concept_columns = cat_concept.get(columns_str)
@@ -631,11 +631,11 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(begin_str()) == "float"
     assert x_class_types.get(respect_bit_str()) == "float"
     assert x_class_types.get(close_str()) == "float"
-    assert x_class_types.get(credit_score_str()) == "float"
-    assert x_class_types.get(credit_vote_str()) == "float"
+    assert x_class_types.get(acct_cred_points_str()) == "float"
+    assert x_class_types.get(group_cred_points_str()) == "float"
     assert x_class_types.get(credor_respect_str()) == "float"
-    assert x_class_types.get(debt_score_str()) == "float"
-    assert x_class_types.get(debt_vote_str()) == "float"
+    assert x_class_types.get(acct_debt_points_str()) == "float"
+    assert x_class_types.get(group_debt_points_str()) == "float"
     assert x_class_types.get(debtor_respect_str()) == "float"
     assert x_class_types.get(denom_str()) == "int"
     assert x_class_types.get("pdivisor") == "int"

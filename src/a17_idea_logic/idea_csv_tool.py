@@ -233,8 +233,8 @@ def add_plan_to_br00020_csv(
                 x_plan.owner_name,
                 acctunit.acct_name,
                 membership.group_title,
-                if_none_str(membership.credit_vote),
-                if_none_str(membership.debt_vote),
+                if_none_str(membership.group_cred_points),
+                if_none_str(membership.group_debt_points),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -255,8 +255,8 @@ def add_plan_to_br00021_csv(
             x_plan.bank_label,
             x_plan.owner_name,
             acctunit.acct_name,
-            if_none_str(acctunit.credit_score),
-            if_none_str(acctunit.debt_score),
+            if_none_str(acctunit.acct_cred_points),
+            if_none_str(acctunit.acct_debt_points),
         ]
         x_csv += csv_delimiter.join(x_row)
         x_csv += "\n"
@@ -591,8 +591,8 @@ def add_pack_to_br00020_csv(
                 x_packunit.owner_name,
                 planatom.jkeys.get("acct_name"),
                 planatom.jkeys.get("group_title"),
-                if_none_str(planatom.jvalues.get("credit_vote")),
-                if_none_str(planatom.jvalues.get("debt_vote")),
+                if_none_str(planatom.jvalues.get("group_cred_points")),
+                if_none_str(planatom.jvalues.get("group_debt_points")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -610,8 +610,8 @@ def add_pack_to_br00021_csv(
                 x_packunit.bank_label,
                 x_packunit.owner_name,
                 planatom.jkeys.get("acct_name"),
-                if_none_str(planatom.jvalues.get("credit_score")),
-                if_none_str(planatom.jvalues.get("debt_score")),
+                if_none_str(planatom.jvalues.get("acct_cred_points")),
+                if_none_str(planatom.jvalues.get("acct_debt_points")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"

@@ -2,12 +2,12 @@ from src.a01_term_logic.rope import to_rope
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_plan_logic.plan import planunit_shop
 from src.a06_plan_logic.test._util.a06_str import (
+    acct_cred_points_str,
+    acct_debt_points_str,
     acct_name_str,
     concept_rope_str,
-    credit_score_str,
-    credit_vote_str,
-    debt_score_str,
-    debt_vote_str,
+    group_cred_points_str,
+    group_debt_points_str,
     group_title_str,
     mass_str,
     plan_acct_membership_str,
@@ -31,17 +31,17 @@ def test_make_plandelta_Arg_idea_format_00021_plan_acctunit_v0_0_0():
     sue_str = "Sue"
     bob_str = "Bob"
     yao_str = "Yao"
-    sue_credit_score = 11
-    bob_credit_score = 13
-    yao_credit_score = 41
-    sue_debt_score = 23
-    bob_debt_score = 29
-    yao_debt_score = 37
+    sue_acct_cred_points = 11
+    bob_acct_cred_points = 13
+    yao_acct_cred_points = 41
+    sue_acct_debt_points = 23
+    bob_acct_debt_points = 29
+    yao_acct_debt_points = 37
     accord_bank_label = "accord56"
     sue_planunit = planunit_shop(sue_str, accord_bank_label)
-    sue_planunit.add_acctunit(sue_str, sue_credit_score, sue_debt_score)
-    sue_planunit.add_acctunit(bob_str, bob_credit_score, bob_debt_score)
-    sue_planunit.add_acctunit(yao_str, yao_credit_score, yao_debt_score)
+    sue_planunit.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
+    sue_planunit.add_acctunit(bob_str, bob_acct_cred_points, bob_acct_debt_points)
+    sue_planunit.add_acctunit(yao_str, yao_acct_cred_points, yao_acct_debt_points)
     x_idea_name = idea_format_00021_plan_acctunit_v0_0_0()
     acct_dataframe = create_idea_df(sue_planunit, x_idea_name)
     print(f"{acct_dataframe.columns=}")
@@ -54,13 +54,13 @@ def test_make_plandelta_Arg_idea_format_00021_plan_acctunit_v0_0_0():
     assert sue_acct_plandelta
     sue_planatom = planatom_shop(plan_acctunit_str(), INSERT_str())
     sue_planatom.set_arg(acct_name_str(), sue_str)
-    sue_planatom.set_arg(credit_score_str(), sue_credit_score)
-    sue_planatom.set_arg(debt_score_str(), sue_debt_score)
+    sue_planatom.set_arg(acct_cred_points_str(), sue_acct_cred_points)
+    sue_planatom.set_arg(acct_debt_points_str(), sue_acct_debt_points)
     sue_planatom.set_atom_order()
     bob_planatom = planatom_shop(plan_acctunit_str(), INSERT_str())
     bob_planatom.set_arg(acct_name_str(), bob_str)
-    bob_planatom.set_arg(credit_score_str(), bob_credit_score)
-    bob_planatom.set_arg(debt_score_str(), bob_debt_score)
+    bob_planatom.set_arg(acct_cred_points_str(), bob_acct_cred_points)
+    bob_planatom.set_arg(acct_debt_points_str(), bob_acct_debt_points)
     bob_planatom.set_atom_order()
     # print(f"{sue_acct_plandelta.get_ordered_dict()=}")
     # print(
@@ -83,22 +83,22 @@ def test_make_plandelta_Arg_idea_format_00021_plan_acctunit_v0_0_0():
 #     sue_planunit.add_acctunit(bob_str)
 #     sue_planunit.add_acctunit(yao_str)
 #     iowa_str = ";Iowa"
-#     sue_iowa_credit_vote = 37
-#     bob_iowa_credit_vote = 43
-#     yao_iowa_credit_vote = 51
-#     sue_iowa_debt_vote = 57
-#     bob_iowa_debt_vote = 61
-#     yao_iowa_debt_vote = 67
+#     sue_iowa_group_cred_points = 37
+#     bob_iowa_group_cred_points = 43
+#     yao_iowa_group_cred_points = 51
+#     sue_iowa_group_debt_points = 57
+#     bob_iowa_group_debt_points = 61
+#     yao_iowa_group_debt_points = 67
 #     ohio_str = ";Ohio"
-#     yao_ohio_credit_vote = 73
-#     yao_ohio_debt_vote = 67
+#     yao_ohio_group_cred_points = 73
+#     yao_ohio_group_debt_points = 67
 #     sue_acctunit = sue_planunit.get_acct(sue_str)
 #     bob_acctunit = sue_planunit.get_acct(bob_str)
 #     yao_acctunit = sue_planunit.get_acct(yao_str)
-#     sue_acctunit.add_membership(iowa_str, sue_iowa_credit_vote, sue_iowa_debt_vote)
-#     bob_acctunit.add_membership(iowa_str, bob_iowa_credit_vote, bob_iowa_debt_vote)
-#     yao_acctunit.add_membership(iowa_str, yao_iowa_credit_vote, yao_iowa_debt_vote)
-#     yao_acctunit.add_membership(ohio_str, yao_ohio_credit_vote, yao_ohio_debt_vote)
+#     sue_acctunit.add_membership(iowa_str, sue_iowa_group_cred_points, sue_iowa_group_debt_points)
+#     bob_acctunit.add_membership(iowa_str, bob_iowa_group_cred_points, bob_iowa_group_debt_points)
+#     yao_acctunit.add_membership(iowa_str, yao_iowa_group_cred_points, yao_iowa_group_debt_points)
+#     yao_acctunit.add_membership(ohio_str, yao_ohio_group_cred_points, yao_ohio_group_debt_points)
 #     x_idea_name = idea_format_00020_plan_acct_membership_v0_0_0()
 #     membership_dataframe = create_idea_df(sue_planunit, x_idea_name)
 #     assert len(membership_dataframe) == 10
@@ -123,14 +123,14 @@ def test_make_plandelta_Arg_idea_format_00021_plan_acctunit_v0_0_0():
 #     bob_iowa_planatom.set_arg(acct_name_str(), bob_str)
 #     yao_iowa_planatom.set_arg(acct_name_str(), yao_str)
 #     yao_ohio_planatom.set_arg(acct_name_str(), yao_str)
-#     sue_iowa_planatom.set_arg(credit_vote_str(), sue_iowa_credit_vote)
-#     bob_iowa_planatom.set_arg(credit_vote_str(), bob_iowa_credit_vote)
-#     yao_iowa_planatom.set_arg(credit_vote_str(), yao_iowa_credit_vote)
-#     yao_ohio_planatom.set_arg(credit_vote_str(), yao_ohio_credit_vote)
-#     sue_iowa_planatom.set_arg(debt_vote_str(), sue_iowa_debt_vote)
-#     bob_iowa_planatom.set_arg(debt_vote_str(), bob_iowa_debt_vote)
-#     yao_iowa_planatom.set_arg(debt_vote_str(), yao_iowa_debt_vote)
-#     yao_ohio_planatom.set_arg(debt_vote_str(), yao_ohio_debt_vote)
+#     sue_iowa_planatom.set_arg(group_cred_points_str(), sue_iowa_group_cred_points)
+#     bob_iowa_planatom.set_arg(group_cred_points_str(), bob_iowa_group_cred_points)
+#     yao_iowa_planatom.set_arg(group_cred_points_str(), yao_iowa_group_cred_points)
+#     yao_ohio_planatom.set_arg(group_cred_points_str(), yao_ohio_group_cred_points)
+#     sue_iowa_planatom.set_arg(group_debt_points_str(), sue_iowa_group_debt_points)
+#     bob_iowa_planatom.set_arg(group_debt_points_str(), bob_iowa_group_debt_points)
+#     yao_iowa_planatom.set_arg(group_debt_points_str(), yao_iowa_group_debt_points)
+#     yao_ohio_planatom.set_arg(group_debt_points_str(), yao_ohio_group_debt_points)
 #     bob_iowa_planatom.set_atom_order()
 #     # print(f"{membership_changunit.get_ordered_planatoms()[2]=}")
 #     # print(f"{sue_iowa_planatom=}")

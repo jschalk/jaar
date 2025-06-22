@@ -1,10 +1,10 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a02_finance_logic.test._util.a02_str import bank_label_str, owner_name_str
 from src.a06_plan_logic.test._util.a06_str import (
+    acct_cred_points_str,
+    acct_debt_points_str,
     acct_name_str,
     concept_rope_str,
-    credit_score_str,
-    debt_score_str,
     labor_title_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
@@ -81,8 +81,8 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_plan_acctunit():
             labor_title_str(),
             owner_name_str(),
             acct_name_str(),
-            credit_score_str(),
-            debt_score_str(),
+            acct_cred_points_str(),
+            acct_debt_points_str(),
             amount_str(),
         ]
         plnacct_cat = "plan_acctunit"
@@ -104,7 +104,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_plan_acctunit():
         )
 
         # THEN
-        columns_str = "event_int, face_name, bank_label, owner_name, acct_name, credit_score, debt_score"
+        columns_str = "event_int, face_name, bank_label, owner_name, acct_name, acct_cred_points, acct_debt_points"
         expected_sqlstr = f"""INSERT INTO {plnacct_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
@@ -131,7 +131,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_plan_acctunit():
             labor_title_str(),
             owner_name_str(),
             acct_name_str(),
-            credit_score_str(),
+            acct_cred_points_str(),
             amount_str(),
         ]
         plnacct_cat = "plan_acctunit"
@@ -154,7 +154,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_plan_acctunit():
 
         # THEN
         columns_str = (
-            "event_int, face_name, bank_label, owner_name, acct_name, credit_score"
+            "event_int, face_name, bank_label, owner_name, acct_name, acct_cred_points"
         )
         expected_sqlstr = f"""INSERT INTO {plnacct_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}

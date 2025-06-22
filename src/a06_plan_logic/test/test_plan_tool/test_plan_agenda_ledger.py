@@ -375,12 +375,12 @@ def test_get_credit_ledger_ReturnsObj_Scenario1_acctunits_Exist():
     bob_str = "Bob"
     xio_str = "Xio"
     zia_str = "Zia"
-    bob_credit_score = 11
-    yao_credit_score = 13
-    xio_credit_score = 17
-    sue_plan.add_acctunit(yao_str, yao_credit_score)
-    sue_plan.add_acctunit(bob_str, bob_credit_score)
-    sue_plan.add_acctunit(xio_str, xio_credit_score)
+    bob_acct_cred_points = 11
+    yao_acct_cred_points = 13
+    xio_acct_cred_points = 17
+    sue_plan.add_acctunit(yao_str, yao_acct_cred_points)
+    sue_plan.add_acctunit(bob_str, bob_acct_cred_points)
+    sue_plan.add_acctunit(xio_str, xio_acct_cred_points)
 
     # WHEN
     sue_credit_ledger = get_credit_ledger(sue_plan)
@@ -389,9 +389,9 @@ def test_get_credit_ledger_ReturnsObj_Scenario1_acctunits_Exist():
     print(f"{sue_credit_ledger=}")
     print("")
     expected_sue_credit_ledger = {
-        bob_str: bob_credit_score,
-        yao_str: yao_credit_score,
-        xio_str: xio_credit_score,
+        bob_str: bob_acct_cred_points,
+        yao_str: yao_acct_cred_points,
+        xio_str: xio_acct_cred_points,
     }
     print(f"{expected_sue_credit_ledger=}")
     assert sue_credit_ledger.get(yao_str) != None

@@ -12,8 +12,8 @@
       "owner_name": {}
     },
     "jvalues": {
-      "credit_vote": {},
-      "debt_vote": {}
+      "group_cred_points": {},
+      "group_debt_points": {}
     }
   },
   "plan_acctunit": {
@@ -28,8 +28,8 @@
       "owner_name": {}
     },
     "jvalues": {
-      "credit_score": {},
-      "debt_score": {}
+      "acct_cred_points": {},
+      "acct_debt_points": {}
     }
   },
   "plan_concept_awardlink": {

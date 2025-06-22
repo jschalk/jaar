@@ -141,6 +141,8 @@ VALUES ('{accord23_str}'), ('{accord45_str}')
 
         accord23_json_path = create_bank_json_path(bank_mstr_dir, accord23_str)
         accord45_json_path = create_bank_json_path(bank_mstr_dir, accord45_str)
+        print(f"{accord23_json_path=}")
+        print(f"{accord45_json_path=}")
         assert os_path_exists(accord23_json_path) is False
         assert os_path_exists(accord45_json_path) is False
 

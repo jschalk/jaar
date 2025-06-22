@@ -2,9 +2,9 @@ from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
 from src.a02_finance_logic.test._util.a02_str import bank_label_str, owner_name_str
 from src.a06_plan_logic.test._util.a06_str import (
+    acct_cred_points_str,
+    acct_debt_points_str,
     acct_name_str,
-    credit_score_str,
-    debt_score_str,
     plan_acctunit_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
@@ -159,8 +159,8 @@ def test_get_insert_voice_agg_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
 , {bank_label_str()}_inx
 , {owner_name_str()}_inx
 , {acct_name_str()}_inx
-, {credit_score_str()}
-, {debt_score_str()}
+, {acct_cred_points_str()}
+, {acct_debt_points_str()}
 )
 VALUES
   ({event1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_inx}', {x44_credit}, {x22_debt})
@@ -187,8 +187,8 @@ VALUES
 , {bank_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
-, {credit_score_str()}
-, {debt_score_str()}
+, {acct_cred_points_str()}
+, {acct_debt_points_str()}
 FROM {plnacct_v_agg_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -229,8 +229,8 @@ def test_etl_voice_raw_tables_to_voice_agg_tables_PopulatesTable_Scenario0():
 , {bank_label_str()}_inx
 , {owner_name_str()}_inx
 , {acct_name_str()}_inx
-, {credit_score_str()}
-, {debt_score_str()}
+, {acct_cred_points_str()}
+, {acct_debt_points_str()}
 )
 VALUES
   ({event1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_inx}', {x44_credit}, {x22_debt})
@@ -255,8 +255,8 @@ VALUES
 , {bank_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
-, {credit_score_str()}
-, {debt_score_str()}
+, {acct_cred_points_str()}
+, {acct_debt_points_str()}
 FROM {plnacct_v_agg_put_tablename}
 """
         cursor.execute(select_sqlstr)

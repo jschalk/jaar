@@ -39,17 +39,17 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlanWhenNo_labo
     yao_str = "Yao"
     yao_gut = planunit_shop(yao_str, a23_str)
     zia_str = "Zia"
-    zia_credit_score = 47
-    zia_debt_score = 41
+    zia_acct_cred_points = 47
+    zia_acct_debt_points = 41
     zia_pool = 87
-    yao_gut.add_acctunit(zia_str, zia_credit_score, zia_debt_score)
+    yao_gut.add_acctunit(zia_str, zia_acct_cred_points, zia_acct_debt_points)
     yao_gut.set_acct_respect(zia_pool)
     save_gut_file(bank_mstr_dir, yao_gut)
 
     zia_gut = planunit_shop(zia_str, a23_str)
     zia_gut.set_concept(conceptunit_shop(clean_str(), task=True), casa_rope())
     zia_gut.set_concept(conceptunit_shop(cook_str(), task=True), casa_rope())
-    zia_gut.add_acctunit(yao_str, debt_score=12)
+    zia_gut.add_acctunit(yao_str, acct_debt_points=12)
     save_gut_file(bank_mstr_dir, zia_gut)
 
     new_yao_job = create_listen_basis(yao_gut)
@@ -72,17 +72,17 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlan(
     yao_str = "Yao"
     yao_gut = planunit_shop(yao_str, a23_str)
     zia_str = "Zia"
-    zia_credit_score = 47
-    zia_debt_score = 41
+    zia_acct_cred_points = 47
+    zia_acct_debt_points = 41
     zia_pool = 87
-    yao_gut.add_acctunit(zia_str, zia_credit_score, zia_debt_score)
+    yao_gut.add_acctunit(zia_str, zia_acct_cred_points, zia_acct_debt_points)
     yao_gut.set_acct_respect(zia_pool)
     a23_str = "accord23"
     save_gut_file(bank_mstr_dir, yao_gut)
     zia_gut = planunit_shop(zia_str, a23_str)
     zia_gut.set_concept(conceptunit_shop(clean_str(), task=True), casa_rope())
     zia_gut.set_concept(conceptunit_shop(cook_str(), task=True), casa_rope())
-    zia_gut.add_acctunit(yao_str, debt_score=12)
+    zia_gut.add_acctunit(yao_str, acct_debt_points=12)
     clean_conceptunit = zia_gut.get_concept_obj(clean_rope())
     cook_conceptunit = zia_gut.get_concept_obj(cook_rope())
     clean_conceptunit.laborunit.set_laborlink(yao_str)
@@ -99,7 +99,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlan(
     assert len(new_yao_job.get_agenda_dict()) == 2
 
 
-def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlanWithDetailsDecidedBy_debt_score(
+def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlanWithDetailsDecidedBy_acct_debt_points(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -138,13 +138,13 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlanWithDetails
     new_cook_concept = new_yao_gut1.get_concept_obj(cook_rope())
     zia_acctunit = new_yao_gut1.get_acct(zia_str)
     bob_acctunit = new_yao_gut1.get_acct(bob_str)
-    assert zia_acctunit.debt_score < bob_acctunit.debt_score
+    assert zia_acctunit.acct_debt_points < bob_acctunit.acct_debt_points
     assert new_cook_concept.get_reasonunit(eat_rope()) is None
 
-    yao_zia_debt_score = 15
-    yao_bob_debt_score = 5
-    yao_gut.add_acctunit(zia_str, None, yao_zia_debt_score)
-    yao_gut.add_acctunit(bob_str, None, yao_bob_debt_score)
+    yao_zia_acct_debt_points = 15
+    yao_bob_acct_debt_points = 5
+    yao_gut.add_acctunit(zia_str, None, yao_zia_acct_debt_points)
+    yao_gut.add_acctunit(bob_str, None, yao_bob_acct_debt_points)
     yao_gut.set_acct_respect(100)
     new_yao_gut2 = create_listen_basis(yao_gut)
     assert new_yao_gut2.concept_exists(cook_rope()) is False
@@ -157,7 +157,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlanWithDetails
     new_cook_concept = new_yao_gut2.get_concept_obj(cook_rope())
     zia_acctunit = new_yao_gut2.get_acct(zia_str)
     bob_acctunit = new_yao_gut2.get_acct(bob_str)
-    assert zia_acctunit.debt_score > bob_acctunit.debt_score
+    assert zia_acctunit.acct_debt_points > bob_acctunit.acct_debt_points
     zia_eat_reasonunit = zia_cook_conceptunit.get_reasonunit(eat_rope())
     assert new_cook_concept.get_reasonunit(eat_rope()) == zia_eat_reasonunit
 
@@ -171,13 +171,13 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalPlan(
     yao_str = "Yao"
     yao_gut = planunit_shop(yao_str, a23_str)
     zia_str = "Zia"
-    zia_credit_score = 47
-    zia_debt_score = 41
+    zia_acct_cred_points = 47
+    zia_acct_debt_points = 41
     sue_str = "Sue"
-    sue_credit_score = 57
-    sue_debt_score = 51
-    yao_gut.add_acctunit(zia_str, zia_credit_score, zia_debt_score)
-    yao_gut.add_acctunit(sue_str, sue_credit_score, sue_debt_score)
+    sue_acct_cred_points = 57
+    sue_acct_debt_points = 51
+    yao_gut.add_acctunit(zia_str, zia_acct_cred_points, zia_acct_debt_points)
+    yao_gut.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
     yao_pool = 92
     yao_gut.set_acct_respect(yao_pool)
     a23_str = "accord23"
@@ -187,7 +187,7 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalPlan(
     zia_gut = planunit_shop(zia_str, a23_str)
     zia_gut.set_concept(conceptunit_shop(clean_str(), task=True), casa_rope())
     zia_gut.set_concept(conceptunit_shop(cook_str(), task=True), casa_rope())
-    zia_gut.add_acctunit(yao_str, debt_score=12)
+    zia_gut.add_acctunit(yao_str, acct_debt_points=12)
     clean_conceptunit = zia_gut.get_concept_obj(clean_rope())
     cook_conceptunit = zia_gut.get_concept_obj(cook_rope())
     clean_conceptunit.laborunit.set_laborlink(yao_str)
@@ -196,7 +196,7 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalPlan(
 
     sue_gut = planunit_shop(sue_str, a23_str)
     sue_gut.set_max_tree_traverse(5)
-    zia_gut.add_acctunit(yao_str, debt_score=12)
+    zia_gut.add_acctunit(yao_str, acct_debt_points=12)
     vacuum_str = "vacuum"
     vacuum_rope = sue_gut.make_l1_rope(vacuum_str)
     sue_gut.set_l1_concept(conceptunit_shop(vacuum_str, task=True))
@@ -234,10 +234,10 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalPlan(
     assert len(new_yao_gut.get_agenda_dict()) == 2
     zia_acctunit = new_yao_gut.get_acct(zia_str)
     sue_acctunit = new_yao_gut.get_acct(sue_str)
-    print(f"{sue_acctunit.debt_score=}")
-    print(f"{sue_acctunit._irrational_debt_score=}")
-    assert zia_acctunit._irrational_debt_score == 0
-    assert sue_acctunit._irrational_debt_score == 51
+    print(f"{sue_acctunit.acct_debt_points=}")
+    print(f"{sue_acctunit._irrational_acct_debt_points=}")
+    assert zia_acctunit._irrational_acct_debt_points == 0
+    assert sue_acctunit._irrational_acct_debt_points == 51
 
 
 def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorPlan(
@@ -253,12 +253,12 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorPlan(
     yao_gut = planunit_shop(yao_str, a23_str)
     zia_str = "Zia"
     sue_str = "Sue"
-    zia_credit_score = 47
-    sue_credit_score = 57
-    zia_debt_score = 41
-    sue_debt_score = 51
-    yao_gut.add_acctunit(zia_str, zia_credit_score, zia_debt_score)
-    yao_gut.add_acctunit(sue_str, sue_credit_score, sue_debt_score)
+    zia_acct_cred_points = 47
+    sue_acct_cred_points = 57
+    zia_acct_debt_points = 41
+    sue_acct_debt_points = 51
+    yao_gut.add_acctunit(zia_str, zia_acct_cred_points, zia_acct_debt_points)
+    yao_gut.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
     yao_pool = 92
     yao_gut.set_acct_respect(yao_pool)
     save_gut_file(bank_mstr_dir, yao_gut)
@@ -266,7 +266,7 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorPlan(
     zia_gut = planunit_shop(zia_str, a23_str)
     zia_gut.set_concept(conceptunit_shop(clean_str(), task=True), casa_rope())
     zia_gut.set_concept(conceptunit_shop(cook_str(), task=True), casa_rope())
-    zia_gut.add_acctunit(yao_str, debt_score=12)
+    zia_gut.add_acctunit(yao_str, acct_debt_points=12)
     clean_conceptunit = zia_gut.get_concept_obj(clean_rope())
     cook_conceptunit = zia_gut.get_concept_obj(cook_rope())
     clean_conceptunit.laborunit.set_laborlink(yao_str)
@@ -282,7 +282,7 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorPlan(
     assert len(new_yao_gut.get_agenda_dict()) == 2
     zia_acctunit = new_yao_gut.get_acct(zia_str)
     sue_acctunit = new_yao_gut.get_acct(sue_str)
-    print(f"{sue_acctunit.debt_score=}")
-    print(f"{sue_acctunit._inallocable_debt_score=}")
-    assert zia_acctunit._inallocable_debt_score == 0
-    assert sue_acctunit._inallocable_debt_score == 51
+    print(f"{sue_acctunit.acct_debt_points=}")
+    print(f"{sue_acctunit._inallocable_acct_debt_points=}")
+    assert zia_acctunit._inallocable_acct_debt_points == 0
+    assert sue_acctunit._inallocable_acct_debt_points == 51

@@ -41,19 +41,19 @@ class AcctCore:
 @dataclass
 class AcctUnit(AcctCore):
     """This represents the owner_name's opinion of the AcctUnit.acct_name
-    AcctUnit.credit_score represents how much credit_score the _owner_name projects to the acct_name
-    AcctUnit.debt_score represents how much debt_score the _owner_name projects to the acct_name
+    AcctUnit.acct_cred_points represents how much acct_cred_points the _owner_name projects to the acct_name
+    AcctUnit.acct_debt_points represents how much acct_debt_points the _owner_name projects to the acct_name
     """
 
-    credit_score: int = None
-    debt_score: int = None
+    acct_cred_points: int = None
+    acct_debt_points: int = None
     # special attribute: static in plan json, in memory it is deleted after loading and recalculated during saving.
     _memberships: dict[AcctName, MemberShip] = None
     # calculated fields
     _credor_pool: RespectNum = None
     _debtor_pool: RespectNum = None
-    _irrational_debt_score: int = None  # set by listening process
-    _inallocable_debt_score: int = None  # set by listening process
+    _irrational_acct_debt_points: int = None  # set by listening process
+    _inallocable_acct_debt_points: int = None  # set by listening process
     # set by Plan.settle_plan()
     _fund_give: float = None
     _fund_take: float = None
@@ -65,27 +65,27 @@ class AcctUnit(AcctCore):
     def set_respect_bit(self, x_respect_bit: float):
         self.respect_bit = x_respect_bit
 
-    def set_credor_debt_score(
+    def set_credor_acct_debt_points(
         self,
-        credit_score: float = None,
-        debt_score: float = None,
+        acct_cred_points: float = None,
+        acct_debt_points: float = None,
     ):
-        if credit_score is not None:
-            self.set_credit_score(credit_score)
-        if debt_score is not None:
-            self.set_debt_score(debt_score)
+        if acct_cred_points is not None:
+            self.set_acct_cred_points(acct_cred_points)
+        if acct_debt_points is not None:
+            self.set_acct_debt_points(acct_debt_points)
 
-    def set_credit_score(self, credit_score: int):
-        self.credit_score = credit_score
+    def set_acct_cred_points(self, acct_cred_points: int):
+        self.acct_cred_points = acct_cred_points
 
-    def set_debt_score(self, debt_score: int):
-        self.debt_score = debt_score
+    def set_acct_debt_points(self, acct_debt_points: int):
+        self.acct_debt_points = acct_debt_points
 
-    def get_credit_score(self):
-        return get_1_if_None(self.credit_score)
+    def get_acct_cred_points(self):
+        return get_1_if_None(self.acct_cred_points)
 
-    def get_debt_score(self):
-        return get_1_if_None(self.debt_score)
+    def get_acct_debt_points(self):
+        return get_1_if_None(self.acct_debt_points)
 
     def clear_fund_give_take(self):
         self._fund_give = 0
@@ -95,15 +95,15 @@ class AcctUnit(AcctCore):
         self._fund_agenda_ratio_give = 0
         self._fund_agenda_ratio_take = 0
 
-    def add_irrational_debt_score(self, x_irrational_debt_score: float):
-        self._irrational_debt_score += x_irrational_debt_score
+    def add_irrational_acct_debt_points(self, x_irrational_acct_debt_points: float):
+        self._irrational_acct_debt_points += x_irrational_acct_debt_points
 
-    def add_inallocable_debt_score(self, x_inallocable_debt_score: float):
-        self._inallocable_debt_score += x_inallocable_debt_score
+    def add_inallocable_acct_debt_points(self, x_inallocable_acct_debt_points: float):
+        self._inallocable_acct_debt_points += x_inallocable_acct_debt_points
 
     def reset_listen_calculated_attrs(self):
-        self._irrational_debt_score = 0
-        self._inallocable_debt_score = 0
+        self._irrational_acct_debt_points = 0
+        self._inallocable_acct_debt_points = 0
 
     def add_fund_give(self, fund_give: float):
         self._fund_give += fund_give
@@ -133,19 +133,21 @@ class AcctUnit(AcctCore):
         self,
         fund_agenda_ratio_give_sum: float,
         fund_agenda_ratio_take_sum: float,
-        acctunits_credit_score_sum: float,
-        acctunits_debt_score_sum: float,
+        acctunits_acct_cred_points_sum: float,
+        acctunits_acct_debt_points_sum: float,
     ):
-        total_credit_score = acctunits_credit_score_sum
+        total_acct_cred_points = acctunits_acct_cred_points_sum
         ratio_give_sum = fund_agenda_ratio_give_sum
         self._fund_agenda_ratio_give = (
-            self.get_credit_score() / total_credit_score
+            self.get_acct_cred_points() / total_acct_cred_points
             if fund_agenda_ratio_give_sum == 0
             else self._fund_agenda_give / ratio_give_sum
         )
         if fund_agenda_ratio_take_sum == 0:
-            total_debt_score = acctunits_debt_score_sum
-            self._fund_agenda_ratio_take = self.get_debt_score() / total_debt_score
+            total_acct_debt_points = acctunits_acct_debt_points_sum
+            self._fund_agenda_ratio_take = (
+                self.get_acct_debt_points() / total_acct_debt_points
+            )
         else:
             ratio_take_sum = fund_agenda_ratio_take_sum
             self._fund_agenda_ratio_take = self._fund_agenda_take / ratio_take_sum
@@ -153,10 +155,12 @@ class AcctUnit(AcctCore):
     def add_membership(
         self,
         group_title: GroupTitle,
-        credit_vote: float = None,
-        debt_vote: float = None,
+        group_cred_points: float = None,
+        group_debt_points: float = None,
     ):
-        x_membership = membership_shop(group_title, credit_vote, debt_vote)
+        x_membership = membership_shop(
+            group_title, group_cred_points, group_debt_points
+        )
         self.set_membership(x_membership)
 
     def set_membership(self, x_membership: MemberShip):
@@ -188,7 +192,7 @@ class AcctUnit(AcctCore):
     def set_credor_pool(self, credor_pool: RespectNum):
         self._credor_pool = credor_pool
         ledger_dict = {
-            x_membership.group_title: x_membership.credit_vote
+            x_membership.group_title: x_membership.group_cred_points
             for x_membership in self._memberships.values()
         }
         allot_dict = allot_scale(ledger_dict, self._credor_pool, self.respect_bit)
@@ -198,7 +202,7 @@ class AcctUnit(AcctCore):
     def set_debtor_pool(self, debtor_pool: RespectNum):
         self._debtor_pool = debtor_pool
         ledger_dict = {
-            x_membership.group_title: x_membership.debt_vote
+            x_membership.group_title: x_membership.group_debt_points
             for x_membership in self._memberships.values()
         }
         allot_dict = allot_scale(ledger_dict, self._debtor_pool, self.respect_bit)
@@ -214,14 +218,14 @@ class AcctUnit(AcctCore):
     def get_dict(self, all_attrs: bool = False) -> dict[str, str]:
         x_dict = {
             "acct_name": self.acct_name,
-            "credit_score": self.credit_score,
-            "debt_score": self.debt_score,
+            "acct_cred_points": self.acct_cred_points,
+            "acct_debt_points": self.acct_debt_points,
             "_memberships": self.get_memberships_dict(),
         }
-        if self._irrational_debt_score not in [None, 0]:
-            x_dict["_irrational_debt_score"] = self._irrational_debt_score
-        if self._inallocable_debt_score not in [None, 0]:
-            x_dict["_inallocable_debt_score"] = self._inallocable_debt_score
+        if self._irrational_acct_debt_points not in [None, 0]:
+            x_dict["_irrational_acct_debt_points"] = self._irrational_acct_debt_points
+        if self._inallocable_acct_debt_points not in [None, 0]:
+            x_dict["_inallocable_acct_debt_points"] = self._inallocable_acct_debt_points
 
         if all_attrs:
             self._all_attrs_necessary_in_dict(x_dict)
@@ -251,34 +255,42 @@ def acctunits_get_from_dict(x_dict: dict, _knot: str = None) -> dict[str, AcctUn
 
 def acctunit_get_from_dict(acctunit_dict: dict, _knot: str) -> AcctUnit:
     x_acct_name = acctunit_dict["acct_name"]
-    x_credit_score = acctunit_dict["credit_score"]
-    x_debt_score = acctunit_dict["debt_score"]
+    x_acct_cred_points = acctunit_dict["acct_cred_points"]
+    x_acct_debt_points = acctunit_dict["acct_debt_points"]
     x_memberships_dict = acctunit_dict["_memberships"]
-    x_acctunit = acctunit_shop(x_acct_name, x_credit_score, x_debt_score, _knot)
+    x_acctunit = acctunit_shop(
+        x_acct_name, x_acct_cred_points, x_acct_debt_points, _knot
+    )
     x_acctunit._memberships = memberships_get_from_dict(x_memberships_dict, x_acct_name)
-    _irrational_debt_score = acctunit_dict.get("_irrational_debt_score", 0)
-    _inallocable_debt_score = acctunit_dict.get("_inallocable_debt_score", 0)
-    x_acctunit.add_irrational_debt_score(get_0_if_None(_irrational_debt_score))
-    x_acctunit.add_inallocable_debt_score(get_0_if_None(_inallocable_debt_score))
+    _irrational_acct_debt_points = acctunit_dict.get("_irrational_acct_debt_points", 0)
+    _inallocable_acct_debt_points = acctunit_dict.get(
+        "_inallocable_acct_debt_points", 0
+    )
+    x_acctunit.add_irrational_acct_debt_points(
+        get_0_if_None(_irrational_acct_debt_points)
+    )
+    x_acctunit.add_inallocable_acct_debt_points(
+        get_0_if_None(_inallocable_acct_debt_points)
+    )
 
     return x_acctunit
 
 
 def acctunit_shop(
     acct_name: AcctName,
-    credit_score: int = None,
-    debt_score: int = None,
+    acct_cred_points: int = None,
+    acct_debt_points: int = None,
     knot: str = None,
     respect_bit: float = None,
 ) -> AcctUnit:
     x_acctunit = AcctUnit(
-        credit_score=get_1_if_None(credit_score),
-        debt_score=get_1_if_None(debt_score),
+        acct_cred_points=get_1_if_None(acct_cred_points),
+        acct_debt_points=get_1_if_None(acct_debt_points),
         _memberships={},
         _credor_pool=0,
         _debtor_pool=0,
-        _irrational_debt_score=0,
-        _inallocable_debt_score=0,
+        _irrational_acct_debt_points=0,
+        _inallocable_acct_debt_points=0,
         _fund_give=0,
         _fund_take=0,
         _fund_agenda_give=0,

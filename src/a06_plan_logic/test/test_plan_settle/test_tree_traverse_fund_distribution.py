@@ -1063,7 +1063,7 @@ def clear_all_acctunits_groupunits_fund_agenda_give_take(x_plan: PlanUnit):
     for groupunit_x in x_plan._groupunits.values():
         groupunit_x.clear_fund_give_take()
         # for membership_x in groupunit_x._accts.values():
-        #     print(f"{groupunit_x.} {membership_x.}  {membership_x._fund_give:.6f} {membership_x.debt_score=} {membership__fund_take:t:.6f} {membership_x.} ")
+        #     print(f"{groupunit_x.} {membership_x.}  {membership_x._fund_give:.6f} {membership_x.acct_debt_points=} {membership__fund_take:t:.6f} {membership_x.} ")
 
     # delete plan_agenda_debt and plan_agenda_cred
     for x_acctunit in x_plan.accts.values():
@@ -1231,9 +1231,9 @@ def test_PlanUnit_settle_plan_SetsAttrsWhenNoFactUnitsNoReasonUnitsEmpty_agenda_
     sue_str = "Sue"
     bob_str = "Bob"
     zia_str = "Zia"
-    sue_acctunit = acctunit_shop(sue_str, 0.5, debt_score=2)
-    bob_acctunit = acctunit_shop(bob_str, 1.5, debt_score=3)
-    zia_acctunit = acctunit_shop(zia_str, 8, debt_score=5)
+    sue_acctunit = acctunit_shop(sue_str, 0.5, acct_debt_points=2)
+    bob_acctunit = acctunit_shop(bob_str, 1.5, acct_debt_points=3)
+    zia_acctunit = acctunit_shop(zia_str, 8, acct_debt_points=5)
     yao_plan.set_acctunit(sue_acctunit)
     yao_plan.set_acctunit(bob_acctunit)
     yao_plan.set_acctunit(zia_acctunit)

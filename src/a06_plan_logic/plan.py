@@ -333,10 +333,13 @@ class PlanUnit:
         self.accts.pop(acct_name)
 
     def add_acctunit(
-        self, acct_name: AcctName, credit_score: int = None, debt_score: int = None
+        self,
+        acct_name: AcctName,
+        acct_cred_points: int = None,
+        acct_debt_points: int = None,
     ):
         x_knot = self.knot
-        acctunit = acctunit_shop(acct_name, credit_score, debt_score, x_knot)
+        acctunit = acctunit_shop(acct_name, acct_cred_points, acct_debt_points, x_knot)
         self.set_acctunit(acctunit)
 
     def set_acctunit(self, x_acctunit: AcctUnit, auto_set_membership: bool = True):
@@ -352,15 +355,18 @@ class PlanUnit:
         return self.get_acct(acct_name) is not None
 
     def edit_acctunit(
-        self, acct_name: AcctName, credit_score: int = None, debt_score: int = None
+        self,
+        acct_name: AcctName,
+        acct_cred_points: int = None,
+        acct_debt_points: int = None,
     ):
         if self.accts.get(acct_name) is None:
             raise AcctMissingException(f"AcctUnit '{acct_name}' does not exist.")
         x_acctunit = self.get_acct(acct_name)
-        if credit_score is not None:
-            x_acctunit.set_credit_score(credit_score)
-        if debt_score is not None:
-            x_acctunit.set_debt_score(debt_score)
+        if acct_cred_points is not None:
+            x_acctunit.set_acct_cred_points(acct_cred_points)
+        if acct_debt_points is not None:
+            x_acctunit.set_acct_debt_points(acct_debt_points)
         self.set_acctunit(x_acctunit)
 
     def clear_acctunits_memberships(self):
@@ -397,8 +403,8 @@ class PlanUnit:
         for x_acctunit in self.accts.values():
             x_membership = membership_shop(
                 group_title=x_group_title,
-                credit_vote=x_acctunit.credit_score,
-                debt_vote=x_acctunit.debt_score,
+                group_cred_points=x_acctunit.acct_cred_points,
+                group_debt_points=x_acctunit.acct_debt_points,
                 acct_name=x_acctunit.acct_name,
             )
             x_groupunit.set_membership(x_membership)
@@ -909,18 +915,18 @@ class PlanUnit:
         credit_ledger = {}
         debt_ledger = {}
         for x_acctunit in self.accts.values():
-            credit_ledger[x_acctunit.acct_name] = x_acctunit.credit_score
-            debt_ledger[x_acctunit.acct_name] = x_acctunit.debt_score
+            credit_ledger[x_acctunit.acct_name] = x_acctunit.acct_cred_points
+            debt_ledger[x_acctunit.acct_name] = x_acctunit.acct_debt_points
         return credit_ledger, debt_ledger
 
     def _allot_offtrack_fund(self):
         self._add_to_acctunits_fund_give_take(self._offtrack_fund)
 
-    def get_acctunits_credit_score_sum(self) -> float:
-        return sum(acctunit.get_credit_score() for acctunit in self.accts.values())
+    def get_acctunits_acct_cred_points_sum(self) -> float:
+        return sum(acctunit.get_acct_cred_points() for acctunit in self.accts.values())
 
-    def get_acctunits_debt_score_sum(self) -> float:
-        return sum(acctunit.get_debt_score() for acctunit in self.accts.values())
+    def get_acctunits_acct_debt_points_sum(self) -> float:
+        return sum(acctunit.get_acct_debt_points() for acctunit in self.accts.values())
 
     def _add_to_acctunits_fund_give_take(self, concept_fund_share: float):
         credor_ledger, debtor_ledger = self.get_credit_ledger_debt_ledger()
@@ -999,14 +1005,14 @@ class PlanUnit:
         fund_agenda_ratio_take_sum = sum(
             x_acctunit._fund_agenda_take for x_acctunit in self.accts.values()
         )
-        x_acctunits_credit_score_sum = self.get_acctunits_credit_score_sum()
-        x_acctunits_debt_score_sum = self.get_acctunits_debt_score_sum()
+        x_acctunits_acct_cred_points_sum = self.get_acctunits_acct_cred_points_sum()
+        x_acctunits_acct_debt_points_sum = self.get_acctunits_acct_debt_points_sum()
         for x_acctunit in self.accts.values():
             x_acctunit.set_fund_agenda_ratio_give_take(
                 fund_agenda_ratio_give_sum=fund_agenda_ratio_give_sum,
                 fund_agenda_ratio_take_sum=fund_agenda_ratio_take_sum,
-                acctunits_credit_score_sum=x_acctunits_credit_score_sum,
-                acctunits_debt_score_sum=x_acctunits_debt_score_sum,
+                acctunits_acct_cred_points_sum=x_acctunits_acct_cred_points_sum,
+                acctunits_acct_debt_points_sum=x_acctunits_acct_debt_points_sum,
             )
 
     def _reset_acctunit_fund_give_take(self):
@@ -1098,7 +1104,9 @@ class PlanUnit:
                 r_concept._gogo_calc = r_concept.begin
                 r_concept._stop_calc = r_concept.close
             else:
-                parent_rope = get_parent_rope(r_concept.get_concept_rope())
+                parent_rope = get_parent_rope(
+                    rope=r_concept.get_concept_rope(), knot=r_concept.knot
+                )
                 parent_concept = self.get_concept_obj(parent_rope)
                 r_concept._gogo_calc = parent_concept._gogo_calc
                 r_concept._stop_calc = parent_concept._stop_calc
@@ -1106,7 +1114,6 @@ class PlanUnit:
                     math_concept.get_concept_rope()
                 )
             r_concept._mold_gogo_calc_stop_calc()
-
             single_range_concept_list.extend(iter(r_concept._kids.values()))
 
     def _set_concepttree_range_attrs(self):

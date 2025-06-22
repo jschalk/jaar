@@ -35,5 +35,4 @@ def get_all_idea_dataframes(dir: str) -> list[IdeaFileRef]:
         df = pandas_read_excel(file_path, sheet_name=sheet_name)
         if idea_columns.issubset(set(df.columns)):
             valid_ideas.append(IdeaFileRef(dir, filename, sheet_name, idea_number))
-
     return valid_ideas

@@ -267,7 +267,7 @@ def test_PlanUnit_get_json_ReturnsCorrectJSON_BigExample():
 
     anna_str = "Anna"
     anna_acctunit = yao_plan.get_acct(anna_str)
-    assert anna_acctunit.get_membership(";Family").credit_vote == 6.2
+    assert anna_acctunit.get_membership(";Family").group_cred_points == 6.2
     assert yao_plan.accts is not None
     assert len(yao_plan.accts) == 22
 
@@ -301,7 +301,7 @@ def test_planunit_get_from_json_ReturnsObjSimpleExample():
     # print(f"{json_shave_concept.concept_label=} {json_shave_concept.parent_rope=}")
 
     sue_str = "Sue"
-    zia_plan.add_acctunit(acct_name=sue_str, credit_score=199, debt_score=199)
+    zia_plan.add_acctunit(acct_name=sue_str, acct_cred_points=199, acct_debt_points=199)
     xio_str = "Xio"
     zia_plan.add_acctunit(acct_name=xio_str)
     run_str = ";runners"

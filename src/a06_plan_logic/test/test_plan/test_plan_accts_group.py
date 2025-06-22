@@ -91,12 +91,12 @@ def test_PlanUnit_create_symmetry_groupunit_ReturnsObj():
     yao_str = "Yao"
     yao_plan = planunit_shop(yao_str)
     zia_str = "Zia"
-    yao_credit_vote = 3
-    yao_debt_vote = 2
-    zia_credit_vote = 4
-    zia_debt_vote = 5
-    yao_plan.add_acctunit(yao_str, yao_credit_vote, yao_debt_vote)
-    yao_plan.add_acctunit(zia_str, zia_credit_vote, zia_debt_vote)
+    yao_group_cred_points = 3
+    yao_group_debt_points = 2
+    zia_group_cred_points = 4
+    zia_group_debt_points = 5
+    yao_plan.add_acctunit(yao_str, yao_group_cred_points, yao_group_debt_points)
+    yao_plan.add_acctunit(zia_str, zia_group_cred_points, zia_group_debt_points)
 
     # WHEN
     xio_str = "Xio"
@@ -109,7 +109,7 @@ def test_PlanUnit_create_symmetry_groupunit_ReturnsObj():
     assert len(xio_groupunit._memberships) == 2
     yao_groupunit = xio_groupunit.get_membership(yao_str)
     zia_groupunit = xio_groupunit.get_membership(zia_str)
-    assert yao_groupunit.credit_vote == yao_credit_vote
-    assert zia_groupunit.credit_vote == zia_credit_vote
-    assert yao_groupunit.debt_vote == yao_debt_vote
-    assert zia_groupunit.debt_vote == zia_debt_vote
+    assert yao_groupunit.group_cred_points == yao_group_cred_points
+    assert zia_groupunit.group_cred_points == zia_group_cred_points
+    assert yao_groupunit.group_debt_points == yao_group_debt_points
+    assert zia_groupunit.group_debt_points == zia_group_debt_points

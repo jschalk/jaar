@@ -12,17 +12,17 @@ from src.a12_hub_toolbox.hubunit import HubUnit
 
 def get_credorledger(x_plan: PlanUnit) -> dict[AcctName, float]:
     return {
-        acctunit.acct_name: acctunit.credit_score
+        acctunit.acct_name: acctunit.acct_cred_points
         for acctunit in x_plan.accts.values()
-        if acctunit.credit_score > 0
+        if acctunit.acct_cred_points > 0
     }
 
 
 def get_debtorledger(x_plan: PlanUnit) -> dict[AcctName, float]:
     return {
-        acctunit.acct_name: acctunit.debt_score
+        acctunit.acct_name: acctunit.acct_debt_points
         for acctunit in x_plan.accts.values()
-        if acctunit.debt_score > 0
+        if acctunit.acct_debt_points > 0
     }
 
 

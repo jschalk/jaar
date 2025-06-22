@@ -145,10 +145,10 @@ def save_arbitrary_planevent(
     x_planunit = planunit_shop(owner_name, bank_label)
     for acct_list in accts:
         try:
-            credit_score = acct_list[1]
+            acct_cred_points = acct_list[1]
         except Exception:
-            credit_score = None
-        x_planunit.add_acctunit(acct_list[0], credit_score)
+            acct_cred_points = None
+        x_planunit.add_acctunit(acct_list[0], acct_cred_points)
     for fact_tup in facts:
         x_rcontext = fact_tup[0]
         x_fstate = fact_tup[1]

@@ -11,12 +11,12 @@ from src.a03_group_logic.test._util.a03_str import (
     _fund_agenda_take_str,
     _fund_give_str,
     _fund_take_str,
-    _inallocable_debt_score_str,
-    _irrational_debt_score_str,
+    _inallocable_acct_debt_points_str,
+    _irrational_acct_debt_points_str,
     _memberships_str,
+    acct_cred_points_str,
+    acct_debt_points_str,
     acct_name_str,
-    credit_score_str,
-    debt_score_str,
     knot_str,
     respect_bit_str,
 )
@@ -34,14 +34,14 @@ def test_AcctUnit_exists():
     assert bob_acctunit
     assert bob_acctunit.acct_name
     assert bob_acctunit.acct_name == bob_str
-    assert not bob_acctunit.credit_score
-    assert not bob_acctunit.debt_score
+    assert not bob_acctunit.acct_cred_points
+    assert not bob_acctunit.acct_debt_points
     # calculated fields
     assert not bob_acctunit._credor_pool
     assert not bob_acctunit._debtor_pool
     assert not bob_acctunit._memberships
-    assert not bob_acctunit._irrational_debt_score
-    assert not bob_acctunit._inallocable_debt_score
+    assert not bob_acctunit._irrational_acct_debt_points
+    assert not bob_acctunit._inallocable_acct_debt_points
     assert not bob_acctunit._fund_give
     assert not bob_acctunit._fund_take
     assert not bob_acctunit._fund_agenda_give
@@ -59,14 +59,14 @@ def test_AcctUnit_exists():
         _fund_agenda_take_str(),
         _fund_give_str(),
         _fund_take_str(),
-        _inallocable_debt_score_str(),
-        _irrational_debt_score_str(),
+        _inallocable_acct_debt_points_str(),
+        _irrational_acct_debt_points_str(),
         _memberships_str(),
         respect_bit_str(),
         acct_name_str(),
         knot_str(),
-        credit_score_str(),
-        debt_score_str(),
+        acct_cred_points_str(),
+        acct_debt_points_str(),
     }
 
 
@@ -105,14 +105,14 @@ def test_acctunit_shop_CorrectlySetsAttributes():
 
     # THEN
     assert yao_acctunit.acct_name == yao_str
-    assert yao_acctunit.credit_score == 1
-    assert yao_acctunit.debt_score == 1
+    assert yao_acctunit.acct_cred_points == 1
+    assert yao_acctunit.acct_debt_points == 1
     # calculated fields
     assert yao_acctunit._credor_pool == 0
     assert yao_acctunit._debtor_pool == 0
     assert yao_acctunit._memberships == {}
-    assert yao_acctunit._irrational_debt_score == 0
-    assert yao_acctunit._inallocable_debt_score == 0
+    assert yao_acctunit._irrational_acct_debt_points == 0
+    assert yao_acctunit._inallocable_acct_debt_points == 0
     assert yao_acctunit._fund_give == 0
     assert yao_acctunit._fund_take == 0
     assert yao_acctunit._fund_agenda_give == 0
@@ -158,110 +158,114 @@ def test_AcctUnit_set_respect_bit_CorrectlySetsAttribute():
     assert bob_acctunit.respect_bit == x_respect_bit
 
 
-def test_AcctUnit_set_credit_score_CorrectlySetsAttribute():
+def test_AcctUnit_set_acct_cred_points_CorrectlySetsAttribute():
     # ESTABLISH
     bob_acctunit = acctunit_shop("Bob")
 
     # WHEN
-    x_credit_score = 23
-    bob_acctunit.set_credit_score(x_credit_score)
+    x_acct_cred_points = 23
+    bob_acctunit.set_acct_cred_points(x_acct_cred_points)
 
     # THEN
-    assert bob_acctunit.credit_score == x_credit_score
+    assert bob_acctunit.acct_cred_points == x_acct_cred_points
 
 
-def test_AcctUnit_set_debt_score_CorrectlySetsAttribute():
+def test_AcctUnit_set_acct_debt_points_CorrectlySetsAttribute():
     # ESTABLISH
     bob_acctunit = acctunit_shop("Bob")
 
     # WHEN
-    x_debt_score = 23
-    bob_acctunit.set_debt_score(x_debt_score)
+    x_acct_debt_points = 23
+    bob_acctunit.set_acct_debt_points(x_acct_debt_points)
 
     # THEN
-    assert bob_acctunit.debt_score == x_debt_score
+    assert bob_acctunit.acct_debt_points == x_acct_debt_points
 
 
-def test_AcctUnit_set_credor_debt_score_SetsAttr_Scenario0():
+def test_AcctUnit_set_credor_acct_debt_points_SetsAttr_Scenario0():
     # ESTABLISH
     bob_acctunit = acctunit_shop("Bob")
-    assert bob_acctunit.credit_score == 1
-    assert bob_acctunit.debt_score == 1
+    assert bob_acctunit.acct_cred_points == 1
+    assert bob_acctunit.acct_debt_points == 1
 
     # WHEN
-    bob_acctunit.set_credor_debt_score(credit_score=23, debt_score=34)
+    bob_acctunit.set_credor_acct_debt_points(acct_cred_points=23, acct_debt_points=34)
 
     # THEN
-    assert bob_acctunit.credit_score == 23
-    assert bob_acctunit.debt_score == 34
+    assert bob_acctunit.acct_cred_points == 23
+    assert bob_acctunit.acct_debt_points == 34
 
 
-def test_AcctUnit_set_credor_debt_score_IgnoresNoneArgs_Scenario0():
+def test_AcctUnit_set_credor_acct_debt_points_IgnoresNoneArgs_Scenario0():
     # ESTABLISH
-    bob_acctunit = acctunit_shop("Bob", credit_score=45, debt_score=56)
-    assert bob_acctunit.credit_score == 45
-    assert bob_acctunit.debt_score == 56
+    bob_acctunit = acctunit_shop("Bob", acct_cred_points=45, acct_debt_points=56)
+    assert bob_acctunit.acct_cred_points == 45
+    assert bob_acctunit.acct_debt_points == 56
 
     # WHEN
-    bob_acctunit.set_credor_debt_score(credit_score=None, debt_score=None)
+    bob_acctunit.set_credor_acct_debt_points(
+        acct_cred_points=None, acct_debt_points=None
+    )
 
     # THEN
-    assert bob_acctunit.credit_score == 45
-    assert bob_acctunit.debt_score == 56
+    assert bob_acctunit.acct_cred_points == 45
+    assert bob_acctunit.acct_debt_points == 56
 
 
-def test_AcctUnit_set_credor_debt_score_IgnoresNoneArgs_Scenario1():
-    # ESTABLISH
-    bob_acctunit = acctunit_shop("Bob")
-    assert bob_acctunit.credit_score == 1
-    assert bob_acctunit.debt_score == 1
-
-    # WHEN
-    bob_acctunit.set_credor_debt_score(credit_score=None, debt_score=None)
-
-    # THEN
-    assert bob_acctunit.credit_score == 1
-    assert bob_acctunit.debt_score == 1
-
-
-def test_AcctUnit_add_irrational_debt_score_SetsAttrCorrectly():
+def test_AcctUnit_set_credor_acct_debt_points_IgnoresNoneArgs_Scenario1():
     # ESTABLISH
     bob_acctunit = acctunit_shop("Bob")
-    assert bob_acctunit._irrational_debt_score == 0
+    assert bob_acctunit.acct_cred_points == 1
+    assert bob_acctunit.acct_debt_points == 1
+
+    # WHEN
+    bob_acctunit.set_credor_acct_debt_points(
+        acct_cred_points=None, acct_debt_points=None
+    )
+
+    # THEN
+    assert bob_acctunit.acct_cred_points == 1
+    assert bob_acctunit.acct_debt_points == 1
+
+
+def test_AcctUnit_add_irrational_acct_debt_points_SetsAttrCorrectly():
+    # ESTABLISH
+    bob_acctunit = acctunit_shop("Bob")
+    assert bob_acctunit._irrational_acct_debt_points == 0
 
     # WHEN
     bob_int1 = 11
-    bob_acctunit.add_irrational_debt_score(bob_int1)
+    bob_acctunit.add_irrational_acct_debt_points(bob_int1)
 
     # THEN
-    assert bob_acctunit._irrational_debt_score == bob_int1
+    assert bob_acctunit._irrational_acct_debt_points == bob_int1
 
     # WHEN
     bob_int2 = 22
-    bob_acctunit.add_irrational_debt_score(bob_int2)
+    bob_acctunit.add_irrational_acct_debt_points(bob_int2)
 
     # THEN
-    assert bob_acctunit._irrational_debt_score == bob_int1 + bob_int2
+    assert bob_acctunit._irrational_acct_debt_points == bob_int1 + bob_int2
 
 
-def test_AcctUnit_add_inallocable_debt_score_SetsAttrCorrectly():
+def test_AcctUnit_add_inallocable_acct_debt_points_SetsAttrCorrectly():
     # ESTABLISH
     bob_acctunit = acctunit_shop("Bob")
-    assert bob_acctunit._inallocable_debt_score == 0
+    assert bob_acctunit._inallocable_acct_debt_points == 0
 
     # WHEN
     bob_int1 = 11
-    bob_acctunit.add_inallocable_debt_score(bob_int1)
+    bob_acctunit.add_inallocable_acct_debt_points(bob_int1)
 
     # THEN
-    assert bob_acctunit._inallocable_debt_score == bob_int1
+    assert bob_acctunit._inallocable_acct_debt_points == bob_int1
 
     # WHEN
     bob_int2 = 22
-    bob_acctunit.add_inallocable_debt_score(bob_int2)
+    bob_acctunit.add_inallocable_acct_debt_points(bob_int2)
 
     # THEN
-    assert bob_acctunit._inallocable_debt_score == bob_int1 + bob_int2
+    assert bob_acctunit._inallocable_acct_debt_points == bob_int1 + bob_int2
 
 
 def test_AcctUnit_reset_listen_calculated_attrs_SetsAttrCorrectly():
@@ -269,17 +273,17 @@ def test_AcctUnit_reset_listen_calculated_attrs_SetsAttrCorrectly():
     bob_acctunit = acctunit_shop("Bob")
     bob_int1 = 11
     bob_int2 = 22
-    bob_acctunit.add_irrational_debt_score(bob_int1)
-    bob_acctunit.add_inallocable_debt_score(bob_int2)
-    assert bob_acctunit._irrational_debt_score == bob_int1
-    assert bob_acctunit._inallocable_debt_score == bob_int2
+    bob_acctunit.add_irrational_acct_debt_points(bob_int1)
+    bob_acctunit.add_inallocable_acct_debt_points(bob_int2)
+    assert bob_acctunit._irrational_acct_debt_points == bob_int1
+    assert bob_acctunit._inallocable_acct_debt_points == bob_int2
 
     # WHEN
     bob_acctunit.reset_listen_calculated_attrs()
 
     # THEN
-    assert bob_acctunit._irrational_debt_score == 0
-    assert bob_acctunit._inallocable_debt_score == 0
+    assert bob_acctunit._irrational_acct_debt_points == 0
+    assert bob_acctunit._inallocable_acct_debt_points == 0
 
 
 def test_AcctUnit_clear_fund_give_take_SetsAttrCorrectly():
@@ -363,7 +367,7 @@ def test_AcctUnit_add_fund_give_take_SetsAttrCorrectly():
 
 def test_AcctUnit_set_acctunits_fund_agenda_ratios_SetsAttrCorrectly():
     # ESTABLISH
-    bob_acctunit = acctunit_shop("Bob", credit_score=15, debt_score=7)
+    bob_acctunit = acctunit_shop("Bob", acct_cred_points=15, acct_debt_points=7)
     bob_acctunit._fund_give = 0.4106
     bob_acctunit._fund_take = 0.1106
     bob_acctunit._fund_agenda_give = 0.041
@@ -377,8 +381,8 @@ def test_AcctUnit_set_acctunits_fund_agenda_ratios_SetsAttrCorrectly():
     bob_acctunit.set_fund_agenda_ratio_give_take(
         fund_agenda_ratio_give_sum=0.2,
         fund_agenda_ratio_take_sum=0.5,
-        acctunits_credit_score_sum=20,
-        acctunits_debt_score_sum=14,
+        acctunits_acct_cred_points_sum=20,
+        acctunits_acct_debt_points_sum=14,
     )
 
     # THEN
@@ -389,8 +393,8 @@ def test_AcctUnit_set_acctunits_fund_agenda_ratios_SetsAttrCorrectly():
     bob_acctunit.set_fund_agenda_ratio_give_take(
         fund_agenda_ratio_give_sum=0,
         fund_agenda_ratio_take_sum=0,
-        acctunits_credit_score_sum=20,
-        acctunits_debt_score_sum=14,
+        acctunits_acct_cred_points_sum=20,
+        acctunits_acct_debt_points_sum=14,
     )
 
     # THEN

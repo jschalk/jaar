@@ -5,8 +5,8 @@ from src.a01_term_logic.rope import create_rope, to_rope
 from src.a02_finance_logic.test._util.a02_str import bank_label_str
 from src.a06_plan_logic.test._util.a06_str import (
     NameTerm_str,
+    acct_cred_points_str,
     acct_name_str,
-    credit_score_str,
     rcontext_str,
 )
 from src.a16_pidgin_logic.map import namemap_shop
@@ -30,11 +30,11 @@ def test_get_dataframe_pidginable_columns_ReturnsObj():
     assert get_dataframe_pidginable_columns(x_dt) == set()
     x_dt = DataFrame(columns=[acct_name_str()])
     assert get_dataframe_pidginable_columns(x_dt) == {acct_name_str()}
-    x_dt = DataFrame(columns=[acct_name_str(), credit_score_str()])
+    x_dt = DataFrame(columns=[acct_name_str(), acct_cred_points_str()])
     assert get_dataframe_pidginable_columns(x_dt) == {acct_name_str()}
-    x_dt = DataFrame(columns=[rcontext_str(), acct_name_str(), credit_score_str()])
+    x_dt = DataFrame(columns=[rcontext_str(), acct_name_str(), acct_cred_points_str()])
     assert get_dataframe_pidginable_columns(x_dt) == {acct_name_str(), rcontext_str()}
-    x_dt = DataFrame(columns=["calc_swim", acct_name_str(), credit_score_str()])
+    x_dt = DataFrame(columns=["calc_swim", acct_name_str(), acct_cred_points_str()])
     assert get_dataframe_pidginable_columns(x_dt) == {acct_name_str()}
 
 
@@ -105,7 +105,9 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_AcctName
     acct_name_mapunit.set_otx2inx(xio_otx, xio_inx)
     acct_name_mapunit.set_otx2inx(sue_otx, sue_inx)
     acct_name_mapunit.set_otx2inx(bob_otx, bob_inx)
-    otx_dt = DataFrame(columns=[bank_label_str(), acct_name_str(), credit_score_str()])
+    otx_dt = DataFrame(
+        columns=[bank_label_str(), acct_name_str(), acct_cred_points_str()]
+    )
     otx_dt.loc[0] = ["ZZ", zia_otx, 12]
     otx_dt.loc[1] = ["ZZ", sue_otx, 12]
     otx_dt.loc[2] = ["ZZ", bob_otx, 12]
@@ -121,7 +123,9 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_AcctName
     assert otx_dt.iloc[0][acct_name_str()] == zia_otx
     assert otx_dt.iloc[1][acct_name_str()] == sue_inx
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
-    inx_dt = DataFrame(columns=[bank_label_str(), acct_name_str(), credit_score_str()])
+    inx_dt = DataFrame(
+        columns=[bank_label_str(), acct_name_str(), acct_cred_points_str()]
+    )
     inx_dt.loc[0] = ["ZZ", zia_otx, 12]
     inx_dt.loc[1] = ["ZZ", sue_inx, 12]
     inx_dt.loc[2] = ["ZZ", bob_inx, 12]
@@ -138,7 +142,9 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario0_AcctName()
     sue_otx = "Sue"
     bob_otx = "Bob"
     zia_otx = "Zia"
-    otx_dt = DataFrame(columns=[bank_label_str(), acct_name_str(), credit_score_str()])
+    otx_dt = DataFrame(
+        columns=[bank_label_str(), acct_name_str(), acct_cred_points_str()]
+    )
     otx_dt.loc[0] = ["ZZ", zia_otx, 12]
     otx_dt.loc[1] = ["ZZ", sue_otx, 12]
     otx_dt.loc[2] = ["ZZ", bob_otx, 12]
@@ -154,7 +160,9 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario0_AcctName()
     assert otx_dt.iloc[0][acct_name_str()] == zia_otx
     assert otx_dt.iloc[1][acct_name_str()] == sue_otx
     pandas_assert_frame_equal(otx_dt, old_otx_dt)
-    inx_dt = DataFrame(columns=[bank_label_str(), acct_name_str(), credit_score_str()])
+    inx_dt = DataFrame(
+        columns=[bank_label_str(), acct_name_str(), acct_cred_points_str()]
+    )
     inx_dt.loc[0] = ["ZZ", zia_otx, 12]
     inx_dt.loc[1] = ["ZZ", sue_otx, 12]
     inx_dt.loc[2] = ["ZZ", bob_otx, 12]
@@ -179,7 +187,9 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario1_AcctName()
     yao_pidginunit.set_otx2inx(NameTerm_str(), xio_otx, xio_inx)
     yao_pidginunit.set_otx2inx(NameTerm_str(), sue_otx, sue_inx)
     yao_pidginunit.set_otx2inx(NameTerm_str(), bob_otx, bob_inx)
-    otx_dt = DataFrame(columns=[bank_label_str(), acct_name_str(), credit_score_str()])
+    otx_dt = DataFrame(
+        columns=[bank_label_str(), acct_name_str(), acct_cred_points_str()]
+    )
     otx_dt.loc[0] = ["ZZ", zia_otx, 12]
     otx_dt.loc[1] = ["ZZ", sue_otx, 12]
     otx_dt.loc[2] = ["ZZ", bob_otx, 12]
@@ -195,7 +205,9 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario1_AcctName()
     assert otx_dt.iloc[0][acct_name_str()] == zia_otx
     assert otx_dt.iloc[1][acct_name_str()] == sue_inx
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
-    inx_dt = DataFrame(columns=[bank_label_str(), acct_name_str(), credit_score_str()])
+    inx_dt = DataFrame(
+        columns=[bank_label_str(), acct_name_str(), acct_cred_points_str()]
+    )
     inx_dt.loc[0] = ["ZZ", zia_otx, 12]
     inx_dt.loc[1] = ["ZZ", sue_inx, 12]
     inx_dt.loc[2] = ["ZZ", bob_inx, 12]

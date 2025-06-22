@@ -6,7 +6,7 @@ from src.a15_bank_logic.bank import bankunit_shop
 def test_BankUnit_set_paypurchase_SetsAttr():
     # ESTABLISH
     t6606_offi_time_max = 6606
-    x_bank = bankunit_shop("accord23", "temp_bank_mstr_dir")
+    x_bank = bankunit_shop("accord23", None)
     x_bank._offi_time_max = t6606_offi_time_max
     sue_str = "Sue"
     bob_str = "Bob"
@@ -25,7 +25,7 @@ def test_BankUnit_set_paypurchase_SetsAttr():
 def test_BankUnit_add_paypurchase_SetsAttr():
     # ESTABLISH
     t6606_offi_time_max = 6606
-    x_bank = bankunit_shop("accord23", "temp_bank_mstr_dir")
+    x_bank = bankunit_shop("accord23", None)
     x_bank._offi_time_max = t6606_offi_time_max
     sue_str = "Sue"
     bob_str = "Bob"
@@ -43,7 +43,7 @@ def test_BankUnit_add_paypurchase_SetsAttr():
 def test_BankUnit_set_paypurchase_RaisesErrorWhen_tranunit_tran_time_GreaterThanOrEqual_offi_time_max():
     # ESTABLISH
     t6606_offi_time_max = 6606
-    x_bank = bankunit_shop("accord23", "temp_bank_mstr_dir")
+    x_bank = bankunit_shop("accord23", None)
     x_bank._offi_time_max = t6606_offi_time_max
     sue_str = "Sue"
     bob_str = "Bob"
@@ -80,7 +80,7 @@ def test_BankUnit_set_paypurchase_RaisesErrorWhen_tranunit_tran_time_GreaterThan
 
 def test_BankUnit_set_paypurchase_RaisesErrorWhenBudUnitHas_tran_time():
     # ESTABLISH
-    x_bank = bankunit_shop("accord23", "temp_bank_mstr_dir")
+    x_bank = bankunit_shop("accord23", None)
     x_bank._offi_time_max = 0
     x_bank._offi_time_max = 0
     sue_str = "Sue"
@@ -104,7 +104,7 @@ def test_BankUnit_set_paypurchase_RaisesErrorWhenBudUnitHas_tran_time():
 
 def test_BankUnit_paypurchase_exists_ReturnsObj():
     # ESTABLISH
-    x_bank = bankunit_shop("accord23", "temp_bank_mstr_dir")
+    x_bank = bankunit_shop("accord23", None)
     x_bank._offi_time_max = 6606
     sue_str = "Sue"
     bob_str = "Bob"
@@ -121,7 +121,7 @@ def test_BankUnit_paypurchase_exists_ReturnsObj():
 
 def test_BankUnit_get_paypurchase_ReturnsObj():
     # ESTABLISH
-    x_bank = bankunit_shop("accord23", "temp_bank_mstr_dir")
+    x_bank = bankunit_shop("accord23", None)
     x_bank._offi_time_max = 6606
     sue_str = "Sue"
     bob_str = "Bob"
@@ -141,7 +141,7 @@ def test_BankUnit_get_paypurchase_ReturnsObj():
 
 def test_BankUnit_del_paypurchase_SetsAttr():
     # ESTABLISH
-    x_bank = bankunit_shop("accord23", "temp_bank_mstr_dir")
+    x_bank = bankunit_shop("accord23", None)
     x_bank._offi_time_max = 6606
     sue_str = "Sue"
     bob_str = "Bob"
@@ -160,7 +160,7 @@ def test_BankUnit_del_paypurchase_SetsAttr():
 def test_BankUnit_set_offi_time_max_SetsAttr():
     # ESTABLISH
     t6606_offi_time_max = 6606
-    x_bank = bankunit_shop("accord23", "temp_bank_mstr_dir")
+    x_bank = bankunit_shop("accord23", None)
     x_bank._offi_time_max = t6606_offi_time_max
     sue_str = "Sue"
     bob_str = "Bob"
@@ -180,7 +180,7 @@ def test_BankUnit_set_offi_time_max_SetsAttr():
 def test_BankUnit_set_offi_time_max_RaisesErrorWhen_paypurchase_ExistsWithGreatertran_time():
     # ESTABLISH
     t6606_offi_time_max = 6606
-    x_bank = bankunit_shop("accord23", "temp_bank_mstr_dir")
+    x_bank = bankunit_shop("accord23", None)
     x_bank._offi_time_max = t6606_offi_time_max
     sue_str = "Sue"
     bob_str = "Bob"
@@ -202,7 +202,7 @@ def test_BankUnit_set_offi_time_max_RaisesErrorWhen_paypurchase_ExistsWithGreate
 
 def test_BankUnit_set_all_tranbook_SetsAttr():
     # ESTABLISH
-    x_bank = bankunit_shop("accord23", "temp_bank_mstr_dir")
+    x_bank = bankunit_shop("accord23", None)
     x_bank._offi_time_max = 10101
     sue_str = "Sue"
     bob_str = "Bob"
