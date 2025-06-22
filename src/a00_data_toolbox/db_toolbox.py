@@ -374,6 +374,8 @@ def db_table_exists(conn_or_cursor: sqlite3_Connection, tablename: str) -> bool:
 
 def get_table_columns(conn_or_cursor: sqlite3_Connection, tablename: str) -> list[str]:
     db_columns = conn_or_cursor.execute(f"PRAGMA table_info({tablename})").fetchall()
+    if db_columns and str(type(db_columns[0])) == "<class 'dict'>":
+        return [db_column.get("name") for db_column in db_columns]
     return [db_column[1] for db_column in db_columns]
 
 
