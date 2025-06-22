@@ -1,5 +1,10 @@
 from src.a00_data_toolbox.csv_toolbox import export_sqlite_tables_to_csv
-from src.a00_data_toolbox.file_toolbox import count_dirs_files, delete_dir, set_dir
+from src.a00_data_toolbox.file_toolbox import (
+    count_dirs_files,
+    create_path,
+    delete_dir,
+    set_dir,
+)
 from src.a20_fis_logic.fis import FisUnit, fisunit_shop
 from sys import argv as sys_argv
 
@@ -47,5 +52,6 @@ if __name__ == "__main__":
     x_fisunit.mud_to_clarity_mstr()
     x_fisunit.create_stances()
     x_fisunit.create_kpi_csvs()
-    export_sqlite_tables_to_csv(x_fisunit.get_db_path(), output_directory)
+    output_db_dir = create_path(output_directory, "db")
+    export_sqlite_tables_to_csv(x_fisunit.get_db_path(), output_db_dir)
     print(f"after  output_dir file/dir count= {count_dirs_files(output_directory)}")

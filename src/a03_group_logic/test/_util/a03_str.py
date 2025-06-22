@@ -58,14 +58,6 @@ def awardee_title_str() -> str:
     return "awardee_title"
 
 
-def group_cred_points_str() -> str:
-    return "group_cred_points"
-
-
-def group_debt_points_str() -> str:
-    return "group_debt_points"
-
-
 def fund_give_str() -> str:
     return "fund_give"
 
@@ -76,6 +68,14 @@ def fund_take_str() -> str:
 
 def give_force_str() -> str:
     return "give_force"
+
+
+def group_cred_points_str() -> str:
+    return "group_cred_points"
+
+
+def group_debt_points_str() -> str:
+    return "group_debt_points"
 
 
 def group_title_str() -> str:
