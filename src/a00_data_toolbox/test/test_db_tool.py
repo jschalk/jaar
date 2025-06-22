@@ -398,7 +398,7 @@ def test_insert_csv_ChangesNotCommitted(
 
         insert_csv(csv_path, cursor, test_tablename)
 
-    # Close and reopen the connection to verify persistence
+    # reopen the connection to verify persistence
     with sqlite3_connect(get_example_test_database7_path()) as conn2:
         cursor2 = conn2.cursor()
         cursor2.execute(get_create_test_table_sqlstr())

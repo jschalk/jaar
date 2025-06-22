@@ -277,7 +277,7 @@ def insert_csv(csv_file_path: str, conn_or_cursor: sqlite3_Connection, table_nam
 
     Args:
         csv_file_path (str): Path to the CSV file.
-        sqlite_connection (sqlite3.Connection): SQLite database connection object.
+        conn_or_cursor (sqlite3.Connection): SQLite database connection object.
         table_name (str): Name of the table to insert data into.
 
     Returns:
@@ -344,7 +344,7 @@ def create_table_from_csv(
 
     Args:
         csv_file_path (str): Path to the CSV file.
-        sqlite_connection (sqlite3.Connection): SQLite database connection object.
+        conn_or_cursor (sqlite3.Connection): SQLite database connection object.
         table_name (str): Name of the table to create.
         column_types (dict): Dictionary mapping column names to their SQLite data types.
 
