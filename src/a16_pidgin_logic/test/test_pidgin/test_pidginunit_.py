@@ -1,6 +1,6 @@
 from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import default_knot_if_None
-from src.a02_finance_logic.test._util.a02_str import bank_label_str, owner_name_str
+from src.a02_finance_logic.test._util.a02_str import belief_label_str, owner_name_str
 from src.a06_plan_logic.test._util.a06_str import (
     LabelTerm_str,
     NameTerm_str,
@@ -28,8 +28,8 @@ from src.a08_plan_atom_logic.atom_config import (
     get_atom_args_class_types,
 )
 from src.a09_pack_logic.test._util.a09_str import face_name_str
-from src.a15_bank_logic.bank_config import get_bank_args_class_types
-from src.a15_bank_logic.test._util.a15_str import (
+from src.a15_belief_logic.belief_config import get_belief_args_class_types
+from src.a15_belief_logic.test._util.a15_str import (
     hour_label_str,
     month_label_str,
     weekday_label_str,
@@ -89,7 +89,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("pdivisor") == "int"
     assert pidgin_args_class_types.get("face_name") == NameTerm_str()
     assert pidgin_args_class_types.get("fcontext") == RopeTerm_str()
-    assert pidgin_args_class_types.get("bank_label") == LabelTerm_str()
+    assert pidgin_args_class_types.get("belief_label") == LabelTerm_str()
     assert pidgin_args_class_types.get("fnigh") == "float"
     assert pidgin_args_class_types.get("fopen") == "float"
     assert pidgin_args_class_types.get("fund_iota") == "float"
@@ -130,20 +130,20 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("knot") == "str"
     assert pidgin_args_class_types.get("yr1_jan1_offset") == "int"
 
-    # make sure it pidgin_arg_class_types has all bank and all atom args
+    # make sure it pidgin_arg_class_types has all belief and all atom args
     pidgin_args = set(pidgin_args_class_types.keys())
     atom_args = set(get_atom_args_class_types().keys())
-    bank_args = set(get_bank_args_class_types().keys())
+    belief_args = set(get_belief_args_class_types().keys())
     assert atom_args.issubset(pidgin_args)
-    assert bank_args.issubset(pidgin_args)
-    assert atom_args.intersection(bank_args) == {
+    assert belief_args.issubset(pidgin_args)
+    assert atom_args.intersection(belief_args) == {
         acct_name_str(),
         fund_iota_str(),
         penny_str(),
         respect_bit_str(),
     }
-    assert atom_args.union(bank_args) != pidgin_args
-    assert atom_args.union(bank_args).union({"face_name"}) == pidgin_args
+    assert atom_args.union(belief_args) != pidgin_args
+    assert atom_args.union(belief_args).union({"face_name"}) == pidgin_args
     assert check_class_types_are_correct()
     # assert pidgin_args_class_types.keys() == get_atom_args_dimen_mapping().keys()
     # assert all_atom_args_class_types_are_correct(x_class_types)
@@ -152,7 +152,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
 def check_class_types_are_correct() -> bool:
     pidgin_args_class_types = get_pidgin_args_class_types()
     atom_args_class_types = get_atom_args_class_types()
-    bank_args_class_types = get_bank_args_class_types()
+    belief_args_class_types = get_belief_args_class_types()
     for pidgin_arg, pidgin_type in pidgin_args_class_types.items():
         print(f"check {pidgin_arg=} {pidgin_type=}")
         if atom_args_class_types.get(pidgin_arg) not in [None, pidgin_type]:
@@ -160,9 +160,9 @@ def check_class_types_are_correct() -> bool:
                 f"{pidgin_arg=} {pidgin_type=} {atom_args_class_types.get(pidgin_arg)=}"
             )
             return False
-        if bank_args_class_types.get(pidgin_arg) not in [None, pidgin_type]:
+        if belief_args_class_types.get(pidgin_arg) not in [None, pidgin_type]:
             print(
-                f"{pidgin_arg=} {pidgin_type=} {bank_args_class_types.get(pidgin_arg)=}"
+                f"{pidgin_arg=} {pidgin_type=} {belief_args_class_types.get(pidgin_arg)=}"
             )
             return False
     return True
@@ -207,7 +207,7 @@ def test_get_pidginable_args_ReturnsObj():
         rcontext_str(),
         face_name_str(),
         fcontext_str(),
-        bank_label_str(),
+        belief_label_str(),
         fstate_str(),
         group_title_str(),
         healer_name_str(),
@@ -339,7 +339,7 @@ def test_get_pidgin_LabelTerm_args_ReturnsObj():
 
     # THEN
     assert pidgin_LabelTerm_args == {
-        bank_label_str(),
+        belief_label_str(),
         hour_label_str(),
         month_label_str(),
         timeline_label_str(),

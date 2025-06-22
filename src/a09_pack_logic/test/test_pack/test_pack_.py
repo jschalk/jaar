@@ -1,8 +1,8 @@
 from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import x_is_json
-from src.a02_finance_logic.test._util.a02_str import bank_label_str, owner_name_str
+from src.a02_finance_logic.test._util.a02_str import belief_label_str, owner_name_str
 from src.a03_group_logic.acct import acctunit_shop
-from src.a05_concept_logic.concept import get_default_bank_label
+from src.a05_concept_logic.concept import get_default_belief_label
 from src.a06_plan_logic.plan import planunit_shop
 from src.a06_plan_logic.test._util.a06_str import (
     acct_cred_points_str,
@@ -49,7 +49,7 @@ def test_PackUnit_exists():
 
     # THEN
     assert not x_packunit.face_name
-    assert not x_packunit.bank_label
+    assert not x_packunit.belief_label
     assert not x_packunit.owner_name
     assert not x_packunit._pack_id
     assert not x_packunit._plandelta
@@ -68,7 +68,7 @@ def test_packunit_shop_ReturnsObjEstablishWithEmptyArgs():
 
     # THEN
     assert not bob_packunit.face_name
-    assert bob_packunit.bank_label == get_default_bank_label()
+    assert bob_packunit.belief_label == get_default_belief_label()
     assert bob_packunit.owner_name == bob_str
     assert bob_packunit._pack_id == 0
     assert bob_packunit._plandelta == plandelta_shop()
@@ -94,7 +94,7 @@ def test_packunit_shop_ReturnsObjEstablishWithNonEmptyArgs():
     bob_packunit = packunit_shop(
         face_name=sue_str,
         owner_name=bob_str,
-        bank_label=accord45_str,
+        belief_label=accord45_str,
         _pack_id=bob_pack_id,
         _plandelta=bob_plandelta,
         _delta_start=bob_delta_start,
@@ -106,7 +106,7 @@ def test_packunit_shop_ReturnsObjEstablishWithNonEmptyArgs():
     # THEN
     assert bob_packunit.face_name == sue_str
     assert bob_packunit.owner_name == bob_str
-    assert bob_packunit.bank_label == accord45_str
+    assert bob_packunit.belief_label == accord45_str
     assert bob_packunit._pack_id == bob_pack_id
     assert bob_packunit._plandelta == bob_plandelta
     assert bob_packunit._delta_start == bob_delta_start
@@ -232,7 +232,7 @@ def test_PackUnit_get_step_dict_ReturnsObj_Simple():
     accord45_str = "accord45"
     accord45_e5_int = 5
     bob_packunit = packunit_shop(
-        bank_label=accord45_str, owner_name=bob_str, event_int=accord45_e5_int
+        belief_label=accord45_str, owner_name=bob_str, event_int=accord45_e5_int
     )
     bob_packunit.set_face(sue_str)
 
@@ -240,8 +240,8 @@ def test_PackUnit_get_step_dict_ReturnsObj_Simple():
     x_dict = bob_packunit.get_step_dict()
 
     # THEN
-    assert x_dict.get(bank_label_str()) is not None
-    assert x_dict.get(bank_label_str()) == accord45_str
+    assert x_dict.get(belief_label_str()) is not None
+    assert x_dict.get(belief_label_str()) == accord45_str
     assert x_dict.get(owner_name_str()) is not None
     assert x_dict.get(owner_name_str()) == bob_str
     assert x_dict.get(face_name_str()) is not None
@@ -311,7 +311,7 @@ def test_PackUnit_get_serializable_dict_ReturnsObj_Simple():
     accord45_str = "accord45"
     accord45_e5_int = 5
     bob_packunit = packunit_shop(
-        bank_label=accord45_str, owner_name=bob_str, event_int=accord45_e5_int
+        belief_label=accord45_str, owner_name=bob_str, event_int=accord45_e5_int
     )
     bob_packunit.set_face(sue_str)
 
@@ -319,8 +319,8 @@ def test_PackUnit_get_serializable_dict_ReturnsObj_Simple():
     total_dict = bob_packunit.get_serializable_dict()
 
     # THEN
-    assert total_dict.get(bank_label_str()) is not None
-    assert total_dict.get(bank_label_str()) == accord45_str
+    assert total_dict.get(belief_label_str()) is not None
+    assert total_dict.get(belief_label_str()) == accord45_str
     assert total_dict.get(owner_name_str()) is not None
     assert total_dict.get(owner_name_str()) == bob_str
     assert total_dict.get(face_name_str()) is not None
@@ -360,7 +360,7 @@ def test_PackUnit_get_json_ReturnsObj_WithPlanDeltaPopulated():
     assert generated_json
     print(f"{generated_json=}")
     expected_json = """{
-  "bank_label": "ZZ",
+  "belief_label": "ZZ",
   "delta": {
     "0": {
       "crud": "DELETE",
@@ -399,7 +399,7 @@ def test_get_packunit_from_json_ReturnsObj_WithPlanDeltaPopulated():
     assert generated_bob_packunit
     assert generated_bob_packunit.face_name == bob_packunit.face_name
     assert generated_bob_packunit.event_int == bob_packunit.event_int
-    assert generated_bob_packunit.bank_label == bob_packunit.bank_label
+    assert generated_bob_packunit.belief_label == bob_packunit.belief_label
     assert generated_bob_packunit._plandelta == bob_packunit._plandelta
     assert generated_bob_packunit == bob_packunit
 
@@ -548,10 +548,10 @@ def test_PackUnit_get_edited_plan_RaisesErrorWhenpackAttrsAndPlanAttrsAreNotTheS
     yao_str = "Yao"
     xia_str = "Xia"
     accord23_str = "accord23"
-    bob_packunit = packunit_shop(yao_str, xia_str, bank_label=accord23_str)
+    bob_packunit = packunit_shop(yao_str, xia_str, belief_label=accord23_str)
     sue_str = "Sue"
     accord45_str = "accord45"
-    before_sue_planunit = planunit_shop(sue_str, bank_label=accord45_str)
+    before_sue_planunit = planunit_shop(sue_str, belief_label=accord45_str)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:

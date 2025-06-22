@@ -4,14 +4,14 @@ from src.a01_term_logic.term import OwnerName
 STANCE0001_FILENAME = "stance0001.xlsx"
 
 
-def create_stances_dir_path(bank_mstr_dir: str) -> str:
-    """Returns path: bank_mstr_dir\\stances"""
-    return create_path(bank_mstr_dir, "stances")
+def create_stances_dir_path(belief_mstr_dir: str) -> str:
+    """Returns path: belief_mstr_dir\\stances"""
+    return create_path(belief_mstr_dir, "stances")
 
 
-def create_stances_owner_dir_path(bank_mstr_dir: str, owner_name: OwnerName) -> str:
-    """Returns path: bank_mstr_dir\\stances\\owner_name"""
-    stances_dir = create_path(bank_mstr_dir, "stances")
+def create_stances_owner_dir_path(belief_mstr_dir: str, owner_name: OwnerName) -> str:
+    """Returns path: belief_mstr_dir\\stances\\owner_name"""
+    stances_dir = create_path(belief_mstr_dir, "stances")
     return create_path(stances_dir, owner_name)
 
 

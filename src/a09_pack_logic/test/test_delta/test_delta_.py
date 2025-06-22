@@ -2,7 +2,7 @@ from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import x_is_json
 from src.a01_term_logic.rope import create_rope, to_rope
 from src.a03_group_logic.acct import acctunit_shop
-from src.a05_concept_logic.concept import get_default_bank_label as root_label
+from src.a05_concept_logic.concept import get_default_belief_label as root_label
 from src.a06_plan_logic.plan import planunit_shop
 from src.a06_plan_logic.test._util.a06_str import (
     acct_cred_points_str,
@@ -337,12 +337,12 @@ def test_PlanDelta_get_sorted_planatoms_ReturnsObj():
 
 def test_PlanDelta_get_sorted_planatoms_ReturnsObj_ConceptUnitsSorted():
     # ESTABLISH
-    x_bank_label = root_label()
-    root_rope = to_rope(x_bank_label)
+    x_belief_label = root_label()
+    root_rope = to_rope(x_belief_label)
     sports_str = "sports"
-    sports_rope = create_rope(x_bank_label, sports_str)
+    sports_rope = create_rope(x_belief_label, sports_str)
     knee_str = "knee"
-    knee_rope = create_rope(x_bank_label, knee_str)
+    knee_rope = create_rope(x_belief_label, knee_str)
     x_dimen = plan_conceptunit_str()
     sports_insert_conceptunit_planatom = planatom_shop(x_dimen, INSERT_str())
     sports_insert_conceptunit_planatom.set_jkey(concept_rope_str(), sports_rope)
@@ -370,9 +370,9 @@ def test_PlanDelta_get_sorted_planatoms_ReturnsObj_ConceptUnitsSorted():
 
 def test_PlanDelta_get_sorted_planatoms_ReturnsObj_Rope_Sorted():
     # ESTABLISH
-    x_bank_label = root_label()
+    x_belief_label = root_label()
     sports_str = "sports"
-    sports_rope = create_rope(x_bank_label, sports_str)
+    sports_rope = create_rope(x_belief_label, sports_str)
     knee_str = "knee"
     knee_rope = create_rope(sports_rope, knee_str)
     x_dimen = plan_concept_awardlink_str()

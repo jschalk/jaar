@@ -6,7 +6,7 @@
         "face_name": {
             "otx_key": true
         },
-        "bank_label": {
+        "belief_label": {
             "otx_key": true
         },
         "concept_rope": {
@@ -21,7 +21,7 @@
     },
     "idea_number": "br00057",
     "dimens": [
-        "bankunit",
+        "beliefunit",
         "planunit",
         "plan_conceptunit",
         "plan_concept_reasonunit"

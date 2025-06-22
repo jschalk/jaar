@@ -6,7 +6,7 @@
         "face_name": {
             "otx_key": true
         },
-        "bank_label": {
+        "belief_label": {
             "otx_key": true
         },
         "concept_rope_ERASE": {
@@ -20,6 +20,6 @@
     "dimens": [
         "plan_conceptunit",
         "planunit",
-        "bankunit"
+        "beliefunit"
     ]
 }

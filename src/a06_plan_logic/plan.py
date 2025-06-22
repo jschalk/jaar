@@ -26,7 +26,7 @@ from src.a01_term_logic.rope import (
 )
 from src.a01_term_logic.term import (
     AcctName,
-    BankLabel,
+    BeliefLabel,
     GroupTitle,
     HealerName,
     LabelTerm,
@@ -66,7 +66,7 @@ from src.a05_concept_logic.concept import (
     ConceptUnit,
     conceptattrholder_shop,
     conceptunit_shop,
-    get_default_bank_label,
+    get_default_belief_label,
     get_obj_from_concept_dict,
 )
 from src.a05_concept_logic.healer import HealerLink
@@ -116,7 +116,7 @@ class _gogo_calc_stop_calc_Exception(Exception):
 
 @dataclass
 class PlanUnit:
-    bank_label: BankLabel = None
+    belief_label: BeliefLabel = None
     owner_name: OwnerName = None
     accts: dict[AcctName, AcctUnit] = None
     conceptroot: ConceptUnit = None
@@ -191,7 +191,7 @@ class PlanUnit:
         )
 
     def make_l1_rope(self, l1_label: LabelTerm):
-        return self.make_rope(self.bank_label, l1_label)
+        return self.make_rope(self.belief_label, l1_label)
 
     def set_knot(self, new_knot: str):
         self.settle_plan()
@@ -206,14 +206,14 @@ class PlanUnit:
             for x_concept in self._concept_dict.values():
                 x_concept.set_knot(self.knot)
 
-    def set_bank_label(self, bank_label: str):
-        old_bank_label = copy_deepcopy(self.bank_label)
+    def set_belief_label(self, belief_label: str):
+        old_belief_label = copy_deepcopy(self.belief_label)
         self.settle_plan()
         for concept_obj in self._concept_dict.values():
-            concept_obj.bank_label = bank_label
-        self.bank_label = bank_label
+            concept_obj.belief_label = belief_label
+        self.belief_label = belief_label
         self.edit_concept_label(
-            old_rope=to_rope(old_bank_label), new_concept_label=self.bank_label
+            old_rope=to_rope(old_belief_label), new_concept_label=self.belief_label
         )
         self.settle_plan()
 
@@ -416,7 +416,7 @@ class PlanUnit:
         return all_group_titles.difference(x_acctunit_group_titles)
 
     def _is_concept_rangeroot(self, concept_rope: RopeTerm) -> bool:
-        if self.bank_label == concept_rope:
+        if self.belief_label == concept_rope:
             raise InvalidPlanException(
                 "its difficult to foresee a scenario where conceptroot is rangeroot"
             )
@@ -447,7 +447,7 @@ class PlanUnit:
             self._create_conceptkid_if_empty(rope=fstate)
 
         fact_fcontext_concept = self.get_concept_obj(fcontext)
-        x_conceptroot = self.get_concept_obj(to_rope(self.bank_label))
+        x_conceptroot = self.get_concept_obj(to_rope(self.belief_label))
         x_fopen = None
         if fnigh is not None and fopen is None:
             x_fopen = x_conceptroot.factunits.get(fcontext).fopen
@@ -606,7 +606,7 @@ class PlanUnit:
     ):
         self.set_concept(
             concept_kid=concept_kid,
-            parent_rope=self.bank_label,
+            parent_rope=self.belief_label,
             create_missing_concepts=create_missing_concepts,
             get_rid_of_missing_awardlinks_awardee_titles=get_rid_of_missing_awardlinks_awardee_titles,
             adoptees=adoptees,
@@ -635,8 +635,8 @@ class PlanUnit:
             raise InvalidPlanException(exception_str)
 
         concept_kid.knot = self.knot
-        if concept_kid.bank_label != self.bank_label:
-            concept_kid.bank_label = self.bank_label
+        if concept_kid.belief_label != self.belief_label:
+            concept_kid.belief_label = self.belief_label
         if concept_kid.fund_iota != self.fund_iota:
             concept_kid.fund_iota = self.fund_iota
         if not get_rid_of_missing_awardlinks_awardee_titles:
@@ -1078,7 +1078,7 @@ class PlanUnit:
         ]
 
     def _set_concept_dict(self):
-        concept_list = [self.get_concept_obj(to_rope(self.bank_label, self.knot))]
+        concept_list = [self.get_concept_obj(to_rope(self.belief_label, self.knot))]
         while concept_list != []:
             x_concept = concept_list.pop()
             x_concept.clear_gogo_calc_stop_calc()
@@ -1433,7 +1433,7 @@ class PlanUnit:
             "respect_bit": self.respect_bit,
             "penny": self.penny,
             "owner_name": self.owner_name,
-            "bank_label": self.bank_label,
+            "belief_label": self.belief_label,
             "max_tree_traverse": self.max_tree_traverse,
             "knot": self.knot,
             "conceptroot": self.conceptroot.get_dict(),
@@ -1468,7 +1468,7 @@ class PlanUnit:
 
 def planunit_shop(
     owner_name: OwnerName = None,
-    bank_label: BankLabel = None,
+    belief_label: BeliefLabel = None,
     knot: str = None,
     fund_pool: FundNum = None,
     fund_iota: FundIota = None,
@@ -1477,11 +1477,11 @@ def planunit_shop(
     tally: float = None,
 ) -> PlanUnit:
     owner_name = "" if owner_name is None else owner_name
-    bank_label = get_default_bank_label() if bank_label is None else bank_label
+    belief_label = get_default_belief_label() if belief_label is None else belief_label
     x_plan = PlanUnit(
         owner_name=owner_name,
         tally=get_1_if_None(tally),
-        bank_label=bank_label,
+        belief_label=belief_label,
         accts=get_empty_dict_if_None(),
         _groupunits={},
         knot=default_knot_if_None(knot),
@@ -1505,7 +1505,7 @@ def planunit_shop(
         root=True,
         _uid=1,
         _level=0,
-        bank_label=x_plan.bank_label,
+        belief_label=x_plan.belief_label,
         knot=x_plan.knot,
         fund_iota=x_plan.fund_iota,
         parent_rope="",
@@ -1524,8 +1524,8 @@ def get_from_dict(plan_dict: dict) -> PlanUnit:
     x_plan.set_owner_name(obj_from_plan_dict(plan_dict, "owner_name"))
     x_plan.tally = obj_from_plan_dict(plan_dict, "tally")
     x_plan.set_max_tree_traverse(obj_from_plan_dict(plan_dict, "max_tree_traverse"))
-    x_plan.bank_label = obj_from_plan_dict(plan_dict, "bank_label")
-    x_plan.conceptroot.concept_label = obj_from_plan_dict(plan_dict, "bank_label")
+    x_plan.belief_label = obj_from_plan_dict(plan_dict, "belief_label")
+    x_plan.conceptroot.concept_label = obj_from_plan_dict(plan_dict, "belief_label")
     plan_knot = obj_from_plan_dict(plan_dict, "knot")
     x_plan.knot = default_knot_if_None(plan_knot)
     x_plan.fund_pool = validate_fund_pool(obj_from_plan_dict(plan_dict, "fund_pool"))
@@ -1551,7 +1551,7 @@ def create_conceptroot_from_plan_dict(x_plan: PlanUnit, plan_dict: dict):
     conceptroot_dict = plan_dict.get("conceptroot")
     x_plan.conceptroot = conceptunit_shop(
         root=True,
-        concept_label=x_plan.bank_label,
+        concept_label=x_plan.belief_label,
         parent_rope="",
         _level=0,
         _uid=get_obj_from_concept_dict(conceptroot_dict, "_uid"),
@@ -1571,7 +1571,7 @@ def create_conceptroot_from_plan_dict(x_plan: PlanUnit, plan_dict: dict):
         awardlinks=get_obj_from_concept_dict(conceptroot_dict, "awardlinks"),
         _is_expanded=get_obj_from_concept_dict(conceptroot_dict, "_is_expanded"),
         knot=x_plan.knot,
-        bank_label=x_plan.bank_label,
+        belief_label=x_plan.belief_label,
         fund_iota=default_fund_iota_if_None(x_plan.fund_iota),
     )
     create_conceptroot_kids_from_dict(x_plan, conceptroot_dict)
@@ -1582,7 +1582,7 @@ def create_conceptroot_kids_from_dict(x_plan: PlanUnit, conceptroot_dict: dict):
     parent_rope_str = "parent_rope"
     # for every kid dict, set parent_rope in dict, add to to_evaluate_list
     for x_dict in get_obj_from_concept_dict(conceptroot_dict, "_kids").values():
-        x_dict[parent_rope_str] = x_plan.bank_label
+        x_dict[parent_rope_str] = x_plan.belief_label
         to_evaluate_concept_dicts.append(x_dict)
 
     while to_evaluate_concept_dicts != []:

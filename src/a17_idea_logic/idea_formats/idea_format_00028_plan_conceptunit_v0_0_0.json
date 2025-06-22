@@ -18,7 +18,7 @@
         "face_name": {
             "otx_key": true
         },
-        "bank_label": {
+        "belief_label": {
             "otx_key": true
         },
         "gogo_want": {
@@ -51,7 +51,7 @@
     },
     "idea_number": "br00028",
     "dimens": [
-        "bankunit",
+        "beliefunit",
         "planunit",
         "plan_conceptunit"
     ]

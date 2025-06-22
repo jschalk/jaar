@@ -5,17 +5,17 @@ from src.a14_keep_logic.rivercycle import get_credorledger
 from src.a14_keep_logic.test._util.a14_env import (
     get_module_temp_dir,
     get_texas_rope,
-    temp_bank_label,
+    temp_belief_label,
 )
 
 
 def example_yao_hubunit() -> HubUnit:
-    return hubunit_shop(get_module_temp_dir(), temp_bank_label(), "Yao")
+    return hubunit_shop(get_module_temp_dir(), temp_belief_label(), "Yao")
 
 
 def example_yao_texas_hubunit() -> HubUnit:
-    bank_mstr_dir = get_module_temp_dir()
-    return hubunit_shop(bank_mstr_dir, temp_bank_label(), "Yao", get_texas_rope())
+    belief_mstr_dir = get_module_temp_dir()
+    return hubunit_shop(belief_mstr_dir, temp_belief_label(), "Yao", get_texas_rope())
 
 
 def example_yao_credorledger() -> dict[str, float]:

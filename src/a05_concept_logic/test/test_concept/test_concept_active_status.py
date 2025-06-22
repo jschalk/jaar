@@ -10,7 +10,7 @@ from src.a04_reason_logic.reason_concept import (
 from src.a04_reason_logic.reason_labor import laborheir_shop, laborunit_shop
 from src.a05_concept_logic.concept import (
     conceptunit_shop,
-    get_default_bank_label as root_label,
+    get_default_belief_label as root_label,
 )
 
 

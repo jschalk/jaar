@@ -2,7 +2,7 @@ from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import create_rope
 from src.a05_concept_logic.concept import (
     conceptunit_shop,
-    get_default_bank_label as root_label,
+    get_default_belief_label as root_label,
 )
 
 

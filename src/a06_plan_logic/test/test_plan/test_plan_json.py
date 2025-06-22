@@ -49,7 +49,7 @@ def test_PlanUnit_get_dict_ReturnsObj_Scenario1_large_json():
     assert plan_dict is not None
     assert str(type(plan_dict)) == "<class 'dict'>"
     assert plan_dict["owner_name"] == yao_plan.owner_name
-    assert plan_dict["bank_label"] == yao_plan.bank_label
+    assert plan_dict["belief_label"] == yao_plan.belief_label
     assert plan_dict["tally"] == yao_plan.tally
     assert plan_dict["tally"] == plan_tally
     assert plan_dict["fund_pool"] == yao_fund_pool
@@ -66,7 +66,7 @@ def test_PlanUnit_get_dict_ReturnsObj_Scenario1_large_json():
     x_conceptroot = yao_plan.conceptroot
     conceptroot_dict = plan_dict["conceptroot"]
     _kids = "_kids"
-    assert x_conceptroot.concept_label == yao_plan.bank_label
+    assert x_conceptroot.concept_label == yao_plan.belief_label
     assert conceptroot_dict["concept_label"] == x_conceptroot.concept_label
     assert conceptroot_dict["mass"] == x_conceptroot.mass
     assert len(conceptroot_dict[_kids]) == len(x_conceptroot._kids)
@@ -78,7 +78,7 @@ def test_PlanUnit_get_dict_ReturnsObj_Scenario2_conceptroot_laborunit():
     sue_plan = planunit_shop("Sue")
     x_laborunit = laborunit_shop()
     x_laborunit.set_laborlink(labor_title=run_str)
-    root_rope = to_rope(sue_plan.bank_label)
+    root_rope = to_rope(sue_plan.belief_label)
     sue_plan.edit_concept_attr(root_rope, laborunit=x_laborunit)
     root_concept = sue_plan.get_concept_obj(root_rope)
     x_gogo_want = 5
@@ -107,7 +107,7 @@ def test_PlanUnit_get_dict_ReturnsObj_Scenario3_With_conceptroot_healerlink():
     yao_acctunit.add_membership(run_str)
     run_healerlink = healerlink_shop()
     run_healerlink.set_healer_name(x_healer_name=run_str)
-    root_rope = to_rope(sue_plan.bank_label)
+    root_rope = to_rope(sue_plan.belief_label)
     sue_plan.edit_concept_attr(root_rope, healerlink=run_healerlink)
 
     # WHEN
@@ -165,7 +165,7 @@ def test_PlanUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     yao_acctunit = zia_plan.get_acct(yao_str)
     yao_acctunit.add_membership(run_str)
     run_healerlink = healerlink_shop({run_str})
-    root_rope = to_rope(zia_plan.bank_label)
+    root_rope = to_rope(zia_plan.belief_label)
     zia_plan.edit_concept_attr(root_rope, healerlink=run_healerlink)
     zia_plan.edit_concept_attr(root_rope, problem_bool=True)
 
@@ -180,7 +180,7 @@ def test_PlanUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     plan_dict = get_dict_from_json(x_json)
 
     assert plan_dict["owner_name"] == zia_plan.owner_name
-    assert plan_dict["bank_label"] == zia_plan.bank_label
+    assert plan_dict["belief_label"] == zia_plan.belief_label
     assert plan_dict["tally"] == zia_plan.tally
     assert plan_dict["fund_pool"] == zia_plan.fund_pool
     assert plan_dict["fund_iota"] == zia_plan.fund_iota
@@ -235,7 +235,7 @@ def test_PlanUnit_get_json_ReturnsCorrectJSON_BigExample():
     # THEN
     _kids = "_kids"
     assert plan_dict["owner_name"] == yao_plan.owner_name
-    assert plan_dict["bank_label"] == yao_plan.bank_label
+    assert plan_dict["belief_label"] == yao_plan.belief_label
     assert plan_dict["tally"] == yao_plan.tally
     assert plan_dict["max_tree_traverse"] == 2
     assert plan_dict["max_tree_traverse"] == yao_plan.max_tree_traverse
@@ -276,8 +276,8 @@ def test_planunit_get_from_json_ReturnsObjSimpleExample():
     # ESTABLISH
     zia_plan = get_planunit_x1_3levels_1reason_1facts()
     zia_plan.set_max_tree_traverse(23)
-    tiger_bank_label = "tiger"
-    zia_plan.set_bank_label(tiger_bank_label)
+    tiger_belief_label = "tiger"
+    zia_plan.set_belief_label(tiger_belief_label)
     zia_fund_pool = 80000
     zia_plan.fund_pool = zia_fund_pool
     zia_fund_iota = 8
@@ -311,7 +311,7 @@ def test_planunit_get_from_json_ReturnsObjSimpleExample():
     xio_acctunit.add_membership(run_str)
     run_laborunit = laborunit_shop()
     run_laborunit.set_laborlink(labor_title=run_str)
-    root_rope = to_rope(zia_plan.bank_label)
+    root_rope = to_rope(zia_plan.belief_label)
     zia_plan.edit_concept_attr(root_rope, laborunit=run_laborunit)
     xio_laborunit = laborunit_shop()
     xio_laborunit.set_laborlink(labor_title=xio_str)
@@ -339,7 +339,7 @@ def test_planunit_get_from_json_ReturnsObjSimpleExample():
     assert str(type(json_plan)).find(".plan.PlanUnit'>") > 0
     assert json_plan.owner_name is not None
     assert json_plan.owner_name == zia_plan.owner_name
-    assert json_plan.bank_label == zia_plan.bank_label
+    assert json_plan.belief_label == zia_plan.belief_label
     assert json_plan.fund_pool == zia_fund_pool
     assert json_plan.fund_pool == zia_plan.fund_pool
     assert json_plan.fund_iota == zia_fund_iota
@@ -401,7 +401,7 @@ def test_planunit_get_from_json_ReturnsCorrectConceptRoot():
     # ESTABLISH
     zia_plan = get_planunit_x1_3levels_1reason_1facts()
     zia_plan.set_max_tree_traverse(23)
-    # root_concept = zia_plan.get_concept_obj(zia_plan.get_concept_obj(zia_plan.bank_label))
+    # root_concept = zia_plan.get_concept_obj(zia_plan.get_concept_obj(zia_plan.belief_label))
     root_concept = zia_plan.conceptroot
     zia_gogo_want = 75
     zia_stop_want = 77
@@ -414,7 +414,7 @@ def test_planunit_get_from_json_ReturnsCorrectConceptRoot():
     json_plan = planunit_get_from_json(x_plan_json=x_json)
 
     # THEN
-    json_conceptroot = json_plan.get_concept_obj(to_rope(zia_plan.bank_label))
+    json_conceptroot = json_plan.get_concept_obj(to_rope(zia_plan.belief_label))
     assert json_conceptroot.gogo_want == zia_gogo_want
     assert json_conceptroot.stop_want == zia_stop_want
 
@@ -476,7 +476,7 @@ def test_planunit_get_from_json_ReturnsObj_Scenario7_conceptroot_knot_IsCorrectl
     slash_str = "/"
     run_str = "runners"
     sue_plan = planunit_shop("Sue", knot=slash_str)
-    root_rope = to_rope(sue_plan.bank_label, slash_str)
+    root_rope = to_rope(sue_plan.belief_label, slash_str)
     day_hr_str = "day_hr"
     day_hr_rope = sue_plan.make_l1_rope(day_hr_str)
     sue_plan.add_concept(day_hr_rope)

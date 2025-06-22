@@ -816,18 +816,18 @@ def test_rope_find_replace_rope_key_dict_ReturnsCorrectPremisesUnit_Scenario1():
 
 def test_rope_find_replace_rope_key_dict_ReturnsCorrectPremisesUnit_Scenario2():
     # ESTABLISH
-    old_bank_label = "El Paso"
+    old_belief_label = "El Paso"
     casa_str = "casa"
     seasons_str = "seasons"
-    old_casa_rope = create_rope(old_bank_label, casa_str)
+    old_casa_rope = create_rope(old_belief_label, casa_str)
     old_seasons_rope = create_rope(old_casa_rope, seasons_str)
     old_premiseunit = premiseunit_shop(pstate=old_seasons_rope)
     old_premiseunits = {old_premiseunit.pstate: old_premiseunit}
     assert old_premiseunits.get(old_seasons_rope) == old_premiseunit
 
     # WHEN
-    new_bank_label = "Austin"
-    new_casa_rope = create_rope(new_bank_label, casa_str)
+    new_belief_label = "Austin"
+    new_casa_rope = create_rope(new_belief_label, casa_str)
     new_seasons_rope = create_rope(new_casa_rope, seasons_str)
     new_premise_ropes = find_replace_rope_key_dict(
         dict_x=old_premiseunits, old_rope=old_seasons_rope, new_rope=new_seasons_rope

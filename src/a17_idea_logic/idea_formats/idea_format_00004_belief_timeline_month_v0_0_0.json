@@ -1,0 +1,24 @@
+{
+    "attributes": {
+        "cumulative_day": {
+            "otx_key": true
+        },
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "belief_label": {
+            "otx_key": true
+        },
+        "month_label": {
+            "otx_key": false
+        }
+    },
+    "idea_number": "br00004",
+    "dimens": [
+        "beliefunit",
+        "belief_timeline_month"
+    ]
+}

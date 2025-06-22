@@ -37,7 +37,7 @@ def test_HubUnit_get_dw_perspective_plan_ReturnsPlanWith_owner_nameSetToHubUnit_
     bob_planunit = get_planunit_with_4_levels()
     bob_planunit.set_owner_name(bob_str)
     bob_hubunit = hubunit_shop(env_dir(), a23_str, bob_str)
-    save_job_file(bob_hubunit.bank_mstr_dir, bob_planunit)
+    save_job_file(bob_hubunit.belief_mstr_dir, bob_planunit)
 
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)

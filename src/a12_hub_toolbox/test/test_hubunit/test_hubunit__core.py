@@ -11,7 +11,7 @@ from src.a02_finance_logic.finance_config import (
     filter_penny,
     validate_fund_pool,
 )
-from src.a05_concept_logic.concept import get_default_bank_label as root_label
+from src.a05_concept_logic.concept import get_default_belief_label as root_label
 from src.a12_hub_toolbox.hub_path import create_owner_dir_path
 from src.a12_hub_toolbox.hubunit import HubUnit, get_keep_path, hubunit_shop
 from src.a12_hub_toolbox.test._util.a12_env import (
@@ -25,8 +25,8 @@ def test_HubUnit_Exists():
     x_hubunit = HubUnit()
 
     # THEN
-    assert not x_hubunit.bank_mstr_dir
-    assert not x_hubunit.bank_label
+    assert not x_hubunit.belief_mstr_dir
+    assert not x_hubunit.belief_label
     assert not x_hubunit.owner_name
     assert not x_hubunit.keep_rope
     assert not x_hubunit.knot
@@ -56,8 +56,8 @@ def test_HubUnit_RaisesError_keep_rope_DoesNotExist():
 
 def test_hubunit_shop_ReturnsObj():
     # ESTABLISH
-    x_bank_mstr_dir = "src/a15_bank_logic/test/_util"
-    x_bank_label = "accord45"
+    x_belief_mstr_dir = "src/a15_belief_logic/test/_util"
+    x_belief_label = "accord45"
     sue_str = "Sue"
     x_knot = "/"
     x_fund_pool = 13000
@@ -68,8 +68,8 @@ def test_hubunit_shop_ReturnsObj():
 
     # WHEN
     x_hubunit = hubunit_shop(
-        bank_mstr_dir=x_bank_mstr_dir,
-        bank_label=x_bank_label,
+        belief_mstr_dir=x_belief_mstr_dir,
+        belief_label=x_belief_label,
         owner_name=sue_str,
         keep_rope=None,
         knot=x_knot,
@@ -81,8 +81,8 @@ def test_hubunit_shop_ReturnsObj():
     )
 
     # THEN
-    assert x_hubunit.bank_mstr_dir == x_bank_mstr_dir
-    assert x_hubunit.bank_label == x_bank_label
+    assert x_hubunit.belief_mstr_dir == x_belief_mstr_dir
+    assert x_hubunit.belief_label == x_belief_label
     assert x_hubunit.owner_name == sue_str
     assert x_hubunit.knot == x_knot
     assert x_hubunit.fund_pool == x_fund_pool
@@ -90,7 +90,7 @@ def test_hubunit_shop_ReturnsObj():
     assert x_hubunit.respect_bit == x_respect_bit
     assert x_hubunit.penny == x_penny
     assert x_hubunit.keep_point_magnitude == x_money_magnitude
-    sue_dir = create_owner_dir_path(x_bank_mstr_dir, x_bank_label, sue_str)
+    sue_dir = create_owner_dir_path(x_belief_mstr_dir, x_belief_label, sue_str)
     assert x_hubunit._keeps_dir == create_path(sue_dir, "keeps")
     assert x_hubunit._atoms_dir == create_path(sue_dir, "atoms")
     assert x_hubunit._packs_dir == create_path(sue_dir, "packs")
@@ -105,26 +105,26 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     usa_rope = create_rope(nation_rope, usa_str)
     texas_str = "Texas"
     texas_rope = create_rope(usa_rope, texas_str)
-    bank_mstr_dir = get_module_temp_dir()
+    belief_mstr_dir = get_module_temp_dir()
     accord23_str = "accord23"
 
     # WHEN
-    sue_hubunit = hubunit_shop(bank_mstr_dir, accord23_str, sue_str, texas_rope)
+    sue_hubunit = hubunit_shop(belief_mstr_dir, accord23_str, sue_str, texas_rope)
 
     # THEN
     x_dutys_path = create_path(sue_hubunit.keep_dir(), "dutys")
     x_visions_path = create_path(sue_hubunit.keep_dir(), "visions")
     x_grades_path = create_path(sue_hubunit.keep_dir(), "grades")
 
-    assert sue_hubunit.bank_mstr_dir == bank_mstr_dir
-    assert sue_hubunit.bank_label == accord23_str
+    assert sue_hubunit.belief_mstr_dir == belief_mstr_dir
+    assert sue_hubunit.belief_label == accord23_str
     assert sue_hubunit.owner_name == sue_str
     assert sue_hubunit.knot == default_knot_if_None()
     assert sue_hubunit.fund_pool == validate_fund_pool()
     assert sue_hubunit.fund_iota == default_fund_iota_if_None()
     assert sue_hubunit.respect_bit == default_RespectBit_if_None()
     assert sue_hubunit.penny == filter_penny()
-    x_hubunit = hubunit_shop(bank_mstr_dir, accord23_str, sue_str)
+    x_hubunit = hubunit_shop(belief_mstr_dir, accord23_str, sue_str)
     assert sue_hubunit.keep_rope == texas_rope
     assert sue_hubunit.keep_dir() == get_keep_path(x_hubunit, texas_rope)
     bob_str = "Bob"
@@ -164,7 +164,7 @@ def test_get_keep_path_ReturnsObj():
     sue_str = "Sue"
     peru_str = "peru"
     sue_hubunit = hubunit_shop(
-        get_module_temp_dir(), bank_label=peru_str, owner_name=sue_str
+        get_module_temp_dir(), belief_label=peru_str, owner_name=sue_str
     )
     texas_str = "texas"
     dallas_str = "dallas"

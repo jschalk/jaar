@@ -5421,7 +5421,7 @@
         },
         "mass": 1
     },
-    "bank_label": "A",
+    "belief_label": "A",
     "mass": 1,
     "max_tree_traverse": 20,
     "owner_name": "Bob",

@@ -2,7 +2,7 @@ from inspect import getdoc as inspect_getdoc
 from src.a01_term_logic.term import (
     AcctName,
     AxiomLabel,
-    BankLabel,
+    BeliefLabel,
     EporTerm,
     EventInt,
     FaceName,
@@ -206,12 +206,12 @@ def test_EventInt_Exists():
     assert EventInt(12.4) == 12
 
 
-def test_BankLabel_Exists():
+def test_BeliefLabel_Exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_bank = BankLabel(empty_str)
+    x_belief = BeliefLabel(empty_str)
     # THEN
-    assert x_bank == empty_str
-    doc_str = f"An AxiomLabel for a Bank Bank. Cannot contain {knot_str()}"
-    assert inspect_getdoc(x_bank) == doc_str
+    assert x_belief == empty_str
+    doc_str = f"An AxiomLabel for a Belief Belief. Cannot contain {knot_str()}"
+    assert inspect_getdoc(x_belief) == doc_str

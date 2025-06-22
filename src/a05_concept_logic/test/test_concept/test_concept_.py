@@ -1,14 +1,14 @@
 from src.a01_term_logic.rope import create_rope, default_knot_if_None
 from src.a01_term_logic.test._util.a01_str import knot_str, parent_rope_str
 from src.a02_finance_logic.finance_config import default_fund_iota_if_None
-from src.a02_finance_logic.test._util.a02_str import bank_label_str, fund_iota_str
+from src.a02_finance_logic.test._util.a02_str import belief_label_str, fund_iota_str
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a04_reason_logic.test._util.a04_str import _chore_str
 from src.a05_concept_logic.concept import (
     ConceptUnit,
     conceptunit_shop,
-    get_default_bank_label,
+    get_default_belief_label,
 )
 from src.a05_concept_logic.healer import healerlink_shop
 from src.a05_concept_logic.test._util.a05_str import (
@@ -32,8 +32,8 @@ from src.a05_concept_logic.test._util.a05_str import (
     _stop_calc_str,
     _uid_str,
     addin_str,
-    bank_label_str,
     begin_str,
+    belief_label_str,
     close_str,
     concept_label_str,
     denom_str,
@@ -50,8 +50,8 @@ from src.a05_concept_logic.test._util.a05_str import (
 )
 
 
-def test_get_default_bank_label_ReturnsObj():
-    assert get_default_bank_label() == "ZZ"
+def test_get_default_belief_label_ReturnsObj():
+    assert get_default_belief_label() == "ZZ"
 
 
 def test_ConceptUnit_Exists():
@@ -97,7 +97,7 @@ def test_ConceptUnit_Exists():
     assert x_conceptunit._fund_onset is None
     assert x_conceptunit._fund_cease is None
     assert x_conceptunit.root is None
-    assert x_conceptunit.bank_label is None
+    assert x_conceptunit.belief_label is None
     assert x_conceptunit._healerlink_ratio is None
     obj_attrs = set(x_conceptunit.__dict__.keys())
     print(sorted(list(obj_attrs)))
@@ -132,7 +132,7 @@ def test_ConceptUnit_Exists():
         concept_label_str(),
         denom_str(),
         "factunits",
-        bank_label_str(),
+        belief_label_str(),
         fund_iota_str(),
         gogo_want_str(),
         healerlink_str(),
@@ -158,7 +158,7 @@ def test_conceptunit_shop_WithNoParametersReturnsObj():
     assert x_conceptunit._kids == {}
     assert x_conceptunit.mass == 1
     assert x_conceptunit.concept_label is None
-    assert x_conceptunit.bank_label == get_default_bank_label()
+    assert x_conceptunit.belief_label == get_default_belief_label()
     assert x_conceptunit._uid is None
     assert x_conceptunit.begin is None
     assert x_conceptunit.close is None
@@ -272,7 +272,7 @@ def test_conceptunit_shop_ReturnsObjWithParameters():
 def test_ConceptUnit_get_obj_key_ReturnsObj():
     # ESTABLISH
     round_str = "round_stuff"
-    round_rope = create_rope(get_default_bank_label(), round_str)
+    round_rope = create_rope(get_default_belief_label(), round_str)
     ball_str = "ball"
 
     # WHEN
@@ -286,7 +286,7 @@ def test_ConceptUnit_get_rope_ReturnsObj():
     # ESTABLISH
     round_str = "round_stuff"
     slash_str = "/"
-    round_rope = create_rope(get_default_bank_label(), round_str, knot=slash_str)
+    round_rope = create_rope(get_default_belief_label(), round_str, knot=slash_str)
     ball_str = "ball"
 
     # WHEN
@@ -301,13 +301,13 @@ def test_ConceptUnit_set_parent_rope_SetsAttr():
     # ESTABLISH
     round_str = "round_stuff"
     slash_str = "/"
-    round_rope = create_rope(get_default_bank_label(), round_str, knot=slash_str)
+    round_rope = create_rope(get_default_belief_label(), round_str, knot=slash_str)
     ball_str = "ball"
     ball_concept = conceptunit_shop(ball_str, parent_rope=round_rope, knot=slash_str)
     assert ball_concept.parent_rope == round_rope
 
     # WHEN
-    sports_rope = create_rope(get_default_bank_label(), "sports", knot=slash_str)
+    sports_rope = create_rope(get_default_belief_label(), "sports", knot=slash_str)
     ball_concept.set_parent_rope(parent_rope=sports_rope)
 
     # THEN

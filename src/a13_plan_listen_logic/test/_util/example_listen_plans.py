@@ -4,7 +4,7 @@ from src.a06_plan_logic.plan import PlanUnit, planunit_shop
 
 def get_planunit_with_4_levels() -> PlanUnit:
     a23_str = "accord23"
-    sue_plan = planunit_shop(owner_name="Sue", bank_label=a23_str, tally=10)
+    sue_plan = planunit_shop(owner_name="Sue", belief_label=a23_str, tally=10)
 
     casa = "casa"
     sue_plan.set_l1_concept(conceptunit_shop(casa, mass=30, task=True))

@@ -1,13 +1,13 @@
 from typing import Literal
 
 
-def bank_acct_nets_str() -> Literal["bank_acct_nets"]:
+def belief_acct_nets_str() -> Literal["belief_acct_nets"]:
     """Table name for the account net amounts."""
-    return "bank_acct_nets"
+    return "belief_acct_nets"
 
 
-def bank_event_time_agg_str() -> Literal["bank_event_time_agg"]:
-    return "bank_event_time_agg"
+def belief_event_time_agg_str() -> Literal["belief_event_time_agg"]:
+    return "belief_event_time_agg"
 
 
 def brick_agg_str() -> str:

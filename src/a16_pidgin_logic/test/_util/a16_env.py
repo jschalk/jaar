@@ -3,7 +3,7 @@ from src.a00_data_toolbox.file_toolbox import create_path, delete_dir
 
 
 def get_module_temp_dir():
-    return "src\\a16_pidgin_logic\\test\\_util\\banks"
+    return "src\\a16_pidgin_logic\\test\\_util\\beliefs"
 
 
 def get_example_face_dir():

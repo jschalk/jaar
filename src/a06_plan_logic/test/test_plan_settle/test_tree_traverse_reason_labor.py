@@ -26,7 +26,7 @@ def test_plan_conceptroot_laborunit_CorrectlySets_concept_laborheir():
     x_laborunit = laborunit_shop()
 
     yao_plan = planunit_shop("Yao")
-    root_rope = to_rope(yao_plan.bank_label)
+    root_rope = to_rope(yao_plan.belief_label)
     yao_plan.edit_concept_attr(root_rope, laborunit=x_laborunit)
     assert yao_plan.conceptroot.laborunit == x_laborunit
     assert yao_plan.conceptroot._laborheir is None
@@ -163,8 +163,12 @@ def test_PlanUnit__get_filtered_awardlinks_concept_CorrectlyCleansConcept_Laboru
     casa_rope = sue1_plan.make_l1_rope(casa_str)
     swim_str = "swim"
     swim_rope = sue1_plan.make_l1_rope(swim_str)
-    sue1_plan.set_concept(conceptunit_shop(casa_str), parent_rope=sue1_plan.bank_label)
-    sue1_plan.set_concept(conceptunit_shop(swim_str), parent_rope=sue1_plan.bank_label)
+    sue1_plan.set_concept(
+        conceptunit_shop(casa_str), parent_rope=sue1_plan.belief_label
+    )
+    sue1_plan.set_concept(
+        conceptunit_shop(swim_str), parent_rope=sue1_plan.belief_label
+    )
     swim_laborunit = laborunit_shop()
     swim_laborunit.set_laborlink(labor_title=xia_str)
     swim_laborunit.set_laborlink(labor_title=zoa_str)
@@ -196,8 +200,12 @@ def test_PlanUnit_set_concept_CorrectlyCleansConcept_awardlinks():
     casa_rope = sue1_plan.make_l1_rope(casa_str)
     swim_str = "swim"
     swim_rope = sue1_plan.make_l1_rope(swim_str)
-    sue1_plan.set_concept(conceptunit_shop(casa_str), parent_rope=sue1_plan.bank_label)
-    sue1_plan.set_concept(conceptunit_shop(swim_str), parent_rope=sue1_plan.bank_label)
+    sue1_plan.set_concept(
+        conceptunit_shop(casa_str), parent_rope=sue1_plan.belief_label
+    )
+    sue1_plan.set_concept(
+        conceptunit_shop(swim_str), parent_rope=sue1_plan.belief_label
+    )
     swim_laborunit = laborunit_shop()
     swim_laborunit.set_laborlink(labor_title=xia_str)
     swim_laborunit.set_laborlink(labor_title=zoa_str)

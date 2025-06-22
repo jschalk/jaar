@@ -5,21 +5,21 @@ from src.a00_data_toolbox.db_toolbox import (
     get_table_columns,
 )
 from src.a01_term_logic.rope import create_rope
-from src.a02_finance_logic.test._util.a02_str import bank_label_str, owner_name_str
+from src.a02_finance_logic.test._util.a02_str import belief_label_str, owner_name_str
 from src.a04_reason_logic.test._util.a04_str import _active_str, _chore_str
 from src.a05_concept_logic.test._util.a05_str import concept_rope_str, task_str
 from src.a06_plan_logic.test._util.a06_str import plan_conceptunit_str
 from src.a18_etl_toolbox.test._util.a18_str import (
-    bank_acct_nets_str,
+    belief_acct_nets_str,
     owner_net_amount_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
-    CREATE_BANK_ACCT_NETS_SQLSTR,
+    CREATE_BELIEF_ACCT_NETS_SQLSTR,
     CREATE_JOB_PLNCONC_SQLSTR,
     create_prime_tablename,
 )
 from src.a19_kpi_toolbox.kpi_mstr import create_populate_kpi001_table
-from src.a19_kpi_toolbox.test._util.a19_str import bank_kpi001_acct_nets_str
+from src.a19_kpi_toolbox.test._util.a19_str import belief_kpi001_acct_nets_str
 
 
 def test_create_populate_kpi001_table_PopulatesTable_Scenario0_NoTasks():
@@ -33,38 +33,38 @@ def test_create_populate_kpi001_table_PopulatesTable_Scenario0_NoTasks():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         cursor.execute(CREATE_JOB_PLNCONC_SQLSTR)
-        cursor.execute(CREATE_BANK_ACCT_NETS_SQLSTR)
-        bank_acct_nets_tablename = bank_acct_nets_str()
-        insert_sqlstr = f"""INSERT INTO {bank_acct_nets_tablename} ({bank_label_str()}, {owner_name_str()}, {owner_net_amount_str()}) 
+        cursor.execute(CREATE_BELIEF_ACCT_NETS_SQLSTR)
+        belief_acct_nets_tablename = belief_acct_nets_str()
+        insert_sqlstr = f"""INSERT INTO {belief_acct_nets_tablename} ({belief_label_str()}, {owner_name_str()}, {owner_net_amount_str()}) 
 VALUES 
   ('{a23_str}', '{bob_str}', {bob_acct_net})
 , ('{a23_str}', '{yao_str}', {yao_acct_net})
 """
         cursor.execute(insert_sqlstr)
-        assert get_row_count(cursor, bank_acct_nets_tablename) == 2
-        bank_kpi001_acct_nets_tablename = bank_kpi001_acct_nets_str()
-        assert not db_table_exists(cursor, bank_kpi001_acct_nets_tablename)
+        assert get_row_count(cursor, belief_acct_nets_tablename) == 2
+        belief_kpi001_acct_nets_tablename = belief_kpi001_acct_nets_str()
+        assert not db_table_exists(cursor, belief_kpi001_acct_nets_tablename)
 
         # WHEN
         create_populate_kpi001_table(cursor)
 
         # THEN
-        assert get_table_columns(cursor, bank_kpi001_acct_nets_tablename) == [
-            bank_label_str(),
+        assert get_table_columns(cursor, belief_kpi001_acct_nets_tablename) == [
+            belief_label_str(),
             owner_name_str(),
             "funds",
             "fund_rank",
             "tasks_count",
         ]
-        assert get_row_count(cursor, bank_kpi001_acct_nets_tablename)
+        assert get_row_count(cursor, belief_kpi001_acct_nets_tablename)
         select_sqlstr = f"""
         SELECT 
-  {bank_label_str()}
+  {belief_label_str()}
 , {owner_name_str()}
 , funds
 , fund_rank
 , tasks_count
-FROM {bank_kpi001_acct_nets_tablename}
+FROM {belief_kpi001_acct_nets_tablename}
 """
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
@@ -86,32 +86,32 @@ def test_create_populate_kpi001_table_PopulatesTable_Scenario1_1task():
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        cursor.execute(CREATE_BANK_ACCT_NETS_SQLSTR)
-        bank_acct_nets_tablename = bank_acct_nets_str()
-        insert_sqlstr = f"""INSERT INTO {bank_acct_nets_tablename} ({bank_label_str()}, {owner_name_str()}, {owner_net_amount_str()})
+        cursor.execute(CREATE_BELIEF_ACCT_NETS_SQLSTR)
+        belief_acct_nets_tablename = belief_acct_nets_str()
+        insert_sqlstr = f"""INSERT INTO {belief_acct_nets_tablename} ({belief_label_str()}, {owner_name_str()}, {owner_net_amount_str()})
 VALUES
   ('{a23_str}', '{bob_str}', {bob_acct_net})
 , ('{a23_str}', '{yao_str}', {yao_acct_net})
 """
         cursor.execute(insert_sqlstr)
-        assert get_row_count(cursor, bank_acct_nets_tablename) == 2
+        assert get_row_count(cursor, belief_acct_nets_tablename) == 2
 
         cursor.execute(CREATE_JOB_PLNCONC_SQLSTR)
         job_plnconc_tablename = create_prime_tablename("plnconc", "job", None)
         insert_sqlstr = f"""
-INSERT INTO {job_plnconc_tablename} ({bank_label_str()}, {owner_name_str()}, {concept_rope_str()}, {task_str()})
+INSERT INTO {job_plnconc_tablename} ({belief_label_str()}, {owner_name_str()}, {concept_rope_str()}, {task_str()})
 VALUES ('{a23_str}', '{bob_str}', '{casa_rope}', 1)
 """
         cursor.execute(insert_sqlstr)
-        bank_kpi001_acct_nets_tablename = bank_kpi001_acct_nets_str()
-        assert not db_table_exists(cursor, bank_kpi001_acct_nets_tablename)
+        belief_kpi001_acct_nets_tablename = belief_kpi001_acct_nets_str()
+        assert not db_table_exists(cursor, belief_kpi001_acct_nets_tablename)
 
         # WHEN
         create_populate_kpi001_table(cursor)
 
         # THEN
-        assert get_row_count(cursor, bank_kpi001_acct_nets_tablename)
-        select_sqlstr = f"""SELECT {bank_label_str()}, {owner_name_str()}, funds, fund_rank, tasks_count FROM {bank_kpi001_acct_nets_tablename}"""
+        assert get_row_count(cursor, belief_kpi001_acct_nets_tablename)
+        select_sqlstr = f"""SELECT {belief_label_str()}, {owner_name_str()}, funds, fund_rank, tasks_count FROM {belief_kpi001_acct_nets_tablename}"""
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         print(rows)

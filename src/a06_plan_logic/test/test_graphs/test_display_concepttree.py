@@ -24,7 +24,7 @@ def test_display_concepttree_Scenario0(graphics_bool):
     a_plan = get_planunit_with_4_levels()
     # a_plan = planunit_v001()
     a_plan.settle_plan()
-    print(f"Plan {a_plan.bank_label}: Labels ({len(a_plan._concept_dict)})")
+    print(f"Plan {a_plan.belief_label}: Labels ({len(a_plan._concept_dict)})")
 
     # WHEN / THEN
     x_fig = display_concepttree(a_plan, graphics_bool)
@@ -39,7 +39,7 @@ def test_display_concepttree_Scenario1_shows_Chores(graphics_bool):
     a_plan = get_planunit_laundry_example1()
     # a_plan = planunit_v001()
     a_plan.settle_plan()
-    print(f"Plan {a_plan.bank_label}: Labels ({len(a_plan._concept_dict)})")
+    print(f"Plan {a_plan.belief_label}: Labels ({len(a_plan._concept_dict)})")
 
     # WHEN / THEN
     display_concepttree(a_plan, mode="Chore", graphics_bool=graphics_bool)

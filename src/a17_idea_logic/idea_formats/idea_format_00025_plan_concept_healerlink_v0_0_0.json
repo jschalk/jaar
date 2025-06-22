@@ -6,7 +6,7 @@
         "face_name": {
             "otx_key": true
         },
-        "bank_label": {
+        "belief_label": {
             "otx_key": true
         },
         "healer_name": {
@@ -21,7 +21,7 @@
     },
     "idea_number": "br00025",
     "dimens": [
-        "bankunit",
+        "beliefunit",
         "planunit",
         "plan_conceptunit",
         "plan_concept_healerlink"

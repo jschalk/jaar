@@ -25,10 +25,6 @@ def delete_update_str() -> str:
     return "delete_update"
 
 
-def fis_id_str() -> str:
-    return "fis_id"
-
-
 def idea_category_str() -> str:
     return "idea_category"
 
@@ -47,3 +43,7 @@ def insert_one_time_str() -> str:
 
 def insert_update_str() -> str:
     return "insert_update"
+
+
+def world_id_str() -> str:
+    return "world_id"
