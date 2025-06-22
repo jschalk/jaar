@@ -1,4 +1,7 @@
-from csv import reader as csv_reader
+from csv import reader as csv_reader, writer as csv_writer
+from os import makedirs as os_makedirs
+from os.path import exists as os_path_exists, join as os_path_join
+from sqlite3 import connect as sqlite3_connect
 
 
 def open_csv_with_types(csv_path, column_types):
@@ -44,3 +47,46 @@ def open_csv_with_types(csv_path, column_types):
             result.append(tuple(typed_list))
 
     return result
+
+
+def export_sqlite_tables_to_csv(db_path, output_dir="."):
+    """
+    Exports all tables from the SQLite database to CSV files.
+    Each file is named <table_name>_<row_count>.csv.
+
+    Args:
+        db_path (str): Path to the SQLite database file.
+        output_dir (str): Directory to save the CSV files (default is current directory).
+    """
+    if not os_path_exists(output_dir):
+        os_makedirs(output_dir)
+
+    with sqlite3_connect(db_path) as conn:
+        cursor = conn.cursor()
+
+        # Get list of all table names
+        cursor.execute(
+            "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'"
+        )
+        tables = cursor.fetchall()
+
+        for (table_name,) in tables:
+            # Get row count
+            cursor.execute(f"SELECT COUNT(*) FROM {table_name}")
+            row_count = cursor.fetchone()[0]
+
+            # Get table data
+            cursor.execute(f"SELECT * FROM {table_name}")
+            rows = cursor.fetchall()
+
+            # Get column names
+            column_names = [description[0] for description in cursor.description]
+
+            # Write to CSV
+            file_name = f"{table_name}_{row_count}.csv"
+            file_path = os_path_join(output_dir, file_name)
+
+            with open(file_path, "w", newline="", encoding="utf-8") as f:
+                writer = csv_writer(f)
+                writer.writerow(column_names)
+                writer.writerows(rows)
