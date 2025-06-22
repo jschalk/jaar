@@ -1,4 +1,4 @@
-from src.a01_term_logic.term import BankLabel
+from src.a01_term_logic.term import BeliefLabel
 from src.a06_plan_logic.test._util.a06_str import (
     acct_name_str,
     concept_label_str,
@@ -15,14 +15,14 @@ from src.a08_plan_atom_logic.test._util.a08_str import (
 from src.a09_pack_logic.delta import PlanDelta, plandelta_shop
 
 
-def get_atom_example_conceptunit_sports(bank_label: BankLabel = None) -> PlanAtom:
-    if not bank_label:
-        bank_label = "accord23"
+def get_atom_example_conceptunit_sports(belief_label: BeliefLabel = None) -> PlanAtom:
+    if not belief_label:
+        belief_label = "accord23"
     sports_str = "sports"
     x_dimen = plan_conceptunit_str()
     insert_conceptunit_planatom = planatom_shop(x_dimen, INSERT_str())
     insert_conceptunit_planatom.set_jkey(concept_label_str(), sports_str)
-    insert_conceptunit_planatom.set_jkey(parent_rope_str(), bank_label)
+    insert_conceptunit_planatom.set_jkey(parent_rope_str(), belief_label)
     return insert_conceptunit_planatom
 
 

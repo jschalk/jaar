@@ -5,7 +5,7 @@ from src.a00_data_toolbox.file_toolbox import (
     delete_dir,
     set_dir,
 )
-from src.a20_fis_logic.fis import FisUnit, fisunit_shop
+from src.a20_world_logic.world import WorldUnit, worldunit_shop
 from sys import argv as sys_argv
 
 if __name__ == "__main__":
@@ -13,7 +13,7 @@ if __name__ == "__main__":
     # Define the old and new strings in names
     default_output_dir = "C:/dev/jaar_output"
     default_input_dir = "C:/dev/jaar_input"
-    default_working_dir = "C:/dev/jaar_fiss"
+    default_working_dir = "C:/dev/jaar_worlds"
 
     input_directory = ""
     output_directory = ""
@@ -39,19 +39,19 @@ if __name__ == "__main__":
     delete_dir(output_directory)
     delete_dir(working_directory)
 
-    x_fisunit = fisunit_shop(
-        fis_id="x_fis",
-        fiss_dir=working_directory,
+    x_worldunit = worldunit_shop(
+        world_id="x_world",
+        worlds_dir=working_directory,
         output_dir=output_directory,
         mud_dir=input_directory,
     )
-    print(f"{x_fisunit.fiss_dir=}")
-    print(f"{x_fisunit.output_dir=}")
-    print(f"{x_fisunit._mud_dir=}")
+    print(f"{x_worldunit.worlds_dir=}")
+    print(f"{x_worldunit.output_dir=}")
+    print(f"{x_worldunit._mud_dir=}")
     print(f"before output_dir file/dir count= {count_dirs_files(output_directory)}")
-    x_fisunit.mud_to_clarity_mstr()
-    x_fisunit.create_stances()
-    x_fisunit.create_kpi_csvs()
+    x_worldunit.mud_to_clarity_mstr()
+    x_worldunit.create_stances()
+    x_worldunit.create_kpi_csvs()
     output_db_dir = create_path(output_directory, "db")
-    export_sqlite_tables_to_csv(x_fisunit.get_db_path(), output_db_dir)
+    export_sqlite_tables_to_csv(x_worldunit.get_db_path(), output_db_dir)
     print(f"after  output_dir file/dir count= {count_dirs_files(output_directory)}")

@@ -7,9 +7,12 @@ from src.a00_data_toolbox.db_toolbox import (
     get_table_columns,
 )
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a02_finance_logic.test._util.a02_str import bank_label_str
+from src.a02_finance_logic.test._util.a02_str import belief_label_str
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a15_bank_logic.test._util.a15_str import cumulative_minute_str, hour_label_str
+from src.a15_belief_logic.test._util.a15_str import (
+    cumulative_minute_str,
+    hour_label_str,
+)
 from src.a17_idea_logic.idea_db_tool import get_sheet_names, upsert_sheet
 from src.a17_idea_logic.test._util.a17_str import brick_raw_str
 from src.a18_etl_toolbox.test._util.a18_env import (
@@ -39,7 +42,7 @@ def test_etl_mud_dfs_to_brick_raw_tables_PopulatesBrickTables(env_dir_setup_clea
         event_int_str(),
         face_name_str(),
         cumulative_minute_str(),
-        bank_label_str(),
+        belief_label_str(),
         hour_label_str(),
     ]
     a23_str = "accord23"
@@ -50,7 +53,7 @@ def test_etl_mud_dfs_to_brick_raw_tables_PopulatesBrickTables(env_dir_setup_clea
         event_int_str(),
         face_name_str(),
         cumulative_minute_str(),
-        bank_label_str(),
+        belief_label_str(),
     ]
     incom_row1 = [event1, sue_str, minute_360, a23_str]
     incom_row2 = [event1, sue_str, minute_420, a23_str]

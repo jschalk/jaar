@@ -3,7 +3,7 @@
 ## Str Functions by Module
 - a00_data_toolbox: INSERT, UPDATE, sqlite_datatype
 - a01_term_logic: LabelTerm, NameTerm, RopeTerm, TitleTerm, knot, parent_rope
-- a02_finance_logic: acct_name, amount, bank_label, bud_acct_nets, bud_time, celldepth, fund_iota, fund_pool, magnitude, offi_time, owner_name, penny, quota, tran_time
+- a02_finance_logic: acct_name, amount, belief_label, bud_acct_nets, bud_time, celldepth, fund_iota, fund_pool, magnitude, offi_time, owner_name, penny, quota, tran_time
 - a03_group_logic: _credor_pool, _debtor_pool, _fund_agenda_give, _fund_agenda_ratio_give, _fund_agenda_ratio_take, _fund_agenda_take, _fund_give, _fund_take, _inallocable_acct_debt_points, _irrational_acct_debt_points, _memberships, acct_cred_points, acct_debt_points, awardee_title, fund_give, fund_take, give_force, group_cred_points, group_debt_points, group_title, respect_bit, take_force
 - a04_reason_logic: _active, _chore, _status, fcontext, fnigh, fopen, fstate, labor_title, pdivisor, pnigh, popen, pstate, rconcept_active_requisite, rcontext
 - a05_concept_logic: _active_hx, _all_acct_cred, _all_acct_debt, _awardheirs, _awardlines, _descendant_task_count, _factheirs, _fund_cease, _fund_onset, _fund_ratio, _gogo_calc, _healerlink_ratio, _is_expanded, _kids, _range_evaluated, _reasonheirs, _stop_calc, _uid, addin, begin, close, concept_label, concept_rope, denom, gogo_want, healer_name, healerlink, mass, morph, numor, problem_bool, stop_want, task
@@ -13,13 +13,13 @@
 - a09_pack_logic: event_int, face_name
 - a10_plan_calc: jmetrics, plan_groupunit
 - a11_bud_cell_logic: boss_facts, bud_owner_name, found_facts, planadjust, planevent_facts
-- a12_hub_toolbox: bank_mstr_dir, bank_ote1_agg, gut, job
+- a12_hub_toolbox: belief_mstr_dir, belief_ote1_agg, gut, job
 - a13_plan_listen_logic: 
 - a14_keep_logic: 
-- a15_bank_logic: bank_budunit, bank_paybook, bank_timeline_hour, bank_timeline_month, bank_timeline_weekday, bank_timeoffi, bankunit, brokerunits, cumulative_minute, hour_label, job_listen_rotations, month_label, paybook, weekday_label, weekday_order
+- a15_belief_logic: belief_budunit, belief_paybook, belief_timeline_hour, belief_timeline_month, belief_timeline_weekday, belief_timeoffi, beliefunit, brokerunits, cumulative_minute, hour_label, job_listen_rotations, month_label, paybook, weekday_label, weekday_order
 - a16_pidgin_logic: inx_knot, inx_label, inx_name, inx_rope, inx_title, map_otx2inx, otx2inx, otx_key, otx_knot, otx_label, otx_name, otx_rope, otx_title, pidgin_core, pidgin_label, pidgin_name, pidgin_rope, pidgin_title, pidginunit, unknown_str
-- a17_idea_logic: allowed_crud, brick_raw, build_order, delete_insert, delete_insert_update, delete_update, fis_id, idea_category, idea_number, insert_multiple, insert_one_time, insert_update
-- a18_etl_toolbox: bank_acct_nets, bank_event_time_agg, brick_agg, brick_valid, events_brick_agg, events_brick_valid, owner_net_amount, sound_agg, sound_raw, voice_agg, voice_raw
-- a19_kpi_toolbox: bank_kpi001_acct_nets
-- a20_fis_logic: 
+- a17_idea_logic: allowed_crud, brick_raw, build_order, delete_insert, delete_insert_update, delete_update, idea_category, idea_number, insert_multiple, insert_one_time, insert_update, world_id
+- a18_etl_toolbox: belief_acct_nets, belief_event_time_agg, brick_agg, brick_valid, events_brick_agg, events_brick_valid, owner_net_amount, sound_agg, sound_raw, voice_agg, voice_raw
+- a19_kpi_toolbox: belief_kpi001_acct_nets
+- a20_world_logic: 
 - a21_lobby_logic: lobby_id, lobby_mstr_dir, lobbys

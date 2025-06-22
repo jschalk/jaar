@@ -9,7 +9,7 @@ def test_LobbyUnit_Exists():
     assert not x_lobbyunit.lobby_id
     assert not x_lobbyunit.option_packs
     assert not x_lobbyunit.selected_pack
-    assert not x_lobbyunit.fiss
+    assert not x_lobbyunit.worlds
 
 
 def test_lobbyunit_shop_ReturnsObj():
@@ -23,7 +23,7 @@ def test_lobbyunit_shop_ReturnsObj():
     assert d456_lobbyunit.lobby_id
     assert not d456_lobbyunit.option_packs
     assert not d456_lobbyunit.selected_pack
-    assert not d456_lobbyunit.fiss
+    assert not d456_lobbyunit.worlds
 
 
 # def test_LobbyUnit_CreateOptionPacks():

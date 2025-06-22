@@ -1,5 +1,5 @@
 from sqlite3 import connect as sqlite3_connect
-from src.a02_finance_logic.test._util.a02_str import bank_label_str, owner_name_str
+from src.a02_finance_logic.test._util.a02_str import belief_label_str, owner_name_str
 from src.a06_plan_logic.test._util.a06_str import (
     acct_cred_points_str,
     acct_debt_points_str,
@@ -8,7 +8,7 @@ from src.a06_plan_logic.test._util.a06_str import (
     labor_title_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a15_bank_logic.test._util.a15_str import amount_str
+from src.a15_belief_logic.test._util.a15_str import amount_str
 from src.a17_idea_logic.idea_config import get_idea_config_dict
 from src.a17_idea_logic.idea_db_tool import (
     create_idea_sorted_table,
@@ -24,7 +24,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_plan_concept_laborli
         idea_cols = [
             event_int_str(),
             face_name_str(),
-            bank_label_str(),
+            belief_label_str(),
             concept_rope_str(),
             labor_title_str(),
             owner_name_str(),
@@ -54,12 +54,12 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_plan_concept_laborli
 
         # THEN
         columns_str = (
-            "event_int, face_name, bank_label, owner_name, concept_rope, labor_title"
+            "event_int, face_name, belief_label, owner_name, concept_rope, labor_title"
         )
         expected_sqlstr = f"""INSERT INTO {plnlabo_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
-WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND bank_label IS NOT NULL AND owner_name IS NOT NULL AND concept_rope IS NOT NULL AND labor_title IS NOT NULL
+WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND belief_label IS NOT NULL AND owner_name IS NOT NULL AND concept_rope IS NOT NULL AND labor_title IS NOT NULL
 GROUP BY {columns_str}
 ;
 """
@@ -76,7 +76,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_plan_acctunit():
         idea_cols = [
             event_int_str(),
             face_name_str(),
-            bank_label_str(),
+            belief_label_str(),
             concept_rope_str(),
             labor_title_str(),
             owner_name_str(),
@@ -104,11 +104,11 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_plan_acctunit():
         )
 
         # THEN
-        columns_str = "event_int, face_name, bank_label, owner_name, acct_name, acct_cred_points, acct_debt_points"
+        columns_str = "event_int, face_name, belief_label, owner_name, acct_name, acct_cred_points, acct_debt_points"
         expected_sqlstr = f"""INSERT INTO {plnacct_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
-WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND bank_label IS NOT NULL AND owner_name IS NOT NULL AND acct_name IS NOT NULL
+WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND belief_label IS NOT NULL AND owner_name IS NOT NULL AND acct_name IS NOT NULL
 GROUP BY {columns_str}
 ;
 """
@@ -126,7 +126,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_plan_acctunit():
         idea_cols = [
             event_int_str(),
             face_name_str(),
-            bank_label_str(),
+            belief_label_str(),
             concept_rope_str(),
             labor_title_str(),
             owner_name_str(),
@@ -153,13 +153,11 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_plan_acctunit():
         )
 
         # THEN
-        columns_str = (
-            "event_int, face_name, bank_label, owner_name, acct_name, acct_cred_points"
-        )
+        columns_str = "event_int, face_name, belief_label, owner_name, acct_name, acct_cred_points"
         expected_sqlstr = f"""INSERT INTO {plnacct_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
-WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND bank_label IS NOT NULL AND owner_name IS NOT NULL AND acct_name IS NOT NULL
+WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND belief_label IS NOT NULL AND owner_name IS NOT NULL AND acct_name IS NOT NULL
 GROUP BY {columns_str}
 ;
 """

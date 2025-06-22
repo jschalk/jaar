@@ -17,7 +17,7 @@ from src.a01_term_logic.rope import (
 )
 from src.a01_term_logic.term import (
     AcctName,
-    BankLabel,
+    BeliefLabel,
     GroupTitle,
     LabelTerm,
     RopeTerm,
@@ -77,7 +77,7 @@ class ConceptGetDescendantsException(Exception):
     pass
 
 
-def get_default_bank_label() -> BankLabel:
+def get_default_belief_label() -> BeliefLabel:
     return "ZZ"
 
 
@@ -222,7 +222,7 @@ class ConceptUnit:
     concept_label : LabelTerm of concept.
     parent_rope : RopeTerm that this concept stems from. Empty string for root concepts.
     root : bool at Indicates whether this is a root concept.
-    bank_label : BankLabel that is root concept LabelTerm.
+    belief_label : BeliefLabel that is root concept LabelTerm.
     knot : str Identifier or label for bridging concepts.
     optional:
     mass : int weight that is arbitrary used by parent concept to calculated relative importance.
@@ -245,7 +245,7 @@ class ConceptUnit:
     problem_bool : bool that describes if the concept is a problem.
     _is_expanded : bool Internal flag for whether the concept is expanded.
 
-    _active : bool that describes if the concept task is active, calculated by BankUnit.
+    _active : bool that describes if the concept task is active, calculated by BeliefUnit.
     _active_hx : dict[int, bool] Historical record of active state, used to calcualte if changes have occured
     _all_acct_cred : bool Flag indicating there are not explicitley defined awardlinks
     _all_acct_debt : bool Flag indicating there are not explicitley defined awardlinks
@@ -255,8 +255,8 @@ class ConceptUnit:
     _factheirs : dict[RopeTerm, FactHeir] parent concept provided facts.
     _fund_ratio : float
     fund_iota : FundIota Smallest indivisible funding component.
-    _fund_onset : FundNum Point at which funding onsets inside BankUnit funding range
-    _fund_cease : FundNum Point at which funding ceases inside BankUnit funding range
+    _fund_onset : FundNum Point at which funding onsets inside BeliefUnit funding range
+    _fund_cease : FundNum Point at which funding ceases inside BeliefUnit funding range
     _healerlink_ratio : float
     _level : int that describes Depth level in concept hierarchy.
     _range_evaluated : bool Flag indicating whether range has been evaluated.
@@ -272,7 +272,7 @@ class ConceptUnit:
     parent_rope: RopeTerm = None
     root: bool = None
     _kids: dict[RopeTerm,] = None
-    bank_label: BankLabel = None
+    belief_label: BeliefLabel = None
     _uid: int = None  # Calculated field?
     awardlinks: dict[GroupTitle, AwardLink] = None
     reasonunits: dict[RopeTerm, ReasonUnit] = None
@@ -559,11 +559,11 @@ class ConceptUnit:
         if (
             self.root
             and concept_label is not None
-            and concept_label != self.bank_label
-            and self.bank_label is not None
+            and concept_label != self.belief_label
+            and self.belief_label is not None
         ):
             raise Concept_root_LabelNotEmptyException(
-                f"Cannot set conceptroot to string different than '{self.bank_label}'"
+                f"Cannot set conceptroot to string different than '{self.belief_label}'"
             )
         else:
             self.concept_label = concept_label
@@ -1057,7 +1057,7 @@ def conceptunit_shop(
     morph: bool = None,
     task: bool = None,
     root: bool = None,
-    bank_label: BankLabel = None,
+    belief_label: BeliefLabel = None,
     problem_bool: bool = None,
     # Calculated fields
     _level: int = None,
@@ -1075,7 +1075,7 @@ def conceptunit_shop(
     knot: str = None,
     _healerlink_ratio: float = None,
 ) -> ConceptUnit:
-    bank_label = get_default_bank_label() if bank_label is None else bank_label
+    belief_label = get_default_belief_label() if belief_label is None else belief_label
     x_healerlink = healerlink_shop() if healerlink is None else healerlink
 
     x_conceptkid = ConceptUnit(
@@ -1105,7 +1105,7 @@ def conceptunit_shop(
         task=get_False_if_None(task),
         problem_bool=get_False_if_None(problem_bool),
         root=get_False_if_None(root),
-        bank_label=bank_label,
+        belief_label=belief_label,
         # Calculated fields
         _level=_level,
         _fund_ratio=_fund_ratio,
@@ -1123,7 +1123,7 @@ def conceptunit_shop(
         _healerlink_ratio=get_0_if_None(_healerlink_ratio),
     )
     if x_conceptkid.root:
-        x_conceptkid.set_concept_label(concept_label=bank_label)
+        x_conceptkid.set_concept_label(concept_label=belief_label)
     else:
         x_conceptkid.set_concept_label(concept_label=concept_label)
     x_conceptkid.set_laborunit_empty_if_None()

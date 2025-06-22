@@ -6,7 +6,7 @@ from src.a02_finance_logic.bud import (
     tranbook_shop,
     tranunit_shop,
 )
-from src.a02_finance_logic.test._util.a02_str import acct_name_str, bank_label_str
+from src.a02_finance_logic.test._util.a02_str import acct_name_str, belief_label_str
 
 
 def test_TranUnit_Exists():
@@ -46,7 +46,7 @@ def test_TranBook_Exists():
 
     # THEN
     assert x_tranbook
-    assert not x_tranbook.bank_label
+    assert not x_tranbook.belief_label
     assert not x_tranbook.tranunits
     assert not x_tranbook._accts_net
 
@@ -65,7 +65,7 @@ def test_tranbook_shop_WithParametersReturnsObj():
 
     # THEN
     assert x_tranbook
-    assert x_tranbook.bank_label == accord23_str
+    assert x_tranbook.belief_label == accord23_str
     assert x_tranbook.tranunits == x_tranunits
     assert x_tranbook._accts_net == {}
 
@@ -79,7 +79,7 @@ def test_tranbook_shop_WithoutParametersReturnsObj():
 
     # THEN
     assert x_tranbook
-    assert x_tranbook.bank_label == accord23_str
+    assert x_tranbook.belief_label == accord23_str
     assert x_tranbook.tranunits == {}
     assert x_tranbook._accts_net == {}
 
@@ -619,8 +619,8 @@ def test_TranBook_get_dict_ReturnsObj():
     # THEN
     tranunits_str = "tranunits"
     assert x_dict
-    assert bank_label_str() in x_dict.keys()
-    assert x_dict.get(bank_label_str()) == accord23_str
+    assert belief_label_str() in x_dict.keys()
+    assert x_dict.get(belief_label_str()) == accord23_str
     assert tranunits_str in x_dict.keys()
     tranunits_dict = x_dict.get(tranunits_str)
     assert tranunits_dict.get(sue_str)
@@ -662,7 +662,7 @@ def test_get_tranbook_from_dict_ReturnsObj_Sccenario0():
 
     # THEN
     assert generated_tranbook
-    assert generated_tranbook.bank_label == accord23_str
+    assert generated_tranbook.belief_label == accord23_str
     assert generated_tranbook.tranunits == accord23_tranbook.tranunits
     assert generated_tranbook == accord23_tranbook
 
@@ -687,7 +687,7 @@ def test_get_tranbook_from_dict_ReturnsObj_Sccenario1():
     accord23_tranbook.add_tranunit(yao_str, yao_str, t77_tran_time, t77_yao_amount)
 
     str_tran_time_accord23_dict = {
-        "bank_label": accord23_str,
+        "belief_label": accord23_str,
         "tranunits": {
             sue_str: {
                 yao_str: {
@@ -705,7 +705,7 @@ def test_get_tranbook_from_dict_ReturnsObj_Sccenario1():
 
     # THEN
     assert generated_tranbook
-    assert generated_tranbook.bank_label == accord23_str
+    assert generated_tranbook.belief_label == accord23_str
     assert generated_tranbook.tranunits == accord23_tranbook.tranunits
     assert generated_tranbook == accord23_tranbook
 

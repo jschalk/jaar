@@ -348,7 +348,7 @@ def save_table_to_csv(conn_or_cursor: sqlite3_Connection, dst_dir: str, tablenam
     select_sqlstr = f"""SELECT * FROM {tablename};"""
     tables_rows = conn_or_cursor.execute(select_sqlstr).fetchall()
     tables_columns = get_table_columns(conn_or_cursor, tablename)
-    # bankunit_columns = [desc[0] for desc in cursor.description]
+    # beliefunit_columns = [desc[0] for desc in cursor.description]
     table_df = DataFrame(tables_rows, columns=tables_columns)
     table_filename = f"{tablename}.csv"
     save_dataframe_to_csv(table_df, dst_dir, table_filename)

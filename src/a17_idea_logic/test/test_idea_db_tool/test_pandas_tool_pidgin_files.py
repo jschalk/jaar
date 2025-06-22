@@ -24,7 +24,7 @@ from src.a17_idea_logic.idea_db_tool import (
 )
 from src.a17_idea_logic.test._util.a17_env import (
     env_dir_setup_cleanup,
-    idea_banks_dir as get_example_face_dir,
+    idea_beliefs_dir as get_example_face_dir,
 )
 
 

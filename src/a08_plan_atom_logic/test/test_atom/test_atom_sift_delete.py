@@ -80,7 +80,7 @@ def test_sift_atom_ReturnsObj_PlanAtom_DELETE_plan_acct_membership():
 def test_sift_atom_ReturnsObj_PlanAtom_DELETE_plan_conceptunit():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
-    root_rope = to_rope(sue_plan.bank_label)
+    root_rope = to_rope(sue_plan.belief_label)
     casa_str = "casa"
     casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"
@@ -121,7 +121,7 @@ def test_sift_atom_ReturnsObj_PlanAtom_DELETE_plan_conceptunit():
 def test_sift_atom_SetsPlanDeltaPlanAtom_plan_conceptunit():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
-    root_rope = to_rope(sue_plan.bank_label)
+    root_rope = to_rope(sue_plan.belief_label)
     casa_str = "casa"
     casa_rope = sue_plan.make_l1_rope(casa_str)
     clean_str = "clean"

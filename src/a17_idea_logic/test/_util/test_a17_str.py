@@ -5,12 +5,12 @@ from src.a17_idea_logic.test._util.a17_str import (
     delete_insert_str,
     delete_insert_update_str,
     delete_update_str,
-    fis_id_str,
     idea_category_str,
     idea_number_str,
     insert_multiple_str,
     insert_one_time_str,
     insert_update_str,
+    world_id_str,
 )
 
 
@@ -28,4 +28,4 @@ def test_str_functions_ReturnsObj():
     assert delete_insert_str() == "delete_insert"
     assert delete_update_str() == "delete_update"
     assert build_order_str() == "build_order"
-    assert fis_id_str() == "fis_id"
+    assert world_id_str() == "world_id"

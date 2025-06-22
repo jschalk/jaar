@@ -155,8 +155,8 @@ def new_timeline_conceptunit(
     return conceptunit_shop(timeline_label, begin=0, close=timeline_length)
 
 
-def get_timeline_rope(bank_label: str, timeline_label: str, knot: str) -> RopeTerm:
-    time_rope = create_rope(bank_label, "time", knot)
+def get_timeline_rope(belief_label: str, timeline_label: str, knot: str) -> RopeTerm:
+    time_rope = create_rope(belief_label, "time", knot)
     return create_rope(time_rope, timeline_label, knot)
 
 
@@ -170,7 +170,7 @@ def add_newtimeline_conceptunit(x_planunit: PlanUnit, timeline_config: dict):
     x_yr1_jan1_offset = timeline_config.get("yr1_jan1_offset")
 
     timeline_rope = get_timeline_rope(
-        bank_label=x_planunit.bank_label,
+        belief_label=x_planunit.belief_label,
         timeline_label=x_concept_label,
         knot=x_planunit.knot,
     )
@@ -202,7 +202,7 @@ def add_stan_conceptunits(
 ):
     time_rope = x_planunit.make_l1_rope("time")
     timeline_rope = get_timeline_rope(
-        bank_label=x_planunit.bank_label,
+        belief_label=x_planunit.belief_label,
         timeline_label=timeline_label,
         knot=x_planunit.knot,
     )

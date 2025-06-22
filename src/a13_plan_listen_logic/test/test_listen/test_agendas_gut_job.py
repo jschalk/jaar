@@ -34,7 +34,7 @@ def test_listen_to_agendas_jobs_into_job_AddsChoresToPlanWhenNo_laborlinkIsSet(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    bank_mstr_dir = env_dir()
+    belief_mstr_dir = env_dir()
     a23_str = "accord23"
     yao_str = "Yao"
     yao_gut = planunit_shop(yao_str, a23_str)
@@ -44,20 +44,20 @@ def test_listen_to_agendas_jobs_into_job_AddsChoresToPlanWhenNo_laborlinkIsSet(
     zia_pool = 87
     yao_gut.add_acctunit(zia_str, zia_acct_cred_points, zia_acct_debt_points)
     yao_gut.set_acct_respect(zia_pool)
-    save_gut_file(bank_mstr_dir, yao_gut)
+    save_gut_file(belief_mstr_dir, yao_gut)
 
     zia_job = planunit_shop(zia_str, a23_str)
     zia_job.set_concept(conceptunit_shop(clean_str(), task=True), casa_rope())
     zia_job.set_concept(conceptunit_shop(cook_str(), task=True), casa_rope())
     zia_job.add_acctunit(yao_str, acct_debt_points=12)
-    save_job_file(bank_mstr_dir, zia_job)
+    save_job_file(belief_mstr_dir, zia_job)
 
     new_yao_job = create_listen_basis(yao_gut)
     assert len(new_yao_job.get_agenda_dict()) == 0
 
     # WHEN
     print(f"{len(new_yao_job.get_concept_dict())=}")
-    listen_to_agendas_jobs_into_job(bank_mstr_dir, new_yao_job)
+    listen_to_agendas_jobs_into_job(belief_mstr_dir, new_yao_job)
 
     # THEN
     assert len(new_yao_job.get_agenda_dict()) == 2
@@ -65,7 +65,7 @@ def test_listen_to_agendas_jobs_into_job_AddsChoresToPlanWhenNo_laborlinkIsSet(
 
 def test_listen_to_agendas_jobs_into_job_AddsChoresToPlan(env_dir_setup_cleanup):
     # ESTABLISH
-    bank_mstr_dir = env_dir()
+    belief_mstr_dir = env_dir()
     a23_str = "accord23"
     yao_str = "Yao"
     yao_gut = planunit_shop(yao_str, a23_str)
@@ -76,7 +76,7 @@ def test_listen_to_agendas_jobs_into_job_AddsChoresToPlan(env_dir_setup_cleanup)
     yao_gut.add_acctunit(zia_str, zia_acct_cred_points, zia_acct_debt_points)
     yao_gut.set_acct_respect(zia_pool)
     a23_str = "accord23"
-    save_job_file(bank_mstr_dir, yao_gut)
+    save_job_file(belief_mstr_dir, yao_gut)
 
     zia_job = planunit_shop(zia_str, a23_str)
     zia_job.set_concept(conceptunit_shop(clean_str(), task=True), casa_rope())
@@ -86,13 +86,13 @@ def test_listen_to_agendas_jobs_into_job_AddsChoresToPlan(env_dir_setup_cleanup)
     cook_conceptunit = zia_job.get_concept_obj(cook_rope())
     clean_conceptunit.laborunit.set_laborlink(yao_str)
     cook_conceptunit.laborunit.set_laborlink(yao_str)
-    save_job_file(bank_mstr_dir, zia_job)
+    save_job_file(belief_mstr_dir, zia_job)
     new_yao_job = create_listen_basis(yao_gut)
     assert len(new_yao_job.get_agenda_dict()) == 0
 
     # WHEN
     print(f"{len(new_yao_job.get_concept_dict())=}")
-    listen_to_agendas_jobs_into_job(bank_mstr_dir, new_yao_job)
+    listen_to_agendas_jobs_into_job(belief_mstr_dir, new_yao_job)
 
     # THEN
     assert len(new_yao_job.get_agenda_dict()) == 2
@@ -102,7 +102,7 @@ def test_listen_to_agendas_jobs_into_job_AddsChoresToPlanWithDetailsDecidedBy_ac
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    bank_mstr_dir = env_dir()
+    belief_mstr_dir = env_dir()
     zia_job = get_example_zia_speaker()
     bob_job = get_example_bob_speaker()
     bob_job.edit_concept_attr(
@@ -118,19 +118,19 @@ def test_listen_to_agendas_jobs_into_job_AddsChoresToPlanWithDetailsDecidedBy_ac
     zia_str = zia_job.owner_name
     bob_str = bob_job.owner_name
     a23_str = "accord23"
-    save_job_file(bank_mstr_dir, zia_job)
-    save_job_file(bank_mstr_dir, bob_job)
+    save_job_file(belief_mstr_dir, zia_job)
+    save_job_file(belief_mstr_dir, bob_job)
 
     yao_gut = get_example_yao_speaker()
     yao_str = yao_gut.owner_name
-    save_gut_file(bank_mstr_dir, yao_gut)
+    save_gut_file(belief_mstr_dir, yao_gut)
 
     new_yao_job1 = create_listen_basis(yao_gut)
     assert new_yao_job1.concept_exists(cook_rope()) is False
 
     # WHEN
-    yao_hubunit = hubunit_shop(bank_mstr_dir, a23_str, yao_str)
-    listen_to_agendas_jobs_into_job(bank_mstr_dir, new_yao_job1)
+    yao_hubunit = hubunit_shop(belief_mstr_dir, a23_str, yao_str)
+    listen_to_agendas_jobs_into_job(belief_mstr_dir, new_yao_job1)
 
     # THEN
     assert new_yao_job1.concept_exists(cook_rope())
@@ -149,7 +149,7 @@ def test_listen_to_agendas_jobs_into_job_AddsChoresToPlanWithDetailsDecidedBy_ac
     assert new_yao_job2.concept_exists(cook_rope()) is False
 
     # WHEN
-    listen_to_agendas_jobs_into_job(bank_mstr_dir, new_yao_job2)
+    listen_to_agendas_jobs_into_job(belief_mstr_dir, new_yao_job2)
 
     # THEN
     assert new_yao_job2.concept_exists(cook_rope())
@@ -163,7 +163,7 @@ def test_listen_to_agendas_jobs_into_job_AddsChoresToPlanWithDetailsDecidedBy_ac
 
 def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalPlan(env_dir_setup_cleanup):
     # ESTABLISH
-    bank_mstr_dir = env_dir()
+    belief_mstr_dir = env_dir()
     a23_str = "accord23"
     yao_str = "Yao"
     yao_gut = planunit_shop(yao_str, a23_str)
@@ -178,7 +178,7 @@ def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalPlan(env_dir_setup_c
     yao_pool = 92
     yao_gut.set_acct_respect(yao_pool)
     a23_str = "accord23"
-    save_gut_file(bank_mstr_dir, yao_gut)
+    save_gut_file(belief_mstr_dir, yao_gut)
 
     zia_str = "Zia"
     zia_job = planunit_shop(zia_str, a23_str)
@@ -189,7 +189,7 @@ def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalPlan(env_dir_setup_c
     cook_conceptunit = zia_job.get_concept_obj(cook_rope())
     clean_conceptunit.laborunit.set_laborlink(yao_str)
     cook_conceptunit.laborunit.set_laborlink(yao_str)
-    save_job_file(bank_mstr_dir, zia_job)
+    save_job_file(belief_mstr_dir, zia_job)
 
     sue_job = planunit_shop(sue_str, a23_str)
     sue_job.set_max_tree_traverse(5)
@@ -220,11 +220,11 @@ def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalPlan(env_dir_setup_c
         reason_rcontext=egg_rope,
         reason_rconcept_active_requisite=False,
     )
-    save_job_file(bank_mstr_dir, sue_job)
+    save_job_file(belief_mstr_dir, sue_job)
 
     # WHEN
     new_yao_job = create_listen_basis(yao_gut)
-    listen_to_agendas_jobs_into_job(bank_mstr_dir, new_yao_job)
+    listen_to_agendas_jobs_into_job(belief_mstr_dir, new_yao_job)
 
     # THEN irrational plan is ignored
     assert len(new_yao_job.get_agenda_dict()) != 3
@@ -241,10 +241,10 @@ def test_listen_to_agendas_jobs_into_job_ProcessesMissingDebtorPlan(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    bank_mstr_dir = env_dir()
+    belief_mstr_dir = env_dir()
     yao_str = "Yao"
     a23_str = "accord23"
-    yao_gut_path = create_gut_path(bank_mstr_dir, a23_str, yao_str)
+    yao_gut_path = create_gut_path(belief_mstr_dir, a23_str, yao_str)
     delete_dir(yao_gut_path)  # don't know why I have to do this...
     print(f"{os_path_exists(yao_gut_path)=}")
     yao_gut = planunit_shop(yao_str, a23_str)
@@ -258,7 +258,7 @@ def test_listen_to_agendas_jobs_into_job_ProcessesMissingDebtorPlan(
     yao_gut.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
     yao_pool = 92
     yao_gut.set_acct_respect(yao_pool)
-    save_gut_file(bank_mstr_dir, yao_gut)
+    save_gut_file(belief_mstr_dir, yao_gut)
 
     zia_job = planunit_shop(zia_str, a23_str)
     zia_job.set_concept(conceptunit_shop(clean_str(), task=True), casa_rope())
@@ -268,11 +268,11 @@ def test_listen_to_agendas_jobs_into_job_ProcessesMissingDebtorPlan(
     cook_conceptunit = zia_job.get_concept_obj(cook_rope())
     clean_conceptunit.laborunit.set_laborlink(yao_str)
     cook_conceptunit.laborunit.set_laborlink(yao_str)
-    save_job_file(bank_mstr_dir, zia_job)
+    save_job_file(belief_mstr_dir, zia_job)
 
     # WHEN
     new_yao_job = create_listen_basis(yao_gut)
-    listen_to_agendas_jobs_into_job(bank_mstr_dir, new_yao_job)
+    listen_to_agendas_jobs_into_job(belief_mstr_dir, new_yao_job)
 
     # THEN irrational plan is ignored
     assert len(new_yao_job.get_agenda_dict()) != 3
@@ -289,7 +289,7 @@ def test_listen_to_agendas_jobs_into_job_ListensToOwner_gut_AndNotOwner_job(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    bank_mstr_dir = env_dir()
+    belief_mstr_dir = env_dir()
     a23_str = "accord23"
     yao_str = "Yao"
     yao_gut = planunit_shop(yao_str, a23_str)
@@ -304,7 +304,7 @@ def test_listen_to_agendas_jobs_into_job_ListensToOwner_gut_AndNotOwner_job(
     yao_pool = 87
     yao_gut.set_acct_respect(yao_pool)
     # save yao without chore to dutys
-    save_gut_file(bank_mstr_dir, yao_gut)
+    save_gut_file(belief_mstr_dir, yao_gut)
 
     # Save Zia to job
     zia_str = "Zia"
@@ -316,7 +316,7 @@ def test_listen_to_agendas_jobs_into_job_ListensToOwner_gut_AndNotOwner_job(
     cook_conceptunit = zia_job.get_concept_obj(cook_rope())
     clean_conceptunit.laborunit.set_laborlink(yao_str)
     cook_conceptunit.laborunit.set_laborlink(yao_str)
-    save_job_file(bank_mstr_dir, zia_job)
+    save_job_file(belief_mstr_dir, zia_job)
 
     # save yao with chore to dutys
     yao_old_job = planunit_shop(yao_str, a23_str)
@@ -325,11 +325,11 @@ def test_listen_to_agendas_jobs_into_job_ListensToOwner_gut_AndNotOwner_job(
     yao_old_job.set_l1_concept(conceptunit_shop(vacuum_str, task=True))
     vacuum_conceptunit = yao_old_job.get_concept_obj(vacuum_rope)
     vacuum_conceptunit.laborunit.set_laborlink(yao_str)
-    save_job_file(bank_mstr_dir, yao_old_job)
+    save_job_file(belief_mstr_dir, yao_old_job)
 
     # WHEN
     new_yao_job = create_listen_basis(yao_gut)
-    listen_to_agendas_jobs_into_job(bank_mstr_dir, new_yao_job)
+    listen_to_agendas_jobs_into_job(belief_mstr_dir, new_yao_job)
 
     # THEN irrational plan is ignored
     assert len(new_yao_job.get_agenda_dict()) != 2

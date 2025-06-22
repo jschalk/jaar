@@ -1,10 +1,10 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, open_file, save_file
 from src.a06_plan_logic.plan import planunit_shop
-from src.a12_hub_toolbox.hub_path import create_bank_json_path, create_gut_path
-from src.a15_bank_logic.bank import bankunit_shop
+from src.a12_hub_toolbox.hub_path import create_belief_json_path, create_gut_path
+from src.a15_belief_logic.belief import beliefunit_shop
 from src.a17_idea_logic.idea_csv_tool import (
-    add_bankunit_to_stance_csv_strs,
+    add_beliefunit_to_stance_csv_strs,
     add_planunit_to_stance_csv_strs,
     create_init_stance_idea_csv_strs,
 )
@@ -20,37 +20,37 @@ from src.a18_etl_toolbox.test._util.a18_env import (
 from src.a18_etl_toolbox.tran_path import create_stance0001_path
 
 
-def test_collect_stance_csv_strs_ReturnsObj_Scenario0_NoBankUnits(
+def test_collect_stance_csv_strs_ReturnsObj_Scenario0_NoBeliefUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    bank_mstr_dir = get_module_temp_dir()
+    belief_mstr_dir = get_module_temp_dir()
     bob_str = "Bob"
 
     # WHEN
-    gen_stance_csv_strs = collect_stance_csv_strs(bank_mstr_dir)
+    gen_stance_csv_strs = collect_stance_csv_strs(belief_mstr_dir)
 
     # THEN
     expected_stance_csv_strs = create_init_stance_idea_csv_strs()
     assert gen_stance_csv_strs == expected_stance_csv_strs
 
 
-def test_collect_stance_csv_strs_ReturnsObj_Scenario1_SingleBankUnit_NoPlanUnits(
+def test_collect_stance_csv_strs_ReturnsObj_Scenario1_SingleBeliefUnit_NoPlanUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    bank_mstr_dir = get_module_temp_dir()
+    belief_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
-    a23_bank = bankunit_shop(a23_str, bank_mstr_dir)
-    bank_json_path = create_bank_json_path(bank_mstr_dir, a23_str)
-    save_file(bank_json_path, None, a23_bank.get_json())
+    a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
+    belief_json_path = create_belief_json_path(belief_mstr_dir, a23_str)
+    save_file(belief_json_path, None, a23_belief.get_json())
 
     # WHEN
-    gen_stance_csv_strs = collect_stance_csv_strs(bank_mstr_dir)
+    gen_stance_csv_strs = collect_stance_csv_strs(belief_mstr_dir)
 
     # THEN
     expected_stance_csv_strs = create_init_stance_idea_csv_strs()
-    add_bankunit_to_stance_csv_strs(a23_bank, expected_stance_csv_strs, ",")
+    add_beliefunit_to_stance_csv_strs(a23_belief, expected_stance_csv_strs, ",")
     assert gen_stance_csv_strs == expected_stance_csv_strs
 
 
@@ -58,39 +58,39 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_PlanUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    bank_mstr_dir = get_module_temp_dir()
+    belief_mstr_dir = get_module_temp_dir()
     bob_str = "Bob"
     a23_str = "accord23"
-    a23_bank = bankunit_shop(a23_str, bank_mstr_dir)
-    bank_json_path = create_bank_json_path(bank_mstr_dir, a23_str)
-    save_file(bank_json_path, None, a23_bank.get_json())
+    a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
+    belief_json_path = create_belief_json_path(belief_mstr_dir, a23_str)
+    save_file(belief_json_path, None, a23_belief.get_json())
     # create plan gut file
     bob_gut = planunit_shop(bob_str, a23_str)
     bob_gut.add_acctunit("Yao", 44, 55)
-    a23_bob_gut_path = create_gut_path(bank_mstr_dir, a23_str, bob_str)
+    a23_bob_gut_path = create_gut_path(belief_mstr_dir, a23_str, bob_str)
     save_file(a23_bob_gut_path, None, bob_gut.get_json())
 
     # WHEN
-    gen_stance_csv_strs = collect_stance_csv_strs(bank_mstr_dir)
+    gen_stance_csv_strs = collect_stance_csv_strs(belief_mstr_dir)
 
     # THEN
     expected_stance_csv_strs = create_init_stance_idea_csv_strs()
-    add_bankunit_to_stance_csv_strs(a23_bank, expected_stance_csv_strs, ",")
+    add_beliefunit_to_stance_csv_strs(a23_belief, expected_stance_csv_strs, ",")
     add_planunit_to_stance_csv_strs(bob_gut, expected_stance_csv_strs, ",")
     assert gen_stance_csv_strs == expected_stance_csv_strs
 
 
-def test_create_stance0001_file_CreatesFile_Scenario0_NoBankUnits(
+def test_create_stance0001_file_CreatesFile_Scenario0_NoBeliefUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    bank_mstr_dir = create_path(get_module_temp_dir(), "bank_mstr")
+    belief_mstr_dir = create_path(get_module_temp_dir(), "belief_mstr")
     output_dir = create_path(get_module_temp_dir(), "output")
     stance0001_path = create_stance0001_path(output_dir)
     assert os_path_exists(stance0001_path) is False
 
     # WHEN
-    create_stance0001_file(bank_mstr_dir, output_dir)
+    create_stance0001_file(belief_mstr_dir, output_dir)
 
     # THEN
     assert os_path_exists(stance0001_path)

@@ -117,15 +117,15 @@ def test_open_plan_file_ReturnsObj_Scenario1_FileExists():
 
 def test_save_gut_file_SetsFile(env_dir_setup_cleanup):
     # ESTABLISH
-    bank_mstr_dir = get_module_temp_dir()
+    belief_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     sue_str = "Sue"
-    sue_gut_path = create_gut_path(bank_mstr_dir, a23_str, sue_str)
+    sue_gut_path = create_gut_path(belief_mstr_dir, a23_str, sue_str)
     sue_plan = planunit_shop(sue_str, a23_str)
     assert os_path_exists(sue_gut_path) is False
 
     # WHEN
-    save_gut_file(bank_mstr_dir, sue_plan)
+    save_gut_file(belief_mstr_dir, sue_plan)
 
     # THEN
     assert os_path_exists(sue_gut_path)
@@ -133,56 +133,56 @@ def test_save_gut_file_SetsFile(env_dir_setup_cleanup):
 
 def test_gut_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    bank_mstr_dir = get_module_temp_dir()
+    belief_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     sue_str = "Sue"
     sue_plan = planunit_shop(sue_str, a23_str)
-    assert gut_file_exists(bank_mstr_dir, a23_str, sue_str) is False
+    assert gut_file_exists(belief_mstr_dir, a23_str, sue_str) is False
 
     # WHEN
-    save_gut_file(bank_mstr_dir, sue_plan)
+    save_gut_file(belief_mstr_dir, sue_plan)
 
     # THEN
-    assert gut_file_exists(bank_mstr_dir, a23_str, sue_str)
+    assert gut_file_exists(belief_mstr_dir, a23_str, sue_str)
 
 
 def test_open_gut_file_ReturnsObj_Scenario0_noFile():
     # ESTABLISH
-    bank_mstr_dir = get_module_temp_dir()
+    belief_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     sue_str = "Sue"
-    sue_gut_path = create_gut_path(bank_mstr_dir, a23_str, sue_str)
+    sue_gut_path = create_gut_path(belief_mstr_dir, a23_str, sue_str)
     assert os_path_exists(sue_gut_path) is False
 
     # WHEN / THEN
-    assert not open_gut_file(bank_mstr_dir, a23_str, sue_str)
+    assert not open_gut_file(belief_mstr_dir, a23_str, sue_str)
 
 
 def test_open_gut_file_ReturnsObj_Scenario1_FileExists():
     # ESTABLISH
-    bank_mstr_dir = get_module_temp_dir()
+    belief_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     sue_str = "Sue"
-    sue_gut_path = create_gut_path(bank_mstr_dir, a23_str, sue_str)
+    sue_gut_path = create_gut_path(belief_mstr_dir, a23_str, sue_str)
     sue_plan = planunit_shop(sue_str, a23_str)
-    save_gut_file(bank_mstr_dir, sue_plan)
+    save_gut_file(belief_mstr_dir, sue_plan)
     assert os_path_exists(sue_gut_path)
 
     # WHEN / THEN
-    assert sue_plan == open_gut_file(bank_mstr_dir, a23_str, sue_str)
+    assert sue_plan == open_gut_file(belief_mstr_dir, a23_str, sue_str)
 
 
 def test_save_job_file_SetsFile(env_dir_setup_cleanup):
     # ESTABLISH
-    bank_mstr_dir = get_module_temp_dir()
+    belief_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     sue_str = "Sue"
-    sue_job_path = create_job_path(bank_mstr_dir, a23_str, sue_str)
+    sue_job_path = create_job_path(belief_mstr_dir, a23_str, sue_str)
     sue_plan = planunit_shop(sue_str, a23_str)
     assert os_path_exists(sue_job_path) is False
 
     # WHEN
-    save_job_file(bank_mstr_dir, sue_plan)
+    save_job_file(belief_mstr_dir, sue_plan)
 
     # THEN
     assert os_path_exists(sue_job_path)
@@ -190,56 +190,56 @@ def test_save_job_file_SetsFile(env_dir_setup_cleanup):
 
 def test_job_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    bank_mstr_dir = get_module_temp_dir()
+    belief_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     sue_str = "Sue"
     sue_plan = planunit_shop(sue_str, a23_str)
-    assert job_file_exists(bank_mstr_dir, a23_str, sue_str) is False
+    assert job_file_exists(belief_mstr_dir, a23_str, sue_str) is False
 
     # WHEN
-    save_job_file(bank_mstr_dir, sue_plan)
+    save_job_file(belief_mstr_dir, sue_plan)
 
     # THEN
-    assert job_file_exists(bank_mstr_dir, a23_str, sue_str)
+    assert job_file_exists(belief_mstr_dir, a23_str, sue_str)
 
 
 def test_open_job_file_ReturnsObj_Scenario0_noFile():
     # ESTABLISH
-    bank_mstr_dir = get_module_temp_dir()
+    belief_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     sue_str = "Sue"
-    sue_job_path = create_job_path(bank_mstr_dir, a23_str, sue_str)
+    sue_job_path = create_job_path(belief_mstr_dir, a23_str, sue_str)
     assert os_path_exists(sue_job_path) is False
 
     # WHEN / THEN
-    assert not open_job_file(bank_mstr_dir, a23_str, sue_str)
+    assert not open_job_file(belief_mstr_dir, a23_str, sue_str)
 
 
 def test_open_job_file_ReturnsObj_Scenario1_FileExists():
     # ESTABLISH
-    bank_mstr_dir = get_module_temp_dir()
+    belief_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     sue_str = "Sue"
-    sue_job_path = create_job_path(bank_mstr_dir, a23_str, sue_str)
+    sue_job_path = create_job_path(belief_mstr_dir, a23_str, sue_str)
     sue_plan = planunit_shop(sue_str, a23_str)
-    save_job_file(bank_mstr_dir, sue_plan)
+    save_job_file(belief_mstr_dir, sue_plan)
     assert os_path_exists(sue_job_path)
 
     # WHEN / THEN
-    assert sue_plan == open_job_file(bank_mstr_dir, a23_str, sue_str)
+    assert sue_plan == open_job_file(belief_mstr_dir, a23_str, sue_str)
 
 
 def test_save_arbitrary_planevent_SetsFile_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
-    bank_mstr_dir = get_module_temp_dir()
+    belief_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     event5 = 5
     sue_str = "Sue"
-    planevent_path = create_planevent_path(bank_mstr_dir, a23_str, sue_str, event5)
+    planevent_path = create_planevent_path(belief_mstr_dir, a23_str, sue_str, event5)
     assert os_path_exists(planevent_path) is False
 
     # WHEN
-    save_arbitrary_planevent(bank_mstr_dir, a23_str, sue_str, event5)
+    save_arbitrary_planevent(belief_mstr_dir, a23_str, sue_str, event5)
 
     # THEN
     assert os_path_exists(planevent_path)
@@ -251,11 +251,11 @@ def test_save_arbitrary_planevent_SetsFile_Scenario1_includes_facts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    bank_mstr_dir = get_module_temp_dir()
+    belief_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     event5 = 5
     sue_str = "Sue"
-    planevent_path = create_planevent_path(bank_mstr_dir, a23_str, sue_str, event5)
+    planevent_path = create_planevent_path(belief_mstr_dir, a23_str, sue_str, event5)
     casa_rope = create_rope(a23_str, "casa")
     clean_rope = create_rope(casa_rope, "clean")
     clean_fopen = 11
@@ -264,7 +264,7 @@ def test_save_arbitrary_planevent_SetsFile_Scenario1_includes_facts(
     assert os_path_exists(planevent_path) is False
 
     # WHEN
-    save_arbitrary_planevent(bank_mstr_dir, a23_str, sue_str, event5, facts=x_facts)
+    save_arbitrary_planevent(belief_mstr_dir, a23_str, sue_str, event5, facts=x_facts)
 
     # THEN
     assert os_path_exists(planevent_path)
@@ -277,22 +277,22 @@ def test_save_arbitrary_planevent_SetsFile_Scenario1_includes_facts(
 
 def test_get_planevent_obj_ReturnsObj_Scenario0_NoFile(env_dir_setup_cleanup):
     # ESTABLISH
-    bank_mstr_dir = get_module_temp_dir()
+    belief_mstr_dir = get_module_temp_dir()
     a23_str = "accord"
     sue_str = "Sue"
     t3 = 3
 
     # WHEN / THEN
-    assert get_planevent_obj(bank_mstr_dir, a23_str, sue_str, t3) is None
+    assert get_planevent_obj(belief_mstr_dir, a23_str, sue_str, t3) is None
 
 
 def test_get_planevent_obj_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
     # ESTABLISH
-    bank_mstr_dir = get_module_temp_dir()
+    belief_mstr_dir = get_module_temp_dir()
     a23_str = "accord"
     sue_str = "Sue"
     t3 = 3
-    t3_json_path = create_planevent_path(bank_mstr_dir, a23_str, sue_str, t3)
+    t3_json_path = create_planevent_path(belief_mstr_dir, a23_str, sue_str, t3)
     sue_plan = planunit_shop(sue_str, a23_str)
     casa_rope = sue_plan.make_l1_rope("case")
     clean_rope = sue_plan.make_l1_rope("clean")
@@ -301,7 +301,7 @@ def test_get_planevent_obj_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup
     save_plan_file(t3_json_path, None, sue_plan)
 
     # WHEN
-    gen_a3_planevent = get_planevent_obj(bank_mstr_dir, a23_str, sue_str, t3)
+    gen_a3_planevent = get_planevent_obj(belief_mstr_dir, a23_str, sue_str, t3)
 
     # THEN
     assert gen_a3_planevent == sue_plan
@@ -311,10 +311,10 @@ def test_collect_owner_event_dir_sets_ReturnsObj_Scenario0_none(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    bank_mstr_dir = get_module_temp_dir()
+    belief_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     # WHEN
-    owner_events_sets = collect_owner_event_dir_sets(bank_mstr_dir, a23_str)
+    owner_events_sets = collect_owner_event_dir_sets(belief_mstr_dir, a23_str)
     # THEN
     assert owner_events_sets == {}
 
@@ -323,20 +323,20 @@ def test_collect_owner_event_dir_sets_ReturnsObj_Scenario1_DirsExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    bank_mstr_dir = get_module_temp_dir()
+    belief_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     bob_str = "Bob"
     event1 = 1
     event2 = 2
-    bob1_dir = create_owner_event_dir_path(bank_mstr_dir, a23_str, bob_str, event1)
-    bob2_dir = create_owner_event_dir_path(bank_mstr_dir, a23_str, bob_str, event2)
+    bob1_dir = create_owner_event_dir_path(belief_mstr_dir, a23_str, bob_str, event1)
+    bob2_dir = create_owner_event_dir_path(belief_mstr_dir, a23_str, bob_str, event2)
     print(f"  {bob1_dir=}")
     print(f"  {bob2_dir=}")
     set_dir(bob1_dir)
     set_dir(bob2_dir)
 
     # WHEN
-    owner_events_sets = collect_owner_event_dir_sets(bank_mstr_dir, a23_str)
+    owner_events_sets = collect_owner_event_dir_sets(belief_mstr_dir, a23_str)
 
     # THEN
     assert owner_events_sets == {bob_str: {event1, event2}}
@@ -346,24 +346,24 @@ def test_collect_owner_event_dir_sets_ReturnsObj_Scenario2_DirsExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    bank_mstr_dir = get_module_temp_dir()
+    belief_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     bob_str = "Bob"
     sue_str = "Sue"
     event1 = 1
     event2 = 2
     event7 = 7
-    bob1_dir = create_owner_event_dir_path(bank_mstr_dir, a23_str, bob_str, event1)
-    bob2_dir = create_owner_event_dir_path(bank_mstr_dir, a23_str, bob_str, event2)
-    sue2_dir = create_owner_event_dir_path(bank_mstr_dir, a23_str, sue_str, event2)
-    sue7_dir = create_owner_event_dir_path(bank_mstr_dir, a23_str, sue_str, event7)
+    bob1_dir = create_owner_event_dir_path(belief_mstr_dir, a23_str, bob_str, event1)
+    bob2_dir = create_owner_event_dir_path(belief_mstr_dir, a23_str, bob_str, event2)
+    sue2_dir = create_owner_event_dir_path(belief_mstr_dir, a23_str, sue_str, event2)
+    sue7_dir = create_owner_event_dir_path(belief_mstr_dir, a23_str, sue_str, event7)
     set_dir(bob1_dir)
     set_dir(bob2_dir)
     set_dir(sue2_dir)
     set_dir(sue7_dir)
 
     # WHEN
-    owner_events_sets = collect_owner_event_dir_sets(bank_mstr_dir, a23_str)
+    owner_events_sets = collect_owner_event_dir_sets(belief_mstr_dir, a23_str)
 
     # THEN
     assert owner_events_sets == {bob_str: {event1, event2}, sue_str: {event2, event7}}
@@ -482,11 +482,11 @@ def test_get_owners_downhill_event_ints_ReturnsObj_Scenario4Empty_downhill_owner
 
 def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
-    bank_mstr_dir = get_module_temp_dir()
+    belief_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     time7 = 777000
     sue_str = "Sue"
-    sue7_cell_path = node_path(bank_mstr_dir, a23_str, sue_str, time7)
+    sue7_cell_path = node_path(belief_mstr_dir, a23_str, sue_str, time7)
     event3 = 3
     das = []
     quota500 = 500
@@ -496,8 +496,8 @@ def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
 
     # WHEN
     cellunit_add_json_file(
-        bank_mstr_dir=bank_mstr_dir,
-        bank_label=a23_str,
+        belief_mstr_dir=belief_mstr_dir,
+        belief_label=a23_str,
         time_owner_name=sue_str,
         bud_time=time7,
         quota=quota500,
@@ -523,19 +523,19 @@ def test_cellunit_add_json_file_SetsFile_Scenario1_ManyParametersEmpty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    bank_mstr_dir = get_module_temp_dir()
+    belief_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     time7 = 777000
     sue_str = "Sue"
     bob_str = "Bob"
     das = [bob_str, sue_str]
-    sue7_cell_path = node_path(bank_mstr_dir, a23_str, sue_str, time7, das)
+    sue7_cell_path = node_path(belief_mstr_dir, a23_str, sue_str, time7, das)
     event3 = 3
     assert os_path_exists(sue7_cell_path) is False
 
     # WHEN
     cellunit_add_json_file(
-        bank_mstr_dir, a23_str, sue_str, time7, event3, bud_ancestors=das
+        belief_mstr_dir, a23_str, sue_str, time7, event3, bud_ancestors=das
     )
 
     # THEN
@@ -552,17 +552,17 @@ def test_cellunit_add_json_file_SetsFile_Scenario1_ManyParametersEmpty(
 
 def test_cellunit_get_from_dir_ReturnsObj_Scenario0_NoFileExists(env_dir_setup_cleanup):
     # ESTABLISH
-    bank_mstr_dir = get_module_temp_dir()
+    belief_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     time7 = 777000
     sue_str = "Sue"
     bob_str = "Bob"
     das = [bob_str, sue_str]
-    sue7_cell_path = node_path(bank_mstr_dir, a23_str, sue_str, time7, das)
+    sue7_cell_path = node_path(belief_mstr_dir, a23_str, sue_str, time7, das)
     event3 = 3
     assert os_path_exists(sue7_cell_path) is False
     cell_dir = create_cell_dir_path(
-        bank_mstr_dir, a23_str, sue_str, time7, bud_ancestors=das
+        belief_mstr_dir, a23_str, sue_str, time7, bud_ancestors=das
     )
 
     # WHEN / THEN
@@ -571,20 +571,20 @@ def test_cellunit_get_from_dir_ReturnsObj_Scenario0_NoFileExists(env_dir_setup_c
 
 def test_cellunit_get_from_dir_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
     # ESTABLISH
-    bank_mstr_dir = get_module_temp_dir()
+    belief_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     time7 = 777000
     sue_str = "Sue"
     bob_str = "Bob"
     das = [bob_str, sue_str]
-    sue7_cell_path = node_path(bank_mstr_dir, a23_str, sue_str, time7, das)
+    sue7_cell_path = node_path(belief_mstr_dir, a23_str, sue_str, time7, das)
     event3 = 3
     assert os_path_exists(sue7_cell_path) is False
     cellunit_add_json_file(
-        bank_mstr_dir, a23_str, sue_str, time7, event3, bud_ancestors=das
+        belief_mstr_dir, a23_str, sue_str, time7, event3, bud_ancestors=das
     )
     cell_dir = create_cell_dir_path(
-        bank_mstr_dir, a23_str, sue_str, time7, bud_ancestors=das
+        belief_mstr_dir, a23_str, sue_str, time7, bud_ancestors=das
     )
 
     # WHEN
@@ -597,16 +597,16 @@ def test_cellunit_get_from_dir_ReturnsObj_Scenario1_FileExists(env_dir_setup_cle
 
 def test_cellunit_save_to_dir_ReturnsObj_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
-    bank_mstr_dir = get_module_temp_dir()
+    belief_mstr_dir = get_module_temp_dir()
     a23_str = "accord23"
     time7 = 777000
     sue_str = "Sue"
     bob_str = "Bob"
     das = [bob_str, sue_str]
-    sue7_cell_path = node_path(bank_mstr_dir, a23_str, sue_str, time7, das)
+    sue7_cell_path = node_path(belief_mstr_dir, a23_str, sue_str, time7, das)
     event3 = 3
     sue_cell = cellunit_shop(sue_str, ancestors=das, event_int=event3)
-    cell_dir = create_cell_dir_path(bank_mstr_dir, a23_str, sue_str, time7, das)
+    cell_dir = create_cell_dir_path(belief_mstr_dir, a23_str, sue_str, time7, das)
     assert os_path_exists(sue7_cell_path) is False
 
     # WHEN
@@ -786,7 +786,7 @@ def test_save_planpoint_file_SavesFile(env_dir_setup_cleanup):
     t55_planpoint = get_planunit_with_4_levels()
     t55_bud_time = 55
     t55_planpoint_path = create_planpoint_path(mstr_dir, a23_str, sue_str, t55_bud_time)
-    print(f"{t55_planpoint.bank_label=}")
+    print(f"{t55_planpoint.belief_label=}")
     print(f"               {mstr_dir=}")
     print(f"      {t55_planpoint_path=}")
     assert os_path_exists(t55_planpoint_path) is False

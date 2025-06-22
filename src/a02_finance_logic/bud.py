@@ -11,7 +11,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_json_from_dict,
     set_in_nested_dict,
 )
-from src.a01_term_logic.term import AcctName, BankLabel, OwnerName
+from src.a01_term_logic.term import AcctName, BeliefLabel, OwnerName
 from src.a02_finance_logic.finance_config import (
     FundNum,
     TimeLinePoint,
@@ -46,7 +46,7 @@ def tranunit_shop(
 
 @dataclass
 class TranBook:
-    bank_label: BankLabel = None
+    belief_label: BeliefLabel = None
     tranunits: dict[OwnerName, dict[AcctName, dict[TimeLinePoint, FundNum]]] = None
     _accts_net: dict[OwnerName, dict[AcctName, FundNum]] = None
 
@@ -158,16 +158,18 @@ class TranBook:
 
     def get_dict(
         self,
-    ) -> dict[BankLabel, dict[OwnerName, dict[AcctName, dict[TimeLinePoint, FundNum]]]]:
-        return {"bank_label": self.bank_label, "tranunits": self.tranunits}
+    ) -> dict[
+        BeliefLabel, dict[OwnerName, dict[AcctName, dict[TimeLinePoint, FundNum]]]
+    ]:
+        return {"belief_label": self.belief_label, "tranunits": self.tranunits}
 
 
 def tranbook_shop(
-    x_bank_label: BankLabel,
+    x_belief_label: BeliefLabel,
     x_tranunits: dict[OwnerName, dict[AcctName, dict[TimeLinePoint, FundNum]]] = None,
 ):
     return TranBook(
-        bank_label=x_bank_label,
+        belief_label=x_belief_label,
         tranunits=get_empty_dict_if_None(x_tranunits),
         _accts_net={},
     )
@@ -181,7 +183,7 @@ def get_tranbook_from_dict(x_dict: dict) -> TranBook:
             for x_tran_time, x_amount in x_tran_time_dict.items():
                 x_key_list = [x_owner_name, x_acct_name, int(x_tran_time)]
                 set_in_nested_dict(new_tranunits, x_key_list, x_amount)
-    return tranbook_shop(x_dict.get("bank_label"), new_tranunits)
+    return tranbook_shop(x_dict.get("belief_label"), new_tranunits)
 
 
 @dataclass
@@ -293,8 +295,8 @@ class BrokerUnit:
     def get_bud_times(self) -> set[TimeLinePoint]:
         return set(self.buds.keys())
 
-    def get_tranbook(self, bank_label: BankLabel) -> TranBook:
-        x_tranbook = tranbook_shop(bank_label)
+    def get_tranbook(self, belief_label: BeliefLabel) -> TranBook:
+        x_tranbook = tranbook_shop(belief_label)
         for x_bud_time, x_bud in self.buds.items():
             for dst_acct_name, x_quota in x_bud._bud_acct_nets.items():
                 x_tranbook.add_tranunit(

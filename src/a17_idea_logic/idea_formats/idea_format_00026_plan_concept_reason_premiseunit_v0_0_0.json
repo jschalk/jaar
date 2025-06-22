@@ -9,7 +9,7 @@
         "face_name": {
             "otx_key": true
         },
-        "bank_label": {
+        "belief_label": {
             "otx_key": true
         },
         "owner_name": {
@@ -32,7 +32,7 @@
         }
     },
     "dimens": [
-        "bankunit",
+        "beliefunit",
         "planunit",
         "plan_conceptunit",
         "plan_concept_reasonunit",

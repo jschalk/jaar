@@ -13,13 +13,13 @@ What does each one do?
 - **a08_plan_atom_logic**: Defines the structure and behavior of planget atoms, which are single units of planget and concepts used in a planget.
 - **a09_pack_logic**: Manages the creation and organization of packs, which are collections of planget atoms for building complex plangets.
 - **a10_plan_calc**: Expresses the calculations performed when a planget is "settled" to determine final amounts for each concept and account.
-- **a11_bud_cell_logic**: When a bank system decides to empower a planget the funds must be distributed
+- **a11_bud_cell_logic**: When a belief system decides to empower a planget the funds must be distributed
 - **a12_hub_tools**: These tools are used to handle complex operations involving plan files, will be deprecated.
 - **a13_plan_listen_logic**: These tools describe how one planget listens to another
 - **a14_keep_logic**: Builds a simulation that describes how much credit a healer has earned 
-- **a15_bank_logic**: A BankUnit is a Bank system with the basic requirements: common system of time, acct tranactions ledger, etc. Importantly a Bank system must know the state of a owner's planget at any time in the past. 
+- **a15_belief_logic**: A BeliefUnit is a Belief system with the basic requirements: common system of time, acct tranactions ledger, etc. Importantly a Belief system must know the state of a owner's planget at any time in the past. 
 - **a16_pidgin_logic**: A tool that translates words from outside language to inside language.  
-- **a17_idea_logic**: idea bricks are tables of data that build bank systems and the plangets within them.
+- **a17_idea_logic**: idea bricks are tables of data that build belief systems and the plangets within them.
 - **a18_etl_toolbox**: 
-- **a19_fis_logic**: *(description needed)*
+- **a19_world_logic**: *(description needed)*
 - **a20_lobby_logic**: *(description needed)*

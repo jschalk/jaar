@@ -9,8 +9,8 @@ def amount_str() -> str:
     return "amount"
 
 
-def bank_label_str() -> str:
-    return "bank_label"
+def belief_label_str() -> str:
+    return "belief_label"
 
 
 def bud_acct_nets_str() -> str:

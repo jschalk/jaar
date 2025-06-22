@@ -15,7 +15,7 @@
         "face_name": {
             "otx_key": true
         },
-        "bank_label": {
+        "belief_label": {
             "otx_key": true
         },
         "group_title": {
@@ -30,6 +30,6 @@
         "plan_acctunit",
         "plan_acct_membership",
         "planunit",
-        "bankunit"
+        "beliefunit"
     ]
 }

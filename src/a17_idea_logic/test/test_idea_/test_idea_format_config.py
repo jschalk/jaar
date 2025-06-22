@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import get_dir_file_strs
-from src.a02_finance_logic.test._util.a02_str import bank_label_str, owner_name_str
+from src.a02_finance_logic.test._util.a02_str import belief_label_str, owner_name_str
 from src.a06_plan_logic.test._util.a06_str import (
     acct_cred_points_str,
     acct_debt_points_str,
@@ -23,7 +23,7 @@ from src.a06_plan_logic.test._util.a06_str import (
     task_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a15_bank_logic.test._util.a15_str import bankunit_str
+from src.a15_belief_logic.test._util.a15_str import beliefunit_str
 from src.a17_idea_logic.idea import (
     _generate_idea_dataframe,
     _get_headers_list,
@@ -82,7 +82,7 @@ def test_get_idearef_obj_ReturnsObj():
     assert set(x_idearef.dimens) == {
         plan_acctunit_str(),
         planunit_str(),
-        bankunit_str(),
+        beliefunit_str(),
     }
     assert x_idearef._attributes != {}
     assert len(x_idearef._attributes) == 7
@@ -97,7 +97,7 @@ def test_get_headers_list_ReturnsObj():
     assert format_00021_headers == [
         event_int_str(),
         face_name_str(),
-        bank_label_str(),
+        belief_label_str(),
         owner_name_str(),
         acct_name_str(),
         acct_cred_points_str(),
@@ -125,7 +125,7 @@ def test_get_sorted_headers_str_ReturnsObj():
     # THEN
     assert (
         br00021_headers
-        == "bank_label,owner_name,acct_name,acct_cred_points,acct_debt_points"
+        == "belief_label,owner_name,acct_name,acct_cred_points,acct_debt_points"
     )
 
     # ESTABLISH / WHEN
@@ -133,7 +133,7 @@ def test_get_sorted_headers_str_ReturnsObj():
 
     # THEN
     print(f"{br00019_headers=}")
-    concept_headers_str = "bank_label,owner_name,concept_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want"
+    concept_headers_str = "belief_label,owner_name,concept_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want"
     assert br00019_headers == concept_headers_str
 
 
@@ -215,13 +215,13 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00021_plan_acctunit_v0_0_0(
         "acct_debt_points": {"otx_key": False},
         "event_int": {"otx_key": True},
         "face_name": {"otx_key": True},
-        "bank_label": {"otx_key": True},
+        "belief_label": {"otx_key": True},
         "owner_name": {"otx_key": True},
     }
     headers_list = format_00001_idearef.get_headers_list()
     assert headers_list[0] == event_int_str()
     assert headers_list[1] == face_name_str()
-    assert headers_list[2] == bank_label_str()
+    assert headers_list[2] == belief_label_str()
     assert headers_list[3] == owner_name_str()
     assert headers_list[4] == acct_name_str()
     assert headers_list[5] == acct_cred_points_str()
@@ -240,7 +240,7 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00020_plan_acct_membership_
     headers_list = format_00021_idearef.get_headers_list()
     assert headers_list[0] == event_int_str()
     assert headers_list[1] == face_name_str()
-    assert headers_list[2] == bank_label_str()
+    assert headers_list[2] == belief_label_str()
     assert headers_list[3] == owner_name_str()
     assert headers_list[4] == acct_name_str()
     assert headers_list[5] == group_title_str()
@@ -260,7 +260,7 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00013_conceptunit_v0_0_0():
     headers_list = format_00003_idearef.get_headers_list()
     assert headers_list[0] == event_int_str()
     assert headers_list[1] == face_name_str()
-    assert headers_list[2] == bank_label_str()
+    assert headers_list[2] == belief_label_str()
     assert headers_list[3] == owner_name_str()
     assert headers_list[4] == concept_rope_str()
     assert headers_list[5] == mass_str()
@@ -279,7 +279,7 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00019_conceptunit_v0_0_0():
     headers_list = format_00019_idearef.get_headers_list()
     assert headers_list[0] == event_int_str()
     assert headers_list[1] == face_name_str()
-    assert headers_list[2] == bank_label_str()
+    assert headers_list[2] == belief_label_str()
     assert headers_list[3] == owner_name_str()
     assert headers_list[4] == concept_rope_str()
     assert headers_list[5] == begin_str()

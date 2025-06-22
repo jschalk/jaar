@@ -2,7 +2,7 @@ from pandas import DataFrame
 from src.a02_finance_logic.test._util.a02_str import (
     acct_name_str,
     amount_str,
-    bank_label_str,
+    belief_label_str,
     bud_time_str,
     celldepth_str,
     fund_iota_str,
@@ -19,7 +19,7 @@ from src.a07_timeline_logic.test._util.a07_str import (
     timeline_label_str,
     yr1_jan1_offset_str,
 )
-from src.a15_bank_logic.test._util.a15_str import (
+from src.a15_belief_logic.test._util.a15_str import (
     job_listen_rotations_str,
     weekday_label_str,
     weekday_order_str,
@@ -30,13 +30,13 @@ JEFFY45_STR = "jeffy45"
 
 
 def get_ex1_br00000_df() -> DataFrame:
-    """idea_format_00000_bankunit_v0_0_0
-    c400_number,bank_label,fund_iota,monthday_distortion,penny,respect_bit,knot,timeline_label,yr1_jan1_offset
+    """idea_format_00000_beliefunit_v0_0_0
+    c400_number,belief_label,fund_iota,monthday_distortion,penny,respect_bit,knot,timeline_label,yr1_jan1_offset
     """
     x_df = DataFrame(
         columns=[
             c400_number_str(),
-            bank_label_str(),
+            belief_label_str(),
             fund_iota_str(),
             monthday_distortion_str(),
             penny_str(),
@@ -52,11 +52,11 @@ def get_ex1_br00000_df() -> DataFrame:
 
 
 def get_ex1_br00001_df() -> DataFrame:
-    """idea_format_00001_bank_budunit_v0_0_0
-    bank_label,owner_name,quota,bud_time,celldepth"""
+    """idea_format_00001_belief_budunit_v0_0_0
+    belief_label,owner_name,quota,bud_time,celldepth"""
     x_df = DataFrame(
         columns=[
-            bank_label_str(),
+            belief_label_str(),
             owner_name_str(),
             quota_str(),
             bud_time_str(),
@@ -68,19 +68,19 @@ def get_ex1_br00001_df() -> DataFrame:
 
 
 def get_ex1_br00002_df() -> DataFrame:
-    """idea_format_00002_bank_paybook_v0_0_0
-    acct_name,amount,bank_label,owner_name,tran_time"""
+    """idea_format_00002_belief_paybook_v0_0_0
+    acct_name,amount,belief_label,owner_name,tran_time"""
     x_df = DataFrame(
-        columns=["acct_name", "amount", "bank_label", "owner_name", "tran_time"]
+        columns=["acct_name", "amount", "belief_label", "owner_name", "tran_time"]
     )
     x_df.loc[0] = ["Bob", 888, ACCORD23_STR, "Zia", 777]
     return x_df
 
 
 def get_ex1_br00003_df() -> DataFrame:
-    """idea_format_00003_bank_timeline_hour_v0_0_0
-    cumulative_minute,bank_label,hour_label"""
-    x_df = DataFrame(columns=["bank_label", "hour_label", "cumulative_minute"])
+    """idea_format_00003_belief_timeline_hour_v0_0_0
+    cumulative_minute,belief_label,hour_label"""
+    x_df = DataFrame(columns=["belief_label", "hour_label", "cumulative_minute"])
     x_df.loc[0] = [ACCORD23_STR, "0-12am", 60]
     x_df.loc[1] = [ACCORD23_STR, "1-1am", 120]
     x_df.loc[2] = [ACCORD23_STR, "2-2am", 180]
@@ -109,9 +109,9 @@ def get_ex1_br00003_df() -> DataFrame:
 
 
 def get_ex1_br00004_df() -> DataFrame:
-    """idea_format_00004_bank_timeline_month_v0_0_0
-    cumulative_day,bank_label,month_label"""
-    x_df = DataFrame(columns=["bank_label", "month_label", "cumulative_day"])
+    """idea_format_00004_belief_timeline_month_v0_0_0
+    cumulative_day,belief_label,month_label"""
+    x_df = DataFrame(columns=["belief_label", "month_label", "cumulative_day"])
     x_df.loc[0] = [ACCORD23_STR, "March", 31]
     x_df.loc[1] = [ACCORD23_STR, "April", 61]
     x_df.loc[2] = [ACCORD23_STR, "May", 92]
@@ -128,10 +128,10 @@ def get_ex1_br00004_df() -> DataFrame:
 
 
 def get_ex1_br00005_df() -> DataFrame:
-    """idea_format_00005_bank_timeline_weekday_v0_0_0
-    bank_label,weekday_label,weekday_order"""
+    """idea_format_00005_belief_timeline_weekday_v0_0_0
+    belief_label,weekday_label,weekday_order"""
     x_df = DataFrame(
-        columns=[bank_label_str(), weekday_label_str(), weekday_order_str()]
+        columns=[belief_label_str(), weekday_label_str(), weekday_order_str()]
     )
     x_df.loc[0] = [ACCORD23_STR, "Wednesday", 0]
     x_df.loc[1] = [ACCORD23_STR, "Thursday", 1]
@@ -144,13 +144,13 @@ def get_ex1_br00005_df() -> DataFrame:
 
 
 def get_ex2_br00000_df() -> DataFrame:
-    """idea_format_00000_bankunit_v0_0_0
-    c400_number,bank_label,fund_iota,monthday_distortion,penny,respect_bit,knot,timeline_label,yr1_jan1_offset,job_listen_rotations
+    """idea_format_00000_beliefunit_v0_0_0
+    c400_number,belief_label,fund_iota,monthday_distortion,penny,respect_bit,knot,timeline_label,yr1_jan1_offset,job_listen_rotations
     """
     x_df = DataFrame(
         columns=[
             c400_number_str(),
-            bank_label_str(),
+            belief_label_str(),
             fund_iota_str(),
             monthday_distortion_str(),
             penny_str(),
@@ -167,11 +167,11 @@ def get_ex2_br00000_df() -> DataFrame:
 
 
 def get_ex2_br00001_df() -> DataFrame:
-    """idea_format_00001_bank_budunit_v0_0_0
-    bank_label,owner_name,quota,bud_time"""
+    """idea_format_00001_belief_budunit_v0_0_0
+    belief_label,owner_name,quota,bud_time"""
     x_df = DataFrame(
         columns=[
-            bank_label_str(),
+            belief_label_str(),
             owner_name_str(),
             quota_str(),
             bud_time_str(),
@@ -187,13 +187,13 @@ def get_ex2_br00001_df() -> DataFrame:
 
 
 def get_ex2_br00002_df() -> DataFrame:
-    """idea_format_00002_bank_paybook_v0_0_0
-    acct_name,amount,bank_label,owner_name,tran_time"""
+    """idea_format_00002_belief_paybook_v0_0_0
+    acct_name,amount,belief_label,owner_name,tran_time"""
     x_df = DataFrame(
         columns=[
             acct_name_str(),
             amount_str(),
-            bank_label_str(),
+            belief_label_str(),
             owner_name_str(),
             tran_time_str(),
         ]
@@ -207,9 +207,9 @@ def get_ex2_br00002_df() -> DataFrame:
 
 
 def get_ex2_br00003_df() -> DataFrame:
-    """idea_format_00003_bank_timeline_hour_v0_0_0
-    cumulative_minute,bank_label,hour_label"""
-    x_df = DataFrame(columns=["bank_label", "hour_label", "cumulative_minute"])
+    """idea_format_00003_belief_timeline_hour_v0_0_0
+    cumulative_minute,belief_label,hour_label"""
+    x_df = DataFrame(columns=["belief_label", "hour_label", "cumulative_minute"])
     x_df.loc[0] = [ACCORD23_STR, "0-12am", 60]
     x_df.loc[1] = [ACCORD23_STR, "1-1am", 120]
     x_df.loc[2] = [ACCORD23_STR, "2-2am", 180]
@@ -258,9 +258,9 @@ def get_ex2_br00003_df() -> DataFrame:
 
 
 def get_ex2_br00004_df() -> DataFrame:
-    """idea_format_00004_bank_timeline_month_v0_0_0
-    cumulative_day,bank_label,month_label"""
-    x_df = DataFrame(columns=["bank_label", "month_label", "cumulative_day"])
+    """idea_format_00004_belief_timeline_month_v0_0_0
+    cumulative_day,belief_label,month_label"""
+    x_df = DataFrame(columns=["belief_label", "month_label", "cumulative_day"])
     x_df.loc[0] = [ACCORD23_STR, "March", 31]
     x_df.loc[1] = [ACCORD23_STR, "April", 61]
     x_df.loc[2] = [ACCORD23_STR, "May", 92]
@@ -292,9 +292,9 @@ def get_ex2_br00004_df() -> DataFrame:
 
 
 def get_ex2_br00005_df() -> DataFrame:
-    """idea_format_00005_bank_timeline_weekday_v0_0_0
-    bank_label,weekday_label,weekday_order"""
-    x_df = DataFrame(columns=["bank_label", "weekday_label", "weekday_order"])
+    """idea_format_00005_belief_timeline_weekday_v0_0_0
+    belief_label,weekday_label,weekday_order"""
+    x_df = DataFrame(columns=["belief_label", "weekday_label", "weekday_order"])
     x_df.loc[0] = [ACCORD23_STR, "Wednesday", 0]
     x_df.loc[1] = [ACCORD23_STR, "Thursday", 1]
     x_df.loc[2] = [ACCORD23_STR, "Friday", 2]
@@ -311,9 +311,9 @@ def get_ex2_br00005_df() -> DataFrame:
 
 
 # def get_ex2_br00006_df() -> DataFrame:
-#     """idea_format_00006_bank_timeoffi_v0_0_0
-#     bank_label,offi_time,_offi_time_maxt"""
-#     x_df = DataFrame(columns=["bank_label", "offi_time", "_offi_time_max"])
+#     """idea_format_00006_belief_timeoffi_v0_0_0
+#     belief_label,offi_time,_offi_time_maxt"""
+#     x_df = DataFrame(columns=["belief_label", "offi_time", "_offi_time_max"])
 #     x_df.loc[0] = [ACCORD23_STR, 100, 300]
 #     x_df.loc[1] = [ACCORD23_STR, 110, 320]
 #     x_df.loc[2] = [ACCORD23_STR, 120, 330]

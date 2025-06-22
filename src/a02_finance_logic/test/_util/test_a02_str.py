@@ -1,7 +1,7 @@
 from src.a02_finance_logic.test._util.a02_str import (
     acct_name_str,
     amount_str,
-    bank_label_str,
+    belief_label_str,
     bud_acct_nets_str,
     bud_time_str,
     celldepth_str,
@@ -21,7 +21,7 @@ def test_str_functions_ReturnsObj():
     assert knot_str() == "knot"
     assert celldepth_str() == "celldepth"
     assert bud_time_str() == "bud_time"
-    assert bank_label_str() == "bank_label"
+    assert belief_label_str() == "belief_label"
     assert fund_pool_str() == "fund_pool"
     assert tran_time_str() == "tran_time"
     assert quota_str() == "quota"
