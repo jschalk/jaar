@@ -46,8 +46,8 @@ def test_listen_to_speaker_agenda_ReturnsSingleChorePlan():
     before_yao_planunit = planunit_shop(yao_str)
     zia_str = "Zia"
     before_yao_planunit.add_acctunit(zia_str)
-    yao_acct_debt_score = 77
-    before_yao_planunit.set_acct_respect(yao_acct_debt_score)
+    yao_acct_acct_debt_points = 77
+    before_yao_planunit.set_acct_respect(yao_acct_acct_debt_points)
     clean_str = "clean"
     zia_clean_conceptunit = conceptunit_shop(clean_str, task=True)
     zia_clean_conceptunit.laborunit.set_laborlink(yao_str)
@@ -68,7 +68,7 @@ def test_listen_to_speaker_agenda_ReturnsSingleChorePlan():
     yao_clean_conceptunit = after_yao_planunit.get_concept_obj(clean_rope)
     print(f"{yao_clean_conceptunit.mass=}")
     assert yao_clean_conceptunit.mass != zia_clean_conceptunit.mass
-    assert yao_clean_conceptunit.mass == yao_acct_debt_score
+    assert yao_clean_conceptunit.mass == yao_acct_acct_debt_points
     assert after_yao_planunit == before_yao_planunit
     assert len(after_yao_planunit.get_agenda_dict()) == 1
 
@@ -79,8 +79,8 @@ def test_listen_to_speaker_agenda_ReturnsLevel2ChorePlan():
     before_yao_planunit = planunit_shop(yao_str)
     zia_str = "Zia"
     before_yao_planunit.add_acctunit(zia_str)
-    yao_debt_score = 77
-    before_yao_planunit.set_acct_respect(yao_debt_score)
+    yao_acct_debt_points = 77
+    before_yao_planunit.set_acct_respect(yao_acct_debt_points)
     zia_planunit = planunit_shop(zia_str)
     zia_planunit.add_acctunit(yao_str)
     clean_str = "clean"
@@ -102,11 +102,11 @@ def test_listen_to_speaker_agenda_ReturnsLevel2ChorePlan():
     yao_clean_conceptunit = after_yao_planunit.get_concept_obj(clean_rope)
     print(f"{yao_clean_conceptunit.mass=}")
     assert yao_clean_conceptunit.mass != zia_clean_conceptunit.mass
-    assert yao_clean_conceptunit.mass == yao_debt_score
+    assert yao_clean_conceptunit.mass == yao_acct_debt_points
     after_casa_conceptunit = after_yao_planunit.get_concept_obj(casa_rope)
     print(f"{after_casa_conceptunit.mass=}")
     assert after_casa_conceptunit.mass != 1
-    assert after_casa_conceptunit.mass == yao_debt_score
+    assert after_casa_conceptunit.mass == yao_acct_debt_points
     assert after_yao_planunit == before_yao_planunit
     assert len(after_yao_planunit.get_agenda_dict()) == 1
 
@@ -117,8 +117,8 @@ def test_listen_to_speaker_agenda_Returns2AgendaConceptsLevel2ChorePlan():
     before_yao_planunit = planunit_shop(yao_str)
     zia_str = "Zia"
     before_yao_planunit.add_acctunit(zia_str)
-    yao_debt_score = 55
-    before_yao_planunit.set_acct_respect(yao_debt_score)
+    yao_acct_debt_points = 55
+    before_yao_planunit.set_acct_respect(yao_acct_debt_points)
 
     zia_str = "Zia"
     zia_planunit = planunit_shop(zia_str)
@@ -173,8 +173,8 @@ def test_listen_to_speaker_agenda_Returns2AgendaConceptsLevel2ChorePlanWhereAnCo
     before_yao_planunit = planunit_shop(yao_str)
     zia_str = "Zia"
     before_yao_planunit.add_acctunit(zia_str)
-    yao_debt_score = 55
-    before_yao_planunit.set_acct_respect(yao_debt_score)
+    yao_acct_debt_points = 55
+    before_yao_planunit.set_acct_respect(yao_acct_debt_points)
     zia_str = "Zia"
     zia_planunit = planunit_shop(zia_str)
     zia_planunit.add_acctunit(yao_str)
@@ -231,13 +231,13 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalPlan():
     yao_str = "Yao"
     yao_duty = planunit_shop(yao_str)
     zia_str = "Zia"
-    zia_credit_score = 47
-    zia_debt_score = 41
+    zia_acct_cred_points = 47
+    zia_acct_debt_points = 41
     sue_str = "Sue"
-    sue_credit_score = 57
-    sue_debt_score = 51
-    yao_duty.add_acctunit(zia_str, zia_credit_score, zia_debt_score)
-    yao_duty.add_acctunit(sue_str, sue_credit_score, sue_debt_score)
+    sue_acct_cred_points = 57
+    sue_acct_debt_points = 51
+    yao_duty.add_acctunit(zia_str, zia_acct_cred_points, zia_acct_debt_points)
+    yao_duty.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
     yao_pool = 92
     yao_duty.set_acct_respect(yao_pool)
 
@@ -275,8 +275,8 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalPlan():
 
     # WHEN
     yao_vision = create_empty_plan_from_plan(yao_duty, yao_str)
-    yao_vision.add_acctunit(zia_str, zia_credit_score, zia_debt_score)
-    yao_vision.add_acctunit(sue_str, sue_credit_score, sue_debt_score)
+    yao_vision.add_acctunit(zia_str, zia_acct_cred_points, zia_acct_debt_points)
+    yao_vision.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
     yao_vision.set_acct_respect(yao_pool)
     yao_vision = listen_to_speaker_agenda(yao_vision, sue_planunit)
     yao_vision.settle_plan()
@@ -286,10 +286,10 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalPlan():
     assert len(yao_vision.get_agenda_dict()) == 0
     zia_acctunit = yao_vision.get_acct(zia_str)
     sue_acctunit = yao_vision.get_acct(sue_str)
-    print(f"{sue_acctunit.debt_score=}")
-    print(f"{sue_acctunit._irrational_debt_score=}")
-    assert zia_acctunit._irrational_debt_score == 0
-    assert sue_acctunit._irrational_debt_score == 51
+    print(f"{sue_acctunit.acct_debt_points=}")
+    print(f"{sue_acctunit._irrational_acct_debt_points=}")
+    assert zia_acctunit._irrational_acct_debt_points == 0
+    assert sue_acctunit._irrational_acct_debt_points == 51
 
 
 def test_listen_to_speaker_agenda_ProcessesBarrenPlan():
@@ -297,21 +297,21 @@ def test_listen_to_speaker_agenda_ProcessesBarrenPlan():
     yao_str = "Yao"
     yao_duty = planunit_shop(yao_str)
     zia_str = "Zia"
-    zia_credit_score = 47
-    zia_debt_score = 41
+    zia_acct_cred_points = 47
+    zia_acct_debt_points = 41
     sue_str = "Sue"
-    sue_credit_score = 57
-    sue_debt_score = 51
-    yao_duty.add_acctunit(zia_str, zia_credit_score, zia_debt_score)
-    yao_duty.add_acctunit(sue_str, sue_credit_score, sue_debt_score)
+    sue_acct_cred_points = 57
+    sue_acct_debt_points = 51
+    yao_duty.add_acctunit(zia_str, zia_acct_cred_points, zia_acct_debt_points)
+    yao_duty.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
     yao_pool = 92
     yao_duty.set_acct_respect(yao_pool)
 
     # WHEN
     sue_vision = create_empty_plan_from_plan(yao_duty, sue_str)
     yao_vision = create_empty_plan_from_plan(yao_duty, yao_str)
-    yao_vision.add_acctunit(zia_str, zia_credit_score, zia_debt_score)
-    yao_vision.add_acctunit(sue_str, sue_credit_score, sue_debt_score)
+    yao_vision.add_acctunit(zia_str, zia_acct_cred_points, zia_acct_debt_points)
+    yao_vision.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
     yao_vision.set_acct_respect(yao_pool)
     yao_vision = listen_to_speaker_agenda(yao_vision, speaker=sue_vision)
 
@@ -320,9 +320,9 @@ def test_listen_to_speaker_agenda_ProcessesBarrenPlan():
     assert len(yao_vision.get_agenda_dict()) == 0
     zia_acctunit = yao_vision.get_acct(zia_str)
     sue_acctunit = yao_vision.get_acct(sue_str)
-    print(f"{sue_acctunit.debt_score=}")
-    print(f"{sue_acctunit._irrational_debt_score=}")
-    assert zia_acctunit._irrational_debt_score == 0
-    assert zia_acctunit._inallocable_debt_score == 0
-    assert sue_acctunit._irrational_debt_score == 0
-    assert sue_acctunit._inallocable_debt_score == 51
+    print(f"{sue_acctunit.acct_debt_points=}")
+    print(f"{sue_acctunit._irrational_acct_debt_points=}")
+    assert zia_acctunit._irrational_acct_debt_points == 0
+    assert zia_acctunit._inallocable_acct_debt_points == 0
+    assert sue_acctunit._irrational_acct_debt_points == 0
+    assert sue_acctunit._inallocable_acct_debt_points == 51

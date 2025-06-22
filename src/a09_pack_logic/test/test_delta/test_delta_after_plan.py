@@ -9,14 +9,14 @@ from src.a06_plan_logic.test._util.a06_str import (
     begin_str,
     close_str,
     concept_rope_str,
-    credit_vote_str,
-    debt_vote_str,
     fcontext_str,
     fnigh_str,
     fopen_str,
     fstate_str,
     give_force_str,
     gogo_want_str,
+    group_cred_points_str,
+    group_debt_points_str,
     group_title_str,
     healer_name_str,
     labor_title_str,
@@ -160,10 +160,10 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_acct():
     dimen = plan_acctunit_str()
     x_planatom = planatom_shop(dimen, INSERT_str())
     x_planatom.set_jkey(acct_name_str(), zia_str)
-    x_credit_score = 55
-    x_debt_score = 66
-    x_planatom.set_jvalue("credit_score", x_credit_score)
-    x_planatom.set_jvalue("debt_score", x_debt_score)
+    x_acct_cred_points = 55
+    x_acct_debt_points = 66
+    x_planatom.set_jvalue("acct_cred_points", x_acct_cred_points)
+    x_planatom.set_jvalue("acct_debt_points", x_acct_debt_points)
     sue_plandelta.set_planatom(x_planatom)
     print(f"{sue_plandelta.planatoms.keys()=}")
     after_sue_planunit = sue_plandelta.get_edited_plan(before_sue_planunit)
@@ -173,8 +173,8 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_acct():
     zia_acctunit = after_sue_planunit.get_acct(zia_str)
     assert yao_acctunit is not None
     assert zia_acctunit is not None
-    assert zia_acctunit.credit_score == x_credit_score
-    assert zia_acctunit.debt_score == x_debt_score
+    assert zia_acctunit.acct_cred_points == x_acct_cred_points
+    assert zia_acctunit.acct_debt_points == x_acct_debt_points
 
 
 def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_acct():
@@ -185,21 +185,21 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_acct():
     before_sue_planunit = planunit_shop(sue_str)
     yao_str = "Yao"
     before_sue_planunit.add_acctunit(yao_str)
-    assert before_sue_planunit.get_acct(yao_str).credit_score == 1
+    assert before_sue_planunit.get_acct(yao_str).acct_cred_points == 1
 
     # WHEN
     dimen = plan_acctunit_str()
     x_planatom = planatom_shop(dimen, UPDATE_str())
     x_planatom.set_jkey(acct_name_str(), yao_str)
-    yao_credit_score = 55
-    x_planatom.set_jvalue("credit_score", yao_credit_score)
+    yao_acct_cred_points = 55
+    x_planatom.set_jvalue("acct_cred_points", yao_acct_cred_points)
     sue_plandelta.set_planatom(x_planatom)
     print(f"{sue_plandelta.planatoms.keys()=}")
     after_sue_planunit = sue_plandelta.get_edited_plan(before_sue_planunit)
 
     # THEN
     yao_acct = after_sue_planunit.get_acct(yao_str)
-    assert yao_acct.credit_score == yao_credit_score
+    assert yao_acct.acct_cred_points == yao_acct_cred_points
 
 
 def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_delete_membership():
@@ -266,8 +266,8 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_membership():
     yao_planatom = planatom_shop(plan_acct_membership_str(), INSERT_str())
     yao_planatom.set_jkey(group_title_str(), run_str)
     yao_planatom.set_jkey(acct_name_str(), yao_str)
-    yao_run_credit_vote = 17
-    yao_planatom.set_jvalue("credit_vote", yao_run_credit_vote)
+    yao_run_group_cred_points = 17
+    yao_planatom.set_jvalue("group_cred_points", yao_run_group_cred_points)
     print(f"{yao_planatom=}")
     sue_plandelta = plandelta_shop()
     sue_plandelta.set_planatom(yao_planatom)
@@ -279,7 +279,7 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_insert_membership():
     after_yao_acctunit = after_sue_planunit.get_acct(yao_str)
     after_yao_run_membership = after_yao_acctunit.get_membership(run_str)
     assert after_yao_run_membership is not None
-    assert after_yao_run_membership.credit_vote == yao_run_credit_vote
+    assert after_yao_run_membership.group_cred_points == yao_run_group_cred_points
 
 
 def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_membership():
@@ -290,20 +290,20 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_membership():
     before_sue_planunit.add_acctunit(yao_str)
     before_yao_acctunit = before_sue_planunit.get_acct(yao_str)
     run_str = ";runners"
-    old_yao_run_credit_vote = 3
-    before_yao_acctunit.add_membership(run_str, old_yao_run_credit_vote)
+    old_yao_run_group_cred_points = 3
+    before_yao_acctunit.add_membership(run_str, old_yao_run_group_cred_points)
     yao_run_membership = before_yao_acctunit.get_membership(run_str)
-    assert yao_run_membership.credit_vote == old_yao_run_credit_vote
-    assert yao_run_membership.debt_vote == 1
+    assert yao_run_membership.group_cred_points == old_yao_run_group_cred_points
+    assert yao_run_membership.group_debt_points == 1
 
     # WHEN
     yao_planatom = planatom_shop(plan_acct_membership_str(), UPDATE_str())
     yao_planatom.set_jkey(group_title_str(), run_str)
     yao_planatom.set_jkey(acct_name_str(), yao_str)
-    new_yao_run_credit_vote = 7
-    new_yao_run_debt_vote = 11
-    yao_planatom.set_jvalue(credit_vote_str(), new_yao_run_credit_vote)
-    yao_planatom.set_jvalue(debt_vote_str(), new_yao_run_debt_vote)
+    new_yao_run_group_cred_points = 7
+    new_yao_run_group_debt_points = 11
+    yao_planatom.set_jvalue(group_cred_points_str(), new_yao_run_group_cred_points)
+    yao_planatom.set_jvalue(group_debt_points_str(), new_yao_run_group_debt_points)
     sue_plandelta = plandelta_shop()
     sue_plandelta.set_planatom(yao_planatom)
     after_sue_planunit = sue_plandelta.get_edited_plan(before_sue_planunit)
@@ -311,8 +311,8 @@ def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_update_membership():
     # THEN
     after_yao_acctunit = after_sue_planunit.get_acct(yao_str)
     after_yao_run_membership = after_yao_acctunit.get_membership(run_str)
-    assert after_yao_run_membership.credit_vote == new_yao_run_credit_vote
-    assert after_yao_run_membership.debt_vote == new_yao_run_debt_vote
+    assert after_yao_run_membership.group_cred_points == new_yao_run_group_cred_points
+    assert after_yao_run_membership.group_debt_points == new_yao_run_group_debt_points
 
 
 def test_PlanDelta_get_edited_plan_ReturnsObj_PlanUnit_delete_conceptunit():

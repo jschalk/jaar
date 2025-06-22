@@ -7,12 +7,12 @@ from src.a06_plan_logic.test._util.a06_str import (
     _reason_rcontexts_str,
     _sum_healerlink_share_str,
     _tree_traverse_count_str,
+    acct_cred_points_str,
+    acct_debt_points_str,
     acct_pool_str,
     ancestors_str,
     attributes_str,
-    credit_score_str,
     credor_respect_str,
-    debt_score_str,
     debtor_respect_str,
     dimen_str,
     dimens_str,
@@ -52,9 +52,9 @@ def test_str_functions_ReturnsObj():
     assert respect_bit_str() == "respect_bit"
     assert tally_str() == "tally"
     assert acct_pool_str() == "acct_pool"
-    assert credit_score_str() == "credit_score"
+    assert acct_cred_points_str() == "acct_cred_points"
     assert credor_respect_str() == "credor_respect"
-    assert debt_score_str() == "debt_score"
+    assert acct_debt_points_str() == "acct_debt_points"
     assert debtor_respect_str() == "debtor_respect"
     assert planunit_str() == "planunit"
     assert plan_acct_membership_str() == "plan_acct_membership"

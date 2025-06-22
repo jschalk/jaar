@@ -26,8 +26,8 @@ def get_bank_guts_accts_plotly_fig(x_bank: BankUnit) -> plotly_Figure:
     column_header_list = [
         "owner_name",
         "acct_name",
-        "credit_score",
-        "debt_score",
+        "acct_cred_points",
+        "acct_debt_points",
         "_fund_give",
         "_fund_take",
         "_fund_agenda_give",
@@ -43,8 +43,8 @@ def get_bank_guts_accts_plotly_fig(x_bank: BankUnit) -> plotly_Figure:
             values=[
                 df.owner_name,
                 df.acct_name,
-                df.credit_score,
-                df.debt_score,
+                df.acct_cred_points,
+                df.acct_debt_points,
                 df._fund_give,
                 df._fund_take,
                 df._fund_agenda_give,
@@ -82,8 +82,8 @@ def get_bank_jobs_accts_plotly_fig(x_bank: BankUnit) -> plotly_Figure:
     column_header_list = [
         "owner_name",
         "acct_name",
-        "credit_score",
-        "debt_score",
+        "acct_cred_points",
+        "acct_debt_points",
         "_fund_give",
         "_fund_take",
         "_fund_agenda_give",
@@ -99,8 +99,8 @@ def get_bank_jobs_accts_plotly_fig(x_bank: BankUnit) -> plotly_Figure:
             values=[
                 df.owner_name,
                 df.acct_name,
-                df.credit_score,
-                df.debt_score,
+                df.acct_cred_points,
+                df.acct_debt_points,
                 df._fund_give,
                 df._fund_take,
                 df._fund_agenda_give,

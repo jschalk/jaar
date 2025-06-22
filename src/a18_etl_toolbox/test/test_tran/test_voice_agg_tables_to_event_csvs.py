@@ -3,8 +3,8 @@ from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.file_toolbox import create_path, open_file
 from src.a02_finance_logic.test._util.a02_str import bank_label_str, owner_name_str
 from src.a06_plan_logic.test._util.a06_str import (
+    acct_cred_points_str,
     acct_name_str,
-    credit_score_str,
     plan_acctunit_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
@@ -30,8 +30,8 @@ def test_etl_voice_agg_to_event_plan_csvs_PopulatesPlanPulabelTables(
     event3 = 3
     event7 = 7
     accord23_str = "accord23"
-    yao_credit_score5 = 5
-    sue_credit_score7 = 7
+    yao_acct_cred_points5 = 5
+    sue_acct_cred_points7 = 7
     put_agg_tablename = create_prime_tablename(plan_acctunit_str(), "v", "agg", "put")
     put_agg_csv = f"{put_agg_tablename}.csv"
     x_bank_mstr_dir = get_module_temp_dir()
@@ -48,11 +48,11 @@ def test_etl_voice_agg_to_event_plan_csvs_PopulatesPlanPulabelTables(
         cursor = plan_db_conn.cursor()
         create_sound_and_voice_tables(cursor)
         insert_raw_sqlstr = f"""
-INSERT INTO {put_agg_tablename} ({event_int_str()},{face_name_str()},{bank_label_str()},{owner_name_str()},{acct_name_str()},{credit_score_str()})
+INSERT INTO {put_agg_tablename} ({event_int_str()},{face_name_str()},{bank_label_str()},{owner_name_str()},{acct_name_str()},{acct_cred_points_str()})
 VALUES
-  ({event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_score5})
-, ({event7},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',{yao_credit_score5})
-, ({event7},'{sue_inx}','{accord23_str}','{bob_inx}','{sue_inx}',{sue_credit_score7})
+  ({event3},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',{yao_acct_cred_points5})
+, ({event7},'{sue_inx}','{accord23_str}','{bob_inx}','{yao_inx}',{yao_acct_cred_points5})
+, ({event7},'{sue_inx}','{accord23_str}','{bob_inx}','{sue_inx}',{sue_acct_cred_points7})
 ;
 """
         print(insert_raw_sqlstr)
@@ -70,10 +70,10 @@ VALUES
         e7_put_csv = open_file(a23_e7_plnacct_put_path)
         print(f"{e3_put_csv=}")
         print(f"{e7_put_csv=}")
-        expected_e3_put_csv = """event_int,face_name,bank_label,owner_name,acct_name,credit_score,debt_score
+        expected_e3_put_csv = """event_int,face_name,bank_label,owner_name,acct_name,acct_cred_points,acct_debt_points
 3,Suzy,accord23,Bobby,Bobby,5.0,
 """
-        expected_e7_put_csv = """event_int,face_name,bank_label,owner_name,acct_name,credit_score,debt_score
+        expected_e7_put_csv = """event_int,face_name,bank_label,owner_name,acct_name,acct_cred_points,acct_debt_points
 7,Suzy,accord23,Bobby,Bobby,5.0,
 7,Suzy,accord23,Bobby,Suzy,7.0,
 """

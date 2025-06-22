@@ -25,11 +25,11 @@ def test_AtomRow_exists():
     assert x_atomrow.begin is None
     assert x_atomrow.respect_bit is None
     assert x_atomrow.close is None
-    assert x_atomrow.credit_score is None
-    assert x_atomrow.credit_vote is None
+    assert x_atomrow.acct_cred_points is None
+    assert x_atomrow.group_cred_points is None
     assert x_atomrow.credor_respect is None
-    assert x_atomrow.debt_score is None
-    assert x_atomrow.debt_vote is None
+    assert x_atomrow.acct_debt_points is None
+    assert x_atomrow.group_debt_points is None
     assert x_atomrow.debtor_respect is None
     assert x_atomrow.denom is None
     assert x_atomrow.pdivisor is None
@@ -167,7 +167,7 @@ def test_AtomRow_get_planatoms_ReturnsObj_plan_acctunit_str_INSERT_Scenario1():
     x_dimen = plan_acctunit_str()
     x_atomrow = atomrow_shop({x_dimen}, INSERT_str())
     x_atomrow.acct_name = "Bob"
-    x_atomrow.credit_score = 5
+    x_atomrow.acct_cred_points = 5
 
     # WHEN
     x_planatoms = x_atomrow.get_planatoms()
@@ -176,7 +176,7 @@ def test_AtomRow_get_planatoms_ReturnsObj_plan_acctunit_str_INSERT_Scenario1():
     assert len(x_planatoms) == 1
     static_atom = planatom_shop(x_dimen, INSERT_str())
     static_atom.set_arg(acct_name_str(), "Bob")
-    static_atom.set_arg("credit_score", 5)
+    static_atom.set_arg("acct_cred_points", 5)
     assert x_planatoms[0] == static_atom
 
 
@@ -198,7 +198,7 @@ def test_AtomRow_get_planatoms_ReturnsObj_plan_acctunit_INSERT_Scenario2():
     x_atomrow = atomrow_shop({x_dimen}, INSERT_str())
     x_atomrow.acct_name = "Bob"
     four_str = "4"
-    x_atomrow.credit_score = four_str
+    x_atomrow.acct_cred_points = four_str
 
     # WHEN
     x_planatoms = x_atomrow.get_planatoms()
@@ -208,7 +208,7 @@ def test_AtomRow_get_planatoms_ReturnsObj_plan_acctunit_INSERT_Scenario2():
     static_atom = planatom_shop(x_dimen, INSERT_str())
     static_atom.set_arg(acct_name_str(), "Bob")
     four_int = 4
-    static_atom.set_arg("credit_score", four_int)
+    static_atom.set_arg("acct_cred_points", four_int)
     assert x_planatoms[0] == static_atom
 
 
@@ -217,7 +217,7 @@ def test_AtomRow_get_planatoms_ReturnsObjIfDimenIsCorrect():
     x_atomrow = atomrow_shop(set(), INSERT_str())
     x_atomrow.acct_name = "Bob"
     four_str = "4"
-    x_atomrow.credit_score = four_str
+    x_atomrow.acct_cred_points = four_str
     assert len(x_atomrow.get_planatoms()) == 0
 
     # WHEN / THEN

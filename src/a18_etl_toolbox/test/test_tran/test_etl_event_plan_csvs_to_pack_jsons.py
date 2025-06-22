@@ -2,9 +2,9 @@ from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import open_file, save_file
 from src.a02_finance_logic.test._util.a02_str import bank_label_str, owner_name_str
 from src.a06_plan_logic.test._util.a06_str import (
+    acct_cred_points_str,
+    acct_debt_points_str,
     acct_name_str,
-    credit_score_str,
-    debt_score_str,
     plan_acctunit_str,
     planunit_str,
 )
@@ -81,10 +81,10 @@ def test_etl_event_plan_csvs_to_pack_json_CreatesFiles_Scenario1(
     # a23_bob_e7_dir = create_path(a23_bob_dir, event7)
     a23_bob_e3_dir = owner_event_dir(bank_mstr_dir, a23_str, bob_inx, event3)
     a23_bob_e7_dir = owner_event_dir(bank_mstr_dir, a23_str, bob_inx, event7)
-    e3_put_csv = f"""{event_int_str()},{face_name_str()},{bank_label_str()},{owner_name_str()},{acct_name_str()},{credit_score_str()},{debt_score_str()}
+    e3_put_csv = f"""{event_int_str()},{face_name_str()},{bank_label_str()},{owner_name_str()},{acct_name_str()},{acct_cred_points_str()},{acct_debt_points_str()}
 {event3},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debt_empty}
 """
-    e7_put_csv = f"""{event_int_str()},{face_name_str()},{bank_label_str()},{owner_name_str()},{acct_name_str()},{credit_score_str()},{debt_score_str()}
+    e7_put_csv = f"""{event_int_str()},{face_name_str()},{bank_label_str()},{owner_name_str()},{acct_name_str()},{acct_cred_points_str()},{acct_debt_points_str()}
 {event7},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debt_empty}
 {event7},{sue_inx},{a23_str},{bob_inx},{sue_inx},{credit88},{debt_empty}
 """
@@ -118,19 +118,19 @@ def test_etl_event_plan_csvs_to_pack_json_CreatesFiles_Scenario1(
         plnacct_dimen,
         INSERT_str(),
         jkeys={acct_name_str(): bob_inx},
-        jvalues={credit_score_str(): credit77, debt_score_str(): None},
+        jvalues={acct_cred_points_str(): credit77, acct_debt_points_str(): None},
     )
     expected_e7_pack._plandelta.add_planatom(
         plnacct_dimen,
         INSERT_str(),
         jkeys={acct_name_str(): bob_inx},
-        jvalues={credit_score_str(): credit77, debt_score_str(): None},
+        jvalues={acct_cred_points_str(): credit77, acct_debt_points_str(): None},
     )
     expected_e7_pack._plandelta.add_planatom(
         plnacct_dimen,
         INSERT_str(),
         jkeys={acct_name_str(): sue_inx},
-        jvalues={credit_score_str(): credit88, debt_score_str(): None},
+        jvalues={acct_cred_points_str(): credit88, acct_debt_points_str(): None},
     )
     e3_packunit = get_packunit_from_json(open_file(e3_all_pack_path))
     e7_packunit = get_packunit_from_json(open_file(e7_all_pack_path))

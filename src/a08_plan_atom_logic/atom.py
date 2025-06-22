@@ -212,19 +212,19 @@ def _modify_plan_acct_membership_update(x_plan: PlanUnit, x_atom: PlanAtom):
     x_group_title = x_atom.get_value("group_title")
     x_acctunit = x_plan.get_acct(x_acct_name)
     x_membership = x_acctunit.get_membership(x_group_title)
-    x_credit_vote = x_atom.get_value("credit_vote")
-    x_debt_vote = x_atom.get_value("debt_vote")
-    x_membership.set_credit_vote(x_credit_vote)
-    x_membership.set_debt_vote(x_debt_vote)
+    x_group_cred_points = x_atom.get_value("group_cred_points")
+    x_group_debt_points = x_atom.get_value("group_debt_points")
+    x_membership.set_group_cred_points(x_group_cred_points)
+    x_membership.set_group_debt_points(x_group_debt_points)
 
 
 def _modify_plan_acct_membership_insert(x_plan: PlanUnit, x_atom: PlanAtom):
     x_acct_name = x_atom.get_value("acct_name")
     x_group_title = x_atom.get_value("group_title")
-    x_credit_vote = x_atom.get_value("credit_vote")
-    x_debt_vote = x_atom.get_value("debt_vote")
+    x_group_cred_points = x_atom.get_value("group_cred_points")
+    x_group_debt_points = x_atom.get_value("group_debt_points")
     x_acctunit = x_plan.get_acct(x_acct_name)
-    x_acctunit.add_membership(x_group_title, x_credit_vote, x_debt_vote)
+    x_acctunit.add_membership(x_group_title, x_group_cred_points, x_group_debt_points)
 
 
 def _modify_plan_conceptunit_delete(x_plan: PlanUnit, x_atom: PlanAtom):
@@ -405,8 +405,8 @@ def _modify_plan_acctunit_delete(x_plan: PlanUnit, x_atom: PlanAtom):
 def _modify_plan_acctunit_update(x_plan: PlanUnit, x_atom: PlanAtom):
     x_plan.edit_acctunit(
         acct_name=x_atom.get_value("acct_name"),
-        credit_score=x_atom.get_value("credit_score"),
-        debt_score=x_atom.get_value("debt_score"),
+        acct_cred_points=x_atom.get_value("acct_cred_points"),
+        acct_debt_points=x_atom.get_value("acct_debt_points"),
     )
 
 
@@ -414,8 +414,8 @@ def _modify_plan_acctunit_insert(x_plan: PlanUnit, x_atom: PlanAtom):
     x_plan.set_acctunit(
         acctunit_shop(
             acct_name=x_atom.get_value("acct_name"),
-            credit_score=x_atom.get_value("credit_score"),
-            debt_score=x_atom.get_value("debt_score"),
+            acct_cred_points=x_atom.get_value("acct_cred_points"),
+            acct_debt_points=x_atom.get_value("acct_debt_points"),
         )
     )
 
@@ -537,8 +537,8 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.fund_iota != y_obj.fund_iota
         )
     elif dimen in {"plan_acct_membership"}:
-        return (x_obj.credit_vote != y_obj.credit_vote) or (
-            x_obj.debt_vote != y_obj.debt_vote
+        return (x_obj.group_cred_points != y_obj.group_cred_points) or (
+            x_obj.group_debt_points != y_obj.group_debt_points
         )
     elif dimen in {"plan_concept_awardlink"}:
         return (x_obj.give_force != y_obj.give_force) or (
@@ -570,8 +570,8 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.pdivisor != y_obj.pdivisor
         )
     elif dimen == "plan_acctunit":
-        return (x_obj.credit_score != y_obj.credit_score) or (
-            x_obj.debt_score != y_obj.debt_score
+        return (x_obj.acct_cred_points != y_obj.acct_cred_points) or (
+            x_obj.acct_debt_points != y_obj.acct_debt_points
         )
 
 
@@ -601,11 +601,11 @@ class AtomRow:
     begin: float = None
     respect_bit: float = None
     close: float = None
-    credit_score: int = None
-    credit_vote: int = None
+    acct_cred_points: int = None
+    group_cred_points: int = None
     credor_respect: int = None
-    debt_score: int = None
-    debt_vote: int = None
+    acct_debt_points: int = None
+    group_debt_points: int = None
     debtor_respect: int = None
     denom: int = None
     pdivisor: int = None

@@ -1,18 +1,18 @@
 from src.a00_data_toolbox.file_toolbox import get_dir_file_strs
 from src.a02_finance_logic.test._util.a02_str import bank_label_str, owner_name_str
 from src.a06_plan_logic.test._util.a06_str import (
+    acct_cred_points_str,
+    acct_debt_points_str,
     acct_name_str,
     acct_pool_str,
     addin_str,
     begin_str,
     close_str,
     concept_rope_str,
-    credit_score_str,
-    credit_vote_str,
-    debt_score_str,
-    debt_vote_str,
     denom_str,
     gogo_want_str,
+    group_cred_points_str,
+    group_debt_points_str,
     group_title_str,
     mass_str,
     morph_str,
@@ -48,10 +48,10 @@ from src.a17_idea_logic.test._util.a17_str import attributes_str
 def test_config_str_functions_ReturnsObjs():
     # ESTABLISH / WHEN / THEN
     assert acct_pool_str() == "acct_pool"
-    assert debt_score_str() == "debt_score"
-    assert credit_score_str() == "credit_score"
-    assert debt_vote_str() == "debt_vote"
-    assert credit_vote_str() == "credit_vote"
+    assert acct_debt_points_str() == "acct_debt_points"
+    assert acct_cred_points_str() == "acct_cred_points"
+    assert group_debt_points_str() == "group_debt_points"
+    assert group_cred_points_str() == "group_cred_points"
     x00021_idea = "idea_format_00021_plan_acctunit_v0_0_0"
     assert idea_format_00021_plan_acctunit_v0_0_0() == x00021_idea
     x00020_idea = "idea_format_00020_plan_acct_membership_v0_0_0"
@@ -100,8 +100,8 @@ def test_get_headers_list_ReturnsObj():
         bank_label_str(),
         owner_name_str(),
         acct_name_str(),
-        credit_score_str(),
-        debt_score_str(),
+        acct_cred_points_str(),
+        acct_debt_points_str(),
     ]
 
 
@@ -123,7 +123,10 @@ def test_get_sorted_headers_str_ReturnsObj():
     # ESTABLISH / WHEN
     br00021_headers = get_sorted_headers_str(idea_format_00021_plan_acctunit_v0_0_0())
     # THEN
-    assert br00021_headers == "bank_label,owner_name,acct_name,credit_score,debt_score"
+    assert (
+        br00021_headers
+        == "bank_label,owner_name,acct_name,acct_cred_points,acct_debt_points"
+    )
 
     # ESTABLISH / WHEN
     br00019_headers = get_sorted_headers_str(idea_format_00019_conceptunit_v0_0_0())
@@ -208,8 +211,8 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00021_plan_acctunit_v0_0_0(
     assert len(format_00001_idearef._attributes) == 7
     assert format_00001_idearef._attributes == {
         "acct_name": {"otx_key": True},
-        "credit_score": {"otx_key": False},
-        "debt_score": {"otx_key": False},
+        "acct_cred_points": {"otx_key": False},
+        "acct_debt_points": {"otx_key": False},
         "event_int": {"otx_key": True},
         "face_name": {"otx_key": True},
         "bank_label": {"otx_key": True},
@@ -221,8 +224,8 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00021_plan_acctunit_v0_0_0(
     assert headers_list[2] == bank_label_str()
     assert headers_list[3] == owner_name_str()
     assert headers_list[4] == acct_name_str()
-    assert headers_list[5] == credit_score_str()
-    assert headers_list[6] == debt_score_str()
+    assert headers_list[5] == acct_cred_points_str()
+    assert headers_list[6] == acct_debt_points_str()
 
 
 def test_get_idearef_obj_HasCorrectAttrs_idea_format_00020_plan_acct_membership_v0_0_0():
@@ -241,8 +244,8 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00020_plan_acct_membership_
     assert headers_list[3] == owner_name_str()
     assert headers_list[4] == acct_name_str()
     assert headers_list[5] == group_title_str()
-    assert headers_list[6] == credit_vote_str()
-    assert headers_list[7] == debt_vote_str()
+    assert headers_list[6] == group_cred_points_str()
+    assert headers_list[7] == group_debt_points_str()
 
 
 def test_get_idearef_obj_HasCorrectAttrs_idea_format_00013_conceptunit_v0_0_0():

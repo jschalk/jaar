@@ -214,9 +214,9 @@ def add_plan_acctunit_insert_to_legible_list(
 ):
     for acctunit_atom in acctunit_dict.values():
         acct_name = acctunit_atom.get_value("acct_name")
-        credit_score_value = acctunit_atom.get_value("credit_score")
-        debt_score_value = acctunit_atom.get_value("debt_score")
-        x_str = f"{acct_name} was added with {credit_score_value} score credit and {debt_score_value} score debt"
+        acct_cred_points_value = acctunit_atom.get_value("acct_cred_points")
+        acct_debt_points_value = acctunit_atom.get_value("acct_debt_points")
+        x_str = f"{acct_name} was added with {acct_cred_points_value} score credit and {acct_debt_points_value} score debt"
         legible_list.append(x_str)
 
 
@@ -225,14 +225,14 @@ def add_plan_acctunit_update_to_legible_list(
 ):
     for acctunit_atom in acctunit_dict.values():
         acct_name = acctunit_atom.get_value("acct_name")
-        credit_score_value = acctunit_atom.get_value("credit_score")
-        debt_score_value = acctunit_atom.get_value("debt_score")
-        if credit_score_value is not None and debt_score_value is not None:
-            x_str = f"{acct_name} now has {credit_score_value} score credit and {debt_score_value} score debt."
-        elif credit_score_value is not None:
-            x_str = f"{acct_name} now has {credit_score_value} score credit."
-        elif debt_score_value is not None:
-            x_str = f"{acct_name} now has {debt_score_value} score debt."
+        acct_cred_points_value = acctunit_atom.get_value("acct_cred_points")
+        acct_debt_points_value = acctunit_atom.get_value("acct_debt_points")
+        if acct_cred_points_value is not None and acct_debt_points_value is not None:
+            x_str = f"{acct_name} now has {acct_cred_points_value} score credit and {acct_debt_points_value} score debt."
+        elif acct_cred_points_value is not None:
+            x_str = f"{acct_name} now has {acct_cred_points_value} score credit."
+        elif acct_debt_points_value is not None:
+            x_str = f"{acct_name} now has {acct_debt_points_value} score debt."
         legible_list.append(x_str)
 
 
@@ -252,9 +252,13 @@ def add_plan_acct_membership_insert_to_legible_list(
         for acct_membership_atom in acct_membership_dict.values():
             group_title = acct_membership_atom.get_value("group_title")
             acct_name = acct_membership_atom.get_value("acct_name")
-            credit_vote_value = acct_membership_atom.get_value("credit_vote")
-            debt_vote_value = acct_membership_atom.get_value("debt_vote")
-            x_str = f"Group '{group_title}' has new membership {acct_name} with credit_vote_value{credit_vote_value} and debt_vote_value={debt_vote_value}."
+            group_cred_points_value = acct_membership_atom.get_value(
+                "group_cred_points"
+            )
+            group_debt_points_value = acct_membership_atom.get_value(
+                "group_debt_points"
+            )
+            x_str = f"Group '{group_title}' has new membership {acct_name} with group_cred_points_value{group_cred_points_value} and group_debt_points_value={group_debt_points_value}."
             legible_list.append(x_str)
 
 
@@ -265,14 +269,21 @@ def add_plan_acct_membership_update_to_legible_list(
         for acct_membership_atom in acct_membership_dict.values():
             group_title = acct_membership_atom.get_value("group_title")
             acct_name = acct_membership_atom.get_value("acct_name")
-            credit_vote_value = acct_membership_atom.get_value("credit_vote")
-            debt_vote_value = acct_membership_atom.get_value("debt_vote")
-            if credit_vote_value is not None and debt_vote_value is not None:
-                x_str = f"Group '{group_title}' membership {acct_name} has new credit_vote_value{credit_vote_value} and debt_vote_value={debt_vote_value}."
-            elif credit_vote_value is not None:
-                x_str = f"Group '{group_title}' membership {acct_name} has new credit_vote_value{credit_vote_value}."
-            elif debt_vote_value is not None:
-                x_str = f"Group '{group_title}' membership {acct_name} has new debt_vote_value={debt_vote_value}."
+            group_cred_points_value = acct_membership_atom.get_value(
+                "group_cred_points"
+            )
+            group_debt_points_value = acct_membership_atom.get_value(
+                "group_debt_points"
+            )
+            if (
+                group_cred_points_value is not None
+                and group_debt_points_value is not None
+            ):
+                x_str = f"Group '{group_title}' membership {acct_name} has new group_cred_points_value{group_cred_points_value} and group_debt_points_value={group_debt_points_value}."
+            elif group_cred_points_value is not None:
+                x_str = f"Group '{group_title}' membership {acct_name} has new group_cred_points_value{group_cred_points_value}."
+            elif group_debt_points_value is not None:
+                x_str = f"Group '{group_title}' membership {acct_name} has new group_debt_points_value={group_debt_points_value}."
             legible_list.append(x_str)
 
 

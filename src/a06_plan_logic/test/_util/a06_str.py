@@ -13,14 +13,14 @@ from src.a02_finance_logic.test._util.a02_str import (
     penny_str,
 )
 from src.a03_group_logic.test._util.a03_str import (
+    acct_cred_points_str,
+    acct_debt_points_str,
     awardee_title_str,
-    credit_score_str,
-    credit_vote_str,
-    debt_score_str,
-    debt_vote_str,
     fund_give_str,
     fund_take_str,
     give_force_str,
+    group_cred_points_str,
+    group_debt_points_str,
     group_title_str,
     respect_bit_str,
     take_force_str,

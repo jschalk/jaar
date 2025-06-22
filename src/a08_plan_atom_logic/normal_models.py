@@ -24,8 +24,8 @@ class AcctUnitTable(Base):
     __tablename__ = "acctunit"
     uid = Column(Integer, primary_key=True)
     acct_name = Column(String)
-    credit_score = Column(Float)
-    debt_score = Column(Float)
+    acct_cred_points = Column(Float)
+    acct_debt_points = Column(Float)
 
 
 class MemberShipTable(Base):
@@ -33,8 +33,8 @@ class MemberShipTable(Base):
     uid = Column(Integer, primary_key=True)
     group_title = Column(String)
     acct_name = Column(String)
-    credit_vote = Column(Float)
-    debt_vote = Column(Float)
+    group_cred_points = Column(Float)
+    group_debt_points = Column(Float)
 
 
 class ConceptTable(Base):

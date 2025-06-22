@@ -22,13 +22,13 @@ def example_yao_credorledger() -> dict[str, float]:
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
-    yao_credit_score = 7
-    bob_credit_score = 3
-    zia_credit_score = 10
+    yao_acct_cred_points = 7
+    bob_acct_cred_points = 3
+    zia_acct_cred_points = 10
     yao_plan = planunit_shop(yao_str)
-    yao_plan.add_acctunit(yao_str, yao_credit_score)
-    yao_plan.add_acctunit(bob_str, bob_credit_score)
-    yao_plan.add_acctunit(zia_str, zia_credit_score)
+    yao_plan.add_acctunit(yao_str, yao_acct_cred_points)
+    yao_plan.add_acctunit(bob_str, bob_acct_cred_points)
+    yao_plan.add_acctunit(zia_str, zia_acct_cred_points)
     return get_credorledger(yao_plan)
 
 
@@ -36,13 +36,13 @@ def example_bob_credorledger() -> dict[str, float]:
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
-    yao_credit_score = 1
-    bob_credit_score = 7
-    zia_credit_score = 42
+    yao_acct_cred_points = 1
+    bob_acct_cred_points = 7
+    zia_acct_cred_points = 42
     bob_plan = planunit_shop(bob_str)
-    bob_plan.add_acctunit(yao_str, yao_credit_score)
-    bob_plan.add_acctunit(bob_str, bob_credit_score)
-    bob_plan.add_acctunit(zia_str, zia_credit_score)
+    bob_plan.add_acctunit(yao_str, yao_acct_cred_points)
+    bob_plan.add_acctunit(bob_str, bob_acct_cred_points)
+    bob_plan.add_acctunit(zia_str, zia_acct_cred_points)
     return get_credorledger(bob_plan)
 
 
@@ -50,13 +50,13 @@ def example_zia_credorledger() -> dict[str, float]:
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
-    yao_credit_score = 89
-    bob_credit_score = 150
-    zia_credit_score = 61
+    yao_acct_cred_points = 89
+    bob_acct_cred_points = 150
+    zia_acct_cred_points = 61
     zia_plan = planunit_shop(zia_str)
-    zia_plan.add_acctunit(yao_str, yao_credit_score)
-    zia_plan.add_acctunit(bob_str, bob_credit_score)
-    zia_plan.add_acctunit(zia_str, zia_credit_score)
+    zia_plan.add_acctunit(yao_str, yao_acct_cred_points)
+    zia_plan.add_acctunit(bob_str, bob_acct_cred_points)
+    zia_plan.add_acctunit(zia_str, zia_acct_cred_points)
     return get_credorledger(zia_plan)
 
 

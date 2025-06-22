@@ -54,11 +54,11 @@
             }
         },
         "jvalues": {
-            "credit_vote": {
+            "group_cred_points": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "debt_vote": {
+            "group_debt_points": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }
@@ -113,21 +113,21 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_inallocable_debt_score": {
+            "_inallocable_acct_debt_points": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_irrational_debt_score": {
+            "_irrational_acct_debt_points": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }
         },
         "jvalues": {
-            "credit_score": {
+            "acct_cred_points": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "debt_score": {
+            "acct_debt_points": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }

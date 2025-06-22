@@ -1,8 +1,8 @@
 from src.a06_plan_logic.plan import planunit_shop
 from src.a06_plan_logic.test._util.a06_str import (
     acct_name_str,
-    credit_vote_str,
-    debt_vote_str,
+    group_cred_points_str,
+    group_debt_points_str,
     group_title_str,
     plan_acct_membership_str,
 )
@@ -22,13 +22,13 @@ def test_create_legible_list_ReturnsObj_acct_membership_INSERT():
     dimen = plan_acct_membership_str()
     swim_str = f"{sue_plan.knot}Swimmers"
     yao_str = "Yao"
-    credit_vote_value = 81
-    debt_vote_value = 43
+    group_cred_points_value = 81
+    group_debt_points_value = 43
     yao_planatom = planatom_shop(dimen, INSERT_str())
     yao_planatom.set_arg(group_title_str(), swim_str)
     yao_planatom.set_arg(acct_name_str(), yao_str)
-    yao_planatom.set_arg(credit_vote_str(), credit_vote_value)
-    yao_planatom.set_arg(debt_vote_str(), debt_vote_value)
+    yao_planatom.set_arg(group_cred_points_str(), group_cred_points_value)
+    yao_planatom.set_arg(group_debt_points_str(), group_debt_points_value)
     # print(f"{yao_planatom=}")
     x_plandelta = plandelta_shop()
     x_plandelta.set_planatom(yao_planatom)
@@ -37,26 +37,26 @@ def test_create_legible_list_ReturnsObj_acct_membership_INSERT():
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"Group '{swim_str}' has new membership {yao_str} with credit_vote_value{credit_vote_value} and debt_vote_value={debt_vote_value}."
+    x_str = f"Group '{swim_str}' has new membership {yao_str} with group_cred_points_value{group_cred_points_value} and group_debt_points_value={group_debt_points_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote_debt_vote():
+def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_group_cred_points_group_debt_points():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     dimen = plan_acct_membership_str()
-    credit_vote_str = "credit_vote"
-    debt_vote_str = "debt_vote"
+    group_cred_points_str = "group_cred_points"
+    group_debt_points_str = "group_debt_points"
     swim_str = f"{sue_plan.knot}Swimmers"
     yao_str = "Yao"
-    credit_vote_value = 81
-    debt_vote_value = 43
+    group_cred_points_value = 81
+    group_debt_points_value = 43
     yao_planatom = planatom_shop(dimen, UPDATE_str())
     yao_planatom.set_arg(group_title_str(), swim_str)
     yao_planatom.set_arg(acct_name_str(), yao_str)
-    yao_planatom.set_arg(credit_vote_str, credit_vote_value)
-    yao_planatom.set_arg(debt_vote_str, debt_vote_value)
+    yao_planatom.set_arg(group_cred_points_str, group_cred_points_value)
+    yao_planatom.set_arg(group_debt_points_str, group_debt_points_value)
     # print(f"{yao_planatom=}")
     x_plandelta = plandelta_shop()
     x_plandelta.set_planatom(yao_planatom)
@@ -65,23 +65,23 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote_debt_
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"Group '{swim_str}' membership {yao_str} has new credit_vote_value{credit_vote_value} and debt_vote_value={debt_vote_value}."
+    x_str = f"Group '{swim_str}' membership {yao_str} has new group_cred_points_value{group_cred_points_value} and group_debt_points_value={group_debt_points_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote():
+def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_group_cred_points():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     dimen = plan_acct_membership_str()
-    credit_vote_str = "credit_vote"
+    group_cred_points_str = "group_cred_points"
     swim_str = f"{sue_plan.knot}Swimmers"
     yao_str = "Yao"
-    credit_vote_value = 81
+    group_cred_points_value = 81
     yao_planatom = planatom_shop(dimen, UPDATE_str())
     yao_planatom.set_arg(group_title_str(), swim_str)
     yao_planatom.set_arg(acct_name_str(), yao_str)
-    yao_planatom.set_arg(credit_vote_str, credit_vote_value)
+    yao_planatom.set_arg(group_cred_points_str, group_cred_points_value)
     # print(f"{yao_planatom=}")
     x_plandelta = plandelta_shop()
     x_plandelta.set_planatom(yao_planatom)
@@ -90,23 +90,23 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_credit_vote():
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"Group '{swim_str}' membership {yao_str} has new credit_vote_value{credit_vote_value}."
+    x_str = f"Group '{swim_str}' membership {yao_str} has new group_cred_points_value{group_cred_points_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_debt_vote():
+def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_group_debt_points():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     dimen = plan_acct_membership_str()
-    debt_vote_str = "debt_vote"
+    group_debt_points_str = "group_debt_points"
     swim_str = f"{sue_plan.knot}Swimmers"
     yao_str = "Yao"
-    debt_vote_value = 43
+    group_debt_points_value = 43
     yao_planatom = planatom_shop(dimen, UPDATE_str())
     yao_planatom.set_arg(group_title_str(), swim_str)
     yao_planatom.set_arg(acct_name_str(), yao_str)
-    yao_planatom.set_arg(debt_vote_str, debt_vote_value)
+    yao_planatom.set_arg(group_debt_points_str, group_debt_points_value)
     # print(f"{yao_planatom=}")
     x_plandelta = plandelta_shop()
     x_plandelta.set_planatom(yao_planatom)
@@ -115,7 +115,7 @@ def test_create_legible_list_ReturnsObj_acct_membership_UPDATE_debt_vote():
     legible_list = create_legible_list(x_plandelta, sue_plan)
 
     # THEN
-    x_str = f"Group '{swim_str}' membership {yao_str} has new debt_vote_value={debt_vote_value}."
+    x_str = f"Group '{swim_str}' membership {yao_str} has new group_debt_points_value={group_debt_points_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 

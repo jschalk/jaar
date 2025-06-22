@@ -2,9 +2,9 @@ from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
 from src.a02_finance_logic.test._util.a02_str import bank_label_str, owner_name_str
 from src.a06_plan_logic.test._util.a06_str import (
+    acct_cred_points_str,
+    acct_debt_points_str,
     acct_name_str,
-    credit_score_str,
-    debt_score_str,
     plan_acctunit_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
@@ -45,8 +45,8 @@ def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_PopulatesTable_Scenario0()
 , {bank_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
-, {credit_score_str()}
-, {debt_score_str()}
+, {acct_cred_points_str()}
+, {acct_debt_points_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -72,8 +72,8 @@ VALUES
 , {bank_label_str()}_otx
 , {owner_name_str()}_otx
 , {acct_name_str()}_otx
-, {credit_score_str()}
-, {debt_score_str()}
+, {acct_cred_points_str()}
+, {acct_debt_points_str()}
 FROM {plnawar_v_raw_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -114,8 +114,8 @@ def test_etl_sound_vld_tables_to_voice_raw_tables_Scenario0_AddRowsToTable():
 , {bank_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
-, {credit_score_str()}
-, {debt_score_str()}
+, {acct_cred_points_str()}
+, {acct_debt_points_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -140,8 +140,8 @@ VALUES
 , {bank_label_str()}_otx
 , {owner_name_str()}_otx
 , {acct_name_str()}_otx
-, {credit_score_str()}
-, {debt_score_str()}
+, {acct_cred_points_str()}
+, {acct_debt_points_str()}
 FROM {plnacct_v_raw_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -181,8 +181,8 @@ def test_etl_sound_vld_tables_to_voice_raw_tables_Scenario1_Populates_inx_Column
 , {bank_label_str()}
 , {owner_name_str()}
 , {acct_name_str()}
-, {credit_score_str()}
-, {debt_score_str()}
+, {acct_cred_points_str()}
+, {acct_debt_points_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -207,8 +207,8 @@ VALUES
 , {bank_label_str()}_inx
 , {owner_name_str()}_inx
 , {acct_name_str()}_inx
-, {credit_score_str()}
-, {debt_score_str()}
+, {acct_cred_points_str()}
+, {acct_debt_points_str()}
 FROM {plnacct_v_raw_put_tablename}
 """
         cursor.execute(select_sqlstr)

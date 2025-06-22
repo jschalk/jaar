@@ -13,9 +13,9 @@ def test_PlanDelta_get_dimens_cruds_plandelta_ReturnsObjWithCorrectDimensAndCRUD
     before_sue_plan.add_acctunit(yao_str)
     after_sue_plan = planunit_shop(sue_str)
     bob_str = "Bob"
-    bob_credit_score = 33
-    bob_debt_score = 44
-    after_sue_plan.add_acctunit(bob_str, bob_credit_score, bob_debt_score)
+    bob_acct_cred_points = 33
+    bob_acct_debt_points = 44
+    after_sue_plan.add_acctunit(bob_str, bob_acct_cred_points, bob_acct_debt_points)
     after_sue_plan.set_l1_concept(conceptunit_shop("casa"))
     old_plandelta = plandelta_shop()
     old_plandelta.add_all_different_planatoms(before_sue_plan, after_sue_plan)
@@ -31,5 +31,5 @@ def test_PlanDelta_get_dimens_cruds_plandelta_ReturnsObjWithCorrectDimensAndCRUD
     sue_acctunit_dict = sue_insert_dict.get(plan_acctunit_str())
     bob_planatom = sue_acctunit_dict.get(bob_str)
     assert bob_planatom.get_value(acct_name_str()) == bob_str
-    assert bob_planatom.get_value("credit_score") == bob_credit_score
-    assert bob_planatom.get_value("debt_score") == bob_debt_score
+    assert bob_planatom.get_value("acct_cred_points") == bob_acct_cred_points
+    assert bob_planatom.get_value("acct_debt_points") == bob_acct_debt_points

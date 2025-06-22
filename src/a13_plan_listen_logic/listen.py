@@ -33,20 +33,20 @@ def _ingest_perspective_agenda(
     return listener
 
 
-def _allocate_irrational_debt_score(
+def _allocate_irrational_acct_debt_points(
     listener: PlanUnit, speaker_owner_name: OwnerName
 ) -> PlanUnit:
     speaker_acctunit = listener.get_acct(speaker_owner_name)
-    speaker_debt_score = speaker_acctunit.debt_score
-    speaker_acctunit.add_irrational_debt_score(speaker_debt_score)
+    speaker_acct_debt_points = speaker_acctunit.acct_debt_points
+    speaker_acctunit.add_irrational_acct_debt_points(speaker_acct_debt_points)
     return listener
 
 
-def _allocate_inallocable_debt_score(
+def _allocate_inallocable_acct_debt_points(
     listener: PlanUnit, speaker_owner_name: OwnerName
 ) -> PlanUnit:
     speaker_acctunit = listener.get_acct(speaker_owner_name)
-    speaker_acctunit.add_inallocable_debt_score(speaker_acctunit.debt_score)
+    speaker_acctunit.add_inallocable_acct_debt_points(speaker_acctunit.acct_debt_points)
     return listener
 
 
@@ -120,13 +120,17 @@ def _add_and_replace_conceptunit_masss(
 
 def get_debtors_roll(x_duty: PlanUnit) -> list[AcctUnit]:
     return [
-        x_acctunit for x_acctunit in x_duty.accts.values() if x_acctunit.debt_score != 0
+        x_acctunit
+        for x_acctunit in x_duty.accts.values()
+        if x_acctunit.acct_debt_points != 0
     ]
 
 
 def get_ordered_debtors_roll(x_plan: PlanUnit) -> list[AcctUnit]:
     accts_ordered_list = get_debtors_roll(x_plan)
-    accts_ordered_list.sort(key=lambda x: (x.debt_score, x.acct_name), reverse=True)
+    accts_ordered_list.sort(
+        key=lambda x: (x.acct_debt_points, x.acct_name), reverse=True
+    )
     return accts_ordered_list
 
 
@@ -169,15 +173,15 @@ def listen_to_speaker_agenda(listener: PlanUnit, speaker: PlanUnit) -> PlanUnit:
         )
     perspective_plan = get_speaker_perspective(speaker, listener.owner_name)
     if perspective_plan._rational is False:
-        return _allocate_irrational_debt_score(listener, speaker.owner_name)
+        return _allocate_irrational_acct_debt_points(listener, speaker.owner_name)
     if listener.debtor_respect is None:
-        return _allocate_inallocable_debt_score(listener, speaker.owner_name)
+        return _allocate_inallocable_acct_debt_points(listener, speaker.owner_name)
     if listener.owner_name != speaker.owner_name:
         agenda = generate_perspective_agenda(perspective_plan)
     else:
         agenda = list(perspective_plan.get_all_tasks().values())
     if len(agenda) == 0:
-        return _allocate_inallocable_debt_score(listener, speaker.owner_name)
+        return _allocate_inallocable_acct_debt_points(listener, speaker.owner_name)
     return _ingest_perspective_agenda(listener, agenda)
 
 

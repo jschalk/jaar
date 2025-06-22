@@ -3,10 +3,10 @@
         "acct_name": {
             "otx_key": true
         },
-        "credit_score": {
+        "acct_cred_points": {
             "otx_key": false
         },
-        "debt_score": {
+        "acct_debt_points": {
             "otx_key": false
         },
         "event_int": {

@@ -21,12 +21,12 @@
             }
         },
         "jvalues": {
-            "credit_vote": {
+            "group_cred_points": {
                 "class_type": "float",
                 "column_order": 3,
                 "sqlite_datatype": "REAL"
             },
-            "debt_vote": {
+            "group_debt_points": {
                 "class_type": "float",
                 "column_order": 2,
                 "sqlite_datatype": "REAL"
@@ -54,12 +54,12 @@
             }
         },
         "jvalues": {
-            "credit_score": {
+            "acct_cred_points": {
                 "class_type": "float",
                 "column_order": 2,
                 "sqlite_datatype": "REAL"
             },
-            "debt_score": {
+            "acct_debt_points": {
                 "class_type": "float",
                 "column_order": 1,
                 "sqlite_datatype": "REAL"
