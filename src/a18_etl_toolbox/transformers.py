@@ -135,6 +135,8 @@ def etl_mud_dfs_to_brick_raw_tables(conn: sqlite3_Connection, mud_dir: str):
         df.insert(0, "file_dir", ref.file_dir)
         df.insert(1, "filename", ref.filename)
         df.insert(2, "sheet_name", ref.sheet_name)
+        df_cols_count = len(df.columns)
+        df.insert(df_cols_count, "error_message", None)
         x_tablename = f"{ref.idea_number}_brick_raw"
         df.to_sql(x_tablename, conn, index=False, if_exists="append")
 
