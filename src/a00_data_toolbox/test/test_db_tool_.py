@@ -51,7 +51,7 @@ def test_sqlite_obj_str_ReturnsObj():
     assert sqlite_obj_str(None, "REAL") == "NULL"
 
 
-def test_sqlite_create_type_reference_insert_sqlstr_ReturnsObj():
+def test_sqlite_create_type_reference_insert_sqlstr_ReturnsObj_Scenario0_WithoutNones():
     # ESTABLISH
     x_table = "kubo_casas"
     eagle_id_str = "eagle_id"
@@ -77,6 +77,37 @@ VALUES (
   {eagle_id_value}
 , '{casa_id_value}'
 , '{casa_color_value}'
+)
+;"""
+    print(example_sqlstr)
+    assert example_sqlstr == gen_sqlstr
+
+
+def test_sqlite_create_type_reference_insert_sqlstr_ReturnsObj_Scenario1_WithNones():
+    # ESTABLISH
+    x_table = "kubo_casas"
+    eagle_id_str = "eagle_id"
+    casa_id_str = "casa_id"
+    casa_color_str = "casa_color"
+    x_columns = [eagle_id_str, casa_id_str, casa_color_str]
+    eagle_id_value = 47.0
+    casa_id_value = 34
+    x_values = [eagle_id_value, casa_id_value, None]
+
+    # WHEN
+    gen_sqlstr = create_type_reference_insert_sqlstr(x_table, x_columns, x_values)
+
+    # THEN
+    example_sqlstr = f"""
+INSERT INTO {x_table} (
+  {eagle_id_str}
+, {casa_id_str}
+, {casa_color_str}
+)
+VALUES (
+  {eagle_id_value}
+, {casa_id_value}
+, NULL
 )
 ;"""
     print(example_sqlstr)

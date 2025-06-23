@@ -367,7 +367,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "c400_number": "INTEGER",
         "yr1_jan1_offset": "INTEGER",
         "quota": "REAL",
-        "celldepth": "INT",
+        "celldepth": "INTEGER",
         "monthday_distortion": "INTEGER",
         "job_listen_rotations": "INTEGER",
         "timeline_label": "TEXT",

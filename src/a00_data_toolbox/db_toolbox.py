@@ -54,7 +54,7 @@ def get_sorted_intersection_list(
 
 def get_nonconvertible_columns(
     row_dict: dict[str, str], col_types: dict[str, str]
-) -> list[str]:
+) -> dict[str, str]:
     """
     Returns a list of columns from row_dict that cannot be converted
     to the expected numeric type defined in col_types.
@@ -64,29 +64,27 @@ def get_nonconvertible_columns(
     - col_types: dict mapping column names to "Integer", "Real", or "Text".
 
     Returns:
-    - List of column names where numeric conversion fails.
+    - Dictionary of column names and the values where numeric conversion fails.
     """
-    nonconvertible = []
-
+    nonconvertible = {}
     for col, value in row_dict.items():
         expected_type = col_types.get(col)
-        if expected_type == "Integer":
+        if expected_type == "INTEGER":
             try:
                 int_val = int(value)
                 if isinstance(value, float) and not value.is_integer():
                     raise ValueError("float with decimal")
             except (ValueError, TypeError):
-                nonconvertible.append(col)
+                nonconvertible[col] = value
 
-        elif expected_type == "Real":
+        elif expected_type == "REAL":
             try:
                 float(value)
             except (ValueError, TypeError):
-                nonconvertible.append(col)
-        elif expected_type != "Text":
-            nonconvertible.append(col)
+                nonconvertible[col] = value
+        elif expected_type and expected_type != "TEXT":
+            nonconvertible[col] = value
         # ignore if expected_type == "Text" or expected_type is None:
-
     return nonconvertible
 
 
@@ -105,8 +103,13 @@ INSERT INTO {x_table} ("""
 , {x_column}"""
     values_str = ""
     for x_value in x_values:
-        if str(type(x_value)) != "<class 'int'>":
-            x_value = f"'{x_value}'"
+        if x_value is None:
+            x_value = "NULL"
+        else:
+            try:
+                float(x_value)
+            except (ValueError, TypeError):
+                x_value = f"'{x_value}'"
 
         if values_str == "":
             values_str = f"""{values_str}

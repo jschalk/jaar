@@ -501,7 +501,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(c400_number_str()) == "INTEGER"
     assert sqlite_types.get(yr1_jan1_offset_str()) == "INTEGER"
     assert sqlite_types.get(quota_str()) == "REAL"
-    assert sqlite_types.get(celldepth_str()) == "INT"
+    assert sqlite_types.get(celldepth_str()) == "INTEGER"
     assert sqlite_types.get(monthday_distortion_str()) == "INTEGER"
     assert sqlite_types.get(timeline_label_str()) == "TEXT"
     assert sqlite_types.get("error_message") == "TEXT"
@@ -510,6 +510,8 @@ def test_get_idea_sqlite_types_ReturnsObj():
     for x_arg, datatype in get_plan_calc_args_sqlite_datatype_dict().items():
         print(f"{x_arg=} {datatype=} {sqlite_types.get(x_arg)=}")
         assert sqlite_types.get(x_arg) == datatype
+
+    assert set(sqlite_types.values()) == {"TEXT", "INTEGER", "REAL"}
 
 
 def test_get_allowed_curds_ReturnsObj():

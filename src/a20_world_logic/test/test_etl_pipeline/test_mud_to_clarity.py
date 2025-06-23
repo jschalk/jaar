@@ -324,6 +324,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
         # THEN
         assert get_row_count(cursor, br00113_raw) == 1
         assert get_row_count(cursor, br00113_agg) == 1
+        print(cursor.execute(f"SELECT * FROM {events_brick_agg_str()}").fetchall())
         assert get_row_count(cursor, events_brick_agg_str()) == 2
         assert get_row_count(cursor, events_brick_valid_tablename) == 2
         assert get_row_count(cursor, br00113_valid) == 2
