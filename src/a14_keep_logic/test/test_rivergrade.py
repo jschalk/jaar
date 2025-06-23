@@ -1,4 +1,4 @@
-from src.a02_finance_logic.test._util.a02_str import belief_label_str
+from src.a04_reason_logic.test._util.a04_str import belief_label_str
 from src.a14_keep_logic.rivercycle import RiverGrade, rivergrade_shop
 from src.a14_keep_logic.test._util.example_credorledgers import example_yao_hubunit
 

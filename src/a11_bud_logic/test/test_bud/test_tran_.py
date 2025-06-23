@@ -1,12 +1,12 @@
 from pytest import raises as pytest_raises
-from src.a02_finance_logic.bud import (
+from src.a06_plan_logic.test._util.a06_str import belief_label_str
+from src.a11_bud_logic.bud import (
     TranBook,
     TranUnit,
     get_tranbook_from_dict,
     tranbook_shop,
     tranunit_shop,
 )
-from src.a02_finance_logic.test._util.a02_str import acct_name_str, belief_label_str
 
 
 def test_TranUnit_Exists():

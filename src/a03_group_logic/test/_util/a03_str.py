@@ -1,5 +1,4 @@
 from src.a01_term_logic.test._util.a01_str import knot_str
-from src.a02_finance_logic.test._util.a02_str import acct_name_str
 
 
 def _credor_pool_str() -> str:
@@ -54,6 +53,10 @@ def acct_debt_points_str() -> str:
     return "acct_debt_points"
 
 
+def acct_name_str() -> str:
+    return "acct_name"
+
+
 def awardee_title_str() -> str:
     return "awardee_title"
 
@@ -80,6 +83,10 @@ def group_debt_points_str() -> str:
 
 def group_title_str() -> str:
     return "group_title"
+
+
+def owner_name_str() -> str:
+    return "owner_name"
 
 
 def respect_bit_str() -> str:

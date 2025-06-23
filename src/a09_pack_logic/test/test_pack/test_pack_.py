@@ -1,6 +1,5 @@
 from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import x_is_json
-from src.a02_finance_logic.test._util.a02_str import belief_label_str, owner_name_str
 from src.a03_group_logic.acct import acctunit_shop
 from src.a05_concept_logic.concept import get_default_belief_label
 from src.a06_plan_logic.plan import planunit_shop
@@ -24,7 +23,12 @@ from src.a09_pack_logic.pack import (
     init_pack_id,
     packunit_shop,
 )
-from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
+from src.a09_pack_logic.test._util.a09_str import (
+    belief_label_str,
+    event_int_str,
+    face_name_str,
+    owner_name_str,
+)
 from src.a09_pack_logic.test._util.example_atoms import (
     get_atom_example_conceptunit_sports,
 )

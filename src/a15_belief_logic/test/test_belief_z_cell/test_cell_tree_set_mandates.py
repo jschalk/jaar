@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import open_json
 from src.a06_plan_logic.plan import PlanUnit, planunit_shop
-from src.a11_bud_cell_logic.cell import cellunit_shop
+from src.a11_bud_logic.cell import cellunit_shop
 from src.a12_hub_toolbox.hub_path import (
     create_cell_acct_mandate_ledger_path as mandate_path,
     create_cell_dir_path as cell_dir,

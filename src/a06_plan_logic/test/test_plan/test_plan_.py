@@ -7,12 +7,7 @@ from src.a02_finance_logic.finance_config import (
     validate_fund_pool,
     validate_respect_num,
 )
-from src.a02_finance_logic.test._util.a02_str import (
-    belief_label_str,
-    fund_pool_str,
-    knot_str,
-    owner_name_str,
-)
+from src.a02_finance_logic.test._util.a02_str import fund_pool_str, knot_str
 from src.a05_concept_logic.concept import get_default_belief_label as root_label
 from src.a06_plan_logic.plan import PlanUnit, planunit_shop
 from src.a06_plan_logic.test._util.a06_str import (
@@ -24,11 +19,13 @@ from src.a06_plan_logic.test._util.a06_str import (
     _reason_rcontexts_str,
     _sum_healerlink_share_str,
     _tree_traverse_count_str,
+    belief_label_str,
     credor_respect_str,
     debtor_respect_str,
     fund_iota_str,
     last_pack_id_str,
     max_tree_traverse_str,
+    owner_name_str,
     penny_str,
     respect_bit_str,
     tally_str,

@@ -1,18 +1,18 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, open_file
-from src.a01_term_logic.rope import to_rope
-from src.a02_finance_logic.test._util.a02_str import belief_label_str, owner_name_str
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a06_plan_logic.plan import planunit_shop
 from src.a06_plan_logic.test._util.a06_str import (
     acct_cred_points_str,
     acct_debt_points_str,
     acct_name_str,
+    belief_label_str,
     concept_rope_str,
     group_cred_points_str,
     group_debt_points_str,
     group_title_str,
     mass_str,
+    owner_name_str,
     task_str,
 )
 from src.a07_timeline_logic.test._util.calendar_examples import (

@@ -1,13 +1,14 @@
 from pytest import raises as pytest_raises
-from src.a02_finance_logic.bud import (
+from src.a02_finance_logic.finance_config import default_fund_pool
+from src.a02_finance_logic.test._util.a02_str import magnitude_str
+from src.a11_bud_logic.bud import (
     DEFAULT_CELLDEPTH,
     BudUnit,
     budunit_shop,
     get_budunit_from_dict,
     get_budunit_from_json,
 )
-from src.a02_finance_logic.finance_config import default_fund_pool
-from src.a02_finance_logic.test._util.a02_str import (
+from src.a11_bud_logic.test._util.a11_str import (
     bud_acct_nets_str,
     bud_time_str,
     celldepth_str,

@@ -1,10 +1,11 @@
 from json import loads as json_loads
 from pathlib import Path
 from src.a00_data_toolbox.file_toolbox import count_files, save_json
-from src.a02_finance_logic.test._util.a02_str import belief_label_str, owner_name_str
 from src.a06_plan_logic.test._util.a06_str import (
+    belief_label_str,
     concept_rope_str,
     gogo_want_str,
+    owner_name_str,
     plan_conceptunit_str,
 )
 from src.a08_plan_atom_logic.atom_config import get_atom_config_args

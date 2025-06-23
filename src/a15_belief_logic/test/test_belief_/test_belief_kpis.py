@@ -1,5 +1,4 @@
 from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
-from src.a02_finance_logic.test._util.a02_str import owner_name_str
 from src.a06_plan_logic.test._util.a06_str import (
     acct_cred_points_str,
     acct_debt_points_str,
@@ -11,6 +10,7 @@ from src.a06_plan_logic.test._util.a06_str import (
     denom_str,
     morph_str,
     numor_str,
+    owner_name_str,
     parent_rope_str,
 )
 from src.a15_belief_logic.belief_report import (

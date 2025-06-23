@@ -2,13 +2,13 @@ from copy import deepcopy as copy_deepcopy
 from src.a01_term_logic.rope import create_rope
 from src.a04_reason_logic.reason_concept import factunit_shop
 from src.a06_plan_logic.plan import planunit_shop
-from src.a11_bud_cell_logic.cell import (
+from src.a11_bud_logic.cell import (
     CELLNODE_QUOTA_DEFAULT,
     CellUnit,
     cellunit_shop,
     create_child_cellunits,
 )
-from src.a11_bud_cell_logic.test._util.a11_str import (
+from src.a11_bud_logic.test._util.a11_str import (
     ancestors_str,
     boss_facts_str,
     bud_owner_name_str,
@@ -18,7 +18,7 @@ from src.a11_bud_cell_logic.test._util.a11_str import (
     planadjust_str,
     planevent_facts_str,
 )
-from src.a11_bud_cell_logic.test._util.example_factunits import (
+from src.a11_bud_logic.test._util.example_factunits import (
     example_casa_clean_factunit as clean_factunit,
     example_casa_dirty_factunit as dirty_factunit,
     example_casa_grimy_factunit as grimy_factunit,

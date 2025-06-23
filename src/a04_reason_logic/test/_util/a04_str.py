@@ -1,4 +1,5 @@
 from src.a01_term_logic.test._util.a01_str import knot_str
+from src.a03_group_logic.test._util.a03_str import owner_name_str
 
 
 def _active_str() -> str:
@@ -11,6 +12,10 @@ def _chore_str() -> str:
 
 def _status_str() -> str:
     return "_status"
+
+
+def belief_label_str() -> str:
+    return "belief_label"
 
 
 def fcontext_str() -> str:

@@ -1,7 +1,10 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
-from src.a02_finance_logic.test._util.a02_str import belief_label_str, owner_name_str
-from src.a06_plan_logic.test._util.a06_str import acct_name_str
+from src.a06_plan_logic.test._util.a06_str import (
+    acct_name_str,
+    belief_label_str,
+    owner_name_str,
+)
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic.test._util.a16_str import (
     inx_knot_str,

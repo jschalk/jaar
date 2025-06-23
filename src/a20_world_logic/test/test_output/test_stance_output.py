@@ -3,8 +3,11 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from pandas.testing import assert_frame_equal
 from shutil import copy2 as shutil_copy2
 from src.a00_data_toolbox.file_toolbox import create_path, set_dir
-from src.a02_finance_logic.test._util.a02_str import belief_label_str, owner_name_str
-from src.a06_plan_logic.test._util.a06_str import acct_name_str
+from src.a06_plan_logic.test._util.a06_str import (
+    acct_name_str,
+    belief_label_str,
+    owner_name_str,
+)
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a17_idea_logic.idea_db_tool import get_sheet_names, upsert_sheet
 from src.a18_etl_toolbox.tran_path import (

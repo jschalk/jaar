@@ -6,7 +6,7 @@ from src.a00_data_toolbox.db_toolbox import (
     get_row_count,
 )
 from src.a00_data_toolbox.file_toolbox import open_file
-from src.a02_finance_logic.test._util.a02_str import belief_label_str
+from src.a04_reason_logic.test._util.a04_str import belief_label_str
 from src.a12_hub_toolbox.hub_path import create_belief_json_path
 from src.a15_belief_logic.belief import get_from_json as beliefunit_get_from_json
 from src.a15_belief_logic.belief_config import get_belief_dimens

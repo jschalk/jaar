@@ -4,7 +4,7 @@ from src.a00_data_toolbox.db_toolbox import (
     get_db_tables,
     get_row_count,
 )
-from src.a02_finance_logic.test._util.a02_str import belief_label_str, owner_name_str
+from src.a04_reason_logic.test._util.a04_str import belief_label_str, owner_name_str
 from src.a18_etl_toolbox.test._util.a18_str import (
     belief_acct_nets_str,
     owner_net_amount_str,

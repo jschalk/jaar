@@ -2,11 +2,11 @@ from copy import deepcopy as copy_deepcopy
 from pandas import DataFrame
 from pandas.testing import assert_frame_equal as pandas_assert_frame_equal
 from src.a01_term_logic.rope import create_rope, to_rope
-from src.a02_finance_logic.test._util.a02_str import belief_label_str
 from src.a06_plan_logic.test._util.a06_str import (
     NameTerm_str,
     acct_cred_points_str,
     acct_name_str,
+    belief_label_str,
     rcontext_str,
 )
 from src.a16_pidgin_logic.map import namemap_shop

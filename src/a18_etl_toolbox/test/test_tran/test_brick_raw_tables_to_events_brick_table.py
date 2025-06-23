@@ -4,9 +4,9 @@ from src.a00_data_toolbox.db_toolbox import (
     get_row_count,
     get_table_columns,
 )
-from src.a02_finance_logic.test._util.a02_str import belief_label_str
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a15_belief_logic.test._util.a15_str import (
+    belief_label_str,
     cumulative_minute_str,
     hour_label_str,
 )
