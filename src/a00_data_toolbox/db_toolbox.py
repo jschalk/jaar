@@ -1,14 +1,8 @@
-from contextlib import contextmanager
 from csv import reader as csv_reader, writer as csv_writer
 from dataclasses import dataclass
 from os.path import join as os_path_join
-from sqlite3 import (
-    Connection as sqlite3_Connection,
-    Error as sqlite3_Error,
-    connect as sqlite3_connect,
-)
+from sqlite3 import Connection as sqlite3_Connection, Error as sqlite3_Error
 from src.a00_data_toolbox.file_toolbox import create_path, set_dir
-from typing import Any, Generator
 
 
 def sqlite_obj_str(x_obj: any, sqlite_datatype: str):
@@ -56,6 +50,44 @@ def get_sorted_intersection_list(
 ) -> list[str]:
     sort_columns_in_existing = set(sorting_columns).intersection(existing_columns)
     return [x_col for x_col in sorting_columns if x_col in sort_columns_in_existing]
+
+
+def get_nonconvertible_columns(
+    row_dict: dict[str, str], col_types: dict[str, str]
+) -> list[str]:
+    """
+    Returns a list of columns from row_dict that cannot be converted
+    to the expected numeric type defined in col_types.
+
+    Parameters:
+    - row_dict: dict with column names as keys and cell values.
+    - col_types: dict mapping column names to "Integer", "Real", or "Text".
+
+    Returns:
+    - List of column names where numeric conversion fails.
+    """
+    nonconvertible = []
+
+    for col, value in row_dict.items():
+        expected_type = col_types.get(col)
+        if expected_type == "Integer":
+            try:
+                int_val = int(value)
+                if isinstance(value, float) and not value.is_integer():
+                    raise ValueError("float with decimal")
+            except (ValueError, TypeError):
+                nonconvertible.append(col)
+
+        elif expected_type == "Real":
+            try:
+                float(value)
+            except (ValueError, TypeError):
+                nonconvertible.append(col)
+        elif expected_type != "Text":
+            nonconvertible.append(col)
+        # ignore if expected_type == "Text" or expected_type is None:
+
+    return nonconvertible
 
 
 def create_type_reference_insert_sqlstr(
