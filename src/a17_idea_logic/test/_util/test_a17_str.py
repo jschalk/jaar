@@ -1,6 +1,5 @@
 from src.a17_idea_logic.test._util.a17_str import (
     allowed_crud_str,
-    brick_raw_str,
     build_order_str,
     delete_insert_str,
     delete_insert_update_str,
@@ -17,7 +16,6 @@ from src.a17_idea_logic.test._util.a17_str import (
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
 
-    assert brick_raw_str() == "brick_raw"
     assert idea_number_str() == "idea_number"
     assert idea_category_str() == "idea_category"
     assert allowed_crud_str() == "allowed_crud"

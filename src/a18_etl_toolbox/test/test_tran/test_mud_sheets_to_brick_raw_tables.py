@@ -17,11 +17,11 @@ from src.a15_belief_logic.test._util.a15_str import (
     hour_label_str,
 )
 from src.a17_idea_logic.idea_db_tool import get_sheet_names, upsert_sheet
-from src.a17_idea_logic.test._util.a17_str import brick_raw_str
 from src.a18_etl_toolbox.test._util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
+from src.a18_etl_toolbox.test._util.a18_str import brick_raw_str
 from src.a18_etl_toolbox.transformers import (
     etl_brick_raw_db_to_brick_raw_df,
     etl_mud_dfs_to_brick_raw_tables,

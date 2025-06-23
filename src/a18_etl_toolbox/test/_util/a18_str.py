@@ -14,6 +14,10 @@ def brick_agg_str() -> str:
     return "brick_agg"
 
 
+def brick_raw_str() -> str:
+    return "brick_raw"
+
+
 def brick_valid_str() -> str:
     return "brick_valid"
 

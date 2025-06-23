@@ -5,10 +5,6 @@ def allowed_crud_str() -> str:
     return "allowed_crud"
 
 
-def brick_raw_str() -> str:
-    return "brick_raw"
-
-
 def build_order_str() -> str:
     return "build_order"
 
