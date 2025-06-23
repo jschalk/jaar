@@ -229,7 +229,7 @@ def get_default_sorted_list(
 
 
 def get_idea_sqlite_types() -> dict[str, str]:
-    """Contains the sqlite_type for all idea and plan_calc columns"""
+    """Returns dictionary of sqlite_type for all idea elements (reference source: get_idea_elements_sort_order)"""
 
     return {
         "world_id": "TEXT",

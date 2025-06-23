@@ -122,6 +122,8 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
 
 
 def etl_mud_dfs_to_brick_raw_tables(conn: sqlite3_Connection, mud_dir: str):
+    idea_sqlite_types = get_idea_sqlite_types()
+
     for ref in get_all_idea_dataframes(mud_dir):
         x_file_path = create_path(ref.file_dir, ref.filename)
         df = pandas_read_excel(x_file_path, ref.sheet_name)
@@ -136,17 +138,34 @@ def etl_mud_dfs_to_brick_raw_tables(conn: sqlite3_Connection, mud_dir: str):
         x_tablename = f"{ref.idea_number}_brick_raw"
         df.to_sql(x_tablename, conn, index=False, if_exists="append")
 
+        # CREATE BRICK RAW TABLE (column types are defined in idea_sqlite_types dict)
+        # CREATE BRICK ERROR TABLE includes error_message column (column types are all text)
 
-def etl_brick_raw_db_to_brick_raw_df(conn: sqlite3_Connection, brick_dir: str):
-    brick_raw_dict = {f"{idea}_brick_raw": idea for idea in get_idea_numbers()}
-    brick_raw_tables = set(brick_raw_dict.keys())
-    for table_name in get_db_tables(conn):
-        if table_name in brick_raw_tables:
-            idea_number = brick_raw_dict.get(table_name)
-            brick_path = create_path(brick_dir, f"{idea_number}.xlsx")
-            sqlstr = f"SELECT * FROM {table_name}"
-            brick_raw_idea_df = pandas_read_sql_query(sqlstr, conn)
-            upsert_sheet(brick_path, "brick_raw", brick_raw_idea_df)
+        for idx, row in df.iterrows():
+            print(f"{row.to_dict()=}")
+            # CREATE INSERT INTO SQLSTR for brick_raw table
+            # CREATE INSERT INTO SQLSTR for brick_error table
+
+            # issues = set()
+            # for col, expected_type in idea_sqlite_types.items():
+            #     value = row[col]
+            #     if expected_type == "Integer":
+            #         try:
+            #             int_val = int(value)
+            #             if isinstance(value, float) and not value.is_integer():
+            #                 raise ValueError("float with fractional part")
+            #         except (ValueError, TypeError):
+            #             issues[col] = (f"{col} (expected Integer)")
+            #     elif expected_type == "Real":
+            #         try:
+            #             float(value)
+            #         except (ValueError, TypeError):
+            #             issues.append(f"{col} (expected Real)")
+            #     elif expected_type == "Text":
+            #         # Text is assumed always valid
+            #         continue
+            #     else:
+            #         issues.append(f"{col} (unknown expected type '{expected_type}')")
 
 
 def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
