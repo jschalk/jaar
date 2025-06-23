@@ -321,17 +321,17 @@ class BeliefUnit:
         )
 
     def paypurchase_exists(
-        self, src: AcctName, dst: AcctName, x_tran_time: TimeLinePoint
+        self, src: OwnerName, dst: AcctName, x_tran_time: TimeLinePoint
     ) -> bool:
         return self.paybook.tranunit_exists(src, dst, x_tran_time)
 
     def get_paypurchase(
-        self, src: AcctName, dst: AcctName, x_tran_time: TimeLinePoint
+        self, src: OwnerName, dst: AcctName, x_tran_time: TimeLinePoint
     ) -> TranUnit:
         return self.paybook.get_tranunit(src, dst, x_tran_time)
 
     def del_paypurchase(
-        self, src: AcctName, dst: AcctName, x_tran_time: TimeLinePoint
+        self, src: OwnerName, dst: AcctName, x_tran_time: TimeLinePoint
     ) -> TranUnit:
         return self.paybook.del_tranunit(src, dst, x_tran_time)
 

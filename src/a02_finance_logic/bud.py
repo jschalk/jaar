@@ -32,14 +32,14 @@ DEFAULT_CELLDEPTH = 2
 
 @dataclass
 class TranUnit:
-    src: AcctName = None
+    src: OwnerName = None
     dst: AcctName = None
     tran_time: TimeLinePoint = None
     amount: FundNum = None
 
 
 def tranunit_shop(
-    src: AcctName, dst: AcctName, tran_time: TimeLinePoint, amount: FundNum
+    src: OwnerName, dst: AcctName, tran_time: TimeLinePoint, amount: FundNum
 ) -> TranUnit:
     return TranUnit(src=src, dst=dst, tran_time=tran_time, amount=amount)
 
@@ -84,24 +84,24 @@ class TranBook:
         set_in_nested_dict(self.tranunits, x_keylist, amount)
 
     def tranunit_exists(
-        self, src: AcctName, dst: AcctName, tran_time: TimeLinePoint
+        self, src: OwnerName, dst: AcctName, tran_time: TimeLinePoint
     ) -> bool:
         return get_from_nested_dict(self.tranunits, [src, dst, tran_time], True) != None
 
     def get_tranunit(
-        self, src: AcctName, dst: AcctName, tran_time: TimeLinePoint
+        self, src: OwnerName, dst: AcctName, tran_time: TimeLinePoint
     ) -> TranUnit:
         x_amount = get_from_nested_dict(self.tranunits, [src, dst, tran_time], True)
         if x_amount != None:
             return tranunit_shop(src, dst, tran_time, x_amount)
 
     def get_amount(
-        self, src: AcctName, dst: AcctName, tran_time: TimeLinePoint
+        self, src: OwnerName, dst: AcctName, tran_time: TimeLinePoint
     ) -> TranUnit:
         return get_from_nested_dict(self.tranunits, [src, dst, tran_time], True)
 
     def del_tranunit(
-        self, src: AcctName, dst: AcctName, tran_time: TimeLinePoint
+        self, src: OwnerName, dst: AcctName, tran_time: TimeLinePoint
     ) -> TranUnit:
         x_keylist = [src, dst, tran_time]
         if exists_in_nested_dict(self.tranunits, x_keylist):
