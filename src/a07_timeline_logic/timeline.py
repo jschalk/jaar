@@ -420,8 +420,8 @@ def get_min_from_dt(
 ) -> int:
     offset_rope = x_plan.make_rope(timeline_rope, "yr1_jan1_offset")
     offset_concept = x_plan.get_concept_obj(offset_rope)
-    offset_amount = offset_concept.addin
-    return get_min_from_dt_offset(x_datetime, offset_amount)
+    offset_addin = offset_concept.addin
+    return get_min_from_dt_offset(x_datetime, offset_addin)
 
 
 def get_timeline_min_difference(timeline_config0: dict, timeline_config1: dict) -> int:

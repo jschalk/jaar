@@ -1,11 +1,12 @@
 from sqlite3 import connect as sqlite3_connect
-from src.a02_finance_logic.test._util.a02_str import belief_label_str, owner_name_str
 from src.a06_plan_logic.test._util.a06_str import (
     acct_cred_points_str,
     acct_debt_points_str,
     acct_name_str,
+    belief_label_str,
     concept_rope_str,
     labor_title_str,
+    owner_name_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a15_belief_logic.test._util.a15_str import amount_str

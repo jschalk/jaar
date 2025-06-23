@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.a02_finance_logic.bud import brokerunit_shop
+from src.a11_bud_logic.bud import brokerunit_shop
 from src.a15_belief_logic.belief import beliefunit_shop
 from src.a15_belief_logic.test._util.a15_env import get_module_temp_dir
 

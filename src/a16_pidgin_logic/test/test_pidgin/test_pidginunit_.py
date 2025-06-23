@@ -1,6 +1,5 @@
 from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import default_knot_if_None
-from src.a02_finance_logic.test._util.a02_str import belief_label_str, owner_name_str
 from src.a06_plan_logic.test._util.a06_str import (
     LabelTerm_str,
     NameTerm_str,
@@ -8,6 +7,7 @@ from src.a06_plan_logic.test._util.a06_str import (
     TitleTerm_str,
     acct_name_str,
     awardee_title_str,
+    belief_label_str,
     concept_label_str,
     concept_rope_str,
     fcontext_str,
@@ -17,6 +17,7 @@ from src.a06_plan_logic.test._util.a06_str import (
     group_title_str,
     healer_name_str,
     labor_title_str,
+    owner_name_str,
     penny_str,
     pstate_str,
     rcontext_str,

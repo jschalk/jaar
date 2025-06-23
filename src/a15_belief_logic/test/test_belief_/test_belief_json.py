@@ -5,8 +5,9 @@ from src.a02_finance_logic.finance_config import (
     default_RespectBit_if_None,
     filter_penny,
 )
-from src.a02_finance_logic.test._util.a02_str import belief_label_str, knot_str
+from src.a02_finance_logic.test._util.a02_str import knot_str
 from src.a06_plan_logic.test._util.a06_str import (
+    belief_label_str,
     fund_iota_str,
     penny_str,
     respect_bit_str,

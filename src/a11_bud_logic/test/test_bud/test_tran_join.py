@@ -1,4 +1,4 @@
-from src.a02_finance_logic.bud import tranbook_shop, tranunit_shop
+from src.a11_bud_logic.bud import tranbook_shop, tranunit_shop
 
 
 def test_TranBook_join_SetsAttr():

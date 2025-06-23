@@ -1,10 +1,11 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a02_finance_logic.test._util.a02_str import belief_label_str, owner_name_str
 from src.a06_plan_logic.plan import planunit_shop
 from src.a06_plan_logic.test._util.a06_str import (
     acct_cred_points_str,
     acct_debt_points_str,
     acct_name_str,
+    belief_label_str,
+    owner_name_str,
 )
 from src.a12_hub_toolbox.hub_tool import gut_file_exists, open_gut_file
 from src.a17_idea_logic.idea import get_idearef_obj, load_idea_csv, save_idea_csv

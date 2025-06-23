@@ -215,42 +215,6 @@ def test_HubUnit_treasury_db_file_exists_ReturnsObj(env_dir_setup_cleanup):
     assert sue_hubunit.treasury_db_file_exists()
 
 
-# def test_HubUnit_treasury_db_file_conn_CreatesTreasuryDBIfDoesNotExist(
-#     env_dir_setup_cleanup,
-# ):
-#     # ESTABLISH create
-#     sue_str = "Sue"
-#     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, get_texas_rope())
-
-#     # WHEN / THEN
-#     with pytest_raises(Exception) as excinfo:
-#         check_connection(sue_hubunit.treasury_db_file_conn())
-#     assert str(excinfo.value) == "unable to popen database file"
-
-#     # WHEN
-#     sue_hubunit.create_treasury_db_file()
-
-#     # THEN
-#     assert check_connection(sue_hubunit.treasury_db_file_conn())
-
-
-def test_HubUnit_treasury_db_file_conn_RaisesErrorIfMissing_keep_rope(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH create
-    sue_str = "Sue"
-    a23_str = "accord23"
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
-
-    # WHEN / THEN
-    with pytest_raises(Exception) as excinfo:
-        sue_hubunit.treasury_db_file_conn()
-    assert (
-        str(excinfo.value)
-        == f"hubunit cannot connect to treasury_db_file because keep_rope is {sue_hubunit.keep_rope}"
-    )
-
-
 def test_HubUnit_create_gut_treasury_db_files_CreatesDatabases(
     env_dir_setup_cleanup, graphics_bool
 ):

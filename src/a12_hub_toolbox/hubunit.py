@@ -1,8 +1,7 @@
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 from os.path import exists as os_path_exists
-from sqlite3 import Connection, connect as sqlite3_connect
-from src.a00_data_toolbox.db_toolbox import sqlite_connection
+from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.dict_toolbox import get_empty_set_if_None
 from src.a00_data_toolbox.file_toolbox import (
     create_path,
@@ -466,15 +465,6 @@ class HubUnit:
 
     def treasury_db_file_exists(self) -> bool:
         return os_path_exists(self.treasury_db_path())
-
-    def treasury_db_file_conn(self) -> Connection:
-        if self.keep_rope is None:
-            raise _keep_ropeMissingException(
-                f"hubunit cannot connect to treasury_db_file because keep_rope is {self.keep_rope}"
-            )
-        if self.treasury_db_file_exists() is False:
-            self.create_treasury_db_file()
-        return sqlite_connection(self.treasury_db_path())
 
     def create_gut_treasury_db_files(self):
         for x_keep_rope in self.get_keep_ropes():

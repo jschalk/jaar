@@ -1,5 +1,4 @@
 from src.a00_data_toolbox.file_toolbox import get_dir_file_strs
-from src.a02_finance_logic.test._util.a02_str import belief_label_str, owner_name_str
 from src.a06_plan_logic.test._util.a06_str import (
     acct_cred_points_str,
     acct_debt_points_str,
@@ -7,6 +6,7 @@ from src.a06_plan_logic.test._util.a06_str import (
     acct_pool_str,
     addin_str,
     begin_str,
+    belief_label_str,
     close_str,
     concept_rope_str,
     denom_str,
@@ -17,6 +17,7 @@ from src.a06_plan_logic.test._util.a06_str import (
     mass_str,
     morph_str,
     numor_str,
+    owner_name_str,
     plan_acctunit_str,
     planunit_str,
     stop_want_str,

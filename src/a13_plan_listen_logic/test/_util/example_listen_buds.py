@@ -1,4 +1,4 @@
-from src.a02_finance_logic.bud import BudUnit, budunit_shop
+from src.a11_bud_logic.bud import BudUnit, budunit_shop
 
 
 def get_budunit_55_example() -> BudUnit:

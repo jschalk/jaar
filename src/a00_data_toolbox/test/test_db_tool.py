@@ -27,7 +27,6 @@ from src.a00_data_toolbox.db_toolbox import (
     insert_csv,
     required_columns_exist,
     rowdata_shop,
-    sqlite_connection,
     sqlite_obj_str,
 )
 from src.a00_data_toolbox.file_toolbox import create_path, delete_dir, set_dir
@@ -97,7 +96,7 @@ def test_RowData_Exists():
 def test_rowdata_shop_ReturnsObj():
     # ESTABLISH
     x_tablename = "earth"
-    with sqlite_connection(":memory:") as conn:
+    with sqlite3_connect(":memory:") as conn:
         res = conn.execute("SELECT 'Earth' AS name, 6378 AS radius")
         row = res.fetchone()
         print(f"{row=}")
@@ -123,7 +122,7 @@ def test_rowdata_shop_RaiseErrorIf_row_dict_IsNotDict():
     x_tablename = "earth"
 
     # WHEN / THEN
-    with sqlite_connection(":memory:") as conn:
+    with sqlite3_connect(":memory:") as conn:
         conn.row_factory = None
         res = conn.execute("SELECT 'Earth' AS name, 6378 AS radius")
         row = res.fetchone()
@@ -138,8 +137,8 @@ def test_rowdata_shop_RaiseErrorIf_row_dict_IsNotDict():
 def test_rowdata_shop_ReturnsObjWithoutNone():
     # ESTABLISH
     x_tablename = "earth"
-    with sqlite_connection(":memory:") as conn:
-        # conn.row_factory = dict_factory
+    with sqlite3_connect(":memory:") as conn:
+        conn.row_factory = dict_factory
         res2 = conn.execute("SELECT 'Earth' AS name, 6378 AS radius, NULL as color")
         row2 = res2.fetchone()
         print(f"{row2=}")
@@ -160,7 +159,7 @@ def test_get_rowdata_ReturnsObj():
     x_tablename = "earth"
 
     # WHEN
-    with sqlite_connection(":memory:") as conn:
+    with sqlite3_connect(":memory:") as conn:
         select_sqlstr = "SELECT 'Earth' AS name, 6378 AS radius, NULL as color"
         x_rowdata = get_rowdata(x_tablename, conn, select_sqlstr)
 
@@ -398,7 +397,7 @@ def test_insert_csv_ChangesNotCommitted(
 
         insert_csv(csv_path, cursor, test_tablename)
 
-    # Close and reopen the connection to verify persistence
+    # reopen the connection to verify persistence
     with sqlite3_connect(get_example_test_database7_path()) as conn2:
         cursor2 = conn2.cursor()
         cursor2.execute(get_create_test_table_sqlstr())
@@ -526,7 +525,7 @@ def test_sqlite_version():
 
 def test_get_table_columns_ReturnsObj_Scenario0_TableDoesNotExist():
     x_tablename = "some_dark_side_table"
-    with sqlite_connection(":memory:") as conn:
+    with sqlite3_connect(":memory:") as conn:
         assert db_table_exists(conn, x_tablename) is False
 
         # WHEN / THEN
@@ -535,7 +534,7 @@ def test_get_table_columns_ReturnsObj_Scenario0_TableDoesNotExist():
 
 def test_get_table_columns_ReturnsObj_Scenario1_TableExists():
     # ESTABLISH
-    with sqlite_connection(":memory:") as conn:
+    with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_table_sqlstr = get_create_test_table_sqlstr()
         x_tablename = get_example_test_tablename()

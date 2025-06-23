@@ -3,7 +3,6 @@ from os import getcwd as os_getcwd
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a01_term_logic.test._util.a01_str import knot_str
-from src.a02_finance_logic.test._util.a02_str import belief_label_str, owner_name_str
 from src.a03_group_logic.test._util.a03_str import (
     _credor_pool_str,
     _debtor_pool_str,
@@ -30,11 +29,13 @@ from src.a03_group_logic.test._util.a03_str import (
 from src.a04_reason_logic.test._util.a04_str import (
     _chore_str,
     _status_str,
+    belief_label_str,
     fcontext_str,
     fnigh_str,
     fopen_str,
     fstate_str,
     labor_title_str,
+    owner_name_str,
     pdivisor_str,
     pnigh_str,
     popen_str,

@@ -1,5 +1,6 @@
 from pytest import raises as pytest_raises
-from src.a00_data_toolbox.db_toolbox import get_rowdata, sqlite_connection
+from sqlite3 import connect as sqlite3_connect
+from src.a00_data_toolbox.db_toolbox import get_rowdata
 from src.a01_term_logic.rope import create_rope
 from src.a06_plan_logic.test._util.a06_str import (
     concept_rope_str,
@@ -109,7 +110,7 @@ def test_get_planatom_from_rowdata_ReturnsObj_concept_factunit():
 , '{knee_rope}' as {x_dimen}_{INSERT_str()}_{fcontext_str()}
 , {knee_fopen} as {x_dimen}_{INSERT_str()}_{fopen_str()}
 """
-    with sqlite_connection(":memory:") as x_conn:
+    with sqlite3_connect(":memory:") as x_conn:
         x_rowdata = get_rowdata(atom_hx_str(), x_conn, x_sqlstr)
 
     # WHEN

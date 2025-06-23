@@ -1,7 +1,8 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_create_table_sqlstr
-from src.a02_finance_logic.test._util.a02_str import belief_label_str, owner_name_str
 from src.a06_plan_logic.test._util.a06_str import (
+    belief_label_str,
+    owner_name_str,
     plan_acct_membership_str,
     plan_acctunit_str,
     plan_concept_awardlink_str,

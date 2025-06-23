@@ -6,8 +6,6 @@ from src.a01_term_logic.test._util.a01_str import (
     parent_rope_str,
 )
 from src.a02_finance_logic.test._util.a02_str import (
-    acct_name_str,
-    amount_str,
     fund_iota_str,
     fund_pool_str,
     penny_str,
@@ -15,6 +13,7 @@ from src.a02_finance_logic.test._util.a02_str import (
 from src.a03_group_logic.test._util.a03_str import (
     acct_cred_points_str,
     acct_debt_points_str,
+    acct_name_str,
     awardee_title_str,
     fund_give_str,
     fund_take_str,
@@ -22,10 +21,12 @@ from src.a03_group_logic.test._util.a03_str import (
     group_cred_points_str,
     group_debt_points_str,
     group_title_str,
+    owner_name_str,
     respect_bit_str,
     take_force_str,
 )
 from src.a04_reason_logic.test._util.a04_str import (
+    belief_label_str,
     fcontext_str,
     fnigh_str,
     fopen_str,

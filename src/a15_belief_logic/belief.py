@@ -20,16 +20,6 @@ from src.a01_term_logic.term import (
     RopeTerm,
     default_knot_if_None,
 )
-from src.a02_finance_logic.bud import (
-    BrokerUnit,
-    BudUnit,
-    TranBook,
-    TranUnit,
-    brokerunit_shop,
-    get_brokerunit_from_dict,
-    get_tranbook_from_dict,
-    tranbook_shop,
-)
 from src.a02_finance_logic.finance_config import (
     BitNum,
     FundIota,
@@ -42,7 +32,17 @@ from src.a02_finance_logic.finance_config import (
 )
 from src.a06_plan_logic.plan import PlanUnit, planunit_shop
 from src.a07_timeline_logic.timeline import TimeLineUnit, timelineunit_shop
-from src.a11_bud_cell_logic.cell import cellunit_shop
+from src.a11_bud_logic.bud import (
+    BrokerUnit,
+    BudUnit,
+    TranBook,
+    TranUnit,
+    brokerunit_shop,
+    get_brokerunit_from_dict,
+    get_tranbook_from_dict,
+    tranbook_shop,
+)
+from src.a11_bud_logic.cell import cellunit_shop
 from src.a12_hub_toolbox.basis_plans import create_listen_basis, get_default_job
 from src.a12_hub_toolbox.hub_path import create_belief_json_path, create_cell_dir_path
 from src.a12_hub_toolbox.hub_tool import (
@@ -321,17 +321,17 @@ class BeliefUnit:
         )
 
     def paypurchase_exists(
-        self, src: AcctName, dst: AcctName, x_tran_time: TimeLinePoint
+        self, src: OwnerName, dst: AcctName, x_tran_time: TimeLinePoint
     ) -> bool:
         return self.paybook.tranunit_exists(src, dst, x_tran_time)
 
     def get_paypurchase(
-        self, src: AcctName, dst: AcctName, x_tran_time: TimeLinePoint
+        self, src: OwnerName, dst: AcctName, x_tran_time: TimeLinePoint
     ) -> TranUnit:
         return self.paybook.get_tranunit(src, dst, x_tran_time)
 
     def del_paypurchase(
-        self, src: AcctName, dst: AcctName, x_tran_time: TimeLinePoint
+        self, src: OwnerName, dst: AcctName, x_tran_time: TimeLinePoint
     ) -> TranUnit:
         return self.paybook.del_tranunit(src, dst, x_tran_time)
 

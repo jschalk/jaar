@@ -186,42 +186,6 @@ def get_row_count(db_conn: sqlite3_Connection, table_name: str) -> str:
     return get_single_result(db_conn, get_row_count_sqlstr(table_name))
 
 
-def check_table_column_existence(
-    tables_dict: dict, db_conn: sqlite3_Connection
-) -> bool:
-    db_tables = get_db_tables(db_conn)
-    db_tables_columns = get_db_columns(db_conn)
-
-    # # for table_name, table_dict in tables_dict.items():
-    # for table_name in tables_dict:
-    #     if db_tables.get(table_name) is None:
-    #         # (f"Table {table_name} is missing")
-    #         return False
-
-    #     # db_columns = set(db_tables_columns.get(table_name).keys())
-    #     # config_columns = set(table_dict.get("columns").keys())
-    #     # diff_columns = db_columns.symmetric_difference(config_columns)
-    #     # (f"Table: {table_name} Column differences: {diff_columns}")
-
-    #     # if diff_columns:
-    #     #     return False
-    return all(db_tables.get(table_name) is not None for table_name in tables_dict)
-
-
-@contextmanager
-def sqlite_connection(db_name) -> Generator[sqlite3_Connection, Any, None]:
-    conn = sqlite3_connect(db_name)
-    conn.row_factory = dict_factory
-    try:
-        yield conn
-        conn.commit()
-    except Exception:
-        conn.rollback()
-        raise
-    finally:
-        conn.close()
-
-
 def _get_grouping_select_clause(
     groupby_columns: list[str], value_columns: list[str]
 ) -> str:
@@ -277,7 +241,7 @@ def insert_csv(csv_file_path: str, conn_or_cursor: sqlite3_Connection, table_nam
 
     Args:
         csv_file_path (str): Path to the CSV file.
-        sqlite_connection (sqlite3.Connection): SQLite database connection object.
+        conn_or_cursor (sqlite3.Connection): SQLite database connection object.
         table_name (str): Name of the table to insert data into.
 
     Returns:
@@ -344,7 +308,7 @@ def create_table_from_csv(
 
     Args:
         csv_file_path (str): Path to the CSV file.
-        sqlite_connection (sqlite3.Connection): SQLite database connection object.
+        conn_or_cursor (sqlite3.Connection): SQLite database connection object.
         table_name (str): Name of the table to create.
         column_types (dict): Dictionary mapping column names to their SQLite data types.
 

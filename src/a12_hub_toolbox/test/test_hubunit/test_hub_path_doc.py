@@ -1,11 +1,11 @@
 from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
-from src.a02_finance_logic.test._util.a02_str import (
+from src.a09_pack_logic.test._util.a09_str import (
     belief_label_str,
     bud_time_str,
+    event_int_str,
     owner_name_str,
 )
-from src.a09_pack_logic.test._util.a09_str import event_int_str
 from src.a12_hub_toolbox.hub_path import (
     belief_agenda_list_report_path,
     create_atoms_dir_path,

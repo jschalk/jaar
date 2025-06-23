@@ -1,6 +1,6 @@
 from sqlite3 import Cursor as sqlite3_Cursor
 from src.a00_data_toolbox.dict_toolbox import set_in_nested_dict
-from src.a02_finance_logic.bud import BeliefLabel
+from src.a11_bud_logic.bud import BeliefLabel
 from src.a18_etl_toolbox.tran_sqlstrs import get_belief_voice_select1_sqlstrs
 
 

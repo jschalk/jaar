@@ -1,6 +1,5 @@
 from src.a01_term_logic.rope import RopeTerm, create_rope, create_rope_from_labels
 from src.a01_term_logic.term import BeliefLabel
-from src.a02_finance_logic.bud import BudUnit, budunit_shop
 from src.a05_concept_logic.concept import get_default_belief_label
 from src.a06_plan_logic.test._util.a06_str import (
     acct_name_str,
@@ -21,6 +20,7 @@ from src.a08_plan_atom_logic.test._util.a08_str import (
 )
 from src.a09_pack_logic.delta import PlanDelta, plandelta_shop
 from src.a09_pack_logic.pack import PackUnit, packunit_shop
+from src.a11_bud_logic.bud import BudUnit, budunit_shop
 from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.a12_hub_toolbox.test._util.a12_env import get_module_temp_dir
 

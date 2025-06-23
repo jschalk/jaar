@@ -3,11 +3,12 @@ from os import remove as os_remove
 from os.path import exists as os_path_exists
 from pytest import fixture as pytest_fixture
 from sqlite3 import Connection as sqlite3_Connection, connect as sqlite3_connect
-from src.a02_finance_logic.test._util.a02_str import belief_label_str, owner_name_str
 from src.a06_plan_logic.test._util.a06_str import (
     acct_name_str,
+    belief_label_str,
     gogo_want_str,
     group_title_str,
+    owner_name_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a17_idea_logic.idea_config import get_idea_sqlite_types

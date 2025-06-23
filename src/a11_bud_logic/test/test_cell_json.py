@@ -1,9 +1,8 @@
-from src.a02_finance_logic.test._util.a02_str import quota_str
 from src.a06_plan_logic.plan import planunit_shop
 from src.a06_plan_logic.test._util.a06_str import penny_str
 from src.a09_pack_logic.test._util.a09_str import event_int_str
-from src.a11_bud_cell_logic.cell import cellunit_get_from_dict, cellunit_shop
-from src.a11_bud_cell_logic.test._util.a11_str import (
+from src.a11_bud_logic.cell import cellunit_get_from_dict, cellunit_shop
+from src.a11_bud_logic.test._util.a11_str import (
     ancestors_str,
     boss_facts_str,
     bud_owner_name_str,
@@ -12,8 +11,9 @@ from src.a11_bud_cell_logic.test._util.a11_str import (
     mandate_str,
     planadjust_str,
     planevent_facts_str,
+    quota_str,
 )
-from src.a11_bud_cell_logic.test._util.example_factunits import (
+from src.a11_bud_logic.test._util.example_factunits import (
     example_casa_clean_factunit as clean_factunit,
     example_casa_dirty_factunit as dirty_factunit,
     example_sky_blue_factunit as sky_blue_factunit,

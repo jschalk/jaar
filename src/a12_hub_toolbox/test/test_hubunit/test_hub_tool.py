@@ -2,7 +2,6 @@ from os.path import exists as os_path_exists
 from pytest import raises as pytest_raises
 from src.a00_data_toolbox.file_toolbox import create_path, open_json, set_dir
 from src.a01_term_logic.rope import create_rope
-from src.a02_finance_logic.test._util.a02_str import quota_str
 from src.a06_plan_logic.plan import planunit_shop
 from src.a06_plan_logic.test._util.a06_str import penny_str
 from src.a06_plan_logic.test._util.example_plans import (
@@ -10,13 +9,14 @@ from src.a06_plan_logic.test._util.example_plans import (
     get_planunit_with_4_levels,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str
-from src.a11_bud_cell_logic.cell import CELLNODE_QUOTA_DEFAULT, cellunit_shop
-from src.a11_bud_cell_logic.test._util.a11_str import (
+from src.a11_bud_logic.cell import CELLNODE_QUOTA_DEFAULT, cellunit_shop
+from src.a11_bud_logic.test._util.a11_str import (
     ancestors_str,
     bud_owner_name_str,
     celldepth_str,
+    quota_str,
 )
-from src.a11_bud_cell_logic.test._util.example_factunits import (
+from src.a11_bud_logic.test._util.example_factunits import (
     example_casa_clean_factunit as clean_factunit,
     example_casa_dirty_factunit as dirty_factunit,
     example_casa_grimy_factunit as grimy_factunit,
