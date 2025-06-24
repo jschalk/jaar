@@ -6,14 +6,15 @@ def get_plan_calc_config_filename() -> str:
     return "plan_calc_config.json"
 
 
-def config_file_path() -> str:
+def config_plan_calc_file_path() -> str:
+    """src/plan_calc_module/plan_calc_config.json"""
     src_dir = create_path(os_getcwd(), "src")
     config_file_dir = create_path(src_dir, "a10_plan_calc")
     return create_path(config_file_dir, get_plan_calc_config_filename())
 
 
 def get_plan_calc_config_dict() -> dict[str, dict]:
-    return open_json(config_file_path())
+    return open_json(config_plan_calc_file_path())
 
 
 def get_plan_calc_dimen_args(dimen: str) -> set:

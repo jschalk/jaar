@@ -474,7 +474,7 @@ def get_from_json(x_belief_json: str) -> BeliefUnit:
     return get_from_dict(get_dict_from_json(x_belief_json))
 
 
-def get_from_default_path(
+def get_default_path_belief(
     belief_mstr_dir: str, belief_label: BeliefLabel
 ) -> BeliefUnit:
     belief_json_path = create_belief_json_path(belief_mstr_dir, belief_label)

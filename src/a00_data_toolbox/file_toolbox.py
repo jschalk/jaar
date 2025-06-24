@@ -32,6 +32,7 @@ from tempfile import TemporaryFile as tempfile_TemporaryFile
 
 
 def create_path(x_dir: any, filename: any) -> str:
+    """Create a path by joining two parameters, both parameters are converted to strings."""
     if not x_dir:
         return f"{filename}" if filename else ""
     x_dir = str(x_dir)
@@ -182,6 +183,7 @@ def rename_dir(src, dst):
 
 
 def get_directory_path(x_list: list[str] = None) -> str:
+    """Create directory path from a list of strs."""
     x_list = [] if x_list is None else x_list
     x_str = ""
     while x_list != []:

@@ -4,8 +4,17 @@ from ast import (
     parse as ast_parse,
     walk as ast_walk,
 )
+from importlib.util import (
+    module_from_spec as importlib_util_module_from_spec,
+    spec_from_file_location as importlib_util_spec_from_file_location,
+)
+import inspect
 from os import walk as os_walk
-from os.path import join as os_path_join
+from os.path import (
+    basename as os_path_basename,
+    join as os_path_join,
+    splitext as os_path_splitext,
+)
 from src.a00_data_toolbox.file_toolbox import (
     create_path,
     get_dir_filenames,
@@ -231,3 +240,14 @@ def check_str_func_test_file_has_needed_asserts(
             str_util_path = create_path(util_dir, f"a{desc_number_str}_str.py")
             print(f"{str_util_path} {str_func_assert_str=}")
         assert test_file_str.find(str_func_assert_str) > 0
+
+
+def get_docstring(file_path, function_name):
+    # Load module from file path
+    module_name = os_path_splitext(os_path_basename(file_path))[0]
+    spec = importlib_util_spec_from_file_location(module_name, file_path)
+    module = importlib_util_module_from_spec(spec)
+    spec.loader.exec_module(module)
+
+    func = getattr(module, function_name)
+    return inspect.getdoc(func)  # Cleans up whitespace

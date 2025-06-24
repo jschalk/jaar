@@ -12,6 +12,7 @@ from src.a99_module_logic.module_eval import (
     check_str_func_test_file_has_needed_asserts,
     check_str_funcs_are_not_duplicated,
     get_all_str_functions,
+    get_docstring,
     get_duplicated_functions,
     get_function_names_from_file,
     get_imports_from_file,
@@ -96,10 +97,6 @@ def test_Modules_NonTestFilesDoNotHaveImportStringFunctions():
     # ESTABLISH / WHEN / THEN
     for module_desc, module_dir in get_module_descs().items():
         for file_path, file_imports in get_python_files_with_flag(module_dir).items():
-            # check_module_imports_are_ordered(file_imports, file_path, desc_number)
-            # TODO uncomment and correct all file imports
-            # check_import_objs_are_ordered(file_imports, file_path)
-
             filename = str(os_path_basename(file_path))
             file_path = str(file_path)
             print(f"{file_path=}")
@@ -125,9 +122,7 @@ def test_Modules_util_AssestsExistForEveryStrFunction():
 
     # sourcery skip: no-loop-in-tests
     # sourcery skip: no-conditionals-in-tests
-    # ESTABLISH
-
-    # WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     running_str_functions = set()
     for module_desc, module_dir in get_module_descs().items():
         desc_number_str = module_desc[1:3]
@@ -232,7 +227,7 @@ def test_Modules_CheckMarkdownHasAllStrFunctions():
     assert open(dst_path).read() == str_func_markdown
 
 
-def test_Modules_most_functions_are_uniquely_named():
+def test_Modules_MostFunctionsAreUniquelyNamed():
     # ESTABLISH
     excluded_functions = {
         "_example_empty_bob_planunit",
@@ -372,3 +367,42 @@ def test_Modules_most_functions_are_uniquely_named():
     # THEN
     assertion_fail_str = f"Duplicated functions found: {duplicated_functions}"
     assert not duplicated_functions, assertion_fail_str
+
+
+def test_Modules_path_FunctionStructureAndFormat():
+    # ESTABLISH
+    excluded_functions = {
+        "atom_file_path",
+        "duty_path",
+        "get_db_path",
+        "grade_path",
+        "pack_file_path",
+        "treasury_db_path",
+        "vision_path",
+    }
+
+    # WHEN
+    x_count = 0
+    path_functions = {}
+    for module_desc, module_dir in get_module_descs().items():
+        filenames_set = get_dir_filenames(module_dir, include_extensions={"py"})
+        for filenames in filenames_set:
+            file_dir = create_path(module_dir, filenames[0])
+            file_path = create_path(file_dir, filenames[1])
+            file_functions = get_function_names_from_file(file_path)
+            for function_name in file_functions:
+                x_count += 1
+                if str(function_name).endswith("_path"):
+                    # print(
+                    #     f"Function #{x_count}: Path function {function_name} in {file_path}"
+                    # )
+                    path_functions[function_name] = file_path
+
+    print(f"Total path functions found: {len(path_functions)}")
+    for function_name, file_path in path_functions.items():
+        if function_name not in excluded_functions:
+            func_docstring = get_docstring(file_path, function_name)
+            print(f"docstring for {function_name}: \t{func_docstring}")
+            assert func_docstring is not None
+
+    print(f"Path functions: {path_functions.keys()=}")

@@ -118,7 +118,7 @@ from src.a08_plan_atom_logic.test._util.a08_str import (
     sqlite_datatype_str,
 )
 from src.a10_plan_calc.plan_calc_config import (
-    config_file_path,
+    config_plan_calc_file_path,
     get_all_plan_calc_args,
     get_plan_calc_args_sqlite_datatype_dict,
     get_plan_calc_args_type_dict,
@@ -138,8 +138,8 @@ def test_get_plan_calc_config_dict_Exists():
     # WHEN / THEN
     assert get_plan_calc_config_filename() == "plan_calc_config.json"
     expected_path = create_path(expected_dir, get_plan_calc_config_filename())
-    assert config_file_path() == expected_path
-    assert os_path_exists(config_file_path())
+    assert config_plan_calc_file_path() == expected_path
+    assert os_path_exists(config_plan_calc_file_path())
 
 
 def test_get_plan_calc_config_dict_ReturnsObj_CheckLevel0Keys():
