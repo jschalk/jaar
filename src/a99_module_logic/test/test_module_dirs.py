@@ -17,7 +17,7 @@ from src.a99_module_logic.module_eval import (
 )
 
 
-def test_ModuleStrFunctionsTestFileFormat():
+def test_Module_util_FilesExist():
     # sourcery skip: no-loop-in-tests
     # sourcery skip: no-conditionals-in-tests
     # ESTABLISH
@@ -47,17 +47,50 @@ def test_ModuleStrFunctionsTestFileFormat():
         # previous_module_number = module_number
 
 
-def test_PythonFileImportsFormat():
-    """Check all non-test python file do not import str functions"""
+def test_Modules_DoNotHaveEmptyDirectories():
+    # sourcery skip: no-loop-in-tests
+    # sourcery skip: no-conditionals-in-tests
+    # ESTABLISH
+    print_str = "print"
+
+    # WHEN / THEN
+    for module_desc, module_dir in get_module_descs().items():
+        for dirpath, dirnames, filenames in os_walk(module_dir):
+            assert_fail_str = f"{module_desc} Empty directory found: {dirpath}"
+            if dirnames == ["__pycache__"] and filenames == []:
+                print(f"{dirnames} {dirpath}")
+                dirnames = []
+            # print(f"{dirnames=}")
+            # print(f"{filenames=}")
+            assert dirnames or filenames, assert_fail_str
+
+
+def test_Modules_NonTestFilesDoNotHavePrintStatments():
+    # sourcery skip: no-loop-in-tests
+    # sourcery skip: no-conditionals-in-tests
+    # ESTABLISH
+    print_str = "print"
+
+    # WHEN / THEN
+    for module_desc, module_dir in get_module_descs().items():
+        desc_number_str = module_desc[1:3]
+        py_files = [f for f in os_listdir(module_dir) if f.endswith(".py")]
+        for py_file in py_files:
+            py_file_path = create_path(module_dir, py_file)
+            py_file_str = open(py_file_path).read()
+            if py_file_str.find(print_str) > -1:
+                print(f"Module {module_desc} file {py_file_path} has print statement")
+            assert py_file_str.find(print_str) == -1
+
+
+def test_Modules_NonTestFilesDoNotHaveImportStringFunctions():
+    """Check all non-test python files do not import str functions"""
 
     # sourcery skip: no-loop-in-tests
     # sourcery skip: no-conditionals-in-tests
     # ESTABLISH / WHEN / THEN
     for module_desc, module_dir in get_module_descs().items():
-        python_files = get_python_files_with_flag(module_dir)
-        desc_number = int(module_desc[1:3])
-        # print(f"{desc_number} {module_desc=} {len(python_files)=}")
-        for file_path, file_imports in python_files.items():
+        for file_path, file_imports in get_python_files_with_flag(module_dir).items():
             # check_module_imports_are_ordered(file_imports, file_path, desc_number)
             # TODO uncomment and correct all file imports
             # check_import_objs_are_ordered(file_imports, file_path)
@@ -72,7 +105,7 @@ def test_PythonFileImportsFormat():
                     assert not str(file_import[0]).endswith("_str")
 
 
-def test_StrFunctionsAreAssertTested():
+def test_Modules_util_AssestsExistForEveryStrFunction():
     """
     Test that all string-related functions in each module directory are asserted and tested.
     This test performs the following checks for each module:
@@ -114,7 +147,7 @@ def test_StrFunctionsAreAssertTested():
             )
 
 
-def test_TestsAreInCorrectFolderStructure():
+def test_Modules_test_TestsAreInCorrectFolderStructure():
     # sourcery skip: no-loop-in-tests
     # sourcery skip: no-conditionals-in-tests
     # ESTABLISH / WHEN / THEN
@@ -130,49 +163,7 @@ def test_TestsAreInCorrectFolderStructure():
                 assert level1_dir == test_str
 
 
-def test_StrFunctionsAreAssertTested():
-    """
-    Test that all string-related functions in each module directory are asserted and tested.
-    This test performs the following checks for each module:
-    - Retrieves all string functions and ensures they are sorted and not duplicated.
-    - Verifies that if string functions exist, a corresponding test file exists in the module's utility directory.
-    - Checks that the test file imports exactly one object and that imports are ordered.
-    - Ensures the test file contains a single test function named 'test_str_functions_ReturnsObj'.
-    - Validates that the test file includes the necessary assertions for all string functions.
-    Raises:
-        AssertionError: If any of the above conditions are not met.
-    """
-
-    # sourcery skip: no-loop-in-tests
-    # sourcery skip: no-conditionals-in-tests
-    # ESTABLISH
-
-    # WHEN / THEN
-    running_str_functions = set()
-    for module_desc, module_dir in get_module_descs().items():
-        desc_number_str = module_desc[1:3]
-        test_dir = create_path(module_dir, "test")
-        util_dir = create_path(test_dir, "_util")
-        print(f"{util_dir}")
-        module_str_funcs = get_module_str_functions(module_dir, desc_number_str)
-        check_if_module_str_funcs_is_sorted(module_str_funcs)
-        check_str_funcs_are_not_duplicated(module_str_funcs, running_str_functions)
-        running_str_functions.update(set(module_str_funcs))
-
-        if len(module_str_funcs) > 0:
-            test_file_path = create_path(util_dir, f"test_a{desc_number_str}_str.py")
-            assert os_path_exists(test_file_path)
-            test_file_imports = get_imports_from_file(test_file_path)
-            assert len(test_file_imports) == 1
-            check_import_objs_are_ordered(test_file_imports, test_file_path)
-            test_functions = get_function_names_from_file(test_file_path)
-            assert test_functions == ["test_str_functions_ReturnsObj"]
-            check_str_func_test_file_has_needed_asserts(
-                module_str_funcs, test_file_path, util_dir, desc_number_str
-            )
-
-
-def test_StrFunctionsAppearWhereTheyShould():
+def test_Modules_StrFunctionsAppearWhereTheyShould():
     # sourcery skip: no-loop-in-tests
     # sourcery skip: no-conditionals-in-tests
     # ESTABLISH
@@ -207,43 +198,7 @@ def test_StrFunctionsAppearWhereTheyShould():
                         assert x_str_func_name in str_funcs_set
 
 
-def test_NoPrintStatmentsInModuleNonTestFiles():
-    # sourcery skip: no-loop-in-tests
-    # sourcery skip: no-conditionals-in-tests
-    # ESTABLISH
-    print_str = "print"
-
-    # WHEN / THEN
-    for module_desc, module_dir in get_module_descs().items():
-        desc_number_str = module_desc[1:3]
-        py_files = [f for f in os_listdir(module_dir) if f.endswith(".py")]
-        for py_file in py_files:
-            py_file_path = create_path(module_dir, py_file)
-            py_file_str = open(py_file_path).read()
-            if py_file_str.find(print_str) > -1:
-                print(f"Module {module_desc} file {py_file_path} has print statement")
-            assert py_file_str.find(print_str) == -1
-
-
-def test_ModulesDoNotHaveEmptyDirectories():
-    # sourcery skip: no-loop-in-tests
-    # sourcery skip: no-conditionals-in-tests
-    # ESTABLISH
-    print_str = "print"
-
-    # WHEN / THEN
-    for module_desc, module_dir in get_module_descs().items():
-        for dirpath, dirnames, filenames in os_walk(module_dir):
-            assert_fail_str = f"{module_desc} Empty directory found: {dirpath}"
-            if dirnames == ["__pycache__"] and filenames == []:
-                print(f"{dirnames} {dirpath}")
-                dirnames = []
-            # print(f"{dirnames=}")
-            # print(f"{filenames=}")
-            assert dirnames or filenames, assert_fail_str
-
-
-def test_str_funcs_MarkdownFileExists():
+def test_Modules_CheckMarkdownHasAllStrFunctions():
     # sourcery skip: no-loop-in-tests
     # ESTALBLISH Gather lines here
     doc_main_dir = pathlib_Path("docs")
