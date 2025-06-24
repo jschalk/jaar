@@ -372,5 +372,3 @@ def test_Modules_most_functions_are_uniquely_named():
     # THEN
     assertion_fail_str = f"Duplicated functions found: {duplicated_functions}"
     assert not duplicated_functions, assertion_fail_str
-
-    assert 1 == 2
