@@ -10,6 +10,7 @@ from src.a12_hub_toolbox.hub_path import (
     create_belief_ote1_csv_path,
     create_belief_ote1_json_path,
 )
+from src.a17_idea_logic.test._util.a17_str import error_message_str
 from src.a18_etl_toolbox.test._util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
@@ -32,10 +33,10 @@ def test_etl_belief_ote1_agg_csvs_to_jsons_CreatesFile_Scenaro0(
     belief_mstr_dir = get_module_temp_dir()
     a23_event_time_p = create_belief_ote1_csv_path(belief_mstr_dir, accord23_str)
     a45_event_time_p = create_belief_ote1_csv_path(belief_mstr_dir, accord45_str)
-    a23_event_time_csv = f"""{belief_label_str()},{owner_name_str()},{event_int_str()},{bud_time_str()},error_message
+    a23_event_time_csv = f"""{belief_label_str()},{owner_name_str()},{event_int_str()},{bud_time_str()},{error_message_str()}
 {accord23_str},{bob_str},{event3},{timepoint55},
 """
-    a45_event_time_csv = f"""{belief_label_str()},{owner_name_str()},{event_int_str()},{bud_time_str()},error_message
+    a45_event_time_csv = f"""{belief_label_str()},{owner_name_str()},{event_int_str()},{bud_time_str()},{error_message_str()}
 {accord45_str},{sue_str},{event3},{timepoint55},
 {accord45_str},{sue_str},{event7},{timepoint66},
 """

@@ -427,6 +427,8 @@ def create_update_inconsistency_error_query(
     x_tablename: str,
     focus_columns: set[str],
     exclude_columns: set[str],
+    error_holder_column: str,
+    error_explanation: str,
 ):
     select_inconsistency_query = create_select_inconsistency_query(
         conn_or_cursor, x_tablename, focus_columns, exclude_columns
@@ -445,7 +447,7 @@ def create_update_inconsistency_error_query(
     return f"""WITH inconsistency_rows AS (
 {select_inconsistency_query})
 UPDATE {x_tablename}
-SET error_message = 'Inconsistent data'
+SET {error_holder_column} = '{error_explanation}'
 FROM inconsistency_rows
 {where_str}
 ;
@@ -458,7 +460,7 @@ def create_table2table_agg_insert_query(
     dst_table: str,
     focus_cols: list[str],
     exclude_cols: set[str],
-    where_block: str = None,
+    where_block: str,
 ) -> str:
     if not focus_cols:
         focus_cols = set(get_table_columns(conn_or_cursor, dst_table))
@@ -476,8 +478,10 @@ def create_table2table_agg_insert_query(
         else:
             select_columns_str += f", MAX({dst_column})"
     groupby_columns_str = ", ".join(focus_col_list)
-    if where_block is None:
-        where_block = "\nWHERE error_message IS NULL"
+    if where_block:
+        where_block = f"\n{where_block}"
+    else:
+        where_block = ""
 
     return f"""INSERT INTO {dst_table} ({dst_columns_str})
 SELECT {select_columns_str}

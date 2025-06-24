@@ -20,7 +20,7 @@ from src.a18_etl_toolbox.test._util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
-from src.a18_etl_toolbox.test._util.a18_str import brick_raw_str
+from src.a18_etl_toolbox.test._util.a18_str import brick_raw_str, error_message_str
 from src.a18_etl_toolbox.transformers import etl_mud_dfs_to_brick_raw_tables
 
 
@@ -73,7 +73,7 @@ def test_etl_mud_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(
         assert file_dir_str == br00003_table_cols[0]
         assert filename_str == br00003_table_cols[1]
         assert sheet_name_str == br00003_table_cols[2]
-        assert "error_message" == br00003_table_cols[-1]
+        assert error_message_str() == br00003_table_cols[-1]
         assert get_row_count(cursor, br00003_tablename) == 5
         select_agg_sqlstr = f"""
 SELECT * 
@@ -168,7 +168,7 @@ def test_etl_mud_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
         assert file_dir_str == br00003_table_cols[0]
         assert filename_str == br00003_table_cols[1]
         assert sheet_name_str == br00003_table_cols[2]
-        assert "error_message" == br00003_table_cols[-1]
+        assert error_message_str() == br00003_table_cols[-1]
         select_agg_sqlstr = f"""
 SELECT * 
 FROM {br00003_tablename} 
@@ -246,7 +246,7 @@ ORDER BY sheet_name, {event_int_str()}, {cumulative_minute_str()};"""
 #         assert file_dir_str == br00003_table_cols[0]
 #         assert filename_str == br00003_table_cols[1]
 #         assert sheet_name_str == br00003_table_cols[2]
-#         assert "error_message" != br00003_table_cols[-1]
+#         assert error_message_str() != br00003_table_cols[-1]
 #         select_agg_sqlstr = f"""
 # SELECT *
 # FROM {br00003_tablename}

@@ -17,7 +17,7 @@ from src.a16_pidgin_logic.test._util.a16_str import (
     pidgin_rope_str,
     unknown_str_str,
 )
-from src.a17_idea_logic.test._util.a17_str import idea_number_str
+from src.a17_idea_logic.test._util.a17_str import error_message_str, idea_number_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_PIDROPE_SOUND_RAW_SQLSTR,
     create_prime_tablename,
@@ -60,7 +60,7 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ExecutedSqlUpdat
 , {otx_knot_str()}
 , {inx_knot_str()}
 , {unknown_str_str()}
-, "error_message"
+, {error_message_str()}
 )"""
         b117 = "br00117"
         b045 = "br00045"
@@ -76,7 +76,7 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        error_count_sqlstr = f"SELECT COUNT(*) FROM {pidrope_s_raw_tablename} WHERE error_message IS NOT NULL"
+        error_count_sqlstr = f"SELECT COUNT(*) FROM {pidrope_s_raw_tablename} WHERE {error_message_str()} IS NOT NULL"
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
@@ -117,7 +117,7 @@ def test_set_sound_raw_tables_error_message_UpdatesTableCorrectly_Scenario0():
 , {otx_knot_str()}
 , {inx_knot_str()}
 , {unknown_str_str()}
-, "error_message"
+, {error_message_str()}
 )"""
         b117 = "br00117"
         b045 = "br00045"
@@ -133,7 +133,7 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        error_count_sqlstr = f"SELECT COUNT(*) FROM {pidrope_s_raw_tablename} WHERE error_message IS NOT NULL"
+        error_count_sqlstr = f"SELECT COUNT(*) FROM {pidrope_s_raw_tablename} WHERE {error_message_str()} IS NOT NULL"
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
@@ -141,7 +141,7 @@ VALUES
 
         # THEN
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 2
-        error_select_sqlstr = f"SELECT idea_number, event_int FROM {pidrope_s_raw_tablename} WHERE error_message IS NOT NULL"
+        error_select_sqlstr = f"SELECT idea_number, event_int FROM {pidrope_s_raw_tablename} WHERE {error_message_str()} IS NOT NULL"
         cursor.execute(error_select_sqlstr)
         assert cursor.fetchall() == [("br00117", 1), ("br00077", 1)]
 
@@ -187,14 +187,14 @@ VALUES
         cursor.execute(f"{insert_into_clause} {values_clause}")
         error_count_sqlstr = f"SELECT COUNT(*) FROM {plana_s_raw_del}"
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 4
-        assert "error_message" not in get_table_columns(cursor, plana_s_raw_del)
+        assert error_message_str() not in get_table_columns(cursor, plana_s_raw_del)
 
         # WHEN
         set_sound_raw_tables_error_message(cursor)
 
         # THEN No Error message is added and updated
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 4
-        assert "error_message" not in get_table_columns(cursor, plana_s_raw_del)
+        assert error_message_str() not in get_table_columns(cursor, plana_s_raw_del)
 
 
 # TODO copy over and use these tests?
@@ -235,12 +235,12 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
 , {otx_knot_str()}
 , {inx_knot_str()}
 , {unknown_str_str()}
-, "error_message"
+, {error_message_str()}
 )"""
         b117 = "br00117"
         b020 = "br00020"
         b045 = "br00045"
-        inconsistent_data_str = "inconsistent data"
+        inconsistent_data_str = "Inconsistent data"
         values_clause = f"""
 VALUES
   ('{b117}', {event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL, '{inconsistent_data_str}')
@@ -263,7 +263,7 @@ VALUES
 , {acct_name_str()}
 , {acct_cred_points_str()}
 , {acct_debt_points_str()}
-, "error_message"
+, {error_message_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -328,7 +328,7 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
     b117 = "br00117"
     b020 = "br00020"
     b045 = "br00045"
-    inconsistent_data_str = "inconsistent data"
+    inconsistent_data_str = "Inconsistent data"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -402,12 +402,12 @@ def test_etl_sound_raw_tables_to_sound_agg_tables_PopulatesValidTable_Scenario0(
 , {otx_knot_str()}
 , {inx_knot_str()}
 , {unknown_str_str()}
-, "error_message"
+, {error_message_str()}
 )"""
         b117 = "br00117"
         b020 = "br00020"
         b045 = "br00045"
-        inconsistent_data_str = "inconsistent data"
+        inconsistent_data_str = "Inconsistent data"
         values_clause = f"""
 VALUES
   ('{b117}', {event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL, NULL)
@@ -431,7 +431,7 @@ VALUES
 , {acct_name_str()}
 , {acct_cred_points_str()}
 , {acct_debt_points_str()}
-, "error_message"
+, {error_message_str()}
 )"""
         values_clause = f"""
 VALUES

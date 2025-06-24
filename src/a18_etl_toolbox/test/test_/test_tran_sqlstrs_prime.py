@@ -40,7 +40,11 @@ from src.a17_idea_logic.idea_config import (
     get_idea_config_dict,
     get_idea_sqlite_types,
 )
-from src.a17_idea_logic.test._util.a17_str import idea_category_str, idea_number_str
+from src.a17_idea_logic.test._util.a17_str import (
+    error_message_str,
+    idea_category_str,
+    idea_number_str,
+)
 from src.a18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
     create_insert_into_pidgin_core_raw_sqlstr,
@@ -135,7 +139,7 @@ def create_pidgin_sound_raw_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "raw")
     columns = get_all_dimen_columns_set(x_dimen)
     columns.add(idea_number_str())
-    columns.add("error_message")
+    columns.add(error_message_str())
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
@@ -143,7 +147,7 @@ def create_pidgin_sound_raw_table_sqlstr(x_dimen):
 def create_pidgin_sound_agg_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg")
     columns = get_all_dimen_columns_set(x_dimen)
-    columns.add("error_message")
+    columns.add(error_message_str())
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
@@ -151,7 +155,7 @@ def create_pidgin_sound_agg_table_sqlstr(x_dimen):
 def create_belief_sound_agg_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg")
     columns = get_all_dimen_columns_set(x_dimen)
-    columns.add("error_message")
+    columns.add(error_message_str())
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
@@ -178,7 +182,7 @@ def create_pidgin_core_raw_table_sqlstr(x_dimen):
     columns = get_all_dimen_columns_set(x_dimen)
     columns.remove(event_int_str())
     columns.add("source_dimen")
-    columns.add("error_message")
+    columns.add(error_message_str())
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
@@ -203,7 +207,7 @@ def create_belief_voice_raw_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "raw")
     columns = get_all_dimen_columns_set(x_dimen)
     columns = find_set_otx_inx_args(columns)
-    columns.add("error_message")
+    columns.add(error_message_str())
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
@@ -221,7 +225,7 @@ def create_plan_sound_put_raw_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "raw", "put")
     columns = get_all_dimen_columns_set(x_dimen)
     columns.add(idea_number_str())
-    columns.add("error_message")
+    columns.add(error_message_str())
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
@@ -229,7 +233,7 @@ def create_plan_sound_put_raw_table_sqlstr(x_dimen: str) -> str:
 def create_plan_sound_put_agg_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg", "put")
     columns = get_all_dimen_columns_set(x_dimen)
-    columns.add("error_message")
+    columns.add(error_message_str())
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
@@ -252,7 +256,7 @@ def create_plan_sound_del_raw_table_sqlstr(x_dimen: str) -> str:
 def create_plan_sound_del_agg_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg", "del")
     columns = get_del_dimen_columns_set(x_dimen)
-    columns.add("error_message")
+    columns.add(error_message_str())
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
@@ -607,9 +611,14 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
         x_tablename = prime_tbl(dimen, "s", "raw")
         dimen_config = get_idea_config_dict().get(dimen)
         dimen_focus_columns = set(dimen_config.get("jkeys").keys())
-        exclude_cols = {idea_number_str(), "error_message"}
+        exclude_cols = {idea_number_str(), error_message_str()}
         expected_update_sqlstr = create_update_inconsistency_error_query(
-            cursor, x_tablename, dimen_focus_columns, exclude_cols
+            cursor,
+            x_tablename,
+            dimen_focus_columns,
+            exclude_cols,
+            error_holder_column=error_message_str(),
+            error_explanation="Inconsistent data",
         )
         assert update_sqlstr == expected_update_sqlstr
 
@@ -651,9 +660,19 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
         x_tablename = prime_tbl(dimen, "s", "raw")
         dimen_config = get_idea_config_dict().get(dimen)
         dimen_focus_columns = set(dimen_config.get("jkeys").keys())
-        exclude_cols = {idea_number_str(), "event_int", "face_name", "error_message"}
+        exclude_cols = {
+            idea_number_str(),
+            "event_int",
+            "face_name",
+            error_message_str(),
+        }
         expected_update_sqlstr = create_update_inconsistency_error_query(
-            cursor, x_tablename, dimen_focus_columns, exclude_cols
+            cursor,
+            x_tablename,
+            dimen_focus_columns,
+            exclude_cols,
+            error_holder_column=error_message_str(),
+            error_explanation="Inconsistent data",
         )
         print(expected_update_sqlstr)
         assert update_sqlstr == expected_update_sqlstr
@@ -692,9 +711,14 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
         x_tablename = prime_tbl(dimen, "s", "raw", "put")
         dimen_config = get_idea_config_dict().get(dimen)
         dimen_focus_columns = set(dimen_config.get("jkeys").keys())
-        exclude_cols = {idea_number_str(), "error_message"}
+        exclude_cols = {idea_number_str(), error_message_str()}
         expected_update_sqlstr = create_update_inconsistency_error_query(
-            cursor, x_tablename, dimen_focus_columns, exclude_cols
+            cursor,
+            x_tablename,
+            dimen_focus_columns,
+            exclude_cols,
+            error_holder_column=error_message_str(),
+            error_explanation="Inconsistent data",
         )
         print(expected_update_sqlstr)
         assert update_sqlstr == expected_update_sqlstr
@@ -737,13 +761,14 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario0_PidginDimen():
         agg_tablename = prime_tbl(dimen, "s", "agg")
         dimen_config = get_idea_config_dict().get(dimen)
         dimen_focus_columns = set(dimen_config.get("jkeys").keys())
-        exclude_cols = {idea_number_str(), "error_message"}
+        exclude_cols = {idea_number_str(), error_message_str()}
         expected_insert_sqlstr = create_table2table_agg_insert_query(
             cursor,
             src_table=raw_tablename,
             dst_table=agg_tablename,
             focus_cols=dimen_focus_columns,
             exclude_cols=exclude_cols,
+            where_block="WHERE error_message IS NULL",
         )
         # print(expected_insert_sqlstr)
         assert update_sqlstrs[0] == expected_insert_sqlstr
@@ -778,7 +803,7 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario1_BeliefDimen():
         dimen_focus_columns = get_default_sorted_list(dimen_focus_columns)
         exclude_cols = {
             idea_number_str(),
-            "error_message",
+            error_message_str(),
         }
         print("yeah")
         expected_insert_sqlstr = create_table2table_agg_insert_query(
@@ -787,6 +812,7 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario1_BeliefDimen():
             dst_table=agg_tablename,
             focus_cols=dimen_focus_columns,
             exclude_cols=exclude_cols,
+            where_block="WHERE error_message IS NULL",
         )
         print(expected_insert_sqlstr)
         assert update_sqlstrs[0] == expected_insert_sqlstr
@@ -818,13 +844,14 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario2_PlanDimen():
         put_agg_tablename = prime_tbl(dimen, "s", "agg", "put")
         put_dimen_config = get_idea_config_dict().get(dimen)
         put_dimen_focus_columns = set(put_dimen_config.get("jkeys").keys())
-        put_exclude_cols = {idea_number_str(), "error_message"}
+        put_exclude_cols = {idea_number_str(), error_message_str()}
         put_expected_insert_sqlstr = create_table2table_agg_insert_query(
             cursor,
             src_table=put_raw_tablename,
             dst_table=put_agg_tablename,
             focus_cols=put_dimen_focus_columns,
             exclude_cols=put_exclude_cols,
+            where_block="WHERE error_message IS NULL",
         )
         # print(put_expected_insert_sqlstr)
         assert update_sqlstrs[0] == put_expected_insert_sqlstr
@@ -847,7 +874,7 @@ GROUP BY event_int, face_name, belief_label, owner_name, concept_rope, awardee_t
         last_element = del_dimen_focus_columns.pop(-1)
         del_dimen_focus_columns.append(f"{last_element}_ERASE")
         print(f"{del_dimen_focus_columns=} {last_element}")
-        del_exclude_cols = {idea_number_str(), "error_message"}
+        del_exclude_cols = {idea_number_str(), error_message_str()}
         del_expected_insert_sqlstr = create_table2table_agg_insert_query(
             cursor,
             src_table=del_raw_tablename,
@@ -1011,8 +1038,8 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_PlanDimens():
             s_del_vld_tablename = prime_tbl(plan_dimen, "s", "vld", "del")
             s_put_agg_cols = get_table_columns(cursor, s_put_agg_tablename)
             s_del_agg_cols = get_table_columns(cursor, s_del_agg_tablename)
-            s_put_agg_cols.remove("error_message")
-            s_del_agg_cols.remove("error_message")
+            s_put_agg_cols.remove(error_message_str())
+            s_del_agg_cols.remove(error_message_str())
             s_put_vld_cols = get_table_columns(cursor, s_put_vld_tablename)
             s_del_vld_cols = get_table_columns(cursor, s_del_vld_tablename)
             s_put_vld_tbl = s_put_vld_tablename
@@ -1068,7 +1095,7 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_BeliefDimens():
             s_agg_tablename = prime_tbl(belief_dimen, "s", "agg")
             s_vld_tablename = prime_tbl(belief_dimen, "s", "vld")
             s_agg_cols = get_table_columns(cursor, s_agg_tablename)
-            s_agg_cols.remove("error_message")
+            s_agg_cols.remove(error_message_str())
             s_vld_cols = get_table_columns(cursor, s_vld_tablename)
             s_vld_tbl = s_vld_tablename
             s_agg_tbl = s_agg_tablename
@@ -1113,8 +1140,8 @@ def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_PlanDimens():
             v_del_raw_tablename = prime_tbl(plan_dimen, "v", "raw", "del")
             s_put_cols = get_table_columns(cursor, s_put_vld_tablename)
             s_del_cols = get_table_columns(cursor, s_del_vld_tablename)
-            # s_put_cols = set(s_put_cols).remove("error_message")
-            # s_del_cols = set(s_del_cols).remove("error_message")
+            # s_put_cols = set(s_put_cols).remove(error_message_str())
+            # s_del_cols = set(s_del_cols).remove(error_message_str())
             v_put_raw_cols = get_table_columns(cursor, v_put_raw_tablename)
             v_del_raw_cols = get_table_columns(cursor, v_del_raw_tablename)
             v_put_cols = find_set_otx_inx_args(v_put_raw_cols)
@@ -1173,7 +1200,7 @@ def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_BeliefDimens():
             v_raw_tablename = prime_tbl(belief_dimen, "v", "raw")
             s_cols = get_table_columns(cursor, s_vld_tablename)
             v_raw_cols = get_table_columns(cursor, v_raw_tablename)
-            v_raw_cols.remove("error_message")
+            v_raw_cols.remove(error_message_str())
             v_cols = find_set_otx_inx_args(v_raw_cols)
             v_cols = {col for col in v_cols if col[-3:] != "inx"}
             v_raw_tbl = v_raw_tablename

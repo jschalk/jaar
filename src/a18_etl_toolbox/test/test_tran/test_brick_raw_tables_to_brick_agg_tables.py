@@ -11,7 +11,11 @@ from src.a15_belief_logic.test._util.a15_str import (
     hour_label_str,
 )
 from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
-from src.a18_etl_toolbox.test._util.a18_str import brick_agg_str, brick_raw_str
+from src.a18_etl_toolbox.test._util.a18_str import (
+    brick_agg_str,
+    brick_raw_str,
+    error_message_str,
+)
 from src.a18_etl_toolbox.transformers import etl_brick_raw_tables_to_brick_agg_tables
 
 
@@ -31,7 +35,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario0_Gr
         belief_label_str(),
         cumulative_minute_str(),
         hour_label_str(),
-        "error_message",
+        error_message_str(),
     ]
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -42,7 +46,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario0_Gr
 , {belief_label_str()}
 , {cumulative_minute_str()}
 , {hour_label_str()}
-, error_message
+, {error_message_str()}
 )"""
         values_clause = f"""
 VALUES     
@@ -108,7 +112,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario1_Gr
         belief_label_str(),
         cumulative_minute_str(),
         hour_label_str(),
-        "error_message",
+        error_message_str(),
     ]
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -119,7 +123,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario1_Gr
 , {belief_label_str()}
 , {cumulative_minute_str()}
 , {hour_label_str()}
-, error_message
+, {error_message_str()}
 )"""
         values_clause = f"""
 VALUES     
@@ -179,7 +183,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario2_Gr
         belief_label_str(),
         cumulative_minute_str(),
         hour_label_str(),
-        "error_message",
+        error_message_str(),
     ]
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -190,7 +194,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario2_Gr
 , {belief_label_str()}
 , {cumulative_minute_str()}
 , {hour_label_str()}
-, error_message
+, {error_message_str()}
 )"""
         values_clause = f"""
 VALUES     

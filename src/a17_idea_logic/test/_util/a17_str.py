@@ -21,6 +21,10 @@ def delete_update_str() -> str:
     return "delete_update"
 
 
+def error_message_str() -> str:
+    return "error_message"
+
+
 def idea_category_str() -> str:
     return "idea_category"
 

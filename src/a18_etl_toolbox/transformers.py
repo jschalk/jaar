@@ -422,8 +422,14 @@ def insert_pidgin_core_agg_to_pidgin_core_vld_table(cursor: sqlite3_Cursor):
 def update_inconsistency_pidgin_core_raw_table(cursor: sqlite3_Cursor):
     pidgin_core_s_raw_tablename = create_prime_tablename("pidcore", "s", "raw")
     sqlstr = create_update_inconsistency_error_query(
-        cursor, pidgin_core_s_raw_tablename, {"face_name"}, {"source_dimen"}
+        cursor,
+        x_tablename=pidgin_core_s_raw_tablename,
+        focus_columns={"face_name"},
+        exclude_columns={"source_dimen"},
+        error_holder_column="error_message",
+        error_explanation="Inconsistent data",
     )
+
     cursor.execute(sqlstr)
 
 

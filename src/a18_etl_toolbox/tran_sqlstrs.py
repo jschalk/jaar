@@ -497,7 +497,12 @@ def create_sound_raw_update_inconsist_error_message_sqlstr(
     dimen_config = get_idea_config_dict().get(dimen)
     dimen_focus_columns = set(dimen_config.get("jkeys").keys())
     return create_update_inconsistency_error_query(
-        conn_or_cursor, x_tablename, dimen_focus_columns, exclude_cols
+        conn_or_cursor=conn_or_cursor,
+        x_tablename=x_tablename,
+        focus_columns=dimen_focus_columns,
+        exclude_columns=exclude_cols,
+        error_holder_column="error_message",
+        error_explanation="Inconsistent data",
     )
 
 
@@ -524,6 +529,7 @@ def create_sound_agg_insert_sqlstrs(
         dst_table=agg_tablename,
         focus_cols=dimen_focus_columns,
         exclude_cols=exclude_cols,
+        where_block="WHERE error_message IS NULL",
     )
     sqlstrs = [pidgin_belief_plan_put_sqlstr]
     if dimen.lower().startswith("plan"):

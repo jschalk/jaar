@@ -9,6 +9,7 @@ from src.a06_plan_logic.test._util.a06_str import (
     plan_acctunit_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
+from src.a18_etl_toolbox.test._util.a18_str import error_message_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
     create_sound_and_voice_tables,
@@ -252,7 +253,7 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario2_DoesNotSelectWhere_e
 , {acct_name_str()}
 , {acct_cred_points_str()}
 , {acct_debt_points_str()}
-, error_message
+, {error_message_str()}
 )"""
         values_clause = f"""
 VALUES

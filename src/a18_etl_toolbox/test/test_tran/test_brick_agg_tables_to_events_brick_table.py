@@ -11,7 +11,7 @@ from src.a15_belief_logic.test._util.a15_str import (
     hour_label_str,
 )
 from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
-from src.a17_idea_logic.test._util.a17_str import idea_number_str
+from src.a17_idea_logic.test._util.a17_str import error_message_str, idea_number_str
 from src.a18_etl_toolbox.test._util.a18_str import (
     brick_agg_str,
     events_brick_agg_str,
@@ -78,7 +78,7 @@ VALUES
         assert idea_number_str() in brick_events_table_cols
         assert face_name_str() in brick_events_table_cols
         assert event_int_str() in brick_events_table_cols
-        assert "error_message" in brick_events_table_cols
+        assert error_message_str() in brick_events_table_cols
         assert get_row_count(cursor, brick_events_tablename) == 3
         select_agg_sqlstr = f"""
 SELECT * 
@@ -184,14 +184,14 @@ def test_etl_events_brick_agg_table_to_events_brick_valid_table_PopulatesTables_
             idea_number_str(),
             event_int_str(),
             face_name_str(),
-            "error_message",
+            error_message_str(),
         ]
         create_idea_sorted_table(cursor, agg_events_tablename, agg_events_columns)
         insert_into_clause = f"""INSERT INTO {agg_events_tablename} (
   {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
-, error_message
+, {error_message_str()}
 )"""
         invalid_str = "invalid because of conflicting event_int"
         values_clause = f"""
@@ -237,13 +237,13 @@ def test_etl_events_brick_agg_db_to_event_dict_ReturnsObj_Scenario0():
     event1 = 1
     event3 = 3
     event9 = 9
-    agg_columns = [face_name_str(), event_int_str(), "error_message"]
+    agg_columns = [face_name_str(), event_int_str(), error_message_str()]
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         agg_events_tablename = events_brick_agg_str()
         create_idea_sorted_table(cursor, agg_events_tablename, agg_columns)
         insert_into_clause = f"""
-INSERT INTO {agg_events_tablename} ({event_int_str()}, {face_name_str()}, error_message)
+INSERT INTO {agg_events_tablename} ({event_int_str()}, {face_name_str()}, {error_message_str()})
 VALUES     
   ('{event3}', '{bob_str}', NULL)
 , ('{event1}', '{sue_str}', 'invalid because of conflicting event_int')
