@@ -18,8 +18,8 @@
 - a14_keep_logic: 
 - a15_belief_logic: belief_budunit, belief_paybook, belief_timeline_hour, belief_timeline_month, belief_timeline_weekday, belief_timeoffi, beliefunit, brokerunits, cumulative_minute, hour_label, job_listen_rotations, month_label, paybook, weekday_label, weekday_order
 - a16_pidgin_logic: inx_knot, inx_label, inx_name, inx_rope, inx_title, map_otx2inx, otx2inx, otx_key, otx_knot, otx_label, otx_name, otx_rope, otx_title, pidgin_core, pidgin_label, pidgin_name, pidgin_rope, pidgin_title, pidginunit, unknown_str
-- a17_idea_logic: allowed_crud, brick_raw, build_order, delete_insert, delete_insert_update, delete_update, idea_category, idea_number, insert_multiple, insert_one_time, insert_update, world_id
-- a18_etl_toolbox: belief_acct_nets, belief_event_time_agg, brick_agg, brick_valid, events_brick_agg, events_brick_valid, owner_net_amount, sound_agg, sound_raw, voice_agg, voice_raw
+- a17_idea_logic: allowed_crud, build_order, delete_insert, delete_insert_update, delete_update, error_message, idea_category, idea_number, insert_multiple, insert_one_time, insert_update, world_id
+- a18_etl_toolbox: belief_acct_nets, belief_event_time_agg, brick_agg, brick_raw, brick_valid, events_brick_agg, events_brick_valid, owner_net_amount, sound_agg, sound_raw, voice_agg, voice_raw
 - a19_kpi_toolbox: belief_kpi001_acct_nets
 - a20_world_logic: 
 - a21_lobby_logic: lobby_id, lobby_mstr_dir, lobbys

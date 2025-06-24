@@ -11,7 +11,7 @@ from src.a06_plan_logic.test._util.a06_str import (
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a15_belief_logic.belief_config import get_belief_dimens
 from src.a17_idea_logic.idea_config import get_default_sorted_list, get_idea_config_dict
-from src.a17_idea_logic.test._util.a17_str import idea_category_str
+from src.a17_idea_logic.test._util.a17_str import error_message_str, idea_category_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
     create_sound_and_voice_tables,
@@ -47,7 +47,7 @@ def test_get_insert_voice_agg_sqlstrs_ReturnsObj_CheckBeliefDimen():
             raw_columns = {raw_col for raw_col in raw_columns if raw_col[-3:] != "otx"}
             raw_columns.remove(f"{face_name_str()}_inx")
             raw_columns.remove(event_int_str())
-            raw_columns.remove("error_message")
+            raw_columns.remove(error_message_str())
             raw_columns = get_default_sorted_list(raw_columns)
 
             raw_columns_str = ", ".join(raw_columns)

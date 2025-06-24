@@ -160,6 +160,7 @@ from src.a17_idea_logic.test._util.a17_str import (
     delete_insert_update_str,
     delete_update_str,
     dimens_str,
+    error_message_str,
     idea_category_str,
     idea_number_str,
     insert_multiple_str,
@@ -167,23 +168,6 @@ from src.a17_idea_logic.test._util.a17_str import (
     insert_update_str,
     world_id_str,
 )
-
-
-def test_str_functions_ReturnsObj():
-    # ESTABLISH / WHEN / THEN
-    assert idea_category_str() == "idea_category"
-    assert build_order_str() == "build_order"
-    assert idea_number_str() == "idea_number"
-    assert allowed_crud_str() == "allowed_crud"
-    assert attributes_str() == "attributes"
-    assert dimens_str() == "dimens"
-    assert otx_key_str() == "otx_key"
-    assert insert_one_time_str() == "insert_one_time"
-    assert insert_multiple_str() == "insert_multiple"
-    assert delete_insert_update_str() == "delete_insert_update"
-    assert insert_update_str() == "insert_update"
-    assert delete_insert_str() == "delete_insert"
-    assert delete_update_str() == "delete_update"
 
 
 def test_get_idea_elements_sort_order_ReturnsObj():
@@ -362,7 +346,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[139] == "quota"
     assert table_sorting_priority[140] == "celldepth"
     assert table_sorting_priority[141] == job_listen_rotations_str()
-    assert table_sorting_priority[142] == "error_message"
+    assert table_sorting_priority[142] == error_message_str()
     assert table_sorting_priority[143] == "_owner_name_labor"
     assert table_sorting_priority[144] == "_active"
     assert table_sorting_priority[145] == "_chore"
@@ -414,8 +398,8 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     all_args.add(face_name_str())
     all_args.add("source_dimen")
     all_args.add("pidgin_event_int")
-    all_args.add("error_message")
-    all_args.add("world_id")
+    all_args.add(error_message_str())
+    all_args.add(world_id_str())
     all_args.add("funds")  # kpi columns
     all_args.add("fund_rank")  # kpi columns
     all_args.add("tasks_count")  # kpi columns
@@ -501,15 +485,17 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(c400_number_str()) == "INTEGER"
     assert sqlite_types.get(yr1_jan1_offset_str()) == "INTEGER"
     assert sqlite_types.get(quota_str()) == "REAL"
-    assert sqlite_types.get(celldepth_str()) == "INT"
+    assert sqlite_types.get(celldepth_str()) == "INTEGER"
     assert sqlite_types.get(monthday_distortion_str()) == "INTEGER"
     assert sqlite_types.get(timeline_label_str()) == "TEXT"
-    assert sqlite_types.get("error_message") == "TEXT"
+    assert sqlite_types.get(error_message_str()) == "TEXT"
 
     # sourcery skip: no-loop-in-tests
     for x_arg, datatype in get_plan_calc_args_sqlite_datatype_dict().items():
         print(f"{x_arg=} {datatype=} {sqlite_types.get(x_arg)=}")
         assert sqlite_types.get(x_arg) == datatype
+
+    assert set(sqlite_types.values()) == {"TEXT", "INTEGER", "REAL"}
 
 
 def test_get_allowed_curds_ReturnsObj():

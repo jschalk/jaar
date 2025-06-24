@@ -28,6 +28,7 @@ from src.a16_pidgin_logic.test._util.a16_str import (
     pidgin_title_str,
     unknown_str_str,
 )
+from src.a18_etl_toolbox.test._util.a18_str import error_message_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_PIDCORE_SOUND_AGG_SQLSTR,
     CREATE_PIDCORE_SOUND_RAW_SQLSTR,
@@ -226,7 +227,7 @@ def test_update_inconsistency_pidgin_core_raw_table_UpdatesTable_Scenario0():
 , {otx_knot_str()}
 , {inx_knot_str()}
 , {unknown_str_str()}
-, error_message
+, {error_message_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -239,7 +240,7 @@ VALUES
         cursor.execute(f"{insert_into_clause} {values_clause}")
 
         create_sound_and_voice_tables(cursor)
-        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidgin_core_s_raw_tablename} WHERE error_message IS NOT NULL;"
+        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidgin_core_s_raw_tablename} WHERE {error_message_str()} IS NOT NULL;"
         assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
@@ -251,11 +252,11 @@ VALUES
         cursor.execute(select_core_raw_sqlstr)
         rows = cursor.fetchall()
         print(f"{rows=}")
-        error_message = "Inconsistent data"
+        error_data_str = "Inconsistent data"
         assert rows == [
             (pidgin_name_s_agg_tablename, "Bob", ":", ":", "Unknown", None),
-            (pidgin_name_s_agg_tablename, "Sue", None, None, ":", error_message),
-            (pidgin_rope_s_agg_tablename, "Sue", None, None, "/", error_message),
+            (pidgin_name_s_agg_tablename, "Sue", None, None, ":", error_data_str),
+            (pidgin_rope_s_agg_tablename, "Sue", None, None, "/", error_data_str),
             (pidgin_rope_s_agg_tablename, "Yao", ":", ":", "Unknown", None),
         ]
 
@@ -270,7 +271,7 @@ def test_insert_pidgin_core_raw_to_pidgin_core_agg_table_PopulatesTable_Scenario
     rdx = ":"
     other_knot = "/"
     ukx = "Unknown"
-    error_message = "Inconsistent data"
+    error_data_str = "Inconsistent data"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -287,13 +288,13 @@ def test_insert_pidgin_core_raw_to_pidgin_core_agg_table_PopulatesTable_Scenario
 , {otx_knot_str()}
 , {inx_knot_str()}
 , {unknown_str_str()}
-, error_message
+, {error_message_str()}
 )"""
         values_clause = f"""
 VALUES
   ('{pidgin_name_s_agg_tablename}', "{bob_str}", "{rdx}", "{rdx}", "{ukx}", NULL)
-, ('{pidgin_name_s_agg_tablename}', "{sue_str}", NULL, NULL, '{rdx}', '{error_message}')
-, ('{pidgin_rope_s_agg_tablename}', "{sue_str}", NULL, NULL, '{other_knot}', '{error_message}')
+, ('{pidgin_name_s_agg_tablename}', "{sue_str}", NULL, NULL, '{rdx}', '{error_data_str}')
+, ('{pidgin_rope_s_agg_tablename}', "{sue_str}", NULL, NULL, '{other_knot}', '{error_data_str}')
 , ('{pidgin_rope_s_agg_tablename}', "{yao_str}", "{rdx}", "{rdx}", "{ukx}", NULL)
 ;
 """
@@ -385,7 +386,7 @@ def test_create_update_pidgin_sound_agg_inconsist_sqlstr_PopulatesTable_Scenario
     event2 = 2
     event5 = 5
     event7 = 7
-    error_message = "Inconsistent pidgin core data"
+    error_pidgin_str = "Inconsistent pidgin core data"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -427,7 +428,7 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidgin_rope_s_agg_tablename} WHERE error_message IS NOT NULL;"
+        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidgin_rope_s_agg_tablename} WHERE {error_message_str()} IS NOT NULL;"
         assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
@@ -442,11 +443,11 @@ VALUES
         rows = cursor.fetchall()
         print(rows)
         assert rows == [
-            (1, sue_str, yao_str, yao_inx, None, None, None, error_message),
-            (1, sue_str, bob_str, bob_inx, None, None, None, error_message),
-            (1, sue_str, bob_str, bob_str, None, "/", None, error_message),
-            (2, sue_str, sue_str, sue_str, ":", ":", "Unknown", error_message),
-            (5, sue_str, bob_str, bob_inx, ":", ":", "Unknown", error_message),
+            (1, sue_str, yao_str, yao_inx, None, None, None, error_pidgin_str),
+            (1, sue_str, bob_str, bob_inx, None, None, None, error_pidgin_str),
+            (1, sue_str, bob_str, bob_str, None, "/", None, error_pidgin_str),
+            (2, sue_str, sue_str, sue_str, ":", ":", "Unknown", error_pidgin_str),
+            (5, sue_str, bob_str, bob_inx, ":", ":", "Unknown", error_pidgin_str),
             (7, yao_str, yao_str, yao_inx, ":", ":", "Unknown", None),
         ]
 
@@ -465,7 +466,7 @@ def test_update_pidgin_sound_agg_inconsist_errors_PopulatesTable_Scenario1():
     event2 = 2
     event5 = 5
     event7 = 7
-    error_message = "Inconsistent pidgin core data"
+    error_pidgin_str = "Inconsistent pidgin core data"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -505,7 +506,7 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidgin_rope_s_agg_tablename} WHERE error_message IS NOT NULL;"
+        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidgin_rope_s_agg_tablename} WHERE {error_message_str()} IS NOT NULL;"
         assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
@@ -518,11 +519,11 @@ VALUES
         rows = cursor.fetchall()
         print(rows)
         assert rows == [
-            (1, sue_str, yao_str, yao_inx, None, None, None, error_message),
-            (1, sue_str, bob_str, bob_inx, None, None, None, error_message),
-            (1, sue_str, bob_str, bob_str, None, "/", None, error_message),
-            (2, sue_str, sue_str, sue_str, ":", ":", "Unknown", error_message),
-            (5, sue_str, bob_str, bob_inx, ":", ":", "Unknown", error_message),
+            (1, sue_str, yao_str, yao_inx, None, None, None, error_pidgin_str),
+            (1, sue_str, bob_str, bob_inx, None, None, None, error_pidgin_str),
+            (1, sue_str, bob_str, bob_str, None, "/", None, error_pidgin_str),
+            (2, sue_str, sue_str, sue_str, ":", ":", "Unknown", error_pidgin_str),
+            (5, sue_str, bob_str, bob_inx, ":", ":", "Unknown", error_pidgin_str),
             (7, yao_str, yao_str, yao_inx, ":", ":", "Unknown", None),
         ]
 
@@ -544,7 +545,7 @@ def test_create_update_pidlabe_sound_agg_knot_error_sqlstr_PopulatesTable_Scenar
     event5 = 5
     event7 = 7
     event9 = 9
-    error_message = "Knot cannot exist in LabelTerm"
+    error_label_str = "Knot cannot exist in LabelTerm"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -581,7 +582,7 @@ VALUES
 ;
 """
         cursor.execute(insert_sqlstr)
-        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidlabe_s_agg_tablename} WHERE error_message IS NOT NULL;"
+        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidlabe_s_agg_tablename} WHERE {error_message_str()} IS NOT NULL;"
 
         testing_select_sqlstr = """
   SELECT label_agg.rowid, label_agg.otx_label, label_agg.inx_label, *
@@ -605,7 +606,7 @@ VALUES
         cursor.execute(select_core_raw_sqlstr)
         rows = cursor.fetchall()
         print(rows)
-        error_x = error_message
+        error_x = error_label_str
         exp_row0 = (1, bob_str, fly_str, fly_inx, None, None, None, None)
         exp_row1 = (1, bob_str, f"{ski_str}{rdx}", ski_str, None, None, None, error_x)
         exp_row2 = (2, bob_str, run_rdx_run, run_str, None, None, None, error_x)
@@ -636,7 +637,7 @@ def test_create_update_pidrope_sound_agg_knot_error_sqlstr_PopulatesTable_Scenar
     event5 = 5
     event7 = 7
     event9 = 9
-    error_message = "Knot must exist in RopeTerm"
+    error_rope_str = "Knot must exist in RopeTerm"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -673,7 +674,7 @@ VALUES
 ;
 """
         cursor.execute(insert_sqlstr)
-        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidrope_s_agg_tablename} WHERE error_message IS NOT NULL;"
+        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidrope_s_agg_tablename} WHERE {error_message_str()} IS NOT NULL;"
 
         testing_select_sqlstr = """
   SELECT rope_agg.rowid, rope_agg.otx_rope, rope_agg.inx_rope
@@ -698,7 +699,7 @@ VALUES
         cursor.execute(select_core_raw_sqlstr)
         rows = cursor.fetchall()
         print(rows)
-        error_x = error_message
+        error_x = error_rope_str
         exp_row0 = (1, bob_str, spt_run_str, spt_run_str, None, None, None, None)
         exp_row1 = (1, bob_str, spt_fly_str, bad_fly_str, None, None, None, error_x)
         exp_row2 = (2, bob_str, bad_fly_str, spt_fly_str, None, None, None, error_x)
@@ -730,7 +731,7 @@ def test_create_update_pidname_sound_agg_knot_error_sqlstr_PopulatesTable_Scenar
     event5 = 5
     event7 = 7
     event9 = 9
-    error_message = "Knot cannot exist in NameTerm"
+    error_name_str = "Knot cannot exist in NameTerm"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -767,7 +768,7 @@ VALUES
 ;
 """
         cursor.execute(insert_sqlstr)
-        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidname_s_agg_tablename} WHERE error_message IS NOT NULL;"
+        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidname_s_agg_tablename} WHERE {error_message_str()} IS NOT NULL;"
 
         testing_select_sqlstr = """
   SELECT name_agg.rowid, name_agg.otx_name, name_agg.inx_name
@@ -792,7 +793,7 @@ VALUES
         cursor.execute(select_core_raw_sqlstr)
         rows = cursor.fetchall()
         print(rows)
-        error_x = error_message
+        error_x = error_name_str
         exp_row0 = (1, bob_str, sue_otx, sue_inx, None, None, None, None)
         exp_row1 = (1, bob_str, sue_otx, bad_sue_inx, None, None, None, error_x)
         exp_row2 = (2, bob_str, zia_otx, bad_zia_inx, None, None, None, error_x)
@@ -825,7 +826,7 @@ def test_create_update_pidtitl_sound_agg_knot_error_sqlstr_PopulatesTable_Scenar
     event5 = 5
     event7 = 7
     event9 = 9
-    error_message = "Otx and inx titles must match knot."
+    error_title_str = "Otx and inx titles must match knot."
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -863,7 +864,7 @@ VALUES
 ;
 """
         cursor.execute(insert_sqlstr)
-        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidtitl_s_agg_tablename} WHERE error_message IS NOT NULL;"
+        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidtitl_s_agg_tablename} WHERE {error_message_str()} IS NOT NULL;"
 
         testing_select_sqlstr = """
   SELECT title_agg.rowid, title_agg.otx_title, title_agg.inx_title
@@ -893,7 +894,7 @@ VALUES
         cursor.execute(select_core_raw_sqlstr)
         rows = cursor.fetchall()
         print(rows)
-        error_x = error_message
+        error_x = error_title_str
         exp_row0 = (1, bob_str, sue_otx, sue_inx, None, None, None, None)
         exp_row1 = (1, yao_str, bad_sue_otx, sue_inx, None, None, None, error_x)
         exp_row2 = (2, bob_str, swim_otx, swim_inx, None, None, None, None)
@@ -952,10 +953,10 @@ VALUES ({event1}, '{bob_str}', '{bad_sue_otx}', '{sue_inx}');"""
 {face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()})
 VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
         cursor.execute(insert_sqlstr)
-        pidlabe_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidlabe_s_agg_tablename} WHERE error_message IS NOT NULL;"
-        pidrope_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidrope_s_agg_tablename} WHERE error_message IS NOT NULL;"
-        pidname_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidname_s_agg_tablename} WHERE error_message IS NOT NULL;"
-        pidtitl_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidtitl_s_agg_tablename} WHERE error_message IS NOT NULL;"
+        pidlabe_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidlabe_s_agg_tablename} WHERE {error_message_str()} IS NOT NULL;"
+        pidrope_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidrope_s_agg_tablename} WHERE {error_message_str()} IS NOT NULL;"
+        pidname_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidname_s_agg_tablename} WHERE {error_message_str()} IS NOT NULL;"
+        pidtitl_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidtitl_s_agg_tablename} WHERE {error_message_str()} IS NOT NULL;"
         assert cursor.execute(pidlabe_error_count_sqlstr).fetchone()[0] == 0
         assert cursor.execute(pidrope_error_count_sqlstr).fetchone()[0] == 0
         assert cursor.execute(pidname_error_count_sqlstr).fetchone()[0] == 0
@@ -992,7 +993,7 @@ def test_create_insert_pidgin_sound_vld_table_sqlstr_ReturnsObj_PopulatesTable_S
     event2 = 2
     event5 = 5
     event7 = 7
-    error_message = "Inconsistent pidgin core data"
+    error_pidgin_str = "Inconsistent pidgin core data"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -1007,15 +1008,15 @@ def test_create_insert_pidgin_sound_vld_table_sqlstr_ReturnsObj_PopulatesTable_S
 , {otx_knot_str()}
 , {inx_knot_str()}
 , {unknown_str_str()}
-, error_message
+, {error_message_str()}
 )"""
         values_clause = f"""
 VALUES
-  ({event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL, '{error_message}')
-, ({event1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL, '{error_message}')
-, ({event1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_knot}', NULL, '{error_message}')
-, ({event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', '{error_message}')
-, ({event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}', '{error_message}')
+  ({event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL, '{error_pidgin_str}')
+, ({event1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL, '{error_pidgin_str}')
+, ({event1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_knot}', NULL, '{error_pidgin_str}')
+, ({event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', '{error_pidgin_str}')
+, ({event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}', '{error_pidgin_str}')
 , ({event1}, '{yao_str}', '{yao_str}', '{yao_str}', '{rdx}', '{rdx}', '{ukx}', NULL)
 , ({event7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}', NULL)
 , ({event7}, '{bob_str}', '{bob_str}', '{bob_inx}', NULL, NULL, '{ukx}', NULL)
@@ -1058,7 +1059,7 @@ def test_insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table_PopulatesTable
     event2 = 2
     event5 = 5
     event7 = 7
-    error_message = "Inconsistent pidgin core data"
+    error_pidgin_str = "Inconsistent pidgin core data"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -1073,15 +1074,15 @@ def test_insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table_PopulatesTable
 , {otx_knot_str()}
 , {inx_knot_str()}
 , {unknown_str_str()}
-, error_message
+, {error_message_str()}
 )"""
         values_clause = f"""
 VALUES
-  ({event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL, '{error_message}')
-, ({event1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL, '{error_message}')
-, ({event1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_knot}', NULL, '{error_message}')
-, ({event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', '{error_message}')
-, ({event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}', '{error_message}')
+  ({event1}, '{sue_str}', '{yao_str}', '{yao_inx}', NULL, NULL, NULL, '{error_pidgin_str}')
+, ({event1}, '{sue_str}', '{bob_str}', '{bob_inx}', NULL, NULL, NULL, '{error_pidgin_str}')
+, ({event1}, '{sue_str}', '{bob_str}', '{bob_str}', NULL, '{other_knot}', NULL, '{error_pidgin_str}')
+, ({event2}, '{sue_str}', '{sue_str}', '{sue_str}', '{rdx}', '{rdx}', '{ukx}', '{error_pidgin_str}')
+, ({event5}, '{sue_str}', '{bob_str}', '{bob_inx}', '{rdx}', '{rdx}', '{ukx}', '{error_pidgin_str}')
 , ({event1}, '{yao_str}', '{yao_str}', '{yao_str}', '{rdx}', '{rdx}', '{ukx}', NULL)
 , ({event7}, '{yao_str}', '{yao_str}', '{yao_inx}', '{rdx}', '{rdx}', '{ukx}', NULL)
 , ({event7}, '{bob_str}', '{bob_str}', '{bob_inx}', NULL, NULL, '{ukx}', NULL)
@@ -1157,7 +1158,7 @@ VALUES
         pidgin_core_s_agg_tablename = create_prime_tablename("pidcore", "s", "agg")
         pidgin_name_s_vld_tablename = create_prime_tablename("pidname", "s", "vld")
         assert get_row_count(cursor, pidgin_name_s_agg_tablename) == 10
-        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidgin_name_s_agg_tablename} WHERE error_message IS NOT NULL;"
+        select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidgin_name_s_agg_tablename} WHERE {error_message_str()} IS NOT NULL;"
         assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 0
         assert get_row_count(cursor, pidgin_core_s_raw_tablename) == 6
         assert get_row_count(cursor, pidgin_core_s_agg_tablename) == 0
@@ -1219,9 +1220,9 @@ VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
 {face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()})
 VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
         cursor.execute(insert_sqlstr)
-        pidlabe_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidlabe_s_agg_tablename} WHERE error_message IS NOT NULL;"
-        pidrope_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidrope_s_agg_tablename} WHERE error_message IS NOT NULL;"
-        pidname_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidname_s_agg_tablename} WHERE error_message IS NOT NULL;"
+        pidlabe_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidlabe_s_agg_tablename} WHERE {error_message_str()} IS NOT NULL;"
+        pidrope_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidrope_s_agg_tablename} WHERE {error_message_str()} IS NOT NULL;"
+        pidname_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidname_s_agg_tablename} WHERE {error_message_str()} IS NOT NULL;"
         assert cursor.execute(pidlabe_error_count_sqlstr).fetchone()[0] == 0
         assert cursor.execute(pidrope_error_count_sqlstr).fetchone()[0] == 0
         assert cursor.execute(pidname_error_count_sqlstr).fetchone()[0] == 0

@@ -1,3 +1,4 @@
+from src.a17_idea_logic.test._util.a17_str import error_message_str
 from typing import Literal
 
 
@@ -12,6 +13,10 @@ def belief_event_time_agg_str() -> Literal["belief_event_time_agg"]:
 
 def brick_agg_str() -> str:
     return "brick_agg"
+
+
+def brick_raw_str() -> str:
+    return "brick_raw"
 
 
 def brick_valid_str() -> str:

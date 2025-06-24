@@ -1,9 +1,6 @@
 from copy import copy as copy_copy, deepcopy as copy_deepcopy
 from os.path import exists as os_path_exists
-from pandas import (
-    read_excel as pandas_read_excel,
-    read_sql_query as pandas_read_sql_query,
-)
+from pandas import read_excel as pandas_read_excel
 from sqlite3 import Connection as sqlite3_Connection, Cursor as sqlite3_Cursor
 from src.a00_data_toolbox.csv_toolbox import open_csv_with_types
 from src.a00_data_toolbox.db_toolbox import (
@@ -11,9 +8,12 @@ from src.a00_data_toolbox.db_toolbox import (
     create_insert_into_clause_str,
     create_select_query,
     create_table_from_columns,
+    create_type_reference_insert_sqlstr,
     create_update_inconsistency_error_query,
     db_table_exists,
+    get_create_table_sqlstr,
     get_db_tables,
+    get_nonconvertible_columns,
     get_row_count,
     get_table_columns,
     save_to_split_csvs,
@@ -40,7 +40,6 @@ from src.a12_hub_toolbox.hub_path import (
     create_belief_ote1_json_path,
     create_event_all_pack_path,
     create_gut_path,
-    create_job_path,
     create_owner_event_dir_path,
     create_planevent_path,
 )
@@ -121,7 +120,9 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
 )
 
 
-def etl_mud_dfs_to_brick_raw_tables(conn: sqlite3_Connection, mud_dir: str):
+def etl_mud_dfs_to_brick_raw_tables(cursor: sqlite3_Cursor, mud_dir: str):
+    idea_sqlite_types = get_idea_sqlite_types()
+
     for ref in get_all_idea_dataframes(mud_dir):
         x_file_path = create_path(ref.file_dir, ref.filename)
         df = pandas_read_excel(x_file_path, ref.sheet_name)
@@ -134,19 +135,38 @@ def etl_mud_dfs_to_brick_raw_tables(conn: sqlite3_Connection, mud_dir: str):
         df.insert(1, "filename", ref.filename)
         df.insert(2, "sheet_name", ref.sheet_name)
         x_tablename = f"{ref.idea_number}_brick_raw"
-        df.to_sql(x_tablename, conn, index=False, if_exists="append")
+        column_names = list(df.columns)
+        column_names.append("error_message")
+        create_table_sqlstr = get_create_table_sqlstr(
+            x_tablename, column_names, idea_sqlite_types
+        )
+        cursor.execute(create_table_sqlstr)
 
+        for idx, row in df.iterrows():
+            nonconvertible_columns = get_nonconvertible_columns(
+                row.to_dict(), idea_sqlite_types
+            )
+            error_message = None
+            if nonconvertible_columns:
+                error_message = ""
+                for issue_col, issue_value in nonconvertible_columns.items():
+                    if error_message:
+                        error_message += ", "
+                    error_message += f"{issue_col}: {issue_value}"
+                error_message = f"Conversion errors: {error_message}"
+            row_values = list(row)
+            row_values.append(error_message)
+            x_index = 0
+            # Set value to None for non-convertible columns
+            for col in column_names:
+                if nonconvertible_columns.get(col):
+                    row_values[x_index] = None
+                x_index += 1
 
-def etl_brick_raw_db_to_brick_raw_df(conn: sqlite3_Connection, brick_dir: str):
-    brick_raw_dict = {f"{idea}_brick_raw": idea for idea in get_idea_numbers()}
-    brick_raw_tables = set(brick_raw_dict.keys())
-    for table_name in get_db_tables(conn):
-        if table_name in brick_raw_tables:
-            idea_number = brick_raw_dict.get(table_name)
-            brick_path = create_path(brick_dir, f"{idea_number}.xlsx")
-            sqlstr = f"SELECT * FROM {table_name}"
-            brick_raw_idea_df = pandas_read_sql_query(sqlstr, conn)
-            upsert_sheet(brick_path, "brick_raw", brick_raw_idea_df)
+            insert_sqlstr = create_type_reference_insert_sqlstr(
+                x_tablename, column_names, row_values
+            )
+            cursor.execute(insert_sqlstr)
 
 
 def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
@@ -185,6 +205,7 @@ def etl_brick_raw_tables_to_brick_agg_tables(conn_or_cursor: sqlite3_Connection)
                 x_table=x_tablename,
                 groupby_columns=key_columns_list,
                 value_columns=value_columns_list,
+                where_clause="WHERE error_message IS NULL",
             )
             insert_clause_sqlstr = create_insert_into_clause_str(
                 conn_or_cursor,
@@ -230,7 +251,7 @@ def etl_brick_agg_tables_to_brick_valid_tables(conn_or_cursor: sqlite3_Connectio
             conn_or_cursor.execute(insert_select_into_sqlstr)
 
 
-def etl_brick_raw_tables_to_events_brick_agg_table(conn_or_cursor: sqlite3_Cursor):
+def etl_brick_agg_tables_to_events_brick_agg_table(conn_or_cursor: sqlite3_Cursor):
     brick_events_tablename = "events_brick_agg"
     if not db_table_exists(conn_or_cursor, brick_events_tablename):
         brick_events_columns = [
@@ -401,8 +422,14 @@ def insert_pidgin_core_agg_to_pidgin_core_vld_table(cursor: sqlite3_Cursor):
 def update_inconsistency_pidgin_core_raw_table(cursor: sqlite3_Cursor):
     pidgin_core_s_raw_tablename = create_prime_tablename("pidcore", "s", "raw")
     sqlstr = create_update_inconsistency_error_query(
-        cursor, pidgin_core_s_raw_tablename, {"face_name"}, {"source_dimen"}
+        cursor,
+        x_tablename=pidgin_core_s_raw_tablename,
+        focus_columns={"face_name"},
+        exclude_columns={"source_dimen"},
+        error_holder_column="error_message",
+        error_explanation="Inconsistent data",
     )
+
     cursor.execute(sqlstr)
 
 

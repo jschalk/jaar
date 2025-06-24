@@ -5,10 +5,6 @@ def allowed_crud_str() -> str:
     return "allowed_crud"
 
 
-def brick_raw_str() -> str:
-    return "brick_raw"
-
-
 def build_order_str() -> str:
     return "build_order"
 
@@ -23,6 +19,10 @@ def delete_insert_update_str() -> str:
 
 def delete_update_str() -> str:
     return "delete_update"
+
+
+def error_message_str() -> str:
+    return "error_message"
 
 
 def idea_category_str() -> str:

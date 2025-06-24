@@ -100,25 +100,6 @@ def get_relevant_columns_dataframe(
     return src_df[relevant_cols_in_order]
 
 
-def get_brick_raw_grouping_with_all_values_equal_df(
-    x_df: DataFrame, groupby_list: list, idea_number: str
-) -> DataFrame:
-    df_columns = set(x_df.columns)
-    grouping_columns = get_default_sorted_list(df_columns, groupby_list)
-    value_columns = df_columns.difference(grouping_columns)
-
-    if grouping_columns == []:
-        return x_df
-    with sqlite3_connect(":memory:") as conn:
-        x_df.to_sql("brick_raw", conn, index=False)
-        query_str = get_grouping_with_all_values_equal_sql_query(
-            x_table="brick_raw",
-            groupby_columns=grouping_columns,
-            value_columns=value_columns,
-        )
-        return pandas_read_sql_query(query_str, conn)
-
-
 def get_dataframe_pidginable_columns(x_df: DataFrame) -> set[str]:
     return {x_column for x_column in x_df.columns if x_column in get_pidginable_args()}
 

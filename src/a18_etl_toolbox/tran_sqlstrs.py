@@ -136,11 +136,11 @@ CREATE_BLFPAYY_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_paybook_s
 CREATE_BLFPAYY_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_paybook_s_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
 CREATE_BLFPAYY_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_paybook_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, acct_name_otx TEXT, acct_name_inx TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
 CREATE_BLFPAYY_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_paybook_v_agg (belief_label TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
-CREATE_BLFBUDD_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_budunit_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, owner_name TEXT, bud_time INTEGER, quota REAL, celldepth INT, error_message TEXT)"""
-CREATE_BLFBUDD_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_budunit_s_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, owner_name TEXT, bud_time INTEGER, quota REAL, celldepth INT, error_message TEXT)"""
-CREATE_BLFBUDD_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_budunit_s_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, owner_name TEXT, bud_time INTEGER, quota REAL, celldepth INT)"""
-CREATE_BLFBUDD_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_budunit_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, bud_time INTEGER, quota REAL, celldepth INT, error_message TEXT)"""
-CREATE_BLFBUDD_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_budunit_v_agg (belief_label TEXT, owner_name TEXT, bud_time INTEGER, quota REAL, celldepth INT)"""
+CREATE_BLFBUDD_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_budunit_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, owner_name TEXT, bud_time INTEGER, quota REAL, celldepth INTEGER, error_message TEXT)"""
+CREATE_BLFBUDD_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_budunit_s_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, owner_name TEXT, bud_time INTEGER, quota REAL, celldepth INTEGER, error_message TEXT)"""
+CREATE_BLFBUDD_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_budunit_s_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, owner_name TEXT, bud_time INTEGER, quota REAL, celldepth INTEGER)"""
+CREATE_BLFBUDD_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_budunit_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, bud_time INTEGER, quota REAL, celldepth INTEGER, error_message TEXT)"""
+CREATE_BLFBUDD_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_budunit_v_agg (belief_label TEXT, owner_name TEXT, bud_time INTEGER, quota REAL, celldepth INTEGER)"""
 CREATE_BLFHOUR_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_timeline_hour_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, cumulative_minute INTEGER, hour_label TEXT, error_message TEXT)"""
 CREATE_BLFHOUR_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_timeline_hour_s_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, cumulative_minute INTEGER, hour_label TEXT, error_message TEXT)"""
 CREATE_BLFHOUR_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_timeline_hour_s_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, cumulative_minute INTEGER, hour_label TEXT)"""
@@ -497,7 +497,12 @@ def create_sound_raw_update_inconsist_error_message_sqlstr(
     dimen_config = get_idea_config_dict().get(dimen)
     dimen_focus_columns = set(dimen_config.get("jkeys").keys())
     return create_update_inconsistency_error_query(
-        conn_or_cursor, x_tablename, dimen_focus_columns, exclude_cols
+        conn_or_cursor=conn_or_cursor,
+        x_tablename=x_tablename,
+        focus_columns=dimen_focus_columns,
+        exclude_columns=exclude_cols,
+        error_holder_column="error_message",
+        error_explanation="Inconsistent data",
     )
 
 
@@ -524,6 +529,7 @@ def create_sound_agg_insert_sqlstrs(
         dst_table=agg_tablename,
         focus_cols=dimen_focus_columns,
         exclude_cols=exclude_cols,
+        where_block="WHERE error_message IS NULL",
     )
     sqlstrs = [pidgin_belief_plan_put_sqlstr]
     if dimen.lower().startswith("plan"):

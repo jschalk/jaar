@@ -52,7 +52,7 @@ from src.a17_idea_logic.idea_db_tool import (
     get_default_sorted_list,
     get_idea_into_dimen_raw_query,
 )
-from src.a17_idea_logic.test._util.a17_str import idea_category_str
+from src.a17_idea_logic.test._util.a17_str import error_message_str, idea_category_str
 from src.a18_etl_toolbox.test._util.a18_str import (
     belief_acct_nets_str,
     belief_event_time_agg_str,
@@ -330,7 +330,7 @@ CREATE TABLE IF NOT EXISTS {belief_event_time_agg_str()} (
   {belief_label_str()} TEXT
 , {event_int_str()} INTEGER
 , agg_time INTEGER
-, error_message TEXT
+, {error_message_str()} TEXT
 )
 ;
 """
@@ -368,7 +368,7 @@ WITH EventTimeOrdered AS (
     FROM {belief_event_time_agg_str()}
 )
 UPDATE {belief_event_time_agg_str()}
-SET error_message = CASE 
+SET {error_message_str()} = CASE 
          WHEN EventTimeOrdered.prev_agg_time > EventTimeOrdered.agg_time
          THEN 'not sorted'
          ELSE 'sorted'

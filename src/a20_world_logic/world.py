@@ -17,8 +17,8 @@ from src.a18_etl_toolbox.transformers import (
     etl_belief_ote1_agg_csvs_to_jsons,
     etl_belief_ote1_agg_table_to_belief_ote1_agg_csvs,
     etl_brick_agg_tables_to_brick_valid_tables,
+    etl_brick_agg_tables_to_events_brick_agg_table,
     etl_brick_raw_tables_to_brick_agg_tables,
-    etl_brick_raw_tables_to_events_brick_agg_table,
     etl_brick_valid_tables_to_sound_raw_tables,
     etl_create_belief_cell_trees,
     etl_create_bud_mandate_ledgers,
@@ -133,7 +133,7 @@ class WorldUnit:
         etl_mud_dfs_to_brick_raw_tables(db_conn, self._mud_dir)
         # brick raw to sound raw, check by event_ints
         etl_brick_raw_tables_to_brick_agg_tables(cursor)
-        etl_brick_raw_tables_to_events_brick_agg_table(cursor)
+        etl_brick_agg_tables_to_events_brick_agg_table(cursor)
         etl_events_brick_agg_table_to_events_brick_valid_table(cursor)
         etl_brick_agg_tables_to_brick_valid_tables(cursor)
         etl_brick_valid_tables_to_sound_raw_tables(cursor)

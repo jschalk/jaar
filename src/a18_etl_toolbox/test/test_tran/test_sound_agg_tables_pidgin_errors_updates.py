@@ -11,6 +11,7 @@ from src.a16_pidgin_logic.test._util.a16_str import (
     otx_knot_str,
     unknown_str_str,
 )
+from src.a18_etl_toolbox.test._util.a18_str import error_message_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_PIDCORE_SOUND_VLD_SQLSTR,
     CREATE_PLNACCT_SOUND_PUT_AGG_STR,
@@ -55,9 +56,7 @@ VALUES
 ;
 """
         cursor.execute(insert_pidcore_sqlstr)
-        error_count_sqlstr = (
-            f"SELECT COUNT(*) FROM {plnacct_s_agg_put} WHERE error_message IS NOT NULL"
-        )
+        error_count_sqlstr = f"SELECT COUNT(*) FROM {plnacct_s_agg_put} WHERE {error_message_str()} IS NOT NULL"
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
@@ -114,9 +113,7 @@ VALUES
 ;
 """
         cursor.execute(insert_pidcore_sqlstr)
-        error_count_sqlstr = (
-            f"SELECT COUNT(*) FROM {plnacct_s_agg_put} WHERE error_message IS NOT NULL"
-        )
+        error_count_sqlstr = f"SELECT COUNT(*) FROM {plnacct_s_agg_put} WHERE {error_message_str()} IS NOT NULL"
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
@@ -175,9 +172,7 @@ VALUES
 ;
 """
         cursor.execute(insert_pidcore_sqlstr)
-        error_count_sqlstr = (
-            f"SELECT COUNT(*) FROM {plnacct_s_agg_put} WHERE error_message IS NOT NULL"
-        )
+        error_count_sqlstr = f"SELECT COUNT(*) FROM {plnacct_s_agg_put} WHERE {error_message_str()} IS NOT NULL"
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN

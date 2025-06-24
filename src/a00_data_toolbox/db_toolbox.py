@@ -1,14 +1,8 @@
-from contextlib import contextmanager
 from csv import reader as csv_reader, writer as csv_writer
 from dataclasses import dataclass
 from os.path import join as os_path_join
-from sqlite3 import (
-    Connection as sqlite3_Connection,
-    Error as sqlite3_Error,
-    connect as sqlite3_connect,
-)
+from sqlite3 import Connection as sqlite3_Connection, Error as sqlite3_Error
 from src.a00_data_toolbox.file_toolbox import create_path, set_dir
-from typing import Any, Generator
 
 
 def sqlite_obj_str(x_obj: any, sqlite_datatype: str):
@@ -58,6 +52,42 @@ def get_sorted_intersection_list(
     return [x_col for x_col in sorting_columns if x_col in sort_columns_in_existing]
 
 
+def get_nonconvertible_columns(
+    row_dict: dict[str, str], col_types: dict[str, str]
+) -> dict[str, str]:
+    """
+    Returns a list of columns from row_dict that cannot be converted
+    to the expected numeric type defined in col_types.
+
+    Parameters:
+    - row_dict: dict with column names as keys and cell values.
+    - col_types: dict mapping column names to "Integer", "Real", or "Text".
+
+    Returns:
+    - Dictionary of column names and the values where numeric conversion fails.
+    """
+    nonconvertible = {}
+    for col, value in row_dict.items():
+        expected_type = col_types.get(col)
+        if expected_type == "INTEGER":
+            try:
+                int_val = int(value)
+                if isinstance(value, float) and not value.is_integer():
+                    raise ValueError("float with decimal")
+            except (ValueError, TypeError):
+                nonconvertible[col] = value
+
+        elif expected_type == "REAL":
+            try:
+                float(value)
+            except (ValueError, TypeError):
+                nonconvertible[col] = value
+        elif expected_type and expected_type != "TEXT":
+            nonconvertible[col] = value
+        # ignore if expected_type == "Text" or expected_type is None:
+    return nonconvertible
+
+
 def create_type_reference_insert_sqlstr(
     x_table: str, x_columns: list[str], x_values: list[str]
 ) -> str:
@@ -73,8 +103,13 @@ INSERT INTO {x_table} ("""
 , {x_column}"""
     values_str = ""
     for x_value in x_values:
-        if str(type(x_value)) != "<class 'int'>":
-            x_value = f"'{x_value}'"
+        if x_value is None:
+            x_value = "NULL"
+        else:
+            try:
+                float(x_value)
+            except (ValueError, TypeError):
+                x_value = f"'{x_value}'"
 
         if values_str == "":
             values_str = f"""{values_str}
@@ -220,15 +255,29 @@ def _get_having_equal_value_clause(value_columns: list[str]) -> str:
 
 
 def get_groupby_sql_query(
-    x_table: str, groupby_columns: list[str], value_columns: list[str]
+    x_table: str,
+    groupby_columns: list[str],
+    value_columns: list[str],
+    where_clause: str = None,
 ) -> str:
-    return f"{_get_grouping_select_clause(groupby_columns, value_columns)} FROM {x_table} {_get_grouping_groupby_clause(groupby_columns)}"
+    if not where_clause:
+        where_clause = ""
+    else:
+        where_clause = f"{where_clause} "
+    return f"{_get_grouping_select_clause(groupby_columns, value_columns)} FROM {x_table} {where_clause}{_get_grouping_groupby_clause(groupby_columns)}"
 
 
 def get_grouping_with_all_values_equal_sql_query(
-    x_table: str, groupby_columns: list[str], value_columns: list[str]
+    x_table: str,
+    groupby_columns: list[str],
+    value_columns: list[str],
+    where_clause: str = None,
 ) -> str:
-    return f"{_get_grouping_select_clause(groupby_columns, value_columns)} FROM {x_table} {_get_grouping_groupby_clause(groupby_columns)} {_get_having_equal_value_clause(value_columns)}"
+    if not where_clause:
+        where_clause = ""
+    else:
+        where_clause = f"{where_clause} "
+    return f"{_get_grouping_select_clause(groupby_columns, value_columns)} FROM {x_table} {where_clause}{_get_grouping_groupby_clause(groupby_columns)} {_get_having_equal_value_clause(value_columns)}"
 
 
 class insert_csv_Exception(Exception):
@@ -378,6 +427,8 @@ def create_update_inconsistency_error_query(
     x_tablename: str,
     focus_columns: set[str],
     exclude_columns: set[str],
+    error_holder_column: str,
+    error_explanation: str,
 ):
     select_inconsistency_query = create_select_inconsistency_query(
         conn_or_cursor, x_tablename, focus_columns, exclude_columns
@@ -396,7 +447,7 @@ def create_update_inconsistency_error_query(
     return f"""WITH inconsistency_rows AS (
 {select_inconsistency_query})
 UPDATE {x_tablename}
-SET error_message = 'Inconsistent data'
+SET {error_holder_column} = '{error_explanation}'
 FROM inconsistency_rows
 {where_str}
 ;
@@ -409,7 +460,7 @@ def create_table2table_agg_insert_query(
     dst_table: str,
     focus_cols: list[str],
     exclude_cols: set[str],
-    where_block: str = None,
+    where_block: str,
 ) -> str:
     if not focus_cols:
         focus_cols = set(get_table_columns(conn_or_cursor, dst_table))
@@ -427,8 +478,10 @@ def create_table2table_agg_insert_query(
         else:
             select_columns_str += f", MAX({dst_column})"
     groupby_columns_str = ", ".join(focus_col_list)
-    if where_block is None:
-        where_block = "\nWHERE error_message IS NULL"
+    if where_block:
+        where_block = f"\n{where_block}"
+    else:
+        where_block = ""
 
     return f"""INSERT INTO {dst_table} ({dst_columns_str})
 SELECT {select_columns_str}

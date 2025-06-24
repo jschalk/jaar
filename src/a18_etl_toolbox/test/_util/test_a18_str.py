@@ -2,6 +2,7 @@ from src.a18_etl_toolbox.test._util.a18_str import (
     belief_acct_nets_str,
     belief_event_time_agg_str,
     brick_agg_str,
+    brick_raw_str,
     brick_valid_str,
     events_brick_agg_str,
     events_brick_valid_str,
@@ -16,6 +17,7 @@ from src.a18_etl_toolbox.test._util.a18_str import (
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert brick_agg_str() == "brick_agg"
+    assert brick_raw_str() == "brick_raw"
     assert brick_valid_str() == "brick_valid"
     assert events_brick_agg_str() == "events_brick_agg"
     assert events_brick_valid_str() == "events_brick_valid"
