@@ -314,6 +314,27 @@ def test_get_groupby_sql_query_ReturnsObj_Scenario0():
     assert gen_select_clause == example_str
 
 
+def test_get_groupby_sql_query_ReturnsObj_Scenario1_IncludeWhereClause():
+    # ESTABLISH
+    fizz_str = "fizz"
+    buzz_str = "buzz"
+    swim_str = "swim"
+    run_str = "run"
+    x_groupby_columns = [fizz_str, buzz_str]
+    x_value_columns = [swim_str, run_str]
+    x_table_name = "fizzybuzzy"
+    where_clause_str = "WHERE error_message IS NULL"
+
+    # WHEN
+    gen_select_clause = get_groupby_sql_query(
+        x_table_name, x_groupby_columns, x_value_columns, where_clause_str
+    )
+
+    # THEN
+    example_str = f"""{_get_grouping_select_clause(x_groupby_columns, x_value_columns)} FROM {x_table_name} WHERE error_message IS NULL GROUP BY {fizz_str}, {buzz_str}"""
+    assert gen_select_clause == example_str
+
+
 def test_get_grouping_with_all_values_equal_sql_query_ReturnsObj_Scenario0():
     # ESTABLISH
     fizz_str = "fizz"
@@ -331,6 +352,27 @@ def test_get_grouping_with_all_values_equal_sql_query_ReturnsObj_Scenario0():
 
     # THEN
     example_str = f"""{get_groupby_sql_query(x_table_name, x_groupby_columns, x_value_columns)} HAVING MIN({swim_str}) = MAX({swim_str}) AND MIN({run_str}) = MAX({run_str})"""
+    assert gen_select_clause == example_str
+
+
+def test_get_grouping_with_all_values_equal_sql_query_ReturnsObj_Scenario1_IncludeWhereClause():
+    # ESTABLISH
+    fizz_str = "fizz"
+    buzz_str = "buzz"
+    swim_str = "swim"
+    run_str = "run"
+    x_groupby_columns = [fizz_str, buzz_str]
+    x_value_columns = [swim_str, run_str]
+    x_table_name = "fizzybuzzy"
+    where_clause_str = "WHERE error_message IS NULL"
+
+    # WHEN
+    gen_select_clause = get_grouping_with_all_values_equal_sql_query(
+        x_table_name, x_groupby_columns, x_value_columns, where_clause_str
+    )
+
+    # THEN
+    example_str = f"""{get_groupby_sql_query(x_table_name, x_groupby_columns, x_value_columns, where_clause_str)} HAVING MIN({swim_str}) = MAX({swim_str}) AND MIN({run_str}) = MAX({run_str})"""
     assert gen_select_clause == example_str
 
 

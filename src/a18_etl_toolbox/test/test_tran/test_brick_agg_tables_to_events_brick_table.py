@@ -18,13 +18,13 @@ from src.a18_etl_toolbox.test._util.a18_str import (
     events_brick_valid_str,
 )
 from src.a18_etl_toolbox.transformers import (
-    etl_brick_raw_tables_to_events_brick_agg_table,
+    etl_brick_agg_tables_to_events_brick_agg_table,
     etl_events_brick_agg_db_to_event_dict,
     etl_events_brick_agg_table_to_events_brick_valid_table,
 )
 
 
-def test_etl_brick_raw_tables_to_events_brick_agg_table_PopulatesTables_Scenario0():
+def test_etl_brick_agg_tables_to_events_brick_agg_table_PopulatesTables_Scenario0():
     # ESTABLISH
     a23_str = "accord23"
     sue_str = "Sue"
@@ -69,7 +69,7 @@ VALUES
         assert not db_table_exists(cursor, brick_events_tablename)
 
         # WHEN
-        etl_brick_raw_tables_to_events_brick_agg_table(cursor)
+        etl_brick_agg_tables_to_events_brick_agg_table(cursor)
 
         # THEN
         assert db_table_exists(cursor, brick_events_tablename)
@@ -97,7 +97,7 @@ ORDER BY {event_int_str()}, {face_name_str()};"""
         assert rows[2] == yao9_r
 
 
-def test_etl_brick_raw_tables_to_events_brick_agg_table_PopulatesTables_Scenario1():
+def test_etl_brick_agg_tables_to_events_brick_agg_table_PopulatesTables_Scenario1():
     # ESTABLISH
     a23_str = "accord23"
     sue_str = "Sue"
@@ -144,7 +144,7 @@ VALUES
         assert not db_table_exists(cursor, brick_events_tablename)
 
         # WHEN
-        etl_brick_raw_tables_to_events_brick_agg_table(cursor)
+        etl_brick_agg_tables_to_events_brick_agg_table(cursor)
 
         # THEN
         assert db_table_exists(cursor, brick_events_tablename)

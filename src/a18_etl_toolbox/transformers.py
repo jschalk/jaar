@@ -205,6 +205,7 @@ def etl_brick_raw_tables_to_brick_agg_tables(conn_or_cursor: sqlite3_Connection)
                 x_table=x_tablename,
                 groupby_columns=key_columns_list,
                 value_columns=value_columns_list,
+                where_clause="WHERE error_message IS NULL",
             )
             insert_clause_sqlstr = create_insert_into_clause_str(
                 conn_or_cursor,
@@ -250,7 +251,7 @@ def etl_brick_agg_tables_to_brick_valid_tables(conn_or_cursor: sqlite3_Connectio
             conn_or_cursor.execute(insert_select_into_sqlstr)
 
 
-def etl_brick_raw_tables_to_events_brick_agg_table(conn_or_cursor: sqlite3_Cursor):
+def etl_brick_agg_tables_to_events_brick_agg_table(conn_or_cursor: sqlite3_Cursor):
     brick_events_tablename = "events_brick_agg"
     if not db_table_exists(conn_or_cursor, brick_events_tablename):
         brick_events_columns = [

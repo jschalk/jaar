@@ -255,15 +255,29 @@ def _get_having_equal_value_clause(value_columns: list[str]) -> str:
 
 
 def get_groupby_sql_query(
-    x_table: str, groupby_columns: list[str], value_columns: list[str]
+    x_table: str,
+    groupby_columns: list[str],
+    value_columns: list[str],
+    where_clause: str = None,
 ) -> str:
-    return f"{_get_grouping_select_clause(groupby_columns, value_columns)} FROM {x_table} {_get_grouping_groupby_clause(groupby_columns)}"
+    if not where_clause:
+        where_clause = ""
+    else:
+        where_clause = f"{where_clause} "
+    return f"{_get_grouping_select_clause(groupby_columns, value_columns)} FROM {x_table} {where_clause}{_get_grouping_groupby_clause(groupby_columns)}"
 
 
 def get_grouping_with_all_values_equal_sql_query(
-    x_table: str, groupby_columns: list[str], value_columns: list[str]
+    x_table: str,
+    groupby_columns: list[str],
+    value_columns: list[str],
+    where_clause: str = None,
 ) -> str:
-    return f"{_get_grouping_select_clause(groupby_columns, value_columns)} FROM {x_table} {_get_grouping_groupby_clause(groupby_columns)} {_get_having_equal_value_clause(value_columns)}"
+    if not where_clause:
+        where_clause = ""
+    else:
+        where_clause = f"{where_clause} "
+    return f"{_get_grouping_select_clause(groupby_columns, value_columns)} FROM {x_table} {where_clause}{_get_grouping_groupby_clause(groupby_columns)} {_get_having_equal_value_clause(value_columns)}"
 
 
 class insert_csv_Exception(Exception):
