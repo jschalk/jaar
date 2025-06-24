@@ -49,7 +49,7 @@ from src.a12_hub_toolbox.hub_tool import (
     open_job_file,
     open_plan_file,
 )
-from src.a15_belief_logic.belief import get_default_path_belief
+from src.a15_belief_logic.belief import get_default_path_beliefunit
 from src.a15_belief_logic.belief_cell import (
     create_belief_owners_cell_trees,
     create_bud_mandate_ledgers,
@@ -724,7 +724,7 @@ def etl_create_buds_root_cells(belief_mstr_dir: str):
         ote1_json_path = create_path(belief_dir, "belief_ote1_agg.json")
         if os_path_exists(ote1_json_path):
             ote1_dict = open_json(ote1_json_path)
-            x_beliefunit = get_default_path_belief(belief_mstr_dir, belief_label)
+            x_beliefunit = get_default_path_beliefunit(belief_mstr_dir, belief_label)
             x_beliefunit.create_buds_root_cells(ote1_dict)
 
 
@@ -900,7 +900,7 @@ def etl_event_inherited_planunits_to_belief_gut(belief_mstr_dir: str):
 def etl_belief_guts_to_belief_jobs(belief_mstr_dir: str):
     beliefs_dir = create_path(belief_mstr_dir, "beliefs")
     for belief_label in get_level1_dirs(beliefs_dir):
-        x_beliefunit = get_default_path_belief(belief_mstr_dir, belief_label)
+        x_beliefunit = get_default_path_beliefunit(belief_mstr_dir, belief_label)
         x_beliefunit.generate_all_jobs()
 
 
@@ -936,6 +936,6 @@ def etl_belief_json_acct_nets_to_belief_acct_nets_table(
     cursor.execute(CREATE_BELIEF_ACCT_NETS_SQLSTR)
     beliefs_dir = create_path(belief_mstr_dir, "beliefs")
     for belief_label in get_level1_dirs(beliefs_dir):
-        x_beliefunit = get_default_path_belief(belief_mstr_dir, belief_label)
+        x_beliefunit = get_default_path_beliefunit(belief_mstr_dir, belief_label)
         x_beliefunit.set_all_tranbook()
         insert_tranunit_accts_net(cursor, x_beliefunit._all_tranbook)

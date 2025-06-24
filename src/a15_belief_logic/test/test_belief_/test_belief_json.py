@@ -16,7 +16,7 @@ from src.a07_timeline_logic.timeline import get_default_timeline_config_dict
 from src.a12_hub_toolbox.hub_path import create_belief_json_path
 from src.a15_belief_logic.belief import (
     beliefunit_shop,
-    get_default_path_belief,
+    get_default_path_beliefunit,
     get_from_dict as beliefunit_get_from_dict,
     get_from_json as beliefunit_get_from_json,
 )
@@ -290,7 +290,7 @@ def test_get_from_file_ReturnsBeliefUnitWith_belief_mstr_dir(env_dir_setup_clean
     assert accord45_belief.belief_mstr_dir != x_belief_mstr_dir
 
     # WHEN
-    generated_a45_belief = get_default_path_belief(x_belief_mstr_dir, accord45_str)
+    generated_a45_belief = get_default_path_beliefunit(x_belief_mstr_dir, accord45_str)
 
     # THEN
     assert generated_a45_belief.belief_mstr_dir == x_belief_mstr_dir
