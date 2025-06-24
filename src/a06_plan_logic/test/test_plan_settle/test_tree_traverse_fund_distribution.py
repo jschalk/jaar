@@ -555,7 +555,7 @@ def test_PlanUnit_settle_plan_WithLevel3AwardLinkSetsGroupUnit_fund_give_fund_ta
     assert groupunit_fund_take_sum == 1 * default_fund_pool()
 
 
-def test_PlanUnit_settle_plan_CreatesNewGroupUnitAndSets_fund_give_fund_take():
+def test_PlanUnit_settle_plan_CreatesNewGroupUnitAndSetsGroup_fund_give_fund_take():
     # ESTABLISH
     yao_str = "Yao"
     x_plan = planunit_shop(yao_str)
@@ -986,7 +986,7 @@ def test_PlanUnit_settle_plan_CorrectlySetsPartGroupedLWAcctUnitPlan_fund():
     )
 
 
-def test_PlanUnit_settle_plan_CreatesNewGroupUnitAndSets_fund_give_fund_take():
+def test_PlanUnit_settle_plan_CreatesNewGroupUnitAndSetsAcct_fund_give_fund_take():
     # ESTABLISH
     bob_str = "Bob"
     bob_plan = planunit_shop(bob_str)
@@ -1013,7 +1013,6 @@ def test_PlanUnit_settle_plan_CreatesNewGroupUnitAndSets_fund_give_fund_take():
     bob_plan.settle_plan()
 
     # THEN
-    xio_groupunit = bob_plan.get_groupunit(xio_str)
     assert len(bob_plan.get_acctunit_group_titles_dict()) != len(bob_plan._groupunits)
     assert not bob_plan.acct_exists(xio_str)
     yao_acctunit = bob_plan.get_acct(yao_str)

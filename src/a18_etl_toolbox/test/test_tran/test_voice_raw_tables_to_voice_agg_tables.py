@@ -69,7 +69,7 @@ GROUP BY {raw_columns_str}
             assert gen_sqlstr == expected_table2table_agg_insert_sqlstr
 
 
-def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_PlanDimens():
+def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_PlanDimensNeeded():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH
     idea_config = get_idea_config_dict()

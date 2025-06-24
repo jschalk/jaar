@@ -64,7 +64,7 @@ def test_get_belief_config_filename_ReturnsObj():
     assert get_belief_config_filename() == "belief_config.json"
 
 
-def test_config_file_dir_ReturnsObj() -> str:
+def test_config_file_dir_ReturnsObj_Belief() -> str:
     src_dir = create_path(os_getcwd(), "src")
     assert config_file_dir() == create_path(src_dir, "a15_belief_logic")
 

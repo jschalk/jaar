@@ -269,7 +269,7 @@ def test_RiverRun_get_acct_tax_due_ReturnsObj():
     assert bob_riverrun.get_acct_tax_due(zia_str) == 0
 
 
-def test_RiverRun_levy_tax_due_SetsAttr():
+def test_RiverRun_levy_tax_due_SetsAttr_ScenarioX():
     # ESTABLISH
     bob_str = "Bob"
     bob_money_amount = 1000

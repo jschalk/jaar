@@ -10,7 +10,7 @@ from src.a06_plan_logic.test._util.example_plans import (
 )
 
 
-def test_PlanUnit_clear_concept_dict_and_plan_obj_settle_attrs_CorrectlySetsAttrs():
+def test_PlanUnit_clear_concept_dict_and_plan_obj_settle_attrs_SetsAttrs_Scenario0():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     x_rational = True
@@ -46,7 +46,7 @@ def test_PlanUnit_clear_concept_dict_and_plan_obj_settle_attrs_CorrectlySetsAttr
     assert not sue_plan._range_inheritors
 
 
-def test_PlanUnit_clear_concept_dict_and_plan_obj_settle_attrs_CorrectlySetsAttrs():
+def test_PlanUnit_clear_concept_dict_and_plan_obj_settle_attrs_SetsAttrs_Scenario1():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     x_keep_justifed = False

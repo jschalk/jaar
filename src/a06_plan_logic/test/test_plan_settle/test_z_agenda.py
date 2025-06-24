@@ -20,7 +20,7 @@ def get_chores_count(agenda_dict: dict[RopeTerm, ConceptUnit]) -> int:
     return sum(bool(x_conceptunit._chore) for x_conceptunit in agenda_dict.values())
 
 
-def test_PlanUnit_get_agenda_dict_ReturnsObj():
+def test_PlanUnit_get_agenda_dict_ReturnsObj_WithTwoConcepts():
     # ESTABLISH
     sue_plan = get_planunit_with_4_levels()
 

@@ -1,10 +1,6 @@
 from plotly.graph_objects import Figure as plotly_Figure
 
 
-def get_positional_dict(x_list: list[str]) -> dict[str, int]:
-    return {x_element: x_count for x_count, x_element in enumerate(x_list)}
-
-
 def conditional_fig_show(fig: plotly_Figure, graphics_bool: bool):
     if graphics_bool:
         fig.show()

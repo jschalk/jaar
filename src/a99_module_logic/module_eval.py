@@ -6,7 +6,11 @@ from ast import (
 )
 from os import walk as os_walk
 from os.path import join as os_path_join
-from src.a00_data_toolbox.file_toolbox import create_path, get_level1_dirs
+from src.a00_data_toolbox.file_toolbox import (
+    create_path,
+    get_dir_filenames,
+    get_level1_dirs,
+)
 
 
 def get_imports_from_file(file_path):
@@ -141,6 +145,30 @@ def get_all_str_functions() -> list:
             str_functions = get_function_names_from_file(str_util_path)
             all_str_functions.extend(iter(str_functions))
     return all_str_functions
+
+
+def get_duplicated_functions(excluded_functions) -> set[str]:
+    x_count = 0
+    duplicate_functions = set()
+    all_functions = set()
+    for module_desc, module_dir in get_module_descs().items():
+        filenames_set = get_dir_filenames(module_dir, include_extensions={"py"})
+        for filenames in filenames_set:
+            file_dir = create_path(module_dir, filenames[0])
+            file_path = create_path(file_dir, filenames[1])
+            file_functions = get_function_names_from_file(file_path)
+            for function_name in file_functions:
+                x_count += 1
+                if function_name in all_functions:
+                    print(
+                        f"Function #{x_count}: Duplicate function {function_name} in {file_path}"
+                    )
+                    duplicate_functions.add(function_name)
+                if function_name not in excluded_functions:
+                    all_functions.add(function_name)
+    print(f"{duplicate_functions=}")
+    print(f"{len(all_functions)=}")
+    return duplicate_functions
 
 
 def check_if_module_str_funcs_is_sorted(module_str_funcs: list[str]):

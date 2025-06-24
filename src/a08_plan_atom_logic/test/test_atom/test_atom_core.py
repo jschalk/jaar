@@ -81,7 +81,7 @@ def test_PlanAtom_set_jvalue_CorrectlySetsAttr():
     assert acctunit_planatom.jvalues == {acct_name_str(): bob_str}
 
 
-def test_PlanAtom_get_value_ReturnsObj():
+def test_PlanAtom_get_value_ReturnsObj_Scenario0():
     # ESTABLISH
     bob_str = "Bob"
     acctunit_str = plan_acctunit_str()
@@ -175,7 +175,7 @@ def test_PlanAtom_is_valid_ReturnsCorrectBoolean_AcctUnit_INSERT():
     assert bob_insert_planatom.is_valid()
 
 
-def test_PlanAtom_get_value_ReturnsObj():
+def test_PlanAtom_get_value_ReturnsObj_Scenario1():
     # ESTABLISH
     bob_str = "Bob"
     bob_acct_cred_points = 55

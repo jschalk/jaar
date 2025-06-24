@@ -771,7 +771,7 @@ def test_PlanUnit__get_filtered_awardlinks_concept_CorrectlyRemovesGroup_awardli
     assert list(cleaned_concept.awardlinks.keys()) == [xia_str]
 
 
-def test_PlanUnit_set_concept_CorrectlyCleansConcept_awardlinks():
+def test_PlanUnit_set_concept_SetsConcept_awardlinks():
     # ESTABLISH
     bob_str = "Bob"
     example_plan = planunit_shop(bob_str)
@@ -790,10 +790,10 @@ def test_PlanUnit_set_concept_CorrectlyCleansConcept_awardlinks():
     example_plan.edit_concept_attr(swim_rope, awardlink=awardlink_shop(zoa_str))
     example_plan_swim_concept = example_plan.get_concept_obj(swim_rope)
     assert len(example_plan_swim_concept.awardlinks) == 2
-
-    # WHEN
     bob_plan = planunit_shop(bob_str)
     bob_plan.add_acctunit(xia_str)
+
+    # WHEN
     bob_plan.set_l1_concept(example_plan_swim_concept, create_missing_concepts=False)
 
     # THEN

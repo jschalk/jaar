@@ -57,11 +57,6 @@ def test_TimeLineLabel_exists():
     assert inspect_getdoc(x_timelinelabel) == doc_str
 
 
-def test_TimeLinePoint_Exists():
-    # ESTABLISH / WHEN / THEN
-    assert TimeLinePoint(4) == 4
-
-
 def test_get_timeline_rope_ReturnsObj_Scenario0_default_knot():
     # ESTABLISH
     fizz_belief_label = "fizz"
