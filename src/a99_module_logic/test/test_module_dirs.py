@@ -31,10 +31,10 @@ def test_Module_util_FilesExist():
     # WHEN / THEN
     # previous_module_number = -1
     for module_desc, module_dir in get_module_descs().items():
-        print(f"{module_desc=} {module_dir=}")
+        print(f"Evaluating {module_desc=} {module_dir=}")
         module_number = int(module_desc[1:3])
         # assert module_number == previous_module_number + 1
-        print(f"{module_desc=} {module_number=}")
+        # print(f"{module_desc=} {module_number=}")
         test_dir = create_path(module_dir, "test")
         util_dir = create_path(test_dir, "_util")
         assert os_path_exists(util_dir)
@@ -44,11 +44,18 @@ def test_Module_util_FilesExist():
         # assert os_path_exists(str_func_test_path)
         env_files = get_python_files_with_flag(util_dir, "env")
         if len(env_files) > 0:
-            print(f"{env_files=}")
+            # print(f"{env_files=}")
             assert len(env_files) == 1
             env_filename = str(list(env_files.keys())[0])
-            print(f"{env_filename=}")
+            # print(f"{env_filename=}")
             assert env_filename.endswith(f"a{module_desc[1:3]}_env.py")
+            assertion_fail_str = (
+                f"{module_number=} {get_function_names_from_file(env_filename)}"
+            )
+            env_functions = set(get_function_names_from_file(env_filename))
+            assert "env_dir_setup_cleanup" in env_functions, assertion_fail_str
+            assert "get_module_temp_dir" in env_functions, assertion_fail_str
+            # print(f"{module_number=} {get_function_names_from_file(env_filename)}")
 
         # previous_module_number = module_number
 
