@@ -150,7 +150,7 @@ class WorldUnit:
         etl_event_plan_csvs_to_pack_json(self._belief_mstr_dir)
         etl_event_pack_json_to_event_inherited_planunits(self._belief_mstr_dir)
         etl_event_inherited_planunits_to_belief_gut(self._belief_mstr_dir)
-        # add_belief_timeline_to_guts(self._belief_mstr_dir)
+        add_belief_timeline_to_guts(self._belief_mstr_dir)
         etl_belief_guts_to_belief_jobs(self._belief_mstr_dir)
         etl_voice_raw_tables_to_belief_ote1_agg(cursor)
         etl_belief_ote1_agg_table_to_belief_ote1_agg_csvs(cursor, self._belief_mstr_dir)

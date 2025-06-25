@@ -195,10 +195,10 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
         assert os_path_exists(a23_e1_all_pack_path)
         assert os_path_exists(a23_e1_expressed_pack_path)
         assert os_path_exists(a23_sue_gut_path)
-        # sue_gut = open_gut_file(mstr_dir, a23_str, sue_inx)
-        # time_rope = sue_gut.make_l1_rope(time_str())
-        # creg_rope = sue_gut.make_rope(time_rope, creg_str())
-        # assert sue_gut.concept_exists(creg_rope)
+        sue_gut = open_gut_file(mstr_dir, a23_str, sue_inx)
+        time_rope = sue_gut.make_l1_rope(time_str())
+        creg_rope = sue_gut.make_rope(time_rope, creg_str())
+        assert sue_gut.concept_exists(creg_rope)
         assert os_path_exists(a23_sue_job_path)
         assert get_row_count(cursor, plnacct_job) == 1
         assert get_row_count(cursor, belief_acct_nets_str()) == 0

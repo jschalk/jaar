@@ -433,7 +433,7 @@ def test_TimeLineUnit_Exists():
     assert not x_timelineunit.yr1_jan1_offset
 
 
-def test_timelineunit_shop_ReturnsObj_Default():
+def test_timelineunit_shop_ReturnsObj_Scenario0_Default():
     # ESTABLISH
     creg_config = get_creg_config()
 
@@ -459,7 +459,7 @@ def test_timelineunit_shop_ReturnsObj_Default():
     assert x_timelineunit.yr1_jan1_offset == creg_yr1_jan1_offset
 
 
-def test_timelineunit_shop_ReturnsObj_WhenTimeLineUnitAttributesAreNone():
+def test_timelineunit_shop_ReturnsObj_Scenario1_WhenTimeLineUnitAttributesAreNone():
     # ESTABLISH
     incomplete_creg_config = get_creg_config()
     incomplete_creg_config.pop(c400_number_str())
@@ -468,6 +468,36 @@ def test_timelineunit_shop_ReturnsObj_WhenTimeLineUnitAttributesAreNone():
     incomplete_creg_config.pop(monthday_distortion_str())
     incomplete_creg_config.pop(weekdays_config_str())
     incomplete_creg_config.pop(yr1_jan1_offset_str())
+    assert incomplete_creg_config
+
+    # WHEN
+    x_timelineunit = timelineunit_shop(incomplete_creg_config)
+
+    # THEN
+    creg_config = get_creg_config()
+    creg_c400_number = creg_config.get(c400_number_str())
+    creg_hours_config = creg_config.get(hours_config_str())
+    creg_months_config = creg_config.get(months_config_str())
+    creg_timeline_label = creg_config.get(timeline_label_str())
+    creg_weekdays_config = creg_config.get(weekdays_config_str())
+    creg_monthday_distortion = creg_config.get(monthday_distortion_str())
+    creg_yr1_jan1_offset = creg_config.get(yr1_jan1_offset_str())
+
+    assert x_timelineunit
+    assert x_timelineunit.c400_number == creg_c400_number
+    assert x_timelineunit.hours_config == creg_hours_config
+    assert x_timelineunit.months_config == creg_months_config
+    assert x_timelineunit.monthday_distortion == creg_monthday_distortion
+    assert x_timelineunit.timeline_label == creg_timeline_label
+    assert x_timelineunit.weekdays_config == creg_weekdays_config
+    assert x_timelineunit.yr1_jan1_offset == creg_yr1_jan1_offset
+
+
+def test_timelineunit_shop_ReturnsObj_Scenario2_timeline_label_Missing():
+    # ESTABLISH
+    incomplete_creg_config = get_creg_config()
+    incomplete_creg_config.pop(timeline_label_str())
+    incomplete_creg_config.pop(hours_config_str())
     assert incomplete_creg_config
 
     # WHEN
