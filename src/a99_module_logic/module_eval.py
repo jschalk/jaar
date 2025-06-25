@@ -1,12 +1,9 @@
 from ast import (
     FunctionDef as ast_FunctionDef,
     ImportFrom as ast_ImportFrom,
+    get_docstring as ast_get_docstring,
     parse as ast_parse,
     walk as ast_walk,
-)
-from importlib.util import (
-    module_from_spec as importlib_util_module_from_spec,
-    spec_from_file_location as importlib_util_spec_from_file_location,
 )
 import inspect
 from os import walk as os_walk
@@ -242,12 +239,12 @@ def check_str_func_test_file_has_needed_asserts(
         assert test_file_str.find(str_func_assert_str) > 0
 
 
-def get_docstring(file_path, function_name):
-    # Load module from file path
-    module_name = os_path_splitext(os_path_basename(file_path))[0]
-    spec = importlib_util_spec_from_file_location(module_name, file_path)
-    module = importlib_util_module_from_spec(spec)
-    spec.loader.exec_module(module)
+def get_docstring(file_path: str, function_name: str) -> str:
+    with open(file_path, "r") as f:
+        tree = ast_parse(f.read(), filename=file_path)
 
-    func = getattr(module, function_name)
-    return inspect.getdoc(func)  # Cleans up whitespace
+    for node in ast_walk(tree):
+        if isinstance(node, ast_FunctionDef) and node.name == function_name:
+            return ast_get_docstring(node)
+
+    return None
