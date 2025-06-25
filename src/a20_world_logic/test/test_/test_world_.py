@@ -30,36 +30,36 @@ def test_WorldUnit_Exists():
     assert not x_world._events
     assert not x_world._syntax_otz_dir
     assert not x_world._world_dir
-    assert not x_world._mud_dir
+    assert not x_world._input_dir
     assert not x_world._brick_dir
     assert not x_world._belief_mstr_dir
     assert not x_world._beliefunits
     assert not x_world._pidgin_events
 
 
-def test_WorldUnit_set_mud_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
+def test_WorldUnit_set_input_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_world = WorldUnit("fizz")
     x_example_dir = create_path(worlds_dir(), "example_dir")
-    x_mud_dir = create_path(x_example_dir, "mud")
+    x_input_dir = create_path(x_example_dir, "input")
 
     assert not fizz_world._world_dir
     assert not fizz_world._syntax_otz_dir
-    assert not fizz_world._mud_dir
+    assert not fizz_world._input_dir
     assert not fizz_world._brick_dir
     assert not fizz_world._belief_mstr_dir
-    assert os_path_exists(x_mud_dir) is False
+    assert os_path_exists(x_input_dir) is False
 
     # WHEN
-    fizz_world.set_mud_dir(x_mud_dir)
+    fizz_world.set_input_dir(x_input_dir)
 
     # THEN
     assert not fizz_world._world_dir
     assert not fizz_world._syntax_otz_dir
-    assert fizz_world._mud_dir == x_mud_dir
+    assert fizz_world._input_dir == x_input_dir
     assert not fizz_world._brick_dir
     assert not fizz_world._belief_mstr_dir
-    assert os_path_exists(x_mud_dir)
+    assert os_path_exists(x_input_dir)
 
 
 def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
@@ -68,18 +68,18 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     fizz_world = WorldUnit(world_id=fizz_str, worlds_dir=worlds_dir())
     x_world_dir = create_path(worlds_dir(), fizz_str)
     x_syntax_otz_dir = create_path(x_world_dir, "syntax_otz")
-    x_mud_dir = create_path(x_world_dir, "mud")
+    x_input_dir = create_path(x_world_dir, "input")
     x_brick_dir = create_path(x_world_dir, "brick")
     x_belief_mstr_dir = create_path(x_world_dir, "belief_mstr")
 
     assert not fizz_world._world_dir
     assert not fizz_world._syntax_otz_dir
-    assert not fizz_world._mud_dir
+    assert not fizz_world._input_dir
     assert not fizz_world._brick_dir
     assert not fizz_world._belief_mstr_dir
     assert os_path_exists(x_world_dir) is False
     assert os_path_exists(x_syntax_otz_dir) is False
-    assert os_path_exists(x_mud_dir) is False
+    assert os_path_exists(x_input_dir) is False
     assert os_path_exists(x_brick_dir) is False
     assert os_path_exists(x_belief_mstr_dir) is False
 
@@ -89,11 +89,11 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     # THEN
     assert fizz_world._world_dir == x_world_dir
     assert fizz_world._syntax_otz_dir == x_syntax_otz_dir
-    assert not fizz_world._mud_dir
+    assert not fizz_world._input_dir
     assert fizz_world._brick_dir == x_brick_dir
     assert os_path_exists(x_world_dir)
     assert os_path_exists(x_syntax_otz_dir)
-    assert os_path_exists(x_mud_dir) is False
+    assert os_path_exists(x_input_dir) is False
     assert os_path_exists(x_brick_dir)
     assert os_path_exists(x_belief_mstr_dir)
 
@@ -101,7 +101,7 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
 def test_worldunit_shop_ReturnsObj_Scenario0_WithParameters(env_dir_setup_cleanup):
     # ESTABLISH
     worlds2_dir = create_path(worlds_dir(), "worlds2")
-    example_mud_dir = create_path(worlds_dir(), "example_mud")
+    example_input_dir = create_path(worlds_dir(), "example_input")
     output_dir = create_path(worlds_dir(), "output")
     five_world_id = "five"
     world2_time_pnigh = 55
@@ -112,7 +112,7 @@ def test_worldunit_shop_ReturnsObj_Scenario0_WithParameters(env_dir_setup_cleanu
         world_id=five_world_id,
         worlds_dir=worlds2_dir,
         output_dir=output_dir,
-        mud_dir=example_mud_dir,
+        input_dir=example_input_dir,
         world_time_pnigh=world2_time_pnigh,
         _beliefunits=world2_beliefunits,
     )
@@ -122,7 +122,7 @@ def test_worldunit_shop_ReturnsObj_Scenario0_WithParameters(env_dir_setup_cleanu
     assert x_world.world_id == five_world_id
     assert x_world.worlds_dir == worlds2_dir
     assert x_world.output_dir == output_dir
-    assert x_world._mud_dir == example_mud_dir
+    assert x_world._input_dir == example_input_dir
     assert x_world.world_time_pnigh == world2_time_pnigh
     assert x_world._events == {}
     assert x_world._syntax_otz_dir == create_path(world_dir, "syntax_otz")
@@ -144,7 +144,7 @@ def test_worldunit_shop_ReturnsObj_Scenario1_WithoutParameters(env_dir_setup_cle
     assert not x_world.output_dir
     assert x_world.world_time_pnigh == 0
     assert x_world._events == {}
-    assert x_world._mud_dir == create_path(x_world._world_dir, "mud")
+    assert x_world._input_dir == create_path(x_world._world_dir, "input")
     assert x_world._syntax_otz_dir == create_path(world_dir, "syntax_otz")
     assert x_world._beliefunits == set()
 

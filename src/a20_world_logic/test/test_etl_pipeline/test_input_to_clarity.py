@@ -47,7 +47,7 @@ from src.a20_world_logic.test._util.a20_env import (
 from src.a20_world_logic.world import worldunit_shop
 
 
-def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
+def test_WorldUnit_input_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH:
@@ -58,7 +58,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
     sue_inx = "Suzy"
     e3 = 3
     ex_filename = "fizzbuzz.xlsx"
-    mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
+    input_file_path = create_path(fizz_world._input_dir, ex_filename)
     br00113_columns = [
         face_name_str(),
         event_int_str(),
@@ -73,7 +73,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
     br00113row0 = [sue_str, e3, a23_str, sue_str, sue_str, sue_str, sue_inx]
     br00113_df = DataFrame([br00113row0], columns=br00113_columns)
     br00113_ex0_str = f"example0_{br00113_str}"
-    upsert_sheet(mud_file_path, br00113_ex0_str, br00113_df)
+    upsert_sheet(input_file_path, br00113_ex0_str, br00113_df)
     br00113_raw = f"{br00113_str}_brick_raw"
     br00113_agg = f"{br00113_str}_brick_agg"
     br00113_valid = f"{br00113_str}_brick_valid"
@@ -150,7 +150,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
         # self.calc_belief_bud_acct_mandate_net_ledgers()
 
         # WHEN
-        fizz_world.mud_to_clarity_with_cursor(db_conn, cursor)
+        fizz_world.input_to_clarity_with_cursor(db_conn, cursor)
 
         # THEN
         # select_pidgin_core = f"SELECT * FROM {pidcore_sound_vld}"
@@ -207,7 +207,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
         assert get_row_count(cursor, belief_kpi001_acct_nets_str()) == 0
 
 
-def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
+def test_WorldUnit_input_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH:
@@ -218,7 +218,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
     sue_inx = "Suzy"
     e3 = 3
     ex_filename = "fizzbuzz.xlsx"
-    mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
+    input_file_path = create_path(fizz_world._input_dir, ex_filename)
     br00113_columns = [
         face_name_str(),
         event_int_str(),
@@ -234,7 +234,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
     br00113row0 = [sue_str, e3, a23_str, sue_str, sue_str, sue_str, sue_inx]
     br00113_df = DataFrame([br00113row0], columns=br00113_columns)
     br00113_ex0_str = f"example0_{br00113_str}"
-    upsert_sheet(mud_file_path, br00113_ex0_str, br00113_df)
+    upsert_sheet(input_file_path, br00113_ex0_str, br00113_df)
 
     br00001_columns = [
         event_int_str(),
@@ -251,7 +251,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
     br1row0 = [e3, sue_str, a23_str, sue_str, tp37, sue_quota, sue_celldepth]
     br00001_1df = DataFrame([br1row0], columns=br00001_columns)
     br00001_ex0_str = "example0_br00001"
-    upsert_sheet(mud_file_path, br00001_ex0_str, br00001_1df)
+    upsert_sheet(input_file_path, br00001_ex0_str, br00001_1df)
 
     # Names of tables
     br00113_raw = f"{br00113_str}_brick_raw"
@@ -325,7 +325,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
         # self.calc_belief_bud_acct_mandate_net_ledgers()
 
         # WHEN
-        fizz_world.mud_to_clarity_with_cursor(db_conn, cursor)
+        fizz_world.input_to_clarity_with_cursor(db_conn, cursor)
 
         # THEN
         assert get_row_count(cursor, br00113_raw) == 1
@@ -364,7 +364,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
         assert get_row_count(cursor, belief_kpi001_acct_nets_str()) == 1
 
 
-def test_WorldUnit_mud_to_clarity_with_cursor_Scenario2_PopulateBeliefTranBook(
+def test_WorldUnit_input_to_clarity_with_cursor_Scenario2_PopulateBeliefTranBook(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH:
@@ -375,7 +375,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario2_PopulateBeliefTranBook(
     sue_str = "Sue"
     e3 = 3
     ex_filename = "fizzbuzz.xlsx"
-    mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
+    input_file_path = create_path(fizz_world._input_dir, ex_filename)
     br00002_columns = [
         event_int_str(),
         face_name_str(),
@@ -392,20 +392,20 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario2_PopulateBeliefTranBook(
     br00002row0 = [e3, sue_str, a23_str, sue_str, bob_str, tp37, sue_to_bob_amount]
     br00002_df = DataFrame([br00002row0], columns=br00002_columns)
     br00002_ex0_str = f"example0_{br00002_str}"
-    upsert_sheet(mud_file_path, br00002_ex0_str, br00002_df)
+    upsert_sheet(input_file_path, br00002_ex0_str, br00002_df)
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         assert not db_table_exists(cursor, belief_acct_nets_str())
 
         # WHEN
-        fizz_world.mud_to_clarity_with_cursor(db_conn, cursor)
+        fizz_world.input_to_clarity_with_cursor(db_conn, cursor)
 
         # THEN
         assert get_row_count(cursor, belief_acct_nets_str()) == 1
 
 
-def test_WorldUnit_mud_to_clarity_with_cursor_Scenario3_WhenNoBeliefIdeas_ote1_IsStillCreated(
+def test_WorldUnit_input_to_clarity_with_cursor_Scenario3_WhenNoBeliefIdeas_ote1_IsStillCreated(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -414,7 +414,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario3_WhenNoBeliefIdeas_ote1_I
     sue_str = "Sue"
     event2 = 2
     ex_filename = "fizzbuzz.xlsx"
-    mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
+    input_file_path = create_path(fizz_world._input_dir, ex_filename)
     accord23_str = "accord23"
     br00011_columns = [
         event_int_str(),
@@ -425,7 +425,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario3_WhenNoBeliefIdeas_ote1_I
     ]
     br00011_rows = [[event2, sue_str, accord23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
-    upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
+    upsert_sheet(input_file_path, "br00011_ex3", br00011_df)
     belief_mstr = fizz_world._belief_mstr_dir
     a23_ote1_csv_path = create_belief_ote1_csv_path(belief_mstr, accord23_str)
     with sqlite3_connect(":memory:") as db_conn:
@@ -433,13 +433,13 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario3_WhenNoBeliefIdeas_ote1_I
         assert os_path_exists(a23_ote1_csv_path) is False
 
         # WHEN
-        fizz_world.mud_to_clarity_with_cursor(db_conn, cursor)
+        fizz_world.input_to_clarity_with_cursor(db_conn, cursor)
 
     # THEN
     assert os_path_exists(a23_ote1_csv_path)
 
 
-def test_WorldUnit_mud_to_clarity_with_cursor_Scenario4_DeletesPreviousFiles(
+def test_WorldUnit_input_to_clarity_with_cursor_Scenario4_DeletesPreviousFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -461,14 +461,14 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario4_DeletesPreviousFiles(
         cursor = db_conn.cursor()
 
         # WHEN
-        fizz_world.mud_to_clarity_with_cursor(db_conn, cursor)
+        fizz_world.input_to_clarity_with_cursor(db_conn, cursor)
 
     # THEN
     assert os_path_exists(testing2_path)
     assert os_path_exists(testing3_path) is False
 
 
-def test_WorldUnit_mud_to_clarity_with_cursor_Scenario5_CreatesFiles(
+def test_WorldUnit_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -483,7 +483,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario5_CreatesFiles(
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
-    mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
+    input_file_path = create_path(fizz_world._input_dir, ex_filename)
     br00003_columns = [
         event_int_str(),
         face_name_str(),
@@ -507,7 +507,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario5_CreatesFiles(
     br1row0 = [event2, sue_str, accord23_str, sue_str, tp37, sue_quota, sue_celldepth]
     br00001_1df = DataFrame([br1row0], columns=br00001_columns)
     br00001_ex0_str = "example0_br00001"
-    upsert_sheet(mud_file_path, br00001_ex0_str, br00001_1df)
+    upsert_sheet(input_file_path, br00001_ex0_str, br00001_1df)
 
     br3row0 = [event1, sue_str, minute_360, accord23_str, hour6am]
     br3row1 = [event1, sue_str, minute_420, accord23_str, hour7am]
@@ -516,8 +516,8 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario5_CreatesFiles(
     br00003_3df = DataFrame([br3row1, br3row0, br3row2], columns=br00003_columns)
     br00003_ex1_str = "example1_br00003"
     br00003_ex3_str = "example3_br00003"
-    upsert_sheet(mud_file_path, br00003_ex1_str, br00003_1df)
-    upsert_sheet(mud_file_path, br00003_ex3_str, br00003_3df)
+    upsert_sheet(input_file_path, br00003_ex1_str, br00003_1df)
+    upsert_sheet(input_file_path, br00003_ex3_str, br00003_3df)
     br00011_columns = [
         event_int_str(),
         face_name_str(),
@@ -527,7 +527,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario5_CreatesFiles(
     ]
     br00011_rows = [[event2, sue_str, accord23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
-    upsert_sheet(mud_file_path, "br00011_ex3", br00011_df)
+    upsert_sheet(input_file_path, "br00011_ex3", br00011_df)
     mstr_dir = fizz_world._belief_mstr_dir
     wrong_a23_belief_dir = create_path(mstr_dir, accord23_str)
     assert os_path_exists(wrong_a23_belief_dir) is False
@@ -537,7 +537,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario5_CreatesFiles(
     sue37_mandate_path = bud_mandate(mstr_dir, accord23_str, sue_str, tp37)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        assert os_path_exists(mud_file_path)
+        assert os_path_exists(input_file_path)
         assert not os_path_exists(a23_json_path)
         assert not os_path_exists(a23_sue_gut_path)
         assert not os_path_exists(a23_sue_job_path)
@@ -545,11 +545,11 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario5_CreatesFiles(
         assert count_dirs_files(fizz_world.worlds_dir) == 6
 
         # WHEN
-        fizz_world.mud_to_clarity_with_cursor(db_conn, cursor)
+        fizz_world.input_to_clarity_with_cursor(db_conn, cursor)
 
         # THEN
         assert os_path_exists(wrong_a23_belief_dir) is False
-        assert os_path_exists(mud_file_path)
+        assert os_path_exists(input_file_path)
         assert os_path_exists(a23_json_path)
         assert os_path_exists(a23_sue_gut_path)
         assert os_path_exists(a23_sue_job_path)
@@ -557,7 +557,7 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario5_CreatesFiles(
         assert count_dirs_files(fizz_world.worlds_dir) == 42
 
 
-def test_WorldUnit_mud_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
+def test_WorldUnit_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     env_dir_setup_cleanup,
 ):  # sourcery skip: extract-method
     # ESTABLISH:
@@ -568,7 +568,7 @@ def test_WorldUnit_mud_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     sue_inx = "Suzy"
     e3 = 3
     ex_filename = "fizzbuzz.xlsx"
-    mud_file_path = create_path(fizz_world._mud_dir, ex_filename)
+    input_file_path = create_path(fizz_world._input_dir, ex_filename)
     br00113_columns = [
         face_name_str(),
         event_int_str(),
@@ -584,7 +584,7 @@ def test_WorldUnit_mud_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     br00113row0 = [sue_str, e3, a23_str, sue_str, sue_str, sue_str, sue_inx]
     br00113_df = DataFrame([br00113row0], columns=br00113_columns)
     br00113_ex0_str = f"example0_{br00113_str}"
-    upsert_sheet(mud_file_path, br00113_ex0_str, br00113_df)
+    upsert_sheet(input_file_path, br00113_ex0_str, br00113_df)
 
     br00001_columns = [
         event_int_str(),
@@ -601,12 +601,12 @@ def test_WorldUnit_mud_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     br1row0 = [e3, sue_str, a23_str, sue_str, tp37, sue_quota, sue_celldepth]
     br00001_1df = DataFrame([br1row0], columns=br00001_columns)
     br00001_ex0_str = "example0_br00001"
-    upsert_sheet(mud_file_path, br00001_ex0_str, br00001_1df)
+    upsert_sheet(input_file_path, br00001_ex0_str, br00001_1df)
     fizz_db_path = fizz_world.get_db_path()
     assert not os_path_exists(fizz_db_path)
 
     # WHEN
-    fizz_world.mud_to_clarity_mstr()
+    fizz_world.input_to_clarity_mstr()
 
     # THEN
     assert os_path_exists(fizz_db_path)

@@ -1,5 +1,5 @@
 from sqlite3 import Cursor as sqlite3_Cursor, connect as sqlite3_connect
-from src.a00_data_toolbox.db_toolbox import get_db_tables
+from src.a00_data_toolbox.db_toolbox import db_table_exists, get_db_tables
 from src.a00_data_toolbox.file_toolbox import (
     create_path,
     get_level1_dirs,
@@ -14,6 +14,7 @@ from src.a19_kpi_toolbox.kpi_sqlstrs import get_belief_kpi001_acct_nets_sqlstr
 
 
 def create_populate_kpi001_table(cursor: sqlite3_Cursor):
+    cursor.execute("DROP TABLE IF EXISTS belief_kpi001_acct_nets")
     cursor.execute(get_belief_kpi001_acct_nets_sqlstr())
 
 
