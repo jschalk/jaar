@@ -897,6 +897,13 @@ def etl_event_inherited_planunits_to_belief_gut(belief_mstr_dir: str):
             save_file(gut_path, None, max_event_plan_json)
 
 
+def add_belief_timeline_to_guts(belief_mstr_dir: str):
+    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
+    for belief_label in get_level1_dirs(beliefs_dir):
+        x_beliefunit = get_default_path_beliefunit(belief_mstr_dir, belief_label)
+        x_beliefunit.add_timeline_to_guts()
+
+
 def etl_belief_guts_to_belief_jobs(belief_mstr_dir: str):
     beliefs_dir = create_path(belief_mstr_dir, "beliefs")
     for belief_label in get_level1_dirs(beliefs_dir):

@@ -51,7 +51,7 @@ def test_BeliefUnit_get_timeline_config_ReturnsObj_Scenario1(env_dir_setup_clean
     assert a23_timeline_config.get("timeline_label") == "five"
 
 
-def test_BeliefUnit_add_timeline_to_gut_ReturnsObj_Scenario0(env_dir_setup_cleanup):
+def test_BeliefUnit_add_timeline_to_gut_SetsFile_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
     a23_str = "accord23"
     belief_mstr_dir = get_module_temp_dir()
@@ -72,7 +72,7 @@ def test_BeliefUnit_add_timeline_to_gut_ReturnsObj_Scenario0(env_dir_setup_clean
     assert post_sue_gut.concept_exists(five_rope)
 
 
-def test_BeliefUnit_add_timeline_to_guts_ReturnsObj_Scenario0(env_dir_setup_cleanup):
+def test_BeliefUnit_add_timeline_to_guts_SetsFiles_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
     a23_str = "accord23"
     belief_mstr_dir = get_module_temp_dir()

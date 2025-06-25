@@ -1,69 +1,41 @@
-# from os.path import exists as os_path_exists
-# from src.a00_data_toolbox.file_toolbox import open_file, save_file
-# from src.a06_plan_logic.plan import (
-#     get_from_json as planunit_get_from_json,
-#     planunit_shop,
-# )
-# from src.a12_hub_toolbox.hub_path import (
-#     create_belief_json_path,
-#     create_gut_path,
-#     create_job_path,
-# )
-# from src.a15_belief_logic.belief import beliefunit_shop
-# from src.a18_etl_toolbox.test._util.a18_env import (
-#     env_dir_setup_cleanup,
-#     get_module_temp_dir,
-# )
-# from src.a18_etl_toolbox.transformers import etl_belief_guts_to_belief_jobs
+from os.path import exists as os_path_exists
+from src.a00_data_toolbox.file_toolbox import save_json
+from src.a06_plan_logic.plan import planunit_shop
+from src.a07_timeline_logic.test._util.a07_str import time_str
+from src.a07_timeline_logic.test._util.calendar_examples import (
+    five_str,
+    get_five_config,
+)
+from src.a07_timeline_logic.timeline import timelineunit_shop
+from src.a12_hub_toolbox.hub_path import create_belief_json_path
+from src.a12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
+from src.a15_belief_logic.belief import beliefunit_shop
+from src.a18_etl_toolbox.test._util.a18_env import (
+    env_dir_setup_cleanup,
+    get_module_temp_dir,
+)
+from src.a18_etl_toolbox.transformers import add_belief_timeline_to_guts
 
 
-# def test_etl_belief_guts_to_belief_jobs_SetsFiles_Scenario0(
-#     env_dir_setup_cleanup,
-# ):
-#     # ESTABLISH
-#     sue_inx = "Suzy"
-#     bob_inx = "Bobby"
-#     yao_inx = "Yaoe"
-#     credit44 = 44
-#     credit77 = 77
-#     credit88 = 88
-#     a23_str = "accord23"
-#     belief_mstr_dir = get_module_temp_dir()
-#     bob_gut = planunit_shop(bob_inx, a23_str)
-#     bob_gut.add_acctunit(bob_inx, credit77)
-#     bob_gut.add_acctunit(yao_inx, credit44)
-#     bob_gut.add_acctunit(bob_inx, credit77)
-#     bob_gut.add_acctunit(sue_inx, credit88)
-#     bob_gut.add_acctunit(yao_inx, credit44)
-#     a23_bob_gut_path = create_gut_path(belief_mstr_dir, a23_str, bob_inx)
-#     save_file(a23_bob_gut_path, None, bob_gut.get_json())
-#     a23_bob_job_path = create_job_path(belief_mstr_dir, a23_str, bob_inx)
-#     belief_json_path = create_belief_json_path(belief_mstr_dir, a23_str)
-#     save_file(
-#         belief_json_path, None, beliefunit_shop(a23_str, belief_mstr_dir).get_json()
-#     )
-#     assert os_path_exists(belief_json_path)
-#     assert os_path_exists(a23_bob_gut_path)
-#     print(f"{a23_bob_gut_path=}")
-#     assert os_path_exists(a23_bob_job_path) is False
+def test_add_belief_timeline_to_guts_SetsFiles_Scenario0(env_dir_setup_cleanup):
+    # ESTABLISH
+    a23_str = "accord23"
+    belief_mstr_dir = get_module_temp_dir()
+    a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
+    a23_belief.timeline = timelineunit_shop(get_five_config())
+    belief_json_path = create_belief_json_path(belief_mstr_dir, a23_str)
+    save_json(belief_json_path, None, a23_belief.get_dict())
+    assert os_path_exists(belief_json_path)
+    sue_str = "Sue"
+    init_sue_gut = planunit_shop(sue_str, a23_str)
+    time_rope = init_sue_gut.make_l1_rope(time_str())
+    five_rope = init_sue_gut.make_rope(time_rope, five_str())
+    save_gut_file(belief_mstr_dir, init_sue_gut)
+    assert not init_sue_gut.concept_exists(five_rope)
 
-#     # WHEN
-#     etl_belief_guts_to_belief_jobs(belief_mstr_dir)
+    # WHEN
+    add_belief_timeline_to_guts(belief_mstr_dir)
 
-#     # THEN
-#     assert os_path_exists(a23_bob_job_path)
-#     generated_job = planunit_get_from_json(open_file(a23_bob_job_path))
-#     expected_job = planunit_shop(bob_inx, a23_str)
-#     expected_job.add_acctunit(bob_inx, credit77)
-#     expected_job.add_acctunit(yao_inx, credit44)
-#     expected_job.add_acctunit(bob_inx, credit77)
-#     expected_job.add_acctunit(sue_inx, credit88)
-#     expected_job.add_acctunit(yao_inx, credit44)
-#     # assert generated_job.get_acct(sue_inx) == expected_job.get_acct(sue_inx)
-#     # assert generated_job.get_acct(bob_inx) == expected_job.get_acct(bob_inx)
-#     # assert generated_job.get_acct(yao_inx) == expected_job.get_acct(yao_inx)
-#     assert generated_job.accts.keys() == expected_job.accts.keys()
-#     # assert generated_job.accts == expected_job.accts
-#     # assert generated_job.get_concept_dict() == expected_job.get_dict()
-#     # assert generated_job.get_dict() == expected_job.get_dict()
-#     # assert generated_job == expected_job
+    # THEN
+    post_sue_gut = open_gut_file(belief_mstr_dir, a23_str, sue_str)
+    assert post_sue_gut.concept_exists(five_rope)
