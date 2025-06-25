@@ -107,11 +107,6 @@ PLAN_PRIME_TABLENAMES = {
 }
 
 
-def test_ALL_DIMEN_ABBV7_has_all_dimens():
-    # ESTABLISH / WHEN / THEN
-    assert len(ALL_DIMEN_ABBV7) == len(get_idea_config_dict())
-
-
 def get_all_dimen_columns_set(x_dimen: str) -> set[str]:
     if x_dimen == pidgin_core_str():
         return {

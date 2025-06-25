@@ -76,39 +76,6 @@ def test_plan_conceptkid_laborunit_EmptyCorrectlySets_concept_laborheir():
     assert run_concept._laborheir == x_laborheir
 
 
-def test_plan_conceptkid_laborunit_EmptyCorrectlySets_concept_laborheir():
-    # ESTABLISH
-    bob_str = "Bob"
-    x_laborunit = laborunit_shop()
-    bob_plan = planunit_shop(bob_str)
-    run_str = "run"
-    run_rope = bob_plan.make_l1_rope(run_str)
-    bob_plan.add_acctunit(bob_str)
-    bob_plan.set_l1_concept(conceptunit_shop(run_str))
-    bob_plan.edit_concept_attr(run_rope, laborunit=x_laborunit)
-    run_concept = bob_plan.get_concept_obj(run_rope)
-    assert run_concept.laborunit == x_laborunit
-    assert run_concept._laborheir is None
-
-    # WHEN
-    bob_plan.settle_plan()
-
-    # THEN
-    assert run_concept._laborheir is not None
-    assert run_concept._laborheir._owner_name_labor
-
-    x_laborheir = laborheir_shop()
-    x_laborheir.set_laborlinks(
-        parent_laborheir=None,
-        laborunit=x_laborunit,
-        groupunits=bob_plan._groupunits,
-    )
-    x_laborheir.set_owner_name_labor(bob_plan._groupunits, bob_plan.owner_name)
-    print(f"{x_laborheir._owner_name_labor=}")
-    assert run_concept._laborheir._owner_name_labor == x_laborheir._owner_name_labor
-    assert run_concept._laborheir == x_laborheir
-
-
 def test_plan_conceptkid_laborunit_CorrectlySets_grandchild_concept_laborheir():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")

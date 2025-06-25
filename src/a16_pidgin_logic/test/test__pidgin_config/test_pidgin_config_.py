@@ -52,7 +52,7 @@ def test_get_pidgin_filename_ReturnsObj():
     assert get_pidgin_filename() == "pidgin.json"
 
 
-def test_config_file_dir_ReturnsObj() -> str:
+def test_config_file_dir_ReturnsObj_Pidgin() -> str:
     src_dir = create_path(os_getcwd(), "src")
     assert config_file_dir() == create_path(src_dir, "a16_pidgin_logic")
 

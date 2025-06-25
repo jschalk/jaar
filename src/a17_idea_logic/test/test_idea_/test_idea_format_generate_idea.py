@@ -194,39 +194,3 @@ def test_create_idea_df_Arg_idea_format_00013_conceptunit_v0_0_0_Scenario_planun
         array_headers = list(conceptunit_format.columns)
         assert array_headers == get_idearef_obj(x_idea_name).get_headers_list()
         assert len(conceptunit_format) == 251
-
-
-def test_make_plandelta_Arg_idea_format_00013_conceptunit_v0_0_0():
-    # ESTABLISH
-    sue_str = "Sue"
-    bob_str = "Bob"
-    accord_belief_label = "accord56"
-    sue_planunit = planunit_shop(sue_str, accord_belief_label)
-    casa_str = "casa"
-    casa_rope = sue_planunit.make_l1_rope(casa_str)
-    casa_mass = 31
-    sue_planunit.set_l1_concept(conceptunit_shop(casa_str, mass=casa_mass))
-    clean_str = "clean"
-    clean_rope = sue_planunit.make_rope(casa_rope, clean_str)
-    sue_planunit.set_concept(conceptunit_shop(clean_str, task=True), casa_rope)
-    x_idea_name = idea_format_00013_conceptunit_v0_0_0()
-    conceptunit_dataframe = create_idea_df(sue_planunit, x_idea_name)
-    conceptunit_csv = conceptunit_dataframe.to_csv(index=False)
-
-    # WHEN
-    conceptunit_changunit = make_plandelta(conceptunit_csv)
-
-    # THEN
-    casa_planatom = planatom_shop(plan_conceptunit_str(), INSERT_str())
-    casa_planatom.set_arg(concept_rope_str(), casa_rope)
-    casa_planatom.set_arg(task_str(), False)
-    casa_planatom.set_arg(mass_str(), casa_mass)
-    print(f"{casa_planatom=}")
-    assert casa_planatom.get_value(mass_str()) == casa_mass
-    clean_planatom = planatom_shop(plan_conceptunit_str(), INSERT_str())
-    clean_planatom.set_arg(concept_rope_str(), clean_rope)
-    clean_planatom.set_arg(task_str(), True)
-    clean_planatom.set_arg(mass_str(), 1)
-    assert conceptunit_changunit.planatom_exists(casa_planatom)
-    assert conceptunit_changunit.planatom_exists(clean_planatom)
-    assert len(conceptunit_changunit.get_ordered_planatoms()) == 2

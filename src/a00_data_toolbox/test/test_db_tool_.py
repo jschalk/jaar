@@ -391,6 +391,7 @@ def get_example_test_tablename() -> str:
 
 
 def get_example_test_csv_path() -> str:
+    """get_module_temp_dir/test_data.csv"""
     return create_path(get_module_temp_dir(), "test_data.csv")
 
 

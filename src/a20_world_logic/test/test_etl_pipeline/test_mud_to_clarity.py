@@ -4,6 +4,7 @@ from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.a00_data_toolbox.file_toolbox import count_dirs_files, create_path, save_file
 from src.a06_plan_logic.test._util.a06_str import acct_name_str
+from src.a07_timeline_logic.test._util.a07_str import creg_str, time_str
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a11_bud_logic.test._util.a11_str import (
     amount_str,
@@ -23,6 +24,7 @@ from src.a12_hub_toolbox.hub_path import (
     create_gut_path,
     create_job_path,
 )
+from src.a12_hub_toolbox.hub_tool import open_gut_file
 from src.a12_hub_toolbox.test._util.a12_str import belief_ote1_agg_str
 from src.a15_belief_logic.test._util.a15_str import (
     cumulative_minute_str,
@@ -193,6 +195,10 @@ def test_WorldUnit_mud_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
         assert os_path_exists(a23_e1_all_pack_path)
         assert os_path_exists(a23_e1_expressed_pack_path)
         assert os_path_exists(a23_sue_gut_path)
+        sue_gut = open_gut_file(mstr_dir, a23_str, sue_inx)
+        time_rope = sue_gut.make_l1_rope(time_str())
+        creg_rope = sue_gut.make_rope(time_rope, creg_str())
+        assert sue_gut.concept_exists(creg_rope)
         assert os_path_exists(a23_sue_job_path)
         assert get_row_count(cursor, plnacct_job) == 1
         assert get_row_count(cursor, belief_acct_nets_str()) == 0

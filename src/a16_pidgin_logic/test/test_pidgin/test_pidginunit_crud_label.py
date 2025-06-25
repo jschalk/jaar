@@ -113,22 +113,6 @@ def test_PidginUnit_set_label_SetsAttr_Scenario0():
     assert labelid_labelmap.otx2inx_exists(sue_otx, sue_inx)
 
 
-def test_PidginUnit_label_exists_ReturnsObj():
-    # ESTABLISH
-    zia_str = "Zia"
-    sue_otx = "Sue"
-    sue_inx = "Suita"
-    zia_pidginunit = pidginunit_shop(zia_str)
-
-    assert zia_pidginunit.label_exists(sue_otx, sue_inx) is False
-
-    # WHEN
-    zia_pidginunit.set_label(sue_otx, sue_inx)
-
-    # THEN
-    assert zia_pidginunit.label_exists(sue_otx, sue_inx)
-
-
 def test_PidginUnit_get_inx_label_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"

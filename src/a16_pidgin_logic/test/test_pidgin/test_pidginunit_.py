@@ -789,38 +789,3 @@ def test_PidginUnit_label_exists_ReturnsObj():
 
     # THEN
     assert zia_pidginunit.label_exists(sue_otx, sue_inx)
-
-
-def test_PidginUnit_get_inx_label_ReturnsObj():
-    # ESTABLISH
-    zia_str = "Zia"
-    sue_otx = "Sue"
-    sue_inx = "Suita"
-    zia_pidginunit = pidginunit_shop(zia_str)
-    assert zia_pidginunit._get_inx_label(sue_otx) != sue_inx
-
-    # WHEN
-    zia_pidginunit.set_label(sue_otx, sue_inx)
-
-    # THEN
-    assert zia_pidginunit._get_inx_label(sue_otx) == sue_inx
-
-
-def test_PidginUnit_del_label_ReturnsObj():
-    # ESTABLISH
-    zia_str = "Zia"
-    sue_otx = "Sue"
-    sue_inx = "Suita"
-    zia_pidginunit = pidginunit_shop(zia_str)
-    zia_pidginunit.set_label(sue_otx, sue_inx)
-    zia_pidginunit.set_label(zia_str, zia_str)
-    assert zia_pidginunit.label_exists(sue_otx, sue_inx)
-    assert zia_pidginunit.label_exists(zia_str, zia_str)
-
-    # WHEN
-    zia_pidginunit.del_label(sue_otx)
-
-    # THEN
-    sue_exists = zia_pidginunit.label_exists(sue_otx, sue_inx)
-    assert sue_exists is False
-    assert zia_pidginunit.label_exists(zia_str, zia_str)

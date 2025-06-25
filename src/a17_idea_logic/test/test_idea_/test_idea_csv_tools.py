@@ -1,56 +1,7 @@
-from src.a00_data_toolbox.dict_toolbox import extract_csv_headers
-from src.a06_plan_logic.test._util.a06_str import (
-    acct_name_str,
-    belief_label_str,
-    owner_name_str,
-)
 from src.a17_idea_logic.idea import (
     belief_label_owner_name_nested_csv_dict,
     get_csv_belief_label_owner_name_metrics,
 )
-
-
-def test_extract_csv_headers_ReturnsObj():
-    # ESTABLISH
-    x_csv = """belief_label,owner_name,acct_name,acct_cred_points,acct_debt_points
-accord56,Sue,Bob,13,29
-accord56,Sue,Sue,11,23
-accord56,Sue,Yao,41,37
-"""
-
-    # WHEN
-    x_headers, x_csv = extract_csv_headers(x_csv)
-
-    # THEN
-    acct_cred_points_str = "acct_cred_points"
-    acct_debt_points_str = "acct_debt_points"
-    assert x_headers == [
-        belief_label_str(),
-        owner_name_str(),
-        acct_name_str(),
-        acct_cred_points_str,
-        acct_debt_points_str,
-    ]
-
-
-def test_extract_csv_headers_RemovesHeaders_csv():
-    # ESTABLISH
-    x_csv = """belief_label,owner_name,acct_name,acct_cred_points,acct_debt_points
-accord56,Sue,Bob,13,29
-accord56,Sue,Sue,11,23
-accord56,Sue,Yao,41,37
-"""
-
-    # WHEN
-    x_headers, new_csv = extract_csv_headers(x_csv)
-
-    # THEN
-    print(f"{new_csv=}")
-    headerless_csv = """accord56,Sue,Bob,13,29
-accord56,Sue,Sue,11,23
-accord56,Sue,Yao,41,37
-"""
-    assert new_csv == headerless_csv
 
 
 def test_get_csv_belief_label_owner_name_metrics_ReturnsObj_Scenario2():

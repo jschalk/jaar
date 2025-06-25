@@ -502,6 +502,7 @@ def hubunit_shop(
 
 
 def get_keep_path(x_hubunit: HubUnit, x_rope: LabelTerm) -> str:
+    """Get the path to the keep directory based on rope and belief_label."""
     keep_root = "conceptroot"
     x_rope = rebuild_rope(x_rope, x_hubunit.belief_label, keep_root)
     x_list = get_all_rope_labels(x_rope, x_hubunit.knot)

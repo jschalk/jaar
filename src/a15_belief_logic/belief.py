@@ -31,7 +31,11 @@ from src.a02_finance_logic.finance_config import (
     filter_penny,
 )
 from src.a06_plan_logic.plan import PlanUnit, planunit_shop
-from src.a07_timeline_logic.timeline import TimeLineUnit, timelineunit_shop
+from src.a07_timeline_logic.timeline import (
+    TimeLineUnit,
+    add_newtimeline_conceptunit,
+    timelineunit_shop,
+)
 from src.a11_bud_logic.bud import (
     BrokerUnit,
     BudUnit,
@@ -394,6 +398,21 @@ class BeliefUnit:
         )
         cellunit_save_to_dir(root_cell_dir, cellunit)
 
+    def get_timeline_config(self) -> dict:
+        return self.timeline.get_dict()
+
+    def add_timeline_to_gut(self, owner_name: OwnerName) -> None:
+        """Adds the timeline to the gut file for the given owner."""
+        x_gut = open_gut_file(self.belief_mstr_dir, self.belief_label, owner_name)
+        add_newtimeline_conceptunit(x_gut, self.get_timeline_config())
+        save_gut_file(self.belief_mstr_dir, x_gut)
+
+    def add_timeline_to_guts(self) -> None:
+        """Adds the timeline to all gut files."""
+        owner_names = self._get_owner_folder_names()
+        for owner_name in owner_names:
+            self.add_timeline_to_gut(owner_name)
+
 
 def _get_ote1_max_past_event_int(
     owner_name: str, ote1_dict: dict[str, dict[str, int]], bud_time: int
@@ -474,7 +493,7 @@ def get_from_json(x_belief_json: str) -> BeliefUnit:
     return get_from_dict(get_dict_from_json(x_belief_json))
 
 
-def get_from_default_path(
+def get_default_path_beliefunit(
     belief_mstr_dir: str, belief_label: BeliefLabel
 ) -> BeliefUnit:
     belief_json_path = create_belief_json_path(belief_mstr_dir, belief_label)

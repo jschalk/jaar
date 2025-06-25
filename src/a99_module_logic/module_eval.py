@@ -4,9 +4,22 @@ from ast import (
     parse as ast_parse,
     walk as ast_walk,
 )
+from importlib.util import (
+    module_from_spec as importlib_util_module_from_spec,
+    spec_from_file_location as importlib_util_spec_from_file_location,
+)
+import inspect
 from os import walk as os_walk
-from os.path import join as os_path_join
-from src.a00_data_toolbox.file_toolbox import create_path, get_level1_dirs
+from os.path import (
+    basename as os_path_basename,
+    join as os_path_join,
+    splitext as os_path_splitext,
+)
+from src.a00_data_toolbox.file_toolbox import (
+    create_path,
+    get_dir_filenames,
+    get_level1_dirs,
+)
 
 
 def get_imports_from_file(file_path):
@@ -143,6 +156,30 @@ def get_all_str_functions() -> list:
     return all_str_functions
 
 
+def get_duplicated_functions(excluded_functions) -> set[str]:
+    x_count = 0
+    duplicate_functions = set()
+    all_functions = set()
+    for module_desc, module_dir in get_module_descs().items():
+        filenames_set = get_dir_filenames(module_dir, include_extensions={"py"})
+        for filenames in filenames_set:
+            file_dir = create_path(module_dir, filenames[0])
+            file_path = create_path(file_dir, filenames[1])
+            file_functions = get_function_names_from_file(file_path)
+            for function_name in file_functions:
+                x_count += 1
+                if function_name in all_functions:
+                    print(
+                        f"Function #{x_count}: Duplicate function {function_name} in {file_path}"
+                    )
+                    duplicate_functions.add(function_name)
+                if function_name not in excluded_functions:
+                    all_functions.add(function_name)
+    print(f"{duplicate_functions=}")
+    print(f"{len(all_functions)=}")
+    return duplicate_functions
+
+
 def check_if_module_str_funcs_is_sorted(module_str_funcs: list[str]):
     if module_str_funcs != sorted(module_str_funcs):
         for module_str_func in sorted(module_str_funcs):
@@ -203,3 +240,14 @@ def check_str_func_test_file_has_needed_asserts(
             str_util_path = create_path(util_dir, f"a{desc_number_str}_str.py")
             print(f"{str_util_path} {str_func_assert_str=}")
         assert test_file_str.find(str_func_assert_str) > 0
+
+
+def get_docstring(file_path, function_name):
+    # Load module from file path
+    module_name = os_path_splitext(os_path_basename(file_path))[0]
+    spec = importlib_util_spec_from_file_location(module_name, file_path)
+    module = importlib_util_module_from_spec(spec)
+    spec.loader.exec_module(module)
+
+    func = getattr(module, function_name)
+    return inspect.getdoc(func)  # Cleans up whitespace

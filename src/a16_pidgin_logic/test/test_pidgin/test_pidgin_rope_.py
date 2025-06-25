@@ -18,11 +18,6 @@ from src.a16_pidgin_logic.test._util.a16_str import (
 )
 
 
-def test_default_unknown_str_if_None_ReturnsObj():
-    # ESTABLISH / WHEN / THEN
-    assert default_unknown_str_if_None() == "UNKNOWN"
-
-
 def test_RopeMap_Exists():
     # ESTABLISH
     x_ropemap = RopeMap()

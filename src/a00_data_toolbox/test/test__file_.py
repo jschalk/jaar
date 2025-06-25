@@ -573,29 +573,6 @@ def test_get_dir_filenames_ReturnsObj_Scenario0_NoFilter(env_dir_setup_cleanup):
     assert len(filenames_set) == 3
 
 
-def test_get_dir_filenames_ReturnsObj_Scenario0_NoFilter(env_dir_setup_cleanup):
-    # ESTABLISH
-    env_dir = get_module_temp_dir()
-    x1_filename = "x1.txt"
-    x2_filename = "x2.txt"
-    iowa_rel_dir = "iowa/dallas"
-    ohio_rel_dir = "ohio/elpaso"
-    iowa_dir = f"{env_dir}/{iowa_rel_dir}"
-    ohio_dir = f"{env_dir}/{ohio_rel_dir}"
-    save_file(iowa_dir, x1_filename, "")
-    save_file(iowa_dir, x2_filename, "")
-    save_file(ohio_dir, x2_filename, "")
-
-    # WHEN
-    filenames_set = get_dir_filenames(env_dir)
-
-    # THEN
-    assert (iowa_rel_dir, x1_filename) in filenames_set
-    assert (iowa_rel_dir, x2_filename) in filenames_set
-    assert (ohio_rel_dir, x2_filename) in filenames_set
-    assert len(filenames_set) == 3
-
-
 def test_get_dir_filenames_ReturnsObj_Scenario1_FilterByExtension(
     env_dir_setup_cleanup,
 ):

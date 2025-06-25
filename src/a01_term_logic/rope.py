@@ -226,6 +226,7 @@ def validate_labelterm(
 
 
 def ropeterm_valid_dir_path(x_ropeterm: RopeTerm, knot: str) -> bool:
+    """Returns path built from RopeTerm if it is a valid directory path."""
     x_rope_labels = get_all_rope_labels(x_ropeterm, knot)
     slash_str = "/"
     x_rope_os_path = create_rope_from_labels(x_rope_labels, knot=slash_str)

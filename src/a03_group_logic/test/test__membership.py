@@ -30,11 +30,6 @@ from src.a03_group_logic.test._util.a03_str import (
 )
 
 
-def test_GroupTitle_exists():
-    ohio_group_title = GroupTitle(",ohio")
-    assert ohio_group_title is not None
-
-
 def test_GroupCore_exists():
     # ESTABLISH
     swim_str = ";swimmers"

@@ -772,6 +772,8 @@ class ConceptUnit:
 
     def add_kid(self, concept_kid):
         self._kids[concept_kid.concept_label] = concept_kid
+        if concept_kid.concept_label is None:
+            raise Exception(f"{concept_kid.concept_label=} cannot be None.")
         self._kids = dict(sorted(self._kids.items()))
 
     def get_kid(self, concept_kid_concept_label: LabelTerm, if_missing_create=False):

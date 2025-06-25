@@ -608,6 +608,8 @@ def timelineunit_shop(timeline_config: dict = None) -> TimeLineUnit:
     default_timeline = get_default_timeline_config_dict()
     if not timeline_config:
         timeline_config = default_timeline
+    if timeline_config.get("timeline_label") is None:
+        timeline_config["timeline_label"] = default_timeline.get("timeline_label")
     if timeline_config.get("c400_number") is None:
         timeline_config["c400_number"] = default_timeline.get("c400_number")
     if timeline_config.get("monthday_distortion") is None:

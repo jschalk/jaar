@@ -49,34 +49,6 @@ def test_get_all_excel_ideasheets_ReturnsObj_Scenario0_SheetNames(
     assert len(x_sheet_names) == 3
 
 
-def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_PidginSheetNames(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    env_dir = get_module_temp_dir()
-    x_dir = create_path(env_dir, "examples_folder")
-    ex_filename = "fizzbuzz.xlsx"
-    ex_file_path = create_path(x_dir, ex_filename)
-    df1 = DataFrame([["AAA", "BBB"]], columns=["spam", "egg"])
-    df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
-    not_br00000_str = "b00000"
-    br00001_str = "example_br00001"
-    br00002_str = "example_br00002_example"
-    upsert_sheet(ex_file_path, not_br00000_str, df1)
-    upsert_sheet(ex_file_path, br00001_str, df2)
-    upsert_sheet(ex_file_path, br00002_str, df2)
-
-    # WHEN
-    x_ideasheets = get_all_excel_ideasheets(env_dir)
-
-    # THEN
-    assert x_ideasheets
-    assert (x_dir, ex_filename, not_br00000_str) not in x_ideasheets
-    assert (x_dir, ex_filename, br00001_str) in x_ideasheets
-    assert (x_dir, ex_filename, br00002_str) in x_ideasheets
-    assert len(x_ideasheets) == 2
-
-
 def test_IdeaFileRef_Exists():
     # ESTABLISH / WHEN
     x_ideafileref = IdeaFileRef()

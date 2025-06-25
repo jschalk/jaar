@@ -188,7 +188,7 @@ def test_PlanUnit_set_max_tree_traverse_CorrectlySetsInt():
     assert zia_plan.max_tree_traverse == 11
 
 
-def test_PlanUnit_set_max_tree_traverse_CorrectlyRaisesError():
+def test_PlanUnit_set_max_tree_traverse_RaisesError_Scenario0():
     # ESTABLISH
     zia_str = "Zia"
     zia_plan = planunit_shop(owner_name=zia_str)
@@ -204,7 +204,7 @@ def test_PlanUnit_set_max_tree_traverse_CorrectlyRaisesError():
     )
 
 
-def test_PlanUnit_set_max_tree_traverse_CorrectlyRaisesError():
+def test_PlanUnit_set_max_tree_traverse_RaisesError_Scenario1():
     # ESTABLISH
     zia_str = "Zia"
     zia_plan = planunit_shop(owner_name=zia_str)

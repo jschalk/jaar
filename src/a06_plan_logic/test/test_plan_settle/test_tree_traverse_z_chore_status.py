@@ -273,7 +273,7 @@ def test_PlanUnit_settle_plan_CorrectlyCalculatesRangeAttributes():
     assert sue_planunit._concept_dict.get(clean_rope)._active is False
 
 
-def test_PlanUnit_get_agenda_dict_ReturnsObj():
+def test_PlanUnit_get_agenda_dict_ReturnsObj_WithSingleTask():
     # ESTABLISH
     sue_planunit = get_planunit_with_4_levels_and_2reasons()
 

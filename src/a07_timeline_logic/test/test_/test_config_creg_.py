@@ -43,6 +43,7 @@ from src.a07_timeline_logic.test._util.calendar_examples import (
     get_wed,
 )
 from src.a07_timeline_logic.timeline import (
+    add_newtimeline_conceptunit,
     get_c400_constants,
     get_min_from_dt,
     get_timeline_min_difference,
@@ -536,6 +537,31 @@ def test_add_time_creg_conceptunit_ReturnsObjWith_offset_ConceptUnits():
     assert five_yr1_offset_concept.addin == get_five_config().get(yr1_jan1_offset_str())
 
 
+def test_add_newtimeline_conceptunit_SetsAttr_Scenario0():
+    # ESTABLISH
+    sue_plan = planunit_shop("Sue")
+    sue_plan.settle_plan()
+    time_rope = sue_plan.make_l1_rope(time_str())
+    creg_rope = sue_plan.make_rope(time_rope, creg_str())
+    creg_yr1_jan1_offset_rope = sue_plan.make_rope(creg_rope, yr1_jan1_offset_str())
+    creg_year_rope = get_year_rope(sue_plan, creg_rope)
+    print(f"{creg_year_rope=}")
+    # print(f"{sue_plan._concept_dict.keys()=}")
+    creg_config = get_creg_config()
+
+    assert not sue_plan.concept_exists(creg_year_rope)
+    assert not sue_plan.concept_exists(creg_yr1_jan1_offset_rope)
+
+    # WHEN
+    sue_plan = add_newtimeline_conceptunit(sue_plan, creg_config)
+
+    # THEN
+    assert sue_plan.concept_exists(creg_year_rope)
+    assert sue_plan.concept_exists(creg_yr1_jan1_offset_rope)
+    creg_offset_concept = sue_plan.get_concept_obj(creg_yr1_jan1_offset_rope)
+    assert creg_offset_concept.addin == creg_config.get(yr1_jan1_offset_str())
+
+
 # def test_PlanUnit_get_concept_ranged_kids_ReturnsSomeChildrenScenario2():
 #     # ESTABLISH
 #     sue_planunit = planunit_shop("Sue")
@@ -754,7 +780,7 @@ def test_ConceptCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingErro
     assert sue_agenda_dict == {}
 
 
-def test_add_newtimeline_conceptunit_CorrectlyAddsMultiple_timelines():
+def test_add_time_five_conceptunit_SetsAttr_Scenario0_AddsMultiple_timelines():
     # ESTABLISH
     sue_plan = planunit_shop("Sue")
     sue_plan = add_time_creg_conceptunit(sue_plan)
