@@ -118,6 +118,9 @@ def replace_csv_column_from_string(
     reader = csv_DictReader(input_io)
     fieldnames = reader.fieldnames
 
+    if fieldnames is None:
+        raise ValueError("csv_string cannot be parsed into columns with headers.")
+
     if column_name not in fieldnames:
         raise ValueError(f"Column '{column_name}' not found in CSV headers.")
 

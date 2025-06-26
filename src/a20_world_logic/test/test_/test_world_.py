@@ -165,22 +165,6 @@ def test_worldunit_shop_ReturnsObj_Scenario2_ThirdParameterIs_output_dir(
     assert x_world.output_dir == output_dir
 
 
-def test_worldunit_shop_ReturnsObj_Scenario3_RaiseErrorIf_knot_In_world_name(
-    env_dir_setup_cleanup,
-):
-    # ESTABLISH
-    a23_str = "amy23"
-    output_dir = create_path(worlds_dir(), "output")
-
-    # WHEN
-    x_world = worldunit_shop(a23_str, worlds_dir(), output_dir)
-
-    # THEN
-    assert x_world.world_name == a23_str
-    assert x_world.worlds_dir == worlds_dir()
-    assert x_world.output_dir == output_dir
-
-
 def test_init_beliefunits_from_dirs_ReturnsObj_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
     x_dir = worlds_dir()
