@@ -1,15 +1,21 @@
-from csv import reader as csv_reader
+from csv import (
+    DictReader as csv_DictReader,
+    DictWriter as csv_DictWriter,
+    reader as csv_reader,
+)
 from pathlib import Path
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.csv_toolbox import (
     export_sqlite_tables_to_csv,
     open_csv_with_types,
+    replace_csv_column,
 )
 from src.a00_data_toolbox.file_toolbox import create_path, save_file, set_dir
 from src.a00_data_toolbox.test._util.a00_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
+import tempfile
 
 
 def test_open_csv_with_types(env_dir_setup_cleanup):
@@ -96,3 +102,35 @@ def test_export_sqlite_tables_to_csv(env_dir_setup_cleanup):
         reader = list(csv_reader(f))
         assert reader[0] == ["sku", "price"]
         assert reader[1] == ["ABC", "9.99"]
+
+
+def test_replace_csv_column(env_dir_setup_cleanup):
+    # ESTABLISH
+    # Create a temporary input CSV file
+    # Use the provided temp directory
+    temp_dir = get_module_temp_dir()
+    file_path = create_path(temp_dir, "temp_file.csv")
+    set_dir(temp_dir)
+    # Create the input CSV file
+    with open(file_path, mode="w", newline="", encoding="utf-8") as f:
+        writer = csv_DictWriter(f, fieldnames=["id", "name", "status"])
+        writer.writeheader()
+        writer.writerows(
+            [
+                {"id": "1", "name": "Alice", "status": "pending"},
+                {"id": "2", "name": "Bob", "status": "in progress"},
+            ]
+        )
+
+    # WHEN
+    replace_csv_column(file_path, "status", "complete")
+
+    # THEN
+    # Read and verify the output CSV
+    with open(file_path, newline="", encoding="utf-8") as f:
+        reader = csv_DictReader(f)
+        rows = list(reader)
+
+    assert all(row["status"] == "complete" for row in rows)
+    assert rows[0]["name"] == "Alice"
+    assert rows[1]["name"] == "Bob"

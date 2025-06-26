@@ -1,4 +1,9 @@
-from csv import reader as csv_reader, writer as csv_writer
+from csv import (
+    DictReader as csv_DictReader,
+    DictWriter as csv_DictWriter,
+    reader as csv_reader,
+    writer as csv_writer,
+)
 from os import makedirs as os_makedirs
 from os.path import exists as os_path_exists, join as os_path_join
 from sqlite3 import connect as sqlite3_connect
@@ -90,3 +95,28 @@ def export_sqlite_tables_to_csv(db_path, output_dir="."):
                 writer = csv_writer(f)
                 writer.writerow(column_names)
                 writer.writerows(rows)
+
+
+def replace_csv_column(csv_path, column_name, new_value):
+    """
+    Replace all values in the specified column with new_value and write to a new CSV file.
+
+    Args:
+        csv_path (str): Path to the input CSV file.
+        column_name (str): Name of the column to replace.
+        new_value (str): Value to replace in the column.
+    """
+    with open(csv_path, "r", newline="", encoding="utf-8") as infile:
+        reader = csv_DictReader(infile)
+        fieldnames = reader.fieldnames
+
+        if column_name not in fieldnames:
+            raise ValueError(f"Column '{column_name}' not found in CSV headers.")
+
+        with open(csv_path, "w", newline="", encoding="utf-8") as outfile:
+            writer = csv_DictWriter(outfile, fieldnames=fieldnames)
+            writer.writeheader()
+
+            for row in reader:
+                row[column_name] = new_value
+                writer.writerow(row)
