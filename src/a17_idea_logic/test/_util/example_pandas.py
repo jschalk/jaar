@@ -95,26 +95,26 @@ def get_ex02_atom_dataframe() -> DataFrame:
     # x_dt.loc[5] = ["fizz3", "buzz0", False, 20]
     # x_dt.loc[6] = ["fizz3", "buzz0", False, 20]
     # x_dt.loc[7] = ["fizz3", "buzz0", False, 20]
-    x_dt.loc[0] = [";yao4", "sue2", ";swim2", ";labor5", "aw1", "accord45;casa"]
-    x_dt.loc[1] = [";yao3", "sue2", ";swim1", ";labor4", "aw1", "accord45;casa;clean"]
-    x_dt.loc[2] = [";yao4", "sue2", ";swim1", ";labor5", "aw1", "accord45;casa"]
-    x_dt.loc[3] = [";yao3", "sue2", ";swim2", ";labor4", "aw1", "accord45;casa;clean"]
-    x_dt.loc[4] = [";yao4", "sue1", ";swim1", ";labor5", "aw1", "accord45;casa"]
-    x_dt.loc[5] = [";yao3", "sue1", ";swim1", ";labor4", "aw1", "accord45;casa;clean"]
-    x_dt.loc[6] = [";yao4", "sue1", ";swim2", ";labor5", "aw1", "accord45;casa"]
-    x_dt.loc[7] = [";yao3", "sue1", ";swim2", ";labor4", "aw1", "accord45;casa;clean"]
+    x_dt.loc[0] = [";yao4", "sue2", ";swim2", ";labor5", "aw1", "amy45;casa"]
+    x_dt.loc[1] = [";yao3", "sue2", ";swim1", ";labor4", "aw1", "amy45;casa;clean"]
+    x_dt.loc[2] = [";yao4", "sue2", ";swim1", ";labor5", "aw1", "amy45;casa"]
+    x_dt.loc[3] = [";yao3", "sue2", ";swim2", ";labor4", "aw1", "amy45;casa;clean"]
+    x_dt.loc[4] = [";yao4", "sue1", ";swim1", ";labor5", "aw1", "amy45;casa"]
+    x_dt.loc[5] = [";yao3", "sue1", ";swim1", ";labor4", "aw1", "amy45;casa;clean"]
+    x_dt.loc[6] = [";yao4", "sue1", ";swim2", ";labor5", "aw1", "amy45;casa"]
+    x_dt.loc[7] = [";yao3", "sue1", ";swim2", ";labor4", "aw1", "amy45;casa;clean"]
 
     return x_dt
 
 
 def get_ex02_atom_csv() -> str:
     return """acct_name,group_title,concept_rope,labor_title,awardee_title,healer_name
-sue1,;swim1,accord45;casa,;labor5,aw1,;yao4
-sue1,;swim1,accord45;casa;clean,;labor4,aw1,;yao3
-sue1,;swim2,accord45;casa,;labor5,aw1,;yao4
-sue1,;swim2,accord45;casa;clean,;labor4,aw1,;yao3
-sue2,;swim1,accord45;casa,;labor5,aw1,;yao4
-sue2,;swim1,accord45;casa;clean,;labor4,aw1,;yao3
-sue2,;swim2,accord45;casa,;labor5,aw1,;yao4
-sue2,;swim2,accord45;casa;clean,;labor4,aw1,;yao3
+sue1,;swim1,amy45;casa,;labor5,aw1,;yao4
+sue1,;swim1,amy45;casa;clean,;labor4,aw1,;yao3
+sue1,;swim2,amy45;casa,;labor5,aw1,;yao4
+sue1,;swim2,amy45;casa;clean,;labor4,aw1,;yao3
+sue2,;swim1,amy45;casa,;labor5,aw1,;yao4
+sue2,;swim1,amy45;casa;clean,;labor4,aw1,;yao3
+sue2,;swim2,amy45;casa,;labor5,aw1,;yao4
+sue2,;swim2,amy45;casa;clean,;labor4,aw1,;yao3
 """

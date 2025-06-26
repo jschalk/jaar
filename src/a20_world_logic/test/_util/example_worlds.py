@@ -4,7 +4,7 @@ from src.a06_plan_logic.plan import PlanUnit, planunit_shop
 
 
 def _example_empty_bob_planunit() -> PlanUnit:
-    a23_str = "accord23"
+    a23_str = "amy23"
     return planunit_shop("Bob", a23_str)
 
 
@@ -41,7 +41,7 @@ def get_bob_mop_with_reason_planunit_example() -> PlanUnit:
 
 
 def example_casa_clean_factunit() -> FactUnit:
-    a23_str = "accord23"
+    a23_str = "amy23"
     casa_rope = create_rope(a23_str, "casa")
     floor_rope = create_rope(casa_rope, "floor status")
     clean_rope = create_rope(floor_rope, "clean")
@@ -49,7 +49,7 @@ def example_casa_clean_factunit() -> FactUnit:
 
 
 def example_casa_dirty_factunit() -> FactUnit:
-    a23_str = "accord23"
+    a23_str = "amy23"
     casa_rope = create_rope(a23_str, "casa")
     floor_rope = create_rope(casa_rope, "floor status")
     dirty_rope = create_rope(floor_rope, "dirty")

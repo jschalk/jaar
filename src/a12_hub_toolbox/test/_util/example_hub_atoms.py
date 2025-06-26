@@ -27,7 +27,7 @@ from src.a12_hub_toolbox.test._util.a12_env import get_module_temp_dir
 
 def get_atom_example_conceptunit_sports(belief_label: BeliefLabel = None) -> PlanAtom:
     if not belief_label:
-        belief_label = "accord23"
+        belief_label = "amy23"
     sports_str = "sports"
     x_dimen = plan_conceptunit_str()
     sports_rope = create_rope(belief_label, sports_str)
@@ -38,7 +38,7 @@ def get_atom_example_conceptunit_sports(belief_label: BeliefLabel = None) -> Pla
 
 def get_atom_example_conceptunit_ball(belief_label: BeliefLabel = None) -> PlanAtom:
     if not belief_label:
-        belief_label = "accord23"
+        belief_label = "amy23"
     sports_str = "sports"
     sports_rope = create_rope(belief_label, sports_str)
     ball_str = "basketball"
@@ -51,7 +51,7 @@ def get_atom_example_conceptunit_ball(belief_label: BeliefLabel = None) -> PlanA
 
 def get_atom_example_conceptunit_knee(belief_label: BeliefLabel = None) -> PlanAtom:
     if not belief_label:
-        belief_label = "accord23"
+        belief_label = "amy23"
     sports_str = "sports"
     sports_rope = create_rope(belief_label, sports_str)
     knee_str = "knee"
@@ -70,7 +70,7 @@ def get_atom_example_conceptunit_knee(belief_label: BeliefLabel = None) -> PlanA
 
 def get_atom_example_factunit_knee(belief_label: BeliefLabel = None) -> PlanAtom:
     if not belief_label:
-        belief_label = "accord23"
+        belief_label = "amy23"
     sports_str = "sports"
     sports_rope = create_rope(belief_label, sports_str)
     ball_str = "basketball"

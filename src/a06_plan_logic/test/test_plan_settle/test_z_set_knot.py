@@ -11,7 +11,7 @@ from src.a06_plan_logic.test._util.example_plans import get_planunit_with_4_leve
 
 def test_PlanUnit_set_belief_label_CorrectlySetsAttr():
     # ESTABLISH
-    x_belief_label = "accord45"
+    x_belief_label = "amy45"
     sue_str = "Sue"
     sue_plan = planunit_shop(sue_str)
     assert sue_plan.belief_label == root_label()
@@ -65,7 +65,7 @@ def test_plan_set_belief_label_CorrectlySetsAttr():
     assert yao_plan.belief_label == yao_plan.belief_label
 
     # WHEN
-    x_belief_label = "accord45"
+    x_belief_label = "amy45"
     yao_plan.set_belief_label(belief_label=x_belief_label)
 
     # THEN
@@ -212,7 +212,7 @@ def test_plan_set_knot_CorrectlyModifiesFactUnit():
 
 def test_PlanUnit_set_knot_CorrectlySetsAttr():
     # ESTABLISH
-    x_belief_label = "accord45"
+    x_belief_label = "amy45"
     slash_knot = "/"
     sue_str = "Sue"
     sue_plan = planunit_shop(sue_str, x_belief_label, knot=slash_knot)

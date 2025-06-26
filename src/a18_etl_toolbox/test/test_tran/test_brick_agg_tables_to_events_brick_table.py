@@ -26,7 +26,7 @@ from src.a18_etl_toolbox.transformers import (
 
 def test_etl_brick_agg_tables_to_events_brick_agg_table_PopulatesTables_Scenario0():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     sue_str = "Sue"
     yao_str = "Yao"
     event1 = 1
@@ -99,7 +99,7 @@ ORDER BY {event_int_str()}, {face_name_str()};"""
 
 def test_etl_brick_agg_tables_to_events_brick_agg_table_PopulatesTables_Scenario1():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     sue_str = "Sue"
     yao_str = "Yao"
     bob_str = "Bob"

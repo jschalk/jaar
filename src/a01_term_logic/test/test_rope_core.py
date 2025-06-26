@@ -359,7 +359,7 @@ def test_rope_get_ancestor_ropes_ReturnsObj_Scenario0_default_knot():
 def test_rope_get_ancestor_ropes_ReturnsObj_Scenario1_nondefault_knot():
     # ESTABLISH
     x_s = "/"
-    root_belief_rope = f"{x_s}accord23{x_s}"
+    root_belief_rope = f"{x_s}amy23{x_s}"
     nation_str = "nation"
     nation_rope = f"{root_belief_rope}{nation_str}{x_s}"
     usa_str = "USA"

@@ -31,7 +31,7 @@ def test_etl_event_plan_csvs_to_pack_json_CreatesFiles_Scenario0_IgnoresCSV_plan
     sue_inx = "Suzy"
     bob_inx = "Bobby"
     event3 = 3
-    a23_str = "accord23"
+    a23_str = "amy23"
     put_agg_tablename = create_prime_tablename(planunit_str(), "v", "agg", "put")
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
     belief_mstr_dir = get_module_temp_dir()
@@ -72,7 +72,7 @@ def test_etl_event_plan_csvs_to_pack_json_CreatesFiles_Scenario1(
     credit77 = 77
     credit88 = 88
     debt_empty = ""
-    a23_str = "accord23"
+    a23_str = "amy23"
     plnacct_str = plan_acctunit_str()
     put_agg_tablename = create_prime_tablename(plnacct_str, "v", "agg", "put")
     put_agg_csv_filename = f"{put_agg_tablename}.csv"

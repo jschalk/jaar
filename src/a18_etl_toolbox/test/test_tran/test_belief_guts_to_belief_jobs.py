@@ -27,7 +27,7 @@ def test_etl_belief_guts_to_belief_jobs_SetsFiles_Scenario0(
     credit44 = 44
     credit77 = 77
     credit88 = 88
-    a23_str = "accord23"
+    a23_str = "amy23"
     belief_mstr_dir = get_module_temp_dir()
     bob_gut = planunit_shop(bob_inx, a23_str)
     bob_gut.add_acctunit(bob_inx, credit77)

@@ -15,7 +15,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
 
 def test_get_belief_dict_from_voice_tables_ReturnsObj_With_beliefunit_Attrs_Scenario0():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     a23_timeline_label = "timeline88"
     a23_c400_number = 3
     a23_yr1_jan1_offset = 7
@@ -75,7 +75,7 @@ VALUES (
 def test_get_belief_dict_from_voice_tables_ReturnsObj_With_beliefunit_Attrs_Scenario1():
     # sourcery skip: extract-method, inline-immediately-returned-variable
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
@@ -105,7 +105,7 @@ def test_get_belief_dict_from_voice_tables_ReturnsObj_With_beliefunit_Attrs_Scen
 
 def test_get_belief_dict_from_voice_tables_ReturnsObj_With_blfpayy_Attrs_Scenario0():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_str = "Bob"
     sue_str = "Sue"
     tp55 = 55
@@ -141,8 +141,8 @@ VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
 
 def test_get_belief_dict_from_voice_tables_ReturnsObj_With_blfpayy_Attrs_Scenario1():
     # ESTABLISH
-    a23_str = "accord23"
-    a45_str = "accord45"
+    a23_str = "amy23"
+    a45_str = "amy45"
     bob_str = "Bob"
     sue_str = "Sue"
     tp55 = 55
@@ -181,7 +181,7 @@ VALUES
 
 def test_get_belief_dict_from_voice_tables_ReturnsObj_With_beliefbud_Attrs_Scenario0():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_str = "Bob"
     tp55 = 55
     bob_tp55_quota = 444
@@ -222,7 +222,7 @@ VALUES ('{a23_str}', '{bob_str}', {tp55}, {bob_tp55_quota}, {bob_tp55_celldepth}
 
 def test_get_belief_dict_from_voice_tables_ReturnsObj_With_blfhour_Attrs_Scenario0():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     hour3_min = 300
     hour4_min = 400
     hour3_label = "3xm"
@@ -256,7 +256,7 @@ VALUES
 
 def test_get_belief_dict_from_voice_tables_ReturnsObj_With_blfmont_Attrs_Scenario0():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     day111_min = 111
     day222_min = 222
     month111_label = "jan111"
@@ -291,7 +291,7 @@ VALUES
 
 def test_get_belief_dict_from_voice_tables_ReturnsObj_With_blfweek_Attrs_Scenario0():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     ana_order = 1
     bee_order = 2
     ana_label = "ana_weekday"
@@ -324,7 +324,7 @@ VALUES
 def test_get_belief_dict_from_voice_tables_ReturnsObj_With_blfoffi_Attrs_Scenario0():
     # sourcery skip: extract-method
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     offi_time5 = 5
     offi_time7 = 7
     with sqlite3_connect(":memory:") as conn:
@@ -353,7 +353,7 @@ VALUES
 
 def test_get_belief_dict_from_voice_tables_ReturnsObj_IsCorrectlyFormatted_Scenario0_beliefunit():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     a23_timeline_label = "timeline88"
     a23_c400_number = 3
     a23_yr1_jan1_offset = 7
@@ -409,7 +409,7 @@ VALUES (
 
 def test_get_belief_dict_from_voice_tables_ReturnsObj_IsCorrectlyFormatted_Scenario1_blfpayy():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_str = "Bob"
     sue_str = "Sue"
     tp55 = 55
@@ -440,7 +440,7 @@ VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
 
 def test_get_belief_dict_from_voice_tables_ReturnsObj_IsCorrectlyFormatted_Scenario2_beliefbud():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_str = "Bob"
     tp55 = 55
     bob_tp55_quota = 444
@@ -474,7 +474,7 @@ VALUES ('{a23_str}', '{bob_str}', {tp55}, {bob_tp55_quota}, {bob_tp55_celldepth}
 
 def test_get_belief_dict_from_voice_tables_ReturnsObj_Scenario3_blfhour():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     hour3_min = 300
     hour4_min = 400
     hour3_label = "3xm"
@@ -507,7 +507,7 @@ VALUES
 
 def test_get_belief_dict_from_voice_tables_ReturnsObj_Scenario4_blfmont():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     day111_min = 111
     day222_min = 222
     month111_label = "jan111"
@@ -540,7 +540,7 @@ VALUES
 
 def test_get_belief_dict_from_voice_tables_ReturnsObj_Scenario5_blfweek():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     ana_order = 1
     bee_order = 2
     ana_label = "ana_weekday"
@@ -571,7 +571,7 @@ VALUES
 def test_get_belief_dict_from_voice_tables_ReturnsObj_Scenario5_blfoffi():
     # sourcery skip: extract-method
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     offi_time5 = 5
     offi_time7 = 7
     with sqlite3_connect(":memory:") as conn:

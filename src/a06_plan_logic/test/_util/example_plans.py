@@ -56,7 +56,7 @@ def planunit_v002() -> PlanUnit:
 
 
 def get_planunit_with_4_levels() -> PlanUnit:
-    a23_str = "accord23"
+    a23_str = "amy23"
     sue_plan = planunit_shop("Sue", a23_str)
     casa_str = "casa"
     sue_plan.set_l1_concept(conceptunit_shop(casa_str, mass=30, task=True))

@@ -423,12 +423,12 @@ def test_RopeMap_del_label_SetsAttr():
 
 def test_RopeMap_set_label_Edits_otx2inx():
     # ESTABLISH
-    otx_accord45_str = to_rope("accord45")
-    inx_accord87_str = to_rope("accord87")
+    otx_amy45_str = to_rope("amy45")
+    inx_amy87_str = to_rope("amy87")
     casa_otx_str = "casa"
     casa_inx_str = "maison"
-    casa_otx_rope = create_rope(otx_accord45_str, casa_otx_str)
-    casa_inx_rope = create_rope(inx_accord87_str, casa_inx_str)
+    casa_otx_rope = create_rope(otx_amy45_str, casa_otx_str)
+    casa_inx_rope = create_rope(inx_amy87_str, casa_inx_str)
     clean_otx_str = "clean"
     clean_inx_str = "propre"
     clean_otx_rope = create_rope(casa_otx_rope, clean_otx_str)
@@ -437,11 +437,11 @@ def test_RopeMap_set_label_Edits_otx2inx():
     sweep_otx_rope = create_rope(clean_otx_rope, sweep_str)
     sweep_inx_rope = create_rope(clean_inx_rope, sweep_str)
     x_ropemap = ropemap_shop()
-    x_ropemap.set_otx2inx(otx_accord45_str, inx_accord87_str)
+    x_ropemap.set_otx2inx(otx_amy45_str, inx_amy87_str)
     x_ropemap.set_otx2inx(casa_otx_rope, casa_inx_rope)
     x_ropemap.set_otx2inx(clean_otx_rope, clean_inx_rope)
     x_ropemap.set_otx2inx(sweep_otx_rope, sweep_inx_rope)
-    assert x_ropemap.otx2inx_exists(otx_accord45_str, inx_accord87_str)
+    assert x_ropemap.otx2inx_exists(otx_amy45_str, inx_amy87_str)
     assert x_ropemap.otx2inx_exists(casa_otx_rope, casa_inx_rope)
     assert x_ropemap.otx2inx_exists(clean_otx_rope, clean_inx_rope)
     assert x_ropemap.otx2inx_exists(sweep_otx_rope, sweep_inx_rope)
@@ -453,7 +453,7 @@ def test_RopeMap_set_label_Edits_otx2inx():
     # THEN
     menage_inx_rope = create_rope(casa_inx_rope, menage_inx_str)
     sweep_menage_inx_rope = create_rope(menage_inx_rope, sweep_str)
-    assert x_ropemap.otx2inx_exists(otx_accord45_str, inx_accord87_str)
+    assert x_ropemap.otx2inx_exists(otx_amy45_str, inx_amy87_str)
     assert x_ropemap.otx2inx_exists(casa_otx_rope, casa_inx_rope)
     assert x_ropemap.otx2inx_exists(clean_otx_rope, menage_inx_rope)
     assert x_ropemap.otx2inx_exists(sweep_otx_rope, sweep_menage_inx_rope)
@@ -546,7 +546,7 @@ def test_get_ropemap_from_json_ReturnsObj():
 def test_RopeMap_all_otx_parent_ropes_exist_ReturnsObj_RopeTerm():
     # ESTABLISH
     otx_r_knot = "/"
-    clean_otx_parent_rope = to_rope("accord45", otx_r_knot)
+    clean_otx_parent_rope = to_rope("amy45", otx_r_knot)
     clean_otx_str = "clean"
     clean_otx_rope = create_rope(clean_otx_parent_rope, clean_otx_str, otx_r_knot)
 
@@ -597,17 +597,17 @@ def test_RopeMap_is_valid_ReturnsObj_Scenario0_concept_label_str():
 
 def test_RopeMap_is_valid_ReturnsObj_Scenario1_rope_str():
     # ESTABLISH
-    accord45_str = "accord45"
+    amy45_str = "amy45"
     otx_r_knot = "/"
     inx_r_knot = ":"
     clean_otx_str = "clean"
-    clean_otx_rope = f"{accord45_str}{otx_r_knot}{clean_otx_str}"
+    clean_otx_rope = f"{amy45_str}{otx_r_knot}{clean_otx_str}"
     clean_inx_str = "prop"
-    clean_inx_rope = f"{accord45_str}{inx_r_knot}{clean_inx_str}"
+    clean_inx_rope = f"{amy45_str}{inx_r_knot}{clean_inx_str}"
     # casa_otx = f"casa{otx_knot}"
     # casa_inx = f"casa"
     x_ropemap = ropemap_shop(otx_knot=otx_r_knot, inx_knot=inx_r_knot)
-    x_ropemap.set_otx2inx(accord45_str, accord45_str)
+    x_ropemap.set_otx2inx(amy45_str, amy45_str)
     assert x_ropemap.is_valid()
     assert x_ropemap.otx2inx_exists(clean_otx_rope, clean_inx_rope) is False
 
@@ -621,7 +621,7 @@ def test_RopeMap_is_valid_ReturnsObj_Scenario1_rope_str():
 def test_RopeMap_is_valid_ReturnsObj_Scenario3_RopeTerm():
     # ESTABLISH
     otx_r_knot = "/"
-    clean_otx_parent_rope = to_rope("accord45", otx_r_knot)
+    clean_otx_parent_rope = to_rope("amy45", otx_r_knot)
     clean_otx_str = "clean"
     clean_otx_rope = create_rope(clean_otx_parent_rope, clean_otx_str, otx_r_knot)
 

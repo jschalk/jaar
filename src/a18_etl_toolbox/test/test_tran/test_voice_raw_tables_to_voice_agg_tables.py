@@ -135,7 +135,7 @@ GROUP BY {v_raw_del_columns_str}
 
 def test_get_insert_voice_agg_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -205,7 +205,7 @@ FROM {plnacct_v_agg_put_tablename}
 
 def test_etl_voice_raw_tables_to_voice_agg_tables_PopulatesTable_Scenario0():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"

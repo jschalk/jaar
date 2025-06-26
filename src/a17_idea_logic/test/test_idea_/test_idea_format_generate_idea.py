@@ -37,8 +37,8 @@ def test_make_plandelta_Arg_idea_format_00021_plan_acctunit_v0_0_0():
     sue_acct_debt_points = 23
     bob_acct_debt_points = 29
     yao_acct_debt_points = 37
-    accord_belief_label = "accord56"
-    sue_planunit = planunit_shop(sue_str, accord_belief_label)
+    amy_belief_label = "amy56"
+    sue_planunit = planunit_shop(sue_str, amy_belief_label)
     sue_planunit.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
     sue_planunit.add_acctunit(bob_str, bob_acct_cred_points, bob_acct_debt_points)
     sue_planunit.add_acctunit(yao_str, yao_acct_cred_points, yao_acct_debt_points)
@@ -77,8 +77,8 @@ def test_make_plandelta_Arg_idea_format_00021_plan_acctunit_v0_0_0():
 #     sue_str = "Sue"
 #     bob_str = "Bob"
 #     yao_str = "Yao"
-#     accord_belief_label = "accord56"
-#     sue_planunit = planunit_shop(sue_str, accord_belief_label)
+#     amy_belief_label = "amy56"
+#     sue_planunit = planunit_shop(sue_str, amy_belief_label)
 #     sue_planunit.add_acctunit(sue_str)
 #     sue_planunit.add_acctunit(bob_str)
 #     sue_planunit.add_acctunit(yao_str)
@@ -147,8 +147,8 @@ def test_make_plandelta_Arg_idea_format_00013_conceptunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
-    accord_belief_label = "accord56"
-    sue_planunit = planunit_shop(sue_str, accord_belief_label)
+    amy_belief_label = "amy56"
+    sue_planunit = planunit_shop(sue_str, amy_belief_label)
     casa_str = "casa"
     casa_rope = sue_planunit.make_l1_rope(casa_str)
     casa_mass = 31

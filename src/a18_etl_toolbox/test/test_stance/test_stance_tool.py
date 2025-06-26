@@ -40,7 +40,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario1_SingleBeliefUnit_NoPlanUni
 ):
     # ESTABLISH
     belief_mstr_dir = get_module_temp_dir()
-    a23_str = "accord23"
+    a23_str = "amy23"
     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
     belief_json_path = create_belief_json_path(belief_mstr_dir, a23_str)
     save_file(belief_json_path, None, a23_belief.get_json())
@@ -60,7 +60,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_PlanUnits(
     # ESTABLISH
     belief_mstr_dir = get_module_temp_dir()
     bob_str = "Bob"
-    a23_str = "accord23"
+    a23_str = "amy23"
     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
     belief_json_path = create_belief_json_path(belief_mstr_dir, a23_str)
     save_file(belief_json_path, None, a23_belief.get_json())

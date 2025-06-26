@@ -20,7 +20,7 @@ def test_load_cells_planevent_SetsFiles_Scenario0_NoFacts(
     # ESTABLISH
     belief_mstr_dir = get_module_temp_dir()
     bob_str = "Bob"
-    a23_str = "accord23"
+    a23_str = "amy23"
     event300 = 300
     time5 = 5
     save_arbitrary_planevent(belief_mstr_dir, a23_str, bob_str, event300)
@@ -46,7 +46,7 @@ def test_load_cells_planevent_SetsFiles_Scenario1_WithFacts(
     # ESTABLISH
     belief_mstr_dir = get_module_temp_dir()
     bob_str = "Bob"
-    a23_str = "accord23"
+    a23_str = "amy23"
     event300 = 300
     time5 = 5
     clean_fact = example_casa_clean_factunit()
@@ -76,7 +76,7 @@ def test_load_cells_planevent_SetsFiles_Scenario2_WithFacts_NotAtRoot(
     # ESTABLISH
     belief_mstr_dir = get_module_temp_dir()
     bob_str = "Bob"
-    a23_str = "accord23"
+    a23_str = "amy23"
     event300 = 300
     time5 = 5
     clean_fact = example_casa_clean_factunit()

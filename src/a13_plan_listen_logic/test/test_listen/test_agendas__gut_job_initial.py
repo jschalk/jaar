@@ -35,7 +35,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlanWhenNo_labo
 ):
     # ESTABLISH
     belief_mstr_dir = env_dir()
-    a23_str = "accord23"
+    a23_str = "amy23"
     yao_str = "Yao"
     yao_gut = planunit_shop(yao_str, a23_str)
     zia_str = "Zia"
@@ -68,7 +68,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlan(
 ):
     # ESTABLISH
     belief_mstr_dir = env_dir()
-    a23_str = "accord23"
+    a23_str = "amy23"
     yao_str = "Yao"
     yao_gut = planunit_shop(yao_str, a23_str)
     zia_str = "Zia"
@@ -77,7 +77,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlan(
     zia_pool = 87
     yao_gut.add_acctunit(zia_str, zia_acct_cred_points, zia_acct_debt_points)
     yao_gut.set_acct_respect(zia_pool)
-    a23_str = "accord23"
+    a23_str = "amy23"
     save_gut_file(belief_mstr_dir, yao_gut)
     zia_gut = planunit_shop(zia_str, a23_str)
     zia_gut.set_concept(conceptunit_shop(clean_str(), task=True), casa_rope())
@@ -118,7 +118,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToPlanWithDetails
     assert len(bob_cook_conceptunit.reasonunits) == 0
     zia_str = zia_gut.owner_name
     bob_str = bob_gut.owner_name
-    a23_str = "accord23"
+    a23_str = "amy23"
     save_gut_file(belief_mstr_dir, zia_gut)
     save_gut_file(belief_mstr_dir, bob_gut)
 
@@ -167,7 +167,7 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalPlan(
 ):
     # ESTABLISH
     belief_mstr_dir = env_dir()
-    a23_str = "accord23"
+    a23_str = "amy23"
     yao_str = "Yao"
     yao_gut = planunit_shop(yao_str, a23_str)
     zia_str = "Zia"
@@ -180,7 +180,7 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalPlan(
     yao_gut.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
     yao_pool = 92
     yao_gut.set_acct_respect(yao_pool)
-    a23_str = "accord23"
+    a23_str = "amy23"
     save_gut_file(belief_mstr_dir, yao_gut)
 
     zia_str = "Zia"
@@ -246,7 +246,7 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorPlan(
     # ESTABLISH
     belief_mstr_dir = env_dir()
     yao_str = "Yao"
-    a23_str = "accord23"
+    a23_str = "amy23"
     yao_gut_path = create_gut_path(belief_mstr_dir, a23_str, yao_str)
     delete_dir(yao_gut_path)  # don't know why I have to do this...
     print(f"{os_path_exists(yao_gut_path)=}")

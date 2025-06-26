@@ -232,7 +232,7 @@ def test_AtomRow_get_planatoms_ReturnsObjIfDimenIsCorrect():
 def test_AtomRow_get_planatoms_ReturnsObj_plan_conceptunit_INSERT_task_False_Scenario0():
     # ESTABLISH
     x_atomrow = atomrow_shop({plan_conceptunit_str()}, INSERT_str())
-    x_atomrow.concept_rope = create_rope("accord78", "casa")
+    x_atomrow.concept_rope = create_rope("amy78", "casa")
     x_atomrow.task = False
     assert len(x_atomrow.get_planatoms()) == 1
 
@@ -241,7 +241,7 @@ def test_AtomRow_get_planatoms_ReturnsObj_plan_conceptunit_INSERT_task_False_Sce
 
     # THEN
     static_planatom = planatom_shop(plan_conceptunit_str(), INSERT_str())
-    static_planatom.set_arg("concept_rope", create_rope("accord78", "casa"))
+    static_planatom.set_arg("concept_rope", create_rope("amy78", "casa"))
     static_planatom.set_arg("task", False)
     print(static_planatom)
     print(x_planatom)
@@ -252,7 +252,7 @@ def test_AtomRow_get_planatoms_ReturnsObj_plan_conceptunit_INSERT_task_False_Sce
     # ESTABLISH
     x_dimens = {plan_conceptunit_str(), plan_concept_healerlink_str()}
     x_atomrow = atomrow_shop(x_dimens, INSERT_str())
-    x_atomrow.concept_rope = create_rope("accord78", "casa")
+    x_atomrow.concept_rope = create_rope("amy78", "casa")
     x_atomrow.task = False
     x_atomrow.healer_name = "Bob"
 
@@ -262,7 +262,7 @@ def test_AtomRow_get_planatoms_ReturnsObj_plan_conceptunit_INSERT_task_False_Sce
     # THEN
     assert len(x_planatoms) == 2
     y_concept_planatom = planatom_shop(plan_conceptunit_str(), INSERT_str())
-    casa_rope = create_rope("accord78", "casa")
+    casa_rope = create_rope("amy78", "casa")
     y_concept_planatom.set_arg("concept_rope", casa_rope)
     y_concept_planatom.set_arg("task", False)
     assert y_concept_planatom in x_planatoms

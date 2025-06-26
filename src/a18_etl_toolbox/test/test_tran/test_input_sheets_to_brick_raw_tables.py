@@ -46,7 +46,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(
         belief_label_str(),
         hour_label_str(),
     ]
-    a23_str = "accord23"
+    a23_str = "amy23"
     row0 = [event1, sue_str, minute_360, a23_str, hour6am]
     row1 = [event1, sue_str, minute_420, a23_str, hour7am]
     row2 = [event2, sue_str, minute_420, a23_str, hour7am]
@@ -128,7 +128,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
         belief_label_str(),
         hour_label_str(),
     ]
-    a23_str = "accord23"
+    a23_str = "amy23"
     row1 = [event1, sue_str, minute_360, a23_str, hour6am]
     row2 = [event1, sue_str, minute_420, a23_str, hour7am]
     row3 = [event2, sue_str, minute_420, a23_str, hour7am]
@@ -220,7 +220,7 @@ ORDER BY sheet_name, {event_int_str()}, {cumulative_minute_str()};"""
 #         belief_label_str(),
 #         hour_label_str(),
 #     ]
-#     a23_str = "accord23"
+#     a23_str = "amy23"
 #     df_row0 = [event1, sue_str, minute_360, a23_str, hour6am]
 #     df_row1 = [event1, sue_str, minute_420, a23_str, hour7am]
 #     df_row2 = [event2, sue_str, minute_420, a23_str, hour7am]

@@ -76,7 +76,7 @@ def test_get_plan_root_facts_dict_ReturnsObj_Scenario2_factunits_Exist():
 
 def test_set_factunits_to_plan_ReturnsObj_Scenario0_PlanEmptyNoFacts():
     # ESTABLISH
-    yao_plan = planunit_shop("Yao", "accord23")
+    yao_plan = planunit_shop("Yao", "amy23")
     before_yao_plan = copy_deepcopy(yao_plan)
     facts_dict = {}
     assert yao_plan.get_dict() == before_yao_plan.get_dict()
@@ -90,7 +90,7 @@ def test_set_factunits_to_plan_ReturnsObj_Scenario0_PlanEmptyNoFacts():
 
 def test_set_factunits_to_plan_ReturnsObj_Scenario1_Plan1FactsChanged():
     # ESTABLISH
-    bob_plan = planunit_shop("Bob", "accord23")
+    bob_plan = planunit_shop("Bob", "amy23")
     casa_str = "casa"
     floor_str = "floor status"
     clean_str = "clean"
@@ -124,7 +124,7 @@ def test_set_factunits_to_plan_ReturnsObj_Scenario1_Plan1FactsChanged():
 
 def test_set_factunits_to_plan_ReturnsObj_Scenario2_FactUnit_rcontext_DoesNotExistInPlan():
     # ESTABLISH
-    bob_plan = planunit_shop("Bob", "accord23")
+    bob_plan = planunit_shop("Bob", "amy23")
     casa_str = "casa"
     floor_str = "floor status"
     clean_str = "clean"
@@ -159,7 +159,7 @@ def test_set_factunits_to_plan_ReturnsObj_Scenario2_FactUnit_rcontext_DoesNotExi
 
 def test_set_factunits_to_plan_ReturnsObj_Scenario3_FactUnit_rcontext_WithoutRcontextNotAddedToPlan():
     # ESTABLISH
-    bob_plan = planunit_shop("Bob", "accord23")
+    bob_plan = planunit_shop("Bob", "amy23")
     casa_str = "casa"
     floor_str = "floor status"
     clean_str = "clean"
@@ -203,7 +203,7 @@ def test_set_factunits_to_plan_ReturnsObj_Scenario3_FactUnit_rcontext_WithoutRco
 
 def test_clear_factunits_from_plan_ReturnsObj_Scenario1_FactUnit_Exist():
     # ESTABLISH
-    bob_plan = planunit_shop("Bob", "accord23")
+    bob_plan = planunit_shop("Bob", "amy23")
     casa_str = "casa"
     floor_str = "floor status"
     clean_str = "clean"

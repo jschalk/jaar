@@ -222,7 +222,7 @@ def test_PlanUnit_set_max_tree_traverse_RaisesError_Scenario1():
 
 def test_PlanUnit_make_rope_ReturnsObj():
     # ESTABLISH
-    x_belief_label = "accord45"
+    x_belief_label = "amy45"
     slash_knot = "/"
     sue_str = "Sue"
     sue_plan = planunit_shop(sue_str, x_belief_label, knot=slash_knot)

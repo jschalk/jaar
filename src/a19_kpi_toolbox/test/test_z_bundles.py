@@ -20,7 +20,7 @@ from src.a19_kpi_toolbox.test._util.a19_str import belief_kpi001_acct_nets_str
 
 def test_populate_kpi_bundle_PopulatesTable_Scenario0_GivenDefaultBundleID():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     yao_str = "Yao"
     bob_str = "Bob"
     yao_acct_net = -55
@@ -56,7 +56,7 @@ VALUES
 
 def test_populate_kpi_bundle_PopulatesTable_Scenario1_GivenNoBundleID():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     yao_str = "Yao"
     bob_str = "Bob"
     yao_acct_net = -55

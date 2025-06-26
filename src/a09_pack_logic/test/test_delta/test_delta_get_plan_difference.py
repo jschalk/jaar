@@ -377,8 +377,8 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_delete()
     before_sue_plan.set_concept(conceptunit_shop(street_str), ball_rope)
     disc_str = "Ultimate Disc"
     disc_rope = before_sue_plan.make_rope(sports_rope, disc_str)
-    accord45_str = "accord45"
-    before_sue_plan.set_l1_concept(conceptunit_shop(accord45_str))
+    amy45_str = "amy45"
+    before_sue_plan.set_l1_concept(conceptunit_shop(amy45_str))
     before_sue_plan.set_concept(conceptunit_shop(disc_str), sports_rope)
     # create after without ball_concept and street_concept
     after_sue_plan = copy_deepcopy(before_sue_plan)
@@ -421,19 +421,19 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_insert()
     disc_str = "Ultimate Disc"
     disc_rope = after_sue_plan.make_rope(sports_rope, disc_str)
     after_sue_plan.set_concept(conceptunit_shop(disc_str), sports_rope)
-    accord45_str = "accord45"
-    accord_begin = 34
-    accord_close = 78
-    accord_mass = 55
-    accord_task = True
-    accord_rope = after_sue_plan.make_l1_rope(accord45_str)
+    amy45_str = "amy45"
+    amy_begin = 34
+    amy_close = 78
+    amy_mass = 55
+    amy_task = True
+    amy_rope = after_sue_plan.make_l1_rope(amy45_str)
     after_sue_plan.set_l1_concept(
         conceptunit_shop(
-            accord45_str,
-            begin=accord_begin,
-            close=accord_close,
-            mass=accord_mass,
-            task=accord_task,
+            amy45_str,
+            begin=amy_begin,
+            close=amy_close,
+            mass=amy_mass,
+            task=amy_task,
         )
     )
 
@@ -448,14 +448,14 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_insert()
     street_planatom = get_from_nested_dict(sue_plandelta.planatoms, x_keylist)
     assert street_planatom.get_value(concept_rope_str()) == disc_rope
 
-    a45_rope = after_sue_plan.make_l1_rope(accord45_str)
+    a45_rope = after_sue_plan.make_l1_rope(amy45_str)
     x_keylist = [INSERT_str(), plan_conceptunit_str(), a45_rope]
     ball_planatom = get_from_nested_dict(sue_plandelta.planatoms, x_keylist)
     assert ball_planatom.get_value(concept_rope_str()) == a45_rope
-    assert ball_planatom.get_value(begin_str()) == accord_begin
-    assert ball_planatom.get_value(close_str()) == accord_close
-    assert ball_planatom.get_value(mass_str()) == accord_mass
-    assert ball_planatom.get_value(task_str()) == accord_task
+    assert ball_planatom.get_value(begin_str()) == amy_begin
+    assert ball_planatom.get_value(close_str()) == amy_close
+    assert ball_planatom.get_value(mass_str()) == amy_mass
+    assert ball_planatom.get_value(task_str()) == amy_task
 
     assert get_planatom_total_count(sue_plandelta) == 2
 
@@ -466,34 +466,34 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_update()
     before_sue_plan = planunit_shop(sue_str)
     sports_str = "sports"
     sports_rope = before_sue_plan.make_l1_rope(sports_str)
-    accord45_str = "accord45"
-    accord45_rope = before_sue_plan.make_l1_rope(accord45_str)
-    before_accord_begin = 34
-    before_accord_close = 78
-    before_accord_mass = 55
-    before_accord_task = True
-    accord_rope = before_sue_plan.make_l1_rope(accord45_str)
+    amy45_str = "amy45"
+    amy45_rope = before_sue_plan.make_l1_rope(amy45_str)
+    before_amy_begin = 34
+    before_amy_close = 78
+    before_amy_mass = 55
+    before_amy_task = True
+    amy_rope = before_sue_plan.make_l1_rope(amy45_str)
     before_sue_plan.set_l1_concept(
         conceptunit_shop(
-            accord45_str,
-            begin=before_accord_begin,
-            close=before_accord_close,
-            mass=before_accord_mass,
-            task=before_accord_task,
+            amy45_str,
+            begin=before_amy_begin,
+            close=before_amy_close,
+            mass=before_amy_mass,
+            task=before_amy_task,
         )
     )
 
     after_sue_plan = copy_deepcopy(before_sue_plan)
-    after_accord_begin = 99
-    after_accord_close = 111
-    after_accord_mass = 22
-    after_accord_task = False
+    after_amy_begin = 99
+    after_amy_close = 111
+    after_amy_mass = 22
+    after_amy_task = False
     after_sue_plan.edit_concept_attr(
-        accord_rope,
-        begin=after_accord_begin,
-        close=after_accord_close,
-        mass=after_accord_mass,
-        task=after_accord_task,
+        amy_rope,
+        begin=after_amy_begin,
+        close=after_amy_close,
+        mass=after_amy_mass,
+        task=after_amy_task,
     )
 
     # WHEN
@@ -503,13 +503,13 @@ def test_PlanDelta_add_all_different_planatoms_Creates_PlanAtom_concept_update()
     # THEN
     print_planatom_keys(sue_plandelta)
 
-    x_keylist = [UPDATE_str(), plan_conceptunit_str(), accord45_rope]
+    x_keylist = [UPDATE_str(), plan_conceptunit_str(), amy45_rope]
     ball_planatom = get_from_nested_dict(sue_plandelta.planatoms, x_keylist)
-    assert ball_planatom.get_value(concept_rope_str()) == accord45_rope
-    assert ball_planatom.get_value(begin_str()) == after_accord_begin
-    assert ball_planatom.get_value(close_str()) == after_accord_close
-    assert ball_planatom.get_value(mass_str()) == after_accord_mass
-    assert ball_planatom.get_value(task_str()) == after_accord_task
+    assert ball_planatom.get_value(concept_rope_str()) == amy45_rope
+    assert ball_planatom.get_value(begin_str()) == after_amy_begin
+    assert ball_planatom.get_value(close_str()) == after_amy_close
+    assert ball_planatom.get_value(mass_str()) == after_amy_mass
+    assert ball_planatom.get_value(task_str()) == after_amy_task
 
     assert get_planatom_total_count(sue_plandelta) == 1
 

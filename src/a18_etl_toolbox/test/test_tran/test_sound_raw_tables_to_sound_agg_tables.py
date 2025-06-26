@@ -33,7 +33,7 @@ from src.a18_etl_toolbox.transformers import (
 
 def test_create_sound_raw_update_inconsist_error_message_sqlstr_ExecutedSqlUpdatesTableCorrectly_Scenario0():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -91,7 +91,7 @@ VALUES
 
 def test_set_sound_raw_tables_error_message_UpdatesTableCorrectly_Scenario0():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -148,7 +148,7 @@ VALUES
 
 def test_set_sound_raw_tables_error_message_UpdatesTableCorrectly_Scenario1_plan_raw_del():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -209,7 +209,7 @@ VALUES
 
 def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scenario0():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -313,7 +313,7 @@ VALUES
 
 def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scenario1_del_table():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -376,7 +376,7 @@ VALUES
 
 def test_etl_sound_raw_tables_to_sound_agg_tables_PopulatesValidTable_Scenario0():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"

@@ -19,7 +19,7 @@ from src.a18_etl_toolbox.transformers import etl_sound_vld_tables_to_voice_raw_t
 
 def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -90,7 +90,7 @@ FROM {plnawar_v_raw_put_tablename}
 
 def test_etl_sound_vld_tables_to_voice_raw_tables_Scenario0_AddRowsToTable():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -158,7 +158,7 @@ FROM {plnacct_v_raw_put_tablename}
 
 def test_etl_sound_vld_tables_to_voice_raw_tables_Scenario1_Populates_inx_Columns():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"

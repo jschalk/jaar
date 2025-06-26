@@ -24,7 +24,7 @@ from src.a18_etl_toolbox.transformers import set_belief_plan_sound_agg_knot_erro
 
 def test_create_knot_exists_in_name_error_update_sqlstr_ReturnsObj_PopulatesTable_Scenario0():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     sue_str = "Sue"
     yao_str = "Yao"
     colon = ":"
@@ -83,8 +83,8 @@ def test_create_knot_exists_in_label_error_update_sqlstr_ReturnsObj_PopulatesTab
     yao_str = "Yao"
     colon = ":"
     bob_str = f"{colon}Bob"
-    a23_str = "accord23"
-    a45_str = f"{colon}accord45"
+    a23_str = "amy23"
+    a45_str = f"{colon}amy45"
     comma = ","
     ukx = "Unknown"
     event1 = 1
@@ -141,8 +141,8 @@ def test_set_belief_plan_sound_agg_knot_errors_PopulatesTable_Scenario0():
     yao_str = "Yao"
     colon = ":"
     bob_str = f"{colon}Bob"
-    a23_str = "accord23"
-    a45_str = f"{colon}accord45"
+    a23_str = "amy23"
+    a45_str = f"{colon}amy45"
     comma = ","
     ukx = "Unknown"
     event1 = 1

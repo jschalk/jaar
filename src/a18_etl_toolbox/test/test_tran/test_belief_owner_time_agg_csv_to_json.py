@@ -26,26 +26,26 @@ def test_etl_belief_ote1_agg_csvs_to_jsons_CreatesFile_Scenaro0(
     sue_str = "Sue"
     event3 = 3
     event7 = 7
-    accord23_str = "accord23"
-    accord45_str = "accord45"
+    amy23_str = "amy23"
+    amy45_str = "amy45"
     timepoint55 = 55
     timepoint66 = 66
     belief_mstr_dir = get_module_temp_dir()
-    a23_event_time_p = create_belief_ote1_csv_path(belief_mstr_dir, accord23_str)
-    a45_event_time_p = create_belief_ote1_csv_path(belief_mstr_dir, accord45_str)
+    a23_event_time_p = create_belief_ote1_csv_path(belief_mstr_dir, amy23_str)
+    a45_event_time_p = create_belief_ote1_csv_path(belief_mstr_dir, amy45_str)
     a23_event_time_csv = f"""{belief_label_str()},{owner_name_str()},{event_int_str()},{bud_time_str()},{error_message_str()}
-{accord23_str},{bob_str},{event3},{timepoint55},
+{amy23_str},{bob_str},{event3},{timepoint55},
 """
     a45_event_time_csv = f"""{belief_label_str()},{owner_name_str()},{event_int_str()},{bud_time_str()},{error_message_str()}
-{accord45_str},{sue_str},{event3},{timepoint55},
-{accord45_str},{sue_str},{event7},{timepoint66},
+{amy45_str},{sue_str},{event3},{timepoint55},
+{amy45_str},{sue_str},{event7},{timepoint66},
 """
     save_file(a23_event_time_p, None, a23_event_time_csv)
     save_file(a45_event_time_p, None, a45_event_time_csv)
     assert os_path_exists(a23_event_time_p)
     assert os_path_exists(a45_event_time_p)
-    a23_ote1_json_path = create_belief_ote1_json_path(belief_mstr_dir, accord23_str)
-    a45_ote1_json_path = create_belief_ote1_json_path(belief_mstr_dir, accord45_str)
+    a23_ote1_json_path = create_belief_ote1_json_path(belief_mstr_dir, amy23_str)
+    a45_ote1_json_path = create_belief_ote1_json_path(belief_mstr_dir, amy45_str)
     assert os_path_exists(a23_ote1_json_path) is False
     assert os_path_exists(a45_ote1_json_path) is False
 

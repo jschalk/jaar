@@ -37,7 +37,7 @@ from src.a18_etl_toolbox.transformers import (
 
 def test_get_belief_voice_select1_sqlstrs_ReturnsObj_HasAllNeededKeys():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
 
     # WHEN
     fu2_select_sqlstrs = get_belief_voice_select1_sqlstrs(a23_str)
@@ -51,7 +51,7 @@ def test_get_belief_voice_select1_sqlstrs_ReturnsObj_HasAllNeededKeys():
 def test_get_belief_voice_select1_sqlstrs_ReturnsObj():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
 
     # WHEN
     fu2_select_sqlstrs = get_belief_voice_select1_sqlstrs(belief_label=a23_str)
@@ -100,7 +100,7 @@ def test_get_belief_voice_select1_sqlstrs_ReturnsObj():
         blfweek_sqlstr_ref = f"{blfweek_abbv7.upper()}_FU2_SELECT_SQLSTR"
         blfoffi_sqlstr_ref = f"{blfoffi_abbv7.upper()}_FU2_SELECT_SQLSTR"
         beliefunit_sqlstr_ref = f"{beliefunit_abbv7.upper()}_FU2_SELECT_SQLSTR"
-        qa23_str = "'accord23'"
+        qa23_str = "'amy23'"
         blank = ""
         print(f"""{blfpayy_sqlstr_ref} = "{blfpayy_sql.replace(qa23_str, blank)}" """)
         print(
@@ -128,8 +128,8 @@ def test_etl_voice_agg_tables_to_belief_jsons_Scenario0_CreateFilesWithOnlyBelie
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    accord23_str = "accord23"
-    accord45_str = "accord45"
+    amy23_str = "amy23"
+    amy45_str = "amy45"
     belief_mstr_dir = get_module_temp_dir()
     beliefunit_v_agg_tablename = create_prime_tablename(beliefunit_str(), "v", "agg")
     print(f"{beliefunit_v_agg_tablename=}")
@@ -140,27 +140,27 @@ def test_etl_voice_agg_tables_to_belief_jsons_Scenario0_CreateFilesWithOnlyBelie
 
         insert_raw_sqlstr = f"""
 INSERT INTO {beliefunit_v_agg_tablename} ({belief_label_str()})
-VALUES ('{accord23_str}'), ('{accord45_str}')
+VALUES ('{amy23_str}'), ('{amy45_str}')
 ;
 """
         cursor.execute(insert_raw_sqlstr)
         assert get_row_count(cursor, beliefunit_v_agg_tablename) == 2
         assert db_table_exists(cursor, belief_event_time_agg_str()) is False
 
-        accord23_json_path = create_belief_json_path(belief_mstr_dir, accord23_str)
-        accord45_json_path = create_belief_json_path(belief_mstr_dir, accord45_str)
-        print(f"{accord23_json_path=}")
-        print(f"{accord45_json_path=}")
-        assert os_path_exists(accord23_json_path) is False
-        assert os_path_exists(accord45_json_path) is False
+        amy23_json_path = create_belief_json_path(belief_mstr_dir, amy23_str)
+        amy45_json_path = create_belief_json_path(belief_mstr_dir, amy45_str)
+        print(f"{amy23_json_path=}")
+        print(f"{amy45_json_path=}")
+        assert os_path_exists(amy23_json_path) is False
+        assert os_path_exists(amy45_json_path) is False
 
         # WHEN
         etl_voice_agg_tables_to_belief_jsons(cursor, belief_mstr_dir)
 
     # THEN
-    assert os_path_exists(accord23_json_path)
-    assert os_path_exists(accord45_json_path)
-    accord23_belief = beliefunit_get_from_json(open_file(accord23_json_path))
-    accord45_belief = beliefunit_get_from_json(open_file(accord45_json_path))
-    assert accord23_belief.belief_label == accord23_str
-    assert accord45_belief.belief_label == accord45_str
+    assert os_path_exists(amy23_json_path)
+    assert os_path_exists(amy45_json_path)
+    amy23_belief = beliefunit_get_from_json(open_file(amy23_json_path))
+    amy45_belief = beliefunit_get_from_json(open_file(amy45_json_path))
+    assert amy23_belief.belief_label == amy23_str
+    assert amy45_belief.belief_label == amy45_str

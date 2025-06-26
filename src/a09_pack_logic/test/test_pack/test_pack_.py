@@ -91,32 +91,32 @@ def test_packunit_shop_ReturnsObjEstablishWithNonEmptyArgs():
     bob_delta_start = 6
     bob_packs_dir = "exampletext7"
     bob_atoms_dir = "exampletext9"
-    accord45_str = "accord45"
-    accord45_e5_event_int = 5
+    amy45_str = "amy45"
+    amy45_e5_event_int = 5
 
     # WHEN
     bob_packunit = packunit_shop(
         face_name=sue_str,
         owner_name=bob_str,
-        belief_label=accord45_str,
+        belief_label=amy45_str,
         _pack_id=bob_pack_id,
         _plandelta=bob_plandelta,
         _delta_start=bob_delta_start,
         _packs_dir=bob_packs_dir,
         _atoms_dir=bob_atoms_dir,
-        event_int=accord45_e5_event_int,
+        event_int=amy45_e5_event_int,
     )
 
     # THEN
     assert bob_packunit.face_name == sue_str
     assert bob_packunit.owner_name == bob_str
-    assert bob_packunit.belief_label == accord45_str
+    assert bob_packunit.belief_label == amy45_str
     assert bob_packunit._pack_id == bob_pack_id
     assert bob_packunit._plandelta == bob_plandelta
     assert bob_packunit._delta_start == bob_delta_start
     assert bob_packunit._packs_dir == bob_packs_dir
     assert bob_packunit._atoms_dir == bob_atoms_dir
-    assert bob_packunit.event_int == accord45_e5_event_int
+    assert bob_packunit.event_int == amy45_e5_event_int
 
 
 def test_packunit_shop_ReturnsObjEstablishWithSomeArgs_v1():
@@ -233,10 +233,10 @@ def test_PackUnit_get_step_dict_ReturnsObj_Simple():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
-    accord45_str = "accord45"
-    accord45_e5_int = 5
+    amy45_str = "amy45"
+    amy45_e5_int = 5
     bob_packunit = packunit_shop(
-        belief_label=accord45_str, owner_name=bob_str, event_int=accord45_e5_int
+        belief_label=amy45_str, owner_name=bob_str, event_int=amy45_e5_int
     )
     bob_packunit.set_face(sue_str)
 
@@ -245,13 +245,13 @@ def test_PackUnit_get_step_dict_ReturnsObj_Simple():
 
     # THEN
     assert x_dict.get(belief_label_str()) is not None
-    assert x_dict.get(belief_label_str()) == accord45_str
+    assert x_dict.get(belief_label_str()) == amy45_str
     assert x_dict.get(owner_name_str()) is not None
     assert x_dict.get(owner_name_str()) == bob_str
     assert x_dict.get(face_name_str()) is not None
     assert x_dict.get(face_name_str()) == sue_str
     assert x_dict.get(event_int_str()) is not None
-    assert x_dict.get(event_int_str()) == accord45_e5_int
+    assert x_dict.get(event_int_str()) == amy45_e5_int
 
     delta_str = "delta"
     assert x_dict.get(delta_str) is not None
@@ -312,10 +312,10 @@ def test_PackUnit_get_serializable_dict_ReturnsObj_Simple():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
-    accord45_str = "accord45"
-    accord45_e5_int = 5
+    amy45_str = "amy45"
+    amy45_e5_int = 5
     bob_packunit = packunit_shop(
-        belief_label=accord45_str, owner_name=bob_str, event_int=accord45_e5_int
+        belief_label=amy45_str, owner_name=bob_str, event_int=amy45_e5_int
     )
     bob_packunit.set_face(sue_str)
 
@@ -324,13 +324,13 @@ def test_PackUnit_get_serializable_dict_ReturnsObj_Simple():
 
     # THEN
     assert total_dict.get(belief_label_str()) is not None
-    assert total_dict.get(belief_label_str()) == accord45_str
+    assert total_dict.get(belief_label_str()) == amy45_str
     assert total_dict.get(owner_name_str()) is not None
     assert total_dict.get(owner_name_str()) == bob_str
     assert total_dict.get(face_name_str()) is not None
     assert total_dict.get(face_name_str()) == sue_str
     assert total_dict.get(event_int_str()) is not None
-    assert total_dict.get(event_int_str()) == accord45_e5_int
+    assert total_dict.get(event_int_str()) == amy45_e5_int
     delta_str = "delta"
     assert total_dict.get(delta_str) == {}
 
@@ -551,16 +551,16 @@ def test_PackUnit_get_edited_plan_RaisesErrorWhenpackAttrsAndPlanAttrsAreNotTheS
     # ESTABLISH
     yao_str = "Yao"
     xia_str = "Xia"
-    accord23_str = "accord23"
-    bob_packunit = packunit_shop(yao_str, xia_str, belief_label=accord23_str)
+    amy23_str = "amy23"
+    bob_packunit = packunit_shop(yao_str, xia_str, belief_label=amy23_str)
     sue_str = "Sue"
-    accord45_str = "accord45"
-    before_sue_planunit = planunit_shop(sue_str, belief_label=accord45_str)
+    amy45_str = "amy45"
+    before_sue_planunit = planunit_shop(sue_str, belief_label=amy45_str)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         bob_packunit.get_edited_plan(before_sue_planunit)
-    assert str(excinfo.value) == "pack plan conflict accord23 != accord45 or Yao != Sue"
+    assert str(excinfo.value) == "pack plan conflict amy23 != amy45 or Yao != Sue"
 
 
 def test_PackUnit_is_empty_ReturnsObj():

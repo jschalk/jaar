@@ -174,7 +174,7 @@ def test_add_beliefunit_to_stance_csv_strs_ReturnsObj_Scenario0_OneBeliefUnit(
     br04_csv_header = x_csvs.get("br00004")
     br05_csv_header = x_csvs.get("br00005")
     # br06_csv_header = x_csvs.get("br00006")
-    a23_beliefunit = x_beliefunits.get("accord23")
+    a23_beliefunit = x_beliefunits.get("amy23")
 
     # WHEN
     add_beliefunit_to_stance_csv_strs(a23_beliefunit, x_csvs, csv_delimiter)
@@ -187,15 +187,15 @@ def test_add_beliefunit_to_stance_csv_strs_ReturnsObj_Scenario0_OneBeliefUnit(
     gen_br00004_csv = x_csvs.get("br00004")
     gen_br00005_csv = x_csvs.get("br00005")
     # gen_br00006_csv = x_csvs.get("br00006")
-    expected_br00000_csv = ",,accord23,creg,7,440640,1,1,1,1,/,4\n"
+    expected_br00000_csv = ",,amy23,creg,7,440640,1,1,1,1,/,4\n"
     expected_br00001_csv = (
-        ",,accord23,Bob,999,332,3\n,,accord23,Sue,777,445,3\n,,accord23,Yao,222,700,3\n"
+        ",,amy23,Bob,999,332,3\n,,amy23,Sue,777,445,3\n,,amy23,Yao,222,700,3\n"
     )
-    expected_br00002_csv = ",,accord23,Bob,Zia,777,888\n,,accord23,Sue,Zia,999,234\n,,accord23,Yao,Zia,999,234\n,,accord23,Zia,Bob,777,888\n"
-    expected_br00003_csv = ",,accord23,60,0-12am\n,,accord23,120,1-1am\n,,accord23,180,2-2am\n,,accord23,240,3-3am\n,,accord23,300,4-4am\n,,accord23,360,5-5am\n,,accord23,420,6-6am\n,,accord23,480,7-7am\n,,accord23,540,8-8am\n,,accord23,600,9-9am\n,,accord23,660,10-10am\n,,accord23,720,11-11am\n,,accord23,780,12-12pm\n,,accord23,840,13-1pm\n,,accord23,900,14-2pm\n,,accord23,960,15-3pm\n,,accord23,1020,16-4pm\n,,accord23,1080,17-5pm\n,,accord23,1140,18-6pm\n,,accord23,1200,19-7pm\n,,accord23,1260,20-8pm\n,,accord23,1320,21-9pm\n,,accord23,1380,22-10pm\n,,accord23,1440,23-11pm\n"
-    expected_br00004_csv = ",,accord23,31,March\n,,accord23,61,April\n,,accord23,92,May\n,,accord23,122,June\n,,accord23,153,July\n,,accord23,184,August\n,,accord23,214,September\n,,accord23,245,October\n,,accord23,275,November\n,,accord23,306,December\n,,accord23,337,January\n,,accord23,365,February\n"
-    expected_br00005_csv = ",,accord23,0,Wednesday\n,,accord23,1,Thursday\n,,accord23,2,Friday\n,,accord23,3,Saturday\n,,accord23,4,Sunday\n,,accord23,5,Monday\n,,accord23,6,Tuesday\n"
-    # expected_br00006_csv = ",,accord23,0,Wednesday\n,,accord23,1,Thursday\n,,accord23,2,Friday\n,,accord23,3,Saturday\n,,accord23,4,Sunday\n,,accord23,5,Monday\n,,accord23,6,Tuesday\n"
+    expected_br00002_csv = ",,amy23,Bob,Zia,777,888\n,,amy23,Sue,Zia,999,234\n,,amy23,Yao,Zia,999,234\n,,amy23,Zia,Bob,777,888\n"
+    expected_br00003_csv = ",,amy23,60,0-12am\n,,amy23,120,1-1am\n,,amy23,180,2-2am\n,,amy23,240,3-3am\n,,amy23,300,4-4am\n,,amy23,360,5-5am\n,,amy23,420,6-6am\n,,amy23,480,7-7am\n,,amy23,540,8-8am\n,,amy23,600,9-9am\n,,amy23,660,10-10am\n,,amy23,720,11-11am\n,,amy23,780,12-12pm\n,,amy23,840,13-1pm\n,,amy23,900,14-2pm\n,,amy23,960,15-3pm\n,,amy23,1020,16-4pm\n,,amy23,1080,17-5pm\n,,amy23,1140,18-6pm\n,,amy23,1200,19-7pm\n,,amy23,1260,20-8pm\n,,amy23,1320,21-9pm\n,,amy23,1380,22-10pm\n,,amy23,1440,23-11pm\n"
+    expected_br00004_csv = ",,amy23,31,March\n,,amy23,61,April\n,,amy23,92,May\n,,amy23,122,June\n,,amy23,153,July\n,,amy23,184,August\n,,amy23,214,September\n,,amy23,245,October\n,,amy23,275,November\n,,amy23,306,December\n,,amy23,337,January\n,,amy23,365,February\n"
+    expected_br00005_csv = ",,amy23,0,Wednesday\n,,amy23,1,Thursday\n,,amy23,2,Friday\n,,amy23,3,Saturday\n,,amy23,4,Sunday\n,,amy23,5,Monday\n,,amy23,6,Tuesday\n"
+    # expected_br00006_csv = ",,amy23,0,Wednesday\n,,amy23,1,Thursday\n,,amy23,2,Friday\n,,amy23,3,Saturday\n,,amy23,4,Sunday\n,,amy23,5,Monday\n,,amy23,6,Tuesday\n"
 
     # print(f"      {br01_csv_header=}")
     # print(f" {expected_br00000_csv=}")
@@ -254,12 +254,12 @@ def test_add_beliefunits_to_stance_csv_strs_ReturnsObj_Scenario1_TwoBeliefUnits(
     expected_br00003_csv = f"event_int,face_name,{expected_br00003_csv}"
     expected_br00004_csv = f"event_int,face_name,{expected_br00004_csv}"
     expected_br00005_csv = f"event_int,face_name,{expected_br00005_csv}"
-    expected_br00000_csv = expected_br00000_csv.replace("accord", ",,accord")
-    expected_br00001_csv = expected_br00001_csv.replace("accord", ",,accord")
-    expected_br00002_csv = expected_br00002_csv.replace("accord", ",,accord")
-    expected_br00003_csv = expected_br00003_csv.replace("accord", ",,accord")
-    expected_br00004_csv = expected_br00004_csv.replace("accord", ",,accord")
-    expected_br00005_csv = expected_br00005_csv.replace("accord", ",,accord")
+    expected_br00000_csv = expected_br00000_csv.replace("amy", ",,amy")
+    expected_br00001_csv = expected_br00001_csv.replace("amy", ",,amy")
+    expected_br00002_csv = expected_br00002_csv.replace("amy", ",,amy")
+    expected_br00003_csv = expected_br00003_csv.replace("amy", ",,amy")
+    expected_br00004_csv = expected_br00004_csv.replace("amy", ",,amy")
+    expected_br00005_csv = expected_br00005_csv.replace("amy", ",,amy")
     expected_br00000_csv = expected_br00000_csv.replace("jeffy45", ",,jeffy45")
     expected_br00001_csv = expected_br00001_csv.replace("jeffy45", ",,jeffy45")
     expected_br00002_csv = expected_br00002_csv.replace("jeffy45", ",,jeffy45")
@@ -290,7 +290,7 @@ def test_add_plan_to_br00020_csv_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     yao_str = "Yao"
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_plan = planunit_shop(bob_str, a23_str)
     bob_plan.add_acctunit(yao_str)
     run_str = ";Run"
@@ -318,7 +318,7 @@ def test_add_plan_to_br00021_csv_ReturnsObj():
     yao_str = "Yao"
     yao_credit = 33
     yao_debt = 55
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_plan = planunit_shop(bob_str, a23_str)
     bob_plan.add_acctunit(yao_str, yao_credit, yao_debt)
     csv_header = x_ideas.get("br00021")
@@ -336,7 +336,7 @@ def test_add_plan_to_br00022_csv_ReturnsObj():
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_plan = planunit_shop(bob_str, a23_str)
     casa_rope = bob_plan.make_l1_rope("casa")
     yao_str = "Yao"
@@ -362,7 +362,7 @@ def test_add_plan_to_br00023_csv_ReturnsObj():
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
-    a23_str = "accord23"
+    a23_str = "amy23"
     a23_rope = to_rope(a23_str)
     bob_plan = planunit_shop(bob_str, a23_str)
     casa_rope = bob_plan.make_l1_rope("casa")
@@ -388,7 +388,7 @@ def test_add_plan_to_br00024_csv_ReturnsObj():
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_plan = planunit_shop(bob_str, a23_str)
     casa_rope = bob_plan.make_l1_rope("casa")
     bob_plan.add_concept(casa_rope)
@@ -412,7 +412,7 @@ def test_add_plan_to_br00025_csv_ReturnsObj():
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_plan = planunit_shop(bob_str, a23_str)
     casa_rope = bob_plan.make_l1_rope("casa")
     bob_plan.add_concept(casa_rope)
@@ -436,7 +436,7 @@ def test_add_plan_to_br00026_csv_ReturnsObj():
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_plan = planunit_shop(bob_str, a23_str)
     mop_rope = bob_plan.make_l1_rope("mop")
     casa_rope = bob_plan.make_l1_rope("casa")
@@ -472,7 +472,7 @@ def test_add_plan_to_br00027_csv_ReturnsObj():
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_plan = planunit_shop(bob_str, a23_str)
     mop_rope = bob_plan.make_l1_rope("mop")
     casa_rope = bob_plan.make_l1_rope("casa")
@@ -500,7 +500,7 @@ def test_add_plan_to_br00028_csv_ReturnsObj():
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
-    a23_str = "accord23"
+    a23_str = "amy23"
     a23_rope = to_rope(a23_str)
     bob_plan = planunit_shop(bob_str, a23_str)
     mop_rope = bob_plan.make_l1_rope("mop")
@@ -555,7 +555,7 @@ def test_add_plan_to_br00029_csv_ReturnsObj():
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_plan = planunit_shop(bob_str, a23_str)
     bob_plan.credor_respect = 444
     bob_plan.debtor_respect = 555
@@ -582,7 +582,7 @@ def test_add_planunit_to_stance_csv_strs_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     yao_str = "Yao"
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_plan = planunit_shop(bob_str, a23_str)
     bob_plan.add_acctunit(yao_str)
     mop_rope = bob_plan.make_l1_rope("mop")
@@ -775,7 +775,7 @@ def test_add_pack_to_br00020_csv_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     yao_str = "Yao"
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_plan = planunit_shop(bob_str, a23_str)
     bob_plan.add_acctunit(yao_str)
     run_str = ";Run"
@@ -810,7 +810,7 @@ def test_add_pack_to_br00021_csv_ReturnsObj():
     yao_str = "Yao"
     yao_credit = 33
     yao_debt = 55
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_plan = planunit_shop(bob_str, a23_str)
     bob_plan.add_acctunit(yao_str, yao_credit, yao_debt)
     bob_plandelta = plandelta_shop()
@@ -836,7 +836,7 @@ def test_add_pack_to_br00022_csv_ReturnsObj():
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_plan = planunit_shop(bob_str, a23_str)
     casa_rope = bob_plan.make_l1_rope("casa")
     yao_str = "Yao"
@@ -867,7 +867,7 @@ def test_add_pack_to_br00023_csv_ReturnsObj():
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
-    a23_str = "accord23"
+    a23_str = "amy23"
     a23_rope = to_rope(a23_str)
     bob_plan = planunit_shop(bob_str, a23_str)
     casa_rope = bob_plan.make_l1_rope("casa")
@@ -902,7 +902,7 @@ def test_add_pack_to_br00024_csv_ReturnsObj():
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_plan = planunit_shop(bob_str, a23_str)
     casa_rope = bob_plan.make_l1_rope("casa")
     bob_plan.add_concept(casa_rope)
@@ -936,7 +936,7 @@ def test_add_pack_to_br00025_csv_ReturnsObj():
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_plan = planunit_shop(bob_str, a23_str)
     casa_rope = bob_plan.make_l1_rope("casa")
     bob_plan.add_concept(casa_rope)
@@ -967,7 +967,7 @@ def test_add_pack_to_br00026_csv_ReturnsObj():
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_plan = planunit_shop(bob_str, a23_str)
     mop_rope = bob_plan.make_l1_rope("mop")
     casa_rope = bob_plan.make_l1_rope("casa")
@@ -1008,7 +1008,7 @@ def test_add_pack_to_br00027_csv_ReturnsObj():
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_plan = planunit_shop(bob_str, a23_str)
     mop_rope = bob_plan.make_l1_rope("mop")
     casa_rope = bob_plan.make_l1_rope("casa")
@@ -1041,7 +1041,7 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
-    a23_str = "accord23"
+    a23_str = "amy23"
     a23_rope = to_rope(a23_str)
     bob_plan = planunit_shop(bob_str, a23_str)
     mop_rope = bob_plan.make_l1_rope("mop")
@@ -1104,7 +1104,7 @@ def test_add_pack_to_br00029_csv_ReturnsObj():
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_plan = planunit_shop(bob_str, a23_str)
     bob_plan.credor_respect = 444
     bob_plan.debtor_respect = 556
@@ -1137,7 +1137,7 @@ def test_add_packunit_to_stance_csv_strs_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     yao_str = "Yao"
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_plan = planunit_shop(bob_str, a23_str)
     bob_plan.add_acctunit(yao_str)
     mop_rope = bob_plan.make_l1_rope("mop")

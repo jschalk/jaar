@@ -24,7 +24,7 @@ def test_etl_belief_job_jsons_to_job_tables_PopulatesTables_Scenario0(
     # ESTABLISH
     m23_belief_mstr_dir = get_module_temp_dir()
     m23_str = "music23"
-    a23_str = "accord23"
+    a23_str = "amy23"
     sue_str = "Sue"
     bob_str = "Bob"
     run_str = ";run"
@@ -102,7 +102,7 @@ def test_etl_belief_job_jsons_to_job_tables_PopulatesTables_Scenario1(
     credit44 = 44
     credit77 = 77
     credit88 = 88
-    a23_str = "accord23"
+    a23_str = "amy23"
     belief_mstr_dir = get_module_temp_dir()
     bob_job = planunit_shop(bob_inx, a23_str)
     bob_job.add_acctunit(bob_inx, credit77)
@@ -132,7 +132,7 @@ def test_etl_belief_job_jsons_to_job_tables_PopulatesTables_Scenario1(
         print(rows)
         assert rows == [
             (
-                "accord23",
+                "amy23",
                 "Bobby",
                 "Bobby",
                 77.0,
@@ -149,7 +149,7 @@ def test_etl_belief_job_jsons_to_job_tables_PopulatesTables_Scenario1(
                 0.0,
             ),
             (
-                "accord23",
+                "amy23",
                 "Bobby",
                 "Suzy",
                 88.0,
@@ -166,7 +166,7 @@ def test_etl_belief_job_jsons_to_job_tables_PopulatesTables_Scenario1(
                 0.0,
             ),
             (
-                "accord23",
+                "amy23",
                 "Bobby",
                 "Yaoe",
                 44.0,

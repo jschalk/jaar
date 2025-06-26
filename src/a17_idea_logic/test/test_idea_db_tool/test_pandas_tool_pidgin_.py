@@ -220,14 +220,14 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario1_AcctName()
 
 def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_get_casa_maison_pidginunit_set_by_otx2inx():
     # ESTABLISH
-    otx_accord45_str = "accord45"
-    inx_accord87_str = "accord87"
-    otx_accord45_rope = to_rope(otx_accord45_str)
-    inx_accord87_rope = to_rope(inx_accord87_str)
+    otx_amy45_str = "amy45"
+    inx_amy87_str = "amy87"
+    otx_amy45_rope = to_rope(otx_amy45_str)
+    inx_amy87_rope = to_rope(inx_amy87_str)
     casa_otx_str = "casa"
     casa_inx_str = "maison"
-    casa_otx_rope = create_rope(otx_accord45_str, casa_otx_str)
-    casa_inx_rope = create_rope(inx_accord87_str, casa_inx_str)
+    casa_otx_rope = create_rope(otx_amy45_str, casa_otx_str)
+    casa_inx_rope = create_rope(inx_amy87_str, casa_inx_str)
     clean_otx_str = "clean"
     clean_inx_str = "propre"
     clean_otx_rope = create_rope(casa_otx_rope, clean_otx_str)
@@ -238,7 +238,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_g
     yao_pidginunit = get_casa_maison_pidginunit_set_by_otx2inx()
     otx_dt = get_casa_maison_rope_otx_dt()
     old_otx_dt = copy_deepcopy(otx_dt)
-    assert otx_dt.iloc[0][rcontext_str()] == otx_accord45_rope
+    assert otx_dt.iloc[0][rcontext_str()] == otx_amy45_rope
     assert otx_dt.iloc[1][rcontext_str()] == casa_otx_rope
     assert otx_dt.iloc[2][rcontext_str()] == clean_otx_rope
     assert otx_dt.iloc[3][rcontext_str()] == sweep_otx_rope
@@ -248,7 +248,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_g
     translate_all_columns_dataframe(otx_dt, yao_pidginunit)
 
     # THEN
-    assert otx_dt.iloc[0][rcontext_str()] == inx_accord87_rope
+    assert otx_dt.iloc[0][rcontext_str()] == inx_amy87_rope
     assert otx_dt.iloc[1][rcontext_str()] == casa_inx_rope
     assert otx_dt.iloc[2][rcontext_str()] == clean_inx_rope
     assert otx_dt.iloc[3][rcontext_str()] == sweep_inx_rope
@@ -262,14 +262,14 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_g
 
 def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario3_RodeUnit_get_casa_maison_pidginunit_set_by_label():
     # ESTABLISH
-    otx_accord45_str = "accord45"
-    inx_accord87_str = "accord87"
-    otx_accord45_rope = to_rope(otx_accord45_str)
-    inx_accord87_rope = to_rope(inx_accord87_str)
+    otx_amy45_str = "amy45"
+    inx_amy87_str = "amy87"
+    otx_amy45_rope = to_rope(otx_amy45_str)
+    inx_amy87_rope = to_rope(inx_amy87_str)
     casa_otx_str = "casa"
     casa_inx_str = "maison"
-    casa_otx_rope = create_rope(otx_accord45_str, casa_otx_str)
-    casa_inx_rope = create_rope(inx_accord87_str, casa_inx_str)
+    casa_otx_rope = create_rope(otx_amy45_str, casa_otx_str)
+    casa_inx_rope = create_rope(inx_amy87_str, casa_inx_str)
     clean_otx_str = "clean"
     clean_inx_str = "propre"
     clean_otx_rope = create_rope(casa_otx_rope, clean_otx_str)
@@ -281,7 +281,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario3_RodeUnit_g
     # print(f"{yao_pidginunit=}")
     otx_dt = get_casa_maison_rope_otx_dt()
     old_otx_dt = copy_deepcopy(otx_dt)
-    assert otx_dt.iloc[0][rcontext_str()] == otx_accord45_rope
+    assert otx_dt.iloc[0][rcontext_str()] == otx_amy45_rope
     assert otx_dt.iloc[1][rcontext_str()] == casa_otx_rope
     assert otx_dt.iloc[2][rcontext_str()] == clean_otx_rope
     assert otx_dt.iloc[3][rcontext_str()] == sweep_otx_rope
@@ -294,7 +294,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario3_RodeUnit_g
     # THEN
     print("")
     print(f"after  {otx_dt=}")
-    assert otx_dt.iloc[0][rcontext_str()] == inx_accord87_rope
+    assert otx_dt.iloc[0][rcontext_str()] == inx_amy87_rope
     assert otx_dt.iloc[1][rcontext_str()] == casa_inx_rope
     assert otx_dt.iloc[2][rcontext_str()] == clean_inx_rope
     assert otx_dt.iloc[3][rcontext_str()] == sweep_inx_rope

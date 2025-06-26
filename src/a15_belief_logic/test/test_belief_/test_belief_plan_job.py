@@ -18,7 +18,7 @@ from src.a15_belief_logic.test._util.a15_env import (
 
 def test_BeliefUnit_rotate_job_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     belief_mstr_dir = get_module_temp_dir()
     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
     sue_str = "Sue"
@@ -40,7 +40,7 @@ def test_BeliefUnit_rotate_job_ReturnsObj_Scenario2_EmptyAcctsCause_inallocable_
 ):
     # ESTABLISH
     belief_mstr_dir = get_module_temp_dir()
-    a23_str = "accord23"
+    a23_str = "amy23"
     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
     sue_str = "Sue"
     yao_str = "Yao"
@@ -68,7 +68,7 @@ def test_BeliefUnit_rotate_job_ReturnsObj_Scenario2_EmptyAcctsCause_inallocable_
 
 def a23_job(owner_name: str) -> PlanUnit:
     belief_mstr_dir = get_module_temp_dir()
-    return open_job_file(belief_mstr_dir, "accord23", owner_name)
+    return open_job_file(belief_mstr_dir, "amy23", owner_name)
 
 
 def test_BeliefUnit_rotate_job_ReturnsObj_Scenario3_job_ChangesFromRotation(
@@ -76,7 +76,7 @@ def test_BeliefUnit_rotate_job_ReturnsObj_Scenario3_job_ChangesFromRotation(
 ):
     # ESTABLISH
     belief_mstr_dir = get_module_temp_dir()
-    a23_str = "accord23"
+    a23_str = "amy23"
     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
     sue_str = "Sue"
     yao_str = "Yao"
@@ -107,7 +107,7 @@ def test_BeliefUnit_rotate_job_ReturnsObj_Scenario4_job_SelfReferenceWorks(
 ):
     # ESTABLISH
     belief_mstr_dir = get_module_temp_dir()
-    a23_str = "accord23"
+    a23_str = "amy23"
     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
     bob_str = "Bob"
     sue_str = "Sue"
@@ -138,7 +138,7 @@ def test_BeliefUnit_generate_all_jobs_Scenario0_init_job_IsCreated(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     belief_mstr_dir = get_module_temp_dir()
     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
     bob_str = "Bob"
@@ -167,7 +167,7 @@ def test_BeliefUnit_generate_all_jobs_Scenario1_jobs_rotated(
 ):
     # ESTABLISH
     belief_mstr_dir = get_module_temp_dir()
-    a23_str = "accord23"
+    a23_str = "amy23"
     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir, job_listen_rotations=1)
     bob_str = "Bob"
     sue_str = "Sue"
@@ -205,7 +205,7 @@ def test_BeliefUnit_generate_all_jobs_Scenario2_jobs_rotated_InSortedOrder(
 ):
     # ESTABLISH
     belief_mstr_dir = get_module_temp_dir()
-    a23_str = "accord23"
+    a23_str = "amy23"
     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir, job_listen_rotations=1)
     bob_str = "Bob"
     sue_str = "Sue"
@@ -254,7 +254,7 @@ def test_BeliefUnit_generate_all_jobs_Scenario3_job_listen_rotation_AffectsJobs(
 ):
     # ESTABLISH
     belief_mstr_dir = get_module_temp_dir()
-    a23_str = "accord23"
+    a23_str = "amy23"
     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir, job_listen_rotations=1)
     bob_str = "Bob"
     sue_str = "Sue"

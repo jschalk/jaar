@@ -31,7 +31,7 @@ from src.a13_plan_listen_logic.test._util.example_listen_hub import get_texas_hu
 
 def test_listen_to_facts_duty_vision_SetsSingleFactUnit_v1(env_dir_setup_cleanup):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     yao_str = "Yao"
     yao_duty = planunit_shop(yao_str, a23_str)
     zia_str = "Zia"
@@ -63,7 +63,7 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnitWithDifferentChore(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     yao_str = "Yao"
     yao_duty = planunit_shop(yao_str, a23_str)
     yao_acct_cred_points = 47

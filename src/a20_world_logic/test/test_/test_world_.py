@@ -105,7 +105,7 @@ def test_worldunit_shop_ReturnsObj_Scenario0_WithParameters(env_dir_setup_cleanu
     output_dir = create_path(worlds_dir(), "output")
     five_world_id = "five"
     world2_time_pnigh = 55
-    world2_beliefunits = {"accord45"}
+    world2_beliefunits = {"amy45"}
 
     # WHEN
     x_world = worldunit_shop(
@@ -132,7 +132,7 @@ def test_worldunit_shop_ReturnsObj_Scenario0_WithParameters(env_dir_setup_cleanu
 
 def test_worldunit_shop_ReturnsObj_Scenario1_WithoutParameters(env_dir_setup_cleanup):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
 
     # WHEN
     x_world = worldunit_shop(a23_str, worlds_dir())
@@ -153,7 +153,7 @@ def test_worldunit_shop_ReturnsObj_Scenario2_ThirdParameterIs_output_dir(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     output_dir = create_path(worlds_dir(), "output")
 
     # WHEN
@@ -232,7 +232,7 @@ def test_init_beliefunits_from_dirs_ReturnsObj_Scenario0(env_dir_setup_cleanup):
 
 def test_WorldUnit_set_event_SetsAttr_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
-    x_world = worldunit_shop("accord23", worlds_dir())
+    x_world = worldunit_shop("amy23", worlds_dir())
     assert x_world._events == {}
 
     # WHEN
@@ -247,7 +247,7 @@ def test_WorldUnit_set_event_SetsAttr_Scenario0(env_dir_setup_cleanup):
 
 def test_WorldUnit_event_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_world = worldunit_shop("accord23", worlds_dir())
+    x_world = worldunit_shop("amy23", worlds_dir())
     e5_event_int = 5
     e5_face_name = "Sue"
     assert x_world.event_exists(e5_event_int) is False
@@ -261,7 +261,7 @@ def test_WorldUnit_event_exists_ReturnsObj(env_dir_setup_cleanup):
 
 def test_WorldUnit_get_event_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_world = worldunit_shop("accord23", worlds_dir())
+    x_world = worldunit_shop("amy23", worlds_dir())
     e5_event_int = 5
     e5_face_name = "Sue"
     assert x_world.get_event(e5_event_int) is None
@@ -275,7 +275,7 @@ def test_WorldUnit_get_event_ReturnsObj(env_dir_setup_cleanup):
 
 def test_WorldUnit_get_db_path_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    a23_world = worldunit_shop("accord23", worlds_dir())
+    a23_world = worldunit_shop("amy23", worlds_dir())
 
     # WHEN
     a23_db_path = a23_world.get_db_path()

@@ -22,7 +22,7 @@ from src.a19_kpi_toolbox.test._util.a19_str import belief_kpi001_acct_nets_str
 
 def test_create_populate_kpi001_table_PopulatesTable_Scenario0_NoTasks():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     yao_str = "Yao"
     bob_str = "Bob"
     yao_acct_net = -55
@@ -75,7 +75,7 @@ FROM {belief_kpi001_acct_nets_tablename}
 
 def test_create_populate_kpi001_table_PopulatesTable_Scenario1_1task():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     yao_str = "Yao"
     bob_str = "Bob"
     yao_acct_net = -55
