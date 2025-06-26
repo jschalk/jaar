@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a20_world_logic.world import WorldID
+from src.a20_world_logic.world import WorldName
 
 
 class LobbyID(str):
@@ -13,7 +13,7 @@ def create_lobby_dir_path(lobby_mstr_dir: str, lobby_id: LobbyID) -> str:
 
 
 def create_world_dir_path(
-    lobby_mstr_dir: str, lobby_id: LobbyID, world_name: WorldID
+    lobby_mstr_dir: str, lobby_id: LobbyID, world_name: WorldName
 ) -> str:
     """Returns path: lobby_mstr_dir\\lobbys\\lobby_id\\worlds\\world_name"""
     lobbys_dir = create_path(lobby_mstr_dir, "lobbys")
@@ -23,7 +23,7 @@ def create_world_dir_path(
 
 
 def create_belief_mstr_dir_path(
-    lobby_mstr_dir: str, lobby_id: LobbyID, world_name: WorldID
+    lobby_mstr_dir: str, lobby_id: LobbyID, world_name: WorldName
 ) -> str:
     """Returns path: lobby_mstr_dir\\lobbys\\lobby_id\\worlds\\world_name\\belief_mstr_dir"""
     lobbys_dir = create_path(lobby_mstr_dir, "lobbys")

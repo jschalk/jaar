@@ -68,11 +68,16 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
 
     # THEN
     assert os_path_exists(fizz_stance0001_path)
+    print(get_sheet_names(fizz_stance0001_path))
+    br00021_sheet_df = pandas_read_excel(fizz_stance0001_path, "br00021")
+    print(f"{br00021_sheet_df=}")
+    assert br00021_sheet_df.iloc[0]["face_name"] == "fizz"
 
 
 def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldUnit(
     env_dir_setup_cleanup,
 ):
+    # sourcery skip: no-loop-in-tests
     # ESTABLISH
     fizz_str = "fizz"
     fizz_output_dir = create_path(worlds_dir(), "fizz_output")

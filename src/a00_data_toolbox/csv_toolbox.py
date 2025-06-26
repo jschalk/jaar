@@ -4,6 +4,7 @@ from csv import (
     reader as csv_reader,
     writer as csv_writer,
 )
+from io import StringIO as io_StringIO
 from os import makedirs as os_makedirs
 from os.path import exists as os_path_exists, join as os_path_join
 from sqlite3 import connect as sqlite3_connect
@@ -97,26 +98,35 @@ def export_sqlite_tables_to_csv(db_path, output_dir="."):
                 writer.writerows(rows)
 
 
-def replace_csv_column(csv_path, column_name, new_value):
+def replace_csv_column_from_string(
+    csv_string: str, column_name: str, new_value: str
+) -> str:
     """
-    Replace all values in the specified column with new_value and write to a new CSV file.
+    Replace all values in the specified column with new_value in the input CSV string.
 
     Args:
-        csv_path (str): Path to the input CSV file.
+        csv_string (str): CSV content as a string.
         column_name (str): Name of the column to replace.
-        new_value (str): Value to replace in the column.
+        new_value (str): Value to insert in place of each column value.
+
+    Returns:
+        str: Modified CSV content as a string.
     """
-    with open(csv_path, "r", newline="", encoding="utf-8") as infile:
-        reader = csv_DictReader(infile)
-        fieldnames = reader.fieldnames
+    input_io = io_StringIO(csv_string)
+    output_io = io_StringIO()
 
-        if column_name not in fieldnames:
-            raise ValueError(f"Column '{column_name}' not found in CSV headers.")
+    reader = csv_DictReader(input_io)
+    fieldnames = reader.fieldnames
 
-        with open(csv_path, "w", newline="", encoding="utf-8") as outfile:
-            writer = csv_DictWriter(outfile, fieldnames=fieldnames)
-            writer.writeheader()
+    if column_name not in fieldnames:
+        raise ValueError(f"Column '{column_name}' not found in CSV headers.")
 
-            for row in reader:
-                row[column_name] = new_value
-                writer.writerow(row)
+    writer = csv_DictWriter(output_io, fieldnames=fieldnames)
+    writer.writeheader()
+
+    for row in reader:
+        row[column_name] = new_value
+        writer.writerow(row)
+
+    csv_str = output_io.getvalue()
+    return csv_str.replace("\r", "")

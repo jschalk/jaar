@@ -49,13 +49,13 @@ from src.a19_kpi_toolbox.kpi_mstr import (
 )
 
 
-class WorldID(str):
+class WorldName(str):
     pass
 
 
 @dataclass
 class WorldUnit:
-    world_name: WorldID = None
+    world_name: WorldName = None
     worlds_dir: str = None
     output_dir: str = None
     world_time_pnigh: TimeLinePoint = None
@@ -168,7 +168,7 @@ class WorldUnit:
         # if store_tracing_files:
 
     def create_stances(self):
-        create_stance0001_file(self._belief_mstr_dir, self.output_dir)
+        create_stance0001_file(self._belief_mstr_dir, self.output_dir, self.world_name)
         create_calendar_markdown_files(self._belief_mstr_dir, self.output_dir)
 
     def create_kpi_csvs(self):
@@ -182,7 +182,7 @@ class WorldUnit:
 
 
 def worldunit_shop(
-    world_name: WorldID,
+    world_name: WorldName,
     worlds_dir: str,
     output_dir: str = None,
     input_dir: str = None,
