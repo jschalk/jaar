@@ -34,7 +34,7 @@ def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovision_PlanWhenNo_labor
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     yao_str = "Yao"
     yao_duty = planunit_shop(yao_str, a23_str)
     zia_str = "Zia"
@@ -65,7 +65,7 @@ def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovision_Plan(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     yao_str = "Yao"
     yao_duty = planunit_shop(yao_str, a23_str)
     zia_str = "Zia"
@@ -103,7 +103,7 @@ def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovisionPlanWithDetailsDe
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     zia_vision = get_example_zia_speaker()
     bob_vision = get_example_bob_speaker()
     bob_vision.edit_concept_attr(
@@ -163,7 +163,7 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesIrrationalPlan(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     yao_str = "Yao"
     yao_duty = planunit_shop(yao_str, a23_str)
     zia_str = "Zia"
@@ -240,7 +240,7 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesMissingDebtorvisionPlan(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     yao_str = "Yao"
     yao_duty = planunit_shop(yao_str, a23_str)
     zia_str = "Zia"
@@ -286,7 +286,7 @@ def test_listen_to_agenda_duty_vision_agenda_ListensToOwner_duty_AndNotOwner_vis
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     yao_str = "Yao"
     yao_duty = planunit_shop(yao_str, a23_str)
     yao_str = "Yao"

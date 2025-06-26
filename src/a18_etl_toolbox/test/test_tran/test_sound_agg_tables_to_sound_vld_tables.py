@@ -20,7 +20,7 @@ from src.a18_etl_toolbox.transformers import etl_sound_agg_tables_to_sound_vld_t
 
 def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -92,7 +92,7 @@ FROM {plnawar_v_vld_put_tablename}
 
 def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario0_AddRowsToTable():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -160,7 +160,7 @@ FROM {plnacct_v_vld_put_tablename}
 
 def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario1_Populates_Columns():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -227,7 +227,7 @@ FROM {plnacct_v_vld_put_tablename}
 
 def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario2_DoesNotSelectWhere_error_message_IsNotNull():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"

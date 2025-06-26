@@ -26,7 +26,7 @@ from src.a18_etl_toolbox.transformers import etl_brick_valid_tables_to_sound_raw
 
 def test_etl_brick_valid_tables_to_sound_raw_tables_PopulatesValidTable_Scenario0_Only_valid_events():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"

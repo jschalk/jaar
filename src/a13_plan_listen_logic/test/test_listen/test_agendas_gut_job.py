@@ -35,7 +35,7 @@ def test_listen_to_agendas_jobs_into_job_AddsChoresToPlanWhenNo_laborlinkIsSet(
 ):
     # ESTABLISH
     belief_mstr_dir = env_dir()
-    a23_str = "accord23"
+    a23_str = "amy23"
     yao_str = "Yao"
     yao_gut = planunit_shop(yao_str, a23_str)
     zia_str = "Zia"
@@ -66,7 +66,7 @@ def test_listen_to_agendas_jobs_into_job_AddsChoresToPlanWhenNo_laborlinkIsSet(
 def test_listen_to_agendas_jobs_into_job_AddsChoresToPlan(env_dir_setup_cleanup):
     # ESTABLISH
     belief_mstr_dir = env_dir()
-    a23_str = "accord23"
+    a23_str = "amy23"
     yao_str = "Yao"
     yao_gut = planunit_shop(yao_str, a23_str)
     zia_str = "Zia"
@@ -75,7 +75,7 @@ def test_listen_to_agendas_jobs_into_job_AddsChoresToPlan(env_dir_setup_cleanup)
     zia_pool = 87
     yao_gut.add_acctunit(zia_str, zia_acct_cred_points, zia_acct_debt_points)
     yao_gut.set_acct_respect(zia_pool)
-    a23_str = "accord23"
+    a23_str = "amy23"
     save_job_file(belief_mstr_dir, yao_gut)
 
     zia_job = planunit_shop(zia_str, a23_str)
@@ -117,7 +117,7 @@ def test_listen_to_agendas_jobs_into_job_AddsChoresToPlanWithDetailsDecidedBy_ac
     assert len(bob_cook_conceptunit.reasonunits) == 0
     zia_str = zia_job.owner_name
     bob_str = bob_job.owner_name
-    a23_str = "accord23"
+    a23_str = "amy23"
     save_job_file(belief_mstr_dir, zia_job)
     save_job_file(belief_mstr_dir, bob_job)
 
@@ -164,7 +164,7 @@ def test_listen_to_agendas_jobs_into_job_AddsChoresToPlanWithDetailsDecidedBy_ac
 def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalPlan(env_dir_setup_cleanup):
     # ESTABLISH
     belief_mstr_dir = env_dir()
-    a23_str = "accord23"
+    a23_str = "amy23"
     yao_str = "Yao"
     yao_gut = planunit_shop(yao_str, a23_str)
     zia_str = "Zia"
@@ -177,7 +177,7 @@ def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalPlan(env_dir_setup_c
     yao_gut.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
     yao_pool = 92
     yao_gut.set_acct_respect(yao_pool)
-    a23_str = "accord23"
+    a23_str = "amy23"
     save_gut_file(belief_mstr_dir, yao_gut)
 
     zia_str = "Zia"
@@ -243,7 +243,7 @@ def test_listen_to_agendas_jobs_into_job_ProcessesMissingDebtorPlan(
     # ESTABLISH
     belief_mstr_dir = env_dir()
     yao_str = "Yao"
-    a23_str = "accord23"
+    a23_str = "amy23"
     yao_gut_path = create_gut_path(belief_mstr_dir, a23_str, yao_str)
     delete_dir(yao_gut_path)  # don't know why I have to do this...
     print(f"{os_path_exists(yao_gut_path)=}")
@@ -290,7 +290,7 @@ def test_listen_to_agendas_jobs_into_job_ListensToOwner_gut_AndNotOwner_job(
 ):
     # ESTABLISH
     belief_mstr_dir = env_dir()
-    a23_str = "accord23"
+    a23_str = "amy23"
     yao_str = "Yao"
     yao_gut = planunit_shop(yao_str, a23_str)
     yao_str = "Yao"

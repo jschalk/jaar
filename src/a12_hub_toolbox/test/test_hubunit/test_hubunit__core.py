@@ -57,7 +57,7 @@ def test_HubUnit_RaisesError_keep_rope_DoesNotExist():
 def test_hubunit_shop_ReturnsObj():
     # ESTABLISH
     x_belief_mstr_dir = "src/a15_belief_logic/test/_util"
-    x_belief_label = "accord45"
+    x_belief_label = "amy45"
     sue_str = "Sue"
     x_knot = "/"
     x_fund_pool = 13000
@@ -106,10 +106,10 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     texas_str = "Texas"
     texas_rope = create_rope(usa_rope, texas_str)
     belief_mstr_dir = get_module_temp_dir()
-    accord23_str = "accord23"
+    amy23_str = "amy23"
 
     # WHEN
-    sue_hubunit = hubunit_shop(belief_mstr_dir, accord23_str, sue_str, texas_rope)
+    sue_hubunit = hubunit_shop(belief_mstr_dir, amy23_str, sue_str, texas_rope)
 
     # THEN
     x_dutys_path = create_path(sue_hubunit.keep_dir(), "dutys")
@@ -117,14 +117,14 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     x_grades_path = create_path(sue_hubunit.keep_dir(), "grades")
 
     assert sue_hubunit.belief_mstr_dir == belief_mstr_dir
-    assert sue_hubunit.belief_label == accord23_str
+    assert sue_hubunit.belief_label == amy23_str
     assert sue_hubunit.owner_name == sue_str
     assert sue_hubunit.knot == default_knot_if_None()
     assert sue_hubunit.fund_pool == validate_fund_pool()
     assert sue_hubunit.fund_iota == default_fund_iota_if_None()
     assert sue_hubunit.respect_bit == default_RespectBit_if_None()
     assert sue_hubunit.penny == filter_penny()
-    x_hubunit = hubunit_shop(belief_mstr_dir, accord23_str, sue_str)
+    x_hubunit = hubunit_shop(belief_mstr_dir, amy23_str, sue_str)
     assert sue_hubunit.keep_rope == texas_rope
     assert sue_hubunit.keep_dir() == get_keep_path(x_hubunit, texas_rope)
     bob_str = "Bob"

@@ -126,7 +126,7 @@ def test_cellunit_shop_ReturnsObj_Scenario2_WithReasonRcontexts():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
-    sue_plan = planunit_shop(sue_str, "accord23")
+    sue_plan = planunit_shop(sue_str, "amy23")
     casa_rope = sue_plan.make_l1_rope("casa")
     mop_rope = sue_plan.make_rope(casa_rope, "mop")
     clean_fact = clean_factunit()
@@ -147,7 +147,7 @@ def test_cellunit_shop_ReturnsObj_Scenario2_WithReasonRcontexts():
 def test_cellunit_shop_ReturnsObj_Scenario3_clear_facts():
     # ESTABLISH
     sue_str = "Sue"
-    sue_plan = planunit_shop(sue_str, "accord23")
+    sue_plan = planunit_shop(sue_str, "amy23")
     casa_rope = sue_plan.make_l1_rope("casa")
     mop_rope = sue_plan.make_rope(casa_rope, "mop")
     clean_fact = clean_factunit()
@@ -214,7 +214,7 @@ def test_CellUnit_eval_planevent_SetsAttr_Scenario1():
     # ESTABLISH
     yao_str = "Yao"
     clean_fact = clean_factunit()
-    yao_plan = planunit_shop(yao_str, "accord23")
+    yao_plan = planunit_shop(yao_str, "amy23")
     casa_rope = yao_plan.make_l1_rope("casa")
     mop_rope = yao_plan.make_rope(casa_rope, "mop")
     clean_fact = clean_factunit()
@@ -262,7 +262,7 @@ def test_get_planevents_credit_ledger_ReturnsObj_Scenario1_FileExists():
     # ESTABLISH
     sue_str = "Sue"
     yao_str = "Yao"
-    sue_plan = planunit_shop(sue_str, "accord23")
+    sue_plan = planunit_shop(sue_str, "amy23")
     sue_plan.add_acctunit(sue_str, 3, 5)
     sue_plan.add_acctunit(yao_str, 7, 2)
     sue_cell = cellunit_shop(yao_str, planadjust=sue_plan)
@@ -291,7 +291,7 @@ def test_get_planevents_quota_ledger_ReturnsObj_Scenario1_FileExists():
     # ESTABLISH
     sue_str = "Sue"
     yao_str = "Yao"
-    sue_plan = planunit_shop(sue_str, "accord23")
+    sue_plan = planunit_shop(sue_str, "amy23")
     sue_plan.add_acctunit(sue_str, 3, 5)
     sue_plan.add_acctunit(yao_str, 7, 2)
     sue_cell = cellunit_shop(yao_str, quota=55, planadjust=sue_plan)
@@ -308,7 +308,7 @@ def test_CellUnit_set_found_facts_from_dict_SetsAttr():
     # ESTABLISH
     yao_str = "Yao"
     clean_fact = clean_factunit()
-    yao_plan = planunit_shop(yao_str, "accord23")
+    yao_plan = planunit_shop(yao_str, "amy23")
     yao_plan.add_fact(
         clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
     )
@@ -328,7 +328,7 @@ def test_CellUnit_set_planevent_facts_from_dict_SetsAttr():
     # ESTABLISH
     yao_str = "Yao"
     clean_fact = clean_factunit()
-    yao_plan = planunit_shop(yao_str, "accord23")
+    yao_plan = planunit_shop(yao_str, "amy23")
     yao_plan.add_fact(
         clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
     )
@@ -348,7 +348,7 @@ def test_CellUnit_set_boss_facts_from_other_facts_SetsAttr_Scenario0_found_facts
     # ESTABLISH
     yao_str = "Yao"
     clean_fact = clean_factunit()
-    yao_plan = planunit_shop(yao_str, "accord23")
+    yao_plan = planunit_shop(yao_str, "amy23")
     yao_plan.add_fact(
         clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
     )
@@ -373,7 +373,7 @@ def test_CellUnit_set_boss_facts_from_other_facts_SetsAttr_Scenario1_planevent_f
     # ESTABLISH
     yao_str = "Yao"
     clean_fact = clean_factunit()
-    yao_plan = planunit_shop(yao_str, "accord23")
+    yao_plan = planunit_shop(yao_str, "amy23")
     yao_plan.add_fact(
         clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
     )
@@ -399,7 +399,7 @@ def test_CellUnit_set_boss_facts_from_other_facts_SetsAttr_Scenario2_planevent_f
     yao_str = "Yao"
     clean_fact = clean_factunit()
     sky_fact = sky_blue_factunit()
-    yao_plan = planunit_shop(yao_str, "accord23")
+    yao_plan = planunit_shop(yao_str, "amy23")
     yao_plan.add_fact(
         clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
     )
@@ -425,7 +425,7 @@ def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario0_found_facts_o
     # ESTABLISH
     yao_str = "Yao"
     clean_fact = clean_factunit()
-    yao_plan = planunit_shop(yao_str, "accord23")
+    yao_plan = planunit_shop(yao_str, "amy23")
     yao_plan.add_fact(
         clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
     )
@@ -449,7 +449,7 @@ def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario1_planevent_fac
     # ESTABLISH
     yao_str = "Yao"
     clean_fact = clean_factunit()
-    yao_plan = planunit_shop(yao_str, "accord23")
+    yao_plan = planunit_shop(yao_str, "amy23")
     yao_plan.add_fact(
         clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
     )
@@ -475,7 +475,7 @@ def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario2_planevent_fac
     yao_str = "Yao"
     clean_fact = clean_factunit()
     sky_fact = sky_blue_factunit()
-    yao_plan = planunit_shop(yao_str, "accord23")
+    yao_plan = planunit_shop(yao_str, "amy23")
     yao_plan.add_fact(
         clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
     )
@@ -509,7 +509,7 @@ def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario2_planevent_fac
 def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario3_boss_facts_AreNotOverwritten():
     # ESTABLISH
     yao_str = "Yao"
-    yao_plan = planunit_shop(yao_str, "accord23")
+    yao_plan = planunit_shop(yao_str, "amy23")
     run_rope = yao_plan.make_l1_rope("run")
     fast_rope = yao_plan.make_rope(run_rope, "fast")
     run_fact = factunit_shop(run_rope, run_rope)
@@ -606,7 +606,7 @@ def test_CellUnit_set_planadjust_facts_ReturnsObj_Scenario0():
     sue_celldepth3 = 3
     sue_penny2 = 2
     sue_quota300 = 300
-    sue_plan = planunit_shop(sue_str, "accord23")
+    sue_plan = planunit_shop(sue_str, "amy23")
     sue_cell = cellunit_shop(
         sue_bud_owner,
         sue_ancestors,
@@ -637,7 +637,7 @@ def test_CellUnit_set_planadjust_facts_ReturnsObj_Scenario1():
     sue_quota300 = 300
     casa_clean_fact = clean_factunit()
     clean_facts = {casa_clean_fact.fcontext: casa_clean_fact}
-    sue_plan = planunit_shop(sue_str, "accord23")
+    sue_plan = planunit_shop(sue_str, "amy23")
     sue_plan.add_concept(casa_clean_fact.fstate)
     sue_cell = cellunit_shop(
         sue_bud_owner,
@@ -657,7 +657,7 @@ def test_CellUnit_set_planadjust_facts_ReturnsObj_Scenario1():
     # THEN
     assert sue_cell.planadjust.get_factunits_dict() != {}
     sue_plan_facts = sue_cell.planadjust.get_factunits_dict()
-    a23_str = "accord23"
+    a23_str = "amy23"
     casa_rope = create_rope(a23_str, "casa")
     sue_plan_casa_fact_dict = sue_plan_facts.get(casa_rope)
     assert sue_plan_casa_fact_dict.get("fstate") == casa_clean_fact.fstate
@@ -677,7 +677,7 @@ def test_CellUnit_set_planadjust_facts_ReturnsObj_Scenario2():
     casa_dirty_fact = dirty_factunit()
     clean_facts = {casa_clean_fact.fcontext: casa_clean_fact}
     dirty_facts = {casa_dirty_fact.fcontext: casa_dirty_fact}
-    sue_plan = planunit_shop(sue_str, "accord23")
+    sue_plan = planunit_shop(sue_str, "amy23")
     sue_plan.add_concept(casa_clean_fact.fstate)
     sue_plan.add_concept(casa_dirty_fact.fstate)
     sue_cell = cellunit_shop(
@@ -699,7 +699,7 @@ def test_CellUnit_set_planadjust_facts_ReturnsObj_Scenario2():
     # THEN
     assert sue_cell.planadjust.get_factunits_dict() != {}
     sue_plan_facts = sue_cell.planadjust.get_factunits_dict()
-    a23_str = "accord23"
+    a23_str = "amy23"
     casa_rope = create_rope(a23_str, "casa")
     sue_plan_casa_fact_dict = sue_plan_facts.get(casa_rope)
     assert sue_plan_casa_fact_dict.get("fstate") == casa_dirty_fact.fstate
@@ -721,7 +721,7 @@ def test_CellUnit_set_planadjust_facts_ReturnsObj_Scenario3():
     clean_facts = {casa_clean_fact.fcontext: casa_clean_fact}
     dirty_facts = {casa_dirty_fact.fcontext: casa_dirty_fact}
     grimy_facts = {casa_grimy_fact.fcontext: casa_grimy_fact}
-    sue_plan = planunit_shop(sue_str, "accord23")
+    sue_plan = planunit_shop(sue_str, "amy23")
     sue_plan.add_concept(casa_clean_fact.fstate)
     sue_plan.add_concept(casa_dirty_fact.fstate)
     sue_plan.add_concept(casa_grimy_fact.fstate)
@@ -745,7 +745,7 @@ def test_CellUnit_set_planadjust_facts_ReturnsObj_Scenario3():
     # THEN
     assert sue_cell.planadjust.get_factunits_dict() != {}
     sue_plan_facts = sue_cell.planadjust.get_factunits_dict()
-    a23_str = "accord23"
+    a23_str = "amy23"
     casa_rope = create_rope(a23_str, "casa")
     sue_plan_casa_fact_dict = sue_plan_facts.get(casa_rope)
     assert sue_plan_casa_fact_dict.get("fstate") == casa_grimy_fact.fstate
@@ -761,7 +761,7 @@ def test_CellUnit_set_acct_mandate_ledger_ReturnsObj_Scenario0():
     sue_penny2 = 2
     sue_quota300 = 300
     sue_mandate = 444
-    sue_plan = planunit_shop(sue_str, "accord23")
+    sue_plan = planunit_shop(sue_str, "amy23")
     sue_cell = cellunit_shop(
         yao_str,
         sue_ancestors,
@@ -795,7 +795,7 @@ def test_CellUnit_set_acct_mandate_ledger_ReturnsObj_Scenario1():
     sue_penny2 = 2
     sue_quota300 = 300
     sue_mandate = 444
-    sue_plan = planunit_shop(sue_str, "accord23")
+    sue_plan = planunit_shop(sue_str, "amy23")
     sue_plan.add_acctunit(sue_str, 3, 5)
     sue_plan.add_acctunit(yao_str, 7, 2)
     sue_cell = cellunit_shop(
@@ -832,7 +832,7 @@ def test_CellUnit_calc_acct_mandate_ledger_ReturnsObj_Scenario0():
     sue_penny2 = 2
     sue_quota300 = 300
     sue_mandate = 444
-    sue_plan = planunit_shop(sue_str, "accord23")
+    sue_plan = planunit_shop(sue_str, "amy23")
     sue_plan.add_acctunit(sue_str, 3, 5)
     sue_plan.add_acctunit(yao_str, 7, 2)
     clean_fact = clean_factunit()
@@ -895,7 +895,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario0():
     sue_penny2 = 2
     sue_quota300 = 300
     sue_mandate = 444
-    sue_plan = planunit_shop(sue_str, "accord23")
+    sue_plan = planunit_shop(sue_str, "amy23")
     sue_plan.add_acctunit(sue_str, 3, 5)
     sue_plan.add_acctunit(yao_str, 7, 2)
     sue_plan.add_acctunit(bob_str, 0, 2)
@@ -951,7 +951,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario1_BudDepth0():
     sue_celldepth = 0
     sue_penny2 = 2
     sue_quota300 = 300
-    sue_plan = planunit_shop(sue_str, "accord23")
+    sue_plan = planunit_shop(sue_str, "amy23")
     sue_plan.add_acctunit(sue_str, 3, 5)
     sue_plan.add_acctunit(yao_str, 7, 2)
     sue_plan.add_acctunit(bob_str, 0, 2)
@@ -982,7 +982,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario2_boss_facts():
     yao_quota = 320
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
-    yao_plan = planunit_shop(yao_str, "accord23")
+    yao_plan = planunit_shop(yao_str, "amy23")
     yao_plan.add_acctunit(sue_str, 3, 5)
     yao_plan.add_acctunit(yao_str, 7, 2)
     yao_plan.add_acctunit(bob_str, 0, 2)
@@ -1025,7 +1025,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
     sue_celldepth3 = 3
     sue_penny2 = 2
     sue_mandate = 444
-    sue_plan = planunit_shop(sue_str, "accord23")
+    sue_plan = planunit_shop(sue_str, "amy23")
     sue_plan.add_acctunit(sue_str, 3, 5)
     sue_plan.add_acctunit(yao_str, 7, 2)
     clean_fact = clean_factunit()

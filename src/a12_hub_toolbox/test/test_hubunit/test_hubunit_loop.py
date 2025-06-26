@@ -13,7 +13,7 @@ def test_HubUnit_get_perspective_plan_ReturnsPlanWith_owner_nameSetToHubUnit_own
     bob_str = "Bob"
     bob_planunit = get_planunit_with_4_levels()
     bob_planunit.set_owner_name(bob_str)
-    a23_str = "accord23"
+    a23_str = "amy23"
 
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)
@@ -33,7 +33,7 @@ def test_HubUnit_get_dw_perspective_plan_ReturnsPlanWith_owner_nameSetToHubUnit_
 ):
     # ESTABLISH
     bob_str = "Bob"
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_planunit = get_planunit_with_4_levels()
     bob_planunit.set_owner_name(bob_str)
     bob_hubunit = hubunit_shop(env_dir(), a23_str, bob_str)
@@ -57,9 +57,9 @@ def test_HubUnit_rj_perspective_plan_ReturnsPlanWith_owner_nameSetToHubUnit_owne
 ):
     # ESTABLISH
     nation_str = "nation"
-    nation_rope = create_rope("accord23", nation_str)
+    nation_rope = create_rope("amy23", nation_str)
     iowa_rope = create_rope(nation_rope, "Iowa")
-    a23_str = "accord23"
+    a23_str = "amy23"
 
     bob_str = "Bob"
     yao_str = "Yao"

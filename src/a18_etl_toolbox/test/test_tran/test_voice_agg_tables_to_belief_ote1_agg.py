@@ -21,9 +21,9 @@ def test_etl_voice_raw_tables_to_belief_ote1_agg_SetsTableAttr():
     sue_str = "Sue"
     event3 = 3
     event7 = 7
-    accord23_str = "accord23"
-    accord45_str = "accord45"
-    accord55_str = "accord55"
+    amy23_str = "amy23"
+    amy45_str = "amy45"
+    amy55_str = "amy55"
     timepoint55 = 55
     timepoint66 = 66
     timepoint77 = 77
@@ -34,10 +34,10 @@ def test_etl_voice_raw_tables_to_belief_ote1_agg_SetsTableAttr():
         insert_raw_sqlstr = f"""
 INSERT INTO {beliefbud_v_raw_table} ({event_int_str()}, {belief_label_str()}_inx, {owner_name_str()}_inx, {bud_time_str()})
 VALUES
-  ({event3}, '{accord23_str}', '{bob_str}', {timepoint55})
-, ({event3}, '{accord23_str}', '{bob_str}', {timepoint55})
-, ({event3}, '{accord45_str}', '{sue_str}', {timepoint55})
-, ({event7}, '{accord45_str}', '{sue_str}', {timepoint66})
+  ({event3}, '{amy23_str}', '{bob_str}', {timepoint55})
+, ({event3}, '{amy23_str}', '{bob_str}', {timepoint55})
+, ({event3}, '{amy45_str}', '{sue_str}', {timepoint55})
+, ({event7}, '{amy45_str}', '{sue_str}', {timepoint66})
 ;
 """
         cursor.execute(insert_raw_sqlstr)
@@ -52,9 +52,9 @@ VALUES
         assert get_row_count(cursor, belief_ote1_agg_str()) == 3
         cursor.execute(f"SELECT * FROM {belief_ote1_agg_str()};")
         beliefunit_agg_rows = cursor.fetchall()
-        ex_row0 = (accord23_str, bob_str, event3, timepoint55, None)
-        ex_row1 = (accord45_str, sue_str, event3, timepoint55, None)
-        ex_row2 = (accord45_str, sue_str, event7, timepoint66, None)
+        ex_row0 = (amy23_str, bob_str, event3, timepoint55, None)
+        ex_row1 = (amy45_str, sue_str, event3, timepoint55, None)
+        ex_row2 = (amy45_str, sue_str, event7, timepoint66, None)
         print(f"{beliefunit_agg_rows[0]=}")
         print(f"{beliefunit_agg_rows[1]=}")
         print(f"{beliefunit_agg_rows[2]=}")

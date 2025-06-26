@@ -19,11 +19,11 @@ from src.a15_belief_logic.test._util.a15_env import (
 
 def test_create_bud_mandate_ledgers_Scenaro0_BudEmpty(env_dir_setup_cleanup):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     mstr_dir = get_module_temp_dir()
-    accord23_belief = beliefunit_shop(a23_str, mstr_dir)
+    amy23_belief = beliefunit_shop(a23_str, mstr_dir)
     a23_json_path = create_belief_json_path(mstr_dir, a23_str)
-    save_json(a23_json_path, None, accord23_belief.get_dict())
+    save_json(a23_json_path, None, amy23_belief.get_dict())
     bob_str = "Bob"
     timepoint9 = 9
     bob9_bud_mandate_path = bud_mandate_path(mstr_dir, a23_str, bob_str, timepoint9)
@@ -38,22 +38,22 @@ def test_create_bud_mandate_ledgers_Scenaro0_BudEmpty(env_dir_setup_cleanup):
 
 def test_create_bud_mandate_ledgers_Scenaro1_BudExists(env_dir_setup_cleanup):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     mstr_dir = get_module_temp_dir()
-    accord23_belief = beliefunit_shop(a23_str, mstr_dir)
+    amy23_belief = beliefunit_shop(a23_str, mstr_dir)
     bob_str = "Bob"
     tp37 = 37
     bud1_quota = 450
-    accord23_belief.add_budunit(bob_str, tp37, bud1_quota)
+    amy23_belief.add_budunit(bob_str, tp37, bud1_quota)
     a23_json_path = create_belief_json_path(mstr_dir, a23_str)
-    save_json(a23_json_path, None, accord23_belief.get_dict())
+    save_json(a23_json_path, None, amy23_belief.get_dict())
     bob37_cell_mandate_path = cell_mandate_path(mstr_dir, a23_str, bob_str, tp37)
     bob_mandate = 777
     assert bud1_quota != bob_mandate
     save_json(bob37_cell_mandate_path, None, {bob_str: bob_mandate})
     bob37_bud_mandate_path = bud_mandate_path(mstr_dir, a23_str, bob_str, tp37)
     assert os_path_exists(bob37_bud_mandate_path) is False
-    bob37_budunit = accord23_belief.get_budunit(bob_str, tp37)
+    bob37_budunit = amy23_belief.get_budunit(bob_str, tp37)
     assert bob37_budunit._bud_acct_nets == {}
 
     # WHEN
@@ -76,9 +76,9 @@ def test_create_bud_mandate_ledgers_Scenaro2_Mutliple_cell_acct_mandate_ledgers(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     mstr_dir = get_module_temp_dir()
-    accord23_belief = beliefunit_shop(a23_str, mstr_dir)
+    amy23_belief = beliefunit_shop(a23_str, mstr_dir)
     bob_str = "Bob"
     yao_str = "Yao"
     zia_str = "Zia"
@@ -86,9 +86,9 @@ def test_create_bud_mandate_ledgers_Scenaro2_Mutliple_cell_acct_mandate_ledgers(
     xio_str = "Xio"
     tp37 = 37
     bud1_quota = 450
-    accord23_belief.add_budunit(bob_str, tp37, bud1_quota)
+    amy23_belief.add_budunit(bob_str, tp37, bud1_quota)
     a23_json_path = create_belief_json_path(mstr_dir, a23_str)
-    save_json(a23_json_path, None, accord23_belief.get_dict())
+    save_json(a23_json_path, None, amy23_belief.get_dict())
     b37_cell_mandate = cell_mandate_path(mstr_dir, a23_str, bob_str, tp37)
     b37_sue_cell_path = cell_mandate_path(mstr_dir, a23_str, bob_str, tp37, [sue_str])
     b37_yao_cell_path = cell_mandate_path(mstr_dir, a23_str, bob_str, tp37, [yao_str])
@@ -100,7 +100,7 @@ def test_create_bud_mandate_ledgers_Scenaro2_Mutliple_cell_acct_mandate_ledgers(
     save_json(b37_yao_zia_cell_path, None, {xio_str: 1})
     bob37_bud_mandate_path = bud_mandate_path(mstr_dir, a23_str, bob_str, tp37)
     assert os_path_exists(bob37_bud_mandate_path) is False
-    bob37_budunit = accord23_belief.get_budunit(bob_str, tp37)
+    bob37_budunit = amy23_belief.get_budunit(bob_str, tp37)
     assert bob37_budunit._bud_acct_nets == {}
 
     # WHEN

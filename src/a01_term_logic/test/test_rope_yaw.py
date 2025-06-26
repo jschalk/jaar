@@ -10,7 +10,7 @@ def test_get_rope_from_epor_ReturnsObj_default_knot():
     # ESTABLISH
     x_s = default_knot_if_None()
     casa_str = "casa"
-    root_label = "accord23"
+    root_label = "amy23"
     casa_rope = f"{x_s}{root_label}{x_s}{casa_str}{x_s}"
     casa_epor = f"{x_s}{casa_str}{x_s}{root_label}{x_s}"
     bloomers_str = "bloomers"
@@ -37,7 +37,7 @@ def test_get_rope_from_epor_ReturnsObj_default_knot():
 def test_get_rope_from_epor_ReturnsObj_Not_default_knot():
     # ESTABLISH
     x_s = "/"
-    root_label = "accord23"
+    root_label = "amy23"
     root_belief_rope = f"{x_s}{root_label}{x_s}"
     casa_str = "casa"
     casa_rope = f"{root_belief_rope}{casa_str}{x_s}"
@@ -64,7 +64,7 @@ def test_get_rope_from_epor_ReturnsObj_Not_default_knot():
 def test_get_epor_from_rope_ReturnsObj_Not_default_knot():
     # ESTABLISH
     x_s = "/"
-    root_label = "accord23"
+    root_label = "amy23"
     root_belief_rope = f"{x_s}{root_label}{x_s}"
     casa_str = "casa"
     casa_rope = f"{root_belief_rope}{casa_str}{x_s}"

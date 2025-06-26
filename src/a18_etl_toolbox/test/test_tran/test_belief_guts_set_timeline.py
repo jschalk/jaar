@@ -19,7 +19,7 @@ from src.a18_etl_toolbox.transformers import add_belief_timeline_to_guts
 
 def test_add_belief_timeline_to_guts_SetsFiles_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     belief_mstr_dir = get_module_temp_dir()
     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
     a23_belief.timeline = timelineunit_shop(get_five_config())

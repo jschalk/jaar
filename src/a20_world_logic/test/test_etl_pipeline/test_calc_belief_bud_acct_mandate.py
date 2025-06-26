@@ -33,11 +33,11 @@ def test_WorldUnit_calc_belief_bud_acct_mandate_net_ledgers_Scenaro0_BudEmpty(
 ):
     # ESTABLISH
     fizz_world = worldunit_shop("fizz", worlds_dir())
-    a23_str = "accord23"
+    a23_str = "amy23"
     belief_mstr_dir = fizz_world._belief_mstr_dir
-    accord23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
+    amy23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
     a23_json_path = create_belief_json_path(fizz_world._belief_mstr_dir, a23_str)
-    save_file(a23_json_path, None, accord23_belief.get_json())
+    save_file(a23_json_path, None, amy23_belief.get_json())
     print(f"{a23_json_path=}")
     a23_owners_path = create_belief_owners_dir_path(
         fizz_world._belief_mstr_dir, a23_str
@@ -57,15 +57,15 @@ def test_WorldUnit_calc_belief_bud_acct_mandate_net_ledgers_Scenaro1_SimpleBud(
     # ESTABLISH
     fizz_world = worldunit_shop("fizz", worlds_dir())
     mstr_dir = fizz_world._belief_mstr_dir
-    a23_str = "accord23"
-    accord23_belief = beliefunit_shop(a23_str, mstr_dir)
+    a23_str = "amy23"
+    amy23_belief = beliefunit_shop(a23_str, mstr_dir)
     bob_str = "Bob"
     tp37 = 37
     bud1_quota = 450
     x_celldepth = 2
-    accord23_belief.add_budunit(bob_str, tp37, bud1_quota, celldepth=x_celldepth)
+    amy23_belief.add_budunit(bob_str, tp37, bud1_quota, celldepth=x_celldepth)
     a23_json_path = create_belief_json_path(mstr_dir, a23_str)
-    save_file(a23_json_path, None, accord23_belief.get_json())
+    save_file(a23_json_path, None, amy23_belief.get_json())
     # Create empty ote1 file
     a23_ote1_json_path = create_belief_ote1_json_path(mstr_dir, a23_str)
     save_json(a23_ote1_json_path, None, {})
@@ -90,11 +90,11 @@ def test_WorldUnit_calc_belief_bud_acct_mandate_net_ledgers_Scenaro2_BudExists(
     # ESTABLISH
     fizz_world = worldunit_shop("fizz", worlds_dir())
     mstr_dir = fizz_world._belief_mstr_dir
-    a23_str = "accord23"
+    a23_str = "amy23"
 
     # Create BeliefUnit with bob bud at time 37
-    accord23_belief = beliefunit_shop(a23_str, mstr_dir)
-    a23_str = "accord23"
+    amy23_belief = beliefunit_shop(a23_str, mstr_dir)
+    a23_str = "amy23"
     sue_str = "Sue"
     bob_str = "Bob"
     yao_str = "Yao"
@@ -102,9 +102,9 @@ def test_WorldUnit_calc_belief_bud_acct_mandate_net_ledgers_Scenaro2_BudExists(
     tp37 = 37
     bud1_quota = 450
     x_celldepth = 2
-    accord23_belief.add_budunit(bob_str, tp37, bud1_quota, celldepth=x_celldepth)
+    amy23_belief.add_budunit(bob_str, tp37, bud1_quota, celldepth=x_celldepth)
     a23_json_path = create_belief_json_path(mstr_dir, a23_str)
-    save_file(a23_json_path, None, accord23_belief.get_json())
+    save_file(a23_json_path, None, amy23_belief.get_json())
 
     # Create event time mapping owner_time_agg for time 37
     event33 = 33

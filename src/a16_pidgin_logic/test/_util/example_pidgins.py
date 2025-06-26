@@ -31,18 +31,18 @@ def get_clean_labelmap() -> LabelMap:
 
 
 def get_clean_ropemap() -> RopeMap:
-    otx_accord45_str = "accord45"
-    inx_accord87_str = "accord87"
-    otx_accord45_rope = to_rope(otx_accord45_str)
-    inx_accord87_rope = to_rope(inx_accord87_str)
+    otx_amy45_str = "amy45"
+    inx_amy87_str = "amy87"
+    otx_amy45_rope = to_rope(otx_amy45_str)
+    inx_amy87_rope = to_rope(inx_amy87_str)
     clean_otx_str = "clean"
     clean_inx_str = "prop"
     knot = default_knot_if_None()
-    clean_otx_rope = create_rope(otx_accord45_str, clean_otx_str, knot)
-    # clean_otx_rope = f"{knot}{otx_accord45_str}{knot}{clean_otx_str}{knot}"
+    clean_otx_rope = create_rope(otx_amy45_str, clean_otx_str, knot)
+    # clean_otx_rope = f"{knot}{otx_amy45_str}{knot}{clean_otx_str}{knot}"
     rope_mapunit = ropemap_shop(face_name="Sue")
     rope_mapunit.set_label(clean_otx_str, clean_inx_str)
-    rope_mapunit.set_otx2inx(otx_accord45_rope, inx_accord87_rope)
+    rope_mapunit.set_otx2inx(otx_amy45_rope, inx_amy87_rope)
     print(f"{rope_mapunit.otx2inx.keys()=}")
     rope_mapunit.reveal_inx(clean_otx_rope)
     return rope_mapunit
@@ -108,15 +108,15 @@ def get_suita_namemap() -> NameMap:
 
 
 def get_slash_ropemap() -> RopeMap:
-    otx_accord45_str = "accord45"
-    inx_accord87_str = "accord87"
+    otx_amy45_str = "amy45"
+    inx_amy87_str = "amy87"
     clean_otx_str = "clean"
     clean_inx_str = "prop"
     x_unknown_str = "UnknownTerm"
     slash_otx_knot = "/"
     colon_inx_knot = ":"
-    clean_otx_rope = f"{otx_accord45_str}{slash_otx_knot}{clean_otx_str}"
-    clean_otx_rope = f"{otx_accord45_str}{colon_inx_knot}{clean_otx_str}"
+    clean_otx_rope = f"{otx_amy45_str}{slash_otx_knot}{clean_otx_str}"
+    clean_otx_rope = f"{otx_amy45_str}{colon_inx_knot}{clean_otx_str}"
     rope_mapunit = ropemap_shop(
         otx_knot=slash_otx_knot,
         inx_knot=colon_inx_knot,
@@ -124,7 +124,7 @@ def get_slash_ropemap() -> RopeMap:
         face_name="Sue",
     )
     rope_mapunit.set_label(clean_otx_str, clean_inx_str)
-    rope_mapunit.set_otx2inx(otx_accord45_str, inx_accord87_str)
+    rope_mapunit.set_otx2inx(otx_amy45_str, inx_amy87_str)
     rope_mapunit.reveal_inx(clean_otx_rope)
     return rope_mapunit
 
@@ -208,14 +208,14 @@ def get_suita_acct_name_inx_dt() -> DataFrame:
 
 
 def get_casa_maison_pidginunit_set_by_otx2inx() -> PidginUnit:
-    otx_accord45_str = "accord45"
-    inx_accord87_str = "accord87"
-    otx_accord45_rope = to_rope(otx_accord45_str)
-    inx_accord87_rope = to_rope(inx_accord87_str)
+    otx_amy45_str = "amy45"
+    inx_amy87_str = "amy87"
+    otx_amy45_rope = to_rope(otx_amy45_str)
+    inx_amy87_rope = to_rope(inx_amy87_str)
     casa_otx_str = "casa"
     casa_inx_str = "maison"
-    casa_otx_rope = create_rope(otx_accord45_rope, casa_otx_str)
-    casa_inx_rope = create_rope(inx_accord87_rope, casa_inx_str)
+    casa_otx_rope = create_rope(otx_amy45_rope, casa_otx_str)
+    casa_inx_rope = create_rope(inx_amy87_rope, casa_inx_str)
     clean_otx_str = "clean"
     clean_inx_str = "propre"
     clean_otx_rope = create_rope(casa_otx_rope, clean_otx_str)
@@ -226,7 +226,7 @@ def get_casa_maison_pidginunit_set_by_otx2inx() -> PidginUnit:
 
     sue_pidginunit = pidginunit_shop("Sue", 7)
     rx = RopeTerm_str()
-    sue_pidginunit.set_otx2inx(rx, otx_accord45_rope, inx_accord87_rope)
+    sue_pidginunit.set_otx2inx(rx, otx_amy45_rope, inx_amy87_rope)
     sue_pidginunit.set_otx2inx(rx, casa_otx_rope, casa_inx_rope)
     sue_pidginunit.set_otx2inx(rx, clean_otx_rope, clean_inx_rope)
     sue_pidginunit.set_otx2inx(rx, sweep_otx_rope, sweep_inx_rope)
@@ -234,12 +234,12 @@ def get_casa_maison_pidginunit_set_by_otx2inx() -> PidginUnit:
 
 
 def get_casa_maison_pidginunit_set_by_label() -> PidginUnit:
-    otx_accord45_str = "accord45"
-    inx_accord87_str = "accord87"
+    otx_amy45_str = "amy45"
+    inx_amy87_str = "amy87"
     casa_otx_str = "casa"
     casa_inx_str = "maison"
-    casa_otx_rope = create_rope(otx_accord45_str, casa_otx_str)
-    casa_inx_rope = create_rope(inx_accord87_str, casa_inx_str)
+    casa_otx_rope = create_rope(otx_amy45_str, casa_otx_str)
+    casa_inx_rope = create_rope(inx_amy87_str, casa_inx_str)
     clean_otx_str = "clean"
     clean_inx_str = "propre"
     clean_otx_rope = create_rope(casa_otx_rope, clean_otx_str)
@@ -249,23 +249,23 @@ def get_casa_maison_pidginunit_set_by_label() -> PidginUnit:
     sweep_inx_rope = create_rope(clean_inx_rope, sweep_str)
 
     sue_pidginunit = pidginunit_shop("Sue", 7)
-    sue_pidginunit.set_label(otx_accord45_str, inx_accord87_str)
+    sue_pidginunit.set_label(otx_amy45_str, inx_amy87_str)
     sue_pidginunit.set_label(casa_otx_str, casa_inx_str)
     sue_pidginunit.set_label(clean_otx_str, clean_inx_str)
     return sue_pidginunit
 
 
 def get_casa_maison_rope_otx_dt() -> DataFrame:
-    otx_accord45_str = "accord45"
-    otx_accord45_rope = to_rope(otx_accord45_str)
+    otx_amy45_str = "amy45"
+    otx_amy45_rope = to_rope(otx_amy45_str)
     casa_otx_str = "casa"
-    casa_otx_rope = create_rope(otx_accord45_str, casa_otx_str)
+    casa_otx_rope = create_rope(otx_amy45_str, casa_otx_str)
     clean_otx_str = "clean"
     clean_otx_rope = create_rope(casa_otx_rope, clean_otx_str)
     sweep_str = "sweep"
     sweep_otx_rope = create_rope(clean_otx_rope, sweep_str)
     otx_dt = DataFrame(columns=[rcontext_str()])
-    otx_dt.loc[0, rcontext_str()] = otx_accord45_rope
+    otx_dt.loc[0, rcontext_str()] = otx_amy45_rope
     otx_dt.loc[1, rcontext_str()] = casa_otx_rope
     otx_dt.loc[2, rcontext_str()] = clean_otx_rope
     otx_dt.loc[3, rcontext_str()] = sweep_otx_rope
@@ -273,13 +273,13 @@ def get_casa_maison_rope_otx_dt() -> DataFrame:
 
 
 def get_casa_maison_rope_inx_dt() -> DataFrame:
-    inx_accord87_str = "accord87"
-    inx_accord87_rope = to_rope(inx_accord87_str)
-    casa_inx_rope = create_rope(inx_accord87_rope, "maison")
+    inx_amy87_str = "amy87"
+    inx_amy87_rope = to_rope(inx_amy87_str)
+    casa_inx_rope = create_rope(inx_amy87_rope, "maison")
     clean_inx_rope = create_rope(casa_inx_rope, "propre")
     sweep_inx_rope = create_rope(clean_inx_rope, "sweep")
     inx_dt = DataFrame(columns=[rcontext_str()])
-    inx_dt.loc[0, rcontext_str()] = inx_accord87_rope
+    inx_dt.loc[0, rcontext_str()] = inx_amy87_rope
     inx_dt.loc[1, rcontext_str()] = casa_inx_rope
     inx_dt.loc[2, rcontext_str()] = clean_inx_rope
     inx_dt.loc[3, rcontext_str()] = sweep_inx_rope
@@ -287,14 +287,14 @@ def get_casa_maison_rope_inx_dt() -> DataFrame:
 
 
 def get_casa_maison_rope_otx2inx_dt() -> DataFrame:
-    inx_accord87_str = "accord87"
-    inx_accord87_rope = to_rope(inx_accord87_str)
-    casa_inx_rope = create_rope(inx_accord87_str, "maison")
+    inx_amy87_str = "amy87"
+    inx_amy87_rope = to_rope(inx_amy87_str)
+    casa_inx_rope = create_rope(inx_amy87_str, "maison")
     clean_inx_rope = create_rope(casa_inx_rope, "propre")
     sweep_inx_rope = create_rope(clean_inx_rope, "sweep")
-    otx_accord45_str = "accord45"
-    otx_accord45_rope = to_rope(otx_accord45_str)
-    casa_otx_rope = create_rope(otx_accord45_rope, "casa")
+    otx_amy45_str = "amy45"
+    otx_amy45_rope = to_rope(otx_amy45_str)
+    casa_otx_rope = create_rope(otx_amy45_rope, "casa")
     clean_otx_rope = create_rope(casa_otx_rope, "clean")
     sweep_otx_rope = create_rope(clean_otx_rope, "sweep")
     x_rd = default_knot_if_None()
@@ -312,7 +312,7 @@ def get_casa_maison_rope_otx2inx_dt() -> DataFrame:
             "inx_rope",
         ]
     )
-    inx_dt.loc[0] = ["Sue", e7, x_rd, x_rd, uw, otx_accord45_rope, inx_accord87_rope]
+    inx_dt.loc[0] = ["Sue", e7, x_rd, x_rd, uw, otx_amy45_rope, inx_amy87_rope]
     inx_dt.loc[1] = ["Sue", e7, x_rd, x_rd, uw, casa_otx_rope, casa_inx_rope]
     inx_dt.loc[2] = ["Sue", e7, x_rd, x_rd, uw, clean_otx_rope, clean_inx_rope]
     inx_dt.loc[3] = ["Sue", e7, x_rd, x_rd, uw, sweep_otx_rope, sweep_inx_rope]
@@ -320,11 +320,11 @@ def get_casa_maison_rope_otx2inx_dt() -> DataFrame:
 
 
 def get_casa_maison_label_dt() -> DataFrame:
-    inx_accord87_str = "accord87"
+    inx_amy87_str = "amy87"
     casa_inx_str = "maison"
     clean_inx_str = "propre"
     sweep_inx_str = "sweep"
-    otx_accord45_str = "accord45"
+    otx_amy45_str = "amy45"
     casa_otx_str = "casa"
     clean_otx_str = "clean"
     sweep_otx_str = "sweep"
@@ -343,7 +343,7 @@ def get_casa_maison_label_dt() -> DataFrame:
             "inx_label",
         ]
     )
-    inx_dt.loc[0] = ["Sue", e7, x_rd, x_rd, uw, otx_accord45_str, inx_accord87_str]
+    inx_dt.loc[0] = ["Sue", e7, x_rd, x_rd, uw, otx_amy45_str, inx_amy87_str]
     inx_dt.loc[1] = ["Sue", e7, x_rd, x_rd, uw, casa_otx_str, casa_inx_str]
     inx_dt.loc[2] = ["Sue", e7, x_rd, x_rd, uw, clean_otx_str, clean_inx_str]
     return inx_dt
@@ -384,8 +384,8 @@ def get_invalid_ropemap() -> RopeMap:
 
 
 def get_slash_labelmap() -> LabelMap:
-    otx_accord45_str = "accord45"
-    inx_accord87_str = "accord87"
+    otx_amy45_str = "amy45"
+    inx_amy87_str = "amy87"
     clean_otx_str = "clean"
     clean_inx_str = "prop"
     x_unknown_str = "UnknownTerm"
@@ -398,7 +398,7 @@ def get_slash_labelmap() -> LabelMap:
         face_name="Sue",
         event_int=7,
     )
-    x_labelmap.set_otx2inx(otx_accord45_str, inx_accord87_str)
+    x_labelmap.set_otx2inx(otx_amy45_str, inx_amy87_str)
     x_labelmap.set_otx2inx(clean_otx_str, clean_inx_str)
     x_labelmap.reveal_inx("running")
     return x_labelmap
@@ -407,15 +407,15 @@ def get_slash_labelmap() -> LabelMap:
 def get_slash_ropemap() -> RopeMap:
     slash_otx_knot = "/"
     colon_inx_knot = ":"
-    otx_accord45_str = "accord45"
-    inx_accord87_str = "accord87"
-    otx_accord45_rope = to_rope(otx_accord45_str, slash_otx_knot)
-    inx_accord87_rope = to_rope(inx_accord87_str, colon_inx_knot)
+    otx_amy45_str = "amy45"
+    inx_amy87_str = "amy87"
+    otx_amy45_rope = to_rope(otx_amy45_str, slash_otx_knot)
+    inx_amy87_rope = to_rope(inx_amy87_str, colon_inx_knot)
     clean_otx_str = "clean"
     clean_inx_str = "prop"
     x_unknown_str = "UnknownTerm"
-    clean_otx_rope = create_rope(otx_accord45_rope, clean_otx_str, slash_otx_knot)
-    clean_inx_rope = create_rope(inx_accord87_rope, clean_otx_str, colon_inx_knot)
+    clean_otx_rope = create_rope(otx_amy45_rope, clean_otx_str, slash_otx_knot)
+    clean_inx_rope = create_rope(inx_amy87_rope, clean_otx_str, colon_inx_knot)
     x_ropemap = ropemap_shop(
         otx_knot=slash_otx_knot,
         inx_knot=colon_inx_knot,
@@ -425,7 +425,7 @@ def get_slash_ropemap() -> RopeMap:
         x_labelmap=get_slash_labelmap(),
     )
     x_ropemap.set_label(clean_otx_str, clean_inx_str)
-    x_ropemap.set_otx2inx(otx_accord45_rope, inx_accord87_rope)
+    x_ropemap.set_otx2inx(otx_amy45_rope, inx_amy87_rope)
     x_ropemap.reveal_inx(clean_otx_rope)
     return x_ropemap
 

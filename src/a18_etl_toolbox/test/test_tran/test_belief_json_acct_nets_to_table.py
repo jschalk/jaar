@@ -21,7 +21,7 @@ from src.a18_etl_toolbox.transformers import (
 
 def test_insert_tranunit_accts_net_PopulatesDatabase():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     a23_tranbook = tranbook_shop(a23_str)
     sue_str = "Sue"
     yao_str = "Yao"
@@ -61,7 +61,7 @@ def test_etl_belief_json_acct_nets_to_belief_acct_nets_table_PopulatesDatabase(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     mstr_dir = get_module_temp_dir()
     a23_belief = beliefunit_shop(a23_str, mstr_dir)
     sue_str = "Sue"

@@ -35,10 +35,10 @@ def test_get_belief_guts_accts_dataframe_ReturnsObj(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
-    accord_belief = create_example_belief2()
+    amy_belief = create_example_belief2()
 
     # WHEN
-    x_df = get_belief_guts_accts_dataframe(accord_belief)
+    x_df = get_belief_guts_accts_dataframe(amy_belief)
 
     # THEN
     acctunit_colums = {
@@ -65,10 +65,10 @@ def test_get_belief_guts_accts_plotly_fig_DisplaysCorrectInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
-    accord_belief = create_example_belief2()
+    amy_belief = create_example_belief2()
 
     # WHEN
-    x_fig = get_belief_guts_accts_plotly_fig(accord_belief)
+    x_fig = get_belief_guts_accts_plotly_fig(amy_belief)
 
     # THEN
     conditional_fig_show(x_fig, graphics_bool)
@@ -78,11 +78,11 @@ def test_get_belief_jobs_accts_dataframe_ReturnsObj(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
-    accord_belief = create_example_belief2()
-    accord_belief.generate_all_jobs()
+    amy_belief = create_example_belief2()
+    amy_belief.generate_all_jobs()
 
     # WHEN
-    x_df = get_belief_jobs_accts_dataframe(accord_belief)
+    x_df = get_belief_jobs_accts_dataframe(amy_belief)
 
     # THEN
     acctunit_colums = {
@@ -110,11 +110,11 @@ def test_get_belief_jobs_accts_plotly_fig_DisplaysCorrectInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
-    accord_belief = create_example_belief2()
-    accord_belief.generate_all_jobs()
+    amy_belief = create_example_belief2()
+    amy_belief.generate_all_jobs()
 
     # WHEN
-    x_fig = get_belief_jobs_accts_plotly_fig(accord_belief)
+    x_fig = get_belief_jobs_accts_plotly_fig(amy_belief)
 
     # THEN
     conditional_fig_show(x_fig, graphics_bool)
@@ -124,10 +124,10 @@ def test_get_belief_guts_agenda_dataframe_ReturnsObj(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
-    accord_belief = create_example_belief3()
+    amy_belief = create_example_belief3()
 
     # WHEN
-    x_df = get_belief_guts_agenda_dataframe(accord_belief)
+    x_df = get_belief_guts_agenda_dataframe(amy_belief)
 
     # THEN
     agenda_colums = {
@@ -153,10 +153,10 @@ def test_get_belief_guts_agenda_plotly_fig_DisplaysCorrectInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
-    accord_belief = create_example_belief3()
+    amy_belief = create_example_belief3()
 
     # WHEN
-    x_fig = get_belief_guts_agenda_plotly_fig(accord_belief)
+    x_fig = get_belief_guts_agenda_plotly_fig(amy_belief)
 
     # THEN
     conditional_fig_show(x_fig, graphics_bool)
@@ -164,11 +164,11 @@ def test_get_belief_guts_agenda_plotly_fig_DisplaysCorrectInfo(
 
 def test_get_belief_jobs_agenda_dataframe_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    accord_belief = create_example_belief4()
-    accord_belief.generate_all_jobs()
+    amy_belief = create_example_belief4()
+    amy_belief.generate_all_jobs()
 
     # WHEN
-    x_df = get_belief_jobs_agenda_dataframe(accord_belief)
+    x_df = get_belief_jobs_agenda_dataframe(amy_belief)
 
     # THEN
     agenda_colums = {
@@ -194,11 +194,11 @@ def test_get_belief_jobs_agenda_plotly_fig_DisplaysCorrectInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
-    accord_belief = create_example_belief4()
-    accord_belief.generate_all_jobs()
+    amy_belief = create_example_belief4()
+    amy_belief.generate_all_jobs()
 
     # WHEN
-    x_fig = get_belief_jobs_agenda_plotly_fig(accord_belief)
+    x_fig = get_belief_jobs_agenda_plotly_fig(amy_belief)
 
     # THEN
     conditional_fig_show(x_fig, graphics_bool)

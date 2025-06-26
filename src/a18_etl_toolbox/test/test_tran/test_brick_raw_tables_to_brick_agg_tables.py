@@ -21,7 +21,7 @@ from src.a18_etl_toolbox.transformers import etl_brick_raw_tables_to_brick_agg_t
 
 def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario0_GroupByWorks():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     sue_str = "Sue"
     event1 = 1
     minute_360 = 360
@@ -96,7 +96,7 @@ ORDER BY {event_int_str()}, {cumulative_minute_str()};"""
 
 def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario1_GroupByOnlyNonConflictingRecords():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     sue_str = "Sue"
     event1 = 1
     minute_360 = 360
@@ -167,7 +167,7 @@ VALUES
 
 def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario2_GroupByExcludesRowsWith_error_message():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     sue_str = "Sue"
     event1 = 1
     minute_360 = 360

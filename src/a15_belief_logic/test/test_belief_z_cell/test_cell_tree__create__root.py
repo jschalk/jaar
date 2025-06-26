@@ -37,17 +37,17 @@ def test_BeliefUnit_create_buds_root_cells_Scenaro0_BudEmpty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     belief_mstr_dir = get_module_temp_dir()
-    accord23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
+    amy23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
     a23_json_path = create_belief_json_path(belief_mstr_dir, a23_str)
-    save_file(a23_json_path, None, accord23_belief.get_json())
+    save_file(a23_json_path, None, amy23_belief.get_json())
     print(f"{a23_json_path=}")
     a23_owners_path = create_belief_owners_dir_path(belief_mstr_dir, a23_str)
     assert count_dirs_files(a23_owners_path) == 0
 
     # WHEN
-    accord23_belief.create_buds_root_cells({})
+    amy23_belief.create_buds_root_cells({})
 
     # THEN
     assert count_dirs_files(a23_owners_path) == 0
@@ -58,16 +58,16 @@ def test_BeliefUnit_create_buds_root_cells_Scenaro1_BudExists(
 ):
     # ESTABLISH
     mstr_dir = get_module_temp_dir()
-    a23_str = "accord23"
+    a23_str = "amy23"
 
     # Create BeliefUnit with bob bud at time 37
-    accord23_belief = beliefunit_shop(a23_str, mstr_dir)
+    amy23_belief = beliefunit_shop(a23_str, mstr_dir)
     bob_str = "Bob"
     timepoint37 = 37
     bud1_quota = 450
-    accord23_belief.add_budunit(bob_str, timepoint37, bud1_quota)
+    amy23_belief.add_budunit(bob_str, timepoint37, bud1_quota)
     a23_json_path = create_belief_json_path(mstr_dir, a23_str)
-    save_file(a23_json_path, None, accord23_belief.get_json())
+    save_file(a23_json_path, None, amy23_belief.get_json())
     assert os_path_exists(a23_json_path)
 
     # Create event time mapping owner_time_agg for time 37
@@ -81,7 +81,7 @@ def test_BeliefUnit_create_buds_root_cells_Scenaro1_BudExists(
     assert os_path_exists(tp37_cell_json_path) is False
 
     # WHEN
-    accord23_belief.create_buds_root_cells(a23_ote1_dict)
+    amy23_belief.create_buds_root_cells(a23_ote1_dict)
 
     # THEN
     assert os_path_exists(tp37_cell_json_path)
@@ -98,16 +98,16 @@ def test_BeliefUnit_create_buds_root_cells_Scenaro2_BudExistsButNoPlanExistsInEv
 ):
     # ESTABLISH
     mstr_dir = get_module_temp_dir()
-    a23_str = "accord23"
+    a23_str = "amy23"
 
     # Create BeliefUnit with bob bud at time 37
-    accord23_belief = beliefunit_shop(a23_str, mstr_dir)
+    amy23_belief = beliefunit_shop(a23_str, mstr_dir)
     bob_str = "Bob"
     timepoint37 = 37
     bud1_quota = 450
-    accord23_belief.add_budunit(bob_str, timepoint37, bud1_quota)
+    amy23_belief.add_budunit(bob_str, timepoint37, bud1_quota)
     a23_json_path = create_belief_json_path(mstr_dir, a23_str)
-    save_file(a23_json_path, None, accord23_belief.get_json())
+    save_file(a23_json_path, None, amy23_belief.get_json())
     assert os_path_exists(a23_json_path)
 
     # Create event time mapping owner_time_agg for time 37
@@ -120,7 +120,7 @@ def test_BeliefUnit_create_buds_root_cells_Scenaro2_BudExistsButNoPlanExistsInEv
     assert os_path_exists(tp37_cell_json_path) is False
 
     # WHEN
-    accord23_belief.create_buds_root_cells(a23_ote1_dict)
+    amy23_belief.create_buds_root_cells(a23_ote1_dict)
 
     # THEN
     assert os_path_exists(tp37_cell_json_path)
@@ -138,21 +138,19 @@ def test_BeliefUnit_create_buds_root_cells_Scenaro3_BudExistsNotPerfectMatch_bud
 ):
     # ESTABLISH
     mstr_dir = get_module_temp_dir()
-    a23_str = "accord23"
+    a23_str = "amy23"
     a23_penny = 2
 
     # Create BeliefUnit with bob bud at time 37
-    accord23_belief = beliefunit_shop(a23_str, mstr_dir, penny=a23_penny)
-    print(f"{accord23_belief.penny=}")
+    amy23_belief = beliefunit_shop(a23_str, mstr_dir, penny=a23_penny)
+    print(f"{amy23_belief.penny=}")
     bob_str = "Bob"
     timepoint37 = 37
     bud1_quota = 450
     bud1_celldepth = 3
-    accord23_belief.add_budunit(
-        bob_str, timepoint37, bud1_quota, celldepth=bud1_celldepth
-    )
+    amy23_belief.add_budunit(bob_str, timepoint37, bud1_quota, celldepth=bud1_celldepth)
     a23_json_path = create_belief_json_path(mstr_dir, a23_str)
-    save_file(a23_json_path, None, accord23_belief.get_json())
+    save_file(a23_json_path, None, amy23_belief.get_json())
     assert os_path_exists(a23_json_path)
 
     # Create event time mapping owner_time_agg for time 37
@@ -167,7 +165,7 @@ def test_BeliefUnit_create_buds_root_cells_Scenaro3_BudExistsNotPerfectMatch_bud
     assert os_path_exists(tp37_cell_json_path) is False
 
     # WHEN
-    accord23_belief.create_buds_root_cells(a23_ote1_dict)
+    amy23_belief.create_buds_root_cells(a23_ote1_dict)
 
     # THEN
     assert os_path_exists(tp37_cell_json_path)

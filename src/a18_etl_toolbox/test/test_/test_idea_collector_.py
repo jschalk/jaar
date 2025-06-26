@@ -89,7 +89,7 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
     event1 = 1
     minute_360 = 360
     minute_420 = 420
-    accord23_str = "accord23"
+    amy23_str = "amy23"
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
@@ -101,8 +101,8 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
         belief_label_str(),
         hour_label_str(),
     ]
-    row1 = [event1, sue_str, minute_360, accord23_str, hour6am]
-    row2 = [event1, sue_str, minute_420, accord23_str, hour7am]
+    row1 = [event1, sue_str, minute_360, amy23_str, hour6am]
+    row2 = [event1, sue_str, minute_420, amy23_str, hour7am]
 
     df1 = DataFrame([row1, row2], columns=idea_columns)
     br00003_str = "example_br00003"
@@ -128,7 +128,7 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     event1 = 1
     minute_360 = 360
     minute_420 = 420
-    accord23_str = "accord23"
+    amy23_str = "amy23"
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
@@ -140,16 +140,16 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
         belief_label_str(),
         hour_label_str(),
     ]
-    row1 = [event1, sue_str, minute_360, accord23_str, hour6am]
-    row2 = [event1, sue_str, minute_420, accord23_str, hour7am]
+    row1 = [event1, sue_str, minute_360, amy23_str, hour6am]
+    row2 = [event1, sue_str, minute_420, amy23_str, hour7am]
     incomplete_idea_columns = [
         event_int_str(),
         face_name_str(),
         cumulative_minute_str(),
         belief_label_str(),
     ]
-    incom_row1 = [event1, sue_str, minute_360, accord23_str]
-    incom_row2 = [event1, sue_str, minute_420, accord23_str]
+    incom_row1 = [event1, sue_str, minute_360, amy23_str]
+    incom_row2 = [event1, sue_str, minute_420, amy23_str]
 
     df1 = DataFrame([row1, row2], columns=idea_columns)
     df2 = DataFrame([incom_row1, incom_row2], columns=incomplete_idea_columns)

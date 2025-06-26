@@ -42,7 +42,7 @@ def test_belief_build_from_df_ReturnsObj_Scenario0_OneBeliefLabel(
     x_penny = 77
     x_job_listen_rotations = 7
     x_beliefs_dir = create_path(idea_beliefs_dir(), "fizz")
-    accord23_str = "accord23"
+    amy23_str = "amy23"
     slash_str = "/"
 
     # WHEN
@@ -61,10 +61,10 @@ def test_belief_build_from_df_ReturnsObj_Scenario0_OneBeliefLabel(
 
     # THEN
     assert x_beliefunits
-    assert x_beliefunits.get(accord23_str) != None
+    assert x_beliefunits.get(amy23_str) != None
     creg_timelineunit = timelineunit_shop(get_default_timeline_config_dict())
-    expected_accord23_beliefunit = beliefunit_shop(
-        belief_label=accord23_str,
+    expected_amy23_beliefunit = beliefunit_shop(
+        belief_label=amy23_str,
         belief_mstr_dir=x_beliefs_dir,
         fund_iota=x_fund_iota,
         penny=x_penny,
@@ -73,33 +73,33 @@ def test_belief_build_from_df_ReturnsObj_Scenario0_OneBeliefLabel(
         timeline=creg_timelineunit,
         job_listen_rotations=x_job_listen_rotations,
     )
-    expected_accord23_beliefunit.add_budunit(
+    expected_amy23_beliefunit.add_budunit(
         owner_name="Sue",
         bud_time=777,
         quota=445,
         allow_prev_to_offi_time_max_entry=True,
         celldepth=5,
     )
-    expected_accord23_beliefunit.add_paypurchase(
+    expected_amy23_beliefunit.add_paypurchase(
         owner_name="Zia",
         acct_name="Bob",
         tran_time=777,
         amount=888,
     )
-    gen_beliefunit = x_beliefunits.get(accord23_str)
+    gen_beliefunit = x_beliefunits.get(amy23_str)
     assert gen_beliefunit.fund_iota == x_fund_iota
     assert gen_beliefunit.respect_bit == x_respect_bit
     assert gen_beliefunit.penny == x_penny
-    assert gen_beliefunit.belief_label == accord23_str
+    assert gen_beliefunit.belief_label == amy23_str
     assert gen_beliefunit.belief_mstr_dir == x_beliefs_dir
-    assert gen_beliefunit.timeline == expected_accord23_beliefunit.timeline
-    assert gen_beliefunit.brokerunits == expected_accord23_beliefunit.brokerunits
-    a23_tranunits = expected_accord23_beliefunit.paybook.tranunits
+    assert gen_beliefunit.timeline == expected_amy23_beliefunit.timeline
+    assert gen_beliefunit.brokerunits == expected_amy23_beliefunit.brokerunits
+    a23_tranunits = expected_amy23_beliefunit.paybook.tranunits
     assert gen_beliefunit.paybook.tranunits == a23_tranunits
     # print(f"{gen_beliefunit.brokerunits=}")
     assert len(gen_beliefunit.brokerunits) == 1
     assert len(gen_beliefunit.paybook.tranunits) == 1
-    assert gen_beliefunit == expected_accord23_beliefunit
+    assert gen_beliefunit == expected_amy23_beliefunit
 
 
 # ESTABLISH a dataframe, build a belief unit
@@ -117,7 +117,7 @@ def test_belief_build_from_df_ReturnsObj_Scenario1_TwoBeliefLabels(
     x_respect_bit = 66
     x_penny = 77
     x_beliefs_dir = create_path(idea_beliefs_dir(), "fizz")
-    accord23_str = "accord23"
+    amy23_str = "amy23"
     slash_str = "/"
 
     # WHEN
@@ -136,8 +136,8 @@ def test_belief_build_from_df_ReturnsObj_Scenario1_TwoBeliefLabels(
 
     # THEN
     creg_timelineunit = timelineunit_shop(get_default_timeline_config_dict())
-    accord23_beliefunit = beliefunit_shop(
-        belief_label=accord23_str,
+    amy23_beliefunit = beliefunit_shop(
+        belief_label=amy23_str,
         belief_mstr_dir=x_beliefs_dir,
         fund_iota=x_fund_iota,
         penny=x_penny,
@@ -156,17 +156,17 @@ def test_belief_build_from_df_ReturnsObj_Scenario1_TwoBeliefLabels(
         timeline=five_timelineunit,
     )
     assert x_beliefunits
-    assert x_beliefunits.get(accord23_str) != None
-    creg_beliefunit = x_beliefunits.get(accord23_str)
+    assert x_beliefunits.get(amy23_str) != None
+    creg_beliefunit = x_beliefunits.get(amy23_str)
     assert creg_beliefunit.fund_iota == x_fund_iota
     assert creg_beliefunit.respect_bit == x_respect_bit
     assert creg_beliefunit.penny == x_penny
-    assert creg_beliefunit.belief_label == accord23_str
+    assert creg_beliefunit.belief_label == amy23_str
     assert creg_beliefunit.belief_mstr_dir == x_beliefs_dir
-    assert creg_beliefunit.timeline == accord23_beliefunit.timeline
+    assert creg_beliefunit.timeline == amy23_beliefunit.timeline
     assert len(creg_beliefunit.brokerunits) == 3
     assert len(creg_beliefunit.paybook.tranunits) == 4
-    # assert creg_beliefunit == accord23_beliefunit
+    # assert creg_beliefunit == amy23_beliefunit
 
     five_beliefunit = x_beliefunits.get("jeffy45")
     assert five_beliefunit.fund_iota == x_fund_iota

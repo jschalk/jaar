@@ -50,25 +50,25 @@ def test_get_default_job_listen_count_ReturnsObj():
 
 def test_BeliefUnit_Exists():
     # ESTABLISH / WHEN
-    accord_belief = BeliefUnit()
+    amy_belief = BeliefUnit()
     # THEN
-    assert not accord_belief.belief_label
-    assert not accord_belief.timeline
-    assert not accord_belief.brokerunits
-    assert not accord_belief.paybook
-    assert not accord_belief.offi_times
-    assert not accord_belief.knot
-    assert not accord_belief.fund_iota
-    assert not accord_belief.respect_bit
-    assert not accord_belief.penny
-    assert not accord_belief.job_listen_rotations
-    assert not accord_belief.belief_mstr_dir
+    assert not amy_belief.belief_label
+    assert not amy_belief.timeline
+    assert not amy_belief.brokerunits
+    assert not amy_belief.paybook
+    assert not amy_belief.offi_times
+    assert not amy_belief.knot
+    assert not amy_belief.fund_iota
+    assert not amy_belief.respect_bit
+    assert not amy_belief.penny
+    assert not amy_belief.job_listen_rotations
+    assert not amy_belief.belief_mstr_dir
     # Calculated fields
-    assert not accord_belief._offi_time_max
-    assert not accord_belief._owners_dir
-    assert not accord_belief._packs_dir
-    assert not accord_belief._all_tranbook
-    assert set(accord_belief.__dict__) == {
+    assert not amy_belief._offi_time_max
+    assert not amy_belief._owners_dir
+    assert not amy_belief._packs_dir
+    assert not amy_belief._all_tranbook
+    assert set(amy_belief.__dict__) == {
         belief_label_str(),
         timeline_str(),
         brokerunits_str(),
@@ -90,7 +90,7 @@ def test_BeliefUnit_Exists():
 
 def test_beliefunit_shop_ReturnsBeliefUnit():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
 
     # WHEN
     a23_belief = beliefunit_shop(a23_str, get_module_temp_dir())
@@ -115,7 +115,7 @@ def test_beliefunit_shop_ReturnsBeliefUnit():
 
 def test_beliefunit_shop_ReturnsBeliefUnitWith_beliefs_dir(env_dir_setup_cleanup):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
 
     # WHEN
     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir=get_module_temp_dir())
@@ -129,7 +129,7 @@ def test_beliefunit_shop_ReturnsBeliefUnitWith_beliefs_dir(env_dir_setup_cleanup
 
 def test_beliefunit_shop_ReturnsBeliefUnitWith_knot(env_dir_setup_cleanup):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     slash_str = "/"
     x_fund_iota = 7.0
     x_respect_bit = 9
@@ -160,28 +160,28 @@ def test_beliefunit_shop_ReturnsBeliefUnitWith_knot(env_dir_setup_cleanup):
 
 def test_BeliefUnit_set_belief_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     # ESTABLISH
-    a23_str = "accord23"
-    accord_belief = BeliefUnit(a23_str, get_module_temp_dir())
+    a23_str = "amy23"
+    amy_belief = BeliefUnit(a23_str, get_module_temp_dir())
     x_beliefs_dir = create_path(get_module_temp_dir(), "beliefs")
     x_belief_dir = create_path(x_beliefs_dir, a23_str)
     x_owners_dir = create_path(x_belief_dir, "owners")
     x_packs_dir = create_path(x_belief_dir, "packs")
 
-    assert not accord_belief._belief_dir
-    assert not accord_belief._owners_dir
-    assert not accord_belief._packs_dir
+    assert not amy_belief._belief_dir
+    assert not amy_belief._owners_dir
+    assert not amy_belief._packs_dir
     assert os_path_exists(x_belief_dir) is False
     assert os_path_isdir(x_belief_dir) is False
     assert os_path_exists(x_owners_dir) is False
     assert os_path_exists(x_packs_dir) is False
 
     # WHEN
-    accord_belief._set_belief_dirs()
+    amy_belief._set_belief_dirs()
 
     # THEN
-    assert accord_belief._belief_dir == x_belief_dir
-    assert accord_belief._owners_dir == x_owners_dir
-    assert accord_belief._packs_dir == x_packs_dir
+    assert amy_belief._belief_dir == x_belief_dir
+    assert amy_belief._owners_dir == x_owners_dir
+    assert amy_belief._packs_dir == x_packs_dir
     assert os_path_exists(x_belief_dir)
     assert os_path_isdir(x_belief_dir)
     assert os_path_exists(x_owners_dir)
@@ -190,7 +190,7 @@ def test_BeliefUnit_set_belief_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanu
 
 def test_beliefunit_shop_SetsbeliefsDirs(env_dir_setup_cleanup):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
 
     # WHEN
     a23_belief = beliefunit_shop(a23_str, get_module_temp_dir())
@@ -207,7 +207,7 @@ def test_BeliefUnit_create_empty_plan_from_belief_ReturnsObj_Scenario0(
 ):
     # ESTABLISH
     belief_mstr_dir = get_module_temp_dir()
-    a23_str = "accord23"
+    a23_str = "amy23"
     slash_str = "/"
     x_fund_iota = 4
     x_respect_bit = 5
@@ -237,7 +237,7 @@ def test_BeliefUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario1_owner_dir_
 ):
     # ESTABLISH
     belief_mstr_dir = get_module_temp_dir()
-    a23_str = "accord23"
+    a23_str = "amy23"
     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
     sue_str = "Sue"
     sue_owner_dir = create_owner_dir_path(belief_mstr_dir, a23_str, sue_str)
@@ -259,7 +259,7 @@ def test_BeliefUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario2_owner_dir_
 ):
     # ESTABLISH
     belief_mstr_dir = get_module_temp_dir()
-    a23_str = "accord23"
+    a23_str = "amy23"
     slash_str = "/"
     x_fund_iota = 4
     x_respect_bit = 5
@@ -296,7 +296,7 @@ def test_BeliefUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario3_FileExists
 ):
     # ESTABLISH
     belief_mstr_dir = get_module_temp_dir()
-    a23_str = "accord23"
+    a23_str = "amy23"
     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
     sue_str = "Sue"
     bob_str = "Bob"
@@ -321,7 +321,7 @@ def test_BeliefUnit_create_init_job_from_guts_Scenario0_CreatesFile(
 ):
     # ESTABLISH
     belief_mstr_dir = get_module_temp_dir()
-    a23_str = "accord23"
+    a23_str = "amy23"
     slash_str = "/"
     x_fund_iota = 4
     x_respect_bit = 5
@@ -348,7 +348,7 @@ def test_BeliefUnit_create_init_job_from_guts_Scenario1_ReplacesFile(
 ):
     # ESTABLISH
     belief_mstr_dir = get_module_temp_dir()
-    a23_str = "accord23"
+    a23_str = "amy23"
     slash_str = "/"
     x_fund_iota = 4
     x_respect_bit = 5
@@ -378,7 +378,7 @@ def test_BeliefUnit_create_init_job_from_guts_Scenario2_job_Has_gut_Accts(
 ):
     # ESTABLISH
     belief_mstr_dir = get_module_temp_dir()
-    a23_str = "accord23"
+    a23_str = "amy23"
     slash_str = "/"
     x_fund_iota = 4
     x_respect_bit = 5
@@ -409,7 +409,7 @@ def test_BeliefUnit_create_init_job_from_guts_Scenario3_gut_FilesAreListenedTo(
 ):
     # ESTABLISH
     belief_mstr_dir = get_module_temp_dir()
-    a23_str = "accord23"
+    a23_str = "amy23"
     slash_str = "/"
     x_fund_iota = 4
     x_respect_bit = 5
@@ -452,7 +452,7 @@ def test_BeliefUnit__set_all_healer_dutys_CorrectlySetsdutys(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     x_belief_mstr_dir = get_module_temp_dir()
     a23_belief = beliefunit_shop(a23_str, x_belief_mstr_dir)
     sue_str = "Sue"
@@ -524,7 +524,7 @@ def test_BeliefUnit__set_all_healer_dutys_CorrectlySetsdutys(
 #     # ESTABLISH
 #     belief_mstr_dir = get_module_temp_dir()
 #     time56 = 56
-#     a23_belief = beliefunit_shop("accord23", belief_mstr_dir, _offi_time_max=time56)
+#     a23_belief = beliefunit_shop("amy23", belief_mstr_dir, _offi_time_max=time56)
 #     assert a23_belief.offi_time == 0
 #     assert a23_belief._offi_time_max == time56
 
@@ -539,7 +539,7 @@ def test_BeliefUnit__set_all_healer_dutys_CorrectlySetsdutys(
 
 # def test_BeliefUnit_set_offi_time_Scenario1_SetsAttr():
 #     # ESTABLISH
-#     a23_belief = beliefunit_shop("accord23", get_module_temp_dir())
+#     a23_belief = beliefunit_shop("amy23", get_module_temp_dir())
 #     assert a23_belief.offi_time == 0
 #     assert a23_belief._offi_time_max == 0
 
@@ -556,7 +556,7 @@ def test_BeliefUnit_set_offi_time_max_Scenario0_SetsAttr():
     # ESTABLISH
     belief_mstr_dir = get_module_temp_dir()
     time7 = 7
-    a23_belief = beliefunit_shop("accord23", belief_mstr_dir)
+    a23_belief = beliefunit_shop("amy23", belief_mstr_dir)
     a23_belief._offi_time_max = time7
     # assert a23_belief.offi_time == 0
     assert a23_belief._offi_time_max == time7
@@ -576,7 +576,7 @@ def test_BeliefUnit_set_offi_time_max_Scenario0_SetsAttr():
 #     time21 = 21
 #     time77 = 77
 #     a23_belief = beliefunit_shop(
-#         "accord23", belief_mstr_dir, offi_time=time21, _offi_time_max=time77
+#         "amy23", belief_mstr_dir, offi_time=time21, _offi_time_max=time77
 #     )
 #     assert a23_belief.offi_time == time21
 #     assert a23_belief._offi_time_max == time77
@@ -591,7 +591,7 @@ def test_BeliefUnit_set_offi_time_max_Scenario0_SetsAttr():
 
 # def test_BeliefUnit_set_offi_time_Scenario0_SetsAttr():
 #     # ESTABLISH
-#     a23_belief = beliefunit_shop("accord23", get_module_temp_dir())
+#     a23_belief = beliefunit_shop("amy23", get_module_temp_dir())
 #     assert a23_belief.offi_time == 0
 #     assert a23_belief._offi_time_max == 0
 

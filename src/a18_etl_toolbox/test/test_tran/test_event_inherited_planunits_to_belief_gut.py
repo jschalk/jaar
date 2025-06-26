@@ -28,7 +28,7 @@ def test_etl_event_inherited_planunits_to_belief_gut_SetsFiles_Scenario0(
     credit44 = 44
     credit77 = 77
     credit88 = 88
-    a23_str = "accord23"
+    a23_str = "amy23"
     belief_mstr_dir = get_module_temp_dir()
     a23_bob_e3_dir = create_owner_event_dir_path(
         belief_mstr_dir, a23_str, bob_inx, event3

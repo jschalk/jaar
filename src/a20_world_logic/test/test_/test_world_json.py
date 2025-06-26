@@ -30,8 +30,8 @@ def test_WorldUnit_get_dict_ReturnsObj_Scenario1():
     worlds2_dir = create_path(get_module_temp_dir(), "worlds2")
     five_world_id = "five"
     world2_time_pnigh = 55
-    accord45_str = "accord45"
-    world2_beliefunits = {"accord45"}
+    amy45_str = "amy45"
+    world2_beliefunits = {"amy45"}
     x_world = worldunit_shop(
         world_id=five_world_id,
         worlds_dir=worlds2_dir,

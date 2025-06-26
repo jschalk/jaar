@@ -22,7 +22,7 @@ from src.a15_belief_logic.test._util.a15_env import (
 
 def test_BeliefUnit_get_timeline_config_ReturnsObj_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     belief_mstr_dir = get_module_temp_dir()
     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
 
@@ -37,7 +37,7 @@ def test_BeliefUnit_get_timeline_config_ReturnsObj_Scenario0(env_dir_setup_clean
 
 def test_BeliefUnit_get_timeline_config_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     belief_mstr_dir = get_module_temp_dir()
     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
     a23_belief.timeline = timelineunit_shop(get_five_config())
@@ -53,7 +53,7 @@ def test_BeliefUnit_get_timeline_config_ReturnsObj_Scenario1(env_dir_setup_clean
 
 def test_BeliefUnit_add_timeline_to_gut_SetsFile_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     belief_mstr_dir = get_module_temp_dir()
     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
     a23_belief.timeline = timelineunit_shop(get_five_config())
@@ -74,7 +74,7 @@ def test_BeliefUnit_add_timeline_to_gut_SetsFile_Scenario0(env_dir_setup_cleanup
 
 def test_BeliefUnit_add_timeline_to_guts_SetsFiles_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     belief_mstr_dir = get_module_temp_dir()
     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
     a23_belief.timeline = timelineunit_shop(get_five_config())

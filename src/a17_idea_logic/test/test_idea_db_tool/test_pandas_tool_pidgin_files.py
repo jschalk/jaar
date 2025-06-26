@@ -90,14 +90,14 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario1_SingleFile_R
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    otx_accord45_str = "accord45"
-    inx_accord87_str = "accord87"
-    otx_accord45_rope = to_rope(otx_accord45_str)
-    inx_accord87_rope = to_rope(inx_accord87_str)
+    otx_amy45_str = "amy45"
+    inx_amy87_str = "amy87"
+    otx_amy45_rope = to_rope(otx_amy45_str)
+    inx_amy87_rope = to_rope(inx_amy87_str)
     casa_otx_str = "casa"
     casa_inx_str = "maison"
-    casa_otx_rope = create_rope(otx_accord45_rope, casa_otx_str)
-    casa_inx_rope = create_rope(inx_accord87_rope, casa_inx_str)
+    casa_otx_rope = create_rope(otx_amy45_rope, casa_otx_str)
+    casa_inx_rope = create_rope(inx_amy87_rope, casa_inx_str)
     clean_otx_str = "clean"
     clean_inx_str = "propre"
     clean_otx_rope = create_rope(casa_otx_rope, clean_otx_str)
@@ -130,7 +130,7 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario1_SingleFile_R
     print(f"{sue_otx_dt=} \n")
     print(f"{sue_inx_dt=} \n")
     gen_inx_dt = open_csv(inz_dir, example_filename)
-    assert gen_inx_dt.iloc[0][rcontext_str()] == inx_accord87_rope
+    assert gen_inx_dt.iloc[0][rcontext_str()] == inx_amy87_rope
     assert gen_inx_dt.iloc[1][rcontext_str()] == casa_inx_rope
     assert gen_inx_dt.to_csv() != sue_otx_dt.to_csv()
     assert gen_inx_dt.iloc[0][rcontext_str()] == sue_inx_dt.iloc[0][rcontext_str()]

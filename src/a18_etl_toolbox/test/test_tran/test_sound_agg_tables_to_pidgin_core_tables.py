@@ -62,7 +62,7 @@ from src.a18_etl_toolbox.transformers import (
 
 def test_create_insert_into_pidgin_core_raw_sqlstr_ReturnsObj_PopulatesTable_Scenario0():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -122,7 +122,7 @@ VALUES
 
 def test_insert_pidgin_sound_agg_into_pidgin_core_raw_table_PopulatesTable_Scenario0():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -373,7 +373,7 @@ VALUES
 
 def test_create_update_pidgin_sound_agg_inconsist_sqlstr_PopulatesTable_Scenario0():
     # ESTABLISH
-    a23_str = "accord23"
+    a23_str = "amy23"
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"

@@ -20,7 +20,7 @@ def test_HubUnit_get_keep_ropes_RaisesErrorWhen__keeps_justified_IsFalse(
 
     # ESTABLISH
     sue_str = "Sue"
-    a23_str = "accord23"
+    a23_str = "amy23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
     save_gut_file(env_dir(), sue_hubunit.default_gut_plan())
     sue_gut_plan = open_gut_file(env_dir(), a23_str, sue_str)
@@ -51,7 +51,7 @@ def test_HubUnit_get_keep_ropes_RaisesErrorWhen__keeps_buildable_IsFalse(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    a23_str = "accord23"
+    a23_str = "amy23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
     save_gut_file(env_dir(), sue_hubunit.default_gut_plan())
     sue_gut_plan = open_gut_file(env_dir(), a23_str, sue_str)
@@ -77,7 +77,7 @@ def test_HubUnit_get_keep_ropes_RaisesErrorWhen__keeps_buildable_IsFalse(
 def test_HubUnit_get_keep_ropes_ReturnsObj(env_dir_setup_cleanup, graphics_bool):
     # ESTABLISH
     sue_str = "Sue"
-    a23_str = "accord23"
+    a23_str = "amy23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
     save_gut_file(env_dir(), sue_hubunit.default_gut_plan())
     sue_gut_plan = open_gut_file(env_dir(), a23_str, sue_str)
@@ -111,7 +111,7 @@ def test_HubUnit_save_all_gut_dutys_CorrectlySetsdutys(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    a23_str = "accord23"
+    a23_str = "amy23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
     save_gut_file(env_dir(), sue_hubunit.default_gut_plan())
     sue_gut_plan = open_gut_file(env_dir(), a23_str, sue_str)
@@ -151,7 +151,7 @@ def test_HubUnit_create_treasury_db_file_CorrectlyCreatesDatabase(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    a23_str = "accord23"
+    a23_str = "amy23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
     save_gut_file(env_dir(), sue_hubunit.default_gut_plan())
     sue_gut_plan = open_gut_file(env_dir(), a23_str, sue_str)
@@ -172,7 +172,7 @@ def test_HubUnit_create_treasury_db_DoesNotOverWriteDBIfExists(
 ):
     # ESTABLISH create keep
     sue_str = "Sue"
-    a23_str = "accord23"
+    a23_str = "amy23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, get_texas_rope())
     delete_dir(sue_hubunit.treasury_db_path())  # clear out any treasury.db file
     sue_hubunit.create_treasury_db_file()
@@ -199,7 +199,7 @@ def test_HubUnit_create_treasury_db_DoesNotOverWriteDBIfExists(
 def test_HubUnit_treasury_db_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
-    a23_str = "accord23"
+    a23_str = "amy23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
     save_gut_file(env_dir(), sue_hubunit.default_gut_plan())
     sue_gut_plan = open_gut_file(env_dir(), a23_str, sue_str)
@@ -220,7 +220,7 @@ def test_HubUnit_create_gut_treasury_db_files_CreatesDatabases(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    a23_str = "accord23"
+    a23_str = "amy23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
     save_gut_file(env_dir(), sue_hubunit.default_gut_plan())
     sue_gut_plan = open_gut_file(env_dir(), a23_str, sue_str)

@@ -45,7 +45,7 @@ def test_create_calendar_markdown_files_Senario1_CreatesFileFromBeliefUnitJSON(
     temp_dir = get_module_temp_dir()
     belief_mstr_dir = create_path(temp_dir, "belief_mstr")
     output_dir = create_path(temp_dir, "output")
-    a23_str = "accord23"
+    a23_str = "amy23"
     a23_belief_path = create_belief_json_path(belief_mstr_dir, a23_str)
     a23_beliefunit = beliefunit_shop(a23_str, belief_mstr_dir)
     assert a23_beliefunit.timeline == timelineunit_shop(get_creg_config())
@@ -74,7 +74,7 @@ def test_create_calendar_markdown_files_Senario1_CreatesFileFromBeliefUnitJSON(
 #     event2 = 2
 #     ex_filename = "fizzbuzz.xlsx"
 #     input_file_path = create_path(fizz_world._input_dir, ex_filename)
-#     a23_str = "accord23"
+#     a23_str = "amy23"
 #     br00011_columns = [
 #         event_int_str(),
 #         face_name_str(),

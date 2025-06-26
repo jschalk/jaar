@@ -24,7 +24,7 @@ def test_create_planunit_metrics_insert_sqlstr_ReturnsObj():
     # for x_arg in sorted(x_args):
     #     print(f"{x_arg=}")
 
-    x_belief_label = "accord23"
+    x_belief_label = "amy23"
     x_owner_name = "Sue"
     x__keeps_buildable = True
     x__keeps_justified = False
@@ -91,7 +91,7 @@ def test_create_plnconc_metrics_insert_sqlstr_ReturnsObj():
     #     # b1_str = "}"
     #     # print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
 
-    x_belief_label = "accord23"
+    x_belief_label = "amy23"
     x_owner_name = "Sue"
     x__active = 1
     x__all_acct_cred = 2
@@ -191,7 +191,7 @@ def test_create_plnreas_metrics_insert_sqlstr_ReturnsObj():
     #     b1_str = "}"
     #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
 
-    x_belief_label = "accord23"
+    x_belief_label = "amy23"
     x_owner_name = "Sue"
     x_rope = 1
     x_rcontext = 2
@@ -254,7 +254,7 @@ def test_create_plnprem_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
 
-    x_belief_label = "accord23"
+    x_belief_label = "amy23"
     x_owner_name = "Sue"
     x_rope = 1
     x_rcontext = 2
@@ -321,7 +321,7 @@ def test_create_plnawar_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
 
-    x_belief_label = "accord23"
+    x_belief_label = "amy23"
     x_owner_name = "Sue"
     x_rope = 1
     x_awardee_title = 2
@@ -384,7 +384,7 @@ def test_create_plnfact_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
 
-    x_belief_label = "accord23"
+    x_belief_label = "amy23"
     x_owner_name = "Sue"
     x_rope = 1
     x_fcontext = 2
@@ -445,7 +445,7 @@ def test_create_plnheal_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
 
-    x_belief_label = "accord23"
+    x_belief_label = "amy23"
     x_owner_name = "Sue"
     x_rope = 1
     x_healer_name = 2
@@ -500,7 +500,7 @@ def test_create_plnlabo_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
 
-    x_belief_label = "accord23"
+    x_belief_label = "amy23"
     x_owner_name = "Sue"
     x_rope = 1
     x_labor_title = 2
@@ -557,7 +557,7 @@ def test_create_plnacct_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
 
-    x_belief_label = "accord23"
+    x_belief_label = "amy23"
     x_owner_name = "Sue"
     x_acct_name = 1
     x_acct_cred_points = 2
@@ -634,7 +634,7 @@ def test_create_plnmemb_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
 
-    x_belief_label = "accord23"
+    x_belief_label = "amy23"
     x_owner_name = "Sue"
     x_acct_name = 1
     x_group_title = 2
@@ -709,7 +709,7 @@ def test_create_plngrou_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
 
-    x_belief_label = "accord23"
+    x_belief_label = "amy23"
     x_owner_name = "Sue"
     x_group_title = 1
     x__credor_pool = 2

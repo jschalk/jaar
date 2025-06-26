@@ -594,26 +594,26 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 540,
                         "popen": 540,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;yr_month;": {
+                  ";amy45;yr_month;": {
                     "premises": {
-                      ";accord45;yr_month;September": {
+                      ";amy45;yr_month;September": {
                         "pdivisor": 12,
                         "pnigh": 9,
                         "popen": 9,
-                        "pstate": ";accord45;yr_month;September"
+                        "pstate": ";amy45;yr_month;September"
                       }
                     },
-                    "rcontext": ";accord45;yr_month;"
+                    "rcontext": ";amy45;yr_month;"
                   }
                 }
               },
@@ -625,26 +625,26 @@
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "premises": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "pnigh": 480,
                             "popen": 480,
-                            "pstate": ";accord45;day_minute;"
+                            "pstate": ";amy45;day_minute;"
                           }
                         },
-                        "rcontext": ";accord45;day_minute;"
+                        "rcontext": ";amy45;day_minute;"
                       },
-                      ";accord45;yr_month;": {
+                      ";amy45;yr_month;": {
                         "premises": {
-                          ";accord45;yr_month;September": {
+                          ";amy45;yr_month;September": {
                             "pdivisor": 12,
                             "pnigh": 9,
                             "popen": 9,
-                            "pstate": ";accord45;yr_month;September"
+                            "pstate": ";amy45;yr_month;September"
                           }
                         },
-                        "rcontext": ";accord45;yr_month;"
+                        "rcontext": ";amy45;yr_month;"
                       }
                     }
                   }
@@ -660,26 +660,26 @@
                     "concept_label": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "reasonunits": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "premises": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "pnigh": 540,
                             "popen": 540,
-                            "pstate": ";accord45;day_minute;"
+                            "pstate": ";amy45;day_minute;"
                           }
                         },
-                        "rcontext": ";accord45;day_minute;"
+                        "rcontext": ";amy45;day_minute;"
                       },
-                      ";accord45;yr_month;": {
+                      ";amy45;yr_month;": {
                         "premises": {
-                          ";accord45;yr_month;September": {
+                          ";amy45;yr_month;September": {
                             "pdivisor": 12,
                             "pnigh": 9,
                             "popen": 9,
-                            "pstate": ";accord45;yr_month;September"
+                            "pstate": ";amy45;yr_month;September"
                           }
                         },
-                        "rcontext": ";accord45;yr_month;"
+                        "rcontext": ";amy45;yr_month;"
                       }
                     }
                   }
@@ -697,26 +697,26 @@
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "premises": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "pnigh": 540,
                             "popen": 540,
-                            "pstate": ";accord45;day_minute;"
+                            "pstate": ";amy45;day_minute;"
                           }
                         },
-                        "rcontext": ";accord45;day_minute;"
+                        "rcontext": ";amy45;day_minute;"
                       },
-                      ";accord45;yr_month;": {
+                      ";amy45;yr_month;": {
                         "premises": {
-                          ";accord45;yr_month;September": {
+                          ";amy45;yr_month;September": {
                             "pdivisor": 12,
                             "pnigh": 9,
                             "popen": 9,
-                            "pstate": ";accord45;yr_month;September"
+                            "pstate": ";amy45;yr_month;September"
                           }
                         },
-                        "rcontext": ";accord45;yr_month;"
+                        "rcontext": ";amy45;yr_month;"
                       }
                     }
                   }
@@ -747,26 +747,26 @@
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "premises": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "pnigh": 540,
                             "popen": 540,
-                            "pstate": ";accord45;day_minute;"
+                            "pstate": ";amy45;day_minute;"
                           }
                         },
-                        "rcontext": ";accord45;day_minute;"
+                        "rcontext": ";amy45;day_minute;"
                       },
-                      ";accord45;yr_month;": {
+                      ";amy45;yr_month;": {
                         "premises": {
-                          ";accord45;yr_month;September": {
+                          ";amy45;yr_month;September": {
                             "pdivisor": 12,
                             "pnigh": 9,
                             "popen": 9,
-                            "pstate": ";accord45;yr_month;September"
+                            "pstate": ";amy45;yr_month;September"
                           }
                         },
-                        "rcontext": ";accord45;yr_month;"
+                        "rcontext": ";amy45;yr_month;"
                       }
                     }
                   }
@@ -784,26 +784,26 @@
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "premises": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "pnigh": 540,
                             "popen": 540,
-                            "pstate": ";accord45;day_minute;"
+                            "pstate": ";amy45;day_minute;"
                           }
                         },
-                        "rcontext": ";accord45;day_minute;"
+                        "rcontext": ";amy45;day_minute;"
                       },
-                      ";accord45;yr_month;": {
+                      ";amy45;yr_month;": {
                         "premises": {
-                          ";accord45;yr_month;September": {
+                          ";amy45;yr_month;September": {
                             "pdivisor": 12,
                             "pnigh": 9,
                             "popen": 9,
-                            "pstate": ";accord45;yr_month;September"
+                            "pstate": ";amy45;yr_month;September"
                           }
                         },
-                        "rcontext": ";accord45;yr_month;"
+                        "rcontext": ";amy45;yr_month;"
                       }
                     }
                   }
@@ -821,26 +821,26 @@
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "premises": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "pnigh": 540,
                             "popen": 540,
-                            "pstate": ";accord45;day_minute;"
+                            "pstate": ";amy45;day_minute;"
                           }
                         },
-                        "rcontext": ";accord45;day_minute;"
+                        "rcontext": ";amy45;day_minute;"
                       },
-                      ";accord45;yr_month;": {
+                      ";amy45;yr_month;": {
                         "premises": {
-                          ";accord45;yr_month;September": {
+                          ";amy45;yr_month;September": {
                             "pdivisor": 12,
                             "pnigh": 9,
                             "popen": 9,
-                            "pstate": ";accord45;yr_month;September"
+                            "pstate": ";amy45;yr_month;September"
                           }
                         },
-                        "rcontext": ";accord45;yr_month;"
+                        "rcontext": ";amy45;yr_month;"
                       }
                     }
                   }
@@ -856,26 +856,26 @@
                     "concept_label": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "reasonunits": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "premises": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "pnigh": 540,
                             "popen": 540,
-                            "pstate": ";accord45;day_minute;"
+                            "pstate": ";amy45;day_minute;"
                           }
                         },
-                        "rcontext": ";accord45;day_minute;"
+                        "rcontext": ";amy45;day_minute;"
                       },
-                      ";accord45;yr_month;": {
+                      ";amy45;yr_month;": {
                         "premises": {
-                          ";accord45;yr_month;September": {
+                          ";amy45;yr_month;September": {
                             "pdivisor": 12,
                             "pnigh": 9,
                             "popen": 9,
-                            "pstate": ";accord45;yr_month;September"
+                            "pstate": ";amy45;yr_month;September"
                           }
                         },
-                        "rcontext": ";accord45;yr_month;"
+                        "rcontext": ";amy45;yr_month;"
                       }
                     }
                   }
@@ -901,15 +901,15 @@
                         "mass": 1,
                         "task": true,
                         "reasonunits": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "premises": {
-                              ";accord45;day_minute;": {
+                              ";amy45;day_minute;": {
                                 "pnigh": 360,
                                 "popen": 360,
-                                "pstate": ";accord45;day_minute;"
+                                "pstate": ";amy45;day_minute;"
                               }
                             },
-                            "rcontext": ";accord45;day_minute;"
+                            "rcontext": ";amy45;day_minute;"
                           }
                         }
                       },
@@ -941,15 +941,15 @@
                         "mass": 1,
                         "task": true,
                         "reasonunits": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "premises": {
-                              ";accord45;day_minute;": {
+                              ";amy45;day_minute;": {
                                 "pnigh": 360,
                                 "popen": 360,
-                                "pstate": ";accord45;day_minute;"
+                                "pstate": ";amy45;day_minute;"
                               }
                             },
-                            "rcontext": ";accord45;day_minute;"
+                            "rcontext": ";amy45;day_minute;"
                           }
                         }
                       }
@@ -958,15 +958,15 @@
                     "concept_label": "check ETLs ran correctly",
                     "mass": 1,
                     "reasonunits": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "premises": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "pnigh": 360,
                             "popen": 360,
-                            "pstate": ";accord45;day_minute;"
+                            "pstate": ";amy45;day_minute;"
                           }
                         },
-                        "rcontext": ";accord45;day_minute;"
+                        "rcontext": ";amy45;day_minute;"
                       }
                     }
                   },
@@ -976,15 +976,15 @@
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "premises": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "pnigh": 450,
                             "popen": 450,
-                            "pstate": ";accord45;day_minute;"
+                            "pstate": ";amy45;day_minute;"
                           }
                         },
-                        "rcontext": ";accord45;day_minute;"
+                        "rcontext": ";amy45;day_minute;"
                       }
                     }
                   },
@@ -995,15 +995,15 @@
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "premises": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "pnigh": 525,
                             "popen": 525,
-                            "pstate": ";accord45;day_minute;"
+                            "pstate": ";amy45;day_minute;"
                           }
                         },
-                        "rcontext": ";accord45;day_minute;"
+                        "rcontext": ";amy45;day_minute;"
                       }
                     }
                   }
@@ -1012,15 +1012,15 @@
                 "concept_label": "IT DEPT off-hrs responsiblities",
                 "mass": 1,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 1320,
                         "popen": 360,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   }
                 }
               },
@@ -1032,15 +1032,15 @@
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "premises": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "pnigh": 540,
                             "popen": 540,
-                            "pstate": ";accord45;day_minute;"
+                            "pstate": ";amy45;day_minute;"
                           }
                         },
-                        "rcontext": ";accord45;day_minute;"
+                        "rcontext": ";amy45;day_minute;"
                       }
                     }
                   },
@@ -1050,15 +1050,15 @@
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "premises": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "pnigh": 541,
                             "popen": 540,
-                            "pstate": ";accord45;day_minute;"
+                            "pstate": ";amy45;day_minute;"
                           }
                         },
-                        "rcontext": ";accord45;day_minute;"
+                        "rcontext": ";amy45;day_minute;"
                       }
                     }
                   },
@@ -1070,15 +1070,15 @@
                         "mass": 1,
                         "task": true,
                         "reasonunits": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "premises": {
-                              ";accord45;day_minute;": {
+                              ";amy45;day_minute;": {
                                 "pnigh": 540,
                                 "popen": 540,
-                                "pstate": ";accord45;day_minute;"
+                                "pstate": ";amy45;day_minute;"
                               }
                             },
-                            "rcontext": ";accord45;day_minute;"
+                            "rcontext": ";amy45;day_minute;"
                           }
                         }
                       },
@@ -1110,15 +1110,15 @@
                         "mass": 1,
                         "task": true,
                         "reasonunits": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "premises": {
-                              ";accord45;day_minute;": {
+                              ";amy45;day_minute;": {
                                 "pnigh": 480,
                                 "popen": 480,
-                                "pstate": ";accord45;day_minute;"
+                                "pstate": ";amy45;day_minute;"
                               }
                             },
-                            "rcontext": ";accord45;day_minute;"
+                            "rcontext": ";amy45;day_minute;"
                           }
                         }
                       },
@@ -1128,15 +1128,15 @@
                         "mass": 1,
                         "task": true,
                         "reasonunits": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "premises": {
-                              ";accord45;day_minute;": {
+                              ";amy45;day_minute;": {
                                 "pnigh": 582,
                                 "popen": 582,
-                                "pstate": ";accord45;day_minute;"
+                                "pstate": ";amy45;day_minute;"
                               }
                             },
-                            "rcontext": ";accord45;day_minute;"
+                            "rcontext": ";amy45;day_minute;"
                           }
                         }
                       }
@@ -1150,15 +1150,15 @@
                     "concept_label": "IT DEPT general",
                     "mass": 1,
                     "reasonunits": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "premises": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "pnigh": 1019,
                             "popen": 540,
-                            "pstate": ";accord45;day_minute;"
+                            "pstate": ";amy45;day_minute;"
                           }
                         },
-                        "rcontext": ";accord45;day_minute;"
+                        "rcontext": ";amy45;day_minute;"
                       }
                     }
                   },
@@ -1168,15 +1168,15 @@
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "premises": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "pnigh": 540,
                             "popen": 540,
-                            "pstate": ";accord45;day_minute;"
+                            "pstate": ";amy45;day_minute;"
                           }
                         },
-                        "rcontext": ";accord45;day_minute;"
+                        "rcontext": ";amy45;day_minute;"
                       }
                     }
                   },
@@ -1187,15 +1187,15 @@
                         "concept_label": "check for access",
                         "mass": 1,
                         "reasonunits": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "premises": {
-                              ";accord45;day_minute;": {
+                              ";amy45;day_minute;": {
                                 "pnigh": 541,
                                 "popen": 540,
-                                "pstate": ";accord45;day_minute;"
+                                "pstate": ";amy45;day_minute;"
                               }
                             },
-                            "rcontext": ";accord45;day_minute;"
+                            "rcontext": ";amy45;day_minute;"
                           }
                         }
                       }
@@ -1204,15 +1204,15 @@
                     "concept_label": "Synergy",
                     "mass": 1,
                     "reasonunits": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "premises": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "pnigh": 1020,
                             "popen": 540,
-                            "pstate": ";accord45;day_minute;"
+                            "pstate": ";amy45;day_minute;"
                           }
                         },
-                        "rcontext": ";accord45;day_minute;"
+                        "rcontext": ";amy45;day_minute;"
                       }
                     }
                   }
@@ -1222,15 +1222,15 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 1019,
                         "popen": 540,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   }
                 }
               }
@@ -1239,15 +1239,15 @@
             "concept_label": "IT DEPT",
             "mass": 1,
             "reasonunits": {
-              ";accord45;day_minute;": {
+              ";amy45;day_minute;": {
                 "premises": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "pnigh": 1379,
                     "popen": 360,
-                    "pstate": ";accord45;day_minute;"
+                    "pstate": ";amy45;day_minute;"
                   }
                 },
-                "rcontext": ";accord45;day_minute;"
+                "rcontext": ";amy45;day_minute;"
               }
             }
           }
@@ -1273,13 +1273,13 @@
                             "concept_label": "be reponsible for rent",
                             "mass": 1,
                             "reasonunits": {
-                              ";accord45;Nation-States;": {
+                              ";amy45;Nation-States;": {
                                 "premises": {
-                                  ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;workspace;": {
-                                    "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;workspace;"
+                                  ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;workspace;": {
+                                    "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;workspace;"
                                   }
                                 },
-                                "rcontext": ";accord45;Nation-States;"
+                                "rcontext": ";amy45;Nation-States;"
                               }
                             }
                           },
@@ -1288,13 +1288,13 @@
                             "concept_label": "flat",
                             "mass": 1,
                             "reasonunits": {
-                              ";accord45;Nation-States;": {
+                              ";amy45;Nation-States;": {
                                 "premises": {
-                                  ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                                    "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                                  ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
+                                    "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
                                   }
                                 },
-                                "rcontext": ";accord45;Nation-States;"
+                                "rcontext": ";amy45;Nation-States;"
                               }
                             }
                           },
@@ -1305,13 +1305,13 @@
                                 "concept_label": "maybe watch a video",
                                 "mass": 1,
                                 "reasonunits": {
-                                  ";accord45;Interweb;": {
+                                  ";amy45;Interweb;": {
                                     "premises": {
-                                      ";accord45;Interweb;YahooVideo;": {
-                                        "pstate": ";accord45;Interweb;YahooVideo;"
+                                      ";amy45;Interweb;YahooVideo;": {
+                                        "pstate": ";amy45;Interweb;YahooVideo;"
                                       }
                                     },
-                                    "rcontext": ";accord45;Interweb;"
+                                    "rcontext": ";amy45;Interweb;"
                                   }
                                 }
                               }
@@ -1320,13 +1320,13 @@
                             "concept_label": "go for parent_rope",
                             "mass": 1,
                             "reasonunits": {
-                              ";accord45;Nation-States;": {
+                              ";amy45;Nation-States;": {
                                 "premises": {
-                                  ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;10th floor gaarden;": {
-                                    "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;10th floor gaarden;"
+                                  ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;10th floor gaarden;": {
+                                    "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;10th floor gaarden;"
                                   }
                                 },
-                                "rcontext": ";accord45;Nation-States;"
+                                "rcontext": ";amy45;Nation-States;"
                               }
                             }
                           },
@@ -1335,13 +1335,13 @@
                             "concept_label": "gym time",
                             "mass": 1,
                             "reasonunits": {
-                              ";accord45;Moods;": {
+                              ";amy45;Moods;": {
                                 "premises": {
-                                  ";accord45;Moods;hungry;": {
-                                    "pstate": ";accord45;Moods;hungry;"
+                                  ";amy45;Moods;hungry;": {
+                                    "pstate": ";amy45;Moods;hungry;"
                                   }
                                 },
-                                "rcontext": ";accord45;Moods;"
+                                "rcontext": ";amy45;Moods;"
                               }
                             }
                           }
@@ -1350,13 +1350,13 @@
                         "concept_label": "flats",
                         "mass": 1,
                         "reasonunits": {
-                          ";accord45;Nation-States;": {
+                          ";amy45;Nation-States;": {
                             "premises": {
-                              ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;": {
-                                "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;"
+                              ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;": {
+                                "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;"
                               }
                             },
-                            "rcontext": ";accord45;Nation-States;"
+                            "rcontext": ";amy45;Nation-States;"
                           }
                         }
                       },
@@ -1367,13 +1367,13 @@
                             "concept_label": "browsing",
                             "mass": 1,
                             "reasonunits": {
-                              ";accord45;Nation-States;": {
+                              ";amy45;Nation-States;": {
                                 "premises": {
-                                  ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU;library;": {
-                                    "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU;library;"
+                                  ";amy45;Nation-States;USA;Portland; OR;Downtown;PSU;library;": {
+                                    "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;PSU;library;"
                                   }
                                 },
-                                "rcontext": ";accord45;Nation-States;"
+                                "rcontext": ";amy45;Nation-States;"
                               }
                             }
                           },
@@ -1382,13 +1382,13 @@
                             "concept_label": "picnic",
                             "mass": 1,
                             "reasonunits": {
-                              ";accord45;Seasons;": {
+                              ";amy45;Seasons;": {
                                 "premises": {
-                                  ";accord45;Seasons;Summer;": {
-                                    "pstate": ";accord45;Seasons;Summer;"
+                                  ";amy45;Seasons;Summer;": {
+                                    "pstate": ";amy45;Seasons;Summer;"
                                   }
                                 },
-                                "rcontext": ";accord45;Seasons;"
+                                "rcontext": ";amy45;Seasons;"
                               }
                             }
                           },
@@ -1397,13 +1397,13 @@
                             "concept_label": "street soccer",
                             "mass": 1,
                             "reasonunits": {
-                              ";accord45;Nation-States;": {
+                              ";amy45;Nation-States;": {
                                 "premises": {
-                                  ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU,Stott Field": {
-                                    "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU,Stott Field"
+                                  ";amy45;Nation-States;USA;Portland; OR;Downtown;PSU,Stott Field": {
+                                    "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;PSU,Stott Field"
                                   }
                                 },
-                                "rcontext": ";accord45;Nation-States;"
+                                "rcontext": ";amy45;Nation-States;"
                               }
                             }
                           },
@@ -1412,13 +1412,13 @@
                             "concept_label": "swimming",
                             "mass": 1,
                             "reasonunits": {
-                              ";accord45;Nation-States;": {
+                              ";amy45;Nation-States;": {
                                 "premises": {
-                                  ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU,Pool": {
-                                    "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU,Pool"
+                                  ";amy45;Nation-States;USA;Portland; OR;Downtown;PSU,Pool": {
+                                    "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;PSU,Pool"
                                   }
                                 },
-                                "rcontext": ";accord45;Nation-States;"
+                                "rcontext": ";amy45;Nation-States;"
                               }
                             }
                           }
@@ -1427,13 +1427,13 @@
                         "concept_label": "PSU Sports",
                         "mass": 1,
                         "reasonunits": {
-                          ";accord45;Nation-States;": {
+                          ";amy45;Nation-States;": {
                             "premises": {
-                              ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU": {
-                                "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;PSU"
+                              ";amy45;Nation-States;USA;Portland; OR;Downtown;PSU": {
+                                "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;PSU"
                               }
                             },
-                            "rcontext": ";accord45;Nation-States;"
+                            "rcontext": ";amy45;Nation-States;"
                           }
                         }
                       }
@@ -1442,13 +1442,13 @@
                     "concept_label": "downtown",
                     "mass": 1,
                     "reasonunits": {
-                      ";accord45;Nation-States;": {
+                      ";amy45;Nation-States;": {
                         "premises": {
-                          ";accord45;Nation-States;USA;Portland; OR;Downtown": {
-                            "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown"
+                          ";amy45;Nation-States;USA;Portland; OR;Downtown": {
+                            "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown"
                           }
                         },
-                        "rcontext": ";accord45;Nation-States;"
+                        "rcontext": ";amy45;Nation-States;"
                       }
                     }
                   }
@@ -1457,13 +1457,13 @@
                 "concept_label": "portland sovereignty",
                 "mass": 1,
                 "reasonunits": {
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland OR": {
-                        "pstate": ";accord45;Nation-States;USA;Portland OR"
+                      ";amy45;Nation-States;USA;Portland OR": {
+                        "pstate": ";amy45;Nation-States;USA;Portland OR"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   }
                 }
               },
@@ -1472,13 +1472,13 @@
                 "concept_label": "texas sovereignty",
                 "mass": 1,
                 "reasonunits": {
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Texas": {
-                        "pstate": ";accord45;Nation-States;USA;Texas"
+                      ";amy45;Nation-States;USA;Texas": {
+                        "pstate": ";amy45;Nation-States;USA;Texas"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   }
                 }
               }
@@ -1487,13 +1487,13 @@
             "concept_label": "American sovereignty",
             "mass": 1,
             "reasonunits": {
-              ";accord45;Nation-States;": {
+              ";amy45;Nation-States;": {
                 "premises": {
-                  ";accord45;Nation-States;USA": {
-                    "pstate": ";accord45;Nation-States;USA"
+                  ";amy45;Nation-States;USA": {
+                    "pstate": ";amy45;Nation-States;USA"
                   }
                 },
-                "rcontext": ";accord45;Nation-States;"
+                "rcontext": ";amy45;Nation-States;"
               }
             }
           },
@@ -1502,13 +1502,13 @@
             "concept_label": "French sovereignty",
             "mass": 1,
             "reasonunits": {
-              ";accord45;Nation-States;": {
+              ";amy45;Nation-States;": {
                 "premises": {
-                  ";accord45;Nation-States;France2": {
-                    "pstate": ";accord45;Nation-States;France2"
+                  ";amy45;Nation-States;France2": {
+                    "pstate": ";amy45;Nation-States;France2"
                   }
                 },
-                "rcontext": ";accord45;Nation-States;"
+                "rcontext": ";amy45;Nation-States;"
               }
             }
           }
@@ -1550,26 +1550,26 @@
             "mass": 1,
             "task": true,
             "reasonunits": {
-              ";accord45;day_minute;": {
+              ";amy45;day_minute;": {
                 "premises": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "pnigh": 540,
                     "popen": 540,
-                    "pstate": ";accord45;day_minute;"
+                    "pstate": ";amy45;day_minute;"
                   }
                 },
-                "rcontext": ";accord45;day_minute;"
+                "rcontext": ";amy45;day_minute;"
               },
-              ";accord45;yr_month;": {
+              ";amy45;yr_month;": {
                 "premises": {
-                  ";accord45;yr_month;": {
+                  ";amy45;yr_month;": {
                     "pdivisor": 3,
                     "pnigh": 0,
                     "popen": 0,
-                    "pstate": ";accord45;yr_month;"
+                    "pstate": ";amy45;yr_month;"
                   }
                 },
-                "rcontext": ";accord45;yr_month;"
+                "rcontext": ";amy45;yr_month;"
               }
             }
           },
@@ -1578,13 +1578,13 @@
             "concept_label": "check up on old family friends",
             "mass": 1,
             "reasonunits": {
-              ";accord45;Moods;": {
+              ";amy45;Moods;": {
                 "premises": {
-                  ";accord45;Moods;Happy,Happy - angerish": {
-                    "pstate": ";accord45;Moods;Happy,Happy - angerish"
+                  ";amy45;Moods;Happy,Happy - angerish": {
+                    "pstate": ";amy45;Moods;Happy,Happy - angerish"
                   }
                 },
-                "rcontext": ";accord45;Moods;"
+                "rcontext": ";amy45;Moods;"
               }
             }
           },
@@ -1604,31 +1604,31 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 420,
                         "popen": 420,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   },
-                  ";accord45;wkdays;": {
+                  ";amy45;wkdays;": {
                     "premises": {
-                      ";accord45;wkdays;Sunday": {
-                        "pstate": ";accord45;wkdays;Sunday"
+                      ";amy45;wkdays;Sunday": {
+                        "pstate": ";amy45;wkdays;Sunday"
                       }
                     },
-                    "rcontext": ";accord45;wkdays;"
+                    "rcontext": ";amy45;wkdays;"
                   }
                 }
               },
@@ -1638,23 +1638,23 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 420,
                         "popen": 420,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   }
                 }
               },
@@ -1671,34 +1671,34 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 420,
                         "popen": 420,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   },
-                  ";accord45;yr_month;": {
+                  ";amy45;yr_month;": {
                     "premises": {
-                      ";accord45;yr_month;": {
+                      ";amy45;yr_month;": {
                         "pdivisor": 3,
                         "pnigh": 0,
                         "popen": 0,
-                        "pstate": ";accord45;yr_month;"
+                        "pstate": ";amy45;yr_month;"
                       }
                     },
-                    "rcontext": ";accord45;yr_month;"
+                    "rcontext": ";amy45;yr_month;"
                   }
                 }
               },
@@ -1715,23 +1715,23 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 600,
                         "popen": 600,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   }
                 }
               },
@@ -1748,31 +1748,31 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 480,
                         "popen": 480,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   },
-                  ";accord45;wkdays;": {
+                  ";amy45;wkdays;": {
                     "premises": {
-                      ";accord45;wkdays;Monday": {
-                        "pstate": ";accord45;wkdays;Monday"
+                      ";amy45;wkdays;Monday": {
+                        "pstate": ";amy45;wkdays;Monday"
                       }
                     },
-                    "rcontext": ";accord45;wkdays;"
+                    "rcontext": ";amy45;wkdays;"
                   }
                 }
               },
@@ -1789,31 +1789,31 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 420,
                         "popen": 420,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   },
-                  ";accord45;wkdays;": {
+                  ";amy45;wkdays;": {
                     "premises": {
-                      ";accord45;wkdays;Monday": {
-                        "pstate": ";accord45;wkdays;Monday"
+                      ";amy45;wkdays;Monday": {
+                        "pstate": ";amy45;wkdays;Monday"
                       }
                     },
-                    "rcontext": ";accord45;wkdays;"
+                    "rcontext": ";amy45;wkdays;"
                   }
                 }
               },
@@ -1830,42 +1830,42 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;ced_wk;": {
+                  ";amy45;ced_wk;": {
                     "premises": {
-                      ";accord45;ced_wk;": {
+                      ";amy45;ced_wk;": {
                         "pdivisor": 6,
                         "pnigh": 1,
                         "popen": 1,
-                        "pstate": ";accord45;ced_wk;"
+                        "pstate": ";amy45;ced_wk;"
                       }
                     },
-                    "rcontext": ";accord45;ced_wk;"
+                    "rcontext": ";amy45;ced_wk;"
                   },
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 420,
                         "popen": 420,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   },
-                  ";accord45;wkdays;": {
+                  ";amy45;wkdays;": {
                     "premises": {
-                      ";accord45;wkdays;Monday": {
-                        "pstate": ";accord45;wkdays;Monday"
+                      ";amy45;wkdays;Monday": {
+                        "pstate": ";amy45;wkdays;Monday"
                       }
                     },
-                    "rcontext": ";accord45;wkdays;"
+                    "rcontext": ";amy45;wkdays;"
                   }
                 }
               },
@@ -1882,31 +1882,31 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 420,
                         "popen": 420,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   },
-                  ";accord45;wkdays;": {
+                  ";amy45;wkdays;": {
                     "premises": {
-                      ";accord45;wkdays;Monday": {
-                        "pstate": ";accord45;wkdays;Monday"
+                      ";amy45;wkdays;Monday": {
+                        "pstate": ";amy45;wkdays;Monday"
                       }
                     },
-                    "rcontext": ";accord45;wkdays;"
+                    "rcontext": ";amy45;wkdays;"
                   }
                 }
               },
@@ -1923,42 +1923,42 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 540,
                         "popen": 540,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;month_wk;": {
+                  ";amy45;month_wk;": {
                     "premises": {
-                      ";accord45;month_wk;1st wk": {
-                        "pstate": ";accord45;month_wk;1st wk"
+                      ";amy45;month_wk;1st wk": {
+                        "pstate": ";amy45;month_wk;1st wk"
                       }
                     },
-                    "rcontext": ";accord45;month_wk;"
+                    "rcontext": ";amy45;month_wk;"
                   },
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   },
-                  ";accord45;yr_month;": {
+                  ";amy45;yr_month;": {
                     "premises": {
-                      ";accord45;yr_month;": {
+                      ";amy45;yr_month;": {
                         "pdivisor": 2,
                         "pnigh": 0,
                         "popen": 0,
-                        "pstate": ";accord45;yr_month;"
+                        "pstate": ";amy45;yr_month;"
                       }
                     },
-                    "rcontext": ";accord45;yr_month;"
+                    "rcontext": ";amy45;yr_month;"
                   }
                 }
               },
@@ -1975,31 +1975,31 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 480,
                         "popen": 480,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   },
-                  ";accord45;wkdays;": {
+                  ";amy45;wkdays;": {
                     "premises": {
-                      ";accord45;wkdays;Friday": {
-                        "pstate": ";accord45;wkdays;Friday"
+                      ";amy45;wkdays;Friday": {
+                        "pstate": ";amy45;wkdays;Friday"
                       }
                     },
-                    "rcontext": ";accord45;wkdays;"
+                    "rcontext": ";amy45;wkdays;"
                   }
                 }
               },
@@ -2016,31 +2016,31 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 480,
                         "popen": 480,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   },
-                  ";accord45;wkdays;": {
+                  ";amy45;wkdays;": {
                     "premises": {
-                      ";accord45;wkdays;Friday": {
-                        "pstate": ";accord45;wkdays;Friday"
+                      ";amy45;wkdays;Friday": {
+                        "pstate": ";amy45;wkdays;Friday"
                       }
                     },
-                    "rcontext": ";accord45;wkdays;"
+                    "rcontext": ";amy45;wkdays;"
                   }
                 }
               },
@@ -2057,31 +2057,31 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 540,
                         "popen": 540,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   },
-                  ";accord45;wkdays;": {
+                  ";amy45;wkdays;": {
                     "premises": {
-                      ";accord45;wkdays;Monday": {
-                        "pstate": ";accord45;wkdays;Monday"
+                      ";amy45;wkdays;Monday": {
+                        "pstate": ";amy45;wkdays;Monday"
                       }
                     },
-                    "rcontext": ";accord45;wkdays;"
+                    "rcontext": ";amy45;wkdays;"
                   }
                 }
               },
@@ -2098,31 +2098,31 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 420,
                         "popen": 420,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   },
-                  ";accord45;wkdays;": {
+                  ";amy45;wkdays;": {
                     "premises": {
-                      ";accord45;wkdays;Saturday": {
-                        "pstate": ";accord45;wkdays;Saturday"
+                      ";amy45;wkdays;Saturday": {
+                        "pstate": ";amy45;wkdays;Saturday"
                       }
                     },
-                    "rcontext": ";accord45;wkdays;"
+                    "rcontext": ";amy45;wkdays;"
                   }
                 }
               },
@@ -2139,31 +2139,31 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 420,
                         "popen": 420,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   },
-                  ";accord45;wkdays;": {
+                  ";amy45;wkdays;": {
                     "premises": {
-                      ";accord45;wkdays;Wednesday": {
-                        "pstate": ";accord45;wkdays;Wednesday"
+                      ";amy45;wkdays;Wednesday": {
+                        "pstate": ";amy45;wkdays;Wednesday"
                       }
                     },
-                    "rcontext": ";accord45;wkdays;"
+                    "rcontext": ";amy45;wkdays;"
                   }
                 }
               },
@@ -2172,23 +2172,23 @@
                 "concept_label": "morning cookery clean-up",
                 "mass": 1,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 480,
                         "popen": 480,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   }
                 }
               },
@@ -2205,23 +2205,23 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 360,
                         "popen": 360,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   }
                 }
               },
@@ -2238,31 +2238,31 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 420,
                         "popen": 420,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   },
-                  ";accord45;wkdays;": {
+                  ";amy45;wkdays;": {
                     "premises": {
-                      ";accord45;wkdays;Tuesday": {
-                        "pstate": ";accord45;wkdays;Tuesday"
+                      ";amy45;wkdays;Tuesday": {
+                        "pstate": ";amy45;wkdays;Tuesday"
                       }
                     },
-                    "rcontext": ";accord45;wkdays;"
+                    "rcontext": ";amy45;wkdays;"
                   }
                 }
               },
@@ -2279,31 +2279,31 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 420,
                         "popen": 420,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   },
-                  ";accord45;wkdays;": {
+                  ";amy45;wkdays;": {
                     "premises": {
-                      ";accord45;wkdays;Friday": {
-                        "pstate": ";accord45;wkdays;Friday"
+                      ";amy45;wkdays;Friday": {
+                        "pstate": ";amy45;wkdays;Friday"
                       }
                     },
-                    "rcontext": ";accord45;wkdays;"
+                    "rcontext": ";amy45;wkdays;"
                   }
                 }
               },
@@ -2320,31 +2320,31 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 480,
                         "popen": 480,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   },
-                  ";accord45;wkdays;": {
+                  ";amy45;wkdays;": {
                     "premises": {
-                      ";accord45;wkdays;Monday": {
-                        "pstate": ";accord45;wkdays;Monday"
+                      ";amy45;wkdays;Monday": {
+                        "pstate": ";amy45;wkdays;Monday"
                       }
                     },
-                    "rcontext": ";accord45;wkdays;"
+                    "rcontext": ";amy45;wkdays;"
                   }
                 }
               },
@@ -2361,31 +2361,31 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 420,
                         "popen": 420,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   },
-                  ";accord45;wkdays;": {
+                  ";amy45;wkdays;": {
                     "premises": {
-                      ";accord45;wkdays;Thursday": {
-                        "pstate": ";accord45;wkdays;Thursday"
+                      ";amy45;wkdays;Thursday": {
+                        "pstate": ";amy45;wkdays;Thursday"
                       }
                     },
-                    "rcontext": ";accord45;wkdays;"
+                    "rcontext": ";amy45;wkdays;"
                   }
                 }
               },
@@ -2402,31 +2402,31 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 540,
                         "popen": 540,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   },
-                  ";accord45;wkdays;": {
+                  ";amy45;wkdays;": {
                     "premises": {
-                      ";accord45;wkdays;Monday": {
-                        "pstate": ";accord45;wkdays;Monday"
+                      ";amy45;wkdays;Monday": {
+                        "pstate": ";amy45;wkdays;Monday"
                       }
                     },
-                    "rcontext": ";accord45;wkdays;"
+                    "rcontext": ";amy45;wkdays;"
                   }
                 }
               },
@@ -2443,31 +2443,31 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 540,
                         "popen": 540,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                        "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                      ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
+                        "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   },
-                  ";accord45;wkdays;": {
+                  ";amy45;wkdays;": {
                     "premises": {
-                      ";accord45;wkdays;Monday": {
-                        "pstate": ";accord45;wkdays;Monday"
+                      ";amy45;wkdays;Monday": {
+                        "pstate": ";amy45;wkdays;Monday"
                       }
                     },
-                    "rcontext": ";accord45;wkdays;"
+                    "rcontext": ";amy45;wkdays;"
                   }
                 }
               }
@@ -2476,13 +2476,13 @@
             "concept_label": "cleaning",
             "mass": 1,
             "reasonunits": {
-              ";accord45;Nation-States;": {
+              ";amy45;Nation-States;": {
                 "premises": {
-                  ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
-                    "pstate": ";accord45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
+                  ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX": {
+                    "pstate": ";amy45;Nation-States;USA;Portland; OR;Downtown;Northfield Apt;Apt X4XX"
                   }
                 },
-                "rcontext": ";accord45;Nation-States;"
+                "rcontext": ";amy45;Nation-States;"
               }
             }
           },
@@ -2501,15 +2501,15 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 420,
                         "popen": 420,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   }
                 }
               },
@@ -2526,15 +2526,15 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 420,
                         "popen": 420,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   }
                 }
               },
@@ -2551,26 +2551,26 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 540,
                         "popen": 540,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;yr_month;": {
+                  ";amy45;yr_month;": {
                     "premises": {
-                      ";accord45;yr_month;": {
+                      ";amy45;yr_month;": {
                         "pdivisor": 3,
                         "pnigh": 0,
                         "popen": 0,
-                        "pstate": ";accord45;yr_month;"
+                        "pstate": ";amy45;yr_month;"
                       }
                     },
-                    "rcontext": ";accord45;yr_month;"
+                    "rcontext": ";amy45;yr_month;"
                   }
                 }
               },
@@ -2587,23 +2587,23 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 540,
                         "popen": 540,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;wkdays;": {
+                  ";amy45;wkdays;": {
                     "premises": {
-                      ";accord45;wkdays;Monday": {
-                        "pstate": ";accord45;wkdays;Monday"
+                      ";amy45;wkdays;Monday": {
+                        "pstate": ";amy45;wkdays;Monday"
                       }
                     },
-                    "rcontext": ";accord45;wkdays;"
+                    "rcontext": ";amy45;wkdays;"
                   }
                 }
               },
@@ -2620,15 +2620,15 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 420,
                         "popen": 420,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   }
                 }
               },
@@ -2640,15 +2640,15 @@
                     "concept_label": "I do not be desperate for of I have to exercise",
                     "mass": 1,
                     "reasonunits": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "premises": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "pnigh": 480,
                             "popen": 480,
-                            "pstate": ";accord45;day_minute;"
+                            "pstate": ";amy45;day_minute;"
                           }
                         },
-                        "rcontext": ";accord45;day_minute;"
+                        "rcontext": ";amy45;day_minute;"
                       }
                     }
                   }
@@ -2665,15 +2665,15 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 960,
                         "popen": 960,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   }
                 }
               },
@@ -2682,15 +2682,15 @@
                 "concept_label": "evening multivitamin",
                 "mass": 1,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 1080,
                         "popen": 1080,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   }
                 }
               },
@@ -2707,26 +2707,26 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 540,
                         "popen": 540,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;yr_month;": {
+                  ";amy45;yr_month;": {
                     "premises": {
-                      ";accord45;yr_month;": {
+                      ";amy45;yr_month;": {
                         "pdivisor": 3,
                         "pnigh": 0,
                         "popen": 0,
-                        "pstate": ";accord45;yr_month;"
+                        "pstate": ";amy45;yr_month;"
                       }
                     },
-                    "rcontext": ";accord45;yr_month;"
+                    "rcontext": ";amy45;yr_month;"
                   }
                 }
               },
@@ -2745,23 +2745,23 @@
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "premises": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "pnigh": 480,
                             "popen": 480,
-                            "pstate": ";accord45;day_minute;"
+                            "pstate": ";amy45;day_minute;"
                           }
                         },
-                        "rcontext": ";accord45;day_minute;"
+                        "rcontext": ";amy45;day_minute;"
                       },
-                      ";accord45;wkdays;": {
+                      ";amy45;wkdays;": {
                         "premises": {
-                          ";accord45;wkdays;Saturday": {
-                            "pstate": ";accord45;wkdays;Saturday"
+                          ";amy45;wkdays;Saturday": {
+                            "pstate": ";amy45;wkdays;Saturday"
                           }
                         },
-                        "rcontext": ";accord45;wkdays;"
+                        "rcontext": ";amy45;wkdays;"
                       }
                     }
                   },
@@ -2793,23 +2793,23 @@
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "premises": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "pnigh": 480,
                             "popen": 480,
-                            "pstate": ";accord45;day_minute;"
+                            "pstate": ";amy45;day_minute;"
                           }
                         },
-                        "rcontext": ";accord45;day_minute;"
+                        "rcontext": ";amy45;day_minute;"
                       },
-                      ";accord45;wkdays;": {
+                      ";amy45;wkdays;": {
                         "premises": {
-                          ";accord45;wkdays;Monday": {
-                            "pstate": ";accord45;wkdays;Monday"
+                          ";amy45;wkdays;Monday": {
+                            "pstate": ";amy45;wkdays;Monday"
                           }
                         },
-                        "rcontext": ";accord45;wkdays;"
+                        "rcontext": ";amy45;wkdays;"
                       }
                     }
                   },
@@ -2818,23 +2818,23 @@
                     "concept_label": "core and squats",
                     "mass": 1,
                     "reasonunits": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "premises": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "pnigh": 482,
                             "popen": 482,
-                            "pstate": ";accord45;day_minute;"
+                            "pstate": ";amy45;day_minute;"
                           }
                         },
-                        "rcontext": ";accord45;day_minute;"
+                        "rcontext": ";amy45;day_minute;"
                       },
-                      ";accord45;wkdays;": {
+                      ";amy45;wkdays;": {
                         "premises": {
-                          ";accord45;wkdays;Friday": {
-                            "pstate": ";accord45;wkdays;Friday"
+                          ";amy45;wkdays;Friday": {
+                            "pstate": ";amy45;wkdays;Friday"
                           }
                         },
-                        "rcontext": ";accord45;wkdays;"
+                        "rcontext": ";amy45;wkdays;"
                       }
                     }
                   },
@@ -2851,23 +2851,23 @@
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "premises": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "pnigh": 480,
                             "popen": 480,
-                            "pstate": ";accord45;day_minute;"
+                            "pstate": ";amy45;day_minute;"
                           }
                         },
-                        "rcontext": ";accord45;day_minute;"
+                        "rcontext": ";amy45;day_minute;"
                       },
-                      ";accord45;wkdays;": {
+                      ";amy45;wkdays;": {
                         "premises": {
-                          ";accord45;wkdays;Wednesday": {
-                            "pstate": ";accord45;wkdays;Wednesday"
+                          ";amy45;wkdays;Wednesday": {
+                            "pstate": ";amy45;wkdays;Wednesday"
                           }
                         },
-                        "rcontext": ";accord45;wkdays;"
+                        "rcontext": ";amy45;wkdays;"
                       }
                     }
                   },
@@ -2884,13 +2884,13 @@
                     "concept_label": "rest",
                     "mass": 1,
                     "reasonunits": {
-                      ";accord45;wkdays;": {
+                      ";amy45;wkdays;": {
                         "premises": {
-                          ";accord45;wkdays;Sunday": {
-                            "pstate": ";accord45;wkdays;Sunday"
+                          ";amy45;wkdays;Sunday": {
+                            "pstate": ";amy45;wkdays;Sunday"
                           }
                         },
-                        "rcontext": ";accord45;wkdays;"
+                        "rcontext": ";amy45;wkdays;"
                       }
                     }
                   },
@@ -2922,23 +2922,23 @@
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "premises": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "pnigh": 480,
                             "popen": 480,
-                            "pstate": ";accord45;day_minute;"
+                            "pstate": ";amy45;day_minute;"
                           }
                         },
-                        "rcontext": ";accord45;day_minute;"
+                        "rcontext": ";amy45;day_minute;"
                       },
-                      ";accord45;wkdays;": {
+                      ";amy45;wkdays;": {
                         "premises": {
-                          ";accord45;wkdays;Tuesday": {
-                            "pstate": ";accord45;wkdays;Tuesday"
+                          ";amy45;wkdays;Tuesday": {
+                            "pstate": ";amy45;wkdays;Tuesday"
                           }
                         },
-                        "rcontext": ";accord45;wkdays;"
+                        "rcontext": ";amy45;wkdays;"
                       }
                     }
                   },
@@ -2955,23 +2955,23 @@
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "premises": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "pnigh": 480,
                             "popen": 480,
-                            "pstate": ";accord45;day_minute;"
+                            "pstate": ";amy45;day_minute;"
                           }
                         },
-                        "rcontext": ";accord45;day_minute;"
+                        "rcontext": ";amy45;day_minute;"
                       },
-                      ";accord45;wkdays;": {
+                      ";amy45;wkdays;": {
                         "premises": {
-                          ";accord45;wkdays;Thursday": {
-                            "pstate": ";accord45;wkdays;Thursday"
+                          ";amy45;wkdays;Thursday": {
+                            "pstate": ";amy45;wkdays;Thursday"
                           }
                         },
-                        "rcontext": ";accord45;wkdays;"
+                        "rcontext": ";amy45;wkdays;"
                       }
                     }
                   }
@@ -2993,15 +2993,15 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 420,
                         "popen": 420,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   }
                 }
               },
@@ -3018,23 +3018,23 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 540,
                         "popen": 540,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;wkdays;": {
+                  ";amy45;wkdays;": {
                     "premises": {
-                      ";accord45;wkdays;Monday": {
-                        "pstate": ";accord45;wkdays;Monday"
+                      ";amy45;wkdays;Monday": {
+                        "pstate": ";amy45;wkdays;Monday"
                       }
                     },
-                    "rcontext": ";accord45;wkdays;"
+                    "rcontext": ";amy45;wkdays;"
                   }
                 }
               },
@@ -3051,15 +3051,15 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 420,
                         "popen": 420,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   }
                 }
               },
@@ -3076,23 +3076,23 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 540,
                         "popen": 540,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;wkdays;": {
+                  ";amy45;wkdays;": {
                     "premises": {
-                      ";accord45;wkdays;Monday": {
-                        "pstate": ";accord45;wkdays;Monday"
+                      ";amy45;wkdays;Monday": {
+                        "pstate": ";amy45;wkdays;Monday"
                       }
                     },
-                    "rcontext": ";accord45;wkdays;"
+                    "rcontext": ";amy45;wkdays;"
                   }
                 }
               }
@@ -3117,23 +3117,23 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 540,
                         "popen": 540,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;month_wk;": {
+                  ";amy45;month_wk;": {
                     "premises": {
-                      ";accord45;month_wk;1st wk": {
-                        "pstate": ";accord45;month_wk;1st wk"
+                      ";amy45;month_wk;1st wk": {
+                        "pstate": ";amy45;month_wk;1st wk"
                       }
                     },
-                    "rcontext": ";accord45;month_wk;"
+                    "rcontext": ";amy45;month_wk;"
                   }
                 }
               },
@@ -3150,23 +3150,23 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 540,
                         "popen": 540,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;month_wk;": {
+                  ";amy45;month_wk;": {
                     "premises": {
-                      ";accord45;month_wk;1st wk": {
-                        "pstate": ";accord45;month_wk;1st wk"
+                      ";amy45;month_wk;1st wk": {
+                        "pstate": ";amy45;month_wk;1st wk"
                       }
                     },
-                    "rcontext": ";accord45;month_wk;"
+                    "rcontext": ";amy45;month_wk;"
                   }
                 }
               },
@@ -3183,23 +3183,23 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 540,
                         "popen": 540,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;month_wk;": {
+                  ";amy45;month_wk;": {
                     "premises": {
-                      ";accord45;month_wk;1st wk": {
-                        "pstate": ";accord45;month_wk;1st wk"
+                      ";amy45;month_wk;1st wk": {
+                        "pstate": ";amy45;month_wk;1st wk"
                       }
                     },
-                    "rcontext": ";accord45;month_wk;"
+                    "rcontext": ";amy45;month_wk;"
                   }
                 }
               },
@@ -3216,23 +3216,23 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 540,
                         "popen": 540,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;wkdays;": {
+                  ";amy45;wkdays;": {
                     "premises": {
-                      ";accord45;wkdays;Tuesday": {
-                        "pstate": ";accord45;wkdays;Tuesday"
+                      ";amy45;wkdays;Tuesday": {
+                        "pstate": ";amy45;wkdays;Tuesday"
                       }
                     },
-                    "rcontext": ";accord45;wkdays;"
+                    "rcontext": ";amy45;wkdays;"
                   }
                 }
               }
@@ -3367,13 +3367,13 @@
             "concept_label": "keep up with friends",
             "mass": 1,
             "reasonunits": {
-              ";accord45;Interweb;": {
+              ";amy45;Interweb;": {
                 "premises": {
-                  ";accord45;Interweb;Faaceboook": {
-                    "pstate": ";accord45;Interweb;Faaceboook"
+                  ";amy45;Interweb;Faaceboook": {
+                    "pstate": ";amy45;Interweb;Faaceboook"
                   }
                 },
-                "rcontext": ";accord45;Interweb;"
+                "rcontext": ";amy45;Interweb;"
               }
             }
           },
@@ -3393,42 +3393,42 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;ced_wk;": {
+                  ";amy45;ced_wk;": {
                     "premises": {
-                      ";accord45;ced_wk;": {
+                      ";amy45;ced_wk;": {
                         "pdivisor": 2,
                         "pnigh": 1,
                         "popen": 1,
-                        "pstate": ";accord45;ced_wk;"
+                        "pstate": ";amy45;ced_wk;"
                       }
                     },
-                    "rcontext": ";accord45;ced_wk;"
+                    "rcontext": ";amy45;ced_wk;"
                   },
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 241,
                         "popen": 240,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland OR": {
-                        "pstate": ";accord45;Nation-States;USA;Portland OR"
+                      ";amy45;Nation-States;USA;Portland OR": {
+                        "pstate": ";amy45;Nation-States;USA;Portland OR"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   },
-                  ";accord45;wkdays;": {
+                  ";amy45;wkdays;": {
                     "premises": {
-                      ";accord45;wkdays;Friday": {
-                        "pstate": ";accord45;wkdays;Friday"
+                      ";amy45;wkdays;Friday": {
+                        "pstate": ";amy45;wkdays;Friday"
                       }
                     },
-                    "rcontext": ";accord45;wkdays;"
+                    "rcontext": ";amy45;wkdays;"
                   }
                 }
               },
@@ -3445,34 +3445,34 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 541,
                         "popen": 540,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland OR": {
-                        "pstate": ";accord45;Nation-States;USA;Portland OR"
+                      ";amy45;Nation-States;USA;Portland OR": {
+                        "pstate": ";amy45;Nation-States;USA;Portland OR"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   },
-                  ";accord45;yr_month;": {
+                  ";amy45;yr_month;": {
                     "premises": {
-                      ";accord45;yr_month;": {
+                      ";amy45;yr_month;": {
                         "pdivisor": 2,
                         "pnigh": 0,
                         "popen": 0,
-                        "pstate": ";accord45;yr_month;"
+                        "pstate": ";amy45;yr_month;"
                       }
                     },
-                    "rcontext": ";accord45;yr_month;"
+                    "rcontext": ";amy45;yr_month;"
                   }
                 }
               },
@@ -3482,23 +3482,23 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 1005,
                         "popen": 1005,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;Nation-States;": {
+                  ";amy45;Nation-States;": {
                     "premises": {
-                      ";accord45;Nation-States;USA;Portland OR": {
-                        "pstate": ";accord45;Nation-States;USA;Portland OR"
+                      ";amy45;Nation-States;USA;Portland OR": {
+                        "pstate": ";amy45;Nation-States;USA;Portland OR"
                       }
                     },
-                    "rcontext": ";accord45;Nation-States;"
+                    "rcontext": ";amy45;Nation-States;"
                   }
                 }
               }
@@ -3507,13 +3507,13 @@
             "concept_label": "responsible for kids",
             "mass": 1,
             "reasonunits": {
-              ";accord45;Nation-States;": {
+              ";amy45;Nation-States;": {
                 "premises": {
-                  ";accord45;Nation-States;USA;Portland OR": {
-                    "pstate": ";accord45;Nation-States;USA;Portland OR"
+                  ";amy45;Nation-States;USA;Portland OR": {
+                    "pstate": ";amy45;Nation-States;USA;Portland OR"
                   }
                 },
-                "rcontext": ";accord45;Nation-States;"
+                "rcontext": ";amy45;Nation-States;"
               }
             }
           },
@@ -3530,23 +3530,23 @@
             "mass": 1,
             "task": true,
             "reasonunits": {
-              ";accord45;day_minute;": {
+              ";amy45;day_minute;": {
                 "premises": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "pnigh": 425,
                     "popen": 420,
-                    "pstate": ";accord45;day_minute;"
+                    "pstate": ";amy45;day_minute;"
                   }
                 },
-                "rcontext": ";accord45;day_minute;"
+                "rcontext": ";amy45;day_minute;"
               },
-              ";accord45;Moods;": {
+              ";amy45;Moods;": {
                 "premises": {
-                  ";accord45;Moods;Bllod Meridan by Cormac": {
-                    "pstate": ";accord45;Moods;Bllod Meridan by Cormac"
+                  ";amy45;Moods;Bllod Meridan by Cormac": {
+                    "pstate": ";amy45;Moods;Bllod Meridan by Cormac"
                   }
                 },
-                "rcontext": ";accord45;Moods;"
+                "rcontext": ";amy45;Moods;"
               }
             }
           }
@@ -3591,13 +3591,13 @@
                 "concept_label": "Ask Chuck monthly what I can do",
                 "mass": 1,
                 "reasonunits": {
-                  ";accord45;Aaron Donald objects effected by him;": {
+                  ";amy45;Aaron Donald objects effected by him;": {
                     "premises": {
-                      ";accord45;Aaron Donald objects effected by him;interesting": {
-                        "pstate": ";accord45;Aaron Donald objects effected by him;interesting"
+                      ";amy45;Aaron Donald objects effected by him;interesting": {
+                        "pstate": ";amy45;Aaron Donald objects effected by him;interesting"
                       }
                     },
-                    "rcontext": ";accord45;Aaron Donald objects effected by him;"
+                    "rcontext": ";amy45;Aaron Donald objects effected by him;"
                   }
                 }
               }
@@ -3613,13 +3613,13 @@
             "concept_label": "Aarons friends are desperate for of housing support",
             "mass": 1,
             "reasonunits": {
-              ";accord45;Aaron Donald objects effected by him;": {
+              ";amy45;Aaron Donald objects effected by him;": {
                 "premises": {
-                  ";accord45;Aaron Donald objects effected by him;interesting": {
-                    "pstate": ";accord45;Aaron Donald objects effected by him;interesting"
+                  ";amy45;Aaron Donald objects effected by him;interesting": {
+                    "pstate": ";amy45;Aaron Donald objects effected by him;interesting"
                   }
                 },
-                "rcontext": ";accord45;Aaron Donald objects effected by him;"
+                "rcontext": ";amy45;Aaron Donald objects effected by him;"
               }
             }
           },
@@ -3631,31 +3631,31 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;Aaron Donald objects effected by him;": {
+                  ";amy45;Aaron Donald objects effected by him;": {
                     "premises": {
-                      ";accord45;Aaron Donald objects effected by him;interesting": {
-                        "pstate": ";accord45;Aaron Donald objects effected by him;interesting"
+                      ";amy45;Aaron Donald objects effected by him;interesting": {
+                        "pstate": ";amy45;Aaron Donald objects effected by him;interesting"
                       }
                     },
-                    "rcontext": ";accord45;Aaron Donald objects effected by him;"
+                    "rcontext": ";amy45;Aaron Donald objects effected by him;"
                   },
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 660,
                         "popen": 660,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;wkdays;": {
+                  ";amy45;wkdays;": {
                     "premises": {
-                      ";accord45;wkdays;Monday": {
-                        "pstate": ";accord45;wkdays;Monday"
+                      ";amy45;wkdays;Monday": {
+                        "pstate": ";amy45;wkdays;Monday"
                       }
                     },
-                    "rcontext": ";accord45;wkdays;"
+                    "rcontext": ";amy45;wkdays;"
                   }
                 }
               }
@@ -3671,13 +3671,13 @@
             "concept_label": "develop D&B software",
             "mass": 1,
             "reasonunits": {
-              ";accord45;Aaron Donald objects effected by him;": {
+              ";amy45;Aaron Donald objects effected by him;": {
                 "premises": {
-                  ";accord45;Aaron Donald objects effected by him;interesting": {
-                    "pstate": ";accord45;Aaron Donald objects effected by him;interesting"
+                  ";amy45;Aaron Donald objects effected by him;interesting": {
+                    "pstate": ";amy45;Aaron Donald objects effected by him;interesting"
                   }
                 },
-                "rcontext": ";accord45;Aaron Donald objects effected by him;"
+                "rcontext": ";amy45;Aaron Donald objects effected by him;"
               }
             }
           },
@@ -3697,42 +3697,42 @@
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
-                  ";accord45;Aaron Donald objects effected by him;": {
+                  ";amy45;Aaron Donald objects effected by him;": {
                     "premises": {
-                      ";accord45;Aaron Donald objects effected by him;interesting": {
-                        "pstate": ";accord45;Aaron Donald objects effected by him;interesting"
+                      ";amy45;Aaron Donald objects effected by him;interesting": {
+                        "pstate": ";amy45;Aaron Donald objects effected by him;interesting"
                       }
                     },
-                    "rcontext": ";accord45;Aaron Donald objects effected by him;"
+                    "rcontext": ";amy45;Aaron Donald objects effected by him;"
                   },
-                  ";accord45;ced_wk;": {
+                  ";amy45;ced_wk;": {
                     "premises": {
-                      ";accord45;ced_wk;": {
+                      ";amy45;ced_wk;": {
                         "pdivisor": 2,
                         "pnigh": 0,
                         "popen": 0,
-                        "pstate": ";accord45;ced_wk;"
+                        "pstate": ";amy45;ced_wk;"
                       }
                     },
-                    "rcontext": ";accord45;ced_wk;"
+                    "rcontext": ";amy45;ced_wk;"
                   },
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "premises": {
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "pnigh": 600,
                         "popen": 600,
-                        "pstate": ";accord45;day_minute;"
+                        "pstate": ";amy45;day_minute;"
                       }
                     },
-                    "rcontext": ";accord45;day_minute;"
+                    "rcontext": ";amy45;day_minute;"
                   },
-                  ";accord45;wkdays;": {
+                  ";amy45;wkdays;": {
                     "premises": {
-                      ";accord45;wkdays;Friday": {
-                        "pstate": ";accord45;wkdays;Friday"
+                      ";amy45;wkdays;Friday": {
+                        "pstate": ";amy45;wkdays;Friday"
                       }
                     },
-                    "rcontext": ";accord45;wkdays;"
+                    "rcontext": ";amy45;wkdays;"
                   }
                 }
               }
@@ -3741,13 +3741,13 @@
             "concept_label": "donate to pro-climate committees",
             "mass": 1,
             "reasonunits": {
-              ";accord45;Aaron Donald objects effected by him;": {
+              ";amy45;Aaron Donald objects effected by him;": {
                 "premises": {
-                  ";accord45;Aaron Donald objects effected by him;interesting": {
-                    "pstate": ";accord45;Aaron Donald objects effected by him;interesting"
+                  ";amy45;Aaron Donald objects effected by him;interesting": {
+                    "pstate": ";amy45;Aaron Donald objects effected by him;interesting"
                   }
                 },
-                "rcontext": ";accord45;Aaron Donald objects effected by him;"
+                "rcontext": ";amy45;Aaron Donald objects effected by him;"
               }
             }
           },
@@ -3757,13 +3757,13 @@
             "mass": 1,
             "task": true,
             "reasonunits": {
-              ";accord45;Aaron Donald objects effected by him;": {
+              ";amy45;Aaron Donald objects effected by him;": {
                 "premises": {
-                  ";accord45;Aaron Donald objects effected by him;interesting": {
-                    "pstate": ";accord45;Aaron Donald objects effected by him;interesting"
+                  ";amy45;Aaron Donald objects effected by him;interesting": {
+                    "pstate": ";amy45;Aaron Donald objects effected by him;interesting"
                   }
                 },
-                "rcontext": ";accord45;Aaron Donald objects effected by him;"
+                "rcontext": ";amy45;Aaron Donald objects effected by him;"
               }
             }
           },
@@ -3785,23 +3785,23 @@
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
-                      ";accord45;Aaron Donald objects effected by him;": {
+                      ";amy45;Aaron Donald objects effected by him;": {
                         "premises": {
-                          ";accord45;Aaron Donald objects effected by him;interesting": {
-                            "pstate": ";accord45;Aaron Donald objects effected by him;interesting"
+                          ";amy45;Aaron Donald objects effected by him;interesting": {
+                            "pstate": ";amy45;Aaron Donald objects effected by him;interesting"
                           }
                         },
-                        "rcontext": ";accord45;Aaron Donald objects effected by him;"
+                        "rcontext": ";amy45;Aaron Donald objects effected by him;"
                       },
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "premises": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "pnigh": 669,
                             "popen": 666,
-                            "pstate": ";accord45;day_minute;"
+                            "pstate": ";amy45;day_minute;"
                           }
                         },
-                        "rcontext": ";accord45;day_minute;"
+                        "rcontext": ";amy45;day_minute;"
                       }
                     }
                   },
@@ -3823,34 +3823,34 @@
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
-                      ";accord45;Aaron Donald objects effected by him;": {
+                      ";amy45;Aaron Donald objects effected by him;": {
                         "premises": {
-                          ";accord45;Aaron Donald objects effected by him;interesting": {
-                            "pstate": ";accord45;Aaron Donald objects effected by him;interesting"
+                          ";amy45;Aaron Donald objects effected by him;interesting": {
+                            "pstate": ";amy45;Aaron Donald objects effected by him;interesting"
                           }
                         },
-                        "rcontext": ";accord45;Aaron Donald objects effected by him;"
+                        "rcontext": ";amy45;Aaron Donald objects effected by him;"
                       },
-                      ";accord45;day_minute;": {
+                      ";amy45;day_minute;": {
                         "premises": {
-                          ";accord45;day_minute;": {
+                          ";amy45;day_minute;": {
                             "pnigh": 480,
                             "popen": 480,
-                            "pstate": ";accord45;day_minute;"
+                            "pstate": ";amy45;day_minute;"
                           }
                         },
-                        "rcontext": ";accord45;day_minute;"
+                        "rcontext": ";amy45;day_minute;"
                       },
-                      ";accord45;yr_month;": {
+                      ";amy45;yr_month;": {
                         "premises": {
-                          ";accord45;yr_month;": {
+                          ";amy45;yr_month;": {
                             "pdivisor": 1,
                             "pnigh": 0,
                             "popen": 0,
-                            "pstate": ";accord45;yr_month;"
+                            "pstate": ";amy45;yr_month;"
                           }
                         },
-                        "rcontext": ";accord45;yr_month;"
+                        "rcontext": ";amy45;yr_month;"
                       }
                     }
                   }
@@ -3866,13 +3866,13 @@
                 "concept_label": "sympathetic receptive to David",
                 "mass": 1,
                 "reasonunits": {
-                  ";accord45;Aaron Donald objects effected by him;": {
+                  ";amy45;Aaron Donald objects effected by him;": {
                     "premises": {
-                      ";accord45;Aaron Donald objects effected by him;interesting": {
-                        "pstate": ";accord45;Aaron Donald objects effected by him;interesting"
+                      ";amy45;Aaron Donald objects effected by him;interesting": {
+                        "pstate": ";amy45;Aaron Donald objects effected by him;interesting"
                       }
                     },
-                    "rcontext": ";accord45;Aaron Donald objects effected by him;"
+                    "rcontext": ";amy45;Aaron Donald objects effected by him;"
                   }
                 }
               }
@@ -3881,13 +3881,13 @@
             "concept_label": "sympathetic receptive",
             "mass": 1,
             "reasonunits": {
-              ";accord45;Aaron Donald objects effected by him;": {
+              ";amy45;Aaron Donald objects effected by him;": {
                 "premises": {
-                  ";accord45;Aaron Donald objects effected by him;interesting": {
-                    "pstate": ";accord45;Aaron Donald objects effected by him;interesting"
+                  ";amy45;Aaron Donald objects effected by him;interesting": {
+                    "pstate": ";amy45;Aaron Donald objects effected by him;interesting"
                   }
                 },
-                "rcontext": ";accord45;Aaron Donald objects effected by him;"
+                "rcontext": ";amy45;Aaron Donald objects effected by him;"
               }
             }
           },
@@ -3906,21 +3906,21 @@
                 "concept_label": "write letters about Climate Death to congressman",
                 "mass": 1,
                 "reasonunits": {
-                  ";accord45;Aaron Donald objects effected by him;": {
+                  ";amy45;Aaron Donald objects effected by him;": {
                     "premises": {
-                      ";accord45;Aaron Donald objects effected by him;interesting": {
-                        "pstate": ";accord45;Aaron Donald objects effected by him;interesting"
+                      ";amy45;Aaron Donald objects effected by him;interesting": {
+                        "pstate": ";amy45;Aaron Donald objects effected by him;interesting"
                       }
                     },
-                    "rcontext": ";accord45;Aaron Donald objects effected by him;"
+                    "rcontext": ";amy45;Aaron Donald objects effected by him;"
                   },
-                  ";accord45;wkdays;": {
+                  ";amy45;wkdays;": {
                     "premises": {
-                      ";accord45;wkdays;Friday": {
-                        "pstate": ";accord45;wkdays;Friday"
+                      ";amy45;wkdays;Friday": {
+                        "pstate": ";amy45;wkdays;Friday"
                       }
                     },
-                    "rcontext": ";accord45;wkdays;"
+                    "rcontext": ";amy45;wkdays;"
                   }
                 }
               }
@@ -3929,13 +3929,13 @@
             "concept_label": "write letters to reps",
             "mass": 1,
             "reasonunits": {
-              ";accord45;Aaron Donald objects effected by him;": {
+              ";amy45;Aaron Donald objects effected by him;": {
                 "premises": {
-                  ";accord45;Aaron Donald objects effected by him;interesting": {
-                    "pstate": ";accord45;Aaron Donald objects effected by him;interesting"
+                  ";amy45;Aaron Donald objects effected by him;interesting": {
+                    "pstate": ";amy45;Aaron Donald objects effected by him;interesting"
                   }
                 },
-                "rcontext": ";accord45;Aaron Donald objects effected by him;"
+                "rcontext": ";amy45;Aaron Donald objects effected by him;"
               }
             }
           }
@@ -3961,13 +3961,13 @@
         "concept_label": "D&B",
         "mass": 1,
         "reasonunits": {
-          ";accord45;Aaron Donald objects effected by him;": {
+          ";amy45;Aaron Donald objects effected by him;": {
             "premises": {
-              ";accord45;Aaron Donald objects effected by him;interesting": {
-                "pstate": ";accord45;Aaron Donald objects effected by him;interesting"
+              ";amy45;Aaron Donald objects effected by him;interesting": {
+                "pstate": ";amy45;Aaron Donald objects effected by him;interesting"
               }
             },
-            "rcontext": ";accord45;Aaron Donald objects effected by him;"
+            "rcontext": ";amy45;Aaron Donald objects effected by him;"
           }
         }
       },
@@ -3982,11 +3982,11 @@
         "close": 1439,
         "concept_label": "day_minute",
         "factunits": {
-          ";accord45;day_minute;": {
-            "fcontext": ";accord45;day_minute;",
+          ";amy45;day_minute;": {
+            "fcontext": ";amy45;day_minute;",
             "fnigh": 59,
             "fopen": 5,
-            "fstate": ";accord45;day_minute;"
+            "fstate": ";amy45;day_minute;"
           }
         },
         "mass": 40
@@ -4001,23 +4001,23 @@
             "mass": 1,
             "task": true,
             "reasonunits": {
-              ";accord45;day_minute;": {
+              ";amy45;day_minute;": {
                 "premises": {
-                  ";accord45;day_minute;": {
+                  ";amy45;day_minute;": {
                     "pnigh": 480,
                     "popen": 480,
-                    "pstate": ";accord45;day_minute;"
+                    "pstate": ";amy45;day_minute;"
                   }
                 },
-                "rcontext": ";accord45;day_minute;"
+                "rcontext": ";amy45;day_minute;"
               },
-              ";accord45;wkdays;": {
+              ";amy45;wkdays;": {
                 "premises": {
-                  ";accord45;wkdays;Friday": {
-                    "pstate": ";accord45;wkdays;Friday"
+                  ";amy45;wkdays;Friday": {
+                    "pstate": ";amy45;wkdays;Friday"
                   }
                 },
-                "rcontext": ";accord45;wkdays;"
+                "rcontext": ";amy45;wkdays;"
               }
             }
           }
@@ -4026,15 +4026,15 @@
         "concept_label": "Freelancing",
         "mass": 1,
         "reasonunits": {
-          ";accord45;day_minute;": {
+          ";amy45;day_minute;": {
             "premises": {
-              ";accord45;day_minute;": {
+              ";amy45;day_minute;": {
                 "pnigh": 1019,
                 "popen": 540,
-                "pstate": ";accord45;day_minute;"
+                "pstate": ";amy45;day_minute;"
               }
             },
-            "rcontext": ";accord45;day_minute;"
+            "rcontext": ";amy45;day_minute;"
           }
         }
       },
@@ -4293,13 +4293,13 @@
             "concept_label": "check on m33",
             "mass": 1,
             "reasonunits": {
-              ";accord45;Moods;": {
+              ";amy45;Moods;": {
                 "premises": {
-                  ";accord45;Moods;Happy": {
-                    "pstate": ";accord45;Moods;Happy"
+                  ";amy45;Moods;Happy": {
+                    "pstate": ";amy45;Moods;Happy"
                   }
                 },
-                "rcontext": ";accord45;Moods;"
+                "rcontext": ";amy45;Moods;"
               }
             }
           },
@@ -4308,13 +4308,13 @@
             "concept_label": "contemplate the disc",
             "mass": 1,
             "reasonunits": {
-              ";accord45;No Movie playing;": {
+              ";amy45;No Movie playing;": {
                 "premises": {
-                  ";accord45;No Movie playing,Big Lewbwski": {
-                    "pstate": ";accord45;No Movie playing,Big Lewbwski"
+                  ";amy45;No Movie playing,Big Lewbwski": {
+                    "pstate": ";amy45;No Movie playing,Big Lewbwski"
                   }
                 },
-                "rcontext": ";accord45;No Movie playing;"
+                "rcontext": ";amy45;No Movie playing;"
               }
             }
           },
@@ -4325,13 +4325,13 @@
                 "concept_label": "check PSU mini",
                 "mass": 1,
                 "reasonunits": {
-                  ";accord45;Moods;": {
+                  ";amy45;Moods;": {
                     "premises": {
-                      ";accord45;Moods;Happy": {
-                        "pstate": ";accord45;Moods;Happy"
+                      ";amy45;Moods;Happy": {
+                        "pstate": ";amy45;Moods;Happy"
                       }
                     },
-                    "rcontext": ";accord45;Moods;"
+                    "rcontext": ";amy45;Moods;"
                   }
                 }
               }
@@ -4340,13 +4340,13 @@
             "concept_label": "playing ultimate",
             "mass": 1,
             "reasonunits": {
-              ";accord45;Moods;": {
+              ";amy45;Moods;": {
                 "premises": {
-                  ";accord45;Moods;Happy": {
-                    "pstate": ";accord45;Moods;Happy"
+                  ";amy45;Moods;Happy": {
+                    "pstate": ";amy45;Moods;Happy"
                   }
                 },
-                "rcontext": ";accord45;Moods;"
+                "rcontext": ";amy45;Moods;"
               }
             }
           },
@@ -4355,13 +4355,13 @@
             "concept_label": "relaxing",
             "mass": 1,
             "reasonunits": {
-              ";accord45;No Movie playing;": {
+              ";amy45;No Movie playing;": {
                 "premises": {
-                  ";accord45;No Movie playing,Star Wars eps IV": {
-                    "pstate": ";accord45;No Movie playing,Star Wars eps IV"
+                  ";amy45;No Movie playing,Star Wars eps IV": {
+                    "pstate": ";amy45;No Movie playing,Star Wars eps IV"
                   }
                 },
-                "rcontext": ";accord45;No Movie playing;"
+                "rcontext": ";amy45;No Movie playing;"
               }
             }
           }
@@ -4370,13 +4370,13 @@
         "concept_label": "Ultimate Frisbee",
         "mass": 1,
         "reasonunits": {
-          ";accord45;Moods;": {
+          ";amy45;Moods;": {
             "premises": {
-              ";accord45;Moods;Happy": {
-                "pstate": ";accord45;Moods;Happy"
+              ";amy45;Moods;Happy": {
+                "pstate": ";amy45;Moods;Happy"
               }
             },
-            "rcontext": ";accord45;Moods;"
+            "rcontext": ";amy45;Moods;"
           }
         }
       },
@@ -4390,13 +4390,13 @@
                 "concept_label": "animate",
                 "mass": 1,
                 "reasonunits": {
-                  ";accord45;WaterExistence;": {
+                  ";amy45;WaterExistence;": {
                     "premises": {
-                      ";accord45;WaterExistence,Williamette WaterShed,East Side of Watershed,flat": {
-                        "pstate": ";accord45;WaterExistence,Williamette WaterShed,East Side of Watershed,flat"
+                      ";amy45;WaterExistence,Williamette WaterShed,East Side of Watershed,flat": {
+                        "pstate": ";amy45;WaterExistence,Williamette WaterShed,East Side of Watershed,flat"
                       }
                     },
-                    "rcontext": ";accord45;WaterExistence;"
+                    "rcontext": ";amy45;WaterExistence;"
                   }
                 }
               },
@@ -4405,13 +4405,13 @@
                 "concept_label": "bike around",
                 "mass": 1,
                 "reasonunits": {
-                  ";accord45;WaterExistence;": {
+                  ";amy45;WaterExistence;": {
                     "premises": {
-                      ";accord45;WaterExistence,Williamette WaterShed,East Side of Watershed": {
-                        "pstate": ";accord45;WaterExistence,Williamette WaterShed,East Side of Watershed"
+                      ";amy45;WaterExistence,Williamette WaterShed,East Side of Watershed": {
+                        "pstate": ";amy45;WaterExistence,Williamette WaterShed,East Side of Watershed"
                       }
                     },
-                    "rcontext": ";accord45;WaterExistence;"
+                    "rcontext": ";amy45;WaterExistence;"
                   }
                 }
               },
@@ -4420,13 +4420,13 @@
                 "concept_label": "Go climbing at east Circuit",
                 "mass": 1,
                 "reasonunits": {
-                  ";accord45;WaterExistence;": {
+                  ";amy45;WaterExistence;": {
                     "premises": {
-                      ";accord45;WaterExistence,Williamette WaterShed,West side of Watershed": {
-                        "pstate": ";accord45;WaterExistence,Williamette WaterShed,West side of Watershed"
+                      ";amy45;WaterExistence,Williamette WaterShed,West side of Watershed": {
+                        "pstate": ";amy45;WaterExistence,Williamette WaterShed,West side of Watershed"
                       }
                     },
-                    "rcontext": ";accord45;WaterExistence;"
+                    "rcontext": ";amy45;WaterExistence;"
                   }
                 }
               }
@@ -4435,13 +4435,13 @@
             "concept_label": "Swimming in Williamette watershed",
             "mass": 1,
             "reasonunits": {
-              ";accord45;WaterExistence;": {
+              ";amy45;WaterExistence;": {
                 "premises": {
-                  ";accord45;WaterExistence,Williamette WaterShed": {
-                    "pstate": ";accord45;WaterExistence,Williamette WaterShed"
+                  ";amy45;WaterExistence,Williamette WaterShed": {
+                    "pstate": ";amy45;WaterExistence,Williamette WaterShed"
                   }
                 },
-                "rcontext": ";accord45;WaterExistence;"
+                "rcontext": ";amy45;WaterExistence;"
               }
             }
           }
@@ -4603,24 +4603,24 @@
       }
     },
     "_uid": 1,
-    "concept_label": "accord45",
+    "concept_label": "amy45",
     "factunits": {
-      ";accord45;day_hr": {
-        "fcontext": ";accord45;day_hr",
+      ";amy45;day_hr": {
+        "fcontext": ";amy45;day_hr",
         "fnigh": 23,
         "fopen": 0,
-        "fstate": ";accord45;day_hr"
+        "fstate": ";amy45;day_hr"
       },
-      ";accord45;day_minute;": {
-        "fcontext": ";accord45;day_minute;",
+      ";amy45;day_minute;": {
+        "fcontext": ";amy45;day_minute;",
         "fnigh": 59,
         "fopen": 0,
-        "fstate": ";accord45;day_minute;"
+        "fstate": ";amy45;day_minute;"
       }
     },
     "mass": 1
   },
-  "belief_label": "accord45",
+  "belief_label": "amy45",
   "fund_iota": 1,
   "fund_pool": 1000000000.0,
   "max_tree_traverse": 2,

@@ -17,7 +17,7 @@ from src.a09_pack_logic.delta import PlanDelta, plandelta_shop
 
 def get_atom_example_conceptunit_sports(belief_label: BeliefLabel = None) -> PlanAtom:
     if not belief_label:
-        belief_label = "accord23"
+        belief_label = "amy23"
     sports_str = "sports"
     x_dimen = plan_conceptunit_str()
     insert_conceptunit_planatom = planatom_shop(x_dimen, INSERT_str())

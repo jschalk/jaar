@@ -38,7 +38,7 @@ def test_etl_event_pack_json_to_event_inherited_planunits_SetsFiles_plan_json(
     credit44 = 44
     credit77 = 77
     credit88 = 88
-    a23_str = "accord23"
+    a23_str = "amy23"
     belief_mstr_dir = get_module_temp_dir()
     a23_bob_e3_dir = create_owner_event_dir_path(
         belief_mstr_dir, a23_str, bob_inx, event3
@@ -110,7 +110,7 @@ def test_etl_event_pack_json_to_event_inherited_planunits_SetsFiles_expressed_pa
     credit44 = 44
     credit77 = 77
     credit88 = 88
-    a23_str = "accord23"
+    a23_str = "amy23"
     belief_mstr_dir = get_module_temp_dir()
     a23_bob_e3_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event3)
     a23_bob_e7_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event7)

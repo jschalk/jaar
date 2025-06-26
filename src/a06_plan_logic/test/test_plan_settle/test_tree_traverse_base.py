@@ -383,7 +383,7 @@ def test_PlanUnit_get_concept_tree_ordered_rope_list_ReturnsObj():
     assert x_8th_rope_in_ordered_list == sue_plan.make_l1_rope(wk_str)
 
     # WHEN
-    y_plan = planunit_shop(belief_label="accord23")
+    y_plan = planunit_shop(belief_label="amy23")
 
     # THEN
     y_1st_rope_in_ordered_list = y_plan.get_concept_tree_ordered_rope_list()[0]

@@ -48,7 +48,7 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
     event2 = 2
     ex_filename = "fizzbuzz.xlsx"
     input_file_path = create_path(fizz_world._input_dir, ex_filename)
-    accord23_str = "accord23"
+    amy23_str = "amy23"
     br00011_columns = [
         event_int_str(),
         face_name_str(),
@@ -56,7 +56,7 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
         owner_name_str(),
         acct_name_str(),
     ]
-    br00011_rows = [[event2, sue_str, accord23_str, sue_str, sue_str]]
+    br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(input_file_path, "br00011_ex3", br00011_df)
     fizz_world.input_to_clarity_mstr()
@@ -81,7 +81,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
     event2 = 2
     ex_filename = "fizzbuzz.xlsx"
     input_file_path = create_path(fizz_world._input_dir, ex_filename)
-    accord23_str = "accord23"
+    amy23_str = "amy23"
     br00011_columns = [
         event_int_str(),
         face_name_str(),
@@ -89,7 +89,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
         owner_name_str(),
         acct_name_str(),
     ]
-    br00011_rows = [[event2, sue_str, accord23_str, sue_str, sue_str]]
+    br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(input_file_path, "br00011_ex3", br00011_df)
     fizz_world.input_to_clarity_mstr()
@@ -135,7 +135,7 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
     event2 = 2
     ex_filename = "fizzbuzz.xlsx"
     input_file_path = create_path(fizz_world._input_dir, ex_filename)
-    a23_str = "accord23"
+    a23_str = "amy23"
     br00011_columns = [
         event_int_str(),
         face_name_str(),
@@ -189,18 +189,18 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
 #         quota_str(),
 #         celldepth_str(),
 #     ]
-#     accord23_str = "accord23"
+#     amy23_str = "amy23"
 #     tp37 = 37
 #     sue_quota = 235
 #     sue_celldepth = 3
-#     br1row0 = [event2, sue_str, accord23_str, sue_str, tp37, sue_quota, sue_celldepth]
+#     br1row0 = [event2, sue_str, amy23_str, sue_str, tp37, sue_quota, sue_celldepth]
 #     br00001_1df = DataFrame([br1row0], columns=br00001_columns)
 #     br00001_ex0_str = "example0_br00001"
 #     upsert_sheet(input_file_path, br00001_ex0_str, br00001_1df)
 
-#     br3row0 = [event1, sue_str,  minute_360, accord23_str, hour6am]
-#     br3row1 = [event1, sue_str,  minute_420, accord23_str, hour7am]
-#     br3row2 = [event2, sue_str, minute_420, accord23_str, hour7am]
+#     br3row0 = [event1, sue_str,  minute_360, amy23_str, hour6am]
+#     br3row1 = [event1, sue_str,  minute_420, amy23_str, hour7am]
+#     br3row2 = [event2, sue_str, minute_420, amy23_str, hour7am]
 #     br00003_1df = DataFrame([br3row0, br3row1], columns=br00003_columns)
 #     br00003_3df = DataFrame([br3row1, br3row0, br3row2], columns=br00003_columns)
 #     br00003_ex1_str = "example1_br00003"
@@ -214,16 +214,16 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
 #         owner_name_str(),
 #         acct_name_str(),
 #     ]
-#     br00011_rows = [[event2, sue_str, accord23_str, sue_str, sue_str]]
+#     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
 #     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
 #     upsert_sheet(input_file_path, "br00011_ex3", br00011_df)
 #     mstr_dir = fizz_world._belief_mstr_dir
-#     wrong_a23_belief_dir = create_path(mstr_dir, accord23_str)
+#     wrong_a23_belief_dir = create_path(mstr_dir, amy23_str)
 #     assert os_path_exists(wrong_a23_belief_dir) is False
-#     a23_json_path = create_belief_json_path(mstr_dir, accord23_str)
-#     a23_sue_gut_path = create_gut_path(mstr_dir, accord23_str, sue_str)
-#     a23_sue_job_path = create_job_path(mstr_dir, accord23_str, sue_str)
-#     sue37_mandate_path = bud_mandate(mstr_dir, accord23_str, sue_str, tp37)
+#     a23_json_path = create_belief_json_path(mstr_dir, amy23_str)
+#     a23_sue_gut_path = create_gut_path(mstr_dir, amy23_str, sue_str)
+#     a23_sue_job_path = create_job_path(mstr_dir, amy23_str, sue_str)
+#     sue37_mandate_path = bud_mandate(mstr_dir, amy23_str, sue_str, tp37)
 #     assert os_path_exists(input_file_path)
 #     assert os_path_exists(a23_json_path) is False
 #     assert os_path_exists(a23_sue_gut_path) is False

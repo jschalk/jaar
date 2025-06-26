@@ -4,34 +4,34 @@ from src.a16_pidgin_logic.map import ropemap_shop
 
 def test_RopeMap_reveal_inx_ReturnsObjAndSetsAttr_rope_Scenario0():
     # ESTABLISH
-    a45_str = "accord45"
+    a45_str = "amy45"
     otx_r_knot = "/"
-    otx_accord45_rope = to_rope(a45_str, otx_r_knot)
+    otx_amy45_rope = to_rope(a45_str, otx_r_knot)
     inx_r_knot = ":"
     rope_ropemap = ropemap_shop(otx_knot=otx_r_knot, inx_knot=inx_r_knot)
-    assert rope_ropemap.otx_exists(otx_accord45_rope) is False
-    assert rope_ropemap.otx2inx_exists(otx_accord45_rope, otx_accord45_rope) is False
+    assert rope_ropemap.otx_exists(otx_amy45_rope) is False
+    assert rope_ropemap.otx2inx_exists(otx_amy45_rope, otx_amy45_rope) is False
 
     # WHEN
-    gen_inx_rope = rope_ropemap.reveal_inx(otx_accord45_rope)
+    gen_inx_rope = rope_ropemap.reveal_inx(otx_amy45_rope)
 
     # THEN
-    assert gen_inx_rope[1:-1] == otx_accord45_rope[1:-1]
-    assert rope_ropemap.otx_exists(otx_accord45_rope)
-    inx_accord45_rope = to_rope(a45_str, inx_r_knot)
-    assert rope_ropemap.otx2inx_exists(otx_accord45_rope, inx_accord45_rope)
+    assert gen_inx_rope[1:-1] == otx_amy45_rope[1:-1]
+    assert rope_ropemap.otx_exists(otx_amy45_rope)
+    inx_amy45_rope = to_rope(a45_str, inx_r_knot)
+    assert rope_ropemap.otx2inx_exists(otx_amy45_rope, inx_amy45_rope)
 
 
 def test_RopeMap_reveal_inx_ReturnsObjAndSetsAttr_rope_Scenario1():
     # ESTABLISH
     otx_r_knot = "/"
     inx_r_knot = ":"
-    otx_accord45_rope = to_rope("accord45", otx_r_knot)
-    inx_accord87_rope = to_rope("accord87", inx_r_knot)
+    otx_amy45_rope = to_rope("amy45", otx_r_knot)
+    inx_amy87_rope = to_rope("amy87", inx_r_knot)
     clean_otx_str = "clean"
-    clean_otx_rope = f"{otx_accord45_rope}{clean_otx_str}{otx_r_knot}"
+    clean_otx_rope = f"{otx_amy45_rope}{clean_otx_str}{otx_r_knot}"
     rope_ropemap = ropemap_shop(otx_knot=otx_r_knot, inx_knot=inx_r_knot)
-    assert rope_ropemap.otx_exists(otx_accord45_rope) is False
+    assert rope_ropemap.otx_exists(otx_amy45_rope) is False
     assert rope_ropemap.otx_exists(clean_otx_rope) is False
 
     # WHEN
@@ -39,13 +39,13 @@ def test_RopeMap_reveal_inx_ReturnsObjAndSetsAttr_rope_Scenario1():
 
     # THEN
     assert gen_inx_rope is None
-    assert rope_ropemap.otx_exists(otx_accord45_rope) is False
+    assert rope_ropemap.otx_exists(otx_amy45_rope) is False
     assert rope_ropemap.otx_exists(clean_otx_rope) is False
-    assert rope_ropemap.otx2inx_exists(otx_accord45_rope, inx_accord87_rope) is False
+    assert rope_ropemap.otx2inx_exists(otx_amy45_rope, inx_amy87_rope) is False
 
     # ESTABLISH
-    rope_ropemap.set_otx2inx(otx_accord45_rope, inx_accord87_rope)
-    assert rope_ropemap.otx2inx_exists(otx_accord45_rope, inx_accord87_rope)
+    rope_ropemap.set_otx2inx(otx_amy45_rope, inx_amy87_rope)
+    assert rope_ropemap.otx2inx_exists(otx_amy45_rope, inx_amy87_rope)
     assert rope_ropemap.otx_exists(clean_otx_rope) is False
 
     # WHEN
@@ -54,21 +54,21 @@ def test_RopeMap_reveal_inx_ReturnsObjAndSetsAttr_rope_Scenario1():
     # THEN
     assert rope_ropemap.otx_exists(clean_otx_rope)
     assert rope_ropemap.otx2inx_exists(clean_otx_rope, gen_inx_rope)
-    assert gen_inx_rope == f"{inx_accord87_rope}{clean_otx_str}{inx_r_knot}"
+    assert gen_inx_rope == f"{inx_amy87_rope}{clean_otx_str}{inx_r_knot}"
 
 
 def test_RopeMap_reveal_inx_ReturnsObjAndSetsAttr_rope_Scenario2_With_label():
     # ESTABLISH
     otx_r_knot = "/"
     inx_r_knot = ":"
-    otx_accord45_rope = to_rope("accord45", otx_r_knot)
-    inx_accord87_rope = to_rope("accord87", inx_r_knot)
+    otx_amy45_rope = to_rope("amy45", otx_r_knot)
+    inx_amy87_rope = to_rope("amy87", inx_r_knot)
     clean_otx_str = "clean"
     clean_inx_str = "prop"
-    clean_otx_rope = f"{otx_accord45_rope}{clean_otx_str}{otx_r_knot}"
+    clean_otx_rope = f"{otx_amy45_rope}{clean_otx_str}{otx_r_knot}"
     rope_ropemap = ropemap_shop(otx_knot=otx_r_knot, inx_knot=inx_r_knot)
     rope_ropemap.set_label(clean_otx_str, clean_inx_str)
-    assert rope_ropemap.otx_exists(otx_accord45_rope) is False
+    assert rope_ropemap.otx_exists(otx_amy45_rope) is False
     assert rope_ropemap.otx_exists(clean_otx_rope) is False
 
     # WHEN
@@ -76,35 +76,35 @@ def test_RopeMap_reveal_inx_ReturnsObjAndSetsAttr_rope_Scenario2_With_label():
 
     # THEN
     assert gen_inx_rope is None
-    assert rope_ropemap.otx_exists(otx_accord45_rope) is False
+    assert rope_ropemap.otx_exists(otx_amy45_rope) is False
     assert rope_ropemap.otx_exists(clean_otx_rope) is False
-    assert rope_ropemap.otx2inx_exists(otx_accord45_rope, inx_accord87_rope) is False
+    assert rope_ropemap.otx2inx_exists(otx_amy45_rope, inx_amy87_rope) is False
 
     # ESTABLISH
-    rope_ropemap.set_otx2inx(otx_accord45_rope, inx_accord87_rope)
-    assert rope_ropemap.otx2inx_exists(otx_accord45_rope, inx_accord87_rope)
+    rope_ropemap.set_otx2inx(otx_amy45_rope, inx_amy87_rope)
+    assert rope_ropemap.otx2inx_exists(otx_amy45_rope, inx_amy87_rope)
     assert rope_ropemap.otx_exists(clean_otx_rope) is False
 
     # WHEN
     gen_inx_rope = rope_ropemap.reveal_inx(clean_otx_rope)
 
     # THEN
-    assert rope_ropemap.otx2inx_exists(otx_accord45_rope, inx_accord87_rope)
+    assert rope_ropemap.otx2inx_exists(otx_amy45_rope, inx_amy87_rope)
     assert rope_ropemap.otx_exists(clean_otx_rope)
     assert rope_ropemap.otx2inx_exists(clean_otx_rope, gen_inx_rope)
-    assert gen_inx_rope == f"{inx_accord87_rope}{clean_inx_str}{inx_r_knot}"
+    assert gen_inx_rope == f"{inx_amy87_rope}{clean_inx_str}{inx_r_knot}"
 
 
 def test_RopeMap_reveal_inx_AddsMissingObjsTo_otx2inx_RopeTerm():
     # ESTABLISH
-    otx_a45_str = "accord45"
-    inx_a87_str = "accord87"
-    otx_accord45_rope = to_rope(otx_a45_str)
-    inx_accord87_rope = to_rope(inx_a87_str)
+    otx_a45_str = "amy45"
+    inx_a87_str = "amy87"
+    otx_amy45_rope = to_rope(otx_a45_str)
+    inx_amy87_rope = to_rope(inx_a87_str)
     casa_otx_str = "casa"
     casa_inx_str = "maison"
-    casa_otx_rope = create_rope(otx_accord45_rope, casa_otx_str)
-    casa_inx_rope = create_rope(inx_accord87_rope, casa_inx_str)
+    casa_otx_rope = create_rope(otx_amy45_rope, casa_otx_str)
+    casa_inx_rope = create_rope(inx_amy87_rope, casa_inx_str)
     clean_otx_str = "clean"
     clean_inx_str = "propre"
     clean_otx_rope = create_rope(casa_otx_rope, clean_otx_str)
@@ -118,25 +118,25 @@ def test_RopeMap_reveal_inx_AddsMissingObjsTo_otx2inx_RopeTerm():
     x_ropemap.set_label(clean_otx_str, clean_inx_str)
     print(f"{x_ropemap.labelmap.otx2inx=}")
     print(f"{x_ropemap.otx2inx=}")
-    assert x_ropemap.otx_exists(otx_accord45_rope) is False
+    assert x_ropemap.otx_exists(otx_amy45_rope) is False
     assert x_ropemap.otx_exists(casa_otx_rope) is False
     assert x_ropemap.otx_exists(clean_otx_rope) is False
     assert x_ropemap.otx_exists(sweep_otx_rope) is False
-    assert x_ropemap.otx2inx_exists(otx_accord45_rope, inx_accord87_rope) is False
+    assert x_ropemap.otx2inx_exists(otx_amy45_rope, inx_amy87_rope) is False
     assert x_ropemap.otx2inx_exists(casa_otx_rope, casa_inx_rope) is False
     assert x_ropemap.otx2inx_exists(clean_otx_rope, clean_inx_rope) is False
     assert x_ropemap.otx2inx_exists(sweep_otx_rope, sweep_inx_rope) is False
 
     # WHEN
-    assert x_ropemap.reveal_inx(otx_accord45_rope) == inx_accord87_rope
+    assert x_ropemap.reveal_inx(otx_amy45_rope) == inx_amy87_rope
     print(f"{x_ropemap.labelmap.otx2inx=}")
     print(f"{x_ropemap.otx2inx=}")
     # THEN
-    assert x_ropemap.otx_exists(otx_accord45_rope)
+    assert x_ropemap.otx_exists(otx_amy45_rope)
     assert x_ropemap.otx_exists(casa_otx_rope) is False
     assert x_ropemap.otx_exists(clean_otx_rope) is False
     assert x_ropemap.otx_exists(sweep_otx_rope) is False
-    assert x_ropemap.otx2inx_exists(otx_accord45_rope, inx_accord87_rope)
+    assert x_ropemap.otx2inx_exists(otx_amy45_rope, inx_amy87_rope)
     assert x_ropemap.otx2inx_exists(casa_otx_rope, casa_inx_rope) is False
     assert x_ropemap.otx2inx_exists(clean_otx_rope, clean_inx_rope) is False
     assert x_ropemap.otx2inx_exists(sweep_otx_rope, sweep_inx_rope) is False
@@ -144,11 +144,11 @@ def test_RopeMap_reveal_inx_AddsMissingObjsTo_otx2inx_RopeTerm():
     # WHEN
     assert x_ropemap.reveal_inx(casa_otx_rope) == casa_inx_rope
     # THEN
-    assert x_ropemap.otx_exists(otx_accord45_rope)
+    assert x_ropemap.otx_exists(otx_amy45_rope)
     assert x_ropemap.otx_exists(casa_otx_rope)
     assert x_ropemap.otx_exists(clean_otx_rope) is False
     assert x_ropemap.otx_exists(sweep_otx_rope) is False
-    assert x_ropemap.otx2inx_exists(otx_accord45_rope, inx_accord87_rope)
+    assert x_ropemap.otx2inx_exists(otx_amy45_rope, inx_amy87_rope)
     assert x_ropemap.otx2inx_exists(casa_otx_rope, casa_inx_rope)
     assert x_ropemap.otx2inx_exists(clean_otx_rope, clean_inx_rope) is False
     assert x_ropemap.otx2inx_exists(sweep_otx_rope, sweep_inx_rope) is False
@@ -157,7 +157,7 @@ def test_RopeMap_reveal_inx_AddsMissingObjsTo_otx2inx_RopeTerm():
     assert x_ropemap.reveal_inx(clean_otx_rope) == clean_inx_rope
     assert x_ropemap.reveal_inx(sweep_otx_rope) == sweep_inx_rope
     # THEN
-    assert x_ropemap.otx2inx_exists(otx_accord45_rope, inx_accord87_rope)
+    assert x_ropemap.otx2inx_exists(otx_amy45_rope, inx_amy87_rope)
     assert x_ropemap.otx2inx_exists(casa_otx_rope, casa_inx_rope)
     assert x_ropemap.otx2inx_exists(clean_otx_rope, clean_inx_rope)
     assert x_ropemap.otx2inx_exists(sweep_otx_rope, sweep_inx_rope)

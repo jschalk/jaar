@@ -16,7 +16,7 @@ def test_set_cell_trees_found_facts_Scenario0_RootOnly_NoFacts(
     # ESTABLISH
     belief_mstr_dir = get_module_temp_dir()
     bob_str = "Bob"
-    a23_str = "accord23"
+    a23_str = "amy23"
     time5 = 5
     das = []
     bob5_dir = cell_dir(belief_mstr_dir, a23_str, bob_str, time5, das)
@@ -40,7 +40,7 @@ def test_set_cell_trees_found_facts_Scenario1_ChildNode_NoFacts(
     bob_str = "Bob"
     yao_str = "Yao"
     sue_str = "Sue"
-    a23_str = "accord23"
+    a23_str = "amy23"
     time5 = 5
     das = []
     das_y = [yao_str]
@@ -71,7 +71,7 @@ def test_set_cell_trees_found_facts_Scenario2_ChildNodeWithOneFactIsAssignedToAn
     bob_str = "Bob"
     yao_str = "Yao"
     sue_str = "Sue"
-    a23_str = "accord23"
+    a23_str = "amy23"
     time5 = 5
     clean_fact = example_casa_clean_factunit()
     das = []

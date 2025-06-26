@@ -11,14 +11,14 @@ from src.a15_belief_logic.test._util.a15_env import get_module_temp_dir
 def create_example_belief2() -> BeliefUnit:
     # ESTABLISH
     x_belief_mstr_dir = get_module_temp_dir()
-    a45_str = "accord45"
-    accord_belief = beliefunit_shop(a45_str, x_belief_mstr_dir)
+    a45_str = "amy45"
+    amy_belief = beliefunit_shop(a45_str, x_belief_mstr_dir)
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"
-    accord_belief.create_init_job_from_guts(yao_str)
-    accord_belief.create_init_job_from_guts(wei_str)
-    accord_belief.create_init_job_from_guts(zia_str)
+    amy_belief.create_init_job_from_guts(yao_str)
+    amy_belief.create_init_job_from_guts(wei_str)
+    amy_belief.create_init_job_from_guts(zia_str)
     yao_gut_plan = open_gut_file(x_belief_mstr_dir, a45_str, yao_str)
     wei_gut_plan = open_gut_file(x_belief_mstr_dir, a45_str, wei_str)
     zia_gut_plan = open_gut_file(x_belief_mstr_dir, a45_str, zia_str)
@@ -61,24 +61,24 @@ def create_example_belief2() -> BeliefUnit:
     save_gut_file(x_belief_mstr_dir, yao_gut_plan)
     save_gut_file(x_belief_mstr_dir, wei_gut_plan)
     save_gut_file(x_belief_mstr_dir, zia_gut_plan)
-    accord_belief._set_all_healer_dutys(yao_str)
-    accord_belief._set_all_healer_dutys(wei_str)
-    accord_belief._set_all_healer_dutys(zia_str)
+    amy_belief._set_all_healer_dutys(yao_str)
+    amy_belief._set_all_healer_dutys(wei_str)
+    amy_belief._set_all_healer_dutys(zia_str)
 
-    return accord_belief
+    return amy_belief
 
 
 def create_example_belief3() -> BeliefUnit:
     # ESTABLISH
-    a45_str = "accord45"
+    a45_str = "amy45"
     x_belief_mstr_dir = get_module_temp_dir()
-    accord_belief = beliefunit_shop(a45_str, x_belief_mstr_dir)
+    amy_belief = beliefunit_shop(a45_str, x_belief_mstr_dir)
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"
-    accord_belief.create_init_job_from_guts(yao_str)
-    accord_belief.create_init_job_from_guts(wei_str)
-    accord_belief.create_init_job_from_guts(zia_str)
+    amy_belief.create_init_job_from_guts(yao_str)
+    amy_belief.create_init_job_from_guts(wei_str)
+    amy_belief.create_init_job_from_guts(zia_str)
     yao_gut_plan = open_gut_file(x_belief_mstr_dir, a45_str, yao_str)
     wei_gut_plan = open_gut_file(x_belief_mstr_dir, a45_str, wei_str)
     zia_gut_plan = open_gut_file(x_belief_mstr_dir, a45_str, zia_str)
@@ -108,20 +108,20 @@ def create_example_belief3() -> BeliefUnit:
     save_gut_file(x_belief_mstr_dir, wei_gut_plan)
     save_gut_file(x_belief_mstr_dir, zia_gut_plan)
 
-    return accord_belief
+    return amy_belief
 
 
 def create_example_belief4() -> BeliefUnit:
     # ESTABLISH
     x_belief_mstr_dir = get_module_temp_dir()
-    a45_str = "accord45"
-    accord_belief = beliefunit_shop(a45_str, x_belief_mstr_dir)
+    a45_str = "amy45"
+    amy_belief = beliefunit_shop(a45_str, x_belief_mstr_dir)
     yao_str = "Yao"
     wei_str = "Wei"
     zia_str = "Zia"
-    accord_belief.create_init_job_from_guts(yao_str)
-    accord_belief.create_init_job_from_guts(wei_str)
-    accord_belief.create_init_job_from_guts(zia_str)
+    amy_belief.create_init_job_from_guts(yao_str)
+    amy_belief.create_init_job_from_guts(wei_str)
+    amy_belief.create_init_job_from_guts(zia_str)
     yao_gut_plan = open_gut_file(x_belief_mstr_dir, a45_str, yao_str)
     wei_gut_plan = open_gut_file(x_belief_mstr_dir, a45_str, wei_str)
     zia_gut_plan = open_gut_file(x_belief_mstr_dir, a45_str, zia_str)
@@ -171,11 +171,11 @@ def create_example_belief4() -> BeliefUnit:
     save_gut_file(x_belief_mstr_dir, wei_gut_plan)
     save_gut_file(x_belief_mstr_dir, zia_gut_plan)
 
-    return accord_belief
+    return amy_belief
 
 
 def example_casa_clean_factunit() -> FactUnit:
-    a23_str = "accord23"
+    a23_str = "amy23"
     casa_rope = create_rope(a23_str, "casa")
     floor_rope = create_rope(casa_rope, "floor status")
     clean_rope = create_rope(floor_rope, "clean")
@@ -183,7 +183,7 @@ def example_casa_clean_factunit() -> FactUnit:
 
 
 def example_casa_dirty_factunit() -> FactUnit:
-    a23_str = "accord23"
+    a23_str = "amy23"
     casa_rope = create_rope(a23_str, "casa")
     floor_rope = create_rope(casa_rope, "floor status")
     dirty_rope = create_rope(floor_rope, "dirty")
@@ -191,7 +191,7 @@ def example_casa_dirty_factunit() -> FactUnit:
 
 
 def _example_empty_bob_planunit() -> PlanUnit:
-    a23_str = "accord23"
+    a23_str = "amy23"
     return planunit_shop("Bob", a23_str)
 
 
@@ -216,7 +216,7 @@ def get_bob_mop_without_reason_planunit_example() -> PlanUnit:
 
 
 def get_bob_mop_with_reason_planunit_example() -> PlanUnit:
-    """owner_name: bob, belief_label: accord23"""
+    """owner_name: bob, belief_label: amy23"""
     bob_plan = get_bob_mop_without_reason_planunit_example()
     casa_str = "casa"
     floor_str = "floor status"
@@ -243,7 +243,7 @@ def get_bob_mop_fact_clean_planunit_example() -> PlanUnit:
 
 
 def get_yao_run_with_reason_planunit_example() -> PlanUnit:
-    yao_plan = planunit_shop("Yao", "accord23")
+    yao_plan = planunit_shop("Yao", "amy23")
     sport_str = "sport"
     participate_str = "participate"
     ski_str = "skiing"
