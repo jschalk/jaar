@@ -60,16 +60,26 @@ def test_Module_util_FilesExist():
         # previous_module_number = module_number
 
 
+def path_contains_subpath(full_path: str, sub_path: str):
+    full = pathlib_Path(full_path).resolve()
+    sub = pathlib_Path(sub_path).resolve()
+    try:
+        full.relative_to(sub)
+        return True
+    except ValueError:
+        return False
+
+
 def test_Modules_DoNotHaveEmptyDirectories():
     # sourcery skip: no-loop-in-tests
     # sourcery skip: no-conditionals-in-tests
     # ESTABLISH
-    exclude_dir = "src\\a20_world_logic\\test\\test_z_examples\\worlds"
+    exclude_dir = "src/a20_world_logic/test/test_z_examples/worlds"
 
     # WHEN / THEN
     for module_desc, module_dir in get_module_descs().items():
         for dirpath, dirnames, filenames in os_walk(module_dir):
-            if not str(dirpath).startswith(exclude_dir):
+            if not path_contains_subpath(dirpath, exclude_dir):
                 assert_fail_str = f"{module_desc} Empty directory found: {dirpath}"
                 if dirnames == ["__pycache__"] and filenames == []:
                     print(f"{dirnames} {dirpath}")

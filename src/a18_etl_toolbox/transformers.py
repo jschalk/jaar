@@ -154,13 +154,10 @@ def etl_input_dfs_to_brick_raw_tables(cursor: sqlite3_Cursor, input_dir: str):
                 error_message = f"Conversion errors: {error_message}"
             row_values = list(row)
             row_values.append(error_message)
-            x_index = 0
             # Set value to None for non-convertible columns
-            for col in column_names:
+            for x_index, col in enumerate(column_names):
                 if nonconvertible_columns.get(col):
                     row_values[x_index] = None
-                x_index += 1
-
             insert_sqlstr = create_type_reference_insert_sqlstr(
                 x_tablename, column_names, row_values
             )
