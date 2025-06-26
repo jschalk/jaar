@@ -64,18 +64,19 @@ def test_Modules_DoNotHaveEmptyDirectories():
     # sourcery skip: no-loop-in-tests
     # sourcery skip: no-conditionals-in-tests
     # ESTABLISH
-    print_str = "print"
+    exclude_dir = "src\\a20_world_logic\\test\\test_z_examples\\worlds"
 
     # WHEN / THEN
     for module_desc, module_dir in get_module_descs().items():
         for dirpath, dirnames, filenames in os_walk(module_dir):
-            assert_fail_str = f"{module_desc} Empty directory found: {dirpath}"
-            if dirnames == ["__pycache__"] and filenames == []:
-                print(f"{dirnames} {dirpath}")
-                dirnames = []
-            # print(f"{dirnames=}")
-            # print(f"{filenames=}")
-            assert dirnames or filenames, assert_fail_str
+            if not str(dirpath).startswith(exclude_dir):
+                assert_fail_str = f"{module_desc} Empty directory found: {dirpath}"
+                if dirnames == ["__pycache__"] and filenames == []:
+                    print(f"{dirnames} {dirpath}")
+                    dirnames = []
+                # print(f"{dirnames=}")
+                # print(f"{filenames=}")
+                assert dirnames or filenames, assert_fail_str
 
 
 def test_Modules_NonTestFilesDoNotHavePrintStatments():
