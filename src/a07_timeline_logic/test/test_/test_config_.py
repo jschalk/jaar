@@ -58,35 +58,35 @@ def test_TimeLineLabel_exists():
 
 def test_get_timeline_rope_ReturnsObj_Scenario0_default_knot():
     # ESTABLISH
-    fizz_belief_label = "fizz"
-    buzz_timeline_label = "buzz_time3"
+    fay_belief_label = "Fay"
+    bob_timeline_label = "Bob_time3"
     default_knot = default_knot_if_None()
 
     # WHEN
-    buzz_rope = get_timeline_rope(fizz_belief_label, buzz_timeline_label, default_knot)
+    bob_rope = get_timeline_rope(fay_belief_label, bob_timeline_label, default_knot)
 
     # THEN
-    assert buzz_rope
-    time_rope = create_rope(fizz_belief_label, "time")
-    expected_buzz_rope = create_rope(time_rope, buzz_timeline_label)
-    assert buzz_rope == expected_buzz_rope
+    assert bob_rope
+    time_rope = create_rope(fay_belief_label, "time")
+    expected_bob_rope = create_rope(time_rope, bob_timeline_label)
+    assert bob_rope == expected_bob_rope
 
 
 def test_get_timeline_rope_ReturnsObj_Scenario1_slash_knot():
     # ESTABLISH
-    fizz_belief_label = "fizz"
-    buzz_timeline_label = "buzz_time3"
+    fay_belief_label = "Fay"
+    bob_timeline_label = "Bob_time3"
     slash_knot = "/"
     assert slash_knot != default_knot_if_None()
 
     # WHEN
-    buzz_rope = get_timeline_rope(fizz_belief_label, buzz_timeline_label, slash_knot)
+    bob_rope = get_timeline_rope(fay_belief_label, bob_timeline_label, slash_knot)
 
     # THEN
-    assert buzz_rope
-    time_rope = create_rope(fizz_belief_label, "time", slash_knot)
-    expected_buzz_rope = create_rope(time_rope, buzz_timeline_label, slash_knot)
-    assert buzz_rope == expected_buzz_rope
+    assert bob_rope
+    time_rope = create_rope(fay_belief_label, "time", slash_knot)
+    expected_bob_rope = create_rope(time_rope, bob_timeline_label, slash_knot)
+    assert bob_rope == expected_bob_rope
 
 
 def test_C400Constants_Exists():
@@ -377,11 +377,11 @@ def test_timeline_config_shop_ReturnsObj_NoParameters():
 
 def test_get_year_rope_ReturnsObj():
     # ESTABLISH
-    fizz_str = "fizz34"
+    fay_str = "Fay34"
     sue_planunit = planunit_shop("Sue")
     time_rope = sue_planunit.make_l1_rope(time_str())
-    fizz_rope = sue_planunit.make_rope(time_rope, fizz_str)
-    c400_leap_rope = sue_planunit.make_rope(fizz_rope, c400_leap_str())
+    fay_rope = sue_planunit.make_rope(time_rope, fay_str)
+    c400_leap_rope = sue_planunit.make_rope(fay_rope, c400_leap_str())
     c400_clean_rope = sue_planunit.make_rope(c400_leap_rope, c400_clean_str())
     c100_rope = sue_planunit.make_rope(c400_clean_rope, c100_str())
     yr4_leap_rope = sue_planunit.make_rope(c100_rope, yr4_leap_str())
@@ -389,31 +389,31 @@ def test_get_year_rope_ReturnsObj():
     year_rope = sue_planunit.make_rope(yr4_clean_rope, year_str())
 
     # WHEN / THEN
-    assert year_rope == get_year_rope(sue_planunit, fizz_rope)
+    assert year_rope == get_year_rope(sue_planunit, fay_rope)
 
 
 def test_get_week_rope_ReturnsObj():
     # ESTABLISH
-    fizz_str = "fizz34"
+    fay_str = "Fay34"
     sue_planunit = planunit_shop("Sue")
     time_rope = sue_planunit.make_l1_rope(time_str())
-    fizz_rope = sue_planunit.make_rope(time_rope, fizz_str)
-    week_rope = sue_planunit.make_rope(fizz_rope, week_str())
+    fay_rope = sue_planunit.make_rope(time_rope, fay_str)
+    week_rope = sue_planunit.make_rope(fay_rope, week_str())
 
     # WHEN / THEN
-    assert week_rope == get_week_rope(sue_planunit, fizz_rope)
+    assert week_rope == get_week_rope(sue_planunit, fay_rope)
 
 
 def test_get_day_rope_ReturnsObj():
     # ESTABLISH
-    fizz_str = "fizz34"
+    fay_str = "Fay34"
     sue_planunit = planunit_shop("Sue")
     time_rope = sue_planunit.make_l1_rope(time_str())
-    fizz_rope = sue_planunit.make_rope(time_rope, fizz_str)
-    day_rope = sue_planunit.make_rope(fizz_rope, day_str())
+    fay_rope = sue_planunit.make_rope(time_rope, fay_str)
+    day_rope = sue_planunit.make_rope(fay_rope, day_str())
 
     # WHEN / THEN
-    assert day_rope == get_day_rope(sue_planunit, fizz_rope)
+    assert day_rope == get_day_rope(sue_planunit, fay_rope)
 
 
 def test_TimeLineUnit_Exists():

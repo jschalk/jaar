@@ -19,7 +19,7 @@ from src.a15_belief_logic.test._util.a15_env import (
 
 def test_create_cell_tree_Scenaro0_timepoint_Empty(env_dir_setup_cleanup):
     # ESTABLISH
-    belief_mstr_dir = create_path(get_module_temp_dir(), "fizz_mstr")
+    belief_mstr_dir = create_path(get_module_temp_dir(), "Fay_mstr")
     a23_str = "amy23"
     bob_str = "Bob"
     tp37 = 37
@@ -37,7 +37,7 @@ def test_create_cell_tree_Scenaro0_timepoint_Empty(env_dir_setup_cleanup):
 
 def test_create_cell_tree_Scenaro1_LedgerDepth0(env_dir_setup_cleanup):
     # ESTABLISH
-    belief_mstr_dir = create_path(get_module_temp_dir(), "fizz_mstr")
+    belief_mstr_dir = create_path(get_module_temp_dir(), "Fay_mstr")
     a23_str = "amy23"
     bob_str = "Bob"
     yao_str = "Yao"
@@ -64,7 +64,7 @@ def test_create_cell_tree_Scenaro1_LedgerDepth0(env_dir_setup_cleanup):
 
 def test_create_cell_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
     # ESTABLISH
-    belief_mstr_dir = create_path(get_module_temp_dir(), "fizz_mstr")
+    belief_mstr_dir = create_path(get_module_temp_dir(), "Fay_mstr")
     a23_str = "amy23"
     bob_str = "Bob"
     yao_str = "Yao"
@@ -149,7 +149,7 @@ def test_create_cell_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
 
 def test_create_cell_tree_Scenaro3_LedgerDepth1_MostRecentEvent(env_dir_setup_cleanup):
     # ESTABLISH
-    belief_mstr_dir = create_path(get_module_temp_dir(), "fizz_mstr")
+    belief_mstr_dir = create_path(get_module_temp_dir(), "Fay_mstr")
     a23_str = "amy23"
     bob_str = "Bob"
     yao_str = "Yao"
@@ -238,7 +238,7 @@ def test_create_cell_tree_Scenaro4_LedgerDepth1_OneOwnerHasNoPast_planevent(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    belief_mstr_dir = create_path(get_module_temp_dir(), "fizz_mstr")
+    belief_mstr_dir = create_path(get_module_temp_dir(), "Fay_mstr")
     a23_str = "amy23"
     bob_str = "Bob"
     yao_str = "Yao"
@@ -313,7 +313,7 @@ def test_create_cell_tree_Scenaro5_LedgerDepth1_ZeroQuotaDoesNotGetCreated(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    belief_mstr_dir = create_path(get_module_temp_dir(), "fizz_mstr")
+    belief_mstr_dir = create_path(get_module_temp_dir(), "Fay_mstr")
     a23_str = "amy23"
     bob_str = "Bob"
     yao_str = "Yao"

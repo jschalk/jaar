@@ -102,7 +102,7 @@ def test_get_all_plan_dimen_keys_ReturnsObj():
 
 def test_get_delete_key_name_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert get_delete_key_name("fizz") == "fizz_ERASE"
+    assert get_delete_key_name("Fay") == "Fay_ERASE"
     assert get_delete_key_name("run") == "run_ERASE"
     assert get_delete_key_name("") is None
 

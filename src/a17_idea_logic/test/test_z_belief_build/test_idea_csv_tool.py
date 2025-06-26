@@ -152,7 +152,7 @@ def test_add_beliefunit_to_stance_csv_strs_ReturnsObj_Scenario0_OneBeliefUnit(
     x_fund_iota = 1
     x_respect_bit = 1
     x_penny = 1
-    x_beliefs_dir = create_path(idea_beliefs_dir(), "fizz")
+    x_beliefs_dir = create_path(idea_beliefs_dir(), "Fay")
     x_beliefunits = belief_build_from_df(
         br00000_df,
         br00001_df,
@@ -222,7 +222,7 @@ def test_add_beliefunits_to_stance_csv_strs_ReturnsObj_Scenario1_TwoBeliefUnits(
     x_fund_iota = 1
     x_respect_bit = 1
     x_penny = 1
-    x_beliefs_dir = create_path(idea_beliefs_dir(), "fizz")
+    x_beliefs_dir = create_path(idea_beliefs_dir(), "Fay")
     x_beliefunits = belief_build_from_df(
         br00000_df,
         br00001_df,

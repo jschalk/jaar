@@ -18,10 +18,10 @@ from src.a17_idea_logic.test._util.a17_env import (
 from src.a17_idea_logic.test._util.example_pandas import (
     get_empty_dataframe,
     get_ex01_dataframe,
-    get_ex01_ordered_by_count_buzz_csv,
+    get_ex01_ordered_by_count_bob_csv,
     get_ex01_ordered_by_count_csv,
     get_ex01_ordered_by_count_x_boolean_csv,
-    get_ex01_ordered_by_fizz_csv,
+    get_ex01_ordered_by_fay_csv,
     get_ex01_unordered_csv,
     get_ex02_atom_csv,
     get_ex02_atom_dataframe,
@@ -36,29 +36,29 @@ def test_get_ordered_csv_ReturnsObj():
     empty_csv = get_ordered_csv(empty_dt).replace("\r", "")
     x1_dt = get_ex01_dataframe()
     unordered_csv = get_ex01_unordered_csv()
-    fizz_csv = get_ex01_ordered_by_fizz_csv()
+    fay_csv = get_ex01_ordered_by_fay_csv()
     count_csv = get_ex01_ordered_by_count_csv()
-    count_buzz_csv = get_ex01_ordered_by_count_buzz_csv()
+    count_bob_csv = get_ex01_ordered_by_count_bob_csv()
     count_bool_csv = get_ex01_ordered_by_count_x_boolean_csv()
 
     # WHEN / THEN
     # print(f"    {empty_csv=}")
     # print(f"{unordered_csv=}")
     assert get_ordered_csv(empty_dt) == """\n"""
-    fizz0_order = ["fizz", "buzz", "x_boolean", "count"]
-    count0_order = ["count", "fizz", "buzz", "x_boolean"]
-    count0_buzz1_order = ["count", "buzz", "fizz", "x_boolean"]
-    count0_xboolean1_order = ["count", "x_boolean", "fizz", "buzz"]
+    fay0_order = ["fay", "bob", "x_boolean", "count"]
+    count0_order = ["count", "fay", "bob", "x_boolean"]
+    count0_bob1_order = ["count", "bob", "fay", "x_boolean"]
+    count0_xboolean1_order = ["count", "x_boolean", "fay", "bob"]
     print(f"                                {count_bool_csv=}")
     print(f"{get_ordered_csv(x1_dt, count0_xboolean1_order)=}")
-    assert get_ordered_csv(x1_dt, fizz0_order) != unordered_csv
-    assert get_ordered_csv(x1_dt, fizz0_order) == fizz_csv
+    assert get_ordered_csv(x1_dt, fay0_order) != unordered_csv
+    assert get_ordered_csv(x1_dt, fay0_order) == fay_csv
     assert get_ordered_csv(x1_dt, count0_order) == count_csv
-    assert get_ordered_csv(x1_dt, count0_buzz1_order) == count_buzz_csv
+    assert get_ordered_csv(x1_dt, count0_bob1_order) == count_bob_csv
     assert get_ordered_csv(x1_dt, count0_xboolean1_order) == count_bool_csv
     # have sorting work even if sorting column does not exist
-    count0_vic1_buzz2_order = ["count", "vic", "buzz", "fizz", "x_boolean"]
-    assert get_ordered_csv(x1_dt, count0_vic1_buzz2_order) == count_buzz_csv
+    count0_vic1_bob2_order = ["count", "vic", "bob", "fay", "x_boolean"]
+    assert get_ordered_csv(x1_dt, count0_vic1_bob2_order) == count_bob_csv
 
 
 def test_save_dataframe_to_csv_SavesFile_Scenario0_SmallDataFrame(
@@ -67,7 +67,7 @@ def test_save_dataframe_to_csv_SavesFile_Scenario0_SmallDataFrame(
     # ESTABLISH
     env_dir = idea_examples_dir()
     small_dt = get_small_example01_dataframe()
-    ex_filename = "fizzbuzz.csv"
+    ex_filename = "Faybob.csv"
     ex_file_path = create_path(env_dir, ex_filename)
     assert os_path_exists(ex_file_path) is False
 

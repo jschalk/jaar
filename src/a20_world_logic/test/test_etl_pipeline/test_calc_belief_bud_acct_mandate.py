@@ -32,20 +32,18 @@ def test_WorldUnit_calc_belief_bud_acct_mandate_net_ledgers_Scenaro0_BudEmpty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz", worlds_dir())
+    fay_world = worldunit_shop("Fay", worlds_dir())
     a23_str = "amy23"
-    belief_mstr_dir = fizz_world._belief_mstr_dir
+    belief_mstr_dir = fay_world._belief_mstr_dir
     amy23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
-    a23_json_path = create_belief_json_path(fizz_world._belief_mstr_dir, a23_str)
+    a23_json_path = create_belief_json_path(fay_world._belief_mstr_dir, a23_str)
     save_file(a23_json_path, None, amy23_belief.get_json())
     print(f"{a23_json_path=}")
-    a23_owners_path = create_belief_owners_dir_path(
-        fizz_world._belief_mstr_dir, a23_str
-    )
+    a23_owners_path = create_belief_owners_dir_path(fay_world._belief_mstr_dir, a23_str)
     assert count_dirs_files(a23_owners_path) == 0
 
     # WHEN
-    fizz_world.calc_belief_bud_acct_mandate_net_ledgers()
+    fay_world.calc_belief_bud_acct_mandate_net_ledgers()
 
     # THEN
     assert count_dirs_files(a23_owners_path) == 0
@@ -55,8 +53,8 @@ def test_WorldUnit_calc_belief_bud_acct_mandate_net_ledgers_Scenaro1_SimpleBud(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz", worlds_dir())
-    mstr_dir = fizz_world._belief_mstr_dir
+    fay_world = worldunit_shop("Fay", worlds_dir())
+    mstr_dir = fay_world._belief_mstr_dir
     a23_str = "amy23"
     amy23_belief = beliefunit_shop(a23_str, mstr_dir)
     bob_str = "Bob"
@@ -73,7 +71,7 @@ def test_WorldUnit_calc_belief_bud_acct_mandate_net_ledgers_Scenaro1_SimpleBud(
     assert os_path_exists(bob37_bud_mandate_path) is False
 
     # WHEN
-    fizz_world.calc_belief_bud_acct_mandate_net_ledgers()
+    fay_world.calc_belief_bud_acct_mandate_net_ledgers()
 
     # THEN
     assert os_path_exists(bob37_bud_mandate_path)
@@ -88,8 +86,8 @@ def test_WorldUnit_calc_belief_bud_acct_mandate_net_ledgers_Scenaro2_BudExists(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_world = worldunit_shop("fizz", worlds_dir())
-    mstr_dir = fizz_world._belief_mstr_dir
+    fay_world = worldunit_shop("Fay", worlds_dir())
+    mstr_dir = fay_world._belief_mstr_dir
     a23_str = "amy23"
 
     # Create BeliefUnit with bob bud at time 37
@@ -146,7 +144,7 @@ def test_WorldUnit_calc_belief_bud_acct_mandate_net_ledgers_Scenaro2_BudExists(
     assert os_path_exists(bob37_bud_mandate_path) is False
 
     # WHEN
-    fizz_world.calc_belief_bud_acct_mandate_net_ledgers()
+    fay_world.calc_belief_bud_acct_mandate_net_ledgers()
 
     # THEN
     assert os_path_exists(bob37_bud_mandate_path)

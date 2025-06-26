@@ -25,29 +25,29 @@ def test_WorldUnit_create_stances_Senario0_EmptyWorld_CreatesFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_str = "fizz"
+    fay_str = "Fay"
     output_dir = create_path(worlds_dir(), "output")
-    fizz_world = worldunit_shop(fizz_str, worlds_dir(), output_dir)
-    fizz_world.input_to_clarity_mstr()
-    fizz_stance0001_path = create_stance0001_path(fizz_world.output_dir)
-    assert os_path_exists(fizz_stance0001_path) is False
+    fay_world = worldunit_shop(fay_str, worlds_dir(), output_dir)
+    fay_world.input_to_clarity_mstr()
+    fay_stance0001_path = create_stance0001_path(fay_world.output_dir)
+    assert os_path_exists(fay_stance0001_path) is False
 
     # WHEN
-    fizz_world.create_stances()
+    fay_world.create_stances()
 
     # THEN
-    assert os_path_exists(fizz_stance0001_path)
+    assert os_path_exists(fay_stance0001_path)
 
 
 def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup):
     # ESTABLISH
-    fizz_str = "fizz"
+    fay_str = "Fay"
     output_dir = create_path(worlds_dir(), "output")
-    fizz_world = worldunit_shop(fizz_str, worlds_dir(), output_dir)
+    fay_world = worldunit_shop(fay_str, worlds_dir(), output_dir)
     sue_str = "Sue"
     event2 = 2
-    ex_filename = "fizzbuzz.xlsx"
-    input_file_path = create_path(fizz_world._input_dir, ex_filename)
+    ex_filename = "Faybob.xlsx"
+    input_file_path = create_path(fay_world._input_dir, ex_filename)
     amy23_str = "amy23"
     br00011_columns = [
         event_int_str(),
@@ -59,19 +59,19 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(input_file_path, "br00011_ex3", br00011_df)
-    fizz_world.input_to_clarity_mstr()
-    fizz_stance0001_path = create_stance0001_path(fizz_world.output_dir)
-    assert os_path_exists(fizz_stance0001_path) is False
+    fay_world.input_to_clarity_mstr()
+    fay_stance0001_path = create_stance0001_path(fay_world.output_dir)
+    assert os_path_exists(fay_stance0001_path) is False
 
     # WHEN
-    fizz_world.create_stances()
+    fay_world.create_stances()
 
     # THEN
-    assert os_path_exists(fizz_stance0001_path)
-    print(get_sheet_names(fizz_stance0001_path))
-    br00021_sheet_df = pandas_read_excel(fizz_stance0001_path, "br00021")
+    assert os_path_exists(fay_stance0001_path)
+    print(get_sheet_names(fay_stance0001_path))
+    br00021_sheet_df = pandas_read_excel(fay_stance0001_path, "br00021")
     print(f"{br00021_sheet_df=}")
-    assert br00021_sheet_df.iloc[0]["face_name"] == "fizz"
+    assert br00021_sheet_df.iloc[0]["face_name"] == "Fay"
 
 
 def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldUnit(
@@ -79,13 +79,13 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
 ):
     # sourcery skip: no-loop-in-tests
     # ESTABLISH
-    fizz_str = "fizz"
-    fizz_output_dir = create_path(worlds_dir(), "fizz_output")
-    fizz_world = worldunit_shop(fizz_str, worlds_dir(), fizz_output_dir)
+    fay_str = "Fay"
+    fay_output_dir = create_path(worlds_dir(), "Fay_output")
+    fay_world = worldunit_shop(fay_str, worlds_dir(), fay_output_dir)
     sue_str = "Sue"
     event2 = 2
-    ex_filename = "fizzbuzz.xlsx"
-    input_file_path = create_path(fizz_world._input_dir, ex_filename)
+    ex_filename = "Faybob.xlsx"
+    input_file_path = create_path(fay_world._input_dir, ex_filename)
     amy23_str = "amy23"
     br00011_columns = [
         event_int_str(),
@@ -97,49 +97,49 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(input_file_path, "br00011_ex3", br00011_df)
-    fizz_world.input_to_clarity_mstr()
-    fizz_stance0001_path = create_stance0001_path(fizz_world.output_dir)
-    fizz_world.create_stances()
-    buzz_output_dir = create_path(worlds_dir(), "buzz_output")
-    buzz_world = worldunit_shop("buzz", worlds_dir(), buzz_output_dir)
-    buzz_input_st0001_path = create_path(buzz_world._belief_mstr_dir, "buzz_input.xlsx")
-    set_dir(create_stances_dir_path(buzz_world._belief_mstr_dir))
-    shutil_copy2(fizz_stance0001_path, dst=buzz_input_st0001_path)
-    # print(f" {pandas_read_excel(fizz_stance0001_path)=}")
-    # print(f"{pandas_read_excel(buzz_input_st0001_path)=}")
-    print(f"{buzz_input_st0001_path=}")
-    print(f"{get_sheet_names(buzz_input_st0001_path)=}")
-    buzz_world.input_to_clarity_mstr()
-    buzz_stance0001_path = create_stance0001_path(buzz_world.output_dir)
-    assert os_path_exists(buzz_stance0001_path) is False
+    fay_world.input_to_clarity_mstr()
+    fay_stance0001_path = create_stance0001_path(fay_world.output_dir)
+    fay_world.create_stances()
+    bob_output_dir = create_path(worlds_dir(), "Bob_output")
+    bob_world = worldunit_shop("Bob", worlds_dir(), bob_output_dir)
+    bob_input_st0001_path = create_path(bob_world._belief_mstr_dir, "Bob_input.xlsx")
+    set_dir(create_stances_dir_path(bob_world._belief_mstr_dir))
+    shutil_copy2(fay_stance0001_path, dst=bob_input_st0001_path)
+    # print(f" {pandas_read_excel(fay_stance0001_path)=}")
+    # print(f"{pandas_read_excel(bob_input_st0001_path)=}")
+    print(f"{bob_input_st0001_path=}")
+    print(f"{get_sheet_names(bob_input_st0001_path)=}")
+    bob_world.input_to_clarity_mstr()
+    bob_stance0001_path = create_stance0001_path(bob_world.output_dir)
+    assert os_path_exists(bob_stance0001_path) is False
 
     # WHEN
-    buzz_world.create_stances()
+    bob_world.create_stances()
 
     # THEN
-    assert os_path_exists(buzz_stance0001_path)
-    print(f"{get_sheet_names(buzz_stance0001_path)=}")
-    for sheetname in get_sheet_names(buzz_stance0001_path):
+    assert os_path_exists(bob_stance0001_path)
+    print(f"{get_sheet_names(bob_stance0001_path)=}")
+    for sheetname in get_sheet_names(bob_stance0001_path):
         print(f"comparing {sheetname=}...")
-        fizz_sheet_df = pandas_read_excel(fizz_stance0001_path, sheetname)
-        buzz_sheet_df = pandas_read_excel(fizz_stance0001_path, sheetname)
+        fay_sheet_df = pandas_read_excel(fay_stance0001_path, sheetname)
+        bob_sheet_df = pandas_read_excel(fay_stance0001_path, sheetname)
         # if sheetname == "br00021":
-        #     print(f"{fizz_sheet_df=}")
-        #     print(f"{buzz_sheet_df=}")
-        assert_frame_equal(fizz_sheet_df, buzz_sheet_df)
+        #     print(f"{fay_sheet_df=}")
+        #     print(f"{bob_sheet_df=}")
+        assert_frame_equal(fay_sheet_df, bob_sheet_df)
 
 
 def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_str = "fizz"
+    fay_str = "Fay"
     output_dir = create_path(worlds_dir(), "output")
-    fizz_world = worldunit_shop(fizz_str, worlds_dir(), output_dir)
+    fay_world = worldunit_shop(fay_str, worlds_dir(), output_dir)
     sue_str = "Sue"
     event2 = 2
-    ex_filename = "fizzbuzz.xlsx"
-    input_file_path = create_path(fizz_world._input_dir, ex_filename)
+    ex_filename = "Faybob.xlsx"
+    input_file_path = create_path(fay_world._input_dir, ex_filename)
     a23_str = "amy23"
     br00011_columns = [
         event_int_str(),
@@ -151,14 +151,14 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
     br00011_rows = [[event2, sue_str, a23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(input_file_path, "br00011_ex3", br00011_df)
-    fizz_world.input_to_clarity_mstr()
+    fay_world.input_to_clarity_mstr()
 
     a23_calendar_md_path = create_path(output_dir, f"{a23_str}_calendar.md")
     print(f"      {a23_calendar_md_path=}")
     assert not os_path_exists(a23_calendar_md_path)
 
     # WHEN
-    fizz_world.create_stances()
+    fay_world.create_stances()
 
     # THEN
     assert os_path_exists(a23_calendar_md_path)
@@ -166,9 +166,9 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
 
 # def test_WorldUnit_input_to_clarity_CreatesFiles(env_dir_setup_cleanup):
 #     # ESTABLISH
-#     fizz_str = "fizz"
-#     fizz_world = worldunit_shop(fizz_str, worlds_dir())
-#     # delete_dir(fizz_world.worlds_dir)
+#     fay_str = "Fay"
+#     fay_world = worldunit_shop(fay_str, worlds_dir())
+#     # delete_dir(fay_world.worlds_dir)
 #     sue_str = "Sue"
 #     event1 = 1
 #     event2 = 2
@@ -176,8 +176,8 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
 #     minute_420 = 420
 #     hour6am = "6am"
 #     hour7am = "7am"
-#     ex_filename = "fizzbuzz.xlsx"
-#     input_file_path = create_path(fizz_world._input_dir, ex_filename)
+#     ex_filename = "Faybob.xlsx"
+#     input_file_path = create_path(fay_world._input_dir, ex_filename)
 #     br00003_columns = [
 #         face_name_str(),
 #         event_int_str(),
@@ -222,7 +222,7 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
 #     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
 #     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
 #     upsert_sheet(input_file_path, "br00011_ex3", br00011_df)
-#     mstr_dir = fizz_world._belief_mstr_dir
+#     mstr_dir = fay_world._belief_mstr_dir
 #     wrong_a23_belief_dir = create_path(mstr_dir, amy23_str)
 #     assert os_path_exists(wrong_a23_belief_dir) is False
 #     a23_json_path = create_belief_json_path(mstr_dir, amy23_str)
@@ -234,18 +234,18 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
 #     assert os_path_exists(a23_sue_gut_path) is False
 #     assert os_path_exists(a23_sue_job_path) is False
 #     assert os_path_exists(sue37_mandate_path) is False
-#     assert count_dirs_files(fizz_world.worlds_dir) == 7
+#     assert count_dirs_files(fay_world.worlds_dir) == 7
 
 #     # WHEN
-#     fizz_world.input_to_clarity_mstr()
+#     fay_world.input_to_clarity_mstr()
 
 #     # THEN
 #     assert os_path_exists(wrong_a23_belief_dir) is False
-#     brick_file_path = create_path(fizz_world._brick_dir, "br00003.xlsx")
+#     brick_file_path = create_path(fay_world._brick_dir, "br00003.xlsx")
 #     assert os_path_exists(input_file_path)
 #     assert os_path_exists(brick_file_path)
 #     assert os_path_exists(a23_json_path)
 #     assert os_path_exists(a23_sue_gut_path)
 #     assert os_path_exists(a23_sue_job_path)
 #     assert os_path_exists(sue37_mandate_path)
-#     assert count_dirs_files(fizz_world.worlds_dir) == 91
+#     assert count_dirs_files(fay_world.worlds_dir) == 91

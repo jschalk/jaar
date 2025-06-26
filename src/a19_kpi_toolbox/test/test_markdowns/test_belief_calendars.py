@@ -41,7 +41,7 @@ def test_create_calendar_markdown_files_Senario1_CreatesFileFromBeliefUnitJSON(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_str = "fizz"
+    fay_str = "Fay"
     temp_dir = get_module_temp_dir()
     belief_mstr_dir = create_path(temp_dir, "belief_mstr")
     output_dir = create_path(temp_dir, "output")
@@ -67,13 +67,13 @@ def test_create_calendar_markdown_files_Senario1_CreatesFileFromBeliefUnitJSON(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
-#     fizz_str = "fizz"
+#     fay_str = "Fay"
 #     output_dir = create_path(worlds_dir(), "output")
-#     fizz_world = shop(fizz_str, worlds_dir(), output_dir)
+#     fay_world = shop(fay_str, worlds_dir(), output_dir)
 #     sue_str = "Sue"
 #     event2 = 2
-#     ex_filename = "fizzbuzz.xlsx"
-#     input_file_path = create_path(fizz_world._input_dir, ex_filename)
+#     ex_filename = "Faybob.xlsx"
+#     input_file_path = create_path(fay_world._input_dir, ex_filename)
 #     a23_str = "amy23"
 #     br00011_columns = [
 #         event_int_str(),
@@ -85,14 +85,14 @@ def test_create_calendar_markdown_files_Senario1_CreatesFileFromBeliefUnitJSON(
 #     br00011_rows = [[event2, sue_str, a23_str, sue_str, sue_str]]
 #     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
 #     upsert_sheet(input_file_path, "br00011_ex3", br00011_df)
-#     fizz_world.input_to_clarity_mstr()
+#     fay_world.input_to_clarity_mstr()
 
 #     a23_calendar_md_path = create_path(output_dir, f"{a23_str}_calendar.md")
 #     print(f"      {a23_calendar_md_path=}")
 #     assert not os_path_exists(a23_calendar_md_path)
 
 #     # WHEN
-#     fizz_world.create_calendar_markdown_files()
+#     fay_world.create_calendar_markdown_files()
 
 #     # THEN
 #     assert os_path_exists(a23_calendar_md_path)

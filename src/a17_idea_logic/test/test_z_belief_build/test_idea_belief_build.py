@@ -41,7 +41,7 @@ def test_belief_build_from_df_ReturnsObj_Scenario0_OneBeliefLabel(
     x_respect_bit = 66
     x_penny = 77
     x_job_listen_rotations = 7
-    x_beliefs_dir = create_path(idea_beliefs_dir(), "fizz")
+    x_beliefs_dir = create_path(idea_beliefs_dir(), "Fay")
     amy23_str = "amy23"
     slash_str = "/"
 
@@ -116,7 +116,7 @@ def test_belief_build_from_df_ReturnsObj_Scenario1_TwoBeliefLabels(
     x_fund_iota = 55
     x_respect_bit = 66
     x_penny = 77
-    x_beliefs_dir = create_path(idea_beliefs_dir(), "fizz")
+    x_beliefs_dir = create_path(idea_beliefs_dir(), "Fay")
     amy23_str = "amy23"
     slash_str = "/"
 

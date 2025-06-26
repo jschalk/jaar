@@ -282,7 +282,7 @@ def test_get_from_file_ReturnsBeliefUnitWith_belief_mstr_dir(env_dir_setup_clean
     amy45_belief.timeline.timeline_label = sue_timeline_label
     sue_respect_bit = 2
     amy45_belief.respect_bit = sue_respect_bit
-    x_belief_mstr_dir = create_path(get_module_temp_dir(), "fizz_buzz")
+    x_belief_mstr_dir = create_path(get_module_temp_dir(), "Fay_bob")
     amy45_json_path = create_belief_json_path(x_belief_mstr_dir, amy45_str)
     save_file(amy45_json_path, None, amy45_belief.get_json())
     assert amy45_belief.belief_mstr_dir != x_belief_mstr_dir

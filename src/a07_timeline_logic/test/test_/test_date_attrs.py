@@ -36,7 +36,7 @@ def test_PlanTimelinePoint_Exists():
 
 def test_PlanTimelinePoint_shop_ReturnsObj():
     # ESTABLISH
-    x_time_range_root_rope = "fizz07"
+    x_time_range_root_rope = "Fay07"
     x_timeline_min = 890000
     sue_plan = planunit_shop("Sue")
 

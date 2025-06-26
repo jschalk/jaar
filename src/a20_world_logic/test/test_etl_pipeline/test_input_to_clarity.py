@@ -51,14 +51,14 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario0_br000113PopulatesTable
     env_dir_setup_cleanup,
 ):
     # ESTABLISH:
-    fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str, worlds_dir())
-    # delete_dir(fizz_world.worlds_dir)
+    fay_str = "Fay"
+    fay_world = worldunit_shop(fay_str, worlds_dir())
+    # delete_dir(fay_world.worlds_dir)
     sue_str = "Sue"
     sue_inx = "Suzy"
     e3 = 3
-    ex_filename = "fizzbuzz.xlsx"
-    input_file_path = create_path(fizz_world._input_dir, ex_filename)
+    ex_filename = "Faybob.xlsx"
+    input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00113_columns = [
         face_name_str(),
         event_int_str(),
@@ -99,7 +99,7 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario0_br000113PopulatesTable
     plnunit_voice_put_agg = create_prime_tablename("planunit", "v", "agg", "put")
     plnacct_voice_put_raw = create_prime_tablename("plnacct", "v", "raw", "put")
     plnacct_voice_put_agg = create_prime_tablename("plnacct", "v", "agg", "put")
-    mstr_dir = fizz_world._belief_mstr_dir
+    mstr_dir = fay_world._belief_mstr_dir
     a23_json_path = create_belief_json_path(mstr_dir, a23_str)
     a23_e1_all_pack_path = create_event_all_pack_path(mstr_dir, a23_str, sue_inx, e3)
     a23_e1_expressed_pack_path = expressed_path(mstr_dir, a23_str, sue_inx, e3)
@@ -150,7 +150,7 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario0_br000113PopulatesTable
         # self.calc_belief_bud_acct_mandate_net_ledgers()
 
         # WHEN
-        fizz_world.input_to_clarity_with_cursor(db_conn, cursor)
+        fay_world.input_to_clarity_with_cursor(db_conn, cursor)
 
         # THEN
         # select_pidgin_core = f"SELECT * FROM {pidcore_sound_vld}"
@@ -211,14 +211,14 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH:
-    fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str, worlds_dir())
-    # delete_dir(fizz_world.worlds_dir)
+    fay_str = "Fay"
+    fay_world = worldunit_shop(fay_str, worlds_dir())
+    # delete_dir(fay_world.worlds_dir)
     sue_str = "Sue"
     sue_inx = "Suzy"
     e3 = 3
-    ex_filename = "fizzbuzz.xlsx"
-    input_file_path = create_path(fizz_world._input_dir, ex_filename)
+    ex_filename = "Faybob.xlsx"
+    input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00113_columns = [
         face_name_str(),
         event_int_str(),
@@ -276,7 +276,7 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
     plnunit_voice_put_agg = create_prime_tablename("planunit", "v", "agg", "put")
     plnacct_voice_put_raw = create_prime_tablename("plnacct", "v", "raw", "put")
     plnacct_voice_put_agg = create_prime_tablename("plnacct", "v", "agg", "put")
-    mstr_dir = fizz_world._belief_mstr_dir
+    mstr_dir = fay_world._belief_mstr_dir
     a23_json_path = create_belief_json_path(mstr_dir, a23_str)
     a23_e1_all_pack_path = create_event_all_pack_path(mstr_dir, a23_str, sue_inx, e3)
     a23_e1_expressed_pack_path = expressed_path(mstr_dir, a23_str, sue_inx, e3)
@@ -325,7 +325,7 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
         # self.calc_belief_bud_acct_mandate_net_ledgers()
 
         # WHEN
-        fizz_world.input_to_clarity_with_cursor(db_conn, cursor)
+        fay_world.input_to_clarity_with_cursor(db_conn, cursor)
 
         # THEN
         assert get_row_count(cursor, br00113_raw) == 1
@@ -368,14 +368,14 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario2_PopulateBeliefTranBook
     env_dir_setup_cleanup,
 ):
     # ESTABLISH:
-    fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str, worlds_dir())
-    # delete_dir(fizz_world.worlds_dir)
+    fay_str = "Fay"
+    fay_world = worldunit_shop(fay_str, worlds_dir())
+    # delete_dir(fay_world.worlds_dir)
     bob_str = "Bob"
     sue_str = "Sue"
     e3 = 3
-    ex_filename = "fizzbuzz.xlsx"
-    input_file_path = create_path(fizz_world._input_dir, ex_filename)
+    ex_filename = "Faybob.xlsx"
+    input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00002_columns = [
         event_int_str(),
         face_name_str(),
@@ -399,7 +399,7 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario2_PopulateBeliefTranBook
         assert not db_table_exists(cursor, belief_acct_nets_str())
 
         # WHEN
-        fizz_world.input_to_clarity_with_cursor(db_conn, cursor)
+        fay_world.input_to_clarity_with_cursor(db_conn, cursor)
 
         # THEN
         assert get_row_count(cursor, belief_acct_nets_str()) == 1
@@ -409,12 +409,12 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario3_WhenNoBeliefIdeas_ote1
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str, worlds_dir())
+    fay_str = "Fay"
+    fay_world = worldunit_shop(fay_str, worlds_dir())
     sue_str = "Sue"
     event2 = 2
-    ex_filename = "fizzbuzz.xlsx"
-    input_file_path = create_path(fizz_world._input_dir, ex_filename)
+    ex_filename = "Faybob.xlsx"
+    input_file_path = create_path(fay_world._input_dir, ex_filename)
     amy23_str = "amy23"
     br00011_columns = [
         event_int_str(),
@@ -426,14 +426,14 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario3_WhenNoBeliefIdeas_ote1
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(input_file_path, "br00011_ex3", br00011_df)
-    belief_mstr = fizz_world._belief_mstr_dir
+    belief_mstr = fay_world._belief_mstr_dir
     a23_ote1_csv_path = create_belief_ote1_csv_path(belief_mstr, amy23_str)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         assert os_path_exists(a23_ote1_csv_path) is False
 
         # WHEN
-        fizz_world.input_to_clarity_with_cursor(db_conn, cursor)
+        fay_world.input_to_clarity_with_cursor(db_conn, cursor)
 
     # THEN
     assert os_path_exists(a23_ote1_csv_path)
@@ -443,16 +443,16 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario4_DeletesPreviousFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str, worlds_dir())
-    print(f"{fizz_world.worlds_dir=}")
-    mstr_dir = fizz_world._belief_mstr_dir
+    fay_str = "Fay"
+    fay_world = worldunit_shop(fay_str, worlds_dir())
+    print(f"{fay_world.worlds_dir=}")
+    mstr_dir = fay_world._belief_mstr_dir
     beliefs_dir = create_path(mstr_dir, "beliefs")
     testing2_filename = "testing2.txt"
     testing3_filename = "testing3.txt"
-    save_file(fizz_world.worlds_dir, testing2_filename, "")
+    save_file(fay_world.worlds_dir, testing2_filename, "")
     save_file(beliefs_dir, testing3_filename, "")
-    testing2_path = create_path(fizz_world.worlds_dir, testing2_filename)
+    testing2_path = create_path(fay_world.worlds_dir, testing2_filename)
     testing3_path = create_path(beliefs_dir, testing3_filename)
     assert os_path_exists(testing2_path)
     assert os_path_exists(testing3_path)
@@ -461,7 +461,7 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario4_DeletesPreviousFiles(
         cursor = db_conn.cursor()
 
         # WHEN
-        fizz_world.input_to_clarity_with_cursor(db_conn, cursor)
+        fay_world.input_to_clarity_with_cursor(db_conn, cursor)
 
     # THEN
     assert os_path_exists(testing2_path)
@@ -472,9 +472,9 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str, worlds_dir())
-    # delete_dir(fizz_world.worlds_dir)
+    fay_str = "Fay"
+    fay_world = worldunit_shop(fay_str, worlds_dir())
+    # delete_dir(fay_world.worlds_dir)
     sue_str = "Sue"
     event1 = 1
     event2 = 2
@@ -482,8 +482,8 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
     minute_420 = 420
     hour6am = "6am"
     hour7am = "7am"
-    ex_filename = "fizzbuzz.xlsx"
-    input_file_path = create_path(fizz_world._input_dir, ex_filename)
+    ex_filename = "Faybob.xlsx"
+    input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00003_columns = [
         event_int_str(),
         face_name_str(),
@@ -528,7 +528,7 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(input_file_path, "br00011_ex3", br00011_df)
-    mstr_dir = fizz_world._belief_mstr_dir
+    mstr_dir = fay_world._belief_mstr_dir
     wrong_a23_belief_dir = create_path(mstr_dir, amy23_str)
     assert os_path_exists(wrong_a23_belief_dir) is False
     a23_json_path = create_belief_json_path(mstr_dir, amy23_str)
@@ -542,10 +542,10 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
         assert not os_path_exists(a23_sue_gut_path)
         assert not os_path_exists(a23_sue_job_path)
         assert not os_path_exists(sue37_mandate_path)
-        assert count_dirs_files(fizz_world.worlds_dir) == 6
+        assert count_dirs_files(fay_world.worlds_dir) == 6
 
         # WHEN
-        fizz_world.input_to_clarity_with_cursor(db_conn, cursor)
+        fay_world.input_to_clarity_with_cursor(db_conn, cursor)
 
         # THEN
         assert os_path_exists(wrong_a23_belief_dir) is False
@@ -554,21 +554,21 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
         assert os_path_exists(a23_sue_gut_path)
         assert os_path_exists(a23_sue_job_path)
         assert os_path_exists(sue37_mandate_path)
-        assert count_dirs_files(fizz_world.worlds_dir) == 42
+        assert count_dirs_files(fay_world.worlds_dir) == 42
 
 
 def test_WorldUnit_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     env_dir_setup_cleanup,
 ):  # sourcery skip: extract-method
     # ESTABLISH:
-    fizz_str = "fizz"
-    fizz_world = worldunit_shop(fizz_str, worlds_dir())
-    # delete_dir(fizz_world.worlds_dir)
+    fay_str = "Fay"
+    fay_world = worldunit_shop(fay_str, worlds_dir())
+    # delete_dir(fay_world.worlds_dir)
     sue_str = "Sue"
     sue_inx = "Suzy"
     e3 = 3
-    ex_filename = "fizzbuzz.xlsx"
-    input_file_path = create_path(fizz_world._input_dir, ex_filename)
+    ex_filename = "Faybob.xlsx"
+    input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00113_columns = [
         face_name_str(),
         event_int_str(),
@@ -602,15 +602,15 @@ def test_WorldUnit_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     br00001_1df = DataFrame([br1row0], columns=br00001_columns)
     br00001_ex0_str = "example0_br00001"
     upsert_sheet(input_file_path, br00001_ex0_str, br00001_1df)
-    fizz_db_path = fizz_world.get_db_path()
-    assert not os_path_exists(fizz_db_path)
+    fay_db_path = fay_world.get_db_path()
+    assert not os_path_exists(fay_db_path)
 
     # WHEN
-    fizz_world.input_to_clarity_mstr()
+    fay_world.input_to_clarity_mstr()
 
     # THEN
-    assert os_path_exists(fizz_db_path)
-    with sqlite3_connect(fizz_db_path) as db_conn:
+    assert os_path_exists(fay_db_path)
+    with sqlite3_connect(fay_db_path) as db_conn:
         br00113_raw = f"{br00113_str}_brick_raw"
         br00113_agg = f"{br00113_str}_brick_agg"
         br00113_valid = f"{br00113_str}_brick_valid"

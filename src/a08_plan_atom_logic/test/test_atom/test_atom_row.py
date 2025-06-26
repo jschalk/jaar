@@ -125,8 +125,8 @@ def test_AtomRow_set_class_types_SetsAttr():
     # ESTABLISH
     x_atomrow = atomrow_shop({}, INSERT_str())
     x_atomrow.close = "4"
-    x_parent_rope = "fizz_buzz"
-    x_concept_label = "buzzziy"
+    x_parent_rope = "Fay_bob"
+    x_concept_label = "Bobziy"
     x_morph_str = "True"
     x_morph_bool = True
     x_rope = create_rope(x_parent_rope, x_concept_label)

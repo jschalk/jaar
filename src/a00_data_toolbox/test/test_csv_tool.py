@@ -27,21 +27,21 @@ def test_open_csv_with_types(env_dir_setup_cleanup):
     }
 
     # Create test CSV file
-    csv_str = """id,name,price,available,fizz
-1,Widget,19.99,True,fizz
-2,Gadget,5.49,False,buzz
-3,Doodad,12.00,true,fizz
-4,Doodad,12.00,truee,fizz
-,Doodad,,truee,fizz
+    csv_str = """id,name,price,available,fay
+1,Widget,19.99,True,fay
+2,Gadget,5.49,False,bob
+3,Doodad,12.00,true,fay
+4,Doodad,12.00,truee,fay
+,Doodad,,truee,fay
 """
     save_file(get_module_temp_dir(), "test.csv", csv_str)
     # with open(csv_path, mode="w", newline="", encoding="utf-8") as csv_file:
     #     writer = csv_writer(csv_file)
-    #     writer.writerow(["id", "name", "price", "available", "fizz"])
-    #     writer.writerow(["1", "Widget", "19.99", "True", "fizz"])
-    #     writer.writerow(["2", "Gadget", "5.49", "False", "buzz"])
-    #     writer.writerow(["3", "Doodad", "12.00", "true", "fizz"])
-    #     writer.writerow(["4", "Doodad", "12.00", "truee", "fizz"])
+    #     writer.writerow(["id", "name", "price", "available", "Fay"])
+    #     writer.writerow(["1", "Widget", "19.99", "True", "Fay"])
+    #     writer.writerow(["2", "Gadget", "5.49", "False", "Bob"])
+    #     writer.writerow(["3", "Doodad", "12.00", "true", "Fay"])
+    #     writer.writerow(["4", "Doodad", "12.00", "truee", "Fay"])
     csv_path = create_path(get_module_temp_dir(), "test.csv")
 
     # WHEN
@@ -49,12 +49,12 @@ def test_open_csv_with_types(env_dir_setup_cleanup):
 
     # THEN
     expected_rows = [
-        ("id", "name", "price", "available", "fizz"),
-        (1, "Widget", 19.99, True, "fizz"),
-        (2, "Gadget", 5.49, False, "buzz"),
-        (3, "Doodad", 12.00, True, "fizz"),
-        (4, "Doodad", 12.00, None, "fizz"),
-        (None, "Doodad", None, None, "fizz"),
+        ("id", "name", "price", "available", "fay"),
+        (1, "Widget", 19.99, True, "fay"),
+        (2, "Gadget", 5.49, False, "bob"),
+        (3, "Doodad", 12.00, True, "fay"),
+        (4, "Doodad", 12.00, None, "fay"),
+        (None, "Doodad", None, None, "fay"),
     ]
     print(f"{generated_rows}")
     assert generated_rows == expected_rows

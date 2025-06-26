@@ -35,7 +35,7 @@ def test_default_knot_if_None_ReturnsObj():
     semicolon_str = ";"
     slash_str = "/"
     colon_str = ":"
-    buzz_str = "buzz"
+    bob_str = "Bob"
 
     # WHEN / THEN
     assert default_knot_if_None() == semicolon_str
@@ -44,7 +44,7 @@ def test_default_knot_if_None_ReturnsObj():
     assert default_knot_if_None(x_nan) == semicolon_str
     assert default_knot_if_None(slash_str) == slash_str
     assert default_knot_if_None(colon_str) == colon_str
-    assert default_knot_if_None(buzz_str) == buzz_str
+    assert default_knot_if_None(bob_str) == bob_str
 
 
 def test_NameTerm_exists():

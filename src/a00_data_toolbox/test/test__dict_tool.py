@@ -48,7 +48,7 @@ def test_get_empty_str_if_None():
     assert get_empty_str_if_None(None) == ""
     assert get_empty_str_if_None(2) == "2"
     assert get_empty_str_if_None(-3) == "-3"
-    assert get_empty_str_if_None("fizz") == "fizz"
+    assert get_empty_str_if_None("Fay") == "Fay"
 
 
 def test_get_0_if_None():

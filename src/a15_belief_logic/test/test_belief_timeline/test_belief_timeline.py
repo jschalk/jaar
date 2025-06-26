@@ -14,74 +14,74 @@ from src.a15_belief_logic.test._util.a15_env import (
 
 def test_get_belief_plantimelinepoint_ReturnsObj_Scenario0_Empty_offi_time():
     # ESTABLISH
-    fizz_str = "fizz"
-    fizz_beliefunit = beliefunit_shop(fizz_str, get_module_temp_dir())
-    assert fizz_beliefunit.timeline == timelineunit_shop(get_creg_config())
-    assert not fizz_beliefunit._offi_time_max
+    fay_str = "Fay"
+    fay_beliefunit = beliefunit_shop(fay_str, get_module_temp_dir())
+    assert fay_beliefunit.timeline == timelineunit_shop(get_creg_config())
+    assert not fay_beliefunit._offi_time_max
 
     # WHEN
-    fizz_plantimelinepoint = get_belief_plantimelinepoint(fizz_beliefunit)
+    fay_plantimelinepoint = get_belief_plantimelinepoint(fay_beliefunit)
 
     # THEN
-    assert fizz_beliefunit._offi_time_max == 0
-    assert fizz_plantimelinepoint.x_min == 0
+    assert fay_beliefunit._offi_time_max == 0
+    assert fay_plantimelinepoint.x_min == 0
 
-    assert fizz_plantimelinepoint
-    # assert fizz_plantimelinepoint.x_min == fizz_offi_time_max
-    fizz_planunit = fizz_plantimelinepoint.x_planunit
-    assert fizz_planunit.owner_name == "for_plantimelinepoint_calculation"
-    assert fizz_planunit.belief_label == fizz_beliefunit.belief_label
-    assert fizz_planunit.knot == fizz_beliefunit.knot
-    assert fizz_planunit.fund_iota == fizz_beliefunit.fund_iota
-    assert fizz_planunit.respect_bit == fizz_beliefunit.respect_bit
-    assert fizz_planunit.penny == fizz_beliefunit.penny
-    assert fizz_plantimelinepoint._month == "March"
-    assert fizz_plantimelinepoint._hour == "0-12am"
-    assert fizz_plantimelinepoint._minute == 0
-    assert fizz_plantimelinepoint._monthday == 1
-    assert fizz_plantimelinepoint._c400_number == 0
-    assert fizz_plantimelinepoint._year_num == 0
+    assert fay_plantimelinepoint
+    # assert fay_plantimelinepoint.x_min == fay_offi_time_max
+    fay_planunit = fay_plantimelinepoint.x_planunit
+    assert fay_planunit.owner_name == "for_plantimelinepoint_calculation"
+    assert fay_planunit.belief_label == fay_beliefunit.belief_label
+    assert fay_planunit.knot == fay_beliefunit.knot
+    assert fay_planunit.fund_iota == fay_beliefunit.fund_iota
+    assert fay_planunit.respect_bit == fay_beliefunit.respect_bit
+    assert fay_planunit.penny == fay_beliefunit.penny
+    assert fay_plantimelinepoint._month == "March"
+    assert fay_plantimelinepoint._hour == "0-12am"
+    assert fay_plantimelinepoint._minute == 0
+    assert fay_plantimelinepoint._monthday == 1
+    assert fay_plantimelinepoint._c400_number == 0
+    assert fay_plantimelinepoint._year_num == 0
 
 
 def test_get_belief_plantimelinepoint_ReturnsObj_Scenario1_BeliefUnit_NonDefaultAttrs():
     # ESTABLISH
-    fizz_str = "fizz"
+    fay_str = "Fay"
     slash_str = "/"
-    fizz_fund_iota = 5
-    fizz_respect_bit = 4
-    fizz_penny = 7
-    fizz_beliefunit = beliefunit_shop(
-        fizz_str,
+    fay_fund_iota = 5
+    fay_respect_bit = 4
+    fay_penny = 7
+    fay_beliefunit = beliefunit_shop(
+        fay_str,
         get_module_temp_dir(),
         knot=slash_str,
-        fund_iota=fizz_fund_iota,
-        respect_bit=fizz_respect_bit,
-        penny=fizz_penny,
+        fund_iota=fay_fund_iota,
+        respect_bit=fay_respect_bit,
+        penny=fay_penny,
     )
-    assert fizz_beliefunit.timeline == timelineunit_shop(get_creg_config())
-    assert not fizz_beliefunit._offi_time_max
+    assert fay_beliefunit.timeline == timelineunit_shop(get_creg_config())
+    assert not fay_beliefunit._offi_time_max
 
     # WHEN
-    fizz_plantimelinepoint = get_belief_plantimelinepoint(fizz_beliefunit)
+    fay_plantimelinepoint = get_belief_plantimelinepoint(fay_beliefunit)
 
     # THEN
-    assert fizz_beliefunit._offi_time_max == 0
-    assert fizz_plantimelinepoint.x_min == 0
+    assert fay_beliefunit._offi_time_max == 0
+    assert fay_plantimelinepoint.x_min == 0
 
-    assert fizz_plantimelinepoint
-    # assert fizz_plantimelinepoint.x_min == fizz_offi_time_max
-    fizz_planunit = fizz_plantimelinepoint.x_planunit
-    assert fizz_planunit.owner_name == "for_plantimelinepoint_calculation"
-    assert fizz_planunit.belief_label == fizz_beliefunit.belief_label
-    assert fizz_planunit.knot == fizz_beliefunit.knot
-    assert fizz_planunit.fund_iota == fizz_beliefunit.fund_iota
-    assert fizz_planunit.respect_bit == fizz_beliefunit.respect_bit
-    assert fizz_planunit.penny == fizz_beliefunit.penny
-    assert fizz_plantimelinepoint._month == "March"
-    assert fizz_plantimelinepoint._hour == "0-12am"
-    assert fizz_plantimelinepoint._minute == 0
-    assert fizz_plantimelinepoint._monthday == 1
-    assert fizz_plantimelinepoint._c400_number == 0
-    assert fizz_plantimelinepoint._year_num == 0
+    assert fay_plantimelinepoint
+    # assert fay_plantimelinepoint.x_min == fay_offi_time_max
+    fay_planunit = fay_plantimelinepoint.x_planunit
+    assert fay_planunit.owner_name == "for_plantimelinepoint_calculation"
+    assert fay_planunit.belief_label == fay_beliefunit.belief_label
+    assert fay_planunit.knot == fay_beliefunit.knot
+    assert fay_planunit.fund_iota == fay_beliefunit.fund_iota
+    assert fay_planunit.respect_bit == fay_beliefunit.respect_bit
+    assert fay_planunit.penny == fay_beliefunit.penny
+    assert fay_plantimelinepoint._month == "March"
+    assert fay_plantimelinepoint._hour == "0-12am"
+    assert fay_plantimelinepoint._minute == 0
+    assert fay_plantimelinepoint._monthday == 1
+    assert fay_plantimelinepoint._c400_number == 0
+    assert fay_plantimelinepoint._year_num == 0
     #  planunit_shop()
     #  plantimelinepoint_shop()
