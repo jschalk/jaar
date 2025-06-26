@@ -166,7 +166,7 @@ from src.a17_idea_logic.test._util.a17_str import (
     insert_multiple_str,
     insert_one_time_str,
     insert_update_str,
-    world_id_str,
+    world_name_str,
 )
 
 
@@ -204,7 +204,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert pidginable_delete_inx_cols.issubset(table_sorting_priority)
 
     # all the suffix otx/inx columns are only used in one table
-    assert table_sorting_priority[0] == "world_id"
+    assert table_sorting_priority[0] == "world_name"
     assert table_sorting_priority[1] == "idea_number"
     assert table_sorting_priority[2] == "source_dimen"
     assert table_sorting_priority[3] == "pidgin_event_int"
@@ -399,7 +399,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     all_args.add("source_dimen")
     all_args.add("pidgin_event_int")
     all_args.add(error_message_str())
-    all_args.add(world_id_str())
+    all_args.add(world_name_str())
     all_args.add("funds")  # kpi columns
     all_args.add("fund_rank")  # kpi columns
     all_args.add("tasks_count")  # kpi columns

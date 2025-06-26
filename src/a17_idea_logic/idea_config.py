@@ -39,7 +39,7 @@ def get_idea_formats_dir() -> str:
 def get_idea_elements_sort_order() -> list[str]:
     """Contains the standard sort order for all idea and plan_calc columns"""
     return [
-        "world_id",
+        "world_name",
         "idea_number",
         "source_dimen",
         "pidgin_event_int",
@@ -232,7 +232,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
     """Returns dictionary of sqlite_type for all idea elements (reference source: get_idea_elements_sort_order)"""
 
     return {
-        "world_id": "TEXT",
+        "world_name": "TEXT",
         "idea_number": "TEXT",
         "face_name": "TEXT",
         "face_name_otx": "TEXT",

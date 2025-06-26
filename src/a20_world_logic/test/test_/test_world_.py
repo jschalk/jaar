@@ -23,7 +23,7 @@ def test_WorldUnit_Exists():
     x_world = WorldUnit()
 
     # THEN
-    assert not x_world.world_id
+    assert not x_world.world_name
     assert not x_world.worlds_dir
     assert not x_world.output_dir
     assert not x_world.world_time_pnigh
@@ -65,7 +65,7 @@ def test_WorldUnit_set_input_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
 def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_str = "fizz"
-    fizz_world = WorldUnit(world_id=fizz_str, worlds_dir=worlds_dir())
+    fizz_world = WorldUnit(world_name=fizz_str, worlds_dir=worlds_dir())
     x_world_dir = create_path(worlds_dir(), fizz_str)
     x_syntax_otz_dir = create_path(x_world_dir, "syntax_otz")
     x_input_dir = create_path(x_world_dir, "input")
@@ -103,13 +103,13 @@ def test_worldunit_shop_ReturnsObj_Scenario0_WithParameters(env_dir_setup_cleanu
     worlds2_dir = create_path(worlds_dir(), "worlds2")
     example_input_dir = create_path(worlds_dir(), "example_input")
     output_dir = create_path(worlds_dir(), "output")
-    five_world_id = "five"
+    five_world_name = "five"
     world2_time_pnigh = 55
     world2_beliefunits = {"amy45"}
 
     # WHEN
     x_world = worldunit_shop(
-        world_id=five_world_id,
+        world_name=five_world_name,
         worlds_dir=worlds2_dir,
         output_dir=output_dir,
         input_dir=example_input_dir,
@@ -118,8 +118,8 @@ def test_worldunit_shop_ReturnsObj_Scenario0_WithParameters(env_dir_setup_cleanu
     )
 
     # THEN
-    world_dir = create_path(worlds2_dir, x_world.world_id)
-    assert x_world.world_id == five_world_id
+    world_dir = create_path(worlds2_dir, x_world.world_name)
+    assert x_world.world_name == five_world_name
     assert x_world.worlds_dir == worlds2_dir
     assert x_world.output_dir == output_dir
     assert x_world._input_dir == example_input_dir
@@ -138,8 +138,8 @@ def test_worldunit_shop_ReturnsObj_Scenario1_WithoutParameters(env_dir_setup_cle
     x_world = worldunit_shop(a23_str, worlds_dir())
 
     # THEN
-    world_dir = create_path(worlds_dir(), x_world.world_id)
-    assert x_world.world_id == a23_str
+    world_dir = create_path(worlds_dir(), x_world.world_name)
+    assert x_world.world_name == a23_str
     assert x_world.worlds_dir == worlds_dir()
     assert not x_world.output_dir
     assert x_world.world_time_pnigh == 0
@@ -160,7 +160,7 @@ def test_worldunit_shop_ReturnsObj_Scenario2_ThirdParameterIs_output_dir(
     x_world = worldunit_shop(a23_str, worlds_dir(), output_dir)
 
     # THEN
-    assert x_world.world_id == a23_str
+    assert x_world.world_name == a23_str
     assert x_world.worlds_dir == worlds_dir()
     assert x_world.output_dir == output_dir
 

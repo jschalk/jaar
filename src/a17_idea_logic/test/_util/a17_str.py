@@ -45,5 +45,5 @@ def insert_update_str() -> str:
     return "insert_update"
 
 
-def world_id_str() -> str:
-    return "world_id"
+def world_name_str() -> str:
+    return "world_name"

@@ -1,6 +1,6 @@
 from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
-from src.a17_idea_logic.test._util.a17_str import world_id_str
+from src.a17_idea_logic.test._util.a17_str import world_name_str
 from src.a21_lobby_logic.lobby_path import (
     create_belief_mstr_dir_path,
     create_lobby_dir_path,
@@ -22,7 +22,7 @@ def test_create_lobby_dir_path_HasDocString():
 def test_create_world_dir_path_HasDocString():
     # ESTABLISH
     doc_str = create_world_dir_path(
-        lobby_mstr_dir_str(), lobby_id_str(), world_id_str()
+        lobby_mstr_dir_str(), lobby_id_str(), world_name_str()
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
@@ -32,7 +32,7 @@ def test_create_world_dir_path_HasDocString():
 def test_create_belief_mstr_dir_path_HasDocString():
     # ESTABLISH
     doc_str = create_belief_mstr_dir_path(
-        lobby_mstr_dir_str(), lobby_id_str(), world_id_str()
+        lobby_mstr_dir_str(), lobby_id_str(), world_name_str()
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
