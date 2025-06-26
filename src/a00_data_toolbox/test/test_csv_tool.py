@@ -1,15 +1,18 @@
-from csv import reader as csv_reader
+from csv import DictReader as csv_DictReader, reader as csv_reader
+from io import StringIO as io_StringIO
 from pathlib import Path
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.csv_toolbox import (
     export_sqlite_tables_to_csv,
     open_csv_with_types,
+    replace_csv_column_from_string,
 )
 from src.a00_data_toolbox.file_toolbox import create_path, save_file, set_dir
 from src.a00_data_toolbox.test._util.a00_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
+import tempfile
 
 
 def test_open_csv_with_types(env_dir_setup_cleanup):
@@ -96,3 +99,28 @@ def test_export_sqlite_tables_to_csv(env_dir_setup_cleanup):
         reader = list(csv_reader(f))
         assert reader[0] == ["sku", "price"]
         assert reader[1] == ["ABC", "9.99"]
+
+
+def test_replace_csv_column_from_string():
+    # ESTABLISH
+    csv_string = """id,name,status
+1,Alice,pending
+2,Bob,in progress
+"""
+
+    # WHEN
+    modified_csv = replace_csv_column_from_string(csv_string, "status", "complete")
+
+    # THEN
+    expected_csv = """id,name,status
+1,Alice,complete
+2,Bob,complete
+"""
+    assert modified_csv == expected_csv
+    reader = csv_DictReader(io_StringIO(modified_csv))
+    rows = list(reader)
+
+    # Assertions
+    assert all(row["status"] == "complete" for row in rows)
+    assert rows[0]["name"] == "Alice"
+    assert rows[1]["name"] == "Bob"

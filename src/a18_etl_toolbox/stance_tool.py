@@ -1,4 +1,5 @@
 from os.path import exists as os_path_exists
+from src.a00_data_toolbox.csv_toolbox import replace_csv_column_from_string
 from src.a00_data_toolbox.file_toolbox import create_path, get_level1_dirs
 from src.a12_hub_toolbox.hub_tool import open_plan_file
 from src.a15_belief_logic.belief import get_default_path_beliefunit
@@ -29,6 +30,10 @@ def collect_stance_csv_strs(belief_mstr_dir: str) -> dict[str, str]:
     return x_csv_strs
 
 
-def create_stance0001_file(belief_mstr_dir: str, output_dir: str):
+def create_stance0001_file(belief_mstr_dir: str, output_dir: str, world_name: str):
     stance_csv_strs = collect_stance_csv_strs(belief_mstr_dir)
-    csv_dict_to_excel(stance_csv_strs, output_dir, STANCE0001_FILENAME)
+    with_face_name_csvs = {}
+    for csv_key, csv_str in stance_csv_strs.items():
+        csv_str = replace_csv_column_from_string(csv_str, "face_name", world_name)
+        with_face_name_csvs[csv_key] = csv_str
+    csv_dict_to_excel(with_face_name_csvs, output_dir, STANCE0001_FILENAME)

@@ -9,8 +9,8 @@ from src.a20_world_logic.world import worldunit_shop
 def test_WorldUnit_get_dict_ReturnsObj_Scenario0MinimalParameters():
     # ESTABLISH
     worlds2_dir = create_path(get_module_temp_dir(), "worlds2")
-    five_world_id = "five"
-    x_world = worldunit_shop(five_world_id, worlds2_dir)
+    five_world_name = "five"
+    x_world = worldunit_shop(five_world_name, worlds2_dir)
 
     # WHEN
     x_world_dict = x_world.get_dict()
@@ -18,22 +18,22 @@ def test_WorldUnit_get_dict_ReturnsObj_Scenario0MinimalParameters():
     # THEN
     assert x_world_dict
     assert set(x_world_dict.keys()) == {
-        "world_id",
+        "world_name",
         "world_time_pnigh",
     }
-    assert x_world_dict.get("world_id") == five_world_id
+    assert x_world_dict.get("world_name") == five_world_name
     assert x_world_dict.get("world_time_pnigh") == 0
 
 
 def test_WorldUnit_get_dict_ReturnsObj_Scenario1():
     # ESTABLISH
     worlds2_dir = create_path(get_module_temp_dir(), "worlds2")
-    five_world_id = "five"
+    five_world_name = "five"
     world2_time_pnigh = 55
     amy45_str = "amy45"
     world2_beliefunits = {"amy45"}
     x_world = worldunit_shop(
-        world_id=five_world_id,
+        world_name=five_world_name,
         worlds_dir=worlds2_dir,
         world_time_pnigh=world2_time_pnigh,
         _beliefunits=world2_beliefunits,
@@ -44,5 +44,5 @@ def test_WorldUnit_get_dict_ReturnsObj_Scenario1():
 
     # THEN
     assert x_world_dict
-    assert x_world_dict.get("world_id") == five_world_id
+    assert x_world_dict.get("world_name") == five_world_name
     assert x_world_dict.get("world_time_pnigh") == world2_time_pnigh

@@ -49,13 +49,13 @@ from src.a19_kpi_toolbox.kpi_mstr import (
 )
 
 
-class WorldID(str):
+class WorldName(str):
     pass
 
 
 @dataclass
 class WorldUnit:
-    world_id: WorldID = None
+    world_name: WorldName = None
     worlds_dir: str = None
     output_dir: str = None
     world_time_pnigh: TimeLinePoint = None
@@ -92,7 +92,7 @@ class WorldUnit:
         set_dir(self._input_dir)
 
     def _set_world_dirs(self):
-        self._world_dir = create_path(self.worlds_dir, self.world_id)
+        self._world_dir = create_path(self.worlds_dir, self.world_name)
         self._syntax_otz_dir = create_path(self._world_dir, "syntax_otz")
         self._brick_dir = create_path(self._world_dir, "brick")
         self._belief_mstr_dir = create_path(self._world_dir, "belief_mstr")
@@ -168,7 +168,7 @@ class WorldUnit:
         # if store_tracing_files:
 
     def create_stances(self):
-        create_stance0001_file(self._belief_mstr_dir, self.output_dir)
+        create_stance0001_file(self._belief_mstr_dir, self.output_dir, self.world_name)
         create_calendar_markdown_files(self._belief_mstr_dir, self.output_dir)
 
     def create_kpi_csvs(self):
@@ -176,13 +176,13 @@ class WorldUnit:
 
     def get_dict(self) -> dict:
         return {
-            "world_id": self.world_id,
+            "world_name": self.world_name,
             "world_time_pnigh": self.world_time_pnigh,
         }
 
 
 def worldunit_shop(
-    world_id: WorldID,
+    world_name: WorldName,
     worlds_dir: str,
     output_dir: str = None,
     input_dir: str = None,
@@ -190,7 +190,7 @@ def worldunit_shop(
     _beliefunits: set[BeliefLabel] = None,
 ) -> WorldUnit:
     x_worldunit = WorldUnit(
-        world_id=world_id,
+        world_name=world_name,
         worlds_dir=worlds_dir,
         output_dir=output_dir,
         world_time_pnigh=get_0_if_None(world_time_pnigh),

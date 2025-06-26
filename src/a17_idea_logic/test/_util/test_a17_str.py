@@ -10,7 +10,7 @@ from src.a17_idea_logic.test._util.a17_str import (
     insert_multiple_str,
     insert_one_time_str,
     insert_update_str,
-    world_id_str,
+    world_name_str,
 )
 
 
@@ -28,4 +28,4 @@ def test_str_functions_ReturnsObj():
     assert insert_one_time_str() == "insert_one_time"
     assert insert_multiple_str() == "insert_multiple"
     assert insert_update_str() == "insert_update"
-    assert world_id_str() == "world_id"
+    assert world_name_str() == "world_name"

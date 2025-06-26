@@ -32,7 +32,7 @@ def test_input_to_clarity_mstr_Examples(env_dir_setup_cleanup):
         input_dir = create_path(examples_dir, example_name)
         print(f"{input_dir=} {get_dir_filenames(input_dir)}")
         example_worldunit = worldunit_shop(
-            world_id=example_name,
+            world_name=example_name,
             worlds_dir=worlds_dir,
             input_dir=input_dir,
             output_dir=output_dir,

@@ -5,17 +5,17 @@ from src.a20_world_logic.test._util.a20_env import (
     get_module_temp_dir as worlds_dir,
 )
 from src.a20_world_logic.world import (
-    WorldID,
+    WorldName,
     WorldUnit,
     init_beliefunits_from_dirs,
     worldunit_shop,
 )
 
 
-def test_WorldID_Exists():
+def test_WorldName_Exists():
     # ESTABLISH / WHEN / THEN
-    assert WorldID() == ""
-    assert WorldID("cookie") == "cookie"
+    assert WorldName() == ""
+    assert WorldName("cookie") == "cookie"
 
 
 def test_WorldUnit_Exists():
@@ -23,7 +23,7 @@ def test_WorldUnit_Exists():
     x_world = WorldUnit()
 
     # THEN
-    assert not x_world.world_id
+    assert not x_world.world_name
     assert not x_world.worlds_dir
     assert not x_world.output_dir
     assert not x_world.world_time_pnigh
@@ -65,7 +65,7 @@ def test_WorldUnit_set_input_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
 def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     # ESTABLISH
     fizz_str = "fizz"
-    fizz_world = WorldUnit(world_id=fizz_str, worlds_dir=worlds_dir())
+    fizz_world = WorldUnit(world_name=fizz_str, worlds_dir=worlds_dir())
     x_world_dir = create_path(worlds_dir(), fizz_str)
     x_syntax_otz_dir = create_path(x_world_dir, "syntax_otz")
     x_input_dir = create_path(x_world_dir, "input")
@@ -103,13 +103,13 @@ def test_worldunit_shop_ReturnsObj_Scenario0_WithParameters(env_dir_setup_cleanu
     worlds2_dir = create_path(worlds_dir(), "worlds2")
     example_input_dir = create_path(worlds_dir(), "example_input")
     output_dir = create_path(worlds_dir(), "output")
-    five_world_id = "five"
+    five_world_name = "five"
     world2_time_pnigh = 55
     world2_beliefunits = {"amy45"}
 
     # WHEN
     x_world = worldunit_shop(
-        world_id=five_world_id,
+        world_name=five_world_name,
         worlds_dir=worlds2_dir,
         output_dir=output_dir,
         input_dir=example_input_dir,
@@ -118,8 +118,8 @@ def test_worldunit_shop_ReturnsObj_Scenario0_WithParameters(env_dir_setup_cleanu
     )
 
     # THEN
-    world_dir = create_path(worlds2_dir, x_world.world_id)
-    assert x_world.world_id == five_world_id
+    world_dir = create_path(worlds2_dir, x_world.world_name)
+    assert x_world.world_name == five_world_name
     assert x_world.worlds_dir == worlds2_dir
     assert x_world.output_dir == output_dir
     assert x_world._input_dir == example_input_dir
@@ -138,8 +138,8 @@ def test_worldunit_shop_ReturnsObj_Scenario1_WithoutParameters(env_dir_setup_cle
     x_world = worldunit_shop(a23_str, worlds_dir())
 
     # THEN
-    world_dir = create_path(worlds_dir(), x_world.world_id)
-    assert x_world.world_id == a23_str
+    world_dir = create_path(worlds_dir(), x_world.world_name)
+    assert x_world.world_name == a23_str
     assert x_world.worlds_dir == worlds_dir()
     assert not x_world.output_dir
     assert x_world.world_time_pnigh == 0
@@ -160,63 +160,25 @@ def test_worldunit_shop_ReturnsObj_Scenario2_ThirdParameterIs_output_dir(
     x_world = worldunit_shop(a23_str, worlds_dir(), output_dir)
 
     # THEN
-    assert x_world.world_id == a23_str
+    assert x_world.world_name == a23_str
     assert x_world.worlds_dir == worlds_dir()
     assert x_world.output_dir == output_dir
 
 
-# def test_WorldUnit_popen_event_from_files_ReturnsObj(env_dir_setup_cleanup):
-#     # ESTABLISH
-#     x_world = worldunit_shop()
-#     sue_str = "Sue"
-#     bob_str = "Bob"
-#     x_world.add_pidginunit(sue_str)
-#     x_world.add_pidginunit(bob_str)
-#     sue_dir = create_path(x_world._syntax_otz_dir, sue_str)
-#     bob_dir = create_path(x_world._syntax_otz_dir, bob_str)
-#     assert os_path_exists(sue_dir) is False
-#     assert os_path_exists(bob_dir) is False
+def test_worldunit_shop_ReturnsObj_Scenario3_RaiseErrorIf_knot_In_world_name(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    a23_str = "amy23"
+    output_dir = create_path(worlds_dir(), "output")
 
-#     # WHEN
-#     x_world.save_pidginunit_files(sue_str)
+    # WHEN
+    x_world = worldunit_shop(a23_str, worlds_dir(), output_dir)
 
-#     # THEN
-#     assert os_path_exists(sue_dir)
-#     assert os_path_exists(bob_dir) is False
-
-
-# def test_WorldUnit_save_pidginunit_ChangesFiles(env_dir_setup_cleanup):
-#     # ESTABLISH
-#     x_world = worldunit_shop()
-#     sue_str = "Sue"
-#     bob_str = "Bob"
-#     zia_str = "Zia"
-#     save_file(x_world._syntax_otz_dir, sue_str, "temp.txt", "")
-#     save_file(x_world._syntax_otz_dir, bob_str, "temp.txt", "")
-#     save_file(x_world._syntax_otz_dir, zia_str, "temp.txt", "")
-#     assert x_world.pidginunit_exists(sue_str) is False
-#     assert x_world.pidginunit_exists(bob_str) is False
-#     assert x_world.pidginunit_exists(zia_str) is False
-#     assert x_world.pidgins_empty()
-
-#     # WHEN
-#     x_world._set_all_pidginunits_from_dirs()
-
-#     # THEN
-#     assert x_world.pidginunit_exists(sue_str)
-#     assert x_world.pidginunit_exists(bob_str)
-#     assert x_world.pidginunit_exists(zia_str)
-#     assert x_world.pidgins_empty() is False
-
-#     # WHEN
-#     delete_dir(x_world._syntax_otz_dir, zia_str)
-#     x_world._set_all_pidginunits_from_dirs()
-
-#     # THEN
-#     assert x_world.pidginunit_exists(sue_str)
-#     assert x_world.pidginunit_exists(bob_str)
-#     assert x_world.pidginunit_exists(zia_str) is False
-#     assert x_world.pidgins_empty() is False
+    # THEN
+    assert x_world.world_name == a23_str
+    assert x_world.worlds_dir == worlds_dir()
+    assert x_world.output_dir == output_dir
 
 
 def test_init_beliefunits_from_dirs_ReturnsObj_Scenario0(env_dir_setup_cleanup):

@@ -84,13 +84,14 @@ def test_create_stance0001_file_CreatesFile_Scenario0_NoBeliefUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
+    sue_str = "Sue"
     belief_mstr_dir = create_path(get_module_temp_dir(), "belief_mstr")
     output_dir = create_path(get_module_temp_dir(), "output")
     stance0001_path = create_stance0001_path(output_dir)
     assert os_path_exists(stance0001_path) is False
 
     # WHEN
-    create_stance0001_file(belief_mstr_dir, output_dir)
+    create_stance0001_file(belief_mstr_dir, output_dir, sue_str)
 
     # THEN
     assert os_path_exists(stance0001_path)
