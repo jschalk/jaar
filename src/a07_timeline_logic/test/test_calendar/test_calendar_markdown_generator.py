@@ -19,10 +19,10 @@ from src.a07_timeline_logic.timeline import (
 
 def test_center_word_ReturnObj():
     # ESTABLISH / WHEN / THEN
-    assert center_word(10, "fizz") == "   fizz   "
-    assert center_word(15, "fizz") == "      fizz     "
-    assert center_word(6, "fizz") == " fizz "
-    assert center_word(6, "fizzbuzz") == "fizzbu"
+    assert center_word(10, "fay") == "   fay    "
+    assert center_word(15, "fay") == "      fay      "
+    assert center_word(6, "fay") == " fay  "
+    assert center_word(5, "faybob") == "faybo"
 
 
 def test_MonthMarkDownUnit_Exists():

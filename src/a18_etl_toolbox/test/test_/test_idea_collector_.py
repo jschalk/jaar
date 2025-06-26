@@ -27,7 +27,7 @@ def test_get_all_excel_ideasheets_ReturnsObj_Scenario0_SheetNames(
     # ESTABLISH
     env_dir = get_module_temp_dir()
     x_dir = create_path(env_dir, "examples_folder")
-    ex_filename = "fizzbuzz.xlsx"
+    ex_filename = "Faybob.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
     df1 = DataFrame([["AAA", "BBB"]], columns=["spam", "egg"])
     df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
@@ -92,7 +92,7 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
     amy23_str = "amy23"
     hour6am = "6am"
     hour7am = "7am"
-    ex_filename = "fizzbuzz.xlsx"
+    ex_filename = "Faybob.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
     idea_columns = [
         event_int_str(),
@@ -131,7 +131,7 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     amy23_str = "amy23"
     hour6am = "6am"
     hour7am = "7am"
-    ex_filename = "fizzbuzz.xlsx"
+    ex_filename = "Faybob.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
     idea_columns = [
         event_int_str(),

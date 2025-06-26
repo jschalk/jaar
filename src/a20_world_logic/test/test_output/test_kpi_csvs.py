@@ -20,15 +20,15 @@ def test_WorldUnit_create_kpi_csvs_Senario0_EmptyWorld_CreatesFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    fizz_str = "fizz"
+    fay_str = "Fay"
     output_dir = create_path(worlds_dir(), "output")
-    fizz_world = worldunit_shop(fizz_str, worlds_dir(), output_dir)
-    fizz_world.input_to_clarity_mstr()
+    fay_world = worldunit_shop(fay_str, worlds_dir(), output_dir)
+    fay_world.input_to_clarity_mstr()
     kpi001_csv_path = create_path(output_dir, f"{belief_kpi001_acct_nets_str()}.csv")
     assert not os_path_exists(kpi001_csv_path)
 
     # WHEN
-    fizz_world.create_kpi_csvs()
+    fay_world.create_kpi_csvs()
 
     # THEN
     assert os_path_exists(kpi001_csv_path)
@@ -36,13 +36,13 @@ def test_WorldUnit_create_kpi_csvs_Senario0_EmptyWorld_CreatesFile(
 
 def test_WorldUnit_create_kpi_csvs_Senario1_Add_CreatesFile(env_dir_setup_cleanup):
     # ESTABLISH
-    fizz_str = "fizz"
+    fay_str = "Fay"
     output_dir = create_path(worlds_dir(), "output")
-    fizz_world = worldunit_shop(fizz_str, worlds_dir(), output_dir)
+    fay_world = worldunit_shop(fay_str, worlds_dir(), output_dir)
     sue_str = "Sue"
     event2 = 2
-    ex_filename = "fizzbuzz.xlsx"
-    input_file_path = create_path(fizz_world._input_dir, ex_filename)
+    ex_filename = "Faybob.xlsx"
+    input_file_path = create_path(fay_world._input_dir, ex_filename)
     amy23_str = "amy23"
     br00011_columns = [
         event_int_str(),
@@ -54,13 +54,13 @@ def test_WorldUnit_create_kpi_csvs_Senario1_Add_CreatesFile(env_dir_setup_cleanu
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(input_file_path, "br00011_ex3", br00011_df)
-    fizz_world.input_to_clarity_mstr()
+    fay_world.input_to_clarity_mstr()
     kpi001_csv_path = create_path(output_dir, f"{belief_kpi001_acct_nets_str()}.csv")
     print(f"         {kpi001_csv_path=}")
     assert not os_path_exists(kpi001_csv_path)
 
     # WHEN
-    fizz_world.create_kpi_csvs()
+    fay_world.create_kpi_csvs()
 
     # THEN
     assert os_path_exists(kpi001_csv_path)

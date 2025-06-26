@@ -152,7 +152,7 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoPidgin(
     # ESTABLISH
     env_dir = idea_belief_mstr_dir()
     x_dir = create_path(env_dir, "examples_folder")
-    ex_filename = "fizzbuzz.xlsx"
+    ex_filename = "Faybob.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
     df1 = DataFrame([["AAA", "BBB"]], columns=["spam", "egg"])
     df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
@@ -177,7 +177,7 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_PidginSheetNames(
     # ESTABLISH
     env_dir = idea_belief_mstr_dir()
     x_dir = create_path(env_dir, "examples_folder")
-    ex_filename = "fizzbuzz.xlsx"
+    ex_filename = "Faybob.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
     df1 = DataFrame([["AAA", "BBB"]], columns=["spam", "egg"])
     df2 = DataFrame([["ABC", "XYZ"]], columns=["Foo", "Bar"])
@@ -204,7 +204,7 @@ def test_sheet_exists_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = idea_belief_mstr_dir()
     x_dir = create_path(env_dir, "examples_folder")
-    ex_filename = "fizzbuzz.xlsx"
+    ex_filename = "Faybob.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
     df1 = DataFrame([["AAA", "BBB"]], columns=["spam", "egg"])
     sugar_str = "sugar"
@@ -270,7 +270,7 @@ def test_split_excel_into_dirs_CreatesFilesWhenColumnIsValid(
 ):
     """Test splitting an Excel file by a valid column."""
     # ESTABLISH
-    x_filename = "fizz"
+    x_filename = "Fay"
     a_dir = create_path(dst_dir, "A")
     b_dir = create_path(dst_dir, "B")
     c_dir = create_path(dst_dir, "C")
@@ -316,7 +316,7 @@ def test_split_excel_into_dirs_DoesNotChangeIfColumnIsEmpty(tmp_path, dst_dir):
     df.to_excel(file_path, index=False, sheet_name="sheet5")
 
     # WHEN
-    x_filename = "fizz"
+    x_filename = "Fay"
     split_excel_into_dirs(file_path, dst_dir, "Dimen", x_filename, "sheet5")
 
     # THEN Verify that no files are created
@@ -331,7 +331,7 @@ def test_split_excel_into_dirs_DoesCreateDirectoryIfColumnEmpty(
     """Test if the destination directory is created automatically."""
     # ESTABLISH
     dst_dir = tmp_path / "nonexistent_destination"
-    x_filename = "fizz"
+    x_filename = "Fay"
 
     # WHEN
     split_excel_into_dirs(sample_excel_file, dst_dir, "Dimen", x_filename, "sheet5")
@@ -353,7 +353,7 @@ def test_split_excel_into_dirs_SavesToCorrectFileNames(tmp_path, dst_dir):
     df = DataFrame(data)
     file_path = tmp_path / "special_chars.xlsx"
     df.to_excel(file_path, index=False, sheet_name="sheet5")
-    x_filename = "fizz"
+    x_filename = "Fay"
     ab_dir = create_path(dst_dir, "A_B")
     cd_dir = create_path(dst_dir, "C_D")
     b_file_path = create_path(ab_dir, f"{x_filename}.xlsx")

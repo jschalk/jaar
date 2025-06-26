@@ -69,27 +69,27 @@ def test_get_immediate_subdir_ReturnsObj(env_dir_setup_cleanup):
 def test_set_dir_SetsFile(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_module_temp_dir()
-    fizz_name = "fizz_buzz"
-    fizz_dir = f"{env_dir}/{fizz_name}"
-    assert not os_path_exist(fizz_dir)
+    fay_name = "Fay_bob"
+    fay_dir = f"{env_dir}/{fay_name}"
+    assert not os_path_exist(fay_dir)
 
     # WHEN
-    set_dir(fizz_dir)
+    set_dir(fay_dir)
 
     # THEN
-    assert os_path_exist(fizz_dir)
+    assert os_path_exist(fay_dir)
 
     # WHEN running it again does not error out
-    set_dir(fizz_dir)
+    set_dir(fay_dir)
 
     # THEN
-    assert os_path_exist(fizz_dir)
+    assert os_path_exist(fay_dir)
 
 
 def test_save_file_SetsFile(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_module_temp_dir()
-    x_name = "fizz_buzz"
+    x_name = "Fay_bob"
     x_file_ext = "txt"
     x_filename = f"{x_name}.{x_file_ext}"
     x_file_str = "trying this"
@@ -157,7 +157,7 @@ def test_save_json_SetsFile(env_dir_setup_cleanup):
     env_dir = get_module_temp_dir()
     bob_str = "bob"
     yao_str = "yao"
-    x_filename = "fizz_buzz.json"
+    x_filename = "Fay_bob.json"
     x_dict = {"users": {bob_str: 1, yao_str: 2}}
     print(f"{env_dir=} {x_filename=}")
     assert not os_path_exist(create_path(env_dir, x_filename))
@@ -180,7 +180,7 @@ def test_open_json_ReturnsObj(
     env_dir = get_module_temp_dir()
     bob_str = "bob"
     yao_str = "yao"
-    x_filename = "fizz_buzz.json"
+    x_filename = "Fay_bob.json"
     x_dict = {"names": {bob_str: 1, yao_str: 2}}
     print(f"{env_dir=} {x_filename=}")
     save_json(env_dir, x_filename, x_dict)
@@ -637,8 +637,8 @@ def test_get_max_file_number_ReturnsObj(env_dir_setup_cleanup):
     x_dir = get_module_temp_dir()
     six_int = 6
     ten_int = 10
-    save_file(x_dir, f"{six_int}.json", "fizzbuzz")
-    save_file(x_dir, f"{ten_int}.json", "fizzbuzz")
+    save_file(x_dir, f"{six_int}.json", "Faybob")
+    save_file(x_dir, f"{ten_int}.json", "Faybob")
 
     # WHEN / THEN
     assert get_max_file_number(x_dir) == ten_int

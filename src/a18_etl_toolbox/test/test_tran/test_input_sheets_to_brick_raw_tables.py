@@ -36,7 +36,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(
     minute_420 = 420
     hour6am = "6am"
     hour7am = "7am"
-    ex_filename = "fizzbuzz.xlsx"
+    ex_filename = "Faybob.xlsx"
     input_dir = create_path(get_module_temp_dir(), "input")
     input_file_path = create_path(input_dir, ex_filename)
     br3_columns = [
@@ -118,7 +118,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
     minute_420 = 420
     hour6am = "6am"
     hour7am = "7am"
-    ex_filename = "fizzbuzz.xlsx"
+    ex_filename = "Faybob.xlsx"
     input_dir = create_path(get_module_temp_dir(), "input")
     input_file_path = create_path(input_dir, ex_filename)
     idea_columns = [
@@ -210,7 +210,7 @@ ORDER BY sheet_name, {event_int_str()}, {cumulative_minute_str()};"""
 #     minute_420 = 420
 #     hour6am = "6am"
 #     hour7am = "7am"
-#     ex_filename = "fizzbuzz.xlsx"
+#     ex_filename = "Faybob.xlsx"
 #     input_dir = create_path(get_module_temp_dir(), "input")
 #     input_file_path = create_path(input_dir, ex_filename)
 #     idea_columns = [
