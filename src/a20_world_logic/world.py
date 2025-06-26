@@ -28,7 +28,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_event_pack_json_to_event_inherited_planunits,
     etl_event_plan_csvs_to_pack_json,
     etl_events_brick_agg_table_to_events_brick_valid_table,
-    etl_mud_dfs_to_brick_raw_tables,
+    etl_input_dfs_to_brick_raw_tables,
     etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables,
     etl_set_cell_tree_cell_mandates,
     etl_set_cell_trees_decrees,
@@ -61,7 +61,7 @@ class WorldUnit:
     world_time_pnigh: TimeLinePoint = None
     _syntax_otz_dir: str = None
     _world_dir: str = None
-    _mud_dir: str = None
+    _input_dir: str = None
     _brick_dir: str = None
     _belief_mstr_dir: str = None
     _beliefunits: set[BeliefLabel] = None
@@ -87,9 +87,9 @@ class WorldUnit:
     def _set_pidgin_events(self):
         self._pidgin_events = get_pidgin_events_by_dirs(self._syntax_otz_dir)
 
-    def set_mud_dir(self, x_dir: str):
-        self._mud_dir = x_dir
-        set_dir(self._mud_dir)
+    def set_input_dir(self, x_dir: str):
+        self._input_dir = x_dir
+        set_dir(self._input_dir)
 
     def _set_world_dirs(self):
         self._world_dir = create_path(self.worlds_dir, self.world_id)
@@ -101,8 +101,8 @@ class WorldUnit:
         set_dir(self._brick_dir)
         set_dir(self._belief_mstr_dir)
 
-    def mud_dfs_to_brick_raw_tables(self, conn: sqlite3_Connection):
-        etl_mud_dfs_to_brick_raw_tables(conn, self._mud_dir)
+    def input_dfs_to_brick_raw_tables(self, conn: sqlite3_Connection):
+        etl_input_dfs_to_brick_raw_tables(conn, self._input_dir)
 
     def event_pack_json_to_event_inherited_planunits(self):
         etl_event_pack_json_to_event_inherited_planunits(self._belief_mstr_dir)
@@ -116,13 +116,13 @@ class WorldUnit:
         etl_set_cell_tree_cell_mandates(mstr_dir)
         etl_create_bud_mandate_ledgers(mstr_dir)
 
-    def mud_to_clarity_mstr(self, store_tracing_files: bool = False):
+    def input_to_clarity_mstr(self, store_tracing_files: bool = False):
         with sqlite3_connect(self.get_db_path()) as db_conn:
             cursor = db_conn.cursor()
-            self.mud_to_clarity_with_cursor(db_conn, cursor, store_tracing_files)
+            self.input_to_clarity_with_cursor(db_conn, cursor, store_tracing_files)
             db_conn.commit()
 
-    def mud_to_clarity_with_cursor(
+    def input_to_clarity_with_cursor(
         self,
         db_conn: sqlite3_Connection,
         cursor: sqlite3_Cursor,
@@ -131,7 +131,7 @@ class WorldUnit:
         delete_dir(self._belief_mstr_dir)
         set_dir(self._belief_mstr_dir)
         # collect excel file data into central location
-        etl_mud_dfs_to_brick_raw_tables(db_conn, self._mud_dir)
+        etl_input_dfs_to_brick_raw_tables(db_conn, self._input_dir)
         # brick raw to sound raw, check by event_ints
         etl_brick_raw_tables_to_brick_agg_tables(cursor)
         etl_brick_agg_tables_to_events_brick_agg_table(cursor)
@@ -185,7 +185,7 @@ def worldunit_shop(
     world_id: WorldID,
     worlds_dir: str,
     output_dir: str = None,
-    mud_dir: str = None,
+    input_dir: str = None,
     world_time_pnigh: TimeLinePoint = None,
     _beliefunits: set[BeliefLabel] = None,
 ) -> WorldUnit:
@@ -196,12 +196,12 @@ def worldunit_shop(
         world_time_pnigh=get_0_if_None(world_time_pnigh),
         _events={},
         _beliefunits=get_empty_set_if_None(_beliefunits),
-        _mud_dir=mud_dir,
+        _input_dir=input_dir,
         _pidgin_events={},
     )
     x_worldunit._set_world_dirs()
-    if not x_worldunit._mud_dir:
-        x_worldunit.set_mud_dir(create_path(x_worldunit._world_dir, "mud"))
+    if not x_worldunit._input_dir:
+        x_worldunit.set_input_dir(create_path(x_worldunit._world_dir, "input"))
     return x_worldunit
 
 

@@ -4,13 +4,11 @@ from src.a00_data_toolbox.file_toolbox import open_json
 from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
 from src.a05_concept_logic.concept import ConceptUnit
 from src.a06_plan_logic.plan import PlanUnit, planunit_shop
-from src.a07_timeline_logic.test._util.a07_env import get_module_examples_dir
 from src.a07_timeline_logic.test._util.a07_str import (
     c400_number_str,
     creg_str,
     five_str,
     hours_config_str,
-    months_config_str,
     timeline_label_str,
     weekdays_config_str,
     yr1_jan1_offset_str,
@@ -37,8 +35,9 @@ def get_squirt_config() -> dict:
 
 
 def get_example_timeline_config(timeline_label: str) -> dict:
+    x_dir = "src/a07_timeline_logic/test/_util"
     x_filename = f"timeline_config_{timeline_label}.json"
-    return open_json(get_module_examples_dir(), x_filename)
+    return open_json(x_dir, x_filename)
 
 
 def cregtime_conceptunit() -> ConceptUnit:

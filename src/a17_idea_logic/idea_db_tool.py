@@ -243,24 +243,24 @@ def sheet_exists(file_path: str, sheet_name: str):
 
 
 def split_excel_into_dirs(
-    input_file: str, dst_dir: str, column_name: str, filename: str, sheet_name: str
+    src_file: str, dst_dir: str, column_name: str, filename: str, sheet_name: str
 ):
     """
     Splits an Excel file into multiple Excel files, each containing rows
     corresponding to a unique value in the specified column.
 
     Args:
-        input_file (str): Path to the input Excel file.
+        src_file (str): Path to the src Excel file.
         dst_dir (str): Directory where the files will be saved.
         column_name (str): Column to split by unique values.
     """
     # Create the destination directory if it doesn't exist
     set_dir(dst_dir)
-    df = pandas_read_excel(input_file, sheet_name=sheet_name)
+    df = pandas_read_excel(src_file, sheet_name=sheet_name)
 
     # Check if the column exists
     if column_name not in df.columns:
-        raise ValueError(f"Column '{column_name}' does not exist in the input file.")
+        raise ValueError(f"Column '{column_name}' does not exist in the src file.")
 
     # Group by unique values in the column
     unique_values = df[column_name].unique()

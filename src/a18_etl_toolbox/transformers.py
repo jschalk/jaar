@@ -118,10 +118,10 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
 )
 
 
-def etl_mud_dfs_to_brick_raw_tables(cursor: sqlite3_Cursor, mud_dir: str):
+def etl_input_dfs_to_brick_raw_tables(cursor: sqlite3_Cursor, input_dir: str):
     idea_sqlite_types = get_idea_sqlite_types()
 
-    for ref in get_all_idea_dataframes(mud_dir):
+    for ref in get_all_idea_dataframes(input_dir):
         x_file_path = create_path(ref.file_dir, ref.filename)
         df = pandas_read_excel(x_file_path, ref.sheet_name)
         idea_sorting_columns = get_default_sorted_list(set(df.columns))
@@ -154,13 +154,10 @@ def etl_mud_dfs_to_brick_raw_tables(cursor: sqlite3_Cursor, mud_dir: str):
                 error_message = f"Conversion errors: {error_message}"
             row_values = list(row)
             row_values.append(error_message)
-            x_index = 0
             # Set value to None for non-convertible columns
-            for col in column_names:
+            for x_index, col in enumerate(column_names):
                 if nonconvertible_columns.get(col):
                     row_values[x_index] = None
-                x_index += 1
-
             insert_sqlstr = create_type_reference_insert_sqlstr(
                 x_tablename, column_names, row_values
             )

@@ -26,7 +26,6 @@ from src.a07_timeline_logic.test._util.calendar_examples import (
     five_str,
     get_creg_config,
     get_example_timeline_config,
-    get_five_config,
     get_squirt_config,
 )
 from src.a07_timeline_logic.timeline import (
@@ -293,7 +292,6 @@ def test_timeline_config_shop_ReturnsObj_AllParameters():
 
     # five_filename = f"timeline_config_{five_str()}.json"
     # five_file_str = get_json_from_dict(five_dict)
-    # save_file(get_module_examples_dir(), five_filename, five_file_str)
     expected_config = get_example_timeline_config(five_str())
     assert validate_timeline_config(expected_config)
     assert expected_config.get(hours_config_str()) == x_hours_config

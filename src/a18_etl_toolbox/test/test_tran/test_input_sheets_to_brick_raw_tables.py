@@ -21,10 +21,10 @@ from src.a18_etl_toolbox.test._util.a18_env import (
     get_module_temp_dir,
 )
 from src.a18_etl_toolbox.test._util.a18_str import brick_raw_str, error_message_str
-from src.a18_etl_toolbox.transformers import etl_mud_dfs_to_brick_raw_tables
+from src.a18_etl_toolbox.transformers import etl_input_dfs_to_brick_raw_tables
 
 
-def test_etl_mud_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(
+def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -37,8 +37,8 @@ def test_etl_mud_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
-    mud_dir = create_path(get_module_temp_dir(), "mud")
-    mud_file_path = create_path(mud_dir, ex_filename)
+    input_dir = create_path(get_module_temp_dir(), "input")
+    input_file_path = create_path(input_dir, ex_filename)
     br3_columns = [
         event_int_str(),
         face_name_str(),
@@ -55,14 +55,14 @@ def test_etl_mud_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(
 
     df1 = DataFrame([row0, row1, row2, row3, row4], columns=br3_columns)
     br00003_ex1_str = "example1_br00003"
-    upsert_sheet(mud_file_path, br00003_ex1_str, df1)
+    upsert_sheet(input_file_path, br00003_ex1_str, df1)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         br00003_tablename = f"br00003_{brick_raw_str()}"
         assert not db_table_exists(cursor, br00003_tablename)
 
         # WHEN
-        etl_mud_dfs_to_brick_raw_tables(db_conn, mud_dir)
+        etl_input_dfs_to_brick_raw_tables(db_conn, input_dir)
 
         # THEN
         assert db_table_exists(cursor, br00003_tablename)
@@ -87,7 +87,7 @@ ORDER BY sheet_name, {event_int_str()}, {cumulative_minute_str()};"""
         e1 = event1
         e2 = event2
         e3 = event3
-        s_dir = create_path(mud_dir, ".")
+        s_dir = create_path(input_dir, ".")
         m_360 = minute_360
         m_420 = minute_420
         br3_ex1_str = br00003_ex1_str
@@ -107,7 +107,7 @@ ORDER BY sheet_name, {event_int_str()}, {cumulative_minute_str()};"""
         assert rows[4] == row4
 
 
-def test_etl_mud_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
+def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -119,8 +119,8 @@ def test_etl_mud_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "fizzbuzz.xlsx"
-    mud_dir = create_path(get_module_temp_dir(), "mud")
-    mud_file_path = create_path(mud_dir, ex_filename)
+    input_dir = create_path(get_module_temp_dir(), "input")
+    input_file_path = create_path(input_dir, ex_filename)
     idea_columns = [
         event_int_str(),
         face_name_str(),
@@ -147,16 +147,16 @@ def test_etl_mud_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
     br00003_ex1_str = "example1_br00003"
     br00003_ex2_str = "example2_br00003"
     br00003_ex3_str = "example3_br00003"
-    upsert_sheet(mud_file_path, br00003_ex1_str, df1)
-    upsert_sheet(mud_file_path, br00003_ex2_str, df2)
-    upsert_sheet(mud_file_path, br00003_ex3_str, df3)
+    upsert_sheet(input_file_path, br00003_ex1_str, df1)
+    upsert_sheet(input_file_path, br00003_ex2_str, df2)
+    upsert_sheet(input_file_path, br00003_ex3_str, df3)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         br00003_tablename = f"br00003_{brick_raw_str()}"
         assert not db_table_exists(cursor, br00003_tablename)
 
         # WHEN
-        etl_mud_dfs_to_brick_raw_tables(db_conn, mud_dir)
+        etl_input_dfs_to_brick_raw_tables(db_conn, input_dir)
 
         # THEN
         assert db_table_exists(cursor, br00003_tablename)
@@ -180,7 +180,7 @@ ORDER BY sheet_name, {event_int_str()}, {cumulative_minute_str()};"""
         file = ex_filename
         e1 = event1
         e2 = event2
-        s_dir = create_path(mud_dir, ".")
+        s_dir = create_path(input_dir, ".")
         m_360 = minute_360
         m_420 = minute_420
         br3_ex1_str = br00003_ex1_str
@@ -199,7 +199,7 @@ ORDER BY sheet_name, {event_int_str()}, {cumulative_minute_str()};"""
         assert rows[4] == row4
 
 
-# def test_etl_mud_dfs_to_brick_raw_tables_PopulatesTables_Scenario2(
+# def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario2(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
@@ -211,8 +211,8 @@ ORDER BY sheet_name, {event_int_str()}, {cumulative_minute_str()};"""
 #     hour6am = "6am"
 #     hour7am = "7am"
 #     ex_filename = "fizzbuzz.xlsx"
-#     mud_dir = create_path(get_module_temp_dir(), "mud")
-#     mud_file_path = create_path(mud_dir, ex_filename)
+#     input_dir = create_path(get_module_temp_dir(), "input")
+#     input_file_path = create_path(input_dir, ex_filename)
 #     idea_columns = [
 #         event_int_str(),
 #         face_name_str(),
@@ -227,14 +227,14 @@ ORDER BY sheet_name, {event_int_str()}, {cumulative_minute_str()};"""
 
 #     df1 = DataFrame([df_row0, df_row1, df_row2], columns=idea_columns)
 #     br00003_ex1_str = "example1_br00003"
-#     upsert_sheet(mud_file_path, br00003_ex1_str, df1)
+#     upsert_sheet(input_file_path, br00003_ex1_str, df1)
 #     with sqlite3_connect(":memory:") as db_conn:
 #         cursor = db_conn.cursor()
 #         br00003_tablename = f"br00003_{brick_raw_str()}"
 #         assert not db_table_exists(cursor, br00003_tablename)
 
 #         # WHEN
-#         etl_mud_dfs_to_brick_raw_tables(db_conn, mud_dir)
+#         etl_input_dfs_to_brick_raw_tables(db_conn, input_dir)
 
 #         # THEN
 #         assert db_table_exists(cursor, br00003_tablename)
@@ -258,7 +258,7 @@ ORDER BY sheet_name, {event_int_str()}, {cumulative_minute_str()};"""
 #         file = ex_filename
 #         e1 = event1
 #         e2 = event2
-#         s_dir = create_path(mud_dir, ".")
+#         s_dir = create_path(input_dir, ".")
 #         m_360 = minute_360
 #         m_420 = minute_420
 #         br3_ex1_str = br00003_ex1_str
