@@ -636,38 +636,6 @@ def split_excel_into_events_dirs(pidgin_file: str, face_dir: str, sheet_name: st
     split_excel_into_dirs(pidgin_file, face_dir, "event_int", "pidgin", sheet_name)
 
 
-def _get_all_syntax_otz_dir_event_dirs(faces_dir) -> list[str]:
-    full_event_dirs = []
-    for face_name_dir in get_level1_dirs(faces_dir):
-        face_dir = create_path(faces_dir, face_name_dir)
-        event_dirs = get_dir_file_strs(face_dir, include_dirs=True, include_files=False)
-        full_event_dirs.extend(
-            create_path(face_dir, event_dir) for event_dir in event_dirs.keys()
-        )
-    return full_event_dirs
-
-
-def etl_event_pidgin_csvs_to_pidgin_json(event_dir: str):
-    pidginunit = init_pidginunit_from_dir(event_dir)
-    save_file(event_dir, "pidgin.json", pidginunit.get_json(), replace=True)
-
-
-def get_pidgin_events_by_dirs(faces_dir: str) -> dict[FaceName, set[EventInt]]:
-    pidgin_events = {}
-    for face_name in get_level1_dirs(faces_dir):
-        face_dir = create_path(faces_dir, face_name)
-        for event_int in get_level1_dirs(face_dir):
-            event_dir = create_path(face_dir, event_int)
-            pidgin_path = create_path(event_dir, "pidgin.json")
-            if os_path_exists(pidgin_path):
-                if pidgin_events.get(face_name) is None:
-                    pidgin_events[face_name] = {int(event_int)}
-                else:
-                    events_list = pidgin_events.get(face_name)
-                    events_list.add(int(event_int))
-    return pidgin_events
-
-
 def get_most_recent_event_int(
     event_set: set[EventInt], max_event_int: EventInt
 ) -> EventInt:

@@ -542,7 +542,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
         assert not os_path_exists(a23_sue_gut_path)
         assert not os_path_exists(a23_sue_job_path)
         assert not os_path_exists(sue37_mandate_path)
-        assert count_dirs_files(fay_world.worlds_dir) == 6
+        assert count_dirs_files(fay_world.worlds_dir) == 5
 
         # WHEN
         fay_world.sheets_input_to_clarity_with_cursor(db_conn, cursor)
@@ -554,7 +554,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
         assert os_path_exists(a23_sue_gut_path)
         assert os_path_exists(a23_sue_job_path)
         assert os_path_exists(sue37_mandate_path)
-        assert count_dirs_files(fay_world.worlds_dir) == 42
+        assert count_dirs_files(fay_world.worlds_dir) == 41
 
 
 def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(

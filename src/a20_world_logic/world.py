@@ -40,7 +40,6 @@ from src.a18_etl_toolbox.transformers import (
     etl_voice_agg_to_event_plan_csvs,
     etl_voice_raw_tables_to_belief_ote1_agg,
     etl_voice_raw_tables_to_voice_agg_tables,
-    get_pidgin_events_by_dirs,
 )
 from src.a19_kpi_toolbox.kpi_mstr import (
     create_calendar_markdown_files,
@@ -59,7 +58,6 @@ class WorldUnit:
     worlds_dir: str = None
     output_dir: str = None
     world_time_pnigh: TimeLinePoint = None
-    _syntax_otz_dir: str = None
     _world_dir: str = None
     _input_dir: str = None
     _brick_dir: str = None
@@ -80,24 +78,15 @@ class WorldUnit:
     def get_event(self, event_int: EventInt) -> FaceName:
         return self._events.get(event_int)
 
-    def _event_dir(self, face_name: FaceName, event_int: EventInt) -> str:
-        face_dir = create_path(self._syntax_otz_dir, face_name)
-        return create_path(face_dir, event_int)
-
-    def _set_pidgin_events(self):
-        self._pidgin_events = get_pidgin_events_by_dirs(self._syntax_otz_dir)
-
     def set_input_dir(self, x_dir: str):
         self._input_dir = x_dir
         set_dir(self._input_dir)
 
     def _set_world_dirs(self):
         self._world_dir = create_path(self.worlds_dir, self.world_name)
-        self._syntax_otz_dir = create_path(self._world_dir, "syntax_otz")
         self._brick_dir = create_path(self._world_dir, "brick")
         self._belief_mstr_dir = create_path(self._world_dir, "belief_mstr")
         set_dir(self._world_dir)
-        set_dir(self._syntax_otz_dir)
         set_dir(self._brick_dir)
         set_dir(self._belief_mstr_dir)
 
