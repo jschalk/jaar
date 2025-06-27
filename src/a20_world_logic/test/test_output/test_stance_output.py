@@ -28,7 +28,7 @@ def test_WorldUnit_create_stances_Senario0_EmptyWorld_CreatesFile(
     fay_str = "Fay"
     output_dir = create_path(worlds_dir(), "output")
     fay_world = worldunit_shop(fay_str, worlds_dir(), output_dir)
-    fay_world.input_to_clarity_mstr()
+    fay_world.sheets_input_to_clarity_mstr()
     fay_stance0001_path = create_stance0001_path(fay_world.output_dir)
     assert os_path_exists(fay_stance0001_path) is False
 
@@ -59,7 +59,7 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(input_file_path, "br00011_ex3", br00011_df)
-    fay_world.input_to_clarity_mstr()
+    fay_world.sheets_input_to_clarity_mstr()
     fay_stance0001_path = create_stance0001_path(fay_world.output_dir)
     assert os_path_exists(fay_stance0001_path) is False
 
@@ -97,7 +97,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(input_file_path, "br00011_ex3", br00011_df)
-    fay_world.input_to_clarity_mstr()
+    fay_world.sheets_input_to_clarity_mstr()
     fay_stance0001_path = create_stance0001_path(fay_world.output_dir)
     fay_world.create_stances()
     bob_output_dir = create_path(worlds_dir(), "Bob_output")
@@ -109,7 +109,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
     # print(f"{pandas_read_excel(bob_input_st0001_path)=}")
     print(f"{bob_input_st0001_path=}")
     print(f"{get_sheet_names(bob_input_st0001_path)=}")
-    bob_world.input_to_clarity_mstr()
+    bob_world.sheets_input_to_clarity_mstr()
     bob_stance0001_path = create_stance0001_path(bob_world.output_dir)
     assert os_path_exists(bob_stance0001_path) is False
 
@@ -151,7 +151,7 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
     br00011_rows = [[event2, sue_str, a23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(input_file_path, "br00011_ex3", br00011_df)
-    fay_world.input_to_clarity_mstr()
+    fay_world.sheets_input_to_clarity_mstr()
 
     a23_calendar_md_path = create_path(output_dir, f"{a23_str}_calendar.md")
     print(f"      {a23_calendar_md_path=}")
@@ -164,7 +164,7 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
     assert os_path_exists(a23_calendar_md_path)
 
 
-# def test_WorldUnit_input_to_clarity_CreatesFiles(env_dir_setup_cleanup):
+# def test_WorldUnit_sheets_input_to_clarity_CreatesFiles(env_dir_setup_cleanup):
 #     # ESTABLISH
 #     fay_str = "Fay"
 #     fay_world = worldunit_shop(fay_str, worlds_dir())
@@ -237,7 +237,7 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
 #     assert count_dirs_files(fay_world.worlds_dir) == 7
 
 #     # WHEN
-#     fay_world.input_to_clarity_mstr()
+#     fay_world.sheets_input_to_clarity_mstr()
 
 #     # THEN
 #     assert os_path_exists(wrong_a23_belief_dir) is False

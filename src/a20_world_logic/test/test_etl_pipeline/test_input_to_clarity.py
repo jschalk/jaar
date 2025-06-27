@@ -47,7 +47,7 @@ from src.a20_world_logic.test._util.a20_env import (
 from src.a20_world_logic.world import worldunit_shop
 
 
-def test_WorldUnit_input_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
+def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113PopulatesTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH:
@@ -150,7 +150,7 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario0_br000113PopulatesTable
         # self.calc_belief_bud_acct_mandate_net_ledgers()
 
         # WHEN
-        fay_world.input_to_clarity_with_cursor(db_conn, cursor)
+        fay_world.sheets_input_to_clarity_with_cursor(db_conn, cursor)
 
         # THEN
         # select_pidgin_core = f"SELECT * FROM {pidcore_sound_vld}"
@@ -207,7 +207,7 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario0_br000113PopulatesTable
         assert get_row_count(cursor, belief_kpi001_acct_nets_str()) == 0
 
 
-def test_WorldUnit_input_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
+def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH:
@@ -325,7 +325,7 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
         # self.calc_belief_bud_acct_mandate_net_ledgers()
 
         # WHEN
-        fay_world.input_to_clarity_with_cursor(db_conn, cursor)
+        fay_world.sheets_input_to_clarity_with_cursor(db_conn, cursor)
 
         # THEN
         assert get_row_count(cursor, br00113_raw) == 1
@@ -364,7 +364,7 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
         assert get_row_count(cursor, belief_kpi001_acct_nets_str()) == 1
 
 
-def test_WorldUnit_input_to_clarity_with_cursor_Scenario2_PopulateBeliefTranBook(
+def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario2_PopulateBeliefTranBook(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH:
@@ -399,13 +399,13 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario2_PopulateBeliefTranBook
         assert not db_table_exists(cursor, belief_acct_nets_str())
 
         # WHEN
-        fay_world.input_to_clarity_with_cursor(db_conn, cursor)
+        fay_world.sheets_input_to_clarity_with_cursor(db_conn, cursor)
 
         # THEN
         assert get_row_count(cursor, belief_acct_nets_str()) == 1
 
 
-def test_WorldUnit_input_to_clarity_with_cursor_Scenario3_WhenNoBeliefIdeas_ote1_IsStillCreated(
+def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario3_WhenNoBeliefIdeas_ote1_IsStillCreated(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -433,13 +433,13 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario3_WhenNoBeliefIdeas_ote1
         assert os_path_exists(a23_ote1_csv_path) is False
 
         # WHEN
-        fay_world.input_to_clarity_with_cursor(db_conn, cursor)
+        fay_world.sheets_input_to_clarity_with_cursor(db_conn, cursor)
 
     # THEN
     assert os_path_exists(a23_ote1_csv_path)
 
 
-def test_WorldUnit_input_to_clarity_with_cursor_Scenario4_DeletesPreviousFiles(
+def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario4_DeletesPreviousFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -461,14 +461,14 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario4_DeletesPreviousFiles(
         cursor = db_conn.cursor()
 
         # WHEN
-        fay_world.input_to_clarity_with_cursor(db_conn, cursor)
+        fay_world.sheets_input_to_clarity_with_cursor(db_conn, cursor)
 
     # THEN
     assert os_path_exists(testing2_path)
     assert os_path_exists(testing3_path) is False
 
 
-def test_WorldUnit_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
+def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -545,7 +545,7 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
         assert count_dirs_files(fay_world.worlds_dir) == 6
 
         # WHEN
-        fay_world.input_to_clarity_with_cursor(db_conn, cursor)
+        fay_world.sheets_input_to_clarity_with_cursor(db_conn, cursor)
 
         # THEN
         assert os_path_exists(wrong_a23_belief_dir) is False
@@ -557,7 +557,7 @@ def test_WorldUnit_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
         assert count_dirs_files(fay_world.worlds_dir) == 42
 
 
-def test_WorldUnit_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
+def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     env_dir_setup_cleanup,
 ):  # sourcery skip: extract-method
     # ESTABLISH:
@@ -606,7 +606,7 @@ def test_WorldUnit_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     assert not os_path_exists(fay_db_path)
 
     # WHEN
-    fay_world.input_to_clarity_mstr()
+    fay_world.sheets_input_to_clarity_mstr()
 
     # THEN
     assert os_path_exists(fay_db_path)

@@ -116,13 +116,15 @@ class WorldUnit:
         etl_set_cell_tree_cell_mandates(mstr_dir)
         etl_create_bud_mandate_ledgers(mstr_dir)
 
-    def input_to_clarity_mstr(self, store_tracing_files: bool = False):
+    def sheets_input_to_clarity_mstr(self, store_tracing_files: bool = False):
         with sqlite3_connect(self.get_db_path()) as db_conn:
             cursor = db_conn.cursor()
-            self.input_to_clarity_with_cursor(db_conn, cursor, store_tracing_files)
+            self.sheets_input_to_clarity_with_cursor(
+                db_conn, cursor, store_tracing_files
+            )
             db_conn.commit()
 
-    def input_to_clarity_with_cursor(
+    def sheets_input_to_clarity_with_cursor(
         self,
         db_conn: sqlite3_Connection,
         cursor: sqlite3_Cursor,
