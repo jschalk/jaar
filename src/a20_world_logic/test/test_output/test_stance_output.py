@@ -33,7 +33,7 @@ def test_WorldUnit_create_stances_Senario0_EmptyWorld_CreatesFile(
     assert os_path_exists(fay_stance0001_path) is False
 
     # WHEN
-    fay_world.create_stances()
+    fay_world.create_stances(prettify_excel_bool=False)
 
     # THEN
     assert os_path_exists(fay_stance0001_path)
@@ -64,7 +64,7 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
     assert os_path_exists(fay_stance0001_path) is False
 
     # WHEN
-    fay_world.create_stances()
+    fay_world.create_stances(prettify_excel_bool=False)
 
     # THEN
     assert os_path_exists(fay_stance0001_path)
@@ -114,7 +114,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
     assert os_path_exists(bob_stance0001_path) is False
 
     # WHEN
-    bob_world.create_stances()
+    bob_world.create_stances(prettify_excel_bool=False)
 
     # THEN
     assert os_path_exists(bob_stance0001_path)
@@ -158,7 +158,7 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
     assert not os_path_exists(a23_calendar_md_path)
 
     # WHEN
-    fay_world.create_stances()
+    fay_world.create_stances(prettify_excel_bool=False)
 
     # THEN
     assert os_path_exists(a23_calendar_md_path)

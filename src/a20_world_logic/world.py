@@ -169,8 +169,10 @@ class WorldUnit:
 
         # if store_tracing_files:
 
-    def create_stances(self):
-        create_stance0001_file(self._belief_mstr_dir, self.output_dir, self.world_name)
+    def create_stances(self, prettify_excel_bool=True):
+        create_stance0001_file(
+            self._belief_mstr_dir, self.output_dir, self.world_name, prettify_excel_bool
+        )
         create_calendar_markdown_files(self._belief_mstr_dir, self.output_dir)
 
     def create_kpi_csvs(self):

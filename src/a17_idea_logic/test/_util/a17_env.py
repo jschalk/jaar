@@ -8,10 +8,6 @@ def src_module_dir() -> str:
 
 
 def get_module_temp_dir() -> str:
-    return "src/a17_idea_logic/test/_util"
-
-
-def idea_examples_dir() -> str:
     return "src/a17_idea_logic/test/_util/idea_examples"
 
 
@@ -25,7 +21,7 @@ def idea_beliefs_dir() -> str:
 
 @pytest_fixture()
 def env_dir_setup_cleanup():
-    env_dir = idea_examples_dir()
+    env_dir = get_module_temp_dir()
     delete_dir(env_dir)
     os_makedirs(env_dir)
     yield env_dir

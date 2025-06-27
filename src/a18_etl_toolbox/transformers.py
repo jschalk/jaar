@@ -13,6 +13,7 @@ from src.a00_data_toolbox.db_toolbox import (
     db_table_exists,
     get_create_table_sqlstr,
     get_db_tables,
+    get_grouping_with_all_values_equal_sql_query,
     get_nonconvertible_columns,
     get_row_count,
     get_table_columns,
@@ -80,9 +81,7 @@ from src.a17_idea_logic.idea_config import (
 from src.a17_idea_logic.idea_db_tool import (
     create_idea_sorted_table,
     get_default_sorted_list,
-    get_grouping_with_all_values_equal_sql_query,
     split_excel_into_dirs,
-    upsert_sheet,
 )
 from src.a17_idea_logic.pidgin_toolbox import init_pidginunit_from_dir
 from src.a18_etl_toolbox.db_obj_belief_tool import get_belief_dict_from_voice_tables
