@@ -23,7 +23,7 @@ def test_WorldUnit_create_kpi_csvs_Senario0_EmptyWorld_CreatesFile(
     fay_str = "Fay"
     output_dir = create_path(worlds_dir(), "output")
     fay_world = worldunit_shop(fay_str, worlds_dir(), output_dir)
-    fay_world.input_to_clarity_mstr()
+    fay_world.sheets_input_to_clarity_mstr()
     kpi001_csv_path = create_path(output_dir, f"{belief_kpi001_acct_nets_str()}.csv")
     assert not os_path_exists(kpi001_csv_path)
 
@@ -54,7 +54,7 @@ def test_WorldUnit_create_kpi_csvs_Senario1_Add_CreatesFile(env_dir_setup_cleanu
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(input_file_path, "br00011_ex3", br00011_df)
-    fay_world.input_to_clarity_mstr()
+    fay_world.sheets_input_to_clarity_mstr()
     kpi001_csv_path = create_path(output_dir, f"{belief_kpi001_acct_nets_str()}.csv")
     print(f"         {kpi001_csv_path=}")
     assert not os_path_exists(kpi001_csv_path)

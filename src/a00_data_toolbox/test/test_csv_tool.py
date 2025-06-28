@@ -3,6 +3,7 @@ from io import StringIO as io_StringIO
 from pathlib import Path
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.csv_toolbox import (
+    delete_column_from_csv_string,
     export_sqlite_tables_to_csv,
     open_csv_with_types,
     replace_csv_column_from_string,
@@ -124,3 +125,25 @@ def test_replace_csv_column_from_string():
     assert all(row["status"] == "complete" for row in rows)
     assert rows[0]["name"] == "Alice"
     assert rows[1]["name"] == "Bob"
+
+
+def test_delete_column_from_csv_string():
+    # Input CSV string
+    csv_input = """id,name,status
+1,Alice,active
+2,Bob,inactive
+"""
+
+    # Expected CSV output after removing 'status'
+    expected_output = [{"id": "1", "name": "Alice"}, {"id": "2", "name": "Bob"}]
+
+    # Call the function
+    result = delete_column_from_csv_string(csv_input, "status")
+
+    # Parse the result using csv.DictReader
+    reader = csv_DictReader(io_StringIO(result))
+    rows = list(reader)
+
+    # Assertions
+    assert reader.fieldnames == ["id", "name"]
+    assert rows == expected_output

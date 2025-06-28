@@ -9,6 +9,7 @@ from src.a00_data_toolbox.file_toolbox import create_path, delete_dir, set_dir
 from src.a01_term_logic.term import BeliefLabel, EventInt, FaceName
 from src.a11_bud_logic.bud import TimeLinePoint
 from src.a15_belief_logic.belief import BeliefUnit
+from src.a17_idea_logic.idea_db_tool import update_event_int_in_excel_files
 from src.a18_etl_toolbox.stance_tool import create_stance0001_file
 from src.a18_etl_toolbox.transformers import (
     add_belief_timeline_to_guts,
@@ -40,7 +41,6 @@ from src.a18_etl_toolbox.transformers import (
     etl_voice_agg_to_event_plan_csvs,
     etl_voice_raw_tables_to_belief_ote1_agg,
     etl_voice_raw_tables_to_voice_agg_tables,
-    get_pidgin_events_by_dirs,
 )
 from src.a19_kpi_toolbox.kpi_mstr import (
     create_calendar_markdown_files,
@@ -59,7 +59,6 @@ class WorldUnit:
     worlds_dir: str = None
     output_dir: str = None
     world_time_pnigh: TimeLinePoint = None
-    _syntax_otz_dir: str = None
     _world_dir: str = None
     _input_dir: str = None
     _brick_dir: str = None
@@ -80,24 +79,15 @@ class WorldUnit:
     def get_event(self, event_int: EventInt) -> FaceName:
         return self._events.get(event_int)
 
-    def _event_dir(self, face_name: FaceName, event_int: EventInt) -> str:
-        face_dir = create_path(self._syntax_otz_dir, face_name)
-        return create_path(face_dir, event_int)
-
-    def _set_pidgin_events(self):
-        self._pidgin_events = get_pidgin_events_by_dirs(self._syntax_otz_dir)
-
     def set_input_dir(self, x_dir: str):
         self._input_dir = x_dir
         set_dir(self._input_dir)
 
     def _set_world_dirs(self):
         self._world_dir = create_path(self.worlds_dir, self.world_name)
-        self._syntax_otz_dir = create_path(self._world_dir, "syntax_otz")
         self._brick_dir = create_path(self._world_dir, "brick")
         self._belief_mstr_dir = create_path(self._world_dir, "belief_mstr")
         set_dir(self._world_dir)
-        set_dir(self._syntax_otz_dir)
         set_dir(self._brick_dir)
         set_dir(self._belief_mstr_dir)
 
@@ -116,17 +106,20 @@ class WorldUnit:
         etl_set_cell_tree_cell_mandates(mstr_dir)
         etl_create_bud_mandate_ledgers(mstr_dir)
 
-    def input_to_clarity_mstr(self, store_tracing_files: bool = False):
+    def sheets_input_to_clarity_mstr(self):
         with sqlite3_connect(self.get_db_path()) as db_conn:
             cursor = db_conn.cursor()
-            self.input_to_clarity_with_cursor(db_conn, cursor, store_tracing_files)
+            self.sheets_input_to_clarity_with_cursor(db_conn, cursor)
             db_conn.commit()
 
-    def input_to_clarity_with_cursor(
+    def stance_sheets_to_clarity_mstr(self):
+        update_event_int_in_excel_files(self._input_dir, 1)
+        self.sheets_input_to_clarity_mstr()
+
+    def sheets_input_to_clarity_with_cursor(
         self,
         db_conn: sqlite3_Connection,
         cursor: sqlite3_Cursor,
-        store_tracing_files: bool = False,
     ):
         delete_dir(self._belief_mstr_dir)
         set_dir(self._belief_mstr_dir)
@@ -167,8 +160,10 @@ class WorldUnit:
 
         # if store_tracing_files:
 
-    def create_stances(self):
-        create_stance0001_file(self._belief_mstr_dir, self.output_dir, self.world_name)
+    def create_stances(self, prettify_excel_bool=True):
+        create_stance0001_file(
+            self._belief_mstr_dir, self.output_dir, self.world_name, prettify_excel_bool
+        )
         create_calendar_markdown_files(self._belief_mstr_dir, self.output_dir)
 
     def create_kpi_csvs(self):

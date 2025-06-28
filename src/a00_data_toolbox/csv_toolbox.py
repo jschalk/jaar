@@ -133,3 +133,35 @@ def replace_csv_column_from_string(
 
     csv_str = output_io.getvalue()
     return csv_str.replace("\r", "")
+
+
+def delete_column_from_csv_string(csv_string: str, column_to_delete: str) -> str:
+    """
+    Removes a column from a CSV string. If the column doesn't exist, returns the original CSV.
+
+    Args:
+        csv_string (str): The input CSV content as a string.
+        column_to_delete (str): The name of the column to remove.
+
+    Returns:
+        str: The CSV string with the column removed, or original if not found.
+    """
+    input_io = io_StringIO(csv_string)
+    output_io = io_StringIO()
+
+    reader = csv_DictReader(input_io)
+
+    # If column not found, return original
+    if column_to_delete not in reader.fieldnames:
+        return csv_string
+
+    # Filtered columns
+    fieldnames = [field for field in reader.fieldnames if field != column_to_delete]
+    writer = csv_DictWriter(output_io, fieldnames=fieldnames)
+    writer.writeheader()
+
+    for row in reader:
+        row.pop(column_to_delete, None)
+        writer.writerow(row)
+
+    return output_io.getvalue()

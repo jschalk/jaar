@@ -260,10 +260,7 @@ def get_groupby_sql_query(
     value_columns: list[str],
     where_clause: str = None,
 ) -> str:
-    if not where_clause:
-        where_clause = ""
-    else:
-        where_clause = f"{where_clause} "
+    where_clause = "" if not where_clause else f"{where_clause} "
     return f"{_get_grouping_select_clause(groupby_columns, value_columns)} FROM {x_table} {where_clause}{_get_grouping_groupby_clause(groupby_columns)}"
 
 
@@ -273,10 +270,7 @@ def get_grouping_with_all_values_equal_sql_query(
     value_columns: list[str],
     where_clause: str = None,
 ) -> str:
-    if not where_clause:
-        where_clause = ""
-    else:
-        where_clause = f"{where_clause} "
+    where_clause = "" if not where_clause else f"{where_clause} "
     return f"{_get_grouping_select_clause(groupby_columns, value_columns)} FROM {x_table} {where_clause}{_get_grouping_groupby_clause(groupby_columns)} {_get_having_equal_value_clause(value_columns)}"
 
 
@@ -478,11 +472,7 @@ def create_table2table_agg_insert_query(
         else:
             select_columns_str += f", MAX({dst_column})"
     groupby_columns_str = ", ".join(focus_col_list)
-    if where_block:
-        where_block = f"\n{where_block}"
-    else:
-        where_block = ""
-
+    where_block = f"\n{where_block}" if where_block else ""
     return f"""INSERT INTO {dst_table} ({dst_columns_str})
 SELECT {select_columns_str}
 FROM {src_table}{where_block}

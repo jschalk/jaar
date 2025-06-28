@@ -13,6 +13,7 @@ from src.a00_data_toolbox.db_toolbox import (
     db_table_exists,
     get_create_table_sqlstr,
     get_db_tables,
+    get_grouping_with_all_values_equal_sql_query,
     get_nonconvertible_columns,
     get_row_count,
     get_table_columns,
@@ -80,9 +81,7 @@ from src.a17_idea_logic.idea_config import (
 from src.a17_idea_logic.idea_db_tool import (
     create_idea_sorted_table,
     get_default_sorted_list,
-    get_grouping_with_all_values_equal_sql_query,
     split_excel_into_dirs,
-    upsert_sheet,
 )
 from src.a17_idea_logic.pidgin_toolbox import init_pidginunit_from_dir
 from src.a18_etl_toolbox.db_obj_belief_tool import get_belief_dict_from_voice_tables
@@ -635,38 +634,6 @@ def etl_brick_valid_table_into_old_prime_table(
 
 def split_excel_into_events_dirs(pidgin_file: str, face_dir: str, sheet_name: str):
     split_excel_into_dirs(pidgin_file, face_dir, "event_int", "pidgin", sheet_name)
-
-
-def _get_all_syntax_otz_dir_event_dirs(faces_dir) -> list[str]:
-    full_event_dirs = []
-    for face_name_dir in get_level1_dirs(faces_dir):
-        face_dir = create_path(faces_dir, face_name_dir)
-        event_dirs = get_dir_file_strs(face_dir, include_dirs=True, include_files=False)
-        full_event_dirs.extend(
-            create_path(face_dir, event_dir) for event_dir in event_dirs.keys()
-        )
-    return full_event_dirs
-
-
-def etl_event_pidgin_csvs_to_pidgin_json(event_dir: str):
-    pidginunit = init_pidginunit_from_dir(event_dir)
-    save_file(event_dir, "pidgin.json", pidginunit.get_json(), replace=True)
-
-
-def get_pidgin_events_by_dirs(faces_dir: str) -> dict[FaceName, set[EventInt]]:
-    pidgin_events = {}
-    for face_name in get_level1_dirs(faces_dir):
-        face_dir = create_path(faces_dir, face_name)
-        for event_int in get_level1_dirs(face_dir):
-            event_dir = create_path(face_dir, event_int)
-            pidgin_path = create_path(event_dir, "pidgin.json")
-            if os_path_exists(pidgin_path):
-                if pidgin_events.get(face_name) is None:
-                    pidgin_events[face_name] = {int(event_int)}
-                else:
-                    events_list = pidgin_events.get(face_name)
-                    events_list.add(int(event_int))
-    return pidgin_events
 
 
 def get_most_recent_event_int(

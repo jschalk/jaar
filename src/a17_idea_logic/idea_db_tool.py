@@ -1,20 +1,24 @@
 from io import StringIO as io_StringIO
 from numpy import float64
 from openpyxl import load_workbook as openpyxl_load_workbook
-from os.path import dirname as os_path_dirname, exists as os_path_exists
+from os import listdir as os_listdir
+from os.path import (
+    dirname as os_path_dirname,
+    exists as os_path_exists,
+    join as os_path_join,
+)
 from pandas import (
     DataFrame,
     ExcelWriter,
     read_csv as pandas_read_csv,
     read_excel as pandas_read_excel,
-    read_sql_query as pandas_read_sql_query,
 )
-from sqlite3 import Connection as sqlite3_Connection, connect as sqlite3_connect
+from pandas.api.types import is_numeric_dtype as pandas_api_types_is_numeric_dtype
+from sqlite3 import Connection as sqlite3_Connection
 from src.a00_data_toolbox.db_toolbox import (
     create_table_from_columns,
     create_table_from_csv,
     db_table_exists,
-    get_grouping_with_all_values_equal_sql_query,
     get_table_columns,
     insert_csv,
 )
@@ -472,3 +476,101 @@ def is_column_type_valid(df: DataFrame, column: str, sqlite_data_type: str) -> b
         return True
     actual_dtype = df[column].dropna().infer_objects().dtype
     return str(actual_dtype) == expected_data_type
+
+
+def prettify_excel(input_file: str, zoom: int = 120) -> None:
+    """
+    Reads all sheets from an Excel file, applies formatting improvements to each,
+    and overwrites the original file. Safely handles sheets with only headers and no data.
+
+    Args:
+        input_file (str): Path to the Excel file to overwrite.
+        zoom (int): Zoom level for each worksheet.
+    """
+    # Load all sheets
+    sheet_data = pandas_read_excel(input_file, sheet_name=None)
+
+    with ExcelWriter(input_file, engine="xlsxwriter") as writer:
+        for sheet_name, df in sheet_data.items():
+            df.to_excel(writer, sheet_name=sheet_name, index=False)
+            workbook = writer.book
+            worksheet = writer.sheets[sheet_name]
+
+            worksheet.freeze_panes(1, 0)
+            worksheet.set_zoom(zoom)
+
+            # Format header
+            header_format = workbook.add_format(
+                {
+                    "bold": True,
+                    "text_wrap": True,
+                    "valign": "top",
+                    "fg_color": "#D7E4BC",
+                    "border": 1,
+                }
+            )
+            for col_num, value in enumerate(df.columns.values):
+                worksheet.write(0, col_num, value, header_format)
+
+            # Format columns and set widths
+            for i, col in enumerate(df.columns):
+                col_data = df[col]
+                width = (
+                    max(
+                        (0 if col_data.empty else col_data.astype(str).map(len).max()),
+                        len(str(col)),
+                    )
+                    + 2
+                )
+
+                if pandas_api_types_is_numeric_dtype(col_data):
+                    if "salary" in col.lower() or "amount" in col.lower():
+                        fmt = workbook.add_format({"num_format": "$#,##0", "border": 1})
+                    else:
+                        fmt = workbook.add_format({"num_format": "0.00", "border": 1})
+                else:
+                    fmt = workbook.add_format({"border": 1})
+                worksheet.set_column(i, i, width, fmt)
+            # Add table only if DataFrame has at least one row
+            if not df.empty:
+                worksheet.add_table(
+                    0,
+                    0,
+                    len(df),
+                    len(df.columns) - 1,
+                    {
+                        "columns": [{"header": col} for col in df.columns],
+                        "style": "Table Style Medium 9",
+                    },
+                )
+
+
+def update_event_int_in_excel_files(directory: str, value) -> None:
+    """
+    Adds or updates the 'event_int' column with a given value
+    in all Excel files in the directory that contain 'stance' in the filename.
+
+    Args:
+        directory (str): Path to the directory containing Excel files.
+        value: The value to set in the 'event_int' column.
+    """
+    for filename in os_listdir(directory):
+        if (
+            filename.lower().endswith((".xlsx", ".xls"))
+            and "stance" in filename.lower()
+        ):
+            filepath = os_path_join(directory, filename)
+
+            # Read all sheets
+            sheets = pandas_read_excel(filepath, sheet_name=None)
+
+            # Modify each sheet
+            updated_sheets = {}
+            for sheet_name, df in sheets.items():
+                df["event_int"] = value  # Add or overwrite
+                updated_sheets[sheet_name] = df
+
+            # Write all sheets back to the same file
+            with ExcelWriter(filepath, engine="xlsxwriter") as writer:
+                for sheet_name, df in updated_sheets.items():
+                    df.to_excel(writer, sheet_name=sheet_name, index=False)

@@ -17,7 +17,7 @@ from src.a17_idea_logic.idea_config import (
 from src.a17_idea_logic.idea_db_tool import open_csv
 from src.a17_idea_logic.test._util.a17_env import (
     env_dir_setup_cleanup,
-    idea_examples_dir,
+    get_module_temp_dir,
 )
 
 
@@ -39,10 +39,10 @@ def test_open_csv_ReturnsObjWhenFileExists(env_dir_setup_cleanup):
     sue_planunit.add_acctunit(yao_str, yao_acct_cred_points, yao_acct_debt_points)
     j1_ideaname = idea_format_00021_plan_acctunit_v0_0_0()
     name_filename = f"{sue_str}_acct_example_01.csv"
-    save_idea_csv(j1_ideaname, sue_planunit, idea_examples_dir(), name_filename)
+    save_idea_csv(j1_ideaname, sue_planunit, get_module_temp_dir(), name_filename)
 
     # WHEN
-    acct_dataframe = open_csv(idea_examples_dir(), name_filename)
+    acct_dataframe = open_csv(get_module_temp_dir(), name_filename)
 
     # THEN
     array_headers = list(acct_dataframe.columns)
@@ -75,7 +75,7 @@ def test_open_csv_ReturnsObjWhenNoFileExists(env_dir_setup_cleanup):
     name_filename = f"{sue_str}_acct_example_77.csv"
 
     # WHEN
-    acct_dataframe = open_csv(idea_examples_dir(), name_filename)
+    acct_dataframe = open_csv(get_module_temp_dir(), name_filename)
 
     # THEN
     assert acct_dataframe is None
@@ -101,7 +101,7 @@ def test_load_idea_csv_Arg_idea_format_00021_plan_acctunit_v0_0_0_csvTo_job(
     sue_planunit.add_acctunit(yao_str, yao_acct_cred_points, yao_acct_debt_points)
     j1_ideaname = idea_format_00021_plan_acctunit_v0_0_0()
     name_filename = f"{sue_str}_acct_example_02.csv"
-    belief_mstr_dir = idea_examples_dir()
+    belief_mstr_dir = get_module_temp_dir()
     csv_example_path = create_path(belief_mstr_dir, name_filename)
     print(f"{csv_example_path}")
     save_idea_csv(j1_ideaname, sue_planunit, belief_mstr_dir, name_filename)
@@ -109,13 +109,13 @@ def test_load_idea_csv_Arg_idea_format_00021_plan_acctunit_v0_0_0_csvTo_job(
     assert not gut_file_exists(belief_mstr_dir, amy_belief_label, sue_str)
 
     # WHEN
-    load_idea_csv(belief_mstr_dir, idea_examples_dir(), name_filename)
+    load_idea_csv(belief_mstr_dir, get_module_temp_dir(), name_filename)
 
     # THEN
     # assert gut Planunit now exists
-    assert gut_file_exists(idea_examples_dir(), amy_belief_label, sue_str)
+    assert gut_file_exists(get_module_temp_dir(), amy_belief_label, sue_str)
     # assert gut Planunit acctunit now exists
-    sue_gut = open_gut_file(idea_examples_dir(), amy_belief_label, sue_str)
+    sue_gut = open_gut_file(get_module_temp_dir(), amy_belief_label, sue_str)
 
     assert sue_gut.acct_exists(sue_str)
     assert sue_gut.acct_exists(bob_str)
@@ -153,21 +153,21 @@ def test_load_idea_csv_csvTo_job(
     sue_planunit.add_acctunit(yao_str, yao_acct_cred_points, yao_acct_debt_points)
     j1_ideaname = idea_format_00021_plan_acctunit_v0_0_0()
     name_filename = f"{sue_str}_acct_example_02.csv"
-    csv_example_path = create_path(idea_examples_dir(), name_filename)
+    csv_example_path = create_path(get_module_temp_dir(), name_filename)
     print(f"{csv_example_path}")
-    save_idea_csv(j1_ideaname, sue_planunit, idea_examples_dir(), name_filename)
-    belief_mstr_dir = idea_examples_dir()
+    save_idea_csv(j1_ideaname, sue_planunit, get_module_temp_dir(), name_filename)
+    belief_mstr_dir = get_module_temp_dir()
     # Popen BeliefUnit and confirm gut PlanUnit does not exist
     assert not gut_file_exists(belief_mstr_dir, amy_belief_label, sue_str)
 
     # WHEN
-    load_idea_csv(belief_mstr_dir, idea_examples_dir(), name_filename)
+    load_idea_csv(belief_mstr_dir, get_module_temp_dir(), name_filename)
 
     # THEN
     # assert gut Planunit now exists
-    assert gut_file_exists(idea_examples_dir(), amy_belief_label, sue_str)
+    assert gut_file_exists(get_module_temp_dir(), amy_belief_label, sue_str)
     # assert gut Planunit acctunit now exists
-    sue_gut = open_gut_file(idea_examples_dir(), amy_belief_label, sue_str)
+    sue_gut = open_gut_file(get_module_temp_dir(), amy_belief_label, sue_str)
     assert sue_gut.acct_exists(sue_str)
     assert sue_gut.acct_exists(bob_str)
     assert sue_gut.acct_exists(yao_str)

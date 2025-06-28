@@ -85,7 +85,7 @@ def test_create_calendar_markdown_files_Senario1_CreatesFileFromBeliefUnitJSON(
 #     br00011_rows = [[event2, sue_str, a23_str, sue_str, sue_str]]
 #     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
 #     upsert_sheet(input_file_path, "br00011_ex3", br00011_df)
-#     fay_world.input_to_clarity_mstr()
+#     fay_world.sheets_input_to_clarity_mstr()
 
 #     a23_calendar_md_path = create_path(output_dir, f"{a23_str}_calendar.md")
 #     print(f"      {a23_calendar_md_path=}")

@@ -28,7 +28,6 @@ def test_WorldUnit_Exists():
     assert not x_world.output_dir
     assert not x_world.world_time_pnigh
     assert not x_world._events
-    assert not x_world._syntax_otz_dir
     assert not x_world._world_dir
     assert not x_world._input_dir
     assert not x_world._brick_dir
@@ -44,7 +43,6 @@ def test_WorldUnit_set_input_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     x_input_dir = create_path(x_example_dir, "input")
 
     assert not fay_world._world_dir
-    assert not fay_world._syntax_otz_dir
     assert not fay_world._input_dir
     assert not fay_world._brick_dir
     assert not fay_world._belief_mstr_dir
@@ -55,7 +53,6 @@ def test_WorldUnit_set_input_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
 
     # THEN
     assert not fay_world._world_dir
-    assert not fay_world._syntax_otz_dir
     assert fay_world._input_dir == x_input_dir
     assert not fay_world._brick_dir
     assert not fay_world._belief_mstr_dir
@@ -67,18 +64,15 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
     fay_str = "Fay"
     fay_world = WorldUnit(world_name=fay_str, worlds_dir=worlds_dir())
     x_world_dir = create_path(worlds_dir(), fay_str)
-    x_syntax_otz_dir = create_path(x_world_dir, "syntax_otz")
     x_input_dir = create_path(x_world_dir, "input")
     x_brick_dir = create_path(x_world_dir, "brick")
     x_belief_mstr_dir = create_path(x_world_dir, "belief_mstr")
 
     assert not fay_world._world_dir
-    assert not fay_world._syntax_otz_dir
     assert not fay_world._input_dir
     assert not fay_world._brick_dir
     assert not fay_world._belief_mstr_dir
     assert os_path_exists(x_world_dir) is False
-    assert os_path_exists(x_syntax_otz_dir) is False
     assert os_path_exists(x_input_dir) is False
     assert os_path_exists(x_brick_dir) is False
     assert os_path_exists(x_belief_mstr_dir) is False
@@ -88,11 +82,9 @@ def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup)
 
     # THEN
     assert fay_world._world_dir == x_world_dir
-    assert fay_world._syntax_otz_dir == x_syntax_otz_dir
     assert not fay_world._input_dir
     assert fay_world._brick_dir == x_brick_dir
     assert os_path_exists(x_world_dir)
-    assert os_path_exists(x_syntax_otz_dir)
     assert os_path_exists(x_input_dir) is False
     assert os_path_exists(x_brick_dir)
     assert os_path_exists(x_belief_mstr_dir)
@@ -125,7 +117,6 @@ def test_worldunit_shop_ReturnsObj_Scenario0_WithParameters(env_dir_setup_cleanu
     assert x_world._input_dir == example_input_dir
     assert x_world.world_time_pnigh == world2_time_pnigh
     assert x_world._events == {}
-    assert x_world._syntax_otz_dir == create_path(world_dir, "syntax_otz")
     assert x_world._beliefunits == world2_beliefunits
     assert x_world._pidgin_events == {}
 
@@ -145,7 +136,6 @@ def test_worldunit_shop_ReturnsObj_Scenario1_WithoutParameters(env_dir_setup_cle
     assert x_world.world_time_pnigh == 0
     assert x_world._events == {}
     assert x_world._input_dir == create_path(x_world._world_dir, "input")
-    assert x_world._syntax_otz_dir == create_path(world_dir, "syntax_otz")
     assert x_world._beliefunits == set()
 
 

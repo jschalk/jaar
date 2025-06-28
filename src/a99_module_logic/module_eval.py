@@ -185,7 +185,7 @@ def check_if_module_str_funcs_is_sorted(module_str_funcs: list[str]):
     sorted_module_str_funcs = sorted(module_str_funcs)
     if module_str_funcs != sorted_module_str_funcs:
         first_wrong_index = None
-        for x in range(0, len(module_str_funcs)):
+        for x in range(len(module_str_funcs)):
             # print(f"{module_str_funcs[x]}")
             if (
                 not first_wrong_index
@@ -243,8 +243,11 @@ def get_docstring(file_path: str, function_name: str) -> str:
     with open(file_path, "r") as f:
         tree = ast_parse(f.read(), filename=file_path)
 
-    for node in ast_walk(tree):
-        if isinstance(node, ast_FunctionDef) and node.name == function_name:
-            return ast_get_docstring(node)
-
-    return None
+    return next(
+        (
+            ast_get_docstring(node)
+            for node in ast_walk(tree)
+            if isinstance(node, ast_FunctionDef) and node.name == function_name
+        ),
+        None,
+    )
