@@ -9,6 +9,7 @@ from src.a00_data_toolbox.file_toolbox import create_path, delete_dir, set_dir
 from src.a01_term_logic.term import BeliefLabel, EventInt, FaceName
 from src.a11_bud_logic.bud import TimeLinePoint
 from src.a15_belief_logic.belief import BeliefUnit
+from src.a17_idea_logic.idea_db_tool import update_event_int_in_excel_files
 from src.a18_etl_toolbox.stance_tool import create_stance0001_file
 from src.a18_etl_toolbox.transformers import (
     add_belief_timeline_to_guts,
@@ -105,19 +106,20 @@ class WorldUnit:
         etl_set_cell_tree_cell_mandates(mstr_dir)
         etl_create_bud_mandate_ledgers(mstr_dir)
 
-    def sheets_input_to_clarity_mstr(self, store_tracing_files: bool = False):
+    def sheets_input_to_clarity_mstr(self):
         with sqlite3_connect(self.get_db_path()) as db_conn:
             cursor = db_conn.cursor()
-            self.sheets_input_to_clarity_with_cursor(
-                db_conn, cursor, store_tracing_files
-            )
+            self.sheets_input_to_clarity_with_cursor(db_conn, cursor)
             db_conn.commit()
+
+    def stance_sheets_to_clarity_mstr(self):
+        update_event_int_in_excel_files(self._input_dir, 1)
+        self.sheets_input_to_clarity_mstr()
 
     def sheets_input_to_clarity_with_cursor(
         self,
         db_conn: sqlite3_Connection,
         cursor: sqlite3_Cursor,
-        store_tracing_files: bool = False,
     ):
         delete_dir(self._belief_mstr_dir)
         set_dir(self._belief_mstr_dir)

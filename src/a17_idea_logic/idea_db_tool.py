@@ -1,7 +1,12 @@
 from io import StringIO as io_StringIO
 from numpy import float64
 from openpyxl import load_workbook as openpyxl_load_workbook
-from os.path import dirname as os_path_dirname, exists as os_path_exists
+from os import listdir as os_listdir
+from os.path import (
+    dirname as os_path_dirname,
+    exists as os_path_exists,
+    join as os_path_join,
+)
 from pandas import (
     DataFrame,
     ExcelWriter,
@@ -538,3 +543,34 @@ def prettify_excel(input_file: str, zoom: int = 120) -> None:
                         "style": "Table Style Medium 9",
                     },
                 )
+
+
+def update_event_int_in_excel_files(directory: str, value) -> None:
+    """
+    Adds or updates the 'event_int' column with a given value
+    in all Excel files in the directory that contain 'stance' in the filename.
+
+    Args:
+        directory (str): Path to the directory containing Excel files.
+        value: The value to set in the 'event_int' column.
+    """
+    for filename in os_listdir(directory):
+        if (
+            filename.lower().endswith((".xlsx", ".xls"))
+            and "stance" in filename.lower()
+        ):
+            filepath = os_path_join(directory, filename)
+
+            # Read all sheets
+            sheets = pandas_read_excel(filepath, sheet_name=None)
+
+            # Modify each sheet
+            updated_sheets = {}
+            for sheet_name, df in sheets.items():
+                df["event_int"] = value  # Add or overwrite
+                updated_sheets[sheet_name] = df
+
+            # Write all sheets back to the same file
+            with ExcelWriter(filepath, engine="xlsxwriter") as writer:
+                for sheet_name, df in updated_sheets.items():
+                    df.to_excel(writer, sheet_name=sheet_name, index=False)

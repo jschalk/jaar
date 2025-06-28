@@ -7,7 +7,11 @@ from pandas import (
     read_excel as pandas_read_excel,
 )
 from pandas.testing import assert_frame_equal as pandas_testing_assert_frame_equal
-from src.a17_idea_logic.idea_db_tool import csv_dict_to_excel, prettify_excel
+from src.a17_idea_logic.idea_db_tool import (
+    csv_dict_to_excel,
+    prettify_excel,
+    update_event_int_in_excel_files,
+)
 from src.a17_idea_logic.test._util.a17_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
@@ -83,3 +87,26 @@ def test_prettify_excel(env_dir_setup_cleanup):
         assert any(
             width and width > 8 for width in col_widths
         )  # default width is ~8.43
+
+
+def test_update_event_int_in_excel_files(env_dir_setup_cleanup):
+    # Setup: Create test directory and Excel file
+    temp_dir = get_module_temp_dir()
+    file_path = os_path_join(temp_dir, "example_stance.xlsx")
+
+    # Create Excel file with two sheets
+    df1 = DataFrame({"name": ["Alice", "Bob"], "score": [80, 90]})
+    df2 = DataFrame({"item": ["Pen", "Notebook"], "price": [1.5, 3.0]})
+    with pandas_ExcelWriter(file_path) as writer:
+        df1.to_excel(writer, sheet_name="Sheet1", index=False)
+        df2.to_excel(writer, sheet_name="Sheet2", index=False)
+
+    # Apply function
+    update_event_int_in_excel_files(temp_dir, 42)
+
+    # Reload the file and verify that event_int column exists and is correct
+    result = pandas_read_excel(file_path, sheet_name=None)
+
+    for sheet_df in result.values():
+        assert "event_int" in sheet_df.columns
+        assert all(sheet_df["event_int"] == 42)
