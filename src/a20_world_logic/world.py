@@ -161,6 +161,9 @@ class WorldUnit:
         # if store_tracing_files:
 
     def create_stances(self, prettify_excel_bool=True):
+        # TODO why is create_stance0001_file not drawing from world db instead of files?
+        # it should be the database because that's the end of the core pipeline so it should
+        # be the source of truth.
         create_stance0001_file(
             self._belief_mstr_dir, self.output_dir, self.world_name, prettify_excel_bool
         )

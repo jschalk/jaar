@@ -574,3 +574,8 @@ def update_event_int_in_excel_files(directory: str, value) -> None:
             with ExcelWriter(filepath, engine="xlsxwriter") as writer:
                 for sheet_name, df in updated_sheets.items():
                     df.to_excel(writer, sheet_name=sheet_name, index=False)
+
+
+# # TODO #834
+# def add_pidginunits_to_stance_csv_strs(csv_strs: dict[str, str], db_path: str):
+#     pass
