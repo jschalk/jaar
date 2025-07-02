@@ -1,11 +1,14 @@
 from pathlib import Path
 from src.a00_data_toolbox.file_toolbox import get_level1_dirs, set_dir
-from src.a18_etl_toolbox.test._util.a18_env import get_module_temp_dir
+from src.a18_etl_toolbox.test._util.a18_env import (
+    env_dir_setup_cleanup,
+    get_module_temp_dir,
+)
 
 
-def test_get_level1_dirs_EmptyDirectory(tmp_path):
+def test_get_level1_dirs_EmptyDirectory(env_dir_setup_cleanup):
     # ESTABLISH
-    test_dir = tmp_path
+    test_dir = get_module_temp_dir()
 
     # WHEN
     result = get_level1_dirs(test_dir)
