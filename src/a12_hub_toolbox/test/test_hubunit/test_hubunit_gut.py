@@ -12,10 +12,10 @@ from src.a12_hub_toolbox.test._util.a12_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as env_dir,
 )
-from src.a12_hub_toolbox.test._util.example_hub_atoms import sue_2planatoms_packunit
+from src.a12_hub_toolbox.test._util.example_hub_atoms import sue_2owneratoms_packunit
 
 
-def test_HubUnit_default_gut_plan_ReturnsObj():
+def test_HubUnit_default_gut_owner_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     slash_str = "/"
@@ -35,7 +35,7 @@ def test_HubUnit_default_gut_plan_ReturnsObj():
     )
 
     # WHEN
-    sue_default_gut = sue_hubunit.default_gut_plan()
+    sue_default_gut = sue_hubunit.default_gut_owner()
 
     # THEN
     assert sue_default_gut.belief_label == sue_hubunit.belief_label
@@ -84,9 +84,9 @@ def test_HubUnit_create_gut_from_packs_CreatesgutFileFromPackFiles(
 
     # THEN
     assert gut_file_exists(env_dir(), "amy23", sue_str)
-    static_sue_gut = sue_hubunit._merge_any_packs(sue_hubunit.default_gut_plan())
-    gut_plan = open_gut_file(env_dir(), "amy23", sue_str)
-    assert gut_plan.get_dict() == static_sue_gut.get_dict()
+    static_sue_gut = sue_hubunit._merge_any_packs(sue_hubunit.default_gut_owner())
+    gut_owner = open_gut_file(env_dir(), "amy23", sue_str)
+    assert gut_owner.get_dict() == static_sue_gut.get_dict()
 
 
 def test_HubUnit_create_initial_pack_and_gut_files_CreatesPackFilesAndgutFile(
@@ -106,9 +106,9 @@ def test_HubUnit_create_initial_pack_and_gut_files_CreatesPackFilesAndgutFile(
     # THEN
     assert os_path_exists(init_pack_file_path)
     assert gut_file_exists(env_dir(), "amy23", sue_str)
-    static_sue_gut = sue_hubunit._merge_any_packs(sue_hubunit.default_gut_plan())
-    gut_plan = open_gut_file(env_dir(), "amy23", sue_str)
-    assert gut_plan.get_dict() == static_sue_gut.get_dict()
+    static_sue_gut = sue_hubunit._merge_any_packs(sue_hubunit.default_gut_owner())
+    gut_owner = open_gut_file(env_dir(), "amy23", sue_str)
+    assert gut_owner.get_dict() == static_sue_gut.get_dict()
 
 
 def test_HubUnit_create_initial_pack_files_from_gut_SavesOnlyPackFiles(
@@ -117,11 +117,11 @@ def test_HubUnit_create_initial_pack_files_from_gut_SavesOnlyPackFiles(
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str)
-    sue_gut_plan = sue_hubunit.default_gut_plan()
+    sue_gut_owner = sue_hubunit.default_gut_owner()
     bob_str = "Bob"
-    sue_gut_plan.add_acctunit(bob_str)
+    sue_gut_owner.add_acctunit(bob_str)
     assert gut_file_exists(env_dir(), "amy23", sue_str) is False
-    save_gut_file(env_dir(), sue_gut_plan)
+    save_gut_file(env_dir(), sue_gut_owner)
     assert gut_file_exists(env_dir(), "amy23", sue_str)
     init_pack_file_path = create_path(sue_hubunit._packs_dir, f"{init_pack_id()}.json")
     assert os_path_exists(init_pack_file_path) is False
@@ -149,10 +149,10 @@ def test_HubUnit_initialize_pack_gut_files_CorrectlySavesgutFileAndPackFile(
     sue_hubunit.initialize_pack_gut_files()
 
     # THEN
-    gut_plan = open_gut_file(env_dir(), "amy23", sue_str)
-    assert gut_plan.belief_label == "amy23"
-    assert gut_plan.owner_name == sue_str
-    assert gut_plan.respect_bit == seven_int
+    gut_owner = open_gut_file(env_dir(), "amy23", sue_str)
+    assert gut_owner.belief_label == "amy23"
+    assert gut_owner.owner_name == sue_str
+    assert gut_owner.respect_bit == seven_int
     assert os_path_exists(init_pack_file_path)
 
 
@@ -175,10 +175,10 @@ def test_HubUnit_initialize_pack_gut_files_CorrectlySavesOnlygutFile(
     sue_hubunit.initialize_pack_gut_files()
 
     # THEN
-    gut_plan = open_gut_file(env_dir(), "amy23", sue_str)
-    assert gut_plan.belief_label == "amy23"
-    assert gut_plan.owner_name == sue_str
-    assert gut_plan.respect_bit == seven_int
+    gut_owner = open_gut_file(env_dir(), "amy23", sue_str)
+    assert gut_owner.belief_label == "amy23"
+    assert gut_owner.owner_name == sue_str
+    assert gut_owner.respect_bit == seven_int
     assert os_path_exists(init_pack_file_path)
 
 
@@ -190,10 +190,10 @@ def test_HubUnit_initialize_pack_gut_files_CorrectlySavesOnlyPackFile(
     seven_int = 25
     sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str, respect_bit=seven_int)
     sue_hubunit.initialize_pack_gut_files()
-    sue_gut_plan = open_gut_file(env_dir(), "amy23", sue_str)
+    sue_gut_owner = open_gut_file(env_dir(), "amy23", sue_str)
     bob_str = "Bob"
-    sue_gut_plan.add_acctunit(bob_str)
-    save_gut_file(env_dir(), sue_gut_plan)
+    sue_gut_owner.add_acctunit(bob_str)
+    save_gut_file(env_dir(), sue_gut_owner)
     assert gut_file_exists(env_dir(), "amy23", sue_str)
     init_pack_file_path = create_path(sue_hubunit._packs_dir, f"{init_pack_id()}.json")
     delete_dir(sue_hubunit._packs_dir)
@@ -203,10 +203,10 @@ def test_HubUnit_initialize_pack_gut_files_CorrectlySavesOnlyPackFile(
     sue_hubunit.initialize_pack_gut_files()
 
     # THEN
-    assert sue_gut_plan.belief_label == "amy23"
-    assert sue_gut_plan.owner_name == sue_str
-    assert sue_gut_plan.respect_bit == seven_int
-    assert sue_gut_plan.acct_exists(bob_str)
+    assert sue_gut_owner.belief_label == "amy23"
+    assert sue_gut_owner.owner_name == sue_str
+    assert sue_gut_owner.respect_bit == seven_int
+    assert sue_gut_owner.acct_exists(bob_str)
     assert os_path_exists(init_pack_file_path)
 
 
@@ -217,20 +217,20 @@ def test_HubUnit_append_packs_to_gut_file_AddsPacksTogutFile(
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str)
     sue_hubunit.initialize_pack_gut_files()
-    sue_hubunit.save_pack_file(sue_2planatoms_packunit())
-    gut_plan = open_gut_file(env_dir(), "amy23", sue_str)
-    # gut_plan.add_concept(gut_plan.make_l1_rope("sports"))
+    sue_hubunit.save_pack_file(sue_2owneratoms_packunit())
+    gut_owner = open_gut_file(env_dir(), "amy23", sue_str)
+    # gut_owner.add_plan(gut_owner.make_l1_rope("sports"))
     sports_str = "sports"
-    sports_rope = gut_plan.make_l1_rope(sports_str)
+    sports_rope = gut_owner.make_l1_rope(sports_str)
     knee_str = "knee"
-    knee_rope = gut_plan.make_rope(sports_rope, knee_str)
-    assert gut_plan.concept_exists(sports_rope) is False
-    assert gut_plan.concept_exists(knee_rope) is False
+    knee_rope = gut_owner.make_rope(sports_rope, knee_str)
+    assert gut_owner.plan_exists(sports_rope) is False
+    assert gut_owner.plan_exists(knee_rope) is False
 
     # WHEN
-    new_plan = sue_hubunit.append_packs_to_gut_file()
+    new_owner = sue_hubunit.append_packs_to_gut_file()
 
     # THEN
-    assert new_plan != gut_plan
-    assert new_plan.concept_exists(sports_rope)
-    assert new_plan.concept_exists(knee_rope)
+    assert new_owner != gut_owner
+    assert new_owner.plan_exists(sports_rope)
+    assert new_owner.plan_exists(knee_rope)

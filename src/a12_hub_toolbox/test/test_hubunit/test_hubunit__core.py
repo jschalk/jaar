@@ -11,7 +11,7 @@ from src.a02_finance_logic.finance_config import (
     filter_penny,
     validate_fund_pool,
 )
-from src.a05_concept_logic.concept import get_default_belief_label as root_label
+from src.a05_plan_logic.plan import get_default_belief_label as root_label
 from src.a12_hub_toolbox.hub_path import create_owner_dir_path
 from src.a12_hub_toolbox.hubunit import HubUnit, get_keep_path, hubunit_shop
 from src.a12_hub_toolbox.test._util.a12_env import (
@@ -170,7 +170,7 @@ def test_get_keep_path_ReturnsObj():
     dallas_str = "dallas"
     elpaso_str = "el paso"
     kern_str = "kern"
-    conceptroot = "conceptroot"
+    planroot = "planroot"
     texas_rope = create_rope_from_labels([peru_str, texas_str])
     dallas_rope = create_rope_from_labels([peru_str, texas_str, dallas_str])
     elpaso_rope = create_rope_from_labels([peru_str, texas_str, elpaso_str])
@@ -183,10 +183,10 @@ def test_get_keep_path_ReturnsObj():
     kern_path = get_keep_path(sue_hubunit, kern_rope)
 
     # THEN
-    conceptroot_dir = create_path(sue_hubunit._keeps_dir, peru_str)
+    planroot_dir = create_path(sue_hubunit._keeps_dir, peru_str)
     print(f"{kern_rope=}")
-    print(f"{conceptroot_dir=}")
-    assert texas_path == create_path(conceptroot_dir, texas_str)
+    print(f"{planroot_dir=}")
+    assert texas_path == create_path(planroot_dir, texas_str)
     assert dallas_path == create_path(texas_path, dallas_str)
     assert elpaso_path == create_path(texas_path, elpaso_str)
     assert kern_path == create_path(elpaso_path, kern_str)

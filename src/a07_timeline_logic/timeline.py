@@ -4,13 +4,13 @@ from os import getcwd as os_getcwd
 from src.a00_data_toolbox.dict_toolbox import get_1_if_None
 from src.a00_data_toolbox.file_toolbox import create_path, open_json
 from src.a01_term_logic.rope import LabelTerm, RopeTerm, create_rope
-from src.a05_concept_logic.concept import (
-    ConceptUnit,
-    all_concepts_between,
-    concepts_calculated_range as calc_range,
-    conceptunit_shop,
+from src.a05_plan_logic.plan import (
+    PlanUnit,
+    all_plans_between,
+    plans_calculated_range as calc_range,
+    planunit_shop,
 )
-from src.a06_plan_logic.plan import PlanUnit
+from src.a06_owner_logic.owner import OwnerUnit
 
 
 class TimeLineLabel(LabelTerm):
@@ -48,44 +48,44 @@ def day_length() -> int:
     return 1440
 
 
-def stan_c400_leap_conceptunit() -> ConceptUnit:
+def stan_c400_leap_planunit() -> PlanUnit:
     x_denom = get_c400_constants().c400_leap_length
-    return conceptunit_shop("c400_leap", denom=x_denom, morph=True)
+    return planunit_shop("c400_leap", denom=x_denom, morph=True)
 
 
-def stan_c400_clean_conceptunit() -> ConceptUnit:
+def stan_c400_clean_planunit() -> PlanUnit:
     x_denom = get_c400_constants().c400_clean_length
-    return conceptunit_shop("c400_clean", denom=x_denom, morph=True)
+    return planunit_shop("c400_clean", denom=x_denom, morph=True)
 
 
-def stan_c100_conceptunit() -> ConceptUnit:
+def stan_c100_planunit() -> PlanUnit:
     x_denom = get_c400_constants().c100_length
-    return conceptunit_shop("c100", denom=x_denom, morph=True)
+    return planunit_shop("c100", denom=x_denom, morph=True)
 
 
-def stan_yr4_leap_conceptunit() -> ConceptUnit:
+def stan_yr4_leap_planunit() -> PlanUnit:
     x_denom = get_c400_constants().yr4_leap_length
-    return conceptunit_shop("yr4_leap", denom=x_denom, morph=True)
+    return planunit_shop("yr4_leap", denom=x_denom, morph=True)
 
 
-def stan_yr4_clean_conceptunit() -> ConceptUnit:
+def stan_yr4_clean_planunit() -> PlanUnit:
     x_denom = get_c400_constants().yr4_clean_length
-    return conceptunit_shop("yr4_clean", denom=x_denom, morph=True)
+    return planunit_shop("yr4_clean", denom=x_denom, morph=True)
 
 
-def stan_year_conceptunit() -> ConceptUnit:
+def stan_year_planunit() -> PlanUnit:
     x_denom = get_c400_constants().year_length
-    return conceptunit_shop("year", denom=x_denom, morph=True)
+    return planunit_shop("year", denom=x_denom, morph=True)
 
 
-def stan_day_conceptunit() -> ConceptUnit:
+def stan_day_planunit() -> PlanUnit:
     x_denom = get_c400_constants().day_length
-    return conceptunit_shop("day", denom=x_denom, morph=True)
+    return planunit_shop("day", denom=x_denom, morph=True)
 
 
-def stan_days_conceptunit() -> ConceptUnit:
+def stan_days_planunit() -> PlanUnit:
     x_denom = get_c400_constants().day_length
-    return conceptunit_shop("days", denom=x_denom)
+    return planunit_shop("days", denom=x_denom)
 
 
 def week_length(x_int: int) -> int:
@@ -93,21 +93,21 @@ def week_length(x_int: int) -> int:
     return day_length() * x_int
 
 
-def create_weekday_conceptunits(x_weekdays: list[str]) -> dict[str, ConceptUnit]:
+def create_weekday_planunits(x_weekdays: list[str]) -> dict[str, PlanUnit]:
     x_dict = {}
     for x_weekday_num in range(len(x_weekdays)):
-        x_concept = conceptunit_shop(
+        x_plan = planunit_shop(
             x_weekdays[x_weekday_num],
             gogo_want=x_weekday_num * day_length(),
             stop_want=(x_weekday_num + 1) * day_length(),
         )
-        x_dict[x_weekdays[x_weekday_num]] = x_concept
+        x_dict[x_weekdays[x_weekday_num]] = x_plan
     return x_dict
 
 
-def create_month_conceptunits(
+def create_month_planunits(
     x_months_list: list[list[str, int]], monthday_distortion: int
-) -> dict[str, ConceptUnit]:
+) -> dict[str, PlanUnit]:
     x_dict = {}
     current_day = 0
     for x_month_list in x_months_list:
@@ -116,43 +116,39 @@ def create_month_conceptunits(
         x_gogo = current_day * day_length()
         x_stop = x_month_days * day_length()
         x_addin = monthday_distortion * day_length()
-        x_concept = conceptunit_shop(
+        x_plan = planunit_shop(
             x_month_str, gogo_want=x_gogo, stop_want=x_stop, addin=x_addin
         )
-        x_dict[x_month_str] = x_concept
+        x_dict[x_month_str] = x_plan
         current_day = x_month_days
     return x_dict
 
 
-def create_hour_conceptunits(x_hours_list: list[str]) -> dict[str, ConceptUnit]:
+def create_hour_planunits(x_hours_list: list[str]) -> dict[str, PlanUnit]:
     x_dict = {}
     current_min = 0
     for x_hour_list in x_hours_list:
         x_hour_str = x_hour_list[0]
         x_stop = x_hour_list[1]
-        x_concept = conceptunit_shop(
-            x_hour_str, gogo_want=current_min, stop_want=x_stop
-        )
-        x_dict[x_hour_str] = x_concept
+        x_plan = planunit_shop(x_hour_str, gogo_want=current_min, stop_want=x_stop)
+        x_dict[x_hour_str] = x_plan
         current_min = x_stop
     return x_dict
 
 
-def create_week_conceptunits(x_weekdays_list) -> dict[str, ConceptUnit]:
+def create_week_planunits(x_weekdays_list) -> dict[str, PlanUnit]:
     x_week_lenth = week_length(len(x_weekdays_list))
     week_str = "week"
     weeks_str = "weeks"
     return {
-        week_str: conceptunit_shop(week_str, denom=x_week_lenth, morph=True),
-        weeks_str: conceptunit_shop(weeks_str, denom=x_week_lenth),
+        week_str: planunit_shop(week_str, denom=x_week_lenth, morph=True),
+        weeks_str: planunit_shop(weeks_str, denom=x_week_lenth),
     }
 
 
-def new_timeline_conceptunit(
-    timeline_label: TimeLineLabel, c400_number: int
-) -> ConceptUnit:
+def new_timeline_planunit(timeline_label: TimeLineLabel, c400_number: int) -> PlanUnit:
     timeline_length = c400_number * get_c400_constants().c400_leap_length
-    return conceptunit_shop(timeline_label, begin=0, close=timeline_length)
+    return planunit_shop(timeline_label, begin=0, close=timeline_length)
 
 
 def get_timeline_rope(belief_label: str, timeline_label: str, knot: str) -> RopeTerm:
@@ -160,8 +156,8 @@ def get_timeline_rope(belief_label: str, timeline_label: str, knot: str) -> Rope
     return create_rope(time_rope, timeline_label, knot)
 
 
-def add_newtimeline_conceptunit(x_planunit: PlanUnit, timeline_config: dict):
-    x_concept_label = timeline_config.get("timeline_label")
+def add_newtimeline_planunit(x_ownerunit: OwnerUnit, timeline_config: dict):
+    x_plan_label = timeline_config.get("timeline_label")
     x_c400_number = timeline_config.get("c400_number")
     x_months = timeline_config.get("months_config")
     x_mday = timeline_config.get("monthday_distortion")
@@ -170,95 +166,93 @@ def add_newtimeline_conceptunit(x_planunit: PlanUnit, timeline_config: dict):
     x_yr1_jan1_offset = timeline_config.get("yr1_jan1_offset")
 
     timeline_rope = get_timeline_rope(
-        belief_label=x_planunit.belief_label,
-        timeline_label=x_concept_label,
-        knot=x_planunit.knot,
+        belief_label=x_ownerunit.belief_label,
+        timeline_label=x_plan_label,
+        knot=x_ownerunit.knot,
     )
-    day_rope = x_planunit.make_rope(timeline_rope, "day")
-    week_rope = x_planunit.make_rope(timeline_rope, "week")
-    year_rope = get_year_rope(x_planunit, timeline_rope)
+    day_rope = x_ownerunit.make_rope(timeline_rope, "day")
+    week_rope = x_ownerunit.make_rope(timeline_rope, "week")
+    year_rope = get_year_rope(x_ownerunit, timeline_rope)
 
-    add_stan_conceptunits(x_planunit, x_concept_label, x_c400_number)
-    add_conceptunits(x_planunit, day_rope, create_hour_conceptunits(x_hours_list))
-    add_conceptunits(x_planunit, timeline_rope, create_week_conceptunits(x_wkdays_list))
-    add_conceptunits(x_planunit, week_rope, create_weekday_conceptunits(x_wkdays_list))
-    add_conceptunits(x_planunit, year_rope, create_month_conceptunits(x_months, x_mday))
-    offset_concept = conceptunit_shop("yr1_jan1_offset", addin=x_yr1_jan1_offset)
-    x_planunit.set_concept(offset_concept, timeline_rope)
-    return x_planunit
+    add_stan_planunits(x_ownerunit, x_plan_label, x_c400_number)
+    add_planunits(x_ownerunit, day_rope, create_hour_planunits(x_hours_list))
+    add_planunits(x_ownerunit, timeline_rope, create_week_planunits(x_wkdays_list))
+    add_planunits(x_ownerunit, week_rope, create_weekday_planunits(x_wkdays_list))
+    add_planunits(x_ownerunit, year_rope, create_month_planunits(x_months, x_mday))
+    offset_plan = planunit_shop("yr1_jan1_offset", addin=x_yr1_jan1_offset)
+    x_ownerunit.set_plan(offset_plan, timeline_rope)
+    return x_ownerunit
 
 
-def add_conceptunits(
-    x_planunit: PlanUnit, parent_rope: RopeTerm, config_dict: dict[str, ConceptUnit]
+def add_planunits(
+    x_ownerunit: OwnerUnit, parent_rope: RopeTerm, config_dict: dict[str, PlanUnit]
 ):
-    for x_time_conceptunit in config_dict.values():
-        x_planunit.set_concept(x_time_conceptunit, parent_rope)
+    for x_time_planunit in config_dict.values():
+        x_ownerunit.set_plan(x_time_planunit, parent_rope)
 
 
-def add_stan_conceptunits(
-    x_planunit: PlanUnit,
+def add_stan_planunits(
+    x_ownerunit: OwnerUnit,
     timeline_label: TimeLineLabel,
     timeline_c400_number: int,
 ):
-    time_rope = x_planunit.make_l1_rope("time")
+    time_rope = x_ownerunit.make_l1_rope("time")
     timeline_rope = get_timeline_rope(
-        belief_label=x_planunit.belief_label,
+        belief_label=x_ownerunit.belief_label,
         timeline_label=timeline_label,
-        knot=x_planunit.knot,
+        knot=x_ownerunit.knot,
     )
-    c400_leap_rope = x_planunit.make_rope(timeline_rope, "c400_leap")
-    c400_clean_rope = x_planunit.make_rope(c400_leap_rope, "c400_clean")
-    c100_rope = x_planunit.make_rope(c400_clean_rope, "c100")
-    yr4_leap_rope = x_planunit.make_rope(c100_rope, "yr4_leap")
-    yr4_clean_rope = x_planunit.make_rope(yr4_leap_rope, "yr4_clean")
+    c400_leap_rope = x_ownerunit.make_rope(timeline_rope, "c400_leap")
+    c400_clean_rope = x_ownerunit.make_rope(c400_leap_rope, "c400_clean")
+    c100_rope = x_ownerunit.make_rope(c400_clean_rope, "c100")
+    yr4_leap_rope = x_ownerunit.make_rope(c100_rope, "yr4_leap")
+    yr4_clean_rope = x_ownerunit.make_rope(yr4_leap_rope, "yr4_clean")
 
-    if not x_planunit.concept_exists(time_rope):
-        x_planunit.set_l1_concept(conceptunit_shop("time"))
-    timeline_conceptunit = new_timeline_conceptunit(
-        timeline_label, timeline_c400_number
-    )
-    x_planunit.set_concept(timeline_conceptunit, time_rope)
-    x_planunit.set_concept(stan_c400_leap_conceptunit(), timeline_rope)
-    x_planunit.set_concept(stan_c400_clean_conceptunit(), c400_leap_rope)
-    x_planunit.set_concept(stan_c100_conceptunit(), c400_clean_rope)
-    x_planunit.set_concept(stan_yr4_leap_conceptunit(), c100_rope)
-    x_planunit.set_concept(stan_yr4_clean_conceptunit(), yr4_leap_rope)
-    x_planunit.set_concept(stan_year_conceptunit(), yr4_clean_rope)
-    x_planunit.set_concept(stan_day_conceptunit(), timeline_rope)
-    x_planunit.set_concept(stan_days_conceptunit(), timeline_rope)
+    if not x_ownerunit.plan_exists(time_rope):
+        x_ownerunit.set_l1_plan(planunit_shop("time"))
+    timeline_planunit = new_timeline_planunit(timeline_label, timeline_c400_number)
+    x_ownerunit.set_plan(timeline_planunit, time_rope)
+    x_ownerunit.set_plan(stan_c400_leap_planunit(), timeline_rope)
+    x_ownerunit.set_plan(stan_c400_clean_planunit(), c400_leap_rope)
+    x_ownerunit.set_plan(stan_c100_planunit(), c400_clean_rope)
+    x_ownerunit.set_plan(stan_yr4_leap_planunit(), c100_rope)
+    x_ownerunit.set_plan(stan_yr4_clean_planunit(), yr4_leap_rope)
+    x_ownerunit.set_plan(stan_year_planunit(), yr4_clean_rope)
+    x_ownerunit.set_plan(stan_day_planunit(), timeline_rope)
+    x_ownerunit.set_plan(stan_days_planunit(), timeline_rope)
 
 
 def get_c400_clean_rope(
-    x_planunit: PlanUnit, time_range_root_rope: RopeTerm
+    x_ownerunit: OwnerUnit, time_range_root_rope: RopeTerm
 ) -> RopeTerm:
-    c400_leap_rope = x_planunit.make_rope(time_range_root_rope, "c400_leap")
-    return x_planunit.make_rope(c400_leap_rope, "c400_clean")
+    c400_leap_rope = x_ownerunit.make_rope(time_range_root_rope, "c400_leap")
+    return x_ownerunit.make_rope(c400_leap_rope, "c400_clean")
 
 
-def get_c100_rope(x_planunit: PlanUnit, time_range_root_rope: RopeTerm) -> RopeTerm:
-    c400_clean_rope = get_c400_clean_rope(x_planunit, time_range_root_rope)
-    return x_planunit.make_rope(c400_clean_rope, "c100")
+def get_c100_rope(x_ownerunit: OwnerUnit, time_range_root_rope: RopeTerm) -> RopeTerm:
+    c400_clean_rope = get_c400_clean_rope(x_ownerunit, time_range_root_rope)
+    return x_ownerunit.make_rope(c400_clean_rope, "c100")
 
 
 def get_yr4_clean_rope(
-    x_planunit: PlanUnit, time_range_root_rope: RopeTerm
+    x_ownerunit: OwnerUnit, time_range_root_rope: RopeTerm
 ) -> RopeTerm:
-    c100_rope = get_c100_rope(x_planunit, time_range_root_rope)
-    yr4_leap_rope = x_planunit.make_rope(c100_rope, "yr4_leap")
-    return x_planunit.make_rope(yr4_leap_rope, "yr4_clean")
+    c100_rope = get_c100_rope(x_ownerunit, time_range_root_rope)
+    yr4_leap_rope = x_ownerunit.make_rope(c100_rope, "yr4_leap")
+    return x_ownerunit.make_rope(yr4_leap_rope, "yr4_clean")
 
 
-def get_year_rope(x_planunit: PlanUnit, time_range_root_rope: RopeTerm) -> RopeTerm:
-    yr4_clean_rope = get_yr4_clean_rope(x_planunit, time_range_root_rope)
-    return x_planunit.make_rope(yr4_clean_rope, "year")
+def get_year_rope(x_ownerunit: OwnerUnit, time_range_root_rope: RopeTerm) -> RopeTerm:
+    yr4_clean_rope = get_yr4_clean_rope(x_ownerunit, time_range_root_rope)
+    return x_ownerunit.make_rope(yr4_clean_rope, "year")
 
 
-def get_week_rope(x_planunit: PlanUnit, time_range_root_rope: RopeTerm) -> RopeTerm:
-    return x_planunit.make_rope(time_range_root_rope, "week")
+def get_week_rope(x_ownerunit: OwnerUnit, time_range_root_rope: RopeTerm) -> RopeTerm:
+    return x_ownerunit.make_rope(time_range_root_rope, "week")
 
 
-def get_day_rope(x_planunit: PlanUnit, time_range_root_rope: RopeTerm) -> RopeTerm:
-    return x_planunit.make_rope(time_range_root_rope, "day")
+def get_day_rope(x_ownerunit: OwnerUnit, time_range_root_rope: RopeTerm) -> RopeTerm:
+    return x_ownerunit.make_rope(time_range_root_rope, "day")
 
 
 def validate_timeline_config(config_dict: dict) -> bool:
@@ -416,11 +410,11 @@ def get_min_from_dt_offset(dt: datetime, yr1_jan1_offset: int) -> int:
 
 
 def get_min_from_dt(
-    x_plan: PlanUnit, timeline_rope: RopeTerm, x_datetime: datetime
+    x_owner: OwnerUnit, timeline_rope: RopeTerm, x_datetime: datetime
 ) -> int:
-    offset_rope = x_plan.make_rope(timeline_rope, "yr1_jan1_offset")
-    offset_concept = x_plan.get_concept_obj(offset_rope)
-    offset_addin = offset_concept.addin
+    offset_rope = x_owner.make_rope(timeline_rope, "yr1_jan1_offset")
+    offset_plan = x_owner.get_plan_obj(offset_rope)
+    offset_addin = offset_plan.addin
     return get_min_from_dt_offset(x_datetime, offset_addin)
 
 
@@ -431,8 +425,8 @@ def get_timeline_min_difference(timeline_config0: dict, timeline_config1: dict) 
 
 
 @dataclass
-class PlanTimelinePoint:
-    """Given plan, timeline_rope, and TimelinePoint, returns time technology attrs
+class OwnerTimelinePoint:
+    """Given owner, timeline_rope, and TimelinePoint, returns time technology attrs
     _c400_number: count of 400 year cycles
     _c100_count: count of 100 year cycles after _c400_number years removed
     _hour
@@ -443,14 +437,14 @@ class PlanTimelinePoint:
     _year_count:  1 year after _c100_count, _c100_count, _yr4_count years removed
     _year_num: calculated year from c400, c100, yr4, year_count
     _weekday
-    _timeline_concept ConceptUnit
-    readable time blurb from PlanUnit, time_range_root_rope, and minute integer."""
+    _timeline_plan PlanUnit
+    readable time blurb from OwnerUnit, time_range_root_rope, and minute integer."""
 
-    x_planunit: PlanUnit = None
+    x_ownerunit: OwnerUnit = None
     time_range_root_rope: RopeTerm = None
     x_min: int = None
     # calculated fields
-    _timeline_concept: ConceptUnit = None
+    _timeline_plan: PlanUnit = None
     _weekday: str = None
     _monthday: str = None
     _month: str = None
@@ -462,83 +456,79 @@ class PlanTimelinePoint:
     _year_count: str = None
     _year_num: str = None
 
-    def _set_timeline_concept(self):
-        self._timeline_concept = self.x_planunit.get_concept_obj(
-            self.time_range_root_rope
-        )
+    def _set_timeline_plan(self):
+        self._timeline_plan = self.x_ownerunit.get_plan_obj(self.time_range_root_rope)
 
     def _set_weekday(self):
-        week_rope = get_week_rope(self.x_planunit, self.time_range_root_rope)
-        week_concept = self.x_planunit.get_concept_obj(week_rope)
-        x_concept_list = [self._timeline_concept, week_concept]
-        popen_rangeunit = calc_range(x_concept_list, self.x_min, self.x_min)
-        popen_weekday_dict = week_concept.get_kids_in_range(popen_rangeunit.gogo)
+        week_rope = get_week_rope(self.x_ownerunit, self.time_range_root_rope)
+        week_plan = self.x_ownerunit.get_plan_obj(week_rope)
+        x_plan_list = [self._timeline_plan, week_plan]
+        popen_rangeunit = calc_range(x_plan_list, self.x_min, self.x_min)
+        popen_weekday_dict = week_plan.get_kids_in_range(popen_rangeunit.gogo)
         for x_weekday in popen_weekday_dict.keys():
             self._weekday = x_weekday
 
     def _set_month(self):
-        year_rope = get_year_rope(self.x_planunit, self.time_range_root_rope)
-        year_concept = self.x_planunit.get_concept_obj(year_rope)
-        x_concept_dict = self.x_planunit._concept_dict
-        concept_list = all_concepts_between(
-            x_concept_dict,
+        year_rope = get_year_rope(self.x_ownerunit, self.time_range_root_rope)
+        year_plan = self.x_ownerunit.get_plan_obj(year_rope)
+        x_plan_dict = self.x_ownerunit._plan_dict
+        plan_list = all_plans_between(
+            x_plan_dict,
             self.time_range_root_rope,
             year_rope,
-            knot=self.x_planunit.knot,
+            knot=self.x_ownerunit.knot,
         )
-        popen_rangeunit = calc_range(concept_list, self.x_min, self.x_min)
-        gogo_month_dict = year_concept.get_kids_in_range(popen_rangeunit.gogo)
-        month_concept = None
-        for x_monthname, month_concept in gogo_month_dict.items():
+        popen_rangeunit = calc_range(plan_list, self.x_min, self.x_min)
+        gogo_month_dict = year_plan.get_kids_in_range(popen_rangeunit.gogo)
+        month_plan = None
+        for x_monthname, month_plan in gogo_month_dict.items():
             self._month = x_monthname
-            month_concept = month_concept
+            month_plan = month_plan
 
-        self._monthday = (
-            popen_rangeunit.gogo - month_concept._gogo_calc + month_concept.addin
-        )
+        self._monthday = popen_rangeunit.gogo - month_plan._gogo_calc + month_plan.addin
         self._monthday = self._monthday // 1440
 
     def _set_hour(self):
-        day_rope = get_day_rope(self.x_planunit, self.time_range_root_rope)
-        day_concept = self.x_planunit.get_concept_obj(day_rope)
-        x_concept_list = [self._timeline_concept, day_concept]
-        rangeunit = calc_range(x_concept_list, self.x_min, self.x_min)
-        hour_dict = day_concept.get_kids_in_range(rangeunit.gogo)
-        for x_hour, hour_concept in hour_dict.items():
+        day_rope = get_day_rope(self.x_ownerunit, self.time_range_root_rope)
+        day_plan = self.x_ownerunit.get_plan_obj(day_rope)
+        x_plan_list = [self._timeline_plan, day_plan]
+        rangeunit = calc_range(x_plan_list, self.x_min, self.x_min)
+        hour_dict = day_plan.get_kids_in_range(rangeunit.gogo)
+        for x_hour, hour_plan in hour_dict.items():
             self._hour = x_hour
-            hour_concept = hour_concept
+            hour_plan = hour_plan
 
-        self._minute = rangeunit.gogo - hour_concept._gogo_calc
+        self._minute = rangeunit.gogo - hour_plan._gogo_calc
 
     def _set_year(self):
         c400_constants = get_c400_constants()
         x_time_rope = self.time_range_root_rope
-        x_concept_dict = self.x_planunit._concept_dict
+        x_plan_dict = self.x_ownerunit._plan_dict
         # count 400 year blocks
         self._c400_number = self.x_min // c400_constants.c400_leap_length
 
         # count 100 year blocks
-        c400_clean_rope = get_c400_clean_rope(self.x_planunit, x_time_rope)
-        c400_clean_concept_list = all_concepts_between(
-            x_concept_dict, x_time_rope, c400_clean_rope, knot=self.x_planunit.knot
+        c400_clean_rope = get_c400_clean_rope(self.x_ownerunit, x_time_rope)
+        c400_clean_plan_list = all_plans_between(
+            x_plan_dict, x_time_rope, c400_clean_rope, knot=self.x_ownerunit.knot
         )
-        c400_clean_range = calc_range(c400_clean_concept_list, self.x_min, self.x_min)
+        c400_clean_range = calc_range(c400_clean_plan_list, self.x_min, self.x_min)
         self._c100_count = c400_clean_range.gogo // c400_constants.c100_length
 
         # count 4 year blocks
-        c100_rope = get_c100_rope(self.x_planunit, x_time_rope)
-        c100_concept_list = all_concepts_between(
-            x_concept_dict, x_time_rope, c100_rope, knot=self.x_planunit.knot
+        c100_rope = get_c100_rope(self.x_ownerunit, x_time_rope)
+        c100_plan_list = all_plans_between(
+            x_plan_dict, x_time_rope, c100_rope, knot=self.x_ownerunit.knot
         )
-        c100_range = calc_range(c100_concept_list, self.x_min, self.x_min)
+        c100_range = calc_range(c100_plan_list, self.x_min, self.x_min)
         self._yr4_count = c100_range.gogo // c400_constants.yr4_leap_length
 
         # count 1 year blocks
-        yr4_clean_rope = get_yr4_clean_rope(self.x_planunit, x_time_rope)
-        yr4_clean_concepts = all_concepts_between(
-            x_concept_dict, x_time_rope, yr4_clean_rope, knot=self.x_planunit.knot
+        yr4_clean_rope = get_yr4_clean_rope(self.x_ownerunit, x_time_rope)
+        yr4_clean_plans = all_plans_between(
+            x_plan_dict, x_time_rope, yr4_clean_rope, knot=self.x_ownerunit.knot
         )
-        yr4_clean_range = calc_range(yr4_clean_concepts, self.x_min, self.x_min)
+        yr4_clean_range = calc_range(yr4_clean_plans, self.x_min, self.x_min)
         self._year_count = yr4_clean_range.gogo // c400_constants.year_length
 
         self._year_num = self._c400_number * 400
@@ -547,8 +537,8 @@ class PlanTimelinePoint:
         self._year_num += self._year_count
 
     def calc_timeline(self):
-        self.x_planunit.settle_plan()
-        self._set_timeline_concept()
+        self.x_ownerunit.settle_owner()
+        self._set_timeline_plan()
         self._set_weekday()
         self._set_month()
         self._set_hour()
@@ -564,8 +554,10 @@ class PlanTimelinePoint:
         return x_str
 
 
-def plantimelinepoint_shop(x_planunit: PlanUnit, time_range_root_rope: str, x_min: int):
-    return PlanTimelinePoint(x_planunit, time_range_root_rope, x_min=x_min)
+def ownertimelinepoint_shop(
+    x_ownerunit: OwnerUnit, time_range_root_rope: str, x_min: int
+):
+    return OwnerTimelinePoint(x_ownerunit, time_range_root_rope, x_min=x_min)
 
 
 def config_file_dir() -> str:

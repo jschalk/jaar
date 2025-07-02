@@ -1,6 +1,6 @@
 from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import default_knot_if_None
-from src.a06_plan_logic.test._util.a06_str import (
+from src.a06_owner_logic.test._util.a06_str import (
     LabelTerm_str,
     NameTerm_str,
     RopeTerm_str,
@@ -8,8 +8,6 @@ from src.a06_plan_logic.test._util.a06_str import (
     acct_name_str,
     awardee_title_str,
     belief_label_str,
-    concept_label_str,
-    concept_rope_str,
     fcontext_str,
     fopen_str,
     fstate_str,
@@ -19,13 +17,15 @@ from src.a06_plan_logic.test._util.a06_str import (
     labor_title_str,
     owner_name_str,
     penny_str,
+    plan_label_str,
+    plan_rope_str,
     pstate_str,
     rcontext_str,
     respect_bit_str,
 )
 from src.a07_timeline_logic.test._util.a07_str import timeline_label_str
-from src.a08_plan_atom_logic.atom_config import (
-    get_all_plan_dimen_delete_keys,
+from src.a08_owner_atom_logic.atom_config import (
+    get_all_owner_dimen_delete_keys,
     get_atom_args_class_types,
 )
 from src.a09_pack_logic.test._util.a09_str import face_name_str
@@ -74,7 +74,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("amount") == "float"
     assert pidgin_args_class_types.get("awardee_title") == TitleTerm_str()
     assert pidgin_args_class_types.get("rcontext") == RopeTerm_str()
-    assert pidgin_args_class_types.get("rconcept_active_requisite") == "bool"
+    assert pidgin_args_class_types.get("rplan_active_requisite") == "bool"
     assert pidgin_args_class_types.get("begin") == "float"
     assert pidgin_args_class_types.get("c400_number") == "int"
     assert pidgin_args_class_types.get("close") == "float"
@@ -117,7 +117,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("problem_bool") == "bool"
     assert pidgin_args_class_types.get("quota") == "int"
     assert pidgin_args_class_types.get("respect_bit") == "float"
-    assert pidgin_args_class_types.get("concept_rope") == RopeTerm_str()
+    assert pidgin_args_class_types.get("plan_rope") == RopeTerm_str()
     assert pidgin_args_class_types.get("celldepth") == "int"
     assert pidgin_args_class_types.get("stop_want") == "float"
     assert pidgin_args_class_types.get("take_force") == "float"
@@ -216,7 +216,7 @@ def test_get_pidginable_args_ReturnsObj():
         month_label_str(),
         pstate_str(),
         owner_name_str(),
-        concept_rope_str(),
+        plan_rope_str(),
         labor_title_str(),
         timeline_label_str(),
         weekday_label_str(),
@@ -240,17 +240,17 @@ def test_find_set_otx_inx_args_ReturnsObj_Scenario0_All_pidginable_args():
     assert otx_inx_args == expected_otx_inx_args
 
 
-def test_find_set_otx_inx_args_ReturnsObj_Scenario1_plan_dimen_delete_keys():
+def test_find_set_otx_inx_args_ReturnsObj_Scenario1_owner_dimen_delete_keys():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH
-    plan_dimen_delete_keys = get_all_plan_dimen_delete_keys()
+    owner_dimen_delete_keys = get_all_owner_dimen_delete_keys()
 
     # WHEN
-    otx_inx_args = find_set_otx_inx_args(plan_dimen_delete_keys)
+    otx_inx_args = find_set_otx_inx_args(owner_dimen_delete_keys)
 
     # THEN
     expected_otx_inx_args = set()
-    for pidginable_arg in plan_dimen_delete_keys:
+    for pidginable_arg in owner_dimen_delete_keys:
         expected_otx_inx_args.add(f"{pidginable_arg}_otx")
         expected_otx_inx_args.add(f"{pidginable_arg}_inx")
     print(f"{otx_inx_args=}")
@@ -261,15 +261,15 @@ def test_find_set_otx_inx_args_ReturnsObj_Scenario2_OtherArgsAreUntouched():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH
     run_str = "run"
-    given_plan_dimen_delete_keys = get_all_plan_dimen_delete_keys()
-    given_plan_dimen_delete_keys.add(run_str)
+    given_owner_dimen_delete_keys = get_all_owner_dimen_delete_keys()
+    given_owner_dimen_delete_keys.add(run_str)
 
     # WHEN
-    otx_inx_args = find_set_otx_inx_args(given_plan_dimen_delete_keys)
+    otx_inx_args = find_set_otx_inx_args(given_owner_dimen_delete_keys)
 
     # THEN
     expected_otx_inx_args = set()
-    for pidginable_arg in get_all_plan_dimen_delete_keys():
+    for pidginable_arg in get_all_owner_dimen_delete_keys():
         expected_otx_inx_args.add(f"{pidginable_arg}_otx")
         expected_otx_inx_args.add(f"{pidginable_arg}_inx")
     expected_otx_inx_args.add(run_str)
@@ -281,10 +281,10 @@ def test_find_set_otx_inx_args_ReturnsObj_Scenario3_PartialSets():
     # ESTABLISH
     healer_name_ERASE_str = f"{healer_name_str()}_ERASE"
     run_str = "run"
-    given_plan_dimen_delete_keys = {run_str, healer_name_ERASE_str}
+    given_owner_dimen_delete_keys = {run_str, healer_name_ERASE_str}
 
     # WHEN
-    otx_inx_args = find_set_otx_inx_args(given_plan_dimen_delete_keys)
+    otx_inx_args = find_set_otx_inx_args(given_owner_dimen_delete_keys)
 
     # THEN
     healer_name_ERASE_str = f"{healer_name_str()}_ERASE"
@@ -362,7 +362,7 @@ def test_get_pidgin_RopeTerm_args_ReturnsObj():
     assert pidgin_RopeTerm_args == {
         fstate_str(),
         fcontext_str(),
-        concept_rope_str(),
+        plan_rope_str(),
         rcontext_str(),
         pstate_str(),
     }

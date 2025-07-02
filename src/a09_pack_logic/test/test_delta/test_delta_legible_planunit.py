@@ -1,119 +1,125 @@
-from src.a06_plan_logic.plan import planunit_shop
-from src.a06_plan_logic.test._util.a06_str import planunit_str
-from src.a08_plan_atom_logic.atom import planatom_shop
-from src.a08_plan_atom_logic.test._util.a08_str import UPDATE_str
-from src.a09_pack_logic.delta import plandelta_shop
+from src.a06_owner_logic.owner import ownerunit_shop
+from src.a06_owner_logic.test._util.a06_str import (
+    addin_str,
+    begin_str,
+    close_str,
+    denom_str,
+    mass_str,
+    morph_str,
+    numor_str,
+    owner_planunit_str,
+    plan_rope_str,
+    task_str,
+)
+from src.a08_owner_atom_logic.atom import owneratom_shop
+from src.a08_owner_atom_logic.test._util.a08_str import (
+    DELETE_str,
+    INSERT_str,
+    UPDATE_str,
+)
+from src.a09_pack_logic.delta import ownerdelta_shop
 from src.a09_pack_logic.legible import create_legible_list
 
 
-def test_create_legible_list_ReturnsObjEstablishWithEmptyPlanDelta():
-    # ESTABLISH / WHEN
-    x_plandelta = plandelta_shop()
-    sue_plan = planunit_shop("Sue")
-
-    # THEN
-    assert create_legible_list(x_plandelta, sue_plan) == []
-
-
-def test_create_legible_list_ReturnsObjEstablishWithPlanUpdate_tally():
+def test_create_legible_list_ReturnsObj_planunit_INSERT():
     # ESTABLISH
-    dimen = planunit_str()
-    tally_str = "tally"
-    tally_int = 55
-    tally_planatom = planatom_shop(dimen, UPDATE_str())
-    tally_planatom.set_arg(tally_str, tally_int)
-    x_plandelta = plandelta_shop()
-    x_plandelta.set_planatom(tally_planatom)
-    sue_plan = planunit_shop("Sue")
+    sue_owner = ownerunit_shop("Sue")
+    dimen = owner_planunit_str()
+    _problem_bool_str = "problem_bool"
+    clean_label = "clean fridge"
+    casa_rope = sue_owner.make_l1_rope("casa")
+    clean_rope = sue_owner.make_rope(casa_rope, clean_label)
+    addin_value = 7
+    begin_value = 13
+    close_value = 17
+    denom_value = 23
+    numor_value = 29
+    problem_bool_value = False
+    morph_value = 37
+    mass_value = 43
+    task_value = False
+    clean_owneratom = owneratom_shop(dimen, INSERT_str())
+    clean_owneratom.set_arg(plan_rope_str(), clean_rope)
+    clean_owneratom.set_arg(addin_str(), addin_value)
+    clean_owneratom.set_arg(begin_str(), begin_value)
+    clean_owneratom.set_arg(close_str(), close_value)
+    clean_owneratom.set_arg(denom_str(), denom_value)
+    clean_owneratom.set_arg(numor_str(), numor_value)
+    clean_owneratom.set_arg(_problem_bool_str, problem_bool_value)
+    clean_owneratom.set_arg(morph_str(), morph_value)
+    clean_owneratom.set_arg(mass_str(), mass_value)
+    clean_owneratom.set_arg(task_str(), task_value)
+
+    x_ownerdelta = ownerdelta_shop()
+    x_ownerdelta.set_owneratom(clean_owneratom)
 
     # WHEN
-    legible_list = create_legible_list(x_plandelta, sue_plan)
+    legible_list = create_legible_list(x_ownerdelta, sue_owner)
 
     # THEN
-    x_str = f"{sue_plan.owner_name}'s plan tally set to {tally_int}"
+    x_str = f"Created Plan '{clean_rope}'. addin={addin_value}.begin={begin_value}.close={close_value}.denom={denom_value}.numor={numor_value}.problem_bool={problem_bool_value}.morph={morph_value}.mass={mass_value}.task={task_value}."
+    print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObjEstablishWithPlanUpdate_credor_respect():
+def test_create_legible_list_ReturnsObj_planunit_UPDATE():
     # ESTABLISH
-    dimen = planunit_str()
-    acct_credor_pool_str = "credor_respect"
-    acct_credor_pool_int = 71
-    acct_credor_pool_planatom = planatom_shop(dimen, UPDATE_str())
-    acct_credor_pool_planatom.set_arg(acct_credor_pool_str, acct_credor_pool_int)
+    sue_owner = ownerunit_shop("Sue")
+    dimen = owner_planunit_str()
+    _problem_bool_str = "problem_bool"
+    clean_label = "clean fridge"
+    casa_rope = sue_owner.make_l1_rope("casa")
+    clean_rope = sue_owner.make_rope(casa_rope, clean_label)
+    addin_value = 7
+    begin_value = 13
+    close_value = 17
+    denom_value = 23
+    numor_value = 29
+    problem_bool_value = False
+    morph_value = 37
+    mass_value = 43
+    task_value = False
+    clean_owneratom = owneratom_shop(dimen, UPDATE_str())
+    clean_owneratom.set_arg(plan_rope_str(), clean_rope)
+    clean_owneratom.set_arg(addin_str(), addin_value)
+    clean_owneratom.set_arg(begin_str(), begin_value)
+    clean_owneratom.set_arg(close_str(), close_value)
+    clean_owneratom.set_arg(denom_str(), denom_value)
+    clean_owneratom.set_arg(numor_str(), numor_value)
+    clean_owneratom.set_arg(_problem_bool_str, problem_bool_value)
+    clean_owneratom.set_arg(morph_str(), morph_value)
+    clean_owneratom.set_arg(mass_str(), mass_value)
+    clean_owneratom.set_arg(task_str(), task_value)
 
-    print(f"{acct_credor_pool_planatom=}")
-    x_plandelta = plandelta_shop()
-    x_plandelta.set_planatom(acct_credor_pool_planatom)
-    sue_plan = planunit_shop("Sue")
+    x_ownerdelta = ownerdelta_shop()
+    x_ownerdelta.set_owneratom(clean_owneratom)
 
     # WHEN
-    legible_list = create_legible_list(x_plandelta, sue_plan)
+    legible_list = create_legible_list(x_ownerdelta, sue_owner)
 
     # THEN
-    x_str = f"{sue_plan.owner_name}'s credor pool is now {acct_credor_pool_int}"
+    x_str = f"Plan '{clean_rope}' set these attributes: addin={addin_value}.begin={begin_value}.close={close_value}.denom={denom_value}.numor={numor_value}.problem_bool={problem_bool_value}.morph={morph_value}.mass={mass_value}.task={task_value}."
+    print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObjEstablishWithPlanUpdate_debtor_respect():
+def test_create_legible_list_ReturnsObj_planunit_DELETE():
     # ESTABLISH
-    dimen = planunit_str()
-    acct_debtor_pool_str = "debtor_respect"
-    acct_debtor_pool_int = 78
-    acct_debtor_pool_planatom = planatom_shop(dimen, UPDATE_str())
-    acct_debtor_pool_planatom.set_arg(acct_debtor_pool_str, acct_debtor_pool_int)
+    sue_owner = ownerunit_shop("Sue")
+    dimen = owner_planunit_str()
+    clean_label = "clean fridge"
+    casa_rope = sue_owner.make_l1_rope("casa")
+    clean_rope = sue_owner.make_rope(casa_rope, clean_label)
+    clean_owneratom = owneratom_shop(dimen, DELETE_str())
+    clean_owneratom.set_arg(plan_rope_str(), clean_rope)
 
-    print(f"{acct_debtor_pool_planatom=}")
-    x_plandelta = plandelta_shop()
-    x_plandelta.set_planatom(acct_debtor_pool_planatom)
-    sue_plan = planunit_shop("Sue")
+    x_ownerdelta = ownerdelta_shop()
+    x_ownerdelta.set_owneratom(clean_owneratom)
 
     # WHEN
-    legible_list = create_legible_list(x_plandelta, sue_plan)
+    legible_list = create_legible_list(x_ownerdelta, sue_owner)
 
     # THEN
-    x_str = f"{sue_plan.owner_name}'s debtor pool is now {acct_debtor_pool_int}"
-    assert legible_list[0] == x_str
-
-
-def test_create_legible_list_ReturnsObjEstablishWithPlanUpdate_credor_respect_Equal_debtor_respect():
-    # ESTABLISH
-    x_plandelta = plandelta_shop()
-    dimen = planunit_str()
-    acct_credor_pool_str = "credor_respect"
-    acct_debtor_pool_str = "debtor_respect"
-    acct_pool_int = 83
-    planunit_planatom = planatom_shop(dimen, UPDATE_str())
-    planunit_planatom.set_arg(acct_credor_pool_str, acct_pool_int)
-    planunit_planatom.set_arg(acct_debtor_pool_str, acct_pool_int)
-    x_plandelta.set_planatom(planunit_planatom)
-    sue_plan = planunit_shop("Sue")
-
-    # WHEN
-    legible_list = create_legible_list(x_plandelta, sue_plan)
-
-    # THEN
-    x_str = f"{sue_plan.owner_name}'s total pool is now {acct_pool_int}"
-    assert len(legible_list) == 1
-    assert legible_list[0] == x_str
-
-
-def test_create_legible_list_ReturnsObjEstablishWithPlanUpdate_max_tree_traverse():
-    # ESTABLISH
-    dimen = planunit_str()
-    max_tree_traverse_str = "max_tree_traverse"
-    max_tree_traverse_int = 71
-    max_tree_traverse_planatom = planatom_shop(dimen, UPDATE_str())
-    max_tree_traverse_planatom.set_arg(max_tree_traverse_str, max_tree_traverse_int)
-
-    print(f"{max_tree_traverse_planatom=}")
-    x_plandelta = plandelta_shop()
-    x_plandelta.set_planatom(max_tree_traverse_planatom)
-    sue_plan = planunit_shop("Sue")
-
-    # WHEN
-    legible_list = create_legible_list(x_plandelta, sue_plan)
-
-    # THEN
-    x_str = f"{sue_plan.owner_name}'s maximum number of Plan evaluations set to {max_tree_traverse_int}"
+    x_str = f"Plan '{clean_rope}' was deleted."
+    print(f"{x_str=}")
     assert legible_list[0] == x_str

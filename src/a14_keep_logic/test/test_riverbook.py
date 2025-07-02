@@ -1,4 +1,4 @@
-from src.a06_plan_logic.plan import planunit_shop
+from src.a06_owner_logic.owner import ownerunit_shop
 from src.a12_hub_toolbox.hubunit import hubunit_shop
 from src.a14_keep_logic.rivercycle import (
     RiverBook,
@@ -39,15 +39,15 @@ def test_create_riverbook_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
-    yao_plan = planunit_shop(yao_str)
-    yao_plan.add_acctunit(yao_str)
-    yao_plan.add_acctunit(sue_str)
+    yao_owner = ownerunit_shop(yao_str)
+    yao_owner.add_acctunit(yao_str)
+    yao_owner.add_acctunit(sue_str)
     x_belief_mstr_dir = temp_belief_mstr_dir()
     yao_hubunit = hubunit_shop(x_belief_mstr_dir, None, yao_str)
     yao_book_point_amount = 500
 
     # WHEN
-    yao_credorledger = get_credorledger(yao_plan)
+    yao_credorledger = get_credorledger(yao_owner)
     yao_riverbook = create_riverbook(
         yao_hubunit, yao_str, yao_credorledger, yao_book_point_amount
     )

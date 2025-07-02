@@ -4,11 +4,11 @@ from src.a00_data_toolbox.csv_toolbox import (
     replace_csv_column_from_string,
 )
 from src.a00_data_toolbox.file_toolbox import create_path, get_level1_dirs
-from src.a12_hub_toolbox.hub_tool import open_plan_file
+from src.a12_hub_toolbox.hub_tool import open_owner_file
 from src.a15_belief_logic.belief import get_default_path_beliefunit
 from src.a17_idea_logic.idea_csv_tool import (
     add_beliefunit_to_stance_csv_strs,
-    add_planunit_to_stance_csv_strs,
+    add_ownerunit_to_stance_csv_strs,
     create_init_stance_idea_csv_strs,
 )
 from src.a17_idea_logic.idea_db_tool import csv_dict_to_excel, prettify_excel
@@ -26,10 +26,10 @@ def collect_stance_csv_strs(belief_mstr_dir: str) -> dict[str, str]:
         for owner_name in get_level1_dirs(owners_dir):
             owner_dir = create_path(owners_dir, owner_name)
             gut_dir = create_path(owner_dir, "gut")
-            gut_plan_path = create_path(gut_dir, f"{owner_name}.json")
-            if os_path_exists(gut_plan_path):
-                gut_plan = open_plan_file(gut_plan_path)
-                add_planunit_to_stance_csv_strs(gut_plan, x_csv_strs, ",")
+            gut_owner_path = create_path(gut_dir, f"{owner_name}.json")
+            if os_path_exists(gut_owner_path):
+                gut_owner = open_owner_file(gut_owner_path)
+                add_ownerunit_to_stance_csv_strs(gut_owner, x_csv_strs, ",")
     return x_csv_strs
 
 

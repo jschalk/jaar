@@ -2,8 +2,8 @@ from datetime import datetime
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 from src.a00_data_toolbox.file_toolbox import open_json
 from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
-from src.a05_concept_logic.concept import ConceptUnit
-from src.a06_plan_logic.plan import PlanUnit, planunit_shop
+from src.a05_plan_logic.plan import PlanUnit
+from src.a06_owner_logic.owner import OwnerUnit, ownerunit_shop
 from src.a07_timeline_logic.test._util.a07_str import (
     c400_number_str,
     creg_str,
@@ -14,11 +14,11 @@ from src.a07_timeline_logic.test._util.a07_str import (
     yr1_jan1_offset_str,
 )
 from src.a07_timeline_logic.timeline import (
-    add_newtimeline_conceptunit,
-    create_weekday_conceptunits,
+    add_newtimeline_planunit,
+    create_weekday_planunits,
     get_min_from_dt_offset,
-    new_timeline_conceptunit,
-    plantimelinepoint_shop,
+    new_timeline_planunit,
+    ownertimelinepoint_shop,
 )
 
 
@@ -40,9 +40,9 @@ def get_example_timeline_config(timeline_label: str) -> dict:
     return open_json(x_dir, x_filename)
 
 
-def cregtime_conceptunit() -> ConceptUnit:
+def cregtime_planunit() -> PlanUnit:
     c400_number = get_creg_config().get(c400_number_str())
-    return new_timeline_conceptunit(get_cregtime_str(), c400_number)
+    return new_timeline_planunit(get_cregtime_str(), c400_number)
 
 
 def get_wed():
@@ -81,8 +81,8 @@ def creg_weekdays_list() -> list[str]:
     return get_creg_config().get(weekdays_config_str())
 
 
-def creg_weekday_conceptunits() -> dict[str, ConceptUnit]:
-    return create_weekday_conceptunits(creg_weekdays_list())
+def creg_weekday_planunits() -> dict[str, PlanUnit]:
+    return create_weekday_planunits(creg_weekdays_list())
 
 
 def get_cregtime_str() -> str:
@@ -93,19 +93,19 @@ def creg_hour_int_label(x_int: int) -> str:
     return creg_hours_list()[x_int][0]
 
 
-def add_time_creg_conceptunit(x_planunit: PlanUnit) -> PlanUnit:
-    """Add creg timeline conceptunit to planunit"""
-    return add_newtimeline_conceptunit(x_planunit, get_creg_config())
+def add_time_creg_planunit(x_ownerunit: OwnerUnit) -> OwnerUnit:
+    """Add creg timeline planunit to ownerunit"""
+    return add_newtimeline_planunit(x_ownerunit, get_creg_config())
 
 
-def add_time_five_conceptunit(x_planunit: PlanUnit) -> PlanUnit:
-    """Add five timeline conceptunit to planunit"""
-    return add_newtimeline_conceptunit(x_planunit, get_five_config())
+def add_time_five_planunit(x_ownerunit: OwnerUnit) -> OwnerUnit:
+    """Add five timeline planunit to ownerunit"""
+    return add_newtimeline_planunit(x_ownerunit, get_five_config())
 
 
-def add_time_squirt_conceptunit(x_planunit: PlanUnit) -> PlanUnit:
-    """Add squirt timeline conceptunit to planunit"""
-    return add_newtimeline_conceptunit(x_planunit, get_squirt_config())
+def add_time_squirt_planunit(x_ownerunit: OwnerUnit) -> OwnerUnit:
+    """Add squirt timeline planunit to ownerunit"""
+    return add_newtimeline_planunit(x_ownerunit, get_squirt_config())
 
 
 def get_creg_min_from_dt(dt: datetime) -> int:
@@ -151,16 +151,16 @@ def display_current_creg_five_min(graphics_bool: bool):
 def display_current_creg_five_time_attrs(graphics_bool: bool):
     if graphics_bool:
         current_datetime = datetime.now()
-        sue_plan = planunit_shop("Sue")
-        sue_plan = add_time_creg_conceptunit(sue_plan)
-        sue_plan = add_time_five_conceptunit(sue_plan)
-        time_rope = sue_plan.make_l1_rope("time")
-        creg_rope = sue_plan.make_rope(time_rope, creg_str())
-        five_rope = sue_plan.make_rope(time_rope, five_str())
+        sue_owner = ownerunit_shop("Sue")
+        sue_owner = add_time_creg_planunit(sue_owner)
+        sue_owner = add_time_five_planunit(sue_owner)
+        time_rope = sue_owner.make_l1_rope("time")
+        creg_rope = sue_owner.make_rope(time_rope, creg_str())
+        five_rope = sue_owner.make_rope(time_rope, five_str())
         creg_min = get_creg_min_from_dt(current_datetime)
         five_min = get_five_min_from_dt(current_datetime)
-        creg_timelinepoint = plantimelinepoint_shop(sue_plan, creg_rope, creg_min)
-        five_timelinepoint = plantimelinepoint_shop(sue_plan, five_rope, five_min)
+        creg_timelinepoint = ownertimelinepoint_shop(sue_owner, creg_rope, creg_min)
+        five_timelinepoint = ownertimelinepoint_shop(sue_owner, five_rope, five_min)
         creg_timelinepoint.calc_timeline()
         five_timelinepoint.calc_timeline()
         creg_blurb = f"<b>{creg_timelinepoint.get_blurb()}</b>"
@@ -188,20 +188,22 @@ def display_current_creg_five_time_attrs(graphics_bool: bool):
 def display_creg_five_squirt_time_attrs(graphics_bool: bool):
     if graphics_bool:
         current_datetime = datetime(2031, 2, 17, 7, 47)
-        sue_plan = planunit_shop("Sue")
-        sue_plan = add_time_creg_conceptunit(sue_plan)
-        sue_plan = add_time_five_conceptunit(sue_plan)
-        sue_plan = add_time_squirt_conceptunit(sue_plan)
-        time_rope = sue_plan.make_l1_rope("time")
-        creg_rope = sue_plan.make_rope(time_rope, creg_str())
-        five_rope = sue_plan.make_rope(time_rope, five_str())
-        squirt_rope = sue_plan.make_rope(time_rope, "squirt")
+        sue_owner = ownerunit_shop("Sue")
+        sue_owner = add_time_creg_planunit(sue_owner)
+        sue_owner = add_time_five_planunit(sue_owner)
+        sue_owner = add_time_squirt_planunit(sue_owner)
+        time_rope = sue_owner.make_l1_rope("time")
+        creg_rope = sue_owner.make_rope(time_rope, creg_str())
+        five_rope = sue_owner.make_rope(time_rope, five_str())
+        squirt_rope = sue_owner.make_rope(time_rope, "squirt")
         creg_min = get_creg_min_from_dt(current_datetime)
         five_min = get_five_min_from_dt(current_datetime)
         squirt_min = get_squirt_min_from_dt(current_datetime)
-        creg_timelinepoint = plantimelinepoint_shop(sue_plan, creg_rope, creg_min)
-        five_timelinepoint = plantimelinepoint_shop(sue_plan, five_rope, five_min)
-        squirt_timelinepoint = plantimelinepoint_shop(sue_plan, squirt_rope, squirt_min)
+        creg_timelinepoint = ownertimelinepoint_shop(sue_owner, creg_rope, creg_min)
+        five_timelinepoint = ownertimelinepoint_shop(sue_owner, five_rope, five_min)
+        squirt_timelinepoint = ownertimelinepoint_shop(
+            sue_owner, squirt_rope, squirt_min
+        )
         creg_timelinepoint.calc_timeline()
         five_timelinepoint.calc_timeline()
         squirt_timelinepoint.calc_timeline()

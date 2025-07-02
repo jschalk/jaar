@@ -47,14 +47,14 @@ class AcctUnit(AcctCore):
 
     acct_cred_points: int = None
     acct_debt_points: int = None
-    # special attribute: static in plan json, in memory it is deleted after loading and recalculated during saving.
+    # special attribute: static in owner json, in memory it is deleted after loading and recalculated during saving.
     _memberships: dict[AcctName, MemberShip] = None
     # calculated fields
     _credor_pool: RespectNum = None
     _debtor_pool: RespectNum = None
     _irrational_acct_debt_points: int = None  # set by listening process
     _inallocable_acct_debt_points: int = None  # set by listening process
-    # set by Plan.settle_plan()
+    # set by Owner.settle_owner()
     _fund_give: float = None
     _fund_take: float = None
     _fund_agenda_give: float = None

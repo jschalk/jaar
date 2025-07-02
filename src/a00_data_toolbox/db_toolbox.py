@@ -422,7 +422,7 @@ def create_update_inconsistency_error_query(
     focus_columns: set[str],
     exclude_columns: set[str],
     error_holder_column: str,
-    error_explanation: str,
+    error_str: str,
 ):
     select_inconsistency_query = create_select_inconsistency_query(
         conn_or_cursor, x_tablename, focus_columns, exclude_columns
@@ -441,7 +441,7 @@ def create_update_inconsistency_error_query(
     return f"""WITH inconsistency_rows AS (
 {select_inconsistency_query})
 UPDATE {x_tablename}
-SET {error_holder_column} = '{error_explanation}'
+SET {error_holder_column} = '{error_str}'
 FROM inconsistency_rows
 {where_str}
 ;

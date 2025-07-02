@@ -1,7 +1,7 @@
 from os import getcwd as os_getcwd
 from src.a00_data_toolbox.dict_toolbox import get_from_nested_dict
 from src.a00_data_toolbox.file_toolbox import create_path, open_json
-from src.a08_plan_atom_logic.atom_config import get_all_plan_dimen_delete_keys
+from src.a08_owner_atom_logic.atom_config import get_all_owner_dimen_delete_keys
 
 
 def config_file_dir() -> str:
@@ -99,7 +99,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "group_title": "TitleTerm",
         "healer_name": "NameTerm",
         "hour_label": "LabelTerm",
-        "concept_rope": "RopeTerm",
+        "plan_rope": "RopeTerm",
         "mass": "int",
         "max_tree_traverse": "int",
         "month_label": "LabelTerm",
@@ -118,7 +118,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "popen": "float",
         "pnigh": "float",
         "rcontext": "RopeTerm",
-        "rconcept_active_requisite": "bool",
+        "rplan_active_requisite": "bool",
         "respect_bit": "float",
         "stop_want": "float",
         "take_force": "float",
@@ -183,7 +183,7 @@ def get_pidginable_args() -> set:
         "group_title",
         "healer_name",
         "hour_label",
-        "concept_rope",
+        "plan_rope",
         "month_label",
         "owner_name",
         "pstate",
@@ -197,7 +197,7 @@ def get_pidginable_args() -> set:
 def find_set_otx_inx_args(args: set) -> set:
     """Receives set of args, returns a set with all "Pidginable" args replaced with "_otx" and "_inx" """
     all_pidginable = get_pidginable_args()
-    all_pidginable.update(get_all_plan_dimen_delete_keys())
+    all_pidginable.update(get_all_owner_dimen_delete_keys())
     all_pidginable.intersection_update(args)
     transformed_args = set()
     for arg in args:
@@ -240,7 +240,7 @@ def get_pidgin_RopeTerm_args() -> set[str]:
     return {
         "fstate",
         "fcontext",
-        "concept_rope",
+        "plan_rope",
         "pstate",
         "rcontext",
     }

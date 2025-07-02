@@ -1,16 +1,16 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, get_dir_file_strs
-from src.a05_concept_logic.concept import get_default_belief_label as belief_label
+from src.a05_plan_logic.plan import get_default_belief_label as belief_label
 from src.a12_hub_toolbox.hubunit import hubunit_shop
 from src.a12_hub_toolbox.test._util.a12_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as belief_mstr_dir,
 )
 from src.a12_hub_toolbox.test._util.example_hub_atoms import (
-    get_atom_example_conceptunit_ball,
-    get_atom_example_conceptunit_knee,
-    get_atom_example_conceptunit_sports,
     get_atom_example_factunit_knee,
+    get_atom_example_planunit_ball,
+    get_atom_example_planunit_knee,
+    get_atom_example_planunit_sports,
 )
 
 
@@ -149,7 +149,7 @@ def test_HubUnit_save_atom_file_CorrectlySavesFile(env_dir_setup_cleanup):
     assert atom_num2 == 12
 
 
-def test_HubUnit_get_plan_from_atom_files_ReturnsFileWithZeroAtoms(
+def test_HubUnit_get_owner_from_atom_files_ReturnsFileWithZeroAtoms(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -157,18 +157,18 @@ def test_HubUnit_get_plan_from_atom_files_ReturnsFileWithZeroAtoms(
     yao_hubunit = hubunit_shop(belief_mstr_dir(), belief_label(), yao_str)
 
     # WHEN
-    yao_plan = yao_hubunit._get_plan_from_atom_files()
+    yao_owner = yao_hubunit._get_owner_from_atom_files()
 
     # THEN
-    assert yao_plan.owner_name == yao_str
-    assert yao_plan.belief_label == yao_hubunit.belief_label
-    assert yao_plan.knot == yao_hubunit.knot
-    assert yao_plan.fund_pool == yao_hubunit.fund_pool
-    assert yao_plan.fund_iota == yao_hubunit.fund_iota
-    assert yao_plan.respect_bit == yao_hubunit.respect_bit
+    assert yao_owner.owner_name == yao_str
+    assert yao_owner.belief_label == yao_hubunit.belief_label
+    assert yao_owner.knot == yao_hubunit.knot
+    assert yao_owner.fund_pool == yao_hubunit.fund_pool
+    assert yao_owner.fund_iota == yao_hubunit.fund_iota
+    assert yao_owner.respect_bit == yao_hubunit.respect_bit
 
 
-def test_HubUnit_get_plan_from_atom_files_ReturnsCorrectFile_SimpleConcept(
+def test_HubUnit_get_owner_from_atom_files_ReturnsCorrectFile_SimplePlan(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -176,23 +176,23 @@ def test_HubUnit_get_plan_from_atom_files_ReturnsCorrectFile_SimpleConcept(
     yao_hubunit = hubunit_shop(belief_mstr_dir(), belief_label(), yao_str)
 
     # save atom files
-    sports_atom = get_atom_example_conceptunit_sports(yao_hubunit.belief_label)
+    sports_atom = get_atom_example_planunit_sports(yao_hubunit.belief_label)
     yao_hubunit.save_atom_file(sports_atom)
 
     # WHEN
-    yao_plan = yao_hubunit._get_plan_from_atom_files()
+    yao_owner = yao_hubunit._get_owner_from_atom_files()
 
     # THEN
-    assert yao_plan.owner_name == yao_str
-    assert yao_plan.belief_label == yao_hubunit.belief_label
-    assert yao_plan.knot == yao_hubunit.knot
+    assert yao_owner.owner_name == yao_str
+    assert yao_owner.belief_label == yao_hubunit.belief_label
+    assert yao_owner.knot == yao_hubunit.knot
     sports_str = "sports"
-    sports_rope = yao_plan.make_l1_rope(sports_str)
+    sports_rope = yao_owner.make_l1_rope(sports_str)
 
-    assert yao_plan.concept_exists(sports_rope)
+    assert yao_owner.plan_exists(sports_rope)
 
 
-def test_HubUnit_get_plan_from_atom_files_ReturnsCorrectFile_WithFactUnit(
+def test_HubUnit_get_owner_from_atom_files_ReturnsCorrectFile_WithFactUnit(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -201,20 +201,20 @@ def test_HubUnit_get_plan_from_atom_files_ReturnsCorrectFile_WithFactUnit(
 
     # save atom files
     x_belief_label = yao_hubunit.belief_label
-    yao_hubunit.save_atom_file(get_atom_example_conceptunit_sports(x_belief_label))
-    yao_hubunit.save_atom_file(get_atom_example_conceptunit_ball(x_belief_label))
-    yao_hubunit.save_atom_file(get_atom_example_conceptunit_knee(x_belief_label))
+    yao_hubunit.save_atom_file(get_atom_example_planunit_sports(x_belief_label))
+    yao_hubunit.save_atom_file(get_atom_example_planunit_ball(x_belief_label))
+    yao_hubunit.save_atom_file(get_atom_example_planunit_knee(x_belief_label))
     yao_hubunit.save_atom_file(get_atom_example_factunit_knee(x_belief_label))
     print(f"{get_dir_file_strs(yao_hubunit._atoms_dir).keys()=}")
 
     # WHEN
-    yao_plan = yao_hubunit._get_plan_from_atom_files()
+    yao_owner = yao_hubunit._get_owner_from_atom_files()
 
     # THEN
-    assert yao_plan.owner_name == yao_str
-    assert yao_plan.belief_label == yao_hubunit.belief_label
-    assert yao_plan.knot == yao_hubunit.knot
+    assert yao_owner.owner_name == yao_str
+    assert yao_owner.belief_label == yao_hubunit.belief_label
+    assert yao_owner.knot == yao_hubunit.knot
     sports_str = "sports"
-    sports_rope = yao_plan.make_l1_rope(sports_str)
+    sports_rope = yao_owner.make_l1_rope(sports_str)
 
-    assert yao_plan.concept_exists(sports_rope)
+    assert yao_owner.plan_exists(sports_rope)

@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
 from src.a01_term_logic.rope import create_rope
-from src.a05_concept_logic.concept import get_default_belief_label as root_label
-from src.a06_plan_logic.test._util.example_plans import get_planunit_with_4_levels
+from src.a05_plan_logic.plan import get_default_belief_label as root_label
+from src.a06_owner_logic.test._util.example_owners import get_ownerunit_with_4_levels
 from src.a12_hub_toolbox.hubunit import hubunit_shop
 from src.a12_hub_toolbox.test._util.a12_env import (
     env_dir_setup_cleanup,
@@ -30,7 +30,7 @@ def test_HubUnit_create_keep_dir_if_missing_CreatesDirectory(env_dir_setup_clean
     assert os_path_exists(sue_hubunit.keep_dir())
 
 
-def test_HubUnit_save_duty_plan_CorrectlySavesFile(env_dir_setup_cleanup):
+def test_HubUnit_save_duty_owner_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
@@ -42,12 +42,12 @@ def test_HubUnit_save_duty_plan_CorrectlySavesFile(env_dir_setup_cleanup):
     a23_str = "amy23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_rope)
     bob_str = "Bob"
-    bob_plan = get_planunit_with_4_levels()
-    bob_plan.set_owner_name(bob_str)
+    bob_owner = get_ownerunit_with_4_levels()
+    bob_owner.set_owner_name(bob_str)
     assert sue_hubunit.duty_file_exists(bob_str) is False
 
     # WHEN
-    sue_hubunit.save_duty_plan(bob_plan)
+    sue_hubunit.save_duty_owner(bob_owner)
 
     # THEN
     assert sue_hubunit.duty_file_exists(bob_str)
@@ -65,18 +65,18 @@ def test_HubUnit_duty_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
     a23_str = "amy23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_rope)
     bob_str = "Bob"
-    bob_plan = get_planunit_with_4_levels()
-    bob_plan.set_owner_name(bob_str)
+    bob_owner = get_ownerunit_with_4_levels()
+    bob_owner.set_owner_name(bob_str)
     assert sue_hubunit.duty_file_exists(bob_str) is False
 
     # WHEN
-    sue_hubunit.save_duty_plan(bob_plan)
+    sue_hubunit.save_duty_owner(bob_owner)
 
     # THEN
     assert sue_hubunit.duty_file_exists(bob_str)
 
 
-def test_HubUnit_get_duty_plan_PopensFile(env_dir_setup_cleanup):
+def test_HubUnit_get_duty_owner_PopensFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
@@ -88,20 +88,20 @@ def test_HubUnit_get_duty_plan_PopensFile(env_dir_setup_cleanup):
     a23_str = "amy23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_rope)
     bob_str = "Bob"
-    bob_plan = get_planunit_with_4_levels()
-    bob_plan.set_owner_name(bob_str)
-    sue_hubunit.save_duty_plan(bob_plan)
+    bob_owner = get_ownerunit_with_4_levels()
+    bob_owner.set_owner_name(bob_str)
+    sue_hubunit.save_duty_owner(bob_owner)
 
     # WHEN / THEN
-    assert sue_hubunit.get_duty_plan(bob_str).get_dict() == bob_plan.get_dict()
+    assert sue_hubunit.get_duty_owner(bob_str).get_dict() == bob_owner.get_dict()
 
 
-def test_HubUnit_delete_duty_file_DeletesPlanFile(env_dir_setup_cleanup):
+def test_HubUnit_delete_duty_file_DeletesOwnerFile(env_dir_setup_cleanup):
     # ESTABLISH
     texas_hubunit = get_texas_hubunit()
-    sue_plan = get_planunit_with_4_levels()
-    sue_str = sue_plan.owner_name
-    texas_hubunit.save_duty_plan(sue_plan)
+    sue_owner = get_ownerunit_with_4_levels()
+    sue_str = sue_owner.owner_name
+    texas_hubunit.save_duty_owner(sue_owner)
     print(f"{texas_hubunit.duty_path(sue_str)=}")
     duty_path = texas_hubunit.duty_path(sue_str)
     assert texas_hubunit.duty_file_exists(sue_str)
@@ -113,7 +113,7 @@ def test_HubUnit_delete_duty_file_DeletesPlanFile(env_dir_setup_cleanup):
     assert texas_hubunit.duty_file_exists(sue_str) is False
 
 
-def test_HubUnit_save_vision_plan_CorrectlySavesFile(env_dir_setup_cleanup):
+def test_HubUnit_save_vision_owner_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
@@ -125,12 +125,12 @@ def test_HubUnit_save_vision_plan_CorrectlySavesFile(env_dir_setup_cleanup):
     a23_str = "amy23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_rope)
     bob_str = "Bob"
-    bob_plan = get_planunit_with_4_levels()
-    bob_plan.set_owner_name(bob_str)
+    bob_owner = get_ownerunit_with_4_levels()
+    bob_owner.set_owner_name(bob_str)
     assert sue_hubunit.vision_file_exists(bob_str) is False
 
     # WHEN
-    sue_hubunit.save_vision_plan(bob_plan)
+    sue_hubunit.save_vision_owner(bob_owner)
 
     # THEN
     assert sue_hubunit.vision_file_exists(bob_str)
@@ -148,18 +148,18 @@ def test_HubUnit_vision_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
     a23_str = "amy23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_rope)
     bob_str = "Bob"
-    bob_plan = get_planunit_with_4_levels()
-    bob_plan.set_owner_name(bob_str)
+    bob_owner = get_ownerunit_with_4_levels()
+    bob_owner.set_owner_name(bob_str)
     assert sue_hubunit.vision_file_exists(bob_str) is False
 
     # WHEN
-    sue_hubunit.save_vision_plan(bob_plan)
+    sue_hubunit.save_vision_owner(bob_owner)
 
     # THEN
     assert sue_hubunit.vision_file_exists(bob_str)
 
 
-def test_HubUnit_get_vision_plan_PopensFile(env_dir_setup_cleanup):
+def test_HubUnit_get_vision_owner_PopensFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
@@ -171,15 +171,15 @@ def test_HubUnit_get_vision_plan_PopensFile(env_dir_setup_cleanup):
     a23_str = "amy23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_rope)
     bob_str = "Bob"
-    bob_plan = get_planunit_with_4_levels()
-    bob_plan.set_owner_name(bob_str)
-    sue_hubunit.save_vision_plan(bob_plan)
+    bob_owner = get_ownerunit_with_4_levels()
+    bob_owner.set_owner_name(bob_str)
+    sue_hubunit.save_vision_owner(bob_owner)
 
     # WHEN / THEN
-    assert sue_hubunit.get_vision_plan(bob_str).get_dict() == bob_plan.get_dict()
+    assert sue_hubunit.get_vision_owner(bob_str).get_dict() == bob_owner.get_dict()
 
 
-def test_HubUnit_get_vision_plan_ReturnsNoneIfFileDoesNotExist(env_dir_setup_cleanup):
+def test_HubUnit_get_vision_owner_ReturnsNoneIfFileDoesNotExist(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
@@ -193,15 +193,15 @@ def test_HubUnit_get_vision_plan_ReturnsNoneIfFileDoesNotExist(env_dir_setup_cle
     bob_str = "Bob"
 
     # WHEN / THEN
-    assert sue_hubunit.get_vision_plan(bob_str) is None
+    assert sue_hubunit.get_vision_owner(bob_str) is None
 
 
-def test_HubUnit_delete_vision_file_DeletesPlanFile(env_dir_setup_cleanup):
+def test_HubUnit_delete_vision_file_DeletesOwnerFile(env_dir_setup_cleanup):
     # ESTABLISH
     texas_hubunit = get_texas_hubunit()
-    sue_plan = get_planunit_with_4_levels()
-    sue_str = sue_plan.owner_name
-    texas_hubunit.save_vision_plan(sue_plan)
+    sue_owner = get_ownerunit_with_4_levels()
+    sue_str = sue_owner.owner_name
+    texas_hubunit.save_vision_owner(sue_owner)
     print(f"{texas_hubunit.vision_path(sue_str)=}")
     assert texas_hubunit.vision_file_exists(sue_str)
 

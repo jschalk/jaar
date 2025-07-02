@@ -1,8 +1,8 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import open_file, save_file
-from src.a06_plan_logic.plan import (
-    get_from_json as planunit_get_from_json,
-    planunit_shop,
+from src.a06_owner_logic.owner import (
+    get_from_json as ownerunit_get_from_json,
+    ownerunit_shop,
 )
 from src.a12_hub_toolbox.hub_path import (
     create_belief_json_path,
@@ -29,7 +29,7 @@ def test_etl_belief_guts_to_belief_jobs_SetsFiles_Scenario0(
     credit88 = 88
     a23_str = "amy23"
     belief_mstr_dir = get_module_temp_dir()
-    bob_gut = planunit_shop(bob_inx, a23_str)
+    bob_gut = ownerunit_shop(bob_inx, a23_str)
     bob_gut.add_acctunit(bob_inx, credit77)
     bob_gut.add_acctunit(yao_inx, credit44)
     bob_gut.add_acctunit(bob_inx, credit77)
@@ -52,8 +52,8 @@ def test_etl_belief_guts_to_belief_jobs_SetsFiles_Scenario0(
 
     # THEN
     assert os_path_exists(a23_bob_job_path)
-    generated_job = planunit_get_from_json(open_file(a23_bob_job_path))
-    expected_job = planunit_shop(bob_inx, a23_str)
+    generated_job = ownerunit_get_from_json(open_file(a23_bob_job_path))
+    expected_job = ownerunit_shop(bob_inx, a23_str)
     expected_job.add_acctunit(bob_inx, credit77)
     expected_job.add_acctunit(yao_inx, credit44)
     expected_job.add_acctunit(bob_inx, credit77)
@@ -64,6 +64,6 @@ def test_etl_belief_guts_to_belief_jobs_SetsFiles_Scenario0(
     # assert generated_job.get_acct(yao_inx) == expected_job.get_acct(yao_inx)
     assert generated_job.accts.keys() == expected_job.accts.keys()
     # assert generated_job.accts == expected_job.accts
-    # assert generated_job.get_concept_dict() == expected_job.get_dict()
+    # assert generated_job.get_plan_dict() == expected_job.get_dict()
     # assert generated_job.get_dict() == expected_job.get_dict()
     # assert generated_job == expected_job

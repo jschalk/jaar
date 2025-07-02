@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import count_files, create_path, save_json
-from src.a06_plan_logic.test._util.a06_str import (
+from src.a06_owner_logic.test._util.a06_str import (
     acct_name_str,
     belief_label_str,
     owner_name_str,

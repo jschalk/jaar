@@ -3,7 +3,7 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from pandas.testing import assert_frame_equal
 from shutil import copy2 as shutil_copy2
 from src.a00_data_toolbox.file_toolbox import create_path, set_dir
-from src.a06_plan_logic.test._util.a06_str import (
+from src.a06_owner_logic.test._util.a06_str import (
     acct_name_str,
     belief_label_str,
     owner_name_str,

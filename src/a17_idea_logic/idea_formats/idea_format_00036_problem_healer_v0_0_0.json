@@ -12,10 +12,10 @@
         "healer_name": {
             "otx_key": true
         },
-        "concept_label": {
+        "plan_label": {
             "otx_key": true
         },
-        "concept_rope": {
+        "plan_rope": {
             "otx_key": true
         },
         "owner_name": {
@@ -28,8 +28,8 @@
     "idea_number": "br00036",
     "dimens": [
         "beliefunit",
-        "planunit",
-        "plan_conceptunit",
-        "plan_concept_healerlink"
+        "ownerunit",
+        "owner_planunit",
+        "owner_plan_healerlink"
     ]
 }

@@ -1,13 +1,13 @@
 from src.a00_data_toolbox.file_toolbox import set_dir
 from src.a01_term_logic.rope import create_rope
-from src.a06_plan_logic.plan import PlanUnit, planunit_shop
+from src.a06_owner_logic.owner import OwnerUnit, ownerunit_shop
 from src.a07_timeline_logic.test._util.a07_str import time_str
 from src.a07_timeline_logic.test._util.calendar_examples import (
     five_str,
     get_five_config,
 )
 from src.a07_timeline_logic.timeline import (
-    add_newtimeline_conceptunit,
+    add_newtimeline_planunit,
     get_default_timeline_config_dict,
     timelineunit_shop,
 )
@@ -58,18 +58,18 @@ def test_BeliefUnit_add_timeline_to_gut_SetsFile_Scenario0(env_dir_setup_cleanup
     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
     a23_belief.timeline = timelineunit_shop(get_five_config())
     sue_str = "Sue"
-    init_sue_gut = planunit_shop(sue_str, a23_str)
+    init_sue_gut = ownerunit_shop(sue_str, a23_str)
     time_rope = init_sue_gut.make_l1_rope(time_str())
     five_rope = init_sue_gut.make_rope(time_rope, five_str())
     save_gut_file(belief_mstr_dir, init_sue_gut)
-    assert not init_sue_gut.concept_exists(five_rope)
+    assert not init_sue_gut.plan_exists(five_rope)
 
     # WHEN
     a23_belief.add_timeline_to_gut(sue_str)
 
     # THEN
     post_sue_gut = open_gut_file(belief_mstr_dir, a23_str, sue_str)
-    assert post_sue_gut.concept_exists(five_rope)
+    assert post_sue_gut.plan_exists(five_rope)
 
 
 def test_BeliefUnit_add_timeline_to_guts_SetsFiles_Scenario0(env_dir_setup_cleanup):
@@ -79,15 +79,15 @@ def test_BeliefUnit_add_timeline_to_guts_SetsFiles_Scenario0(env_dir_setup_clean
     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
     a23_belief.timeline = timelineunit_shop(get_five_config())
     sue_str = "Sue"
-    init_sue_gut = planunit_shop(sue_str, a23_str)
+    init_sue_gut = ownerunit_shop(sue_str, a23_str)
     time_rope = init_sue_gut.make_l1_rope(time_str())
     five_rope = init_sue_gut.make_rope(time_rope, five_str())
     save_gut_file(belief_mstr_dir, init_sue_gut)
-    assert not init_sue_gut.concept_exists(five_rope)
+    assert not init_sue_gut.plan_exists(five_rope)
 
     # WHEN
     a23_belief.add_timeline_to_guts()
 
     # THEN
     post_sue_gut = open_gut_file(belief_mstr_dir, a23_str, sue_str)
-    assert post_sue_gut.concept_exists(five_rope)
+    assert post_sue_gut.plan_exists(five_rope)

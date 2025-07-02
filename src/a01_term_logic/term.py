@@ -41,7 +41,7 @@ class NameTerm(str):
 
 
 class OwnerName(NameTerm):
-    """A NameTerm used to identify a PlanUnit's owner"""
+    """A NameTerm used to identify a OwnerUnit's owner"""
 
     pass
 

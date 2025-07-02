@@ -26,6 +26,6 @@
     "dimens": [
         "belief_budunit",
         "beliefunit",
-        "planunit"
+        "ownerunit"
     ]
 }

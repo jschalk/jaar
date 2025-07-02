@@ -8,7 +8,7 @@ from src.a00_data_toolbox.file_toolbox import (
 )
 from src.a07_timeline_logic.calendar_markdown import get_calendarmarkdown_str
 from src.a15_belief_logic.belief import get_default_path_beliefunit
-from src.a15_belief_logic.belief_timeline import get_belief_plantimelinepoint
+from src.a15_belief_logic.belief_timeline import get_belief_ownertimelinepoint
 from src.a17_idea_logic.idea_db_tool import save_table_to_csv
 from src.a19_kpi_toolbox.kpi_sqlstrs import get_belief_kpi001_acct_nets_sqlstr
 
@@ -72,8 +72,8 @@ def create_calendar_markdown_files(belief_mstr_dir: str, output_dir: str):
     for belief_label in get_level1_dirs(beliefs_dir):
         belief_calendar_md_path = create_path(output_dir, f"{belief_label}_calendar.md")
         x_beliefunit = get_default_path_beliefunit(belief_mstr_dir, belief_label)
-        belief_plantimelinepoint = get_belief_plantimelinepoint(x_beliefunit)
-        belief_year_num = belief_plantimelinepoint._year_num
+        belief_ownertimelinepoint = get_belief_ownertimelinepoint(x_beliefunit)
+        belief_year_num = belief_ownertimelinepoint._year_num
         belief_timeline_config = x_beliefunit.timeline.get_dict()
         x_calendarmarkdown = get_calendarmarkdown_str(
             belief_timeline_config, belief_year_num

@@ -9,11 +9,11 @@ SELECT
 , belief_acct_nets.owner_name
 , owner_net_amount AS funds
 , RANK() OVER (ORDER BY owner_net_amount DESC) AS fund_rank
-, IFNULL(SUM(plan_conceptunit_job.task), 0) AS tasks_count
+, IFNULL(SUM(owner_planunit_job.task), 0) AS tasks_count
 FROM belief_acct_nets
-LEFT JOIN plan_conceptunit_job ON
-  plan_conceptunit_job.belief_label = belief_acct_nets.belief_label
-  AND plan_conceptunit_job.owner_name = belief_acct_nets.owner_name
+LEFT JOIN owner_planunit_job ON
+  owner_planunit_job.belief_label = belief_acct_nets.belief_label
+  AND owner_planunit_job.owner_name = belief_acct_nets.owner_name
 GROUP BY belief_acct_nets.belief_label, belief_acct_nets.owner_name
 ;
 """

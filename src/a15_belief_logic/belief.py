@@ -30,10 +30,10 @@ from src.a02_finance_logic.finance_config import (
     default_RespectBit_if_None,
     filter_penny,
 )
-from src.a06_plan_logic.plan import PlanUnit, planunit_shop
+from src.a06_owner_logic.owner import OwnerUnit, ownerunit_shop
 from src.a07_timeline_logic.timeline import (
     TimeLineUnit,
-    add_newtimeline_conceptunit,
+    add_newtimeline_planunit,
     timelineunit_shop,
 )
 from src.a11_bud_logic.bud import (
@@ -47,7 +47,7 @@ from src.a11_bud_logic.bud import (
     tranbook_shop,
 )
 from src.a11_bud_logic.cell import cellunit_shop
-from src.a12_hub_toolbox.basis_plans import create_listen_basis, get_default_job
+from src.a12_hub_toolbox.basis_owners import create_listen_basis, get_default_job
 from src.a12_hub_toolbox.hub_path import create_belief_json_path, create_cell_dir_path
 from src.a12_hub_toolbox.hub_tool import (
     cellunit_save_to_dir,
@@ -58,7 +58,7 @@ from src.a12_hub_toolbox.hub_tool import (
     save_job_file,
 )
 from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
-from src.a13_plan_listen_logic.listen import (
+from src.a13_owner_listen_logic.listen import (
     create_vision_file_from_duty_file,
     listen_to_agendas_create_init_job_from_guts,
     listen_to_debtors_roll_jobs_into_job,
@@ -133,7 +133,7 @@ class BeliefUnit:
     # owner management
     def _set_all_healer_dutys(self, owner_name: OwnerName):
         x_gut = open_gut_file(self.belief_mstr_dir, self.belief_label, owner_name)
-        x_gut.settle_plan()
+        x_gut.settle_owner()
         for healer_name, healer_dict in x_gut._healers_dict.items():
             healer_hubunit = hubunit_shop(
                 self.belief_mstr_dir,
@@ -151,15 +151,15 @@ class BeliefUnit:
         self,
         healer_hubunit: HubUnit,
         keep_rope: RopeTerm,
-        gut_plan: PlanUnit,
+        gut_owner: OwnerUnit,
     ) -> None:
         healer_hubunit.keep_rope = keep_rope
         healer_hubunit.create_treasury_db_file()
-        healer_hubunit.save_duty_plan(gut_plan)
+        healer_hubunit.save_duty_owner(gut_owner)
 
     def generate_healers_authored_job(
-        self, owner_name: OwnerName, x_gut: PlanUnit
-    ) -> PlanUnit:
+        self, owner_name: OwnerName, x_gut: OwnerUnit
+    ) -> OwnerUnit:
         x_job = get_default_job(x_gut)
         for healer_name, healer_dict in x_gut._healers_dict.items():
             healer_hubunit = hubunit_shop(
@@ -181,15 +181,15 @@ class BeliefUnit:
                     knot=self.knot,
                     respect_bit=self.respect_bit,
                 )
-                keep_hubunit.save_duty_plan(x_gut)
+                keep_hubunit.save_duty_owner(x_gut)
                 create_vision_file_from_duty_file(keep_hubunit, owner_name)
-                x_vision = keep_hubunit.get_vision_plan(owner_name)
+                x_vision = keep_hubunit.get_vision_owner(owner_name)
                 x_job = listen_to_speaker_agenda(x_job, x_vision)
         return x_job
 
-    # job plan management
-    def create_empty_plan_from_belief(self, owner_name: OwnerName) -> PlanUnit:
-        return planunit_shop(
+    # job owner management
+    def create_empty_owner_from_belief(self, owner_name: OwnerName) -> OwnerUnit:
+        return ownerunit_shop(
             owner_name,
             self.belief_label,
             knot=self.knot,
@@ -200,8 +200,8 @@ class BeliefUnit:
 
     def create_gut_file_if_none(self, owner_name: OwnerName) -> None:
         if not gut_file_exists(self.belief_mstr_dir, self.belief_label, owner_name):
-            empty_plan = self.create_empty_plan_from_belief(owner_name)
-            save_gut_file(self.belief_mstr_dir, empty_plan)
+            empty_owner = self.create_empty_owner_from_belief(owner_name)
+            save_gut_file(self.belief_mstr_dir, empty_owner)
 
     def create_init_job_from_guts(self, owner_name: OwnerName) -> None:
         self.create_gut_file_if_none(owner_name)
@@ -210,13 +210,13 @@ class BeliefUnit:
         listen_to_agendas_create_init_job_from_guts(self.belief_mstr_dir, x_job)
         save_job_file(self.belief_mstr_dir, x_job)
 
-    def rotate_job(self, owner_name: OwnerName) -> PlanUnit:
+    def rotate_job(self, owner_name: OwnerName) -> OwnerUnit:
         x_job = open_job_file(self.belief_mstr_dir, self.belief_label, owner_name)
-        x_job.settle_plan()
-        # # if planunit has healers create job from healers.
+        x_job.settle_owner()
+        # # if ownerunit has healers create job from healers.
         # if len(x_gut._healers_dict) > 0:
         #     return self.generate_healers_authored_job(owner_name, x_gut)
-        # create planunit from debtors roll
+        # create ownerunit from debtors roll
         return listen_to_debtors_roll_jobs_into_job(
             self.belief_mstr_dir, self.belief_label, owner_name
         )
@@ -230,7 +230,7 @@ class BeliefUnit:
             for owner_name in owner_names:
                 save_job_file(self.belief_mstr_dir, self.rotate_job(owner_name))
 
-    def get_job_file_plan(self, owner_name: OwnerName) -> PlanUnit:
+    def get_job_file_owner(self, owner_name: OwnerName) -> OwnerUnit:
         return open_job_file(self.belief_mstr_dir, self.belief_label, owner_name)
 
     # brokerunits
@@ -404,7 +404,7 @@ class BeliefUnit:
     def add_timeline_to_gut(self, owner_name: OwnerName) -> None:
         """Adds the timeline to the gut file for the given owner."""
         x_gut = open_gut_file(self.belief_mstr_dir, self.belief_label, owner_name)
-        add_newtimeline_conceptunit(x_gut, self.get_timeline_config())
+        add_newtimeline_planunit(x_gut, self.get_timeline_config())
         save_gut_file(self.belief_mstr_dir, x_gut)
 
     def add_timeline_to_guts(self) -> None:

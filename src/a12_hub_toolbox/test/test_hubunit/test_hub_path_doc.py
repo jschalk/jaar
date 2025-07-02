@@ -28,9 +28,9 @@ from src.a12_hub_toolbox.hub_path import (
     create_keeps_dir_path,
     create_owner_dir_path,
     create_owner_event_dir_path,
+    create_ownerevent_path,
+    create_ownerpoint_path,
     create_packs_dir_path,
-    create_planevent_path,
-    create_planpoint_path,
 )
 
 LINUX_OS = platform_system() == "Linux"
@@ -244,9 +244,9 @@ def test_create_bud_acct_mandate_ledger_path_HasDocString():
     assert LINUX_OS or inspect_getdoc(create_bud_acct_mandate_ledger_path) == doc_str
 
 
-def test_create_planpoint_path_HasDocString():
+def test_create_ownerpoint_path_HasDocString():
     # ESTABLISH
-    doc_str = create_planpoint_path(
+    doc_str = create_ownerpoint_path(
         belief_mstr_dir="belief_mstr_dir",
         belief_label=belief_label_str(),
         owner_name=owner_name_str(),
@@ -255,7 +255,7 @@ def test_create_planpoint_path_HasDocString():
     doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_planpoint_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_ownerpoint_path) == doc_str
 
 
 def test_create_owner_event_dir_path_HasDocString():
@@ -271,9 +271,9 @@ def test_create_owner_event_dir_path_HasDocString():
     assert LINUX_OS or inspect_getdoc(create_owner_event_dir_path) == doc_str
 
 
-def test_create_planevent_path_HasDocString():
+def test_create_ownerevent_path_HasDocString():
     # ESTABLISH
-    doc_str = create_planevent_path(
+    doc_str = create_ownerevent_path(
         belief_mstr_dir="belief_mstr_dir",
         belief_label=belief_label_str(),
         owner_name=owner_name_str(),
@@ -281,7 +281,7 @@ def test_create_planevent_path_HasDocString():
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_planevent_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_ownerevent_path) == doc_str
 
 
 def test_create_event_all_pack_path_HasDocString():

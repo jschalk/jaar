@@ -1,0 +1,38 @@
+{
+    "attributes": {
+        "plan_rope": {
+            "otx_key": true
+        },
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "fcontext": {
+            "otx_key": true
+        },
+        "belief_label": {
+            "otx_key": true
+        },
+        "fnigh": {
+            "otx_key": false
+        },
+        "fopen": {
+            "otx_key": false
+        },
+        "fstate": {
+            "otx_key": false
+        },
+        "owner_name": {
+            "otx_key": true
+        }
+    },
+    "dimens": [
+        "beliefunit",
+        "ownerunit",
+        "owner_planunit",
+        "owner_plan_factunit"
+    ],
+    "idea_number": "br00023"
+}

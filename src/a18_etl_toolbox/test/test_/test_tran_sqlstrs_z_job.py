@@ -1,21 +1,21 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_create_table_sqlstr
-from src.a06_plan_logic.test._util.a06_str import (
+from src.a06_owner_logic.test._util.a06_str import (
     belief_label_str,
+    owner_acct_membership_str,
+    owner_acctunit_str,
     owner_name_str,
-    plan_acct_membership_str,
-    plan_acctunit_str,
-    plan_concept_awardlink_str,
-    plan_concept_factunit_str,
-    plan_concept_healerlink_str,
-    plan_concept_laborlink_str,
-    plan_concept_reason_premiseunit_str,
-    plan_concept_reasonunit_str,
-    plan_conceptunit_str,
-    planunit_str,
+    owner_plan_awardlink_str,
+    owner_plan_factunit_str,
+    owner_plan_healerlink_str,
+    owner_plan_laborlink_str,
+    owner_plan_reason_premiseunit_str,
+    owner_plan_reasonunit_str,
+    owner_planunit_str,
+    ownerunit_str,
 )
-from src.a10_plan_calc.plan_calc_config import get_plan_calc_config_dict
-from src.a10_plan_calc.test._util.a10_str import plan_groupunit_str
+from src.a10_owner_calc.owner_calc_config import get_owner_calc_config_dict
+from src.a10_owner_calc.test._util.a10_str import owner_groupunit_str
 from src.a12_hub_toolbox.test._util.a12_str import job_str
 from src.a17_idea_logic.idea_config import get_idea_sqlite_types
 from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
@@ -33,10 +33,10 @@ def test_get_job_create_table_sqlstrs_ReturnsObj():
 
     # THEN
     s_types = get_idea_sqlite_types()
-    plan_calc_config = get_plan_calc_config_dict()
-    for x_dimen in plan_calc_config.keys():
+    owner_calc_config = get_owner_calc_config_dict()
+    for x_dimen in owner_calc_config.keys():
         # print(f"{x_dimen} checking...")
-        x_config = plan_calc_config.get(x_dimen)
+        x_config = owner_calc_config.get(x_dimen)
 
         job_table = prime_table(x_dimen, job_str(), None)
         job_cols = {belief_label_str(), owner_name_str()}
@@ -60,42 +60,42 @@ def test_create_job_tables_CreatesTables():
         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
         assert cursor.fetchone()[0] == 0
 
-        plnmemb_job_table = prime_table(plan_acct_membership_str(), job_str(), None)
-        plnacct_job_table = prime_table(plan_acctunit_str(), job_str(), None)
-        plngrou_job_table = prime_table(plan_groupunit_str(), job_str(), None)
-        plnawar_job_table = prime_table(plan_concept_awardlink_str(), job_str(), None)
-        plnfact_job_table = prime_table(plan_concept_factunit_str(), job_str(), None)
-        plnheal_job_table = prime_table(plan_concept_healerlink_str(), job_str(), None)
-        plnprem_job_table = prime_table(
-            plan_concept_reason_premiseunit_str(), job_str(), None
+        onrmemb_job_table = prime_table(owner_acct_membership_str(), job_str(), None)
+        onracct_job_table = prime_table(owner_acctunit_str(), job_str(), None)
+        onrgrou_job_table = prime_table(owner_groupunit_str(), job_str(), None)
+        onrawar_job_table = prime_table(owner_plan_awardlink_str(), job_str(), None)
+        onrfact_job_table = prime_table(owner_plan_factunit_str(), job_str(), None)
+        onrheal_job_table = prime_table(owner_plan_healerlink_str(), job_str(), None)
+        onrprem_job_table = prime_table(
+            owner_plan_reason_premiseunit_str(), job_str(), None
         )
-        planares_job_table = prime_table(plan_concept_reasonunit_str(), job_str(), None)
-        plnlabo_job_table = prime_table(plan_concept_laborlink_str(), job_str(), None)
-        plnconc_job_table = prime_table(plan_conceptunit_str(), job_str(), None)
-        plnunit_job_table = prime_table(planunit_str(), job_str(), None)
-        # plnmemb_job_table = f"{plan_acct_membership_str()}_job"
-        # plnacct_job_table = f"{plan_acctunit_str()}_job"
-        # plngrou_job_table = f"{plan_groupunit_str()}_job"
-        # plnawar_job_table = f"{plan_concept_awardlink_str()}_job"
-        # plnfact_job_table = f"{plan_concept_factunit_str()}_job"
-        # plnheal_job_table = f"{plan_concept_healerlink_str()}_job"
-        # plnprem_job_table = f"{plan_concept_reason_premiseunit_str()}_job"
-        # planares_job_table = f"{plan_concept_reasonunit_str()}_job"
-        # plnlabo_job_table = f"{plan_concept_laborlink_str()}_job"
-        # plnconc_job_table = f"{plan_conceptunit_str()}_job"
-        # plnunit_job_table = f"{planunit_str()}_job"
+        ownerares_job_table = prime_table(owner_plan_reasonunit_str(), job_str(), None)
+        onrlabo_job_table = prime_table(owner_plan_laborlink_str(), job_str(), None)
+        onrplan_job_table = prime_table(owner_planunit_str(), job_str(), None)
+        onrunit_job_table = prime_table(ownerunit_str(), job_str(), None)
+        # onrmemb_job_table = f"{owner_acct_membership_str()}_job"
+        # onracct_job_table = f"{owner_acctunit_str()}_job"
+        # onrgrou_job_table = f"{owner_groupunit_str()}_job"
+        # onrawar_job_table = f"{owner_plan_awardlink_str()}_job"
+        # onrfact_job_table = f"{owner_plan_factunit_str()}_job"
+        # onrheal_job_table = f"{owner_plan_healerlink_str()}_job"
+        # onrprem_job_table = f"{owner_plan_reason_premiseunit_str()}_job"
+        # ownerares_job_table = f"{owner_plan_reasonunit_str()}_job"
+        # onrlabo_job_table = f"{owner_plan_laborlink_str()}_job"
+        # onrplan_job_table = f"{owner_planunit_str()}_job"
+        # onrunit_job_table = f"{ownerunit_str()}_job"
 
-        assert db_table_exists(cursor, plnmemb_job_table) is False
-        assert db_table_exists(cursor, plnacct_job_table) is False
-        assert db_table_exists(cursor, plngrou_job_table) is False
-        assert db_table_exists(cursor, plnawar_job_table) is False
-        assert db_table_exists(cursor, plnfact_job_table) is False
-        assert db_table_exists(cursor, plnheal_job_table) is False
-        assert db_table_exists(cursor, plnprem_job_table) is False
-        assert db_table_exists(cursor, planares_job_table) is False
-        assert db_table_exists(cursor, plnlabo_job_table) is False
-        assert db_table_exists(cursor, plnconc_job_table) is False
-        assert db_table_exists(cursor, plnunit_job_table) is False
+        assert db_table_exists(cursor, onrmemb_job_table) is False
+        assert db_table_exists(cursor, onracct_job_table) is False
+        assert db_table_exists(cursor, onrgrou_job_table) is False
+        assert db_table_exists(cursor, onrawar_job_table) is False
+        assert db_table_exists(cursor, onrfact_job_table) is False
+        assert db_table_exists(cursor, onrheal_job_table) is False
+        assert db_table_exists(cursor, onrprem_job_table) is False
+        assert db_table_exists(cursor, ownerares_job_table) is False
+        assert db_table_exists(cursor, onrlabo_job_table) is False
+        assert db_table_exists(cursor, onrplan_job_table) is False
+        assert db_table_exists(cursor, onrunit_job_table) is False
 
         # WHEN
         create_job_tables(cursor)
@@ -107,16 +107,16 @@ def test_create_job_tables_CreatesTables():
         # for x_row in cursor.fetchall():
         #     print(f"{x_count} {x_row[1]=}")
         #     x_count += 1
-        assert db_table_exists(cursor, plnmemb_job_table)
-        assert db_table_exists(cursor, plnacct_job_table)
-        assert db_table_exists(cursor, plngrou_job_table)
-        assert db_table_exists(cursor, plnawar_job_table)
-        assert db_table_exists(cursor, plnfact_job_table)
-        assert db_table_exists(cursor, plnheal_job_table)
-        assert db_table_exists(cursor, plnprem_job_table)
-        assert db_table_exists(cursor, planares_job_table)
-        assert db_table_exists(cursor, plnlabo_job_table)
-        assert db_table_exists(cursor, plnconc_job_table)
-        assert db_table_exists(cursor, plnunit_job_table)
+        assert db_table_exists(cursor, onrmemb_job_table)
+        assert db_table_exists(cursor, onracct_job_table)
+        assert db_table_exists(cursor, onrgrou_job_table)
+        assert db_table_exists(cursor, onrawar_job_table)
+        assert db_table_exists(cursor, onrfact_job_table)
+        assert db_table_exists(cursor, onrheal_job_table)
+        assert db_table_exists(cursor, onrprem_job_table)
+        assert db_table_exists(cursor, ownerares_job_table)
+        assert db_table_exists(cursor, onrlabo_job_table)
+        assert db_table_exists(cursor, onrplan_job_table)
+        assert db_table_exists(cursor, onrunit_job_table)
         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
         assert cursor.fetchone()[0] == 11

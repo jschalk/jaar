@@ -10,8 +10,8 @@ from src.a12_hub_toolbox.hub_path import (
     CELLNODE_FILENAME,
     EVENT_ALL_PACK_FILENAME,
     EVENT_EXPRESSED_PACK_FILENAME,
-    PLANEVENT_FILENAME,
-    PLANPOINT_FILENAME,
+    OWNEREVENT_FILENAME,
+    OWNERPOINT_FILENAME,
     belief_agenda_list_report_path,
     create_atoms_dir_path,
     create_belief_dir_path,
@@ -33,9 +33,9 @@ from src.a12_hub_toolbox.hub_path import (
     create_keeps_dir_path,
     create_owner_dir_path,
     create_owner_event_dir_path,
+    create_ownerevent_path,
+    create_ownerpoint_path,
     create_packs_dir_path,
-    create_planevent_path,
-    create_planpoint_path,
     treasury_filename,
 )
 from src.a12_hub_toolbox.test._util.a12_env import get_module_temp_dir
@@ -294,7 +294,7 @@ def test_create_bud_acct_mandate_ledger_path_ReturnsObj():
     assert gen_bud_path == expected_bud_path_dir
 
 
-def test_create_planpoint_path_ReturnsObj():
+def test_create_ownerpoint_path_ReturnsObj():
     # ESTABLISH
     x_belief_mstr_dir = get_module_temp_dir()
     a23_str = "amy23"
@@ -302,7 +302,7 @@ def test_create_planpoint_path_ReturnsObj():
     timepoint7 = 7
 
     # WHEN
-    gen_planpoint_path = create_planpoint_path(
+    gen_ownerpoint_path = create_ownerpoint_path(
         x_belief_mstr_dir, a23_str, sue_str, timepoint7
     )
 
@@ -313,8 +313,8 @@ def test_create_planpoint_path_ReturnsObj():
     sue_dir = create_path(owners_dir, sue_str)
     buds_dir = create_path(sue_dir, "buds")
     timepoint_dir = create_path(buds_dir, timepoint7)
-    expected_planpoint_path_dir = create_path(timepoint_dir, PLANPOINT_FILENAME)
-    assert gen_planpoint_path == expected_planpoint_path_dir
+    expected_ownerpoint_path_dir = create_path(timepoint_dir, OWNERPOINT_FILENAME)
+    assert gen_ownerpoint_path == expected_ownerpoint_path_dir
 
 
 def test_create_cell_dir_path_ReturnsObj_Scenario0_No_bud_ancestors():
@@ -467,7 +467,7 @@ def test_create_owner_event_dir_path_ReturnsObj():
     assert gen_a23_e3_dir_path == expected_a23_bob_e3_dir
 
 
-def test_create_planevent_path_ReturnsObj():
+def test_create_ownerevent_path_ReturnsObj():
     # ESTABLISH
     x_belief_mstr_dir = get_module_temp_dir()
     amy23_str = "amy23"
@@ -475,7 +475,7 @@ def test_create_planevent_path_ReturnsObj():
     event3 = 3
 
     # WHEN
-    gen_a23_e3_plan_path = create_planevent_path(
+    gen_a23_e3_owner_path = create_ownerevent_path(
         x_belief_mstr_dir, amy23_str, bob_str, event3
     )
 
@@ -486,8 +486,8 @@ def test_create_planevent_path_ReturnsObj():
     a23_bob_dir = create_path(a23_owners_dir, bob_str)
     a23_events_dir = create_path(a23_bob_dir, "events")
     a23_bob_e3_dir = create_path(a23_events_dir, event3)
-    expected_a23_bob_e3_plan_path = create_path(a23_bob_e3_dir, PLANEVENT_FILENAME)
-    assert gen_a23_e3_plan_path == expected_a23_bob_e3_plan_path
+    expected_a23_bob_e3_owner_path = create_path(a23_bob_e3_dir, OWNEREVENT_FILENAME)
+    assert gen_a23_e3_owner_path == expected_a23_bob_e3_owner_path
 
 
 def test_create_event_all_pack_path_ReturnsObj():
@@ -498,7 +498,7 @@ def test_create_event_all_pack_path_ReturnsObj():
     event3 = 3
 
     # WHEN
-    gen_a23_e3_plan_path = create_event_all_pack_path(
+    gen_a23_e3_owner_path = create_event_all_pack_path(
         x_belief_mstr_dir, amy23_str, bob_str, event3
     )
 
@@ -512,7 +512,7 @@ def test_create_event_all_pack_path_ReturnsObj():
     expected_a23_bob_e3_all_pack_path = create_path(
         a23_bob_e3_dir, EVENT_ALL_PACK_FILENAME
     )
-    assert gen_a23_e3_plan_path == expected_a23_bob_e3_all_pack_path
+    assert gen_a23_e3_owner_path == expected_a23_bob_e3_all_pack_path
 
 
 def test_create_event_expressed_pack_path_ReturnsObj():
@@ -523,7 +523,7 @@ def test_create_event_expressed_pack_path_ReturnsObj():
     event3 = 3
 
     # WHEN
-    gen_a23_e3_plan_path = create_event_expressed_pack_path(
+    gen_a23_e3_owner_path = create_event_expressed_pack_path(
         x_belief_mstr_dir, amy23_str, bob_str, event3
     )
 
@@ -537,7 +537,7 @@ def test_create_event_expressed_pack_path_ReturnsObj():
     expected_a23_bob_e3_expressed_pack_path = create_path(
         a23_bob_e3_dir, EVENT_EXPRESSED_PACK_FILENAME
     )
-    assert gen_a23_e3_plan_path == expected_a23_bob_e3_expressed_pack_path
+    assert gen_a23_e3_owner_path == expected_a23_bob_e3_expressed_pack_path
 
 
 def test_create_gut_path_ReturnsObj():
@@ -547,7 +547,7 @@ def test_create_gut_path_ReturnsObj():
     bob_str = "Bob"
 
     # WHEN
-    gen_a23_e3_plan_path = create_gut_path(x_belief_mstr_dir, a23_str, bob_str)
+    gen_a23_e3_owner_path = create_gut_path(x_belief_mstr_dir, a23_str, bob_str)
 
     # THEN
     x_beliefs_dir = create_path(x_belief_mstr_dir, "beliefs")
@@ -556,9 +556,9 @@ def test_create_gut_path_ReturnsObj():
     a23_bob_dir = create_path(a23_owners_dir, bob_str)
     a23_bob_gut_dir = create_path(a23_bob_dir, gut_str())
     expected_a23_bob_gut_json_path = create_path(a23_bob_gut_dir, f"{bob_str}.json")
-    # plan_filename = "plan.json"
-    # expected_a23_e3_plan_path = create_path(a23_bob_e3_dir, plan_filename)
-    assert gen_a23_e3_plan_path == expected_a23_bob_gut_json_path
+    # owner_filename = "owner.json"
+    # expected_a23_e3_owner_path = create_path(a23_bob_e3_dir, owner_filename)
+    assert gen_a23_e3_owner_path == expected_a23_bob_gut_json_path
 
 
 def test_create_job_path_ReturnsObj():
@@ -568,7 +568,7 @@ def test_create_job_path_ReturnsObj():
     bob_str = "Bob"
 
     # WHEN
-    gen_a23_e3_plan_path = create_job_path(x_belief_mstr_dir, a23_str, bob_str)
+    gen_a23_e3_owner_path = create_job_path(x_belief_mstr_dir, a23_str, bob_str)
 
     # THEN
     x_beliefs_dir = create_path(x_belief_mstr_dir, "beliefs")
@@ -577,6 +577,6 @@ def test_create_job_path_ReturnsObj():
     a23_bob_dir = create_path(a23_owners_dir, bob_str)
     a23_bob_job_dir = create_path(a23_bob_dir, job_str())
     expected_a23_bob_job_json_path = create_path(a23_bob_job_dir, f"{bob_str}.json")
-    # plan_filename = "plan.json"
-    # expected_a23_e3_plan_path = create_path(a23_bob_e3_dir, plan_filename)
-    assert gen_a23_e3_plan_path == expected_a23_bob_job_json_path
+    # owner_filename = "owner.json"
+    # expected_a23_e3_owner_path = create_path(a23_bob_e3_dir, owner_filename)
+    assert gen_a23_e3_owner_path == expected_a23_bob_job_json_path

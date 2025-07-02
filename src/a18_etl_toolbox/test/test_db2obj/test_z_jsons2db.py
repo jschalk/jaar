@@ -8,29 +8,29 @@ from src.a03_group_logic.group import (
     groupunit_shop,
     membership_shop,
 )
-from src.a04_reason_logic.reason_concept import (
+from src.a04_reason_logic.reason_labor import laborheir_shop, laborunit_shop
+from src.a04_reason_logic.reason_plan import (
     factheir_shop,
     premiseunit_shop,
     reasonheir_shop,
 )
-from src.a04_reason_logic.reason_labor import laborheir_shop, laborunit_shop
-from src.a05_concept_logic.concept import conceptunit_shop
-from src.a05_concept_logic.healer import healerlink_shop
-from src.a06_plan_logic.plan import planunit_shop
-from src.a18_etl_toolbox.db_obj_plan_tool import (
+from src.a05_plan_logic.healer import healerlink_shop
+from src.a05_plan_logic.plan import planunit_shop
+from src.a06_owner_logic.owner import ownerunit_shop
+from src.a18_etl_toolbox.db_obj_owner_tool import (
     ObjKeysHolder,
     insert_job_obj,
-    insert_job_plnacct,
-    insert_job_plnawar,
-    insert_job_plnconc,
-    insert_job_plnfact,
-    insert_job_plngrou,
-    insert_job_plnheal,
-    insert_job_plnlabo,
-    insert_job_plnmemb,
-    insert_job_plnprem,
-    insert_job_plnreas,
-    insert_job_plnunit,
+    insert_job_onracct,
+    insert_job_onrawar,
+    insert_job_onrfact,
+    insert_job_onrgrou,
+    insert_job_onrheal,
+    insert_job_onrlabo,
+    insert_job_onrmemb,
+    insert_job_onrplan,
+    insert_job_onrprem,
+    insert_job_onrreas,
+    insert_job_onrunit,
 )
 from src.a18_etl_toolbox.test._util.a18_env import env_dir_setup_cleanup
 from src.a18_etl_toolbox.tran_sqlstrs import create_job_tables
@@ -51,7 +51,7 @@ def test_ObjKeysHolder_Exists():
     assert not x_objkeyholder.fact_rope
 
 
-def test_insert_job_plnunit_CreatesTableRowsFor_planunit_job():
+def test_insert_job_onrunit_CreatesTableRowsFor_ownerunit_job():
     # sourcery skip: extract-method
     # ESTABLISH
     x_belief_label = "amy23"
@@ -70,31 +70,31 @@ def test_insert_job_plnunit_CreatesTableRowsFor_planunit_job():
     x_penny = 4.0
     x_respect_bit = 0.2
     x_tally = 6
-    sue_plan = planunit_shop(owner_name=x_owner_name, belief_label=x_belief_label)
-    sue_plan.fund_pool = x_fund_pool
-    sue_plan.fund_iota = x_fund_iota
-    sue_plan.penny = x_penny
-    sue_plan.tally = x_tally
-    sue_plan.respect_bit = x_respect_bit
-    sue_plan.max_tree_traverse = x_max_tree_traverse
-    sue_plan._keeps_buildable = x__keeps_buildable
-    sue_plan._keeps_justified = x__keeps_justified
-    sue_plan._offtrack_fund = x__offtrack_fund
-    sue_plan._rational = x__rational
-    sue_plan._sum_healerlink_share = x__sum_healerlink_share
-    sue_plan._tree_traverse_count = x__tree_traverse_count
-    sue_plan.credor_respect = x_credor_respect
-    sue_plan.debtor_respect = x_debtor_respect
+    sue_owner = ownerunit_shop(owner_name=x_owner_name, belief_label=x_belief_label)
+    sue_owner.fund_pool = x_fund_pool
+    sue_owner.fund_iota = x_fund_iota
+    sue_owner.penny = x_penny
+    sue_owner.tally = x_tally
+    sue_owner.respect_bit = x_respect_bit
+    sue_owner.max_tree_traverse = x_max_tree_traverse
+    sue_owner._keeps_buildable = x__keeps_buildable
+    sue_owner._keeps_justified = x__keeps_justified
+    sue_owner._offtrack_fund = x__offtrack_fund
+    sue_owner._rational = x__rational
+    sue_owner._sum_healerlink_share = x__sum_healerlink_share
+    sue_owner._tree_traverse_count = x__tree_traverse_count
+    sue_owner.credor_respect = x_credor_respect
+    sue_owner.debtor_respect = x_debtor_respect
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "planunit_job"
+        x_table_name = "ownerunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         objkeysholder = ObjKeysHolder()
 
         # WHEN
-        insert_job_plnunit(cursor, objkeysholder, sue_plan)
+        insert_job_onrunit(cursor, objkeysholder, sue_owner)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -123,17 +123,17 @@ def test_insert_job_plnunit_CreatesTableRowsFor_planunit_job():
         assert rows == expected_data
 
 
-def test_insert_job_plnconc_CreatesTableRowsFor_plnconc_job():
+def test_insert_job_onrplan_CreatesTableRowsFor_onrplan_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_plan_calc_dimen_args("plan_conceptunit")
+    # x_args = get_owner_calc_dimen_args("owner_planunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
     #     print(f"    x_{x_arg} = {x_count}")
     # print("")
     # for x_arg in get_default_sorted_list(x_args):
-    #     print(f"""    x_concept.{x_arg} = x_{x_arg}""")
+    #     print(f"""    x_plan.{x_arg} = x_{x_arg}""")
     # print("")
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
@@ -142,7 +142,7 @@ def test_insert_job_plnconc_CreatesTableRowsFor_plnconc_job():
     x_owner_name = 2
     casa_rope = create_rope(x_belief_label, "casa")
     x_parent_rope = casa_rope
-    x_concept_label = "clean"
+    x_plan_label = "clean"
     x_begin = 5.0
     x_close = 6.0
     x_addin = 7.0
@@ -168,70 +168,70 @@ def test_insert_job_plnconc_CreatesTableRowsFor_plnconc_job():
     x__healerlink_ratio = 27.0
     x__all_acct_cred = 28
     x__all_acct_debt = 29
-    x_concept = conceptunit_shop()
-    x_concept.belief_label = x_belief_label
-    x_concept.parent_rope = x_parent_rope
-    x_concept.concept_label = x_concept_label
-    x_concept.begin = x_begin
-    x_concept.close = x_close
-    x_concept.addin = x_addin
-    x_concept.numor = x_numor
-    x_concept.denom = x_denom
-    x_concept.morph = x_morph
-    x_concept.gogo_want = x_gogo_want
-    x_concept.stop_want = x_stop_want
-    x_concept.mass = x_mass
-    x_concept.task = x_task
-    x_concept.problem_bool = x_problem_bool
-    x_concept._active = x__active
-    x_concept._chore = x__chore
-    x_concept.fund_iota = x_fund_iota
-    x_concept._fund_onset = x__fund_onset
-    x_concept._fund_cease = x__fund_cease
-    x_concept._fund_ratio = x__fund_ratio
-    x_concept._gogo_calc = x__gogo_calc
-    x_concept._stop_calc = x__stop_calc
-    x_concept._level = x__level
-    x_concept._range_evaluated = x__range_evaluated
-    x_concept._descendant_task_count = x__descendant_task_count
-    x_concept._healerlink_ratio = x__healerlink_ratio
-    x_concept._all_acct_cred = x__all_acct_cred
-    x_concept._all_acct_debt = x__all_acct_debt
-    x_concept.begin = x_begin
-    x_concept.close = x_close
-    x_concept.addin = x_addin
-    x_concept.numor = x_numor
-    x_concept.denom = x_denom
-    x_concept.morph = x_morph
-    x_concept.gogo_want = x_gogo_want
-    x_concept.stop_want = x_stop_want
-    x_concept.mass = x_mass
-    x_concept.task = x_task
-    x_concept.problem_bool = x_problem_bool
-    x_concept._active = x__active
-    x_concept._chore = x__chore
-    x_concept.fund_iota = x_fund_iota
-    x_concept._fund_onset = x__fund_onset
-    x_concept._fund_cease = x__fund_cease
-    x_concept._fund_ratio = x__fund_ratio
-    x_concept._gogo_calc = x__gogo_calc
-    x_concept._stop_calc = x__stop_calc
-    x_concept._level = x__level
-    x_concept._range_evaluated = x__range_evaluated
-    x_concept._descendant_task_count = x__descendant_task_count
-    x_concept._healerlink_ratio = x__healerlink_ratio
-    x_concept._all_acct_cred = x__all_acct_cred
-    x_concept._all_acct_debt = x__all_acct_debt
+    x_plan = planunit_shop()
+    x_plan.belief_label = x_belief_label
+    x_plan.parent_rope = x_parent_rope
+    x_plan.plan_label = x_plan_label
+    x_plan.begin = x_begin
+    x_plan.close = x_close
+    x_plan.addin = x_addin
+    x_plan.numor = x_numor
+    x_plan.denom = x_denom
+    x_plan.morph = x_morph
+    x_plan.gogo_want = x_gogo_want
+    x_plan.stop_want = x_stop_want
+    x_plan.mass = x_mass
+    x_plan.task = x_task
+    x_plan.problem_bool = x_problem_bool
+    x_plan._active = x__active
+    x_plan._chore = x__chore
+    x_plan.fund_iota = x_fund_iota
+    x_plan._fund_onset = x__fund_onset
+    x_plan._fund_cease = x__fund_cease
+    x_plan._fund_ratio = x__fund_ratio
+    x_plan._gogo_calc = x__gogo_calc
+    x_plan._stop_calc = x__stop_calc
+    x_plan._level = x__level
+    x_plan._range_evaluated = x__range_evaluated
+    x_plan._descendant_task_count = x__descendant_task_count
+    x_plan._healerlink_ratio = x__healerlink_ratio
+    x_plan._all_acct_cred = x__all_acct_cred
+    x_plan._all_acct_debt = x__all_acct_debt
+    x_plan.begin = x_begin
+    x_plan.close = x_close
+    x_plan.addin = x_addin
+    x_plan.numor = x_numor
+    x_plan.denom = x_denom
+    x_plan.morph = x_morph
+    x_plan.gogo_want = x_gogo_want
+    x_plan.stop_want = x_stop_want
+    x_plan.mass = x_mass
+    x_plan.task = x_task
+    x_plan.problem_bool = x_problem_bool
+    x_plan._active = x__active
+    x_plan._chore = x__chore
+    x_plan.fund_iota = x_fund_iota
+    x_plan._fund_onset = x__fund_onset
+    x_plan._fund_cease = x__fund_cease
+    x_plan._fund_ratio = x__fund_ratio
+    x_plan._gogo_calc = x__gogo_calc
+    x_plan._stop_calc = x__stop_calc
+    x_plan._level = x__level
+    x_plan._range_evaluated = x__range_evaluated
+    x_plan._descendant_task_count = x__descendant_task_count
+    x_plan._healerlink_ratio = x__healerlink_ratio
+    x_plan._all_acct_cred = x__all_acct_cred
+    x_plan._all_acct_debt = x__all_acct_debt
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "plan_conceptunit_job"
+        x_table_name = "owner_planunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name)
 
         # WHEN
-        insert_job_plnconc(cursor, x_objkeysholder, x_concept)
+        insert_job_onrplan(cursor, x_objkeysholder, x_plan)
 
         # THEN
         clean_rope = create_rope(casa_rope, "clean")
@@ -273,10 +273,10 @@ def test_insert_job_plnconc_CreatesTableRowsFor_plnconc_job():
         assert rows == expected_data
 
 
-def test_insert_job_plnreas_CreatesTableRowsFor_plnreas_job():
+def test_insert_job_onrreas_CreatesTableRowsFor_onrreas_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_plan_calc_dimen_args("plan_concept_reasonunit")
+    # x_args = get_owner_calc_dimen_args("owner_plan_reasonunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -293,26 +293,26 @@ def test_insert_job_plnreas_CreatesTableRowsFor_plnreas_job():
     x_owner_name = 2
     x_rope = 3
     x_rcontext = 4
-    x_rconcept_active_requisite = 5
+    x_rplan_active_requisite = 5
     x__chore = 6
     x__status = 7
-    x__rconcept_active_value = 8
+    x__rplan_active_value = 8
     x_reasonheir = reasonheir_shop(rcontext=x_rcontext)
     x_reasonheir.rcontext = x_rcontext
-    x_reasonheir.rconcept_active_requisite = x_rconcept_active_requisite
+    x_reasonheir.rplan_active_requisite = x_rplan_active_requisite
     x_reasonheir._chore = x__chore
     x_reasonheir._status = x__status
-    x_reasonheir._rconcept_active_value = x__rconcept_active_value
+    x_reasonheir._rplan_active_value = x__rplan_active_value
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "plan_concept_reasonunit_job"
+        x_table_name = "owner_plan_reasonunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name, x_rope)
 
         # WHEN
-        insert_job_plnreas(cursor, x_objkeysholder, x_reasonheir)
+        insert_job_onrreas(cursor, x_objkeysholder, x_reasonheir)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -324,19 +324,19 @@ def test_insert_job_plnreas_CreatesTableRowsFor_plnreas_job():
             str(x_owner_name),
             str(x_rope),
             str(x_rcontext),
-            x_rconcept_active_requisite,
+            x_rplan_active_requisite,
             x__chore,
             x__status,
-            x__rconcept_active_value,
+            x__rplan_active_value,
         )
         expected_data = [expected_row1]
         assert rows == expected_data
 
 
-def test_insert_job_plnprem_CreatesTableRowsFor_plnprem_job():
+def test_insert_job_onrprem_CreatesTableRowsFor_onrprem_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_plan_calc_dimen_args("plan_concept_reason_premiseunit")
+    # x_args = get_owner_calc_dimen_args("owner_plan_reason_premiseunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -369,14 +369,14 @@ def test_insert_job_plnprem_CreatesTableRowsFor_plnprem_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "plan_concept_reason_premiseunit_job"
+        x_table_name = "owner_plan_reason_premiseunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(
             x_belief_label, x_owner_name, x_rope, x_rcontext
         )
 
         # WHEN
-        insert_job_plnprem(cursor, x_objkeysholder, x_premiseunit)
+        insert_job_onrprem(cursor, x_objkeysholder, x_premiseunit)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -399,10 +399,10 @@ def test_insert_job_plnprem_CreatesTableRowsFor_plnprem_job():
         assert rows == expected_data
 
 
-def test_insert_job_plnmemb_CreatesTableRowsFor_plnmemb_job():
+def test_insert_job_onrmemb_CreatesTableRowsFor_onrmemb_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_plan_calc_dimen_args("plan_acct_membership")
+    # x_args = get_owner_calc_dimen_args("owner_acct_membership")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -444,12 +444,12 @@ def test_insert_job_plnmemb_CreatesTableRowsFor_plnmemb_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "plan_acct_membership_job"
+        x_table_name = "owner_acct_membership_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name)
 
         # WHEN
-        insert_job_plnmemb(cursor, x_objkeysholder, x_membership)
+        insert_job_onrmemb(cursor, x_objkeysholder, x_membership)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -476,10 +476,10 @@ def test_insert_job_plnmemb_CreatesTableRowsFor_plnmemb_job():
         assert rows == expected_data
 
 
-def test_insert_job_plnacct_CreatesTableRowsFor_plnacct_job():
+def test_insert_job_onracct_CreatesTableRowsFor_onracct_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_plan_calc_dimen_args("plan_acctunit")
+    # x_args = get_owner_calc_dimen_args("owner_acctunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -524,12 +524,12 @@ def test_insert_job_plnacct_CreatesTableRowsFor_plnacct_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "plan_acctunit_job"
+        x_table_name = "owner_acctunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name)
 
         # WHEN
-        insert_job_plnacct(cursor, x_objkeysholder, x_acct)
+        insert_job_onracct(cursor, x_objkeysholder, x_acct)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -557,10 +557,10 @@ def test_insert_job_plnacct_CreatesTableRowsFor_plnacct_job():
         assert rows == expected_data
 
 
-def test_insert_job_plngrou_CreatesTableRowsFor_plngrou_job():
+def test_insert_job_onrgrou_CreatesTableRowsFor_onrgrou_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_plan_calc_dimen_args("plan_groupunit")
+    # x_args = get_owner_calc_dimen_args("owner_groupunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -597,12 +597,12 @@ def test_insert_job_plngrou_CreatesTableRowsFor_plngrou_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "plan_groupunit_job"
+        x_table_name = "owner_groupunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name)
 
         # WHEN
-        insert_job_plngrou(cursor, x_objkeysholder, x_group)
+        insert_job_onrgrou(cursor, x_objkeysholder, x_group)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -626,10 +626,10 @@ def test_insert_job_plngrou_CreatesTableRowsFor_plngrou_job():
         assert rows == expected_data
 
 
-def test_insert_job_plnawar_CreatesTableRowsFor_plnawar_job():
+def test_insert_job_onrawar_CreatesTableRowsFor_onrawar_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_plan_calc_dimen_args("plan_concept_awardlink")
+    # x_args = get_owner_calc_dimen_args("owner_plan_awardlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -659,12 +659,12 @@ def test_insert_job_plnawar_CreatesTableRowsFor_plnawar_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "plan_concept_awardlink_job"
+        x_table_name = "owner_plan_awardlink_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name, x_rope)
 
         # WHEN
-        insert_job_plnawar(cursor, x_objkeysholder, x_awardheir)
+        insert_job_onrawar(cursor, x_objkeysholder, x_awardheir)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -685,10 +685,10 @@ def test_insert_job_plnawar_CreatesTableRowsFor_plnawar_job():
         assert rows == expected_data
 
 
-def test_insert_job_plnfact_CreatesTableRowsFor_plnfact_job():
+def test_insert_job_onrfact_CreatesTableRowsFor_onrfact_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_plan_calc_dimen_args("plan_concept_factunit")
+    # x_args = get_owner_calc_dimen_args("owner_plan_factunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -716,12 +716,12 @@ def test_insert_job_plnfact_CreatesTableRowsFor_plnfact_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "plan_concept_factunit_job"
+        x_table_name = "owner_plan_factunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name, x_rope)
 
         # WHEN
-        insert_job_plnfact(cursor, x_objkeysholder, x_factheir)
+        insert_job_onrfact(cursor, x_objkeysholder, x_factheir)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -741,10 +741,10 @@ def test_insert_job_plnfact_CreatesTableRowsFor_plnfact_job():
         assert rows == expected_data
 
 
-def test_insert_job_plnheal_CreatesTableRowsFor_plnheal_job():
+def test_insert_job_onrheal_CreatesTableRowsFor_onrheal_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_plan_calc_dimen_args("plan_concept_healerlink")
+    # x_args = get_owner_calc_dimen_args("owner_plan_healerlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -768,12 +768,12 @@ def test_insert_job_plnheal_CreatesTableRowsFor_plnheal_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "plan_concept_healerlink_job"
+        x_table_name = "owner_plan_healerlink_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name, x_rope)
 
         # WHEN
-        insert_job_plnheal(cursor, x_objkeysholder, x_healerlink)
+        insert_job_onrheal(cursor, x_objkeysholder, x_healerlink)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 2
@@ -796,10 +796,10 @@ def test_insert_job_plnheal_CreatesTableRowsFor_plnheal_job():
         assert rows == expected_data
 
 
-def test_insert_job_plnlabo_CreatesTableRowsFor_plnlabo_job():
+def test_insert_job_onrlabo_CreatesTableRowsFor_onrlabo_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_plan_calc_dimen_args("plan_concept_laborlink")
+    # x_args = get_owner_calc_dimen_args("owner_plan_laborlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -824,12 +824,12 @@ def test_insert_job_plnlabo_CreatesTableRowsFor_plnlabo_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "plan_concept_laborlink_job"
+        x_table_name = "owner_plan_laborlink_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name, x_rope)
 
         # WHEN
-        insert_job_plnlabo(cursor, x_objkeysholder, x_laborheir)
+        insert_job_onrlabo(cursor, x_objkeysholder, x_laborheir)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 2
@@ -861,63 +861,63 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
     sue_str = "Sue"
     bob_str = "Bob"
     run_str = ";run"
-    sue_plan = planunit_shop(sue_str, a23_str)
-    sue_plan.add_acctunit(sue_str)
-    sue_plan.add_acctunit(bob_str)
-    sue_plan.get_acct(bob_str).add_membership(run_str)
-    casa_rope = sue_plan.make_l1_rope("casa")
-    status_rope = sue_plan.make_l1_rope("status")
-    clean_rope = sue_plan.make_rope(status_rope, "clean")
-    dirty_rope = sue_plan.make_rope(status_rope, "dirty")
-    sue_plan.add_concept(casa_rope)
-    sue_plan.add_concept(clean_rope)
-    sue_plan.add_concept(dirty_rope)
-    sue_plan.edit_concept_attr(
+    sue_owner = ownerunit_shop(sue_str, a23_str)
+    sue_owner.add_acctunit(sue_str)
+    sue_owner.add_acctunit(bob_str)
+    sue_owner.get_acct(bob_str).add_membership(run_str)
+    casa_rope = sue_owner.make_l1_rope("casa")
+    status_rope = sue_owner.make_l1_rope("status")
+    clean_rope = sue_owner.make_rope(status_rope, "clean")
+    dirty_rope = sue_owner.make_rope(status_rope, "dirty")
+    sue_owner.add_plan(casa_rope)
+    sue_owner.add_plan(clean_rope)
+    sue_owner.add_plan(dirty_rope)
+    sue_owner.edit_plan_attr(
         casa_rope, reason_rcontext=status_rope, reason_premise=dirty_rope
     )
-    sue_plan.edit_concept_attr(casa_rope, awardlink=awardlink_shop(run_str))
-    sue_plan.edit_concept_attr(casa_rope, healerlink=healerlink_shop({bob_str}))
-    sue_plan.edit_concept_attr(casa_rope, laborunit=laborunit_shop({sue_str}))
-    sue_plan.add_fact(status_rope, clean_rope)
+    sue_owner.edit_plan_attr(casa_rope, awardlink=awardlink_shop(run_str))
+    sue_owner.edit_plan_attr(casa_rope, healerlink=healerlink_shop({bob_str}))
+    sue_owner.edit_plan_attr(casa_rope, laborunit=laborunit_shop({sue_str}))
+    sue_owner.add_fact(status_rope, clean_rope)
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        plnmemb_job_table = "plan_acct_membership_job"
-        plnacct_job_table = "plan_acctunit_job"
-        plngrou_job_table = "plan_groupunit_job"
-        plnawar_job_table = "plan_concept_awardlink_job"
-        plnfact_job_table = "plan_concept_factunit_job"
-        plnheal_job_table = "plan_concept_healerlink_job"
-        plnprem_job_table = "plan_concept_reason_premiseunit_job"
-        plnreas_job_table = "plan_concept_reasonunit_job"
-        plnlabo_job_table = "plan_concept_laborlink_job"
-        plnconc_job_table = "plan_conceptunit_job"
-        plnunit_job_table = "planunit_job"
-        assert get_row_count(cursor, plnunit_job_table) == 0
-        assert get_row_count(cursor, plnconc_job_table) == 0
-        assert get_row_count(cursor, plnacct_job_table) == 0
-        assert get_row_count(cursor, plnmemb_job_table) == 0
-        assert get_row_count(cursor, plngrou_job_table) == 0
-        assert get_row_count(cursor, plnawar_job_table) == 0
-        assert get_row_count(cursor, plnfact_job_table) == 0
-        assert get_row_count(cursor, plnheal_job_table) == 0
-        assert get_row_count(cursor, plnreas_job_table) == 0
-        assert get_row_count(cursor, plnprem_job_table) == 0
-        assert get_row_count(cursor, plnlabo_job_table) == 0
+        onrmemb_job_table = "owner_acct_membership_job"
+        onracct_job_table = "owner_acctunit_job"
+        onrgrou_job_table = "owner_groupunit_job"
+        onrawar_job_table = "owner_plan_awardlink_job"
+        onrfact_job_table = "owner_plan_factunit_job"
+        onrheal_job_table = "owner_plan_healerlink_job"
+        onrprem_job_table = "owner_plan_reason_premiseunit_job"
+        onrreas_job_table = "owner_plan_reasonunit_job"
+        onrlabo_job_table = "owner_plan_laborlink_job"
+        onrplan_job_table = "owner_planunit_job"
+        onrunit_job_table = "ownerunit_job"
+        assert get_row_count(cursor, onrunit_job_table) == 0
+        assert get_row_count(cursor, onrplan_job_table) == 0
+        assert get_row_count(cursor, onracct_job_table) == 0
+        assert get_row_count(cursor, onrmemb_job_table) == 0
+        assert get_row_count(cursor, onrgrou_job_table) == 0
+        assert get_row_count(cursor, onrawar_job_table) == 0
+        assert get_row_count(cursor, onrfact_job_table) == 0
+        assert get_row_count(cursor, onrheal_job_table) == 0
+        assert get_row_count(cursor, onrreas_job_table) == 0
+        assert get_row_count(cursor, onrprem_job_table) == 0
+        assert get_row_count(cursor, onrlabo_job_table) == 0
 
         # WHEN
-        insert_job_obj(cursor, sue_plan)
+        insert_job_obj(cursor, sue_owner)
 
         # THEN
-        assert get_row_count(cursor, plnunit_job_table) == 1
-        assert get_row_count(cursor, plnconc_job_table) == 5
-        assert get_row_count(cursor, plnacct_job_table) == 2
-        assert get_row_count(cursor, plnmemb_job_table) == 3
-        assert get_row_count(cursor, plngrou_job_table) == 3
-        assert get_row_count(cursor, plnawar_job_table) == 1
-        assert get_row_count(cursor, plnfact_job_table) == 1
-        assert get_row_count(cursor, plnheal_job_table) == 1
-        assert get_row_count(cursor, plnreas_job_table) == 1
-        assert get_row_count(cursor, plnprem_job_table) == 1
-        assert get_row_count(cursor, plnlabo_job_table) == 1
+        assert get_row_count(cursor, onrunit_job_table) == 1
+        assert get_row_count(cursor, onrplan_job_table) == 5
+        assert get_row_count(cursor, onracct_job_table) == 2
+        assert get_row_count(cursor, onrmemb_job_table) == 3
+        assert get_row_count(cursor, onrgrou_job_table) == 3
+        assert get_row_count(cursor, onrawar_job_table) == 1
+        assert get_row_count(cursor, onrfact_job_table) == 1
+        assert get_row_count(cursor, onrheal_job_table) == 1
+        assert get_row_count(cursor, onrreas_job_table) == 1
+        assert get_row_count(cursor, onrprem_job_table) == 1
+        assert get_row_count(cursor, onrlabo_job_table) == 1

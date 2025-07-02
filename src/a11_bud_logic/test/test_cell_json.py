@@ -1,5 +1,5 @@
-from src.a06_plan_logic.plan import planunit_shop
-from src.a06_plan_logic.test._util.a06_str import penny_str
+from src.a06_owner_logic.owner import ownerunit_shop
+from src.a06_owner_logic.test._util.a06_str import penny_str
 from src.a09_pack_logic.test._util.a09_str import event_int_str
 from src.a11_bud_logic.cell import cellunit_get_from_dict, cellunit_shop
 from src.a11_bud_logic.test._util.a11_str import (
@@ -9,8 +9,8 @@ from src.a11_bud_logic.test._util.a11_str import (
     celldepth_str,
     found_facts_str,
     mandate_str,
-    planadjust_str,
-    planevent_facts_str,
+    owneradjust_str,
+    ownerevent_facts_str,
     quota_str,
 )
 from src.a11_bud_logic.test._util.example_factunits import (
@@ -54,8 +54,8 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario0():
         penny_str(),
         quota_str(),
         mandate_str(),
-        planadjust_str(),
-        planevent_facts_str(),
+        owneradjust_str(),
+        ownerevent_facts_str(),
         found_facts_str(),
         boss_facts_str(),
     ]
@@ -66,14 +66,14 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario0():
     assert x_cell_dict.get(penny_str()) == bob_sue_penny2
     assert x_cell_dict.get(quota_str()) == bob_sue_quota300
     assert x_cell_dict.get(mandate_str()) == bob_sue_mandate444
-    bob_sue_plan = planunit_shop(bob_sue_bud_owner)
-    assert x_cell_dict.get(planadjust_str()) == bob_sue_plan.get_dict()
-    assert x_cell_dict.get(planevent_facts_str()) == {}
+    bob_sue_owner = ownerunit_shop(bob_sue_bud_owner)
+    assert x_cell_dict.get(owneradjust_str()) == bob_sue_owner.get_dict()
+    assert x_cell_dict.get(ownerevent_facts_str()) == {}
     assert x_cell_dict.get(found_facts_str()) == {}
     assert x_cell_dict.get(boss_facts_str()) == {}
 
 
-def test_CellUnit_get_dict_ReturnsObj_Scenario1_EmptyPlanAdjust():
+def test_CellUnit_get_dict_ReturnsObj_Scenario1_EmptyOwnerAdjust():
     # ESTABLISH
     yao_str = "Yao"
     bob_str = "Bob"
@@ -93,7 +93,7 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario1_EmptyPlanAdjust():
         bob_sue_quota300,
         mandate=bob_sue_mandate444,
     )
-    x_cellunit.planadjust = None
+    x_cellunit.owneradjust = None
 
     # WHEN
     x_cell_dict = x_cellunit.get_dict()
@@ -107,8 +107,8 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario1_EmptyPlanAdjust():
         penny_str(),
         quota_str(),
         mandate_str(),
-        planadjust_str(),
-        planevent_facts_str(),
+        owneradjust_str(),
+        ownerevent_facts_str(),
         found_facts_str(),
         boss_facts_str(),
     ]
@@ -119,9 +119,9 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario1_EmptyPlanAdjust():
     assert x_cell_dict.get(penny_str()) == bob_sue_penny2
     assert x_cell_dict.get(quota_str()) == bob_sue_quota300
     assert x_cell_dict.get(mandate_str()) == bob_sue_mandate444
-    bob_sue_plan = planunit_shop(sue_str)
-    assert x_cell_dict.get(planadjust_str()) == bob_sue_plan.get_dict()
-    assert x_cell_dict.get(planevent_facts_str()) == {}
+    bob_sue_owner = ownerunit_shop(sue_str)
+    assert x_cell_dict.get(owneradjust_str()) == bob_sue_owner.get_dict()
+    assert x_cell_dict.get(ownerevent_facts_str()) == {}
     assert x_cell_dict.get(found_facts_str()) == {}
     assert x_cell_dict.get(boss_facts_str()) == {}
 
@@ -141,7 +141,7 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario1_WithMoreParameters():
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
     sky_blue_fact = sky_blue_factunit()
-    bob_sue_planevent_factunits = {clean_fact.fcontext: clean_fact}
+    bob_sue_ownerevent_factunits = {clean_fact.fcontext: clean_fact}
     bob_sue_found_factunits = {dirty_fact.fcontext: dirty_fact}
     bob_sue_boss_factunits = {sky_blue_fact.fcontext: sky_blue_fact}
     x_cellunit = cellunit_shop(
@@ -152,7 +152,7 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario1_WithMoreParameters():
         bob_sue_penny2,
         bob_sue_quota300,
         None,
-        bob_sue_planevent_factunits,
+        bob_sue_ownerevent_factunits,
         bob_sue_found_factunits,
         bob_sue_boss_factunits,
         mandate=bob_sue_mandate444,
@@ -170,8 +170,8 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario1_WithMoreParameters():
         penny_str(),
         quota_str(),
         mandate_str(),
-        planadjust_str(),
-        planevent_facts_str(),
+        owneradjust_str(),
+        ownerevent_facts_str(),
         found_facts_str(),
         boss_facts_str(),
     ]
@@ -183,12 +183,13 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario1_WithMoreParameters():
     assert x_cell_dict.get(quota_str()) == bob_sue_quota300
     assert x_cell_dict.get(mandate_str()) == bob_sue_mandate444
     assert (
-        x_cell_dict.get(planadjust_str()) == planunit_shop(bob_sue_bud_owner).get_dict()
+        x_cell_dict.get(owneradjust_str())
+        == ownerunit_shop(bob_sue_bud_owner).get_dict()
     )
-    bob_sue_planevent_fact_dicts = {clean_fact.fcontext: clean_fact.get_dict()}
+    bob_sue_ownerevent_fact_dicts = {clean_fact.fcontext: clean_fact.get_dict()}
     bob_sue_found_fact_dicts = {dirty_fact.fcontext: dirty_fact.get_dict()}
     bob_sue_boss_fact_dicts = {sky_blue_fact.fcontext: sky_blue_fact.get_dict()}
-    assert x_cell_dict.get(planevent_facts_str()) == bob_sue_planevent_fact_dicts
+    assert x_cell_dict.get(ownerevent_facts_str()) == bob_sue_ownerevent_fact_dicts
     assert x_cell_dict.get(found_facts_str()) == bob_sue_found_fact_dicts
     assert x_cell_dict.get(boss_facts_str()) == bob_sue_boss_fact_dicts
     assert len(x_cell_dict) == 11
@@ -208,11 +209,11 @@ def test_CellUnit_get_json_ReturnsObj():
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
     sky_blue_fact = sky_blue_factunit()
-    bob_sue_planevent_factunits = {clean_fact.fcontext: clean_fact}
+    bob_sue_ownerevent_factunits = {clean_fact.fcontext: clean_fact}
     bob_sue_found_factunits = {dirty_fact.fcontext: dirty_fact}
     bob_sue_boss_factunits = {sky_blue_fact.fcontext: sky_blue_fact}
-    bob_sue_plan = planunit_shop(bob_sue_bud_owner)
-    bob_sue_plan.add_acctunit(sue_str)
+    bob_sue_owner = ownerunit_shop(bob_sue_bud_owner)
+    bob_sue_owner.add_acctunit(sue_str)
     x_cellunit = cellunit_shop(
         bob_sue_bud_owner,
         bob_sue_ancestors,
@@ -220,8 +221,8 @@ def test_CellUnit_get_json_ReturnsObj():
         bob_sue_celldepth3,
         bob_sue_penny2,
         bob_sue_quota300,
-        bob_sue_plan,
-        bob_sue_planevent_factunits,
+        bob_sue_owner,
+        bob_sue_ownerevent_factunits,
         bob_sue_found_factunits,
         bob_sue_boss_factunits,
     )
@@ -230,7 +231,7 @@ def test_CellUnit_get_json_ReturnsObj():
     x_cell_json = x_cellunit.get_json()
 
     # THEN
-    assert len(x_cell_json) == 1235
+    assert len(x_cell_json) == 1231
 
 
 def test_cellunit_get_from_dict_ReturnsObj_Scenario0_NoParameters():
@@ -259,11 +260,11 @@ def test_cellunit_get_from_dict_ReturnsObj_Scenario1():
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
     sky_blue_fact = sky_blue_factunit()
-    bob_sue_planevent_factunits = {clean_fact.fcontext: clean_fact}
+    bob_sue_ownerevent_factunits = {clean_fact.fcontext: clean_fact}
     bob_sue_found_factunits = {dirty_fact.fcontext: dirty_fact}
     bob_sue_boss_factunits = {sky_blue_fact.fcontext: sky_blue_fact}
-    bob_sue_plan = planunit_shop(bob_sue_bud_owner)
-    bob_sue_plan.add_acctunit(sue_str)
+    bob_sue_owner = ownerunit_shop(bob_sue_bud_owner)
+    bob_sue_owner.add_acctunit(sue_str)
     bob_sue_cellunit = cellunit_shop(
         bob_sue_bud_owner,
         bob_sue_ancestors,
@@ -271,8 +272,8 @@ def test_cellunit_get_from_dict_ReturnsObj_Scenario1():
         bob_sue_celldepth3,
         bob_sue_penny2,
         bob_sue_quota300,
-        bob_sue_plan,
-        bob_sue_planevent_factunits,
+        bob_sue_owner,
+        bob_sue_ownerevent_factunits,
         bob_sue_found_factunits,
         bob_sue_boss_factunits,
     )

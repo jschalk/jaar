@@ -9,20 +9,20 @@ from src.a00_data_toolbox.file_toolbox import (
     save_file,
 )
 from src.a01_term_logic.term import BeliefLabel, FaceName, OwnerName
-from src.a05_concept_logic.concept import get_default_belief_label
-from src.a06_plan_logic.plan import PlanUnit
-from src.a08_plan_atom_logic.atom import (
-    PlanAtom,
-    get_from_json as planatom_get_from_json,
+from src.a05_plan_logic.plan import get_default_belief_label
+from src.a06_owner_logic.owner import OwnerUnit
+from src.a08_owner_atom_logic.atom import (
+    OwnerAtom,
+    get_from_json as owneratom_get_from_json,
 )
 from src.a09_pack_logic.delta import (
-    PlanDelta,
-    get_plandelta_from_ordered_dict,
-    plandelta_shop,
+    OwnerDelta,
+    get_ownerdelta_from_ordered_dict,
+    ownerdelta_shop,
 )
 
 
-class pack_plan_conflict_Exception(Exception):
+class pack_owner_conflict_Exception(Exception):
     pass
 
 
@@ -40,12 +40,12 @@ class PackUnit:
     belief_label: BeliefLabel = None
     owner_name: OwnerName = None
     _pack_id: int = None
-    _plandelta: PlanDelta = None
+    _ownerdelta: OwnerDelta = None
     _delta_start: int = None
     _packs_dir: str = None
     _atoms_dir: str = None
     event_int: int = None
-    """Represents a per belief_label/event_int PlanDelta for a owner_name"""
+    """Represents a per belief_label/event_int OwnerDelta for a owner_name"""
 
     def set_face(self, x_face_name: FaceName):
         self.face_name = x_face_name
@@ -53,17 +53,17 @@ class PackUnit:
     def del_face(self):
         self.face_name = None
 
-    def set_plandelta(self, x_plandelta: PlanDelta):
-        self._plandelta = x_plandelta
+    def set_ownerdelta(self, x_ownerdelta: OwnerDelta):
+        self._ownerdelta = x_ownerdelta
 
-    def del_plandelta(self):
-        self._plandelta = plandelta_shop()
+    def del_ownerdelta(self):
+        self._ownerdelta = ownerdelta_shop()
 
     def set_delta_start(self, x_delta_start: int):
         self._delta_start = get_init_pack_id_if_None(x_delta_start)
 
-    def planatom_exists(self, x_planatom: PlanAtom):
-        return self._plandelta.planatom_exists(x_planatom)
+    def owneratom_exists(self, x_owneratom: OwnerAtom):
+        return self._ownerdelta.owneratom_exists(x_owneratom)
 
     def get_step_dict(self) -> dict[str, any]:
         return {
@@ -71,12 +71,12 @@ class PackUnit:
             "belief_label": self.belief_label,
             "owner_name": self.owner_name,
             "event_int": self.event_int,
-            "delta": self._plandelta.get_ordered_planatoms(self._delta_start),
+            "delta": self._ownerdelta.get_ordered_owneratoms(self._delta_start),
         }
 
     def get_serializable_dict(self) -> dict[str, dict]:
         total_dict = self.get_step_dict()
-        total_dict["delta"] = self._plandelta.get_ordered_dict()
+        total_dict["delta"] = self._ownerdelta.get_ordered_dict()
         return total_dict
 
     def get_json(self) -> str:
@@ -101,7 +101,7 @@ class PackUnit:
     def _get_num_filename(self, x_number: int) -> str:
         return get_json_filename(x_number)
 
-    def _save_atom_file(self, atom_number: int, x_atom: PlanAtom):
+    def _save_atom_file(self, atom_number: int, x_atom: OwnerAtom):
         x_filename = self._get_num_filename(atom_number)
         save_file(self._atoms_dir, x_filename, x_atom.get_json())
 
@@ -109,9 +109,9 @@ class PackUnit:
         x_filename = self._get_num_filename(atom_number)
         return os_path_exists(create_path(self._atoms_dir, x_filename))
 
-    def _open_atom_file(self, atom_number: int) -> PlanAtom:
+    def _open_atom_file(self, atom_number: int) -> OwnerAtom:
         x_json = open_file(self._atoms_dir, self._get_num_filename(atom_number))
-        return planatom_get_from_json(x_json)
+        return owneratom_get_from_json(x_json)
 
     def _save_pack_file(self):
         x_filename = self._get_num_filename(self._pack_id)
@@ -123,42 +123,42 @@ class PackUnit:
 
     def _save_atom_files(self):
         step_dict = self.get_step_dict()
-        ordered_planatoms = step_dict.get("delta")
-        for order_int, planatom in ordered_planatoms.items():
-            self._save_atom_file(order_int, planatom)
+        ordered_owneratoms = step_dict.get("delta")
+        for order_int, owneratom in ordered_owneratoms.items():
+            self._save_atom_file(order_int, owneratom)
 
     def save_files(self):
         self._save_pack_file()
         self._save_atom_files()
 
-    def _create_plandelta_from_atom_files(self, atom_number_list: list) -> PlanDelta:
-        x_plandelta = plandelta_shop()
+    def _create_ownerdelta_from_atom_files(self, atom_number_list: list) -> OwnerDelta:
+        x_ownerdelta = ownerdelta_shop()
         for atom_number in atom_number_list:
-            x_planatom = self._open_atom_file(atom_number)
-            x_plandelta.set_planatom(x_planatom)
-        self._plandelta = x_plandelta
+            x_owneratom = self._open_atom_file(atom_number)
+            x_ownerdelta.set_owneratom(x_owneratom)
+        self._ownerdelta = x_ownerdelta
 
-    def add_planatom(
+    def add_owneratom(
         self,
         dimen: str,
         crud_str: str,
         jkeys: dict[str, str] = None,
         jvalues: dict[str, str] = None,
     ):
-        self._plandelta.add_planatom(dimen, crud_str, jkeys=jkeys, jvalues=jvalues)
+        self._ownerdelta.add_owneratom(dimen, crud_str, jkeys=jkeys, jvalues=jvalues)
 
-    def get_edited_plan(self, before_plan: PlanUnit) -> PlanUnit:
+    def get_edited_owner(self, before_owner: OwnerUnit) -> OwnerUnit:
         if (
-            self.belief_label != before_plan.belief_label
-            or self.owner_name != before_plan.owner_name
+            self.belief_label != before_owner.belief_label
+            or self.owner_name != before_owner.owner_name
         ):
-            raise pack_plan_conflict_Exception(
-                f"pack plan conflict {self.belief_label} != {before_plan.belief_label} or {self.owner_name} != {before_plan.owner_name}"
+            raise pack_owner_conflict_Exception(
+                f"pack owner conflict {self.belief_label} != {before_owner.belief_label} or {self.owner_name} != {before_owner.owner_name}"
             )
-        return self._plandelta.get_edited_plan(before_plan)
+        return self._ownerdelta.get_edited_owner(before_owner)
 
     def is_empty(self) -> bool:
-        return self._plandelta.is_empty()
+        return self._ownerdelta.is_empty()
 
 
 def packunit_shop(
@@ -166,20 +166,20 @@ def packunit_shop(
     face_name: FaceName = None,
     belief_label: BeliefLabel = None,
     _pack_id: int = None,
-    _plandelta: PlanDelta = None,
+    _ownerdelta: OwnerDelta = None,
     _delta_start: int = None,
     _packs_dir: str = None,
     _atoms_dir: str = None,
     event_int: int = None,
 ) -> PackUnit:
-    _plandelta = plandelta_shop() if _plandelta is None else _plandelta
+    _ownerdelta = ownerdelta_shop() if _ownerdelta is None else _ownerdelta
     belief_label = get_default_belief_label() if belief_label is None else belief_label
     x_packunit = PackUnit(
         face_name=face_name,
         owner_name=owner_name,
         belief_label=belief_label,
         _pack_id=get_init_pack_id_if_None(_pack_id),
-        _plandelta=_plandelta,
+        _ownerdelta=_ownerdelta,
         _packs_dir=_packs_dir,
         _atoms_dir=_atoms_dir,
         event_int=event_int,
@@ -206,7 +206,7 @@ def create_packunit_from_files(
         _pack_id=pack_id,
         _atoms_dir=atoms_dir,
     )
-    x_packunit._create_plandelta_from_atom_files(delta_atom_numbers_list)
+    x_packunit._create_ownerdelta_from_atom_files(delta_atom_numbers_list)
     return x_packunit
 
 
@@ -224,6 +224,6 @@ def get_packunit_from_json(x_json: str) -> PackUnit:
         _atoms_dir=pack_dict.get("atoms_dir"),
         event_int=x_event_int,
     )
-    x_plandelta = get_plandelta_from_ordered_dict(pack_dict.get("delta"))
-    x_packunit.set_plandelta(x_plandelta)
+    x_ownerdelta = get_ownerdelta_from_ordered_dict(pack_dict.get("delta"))
+    x_packunit.set_ownerdelta(x_ownerdelta)
     return x_packunit

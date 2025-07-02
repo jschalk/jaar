@@ -1,7 +1,7 @@
 from os import getcwd as os_getcwd
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a02_finance_logic.test._util.a02_str import knot_str
-from src.a06_plan_logic.test._util.a06_str import (
+from src.a06_owner_logic.test._util.a06_str import (
     acct_name_str,
     belief_label_str,
     fund_iota_str,
@@ -14,8 +14,8 @@ from src.a07_timeline_logic.test._util.a07_str import (
     timeline_label_str,
     yr1_jan1_offset_str,
 )
-from src.a08_plan_atom_logic.atom_config import get_allowed_class_types
-from src.a08_plan_atom_logic.test._util.a08_str import (
+from src.a08_owner_atom_logic.atom_config import get_allowed_class_types
+from src.a08_owner_atom_logic.test._util.a08_str import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,

@@ -1,21 +1,21 @@
 from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import x_is_json
 from src.a03_group_logic.acct import acctunit_shop
-from src.a05_concept_logic.concept import get_default_belief_label
-from src.a06_plan_logic.plan import planunit_shop
-from src.a06_plan_logic.test._util.a06_str import (
+from src.a05_plan_logic.plan import get_default_belief_label
+from src.a06_owner_logic.owner import ownerunit_shop
+from src.a06_owner_logic.test._util.a06_str import (
     acct_cred_points_str,
     acct_debt_points_str,
     acct_name_str,
-    plan_acctunit_str,
+    owner_acctunit_str,
 )
-from src.a08_plan_atom_logic.atom import planatom_shop
-from src.a08_plan_atom_logic.test._util.a08_str import (
+from src.a08_owner_atom_logic.atom import owneratom_shop
+from src.a08_owner_atom_logic.test._util.a08_str import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,
 )
-from src.a09_pack_logic.delta import plandelta_shop
+from src.a09_pack_logic.delta import ownerdelta_shop
 from src.a09_pack_logic.pack import (
     PackUnit,
     get_init_pack_id_if_None,
@@ -29,10 +29,8 @@ from src.a09_pack_logic.test._util.a09_str import (
     face_name_str,
     owner_name_str,
 )
-from src.a09_pack_logic.test._util.example_atoms import (
-    get_atom_example_conceptunit_sports,
-)
-from src.a09_pack_logic.test._util.example_deltas import get_plandelta_sue_example
+from src.a09_pack_logic.test._util.example_atoms import get_atom_example_planunit_sports
+from src.a09_pack_logic.test._util.example_deltas import get_ownerdelta_sue_example
 
 
 def test_init_pack_id_ReturnsObj():
@@ -56,7 +54,7 @@ def test_PackUnit_exists():
     assert not x_packunit.belief_label
     assert not x_packunit.owner_name
     assert not x_packunit._pack_id
-    assert not x_packunit._plandelta
+    assert not x_packunit._ownerdelta
     assert not x_packunit._delta_start
     assert not x_packunit._packs_dir
     assert not x_packunit._atoms_dir
@@ -75,7 +73,7 @@ def test_packunit_shop_ReturnsObjEstablishWithEmptyArgs():
     assert bob_packunit.belief_label == get_default_belief_label()
     assert bob_packunit.owner_name == bob_str
     assert bob_packunit._pack_id == 0
-    assert bob_packunit._plandelta == plandelta_shop()
+    assert bob_packunit._ownerdelta == ownerdelta_shop()
     assert bob_packunit._delta_start == 0
     assert not bob_packunit._packs_dir
     assert not bob_packunit._atoms_dir
@@ -87,7 +85,7 @@ def test_packunit_shop_ReturnsObjEstablishWithNonEmptyArgs():
     bob_str = "Bob"
     bob_pack_id = 13
     sue_str = "Sue"
-    bob_plandelta = get_plandelta_sue_example()
+    bob_ownerdelta = get_ownerdelta_sue_example()
     bob_delta_start = 6
     bob_packs_dir = "exampletext7"
     bob_atoms_dir = "exampletext9"
@@ -100,7 +98,7 @@ def test_packunit_shop_ReturnsObjEstablishWithNonEmptyArgs():
         owner_name=bob_str,
         belief_label=amy45_str,
         _pack_id=bob_pack_id,
-        _plandelta=bob_plandelta,
+        _ownerdelta=bob_ownerdelta,
         _delta_start=bob_delta_start,
         _packs_dir=bob_packs_dir,
         _atoms_dir=bob_atoms_dir,
@@ -112,7 +110,7 @@ def test_packunit_shop_ReturnsObjEstablishWithNonEmptyArgs():
     assert bob_packunit.owner_name == bob_str
     assert bob_packunit.belief_label == amy45_str
     assert bob_packunit._pack_id == bob_pack_id
-    assert bob_packunit._plandelta == bob_plandelta
+    assert bob_packunit._ownerdelta == bob_ownerdelta
     assert bob_packunit._delta_start == bob_delta_start
     assert bob_packunit._packs_dir == bob_packs_dir
     assert bob_packunit._atoms_dir == bob_atoms_dir
@@ -163,19 +161,19 @@ def test_PackUnit_del_face_SetsAttribute():
     assert bob_packunit.face_name is None
 
 
-def test_PackUnit_set_plandelta_SetsAttribute():
+def test_PackUnit_set_ownerdelta_SetsAttribute():
     # ESTABLISH
     bob_str = "Bob"
     bob_packunit = packunit_shop(owner_name=bob_str)
-    assert bob_packunit._plandelta == plandelta_shop()
+    assert bob_packunit._ownerdelta == ownerdelta_shop()
 
     # WHEN
-    x_plandelta = plandelta_shop()
-    x_plandelta.set_planatom(get_atom_example_conceptunit_sports())
-    bob_packunit.set_plandelta(x_plandelta)
+    x_ownerdelta = ownerdelta_shop()
+    x_ownerdelta.set_owneratom(get_atom_example_planunit_sports())
+    bob_packunit.set_ownerdelta(x_ownerdelta)
 
     # THEN
-    assert bob_packunit._plandelta == x_plandelta
+    assert bob_packunit._ownerdelta == x_ownerdelta
 
 
 def test_PackUnit_set_delta_start_SetsAttribute():
@@ -192,41 +190,41 @@ def test_PackUnit_set_delta_start_SetsAttribute():
     assert bob_packunit._delta_start == x_delta_start
 
 
-def test_PackUnit_planatom_exists_ReturnsObj():
+def test_PackUnit_owneratom_exists_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
-    x_plandelta = plandelta_shop()
+    x_ownerdelta = ownerdelta_shop()
     bob_packunit = packunit_shop(owner_name=bob_str)
-    bob_packunit.set_plandelta(x_plandelta)
+    bob_packunit.set_ownerdelta(x_ownerdelta)
 
     # WHEN
-    sports_planatom = get_atom_example_conceptunit_sports()
+    sports_owneratom = get_atom_example_planunit_sports()
 
     # THEN
-    assert bob_packunit.planatom_exists(sports_planatom) is False
+    assert bob_packunit.owneratom_exists(sports_owneratom) is False
 
     # WHEN
-    x_plandelta.set_planatom(sports_planatom)
-    bob_packunit.set_plandelta(x_plandelta)
+    x_ownerdelta.set_owneratom(sports_owneratom)
+    bob_packunit.set_ownerdelta(x_ownerdelta)
 
     # THEN
-    assert bob_packunit.planatom_exists(sports_planatom)
+    assert bob_packunit.owneratom_exists(sports_owneratom)
 
 
-def test_PackUnit_del_plandelta_SetsAttribute():
+def test_PackUnit_del_ownerdelta_SetsAttribute():
     # ESTABLISH
     bob_str = "Bob"
-    x_plandelta = plandelta_shop()
-    x_plandelta.set_planatom(get_atom_example_conceptunit_sports())
-    bob_packunit = packunit_shop(owner_name=bob_str, _plandelta=x_plandelta)
-    assert bob_packunit._plandelta != plandelta_shop()
-    assert bob_packunit._plandelta == x_plandelta
+    x_ownerdelta = ownerdelta_shop()
+    x_ownerdelta.set_owneratom(get_atom_example_planunit_sports())
+    bob_packunit = packunit_shop(owner_name=bob_str, _ownerdelta=x_ownerdelta)
+    assert bob_packunit._ownerdelta != ownerdelta_shop()
+    assert bob_packunit._ownerdelta == x_ownerdelta
 
     # WHEN
-    bob_packunit.del_plandelta()
+    bob_packunit.del_ownerdelta()
 
     # THEN
-    assert bob_packunit._plandelta == plandelta_shop()
+    assert bob_packunit._ownerdelta == ownerdelta_shop()
 
 
 def test_PackUnit_get_step_dict_ReturnsObj_Simple():
@@ -255,15 +253,15 @@ def test_PackUnit_get_step_dict_ReturnsObj_Simple():
 
     delta_str = "delta"
     assert x_dict.get(delta_str) is not None
-    assert x_dict.get(delta_str) == plandelta_shop().get_ordered_planatoms()
+    assert x_dict.get(delta_str) == ownerdelta_shop().get_ordered_owneratoms()
     assert x_dict.get(delta_str) == {}
 
 
-def test_PackUnit_get_step_dict_ReturnsObj_WithPlanDeltaPopulated():
+def test_PackUnit_get_step_dict_ReturnsObj_WithOwnerDeltaPopulated():
     # ESTABLISH
     bob_str = "Bob"
-    sue_plandelta = get_plandelta_sue_example()
-    bob_packunit = packunit_shop(bob_str, _plandelta=sue_plandelta)
+    sue_ownerdelta = get_ownerdelta_sue_example()
+    bob_packunit = packunit_shop(bob_str, _ownerdelta=sue_ownerdelta)
 
     # WHEN
     x_dict = bob_packunit.get_step_dict()
@@ -271,23 +269,23 @@ def test_PackUnit_get_step_dict_ReturnsObj_WithPlanDeltaPopulated():
     # THEN
     delta_str = "delta"
     assert x_dict.get(delta_str) is not None
-    assert x_dict.get(delta_str) == sue_plandelta.get_ordered_planatoms()
-    sue_planatoms_dict = x_dict.get(delta_str)
-    print(f"{len(sue_plandelta.get_sorted_planatoms())=}")
-    print(f"{sue_planatoms_dict.keys()=}")
-    # print(f"{sue_planatoms_dict.get(0)=}")
-    assert sue_planatoms_dict.get(2) is None
-    assert sue_planatoms_dict.get(0) is not None
-    assert sue_planatoms_dict.get(1) is not None
+    assert x_dict.get(delta_str) == sue_ownerdelta.get_ordered_owneratoms()
+    sue_owneratoms_dict = x_dict.get(delta_str)
+    print(f"{len(sue_ownerdelta.get_sorted_owneratoms())=}")
+    print(f"{sue_owneratoms_dict.keys()=}")
+    # print(f"{sue_owneratoms_dict.get(0)=}")
+    assert sue_owneratoms_dict.get(2) is None
+    assert sue_owneratoms_dict.get(0) is not None
+    assert sue_owneratoms_dict.get(1) is not None
 
 
 def test_PackUnit_get_step_dict_ReturnsObj_delta_start():
     # ESTABLISH
     bob_str = "Bob"
-    sue_plandelta = get_plandelta_sue_example()
+    sue_ownerdelta = get_ownerdelta_sue_example()
     x_delta_start = 7
     bob_packunit = packunit_shop(
-        bob_str, _plandelta=sue_plandelta, _delta_start=x_delta_start
+        bob_str, _ownerdelta=sue_ownerdelta, _delta_start=x_delta_start
     )
 
     # WHEN
@@ -296,16 +294,16 @@ def test_PackUnit_get_step_dict_ReturnsObj_delta_start():
     # THEN
     delta_str = "delta"
     assert step_dict.get(delta_str) is not None
-    assert step_dict.get(delta_str) == sue_plandelta.get_ordered_planatoms(
+    assert step_dict.get(delta_str) == sue_ownerdelta.get_ordered_owneratoms(
         x_delta_start
     )
-    sue_planatoms_dict = step_dict.get(delta_str)
-    print(f"{len(sue_plandelta.get_sorted_planatoms())=}")
-    print(f"{sue_planatoms_dict.keys()=}")
-    # print(f"{sue_planatoms_dict.get(0)=}")
-    assert sue_planatoms_dict.get(x_delta_start + 2) is None
-    assert sue_planatoms_dict.get(x_delta_start + 0) is not None
-    assert sue_planatoms_dict.get(x_delta_start + 1) is not None
+    sue_owneratoms_dict = step_dict.get(delta_str)
+    print(f"{len(sue_ownerdelta.get_sorted_owneratoms())=}")
+    print(f"{sue_owneratoms_dict.keys()=}")
+    # print(f"{sue_owneratoms_dict.get(0)=}")
+    assert sue_owneratoms_dict.get(x_delta_start + 2) is None
+    assert sue_owneratoms_dict.get(x_delta_start + 0) is not None
+    assert sue_owneratoms_dict.get(x_delta_start + 1) is not None
 
 
 def test_PackUnit_get_serializable_dict_ReturnsObj_Simple():
@@ -335,11 +333,11 @@ def test_PackUnit_get_serializable_dict_ReturnsObj_Simple():
     assert total_dict.get(delta_str) == {}
 
 
-def test_PackUnit_get_serializable_dict_ReturnsObj_WithPlanDeltaPopulated():
+def test_PackUnit_get_serializable_dict_ReturnsObj_WithOwnerDeltaPopulated():
     # ESTABLISH
     bob_str = "Bob"
-    sue_plandelta = get_plandelta_sue_example()
-    bob_packunit = packunit_shop(bob_str, _plandelta=sue_plandelta)
+    sue_ownerdelta = get_ownerdelta_sue_example()
+    bob_packunit = packunit_shop(bob_str, _ownerdelta=sue_ownerdelta)
 
     # WHEN
     total_dict = bob_packunit.get_serializable_dict()
@@ -348,14 +346,14 @@ def test_PackUnit_get_serializable_dict_ReturnsObj_WithPlanDeltaPopulated():
     print(f"{total_dict=}")
     delta_str = "delta"
     assert total_dict.get(delta_str) is not None
-    assert total_dict.get(delta_str) == sue_plandelta.get_ordered_dict()
+    assert total_dict.get(delta_str) == sue_ownerdelta.get_ordered_dict()
 
 
-def test_PackUnit_get_json_ReturnsObj_WithPlanDeltaPopulated():
+def test_PackUnit_get_json_ReturnsObj_WithOwnerDeltaPopulated():
     # ESTABLISH
     bob_str = "Bob"
-    sue_plandelta = get_plandelta_sue_example()
-    bob_packunit = packunit_shop(bob_str, _plandelta=sue_plandelta)
+    sue_ownerdelta = get_ownerdelta_sue_example()
+    bob_packunit = packunit_shop(bob_str, _ownerdelta=sue_ownerdelta)
 
     # WHEN
     generated_json = bob_packunit.get_json()
@@ -368,7 +366,7 @@ def test_PackUnit_get_json_ReturnsObj_WithPlanDeltaPopulated():
   "delta": {
     "0": {
       "crud": "DELETE",
-      "dimen": "plan_acctunit",
+      "dimen": "owner_acctunit",
       "jkeys": {
         "acct_name": "Sue"
       },
@@ -376,7 +374,7 @@ def test_PackUnit_get_json_ReturnsObj_WithPlanDeltaPopulated():
     },
     "1": {
       "crud": "UPDATE",
-      "dimen": "planunit",
+      "dimen": "ownerunit",
       "jkeys": {},
       "jvalues": {
         "credor_respect": 77
@@ -390,11 +388,11 @@ def test_PackUnit_get_json_ReturnsObj_WithPlanDeltaPopulated():
     assert generated_json == expected_json
 
 
-def test_get_packunit_from_json_ReturnsObj_WithPlanDeltaPopulated():
+def test_get_packunit_from_json_ReturnsObj_WithOwnerDeltaPopulated():
     # ESTABLISH
     bob_str = "Bob"
-    sue_plandelta = get_plandelta_sue_example()
-    bob_packunit = packunit_shop(bob_str, _plandelta=sue_plandelta, event_int=778)
+    sue_ownerdelta = get_ownerdelta_sue_example()
+    bob_packunit = packunit_shop(bob_str, _ownerdelta=sue_ownerdelta, event_int=778)
 
     # WHEN
     generated_bob_packunit = get_packunit_from_json(bob_packunit.get_json())
@@ -404,7 +402,7 @@ def test_get_packunit_from_json_ReturnsObj_WithPlanDeltaPopulated():
     assert generated_bob_packunit.face_name == bob_packunit.face_name
     assert generated_bob_packunit.event_int == bob_packunit.event_int
     assert generated_bob_packunit.belief_label == bob_packunit.belief_label
-    assert generated_bob_packunit._plandelta == bob_packunit._plandelta
+    assert generated_bob_packunit._ownerdelta == bob_packunit._ownerdelta
     assert generated_bob_packunit == bob_packunit
 
 
@@ -412,10 +410,10 @@ def test_PackUnit_get_delta_atom_numbers_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
     yao_str = "Yao"
-    sue_plandelta = get_plandelta_sue_example()
+    sue_ownerdelta = get_ownerdelta_sue_example()
     x_delta_start = 7
     bob_packunit = packunit_shop(bob_str)
-    bob_packunit.set_plandelta(sue_plandelta)
+    bob_packunit.set_ownerdelta(sue_ownerdelta)
     bob_packunit.set_delta_start(x_delta_start)
     bob_packunit.set_face(yao_str)
     x_dict = bob_packunit.get_step_dict()
@@ -431,10 +429,10 @@ def test_PackUnit_get_deltametric_dict_ReturnsObj():
     bob_str = "Bob"
     yao_str = "Yao"
     event5_int = 5550
-    sue_plandelta = get_plandelta_sue_example()
+    sue_ownerdelta = get_ownerdelta_sue_example()
     x_delta_start = 7
     bob_packunit = packunit_shop(bob_str)
-    bob_packunit.set_plandelta(sue_plandelta)
+    bob_packunit.set_ownerdelta(sue_ownerdelta)
     bob_packunit.set_delta_start(x_delta_start)
     bob_packunit.set_face(yao_str)
     bob_packunit.event_int = event5_int
@@ -465,10 +463,10 @@ def test_PackUnit_get_deltametric_json_ReturnsObj():
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
-    sue_plandelta = get_plandelta_sue_example()
+    sue_ownerdelta = get_ownerdelta_sue_example()
     x_delta_start = 7
     bob_packunit = packunit_shop(bob_str)
-    bob_packunit.set_plandelta(sue_plandelta)
+    bob_packunit.set_ownerdelta(sue_ownerdelta)
     bob_packunit.set_delta_start(x_delta_start)
     bob_packunit.set_face(sue_str)
     bob_packunit.set_face(yao_str)
@@ -480,7 +478,7 @@ def test_PackUnit_get_deltametric_json_ReturnsObj():
     assert x_is_json(delta_json)
 
 
-def test_PackUnit_add_planatom_CorrectlySets_PlanUnit_acctunits():
+def test_PackUnit_add_owneratom_CorrectlySets_OwnerUnit_acctunits():
     # ESTABLISH
     bob_str = "Bob"
     bob_packunit = packunit_shop(bob_str)
@@ -494,60 +492,60 @@ def test_PackUnit_add_planatom_CorrectlySets_PlanUnit_acctunits():
     bob_optional_dict = {cw_str: bob_acctunit.get_dict().get(cw_str)}
     bob_optional_dict[dw_str] = bob_acctunit.get_dict().get(dw_str)
     print(f"{bob_required_dict=}")
-    assert bob_packunit._plandelta.planatoms == {}
+    assert bob_packunit._ownerdelta.owneratoms == {}
 
     # WHEN
-    bob_packunit.add_planatom(
-        dimen=plan_acctunit_str(),
+    bob_packunit.add_owneratom(
+        dimen=owner_acctunit_str(),
         crud_str=INSERT_str(),
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
     )
 
     # THEN
-    assert len(bob_packunit._plandelta.planatoms) == 1
+    assert len(bob_packunit._ownerdelta.owneratoms) == 1
     assert (
-        bob_packunit._plandelta.planatoms.get(INSERT_str())
-        .get(plan_acctunit_str())
+        bob_packunit._ownerdelta.owneratoms.get(INSERT_str())
+        .get(owner_acctunit_str())
         .get(bob_str)
         is not None
     )
 
 
-def test_PackUnit_get_edited_plan_ReturnsObj_PlanUnit_insert_acct():
+def test_PackUnit_get_edited_owner_ReturnsObj_OwnerUnit_insert_acct():
     # ESTABLISH
     sue_str = "Sue"
     sue_packunit = packunit_shop(sue_str)
 
-    before_sue_planunit = planunit_shop(sue_str)
+    before_sue_ownerunit = ownerunit_shop(sue_str)
     yao_str = "Yao"
     zia_str = "Zia"
-    before_sue_planunit.add_acctunit(yao_str)
-    assert before_sue_planunit.acct_exists(yao_str)
-    assert before_sue_planunit.acct_exists(zia_str) is False
-    dimen = plan_acctunit_str()
-    x_planatom = planatom_shop(dimen, INSERT_str())
-    x_planatom.set_jkey(acct_name_str(), zia_str)
+    before_sue_ownerunit.add_acctunit(yao_str)
+    assert before_sue_ownerunit.acct_exists(yao_str)
+    assert before_sue_ownerunit.acct_exists(zia_str) is False
+    dimen = owner_acctunit_str()
+    x_owneratom = owneratom_shop(dimen, INSERT_str())
+    x_owneratom.set_jkey(acct_name_str(), zia_str)
     x_acct_cred_points = 55
     x_acct_debt_points = 66
-    x_planatom.set_jvalue("acct_cred_points", x_acct_cred_points)
-    x_planatom.set_jvalue("acct_debt_points", x_acct_debt_points)
-    sue_packunit._plandelta.set_planatom(x_planatom)
-    print(f"{sue_packunit._plandelta.planatoms.keys()=}")
+    x_owneratom.set_jvalue("acct_cred_points", x_acct_cred_points)
+    x_owneratom.set_jvalue("acct_debt_points", x_acct_debt_points)
+    sue_packunit._ownerdelta.set_owneratom(x_owneratom)
+    print(f"{sue_packunit._ownerdelta.owneratoms.keys()=}")
 
     # WHEN
-    after_sue_planunit = sue_packunit.get_edited_plan(before_sue_planunit)
+    after_sue_ownerunit = sue_packunit.get_edited_owner(before_sue_ownerunit)
 
     # THEN
-    yao_acctunit = after_sue_planunit.get_acct(yao_str)
-    zia_acctunit = after_sue_planunit.get_acct(zia_str)
+    yao_acctunit = after_sue_ownerunit.get_acct(yao_str)
+    zia_acctunit = after_sue_ownerunit.get_acct(zia_str)
     assert yao_acctunit is not None
     assert zia_acctunit is not None
     assert zia_acctunit.acct_cred_points == x_acct_cred_points
     assert zia_acctunit.acct_debt_points == x_acct_debt_points
 
 
-def test_PackUnit_get_edited_plan_RaisesErrorWhenpackAttrsAndPlanAttrsAreNotTheSame():
+def test_PackUnit_get_edited_owner_RaisesErrorWhenpackAttrsAndOwnerAttrsAreNotTheSame():
     # ESTABLISH
     yao_str = "Yao"
     xia_str = "Xia"
@@ -555,12 +553,12 @@ def test_PackUnit_get_edited_plan_RaisesErrorWhenpackAttrsAndPlanAttrsAreNotTheS
     bob_packunit = packunit_shop(yao_str, xia_str, belief_label=amy23_str)
     sue_str = "Sue"
     amy45_str = "amy45"
-    before_sue_planunit = planunit_shop(sue_str, belief_label=amy45_str)
+    before_sue_ownerunit = ownerunit_shop(sue_str, belief_label=amy45_str)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        bob_packunit.get_edited_plan(before_sue_planunit)
-    assert str(excinfo.value) == "pack plan conflict amy23 != amy45 or Yao != Sue"
+        bob_packunit.get_edited_owner(before_sue_ownerunit)
+    assert str(excinfo.value) == "pack owner conflict amy23 != amy45 or Yao != Sue"
 
 
 def test_PackUnit_is_empty_ReturnsObj():
@@ -577,45 +575,45 @@ def test_PackUnit_is_empty_ReturnsObj():
     bob_optional_dict = {cw_str: bob_acctunit.get_dict().get(cw_str)}
     bob_optional_dict[dw_str] = bob_acctunit.get_dict().get(dw_str)
     print(f"{bob_required_dict=}")
-    assert bob_packunit._plandelta.planatoms == {}
+    assert bob_packunit._ownerdelta.owneratoms == {}
     assert bob_packunit.is_empty()
 
     # WHEN
-    bob_packunit.add_planatom(
-        dimen=plan_acctunit_str(),
+    bob_packunit.add_owneratom(
+        dimen=owner_acctunit_str(),
         crud_str=INSERT_str(),
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
     )
 
     # THEN
-    assert len(bob_packunit._plandelta.planatoms) == 1
+    assert len(bob_packunit._ownerdelta.owneratoms) == 1
     assert bob_packunit.is_empty() is False
 
     # WHEN
-    bob_packunit._plandelta.planatoms = {}
+    bob_packunit._ownerdelta.owneratoms = {}
 
     # THEN
     assert bob_packunit.is_empty()
 
     # Test for UPDATE_str operation
     bob_packunit_update = packunit_shop(bob_str)
-    bob_packunit_update.add_planatom(
-        dimen=plan_acctunit_str(),
+    bob_packunit_update.add_owneratom(
+        dimen=owner_acctunit_str(),
         crud_str=UPDATE_str(),
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
     )
-    assert len(bob_packunit_update._plandelta.planatoms) == 1
+    assert len(bob_packunit_update._ownerdelta.owneratoms) == 1
     assert bob_packunit_update.is_empty() is False
 
     # Test for DELETE_str operation
     bob_packunit_delete = packunit_shop(bob_str)
-    bob_packunit_delete.add_planatom(
-        dimen=plan_acctunit_str(),
+    bob_packunit_delete.add_owneratom(
+        dimen=owner_acctunit_str(),
         crud_str=DELETE_str(),
         jkeys=bob_required_dict,
         jvalues={},
     )
-    assert len(bob_packunit_delete._plandelta.planatoms) == 1
+    assert len(bob_packunit_delete._ownerdelta.owneratoms) == 1
     assert bob_packunit_delete.is_empty() is False

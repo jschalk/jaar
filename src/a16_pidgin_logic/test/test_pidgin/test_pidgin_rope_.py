@@ -570,7 +570,7 @@ def test_RopeMap_all_otx_parent_ropes_exist_ReturnsObj_RopeTerm():
     assert x_ropemap.all_otx_parent_ropes_exist()
 
 
-def test_RopeMap_is_valid_ReturnsObj_Scenario0_concept_label_str():
+def test_RopeMap_is_valid_ReturnsObj_Scenario0_plan_label_str():
     # ESTABLISH
     x_otx_knot = "/"
     x_inx_knot = ":"

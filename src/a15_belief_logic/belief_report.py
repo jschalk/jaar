@@ -1,8 +1,8 @@
 from pandas import DataFrame, concat as pandas_concat
 from plotly.graph_objects import Figure as plotly_Figure, Table as plotly_Table
-from src.a06_plan_logic.report import (
-    get_plan_acctunits_dataframe,
-    get_plan_agenda_dataframe,
+from src.a06_owner_logic.report import (
+    get_owner_acctunits_dataframe,
+    get_owner_agenda_dataframe,
 )
 from src.a12_hub_toolbox.hub_tool import open_gut_file, open_job_file
 from src.a15_belief_logic.belief import BeliefUnit
@@ -14,12 +14,12 @@ def get_belief_guts_accts_dataframe(x_belief: BeliefUnit) -> DataFrame:
     # for all owners get gut
     gut_dfs = []
     for owner_name in belief_owner_names:
-        gut_plan = open_gut_file(
+        gut_owner = open_gut_file(
             x_belief.belief_mstr_dir, x_belief.belief_label, owner_name
         )
-        gut_plan.settle_plan()
-        df = get_plan_acctunits_dataframe(gut_plan)
-        df.insert(0, "owner_name", gut_plan.owner_name)
+        gut_owner.settle_owner()
+        df = get_owner_acctunits_dataframe(gut_owner)
+        df.insert(0, "owner_name", gut_owner.owner_name)
         gut_dfs.append(df)
     return pandas_concat(gut_dfs, ignore_index=True)
 
@@ -73,8 +73,8 @@ def get_belief_jobs_accts_dataframe(x_belief: BeliefUnit) -> DataFrame:
     job_dfs = []
     for owner_name in belief_owner_names:
         job = open_job_file(x_belief.belief_mstr_dir, x_belief.belief_label, owner_name)
-        job.settle_plan()
-        job_df = get_plan_acctunits_dataframe(job)
+        job.settle_owner()
+        job_df = get_owner_acctunits_dataframe(job)
         job_df.insert(0, "owner_name", job.owner_name)
         job_dfs.append(job_df)
     return pandas_concat(job_dfs, ignore_index=True)
@@ -127,11 +127,11 @@ def get_belief_guts_agenda_dataframe(x_belief: BeliefUnit) -> DataFrame:
     # for all owners get gut
     gut_dfs = []
     for owner_name in belief_owner_names:
-        gut_plan = open_gut_file(
+        gut_owner = open_gut_file(
             x_belief.belief_mstr_dir, x_belief.belief_label, owner_name
         )
-        gut_plan.settle_plan()
-        df = get_plan_agenda_dataframe(gut_plan)
+        gut_owner.settle_owner()
+        df = get_owner_agenda_dataframe(gut_owner)
         gut_dfs.append(df)
     return pandas_concat(gut_dfs, ignore_index=True)
 
@@ -140,7 +140,7 @@ def get_belief_guts_agenda_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
     column_header_list = [
         "owner_name",
         "fund_ratio",
-        "concept_label",
+        "plan_label",
         "parent_rope",
         "begin",
         "close",
@@ -159,7 +159,7 @@ def get_belief_guts_agenda_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
             values=[
                 df.owner_name,
                 df.fund_ratio,
-                df.concept_label,
+                df.plan_label,
                 df.parent_rope,
                 df.begin,
                 df.close,
@@ -189,8 +189,8 @@ def get_belief_jobs_agenda_dataframe(x_belief: BeliefUnit) -> DataFrame:
         job = open_job_file(
             x_belief.belief_mstr_dir, x_belief.belief_label, x_owner_name
         )
-        job.settle_plan()
-        job_df = get_plan_agenda_dataframe(job)
+        job.settle_owner()
+        job_df = get_owner_agenda_dataframe(job)
         job_dfs.append(job_df)
     return pandas_concat(job_dfs, ignore_index=True)
 
@@ -199,7 +199,7 @@ def get_belief_jobs_agenda_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
     column_header_list = [
         "owner_name",
         "fund_ratio",
-        "concept_label",
+        "plan_label",
         "parent_rope",
         "begin",
         "close",
@@ -218,7 +218,7 @@ def get_belief_jobs_agenda_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
             values=[
                 df.owner_name,
                 df.fund_ratio,
-                df.concept_label,
+                df.plan_label,
                 df.parent_rope,
                 df.begin,
                 df.close,
