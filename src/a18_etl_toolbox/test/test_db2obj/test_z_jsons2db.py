@@ -8,14 +8,14 @@ from src.a03_group_logic.group import (
     groupunit_shop,
     membership_shop,
 )
-from src.a04_reason_logic.reason_concept import (
+from src.a04_reason_logic.reason_labor import laborheir_shop, laborunit_shop
+from src.a04_reason_logic.reason_plan import (
     factheir_shop,
     premiseunit_shop,
     reasonheir_shop,
 )
-from src.a04_reason_logic.reason_labor import laborheir_shop, laborunit_shop
-from src.a05_concept_logic.concept import conceptunit_shop
-from src.a05_concept_logic.healer import healerlink_shop
+from src.a05_plan_logic.healer import healerlink_shop
+from src.a05_plan_logic.plan import planunit_shop
 from src.a06_owner_logic.owner import ownerunit_shop
 from src.a18_etl_toolbox.db_obj_owner_tool import (
     ObjKeysHolder,
@@ -126,14 +126,14 @@ def test_insert_job_plnunit_CreatesTableRowsFor_ownerunit_job():
 def test_insert_job_plnconc_CreatesTableRowsFor_plnconc_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_owner_calc_dimen_args("owner_conceptunit")
+    # x_args = get_owner_calc_dimen_args("owner_planunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
     #     print(f"    x_{x_arg} = {x_count}")
     # print("")
     # for x_arg in get_default_sorted_list(x_args):
-    #     print(f"""    x_concept.{x_arg} = x_{x_arg}""")
+    #     print(f"""    x_plan.{x_arg} = x_{x_arg}""")
     # print("")
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
@@ -142,7 +142,7 @@ def test_insert_job_plnconc_CreatesTableRowsFor_plnconc_job():
     x_owner_name = 2
     casa_rope = create_rope(x_belief_label, "casa")
     x_parent_rope = casa_rope
-    x_concept_label = "clean"
+    x_plan_label = "clean"
     x_begin = 5.0
     x_close = 6.0
     x_addin = 7.0
@@ -168,70 +168,70 @@ def test_insert_job_plnconc_CreatesTableRowsFor_plnconc_job():
     x__healerlink_ratio = 27.0
     x__all_acct_cred = 28
     x__all_acct_debt = 29
-    x_concept = conceptunit_shop()
-    x_concept.belief_label = x_belief_label
-    x_concept.parent_rope = x_parent_rope
-    x_concept.concept_label = x_concept_label
-    x_concept.begin = x_begin
-    x_concept.close = x_close
-    x_concept.addin = x_addin
-    x_concept.numor = x_numor
-    x_concept.denom = x_denom
-    x_concept.morph = x_morph
-    x_concept.gogo_want = x_gogo_want
-    x_concept.stop_want = x_stop_want
-    x_concept.mass = x_mass
-    x_concept.task = x_task
-    x_concept.problem_bool = x_problem_bool
-    x_concept._active = x__active
-    x_concept._chore = x__chore
-    x_concept.fund_iota = x_fund_iota
-    x_concept._fund_onset = x__fund_onset
-    x_concept._fund_cease = x__fund_cease
-    x_concept._fund_ratio = x__fund_ratio
-    x_concept._gogo_calc = x__gogo_calc
-    x_concept._stop_calc = x__stop_calc
-    x_concept._level = x__level
-    x_concept._range_evaluated = x__range_evaluated
-    x_concept._descendant_task_count = x__descendant_task_count
-    x_concept._healerlink_ratio = x__healerlink_ratio
-    x_concept._all_acct_cred = x__all_acct_cred
-    x_concept._all_acct_debt = x__all_acct_debt
-    x_concept.begin = x_begin
-    x_concept.close = x_close
-    x_concept.addin = x_addin
-    x_concept.numor = x_numor
-    x_concept.denom = x_denom
-    x_concept.morph = x_morph
-    x_concept.gogo_want = x_gogo_want
-    x_concept.stop_want = x_stop_want
-    x_concept.mass = x_mass
-    x_concept.task = x_task
-    x_concept.problem_bool = x_problem_bool
-    x_concept._active = x__active
-    x_concept._chore = x__chore
-    x_concept.fund_iota = x_fund_iota
-    x_concept._fund_onset = x__fund_onset
-    x_concept._fund_cease = x__fund_cease
-    x_concept._fund_ratio = x__fund_ratio
-    x_concept._gogo_calc = x__gogo_calc
-    x_concept._stop_calc = x__stop_calc
-    x_concept._level = x__level
-    x_concept._range_evaluated = x__range_evaluated
-    x_concept._descendant_task_count = x__descendant_task_count
-    x_concept._healerlink_ratio = x__healerlink_ratio
-    x_concept._all_acct_cred = x__all_acct_cred
-    x_concept._all_acct_debt = x__all_acct_debt
+    x_plan = planunit_shop()
+    x_plan.belief_label = x_belief_label
+    x_plan.parent_rope = x_parent_rope
+    x_plan.plan_label = x_plan_label
+    x_plan.begin = x_begin
+    x_plan.close = x_close
+    x_plan.addin = x_addin
+    x_plan.numor = x_numor
+    x_plan.denom = x_denom
+    x_plan.morph = x_morph
+    x_plan.gogo_want = x_gogo_want
+    x_plan.stop_want = x_stop_want
+    x_plan.mass = x_mass
+    x_plan.task = x_task
+    x_plan.problem_bool = x_problem_bool
+    x_plan._active = x__active
+    x_plan._chore = x__chore
+    x_plan.fund_iota = x_fund_iota
+    x_plan._fund_onset = x__fund_onset
+    x_plan._fund_cease = x__fund_cease
+    x_plan._fund_ratio = x__fund_ratio
+    x_plan._gogo_calc = x__gogo_calc
+    x_plan._stop_calc = x__stop_calc
+    x_plan._level = x__level
+    x_plan._range_evaluated = x__range_evaluated
+    x_plan._descendant_task_count = x__descendant_task_count
+    x_plan._healerlink_ratio = x__healerlink_ratio
+    x_plan._all_acct_cred = x__all_acct_cred
+    x_plan._all_acct_debt = x__all_acct_debt
+    x_plan.begin = x_begin
+    x_plan.close = x_close
+    x_plan.addin = x_addin
+    x_plan.numor = x_numor
+    x_plan.denom = x_denom
+    x_plan.morph = x_morph
+    x_plan.gogo_want = x_gogo_want
+    x_plan.stop_want = x_stop_want
+    x_plan.mass = x_mass
+    x_plan.task = x_task
+    x_plan.problem_bool = x_problem_bool
+    x_plan._active = x__active
+    x_plan._chore = x__chore
+    x_plan.fund_iota = x_fund_iota
+    x_plan._fund_onset = x__fund_onset
+    x_plan._fund_cease = x__fund_cease
+    x_plan._fund_ratio = x__fund_ratio
+    x_plan._gogo_calc = x__gogo_calc
+    x_plan._stop_calc = x__stop_calc
+    x_plan._level = x__level
+    x_plan._range_evaluated = x__range_evaluated
+    x_plan._descendant_task_count = x__descendant_task_count
+    x_plan._healerlink_ratio = x__healerlink_ratio
+    x_plan._all_acct_cred = x__all_acct_cred
+    x_plan._all_acct_debt = x__all_acct_debt
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "owner_conceptunit_job"
+        x_table_name = "owner_planunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name)
 
         # WHEN
-        insert_job_plnconc(cursor, x_objkeysholder, x_concept)
+        insert_job_plnconc(cursor, x_objkeysholder, x_plan)
 
         # THEN
         clean_rope = create_rope(casa_rope, "clean")
@@ -276,7 +276,7 @@ def test_insert_job_plnconc_CreatesTableRowsFor_plnconc_job():
 def test_insert_job_plnreas_CreatesTableRowsFor_plnreas_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_owner_calc_dimen_args("owner_concept_reasonunit")
+    # x_args = get_owner_calc_dimen_args("owner_plan_reasonunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -293,21 +293,21 @@ def test_insert_job_plnreas_CreatesTableRowsFor_plnreas_job():
     x_owner_name = 2
     x_rope = 3
     x_rcontext = 4
-    x_rconcept_active_requisite = 5
+    x_rplan_active_requisite = 5
     x__chore = 6
     x__status = 7
-    x__rconcept_active_value = 8
+    x__rplan_active_value = 8
     x_reasonheir = reasonheir_shop(rcontext=x_rcontext)
     x_reasonheir.rcontext = x_rcontext
-    x_reasonheir.rconcept_active_requisite = x_rconcept_active_requisite
+    x_reasonheir.rplan_active_requisite = x_rplan_active_requisite
     x_reasonheir._chore = x__chore
     x_reasonheir._status = x__status
-    x_reasonheir._rconcept_active_value = x__rconcept_active_value
+    x_reasonheir._rplan_active_value = x__rplan_active_value
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "owner_concept_reasonunit_job"
+        x_table_name = "owner_plan_reasonunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name, x_rope)
 
@@ -324,10 +324,10 @@ def test_insert_job_plnreas_CreatesTableRowsFor_plnreas_job():
             str(x_owner_name),
             str(x_rope),
             str(x_rcontext),
-            x_rconcept_active_requisite,
+            x_rplan_active_requisite,
             x__chore,
             x__status,
-            x__rconcept_active_value,
+            x__rplan_active_value,
         )
         expected_data = [expected_row1]
         assert rows == expected_data
@@ -336,7 +336,7 @@ def test_insert_job_plnreas_CreatesTableRowsFor_plnreas_job():
 def test_insert_job_plnprem_CreatesTableRowsFor_plnprem_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_owner_calc_dimen_args("owner_concept_reason_premiseunit")
+    # x_args = get_owner_calc_dimen_args("owner_plan_reason_premiseunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -369,7 +369,7 @@ def test_insert_job_plnprem_CreatesTableRowsFor_plnprem_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "owner_concept_reason_premiseunit_job"
+        x_table_name = "owner_plan_reason_premiseunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(
             x_belief_label, x_owner_name, x_rope, x_rcontext
@@ -629,7 +629,7 @@ def test_insert_job_plngrou_CreatesTableRowsFor_plngrou_job():
 def test_insert_job_plnawar_CreatesTableRowsFor_plnawar_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_owner_calc_dimen_args("owner_concept_awardlink")
+    # x_args = get_owner_calc_dimen_args("owner_plan_awardlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -659,7 +659,7 @@ def test_insert_job_plnawar_CreatesTableRowsFor_plnawar_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "owner_concept_awardlink_job"
+        x_table_name = "owner_plan_awardlink_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name, x_rope)
 
@@ -688,7 +688,7 @@ def test_insert_job_plnawar_CreatesTableRowsFor_plnawar_job():
 def test_insert_job_plnfact_CreatesTableRowsFor_plnfact_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_owner_calc_dimen_args("owner_concept_factunit")
+    # x_args = get_owner_calc_dimen_args("owner_plan_factunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -716,7 +716,7 @@ def test_insert_job_plnfact_CreatesTableRowsFor_plnfact_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "owner_concept_factunit_job"
+        x_table_name = "owner_plan_factunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name, x_rope)
 
@@ -744,7 +744,7 @@ def test_insert_job_plnfact_CreatesTableRowsFor_plnfact_job():
 def test_insert_job_plnheal_CreatesTableRowsFor_plnheal_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_owner_calc_dimen_args("owner_concept_healerlink")
+    # x_args = get_owner_calc_dimen_args("owner_plan_healerlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -768,7 +768,7 @@ def test_insert_job_plnheal_CreatesTableRowsFor_plnheal_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "owner_concept_healerlink_job"
+        x_table_name = "owner_plan_healerlink_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name, x_rope)
 
@@ -799,7 +799,7 @@ def test_insert_job_plnheal_CreatesTableRowsFor_plnheal_job():
 def test_insert_job_plnlabo_CreatesTableRowsFor_plnlabo_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_owner_calc_dimen_args("owner_concept_laborlink")
+    # x_args = get_owner_calc_dimen_args("owner_plan_laborlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -824,7 +824,7 @@ def test_insert_job_plnlabo_CreatesTableRowsFor_plnlabo_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "owner_concept_laborlink_job"
+        x_table_name = "owner_plan_laborlink_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name, x_rope)
 
@@ -869,15 +869,15 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
     status_rope = sue_owner.make_l1_rope("status")
     clean_rope = sue_owner.make_rope(status_rope, "clean")
     dirty_rope = sue_owner.make_rope(status_rope, "dirty")
-    sue_owner.add_concept(casa_rope)
-    sue_owner.add_concept(clean_rope)
-    sue_owner.add_concept(dirty_rope)
-    sue_owner.edit_concept_attr(
+    sue_owner.add_plan(casa_rope)
+    sue_owner.add_plan(clean_rope)
+    sue_owner.add_plan(dirty_rope)
+    sue_owner.edit_plan_attr(
         casa_rope, reason_rcontext=status_rope, reason_premise=dirty_rope
     )
-    sue_owner.edit_concept_attr(casa_rope, awardlink=awardlink_shop(run_str))
-    sue_owner.edit_concept_attr(casa_rope, healerlink=healerlink_shop({bob_str}))
-    sue_owner.edit_concept_attr(casa_rope, laborunit=laborunit_shop({sue_str}))
+    sue_owner.edit_plan_attr(casa_rope, awardlink=awardlink_shop(run_str))
+    sue_owner.edit_plan_attr(casa_rope, healerlink=healerlink_shop({bob_str}))
+    sue_owner.edit_plan_attr(casa_rope, laborunit=laborunit_shop({sue_str}))
     sue_owner.add_fact(status_rope, clean_rope)
 
     with sqlite3_connect(":memory:") as conn:
@@ -886,13 +886,13 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         plnmemb_job_table = "owner_acct_membership_job"
         plnacct_job_table = "owner_acctunit_job"
         plngrou_job_table = "owner_groupunit_job"
-        plnawar_job_table = "owner_concept_awardlink_job"
-        plnfact_job_table = "owner_concept_factunit_job"
-        plnheal_job_table = "owner_concept_healerlink_job"
-        plnprem_job_table = "owner_concept_reason_premiseunit_job"
-        plnreas_job_table = "owner_concept_reasonunit_job"
-        plnlabo_job_table = "owner_concept_laborlink_job"
-        plnconc_job_table = "owner_conceptunit_job"
+        plnawar_job_table = "owner_plan_awardlink_job"
+        plnfact_job_table = "owner_plan_factunit_job"
+        plnheal_job_table = "owner_plan_healerlink_job"
+        plnprem_job_table = "owner_plan_reason_premiseunit_job"
+        plnreas_job_table = "owner_plan_reasonunit_job"
+        plnlabo_job_table = "owner_plan_laborlink_job"
+        plnconc_job_table = "owner_planunit_job"
         plnunit_job_table = "ownerunit_job"
         assert get_row_count(cursor, plnunit_job_table) == 0
         assert get_row_count(cursor, plnconc_job_table) == 0

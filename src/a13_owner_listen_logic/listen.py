@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from src.a01_term_logic.rope import get_ancestor_ropes, get_root_label_from_rope
 from src.a01_term_logic.term import OwnerName, RopeTerm
 from src.a02_finance_logic.allot import allot_scale
-from src.a05_concept_logic.concept import ConceptUnit
+from src.a05_plan_logic.plan import PlanUnit
 from src.a06_owner_logic.owner import AcctUnit, OwnerUnit
 from src.a12_hub_toolbox.basis_owners import (
     create_empty_owner_from_owner,
@@ -17,19 +17,19 @@ class Missing_debtor_respectException(Exception):
     pass
 
 
-def generate_perspective_agenda(perspective_owner: OwnerUnit) -> list[ConceptUnit]:
-    for x_factunit in perspective_owner.conceptroot.factunits.values():
+def generate_perspective_agenda(perspective_owner: OwnerUnit) -> list[PlanUnit]:
+    for x_factunit in perspective_owner.planroot.factunits.values():
         x_factunit.set_fstate_to_fcontext()
     return list(perspective_owner.get_agenda_dict().values())
 
 
 def _ingest_perspective_agenda(
-    listener: OwnerUnit, agenda: list[ConceptUnit]
+    listener: OwnerUnit, agenda: list[PlanUnit]
 ) -> OwnerUnit:
     debtor_amount = listener.debtor_respect
     ingest_list = generate_ingest_list(agenda, debtor_amount, listener.respect_bit)
-    for ingest_conceptunit in ingest_list:
-        _ingest_single_conceptunit(listener, ingest_conceptunit)
+    for ingest_planunit in ingest_list:
+        _ingest_single_planunit(listener, ingest_planunit)
     return listener
 
 
@@ -56,31 +56,27 @@ def get_speaker_perspective(speaker: OwnerUnit, listener_owner_name: OwnerName):
 
 
 def generate_ingest_list(
-    concept_list: list[ConceptUnit], debtor_amount: float, respect_bit: float
-) -> list[ConceptUnit]:
-    concept_ledger = {
-        x_concept.get_concept_rope(): x_concept.mass for x_concept in concept_list
-    }
-    mass_allot = allot_scale(concept_ledger, debtor_amount, respect_bit)
-    for x_conceptunit in concept_list:
-        x_conceptunit.mass = mass_allot.get(x_conceptunit.get_concept_rope())
-    return concept_list
+    plan_list: list[PlanUnit], debtor_amount: float, respect_bit: float
+) -> list[PlanUnit]:
+    plan_ledger = {x_plan.get_plan_rope(): x_plan.mass for x_plan in plan_list}
+    mass_allot = allot_scale(plan_ledger, debtor_amount, respect_bit)
+    for x_planunit in plan_list:
+        x_planunit.mass = mass_allot.get(x_planunit.get_plan_rope())
+    return plan_list
 
 
-def _ingest_single_conceptunit(listener: OwnerUnit, ingest_conceptunit: ConceptUnit):
-    mass_data = _create_mass_data(listener, ingest_conceptunit.get_concept_rope())
+def _ingest_single_planunit(listener: OwnerUnit, ingest_planunit: PlanUnit):
+    mass_data = _create_mass_data(listener, ingest_planunit.get_plan_rope())
 
-    if listener.concept_exists(ingest_conceptunit.get_concept_rope()) is False:
-        x_parent_rope = ingest_conceptunit.parent_rope
-        listener.set_concept(
-            ingest_conceptunit, x_parent_rope, create_missing_concepts=True
-        )
+    if listener.plan_exists(ingest_planunit.get_plan_rope()) is False:
+        x_parent_rope = ingest_planunit.parent_rope
+        listener.set_plan(ingest_planunit, x_parent_rope, create_missing_plans=True)
 
-    _add_and_replace_conceptunit_masss(
+    _add_and_replace_planunit_masss(
         listener=listener,
         replace_mass_list=mass_data.replace_mass_list,
         add_to_mass_list=mass_data.add_to_mass_list,
-        x_mass=ingest_conceptunit.mass,
+        x_mass=ingest_planunit.mass,
     )
 
 
@@ -98,24 +94,24 @@ def _create_mass_data(listener: OwnerUnit, x_rope: RopeTerm) -> list:
     root_rope = get_root_label_from_rope(x_rope, listener.knot)
     for ancestor_rope in ancestor_ropes:
         if ancestor_rope != root_rope:
-            if listener.concept_exists(ancestor_rope):
+            if listener.plan_exists(ancestor_rope):
                 mass_data.add_to_mass_list.append(ancestor_rope)
             else:
                 mass_data.replace_mass_list.append(ancestor_rope)
     return mass_data
 
 
-def _add_and_replace_conceptunit_masss(
+def _add_and_replace_planunit_masss(
     listener: OwnerUnit,
     replace_mass_list: list[RopeTerm],
     add_to_mass_list: list[RopeTerm],
     x_mass: float,
 ) -> None:
-    for concept_rope in replace_mass_list:
-        listener.edit_concept_attr(concept_rope, mass=x_mass)
-    for concept_rope in add_to_mass_list:
-        x_conceptunit = listener.get_concept_obj(concept_rope)
-        x_conceptunit.mass += x_mass
+    for plan_rope in replace_mass_list:
+        listener.edit_plan_attr(plan_rope, mass=x_mass)
+    for plan_rope in add_to_mass_list:
+        x_planunit = listener.get_plan_obj(plan_rope)
+        x_planunit.mass += x_mass
 
 
 def get_debtors_roll(x_duty: OwnerUnit) -> list[AcctUnit]:
@@ -135,15 +131,15 @@ def get_ordered_debtors_roll(x_owner: OwnerUnit) -> list[AcctUnit]:
 
 
 def migrate_all_facts(src_listener: OwnerUnit, dst_listener: OwnerUnit):
-    for x_factunit in src_listener.conceptroot.factunits.values():
+    for x_factunit in src_listener.planroot.factunits.values():
         fcontext_rope = x_factunit.fcontext
         fstate_rope = x_factunit.fstate
-        if dst_listener.concept_exists(fcontext_rope) is False:
-            rcontext_concept = src_listener.get_concept_obj(fcontext_rope)
-            dst_listener.set_concept(rcontext_concept, rcontext_concept.parent_rope)
-        if dst_listener.concept_exists(fstate_rope) is False:
-            fstate_concept = src_listener.get_concept_obj(fstate_rope)
-            dst_listener.set_concept(fstate_concept, fstate_concept.parent_rope)
+        if dst_listener.plan_exists(fcontext_rope) is False:
+            rcontext_plan = src_listener.get_plan_obj(fcontext_rope)
+            dst_listener.set_plan(rcontext_plan, rcontext_plan.parent_rope)
+        if dst_listener.plan_exists(fstate_rope) is False:
+            fstate_plan = src_listener.get_plan_obj(fstate_rope)
+            dst_listener.set_plan(fstate_plan, fstate_plan.parent_rope)
         dst_listener.add_fact(fcontext_rope, fstate_rope)
 
 
@@ -162,7 +158,7 @@ def listen_to_speaker_fact(
                 fstate=x_factunit.fstate,
                 fopen=x_factunit.fopen,
                 fnigh=x_factunit.fnigh,
-                create_missing_concepts=True,
+                create_missing_plans=True,
             )
 
 
@@ -317,13 +313,13 @@ def fstate_keep_vision_and_listen(
 
 
 def listen_to_vision_agenda(listener: OwnerUnit, vision: OwnerUnit):
-    for x_concept in vision._concept_dict.values():
-        if listener.concept_exists(x_concept.get_concept_rope()) is False:
-            listener.set_concept(x_concept, x_concept.parent_rope)
-        if listener.get_fact(x_concept.get_concept_rope()) is False:
-            listener.set_concept(x_concept, x_concept.parent_rope)
-    for x_fact_rope, x_fact_unit in vision.conceptroot.factunits.items():
-        listener.conceptroot.set_factunit(x_fact_unit)
+    for x_plan in vision._plan_dict.values():
+        if listener.plan_exists(x_plan.get_plan_rope()) is False:
+            listener.set_plan(x_plan, x_plan.parent_rope)
+        if listener.get_fact(x_plan.get_plan_rope()) is False:
+            listener.set_plan(x_plan, x_plan.parent_rope)
+    for x_fact_rope, x_fact_unit in vision.planroot.factunits.items():
+        listener.planroot.set_factunit(x_fact_unit)
     listener.settle_owner()
 
 

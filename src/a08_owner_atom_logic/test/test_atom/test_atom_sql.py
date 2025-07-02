@@ -3,11 +3,11 @@ from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_rowdata
 from src.a01_term_logic.rope import create_rope
 from src.a06_owner_logic.test._util.a06_str import (
-    concept_rope_str,
     fcontext_str,
     fopen_str,
-    owner_concept_factunit_str,
+    owner_plan_factunit_str,
     ownerunit_str,
+    plan_rope_str,
 )
 from src.a08_owner_atom_logic.atom import get_owneratom_from_rowdata, owneratom_shop
 from src.a08_owner_atom_logic.test._util.a08_str import (
@@ -27,7 +27,7 @@ def test_OwnerAtom_get_insert_sqlstr_RaisesErrorWhen_is_valid_False():
     knee_rope = create_rope("a", knee_str)
 
     # WHEN
-    x_dimen = owner_concept_factunit_str()
+    x_dimen = owner_plan_factunit_str()
     update_disc_owneratom = owneratom_shop(x_dimen, UPDATE_str())
     update_disc_owneratom.set_jkey("rcontext", knee_rope)
 
@@ -60,7 +60,7 @@ VALUES (
     assert x_owneratom.get_insert_sqlstr() == example_sqlstr
 
 
-def test_OwnerAtom_get_insert_sqlstr_ReturnsObj_concept_factunit():
+def test_OwnerAtom_get_insert_sqlstr_ReturnsObj_plan_factunit():
     # ESTABLISH
     sports_str = "sports"
     sports_rope = create_rope("a", sports_str)
@@ -69,9 +69,9 @@ def test_OwnerAtom_get_insert_sqlstr_ReturnsObj_concept_factunit():
     knee_str = "knee"
     knee_rope = create_rope("a", knee_str)
     knee_popen = 7
-    x_dimen = owner_concept_factunit_str()
+    x_dimen = owner_plan_factunit_str()
     update_disc_owneratom = owneratom_shop(x_dimen, INSERT_str())
-    update_disc_owneratom.set_jkey(concept_rope_str(), ball_rope)
+    update_disc_owneratom.set_jkey(plan_rope_str(), ball_rope)
     update_disc_owneratom.set_jkey(fcontext_str(), knee_rope)
     update_disc_owneratom.set_jvalue(fopen_str(), knee_popen)
 
@@ -81,7 +81,7 @@ def test_OwnerAtom_get_insert_sqlstr_ReturnsObj_concept_factunit():
     # THEN
     example_sqlstr = f"""
 INSERT INTO {atom_hx_str()} (
-  {x_dimen}_{INSERT_str()}_{concept_rope_str()}
+  {x_dimen}_{INSERT_str()}_{plan_rope_str()}
 , {x_dimen}_{INSERT_str()}_{fcontext_str()}
 , {x_dimen}_{INSERT_str()}_{fopen_str()}
 )
@@ -95,7 +95,7 @@ VALUES (
     assert generated_sqlstr == example_sqlstr
 
 
-def test_get_owneratom_from_rowdata_ReturnsObj_concept_factunit():
+def test_get_owneratom_from_rowdata_ReturnsObj_plan_factunit():
     # ESTABLISH
     sports_str = "sports"
     sports_rope = create_rope("a", sports_str)
@@ -104,9 +104,9 @@ def test_get_owneratom_from_rowdata_ReturnsObj_concept_factunit():
     knee_str = "knee"
     knee_rope = create_rope("a", knee_str)
     knee_fopen = 7
-    x_dimen = owner_concept_factunit_str()
+    x_dimen = owner_plan_factunit_str()
     x_sqlstr = f"""SELECT
-  '{ball_rope}' as {x_dimen}_{INSERT_str()}_{concept_rope_str()}
+  '{ball_rope}' as {x_dimen}_{INSERT_str()}_{plan_rope_str()}
 , '{knee_rope}' as {x_dimen}_{INSERT_str()}_{fcontext_str()}
 , {knee_fopen} as {x_dimen}_{INSERT_str()}_{fopen_str()}
 """
@@ -118,7 +118,7 @@ def test_get_owneratom_from_rowdata_ReturnsObj_concept_factunit():
 
     # THEN
     update_disc_owneratom = owneratom_shop(x_dimen, INSERT_str())
-    update_disc_owneratom.set_jkey(concept_rope_str(), ball_rope)
+    update_disc_owneratom.set_jkey(plan_rope_str(), ball_rope)
     update_disc_owneratom.set_jkey(fcontext_str(), knee_rope)
     update_disc_owneratom.set_jvalue(fopen_str(), knee_fopen)
     assert update_disc_owneratom.dimen == x_owneratom.dimen

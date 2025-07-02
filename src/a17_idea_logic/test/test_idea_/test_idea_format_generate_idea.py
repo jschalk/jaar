@@ -1,18 +1,18 @@
 from src.a01_term_logic.rope import to_rope
-from src.a05_concept_logic.concept import conceptunit_shop
+from src.a05_plan_logic.plan import planunit_shop
 from src.a06_owner_logic.owner import ownerunit_shop
 from src.a06_owner_logic.test._util.a06_str import (
     acct_cred_points_str,
     acct_debt_points_str,
     acct_name_str,
-    concept_rope_str,
     group_cred_points_str,
     group_debt_points_str,
     group_title_str,
     mass_str,
     owner_acct_membership_str,
     owner_acctunit_str,
-    owner_conceptunit_str,
+    owner_planunit_str,
+    plan_rope_str,
     task_str,
 )
 from src.a06_owner_logic.test._util.example_owners import ownerunit_v001
@@ -20,7 +20,7 @@ from src.a08_owner_atom_logic.atom import owneratom_shop
 from src.a08_owner_atom_logic.test._util.a08_str import INSERT_str
 from src.a17_idea_logic.idea import create_idea_df, get_idearef_obj, make_ownerdelta
 from src.a17_idea_logic.idea_config import (
-    idea_format_00013_conceptunit_v0_0_0,
+    idea_format_00013_planunit_v0_0_0,
     idea_format_00020_owner_acct_membership_v0_0_0,
     idea_format_00021_owner_acctunit_v0_0_0,
 )
@@ -143,7 +143,7 @@ def test_make_ownerdelta_Arg_idea_format_00021_owner_acctunit_v0_0_0():
 #     assert len(membership_changunit.get_ordered_owneratoms()) == 10
 
 
-def test_make_ownerdelta_Arg_idea_format_00013_conceptunit_v0_0_0():
+def test_make_ownerdelta_Arg_idea_format_00013_planunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -152,45 +152,45 @@ def test_make_ownerdelta_Arg_idea_format_00013_conceptunit_v0_0_0():
     casa_str = "casa"
     casa_rope = sue_ownerunit.make_l1_rope(casa_str)
     casa_mass = 31
-    sue_ownerunit.set_l1_concept(conceptunit_shop(casa_str, mass=casa_mass))
+    sue_ownerunit.set_l1_plan(planunit_shop(casa_str, mass=casa_mass))
     clean_str = "clean"
     clean_rope = sue_ownerunit.make_rope(casa_rope, clean_str)
-    sue_ownerunit.set_concept(conceptunit_shop(clean_str, task=True), casa_rope)
-    x_idea_name = idea_format_00013_conceptunit_v0_0_0()
-    conceptunit_dataframe = create_idea_df(sue_ownerunit, x_idea_name)
-    conceptunit_csv = conceptunit_dataframe.to_csv(index=False)
+    sue_ownerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
+    x_idea_name = idea_format_00013_planunit_v0_0_0()
+    planunit_dataframe = create_idea_df(sue_ownerunit, x_idea_name)
+    planunit_csv = planunit_dataframe.to_csv(index=False)
 
     # WHEN
-    conceptunit_changunit = make_ownerdelta(conceptunit_csv)
+    planunit_changunit = make_ownerdelta(planunit_csv)
 
     # THEN
-    casa_owneratom = owneratom_shop(owner_conceptunit_str(), INSERT_str())
-    casa_owneratom.set_arg(concept_rope_str(), casa_rope)
+    casa_owneratom = owneratom_shop(owner_planunit_str(), INSERT_str())
+    casa_owneratom.set_arg(plan_rope_str(), casa_rope)
     casa_owneratom.set_arg(task_str(), False)
     casa_owneratom.set_arg(mass_str(), casa_mass)
     print(f"{casa_owneratom=}")
     assert casa_owneratom.get_value(mass_str()) == casa_mass
-    clean_owneratom = owneratom_shop(owner_conceptunit_str(), INSERT_str())
-    clean_owneratom.set_arg(concept_rope_str(), clean_rope)
+    clean_owneratom = owneratom_shop(owner_planunit_str(), INSERT_str())
+    clean_owneratom.set_arg(plan_rope_str(), clean_rope)
     clean_owneratom.set_arg(task_str(), True)
     clean_owneratom.set_arg(mass_str(), 1)
-    assert conceptunit_changunit.owneratom_exists(casa_owneratom)
-    assert conceptunit_changunit.owneratom_exists(clean_owneratom)
-    assert len(conceptunit_changunit.get_ordered_owneratoms()) == 2
+    assert planunit_changunit.owneratom_exists(casa_owneratom)
+    assert planunit_changunit.owneratom_exists(clean_owneratom)
+    assert len(planunit_changunit.get_ordered_owneratoms()) == 2
 
 
-def test_create_idea_df_Arg_idea_format_00013_conceptunit_v0_0_0_Scenario_ownerunit_v001(
+def test_create_idea_df_Arg_idea_format_00013_planunit_v0_0_0_Scenario_ownerunit_v001(
     big_volume,
 ):
     # sourcery skip: no-conditionals-in-tests
     if big_volume:
         # ESTABLISH / WHEN
-        x_idea_name = idea_format_00013_conceptunit_v0_0_0()
+        x_idea_name = idea_format_00013_planunit_v0_0_0()
 
         # WHEN
-        conceptunit_format = create_idea_df(ownerunit_v001(), x_idea_name)
+        planunit_format = create_idea_df(ownerunit_v001(), x_idea_name)
 
         # THEN
-        array_headers = list(conceptunit_format.columns)
+        array_headers = list(planunit_format.columns)
         assert array_headers == get_idearef_obj(x_idea_name).get_headers_list()
-        assert len(conceptunit_format) == 251
+        assert len(planunit_format) == 251

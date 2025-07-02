@@ -23,50 +23,50 @@ def create_legible_list(x_delta: OwnerDelta, x_owner: OwnerUnit) -> list[str]:
     x_list = ["DELETE", "owner_acct_membership"]
     acct_membership_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "owner_conceptunit"]
-    owner_conceptunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "owner_conceptunit"]
-    owner_conceptunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "owner_conceptunit"]
-    owner_conceptunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "owner_planunit"]
+    owner_planunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "owner_planunit"]
+    owner_planunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "owner_planunit"]
+    owner_planunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "owner_concept_awardlink"]
-    owner_concept_awardlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "owner_concept_awardlink"]
-    owner_concept_awardlink_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "owner_concept_awardlink"]
-    owner_concept_awardlink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "owner_plan_awardlink"]
+    owner_plan_awardlink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "owner_plan_awardlink"]
+    owner_plan_awardlink_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "owner_plan_awardlink"]
+    owner_plan_awardlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "owner_concept_reasonunit"]
-    owner_concept_reasonunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "owner_concept_reasonunit"]
-    owner_concept_reasonunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "owner_concept_reasonunit"]
-    owner_concept_reasonunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "owner_plan_reasonunit"]
+    owner_plan_reasonunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "owner_plan_reasonunit"]
+    owner_plan_reasonunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "owner_plan_reasonunit"]
+    owner_plan_reasonunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "owner_concept_reason_premiseunit"]
-    owner_concept_reason_premiseunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "owner_concept_reason_premiseunit"]
-    owner_concept_reason_premiseunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "owner_concept_reason_premiseunit"]
-    owner_concept_reason_premiseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "owner_plan_reason_premiseunit"]
+    owner_plan_reason_premiseunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "owner_plan_reason_premiseunit"]
+    owner_plan_reason_premiseunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "owner_plan_reason_premiseunit"]
+    owner_plan_reason_premiseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "owner_concept_laborlink"]
-    owner_concept_laborlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "owner_concept_laborlink"]
-    owner_concept_laborlink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "owner_plan_laborlink"]
+    owner_plan_laborlink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "owner_plan_laborlink"]
+    owner_plan_laborlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "owner_concept_healerlink"]
-    owner_concept_healerlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "owner_concept_healerlink"]
-    owner_concept_healerlink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "owner_plan_healerlink"]
+    owner_plan_healerlink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "owner_plan_healerlink"]
+    owner_plan_healerlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "owner_concept_factunit"]
-    owner_concept_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "owner_concept_factunit"]
-    owner_concept_factunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "owner_concept_factunit"]
-    owner_concept_factunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "owner_plan_factunit"]
+    owner_plan_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "owner_plan_factunit"]
+    owner_plan_factunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "owner_plan_factunit"]
+    owner_plan_factunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     leg_list = []
     if ownerunit_atom is not None:
@@ -97,87 +97,87 @@ def create_legible_list(x_delta: OwnerDelta, x_owner: OwnerUnit) -> list[str]:
             leg_list, acct_membership_delete_dict, x_owner
         )
 
-    if owner_conceptunit_insert_dict is not None:
-        add_owner_conceptunit_insert_to_legible_list(
-            leg_list, owner_conceptunit_insert_dict, x_owner
+    if owner_planunit_insert_dict is not None:
+        add_owner_planunit_insert_to_legible_list(
+            leg_list, owner_planunit_insert_dict, x_owner
         )
-    if owner_conceptunit_update_dict is not None:
-        add_owner_conceptunit_update_to_legible_list(
-            leg_list, owner_conceptunit_update_dict, x_owner
+    if owner_planunit_update_dict is not None:
+        add_owner_planunit_update_to_legible_list(
+            leg_list, owner_planunit_update_dict, x_owner
         )
-    if owner_conceptunit_delete_dict is not None:
-        add_owner_conceptunit_delete_to_legible_list(
-            leg_list, owner_conceptunit_delete_dict, x_owner
-        )
-
-    if owner_concept_awardlink_insert_dict is not None:
-        add_owner_concept_awardlink_insert_to_legible_list(
-            leg_list, owner_concept_awardlink_insert_dict, x_owner
-        )
-    if owner_concept_awardlink_update_dict is not None:
-        add_owner_concept_awardlink_update_to_legible_list(
-            leg_list, owner_concept_awardlink_update_dict, x_owner
-        )
-    if owner_concept_awardlink_delete_dict is not None:
-        add_owner_concept_awardlink_delete_to_legible_list(
-            leg_list, owner_concept_awardlink_delete_dict, x_owner
+    if owner_planunit_delete_dict is not None:
+        add_owner_planunit_delete_to_legible_list(
+            leg_list, owner_planunit_delete_dict, x_owner
         )
 
-    if owner_concept_reasonunit_insert_dict is not None:
-        add_owner_concept_reasonunit_insert_to_legible_list(
-            leg_list, owner_concept_reasonunit_insert_dict, x_owner
+    if owner_plan_awardlink_insert_dict is not None:
+        add_owner_plan_awardlink_insert_to_legible_list(
+            leg_list, owner_plan_awardlink_insert_dict, x_owner
         )
-    if owner_concept_reasonunit_update_dict is not None:
-        add_owner_concept_reasonunit_update_to_legible_list(
-            leg_list, owner_concept_reasonunit_update_dict, x_owner
+    if owner_plan_awardlink_update_dict is not None:
+        add_owner_plan_awardlink_update_to_legible_list(
+            leg_list, owner_plan_awardlink_update_dict, x_owner
         )
-    if owner_concept_reasonunit_delete_dict is not None:
-        add_owner_concept_reasonunit_delete_to_legible_list(
-            leg_list, owner_concept_reasonunit_delete_dict, x_owner
+    if owner_plan_awardlink_delete_dict is not None:
+        add_owner_plan_awardlink_delete_to_legible_list(
+            leg_list, owner_plan_awardlink_delete_dict, x_owner
         )
 
-    if owner_concept_reason_premiseunit_insert_dict is not None:
+    if owner_plan_reasonunit_insert_dict is not None:
+        add_owner_plan_reasonunit_insert_to_legible_list(
+            leg_list, owner_plan_reasonunit_insert_dict, x_owner
+        )
+    if owner_plan_reasonunit_update_dict is not None:
+        add_owner_plan_reasonunit_update_to_legible_list(
+            leg_list, owner_plan_reasonunit_update_dict, x_owner
+        )
+    if owner_plan_reasonunit_delete_dict is not None:
+        add_owner_plan_reasonunit_delete_to_legible_list(
+            leg_list, owner_plan_reasonunit_delete_dict, x_owner
+        )
+
+    if owner_plan_reason_premiseunit_insert_dict is not None:
         add_owner_reason_premiseunit_insert_to_legible_list(
-            leg_list, owner_concept_reason_premiseunit_insert_dict, x_owner
+            leg_list, owner_plan_reason_premiseunit_insert_dict, x_owner
         )
-    if owner_concept_reason_premiseunit_update_dict is not None:
+    if owner_plan_reason_premiseunit_update_dict is not None:
         add_owner_reason_premiseunit_update_to_legible_list(
-            leg_list, owner_concept_reason_premiseunit_update_dict, x_owner
+            leg_list, owner_plan_reason_premiseunit_update_dict, x_owner
         )
-    if owner_concept_reason_premiseunit_delete_dict is not None:
+    if owner_plan_reason_premiseunit_delete_dict is not None:
         add_owner_reason_premiseunit_delete_to_legible_list(
-            leg_list, owner_concept_reason_premiseunit_delete_dict, x_owner
+            leg_list, owner_plan_reason_premiseunit_delete_dict, x_owner
         )
 
-    if owner_concept_laborlink_insert_dict is not None:
-        add_owner_concept_laborlink_insert_to_legible_list(
-            leg_list, owner_concept_laborlink_insert_dict, x_owner
+    if owner_plan_laborlink_insert_dict is not None:
+        add_owner_plan_laborlink_insert_to_legible_list(
+            leg_list, owner_plan_laborlink_insert_dict, x_owner
         )
-    if owner_concept_laborlink_delete_dict is not None:
-        add_owner_concept_laborlink_delete_to_legible_list(
-            leg_list, owner_concept_laborlink_delete_dict, x_owner
-        )
-
-    if owner_concept_healerlink_insert_dict is not None:
-        add_owner_concept_healerlink_insert_to_legible_list(
-            leg_list, owner_concept_healerlink_insert_dict, x_owner
-        )
-    if owner_concept_healerlink_delete_dict is not None:
-        add_owner_concept_healerlink_delete_to_legible_list(
-            leg_list, owner_concept_healerlink_delete_dict, x_owner
+    if owner_plan_laborlink_delete_dict is not None:
+        add_owner_plan_laborlink_delete_to_legible_list(
+            leg_list, owner_plan_laborlink_delete_dict, x_owner
         )
 
-    if owner_concept_factunit_insert_dict is not None:
-        add_owner_concept_factunit_insert_to_legible_list(
-            leg_list, owner_concept_factunit_insert_dict, x_owner
+    if owner_plan_healerlink_insert_dict is not None:
+        add_owner_plan_healerlink_insert_to_legible_list(
+            leg_list, owner_plan_healerlink_insert_dict, x_owner
         )
-    if owner_concept_factunit_update_dict is not None:
-        add_owner_concept_factunit_update_to_legible_list(
-            leg_list, owner_concept_factunit_update_dict, x_owner
+    if owner_plan_healerlink_delete_dict is not None:
+        add_owner_plan_healerlink_delete_to_legible_list(
+            leg_list, owner_plan_healerlink_delete_dict, x_owner
         )
-    if owner_concept_factunit_delete_dict is not None:
-        add_owner_concept_factunit_delete_to_legible_list(
-            leg_list, owner_concept_factunit_delete_dict, x_owner
+
+    if owner_plan_factunit_insert_dict is not None:
+        add_owner_plan_factunit_insert_to_legible_list(
+            leg_list, owner_plan_factunit_insert_dict, x_owner
+        )
+    if owner_plan_factunit_update_dict is not None:
+        add_owner_plan_factunit_update_to_legible_list(
+            leg_list, owner_plan_factunit_update_dict, x_owner
+        )
+    if owner_plan_factunit_delete_dict is not None:
+        add_owner_plan_factunit_delete_to_legible_list(
+            leg_list, owner_plan_factunit_delete_dict, x_owner
         )
 
     return leg_list
@@ -304,22 +304,22 @@ def add_owner_acct_membership_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_owner_conceptunit_insert_to_legible_list(
-    legible_list: list[str], conceptunit_insert_dict: dict, x_owner: OwnerUnit
+def add_owner_planunit_insert_to_legible_list(
+    legible_list: list[str], planunit_insert_dict: dict, x_owner: OwnerUnit
 ):
     _problem_bool_str = "problem_bool"
-    for conceptunit_atom in conceptunit_insert_dict.values():
-        rope_value = conceptunit_atom.get_value("concept_rope")
-        _addin_value = conceptunit_atom.get_value("addin")
-        _begin_value = conceptunit_atom.get_value("begin")
-        _close_value = conceptunit_atom.get_value("close")
-        _denom_value = conceptunit_atom.get_value("denom")
-        _numor_value = conceptunit_atom.get_value("numor")
-        _problem_bool_value = conceptunit_atom.get_value(_problem_bool_str)
-        _morph_value = conceptunit_atom.get_value("morph")
-        _mass_value = conceptunit_atom.get_value("mass")
-        task_value = conceptunit_atom.get_value("task")
-        x_str = f"Created Concept '{rope_value}'. "
+    for planunit_atom in planunit_insert_dict.values():
+        rope_value = planunit_atom.get_value("plan_rope")
+        _addin_value = planunit_atom.get_value("addin")
+        _begin_value = planunit_atom.get_value("begin")
+        _close_value = planunit_atom.get_value("close")
+        _denom_value = planunit_atom.get_value("denom")
+        _numor_value = planunit_atom.get_value("numor")
+        _problem_bool_value = planunit_atom.get_value(_problem_bool_str)
+        _morph_value = planunit_atom.get_value("morph")
+        _mass_value = planunit_atom.get_value("mass")
+        task_value = planunit_atom.get_value("task")
+        x_str = f"Created Plan '{rope_value}'. "
         if _addin_value is not None:
             x_str += f"addin={_addin_value}."
         if _begin_value is not None:
@@ -342,22 +342,22 @@ def add_owner_conceptunit_insert_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_owner_conceptunit_update_to_legible_list(
-    legible_list: list[str], conceptunit_update_dict: dict, x_owner: OwnerUnit
+def add_owner_planunit_update_to_legible_list(
+    legible_list: list[str], planunit_update_dict: dict, x_owner: OwnerUnit
 ):
     _problem_bool_str = "problem_bool"
-    for conceptunit_atom in conceptunit_update_dict.values():
-        rope_value = conceptunit_atom.get_value("concept_rope")
-        addin_value = conceptunit_atom.get_value("addin")
-        begin_value = conceptunit_atom.get_value("begin")
-        close_value = conceptunit_atom.get_value("close")
-        denom_value = conceptunit_atom.get_value("denom")
-        numor_value = conceptunit_atom.get_value("numor")
-        problem_bool_value = conceptunit_atom.get_value(_problem_bool_str)
-        morph_value = conceptunit_atom.get_value("morph")
-        mass_value = conceptunit_atom.get_value("mass")
-        task_value = conceptunit_atom.get_value("task")
-        x_str = f"Concept '{rope_value}' set these attributes: "
+    for planunit_atom in planunit_update_dict.values():
+        rope_value = planunit_atom.get_value("plan_rope")
+        addin_value = planunit_atom.get_value("addin")
+        begin_value = planunit_atom.get_value("begin")
+        close_value = planunit_atom.get_value("close")
+        denom_value = planunit_atom.get_value("denom")
+        numor_value = planunit_atom.get_value("numor")
+        problem_bool_value = planunit_atom.get_value(_problem_bool_str)
+        morph_value = planunit_atom.get_value("morph")
+        mass_value = planunit_atom.get_value("mass")
+        task_value = planunit_atom.get_value("task")
+        x_str = f"Plan '{rope_value}' set these attributes: "
         if addin_value is not None:
             x_str += f"addin={addin_value}."
         if begin_value is not None:
@@ -380,118 +380,116 @@ def add_owner_conceptunit_update_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_owner_conceptunit_delete_to_legible_list(
-    legible_list: list[str], conceptunit_delete_dict: dict, x_owner: OwnerUnit
+def add_owner_planunit_delete_to_legible_list(
+    legible_list: list[str], planunit_delete_dict: dict, x_owner: OwnerUnit
 ):
-    for conceptunit_atom in conceptunit_delete_dict.values():
-        rope_value = conceptunit_atom.get_value("concept_rope")
-        x_str = f"Concept '{rope_value}' was deleted."
+    for planunit_atom in planunit_delete_dict.values():
+        rope_value = planunit_atom.get_value("plan_rope")
+        x_str = f"Plan '{rope_value}' was deleted."
         legible_list.append(x_str)
 
 
-def add_owner_concept_awardlink_insert_to_legible_list(
-    legible_list: list[str], concept_awardlink_insert_dict: dict, x_owner: OwnerUnit
+def add_owner_plan_awardlink_insert_to_legible_list(
+    legible_list: list[str], plan_awardlink_insert_dict: dict, x_owner: OwnerUnit
 ):
-    for rope_dict in concept_awardlink_insert_dict.values():
-        for concept_awardlink_atom in rope_dict.values():
-            awardee_title_value = concept_awardlink_atom.get_value("awardee_title")
-            rope_value = concept_awardlink_atom.get_value("concept_rope")
-            give_force_value = concept_awardlink_atom.get_value("give_force")
-            take_force_value = concept_awardlink_atom.get_value("take_force")
-            x_str = f"Awardlink created for group {awardee_title_value} for concept '{rope_value}' with give_force={give_force_value} and take_force={take_force_value}."
+    for rope_dict in plan_awardlink_insert_dict.values():
+        for plan_awardlink_atom in rope_dict.values():
+            awardee_title_value = plan_awardlink_atom.get_value("awardee_title")
+            rope_value = plan_awardlink_atom.get_value("plan_rope")
+            give_force_value = plan_awardlink_atom.get_value("give_force")
+            take_force_value = plan_awardlink_atom.get_value("take_force")
+            x_str = f"Awardlink created for group {awardee_title_value} for plan '{rope_value}' with give_force={give_force_value} and take_force={take_force_value}."
             legible_list.append(x_str)
 
 
-def add_owner_concept_awardlink_update_to_legible_list(
-    legible_list: list[str], concept_awardlink_update_dict: dict, x_owner: OwnerUnit
+def add_owner_plan_awardlink_update_to_legible_list(
+    legible_list: list[str], plan_awardlink_update_dict: dict, x_owner: OwnerUnit
 ):
-    for rope_dict in concept_awardlink_update_dict.values():
-        for concept_awardlink_atom in rope_dict.values():
-            awardee_title_value = concept_awardlink_atom.get_value("awardee_title")
-            rope_value = concept_awardlink_atom.get_value("concept_rope")
-            give_force_value = concept_awardlink_atom.get_value("give_force")
-            take_force_value = concept_awardlink_atom.get_value("take_force")
+    for rope_dict in plan_awardlink_update_dict.values():
+        for plan_awardlink_atom in rope_dict.values():
+            awardee_title_value = plan_awardlink_atom.get_value("awardee_title")
+            rope_value = plan_awardlink_atom.get_value("plan_rope")
+            give_force_value = plan_awardlink_atom.get_value("give_force")
+            take_force_value = plan_awardlink_atom.get_value("take_force")
             if give_force_value is not None and take_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_title_value} for concept '{rope_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
+                x_str = f"Awardlink has been set for group {awardee_title_value} for plan '{rope_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
             elif give_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_title_value} for concept '{rope_value}'. Now give_force={give_force_value}."
+                x_str = f"Awardlink has been set for group {awardee_title_value} for plan '{rope_value}'. Now give_force={give_force_value}."
             elif take_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_title_value} for concept '{rope_value}'. Now take_force={take_force_value}."
+                x_str = f"Awardlink has been set for group {awardee_title_value} for plan '{rope_value}'. Now take_force={take_force_value}."
             legible_list.append(x_str)
 
 
-def add_owner_concept_awardlink_delete_to_legible_list(
-    legible_list: list[str], concept_awardlink_delete_dict: dict, x_owner: OwnerUnit
+def add_owner_plan_awardlink_delete_to_legible_list(
+    legible_list: list[str], plan_awardlink_delete_dict: dict, x_owner: OwnerUnit
 ):
-    for rope_dict in concept_awardlink_delete_dict.values():
-        for concept_awardlink_atom in rope_dict.values():
-            awardee_title_value = concept_awardlink_atom.get_value("awardee_title")
-            rope_value = concept_awardlink_atom.get_value("concept_rope")
-            x_str = f"Awardlink for group {awardee_title_value}, concept '{rope_value}' has been deleted."
+    for rope_dict in plan_awardlink_delete_dict.values():
+        for plan_awardlink_atom in rope_dict.values():
+            awardee_title_value = plan_awardlink_atom.get_value("awardee_title")
+            rope_value = plan_awardlink_atom.get_value("plan_rope")
+            x_str = f"Awardlink for group {awardee_title_value}, plan '{rope_value}' has been deleted."
             legible_list.append(x_str)
 
 
-def add_owner_concept_reasonunit_insert_to_legible_list(
-    legible_list: list[str], concept_reasonunit_insert_dict: dict, x_owner: OwnerUnit
+def add_owner_plan_reasonunit_insert_to_legible_list(
+    legible_list: list[str], plan_reasonunit_insert_dict: dict, x_owner: OwnerUnit
 ):
-    for rope_dict in concept_reasonunit_insert_dict.values():
-        for concept_reasonunit_atom in rope_dict.values():
-            rope_value = concept_reasonunit_atom.get_value("concept_rope")
-            rcontext_value = concept_reasonunit_atom.get_value("rcontext")
-            rconcept_active_requisite_value = concept_reasonunit_atom.get_value(
-                "rconcept_active_requisite"
+    for rope_dict in plan_reasonunit_insert_dict.values():
+        for plan_reasonunit_atom in rope_dict.values():
+            rope_value = plan_reasonunit_atom.get_value("plan_rope")
+            rcontext_value = plan_reasonunit_atom.get_value("rcontext")
+            rplan_active_requisite_value = plan_reasonunit_atom.get_value(
+                "rplan_active_requisite"
             )
-            x_str = f"ReasonUnit created for concept '{rope_value}' with rcontext '{rcontext_value}'."
-            if rconcept_active_requisite_value is not None:
-                x_str += (
-                    f" rconcept_active_requisite={rconcept_active_requisite_value}."
-                )
+            x_str = f"ReasonUnit created for plan '{rope_value}' with rcontext '{rcontext_value}'."
+            if rplan_active_requisite_value is not None:
+                x_str += f" rplan_active_requisite={rplan_active_requisite_value}."
             legible_list.append(x_str)
 
 
-def add_owner_concept_reasonunit_update_to_legible_list(
-    legible_list: list[str], concept_reasonunit_update_dict: dict, x_owner: OwnerUnit
+def add_owner_plan_reasonunit_update_to_legible_list(
+    legible_list: list[str], plan_reasonunit_update_dict: dict, x_owner: OwnerUnit
 ):
-    for rope_dict in concept_reasonunit_update_dict.values():
-        for concept_reasonunit_atom in rope_dict.values():
-            rope_value = concept_reasonunit_atom.get_value("concept_rope")
-            rcontext_value = concept_reasonunit_atom.get_value("rcontext")
-            rconcept_active_requisite_value = concept_reasonunit_atom.get_value(
-                "rconcept_active_requisite"
+    for rope_dict in plan_reasonunit_update_dict.values():
+        for plan_reasonunit_atom in rope_dict.values():
+            rope_value = plan_reasonunit_atom.get_value("plan_rope")
+            rcontext_value = plan_reasonunit_atom.get_value("rcontext")
+            rplan_active_requisite_value = plan_reasonunit_atom.get_value(
+                "rplan_active_requisite"
             )
-            if rconcept_active_requisite_value is not None:
-                x_str = f"ReasonUnit rcontext='{rcontext_value}' for concept '{rope_value}' set with rconcept_active_requisite={rconcept_active_requisite_value}."
+            if rplan_active_requisite_value is not None:
+                x_str = f"ReasonUnit rcontext='{rcontext_value}' for plan '{rope_value}' set with rplan_active_requisite={rplan_active_requisite_value}."
             else:
-                x_str = f"ReasonUnit rcontext='{rcontext_value}' for concept '{rope_value}' and no longer checks rcontext active mode."
+                x_str = f"ReasonUnit rcontext='{rcontext_value}' for plan '{rope_value}' and no longer checks rcontext active mode."
             legible_list.append(x_str)
 
 
-def add_owner_concept_reasonunit_delete_to_legible_list(
-    legible_list: list[str], concept_reasonunit_delete_dict: dict, x_owner: OwnerUnit
+def add_owner_plan_reasonunit_delete_to_legible_list(
+    legible_list: list[str], plan_reasonunit_delete_dict: dict, x_owner: OwnerUnit
 ):
-    for rope_dict in concept_reasonunit_delete_dict.values():
-        for concept_reasonunit_atom in rope_dict.values():
-            rope_value = concept_reasonunit_atom.get_value("concept_rope")
-            rcontext_value = concept_reasonunit_atom.get_value("rcontext")
-            x_str = f"ReasonUnit rcontext='{rcontext_value}' for concept '{rope_value}' has been deleted."
+    for rope_dict in plan_reasonunit_delete_dict.values():
+        for plan_reasonunit_atom in rope_dict.values():
+            rope_value = plan_reasonunit_atom.get_value("plan_rope")
+            rcontext_value = plan_reasonunit_atom.get_value("rcontext")
+            x_str = f"ReasonUnit rcontext='{rcontext_value}' for plan '{rope_value}' has been deleted."
             legible_list.append(x_str)
 
 
 def add_owner_reason_premiseunit_insert_to_legible_list(
     legible_list: list[str],
-    concept_reason_premiseunit_insert_dict: dict,
+    plan_reason_premiseunit_insert_dict: dict,
     x_owner: OwnerUnit,
 ):
-    for rope_dict in concept_reason_premiseunit_insert_dict.values():
+    for rope_dict in plan_reason_premiseunit_insert_dict.values():
         for rcontext_dict in rope_dict.values():
-            for concept_reason_premiseunit_atom in rcontext_dict.values():
-                rope_value = concept_reason_premiseunit_atom.get_value("concept_rope")
-                rcontext_value = concept_reason_premiseunit_atom.get_value("rcontext")
-                pstate_value = concept_reason_premiseunit_atom.get_value("pstate")
-                pdivisor_value = concept_reason_premiseunit_atom.get_value("pdivisor")
-                pnigh_value = concept_reason_premiseunit_atom.get_value("pnigh")
-                popen_value = concept_reason_premiseunit_atom.get_value("popen")
-                x_str = f"PremiseUnit '{pstate_value}' created for reason '{rcontext_value}' for concept '{rope_value}'."
+            for plan_reason_premiseunit_atom in rcontext_dict.values():
+                rope_value = plan_reason_premiseunit_atom.get_value("plan_rope")
+                rcontext_value = plan_reason_premiseunit_atom.get_value("rcontext")
+                pstate_value = plan_reason_premiseunit_atom.get_value("pstate")
+                pdivisor_value = plan_reason_premiseunit_atom.get_value("pdivisor")
+                pnigh_value = plan_reason_premiseunit_atom.get_value("pnigh")
+                popen_value = plan_reason_premiseunit_atom.get_value("popen")
+                x_str = f"PremiseUnit '{pstate_value}' created for reason '{rcontext_value}' for plan '{rope_value}'."
                 if popen_value is not None:
                     x_str += f" Popen={popen_value}."
                 if pnigh_value is not None:
@@ -503,19 +501,19 @@ def add_owner_reason_premiseunit_insert_to_legible_list(
 
 def add_owner_reason_premiseunit_update_to_legible_list(
     legible_list: list[str],
-    concept_reason_premiseunit_update_dict: dict,
+    plan_reason_premiseunit_update_dict: dict,
     x_owner: OwnerUnit,
 ):
-    for rope_dict in concept_reason_premiseunit_update_dict.values():
+    for rope_dict in plan_reason_premiseunit_update_dict.values():
         for rcontext_dict in rope_dict.values():
-            for concept_reason_premiseunit_atom in rcontext_dict.values():
-                rope_value = concept_reason_premiseunit_atom.get_value("concept_rope")
-                rcontext_value = concept_reason_premiseunit_atom.get_value("rcontext")
-                pstate_value = concept_reason_premiseunit_atom.get_value("pstate")
-                pdivisor_value = concept_reason_premiseunit_atom.get_value("pdivisor")
-                pnigh_value = concept_reason_premiseunit_atom.get_value("pnigh")
-                popen_value = concept_reason_premiseunit_atom.get_value("popen")
-                x_str = f"PremiseUnit '{pstate_value}' updated for reason '{rcontext_value}' for concept '{rope_value}'."
+            for plan_reason_premiseunit_atom in rcontext_dict.values():
+                rope_value = plan_reason_premiseunit_atom.get_value("plan_rope")
+                rcontext_value = plan_reason_premiseunit_atom.get_value("rcontext")
+                pstate_value = plan_reason_premiseunit_atom.get_value("pstate")
+                pdivisor_value = plan_reason_premiseunit_atom.get_value("pdivisor")
+                pnigh_value = plan_reason_premiseunit_atom.get_value("pnigh")
+                popen_value = plan_reason_premiseunit_atom.get_value("popen")
+                x_str = f"PremiseUnit '{pstate_value}' updated for reason '{rcontext_value}' for plan '{rope_value}'."
                 if popen_value is not None:
                     x_str += f" Popen={popen_value}."
                 if pnigh_value is not None:
@@ -527,82 +525,74 @@ def add_owner_reason_premiseunit_update_to_legible_list(
 
 def add_owner_reason_premiseunit_delete_to_legible_list(
     legible_list: list[str],
-    concept_reason_premiseunit_delete_dict: dict,
+    plan_reason_premiseunit_delete_dict: dict,
     x_owner: OwnerUnit,
 ):
-    for rope_dict in concept_reason_premiseunit_delete_dict.values():
+    for rope_dict in plan_reason_premiseunit_delete_dict.values():
         for rcontext_dict in rope_dict.values():
-            for concept_reason_premiseunit_atom in rcontext_dict.values():
-                rope_value = concept_reason_premiseunit_atom.get_value("concept_rope")
-                rcontext_value = concept_reason_premiseunit_atom.get_value("rcontext")
-                pstate_value = concept_reason_premiseunit_atom.get_value("pstate")
-                x_str = f"PremiseUnit '{pstate_value}' deleted from reason '{rcontext_value}' for concept '{rope_value}'."
+            for plan_reason_premiseunit_atom in rcontext_dict.values():
+                rope_value = plan_reason_premiseunit_atom.get_value("plan_rope")
+                rcontext_value = plan_reason_premiseunit_atom.get_value("rcontext")
+                pstate_value = plan_reason_premiseunit_atom.get_value("pstate")
+                x_str = f"PremiseUnit '{pstate_value}' deleted from reason '{rcontext_value}' for plan '{rope_value}'."
                 legible_list.append(x_str)
 
 
-def add_owner_concept_laborlink_insert_to_legible_list(
-    legible_list: list[str], concept_laborlink_insert_dict: dict, x_owner: OwnerUnit
+def add_owner_plan_laborlink_insert_to_legible_list(
+    legible_list: list[str], plan_laborlink_insert_dict: dict, x_owner: OwnerUnit
 ):
-    for rope_dict in concept_laborlink_insert_dict.values():
-        for concept_laborlink_atom in rope_dict.values():
-            labor_title_value = concept_laborlink_atom.get_value("labor_title")
-            rope_value = concept_laborlink_atom.get_value("concept_rope")
-            x_str = (
-                f"laborlink '{labor_title_value}' created for concept '{rope_value}'."
-            )
+    for rope_dict in plan_laborlink_insert_dict.values():
+        for plan_laborlink_atom in rope_dict.values():
+            labor_title_value = plan_laborlink_atom.get_value("labor_title")
+            rope_value = plan_laborlink_atom.get_value("plan_rope")
+            x_str = f"laborlink '{labor_title_value}' created for plan '{rope_value}'."
             legible_list.append(x_str)
 
 
-def add_owner_concept_laborlink_delete_to_legible_list(
-    legible_list: list[str], concept_laborlink_delete_dict: dict, x_owner: OwnerUnit
+def add_owner_plan_laborlink_delete_to_legible_list(
+    legible_list: list[str], plan_laborlink_delete_dict: dict, x_owner: OwnerUnit
 ):
-    for rope_dict in concept_laborlink_delete_dict.values():
-        for concept_laborlink_atom in rope_dict.values():
-            labor_title_value = concept_laborlink_atom.get_value("labor_title")
-            rope_value = concept_laborlink_atom.get_value("concept_rope")
-            x_str = (
-                f"laborlink '{labor_title_value}' deleted for concept '{rope_value}'."
-            )
+    for rope_dict in plan_laborlink_delete_dict.values():
+        for plan_laborlink_atom in rope_dict.values():
+            labor_title_value = plan_laborlink_atom.get_value("labor_title")
+            rope_value = plan_laborlink_atom.get_value("plan_rope")
+            x_str = f"laborlink '{labor_title_value}' deleted for plan '{rope_value}'."
             legible_list.append(x_str)
 
 
-def add_owner_concept_healerlink_insert_to_legible_list(
-    legible_list: list[str], concept_healerlink_insert_dict: dict, x_owner: OwnerUnit
+def add_owner_plan_healerlink_insert_to_legible_list(
+    legible_list: list[str], plan_healerlink_insert_dict: dict, x_owner: OwnerUnit
 ):
-    for rope_dict in concept_healerlink_insert_dict.values():
-        for concept_healerlink_atom in rope_dict.values():
-            healer_name_value = concept_healerlink_atom.get_value("healer_name")
-            rope_value = concept_healerlink_atom.get_value("concept_rope")
-            x_str = (
-                f"HealerLink '{healer_name_value}' created for concept '{rope_value}'."
-            )
+    for rope_dict in plan_healerlink_insert_dict.values():
+        for plan_healerlink_atom in rope_dict.values():
+            healer_name_value = plan_healerlink_atom.get_value("healer_name")
+            rope_value = plan_healerlink_atom.get_value("plan_rope")
+            x_str = f"HealerLink '{healer_name_value}' created for plan '{rope_value}'."
             legible_list.append(x_str)
 
 
-def add_owner_concept_healerlink_delete_to_legible_list(
-    legible_list: list[str], concept_healerlink_delete_dict: dict, x_owner: OwnerUnit
+def add_owner_plan_healerlink_delete_to_legible_list(
+    legible_list: list[str], plan_healerlink_delete_dict: dict, x_owner: OwnerUnit
 ):
-    for rope_dict in concept_healerlink_delete_dict.values():
-        for concept_healerlink_atom in rope_dict.values():
-            healer_name_value = concept_healerlink_atom.get_value("healer_name")
-            rope_value = concept_healerlink_atom.get_value("concept_rope")
-            x_str = (
-                f"HealerLink '{healer_name_value}' deleted for concept '{rope_value}'."
-            )
+    for rope_dict in plan_healerlink_delete_dict.values():
+        for plan_healerlink_atom in rope_dict.values():
+            healer_name_value = plan_healerlink_atom.get_value("healer_name")
+            rope_value = plan_healerlink_atom.get_value("plan_rope")
+            x_str = f"HealerLink '{healer_name_value}' deleted for plan '{rope_value}'."
             legible_list.append(x_str)
 
 
-def add_owner_concept_factunit_insert_to_legible_list(
-    legible_list: list[str], concept_factunit_insert_dict: dict, x_owner: OwnerUnit
+def add_owner_plan_factunit_insert_to_legible_list(
+    legible_list: list[str], plan_factunit_insert_dict: dict, x_owner: OwnerUnit
 ):
-    for rope_dict in concept_factunit_insert_dict.values():
-        for concept_factunit_atom in rope_dict.values():
-            rope_value = concept_factunit_atom.get_value("concept_rope")
-            fcontext_value = concept_factunit_atom.get_value("fcontext")
-            fstate_value = concept_factunit_atom.get_value("fstate")
-            fnigh_value = concept_factunit_atom.get_value("fnigh")
-            fopen_value = concept_factunit_atom.get_value("fopen")
-            x_str = f"FactUnit '{fstate_value}' created for rcontext '{fcontext_value}' for concept '{rope_value}'."
+    for rope_dict in plan_factunit_insert_dict.values():
+        for plan_factunit_atom in rope_dict.values():
+            rope_value = plan_factunit_atom.get_value("plan_rope")
+            fcontext_value = plan_factunit_atom.get_value("fcontext")
+            fstate_value = plan_factunit_atom.get_value("fstate")
+            fnigh_value = plan_factunit_atom.get_value("fnigh")
+            fopen_value = plan_factunit_atom.get_value("fopen")
+            x_str = f"FactUnit '{fstate_value}' created for rcontext '{fcontext_value}' for plan '{rope_value}'."
             if fopen_value is not None:
                 x_str += f" fopen={fopen_value}."
             if fnigh_value is not None:
@@ -610,17 +600,17 @@ def add_owner_concept_factunit_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_owner_concept_factunit_update_to_legible_list(
-    legible_list: list[str], concept_factunit_update_dict: dict, x_owner: OwnerUnit
+def add_owner_plan_factunit_update_to_legible_list(
+    legible_list: list[str], plan_factunit_update_dict: dict, x_owner: OwnerUnit
 ):
-    for rope_dict in concept_factunit_update_dict.values():
-        for concept_factunit_atom in rope_dict.values():
-            rope_value = concept_factunit_atom.get_value("concept_rope")
-            fcontext_value = concept_factunit_atom.get_value("fcontext")
-            fstate_value = concept_factunit_atom.get_value("fstate")
-            fnigh_value = concept_factunit_atom.get_value("fnigh")
-            fopen_value = concept_factunit_atom.get_value("fopen")
-            x_str = f"FactUnit '{fstate_value}' updated for rcontext '{fcontext_value}' for concept '{rope_value}'."
+    for rope_dict in plan_factunit_update_dict.values():
+        for plan_factunit_atom in rope_dict.values():
+            rope_value = plan_factunit_atom.get_value("plan_rope")
+            fcontext_value = plan_factunit_atom.get_value("fcontext")
+            fstate_value = plan_factunit_atom.get_value("fstate")
+            fnigh_value = plan_factunit_atom.get_value("fnigh")
+            fopen_value = plan_factunit_atom.get_value("fopen")
+            x_str = f"FactUnit '{fstate_value}' updated for rcontext '{fcontext_value}' for plan '{rope_value}'."
             if fopen_value is not None:
                 x_str += f" fopen={fopen_value}."
             if fnigh_value is not None:
@@ -628,13 +618,15 @@ def add_owner_concept_factunit_update_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_owner_concept_factunit_delete_to_legible_list(
-    legible_list: list[str], concept_factunit_delete_dict: dict, x_owner: OwnerUnit
+def add_owner_plan_factunit_delete_to_legible_list(
+    legible_list: list[str], plan_factunit_delete_dict: dict, x_owner: OwnerUnit
 ):
-    for rope_dict in concept_factunit_delete_dict.values():
-        for concept_factunit_atom in rope_dict.values():
-            rope_value = concept_factunit_atom.get_value("concept_rope")
-            fcontext_value = concept_factunit_atom.get_value("fcontext")
-            fstate_value = concept_factunit_atom.get_value("fstate")
-            x_str = f"FactUnit rcontext '{fcontext_value}' deleted for concept '{rope_value}'."
+    for rope_dict in plan_factunit_delete_dict.values():
+        for plan_factunit_atom in rope_dict.values():
+            rope_value = plan_factunit_atom.get_value("plan_rope")
+            fcontext_value = plan_factunit_atom.get_value("fcontext")
+            fstate_value = plan_factunit_atom.get_value("fstate")
+            x_str = (
+                f"FactUnit rcontext '{fcontext_value}' deleted for plan '{rope_value}'."
+            )
             legible_list.append(x_str)

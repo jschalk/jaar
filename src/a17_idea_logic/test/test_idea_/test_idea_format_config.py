@@ -8,7 +8,6 @@ from src.a06_owner_logic.test._util.a06_str import (
     begin_str,
     belief_label_str,
     close_str,
-    concept_rope_str,
     denom_str,
     gogo_want_str,
     group_cred_points_str,
@@ -20,6 +19,7 @@ from src.a06_owner_logic.test._util.a06_str import (
     owner_acctunit_str,
     owner_name_str,
     ownerunit_str,
+    plan_rope_str,
     stop_want_str,
     task_str,
 )
@@ -37,8 +37,8 @@ from src.a17_idea_logic.idea_config import (
     get_idea_format_headers,
     get_idea_formats_dir,
     get_idearef_from_file,
-    idea_format_00013_conceptunit_v0_0_0,
-    idea_format_00019_conceptunit_v0_0_0,
+    idea_format_00013_planunit_v0_0_0,
+    idea_format_00019_planunit_v0_0_0,
     idea_format_00020_owner_acct_membership_v0_0_0,
     idea_format_00021_owner_acctunit_v0_0_0,
 )
@@ -57,8 +57,8 @@ def test_config_str_functions_ReturnsObjs():
     assert idea_format_00021_owner_acctunit_v0_0_0() == x00021_idea
     x00020_idea = "idea_format_00020_owner_acct_membership_v0_0_0"
     assert idea_format_00020_owner_acct_membership_v0_0_0() == x00020_idea
-    x0003_idea = "idea_format_00013_conceptunit_v0_0_0"
-    assert idea_format_00013_conceptunit_v0_0_0() == x0003_idea
+    x0003_idea = "idea_format_00013_planunit_v0_0_0"
+    assert idea_format_00013_planunit_v0_0_0() == x0003_idea
 
 
 def test_get_idea_formats_dir_ReturnsObj():
@@ -130,12 +130,12 @@ def test_get_sorted_headers_str_ReturnsObj():
     )
 
     # ESTABLISH / WHEN
-    br00019_headers = get_sorted_headers_str(idea_format_00019_conceptunit_v0_0_0())
+    br00019_headers = get_sorted_headers_str(idea_format_00019_planunit_v0_0_0())
 
     # THEN
     print(f"{br00019_headers=}")
-    concept_headers_str = "belief_label,owner_name,concept_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want"
-    assert br00019_headers == concept_headers_str
+    plan_headers_str = "belief_label,owner_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want"
+    assert br00019_headers == plan_headers_str
 
 
 def check_sorted_headers_exist(idea_format_filename: str, x_headers: dict):
@@ -249,9 +249,9 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00020_owner_acct_membership
     assert headers_list[7] == group_debt_points_str()
 
 
-def test_get_idearef_obj_HasCorrectAttrs_idea_format_00013_conceptunit_v0_0_0():
+def test_get_idearef_obj_HasCorrectAttrs_idea_format_00013_planunit_v0_0_0():
     # ESTABLISH
-    idea_name = idea_format_00013_conceptunit_v0_0_0()
+    idea_name = idea_format_00013_planunit_v0_0_0()
 
     # WHEN
     format_00003_idearef = get_idearef_obj(idea_name)
@@ -263,14 +263,14 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00013_conceptunit_v0_0_0():
     assert headers_list[1] == face_name_str()
     assert headers_list[2] == belief_label_str()
     assert headers_list[3] == owner_name_str()
-    assert headers_list[4] == concept_rope_str()
+    assert headers_list[4] == plan_rope_str()
     assert headers_list[5] == mass_str()
     assert headers_list[6] == task_str()
 
 
-def test_get_idearef_obj_HasCorrectAttrs_idea_format_00019_conceptunit_v0_0_0():
+def test_get_idearef_obj_HasCorrectAttrs_idea_format_00019_planunit_v0_0_0():
     # ESTABLISH
-    idea_name = idea_format_00019_conceptunit_v0_0_0()
+    idea_name = idea_format_00019_planunit_v0_0_0()
 
     # WHEN
     format_00019_idearef = get_idearef_obj(idea_name)
@@ -282,7 +282,7 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00019_conceptunit_v0_0_0():
     assert headers_list[1] == face_name_str()
     assert headers_list[2] == belief_label_str()
     assert headers_list[3] == owner_name_str()
-    assert headers_list[4] == concept_rope_str()
+    assert headers_list[4] == plan_rope_str()
     assert headers_list[5] == begin_str()
     assert headers_list[6] == close_str()
     assert headers_list[7] == addin_str()

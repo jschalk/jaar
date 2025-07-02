@@ -1,7 +1,7 @@
 from src.a01_term_logic.rope import create_rope_from_labels
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import awardlink_shop
-from src.a05_concept_logic.concept import conceptunit_shop
+from src.a05_plan_logic.plan import planunit_shop
 from src.a06_owner_logic.owner import ownerunit_shop
 from src.a06_owner_logic.test._util.example_owners import ownerunit_v001
 
@@ -20,7 +20,7 @@ def test_OwnerUnit_get_tree_metrics_exists():
     assert zia_owner_tree_metrics.awardlinks_metrics is not None
 
 
-def test_OwnerUnit_get_tree_metrics_get_concept_uid_max_correctlyGetsMaxConceptUID():
+def test_OwnerUnit_get_tree_metrics_get_plan_uid_max_correctlyGetsMaxPlanUID():
     # ESTABLISH
     yao_owner = ownerunit_v001()
 
@@ -29,10 +29,10 @@ def test_OwnerUnit_get_tree_metrics_get_concept_uid_max_correctlyGetsMaxConceptU
 
     # THEN
     assert tree_metrics_x.uid_max == 279
-    assert yao_owner.get_concept_uid_max() == 279
+    assert yao_owner.get_plan_uid_max() == 279
 
 
-def test_OwnerUnit_get_tree_metrics_CorrectlySetsBoolean_all_concept_uids_are_unique():
+def test_OwnerUnit_get_tree_metrics_CorrectlySetsBoolean_all_plan_uids_are_unique():
     # ESTABLISH
     yao_owner = ownerunit_v001()
 
@@ -40,59 +40,59 @@ def test_OwnerUnit_get_tree_metrics_CorrectlySetsBoolean_all_concept_uids_are_un
     tree_metrics_x = yao_owner.get_tree_metrics()
 
     # THEN
-    assert tree_metrics_x.all_concept_uids_are_unique is False
+    assert tree_metrics_x.all_plan_uids_are_unique is False
     assert len(tree_metrics_x.uid_dict) == 219
 
 
-def test_OwnerUnit_get_tree_set_all_concept_uids_unique():
+def test_OwnerUnit_get_tree_set_all_plan_uids_unique():
     # ESTABLISH
     yao_owner = ownerunit_v001()
     tree_metrics_before = yao_owner.get_tree_metrics()
     assert len(tree_metrics_before.uid_dict) == 219
 
     # WHEN
-    yao_owner.set_all_concept_uids_unique()
+    yao_owner.set_all_plan_uids_unique()
 
     # THEN
     tree_metrics_after = yao_owner.get_tree_metrics()
     # for uid, uid_count in tree_metrics_after.uid_dict.items():
-    #     # print(f"{uid=} {uid_count=} {len(yao_owner.get_concept_dict())=}")
+    #     # print(f"{uid=} {uid_count=} {len(yao_owner.get_plan_dict())=}")
     #     print(f"{uid=} {uid_count=} ")
     assert len(tree_metrics_after.uid_dict) == 252
-    assert tree_metrics_after.all_concept_uids_are_unique is True
+    assert tree_metrics_after.all_plan_uids_are_unique is True
 
 
-def test_OwnerUnit_set_all_concept_uids_unique_SetsUIDsCorrectly():
+def test_OwnerUnit_set_all_plan_uids_unique_SetsUIDsCorrectly():
     # ESTABLISH
     zia_str = "Zia"
     zia_owner = ownerunit_shop(owner_name=zia_str)
     swim_str = "swim"
     sports_str = "sports"
-    zia_owner.set_l1_concept(conceptunit_shop(swim_str, _uid=None))
-    zia_owner.set_l1_concept(conceptunit_shop(sports_str, _uid=2))
+    zia_owner.set_l1_plan(planunit_shop(swim_str, _uid=None))
+    zia_owner.set_l1_plan(planunit_shop(sports_str, _uid=2))
     swim_rope = zia_owner.make_l1_rope(swim_str)
-    assert zia_owner.get_concept_obj(swim_rope)._uid is None
+    assert zia_owner.get_plan_obj(swim_rope)._uid is None
 
     # WHEN
-    zia_owner.set_all_concept_uids_unique()
+    zia_owner.set_all_plan_uids_unique()
 
     # THEN
-    assert zia_owner.get_concept_obj(swim_rope)._uid is not None
+    assert zia_owner.get_plan_obj(swim_rope)._uid is not None
 
 
-def test_OwnerUnit_get_tree_metrics_ReturnsANone_task_ConceptRopeTerm():
+def test_OwnerUnit_get_tree_metrics_ReturnsANone_task_PlanRopeTerm():
     # ESTABLISH
     nia_str = "Nia"
     nia_owner = ownerunit_shop(nia_str, tally=10)
     wkdays = "wkdays"
-    nia_owner.set_l1_concept(conceptunit_shop(wkdays, mass=40))
+    nia_owner.set_l1_plan(planunit_shop(wkdays, mass=40))
     tree_metrics_before = nia_owner.get_tree_metrics()
 
     # WHEN / THEN
-    assert tree_metrics_before.last_evaluated_task_concept_rope is None
+    assert tree_metrics_before.last_evaluated_task_plan_rope is None
 
 
-def test_OwnerUnit_get_tree_metrics_Returns_task_ConceptRopeTerm():
+def test_OwnerUnit_get_tree_metrics_Returns_task_PlanRopeTerm():
     # ESTABLISH
     yao_owner = ownerunit_v001()
     yao_tree_metrics = yao_owner.get_tree_metrics()
@@ -107,7 +107,7 @@ def test_OwnerUnit_get_tree_metrics_Returns_task_ConceptRopeTerm():
             "Accomplish Fall 2021 traaining",
         ]
     )
-    assert yao_tree_metrics.last_evaluated_task_concept_rope == traain_rope
+    assert yao_tree_metrics.last_evaluated_task_plan_rope == traain_rope
 
 
 def test_OwnerUnit_get_tree_metrics_TracksReasonsThatHaveNoFactRcontexts():
@@ -149,7 +149,7 @@ def test_OwnerUnit_get_missing_fact_rcontexts_ReturnsAllRcontextsNotCoveredByFac
     assert len(missing_rcontexts) == 11
 
 
-def test_OwnerUnit_3AdvocatesNoconceptunit_shop():
+def test_OwnerUnit_3AdvocatesNoplanunit_shop():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
@@ -163,9 +163,9 @@ def test_OwnerUnit_3AdvocatesNoconceptunit_shop():
     zia_ownerunit.set_acctunit(yao_acctunit)
     zia_ownerunit.set_acctunit(sue_acctunit)
     zia_ownerunit.set_acctunit(zia_acctunit)
-    zia_ownerunit.conceptroot.set_awardlink(awardlink_shop(yao_str, give_force=10))
-    zia_ownerunit.conceptroot.set_awardlink(awardlink_shop(sue_str, give_force=10))
-    zia_ownerunit.conceptroot.set_awardlink(awardlink_shop(zia_str, give_force=10))
+    zia_ownerunit.planroot.set_awardlink(awardlink_shop(yao_str, give_force=10))
+    zia_ownerunit.planroot.set_awardlink(awardlink_shop(sue_str, give_force=10))
+    zia_ownerunit.planroot.set_awardlink(awardlink_shop(zia_str, give_force=10))
 
     # WHEN
     assert zia_ownerunit.get_awardlinks_metrics() is not None

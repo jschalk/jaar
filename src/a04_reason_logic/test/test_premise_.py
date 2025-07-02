@@ -3,7 +3,7 @@ from src.a01_term_logic.rope import (
     find_replace_rope_key_dict,
     get_default_axiom_label as root_label,
 )
-from src.a04_reason_logic.reason_concept import (
+from src.a04_reason_logic.reason_plan import (
     PremiseUnit,
     factheir_shop,
     premises_get_from_dict,

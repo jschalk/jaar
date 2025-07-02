@@ -8,9 +8,9 @@ from src.a09_pack_logic.test._util.a09_env import (
 )
 from src.a09_pack_logic.test._util.a09_str import face_name_str, owner_name_str
 from src.a09_pack_logic.test._util.example_atoms import (
-    get_atom_example_conceptunit_ball,
-    get_atom_example_conceptunit_knee,
-    get_atom_example_conceptunit_sports,
+    get_atom_example_planunit_ball,
+    get_atom_example_planunit_knee,
+    get_atom_example_planunit_sports,
 )
 
 
@@ -34,7 +34,7 @@ def test_PackUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
     assert os_path_exists(sue_atom6_path) is False
 
     # WHEN
-    sports_atom = get_atom_example_conceptunit_sports()
+    sports_atom = get_atom_example_planunit_sports()
     sue_packunit._save_atom_file(two_int, sports_atom)
 
     # THEN
@@ -64,7 +64,7 @@ def test_PackUnit_atom_file_exists_ReturnsObj(env_dir_setup_cleanup):
     assert sue_packunit.atom_file_exists(two_int) is False
 
     # WHEN
-    sports_atom = get_atom_example_conceptunit_sports()
+    sports_atom = get_atom_example_planunit_sports()
     sue_packunit._save_atom_file(two_int, sports_atom)
 
     # THEN
@@ -87,7 +87,7 @@ def test_PackUnit_open_atom_file_ReturnsObj(env_dir_setup_cleanup):
     print(f"{sue_atom2_path=}")
     print(f"{sue_atom6_path=}")
     sue_packunit = packunit_shop(sue_str, _atoms_dir=sue_atoms_dir)
-    sports_atom = get_atom_example_conceptunit_sports()
+    sports_atom = get_atom_example_planunit_sports()
     sue_packunit._save_atom_file(two_int, sports_atom)
     assert sue_packunit.atom_file_exists(two_int)
 
@@ -180,8 +180,8 @@ def test_PackUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
     sue_packunit.set_face(yao_str)
     int4 = 4
     int5 = 5
-    sports_atom = get_atom_example_conceptunit_sports()
-    knee_atom = get_atom_example_conceptunit_knee()
+    sports_atom = get_atom_example_planunit_sports()
+    knee_atom = get_atom_example_planunit_knee()
     sue_packunit._ownerdelta.set_owneratom(sports_atom)
     sue_packunit._ownerdelta.set_owneratom(knee_atom)
     assert sue_packunit.pack_file_exists() is False
@@ -209,9 +209,9 @@ def test_PackUnit_create_ownerdelta_from_atom_files_SetsAttr(env_dir_setup_clean
     int4 = 4
     int5 = 5
     int9 = 9
-    spor_atom = get_atom_example_conceptunit_sports()
-    knee_atom = get_atom_example_conceptunit_knee()
-    ball_atom = get_atom_example_conceptunit_ball()
+    spor_atom = get_atom_example_planunit_sports()
+    knee_atom = get_atom_example_planunit_knee()
+    ball_atom = get_atom_example_planunit_ball()
     sue_packunit._save_atom_file(int4, spor_atom)
     sue_packunit._save_atom_file(int5, knee_atom)
     sue_packunit._save_atom_file(int9, ball_atom)
@@ -246,9 +246,9 @@ def test_create_packunit_from_files_ReturnsObj(env_dir_setup_cleanup):
     )
     src_sue_packunit.set_delta_start(sue_delta_start)
     src_sue_packunit.set_face(yao_str)
-    sports_atom = get_atom_example_conceptunit_sports()
-    knee_atom = get_atom_example_conceptunit_knee()
-    ball_atom = get_atom_example_conceptunit_ball()
+    sports_atom = get_atom_example_planunit_sports()
+    knee_atom = get_atom_example_planunit_knee()
+    ball_atom = get_atom_example_planunit_ball()
     src_sue_packunit._ownerdelta.set_owneratom(sports_atom)
     src_sue_packunit._ownerdelta.set_owneratom(knee_atom)
     src_sue_packunit._ownerdelta.set_owneratom(ball_atom)

@@ -8,13 +8,13 @@ from src.a00_data_toolbox.db_toolbox import (
 from src.a06_owner_logic.test._util.a06_str import (
     owner_acct_membership_str,
     owner_acctunit_str,
-    owner_concept_awardlink_str,
-    owner_concept_factunit_str,
-    owner_concept_healerlink_str,
-    owner_concept_laborlink_str,
-    owner_concept_reason_premiseunit_str,
-    owner_concept_reasonunit_str,
-    owner_conceptunit_str,
+    owner_plan_awardlink_str,
+    owner_plan_factunit_str,
+    owner_plan_healerlink_str,
+    owner_plan_laborlink_str,
+    owner_plan_reason_premiseunit_str,
+    owner_plan_reasonunit_str,
+    owner_planunit_str,
     ownerunit_str,
 )
 from src.a08_owner_atom_logic.atom_config import get_delete_key_name
@@ -87,13 +87,13 @@ def test_create_prime_tablename_ReturnsObj():
     plnacct_dimen = owner_acctunit_str()
     plnmemb_dimen = owner_acct_membership_str()
     plngrou_dimen = owner_groupunit_str()
-    plnconc_dimen = owner_conceptunit_str()
-    plnawar_dimen = owner_concept_awardlink_str()
-    plnreas_dimen = owner_concept_reasonunit_str()
-    plnprem_dimen = owner_concept_reason_premiseunit_str()
-    plnlabo_dimen = owner_concept_laborlink_str()
-    plnheal_dimen = owner_concept_healerlink_str()
-    plnfact_dimen = owner_concept_factunit_str()
+    plnconc_dimen = owner_planunit_str()
+    plnawar_dimen = owner_plan_awardlink_str()
+    plnreas_dimen = owner_plan_reasonunit_str()
+    plnprem_dimen = owner_plan_reason_premiseunit_str()
+    plnlabo_dimen = owner_plan_laborlink_str()
+    plnheal_dimen = owner_plan_healerlink_str()
+    plnfact_dimen = owner_plan_factunit_str()
     beliefunit_dimen = beliefunit_str()
     blfpayy_dimen = belief_paybook_str()
     blfbudd_dimen = belief_budunit_str()

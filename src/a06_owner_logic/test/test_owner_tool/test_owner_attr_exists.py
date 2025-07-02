@@ -1,38 +1,38 @@
 from src.a01_term_logic.rope import to_rope
 from src.a03_group_logic.group import awardlink_shop
-from src.a04_reason_logic.reason_concept import factunit_shop, reasonunit_shop
+from src.a04_reason_logic.reason_plan import factunit_shop, reasonunit_shop
 from src.a06_owner_logic.owner import ownerunit_shop
 from src.a06_owner_logic.owner_tool import (
     owner_acct_membership_exists,
     owner_acctunit_exists,
     owner_attr_exists,
-    owner_concept_awardlink_exists,
-    owner_concept_factunit_exists,
-    owner_concept_healerlink_exists,
-    owner_concept_laborlink_exists,
-    owner_concept_reason_premiseunit_exists as premiseunit_exists,
-    owner_concept_reasonunit_exists,
-    owner_conceptunit_exists,
+    owner_plan_awardlink_exists,
+    owner_plan_factunit_exists,
+    owner_plan_healerlink_exists,
+    owner_plan_laborlink_exists,
+    owner_plan_reason_premiseunit_exists as premiseunit_exists,
+    owner_plan_reasonunit_exists,
+    owner_planunit_exists,
     ownerunit_exists,
 )
 from src.a06_owner_logic.test._util.a06_str import (
     acct_name_str,
     awardee_title_str,
-    concept_rope_str,
     fcontext_str,
     group_title_str,
     healer_name_str,
     labor_title_str,
     owner_acct_membership_str,
     owner_acctunit_str,
-    owner_concept_awardlink_str,
-    owner_concept_factunit_str,
-    owner_concept_healerlink_str,
-    owner_concept_laborlink_str,
-    owner_concept_reason_premiseunit_str,
-    owner_concept_reasonunit_str,
-    owner_conceptunit_str,
+    owner_plan_awardlink_str,
+    owner_plan_factunit_str,
+    owner_plan_healerlink_str,
+    owner_plan_laborlink_str,
+    owner_plan_reason_premiseunit_str,
+    owner_plan_reasonunit_str,
+    owner_planunit_str,
     ownerunit_str,
+    plan_rope_str,
     pstate_str,
     rcontext_str,
 )
@@ -78,19 +78,19 @@ def test_owner_acct_membership_exists_ReturnsObj():
     assert not owner_acct_membership_exists(sue_owner, jkeys)
 
     # WHEN
-    yao_concept = sue_owner.get_acct(yao_str)
-    yao_concept.add_membership(";run")
+    yao_plan = sue_owner.get_acct(yao_str)
+    yao_plan.add_membership(";run")
     # THEN
     assert not owner_acct_membership_exists(sue_owner, jkeys)
 
     # WHEN
-    yao_concept = sue_owner.get_acct(yao_str)
-    yao_concept.add_membership(swim_str)
+    yao_plan = sue_owner.get_acct(yao_str)
+    yao_plan.add_membership(swim_str)
     # THEN
     assert owner_acct_membership_exists(sue_owner, jkeys)
 
 
-def test_owner_conceptunit_exists_ReturnsObj():
+def test_owner_planunit_exists_ReturnsObj():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
@@ -99,39 +99,39 @@ def test_owner_conceptunit_exists_ReturnsObj():
     clean_rope = sue_owner.make_rope(casa_rope, clean_str)
     sweep_rope = sue_owner.make_rope(clean_rope, "sweep")
     root_rope = to_rope(sue_owner.belief_label)
-    root_jkeys = {concept_rope_str(): root_rope}
-    casa_jkeys = {concept_rope_str(): casa_rope}
-    clean_jkeys = {concept_rope_str(): clean_rope}
-    sweep_jkeys = {concept_rope_str(): sweep_rope}
+    root_jkeys = {plan_rope_str(): root_rope}
+    casa_jkeys = {plan_rope_str(): casa_rope}
+    clean_jkeys = {plan_rope_str(): clean_rope}
+    sweep_jkeys = {plan_rope_str(): sweep_rope}
 
     # WHEN / THEN
-    assert not owner_conceptunit_exists(None, {})
-    assert not owner_conceptunit_exists(sue_owner, {})
-    assert owner_conceptunit_exists(sue_owner, root_jkeys)
-    assert not owner_conceptunit_exists(sue_owner, casa_jkeys)
-    assert not owner_conceptunit_exists(sue_owner, clean_jkeys)
-    assert not owner_conceptunit_exists(sue_owner, sweep_jkeys)
+    assert not owner_planunit_exists(None, {})
+    assert not owner_planunit_exists(sue_owner, {})
+    assert owner_planunit_exists(sue_owner, root_jkeys)
+    assert not owner_planunit_exists(sue_owner, casa_jkeys)
+    assert not owner_planunit_exists(sue_owner, clean_jkeys)
+    assert not owner_planunit_exists(sue_owner, sweep_jkeys)
 
     # WHEN
-    sue_owner.add_concept(casa_rope)
+    sue_owner.add_plan(casa_rope)
     # THEN
-    assert not owner_conceptunit_exists(sue_owner, {})
-    assert owner_conceptunit_exists(sue_owner, root_jkeys)
-    assert owner_conceptunit_exists(sue_owner, casa_jkeys)
-    assert not owner_conceptunit_exists(sue_owner, clean_jkeys)
-    assert not owner_conceptunit_exists(sue_owner, sweep_jkeys)
+    assert not owner_planunit_exists(sue_owner, {})
+    assert owner_planunit_exists(sue_owner, root_jkeys)
+    assert owner_planunit_exists(sue_owner, casa_jkeys)
+    assert not owner_planunit_exists(sue_owner, clean_jkeys)
+    assert not owner_planunit_exists(sue_owner, sweep_jkeys)
 
     # WHEN
-    sue_owner.add_concept(clean_rope)
+    sue_owner.add_plan(clean_rope)
     # THEN
-    assert not owner_conceptunit_exists(sue_owner, {})
-    assert owner_conceptunit_exists(sue_owner, root_jkeys)
-    assert owner_conceptunit_exists(sue_owner, casa_jkeys)
-    assert owner_conceptunit_exists(sue_owner, clean_jkeys)
-    assert not owner_conceptunit_exists(sue_owner, sweep_jkeys)
+    assert not owner_planunit_exists(sue_owner, {})
+    assert owner_planunit_exists(sue_owner, root_jkeys)
+    assert owner_planunit_exists(sue_owner, casa_jkeys)
+    assert owner_planunit_exists(sue_owner, clean_jkeys)
+    assert not owner_planunit_exists(sue_owner, sweep_jkeys)
 
 
-def test_owner_concept_awardlink_exists_ReturnsObj():
+def test_owner_plan_awardlink_exists_ReturnsObj():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
@@ -141,28 +141,28 @@ def test_owner_concept_awardlink_exists_ReturnsObj():
     root_rope = to_rope(sue_owner.belief_label)
     swim_str = "Swim"
     root_rope = to_rope(sue_owner.belief_label)
-    root_jkeys = {concept_rope_str(): root_rope, awardee_title_str(): swim_str}
-    casa_jkeys = {concept_rope_str(): casa_rope, awardee_title_str(): swim_str}
-    clean_jkeys = {concept_rope_str(): clean_rope, awardee_title_str(): swim_str}
+    root_jkeys = {plan_rope_str(): root_rope, awardee_title_str(): swim_str}
+    casa_jkeys = {plan_rope_str(): casa_rope, awardee_title_str(): swim_str}
+    clean_jkeys = {plan_rope_str(): clean_rope, awardee_title_str(): swim_str}
 
     # WHEN / THEN
-    assert not owner_concept_awardlink_exists(None, {})
-    assert not owner_concept_awardlink_exists(sue_owner, {})
-    assert not owner_concept_awardlink_exists(sue_owner, root_jkeys)
-    assert not owner_concept_awardlink_exists(sue_owner, casa_jkeys)
-    assert not owner_concept_awardlink_exists(sue_owner, clean_jkeys)
+    assert not owner_plan_awardlink_exists(None, {})
+    assert not owner_plan_awardlink_exists(sue_owner, {})
+    assert not owner_plan_awardlink_exists(sue_owner, root_jkeys)
+    assert not owner_plan_awardlink_exists(sue_owner, casa_jkeys)
+    assert not owner_plan_awardlink_exists(sue_owner, clean_jkeys)
 
     # WHEN
-    sue_owner.conceptroot.set_awardlink(awardlink_shop(swim_str))
+    sue_owner.planroot.set_awardlink(awardlink_shop(swim_str))
 
     # THEN
-    assert not owner_concept_awardlink_exists(sue_owner, {})
-    assert owner_concept_awardlink_exists(sue_owner, root_jkeys)
-    assert not owner_concept_awardlink_exists(sue_owner, casa_jkeys)
-    assert not owner_concept_awardlink_exists(sue_owner, clean_jkeys)
+    assert not owner_plan_awardlink_exists(sue_owner, {})
+    assert owner_plan_awardlink_exists(sue_owner, root_jkeys)
+    assert not owner_plan_awardlink_exists(sue_owner, casa_jkeys)
+    assert not owner_plan_awardlink_exists(sue_owner, clean_jkeys)
 
 
-def test_owner_concept_reasonunit_exists_ReturnsObj():
+def test_owner_plan_reasonunit_exists_ReturnsObj():
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_owner.make_l1_rope(casa_str)
@@ -171,29 +171,29 @@ def test_owner_concept_reasonunit_exists_ReturnsObj():
     root_rope = to_rope(sue_owner.belief_label)
     wk_str = "wk"
     wk_rope = sue_owner.make_l1_rope(wk_str)
-    root_jkeys = {concept_rope_str(): root_rope, rcontext_str(): wk_rope}
-    casa_jkeys = {concept_rope_str(): casa_rope, rcontext_str(): wk_rope}
-    clean_jkeys = {concept_rope_str(): clean_rope, rcontext_str(): wk_rope}
+    root_jkeys = {plan_rope_str(): root_rope, rcontext_str(): wk_rope}
+    casa_jkeys = {plan_rope_str(): casa_rope, rcontext_str(): wk_rope}
+    clean_jkeys = {plan_rope_str(): clean_rope, rcontext_str(): wk_rope}
 
     # WHEN / THEN
-    assert not owner_concept_reasonunit_exists(None, {})
-    assert not owner_concept_reasonunit_exists(sue_owner, {})
-    assert not owner_concept_reasonunit_exists(sue_owner, root_jkeys)
-    assert not owner_concept_reasonunit_exists(sue_owner, casa_jkeys)
-    assert not owner_concept_reasonunit_exists(sue_owner, clean_jkeys)
+    assert not owner_plan_reasonunit_exists(None, {})
+    assert not owner_plan_reasonunit_exists(sue_owner, {})
+    assert not owner_plan_reasonunit_exists(sue_owner, root_jkeys)
+    assert not owner_plan_reasonunit_exists(sue_owner, casa_jkeys)
+    assert not owner_plan_reasonunit_exists(sue_owner, clean_jkeys)
 
     # WHEN
-    sue_owner.add_concept(wk_rope)
-    sue_owner.conceptroot.set_reasonunit(reasonunit_shop(wk_rope))
+    sue_owner.add_plan(wk_rope)
+    sue_owner.planroot.set_reasonunit(reasonunit_shop(wk_rope))
 
     # THEN
-    assert not owner_concept_reasonunit_exists(sue_owner, {})
-    assert owner_concept_reasonunit_exists(sue_owner, root_jkeys)
-    assert not owner_concept_reasonunit_exists(sue_owner, casa_jkeys)
-    assert not owner_concept_reasonunit_exists(sue_owner, clean_jkeys)
+    assert not owner_plan_reasonunit_exists(sue_owner, {})
+    assert owner_plan_reasonunit_exists(sue_owner, root_jkeys)
+    assert not owner_plan_reasonunit_exists(sue_owner, casa_jkeys)
+    assert not owner_plan_reasonunit_exists(sue_owner, clean_jkeys)
 
 
-def test_owner_concept_reason_premiseunit_exists_ReturnsObj():
+def test_owner_plan_reason_premiseunit_exists_ReturnsObj():
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_owner.make_l1_rope(casa_str)
@@ -204,17 +204,17 @@ def test_owner_concept_reason_premiseunit_exists_ReturnsObj():
     wk_rope = sue_owner.make_l1_rope(wk_str)
     thur_rope = sue_owner.make_rope(wk_rope, "thur")
     root_jkeys = {
-        concept_rope_str(): root_rope,
+        plan_rope_str(): root_rope,
         rcontext_str(): wk_rope,
         pstate_str(): thur_rope,
     }
     casa_jkeys = {
-        concept_rope_str(): casa_rope,
+        plan_rope_str(): casa_rope,
         rcontext_str(): wk_rope,
         pstate_str(): thur_rope,
     }
     clean_jkeys = {
-        concept_rope_str(): clean_rope,
+        plan_rope_str(): clean_rope,
         rcontext_str(): wk_rope,
         pstate_str(): thur_rope,
     }
@@ -227,8 +227,8 @@ def test_owner_concept_reason_premiseunit_exists_ReturnsObj():
     assert not premiseunit_exists(sue_owner, clean_jkeys)
 
     # WHEN
-    sue_owner.add_concept(wk_rope)
-    sue_owner.conceptroot.set_reasonunit(reasonunit_shop(wk_rope))
+    sue_owner.add_plan(wk_rope)
+    sue_owner.planroot.set_reasonunit(reasonunit_shop(wk_rope))
 
     # THEN
     assert not premiseunit_exists(sue_owner, {})
@@ -237,8 +237,8 @@ def test_owner_concept_reason_premiseunit_exists_ReturnsObj():
     assert not premiseunit_exists(sue_owner, clean_jkeys)
 
     # WHEN
-    sue_owner.add_concept(thur_rope)
-    sue_owner.conceptroot.get_reasonunit(wk_rope).set_premise(thur_rope)
+    sue_owner.add_plan(thur_rope)
+    sue_owner.planroot.get_reasonunit(wk_rope).set_premise(thur_rope)
 
     # THEN
     assert not premiseunit_exists(sue_owner, {})
@@ -247,7 +247,7 @@ def test_owner_concept_reason_premiseunit_exists_ReturnsObj():
     assert not premiseunit_exists(sue_owner, clean_jkeys)
 
 
-def test_owner_concept_laborlink_exists_ReturnsObj():
+def test_owner_plan_laborlink_exists_ReturnsObj():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
@@ -256,28 +256,28 @@ def test_owner_concept_laborlink_exists_ReturnsObj():
     clean_rope = sue_owner.make_rope(casa_rope, clean_str)
     root_rope = to_rope(sue_owner.belief_label)
     swim_str = "Swim"
-    root_jkeys = {concept_rope_str(): root_rope, labor_title_str(): swim_str}
-    casa_jkeys = {concept_rope_str(): casa_rope, labor_title_str(): swim_str}
-    clean_jkeys = {concept_rope_str(): clean_rope, labor_title_str(): swim_str}
+    root_jkeys = {plan_rope_str(): root_rope, labor_title_str(): swim_str}
+    casa_jkeys = {plan_rope_str(): casa_rope, labor_title_str(): swim_str}
+    clean_jkeys = {plan_rope_str(): clean_rope, labor_title_str(): swim_str}
 
     # WHEN / THEN
-    assert not owner_concept_laborlink_exists(None, {})
-    assert not owner_concept_laborlink_exists(sue_owner, {})
-    assert not owner_concept_laborlink_exists(sue_owner, root_jkeys)
-    assert not owner_concept_laborlink_exists(sue_owner, casa_jkeys)
-    assert not owner_concept_laborlink_exists(sue_owner, clean_jkeys)
+    assert not owner_plan_laborlink_exists(None, {})
+    assert not owner_plan_laborlink_exists(sue_owner, {})
+    assert not owner_plan_laborlink_exists(sue_owner, root_jkeys)
+    assert not owner_plan_laborlink_exists(sue_owner, casa_jkeys)
+    assert not owner_plan_laborlink_exists(sue_owner, clean_jkeys)
 
     # WHEN
-    sue_owner.conceptroot.laborunit.set_laborlink(swim_str)
+    sue_owner.planroot.laborunit.set_laborlink(swim_str)
 
     # THEN
-    assert not owner_concept_laborlink_exists(sue_owner, {})
-    assert owner_concept_laborlink_exists(sue_owner, root_jkeys)
-    assert not owner_concept_laborlink_exists(sue_owner, casa_jkeys)
-    assert not owner_concept_laborlink_exists(sue_owner, clean_jkeys)
+    assert not owner_plan_laborlink_exists(sue_owner, {})
+    assert owner_plan_laborlink_exists(sue_owner, root_jkeys)
+    assert not owner_plan_laborlink_exists(sue_owner, casa_jkeys)
+    assert not owner_plan_laborlink_exists(sue_owner, clean_jkeys)
 
 
-def test_owner_concept_healerlink_exists_ReturnsObj():
+def test_owner_plan_healerlink_exists_ReturnsObj():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
@@ -286,28 +286,28 @@ def test_owner_concept_healerlink_exists_ReturnsObj():
     clean_rope = sue_owner.make_rope(casa_rope, clean_str)
     root_rope = to_rope(sue_owner.belief_label)
     swim_str = "Swim"
-    root_jkeys = {concept_rope_str(): root_rope, healer_name_str(): swim_str}
-    casa_jkeys = {concept_rope_str(): casa_rope, healer_name_str(): swim_str}
-    clean_jkeys = {concept_rope_str(): clean_rope, healer_name_str(): swim_str}
+    root_jkeys = {plan_rope_str(): root_rope, healer_name_str(): swim_str}
+    casa_jkeys = {plan_rope_str(): casa_rope, healer_name_str(): swim_str}
+    clean_jkeys = {plan_rope_str(): clean_rope, healer_name_str(): swim_str}
 
     # WHEN / THEN
-    assert not owner_concept_healerlink_exists(None, {})
-    assert not owner_concept_healerlink_exists(sue_owner, {})
-    assert not owner_concept_healerlink_exists(sue_owner, root_jkeys)
-    assert not owner_concept_healerlink_exists(sue_owner, casa_jkeys)
-    assert not owner_concept_healerlink_exists(sue_owner, clean_jkeys)
+    assert not owner_plan_healerlink_exists(None, {})
+    assert not owner_plan_healerlink_exists(sue_owner, {})
+    assert not owner_plan_healerlink_exists(sue_owner, root_jkeys)
+    assert not owner_plan_healerlink_exists(sue_owner, casa_jkeys)
+    assert not owner_plan_healerlink_exists(sue_owner, clean_jkeys)
 
     # WHEN
-    sue_owner.conceptroot.healerlink.set_healer_name(swim_str)
+    sue_owner.planroot.healerlink.set_healer_name(swim_str)
 
     # THEN
-    assert not owner_concept_healerlink_exists(sue_owner, {})
-    assert owner_concept_healerlink_exists(sue_owner, root_jkeys)
-    assert not owner_concept_healerlink_exists(sue_owner, casa_jkeys)
-    assert not owner_concept_healerlink_exists(sue_owner, clean_jkeys)
+    assert not owner_plan_healerlink_exists(sue_owner, {})
+    assert owner_plan_healerlink_exists(sue_owner, root_jkeys)
+    assert not owner_plan_healerlink_exists(sue_owner, casa_jkeys)
+    assert not owner_plan_healerlink_exists(sue_owner, clean_jkeys)
 
 
-def test_owner_concept_factunit_exists_ReturnsObj():
+def test_owner_plan_factunit_exists_ReturnsObj():
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_owner.make_l1_rope(casa_str)
@@ -316,26 +316,26 @@ def test_owner_concept_factunit_exists_ReturnsObj():
     root_rope = to_rope(sue_owner.belief_label)
     wk_str = "wk"
     wk_rope = sue_owner.make_l1_rope(wk_str)
-    root_jkeys = {concept_rope_str(): root_rope, fcontext_str(): wk_rope}
-    casa_jkeys = {concept_rope_str(): casa_rope, fcontext_str(): wk_rope}
-    clean_jkeys = {concept_rope_str(): clean_rope, fcontext_str(): wk_rope}
+    root_jkeys = {plan_rope_str(): root_rope, fcontext_str(): wk_rope}
+    casa_jkeys = {plan_rope_str(): casa_rope, fcontext_str(): wk_rope}
+    clean_jkeys = {plan_rope_str(): clean_rope, fcontext_str(): wk_rope}
 
     # WHEN / THEN
-    assert not owner_concept_factunit_exists(None, {})
-    assert not owner_concept_factunit_exists(sue_owner, {})
-    assert not owner_concept_factunit_exists(sue_owner, root_jkeys)
-    assert not owner_concept_factunit_exists(sue_owner, casa_jkeys)
-    assert not owner_concept_factunit_exists(sue_owner, clean_jkeys)
+    assert not owner_plan_factunit_exists(None, {})
+    assert not owner_plan_factunit_exists(sue_owner, {})
+    assert not owner_plan_factunit_exists(sue_owner, root_jkeys)
+    assert not owner_plan_factunit_exists(sue_owner, casa_jkeys)
+    assert not owner_plan_factunit_exists(sue_owner, clean_jkeys)
 
     # WHEN
-    sue_owner.add_concept(wk_rope)
-    sue_owner.conceptroot.set_factunit(factunit_shop(wk_rope))
+    sue_owner.add_plan(wk_rope)
+    sue_owner.planroot.set_factunit(factunit_shop(wk_rope))
 
     # THEN
-    assert not owner_concept_factunit_exists(sue_owner, {})
-    assert owner_concept_factunit_exists(sue_owner, root_jkeys)
-    assert not owner_concept_factunit_exists(sue_owner, casa_jkeys)
-    assert not owner_concept_factunit_exists(sue_owner, clean_jkeys)
+    assert not owner_plan_factunit_exists(sue_owner, {})
+    assert owner_plan_factunit_exists(sue_owner, root_jkeys)
+    assert not owner_plan_factunit_exists(sue_owner, casa_jkeys)
+    assert not owner_plan_factunit_exists(sue_owner, clean_jkeys)
 
 
 def test_owner_attr_exists_ReturnsObj_ownerunit():
@@ -379,19 +379,19 @@ def test_owner_attr_exists_ReturnsObj_owner_acct_membership():
     assert not owner_attr_exists(x_dimen, sue_owner, x_jkeys)
 
     # WHEN
-    yao_concept = sue_owner.get_acct(yao_str)
-    yao_concept.add_membership(";run")
+    yao_plan = sue_owner.get_acct(yao_str)
+    yao_plan.add_membership(";run")
     # THEN
     assert not owner_attr_exists(x_dimen, sue_owner, x_jkeys)
 
     # WHEN
-    yao_concept = sue_owner.get_acct(yao_str)
-    yao_concept.add_membership(swim_str)
+    yao_plan = sue_owner.get_acct(yao_str)
+    yao_plan.add_membership(swim_str)
     # THEN
     assert owner_attr_exists(x_dimen, sue_owner, x_jkeys)
 
 
-def test_owner_attr_exists_ReturnsObj_owner_conceptunit():
+def test_owner_attr_exists_ReturnsObj_owner_planunit():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
@@ -400,11 +400,11 @@ def test_owner_attr_exists_ReturnsObj_owner_conceptunit():
     clean_rope = sue_owner.make_rope(casa_rope, clean_str)
     sweep_rope = sue_owner.make_rope(clean_rope, "sweep")
     x_parent_rope = to_rope(sue_owner.belief_label)
-    root_jkeys = {concept_rope_str(): x_parent_rope}
-    casa_jkeys = {concept_rope_str(): casa_rope}
-    clean_jkeys = {concept_rope_str(): clean_rope}
-    sweep_jkeys = {concept_rope_str(): sweep_rope}
-    x_dimen = owner_conceptunit_str()
+    root_jkeys = {plan_rope_str(): x_parent_rope}
+    casa_jkeys = {plan_rope_str(): casa_rope}
+    clean_jkeys = {plan_rope_str(): clean_rope}
+    sweep_jkeys = {plan_rope_str(): sweep_rope}
+    x_dimen = owner_planunit_str()
 
     # WHEN / THEN
     assert not owner_attr_exists(x_dimen, None, {})
@@ -415,7 +415,7 @@ def test_owner_attr_exists_ReturnsObj_owner_conceptunit():
     assert not owner_attr_exists(x_dimen, sue_owner, sweep_jkeys)
 
     # WHEN
-    sue_owner.add_concept(casa_rope)
+    sue_owner.add_plan(casa_rope)
     # THEN
     assert not owner_attr_exists(x_dimen, sue_owner, {})
     assert owner_attr_exists(x_dimen, sue_owner, root_jkeys)
@@ -424,7 +424,7 @@ def test_owner_attr_exists_ReturnsObj_owner_conceptunit():
     assert not owner_attr_exists(x_dimen, sue_owner, sweep_jkeys)
 
     # WHEN
-    sue_owner.add_concept(clean_rope)
+    sue_owner.add_plan(clean_rope)
     # THEN
     assert not owner_attr_exists(x_dimen, sue_owner, {})
     assert owner_attr_exists(x_dimen, sue_owner, root_jkeys)
@@ -433,7 +433,7 @@ def test_owner_attr_exists_ReturnsObj_owner_conceptunit():
     assert not owner_attr_exists(x_dimen, sue_owner, sweep_jkeys)
 
 
-def test_owner_attr_exists_ReturnsObj_owner_concept_awardlink():
+def test_owner_attr_exists_ReturnsObj_owner_plan_awardlink():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
@@ -442,10 +442,10 @@ def test_owner_attr_exists_ReturnsObj_owner_concept_awardlink():
     clean_rope = sue_owner.make_rope(casa_rope, clean_str)
     root_rope = to_rope(sue_owner.belief_label)
     swim_str = "Swim"
-    x_dimen = owner_concept_awardlink_str()
-    root_jkeys = {concept_rope_str(): root_rope, awardee_title_str(): swim_str}
-    casa_jkeys = {concept_rope_str(): casa_rope, awardee_title_str(): swim_str}
-    clean_jkeys = {concept_rope_str(): clean_rope, awardee_title_str(): swim_str}
+    x_dimen = owner_plan_awardlink_str()
+    root_jkeys = {plan_rope_str(): root_rope, awardee_title_str(): swim_str}
+    casa_jkeys = {plan_rope_str(): casa_rope, awardee_title_str(): swim_str}
+    clean_jkeys = {plan_rope_str(): clean_rope, awardee_title_str(): swim_str}
 
     # WHEN / THEN
     assert not owner_attr_exists(x_dimen, None, {})
@@ -455,7 +455,7 @@ def test_owner_attr_exists_ReturnsObj_owner_concept_awardlink():
     assert not owner_attr_exists(x_dimen, sue_owner, clean_jkeys)
 
     # WHEN
-    sue_owner.conceptroot.set_awardlink(awardlink_shop(swim_str))
+    sue_owner.planroot.set_awardlink(awardlink_shop(swim_str))
 
     # THEN
     assert not owner_attr_exists(x_dimen, sue_owner, {})
@@ -464,7 +464,7 @@ def test_owner_attr_exists_ReturnsObj_owner_concept_awardlink():
     assert not owner_attr_exists(x_dimen, sue_owner, clean_jkeys)
 
 
-def test_owner_attr_exists_ReturnsObj_owner_concept_reasonunit():
+def test_owner_attr_exists_ReturnsObj_owner_plan_reasonunit():
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_owner.make_l1_rope(casa_str)
@@ -473,10 +473,10 @@ def test_owner_attr_exists_ReturnsObj_owner_concept_reasonunit():
     root_rope = to_rope(sue_owner.belief_label)
     wk_str = "wk"
     wk_rope = sue_owner.make_l1_rope(wk_str)
-    x_dimen = owner_concept_reasonunit_str()
-    root_jkeys = {concept_rope_str(): root_rope, rcontext_str(): wk_rope}
-    casa_jkeys = {concept_rope_str(): casa_rope, rcontext_str(): wk_rope}
-    clean_jkeys = {concept_rope_str(): clean_rope, rcontext_str(): wk_rope}
+    x_dimen = owner_plan_reasonunit_str()
+    root_jkeys = {plan_rope_str(): root_rope, rcontext_str(): wk_rope}
+    casa_jkeys = {plan_rope_str(): casa_rope, rcontext_str(): wk_rope}
+    clean_jkeys = {plan_rope_str(): clean_rope, rcontext_str(): wk_rope}
 
     # WHEN / THEN
     assert not owner_attr_exists(x_dimen, None, {})
@@ -486,8 +486,8 @@ def test_owner_attr_exists_ReturnsObj_owner_concept_reasonunit():
     assert not owner_attr_exists(x_dimen, sue_owner, clean_jkeys)
 
     # WHEN
-    sue_owner.add_concept(wk_rope)
-    sue_owner.conceptroot.set_reasonunit(reasonunit_shop(wk_rope))
+    sue_owner.add_plan(wk_rope)
+    sue_owner.planroot.set_reasonunit(reasonunit_shop(wk_rope))
 
     # THEN
     assert owner_attr_exists(x_dimen, sue_owner, root_jkeys)
@@ -495,7 +495,7 @@ def test_owner_attr_exists_ReturnsObj_owner_concept_reasonunit():
     assert not owner_attr_exists(x_dimen, sue_owner, clean_jkeys)
 
 
-def test_owner_attr_exists_ReturnsObj_owner_concept_reason_premiseunit():
+def test_owner_attr_exists_ReturnsObj_owner_plan_reason_premiseunit():
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_owner.make_l1_rope(casa_str)
@@ -505,19 +505,19 @@ def test_owner_attr_exists_ReturnsObj_owner_concept_reason_premiseunit():
     wk_str = "wk"
     wk_rope = sue_owner.make_l1_rope(wk_str)
     thur_rope = sue_owner.make_rope(wk_rope, "thur")
-    x_dimen = owner_concept_reason_premiseunit_str()
+    x_dimen = owner_plan_reason_premiseunit_str()
     root_jkeys = {
-        concept_rope_str(): root_rope,
+        plan_rope_str(): root_rope,
         rcontext_str(): wk_rope,
         pstate_str(): thur_rope,
     }
     casa_jkeys = {
-        concept_rope_str(): casa_rope,
+        plan_rope_str(): casa_rope,
         rcontext_str(): wk_rope,
         pstate_str(): thur_rope,
     }
     clean_jkeys = {
-        concept_rope_str(): clean_rope,
+        plan_rope_str(): clean_rope,
         rcontext_str(): wk_rope,
         pstate_str(): thur_rope,
     }
@@ -530,8 +530,8 @@ def test_owner_attr_exists_ReturnsObj_owner_concept_reason_premiseunit():
     assert not owner_attr_exists(x_dimen, sue_owner, clean_jkeys)
 
     # WHEN
-    sue_owner.add_concept(wk_rope)
-    sue_owner.conceptroot.set_reasonunit(reasonunit_shop(wk_rope))
+    sue_owner.add_plan(wk_rope)
+    sue_owner.planroot.set_reasonunit(reasonunit_shop(wk_rope))
 
     # THEN
     assert not owner_attr_exists(x_dimen, sue_owner, root_jkeys)
@@ -539,8 +539,8 @@ def test_owner_attr_exists_ReturnsObj_owner_concept_reason_premiseunit():
     assert not owner_attr_exists(x_dimen, sue_owner, clean_jkeys)
 
     # WHEN
-    sue_owner.add_concept(thur_rope)
-    sue_owner.conceptroot.get_reasonunit(wk_rope).set_premise(thur_rope)
+    sue_owner.add_plan(thur_rope)
+    sue_owner.planroot.get_reasonunit(wk_rope).set_premise(thur_rope)
 
     # THEN
     assert owner_attr_exists(x_dimen, sue_owner, root_jkeys)
@@ -548,7 +548,7 @@ def test_owner_attr_exists_ReturnsObj_owner_concept_reason_premiseunit():
     assert not owner_attr_exists(x_dimen, sue_owner, clean_jkeys)
 
 
-def test_owner_attr_exists_ReturnsObj_owner_concept_laborlink():
+def test_owner_attr_exists_ReturnsObj_owner_plan_laborlink():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
@@ -557,10 +557,10 @@ def test_owner_attr_exists_ReturnsObj_owner_concept_laborlink():
     clean_rope = sue_owner.make_rope(casa_rope, clean_str)
     root_rope = to_rope(sue_owner.belief_label)
     swim_str = "Swim"
-    x_dimen = owner_concept_laborlink_str()
-    root_jkeys = {concept_rope_str(): root_rope, labor_title_str(): swim_str}
-    casa_jkeys = {concept_rope_str(): casa_rope, labor_title_str(): swim_str}
-    clean_jkeys = {concept_rope_str(): clean_rope, labor_title_str(): swim_str}
+    x_dimen = owner_plan_laborlink_str()
+    root_jkeys = {plan_rope_str(): root_rope, labor_title_str(): swim_str}
+    casa_jkeys = {plan_rope_str(): casa_rope, labor_title_str(): swim_str}
+    clean_jkeys = {plan_rope_str(): clean_rope, labor_title_str(): swim_str}
 
     # WHEN / THEN
     assert not owner_attr_exists(x_dimen, None, {})
@@ -570,7 +570,7 @@ def test_owner_attr_exists_ReturnsObj_owner_concept_laborlink():
     assert not owner_attr_exists(x_dimen, sue_owner, clean_jkeys)
 
     # WHEN
-    sue_owner.conceptroot.laborunit.set_laborlink(swim_str)
+    sue_owner.planroot.laborunit.set_laborlink(swim_str)
 
     # THEN
     assert not owner_attr_exists(x_dimen, sue_owner, {})
@@ -579,7 +579,7 @@ def test_owner_attr_exists_ReturnsObj_owner_concept_laborlink():
     assert not owner_attr_exists(x_dimen, sue_owner, clean_jkeys)
 
 
-def test_owner_attr_exists_ReturnsObj_owner_concept_healerlink():
+def test_owner_attr_exists_ReturnsObj_owner_plan_healerlink():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
@@ -588,10 +588,10 @@ def test_owner_attr_exists_ReturnsObj_owner_concept_healerlink():
     clean_rope = sue_owner.make_rope(casa_rope, clean_str)
     root_rope = to_rope(sue_owner.belief_label)
     swim_str = "Swim"
-    x_dimen = owner_concept_healerlink_str()
-    root_jkeys = {concept_rope_str(): root_rope, healer_name_str(): swim_str}
-    casa_jkeys = {concept_rope_str(): casa_rope, healer_name_str(): swim_str}
-    clean_jkeys = {concept_rope_str(): clean_rope, healer_name_str(): swim_str}
+    x_dimen = owner_plan_healerlink_str()
+    root_jkeys = {plan_rope_str(): root_rope, healer_name_str(): swim_str}
+    casa_jkeys = {plan_rope_str(): casa_rope, healer_name_str(): swim_str}
+    clean_jkeys = {plan_rope_str(): clean_rope, healer_name_str(): swim_str}
 
     # WHEN / THEN
     assert not owner_attr_exists(x_dimen, None, {})
@@ -601,7 +601,7 @@ def test_owner_attr_exists_ReturnsObj_owner_concept_healerlink():
     assert not owner_attr_exists(x_dimen, sue_owner, clean_jkeys)
 
     # WHEN
-    sue_owner.conceptroot.healerlink.set_healer_name(swim_str)
+    sue_owner.planroot.healerlink.set_healer_name(swim_str)
 
     # THEN
     assert not owner_attr_exists(x_dimen, sue_owner, {})
@@ -610,7 +610,7 @@ def test_owner_attr_exists_ReturnsObj_owner_concept_healerlink():
     assert not owner_attr_exists(x_dimen, sue_owner, clean_jkeys)
 
 
-def test_owner_attr_exists_ReturnsObj_owner_concept_factunit():
+def test_owner_attr_exists_ReturnsObj_owner_plan_factunit():
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_owner.make_l1_rope(casa_str)
@@ -619,10 +619,10 @@ def test_owner_attr_exists_ReturnsObj_owner_concept_factunit():
     root_rope = to_rope(sue_owner.belief_label)
     wk_str = "wk"
     wk_rope = sue_owner.make_l1_rope(wk_str)
-    x_dimen = owner_concept_factunit_str()
-    root_jkeys = {concept_rope_str(): root_rope, fcontext_str(): wk_rope}
-    casa_jkeys = {concept_rope_str(): casa_rope, fcontext_str(): wk_rope}
-    clean_jkeys = {concept_rope_str(): clean_rope, fcontext_str(): wk_rope}
+    x_dimen = owner_plan_factunit_str()
+    root_jkeys = {plan_rope_str(): root_rope, fcontext_str(): wk_rope}
+    casa_jkeys = {plan_rope_str(): casa_rope, fcontext_str(): wk_rope}
+    clean_jkeys = {plan_rope_str(): clean_rope, fcontext_str(): wk_rope}
 
     # WHEN / THEN
     assert not owner_attr_exists(x_dimen, None, {})
@@ -632,8 +632,8 @@ def test_owner_attr_exists_ReturnsObj_owner_concept_factunit():
     assert not owner_attr_exists(x_dimen, sue_owner, clean_jkeys)
 
     # WHEN
-    sue_owner.add_concept(wk_rope)
-    sue_owner.conceptroot.set_factunit(factunit_shop(wk_rope))
+    sue_owner.add_plan(wk_rope)
+    sue_owner.planroot.set_factunit(factunit_shop(wk_rope))
 
     # THEN
     assert owner_attr_exists(x_dimen, sue_owner, root_jkeys)

@@ -87,12 +87,12 @@ def get_idea_elements_sort_order() -> list[str]:
         "group_title_ERASE",
         "group_title_ERASE_otx",
         "group_title_ERASE_inx",
-        "concept_rope",
-        "concept_rope_otx",
-        "concept_rope_inx",
-        "concept_rope_ERASE",
-        "concept_rope_ERASE_otx",
-        "concept_rope_ERASE_inx",
+        "plan_rope",
+        "plan_rope_otx",
+        "plan_rope_inx",
+        "plan_rope_ERASE",
+        "plan_rope_ERASE_otx",
+        "plan_rope_ERASE_inx",
         "rcontext",
         "rcontext_otx",
         "rcontext_inx",
@@ -142,7 +142,7 @@ def get_idea_elements_sort_order() -> list[str]:
         "morph",
         "gogo_want",
         "stop_want",
-        "rconcept_active_requisite",
+        "rplan_active_requisite",
         "acct_cred_points",
         "acct_debt_points",
         "group_cred_points",
@@ -208,7 +208,7 @@ def get_idea_elements_sort_order() -> list[str]:
         "_all_acct_cred",
         "_keeps_justified",
         "_offtrack_fund",
-        "_rconcept_active_value",
+        "_rplan_active_value",
         "_irrational_acct_debt_points",
         "_sum_healerlink_share",
         "_keeps_buildable",
@@ -261,12 +261,12 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "group_title_ERASE": "TEXT",
         "group_title_ERASE_otx": "TEXT",
         "group_title_ERASE_inx": "TEXT",
-        "concept_rope": "TEXT",
-        "concept_rope_otx": "TEXT",
-        "concept_rope_inx": "TEXT",
-        "concept_rope_ERASE": "TEXT",
-        "concept_rope_ERASE_otx": "TEXT",
-        "concept_rope_ERASE_inx": "TEXT",
+        "plan_rope": "TEXT",
+        "plan_rope_otx": "TEXT",
+        "plan_rope_inx": "TEXT",
+        "plan_rope_ERASE": "TEXT",
+        "plan_rope_ERASE_otx": "TEXT",
+        "plan_rope_ERASE_inx": "TEXT",
         "rcontext": "TEXT",
         "rcontext_otx": "TEXT",
         "rcontext_inx": "TEXT",
@@ -317,7 +317,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "morph": "INTEGER",
         "gogo_want": "REAL",
         "stop_want": "REAL",
-        "rconcept_active_requisite": "INTEGER",
+        "rplan_active_requisite": "INTEGER",
         "acct_cred_points": "REAL",
         "acct_debt_points": "REAL",
         "group_cred_points": "REAL",
@@ -390,7 +390,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "_stop_calc": "REAL",
         "_all_acct_cred": "INTEGER",
         "_all_acct_debt": "INTEGER",
-        "_rconcept_active_value": "INTEGER",
+        "_rplan_active_value": "INTEGER",
         "_inallocable_acct_debt_points": "REAL",
         "_irrational_acct_debt_points": "REAL",
         "_status": "INTEGER",
@@ -457,23 +457,23 @@ def idea_format_00012_membership_v0_0_0() -> str:
     return "idea_format_00012_membership_v0_0_0"
 
 
-def idea_format_00013_conceptunit_v0_0_0() -> str:
-    return "idea_format_00013_conceptunit_v0_0_0"
+def idea_format_00013_planunit_v0_0_0() -> str:
+    return "idea_format_00013_planunit_v0_0_0"
 
 
-def idea_format_00019_conceptunit_v0_0_0() -> str:
-    return "idea_format_00019_conceptunit_v0_0_0"
+def idea_format_00019_planunit_v0_0_0() -> str:
+    return "idea_format_00019_planunit_v0_0_0"
 
 
 # def idea_format_00020_owner_acct_membership_v0_0_0()-> str: return "idea_format_00020_owner_acct_membership_v0_0_0"
 # def idea_format_00021_owner_acctunit_v0_0_0()-> str: return "idea_format_00021_owner_acctunit_v0_0_0"
-# def idea_format_00022_owner_concept_awardlink_v0_0_0()-> str: return "idea_format_00022_owner_concept_awardlink_v0_0_0"
-# def idea_format_00023_owner_concept_factunit_v0_0_0()-> str: return "idea_format_00023_owner_concept_factunit_v0_0_0"
-# def idea_format_00024_owner_concept_laborlink_v0_0_0()-> str: return "idea_format_00024_owner_concept_laborlink_v0_0_0"
-# def idea_format_00025_owner_concept_healerlink_v0_0_0()-> str: return "idea_format_00025_owner_concept_healerlink_v0_0_0"
-# def idea_format_00026_owner_concept_reason_premiseunit_v0_0_0()-> str: return "idea_format_00026_owner_concept_reason_premiseunit_v0_0_0"
-# def idea_format_00027_owner_concept_reasonunit_v0_0_0()-> str: return "idea_format_00027_owner_concept_reasonunit_v0_0_0"
-# def idea_format_00028_owner_conceptunit_v0_0_0()-> str: return "idea_format_00028_owner_conceptunit_v0_0_0"
+# def idea_format_00022_owner_plan_awardlink_v0_0_0()-> str: return "idea_format_00022_owner_plan_awardlink_v0_0_0"
+# def idea_format_00023_owner_plan_factunit_v0_0_0()-> str: return "idea_format_00023_owner_plan_factunit_v0_0_0"
+# def idea_format_00024_owner_plan_laborlink_v0_0_0()-> str: return "idea_format_00024_owner_plan_laborlink_v0_0_0"
+# def idea_format_00025_owner_plan_healerlink_v0_0_0()-> str: return "idea_format_00025_owner_plan_healerlink_v0_0_0"
+# def idea_format_00026_owner_plan_reason_premiseunit_v0_0_0()-> str: return "idea_format_00026_owner_plan_reason_premiseunit_v0_0_0"
+# def idea_format_00027_owner_plan_reasonunit_v0_0_0()-> str: return "idea_format_00027_owner_plan_reasonunit_v0_0_0"
+# def idea_format_00028_owner_planunit_v0_0_0()-> str: return "idea_format_00028_owner_planunit_v0_0_0"
 # def idea_format_00029_ownerunit_v0_0_0()-> str: return "idea_format_00029_ownerunit_v0_0_0"
 
 
@@ -485,32 +485,32 @@ def idea_format_00021_owner_acctunit_v0_0_0() -> str:
     return "idea_format_00021_owner_acctunit_v0_0_0"
 
 
-def idea_format_00022_owner_concept_awardlink_v0_0_0() -> str:
-    return "idea_format_00022_owner_concept_awardlink_v0_0_0"
+def idea_format_00022_owner_plan_awardlink_v0_0_0() -> str:
+    return "idea_format_00022_owner_plan_awardlink_v0_0_0"
 
 
-def idea_format_00023_owner_concept_factunit_v0_0_0() -> str:
-    return "idea_format_00023_owner_concept_factunit_v0_0_0"
+def idea_format_00023_owner_plan_factunit_v0_0_0() -> str:
+    return "idea_format_00023_owner_plan_factunit_v0_0_0"
 
 
-def idea_format_00024_owner_concept_laborlink_v0_0_0() -> str:
-    return "idea_format_00024_owner_concept_laborlink_v0_0_0"
+def idea_format_00024_owner_plan_laborlink_v0_0_0() -> str:
+    return "idea_format_00024_owner_plan_laborlink_v0_0_0"
 
 
-def idea_format_00025_owner_concept_healerlink_v0_0_0() -> str:
-    return "idea_format_00025_owner_concept_healerlink_v0_0_0"
+def idea_format_00025_owner_plan_healerlink_v0_0_0() -> str:
+    return "idea_format_00025_owner_plan_healerlink_v0_0_0"
 
 
-def idea_format_00026_owner_concept_reason_premiseunit_v0_0_0() -> str:
-    return "idea_format_00026_owner_concept_reason_premiseunit_v0_0_0"
+def idea_format_00026_owner_plan_reason_premiseunit_v0_0_0() -> str:
+    return "idea_format_00026_owner_plan_reason_premiseunit_v0_0_0"
 
 
-def idea_format_00027_owner_concept_reasonunit_v0_0_0() -> str:
-    return "idea_format_00027_owner_concept_reasonunit_v0_0_0"
+def idea_format_00027_owner_plan_reasonunit_v0_0_0() -> str:
+    return "idea_format_00027_owner_plan_reasonunit_v0_0_0"
 
 
-def idea_format_00028_owner_conceptunit_v0_0_0() -> str:
-    return "idea_format_00028_owner_conceptunit_v0_0_0"
+def idea_format_00028_owner_planunit_v0_0_0() -> str:
+    return "idea_format_00028_owner_planunit_v0_0_0"
 
 
 def idea_format_00029_ownerunit_v0_0_0() -> str:
@@ -549,32 +549,32 @@ def idea_format_00051_delete_owner_acctunit_v0_0_0() -> str:
     return "idea_format_00051_delete_owner_acctunit_v0_0_0"
 
 
-def idea_format_00052_delete_owner_concept_awardlink_v0_0_0() -> str:
-    return "idea_format_00052_delete_owner_concept_awardlink_v0_0_0"
+def idea_format_00052_delete_owner_plan_awardlink_v0_0_0() -> str:
+    return "idea_format_00052_delete_owner_plan_awardlink_v0_0_0"
 
 
-def idea_format_00053_delete_owner_concept_factunit_v0_0_0() -> str:
-    return "idea_format_00053_delete_owner_concept_factunit_v0_0_0"
+def idea_format_00053_delete_owner_plan_factunit_v0_0_0() -> str:
+    return "idea_format_00053_delete_owner_plan_factunit_v0_0_0"
 
 
-def idea_format_00054_delete_owner_concept_laborlink_v0_0_0() -> str:
-    return "idea_format_00054_delete_owner_concept_laborlink_v0_0_0"
+def idea_format_00054_delete_owner_plan_laborlink_v0_0_0() -> str:
+    return "idea_format_00054_delete_owner_plan_laborlink_v0_0_0"
 
 
-def idea_format_00055_delete_owner_concept_healerlink_v0_0_0() -> str:
-    return "idea_format_00055_delete_owner_concept_healerlink_v0_0_0"
+def idea_format_00055_delete_owner_plan_healerlink_v0_0_0() -> str:
+    return "idea_format_00055_delete_owner_plan_healerlink_v0_0_0"
 
 
-def idea_format_00056_delete_owner_concept_reason_premiseunit_v0_0_0() -> str:
-    return "idea_format_00056_delete_owner_concept_reason_premiseunit_v0_0_0"
+def idea_format_00056_delete_owner_plan_reason_premiseunit_v0_0_0() -> str:
+    return "idea_format_00056_delete_owner_plan_reason_premiseunit_v0_0_0"
 
 
-def idea_format_00057_delete_owner_concept_reasonunit_v0_0_0() -> str:
-    return "idea_format_00057_delete_owner_concept_reasonunit_v0_0_0"
+def idea_format_00057_delete_owner_plan_reasonunit_v0_0_0() -> str:
+    return "idea_format_00057_delete_owner_plan_reasonunit_v0_0_0"
 
 
-def idea_format_00058_delete_owner_conceptunit_v0_0_0() -> str:
-    return "idea_format_00058_delete_owner_conceptunit_v0_0_0"
+def idea_format_00058_delete_owner_planunit_v0_0_0() -> str:
+    return "idea_format_00058_delete_owner_planunit_v0_0_0"
 
 
 def idea_format_00059_delete_ownerunit_v0_0_0() -> str:
@@ -612,17 +612,17 @@ def get_idea_format_filenames() -> set[str]:
         idea_format_00006_belief_timeoffi_v0_0_0(),
         idea_format_00011_acct_v0_0_0(),
         idea_format_00012_membership_v0_0_0(),
-        idea_format_00013_conceptunit_v0_0_0(),
-        idea_format_00019_conceptunit_v0_0_0(),
+        idea_format_00013_planunit_v0_0_0(),
+        idea_format_00019_planunit_v0_0_0(),
         idea_format_00020_owner_acct_membership_v0_0_0(),
         idea_format_00021_owner_acctunit_v0_0_0(),
-        idea_format_00022_owner_concept_awardlink_v0_0_0(),
-        idea_format_00023_owner_concept_factunit_v0_0_0(),
-        idea_format_00024_owner_concept_laborlink_v0_0_0(),
-        idea_format_00025_owner_concept_healerlink_v0_0_0(),
-        idea_format_00026_owner_concept_reason_premiseunit_v0_0_0(),
-        idea_format_00027_owner_concept_reasonunit_v0_0_0(),
-        idea_format_00028_owner_conceptunit_v0_0_0(),
+        idea_format_00022_owner_plan_awardlink_v0_0_0(),
+        idea_format_00023_owner_plan_factunit_v0_0_0(),
+        idea_format_00024_owner_plan_laborlink_v0_0_0(),
+        idea_format_00025_owner_plan_healerlink_v0_0_0(),
+        idea_format_00026_owner_plan_reason_premiseunit_v0_0_0(),
+        idea_format_00027_owner_plan_reasonunit_v0_0_0(),
+        idea_format_00028_owner_planunit_v0_0_0(),
         idea_format_00029_ownerunit_v0_0_0(),
         idea_format_00036_problem_healer_v0_0_0(),
         idea_format_00042_pidgin_title_v0_0_0(),
@@ -631,13 +631,13 @@ def get_idea_format_filenames() -> set[str]:
         idea_format_00045_pidgin_rope_v0_0_0(),
         idea_format_00050_delete_owner_acct_membership_v0_0_0(),
         idea_format_00051_delete_owner_acctunit_v0_0_0(),
-        idea_format_00052_delete_owner_concept_awardlink_v0_0_0(),
-        idea_format_00053_delete_owner_concept_factunit_v0_0_0(),
-        idea_format_00054_delete_owner_concept_laborlink_v0_0_0(),
-        idea_format_00055_delete_owner_concept_healerlink_v0_0_0(),
-        idea_format_00056_delete_owner_concept_reason_premiseunit_v0_0_0(),
-        idea_format_00057_delete_owner_concept_reasonunit_v0_0_0(),
-        idea_format_00058_delete_owner_conceptunit_v0_0_0(),
+        idea_format_00052_delete_owner_plan_awardlink_v0_0_0(),
+        idea_format_00053_delete_owner_plan_factunit_v0_0_0(),
+        idea_format_00054_delete_owner_plan_laborlink_v0_0_0(),
+        idea_format_00055_delete_owner_plan_healerlink_v0_0_0(),
+        idea_format_00056_delete_owner_plan_reason_premiseunit_v0_0_0(),
+        idea_format_00057_delete_owner_plan_reasonunit_v0_0_0(),
+        idea_format_00058_delete_owner_planunit_v0_0_0(),
         idea_format_00059_delete_ownerunit_v0_0_0(),
         idea_format_00113_acct_map1_v0_0_0(),
         idea_format_00115_group_map1_v0_0_0(),
@@ -709,32 +709,32 @@ def get_idea_format_headers() -> dict[str, list[str]]:
         "belief_label,offi_time": idea_format_00006_belief_timeoffi_v0_0_0(),
         "belief_label,owner_name,acct_name": idea_format_00011_acct_v0_0_0(),
         "belief_label,owner_name,acct_name,group_title": idea_format_00012_membership_v0_0_0(),
-        "belief_label,owner_name,concept_rope,mass,task": idea_format_00013_conceptunit_v0_0_0(),
-        "belief_label,owner_name,concept_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want": idea_format_00019_conceptunit_v0_0_0(),
+        "belief_label,owner_name,plan_rope,mass,task": idea_format_00013_planunit_v0_0_0(),
+        "belief_label,owner_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want": idea_format_00019_planunit_v0_0_0(),
         "belief_label,owner_name,acct_name,group_title,group_cred_points,group_debt_points": idea_format_00020_owner_acct_membership_v0_0_0(),
         "belief_label,owner_name,acct_name,acct_cred_points,acct_debt_points": idea_format_00021_owner_acctunit_v0_0_0(),
-        "belief_label,owner_name,concept_rope,awardee_title,give_force,take_force": idea_format_00022_owner_concept_awardlink_v0_0_0(),
-        "belief_label,owner_name,concept_rope,fcontext,fstate,fopen,fnigh": idea_format_00023_owner_concept_factunit_v0_0_0(),
-        "belief_label,owner_name,concept_rope,labor_title": idea_format_00024_owner_concept_laborlink_v0_0_0(),
-        "belief_label,owner_name,concept_rope,healer_name": idea_format_00025_owner_concept_healerlink_v0_0_0(),
-        "belief_label,owner_name,concept_rope,rcontext,pstate,pnigh,popen,pdivisor": idea_format_00026_owner_concept_reason_premiseunit_v0_0_0(),
-        "belief_label,owner_name,concept_rope,rcontext,rconcept_active_requisite": idea_format_00027_owner_concept_reasonunit_v0_0_0(),
-        "belief_label,owner_name,concept_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,task,problem_bool": idea_format_00028_owner_conceptunit_v0_0_0(),
+        "belief_label,owner_name,plan_rope,awardee_title,give_force,take_force": idea_format_00022_owner_plan_awardlink_v0_0_0(),
+        "belief_label,owner_name,plan_rope,fcontext,fstate,fopen,fnigh": idea_format_00023_owner_plan_factunit_v0_0_0(),
+        "belief_label,owner_name,plan_rope,labor_title": idea_format_00024_owner_plan_laborlink_v0_0_0(),
+        "belief_label,owner_name,plan_rope,healer_name": idea_format_00025_owner_plan_healerlink_v0_0_0(),
+        "belief_label,owner_name,plan_rope,rcontext,pstate,pnigh,popen,pdivisor": idea_format_00026_owner_plan_reason_premiseunit_v0_0_0(),
+        "belief_label,owner_name,plan_rope,rcontext,rplan_active_requisite": idea_format_00027_owner_plan_reasonunit_v0_0_0(),
+        "belief_label,owner_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,task,problem_bool": idea_format_00028_owner_planunit_v0_0_0(),
         "belief_label,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_iota,penny,respect_bit": idea_format_00029_ownerunit_v0_0_0(),
-        "belief_label,owner_name,concept_rope,healer_name,problem_bool": idea_format_00036_problem_healer_v0_0_0(),
+        "belief_label,owner_name,plan_rope,healer_name,problem_bool": idea_format_00036_problem_healer_v0_0_0(),
         "otx_title,inx_title,otx_knot,inx_knot,unknown_str": idea_format_00042_pidgin_title_v0_0_0(),
         "otx_name,inx_name,otx_knot,inx_knot,unknown_str": idea_format_00043_pidgin_name_v0_0_0(),
         "otx_label,inx_label,otx_knot,inx_knot,unknown_str": idea_format_00044_pidgin_label_v0_0_0(),
         "otx_rope,inx_rope,otx_knot,inx_knot,unknown_str": idea_format_00045_pidgin_rope_v0_0_0(),
         "belief_label,owner_name,acct_name,group_title_ERASE": idea_format_00050_delete_owner_acct_membership_v0_0_0(),
         "belief_label,owner_name,acct_name_ERASE": idea_format_00051_delete_owner_acctunit_v0_0_0(),
-        "belief_label,owner_name,concept_rope,awardee_title_ERASE": idea_format_00052_delete_owner_concept_awardlink_v0_0_0(),
-        "belief_label,owner_name,concept_rope,fcontext_ERASE": idea_format_00053_delete_owner_concept_factunit_v0_0_0(),
-        "belief_label,owner_name,concept_rope,labor_title_ERASE": idea_format_00054_delete_owner_concept_laborlink_v0_0_0(),
-        "belief_label,owner_name,concept_rope,healer_name_ERASE": idea_format_00055_delete_owner_concept_healerlink_v0_0_0(),
-        "belief_label,owner_name,concept_rope,rcontext,pstate_ERASE": idea_format_00056_delete_owner_concept_reason_premiseunit_v0_0_0(),
-        "belief_label,owner_name,concept_rope,rcontext_ERASE": idea_format_00057_delete_owner_concept_reasonunit_v0_0_0(),
-        "belief_label,owner_name,concept_rope_ERASE": idea_format_00058_delete_owner_conceptunit_v0_0_0(),
+        "belief_label,owner_name,plan_rope,awardee_title_ERASE": idea_format_00052_delete_owner_plan_awardlink_v0_0_0(),
+        "belief_label,owner_name,plan_rope,fcontext_ERASE": idea_format_00053_delete_owner_plan_factunit_v0_0_0(),
+        "belief_label,owner_name,plan_rope,labor_title_ERASE": idea_format_00054_delete_owner_plan_laborlink_v0_0_0(),
+        "belief_label,owner_name,plan_rope,healer_name_ERASE": idea_format_00055_delete_owner_plan_healerlink_v0_0_0(),
+        "belief_label,owner_name,plan_rope,rcontext,pstate_ERASE": idea_format_00056_delete_owner_plan_reason_premiseunit_v0_0_0(),
+        "belief_label,owner_name,plan_rope,rcontext_ERASE": idea_format_00057_delete_owner_plan_reasonunit_v0_0_0(),
+        "belief_label,owner_name,plan_rope_ERASE": idea_format_00058_delete_owner_planunit_v0_0_0(),
         "belief_label,owner_name_ERASE": idea_format_00059_delete_ownerunit_v0_0_0(),
         "belief_label,owner_name,acct_name,otx_name,inx_name": idea_format_00113_acct_map1_v0_0_0(),
         "belief_label,owner_name,acct_name,otx_title,inx_title": idea_format_00115_group_map1_v0_0_0(),
@@ -774,13 +774,13 @@ def get_idea_dimen_ref() -> dict[str, set[str]]:
             "br00116",
             "br00117",
         },
-        "owner_concept_awardlink": {"br00022", "br00052"},
-        "owner_concept_factunit": {"br00023", "br00053"},
-        "owner_concept_healerlink": {"br00025", "br00036", "br00055"},
-        "owner_concept_reason_premiseunit": {"br00026", "br00056"},
-        "owner_concept_reasonunit": {"br00026", "br00027", "br00056", "br00057"},
-        "owner_concept_laborlink": {"br00024", "br00054"},
-        "owner_conceptunit": {
+        "owner_plan_awardlink": {"br00022", "br00052"},
+        "owner_plan_factunit": {"br00023", "br00053"},
+        "owner_plan_healerlink": {"br00025", "br00036", "br00055"},
+        "owner_plan_reason_premiseunit": {"br00026", "br00056"},
+        "owner_plan_reasonunit": {"br00026", "br00027", "br00056", "br00057"},
+        "owner_plan_laborlink": {"br00024", "br00054"},
+        "owner_planunit": {
             "br00013",
             "br00019",
             "br00022",

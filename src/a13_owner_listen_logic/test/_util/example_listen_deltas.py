@@ -1,10 +1,10 @@
 from src.a01_term_logic.term import BeliefLabel
 from src.a06_owner_logic.test._util.a06_str import (
     acct_name_str,
-    concept_label_str,
     owner_acctunit_str,
-    owner_conceptunit_str,
+    owner_planunit_str,
     parent_rope_str,
+    plan_label_str,
 )
 from src.a08_owner_atom_logic.atom import OwnerAtom, owneratom_shop
 from src.a08_owner_atom_logic.test._util.a08_str import (
@@ -15,15 +15,15 @@ from src.a08_owner_atom_logic.test._util.a08_str import (
 from src.a09_pack_logic.delta import OwnerDelta, ownerdelta_shop
 
 
-def get_atom_example_conceptunit_sports(belief_label: BeliefLabel = None) -> OwnerAtom:
+def get_atom_example_planunit_sports(belief_label: BeliefLabel = None) -> OwnerAtom:
     if not belief_label:
         belief_label = "amy23"
     sports_str = "sports"
-    x_dimen = owner_conceptunit_str()
-    insert_conceptunit_owneratom = owneratom_shop(x_dimen, INSERT_str())
-    insert_conceptunit_owneratom.set_jkey(concept_label_str(), sports_str)
-    insert_conceptunit_owneratom.set_jkey(parent_rope_str(), belief_label)
-    return insert_conceptunit_owneratom
+    x_dimen = owner_planunit_str()
+    insert_planunit_owneratom = owneratom_shop(x_dimen, INSERT_str())
+    insert_planunit_owneratom.set_jkey(plan_label_str(), sports_str)
+    insert_planunit_owneratom.set_jkey(parent_rope_str(), belief_label)
+    return insert_planunit_owneratom
 
 
 def get_ownerdelta_sue_example() -> OwnerDelta:

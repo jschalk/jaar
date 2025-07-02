@@ -6,7 +6,7 @@ from src.a00_data_toolbox.db_toolbox import (
 )
 from src.a01_term_logic.rope import create_rope
 from src.a04_reason_logic.test._util.a04_str import belief_label_str, owner_name_str
-from src.a05_concept_logic.test._util.a05_str import concept_rope_str, task_str
+from src.a05_plan_logic.test._util.a05_str import plan_rope_str, task_str
 from src.a18_etl_toolbox.test._util.a18_str import (
     belief_acct_nets_str,
     owner_net_amount_str,
@@ -97,7 +97,7 @@ VALUES
         cursor.execute(CREATE_JOB_PLNCONC_SQLSTR)
         job_plnconc_tablename = create_prime_tablename("plnconc", "job", None)
         insert_sqlstr = f"""
-INSERT INTO {job_plnconc_tablename} ({belief_label_str()}, {owner_name_str()}, {concept_rope_str()}, {task_str()})
+INSERT INTO {job_plnconc_tablename} ({belief_label_str()}, {owner_name_str()}, {plan_rope_str()}, {task_str()})
 VALUES ('{a23_str}', '{bob_str}', '{casa_rope}', 1)
 """
         cursor.execute(insert_sqlstr)

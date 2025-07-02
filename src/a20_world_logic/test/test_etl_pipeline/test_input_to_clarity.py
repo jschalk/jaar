@@ -198,7 +198,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         sue_gut = open_gut_file(mstr_dir, a23_str, sue_inx)
         time_rope = sue_gut.make_l1_rope(time_str())
         creg_rope = sue_gut.make_rope(time_rope, creg_str())
-        assert sue_gut.concept_exists(creg_rope)
+        assert sue_gut.plan_exists(creg_rope)
         assert os_path_exists(a23_sue_job_path)
         assert get_row_count(cursor, plnacct_job) == 1
         assert get_row_count(cursor, belief_acct_nets_str()) == 0

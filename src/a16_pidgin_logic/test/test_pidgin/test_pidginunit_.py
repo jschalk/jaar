@@ -8,8 +8,6 @@ from src.a06_owner_logic.test._util.a06_str import (
     acct_name_str,
     awardee_title_str,
     belief_label_str,
-    concept_label_str,
-    concept_rope_str,
     fcontext_str,
     fopen_str,
     fstate_str,
@@ -19,6 +17,8 @@ from src.a06_owner_logic.test._util.a06_str import (
     labor_title_str,
     owner_name_str,
     penny_str,
+    plan_label_str,
+    plan_rope_str,
     pstate_str,
     rcontext_str,
     respect_bit_str,
@@ -74,7 +74,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("amount") == "float"
     assert pidgin_args_class_types.get("awardee_title") == TitleTerm_str()
     assert pidgin_args_class_types.get("rcontext") == RopeTerm_str()
-    assert pidgin_args_class_types.get("rconcept_active_requisite") == "bool"
+    assert pidgin_args_class_types.get("rplan_active_requisite") == "bool"
     assert pidgin_args_class_types.get("begin") == "float"
     assert pidgin_args_class_types.get("c400_number") == "int"
     assert pidgin_args_class_types.get("close") == "float"
@@ -117,7 +117,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("problem_bool") == "bool"
     assert pidgin_args_class_types.get("quota") == "int"
     assert pidgin_args_class_types.get("respect_bit") == "float"
-    assert pidgin_args_class_types.get("concept_rope") == RopeTerm_str()
+    assert pidgin_args_class_types.get("plan_rope") == RopeTerm_str()
     assert pidgin_args_class_types.get("celldepth") == "int"
     assert pidgin_args_class_types.get("stop_want") == "float"
     assert pidgin_args_class_types.get("take_force") == "float"
@@ -216,7 +216,7 @@ def test_get_pidginable_args_ReturnsObj():
         month_label_str(),
         pstate_str(),
         owner_name_str(),
-        concept_rope_str(),
+        plan_rope_str(),
         labor_title_str(),
         timeline_label_str(),
         weekday_label_str(),
@@ -362,7 +362,7 @@ def test_get_pidgin_RopeTerm_args_ReturnsObj():
     assert pidgin_RopeTerm_args == {
         fstate_str(),
         fcontext_str(),
-        concept_rope_str(),
+        plan_rope_str(),
         rcontext_str(),
         pstate_str(),
     }

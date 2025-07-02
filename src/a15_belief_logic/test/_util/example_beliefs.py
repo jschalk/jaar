@@ -1,7 +1,7 @@
 from src.a01_term_logic.rope import create_rope
-from src.a04_reason_logic.reason_concept import FactUnit, factunit_shop
-from src.a05_concept_logic.concept import conceptunit_shop
-from src.a05_concept_logic.healer import healerlink_shop
+from src.a04_reason_logic.reason_plan import FactUnit, factunit_shop
+from src.a05_plan_logic.healer import healerlink_shop
+from src.a05_plan_logic.plan import planunit_shop
 from src.a06_owner_logic.owner import OwnerUnit, ownerunit_shop
 from src.a12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
 from src.a15_belief_logic.belief import BeliefUnit, beliefunit_shop
@@ -40,24 +40,24 @@ def create_example_belief2() -> BeliefUnit:
     zia_gut_owner.add_acctunit(zia_str, 38, 400)
     texas_str = "Texas"
     texas_rope = yao_gut_owner.make_l1_rope(texas_str)
-    yao_gut_owner.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
-    wei_gut_owner.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
-    zia_gut_owner.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
+    yao_gut_owner.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
+    wei_gut_owner.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
+    zia_gut_owner.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
     dallas_rope = yao_gut_owner.make_rope(texas_rope, dallas_str)
     dallas_healerlink = healerlink_shop({yao_str, zia_str})
-    dallas_concept = conceptunit_shop(dallas_str, healerlink=dallas_healerlink)
+    dallas_plan = planunit_shop(dallas_str, healerlink=dallas_healerlink)
     elpaso_str = "el paso"
     elpaso_rope = yao_gut_owner.make_rope(texas_rope, elpaso_str)
     elpaso_healerlink = healerlink_shop({yao_str})
-    elpaso_concept = conceptunit_shop(elpaso_str, healerlink=elpaso_healerlink)
+    elpaso_plan = planunit_shop(elpaso_str, healerlink=elpaso_healerlink)
 
-    yao_gut_owner.set_concept(dallas_concept, texas_rope)
-    yao_gut_owner.set_concept(elpaso_concept, texas_rope)
-    wei_gut_owner.set_concept(dallas_concept, texas_rope)
-    wei_gut_owner.set_concept(elpaso_concept, texas_rope)
-    zia_gut_owner.set_concept(dallas_concept, texas_rope)
-    zia_gut_owner.set_concept(elpaso_concept, texas_rope)
+    yao_gut_owner.set_plan(dallas_plan, texas_rope)
+    yao_gut_owner.set_plan(elpaso_plan, texas_rope)
+    wei_gut_owner.set_plan(dallas_plan, texas_rope)
+    wei_gut_owner.set_plan(elpaso_plan, texas_rope)
+    zia_gut_owner.set_plan(dallas_plan, texas_rope)
+    zia_gut_owner.set_plan(elpaso_plan, texas_rope)
     save_gut_file(x_belief_mstr_dir, yao_gut_owner)
     save_gut_file(x_belief_mstr_dir, wei_gut_owner)
     save_gut_file(x_belief_mstr_dir, zia_gut_owner)
@@ -85,24 +85,24 @@ def create_example_belief3() -> BeliefUnit:
 
     casa_str = "casa"
     casa_rope = yao_gut_owner.make_l1_rope(casa_str)
-    yao_gut_owner.set_l1_concept(conceptunit_shop(casa_str))
-    wei_gut_owner.set_l1_concept(conceptunit_shop(casa_str))
-    zia_gut_owner.set_l1_concept(conceptunit_shop(casa_str))
+    yao_gut_owner.set_l1_plan(planunit_shop(casa_str))
+    wei_gut_owner.set_l1_plan(planunit_shop(casa_str))
+    zia_gut_owner.set_l1_plan(planunit_shop(casa_str))
     clean_str = "clean"
     clean_rope = yao_gut_owner.make_rope(casa_rope, clean_str)
     bath_str = "clean bathroom"
     hall_str = "clean hall"
 
-    yao_gut_owner.set_concept(conceptunit_shop(clean_str, task=True), casa_rope)
-    yao_gut_owner.set_concept(conceptunit_shop(bath_str, task=True), clean_rope)
-    yao_gut_owner.set_concept(conceptunit_shop(hall_str, task=True), clean_rope)
+    yao_gut_owner.set_plan(planunit_shop(clean_str, task=True), casa_rope)
+    yao_gut_owner.set_plan(planunit_shop(bath_str, task=True), clean_rope)
+    yao_gut_owner.set_plan(planunit_shop(hall_str, task=True), clean_rope)
 
-    wei_gut_owner.set_concept(conceptunit_shop(clean_str, task=True), casa_rope)
-    wei_gut_owner.set_concept(conceptunit_shop(bath_str, task=True), clean_rope)
+    wei_gut_owner.set_plan(planunit_shop(clean_str, task=True), casa_rope)
+    wei_gut_owner.set_plan(planunit_shop(bath_str, task=True), clean_rope)
 
-    zia_gut_owner.set_concept(conceptunit_shop(clean_str, task=True), casa_rope)
-    zia_gut_owner.set_concept(conceptunit_shop(bath_str, task=True), clean_rope)
-    zia_gut_owner.set_concept(conceptunit_shop(hall_str, task=True), clean_rope)
+    zia_gut_owner.set_plan(planunit_shop(clean_str, task=True), casa_rope)
+    zia_gut_owner.set_plan(planunit_shop(bath_str, task=True), clean_rope)
+    zia_gut_owner.set_plan(planunit_shop(hall_str, task=True), clean_rope)
 
     save_gut_file(x_belief_mstr_dir, yao_gut_owner)
     save_gut_file(x_belief_mstr_dir, wei_gut_owner)
@@ -128,24 +128,24 @@ def create_example_belief4() -> BeliefUnit:
 
     casa_str = "casa"
     casa_rope = yao_gut_owner.make_l1_rope(casa_str)
-    yao_gut_owner.set_l1_concept(conceptunit_shop(casa_str))
-    wei_gut_owner.set_l1_concept(conceptunit_shop(casa_str))
-    zia_gut_owner.set_l1_concept(conceptunit_shop(casa_str))
+    yao_gut_owner.set_l1_plan(planunit_shop(casa_str))
+    wei_gut_owner.set_l1_plan(planunit_shop(casa_str))
+    zia_gut_owner.set_l1_plan(planunit_shop(casa_str))
     clean_str = "clean"
     clean_rope = yao_gut_owner.make_rope(casa_rope, clean_str)
     bath_str = "clean bathroom"
     hall_str = "clean hall"
 
-    yao_gut_owner.set_concept(conceptunit_shop(clean_str, task=True), casa_rope)
-    yao_gut_owner.set_concept(conceptunit_shop(bath_str, task=True), clean_rope)
-    yao_gut_owner.set_concept(conceptunit_shop(hall_str, task=True), clean_rope)
+    yao_gut_owner.set_plan(planunit_shop(clean_str, task=True), casa_rope)
+    yao_gut_owner.set_plan(planunit_shop(bath_str, task=True), clean_rope)
+    yao_gut_owner.set_plan(planunit_shop(hall_str, task=True), clean_rope)
 
-    wei_gut_owner.set_concept(conceptunit_shop(clean_str, task=True), casa_rope)
-    wei_gut_owner.set_concept(conceptunit_shop(bath_str, task=True), clean_rope)
+    wei_gut_owner.set_plan(planunit_shop(clean_str, task=True), casa_rope)
+    wei_gut_owner.set_plan(planunit_shop(bath_str, task=True), clean_rope)
 
-    zia_gut_owner.set_concept(conceptunit_shop(clean_str, task=True), casa_rope)
-    zia_gut_owner.set_concept(conceptunit_shop(bath_str, task=True), clean_rope)
-    zia_gut_owner.set_concept(conceptunit_shop(hall_str, task=True), clean_rope)
+    zia_gut_owner.set_plan(planunit_shop(clean_str, task=True), casa_rope)
+    zia_gut_owner.set_plan(planunit_shop(bath_str, task=True), clean_rope)
+    zia_gut_owner.set_plan(planunit_shop(hall_str, task=True), clean_rope)
 
     yao_gut_owner.set_credor_respect(101)
     wei_gut_owner.set_credor_respect(75)
@@ -164,9 +164,9 @@ def create_example_belief4() -> BeliefUnit:
     zia_gut_owner.add_acctunit(zia_str, 38, 400)
 
     texas_str = "Texas"
-    yao_gut_owner.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
-    wei_gut_owner.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
-    zia_gut_owner.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
+    yao_gut_owner.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
+    wei_gut_owner.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
+    zia_gut_owner.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
     save_gut_file(x_belief_mstr_dir, yao_gut_owner)
     save_gut_file(x_belief_mstr_dir, wei_gut_owner)
     save_gut_file(x_belief_mstr_dir, zia_gut_owner)
@@ -207,11 +207,11 @@ def get_bob_mop_without_reason_ownerunit_example() -> OwnerUnit:
     clean_rope = bob_owner.make_rope(floor_rope, clean_str)
     dirty_rope = bob_owner.make_rope(floor_rope, dirty_str)
     mop_rope = bob_owner.make_rope(casa_rope, mop_str)
-    bob_owner.add_concept(casa_rope, 1)
-    bob_owner.add_concept(floor_rope, 1)
-    bob_owner.add_concept(clean_rope, 1)
-    bob_owner.add_concept(dirty_rope, 1)
-    bob_owner.add_concept(mop_rope, 1, task=True)
+    bob_owner.add_plan(casa_rope, 1)
+    bob_owner.add_plan(floor_rope, 1)
+    bob_owner.add_plan(clean_rope, 1)
+    bob_owner.add_plan(dirty_rope, 1)
+    bob_owner.add_plan(mop_rope, 1, task=True)
     return bob_owner
 
 
@@ -226,7 +226,7 @@ def get_bob_mop_with_reason_ownerunit_example() -> OwnerUnit:
     floor_rope = bob_owner.make_rope(casa_rope, floor_str)
     dirty_rope = bob_owner.make_rope(floor_rope, dirty_str)
     mop_rope = bob_owner.make_rope(casa_rope, mop_str)
-    bob_owner.edit_concept_attr(
+    bob_owner.edit_plan_attr(
         mop_rope, reason_rcontext=floor_rope, reason_premise=dirty_rope
     )
     return bob_owner
@@ -258,16 +258,16 @@ def get_yao_run_with_reason_ownerunit_example() -> OwnerUnit:
     weather_rope = yao_owner.make_l1_rope(weather_str)
     rain_rope = yao_owner.make_rope(weather_rope, raining_str)
     snow_rope = yao_owner.make_rope(weather_rope, snowng_str)
-    yao_owner.add_concept(participate_rope)
-    yao_owner.add_concept(ski_rope, 5, task=True)
-    yao_owner.add_concept(run_rope, 1, task=True)
-    yao_owner.add_concept(weather_rope)
-    yao_owner.add_concept(rain_rope)
-    yao_owner.add_concept(snow_rope)
-    yao_owner.edit_concept_attr(
+    yao_owner.add_plan(participate_rope)
+    yao_owner.add_plan(ski_rope, 5, task=True)
+    yao_owner.add_plan(run_rope, 1, task=True)
+    yao_owner.add_plan(weather_rope)
+    yao_owner.add_plan(rain_rope)
+    yao_owner.add_plan(snow_rope)
+    yao_owner.edit_plan_attr(
         ski_rope, reason_rcontext=weather_rope, reason_premise=snow_rope
     )
-    yao_owner.edit_concept_attr(
+    yao_owner.edit_plan_attr(
         run_rope, reason_rcontext=weather_rope, reason_premise=rain_rope
     )
     return yao_owner

@@ -1,4 +1,4 @@
-from src.a05_concept_logic.concept import conceptunit_shop
+from src.a05_plan_logic.plan import planunit_shop
 from src.a06_owner_logic.owner import ownerunit_shop
 from src.a13_owner_listen_logic.listen import (
     get_debtors_roll,
@@ -134,16 +134,16 @@ def test_set_listen_to_speaker_fact_SetsFact():
 
     yao_listener.add_acctunit(yao_str)
     yao_listener.set_acct_respect(20)
-    yao_listener.set_concept(conceptunit_shop(clean_str), status_rope)
-    yao_listener.set_concept(conceptunit_shop(dirty_str), status_rope)
-    yao_listener.set_concept(conceptunit_shop(sweep_str, task=True), casa_rope)
-    yao_listener.edit_concept_attr(
+    yao_listener.set_plan(planunit_shop(clean_str), status_rope)
+    yao_listener.set_plan(planunit_shop(dirty_str), status_rope)
+    yao_listener.set_plan(planunit_shop(sweep_str, task=True), casa_rope)
+    yao_listener.edit_plan_attr(
         sweep_rope, reason_rcontext=status_rope, reason_premise=dirty_rope
     )
     missing_fact_fcontexts = list(yao_listener.get_missing_fact_rcontexts().keys())
 
     yao_speaker = ownerunit_shop(yao_str)
-    yao_speaker.add_fact(status_rope, clean_rope, create_missing_concepts=True)
+    yao_speaker.add_fact(status_rope, clean_rope, create_missing_plans=True)
     assert yao_listener.get_missing_fact_rcontexts().keys() == {status_rope}
 
     # WHEN
@@ -174,14 +174,14 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     running_str = "running"
     running_rope = yao_listener.make_rope(fridge_rope, running_str)
 
-    yao_listener.set_concept(conceptunit_shop(running_str), fridge_rope)
-    yao_listener.set_concept(conceptunit_shop(clean_str), status_rope)
-    yao_listener.set_concept(conceptunit_shop(dirty_str), status_rope)
-    yao_listener.set_concept(conceptunit_shop(sweep_str, task=True), casa_rope)
-    yao_listener.edit_concept_attr(
+    yao_listener.set_plan(planunit_shop(running_str), fridge_rope)
+    yao_listener.set_plan(planunit_shop(clean_str), status_rope)
+    yao_listener.set_plan(planunit_shop(dirty_str), status_rope)
+    yao_listener.set_plan(planunit_shop(sweep_str, task=True), casa_rope)
+    yao_listener.edit_plan_attr(
         sweep_rope, reason_rcontext=status_rope, reason_premise=dirty_rope
     )
-    yao_listener.edit_concept_attr(
+    yao_listener.edit_plan_attr(
         sweep_rope, reason_rcontext=fridge_rope, reason_premise=running_rope
     )
     assert len(yao_listener.get_missing_fact_rcontexts()) == 2
@@ -191,8 +191,8 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
 
     # WHEN
     yao_speaker = ownerunit_shop(yao_str)
-    yao_speaker.add_fact(status_rope, clean_rope, create_missing_concepts=True)
-    yao_speaker.add_fact(fridge_rope, running_rope, create_missing_concepts=True)
+    yao_speaker.add_fact(status_rope, clean_rope, create_missing_plans=True)
+    yao_speaker.add_fact(fridge_rope, running_rope, create_missing_plans=True)
     missing_fact_fcontexts = list(yao_listener.get_missing_fact_rcontexts().keys())
     listen_to_speaker_fact(yao_listener, yao_speaker, missing_fact_fcontexts)
 
@@ -204,7 +204,7 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     assert yao_listener.get_fact(fridge_rope).fstate == running_rope
 
 
-def test_migrate_all_facts_CorrectlyAddsConceptUnitsAndSetsFactUnits():
+def test_migrate_all_facts_CorrectlyAddsPlanUnitsAndSetsFactUnits():
     # ESTABLISH
     yao_str = "Yao"
     yao_src = ownerunit_shop(yao_str)
@@ -227,22 +227,22 @@ def test_migrate_all_facts_CorrectlyAddsConceptUnitsAndSetsFactUnits():
 
     yao_src.add_acctunit(yao_str)
     yao_src.set_acct_respect(20)
-    yao_src.set_concept(conceptunit_shop(clean_str), status_rope)
-    yao_src.set_concept(conceptunit_shop(dirty_str), status_rope)
-    yao_src.set_concept(conceptunit_shop(sweep_str, task=True), casa_rope)
+    yao_src.set_plan(planunit_shop(clean_str), status_rope)
+    yao_src.set_plan(planunit_shop(dirty_str), status_rope)
+    yao_src.set_plan(planunit_shop(sweep_str, task=True), casa_rope)
     yao_src.edit_reason(sweep_rope, status_rope, dirty_rope)
     # missing_fact_fcontexts = list(yao_src.get_missing_fact_rcontexts().keys())
-    yao_src.set_concept(conceptunit_shop(rain_str), weather_rope)
-    yao_src.set_concept(conceptunit_shop(snow_str), weather_rope)
+    yao_src.set_plan(planunit_shop(rain_str), weather_rope)
+    yao_src.set_plan(planunit_shop(snow_str), weather_rope)
     yao_src.add_fact(weather_rope, rain_rope)
     yao_src.add_fact(status_rope, clean_rope)
     yao_src.settle_owner()
 
     yao_dst = ownerunit_shop(yao_str)
-    assert yao_dst.concept_exists(clean_rope) is False
-    assert yao_dst.concept_exists(dirty_rope) is False
-    assert yao_dst.concept_exists(rain_rope) is False
-    assert yao_dst.concept_exists(snow_rope) is False
+    assert yao_dst.plan_exists(clean_rope) is False
+    assert yao_dst.plan_exists(dirty_rope) is False
+    assert yao_dst.plan_exists(rain_rope) is False
+    assert yao_dst.plan_exists(snow_rope) is False
     assert yao_dst.get_fact(weather_rope) is None
     assert yao_dst.get_fact(status_rope) is None
 
@@ -250,10 +250,10 @@ def test_migrate_all_facts_CorrectlyAddsConceptUnitsAndSetsFactUnits():
     migrate_all_facts(yao_src, yao_dst)
 
     # THEN
-    assert yao_dst.concept_exists(clean_rope)
-    assert yao_dst.concept_exists(dirty_rope)
-    assert yao_dst.concept_exists(rain_rope)
-    assert yao_dst.concept_exists(snow_rope)
+    assert yao_dst.plan_exists(clean_rope)
+    assert yao_dst.plan_exists(dirty_rope)
+    assert yao_dst.plan_exists(rain_rope)
+    assert yao_dst.plan_exists(snow_rope)
     assert yao_dst.get_fact(weather_rope) is not None
     assert yao_dst.get_fact(status_rope) is not None
     assert yao_dst.get_fact(weather_rope).fstate == rain_rope

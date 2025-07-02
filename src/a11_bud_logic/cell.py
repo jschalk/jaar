@@ -10,7 +10,7 @@ from src.a00_data_toolbox.dict_toolbox import (
 from src.a01_term_logic.term import EventInt, OwnerName, RopeTerm
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import FundNum, PennyNum
-from src.a04_reason_logic.reason_concept import (
+from src.a04_reason_logic.reason_plan import (
     FactUnit,
     factunits_get_from_dict,
     get_dict_from_factunits,

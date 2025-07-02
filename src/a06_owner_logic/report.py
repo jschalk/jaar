@@ -31,7 +31,7 @@ def get_owner_agenda_dataframe(
             columns=[
                 "owner_name",
                 "fund_ratio",
-                "concept_label",
+                "plan_label",
                 "parent_rope",
                 "begin",
                 "close",
@@ -41,19 +41,19 @@ def get_owner_agenda_dataframe(
                 "morph",
             ]
         )
-    x_concept_list = []
-    for x_concept in agenda_dict.values():
-        concept_dict = {
+    x_plan_list = []
+    for x_plan in agenda_dict.values():
+        plan_dict = {
             "owner_name": x_owner.owner_name,
-            "fund_ratio": x_concept._fund_ratio,
-            "concept_label": x_concept.concept_label,
-            "parent_rope": x_concept.parent_rope,
-            "begin": x_concept.begin,
-            "close": x_concept.close,
-            "addin": x_concept.addin,
-            "denom": x_concept.denom,
-            "numor": x_concept.numor,
-            "morph": x_concept.morph,
+            "fund_ratio": x_plan._fund_ratio,
+            "plan_label": x_plan.plan_label,
+            "parent_rope": x_plan.parent_rope,
+            "begin": x_plan.begin,
+            "close": x_plan.close,
+            "addin": x_plan.addin,
+            "denom": x_plan.denom,
+            "numor": x_plan.numor,
+            "morph": x_plan.morph,
         }
-        x_concept_list.append(concept_dict)
-    return DataFrame(x_concept_list)
+        x_plan_list.append(plan_dict)
+    return DataFrame(x_plan_list)

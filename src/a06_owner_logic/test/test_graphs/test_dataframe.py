@@ -84,7 +84,7 @@ def test_get_owner_agenda_dataframe_ReturnsCorrectDataFrame():
     acctunit_colums = {
         "owner_name",
         "fund_ratio",
-        "concept_label",
+        "plan_label",
         "parent_rope",
         "begin",
         "close",
@@ -112,7 +112,7 @@ def test_get_owner_agenda_dataframe_ReturnsCorrectEmptyDataFrame():
     acctunit_colums = {
         "owner_name",
         "fund_ratio",
-        "concept_label",
+        "plan_label",
         "parent_rope",
         "begin",
         "close",

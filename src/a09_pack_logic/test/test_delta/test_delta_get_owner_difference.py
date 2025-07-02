@@ -5,15 +5,14 @@ from src.a00_data_toolbox.dict_toolbox import (
 )
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import awardlink_shop
-from src.a04_reason_logic.reason_concept import factunit_shop
-from src.a05_concept_logic.concept import conceptunit_shop
+from src.a04_reason_logic.reason_plan import factunit_shop
+from src.a05_plan_logic.plan import planunit_shop
 from src.a06_owner_logic.owner import ownerunit_shop
 from src.a06_owner_logic.test._util.a06_str import (
     acct_name_str,
     awardee_title_str,
     begin_str,
     close_str,
-    concept_rope_str,
     fcontext_str,
     fnigh_str,
     fopen_str,
@@ -25,15 +24,16 @@ from src.a06_owner_logic.test._util.a06_str import (
     mass_str,
     owner_acct_membership_str,
     owner_acctunit_str,
-    owner_concept_awardlink_str,
-    owner_concept_factunit_str,
-    owner_concept_healerlink_str,
-    owner_concept_laborlink_str,
-    owner_concept_reason_premiseunit_str,
-    owner_concept_reasonunit_str,
-    owner_conceptunit_str,
+    owner_plan_awardlink_str,
+    owner_plan_factunit_str,
+    owner_plan_healerlink_str,
+    owner_plan_laborlink_str,
+    owner_plan_reason_premiseunit_str,
+    owner_plan_reasonunit_str,
+    owner_planunit_str,
     ownerunit_str,
-    rconcept_active_requisite_str,
+    plan_rope_str,
+    rplan_active_requisite_str,
     take_force_str,
     task_str,
 )
@@ -365,7 +365,7 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_acct_membersh
     assert get_owneratom_total_count(sue_ownerdelta) == 3
 
 
-def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_delete():
+def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_plan_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_owner = ownerunit_shop(sue_str)
@@ -373,40 +373,40 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_delet
     sports_rope = before_sue_owner.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_owner.make_rope(sports_rope, ball_str)
-    before_sue_owner.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_sue_owner.set_plan(planunit_shop(ball_str), sports_rope)
     street_str = "street ball"
     street_rope = before_sue_owner.make_rope(ball_rope, street_str)
-    before_sue_owner.set_concept(conceptunit_shop(street_str), ball_rope)
+    before_sue_owner.set_plan(planunit_shop(street_str), ball_rope)
     disc_str = "Ultimate Disc"
     disc_rope = before_sue_owner.make_rope(sports_rope, disc_str)
     amy45_str = "amy45"
-    before_sue_owner.set_l1_concept(conceptunit_shop(amy45_str))
-    before_sue_owner.set_concept(conceptunit_shop(disc_str), sports_rope)
-    # create after without ball_concept and street_concept
+    before_sue_owner.set_l1_plan(planunit_shop(amy45_str))
+    before_sue_owner.set_plan(planunit_shop(disc_str), sports_rope)
+    # create after without ball_plan and street_plan
     after_sue_owner = copy_deepcopy(before_sue_owner)
-    after_sue_owner.del_concept_obj(ball_rope)
+    after_sue_owner.del_plan_obj(ball_rope)
 
     # WHEN
     sue_ownerdelta = ownerdelta_shop()
     sue_ownerdelta.add_all_different_owneratoms(before_sue_owner, after_sue_owner)
 
     # THEN
-    x_dimen = owner_conceptunit_str()
+    x_dimen = owner_planunit_str()
     print(f"{sue_ownerdelta.owneratoms.get(DELETE_str()).get(x_dimen).keys()=}")
 
-    x_keylist = [DELETE_str(), owner_conceptunit_str(), street_rope]
+    x_keylist = [DELETE_str(), owner_planunit_str(), street_rope]
     street_owneratom = get_from_nested_dict(sue_ownerdelta.owneratoms, x_keylist)
-    assert street_owneratom.get_value(concept_rope_str()) == street_rope
+    assert street_owneratom.get_value(plan_rope_str()) == street_rope
 
-    x_keylist = [DELETE_str(), owner_conceptunit_str(), ball_rope]
+    x_keylist = [DELETE_str(), owner_planunit_str(), ball_rope]
     ball_owneratom = get_from_nested_dict(sue_ownerdelta.owneratoms, x_keylist)
-    assert ball_owneratom.get_value(concept_rope_str()) == ball_rope
+    assert ball_owneratom.get_value(plan_rope_str()) == ball_rope
 
     print(f"{get_owneratom_total_count(sue_ownerdelta)=}")
     assert get_owneratom_total_count(sue_ownerdelta) == 2
 
 
-def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_insert():
+def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_plan_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_owner = ownerunit_shop(sue_str)
@@ -414,23 +414,23 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_inser
     sports_rope = before_sue_owner.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_owner.make_rope(sports_rope, ball_str)
-    before_sue_owner.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_sue_owner.set_plan(planunit_shop(ball_str), sports_rope)
     street_str = "street ball"
     street_rope = before_sue_owner.make_rope(ball_rope, street_str)
-    before_sue_owner.set_concept(conceptunit_shop(street_str), ball_rope)
+    before_sue_owner.set_plan(planunit_shop(street_str), ball_rope)
 
     after_sue_owner = copy_deepcopy(before_sue_owner)
     disc_str = "Ultimate Disc"
     disc_rope = after_sue_owner.make_rope(sports_rope, disc_str)
-    after_sue_owner.set_concept(conceptunit_shop(disc_str), sports_rope)
+    after_sue_owner.set_plan(planunit_shop(disc_str), sports_rope)
     amy45_str = "amy45"
     amy_begin = 34
     amy_close = 78
     amy_mass = 55
     amy_task = True
     amy_rope = after_sue_owner.make_l1_rope(amy45_str)
-    after_sue_owner.set_l1_concept(
-        conceptunit_shop(
+    after_sue_owner.set_l1_plan(
+        planunit_shop(
             amy45_str,
             begin=amy_begin,
             close=amy_close,
@@ -446,14 +446,14 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_inser
     # THEN
     print_owneratom_keys(sue_ownerdelta)
 
-    x_keylist = [INSERT_str(), owner_conceptunit_str(), disc_rope]
+    x_keylist = [INSERT_str(), owner_planunit_str(), disc_rope]
     street_owneratom = get_from_nested_dict(sue_ownerdelta.owneratoms, x_keylist)
-    assert street_owneratom.get_value(concept_rope_str()) == disc_rope
+    assert street_owneratom.get_value(plan_rope_str()) == disc_rope
 
     a45_rope = after_sue_owner.make_l1_rope(amy45_str)
-    x_keylist = [INSERT_str(), owner_conceptunit_str(), a45_rope]
+    x_keylist = [INSERT_str(), owner_planunit_str(), a45_rope]
     ball_owneratom = get_from_nested_dict(sue_ownerdelta.owneratoms, x_keylist)
-    assert ball_owneratom.get_value(concept_rope_str()) == a45_rope
+    assert ball_owneratom.get_value(plan_rope_str()) == a45_rope
     assert ball_owneratom.get_value(begin_str()) == amy_begin
     assert ball_owneratom.get_value(close_str()) == amy_close
     assert ball_owneratom.get_value(mass_str()) == amy_mass
@@ -462,7 +462,7 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_inser
     assert get_owneratom_total_count(sue_ownerdelta) == 2
 
 
-def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_update():
+def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_plan_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_owner = ownerunit_shop(sue_str)
@@ -475,8 +475,8 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_updat
     before_amy_mass = 55
     before_amy_task = True
     amy_rope = before_sue_owner.make_l1_rope(amy45_str)
-    before_sue_owner.set_l1_concept(
-        conceptunit_shop(
+    before_sue_owner.set_l1_plan(
+        planunit_shop(
             amy45_str,
             begin=before_amy_begin,
             close=before_amy_close,
@@ -490,7 +490,7 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_updat
     after_amy_close = 111
     after_amy_mass = 22
     after_amy_task = False
-    after_sue_owner.edit_concept_attr(
+    after_sue_owner.edit_plan_attr(
         amy_rope,
         begin=after_amy_begin,
         close=after_amy_close,
@@ -505,9 +505,9 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_updat
     # THEN
     print_owneratom_keys(sue_ownerdelta)
 
-    x_keylist = [UPDATE_str(), owner_conceptunit_str(), amy45_rope]
+    x_keylist = [UPDATE_str(), owner_planunit_str(), amy45_rope]
     ball_owneratom = get_from_nested_dict(sue_ownerdelta.owneratoms, x_keylist)
-    assert ball_owneratom.get_value(concept_rope_str()) == amy45_rope
+    assert ball_owneratom.get_value(plan_rope_str()) == amy45_rope
     assert ball_owneratom.get_value(begin_str()) == after_amy_begin
     assert ball_owneratom.get_value(close_str()) == after_amy_close
     assert ball_owneratom.get_value(mass_str()) == after_amy_mass
@@ -516,7 +516,7 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_updat
     assert get_owneratom_total_count(sue_ownerdelta) == 1
 
 
-def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_awardlink_delete():
+def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_plan_awardlink_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = ownerunit_shop(sue_str)
@@ -542,15 +542,15 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_award
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
     disc_str = "Ultimate Disc"
     disc_rope = before_sue_au.make_rope(sports_rope, disc_str)
-    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_rope)
-    before_sue_au.set_concept(conceptunit_shop(disc_str), sports_rope)
-    before_sue_au.edit_concept_attr(ball_rope, awardlink=awardlink_shop(run_str))
-    before_sue_au.edit_concept_attr(ball_rope, awardlink=awardlink_shop(fly_str))
-    before_sue_au.edit_concept_attr(disc_rope, awardlink=awardlink_shop(run_str))
-    before_sue_au.edit_concept_attr(disc_rope, awardlink=awardlink_shop(fly_str))
+    before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
+    before_sue_au.set_plan(planunit_shop(disc_str), sports_rope)
+    before_sue_au.edit_plan_attr(ball_rope, awardlink=awardlink_shop(run_str))
+    before_sue_au.edit_plan_attr(ball_rope, awardlink=awardlink_shop(fly_str))
+    before_sue_au.edit_plan_attr(disc_rope, awardlink=awardlink_shop(run_str))
+    before_sue_au.edit_plan_attr(disc_rope, awardlink=awardlink_shop(fly_str))
 
     after_sue_owner = copy_deepcopy(before_sue_au)
-    after_sue_owner.edit_concept_attr(disc_rope, awardlink_del=run_str)
+    after_sue_owner.edit_plan_attr(disc_rope, awardlink_del=run_str)
 
     # WHEN
     sue_ownerdelta = ownerdelta_shop()
@@ -559,15 +559,15 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_award
     # THEN
     print(f"{print_owneratom_keys(sue_ownerdelta)=}")
 
-    x_keylist = [DELETE_str(), owner_concept_awardlink_str(), disc_rope, run_str]
+    x_keylist = [DELETE_str(), owner_plan_awardlink_str(), disc_rope, run_str]
     run_owneratom = get_from_nested_dict(sue_ownerdelta.owneratoms, x_keylist)
-    assert run_owneratom.get_value(concept_rope_str()) == disc_rope
+    assert run_owneratom.get_value(plan_rope_str()) == disc_rope
     assert run_owneratom.get_value(awardee_title_str()) == run_str
 
     assert get_owneratom_total_count(sue_ownerdelta) == 1
 
 
-def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_awardlink_insert():
+def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_plan_awardlink_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = ownerunit_shop(sue_str)
@@ -593,16 +593,16 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_award
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
     disc_str = "Ultimate Disc"
     disc_rope = before_sue_au.make_rope(sports_rope, disc_str)
-    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_rope)
-    before_sue_au.set_concept(conceptunit_shop(disc_str), sports_rope)
-    before_sue_au.edit_concept_attr(ball_rope, awardlink=awardlink_shop(run_str))
-    before_sue_au.edit_concept_attr(disc_rope, awardlink=awardlink_shop(fly_str))
+    before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
+    before_sue_au.set_plan(planunit_shop(disc_str), sports_rope)
+    before_sue_au.edit_plan_attr(ball_rope, awardlink=awardlink_shop(run_str))
+    before_sue_au.edit_plan_attr(disc_rope, awardlink=awardlink_shop(fly_str))
     after_sue_au = copy_deepcopy(before_sue_au)
-    after_sue_au.edit_concept_attr(ball_rope, awardlink=awardlink_shop(fly_str))
+    after_sue_au.edit_plan_attr(ball_rope, awardlink=awardlink_shop(fly_str))
     after_run_give_force = 44
     after_run_take_force = 66
     x_awardlink = awardlink_shop(run_str, after_run_give_force, after_run_take_force)
-    after_sue_au.edit_concept_attr(disc_rope, awardlink=x_awardlink)
+    after_sue_au.edit_plan_attr(disc_rope, awardlink=x_awardlink)
 
     # WHEN
     sue_ownerdelta = ownerdelta_shop()
@@ -611,11 +611,11 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_award
     # THEN
     print(f"{print_owneratom_keys(sue_ownerdelta)=}")
 
-    x_keylist = [INSERT_str(), owner_concept_awardlink_str(), disc_rope, run_str]
+    x_keylist = [INSERT_str(), owner_plan_awardlink_str(), disc_rope, run_str]
     run_owneratom = get_from_nested_dict(sue_ownerdelta.owneratoms, x_keylist)
-    assert run_owneratom.get_value(concept_rope_str()) == disc_rope
+    assert run_owneratom.get_value(plan_rope_str()) == disc_rope
     assert run_owneratom.get_value(awardee_title_str()) == run_str
-    assert run_owneratom.get_value(concept_rope_str()) == disc_rope
+    assert run_owneratom.get_value(plan_rope_str()) == disc_rope
     assert run_owneratom.get_value(awardee_title_str()) == run_str
     assert run_owneratom.get_value(give_force_str()) == after_run_give_force
     assert run_owneratom.get_value(take_force_str()) == after_run_take_force
@@ -623,7 +623,7 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_award
     assert get_owneratom_total_count(sue_ownerdelta) == 2
 
 
-def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_awardlink_update():
+def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_plan_awardlink_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = ownerunit_shop(sue_str)
@@ -638,14 +638,14 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_award
     sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
-    before_sue_au.set_concept(conceptunit_shop(ball_str), sports_rope)
-    before_sue_au.edit_concept_attr(ball_rope, awardlink=awardlink_shop(run_str))
-    run_awardlink = before_sue_au.get_concept_obj(ball_rope).awardlinks.get(run_str)
+    before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
+    before_sue_au.edit_plan_attr(ball_rope, awardlink=awardlink_shop(run_str))
+    run_awardlink = before_sue_au.get_plan_obj(ball_rope).awardlinks.get(run_str)
 
     after_sue_owner = copy_deepcopy(before_sue_au)
     after_give_force = 55
     after_take_force = 66
-    after_sue_owner.edit_concept_attr(
+    after_sue_owner.edit_plan_attr(
         ball_rope,
         awardlink=awardlink_shop(
             awardee_title=run_str,
@@ -660,16 +660,16 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_award
     # THEN
     print(f"{print_owneratom_keys(sue_ownerdelta)=}")
 
-    x_keylist = [UPDATE_str(), owner_concept_awardlink_str(), ball_rope, run_str]
+    x_keylist = [UPDATE_str(), owner_plan_awardlink_str(), ball_rope, run_str]
     ball_owneratom = get_from_nested_dict(sue_ownerdelta.owneratoms, x_keylist)
-    assert ball_owneratom.get_value(concept_rope_str()) == ball_rope
+    assert ball_owneratom.get_value(plan_rope_str()) == ball_rope
     assert ball_owneratom.get_value(awardee_title_str()) == run_str
     assert ball_owneratom.get_value(give_force_str()) == after_give_force
     assert ball_owneratom.get_value(take_force_str()) == after_take_force
     assert get_owneratom_total_count(sue_ownerdelta) == 1
 
 
-def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_factunit_update():
+def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_plan_factunit_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_owner = ownerunit_shop(sue_str)
@@ -677,26 +677,26 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_factu
     sports_rope = before_sue_owner.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_owner.make_rope(sports_rope, ball_str)
-    before_sue_owner.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_sue_owner.set_plan(planunit_shop(ball_str), sports_rope)
     knee_str = "knee"
     knee_rope = before_sue_owner.make_l1_rope(knee_str)
     bend_str = "bendable"
     bend_rope = before_sue_owner.make_rope(knee_rope, bend_str)
-    before_sue_owner.set_concept(conceptunit_shop(bend_str), knee_rope)
+    before_sue_owner.set_plan(planunit_shop(bend_str), knee_rope)
     damaged_str = "damaged mcl"
     damaged_rope = before_sue_owner.make_rope(knee_rope, damaged_str)
-    before_sue_owner.set_l1_concept(conceptunit_shop(knee_str))
-    before_sue_owner.set_concept(conceptunit_shop(damaged_str), knee_rope)
+    before_sue_owner.set_l1_plan(planunit_shop(knee_str))
+    before_sue_owner.set_plan(planunit_shop(damaged_str), knee_rope)
     before_fopen = 11
     before_fnigh = 22
     before_fact = factunit_shop(knee_rope, bend_rope, before_fopen, before_fnigh)
-    before_sue_owner.edit_concept_attr(ball_rope, factunit=before_fact)
+    before_sue_owner.edit_plan_attr(ball_rope, factunit=before_fact)
 
     after_sue_owner = copy_deepcopy(before_sue_owner)
     after_fopen = 55
     after_fnigh = 66
     knee_fact = factunit_shop(knee_rope, damaged_rope, after_fopen, after_fnigh)
-    after_sue_owner.edit_concept_attr(ball_rope, factunit=knee_fact)
+    after_sue_owner.edit_plan_attr(ball_rope, factunit=knee_fact)
 
     # WHEN
     sue_ownerdelta = ownerdelta_shop()
@@ -705,9 +705,9 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_factu
     # THEN
     print(f"{print_owneratom_keys(sue_ownerdelta)=}")
 
-    x_keylist = [UPDATE_str(), owner_concept_factunit_str(), ball_rope, knee_rope]
+    x_keylist = [UPDATE_str(), owner_plan_factunit_str(), ball_rope, knee_rope]
     ball_owneratom = get_from_nested_dict(sue_ownerdelta.owneratoms, x_keylist)
-    assert ball_owneratom.get_value(concept_rope_str()) == ball_rope
+    assert ball_owneratom.get_value(plan_rope_str()) == ball_rope
     assert ball_owneratom.get_value(fcontext_str()) == knee_rope
     assert ball_owneratom.get_value(fstate_str()) == damaged_rope
     assert ball_owneratom.get_value(fopen_str()) == after_fopen
@@ -715,7 +715,7 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_factu
     assert get_owneratom_total_count(sue_ownerdelta) == 1
 
 
-def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_factunit_insert():
+def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_plan_factunit_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_owner = ownerunit_shop(sue_str)
@@ -723,19 +723,19 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_factu
     sports_rope = before_sue_owner.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_owner.make_rope(sports_rope, ball_str)
-    before_sue_owner.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_sue_owner.set_plan(planunit_shop(ball_str), sports_rope)
     knee_str = "knee"
     knee_rope = before_sue_owner.make_l1_rope(knee_str)
     damaged_str = "damaged mcl"
     damaged_rope = before_sue_owner.make_rope(knee_rope, damaged_str)
-    before_sue_owner.set_l1_concept(conceptunit_shop(knee_str))
-    before_sue_owner.set_concept(conceptunit_shop(damaged_str), knee_rope)
+    before_sue_owner.set_l1_plan(planunit_shop(knee_str))
+    before_sue_owner.set_plan(planunit_shop(damaged_str), knee_rope)
 
     after_sue_owner = copy_deepcopy(before_sue_owner)
     after_fopen = 55
     after_fnigh = 66
     after_fact = factunit_shop(knee_rope, damaged_rope, after_fopen, after_fnigh)
-    after_sue_owner.edit_concept_attr(ball_rope, factunit=after_fact)
+    after_sue_owner.edit_plan_attr(ball_rope, factunit=after_fact)
 
     # WHEN
     sue_ownerdelta = ownerdelta_shop()
@@ -743,10 +743,10 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_factu
 
     # THEN
     print(f"{print_owneratom_keys(sue_ownerdelta)=}")
-    x_keylist = [INSERT_str(), owner_concept_factunit_str(), ball_rope, knee_rope]
+    x_keylist = [INSERT_str(), owner_plan_factunit_str(), ball_rope, knee_rope]
     ball_owneratom = get_from_nested_dict(sue_ownerdelta.owneratoms, x_keylist)
     print(f"{ball_owneratom=}")
-    assert ball_owneratom.get_value(concept_rope_str()) == ball_rope
+    assert ball_owneratom.get_value(plan_rope_str()) == ball_rope
     assert ball_owneratom.get_value(fcontext_str()) == knee_rope
     assert ball_owneratom.get_value(fstate_str()) == damaged_rope
     assert ball_owneratom.get_value(fopen_str()) == after_fopen
@@ -754,7 +754,7 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_factu
     assert get_owneratom_total_count(sue_ownerdelta) == 1
 
 
-def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_factunit_delete():
+def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_plan_factunit_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_owner = ownerunit_shop(sue_str)
@@ -762,13 +762,13 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_factu
     sports_rope = before_sue_owner.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_owner.make_rope(sports_rope, ball_str)
-    before_sue_owner.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_sue_owner.set_plan(planunit_shop(ball_str), sports_rope)
     knee_str = "knee"
     knee_rope = before_sue_owner.make_l1_rope(knee_str)
     damaged_str = "damaged mcl"
     damaged_rope = before_sue_owner.make_rope(knee_rope, damaged_str)
-    before_sue_owner.set_l1_concept(conceptunit_shop(knee_str))
-    before_sue_owner.set_concept(conceptunit_shop(damaged_str), knee_rope)
+    before_sue_owner.set_l1_plan(planunit_shop(knee_str))
+    before_sue_owner.set_plan(planunit_shop(damaged_str), knee_rope)
 
     after_sue_owner = copy_deepcopy(before_sue_owner)
     before_damaged_popen = 55
@@ -779,7 +779,7 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_factu
         fopen=before_damaged_popen,
         fnigh=before_damaged_pnigh,
     )
-    before_sue_owner.edit_concept_attr(ball_rope, factunit=before_fact)
+    before_sue_owner.edit_plan_attr(ball_rope, factunit=before_fact)
 
     # WHEN
     sue_ownerdelta = ownerdelta_shop()
@@ -787,14 +787,14 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_factu
 
     # THEN
     print(f"{print_owneratom_keys(sue_ownerdelta)=}")
-    x_keylist = [DELETE_str(), owner_concept_factunit_str(), ball_rope, knee_rope]
+    x_keylist = [DELETE_str(), owner_plan_factunit_str(), ball_rope, knee_rope]
     ball_owneratom = get_from_nested_dict(sue_ownerdelta.owneratoms, x_keylist)
-    assert ball_owneratom.get_value(concept_rope_str()) == ball_rope
+    assert ball_owneratom.get_value(plan_rope_str()) == ball_rope
     assert ball_owneratom.get_value(fcontext_str()) == knee_rope
     assert get_owneratom_total_count(sue_ownerdelta) == 1
 
 
-def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_reason_premiseunit_insert():
+def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_plan_reason_premiseunit_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_owner = ownerunit_shop(sue_str)
@@ -802,17 +802,17 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_reaso
     sports_rope = before_sue_owner.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_owner.make_rope(sports_rope, ball_str)
-    before_sue_owner.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_sue_owner.set_plan(planunit_shop(ball_str), sports_rope)
     knee_str = "knee"
     knee_rope = before_sue_owner.make_l1_rope(knee_str)
-    before_sue_owner.set_l1_concept(conceptunit_shop(knee_str))
+    before_sue_owner.set_l1_plan(planunit_shop(knee_str))
     damaged_str = "damaged mcl"
     damaged_rope = before_sue_owner.make_rope(knee_rope, damaged_str)
-    before_sue_owner.set_concept(conceptunit_shop(damaged_str), knee_rope)
+    before_sue_owner.set_plan(planunit_shop(damaged_str), knee_rope)
     bend_str = "bend"
     bend_rope = before_sue_owner.make_rope(knee_rope, bend_str)
-    before_sue_owner.set_concept(conceptunit_shop(bend_str), knee_rope)
-    before_sue_owner.edit_concept_attr(
+    before_sue_owner.set_plan(planunit_shop(bend_str), knee_rope)
+    before_sue_owner.edit_plan_attr(
         ball_rope, reason_rcontext=knee_rope, reason_premise=bend_rope
     )
 
@@ -820,7 +820,7 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_reaso
     damaged_popen = 45
     damaged_pnigh = 77
     damaged_pdivisor = 3
-    after_sue_owner.edit_concept_attr(
+    after_sue_owner.edit_plan_attr(
         ball_rope,
         reason_rcontext=knee_rope,
         reason_premise=damaged_rope,
@@ -837,13 +837,13 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_reaso
     print(f"{print_owneratom_keys(sue_ownerdelta)=}")
     x_keylist = [
         INSERT_str(),
-        owner_concept_reason_premiseunit_str(),
+        owner_plan_reason_premiseunit_str(),
         ball_rope,
         knee_rope,
         damaged_rope,
     ]
     ball_owneratom = get_from_nested_dict(sue_ownerdelta.owneratoms, x_keylist)
-    assert ball_owneratom.get_value(concept_rope_str()) == ball_rope
+    assert ball_owneratom.get_value(plan_rope_str()) == ball_rope
     assert ball_owneratom.get_value("rcontext") == knee_rope
     assert ball_owneratom.get_value("pstate") == damaged_rope
     assert ball_owneratom.get_value("popen") == damaged_popen
@@ -852,7 +852,7 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_reaso
     assert get_owneratom_total_count(sue_ownerdelta) == 1
 
 
-def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_reason_premiseunit_delete():
+def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_plan_reason_premiseunit_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_owner = ownerunit_shop(sue_str)
@@ -860,23 +860,23 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_reaso
     sports_rope = before_sue_owner.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_owner.make_rope(sports_rope, ball_str)
-    before_sue_owner.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_sue_owner.set_plan(planunit_shop(ball_str), sports_rope)
     knee_str = "knee"
     knee_rope = before_sue_owner.make_l1_rope(knee_str)
-    before_sue_owner.set_l1_concept(conceptunit_shop(knee_str))
+    before_sue_owner.set_l1_plan(planunit_shop(knee_str))
     damaged_str = "damaged mcl"
     damaged_rope = before_sue_owner.make_rope(knee_rope, damaged_str)
-    before_sue_owner.set_concept(conceptunit_shop(damaged_str), knee_rope)
+    before_sue_owner.set_plan(planunit_shop(damaged_str), knee_rope)
     bend_str = "bend"
     bend_rope = before_sue_owner.make_rope(knee_rope, bend_str)
-    before_sue_owner.set_concept(conceptunit_shop(bend_str), knee_rope)
-    before_sue_owner.edit_concept_attr(
+    before_sue_owner.set_plan(planunit_shop(bend_str), knee_rope)
+    before_sue_owner.edit_plan_attr(
         ball_rope, reason_rcontext=knee_rope, reason_premise=bend_rope
     )
     damaged_popen = 45
     damaged_pnigh = 77
     damaged_pdivisor = 3
-    before_sue_owner.edit_concept_attr(
+    before_sue_owner.edit_plan_attr(
         ball_rope,
         reason_rcontext=knee_rope,
         reason_premise=damaged_rope,
@@ -885,7 +885,7 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_reaso
         pdivisor=damaged_pdivisor,
     )
     after_sue_owner = copy_deepcopy(before_sue_owner)
-    after_sue_owner.edit_concept_attr(
+    after_sue_owner.edit_plan_attr(
         ball_rope,
         reason_del_premise_rcontext=knee_rope,
         reason_del_premise_pstate=damaged_rope,
@@ -899,19 +899,19 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_reaso
     print(f"{print_owneratom_keys(sue_ownerdelta)=}")
     x_keylist = [
         DELETE_str(),
-        owner_concept_reason_premiseunit_str(),
+        owner_plan_reason_premiseunit_str(),
         ball_rope,
         knee_rope,
         damaged_rope,
     ]
     ball_owneratom = get_from_nested_dict(sue_ownerdelta.owneratoms, x_keylist)
-    assert ball_owneratom.get_value(concept_rope_str()) == ball_rope
+    assert ball_owneratom.get_value(plan_rope_str()) == ball_rope
     assert ball_owneratom.get_value("rcontext") == knee_rope
     assert ball_owneratom.get_value("pstate") == damaged_rope
     assert get_owneratom_total_count(sue_ownerdelta) == 1
 
 
-def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_reason_premiseunit_update():
+def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_plan_reason_premiseunit_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_owner = ownerunit_shop(sue_str)
@@ -919,23 +919,23 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_reaso
     sports_rope = before_sue_owner.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_owner.make_rope(sports_rope, ball_str)
-    before_sue_owner.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_sue_owner.set_plan(planunit_shop(ball_str), sports_rope)
     knee_str = "knee"
     knee_rope = before_sue_owner.make_l1_rope(knee_str)
-    before_sue_owner.set_l1_concept(conceptunit_shop(knee_str))
+    before_sue_owner.set_l1_plan(planunit_shop(knee_str))
     damaged_str = "damaged mcl"
     damaged_rope = before_sue_owner.make_rope(knee_rope, damaged_str)
-    before_sue_owner.set_concept(conceptunit_shop(damaged_str), knee_rope)
+    before_sue_owner.set_plan(planunit_shop(damaged_str), knee_rope)
     bend_str = "bend"
     bend_rope = before_sue_owner.make_rope(knee_rope, bend_str)
-    before_sue_owner.set_concept(conceptunit_shop(bend_str), knee_rope)
-    before_sue_owner.edit_concept_attr(
+    before_sue_owner.set_plan(planunit_shop(bend_str), knee_rope)
+    before_sue_owner.edit_plan_attr(
         ball_rope, reason_rcontext=knee_rope, reason_premise=bend_rope
     )
     before_damaged_popen = 111
     before_damaged_pnigh = 777
     before_damaged_pdivisor = 13
-    before_sue_owner.edit_concept_attr(
+    before_sue_owner.edit_plan_attr(
         ball_rope,
         reason_rcontext=knee_rope,
         reason_premise=damaged_rope,
@@ -948,7 +948,7 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_reaso
     after_damaged_popen = 333
     after_damaged_pnigh = 555
     after_damaged_pdivisor = 78
-    after_sue_owner.edit_concept_attr(
+    after_sue_owner.edit_plan_attr(
         ball_rope,
         reason_rcontext=knee_rope,
         reason_premise=damaged_rope,
@@ -965,13 +965,13 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_reaso
     print(f"{print_owneratom_keys(sue_ownerdelta)=}")
     x_keylist = [
         UPDATE_str(),
-        owner_concept_reason_premiseunit_str(),
+        owner_plan_reason_premiseunit_str(),
         ball_rope,
         knee_rope,
         damaged_rope,
     ]
     ball_owneratom = get_from_nested_dict(sue_ownerdelta.owneratoms, x_keylist)
-    assert ball_owneratom.get_value(concept_rope_str()) == ball_rope
+    assert ball_owneratom.get_value(plan_rope_str()) == ball_rope
     assert ball_owneratom.get_value("rcontext") == knee_rope
     assert ball_owneratom.get_value("pstate") == damaged_rope
     assert ball_owneratom.get_value("popen") == after_damaged_popen
@@ -980,7 +980,7 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_reaso
     assert get_owneratom_total_count(sue_ownerdelta) == 1
 
 
-def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_reasonunit_insert():
+def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_plan_reasonunit_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_owner = ownerunit_shop(sue_str)
@@ -988,20 +988,20 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_reaso
     sports_rope = before_sue_owner.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_owner.make_rope(sports_rope, ball_str)
-    before_sue_owner.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_sue_owner.set_plan(planunit_shop(ball_str), sports_rope)
     knee_str = "knee"
     knee_rope = before_sue_owner.make_l1_rope(knee_str)
     medical_str = "get medical attention"
     medical_rope = before_sue_owner.make_rope(knee_rope, medical_str)
-    before_sue_owner.set_l1_concept(conceptunit_shop(knee_str))
-    before_sue_owner.set_concept(conceptunit_shop(medical_str), knee_rope)
+    before_sue_owner.set_l1_plan(planunit_shop(knee_str))
+    before_sue_owner.set_plan(planunit_shop(medical_str), knee_rope)
 
     after_sue_owner = copy_deepcopy(before_sue_owner)
-    after_medical_rconcept_active_requisite = False
-    after_sue_owner.edit_concept_attr(
+    after_medical_rplan_active_requisite = False
+    after_sue_owner.edit_plan_attr(
         ball_rope,
         reason_rcontext=medical_rope,
-        reason_rconcept_active_requisite=after_medical_rconcept_active_requisite,
+        reason_rplan_active_requisite=after_medical_rplan_active_requisite,
     )
 
     sue_ownerdelta = ownerdelta_shop()
@@ -1011,21 +1011,21 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_reaso
     print(f"{print_owneratom_keys(sue_ownerdelta)=}")
     x_keylist = [
         INSERT_str(),
-        owner_concept_reasonunit_str(),
+        owner_plan_reasonunit_str(),
         ball_rope,
         medical_rope,
     ]
     ball_owneratom = get_from_nested_dict(sue_ownerdelta.owneratoms, x_keylist)
-    assert ball_owneratom.get_value(concept_rope_str()) == ball_rope
+    assert ball_owneratom.get_value(plan_rope_str()) == ball_rope
     assert ball_owneratom.get_value("rcontext") == medical_rope
     assert (
-        ball_owneratom.get_value(rconcept_active_requisite_str())
-        == after_medical_rconcept_active_requisite
+        ball_owneratom.get_value(rplan_active_requisite_str())
+        == after_medical_rplan_active_requisite
     )
     assert get_owneratom_total_count(sue_ownerdelta) == 1
 
 
-def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_reasonunit_update():
+def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_plan_reasonunit_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_owner = ownerunit_shop(sue_str)
@@ -1033,26 +1033,26 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_reaso
     sports_rope = before_sue_owner.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_owner.make_rope(sports_rope, ball_str)
-    before_sue_owner.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_sue_owner.set_plan(planunit_shop(ball_str), sports_rope)
     knee_str = "knee"
     knee_rope = before_sue_owner.make_l1_rope(knee_str)
     medical_str = "get medical attention"
     medical_rope = before_sue_owner.make_rope(knee_rope, medical_str)
-    before_sue_owner.set_l1_concept(conceptunit_shop(knee_str))
-    before_sue_owner.set_concept(conceptunit_shop(medical_str), knee_rope)
-    before_medical_rconcept_active_requisite = True
-    before_sue_owner.edit_concept_attr(
+    before_sue_owner.set_l1_plan(planunit_shop(knee_str))
+    before_sue_owner.set_plan(planunit_shop(medical_str), knee_rope)
+    before_medical_rplan_active_requisite = True
+    before_sue_owner.edit_plan_attr(
         ball_rope,
         reason_rcontext=medical_rope,
-        reason_rconcept_active_requisite=before_medical_rconcept_active_requisite,
+        reason_rplan_active_requisite=before_medical_rplan_active_requisite,
     )
 
     after_sue_owner = copy_deepcopy(before_sue_owner)
-    after_medical_rconcept_active_requisite = False
-    after_sue_owner.edit_concept_attr(
+    after_medical_rplan_active_requisite = False
+    after_sue_owner.edit_plan_attr(
         ball_rope,
         reason_rcontext=medical_rope,
-        reason_rconcept_active_requisite=after_medical_rconcept_active_requisite,
+        reason_rplan_active_requisite=after_medical_rplan_active_requisite,
     )
 
     # WHEN
@@ -1063,21 +1063,21 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_reaso
     print(f"{print_owneratom_keys(sue_ownerdelta)=}")
     x_keylist = [
         UPDATE_str(),
-        owner_concept_reasonunit_str(),
+        owner_plan_reasonunit_str(),
         ball_rope,
         medical_rope,
     ]
     ball_owneratom = get_from_nested_dict(sue_ownerdelta.owneratoms, x_keylist)
-    assert ball_owneratom.get_value(concept_rope_str()) == ball_rope
+    assert ball_owneratom.get_value(plan_rope_str()) == ball_rope
     assert ball_owneratom.get_value("rcontext") == medical_rope
     assert (
-        ball_owneratom.get_value(rconcept_active_requisite_str())
-        == after_medical_rconcept_active_requisite
+        ball_owneratom.get_value(rplan_active_requisite_str())
+        == after_medical_rplan_active_requisite
     )
     assert get_owneratom_total_count(sue_ownerdelta) == 1
 
 
-def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_reasonunit_delete():
+def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_plan_reasonunit_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_owner = ownerunit_shop(sue_str)
@@ -1085,23 +1085,23 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_reaso
     sports_rope = before_sue_owner.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_owner.make_rope(sports_rope, ball_str)
-    before_sue_owner.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_sue_owner.set_plan(planunit_shop(ball_str), sports_rope)
     knee_str = "knee"
     knee_rope = before_sue_owner.make_l1_rope(knee_str)
     medical_str = "get medical attention"
     medical_rope = before_sue_owner.make_rope(knee_rope, medical_str)
-    before_sue_owner.set_l1_concept(conceptunit_shop(knee_str))
-    before_sue_owner.set_concept(conceptunit_shop(medical_str), knee_rope)
-    before_medical_rconcept_active_requisite = True
-    before_sue_owner.edit_concept_attr(
+    before_sue_owner.set_l1_plan(planunit_shop(knee_str))
+    before_sue_owner.set_plan(planunit_shop(medical_str), knee_rope)
+    before_medical_rplan_active_requisite = True
+    before_sue_owner.edit_plan_attr(
         ball_rope,
         reason_rcontext=medical_rope,
-        reason_rconcept_active_requisite=before_medical_rconcept_active_requisite,
+        reason_rplan_active_requisite=before_medical_rplan_active_requisite,
     )
 
     after_sue_owner = copy_deepcopy(before_sue_owner)
-    after_ball_concept = after_sue_owner.get_concept_obj(ball_rope)
-    after_ball_concept.del_reasonunit_rcontext(medical_rope)
+    after_ball_plan = after_sue_owner.get_plan_obj(ball_rope)
+    after_ball_plan.del_reasonunit_rcontext(medical_rope)
 
     # WHEN
     sue_ownerdelta = ownerdelta_shop()
@@ -1111,17 +1111,17 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_reaso
     print(f"{print_owneratom_keys(sue_ownerdelta)=}")
     x_keylist = [
         DELETE_str(),
-        owner_concept_reasonunit_str(),
+        owner_plan_reasonunit_str(),
         ball_rope,
         medical_rope,
     ]
     ball_owneratom = get_from_nested_dict(sue_ownerdelta.owneratoms, x_keylist)
-    assert ball_owneratom.get_value(concept_rope_str()) == ball_rope
+    assert ball_owneratom.get_value(plan_rope_str()) == ball_rope
     assert ball_owneratom.get_value("rcontext") == medical_rope
     assert get_owneratom_total_count(sue_ownerdelta) == 1
 
 
-def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_laborlink_insert():
+def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_plan_laborlink_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_owner = ownerunit_shop(sue_str)
@@ -1131,11 +1131,11 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_labor
     sports_rope = before_sue_owner.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_owner.make_rope(sports_rope, ball_str)
-    before_sue_owner.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_sue_owner.set_plan(planunit_shop(ball_str), sports_rope)
 
     after_sue_owner = copy_deepcopy(before_sue_owner)
-    after_ball_conceptunit = after_sue_owner.get_concept_obj(ball_rope)
-    after_ball_conceptunit.laborunit.set_laborlink(xio_str)
+    after_ball_planunit = after_sue_owner.get_plan_obj(ball_rope)
+    after_ball_planunit.laborunit.set_laborlink(xio_str)
 
     # WHEN
     sue_ownerdelta = ownerdelta_shop()
@@ -1145,17 +1145,17 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_labor
     print(f"{print_owneratom_keys(sue_ownerdelta)=}")
     x_keylist = [
         INSERT_str(),
-        owner_concept_laborlink_str(),
+        owner_plan_laborlink_str(),
         ball_rope,
         xio_str,
     ]
     ball_owneratom = get_from_nested_dict(sue_ownerdelta.owneratoms, x_keylist)
-    assert ball_owneratom.get_value(concept_rope_str()) == ball_rope
+    assert ball_owneratom.get_value(plan_rope_str()) == ball_rope
     assert ball_owneratom.get_value(labor_title_str()) == xio_str
     assert get_owneratom_total_count(sue_ownerdelta) == 1
 
 
-def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_laborlink_delete():
+def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_plan_laborlink_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_owner = ownerunit_shop(sue_str)
@@ -1165,13 +1165,13 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_labor
     sports_rope = before_sue_owner.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_owner.make_rope(sports_rope, ball_str)
-    before_sue_owner.set_concept(conceptunit_shop(ball_str), sports_rope)
-    before_ball_conceptunit = before_sue_owner.get_concept_obj(ball_rope)
-    before_ball_conceptunit.laborunit.set_laborlink(xio_str)
+    before_sue_owner.set_plan(planunit_shop(ball_str), sports_rope)
+    before_ball_planunit = before_sue_owner.get_plan_obj(ball_rope)
+    before_ball_planunit.laborunit.set_laborlink(xio_str)
 
     after_sue_owner = copy_deepcopy(before_sue_owner)
-    after_ball_conceptunit = after_sue_owner.get_concept_obj(ball_rope)
-    after_ball_conceptunit.laborunit.del_laborlink(xio_str)
+    after_ball_planunit = after_sue_owner.get_plan_obj(ball_rope)
+    after_ball_planunit.laborunit.del_laborlink(xio_str)
 
     # WHEN
     sue_ownerdelta = ownerdelta_shop()
@@ -1181,17 +1181,17 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_labor
     print(f"{print_owneratom_keys(sue_ownerdelta)=}")
     x_keylist = [
         DELETE_str(),
-        owner_concept_laborlink_str(),
+        owner_plan_laborlink_str(),
         ball_rope,
         xio_str,
     ]
     ball_owneratom = get_from_nested_dict(sue_ownerdelta.owneratoms, x_keylist)
-    assert ball_owneratom.get_value(concept_rope_str()) == ball_rope
+    assert ball_owneratom.get_value(plan_rope_str()) == ball_rope
     assert ball_owneratom.get_value(labor_title_str()) == xio_str
     assert get_owneratom_total_count(sue_ownerdelta) == 1
 
 
-def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_healerlink_insert_ConceptUnitUpdate():
+def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_plan_healerlink_insert_PlanUnitUpdate():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_owner = ownerunit_shop(sue_str)
@@ -1201,11 +1201,11 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_heale
     sports_rope = before_sue_owner.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_owner.make_rope(sports_rope, ball_str)
-    before_sue_owner.set_concept(conceptunit_shop(ball_str), sports_rope)
+    before_sue_owner.set_plan(planunit_shop(ball_str), sports_rope)
 
     after_sue_owner = copy_deepcopy(before_sue_owner)
-    after_ball_conceptunit = after_sue_owner.get_concept_obj(ball_rope)
-    after_ball_conceptunit.healerlink.set_healer_name(xio_str)
+    after_ball_planunit = after_sue_owner.get_plan_obj(ball_rope)
+    after_ball_planunit.healerlink.set_healer_name(xio_str)
 
     # WHEN
     sue_ownerdelta = ownerdelta_shop()
@@ -1215,17 +1215,17 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_heale
     print(f"{print_owneratom_keys(sue_ownerdelta)=}")
     x_keylist = [
         INSERT_str(),
-        owner_concept_healerlink_str(),
+        owner_plan_healerlink_str(),
         ball_rope,
         xio_str,
     ]
     ball_owneratom = get_from_nested_dict(sue_ownerdelta.owneratoms, x_keylist)
-    assert ball_owneratom.get_value(concept_rope_str()) == ball_rope
+    assert ball_owneratom.get_value(plan_rope_str()) == ball_rope
     assert ball_owneratom.get_value(healer_name_str()) == xio_str
     assert get_owneratom_total_count(sue_ownerdelta) == 1
 
 
-def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_healerlink_insert_ConceptUnitInsert():
+def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_plan_healerlink_insert_PlanUnitInsert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_owner = ownerunit_shop(sue_str)
@@ -1237,9 +1237,9 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_heale
     sports_rope = before_sue_owner.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_owner.make_rope(sports_rope, ball_str)
-    after_sue_owner.set_concept(conceptunit_shop(ball_str), sports_rope)
-    after_ball_conceptunit = after_sue_owner.get_concept_obj(ball_rope)
-    after_ball_conceptunit.healerlink.set_healer_name(xio_str)
+    after_sue_owner.set_plan(planunit_shop(ball_str), sports_rope)
+    after_ball_planunit = after_sue_owner.get_plan_obj(ball_rope)
+    after_ball_planunit.healerlink.set_healer_name(xio_str)
 
     # WHEN
     sue_ownerdelta = ownerdelta_shop()
@@ -1249,18 +1249,18 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_heale
     print(f"{print_owneratom_keys(sue_ownerdelta)=}")
     x_keylist = [
         INSERT_str(),
-        owner_concept_healerlink_str(),
+        owner_plan_healerlink_str(),
         ball_rope,
         xio_str,
     ]
     ball_owneratom = get_from_nested_dict(sue_ownerdelta.owneratoms, x_keylist, True)
     assert ball_owneratom
-    assert ball_owneratom.get_value(concept_rope_str()) == ball_rope
+    assert ball_owneratom.get_value(plan_rope_str()) == ball_rope
     assert ball_owneratom.get_value(healer_name_str()) == xio_str
     assert get_owneratom_total_count(sue_ownerdelta) == 3
 
 
-def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_healerlink_delete_ConceptUnitUpdate():
+def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_plan_healerlink_delete_PlanUnitUpdate():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_owner = ownerunit_shop(sue_str)
@@ -1270,13 +1270,13 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_heale
     sports_rope = before_sue_owner.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_owner.make_rope(sports_rope, ball_str)
-    before_sue_owner.set_concept(conceptunit_shop(ball_str), sports_rope)
-    before_ball_conceptunit = before_sue_owner.get_concept_obj(ball_rope)
-    before_ball_conceptunit.healerlink.set_healer_name(xio_str)
+    before_sue_owner.set_plan(planunit_shop(ball_str), sports_rope)
+    before_ball_planunit = before_sue_owner.get_plan_obj(ball_rope)
+    before_ball_planunit.healerlink.set_healer_name(xio_str)
 
     after_sue_owner = copy_deepcopy(before_sue_owner)
-    after_ball_conceptunit = after_sue_owner.get_concept_obj(ball_rope)
-    after_ball_conceptunit.healerlink.del_healer_name(xio_str)
+    after_ball_planunit = after_sue_owner.get_plan_obj(ball_rope)
+    after_ball_planunit.healerlink.del_healer_name(xio_str)
 
     # WHEN
     sue_ownerdelta = ownerdelta_shop()
@@ -1286,7 +1286,7 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_heale
     print(f"{print_owneratom_keys(sue_ownerdelta)=}")
     x_keylist = [
         DELETE_str(),
-        owner_concept_healerlink_str(),
+        owner_plan_healerlink_str(),
         ball_rope,
         xio_str,
     ]
@@ -1294,12 +1294,12 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_heale
         sue_ownerdelta.owneratoms, x_keylist, if_missing_return_None=True
     )
     assert ball_owneratom
-    assert ball_owneratom.get_value(concept_rope_str()) == ball_rope
+    assert ball_owneratom.get_value(plan_rope_str()) == ball_rope
     assert ball_owneratom.get_value(healer_name_str()) == xio_str
     assert get_owneratom_total_count(sue_ownerdelta) == 1
 
 
-def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_healerlink_delete_ConceptUnitDelete():
+def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_plan_healerlink_delete_PlanUnitDelete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_owner = ownerunit_shop(sue_str)
@@ -1309,12 +1309,12 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_heale
     sports_rope = before_sue_owner.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = before_sue_owner.make_rope(sports_rope, ball_str)
-    before_sue_owner.set_concept(conceptunit_shop(ball_str), sports_rope)
-    before_ball_conceptunit = before_sue_owner.get_concept_obj(ball_rope)
-    before_ball_conceptunit.healerlink.set_healer_name(xio_str)
+    before_sue_owner.set_plan(planunit_shop(ball_str), sports_rope)
+    before_ball_planunit = before_sue_owner.get_plan_obj(ball_rope)
+    before_ball_planunit.healerlink.set_healer_name(xio_str)
 
     after_sue_owner = copy_deepcopy(before_sue_owner)
-    after_sue_owner.del_concept_obj(ball_rope)
+    after_sue_owner.del_plan_obj(ball_rope)
 
     # WHEN
     sue_ownerdelta = ownerdelta_shop()
@@ -1324,7 +1324,7 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_heale
     print(f"{print_owneratom_keys(sue_ownerdelta)=}")
     x_keylist = [
         DELETE_str(),
-        owner_concept_healerlink_str(),
+        owner_plan_healerlink_str(),
         ball_rope,
         xio_str,
     ]
@@ -1332,7 +1332,7 @@ def test_OwnerDelta_add_all_different_owneratoms_Creates_OwnerAtom_concept_heale
         sue_ownerdelta.owneratoms, x_keylist, if_missing_return_None=True
     )
     assert ball_owneratom
-    assert ball_owneratom.get_value(concept_rope_str()) == ball_rope
+    assert ball_owneratom.get_value(plan_rope_str()) == ball_rope
     assert ball_owneratom.get_value(healer_name_str()) == xio_str
     assert get_owneratom_total_count(sue_ownerdelta) == 2
 
@@ -1349,9 +1349,9 @@ def test_OwnerDelta_add_all_owneratoms_CorrectlyCreates_OwnerAtoms():
     sports_rope = after_sue_owner.make_l1_rope(sports_str)
     ball_str = "basketball"
     ball_rope = after_sue_owner.make_rope(sports_rope, ball_str)
-    after_sue_owner.set_concept(conceptunit_shop(ball_str), sports_rope)
-    after_ball_conceptunit = after_sue_owner.get_concept_obj(ball_rope)
-    after_ball_conceptunit.laborunit.set_laborlink(xio_str)
+    after_sue_owner.set_plan(planunit_shop(ball_str), sports_rope)
+    after_ball_planunit = after_sue_owner.get_plan_obj(ball_rope)
+    after_ball_planunit.laborunit.set_laborlink(xio_str)
 
     before_sue_owner = ownerunit_shop(sue_str)
     sue1_ownerdelta = ownerdelta_shop()

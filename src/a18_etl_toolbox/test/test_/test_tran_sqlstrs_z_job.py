@@ -4,14 +4,14 @@ from src.a06_owner_logic.test._util.a06_str import (
     belief_label_str,
     owner_acct_membership_str,
     owner_acctunit_str,
-    owner_concept_awardlink_str,
-    owner_concept_factunit_str,
-    owner_concept_healerlink_str,
-    owner_concept_laborlink_str,
-    owner_concept_reason_premiseunit_str,
-    owner_concept_reasonunit_str,
-    owner_conceptunit_str,
     owner_name_str,
+    owner_plan_awardlink_str,
+    owner_plan_factunit_str,
+    owner_plan_healerlink_str,
+    owner_plan_laborlink_str,
+    owner_plan_reason_premiseunit_str,
+    owner_plan_reasonunit_str,
+    owner_planunit_str,
     ownerunit_str,
 )
 from src.a10_owner_calc.owner_calc_config import get_owner_calc_config_dict
@@ -63,28 +63,26 @@ def test_create_job_tables_CreatesTables():
         plnmemb_job_table = prime_table(owner_acct_membership_str(), job_str(), None)
         plnacct_job_table = prime_table(owner_acctunit_str(), job_str(), None)
         plngrou_job_table = prime_table(owner_groupunit_str(), job_str(), None)
-        plnawar_job_table = prime_table(owner_concept_awardlink_str(), job_str(), None)
-        plnfact_job_table = prime_table(owner_concept_factunit_str(), job_str(), None)
-        plnheal_job_table = prime_table(owner_concept_healerlink_str(), job_str(), None)
+        plnawar_job_table = prime_table(owner_plan_awardlink_str(), job_str(), None)
+        plnfact_job_table = prime_table(owner_plan_factunit_str(), job_str(), None)
+        plnheal_job_table = prime_table(owner_plan_healerlink_str(), job_str(), None)
         plnprem_job_table = prime_table(
-            owner_concept_reason_premiseunit_str(), job_str(), None
+            owner_plan_reason_premiseunit_str(), job_str(), None
         )
-        ownerares_job_table = prime_table(
-            owner_concept_reasonunit_str(), job_str(), None
-        )
-        plnlabo_job_table = prime_table(owner_concept_laborlink_str(), job_str(), None)
-        plnconc_job_table = prime_table(owner_conceptunit_str(), job_str(), None)
+        ownerares_job_table = prime_table(owner_plan_reasonunit_str(), job_str(), None)
+        plnlabo_job_table = prime_table(owner_plan_laborlink_str(), job_str(), None)
+        plnconc_job_table = prime_table(owner_planunit_str(), job_str(), None)
         plnunit_job_table = prime_table(ownerunit_str(), job_str(), None)
         # plnmemb_job_table = f"{owner_acct_membership_str()}_job"
         # plnacct_job_table = f"{owner_acctunit_str()}_job"
         # plngrou_job_table = f"{owner_groupunit_str()}_job"
-        # plnawar_job_table = f"{owner_concept_awardlink_str()}_job"
-        # plnfact_job_table = f"{owner_concept_factunit_str()}_job"
-        # plnheal_job_table = f"{owner_concept_healerlink_str()}_job"
-        # plnprem_job_table = f"{owner_concept_reason_premiseunit_str()}_job"
-        # ownerares_job_table = f"{owner_concept_reasonunit_str()}_job"
-        # plnlabo_job_table = f"{owner_concept_laborlink_str()}_job"
-        # plnconc_job_table = f"{owner_conceptunit_str()}_job"
+        # plnawar_job_table = f"{owner_plan_awardlink_str()}_job"
+        # plnfact_job_table = f"{owner_plan_factunit_str()}_job"
+        # plnheal_job_table = f"{owner_plan_healerlink_str()}_job"
+        # plnprem_job_table = f"{owner_plan_reason_premiseunit_str()}_job"
+        # ownerares_job_table = f"{owner_plan_reasonunit_str()}_job"
+        # plnlabo_job_table = f"{owner_plan_laborlink_str()}_job"
+        # plnconc_job_table = f"{owner_planunit_str()}_job"
         # plnunit_job_table = f"{ownerunit_str()}_job"
 
         assert db_table_exists(cursor, plnmemb_job_table) is False

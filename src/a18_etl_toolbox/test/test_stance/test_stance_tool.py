@@ -2,7 +2,7 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.file_toolbox import create_path, open_file, save_file, set_dir
 from src.a06_owner_logic.owner import ownerunit_shop
-from src.a06_owner_logic.test._util.a06_str import owner_concept_awardlink_str
+from src.a06_owner_logic.test._util.a06_str import owner_plan_awardlink_str
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a12_hub_toolbox.hub_path import create_belief_json_path, create_gut_path
 from src.a15_belief_logic.belief import beliefunit_shop

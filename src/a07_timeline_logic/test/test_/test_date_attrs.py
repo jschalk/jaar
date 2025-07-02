@@ -1,8 +1,8 @@
 from datetime import datetime
 from src.a06_owner_logic.owner import OwnerUnit, ownerunit_shop
 from src.a07_timeline_logic.test._util.calendar_examples import (
-    add_time_creg_conceptunit,
-    add_time_five_conceptunit,
+    add_time_creg_planunit,
+    add_time_five_planunit,
     creg_str,
     display_creg_five_squirt_time_attrs,
     display_current_creg_five_time_attrs,
@@ -21,7 +21,7 @@ def test_OwnerTimelinePoint_Exists():
     assert not x_timelinepoint.x_ownerunit
     assert not x_timelinepoint.time_range_root_rope
     assert not x_timelinepoint.x_min
-    assert not x_timelinepoint._timeline_concept
+    assert not x_timelinepoint._timeline_plan
     assert not x_timelinepoint._weekday
     assert not x_timelinepoint._monthday
     assert not x_timelinepoint._month
@@ -53,32 +53,32 @@ def test_OwnerTimelinePoint_shop_ReturnsObj():
     assert x_timelinepoint.x_min == x_timeline_min
 
 
-def test_OwnerTimelinePoint_set_timeline_concept_SetsAttr():
+def test_OwnerTimelinePoint_set_timeline_plan_SetsAttr():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
-    sue_owner = add_time_creg_conceptunit(sue_owner)
+    sue_owner = add_time_creg_planunit(sue_owner)
     sue_owner.settle_owner()
     time_rope = sue_owner.make_l1_rope("time")
     creg_rope = sue_owner.make_rope(time_rope, creg_str())
     x_timelinepoint = ownertimelinepoint_shop(sue_owner, creg_rope, 10000000)
-    assert not x_timelinepoint._timeline_concept
+    assert not x_timelinepoint._timeline_plan
 
     # WHEN
-    x_timelinepoint._set_timeline_concept()
+    x_timelinepoint._set_timeline_plan()
 
     # THEN
-    assert x_timelinepoint._timeline_concept
+    assert x_timelinepoint._timeline_plan
 
 
 def test_OwnerTimelinePoint_set_weekday_SetsAttr():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
-    sue_owner = add_time_creg_conceptunit(sue_owner)
+    sue_owner = add_time_creg_planunit(sue_owner)
     sue_owner.settle_owner()
     time_rope = sue_owner.make_l1_rope("time")
     creg_rope = sue_owner.make_rope(time_rope, creg_str())
     x_timelinepoint = ownertimelinepoint_shop(sue_owner, creg_rope, 10001440)
-    x_timelinepoint._set_timeline_concept()
+    x_timelinepoint._set_timeline_plan()
     assert not x_timelinepoint._weekday
 
     # WHEN
@@ -91,12 +91,12 @@ def test_OwnerTimelinePoint_set_weekday_SetsAttr():
 def test_OwnerTimelinePoint_set_month_SetsAttr():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
-    sue_owner = add_time_creg_conceptunit(sue_owner)
+    sue_owner = add_time_creg_planunit(sue_owner)
     sue_owner.settle_owner()
     time_rope = sue_owner.make_l1_rope("time")
     creg_rope = sue_owner.make_rope(time_rope, creg_str())
     x_timelinepoint = ownertimelinepoint_shop(sue_owner, creg_rope, 10060000)
-    x_timelinepoint._set_timeline_concept()
+    x_timelinepoint._set_timeline_plan()
     assert not x_timelinepoint._month
     assert not x_timelinepoint._monthday
 
@@ -112,12 +112,12 @@ def test_OwnerTimelinePoint_set_month_SetsAttr():
 def test_OwnerTimelinePoint_set_hour_SetsAttr():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
-    sue_owner = add_time_creg_conceptunit(sue_owner)
+    sue_owner = add_time_creg_planunit(sue_owner)
     sue_owner.settle_owner()
     time_rope = sue_owner.make_l1_rope("time")
     creg_rope = sue_owner.make_rope(time_rope, creg_str())
     x_timelinepoint = ownertimelinepoint_shop(sue_owner, creg_rope, 10000001)
-    x_timelinepoint._set_timeline_concept()
+    x_timelinepoint._set_timeline_plan()
     assert not x_timelinepoint._hour
     assert not x_timelinepoint._hour
     assert not x_timelinepoint._minute
@@ -133,12 +133,12 @@ def test_OwnerTimelinePoint_set_hour_SetsAttr():
 def test_OwnerTimelinePoint_set_year_SetsAttr():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
-    sue_owner = add_time_creg_conceptunit(sue_owner)
+    sue_owner = add_time_creg_planunit(sue_owner)
     sue_owner.settle_owner()
     time_rope = sue_owner.make_l1_rope("time")
     creg_rope = sue_owner.make_rope(time_rope, creg_str())
     x_timelinepoint = ownertimelinepoint_shop(sue_owner, creg_rope, 1030600100)
-    x_timelinepoint._set_timeline_concept()
+    x_timelinepoint._set_timeline_plan()
     assert not x_timelinepoint._c400_number
     assert not x_timelinepoint._c100_count
     assert not x_timelinepoint._yr4_count
@@ -160,11 +160,11 @@ def test_OwnerTimelinePoint_set_year_SetsAttr():
 def test_OwnerTimelinePoint_calc_timeline_SetsAttrs():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
-    sue_owner = add_time_creg_conceptunit(sue_owner)
+    sue_owner = add_time_creg_planunit(sue_owner)
     time_rope = sue_owner.make_l1_rope("time")
     creg_rope = sue_owner.make_rope(time_rope, creg_str())
     x_timelinepoint = ownertimelinepoint_shop(sue_owner, creg_rope, 1030600102)
-    assert not x_timelinepoint._timeline_concept
+    assert not x_timelinepoint._timeline_plan
     assert not x_timelinepoint._weekday
     assert not x_timelinepoint._monthday
     assert not x_timelinepoint._month
@@ -176,7 +176,7 @@ def test_OwnerTimelinePoint_calc_timeline_SetsAttrs():
     x_timelinepoint.calc_timeline()
 
     # THEN
-    assert x_timelinepoint._timeline_concept
+    assert x_timelinepoint._timeline_plan
     assert x_timelinepoint._weekday
     assert x_timelinepoint._monthday
     assert x_timelinepoint._month
@@ -188,12 +188,12 @@ def test_OwnerTimelinePoint_calc_timeline_SetsAttrs():
 def test_OwnerTimelinePoint_get_blurb_ReturnsObj():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
-    sue_owner = add_time_creg_conceptunit(sue_owner)
+    sue_owner = add_time_creg_planunit(sue_owner)
     time_rope = sue_owner.make_l1_rope("time")
     creg_rope = sue_owner.make_rope(time_rope, creg_str())
     x_timelinepoint = ownertimelinepoint_shop(sue_owner, creg_rope, 1030600102)
     x_timelinepoint.calc_timeline()
-    assert x_timelinepoint._timeline_concept
+    assert x_timelinepoint._timeline_plan
     assert x_timelinepoint._weekday
     assert x_timelinepoint._monthday
     assert x_timelinepoint._month
@@ -217,8 +217,8 @@ def test_OwnerTimelinePoint_get_blurb_ReturnsObj():
 def test_calc_timeline_SetsAttrFiveTimeLine(graphics_bool):
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
-    sue_owner = add_time_creg_conceptunit(sue_owner)
-    sue_owner = add_time_five_conceptunit(sue_owner)
+    sue_owner = add_time_creg_planunit(sue_owner)
+    sue_owner = add_time_five_planunit(sue_owner)
     time_rope = sue_owner.make_l1_rope("time")
     creg_rope = sue_owner.make_rope(time_rope, creg_str())
     five_rope = sue_owner.make_rope(time_rope, five_str())
@@ -299,7 +299,7 @@ def check_creg_timeline_attr(x_owner: OwnerUnit, x_datetime: datetime):
 def test_check_creg_timeline():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
-    sue_owner = add_time_creg_conceptunit(sue_owner)
+    sue_owner = add_time_creg_planunit(sue_owner)
     check_creg_timeline_attr(sue_owner, datetime(2000, 3, 1, 0, 21))
     check_creg_timeline_attr(sue_owner, datetime(2000, 3, 1, 3, 21))
     check_creg_timeline_attr(sue_owner, datetime(2000, 3, 1, 12, 00))

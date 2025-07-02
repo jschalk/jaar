@@ -9,8 +9,8 @@ from src.a01_term_logic.rope import create_rope, get_parent_rope, get_tail_label
 from src.a01_term_logic.term import AcctName, LabelTerm, RopeTerm, TitleTerm
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import awardlink_shop
-from src.a04_reason_logic.reason_concept import factunit_shop
-from src.a05_concept_logic.concept import conceptunit_shop
+from src.a04_reason_logic.reason_plan import factunit_shop
+from src.a05_plan_logic.plan import planunit_shop
 from src.a06_owner_logic.owner import OwnerUnit
 from src.a06_owner_logic.owner_tool import owner_attr_exists, owner_get_obj
 from src.a08_owner_atom_logic.atom_config import (
@@ -227,15 +227,15 @@ def _modify_owner_acct_membership_insert(x_owner: OwnerUnit, x_atom: OwnerAtom):
     x_acctunit.add_membership(x_group_title, x_group_cred_points, x_group_debt_points)
 
 
-def _modify_owner_conceptunit_delete(x_owner: OwnerUnit, x_atom: OwnerAtom):
-    concept_rope = create_rope(x_atom.get_value("concept_rope"), knot=x_owner.knot)
-    x_owner.del_concept_obj(concept_rope, del_children=x_atom.get_value("del_children"))
+def _modify_owner_planunit_delete(x_owner: OwnerUnit, x_atom: OwnerAtom):
+    plan_rope = create_rope(x_atom.get_value("plan_rope"), knot=x_owner.knot)
+    x_owner.del_plan_obj(plan_rope, del_children=x_atom.get_value("del_children"))
 
 
-def _modify_owner_conceptunit_update(x_owner: OwnerUnit, x_atom: OwnerAtom):
-    concept_rope = create_rope(x_atom.get_value("concept_rope"), knot=x_owner.knot)
-    x_owner.edit_concept_attr(
-        concept_rope,
+def _modify_owner_planunit_update(x_owner: OwnerUnit, x_atom: OwnerAtom):
+    plan_rope = create_rope(x_atom.get_value("plan_rope"), knot=x_owner.knot)
+    x_owner.edit_plan_attr(
+        plan_rope,
         addin=x_atom.get_value("addin"),
         begin=x_atom.get_value("begin"),
         gogo_want=x_atom.get_value("gogo_want"),
@@ -249,13 +249,13 @@ def _modify_owner_conceptunit_update(x_owner: OwnerUnit, x_atom: OwnerAtom):
     )
 
 
-def _modify_owner_conceptunit_insert(x_owner: OwnerUnit, x_atom: OwnerAtom):
-    concept_rope = x_atom.get_value("concept_rope")
-    concept_label = get_tail_label(concept_rope)
-    concept_parent_rope = get_parent_rope(concept_rope)
-    x_owner.set_concept(
-        concept_kid=conceptunit_shop(
-            concept_label=concept_label,
+def _modify_owner_planunit_insert(x_owner: OwnerUnit, x_atom: OwnerAtom):
+    plan_rope = x_atom.get_value("plan_rope")
+    plan_label = get_tail_label(plan_rope)
+    plan_parent_rope = get_parent_rope(plan_rope)
+    x_owner.set_plan(
+        plan_kid=planunit_shop(
+            plan_label=plan_label,
             addin=x_atom.get_value("addin"),
             begin=x_atom.get_value("begin"),
             close=x_atom.get_value("close"),
@@ -265,49 +265,49 @@ def _modify_owner_conceptunit_insert(x_owner: OwnerUnit, x_atom: OwnerAtom):
             numor=x_atom.get_value("numor"),
             task=x_atom.get_value("task"),
         ),
-        parent_rope=concept_parent_rope,
-        create_missing_concepts=False,
+        parent_rope=plan_parent_rope,
+        create_missing_plans=False,
         get_rid_of_missing_awardlinks_awardee_titles=False,
         create_missing_ancestors=True,
     )
 
 
-def _modify_owner_concept_awardlink_delete(x_owner: OwnerUnit, x_atom: OwnerAtom):
-    x_owner.edit_concept_attr(
-        x_atom.get_value("concept_rope"),
+def _modify_owner_plan_awardlink_delete(x_owner: OwnerUnit, x_atom: OwnerAtom):
+    x_owner.edit_plan_attr(
+        x_atom.get_value("plan_rope"),
         awardlink_del=x_atom.get_value("awardee_title"),
     )
 
 
-def _modify_owner_concept_awardlink_update(x_owner: OwnerUnit, x_atom: OwnerAtom):
-    x_concept = x_owner.get_concept_obj(x_atom.get_value("concept_rope"))
-    x_awardlink = x_concept.awardlinks.get(x_atom.get_value("awardee_title"))
+def _modify_owner_plan_awardlink_update(x_owner: OwnerUnit, x_atom: OwnerAtom):
+    x_plan = x_owner.get_plan_obj(x_atom.get_value("plan_rope"))
+    x_awardlink = x_plan.awardlinks.get(x_atom.get_value("awardee_title"))
     x_give_force = x_atom.get_value("give_force")
     if x_give_force is not None and x_awardlink.give_force != x_give_force:
         x_awardlink.give_force = x_give_force
     x_take_force = x_atom.get_value("take_force")
     if x_take_force is not None and x_awardlink.take_force != x_take_force:
         x_awardlink.take_force = x_take_force
-    x_owner.edit_concept_attr(x_atom.get_value("concept_rope"), awardlink=x_awardlink)
+    x_owner.edit_plan_attr(x_atom.get_value("plan_rope"), awardlink=x_awardlink)
 
 
-def _modify_owner_concept_awardlink_insert(x_owner: OwnerUnit, x_atom: OwnerAtom):
+def _modify_owner_plan_awardlink_insert(x_owner: OwnerUnit, x_atom: OwnerAtom):
     x_awardlink = awardlink_shop(
         awardee_title=x_atom.get_value("awardee_title"),
         give_force=x_atom.get_value("give_force"),
         take_force=x_atom.get_value("take_force"),
     )
-    x_owner.edit_concept_attr(x_atom.get_value("concept_rope"), awardlink=x_awardlink)
+    x_owner.edit_plan_attr(x_atom.get_value("plan_rope"), awardlink=x_awardlink)
 
 
-def _modify_owner_concept_factunit_delete(x_owner: OwnerUnit, x_atom: OwnerAtom):
-    x_conceptunit = x_owner.get_concept_obj(x_atom.get_value("concept_rope"))
-    x_conceptunit.del_factunit(x_atom.get_value("fcontext"))
+def _modify_owner_plan_factunit_delete(x_owner: OwnerUnit, x_atom: OwnerAtom):
+    x_planunit = x_owner.get_plan_obj(x_atom.get_value("plan_rope"))
+    x_planunit.del_factunit(x_atom.get_value("fcontext"))
 
 
-def _modify_owner_concept_factunit_update(x_owner: OwnerUnit, x_atom: OwnerAtom):
-    x_conceptunit = x_owner.get_concept_obj(x_atom.get_value("concept_rope"))
-    x_factunit = x_conceptunit.factunits.get(x_atom.get_value("fcontext"))
+def _modify_owner_plan_factunit_update(x_owner: OwnerUnit, x_atom: OwnerAtom):
+    x_planunit = x_owner.get_plan_obj(x_atom.get_value("plan_rope"))
+    x_factunit = x_planunit.factunits.get(x_atom.get_value("fcontext"))
     x_factunit.set_attr(
         fstate=x_atom.get_value("fstate"),
         fopen=x_atom.get_value("fopen"),
@@ -315,9 +315,9 @@ def _modify_owner_concept_factunit_update(x_owner: OwnerUnit, x_atom: OwnerAtom)
     )
 
 
-def _modify_owner_concept_factunit_insert(x_owner: OwnerUnit, x_atom: OwnerAtom):
-    x_owner.edit_concept_attr(
-        x_atom.get_value("concept_rope"),
+def _modify_owner_plan_factunit_insert(x_owner: OwnerUnit, x_atom: OwnerAtom):
+    x_owner.edit_plan_attr(
+        x_atom.get_value("plan_rope"),
         factunit=factunit_shop(
             fcontext=x_atom.get_value("fcontext"),
             fstate=x_atom.get_value("fstate"),
@@ -327,42 +327,38 @@ def _modify_owner_concept_factunit_insert(x_owner: OwnerUnit, x_atom: OwnerAtom)
     )
 
 
-def _modify_owner_concept_reasonunit_delete(x_owner: OwnerUnit, x_atom: OwnerAtom):
-    x_conceptunit = x_owner.get_concept_obj(x_atom.get_value("concept_rope"))
-    x_conceptunit.del_reasonunit_rcontext(x_atom.get_value("rcontext"))
+def _modify_owner_plan_reasonunit_delete(x_owner: OwnerUnit, x_atom: OwnerAtom):
+    x_planunit = x_owner.get_plan_obj(x_atom.get_value("plan_rope"))
+    x_planunit.del_reasonunit_rcontext(x_atom.get_value("rcontext"))
 
 
-def _modify_owner_concept_reasonunit_update(x_owner: OwnerUnit, x_atom: OwnerAtom):
-    x_owner.edit_concept_attr(
-        x_atom.get_value("concept_rope"),
+def _modify_owner_plan_reasonunit_update(x_owner: OwnerUnit, x_atom: OwnerAtom):
+    x_owner.edit_plan_attr(
+        x_atom.get_value("plan_rope"),
         reason_rcontext=x_atom.get_value("rcontext"),
-        reason_rconcept_active_requisite=x_atom.get_value("rconcept_active_requisite"),
+        reason_rplan_active_requisite=x_atom.get_value("rplan_active_requisite"),
     )
 
 
-def _modify_owner_concept_reasonunit_insert(x_owner: OwnerUnit, x_atom: OwnerAtom):
-    x_owner.edit_concept_attr(
-        x_atom.get_value("concept_rope"),
+def _modify_owner_plan_reasonunit_insert(x_owner: OwnerUnit, x_atom: OwnerAtom):
+    x_owner.edit_plan_attr(
+        x_atom.get_value("plan_rope"),
         reason_rcontext=x_atom.get_value("rcontext"),
-        reason_rconcept_active_requisite=x_atom.get_value("rconcept_active_requisite"),
+        reason_rplan_active_requisite=x_atom.get_value("rplan_active_requisite"),
     )
 
 
-def _modify_owner_concept_reason_premiseunit_delete(
-    x_owner: OwnerUnit, x_atom: OwnerAtom
-):
-    x_owner.edit_concept_attr(
-        x_atom.get_value("concept_rope"),
+def _modify_owner_plan_reason_premiseunit_delete(x_owner: OwnerUnit, x_atom: OwnerAtom):
+    x_owner.edit_plan_attr(
+        x_atom.get_value("plan_rope"),
         reason_del_premise_rcontext=x_atom.get_value("rcontext"),
         reason_del_premise_pstate=x_atom.get_value("pstate"),
     )
 
 
-def _modify_owner_concept_reason_premiseunit_update(
-    x_owner: OwnerUnit, x_atom: OwnerAtom
-):
-    x_owner.edit_concept_attr(
-        x_atom.get_value("concept_rope"),
+def _modify_owner_plan_reason_premiseunit_update(x_owner: OwnerUnit, x_atom: OwnerAtom):
+    x_owner.edit_plan_attr(
+        x_atom.get_value("plan_rope"),
         reason_rcontext=x_atom.get_value("rcontext"),
         reason_premise=x_atom.get_value("pstate"),
         popen=x_atom.get_value("popen"),
@@ -371,11 +367,9 @@ def _modify_owner_concept_reason_premiseunit_update(
     )
 
 
-def _modify_owner_concept_reason_premiseunit_insert(
-    x_owner: OwnerUnit, x_atom: OwnerAtom
-):
-    x_conceptunit = x_owner.get_concept_obj(x_atom.get_value("concept_rope"))
-    x_conceptunit.set_reason_premise(
+def _modify_owner_plan_reason_premiseunit_insert(x_owner: OwnerUnit, x_atom: OwnerAtom):
+    x_planunit = x_owner.get_plan_obj(x_atom.get_value("plan_rope"))
+    x_planunit.set_reason_premise(
         rcontext=x_atom.get_value("rcontext"),
         premise=x_atom.get_value("pstate"),
         popen=x_atom.get_value("popen"),
@@ -384,24 +378,24 @@ def _modify_owner_concept_reason_premiseunit_insert(
     )
 
 
-def _modify_owner_concept_laborlink_delete(x_owner: OwnerUnit, x_atom: OwnerAtom):
-    x_conceptunit = x_owner.get_concept_obj(x_atom.get_value("concept_rope"))
-    x_conceptunit.laborunit.del_laborlink(labor_title=x_atom.get_value("labor_title"))
+def _modify_owner_plan_laborlink_delete(x_owner: OwnerUnit, x_atom: OwnerAtom):
+    x_planunit = x_owner.get_plan_obj(x_atom.get_value("plan_rope"))
+    x_planunit.laborunit.del_laborlink(labor_title=x_atom.get_value("labor_title"))
 
 
-def _modify_owner_concept_laborlink_insert(x_owner: OwnerUnit, x_atom: OwnerAtom):
-    x_conceptunit = x_owner.get_concept_obj(x_atom.get_value("concept_rope"))
-    x_conceptunit.laborunit.set_laborlink(labor_title=x_atom.get_value("labor_title"))
+def _modify_owner_plan_laborlink_insert(x_owner: OwnerUnit, x_atom: OwnerAtom):
+    x_planunit = x_owner.get_plan_obj(x_atom.get_value("plan_rope"))
+    x_planunit.laborunit.set_laborlink(labor_title=x_atom.get_value("labor_title"))
 
 
-def _modify_owner_concept_healerlink_delete(x_owner: OwnerUnit, x_atom: OwnerAtom):
-    x_conceptunit = x_owner.get_concept_obj(x_atom.get_value("concept_rope"))
-    x_conceptunit.healerlink.del_healer_name(x_atom.get_value("healer_name"))
+def _modify_owner_plan_healerlink_delete(x_owner: OwnerUnit, x_atom: OwnerAtom):
+    x_planunit = x_owner.get_plan_obj(x_atom.get_value("plan_rope"))
+    x_planunit.healerlink.del_healer_name(x_atom.get_value("healer_name"))
 
 
-def _modify_owner_concept_healerlink_insert(x_owner: OwnerUnit, x_atom: OwnerAtom):
-    x_conceptunit = x_owner.get_concept_obj(x_atom.get_value("concept_rope"))
-    x_conceptunit.healerlink.set_healer_name(x_atom.get_value("healer_name"))
+def _modify_owner_plan_healerlink_insert(x_owner: OwnerUnit, x_atom: OwnerAtom):
+    x_planunit = x_owner.get_plan_obj(x_atom.get_value("plan_rope"))
+    x_planunit.healerlink.set_healer_name(x_atom.get_value("healer_name"))
 
 
 def _modify_owner_acctunit_delete(x_owner: OwnerUnit, x_atom: OwnerAtom):
@@ -440,63 +434,63 @@ def _modify_owner_acct_membership(x_owner: OwnerUnit, x_atom: OwnerAtom):
         _modify_owner_acct_membership_insert(x_owner, x_atom)
 
 
-def _modify_owner_conceptunit(x_owner: OwnerUnit, x_atom: OwnerAtom):
+def _modify_owner_planunit(x_owner: OwnerUnit, x_atom: OwnerAtom):
     if x_atom.crud_str == "DELETE":
-        _modify_owner_conceptunit_delete(x_owner, x_atom)
+        _modify_owner_planunit_delete(x_owner, x_atom)
     elif x_atom.crud_str == "UPDATE":
-        _modify_owner_conceptunit_update(x_owner, x_atom)
+        _modify_owner_planunit_update(x_owner, x_atom)
     elif x_atom.crud_str == "INSERT":
-        _modify_owner_conceptunit_insert(x_owner, x_atom)
+        _modify_owner_planunit_insert(x_owner, x_atom)
 
 
-def _modify_owner_concept_awardlink(x_owner: OwnerUnit, x_atom: OwnerAtom):
+def _modify_owner_plan_awardlink(x_owner: OwnerUnit, x_atom: OwnerAtom):
     if x_atom.crud_str == "DELETE":
-        _modify_owner_concept_awardlink_delete(x_owner, x_atom)
+        _modify_owner_plan_awardlink_delete(x_owner, x_atom)
     elif x_atom.crud_str == "UPDATE":
-        _modify_owner_concept_awardlink_update(x_owner, x_atom)
+        _modify_owner_plan_awardlink_update(x_owner, x_atom)
     elif x_atom.crud_str == "INSERT":
-        _modify_owner_concept_awardlink_insert(x_owner, x_atom)
+        _modify_owner_plan_awardlink_insert(x_owner, x_atom)
 
 
-def _modify_owner_concept_factunit(x_owner: OwnerUnit, x_atom: OwnerAtom):
+def _modify_owner_plan_factunit(x_owner: OwnerUnit, x_atom: OwnerAtom):
     if x_atom.crud_str == "DELETE":
-        _modify_owner_concept_factunit_delete(x_owner, x_atom)
+        _modify_owner_plan_factunit_delete(x_owner, x_atom)
     elif x_atom.crud_str == "UPDATE":
-        _modify_owner_concept_factunit_update(x_owner, x_atom)
+        _modify_owner_plan_factunit_update(x_owner, x_atom)
     elif x_atom.crud_str == "INSERT":
-        _modify_owner_concept_factunit_insert(x_owner, x_atom)
+        _modify_owner_plan_factunit_insert(x_owner, x_atom)
 
 
-def _modify_owner_concept_reasonunit(x_owner: OwnerUnit, x_atom: OwnerAtom):
+def _modify_owner_plan_reasonunit(x_owner: OwnerUnit, x_atom: OwnerAtom):
     if x_atom.crud_str == "DELETE":
-        _modify_owner_concept_reasonunit_delete(x_owner, x_atom)
+        _modify_owner_plan_reasonunit_delete(x_owner, x_atom)
     elif x_atom.crud_str == "UPDATE":
-        _modify_owner_concept_reasonunit_update(x_owner, x_atom)
+        _modify_owner_plan_reasonunit_update(x_owner, x_atom)
     elif x_atom.crud_str == "INSERT":
-        _modify_owner_concept_reasonunit_insert(x_owner, x_atom)
+        _modify_owner_plan_reasonunit_insert(x_owner, x_atom)
 
 
-def _modify_owner_concept_reason_premiseunit(x_owner: OwnerUnit, x_atom: OwnerAtom):
+def _modify_owner_plan_reason_premiseunit(x_owner: OwnerUnit, x_atom: OwnerAtom):
     if x_atom.crud_str == "DELETE":
-        _modify_owner_concept_reason_premiseunit_delete(x_owner, x_atom)
+        _modify_owner_plan_reason_premiseunit_delete(x_owner, x_atom)
     elif x_atom.crud_str == "UPDATE":
-        _modify_owner_concept_reason_premiseunit_update(x_owner, x_atom)
+        _modify_owner_plan_reason_premiseunit_update(x_owner, x_atom)
     elif x_atom.crud_str == "INSERT":
-        _modify_owner_concept_reason_premiseunit_insert(x_owner, x_atom)
+        _modify_owner_plan_reason_premiseunit_insert(x_owner, x_atom)
 
 
-def _modify_owner_concept_laborlink(x_owner: OwnerUnit, x_atom: OwnerAtom):
+def _modify_owner_plan_laborlink(x_owner: OwnerUnit, x_atom: OwnerAtom):
     if x_atom.crud_str == "DELETE":
-        _modify_owner_concept_laborlink_delete(x_owner, x_atom)
+        _modify_owner_plan_laborlink_delete(x_owner, x_atom)
     elif x_atom.crud_str == "INSERT":
-        _modify_owner_concept_laborlink_insert(x_owner, x_atom)
+        _modify_owner_plan_laborlink_insert(x_owner, x_atom)
 
 
-def _modify_owner_concept_healerlink(x_owner: OwnerUnit, x_atom: OwnerAtom):
+def _modify_owner_plan_healerlink(x_owner: OwnerUnit, x_atom: OwnerAtom):
     if x_atom.crud_str == "DELETE":
-        _modify_owner_concept_healerlink_delete(x_owner, x_atom)
+        _modify_owner_plan_healerlink_delete(x_owner, x_atom)
     elif x_atom.crud_str == "INSERT":
-        _modify_owner_concept_healerlink_insert(x_owner, x_atom)
+        _modify_owner_plan_healerlink_insert(x_owner, x_atom)
 
 
 def _modify_owner_acctunit(x_owner: OwnerUnit, x_atom: OwnerAtom):
@@ -513,20 +507,20 @@ def modify_owner_with_owneratom(x_owner: OwnerUnit, x_atom: OwnerAtom):
         _modify_owner_ownerunit(x_owner, x_atom)
     elif x_atom.dimen == "owner_acct_membership":
         _modify_owner_acct_membership(x_owner, x_atom)
-    elif x_atom.dimen == "owner_conceptunit":
-        _modify_owner_conceptunit(x_owner, x_atom)
-    elif x_atom.dimen == "owner_concept_awardlink":
-        _modify_owner_concept_awardlink(x_owner, x_atom)
-    elif x_atom.dimen == "owner_concept_factunit":
-        _modify_owner_concept_factunit(x_owner, x_atom)
-    elif x_atom.dimen == "owner_concept_reasonunit":
-        _modify_owner_concept_reasonunit(x_owner, x_atom)
-    elif x_atom.dimen == "owner_concept_reason_premiseunit":
-        _modify_owner_concept_reason_premiseunit(x_owner, x_atom)
-    elif x_atom.dimen == "owner_concept_healerlink":
-        _modify_owner_concept_healerlink(x_owner, x_atom)
-    elif x_atom.dimen == "owner_concept_laborlink":
-        _modify_owner_concept_laborlink(x_owner, x_atom)
+    elif x_atom.dimen == "owner_planunit":
+        _modify_owner_planunit(x_owner, x_atom)
+    elif x_atom.dimen == "owner_plan_awardlink":
+        _modify_owner_plan_awardlink(x_owner, x_atom)
+    elif x_atom.dimen == "owner_plan_factunit":
+        _modify_owner_plan_factunit(x_owner, x_atom)
+    elif x_atom.dimen == "owner_plan_reasonunit":
+        _modify_owner_plan_reasonunit(x_owner, x_atom)
+    elif x_atom.dimen == "owner_plan_reason_premiseunit":
+        _modify_owner_plan_reason_premiseunit(x_owner, x_atom)
+    elif x_atom.dimen == "owner_plan_healerlink":
+        _modify_owner_plan_healerlink(x_owner, x_atom)
+    elif x_atom.dimen == "owner_plan_laborlink":
+        _modify_owner_plan_laborlink(x_owner, x_atom)
     elif x_atom.dimen == "owner_acctunit":
         _modify_owner_acctunit(x_owner, x_atom)
 
@@ -546,11 +540,11 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
         return (x_obj.group_cred_points != y_obj.group_cred_points) or (
             x_obj.group_debt_points != y_obj.group_debt_points
         )
-    elif dimen in {"owner_concept_awardlink"}:
+    elif dimen in {"owner_plan_awardlink"}:
         return (x_obj.give_force != y_obj.give_force) or (
             x_obj.take_force != y_obj.take_force
         )
-    elif dimen == "owner_conceptunit":
+    elif dimen == "owner_planunit":
         return (
             x_obj.addin != y_obj.addin
             or x_obj.begin != y_obj.begin
@@ -561,15 +555,15 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.mass != y_obj.mass
             or x_obj.task != y_obj.task
         )
-    elif dimen == "owner_concept_factunit":
+    elif dimen == "owner_plan_factunit":
         return (
             (x_obj.fstate != y_obj.fstate)
             or (x_obj.popen != y_obj.popen)
             or (x_obj.pnigh != y_obj.pnigh)
         )
-    elif dimen == "owner_concept_reasonunit":
-        return x_obj.rconcept_active_requisite != y_obj.rconcept_active_requisite
-    elif dimen == "owner_concept_reason_premiseunit":
+    elif dimen == "owner_plan_reasonunit":
+        return x_obj.rplan_active_requisite != y_obj.rplan_active_requisite
+    elif dimen == "owner_plan_reason_premiseunit":
         return (
             x_obj.popen != y_obj.popen
             or x_obj.pnigh != y_obj.pnigh
@@ -603,7 +597,7 @@ class AtomRow:
     addin: float = None
     awardee_title: TitleTerm = None
     rcontext: RopeTerm = None
-    rconcept_active_requisite: bool = None
+    rplan_active_requisite: bool = None
     begin: float = None
     respect_bit: float = None
     close: float = None
@@ -635,7 +629,7 @@ class AtomRow:
     fstate: RopeTerm = None
     task: bool = None
     problem_bool: bool = None
-    concept_rope: RopeTerm = None
+    plan_rope: RopeTerm = None
     stop_want: float = None
     take_force: float = None
     tally: int = None

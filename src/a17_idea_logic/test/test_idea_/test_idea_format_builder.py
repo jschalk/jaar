@@ -3,10 +3,10 @@ from pathlib import Path
 from src.a00_data_toolbox.file_toolbox import count_files, save_json
 from src.a06_owner_logic.test._util.a06_str import (
     belief_label_str,
-    concept_rope_str,
     gogo_want_str,
-    owner_conceptunit_str,
     owner_name_str,
+    owner_planunit_str,
+    plan_rope_str,
 )
 from src.a08_owner_atom_logic.atom_config import get_atom_config_args
 from src.a17_idea_logic.idea_config import (
@@ -41,18 +41,16 @@ def test_create_dimens_idea_format_dict_ReturnsObj(rebuild_bool):
 
     # THEN
     assert len(dimens_idea_format_dict) == 10
-    owner_conceptunit_filename = (
-        f"idea_format_00028_{owner_conceptunit_str()}_v0_0_0.json"
-    )
-    assert dimens_idea_format_dict.get(owner_conceptunit_filename)
-    owner_conceptunit_dict = dimens_idea_format_dict.get(owner_conceptunit_filename)
-    assert owner_conceptunit_dict.get(dimens_str()) == [owner_conceptunit_str()]
-    assert owner_conceptunit_dict.get(attributes_str())
-    owner_conceptunit_attributes = owner_conceptunit_dict.get(attributes_str())
-    assert belief_label_str() in owner_conceptunit_attributes
-    assert owner_name_str() in owner_conceptunit_attributes
-    assert concept_rope_str() in owner_conceptunit_attributes
-    assert gogo_want_str() in owner_conceptunit_attributes
+    owner_planunit_filename = f"idea_format_00028_{owner_planunit_str()}_v0_0_0.json"
+    assert dimens_idea_format_dict.get(owner_planunit_filename)
+    owner_planunit_dict = dimens_idea_format_dict.get(owner_planunit_filename)
+    assert owner_planunit_dict.get(dimens_str()) == [owner_planunit_str()]
+    assert owner_planunit_dict.get(attributes_str())
+    owner_planunit_attributes = owner_planunit_dict.get(attributes_str())
+    assert belief_label_str() in owner_planunit_attributes
+    assert owner_name_str() in owner_planunit_attributes
+    assert plan_rope_str() in owner_planunit_attributes
+    assert gogo_want_str() in owner_planunit_attributes
 
     rebuild_format_jsons(rebuild_bool)
 

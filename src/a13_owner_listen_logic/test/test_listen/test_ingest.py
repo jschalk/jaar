@@ -1,4 +1,4 @@
-from src.a05_concept_logic.concept import conceptunit_shop
+from src.a05_plan_logic.plan import planunit_shop
 from src.a06_owner_logic.owner import ownerunit_shop
 from src.a13_owner_listen_logic.listen import (
     _allocate_irrational_acct_debt_points,
@@ -40,10 +40,10 @@ def test_generate_perspective_agenda_CorrectlyGrabsAgendaChores():
     dirty_rope = yao_speaker.make_rope(status_rope, dirty_str)
     sweep_str = "sweep"
     sweep_rope = yao_speaker.make_rope(casa_rope, sweep_str)
-    yao_speaker.set_concept(conceptunit_shop(clean_str), status_rope)
-    yao_speaker.set_concept(conceptunit_shop(dirty_str), status_rope)
-    yao_speaker.set_concept(conceptunit_shop(sweep_str, task=True), casa_rope)
-    yao_speaker.edit_concept_attr(
+    yao_speaker.set_plan(planunit_shop(clean_str), status_rope)
+    yao_speaker.set_plan(planunit_shop(dirty_str), status_rope)
+    yao_speaker.set_plan(planunit_shop(sweep_str, task=True), casa_rope)
+    yao_speaker.edit_plan_attr(
         sweep_rope, reason_rcontext=status_rope, reason_premise=dirty_rope
     )
     yao_speaker.add_fact(status_rope, clean_rope)
@@ -61,14 +61,14 @@ def test_generate_ingest_list_ReturnsCorrectList_v1():
     zia_str = "Zia"
     zia_ownerunit = ownerunit_shop(zia_str)
     clean_str = "clean"
-    zia_ownerunit.set_l1_concept(conceptunit_shop(clean_str, task=True))
+    zia_ownerunit.set_l1_plan(planunit_shop(clean_str, task=True))
     zia_debtor_pool = 78
     zia_resepect_bit = 2
     assert len(zia_ownerunit.get_agenda_dict()) == 1
 
     # WHEN
     ingested_list = generate_ingest_list(
-        concept_list=list(zia_ownerunit.get_agenda_dict().values()),
+        plan_list=list(zia_ownerunit.get_agenda_dict().values()),
         debtor_amount=zia_debtor_pool,
         respect_bit=zia_resepect_bit,
     )
@@ -76,8 +76,8 @@ def test_generate_ingest_list_ReturnsCorrectList_v1():
     # THEN
     # clean_rope = zia_ownerunit.make_l1_rope(clean_str)
     clean_rope = zia_ownerunit.make_l1_rope(clean_str)
-    clean_conceptunit = zia_ownerunit.get_concept_obj(clean_rope)
-    assert ingested_list[0] == clean_conceptunit
+    clean_planunit = zia_ownerunit.get_plan_obj(clean_rope)
+    assert ingested_list[0] == clean_planunit
     assert ingested_list[0].mass == zia_debtor_pool
 
 
@@ -87,15 +87,15 @@ def test_generate_ingest_list_ReturnsCorrectList_v2():
     zia_ownerunit = ownerunit_shop(zia_str)
     clean_str = "clean"
     cook_str = "cook"
-    zia_ownerunit.set_l1_concept(conceptunit_shop(clean_str, task=True))
-    zia_ownerunit.set_l1_concept(conceptunit_shop(cook_str, task=True))
+    zia_ownerunit.set_l1_plan(planunit_shop(clean_str, task=True))
+    zia_ownerunit.set_l1_plan(planunit_shop(cook_str, task=True))
     zia_debtor_pool = 32
     zia_resepect_bit = 2
     assert len(zia_ownerunit.get_agenda_dict()) == 2
 
     # WHEN
     ingested_list = generate_ingest_list(
-        concept_list=list(zia_ownerunit.get_agenda_dict().values()),
+        plan_list=list(zia_ownerunit.get_agenda_dict().values()),
         debtor_amount=zia_debtor_pool,
         respect_bit=zia_resepect_bit,
     )
@@ -105,11 +105,11 @@ def test_generate_ingest_list_ReturnsCorrectList_v2():
     assert len(ingested_list) == 2
     clean_rope = zia_ownerunit.make_l1_rope(clean_str)
     cook_rope = zia_ownerunit.make_l1_rope(cook_str)
-    clean_conceptunit = zia_ownerunit.get_concept_obj(clean_rope)
-    cook_conceptunit = zia_ownerunit.get_concept_obj(cook_rope)
-    assert ingested_list[0] == cook_conceptunit
+    clean_planunit = zia_ownerunit.get_plan_obj(clean_rope)
+    cook_planunit = zia_ownerunit.get_plan_obj(cook_rope)
+    assert ingested_list[0] == cook_planunit
     assert ingested_list[0].mass == 16.0
-    assert ingested_list == [cook_conceptunit, clean_conceptunit]
+    assert ingested_list == [cook_planunit, clean_planunit]
 
 
 def test_generate_ingest_list_ReturnsCorrectList_v3():
@@ -118,15 +118,15 @@ def test_generate_ingest_list_ReturnsCorrectList_v3():
     zia_ownerunit = ownerunit_shop(zia_str)
     clean_str = "clean"
     cook_str = "cook"
-    zia_ownerunit.set_l1_concept(conceptunit_shop(clean_str, task=True))
-    zia_ownerunit.set_l1_concept(conceptunit_shop(cook_str, mass=3, task=True))
+    zia_ownerunit.set_l1_plan(planunit_shop(clean_str, task=True))
+    zia_ownerunit.set_l1_plan(planunit_shop(cook_str, mass=3, task=True))
     zia_debtor_pool = 32
     zia_resepect_bit = 2
     assert len(zia_ownerunit.get_agenda_dict()) == 2
 
     # WHEN
     ingested_list = generate_ingest_list(
-        concept_list=list(zia_ownerunit.get_agenda_dict().values()),
+        plan_list=list(zia_ownerunit.get_agenda_dict().values()),
         debtor_amount=zia_debtor_pool,
         respect_bit=zia_resepect_bit,
     )
@@ -134,9 +134,9 @@ def test_generate_ingest_list_ReturnsCorrectList_v3():
     # THEN
     clean_rope = zia_ownerunit.make_l1_rope(clean_str)
     cook_rope = zia_ownerunit.make_l1_rope(cook_str)
-    clean_conceptunit = zia_ownerunit.get_concept_obj(clean_rope)
-    cook_conceptunit = zia_ownerunit.get_concept_obj(cook_rope)
-    assert ingested_list == [cook_conceptunit, clean_conceptunit]
+    clean_planunit = zia_ownerunit.get_plan_obj(clean_rope)
+    cook_planunit = zia_ownerunit.get_plan_obj(cook_rope)
+    assert ingested_list == [cook_planunit, clean_planunit]
     assert ingested_list[0].mass == 24.0
     assert ingested_list[1].mass == 8.0
 
@@ -147,15 +147,15 @@ def test_generate_ingest_list_ReturnsCorrectList_v4():
     zia_ownerunit = ownerunit_shop(zia_str)
     clean_str = "clean"
     cook_str = "cook"
-    zia_ownerunit.set_l1_concept(conceptunit_shop(clean_str, task=True))
-    zia_ownerunit.set_l1_concept(conceptunit_shop(cook_str, mass=2, task=True))
+    zia_ownerunit.set_l1_plan(planunit_shop(clean_str, task=True))
+    zia_ownerunit.set_l1_plan(planunit_shop(cook_str, mass=2, task=True))
     zia_debtor_pool = 32
     zia_resepect_bit = 2
     assert len(zia_ownerunit.get_agenda_dict()) == 2
 
     # WHEN
     ingested_list = generate_ingest_list(
-        concept_list=list(zia_ownerunit.get_agenda_dict().values()),
+        plan_list=list(zia_ownerunit.get_agenda_dict().values()),
         debtor_amount=zia_debtor_pool,
         respect_bit=zia_resepect_bit,
     )
@@ -163,8 +163,8 @@ def test_generate_ingest_list_ReturnsCorrectList_v4():
     # THEN
     clean_rope = zia_ownerunit.make_l1_rope(clean_str)
     cook_rope = zia_ownerunit.make_l1_rope(cook_str)
-    clean_conceptunit = zia_ownerunit.get_concept_obj(clean_rope)
-    cook_conceptunit = zia_ownerunit.get_concept_obj(cook_rope)
+    clean_planunit = zia_ownerunit.get_plan_obj(clean_rope)
+    cook_planunit = zia_ownerunit.get_plan_obj(cook_rope)
     assert ingested_list[0].mass == 22
     assert ingested_list[1].mass == 10
-    assert ingested_list == [cook_conceptunit, clean_conceptunit]
+    assert ingested_list == [cook_planunit, clean_planunit]

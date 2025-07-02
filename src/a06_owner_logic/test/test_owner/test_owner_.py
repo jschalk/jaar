@@ -8,7 +8,7 @@ from src.a02_finance_logic.finance_config import (
     validate_respect_num,
 )
 from src.a02_finance_logic.test._util.a02_str import fund_pool_str, knot_str
-from src.a05_concept_logic.concept import get_default_belief_label as root_label
+from src.a05_plan_logic.plan import get_default_belief_label as root_label
 from src.a06_owner_logic.owner import OwnerUnit, ownerunit_shop
 from src.a06_owner_logic.test._util.a06_str import (
     _keeps_buildable_str,
@@ -42,7 +42,7 @@ def test_OwnerUnit_Exists():
     assert x_owner.owner_name is None
     assert x_owner.tally is None
     assert x_owner.accts is None
-    assert x_owner.conceptroot is None
+    assert x_owner.planroot is None
     assert x_owner.credor_respect is None
     assert x_owner.debtor_respect is None
     assert x_owner.max_tree_traverse is None
@@ -53,7 +53,7 @@ def test_OwnerUnit_Exists():
     assert x_owner.penny is None
     assert x_owner.last_pack_id is None
     # calculated attr
-    assert x_owner._concept_dict is None
+    assert x_owner._plan_dict is None
     assert x_owner._keep_dict is None
     assert x_owner._healers_dict is None
     assert x_owner._tree_traverse_count is None
@@ -65,11 +65,11 @@ def test_OwnerUnit_Exists():
     assert x_owner._offtrack_fund is None
     assert x_owner._reason_rcontexts is None
     assert x_owner._range_inheritors is None
-    assert str(type(x_owner.conceptroot)).find("None") == 8
+    assert str(type(x_owner.planroot)).find("None") == 8
     obj_attrs = set(x_owner.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
-        "_concept_dict",
+        "_plan_dict",
         "_healers_dict",
         "_keep_dict",
         _keeps_buildable_str(),
@@ -83,7 +83,7 @@ def test_OwnerUnit_Exists():
         _tree_traverse_count_str(),
         "accts",
         knot_str(),
-        "conceptroot",
+        "planroot",
         credor_respect_str(),
         debtor_respect_str(),
         "_groupunits",
@@ -126,7 +126,7 @@ def test_ownerunit_shop_ReturnsObjectWithFilledFields():
     assert x_owner.belief_label == iowa_belief_label
     assert x_owner.tally == 1
     assert x_owner.accts == {}
-    assert x_owner.conceptroot is not None
+    assert x_owner.planroot is not None
     assert x_owner.max_tree_traverse == 3
     assert x_owner.knot == slash_knot
     assert x_owner.fund_pool == x_fund_pool
@@ -137,7 +137,7 @@ def test_ownerunit_shop_ReturnsObjectWithFilledFields():
     assert x_owner.debtor_respect == validate_respect_num()
     assert not x_owner.last_pack_id
     # calculated attr
-    assert x_owner._concept_dict == {}
+    assert x_owner._plan_dict == {}
     assert x_owner._keep_dict == {}
     assert x_owner._healers_dict == {}
     assert not x_owner._tree_traverse_count
@@ -149,8 +149,8 @@ def test_ownerunit_shop_ReturnsObjectWithFilledFields():
     assert not x_owner._offtrack_fund
     assert x_owner._reason_rcontexts == set()
     assert x_owner._range_inheritors == {}
-    print(f"{type(x_owner.conceptroot)=}") == 0
-    assert str(type(x_owner.conceptroot)).find(".concept.ConceptUnit'>") > 0
+    print(f"{type(x_owner.planroot)=}") == 0
+    assert str(type(x_owner.planroot)).find(".plan.PlanUnit'>") > 0
 
 
 def test_ownerunit_shop_ReturnsObjectWithCorrectEmptyField():
@@ -165,14 +165,14 @@ def test_ownerunit_shop_ReturnsObjectWithCorrectEmptyField():
     assert x_owner.fund_iota == default_fund_iota_if_None()
     assert x_owner.respect_bit == default_RespectBit_if_None()
     assert x_owner.penny == filter_penny()
-    assert x_owner.conceptroot.fund_iota == x_owner.fund_iota
-    assert x_owner.conceptroot.knot == x_owner.knot
-    assert x_owner.conceptroot.root
-    assert x_owner.conceptroot._uid == 1
-    assert x_owner.conceptroot._level == 0
-    assert x_owner.conceptroot.belief_label == x_owner.belief_label
-    assert x_owner.conceptroot.knot == x_owner.knot
-    assert x_owner.conceptroot.parent_rope == ""
+    assert x_owner.planroot.fund_iota == x_owner.fund_iota
+    assert x_owner.planroot.knot == x_owner.knot
+    assert x_owner.planroot.root
+    assert x_owner.planroot._uid == 1
+    assert x_owner.planroot._level == 0
+    assert x_owner.planroot.belief_label == x_owner.belief_label
+    assert x_owner.planroot.knot == x_owner.knot
+    assert x_owner.planroot.parent_rope == ""
 
 
 def test_OwnerUnit_set_max_tree_traverse_CorrectlySetsInt():

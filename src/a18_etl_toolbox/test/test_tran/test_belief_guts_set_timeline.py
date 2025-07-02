@@ -31,11 +31,11 @@ def test_add_belief_timeline_to_guts_SetsFiles_Scenario0(env_dir_setup_cleanup):
     time_rope = init_sue_gut.make_l1_rope(time_str())
     five_rope = init_sue_gut.make_rope(time_rope, five_str())
     save_gut_file(belief_mstr_dir, init_sue_gut)
-    assert not init_sue_gut.concept_exists(five_rope)
+    assert not init_sue_gut.plan_exists(five_rope)
 
     # WHEN
     add_belief_timeline_to_guts(belief_mstr_dir)
 
     # THEN
     post_sue_gut = open_gut_file(belief_mstr_dir, a23_str, sue_str)
-    assert post_sue_gut.concept_exists(five_rope)
+    assert post_sue_gut.plan_exists(five_rope)

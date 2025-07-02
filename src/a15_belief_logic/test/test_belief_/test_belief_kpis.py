@@ -6,12 +6,12 @@ from src.a06_owner_logic.test._util.a06_str import (
     addin_str,
     begin_str,
     close_str,
-    concept_label_str,
     denom_str,
     morph_str,
     numor_str,
     owner_name_str,
     parent_rope_str,
+    plan_label_str,
 )
 from src.a15_belief_logic.belief_report import (
     get_belief_guts_accts_dataframe,
@@ -133,7 +133,7 @@ def test_get_belief_guts_agenda_dataframe_ReturnsObj(
     agenda_colums = {
         owner_name_str(),
         "fund_ratio",
-        concept_label_str(),
+        plan_label_str(),
         parent_rope_str(),
         begin_str(),
         close_str(),
@@ -174,7 +174,7 @@ def test_get_belief_jobs_agenda_dataframe_ReturnsObj(env_dir_setup_cleanup):
     agenda_colums = {
         owner_name_str(),
         "fund_ratio",
-        "concept_label",
+        "plan_label",
         parent_rope_str(),
         begin_str(),
         close_str(),

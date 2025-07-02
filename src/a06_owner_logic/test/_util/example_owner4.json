@@ -561,24 +561,24 @@
     }
   },
   "knot": ";",
-  "conceptroot": {
+  "planroot": {
     "_kids": {
       "Aaron Donald objects effected by him": {
         "_is_expanded": false,
         "_kids": {
           "interesting": {
             "_uid": 262,
-            "concept_label": "interesting",
+            "plan_label": "interesting",
             "mass": 1
           },
           "not interesting": {
             "_uid": 263,
-            "concept_label": "not interesting",
+            "plan_label": "not interesting",
             "mass": 1
           }
         },
         "_uid": 261,
-        "concept_label": "Aaron Donald objects effected by him",
+        "plan_label": "Aaron Donald objects effected by him",
         "mass": 1
       },
       "ACME": {
@@ -591,7 +591,7 @@
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 116,
-                    "concept_label": "Accomplish Fall 2021 traaining",
+                    "plan_label": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
@@ -609,14 +609,14 @@
                   }
                 },
                 "_uid": 106,
-                "concept_label": "Abuse Deterrence and Reporting guildlines",
+                "plan_label": "Abuse Deterrence and Reporting guildlines",
                 "mass": 1
               },
               "Know ACME Staff  and Safety #2 guildlines": {
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 115,
-                    "concept_label": "Accomplish Fall 2021 traaining",
+                    "plan_label": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime;": {
@@ -633,14 +633,14 @@
                   }
                 },
                 "_uid": 105,
-                "concept_label": "Know ACME Staff  and Safety #2 guildlines",
+                "plan_label": "Know ACME Staff  and Safety #2 guildlines",
                 "mass": 1
               },
               "Know Adult Sexual Misconduct guildlines": {
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 118,
-                    "concept_label": "Accomplish Fall 2021 traaining",
+                    "plan_label": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
@@ -658,12 +658,12 @@
                   }
                 },
                 "_uid": 108,
-                "concept_label": "Know Adult Sexual Misconduct guildlines",
+                "plan_label": "Know Adult Sexual Misconduct guildlines",
                 "mass": 1
               },
               "Know Employee Intruction manuel.": {
                 "_uid": 123,
-                "concept_label": "Know Employee Intruction manuel.",
+                "plan_label": "Know Employee Intruction manuel.",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -683,7 +683,7 @@
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 119,
-                    "concept_label": "Accomplish Fall 2021 traaining",
+                    "plan_label": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
@@ -701,14 +701,14 @@
                   }
                 },
                 "_uid": 109,
-                "concept_label": "Know Identifying and Supporting Houseless Youth guildlines",
+                "plan_label": "Know Identifying and Supporting Houseless Youth guildlines",
                 "mass": 1
               },
               "Know Information Security Awareness guildlines": {
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 121,
-                    "concept_label": "Accomplish Fall 2021 traaining",
+                    "plan_label": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
@@ -726,14 +726,14 @@
                   }
                 },
                 "_uid": 111,
-                "concept_label": "Know Information Security Awareness guildlines",
+                "plan_label": "Know Information Security Awareness guildlines",
                 "mass": 1
               },
               "Know Interbody retaliation guildlines": {
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 117,
-                    "concept_label": "Accomplish Fall 2021 traaining",
+                    "plan_label": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime;": {
@@ -750,14 +750,14 @@
                   }
                 },
                 "_uid": 107,
-                "concept_label": "Know Interbody retaliation guildlines",
+                "plan_label": "Know Interbody retaliation guildlines",
                 "mass": 1
               },
               "know OSHA COVID-19 Rick Reduction guildlines": {
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 120,
-                    "concept_label": "Accomplish Fall 2021 traaining",
+                    "plan_label": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
@@ -775,14 +775,14 @@
                   }
                 },
                 "_uid": 110,
-                "concept_label": "know OSHA COVID-19 Rick Reduction guildlines",
+                "plan_label": "know OSHA COVID-19 Rick Reduction guildlines",
                 "mass": 1
               },
               "Rick Management and Hazard Analysis": {
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 122,
-                    "concept_label": "Accomplish Fall 2021 traaining",
+                    "plan_label": "Accomplish Fall 2021 traaining",
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime;": {
@@ -799,12 +799,12 @@
                   }
                 },
                 "_uid": 112,
-                "concept_label": "Rick Management and Hazard Analysis",
+                "plan_label": "Rick Management and Hazard Analysis",
                 "mass": 1
               }
             },
             "_uid": 102,
-            "concept_label": "ACME Employee Responsiblities",
+            "plan_label": "ACME Employee Responsiblities",
             "mass": 1
           },
           "IT DEPT": {
@@ -816,7 +816,7 @@
                     "_kids": {
                       "check emails": {
                         "_uid": 138,
-                        "concept_label": "check emails",
+                        "plan_label": "check emails",
                         "mass": 1,
                         "task": true,
                         "reasonunits": {
@@ -837,27 +837,27 @@
                         "_kids": {
                           "MECHANISM1": {
                             "_uid": 170,
-                            "concept_label": "MECHANISM1",
+                            "plan_label": "MECHANISM1",
                             "mass": 1
                           },
                           "MECHANISM2": {
                             "_uid": 171,
-                            "concept_label": "MECHANISM2",
+                            "plan_label": "MECHANISM2",
                             "mass": 1
                           },
                           "MECHANISM3": {
                             "_uid": 172,
-                            "concept_label": "MECHANISM3",
+                            "plan_label": "MECHANISM3",
                             "mass": 1
                           },
                           "MECHANISM4": {
                             "_uid": 173,
-                            "concept_label": "MECHANISM4",
+                            "plan_label": "MECHANISM4",
                             "mass": 1
                           }
                         },
                         "_uid": 139,
-                        "concept_label": "check mechanisms",
+                        "plan_label": "check mechanisms",
                         "mass": 1,
                         "task": true,
                         "reasonunits": {
@@ -876,7 +876,7 @@
                       }
                     },
                     "_uid": 137,
-                    "concept_label": "check ETLs ran correctly",
+                    "plan_label": "check ETLs ran correctly",
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime;": {
@@ -894,7 +894,7 @@
                   },
                   "dress to slightly impress": {
                     "_uid": 158,
-                    "concept_label": "dress to slightly impress",
+                    "plan_label": "dress to slightly impress",
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
@@ -913,7 +913,7 @@
                   },
                   "go to employment": {
                     "_uid": 231,
-                    "concept_label": "go to employment",
+                    "plan_label": "go to employment",
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
@@ -932,7 +932,7 @@
                   }
                 },
                 "_uid": 136,
-                "concept_label": "IT DEPT off-hrs responsiblities",
+                "plan_label": "IT DEPT off-hrs responsiblities",
                 "mass": 1,
                 "reasonunits": {
                   "A;time;gregtime;": {
@@ -952,7 +952,7 @@
                 "_kids": {
                   "Add to Azure DevOps": {
                     "_uid": 156,
-                    "concept_label": "Add to Azure DevOps",
+                    "plan_label": "Add to Azure DevOps",
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
@@ -971,7 +971,7 @@
                   },
                   "consider management perspective": {
                     "_uid": 155,
-                    "concept_label": "consider management perspective",
+                    "plan_label": "consider management perspective",
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
@@ -992,7 +992,7 @@
                     "_kids": {
                       "Datawarehouse Expertise acquisition": {
                         "_uid": 142,
-                        "concept_label": "Datawarehouse Expertise acquisition",
+                        "plan_label": "Datawarehouse Expertise acquisition",
                         "mass": 1,
                         "task": true,
                         "reasonunits": {
@@ -1013,27 +1013,27 @@
                         "_kids": {
                           "MECHANISM1": {
                             "_uid": 175,
-                            "concept_label": "MECHANISM1",
+                            "plan_label": "MECHANISM1",
                             "mass": 1
                           },
                           "MECHANISM2": {
                             "_uid": 176,
-                            "concept_label": "MECHANISM2",
+                            "plan_label": "MECHANISM2",
                             "mass": 1
                           },
                           "MECHANISM4D": {
                             "_uid": 177,
-                            "concept_label": "MECHANISM4D",
+                            "plan_label": "MECHANISM4D",
                             "mass": 1
                           },
                           "MECHANISM4DD": {
                             "_uid": 174,
-                            "concept_label": "MECHANISM4DD",
+                            "plan_label": "MECHANISM4DD",
                             "mass": 1
                           }
                         },
                         "_uid": 157,
-                        "concept_label": "dev quantification script \"T2R8\"",
+                        "plan_label": "dev quantification script \"T2R8\"",
                         "mass": 1,
                         "task": true,
                         "reasonunits": {
@@ -1052,7 +1052,7 @@
                       },
                       "go to daily meeting ": {
                         "_uid": 232,
-                        "concept_label": "go to daily meeting ",
+                        "plan_label": "go to daily meeting ",
                         "mass": 1,
                         "task": true,
                         "reasonunits": {
@@ -1071,12 +1071,12 @@
                       }
                     },
                     "_uid": 135,
-                    "concept_label": "Datawarehouse",
+                    "plan_label": "Datawarehouse",
                     "mass": 1
                   },
                   "IT DEPT general": {
                     "_uid": 141,
-                    "concept_label": "IT DEPT general",
+                    "plan_label": "IT DEPT general",
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime;": {
@@ -1094,7 +1094,7 @@
                   },
                   "Keep track of Chatroom conversations": {
                     "_uid": 151,
-                    "concept_label": "Keep track of Chatroom conversations",
+                    "plan_label": "Keep track of Chatroom conversations",
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
@@ -1115,7 +1115,7 @@
                     "_kids": {
                       "check for access": {
                         "_uid": 143,
-                        "concept_label": "check for access",
+                        "plan_label": "check for access",
                         "mass": 1,
                         "reasonunits": {
                           "A;time;gregtime;": {
@@ -1133,7 +1133,7 @@
                       }
                     },
                     "_uid": 140,
-                    "concept_label": "SQLIte",
+                    "plan_label": "SQLIte",
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime;": {
@@ -1151,7 +1151,7 @@
                   }
                 },
                 "_uid": 133,
-                "concept_label": "IT DEPT regular hrs responsiblities",
+                "plan_label": "IT DEPT regular hrs responsiblities",
                 "mass": 1,
                 "morph": false,
                 "task": true,
@@ -1171,7 +1171,7 @@
               }
             },
             "_uid": 101,
-            "concept_label": "IT DEPT",
+            "plan_label": "IT DEPT",
             "mass": 1,
             "reasonunits": {
               "A;time;gregtime;": {
@@ -1189,7 +1189,7 @@
           }
         },
         "_uid": 100,
-        "concept_label": "ACME",
+        "plan_label": "ACME",
         "mass": 1
       },
       "Asset management": {
@@ -1205,7 +1205,7 @@
                         "_kids": {
                           "be reponsible for rent": {
                             "_uid": 209,
-                            "concept_label": "be reponsible for rent",
+                            "plan_label": "be reponsible for rent",
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States;": {
@@ -1222,7 +1222,7 @@
                             "_kids": {
                               "maybe watch a video": {
                                 "_uid": 218,
-                                "concept_label": "maybe watch a video",
+                                "plan_label": "maybe watch a video",
                                 "mass": 1,
                                 "reasonunits": {
                                   "A;Interweb;": {
@@ -1237,7 +1237,7 @@
                               }
                             },
                             "_uid": 214,
-                            "concept_label": "enjoy silent time",
+                            "plan_label": "enjoy silent time",
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States;": {
@@ -1252,7 +1252,7 @@
                           },
                           "flat": {
                             "_uid": 211,
-                            "concept_label": "flat",
+                            "plan_label": "flat",
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States;": {
@@ -1267,7 +1267,7 @@
                           },
                           "gym time": {
                             "_uid": 215,
-                            "concept_label": "gym time",
+                            "plan_label": "gym time",
                             "mass": 1,
                             "reasonunits": {
                               "A;Moods;": {
@@ -1282,7 +1282,7 @@
                           }
                         },
                         "_uid": 208,
-                        "concept_label": "flats",
+                        "plan_label": "flats",
                         "mass": 1,
                         "reasonunits": {
                           "A;Nation-States;": {
@@ -1299,7 +1299,7 @@
                         "_kids": {
                           "browsing": {
                             "_uid": 217,
-                            "concept_label": "browsing",
+                            "plan_label": "browsing",
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States;": {
@@ -1314,7 +1314,7 @@
                           },
                           "picnic": {
                             "_uid": 216,
-                            "concept_label": "picnic",
+                            "plan_label": "picnic",
                             "mass": 1,
                             "reasonunits": {
                               "A;Seasons;": {
@@ -1329,7 +1329,7 @@
                           },
                           "street soccer": {
                             "_uid": 213,
-                            "concept_label": "street soccer",
+                            "plan_label": "street soccer",
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States;": {
@@ -1344,7 +1344,7 @@
                           },
                           "swimming": {
                             "_uid": 212,
-                            "concept_label": "swimming",
+                            "plan_label": "swimming",
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States;": {
@@ -1359,7 +1359,7 @@
                           }
                         },
                         "_uid": 210,
-                        "concept_label": "Local college",
+                        "plan_label": "Local college",
                         "mass": 1,
                         "reasonunits": {
                           "A;Nation-States;": {
@@ -1374,7 +1374,7 @@
                       }
                     },
                     "_uid": 207,
-                    "concept_label": "downtown",
+                    "plan_label": "downtown",
                     "mass": 1,
                     "reasonunits": {
                       "A;Nation-States;": {
@@ -1389,7 +1389,7 @@
                   }
                 },
                 "_uid": 206,
-                "concept_label": "portland sovereignty",
+                "plan_label": "portland sovereignty",
                 "mass": 1,
                 "reasonunits": {
                   "A;Nation-States;": {
@@ -1404,7 +1404,7 @@
               },
               "texas sovereignty": {
                 "_uid": 205,
-                "concept_label": "texas sovereignty",
+                "plan_label": "texas sovereignty",
                 "mass": 1,
                 "reasonunits": {
                   "A;Nation-States;": {
@@ -1419,7 +1419,7 @@
               }
             },
             "_uid": 204,
-            "concept_label": "American sovereignty",
+            "plan_label": "American sovereignty",
             "mass": 1,
             "reasonunits": {
               "A;Nation-States;": {
@@ -1434,7 +1434,7 @@
           },
           "French sovereignty": {
             "_uid": 203,
-            "concept_label": "French sovereignty",
+            "plan_label": "French sovereignty",
             "mass": 1,
             "reasonunits": {
               "A;Nation-States;": {
@@ -1449,7 +1449,7 @@
           }
         },
         "_uid": 199,
-        "concept_label": "Asset management",
+        "plan_label": "Asset management",
         "mass": 1
       },
       "Better Stuff Proposal": {
@@ -1458,7 +1458,7 @@
           "decrease carbon footprint": {
             "_kids": {
               "never fly a private G5": {
-                "concept_label": "never fly a private G5",
+                "plan_label": "never fly a private G5",
                 "mass": 1,
                 "morph": false,
                 "task": true,
@@ -1476,12 +1476,12 @@
                 }
               }
             },
-            "concept_label": "decrease carbon footprint",
+            "plan_label": "decrease carbon footprint",
             "mass": 1,
             "morph": false
           }
         },
-        "concept_label": "Better Stuff Proposal",
+        "plan_label": "Better Stuff Proposal",
         "mass": 1,
         "morph": false
       },
@@ -1489,17 +1489,17 @@
         "_kids": {
           "Aint me Babe": {
             "_uid": 270,
-            "concept_label": "Aint me Babe",
+            "plan_label": "Aint me Babe",
             "mass": 1
           },
           "tangled up in blue": {
             "_uid": 271,
-            "concept_label": "tangled up in blue",
+            "plan_label": "tangled up in blue",
             "mass": 1
           }
         },
         "_uid": 269,
-        "concept_label": "Bob Dylan Root",
+        "plan_label": "Bob Dylan Root",
         "mass": 1
       },
       "casa": {
@@ -1514,7 +1514,7 @@
                 "take_force": 1
               }
             },
-            "concept_label": "call Crazy pete to say hi",
+            "plan_label": "call Crazy pete to say hi",
             "mass": 30,
             "morph": false,
             "task": true,
@@ -1534,7 +1534,7 @@
           },
           "check up on old family friends": {
             "_uid": 222,
-            "concept_label": "check up on old family friends",
+            "plan_label": "check up on old family friends",
             "mass": 1,
             "reasonunits": {
               "A;Moods;": {
@@ -1558,7 +1558,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "check cat water",
+                "plan_label": "check cat water",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -1577,7 +1577,7 @@
               },
               "check humidifer": {
                 "_uid": 159,
-                "concept_label": "check humidifer",
+                "plan_label": "check humidifer",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -1603,7 +1603,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "clean baby seats",
+                "plan_label": "clean baby seats",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -1629,7 +1629,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "clean bathroom",
+                "plan_label": "clean bathroom",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -1655,7 +1655,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "clean cat poo",
+                "plan_label": "clean cat poo",
                 "mass": 1,
                 "morph": false,
                 "task": true,
@@ -1682,7 +1682,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "clean humidifiers",
+                "plan_label": "clean humidifiers",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -1708,7 +1708,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "clean sheets couch blankets",
+                "plan_label": "clean sheets couch blankets",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -1734,7 +1734,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "clean table",
+                "plan_label": "clean table",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -1760,7 +1760,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "deep clean play mat",
+                "plan_label": "deep clean play mat",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -1786,7 +1786,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "empty roomba",
+                "plan_label": "empty roomba",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -1812,7 +1812,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "empty roomba Friday",
+                "plan_label": "empty roomba Friday",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -1832,17 +1832,17 @@
               "laundry basket status": {
                 "_kids": {
                   "full": {
-                    "concept_label": "full",
+                    "plan_label": "full",
                     "mass": 1,
                     "morph": false
                   },
                   "not full": {
-                    "concept_label": "not full",
+                    "plan_label": "not full",
                     "mass": 1,
                     "morph": false
                   }
                 },
-                "concept_label": "laundry basket status",
+                "plan_label": "laundry basket status",
                 "mass": 1,
                 "morph": false
               },
@@ -1855,7 +1855,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "laundry monday",
+                "plan_label": "laundry monday",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -1889,7 +1889,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "laundry saturday",
+                "plan_label": "laundry saturday",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -1915,7 +1915,7 @@
                 }
               },
               "laundry thursday": {
-                "concept_label": "laundry thursday",
+                "plan_label": "laundry thursday",
                 "mass": 1,
                 "morph": false,
                 "task": true,
@@ -1950,7 +1950,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "laundry wednesday",
+                "plan_label": "laundry wednesday",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -1977,7 +1977,7 @@
               },
               "morning cookery clean-up": {
                 "_uid": 150,
-                "concept_label": "morning cookery clean-up",
+                "plan_label": "morning cookery clean-up",
                 "mass": 1,
                 "reasonunits": {
                   "A;time;gregtime;": {
@@ -2002,7 +2002,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "prepare_bed clean bedroom",
+                "plan_label": "prepare_bed clean bedroom",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -2028,7 +2028,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "roomba bedroom",
+                "plan_label": "roomba bedroom",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -2054,7 +2054,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "roomba bedroom Friday",
+                "plan_label": "roomba bedroom Friday",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -2080,7 +2080,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "roomba living area",
+                "plan_label": "roomba living area",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -2106,7 +2106,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "roomba living area thur",
+                "plan_label": "roomba living area thur",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -2132,7 +2132,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "roomba maintenance",
+                "plan_label": "roomba maintenance",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -2158,7 +2158,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "wipe down play mat2",
+                "plan_label": "wipe down play mat2",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -2177,7 +2177,7 @@
               }
             },
             "_uid": 146,
-            "concept_label": "cleaning",
+            "plan_label": "cleaning",
             "mass": 1,
             "reasonunits": {
               "A;Nation-States;": {
@@ -2202,7 +2202,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "5 push-ups",
+                "plan_label": "5 push-ups",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -2228,7 +2228,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "check protein for wk is adequate",
+                "plan_label": "check protein for wk is adequate",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -2254,7 +2254,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "clean ears",
+                "plan_label": "clean ears",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -2280,7 +2280,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "clip body nails",
+                "plan_label": "clip body nails",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -2306,7 +2306,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "cook veggies every morning",
+                "plan_label": "cook veggies every morning",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -2325,7 +2325,7 @@
               },
               "evening multivitamin": {
                 "_uid": 230,
-                "concept_label": "evening multivitamin",
+                "plan_label": "evening multivitamin",
                 "mass": 1,
                 "reasonunits": {
                   "A;time;gregtime;": {
@@ -2350,7 +2350,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "flossing teeth",
+                "plan_label": "flossing teeth",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -2378,7 +2378,7 @@
                         "take_force": 1
                       }
                     },
-                    "concept_label": "bike or stuff",
+                    "plan_label": "bike or stuff",
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
@@ -2399,12 +2399,12 @@
                     "_kids": {
                       "bi and triceps exercises": {
                         "_uid": 130,
-                        "concept_label": "bi and triceps exercises",
+                        "plan_label": "bi and triceps exercises",
                         "mass": 1
                       },
                       "chest  exercises": {
                         "_uid": 129,
-                        "concept_label": "chest  exercises",
+                        "plan_label": "chest  exercises",
                         "mass": 1
                       }
                     },
@@ -2416,7 +2416,7 @@
                         "take_force": 1
                       }
                     },
-                    "concept_label": "chest and arms (mon)",
+                    "plan_label": "chest and arms (mon)",
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
@@ -2435,7 +2435,7 @@
                   },
                   "core and squats": {
                     "_uid": 179,
-                    "concept_label": "core and squats",
+                    "plan_label": "core and squats",
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime;": {
@@ -2460,7 +2460,7 @@
                         "take_force": 1
                       }
                     },
-                    "concept_label": "core lower back",
+                    "plan_label": "core lower back",
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
@@ -2486,7 +2486,7 @@
                         "take_force": 1
                       }
                     },
-                    "concept_label": "rest",
+                    "plan_label": "rest",
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime;": {
@@ -2506,14 +2506,14 @@
                     "_kids": {
                       "shoulder exercises": {
                         "_uid": 131,
-                        "concept_label": "shoulder exercises",
+                        "plan_label": "shoulder exercises",
                         "mass": 1,
                         "morph": false,
                         "task": true
                       },
                       "upper back exercises": {
                         "_uid": 132,
-                        "concept_label": "upper back exercises",
+                        "plan_label": "upper back exercises",
                         "mass": 1,
                         "morph": false,
                         "task": true
@@ -2527,7 +2527,7 @@
                         "take_force": 1
                       }
                     },
-                    "concept_label": "shoulders and upper back",
+                    "plan_label": "shoulders and upper back",
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
@@ -2553,7 +2553,7 @@
                         "take_force": 1
                       }
                     },
-                    "concept_label": "squats hamstrings and calves",
+                    "plan_label": "squats hamstrings and calves",
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
@@ -2572,7 +2572,7 @@
                   }
                 },
                 "_uid": 81,
-                "concept_label": "mass traaining",
+                "plan_label": "mass traaining",
                 "mass": 1
               },
               "morning multivitamin": {
@@ -2584,7 +2584,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "morning multivitamin",
+                "plan_label": "morning multivitamin",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -2610,7 +2610,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "shampooing",
+                "plan_label": "shampooing",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -2636,7 +2636,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "straight back for 45 secs",
+                "plan_label": "straight back for 45 secs",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -2657,7 +2657,7 @@
                 "_is_expanded": false,
                 "_kids": {
                   "back": {
-                    "concept_label": "back",
+                    "plan_label": "back",
                     "mass": 30,
                     "morph": false,
                     "task": true,
@@ -2676,7 +2676,7 @@
                     }
                   },
                   "legs": {
-                    "concept_label": "legs",
+                    "plan_label": "legs",
                     "mass": 30,
                     "morph": false,
                     "task": true,
@@ -2695,13 +2695,13 @@
                     }
                   },
                   "waist": {
-                    "concept_label": "waist",
+                    "plan_label": "waist",
                     "mass": 30,
                     "morph": false,
                     "task": true
                   }
                 },
-                "concept_label": "stretch",
+                "plan_label": "stretch",
                 "mass": 30,
                 "morph": false,
                 "task": true,
@@ -2728,7 +2728,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "trim beard",
+                "plan_label": "trim beard",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -2747,7 +2747,7 @@
               }
             },
             "_uid": 147,
-            "concept_label": "exercise",
+            "plan_label": "exercise",
             "mass": 1
           },
           "Financial Ops": {
@@ -2762,7 +2762,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "be reponsible for rent",
+                "plan_label": "be reponsible for rent",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -2787,7 +2787,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "be responsible for expenses card",
+                "plan_label": "be responsible for expenses card",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -2812,7 +2812,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "be responsible for utilities",
+                "plan_label": "be responsible for utilities",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -2837,7 +2837,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "set aside a little bucks for fun the wk",
+                "plan_label": "set aside a little bucks for fun the wk",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -2855,7 +2855,7 @@
               }
             },
             "_uid": 148,
-            "concept_label": "Financial Ops",
+            "plan_label": "Financial Ops",
             "mass": 1
           },
           "Housing": {
@@ -2863,36 +2863,36 @@
             "_kids": {
               "Bike Garage": {
                 "_uid": 185,
-                "concept_label": "Bike Garage",
+                "plan_label": "Bike Garage",
                 "mass": 1
               },
               "Bike Gym": {
                 "_uid": 184,
-                "concept_label": "Bike Gym",
+                "plan_label": "Bike Gym",
                 "mass": 1
               },
               "Flat": {
                 "_kids": {
                   "bathroom #2": {
                     "_uid": 196,
-                    "concept_label": "bathroom #2",
+                    "plan_label": "bathroom #2",
                     "mass": 1
                   },
                   "bedroom #1": {
                     "_kids": {
                       "big bathroom": {
                         "_uid": 195,
-                        "concept_label": "big bathroom",
+                        "plan_label": "big bathroom",
                         "mass": 1
                       },
                       "closet": {
                         "_uid": 194,
-                        "concept_label": "closet",
+                        "plan_label": "closet",
                         "mass": 1
                       }
                     },
                     "_uid": 191,
-                    "concept_label": "bedroom #1",
+                    "plan_label": "bedroom #1",
                     "mass": 1
                   },
                   "bedroom #2": {
@@ -2908,62 +2908,62 @@
                                 "take_force": 1
                               }
                             },
-                            "concept_label": "heater maintenance",
+                            "plan_label": "heater maintenance",
                             "mass": 1
                           }
                         },
                         "_uid": 197,
-                        "concept_label": "bed area",
+                        "plan_label": "bed area",
                         "mass": 1
                       },
                       "closet": {
                         "_uid": 193,
-                        "concept_label": "closet",
+                        "plan_label": "closet",
                         "mass": 1
                       }
                     },
                     "_uid": 192,
-                    "concept_label": "bedroom #2",
+                    "plan_label": "bedroom #2",
                     "mass": 1
                   },
                   "cookery": {
                     "_uid": 189,
-                    "concept_label": "cookery",
+                    "plan_label": "cookery",
                     "mass": 1
                   },
                   "dining area": {
                     "_uid": 190,
-                    "concept_label": "dining area",
+                    "plan_label": "dining area",
                     "mass": 1
                   },
                   "maintenance": {
                     "_uid": 187,
-                    "concept_label": "maintenance",
+                    "plan_label": "maintenance",
                     "mass": 1
                   },
                   "nursery": {
                     "_uid": 188,
-                    "concept_label": "nursery",
+                    "plan_label": "nursery",
                     "mass": 1
                   }
                 },
                 "_uid": 181,
-                "concept_label": "Flat",
+                "plan_label": "Flat",
                 "mass": 1
               },
               "Lifting Gym": {
                 "_uid": 183,
-                "concept_label": "Lifting Gym",
+                "plan_label": "Lifting Gym",
                 "mass": 1
               },
               "Playing in nurserys": {
                 "_uid": 186,
-                "concept_label": "Playing in nurserys",
+                "plan_label": "Playing in nurserys",
                 "mass": 1
               },
               "Pool": {
                 "_uid": 182,
-                "concept_label": "Pool",
+                "plan_label": "Pool",
                 "mass": 1
               }
             },
@@ -2975,12 +2975,12 @@
                 "take_force": 1
               }
             },
-            "concept_label": "Housing",
+            "plan_label": "Housing",
             "mass": 1
           },
           "keep up with friends": {
             "_uid": 220,
-            "concept_label": "keep up with friends",
+            "plan_label": "keep up with friends",
             "mass": 1,
             "reasonunits": {
               "A;Interweb;": {
@@ -3005,7 +3005,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "clip oldest nails",
+                "plan_label": "clip oldest nails",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -3039,7 +3039,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "get rid of toy get new toy",
+                "plan_label": "get rid of toy get new toy",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -3066,7 +3066,7 @@
               }
             },
             "_uid": 144,
-            "concept_label": "responsible for kids",
+            "plan_label": "responsible for kids",
             "mass": 1,
             "reasonunits": {
               "A;Nation-States;": {
@@ -3080,7 +3080,7 @@
             }
           },
           "say double hi to birds": {
-            "concept_label": "say double hi to birds",
+            "plan_label": "say double hi to birds",
             "mass": 25,
             "morph": false,
             "task": true,
@@ -3107,7 +3107,7 @@
                 "take_force": 1
               }
             },
-            "concept_label": "say hi to birds",
+            "plan_label": "say hi to birds",
             "mass": 1,
             "task": true,
             "reasonunits": {
@@ -3126,7 +3126,7 @@
           }
         },
         "_uid": 2,
-        "concept_label": "casa",
+        "plan_label": "casa",
         "mass": 20,
         "morph": false
       },
@@ -3144,7 +3144,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "Ask Aaron monthly what I can do",
+                "plan_label": "Ask Aaron monthly what I can do",
                 "mass": 1,
                 "reasonunits": {
                   "A;Aaron Donald objects effected by him;": {
@@ -3166,7 +3166,7 @@
                 "take_force": 1
               }
             },
-            "concept_label": "bens friends be desperate for of housing support",
+            "plan_label": "bens friends be desperate for of housing support",
             "mass": 1,
             "reasonunits": {
               "A;Aaron Donald objects effected by him;": {
@@ -3183,7 +3183,7 @@
             "_kids": {
               "test program": {
                 "_uid": 178,
-                "concept_label": "test program",
+                "plan_label": "test program",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -3217,7 +3217,7 @@
                 "take_force": 1
               }
             },
-            "concept_label": "develop D&B software",
+            "plan_label": "develop D&B software",
             "mass": 1,
             "reasonunits": {
               "A;Aaron Donald objects effected by him;": {
@@ -3241,7 +3241,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "donate to influential people that are pro-Climate Death",
+                "plan_label": "donate to influential people that are pro-Climate Death",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -3268,7 +3268,7 @@
               }
             },
             "_uid": 167,
-            "concept_label": "donate to pro-climate committees",
+            "plan_label": "donate to pro-climate committees",
             "mass": 1,
             "reasonunits": {
               "A;Aaron Donald objects effected by him;": {
@@ -3283,7 +3283,7 @@
           },
           "late_evening_go_to_sleep": {
             "_uid": 149,
-            "concept_label": "late_evening_go_to_sleep",
+            "plan_label": "late_evening_go_to_sleep",
             "mass": 1,
             "task": true,
             "reasonunits": {
@@ -3313,7 +3313,7 @@
               "Ernesto Chavez": {
                 "_kids": {
                   "available for phone call": {
-                    "concept_label": "available for phone call",
+                    "plan_label": "available for phone call",
                     "mass": 4,
                     "morph": false,
                     "task": true,
@@ -3332,7 +3332,7 @@
                     }
                   }
                 },
-                "concept_label": "Ernesto Chavez",
+                "plan_label": "Ernesto Chavez",
                 "mass": 4,
                 "morph": false,
                 "reasonunits": {
@@ -3352,7 +3352,7 @@
                         "take_force": 1
                       }
                     },
-                    "concept_label": "be available for phone call",
+                    "plan_label": "be available for phone call",
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
@@ -3391,7 +3391,7 @@
                         "take_force": 1
                       }
                     },
-                    "concept_label": "call Aaron and discuss methodology",
+                    "plan_label": "call Aaron and discuss methodology",
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
@@ -3425,7 +3425,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "sympathetic receptive to Aaron",
+                "plan_label": "sympathetic receptive to Aaron",
                 "mass": 1,
                 "reasonunits": {
                   "A;Aaron Donald objects effected by him;": {
@@ -3440,7 +3440,7 @@
               }
             },
             "_uid": 161,
-            "concept_label": "sympathetic receptive",
+            "plan_label": "sympathetic receptive",
             "mass": 1,
             "reasonunits": {
               "A;Aaron Donald objects effected by him;": {
@@ -3464,7 +3464,7 @@
                     "take_force": 1
                   }
                 },
-                "concept_label": "write letters about Climate Death to congressman",
+                "plan_label": "write letters about Climate Death to congressman",
                 "mass": 1,
                 "reasonunits": {
                   "A;Aaron Donald objects effected by him;": {
@@ -3490,7 +3490,7 @@
               }
             },
             "_uid": 165,
-            "concept_label": "write letters to reps",
+            "plan_label": "write letters to reps",
             "mass": 1,
             "reasonunits": {
               "A;Aaron Donald objects effected by him;": {
@@ -3522,7 +3522,7 @@
             "take_force": 1
           }
         },
-        "concept_label": "D&B",
+        "plan_label": "D&B",
         "mass": 1,
         "reasonunits": {
           "A;Aaron Donald objects effected by him;": {
@@ -3542,66 +3542,66 @@
             "_kids": {
               "PSU Ultimate": {
                 "_uid": 254,
-                "concept_label": "PSU Ultimate",
+                "plan_label": "PSU Ultimate",
                 "mass": 1
               }
             },
             "_uid": 253,
-            "concept_label": "AOL AIM",
+            "plan_label": "AOL AIM",
             "mass": 1
           },
           "Faaceboook": {
             "_uid": 251,
-            "concept_label": "Faaceboook",
+            "plan_label": "Faaceboook",
             "mass": 1
           },
           "Github": {
             "_uid": 252,
-            "concept_label": "Github",
+            "plan_label": "Github",
             "mass": 1
           },
           "YahooVideo": {
             "_uid": 255,
-            "concept_label": "YahooVideo",
+            "plan_label": "YahooVideo",
             "mass": 1
           }
         },
         "_uid": 250,
-        "concept_label": "Interweb",
+        "plan_label": "Interweb",
         "mass": 1
       },
       "Moods": {
         "_kids": {
           "Bllod Meridan by Cormac": {
             "_uid": 265,
-            "concept_label": "Bllod Meridan by Cormac",
+            "plan_label": "Bllod Meridan by Cormac",
             "mass": 1
           },
           "Happy": {
             "_kids": {
               "Happy - angerish": {
                 "_uid": 267,
-                "concept_label": "Happy - angerish",
+                "plan_label": "Happy - angerish",
                 "mass": 1
               }
             },
             "_uid": 266,
-            "concept_label": "Happy",
+            "plan_label": "Happy",
             "mass": 1
           },
           "hungry": {
             "_uid": 268,
-            "concept_label": "hungry",
+            "plan_label": "hungry",
             "mass": 1
           },
           "I will waste time": {
-            "concept_label": "I will waste time",
+            "plan_label": "I will waste time",
             "mass": 1,
             "morph": false
           }
         },
         "_uid": 264,
-        "concept_label": "Moods",
+        "plan_label": "Moods",
         "mass": 1
       },
       "Nation-States": {
@@ -3609,7 +3609,7 @@
         "_kids": {
           "France2": {
             "_uid": 235,
-            "concept_label": "France2",
+            "plan_label": "France2",
             "mass": 1
           },
           "USA": {
@@ -3622,79 +3622,79 @@
                         "_kids": {
                           "10th floor gaarden": {
                             "_uid": 246,
-                            "concept_label": "10th floor gaarden",
+                            "plan_label": "10th floor gaarden",
                             "mass": 1
                           },
                           "Apt 450": {
                             "_uid": 247,
-                            "concept_label": "Apt 450",
+                            "plan_label": "Apt 450",
                             "mass": 1
                           },
                           "Gym": {
                             "_uid": 248,
-                            "concept_label": "Gym",
+                            "plan_label": "Gym",
                             "mass": 1
                           },
                           "workspace": {
                             "_uid": 249,
-                            "concept_label": "workspace",
+                            "plan_label": "workspace",
                             "mass": 1
                           }
                         },
                         "_uid": 245,
-                        "concept_label": "Flats",
+                        "plan_label": "Flats",
                         "mass": 1
                       },
                       "PSU": {
                         "_kids": {
                           "library": {
                             "_uid": 244,
-                            "concept_label": "library",
+                            "plan_label": "library",
                             "mass": 1
                           },
                           "Park Squares": {
                             "_uid": 241,
-                            "concept_label": "Park Squares",
+                            "plan_label": "Park Squares",
                             "mass": 1
                           },
                           "Pool": {
                             "_uid": 242,
-                            "concept_label": "Pool",
+                            "plan_label": "Pool",
                             "mass": 1
                           },
                           "Stott Field": {
                             "_uid": 243,
-                            "concept_label": "Stott Field",
+                            "plan_label": "Stott Field",
                             "mass": 1
                           }
                         },
                         "_uid": 240,
-                        "concept_label": "PSU",
+                        "plan_label": "PSU",
                         "mass": 1
                       }
                     },
                     "_uid": 239,
-                    "concept_label": "Downtown",
+                    "plan_label": "Downtown",
                     "mass": 1
                   }
                 },
                 "_uid": 237,
-                "concept_label": "Portland OR",
+                "plan_label": "Portland OR",
                 "mass": 1
               },
               "Texas": {
                 "_uid": 238,
-                "concept_label": "Texas",
+                "plan_label": "Texas",
                 "mass": 1
               }
             },
             "_uid": 236,
-            "concept_label": "USA",
+            "plan_label": "USA",
             "mass": 1
           }
         },
         "_uid": 234,
-        "concept_label": "Nation-States",
+        "plan_label": "Nation-States",
         "mass": 1
       },
       "No Movie playing": {
@@ -3702,17 +3702,17 @@
         "_kids": {
           "Big Lewbwski": {
             "_uid": 273,
-            "concept_label": "Big Lewbwski",
+            "plan_label": "Big Lewbwski",
             "mass": 1
           },
           "Star Wars eps IV": {
             "_uid": 274,
-            "concept_label": "Star Wars eps IV",
+            "plan_label": "Star Wars eps IV",
             "mass": 1
           }
         },
         "_uid": 272,
-        "concept_label": "No Movie playing",
+        "plan_label": "No Movie playing",
         "mass": 1
       },
       "Seasons": {
@@ -3720,12 +3720,12 @@
         "_kids": {
           "Summer": {
             "_uid": 276,
-            "concept_label": "Summer",
+            "plan_label": "Summer",
             "mass": 1
           }
         },
         "_uid": 275,
-        "concept_label": "Seasons",
+        "plan_label": "Seasons",
         "mass": 1
       },
       "time": {
@@ -3735,7 +3735,7 @@
             "_kids": {
               "400 yr segment": {
                 "_is_expanded": false,
-                "concept_label": "400 yr segment",
+                "plan_label": "400 yr segment",
                 "denom": 7,
                 "gogo_want": 0.0,
                 "mass": 1,
@@ -3745,7 +3745,7 @@
               },
               "400 yr segments": {
                 "_is_expanded": false,
-                "concept_label": "400 yr segments",
+                "plan_label": "400 yr segments",
                 "denom": 210379680,
                 "gogo_want": 0.0,
                 "mass": 1,
@@ -3755,7 +3755,7 @@
               },
               "day": {
                 "_is_expanded": false,
-                "concept_label": "day",
+                "plan_label": "day",
                 "denom": 1022679.0,
                 "gogo_want": 0.0,
                 "mass": 1,
@@ -3765,7 +3765,7 @@
               },
               "days": {
                 "_is_expanded": false,
-                "concept_label": "days",
+                "plan_label": "days",
                 "denom": 1440,
                 "gogo_want": 0.0,
                 "mass": 1,
@@ -3775,7 +3775,7 @@
               },
               "wk": {
                 "_is_expanded": false,
-                "concept_label": "wk",
+                "plan_label": "wk",
                 "denom": 146097.0,
                 "gogo_want": 0.0,
                 "mass": 1,
@@ -3785,7 +3785,7 @@
               },
               "wks": {
                 "_is_expanded": false,
-                "concept_label": "wks",
+                "plan_label": "wks",
                 "denom": 10080,
                 "gogo_want": 0.0,
                 "mass": 1,
@@ -3798,28 +3798,28 @@
                   "monthly 1st business day": {
                     "_kids": {
                       "2023 Feb 9am": {
-                        "concept_label": "2023 Feb 9am",
+                        "plan_label": "2023 Feb 9am",
                         "gogo_want": 1064041020.0,
                         "mass": 1,
                         "morph": false,
                         "stop_want": 1064041020.0
                       }
                     },
-                    "concept_label": "monthly 1st business day",
+                    "plan_label": "monthly 1st business day",
                     "gogo_want": 0.0,
                     "mass": 1,
                     "morph": false,
                     "stop_want": 1472657760.0
                   },
                   "Sept 4th 2023 9am": {
-                    "concept_label": "Sept 4th 2023 9am",
+                    "plan_label": "Sept 4th 2023 9am",
                     "gogo_want": 1064350680.0,
                     "mass": 1,
                     "morph": false,
                     "stop_want": 1064350680.0
                   }
                 },
-                "concept_label": "x2",
+                "plan_label": "x2",
                 "gogo_want": 0.0,
                 "mass": 1,
                 "morph": false,
@@ -3828,7 +3828,7 @@
             },
             "begin": 0,
             "close": 1472657760,
-            "concept_label": "gregtime",
+            "plan_label": "gregtime",
             "mass": 1
           },
           "tech": {
@@ -3838,84 +3838,84 @@
                 "_kids": {
                   "1-Jan": {
                     "_is_expanded": false,
-                    "concept_label": "1-Jan",
+                    "plan_label": "1-Jan",
                     "gogo_want": 0,
                     "mass": 1,
                     "stop_want": 44640
                   },
                   "10-Oct": {
                     "_is_expanded": false,
-                    "concept_label": "10-Oct",
+                    "plan_label": "10-Oct",
                     "gogo_want": 393120,
                     "mass": 1,
                     "stop_want": 437760
                   },
                   "11-Nov": {
                     "_is_expanded": false,
-                    "concept_label": "11-Nov",
+                    "plan_label": "11-Nov",
                     "gogo_want": 437760,
                     "mass": 1,
                     "stop_want": 480960
                   },
                   "12-Dec": {
                     "_is_expanded": false,
-                    "concept_label": "12-Dec",
+                    "plan_label": "12-Dec",
                     "gogo_want": 480960,
                     "mass": 1,
                     "stop_want": 525600
                   },
                   "2-Feb28": {
                     "_is_expanded": false,
-                    "concept_label": "2-Feb28",
+                    "plan_label": "2-Feb28",
                     "gogo_want": 44640,
                     "mass": 1,
                     "stop_want": 84960
                   },
                   "3-Mar": {
                     "_is_expanded": false,
-                    "concept_label": "3-Mar",
+                    "plan_label": "3-Mar",
                     "gogo_want": 84960,
                     "mass": 1,
                     "stop_want": 129600
                   },
                   "4-Apr": {
                     "_is_expanded": false,
-                    "concept_label": "4-Apr",
+                    "plan_label": "4-Apr",
                     "gogo_want": 129600,
                     "mass": 1,
                     "stop_want": 172800
                   },
                   "5-May": {
                     "_is_expanded": false,
-                    "concept_label": "5-May",
+                    "plan_label": "5-May",
                     "gogo_want": 172800,
                     "mass": 1,
                     "stop_want": 217440
                   },
                   "6-Jun": {
                     "_is_expanded": false,
-                    "concept_label": "6-Jun",
+                    "plan_label": "6-Jun",
                     "gogo_want": 217440,
                     "mass": 1,
                     "stop_want": 260640
                   },
                   "7-Jul": {
                     "_is_expanded": false,
-                    "concept_label": "7-Jul",
+                    "plan_label": "7-Jul",
                     "gogo_want": 260640,
                     "mass": 1,
                     "stop_want": 305280
                   },
                   "8-Aug": {
                     "_is_expanded": false,
-                    "concept_label": "8-Aug",
+                    "plan_label": "8-Aug",
                     "gogo_want": 305280,
                     "mass": 1,
                     "stop_want": 349920
                   },
                   "9-Sep": {
                     "_is_expanded": false,
-                    "concept_label": "9-Sep",
+                    "plan_label": "9-Sep",
                     "gogo_want": 349920,
                     "mass": 1,
                     "stop_want": 393120
@@ -3923,7 +3923,7 @@
                 },
                 "begin": 0,
                 "close": 525600,
-                "concept_label": "365 yr",
+                "plan_label": "365 yr",
                 "mass": 1
               },
               "366 yr": {
@@ -3931,84 +3931,84 @@
                 "_kids": {
                   "1-Jan": {
                     "_is_expanded": false,
-                    "concept_label": "1-Jan",
+                    "plan_label": "1-Jan",
                     "gogo_want": 0,
                     "mass": 1,
                     "stop_want": 44640
                   },
                   "10-Oct": {
                     "_is_expanded": false,
-                    "concept_label": "10-Oct",
+                    "plan_label": "10-Oct",
                     "gogo_want": 394560,
                     "mass": 1,
                     "stop_want": 439200
                   },
                   "11-Nov": {
                     "_is_expanded": false,
-                    "concept_label": "11-Nov",
+                    "plan_label": "11-Nov",
                     "gogo_want": 439200,
                     "mass": 1,
                     "stop_want": 482400
                   },
                   "12-Dec": {
                     "_is_expanded": false,
-                    "concept_label": "12-Dec",
+                    "plan_label": "12-Dec",
                     "gogo_want": 482400,
                     "mass": 1,
                     "stop_want": 527040
                   },
                   "2-Feb29": {
                     "_is_expanded": false,
-                    "concept_label": "2-Feb29",
+                    "plan_label": "2-Feb29",
                     "gogo_want": 44640,
                     "mass": 1,
                     "stop_want": 86400
                   },
                   "3-Mar": {
                     "_is_expanded": false,
-                    "concept_label": "3-Mar",
+                    "plan_label": "3-Mar",
                     "gogo_want": 86400,
                     "mass": 1,
                     "stop_want": 131040
                   },
                   "4-Apr": {
                     "_is_expanded": false,
-                    "concept_label": "4-Apr",
+                    "plan_label": "4-Apr",
                     "gogo_want": 131040,
                     "mass": 1,
                     "stop_want": 174240
                   },
                   "5-May": {
                     "_is_expanded": false,
-                    "concept_label": "5-May",
+                    "plan_label": "5-May",
                     "gogo_want": 174240,
                     "mass": 1,
                     "stop_want": 218880
                   },
                   "6-Jun": {
                     "_is_expanded": false,
-                    "concept_label": "6-Jun",
+                    "plan_label": "6-Jun",
                     "gogo_want": 218880,
                     "mass": 1,
                     "stop_want": 262080
                   },
                   "7-Jul": {
                     "_is_expanded": false,
-                    "concept_label": "7-Jul",
+                    "plan_label": "7-Jul",
                     "gogo_want": 262080,
                     "mass": 1,
                     "stop_want": 306720
                   },
                   "8-Aug": {
                     "_is_expanded": false,
-                    "concept_label": "8-Aug",
+                    "plan_label": "8-Aug",
                     "gogo_want": 306720,
                     "mass": 1,
                     "stop_want": 351360
                   },
                   "9-Sep": {
                     "_is_expanded": false,
-                    "concept_label": "9-Sep",
+                    "plan_label": "9-Sep",
                     "gogo_want": 351360,
                     "mass": 1,
                     "stop_want": 394560
@@ -4016,7 +4016,7 @@
                 },
                 "begin": 0,
                 "close": 527040,
-                "concept_label": "366 yr",
+                "plan_label": "366 yr",
                 "mass": 1
               },
               "400 yr segment": {
@@ -4027,7 +4027,7 @@
                     "_kids": {
                       "4yr with leap": {
                         "_is_expanded": false,
-                        "concept_label": "4yr with leap",
+                        "plan_label": "4yr with leap",
                         "denom": 25,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -4036,7 +4036,7 @@
                         "stop_want": 2103840.0
                       }
                     },
-                    "concept_label": "0-100-25 leap yrs",
+                    "plan_label": "0-100-25 leap yrs",
                     "gogo_want": 0,
                     "mass": 1,
                     "stop_want": 52596000
@@ -4046,7 +4046,7 @@
                     "_kids": {
                       "4yr wo leap": {
                         "_is_expanded": false,
-                        "concept_label": "4yr wo leap",
+                        "plan_label": "4yr wo leap",
                         "denom": 1,
                         "gogo_want": 52596000.0,
                         "mass": 1,
@@ -4055,7 +4055,7 @@
                         "stop_want": 54698400.0
                       }
                     },
-                    "concept_label": "100-104-0 leap yrs",
+                    "plan_label": "100-104-0 leap yrs",
                     "gogo_want": 52596000,
                     "mass": 1,
                     "stop_want": 54698400
@@ -4065,7 +4065,7 @@
                     "_kids": {
                       "4yr with leap": {
                         "_is_expanded": false,
-                        "concept_label": "4yr with leap",
+                        "plan_label": "4yr with leap",
                         "denom": 24,
                         "gogo_want": 2279100.0,
                         "mass": 1,
@@ -4074,7 +4074,7 @@
                         "stop_want": 4382940.0
                       }
                     },
-                    "concept_label": "104-200-24 leap yrs",
+                    "plan_label": "104-200-24 leap yrs",
                     "gogo_want": 54698400,
                     "mass": 1,
                     "stop_want": 105190560
@@ -4084,7 +4084,7 @@
                     "_kids": {
                       "4yr wo leap": {
                         "_is_expanded": false,
-                        "concept_label": "4yr wo leap",
+                        "plan_label": "4yr wo leap",
                         "denom": 1,
                         "gogo_want": 105190560.0,
                         "mass": 1,
@@ -4093,7 +4093,7 @@
                         "stop_want": 107292960.0
                       }
                     },
-                    "concept_label": "200-204-0 leap yrs",
+                    "plan_label": "200-204-0 leap yrs",
                     "gogo_want": 105190560,
                     "mass": 1,
                     "stop_want": 107292960
@@ -4103,7 +4103,7 @@
                     "_kids": {
                       "4yr with leap": {
                         "_is_expanded": false,
-                        "concept_label": "4yr with leap",
+                        "plan_label": "4yr with leap",
                         "denom": 24,
                         "gogo_want": 4470540.0,
                         "mass": 1,
@@ -4112,7 +4112,7 @@
                         "stop_want": 6574380.0
                       }
                     },
-                    "concept_label": "204-300-24 leap yrs",
+                    "plan_label": "204-300-24 leap yrs",
                     "gogo_want": 107292960,
                     "mass": 1,
                     "stop_want": 157785120
@@ -4122,7 +4122,7 @@
                     "_kids": {
                       "4yr wo leap": {
                         "_is_expanded": false,
-                        "concept_label": "4yr wo leap",
+                        "plan_label": "4yr wo leap",
                         "denom": 1,
                         "gogo_want": 157785120.0,
                         "mass": 1,
@@ -4131,7 +4131,7 @@
                         "stop_want": 159887520.0
                       }
                     },
-                    "concept_label": "300-304-0 leap yrs",
+                    "plan_label": "300-304-0 leap yrs",
                     "gogo_want": 157785120,
                     "mass": 1,
                     "stop_want": 159887520
@@ -4141,7 +4141,7 @@
                     "_kids": {
                       "4yr with leap": {
                         "_is_expanded": false,
-                        "concept_label": "4yr with leap",
+                        "plan_label": "4yr with leap",
                         "denom": 24,
                         "gogo_want": 6661980.0,
                         "mass": 1,
@@ -4150,7 +4150,7 @@
                         "stop_want": 8765820.0
                       }
                     },
-                    "concept_label": "304-400-24 leap yrs",
+                    "plan_label": "304-400-24 leap yrs",
                     "gogo_want": 159887520,
                     "mass": 1,
                     "stop_want": 210379680
@@ -4158,7 +4158,7 @@
                 },
                 "begin": 0.0,
                 "close": 210379680.0,
-                "concept_label": "400 yr segment",
+                "plan_label": "400 yr segment",
                 "mass": 1
               },
               "4yr with leap": {
@@ -4166,28 +4166,28 @@
                 "_kids": {
                   "1-yr": {
                     "_is_expanded": false,
-                    "concept_label": "1-yr",
+                    "plan_label": "1-yr",
                     "gogo_want": 0,
                     "mass": 1,
                     "stop_want": 527040
                   },
                   "2-yr": {
                     "_is_expanded": false,
-                    "concept_label": "2-yr",
+                    "plan_label": "2-yr",
                     "gogo_want": 527040,
                     "mass": 1,
                     "stop_want": 1052640
                   },
                   "3-yr": {
                     "_is_expanded": false,
-                    "concept_label": "3-yr",
+                    "plan_label": "3-yr",
                     "gogo_want": 1052640,
                     "mass": 1,
                     "stop_want": 1578240
                   },
                   "4-yr": {
                     "_is_expanded": false,
-                    "concept_label": "4-yr",
+                    "plan_label": "4-yr",
                     "gogo_want": 1578240,
                     "mass": 1,
                     "stop_want": 2103840
@@ -4195,7 +4195,7 @@
                 },
                 "begin": 0.0,
                 "close": 2103840.0,
-                "concept_label": "4yr with leap",
+                "plan_label": "4yr with leap",
                 "mass": 1
               },
               "4yr wo leap": {
@@ -4203,28 +4203,28 @@
                 "_kids": {
                   "1-yr": {
                     "_is_expanded": false,
-                    "concept_label": "1-yr",
+                    "plan_label": "1-yr",
                     "gogo_want": 0,
                     "mass": 1,
                     "stop_want": 525600
                   },
                   "2-yr": {
                     "_is_expanded": false,
-                    "concept_label": "2-yr",
+                    "plan_label": "2-yr",
                     "gogo_want": 525600,
                     "mass": 1,
                     "stop_want": 1051200
                   },
                   "3-yr": {
                     "_is_expanded": false,
-                    "concept_label": "3-yr",
+                    "plan_label": "3-yr",
                     "gogo_want": 1051200,
                     "mass": 1,
                     "stop_want": 1576800
                   },
                   "4-yr": {
                     "_is_expanded": false,
-                    "concept_label": "4-yr",
+                    "plan_label": "4-yr",
                     "gogo_want": 1576800,
                     "mass": 1,
                     "stop_want": 2102400
@@ -4232,7 +4232,7 @@
                 },
                 "begin": 0,
                 "close": 2102400,
-                "concept_label": "4yr wo leap",
+                "plan_label": "4yr wo leap",
                 "mass": 1
               },
               "day": {
@@ -4240,168 +4240,168 @@
                 "_kids": {
                   "0-12am": {
                     "_is_expanded": false,
-                    "concept_label": "0-12am",
+                    "plan_label": "0-12am",
                     "gogo_want": 0,
                     "mass": 1,
                     "stop_want": 60
                   },
                   "1-1am": {
                     "_is_expanded": false,
-                    "concept_label": "1-1am",
+                    "plan_label": "1-1am",
                     "gogo_want": 60,
                     "mass": 1,
                     "stop_want": 120
                   },
                   "10-10am": {
                     "_is_expanded": false,
-                    "concept_label": "10-10am",
+                    "plan_label": "10-10am",
                     "gogo_want": 600,
                     "mass": 1,
                     "stop_want": 660
                   },
                   "11-11am": {
                     "_is_expanded": false,
-                    "concept_label": "11-11am",
+                    "plan_label": "11-11am",
                     "gogo_want": 660,
                     "mass": 1,
                     "stop_want": 720
                   },
                   "12-12pm": {
                     "_is_expanded": false,
-                    "concept_label": "12-12pm",
+                    "plan_label": "12-12pm",
                     "gogo_want": 720,
                     "mass": 1,
                     "stop_want": 780
                   },
                   "13-1pm": {
                     "_is_expanded": false,
-                    "concept_label": "13-1pm",
+                    "plan_label": "13-1pm",
                     "gogo_want": 780,
                     "mass": 1,
                     "stop_want": 840
                   },
                   "14-2pm": {
                     "_is_expanded": false,
-                    "concept_label": "14-2pm",
+                    "plan_label": "14-2pm",
                     "gogo_want": 840,
                     "mass": 1,
                     "stop_want": 900
                   },
                   "15-3pm": {
                     "_is_expanded": false,
-                    "concept_label": "15-3pm",
+                    "plan_label": "15-3pm",
                     "gogo_want": 900,
                     "mass": 1,
                     "stop_want": 960
                   },
                   "16-4pm": {
                     "_is_expanded": false,
-                    "concept_label": "16-4pm",
+                    "plan_label": "16-4pm",
                     "gogo_want": 960,
                     "mass": 1,
                     "stop_want": 1020
                   },
                   "17-5pm": {
                     "_is_expanded": false,
-                    "concept_label": "17-5pm",
+                    "plan_label": "17-5pm",
                     "gogo_want": 1020,
                     "mass": 1,
                     "stop_want": 1080
                   },
                   "18-6pm": {
                     "_is_expanded": false,
-                    "concept_label": "18-6pm",
+                    "plan_label": "18-6pm",
                     "gogo_want": 1080,
                     "mass": 1,
                     "stop_want": 1140
                   },
                   "19-7pm": {
                     "_is_expanded": false,
-                    "concept_label": "19-7pm",
+                    "plan_label": "19-7pm",
                     "gogo_want": 1140,
                     "mass": 1,
                     "stop_want": 1200
                   },
                   "2-2am": {
                     "_is_expanded": false,
-                    "concept_label": "2-2am",
+                    "plan_label": "2-2am",
                     "gogo_want": 120,
                     "mass": 1,
                     "stop_want": 180
                   },
                   "20-8pm": {
                     "_is_expanded": false,
-                    "concept_label": "20-8pm",
+                    "plan_label": "20-8pm",
                     "gogo_want": 1200,
                     "mass": 1,
                     "stop_want": 1260
                   },
                   "21-9pm": {
                     "_is_expanded": false,
-                    "concept_label": "21-9pm",
+                    "plan_label": "21-9pm",
                     "gogo_want": 1260,
                     "mass": 1,
                     "stop_want": 1320
                   },
                   "22-10pm": {
                     "_is_expanded": false,
-                    "concept_label": "22-10pm",
+                    "plan_label": "22-10pm",
                     "gogo_want": 1320,
                     "mass": 1,
                     "stop_want": 1380
                   },
                   "23-11pm": {
                     "_is_expanded": false,
-                    "concept_label": "23-11pm",
+                    "plan_label": "23-11pm",
                     "gogo_want": 1380,
                     "mass": 1,
                     "stop_want": 1440
                   },
                   "3-3am": {
                     "_is_expanded": false,
-                    "concept_label": "3-3am",
+                    "plan_label": "3-3am",
                     "gogo_want": 180,
                     "mass": 1,
                     "stop_want": 240
                   },
                   "4-4am": {
                     "_is_expanded": false,
-                    "concept_label": "4-4am",
+                    "plan_label": "4-4am",
                     "gogo_want": 240,
                     "mass": 1,
                     "stop_want": 300
                   },
                   "5-5am": {
                     "_is_expanded": false,
-                    "concept_label": "5-5am",
+                    "plan_label": "5-5am",
                     "gogo_want": 300,
                     "mass": 1,
                     "stop_want": 360
                   },
                   "6-6am": {
                     "_is_expanded": false,
-                    "concept_label": "6-6am",
+                    "plan_label": "6-6am",
                     "gogo_want": 360,
                     "mass": 1,
                     "stop_want": 420
                   },
                   "7-7am": {
                     "_is_expanded": false,
-                    "concept_label": "7-7am",
+                    "plan_label": "7-7am",
                     "gogo_want": 420,
                     "mass": 1,
                     "stop_want": 480
                   },
                   "8-8am": {
                     "_is_expanded": false,
-                    "concept_label": "8-8am",
+                    "plan_label": "8-8am",
                     "gogo_want": 480,
                     "mass": 1,
                     "stop_want": 540
                   },
                   "9-9am": {
                     "_is_expanded": false,
-                    "concept_label": "9-9am",
+                    "plan_label": "9-9am",
                     "gogo_want": 540,
                     "mass": 1,
                     "stop_want": 600
@@ -4409,7 +4409,7 @@
                 },
                 "begin": 0,
                 "close": 1440,
-                "concept_label": "day",
+                "plan_label": "day",
                 "mass": 1
               },
               "hr": {
@@ -4417,420 +4417,420 @@
                 "_kids": {
                   "0-:00": {
                     "_is_expanded": false,
-                    "concept_label": "0-:00",
+                    "plan_label": "0-:00",
                     "gogo_want": 0,
                     "mass": 1,
                     "stop_want": 1
                   },
                   "1-:01": {
                     "_is_expanded": false,
-                    "concept_label": "1-:01",
+                    "plan_label": "1-:01",
                     "gogo_want": 1,
                     "mass": 1,
                     "stop_want": 2
                   },
                   "10-:10": {
                     "_is_expanded": false,
-                    "concept_label": "10-:10",
+                    "plan_label": "10-:10",
                     "gogo_want": 10,
                     "mass": 1,
                     "stop_want": 11
                   },
                   "11-:11": {
                     "_is_expanded": false,
-                    "concept_label": "11-:11",
+                    "plan_label": "11-:11",
                     "gogo_want": 11,
                     "mass": 1,
                     "stop_want": 12
                   },
                   "12-:12": {
                     "_is_expanded": false,
-                    "concept_label": "12-:12",
+                    "plan_label": "12-:12",
                     "gogo_want": 12,
                     "mass": 1,
                     "stop_want": 13
                   },
                   "13-:13": {
                     "_is_expanded": false,
-                    "concept_label": "13-:13",
+                    "plan_label": "13-:13",
                     "gogo_want": 13,
                     "mass": 1,
                     "stop_want": 14
                   },
                   "14-:14": {
                     "_is_expanded": false,
-                    "concept_label": "14-:14",
+                    "plan_label": "14-:14",
                     "gogo_want": 14,
                     "mass": 1,
                     "stop_want": 15
                   },
                   "15-:15": {
                     "_is_expanded": false,
-                    "concept_label": "15-:15",
+                    "plan_label": "15-:15",
                     "gogo_want": 15,
                     "mass": 1,
                     "stop_want": 16
                   },
                   "16-:16": {
                     "_is_expanded": false,
-                    "concept_label": "16-:16",
+                    "plan_label": "16-:16",
                     "gogo_want": 16,
                     "mass": 1,
                     "stop_want": 17
                   },
                   "17-:17": {
                     "_is_expanded": false,
-                    "concept_label": "17-:17",
+                    "plan_label": "17-:17",
                     "gogo_want": 17,
                     "mass": 1,
                     "stop_want": 18
                   },
                   "18-:18": {
                     "_is_expanded": false,
-                    "concept_label": "18-:18",
+                    "plan_label": "18-:18",
                     "gogo_want": 18,
                     "mass": 1,
                     "stop_want": 19
                   },
                   "19-:19": {
                     "_is_expanded": false,
-                    "concept_label": "19-:19",
+                    "plan_label": "19-:19",
                     "gogo_want": 19,
                     "mass": 1,
                     "stop_want": 20
                   },
                   "2-:02": {
                     "_is_expanded": false,
-                    "concept_label": "2-:02",
+                    "plan_label": "2-:02",
                     "gogo_want": 2,
                     "mass": 1,
                     "stop_want": 3
                   },
                   "20-:20": {
                     "_is_expanded": false,
-                    "concept_label": "20-:20",
+                    "plan_label": "20-:20",
                     "gogo_want": 20,
                     "mass": 1,
                     "stop_want": 21
                   },
                   "21-:21": {
                     "_is_expanded": false,
-                    "concept_label": "21-:21",
+                    "plan_label": "21-:21",
                     "gogo_want": 21,
                     "mass": 1,
                     "stop_want": 22
                   },
                   "22-:22": {
                     "_is_expanded": false,
-                    "concept_label": "22-:22",
+                    "plan_label": "22-:22",
                     "gogo_want": 22,
                     "mass": 1,
                     "stop_want": 23
                   },
                   "23-:23": {
                     "_is_expanded": false,
-                    "concept_label": "23-:23",
+                    "plan_label": "23-:23",
                     "gogo_want": 23,
                     "mass": 1,
                     "stop_want": 24
                   },
                   "24-:24": {
                     "_is_expanded": false,
-                    "concept_label": "24-:24",
+                    "plan_label": "24-:24",
                     "gogo_want": 24,
                     "mass": 1,
                     "stop_want": 25
                   },
                   "25-:25": {
                     "_is_expanded": false,
-                    "concept_label": "25-:25",
+                    "plan_label": "25-:25",
                     "gogo_want": 25,
                     "mass": 1,
                     "stop_want": 26
                   },
                   "26-:26": {
                     "_is_expanded": false,
-                    "concept_label": "26-:26",
+                    "plan_label": "26-:26",
                     "gogo_want": 26,
                     "mass": 1,
                     "stop_want": 27
                   },
                   "27-:27": {
                     "_is_expanded": false,
-                    "concept_label": "27-:27",
+                    "plan_label": "27-:27",
                     "gogo_want": 27,
                     "mass": 1,
                     "stop_want": 28
                   },
                   "28-:28": {
                     "_is_expanded": false,
-                    "concept_label": "28-:28",
+                    "plan_label": "28-:28",
                     "gogo_want": 28,
                     "mass": 1,
                     "stop_want": 29
                   },
                   "29-:29": {
                     "_is_expanded": false,
-                    "concept_label": "29-:29",
+                    "plan_label": "29-:29",
                     "gogo_want": 29,
                     "mass": 1,
                     "stop_want": 30
                   },
                   "3-:03": {
                     "_is_expanded": false,
-                    "concept_label": "3-:03",
+                    "plan_label": "3-:03",
                     "gogo_want": 3,
                     "mass": 1,
                     "stop_want": 4
                   },
                   "30-:30": {
                     "_is_expanded": false,
-                    "concept_label": "30-:30",
+                    "plan_label": "30-:30",
                     "gogo_want": 30,
                     "mass": 1,
                     "stop_want": 31
                   },
                   "31-:31": {
                     "_is_expanded": false,
-                    "concept_label": "31-:31",
+                    "plan_label": "31-:31",
                     "gogo_want": 31,
                     "mass": 1,
                     "stop_want": 32
                   },
                   "32-:32": {
                     "_is_expanded": false,
-                    "concept_label": "32-:32",
+                    "plan_label": "32-:32",
                     "gogo_want": 32,
                     "mass": 1,
                     "stop_want": 33
                   },
                   "33-:33": {
                     "_is_expanded": false,
-                    "concept_label": "33-:33",
+                    "plan_label": "33-:33",
                     "gogo_want": 33,
                     "mass": 1,
                     "stop_want": 34
                   },
                   "34-:34": {
                     "_is_expanded": false,
-                    "concept_label": "34-:34",
+                    "plan_label": "34-:34",
                     "gogo_want": 34,
                     "mass": 1,
                     "stop_want": 35
                   },
                   "35-:35": {
                     "_is_expanded": false,
-                    "concept_label": "35-:35",
+                    "plan_label": "35-:35",
                     "gogo_want": 35,
                     "mass": 1,
                     "stop_want": 36
                   },
                   "36-:36": {
                     "_is_expanded": false,
-                    "concept_label": "36-:36",
+                    "plan_label": "36-:36",
                     "gogo_want": 36,
                     "mass": 1,
                     "stop_want": 37
                   },
                   "37-:37": {
                     "_is_expanded": false,
-                    "concept_label": "37-:37",
+                    "plan_label": "37-:37",
                     "gogo_want": 37,
                     "mass": 1,
                     "stop_want": 38
                   },
                   "38-:38": {
                     "_is_expanded": false,
-                    "concept_label": "38-:38",
+                    "plan_label": "38-:38",
                     "gogo_want": 38,
                     "mass": 1,
                     "stop_want": 39
                   },
                   "39-:39": {
                     "_is_expanded": false,
-                    "concept_label": "39-:39",
+                    "plan_label": "39-:39",
                     "gogo_want": 39,
                     "mass": 1,
                     "stop_want": 40
                   },
                   "4-:04": {
                     "_is_expanded": false,
-                    "concept_label": "4-:04",
+                    "plan_label": "4-:04",
                     "gogo_want": 4,
                     "mass": 1,
                     "stop_want": 5
                   },
                   "40-:40": {
                     "_is_expanded": false,
-                    "concept_label": "40-:40",
+                    "plan_label": "40-:40",
                     "gogo_want": 40,
                     "mass": 1,
                     "stop_want": 41
                   },
                   "41-:41": {
                     "_is_expanded": false,
-                    "concept_label": "41-:41",
+                    "plan_label": "41-:41",
                     "gogo_want": 41,
                     "mass": 1,
                     "stop_want": 42
                   },
                   "42-:42": {
                     "_is_expanded": false,
-                    "concept_label": "42-:42",
+                    "plan_label": "42-:42",
                     "gogo_want": 42,
                     "mass": 1,
                     "stop_want": 43
                   },
                   "43-:43": {
                     "_is_expanded": false,
-                    "concept_label": "43-:43",
+                    "plan_label": "43-:43",
                     "gogo_want": 43,
                     "mass": 1,
                     "stop_want": 44
                   },
                   "44-:44": {
                     "_is_expanded": false,
-                    "concept_label": "44-:44",
+                    "plan_label": "44-:44",
                     "gogo_want": 44,
                     "mass": 1,
                     "stop_want": 45
                   },
                   "45-:45": {
                     "_is_expanded": false,
-                    "concept_label": "45-:45",
+                    "plan_label": "45-:45",
                     "gogo_want": 45,
                     "mass": 1,
                     "stop_want": 46
                   },
                   "46-:46": {
                     "_is_expanded": false,
-                    "concept_label": "46-:46",
+                    "plan_label": "46-:46",
                     "gogo_want": 46,
                     "mass": 1,
                     "stop_want": 47
                   },
                   "47-:47": {
                     "_is_expanded": false,
-                    "concept_label": "47-:47",
+                    "plan_label": "47-:47",
                     "gogo_want": 47,
                     "mass": 1,
                     "stop_want": 48
                   },
                   "48-:48": {
                     "_is_expanded": false,
-                    "concept_label": "48-:48",
+                    "plan_label": "48-:48",
                     "gogo_want": 48,
                     "mass": 1,
                     "stop_want": 49
                   },
                   "49-:49": {
                     "_is_expanded": false,
-                    "concept_label": "49-:49",
+                    "plan_label": "49-:49",
                     "gogo_want": 49,
                     "mass": 1,
                     "stop_want": 50
                   },
                   "5-:05": {
                     "_is_expanded": false,
-                    "concept_label": "5-:05",
+                    "plan_label": "5-:05",
                     "gogo_want": 5,
                     "mass": 1,
                     "stop_want": 6
                   },
                   "50-:50": {
                     "_is_expanded": false,
-                    "concept_label": "50-:50",
+                    "plan_label": "50-:50",
                     "gogo_want": 50,
                     "mass": 1,
                     "stop_want": 51
                   },
                   "51-:51": {
                     "_is_expanded": false,
-                    "concept_label": "51-:51",
+                    "plan_label": "51-:51",
                     "gogo_want": 51,
                     "mass": 1,
                     "stop_want": 52
                   },
                   "52-:52": {
                     "_is_expanded": false,
-                    "concept_label": "52-:52",
+                    "plan_label": "52-:52",
                     "gogo_want": 52,
                     "mass": 1,
                     "stop_want": 53
                   },
                   "53-:53": {
                     "_is_expanded": false,
-                    "concept_label": "53-:53",
+                    "plan_label": "53-:53",
                     "gogo_want": 53,
                     "mass": 1,
                     "stop_want": 54
                   },
                   "54-:54": {
                     "_is_expanded": false,
-                    "concept_label": "54-:54",
+                    "plan_label": "54-:54",
                     "gogo_want": 54,
                     "mass": 1,
                     "stop_want": 55
                   },
                   "55-:55": {
                     "_is_expanded": false,
-                    "concept_label": "55-:55",
+                    "plan_label": "55-:55",
                     "gogo_want": 55,
                     "mass": 1,
                     "stop_want": 56
                   },
                   "56-:56": {
                     "_is_expanded": false,
-                    "concept_label": "56-:56",
+                    "plan_label": "56-:56",
                     "gogo_want": 56,
                     "mass": 1,
                     "stop_want": 57
                   },
                   "57-:57": {
                     "_is_expanded": false,
-                    "concept_label": "57-:57",
+                    "plan_label": "57-:57",
                     "gogo_want": 57,
                     "mass": 1,
                     "stop_want": 58
                   },
                   "58-:58": {
                     "_is_expanded": false,
-                    "concept_label": "58-:58",
+                    "plan_label": "58-:58",
                     "gogo_want": 58,
                     "mass": 1,
                     "stop_want": 59
                   },
                   "59-59": {
                     "_is_expanded": false,
-                    "concept_label": "59-59",
+                    "plan_label": "59-59",
                     "gogo_want": 59,
                     "mass": 1,
                     "stop_want": 60
                   },
                   "6-:06": {
                     "_is_expanded": false,
-                    "concept_label": "6-:06",
+                    "plan_label": "6-:06",
                     "gogo_want": 6,
                     "mass": 1,
                     "stop_want": 7
                   },
                   "7-:07": {
                     "_is_expanded": false,
-                    "concept_label": "7-:07",
+                    "plan_label": "7-:07",
                     "gogo_want": 7,
                     "mass": 1,
                     "stop_want": 8
                   },
                   "8-:08": {
                     "_is_expanded": false,
-                    "concept_label": "8-:08",
+                    "plan_label": "8-:08",
                     "gogo_want": 8,
                     "mass": 1,
                     "stop_want": 9
                   },
                   "9-:09": {
                     "_is_expanded": false,
-                    "concept_label": "9-:09",
+                    "plan_label": "9-:09",
                     "gogo_want": 9,
                     "mass": 1,
                     "stop_want": 10
@@ -4838,7 +4838,7 @@
                 },
                 "begin": 0,
                 "close": 60,
-                "concept_label": "hr",
+                "plan_label": "hr",
                 "mass": 1
               },
               "month": {
@@ -4849,7 +4849,7 @@
                     "_kids": {
                       "days": {
                         "_is_expanded": false,
-                        "concept_label": "days",
+                        "plan_label": "days",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -4860,7 +4860,7 @@
                     },
                     "begin": 0,
                     "close": 43200,
-                    "concept_label": "Apr",
+                    "plan_label": "Apr",
                     "mass": 1
                   },
                   "Aug": {
@@ -4868,7 +4868,7 @@
                     "_kids": {
                       "days": {
                         "_is_expanded": false,
-                        "concept_label": "days",
+                        "plan_label": "days",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -4879,7 +4879,7 @@
                     },
                     "begin": 0,
                     "close": 44640,
-                    "concept_label": "Aug",
+                    "plan_label": "Aug",
                     "mass": 1
                   },
                   "Dec": {
@@ -4887,7 +4887,7 @@
                     "_kids": {
                       "days": {
                         "_is_expanded": false,
-                        "concept_label": "days",
+                        "plan_label": "days",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -4898,7 +4898,7 @@
                     },
                     "begin": 0,
                     "close": 44640,
-                    "concept_label": "Dec",
+                    "plan_label": "Dec",
                     "mass": 1
                   },
                   "Feb28": {
@@ -4906,7 +4906,7 @@
                     "_kids": {
                       "days": {
                         "_is_expanded": false,
-                        "concept_label": "days",
+                        "plan_label": "days",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -4917,7 +4917,7 @@
                     },
                     "begin": 0,
                     "close": 40320,
-                    "concept_label": "Feb28",
+                    "plan_label": "Feb28",
                     "mass": 1
                   },
                   "Feb29": {
@@ -4925,7 +4925,7 @@
                     "_kids": {
                       "days": {
                         "_is_expanded": false,
-                        "concept_label": "days",
+                        "plan_label": "days",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -4936,7 +4936,7 @@
                     },
                     "begin": 0,
                     "close": 41760,
-                    "concept_label": "Feb29",
+                    "plan_label": "Feb29",
                     "mass": 1
                   },
                   "Jan": {
@@ -4944,7 +4944,7 @@
                     "_kids": {
                       "days": {
                         "_is_expanded": false,
-                        "concept_label": "days",
+                        "plan_label": "days",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -4955,7 +4955,7 @@
                     },
                     "begin": 0,
                     "close": 44640,
-                    "concept_label": "Jan",
+                    "plan_label": "Jan",
                     "mass": 1
                   },
                   "Jul": {
@@ -4963,7 +4963,7 @@
                     "_kids": {
                       "days": {
                         "_is_expanded": false,
-                        "concept_label": "days",
+                        "plan_label": "days",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -4974,7 +4974,7 @@
                     },
                     "begin": 0,
                     "close": 44640,
-                    "concept_label": "Jul",
+                    "plan_label": "Jul",
                     "mass": 1
                   },
                   "Jun": {
@@ -4982,7 +4982,7 @@
                     "_kids": {
                       "days": {
                         "_is_expanded": false,
-                        "concept_label": "days",
+                        "plan_label": "days",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -4993,7 +4993,7 @@
                     },
                     "begin": 0,
                     "close": 43200,
-                    "concept_label": "Jun",
+                    "plan_label": "Jun",
                     "mass": 1
                   },
                   "Mar": {
@@ -5001,7 +5001,7 @@
                     "_kids": {
                       "days": {
                         "_is_expanded": false,
-                        "concept_label": "days",
+                        "plan_label": "days",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -5012,7 +5012,7 @@
                     },
                     "begin": 0,
                     "close": 44640,
-                    "concept_label": "Mar",
+                    "plan_label": "Mar",
                     "mass": 1
                   },
                   "May": {
@@ -5020,7 +5020,7 @@
                     "_kids": {
                       "days": {
                         "_is_expanded": false,
-                        "concept_label": "days",
+                        "plan_label": "days",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -5031,7 +5031,7 @@
                     },
                     "begin": 0,
                     "close": 44640,
-                    "concept_label": "May",
+                    "plan_label": "May",
                     "mass": 1
                   },
                   "Nov": {
@@ -5039,7 +5039,7 @@
                     "_kids": {
                       "days": {
                         "_is_expanded": false,
-                        "concept_label": "days",
+                        "plan_label": "days",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -5050,7 +5050,7 @@
                     },
                     "begin": 0,
                     "close": 43200,
-                    "concept_label": "Nov",
+                    "plan_label": "Nov",
                     "mass": 1
                   },
                   "Oct": {
@@ -5058,7 +5058,7 @@
                     "_kids": {
                       "days": {
                         "_is_expanded": false,
-                        "concept_label": "days",
+                        "plan_label": "days",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -5069,7 +5069,7 @@
                     },
                     "begin": 0,
                     "close": 44640,
-                    "concept_label": "Oct",
+                    "plan_label": "Oct",
                     "mass": 1
                   },
                   "Sep": {
@@ -5077,7 +5077,7 @@
                     "_kids": {
                       "days": {
                         "_is_expanded": false,
-                        "concept_label": "days",
+                        "plan_label": "days",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -5088,11 +5088,11 @@
                     },
                     "begin": 0,
                     "close": 43200,
-                    "concept_label": "Sep",
+                    "plan_label": "Sep",
                     "mass": 1
                   }
                 },
-                "concept_label": "month",
+                "plan_label": "month",
                 "mass": 1
               },
               "wk": {
@@ -5100,49 +5100,49 @@
                 "_kids": {
                   "Friday": {
                     "_is_expanded": false,
-                    "concept_label": "Friday",
+                    "plan_label": "Friday",
                     "gogo_want": 8640,
                     "mass": 1,
                     "stop_want": 10080
                   },
                   "Monday": {
                     "_is_expanded": false,
-                    "concept_label": "Monday",
+                    "plan_label": "Monday",
                     "gogo_want": 2880,
                     "mass": 1,
                     "stop_want": 4320
                   },
                   "Saturday": {
                     "_is_expanded": false,
-                    "concept_label": "Saturday",
+                    "plan_label": "Saturday",
                     "gogo_want": 0,
                     "mass": 1,
                     "stop_want": 1440
                   },
                   "Sunday": {
                     "_is_expanded": false,
-                    "concept_label": "Sunday",
+                    "plan_label": "Sunday",
                     "gogo_want": 1440,
                     "mass": 1,
                     "stop_want": 2880
                   },
                   "Thursday": {
                     "_is_expanded": false,
-                    "concept_label": "Thursday",
+                    "plan_label": "Thursday",
                     "gogo_want": 7200,
                     "mass": 1,
                     "stop_want": 8640
                   },
                   "Tuesday": {
                     "_is_expanded": false,
-                    "concept_label": "Tuesday",
+                    "plan_label": "Tuesday",
                     "gogo_want": 4320,
                     "mass": 1,
                     "stop_want": 5760
                   },
                   "Wednesday": {
                     "_is_expanded": false,
-                    "concept_label": "Wednesday",
+                    "plan_label": "Wednesday",
                     "gogo_want": 5760,
                     "mass": 1,
                     "stop_want": 7200
@@ -5150,15 +5150,15 @@
                 },
                 "begin": 0.0,
                 "close": 10080.0,
-                "concept_label": "wk",
+                "plan_label": "wk",
                 "mass": 1
               }
             },
-            "concept_label": "tech",
+            "plan_label": "tech",
             "mass": 1
           }
         },
-        "concept_label": "time",
+        "plan_label": "time",
         "mass": 1
       },
       "Tired Status": {
@@ -5166,17 +5166,17 @@
         "_kids": {
           "Not tired": {
             "_uid": 278,
-            "concept_label": "Not tired",
+            "plan_label": "Not tired",
             "mass": 1
           },
           "Tired": {
             "_uid": 279,
-            "concept_label": "Tired",
+            "plan_label": "Tired",
             "mass": 1
           }
         },
         "_uid": 277,
-        "concept_label": "Tired Status",
+        "plan_label": "Tired Status",
         "mass": 1
       },
       "Ultimate Frisbee": {
@@ -5184,7 +5184,7 @@
         "_kids": {
           "check on m33": {
             "_uid": 221,
-            "concept_label": "check on m33",
+            "plan_label": "check on m33",
             "mass": 1,
             "reasonunits": {
               "A;Moods;": {
@@ -5199,7 +5199,7 @@
           },
           "contemplate the disc": {
             "_uid": 229,
-            "concept_label": "contemplate the disc",
+            "plan_label": "contemplate the disc",
             "mass": 1,
             "reasonunits": {
               "A;No Movie playing;": {
@@ -5216,7 +5216,7 @@
             "_kids": {
               "check for mini ultimate at park": {
                 "_uid": 219,
-                "concept_label": "check for mini ultimate at park",
+                "plan_label": "check for mini ultimate at park",
                 "mass": 1,
                 "reasonunits": {
                   "A;Moods;": {
@@ -5231,7 +5231,7 @@
               }
             },
             "_uid": 201,
-            "concept_label": "playing ultimate",
+            "plan_label": "playing ultimate",
             "mass": 1,
             "reasonunits": {
               "A;Moods;": {
@@ -5246,7 +5246,7 @@
           },
           "relaxing": {
             "_uid": 202,
-            "concept_label": "relaxing",
+            "plan_label": "relaxing",
             "mass": 1,
             "reasonunits": {
               "A;No Movie playing;": {
@@ -5261,7 +5261,7 @@
           }
         },
         "_uid": 200,
-        "concept_label": "Ultimate Frisbee",
+        "plan_label": "Ultimate Frisbee",
         "mass": 1,
         "reasonunits": {
           "A;Moods;": {
@@ -5281,7 +5281,7 @@
             "_kids": {
               "bike around": {
                 "_uid": 227,
-                "concept_label": "bike around",
+                "plan_label": "bike around",
                 "mass": 1,
                 "reasonunits": {
                   "A;WaterExistence;": {
@@ -5296,7 +5296,7 @@
               },
               "Go climbing at east Circuit": {
                 "_uid": 226,
-                "concept_label": "Go climbing at east Circuit",
+                "plan_label": "Go climbing at east Circuit",
                 "mass": 1,
                 "reasonunits": {
                   "A;WaterExistence;": {
@@ -5311,7 +5311,7 @@
               },
               "trout": {
                 "_uid": 228,
-                "concept_label": "trout",
+                "plan_label": "trout",
                 "mass": 1,
                 "reasonunits": {
                   "A;WaterExistence;": {
@@ -5326,7 +5326,7 @@
               }
             },
             "_uid": 225,
-            "concept_label": "Swimming in Williamette watershed",
+            "plan_label": "Swimming in Williamette watershed",
             "mass": 1,
             "reasonunits": {
               "A;WaterExistence;": {
@@ -5341,7 +5341,7 @@
           }
         },
         "_uid": 223,
-        "concept_label": "Water Living",
+        "plan_label": "Water Living",
         "mass": 1
       },
       "WaterExistence": {
@@ -5353,32 +5353,32 @@
                 "_kids": {
                   "flat": {
                     "_uid": 260,
-                    "concept_label": "flat",
+                    "plan_label": "flat",
                     "mass": 1
                   }
                 },
                 "_uid": 258,
-                "concept_label": "East Side of Watershed",
+                "plan_label": "East Side of Watershed",
                 "mass": 1
               },
               "West side of Watershed": {
                 "_uid": 259,
-                "concept_label": "West side of Watershed",
+                "plan_label": "West side of Watershed",
                 "mass": 1
               }
             },
             "_uid": 257,
-            "concept_label": "Williamette WaterShed",
+            "plan_label": "Williamette WaterShed",
             "mass": 1
           }
         },
         "_uid": 256,
-        "concept_label": "WaterExistence",
+        "plan_label": "WaterExistence",
         "mass": 1
       }
     },
     "_uid": 1,
-    "concept_label": "A",
+    "plan_label": "A",
     "factunits": {
       "A;Aaron Donald objects effected by him;": {
         "fcontext": ";A;Aaron Donald objects effected by him;",

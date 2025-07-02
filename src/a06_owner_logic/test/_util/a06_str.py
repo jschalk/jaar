@@ -35,21 +35,21 @@ from src.a04_reason_logic.test._util.a04_str import (
     pnigh_str,
     popen_str,
     pstate_str,
-    rconcept_active_requisite_str,
     rcontext_str,
+    rplan_active_requisite_str,
 )
-from src.a05_concept_logic.test._util.a05_str import (
+from src.a05_plan_logic.test._util.a05_str import (
     addin_str,
     begin_str,
     close_str,
-    concept_label_str,
-    concept_rope_str,
     denom_str,
     gogo_want_str,
     healer_name_str,
     mass_str,
     morph_str,
     numor_str,
+    plan_label_str,
+    plan_rope_str,
     stop_want_str,
     task_str,
 )
@@ -139,32 +139,32 @@ def owner_acctunit_str() -> str:
     return "owner_acctunit"
 
 
-def owner_concept_awardlink_str() -> str:
-    return "owner_concept_awardlink"
+def owner_plan_awardlink_str() -> str:
+    return "owner_plan_awardlink"
 
 
-def owner_concept_factunit_str() -> str:
-    return "owner_concept_factunit"
+def owner_plan_factunit_str() -> str:
+    return "owner_plan_factunit"
 
 
-def owner_concept_healerlink_str() -> str:
-    return "owner_concept_healerlink"
+def owner_plan_healerlink_str() -> str:
+    return "owner_plan_healerlink"
 
 
-def owner_concept_laborlink_str() -> str:
-    return "owner_concept_laborlink"
+def owner_plan_laborlink_str() -> str:
+    return "owner_plan_laborlink"
 
 
-def owner_concept_reason_premiseunit_str() -> str:
-    return "owner_concept_reason_premiseunit"
+def owner_plan_reason_premiseunit_str() -> str:
+    return "owner_plan_reason_premiseunit"
 
 
-def owner_concept_reasonunit_str() -> str:
-    return "owner_concept_reasonunit"
+def owner_plan_reasonunit_str() -> str:
+    return "owner_plan_reasonunit"
 
 
-def owner_conceptunit_str() -> str:
-    return "owner_conceptunit"
+def owner_planunit_str() -> str:
+    return "owner_planunit"
 
 
 def ownerunit_str() -> str:

@@ -10,7 +10,7 @@ from src.a00_data_toolbox.plotly_toolbox import (
     conditional_fig_show,
 )
 from src.a01_term_logic.rope import RopeTerm, get_parent_rope, is_sub_rope
-from src.a05_concept_logic.concept import ConceptUnit
+from src.a05_plan_logic.plan import PlanUnit
 from src.a06_owner_logic.owner import OwnerUnit
 from src.a06_owner_logic.report import (
     get_owner_acctunits_dataframe,
@@ -22,40 +22,35 @@ def _get_dot_diameter(x_ratio: float):
     return ((x_ratio**0.4)) * 100
 
 
-def _get_parent_y(
-    x_concept: ConceptUnit, conceptunit_y_coordinate_dict: dict
-) -> RopeTerm:
-    parent_rope = get_parent_rope(x_concept.get_concept_rope())
-    return conceptunit_y_coordinate_dict.get(parent_rope)
+def _get_parent_y(x_plan: PlanUnit, planunit_y_coordinate_dict: dict) -> RopeTerm:
+    parent_rope = get_parent_rope(x_plan.get_plan_rope())
+    return planunit_y_coordinate_dict.get(parent_rope)
 
 
-def _get_color_for_conceptunit_trace(x_conceptunit: ConceptUnit, mode: str) -> str:
+def _get_color_for_planunit_trace(x_planunit: PlanUnit, mode: str) -> str:
     if mode is None:
-        if x_conceptunit._level == 0:
+        if x_planunit._level == 0:
             return "Red"
-        elif x_conceptunit._level == 1:
+        elif x_planunit._level == 1:
             return "Pink"
-        elif x_conceptunit._level == 2:
+        elif x_planunit._level == 2:
             return "Green"
-        elif x_conceptunit._level == 3:
+        elif x_planunit._level == 3:
             return "Blue"
-        elif x_conceptunit._level == 4:
+        elif x_planunit._level == 4:
             return "Purple"
-        elif x_conceptunit._level == 5:
+        elif x_planunit._level == 5:
             return "Gold"
         else:
             return "Black"
     elif mode == "Chore":
-        return "Red" if x_conceptunit.task else "Pink"
+        return "Red" if x_planunit.task else "Pink"
     elif mode == "Keep":
-        if (
-            x_conceptunit.problem_bool
-            and x_conceptunit.healerlink.any_healer_name_exists()
-        ):
+        if x_planunit.problem_bool and x_planunit.healerlink.any_healer_name_exists():
             return "Purple"
-        elif x_conceptunit.healerlink.any_healer_name_exists():
+        elif x_planunit.healerlink.any_healer_name_exists():
             return "Blue"
-        elif x_conceptunit.problem_bool:
+        elif x_planunit.problem_bool:
             return "Red"
         else:
             return "Pink"
@@ -66,63 +61,63 @@ def _add_individual_trace(
     anno_list: list,
     parent_y,
     source_y,
-    kid_concept: ConceptUnit,
+    kid_plan: PlanUnit,
     mode: str,
 ):
     trace_list.append(
         plotly_Scatter(
-            x=[kid_concept._level - 1, kid_concept._level],
+            x=[kid_plan._level - 1, kid_plan._level],
             y=[parent_y, source_y],
-            marker_size=_get_dot_diameter(kid_concept._fund_ratio),
-            name=kid_concept.concept_label,
-            marker_color=_get_color_for_conceptunit_trace(kid_concept, mode=mode),
+            marker_size=_get_dot_diameter(kid_plan._fund_ratio),
+            name=kid_plan.plan_label,
+            marker_color=_get_color_for_planunit_trace(kid_plan, mode=mode),
         )
     )
     anno_list.append(
         dict(
-            x=kid_concept._level,
-            y=source_y + (_get_dot_diameter(kid_concept._fund_ratio) / 150) + 0.002,
-            text=kid_concept.concept_label,
+            x=kid_plan._level,
+            y=source_y + (_get_dot_diameter(kid_plan._fund_ratio) / 150) + 0.002,
+            text=kid_plan.plan_label,
             showarrow=False,
         )
     )
 
 
-def _create_conceptunit_traces(
+def _create_planunit_traces(
     trace_list, anno_list, x_owner: OwnerUnit, source_y: float, mode: str
 ):
-    concepts = [x_owner.conceptroot]
-    y_conceptunit_y_coordinate_dict = {None: 0}
-    prev_rope = x_owner.conceptroot.get_concept_rope()
+    plans = [x_owner.planroot]
+    y_planunit_y_coordinate_dict = {None: 0}
+    prev_rope = x_owner.planroot.get_plan_rope()
     source_y = 0
-    while concepts != []:
-        x_concept = concepts.pop(-1)
-        if is_sub_rope(x_concept.get_concept_rope(), prev_rope) is False:
+    while plans != []:
+        x_plan = plans.pop(-1)
+        if is_sub_rope(x_plan.get_plan_rope(), prev_rope) is False:
             source_y -= 1
         _add_individual_trace(
             trace_list=trace_list,
             anno_list=anno_list,
-            parent_y=_get_parent_y(x_concept, y_conceptunit_y_coordinate_dict),
+            parent_y=_get_parent_y(x_plan, y_planunit_y_coordinate_dict),
             source_y=source_y,
-            kid_concept=x_concept,
+            kid_plan=x_plan,
             mode=mode,
         )
-        concepts.extend(iter(x_concept._kids.values()))
-        y_conceptunit_y_coordinate_dict[x_concept.get_concept_rope()] = source_y
-        prev_rope = x_concept.get_concept_rope()
+        plans.extend(iter(x_plan._kids.values()))
+        y_planunit_y_coordinate_dict[x_plan.get_plan_rope()] = source_y
+        prev_rope = x_plan.get_plan_rope()
 
 
 def _update_layout_fig(x_fig: plotly_Figure, mode: str, x_owner: OwnerUnit):
     fig_label = "Tree with lines Layout"
     if mode == "Chore":
-        fig_label = "Concept Tree with chore concepts in Red."
-    fig_label += f" (Concepts: {len(x_owner._concept_dict)})"
+        fig_label = "Plan Tree with chore plans in Red."
+    fig_label += f" (Plans: {len(x_owner._plan_dict)})"
     fig_label += f" (_sum_healerlink_share: {x_owner._sum_healerlink_share})"
     fig_label += f" (_keeps_justified: {x_owner._keeps_justified})"
     x_fig.update_layout(title_text=fig_label, font_size=12)
 
 
-def display_concepttree(
+def display_plantree(
     x_owner: OwnerUnit, mode: str = None, graphics_bool: bool = False
 ) -> plotly_Figure:
     """Mode can be None, Chore, Keep"""
@@ -132,7 +127,7 @@ def display_concepttree(
     source_y = 0
     trace_list = []
     anno_list = []
-    _create_conceptunit_traces(trace_list, anno_list, x_owner, source_y, mode=mode)
+    _create_planunit_traces(trace_list, anno_list, x_owner, source_y, mode=mode)
     _update_layout_fig(x_fig, mode, x_owner=x_owner)
     while trace_list:
         x_trace = trace_list.pop(-1)
@@ -201,7 +196,7 @@ def get_owner_agenda_plotly_fig(x_owner: OwnerUnit) -> plotly_Figure:
     column_header_list = [
         "owner_name",
         "fund_ratio",
-        "concept_label",
+        "plan_label",
         "parent_rope",
     ]
     df = get_owner_agenda_dataframe(x_owner)
@@ -214,7 +209,7 @@ def get_owner_agenda_plotly_fig(x_owner: OwnerUnit) -> plotly_Figure:
             values=[
                 df.owner_name,
                 df.fund_ratio,
-                df.concept_label,
+                df.plan_label,
                 df.parent_rope,
             ],
             fill_color="lavender",
@@ -242,7 +237,7 @@ def add_rect_str(fig, x, y, text):
     )
 
 
-def create_concept_rect(
+def create_plan_rect(
     fig: plotly_Figure,
     base_width,
     base_h,
@@ -419,7 +414,7 @@ def ownerunit_graph2(graphics_bool) -> plotly_Figure:
     # Add shapes
     base_w = 0.1
     base_h = 0.125
-    create_concept_rect(fig, base_w, base_h, 0, 0, 1, "Root Concept")
+    create_plan_rect(fig, base_w, base_h, 0, 0, 1, "Root Plan")
     add_group_rect(fig, base_w, base_h, 1, 0, 1, "groups")
     add_people_rect(fig, base_w, base_h, 0, 0, 1, "people")
 
@@ -429,8 +424,8 @@ def ownerunit_graph2(graphics_bool) -> plotly_Figure:
             y=[3.75, 3.5, 3.25],
             text=[
                 "What Owners Are Made Of: Graph 1",
-                "Tasks are from Concepts",
-                "All concepts build from one",
+                "Tasks are from Plans",
+                "All plans build from one",
             ],
             mode="text",
         )
@@ -444,12 +439,12 @@ def ownerunit_graph3(graphics_bool) -> plotly_Figure:
     # Add shapes
     base_w = 0.1
     base_h = 0.125
-    create_concept_rect(fig, base_w, base_h, 2, 0.4, 0.7, "Sub Concept")
-    create_concept_rect(fig, base_w, base_h, 2, 0.3, 0.4, "Sub Concept")
-    create_concept_rect(fig, base_w, base_h, 1, 0, 0.3, "Sub Concept")
-    create_concept_rect(fig, base_w, base_h, 1, 0.3, 0.7, "Sub Concept")
-    create_concept_rect(fig, base_w, base_h, 1, 0.7, 1, "Sub Concept")
-    create_concept_rect(fig, base_w, base_h, 0, 0, 1, "Root Concept")
+    create_plan_rect(fig, base_w, base_h, 2, 0.4, 0.7, "Sub Plan")
+    create_plan_rect(fig, base_w, base_h, 2, 0.3, 0.4, "Sub Plan")
+    create_plan_rect(fig, base_w, base_h, 1, 0, 0.3, "Sub Plan")
+    create_plan_rect(fig, base_w, base_h, 1, 0.3, 0.7, "Sub Plan")
+    create_plan_rect(fig, base_w, base_h, 1, 0.7, 1, "Sub Plan")
+    create_plan_rect(fig, base_w, base_h, 0, 0, 1, "Root Plan")
     add_group_rect(fig, base_w, base_h, 1, 0, 1, "groups")
     add_people_rect(fig, base_w, base_h, 0, 0, 1, "people")
 
@@ -459,8 +454,8 @@ def ownerunit_graph3(graphics_bool) -> plotly_Figure:
             y=[3.75, 3.5, 3.25],
             text=[
                 "What Owners Are Made Of: Graph 1",
-                "Tasks are from Concepts",
-                "All concepts build from one",
+                "Tasks are from Plans",
+                "All plans build from one",
             ],
             mode="text",
         )
@@ -474,12 +469,12 @@ def ownerunit_graph4(graphics_bool) -> plotly_Figure:
     # Add shapes
     base_w = 0.1
     base_h = 0.125
-    create_concept_rect(fig, base_w, base_h, 2, 0.4, 0.7, "Premise against Task")
-    create_concept_rect(fig, base_w, base_h, 2, 0.1, 0.4, "Premise for Task")
-    create_concept_rect(fig, base_w, base_h, 1, 0, 0.1, "Concept")
-    create_concept_rect(fig, base_w, base_h, 1, 0.1, 0.7, "Task Reason Base")
-    create_concept_rect(fig, base_w, base_h, 0, 0, 1, "Root Concept")
-    create_concept_rect(fig, base_w, base_h, 1, 0.7, 1, "Task Itself", True)
+    create_plan_rect(fig, base_w, base_h, 2, 0.4, 0.7, "Premise against Task")
+    create_plan_rect(fig, base_w, base_h, 2, 0.1, 0.4, "Premise for Task")
+    create_plan_rect(fig, base_w, base_h, 1, 0, 0.1, "Plan")
+    create_plan_rect(fig, base_w, base_h, 1, 0.1, 0.7, "Task Reason Base")
+    create_plan_rect(fig, base_w, base_h, 0, 0, 1, "Root Plan")
+    create_plan_rect(fig, base_w, base_h, 1, 0.7, 1, "Task Itself", True)
     add_group_rect(fig, base_w, base_h, 1, 0, 1, "groups")
     add_people_rect(fig, base_w, base_h, 0, 0, 1, "people")
 
@@ -489,8 +484,8 @@ def ownerunit_graph4(graphics_bool) -> plotly_Figure:
             y=[3.75, 3.5, 3.25],
             text=[
                 "What Owners Are Made Of: Graph 1",
-                "Some Concepts are tasks, others are reasons for tasks",
-                "All concepts build from one",
+                "Some Plans are tasks, others are reasons for tasks",
+                "All plans build from one",
             ],
             mode="text",
         )
@@ -501,7 +496,7 @@ def ownerunit_graph4(graphics_bool) -> plotly_Figure:
 def fund_graph0(
     x_owner: OwnerUnit, mode: str = None, graphics_bool: bool = False
 ) -> plotly_Figure:
-    fig = display_concepttree(x_owner, mode, False)
+    fig = display_plantree(x_owner, mode, False)
     fig.update_xaxes(range=[-1, 11])
     fig.update_yaxes(range=[-5.5, 3])
 
@@ -528,10 +523,8 @@ def fund_graph0(
     add_simp_rect(fig, 4, -3.2, 5, -2.8, laborunit_str)
     add_rect_arrow(fig, 4, -2.9, 3.1, -2.9, green_str)
     add_keep__rect(fig, -0.5, -4.5, 10, 2.3, d_sue1_label, "", "", "")
-    d_sue1_p0 = (
-        "Fund Source is ConceptRoot. Each Concept fund range calculated by mass "
-    )
-    d_sue1_p1 = "ConceptRoot Fund ranges: Black arrows. Sum of childless Concept's funds equal conceptroot's fund "
+    d_sue1_p0 = "Fund Source is PlanRoot. Each Plan fund range calculated by mass "
+    d_sue1_p1 = "PlanRoot Fund ranges: Black arrows. Sum of childless Plan's funds equal planroot's fund "
     d_sue1_p2 = "Regular Fund: Green arrows, all fund_iotas end up at AcctUnits"
     d_sue1_p3 = "Agenda Fund: Blue arrows, fund_iotas from active chores"
     d_sue1_p4 = f"fund_pool = {x_owner.fund_pool} "
@@ -575,8 +568,8 @@ def fund_graph0(
     add_simp_rect(fig, 9, -4.0, 9.75, -2.2, acctunit_str, "gold")
 
     fund_t0 = "OwnerUnit.fund_pool"
-    fund_t1_0 = "ConceptUnit._fund_onset"
-    fund_t1_1 = "ConceptUnit._fund_cease"
+    fund_t1_0 = "PlanUnit._fund_onset"
+    fund_t1_1 = "PlanUnit._fund_cease"
     fund_t2_0 = "AwardHeir._fund_give"
     fund_t2_1 = "AwardHeir._fund_take"
 

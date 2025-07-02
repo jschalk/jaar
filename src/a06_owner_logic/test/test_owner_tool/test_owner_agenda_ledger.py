@@ -278,11 +278,11 @@ def test_get_acct_mandate_ledger_ReturnsObj_Scenario5_Zero_fund_agenda_give():
     clean_rope = sue_owner.make_rope(floor_rope, clean_str)
     dirty_rope = sue_owner.make_rope(floor_rope, dirty_str)
     mop_rope = sue_owner.make_rope(casa_rope, mop_str)
-    sue_owner.add_concept(floor_rope)
-    sue_owner.add_concept(clean_rope)
-    sue_owner.add_concept(dirty_rope)
-    sue_owner.add_concept(mop_rope, task=True)
-    sue_owner.edit_concept_attr(
+    sue_owner.add_plan(floor_rope)
+    sue_owner.add_plan(clean_rope)
+    sue_owner.add_plan(dirty_rope)
+    sue_owner.add_plan(mop_rope, task=True)
+    sue_owner.edit_plan_attr(
         mop_rope, reason_rcontext=floor_rope, reason_premise=clean_rope
     )
     yao_str = "Yao"

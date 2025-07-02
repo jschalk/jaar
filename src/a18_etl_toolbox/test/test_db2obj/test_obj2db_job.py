@@ -80,7 +80,7 @@ def test_create_ownerunit_metrics_insert_sqlstr_ReturnsObj():
 def test_create_plnconc_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_owner_calc_dimen_args("owner_conceptunit")
+    x_args = get_owner_calc_dimen_args("owner_planunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -144,7 +144,7 @@ def test_create_plnconc_metrics_insert_sqlstr_ReturnsObj():
         "mass": x_mass,
         "morph": x_morph,
         "numor": x_numor,
-        "concept_rope": x_rope,
+        "plan_rope": x_rope,
         "task": x_task,
         "problem_bool": x_problem_bool,
         "stop_want": x_stop_want,
@@ -160,7 +160,7 @@ def test_create_plnconc_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "owner_conceptunit_job"
+        table_name = "owner_planunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print(expected_sqlstr)
         print("")
@@ -171,7 +171,7 @@ def test_create_plnconc_metrics_insert_sqlstr_ReturnsObj():
 def test_create_plnreas_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_owner_calc_dimen_args("owner_concept_reasonunit")
+    x_args = get_owner_calc_dimen_args("owner_plan_reasonunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -195,19 +195,19 @@ def test_create_plnreas_metrics_insert_sqlstr_ReturnsObj():
     x_owner_name = "Sue"
     x_rope = 1
     x_rcontext = 2
-    x_rconcept_active_requisite = 3
+    x_rplan_active_requisite = 3
     x__chore = 4
     x__status = 5
-    x__rconcept_active_value = 6
+    x__rplan_active_value = 6
     values_dict = {
         "belief_label": x_belief_label,
         "owner_name": x_owner_name,
-        "concept_rope": x_rope,
+        "plan_rope": x_rope,
         "rcontext": x_rcontext,
-        "rconcept_active_requisite": x_rconcept_active_requisite,
+        "rplan_active_requisite": x_rplan_active_requisite,
         "_chore": x__chore,
         "_status": x__status,
-        "_rconcept_active_value": x__rconcept_active_value,
+        "_rplan_active_value": x__rplan_active_value,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())
@@ -220,7 +220,7 @@ def test_create_plnreas_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "owner_concept_reasonunit_job"
+        table_name = "owner_plan_reasonunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print(expected_sqlstr)
         print("")
@@ -231,7 +231,7 @@ def test_create_plnreas_metrics_insert_sqlstr_ReturnsObj():
 def test_create_plnprem_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_owner_calc_dimen_args("owner_concept_reason_premiseunit")
+    x_args = get_owner_calc_dimen_args("owner_plan_reason_premiseunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -267,7 +267,7 @@ def test_create_plnprem_metrics_insert_sqlstr_ReturnsObj():
     values_dict = {
         "belief_label": x_belief_label,
         "owner_name": x_owner_name,
-        "concept_rope": x_rope,
+        "plan_rope": x_rope,
         "rcontext": x_rcontext,
         "pstate": x_pstate,
         "pnigh": x_pnigh,
@@ -287,7 +287,7 @@ def test_create_plnprem_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "owner_concept_reason_premiseunit_job"
+        table_name = "owner_plan_reason_premiseunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         # print(expected_sqlstr)
         print("")
@@ -298,7 +298,7 @@ def test_create_plnprem_metrics_insert_sqlstr_ReturnsObj():
 def test_create_plnawar_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_owner_calc_dimen_args("owner_concept_awardlink")
+    x_args = get_owner_calc_dimen_args("owner_plan_awardlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -332,7 +332,7 @@ def test_create_plnawar_metrics_insert_sqlstr_ReturnsObj():
     values_dict = {
         "belief_label": x_belief_label,
         "owner_name": x_owner_name,
-        "concept_rope": x_rope,
+        "plan_rope": x_rope,
         "awardee_title": x_awardee_title,
         "give_force": x_give_force,
         "take_force": x_take_force,
@@ -350,7 +350,7 @@ def test_create_plnawar_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "owner_concept_awardlink_job"
+        table_name = "owner_plan_awardlink_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -361,7 +361,7 @@ def test_create_plnawar_metrics_insert_sqlstr_ReturnsObj():
 def test_create_plnfact_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_owner_calc_dimen_args("owner_concept_factunit")
+    x_args = get_owner_calc_dimen_args("owner_plan_factunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -394,7 +394,7 @@ def test_create_plnfact_metrics_insert_sqlstr_ReturnsObj():
     values_dict = {
         "belief_label": x_belief_label,
         "owner_name": x_owner_name,
-        "concept_rope": x_rope,
+        "plan_rope": x_rope,
         "fcontext": x_fcontext,
         "fstate": x_fstate,
         "fopen": x_fopen,
@@ -411,7 +411,7 @@ def test_create_plnfact_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "owner_concept_factunit_job"
+        table_name = "owner_plan_factunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -422,7 +422,7 @@ def test_create_plnfact_metrics_insert_sqlstr_ReturnsObj():
 def test_create_plnheal_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_owner_calc_dimen_args("owner_concept_healerlink")
+    x_args = get_owner_calc_dimen_args("owner_plan_healerlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -452,7 +452,7 @@ def test_create_plnheal_metrics_insert_sqlstr_ReturnsObj():
     values_dict = {
         "belief_label": x_belief_label,
         "owner_name": x_owner_name,
-        "concept_rope": x_rope,
+        "plan_rope": x_rope,
         "healer_name": x_healer_name,
     }
     # all args included in values dict
@@ -466,7 +466,7 @@ def test_create_plnheal_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "owner_concept_healerlink_job"
+        table_name = "owner_plan_healerlink_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -477,7 +477,7 @@ def test_create_plnheal_metrics_insert_sqlstr_ReturnsObj():
 def test_create_plnlabo_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_owner_calc_dimen_args("owner_concept_laborlink")
+    x_args = get_owner_calc_dimen_args("owner_plan_laborlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -508,7 +508,7 @@ def test_create_plnlabo_metrics_insert_sqlstr_ReturnsObj():
     values_dict = {
         "belief_label": x_belief_label,
         "owner_name": x_owner_name,
-        "concept_rope": x_rope,
+        "plan_rope": x_rope,
         "labor_title": x_labor_title,
         "_owner_name_labor": x__owner_name_labor,
     }
@@ -523,7 +523,7 @@ def test_create_plnlabo_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "owner_concept_laborlink_job"
+        table_name = "owner_plan_laborlink_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)

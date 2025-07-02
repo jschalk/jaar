@@ -1,6 +1,6 @@
 from src.a06_owner_logic.owner import ownerunit_shop
 from src.a07_timeline_logic.test._util.calendar_examples import (
-    add_time_creg_conceptunit,
+    add_time_creg_planunit,
     get_creg_config,
 )
 from src.a07_timeline_logic.timeline import ownertimelinepoint_shop, timelineunit_shop

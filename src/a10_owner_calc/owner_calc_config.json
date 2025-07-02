@@ -133,14 +133,14 @@
             }
         }
     },
-    "owner_concept_awardlink": {
+    "owner_plan_awardlink": {
         "abbreviation": "plnawar",
         "jkeys": {
             "awardee_title": {
                 "class_type": "TitleTerm",
                 "sqlite_datatype": "TEXT"
             },
-            "concept_rope": {
+            "plan_rope": {
                 "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -174,10 +174,10 @@
             }
         }
     },
-    "owner_concept_factunit": {
+    "owner_plan_factunit": {
         "abbreviation": "plnfact",
         "jkeys": {
-            "concept_rope": {
+            "plan_rope": {
                 "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -210,10 +210,10 @@
             }
         }
     },
-    "owner_concept_healerlink": {
+    "owner_plan_healerlink": {
         "abbreviation": "plnheal",
         "jkeys": {
-            "concept_rope": {
+            "plan_rope": {
                 "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -233,10 +233,10 @@
         "jmetrics": {},
         "jvalues": {}
     },
-    "owner_concept_laborlink": {
+    "owner_plan_laborlink": {
         "abbreviation": "plnlabo",
         "jkeys": {
-            "concept_rope": {
+            "plan_rope": {
                 "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -261,10 +261,10 @@
         },
         "jvalues": {}
     },
-    "owner_concept_reason_premiseunit": {
+    "owner_plan_reason_premiseunit": {
         "abbreviation": "plnprem",
         "jkeys": {
-            "concept_rope": {
+            "plan_rope": {
                 "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -310,10 +310,10 @@
             }
         }
     },
-    "owner_concept_reasonunit": {
+    "owner_plan_reasonunit": {
         "abbreviation": "plnreas",
         "jkeys": {
-            "concept_rope": {
+            "plan_rope": {
                 "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -331,7 +331,7 @@
             }
         },
         "jmetrics": {
-            "_rconcept_active_value": {
+            "_rplan_active_value": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
@@ -345,16 +345,16 @@
             }
         },
         "jvalues": {
-            "rconcept_active_requisite": {
+            "rplan_active_requisite": {
                 "class_type": "bool",
                 "sqlite_datatype": "INTEGER"
             }
         }
     },
-    "owner_conceptunit": {
+    "owner_planunit": {
         "abbreviation": "plnconc",
         "jkeys": {
-            "concept_rope": {
+            "plan_rope": {
                 "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },

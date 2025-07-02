@@ -2,10 +2,10 @@ from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import get_dict_from_json, x_is_json
 from src.a01_term_logic.rope import default_knot_if_None, to_rope
 from src.a03_group_logic.group import awardlink_shop
-from src.a04_reason_logic.reason_concept import factunit_shop
 from src.a04_reason_logic.reason_labor import laborunit_shop
-from src.a05_concept_logic.concept import conceptunit_shop
-from src.a05_concept_logic.healer import healerlink_shop
+from src.a04_reason_logic.reason_plan import factunit_shop
+from src.a05_plan_logic.healer import healerlink_shop
+from src.a05_plan_logic.plan import planunit_shop
 from src.a06_owner_logic.owner import (
     get_dict_of_owner_from_dict,
     get_from_json as ownerunit_get_from_json,
@@ -23,7 +23,7 @@ def test_OwnerUnit_get_dict_ReturnsObj_Scenario1_large_json():
     yao_owner = ownerunit_v001()
     day_hr_str = "day_hr"
     day_hr_rope = yao_owner.make_l1_rope(day_hr_str)
-    day_hr_concept = yao_owner.get_concept_obj(day_hr_rope)
+    day_hr_plan = yao_owner.get_plan_obj(day_hr_rope)
     yao_owner.add_fact(fcontext=day_hr_rope, fstate=day_hr_rope, fopen=0, fnigh=23)
     time_minute = yao_owner.make_l1_rope("day_minute")
     yao_owner.add_fact(fcontext=time_minute, fstate=time_minute, fopen=0, fnigh=1440)
@@ -63,41 +63,41 @@ def test_OwnerUnit_get_dict_ReturnsObj_Scenario1_large_json():
     assert len(owner_dict["accts"]) != 12
     assert owner_dict.get("_groups") is None
 
-    x_conceptroot = yao_owner.conceptroot
-    conceptroot_dict = owner_dict["conceptroot"]
+    x_planroot = yao_owner.planroot
+    planroot_dict = owner_dict["planroot"]
     _kids = "_kids"
-    assert x_conceptroot.concept_label == yao_owner.belief_label
-    assert conceptroot_dict["concept_label"] == x_conceptroot.concept_label
-    assert conceptroot_dict["mass"] == x_conceptroot.mass
-    assert len(conceptroot_dict[_kids]) == len(x_conceptroot._kids)
+    assert x_planroot.plan_label == yao_owner.belief_label
+    assert planroot_dict["plan_label"] == x_planroot.plan_label
+    assert planroot_dict["mass"] == x_planroot.mass
+    assert len(planroot_dict[_kids]) == len(x_planroot._kids)
 
 
-def test_OwnerUnit_get_dict_ReturnsObj_Scenario2_conceptroot_laborunit():
+def test_OwnerUnit_get_dict_ReturnsObj_Scenario2_planroot_laborunit():
     # ESTABLISH
     run_str = "runners"
     sue_owner = ownerunit_shop("Sue")
     x_laborunit = laborunit_shop()
     x_laborunit.set_laborlink(labor_title=run_str)
     root_rope = to_rope(sue_owner.belief_label)
-    sue_owner.edit_concept_attr(root_rope, laborunit=x_laborunit)
-    root_concept = sue_owner.get_concept_obj(root_rope)
+    sue_owner.edit_plan_attr(root_rope, laborunit=x_laborunit)
+    root_plan = sue_owner.get_plan_obj(root_rope)
     x_gogo_want = 5
     x_stop_want = 11
-    root_concept.gogo_want = x_gogo_want
-    root_concept.stop_want = x_stop_want
+    root_plan.gogo_want = x_gogo_want
+    root_plan.stop_want = x_stop_want
 
     # WHEN
     owner_dict = sue_owner.get_dict()
-    conceptroot_dict = owner_dict.get("conceptroot")
+    planroot_dict = owner_dict.get("planroot")
 
     # THEN
-    assert conceptroot_dict["laborunit"] == x_laborunit.get_dict()
-    assert conceptroot_dict["laborunit"] == {"_laborlinks": [run_str]}
-    assert conceptroot_dict.get("gogo_want") == x_gogo_want
-    assert conceptroot_dict.get("stop_want") == x_stop_want
+    assert planroot_dict["laborunit"] == x_laborunit.get_dict()
+    assert planroot_dict["laborunit"] == {"_laborlinks": [run_str]}
+    assert planroot_dict.get("gogo_want") == x_gogo_want
+    assert planroot_dict.get("stop_want") == x_stop_want
 
 
-def test_OwnerUnit_get_dict_ReturnsObj_Scenario3_With_conceptroot_healerlink():
+def test_OwnerUnit_get_dict_ReturnsObj_Scenario3_With_planroot_healerlink():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
     yao_str = "Yao"
@@ -108,17 +108,17 @@ def test_OwnerUnit_get_dict_ReturnsObj_Scenario3_With_conceptroot_healerlink():
     run_healerlink = healerlink_shop()
     run_healerlink.set_healer_name(x_healer_name=run_str)
     root_rope = to_rope(sue_owner.belief_label)
-    sue_owner.edit_concept_attr(root_rope, healerlink=run_healerlink)
+    sue_owner.edit_plan_attr(root_rope, healerlink=run_healerlink)
 
     # WHEN
     owner_dict = sue_owner.get_dict()
-    conceptroot_dict = owner_dict.get("conceptroot")
+    planroot_dict = owner_dict.get("planroot")
 
     # THEN
-    assert conceptroot_dict["healerlink"] == run_healerlink.get_dict()
+    assert planroot_dict["healerlink"] == run_healerlink.get_dict()
 
 
-def test_OwnerUnit_get_dict_ReturnsObj_Scenario4_conceptkid_LaborUnit():
+def test_OwnerUnit_get_dict_ReturnsObj_Scenario4_plankid_LaborUnit():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
     yao_str = "Yao"
@@ -129,20 +129,20 @@ def test_OwnerUnit_get_dict_ReturnsObj_Scenario4_conceptkid_LaborUnit():
 
     morn_str = "morning"
     morn_rope = sue_owner.make_l1_rope(morn_str)
-    sue_owner.set_l1_concept(conceptunit_shop(morn_str))
+    sue_owner.set_l1_plan(planunit_shop(morn_str))
     x_laborunit = laborunit_shop()
     x_laborunit.set_laborlink(labor_title=run_str)
-    sue_owner.edit_concept_attr(morn_rope, laborunit=x_laborunit)
+    sue_owner.edit_plan_attr(morn_rope, laborunit=x_laborunit)
 
     # WHEN
     owner_dict = sue_owner.get_dict()
-    conceptroot_dict = owner_dict.get("conceptroot")
+    planroot_dict = owner_dict.get("planroot")
 
     # THEN
     _kids = "_kids"
     _laborunit = "laborunit"
 
-    labor_dict_x = conceptroot_dict[_kids][morn_str][_laborunit]
+    labor_dict_x = planroot_dict[_kids][morn_str][_laborunit]
     assert labor_dict_x == x_laborunit.get_dict()
     assert labor_dict_x == {"_laborlinks": [run_str]}
 
@@ -166,8 +166,8 @@ def test_OwnerUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     yao_acctunit.add_membership(run_str)
     run_healerlink = healerlink_shop({run_str})
     root_rope = to_rope(zia_owner.belief_label)
-    zia_owner.edit_concept_attr(root_rope, healerlink=run_healerlink)
-    zia_owner.edit_concept_attr(root_rope, problem_bool=True)
+    zia_owner.edit_plan_attr(root_rope, healerlink=run_healerlink)
+    zia_owner.edit_plan_attr(root_rope, problem_bool=True)
 
     # WHEN
     x_json = zia_owner.get_json()
@@ -197,22 +197,22 @@ def test_OwnerUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     with pytest_raises(Exception) as excinfo:
         owner_dict["last_pack_id"]
 
-    x_conceptroot = zia_owner.conceptroot
-    conceptroot_dict = owner_dict.get("conceptroot")
+    x_planroot = zia_owner.planroot
+    planroot_dict = owner_dict.get("planroot")
 
-    assert len(conceptroot_dict[_kids]) == len(x_conceptroot._kids)
+    assert len(planroot_dict[_kids]) == len(x_planroot._kids)
 
     shave_str = "shave"
-    shave_dict = conceptroot_dict[_kids][shave_str]
+    shave_dict = planroot_dict[_kids][shave_str]
     shave_factunits = shave_dict["factunits"]
     print(f"{shave_factunits=}")
     assert len(shave_factunits) == 1
-    assert len(shave_factunits) == len(x_conceptroot._kids[shave_str].factunits)
-    conceptroot_healerlink = conceptroot_dict["healerlink"]
-    print(f"{conceptroot_healerlink=}")
-    assert len(conceptroot_healerlink) == 1
-    assert x_conceptroot.healerlink.any_healer_name_exists()
-    assert x_conceptroot.problem_bool
+    assert len(shave_factunits) == len(x_planroot._kids[shave_str].factunits)
+    planroot_healerlink = planroot_dict["healerlink"]
+    print(f"{planroot_healerlink=}")
+    assert len(planroot_healerlink) == 1
+    assert x_planroot.healerlink.any_healer_name_exists()
+    assert x_planroot.problem_bool
 
 
 def test_OwnerUnit_get_json_ReturnsCorrectJSON_BigExample():
@@ -225,7 +225,7 @@ def test_OwnerUnit_get_json_ReturnsCorrectJSON_BigExample():
     day_min_rope = yao_owner.make_l1_rope(day_min_str)
     yao_owner.add_fact(fcontext=day_min_rope, fstate=day_min_rope, fopen=0, fnigh=59)
     x_factunit = factunit_shop(day_min_rope, day_min_rope, 5, 59)
-    yao_owner.edit_concept_attr(x_factunit.fcontext, factunit=x_factunit)
+    yao_owner.edit_plan_attr(x_factunit.fcontext, factunit=x_factunit)
     yao_owner.set_max_tree_traverse(2)
     yao_str = "Yao"
 
@@ -241,29 +241,29 @@ def test_OwnerUnit_get_json_ReturnsCorrectJSON_BigExample():
     assert owner_dict["max_tree_traverse"] == yao_owner.max_tree_traverse
     assert owner_dict["knot"] == yao_owner.knot
 
-    x_conceptroot = yao_owner.conceptroot
-    conceptroot_dict = owner_dict.get("conceptroot")
-    assert len(conceptroot_dict[_kids]) == len(x_conceptroot._kids)
+    x_planroot = yao_owner.planroot
+    planroot_dict = owner_dict.get("planroot")
+    assert len(planroot_dict[_kids]) == len(x_planroot._kids)
 
-    kids = conceptroot_dict[_kids]
+    kids = planroot_dict[_kids]
     day_min_dict = kids[day_min_str]
     day_min_factunits_dict = day_min_dict["factunits"]
-    day_min_concept_x = yao_owner.get_concept_obj(day_min_rope)
+    day_min_plan_x = yao_owner.get_plan_obj(day_min_rope)
     print(f"{day_min_factunits_dict=}")
     assert len(day_min_factunits_dict) == 1
-    assert len(day_min_factunits_dict) == len(day_min_concept_x.factunits)
+    assert len(day_min_factunits_dict) == len(day_min_plan_x.factunits)
 
     _reasonunits = "reasonunits"
     cont_str = "Freelancing"
     ulti_str = "Ultimate Frisbee"
     cont_rope = yao_owner.make_l1_rope(cont_str)
     ulti_rope = yao_owner.make_l1_rope(ulti_str)
-    cont_concept = yao_owner.get_concept_obj(cont_rope)
-    ulti_concept = yao_owner.get_concept_obj(ulti_rope)
-    cont_reasonunits_dict = conceptroot_dict[_kids][cont_str][_reasonunits]
-    ulti_reasonunits_dict = conceptroot_dict[_kids][ulti_str][_reasonunits]
-    assert len(cont_reasonunits_dict) == len(cont_concept.reasonunits)
-    assert len(ulti_reasonunits_dict) == len(ulti_concept.reasonunits)
+    cont_plan = yao_owner.get_plan_obj(cont_rope)
+    ulti_plan = yao_owner.get_plan_obj(ulti_rope)
+    cont_reasonunits_dict = planroot_dict[_kids][cont_str][_reasonunits]
+    ulti_reasonunits_dict = planroot_dict[_kids][ulti_str][_reasonunits]
+    assert len(cont_reasonunits_dict) == len(cont_plan.reasonunits)
+    assert len(ulti_reasonunits_dict) == len(ulti_plan.reasonunits)
 
     anna_str = "Anna"
     anna_acctunit = yao_owner.get_acct(anna_str)
@@ -295,10 +295,10 @@ def test_ownerunit_get_from_json_ReturnsObjSimpleExample():
 
     shave_str = "shave"
     shave_rope = zia_owner.make_l1_rope(shave_str)
-    shave_concept_y1 = zia_owner.get_concept_obj(shave_rope)
-    shave_concept_y1.problem_bool = True
+    shave_plan_y1 = zia_owner.get_plan_obj(shave_rope)
+    shave_plan_y1.problem_bool = True
     # print(f"{shave_rope=}")
-    # print(f"{json_shave_concept.concept_label=} {json_shave_concept.parent_rope=}")
+    # print(f"{json_shave_plan.plan_label=} {json_shave_plan.parent_rope=}")
 
     sue_str = "Sue"
     zia_owner.add_acctunit(
@@ -314,21 +314,21 @@ def test_ownerunit_get_from_json_ReturnsObjSimpleExample():
     run_laborunit = laborunit_shop()
     run_laborunit.set_laborlink(labor_title=run_str)
     root_rope = to_rope(zia_owner.belief_label)
-    zia_owner.edit_concept_attr(root_rope, laborunit=run_laborunit)
+    zia_owner.edit_plan_attr(root_rope, laborunit=run_laborunit)
     xio_laborunit = laborunit_shop()
     xio_laborunit.set_laborlink(labor_title=xio_str)
-    zia_owner.edit_concept_attr(shave_rope, laborunit=xio_laborunit)
-    zia_owner.edit_concept_attr(shave_rope, awardlink=awardlink_shop(xio_str))
-    zia_owner.edit_concept_attr(shave_rope, awardlink=awardlink_shop(sue_str))
-    zia_owner.edit_concept_attr(root_rope, awardlink=awardlink_shop(sue_str))
-    # add healerlink to shave conceptunit
+    zia_owner.edit_plan_attr(shave_rope, laborunit=xio_laborunit)
+    zia_owner.edit_plan_attr(shave_rope, awardlink=awardlink_shop(xio_str))
+    zia_owner.edit_plan_attr(shave_rope, awardlink=awardlink_shop(sue_str))
+    zia_owner.edit_plan_attr(root_rope, awardlink=awardlink_shop(sue_str))
+    # add healerlink to shave planunit
     run_healerlink = healerlink_shop({run_str})
-    zia_owner.edit_concept_attr(shave_rope, healerlink=run_healerlink)
-    shave_concept = zia_owner.get_concept_obj(shave_rope)
+    zia_owner.edit_plan_attr(shave_rope, healerlink=run_healerlink)
+    shave_plan = zia_owner.get_plan_obj(shave_rope)
     zia_gogo_want = 75
     zia_stop_want = 77
-    shave_concept.gogo_want = zia_gogo_want
-    shave_concept.stop_want = zia_stop_want
+    shave_plan.gogo_want = zia_gogo_want
+    shave_plan.stop_want = zia_stop_want
 
     override_str = "override"
 
@@ -361,54 +361,54 @@ def test_ownerunit_get_from_json_ReturnsObjSimpleExample():
     assert json_owner.last_pack_id == zia_last_pack_id
     # assert json_owner._groups == zia_owner._groups
 
-    json_conceptroot = json_owner.conceptroot
-    assert json_conceptroot.parent_rope == ""
-    assert json_conceptroot.parent_rope == zia_owner.conceptroot.parent_rope
-    assert json_conceptroot.reasonunits == {}
-    assert json_conceptroot.laborunit == zia_owner.conceptroot.laborunit
-    assert json_conceptroot.laborunit == run_laborunit
-    assert json_conceptroot.fund_iota == 8
-    assert json_conceptroot.fund_iota == zia_fund_iota
-    assert len(json_conceptroot.factunits) == 1
-    assert len(json_conceptroot.awardlinks) == 1
+    json_planroot = json_owner.planroot
+    assert json_planroot.parent_rope == ""
+    assert json_planroot.parent_rope == zia_owner.planroot.parent_rope
+    assert json_planroot.reasonunits == {}
+    assert json_planroot.laborunit == zia_owner.planroot.laborunit
+    assert json_planroot.laborunit == run_laborunit
+    assert json_planroot.fund_iota == 8
+    assert json_planroot.fund_iota == zia_fund_iota
+    assert len(json_planroot.factunits) == 1
+    assert len(json_planroot.awardlinks) == 1
 
-    assert len(json_owner.conceptroot._kids) == 2
+    assert len(json_owner.planroot._kids) == 2
 
     wkday_str = "wkdays"
     wkday_rope = json_owner.make_l1_rope(wkday_str)
-    wkday_concept_x = json_owner.get_concept_obj(wkday_rope)
-    assert len(wkday_concept_x._kids) == 2
+    wkday_plan_x = json_owner.get_plan_obj(wkday_rope)
+    assert len(wkday_plan_x._kids) == 2
 
     sunday_str = "Sunday"
     sunday_rope = json_owner.make_rope(wkday_rope, sunday_str)
-    sunday_concept = json_owner.get_concept_obj(sunday_rope)
-    assert sunday_concept.mass == 20
+    sunday_plan = json_owner.get_plan_obj(sunday_rope)
+    assert sunday_plan.mass == 20
 
-    json_shave_concept = json_owner.get_concept_obj(shave_rope)
-    zia_shave_concept = zia_owner.get_concept_obj(shave_rope)
-    assert len(json_shave_concept.reasonunits) == 1
-    assert json_shave_concept.laborunit == zia_shave_concept.laborunit
-    assert json_shave_concept.laborunit == xio_laborunit
-    print(f"{json_shave_concept.healerlink=}")
-    assert json_shave_concept.healerlink == zia_shave_concept.healerlink
-    assert len(json_shave_concept.awardlinks) == 2
-    assert len(json_shave_concept.factunits) == 1
-    assert zia_shave_concept.problem_bool
-    assert json_shave_concept.problem_bool == zia_shave_concept.problem_bool
-    assert json_shave_concept.gogo_want == zia_shave_concept.gogo_want
-    assert json_shave_concept.stop_want == zia_shave_concept.stop_want
+    json_shave_plan = json_owner.get_plan_obj(shave_rope)
+    zia_shave_plan = zia_owner.get_plan_obj(shave_rope)
+    assert len(json_shave_plan.reasonunits) == 1
+    assert json_shave_plan.laborunit == zia_shave_plan.laborunit
+    assert json_shave_plan.laborunit == xio_laborunit
+    print(f"{json_shave_plan.healerlink=}")
+    assert json_shave_plan.healerlink == zia_shave_plan.healerlink
+    assert len(json_shave_plan.awardlinks) == 2
+    assert len(json_shave_plan.factunits) == 1
+    assert zia_shave_plan.problem_bool
+    assert json_shave_plan.problem_bool == zia_shave_plan.problem_bool
+    assert json_shave_plan.gogo_want == zia_shave_plan.gogo_want
+    assert json_shave_plan.stop_want == zia_shave_plan.stop_want
 
 
-def test_ownerunit_get_from_json_ReturnsCorrectConceptRoot():
+def test_ownerunit_get_from_json_ReturnsCorrectPlanRoot():
     # ESTABLISH
     zia_owner = get_ownerunit_x1_3levels_1reason_1facts()
     zia_owner.set_max_tree_traverse(23)
-    # root_concept = zia_owner.get_concept_obj(zia_owner.get_concept_obj(zia_owner.belief_label))
-    root_concept = zia_owner.conceptroot
+    # root_plan = zia_owner.get_plan_obj(zia_owner.get_plan_obj(zia_owner.belief_label))
+    root_plan = zia_owner.planroot
     zia_gogo_want = 75
     zia_stop_want = 77
-    root_concept.gogo_want = zia_gogo_want
-    root_concept.stop_want = zia_stop_want
+    root_plan.gogo_want = zia_gogo_want
+    root_plan.stop_want = zia_stop_want
 
     # WHEN
     x_json = zia_owner.get_json()
@@ -416,9 +416,9 @@ def test_ownerunit_get_from_json_ReturnsCorrectConceptRoot():
     json_owner = ownerunit_get_from_json(x_owner_json=x_json)
 
     # THEN
-    json_conceptroot = json_owner.get_concept_obj(to_rope(zia_owner.belief_label))
-    assert json_conceptroot.gogo_want == zia_gogo_want
-    assert json_conceptroot.stop_want == zia_stop_want
+    json_planroot = json_owner.get_plan_obj(to_rope(zia_owner.belief_label))
+    assert json_planroot.gogo_want == zia_gogo_want
+    assert json_planroot.stop_want == zia_stop_want
 
 
 def test_ownerunit_get_from_json_ReturnsObj_knot_Example():
@@ -473,7 +473,7 @@ def test_ownerunit_get_from_json_ReturnsObj_knot_GroupExample():
     assert after_yao_acctunit.knot == slash_knot
 
 
-def test_ownerunit_get_from_json_ReturnsObj_Scenario7_conceptroot_knot_IsCorrectlySet():
+def test_ownerunit_get_from_json_ReturnsObj_Scenario7_planroot_knot_IsCorrectlySet():
     # ESTABLISH
     slash_str = "/"
     run_str = "runners"
@@ -481,18 +481,18 @@ def test_ownerunit_get_from_json_ReturnsObj_Scenario7_conceptroot_knot_IsCorrect
     root_rope = to_rope(sue_owner.belief_label, slash_str)
     day_hr_str = "day_hr"
     day_hr_rope = sue_owner.make_l1_rope(day_hr_str)
-    sue_owner.add_concept(day_hr_rope)
+    sue_owner.add_plan(day_hr_rope)
     assert sue_owner.knot == slash_str
-    assert sue_owner.get_concept_obj(root_rope).knot == slash_str
-    assert sue_owner.get_concept_obj(day_hr_rope).knot == slash_str
+    assert sue_owner.get_plan_obj(root_rope).knot == slash_str
+    assert sue_owner.get_plan_obj(day_hr_rope).knot == slash_str
 
     # WHEN
     after_bob_owner = ownerunit_get_from_json(sue_owner.get_json())
 
     # THEN
     assert after_bob_owner.knot == slash_str
-    assert after_bob_owner.get_concept_obj(root_rope).knot == slash_str
-    assert after_bob_owner.get_concept_obj(day_hr_rope).knot == slash_str
+    assert after_bob_owner.get_plan_obj(root_rope).knot == slash_str
+    assert after_bob_owner.get_plan_obj(day_hr_rope).knot == slash_str
 
 
 def test_ownerunit_get_from_json_ExportsOwnerUnit_mass():
@@ -500,8 +500,8 @@ def test_ownerunit_get_from_json_ExportsOwnerUnit_mass():
     x1_owner = ownerunit_v001()
     x1_owner.tally = 15
     assert x1_owner.tally == 15
-    assert x1_owner.conceptroot.mass != x1_owner.tally
-    assert x1_owner.conceptroot.mass == 1
+    assert x1_owner.planroot.mass != x1_owner.tally
+    assert x1_owner.planroot.mass == 1
 
     # WHEN
     x2_owner = ownerunit_get_from_json(x1_owner.get_json())
@@ -509,9 +509,9 @@ def test_ownerunit_get_from_json_ExportsOwnerUnit_mass():
     # THEN
     assert x1_owner.tally == 15
     assert x1_owner.tally == x2_owner.tally
-    assert x1_owner.conceptroot.mass == 1
-    assert x1_owner.conceptroot.mass == x2_owner.conceptroot.mass
-    assert x1_owner.conceptroot._kids == x2_owner.conceptroot._kids
+    assert x1_owner.planroot.mass == 1
+    assert x1_owner.planroot.mass == x2_owner.planroot.mass
+    assert x1_owner.planroot._kids == x2_owner.planroot._kids
 
 
 def test_get_dict_of_owner_from_dict_ReturnsDictOfOwnerUnits():
@@ -538,22 +538,22 @@ def test_get_dict_of_owner_from_dict_ReturnsDictOfOwnerUnits():
     assert ccn_dict_of_obj.get(x3_owner.owner_name) is not None
 
     ccn2_owner = ccn_dict_of_obj.get(x2_owner.owner_name)
-    assert ccn2_owner.conceptroot.concept_label == x2_owner.conceptroot.concept_label
-    assert ccn2_owner.conceptroot.parent_rope == x2_owner.conceptroot.parent_rope
-    assert ccn2_owner.conceptroot.fund_iota == x2_owner.conceptroot.fund_iota
+    assert ccn2_owner.planroot.plan_label == x2_owner.planroot.plan_label
+    assert ccn2_owner.planroot.parent_rope == x2_owner.planroot.parent_rope
+    assert ccn2_owner.planroot.fund_iota == x2_owner.planroot.fund_iota
     shave_rope = ccn2_owner.make_l1_rope("shave")
     wk_rope = ccn2_owner.make_l1_rope("wkdays")
-    # assert ccn2_owner.get_concept_obj(shave_rope) == x2_owner.get_concept_obj(shave_rope)
-    # assert ccn2_owner.get_concept_obj(wk_rope) == x2_owner.get_concept_obj(wk_rope)
-    # assert ccn2_owner.conceptroot == x2_owner.conceptroot
+    # assert ccn2_owner.get_plan_obj(shave_rope) == x2_owner.get_plan_obj(shave_rope)
+    # assert ccn2_owner.get_plan_obj(wk_rope) == x2_owner.get_plan_obj(wk_rope)
+    # assert ccn2_owner.planroot == x2_owner.planroot
     assert ccn2_owner.get_dict() == x2_owner.get_dict()
 
     ccn_owner3 = ccn_dict_of_obj.get(x3_owner.owner_name)
     assert ccn_owner3.get_dict() == x3_owner.get_dict()
 
-    cc1_concept_root = ccn_dict_of_obj.get(x1_owner.owner_name).conceptroot
+    cc1_plan_root = ccn_dict_of_obj.get(x1_owner.owner_name).planroot
     ccn_owner1 = ccn_dict_of_obj.get(x1_owner.owner_name)
-    assert ccn_owner1._concept_dict == x1_owner._concept_dict
+    assert ccn_owner1._plan_dict == x1_owner._plan_dict
     philipa_str = "Philipa"
     ccn_philipa_acctunit = ccn_owner1.get_acct(philipa_str)
     x1_philipa_acctunit = x1_owner.get_acct(philipa_str)

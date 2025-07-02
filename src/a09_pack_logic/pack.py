@@ -9,7 +9,7 @@ from src.a00_data_toolbox.file_toolbox import (
     save_file,
 )
 from src.a01_term_logic.term import BeliefLabel, FaceName, OwnerName
-from src.a05_concept_logic.concept import get_default_belief_label
+from src.a05_plan_logic.plan import get_default_belief_label
 from src.a06_owner_logic.owner import OwnerUnit
 from src.a08_owner_atom_logic.atom import (
     OwnerAtom,

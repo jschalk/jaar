@@ -1,25 +1,25 @@
 from src.a01_term_logic.rope import to_rope
 from src.a03_group_logic.group import awardlink_shop
-from src.a04_reason_logic.reason_concept import factunit_shop, reasonunit_shop
+from src.a04_reason_logic.reason_plan import factunit_shop, reasonunit_shop
 from src.a06_owner_logic.owner import ownerunit_shop
 from src.a06_owner_logic.test._util.a06_str import (
     acct_name_str,
     awardee_title_str,
-    concept_label_str,
-    concept_rope_str,
     fcontext_str,
     group_title_str,
     healer_name_str,
     labor_title_str,
     owner_acct_membership_str,
     owner_acctunit_str,
-    owner_concept_awardlink_str,
-    owner_concept_factunit_str,
-    owner_concept_healerlink_str,
-    owner_concept_laborlink_str,
-    owner_concept_reason_premiseunit_str,
-    owner_concept_reasonunit_str,
-    owner_conceptunit_str,
+    owner_plan_awardlink_str,
+    owner_plan_factunit_str,
+    owner_plan_healerlink_str,
+    owner_plan_laborlink_str,
+    owner_plan_reason_premiseunit_str,
+    owner_plan_reasonunit_str,
+    owner_planunit_str,
+    plan_label_str,
+    plan_rope_str,
     rcontext_str,
 )
 from src.a08_owner_atom_logic.atom import owneratom_shop, sift_owneratom
@@ -77,7 +77,7 @@ def test_sift_atom_ReturnsObj_OwnerAtom_DELETE_owner_acct_membership():
     assert not new_bob_run_owneratom
 
 
-def test_sift_atom_ReturnsObj_OwnerAtom_DELETE_owner_conceptunit():
+def test_sift_atom_ReturnsObj_OwnerAtom_DELETE_owner_planunit():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
     root_rope = to_rope(sue_owner.belief_label)
@@ -88,21 +88,21 @@ def test_sift_atom_ReturnsObj_OwnerAtom_DELETE_owner_conceptunit():
     sweep_str = "sweep"
     sweep_rope = sue_owner.make_rope(clean_rope, sweep_str)
 
-    root_atom = owneratom_shop(owner_conceptunit_str(), DELETE_str())
-    root_atom.set_arg(concept_rope_str(), root_rope)
-    casa_atom = owneratom_shop(owner_conceptunit_str(), DELETE_str())
-    casa_atom.set_arg(concept_rope_str(), casa_rope)
-    clean_atom = owneratom_shop(owner_conceptunit_str(), DELETE_str())
-    clean_atom.set_arg(concept_rope_str(), clean_rope)
-    sweep_atom = owneratom_shop(owner_conceptunit_str(), DELETE_str())
-    sweep_atom.set_arg(concept_rope_str(), sweep_rope)
+    root_atom = owneratom_shop(owner_planunit_str(), DELETE_str())
+    root_atom.set_arg(plan_rope_str(), root_rope)
+    casa_atom = owneratom_shop(owner_planunit_str(), DELETE_str())
+    casa_atom.set_arg(plan_rope_str(), casa_rope)
+    clean_atom = owneratom_shop(owner_planunit_str(), DELETE_str())
+    clean_atom.set_arg(plan_rope_str(), clean_rope)
+    sweep_atom = owneratom_shop(owner_planunit_str(), DELETE_str())
+    sweep_atom.set_arg(plan_rope_str(), sweep_rope)
     assert sift_owneratom(sue_owner, root_atom)
     assert not sift_owneratom(sue_owner, casa_atom)
     assert not sift_owneratom(sue_owner, clean_atom)
     assert not sift_owneratom(sue_owner, sweep_atom)
 
     # WHEN
-    sue_owner.add_concept(casa_rope)
+    sue_owner.add_plan(casa_rope)
     # THEN
     assert sift_owneratom(sue_owner, root_atom)
     assert sift_owneratom(sue_owner, casa_atom)
@@ -110,7 +110,7 @@ def test_sift_atom_ReturnsObj_OwnerAtom_DELETE_owner_conceptunit():
     assert not sift_owneratom(sue_owner, sweep_atom)
 
     # WHEN
-    sue_owner.add_concept(clean_rope)
+    sue_owner.add_plan(clean_rope)
     # THEN
     assert sift_owneratom(sue_owner, root_atom)
     assert sift_owneratom(sue_owner, casa_atom)
@@ -118,7 +118,7 @@ def test_sift_atom_ReturnsObj_OwnerAtom_DELETE_owner_conceptunit():
     assert not sift_owneratom(sue_owner, sweep_atom)
 
 
-def test_sift_atom_SetsOwnerDeltaOwnerAtom_owner_conceptunit():
+def test_sift_atom_SetsOwnerDeltaOwnerAtom_owner_planunit():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
     root_rope = to_rope(sue_owner.belief_label)
@@ -129,32 +129,32 @@ def test_sift_atom_SetsOwnerDeltaOwnerAtom_owner_conceptunit():
     sweep_str = "sweep"
     sweep_rope = sue_owner.make_rope(clean_rope, sweep_str)
 
-    casa_atom = owneratom_shop(owner_conceptunit_str(), DELETE_str())
-    casa_atom.set_arg(concept_rope_str(), casa_rope)
-    clean_atom = owneratom_shop(owner_conceptunit_str(), DELETE_str())
-    clean_atom.set_arg(concept_rope_str(), clean_rope)
-    sweep_atom = owneratom_shop(owner_conceptunit_str(), DELETE_str())
-    sweep_atom.set_arg(concept_rope_str(), sweep_rope)
+    casa_atom = owneratom_shop(owner_planunit_str(), DELETE_str())
+    casa_atom.set_arg(plan_rope_str(), casa_rope)
+    clean_atom = owneratom_shop(owner_planunit_str(), DELETE_str())
+    clean_atom.set_arg(plan_rope_str(), clean_rope)
+    sweep_atom = owneratom_shop(owner_planunit_str(), DELETE_str())
+    sweep_atom.set_arg(plan_rope_str(), sweep_rope)
     assert not sift_owneratom(sue_owner, casa_atom)
     assert not sift_owneratom(sue_owner, clean_atom)
     assert not sift_owneratom(sue_owner, sweep_atom)
 
     # WHEN
-    sue_owner.add_concept(casa_rope)
+    sue_owner.add_plan(casa_rope)
     # THEN
     assert sift_owneratom(sue_owner, casa_atom)
     assert not sift_owneratom(sue_owner, clean_atom)
     assert not sift_owneratom(sue_owner, sweep_atom)
 
     # WHEN
-    sue_owner.add_concept(clean_rope)
+    sue_owner.add_plan(clean_rope)
     # THEN
     assert sift_owneratom(sue_owner, casa_atom)
     assert sift_owneratom(sue_owner, clean_atom)
     assert not sift_owneratom(sue_owner, sweep_atom)
 
 
-def test_sift_atom_SetsOwnerDeltaOwnerAtom_owner_concept_awardlink():
+def test_sift_atom_SetsOwnerDeltaOwnerAtom_owner_plan_awardlink():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
@@ -163,32 +163,32 @@ def test_sift_atom_SetsOwnerDeltaOwnerAtom_owner_concept_awardlink():
     clean_rope = sue_owner.make_rope(casa_rope, clean_str)
     swim_str = "Swim"
 
-    casa_swim_atom = owneratom_shop(owner_concept_awardlink_str(), DELETE_str())
-    casa_swim_atom.set_arg(concept_rope_str(), casa_rope)
+    casa_swim_atom = owneratom_shop(owner_plan_awardlink_str(), DELETE_str())
+    casa_swim_atom.set_arg(plan_rope_str(), casa_rope)
     casa_swim_atom.set_arg(awardee_title_str(), swim_str)
-    clean_swim_atom = owneratom_shop(owner_concept_awardlink_str(), DELETE_str())
-    clean_swim_atom.set_arg(concept_rope_str(), clean_rope)
+    clean_swim_atom = owneratom_shop(owner_plan_awardlink_str(), DELETE_str())
+    clean_swim_atom.set_arg(plan_rope_str(), clean_rope)
     clean_swim_atom.set_arg(awardee_title_str(), swim_str)
-    sue_owner.add_concept(casa_rope)
-    sue_owner.add_concept(clean_rope)
+    sue_owner.add_plan(casa_rope)
+    sue_owner.add_plan(clean_rope)
     assert not sift_owneratom(sue_owner, casa_swim_atom)
     assert not sift_owneratom(sue_owner, clean_swim_atom)
 
     # WHEN
-    sue_owner.get_concept_obj(casa_rope).set_awardlink(awardlink_shop(swim_str))
+    sue_owner.get_plan_obj(casa_rope).set_awardlink(awardlink_shop(swim_str))
 
     # THEN
     assert sift_owneratom(sue_owner, casa_swim_atom)
     assert not sift_owneratom(sue_owner, clean_swim_atom)
 
     # WHEN
-    sue_owner.get_concept_obj(clean_rope).set_awardlink(awardlink_shop(swim_str))
+    sue_owner.get_plan_obj(clean_rope).set_awardlink(awardlink_shop(swim_str))
     # THEN
     assert sift_owneratom(sue_owner, casa_swim_atom)
     assert sift_owneratom(sue_owner, clean_swim_atom)
 
 
-def test_sift_atom_SetsOwnerDeltaOwnerAtom_owner_concept_reasonunit():
+def test_sift_atom_SetsOwnerDeltaOwnerAtom_owner_plan_reasonunit():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
@@ -198,32 +198,32 @@ def test_sift_atom_SetsOwnerDeltaOwnerAtom_owner_concept_reasonunit():
     week_str = "week"
     week_rope = sue_owner.make_l1_rope(week_str)
 
-    casa_week_atom = owneratom_shop(owner_concept_reasonunit_str(), DELETE_str())
-    casa_week_atom.set_arg(concept_rope_str(), casa_rope)
+    casa_week_atom = owneratom_shop(owner_plan_reasonunit_str(), DELETE_str())
+    casa_week_atom.set_arg(plan_rope_str(), casa_rope)
     casa_week_atom.set_arg(rcontext_str(), week_rope)
-    clean_week_atom = owneratom_shop(owner_concept_reasonunit_str(), DELETE_str())
-    clean_week_atom.set_arg(concept_rope_str(), clean_rope)
+    clean_week_atom = owneratom_shop(owner_plan_reasonunit_str(), DELETE_str())
+    clean_week_atom.set_arg(plan_rope_str(), clean_rope)
     clean_week_atom.set_arg(rcontext_str(), week_rope)
-    sue_owner.add_concept(casa_rope)
-    sue_owner.add_concept(clean_rope)
+    sue_owner.add_plan(casa_rope)
+    sue_owner.add_plan(clean_rope)
     assert not sift_owneratom(sue_owner, casa_week_atom)
     assert not sift_owneratom(sue_owner, clean_week_atom)
 
     # WHEN
-    sue_owner.get_concept_obj(casa_rope).set_reasonunit(reasonunit_shop(week_rope))
+    sue_owner.get_plan_obj(casa_rope).set_reasonunit(reasonunit_shop(week_rope))
 
     # THEN
     assert sift_owneratom(sue_owner, casa_week_atom)
     assert not sift_owneratom(sue_owner, clean_week_atom)
 
     # WHEN
-    sue_owner.get_concept_obj(clean_rope).set_reasonunit(reasonunit_shop(week_rope))
+    sue_owner.get_plan_obj(clean_rope).set_reasonunit(reasonunit_shop(week_rope))
     # THEN
     assert sift_owneratom(sue_owner, casa_week_atom)
     assert sift_owneratom(sue_owner, clean_week_atom)
 
 
-def test_sift_atom_SetsOwnerDeltaOwnerAtom_owner_concept_reason_premiseunit_exists():
+def test_sift_atom_SetsOwnerDeltaOwnerAtom_owner_plan_reason_premiseunit_exists():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
@@ -235,43 +235,39 @@ def test_sift_atom_SetsOwnerDeltaOwnerAtom_owner_concept_reason_premiseunit_exis
     thur_str = "thur"
     thur_rope = sue_owner.make_rope(week_rope, thur_str)
 
-    casa_week_atom = owneratom_shop(
-        owner_concept_reason_premiseunit_str(), DELETE_str()
-    )
-    casa_week_atom.set_arg(concept_rope_str(), casa_rope)
+    casa_week_atom = owneratom_shop(owner_plan_reason_premiseunit_str(), DELETE_str())
+    casa_week_atom.set_arg(plan_rope_str(), casa_rope)
     casa_week_atom.set_arg(rcontext_str(), week_rope)
     casa_week_atom.set_arg("pstate", thur_rope)
-    clean_week_atom = owneratom_shop(
-        owner_concept_reason_premiseunit_str(), DELETE_str()
-    )
-    clean_week_atom.set_arg(concept_rope_str(), clean_rope)
+    clean_week_atom = owneratom_shop(owner_plan_reason_premiseunit_str(), DELETE_str())
+    clean_week_atom.set_arg(plan_rope_str(), clean_rope)
     clean_week_atom.set_arg(rcontext_str(), week_rope)
     clean_week_atom.set_arg("pstate", thur_rope)
-    sue_owner.add_concept(casa_rope)
-    sue_owner.add_concept(clean_rope)
-    casa_concept = sue_owner.get_concept_obj(casa_rope)
-    clean_concept = sue_owner.get_concept_obj(clean_rope)
-    casa_concept.set_reasonunit(reasonunit_shop(week_rope))
-    clean_concept.set_reasonunit(reasonunit_shop(week_rope))
+    sue_owner.add_plan(casa_rope)
+    sue_owner.add_plan(clean_rope)
+    casa_plan = sue_owner.get_plan_obj(casa_rope)
+    clean_plan = sue_owner.get_plan_obj(clean_rope)
+    casa_plan.set_reasonunit(reasonunit_shop(week_rope))
+    clean_plan.set_reasonunit(reasonunit_shop(week_rope))
     assert not sift_owneratom(sue_owner, casa_week_atom)
     assert not sift_owneratom(sue_owner, clean_week_atom)
 
     # WHEN
-    casa_concept.get_reasonunit(week_rope).set_premise(thur_rope)
+    casa_plan.get_reasonunit(week_rope).set_premise(thur_rope)
 
     # THEN
     assert sift_owneratom(sue_owner, casa_week_atom)
     assert not sift_owneratom(sue_owner, clean_week_atom)
 
     # WHEN
-    clean_concept.get_reasonunit(week_rope).set_premise(thur_rope)
+    clean_plan.get_reasonunit(week_rope).set_premise(thur_rope)
 
     # THEN
     assert sift_owneratom(sue_owner, casa_week_atom)
     assert sift_owneratom(sue_owner, clean_week_atom)
 
 
-def test_sift_atom_SetsOwnerDeltaOwnerAtom_owner_concept_laborlink():
+def test_sift_atom_SetsOwnerDeltaOwnerAtom_owner_plan_laborlink():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
@@ -280,32 +276,32 @@ def test_sift_atom_SetsOwnerDeltaOwnerAtom_owner_concept_laborlink():
     clean_rope = sue_owner.make_rope(casa_rope, clean_str)
     swim_str = "Swim"
 
-    casa_swim_atom = owneratom_shop(owner_concept_laborlink_str(), DELETE_str())
-    casa_swim_atom.set_arg(concept_rope_str(), casa_rope)
+    casa_swim_atom = owneratom_shop(owner_plan_laborlink_str(), DELETE_str())
+    casa_swim_atom.set_arg(plan_rope_str(), casa_rope)
     casa_swim_atom.set_arg(labor_title_str(), swim_str)
-    clean_swim_atom = owneratom_shop(owner_concept_laborlink_str(), DELETE_str())
-    clean_swim_atom.set_arg(concept_rope_str(), clean_rope)
+    clean_swim_atom = owneratom_shop(owner_plan_laborlink_str(), DELETE_str())
+    clean_swim_atom.set_arg(plan_rope_str(), clean_rope)
     clean_swim_atom.set_arg(labor_title_str(), swim_str)
-    sue_owner.add_concept(casa_rope)
-    sue_owner.add_concept(clean_rope)
+    sue_owner.add_plan(casa_rope)
+    sue_owner.add_plan(clean_rope)
     assert not sift_owneratom(sue_owner, casa_swim_atom)
     assert not sift_owneratom(sue_owner, clean_swim_atom)
 
     # WHEN
-    sue_owner.get_concept_obj(casa_rope).laborunit.set_laborlink(swim_str)
+    sue_owner.get_plan_obj(casa_rope).laborunit.set_laborlink(swim_str)
 
     # THEN
     assert sift_owneratom(sue_owner, casa_swim_atom)
     assert not sift_owneratom(sue_owner, clean_swim_atom)
 
     # WHEN
-    sue_owner.get_concept_obj(clean_rope).laborunit.set_laborlink(swim_str)
+    sue_owner.get_plan_obj(clean_rope).laborunit.set_laborlink(swim_str)
     # THEN
     assert sift_owneratom(sue_owner, casa_swim_atom)
     assert sift_owneratom(sue_owner, clean_swim_atom)
 
 
-def test_sift_atom_SetsOwnerDeltaOwnerAtom_owner_concept_healerlink():
+def test_sift_atom_SetsOwnerDeltaOwnerAtom_owner_plan_healerlink():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
@@ -314,32 +310,32 @@ def test_sift_atom_SetsOwnerDeltaOwnerAtom_owner_concept_healerlink():
     clean_rope = sue_owner.make_rope(casa_rope, clean_str)
     swim_str = "Swim"
 
-    casa_swim_atom = owneratom_shop(owner_concept_healerlink_str(), DELETE_str())
-    casa_swim_atom.set_arg(concept_rope_str(), casa_rope)
+    casa_swim_atom = owneratom_shop(owner_plan_healerlink_str(), DELETE_str())
+    casa_swim_atom.set_arg(plan_rope_str(), casa_rope)
     casa_swim_atom.set_arg(healer_name_str(), swim_str)
-    clean_swim_atom = owneratom_shop(owner_concept_healerlink_str(), DELETE_str())
-    clean_swim_atom.set_arg(concept_rope_str(), clean_rope)
+    clean_swim_atom = owneratom_shop(owner_plan_healerlink_str(), DELETE_str())
+    clean_swim_atom.set_arg(plan_rope_str(), clean_rope)
     clean_swim_atom.set_arg(healer_name_str(), swim_str)
-    sue_owner.add_concept(casa_rope)
-    sue_owner.add_concept(clean_rope)
+    sue_owner.add_plan(casa_rope)
+    sue_owner.add_plan(clean_rope)
     assert not sift_owneratom(sue_owner, casa_swim_atom)
     assert not sift_owneratom(sue_owner, clean_swim_atom)
 
     # WHEN
-    sue_owner.get_concept_obj(casa_rope).healerlink.set_healer_name(swim_str)
+    sue_owner.get_plan_obj(casa_rope).healerlink.set_healer_name(swim_str)
 
     # THEN
     assert sift_owneratom(sue_owner, casa_swim_atom)
     assert not sift_owneratom(sue_owner, clean_swim_atom)
 
     # WHEN
-    sue_owner.get_concept_obj(clean_rope).healerlink.set_healer_name(swim_str)
+    sue_owner.get_plan_obj(clean_rope).healerlink.set_healer_name(swim_str)
     # THEN
     assert sift_owneratom(sue_owner, casa_swim_atom)
     assert sift_owneratom(sue_owner, clean_swim_atom)
 
 
-def test_sift_atom_SetsOwnerDeltaOwnerAtom_owner_concept_factunit():
+def test_sift_atom_SetsOwnerDeltaOwnerAtom_owner_plan_factunit():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
@@ -349,26 +345,26 @@ def test_sift_atom_SetsOwnerDeltaOwnerAtom_owner_concept_factunit():
     week_str = "week"
     week_rope = sue_owner.make_l1_rope(week_str)
 
-    casa_week_atom = owneratom_shop(owner_concept_factunit_str(), DELETE_str())
-    casa_week_atom.set_arg(concept_rope_str(), casa_rope)
+    casa_week_atom = owneratom_shop(owner_plan_factunit_str(), DELETE_str())
+    casa_week_atom.set_arg(plan_rope_str(), casa_rope)
     casa_week_atom.set_arg(fcontext_str(), week_rope)
-    clean_week_atom = owneratom_shop(owner_concept_factunit_str(), DELETE_str())
-    clean_week_atom.set_arg(concept_rope_str(), clean_rope)
+    clean_week_atom = owneratom_shop(owner_plan_factunit_str(), DELETE_str())
+    clean_week_atom.set_arg(plan_rope_str(), clean_rope)
     clean_week_atom.set_arg(fcontext_str(), week_rope)
-    sue_owner.add_concept(casa_rope)
-    sue_owner.add_concept(clean_rope)
+    sue_owner.add_plan(casa_rope)
+    sue_owner.add_plan(clean_rope)
     assert not sift_owneratom(sue_owner, casa_week_atom)
     assert not sift_owneratom(sue_owner, clean_week_atom)
 
     # WHEN
-    sue_owner.get_concept_obj(casa_rope).set_factunit(factunit_shop(week_rope))
+    sue_owner.get_plan_obj(casa_rope).set_factunit(factunit_shop(week_rope))
 
     # THEN
     assert sift_owneratom(sue_owner, casa_week_atom)
     assert not sift_owneratom(sue_owner, clean_week_atom)
 
     # WHEN
-    sue_owner.get_concept_obj(clean_rope).set_factunit(factunit_shop(week_rope))
+    sue_owner.get_plan_obj(clean_rope).set_factunit(factunit_shop(week_rope))
     # THEN
     assert sift_owneratom(sue_owner, casa_week_atom)
     assert sift_owneratom(sue_owner, clean_week_atom)

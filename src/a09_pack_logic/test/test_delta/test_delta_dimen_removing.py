@@ -1,4 +1,4 @@
-from src.a05_concept_logic.concept import conceptunit_shop
+from src.a05_plan_logic.plan import planunit_shop
 from src.a06_owner_logic.owner import ownerunit_shop
 from src.a06_owner_logic.test._util.a06_str import acct_name_str, owner_acctunit_str
 from src.a08_owner_atom_logic.test._util.a08_str import INSERT_str
@@ -16,7 +16,7 @@ def test_OwnerDelta_get_dimens_cruds_ownerdelta_ReturnsObjWithCorrectDimensAndCR
     bob_acct_cred_points = 33
     bob_acct_debt_points = 44
     after_sue_owner.add_acctunit(bob_str, bob_acct_cred_points, bob_acct_debt_points)
-    after_sue_owner.set_l1_concept(conceptunit_shop("casa"))
+    after_sue_owner.set_l1_plan(planunit_shop("casa"))
     old_ownerdelta = ownerdelta_shop()
     old_ownerdelta.add_all_different_owneratoms(before_sue_owner, after_sue_owner)
 

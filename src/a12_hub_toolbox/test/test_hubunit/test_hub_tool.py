@@ -297,7 +297,7 @@ def test_get_ownerevent_obj_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanu
     casa_rope = sue_owner.make_l1_rope("case")
     clean_rope = sue_owner.make_l1_rope("clean")
     dirty_rope = sue_owner.make_l1_rope("dirty")
-    sue_owner.add_fact(casa_rope, dirty_rope, create_missing_concepts=True)
+    sue_owner.add_fact(casa_rope, dirty_rope, create_missing_plans=True)
     save_owner_file(t3_json_path, None, sue_owner)
 
     # WHEN
@@ -659,14 +659,14 @@ def test_create_cell_acct_mandate_ledger_json_CreatesFile_Scenario1(
     sue_owner.add_acctunit(yao_str, 7, 2)
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
-    sue_owner.add_concept(clean_fact.fstate)
-    sue_owner.add_concept(dirty_fact.fstate)
+    sue_owner.add_plan(clean_fact.fstate)
+    sue_owner.add_plan(dirty_fact.fstate)
     casa_rope = sue_owner.make_l1_rope("casa")
     mop_rope = sue_owner.make_rope(casa_rope, "mop")
-    sue_owner.add_concept(mop_rope, 1, task=True)
+    sue_owner.add_plan(mop_rope, 1, task=True)
     sue_owner.edit_reason(mop_rope, dirty_fact.fcontext, dirty_fact.fstate)
     sue_owner.add_fact(
-        dirty_fact.fcontext, dirty_fact.fstate, create_missing_concepts=True
+        dirty_fact.fcontext, dirty_fact.fstate, create_missing_plans=True
     )
     sky_blue_fact = sky_blue_factunit()
     sue_ownerevent_factunits = {clean_fact.fcontext: clean_fact}

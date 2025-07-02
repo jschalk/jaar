@@ -74,13 +74,13 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyBeliefUnit(
         # "br00006": "belief_label,offi_time,_offi_time_max\n",
         "br00020": "belief_label,owner_name,acct_name,group_title,group_cred_points,group_debt_points\n",
         "br00021": "belief_label,owner_name,acct_name,acct_cred_points,acct_debt_points\n",
-        "br00022": "belief_label,owner_name,concept_rope,awardee_title,give_force,take_force\n",
-        "br00023": "belief_label,owner_name,concept_rope,fcontext,fstate,fopen,fnigh\n",
-        "br00024": "belief_label,owner_name,concept_rope,labor_title\n",
-        "br00025": "belief_label,owner_name,concept_rope,healer_name\n",
-        "br00026": "belief_label,owner_name,concept_rope,rcontext,pstate,pnigh,popen,pdivisor\n",
-        "br00027": "belief_label,owner_name,concept_rope,rcontext,rconcept_active_requisite\n",
-        "br00028": "belief_label,owner_name,concept_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,task,problem_bool\n",
+        "br00022": "belief_label,owner_name,plan_rope,awardee_title,give_force,take_force\n",
+        "br00023": "belief_label,owner_name,plan_rope,fcontext,fstate,fopen,fnigh\n",
+        "br00024": "belief_label,owner_name,plan_rope,labor_title\n",
+        "br00025": "belief_label,owner_name,plan_rope,healer_name\n",
+        "br00026": "belief_label,owner_name,plan_rope,rcontext,pstate,pnigh,popen,pdivisor\n",
+        "br00027": "belief_label,owner_name,plan_rope,rcontext,rplan_active_requisite\n",
+        "br00028": "belief_label,owner_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,task,problem_bool\n",
         "br00029": "belief_label,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_iota,penny,respect_bit\n",
         "br00042": "otx_title,inx_title,otx_knot,inx_knot,unknown_str\n",
         "br00043": "otx_name,inx_name,otx_knot,inx_knot,unknown_str\n",
@@ -343,8 +343,8 @@ def test_add_owner_to_br00022_csv_ReturnsObj():
     yao_give_force = 55
     yao_take_force = 77
     casa_awardlink = awardlink_shop(yao_str, yao_give_force, yao_take_force)
-    bob_owner.add_concept(casa_rope)
-    bob_owner.edit_concept_attr(casa_rope, awardlink=casa_awardlink)
+    bob_owner.add_plan(casa_rope)
+    bob_owner.edit_plan_attr(casa_rope, awardlink=casa_awardlink)
     csv_header = x_ideas.get("br00022")
     print(f"{csv_header=}")
 
@@ -369,8 +369,8 @@ def test_add_owner_to_br00023_csv_ReturnsObj():
     clean_rope = bob_owner.make_rope(casa_rope, "clean")
     clean_fopen = 55
     clean_fnigh = 77
-    bob_owner.add_concept(casa_rope)
-    bob_owner.add_concept(clean_rope)
+    bob_owner.add_plan(casa_rope)
+    bob_owner.add_plan(clean_rope)
     bob_owner.add_fact(casa_rope, clean_rope, clean_fopen, clean_fnigh)
     csv_header = x_ideas.get("br00023")
     print(f"{csv_header=}")
@@ -391,10 +391,10 @@ def test_add_owner_to_br00024_csv_ReturnsObj():
     a23_str = "amy23"
     bob_owner = ownerunit_shop(bob_str, a23_str)
     casa_rope = bob_owner.make_l1_rope("casa")
-    bob_owner.add_concept(casa_rope)
-    casa_concept = bob_owner.get_concept_obj(casa_rope)
+    bob_owner.add_plan(casa_rope)
+    casa_plan = bob_owner.get_plan_obj(casa_rope)
     cleaners_str = "cleaners"
-    casa_concept.laborunit.set_laborlink(cleaners_str)
+    casa_plan.laborunit.set_laborlink(cleaners_str)
     csv_header = x_ideas.get("br00024")
     print(f"{csv_header=}")
 
@@ -415,10 +415,10 @@ def test_add_owner_to_br00025_csv_ReturnsObj():
     a23_str = "amy23"
     bob_owner = ownerunit_shop(bob_str, a23_str)
     casa_rope = bob_owner.make_l1_rope("casa")
-    bob_owner.add_concept(casa_rope)
-    casa_concept = bob_owner.get_concept_obj(casa_rope)
+    bob_owner.add_plan(casa_rope)
+    casa_plan = bob_owner.get_plan_obj(casa_rope)
     cleaners_str = "cleaners"
-    casa_concept.healerlink.set_healer_name(cleaners_str)
+    casa_plan.healerlink.set_healer_name(cleaners_str)
     csv_header = x_ideas.get("br00025")
     print(f"{csv_header=}")
 
@@ -444,10 +444,10 @@ def test_add_owner_to_br00026_csv_ReturnsObj():
     clean_popen = 22
     clean_pnigh = 55
     clean_pdivisor = 77
-    bob_owner.add_concept(mop_rope)
-    bob_owner.add_concept(casa_rope)
-    bob_owner.add_concept(clean_rope)
-    bob_owner.edit_concept_attr(
+    bob_owner.add_plan(mop_rope)
+    bob_owner.add_plan(casa_rope)
+    bob_owner.add_plan(clean_rope)
+    bob_owner.edit_plan_attr(
         mop_rope,
         reason_rcontext=casa_rope,
         reason_premise=clean_rope,
@@ -476,12 +476,12 @@ def test_add_owner_to_br00027_csv_ReturnsObj():
     bob_owner = ownerunit_shop(bob_str, a23_str)
     mop_rope = bob_owner.make_l1_rope("mop")
     casa_rope = bob_owner.make_l1_rope("casa")
-    bob_owner.add_concept(mop_rope)
-    bob_owner.add_concept(casa_rope)
-    bob_owner.edit_concept_attr(
+    bob_owner.add_plan(mop_rope)
+    bob_owner.add_plan(casa_rope)
+    bob_owner.edit_plan_attr(
         mop_rope,
         reason_rcontext=casa_rope,
-        reason_rconcept_active_requisite=True,
+        reason_rplan_active_requisite=True,
     )
     csv_header = x_ideas.get("br00027")
     print(f"{csv_header=}")
@@ -516,9 +516,9 @@ def test_add_owner_to_br00028_csv_ReturnsObj():
     casa_mass = 2
     casa_task = False
     casa_problem_bool = False
-    bob_owner.add_concept(casa_rope)
-    bob_owner.add_concept(mop_rope)
-    bob_owner.edit_concept_attr(
+    bob_owner.add_plan(casa_rope)
+    bob_owner.add_plan(mop_rope)
+    bob_owner.edit_plan_attr(
         mop_rope,
         begin=casa_begin,
         close=casa_close,
@@ -588,14 +588,14 @@ def test_add_ownerunit_to_stance_csv_strs_ReturnsObj():
     mop_rope = bob_owner.make_l1_rope("mop")
     casa_rope = bob_owner.make_l1_rope("casa")
     clean_rope = bob_owner.make_rope(casa_rope, "clean")
-    bob_owner.add_concept(mop_rope)
-    bob_owner.add_concept(casa_rope)
-    bob_owner.add_concept(clean_rope)
-    bob_owner.edit_concept_attr(
+    bob_owner.add_plan(mop_rope)
+    bob_owner.add_plan(casa_rope)
+    bob_owner.add_plan(clean_rope)
+    bob_owner.edit_plan_attr(
         mop_rope, reason_rcontext=casa_rope, reason_premise=clean_rope
     )
-    bob_owner.add_concept(casa_rope)
-    bob_owner.edit_concept_attr(casa_rope, awardlink=awardlink_shop(yao_str))
+    bob_owner.add_plan(casa_rope)
+    bob_owner.edit_plan_attr(casa_rope, awardlink=awardlink_shop(yao_str))
     bob_owner.add_fact(casa_rope, clean_rope)
 
     br00020_header = x_ideas.get("br00020")
@@ -843,8 +843,8 @@ def test_add_pack_to_br00022_csv_ReturnsObj():
     yao_give_force = 55
     yao_take_force = 77
     casa_awardlink = awardlink_shop(yao_str, yao_give_force, yao_take_force)
-    bob_owner.add_concept(casa_rope)
-    bob_owner.edit_concept_attr(casa_rope, awardlink=casa_awardlink)
+    bob_owner.add_plan(casa_rope)
+    bob_owner.edit_plan_attr(casa_rope, awardlink=casa_awardlink)
     bob_ownerdelta = ownerdelta_shop()
     bob_ownerdelta.add_all_owneratoms(bob_owner)
     sue_str = "Sue"
@@ -874,8 +874,8 @@ def test_add_pack_to_br00023_csv_ReturnsObj():
     clean_rope = bob_owner.make_rope(casa_rope, "clean")
     clean_fopen = 55
     clean_fnigh = 77
-    bob_owner.add_concept(casa_rope)
-    bob_owner.add_concept(clean_rope)
+    bob_owner.add_plan(casa_rope)
+    bob_owner.add_plan(clean_rope)
     bob_owner.add_fact(casa_rope, clean_rope, clean_fopen, clean_fnigh)
     bob_ownerdelta = ownerdelta_shop()
     bob_ownerdelta.add_all_owneratoms(bob_owner)
@@ -905,10 +905,10 @@ def test_add_pack_to_br00024_csv_ReturnsObj():
     a23_str = "amy23"
     bob_owner = ownerunit_shop(bob_str, a23_str)
     casa_rope = bob_owner.make_l1_rope("casa")
-    bob_owner.add_concept(casa_rope)
-    casa_concept = bob_owner.get_concept_obj(casa_rope)
+    bob_owner.add_plan(casa_rope)
+    casa_plan = bob_owner.get_plan_obj(casa_rope)
     cleaners_str = "cleaners"
-    casa_concept.laborunit.set_laborlink(cleaners_str)
+    casa_plan.laborunit.set_laborlink(cleaners_str)
     bob_ownerdelta = ownerdelta_shop()
     bob_ownerdelta.add_all_owneratoms(bob_owner)
     sue_str = "Sue"
@@ -939,10 +939,10 @@ def test_add_pack_to_br00025_csv_ReturnsObj():
     a23_str = "amy23"
     bob_owner = ownerunit_shop(bob_str, a23_str)
     casa_rope = bob_owner.make_l1_rope("casa")
-    bob_owner.add_concept(casa_rope)
-    casa_concept = bob_owner.get_concept_obj(casa_rope)
+    bob_owner.add_plan(casa_rope)
+    casa_plan = bob_owner.get_plan_obj(casa_rope)
     cleaners_str = "cleaners"
-    casa_concept.healerlink.set_healer_name(cleaners_str)
+    casa_plan.healerlink.set_healer_name(cleaners_str)
     bob_ownerdelta = ownerdelta_shop()
     bob_ownerdelta.add_all_owneratoms(bob_owner)
     sue_str = "Sue"
@@ -975,10 +975,10 @@ def test_add_pack_to_br00026_csv_ReturnsObj():
     clean_popen = 22
     clean_pnigh = 55
     clean_pdivisor = 77
-    bob_owner.add_concept(mop_rope)
-    bob_owner.add_concept(casa_rope)
-    bob_owner.add_concept(clean_rope)
-    bob_owner.edit_concept_attr(
+    bob_owner.add_plan(mop_rope)
+    bob_owner.add_plan(casa_rope)
+    bob_owner.add_plan(clean_rope)
+    bob_owner.edit_plan_attr(
         mop_rope,
         reason_rcontext=casa_rope,
         reason_premise=clean_rope,
@@ -1012,12 +1012,12 @@ def test_add_pack_to_br00027_csv_ReturnsObj():
     bob_owner = ownerunit_shop(bob_str, a23_str)
     mop_rope = bob_owner.make_l1_rope("mop")
     casa_rope = bob_owner.make_l1_rope("casa")
-    bob_owner.add_concept(mop_rope)
-    bob_owner.add_concept(casa_rope)
-    bob_owner.edit_concept_attr(
+    bob_owner.add_plan(mop_rope)
+    bob_owner.add_plan(casa_rope)
+    bob_owner.edit_plan_attr(
         mop_rope,
         reason_rcontext=casa_rope,
-        reason_rconcept_active_requisite=True,
+        reason_rplan_active_requisite=True,
     )
     bob_ownerdelta = ownerdelta_shop()
     bob_ownerdelta.add_all_owneratoms(bob_owner)
@@ -1057,9 +1057,9 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
     casa_mass = 2
     casa_task = False
     casa_problem_bool = False
-    bob_owner.add_concept(casa_rope)
-    bob_owner.add_concept(mop_rope)
-    bob_owner.edit_concept_attr(
+    bob_owner.add_plan(casa_rope)
+    bob_owner.add_plan(mop_rope)
+    bob_owner.edit_plan_attr(
         mop_rope,
         begin=casa_begin,
         close=casa_close,
@@ -1143,14 +1143,14 @@ def test_add_packunit_to_stance_csv_strs_ReturnsObj():
     mop_rope = bob_owner.make_l1_rope("mop")
     casa_rope = bob_owner.make_l1_rope("casa")
     clean_rope = bob_owner.make_rope(casa_rope, "clean")
-    bob_owner.add_concept(mop_rope)
-    bob_owner.add_concept(casa_rope)
-    bob_owner.add_concept(clean_rope)
-    bob_owner.edit_concept_attr(
+    bob_owner.add_plan(mop_rope)
+    bob_owner.add_plan(casa_rope)
+    bob_owner.add_plan(clean_rope)
+    bob_owner.edit_plan_attr(
         mop_rope, reason_rcontext=casa_rope, reason_premise=clean_rope
     )
-    bob_owner.add_concept(casa_rope)
-    bob_owner.edit_concept_attr(casa_rope, awardlink=awardlink_shop(yao_str))
+    bob_owner.add_plan(casa_rope)
+    bob_owner.edit_plan_attr(casa_rope, awardlink=awardlink_shop(yao_str))
     bob_owner.add_fact(casa_rope, clean_rope)
     bob_owner.credor_respect = 444
     bob_owner.debtor_respect = 556

@@ -33,7 +33,7 @@ from src.a02_finance_logic.finance_config import (
 from src.a06_owner_logic.owner import OwnerUnit, ownerunit_shop
 from src.a07_timeline_logic.timeline import (
     TimeLineUnit,
-    add_newtimeline_conceptunit,
+    add_newtimeline_planunit,
     timelineunit_shop,
 )
 from src.a11_bud_logic.bud import (
@@ -404,7 +404,7 @@ class BeliefUnit:
     def add_timeline_to_gut(self, owner_name: OwnerName) -> None:
         """Adds the timeline to the gut file for the given owner."""
         x_gut = open_gut_file(self.belief_mstr_dir, self.belief_label, owner_name)
-        add_newtimeline_conceptunit(x_gut, self.get_timeline_config())
+        add_newtimeline_planunit(x_gut, self.get_timeline_config())
         save_gut_file(self.belief_mstr_dir, x_gut)
 
     def add_timeline_to_guts(self) -> None:

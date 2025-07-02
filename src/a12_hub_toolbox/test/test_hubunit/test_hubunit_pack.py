@@ -17,7 +17,7 @@ from src.a12_hub_toolbox.test._util.a12_env import (
     get_module_temp_dir as env_dir,
 )
 from src.a12_hub_toolbox.test._util.example_hub_atoms import (
-    get_atom_example_conceptunit_knee,
+    get_atom_example_planunit_knee,
     get_sue_packunit,
     sue_1owneratoms_packunit,
     sue_2owneratoms_packunit,
@@ -371,7 +371,7 @@ def test_HubUnit_del_pack_file_DeletespackjsonAndNotOwnerAtomjsons(
         _atoms_dir=sue_hubunit._atoms_dir,
         _packs_dir=sue_hubunit._packs_dir,
     )
-    sue_packunit._ownerdelta.set_owneratom(get_atom_example_conceptunit_knee())
+    sue_packunit._ownerdelta.set_owneratom(get_atom_example_planunit_knee())
     zero_int = 0
     assert sue_hubunit.pack_file_exists(six_int) is False
     assert sue_hubunit.atom_file_exists(zero_int) is False
@@ -495,14 +495,14 @@ def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_1atom(
     sports_rope = gut_owner.make_l1_rope(sports_str)
     knee_str = "knee"
     knee_rope = gut_owner.make_rope(sports_rope, knee_str)
-    assert gut_owner.concept_exists(sports_rope) is False
+    assert gut_owner.plan_exists(sports_rope) is False
 
     # WHEN
     new_owner = sue_hubunit._merge_any_packs(gut_owner)
 
     # THEN
     assert new_owner != gut_owner
-    assert new_owner.concept_exists(sports_rope)
+    assert new_owner.plan_exists(sports_rope)
 
 
 def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_2atoms(
@@ -519,13 +519,13 @@ def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_2atoms(
     sports_rope = gut_owner.make_l1_rope(sports_str)
     knee_str = "knee"
     knee_rope = gut_owner.make_rope(sports_rope, knee_str)
-    assert gut_owner.concept_exists(sports_rope) is False
-    assert gut_owner.concept_exists(knee_rope) is False
+    assert gut_owner.plan_exists(sports_rope) is False
+    assert gut_owner.plan_exists(knee_rope) is False
 
     # WHEN
     new_owner = sue_hubunit._merge_any_packs(gut_owner)
 
     # THEN
     assert new_owner != gut_owner
-    assert new_owner.concept_exists(sports_rope)
-    assert new_owner.concept_exists(knee_rope)
+    assert new_owner.plan_exists(sports_rope)
+    assert new_owner.plan_exists(knee_rope)

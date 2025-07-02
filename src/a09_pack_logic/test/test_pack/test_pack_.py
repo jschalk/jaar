@@ -1,7 +1,7 @@
 from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import x_is_json
 from src.a03_group_logic.acct import acctunit_shop
-from src.a05_concept_logic.concept import get_default_belief_label
+from src.a05_plan_logic.plan import get_default_belief_label
 from src.a06_owner_logic.owner import ownerunit_shop
 from src.a06_owner_logic.test._util.a06_str import (
     acct_cred_points_str,
@@ -29,9 +29,7 @@ from src.a09_pack_logic.test._util.a09_str import (
     face_name_str,
     owner_name_str,
 )
-from src.a09_pack_logic.test._util.example_atoms import (
-    get_atom_example_conceptunit_sports,
-)
+from src.a09_pack_logic.test._util.example_atoms import get_atom_example_planunit_sports
 from src.a09_pack_logic.test._util.example_deltas import get_ownerdelta_sue_example
 
 
@@ -171,7 +169,7 @@ def test_PackUnit_set_ownerdelta_SetsAttribute():
 
     # WHEN
     x_ownerdelta = ownerdelta_shop()
-    x_ownerdelta.set_owneratom(get_atom_example_conceptunit_sports())
+    x_ownerdelta.set_owneratom(get_atom_example_planunit_sports())
     bob_packunit.set_ownerdelta(x_ownerdelta)
 
     # THEN
@@ -200,7 +198,7 @@ def test_PackUnit_owneratom_exists_ReturnsObj():
     bob_packunit.set_ownerdelta(x_ownerdelta)
 
     # WHEN
-    sports_owneratom = get_atom_example_conceptunit_sports()
+    sports_owneratom = get_atom_example_planunit_sports()
 
     # THEN
     assert bob_packunit.owneratom_exists(sports_owneratom) is False
@@ -217,7 +215,7 @@ def test_PackUnit_del_ownerdelta_SetsAttribute():
     # ESTABLISH
     bob_str = "Bob"
     x_ownerdelta = ownerdelta_shop()
-    x_ownerdelta.set_owneratom(get_atom_example_conceptunit_sports())
+    x_ownerdelta.set_owneratom(get_atom_example_planunit_sports())
     bob_packunit = packunit_shop(owner_name=bob_str, _ownerdelta=x_ownerdelta)
     assert bob_packunit._ownerdelta != ownerdelta_shop()
     assert bob_packunit._ownerdelta == x_ownerdelta

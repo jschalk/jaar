@@ -439,7 +439,7 @@ def test_LaborHeir_set_laborlink_LaborUnit_NotEqual_ParentLaborHeir_NonEmpty():
 #         x_laborheir.set_laborlinks(parent_laborheir, laborunit_swim3, x_groupunits)
 #     assert (
 #         str(excinfo.value)
-#         == f"parent_laborheir does not contain all accts of the concept's laborunit\n{set(all_parent_laborheir_accts)=}\n\n{set(all_laborunit_accts)=}"
+#         == f"parent_laborheir does not contain all accts of the plan's laborunit\n{set(all_parent_laborheir_accts)=}\n\n{set(all_laborunit_accts)=}"
 #     )
 
 

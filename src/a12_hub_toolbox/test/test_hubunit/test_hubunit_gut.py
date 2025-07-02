@@ -219,18 +219,18 @@ def test_HubUnit_append_packs_to_gut_file_AddsPacksTogutFile(
     sue_hubunit.initialize_pack_gut_files()
     sue_hubunit.save_pack_file(sue_2owneratoms_packunit())
     gut_owner = open_gut_file(env_dir(), "amy23", sue_str)
-    # gut_owner.add_concept(gut_owner.make_l1_rope("sports"))
+    # gut_owner.add_plan(gut_owner.make_l1_rope("sports"))
     sports_str = "sports"
     sports_rope = gut_owner.make_l1_rope(sports_str)
     knee_str = "knee"
     knee_rope = gut_owner.make_rope(sports_rope, knee_str)
-    assert gut_owner.concept_exists(sports_rope) is False
-    assert gut_owner.concept_exists(knee_rope) is False
+    assert gut_owner.plan_exists(sports_rope) is False
+    assert gut_owner.plan_exists(knee_rope) is False
 
     # WHEN
     new_owner = sue_hubunit.append_packs_to_gut_file()
 
     # THEN
     assert new_owner != gut_owner
-    assert new_owner.concept_exists(sports_rope)
-    assert new_owner.concept_exists(knee_rope)
+    assert new_owner.plan_exists(sports_rope)
+    assert new_owner.plan_exists(knee_rope)

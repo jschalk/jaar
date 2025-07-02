@@ -32,13 +32,13 @@
       "acct_debt_points": {}
     }
   },
-  "owner_concept_awardlink": {
+  "owner_plan_awardlink": {
     "allowed_crud": "delete_insert_update",
     "build_order": 11,
     "idea_category": "owner",
     "jkeys": {
       "awardee_title": {},
-      "concept_rope": {},
+      "plan_rope": {},
       "event_int": {},
       "face_name": {},
       "belief_label": {},
@@ -49,12 +49,12 @@
       "take_force": {}
     }
   },
-  "owner_concept_factunit": {
+  "owner_plan_factunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 12,
     "idea_category": "owner",
     "jkeys": {
-      "concept_rope": {},
+      "plan_rope": {},
       "event_int": {},
       "face_name": {},
       "fcontext": {},
@@ -67,12 +67,12 @@
       "fstate": {}
     }
   },
-  "owner_concept_healerlink": {
+  "owner_plan_healerlink": {
     "allowed_crud": "delete_insert",
     "build_order": 15,
     "idea_category": "owner",
     "jkeys": {
-      "concept_rope": {},
+      "plan_rope": {},
       "event_int": {},
       "face_name": {},
       "belief_label": {},
@@ -81,12 +81,12 @@
     },
     "jvalues": {}
   },
-  "owner_concept_laborlink": {
+  "owner_plan_laborlink": {
     "allowed_crud": "delete_insert",
     "build_order": 14,
     "idea_category": "owner",
     "jkeys": {
-      "concept_rope": {},
+      "plan_rope": {},
       "event_int": {},
       "face_name": {},
       "belief_label": {},
@@ -95,12 +95,12 @@
     },
     "jvalues": {}
   },
-  "owner_concept_reason_premiseunit": {
+  "owner_plan_reason_premiseunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 16,
     "idea_category": "owner",
     "jkeys": {
-      "concept_rope": {},
+      "plan_rope": {},
       "event_int": {},
       "face_name": {},
       "belief_label": {},
@@ -114,12 +114,12 @@
       "popen": {}
     }
   },
-  "owner_concept_reasonunit": {
+  "owner_plan_reasonunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 17,
     "idea_category": "owner",
     "jkeys": {
-      "concept_rope": {},
+      "plan_rope": {},
       "event_int": {},
       "face_name": {},
       "belief_label": {},
@@ -127,15 +127,15 @@
       "rcontext": {}
     },
     "jvalues": {
-      "rconcept_active_requisite": {}
+      "rplan_active_requisite": {}
     }
   },
-  "owner_conceptunit": {
+  "owner_planunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 18,
     "idea_category": "owner",
     "jkeys": {
-      "concept_rope": {},
+      "plan_rope": {},
       "event_int": {},
       "face_name": {},
       "belief_label": {},

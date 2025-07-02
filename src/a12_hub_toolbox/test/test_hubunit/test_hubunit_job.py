@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path, delete_dir
-from src.a05_concept_logic.concept import get_default_belief_label as root_label
+from src.a05_plan_logic.plan import get_default_belief_label as root_label
 from src.a06_owner_logic.owner import ownerunit_shop
 from src.a12_hub_toolbox.hub_path import create_job_path
 from src.a12_hub_toolbox.hub_tool import job_file_exists, open_job_file, save_job_file

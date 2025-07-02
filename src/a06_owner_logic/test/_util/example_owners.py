@@ -1,8 +1,8 @@
 from src.a00_data_toolbox.file_toolbox import open_file
 from src.a01_term_logic.rope import RopeTerm
-from src.a04_reason_logic.reason_concept import factunit_shop, reasonunit_shop
 from src.a04_reason_logic.reason_labor import laborunit_shop
-from src.a05_concept_logic.concept import conceptunit_shop
+from src.a04_reason_logic.reason_plan import factunit_shop, reasonunit_shop
+from src.a05_plan_logic.plan import planunit_shop
 from src.a06_owner_logic.owner import (
     OwnerUnit,
     get_from_json as ownerunit_get_from_json,
@@ -59,14 +59,14 @@ def get_ownerunit_with_4_levels() -> OwnerUnit:
     a23_str = "amy23"
     sue_owner = ownerunit_shop("Sue", a23_str)
     casa_str = "casa"
-    sue_owner.set_l1_concept(conceptunit_shop(casa_str, mass=30, task=True))
+    sue_owner.set_l1_plan(planunit_shop(casa_str, mass=30, task=True))
     cat_str = "cat have dinner"
-    sue_owner.set_l1_concept(conceptunit_shop(cat_str, mass=30, task=True))
+    sue_owner.set_l1_plan(planunit_shop(cat_str, mass=30, task=True))
 
     wk_str = "wkdays"
     wk_rope = sue_owner.make_l1_rope(wk_str)
-    concept_kid_wkdays = conceptunit_shop(wk_str, mass=40)
-    sue_owner.set_l1_concept(concept_kid_wkdays)
+    plan_kid_wkdays = planunit_shop(wk_str, mass=40)
+    sue_owner.set_l1_plan(plan_kid_wkdays)
     sun_str = "Sunday"
     mon_str = "Monday"
     tue_str = "Tuesday"
@@ -74,34 +74,34 @@ def get_ownerunit_with_4_levels() -> OwnerUnit:
     thu_str = "Thursday"
     fri_str = "Friday"
     sat_str = "Saturday"
-    sue_owner.set_concept(conceptunit_shop(sun_str, mass=20), wk_rope)
-    sue_owner.set_concept(conceptunit_shop(mon_str, mass=20), wk_rope)
-    sue_owner.set_concept(conceptunit_shop(tue_str, mass=20), wk_rope)
-    sue_owner.set_concept(conceptunit_shop(wed_str, mass=20), wk_rope)
-    sue_owner.set_concept(conceptunit_shop(thu_str, mass=30), wk_rope)
-    sue_owner.set_concept(conceptunit_shop(fri_str, mass=40), wk_rope)
-    sue_owner.set_concept(conceptunit_shop(sat_str, mass=50), wk_rope)
+    sue_owner.set_plan(planunit_shop(sun_str, mass=20), wk_rope)
+    sue_owner.set_plan(planunit_shop(mon_str, mass=20), wk_rope)
+    sue_owner.set_plan(planunit_shop(tue_str, mass=20), wk_rope)
+    sue_owner.set_plan(planunit_shop(wed_str, mass=20), wk_rope)
+    sue_owner.set_plan(planunit_shop(thu_str, mass=30), wk_rope)
+    sue_owner.set_plan(planunit_shop(fri_str, mass=40), wk_rope)
+    sue_owner.set_plan(planunit_shop(sat_str, mass=50), wk_rope)
 
     nation_str = "nation"
     nation_rope = sue_owner.make_l1_rope(nation_str)
-    concept_kid_nation = conceptunit_shop(nation_str, mass=30)
-    sue_owner.set_l1_concept(concept_kid_nation)
+    plan_kid_nation = planunit_shop(nation_str, mass=30)
+    sue_owner.set_l1_plan(plan_kid_nation)
     usa_str = "USA"
     usa_rope = sue_owner.make_rope(nation_rope, usa_str)
     france_str = "France"
     brazil_str = "Brazil"
-    concept_grandkid_usa = conceptunit_shop(usa_str, mass=50)
-    concept_grandkid_france = conceptunit_shop(france_str, mass=50)
-    concept_grandkid_brazil = conceptunit_shop(brazil_str, mass=50)
-    sue_owner.set_concept(concept_grandkid_france, nation_rope)
-    sue_owner.set_concept(concept_grandkid_brazil, nation_rope)
-    sue_owner.set_concept(concept_grandkid_usa, nation_rope)
+    plan_grandkid_usa = planunit_shop(usa_str, mass=50)
+    plan_grandkid_france = planunit_shop(france_str, mass=50)
+    plan_grandkid_brazil = planunit_shop(brazil_str, mass=50)
+    sue_owner.set_plan(plan_grandkid_france, nation_rope)
+    sue_owner.set_plan(plan_grandkid_brazil, nation_rope)
+    sue_owner.set_plan(plan_grandkid_usa, nation_rope)
     texas_str = "Texas"
     oregon_str = "Oregon"
-    concept_grandgrandkid_usa_texas = conceptunit_shop(texas_str, mass=50)
-    concept_grandgrandkid_usa_oregon = conceptunit_shop(oregon_str, mass=50)
-    sue_owner.set_concept(concept_grandgrandkid_usa_texas, usa_rope)
-    sue_owner.set_concept(concept_grandgrandkid_usa_oregon, usa_rope)
+    plan_grandgrandkid_usa_texas = planunit_shop(texas_str, mass=50)
+    plan_grandgrandkid_usa_oregon = planunit_shop(oregon_str, mass=50)
+    sue_owner.set_plan(plan_grandgrandkid_usa_texas, usa_rope)
+    sue_owner.set_plan(plan_grandgrandkid_usa_oregon, usa_rope)
     return sue_owner
 
 
@@ -123,8 +123,8 @@ def get_ownerunit_with_4_levels_and_2reasons() -> OwnerUnit:
 
     casa_str = "casa"
     casa_rope = sue_owner.make_l1_rope(casa_str)
-    sue_owner.edit_concept_attr(casa_rope, reason=wk_reason)
-    sue_owner.edit_concept_attr(casa_rope, reason=nation_reason)
+    sue_owner.edit_plan_attr(casa_rope, reason=wk_reason)
+    sue_owner.edit_plan_attr(casa_rope, reason=nation_reason)
     return sue_owner
 
 
@@ -148,11 +148,11 @@ def get_ownerunit_with7amCleanTableReason() -> OwnerUnit:
 
     time_str = "timetech"
     time_rope = sue_owner.make_l1_rope(time_str)
-    time_concept = conceptunit_shop(time_str)
+    time_plan = planunit_shop(time_str)
 
     day24hr_str = "24hr day"
     day24hr_rope = sue_owner.make_rope(time_rope, day24hr_str)
-    day24hr_concept = conceptunit_shop(day24hr_str, begin=0.0, close=24.0)
+    day24hr_plan = planunit_shop(day24hr_str, begin=0.0, close=24.0)
 
     am_str = "am"
     am_rope = sue_owner.make_rope(day24hr_rope, am_str)
@@ -160,19 +160,19 @@ def get_ownerunit_with7amCleanTableReason() -> OwnerUnit:
     n1_str = "1"
     n2_str = "2"
     n3_str = "3"
-    am_concept = conceptunit_shop(am_str, gogo_want=0, stop_want=12)
-    pm_concept = conceptunit_shop(pm_str, gogo_want=12, stop_want=24)
-    n1_concept = conceptunit_shop(n1_str, gogo_want=1, stop_want=2)
-    n2_concept = conceptunit_shop(n2_str, gogo_want=2, stop_want=3)
-    n3_concept = conceptunit_shop(n3_str, gogo_want=3, stop_want=4)
+    am_plan = planunit_shop(am_str, gogo_want=0, stop_want=12)
+    pm_plan = planunit_shop(pm_str, gogo_want=12, stop_want=24)
+    n1_plan = planunit_shop(n1_str, gogo_want=1, stop_want=2)
+    n2_plan = planunit_shop(n2_str, gogo_want=2, stop_want=3)
+    n3_plan = planunit_shop(n3_str, gogo_want=3, stop_want=4)
 
-    sue_owner.set_l1_concept(time_concept)
-    sue_owner.set_concept(day24hr_concept, time_rope)
-    sue_owner.set_concept(am_concept, day24hr_rope)
-    sue_owner.set_concept(pm_concept, day24hr_rope)
-    sue_owner.set_concept(n1_concept, am_rope)  # concept_am
-    sue_owner.set_concept(n2_concept, am_rope)  # concept_am
-    sue_owner.set_concept(n3_concept, am_rope)  # concept_am
+    sue_owner.set_l1_plan(time_plan)
+    sue_owner.set_plan(day24hr_plan, time_rope)
+    sue_owner.set_plan(am_plan, day24hr_rope)
+    sue_owner.set_plan(pm_plan, day24hr_rope)
+    sue_owner.set_plan(n1_plan, am_rope)  # plan_am
+    sue_owner.set_plan(n2_plan, am_rope)  # plan_am
+    sue_owner.set_plan(n3_plan, am_rope)  # plan_am
 
     house_str = "housemanagement"
     house_rope = sue_owner.make_l1_rope(house_str)
@@ -183,17 +183,17 @@ def get_ownerunit_with7amCleanTableReason() -> OwnerUnit:
     soap_rope = sue_owner.make_rope(clean_rope, soap_str)
     grab_str = "grab soap"
     grab_rope = sue_owner.make_rope(soap_rope, grab_str)
-    house_concept = conceptunit_shop(house_str)
-    clean_concept = conceptunit_shop(clean_str, task=True)
-    dish_concept = conceptunit_shop(dish_str, task=True)
-    soap_concept = conceptunit_shop(soap_str, task=True)
-    grab_concept = conceptunit_shop(grab_str, task=True)
+    house_plan = planunit_shop(house_str)
+    clean_plan = planunit_shop(clean_str, task=True)
+    dish_plan = planunit_shop(dish_str, task=True)
+    soap_plan = planunit_shop(soap_str, task=True)
+    grab_plan = planunit_shop(grab_str, task=True)
 
-    sue_owner.set_l1_concept(house_concept)
-    sue_owner.set_concept(clean_concept, house_rope)
-    sue_owner.set_concept(dish_concept, clean_rope)
-    sue_owner.set_concept(soap_concept, clean_rope)
-    sue_owner.set_concept(grab_concept, soap_rope)
+    sue_owner.set_l1_plan(house_plan)
+    sue_owner.set_plan(clean_plan, house_rope)
+    sue_owner.set_plan(dish_plan, clean_rope)
+    sue_owner.set_plan(soap_plan, clean_rope)
+    sue_owner.set_plan(grab_plan, soap_rope)
 
     clean_table_7am_rcontext = day24hr_rope
     clean_table_7am_premise_rope = day24hr_rope
@@ -205,27 +205,27 @@ def get_ownerunit_with7amCleanTableReason() -> OwnerUnit:
         popen=clean_table_7am_popen,
         pnigh=clean_table_7am_pnigh,
     )
-    sue_owner.edit_concept_attr(clean_rope, reason=clean_table_7am_reason)
+    sue_owner.edit_plan_attr(clean_rope, reason=clean_table_7am_reason)
     casa_str = "casa"
     casa_rope = sue_owner.make_l1_rope(casa_str)
-    sue_owner.edit_concept_attr(casa_rope, reason=clean_table_7am_reason)
+    sue_owner.edit_plan_attr(casa_rope, reason=clean_table_7am_reason)
     return sue_owner
 
 
 def get_ownerunit_1Chore_1CE0MinutesReason_1Fact() -> OwnerUnit:
     yao_owner = ownerunit_shop("Yao")
     hr_min_str = "hr"
-    hr_min_concept = conceptunit_shop(hr_min_str)
+    hr_min_plan = planunit_shop(hr_min_str)
     hr_rope = yao_owner.make_l1_rope(hr_min_str)
     hr_reasonunit = reasonunit_shop(hr_rope)
     hr_reasonunit.set_premise(hr_rope, popen=80, pnigh=90)
-    yao_owner.set_l1_concept(hr_min_concept)
+    yao_owner.set_l1_plan(hr_min_plan)
     yao_owner.add_fact(hr_rope, hr_rope, 85, 95)
     mail_str = "obtain mail"
     mail_rope = yao_owner.make_l1_rope(mail_str)
-    mail_concept = conceptunit_shop(mail_str, task=True)
-    yao_owner.set_l1_concept(mail_concept)
-    yao_owner.edit_concept_attr(mail_rope, reason=hr_reasonunit)
+    mail_plan = planunit_shop(mail_str, task=True)
+    yao_owner.set_l1_plan(mail_plan)
+    yao_owner.edit_plan_attr(mail_rope, reason=hr_reasonunit)
     return yao_owner
 
 
@@ -234,12 +234,12 @@ def get_ownerunit_x1_3levels_1reason_1facts() -> OwnerUnit:
     zia_owner = ownerunit_shop("Zia", belief_label=tiger_str)
     shave_str = "shave"
     shave_rope = zia_owner.make_l1_rope(shave_str)
-    concept_kid_shave = conceptunit_shop(shave_str, mass=30, task=True)
-    zia_owner.set_l1_concept(concept_kid_shave)
+    plan_kid_shave = planunit_shop(shave_str, mass=30, task=True)
+    zia_owner.set_l1_plan(plan_kid_shave)
     wk_str = "wkdays"
     wk_rope = zia_owner.make_l1_rope(wk_str)
-    wk_concept = conceptunit_shop(wk_str, mass=40)
-    zia_owner.set_l1_concept(wk_concept)
+    wk_plan = planunit_shop(wk_str, mass=40)
+    zia_owner.set_l1_plan(wk_plan)
 
     sun_str = "Sunday"
     sun_rope = zia_owner.make_rope(wk_rope, sun_str)
@@ -247,29 +247,29 @@ def get_ownerunit_x1_3levels_1reason_1facts() -> OwnerUnit:
     church_rope = zia_owner.make_rope(sun_rope, church_str)
     mon_str = "Monday"
     mon_rope = zia_owner.make_rope(wk_rope, mon_str)
-    concept_grandkidU = conceptunit_shop(sun_str, mass=20)
-    concept_grandkidM = conceptunit_shop(mon_str, mass=20)
-    zia_owner.set_concept(concept_grandkidU, wk_rope)
-    zia_owner.set_concept(concept_grandkidM, wk_rope)
+    plan_grandkidU = planunit_shop(sun_str, mass=20)
+    plan_grandkidM = planunit_shop(mon_str, mass=20)
+    zia_owner.set_plan(plan_grandkidU, wk_rope)
+    zia_owner.set_plan(plan_grandkidM, wk_rope)
 
     shave_reason = reasonunit_shop(wk_rope)
     shave_reason.set_premise(mon_rope)
 
-    zia_owner.edit_concept_attr(shave_rope, reason=shave_reason)
+    zia_owner.edit_plan_attr(shave_rope, reason=shave_reason)
     zia_owner.add_fact(fcontext=wk_rope, fstate=sun_rope)
     x_factunit = factunit_shop(fcontext=wk_rope, fstate=church_rope)
-    zia_owner.edit_concept_attr(shave_rope, factunit=x_factunit)
+    zia_owner.edit_plan_attr(shave_rope, factunit=x_factunit)
     return zia_owner
 
 
 def get_ownerunit_rcontext_time_example() -> OwnerUnit:
     sue_owner = ownerunit_shop("Sue")
-    sue_owner.set_l1_concept(conceptunit_shop("casa"))
+    sue_owner.set_l1_plan(planunit_shop("casa"))
     return sue_owner
 
 
 def get_ownerunit_irrational_example() -> OwnerUnit:
-    # this owner has no definitive agenda because 2 task concepts are in contradiction
+    # this owner has no definitive agenda because 2 task plans are in contradiction
     # "egg first" is true when "chicken first" is false
     # "chicken first" is true when "egg first" is true
     # Step 0: if chicken._active is True, egg._active is set to False
@@ -286,26 +286,26 @@ def get_ownerunit_irrational_example() -> OwnerUnit:
 
     egg_str = "egg first"
     egg_rope = hatter_owner.make_l1_rope(egg_str)
-    hatter_owner.set_l1_concept(conceptunit_shop(egg_str))
+    hatter_owner.set_l1_plan(planunit_shop(egg_str))
 
     chicken_str = "chicken first"
     chicken_rope = hatter_owner.make_l1_rope(chicken_str)
-    hatter_owner.set_l1_concept(conceptunit_shop(chicken_str))
+    hatter_owner.set_l1_plan(planunit_shop(chicken_str))
 
     # set egg task is True when chicken first is False
-    hatter_owner.edit_concept_attr(
+    hatter_owner.edit_plan_attr(
         egg_rope,
         task=True,
         reason_rcontext=chicken_rope,
-        reason_rconcept_active_requisite=True,
+        reason_rplan_active_requisite=True,
     )
 
     # set chick task is True when egg first is False
-    hatter_owner.edit_concept_attr(
+    hatter_owner.edit_plan_attr(
         chicken_rope,
         task=True,
         reason_rcontext=egg_rope,
-        reason_rconcept_active_requisite=False,
+        reason_rplan_active_requisite=False,
     )
 
     return hatter_owner
@@ -317,24 +317,24 @@ def get_mop_with_reason_ownerunit_example1():
     casa_rope = sue_owner.make_l1_rope(casa_str)
     floor_str = "mop floor"
     floor_rope = sue_owner.make_rope(casa_rope, floor_str)
-    floor_concept = conceptunit_shop(floor_str, task=True)
-    sue_owner.set_concept(floor_concept, casa_rope)
-    sue_owner.set_l1_concept(conceptunit_shop("unimportant"))
+    floor_plan = planunit_shop(floor_str, task=True)
+    sue_owner.set_plan(floor_plan, casa_rope)
+    sue_owner.set_l1_plan(planunit_shop("unimportant"))
 
     status_str = "cleaniness status"
     status_rope = sue_owner.make_rope(casa_rope, status_str)
-    sue_owner.set_concept(conceptunit_shop(status_str), casa_rope)
+    sue_owner.set_plan(planunit_shop(status_str), casa_rope)
 
     clean_str = "clean"
     clean_rope = sue_owner.make_rope(status_rope, clean_str)
-    sue_owner.set_concept(conceptunit_shop(clean_str), status_rope)
-    sue_owner.set_concept(conceptunit_shop("very_much"), clean_rope)
-    sue_owner.set_concept(conceptunit_shop("moderately"), clean_rope)
-    sue_owner.set_concept(conceptunit_shop("dirty"), status_rope)
+    sue_owner.set_plan(planunit_shop(clean_str), status_rope)
+    sue_owner.set_plan(planunit_shop("very_much"), clean_rope)
+    sue_owner.set_plan(planunit_shop("moderately"), clean_rope)
+    sue_owner.set_plan(planunit_shop("dirty"), status_rope)
 
     floor_reason = reasonunit_shop(status_rope)
     floor_reason.set_premise(premise=status_rope)
-    sue_owner.edit_concept_attr(floor_rope, reason=floor_reason)
+    sue_owner.edit_plan_attr(floor_rope, reason=floor_reason)
     return sue_owner
 
 
@@ -358,26 +358,26 @@ def get_ownerunit_laundry_example1() -> OwnerUnit:
     b_full_rope = amos_owner.make_rope(basket_rope, b_full_str)
     b_smel_rope = amos_owner.make_rope(basket_rope, b_smel_str)
     laundry_chore_rope = amos_owner.make_rope(casa_rope, do_laundry_str)
-    amos_owner.set_l1_concept(conceptunit_shop(casa_str))
-    amos_owner.set_concept(conceptunit_shop(basket_str), casa_rope)
-    amos_owner.set_concept(conceptunit_shop(b_full_str), basket_rope)
-    amos_owner.set_concept(conceptunit_shop(b_smel_str), basket_rope)
-    amos_owner.set_concept(conceptunit_shop(b_bare_str), basket_rope)
-    amos_owner.set_concept(conceptunit_shop(b_fine_str), basket_rope)
-    amos_owner.set_concept(conceptunit_shop(b_half_str), basket_rope)
-    amos_owner.set_concept(conceptunit_shop(do_laundry_str, task=True), casa_rope)
+    amos_owner.set_l1_plan(planunit_shop(casa_str))
+    amos_owner.set_plan(planunit_shop(basket_str), casa_rope)
+    amos_owner.set_plan(planunit_shop(b_full_str), basket_rope)
+    amos_owner.set_plan(planunit_shop(b_smel_str), basket_rope)
+    amos_owner.set_plan(planunit_shop(b_bare_str), basket_rope)
+    amos_owner.set_plan(planunit_shop(b_fine_str), basket_rope)
+    amos_owner.set_plan(planunit_shop(b_half_str), basket_rope)
+    amos_owner.set_plan(planunit_shop(do_laundry_str, task=True), casa_rope)
 
     # laundry requirement
-    amos_owner.edit_concept_attr(
+    amos_owner.edit_plan_attr(
         laundry_chore_rope, reason_rcontext=basket_rope, reason_premise=b_full_rope
     )
     # laundry requirement
-    amos_owner.edit_concept_attr(
+    amos_owner.edit_plan_attr(
         laundry_chore_rope, reason_rcontext=basket_rope, reason_premise=b_smel_rope
     )
     cali_laborunit = laborunit_shop()
     cali_laborunit.set_laborlink(cali_str)
-    amos_owner.edit_concept_attr(laundry_chore_rope, laborunit=cali_laborunit)
+    amos_owner.edit_plan_attr(laundry_chore_rope, laborunit=cali_laborunit)
     amos_owner.add_fact(fcontext=basket_rope, fstate=b_full_rope)
 
     return amos_owner
@@ -385,28 +385,26 @@ def get_ownerunit_laundry_example1() -> OwnerUnit:
 
 # class YR:
 def from_list_get_active(
-    rope: RopeTerm, concept_dict: dict, asse_bool: bool = None
+    rope: RopeTerm, plan_dict: dict, asse_bool: bool = None
 ) -> bool:
     active = None
-    temp_concept = None
+    temp_plan = None
 
     active_true_count = 0
     active_false_count = 0
-    for concept in concept_dict.values():
-        if concept.get_concept_rope() == rope:
-            temp_concept = concept
-            print(
-                f"s for ConceptUnit {temp_concept.get_concept_rope()}  {temp_concept._active=}"
-            )
+    for plan in plan_dict.values():
+        if plan.get_plan_rope() == rope:
+            temp_plan = plan
+            print(f"s for PlanUnit {temp_plan.get_plan_rope()}  {temp_plan._active=}")
 
-        if concept._active:
+        if plan._active:
             active_true_count += 1
-        elif concept._active is False:
+        elif plan._active is False:
             active_false_count += 1
 
-    active = temp_concept._active
+    active = temp_plan._active
     print(
-        f"Set active: {concept.concept_label=} {active} {active_true_count=} {active_false_count=}"
+        f"Set active: {plan.plan_label=} {active} {active_true_count=} {active_false_count=}"
     )
 
     return active

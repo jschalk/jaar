@@ -10,7 +10,6 @@ from src.a06_owner_logic.test._util.a06_str import (
     awardee_title_str,
     begin_str,
     close_str,
-    concept_rope_str,
     credor_respect_str,
     debtor_respect_str,
     denom_str,
@@ -31,21 +30,22 @@ from src.a06_owner_logic.test._util.a06_str import (
     numor_str,
     owner_acct_membership_str,
     owner_acctunit_str,
-    owner_concept_awardlink_str,
-    owner_concept_factunit_str,
-    owner_concept_healerlink_str,
-    owner_concept_laborlink_str,
-    owner_concept_reason_premiseunit_str,
-    owner_concept_reasonunit_str,
-    owner_conceptunit_str,
+    owner_plan_awardlink_str,
+    owner_plan_factunit_str,
+    owner_plan_healerlink_str,
+    owner_plan_laborlink_str,
+    owner_plan_reason_premiseunit_str,
+    owner_plan_reasonunit_str,
+    owner_planunit_str,
     ownerunit_str,
     penny_str,
+    plan_rope_str,
     pnigh_str,
     popen_str,
     pstate_str,
-    rconcept_active_requisite_str,
     rcontext_str,
     respect_bit_str,
+    rplan_active_requisite_str,
     stop_want_str,
     take_force_str,
     task_str,
@@ -148,7 +148,7 @@ from src.a17_idea_logic.idea_config import (
     get_idea_sqlite_types,
     get_idearef_from_file,
     get_quick_ideas_column_ref,
-    idea_format_00013_conceptunit_v0_0_0,
+    idea_format_00013_planunit_v0_0_0,
     idea_format_00020_owner_acct_membership_v0_0_0,
     idea_format_00021_owner_acctunit_v0_0_0,
 )
@@ -252,12 +252,12 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[45] == "group_title_ERASE"
     assert table_sorting_priority[46] == "group_title_ERASE_otx"
     assert table_sorting_priority[47] == "group_title_ERASE_inx"
-    assert table_sorting_priority[48] == "concept_rope"
-    assert table_sorting_priority[49] == "concept_rope_otx"
-    assert table_sorting_priority[50] == "concept_rope_inx"
-    assert table_sorting_priority[51] == "concept_rope_ERASE"
-    assert table_sorting_priority[52] == "concept_rope_ERASE_otx"
-    assert table_sorting_priority[53] == "concept_rope_ERASE_inx"
+    assert table_sorting_priority[48] == "plan_rope"
+    assert table_sorting_priority[49] == "plan_rope_otx"
+    assert table_sorting_priority[50] == "plan_rope_inx"
+    assert table_sorting_priority[51] == "plan_rope_ERASE"
+    assert table_sorting_priority[52] == "plan_rope_ERASE_otx"
+    assert table_sorting_priority[53] == "plan_rope_ERASE_inx"
     assert table_sorting_priority[54] == "rcontext"
     assert table_sorting_priority[55] == "rcontext_otx"
     assert table_sorting_priority[56] == "rcontext_inx"
@@ -307,7 +307,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[100] == "morph"
     assert table_sorting_priority[101] == "gogo_want"
     assert table_sorting_priority[102] == "stop_want"
-    assert table_sorting_priority[103] == "rconcept_active_requisite"
+    assert table_sorting_priority[103] == "rplan_active_requisite"
     assert table_sorting_priority[104] == "acct_cred_points"
     assert table_sorting_priority[105] == "acct_debt_points"
     assert table_sorting_priority[106] == "group_cred_points"
@@ -373,7 +373,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[166] == "_all_acct_cred"
     assert table_sorting_priority[167] == "_keeps_justified"
     assert table_sorting_priority[168] == "_offtrack_fund"
-    assert table_sorting_priority[169] == "_rconcept_active_value"
+    assert table_sorting_priority[169] == "_rplan_active_value"
     assert table_sorting_priority[170] == "_irrational_acct_debt_points"
     assert table_sorting_priority[171] == "_sum_healerlink_share"
     assert table_sorting_priority[172] == "_keeps_buildable"
@@ -430,7 +430,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(owner_name_str()) == "TEXT"
     assert sqlite_types.get(acct_name_str()) == "TEXT"
     assert sqlite_types.get(group_title_str()) == "TEXT"
-    assert sqlite_types.get(concept_rope_str()) == "TEXT"
+    assert sqlite_types.get(plan_rope_str()) == "TEXT"
     assert sqlite_types.get(rcontext_str()) == "TEXT"
     assert sqlite_types.get("pstate") == "TEXT"
     assert sqlite_types.get("fstate") == "TEXT"
@@ -448,7 +448,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(morph_str()) == "INTEGER"
     assert sqlite_types.get(gogo_want_str()) == "REAL"
     assert sqlite_types.get(stop_want_str()) == "REAL"
-    assert sqlite_types.get(rconcept_active_requisite_str()) == "INTEGER"
+    assert sqlite_types.get(rplan_active_requisite_str()) == "INTEGER"
     assert sqlite_types.get(acct_cred_points_str()) == "REAL"
     assert sqlite_types.get(acct_debt_points_str()) == "REAL"
     assert sqlite_types.get(group_cred_points_str()) == "REAL"
@@ -539,13 +539,13 @@ def test_get_idea_config_dict_ReturnsObj():
     assert belief_timeoffi_str() in idea_config_dimens
     assert owner_acct_membership_str() in idea_config_dimens
     assert owner_acctunit_str() in idea_config_dimens
-    assert owner_concept_awardlink_str() in idea_config_dimens
-    assert owner_concept_factunit_str() in idea_config_dimens
-    assert owner_concept_laborlink_str() in idea_config_dimens
-    assert owner_concept_healerlink_str() in idea_config_dimens
-    assert owner_concept_reason_premiseunit_str() in idea_config_dimens
-    assert owner_concept_reasonunit_str() in idea_config_dimens
-    assert owner_conceptunit_str() in idea_config_dimens
+    assert owner_plan_awardlink_str() in idea_config_dimens
+    assert owner_plan_factunit_str() in idea_config_dimens
+    assert owner_plan_laborlink_str() in idea_config_dimens
+    assert owner_plan_healerlink_str() in idea_config_dimens
+    assert owner_plan_reason_premiseunit_str() in idea_config_dimens
+    assert owner_plan_reasonunit_str() in idea_config_dimens
+    assert owner_planunit_str() in idea_config_dimens
     assert ownerunit_str() in idea_config_dimens
     assert pidgin_name_str() in idea_config_dimens
     assert pidgin_title_str() in idea_config_dimens
@@ -715,7 +715,7 @@ def test_get_idea_format_filenames_ReturnsObj():
     # THEN
     assert idea_format_00021_owner_acctunit_v0_0_0() in idea_filenames_set
     assert idea_format_00020_owner_acct_membership_v0_0_0() in idea_filenames_set
-    assert idea_format_00013_conceptunit_v0_0_0() in idea_filenames_set
+    assert idea_format_00013_planunit_v0_0_0() in idea_filenames_set
 
     # WHEN / THEN
     assert _validate_idea_format_files(idea_filenames_sorted)
@@ -779,7 +779,7 @@ def _validate_idea_format_files(idea_filenames: set[str]):
             idea_attrs.add(delete_attr_without_erase)
 
         for x_dimen, dimen_keys in all_dimen_keys_dict.items():
-            # if x_dimen == owner_concept_factunit_str() and x_dimen in format_dimens:
+            # if x_dimen == owner_plan_factunit_str() and x_dimen in format_dimens:
             #     print(f"{idea_number_value}  {x_dimen=} {idea_attrs_list=}")
             if dimen_keys.issubset(idea_attrs):
                 if x_dimen not in format_dimens:
@@ -822,7 +822,7 @@ def test_get_idea_format_filename_ReturnsObj():
     # THEN
     assert br00021_filename == idea_format_00021_owner_acctunit_v0_0_0()
     assert br00020_filename == idea_format_00020_owner_acct_membership_v0_0_0()
-    assert br00013_filename == idea_format_00013_conceptunit_v0_0_0()
+    assert br00013_filename == idea_format_00013_planunit_v0_0_0()
 
     all_set = {get_idea_format_filename(br) for br in get_idea_numbers()}
     assert all_set == get_idea_format_filenames()
@@ -849,13 +849,13 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     # set_idea_config_json(belief_timeline_weekday_str(), 8)
     # set_idea_config_json(owner_acct_membership_str(), 9)
     # set_idea_config_json(owner_acctunit_str(), 10)
-    # set_idea_config_json(owner_concept_awardlink_str(), 11)
-    # set_idea_config_json(owner_concept_factunit_str(), 12)
-    # set_idea_config_json(owner_concept_laborlink_str(), 14)
-    # set_idea_config_json(owner_concept_healerlink_str(), 15)
-    # set_idea_config_json(owner_concept_reason_premiseunit_str(), 16)
-    # set_idea_config_json(owner_concept_reasonunit_str(), 17)
-    # set_idea_config_json(owner_conceptunit_str(), 18)
+    # set_idea_config_json(owner_plan_awardlink_str(), 11)
+    # set_idea_config_json(owner_plan_factunit_str(), 12)
+    # set_idea_config_json(owner_plan_laborlink_str(), 14)
+    # set_idea_config_json(owner_plan_healerlink_str(), 15)
+    # set_idea_config_json(owner_plan_reason_premiseunit_str(), 16)
+    # set_idea_config_json(owner_plan_reasonunit_str(), 17)
+    # set_idea_config_json(owner_planunit_str(), 18)
     # set_idea_config_json(ownerunit_str(), 19)
     # set_idea_config_json(belief_budunit_str(), 20)
     # set_idea_config_json(belief_paybook_str(), 21)
@@ -873,13 +873,13 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     assert x_idea_config.get(belief_timeline_weekday_str()).get(bo) == 8
     assert x_idea_config.get(owner_acct_membership_str()).get(bo) == 9
     assert x_idea_config.get(owner_acctunit_str()).get(bo) == 10
-    assert x_idea_config.get(owner_concept_awardlink_str()).get(bo) == 11
-    assert x_idea_config.get(owner_concept_factunit_str()).get(bo) == 12
-    assert x_idea_config.get(owner_concept_laborlink_str()).get(bo) == 14
-    assert x_idea_config.get(owner_concept_healerlink_str()).get(bo) == 15
-    assert x_idea_config.get(owner_concept_reason_premiseunit_str()).get(bo) == 16
-    assert x_idea_config.get(owner_concept_reasonunit_str()).get(bo) == 17
-    assert x_idea_config.get(owner_conceptunit_str()).get(bo) == 18
+    assert x_idea_config.get(owner_plan_awardlink_str()).get(bo) == 11
+    assert x_idea_config.get(owner_plan_factunit_str()).get(bo) == 12
+    assert x_idea_config.get(owner_plan_laborlink_str()).get(bo) == 14
+    assert x_idea_config.get(owner_plan_healerlink_str()).get(bo) == 15
+    assert x_idea_config.get(owner_plan_reason_premiseunit_str()).get(bo) == 16
+    assert x_idea_config.get(owner_plan_reasonunit_str()).get(bo) == 17
+    assert x_idea_config.get(owner_planunit_str()).get(bo) == 18
     assert x_idea_config.get(ownerunit_str()).get(bo) == 19
     assert x_idea_config.get(belief_budunit_str()).get(bo) == 20
     assert x_idea_config.get(belief_paybook_str()).get(bo) == 21

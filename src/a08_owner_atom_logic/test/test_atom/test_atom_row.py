@@ -3,8 +3,8 @@ from src.a06_owner_logic.test._util.a06_str import (
     acct_name_str,
     owner_acct_membership_str,
     owner_acctunit_str,
-    owner_concept_healerlink_str,
-    owner_conceptunit_str,
+    owner_plan_healerlink_str,
+    owner_planunit_str,
 )
 from src.a08_owner_atom_logic.atom import AtomRow, atomrow_shop, owneratom_shop
 from src.a08_owner_atom_logic.atom_config import get_atom_args_class_types
@@ -21,7 +21,7 @@ def test_AtomRow_exists():
     assert x_atomrow.acct_name is None
     assert x_atomrow.addin is None
     assert x_atomrow.rcontext is None
-    assert x_atomrow.rconcept_active_requisite is None
+    assert x_atomrow.rplan_active_requisite is None
     assert x_atomrow.begin is None
     assert x_atomrow.respect_bit is None
     assert x_atomrow.close is None
@@ -53,7 +53,7 @@ def test_AtomRow_exists():
     assert x_atomrow.fstate is None
     assert x_atomrow.task is None
     assert x_atomrow.problem_bool is None
-    assert x_atomrow.concept_rope is None
+    assert x_atomrow.plan_rope is None
     assert x_atomrow.stop_want is None
     assert x_atomrow.take_force is None
     assert x_atomrow.tally is None
@@ -126,15 +126,15 @@ def test_AtomRow_set_class_types_SetsAttr():
     x_atomrow = atomrow_shop({}, INSERT_str())
     x_atomrow.close = "4"
     x_parent_rope = "Fay_bob"
-    x_concept_label = "Bobziy"
+    x_plan_label = "Bobziy"
     x_morph_str = "True"
     x_morph_bool = True
-    x_rope = create_rope(x_parent_rope, x_concept_label)
-    x_atomrow.concept_rope = x_rope
+    x_rope = create_rope(x_parent_rope, x_plan_label)
+    x_atomrow.plan_rope = x_rope
     x_atomrow.morph = x_morph_str
     four_int = 4
     assert x_atomrow.close != four_int
-    assert x_atomrow.concept_rope == x_rope
+    assert x_atomrow.plan_rope == x_rope
     assert x_atomrow.morph == x_morph_str
 
     # WHEN
@@ -142,7 +142,7 @@ def test_AtomRow_set_class_types_SetsAttr():
 
     # THEN
     assert x_atomrow.close == four_int
-    assert x_atomrow.concept_rope == x_rope
+    assert x_atomrow.plan_rope == x_rope
     assert x_atomrow.morph == x_morph_bool
 
 
@@ -229,10 +229,10 @@ def test_AtomRow_get_owneratoms_ReturnsObjIfDimenIsCorrect():
     assert len(x_atomrow.get_owneratoms()) == 1
 
 
-def test_AtomRow_get_owneratoms_ReturnsObj_owner_conceptunit_INSERT_task_False_Scenario0():
+def test_AtomRow_get_owneratoms_ReturnsObj_owner_planunit_INSERT_task_False_Scenario0():
     # ESTABLISH
-    x_atomrow = atomrow_shop({owner_conceptunit_str()}, INSERT_str())
-    x_atomrow.concept_rope = create_rope("amy78", "casa")
+    x_atomrow = atomrow_shop({owner_planunit_str()}, INSERT_str())
+    x_atomrow.plan_rope = create_rope("amy78", "casa")
     x_atomrow.task = False
     assert len(x_atomrow.get_owneratoms()) == 1
 
@@ -240,19 +240,19 @@ def test_AtomRow_get_owneratoms_ReturnsObj_owner_conceptunit_INSERT_task_False_S
     x_owneratom = x_atomrow.get_owneratoms()[0]
 
     # THEN
-    static_owneratom = owneratom_shop(owner_conceptunit_str(), INSERT_str())
-    static_owneratom.set_arg("concept_rope", create_rope("amy78", "casa"))
+    static_owneratom = owneratom_shop(owner_planunit_str(), INSERT_str())
+    static_owneratom.set_arg("plan_rope", create_rope("amy78", "casa"))
     static_owneratom.set_arg("task", False)
     print(static_owneratom)
     print(x_owneratom)
     assert x_owneratom == static_owneratom
 
 
-def test_AtomRow_get_owneratoms_ReturnsObj_owner_conceptunit_INSERT_task_False_Scenario1():
+def test_AtomRow_get_owneratoms_ReturnsObj_owner_planunit_INSERT_task_False_Scenario1():
     # ESTABLISH
-    x_dimens = {owner_conceptunit_str(), owner_concept_healerlink_str()}
+    x_dimens = {owner_planunit_str(), owner_plan_healerlink_str()}
     x_atomrow = atomrow_shop(x_dimens, INSERT_str())
-    x_atomrow.concept_rope = create_rope("amy78", "casa")
+    x_atomrow.plan_rope = create_rope("amy78", "casa")
     x_atomrow.task = False
     x_atomrow.healer_name = "Bob"
 
@@ -261,12 +261,12 @@ def test_AtomRow_get_owneratoms_ReturnsObj_owner_conceptunit_INSERT_task_False_S
 
     # THEN
     assert len(x_owneratoms) == 2
-    y_concept_owneratom = owneratom_shop(owner_conceptunit_str(), INSERT_str())
+    y_plan_owneratom = owneratom_shop(owner_planunit_str(), INSERT_str())
     casa_rope = create_rope("amy78", "casa")
-    y_concept_owneratom.set_arg("concept_rope", casa_rope)
-    y_concept_owneratom.set_arg("task", False)
-    assert y_concept_owneratom in x_owneratoms
-    healerlink_owneratom = owneratom_shop(owner_concept_healerlink_str(), INSERT_str())
-    healerlink_owneratom.set_arg("concept_rope", casa_rope)
+    y_plan_owneratom.set_arg("plan_rope", casa_rope)
+    y_plan_owneratom.set_arg("task", False)
+    assert y_plan_owneratom in x_owneratoms
+    healerlink_owneratom = owneratom_shop(owner_plan_healerlink_str(), INSERT_str())
+    healerlink_owneratom.set_arg("plan_rope", casa_rope)
     healerlink_owneratom.set_arg("healer_name", "Bob")
     assert healerlink_owneratom in x_owneratoms

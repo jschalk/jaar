@@ -40,10 +40,10 @@ from src.a04_reason_logic.test._util.a04_str import (
     pnigh_str,
     popen_str,
     pstate_str,
-    rconcept_active_requisite_str,
     rcontext_str,
+    rplan_active_requisite_str,
 )
-from src.a05_concept_logic.test._util.a05_str import (
+from src.a05_plan_logic.test._util.a05_str import (
     _all_acct_cred_str,
     _all_acct_debt_str,
     _descendant_task_count_str,
@@ -74,7 +74,6 @@ from src.a06_owner_logic.test._util.a06_str import (
     awardee_title_str,
     begin_str,
     close_str,
-    concept_rope_str,
     credor_respect_str,
     debtor_respect_str,
     denom_str,
@@ -94,15 +93,16 @@ from src.a06_owner_logic.test._util.a06_str import (
     numor_str,
     owner_acct_membership_str,
     owner_acctunit_str,
-    owner_concept_awardlink_str,
-    owner_concept_factunit_str,
-    owner_concept_healerlink_str,
-    owner_concept_laborlink_str,
-    owner_concept_reason_premiseunit_str,
-    owner_concept_reasonunit_str,
-    owner_conceptunit_str,
+    owner_plan_awardlink_str,
+    owner_plan_factunit_str,
+    owner_plan_healerlink_str,
+    owner_plan_laborlink_str,
+    owner_plan_reason_premiseunit_str,
+    owner_plan_reasonunit_str,
+    owner_planunit_str,
     ownerunit_str,
     penny_str,
+    plan_rope_str,
     pnigh_str,
     popen_str,
     pstate_str,
@@ -151,13 +151,13 @@ def test_get_owner_calc_config_dict_ReturnsObj_CheckLevel0Keys():
     assert ownerunit_str() in owner_calc_config_keys
     assert owner_acctunit_str() in owner_calc_config_keys
     assert owner_acct_membership_str() in owner_calc_config_keys
-    assert owner_conceptunit_str() in owner_calc_config_keys
-    assert owner_concept_awardlink_str() in owner_calc_config_keys
-    assert owner_concept_reasonunit_str() in owner_calc_config_keys
-    assert owner_concept_reason_premiseunit_str() in owner_calc_config_keys
-    assert owner_concept_laborlink_str() in owner_calc_config_keys
-    assert owner_concept_healerlink_str() in owner_calc_config_keys
-    assert owner_concept_factunit_str() in owner_calc_config_keys
+    assert owner_planunit_str() in owner_calc_config_keys
+    assert owner_plan_awardlink_str() in owner_calc_config_keys
+    assert owner_plan_reasonunit_str() in owner_calc_config_keys
+    assert owner_plan_reason_premiseunit_str() in owner_calc_config_keys
+    assert owner_plan_laborlink_str() in owner_calc_config_keys
+    assert owner_plan_healerlink_str() in owner_calc_config_keys
+    assert owner_plan_factunit_str() in owner_calc_config_keys
     assert owner_groupunit_str() in owner_calc_config_keys
     assert len(get_owner_calc_config_dict()) == 11
     atom_config_dict = get_atom_config_dict()
@@ -214,13 +214,13 @@ def test_get_owner_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     plnunit_aspect = owner_calc_config.get(ownerunit_str())
     plnacct_aspect = owner_calc_config.get(owner_acctunit_str())
     plnmemb_aspect = owner_calc_config.get(owner_acct_membership_str())
-    plnconc_aspect = owner_calc_config.get(owner_conceptunit_str())
-    plnawar_aspect = owner_calc_config.get(owner_concept_awardlink_str())
-    plnreas_aspect = owner_calc_config.get(owner_concept_reasonunit_str())
-    plnprem_aspect = owner_calc_config.get(owner_concept_reason_premiseunit_str())
-    plnlabo_aspect = owner_calc_config.get(owner_concept_laborlink_str())
-    plnheal_aspect = owner_calc_config.get(owner_concept_healerlink_str())
-    plnfact_aspect = owner_calc_config.get(owner_concept_factunit_str())
+    plnconc_aspect = owner_calc_config.get(owner_planunit_str())
+    plnawar_aspect = owner_calc_config.get(owner_plan_awardlink_str())
+    plnreas_aspect = owner_calc_config.get(owner_plan_reasonunit_str())
+    plnprem_aspect = owner_calc_config.get(owner_plan_reason_premiseunit_str())
+    plnlabo_aspect = owner_calc_config.get(owner_plan_laborlink_str())
+    plnheal_aspect = owner_calc_config.get(owner_plan_healerlink_str())
+    plnfact_aspect = owner_calc_config.get(owner_plan_factunit_str())
     plngrou_aspect = owner_calc_config.get(owner_groupunit_str())
 
     plnunit_jmetrics_keys = set(plnunit_aspect.get(jmetrics_str()))
@@ -290,7 +290,7 @@ def test_get_owner_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     expected_plnreas_jmetrics_keys = {
         "_status",
         "_chore",
-        "_rconcept_active_value",
+        "_rplan_active_value",
     }
     assert expected_plnreas_jmetrics_keys == plnreas_jmetrics_keys
     expected_plnprem_jmetrics_keys = {"_status", "_chore"}
@@ -329,13 +329,13 @@ def test_get_owner_calc_config_dict_ReturnsObj_CheckAbbreviations():
     plnunit_aspect = owner_calc_config.get(ownerunit_str())
     plnacct_aspect = owner_calc_config.get(owner_acctunit_str())
     plnmemb_aspect = owner_calc_config.get(owner_acct_membership_str())
-    plnconc_aspect = owner_calc_config.get(owner_conceptunit_str())
-    plnawar_aspect = owner_calc_config.get(owner_concept_awardlink_str())
-    plnreas_aspect = owner_calc_config.get(owner_concept_reasonunit_str())
-    plnprem_aspect = owner_calc_config.get(owner_concept_reason_premiseunit_str())
-    plnlabo_aspect = owner_calc_config.get(owner_concept_laborlink_str())
-    plnheal_aspect = owner_calc_config.get(owner_concept_healerlink_str())
-    plnfact_aspect = owner_calc_config.get(owner_concept_factunit_str())
+    plnconc_aspect = owner_calc_config.get(owner_planunit_str())
+    plnawar_aspect = owner_calc_config.get(owner_plan_awardlink_str())
+    plnreas_aspect = owner_calc_config.get(owner_plan_reasonunit_str())
+    plnprem_aspect = owner_calc_config.get(owner_plan_reason_premiseunit_str())
+    plnlabo_aspect = owner_calc_config.get(owner_plan_laborlink_str())
+    plnheal_aspect = owner_calc_config.get(owner_plan_healerlink_str())
+    plnfact_aspect = owner_calc_config.get(owner_plan_factunit_str())
     plngrou_aspect = owner_calc_config.get(owner_groupunit_str())
     abbr_str = "abbreviation"
     assert plnunit_aspect.get(abbr_str) == "plnunit"
@@ -358,10 +358,10 @@ def test_get_all_owner_calc_args_ReturnsObj():
     # THEN
     assert all_owner_calc_args
     assert stop_want_str() in all_owner_calc_args
-    assert concept_rope_str() in all_owner_calc_args
+    assert plan_rope_str() in all_owner_calc_args
     assert "_fund_give" in all_owner_calc_args
     assert all_owner_calc_args.get("_fund_give") == {
-        "owner_concept_awardlink",
+        "owner_plan_awardlink",
         "owner_acct_membership",
         "owner_groupunit",
         "owner_acctunit",
@@ -371,8 +371,8 @@ def test_get_all_owner_calc_args_ReturnsObj():
     # owner_acctunit_aspects = owner_calc_config.get("owner_acctunit")
     # plnacct_jmetrics_dict = owner_acctunit_aspects.get("jmetrics")
     # rope_owner_calc_aspects = plnacct_jmetrics_dict.get("_fund_give")
-    # assert owner_concept_factunit_str() in rope_owner_calc_aspects
-    # assert owner_concept_laborlink_str() in rope_owner_calc_aspects
+    # assert owner_plan_factunit_str() in rope_owner_calc_aspects
+    # assert owner_plan_laborlink_str() in rope_owner_calc_aspects
     # assert len(rope_owner_calc_aspects) == 6
     assert len(all_owner_calc_args) == 76
 
@@ -405,13 +405,13 @@ def test_get_owner_calc_dimens_ReturnsObj():
         ownerunit_str(),
         owner_acctunit_str(),
         owner_acct_membership_str(),
-        owner_conceptunit_str(),
-        owner_concept_awardlink_str(),
-        owner_concept_reasonunit_str(),
-        owner_concept_reason_premiseunit_str(),
-        owner_concept_laborlink_str(),
-        owner_concept_healerlink_str(),
-        owner_concept_factunit_str(),
+        owner_planunit_str(),
+        owner_plan_awardlink_str(),
+        owner_plan_reasonunit_str(),
+        owner_plan_reason_premiseunit_str(),
+        owner_plan_laborlink_str(),
+        owner_plan_healerlink_str(),
+        owner_plan_factunit_str(),
         owner_groupunit_str(),
     }
     assert owner_calc_dimens == expected_owner_calc_dimens
@@ -421,7 +421,7 @@ def test_get_owner_calc_dimens_ReturnsObj():
 def test_get_owner_calc_dimen_args_ReturnsObj():
     # ESTABLISH / WHEN
     owner_acctunit_args = get_owner_calc_dimen_args(owner_acctunit_str())
-    owner_conceptunit_args = get_owner_calc_dimen_args(owner_conceptunit_str())
+    owner_planunit_args = get_owner_calc_dimen_args(owner_planunit_str())
     owner_groupunit_args = get_owner_calc_dimen_args(owner_groupunit_str())
 
     #  THEN
@@ -444,7 +444,7 @@ def test_get_owner_calc_dimen_args_ReturnsObj():
         "_debtor_pool",
         "_irrational_acct_debt_points",
     }
-    assert owner_conceptunit_args == {
+    assert owner_planunit_args == {
         belief_label_str(),
         owner_name_str(),
         morph_str(),
@@ -471,7 +471,7 @@ def test_get_owner_calc_dimen_args_ReturnsObj():
         "_range_evaluated",
         "problem_bool",
         gogo_want_str(),
-        concept_rope_str(),
+        plan_rope_str(),
         begin_str(),
     }
     assert owner_groupunit_args == {
@@ -530,13 +530,13 @@ def test_get_owner_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     ownerunit = ownerunit_str()
     plnacct = owner_acctunit_str()
     plnmemb = owner_acct_membership_str()
-    plnconc = owner_conceptunit_str()
-    plnawar = owner_concept_awardlink_str()
-    plnreas = owner_concept_reasonunit_str()
-    plnprem = owner_concept_reason_premiseunit_str()
-    plnlabo = owner_concept_laborlink_str()
-    plnheal = owner_concept_healerlink_str()
-    plnfact = owner_concept_factunit_str()
+    plnconc = owner_planunit_str()
+    plnawar = owner_plan_awardlink_str()
+    plnreas = owner_plan_reasonunit_str()
+    plnprem = owner_plan_reason_premiseunit_str()
+    plnlabo = owner_plan_laborlink_str()
+    plnheal = owner_plan_healerlink_str()
+    plnfact = owner_plan_factunit_str()
     plngrou = owner_groupunit_str()
     assert g_class_type(cfig, plnmemb, jk, acct_name_str()) == NameTerm_str()
     assert g_sqlitetype(cfig, plnmemb, jk, acct_name_str()) == "TEXT"
@@ -616,8 +616,8 @@ def test_get_owner_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
 
     assert g_class_type(cfig, plnawar, jk, awardee_title_str()) == TitleTerm_str()
     assert g_sqlitetype(cfig, plnawar, jk, awardee_title_str()) == "TEXT"
-    assert g_class_type(cfig, plnawar, jk, concept_rope_str()) == RopeTerm_str()
-    assert g_sqlitetype(cfig, plnawar, jk, concept_rope_str()) == "TEXT"
+    assert g_class_type(cfig, plnawar, jk, plan_rope_str()) == RopeTerm_str()
+    assert g_sqlitetype(cfig, plnawar, jk, plan_rope_str()) == "TEXT"
     assert g_class_type(cfig, plnawar, jm, _fund_give_str()) == "float"
     assert g_sqlitetype(cfig, plnawar, jm, _fund_give_str()) == "REAL"
     assert g_class_type(cfig, plnawar, jm, _fund_take_str()) == "float"
@@ -628,8 +628,8 @@ def test_get_owner_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, plnawar, jv, take_force_str()) == "REAL"
     assert g_class_type(cfig, plnfact, jk, fcontext_str()) == RopeTerm_str()
     assert g_sqlitetype(cfig, plnfact, jk, fcontext_str()) == "TEXT"
-    assert g_class_type(cfig, plnfact, jk, concept_rope_str()) == RopeTerm_str()
-    assert g_sqlitetype(cfig, plnfact, jk, concept_rope_str()) == "TEXT"
+    assert g_class_type(cfig, plnfact, jk, plan_rope_str()) == RopeTerm_str()
+    assert g_sqlitetype(cfig, plnfact, jk, plan_rope_str()) == "TEXT"
     assert g_class_type(cfig, plnfact, jv, fnigh_str()) == "float"
     assert g_sqlitetype(cfig, plnfact, jv, fnigh_str()) == "REAL"
     assert g_class_type(cfig, plnfact, jv, fopen_str()) == "float"
@@ -638,14 +638,14 @@ def test_get_owner_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, plnfact, jv, fstate_str()) == "TEXT"
     assert g_class_type(cfig, plnheal, jk, healer_name_str()) == NameTerm_str()
     assert g_sqlitetype(cfig, plnheal, jk, healer_name_str()) == "TEXT"
-    assert g_class_type(cfig, plnheal, jk, concept_rope_str()) == RopeTerm_str()
-    assert g_sqlitetype(cfig, plnheal, jk, concept_rope_str()) == "TEXT"
+    assert g_class_type(cfig, plnheal, jk, plan_rope_str()) == RopeTerm_str()
+    assert g_sqlitetype(cfig, plnheal, jk, plan_rope_str()) == "TEXT"
     assert g_class_type(cfig, plnprem, jk, rcontext_str()) == RopeTerm_str()
     assert g_sqlitetype(cfig, plnprem, jk, rcontext_str()) == "TEXT"
     assert g_class_type(cfig, plnprem, jk, pstate_str()) == RopeTerm_str()
     assert g_sqlitetype(cfig, plnprem, jk, pstate_str()) == "TEXT"
-    assert g_class_type(cfig, plnprem, jk, concept_rope_str()) == RopeTerm_str()
-    assert g_sqlitetype(cfig, plnprem, jk, concept_rope_str()) == "TEXT"
+    assert g_class_type(cfig, plnprem, jk, plan_rope_str()) == RopeTerm_str()
+    assert g_sqlitetype(cfig, plnprem, jk, plan_rope_str()) == "TEXT"
     assert g_class_type(cfig, plnprem, jm, _status_str()) == "int"
     assert g_sqlitetype(cfig, plnprem, jm, _status_str()) == "INTEGER"
     assert g_class_type(cfig, plnprem, jm, _chore_str()) == "int"
@@ -658,18 +658,18 @@ def test_get_owner_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, plnprem, jv, popen_str()) == "REAL"
     assert g_class_type(cfig, plnreas, jk, rcontext_str()) == RopeTerm_str()
     assert g_sqlitetype(cfig, plnreas, jk, rcontext_str()) == "TEXT"
-    assert g_class_type(cfig, plnreas, jk, concept_rope_str()) == RopeTerm_str()
-    assert g_sqlitetype(cfig, plnreas, jk, concept_rope_str()) == "TEXT"
-    assert g_class_type(cfig, plnreas, jm, "_rconcept_active_value") == "int"
-    assert g_sqlitetype(cfig, plnreas, jm, "_rconcept_active_value") == "INTEGER"
+    assert g_class_type(cfig, plnreas, jk, plan_rope_str()) == RopeTerm_str()
+    assert g_sqlitetype(cfig, plnreas, jk, plan_rope_str()) == "TEXT"
+    assert g_class_type(cfig, plnreas, jm, "_rplan_active_value") == "int"
+    assert g_sqlitetype(cfig, plnreas, jm, "_rplan_active_value") == "INTEGER"
     assert g_class_type(cfig, plnreas, jm, _status_str()) == "int"
     assert g_sqlitetype(cfig, plnreas, jm, _status_str()) == "INTEGER"
     assert g_class_type(cfig, plnreas, jm, _chore_str()) == "int"
     assert g_sqlitetype(cfig, plnreas, jm, _chore_str()) == "INTEGER"
-    assert g_class_type(cfig, plnreas, jv, rconcept_active_requisite_str()) == "bool"
-    assert g_sqlitetype(cfig, plnreas, jv, rconcept_active_requisite_str()) == "INTEGER"
-    assert g_class_type(cfig, plnlabo, jk, concept_rope_str()) == RopeTerm_str()
-    assert g_sqlitetype(cfig, plnlabo, jk, concept_rope_str()) == "TEXT"
+    assert g_class_type(cfig, plnreas, jv, rplan_active_requisite_str()) == "bool"
+    assert g_sqlitetype(cfig, plnreas, jv, rplan_active_requisite_str()) == "INTEGER"
+    assert g_class_type(cfig, plnlabo, jk, plan_rope_str()) == RopeTerm_str()
+    assert g_sqlitetype(cfig, plnlabo, jk, plan_rope_str()) == "TEXT"
     assert g_class_type(cfig, plnlabo, jk, labor_title_str()) == TitleTerm_str()
     assert g_sqlitetype(cfig, plnlabo, jk, labor_title_str()) == "TEXT"
     assert g_class_type(cfig, plnlabo, jm, "_owner_name_labor") == "int"
@@ -849,7 +849,7 @@ def test_get_owner_calc_args_type_dict_ReturnsObj():
     assert owner_calc_args_type_dict.get(problem_bool_str()) == "bool"
     assert owner_calc_args_type_dict.get(stop_want_str()) == "float"
     assert owner_calc_args_type_dict.get(awardee_title_str()) == TitleTerm_str()
-    assert owner_calc_args_type_dict.get(concept_rope_str()) == RopeTerm_str()
+    assert owner_calc_args_type_dict.get(plan_rope_str()) == RopeTerm_str()
     assert owner_calc_args_type_dict.get(give_force_str()) == "float"
     assert owner_calc_args_type_dict.get(take_force_str()) == "float"
     assert owner_calc_args_type_dict.get(rcontext_str()) == RopeTerm_str()
@@ -863,8 +863,8 @@ def test_get_owner_calc_args_type_dict_ReturnsObj():
     assert owner_calc_args_type_dict.get(pdivisor_str()) == "int"
     assert owner_calc_args_type_dict.get(pnigh_str()) == "float"
     assert owner_calc_args_type_dict.get(popen_str()) == "float"
-    assert owner_calc_args_type_dict.get("_rconcept_active_value") == "int"
-    assert owner_calc_args_type_dict.get("rconcept_active_requisite") == "bool"
+    assert owner_calc_args_type_dict.get("_rplan_active_value") == "int"
+    assert owner_calc_args_type_dict.get("rplan_active_requisite") == "bool"
     assert owner_calc_args_type_dict.get(labor_title_str()) == TitleTerm_str()
     assert owner_calc_args_type_dict.get("_owner_name_labor") == "int"
     assert owner_calc_args_type_dict.get("_active") == "int"

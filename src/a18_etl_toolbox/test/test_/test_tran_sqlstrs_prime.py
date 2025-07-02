@@ -11,13 +11,13 @@ from src.a00_data_toolbox.db_toolbox import (
 from src.a06_owner_logic.test._util.a06_str import (
     owner_acct_membership_str,
     owner_acctunit_str,
-    owner_concept_awardlink_str,
-    owner_concept_factunit_str,
-    owner_concept_healerlink_str,
-    owner_concept_laborlink_str,
-    owner_concept_reason_premiseunit_str,
-    owner_concept_reasonunit_str,
-    owner_conceptunit_str,
+    owner_plan_awardlink_str,
+    owner_plan_factunit_str,
+    owner_plan_healerlink_str,
+    owner_plan_laborlink_str,
+    owner_plan_reason_premiseunit_str,
+    owner_plan_reasonunit_str,
+    owner_planunit_str,
     ownerunit_str,
 )
 from src.a08_owner_atom_logic.atom_config import get_delete_key_name, get_owner_dimens
@@ -68,40 +68,40 @@ OWNER_PRIME_TABLENAMES = {
     f"{owner_acct_membership_str()}_sound_put_raw": "PLNMEMB_PUT_RAW",
     f"{owner_acctunit_str()}_sound_put_agg": "PLNACCT_PUT_AGG",
     f"{owner_acctunit_str()}_sound_put_raw": "PLNACCT_PUT_RAW",
-    f"{owner_concept_awardlink_str()}_sound_put_agg": "PLNAWAR_PUT_AGG",
-    f"{owner_concept_awardlink_str()}_sound_put_raw": "PLNAWAR_PUT_RAW",
-    f"{owner_concept_factunit_str()}_sound_put_agg": "PLNFACT_PUT_AGG",
-    f"{owner_concept_factunit_str()}_sound_put_raw": "PLNFACT_PUT_RAW",
-    f"{owner_concept_healerlink_str()}_sound_put_agg": "PLNHEAL_PUT_AGG",
-    f"{owner_concept_healerlink_str()}_sound_put_raw": "PLNHEAL_PUT_RAW",
-    f"{owner_concept_reason_premiseunit_str()}_sound_put_agg": "PLNPREM_PUT_AGG",
-    f"{owner_concept_reason_premiseunit_str()}_sound_put_raw": "PLNPREM_PUT_RAW",
-    f"{owner_concept_reasonunit_str()}_sound_put_agg": "PLNREAS_PUT_AGG",
-    f"{owner_concept_reasonunit_str()}_sound_put_raw": "PLNREAS_PUT_RAW",
-    f"{owner_concept_laborlink_str()}_sound_put_agg": "PLNLABO_PUT_AGG",
-    f"{owner_concept_laborlink_str()}_sound_put_raw": "PLNLABO_PUT_RAW",
-    f"{owner_conceptunit_str()}_sound_put_agg": "PLNCONC_PUT_AGG",
-    f"{owner_conceptunit_str()}_sound_put_raw": "PLNCONC_PUT_RAW",
+    f"{owner_plan_awardlink_str()}_sound_put_agg": "PLNAWAR_PUT_AGG",
+    f"{owner_plan_awardlink_str()}_sound_put_raw": "PLNAWAR_PUT_RAW",
+    f"{owner_plan_factunit_str()}_sound_put_agg": "PLNFACT_PUT_AGG",
+    f"{owner_plan_factunit_str()}_sound_put_raw": "PLNFACT_PUT_RAW",
+    f"{owner_plan_healerlink_str()}_sound_put_agg": "PLNHEAL_PUT_AGG",
+    f"{owner_plan_healerlink_str()}_sound_put_raw": "PLNHEAL_PUT_RAW",
+    f"{owner_plan_reason_premiseunit_str()}_sound_put_agg": "PLNPREM_PUT_AGG",
+    f"{owner_plan_reason_premiseunit_str()}_sound_put_raw": "PLNPREM_PUT_RAW",
+    f"{owner_plan_reasonunit_str()}_sound_put_agg": "PLNREAS_PUT_AGG",
+    f"{owner_plan_reasonunit_str()}_sound_put_raw": "PLNREAS_PUT_RAW",
+    f"{owner_plan_laborlink_str()}_sound_put_agg": "PLNLABO_PUT_AGG",
+    f"{owner_plan_laborlink_str()}_sound_put_raw": "PLNLABO_PUT_RAW",
+    f"{owner_planunit_str()}_sound_put_agg": "PLNCONC_PUT_AGG",
+    f"{owner_planunit_str()}_sound_put_raw": "PLNCONC_PUT_RAW",
     f"{ownerunit_str()}_sound_put_agg": "PLNUNIT_PUT_AGG",
     f"{ownerunit_str()}_sound_put_raw": "PLNUNIT_PUT_RAW",
     f"{owner_acct_membership_str()}_sound_del_agg": "PLNMEMB_DEL_AGG",
     f"{owner_acct_membership_str()}_sound_del_raw": "PLNMEMB_DEL_RAW",
     f"{owner_acctunit_str()}_sound_del_agg": "PLNACCT_DEL_AGG",
     f"{owner_acctunit_str()}_sound_del_raw": "PLNACCT_DEL_RAW",
-    f"{owner_concept_awardlink_str()}_sound_del_agg": "PLNAWAR_DEL_AGG",
-    f"{owner_concept_awardlink_str()}_sound_del_raw": "PLNAWAR_DEL_RAW",
-    f"{owner_concept_factunit_str()}_sound_del_agg": "PLNFACT_DEL_AGG",
-    f"{owner_concept_factunit_str()}_sound_del_raw": "PLNFACT_DEL_RAW",
-    f"{owner_concept_healerlink_str()}_sound_del_agg": "PLNHEAL_DEL_AGG",
-    f"{owner_concept_healerlink_str()}_sound_del_raw": "PLNHEAL_DEL_RAW",
-    f"{owner_concept_reason_premiseunit_str()}_sound_del_agg": "PLNPREM_DEL_AGG",
-    f"{owner_concept_reason_premiseunit_str()}_sound_del_raw": "PLNPREM_DEL_RAW",
-    f"{owner_concept_reasonunit_str()}_sound_del_agg": "PLNREAS_DEL_AGG",
-    f"{owner_concept_reasonunit_str()}_sound_del_raw": "PLNREAS_DEL_RAW",
-    f"{owner_concept_laborlink_str()}_sound_del_agg": "PLNLABO_DEL_AGG",
-    f"{owner_concept_laborlink_str()}_sound_del_raw": "PLNLABO_DEL_RAW",
-    f"{owner_conceptunit_str()}_sound_del_agg": "PLNCONC_DEL_AGG",
-    f"{owner_conceptunit_str()}_sound_del_raw": "PLNCONC_DEL_RAW",
+    f"{owner_plan_awardlink_str()}_sound_del_agg": "PLNAWAR_DEL_AGG",
+    f"{owner_plan_awardlink_str()}_sound_del_raw": "PLNAWAR_DEL_RAW",
+    f"{owner_plan_factunit_str()}_sound_del_agg": "PLNFACT_DEL_AGG",
+    f"{owner_plan_factunit_str()}_sound_del_raw": "PLNFACT_DEL_RAW",
+    f"{owner_plan_healerlink_str()}_sound_del_agg": "PLNHEAL_DEL_AGG",
+    f"{owner_plan_healerlink_str()}_sound_del_raw": "PLNHEAL_DEL_RAW",
+    f"{owner_plan_reason_premiseunit_str()}_sound_del_agg": "PLNPREM_DEL_AGG",
+    f"{owner_plan_reason_premiseunit_str()}_sound_del_raw": "PLNPREM_DEL_RAW",
+    f"{owner_plan_reasonunit_str()}_sound_del_agg": "PLNREAS_DEL_AGG",
+    f"{owner_plan_reasonunit_str()}_sound_del_raw": "PLNREAS_DEL_RAW",
+    f"{owner_plan_laborlink_str()}_sound_del_agg": "PLNLABO_DEL_AGG",
+    f"{owner_plan_laborlink_str()}_sound_del_raw": "PLNLABO_DEL_RAW",
+    f"{owner_planunit_str()}_sound_del_agg": "PLNCONC_DEL_AGG",
+    f"{owner_planunit_str()}_sound_del_raw": "PLNCONC_DEL_RAW",
     f"{ownerunit_str()}_sound_del_agg": "PLNUNIT_DEL_AGG",
     f"{ownerunit_str()}_sound_del_raw": "PLNUNIT_DEL_RAW",
 }
@@ -692,7 +692,7 @@ WHERE inconsistency_rows.belief_label = belief_timeline_hour_s_raw.belief_label
 def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scenario2_OwnerDimen():
     # sourcery skip: extract-method
     # ESTABLISH
-    dimen = owner_concept_awardlink_str()
+    dimen = owner_plan_awardlink_str()
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
@@ -719,21 +719,21 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
         assert update_sqlstr == expected_update_sqlstr
 
         static_example_sqlstr = """WITH inconsistency_rows AS (
-SELECT event_int, face_name, belief_label, owner_name, concept_rope, awardee_title
-FROM owner_concept_awardlink_s_put_raw
-GROUP BY event_int, face_name, belief_label, owner_name, concept_rope, awardee_title
+SELECT event_int, face_name, belief_label, owner_name, plan_rope, awardee_title
+FROM owner_plan_awardlink_s_put_raw
+GROUP BY event_int, face_name, belief_label, owner_name, plan_rope, awardee_title
 HAVING MIN(give_force) != MAX(give_force)
     OR MIN(take_force) != MAX(take_force)
 )
-UPDATE owner_concept_awardlink_s_put_raw
+UPDATE owner_plan_awardlink_s_put_raw
 SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
-WHERE inconsistency_rows.event_int = owner_concept_awardlink_s_put_raw.event_int
-    AND inconsistency_rows.face_name = owner_concept_awardlink_s_put_raw.face_name
-    AND inconsistency_rows.belief_label = owner_concept_awardlink_s_put_raw.belief_label
-    AND inconsistency_rows.owner_name = owner_concept_awardlink_s_put_raw.owner_name
-    AND inconsistency_rows.concept_rope = owner_concept_awardlink_s_put_raw.concept_rope
-    AND inconsistency_rows.awardee_title = owner_concept_awardlink_s_put_raw.awardee_title
+WHERE inconsistency_rows.event_int = owner_plan_awardlink_s_put_raw.event_int
+    AND inconsistency_rows.face_name = owner_plan_awardlink_s_put_raw.face_name
+    AND inconsistency_rows.belief_label = owner_plan_awardlink_s_put_raw.belief_label
+    AND inconsistency_rows.owner_name = owner_plan_awardlink_s_put_raw.owner_name
+    AND inconsistency_rows.plan_rope = owner_plan_awardlink_s_put_raw.plan_rope
+    AND inconsistency_rows.awardee_title = owner_plan_awardlink_s_put_raw.awardee_title
 ;
 """
         print(update_sqlstr)
@@ -826,7 +826,7 @@ GROUP BY event_int, face_name, belief_label, cumulative_minute
 def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario2_OwnerDimen():
     # sourcery skip: extract-method
     # ESTABLISH
-    dimen = owner_concept_awardlink_str()
+    dimen = owner_plan_awardlink_str()
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
@@ -851,11 +851,11 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario2_OwnerDimen():
         # print(put_expected_insert_sqlstr)
         assert update_sqlstrs[0] == put_expected_insert_sqlstr
 
-        static_example_put_sqlstr = """INSERT INTO owner_concept_awardlink_s_put_agg (event_int, face_name, belief_label, owner_name, concept_rope, awardee_title, give_force, take_force)
-SELECT event_int, face_name, belief_label, owner_name, concept_rope, awardee_title, MAX(give_force), MAX(take_force)
-FROM owner_concept_awardlink_s_put_raw
+        static_example_put_sqlstr = """INSERT INTO owner_plan_awardlink_s_put_agg (event_int, face_name, belief_label, owner_name, plan_rope, awardee_title, give_force, take_force)
+SELECT event_int, face_name, belief_label, owner_name, plan_rope, awardee_title, MAX(give_force), MAX(take_force)
+FROM owner_plan_awardlink_s_put_raw
 WHERE error_message IS NULL
-GROUP BY event_int, face_name, belief_label, owner_name, concept_rope, awardee_title
+GROUP BY event_int, face_name, belief_label, owner_name, plan_rope, awardee_title
 ;
 """
         # print(update_sqlstrs[0])
@@ -882,10 +882,10 @@ GROUP BY event_int, face_name, belief_label, owner_name, concept_rope, awardee_t
         print(update_sqlstrs[1])
         assert update_sqlstrs[1] == del_expected_insert_sqlstr
 
-        static_example_del_sqlstr = """INSERT INTO owner_concept_awardlink_s_del_agg (event_int, face_name, belief_label, owner_name, concept_rope, awardee_title_ERASE)
-SELECT event_int, face_name, belief_label, owner_name, concept_rope, awardee_title_ERASE
-FROM owner_concept_awardlink_s_del_raw
-GROUP BY event_int, face_name, belief_label, owner_name, concept_rope, awardee_title_ERASE
+        static_example_del_sqlstr = """INSERT INTO owner_plan_awardlink_s_del_agg (event_int, face_name, belief_label, owner_name, plan_rope, awardee_title_ERASE)
+SELECT event_int, face_name, belief_label, owner_name, plan_rope, awardee_title_ERASE
+FROM owner_plan_awardlink_s_del_raw
+GROUP BY event_int, face_name, belief_label, owner_name, plan_rope, awardee_title_ERASE
 ;
 """
         assert update_sqlstrs[1] == static_example_del_sqlstr

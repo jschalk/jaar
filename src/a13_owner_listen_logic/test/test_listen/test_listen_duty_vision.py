@@ -1,5 +1,5 @@
 from src.a01_term_logic.rope import LabelTerm, RopeTerm, create_rope
-from src.a05_concept_logic.concept import conceptunit_shop, get_default_belief_label
+from src.a05_plan_logic.plan import get_default_belief_label, planunit_shop
 from src.a06_owner_logic.owner import OwnerUnit, ownerunit_shop
 from src.a12_hub_toolbox.hub_tool import (
     gut_file_exists,
@@ -104,7 +104,7 @@ def get_example_yao_owner() -> OwnerUnit:
     zia_str = "Zia"
     bob_str = "Bob"
     yao_speaker = ownerunit_shop(yao_str, get_default_belief_label())
-    yao_speaker.set_concept(conceptunit_shop(run_str()), casa_rope())
+    yao_speaker.set_plan(planunit_shop(run_str()), casa_rope())
     yao_speaker.add_acctunit(yao_str, acct_debt_points=10)
     yao_speaker.add_acctunit(zia_str, acct_debt_points=30)
     yao_speaker.add_acctunit(bob_str, acct_debt_points=40)
@@ -115,13 +115,13 @@ def get_example_yao_owner() -> OwnerUnit:
 def get_example_yao_vision1_speaker() -> OwnerUnit:
     yao_str = "Yao"
     yao_speaker = get_example_yao_owner()
-    yao_speaker.del_concept_obj(run_rope())
+    yao_speaker.del_plan_obj(run_rope())
     yao_speaker.set_acct_respect(40)
-    yao_speaker.set_concept(conceptunit_shop(cook_str(), task=True), casa_rope())
-    yao_speaker.set_concept(conceptunit_shop(hungry_str()), eat_rope())
-    yao_speaker.set_concept(conceptunit_shop(full_str()), eat_rope())
-    cook_conceptunit = yao_speaker.get_concept_obj(cook_rope())
-    cook_conceptunit.laborunit.set_laborlink(yao_str)
+    yao_speaker.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
+    yao_speaker.set_plan(planunit_shop(hungry_str()), eat_rope())
+    yao_speaker.set_plan(planunit_shop(full_str()), eat_rope())
+    cook_planunit = yao_speaker.get_plan_obj(cook_rope())
+    cook_planunit.laborunit.set_laborlink(yao_str)
     yao_speaker.edit_reason(cook_rope(), eat_rope(), hungry_rope())
     yao_speaker.add_fact(eat_rope(), hungry_rope())
     return yao_speaker
@@ -130,19 +130,19 @@ def get_example_yao_vision1_speaker() -> OwnerUnit:
 def get_example_yao_vision2_speaker() -> OwnerUnit:
     yao_str = "Yao"
     yao_speaker = get_example_yao_owner()
-    yao_speaker.del_concept_obj(run_rope())
+    yao_speaker.del_plan_obj(run_rope())
     yao_speaker.set_acct_respect(30)
-    yao_speaker.set_concept(conceptunit_shop(cook_str(), task=True), casa_rope())
-    yao_speaker.set_concept(conceptunit_shop(hungry_str()), eat_rope())
-    yao_speaker.set_concept(conceptunit_shop(full_str()), eat_rope())
-    cook_conceptunit = yao_speaker.get_concept_obj(cook_rope())
-    cook_conceptunit.laborunit.set_laborlink(yao_str)
+    yao_speaker.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
+    yao_speaker.set_plan(planunit_shop(hungry_str()), eat_rope())
+    yao_speaker.set_plan(planunit_shop(full_str()), eat_rope())
+    cook_planunit = yao_speaker.get_plan_obj(cook_rope())
+    cook_planunit.laborunit.set_laborlink(yao_str)
     yao_speaker.edit_reason(cook_rope(), eat_rope(), hungry_rope())
     yao_speaker.add_fact(eat_rope(), hungry_rope())
 
-    yao_speaker.set_concept(conceptunit_shop(sweep_str(), task=True), casa_rope())
-    yao_speaker.set_concept(conceptunit_shop(dirty_str()), sanitation_rope())
-    yao_speaker.set_concept(conceptunit_shop(clean_str()), sanitation_rope())
+    yao_speaker.set_plan(planunit_shop(sweep_str(), task=True), casa_rope())
+    yao_speaker.set_plan(planunit_shop(dirty_str()), sanitation_rope())
+    yao_speaker.set_plan(planunit_shop(clean_str()), sanitation_rope())
     yao_speaker.edit_reason(sweep_rope(), sanitation_rope(), dirty_rope())
     yao_speaker.add_fact(sweep_rope(), dirty_rope())
     return yao_speaker
@@ -150,11 +150,11 @@ def get_example_yao_vision2_speaker() -> OwnerUnit:
 
 def get_example_yao_vision3_speaker() -> OwnerUnit:
     yao_speaker = get_example_yao_owner()
-    yao_speaker.del_concept_obj(run_rope())
+    yao_speaker.del_plan_obj(run_rope())
     yao_speaker.set_acct_respect(10)
-    yao_speaker.set_concept(conceptunit_shop(sweep_str(), task=True), casa_rope())
-    yao_speaker.set_concept(conceptunit_shop(dirty_str()), sanitation_rope())
-    yao_speaker.set_concept(conceptunit_shop(clean_str()), sanitation_rope())
+    yao_speaker.set_plan(planunit_shop(sweep_str(), task=True), casa_rope())
+    yao_speaker.set_plan(planunit_shop(dirty_str()), sanitation_rope())
+    yao_speaker.set_plan(planunit_shop(clean_str()), sanitation_rope())
     yao_speaker.edit_reason(sweep_rope(), sanitation_rope(), dirty_rope())
     yao_speaker.add_fact(sweep_rope(), dirty_rope())
     return yao_speaker
@@ -258,15 +258,15 @@ def get_example_yao_gut_with_3_healers():
     yao_str = yao_gut.get_acct("Yao").acct_name
     bob_str = yao_gut.get_acct("Bob").acct_name
     zia_str = yao_gut.get_acct("Zia").acct_name
-    iowa_concept = conceptunit_shop(get_iowa_str(), problem_bool=True)
-    ohio_concept = conceptunit_shop(get_ohio_str(), problem_bool=True)
-    utah_concept = conceptunit_shop(get_utah_str(), problem_bool=True)
-    iowa_concept.healerlink.set_healer_name(get_yao_iowa_hubunit().owner_name)
-    ohio_concept.healerlink.set_healer_name(get_yao_ohio_hubunit().owner_name)
-    utah_concept.healerlink.set_healer_name(get_zia_utah_hubunit().owner_name)
-    yao_gut.set_concept(iowa_concept, get_usa_rope())
-    yao_gut.set_concept(ohio_concept, get_usa_rope())
-    yao_gut.set_concept(utah_concept, get_usa_rope())
+    iowa_plan = planunit_shop(get_iowa_str(), problem_bool=True)
+    ohio_plan = planunit_shop(get_ohio_str(), problem_bool=True)
+    utah_plan = planunit_shop(get_utah_str(), problem_bool=True)
+    iowa_plan.healerlink.set_healer_name(get_yao_iowa_hubunit().owner_name)
+    ohio_plan.healerlink.set_healer_name(get_yao_ohio_hubunit().owner_name)
+    utah_plan.healerlink.set_healer_name(get_zia_utah_hubunit().owner_name)
+    yao_gut.set_plan(iowa_plan, get_usa_rope())
+    yao_gut.set_plan(ohio_plan, get_usa_rope())
+    yao_gut.set_plan(utah_plan, get_usa_rope())
 
     return yao_gut
 
@@ -282,20 +282,20 @@ def test_listen_to_owner_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItse
     belief_mstr_dir = env_dir()
     belief_label = get_default_belief_label()
     yao_gut0 = get_example_yao_gut_with_3_healers()
-    yao_gut0.set_l1_concept(conceptunit_shop(get_location_str()))
-    yao_gut0.set_concept(conceptunit_shop(get_in_mer_str()), get_location_rope())
-    yao_gut0.set_concept(conceptunit_shop(get_on_land_str()), get_location_rope())
-    yao_gut0.set_l1_concept(conceptunit_shop(get_swim_str(), task=True))
+    yao_gut0.set_l1_plan(planunit_shop(get_location_str()))
+    yao_gut0.set_plan(planunit_shop(get_in_mer_str()), get_location_rope())
+    yao_gut0.set_plan(planunit_shop(get_on_land_str()), get_location_rope())
+    yao_gut0.set_l1_plan(planunit_shop(get_swim_str(), task=True))
     yao_gut0.edit_reason(get_swim_rope(), get_location_rope(), get_in_mer_rope())
     yao_gut0.add_fact(get_location_rope(), get_in_mer_rope())
     print(f"{yao_gut0.get_fact(get_location_rope())=}")
-    yao_gut0.del_concept_obj(run_rope())
+    yao_gut0.del_plan_obj(run_rope())
     assert yao_gut0._keep_dict.get(get_iowa_rope())
     assert yao_gut0._keep_dict.get(get_ohio_rope())
     assert yao_gut0._keep_dict.get(get_utah_rope())
     yao_gut0.settle_owner()
     assert len(yao_gut0._keep_dict) == 3
-    # print(f"{yao_gut0._concept_dict.keys()=}")
+    # print(f"{yao_gut0._plan_dict.keys()=}")
 
     yao_str = yao_gut0.owner_name
     yao_vision1 = get_example_yao_vision1_speaker()
@@ -339,19 +339,19 @@ def test_listen_to_owner_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItse
     assert yao_job_accts.keys() == yao_gut0_accts.keys()
     assert yao_job_accts == yao_gut0_accts
     assert len(yao_job.get_dict().get("accts")) == 3
-    assert len(yao_job._concept_dict) == 4
-    print(f"{yao_job._concept_dict.keys()=}")
+    assert len(yao_job._plan_dict) == 4
+    print(f"{yao_job._plan_dict.keys()=}")
     print(f"{yao_job.get_factunits_dict().keys()=}")
-    assert yao_job.concept_exists(cook_rope()) is False
-    assert yao_job.concept_exists(clean_rope()) is False
-    assert yao_job.concept_exists(run_rope()) is False
-    assert yao_job.concept_exists(get_swim_rope())
-    assert yao_job.concept_exists(get_in_mer_rope())
-    assert yao_job.concept_exists(get_on_land_rope()) is False
+    assert yao_job.plan_exists(cook_rope()) is False
+    assert yao_job.plan_exists(clean_rope()) is False
+    assert yao_job.plan_exists(run_rope()) is False
+    assert yao_job.plan_exists(get_swim_rope())
+    assert yao_job.plan_exists(get_in_mer_rope())
+    assert yao_job.plan_exists(get_on_land_rope()) is False
     assert yao_job.get_fact(get_location_rope()) is not None
     assert yao_job.get_fact(get_location_rope()).fstate == get_in_mer_rope()
     assert len(yao_job.get_agenda_dict()) == 1
-    assert len(yao_job.conceptroot.factunits) == 1
+    assert len(yao_job.planroot.factunits) == 1
     assert yao_job != yao_gut0
 
 

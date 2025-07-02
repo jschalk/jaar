@@ -24,7 +24,7 @@ def test_get_owner_root_facts_dict_ReturnsObj_Scenario1_factunits_Exist():
     casa_rope = sue_owner.make_l1_rope("case")
     clean_rope = sue_owner.make_l1_rope("clean")
     dirty_rope = sue_owner.make_l1_rope("dirty")
-    sue_owner.add_fact(casa_rope, dirty_rope, create_missing_concepts=True)
+    sue_owner.add_fact(casa_rope, dirty_rope, create_missing_plans=True)
 
     # WHEN
     sue_fact_dict = get_owner_root_facts_dict(sue_owner)
@@ -101,11 +101,11 @@ def test_set_factunits_to_owner_ReturnsObj_Scenario1_Owner1FactsChanged():
     clean_rope = bob_owner.make_rope(floor_rope, clean_str)
     dirty_rope = bob_owner.make_rope(floor_rope, dirty_str)
     mop_rope = bob_owner.make_rope(casa_rope, mop_str)
-    bob_owner.add_concept(floor_rope)
-    bob_owner.add_concept(clean_rope)
-    bob_owner.add_concept(dirty_rope)
-    bob_owner.add_concept(mop_rope, task=True)
-    bob_owner.edit_concept_attr(
+    bob_owner.add_plan(floor_rope)
+    bob_owner.add_plan(clean_rope)
+    bob_owner.add_plan(dirty_rope)
+    bob_owner.add_plan(mop_rope, task=True)
+    bob_owner.edit_plan_attr(
         mop_rope, reason_rcontext=floor_rope, reason_premise=dirty_rope
     )
     dirty_facts_dict = {floor_rope: {"fcontext": floor_rope, "fstate": dirty_rope}}
@@ -135,11 +135,11 @@ def test_set_factunits_to_owner_ReturnsObj_Scenario2_FactUnit_rcontext_DoesNotEx
     clean_rope = bob_owner.make_rope(floor_rope, clean_str)
     dirty_rope = bob_owner.make_rope(floor_rope, dirty_str)
     mop_rope = bob_owner.make_rope(casa_rope, mop_str)
-    bob_owner.add_concept(floor_rope)
-    # bob_owner.add_concept(clean_rope)
-    bob_owner.add_concept(dirty_rope)
-    bob_owner.add_concept(mop_rope, task=True)
-    bob_owner.edit_concept_attr(
+    bob_owner.add_plan(floor_rope)
+    # bob_owner.add_plan(clean_rope)
+    bob_owner.add_plan(dirty_rope)
+    bob_owner.add_plan(mop_rope, task=True)
+    bob_owner.edit_plan_attr(
         mop_rope, reason_rcontext=floor_rope, reason_premise=dirty_rope
     )
     clean_facts_dict = {floor_rope: {"fcontext": floor_rope, "fstate": clean_rope}}
@@ -154,7 +154,7 @@ def test_set_factunits_to_owner_ReturnsObj_Scenario2_FactUnit_rcontext_DoesNotEx
     # THEN
     assert bob_owner.get_dict() != before_bob_owner.get_dict()
     assert bob_owner.get_factunits_dict() == clean_facts_dict
-    assert bob_owner.get_concept_obj(clean_rope)
+    assert bob_owner.get_plan_obj(clean_rope)
 
 
 def test_set_factunits_to_owner_ReturnsObj_Scenario3_FactUnit_rcontext_WithoutRcontextNotAddedToOwner():
@@ -170,11 +170,11 @@ def test_set_factunits_to_owner_ReturnsObj_Scenario3_FactUnit_rcontext_WithoutRc
     clean_rope = bob_owner.make_rope(floor_rope, clean_str)
     dirty_rope = bob_owner.make_rope(floor_rope, dirty_str)
     mop_rope = bob_owner.make_rope(casa_rope, mop_str)
-    bob_owner.add_concept(floor_rope)
-    # bob_owner.add_concept(clean_rope)
-    bob_owner.add_concept(dirty_rope)
-    bob_owner.add_concept(mop_rope, task=True)
-    bob_owner.edit_concept_attr(
+    bob_owner.add_plan(floor_rope)
+    # bob_owner.add_plan(clean_rope)
+    bob_owner.add_plan(dirty_rope)
+    bob_owner.add_plan(mop_rope, task=True)
+    bob_owner.edit_plan_attr(
         mop_rope, reason_rcontext=floor_rope, reason_premise=dirty_rope
     )
 
@@ -214,11 +214,11 @@ def test_clear_factunits_from_owner_ReturnsObj_Scenario1_FactUnit_Exist():
     clean_rope = bob_owner.make_rope(floor_rope, clean_str)
     dirty_rope = bob_owner.make_rope(floor_rope, dirty_str)
     mop_rope = bob_owner.make_rope(casa_rope, mop_str)
-    bob_owner.add_concept(floor_rope)
-    # bob_owner.add_concept(clean_rope)
-    bob_owner.add_concept(dirty_rope)
-    bob_owner.add_concept(mop_rope, task=True)
-    bob_owner.edit_concept_attr(
+    bob_owner.add_plan(floor_rope)
+    # bob_owner.add_plan(clean_rope)
+    bob_owner.add_plan(dirty_rope)
+    bob_owner.add_plan(mop_rope, task=True)
+    bob_owner.edit_plan_attr(
         mop_rope, reason_rcontext=floor_rope, reason_premise=dirty_rope
     )
     bob_owner.add_fact(floor_rope, dirty_rope)

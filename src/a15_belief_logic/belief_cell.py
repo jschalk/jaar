@@ -11,7 +11,7 @@ from src.a00_data_toolbox.file_toolbox import (
 from src.a01_term_logic.term import LabelTerm, OwnerName
 from src.a02_finance_logic.allot import allot_nested_scale
 from src.a02_finance_logic.finance_config import FundNum, TimeLinePoint
-from src.a04_reason_logic.reason_concept import get_dict_from_factunits
+from src.a04_reason_logic.reason_plan import get_dict_from_factunits
 from src.a11_bud_logic.bud import BeliefLabel
 from src.a11_bud_logic.cell import CellUnit, cellunit_shop
 from src.a12_hub_toolbox.fact_tool import get_nodes_with_weighted_facts

@@ -11,8 +11,8 @@ from src.a00_data_toolbox.dict_toolbox import (
 from src.a01_term_logic.term import RopeTerm, TitleTerm
 from src.a03_group_logic.acct import AcctName, AcctUnit, MemberShip
 from src.a03_group_logic.group import MemberShip
-from src.a04_reason_logic.reason_concept import FactUnit, ReasonUnit
-from src.a05_concept_logic.concept import ConceptUnit
+from src.a04_reason_logic.reason_plan import FactUnit, ReasonUnit
+from src.a05_plan_logic.plan import PlanUnit
 from src.a06_owner_logic.owner import OwnerUnit, ownerunit_shop
 from src.a08_owner_atom_logic.atom import (
     InvalidOwnerAtomException,
@@ -49,8 +49,8 @@ class OwnerDelta:
 
         ordered_list = []
         for x_list in atom_order_key_dict.values():
-            if x_list[0].jkeys.get("concept_rope") is not None:
-                x_list = sorted(x_list, key=lambda x: x.jkeys.get("concept_rope"))
+            if x_list[0].jkeys.get("plan_rope") is not None:
+                x_list = sorted(x_list, key=lambda x: x.jkeys.get("plan_rope"))
             ordered_list.extend(x_list)
         return ordered_list
 
@@ -127,7 +127,7 @@ class OwnerDelta:
         after_owner.settle_owner()
         self.add_owneratoms_ownerunit_simple_attrs(before_owner, after_owner)
         self.add_owneratoms_accts(before_owner, after_owner)
-        self.add_owneratoms_concepts(before_owner, after_owner)
+        self.add_owneratoms_plans(before_owner, after_owner)
 
     def add_owneratoms_ownerunit_simple_attrs(
         self, before_owner: OwnerUnit, after_owner: OwnerUnit
@@ -320,159 +320,153 @@ class OwnerDelta:
             x_owneratom.set_jkey("group_title", delete_group_title)
             self.set_owneratom(x_owneratom)
 
-    def add_owneratoms_concepts(self, before_owner: OwnerUnit, after_owner: OwnerUnit):
-        before_concept_ropes = set(before_owner._concept_dict.keys())
-        after_concept_ropes = set(after_owner._concept_dict.keys())
+    def add_owneratoms_plans(self, before_owner: OwnerUnit, after_owner: OwnerUnit):
+        before_plan_ropes = set(before_owner._plan_dict.keys())
+        after_plan_ropes = set(after_owner._plan_dict.keys())
 
-        self.add_owneratom_concept_inserts(
+        self.add_owneratom_plan_inserts(
             after_owner=after_owner,
-            insert_concept_ropes=after_concept_ropes.difference(before_concept_ropes),
+            insert_plan_ropes=after_plan_ropes.difference(before_plan_ropes),
         )
-        self.add_owneratom_concept_deletes(
+        self.add_owneratom_plan_deletes(
             before_owner=before_owner,
-            delete_concept_ropes=before_concept_ropes.difference(after_concept_ropes),
+            delete_plan_ropes=before_plan_ropes.difference(after_plan_ropes),
         )
-        self.add_owneratom_concept_updates(
+        self.add_owneratom_plan_updates(
             before_owner=before_owner,
             after_owner=after_owner,
-            update_ropes=before_concept_ropes.intersection(after_concept_ropes),
+            update_ropes=before_plan_ropes.intersection(after_plan_ropes),
         )
 
-    def add_owneratom_concept_inserts(
-        self, after_owner: OwnerUnit, insert_concept_ropes: set
+    def add_owneratom_plan_inserts(
+        self, after_owner: OwnerUnit, insert_plan_ropes: set
     ):
-        for insert_concept_rope in insert_concept_ropes:
-            insert_conceptunit = after_owner.get_concept_obj(insert_concept_rope)
-            x_owneratom = owneratom_shop("owner_conceptunit", "INSERT")
-            x_owneratom.set_jkey("concept_rope", insert_conceptunit.get_concept_rope())
-            x_owneratom.set_jvalue("addin", insert_conceptunit.addin)
-            x_owneratom.set_jvalue("begin", insert_conceptunit.begin)
-            x_owneratom.set_jvalue("close", insert_conceptunit.close)
-            x_owneratom.set_jvalue("denom", insert_conceptunit.denom)
-            x_owneratom.set_jvalue("numor", insert_conceptunit.numor)
-            x_owneratom.set_jvalue("morph", insert_conceptunit.morph)
-            x_owneratom.set_jvalue("mass", insert_conceptunit.mass)
-            x_owneratom.set_jvalue("task", insert_conceptunit.task)
+        for insert_plan_rope in insert_plan_ropes:
+            insert_planunit = after_owner.get_plan_obj(insert_plan_rope)
+            x_owneratom = owneratom_shop("owner_planunit", "INSERT")
+            x_owneratom.set_jkey("plan_rope", insert_planunit.get_plan_rope())
+            x_owneratom.set_jvalue("addin", insert_planunit.addin)
+            x_owneratom.set_jvalue("begin", insert_planunit.begin)
+            x_owneratom.set_jvalue("close", insert_planunit.close)
+            x_owneratom.set_jvalue("denom", insert_planunit.denom)
+            x_owneratom.set_jvalue("numor", insert_planunit.numor)
+            x_owneratom.set_jvalue("morph", insert_planunit.morph)
+            x_owneratom.set_jvalue("mass", insert_planunit.mass)
+            x_owneratom.set_jvalue("task", insert_planunit.task)
             self.set_owneratom(x_owneratom)
 
-            self.add_owneratom_concept_factunit_inserts(
-                conceptunit=insert_conceptunit,
-                insert_factunit_rcontexts=set(insert_conceptunit.factunits.keys()),
+            self.add_owneratom_plan_factunit_inserts(
+                planunit=insert_planunit,
+                insert_factunit_rcontexts=set(insert_planunit.factunits.keys()),
             )
-            self.add_owneratom_concept_awardlink_inserts(
-                after_conceptunit=insert_conceptunit,
-                insert_awardlink_awardee_titles=set(
-                    insert_conceptunit.awardlinks.keys()
-                ),
+            self.add_owneratom_plan_awardlink_inserts(
+                after_planunit=insert_planunit,
+                insert_awardlink_awardee_titles=set(insert_planunit.awardlinks.keys()),
             )
-            self.add_owneratom_concept_reasonunit_inserts(
-                after_conceptunit=insert_conceptunit,
-                insert_reasonunit_rcontexts=set(insert_conceptunit.reasonunits.keys()),
+            self.add_owneratom_plan_reasonunit_inserts(
+                after_planunit=insert_planunit,
+                insert_reasonunit_rcontexts=set(insert_planunit.reasonunits.keys()),
             )
-            self.add_owneratom_concept_laborlink_insert(
-                concept_rope=insert_concept_rope,
-                insert_laborlink_labor_titles=insert_conceptunit.laborunit._laborlinks,
+            self.add_owneratom_plan_laborlink_insert(
+                plan_rope=insert_plan_rope,
+                insert_laborlink_labor_titles=insert_planunit.laborunit._laborlinks,
             )
-            self.add_owneratom_concept_healerlink_insert(
-                concept_rope=insert_concept_rope,
-                insert_healerlink_healer_names=insert_conceptunit.healerlink._healer_names,
+            self.add_owneratom_plan_healerlink_insert(
+                plan_rope=insert_plan_rope,
+                insert_healerlink_healer_names=insert_planunit.healerlink._healer_names,
             )
 
-    def add_owneratom_concept_updates(
+    def add_owneratom_plan_updates(
         self, before_owner: OwnerUnit, after_owner: OwnerUnit, update_ropes: set
     ):
-        for concept_rope in update_ropes:
-            after_conceptunit = after_owner.get_concept_obj(concept_rope)
-            before_conceptunit = before_owner.get_concept_obj(concept_rope)
-            if jvalues_different(
-                "owner_conceptunit", before_conceptunit, after_conceptunit
-            ):
-                x_owneratom = owneratom_shop("owner_conceptunit", "UPDATE")
-                x_owneratom.set_jkey(
-                    "concept_rope", after_conceptunit.get_concept_rope()
-                )
-                if before_conceptunit.addin != after_conceptunit.addin:
-                    x_owneratom.set_jvalue("addin", after_conceptunit.addin)
-                if before_conceptunit.begin != after_conceptunit.begin:
-                    x_owneratom.set_jvalue("begin", after_conceptunit.begin)
-                if before_conceptunit.close != after_conceptunit.close:
-                    x_owneratom.set_jvalue("close", after_conceptunit.close)
-                if before_conceptunit.denom != after_conceptunit.denom:
-                    x_owneratom.set_jvalue("denom", after_conceptunit.denom)
-                if before_conceptunit.numor != after_conceptunit.numor:
-                    x_owneratom.set_jvalue("numor", after_conceptunit.numor)
-                if before_conceptunit.morph != after_conceptunit.morph:
-                    x_owneratom.set_jvalue("morph", after_conceptunit.morph)
-                if before_conceptunit.mass != after_conceptunit.mass:
-                    x_owneratom.set_jvalue("mass", after_conceptunit.mass)
-                if before_conceptunit.task != after_conceptunit.task:
-                    x_owneratom.set_jvalue("task", after_conceptunit.task)
+        for plan_rope in update_ropes:
+            after_planunit = after_owner.get_plan_obj(plan_rope)
+            before_planunit = before_owner.get_plan_obj(plan_rope)
+            if jvalues_different("owner_planunit", before_planunit, after_planunit):
+                x_owneratom = owneratom_shop("owner_planunit", "UPDATE")
+                x_owneratom.set_jkey("plan_rope", after_planunit.get_plan_rope())
+                if before_planunit.addin != after_planunit.addin:
+                    x_owneratom.set_jvalue("addin", after_planunit.addin)
+                if before_planunit.begin != after_planunit.begin:
+                    x_owneratom.set_jvalue("begin", after_planunit.begin)
+                if before_planunit.close != after_planunit.close:
+                    x_owneratom.set_jvalue("close", after_planunit.close)
+                if before_planunit.denom != after_planunit.denom:
+                    x_owneratom.set_jvalue("denom", after_planunit.denom)
+                if before_planunit.numor != after_planunit.numor:
+                    x_owneratom.set_jvalue("numor", after_planunit.numor)
+                if before_planunit.morph != after_planunit.morph:
+                    x_owneratom.set_jvalue("morph", after_planunit.morph)
+                if before_planunit.mass != after_planunit.mass:
+                    x_owneratom.set_jvalue("mass", after_planunit.mass)
+                if before_planunit.task != after_planunit.task:
+                    x_owneratom.set_jvalue("task", after_planunit.task)
                 self.set_owneratom(x_owneratom)
 
             # insert / update / delete factunits
-            before_factunit_rcontexts = set(before_conceptunit.factunits.keys())
-            after_factunit_rcontexts = set(after_conceptunit.factunits.keys())
-            self.add_owneratom_concept_factunit_inserts(
-                conceptunit=after_conceptunit,
+            before_factunit_rcontexts = set(before_planunit.factunits.keys())
+            after_factunit_rcontexts = set(after_planunit.factunits.keys())
+            self.add_owneratom_plan_factunit_inserts(
+                planunit=after_planunit,
                 insert_factunit_rcontexts=after_factunit_rcontexts.difference(
                     before_factunit_rcontexts
                 ),
             )
-            self.add_owneratom_concept_factunit_updates(
-                before_conceptunit=before_conceptunit,
-                after_conceptunit=after_conceptunit,
+            self.add_owneratom_plan_factunit_updates(
+                before_planunit=before_planunit,
+                after_planunit=after_planunit,
                 update_factunit_rcontexts=before_factunit_rcontexts.intersection(
                     after_factunit_rcontexts
                 ),
             )
-            self.add_owneratom_concept_factunit_deletes(
-                concept_rope=concept_rope,
+            self.add_owneratom_plan_factunit_deletes(
+                plan_rope=plan_rope,
                 delete_factunit_rcontexts=before_factunit_rcontexts.difference(
                     after_factunit_rcontexts
                 ),
             )
 
             # insert / update / delete awardunits
-            before_awardlinks_awardee_titles = set(before_conceptunit.awardlinks.keys())
-            after_awardlinks_awardee_titles = set(after_conceptunit.awardlinks.keys())
-            self.add_owneratom_concept_awardlink_inserts(
-                after_conceptunit=after_conceptunit,
+            before_awardlinks_awardee_titles = set(before_planunit.awardlinks.keys())
+            after_awardlinks_awardee_titles = set(after_planunit.awardlinks.keys())
+            self.add_owneratom_plan_awardlink_inserts(
+                after_planunit=after_planunit,
                 insert_awardlink_awardee_titles=after_awardlinks_awardee_titles.difference(
                     before_awardlinks_awardee_titles
                 ),
             )
-            self.add_owneratom_concept_awardlink_updates(
-                before_conceptunit=before_conceptunit,
-                after_conceptunit=after_conceptunit,
+            self.add_owneratom_plan_awardlink_updates(
+                before_planunit=before_planunit,
+                after_planunit=after_planunit,
                 update_awardlink_awardee_titles=before_awardlinks_awardee_titles.intersection(
                     after_awardlinks_awardee_titles
                 ),
             )
-            self.add_owneratom_concept_awardlink_deletes(
-                concept_rope=concept_rope,
+            self.add_owneratom_plan_awardlink_deletes(
+                plan_rope=plan_rope,
                 delete_awardlink_awardee_titles=before_awardlinks_awardee_titles.difference(
                     after_awardlinks_awardee_titles
                 ),
             )
 
             # insert / update / delete reasonunits
-            before_reasonunit_rcontexts = set(before_conceptunit.reasonunits.keys())
-            after_reasonunit_rcontexts = set(after_conceptunit.reasonunits.keys())
-            self.add_owneratom_concept_reasonunit_inserts(
-                after_conceptunit=after_conceptunit,
+            before_reasonunit_rcontexts = set(before_planunit.reasonunits.keys())
+            after_reasonunit_rcontexts = set(after_planunit.reasonunits.keys())
+            self.add_owneratom_plan_reasonunit_inserts(
+                after_planunit=after_planunit,
                 insert_reasonunit_rcontexts=after_reasonunit_rcontexts.difference(
                     before_reasonunit_rcontexts
                 ),
             )
-            self.add_owneratom_concept_reasonunit_updates(
-                before_conceptunit=before_conceptunit,
-                after_conceptunit=after_conceptunit,
+            self.add_owneratom_plan_reasonunit_updates(
+                before_planunit=before_planunit,
+                after_planunit=after_planunit,
                 update_reasonunit_rcontexts=before_reasonunit_rcontexts.intersection(
                     after_reasonunit_rcontexts
                 ),
             )
-            self.add_owneratom_concept_reasonunit_deletes(
-                before_conceptunit=before_conceptunit,
+            self.add_owneratom_plan_reasonunit_deletes(
+                before_planunit=before_planunit,
                 delete_reasonunit_rcontexts=before_reasonunit_rcontexts.difference(
                     after_reasonunit_rcontexts
                 ),
@@ -483,18 +477,16 @@ class OwnerDelta:
             # update reasonunits_permises delete_premise
 
             # insert / update / delete laborlinks
-            before_laborlinks_labor_titles = set(
-                before_conceptunit.laborunit._laborlinks
-            )
-            after_laborlinks_labor_titles = set(after_conceptunit.laborunit._laborlinks)
-            self.add_owneratom_concept_laborlink_insert(
-                concept_rope=concept_rope,
+            before_laborlinks_labor_titles = set(before_planunit.laborunit._laborlinks)
+            after_laborlinks_labor_titles = set(after_planunit.laborunit._laborlinks)
+            self.add_owneratom_plan_laborlink_insert(
+                plan_rope=plan_rope,
                 insert_laborlink_labor_titles=after_laborlinks_labor_titles.difference(
                     before_laborlinks_labor_titles
                 ),
             )
-            self.add_owneratom_concept_laborlink_deletes(
-                concept_rope=concept_rope,
+            self.add_owneratom_plan_laborlink_deletes(
+                plan_rope=plan_rope,
                 delete_laborlink_labor_titles=before_laborlinks_labor_titles.difference(
                     after_laborlinks_labor_titles
                 ),
@@ -502,164 +494,156 @@ class OwnerDelta:
 
             # insert / update / delete healerlinks
             before_healerlinks_healer_names = set(
-                before_conceptunit.healerlink._healer_names
+                before_planunit.healerlink._healer_names
             )
             after_healerlinks_healer_names = set(
-                after_conceptunit.healerlink._healer_names
+                after_planunit.healerlink._healer_names
             )
-            self.add_owneratom_concept_healerlink_insert(
-                concept_rope=concept_rope,
+            self.add_owneratom_plan_healerlink_insert(
+                plan_rope=plan_rope,
                 insert_healerlink_healer_names=after_healerlinks_healer_names.difference(
                     before_healerlinks_healer_names
                 ),
             )
-            self.add_owneratom_concept_healerlink_deletes(
-                concept_rope=concept_rope,
+            self.add_owneratom_plan_healerlink_deletes(
+                plan_rope=plan_rope,
                 delete_healerlink_healer_names=before_healerlinks_healer_names.difference(
                     after_healerlinks_healer_names
                 ),
             )
 
-    def add_owneratom_concept_deletes(
-        self, before_owner: OwnerUnit, delete_concept_ropes: set
+    def add_owneratom_plan_deletes(
+        self, before_owner: OwnerUnit, delete_plan_ropes: set
     ):
-        for delete_concept_rope in delete_concept_ropes:
-            x_owneratom = owneratom_shop("owner_conceptunit", "DELETE")
-            x_owneratom.set_jkey("concept_rope", delete_concept_rope)
+        for delete_plan_rope in delete_plan_ropes:
+            x_owneratom = owneratom_shop("owner_planunit", "DELETE")
+            x_owneratom.set_jkey("plan_rope", delete_plan_rope)
             self.set_owneratom(x_owneratom)
 
-            delete_conceptunit = before_owner.get_concept_obj(delete_concept_rope)
-            self.add_owneratom_concept_factunit_deletes(
-                concept_rope=delete_concept_rope,
-                delete_factunit_rcontexts=set(delete_conceptunit.factunits.keys()),
+            delete_planunit = before_owner.get_plan_obj(delete_plan_rope)
+            self.add_owneratom_plan_factunit_deletes(
+                plan_rope=delete_plan_rope,
+                delete_factunit_rcontexts=set(delete_planunit.factunits.keys()),
             )
 
-            self.add_owneratom_concept_awardlink_deletes(
-                concept_rope=delete_concept_rope,
-                delete_awardlink_awardee_titles=set(
-                    delete_conceptunit.awardlinks.keys()
-                ),
+            self.add_owneratom_plan_awardlink_deletes(
+                plan_rope=delete_plan_rope,
+                delete_awardlink_awardee_titles=set(delete_planunit.awardlinks.keys()),
             )
-            self.add_owneratom_concept_reasonunit_deletes(
-                before_conceptunit=delete_conceptunit,
-                delete_reasonunit_rcontexts=set(delete_conceptunit.reasonunits.keys()),
+            self.add_owneratom_plan_reasonunit_deletes(
+                before_planunit=delete_planunit,
+                delete_reasonunit_rcontexts=set(delete_planunit.reasonunits.keys()),
             )
-            self.add_owneratom_concept_laborlink_deletes(
-                concept_rope=delete_concept_rope,
-                delete_laborlink_labor_titles=delete_conceptunit.laborunit._laborlinks,
+            self.add_owneratom_plan_laborlink_deletes(
+                plan_rope=delete_plan_rope,
+                delete_laborlink_labor_titles=delete_planunit.laborunit._laborlinks,
             )
-            self.add_owneratom_concept_healerlink_deletes(
-                concept_rope=delete_concept_rope,
-                delete_healerlink_healer_names=delete_conceptunit.healerlink._healer_names,
+            self.add_owneratom_plan_healerlink_deletes(
+                plan_rope=delete_plan_rope,
+                delete_healerlink_healer_names=delete_planunit.healerlink._healer_names,
             )
 
-    def add_owneratom_concept_reasonunit_inserts(
-        self, after_conceptunit: ConceptUnit, insert_reasonunit_rcontexts: set
+    def add_owneratom_plan_reasonunit_inserts(
+        self, after_planunit: PlanUnit, insert_reasonunit_rcontexts: set
     ):
         for insert_reasonunit_rcontext in insert_reasonunit_rcontexts:
-            after_reasonunit = after_conceptunit.get_reasonunit(
-                insert_reasonunit_rcontext
-            )
-            x_owneratom = owneratom_shop("owner_concept_reasonunit", "INSERT")
-            x_owneratom.set_jkey("concept_rope", after_conceptunit.get_concept_rope())
+            after_reasonunit = after_planunit.get_reasonunit(insert_reasonunit_rcontext)
+            x_owneratom = owneratom_shop("owner_plan_reasonunit", "INSERT")
+            x_owneratom.set_jkey("plan_rope", after_planunit.get_plan_rope())
             x_owneratom.set_jkey("rcontext", after_reasonunit.rcontext)
-            if after_reasonunit.rconcept_active_requisite is not None:
+            if after_reasonunit.rplan_active_requisite is not None:
                 x_owneratom.set_jvalue(
-                    "rconcept_active_requisite",
-                    after_reasonunit.rconcept_active_requisite,
+                    "rplan_active_requisite",
+                    after_reasonunit.rplan_active_requisite,
                 )
             self.set_owneratom(x_owneratom)
 
-            self.add_owneratom_concept_reason_premiseunit_inserts(
-                concept_rope=after_conceptunit.get_concept_rope(),
+            self.add_owneratom_plan_reason_premiseunit_inserts(
+                plan_rope=after_planunit.get_plan_rope(),
                 after_reasonunit=after_reasonunit,
                 insert_premise_pstates=set(after_reasonunit.premises.keys()),
             )
 
-    def add_owneratom_concept_reasonunit_updates(
+    def add_owneratom_plan_reasonunit_updates(
         self,
-        before_conceptunit: ConceptUnit,
-        after_conceptunit: ConceptUnit,
+        before_planunit: PlanUnit,
+        after_planunit: PlanUnit,
         update_reasonunit_rcontexts: set,
     ):
         for update_reasonunit_rcontext in update_reasonunit_rcontexts:
-            before_reasonunit = before_conceptunit.get_reasonunit(
+            before_reasonunit = before_planunit.get_reasonunit(
                 update_reasonunit_rcontext
             )
-            after_reasonunit = after_conceptunit.get_reasonunit(
-                update_reasonunit_rcontext
-            )
+            after_reasonunit = after_planunit.get_reasonunit(update_reasonunit_rcontext)
             if jvalues_different(
-                "owner_concept_reasonunit", before_reasonunit, after_reasonunit
+                "owner_plan_reasonunit", before_reasonunit, after_reasonunit
             ):
-                x_owneratom = owneratom_shop("owner_concept_reasonunit", "UPDATE")
-                x_owneratom.set_jkey(
-                    "concept_rope", before_conceptunit.get_concept_rope()
-                )
+                x_owneratom = owneratom_shop("owner_plan_reasonunit", "UPDATE")
+                x_owneratom.set_jkey("plan_rope", before_planunit.get_plan_rope())
                 x_owneratom.set_jkey("rcontext", after_reasonunit.rcontext)
                 if (
-                    before_reasonunit.rconcept_active_requisite
-                    != after_reasonunit.rconcept_active_requisite
+                    before_reasonunit.rplan_active_requisite
+                    != after_reasonunit.rplan_active_requisite
                 ):
                     x_owneratom.set_jvalue(
-                        "rconcept_active_requisite",
-                        after_reasonunit.rconcept_active_requisite,
+                        "rplan_active_requisite",
+                        after_reasonunit.rplan_active_requisite,
                     )
                 self.set_owneratom(x_owneratom)
 
             before_premise_pstates = set(before_reasonunit.premises.keys())
             after_premise_pstates = set(after_reasonunit.premises.keys())
-            self.add_owneratom_concept_reason_premiseunit_inserts(
-                concept_rope=before_conceptunit.get_concept_rope(),
+            self.add_owneratom_plan_reason_premiseunit_inserts(
+                plan_rope=before_planunit.get_plan_rope(),
                 after_reasonunit=after_reasonunit,
                 insert_premise_pstates=after_premise_pstates.difference(
                     before_premise_pstates
                 ),
             )
-            self.add_owneratom_concept_reason_premiseunit_updates(
-                concept_rope=before_conceptunit.get_concept_rope(),
+            self.add_owneratom_plan_reason_premiseunit_updates(
+                plan_rope=before_planunit.get_plan_rope(),
                 before_reasonunit=before_reasonunit,
                 after_reasonunit=after_reasonunit,
                 update_premise_pstates=after_premise_pstates.intersection(
                     before_premise_pstates
                 ),
             )
-            self.add_owneratom_concept_reason_premiseunit_deletes(
-                concept_rope=before_conceptunit.get_concept_rope(),
+            self.add_owneratom_plan_reason_premiseunit_deletes(
+                plan_rope=before_planunit.get_plan_rope(),
                 reasonunit_rcontext=update_reasonunit_rcontext,
                 delete_premise_pstates=before_premise_pstates.difference(
                     after_premise_pstates
                 ),
             )
 
-    def add_owneratom_concept_reasonunit_deletes(
-        self, before_conceptunit: ConceptUnit, delete_reasonunit_rcontexts: set
+    def add_owneratom_plan_reasonunit_deletes(
+        self, before_planunit: PlanUnit, delete_reasonunit_rcontexts: set
     ):
         for delete_reasonunit_rcontext in delete_reasonunit_rcontexts:
-            x_owneratom = owneratom_shop("owner_concept_reasonunit", "DELETE")
-            x_owneratom.set_jkey("concept_rope", before_conceptunit.get_concept_rope())
+            x_owneratom = owneratom_shop("owner_plan_reasonunit", "DELETE")
+            x_owneratom.set_jkey("plan_rope", before_planunit.get_plan_rope())
             x_owneratom.set_jkey("rcontext", delete_reasonunit_rcontext)
             self.set_owneratom(x_owneratom)
 
-            before_reasonunit = before_conceptunit.get_reasonunit(
+            before_reasonunit = before_planunit.get_reasonunit(
                 delete_reasonunit_rcontext
             )
-            self.add_owneratom_concept_reason_premiseunit_deletes(
-                concept_rope=before_conceptunit.get_concept_rope(),
+            self.add_owneratom_plan_reason_premiseunit_deletes(
+                plan_rope=before_planunit.get_plan_rope(),
                 reasonunit_rcontext=delete_reasonunit_rcontext,
                 delete_premise_pstates=set(before_reasonunit.premises.keys()),
             )
 
-    def add_owneratom_concept_reason_premiseunit_inserts(
+    def add_owneratom_plan_reason_premiseunit_inserts(
         self,
-        concept_rope: RopeTerm,
+        plan_rope: RopeTerm,
         after_reasonunit: ReasonUnit,
         insert_premise_pstates: set,
     ):
         for insert_premise_pstate in insert_premise_pstates:
             after_premiseunit = after_reasonunit.get_premise(insert_premise_pstate)
-            x_owneratom = owneratom_shop("owner_concept_reason_premiseunit", "INSERT")
-            x_owneratom.set_jkey("concept_rope", concept_rope)
+            x_owneratom = owneratom_shop("owner_plan_reason_premiseunit", "INSERT")
+            x_owneratom.set_jkey("plan_rope", plan_rope)
             x_owneratom.set_jkey("rcontext", after_reasonunit.rcontext)
             x_owneratom.set_jkey("pstate", after_premiseunit.pstate)
             if after_premiseunit.popen is not None:
@@ -670,9 +654,9 @@ class OwnerDelta:
                 x_owneratom.set_jvalue("pdivisor", after_premiseunit.pdivisor)
             self.set_owneratom(x_owneratom)
 
-    def add_owneratom_concept_reason_premiseunit_updates(
+    def add_owneratom_plan_reason_premiseunit_updates(
         self,
-        concept_rope: RopeTerm,
+        plan_rope: RopeTerm,
         before_reasonunit: ReasonUnit,
         after_reasonunit: ReasonUnit,
         update_premise_pstates: set,
@@ -681,14 +665,12 @@ class OwnerDelta:
             before_premiseunit = before_reasonunit.get_premise(update_premise_pstate)
             after_premiseunit = after_reasonunit.get_premise(update_premise_pstate)
             if jvalues_different(
-                "owner_concept_reason_premiseunit",
+                "owner_plan_reason_premiseunit",
                 before_premiseunit,
                 after_premiseunit,
             ):
-                x_owneratom = owneratom_shop(
-                    "owner_concept_reason_premiseunit", "UPDATE"
-                )
-                x_owneratom.set_jkey("concept_rope", concept_rope)
+                x_owneratom = owneratom_shop("owner_plan_reason_premiseunit", "UPDATE")
+                x_owneratom.set_jkey("plan_rope", plan_rope)
                 x_owneratom.set_jkey("rcontext", before_reasonunit.rcontext)
                 x_owneratom.set_jkey("pstate", after_premiseunit.pstate)
                 if after_premiseunit.popen != before_premiseunit.popen:
@@ -699,89 +681,87 @@ class OwnerDelta:
                     x_owneratom.set_jvalue("pdivisor", after_premiseunit.pdivisor)
                 self.set_owneratom(x_owneratom)
 
-    def add_owneratom_concept_reason_premiseunit_deletes(
+    def add_owneratom_plan_reason_premiseunit_deletes(
         self,
-        concept_rope: RopeTerm,
+        plan_rope: RopeTerm,
         reasonunit_rcontext: RopeTerm,
         delete_premise_pstates: set,
     ):
         for delete_premise_pstate in delete_premise_pstates:
-            x_owneratom = owneratom_shop("owner_concept_reason_premiseunit", "DELETE")
-            x_owneratom.set_jkey("concept_rope", concept_rope)
+            x_owneratom = owneratom_shop("owner_plan_reason_premiseunit", "DELETE")
+            x_owneratom.set_jkey("plan_rope", plan_rope)
             x_owneratom.set_jkey("rcontext", reasonunit_rcontext)
             x_owneratom.set_jkey("pstate", delete_premise_pstate)
             self.set_owneratom(x_owneratom)
 
-    def add_owneratom_concept_laborlink_insert(
-        self, concept_rope: RopeTerm, insert_laborlink_labor_titles: set
+    def add_owneratom_plan_laborlink_insert(
+        self, plan_rope: RopeTerm, insert_laborlink_labor_titles: set
     ):
         for insert_laborlink_labor_title in insert_laborlink_labor_titles:
-            x_owneratom = owneratom_shop("owner_concept_laborlink", "INSERT")
-            x_owneratom.set_jkey("concept_rope", concept_rope)
+            x_owneratom = owneratom_shop("owner_plan_laborlink", "INSERT")
+            x_owneratom.set_jkey("plan_rope", plan_rope)
             x_owneratom.set_jkey("labor_title", insert_laborlink_labor_title)
             self.set_owneratom(x_owneratom)
 
-    def add_owneratom_concept_laborlink_deletes(
-        self, concept_rope: RopeTerm, delete_laborlink_labor_titles: set
+    def add_owneratom_plan_laborlink_deletes(
+        self, plan_rope: RopeTerm, delete_laborlink_labor_titles: set
     ):
         for delete_laborlink_labor_title in delete_laborlink_labor_titles:
-            x_owneratom = owneratom_shop("owner_concept_laborlink", "DELETE")
-            x_owneratom.set_jkey("concept_rope", concept_rope)
+            x_owneratom = owneratom_shop("owner_plan_laborlink", "DELETE")
+            x_owneratom.set_jkey("plan_rope", plan_rope)
             x_owneratom.set_jkey("labor_title", delete_laborlink_labor_title)
             self.set_owneratom(x_owneratom)
 
-    def add_owneratom_concept_healerlink_insert(
-        self, concept_rope: RopeTerm, insert_healerlink_healer_names: set
+    def add_owneratom_plan_healerlink_insert(
+        self, plan_rope: RopeTerm, insert_healerlink_healer_names: set
     ):
         for insert_healerlink_healer_name in insert_healerlink_healer_names:
-            x_owneratom = owneratom_shop("owner_concept_healerlink", "INSERT")
-            x_owneratom.set_jkey("concept_rope", concept_rope)
+            x_owneratom = owneratom_shop("owner_plan_healerlink", "INSERT")
+            x_owneratom.set_jkey("plan_rope", plan_rope)
             x_owneratom.set_jkey("healer_name", insert_healerlink_healer_name)
             self.set_owneratom(x_owneratom)
 
-    def add_owneratom_concept_healerlink_deletes(
-        self, concept_rope: RopeTerm, delete_healerlink_healer_names: set
+    def add_owneratom_plan_healerlink_deletes(
+        self, plan_rope: RopeTerm, delete_healerlink_healer_names: set
     ):
         for delete_healerlink_healer_name in delete_healerlink_healer_names:
-            x_owneratom = owneratom_shop("owner_concept_healerlink", "DELETE")
-            x_owneratom.set_jkey("concept_rope", concept_rope)
+            x_owneratom = owneratom_shop("owner_plan_healerlink", "DELETE")
+            x_owneratom.set_jkey("plan_rope", plan_rope)
             x_owneratom.set_jkey("healer_name", delete_healerlink_healer_name)
             self.set_owneratom(x_owneratom)
 
-    def add_owneratom_concept_awardlink_inserts(
-        self, after_conceptunit: ConceptUnit, insert_awardlink_awardee_titles: set
+    def add_owneratom_plan_awardlink_inserts(
+        self, after_planunit: PlanUnit, insert_awardlink_awardee_titles: set
     ):
         for after_awardlink_awardee_title in insert_awardlink_awardee_titles:
-            after_awardlink = after_conceptunit.awardlinks.get(
+            after_awardlink = after_planunit.awardlinks.get(
                 after_awardlink_awardee_title
             )
-            x_owneratom = owneratom_shop("owner_concept_awardlink", "INSERT")
-            x_owneratom.set_jkey("concept_rope", after_conceptunit.get_concept_rope())
+            x_owneratom = owneratom_shop("owner_plan_awardlink", "INSERT")
+            x_owneratom.set_jkey("plan_rope", after_planunit.get_plan_rope())
             x_owneratom.set_jkey("awardee_title", after_awardlink.awardee_title)
             x_owneratom.set_jvalue("give_force", after_awardlink.give_force)
             x_owneratom.set_jvalue("take_force", after_awardlink.take_force)
             self.set_owneratom(x_owneratom)
 
-    def add_owneratom_concept_awardlink_updates(
+    def add_owneratom_plan_awardlink_updates(
         self,
-        before_conceptunit: ConceptUnit,
-        after_conceptunit: ConceptUnit,
+        before_planunit: PlanUnit,
+        after_planunit: PlanUnit,
         update_awardlink_awardee_titles: set,
     ):
         for update_awardlink_awardee_title in update_awardlink_awardee_titles:
-            before_awardlink = before_conceptunit.awardlinks.get(
+            before_awardlink = before_planunit.awardlinks.get(
                 update_awardlink_awardee_title
             )
-            after_awardlink = after_conceptunit.awardlinks.get(
+            after_awardlink = after_planunit.awardlinks.get(
                 update_awardlink_awardee_title
             )
             if jvalues_different(
-                "owner_concept_awardlink", before_awardlink, after_awardlink
+                "owner_plan_awardlink", before_awardlink, after_awardlink
             ):
-                x_owneratom = owneratom_shop("owner_concept_awardlink", "UPDATE")
-                x_owneratom.set_jkey(
-                    "concept_rope", before_conceptunit.get_concept_rope()
-                )
+                x_owneratom = owneratom_shop("owner_plan_awardlink", "UPDATE")
+                x_owneratom.set_jkey("plan_rope", before_planunit.get_plan_rope())
                 x_owneratom.set_jkey("awardee_title", after_awardlink.awardee_title)
                 if before_awardlink.give_force != after_awardlink.give_force:
                     x_owneratom.set_jvalue("give_force", after_awardlink.give_force)
@@ -789,22 +769,22 @@ class OwnerDelta:
                     x_owneratom.set_jvalue("take_force", after_awardlink.take_force)
                 self.set_owneratom(x_owneratom)
 
-    def add_owneratom_concept_awardlink_deletes(
-        self, concept_rope: RopeTerm, delete_awardlink_awardee_titles: set
+    def add_owneratom_plan_awardlink_deletes(
+        self, plan_rope: RopeTerm, delete_awardlink_awardee_titles: set
     ):
         for delete_awardlink_awardee_title in delete_awardlink_awardee_titles:
-            x_owneratom = owneratom_shop("owner_concept_awardlink", "DELETE")
-            x_owneratom.set_jkey("concept_rope", concept_rope)
+            x_owneratom = owneratom_shop("owner_plan_awardlink", "DELETE")
+            x_owneratom.set_jkey("plan_rope", plan_rope)
             x_owneratom.set_jkey("awardee_title", delete_awardlink_awardee_title)
             self.set_owneratom(x_owneratom)
 
-    def add_owneratom_concept_factunit_inserts(
-        self, conceptunit: ConceptUnit, insert_factunit_rcontexts: set
+    def add_owneratom_plan_factunit_inserts(
+        self, planunit: PlanUnit, insert_factunit_rcontexts: set
     ):
         for insert_factunit_rcontext in insert_factunit_rcontexts:
-            insert_factunit = conceptunit.factunits.get(insert_factunit_rcontext)
-            x_owneratom = owneratom_shop("owner_concept_factunit", "INSERT")
-            x_owneratom.set_jkey("concept_rope", conceptunit.get_concept_rope())
+            insert_factunit = planunit.factunits.get(insert_factunit_rcontext)
+            x_owneratom = owneratom_shop("owner_plan_factunit", "INSERT")
+            x_owneratom.set_jkey("plan_rope", planunit.get_plan_rope())
             x_owneratom.set_jkey("fcontext", insert_factunit.fcontext)
             if insert_factunit.fstate is not None:
                 x_owneratom.set_jvalue("fstate", insert_factunit.fstate)
@@ -814,22 +794,20 @@ class OwnerDelta:
                 x_owneratom.set_jvalue("fnigh", insert_factunit.fnigh)
             self.set_owneratom(x_owneratom)
 
-    def add_owneratom_concept_factunit_updates(
+    def add_owneratom_plan_factunit_updates(
         self,
-        before_conceptunit: ConceptUnit,
-        after_conceptunit: ConceptUnit,
+        before_planunit: PlanUnit,
+        after_planunit: PlanUnit,
         update_factunit_rcontexts: set,
     ):
         for update_factunit_rcontext in update_factunit_rcontexts:
-            before_factunit = before_conceptunit.factunits.get(update_factunit_rcontext)
-            after_factunit = after_conceptunit.factunits.get(update_factunit_rcontext)
+            before_factunit = before_planunit.factunits.get(update_factunit_rcontext)
+            after_factunit = after_planunit.factunits.get(update_factunit_rcontext)
             if jvalues_different(
-                "owner_concept_factunit", before_factunit, after_factunit
+                "owner_plan_factunit", before_factunit, after_factunit
             ):
-                x_owneratom = owneratom_shop("owner_concept_factunit", "UPDATE")
-                x_owneratom.set_jkey(
-                    "concept_rope", before_conceptunit.get_concept_rope()
-                )
+                x_owneratom = owneratom_shop("owner_plan_factunit", "UPDATE")
+                x_owneratom.set_jkey("plan_rope", before_planunit.get_plan_rope())
                 x_owneratom.set_jkey("fcontext", after_factunit.fcontext)
                 if before_factunit.fstate != after_factunit.fstate:
                     x_owneratom.set_jvalue("fstate", after_factunit.fstate)
@@ -839,12 +817,12 @@ class OwnerDelta:
                     x_owneratom.set_jvalue("fnigh", after_factunit.fnigh)
                 self.set_owneratom(x_owneratom)
 
-    def add_owneratom_concept_factunit_deletes(
-        self, concept_rope: RopeTerm, delete_factunit_rcontexts: FactUnit
+    def add_owneratom_plan_factunit_deletes(
+        self, plan_rope: RopeTerm, delete_factunit_rcontexts: FactUnit
     ):
         for delete_factunit_rcontext in delete_factunit_rcontexts:
-            x_owneratom = owneratom_shop("owner_concept_factunit", "DELETE")
-            x_owneratom.set_jkey("concept_rope", concept_rope)
+            x_owneratom = owneratom_shop("owner_plan_factunit", "DELETE")
+            x_owneratom.set_jkey("plan_rope", plan_rope)
             x_owneratom.set_jkey("fcontext", delete_factunit_rcontext)
             self.set_owneratom(x_owneratom)
 

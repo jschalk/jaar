@@ -1,10 +1,10 @@
 from src.a03_group_logic.group import awardlink_shop
-from src.a04_reason_logic.reason_concept import factunit_shop, reasonunit_shop
+from src.a04_reason_logic.reason_plan import factunit_shop, reasonunit_shop
 from src.a06_owner_logic.owner import ownerunit_shop
 from src.a06_owner_logic.owner_tool import (
-    owner_concept_factunit_get_obj,
-    owner_concept_reason_premiseunit_get_obj as premiseunit_get_obj,
-    owner_concept_reasonunit_get_obj,
+    owner_plan_factunit_get_obj,
+    owner_plan_reason_premiseunit_get_obj as premiseunit_get_obj,
+    owner_plan_reasonunit_get_obj,
 )
 from src.a06_owner_logic.test._util.a06_str import (
     acct_debt_points_str,
@@ -13,8 +13,6 @@ from src.a06_owner_logic.test._util.a06_str import (
     awardee_title_str,
     begin_str,
     close_str,
-    concept_label_str,
-    concept_rope_str,
     denom_str,
     fcontext_str,
     fopen_str,
@@ -28,17 +26,19 @@ from src.a06_owner_logic.test._util.a06_str import (
     numor_str,
     owner_acct_membership_str,
     owner_acctunit_str,
-    owner_concept_awardlink_str,
-    owner_concept_factunit_str,
-    owner_concept_healerlink_str,
-    owner_concept_laborlink_str,
-    owner_concept_reason_premiseunit_str,
-    owner_concept_reasonunit_str,
-    owner_conceptunit_str,
+    owner_plan_awardlink_str,
+    owner_plan_factunit_str,
+    owner_plan_healerlink_str,
+    owner_plan_laborlink_str,
+    owner_plan_reason_premiseunit_str,
+    owner_plan_reasonunit_str,
+    owner_planunit_str,
     ownerunit_str,
     parent_rope_str,
-    rconcept_active_requisite_str,
+    plan_label_str,
+    plan_rope_str,
     rcontext_str,
+    rplan_active_requisite_str,
     stop_want_str,
     take_force_str,
     task_str,
@@ -52,10 +52,10 @@ def test_sift_atom_ReturnsNoneIfGivenOwnerAtomIsUPDATE():
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_owner.make_l1_rope(casa_str)
-    sue_owner.add_concept(casa_rope)
-    casa_atom = owneratom_shop(owner_conceptunit_str(), UPDATE_str())
+    sue_owner.add_plan(casa_rope)
+    casa_atom = owneratom_shop(owner_planunit_str(), UPDATE_str())
     casa_atom.set_arg(parent_rope_str(), sue_owner.belief_label)
-    casa_atom.set_arg(concept_label_str(), casa_str)
+    casa_atom.set_arg(plan_label_str(), casa_str)
     casa_atom.set_arg(mass_str(), 8)
     # THEN
     new_casa_atom = sift_owneratom(sue_owner, casa_atom)
@@ -152,12 +152,12 @@ def test_sift_atom_ReturnsObj_OwnerAtom_UPDATE_owner_acct_membership():
     assert zia_jvalues == {group_debt_points_str(): zia_run_group_debt_points}
 
 
-def test_sift_atom_ReturnsObj_OwnerAtom_UPDATE_owner_conceptunit():
+def test_sift_atom_ReturnsObj_OwnerAtom_UPDATE_owner_planunit():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_owner.make_l1_rope(casa_str)
-    sue_owner.add_concept(casa_rope)
+    sue_owner.add_plan(casa_rope)
 
     sue_addin = 23
     sue_begin = 37
@@ -170,8 +170,8 @@ def test_sift_atom_ReturnsObj_OwnerAtom_UPDATE_owner_conceptunit():
     sue_task = 97
     sue_problem_bool = True
     sue_stop_want = 107
-    old_casa_atom = owneratom_shop(owner_conceptunit_str(), INSERT_str())
-    old_casa_atom.set_arg(concept_rope_str(), casa_rope)
+    old_casa_atom = owneratom_shop(owner_planunit_str(), INSERT_str())
+    old_casa_atom.set_arg(plan_rope_str(), casa_rope)
     old_casa_atom.set_arg(addin_str(), sue_addin)
     old_casa_atom.set_arg(begin_str(), sue_begin)
     old_casa_atom.set_arg(close_str(), sue_close)
@@ -204,19 +204,19 @@ def test_sift_atom_ReturnsObj_OwnerAtom_UPDATE_owner_conceptunit():
     assert zia_jvalues.get(stop_want_str()) == sue_stop_want
 
 
-def test_sift_atom_ReturnsObj_OwnerAtom_UPDATE_owner_concept_awardlink():
+def test_sift_atom_ReturnsObj_OwnerAtom_UPDATE_owner_plan_awardlink():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_owner.make_l1_rope(casa_str)
-    sue_owner.add_concept(casa_rope)
+    sue_owner.add_plan(casa_rope)
     run_str = ";run"
     zia_run_give_force = 72
     zia_run_take_force = 76
-    sue_owner.get_concept_obj(casa_rope).set_awardlink(awardlink_shop(run_str, 2, 3))
+    sue_owner.get_plan_obj(casa_rope).set_awardlink(awardlink_shop(run_str, 2, 3))
 
-    zia_atom = owneratom_shop(owner_concept_awardlink_str(), INSERT_str())
-    zia_atom.set_arg(concept_rope_str(), casa_rope)
+    zia_atom = owneratom_shop(owner_plan_awardlink_str(), INSERT_str())
+    zia_atom.set_arg(plan_rope_str(), casa_rope)
     zia_atom.set_arg(awardee_title_str(), run_str)
     zia_atom.set_arg(give_force_str(), zia_run_give_force)
     zia_atom.set_arg(take_force_str(), zia_run_take_force)
@@ -233,25 +233,25 @@ def test_sift_atom_ReturnsObj_OwnerAtom_UPDATE_owner_concept_awardlink():
     assert zia_jvalues.get(take_force_str()) == zia_run_take_force
 
 
-def test_sift_atom_ReturnsObj_OwnerAtom_UPDATE_owner_concept_reasonunit():
+def test_sift_atom_ReturnsObj_OwnerAtom_UPDATE_owner_plan_reasonunit():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_owner.make_l1_rope(casa_str)
     week_str = "week"
     week_rope = sue_owner.make_l1_rope(casa_str)
-    sue_owner.add_concept(casa_rope)
-    sue_owner.get_concept_obj(casa_rope).set_reasonunit(reasonunit_shop(week_rope))
+    sue_owner.add_plan(casa_rope)
+    sue_owner.get_plan_obj(casa_rope).set_reasonunit(reasonunit_shop(week_rope))
 
-    new_rconcept_active_requisite = True
-    casa_atom = owneratom_shop(owner_concept_reasonunit_str(), INSERT_str())
-    casa_atom.set_arg(concept_rope_str(), casa_rope)
+    new_rplan_active_requisite = True
+    casa_atom = owneratom_shop(owner_plan_reasonunit_str(), INSERT_str())
+    casa_atom.set_arg(plan_rope_str(), casa_rope)
     casa_atom.set_arg(rcontext_str(), week_rope)
-    casa_atom.set_arg(rconcept_active_requisite_str(), new_rconcept_active_requisite)
+    casa_atom.set_arg(rplan_active_requisite_str(), new_rplan_active_requisite)
     casa_jkeys = casa_atom.get_jkeys_dict()
-    casa_reasonunit = owner_concept_reasonunit_get_obj(sue_owner, casa_jkeys)
-    assert casa_reasonunit.rconcept_active_requisite != new_rconcept_active_requisite
-    assert casa_reasonunit.rconcept_active_requisite is None
+    casa_reasonunit = owner_plan_reasonunit_get_obj(sue_owner, casa_jkeys)
+    assert casa_reasonunit.rplan_active_requisite != new_rplan_active_requisite
+    assert casa_reasonunit.rplan_active_requisite is None
 
     # WHEN
     new_zia_owneratom = sift_owneratom(sue_owner, casa_atom)
@@ -261,11 +261,11 @@ def test_sift_atom_ReturnsObj_OwnerAtom_UPDATE_owner_concept_reasonunit():
     assert new_zia_owneratom.crud_str == UPDATE_str()
     assert new_zia_owneratom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_owneratom.get_jvalues_dict()
-    zia_requisite_value = zia_jvalues.get(rconcept_active_requisite_str())
-    assert zia_requisite_value == new_rconcept_active_requisite
+    zia_requisite_value = zia_jvalues.get(rplan_active_requisite_str())
+    assert zia_requisite_value == new_rplan_active_requisite
 
 
-def test_sift_atom_ReturnsObj_OwnerAtom_UPDATE_owner_concept_reason_premiseunit():
+def test_sift_atom_ReturnsObj_OwnerAtom_UPDATE_owner_plan_reason_premiseunit():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
@@ -276,15 +276,15 @@ def test_sift_atom_ReturnsObj_OwnerAtom_UPDATE_owner_concept_reason_premiseunit(
     week_rope = sue_owner.make_l1_rope(week_str)
     thur_str = "thur"
     thur_rope = sue_owner.make_rope(week_rope, thur_str)
-    sue_owner.add_concept(clean_rope)
-    sue_owner.get_concept_obj(casa_rope).set_reasonunit(reasonunit_shop(week_rope))
-    clean_concept = sue_owner.get_concept_obj(clean_rope)
-    clean_concept.set_reasonunit(reasonunit_shop(week_rope))
-    clean_concept.get_reasonunit(week_rope).set_premise(thur_rope)
+    sue_owner.add_plan(clean_rope)
+    sue_owner.get_plan_obj(casa_rope).set_reasonunit(reasonunit_shop(week_rope))
+    clean_plan = sue_owner.get_plan_obj(clean_rope)
+    clean_plan.set_reasonunit(reasonunit_shop(week_rope))
+    clean_plan.get_reasonunit(week_rope).set_premise(thur_rope)
 
     thur_pdivisor = 39
-    thur_atom = owneratom_shop(owner_concept_reason_premiseunit_str(), INSERT_str())
-    thur_atom.set_arg(concept_rope_str(), clean_rope)
+    thur_atom = owneratom_shop(owner_plan_reason_premiseunit_str(), INSERT_str())
+    thur_atom.set_arg(plan_rope_str(), clean_rope)
     thur_atom.set_arg(rcontext_str(), week_rope)
     thur_atom.set_arg("pstate", thur_rope)
     assert thur_atom.is_valid()
@@ -305,23 +305,23 @@ def test_sift_atom_ReturnsObj_OwnerAtom_UPDATE_owner_concept_reason_premiseunit(
     assert zia_jvalues.get("pdivisor") == thur_pdivisor
 
 
-def test_sift_atom_ReturnsObj_OwnerAtom_UPDATE_owner_concept_factunit():
+def test_sift_atom_ReturnsObj_OwnerAtom_UPDATE_owner_plan_factunit():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_owner.make_l1_rope(casa_str)
     week_str = "week"
     week_rope = sue_owner.make_l1_rope(casa_str)
-    sue_owner.add_concept(casa_rope)
-    sue_owner.get_concept_obj(casa_rope).set_factunit(factunit_shop(week_rope))
+    sue_owner.add_plan(casa_rope)
+    sue_owner.get_plan_obj(casa_rope).set_factunit(factunit_shop(week_rope))
 
     casa_fopen = 32
-    casa_atom = owneratom_shop(owner_concept_factunit_str(), INSERT_str())
-    casa_atom.set_arg(concept_rope_str(), casa_rope)
+    casa_atom = owneratom_shop(owner_plan_factunit_str(), INSERT_str())
+    casa_atom.set_arg(plan_rope_str(), casa_rope)
     casa_atom.set_arg(fcontext_str(), week_rope)
     casa_atom.set_arg(fopen_str(), casa_fopen)
     casa_jkeys = casa_atom.get_jkeys_dict()
-    casa_factunit = owner_concept_factunit_get_obj(sue_owner, casa_jkeys)
+    casa_factunit = owner_plan_factunit_get_obj(sue_owner, casa_jkeys)
     assert casa_factunit.fopen != casa_fopen
     assert casa_factunit.fopen is None
 

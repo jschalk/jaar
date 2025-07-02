@@ -140,7 +140,7 @@ def get_belief_guts_agenda_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
     column_header_list = [
         "owner_name",
         "fund_ratio",
-        "concept_label",
+        "plan_label",
         "parent_rope",
         "begin",
         "close",
@@ -159,7 +159,7 @@ def get_belief_guts_agenda_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
             values=[
                 df.owner_name,
                 df.fund_ratio,
-                df.concept_label,
+                df.plan_label,
                 df.parent_rope,
                 df.begin,
                 df.close,
@@ -199,7 +199,7 @@ def get_belief_jobs_agenda_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
     column_header_list = [
         "owner_name",
         "fund_ratio",
-        "concept_label",
+        "plan_label",
         "parent_rope",
         "begin",
         "close",
@@ -218,7 +218,7 @@ def get_belief_jobs_agenda_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
             values=[
                 df.owner_name,
                 df.fund_ratio,
-                df.concept_label,
+                df.plan_label,
                 df.parent_rope,
                 df.begin,
                 df.close,

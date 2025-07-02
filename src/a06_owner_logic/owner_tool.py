@@ -4,13 +4,13 @@ from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import FundNum, RespectNum, get_net
 from src.a03_group_logic.acct import AcctUnit
 from src.a03_group_logic.group import AwardLink, MemberShip
-from src.a04_reason_logic.reason_concept import (
+from src.a04_reason_logic.reason_plan import (
     FactUnit,
     PremiseUnit,
     ReasonUnit,
     factunits_get_from_dict,
 )
-from src.a05_concept_logic.concept import ConceptUnit
+from src.a05_plan_logic.plan import PlanUnit
 from src.a06_owner_logic.owner import OwnerUnit
 
 
@@ -32,67 +32,67 @@ def owner_acct_membership_exists(x_owner: OwnerUnit, jkeys: dict[str, any]) -> b
     )
 
 
-def owner_conceptunit_exists(x_owner: OwnerUnit, jkeys: dict[str, any]) -> bool:
-    x_rope = jkeys.get("concept_rope")
-    return False if x_owner is None else bool(x_owner.concept_exists(x_rope))
+def owner_planunit_exists(x_owner: OwnerUnit, jkeys: dict[str, any]) -> bool:
+    x_rope = jkeys.get("plan_rope")
+    return False if x_owner is None else bool(x_owner.plan_exists(x_rope))
 
 
-def owner_concept_awardlink_exists(x_owner: OwnerUnit, jkeys: dict[str, any]) -> bool:
+def owner_plan_awardlink_exists(x_owner: OwnerUnit, jkeys: dict[str, any]) -> bool:
     x_awardee_title = jkeys.get("awardee_title")
-    x_rope = jkeys.get("concept_rope")
+    x_rope = jkeys.get("plan_rope")
     return bool(
-        owner_conceptunit_exists(x_owner, jkeys)
-        and x_owner.get_concept_obj(x_rope).awardlink_exists(x_awardee_title)
+        owner_planunit_exists(x_owner, jkeys)
+        and x_owner.get_plan_obj(x_rope).awardlink_exists(x_awardee_title)
     )
 
 
-def owner_concept_reasonunit_exists(x_owner: OwnerUnit, jkeys: dict[str, any]) -> bool:
-    x_rope = jkeys.get("concept_rope")
+def owner_plan_reasonunit_exists(x_owner: OwnerUnit, jkeys: dict[str, any]) -> bool:
+    x_rope = jkeys.get("plan_rope")
     x_rcontext = jkeys.get("rcontext")
     return bool(
-        owner_conceptunit_exists(x_owner, jkeys)
-        and x_owner.get_concept_obj(x_rope).reasonunit_exists(x_rcontext)
+        owner_planunit_exists(x_owner, jkeys)
+        and x_owner.get_plan_obj(x_rope).reasonunit_exists(x_rcontext)
     )
 
 
-def owner_concept_reason_premiseunit_exists(
+def owner_plan_reason_premiseunit_exists(
     x_owner: OwnerUnit, jkeys: dict[str, any]
 ) -> bool:
-    x_rope = jkeys.get("concept_rope")
+    x_rope = jkeys.get("plan_rope")
     x_rcontext = jkeys.get("rcontext")
     x_pstate = jkeys.get("pstate")
     return bool(
-        owner_concept_reasonunit_exists(x_owner, jkeys)
-        and x_owner.get_concept_obj(x_rope)
+        owner_plan_reasonunit_exists(x_owner, jkeys)
+        and x_owner.get_plan_obj(x_rope)
         .get_reasonunit(x_rcontext)
         .premise_exists(x_pstate)
     )
 
 
-def owner_concept_laborlink_exists(x_owner: OwnerUnit, jkeys: dict[str, any]) -> bool:
+def owner_plan_laborlink_exists(x_owner: OwnerUnit, jkeys: dict[str, any]) -> bool:
     x_labor_title = jkeys.get("labor_title")
-    x_rope = jkeys.get("concept_rope")
+    x_rope = jkeys.get("plan_rope")
     return bool(
-        owner_conceptunit_exists(x_owner, jkeys)
-        and x_owner.get_concept_obj(x_rope).laborunit.laborlink_exists(x_labor_title)
+        owner_planunit_exists(x_owner, jkeys)
+        and x_owner.get_plan_obj(x_rope).laborunit.laborlink_exists(x_labor_title)
     )
 
 
-def owner_concept_healerlink_exists(x_owner: OwnerUnit, jkeys: dict[str, any]) -> bool:
+def owner_plan_healerlink_exists(x_owner: OwnerUnit, jkeys: dict[str, any]) -> bool:
     x_healer_name = jkeys.get("healer_name")
-    x_rope = jkeys.get("concept_rope")
+    x_rope = jkeys.get("plan_rope")
     return bool(
-        owner_conceptunit_exists(x_owner, jkeys)
-        and x_owner.get_concept_obj(x_rope).healerlink.healer_name_exists(x_healer_name)
+        owner_planunit_exists(x_owner, jkeys)
+        and x_owner.get_plan_obj(x_rope).healerlink.healer_name_exists(x_healer_name)
     )
 
 
-def owner_concept_factunit_exists(x_owner: OwnerUnit, jkeys: dict[str, any]) -> bool:
-    x_rope = jkeys.get("concept_rope")
+def owner_plan_factunit_exists(x_owner: OwnerUnit, jkeys: dict[str, any]) -> bool:
+    x_rope = jkeys.get("plan_rope")
     x_fcontext = jkeys.get("fcontext")
     return bool(
-        owner_conceptunit_exists(x_owner, jkeys)
-        and x_owner.get_concept_obj(x_rope).factunit_exists(x_fcontext)
+        owner_planunit_exists(x_owner, jkeys)
+        and x_owner.get_plan_obj(x_rope).factunit_exists(x_fcontext)
     )
 
 
@@ -101,20 +101,20 @@ def owner_attr_exists(x_dimen: str, x_owner: OwnerUnit, jkeys: dict[str, any]) -
         return owner_acct_membership_exists(x_owner, jkeys)
     elif x_dimen == "owner_acctunit":
         return owner_acctunit_exists(x_owner, jkeys)
-    elif x_dimen == "owner_concept_awardlink":
-        return owner_concept_awardlink_exists(x_owner, jkeys)
-    elif x_dimen == "owner_concept_factunit":
-        return owner_concept_factunit_exists(x_owner, jkeys)
-    elif x_dimen == "owner_concept_healerlink":
-        return owner_concept_healerlink_exists(x_owner, jkeys)
-    elif x_dimen == "owner_concept_reason_premiseunit":
-        return owner_concept_reason_premiseunit_exists(x_owner, jkeys)
-    elif x_dimen == "owner_concept_reasonunit":
-        return owner_concept_reasonunit_exists(x_owner, jkeys)
-    elif x_dimen == "owner_concept_laborlink":
-        return owner_concept_laborlink_exists(x_owner, jkeys)
-    elif x_dimen == "owner_conceptunit":
-        return owner_conceptunit_exists(x_owner, jkeys)
+    elif x_dimen == "owner_plan_awardlink":
+        return owner_plan_awardlink_exists(x_owner, jkeys)
+    elif x_dimen == "owner_plan_factunit":
+        return owner_plan_factunit_exists(x_owner, jkeys)
+    elif x_dimen == "owner_plan_healerlink":
+        return owner_plan_healerlink_exists(x_owner, jkeys)
+    elif x_dimen == "owner_plan_reason_premiseunit":
+        return owner_plan_reason_premiseunit_exists(x_owner, jkeys)
+    elif x_dimen == "owner_plan_reasonunit":
+        return owner_plan_reasonunit_exists(x_owner, jkeys)
+    elif x_dimen == "owner_plan_laborlink":
+        return owner_plan_laborlink_exists(x_owner, jkeys)
+    elif x_dimen == "owner_planunit":
+        return owner_planunit_exists(x_owner, jkeys)
     elif x_dimen == "ownerunit":
         return ownerunit_exists(x_owner)
     return True
@@ -132,44 +132,40 @@ def owner_acct_membership_get_obj(
     return x_owner.get_acct(x_acct_name).get_membership(x_group_title)
 
 
-def owner_conceptunit_get_obj(x_owner: OwnerUnit, jkeys: dict[str, any]) -> ConceptUnit:
-    x_rope = jkeys.get("concept_rope")
-    return x_owner.get_concept_obj(x_rope)
+def owner_planunit_get_obj(x_owner: OwnerUnit, jkeys: dict[str, any]) -> PlanUnit:
+    x_rope = jkeys.get("plan_rope")
+    return x_owner.get_plan_obj(x_rope)
 
 
-def owner_concept_awardlink_get_obj(
+def owner_plan_awardlink_get_obj(
     x_owner: OwnerUnit, jkeys: dict[str, any]
 ) -> AwardLink:
-    x_rope = jkeys.get("concept_rope")
+    x_rope = jkeys.get("plan_rope")
     x_awardee_title = jkeys.get("awardee_title")
-    return x_owner.get_concept_obj(x_rope).get_awardlink(x_awardee_title)
+    return x_owner.get_plan_obj(x_rope).get_awardlink(x_awardee_title)
 
 
-def owner_concept_reasonunit_get_obj(
+def owner_plan_reasonunit_get_obj(
     x_owner: OwnerUnit, jkeys: dict[str, any]
 ) -> ReasonUnit:
-    x_rope = jkeys.get("concept_rope")
+    x_rope = jkeys.get("plan_rope")
     x_rcontext = jkeys.get("rcontext")
-    return x_owner.get_concept_obj(x_rope).get_reasonunit(x_rcontext)
+    return x_owner.get_plan_obj(x_rope).get_reasonunit(x_rcontext)
 
 
-def owner_concept_reason_premiseunit_get_obj(
+def owner_plan_reason_premiseunit_get_obj(
     x_owner: OwnerUnit, jkeys: dict[str, any]
 ) -> PremiseUnit:
-    x_rope = jkeys.get("concept_rope")
+    x_rope = jkeys.get("plan_rope")
     x_rcontext = jkeys.get("rcontext")
     x_pstate = jkeys.get("pstate")
-    return (
-        x_owner.get_concept_obj(x_rope).get_reasonunit(x_rcontext).get_premise(x_pstate)
-    )
+    return x_owner.get_plan_obj(x_rope).get_reasonunit(x_rcontext).get_premise(x_pstate)
 
 
-def owner_concept_factunit_get_obj(
-    x_owner: OwnerUnit, jkeys: dict[str, any]
-) -> FactUnit:
-    x_rope = jkeys.get("concept_rope")
+def owner_plan_factunit_get_obj(x_owner: OwnerUnit, jkeys: dict[str, any]) -> FactUnit:
+    x_rope = jkeys.get("plan_rope")
     x_fcontext = jkeys.get("fcontext")
-    return x_owner.get_concept_obj(x_rope).factunits.get(x_fcontext)
+    return x_owner.get_plan_obj(x_rope).factunits.get(x_fcontext)
 
 
 def owner_get_obj(x_dimen: str, x_owner: OwnerUnit, jkeys: dict[str, any]) -> any:
@@ -179,11 +175,11 @@ def owner_get_obj(x_dimen: str, x_owner: OwnerUnit, jkeys: dict[str, any]) -> an
     x_dimens = {
         "owner_acctunit": owner_acctunit_get_obj,
         "owner_acct_membership": owner_acct_membership_get_obj,
-        "owner_conceptunit": owner_conceptunit_get_obj,
-        "owner_concept_awardlink": owner_concept_awardlink_get_obj,
-        "owner_concept_reasonunit": owner_concept_reasonunit_get_obj,
-        "owner_concept_reason_premiseunit": owner_concept_reason_premiseunit_get_obj,
-        "owner_concept_factunit": owner_concept_factunit_get_obj,
+        "owner_planunit": owner_planunit_get_obj,
+        "owner_plan_awardlink": owner_plan_awardlink_get_obj,
+        "owner_plan_reasonunit": owner_plan_reasonunit_get_obj,
+        "owner_plan_reason_premiseunit": owner_plan_reason_premiseunit_get_obj,
+        "owner_plan_factunit": owner_plan_factunit_get_obj,
     }
     if x_func := x_dimens.get(x_dimen):
         return x_func(x_owner, jkeys)
@@ -277,7 +273,7 @@ def set_factunits_to_owner(x_owner: OwnerUnit, x_facts_dict: dict[RopeTerm, dict
                 factunit.fstate,
                 factunit.fopen,
                 factunit.fnigh,
-                create_missing_concepts=True,
+                create_missing_plans=True,
             )
 
 

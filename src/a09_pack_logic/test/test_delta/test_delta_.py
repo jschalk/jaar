@@ -2,20 +2,20 @@ from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import x_is_json
 from src.a01_term_logic.rope import create_rope, to_rope
 from src.a03_group_logic.acct import acctunit_shop
-from src.a05_concept_logic.concept import get_default_belief_label as root_label
+from src.a05_plan_logic.plan import get_default_belief_label as root_label
 from src.a06_owner_logic.owner import ownerunit_shop
 from src.a06_owner_logic.test._util.a06_str import (
     acct_cred_points_str,
     acct_debt_points_str,
     acct_name_str,
     awardee_title_str,
-    concept_rope_str,
     group_title_str,
     owner_acct_membership_str,
     owner_acctunit_str,
-    owner_concept_awardlink_str,
-    owner_conceptunit_str,
+    owner_plan_awardlink_str,
+    owner_planunit_str,
     ownerunit_str,
+    plan_rope_str,
 )
 from src.a08_owner_atom_logic.atom import owneratom_shop
 from src.a08_owner_atom_logic.test._util.a08_str import (
@@ -335,7 +335,7 @@ def test_OwnerDelta_get_sorted_owneratoms_ReturnsObj():
     #         print(f"{x_atom.dimen=}")
 
 
-def test_OwnerDelta_get_sorted_owneratoms_ReturnsObj_ConceptUnitsSorted():
+def test_OwnerDelta_get_sorted_owneratoms_ReturnsObj_PlanUnitsSorted():
     # ESTABLISH
     x_belief_label = root_label()
     root_rope = to_rope(x_belief_label)
@@ -343,14 +343,14 @@ def test_OwnerDelta_get_sorted_owneratoms_ReturnsObj_ConceptUnitsSorted():
     sports_rope = create_rope(x_belief_label, sports_str)
     knee_str = "knee"
     knee_rope = create_rope(x_belief_label, knee_str)
-    x_dimen = owner_conceptunit_str()
-    sports_insert_conceptunit_owneratom = owneratom_shop(x_dimen, INSERT_str())
-    sports_insert_conceptunit_owneratom.set_jkey(concept_rope_str(), sports_rope)
-    knee_insert_conceptunit_owneratom = owneratom_shop(x_dimen, INSERT_str())
-    knee_insert_conceptunit_owneratom.set_jkey(concept_rope_str(), knee_rope)
+    x_dimen = owner_planunit_str()
+    sports_insert_planunit_owneratom = owneratom_shop(x_dimen, INSERT_str())
+    sports_insert_planunit_owneratom.set_jkey(plan_rope_str(), sports_rope)
+    knee_insert_planunit_owneratom = owneratom_shop(x_dimen, INSERT_str())
+    knee_insert_planunit_owneratom.set_jkey(plan_rope_str(), knee_rope)
     x_ownerdelta = ownerdelta_shop()
-    x_ownerdelta.set_owneratom(knee_insert_conceptunit_owneratom)
-    x_ownerdelta.set_owneratom(sports_insert_conceptunit_owneratom)
+    x_ownerdelta.set_owneratom(knee_insert_planunit_owneratom)
+    x_ownerdelta.set_owneratom(sports_insert_planunit_owneratom)
 
     # WHEN
     x_atom_order_list = x_ownerdelta.get_sorted_owneratoms()
@@ -359,8 +359,8 @@ def test_OwnerDelta_get_sorted_owneratoms_ReturnsObj_ConceptUnitsSorted():
     assert len(x_atom_order_list) == 2
     # for owneratom in x_atom_order_list:
     #     print(f"{owneratom.jkeys=}")
-    assert x_atom_order_list[0] == knee_insert_conceptunit_owneratom
-    assert x_atom_order_list[1] == sports_insert_conceptunit_owneratom
+    assert x_atom_order_list[0] == knee_insert_planunit_owneratom
+    assert x_atom_order_list[1] == sports_insert_planunit_owneratom
     # for crud_str, atom_list in sue_atom_order_dict.items():
     #     print(f"{crud_str=}")
     #     print(f"{len(atom_list)=}")
@@ -375,14 +375,14 @@ def test_OwnerDelta_get_sorted_owneratoms_ReturnsObj_Rope_Sorted():
     sports_rope = create_rope(x_belief_label, sports_str)
     knee_str = "knee"
     knee_rope = create_rope(sports_rope, knee_str)
-    x_dimen = owner_concept_awardlink_str()
+    x_dimen = owner_plan_awardlink_str()
     swimmers_str = ",Swimmers"
     sports_awardlink_owneratom = owneratom_shop(x_dimen, INSERT_str())
     sports_awardlink_owneratom.set_jkey(awardee_title_str(), swimmers_str)
-    sports_awardlink_owneratom.set_jkey(concept_rope_str(), sports_rope)
+    sports_awardlink_owneratom.set_jkey(plan_rope_str(), sports_rope)
     knee_awardlink_owneratom = owneratom_shop(x_dimen, INSERT_str())
     knee_awardlink_owneratom.set_jkey(awardee_title_str(), swimmers_str)
-    knee_awardlink_owneratom.set_jkey(concept_rope_str(), knee_rope)
+    knee_awardlink_owneratom.set_jkey(plan_rope_str(), knee_rope)
     x_ownerdelta = ownerdelta_shop()
     x_ownerdelta.set_owneratom(knee_awardlink_owneratom)
     x_ownerdelta.set_owneratom(sports_awardlink_owneratom)

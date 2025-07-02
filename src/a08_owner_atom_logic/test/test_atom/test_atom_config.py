@@ -12,7 +12,6 @@ from src.a06_owner_logic.test._util.a06_str import (
     awardee_title_str,
     begin_str,
     close_str,
-    concept_rope_str,
     credor_respect_str,
     debtor_respect_str,
     denom_str,
@@ -30,16 +29,17 @@ from src.a06_owner_logic.test._util.a06_str import (
     numor_str,
     owner_acct_membership_str,
     owner_acctunit_str,
-    owner_concept_awardlink_str,
-    owner_concept_factunit_str,
-    owner_concept_healerlink_str,
-    owner_concept_laborlink_str,
-    owner_concept_reason_premiseunit_str,
-    owner_concept_reasonunit_str,
-    owner_conceptunit_str,
+    owner_plan_awardlink_str,
+    owner_plan_factunit_str,
+    owner_plan_healerlink_str,
+    owner_plan_laborlink_str,
+    owner_plan_reason_premiseunit_str,
+    owner_plan_reasonunit_str,
+    owner_planunit_str,
     ownerunit_str,
     parent_rope_str,
     penny_str,
+    plan_rope_str,
     rcontext_str,
     respect_bit_str,
     stop_want_str,
@@ -81,7 +81,7 @@ def test_get_owner_dimens_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert get_owner_dimens() == set(get_atom_config_dict().keys())
     assert owner_acctunit_str() in get_owner_dimens()
-    assert is_owner_dimen("conceptroot") is False
+    assert is_owner_dimen("planroot") is False
 
 
 def test_get_all_owner_dimen_keys_ReturnsObj():
@@ -162,54 +162,54 @@ def test_get_atom_config_dict_EveryCrudOperationHasOwnerDeltaOrderGroup():
     # # Simple script for editing atom_config.json
     # set_mog(INSERT_str(), owner_acctunit_str(), 0)
     # set_mog(INSERT_str(), owner_acct_membership_str(), 1)
-    # set_mog(INSERT_str(), owner_conceptunit_str(), 2)
-    # set_mog(INSERT_str(), owner_concept_awardlink_str(), 3)
-    # set_mog(INSERT_str(), owner_concept_laborlink_str(), 4)
-    # set_mog(INSERT_str(), owner_concept_healerlink_str(), 5)
-    # set_mog(INSERT_str(), owner_concept_factunit_str(), 6)
-    # set_mog(INSERT_str(), owner_concept_reasonunit_str(), 7)
-    # set_mog(INSERT_str(), owner_concept_reason_premiseunit_str(), 8)
+    # set_mog(INSERT_str(), owner_planunit_str(), 2)
+    # set_mog(INSERT_str(), owner_plan_awardlink_str(), 3)
+    # set_mog(INSERT_str(), owner_plan_laborlink_str(), 4)
+    # set_mog(INSERT_str(), owner_plan_healerlink_str(), 5)
+    # set_mog(INSERT_str(), owner_plan_factunit_str(), 6)
+    # set_mog(INSERT_str(), owner_plan_reasonunit_str(), 7)
+    # set_mog(INSERT_str(), owner_plan_reason_premiseunit_str(), 8)
     # set_mog(UPDATE_str(), owner_acctunit_str(), 9)
     # set_mog(UPDATE_str(), owner_acct_membership_str(), 10)
-    # set_mog(UPDATE_str(), owner_conceptunit_str(), 11)
-    # set_mog(UPDATE_str(), owner_concept_awardlink_str(), 12)
-    # set_mog(UPDATE_str(), owner_concept_factunit_str(), 13)
-    # set_mog(UPDATE_str(), owner_concept_reason_premiseunit_str(), 14)
-    # set_mog(UPDATE_str(), owner_concept_reasonunit_str(), 15)
-    # set_mog(DELETE_str(), owner_concept_reason_premiseunit_str(), 16)
-    # set_mog(DELETE_str(), owner_concept_reasonunit_str(), 17)
-    # set_mog(DELETE_str(), owner_concept_factunit_str(), 18)
-    # set_mog(DELETE_str(), owner_concept_laborlink_str(), 19)
-    # set_mog(DELETE_str(), owner_concept_healerlink_str(), 20)
-    # set_mog(DELETE_str(), owner_concept_awardlink_str(), 21)
-    # set_mog(DELETE_str(), owner_conceptunit_str(), 22)
+    # set_mog(UPDATE_str(), owner_planunit_str(), 11)
+    # set_mog(UPDATE_str(), owner_plan_awardlink_str(), 12)
+    # set_mog(UPDATE_str(), owner_plan_factunit_str(), 13)
+    # set_mog(UPDATE_str(), owner_plan_reason_premiseunit_str(), 14)
+    # set_mog(UPDATE_str(), owner_plan_reasonunit_str(), 15)
+    # set_mog(DELETE_str(), owner_plan_reason_premiseunit_str(), 16)
+    # set_mog(DELETE_str(), owner_plan_reasonunit_str(), 17)
+    # set_mog(DELETE_str(), owner_plan_factunit_str(), 18)
+    # set_mog(DELETE_str(), owner_plan_laborlink_str(), 19)
+    # set_mog(DELETE_str(), owner_plan_healerlink_str(), 20)
+    # set_mog(DELETE_str(), owner_plan_awardlink_str(), 21)
+    # set_mog(DELETE_str(), owner_planunit_str(), 22)
     # set_mog(DELETE_str(), owner_acct_membership_str(), 23)
     # set_mog(DELETE_str(), owner_acctunit_str(), 24)
     # set_mog(UPDATE_str(), ownerunit_str(), 25)
 
     assert 0 == q_order(INSERT_str(), owner_acctunit_str())
     assert 1 == q_order(INSERT_str(), owner_acct_membership_str())
-    assert 2 == q_order(INSERT_str(), owner_conceptunit_str())
-    assert 3 == q_order(INSERT_str(), owner_concept_awardlink_str())
-    assert 4 == q_order(INSERT_str(), owner_concept_laborlink_str())
-    assert 5 == q_order(INSERT_str(), owner_concept_healerlink_str())
-    assert 6 == q_order(INSERT_str(), owner_concept_factunit_str())
-    assert 7 == q_order(INSERT_str(), owner_concept_reasonunit_str())
-    assert 8 == q_order(INSERT_str(), owner_concept_reason_premiseunit_str())
+    assert 2 == q_order(INSERT_str(), owner_planunit_str())
+    assert 3 == q_order(INSERT_str(), owner_plan_awardlink_str())
+    assert 4 == q_order(INSERT_str(), owner_plan_laborlink_str())
+    assert 5 == q_order(INSERT_str(), owner_plan_healerlink_str())
+    assert 6 == q_order(INSERT_str(), owner_plan_factunit_str())
+    assert 7 == q_order(INSERT_str(), owner_plan_reasonunit_str())
+    assert 8 == q_order(INSERT_str(), owner_plan_reason_premiseunit_str())
     assert 9 == q_order(UPDATE_str(), owner_acctunit_str())
     assert 10 == q_order(UPDATE_str(), owner_acct_membership_str())
-    assert 11 == q_order(UPDATE_str(), owner_conceptunit_str())
-    assert 12 == q_order(UPDATE_str(), owner_concept_awardlink_str())
-    assert 13 == q_order(UPDATE_str(), owner_concept_factunit_str())
-    assert 14 == q_order(UPDATE_str(), owner_concept_reason_premiseunit_str())
-    assert 15 == q_order(UPDATE_str(), owner_concept_reasonunit_str())
-    assert 16 == q_order(DELETE_str(), owner_concept_reason_premiseunit_str())
-    assert 17 == q_order(DELETE_str(), owner_concept_reasonunit_str())
-    assert 18 == q_order(DELETE_str(), owner_concept_factunit_str())
-    assert 19 == q_order(DELETE_str(), owner_concept_laborlink_str())
-    assert 20 == q_order(DELETE_str(), owner_concept_healerlink_str())
-    assert 21 == q_order(DELETE_str(), owner_concept_awardlink_str())
-    assert 22 == q_order(DELETE_str(), owner_conceptunit_str())
+    assert 11 == q_order(UPDATE_str(), owner_planunit_str())
+    assert 12 == q_order(UPDATE_str(), owner_plan_awardlink_str())
+    assert 13 == q_order(UPDATE_str(), owner_plan_factunit_str())
+    assert 14 == q_order(UPDATE_str(), owner_plan_reason_premiseunit_str())
+    assert 15 == q_order(UPDATE_str(), owner_plan_reasonunit_str())
+    assert 16 == q_order(DELETE_str(), owner_plan_reason_premiseunit_str())
+    assert 17 == q_order(DELETE_str(), owner_plan_reasonunit_str())
+    assert 18 == q_order(DELETE_str(), owner_plan_factunit_str())
+    assert 19 == q_order(DELETE_str(), owner_plan_laborlink_str())
+    assert 20 == q_order(DELETE_str(), owner_plan_healerlink_str())
+    assert 21 == q_order(DELETE_str(), owner_plan_awardlink_str())
+    assert 22 == q_order(DELETE_str(), owner_planunit_str())
     assert 23 == q_order(DELETE_str(), owner_acct_membership_str())
     assert 24 == q_order(DELETE_str(), owner_acctunit_str())
     assert 25 == q_order(UPDATE_str(), ownerunit_str())
@@ -230,24 +230,24 @@ def test_get_atom_config_dict_CheckEachDimenHasCorrectArgCount():
     assert _get_atom_config_jkeys_len(ownerunit_str()) == 0
     assert _get_atom_config_jkeys_len(owner_acctunit_str()) == 1
     assert _get_atom_config_jkeys_len(owner_acct_membership_str()) == 2
-    assert _get_atom_config_jkeys_len(owner_conceptunit_str()) == 1
-    assert _get_atom_config_jkeys_len(owner_concept_awardlink_str()) == 2
-    assert _get_atom_config_jkeys_len(owner_concept_reasonunit_str()) == 2
-    assert _get_atom_config_jkeys_len(owner_concept_reason_premiseunit_str()) == 3
-    assert _get_atom_config_jkeys_len(owner_concept_laborlink_str()) == 2
-    assert _get_atom_config_jkeys_len(owner_concept_healerlink_str()) == 2
-    assert _get_atom_config_jkeys_len(owner_concept_factunit_str()) == 2
+    assert _get_atom_config_jkeys_len(owner_planunit_str()) == 1
+    assert _get_atom_config_jkeys_len(owner_plan_awardlink_str()) == 2
+    assert _get_atom_config_jkeys_len(owner_plan_reasonunit_str()) == 2
+    assert _get_atom_config_jkeys_len(owner_plan_reason_premiseunit_str()) == 3
+    assert _get_atom_config_jkeys_len(owner_plan_laborlink_str()) == 2
+    assert _get_atom_config_jkeys_len(owner_plan_healerlink_str()) == 2
+    assert _get_atom_config_jkeys_len(owner_plan_factunit_str()) == 2
 
     assert _get_atom_config_jvalues_len(ownerunit_str()) == 8
     assert _get_atom_config_jvalues_len(owner_acctunit_str()) == 2
     assert _get_atom_config_jvalues_len(owner_acct_membership_str()) == 2
-    assert _get_atom_config_jvalues_len(owner_conceptunit_str()) == 11
-    assert _get_atom_config_jvalues_len(owner_concept_awardlink_str()) == 2
-    assert _get_atom_config_jvalues_len(owner_concept_reasonunit_str()) == 1
-    assert _get_atom_config_jvalues_len(owner_concept_reason_premiseunit_str()) == 3
-    assert _get_atom_config_jvalues_len(owner_concept_laborlink_str()) == 0
-    assert _get_atom_config_jvalues_len(owner_concept_healerlink_str()) == 0
-    assert _get_atom_config_jvalues_len(owner_concept_factunit_str()) == 3
+    assert _get_atom_config_jvalues_len(owner_planunit_str()) == 11
+    assert _get_atom_config_jvalues_len(owner_plan_awardlink_str()) == 2
+    assert _get_atom_config_jvalues_len(owner_plan_reasonunit_str()) == 1
+    assert _get_atom_config_jvalues_len(owner_plan_reason_premiseunit_str()) == 3
+    assert _get_atom_config_jvalues_len(owner_plan_laborlink_str()) == 0
+    assert _get_atom_config_jvalues_len(owner_plan_healerlink_str()) == 0
+    assert _get_atom_config_jvalues_len(owner_plan_factunit_str()) == 3
 
 
 def _has_every_element(x_arg, x_dict) -> bool:
@@ -345,8 +345,8 @@ def unique_jkeys():
     jkey_key_count = 0
     for atom_dimen in get_atom_config_dict().keys():
         new_jkey_keys = _get_atom_config_jkey_keys(atom_dimen)
-        if concept_rope_str() in new_jkey_keys:
-            new_jkey_keys.remove(concept_rope_str())
+        if plan_rope_str() in new_jkey_keys:
+            new_jkey_keys.remove(plan_rope_str())
         if rcontext_str() in new_jkey_keys:
             new_jkey_keys.remove(rcontext_str())
         if acct_name_str() in new_jkey_keys:
@@ -379,15 +379,15 @@ def test_get_sorted_jkey_keys_ReturnsObj_owner_acctunit():
     assert x_sorted_jkey_keys == [acct_name_str()]
 
 
-def test_get_sorted_jkey_keys_ReturnsObj_owner_concept_reason_premiseunit():
+def test_get_sorted_jkey_keys_ReturnsObj_owner_plan_reason_premiseunit():
     # ESTABLISH
-    x_dimen = owner_concept_reason_premiseunit_str()
+    x_dimen = owner_plan_reason_premiseunit_str()
 
     # WHEN
     x_sorted_jkey_keys = get_sorted_jkey_keys(x_dimen)
 
     # THEN
-    assert x_sorted_jkey_keys == [concept_rope_str(), rcontext_str(), "pstate"]
+    assert x_sorted_jkey_keys == [plan_rope_str(), rcontext_str(), "pstate"]
 
 
 def test_get_flattened_atom_table_build_ReturnsObj():
@@ -410,18 +410,18 @@ def test_get_normalized_owner_table_build_ReturnsObj():
     cat_ownerunit = nx.get(ownerunit_str())
     cat_acctunit = nx.get(owner_acctunit_str())
     cat_membership = nx.get(owner_acct_membership_str())
-    cat_concept = nx.get(owner_conceptunit_str())
-    cat_awardlink = nx.get(owner_concept_awardlink_str())
-    cat_reason = nx.get(owner_concept_reasonunit_str())
-    cat_premise = nx.get(owner_concept_reason_premiseunit_str())
-    cat_laborlink = nx.get(owner_concept_laborlink_str())
-    cat_healerlink = nx.get(owner_concept_healerlink_str())
-    cat_fact = nx.get(owner_concept_factunit_str())
+    cat_plan = nx.get(owner_planunit_str())
+    cat_awardlink = nx.get(owner_plan_awardlink_str())
+    cat_reason = nx.get(owner_plan_reasonunit_str())
+    cat_premise = nx.get(owner_plan_reason_premiseunit_str())
+    cat_laborlink = nx.get(owner_plan_laborlink_str())
+    cat_healerlink = nx.get(owner_plan_healerlink_str())
+    cat_fact = nx.get(owner_plan_factunit_str())
 
     assert cat_ownerunit is not None
     assert cat_acctunit is not None
     assert cat_membership is not None
-    assert cat_concept is not None
+    assert cat_plan is not None
     assert cat_awardlink is not None
     assert cat_reason is not None
     assert cat_premise is not None
@@ -432,7 +432,7 @@ def test_get_normalized_owner_table_build_ReturnsObj():
     normal_specs_ownerunit = cat_ownerunit.get(normal_specs_str())
     normal_specs_acctunit = cat_acctunit.get(normal_specs_str())
     normal_specs_membership = cat_membership.get(normal_specs_str())
-    normal_specs_concept = cat_concept.get(normal_specs_str())
+    normal_specs_plan = cat_plan.get(normal_specs_str())
     normal_specs_awardlink = cat_awardlink.get(normal_specs_str())
     normal_specs_reason = cat_reason.get(normal_specs_str())
     normal_specs_premise = cat_premise.get(normal_specs_str())
@@ -446,7 +446,7 @@ def test_get_normalized_owner_table_build_ReturnsObj():
     assert normal_specs_ownerunit is not None
     assert normal_specs_acctunit is not None
     assert normal_specs_membership is not None
-    assert normal_specs_concept is not None
+    assert normal_specs_plan is not None
     assert normal_specs_awardlink is not None
     assert normal_specs_reason is not None
     assert normal_specs_premise is not None
@@ -457,7 +457,7 @@ def test_get_normalized_owner_table_build_ReturnsObj():
     table_name_ownerunit = normal_specs_ownerunit.get(normal_table_name_str())
     table_name_acctunit = normal_specs_acctunit.get(normal_table_name_str())
     table_name_membership = normal_specs_membership.get(normal_table_name_str())
-    table_name_concept = normal_specs_concept.get(normal_table_name_str())
+    table_name_plan = normal_specs_plan.get(normal_table_name_str())
     table_name_awardlink = normal_specs_awardlink.get(normal_table_name_str())
     table_name_reason = normal_specs_reason.get(normal_table_name_str())
     table_name_premise = normal_specs_premise.get(normal_table_name_str())
@@ -468,7 +468,7 @@ def test_get_normalized_owner_table_build_ReturnsObj():
     assert table_name_ownerunit == "owner"
     assert table_name_acctunit == "acctunit"
     assert table_name_membership == "membership"
-    assert table_name_concept == "concept"
+    assert table_name_plan == "plan"
     assert table_name_awardlink == "awardlink"
     assert table_name_reason == "reason"
     assert table_name_premise == "premise"
@@ -508,16 +508,16 @@ def test_get_normalized_owner_table_build_ReturnsObj():
     assert acct_debt_points_dict.get(sqlite_datatype_str()) == "REAL"
     assert acct_debt_points_dict.get("nullable") is True
 
-    assert len(cat_concept) == 2
-    concept_columns = cat_concept.get(columns_str)
-    assert len(concept_columns) == 13
-    assert concept_columns.get("uid") is not None
-    assert concept_columns.get(concept_rope_str()) is not None
-    assert concept_columns.get(begin_str()) is not None
-    assert concept_columns.get(close_str()) is not None
+    assert len(cat_plan) == 2
+    plan_columns = cat_plan.get(columns_str)
+    assert len(plan_columns) == 13
+    assert plan_columns.get("uid") is not None
+    assert plan_columns.get(plan_rope_str()) is not None
+    assert plan_columns.get(begin_str()) is not None
+    assert plan_columns.get(close_str()) is not None
 
-    gogo_want_dict = concept_columns.get(gogo_want_str())
-    stop_want_dict = concept_columns.get(stop_want_str())
+    gogo_want_dict = plan_columns.get(gogo_want_str())
+    stop_want_dict = plan_columns.get(stop_want_str())
     assert len(gogo_want_dict) == 2
     assert len(stop_want_dict) == 2
     assert gogo_want_dict.get(sqlite_datatype_str()) == "REAL"
@@ -533,11 +533,11 @@ def test_get_atom_args_dimen_mapping_ReturnsObj():
     # THEN
     assert x_atom_args_dimen_mapping
     assert x_atom_args_dimen_mapping.get(stop_want_str())
-    assert x_atom_args_dimen_mapping.get(stop_want_str()) == {owner_conceptunit_str()}
-    assert x_atom_args_dimen_mapping.get(concept_rope_str())
-    rope_dimens = x_atom_args_dimen_mapping.get(concept_rope_str())
-    assert owner_concept_factunit_str() in rope_dimens
-    assert owner_concept_laborlink_str() in rope_dimens
+    assert x_atom_args_dimen_mapping.get(stop_want_str()) == {owner_planunit_str()}
+    assert x_atom_args_dimen_mapping.get(plan_rope_str())
+    rope_dimens = x_atom_args_dimen_mapping.get(plan_rope_str())
+    assert owner_plan_factunit_str() in rope_dimens
+    assert owner_plan_laborlink_str() in rope_dimens
     assert len(rope_dimens) == 7
     assert len(x_atom_args_dimen_mapping) == 41
 
@@ -558,7 +558,7 @@ def get_class_type(x_dimen: str, x_arg: str) -> str:
 def test_get_class_type_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert get_class_type(owner_acctunit_str(), acct_name_str()) == NameTerm_str()
-    assert get_class_type(owner_conceptunit_str(), gogo_want_str()) == "float"
+    assert get_class_type(owner_planunit_str(), gogo_want_str()) == "float"
 
 
 def test_get_allowed_class_types_ReturnsObj():
@@ -629,7 +629,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(addin_str()) == "float"
     assert x_class_types.get(awardee_title_str()) == TitleTerm_str()
     assert x_class_types.get(rcontext_str()) == RopeTerm_str()
-    assert x_class_types.get("rconcept_active_requisite") == "bool"
+    assert x_class_types.get("rplan_active_requisite") == "bool"
     assert x_class_types.get(begin_str()) == "float"
     assert x_class_types.get(respect_bit_str()) == "float"
     assert x_class_types.get(close_str()) == "float"
@@ -661,7 +661,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("fstate") == RopeTerm_str()
     assert x_class_types.get("task") == "bool"
     assert x_class_types.get("problem_bool") == "bool"
-    assert x_class_types.get(concept_rope_str()) == RopeTerm_str()
+    assert x_class_types.get(plan_rope_str()) == RopeTerm_str()
     assert x_class_types.get(stop_want_str()) == "float"
     assert x_class_types.get("take_force") == "float"
     assert x_class_types.get("tally") == "int"

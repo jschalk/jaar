@@ -7,7 +7,7 @@ from src.a07_timeline_logic.test._util.calendar_examples import (
     get_five_config,
 )
 from src.a07_timeline_logic.timeline import (
-    add_newtimeline_conceptunit,
+    add_newtimeline_planunit,
     get_default_timeline_config_dict,
     timelineunit_shop,
 )
@@ -62,14 +62,14 @@ def test_BeliefUnit_add_timeline_to_gut_SetsFile_Scenario0(env_dir_setup_cleanup
     time_rope = init_sue_gut.make_l1_rope(time_str())
     five_rope = init_sue_gut.make_rope(time_rope, five_str())
     save_gut_file(belief_mstr_dir, init_sue_gut)
-    assert not init_sue_gut.concept_exists(five_rope)
+    assert not init_sue_gut.plan_exists(five_rope)
 
     # WHEN
     a23_belief.add_timeline_to_gut(sue_str)
 
     # THEN
     post_sue_gut = open_gut_file(belief_mstr_dir, a23_str, sue_str)
-    assert post_sue_gut.concept_exists(five_rope)
+    assert post_sue_gut.plan_exists(five_rope)
 
 
 def test_BeliefUnit_add_timeline_to_guts_SetsFiles_Scenario0(env_dir_setup_cleanup):
@@ -83,11 +83,11 @@ def test_BeliefUnit_add_timeline_to_guts_SetsFiles_Scenario0(env_dir_setup_clean
     time_rope = init_sue_gut.make_l1_rope(time_str())
     five_rope = init_sue_gut.make_rope(time_rope, five_str())
     save_gut_file(belief_mstr_dir, init_sue_gut)
-    assert not init_sue_gut.concept_exists(five_rope)
+    assert not init_sue_gut.plan_exists(five_rope)
 
     # WHEN
     a23_belief.add_timeline_to_guts()
 
     # THEN
     post_sue_gut = open_gut_file(belief_mstr_dir, a23_str, sue_str)
-    assert post_sue_gut.concept_exists(five_rope)
+    assert post_sue_gut.plan_exists(five_rope)

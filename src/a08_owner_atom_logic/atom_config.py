@@ -69,7 +69,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "addin": "float",
         "awardee_title": "TitleTerm",
         "rcontext": "RopeTerm",
-        "rconcept_active_requisite": "bool",
+        "rplan_active_requisite": "bool",
         "begin": "float",
         "close": "float",
         "acct_cred_points": "float",
@@ -101,7 +101,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "task": "bool",
         "problem_bool": "bool",
         "respect_bit": "float",
-        "concept_rope": "RopeTerm",
+        "plan_rope": "RopeTerm",
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
@@ -233,13 +233,13 @@ def get_owner_dimens() -> set:
         "ownerunit",
         "owner_acctunit",
         "owner_acct_membership",
-        "owner_conceptunit",
-        "owner_concept_awardlink",
-        "owner_concept_reasonunit",
-        "owner_concept_reason_premiseunit",
-        "owner_concept_laborlink",
-        "owner_concept_healerlink",
-        "owner_concept_factunit",
+        "owner_planunit",
+        "owner_plan_awardlink",
+        "owner_plan_reasonunit",
+        "owner_plan_reason_premiseunit",
+        "owner_plan_laborlink",
+        "owner_plan_healerlink",
+        "owner_plan_factunit",
     }
 
 
@@ -253,7 +253,7 @@ def get_all_owner_dimen_keys() -> set:
         "healer_name",
         "pstate",
         "owner_name",
-        "concept_rope",
+        "plan_rope",
         "labor_title",
     }
 
@@ -272,7 +272,7 @@ def get_all_owner_dimen_delete_keys() -> set:
         "healer_name_ERASE",
         "pstate_ERASE",
         "owner_name_ERASE",
-        "concept_rope_ERASE",
+        "plan_rope_ERASE",
         "labor_title_ERASE",
     }
 

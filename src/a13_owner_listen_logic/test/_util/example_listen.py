@@ -1,6 +1,6 @@
 from src.a01_term_logic.rope import RopeTerm, create_rope
-from src.a04_reason_logic.reason_concept import FactUnit, factunit_shop
-from src.a05_concept_logic.concept import conceptunit_shop
+from src.a04_reason_logic.reason_plan import FactUnit, factunit_shop
+from src.a05_plan_logic.plan import planunit_shop
 from src.a06_owner_logic.owner import OwnerUnit, ownerunit_shop
 
 
@@ -64,14 +64,14 @@ def get_example_zia_speaker() -> OwnerUnit:
     zia_str = "Zia"
     a23_str = "amy23"
     zia_speaker = ownerunit_shop(zia_str, a23_str)
-    zia_speaker.set_concept(conceptunit_shop(cook_str(), task=True), casa_rope())
-    zia_speaker.set_concept(conceptunit_shop(hungry_str()), eat_rope())
-    zia_speaker.set_concept(conceptunit_shop(full_str()), eat_rope())
+    zia_speaker.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
+    zia_speaker.set_plan(planunit_shop(hungry_str()), eat_rope())
+    zia_speaker.set_plan(planunit_shop(full_str()), eat_rope())
     yao_str = "Yao"
     zia_speaker.add_acctunit(yao_str, acct_debt_points=12)
-    cook_conceptunit = zia_speaker.get_concept_obj(cook_rope())
-    cook_conceptunit.laborunit.set_laborlink(yao_str)
-    zia_speaker.edit_concept_attr(
+    cook_planunit = zia_speaker.get_plan_obj(cook_rope())
+    cook_planunit.laborunit.set_laborlink(yao_str)
+    zia_speaker.edit_plan_attr(
         cook_rope(), reason_rcontext=eat_rope(), reason_premise=hungry_rope()
     )
     zia_speaker.add_fact(eat_rope(), full_rope())
@@ -83,14 +83,14 @@ def get_example_bob_speaker() -> OwnerUnit:
     bob_str = "Bob"
     a23_str = "amy23"
     bob_speaker = ownerunit_shop(bob_str, a23_str)
-    bob_speaker.set_concept(conceptunit_shop(cook_str(), task=True), casa_rope())
-    bob_speaker.set_concept(conceptunit_shop(hungry_str()), eat_rope())
-    bob_speaker.set_concept(conceptunit_shop(full_str()), eat_rope())
+    bob_speaker.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
+    bob_speaker.set_plan(planunit_shop(hungry_str()), eat_rope())
+    bob_speaker.set_plan(planunit_shop(full_str()), eat_rope())
     yao_str = "Yao"
     bob_speaker.add_acctunit(yao_str, acct_debt_points=12)
-    cook_conceptunit = bob_speaker.get_concept_obj(cook_rope())
-    cook_conceptunit.laborunit.set_laborlink(yao_str)
-    bob_speaker.edit_concept_attr(
+    cook_planunit = bob_speaker.get_plan_obj(cook_rope())
+    cook_planunit.laborunit.set_laborlink(yao_str)
+    bob_speaker.edit_plan_attr(
         cook_rope(), reason_rcontext=eat_rope(), reason_premise=hungry_rope()
     )
     bob_speaker.add_fact(eat_rope(), hungry_rope())
@@ -108,12 +108,12 @@ def get_example_yao_speaker() -> OwnerUnit:
     yao_speaker.add_acctunit(zia_str, acct_debt_points=36)
     yao_speaker.add_acctunit(bob_str, acct_debt_points=48)
     yao_speaker.set_acct_respect(100)
-    yao_speaker.set_concept(conceptunit_shop(cook_str(), task=True), casa_rope())
-    yao_speaker.set_concept(conceptunit_shop(hungry_str()), eat_rope())
-    yao_speaker.set_concept(conceptunit_shop(full_str()), eat_rope())
-    cook_conceptunit = yao_speaker.get_concept_obj(cook_rope())
-    cook_conceptunit.laborunit.set_laborlink(yao_str)
-    yao_speaker.edit_concept_attr(
+    yao_speaker.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
+    yao_speaker.set_plan(planunit_shop(hungry_str()), eat_rope())
+    yao_speaker.set_plan(planunit_shop(full_str()), eat_rope())
+    cook_planunit = yao_speaker.get_plan_obj(cook_rope())
+    cook_planunit.laborunit.set_laborlink(yao_str)
+    yao_speaker.edit_plan_attr(
         cook_rope(), reason_rcontext=eat_rope(), reason_premise=hungry_rope()
     )
     yao_speaker.add_fact(eat_rope(), hungry_rope())

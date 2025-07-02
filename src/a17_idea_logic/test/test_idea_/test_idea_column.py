@@ -1,8 +1,8 @@
 from src.a06_owner_logic.test._util.a06_str import (
     acct_name_str,
-    concept_rope_str,
     group_title_str,
     owner_acctunit_str,
+    plan_rope_str,
     rcontext_str,
 )
 from src.a17_idea_logic.idea import IdeaRef, idearef_shop
@@ -74,7 +74,7 @@ def test_IdeaRef_get_headers_list_ReturnsObj_Scenario2():
     # ESTABLISH
 
     x3_idearef = idearef_shop("0003", owner_acctunit_str())
-    x3_idearef.set_attribute(concept_rope_str(), True)
+    x3_idearef.set_attribute(plan_rope_str(), True)
     x3_idearef.set_attribute(group_title_str(), False)
     x3_idearef.set_attribute(acct_name_str(), True)
 
@@ -82,7 +82,7 @@ def test_IdeaRef_get_headers_list_ReturnsObj_Scenario2():
     x_headers_list = x3_idearef.get_headers_list()
 
     # THEN
-    assert x_headers_list == [acct_name_str(), group_title_str(), concept_rope_str()]
+    assert x_headers_list == [acct_name_str(), group_title_str(), plan_rope_str()]
 
 
 def test_IdeaRef_get_otx_keys_list_ReturnsObj_Scenario0():
@@ -113,7 +113,7 @@ def test_IdeaRef_get_otx_keys_list_ReturnsObj_Scenario2():
     # ESTABLISH
 
     x3_idearef = idearef_shop("0003", owner_acctunit_str())
-    x3_idearef.set_attribute(concept_rope_str(), True)
+    x3_idearef.set_attribute(plan_rope_str(), True)
     x3_idearef.set_attribute(group_title_str(), False)
     x3_idearef.set_attribute(acct_name_str(), True)
 
@@ -121,7 +121,7 @@ def test_IdeaRef_get_otx_keys_list_ReturnsObj_Scenario2():
     x_otx_keys_list = x3_idearef.get_otx_keys_list()
 
     # THEN
-    assert x_otx_keys_list == [acct_name_str(), concept_rope_str()]
+    assert x_otx_keys_list == [acct_name_str(), plan_rope_str()]
 
 
 def test_IdeaRef_get_otx_values_list_ReturnsObj_Scenario0():
@@ -152,7 +152,7 @@ def test_IdeaRef_get_otx_values_list_ReturnsObj_Scenario2():
     # ESTABLISH
 
     x3_idearef = idearef_shop("0003", owner_acctunit_str())
-    x3_idearef.set_attribute(concept_rope_str(), True)
+    x3_idearef.set_attribute(plan_rope_str(), True)
     x3_idearef.set_attribute(group_title_str(), False)
     x3_idearef.set_attribute(rcontext_str(), False)
     x3_idearef.set_attribute(acct_name_str(), False)

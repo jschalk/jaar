@@ -164,13 +164,13 @@ def _add_hours_to_br00003_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for hour_concept in x_belief.timeline.hours_config:
+    for hour_plan in x_belief.timeline.hours_config:
         x_row = [
             if_none_str(face_name),
             if_none_str(event_int),
             x_belief.belief_label,
-            str(hour_concept[1]),
-            hour_concept[0],
+            str(hour_plan[1]),
+            hour_plan[0],
         ]
         x_csv += csv_delimiter.join(x_row)
         x_csv += "\n"
@@ -184,13 +184,13 @@ def _add_months_to_br00004_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for month_concept in x_belief.timeline.months_config:
+    for month_plan in x_belief.timeline.months_config:
         x_row = [
             if_none_str(face_name),
             if_none_str(event_int),
             x_belief.belief_label,
-            str(month_concept[1]),
-            month_concept[0],
+            str(month_plan[1]),
+            month_plan[0],
         ]
         x_csv += csv_delimiter.join(x_row)
         x_csv += "\n"
@@ -270,14 +270,14 @@ def add_owner_to_br00022_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for conceptunit in x_owner._concept_dict.values():
-        for awardlink in conceptunit.awardlinks.values():
+    for planunit in x_owner._plan_dict.values():
+        for awardlink in planunit.awardlinks.values():
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
                 x_owner.belief_label,
                 x_owner.owner_name,
-                conceptunit.get_concept_rope(),
+                planunit.get_plan_rope(),
                 awardlink.awardee_title,
                 if_none_str(awardlink.give_force),
                 if_none_str(awardlink.take_force),
@@ -294,13 +294,13 @@ def add_owner_to_br00023_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for factunit in x_owner.conceptroot.factunits.values():
+    for factunit in x_owner.planroot.factunits.values():
         x_row = [
             if_none_str(face_name),
             if_none_str(event_int),
             x_owner.belief_label,
             x_owner.owner_name,
-            x_owner.conceptroot.get_concept_rope(),
+            x_owner.planroot.get_plan_rope(),
             factunit.fcontext,
             factunit.fstate,
             if_none_str(factunit.fopen),
@@ -318,14 +318,14 @@ def add_owner_to_br00024_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for conceptunit in x_owner._concept_dict.values():
-        for group_title in conceptunit.laborunit._laborlinks:
+    for planunit in x_owner._plan_dict.values():
+        for group_title in planunit.laborunit._laborlinks:
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
                 x_owner.belief_label,
                 x_owner.owner_name,
-                conceptunit.get_concept_rope(),
+                planunit.get_plan_rope(),
                 group_title,
             ]
             x_csv += csv_delimiter.join(x_row)
@@ -340,14 +340,14 @@ def add_owner_to_br00025_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for conceptunit in x_owner._concept_dict.values():
-        for group_title in conceptunit.healerlink._healer_names:
+    for planunit in x_owner._plan_dict.values():
+        for group_title in planunit.healerlink._healer_names:
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
                 x_owner.belief_label,
                 x_owner.owner_name,
-                conceptunit.get_concept_rope(),
+                planunit.get_plan_rope(),
                 group_title,
             ]
             x_csv += csv_delimiter.join(x_row)
@@ -362,15 +362,15 @@ def add_owner_to_br00026_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for conceptunit in x_owner._concept_dict.values():
-        for reasonunit in conceptunit.reasonunits.values():
+    for planunit in x_owner._plan_dict.values():
+        for reasonunit in planunit.reasonunits.values():
             for premiseunit in reasonunit.premises.values():
                 x_row = [
                     if_none_str(face_name),
                     if_none_str(event_int),
                     x_owner.belief_label,
                     x_owner.owner_name,
-                    conceptunit.get_concept_rope(),
+                    planunit.get_plan_rope(),
                     reasonunit.rcontext,
                     premiseunit.pstate,
                     if_none_str(premiseunit.popen),
@@ -389,16 +389,16 @@ def add_owner_to_br00027_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for conceptunit in x_owner._concept_dict.values():
-        for reasonunit in conceptunit.reasonunits.values():
+    for planunit in x_owner._plan_dict.values():
+        for reasonunit in planunit.reasonunits.values():
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
                 x_owner.belief_label,
                 x_owner.owner_name,
-                conceptunit.get_concept_rope(),
+                planunit.get_plan_rope(),
                 reasonunit.rcontext,
-                if_none_str(reasonunit.rconcept_active_requisite),
+                if_none_str(reasonunit.rplan_active_requisite),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -412,25 +412,25 @@ def add_owner_to_br00028_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for conceptunit in x_owner._concept_dict.values():
-        if conceptunit != x_owner.conceptroot:
+    for planunit in x_owner._plan_dict.values():
+        if planunit != x_owner.planroot:
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
                 x_owner.belief_label,
                 x_owner.owner_name,
-                conceptunit.get_concept_rope(),
-                if_none_str(conceptunit.begin),
-                if_none_str(conceptunit.close),
-                if_none_str(conceptunit.addin),
-                if_none_str(conceptunit.numor),
-                if_none_str(conceptunit.denom),
-                if_none_str(conceptunit.morph),
-                if_none_str(conceptunit.gogo_want),
-                if_none_str(conceptunit.stop_want),
-                if_none_str(conceptunit.mass),
-                if_none_str(conceptunit.task),
-                if_none_str(conceptunit.problem_bool),
+                planunit.get_plan_rope(),
+                if_none_str(planunit.begin),
+                if_none_str(planunit.close),
+                if_none_str(planunit.addin),
+                if_none_str(planunit.numor),
+                if_none_str(planunit.denom),
+                if_none_str(planunit.morph),
+                if_none_str(planunit.gogo_want),
+                if_none_str(planunit.stop_want),
+                if_none_str(planunit.mass),
+                if_none_str(planunit.task),
+                if_none_str(planunit.problem_bool),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -622,13 +622,13 @@ def add_pack_to_br00022_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
     for owneratom in x_packunit._ownerdelta.get_ordered_owneratoms().values():
-        if owneratom.dimen == "owner_concept_awardlink":
+        if owneratom.dimen == "owner_plan_awardlink":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.belief_label,
                 x_packunit.owner_name,
-                owneratom.jkeys.get("concept_rope"),
+                owneratom.jkeys.get("plan_rope"),
                 owneratom.jkeys.get("awardee_title"),
                 if_none_str(owneratom.jvalues.get("give_force")),
                 if_none_str(owneratom.jvalues.get("take_force")),
@@ -642,13 +642,13 @@ def add_pack_to_br00023_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
     for owneratom in x_packunit._ownerdelta.get_ordered_owneratoms().values():
-        if owneratom.dimen == "owner_concept_factunit":
+        if owneratom.dimen == "owner_plan_factunit":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.belief_label,
                 x_packunit.owner_name,
-                owneratom.jkeys.get("concept_rope"),
+                owneratom.jkeys.get("plan_rope"),
                 owneratom.jkeys.get("fcontext"),
                 if_none_str(owneratom.jvalues.get("fstate")),
                 if_none_str(owneratom.jvalues.get("fopen")),
@@ -663,13 +663,13 @@ def add_pack_to_br00024_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
     for owneratom in x_packunit._ownerdelta.get_ordered_owneratoms().values():
-        if owneratom.dimen == "owner_concept_laborlink":
+        if owneratom.dimen == "owner_plan_laborlink":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.belief_label,
                 x_packunit.owner_name,
-                owneratom.jkeys.get("concept_rope"),
+                owneratom.jkeys.get("plan_rope"),
                 owneratom.jkeys.get("labor_title"),
             ]
             x_csv += csv_delimiter.join(x_row)
@@ -681,13 +681,13 @@ def add_pack_to_br00025_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
     for owneratom in x_packunit._ownerdelta.get_ordered_owneratoms().values():
-        if owneratom.dimen == "owner_concept_healerlink":
+        if owneratom.dimen == "owner_plan_healerlink":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.belief_label,
                 x_packunit.owner_name,
-                owneratom.jkeys.get("concept_rope"),
+                owneratom.jkeys.get("plan_rope"),
                 owneratom.jkeys.get("healer_name"),
             ]
             x_csv += csv_delimiter.join(x_row)
@@ -699,13 +699,13 @@ def add_pack_to_br00026_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
     for owneratom in x_packunit._ownerdelta.get_ordered_owneratoms().values():
-        if owneratom.dimen == "owner_concept_reason_premiseunit":
+        if owneratom.dimen == "owner_plan_reason_premiseunit":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.belief_label,
                 x_packunit.owner_name,
-                owneratom.jkeys.get("concept_rope"),
+                owneratom.jkeys.get("plan_rope"),
                 owneratom.jkeys.get("rcontext"),
                 owneratom.jkeys.get("pstate"),
                 if_none_str(owneratom.jvalues.get("popen")),
@@ -721,15 +721,15 @@ def add_pack_to_br00027_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
     for owneratom in x_packunit._ownerdelta.get_ordered_owneratoms().values():
-        if owneratom.dimen == "owner_concept_reasonunit":
+        if owneratom.dimen == "owner_plan_reasonunit":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.belief_label,
                 x_packunit.owner_name,
-                owneratom.jkeys.get("concept_rope"),
+                owneratom.jkeys.get("plan_rope"),
                 owneratom.jkeys.get("rcontext"),
-                if_none_str(owneratom.jvalues.get("rconcept_active_requisite")),
+                if_none_str(owneratom.jvalues.get("rplan_active_requisite")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -740,13 +740,13 @@ def add_pack_to_br00028_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
     for owneratom in x_packunit._ownerdelta.get_ordered_owneratoms().values():
-        if owneratom.dimen == "owner_conceptunit":
+        if owneratom.dimen == "owner_planunit":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.belief_label,
                 x_packunit.owner_name,
-                owneratom.jkeys.get("concept_rope"),
+                owneratom.jkeys.get("plan_rope"),
                 if_none_str(owneratom.jvalues.get("begin")),
                 if_none_str(owneratom.jvalues.get("close")),
                 if_none_str(owneratom.jvalues.get("addin")),

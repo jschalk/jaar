@@ -2,25 +2,25 @@ from sqlalchemy import inspect
 from src.a06_owner_logic.test._util.a06_str import (
     owner_acct_membership_str,
     owner_acctunit_str,
-    owner_concept_awardlink_str,
-    owner_concept_factunit_str,
-    owner_concept_healerlink_str,
-    owner_concept_laborlink_str,
-    owner_concept_reason_premiseunit_str,
-    owner_concept_reasonunit_str,
-    owner_conceptunit_str,
+    owner_plan_awardlink_str,
+    owner_plan_factunit_str,
+    owner_plan_healerlink_str,
+    owner_plan_laborlink_str,
+    owner_plan_reason_premiseunit_str,
+    owner_plan_reasonunit_str,
+    owner_planunit_str,
     ownerunit_str,
 )
 from src.a08_owner_atom_logic.atom_config import get_normalized_owner_table_build
 from src.a08_owner_atom_logic.normal_models import (
     AcctUnitTable,
     AwardLinkTable,
-    ConceptTable,
     FactTable,
     HealerLinkTable,
     LaborLinkTable,
     MemberShipTable,
     OwnerTable,
+    PlanTable,
     PremiseTable,
     ReasonTable,
 )
@@ -109,22 +109,22 @@ def test_normalized_table_MemberShipTable_membership_Exists():
     all_columns_are_as_config_requires(mapper, config_dimen)
 
 
-def test_normalized_table_ConceptTable_concept_Exists():
+def test_normalized_table_PlanTable_plan_Exists():
     # ESTABLISH
-    config_dimen = get_normalized_owner_table_build().get(owner_conceptunit_str())
-    mapper = inspect(ConceptTable)
+    config_dimen = get_normalized_owner_table_build().get(owner_planunit_str())
+    mapper = inspect(PlanTable)
     print_out_expected_class_attribute_declarations(config_dimen)
 
     # WHEN / THEN
     config_table_name = get_config_table_name(config_dimen)
-    assert config_table_name == "concept"
-    assert config_table_name == ConceptTable.__tablename__
+    assert config_table_name == "plan"
+    assert config_table_name == PlanTable.__tablename__
     all_columns_are_as_config_requires(mapper, config_dimen)
 
 
 def test_normalized_table_AwardLinkTable_awardlink_Exists():
     # ESTABLISH
-    config_dimen = get_normalized_owner_table_build().get(owner_concept_awardlink_str())
+    config_dimen = get_normalized_owner_table_build().get(owner_plan_awardlink_str())
     mapper = inspect(AwardLinkTable)
     print_out_expected_class_attribute_declarations(config_dimen)
 
@@ -137,9 +137,7 @@ def test_normalized_table_AwardLinkTable_awardlink_Exists():
 
 def test_normalized_table_ReasonTable_reason_Exists():
     # ESTABLISH
-    config_dimen = get_normalized_owner_table_build().get(
-        owner_concept_reasonunit_str()
-    )
+    config_dimen = get_normalized_owner_table_build().get(owner_plan_reasonunit_str())
     mapper = inspect(ReasonTable)
     print_out_expected_class_attribute_declarations(config_dimen)
 
@@ -153,7 +151,7 @@ def test_normalized_table_ReasonTable_reason_Exists():
 def test_normalized_table_PremiseTable_premise_Exists():
     # ESTABLISH
     config_dimen = get_normalized_owner_table_build().get(
-        owner_concept_reason_premiseunit_str()
+        owner_plan_reason_premiseunit_str()
     )
     mapper = inspect(PremiseTable)
     print_out_expected_class_attribute_declarations(config_dimen)
@@ -167,7 +165,7 @@ def test_normalized_table_PremiseTable_premise_Exists():
 
 def test_normalized_table_LaborLinkTable_laborlink_Exists():
     # ESTABLISH
-    config_dimen = get_normalized_owner_table_build().get(owner_concept_laborlink_str())
+    config_dimen = get_normalized_owner_table_build().get(owner_plan_laborlink_str())
     mapper = inspect(LaborLinkTable)
     print_out_expected_class_attribute_declarations(config_dimen)
 
@@ -180,9 +178,7 @@ def test_normalized_table_LaborLinkTable_laborlink_Exists():
 
 def test_normalized_table_HealerLinkTable_healerlink_Exists():
     # ESTABLISH
-    config_dimen = get_normalized_owner_table_build().get(
-        owner_concept_healerlink_str()
-    )
+    config_dimen = get_normalized_owner_table_build().get(owner_plan_healerlink_str())
     mapper = inspect(HealerLinkTable)
     print_out_expected_class_attribute_declarations(config_dimen)
 
@@ -195,7 +191,7 @@ def test_normalized_table_HealerLinkTable_healerlink_Exists():
 
 def test_normalized_table_FactTable_fact_Exists():
     # ESTABLISH
-    config_dimen = get_normalized_owner_table_build().get(owner_concept_factunit_str())
+    config_dimen = get_normalized_owner_table_build().get(owner_plan_factunit_str())
     mapper = inspect(FactTable)
     print_out_expected_class_attribute_declarations(config_dimen)
 

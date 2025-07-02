@@ -4,7 +4,7 @@ from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.a00_data_toolbox.file_toolbox import save_file
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_labor import laborunit_shop
-from src.a05_concept_logic.healer import healerlink_shop
+from src.a05_plan_logic.healer import healerlink_shop
 from src.a06_owner_logic.owner import ownerunit_shop
 from src.a12_hub_toolbox.hub_path import create_belief_json_path, create_job_path
 from src.a12_hub_toolbox.hub_tool import save_job_file
@@ -36,18 +36,18 @@ def test_etl_belief_job_jsons_to_job_tables_PopulatesTables_Scenario0(
     status_rope = sue_owner.make_l1_rope("status")
     clean_rope = sue_owner.make_rope(status_rope, "clean")
     dirty_rope = sue_owner.make_rope(status_rope, "dirty")
-    sue_owner.add_concept(casa_rope)
-    sue_owner.add_concept(clean_rope)
-    sue_owner.add_concept(dirty_rope)
-    sue_owner.edit_concept_attr(
+    sue_owner.add_plan(casa_rope)
+    sue_owner.add_plan(clean_rope)
+    sue_owner.add_plan(dirty_rope)
+    sue_owner.edit_plan_attr(
         casa_rope, reason_rcontext=status_rope, reason_premise=dirty_rope
     )
-    sue_owner.edit_concept_attr(casa_rope, awardlink=awardlink_shop(run_str))
-    sue_owner.edit_concept_attr(casa_rope, healerlink=healerlink_shop({bob_str}))
-    sue_owner.edit_concept_attr(casa_rope, laborunit=laborunit_shop({sue_str}))
+    sue_owner.edit_plan_attr(casa_rope, awardlink=awardlink_shop(run_str))
+    sue_owner.edit_plan_attr(casa_rope, healerlink=healerlink_shop({bob_str}))
+    sue_owner.edit_plan_attr(casa_rope, laborunit=laborunit_shop({sue_str}))
     sue_owner.add_fact(status_rope, clean_rope)
-    print(f"{sue_owner.get_concept_obj(casa_rope).laborunit=}")
-    print(f"{sue_owner.get_concept_obj(casa_rope).get_dict()=}")
+    print(f"{sue_owner.get_plan_obj(casa_rope).laborunit=}")
+    print(f"{sue_owner.get_plan_obj(casa_rope).get_dict()=}")
     save_job_file(m23_belief_mstr_dir, sue_owner)
 
     with sqlite3_connect(":memory:") as conn:

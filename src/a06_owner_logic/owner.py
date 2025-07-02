@@ -54,22 +54,22 @@ from src.a03_group_logic.group import (
     groupunit_shop,
     membership_shop,
 )
-from src.a04_reason_logic.reason_concept import (
+from src.a04_reason_logic.reason_labor import LaborUnit
+from src.a04_reason_logic.reason_plan import (
     FactUnit,
     ReasonUnit,
     RopeTerm,
     factunit_shop,
 )
-from src.a04_reason_logic.reason_labor import LaborUnit
-from src.a05_concept_logic.concept import (
-    ConceptAttrHolder,
-    ConceptUnit,
-    conceptattrholder_shop,
-    conceptunit_shop,
+from src.a05_plan_logic.healer import HealerLink
+from src.a05_plan_logic.plan import (
+    PlanAttrHolder,
+    PlanUnit,
     get_default_belief_label,
-    get_obj_from_concept_dict,
+    get_obj_from_plan_dict,
+    planattrholder_shop,
+    planunit_shop,
 )
-from src.a05_concept_logic.healer import HealerLink
 from src.a06_owner_logic.owner_config import max_tree_traverse_default
 from src.a06_owner_logic.tree_metrics import TreeMetrics, treemetrics_shop
 
@@ -119,7 +119,7 @@ class OwnerUnit:
     belief_label: BeliefLabel = None
     owner_name: OwnerName = None
     accts: dict[AcctName, AcctUnit] = None
-    conceptroot: ConceptUnit = None
+    planroot: PlanUnit = None
     tally: float = None
     fund_pool: FundNum = None
     fund_iota: FundIota = None
@@ -131,9 +131,9 @@ class OwnerUnit:
     max_tree_traverse: int = None
     last_pack_id: int = None
     # settle_owner Calculated field begin
-    _concept_dict: dict[RopeTerm, ConceptUnit] = None
-    _keep_dict: dict[RopeTerm, ConceptUnit] = None
-    _healers_dict: dict[HealerName, dict[RopeTerm, ConceptUnit]] = None
+    _plan_dict: dict[RopeTerm, PlanUnit] = None
+    _keep_dict: dict[RopeTerm, PlanUnit] = None
+    _healers_dict: dict[HealerName, dict[RopeTerm, PlanUnit]] = None
     _tree_traverse_count: int = None
     _rational: bool = None
     _keeps_justified: bool = None
@@ -196,24 +196,24 @@ class OwnerUnit:
     def set_knot(self, new_knot: str):
         self.settle_owner()
         if self.knot != new_knot:
-            for x_concept_rope in self._concept_dict.keys():
-                if is_string_in_rope(new_knot, x_concept_rope):
-                    exception_str = f"Cannot modify knot to '{new_knot}' because it exists an concept concept_label '{x_concept_rope}'"
+            for x_plan_rope in self._plan_dict.keys():
+                if is_string_in_rope(new_knot, x_plan_rope):
+                    exception_str = f"Cannot modify knot to '{new_knot}' because it exists an plan plan_label '{x_plan_rope}'"
                     raise NewKnotException(exception_str)
 
-            # modify all rope attributes in conceptunits
+            # modify all rope attributes in planunits
             self.knot = default_knot_if_None(new_knot)
-            for x_concept in self._concept_dict.values():
-                x_concept.set_knot(self.knot)
+            for x_plan in self._plan_dict.values():
+                x_plan.set_knot(self.knot)
 
     def set_belief_label(self, belief_label: str):
         old_belief_label = copy_deepcopy(self.belief_label)
         self.settle_owner()
-        for concept_obj in self._concept_dict.values():
-            concept_obj.belief_label = belief_label
+        for plan_obj in self._plan_dict.values():
+            plan_obj.belief_label = belief_label
         self.belief_label = belief_label
-        self.edit_concept_label(
-            old_rope=to_rope(old_belief_label), new_concept_label=self.belief_label
+        self.edit_plan_label(
+            old_rope=to_rope(old_belief_label), new_plan_label=self.belief_label
         )
         self.settle_owner()
 
@@ -238,8 +238,8 @@ class OwnerUnit:
         # nice to avoid infinite loops from programming errors though...
         while to_evaluate_list != []:
             x_rope = to_evaluate_list.pop()
-            x_concept = self.get_concept_obj(x_rope)
-            for reasonunit_obj in x_concept.reasonunits.values():
+            x_plan = self.get_plan_obj(x_rope)
+            for reasonunit_obj in x_plan.reasonunits.values():
                 reason_rcontext = reasonunit_obj.rcontext
                 self._evaluate_relevancy(
                     to_evaluate_list=to_evaluate_list,
@@ -271,10 +271,10 @@ class OwnerUnit:
             to_evaluate_hx_dict[to_evaluate_rope] = rope_type
 
             if rope_type == "reasonunit_rcontext":
-                ru_rcontext_concept = self.get_concept_obj(to_evaluate_rope)
+                ru_rcontext_plan = self.get_plan_obj(to_evaluate_rope)
                 for (
                     descendant_rope
-                ) in ru_rcontext_concept.get_descendant_ropes_from_kids():
+                ) in ru_rcontext_plan.get_descendant_ropes_from_kids():
                     self._evaluate_relevancy(
                         to_evaluate_list=to_evaluate_list,
                         to_evaluate_hx_dict=to_evaluate_hx_dict,
@@ -282,10 +282,10 @@ class OwnerUnit:
                         rope_type="reasonunit_descendant",
                     )
 
-    def all_concepts_relevant_to_task_concept(self, rope: RopeTerm) -> bool:
-        task_concept_assoc_set = set(self._get_relevant_ropes({rope}))
-        all_concepts_set = set(self.get_concept_tree_ordered_rope_list())
-        return all_concepts_set == all_concepts_set.intersection(task_concept_assoc_set)
+    def all_plans_relevant_to_task_plan(self, rope: RopeTerm) -> bool:
+        task_plan_assoc_set = set(self._get_relevant_ropes({rope}))
+        all_plans_set = set(self.get_plan_tree_ordered_rope_list())
+        return all_plans_set == all_plans_set.intersection(task_plan_assoc_set)
 
     def get_awardlinks_metrics(self) -> dict[GroupTitle, AwardLink]:
         tree_metrics = self.get_tree_metrics()
@@ -415,22 +415,22 @@ class OwnerUnit:
         all_group_titles = set(self._groupunits.keys())
         return all_group_titles.difference(x_acctunit_group_titles)
 
-    def _is_concept_rangeroot(self, concept_rope: RopeTerm) -> bool:
-        if self.belief_label == concept_rope:
+    def _is_plan_rangeroot(self, plan_rope: RopeTerm) -> bool:
+        if self.belief_label == plan_rope:
             raise InvalidOwnerException(
-                "its difficult to foresee a scenario where conceptroot is rangeroot"
+                "its difficult to foresee a scenario where planroot is rangeroot"
             )
-        parent_rope = get_parent_rope(concept_rope)
-        parent_concept = self.get_concept_obj(parent_rope)
-        return not parent_concept.is_math()
+        parent_rope = get_parent_rope(plan_rope)
+        parent_plan = self.get_plan_obj(parent_rope)
+        return not parent_plan.is_math()
 
     def _get_rangeroot_factunits(self) -> list[FactUnit]:
         return [
             fact
-            for fact in self.conceptroot.factunits.values()
+            for fact in self.planroot.factunits.values()
             if fact.fopen is not None
             and fact.fnigh is not None
-            and self._is_concept_rangeroot(concept_rope=fact.fcontext)
+            and self._is_plan_rangeroot(plan_rope=fact.fcontext)
         ]
 
     def add_fact(
@@ -439,23 +439,23 @@ class OwnerUnit:
         fstate: RopeTerm = None,
         fopen: float = None,
         fnigh: float = None,
-        create_missing_concepts: bool = None,
+        create_missing_plans: bool = None,
     ):
         fstate = fcontext if fstate is None else fstate
-        if create_missing_concepts:
-            self._create_conceptkid_if_empty(rope=fcontext)
-            self._create_conceptkid_if_empty(rope=fstate)
+        if create_missing_plans:
+            self._create_plankid_if_empty(rope=fcontext)
+            self._create_plankid_if_empty(rope=fstate)
 
-        fact_fcontext_concept = self.get_concept_obj(fcontext)
-        x_conceptroot = self.get_concept_obj(to_rope(self.belief_label))
+        fact_fcontext_plan = self.get_plan_obj(fcontext)
+        x_planroot = self.get_plan_obj(to_rope(self.belief_label))
         x_fopen = None
         if fnigh is not None and fopen is None:
-            x_fopen = x_conceptroot.factunits.get(fcontext).fopen
+            x_fopen = x_planroot.factunits.get(fcontext).fopen
         else:
             x_fopen = fopen
         x_fnigh = None
         if fopen is not None and fnigh is None:
-            x_fnigh = x_conceptroot.factunits.get(fcontext).fnigh
+            x_fnigh = x_planroot.factunits.get(fcontext).fnigh
         else:
             x_fnigh = fnigh
         x_factunit = factunit_shop(
@@ -465,18 +465,17 @@ class OwnerUnit:
             fnigh=x_fnigh,
         )
 
-        if fact_fcontext_concept.is_math() is False:
-            x_conceptroot.set_factunit(x_factunit)
-        # if fact's concept no range or is a "range-root" then allow fact to be set
+        if fact_fcontext_plan.is_math() is False:
+            x_planroot.set_factunit(x_factunit)
+        # if fact's plan no range or is a "range-root" then allow fact to be set
         elif (
-            fact_fcontext_concept.is_math()
-            and self._is_concept_rangeroot(fcontext) is False
+            fact_fcontext_plan.is_math() and self._is_plan_rangeroot(fcontext) is False
         ):
             raise InvalidOwnerException(
                 f"Non range-root fact:{fcontext} can only be set by range-root fact"
             )
-        elif fact_fcontext_concept.is_math() and self._is_concept_rangeroot(fcontext):
-            # WHEN concept is "range-root" identify any reason.rcontexts that are descendants
+        elif fact_fcontext_plan.is_math() and self._is_plan_rangeroot(fcontext):
+            # WHEN plan is "range-root" identify any reason.rcontexts that are descendants
             # calculate and set those descendant facts
             # example: timeline range (0-, 1.5e9) is range-root
             # example: "timeline,wks" (spllt 10080) is range-descendant
@@ -486,80 +485,76 @@ class OwnerUnit:
             # should not set "timeline,wks" fact, only "timeline" fact and
             # "timeline,wks" should be set automatica_lly since there exists a reason
             # that has that rcontext.
-            x_conceptroot.set_factunit(x_factunit)
+            x_planroot.set_factunit(x_factunit)
 
     def get_fact(self, fcontext: RopeTerm) -> FactUnit:
-        return self.conceptroot.factunits.get(fcontext)
+        return self.planroot.factunits.get(fcontext)
 
     def del_fact(self, fcontext: RopeTerm):
-        self.conceptroot.del_factunit(fcontext)
+        self.planroot.del_factunit(fcontext)
 
-    def get_concept_dict(self, problem: bool = None) -> dict[RopeTerm, ConceptUnit]:
+    def get_plan_dict(self, problem: bool = None) -> dict[RopeTerm, PlanUnit]:
         self.settle_owner()
         if not problem:
-            return self._concept_dict
+            return self._plan_dict
         if self._keeps_justified is False:
             exception_str = f"Cannot return problem set because _keeps_justified={self._keeps_justified}."
             raise Exception_keeps_justified(exception_str)
 
-        x_concepts = self._concept_dict.values()
+        x_plans = self._plan_dict.values()
         return {
-            x_concept.get_concept_rope(): x_concept
-            for x_concept in x_concepts
-            if x_concept.problem_bool
+            x_plan.get_plan_rope(): x_plan for x_plan in x_plans if x_plan.problem_bool
         }
 
     def get_tree_metrics(self) -> TreeMetrics:
         self.settle_owner()
         tree_metrics = treemetrics_shop()
         tree_metrics.evaluate_label(
-            level=self.conceptroot._level,
-            reasons=self.conceptroot.reasonunits,
-            awardlinks=self.conceptroot.awardlinks,
-            uid=self.conceptroot._uid,
-            task=self.conceptroot.task,
-            concept_rope=self.conceptroot.get_concept_rope(),
+            level=self.planroot._level,
+            reasons=self.planroot.reasonunits,
+            awardlinks=self.planroot.awardlinks,
+            uid=self.planroot._uid,
+            task=self.planroot.task,
+            plan_rope=self.planroot.get_plan_rope(),
         )
 
-        x_concept_list = [self.conceptroot]
-        while x_concept_list != []:
-            parent_concept = x_concept_list.pop()
-            for concept_kid in parent_concept._kids.values():
+        x_plan_list = [self.planroot]
+        while x_plan_list != []:
+            parent_plan = x_plan_list.pop()
+            for plan_kid in parent_plan._kids.values():
                 self._eval_tree_metrics(
-                    parent_concept, concept_kid, tree_metrics, x_concept_list
+                    parent_plan, plan_kid, tree_metrics, x_plan_list
                 )
         return tree_metrics
 
-    def _eval_tree_metrics(
-        self, parent_concept, concept_kid, tree_metrics, x_concept_list
-    ):
-        concept_kid._level = parent_concept._level + 1
+    def _eval_tree_metrics(self, parent_plan, plan_kid, tree_metrics, x_plan_list):
+        plan_kid._level = parent_plan._level + 1
         tree_metrics.evaluate_label(
-            level=concept_kid._level,
-            reasons=concept_kid.reasonunits,
-            awardlinks=concept_kid.awardlinks,
-            uid=concept_kid._uid,
-            task=concept_kid.task,
-            concept_rope=concept_kid.get_concept_rope(),
+            level=plan_kid._level,
+            reasons=plan_kid.reasonunits,
+            awardlinks=plan_kid.awardlinks,
+            uid=plan_kid._uid,
+            task=plan_kid.task,
+            plan_rope=plan_kid.get_plan_rope(),
         )
-        x_concept_list.append(concept_kid)
+        x_plan_list.append(plan_kid)
 
-    def get_concept_uid_max(self) -> int:
+    def get_plan_uid_max(self) -> int:
         tree_metrics = self.get_tree_metrics()
         return tree_metrics.uid_max
 
-    def set_all_concept_uids_unique(self):
+    def set_all_plan_uids_unique(self):
         tree_metrics = self.get_tree_metrics()
-        concept_uid_max = tree_metrics.uid_max
-        concept_uid_dict = tree_metrics.uid_dict
+        plan_uid_max = tree_metrics.uid_max
+        plan_uid_dict = tree_metrics.uid_dict
 
-        for x_concept in self.get_concept_dict().values():
-            if x_concept._uid is None or concept_uid_dict.get(x_concept._uid) > 1:
-                new_concept_uid_max = concept_uid_max + 1
-                self.edit_concept_attr(
-                    concept_rope=x_concept.get_concept_rope(), uid=new_concept_uid_max
+        for x_plan in self.get_plan_dict().values():
+            if x_plan._uid is None or plan_uid_dict.get(x_plan._uid) > 1:
+                new_plan_uid_max = plan_uid_max + 1
+                self.edit_plan_attr(
+                    plan_rope=x_plan.get_plan_rope(), uid=new_plan_uid_max
                 )
-                concept_uid_max = new_concept_uid_max
+                plan_uid_max = new_plan_uid_max
 
     def get_level_count(self, level) -> int:
         tree_metrics = self.get_tree_metrics()
@@ -579,229 +574,219 @@ class OwnerUnit:
         missing_rcontexts = {}
         for rcontext, rcontext_count in reason_rcontexts.items():
             try:
-                self.conceptroot.factunits[rcontext]
+                self.planroot.factunits[rcontext]
             except KeyError:
                 missing_rcontexts[rcontext] = rcontext_count
         return missing_rcontexts
 
-    def add_concept(
-        self, concept_rope: RopeTerm, mass: float = None, task: bool = None
-    ) -> ConceptUnit:
-        x_concept_label = get_tail_label(concept_rope, self.knot)
-        x_parent_rope = get_parent_rope(concept_rope, self.knot)
-        x_conceptunit = conceptunit_shop(x_concept_label, mass=mass)
+    def add_plan(
+        self, plan_rope: RopeTerm, mass: float = None, task: bool = None
+    ) -> PlanUnit:
+        x_plan_label = get_tail_label(plan_rope, self.knot)
+        x_parent_rope = get_parent_rope(plan_rope, self.knot)
+        x_planunit = planunit_shop(x_plan_label, mass=mass)
         if task:
-            x_conceptunit.task = True
-        self.set_concept(x_conceptunit, x_parent_rope)
-        return x_conceptunit
+            x_planunit.task = True
+        self.set_plan(x_planunit, x_parent_rope)
+        return x_planunit
 
-    def set_l1_concept(
+    def set_l1_plan(
         self,
-        concept_kid: ConceptUnit,
-        create_missing_concepts: bool = None,
+        plan_kid: PlanUnit,
+        create_missing_plans: bool = None,
         get_rid_of_missing_awardlinks_awardee_titles: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
         create_missing_ancestors: bool = True,
     ):
-        self.set_concept(
-            concept_kid=concept_kid,
+        self.set_plan(
+            plan_kid=plan_kid,
             parent_rope=self.belief_label,
-            create_missing_concepts=create_missing_concepts,
+            create_missing_plans=create_missing_plans,
             get_rid_of_missing_awardlinks_awardee_titles=get_rid_of_missing_awardlinks_awardee_titles,
             adoptees=adoptees,
             bundling=bundling,
             create_missing_ancestors=create_missing_ancestors,
         )
 
-    def set_concept(
+    def set_plan(
         self,
-        concept_kid: ConceptUnit,
+        plan_kid: PlanUnit,
         parent_rope: RopeTerm,
         get_rid_of_missing_awardlinks_awardee_titles: bool = None,
-        create_missing_concepts: bool = None,
+        create_missing_plans: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
         create_missing_ancestors: bool = True,
     ):
         parent_rope = to_rope(parent_rope, self.knot)
-        if LabelTerm(concept_kid.concept_label).is_label(self.knot) is False:
-            x_str = f"set_concept failed because '{concept_kid.concept_label}' is not a LabelTerm."
+        if LabelTerm(plan_kid.plan_label).is_label(self.knot) is False:
+            x_str = (
+                f"set_plan failed because '{plan_kid.plan_label}' is not a LabelTerm."
+            )
             raise InvalidOwnerException(x_str)
 
         x_root_label = get_root_label_from_rope(parent_rope, self.knot)
-        if self.conceptroot.concept_label != x_root_label:
-            exception_str = f"set_concept failed because parent_rope '{parent_rope}' has an invalid root label. Should be {self.conceptroot.concept_label}."
+        if self.planroot.plan_label != x_root_label:
+            exception_str = f"set_plan failed because parent_rope '{parent_rope}' has an invalid root label. Should be {self.planroot.plan_label}."
             raise InvalidOwnerException(exception_str)
 
-        concept_kid.knot = self.knot
-        if concept_kid.belief_label != self.belief_label:
-            concept_kid.belief_label = self.belief_label
-        if concept_kid.fund_iota != self.fund_iota:
-            concept_kid.fund_iota = self.fund_iota
+        plan_kid.knot = self.knot
+        if plan_kid.belief_label != self.belief_label:
+            plan_kid.belief_label = self.belief_label
+        if plan_kid.fund_iota != self.fund_iota:
+            plan_kid.fund_iota = self.fund_iota
         if not get_rid_of_missing_awardlinks_awardee_titles:
-            concept_kid = self._get_filtered_awardlinks_concept(concept_kid)
-        concept_kid.set_parent_rope(parent_rope=parent_rope)
+            plan_kid = self._get_filtered_awardlinks_plan(plan_kid)
+        plan_kid.set_parent_rope(parent_rope=parent_rope)
 
-        # create any missing concepts
-        if not create_missing_ancestors and self.concept_exists(parent_rope) is False:
-            x_str = (
-                f"set_concept failed because '{parent_rope}' concept does not exist."
-            )
+        # create any missing plans
+        if not create_missing_ancestors and self.plan_exists(parent_rope) is False:
+            x_str = f"set_plan failed because '{parent_rope}' plan does not exist."
             raise InvalidOwnerException(x_str)
-        parent_rope_concept = self.get_concept_obj(
-            parent_rope, create_missing_ancestors
-        )
-        if parent_rope_concept.root is False:
-            parent_rope_concept
-        parent_rope_concept.add_kid(concept_kid)
+        parent_rope_plan = self.get_plan_obj(parent_rope, create_missing_ancestors)
+        if parent_rope_plan.root is False:
+            parent_rope_plan
+        parent_rope_plan.add_kid(plan_kid)
 
-        kid_rope = self.make_rope(parent_rope, concept_kid.concept_label)
+        kid_rope = self.make_rope(parent_rope, plan_kid.plan_label)
         if adoptees is not None:
             mass_sum = 0
-            for adoptee_concept_label in adoptees:
-                adoptee_rope = self.make_rope(parent_rope, adoptee_concept_label)
-                adoptee_concept = self.get_concept_obj(adoptee_rope)
-                mass_sum += adoptee_concept.mass
-                new_adoptee_parent_rope = self.make_rope(
-                    kid_rope, adoptee_concept_label
-                )
-                self.set_concept(adoptee_concept, new_adoptee_parent_rope)
-                self.edit_concept_attr(
-                    new_adoptee_parent_rope, mass=adoptee_concept.mass
-                )
-                self.del_concept_obj(adoptee_rope)
+            for adoptee_plan_label in adoptees:
+                adoptee_rope = self.make_rope(parent_rope, adoptee_plan_label)
+                adoptee_plan = self.get_plan_obj(adoptee_rope)
+                mass_sum += adoptee_plan.mass
+                new_adoptee_parent_rope = self.make_rope(kid_rope, adoptee_plan_label)
+                self.set_plan(adoptee_plan, new_adoptee_parent_rope)
+                self.edit_plan_attr(new_adoptee_parent_rope, mass=adoptee_plan.mass)
+                self.del_plan_obj(adoptee_rope)
 
             if bundling:
-                self.edit_concept_attr(kid_rope, mass=mass_sum)
+                self.edit_plan_attr(kid_rope, mass=mass_sum)
 
-        if create_missing_concepts:
-            self._create_missing_concepts(rope=kid_rope)
+        if create_missing_plans:
+            self._create_missing_plans(rope=kid_rope)
 
-    def _get_filtered_awardlinks_concept(self, x_concept: ConceptUnit) -> ConceptUnit:
+    def _get_filtered_awardlinks_plan(self, x_plan: PlanUnit) -> PlanUnit:
         _awardlinks_to_delete = [
             _awardlink_awardee_title
-            for _awardlink_awardee_title in x_concept.awardlinks.keys()
+            for _awardlink_awardee_title in x_plan.awardlinks.keys()
             if self.get_acctunit_group_titles_dict().get(_awardlink_awardee_title)
             is None
         ]
         for _awardlink_awardee_title in _awardlinks_to_delete:
-            x_concept.awardlinks.pop(_awardlink_awardee_title)
-        if x_concept.laborunit is not None:
+            x_plan.awardlinks.pop(_awardlink_awardee_title)
+        if x_plan.laborunit is not None:
             _laborlinks_to_delete = [
                 _laborlink_labor_title
-                for _laborlink_labor_title in x_concept.laborunit._laborlinks
+                for _laborlink_labor_title in x_plan.laborunit._laborlinks
                 if self.get_acctunit_group_titles_dict().get(_laborlink_labor_title)
                 is None
             ]
             for _laborlink_labor_title in _laborlinks_to_delete:
-                x_concept.laborunit.del_laborlink(_laborlink_labor_title)
-        return x_concept
+                x_plan.laborunit.del_laborlink(_laborlink_labor_title)
+        return x_plan
 
-    def _create_missing_concepts(self, rope):
-        self._set_concept_dict()
-        posted_concept = self.get_concept_obj(rope)
+    def _create_missing_plans(self, rope):
+        self._set_plan_dict()
+        posted_plan = self.get_plan_obj(rope)
 
-        for x_reason in posted_concept.reasonunits.values():
-            self._create_conceptkid_if_empty(rope=x_reason.rcontext)
+        for x_reason in posted_plan.reasonunits.values():
+            self._create_plankid_if_empty(rope=x_reason.rcontext)
             for premise_x in x_reason.premises.values():
-                self._create_conceptkid_if_empty(rope=premise_x.pstate)
+                self._create_plankid_if_empty(rope=premise_x.pstate)
 
-    def _create_conceptkid_if_empty(self, rope: RopeTerm):
-        if self.concept_exists(rope) is False:
-            self.add_concept(rope)
+    def _create_plankid_if_empty(self, rope: RopeTerm):
+        if self.plan_exists(rope) is False:
+            self.add_plan(rope)
 
-    def del_concept_obj(self, rope: RopeTerm, del_children: bool = True):
-        if rope == self.conceptroot.get_concept_rope():
-            raise InvalidOwnerException("Conceptroot cannot be deleted")
+    def del_plan_obj(self, rope: RopeTerm, del_children: bool = True):
+        if rope == self.planroot.get_plan_rope():
+            raise InvalidOwnerException("Planroot cannot be deleted")
         parent_rope = get_parent_rope(rope)
-        if self.concept_exists(rope):
+        if self.plan_exists(rope):
             if not del_children:
-                self._shift_concept_kids(x_rope=rope)
-            parent_concept = self.get_concept_obj(parent_rope)
-            parent_concept.del_kid(get_tail_label(rope, self.knot))
+                self._shift_plan_kids(x_rope=rope)
+            parent_plan = self.get_plan_obj(parent_rope)
+            parent_plan.del_kid(get_tail_label(rope, self.knot))
         self.settle_owner()
 
-    def _shift_concept_kids(self, x_rope: RopeTerm):
+    def _shift_plan_kids(self, x_rope: RopeTerm):
         parent_rope = get_parent_rope(x_rope)
-        d_temp_concept = self.get_concept_obj(x_rope)
-        for kid in d_temp_concept._kids.values():
-            self.set_concept(kid, parent_rope=parent_rope)
+        d_temp_plan = self.get_plan_obj(x_rope)
+        for kid in d_temp_plan._kids.values():
+            self.set_plan(kid, parent_rope=parent_rope)
 
     def set_owner_name(self, new_owner_name):
         self.owner_name = new_owner_name
 
-    def edit_concept_label(self, old_rope: RopeTerm, new_concept_label: LabelTerm):
-        if self.knot in new_concept_label:
-            exception_str = f"Cannot modify '{old_rope}' because new_concept_label {new_concept_label} contains knot {self.knot}"
+    def edit_plan_label(self, old_rope: RopeTerm, new_plan_label: LabelTerm):
+        if self.knot in new_plan_label:
+            exception_str = f"Cannot modify '{old_rope}' because new_plan_label {new_plan_label} contains knot {self.knot}"
             raise InvalidLabelException(exception_str)
-        if self.concept_exists(old_rope) is False:
-            raise InvalidOwnerException(f"Concept {old_rope=} does not exist")
+        if self.plan_exists(old_rope) is False:
+            raise InvalidOwnerException(f"Plan {old_rope=} does not exist")
 
         parent_rope = get_parent_rope(rope=old_rope)
         new_rope = (
-            self.make_rope(new_concept_label)
+            self.make_rope(new_plan_label)
             if parent_rope == ""
-            else self.make_rope(parent_rope, new_concept_label)
+            else self.make_rope(parent_rope, new_plan_label)
         )
         if old_rope != new_rope:
             if parent_rope == "":
-                self.conceptroot.set_concept_label(new_concept_label)
+                self.planroot.set_plan_label(new_plan_label)
             else:
-                self._non_root_concept_label_edit(
-                    old_rope, new_concept_label, parent_rope
-                )
-            self._conceptroot_find_replace_rope(old_rope=old_rope, new_rope=new_rope)
+                self._non_root_plan_label_edit(old_rope, new_plan_label, parent_rope)
+            self._planroot_find_replace_rope(old_rope=old_rope, new_rope=new_rope)
 
-    def _non_root_concept_label_edit(
-        self, old_rope: RopeTerm, new_concept_label: LabelTerm, parent_rope: RopeTerm
+    def _non_root_plan_label_edit(
+        self, old_rope: RopeTerm, new_plan_label: LabelTerm, parent_rope: RopeTerm
     ):
-        x_concept = self.get_concept_obj(old_rope)
-        x_concept.set_concept_label(new_concept_label)
-        x_concept.parent_rope = parent_rope
-        concept_parent = self.get_concept_obj(get_parent_rope(old_rope))
-        concept_parent._kids.pop(get_tail_label(old_rope, self.knot))
-        concept_parent._kids[x_concept.concept_label] = x_concept
+        x_plan = self.get_plan_obj(old_rope)
+        x_plan.set_plan_label(new_plan_label)
+        x_plan.parent_rope = parent_rope
+        plan_parent = self.get_plan_obj(get_parent_rope(old_rope))
+        plan_parent._kids.pop(get_tail_label(old_rope, self.knot))
+        plan_parent._kids[x_plan.plan_label] = x_plan
 
-    def _conceptroot_find_replace_rope(self, old_rope: RopeTerm, new_rope: RopeTerm):
-        self.conceptroot.find_replace_rope(old_rope=old_rope, new_rope=new_rope)
+    def _planroot_find_replace_rope(self, old_rope: RopeTerm, new_rope: RopeTerm):
+        self.planroot.find_replace_rope(old_rope=old_rope, new_rope=new_rope)
 
-        concept_iter_list = [self.conceptroot]
-        while concept_iter_list != []:
-            listed_concept = concept_iter_list.pop()
-            # add all concept_children in concept list
-            if listed_concept._kids is not None:
-                for concept_kid in listed_concept._kids.values():
-                    concept_iter_list.append(concept_kid)
-                    if is_sub_rope(concept_kid.parent_rope, sub_rope=old_rope):
-                        concept_kid.parent_rope = rebuild_rope(
-                            subj_rope=concept_kid.parent_rope,
+        plan_iter_list = [self.planroot]
+        while plan_iter_list != []:
+            listed_plan = plan_iter_list.pop()
+            # add all plan_children in plan list
+            if listed_plan._kids is not None:
+                for plan_kid in listed_plan._kids.values():
+                    plan_iter_list.append(plan_kid)
+                    if is_sub_rope(plan_kid.parent_rope, sub_rope=old_rope):
+                        plan_kid.parent_rope = rebuild_rope(
+                            subj_rope=plan_kid.parent_rope,
                             old_rope=old_rope,
                             new_rope=new_rope,
                         )
-                    concept_kid.find_replace_rope(old_rope=old_rope, new_rope=new_rope)
+                    plan_kid.find_replace_rope(old_rope=old_rope, new_rope=new_rope)
 
-    def _set_conceptattrholder_premise_ranges(
-        self, x_conceptattrholder: ConceptAttrHolder
-    ):
-        premise_concept = self.get_concept_obj(x_conceptattrholder.reason_premise)
-        x_conceptattrholder.set_premise_range_influenced_by_premise_concept(
-            popen=premise_concept.begin,
-            pnigh=premise_concept.close,
-            premise_denom=premise_concept.denom,
+    def _set_planattrholder_premise_ranges(self, x_planattrholder: PlanAttrHolder):
+        premise_plan = self.get_plan_obj(x_planattrholder.reason_premise)
+        x_planattrholder.set_premise_range_influenced_by_premise_plan(
+            popen=premise_plan.begin,
+            pnigh=premise_plan.close,
+            premise_denom=premise_plan.denom,
         )
 
     def edit_reason(
         self,
-        concept_rope: RopeTerm,
+        plan_rope: RopeTerm,
         reason_rcontext: RopeTerm = None,
         reason_premise: RopeTerm = None,
         popen: float = None,
         reason_pnigh: float = None,
         pdivisor: int = None,
     ):
-        self.edit_concept_attr(
-            concept_rope=concept_rope,
+        self.edit_plan_attr(
+            plan_rope=plan_rope,
             reason_rcontext=reason_rcontext,
             reason_premise=reason_premise,
             popen=popen,
@@ -809,9 +794,9 @@ class OwnerUnit:
             pdivisor=pdivisor,
         )
 
-    def edit_concept_attr(
+    def edit_plan_attr(
         self,
-        concept_rope: RopeTerm,
+        plan_rope: RopeTerm,
         mass: int = None,
         uid: int = None,
         reason: ReasonUnit = None,
@@ -822,7 +807,7 @@ class OwnerUnit:
         pdivisor: int = None,
         reason_del_premise_rcontext: RopeTerm = None,
         reason_del_premise_pstate: RopeTerm = None,
-        reason_rconcept_active_requisite: str = None,
+        reason_rplan_active_requisite: str = None,
         laborunit: LaborUnit = None,
         healerlink: HealerLink = None,
         begin: float = None,
@@ -846,10 +831,10 @@ class OwnerUnit:
         if healerlink is not None:
             for x_healer_name in healerlink._healer_names:
                 if self.get_acctunit_group_titles_dict().get(x_healer_name) is None:
-                    exception_str = f"Concept cannot edit healerlink because group_title '{x_healer_name}' does not exist as group in Owner"
+                    exception_str = f"Plan cannot edit healerlink because group_title '{x_healer_name}' does not exist as group in Owner"
                     raise healerlink_group_title_Exception(exception_str)
 
-        x_conceptattrholder = conceptattrholder_shop(
+        x_planattrholder = planattrholder_shop(
             mass=mass,
             uid=uid,
             reason=reason,
@@ -860,7 +845,7 @@ class OwnerUnit:
             pdivisor=pdivisor,
             reason_del_premise_rcontext=reason_del_premise_rcontext,
             reason_del_premise_pstate=reason_del_premise_pstate,
-            reason_rconcept_active_requisite=reason_rconcept_active_requisite,
+            reason_rplan_active_requisite=reason_rplan_active_requisite,
             laborunit=laborunit,
             healerlink=healerlink,
             begin=begin,
@@ -882,32 +867,28 @@ class OwnerUnit:
             problem_bool=problem_bool,
         )
         if reason_premise is not None:
-            self._set_conceptattrholder_premise_ranges(x_conceptattrholder)
-        x_concept = self.get_concept_obj(concept_rope)
-        x_concept._set_attrs_to_conceptunit(concept_attr=x_conceptattrholder)
+            self._set_planattrholder_premise_ranges(x_planattrholder)
+        x_plan = self.get_plan_obj(plan_rope)
+        x_plan._set_attrs_to_planunit(plan_attr=x_planattrholder)
 
     def get_agenda_dict(
         self, necessary_rcontext: RopeTerm = None
-    ) -> dict[RopeTerm, ConceptUnit]:
+    ) -> dict[RopeTerm, PlanUnit]:
         self.settle_owner()
         return {
-            x_concept.get_concept_rope(): x_concept
-            for x_concept in self._concept_dict.values()
-            if x_concept.is_agenda_concept(necessary_rcontext)
+            x_plan.get_plan_rope(): x_plan
+            for x_plan in self._plan_dict.values()
+            if x_plan.is_agenda_plan(necessary_rcontext)
         }
 
-    def get_all_tasks(self) -> dict[RopeTerm, ConceptUnit]:
+    def get_all_tasks(self) -> dict[RopeTerm, PlanUnit]:
         self.settle_owner()
-        all_concepts = self._concept_dict.values()
-        return {
-            x_concept.get_concept_rope(): x_concept
-            for x_concept in all_concepts
-            if x_concept.task
-        }
+        all_plans = self._plan_dict.values()
+        return {x_plan.get_plan_rope(): x_plan for x_plan in all_plans if x_plan.task}
 
     def set_agenda_chore_complete(self, chore_rope: RopeTerm, rcontext: RopeTerm):
-        task_concept = self.get_concept_obj(chore_rope)
-        task_concept.set_factunit_to_complete(self.conceptroot.factunits[rcontext])
+        task_plan = self.get_plan_obj(chore_rope)
+        task_plan.set_factunit_to_complete(self.planroot.factunits[rcontext])
 
     def get_credit_ledger_debt_ledger(
         self,
@@ -928,10 +909,10 @@ class OwnerUnit:
     def get_acctunits_acct_debt_points_sum(self) -> float:
         return sum(acctunit.get_acct_debt_points() for acctunit in self.accts.values())
 
-    def _add_to_acctunits_fund_give_take(self, concept_fund_share: float):
+    def _add_to_acctunits_fund_give_take(self, plan_fund_share: float):
         credor_ledger, debtor_ledger = self.get_credit_ledger_debt_ledger()
-        fund_give_allot = allot_scale(credor_ledger, concept_fund_share, self.fund_iota)
-        fund_take_allot = allot_scale(debtor_ledger, concept_fund_share, self.fund_iota)
+        fund_give_allot = allot_scale(credor_ledger, plan_fund_share, self.fund_iota)
+        fund_take_allot = allot_scale(debtor_ledger, plan_fund_share, self.fund_iota)
         for x_acct_name, acct_fund_give in fund_give_allot.items():
             self.get_acct(x_acct_name).add_fund_give(acct_fund_give)
             # if there is no differentiated agenda (what factunits exist do not change agenda)
@@ -943,10 +924,10 @@ class OwnerUnit:
             if not self._reason_rcontexts:
                 self.get_acct(x_acct_name).add_fund_agenda_take(acct_fund_take)
 
-    def _add_to_acctunits_fund_agenda_give_take(self, concept_fund_share: float):
+    def _add_to_acctunits_fund_agenda_give_take(self, plan_fund_share: float):
         credor_ledger, debtor_ledger = self.get_credit_ledger_debt_ledger()
-        fund_give_allot = allot_scale(credor_ledger, concept_fund_share, self.fund_iota)
-        fund_take_allot = allot_scale(debtor_ledger, concept_fund_share, self.fund_iota)
+        fund_give_allot = allot_scale(credor_ledger, plan_fund_share, self.fund_iota)
+        fund_take_allot = allot_scale(debtor_ledger, plan_fund_share, self.fund_iota)
         for x_acct_name, acct_fund_give in fund_give_allot.items():
             self.get_acct(x_acct_name).add_fund_agenda_give(acct_fund_give)
         for x_acct_name, acct_fund_take in fund_take_allot.items():
@@ -968,23 +949,21 @@ class OwnerUnit:
             )
 
     def _allot_fund_owner_agenda(self):
-        for concept in self._concept_dict.values():
-            # If there are no awardlines associated with concept
+        for plan in self._plan_dict.values():
+            # If there are no awardlines associated with plan
             # allot fund_share via general acctunit
             # cred ratio and debt ratio
-            # if concept.is_agenda_concept() and concept._awardlines == {}:
-            if concept.is_agenda_concept():
-                if concept.awardheir_exists():
-                    for x_awardline in concept._awardlines.values():
+            # if plan.is_agenda_plan() and plan._awardlines == {}:
+            if plan.is_agenda_plan():
+                if plan.awardheir_exists():
+                    for x_awardline in plan._awardlines.values():
                         self.add_to_groupunit_fund_agenda_give_take(
                             group_title=x_awardline.awardee_title,
                             awardline_fund_give=x_awardline._fund_give,
                             awardline_fund_take=x_awardline._fund_take,
                         )
                 else:
-                    self._add_to_acctunits_fund_agenda_give_take(
-                        concept.get_fund_share()
-                    )
+                    self._add_to_acctunits_fund_agenda_give_take(plan.get_fund_share())
 
     def _allot_groupunits_fund(self):
         for x_groupunit in self._groupunits.values():
@@ -1019,123 +998,117 @@ class OwnerUnit:
         for acctunit in self.accts.values():
             acctunit.clear_fund_give_take()
 
-    def concept_exists(self, rope: RopeTerm) -> bool:
+    def plan_exists(self, rope: RopeTerm) -> bool:
         if rope in {"", None}:
             return False
-        root_rope_concept_label = get_root_label_from_rope(rope, self.knot)
-        if root_rope_concept_label != self.conceptroot.concept_label:
+        root_rope_plan_label = get_root_label_from_rope(rope, self.knot)
+        if root_rope_plan_label != self.planroot.plan_label:
             return False
 
         labels = get_all_rope_labels(rope, knot=self.knot)
-        root_rope_concept_label = labels.pop(0)
+        root_rope_plan_label = labels.pop(0)
         if labels == []:
             return True
 
-        concept_label = labels.pop(0)
-        x_concept = self.conceptroot.get_kid(concept_label)
-        if x_concept is None:
+        plan_label = labels.pop(0)
+        x_plan = self.planroot.get_kid(plan_label)
+        if x_plan is None:
             return False
         while labels != []:
-            concept_label = labels.pop(0)
-            x_concept = x_concept.get_kid(concept_label)
-            if x_concept is None:
+            plan_label = labels.pop(0)
+            x_plan = x_plan.get_kid(plan_label)
+            if x_plan is None:
                 return False
         return True
 
-    def get_concept_obj(
-        self, rope: RopeTerm, if_missing_create: bool = False
-    ) -> ConceptUnit:
+    def get_plan_obj(self, rope: RopeTerm, if_missing_create: bool = False) -> PlanUnit:
         if rope is None:
-            raise InvalidOwnerException("get_concept_obj received rope=None")
-        if self.concept_exists(rope) is False and not if_missing_create:
-            raise InvalidOwnerException(
-                f"get_concept_obj failed. no concept at '{rope}'"
-            )
+            raise InvalidOwnerException("get_plan_obj received rope=None")
+        if self.plan_exists(rope) is False and not if_missing_create:
+            raise InvalidOwnerException(f"get_plan_obj failed. no plan at '{rope}'")
         labelterms = get_all_rope_labels(rope, knot=self.knot)
         if len(labelterms) == 1:
-            return self.conceptroot
+            return self.planroot
 
         labelterms.pop(0)
-        concept_label = labelterms.pop(0)
-        x_concept = self.conceptroot.get_kid(concept_label, if_missing_create)
+        plan_label = labelterms.pop(0)
+        x_plan = self.planroot.get_kid(plan_label, if_missing_create)
         while labelterms != []:
-            x_concept = x_concept.get_kid(labelterms.pop(0), if_missing_create)
+            x_plan = x_plan.get_kid(labelterms.pop(0), if_missing_create)
 
-        return x_concept
+        return x_plan
 
-    def get_concept_ranged_kids(
-        self, concept_rope: str, x_gogo_calc: float = None, x_stop_calc: float = None
-    ) -> dict[ConceptUnit]:
-        x_concept = self.get_concept_obj(concept_rope)
-        return x_concept.get_kids_in_range(x_gogo_calc, x_stop_calc)
+    def get_plan_ranged_kids(
+        self, plan_rope: str, x_gogo_calc: float = None, x_stop_calc: float = None
+    ) -> dict[PlanUnit]:
+        x_plan = self.get_plan_obj(plan_rope)
+        return x_plan.get_kids_in_range(x_gogo_calc, x_stop_calc)
 
-    def get_inheritor_concept_list(
+    def get_inheritor_plan_list(
         self, math_rope: RopeTerm, inheritor_rope: RopeTerm
-    ) -> list[ConceptUnit]:
-        concept_ropes = all_ropeterms_between(math_rope, inheritor_rope)
-        return [
-            self.get_concept_obj(x_concept_rope) for x_concept_rope in concept_ropes
-        ]
+    ) -> list[PlanUnit]:
+        plan_ropes = all_ropeterms_between(math_rope, inheritor_rope)
+        return [self.get_plan_obj(x_plan_rope) for x_plan_rope in plan_ropes]
 
-    def _set_concept_dict(self):
-        concept_list = [self.get_concept_obj(to_rope(self.belief_label, self.knot))]
-        while concept_list != []:
-            x_concept = concept_list.pop()
-            x_concept.clear_gogo_calc_stop_calc()
-            for concept_kid in x_concept._kids.values():
-                concept_kid.set_parent_rope(x_concept.get_concept_rope())
-                concept_kid.set_level(x_concept._level)
-                concept_list.append(concept_kid)
-            self._concept_dict[x_concept.get_concept_rope()] = x_concept
-            for x_reason_rcontext in x_concept.reasonunits.keys():
+    def _set_plan_dict(self):
+        plan_list = [self.get_plan_obj(to_rope(self.belief_label, self.knot))]
+        while plan_list != []:
+            x_plan = plan_list.pop()
+            x_plan.clear_gogo_calc_stop_calc()
+            for plan_kid in x_plan._kids.values():
+                plan_kid.set_parent_rope(x_plan.get_plan_rope())
+                plan_kid.set_level(x_plan._level)
+                plan_list.append(plan_kid)
+            self._plan_dict[x_plan.get_plan_rope()] = x_plan
+            for x_reason_rcontext in x_plan.reasonunits.keys():
                 self._reason_rcontexts.add(x_reason_rcontext)
 
-    def _raise_gogo_calc_stop_calc_exception(self, concept_rope: RopeTerm):
-        exception_str = f"Error has occurred, Concept '{concept_rope}' is having _gogo_calc and _stop_calc attributes set twice"
+    def _raise_gogo_calc_stop_calc_exception(self, plan_rope: RopeTerm):
+        exception_str = f"Error has occurred, Plan '{plan_rope}' is having _gogo_calc and _stop_calc attributes set twice"
         raise _gogo_calc_stop_calc_Exception(exception_str)
 
-    def _distribute_math_attrs(self, math_concept: ConceptUnit):
-        single_range_concept_list = [math_concept]
-        while single_range_concept_list != []:
-            r_concept = single_range_concept_list.pop()
-            if r_concept._range_evaluated:
-                self._raise_gogo_calc_stop_calc_exception(r_concept.get_concept_rope())
-            if r_concept.is_math():
-                r_concept._gogo_calc = r_concept.begin
-                r_concept._stop_calc = r_concept.close
+    def _distribute_math_attrs(self, math_plan: PlanUnit):
+        single_range_plan_list = [math_plan]
+        while single_range_plan_list != []:
+            r_plan = single_range_plan_list.pop()
+            if r_plan._range_evaluated:
+                self._raise_gogo_calc_stop_calc_exception(r_plan.get_plan_rope())
+            if r_plan.is_math():
+                r_plan._gogo_calc = r_plan.begin
+                r_plan._stop_calc = r_plan.close
             else:
                 parent_rope = get_parent_rope(
-                    rope=r_concept.get_concept_rope(), knot=r_concept.knot
+                    rope=r_plan.get_plan_rope(), knot=r_plan.knot
                 )
-                parent_concept = self.get_concept_obj(parent_rope)
-                r_concept._gogo_calc = parent_concept._gogo_calc
-                r_concept._stop_calc = parent_concept._stop_calc
-                self._range_inheritors[r_concept.get_concept_rope()] = (
-                    math_concept.get_concept_rope()
+                parent_plan = self.get_plan_obj(parent_rope)
+                r_plan._gogo_calc = parent_plan._gogo_calc
+                r_plan._stop_calc = parent_plan._stop_calc
+                self._range_inheritors[r_plan.get_plan_rope()] = (
+                    math_plan.get_plan_rope()
                 )
-            r_concept._mold_gogo_calc_stop_calc()
-            single_range_concept_list.extend(iter(r_concept._kids.values()))
+            r_plan._mold_gogo_calc_stop_calc()
+            single_range_plan_list.extend(iter(r_plan._kids.values()))
 
-    def _set_concepttree_range_attrs(self):
-        for x_concept in self._concept_dict.values():
-            if x_concept.is_math():
-                self._distribute_math_attrs(x_concept)
+    def _set_plantree_range_attrs(self):
+        for x_plan in self._plan_dict.values():
+            if x_plan.is_math():
+                self._distribute_math_attrs(x_plan)
 
             if (
-                not x_concept.is_kidless()
-                and x_concept.get_kids_mass_sum() == 0
-                and x_concept.mass != 0
+                not x_plan.is_kidless()
+                and x_plan.get_kids_mass_sum() == 0
+                and x_plan.mass != 0
             ):
-                self._offtrack_kids_mass_set.add(x_concept.get_concept_rope())
+                self._offtrack_kids_mass_set.add(x_plan.get_plan_rope())
 
     def _set_groupunit_acctunit_funds(self, keep_exceptions):
-        for x_concept in self._concept_dict.values():
-            x_concept.set_awardheirs_fund_give_fund_take()
-            if x_concept.is_kidless():
+        for x_plan in self._plan_dict.values():
+            x_plan.set_awardheirs_fund_give_fund_take()
+            if x_plan.is_kidless():
                 self._set_ancestors_task_fund_keep_attrs(
-                    x_concept.get_concept_rope(), keep_exceptions
+                    x_plan.get_plan_rope(), keep_exceptions
                 )
-                self._allot_fund_share(x_concept)
+                self._allot_fund_share(x_plan)
 
     def _set_ancestors_task_fund_keep_attrs(
         self, rope: RopeTerm, keep_exceptions: bool = False
@@ -1149,65 +1122,63 @@ class OwnerUnit:
 
         while ancestor_ropes != []:
             youngest_rope = ancestor_ropes.pop(0)
-            x_concept_obj = self.get_concept_obj(youngest_rope)
-            x_concept_obj.add_to_descendant_task_count(x_descendant_task_count)
-            if x_concept_obj.is_kidless():
-                x_concept_obj.set_kidless_awardlines()
-                child_awardlines = x_concept_obj._awardlines
+            x_plan_obj = self.get_plan_obj(youngest_rope)
+            x_plan_obj.add_to_descendant_task_count(x_descendant_task_count)
+            if x_plan_obj.is_kidless():
+                x_plan_obj.set_kidless_awardlines()
+                child_awardlines = x_plan_obj._awardlines
             else:
-                x_concept_obj.set_awardlines(child_awardlines)
+                x_plan_obj.set_awardlines(child_awardlines)
 
-            if x_concept_obj._chore:
+            if x_plan_obj._chore:
                 x_descendant_task_count += 1
 
             if (
                 group_everyone != False
-                and x_concept_obj._all_acct_cred != False
-                and x_concept_obj._all_acct_debt != False
-                and x_concept_obj._awardheirs != {}
+                and x_plan_obj._all_acct_cred != False
+                and x_plan_obj._all_acct_debt != False
+                and x_plan_obj._awardheirs != {}
             ) or (
                 group_everyone != False
-                and x_concept_obj._all_acct_cred is False
-                and x_concept_obj._all_acct_debt is False
+                and x_plan_obj._all_acct_cred is False
+                and x_plan_obj._all_acct_debt is False
             ):
                 group_everyone = False
             elif group_everyone != False:
                 group_everyone = True
-            x_concept_obj._all_acct_cred = group_everyone
-            x_concept_obj._all_acct_debt = group_everyone
+            x_plan_obj._all_acct_cred = group_everyone
+            x_plan_obj._all_acct_debt = group_everyone
 
-            if x_concept_obj.healerlink.any_healer_name_exists():
+            if x_plan_obj.healerlink.any_healer_name_exists():
                 keep_justified_by_problem = False
                 healerlink_count += 1
-                self._sum_healerlink_share += x_concept_obj.get_fund_share()
-            if x_concept_obj.problem_bool:
+                self._sum_healerlink_share += x_plan_obj.get_fund_share()
+            if x_plan_obj.problem_bool:
                 keep_justified_by_problem = True
 
         if keep_justified_by_problem is False or healerlink_count > 1:
             if keep_exceptions:
-                exception_str = f"ConceptUnit '{rope}' cannot sponsor ancestor keeps."
+                exception_str = f"PlanUnit '{rope}' cannot sponsor ancestor keeps."
                 raise Exception_keeps_justified(exception_str)
             self._keeps_justified = False
 
-    def _clear_concepttree_fund_and_active_status_attrs(self):
-        for x_concept in self._concept_dict.values():
-            x_concept.clear_awardlines()
-            x_concept.clear_descendant_task_count()
-            x_concept.clear_all_acct_cred_debt()
+    def _clear_plantree_fund_and_active_status_attrs(self):
+        for x_plan in self._plan_dict.values():
+            x_plan.clear_awardlines()
+            x_plan.clear_descendant_task_count()
+            x_plan.clear_all_acct_cred_debt()
 
-    def _set_kids_active_status_attrs(
-        self, x_concept: ConceptUnit, parent_concept: ConceptUnit
-    ):
-        x_concept.set_reasonheirs(self._concept_dict, parent_concept._reasonheirs)
-        x_concept.set_range_factheirs(self._concept_dict, self._range_inheritors)
+    def _set_kids_active_status_attrs(self, x_plan: PlanUnit, parent_plan: PlanUnit):
+        x_plan.set_reasonheirs(self._plan_dict, parent_plan._reasonheirs)
+        x_plan.set_range_factheirs(self._plan_dict, self._range_inheritors)
         tt_count = self._tree_traverse_count
-        x_concept.set_active_attrs(tt_count, self._groupunits, self.owner_name)
+        x_plan.set_active_attrs(tt_count, self._groupunits, self.owner_name)
 
-    def _allot_fund_share(self, concept: ConceptUnit):
-        if concept.awardheir_exists():
-            self._set_groupunits_fund_share(concept._awardheirs)
-        elif concept.awardheir_exists() is False:
-            self._add_to_acctunits_fund_give_take(concept.get_fund_share())
+    def _allot_fund_share(self, plan: PlanUnit):
+        if plan.awardheir_exists():
+            self._set_groupunits_fund_share(plan._awardheirs)
+        elif plan.awardheir_exists() is False:
+            self._add_to_acctunits_fund_give_take(plan.get_fund_share())
 
     def _create_groupunits_metrics(self):
         self._groupunits = {}
@@ -1234,8 +1205,8 @@ class OwnerUnit:
         self._create_groupunits_metrics()
         self._reset_acctunit_fund_give_take()
 
-    def _clear_concept_dict_and_owner_obj_settle_attrs(self):
-        self._concept_dict = {self.conceptroot.get_concept_rope(): self.conceptroot}
+    def _clear_plan_dict_and_owner_obj_settle_attrs(self):
+        self._plan_dict = {self.planroot.get_plan_rope(): self.planroot}
         self._rational = False
         self._tree_traverse_count = 0
         self._offtrack_kids_mass_set = set()
@@ -1247,86 +1218,80 @@ class OwnerUnit:
         self._keep_dict = {}
         self._healers_dict = {}
 
-    def _set_concepttree_factheirs_laborheirs_awardheirs(self):
-        for x_concept in get_sorted_concept_list(list(self._concept_dict.values())):
-            if x_concept.root:
-                x_concept.set_factheirs(x_concept.factunits)
-                x_concept.set_conceptroot_inherit_reasonheirs()
-                x_concept.set_laborheir(None, self._groupunits)
-                x_concept.inherit_awardheirs()
+    def _set_plantree_factheirs_laborheirs_awardheirs(self):
+        for x_plan in get_sorted_plan_list(list(self._plan_dict.values())):
+            if x_plan.root:
+                x_plan.set_factheirs(x_plan.factunits)
+                x_plan.set_planroot_inherit_reasonheirs()
+                x_plan.set_laborheir(None, self._groupunits)
+                x_plan.inherit_awardheirs()
             else:
-                parent_concept = self.get_concept_obj(x_concept.parent_rope)
-                x_concept.set_factheirs(parent_concept._factheirs)
-                x_concept.set_laborheir(parent_concept._laborheir, self._groupunits)
-                x_concept.inherit_awardheirs(parent_concept._awardheirs)
-            x_concept.set_awardheirs_fund_give_fund_take()
+                parent_plan = self.get_plan_obj(x_plan.parent_rope)
+                x_plan.set_factheirs(parent_plan._factheirs)
+                x_plan.set_laborheir(parent_plan._laborheir, self._groupunits)
+                x_plan.inherit_awardheirs(parent_plan._awardheirs)
+            x_plan.set_awardheirs_fund_give_fund_take()
 
     def settle_owner(self, keep_exceptions: bool = False):
-        self._clear_concept_dict_and_owner_obj_settle_attrs()
-        self._set_concept_dict()
-        self._set_concepttree_range_attrs()
+        self._clear_plan_dict_and_owner_obj_settle_attrs()
+        self._set_plan_dict()
+        self._set_plantree_range_attrs()
         self._set_acctunit_groupunit_respect_ledgers()
         self._clear_acctunit_fund_attrs()
-        self._clear_concepttree_fund_and_active_status_attrs()
-        self._set_concepttree_factheirs_laborheirs_awardheirs()
+        self._clear_plantree_fund_and_active_status_attrs()
+        self._set_plantree_factheirs_laborheirs_awardheirs()
 
         max_count = self.max_tree_traverse
         while not self._rational and self._tree_traverse_count < max_count:
-            self._set_concepttree_active_status_attrs()
+            self._set_plantree_active_status_attrs()
             self._set_rational_attr()
             self._tree_traverse_count += 1
 
-        self._set_concepttree_fund_attrs(self.conceptroot)
+        self._set_plantree_fund_attrs(self.planroot)
         self._set_groupunit_acctunit_funds(keep_exceptions)
         self._set_acctunit_fund_related_attrs()
         self._set_owner_keep_attrs()
 
-    def _set_concepttree_active_status_attrs(self):
-        for x_concept in get_sorted_concept_list(list(self._concept_dict.values())):
-            if x_concept.root:
+    def _set_plantree_active_status_attrs(self):
+        for x_plan in get_sorted_plan_list(list(self._plan_dict.values())):
+            if x_plan.root:
                 tt_count = self._tree_traverse_count
-                root_concept = self.conceptroot
-                root_concept.set_active_attrs(
-                    tt_count, self._groupunits, self.owner_name
-                )
+                root_plan = self.planroot
+                root_plan.set_active_attrs(tt_count, self._groupunits, self.owner_name)
             else:
-                parent_concept = self.get_concept_obj(x_concept.parent_rope)
-                self._set_kids_active_status_attrs(x_concept, parent_concept)
+                parent_plan = self.get_plan_obj(x_plan.parent_rope)
+                self._set_kids_active_status_attrs(x_plan, parent_plan)
 
-    def _set_concepttree_fund_attrs(self, root_concept: ConceptUnit):
-        root_concept.set_fund_attr(0, self.fund_pool, self.fund_pool)
+    def _set_plantree_fund_attrs(self, root_plan: PlanUnit):
+        root_plan.set_fund_attr(0, self.fund_pool, self.fund_pool)
         # no function recursion, recursion by iterateing over list that can be added to by iterations
-        cache_concept_list = [root_concept]
-        while cache_concept_list != []:
-            parent_concept = cache_concept_list.pop()
-            kids_concepts = parent_concept._kids.items()
-            x_ledger = {
-                x_rope: concept_kid.mass for x_rope, concept_kid in kids_concepts
-            }
-            parent_fund_num = parent_concept._fund_cease - parent_concept._fund_onset
+        cache_plan_list = [root_plan]
+        while cache_plan_list != []:
+            parent_plan = cache_plan_list.pop()
+            kids_plans = parent_plan._kids.items()
+            x_ledger = {x_rope: plan_kid.mass for x_rope, plan_kid in kids_plans}
+            parent_fund_num = parent_plan._fund_cease - parent_plan._fund_onset
             alloted_fund_num = allot_scale(x_ledger, parent_fund_num, self.fund_iota)
 
             fund_onset = None
             fund_cease = None
-            for x_concept in parent_concept._kids.values():
+            for x_plan in parent_plan._kids.values():
                 if fund_onset is None:
-                    fund_onset = parent_concept._fund_onset
-                    fund_cease = fund_onset + alloted_fund_num.get(
-                        x_concept.concept_label
-                    )
+                    fund_onset = parent_plan._fund_onset
+                    fund_cease = fund_onset + alloted_fund_num.get(x_plan.plan_label)
                 else:
                     fund_onset = fund_cease
-                    fund_cease += alloted_fund_num.get(x_concept.concept_label)
-                x_concept.set_fund_attr(fund_onset, fund_cease, self.fund_pool)
-                cache_concept_list.append(x_concept)
+                    fund_cease += alloted_fund_num.get(x_plan.plan_label)
+                x_plan.set_fund_attr(fund_onset, fund_cease, self.fund_pool)
+                cache_plan_list.append(x_plan)
 
     def _set_rational_attr(self):
-        any_concept_active_status_has_altered = False
-        for concept in self._concept_dict.values():
-            if concept._active_hx.get(self._tree_traverse_count) is not None:
-                any_concept_active_status_has_altered = True
+        any_plan_active_status_has_altered = False
+        for plan in self._plan_dict.values():
+            if plan._active_hx.get(self._tree_traverse_count) is not None:
+                any_plan_active_status_has_altered = True
 
-        if any_concept_active_status_has_altered is False:
+        if any_plan_active_status_has_altered is False:
             self._rational = True
 
     def _set_acctunit_fund_related_attrs(self):
@@ -1344,26 +1309,26 @@ class OwnerUnit:
     def _set_keep_dict(self):
         if self._keeps_justified is False:
             self._sum_healerlink_share = 0
-        for x_concept in self._concept_dict.values():
+        for x_plan in self._plan_dict.values():
             if self._sum_healerlink_share == 0:
-                x_concept._healerlink_ratio = 0
+                x_plan._healerlink_ratio = 0
             else:
                 x_sum = self._sum_healerlink_share
-                x_concept._healerlink_ratio = x_concept.get_fund_share() / x_sum
-            if self._keeps_justified and x_concept.healerlink.any_healer_name_exists():
-                self._keep_dict[x_concept.get_concept_rope()] = x_concept
+                x_plan._healerlink_ratio = x_plan.get_fund_share() / x_sum
+            if self._keeps_justified and x_plan.healerlink.any_healer_name_exists():
+                self._keep_dict[x_plan.get_plan_rope()] = x_plan
 
-    def _get_healers_dict(self) -> dict[HealerName, dict[RopeTerm, ConceptUnit]]:
+    def _get_healers_dict(self) -> dict[HealerName, dict[RopeTerm, PlanUnit]]:
         _healers_dict = {}
-        for x_keep_rope, x_keep_concept in self._keep_dict.items():
-            for x_healer_name in x_keep_concept.healerlink._healer_names:
+        for x_keep_rope, x_keep_plan in self._keep_dict.items():
+            for x_healer_name in x_keep_plan.healerlink._healer_names:
                 x_groupunit = self.get_groupunit(x_healer_name)
                 for x_acct_name in x_groupunit._memberships.keys():
                     if _healers_dict.get(x_acct_name) is None:
-                        _healers_dict[x_acct_name] = {x_keep_rope: x_keep_concept}
+                        _healers_dict[x_acct_name] = {x_keep_rope: x_keep_plan}
                     else:
                         healer_dict = _healers_dict.get(x_acct_name)
-                        healer_dict[x_keep_rope] = x_keep_concept
+                        healer_dict[x_keep_rope] = x_keep_plan
         return _healers_dict
 
     def _get_buildable_keeps(self) -> bool:
@@ -1376,13 +1341,12 @@ class OwnerUnit:
         self._reset_groupunits_fund_give_take()
         self._reset_acctunit_fund_give_take()
 
-    def get_concept_tree_ordered_rope_list(
+    def get_plan_tree_ordered_rope_list(
         self, no_range_descendants: bool = False
     ) -> list[RopeTerm]:
-        concept_list = list(self.get_concept_dict().values())
+        plan_list = list(self.get_plan_dict().values())
         label_dict = {
-            concept.get_concept_rope().lower(): concept.get_concept_rope()
-            for concept in concept_list
+            plan.get_plan_rope().lower(): plan.get_plan_rope() for plan in plan_list
         }
         label_lowercase_ordered_list = sorted(list(label_dict))
         label_orginalcase_ordered_list = [
@@ -1398,22 +1362,19 @@ class OwnerUnit:
                 if len(anc_list) == 1:
                     list_x.append(rope)
                 elif len(anc_list) == 2:
-                    if (
-                        self.conceptroot.begin is None
-                        and self.conceptroot.close is None
-                    ):
+                    if self.planroot.begin is None and self.planroot.close is None:
                         list_x.append(rope)
                 else:
-                    parent_concept = self.get_concept_obj(rope=anc_list[1])
-                    if parent_concept.begin is None and parent_concept.close is None:
+                    parent_plan = self.get_plan_obj(rope=anc_list[1])
+                    if parent_plan.begin is None and parent_plan.close is None:
                         list_x.append(rope)
 
         return list_x
 
     def get_factunits_dict(self) -> dict[str, str]:
         x_dict = {}
-        if self.conceptroot.factunits is not None:
-            for fact_rope, fact_obj in self.conceptroot.factunits.items():
+        if self.planroot.factunits is not None:
+            for fact_rope, fact_obj in self.planroot.factunits.items():
                 x_dict[fact_rope] = fact_obj.get_dict()
         return x_dict
 
@@ -1436,7 +1397,7 @@ class OwnerUnit:
             "belief_label": self.belief_label,
             "max_tree_traverse": self.max_tree_traverse,
             "knot": self.knot,
-            "conceptroot": self.conceptroot.get_dict(),
+            "planroot": self.planroot.get_dict(),
         }
         if self.credor_respect is not None:
             x_dict["credor_respect"] = self.credor_respect
@@ -1450,19 +1411,19 @@ class OwnerUnit:
     def get_json(self) -> str:
         return get_json_from_dict(self.get_dict())
 
-    def set_dominate_task_concept(self, concept_kid: ConceptUnit):
-        concept_kid.task = True
-        self.set_concept(
-            concept_kid=concept_kid,
-            parent_rope=self.make_rope(concept_kid.parent_rope),
+    def set_dominate_task_plan(self, plan_kid: PlanUnit):
+        plan_kid.task = True
+        self.set_plan(
+            plan_kid=plan_kid,
+            parent_rope=self.make_rope(plan_kid.parent_rope),
             get_rid_of_missing_awardlinks_awardee_titles=True,
-            create_missing_concepts=True,
+            create_missing_plans=True,
         )
 
     def set_offtrack_fund(self) -> float:
         mass_set = self._offtrack_kids_mass_set
         self._offtrack_fund = sum(
-            self.get_concept_obj(x_ropeterm).get_fund_share() for x_ropeterm in mass_set
+            self.get_plan_obj(x_ropeterm).get_fund_share() for x_ropeterm in mass_set
         )
 
 
@@ -1491,7 +1452,7 @@ def ownerunit_shop(
         fund_iota=default_fund_iota_if_None(fund_iota),
         respect_bit=default_RespectBit_if_None(respect_bit),
         penny=filter_penny(penny),
-        _concept_dict=get_empty_dict_if_None(),
+        _plan_dict=get_empty_dict_if_None(),
         _keep_dict=get_empty_dict_if_None(),
         _healers_dict=get_empty_dict_if_None(),
         _keeps_justified=get_False_if_None(),
@@ -1501,7 +1462,7 @@ def ownerunit_shop(
         _reason_rcontexts=set(),
         _range_inheritors={},
     )
-    x_owner.conceptroot = conceptunit_shop(
+    x_owner.planroot = planunit_shop(
         root=True,
         _uid=1,
         _level=0,
@@ -1525,7 +1486,7 @@ def get_from_dict(owner_dict: dict) -> OwnerUnit:
     x_owner.tally = obj_from_owner_dict(owner_dict, "tally")
     x_owner.set_max_tree_traverse(obj_from_owner_dict(owner_dict, "max_tree_traverse"))
     x_owner.belief_label = obj_from_owner_dict(owner_dict, "belief_label")
-    x_owner.conceptroot.concept_label = obj_from_owner_dict(owner_dict, "belief_label")
+    x_owner.planroot.plan_label = obj_from_owner_dict(owner_dict, "belief_label")
     owner_knot = obj_from_owner_dict(owner_dict, "knot")
     x_owner.knot = default_knot_if_None(owner_knot)
     x_owner.fund_pool = validate_fund_pool(obj_from_owner_dict(owner_dict, "fund_pool"))
@@ -1543,79 +1504,77 @@ def get_from_dict(owner_dict: dict) -> OwnerUnit:
     x_accts = obj_from_owner_dict(owner_dict, "accts", x_knot).values()
     for x_acctunit in x_accts:
         x_owner.set_acctunit(x_acctunit)
-    create_conceptroot_from_owner_dict(x_owner, owner_dict)
+    create_planroot_from_owner_dict(x_owner, owner_dict)
     return x_owner
 
 
-def create_conceptroot_from_owner_dict(x_owner: OwnerUnit, owner_dict: dict):
-    conceptroot_dict = owner_dict.get("conceptroot")
-    x_owner.conceptroot = conceptunit_shop(
+def create_planroot_from_owner_dict(x_owner: OwnerUnit, owner_dict: dict):
+    planroot_dict = owner_dict.get("planroot")
+    x_owner.planroot = planunit_shop(
         root=True,
-        concept_label=x_owner.belief_label,
+        plan_label=x_owner.belief_label,
         parent_rope="",
         _level=0,
-        _uid=get_obj_from_concept_dict(conceptroot_dict, "_uid"),
-        mass=get_obj_from_concept_dict(conceptroot_dict, "mass"),
-        begin=get_obj_from_concept_dict(conceptroot_dict, "begin"),
-        close=get_obj_from_concept_dict(conceptroot_dict, "close"),
-        numor=get_obj_from_concept_dict(conceptroot_dict, "numor"),
-        denom=get_obj_from_concept_dict(conceptroot_dict, "denom"),
-        morph=get_obj_from_concept_dict(conceptroot_dict, "morph"),
-        gogo_want=get_obj_from_concept_dict(conceptroot_dict, "gogo_want"),
-        stop_want=get_obj_from_concept_dict(conceptroot_dict, "stop_want"),
-        problem_bool=get_obj_from_concept_dict(conceptroot_dict, "problem_bool"),
-        reasonunits=get_obj_from_concept_dict(conceptroot_dict, "reasonunits"),
-        laborunit=get_obj_from_concept_dict(conceptroot_dict, "laborunit"),
-        healerlink=get_obj_from_concept_dict(conceptroot_dict, "healerlink"),
-        factunits=get_obj_from_concept_dict(conceptroot_dict, "factunits"),
-        awardlinks=get_obj_from_concept_dict(conceptroot_dict, "awardlinks"),
-        _is_expanded=get_obj_from_concept_dict(conceptroot_dict, "_is_expanded"),
+        _uid=get_obj_from_plan_dict(planroot_dict, "_uid"),
+        mass=get_obj_from_plan_dict(planroot_dict, "mass"),
+        begin=get_obj_from_plan_dict(planroot_dict, "begin"),
+        close=get_obj_from_plan_dict(planroot_dict, "close"),
+        numor=get_obj_from_plan_dict(planroot_dict, "numor"),
+        denom=get_obj_from_plan_dict(planroot_dict, "denom"),
+        morph=get_obj_from_plan_dict(planroot_dict, "morph"),
+        gogo_want=get_obj_from_plan_dict(planroot_dict, "gogo_want"),
+        stop_want=get_obj_from_plan_dict(planroot_dict, "stop_want"),
+        problem_bool=get_obj_from_plan_dict(planroot_dict, "problem_bool"),
+        reasonunits=get_obj_from_plan_dict(planroot_dict, "reasonunits"),
+        laborunit=get_obj_from_plan_dict(planroot_dict, "laborunit"),
+        healerlink=get_obj_from_plan_dict(planroot_dict, "healerlink"),
+        factunits=get_obj_from_plan_dict(planroot_dict, "factunits"),
+        awardlinks=get_obj_from_plan_dict(planroot_dict, "awardlinks"),
+        _is_expanded=get_obj_from_plan_dict(planroot_dict, "_is_expanded"),
         knot=x_owner.knot,
         belief_label=x_owner.belief_label,
         fund_iota=default_fund_iota_if_None(x_owner.fund_iota),
     )
-    create_conceptroot_kids_from_dict(x_owner, conceptroot_dict)
+    create_planroot_kids_from_dict(x_owner, planroot_dict)
 
 
-def create_conceptroot_kids_from_dict(x_owner: OwnerUnit, conceptroot_dict: dict):
-    to_evaluate_concept_dicts = []
+def create_planroot_kids_from_dict(x_owner: OwnerUnit, planroot_dict: dict):
+    to_evaluate_plan_dicts = []
     parent_rope_str = "parent_rope"
     # for every kid dict, set parent_rope in dict, add to to_evaluate_list
-    for x_dict in get_obj_from_concept_dict(conceptroot_dict, "_kids").values():
+    for x_dict in get_obj_from_plan_dict(planroot_dict, "_kids").values():
         x_dict[parent_rope_str] = x_owner.belief_label
-        to_evaluate_concept_dicts.append(x_dict)
+        to_evaluate_plan_dicts.append(x_dict)
 
-    while to_evaluate_concept_dicts != []:
-        concept_dict = to_evaluate_concept_dicts.pop(0)
+    while to_evaluate_plan_dicts != []:
+        plan_dict = to_evaluate_plan_dicts.pop(0)
         # for every kid dict, set parent_rope in dict, add to to_evaluate_list
-        for kid_dict in get_obj_from_concept_dict(concept_dict, "_kids").values():
-            parent_rope = get_obj_from_concept_dict(concept_dict, parent_rope_str)
-            kid_concept_label = get_obj_from_concept_dict(concept_dict, "concept_label")
-            kid_dict[parent_rope_str] = x_owner.make_rope(
-                parent_rope, kid_concept_label
-            )
-            to_evaluate_concept_dicts.append(kid_dict)
-        x_conceptkid = conceptunit_shop(
-            concept_label=get_obj_from_concept_dict(concept_dict, "concept_label"),
-            mass=get_obj_from_concept_dict(concept_dict, "mass"),
-            _uid=get_obj_from_concept_dict(concept_dict, "_uid"),
-            begin=get_obj_from_concept_dict(concept_dict, "begin"),
-            close=get_obj_from_concept_dict(concept_dict, "close"),
-            numor=get_obj_from_concept_dict(concept_dict, "numor"),
-            denom=get_obj_from_concept_dict(concept_dict, "denom"),
-            morph=get_obj_from_concept_dict(concept_dict, "morph"),
-            gogo_want=get_obj_from_concept_dict(concept_dict, "gogo_want"),
-            stop_want=get_obj_from_concept_dict(concept_dict, "stop_want"),
-            task=get_obj_from_concept_dict(concept_dict, "task"),
-            problem_bool=get_obj_from_concept_dict(concept_dict, "problem_bool"),
-            reasonunits=get_obj_from_concept_dict(concept_dict, "reasonunits"),
-            laborunit=get_obj_from_concept_dict(concept_dict, "laborunit"),
-            healerlink=get_obj_from_concept_dict(concept_dict, "healerlink"),
-            awardlinks=get_obj_from_concept_dict(concept_dict, "awardlinks"),
-            factunits=get_obj_from_concept_dict(concept_dict, "factunits"),
-            _is_expanded=get_obj_from_concept_dict(concept_dict, "_is_expanded"),
+        for kid_dict in get_obj_from_plan_dict(plan_dict, "_kids").values():
+            parent_rope = get_obj_from_plan_dict(plan_dict, parent_rope_str)
+            kid_plan_label = get_obj_from_plan_dict(plan_dict, "plan_label")
+            kid_dict[parent_rope_str] = x_owner.make_rope(parent_rope, kid_plan_label)
+            to_evaluate_plan_dicts.append(kid_dict)
+        x_plankid = planunit_shop(
+            plan_label=get_obj_from_plan_dict(plan_dict, "plan_label"),
+            mass=get_obj_from_plan_dict(plan_dict, "mass"),
+            _uid=get_obj_from_plan_dict(plan_dict, "_uid"),
+            begin=get_obj_from_plan_dict(plan_dict, "begin"),
+            close=get_obj_from_plan_dict(plan_dict, "close"),
+            numor=get_obj_from_plan_dict(plan_dict, "numor"),
+            denom=get_obj_from_plan_dict(plan_dict, "denom"),
+            morph=get_obj_from_plan_dict(plan_dict, "morph"),
+            gogo_want=get_obj_from_plan_dict(plan_dict, "gogo_want"),
+            stop_want=get_obj_from_plan_dict(plan_dict, "stop_want"),
+            task=get_obj_from_plan_dict(plan_dict, "task"),
+            problem_bool=get_obj_from_plan_dict(plan_dict, "problem_bool"),
+            reasonunits=get_obj_from_plan_dict(plan_dict, "reasonunits"),
+            laborunit=get_obj_from_plan_dict(plan_dict, "laborunit"),
+            healerlink=get_obj_from_plan_dict(plan_dict, "healerlink"),
+            awardlinks=get_obj_from_plan_dict(plan_dict, "awardlinks"),
+            factunits=get_obj_from_plan_dict(plan_dict, "factunits"),
+            _is_expanded=get_obj_from_plan_dict(plan_dict, "_is_expanded"),
         )
-        x_owner.set_concept(x_conceptkid, parent_rope=concept_dict[parent_rope_str])
+        x_owner.set_plan(x_plankid, parent_rope=plan_dict[parent_rope_str])
 
 
 def obj_from_owner_dict(
@@ -1641,6 +1600,6 @@ def get_dict_of_owner_from_dict(x_dict: dict[str, dict]) -> dict[str, OwnerUnit]
     return ownerunits
 
 
-def get_sorted_concept_list(x_list: list[ConceptUnit]) -> list[ConceptUnit]:
-    x_list.sort(key=lambda x: x.get_concept_rope(), reverse=False)
+def get_sorted_plan_list(x_list: list[PlanUnit]) -> list[PlanUnit]:
+    x_list.sort(key=lambda x: x.get_plan_rope(), reverse=False)
     return x_list

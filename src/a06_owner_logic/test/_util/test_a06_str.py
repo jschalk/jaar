@@ -22,13 +22,13 @@ from src.a06_owner_logic.test._util.a06_str import (
     max_tree_traverse_str,
     owner_acct_membership_str,
     owner_acctunit_str,
-    owner_concept_awardlink_str,
-    owner_concept_factunit_str,
-    owner_concept_healerlink_str,
-    owner_concept_laborlink_str,
-    owner_concept_reason_premiseunit_str,
-    owner_concept_reasonunit_str,
-    owner_conceptunit_str,
+    owner_plan_awardlink_str,
+    owner_plan_factunit_str,
+    owner_plan_healerlink_str,
+    owner_plan_laborlink_str,
+    owner_plan_reason_premiseunit_str,
+    owner_plan_reasonunit_str,
+    owner_planunit_str,
     ownerunit_str,
     penny_str,
     respect_bit_str,
@@ -59,13 +59,13 @@ def test_str_functions_ReturnsObj():
     assert ownerunit_str() == "ownerunit"
     assert owner_acct_membership_str() == "owner_acct_membership"
     assert owner_acctunit_str() == "owner_acctunit"
-    assert owner_conceptunit_str() == "owner_conceptunit"
-    assert owner_concept_awardlink_str() == "owner_concept_awardlink"
-    assert owner_concept_reasonunit_str() == "owner_concept_reasonunit"
-    assert owner_concept_reason_premiseunit_str() == "owner_concept_reason_premiseunit"
-    assert owner_concept_laborlink_str() == "owner_concept_laborlink"
-    assert owner_concept_healerlink_str() == "owner_concept_healerlink"
-    assert owner_concept_factunit_str() == "owner_concept_factunit"
+    assert owner_planunit_str() == "owner_planunit"
+    assert owner_plan_awardlink_str() == "owner_plan_awardlink"
+    assert owner_plan_reasonunit_str() == "owner_plan_reasonunit"
+    assert owner_plan_reason_premiseunit_str() == "owner_plan_reason_premiseunit"
+    assert owner_plan_laborlink_str() == "owner_plan_laborlink"
+    assert owner_plan_healerlink_str() == "owner_plan_healerlink"
+    assert owner_plan_factunit_str() == "owner_plan_factunit"
     assert jkeys_str() == "jkeys"
     assert attributes_str() == "attributes"
     assert timeline_str() == "timeline"

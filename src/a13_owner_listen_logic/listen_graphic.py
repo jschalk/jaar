@@ -9,7 +9,7 @@ from src.a00_data_toolbox.plotly_toolbox import (
 )
 from src.a02_finance_logic.finance_config import default_money_magnitude
 from src.a06_owner_logic.owner import OwnerUnit
-from src.a06_owner_logic.owner_graphics import display_concepttree
+from src.a06_owner_logic.owner_graphics import display_plantree
 
 
 def get_hubunit_base_fig() -> plotly_Figure:
@@ -271,7 +271,7 @@ def get_listen_structures3_fig(graphics_bool: bool = False) -> plotly_Figure:
 def fund_graph0(
     x_owner: OwnerUnit, mode: str = None, graphics_bool: bool = False
 ) -> plotly_Figure:
-    fig = display_concepttree(x_owner, mode, False)
+    fig = display_plantree(x_owner, mode, False)
     fig.update_xaxes(range=[-1, 11])
     fig.update_yaxes(range=[-5, 3])
 

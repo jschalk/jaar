@@ -1,6 +1,6 @@
 from src.a01_term_logic.rope import to_rope
-from src.a04_reason_logic.reason_concept import reasonunit_shop
-from src.a05_concept_logic.concept import conceptunit_shop
+from src.a04_reason_logic.reason_plan import reasonunit_shop
+from src.a05_plan_logic.plan import planunit_shop
 from src.a06_owner_logic.owner import ownerunit_shop
 from src.a06_owner_logic.test._util.example_owners import (
     get_mop_with_reason_ownerunit_example1,
@@ -62,21 +62,21 @@ def test_OwnerUnit_get_relevant_ropes_ReturnsSimpleReasonUnitRcontext():
     casa_rope = sue_owner.make_l1_rope(casa_str)
     floor_str = "mop floor"
     floor_rope = sue_owner.make_rope(casa_rope, floor_str)
-    floor_concept = conceptunit_shop(floor_str)
-    sue_owner.set_concept(floor_concept, parent_rope=casa_rope)
+    floor_plan = planunit_shop(floor_str)
+    sue_owner.set_plan(floor_plan, parent_rope=casa_rope)
 
     unim_str = "unimportant"
     unim_rope = sue_owner.make_l1_rope(unim_str)
-    unim_concept = conceptunit_shop(unim_str)
-    sue_owner.set_concept(unim_concept, parent_rope=sue_owner.belief_label)
+    unim_plan = planunit_shop(unim_str)
+    sue_owner.set_plan(unim_plan, parent_rope=sue_owner.belief_label)
 
     status_str = "cleaniness status"
     status_rope = sue_owner.make_rope(casa_rope, status_str)
-    status_concept = conceptunit_shop(status_str)
-    sue_owner.set_concept(status_concept, parent_rope=casa_rope)
+    status_plan = planunit_shop(status_str)
+    sue_owner.set_plan(status_plan, parent_rope=casa_rope)
     floor_reason = reasonunit_shop(rcontext=status_rope)
     floor_reason.set_premise(premise=status_rope)
-    sue_owner.edit_concept_attr(floor_rope, reason=floor_reason)
+    sue_owner.edit_plan_attr(floor_rope, reason=floor_reason)
 
     # WHEN
     floor_dict = {floor_rope}
@@ -148,26 +148,26 @@ def test_OwnerUnit_get_relevant_ropes_ReturnSimple():
     root_rope = to_rope(yao_owner.belief_label)
     min_range_x_str = "a_minute_range"
     min_range_x_rope = yao_owner.make_l1_rope(min_range_x_str)
-    min_range_concept = conceptunit_shop(min_range_x_str, begin=0, close=2880)
-    yao_owner.set_l1_concept(min_range_concept)
+    min_range_plan = planunit_shop(min_range_x_str, begin=0, close=2880)
+    yao_owner.set_l1_plan(min_range_plan)
 
     day_length_str = "day_1ce"
     day_length_rope = yao_owner.make_l1_rope(day_length_str)
-    day_length_concept = conceptunit_shop(day_length_str, begin=0, close=1440)
-    yao_owner.set_l1_concept(day_length_concept)
+    day_length_plan = planunit_shop(day_length_str, begin=0, close=1440)
+    yao_owner.set_l1_plan(day_length_plan)
 
     hr_length_str = "hr_length"
     hr_length_rope = yao_owner.make_l1_rope(hr_length_str)
-    hr_length_concept = conceptunit_shop(hr_length_str)
-    yao_owner.set_l1_concept(hr_length_concept)
+    hr_length_plan = planunit_shop(hr_length_str)
+    yao_owner.set_l1_plan(hr_length_plan)
 
     min_days_str = "days in minute_range"
     min_days_rope = yao_owner.make_rope(min_range_x_rope, min_days_str)
-    min_days_concept = conceptunit_shop(min_days_str)
-    yao_owner.set_concept(min_days_concept, parent_rope=min_range_x_rope)
+    min_days_plan = planunit_shop(min_days_str)
+    yao_owner.set_plan(min_days_plan, parent_rope=min_range_x_rope)
 
     # WHEN
-    print(f"{yao_owner._concept_dict.keys()}")
+    print(f"{yao_owner._plan_dict.keys()}")
     ropes_dict = {min_days_rope}
     relevant_ropes = yao_owner._get_relevant_ropes(ropes_dict)
 
@@ -179,28 +179,26 @@ def test_OwnerUnit_get_relevant_ropes_ReturnSimple():
     assert hr_length_rope not in relevant_ropes
     assert min_days_rope in relevant_ropes
     assert root_rope in relevant_ropes
-    # min_days_concept = yao_owner.get_concept_obj(min_days_rope)
+    # min_days_plan = yao_owner.get_plan_obj(min_days_rope)
 
 
-def test_OwnerUnit_get_inheritor_concept_list_ReturnsObj_Scenario0():
+def test_OwnerUnit_get_inheritor_plan_list_ReturnsObj_Scenario0():
     # ESTABLISH
     yao_ownerunit = ownerunit_shop("Yao")
     tech_rope = yao_ownerunit.make_l1_rope("tech")
     wk_str = "wk"
     wk_rope = yao_ownerunit.make_rope(tech_rope, wk_str)
-    yao_ownerunit.set_concept(conceptunit_shop(wk_str, begin=0, close=10800), tech_rope)
+    yao_ownerunit.set_plan(planunit_shop(wk_str, begin=0, close=10800), tech_rope)
     mon_str = "Monday"
     mon_rope = yao_ownerunit.make_rope(wk_rope, mon_str)
-    yao_ownerunit.set_concept(conceptunit_shop(mon_str), wk_rope)
+    yao_ownerunit.set_plan(planunit_shop(mon_str), wk_rope)
     yao_ownerunit.settle_owner()
 
     # WHEN
-    x_inheritor_concept_list = yao_ownerunit.get_inheritor_concept_list(
-        wk_rope, mon_rope
-    )
+    x_inheritor_plan_list = yao_ownerunit.get_inheritor_plan_list(wk_rope, mon_rope)
 
     # # THEN
-    assert len(x_inheritor_concept_list) == 2
-    wk_concept = yao_ownerunit.get_concept_obj(wk_rope)
-    mon_concept = yao_ownerunit.get_concept_obj(mon_rope)
-    assert x_inheritor_concept_list == [wk_concept, mon_concept]
+    assert len(x_inheritor_plan_list) == 2
+    wk_plan = yao_ownerunit.get_plan_obj(wk_rope)
+    mon_plan = yao_ownerunit.get_plan_obj(mon_rope)
+    assert x_inheritor_plan_list == [wk_plan, mon_plan]

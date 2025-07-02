@@ -4,7 +4,7 @@ from src.a01_term_logic.rope import RopeTerm, to_rope
 from src.a02_finance_logic.finance_config import default_fund_pool
 from src.a03_group_logic.acct import acctunit_shop
 from src.a03_group_logic.group import awardline_shop, awardlink_shop
-from src.a05_concept_logic.concept import ConceptUnit, conceptunit_shop
+from src.a05_plan_logic.plan import PlanUnit, planunit_shop
 from src.a06_owner_logic.owner import OwnerUnit, ownerunit_shop
 from src.a06_owner_logic.test._util.example_owners import (
     get_ownerunit_with7amCleanTableReason,
@@ -14,83 +14,83 @@ from src.a06_owner_logic.test._util.example_owners import (
 )
 
 
-def test_OwnerUnit_settle_owner_Sets_conceptunit_fund_onset_fund_cease_Scenario0():
+def test_OwnerUnit_settle_owner_Sets_planunit_fund_onset_fund_cease_Scenario0():
     # ESTABLISH
     x_ownerunit = get_ownerunit_with7amCleanTableReason()
     casa_rope = x_ownerunit.make_l1_rope("casa")
     catt_rope = x_ownerunit.make_l1_rope("cat have dinner")
     wk_rope = x_ownerunit.make_l1_rope("wkdays")
-    x_ownerunit.conceptroot._fund_onset = 13
-    x_ownerunit.conceptroot._fund_cease = 13
-    x_ownerunit.get_concept_obj(casa_rope)._fund_onset = 13
-    x_ownerunit.get_concept_obj(casa_rope)._fund_cease = 13
-    x_ownerunit.get_concept_obj(catt_rope)._fund_onset = 13
-    x_ownerunit.get_concept_obj(catt_rope)._fund_cease = 13
-    x_ownerunit.get_concept_obj(wk_rope)._fund_onset = 13
-    x_ownerunit.get_concept_obj(wk_rope)._fund_cease = 13
+    x_ownerunit.planroot._fund_onset = 13
+    x_ownerunit.planroot._fund_cease = 13
+    x_ownerunit.get_plan_obj(casa_rope)._fund_onset = 13
+    x_ownerunit.get_plan_obj(casa_rope)._fund_cease = 13
+    x_ownerunit.get_plan_obj(catt_rope)._fund_onset = 13
+    x_ownerunit.get_plan_obj(catt_rope)._fund_cease = 13
+    x_ownerunit.get_plan_obj(wk_rope)._fund_onset = 13
+    x_ownerunit.get_plan_obj(wk_rope)._fund_cease = 13
 
-    assert x_ownerunit.conceptroot._fund_onset == 13
-    assert x_ownerunit.conceptroot._fund_cease == 13
-    assert x_ownerunit.get_concept_obj(casa_rope)._fund_onset == 13
-    assert x_ownerunit.get_concept_obj(casa_rope)._fund_cease == 13
-    assert x_ownerunit.get_concept_obj(catt_rope)._fund_onset == 13
-    assert x_ownerunit.get_concept_obj(catt_rope)._fund_cease == 13
-    assert x_ownerunit.get_concept_obj(wk_rope)._fund_onset == 13
-    assert x_ownerunit.get_concept_obj(wk_rope)._fund_cease == 13
+    assert x_ownerunit.planroot._fund_onset == 13
+    assert x_ownerunit.planroot._fund_cease == 13
+    assert x_ownerunit.get_plan_obj(casa_rope)._fund_onset == 13
+    assert x_ownerunit.get_plan_obj(casa_rope)._fund_cease == 13
+    assert x_ownerunit.get_plan_obj(catt_rope)._fund_onset == 13
+    assert x_ownerunit.get_plan_obj(catt_rope)._fund_cease == 13
+    assert x_ownerunit.get_plan_obj(wk_rope)._fund_onset == 13
+    assert x_ownerunit.get_plan_obj(wk_rope)._fund_cease == 13
 
     # WHEN
     x_ownerunit.settle_owner()
 
     # THEN
-    assert x_ownerunit.conceptroot._fund_onset != 13
-    assert x_ownerunit.conceptroot._fund_cease != 13
-    assert x_ownerunit.get_concept_obj(casa_rope)._fund_onset != 13
-    assert x_ownerunit.get_concept_obj(casa_rope)._fund_cease != 13
-    assert x_ownerunit.get_concept_obj(catt_rope)._fund_onset != 13
-    assert x_ownerunit.get_concept_obj(catt_rope)._fund_cease != 13
-    assert x_ownerunit.get_concept_obj(wk_rope)._fund_onset != 13
-    assert x_ownerunit.get_concept_obj(wk_rope)._fund_cease != 13
+    assert x_ownerunit.planroot._fund_onset != 13
+    assert x_ownerunit.planroot._fund_cease != 13
+    assert x_ownerunit.get_plan_obj(casa_rope)._fund_onset != 13
+    assert x_ownerunit.get_plan_obj(casa_rope)._fund_cease != 13
+    assert x_ownerunit.get_plan_obj(catt_rope)._fund_onset != 13
+    assert x_ownerunit.get_plan_obj(catt_rope)._fund_cease != 13
+    assert x_ownerunit.get_plan_obj(wk_rope)._fund_onset != 13
+    assert x_ownerunit.get_plan_obj(wk_rope)._fund_cease != 13
 
 
-def test_OwnerUnit_settle_owner_Sets_conceptunit_fund_onset_fund_cease_Scenario1():
+def test_OwnerUnit_settle_owner_Sets_planunit_fund_onset_fund_cease_Scenario1():
     # ESTABLISH
     yao_ownerunit = ownerunit_shop("Yao", tally=10)
 
     auto_str = "auto"
     auto_rope = yao_ownerunit.make_l1_rope(auto_str)
-    auto_concept = conceptunit_shop(auto_str, mass=10)
-    yao_ownerunit.set_l1_concept(auto_concept)
+    auto_plan = planunit_shop(auto_str, mass=10)
+    yao_ownerunit.set_l1_plan(auto_plan)
 
     carn_str = "carn"
     carn_rope = yao_ownerunit.make_l1_rope(carn_str)
-    carn_concept = conceptunit_shop(carn_str, mass=60)
-    yao_ownerunit.set_l1_concept(carn_concept)
+    carn_plan = planunit_shop(carn_str, mass=60)
+    yao_ownerunit.set_l1_plan(carn_plan)
     lamb_str = "lambs"
     lamb_rope = yao_ownerunit.make_rope(carn_rope, lamb_str)
-    lamb_concept = conceptunit_shop(lamb_str, mass=1)
-    yao_ownerunit.set_concept(lamb_concept, parent_rope=carn_rope)
+    lamb_plan = planunit_shop(lamb_str, mass=1)
+    yao_ownerunit.set_plan(lamb_plan, parent_rope=carn_rope)
     duck_str = "ducks"
     duck_rope = yao_ownerunit.make_rope(carn_rope, duck_str)
-    duck_concept = conceptunit_shop(duck_str, mass=2)
-    yao_ownerunit.set_concept(duck_concept, parent_rope=carn_rope)
+    duck_plan = planunit_shop(duck_str, mass=2)
+    yao_ownerunit.set_plan(duck_plan, parent_rope=carn_rope)
 
     coal_str = "coal"
     coal_rope = yao_ownerunit.make_l1_rope(coal_str)
-    coal_concept = conceptunit_shop(coal_str, mass=30)
-    yao_ownerunit.set_l1_concept(coal_concept)
+    coal_plan = planunit_shop(coal_str, mass=30)
+    yao_ownerunit.set_l1_plan(coal_plan)
 
-    assert yao_ownerunit.conceptroot._fund_onset is None
-    assert yao_ownerunit.conceptroot._fund_cease is None
-    assert yao_ownerunit.get_concept_obj(auto_rope)._fund_onset is None
-    assert yao_ownerunit.get_concept_obj(auto_rope)._fund_cease is None
-    assert yao_ownerunit.get_concept_obj(carn_rope)._fund_onset is None
-    assert yao_ownerunit.get_concept_obj(carn_rope)._fund_cease is None
-    assert yao_ownerunit.get_concept_obj(coal_rope)._fund_onset is None
-    assert yao_ownerunit.get_concept_obj(coal_rope)._fund_cease is None
-    lamb_before = yao_ownerunit.get_concept_obj(rope=lamb_rope)
+    assert yao_ownerunit.planroot._fund_onset is None
+    assert yao_ownerunit.planroot._fund_cease is None
+    assert yao_ownerunit.get_plan_obj(auto_rope)._fund_onset is None
+    assert yao_ownerunit.get_plan_obj(auto_rope)._fund_cease is None
+    assert yao_ownerunit.get_plan_obj(carn_rope)._fund_onset is None
+    assert yao_ownerunit.get_plan_obj(carn_rope)._fund_cease is None
+    assert yao_ownerunit.get_plan_obj(coal_rope)._fund_onset is None
+    assert yao_ownerunit.get_plan_obj(coal_rope)._fund_cease is None
+    lamb_before = yao_ownerunit.get_plan_obj(rope=lamb_rope)
     assert lamb_before._fund_onset is None
     assert lamb_before._fund_cease is None
-    duck_before = yao_ownerunit.get_concept_obj(rope=duck_rope)
+    duck_before = yao_ownerunit.get_plan_obj(rope=duck_rope)
     assert duck_before._fund_onset is None
     assert duck_before._fund_cease is None
 
@@ -98,77 +98,72 @@ def test_OwnerUnit_settle_owner_Sets_conceptunit_fund_onset_fund_cease_Scenario1
     yao_ownerunit.settle_owner()
 
     # THEN
-    assert yao_ownerunit.conceptroot._fund_onset == 0.0
-    assert yao_ownerunit.conceptroot._fund_cease == default_fund_pool()
-    assert yao_ownerunit.get_concept_obj(auto_rope)._fund_onset == 0.0
+    assert yao_ownerunit.planroot._fund_onset == 0.0
+    assert yao_ownerunit.planroot._fund_cease == default_fund_pool()
+    assert yao_ownerunit.get_plan_obj(auto_rope)._fund_onset == 0.0
     assert (
-        yao_ownerunit.get_concept_obj(auto_rope)._fund_cease
-        == default_fund_pool() * 0.1
+        yao_ownerunit.get_plan_obj(auto_rope)._fund_cease == default_fund_pool() * 0.1
     )
     assert (
-        yao_ownerunit.get_concept_obj(carn_rope)._fund_onset
-        == default_fund_pool() * 0.1
+        yao_ownerunit.get_plan_obj(carn_rope)._fund_onset == default_fund_pool() * 0.1
     )
     assert (
-        yao_ownerunit.get_concept_obj(carn_rope)._fund_cease
-        == default_fund_pool() * 0.7
+        yao_ownerunit.get_plan_obj(carn_rope)._fund_cease == default_fund_pool() * 0.7
     )
     assert (
-        yao_ownerunit.get_concept_obj(coal_rope)._fund_onset
-        == default_fund_pool() * 0.7
+        yao_ownerunit.get_plan_obj(coal_rope)._fund_onset == default_fund_pool() * 0.7
     )
     assert (
-        yao_ownerunit.get_concept_obj(coal_rope)._fund_cease
-        == default_fund_pool() * 1.0
+        yao_ownerunit.get_plan_obj(coal_rope)._fund_cease == default_fund_pool() * 1.0
     )
 
-    duck_after = yao_ownerunit.get_concept_obj(rope=duck_rope)
+    duck_after = yao_ownerunit.get_plan_obj(rope=duck_rope)
     assert duck_after._fund_onset == default_fund_pool() * 0.1
     assert duck_after._fund_cease == default_fund_pool() * 0.5
-    lamb_after = yao_ownerunit.get_concept_obj(rope=lamb_rope)
+    lamb_after = yao_ownerunit.get_plan_obj(rope=lamb_rope)
     assert lamb_after._fund_onset == default_fund_pool() * 0.5
     assert lamb_after._fund_cease == default_fund_pool() * 0.7
 
 
-def test_OwnerUnit_settle_owner_Sets_conceptunit_fund_onset_fund_cease_Scenario2_DifferentOrderOfConcepts():
+def test_OwnerUnit_settle_owner_Sets_planunit_fund_onset_fund_cease_Scenario2_DifferentOrderOfPlans():
     # ESTABLISH
     yao_ownerunit = ownerunit_shop("Yao", tally=10)
 
     auto_str = "auto"
     auto_rope = yao_ownerunit.make_l1_rope(auto_str)
-    auto_concept = conceptunit_shop(auto_str, mass=10)
-    yao_ownerunit.set_l1_concept(auto_concept)
+    auto_plan = planunit_shop(auto_str, mass=10)
+    yao_ownerunit.set_l1_plan(auto_plan)
 
     yarn_str = "yarn"
     yarn_rope = yao_ownerunit.make_l1_rope(yarn_str)
-    yarn_concept = conceptunit_shop(yarn_str, mass=60)
-    yao_ownerunit.set_l1_concept(yarn_concept)
+    yarn_plan = planunit_shop(yarn_str, mass=60)
+    yao_ownerunit.set_l1_plan(yarn_plan)
     lamb_str = "lambs"
     lamb_rope = yao_ownerunit.make_rope(yarn_rope, lamb_str)
-    lamb_concept = conceptunit_shop(lamb_str, mass=1)
-    yao_ownerunit.set_concept(lamb_concept, parent_rope=yarn_rope)
+    lamb_plan = planunit_shop(lamb_str, mass=1)
+    yao_ownerunit.set_plan(lamb_plan, parent_rope=yarn_rope)
     duck_str = "ducks"
     duck_rope = yao_ownerunit.make_rope(yarn_rope, duck_str)
-    duck_concept = conceptunit_shop(duck_str, mass=2)
-    yao_ownerunit.set_concept(duck_concept, parent_rope=yarn_rope)
+    duck_plan = planunit_shop(duck_str, mass=2)
+    yao_ownerunit.set_plan(duck_plan, parent_rope=yarn_rope)
 
     coal_str = "coal"
     coal_rope = yao_ownerunit.make_l1_rope(coal_str)
-    coal_concept = conceptunit_shop(coal_str, mass=30)
-    yao_ownerunit.set_l1_concept(coal_concept)
+    coal_plan = planunit_shop(coal_str, mass=30)
+    yao_ownerunit.set_l1_plan(coal_plan)
 
-    assert yao_ownerunit.conceptroot._fund_onset is None
-    assert yao_ownerunit.conceptroot._fund_cease is None
-    assert yao_ownerunit.get_concept_obj(auto_rope)._fund_onset is None
-    assert yao_ownerunit.get_concept_obj(auto_rope)._fund_cease is None
-    assert yao_ownerunit.get_concept_obj(yarn_rope)._fund_onset is None
-    assert yao_ownerunit.get_concept_obj(yarn_rope)._fund_cease is None
-    assert yao_ownerunit.get_concept_obj(coal_rope)._fund_onset is None
-    assert yao_ownerunit.get_concept_obj(coal_rope)._fund_cease is None
-    lamb_before = yao_ownerunit.get_concept_obj(rope=lamb_rope)
+    assert yao_ownerunit.planroot._fund_onset is None
+    assert yao_ownerunit.planroot._fund_cease is None
+    assert yao_ownerunit.get_plan_obj(auto_rope)._fund_onset is None
+    assert yao_ownerunit.get_plan_obj(auto_rope)._fund_cease is None
+    assert yao_ownerunit.get_plan_obj(yarn_rope)._fund_onset is None
+    assert yao_ownerunit.get_plan_obj(yarn_rope)._fund_cease is None
+    assert yao_ownerunit.get_plan_obj(coal_rope)._fund_onset is None
+    assert yao_ownerunit.get_plan_obj(coal_rope)._fund_cease is None
+    lamb_before = yao_ownerunit.get_plan_obj(rope=lamb_rope)
     assert lamb_before._fund_onset is None
     assert lamb_before._fund_cease is None
-    duck_before = yao_ownerunit.get_concept_obj(rope=duck_rope)
+    duck_before = yao_ownerunit.get_plan_obj(rope=duck_rope)
     assert duck_before._fund_onset is None
     assert duck_before._fund_cease is None
 
@@ -176,95 +171,90 @@ def test_OwnerUnit_settle_owner_Sets_conceptunit_fund_onset_fund_cease_Scenario2
     yao_ownerunit.settle_owner()
 
     # THEN
-    assert yao_ownerunit.conceptroot._fund_onset == 0.0
-    assert yao_ownerunit.conceptroot._fund_cease == default_fund_pool()
-    assert yao_ownerunit.get_concept_obj(auto_rope)._fund_onset == 0.0
+    assert yao_ownerunit.planroot._fund_onset == 0.0
+    assert yao_ownerunit.planroot._fund_cease == default_fund_pool()
+    assert yao_ownerunit.get_plan_obj(auto_rope)._fund_onset == 0.0
     assert (
-        yao_ownerunit.get_concept_obj(auto_rope)._fund_cease
-        == default_fund_pool() * 0.1
+        yao_ownerunit.get_plan_obj(auto_rope)._fund_cease == default_fund_pool() * 0.1
     )
     assert (
-        yao_ownerunit.get_concept_obj(coal_rope)._fund_onset
-        == default_fund_pool() * 0.1
+        yao_ownerunit.get_plan_obj(coal_rope)._fund_onset == default_fund_pool() * 0.1
     )
     assert (
-        yao_ownerunit.get_concept_obj(coal_rope)._fund_cease
-        == default_fund_pool() * 0.4
+        yao_ownerunit.get_plan_obj(coal_rope)._fund_cease == default_fund_pool() * 0.4
     )
     assert (
-        yao_ownerunit.get_concept_obj(yarn_rope)._fund_onset
-        == default_fund_pool() * 0.4
+        yao_ownerunit.get_plan_obj(yarn_rope)._fund_onset == default_fund_pool() * 0.4
     )
     assert (
-        yao_ownerunit.get_concept_obj(yarn_rope)._fund_cease
-        == default_fund_pool() * 1.0
+        yao_ownerunit.get_plan_obj(yarn_rope)._fund_cease == default_fund_pool() * 1.0
     )
 
-    duck_after = yao_ownerunit.get_concept_obj(rope=duck_rope)
+    duck_after = yao_ownerunit.get_plan_obj(rope=duck_rope)
     assert duck_after._fund_onset == default_fund_pool() * 0.4
     assert duck_after._fund_cease == default_fund_pool() * 0.8
-    lamb_after = yao_ownerunit.get_concept_obj(rope=lamb_rope)
+    lamb_after = yao_ownerunit.get_plan_obj(rope=lamb_rope)
     assert lamb_after._fund_onset == default_fund_pool() * 0.8
     assert lamb_after._fund_cease == default_fund_pool() * 1.0
 
 
-def test_OwnerUnit_settle_owner_Sets_fund_ratio_WithSomeConceptsOfZero_massScenario0():
+def test_OwnerUnit_settle_owner_Sets_fund_ratio_WithSomePlansOfZero_massScenario0():
     # ESTABLISH
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_owner.make_l1_rope(casa_str)
     floor_str = "mop floor"
     floor_rope = sue_owner.make_rope(casa_rope, floor_str)
-    floor_concept = conceptunit_shop(floor_str, task=True)
-    sue_owner.set_concept(floor_concept, casa_rope)
-    sue_owner.set_l1_concept(conceptunit_shop("unimportant"))
+    floor_plan = planunit_shop(floor_str, task=True)
+    sue_owner.set_plan(floor_plan, casa_rope)
+    sue_owner.set_l1_plan(planunit_shop("unimportant"))
 
     status_str = "cleaniness status"
     status_rope = sue_owner.make_rope(casa_rope, status_str)
-    sue_owner.set_concept(conceptunit_shop(status_str, mass=0), casa_rope)
+    sue_owner.set_plan(planunit_shop(status_str, mass=0), casa_rope)
 
     non_str = "not clean"
     yes_str = "yes clean"
     non_rope = sue_owner.make_rope(status_rope, non_str)
     yes_rope = sue_owner.make_rope(status_rope, yes_str)
-    sue_owner.set_concept(conceptunit_shop(non_str), status_rope)
-    sue_owner.set_concept(conceptunit_shop(yes_str, mass=2), status_rope)
+    sue_owner.set_plan(planunit_shop(non_str), status_rope)
+    sue_owner.set_plan(planunit_shop(yes_str, mass=2), status_rope)
 
-    assert sue_owner.get_concept_obj(casa_rope)._fund_ratio is None
-    assert sue_owner.get_concept_obj(floor_rope)._fund_ratio is None
-    assert sue_owner.get_concept_obj(status_rope)._fund_ratio is None
-    assert sue_owner.get_concept_obj(non_rope)._fund_ratio is None
-    assert sue_owner.get_concept_obj(yes_rope)._fund_ratio is None
+    assert sue_owner.get_plan_obj(casa_rope)._fund_ratio is None
+    assert sue_owner.get_plan_obj(floor_rope)._fund_ratio is None
+    assert sue_owner.get_plan_obj(status_rope)._fund_ratio is None
+    assert sue_owner.get_plan_obj(non_rope)._fund_ratio is None
+    assert sue_owner.get_plan_obj(yes_rope)._fund_ratio is None
 
     # WHEN
     sue_owner.settle_owner()
 
     # THEN
     print(f"{sue_owner.fund_pool=}")
-    assert sue_owner.get_concept_obj(casa_rope)._fund_ratio == 0.5
-    assert sue_owner.get_concept_obj(floor_rope)._fund_ratio == 0.5
-    assert sue_owner.get_concept_obj(status_rope)._fund_ratio == 0.0
-    assert sue_owner.get_concept_obj(non_rope)._fund_ratio == 0.0
-    assert sue_owner.get_concept_obj(yes_rope)._fund_ratio == 0.0
+    assert sue_owner.get_plan_obj(casa_rope)._fund_ratio == 0.5
+    assert sue_owner.get_plan_obj(floor_rope)._fund_ratio == 0.5
+    assert sue_owner.get_plan_obj(status_rope)._fund_ratio == 0.0
+    assert sue_owner.get_plan_obj(non_rope)._fund_ratio == 0.0
+    assert sue_owner.get_plan_obj(yes_rope)._fund_ratio == 0.0
 
 
-def test_OwnerUnit_settle_owner_Sets_fund_ratio_WithSomeConceptsOfZero_massScenario1():
+def test_OwnerUnit_settle_owner_Sets_fund_ratio_WithSomePlansOfZero_massScenario1():
     sue_owner = ownerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_owner.make_l1_rope(casa_str)
     floor_str = "mop floor"
     floor_rope = sue_owner.make_rope(casa_rope, floor_str)
-    floor_concept = conceptunit_shop(floor_str, task=True)
-    sue_owner.set_concept(floor_concept, casa_rope)
-    sue_owner.set_l1_concept(conceptunit_shop("unimportant"))
+    floor_plan = planunit_shop(floor_str, task=True)
+    sue_owner.set_plan(floor_plan, casa_rope)
+    sue_owner.set_l1_plan(planunit_shop("unimportant"))
 
     status_str = "cleaniness status"
     status_rope = sue_owner.make_rope(casa_rope, status_str)
-    sue_owner.set_concept(conceptunit_shop(status_str), casa_rope)
+    sue_owner.set_plan(planunit_shop(status_str), casa_rope)
 
-    status_concept = sue_owner.get_concept_obj(status_rope)
-    print(f"{status_concept.mass=}")
-    print("This should raise error: 'Conceptunit._'")
+    status_plan = sue_owner.get_plan_obj(status_rope)
+    print(f"{status_plan.mass=}")
+    print("This should raise error: 'Planunit._'")
 
     clean_str = "clean"
     clean_rope = sue_owner.make_rope(status_rope, clean_str)
@@ -272,71 +262,71 @@ def test_OwnerUnit_settle_owner_Sets_fund_ratio_WithSomeConceptsOfZero_massScena
     mod_str = "moderately"
     dirty_str = "dirty"
 
-    sue_owner.set_concept(conceptunit_shop(clean_str, mass=0), status_rope)
-    sue_owner.set_concept(conceptunit_shop(very_str), clean_rope)
-    sue_owner.set_concept(conceptunit_shop(mod_str, mass=2), clean_rope)
-    sue_owner.set_concept(conceptunit_shop(dirty_str), clean_rope)
+    sue_owner.set_plan(planunit_shop(clean_str, mass=0), status_rope)
+    sue_owner.set_plan(planunit_shop(very_str), clean_rope)
+    sue_owner.set_plan(planunit_shop(mod_str, mass=2), clean_rope)
+    sue_owner.set_plan(planunit_shop(dirty_str), clean_rope)
 
     very_rope = sue_owner.make_rope(clean_rope, very_str)
     mod_rope = sue_owner.make_rope(clean_rope, mod_str)
     dirty_rope = sue_owner.make_rope(clean_rope, dirty_str)
-    assert sue_owner.get_concept_obj(casa_rope)._fund_ratio is None
-    assert sue_owner.get_concept_obj(floor_rope)._fund_ratio is None
-    assert sue_owner.get_concept_obj(status_rope)._fund_ratio is None
-    assert sue_owner.get_concept_obj(clean_rope)._fund_ratio is None
-    assert sue_owner.get_concept_obj(very_rope)._fund_ratio is None
-    assert sue_owner.get_concept_obj(mod_rope)._fund_ratio is None
-    assert sue_owner.get_concept_obj(dirty_rope)._fund_ratio is None
+    assert sue_owner.get_plan_obj(casa_rope)._fund_ratio is None
+    assert sue_owner.get_plan_obj(floor_rope)._fund_ratio is None
+    assert sue_owner.get_plan_obj(status_rope)._fund_ratio is None
+    assert sue_owner.get_plan_obj(clean_rope)._fund_ratio is None
+    assert sue_owner.get_plan_obj(very_rope)._fund_ratio is None
+    assert sue_owner.get_plan_obj(mod_rope)._fund_ratio is None
+    assert sue_owner.get_plan_obj(dirty_rope)._fund_ratio is None
 
     # WHEN
     sue_owner.settle_owner()
 
     # THEN
     print(f"{sue_owner.fund_pool=}")
-    assert sue_owner.get_concept_obj(casa_rope)._fund_ratio == 0.5
-    assert sue_owner.get_concept_obj(floor_rope)._fund_ratio == 0.25
-    assert sue_owner.get_concept_obj(status_rope)._fund_ratio == 0.25
-    assert sue_owner.get_concept_obj(clean_rope)._fund_ratio == 0
-    assert sue_owner.get_concept_obj(very_rope)._fund_ratio == 0
-    assert sue_owner.get_concept_obj(mod_rope)._fund_ratio == 0
-    assert sue_owner.get_concept_obj(dirty_rope)._fund_ratio == 0
+    assert sue_owner.get_plan_obj(casa_rope)._fund_ratio == 0.5
+    assert sue_owner.get_plan_obj(floor_rope)._fund_ratio == 0.25
+    assert sue_owner.get_plan_obj(status_rope)._fund_ratio == 0.25
+    assert sue_owner.get_plan_obj(clean_rope)._fund_ratio == 0
+    assert sue_owner.get_plan_obj(very_rope)._fund_ratio == 0
+    assert sue_owner.get_plan_obj(mod_rope)._fund_ratio == 0
+    assert sue_owner.get_plan_obj(dirty_rope)._fund_ratio == 0
 
 
-def test_OwnerUnit_settle_owner_WhenConceptUnitHasFundsBut_kidsHaveNoMassDistributeFundsToAcctUnits_scenario0():
+def test_OwnerUnit_settle_owner_WhenPlanUnitHasFundsBut_kidsHaveNoMassDistributeFundsToAcctUnits_scenario0():
     sue_ownerunit = ownerunit_shop("Sue")
     yao_str = "Yao"
     sue_ownerunit.add_acctunit(yao_str)
     casa_str = "casa"
     casa_rope = sue_ownerunit.make_l1_rope(casa_str)
-    casa_concept = conceptunit_shop(casa_str, mass=1)
+    casa_plan = planunit_shop(casa_str, mass=1)
 
     swim_str = "swimming"
     swim_rope = sue_ownerunit.make_rope(casa_rope, swim_str)
-    swim_concept = conceptunit_shop(swim_str, mass=8)
+    swim_plan = planunit_shop(swim_str, mass=8)
 
     clean_str = "cleaning"
     clean_rope = sue_ownerunit.make_rope(casa_rope, clean_str)
-    clean_concept = conceptunit_shop(clean_str, mass=2)
-    sue_ownerunit.set_concept(conceptunit_shop(clean_str), casa_rope)
+    clean_plan = planunit_shop(clean_str, mass=2)
+    sue_ownerunit.set_plan(planunit_shop(clean_str), casa_rope)
 
     sweep_str = "sweep"
     sweep_rope = sue_ownerunit.make_rope(clean_rope, sweep_str)
-    sweep_concept = conceptunit_shop(sweep_str, mass=0)
+    sweep_plan = planunit_shop(sweep_str, mass=0)
     vaccum_str = "vaccum"
     vaccum_rope = sue_ownerunit.make_rope(clean_rope, vaccum_str)
-    vaccum_concept = conceptunit_shop(vaccum_str, mass=0)
+    vaccum_plan = planunit_shop(vaccum_str, mass=0)
 
-    sue_ownerunit.set_l1_concept(casa_concept)
-    sue_ownerunit.set_concept(swim_concept, casa_rope)
-    sue_ownerunit.set_concept(clean_concept, casa_rope)
-    sue_ownerunit.set_concept(sweep_concept, clean_rope)  # _mass=0
-    sue_ownerunit.set_concept(vaccum_concept, clean_rope)  # _mass=0
+    sue_ownerunit.set_l1_plan(casa_plan)
+    sue_ownerunit.set_plan(swim_plan, casa_rope)
+    sue_ownerunit.set_plan(clean_plan, casa_rope)
+    sue_ownerunit.set_plan(sweep_plan, clean_rope)  # _mass=0
+    sue_ownerunit.set_plan(vaccum_plan, clean_rope)  # _mass=0
 
-    assert sue_ownerunit.get_concept_obj(casa_rope)._fund_ratio is None
-    assert sue_ownerunit.get_concept_obj(swim_rope)._fund_ratio is None
-    assert sue_ownerunit.get_concept_obj(clean_rope)._fund_ratio is None
-    assert sue_ownerunit.get_concept_obj(sweep_rope)._fund_ratio is None
-    assert sue_ownerunit.get_concept_obj(vaccum_rope)._fund_ratio is None
+    assert sue_ownerunit.get_plan_obj(casa_rope)._fund_ratio is None
+    assert sue_ownerunit.get_plan_obj(swim_rope)._fund_ratio is None
+    assert sue_ownerunit.get_plan_obj(clean_rope)._fund_ratio is None
+    assert sue_ownerunit.get_plan_obj(sweep_rope)._fund_ratio is None
+    assert sue_ownerunit.get_plan_obj(vaccum_rope)._fund_ratio is None
     assert sue_ownerunit.get_groupunit(yao_str) is None
 
     assert not sue_ownerunit._offtrack_fund
@@ -349,11 +339,11 @@ def test_OwnerUnit_settle_owner_WhenConceptUnitHasFundsBut_kidsHaveNoMassDistrib
     # THEN
     print(f"{sue_ownerunit.fund_pool=}")
     clean_fund_ratio = 0.2
-    assert sue_ownerunit.get_concept_obj(casa_rope)._fund_ratio == 1
-    assert sue_ownerunit.get_concept_obj(swim_rope)._fund_ratio == 0.8
-    assert sue_ownerunit.get_concept_obj(clean_rope)._fund_ratio == clean_fund_ratio
-    assert sue_ownerunit.get_concept_obj(sweep_rope)._fund_ratio == 0
-    assert sue_ownerunit.get_concept_obj(vaccum_rope)._fund_ratio == 0
+    assert sue_ownerunit.get_plan_obj(casa_rope)._fund_ratio == 1
+    assert sue_ownerunit.get_plan_obj(swim_rope)._fund_ratio == 0.8
+    assert sue_ownerunit.get_plan_obj(clean_rope)._fund_ratio == clean_fund_ratio
+    assert sue_ownerunit.get_plan_obj(sweep_rope)._fund_ratio == 0
+    assert sue_ownerunit.get_plan_obj(vaccum_rope)._fund_ratio == 0
     assert sue_ownerunit.get_groupunit(yao_str)._fund_give == 0
     assert sue_ownerunit.get_groupunit(yao_str)._fund_take == 0
 
@@ -366,86 +356,86 @@ def test_OwnerUnit_settle_owner_TreeTraverseSetsAwardLine_fundFromRootCorrectly(
     # ESTABLISH
     sue_owner = get_ownerunit_with_4_levels()
     sue_owner.settle_owner()
-    # concept tree has no awardlinks
-    assert sue_owner.conceptroot._awardlines == {}
+    # plan tree has no awardlinks
+    assert sue_owner.planroot._awardlines == {}
     sue_str = "Sue"
     wk_str = "wkdays"
     nation_str = "nation"
     sue_awardlink = awardlink_shop(awardee_title=sue_str)
     sue_owner.add_acctunit(acct_name=sue_str)
-    sue_owner.conceptroot.set_awardlink(awardlink=sue_awardlink)
-    # concept tree has awardlines
-    assert sue_owner.conceptroot._awardheirs.get(sue_str) is None
+    sue_owner.planroot.set_awardlink(awardlink=sue_awardlink)
+    # plan tree has awardlines
+    assert sue_owner.planroot._awardheirs.get(sue_str) is None
 
     # WHEN
     sue_owner.settle_owner()
 
     # THEN
-    assert sue_owner.conceptroot._awardheirs.get(sue_str) is not None
-    assert sue_owner.conceptroot._awardheirs.get(sue_str).awardee_title == sue_str
-    assert sue_owner.conceptroot._awardlines != {}
-    root_rope = to_rope(sue_owner.conceptroot.concept_label)
-    root_concept = sue_owner.get_concept_obj(rope=root_rope)
-    sue_awardline = sue_owner.conceptroot._awardlines.get(sue_str)
-    print(f"{sue_awardline._fund_give=} {root_concept._fund_ratio=} ")
-    print(f"  {sue_awardline._fund_take=} {root_concept._fund_ratio=} ")
+    assert sue_owner.planroot._awardheirs.get(sue_str) is not None
+    assert sue_owner.planroot._awardheirs.get(sue_str).awardee_title == sue_str
+    assert sue_owner.planroot._awardlines != {}
+    root_rope = to_rope(sue_owner.planroot.plan_label)
+    root_plan = sue_owner.get_plan_obj(rope=root_rope)
+    sue_awardline = sue_owner.planroot._awardlines.get(sue_str)
+    print(f"{sue_awardline._fund_give=} {root_plan._fund_ratio=} ")
+    print(f"  {sue_awardline._fund_take=} {root_plan._fund_ratio=} ")
     sum_x = 0
     cat_rope = sue_owner.make_l1_rope("cat have dinner")
-    cat_concept = sue_owner.get_concept_obj(cat_rope)
+    cat_plan = sue_owner.get_plan_obj(cat_rope)
     wk_rope = sue_owner.make_l1_rope(wk_str)
-    wk_concept = sue_owner.get_concept_obj(wk_rope)
+    wk_plan = sue_owner.get_plan_obj(wk_rope)
     casa_str = "casa"
     casa_rope = sue_owner.make_l1_rope(casa_str)
-    casa_concept = sue_owner.get_concept_obj(casa_rope)
+    casa_plan = sue_owner.get_plan_obj(casa_rope)
     nation_rope = sue_owner.make_l1_rope(nation_str)
-    nation_concept = sue_owner.get_concept_obj(nation_rope)
-    sum_x = cat_concept._fund_ratio
-    print(f"{cat_concept._fund_ratio=} {sum_x} ")
-    sum_x += wk_concept._fund_ratio
-    print(f"{wk_concept._fund_ratio=} {sum_x} ")
-    sum_x += casa_concept._fund_ratio
-    print(f"{casa_concept._fund_ratio=} {sum_x} ")
-    sum_x += nation_concept._fund_ratio
-    print(f"{nation_concept._fund_ratio=} {sum_x} ")
+    nation_plan = sue_owner.get_plan_obj(nation_rope)
+    sum_x = cat_plan._fund_ratio
+    print(f"{cat_plan._fund_ratio=} {sum_x} ")
+    sum_x += wk_plan._fund_ratio
+    print(f"{wk_plan._fund_ratio=} {sum_x} ")
+    sum_x += casa_plan._fund_ratio
+    print(f"{casa_plan._fund_ratio=} {sum_x} ")
+    sum_x += nation_plan._fund_ratio
+    print(f"{nation_plan._fund_ratio=} {sum_x} ")
     tolerance = 1e-10
     assert sum_x < 1.0 + tolerance
 
-    # for kid_concept in root_concept._kids.values():
-    #     sum_x += kid_concept._fund_ratio
-    #     print(f"  {kid_concept._fund_ratio=} {sum_x=} {kid_concept.get_concept_rope()=}")
+    # for kid_plan in root_plan._kids.values():
+    #     sum_x += kid_plan._fund_ratio
+    #     print(f"  {kid_plan._fund_ratio=} {sum_x=} {kid_plan.get_plan_rope()=}")
     assert round(sue_awardline._fund_give, 15) == default_fund_pool()
     assert round(sue_awardline._fund_take, 15) == default_fund_pool()
     x_awardline = awardline_shop(sue_str, default_fund_pool(), default_fund_pool())
-    assert sue_owner.conceptroot._awardlines == {x_awardline.awardee_title: x_awardline}
+    assert sue_owner.planroot._awardlines == {x_awardline.awardee_title: x_awardline}
 
 
-def test_OwnerUnit_settle_owner_TreeTraverseSets_awardlines_ToRootConceptUnitFromNonRootConceptUnit():
+def test_OwnerUnit_settle_owner_TreeTraverseSets_awardlines_ToRootPlanUnitFromNonRootPlanUnit():
     # ESTABLISH
     sue_owner = get_ownerunit_with_4_levels()
     sue_owner.settle_owner()
     sue_str = "Sue"
     sue_owner.add_acctunit(sue_str)
     casa_rope = sue_owner.make_l1_rope("casa")
-    sue_owner.get_concept_obj(casa_rope).set_awardlink(
+    sue_owner.get_plan_obj(casa_rope).set_awardlink(
         awardlink_shop(awardee_title=sue_str)
     )
-    assert sue_owner.conceptroot._awardlines == {}
+    assert sue_owner.planroot._awardlines == {}
 
     # WHEN
     sue_owner.settle_owner()
 
     # THEN
-    assert sue_owner.conceptroot._awardlines != {}
-    print(f"{sue_owner.conceptroot._awardlines=}")
+    assert sue_owner.planroot._awardlines != {}
+    print(f"{sue_owner.planroot._awardlines=}")
     x_awardline = awardline_shop(
         awardee_title=sue_str,
         _fund_give=0.230769231 * default_fund_pool(),
         _fund_take=0.230769231 * default_fund_pool(),
     )
-    assert sue_owner.conceptroot._awardlines == {x_awardline.awardee_title: x_awardline}
-    casa_conceptunit = sue_owner.get_concept_obj(casa_rope)
-    assert casa_conceptunit._awardlines != {}
-    assert casa_conceptunit._awardlines == {x_awardline.awardee_title: x_awardline}
+    assert sue_owner.planroot._awardlines == {x_awardline.awardee_title: x_awardline}
+    casa_planunit = sue_owner.get_plan_obj(casa_rope)
+    assert casa_planunit._awardlines != {}
+    assert casa_planunit._awardlines == {x_awardline.awardee_title: x_awardline}
 
 
 def test_OwnerUnit_settle_owner_WithRootLevelAwardLinkSetsGroupUnit_fund_give_fund_take():
@@ -461,11 +451,11 @@ def test_OwnerUnit_settle_owner_WithRootLevelAwardLinkSetsGroupUnit_fund_give_fu
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_str, give_force=10)
-    root_rope = to_rope(sue_owner.conceptroot.concept_label)
-    x_conceptroot = sue_owner.get_concept_obj(root_rope)
-    x_conceptroot.set_awardlink(awardlink=yao_awardlink)
-    x_conceptroot.set_awardlink(awardlink=zia_awardlink)
-    x_conceptroot.set_awardlink(awardlink=xio_awardlink)
+    root_rope = to_rope(sue_owner.planroot.plan_label)
+    x_planroot = sue_owner.get_plan_obj(root_rope)
+    x_planroot.set_awardlink(awardlink=yao_awardlink)
+    x_planroot.set_awardlink(awardlink=zia_awardlink)
+    x_planroot.set_awardlink(awardlink=xio_awardlink)
     assert len(sue_owner.get_acctunit_group_titles_dict()) == 3
 
     # WHEN
@@ -491,8 +481,8 @@ def test_OwnerUnit_settle_owner_WithRootLevelAwardLinkSetsGroupUnit_fund_give_fu
     # ESTABLISH
     sue_owner.set_acctunit(acctunit_shop(sue_str))
     sue_awardlink = awardlink_shop(sue_str, give_force=37)
-    x_conceptroot.set_awardlink(sue_awardlink)
-    assert len(x_conceptroot.awardlinks) == 4
+    x_planroot.set_awardlink(sue_awardlink)
+    assert len(x_planroot.awardlinks) == 4
     assert len(sue_owner.get_acctunit_group_titles_dict()) == 4
 
     # WHEN
@@ -525,7 +515,7 @@ def test_OwnerUnit_settle_owner_WithLevel3AwardLinkSetsGroupUnit_fund_give_fund_
     x_owner = ownerunit_shop(bob_str)
     swim_str = "swim"
     swim_rope = x_owner.make_l1_rope(swim_str)
-    x_owner.set_l1_concept(conceptunit_shop(swim_str))
+    x_owner.set_l1_plan(planunit_shop(swim_str))
 
     yao_str = "Yao"
     zia_str = "Zia"
@@ -536,10 +526,10 @@ def test_OwnerUnit_settle_owner_WithLevel3AwardLinkSetsGroupUnit_fund_give_fund_
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_str, give_force=10)
-    swim_concept = x_owner.get_concept_obj(swim_rope)
-    swim_concept.set_awardlink(yao_awardlink)
-    swim_concept.set_awardlink(zia_awardlink)
-    swim_concept.set_awardlink(xio_awardlink)
+    swim_plan = x_owner.get_plan_obj(swim_rope)
+    swim_plan.set_awardlink(yao_awardlink)
+    swim_plan.set_awardlink(zia_awardlink)
+    swim_plan.set_awardlink(xio_awardlink)
     assert len(x_owner.get_acctunit_group_titles_dict()) == 3
 
     # WHEN
@@ -571,7 +561,7 @@ def test_OwnerUnit_settle_owner_CreatesNewGroupUnitAndSetsGroup_fund_give_fund_t
     x_owner = ownerunit_shop(yao_str)
     swim_str = "swim"
     swim_rope = x_owner.make_l1_rope(swim_str)
-    x_owner.set_l1_concept(conceptunit_shop(swim_str))
+    x_owner.set_l1_plan(planunit_shop(swim_str))
 
     yao_str = "Yao"
     zia_str = "Zia"
@@ -582,10 +572,10 @@ def test_OwnerUnit_settle_owner_CreatesNewGroupUnitAndSetsGroup_fund_give_fund_t
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_str, give_force=10)
-    swim_concept = x_owner.get_concept_obj(swim_rope)
-    swim_concept.set_awardlink(yao_awardlink)
-    swim_concept.set_awardlink(zia_awardlink)
-    swim_concept.set_awardlink(xio_awardlink)
+    swim_plan = x_owner.get_plan_obj(swim_rope)
+    swim_plan.set_awardlink(yao_awardlink)
+    swim_plan.set_awardlink(zia_awardlink)
+    swim_plan.set_awardlink(xio_awardlink)
     assert len(x_owner.get_acctunit_group_titles_dict()) == 2
 
     # WHEN
@@ -618,7 +608,7 @@ def test_OwnerUnit_settle_owner_WithLevel3AwardLinkAndEmptyAncestorsSetsGroupUni
     x_owner = ownerunit_shop(yao_str)
     swim_str = "swim"
     swim_rope = x_owner.make_l1_rope(swim_str)
-    x_owner.set_l1_concept(conceptunit_shop(swim_str))
+    x_owner.set_l1_plan(planunit_shop(swim_str))
 
     yao_str = "Yao"
     zia_str = "Zia"
@@ -629,36 +619,36 @@ def test_OwnerUnit_settle_owner_WithLevel3AwardLinkAndEmptyAncestorsSetsGroupUni
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_str, give_force=10)
-    swim_concept = x_owner.get_concept_obj(swim_rope)
-    swim_concept.set_awardlink(yao_awardlink)
-    swim_concept.set_awardlink(zia_awardlink)
-    swim_concept.set_awardlink(xio_awardlink)
+    swim_plan = x_owner.get_plan_obj(swim_rope)
+    swim_plan.set_awardlink(yao_awardlink)
+    swim_plan.set_awardlink(zia_awardlink)
+    swim_plan.set_awardlink(xio_awardlink)
 
     # no awardlinks attached to this one
-    x_owner.set_l1_concept(conceptunit_shop("hunt", mass=3))
+    x_owner.set_l1_plan(planunit_shop("hunt", mass=3))
 
     # WHEN
     x_owner.settle_owner()
 
     # THEN
-    x_conceptroot = x_owner.get_concept_obj(to_rope(x_owner.belief_label))
+    x_planroot = x_owner.get_plan_obj(to_rope(x_owner.belief_label))
     with pytest_raises(Exception) as excinfo:
-        x_conceptroot.awardlinks[yao_str]
+        x_planroot.awardlinks[yao_str]
     assert str(excinfo.value) == f"'{yao_str}'"
     with pytest_raises(Exception) as excinfo:
-        x_conceptroot.awardlinks[zia_str]
+        x_planroot.awardlinks[zia_str]
     assert str(excinfo.value) == f"'{zia_str}'"
     with pytest_raises(Exception) as excinfo:
-        x_conceptroot.awardlinks[xio_str]
+        x_planroot.awardlinks[xio_str]
     assert str(excinfo.value) == f"'{xio_str}'"
     with pytest_raises(Exception) as excinfo:
-        x_conceptroot._kids["hunt"]._awardheirs[yao_str]
+        x_planroot._kids["hunt"]._awardheirs[yao_str]
     assert str(excinfo.value) == f"'{yao_str}'"
     with pytest_raises(Exception) as excinfo:
-        x_conceptroot._kids["hunt"]._awardheirs[zia_str]
+        x_planroot._kids["hunt"]._awardheirs[zia_str]
     assert str(excinfo.value) == f"'{zia_str}'"
     with pytest_raises(Exception) as excinfo:
-        x_conceptroot._kids["hunt"]._awardheirs[xio_str]
+        x_planroot._kids["hunt"]._awardheirs[xio_str]
     assert str(excinfo.value) == f"'{xio_str}'"
 
     # THEN
@@ -694,22 +684,22 @@ def test_OwnerUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkOwnerFund(
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     Xio_awardlink = awardlink_shop(Xio_str, give_force=10)
-    sue_owner.conceptroot.set_awardlink(yao_awardlink)
-    sue_owner.conceptroot.set_awardlink(zia_awardlink)
-    sue_owner.conceptroot.set_awardlink(Xio_awardlink)
-    assert len(sue_owner.conceptroot.awardlinks) == 3
+    sue_owner.planroot.set_awardlink(yao_awardlink)
+    sue_owner.planroot.set_awardlink(zia_awardlink)
+    sue_owner.planroot.set_awardlink(Xio_awardlink)
+    assert len(sue_owner.planroot.awardlinks) == 3
 
     # WHEN
-    concept_dict = sue_owner.get_concept_dict()
+    plan_dict = sue_owner.get_plan_dict()
 
     # THEN
-    print(f"{concept_dict.keys()=}")
-    concept_bob = concept_dict.get(to_rope(sue_owner.belief_label))
-    assert len(concept_bob._awardheirs) == 3
+    print(f"{plan_dict.keys()=}")
+    plan_bob = plan_dict.get(to_rope(sue_owner.belief_label))
+    assert len(plan_bob._awardheirs) == 3
 
-    bheir_yao = concept_bob._awardheirs.get(yao_str)
-    bheir_zia = concept_bob._awardheirs.get(zia_str)
-    bheir_Xio = concept_bob._awardheirs.get(Xio_str)
+    bheir_yao = plan_bob._awardheirs.get(yao_str)
+    bheir_zia = plan_bob._awardheirs.get(zia_str)
+    bheir_Xio = plan_bob._awardheirs.get(Xio_str)
     assert bheir_yao._fund_give == 0.5 * default_fund_pool()
     assert bheir_yao._fund_take == 0.75 * default_fund_pool()
     assert bheir_zia._fund_give == 0.25 * default_fund_pool()
@@ -727,7 +717,7 @@ def test_OwnerUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkOwnerFund(
 
     # fund_give_sum = 0
     # fund_take_sum = 0
-    # for group in x_owner.conceptroot._awardheirs.values():
+    # for group in x_owner.planroot._awardheirs.values():
     #     print(f"{group=}")
     #     assert group._fund_give is not None
     #     assert group._fund_give in [0.25, 0.5]
@@ -753,9 +743,9 @@ def test_OwnerUnit_settle_owner_CorrectlySetsGroupLinkOwnerCredAndDebt():
     bob_awardlink = awardlink_shop(bob_str, 10, take_force=5)
     zia_awardlink = awardlink_shop(zia_str, 10, take_force=5)
     root_rope = to_rope(yao_owner.belief_label)
-    yao_owner.edit_concept_attr(root_rope, awardlink=sue_awardlink)
-    yao_owner.edit_concept_attr(root_rope, awardlink=bob_awardlink)
-    yao_owner.edit_concept_attr(root_rope, awardlink=zia_awardlink)
+    yao_owner.edit_plan_attr(root_rope, awardlink=sue_awardlink)
+    yao_owner.edit_plan_attr(root_rope, awardlink=bob_awardlink)
+    yao_owner.edit_plan_attr(root_rope, awardlink=zia_awardlink)
 
     sue_acctunit = yao_owner.get_acct(sue_str)
     bob_acctunit = yao_owner.get_acct(bob_str)
@@ -797,7 +787,7 @@ def test_OwnerUnit_settle_owner_CorrectlySetsGroupLinkOwnerCredAndDebt():
     # ESTABLISH another task, check metrics are as expected
     xio_str = "Xio"
     yao_owner.set_acctunit(acctunit_shop(xio_str))
-    yao_owner.conceptroot.set_awardlink(awardlink_shop(xio_str, 20, take_force=13))
+    yao_owner.planroot.set_awardlink(awardlink_shop(xio_str, 20, take_force=13))
 
     # WHEN
     yao_owner.settle_owner()
@@ -842,7 +832,7 @@ def test_OwnerUnit_settle_owner_CorrectlySetsAcctUnitOwner_fund():
     yao_owner = ownerunit_shop("Yao")
     swim_str = "swim"
     swim_rope = yao_owner.make_l1_rope(swim_str)
-    yao_owner.set_l1_concept(conceptunit_shop(swim_str))
+    yao_owner.set_l1_plan(planunit_shop(swim_str))
     sue_str = "Sue"
     bob_str = "Bob"
     zia_str = "Zia"
@@ -852,9 +842,9 @@ def test_OwnerUnit_settle_owner_CorrectlySetsAcctUnitOwner_fund():
     bl_sue = awardlink_shop(sue_str, 20, take_force=40)
     bl_bob = awardlink_shop(bob_str, 10, take_force=5)
     bl_zia = awardlink_shop(zia_str, 10, take_force=5)
-    yao_owner.get_concept_obj(swim_rope).set_awardlink(bl_sue)
-    yao_owner.get_concept_obj(swim_rope).set_awardlink(bl_bob)
-    yao_owner.get_concept_obj(swim_rope).set_awardlink(bl_zia)
+    yao_owner.get_plan_obj(swim_rope).set_awardlink(bl_sue)
+    yao_owner.get_plan_obj(swim_rope).set_awardlink(bl_bob)
+    yao_owner.get_plan_obj(swim_rope).set_awardlink(bl_zia)
 
     sue_acctunit = yao_owner.get_acct(sue_str)
     bob_acctunit = yao_owner.get_acct(bob_str)
@@ -890,7 +880,7 @@ def test_OwnerUnit_settle_owner_CorrectlySetsAcctUnitOwner_fund():
     # WHEN another task, check metrics are as expected
     xio_str = "Xio"
     yao_owner.set_acctunit(acctunit_shop(xio_str))
-    yao_owner.conceptroot.set_awardlink(awardlink_shop(xio_str, 20, take_force=10))
+    yao_owner.planroot.set_awardlink(awardlink_shop(xio_str, 20, take_force=10))
     yao_owner.settle_owner()
 
     # THEN
@@ -934,7 +924,7 @@ def test_OwnerUnit_settle_owner_CorrectlySetsPartGroupedLWAcctUnitOwner_fund():
     yao_owner = ownerunit_shop("Yao")
     swim_str = "swim"
     swim_rope = yao_owner.make_l1_rope(swim_str)
-    yao_owner.set_l1_concept(conceptunit_shop(swim_str))
+    yao_owner.set_l1_plan(planunit_shop(swim_str))
     sue_str = "Sue"
     bob_str = "Bob"
     zia_str = "Zia"
@@ -944,14 +934,14 @@ def test_OwnerUnit_settle_owner_CorrectlySetsPartGroupedLWAcctUnitOwner_fund():
     sue_awardlink = awardlink_shop(sue_str, 20, take_force=40)
     bob_awardlink = awardlink_shop(bob_str, 10, take_force=5)
     zia_awardlink = awardlink_shop(zia_str, 10, take_force=5)
-    swim_concept = yao_owner.get_concept_obj(swim_rope)
-    swim_concept.set_awardlink(sue_awardlink)
-    swim_concept.set_awardlink(bob_awardlink)
-    swim_concept.set_awardlink(zia_awardlink)
+    swim_plan = yao_owner.get_plan_obj(swim_rope)
+    swim_plan.set_awardlink(sue_awardlink)
+    swim_plan.set_awardlink(bob_awardlink)
+    swim_plan.set_awardlink(zia_awardlink)
 
     # no awardlinks attached to this one
     hunt_str = "hunt"
-    yao_owner.set_l1_concept(conceptunit_shop(hunt_str, mass=3))
+    yao_owner.set_l1_plan(planunit_shop(hunt_str, mass=3))
 
     # WHEN
     yao_owner.settle_owner()
@@ -1002,7 +992,7 @@ def test_OwnerUnit_settle_owner_CreatesNewGroupUnitAndSetsAcct_fund_give_fund_ta
     bob_owner = ownerunit_shop(bob_str)
     swim_str = "swim"
     swim_rope = bob_owner.make_l1_rope(swim_str)
-    bob_owner.set_l1_concept(conceptunit_shop(swim_str))
+    bob_owner.set_l1_plan(planunit_shop(swim_str))
 
     yao_str = "Yao"
     zia_str = "Zia"
@@ -1013,10 +1003,10 @@ def test_OwnerUnit_settle_owner_CreatesNewGroupUnitAndSetsAcct_fund_give_fund_ta
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_str, give_force=10)
-    swim_concept = bob_owner.get_concept_obj(swim_rope)
-    swim_concept.set_awardlink(yao_awardlink)
-    swim_concept.set_awardlink(zia_awardlink)
-    swim_concept.set_awardlink(xio_awardlink)
+    swim_plan = bob_owner.get_plan_obj(swim_rope)
+    swim_plan.set_awardlink(yao_awardlink)
+    swim_plan.set_awardlink(zia_awardlink)
+    swim_plan.set_awardlink(xio_awardlink)
     assert len(bob_owner.get_acctunit_group_titles_dict()) == 2
 
     # WHEN
@@ -1036,7 +1026,7 @@ def test_OwnerUnit_settle_owner_CreatesNewGroupUnitAndSetsAcct_fund_give_fund_ta
 def test_OwnerUnit_settle_owner_CorrectlySetsAcctUnit_fund_give_fund_take():
     # ESTABLISH
     yao_owner = ownerunit_shop("Yao")
-    yao_owner.set_l1_concept(conceptunit_shop("swim"))
+    yao_owner.set_l1_plan(planunit_shop("swim"))
     sue_str = "Sue"
     bob_str = "Bob"
     zia_str = "Zia"
@@ -1120,15 +1110,15 @@ class AwardAgendaMetrics:
     agenda_no_owner_i_sum = 0
     agenda_yes_owner_i_sum = 0
 
-    def set_sums(self, agenda_dict: dict[RopeTerm, ConceptUnit]):
-        for agenda_concept in agenda_dict.values():
-            self.sum_owner_agenda_share += agenda_concept.get_fund_share()
-            if agenda_concept._awardlines == {}:
+    def set_sums(self, agenda_dict: dict[RopeTerm, PlanUnit]):
+        for agenda_plan in agenda_dict.values():
+            self.sum_owner_agenda_share += agenda_plan.get_fund_share()
+            if agenda_plan._awardlines == {}:
                 self.agenda_no_count += 1
-                self.agenda_no_owner_i_sum += agenda_concept.get_fund_share()
+                self.agenda_no_owner_i_sum += agenda_plan.get_fund_share()
             else:
                 self.agenda_yes_count += 1
-                self.agenda_yes_owner_i_sum += agenda_concept.get_fund_share()
+                self.agenda_yes_owner_i_sum += agenda_plan.get_fund_share()
 
 
 def test_OwnerUnit_agenda_cred_debt_IsCorrectlySet():
@@ -1154,8 +1144,8 @@ def test_OwnerUnit_agenda_cred_debt_IsCorrectlySet():
 
     # WHEN
     agenda_dict = yao_owner.get_agenda_dict()
-    # for concept_rope in yao_owner._concept_dict.keys():
-    #     print(f"{concept_rope=}")
+    # for plan_rope in yao_owner._plan_dict.keys():
+    #     print(f"{plan_rope=}")
     # for x_acct in yao_owner.accts.values():
     #     for x_membership in x_acct._memberships.values():
     #         print(f"{x_membership.group_title=}")
@@ -1319,15 +1309,15 @@ def test_OwnerUnit_settle_owner_CreatesGroupUnitWith_ownerunit_v001():
 
     # WHEN
     yao_owner.settle_owner()
-    concept_dict = yao_owner._concept_dict
+    plan_dict = yao_owner._plan_dict
 
     # THEN
-    # print(f"{len(concept_dict)=}")
-    db_concept = concept_dict.get(yao_owner.make_l1_rope("D&B"))
-    assert len(db_concept.awardlinks) == 3
-    # for concept_key in concept_dict:
-    #     print(f"{concept_key=}")
-    #     if concept.concept_label == "D&B":
-    #         print(f"{concept.concept_label=} {concept.awardlinks=}")
-    #         db_awardlink_len = len(concept.awardlinks)
+    # print(f"{len(plan_dict)=}")
+    db_plan = plan_dict.get(yao_owner.make_l1_rope("D&B"))
+    assert len(db_plan.awardlinks) == 3
+    # for plan_key in plan_dict:
+    #     print(f"{plan_key=}")
+    #     if plan.plan_label == "D&B":
+    #         print(f"{plan.plan_label=} {plan.awardlinks=}")
+    #         db_awardlink_len = len(plan.awardlinks)
     # assert db_awardlink_len == 3

@@ -11,7 +11,7 @@ from src.a12_hub_toolbox.hub_tool import gut_file_exists, open_gut_file
 from src.a17_idea_logic.idea import get_idearef_obj, load_idea_csv, save_idea_csv
 from src.a17_idea_logic.idea_config import (
     idea_format_00012_membership_v0_0_0,
-    idea_format_00013_conceptunit_v0_0_0,
+    idea_format_00013_planunit_v0_0_0,
     idea_format_00021_owner_acctunit_v0_0_0,
 )
 from src.a17_idea_logic.idea_db_tool import open_csv

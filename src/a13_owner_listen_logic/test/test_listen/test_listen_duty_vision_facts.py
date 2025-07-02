@@ -1,4 +1,4 @@
-from src.a05_concept_logic.concept import conceptunit_shop
+from src.a05_plan_logic.plan import planunit_shop
 from src.a06_owner_logic.owner import ownerunit_shop
 from src.a13_owner_listen_logic.listen import (
     create_listen_basis,
@@ -76,9 +76,9 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnitWithDifferentChore(
     sue_texas_hubunit.save_duty_owner(yao_duty)
 
     zia_vision = get_example_zia_speaker()
-    zia_vision.set_concept(conceptunit_shop(clean_str(), task=True), casa_rope())
-    clean_conceptunit = zia_vision.get_concept_obj(clean_rope())
-    clean_conceptunit.laborunit.set_laborlink(yao_str)
+    zia_vision.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
+    clean_planunit = zia_vision.get_plan_obj(clean_rope())
+    clean_planunit.laborunit.set_laborlink(yao_str)
     sue_texas_hubunit.save_vision_owner(zia_vision)
 
     new_yao_vision = create_listen_basis(yao_duty)
@@ -150,7 +150,7 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfstateedFromOwnersSpeakerDirOw
     assert new_yao_vision.get_missing_fact_rcontexts().get(eat_rope()) is None
     listen_to_agendas_duty_vision(new_yao_vision, sue_texas_hubunit)
     print(f"{new_yao_vision.get_missing_fact_rcontexts().keys()=}")
-    print(f"{new_yao_vision.conceptroot.factunits.keys()=}")
+    print(f"{new_yao_vision.planroot.factunits.keys()=}")
     assert new_yao_vision.get_missing_fact_rcontexts().get(eat_rope()) is not None
 
     # WHEN
@@ -218,7 +218,7 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfstateedFromOwnersSpeakerDirOw
     assert new_yao_vision1.get_missing_fact_rcontexts().get(eat_rope()) is None
     listen_to_agendas_duty_vision(new_yao_vision1, sue_texas_hubunit)
     print(f"{new_yao_vision1.get_missing_fact_rcontexts().keys()=}")
-    print(f"{new_yao_vision1.conceptroot.factunits.keys()=}")
+    print(f"{new_yao_vision1.planroot.factunits.keys()=}")
     assert new_yao_vision1.get_missing_fact_rcontexts().get(eat_rope()) is not None
 
     # WHEN
@@ -270,14 +270,14 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfstateedFromOwnersSpeakerDirOw
 
 #     sue_speaker.add_acctunit(yao_str)
 #     sue_speaker.set_acct_respect(20)
-#     sue_speaker.set_concept(conceptunit_shop(clean_str), status_rope)
-#     sue_speaker.set_concept(conceptunit_shop(dirty_str), status_rope)
-#     sue_speaker.set_concept(conceptunit_shop(sweep_str, task=True), casa_rope)
-#     sue_speaker.edit_concept_attr(
+#     sue_speaker.set_plan(planunit_shop(clean_str), status_rope)
+#     sue_speaker.set_plan(planunit_shop(dirty_str), status_rope)
+#     sue_speaker.set_plan(planunit_shop(sweep_str, task=True), casa_rope)
+#     sue_speaker.edit_plan_attr(
 #         sweep_rope, reason_rcontext=status_rope, reason_premise=dirty_rope
 #     )
-#     sweep_concept = sue_speaker.get_concept_obj(sweep_rope)
-#     sweep_concept.laborunit.set_laborlink(yao_str)
+#     sweep_plan = sue_speaker.get_plan_obj(sweep_rope)
+#     sweep_plan.laborunit.set_laborlink(yao_str)
 
 #     sue_texas_hubunit = get_texas_hubunit()
 #     sue_texas_hubunit.save_vision_owner(sue_str, sue_speaker.get_json(), True)
@@ -285,14 +285,14 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfstateedFromOwnersSpeakerDirOw
 #     yao_duty.add_acctunit(yao_str)
 #     yao_duty.add_acctunit(sue_str)
 #     new_yao_vision = create_listen_basis(yao_duty)
-#     print(f"{new_yao_vision.get_concept_dict().keys()=}")
+#     print(f"{new_yao_vision.get_plan_dict().keys()=}")
 #     # assert new_yao_vision.get_missing_fact_rcontexts().get(status_rope) is None
 #     listen_to_agendas_duty_vision(new_yao_vision, texas_hubunit)
-#     print(f"{new_yao_vision.get_concept_dict().keys()=}")
+#     print(f"{new_yao_vision.get_plan_dict().keys()=}")
 #     assert new_yao_vision.get_missing_fact_rcontexts().get(status_rope) is not None
 
 #     # assert new_yao_vision.get_missing_fact_rcontexts().keys() == {status_rope}
-#     # sue_speaker.add_fact(status_rope, clean_rope, create_missing_concepts=True)
+#     # sue_speaker.add_fact(status_rope, clean_rope, create_missing_plans=True)
 
 #     # # WHEN
 #     # listen_to_facts_duty_vision(yao_duty, yao_vision, missing_fact_fcontexts)
@@ -323,14 +323,14 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfstateedFromOwnersSpeakerDirOw
 #     running_str = "running"
 #     running_rope = yao_duty.make_rope(fridge_rope, running_str)
 
-#     yao_duty.set_concept(conceptunit_shop(running_str), fridge_rope)
-#     yao_duty.set_concept(conceptunit_shop(clean_str), status_rope)
-#     yao_duty.set_concept(conceptunit_shop(dirty_str), status_rope)
-#     yao_duty.set_concept(conceptunit_shop(sweep_str, task=True), casa_rope)
-#     yao_duty.edit_concept_attr(
+#     yao_duty.set_plan(planunit_shop(running_str), fridge_rope)
+#     yao_duty.set_plan(planunit_shop(clean_str), status_rope)
+#     yao_duty.set_plan(planunit_shop(dirty_str), status_rope)
+#     yao_duty.set_plan(planunit_shop(sweep_str, task=True), casa_rope)
+#     yao_duty.edit_plan_attr(
 #         sweep_rope, reason_rcontext=status_rope, reason_premise=dirty_rope
 #     )
-#     yao_duty.edit_concept_attr(
+#     yao_duty.edit_plan_attr(
 #         sweep_rope, reason_rcontext=fridge_rope, reason_premise=running_rope
 #     )
 #     assert len(yao_duty.get_missing_fact_rcontexts()) == 2
@@ -340,8 +340,8 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfstateedFromOwnersSpeakerDirOw
 
 #     # WHEN
 #     yao_vision = ownerunit_shop(yao_str)
-#     yao_vision.add_fact(status_rope, clean_rope, create_missing_concepts=True)
-#     yao_vision.add_fact(fridge_rope, running_rope, create_missing_concepts=True)
+#     yao_vision.add_fact(status_rope, clean_rope, create_missing_plans=True)
+#     yao_vision.add_fact(fridge_rope, running_rope, create_missing_plans=True)
 #     missing_fact_fcontexts = list(yao_duty.get_missing_fact_rcontexts().keys())
 #     listen_to_facts_duty_vision(yao_duty, yao_vision, missing_fact_fcontexts)
 

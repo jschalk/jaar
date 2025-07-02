@@ -2,7 +2,7 @@ from src.a01_term_logic.rope import create_rope
 from src.a06_owner_logic.owner import OwnerUnit, ownerunit_shop
 from src.a07_timeline_logic.timeline import (
     OwnerTimelinePoint,
-    add_newtimeline_conceptunit,
+    add_newtimeline_planunit,
     get_timeline_rope,
     ownertimelinepoint_shop,
     timeline_config_shop,
@@ -28,8 +28,8 @@ def get_belief_ownertimelinepoint(beliefunit: BeliefUnit) -> OwnerTimelinePoint:
         knot=beliefunit.knot,
     )
     belief_timeline_config = beliefunit.timeline.get_dict()
-    # create timeline concept from beliefunit.timeline_config
-    add_newtimeline_conceptunit(x_ownerunit, belief_timeline_config)
+    # create timeline plan from beliefunit.timeline_config
+    add_newtimeline_planunit(x_ownerunit, belief_timeline_config)
     x_ownertimelinepoint = ownertimelinepoint_shop(x_ownerunit, timeline_rope, 0)
     x_ownertimelinepoint.calc_timeline()
     return x_ownertimelinepoint

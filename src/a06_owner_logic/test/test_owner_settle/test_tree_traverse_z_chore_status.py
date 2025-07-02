@@ -1,14 +1,14 @@
 from src.a01_term_logic.rope import to_rope
 from src.a02_finance_logic.finance_config import default_fund_pool
-from src.a04_reason_logic.reason_concept import (
+from src.a04_reason_logic.reason_plan import (
     premiseunit_shop,
     reasonheir_shop,
     reasonunit_shop,
 )
-from src.a05_concept_logic.concept import conceptunit_shop
-from src.a05_concept_logic.healer import healerlink_shop
+from src.a05_plan_logic.healer import healerlink_shop
+from src.a05_plan_logic.plan import planunit_shop
 from src.a06_owner_logic.owner import ownerunit_shop
-from src.a06_owner_logic.owner_graphics import display_concepttree
+from src.a06_owner_logic.owner_graphics import display_plantree
 from src.a06_owner_logic.test._util.example_owners import (
     from_list_get_active,
     get_ownerunit_with7amCleanTableReason,
@@ -25,23 +25,23 @@ def test_OwnerUnit_settle_owner_SetsStatus_active_WhenFactSaysNo():
     sun_str = "Sunday"
     sun_rope = sue_ownerunit.make_rope(wk_rope, sun_str)
 
-    # for concept in sue_ownerunit._concept_dict.values():
-    #     print(f"{casa_rope=} {concept.get_concept_rope()=}")
+    # for plan in sue_ownerunit._plan_dict.values():
+    #     print(f"{casa_rope=} {plan.get_plan_rope()=}")
     casa_str = "casa"
     casa_rope = sue_ownerunit.make_l1_rope(casa_str)
-    assert sue_ownerunit.get_concept_obj(casa_rope)._active is None
+    assert sue_ownerunit.get_plan_obj(casa_rope)._active is None
 
     # WHEN
     sue_ownerunit.add_fact(fcontext=wk_rope, fstate=sun_rope)
     sue_ownerunit.settle_owner()
 
     # THEN
-    assert sue_ownerunit._concept_dict != {}
-    assert len(sue_ownerunit._concept_dict) == 17
+    assert sue_ownerunit._plan_dict != {}
+    assert len(sue_ownerunit._plan_dict) == 17
 
-    # for concept in sue_ownerunit._concept_dict.values():
-    #     print(f"{casa_rope=} {concept.get_concept_rope()=}")
-    assert sue_ownerunit.get_concept_obj(casa_rope)._active is False
+    # for plan in sue_ownerunit._plan_dict.values():
+    #     print(f"{casa_rope=} {plan.get_plan_rope()=}")
+    assert sue_ownerunit.get_plan_obj(casa_rope)._active is False
 
 
 def test_OwnerUnit_settle_owner_SetsStatus_active_WhenFactModifies():
@@ -59,9 +59,9 @@ def test_OwnerUnit_settle_owner_SetsStatus_active_WhenFactModifies():
 
     # THEN
     sue_ownerunit.settle_owner()
-    assert sue_ownerunit._concept_dict
-    assert len(sue_ownerunit._concept_dict) == 17
-    assert sue_ownerunit._concept_dict.get(casa_rope)._active is False
+    assert sue_ownerunit._plan_dict
+    assert len(sue_ownerunit._plan_dict) == 17
+    assert sue_ownerunit._plan_dict.get(casa_rope)._active is False
 
     # WHEN
     nation_str = "nation"
@@ -72,9 +72,9 @@ def test_OwnerUnit_settle_owner_SetsStatus_active_WhenFactModifies():
 
     # THEN
     sue_ownerunit.settle_owner()
-    assert sue_ownerunit._concept_dict
-    assert len(sue_ownerunit._concept_dict) == 17
-    assert sue_ownerunit._concept_dict.get(casa_rope)._active
+    assert sue_ownerunit._plan_dict
+    assert len(sue_ownerunit._plan_dict) == 17
+    assert sue_ownerunit._plan_dict.get(casa_rope)._active
 
     # WHEN
     france_str = "France"
@@ -83,12 +83,12 @@ def test_OwnerUnit_settle_owner_SetsStatus_active_WhenFactModifies():
 
     # THEN
     sue_ownerunit.settle_owner()
-    assert sue_ownerunit._concept_dict
-    assert len(sue_ownerunit._concept_dict) == 17
-    assert sue_ownerunit._concept_dict.get(casa_rope)._active is False
+    assert sue_ownerunit._plan_dict
+    assert len(sue_ownerunit._plan_dict) == 17
+    assert sue_ownerunit._plan_dict.get(casa_rope)._active is False
 
 
-def test_OwnerUnit_settle_owner_CorrectlySets_concept_dict():
+def test_OwnerUnit_settle_owner_CorrectlySets_plan_dict():
     # ESTABLISH
     sue_ownerunit = get_ownerunit_with_4_levels_and_2reasons()
     wk_str = "wkdays"
@@ -104,15 +104,15 @@ def test_OwnerUnit_settle_owner_CorrectlySets_concept_dict():
 
     casa_str = "casa"
     casa_rope = sue_ownerunit.make_l1_rope(casa_str)
-    casa_concept = sue_ownerunit.get_concept_obj(casa_rope)
-    print(f"{sue_ownerunit.owner_name=} {len(casa_concept.reasonunits)=}")
-    # print(f"{casa_concept.reasonunits=}")
-    print(f"{sue_ownerunit.owner_name=} {len(sue_ownerunit.conceptroot.factunits)=}")
-    # print(f"{sue_ownerunit.conceptroot.factunits=}")
+    casa_plan = sue_ownerunit.get_plan_obj(casa_rope)
+    print(f"{sue_ownerunit.owner_name=} {len(casa_plan.reasonunits)=}")
+    # print(f"{casa_plan.reasonunits=}")
+    print(f"{sue_ownerunit.owner_name=} {len(sue_ownerunit.planroot.factunits)=}")
+    # print(f"{sue_ownerunit.planroot.factunits=}")
 
     sue_ownerunit.settle_owner()
-    assert sue_ownerunit._concept_dict
-    assert len(sue_ownerunit._concept_dict) == 17
+    assert sue_ownerunit._plan_dict
+    assert len(sue_ownerunit._plan_dict) == 17
 
     usa_str = "USA"
     usa_rope = sue_ownerunit.make_rope(nation_rope, usa_str)
@@ -133,14 +133,14 @@ def test_OwnerUnit_settle_owner_CorrectlySets_concept_dict():
         premises={wed.pstate: wed},
         _status=True,
         _chore=False,
-        _rconcept_active_value=True,
+        _rplan_active_value=True,
     )
     sta_lh = reasonheir_shop(
         rcontext=nation_rope,
         premises={usa.pstate: usa},
         _status=True,
         _chore=False,
-        _rconcept_active_value=True,
+        _rplan_active_value=True,
     )
 
     x1_reasonunits = {
@@ -157,25 +157,25 @@ def test_OwnerUnit_settle_owner_CorrectlySets_concept_dict():
     sue_ownerunit.settle_owner()
 
     # THEN
-    casa_concept = sue_ownerunit._concept_dict.get(casa_rope)
-    print(f"\nlook at {casa_concept.get_concept_rope()=}")
-    assert casa_concept.parent_rope == to_rope(sue_ownerunit.belief_label)
-    assert casa_concept._kids == {}
-    assert casa_concept.mass == 30
-    assert casa_concept.concept_label == casa_str
-    assert casa_concept._level == 1
-    assert casa_concept._active
-    assert casa_concept.task
-    # print(f"{casa_concept._reasonheirs=}")
-    nation_reasonheir = casa_concept._reasonheirs[nation_rope]
+    casa_plan = sue_ownerunit._plan_dict.get(casa_rope)
+    print(f"\nlook at {casa_plan.get_plan_rope()=}")
+    assert casa_plan.parent_rope == to_rope(sue_ownerunit.belief_label)
+    assert casa_plan._kids == {}
+    assert casa_plan.mass == 30
+    assert casa_plan.plan_label == casa_str
+    assert casa_plan._level == 1
+    assert casa_plan._active
+    assert casa_plan.task
+    # print(f"{casa_plan._reasonheirs=}")
+    nation_reasonheir = casa_plan._reasonheirs[nation_rope]
     print(f"  {nation_reasonheir=}")
     print(f"  {nation_reasonheir._status=}\n")
-    # assert casa_concept._reasonheirs == x1_reasonheirs
+    # assert casa_plan._reasonheirs == x1_reasonheirs
 
-    assert len(casa_concept._reasonheirs) == len(x1_reasonheirs)
-    wk_reasonheir = casa_concept._reasonheirs.get(wk_rope)
+    assert len(casa_plan._reasonheirs) == len(x1_reasonheirs)
+    wk_reasonheir = casa_plan._reasonheirs.get(wk_rope)
     # usa_premise = wk_reasonheir.premises.get(usa_rope)
-    print(f"    {casa_concept.concept_label=}")
+    print(f"    {casa_plan.plan_label=}")
     # print(f"    {usa_premise.rcontext=}")
     # print(f"    {usa_premise._chore=}")
     # print(f"    {usa_premise._chore=}")
@@ -187,21 +187,21 @@ def test_OwnerUnit_settle_owner_CorrectlySets_concept_dict():
     # assert usa_premise._status == w_state._status
     # assert wk_reasonheir.premises == wk_reasonheir.premises
 
-    # assert casa_concept.reasonunits == x1_reasonunits
+    # assert casa_plan.reasonunits == x1_reasonunits
 
-    # print("iterate through every concept...")
-    # for x_concept in concept_dict:
-    #     if str(type(x_concept)).find(".concept.ConceptUnit'>") > 0:
-    #         assert x_concept._active is not None
+    # print("iterate through every plan...")
+    # for x_plan in plan_dict:
+    #     if str(type(x_plan)).find(".plan.PlanUnit'>") > 0:
+    #         assert x_plan._active is not None
 
     #     # print("")
-    #     # print(f"{x_concept.concept_label=}")
-    #     # print(f"{len(x_concept.reasonunits)=}")
+    #     # print(f"{x_plan.plan_label=}")
+    #     # print(f"{len(x_plan.reasonunits)=}")
     #     print(
-    #         f"  {x_concept.concept_label} iterate through every reasonheir... {len(x_concept._reasonheirs)=} {x_concept.concept_label=}"
+    #         f"  {x_plan.plan_label} iterate through every reasonheir... {len(x_plan._reasonheirs)=} {x_plan.plan_label=}"
     #     )
-    #     # print(f"{x_concept._reasonheirs=}")
-    #     for reason in x_concept._reasonheirs.values():
+    #     # print(f"{x_plan._reasonheirs=}")
+    #     for reason in x_plan._reasonheirs.values():
     #         assert str(type(reason)).find(".reason.ReasonHeir'>") > 0
     #         print(f"    {reason.rcontext=}")
     #         assert reason._status is not None
@@ -229,7 +229,7 @@ def test_OwnerUnit_settle_owner_CorrectlyCalculatesRangeAttributes():
     house_rope = sue_ownerunit.make_l1_rope(house_str)
     clean_str = "clean table"
     clean_rope = sue_ownerunit.make_rope(house_rope, clean_str)
-    assert sue_ownerunit._concept_dict.get(clean_rope)._active is False
+    assert sue_ownerunit._plan_dict.get(clean_rope)._active is False
 
     # set facts as midevening to 8am
     time_str = "timetech"
@@ -251,26 +251,26 @@ def test_OwnerUnit_settle_owner_CorrectlyCalculatesRangeAttributes():
 
     # THEN
     sue_ownerunit.settle_owner()
-    assert sue_ownerunit._concept_dict.get(clean_rope)._active
+    assert sue_ownerunit._plan_dict.get(clean_rope)._active
 
     # WHEN
     # set facts as 8am to 10am
     day24hr_popen = 8.0
     day24hr_pnigh = 10.0
-    print(sue_ownerunit.conceptroot.factunits[day24hr_rope])
+    print(sue_ownerunit.planroot.factunits[day24hr_rope])
     sue_ownerunit.add_fact(
         day24hr_rcontext,
         fstate=day24hr_fstate,
         fopen=day24hr_popen,
         fnigh=day24hr_pnigh,
     )
-    print(sue_ownerunit.conceptroot.factunits[day24hr_rope])
-    print(sue_ownerunit.conceptroot._kids[house_str]._kids[clean_str].reasonunits)
-    # sue_ownerunit.conceptroot._kids["housemanagement"]._kids[clean_str]._active = None
+    print(sue_ownerunit.planroot.factunits[day24hr_rope])
+    print(sue_ownerunit.planroot._kids[house_str]._kids[clean_str].reasonunits)
+    # sue_ownerunit.planroot._kids["housemanagement"]._kids[clean_str]._active = None
 
     # THEN
     sue_ownerunit.settle_owner()
-    assert sue_ownerunit._concept_dict.get(clean_rope)._active is False
+    assert sue_ownerunit._plan_dict.get(clean_rope)._active is False
 
 
 def test_OwnerUnit_get_agenda_dict_ReturnsObj_WithSingleTask():
@@ -278,12 +278,12 @@ def test_OwnerUnit_get_agenda_dict_ReturnsObj_WithSingleTask():
     sue_ownerunit = get_ownerunit_with_4_levels_and_2reasons()
 
     # WHEN
-    task_concepts = sue_ownerunit.get_agenda_dict()
+    task_plans = sue_ownerunit.get_agenda_dict()
 
     # THEN
-    assert task_concepts is not None
-    assert len(task_concepts) > 0
-    assert len(task_concepts) == 1
+    assert task_plans is not None
+    assert len(task_plans) > 0
+    assert len(task_plans) == 1
 
 
 def test_OwnerUnit_settle_owner_CorrectlySetsData_ownerunit_v001():
@@ -311,39 +311,39 @@ def test_OwnerUnit_settle_owner_CorrectlySetsData_ownerunit_v001():
     yao_ownerunit.add_fact(fcontext=inter_rope, fstate=inter_rope)
     assert yao_ownerunit is not None
     # print(f"{yao_ownerunit.owner_name=}")
-    # print(f"{len(yao_ownerunit.conceptroot._kids)=}")
+    # print(f"{len(yao_ownerunit.planroot._kids)=}")
     ulty_str = "Ultimate Frisbee"
     ulty_rope = yao_ownerunit.make_l1_rope(ulty_str)
 
-    # if yao_ownerunit.conceptroot._kids["Ultimate Frisbee"].concept_label == "Ultimate Frisbee":
-    assert yao_ownerunit.conceptroot._kids[ulty_str].reasonunits is not None
+    # if yao_ownerunit.planroot._kids["Ultimate Frisbee"].plan_label == "Ultimate Frisbee":
+    assert yao_ownerunit.planroot._kids[ulty_str].reasonunits is not None
     assert yao_ownerunit.owner_name is not None
 
-    # for fact in yao_ownerunit.conceptroot.factunits.values():
+    # for fact in yao_ownerunit.planroot.factunits.values():
     #     print(f"{fact=}")
 
     # WHEN
     yao_ownerunit.settle_owner()
 
     # THEN
-    # print(f"{str(type(concept))=}")
-    # print(f"{len(concept_dict)=}")
+    # print(f"{str(type(plan))=}")
+    # print(f"{len(plan_dict)=}")
     laundry_str = "laundry monday"
     casa_rope = yao_ownerunit.make_l1_rope("casa")
     cleaning_rope = yao_ownerunit.make_rope(casa_rope, "cleaning")
     laundry_rope = yao_ownerunit.make_rope(cleaning_rope, laundry_str)
 
-    # for concept in concept_dict:
+    # for plan in plan_dict:
     #     assert (
-    #         str(type(concept)).find(".concept.ConceptUnit'>") > 0
-    #         or str(type(concept)).find(".concept.ConceptUnit'>") > 0
+    #         str(type(plan)).find(".plan.PlanUnit'>") > 0
+    #         or str(type(plan)).find(".plan.PlanUnit'>") > 0
     #     )
-    #     # print(f"{concept.concept_label=}")
-    #     if concept.concept_label == laundry_str:
-    #         for reason in concept.reasonunits.values():
-    #             print(f"{concept.concept_label=} {reason.rcontext=}")  # {reason.premises=}")
-    # assert concept._active is False
-    assert yao_ownerunit._concept_dict.get(laundry_rope)._active is False
+    #     # print(f"{plan.plan_label=}")
+    #     if plan.plan_label == laundry_str:
+    #         for reason in plan.reasonunits.values():
+    #             print(f"{plan.plan_label=} {reason.rcontext=}")  # {reason.premises=}")
+    # assert plan._active is False
+    assert yao_ownerunit._plan_dict.get(laundry_rope)._active is False
 
     # WHEN
     wk_str = "wkdays"
@@ -354,7 +354,7 @@ def test_OwnerUnit_settle_owner_CorrectlySetsData_ownerunit_v001():
     yao_ownerunit.settle_owner()
 
     # THEN
-    assert yao_ownerunit._concept_dict.get(laundry_rope)._active is False
+    assert yao_ownerunit._plan_dict.get(laundry_rope)._active is False
 
 
 def test_OwnerUnit_settle_owner_OptionWeekdaysReturnsObj_ownerunit_v001():
@@ -413,12 +413,12 @@ def test_OwnerUnit_settle_owner_OptionWeekdaysReturnsObj_ownerunit_v001():
     }
     mt_reasonunit = reasonunit_shop(wk_rope, premises=mt_premises)
     mt_reasonheir = reasonheir_shop(wk_rope, premises=mt_premises, _status=False)
-    x_conceptroot = yao_ownerunit.get_concept_obj(to_rope(yao_ownerunit.belief_label))
-    x_conceptroot.set_reasonunit(reason=mt_reasonunit)
+    x_planroot = yao_ownerunit.get_plan_obj(to_rope(yao_ownerunit.belief_label))
+    x_planroot.set_reasonunit(reason=mt_reasonunit)
     # print(f"{yao_ownerunit.reasonunits[wk_rope].rcontext=}")
     # print(f"{yao_ownerunit.reasonunits[wk_rope].premises[mon_rope].pstate=}")
     # print(f"{yao_ownerunit.reasonunits[wk_rope].premises[tue_rope].pstate=}")
-    wk_reasonunit = x_conceptroot.reasonunits[wk_rope]
+    wk_reasonunit = x_planroot.reasonunits[wk_rope]
     print(f"{wk_reasonunit.premises=}")
     premise_mon = wk_reasonunit.premises.get(mon_rope)
     premise_tue = wk_reasonunit.premises.get(tue_rope)
@@ -429,10 +429,10 @@ def test_OwnerUnit_settle_owner_OptionWeekdaysReturnsObj_ownerunit_v001():
     assert wk_reasonunit == mt_reasonunit
 
     # WHEN
-    concept_dict = yao_ownerunit.get_concept_dict()
+    plan_dict = yao_ownerunit.get_plan_dict()
 
     # THEN
-    gen_wk_reasonheir = x_conceptroot.get_reasonheir(wk_rope)
+    gen_wk_reasonheir = x_planroot.get_reasonheir(wk_rope)
     gen_mon_premise = gen_wk_reasonheir.premises.get(mon_rope)
     assert gen_mon_premise._status == mt_reasonheir.premises.get(mon_rope)._status
     assert gen_mon_premise == mt_reasonheir.premises.get(mon_rope)
@@ -443,28 +443,28 @@ def test_OwnerUnit_settle_owner_OptionWeekdaysReturnsObj_ownerunit_v001():
     casa_rope = yao_ownerunit.make_l1_rope(casa_str)
     bird_str = "say hi to birds"
     bird_rope = yao_ownerunit.make_rope(casa_rope, bird_str)
-    assert from_list_get_active(bird_rope, concept_dict) is False
+    assert from_list_get_active(bird_rope, plan_dict) is False
 
     # yao_ownerunit.add_fact(fcontext=wk_rope, fstate=mon_rope)
-    # concept_dict = yao_ownerunit.get_concept_dict()
-    # casa_concept = x_conceptroot._kids[casa_str]
-    # twee_concept = casa_concept._kids[bird_str]
-    # print(f"{len(x_conceptroot._reasonheirs)=}")
-    # print(f"{len(casa_concept._reasonheirs)=}")
-    # print(f"{len(twee_concept._reasonheirs)=}")
+    # plan_dict = yao_ownerunit.get_plan_dict()
+    # casa_plan = x_planroot._kids[casa_str]
+    # twee_plan = casa_plan._kids[bird_str]
+    # print(f"{len(x_planroot._reasonheirs)=}")
+    # print(f"{len(casa_plan._reasonheirs)=}")
+    # print(f"{len(twee_plan._reasonheirs)=}")
 
-    # assert YR.get_active(rope=bird_concept, concept_dict=concept_dict) is True
+    # assert YR.get_active(rope=bird_plan, plan_dict=plan_dict) is True
 
     # yao_ownerunit.add_fact(fcontext=f"{yao_ownerunit.belief_label},wkdays", fstate=f"{yao_ownerunit.belief_label},wkdays,Tuesday")
-    # concept_dict = yao_ownerunit.get_concept_dict()
-    # assert YR.get_active(rope=bird_concept, concept_dict=concept_dict) is True
+    # plan_dict = yao_ownerunit.get_plan_dict()
+    # assert YR.get_active(rope=bird_plan, plan_dict=plan_dict) is True
 
     # yao_ownerunit.add_fact(fcontext=f"{yao_ownerunit.belief_label},wkdays", fstate=f"{yao_ownerunit.belief_label},wkdays,Wednesday")
-    # concept_dict = yao_ownerunit.get_concept_dict()
-    # assert YR.get_active(rope=bird_concept, concept_dict=concept_dict) is False
+    # plan_dict = yao_ownerunit.get_plan_dict()
+    # assert YR.get_active(rope=bird_plan, plan_dict=plan_dict) is False
 
 
-def test_OwnerUnit_settle_owner_CorrectlySetsConceptUnitsActiveWithEvery6WeeksReason_ownerunit_v001():
+def test_OwnerUnit_settle_owner_CorrectlySetsPlanUnitsActiveWithEvery6WeeksReason_ownerunit_v001():
     # ESTABLISH
     yao_ownerunit = ownerunit_v001()
     day_str = "day_hr"
@@ -483,38 +483,38 @@ def test_OwnerUnit_settle_owner_CorrectlySetsConceptUnitsActiveWithEvery6WeeksRe
     pdivisor = None
     popen = None
     pnigh = None
-    print(f"{len(yao_ownerunit._concept_dict)=}")
+    print(f"{len(yao_ownerunit._plan_dict)=}")
 
     casa_rope = yao_ownerunit.make_l1_rope("casa")
     cleaning_rope = yao_ownerunit.make_rope(casa_rope, "cleaning")
     clean_couch_rope = yao_ownerunit.make_rope(
         cleaning_rope, "clean sheets couch blankets"
     )
-    clean_sheet_concept = yao_ownerunit.get_concept_obj(clean_couch_rope)
-    # print(f"{clean_sheet_concept.reasonunits.values()=}")
-    ced_wk_reason = clean_sheet_concept.reasonunits.get(ced_wk_rcontext)
+    clean_sheet_plan = yao_ownerunit.get_plan_obj(clean_couch_rope)
+    # print(f"{clean_sheet_plan.reasonunits.values()=}")
+    ced_wk_reason = clean_sheet_plan.reasonunits.get(ced_wk_rcontext)
     ced_wk_premise = ced_wk_reason.premises.get(ced_wk_rcontext)
     print(
-        f"{clean_sheet_concept.concept_label=} {ced_wk_reason.rcontext=} {ced_wk_premise.pstate=}"
+        f"{clean_sheet_plan.plan_label=} {ced_wk_reason.rcontext=} {ced_wk_premise.pstate=}"
     )
-    # print(f"{clean_sheet_concept.concept_label=} {ced_wk_reason.rcontext=} {premise_x=}")
+    # print(f"{clean_sheet_plan.plan_label=} {ced_wk_reason.rcontext=} {premise_x=}")
     pdivisor = ced_wk_premise.pdivisor
     popen = ced_wk_premise.popen
     pnigh = ced_wk_premise.pnigh
-    # print(f"{concept.reasonunits=}")
-    assert clean_sheet_concept._active is False
+    # print(f"{plan.reasonunits=}")
+    assert clean_sheet_plan._active is False
 
-    # for concept in concept_dict:
-    #     # print(f"{concept.parent_rope=}")
-    #     if concept.concept_label == "clean sheets couch blankets":
-    #         print(f"{concept.get_concept_rope()=}")
+    # for plan in plan_dict:
+    #     # print(f"{plan.parent_rope=}")
+    #     if plan.plan_label == "clean sheets couch blankets":
+    #         print(f"{plan.get_plan_rope()=}")
 
     assert pdivisor == 6
     assert popen == 1
     print(
-        f"There exists a concept with a reason_rcontext {ced_wk_rcontext} that also has lemmet div =6 and popen/pnigh =1"
+        f"There exists a plan with a reason_rcontext {ced_wk_rcontext} that also has lemmet div =6 and popen/pnigh =1"
     )
-    # print(f"{len(concept_dict)=}")
+    # print(f"{len(plan_dict)=}")
     ced_wk_popen = 6001
 
     # WHEN
@@ -530,7 +530,7 @@ def test_OwnerUnit_settle_owner_CorrectlySetsConceptUnitsActiveWithEvery6WeeksRe
     print(
         f"Nation set and also fact set: {ced_wk_rcontext=} with {ced_wk_popen=} and {ced_wk_popen=}"
     )
-    print(f"{yao_ownerunit.conceptroot.factunits=}")
+    print(f"{yao_ownerunit.planroot.factunits=}")
     yao_ownerunit.settle_owner()
 
     # THEN
@@ -540,14 +540,14 @@ def test_OwnerUnit_settle_owner_CorrectlySetsConceptUnitsActiveWithEvery6WeeksRe
     cleaning_rope = yao_ownerunit.make_rope(casa_rope, "cleaning")
     clean_couch_str = "clean sheets couch blankets"
     clean_couch_rope = yao_ownerunit.make_rope(cleaning_rope, clean_couch_str)
-    clean_couch_concept = yao_ownerunit.get_concept_obj(rope=clean_couch_rope)
-    wk_reason = clean_couch_concept.reasonunits.get(wk_rope)
+    clean_couch_plan = yao_ownerunit.get_plan_obj(rope=clean_couch_rope)
+    wk_reason = clean_couch_plan.reasonunits.get(wk_rope)
     wk_premise = wk_reason.premises.get(wk_rope)
-    print(f"{clean_couch_concept.concept_label=} {wk_reason.rcontext=} {wk_premise=}")
+    print(f"{clean_couch_plan.plan_label=} {wk_reason.rcontext=} {wk_premise=}")
     assert wk_premise.pdivisor == 6 and wk_premise.popen == 1
 
 
-def test_OwnerUnit_settle_owner_EveryConceptHasActiveStatus_ownerunit_v001():
+def test_OwnerUnit_settle_owner_EveryPlanHasActiveStatus_ownerunit_v001():
     # ESTABLISH
     yao_ownerunit = ownerunit_v001()
 
@@ -555,36 +555,36 @@ def test_OwnerUnit_settle_owner_EveryConceptHasActiveStatus_ownerunit_v001():
     yao_ownerunit.settle_owner()
 
     # THEN
-    print(f"{len(yao_ownerunit._concept_dict)=}")
-    # first_concept_kid_count = 0
-    # first_concept_kid_none_count = 0
-    # first_concept_kid_true_count = 0
-    # first_concept_kid_false_count = 0
-    # for concept in concept_list:
-    #     if str(type(concept)).find(".concept.ConceptUnit'>") > 0:
-    #         first_concept_kid_count += 1
-    #         if concept._active is None:
-    #             first_concept_kid_none_count += 1
-    #         elif concept._active:
-    #             first_concept_kid_true_count += 1
-    #         elif concept._active is False:
-    #             first_concept_kid_false_count += 1
+    print(f"{len(yao_ownerunit._plan_dict)=}")
+    # first_plan_kid_count = 0
+    # first_plan_kid_none_count = 0
+    # first_plan_kid_true_count = 0
+    # first_plan_kid_false_count = 0
+    # for plan in plan_list:
+    #     if str(type(plan)).find(".plan.PlanUnit'>") > 0:
+    #         first_plan_kid_count += 1
+    #         if plan._active is None:
+    #             first_plan_kid_none_count += 1
+    #         elif plan._active:
+    #             first_plan_kid_true_count += 1
+    #         elif plan._active is False:
+    #             first_plan_kid_false_count += 1
 
-    # print(f"{first_concept_kid_count=}")
-    # print(f"{first_concept_kid_none_count=}")
-    # print(f"{first_concept_kid_true_count=}")
-    # print(f"{first_concept_kid_false_count=}")
+    # print(f"{first_plan_kid_count=}")
+    # print(f"{first_plan_kid_none_count=}")
+    # print(f"{first_plan_kid_true_count=}")
+    # print(f"{first_plan_kid_false_count=}")
 
-    # concept_kid_count = 0
-    # for concept in concept_list_without_conceptroot:
-    #     concept_kid_count += 1
-    #     print(f"{concept.concept_label=} {concept_kid_count=}")
-    #     assert concept._active is not None
-    #     assert concept._active in (True, False)
-    # assert concept_kid_count == len(concept_list_without_conceptroot)
+    # plan_kid_count = 0
+    # for plan in plan_list_without_planroot:
+    #     plan_kid_count += 1
+    #     print(f"{plan.plan_label=} {plan_kid_count=}")
+    #     assert plan._active is not None
+    #     assert plan._active in (True, False)
+    # assert plan_kid_count == len(plan_list_without_planroot)
 
-    assert len(yao_ownerunit._concept_dict) == sum(
-        concept._active is not None for concept in yao_ownerunit._concept_dict.values()
+    assert len(yao_ownerunit._plan_dict) == sum(
+        plan._active is not None for plan in yao_ownerunit._plan_dict.values()
     )
 
 
@@ -614,16 +614,16 @@ def test_OwnerUnit_settle_owner_EveryTwoMonthReturnsObj_ownerunit_v001():
     wkdays_str = "wkdays"
     wkdays_rope = yao_ownerunit.make_l1_rope(wkdays_str)
     yao_ownerunit.add_fact(fcontext=wkdays_rope, fstate=wkdays_rope)
-    concept_dict = yao_ownerunit.get_concept_dict()
-    print(f"{len(concept_dict)=}")
+    plan_dict = yao_ownerunit.get_plan_dict()
+    print(f"{len(plan_dict)=}")
 
     casa_str = "casa"
     casa_rope = yao_ownerunit.make_l1_rope(casa_str)
     clean_str = "cleaning"
     clean_rope = yao_ownerunit.make_rope(casa_rope, clean_str)
-    mat_concept_label = "deep clean play mat"
-    mat_rope = yao_ownerunit.make_rope(clean_rope, mat_concept_label)
-    assert from_list_get_active(mat_rope, concept_dict) is False
+    mat_plan_label = "deep clean play mat"
+    mat_rope = yao_ownerunit.make_rope(clean_rope, mat_plan_label)
+    assert from_list_get_active(mat_rope, plan_dict) is False
 
     yr_month_rcontext = yao_ownerunit.make_l1_rope("yr_month")
     print(f"{yr_month_rcontext=}, {yr_month_rcontext=}")
@@ -637,9 +637,9 @@ def test_OwnerUnit_settle_owner_EveryTwoMonthReturnsObj_ownerunit_v001():
     yao_ownerunit.settle_owner()
 
     # THEN
-    print(f"{len(concept_dict)=}")
-    print(f"{len(yao_ownerunit.conceptroot.factunits)=}")
-    assert from_list_get_active(mat_rope, yao_ownerunit._concept_dict)
+    print(f"{len(plan_dict)=}")
+    print(f"{len(yao_ownerunit.planroot.factunits)=}")
+    assert from_list_get_active(mat_rope, yao_ownerunit._plan_dict)
 
 
 def test_OwnerUnit_settle_owner_CorrectlySetsEmpty_sum_healerlink_share():
@@ -665,42 +665,42 @@ def test_OwnerUnit_settle_owner_CorrectlySets_sum_healerlink_share(graphics_bool
     usa_rope = sue_ownerunit.make_rope(nation_rope, "USA")
     oregon_rope = sue_ownerunit.make_rope(usa_rope, "Oregon")
     sue_healerlink = healerlink_shop({"Sue"})
-    sue_ownerunit.edit_concept_attr(
+    sue_ownerunit.edit_plan_attr(
         oregon_rope, problem_bool=True, healerlink=sue_healerlink
     )
-    oregon_concept = sue_ownerunit.get_concept_obj(oregon_rope)
-    print(f"{oregon_concept._fund_ratio=}")
+    oregon_plan = sue_ownerunit.get_plan_obj(oregon_rope)
+    print(f"{oregon_plan._fund_ratio=}")
     assert sue_ownerunit._sum_healerlink_share == 0
-    assert oregon_concept._healerlink_ratio == 0
+    assert oregon_plan._healerlink_ratio == 0
 
     # WHEN
     sue_ownerunit.settle_owner()
     # THEN
     assert sue_ownerunit._sum_healerlink_share == 0.038461539 * default_fund_pool()
-    assert oregon_concept._healerlink_ratio == 1
+    assert oregon_plan._healerlink_ratio == 1
 
     # WHEN
     wk_rope = sue_ownerunit.make_l1_rope("wkdays")
-    sue_ownerunit.edit_concept_attr(wk_rope, problem_bool=True)
+    sue_ownerunit.edit_plan_attr(wk_rope, problem_bool=True)
     mon_rope = sue_ownerunit.make_rope(wk_rope, "Monday")
-    sue_ownerunit.edit_concept_attr(mon_rope, healerlink=sue_healerlink)
-    mon_concept = sue_ownerunit.get_concept_obj(mon_rope)
-    # print(f"{mon_concept.problem_bool=} {mon_concept._fund_ratio=}")
+    sue_ownerunit.edit_plan_attr(mon_rope, healerlink=sue_healerlink)
+    mon_plan = sue_ownerunit.get_plan_obj(mon_rope)
+    # print(f"{mon_plan.problem_bool=} {mon_plan._fund_ratio=}")
     sue_ownerunit.settle_owner()
     # THEN
     assert sue_ownerunit._sum_healerlink_share != 0.038461539 * default_fund_pool()
     assert sue_ownerunit._sum_healerlink_share == 0.06923077 * default_fund_pool()
-    assert oregon_concept._healerlink_ratio == 0.5555555571604938
-    assert mon_concept._healerlink_ratio == 0.4444444428395062
+    assert oregon_plan._healerlink_ratio == 0.5555555571604938
+    assert mon_plan._healerlink_ratio == 0.4444444428395062
 
     # WHEN
     tue_rope = sue_ownerunit.make_rope(wk_rope, "Tuesday")
-    sue_ownerunit.edit_concept_attr(tue_rope, healerlink=sue_healerlink)
-    tue_concept = sue_ownerunit.get_concept_obj(tue_rope)
-    # print(f"{tue_concept.problem_bool=} {tue_concept._fund_ratio=}")
+    sue_ownerunit.edit_plan_attr(tue_rope, healerlink=sue_healerlink)
+    tue_plan = sue_ownerunit.get_plan_obj(tue_rope)
+    # print(f"{tue_plan.problem_bool=} {tue_plan._fund_ratio=}")
     # sat_rope = sue_ownerunit.make_rope(wk_rope, "Saturday")
-    # sat_concept = sue_ownerunit.get_concept_obj(sat_rope)
-    # print(f"{sat_concept.problem_bool=} {sat_concept._fund_ratio=}")
+    # sat_plan = sue_ownerunit.get_plan_obj(sat_rope)
+    # print(f"{sat_plan.problem_bool=} {sat_plan._fund_ratio=}")
     sue_ownerunit.settle_owner()
 
     # THEN
@@ -708,23 +708,21 @@ def test_OwnerUnit_settle_owner_CorrectlySets_sum_healerlink_share(graphics_bool
         sue_ownerunit._sum_healerlink_share != 0.06923076923076923 * default_fund_pool()
     )
     assert sue_ownerunit._sum_healerlink_share == 0.100000001 * default_fund_pool()
-    assert oregon_concept._healerlink_ratio == 0.38461538615384616
-    assert mon_concept._healerlink_ratio == 0.3076923069230769
-    assert tue_concept._healerlink_ratio == 0.3076923069230769
+    assert oregon_plan._healerlink_ratio == 0.38461538615384616
+    assert mon_plan._healerlink_ratio == 0.3076923069230769
+    assert tue_plan._healerlink_ratio == 0.3076923069230769
 
     # WHEN
-    sue_ownerunit.edit_concept_attr(wk_rope, healerlink=sue_healerlink)
-    wk_concept = sue_ownerunit.get_concept_obj(wk_rope)
-    print(
-        f"{wk_concept.concept_label=} {wk_concept.problem_bool=} {wk_concept._fund_ratio=}"
-    )
+    sue_ownerunit.edit_plan_attr(wk_rope, healerlink=sue_healerlink)
+    wk_plan = sue_ownerunit.get_plan_obj(wk_rope)
+    print(f"{wk_plan.plan_label=} {wk_plan.problem_bool=} {wk_plan._fund_ratio=}")
     sue_ownerunit.settle_owner()
     # THEN
-    display_concepttree(sue_ownerunit, "Keep", graphics_bool)
+    display_plantree(sue_ownerunit, "Keep", graphics_bool)
     assert sue_ownerunit._sum_healerlink_share == 0
-    assert oregon_concept._healerlink_ratio == 0
-    assert mon_concept._healerlink_ratio == 0
-    assert tue_concept._healerlink_ratio == 0
+    assert oregon_plan._healerlink_ratio == 0
+    assert mon_plan._healerlink_ratio == 0
+    assert tue_plan._healerlink_ratio == 0
 
 
 def test_OwnerUnit_settle_owner_CorrectlySets_keep_dict_v1(graphics_bool):
@@ -736,7 +734,7 @@ def test_OwnerUnit_settle_owner_CorrectlySets_keep_dict_v1(graphics_bool):
     usa_rope = sue_ownerunit.make_rope(nation_rope, "USA")
     oregon_rope = sue_ownerunit.make_rope(usa_rope, "Oregon")
     sue_healerlink = healerlink_shop({"Sue"})
-    sue_ownerunit.edit_concept_attr(
+    sue_ownerunit.edit_plan_attr(
         oregon_rope, problem_bool=True, healerlink=sue_healerlink
     )
     assert len(sue_ownerunit._keep_dict) == 0
@@ -750,11 +748,11 @@ def test_OwnerUnit_settle_owner_CorrectlySets_keep_dict_v1(graphics_bool):
 
     # WHEN
     wk_rope = sue_ownerunit.make_l1_rope("wkdays")
-    sue_ownerunit.edit_concept_attr(wk_rope, problem_bool=True)
+    sue_ownerunit.edit_plan_attr(wk_rope, problem_bool=True)
     mon_rope = sue_ownerunit.make_rope(wk_rope, "Monday")
-    sue_ownerunit.edit_concept_attr(mon_rope, healerlink=sue_healerlink)
-    # mon_concept = sue_ownerunit.get_concept_obj(mon_rope)
-    # print(f"{mon_concept.problem_bool=} {mon_concept._fund_ratio=}")
+    sue_ownerunit.edit_plan_attr(mon_rope, healerlink=sue_healerlink)
+    # mon_plan = sue_ownerunit.get_plan_obj(mon_rope)
+    # print(f"{mon_plan.problem_bool=} {mon_plan._fund_ratio=}")
     sue_ownerunit.settle_owner()
     # THEN
     assert len(sue_ownerunit._keep_dict) == 2
@@ -763,12 +761,12 @@ def test_OwnerUnit_settle_owner_CorrectlySets_keep_dict_v1(graphics_bool):
 
     # WHEN
     tue_rope = sue_ownerunit.make_rope(wk_rope, "Tuesday")
-    sue_ownerunit.edit_concept_attr(tue_rope, healerlink=sue_healerlink)
-    # tue_concept = sue_ownerunit.get_concept_obj(tue_rope)
-    # print(f"{tue_concept.problem_bool=} {tue_concept._fund_ratio=}")
+    sue_ownerunit.edit_plan_attr(tue_rope, healerlink=sue_healerlink)
+    # tue_plan = sue_ownerunit.get_plan_obj(tue_rope)
+    # print(f"{tue_plan.problem_bool=} {tue_plan._fund_ratio=}")
     # sat_rope = sue_ownerunit.make_rope(wk_rope, "Saturday")
-    # sat_concept = sue_ownerunit.get_concept_obj(sat_rope)
-    # print(f"{sat_concept.problem_bool=} {sat_concept._fund_ratio=}")
+    # sat_plan = sue_ownerunit.get_plan_obj(sat_rope)
+    # print(f"{sat_plan.problem_bool=} {sat_plan._fund_ratio=}")
     sue_ownerunit.settle_owner()
 
     # THEN
@@ -778,14 +776,12 @@ def test_OwnerUnit_settle_owner_CorrectlySets_keep_dict_v1(graphics_bool):
     assert sue_ownerunit._keep_dict.get(tue_rope) is not None
 
     # WHEN
-    sue_ownerunit.edit_concept_attr(wk_rope, healerlink=sue_healerlink)
-    wk_concept = sue_ownerunit.get_concept_obj(wk_rope)
-    print(
-        f"{wk_concept.concept_label=} {wk_concept.problem_bool=} {wk_concept._fund_ratio=}"
-    )
+    sue_ownerunit.edit_plan_attr(wk_rope, healerlink=sue_healerlink)
+    wk_plan = sue_ownerunit.get_plan_obj(wk_rope)
+    print(f"{wk_plan.plan_label=} {wk_plan.problem_bool=} {wk_plan._fund_ratio=}")
     sue_ownerunit.settle_owner()
     # THEN
-    display_concepttree(sue_ownerunit, "Keep", graphics_bool)
+    display_plantree(sue_ownerunit, "Keep", graphics_bool)
     assert len(sue_ownerunit._keep_dict) == 0
     assert sue_ownerunit._keep_dict == {}
 
@@ -809,15 +805,13 @@ def test_OwnerUnit_settle_owner_CorrectlySets_healers_dict():
     usa_rope = sue_ownerunit.make_rope(nation_rope, "USA")
     oregon_rope = sue_ownerunit.make_rope(usa_rope, "Oregon")
     sue_healerlink = healerlink_shop({sue_str})
-    sue_ownerunit.edit_concept_attr(
+    sue_ownerunit.edit_plan_attr(
         oregon_rope, problem_bool=True, healerlink=sue_healerlink
     )
 
     wk_rope = sue_ownerunit.make_l1_rope("wkdays")
     bob_healerlink = healerlink_shop({bob_str})
-    sue_ownerunit.edit_concept_attr(
-        wk_rope, problem_bool=True, healerlink=bob_healerlink
-    )
+    sue_ownerunit.edit_plan_attr(wk_rope, problem_bool=True, healerlink=bob_healerlink)
     assert sue_ownerunit._healers_dict == {}
 
     # WHEN
@@ -825,10 +819,10 @@ def test_OwnerUnit_settle_owner_CorrectlySets_healers_dict():
 
     # THEN
     assert len(sue_ownerunit._healers_dict) == 2
-    wk_concept = sue_ownerunit.get_concept_obj(wk_rope)
-    assert sue_ownerunit._healers_dict.get(bob_str) == {wk_rope: wk_concept}
-    oregon_concept = sue_ownerunit.get_concept_obj(oregon_rope)
-    assert sue_ownerunit._healers_dict.get(sue_str) == {oregon_rope: oregon_concept}
+    wk_plan = sue_ownerunit.get_plan_obj(wk_rope)
+    assert sue_ownerunit._healers_dict.get(bob_str) == {wk_rope: wk_plan}
+    oregon_plan = sue_ownerunit.get_plan_obj(oregon_rope)
+    assert sue_ownerunit._healers_dict.get(sue_str) == {oregon_rope: oregon_plan}
 
 
 def test_OwnerUnit_settle_owner_CorrectlySets_keeps_buildable_True():
@@ -850,15 +844,13 @@ def test_OwnerUnit_settle_owner_CorrectlySets_keeps_buildable_True():
     usa_rope = sue_ownerunit.make_rope(nation_rope, "USA")
     oregon_rope = sue_ownerunit.make_rope(usa_rope, "Oregon")
     sue_healerlink = healerlink_shop({sue_str})
-    sue_ownerunit.edit_concept_attr(
+    sue_ownerunit.edit_plan_attr(
         oregon_rope, problem_bool=True, healerlink=sue_healerlink
     )
 
     wk_rope = sue_ownerunit.make_l1_rope("wkdays")
     bob_healerlink = healerlink_shop({bob_str})
-    sue_ownerunit.edit_concept_attr(
-        wk_rope, problem_bool=True, healerlink=bob_healerlink
-    )
+    sue_ownerunit.edit_plan_attr(wk_rope, problem_bool=True, healerlink=bob_healerlink)
 
     # WHEN
     sue_ownerunit.settle_owner()
@@ -886,9 +878,9 @@ def test_OwnerUnit_settle_owner_CorrectlySets_keeps_buildable_False():
     oregon_rope = sue_ownerunit.make_rope(usa_rope, "Oregon")
     bend_str = "Be/nd"
     bend_rope = sue_ownerunit.make_rope(oregon_rope, bend_str)
-    sue_ownerunit.set_concept(conceptunit_shop(bend_str), oregon_rope)
+    sue_ownerunit.set_plan(planunit_shop(bend_str), oregon_rope)
     sue_healerlink = healerlink_shop({sue_str})
-    sue_ownerunit.edit_concept_attr(
+    sue_ownerunit.edit_plan_attr(
         bend_rope, problem_bool=True, healerlink=sue_healerlink
     )
     assert sue_ownerunit._keeps_buildable

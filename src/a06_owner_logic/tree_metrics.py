@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from src.a00_data_toolbox.dict_toolbox import get_0_if_None, get_empty_dict_if_None
 from src.a01_term_logic.term import GroupTitle
 from src.a03_group_logic.group import AwardLink
-from src.a04_reason_logic.reason_concept import ReasonUnit, RopeTerm
+from src.a04_reason_logic.reason_plan import ReasonUnit, RopeTerm
 
 
 @dataclass
@@ -13,8 +13,8 @@ class TreeMetrics:
     awardlinks_metrics: dict[GroupTitle, AwardLink] = None
     uid_max: int = None
     uid_dict: dict[int, int] = None
-    all_concept_uids_are_unique: bool = None
-    last_evaluated_task_concept_rope: RopeTerm = None
+    all_plan_uids_are_unique: bool = None
+    last_evaluated_task_plan_rope: RopeTerm = None
 
     def evaluate_label(
         self,
@@ -23,18 +23,18 @@ class TreeMetrics:
         awardlinks: dict[GroupTitle, AwardLink],
         uid: int,
         task: bool,
-        concept_rope: RopeTerm,
+        plan_rope: RopeTerm,
     ):
         self.label_count += 1
-        self.evaluate_task(task=task, concept_rope=concept_rope)
+        self.evaluate_task(task=task, plan_rope=plan_rope)
         self.evaluate_level(level=level)
         self.evaluate_reasonunits(reasons=reasons)
         self.evaluate_awardlinks(awardlinks=awardlinks)
         self.evaluate_uid_max(uid=uid)
 
-    def evaluate_task(self, task: bool, concept_rope: RopeTerm):
+    def evaluate_task(self, task: bool, plan_rope: RopeTerm):
         if task:
-            self.last_evaluated_task_concept_rope = concept_rope
+            self.last_evaluated_task_plan_rope = plan_rope
 
     def evaluate_level(self, level):
         if self.level_count.get(level) is None:
@@ -65,7 +65,7 @@ class TreeMetrics:
             self.uid_dict[uid] = 1
         else:
             self.uid_dict[uid] += 1
-            self.all_concept_uids_are_unique = False
+            self.all_plan_uids_are_unique = False
 
 
 def treemetrics_shop(
@@ -84,6 +84,6 @@ def treemetrics_shop(
         uid_dict=get_empty_dict_if_None(uid_dict),
         uid_max=get_0_if_None(uid_max),
     )
-    if x_treemetrics.all_concept_uids_are_unique is None:
-        x_treemetrics.all_concept_uids_are_unique = True
+    if x_treemetrics.all_plan_uids_are_unique is None:
+        x_treemetrics.all_plan_uids_are_unique = True
     return x_treemetrics

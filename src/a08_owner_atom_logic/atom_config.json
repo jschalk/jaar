@@ -72,7 +72,7 @@
             "atom_order": 9
         }
     },
-    "owner_concept_awardlink": {
+    "owner_plan_awardlink": {
         "DELETE": {
             "atom_order": 21
         },
@@ -86,7 +86,7 @@
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             },
-            "concept_rope": {
+            "plan_rope": {
                 "class_type": "RopeTerm",
                 "column_order": 0,
                 "nesting_order": 0,
@@ -112,7 +112,7 @@
             "atom_order": 12
         }
     },
-    "owner_concept_factunit": {
+    "owner_plan_factunit": {
         "DELETE": {
             "atom_order": 18
         },
@@ -120,7 +120,7 @@
             "atom_order": 6
         },
         "jkeys": {
-            "concept_rope": {
+            "plan_rope": {
                 "class_type": "RopeTerm",
                 "column_order": 0,
                 "nesting_order": 0,
@@ -157,7 +157,7 @@
             "atom_order": 13
         }
     },
-    "owner_concept_healerlink": {
+    "owner_plan_healerlink": {
         "DELETE": {
             "atom_order": 20
         },
@@ -165,7 +165,7 @@
             "atom_order": 5
         },
         "jkeys": {
-            "concept_rope": {
+            "plan_rope": {
                 "class_type": "RopeTerm",
                 "column_order": 0,
                 "nesting_order": 0,
@@ -183,7 +183,7 @@
             "normal_table_name": "healerlink"
         }
     },
-    "owner_concept_laborlink": {
+    "owner_plan_laborlink": {
         "DELETE": {
             "atom_order": 19
         },
@@ -191,7 +191,7 @@
             "atom_order": 4
         },
         "jkeys": {
-            "concept_rope": {
+            "plan_rope": {
                 "class_type": "RopeTerm",
                 "column_order": 0,
                 "nesting_order": 0,
@@ -209,7 +209,7 @@
             "normal_table_name": "laborlink"
         }
     },
-    "owner_concept_reason_premiseunit": {
+    "owner_plan_reason_premiseunit": {
         "DELETE": {
             "atom_order": 16
         },
@@ -217,7 +217,7 @@
             "atom_order": 8
         },
         "jkeys": {
-            "concept_rope": {
+            "plan_rope": {
                 "class_type": "RopeTerm",
                 "column_order": 0,
                 "nesting_order": 0,
@@ -260,7 +260,7 @@
             "atom_order": 14
         }
     },
-    "owner_concept_reasonunit": {
+    "owner_plan_reasonunit": {
         "DELETE": {
             "atom_order": 17
         },
@@ -268,7 +268,7 @@
             "atom_order": 7
         },
         "jkeys": {
-            "concept_rope": {
+            "plan_rope": {
                 "class_type": "RopeTerm",
                 "column_order": 0,
                 "nesting_order": 0,
@@ -282,7 +282,7 @@
             }
         },
         "jvalues": {
-            "rconcept_active_requisite": {
+            "rplan_active_requisite": {
                 "class_type": "bool",
                 "column_order": 2,
                 "sqlite_datatype": "INTEGER"
@@ -295,7 +295,7 @@
             "atom_order": 15
         }
     },
-    "owner_conceptunit": {
+    "owner_planunit": {
         "DELETE": {
             "atom_order": 22
         },
@@ -303,7 +303,7 @@
             "atom_order": 2
         },
         "jkeys": {
-            "concept_rope": {
+            "plan_rope": {
                 "class_type": "RopeTerm",
                 "column_order": 0,
                 "nesting_order": 0,
@@ -368,7 +368,7 @@
             }
         },
         "normal_specs": {
-            "normal_table_name": "concept"
+            "normal_table_name": "plan"
         },
         "UPDATE": {
             "atom_order": 11

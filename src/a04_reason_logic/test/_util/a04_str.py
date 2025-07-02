@@ -54,9 +54,9 @@ def pstate_str() -> str:
     return "pstate"
 
 
-def rconcept_active_requisite_str() -> str:
-    return "rconcept_active_requisite"
-
-
 def rcontext_str() -> str:
     return "rcontext"
+
+
+def rplan_active_requisite_str() -> str:
+    return "rplan_active_requisite"

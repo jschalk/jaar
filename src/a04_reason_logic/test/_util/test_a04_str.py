@@ -12,8 +12,8 @@ from src.a04_reason_logic.test._util.a04_str import (
     pnigh_str,
     popen_str,
     pstate_str,
-    rconcept_active_requisite_str,
     rcontext_str,
+    rplan_active_requisite_str,
 )
 
 
@@ -31,5 +31,5 @@ def test_str_functions_ReturnsObj():
     assert pnigh_str() == "pnigh"
     assert popen_str() == "popen"
     assert pstate_str() == "pstate"
-    assert rconcept_active_requisite_str() == "rconcept_active_requisite"
+    assert rplan_active_requisite_str() == "rplan_active_requisite"
     assert rcontext_str() == "rcontext"

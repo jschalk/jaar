@@ -4,9 +4,9 @@ from src.a06_owner_logic.test._util.a06_str import (
     acct_debt_points_str,
     acct_name_str,
     belief_label_str,
-    concept_rope_str,
     labor_title_str,
     owner_name_str,
+    plan_rope_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a15_belief_logic.test._util.a15_str import amount_str
@@ -18,7 +18,7 @@ from src.a17_idea_logic.idea_db_tool import (
 )
 
 
-def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_owner_concept_laborlink():
+def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_owner_plan_laborlink():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
@@ -26,13 +26,13 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_owner_concept_laborl
             event_int_str(),
             face_name_str(),
             belief_label_str(),
-            concept_rope_str(),
+            plan_rope_str(),
             labor_title_str(),
             owner_name_str(),
             acct_name_str(),
             amount_str(),
         ]
-        plnlabo_cat = "owner_concept_laborlink"
+        plnlabo_cat = "owner_plan_laborlink"
         src_table = f"{idea_number}_raw"
         dst_table = f"{plnlabo_cat}_raw"
         idea_config = get_idea_config_dict()
@@ -55,12 +55,12 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_owner_concept_laborl
 
         # THEN
         columns_str = (
-            "event_int, face_name, belief_label, owner_name, concept_rope, labor_title"
+            "event_int, face_name, belief_label, owner_name, plan_rope, labor_title"
         )
         expected_sqlstr = f"""INSERT INTO {plnlabo_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
-WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND belief_label IS NOT NULL AND owner_name IS NOT NULL AND concept_rope IS NOT NULL AND labor_title IS NOT NULL
+WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND belief_label IS NOT NULL AND owner_name IS NOT NULL AND plan_rope IS NOT NULL AND labor_title IS NOT NULL
 GROUP BY {columns_str}
 ;
 """
@@ -78,7 +78,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_owner_acctunit():
             event_int_str(),
             face_name_str(),
             belief_label_str(),
-            concept_rope_str(),
+            plan_rope_str(),
             labor_title_str(),
             owner_name_str(),
             acct_name_str(),
@@ -128,7 +128,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_owner_acctunit():
             event_int_str(),
             face_name_str(),
             belief_label_str(),
-            concept_rope_str(),
+            plan_rope_str(),
             labor_title_str(),
             owner_name_str(),
             acct_name_str(),

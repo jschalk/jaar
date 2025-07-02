@@ -1,6 +1,6 @@
 from copy import deepcopy as copy_deepcopy
 from src.a01_term_logic.rope import create_rope
-from src.a04_reason_logic.reason_concept import factunit_shop
+from src.a04_reason_logic.reason_plan import factunit_shop
 from src.a06_owner_logic.owner import ownerunit_shop
 from src.a11_bud_logic.cell import (
     CELLNODE_QUOTA_DEFAULT,
@@ -130,8 +130,8 @@ def test_cellunit_shop_ReturnsObj_Scenario2_WithReasonRcontexts():
     casa_rope = sue_owner.make_l1_rope("casa")
     mop_rope = sue_owner.make_rope(casa_rope, "mop")
     clean_fact = clean_factunit()
-    sue_owner.add_concept(clean_factunit().fstate)
-    sue_owner.add_concept(mop_rope, task=True)
+    sue_owner.add_plan(clean_factunit().fstate)
+    sue_owner.add_plan(mop_rope, task=True)
     sue_owner.edit_reason(mop_rope, clean_fact.fcontext, clean_fact.fstate)
 
     # WHEN
@@ -151,8 +151,8 @@ def test_cellunit_shop_ReturnsObj_Scenario3_clear_facts():
     casa_rope = sue_owner.make_l1_rope("casa")
     mop_rope = sue_owner.make_rope(casa_rope, "mop")
     clean_fact = clean_factunit()
-    sue_owner.add_concept(clean_factunit().fstate)
-    sue_owner.add_concept(mop_rope, task=True)
+    sue_owner.add_plan(clean_factunit().fstate)
+    sue_owner.add_plan(mop_rope, task=True)
     sue_owner.edit_reason(mop_rope, clean_fact.fcontext, clean_fact.fstate)
     sue_owner.add_fact(clean_fact.fcontext, clean_fact.fstate)
     assert len(sue_owner.get_factunits_dict()) == 1
@@ -218,11 +218,11 @@ def test_CellUnit_eval_ownerevent_SetsAttr_Scenario1():
     casa_rope = yao_owner.make_l1_rope("casa")
     mop_rope = yao_owner.make_rope(casa_rope, "mop")
     clean_fact = clean_factunit()
-    yao_owner.add_concept(clean_fact.fstate)
-    yao_owner.add_concept(mop_rope, task=True)
+    yao_owner.add_plan(clean_fact.fstate)
+    yao_owner.add_plan(mop_rope, task=True)
     yao_owner.edit_reason(mop_rope, clean_fact.fcontext, clean_fact.fstate)
     yao_owner.add_fact(
-        clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
+        clean_fact.fcontext, clean_fact.fstate, create_missing_plans=True
     )
     yao_cellunit = cellunit_shop(yao_str)
     assert yao_cellunit.ownerevent_facts == {}
@@ -239,10 +239,10 @@ def test_CellUnit_eval_ownerevent_SetsAttr_Scenario1():
     expected_adjust_owner = copy_deepcopy(yao_owner)
     expected_adjust_owner.del_fact(clean_fact.fcontext)
     expected_adjust_owner.settle_owner()
-    expected_conceptroot = expected_adjust_owner.conceptroot
-    generated_conceptroot = yao_cellunit.owneradjust.conceptroot
+    expected_planroot = expected_adjust_owner.planroot
+    generated_planroot = yao_cellunit.owneradjust.planroot
     assert yao_cellunit.owneradjust.get_dict() != yao_owner.get_dict()
-    assert generated_conceptroot.get_dict() == expected_conceptroot.get_dict()
+    assert generated_planroot.get_dict() == expected_planroot.get_dict()
     assert yao_cellunit.owneradjust.get_dict() == expected_adjust_owner.get_dict()
 
 
@@ -310,7 +310,7 @@ def test_CellUnit_set_found_facts_from_dict_SetsAttr():
     clean_fact = clean_factunit()
     yao_owner = ownerunit_shop(yao_str, "amy23")
     yao_owner.add_fact(
-        clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
+        clean_fact.fcontext, clean_fact.fstate, create_missing_plans=True
     )
     yao_found_fact_dict = {clean_fact.fcontext: clean_fact.get_dict()}
     yao_cellunit = cellunit_shop(yao_str)
@@ -330,7 +330,7 @@ def test_CellUnit_set_ownerevent_facts_from_dict_SetsAttr():
     clean_fact = clean_factunit()
     yao_owner = ownerunit_shop(yao_str, "amy23")
     yao_owner.add_fact(
-        clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
+        clean_fact.fcontext, clean_fact.fstate, create_missing_plans=True
     )
     yao_found_fact_dict = {clean_fact.fcontext: clean_fact.get_dict()}
     yao_cellunit = cellunit_shop(yao_str)
@@ -350,7 +350,7 @@ def test_CellUnit_set_boss_facts_from_other_facts_SetsAttr_Scenario0_found_facts
     clean_fact = clean_factunit()
     yao_owner = ownerunit_shop(yao_str, "amy23")
     yao_owner.add_fact(
-        clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
+        clean_fact.fcontext, clean_fact.fstate, create_missing_plans=True
     )
     yao_found_fact_dict = {clean_fact.fcontext: clean_fact.get_dict()}
     yao_cellunit = cellunit_shop(yao_str)
@@ -375,7 +375,7 @@ def test_CellUnit_set_boss_facts_from_other_facts_SetsAttr_Scenario1_ownerevent_
     clean_fact = clean_factunit()
     yao_owner = ownerunit_shop(yao_str, "amy23")
     yao_owner.add_fact(
-        clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
+        clean_fact.fcontext, clean_fact.fstate, create_missing_plans=True
     )
     yao_found_fact_dict = {clean_fact.fcontext: clean_fact.get_dict()}
     yao_cellunit = cellunit_shop(yao_str)
@@ -401,7 +401,7 @@ def test_CellUnit_set_boss_facts_from_other_facts_SetsAttr_Scenario2_ownerevent_
     sky_fact = sky_blue_factunit()
     yao_owner = ownerunit_shop(yao_str, "amy23")
     yao_owner.add_fact(
-        clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
+        clean_fact.fcontext, clean_fact.fstate, create_missing_plans=True
     )
     yao_ownerevent_fact_dict = {sky_fact.fcontext: sky_fact.get_dict()}
     yao_found_fact_dict = {clean_fact.fcontext: clean_fact.get_dict()}
@@ -427,7 +427,7 @@ def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario0_found_facts_o
     clean_fact = clean_factunit()
     yao_owner = ownerunit_shop(yao_str, "amy23")
     yao_owner.add_fact(
-        clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
+        clean_fact.fcontext, clean_fact.fstate, create_missing_plans=True
     )
     yao_found_fact_dict = {clean_fact.fcontext: clean_fact.get_dict()}
     yao_cellunit = cellunit_shop(yao_str)
@@ -451,7 +451,7 @@ def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario1_ownerevent_fa
     clean_fact = clean_factunit()
     yao_owner = ownerunit_shop(yao_str, "amy23")
     yao_owner.add_fact(
-        clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
+        clean_fact.fcontext, clean_fact.fstate, create_missing_plans=True
     )
     yao_found_fact_dict = {clean_fact.fcontext: clean_fact.get_dict()}
     yao_cellunit = cellunit_shop(yao_str)
@@ -477,7 +477,7 @@ def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario2_ownerevent_fa
     sky_fact = sky_blue_factunit()
     yao_owner = ownerunit_shop(yao_str, "amy23")
     yao_owner.add_fact(
-        clean_fact.fcontext, clean_fact.fstate, create_missing_concepts=True
+        clean_fact.fcontext, clean_fact.fstate, create_missing_plans=True
     )
     run_rope = yao_owner.make_l1_rope("run")
     run_fact = factunit_shop(run_rope, run_rope)
@@ -638,7 +638,7 @@ def test_CellUnit_set_owneradjust_facts_ReturnsObj_Scenario1():
     casa_clean_fact = clean_factunit()
     clean_facts = {casa_clean_fact.fcontext: casa_clean_fact}
     sue_owner = ownerunit_shop(sue_str, "amy23")
-    sue_owner.add_concept(casa_clean_fact.fstate)
+    sue_owner.add_plan(casa_clean_fact.fstate)
     sue_cell = cellunit_shop(
         sue_bud_owner,
         sue_ancestors,
@@ -678,8 +678,8 @@ def test_CellUnit_set_owneradjust_facts_ReturnsObj_Scenario2():
     clean_facts = {casa_clean_fact.fcontext: casa_clean_fact}
     dirty_facts = {casa_dirty_fact.fcontext: casa_dirty_fact}
     sue_owner = ownerunit_shop(sue_str, "amy23")
-    sue_owner.add_concept(casa_clean_fact.fstate)
-    sue_owner.add_concept(casa_dirty_fact.fstate)
+    sue_owner.add_plan(casa_clean_fact.fstate)
+    sue_owner.add_plan(casa_dirty_fact.fstate)
     sue_cell = cellunit_shop(
         sue_bud_owner,
         sue_ancestors,
@@ -722,9 +722,9 @@ def test_CellUnit_set_owneradjust_facts_ReturnsObj_Scenario3():
     dirty_facts = {casa_dirty_fact.fcontext: casa_dirty_fact}
     grimy_facts = {casa_grimy_fact.fcontext: casa_grimy_fact}
     sue_owner = ownerunit_shop(sue_str, "amy23")
-    sue_owner.add_concept(casa_clean_fact.fstate)
-    sue_owner.add_concept(casa_dirty_fact.fstate)
-    sue_owner.add_concept(casa_grimy_fact.fstate)
+    sue_owner.add_plan(casa_clean_fact.fstate)
+    sue_owner.add_plan(casa_dirty_fact.fstate)
+    sue_owner.add_plan(casa_grimy_fact.fstate)
     sue_cell = cellunit_shop(
         sue_bud_owner,
         sue_ancestors,
@@ -837,14 +837,14 @@ def test_CellUnit_calc_acct_mandate_ledger_ReturnsObj_Scenario0():
     sue_owner.add_acctunit(yao_str, 7, 2)
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
-    sue_owner.add_concept(clean_fact.fstate)
-    sue_owner.add_concept(dirty_fact.fstate)
+    sue_owner.add_plan(clean_fact.fstate)
+    sue_owner.add_plan(dirty_fact.fstate)
     casa_rope = sue_owner.make_l1_rope("casa")
     mop_rope = sue_owner.make_rope(casa_rope, "mop")
-    sue_owner.add_concept(mop_rope, 1, task=True)
+    sue_owner.add_plan(mop_rope, 1, task=True)
     sue_owner.edit_reason(mop_rope, dirty_fact.fcontext, dirty_fact.fstate)
     sue_owner.add_fact(
-        dirty_fact.fcontext, dirty_fact.fstate, create_missing_concepts=True
+        dirty_fact.fcontext, dirty_fact.fstate, create_missing_plans=True
     )
     sky_blue_fact = sky_blue_factunit()
     sue_ownerevent_factunits = {clean_fact.fcontext: clean_fact}
@@ -879,9 +879,9 @@ def test_CellUnit_calc_acct_mandate_ledger_ReturnsObj_Scenario0():
     assert set(sue_cell.owneradjust.get_factunits_dict().keys()) == {
         clean_fact.fcontext
     }
-    # concept_dict = sue_cell.owneradjust.get_concept_dict()
-    # for concept_rope, concept_obj in concept_dict.items():
-    #     print(f"{concept_rope=} {concept_obj._fund_onset=} {concept_obj._fund_cease}")
+    # plan_dict = sue_cell.owneradjust.get_plan_dict()
+    # for plan_rope, plan_obj in plan_dict.items():
+    #     print(f"{plan_rope=} {plan_obj._fund_onset=} {plan_obj._fund_cease}")
     assert sue_cell._acct_mandate_ledger != {}
     assert sue_cell._acct_mandate_ledger == {yao_str: 311, sue_str: 133}
 
@@ -991,10 +991,10 @@ def test_create_child_cellunits_ReturnsObj_Scenario2_boss_facts():
     casa_rope = yao_owner.make_l1_rope("casa")
     mop_rope = yao_owner.make_rope(casa_rope, "mop")
     clean_fact = clean_factunit()
-    yao_owner.add_concept(casa_rope, 1)
-    yao_owner.add_concept(mop_rope, 1, task=True)
-    yao_owner.add_concept(clean_fact.fstate)
-    yao_owner.add_concept(dirty_fact.fstate)
+    yao_owner.add_plan(casa_rope, 1)
+    yao_owner.add_plan(mop_rope, 1, task=True)
+    yao_owner.add_plan(clean_fact.fstate)
+    yao_owner.add_plan(dirty_fact.fstate)
     yao_owner.edit_reason(mop_rope, dirty_fact.fcontext, dirty_fact.fstate)
     yao_cell = cellunit_shop(
         yao_str, celldepth=yao_celldepth, quota=yao_quota, owneradjust=yao_owner
@@ -1032,14 +1032,14 @@ def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
     sue_owner.add_acctunit(yao_str, 7, 2)
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
-    sue_owner.add_concept(clean_fact.fstate)
-    sue_owner.add_concept(dirty_fact.fstate)
+    sue_owner.add_plan(clean_fact.fstate)
+    sue_owner.add_plan(dirty_fact.fstate)
     casa_rope = sue_owner.make_l1_rope("casa")
     mop_rope = sue_owner.make_rope(casa_rope, "mop")
-    sue_owner.add_concept(mop_rope, 1, task=True)
+    sue_owner.add_plan(mop_rope, 1, task=True)
     sue_owner.edit_reason(mop_rope, dirty_fact.fcontext, dirty_fact.fstate)
     sue_owner.add_fact(
-        dirty_fact.fcontext, dirty_fact.fstate, create_missing_concepts=True
+        dirty_fact.fcontext, dirty_fact.fstate, create_missing_plans=True
     )
     sky_blue_fact = sky_blue_factunit()
     sue_ownerevent_factunits = {clean_fact.fcontext: clean_fact}
@@ -1076,9 +1076,9 @@ def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
     assert set(sue_cell.owneradjust.get_factunits_dict().keys()) == {
         dirty_fact.fcontext
     }
-    # concept_dict = sue_cell.owneradjust.get_concept_dict()
-    # for concept_rope, concept_obj in concept_dict.items():
-    #     print(f"{concept_rope=} {concept_obj._fund_onset=} {concept_obj._fund_cease}")
+    # plan_dict = sue_cell.owneradjust.get_plan_dict()
+    # for plan_rope, plan_obj in plan_dict.items():
+    #     print(f"{plan_rope=} {plan_obj._fund_onset=} {plan_obj._fund_cease}")
     assert sue_cell._acct_mandate_ledger != {}
     assert sue_cell._acct_mandate_ledger == {yao_str: 311, sue_str: 133}
 
