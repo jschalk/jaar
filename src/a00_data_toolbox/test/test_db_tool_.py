@@ -432,6 +432,7 @@ def test_insert_csv_ChangesDBState(env_dir_setup_cleanup):
             (2, "Jane Smith", 25, "jane@example.com"),
         ]
         assert rows == expected_data
+    conn.close()
 
 
 def test_insert_csv_ChangesDBState_WhenPassedCursorObj(
@@ -456,6 +457,7 @@ def test_insert_csv_ChangesDBState_WhenPassedCursorObj(
             (2, "Jane Smith", 25, "jane@example.com"),
         ]
         assert rows == expected_data
+    conn.close()
 
 
 def test_insert_csv_ChangesNotCommitted(
@@ -480,6 +482,9 @@ def test_insert_csv_ChangesNotCommitted(
         cursor2.execute(f"SELECT * FROM {test_tablename}")
         rows = cursor2.fetchall()
         assert rows == []
+
+    conn.close()
+    conn2.close()
 
 
 def test_create_table_from_csv_ChangesDBState(env_dir_setup_cleanup):
@@ -513,6 +518,8 @@ def test_create_table_from_csv_ChangesDBState(env_dir_setup_cleanup):
         ]
         assert columns == expected_columns
 
+    conn.close()
+
 
 def test_create_table_from_csv_DoesNotEmptyTable(
     env_dir_setup_cleanup: tuple[sqlite3_Connection, str, str],
@@ -540,6 +547,8 @@ def test_create_table_from_csv_DoesNotEmptyTable(
         cursor.execute(f"SELECT * FROM {test_table}")
         assert cursor.fetchall() == before_data
     delete_dir(test_csv_filepath)
+
+    conn.close()
 
 
 def test_table_exists_ReturnsObjWhenPassedConnectionObj():
