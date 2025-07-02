@@ -18,13 +18,13 @@ from src.a12_hub_toolbox.hub_path import (
     create_believer_event_dir_path,
     create_believerevent_path,
     create_believerpoint_path,
-    create_bud_acct_mandate_ledger_path,
     create_bud_dir_path,
+    create_bud_person_mandate_ledger_path,
     create_buds_dir_path,
     create_budunit_json_path,
-    create_cell_acct_mandate_ledger_path,
     create_cell_dir_path,
     create_cell_json_path,
+    create_cell_person_mandate_ledger_path,
     create_event_all_pack_path,
     create_event_expressed_pack_path,
     create_gut_path,
@@ -200,9 +200,9 @@ def test_create_cell_json_path_HasDocString():
     assert LINUX_OS or inspect_getdoc(create_cell_json_path) == doc_str
 
 
-def test_create_cell_acct_mandate_ledger_path_HasDocString():
+def test_create_cell_person_mandate_ledger_path_HasDocString():
     # ESTABLISH
-    doc_str = create_cell_acct_mandate_ledger_path(
+    doc_str = create_cell_person_mandate_ledger_path(
         belief_mstr_dir="belief_mstr_dir",
         belief_label=belief_label_str(),
         believer_name=believer_name_str(),
@@ -213,7 +213,7 @@ def test_create_cell_acct_mandate_ledger_path_HasDocString():
     doc_str = f"Returns path: {doc_str}"
     print(f"{doc_str=}")
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_cell_acct_mandate_ledger_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_cell_person_mandate_ledger_path) == doc_str
 
 
 def test_create_budunit_json_path_HasDocString():
@@ -230,9 +230,9 @@ def test_create_budunit_json_path_HasDocString():
     assert LINUX_OS or inspect_getdoc(create_budunit_json_path) == doc_str
 
 
-def test_create_bud_acct_mandate_ledger_path_HasDocString():
+def test_create_bud_person_mandate_ledger_path_HasDocString():
     # ESTABLISH
-    doc_str = create_bud_acct_mandate_ledger_path(
+    doc_str = create_bud_person_mandate_ledger_path(
         belief_mstr_dir="belief_mstr_dir",
         belief_label=belief_label_str(),
         believer_name=believer_name_str(),
@@ -241,7 +241,7 @@ def test_create_bud_acct_mandate_ledger_path_HasDocString():
     doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_bud_acct_mandate_ledger_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_bud_person_mandate_ledger_path) == doc_str
 
 
 def test_create_believerpoint_path_HasDocString():

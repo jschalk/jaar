@@ -1,14 +1,14 @@
 from pandas import DataFrame, concat as pandas_concat
 from plotly.graph_objects import Figure as plotly_Figure, Table as plotly_Table
 from src.a06_believer_logic.report import (
-    get_believer_acctunits_dataframe,
     get_believer_agenda_dataframe,
+    get_believer_personunits_dataframe,
 )
 from src.a12_hub_toolbox.hub_tool import open_gut_file, open_job_file
 from src.a15_belief_logic.belief import BeliefUnit
 
 
-def get_belief_guts_accts_dataframe(x_belief: BeliefUnit) -> DataFrame:
+def get_belief_guts_persons_dataframe(x_belief: BeliefUnit) -> DataFrame:
     # get list of all believer paths
     belief_believer_names = x_belief._get_believer_folder_names()
     # for all believers get gut
@@ -18,24 +18,24 @@ def get_belief_guts_accts_dataframe(x_belief: BeliefUnit) -> DataFrame:
             x_belief.belief_mstr_dir, x_belief.belief_label, believer_name
         )
         gut_believer.settle_believer()
-        df = get_believer_acctunits_dataframe(gut_believer)
+        df = get_believer_personunits_dataframe(gut_believer)
         df.insert(0, "believer_name", gut_believer.believer_name)
         gut_dfs.append(df)
     return pandas_concat(gut_dfs, ignore_index=True)
 
 
-def get_belief_guts_accts_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
+def get_belief_guts_persons_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
     column_header_list = [
         "believer_name",
-        "acct_name",
-        "acct_cred_points",
-        "acct_debt_points",
+        "person_name",
+        "person_cred_points",
+        "person_debt_points",
         "_fund_give",
         "_fund_take",
         "_fund_agenda_give",
         "_fund_agenda_take",
     ]
-    df = get_belief_guts_accts_dataframe(x_belief)
+    df = get_belief_guts_persons_dataframe(x_belief)
     header_dict = dict(
         values=column_header_list, fill_color="paleturquoise", align="left"
     )
@@ -44,9 +44,9 @@ def get_belief_guts_accts_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
         cells=dict(
             values=[
                 df.believer_name,
-                df.acct_name,
-                df.acct_cred_points,
-                df.acct_debt_points,
+                df.person_name,
+                df.person_cred_points,
+                df.person_debt_points,
                 df._fund_give,
                 df._fund_take,
                 df._fund_agenda_give,
@@ -58,7 +58,7 @@ def get_belief_guts_accts_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_label = f"belief '{x_belief.belief_label}', gut accts metrics"
+    fig_label = f"belief '{x_belief.belief_label}', gut persons metrics"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_label, title_font_size=20)
@@ -66,7 +66,7 @@ def get_belief_guts_accts_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
     return fig
 
 
-def get_belief_jobs_accts_dataframe(x_belief: BeliefUnit) -> DataFrame:
+def get_belief_jobs_persons_dataframe(x_belief: BeliefUnit) -> DataFrame:
     # get list of all believer paths
     belief_believer_names = x_belief._get_believer_folder_names()
     # for all believers get gut
@@ -76,24 +76,24 @@ def get_belief_jobs_accts_dataframe(x_belief: BeliefUnit) -> DataFrame:
             x_belief.belief_mstr_dir, x_belief.belief_label, believer_name
         )
         job.settle_believer()
-        job_df = get_believer_acctunits_dataframe(job)
+        job_df = get_believer_personunits_dataframe(job)
         job_df.insert(0, "believer_name", job.believer_name)
         job_dfs.append(job_df)
     return pandas_concat(job_dfs, ignore_index=True)
 
 
-def get_belief_jobs_accts_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
+def get_belief_jobs_persons_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
     column_header_list = [
         "believer_name",
-        "acct_name",
-        "acct_cred_points",
-        "acct_debt_points",
+        "person_name",
+        "person_cred_points",
+        "person_debt_points",
         "_fund_give",
         "_fund_take",
         "_fund_agenda_give",
         "_fund_agenda_take",
     ]
-    df = get_belief_jobs_accts_dataframe(x_belief)
+    df = get_belief_jobs_persons_dataframe(x_belief)
     header_dict = dict(
         values=column_header_list, fill_color="paleturquoise", align="left"
     )
@@ -102,9 +102,9 @@ def get_belief_jobs_accts_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
         cells=dict(
             values=[
                 df.believer_name,
-                df.acct_name,
-                df.acct_cred_points,
-                df.acct_debt_points,
+                df.person_name,
+                df.person_cred_points,
+                df.person_debt_points,
                 df._fund_give,
                 df._fund_take,
                 df._fund_agenda_give,
@@ -116,7 +116,7 @@ def get_belief_jobs_accts_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_label = f"belief '{x_belief.belief_label}', job accts metrics"
+    fig_label = f"belief '{x_belief.belief_label}', job persons metrics"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_label, title_font_size=20)

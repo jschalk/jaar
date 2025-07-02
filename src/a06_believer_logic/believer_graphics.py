@@ -13,8 +13,8 @@ from src.a01_term_logic.rope import RopeTerm, get_parent_rope, is_sub_rope
 from src.a05_plan_logic.plan import PlanUnit
 from src.a06_believer_logic.believer import BelieverUnit
 from src.a06_believer_logic.report import (
-    get_believer_acctunits_dataframe,
     get_believer_agenda_dataframe,
+    get_believer_personunits_dataframe,
 )
 
 
@@ -146,19 +146,19 @@ def display_plantree(
         return x_fig
 
 
-def get_believer_accts_plotly_fig(x_believer: BelieverUnit) -> plotly_Figure:
+def get_believer_persons_plotly_fig(x_believer: BelieverUnit) -> plotly_Figure:
     column_header_list = [
-        "acct_name",
+        "person_name",
         "_credor_respect",
-        "acct_cred_points",
+        "person_cred_points",
         "_debtor_respect",
-        "acct_debt_points",
+        "person_debt_points",
         "_fund_give",
         "_fund_take",
         "_fund_agenda_give",
         "_fund_agenda_take",
     ]
-    df = get_believer_acctunits_dataframe(x_believer)
+    df = get_believer_personunits_dataframe(x_believer)
     df.insert(1, "_credor_respect", x_believer.credor_respect)
     df.insert(4, "_debtor_respect", x_believer.debtor_respect)
     header_dict = dict(
@@ -168,11 +168,11 @@ def get_believer_accts_plotly_fig(x_believer: BelieverUnit) -> plotly_Figure:
         header=header_dict,
         cells=dict(
             values=[
-                df.acct_name,
+                df.person_name,
                 df._credor_respect,
-                df.acct_cred_points,
+                df.person_cred_points,
                 df._debtor_respect,
-                df.acct_debt_points,
+                df.person_debt_points,
                 df._fund_give,
                 df._fund_take,
                 df._fund_agenda_give,
@@ -184,7 +184,7 @@ def get_believer_accts_plotly_fig(x_believer: BelieverUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_label = f"BelieverName '{x_believer.believer_name}' believer accts metrics"
+    fig_label = f"BelieverName '{x_believer.believer_name}' believer persons metrics"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_label, title_font_size=20)
@@ -388,10 +388,10 @@ def believerunit_graph1(graphics_bool) -> plotly_Figure:
     add_group_rect(fig, base_w, base_h, 2, 0.2, 0.4, "group2")
     add_group_rect(fig, base_w, base_h, 2, 0.4, 0.6, "group3")
     add_group_rect(fig, base_w, base_h, 2, 0.6, 1, "group4")
-    add_people_rect(fig, base_w, base_h, 0, 0, 0.3, "acct0")
-    add_people_rect(fig, base_w, base_h, 0, 0.3, 0.5, "acct1")
-    add_people_rect(fig, base_w, base_h, 0, 0.5, 0.7, "acct2")
-    add_people_rect(fig, base_w, base_h, 0, 0.7, 1, "acct3")
+    add_people_rect(fig, base_w, base_h, 0, 0, 0.3, "person0")
+    add_people_rect(fig, base_w, base_h, 0, 0.3, 0.5, "person1")
+    add_people_rect(fig, base_w, base_h, 0, 0.5, 0.7, "person2")
+    add_people_rect(fig, base_w, base_h, 0, 0.7, 1, "person3")
 
     fig.add_trace(
         plotly_Scatter(
@@ -525,7 +525,7 @@ def fund_graph0(
     add_keep__rect(fig, -0.5, -4.5, 10, 2.3, d_sue1_label, "", "", "")
     d_sue1_p0 = "Fund Source is PlanRoot. Each Plan fund range calculated by mass "
     d_sue1_p1 = "PlanRoot Fund ranges: Black arrows. Sum of childless Plan's funds equal planroot's fund "
-    d_sue1_p2 = "Regular Fund: Green arrows, all fund_iotas end up at AcctUnits"
+    d_sue1_p2 = "Regular Fund: Green arrows, all fund_iotas end up at PersonUnits"
     d_sue1_p3 = "Agenda Fund: Blue arrows, fund_iotas from active chores"
     d_sue1_p4 = f"fund_pool = {x_believer.fund_pool} "
     fig.add_trace(
@@ -559,13 +559,13 @@ def fund_graph0(
     add_rect_arrow(fig, 7, -0.6, 6.25, -0.6, green_str)
     add_rect_arrow(fig, 9, -0.4, 7.75, -0.4, blue_str)
     add_rect_arrow(fig, 9, -0.6, 7.75, -0.6, green_str)
-    acctunit_str = "acctunit"
+    personunit_str = "personunit"
     purple_str = "purple"
-    add_simp_rect(fig, 9, -0.4, 9.75, 0.2, acctunit_str, "gold")
-    add_simp_rect(fig, 9, -1.0, 9.75, -0.4, acctunit_str, "gold")
-    add_simp_rect(fig, 9, -1.6, 9.75, -1.0, acctunit_str, "gold")
-    add_simp_rect(fig, 9, -2.2, 9.75, -1.6, acctunit_str, "gold")
-    add_simp_rect(fig, 9, -4.0, 9.75, -2.2, acctunit_str, "gold")
+    add_simp_rect(fig, 9, -0.4, 9.75, 0.2, personunit_str, "gold")
+    add_simp_rect(fig, 9, -1.0, 9.75, -0.4, personunit_str, "gold")
+    add_simp_rect(fig, 9, -1.6, 9.75, -1.0, personunit_str, "gold")
+    add_simp_rect(fig, 9, -2.2, 9.75, -1.6, personunit_str, "gold")
+    add_simp_rect(fig, 9, -4.0, 9.75, -2.2, personunit_str, "gold")
 
     fund_t0 = "BelieverUnit.fund_pool"
     fund_t1_0 = "PlanUnit._fund_onset"
@@ -583,10 +583,10 @@ def fund_graph0(
     fund_trace4_2 = "MemberShip._fund_agenda_give"
     fund_trace4_3 = "MemberShip._fund_agenda_take"
 
-    fund_trace5_0 = "AcctUnit._fund_give"
-    fund_trace5_1 = "AcctUnit._fund_take"
-    fund_trace5_2 = "AcctUnit._fund_agenda_give"
-    fund_trace5_3 = "AcctUnit._fund_agenda_take"
+    fund_trace5_0 = "PersonUnit._fund_give"
+    fund_trace5_1 = "PersonUnit._fund_take"
+    fund_trace5_2 = "PersonUnit._fund_agenda_give"
+    fund_trace5_3 = "PersonUnit._fund_agenda_take"
 
     tracex_list = [fund_t0, fund_t1_0, fund_t1_1, fund_t2_0, fund_t2_1]
     fig.add_trace(

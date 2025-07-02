@@ -13,10 +13,10 @@ from src.a00_data_toolbox.file_toolbox import (
     set_dir,
 )
 from src.a01_term_logic.term import (
-    AcctName,
     BeliefLabel,
     BelieverName,
     EventInt,
+    PersonName,
     RopeTerm,
     default_knot_if_None,
 )
@@ -313,7 +313,7 @@ class BeliefUnit:
     def add_paypurchase(
         self,
         believer_name: BelieverName,
-        acct_name: AcctName,
+        person_name: PersonName,
         tran_time: TimeLinePoint,
         amount: FundNum,
         blocked_tran_times: set[TimeLinePoint] = None,
@@ -321,7 +321,7 @@ class BeliefUnit:
     ) -> None:
         self.paybook.add_tranunit(
             believer_name=believer_name,
-            acct_name=acct_name,
+            person_name=person_name,
             tran_time=tran_time,
             amount=amount,
             blocked_tran_times=blocked_tran_times,
@@ -329,17 +329,17 @@ class BeliefUnit:
         )
 
     def paypurchase_exists(
-        self, src: BelieverName, dst: AcctName, x_tran_time: TimeLinePoint
+        self, src: BelieverName, dst: PersonName, x_tran_time: TimeLinePoint
     ) -> bool:
         return self.paybook.tranunit_exists(src, dst, x_tran_time)
 
     def get_paypurchase(
-        self, src: BelieverName, dst: AcctName, x_tran_time: TimeLinePoint
+        self, src: BelieverName, dst: PersonName, x_tran_time: TimeLinePoint
     ) -> TranUnit:
         return self.paybook.get_tranunit(src, dst, x_tran_time)
 
     def del_paypurchase(
-        self, src: BelieverName, dst: AcctName, x_tran_time: TimeLinePoint
+        self, src: BelieverName, dst: PersonName, x_tran_time: TimeLinePoint
     ) -> TranUnit:
         return self.paybook.del_tranunit(src, dst, x_tran_time)
 
@@ -369,9 +369,9 @@ class BeliefUnit:
         x_tranbook = tranbook_shop(self.belief_label, x_tranunits)
         for believer_name, x_brokerunit in self.brokerunits.items():
             for x_bud_time, x_budunit in x_brokerunit.buds.items():
-                for acct_name, x_amount in x_budunit._bud_acct_nets.items():
+                for person_name, x_amount in x_budunit._bud_person_nets.items():
                     x_tranbook.add_tranunit(
-                        believer_name, acct_name, x_bud_time, x_amount
+                        believer_name, person_name, x_bud_time, x_amount
                     )
         self._all_tranbook = x_tranbook
 

@@ -23,13 +23,13 @@ from src.a12_hub_toolbox.hub_path import (
     create_believer_event_dir_path,
     create_believerevent_path,
     create_believerpoint_path,
-    create_bud_acct_mandate_ledger_path,
     create_bud_dir_path,
+    create_bud_person_mandate_ledger_path,
     create_buds_dir_path,
     create_budunit_json_path,
-    create_cell_acct_mandate_ledger_path,
     create_cell_dir_path,
     create_cell_json_path,
+    create_cell_person_mandate_ledger_path,
     create_event_all_pack_path,
     create_event_expressed_pack_path,
     create_gut_path,
@@ -271,7 +271,7 @@ def test_create_budunit_json_path_ReturnsObj():
     assert gen_bud_path == expected_bud_path_dir
 
 
-def test_create_bud_acct_mandate_ledger_path_ReturnsObj():
+def test_create_bud_person_mandate_ledger_path_ReturnsObj():
     # ESTABLISH
     x_belief_mstr_dir = get_module_temp_dir()
     a23_str = "amy23"
@@ -279,7 +279,7 @@ def test_create_bud_acct_mandate_ledger_path_ReturnsObj():
     timepoint7 = 7
 
     # WHEN
-    gen_bud_path = create_bud_acct_mandate_ledger_path(
+    gen_bud_path = create_bud_person_mandate_ledger_path(
         x_belief_mstr_dir, a23_str, sue_str, timepoint7
     )
 
@@ -422,7 +422,7 @@ def test_create_cell_json_path_ReturnsObj_Scenario1_Three_bud_ancestors():
     assert gen_cell_json_path == expected_cell_json_path
 
 
-def test_create_cell_acct_mandate_ledger_path_ReturnsObj_Scenario1_Three_bud_ancestors():
+def test_create_cell_person_mandate_ledger_path_ReturnsObj_Scenario1_Three_bud_ancestors():
     # ESTABLISH
     x_belief_mstr_dir = get_module_temp_dir()
     a23_str = "amy23"
@@ -433,7 +433,7 @@ def test_create_cell_acct_mandate_ledger_path_ReturnsObj_Scenario1_Three_bud_anc
     bud_ancestors = [yao_str, bob_str]
 
     # WHEN
-    gen_cell_json_path = create_cell_acct_mandate_ledger_path(
+    gen_cell_json_path = create_cell_person_mandate_ledger_path(
         x_belief_mstr_dir, a23_str, sue_str, tp7, bud_ancestors=bud_ancestors
     )
 

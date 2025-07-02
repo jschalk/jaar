@@ -1,7 +1,7 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a06_believer_logic.test._util.a06_str import (
-    acct_name_str,
-    believer_acctunit_str,
+    believer_personunit_str,
+    person_name_str,
 )
 from src.a09_pack_logic.test._util.a09_str import (
     belief_label_str,
@@ -16,7 +16,7 @@ from src.a16_pidgin_logic.test._util.a16_str import (
 )
 from src.a18_etl_toolbox.test._util.a18_str import error_message_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
-    CREATE_ONRACCT_SOUND_PUT_AGG_STR,
+    CREATE_BLRPERN_SOUND_PUT_AGG_STR,
     CREATE_PIDCORE_SOUND_VLD_SQLSTR,
     create_knot_exists_in_label_error_update_sqlstr,
     create_knot_exists_in_name_error_update_sqlstr,
@@ -38,17 +38,17 @@ def test_create_knot_exists_in_name_error_update_sqlstr_ReturnsObj_PopulatesTabl
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        cursor.execute(CREATE_ONRACCT_SOUND_PUT_AGG_STR)
-        onracct_dimen = believer_acctunit_str()
-        onracct_s_agg_put = create_prime_tablename(onracct_dimen, "s", "agg", "put")
-        insert_onracct_sqlstr = f"""INSERT INTO {onracct_s_agg_put} (
-  {event_int_str()}, {face_name_str()}, {belief_label_str()}, {believer_name_str()}, {acct_name_str()})
+        cursor.execute(CREATE_BLRPERN_SOUND_PUT_AGG_STR)
+        blrpern_dimen = believer_personunit_str()
+        blrpern_s_agg_put = create_prime_tablename(blrpern_dimen, "s", "agg", "put")
+        insert_blrpern_sqlstr = f"""INSERT INTO {blrpern_s_agg_put} (
+  {event_int_str()}, {face_name_str()}, {belief_label_str()}, {believer_name_str()}, {person_name_str()})
 VALUES
   ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
 , ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{bob_str}')
 ;
 """
-        cursor.execute(insert_onracct_sqlstr)
+        cursor.execute(insert_blrpern_sqlstr)
         cursor.execute(CREATE_PIDCORE_SOUND_VLD_SQLSTR)
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_pidcore_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename} (
@@ -59,21 +59,21 @@ VALUES
 ;
 """
         cursor.execute(insert_pidcore_sqlstr)
-        error_count_sqlstr = f"SELECT COUNT(*) FROM {onracct_s_agg_put} WHERE {error_message_str()} IS NOT NULL"
+        error_count_sqlstr = f"SELECT COUNT(*) FROM {blrpern_s_agg_put} WHERE {error_message_str()} IS NOT NULL"
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
         sqlstr = create_knot_exists_in_name_error_update_sqlstr(
-            onracct_s_agg_put, acct_name_str()
+            blrpern_s_agg_put, person_name_str()
         )
         print(f"{sqlstr=}")
         cursor.execute(sqlstr)
 
         # THEN
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 1
-        select_core_raw_sqlstr = f"SELECT * FROM {onracct_s_agg_put}"
+        select_core_raw_sqlstr = f"SELECT * FROM {blrpern_s_agg_put}"
         cursor.execute(select_core_raw_sqlstr)
-        name_knot_str = f"Knot cannot exist in NameTerm column {acct_name_str()}"
+        name_knot_str = f"Knot cannot exist in NameTerm column {person_name_str()}"
         assert cursor.fetchall() == [
             (event1, sue_str, a23_str, yao_str, yao_str, None, None, None),
             (event1, sue_str, a23_str, yao_str, bob_str, None, None, name_knot_str),
@@ -94,18 +94,18 @@ def test_create_knot_exists_in_label_error_update_sqlstr_ReturnsObj_PopulatesTab
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        cursor.execute(CREATE_ONRACCT_SOUND_PUT_AGG_STR)
-        onracct_dimen = believer_acctunit_str()
-        onracct_s_agg_put = create_prime_tablename(onracct_dimen, "s", "agg", "put")
-        insert_onracct_sqlstr = f"""INSERT INTO {onracct_s_agg_put} (
-  {event_int_str()}, {face_name_str()}, {belief_label_str()}, {believer_name_str()}, {acct_name_str()})
+        cursor.execute(CREATE_BLRPERN_SOUND_PUT_AGG_STR)
+        blrpern_dimen = believer_personunit_str()
+        blrpern_s_agg_put = create_prime_tablename(blrpern_dimen, "s", "agg", "put")
+        insert_blrpern_sqlstr = f"""INSERT INTO {blrpern_s_agg_put} (
+  {event_int_str()}, {face_name_str()}, {belief_label_str()}, {believer_name_str()}, {person_name_str()})
 VALUES
   ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
 , ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{bob_str}')
 , ({event1}, '{sue_str}', '{a45_str}', '{yao_str}', '{bob_str}')
 ;
 """
-        cursor.execute(insert_onracct_sqlstr)
+        cursor.execute(insert_blrpern_sqlstr)
         cursor.execute(CREATE_PIDCORE_SOUND_VLD_SQLSTR)
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_pidcore_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename} (
@@ -116,19 +116,19 @@ VALUES
 ;
 """
         cursor.execute(insert_pidcore_sqlstr)
-        error_count_sqlstr = f"SELECT COUNT(*) FROM {onracct_s_agg_put} WHERE {error_message_str()} IS NOT NULL"
+        error_count_sqlstr = f"SELECT COUNT(*) FROM {blrpern_s_agg_put} WHERE {error_message_str()} IS NOT NULL"
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
         sqlstr = create_knot_exists_in_label_error_update_sqlstr(
-            onracct_s_agg_put, belief_label_str()
+            blrpern_s_agg_put, belief_label_str()
         )
         print(f"{sqlstr=}")
         cursor.execute(sqlstr)
 
         # THEN
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 1
-        select_core_raw_sqlstr = f"SELECT * FROM {onracct_s_agg_put}"
+        select_core_raw_sqlstr = f"SELECT * FROM {blrpern_s_agg_put}"
         cursor.execute(select_core_raw_sqlstr)
         label_knot_str = f"Knot cannot exist in LabelTerm column {belief_label_str()}"
         assert cursor.fetchall() == [
@@ -153,18 +153,18 @@ def test_set_belief_believer_sound_agg_knot_errors_PopulatesTable_Scenario0():
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        cursor.execute(CREATE_ONRACCT_SOUND_PUT_AGG_STR)
-        onracct_dimen = believer_acctunit_str()
-        onracct_s_agg_put = create_prime_tablename(onracct_dimen, "s", "agg", "put")
-        insert_onracct_sqlstr = f"""INSERT INTO {onracct_s_agg_put} (
-  {event_int_str()}, {face_name_str()}, {belief_label_str()}, {believer_name_str()}, {acct_name_str()})
+        cursor.execute(CREATE_BLRPERN_SOUND_PUT_AGG_STR)
+        blrpern_dimen = believer_personunit_str()
+        blrpern_s_agg_put = create_prime_tablename(blrpern_dimen, "s", "agg", "put")
+        insert_blrpern_sqlstr = f"""INSERT INTO {blrpern_s_agg_put} (
+  {event_int_str()}, {face_name_str()}, {belief_label_str()}, {believer_name_str()}, {person_name_str()})
 VALUES
   ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
 , ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{bob_str}')
 , ({event1}, '{sue_str}', '{a45_str}', '{yao_str}', '{yao_str}')
 ;
 """
-        cursor.execute(insert_onracct_sqlstr)
+        cursor.execute(insert_blrpern_sqlstr)
         cursor.execute(CREATE_PIDCORE_SOUND_VLD_SQLSTR)
         pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
         insert_pidcore_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename} (
@@ -175,7 +175,7 @@ VALUES
 ;
 """
         cursor.execute(insert_pidcore_sqlstr)
-        error_count_sqlstr = f"SELECT COUNT(*) FROM {onracct_s_agg_put} WHERE {error_message_str()} IS NOT NULL"
+        error_count_sqlstr = f"SELECT COUNT(*) FROM {blrpern_s_agg_put} WHERE {error_message_str()} IS NOT NULL"
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
@@ -183,9 +183,9 @@ VALUES
 
         # THEN
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 2
-        select_core_raw_sqlstr = f"SELECT * FROM {onracct_s_agg_put} ORDER BY {belief_label_str()}, {believer_name_str()}, {acct_name_str()}"
+        select_core_raw_sqlstr = f"SELECT * FROM {blrpern_s_agg_put} ORDER BY {belief_label_str()}, {believer_name_str()}, {person_name_str()}"
         cursor.execute(select_core_raw_sqlstr)
-        name_knot_str = f"Knot cannot exist in NameTerm column {acct_name_str()}"
+        name_knot_str = f"Knot cannot exist in NameTerm column {person_name_str()}"
         label_knot_str = f"Knot cannot exist in LabelTerm column {belief_label_str()}"
         rows = cursor.fetchall()
         print(f"{rows=}")

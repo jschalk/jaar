@@ -37,11 +37,11 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnit_v1(env_dir_setup_cleanup
     yao_str = "Yao"
     yao_duty = believerunit_shop(yao_str, a23_str)
     zia_str = "Zia"
-    zia_acct_cred_points = 47
-    zia_acct_debt_points = 41
+    zia_person_cred_points = 47
+    zia_person_debt_points = 41
     zia_pool = 87
-    yao_duty.add_acctunit(zia_str, zia_acct_cred_points, zia_acct_debt_points)
-    yao_duty.set_acct_respect(zia_pool)
+    yao_duty.add_personunit(zia_str, zia_person_cred_points, zia_person_debt_points)
+    yao_duty.set_person_respect(zia_pool)
     sue_texas_hubunit = get_texas_hubunit()
     sue_texas_hubunit.save_duty_believer(yao_duty)
 
@@ -68,12 +68,12 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnitWithDifferentChore(
     a23_str = "amy23"
     yao_str = "Yao"
     yao_duty = believerunit_shop(yao_str, a23_str)
-    yao_acct_cred_points = 47
-    yao_acct_debt_points = 41
+    yao_person_cred_points = 47
+    yao_person_debt_points = 41
     yao_pool = 87
     zia_str = "Zia"
-    yao_duty.add_acctunit(zia_str, yao_acct_cred_points, yao_acct_debt_points)
-    yao_duty.set_acct_respect(yao_pool)
+    yao_duty.add_personunit(zia_str, yao_person_cred_points, yao_person_debt_points)
+    yao_duty.set_person_respect(yao_pool)
     sue_texas_hubunit = get_texas_hubunit()
     sue_texas_hubunit.save_duty_believer(yao_duty)
 
@@ -228,27 +228,27 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfstateedFromBelieversSpeakerDi
 
     # THEN
     assert yao_duty.get_fact(eat_rope()) is None
-    zia_acctunit = new_yao_vision1.get_acct(zia_str)
-    bob_acctunit = new_yao_vision1.get_acct(bob_str)
-    assert zia_acctunit.acct_debt_points < bob_acctunit.acct_debt_points
+    zia_personunit = new_yao_vision1.get_person(zia_str)
+    bob_personunit = new_yao_vision1.get_person(bob_str)
+    assert zia_personunit.person_debt_points < bob_personunit.person_debt_points
     assert bob_vision.get_fact(eat_rope()).fstate == hungry_rope()
     assert zia_vision.get_fact(eat_rope()).fstate == eat_rope()
     assert new_yao_vision1.get_fact(eat_rope()).fstate == hungry_rope()
 
     # WHEN
-    yao_zia_acct_debt_points = 15
-    yao_bob_acct_debt_points = 5
-    yao_duty.add_acctunit(zia_str, None, yao_zia_acct_debt_points)
-    yao_duty.add_acctunit(bob_str, None, yao_bob_acct_debt_points)
-    yao_duty.set_acct_respect(100)
+    yao_zia_person_debt_points = 15
+    yao_bob_person_debt_points = 5
+    yao_duty.add_personunit(zia_str, None, yao_zia_person_debt_points)
+    yao_duty.add_personunit(bob_str, None, yao_bob_person_debt_points)
+    yao_duty.set_person_respect(100)
     new_yao_vision2 = create_listen_basis(yao_duty)
     listen_to_agendas_duty_vision(new_yao_vision2, sue_texas_hubunit)
     listen_to_facts_duty_vision(new_yao_vision2, sue_texas_hubunit)
 
     # THEN
-    zia_acctunit = new_yao_vision2.get_acct(zia_str)
-    bob_acctunit = new_yao_vision2.get_acct(bob_str)
-    assert zia_acctunit.acct_debt_points > bob_acctunit.acct_debt_points
+    zia_personunit = new_yao_vision2.get_person(zia_str)
+    bob_personunit = new_yao_vision2.get_person(bob_str)
+    assert zia_personunit.person_debt_points > bob_personunit.person_debt_points
     assert bob_vision.get_fact(eat_rope()).fstate == hungry_rope()
     assert zia_vision.get_fact(eat_rope()).fstate == eat_rope()
     assert new_yao_vision2.get_fact(eat_rope()).fstate == eat_rope()
@@ -270,8 +270,8 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfstateedFromBelieversSpeakerDi
 #     sweep_str = "sweep"
 #     sweep_rope = sue_speaker.make_rope(casa_rope, sweep_str)
 
-#     sue_speaker.add_acctunit(yao_str)
-#     sue_speaker.set_acct_respect(20)
+#     sue_speaker.add_personunit(yao_str)
+#     sue_speaker.set_person_respect(20)
 #     sue_speaker.set_plan(planunit_shop(clean_str), status_rope)
 #     sue_speaker.set_plan(planunit_shop(dirty_str), status_rope)
 #     sue_speaker.set_plan(planunit_shop(sweep_str, task=True), casa_rope)
@@ -284,8 +284,8 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfstateedFromBelieversSpeakerDi
 #     sue_texas_hubunit = get_texas_hubunit()
 #     sue_texas_hubunit.save_vision_believer(sue_str, sue_speaker.get_json(), True)
 #     yao_duty = believerunit_shop(yao_str)
-#     yao_duty.add_acctunit(yao_str)
-#     yao_duty.add_acctunit(sue_str)
+#     yao_duty.add_personunit(yao_str)
+#     yao_duty.add_personunit(sue_str)
 #     new_yao_vision = create_listen_basis(yao_duty)
 #     print(f"{new_yao_vision.get_plan_dict().keys()=}")
 #     # assert new_yao_vision.get_missing_fact_rcontexts().get(status_rope) is None
@@ -308,8 +308,8 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfstateedFromBelieversSpeakerDi
 #     # ESTABLISH
 #     yao_str = "Yao"
 #     yao_duty = believerunit_shop(yao_str)
-#     yao_duty.add_acctunit(yao_str)
-#     yao_duty.set_acct_respect(20)
+#     yao_duty.add_personunit(yao_str)
+#     yao_duty.set_person_respect(20)
 #     casa_str = "casa"
 #     casa_rope = yao_duty.make_l1_rope(casa_str)
 #     status_str = "status"

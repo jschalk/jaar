@@ -1,7 +1,7 @@
 from src.a06_believer_logic.test._util.a06_str import (
-    acct_name_str,
-    believer_acctunit_str,
+    believer_personunit_str,
     group_title_str,
+    person_name_str,
     plan_rope_str,
     rcontext_str,
 )
@@ -24,18 +24,18 @@ def test_idearef_shop_ReturnsObj():
 
     # WHEN
     x_idearef = idearef_shop(
-        x_idea_name=x1_idea_name, x_dimens=[believer_acctunit_str()]
+        x_idea_name=x1_idea_name, x_dimens=[believer_personunit_str()]
     )
 
     # THEN
     assert x_idearef.idea_name == x1_idea_name
-    assert x_idearef.dimens == [believer_acctunit_str()]
+    assert x_idearef.dimens == [believer_personunit_str()]
     assert x_idearef._attributes == {}
 
 
 def test_IdeaRef_set_attribute_SetsAttr():
     # ESTABLISH
-    x_idearef = idearef_shop("0003", believer_acctunit_str())
+    x_idearef = idearef_shop("0003", believer_personunit_str())
     x_attribute = "1"
     assert x_idearef._attributes == {}
 
@@ -50,7 +50,7 @@ def test_IdeaRef_set_attribute_SetsAttr():
 def test_IdeaRef_get_headers_list_ReturnsObj_Scenario0():
     # ESTABLISH
 
-    x_idearef = idearef_shop("0003", believer_acctunit_str())
+    x_idearef = idearef_shop("0003", believer_personunit_str())
 
     # WHEN
     x_headers_list = x_idearef.get_headers_list()
@@ -62,7 +62,7 @@ def test_IdeaRef_get_headers_list_ReturnsObj_Scenario0():
 def test_IdeaRef_get_headers_list_ReturnsObj_Scenario1():
     # ESTABLISH
 
-    x3_idearef = idearef_shop("0003", believer_acctunit_str())
+    x3_idearef = idearef_shop("0003", believer_personunit_str())
     x3_idearef.set_attribute(group_title_str(), True)
 
     # WHEN
@@ -75,21 +75,21 @@ def test_IdeaRef_get_headers_list_ReturnsObj_Scenario1():
 def test_IdeaRef_get_headers_list_ReturnsObj_Scenario2():
     # ESTABLISH
 
-    x3_idearef = idearef_shop("0003", believer_acctunit_str())
+    x3_idearef = idearef_shop("0003", believer_personunit_str())
     x3_idearef.set_attribute(plan_rope_str(), True)
     x3_idearef.set_attribute(group_title_str(), False)
-    x3_idearef.set_attribute(acct_name_str(), True)
+    x3_idearef.set_attribute(person_name_str(), True)
 
     # WHEN
     x_headers_list = x3_idearef.get_headers_list()
 
     # THEN
-    assert x_headers_list == [acct_name_str(), group_title_str(), plan_rope_str()]
+    assert x_headers_list == [person_name_str(), group_title_str(), plan_rope_str()]
 
 
 def test_IdeaRef_get_otx_keys_list_ReturnsObj_Scenario0():
     # ESTABLISH
-    x_idearef = idearef_shop("0003", believer_acctunit_str())
+    x_idearef = idearef_shop("0003", believer_personunit_str())
 
     # WHEN
     x_otx_keys_list = x_idearef.get_otx_keys_list()
@@ -101,7 +101,7 @@ def test_IdeaRef_get_otx_keys_list_ReturnsObj_Scenario0():
 def test_IdeaRef_get_otx_keys_list_ReturnsObj_Scenario1():
     # ESTABLISH
 
-    x3_idearef = idearef_shop("0003", believer_acctunit_str())
+    x3_idearef = idearef_shop("0003", believer_personunit_str())
     x3_idearef.set_attribute(group_title_str(), True)
 
     # WHEN
@@ -114,21 +114,21 @@ def test_IdeaRef_get_otx_keys_list_ReturnsObj_Scenario1():
 def test_IdeaRef_get_otx_keys_list_ReturnsObj_Scenario2():
     # ESTABLISH
 
-    x3_idearef = idearef_shop("0003", believer_acctunit_str())
+    x3_idearef = idearef_shop("0003", believer_personunit_str())
     x3_idearef.set_attribute(plan_rope_str(), True)
     x3_idearef.set_attribute(group_title_str(), False)
-    x3_idearef.set_attribute(acct_name_str(), True)
+    x3_idearef.set_attribute(person_name_str(), True)
 
     # WHEN
     x_otx_keys_list = x3_idearef.get_otx_keys_list()
 
     # THEN
-    assert x_otx_keys_list == [acct_name_str(), plan_rope_str()]
+    assert x_otx_keys_list == [person_name_str(), plan_rope_str()]
 
 
 def test_IdeaRef_get_otx_values_list_ReturnsObj_Scenario0():
     # ESTABLISH
-    x_idearef = idearef_shop("0003", believer_acctunit_str())
+    x_idearef = idearef_shop("0003", believer_personunit_str())
 
     # WHEN
     x_otx_values_list = x_idearef.get_otx_values_list()
@@ -140,7 +140,7 @@ def test_IdeaRef_get_otx_values_list_ReturnsObj_Scenario0():
 def test_IdeaRef_get_otx_values_list_ReturnsObj_Scenario1():
     # ESTABLISH
 
-    x3_idearef = idearef_shop("0003", believer_acctunit_str())
+    x3_idearef = idearef_shop("0003", believer_personunit_str())
     x3_idearef.set_attribute(group_title_str(), True)
 
     # WHEN
@@ -153,14 +153,14 @@ def test_IdeaRef_get_otx_values_list_ReturnsObj_Scenario1():
 def test_IdeaRef_get_otx_values_list_ReturnsObj_Scenario2():
     # ESTABLISH
 
-    x3_idearef = idearef_shop("0003", believer_acctunit_str())
+    x3_idearef = idearef_shop("0003", believer_personunit_str())
     x3_idearef.set_attribute(plan_rope_str(), True)
     x3_idearef.set_attribute(group_title_str(), False)
     x3_idearef.set_attribute(rcontext_str(), False)
-    x3_idearef.set_attribute(acct_name_str(), False)
+    x3_idearef.set_attribute(person_name_str(), False)
 
     # WHEN
     x_otx_values_list = x3_idearef.get_otx_values_list()
 
     # THEN
-    assert x_otx_values_list == [acct_name_str(), group_title_str(), rcontext_str()]
+    assert x_otx_values_list == [person_name_str(), group_title_str(), rcontext_str()]

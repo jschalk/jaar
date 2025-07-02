@@ -128,13 +128,13 @@ def test_RiverCylce_create_cylceledger_ReturnsObjTwoRiverBooks():
     assert one_cylceledger == {yao_str: yao_money, bob_str: bob_money}
 
 
-def test_create_init_rivercycle_ReturnsObjScenarioOne_acctunit():
+def test_create_init_rivercycle_ReturnsObjScenarioOne_personunit():
     # ESTABLISH
     yao_str = "Yao"
     x_belief_mstr_dir = temp_belief_mstr_dir()
     yao_hubunit = hubunit_shop(x_belief_mstr_dir, None, yao_str)
     yao_believer = believerunit_shop(yao_str)
-    yao_believer.add_acctunit(yao_str)
+    yao_believer.add_personunit(yao_str)
     yao_credorledger = get_credorledger(yao_believer)
     keep_credorledgers = {yao_str: yao_credorledger}
 
@@ -147,20 +147,20 @@ def test_create_init_rivercycle_ReturnsObjScenarioOne_acctunit():
     assert yao_init_rivercycle.riverbooks.get(yao_str) is not None
 
 
-def test_create_init_rivercycle_ReturnsObjScenarioThree_acctunit():
+def test_create_init_rivercycle_ReturnsObjScenarioThree_personunit():
     # ESTABLISH
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
-    yao_acct_cred_points = 7
-    bob_acct_cred_points = 3
-    zia_acct_cred_points = 10
+    yao_person_cred_points = 7
+    bob_person_cred_points = 3
+    zia_person_cred_points = 10
     x_belief_mstr_dir = temp_belief_mstr_dir()
     yao_hubunit = hubunit_shop(x_belief_mstr_dir, None, yao_str)
     yao_believer = believerunit_shop(yao_str)
-    yao_believer.add_acctunit(yao_str, yao_acct_cred_points)
-    yao_believer.add_acctunit(bob_str, bob_acct_cred_points)
-    yao_believer.add_acctunit(zia_str, zia_acct_cred_points)
+    yao_believer.add_personunit(yao_str, yao_person_cred_points)
+    yao_believer.add_personunit(bob_str, bob_person_cred_points)
+    yao_believer.add_personunit(zia_str, zia_person_cred_points)
     yao_credorledger = get_credorledger(yao_believer)
     keep_credorledgers = {yao_str: yao_credorledger}
     print(f"{keep_credorledgers=}")
@@ -179,7 +179,7 @@ def test_create_init_rivercycle_ReturnsObjScenarioThree_acctunit():
     assert yao_riverbook._rivergrants.get(zia_str) == 500000000
 
 
-def test_create_next_rivercycle_ReturnsObjScenarioThree_acctunit():
+def test_create_next_rivercycle_ReturnsObjScenarioThree_personunit():
     # ESTABLISH
     yao_str = "Yao"
     bob_str = "Bob"

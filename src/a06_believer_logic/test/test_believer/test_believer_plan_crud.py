@@ -396,21 +396,21 @@ def test_BelieverUnit_edit_plan_attr_IsAbleToEditAnyAncestor_Plan():
     ]._descendant_task_count
     assert _descendant_task_count_new == 67
 
-    # _all_acct_cred: bool = None,
-    sue_believer.planroot._kids[casa_str]._all_acct_cred = 74
-    x_all_acct_cred = sue_believer.planroot._kids[casa_str]._all_acct_cred
-    assert x_all_acct_cred == 74
-    sue_believer.edit_plan_attr(casa_rope, all_acct_cred=59)
-    _all_acct_cred_new = sue_believer.planroot._kids[casa_str]._all_acct_cred
-    assert _all_acct_cred_new == 59
+    # _all_person_cred: bool = None,
+    sue_believer.planroot._kids[casa_str]._all_person_cred = 74
+    x_all_person_cred = sue_believer.planroot._kids[casa_str]._all_person_cred
+    assert x_all_person_cred == 74
+    sue_believer.edit_plan_attr(casa_rope, all_person_cred=59)
+    _all_person_cred_new = sue_believer.planroot._kids[casa_str]._all_person_cred
+    assert _all_person_cred_new == 59
 
-    # _all_acct_debt: bool = None,
-    sue_believer.planroot._kids[casa_str]._all_acct_debt = 74
-    x_all_acct_debt = sue_believer.planroot._kids[casa_str]._all_acct_debt
-    assert x_all_acct_debt == 74
-    sue_believer.edit_plan_attr(casa_rope, all_acct_debt=59)
-    _all_acct_debt_new = sue_believer.planroot._kids[casa_str]._all_acct_debt
-    assert _all_acct_debt_new == 59
+    # _all_person_debt: bool = None,
+    sue_believer.planroot._kids[casa_str]._all_person_debt = 74
+    x_all_person_debt = sue_believer.planroot._kids[casa_str]._all_person_debt
+    assert x_all_person_debt == 74
+    sue_believer.edit_plan_attr(casa_rope, all_person_debt=59)
+    _all_person_debt_new = sue_believer.planroot._kids[casa_str]._all_person_debt
+    assert _all_person_debt_new == 59
 
     # _awardlink: dict = None,
     sue_believer.planroot._kids[casa_str].awardlinks = {
@@ -445,8 +445,8 @@ def test_BelieverUnit_edit_plan_attr_IsAbleToEditAnyAncestor_Plan():
     sue_str = "Sue"
     yao_str = "Yao"
     x_healerlink = healerlink_shop({sue_str, yao_str})
-    sue_believer.add_acctunit(sue_str)
-    sue_believer.add_acctunit(yao_str)
+    sue_believer.add_personunit(sue_str)
+    sue_believer.add_personunit(yao_str)
     sue_believer.edit_plan_attr(casa_rope, healerlink=x_healerlink)
     assert sue_believer.planroot._kids[casa_str].healerlink == x_healerlink
 
@@ -669,9 +669,9 @@ def test_BelieverUnit_edit_plan_attr_DeletesPlanUnit_awardlinks():
     yao_str = "Yao"
     zia_str = "Zia"
     Xio_str = "Xio"
-    yao_believer.add_acctunit(yao_str)
-    yao_believer.add_acctunit(zia_str)
-    yao_believer.add_acctunit(Xio_str)
+    yao_believer.add_personunit(yao_str)
+    yao_believer.add_personunit(zia_str)
+    yao_believer.add_personunit(Xio_str)
 
     swim_str = "swim"
     swim_rope = yao_believer.make_l1_rope(swim_str)
@@ -701,15 +701,15 @@ def test_BelieverUnit_edit_plan_attr_DeletesPlanUnit_awardlinks():
     assert len(yao_believer.planroot._kids[swim_str].awardlinks) == 2
 
 
-def test_BelieverUnit__get_filtered_awardlinks_plan_CorrectlyRemovesAcct_awardlinks():
+def test_BelieverUnit__get_filtered_awardlinks_plan_CorrectlyRemovesPerson_awardlinks():
     # ESTABLISH
     bob_str = "Bob"
     example_believer = believerunit_shop(bob_str)
     xia_str = "Xia"
     run_str = ";runners"
     hike_str = ";hikers"
-    example_believer.add_acctunit(xia_str)
-    example_believer.get_acct(xia_str).add_membership(run_str)
+    example_believer.add_personunit(xia_str)
+    example_believer.get_person(xia_str).add_membership(run_str)
 
     sports_str = "sports"
     sports_rope = example_believer.make_l1_rope(sports_str)
@@ -719,8 +719,8 @@ def test_BelieverUnit__get_filtered_awardlinks_plan_CorrectlyRemovesAcct_awardli
     example_believer_sports_plan = example_believer.get_plan_obj(sports_rope)
     assert len(example_believer_sports_plan.awardlinks) == 2
     bob_believer = believerunit_shop(bob_str)
-    bob_believer.add_acctunit(xia_str)
-    bob_believer.get_acct(xia_str).add_membership(run_str)
+    bob_believer.add_personunit(xia_str)
+    bob_believer.get_person(xia_str).add_membership(run_str)
     print(f"{example_believer_sports_plan.awardlinks=}")
 
     # WHEN
@@ -739,8 +739,8 @@ def test_BelieverUnit__get_filtered_awardlinks_plan_CorrectlyRemovesGroup_awardl
     example_believer = believerunit_shop(bob_str)
     xia_str = "Xia"
     zoa_str = "Zoa"
-    example_believer.add_acctunit(xia_str)
-    example_believer.add_acctunit(zoa_str)
+    example_believer.add_personunit(xia_str)
+    example_believer.add_personunit(zoa_str)
 
     swim_str = "swim"
     swim_rope = example_believer.make_l1_rope(swim_str)
@@ -750,7 +750,7 @@ def test_BelieverUnit__get_filtered_awardlinks_plan_CorrectlyRemovesGroup_awardl
     example_believer_swim_plan = example_believer.get_plan_obj(swim_rope)
     assert len(example_believer_swim_plan.awardlinks) == 2
     bob_believer = believerunit_shop(bob_str)
-    bob_believer.add_acctunit(xia_str)
+    bob_believer.add_personunit(xia_str)
 
     # WHEN
     cleaned_plan = bob_believer._get_filtered_awardlinks_plan(
@@ -768,8 +768,8 @@ def test_BelieverUnit_set_plan_SetsPlan_awardlinks():
     example_believer = believerunit_shop(bob_str)
     xia_str = "Xia"
     zoa_str = "Zoa"
-    example_believer.add_acctunit(xia_str)
-    example_believer.add_acctunit(zoa_str)
+    example_believer.add_personunit(xia_str)
+    example_believer.add_personunit(zoa_str)
 
     casa_str = "casa"
     casa_rope = example_believer.make_l1_rope(casa_str)
@@ -782,7 +782,7 @@ def test_BelieverUnit_set_plan_SetsPlan_awardlinks():
     example_believer_swim_plan = example_believer.get_plan_obj(swim_rope)
     assert len(example_believer_swim_plan.awardlinks) == 2
     bob_believer = believerunit_shop(bob_str)
-    bob_believer.add_acctunit(xia_str)
+    bob_believer.add_personunit(xia_str)
 
     # WHEN
     bob_believer.set_l1_plan(example_believer_swim_plan, create_missing_plans=False)
@@ -935,9 +935,9 @@ def test_BelieverUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     yao_str = "Yao"
     sue_str = "Sue"
     bob_believerunit = believerunit_shop(bob_str)
-    bob_believerunit.add_acctunit(bob_str)
-    bob_believerunit.add_acctunit(yao_str, acct_cred_points=2)
-    bob_believerunit.add_acctunit(sue_str, acct_debt_points=2)
+    bob_believerunit.add_personunit(bob_str)
+    bob_believerunit.add_personunit(yao_str, person_cred_points=2)
+    bob_believerunit.add_personunit(sue_str, person_debt_points=2)
     bob_believerunit.set_offtrack_fund()
     assert bob_believerunit._offtrack_fund == 0
 
@@ -945,12 +945,12 @@ def test_BelieverUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     bob_believerunit._allot_offtrack_fund()
 
     # THEN
-    assert bob_believerunit.get_acct(bob_str)._fund_give == 0
-    assert bob_believerunit.get_acct(bob_str)._fund_take == 0
-    assert bob_believerunit.get_acct(yao_str)._fund_give == 0
-    assert bob_believerunit.get_acct(yao_str)._fund_take == 0
-    assert bob_believerunit.get_acct(sue_str)._fund_give == 0
-    assert bob_believerunit.get_acct(sue_str)._fund_take == 0
+    assert bob_believerunit.get_person(bob_str)._fund_give == 0
+    assert bob_believerunit.get_person(bob_str)._fund_take == 0
+    assert bob_believerunit.get_person(yao_str)._fund_give == 0
+    assert bob_believerunit.get_person(yao_str)._fund_take == 0
+    assert bob_believerunit.get_person(sue_str)._fund_give == 0
+    assert bob_believerunit.get_person(sue_str)._fund_take == 0
 
     # WHEN
     casa_str = "casa"
@@ -977,12 +977,12 @@ def test_BelieverUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     bob_believerunit._allot_offtrack_fund()
 
     # THEN
-    assert bob_believerunit.get_acct(bob_str)._fund_give == 26
-    assert bob_believerunit.get_acct(bob_str)._fund_take == 26
-    assert bob_believerunit.get_acct(yao_str)._fund_give == 53
-    assert bob_believerunit.get_acct(yao_str)._fund_take == 26
-    assert bob_believerunit.get_acct(sue_str)._fund_give == 26
-    assert bob_believerunit.get_acct(sue_str)._fund_take == 53
+    assert bob_believerunit.get_person(bob_str)._fund_give == 26
+    assert bob_believerunit.get_person(bob_str)._fund_take == 26
+    assert bob_believerunit.get_person(yao_str)._fund_give == 53
+    assert bob_believerunit.get_person(yao_str)._fund_take == 26
+    assert bob_believerunit.get_person(sue_str)._fund_give == 26
+    assert bob_believerunit.get_person(sue_str)._fund_take == 53
 
     bob_believerunit._offtrack_kids_mass_set.add(wed_rope)
     bob_believerunit.set_offtrack_fund()

@@ -26,21 +26,21 @@ def test_HubUnit_initialize_job_file_CorrectlySavesFile(env_dir_setup_cleanup):
     assert job.belief_label == root_label()
     assert job.believer_name == sue_str
     bob_str = "Bob"
-    assert job.acct_exists(bob_str) is False
+    assert job.person_exists(bob_str) is False
 
     # ESTABLISH
     sue_believer = believerunit_shop(sue_str)
-    sue_believer.add_acctunit(bob_str)
+    sue_believer.add_personunit(bob_str)
     save_job_file(belief_mstr_dir, sue_believer)
     job = open_job_file(belief_mstr_dir, root_label(), sue_str)
-    assert job.get_acct(bob_str)
+    assert job.get_person(bob_str)
 
     # WHEN
     sue_hubunit.initialize_job_file(sue_believer)
 
     # THEN
     job = open_job_file(belief_mstr_dir, root_label(), sue_str)
-    assert job.get_acct(bob_str)
+    assert job.get_person(bob_str)
 
 
 def test_HubUnit_initialize_job_file_CorrectlyDoesNotOverwrite(
@@ -77,7 +77,7 @@ def test_HubUnit_initialize_job_file_CorrectlyDoesNotOverwrite(
 
     # WHEN
     bob_str = "Bob"
-    sue_believer.add_acctunit(bob_str)
+    sue_believer.add_personunit(bob_str)
     sue_hubunit.initialize_job_file(sue_believer)
 
     # THEN

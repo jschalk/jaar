@@ -1,20 +1,20 @@
 from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import x_is_json
 from src.a01_term_logic.rope import create_rope, to_rope
-from src.a03_group_logic.acct import acctunit_shop
+from src.a03_group_logic.person import personunit_shop
 from src.a05_plan_logic.plan import get_default_belief_label as root_label
 from src.a06_believer_logic.believer import believerunit_shop
 from src.a06_believer_logic.test._util.a06_str import (
-    acct_cred_points_str,
-    acct_debt_points_str,
-    acct_name_str,
     awardee_title_str,
-    believer_acct_membership_str,
-    believer_acctunit_str,
+    believer_person_membership_str,
+    believer_personunit_str,
     believer_plan_awardlink_str,
     believer_planunit_str,
     believerunit_str,
     group_title_str,
+    person_cred_points_str,
+    person_debt_points_str,
+    person_name_str,
     plan_rope_str,
 )
 from src.a08_believer_atom_logic.atom import believeratom_shop
@@ -86,7 +86,7 @@ def test_BelieverDelta_set_believeratom_CorrectlySets_BelieverUnitSimpleAttrs():
 def test_BelieverDelta_set_believeratom_RaisesErrorWhen_is_valid_IsFalse():
     # ESTABLISH
     ex1_believerdelta = believerdelta_shop()
-    x_dimen = believer_acctunit_str()
+    x_dimen = believer_personunit_str()
     believer_mass_believeratom = believeratom_shop(x_dimen, UPDATE_str())
 
     # WHEN
@@ -100,12 +100,12 @@ def test_BelieverDelta_set_believeratom_RaisesErrorWhen_is_valid_IsFalse():
     )
 
 
-def test_ChangUnit_believeratom_exists_ReturnsObj_believer_acctunit_str():
+def test_ChangUnit_believeratom_exists_ReturnsObj_believer_personunit_str():
     # ESTABLISH
     bob_str = "Bob"
     x_believerdelta = believerdelta_shop()
-    bob_believeratom = believeratom_shop(believer_acctunit_str(), INSERT_str())
-    bob_believeratom.set_arg(acct_name_str(), bob_str)
+    bob_believeratom = believeratom_shop(believer_personunit_str(), INSERT_str())
+    bob_believeratom.set_arg(person_name_str(), bob_str)
     assert not x_believerdelta.believeratom_exists(bob_believeratom)
 
     # WHEN
@@ -115,16 +115,16 @@ def test_ChangUnit_believeratom_exists_ReturnsObj_believer_acctunit_str():
     assert x_believerdelta.believeratom_exists(bob_believeratom)
 
 
-def test_ChangUnit_believeratom_exists_ReturnsObj_believer_acct_membership_str():
+def test_ChangUnit_believeratom_exists_ReturnsObj_believer_person_membership_str():
     # ESTABLISH
     bob_str = "Bob"
     iowa_str = ";Iowa"
     x_believerdelta = believerdelta_shop()
     bob_iowa_believeratom = believeratom_shop(
-        believer_acct_membership_str(), INSERT_str()
+        believer_person_membership_str(), INSERT_str()
     )
     bob_iowa_believeratom.set_arg(group_title_str(), iowa_str)
-    bob_iowa_believeratom.set_arg(acct_name_str(), bob_str)
+    bob_iowa_believeratom.set_arg(person_name_str(), bob_str)
     assert not x_believerdelta.believeratom_exists(bob_iowa_believeratom)
 
     # WHEN
@@ -177,26 +177,30 @@ def test_BelieverDelta_add_believeratom_CorrectlySets_BelieverUnitSimpleAttrs():
     assert x_believeratom.dimen == believerunit_str()
 
 
-def test_BelieverDelta_add_believeratom_CorrectlySets_BelieverUnit_acctunits():
+def test_BelieverDelta_add_believeratom_CorrectlySets_BelieverUnit_personunits():
     # ESTABLISH
     ex1_believerdelta = believerdelta_shop()
     assert ex1_believerdelta.believeratoms == {}
 
     # WHEN
     bob_str = "Bob"
-    bob_acct_cred_points = 55
-    bob_acct_debt_points = 66
-    bob_acctunit = acctunit_shop(bob_str, bob_acct_cred_points, bob_acct_debt_points)
-    cw_str = acct_cred_points_str()
-    dw_str = acct_debt_points_str()
-    print(f"{bob_acctunit.get_dict()=}")
-    bob_required_dict = {acct_name_str(): bob_acctunit.get_dict().get(acct_name_str())}
-    bob_optional_dict = {cw_str: bob_acctunit.get_dict().get(cw_str)}
-    bob_optional_dict[dw_str] = bob_acctunit.get_dict().get(dw_str)
+    bob_person_cred_points = 55
+    bob_person_debt_points = 66
+    bob_personunit = personunit_shop(
+        bob_str, bob_person_cred_points, bob_person_debt_points
+    )
+    cw_str = person_cred_points_str()
+    dw_str = person_debt_points_str()
+    print(f"{bob_personunit.get_dict()=}")
+    bob_required_dict = {
+        person_name_str(): bob_personunit.get_dict().get(person_name_str())
+    }
+    bob_optional_dict = {cw_str: bob_personunit.get_dict().get(cw_str)}
+    bob_optional_dict[dw_str] = bob_personunit.get_dict().get(dw_str)
     print(f"{bob_required_dict=}")
-    acctunit_str = believer_acctunit_str()
+    personunit_str = believer_personunit_str()
     ex1_believerdelta.add_believeratom(
-        dimen=acctunit_str,
+        dimen=personunit_str,
         crud_str=INSERT_str(),
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
@@ -204,7 +208,9 @@ def test_BelieverDelta_add_believeratom_CorrectlySets_BelieverUnit_acctunits():
     # THEN
     assert len(ex1_believerdelta.believeratoms) == 1
     assert (
-        ex1_believerdelta.believeratoms.get(INSERT_str()).get(acctunit_str).get(bob_str)
+        ex1_believerdelta.believeratoms.get(INSERT_str())
+        .get(personunit_str)
+        .get(bob_str)
         is not None
     )
 
@@ -250,9 +256,9 @@ def test_BelieverDelta_get_dimen_sorted_believeratoms_list_ReturnsObj_Scenario0_
     assert sue_atoms_list[0] == update_dict.get(believerunit_str())
     z_atom = sue_atoms_list[1]
     print(f"{z_atom=}")
-    print(delete_dict.get(believer_acctunit_str()).keys())
-    zia_acctunit_delete = delete_dict.get(believer_acctunit_str()).get("Zia")
-    assert sue_atoms_list[1] == zia_acctunit_delete
+    print(delete_dict.get(believer_personunit_str()).keys())
+    zia_personunit_delete = delete_dict.get(believer_personunit_str()).get("Zia")
+    assert sue_atoms_list[1] == zia_personunit_delete
 
 
 # def test_BelieverDelta_add_believeratom_CorrectlySets_BelieverUnit_max_tree_traverse():
@@ -316,7 +322,7 @@ def test_BelieverDelta_get_sorted_believeratoms_ReturnsObj():
     print(f"atom_order 28 {ex1_believerdelta.believeratoms.get(UPDATE_str()).keys()=}")
     delete_dict = ex1_believerdelta.believeratoms.get(DELETE_str())
     assert len(delete_dict.keys()) == 1
-    assert delete_dict.get(believer_acctunit_str()) is not None
+    assert delete_dict.get(believer_personunit_str()) is not None
     print(f"atom_order 26 {ex1_believerdelta.believeratoms.get(DELETE_str()).keys()=}")
 
     # WHEN
@@ -324,11 +330,11 @@ def test_BelieverDelta_get_sorted_believeratoms_ReturnsObj():
 
     # THEN
     assert len(sue_atom_order_list) == 2
-    print(delete_dict.get(believer_acctunit_str()).keys())
-    zia_acctunit_delete = delete_dict.get(believer_acctunit_str()).get("Zia")
+    print(delete_dict.get(believer_personunit_str()).keys())
+    zia_personunit_delete = delete_dict.get(believer_personunit_str()).get("Zia")
     # for believeratom in sue_atom_order_list:
     #     print(f"{believeratom.atom_order=}")
-    assert sue_atom_order_list[0] == zia_acctunit_delete
+    assert sue_atom_order_list[0] == zia_personunit_delete
     assert sue_atom_order_list[1] == update_dict.get(believerunit_str())
     # for crud_str, atom_list in sue_atom_order_dict.items():
     #     print(f"{crud_str=}")
@@ -414,11 +420,11 @@ def test_believer_built_from_delta_is_valid_ReturnsObjEstablishWithNoBeliever_sc
     x_believeratom.set_jvalue(x_attribute, 100)
     sue_believerdelta.set_believeratom(x_believeratom)
 
-    dimen = believer_acctunit_str()
+    dimen = believer_personunit_str()
     zia_str = "Zia"
     x_believeratom = believeratom_shop(dimen, INSERT_str())
-    x_believeratom.set_arg(acct_name_str(), zia_str)
-    x_believeratom.set_arg(acct_cred_points_str(), "70 is the number")
+    x_believeratom.set_arg(person_name_str(), zia_str)
+    x_believeratom.set_arg(person_cred_points_str(), "70 is the number")
     sue_believerdelta.set_believeratom(x_believeratom)
     print(f"{sue_believerdelta=}")
 
@@ -428,12 +434,12 @@ def test_believer_built_from_delta_is_valid_ReturnsObjEstablishWithNoBeliever_sc
 
 def test_believer_built_from_delta_is_valid_ReturnsObjEstablishWithNoBeliever_scenario2():
     sue_believerdelta = believerdelta_shop()
-    dimen = believer_acctunit_str()
+    dimen = believer_personunit_str()
     # WHEN
     yao_str = "Yao"
     x_believeratom = believeratom_shop(dimen, INSERT_str())
-    x_believeratom.set_arg(acct_name_str(), yao_str)
-    x_believeratom.set_arg(acct_cred_points_str(), 30)
+    x_believeratom.set_arg(person_name_str(), yao_str)
+    x_believeratom.set_arg(person_cred_points_str(), 30)
     sue_believerdelta.set_believeratom(x_believeratom)
 
     # THEN
@@ -442,8 +448,8 @@ def test_believer_built_from_delta_is_valid_ReturnsObjEstablishWithNoBeliever_sc
     # WHEN
     bob_str = "Bob"
     x_believeratom = believeratom_shop(dimen, INSERT_str())
-    x_believeratom.set_arg(acct_name_str(), bob_str)
-    x_believeratom.set_arg(acct_cred_points_str(), "70 is the number")
+    x_believeratom.set_arg(person_name_str(), bob_str)
+    x_believeratom.set_arg(person_cred_points_str(), "70 is the number")
     sue_believerdelta.set_believeratom(x_believeratom)
 
     # THEN
@@ -457,18 +463,18 @@ def test_BelieverDelta_get_ordered_believeratoms_ReturnsObj_EstablishWithNoStart
     pool_attribute = "credor_respect"
     pool_believeratom.set_jvalue(pool_attribute, 100)
     sue_believerdelta.set_believeratom(pool_believeratom)
-    dimen = believer_acctunit_str()
+    dimen = believer_personunit_str()
     zia_str = "Zia"
     zia_believeratom = believeratom_shop(dimen, INSERT_str())
-    zia_believeratom.set_arg(acct_name_str(), zia_str)
-    zia_believeratom.set_arg(acct_cred_points_str(), 70)
+    zia_believeratom.set_arg(person_name_str(), zia_str)
+    zia_believeratom.set_arg(person_cred_points_str(), 70)
     sue_believerdelta.set_believeratom(zia_believeratom)
     sue_believer = believerunit_shop("Sue")
     sue_believer.set_credor_respect(100)
     yao_str = "Yao"
     yao_believeratom = believeratom_shop(dimen, INSERT_str())
-    yao_believeratom.set_arg(acct_name_str(), yao_str)
-    yao_believeratom.set_arg(acct_cred_points_str(), 30)
+    yao_believeratom.set_arg(person_name_str(), yao_str)
+    yao_believeratom.set_arg(person_cred_points_str(), 30)
     sue_believerdelta.set_believeratom(yao_believeratom)
 
     sue_believer = believerunit_shop("Sue")
@@ -496,18 +502,18 @@ def test_BelieverDelta_get_ordered_believeratoms_ReturnsObj_EstablishWithStartin
     pool_attribute = "credor_respect"
     pool_believeratom.set_jvalue(pool_attribute, 100)
     sue_believerdelta.set_believeratom(pool_believeratom)
-    dimen = believer_acctunit_str()
+    dimen = believer_personunit_str()
     zia_str = "Zia"
     zia_believeratom = believeratom_shop(dimen, INSERT_str())
-    zia_believeratom.set_arg(acct_name_str(), zia_str)
-    zia_believeratom.set_arg(acct_cred_points_str(), 70)
+    zia_believeratom.set_arg(person_name_str(), zia_str)
+    zia_believeratom.set_arg(person_cred_points_str(), 70)
     sue_believerdelta.set_believeratom(zia_believeratom)
     sue_believer = believerunit_shop("Sue")
     sue_believer.set_credor_respect(100)
     yao_str = "Yao"
     yao_believeratom = believeratom_shop(dimen, INSERT_str())
-    yao_believeratom.set_arg(acct_name_str(), yao_str)
-    yao_believeratom.set_arg(acct_cred_points_str(), 30)
+    yao_believeratom.set_arg(person_name_str(), yao_str)
+    yao_believeratom.set_arg(person_cred_points_str(), 30)
     sue_believerdelta.set_believeratom(yao_believeratom)
 
     sue_believer = believerunit_shop("Sue")
@@ -535,18 +541,18 @@ def test_BelieverDelta_get_ordered_dict_ReturnsObj_EstablishWithStartingNumber()
     pool_attribute = "credor_respect"
     pool_believeratom.set_jvalue(pool_attribute, 100)
     sue_believerdelta.set_believeratom(pool_believeratom)
-    dimen = believer_acctunit_str()
+    dimen = believer_personunit_str()
     zia_str = "Zia"
     zia_believeratom = believeratom_shop(dimen, INSERT_str())
-    zia_believeratom.set_arg(acct_name_str(), zia_str)
-    zia_believeratom.set_arg(acct_cred_points_str(), 70)
+    zia_believeratom.set_arg(person_name_str(), zia_str)
+    zia_believeratom.set_arg(person_cred_points_str(), 70)
     sue_believerdelta.set_believeratom(zia_believeratom)
     sue_believer = believerunit_shop("Sue")
     sue_believer.set_credor_respect(100)
     yao_str = "Yao"
     yao_believeratom = believeratom_shop(dimen, INSERT_str())
-    yao_believeratom.set_arg(acct_name_str(), yao_str)
-    yao_believeratom.set_arg(acct_cred_points_str(), 30)
+    yao_believeratom.set_arg(person_name_str(), yao_str)
+    yao_believeratom.set_arg(person_cred_points_str(), 30)
     sue_believerdelta.set_believeratom(yao_believeratom)
 
     sue_believer = believerunit_shop("Sue")
@@ -574,18 +580,18 @@ def test_get_believerdelta_from_ordered_dict_ReturnsObj():
     pool_attribute = "credor_respect"
     pool_believeratom.set_jvalue(pool_attribute, 100)
     expected_believerdelta.set_believeratom(pool_believeratom)
-    dimen = believer_acctunit_str()
+    dimen = believer_personunit_str()
     zia_str = "Zia"
     zia_believeratom = believeratom_shop(dimen, INSERT_str())
-    zia_believeratom.set_arg(acct_name_str(), zia_str)
-    zia_believeratom.set_arg(acct_cred_points_str(), 70)
+    zia_believeratom.set_arg(person_name_str(), zia_str)
+    zia_believeratom.set_arg(person_cred_points_str(), 70)
     expected_believerdelta.set_believeratom(zia_believeratom)
     sue_believer = believerunit_shop("Sue")
     sue_believer.set_credor_respect(100)
     yao_str = "Yao"
     yao_believeratom = believeratom_shop(dimen, INSERT_str())
-    yao_believeratom.set_arg(acct_name_str(), yao_str)
-    yao_believeratom.set_arg(acct_cred_points_str(), 30)
+    yao_believeratom.set_arg(person_name_str(), yao_str)
+    yao_believeratom.set_arg(person_cred_points_str(), 30)
     expected_believerdelta.set_believeratom(yao_believeratom)
     believerdelta_dict = expected_believerdelta.get_ordered_dict(5)
 
@@ -612,16 +618,16 @@ def test_BelieverDelta_get_json_ReturnsObj():
     pool_attribute = "credor_respect"
     pool_believeratom.set_jvalue(pool_attribute, 100)
     sue_believerdelta.set_believeratom(pool_believeratom)
-    dimen = believer_acctunit_str()
+    dimen = believer_personunit_str()
     zia_str = "Zia"
     zia_believeratom = believeratom_shop(dimen, INSERT_str())
-    zia_believeratom.set_arg(acct_name_str(), zia_str)
-    zia_believeratom.set_arg(acct_cred_points_str(), 70)
+    zia_believeratom.set_arg(person_name_str(), zia_str)
+    zia_believeratom.set_arg(person_cred_points_str(), 70)
     sue_believerdelta.set_believeratom(zia_believeratom)
     yao_str = "Yao"
     yao_believeratom = believeratom_shop(dimen, INSERT_str())
-    yao_believeratom.set_arg(acct_name_str(), yao_str)
-    yao_believeratom.set_arg(acct_cred_points_str(), 30)
+    yao_believeratom.set_arg(person_name_str(), yao_str)
+    yao_believeratom.set_arg(person_cred_points_str(), 30)
     sue_believerdelta.set_believeratom(yao_believeratom)
 
     # WHEN
@@ -637,11 +643,11 @@ def test_BelieverDelta_believeratom_exists_ReturnsObj():
     x_believerdelta = believerdelta_shop()
 
     # WHEN / THEN
-    dimen = believer_acctunit_str()
+    dimen = believer_personunit_str()
     zia_str = "Zia"
     zia_believeratom = believeratom_shop(dimen, INSERT_str())
-    zia_believeratom.set_arg(acct_name_str(), zia_str)
-    zia_believeratom.set_arg(acct_cred_points_str(), 70)
+    zia_believeratom.set_arg(person_name_str(), zia_str)
+    zia_believeratom.set_arg(person_cred_points_str(), 70)
     assert x_believerdelta.believeratom_exists(zia_believeratom) is False
 
     # WHEN
@@ -656,11 +662,11 @@ def test_BelieverDelta_is_empty_ReturnsObj():
     x_believerdelta = believerdelta_shop()
 
     # WHEN / THEN
-    dimen = believer_acctunit_str()
+    dimen = believer_personunit_str()
     zia_str = "Zia"
     zia_believeratom = believeratom_shop(dimen, INSERT_str())
-    zia_believeratom.set_arg(acct_name_str(), zia_str)
-    zia_believeratom.set_arg(acct_cred_points_str(), 70)
+    zia_believeratom.set_arg(person_name_str(), zia_str)
+    zia_believeratom.set_arg(person_cred_points_str(), 70)
     assert x_believerdelta.is_empty()
 
     # WHEN

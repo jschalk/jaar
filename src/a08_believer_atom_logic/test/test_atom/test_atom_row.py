@@ -1,10 +1,10 @@
 from src.a01_term_logic.rope import create_rope, to_rope
 from src.a06_believer_logic.test._util.a06_str import (
-    acct_name_str,
-    believer_acct_membership_str,
-    believer_acctunit_str,
+    believer_person_membership_str,
+    believer_personunit_str,
     believer_plan_healerlink_str,
     believer_planunit_str,
+    person_name_str,
 )
 from src.a08_believer_atom_logic.atom import AtomRow, atomrow_shop, believeratom_shop
 from src.a08_believer_atom_logic.atom_config import get_atom_args_class_types
@@ -18,17 +18,17 @@ def test_AtomRow_exists():
     # THEN
     assert x_atomrow._atom_dimens is None
     assert x_atomrow._crud_command is None
-    assert x_atomrow.acct_name is None
+    assert x_atomrow.person_name is None
     assert x_atomrow.addin is None
     assert x_atomrow.rcontext is None
     assert x_atomrow.rplan_active_requisite is None
     assert x_atomrow.begin is None
     assert x_atomrow.respect_bit is None
     assert x_atomrow.close is None
-    assert x_atomrow.acct_cred_points is None
+    assert x_atomrow.person_cred_points is None
     assert x_atomrow.group_cred_points is None
     assert x_atomrow.credor_respect is None
-    assert x_atomrow.acct_debt_points is None
+    assert x_atomrow.person_debt_points is None
     assert x_atomrow.group_debt_points is None
     assert x_atomrow.debtor_respect is None
     assert x_atomrow.denom is None
@@ -69,7 +69,7 @@ def test_AtomRow_exists():
 
 def test_atomrow_shop_ReturnsObj():
     # ESTABLISH
-    x_atom_dimens = {believer_acctunit_str()}
+    x_atom_dimens = {believer_personunit_str()}
 
     # WHEN
     x_atomrow = atomrow_shop(x_atom_dimens, INSERT_str())
@@ -81,44 +81,44 @@ def test_atomrow_shop_ReturnsObj():
 
 def test_AtomRow_set_atom_dimen_SetsAttr():
     # ESTABLISH
-    x_atomrow = atomrow_shop({believer_acctunit_str()}, INSERT_str())
-    assert believer_acct_membership_str() not in x_atomrow._atom_dimens
+    x_atomrow = atomrow_shop({believer_personunit_str()}, INSERT_str())
+    assert believer_person_membership_str() not in x_atomrow._atom_dimens
 
     # WHEN
-    x_atomrow.set_atom_dimen(believer_acct_membership_str())
+    x_atomrow.set_atom_dimen(believer_person_membership_str())
 
     # THEN
-    assert believer_acct_membership_str() in x_atomrow._atom_dimens
+    assert believer_person_membership_str() in x_atomrow._atom_dimens
 
 
 def test_AtomRow_atom_dimen_exists_ReturnsObj():
     # ESTABLISH
     x_atomrow = atomrow_shop(set(), INSERT_str())
-    assert not x_atomrow.atom_dimen_exists(believer_acctunit_str())
-    assert not x_atomrow.atom_dimen_exists(believer_acct_membership_str())
+    assert not x_atomrow.atom_dimen_exists(believer_personunit_str())
+    assert not x_atomrow.atom_dimen_exists(believer_person_membership_str())
 
     # WHEN
-    x_atomrow.set_atom_dimen(believer_acct_membership_str())
+    x_atomrow.set_atom_dimen(believer_person_membership_str())
 
     # THEN
-    assert not x_atomrow.atom_dimen_exists(believer_acctunit_str())
-    assert x_atomrow.atom_dimen_exists(believer_acct_membership_str())
+    assert not x_atomrow.atom_dimen_exists(believer_personunit_str())
+    assert x_atomrow.atom_dimen_exists(believer_person_membership_str())
 
 
 def test_AtomRow_delete_atom_dimen_SetsAttr():
     # ESTABLISH
-    x_atomrow = atomrow_shop({believer_acctunit_str()}, INSERT_str())
-    x_atomrow.set_atom_dimen(believer_acctunit_str())
-    x_atomrow.set_atom_dimen(believer_acct_membership_str())
-    assert x_atomrow.atom_dimen_exists(believer_acctunit_str())
-    assert x_atomrow.atom_dimen_exists(believer_acct_membership_str())
+    x_atomrow = atomrow_shop({believer_personunit_str()}, INSERT_str())
+    x_atomrow.set_atom_dimen(believer_personunit_str())
+    x_atomrow.set_atom_dimen(believer_person_membership_str())
+    assert x_atomrow.atom_dimen_exists(believer_personunit_str())
+    assert x_atomrow.atom_dimen_exists(believer_person_membership_str())
 
     # WHEN
-    x_atomrow.delete_atom_dimen(believer_acct_membership_str())
+    x_atomrow.delete_atom_dimen(believer_person_membership_str())
 
     # THEN
-    assert x_atomrow.atom_dimen_exists(believer_acctunit_str())
-    assert not x_atomrow.atom_dimen_exists(believer_acct_membership_str())
+    assert x_atomrow.atom_dimen_exists(believer_personunit_str())
+    assert not x_atomrow.atom_dimen_exists(believer_person_membership_str())
 
 
 def test_AtomRow_set_class_types_SetsAttr():
@@ -146,11 +146,11 @@ def test_AtomRow_set_class_types_SetsAttr():
     assert x_atomrow.morph == x_morph_bool
 
 
-def test_AtomRow_get_believeratoms_ReturnsObj_believer_acctunit_str_INSERT_Scenario0():
+def test_AtomRow_get_believeratoms_ReturnsObj_believer_personunit_str_INSERT_Scenario0():
     # ESTABLISH
-    x_dimen = believer_acctunit_str()
+    x_dimen = believer_personunit_str()
     x_atomrow = atomrow_shop({x_dimen}, INSERT_str())
-    x_atomrow.acct_name = "Bob"
+    x_atomrow.person_name = "Bob"
 
     # WHEN
     x_believeratoms = x_atomrow.get_believeratoms()
@@ -158,16 +158,16 @@ def test_AtomRow_get_believeratoms_ReturnsObj_believer_acctunit_str_INSERT_Scena
     # THEN
     assert len(x_believeratoms) == 1
     static_atom = believeratom_shop(x_dimen, INSERT_str())
-    static_atom.set_arg(acct_name_str(), "Bob")
+    static_atom.set_arg(person_name_str(), "Bob")
     assert x_believeratoms[0] == static_atom
 
 
-def test_AtomRow_get_believeratoms_ReturnsObj_believer_acctunit_str_INSERT_Scenario1():
+def test_AtomRow_get_believeratoms_ReturnsObj_believer_personunit_str_INSERT_Scenario1():
     # ESTABLISH
-    x_dimen = believer_acctunit_str()
+    x_dimen = believer_personunit_str()
     x_atomrow = atomrow_shop({x_dimen}, INSERT_str())
-    x_atomrow.acct_name = "Bob"
-    x_atomrow.acct_cred_points = 5
+    x_atomrow.person_name = "Bob"
+    x_atomrow.person_cred_points = 5
 
     # WHEN
     x_believeratoms = x_atomrow.get_believeratoms()
@@ -175,14 +175,14 @@ def test_AtomRow_get_believeratoms_ReturnsObj_believer_acctunit_str_INSERT_Scena
     # THEN
     assert len(x_believeratoms) == 1
     static_atom = believeratom_shop(x_dimen, INSERT_str())
-    static_atom.set_arg(acct_name_str(), "Bob")
-    static_atom.set_arg("acct_cred_points", 5)
+    static_atom.set_arg(person_name_str(), "Bob")
+    static_atom.set_arg("person_cred_points", 5)
     assert x_believeratoms[0] == static_atom
 
 
-def test_AtomRow_get_believeratoms_ReturnsObj_believer_acctunit_NSERT_Fails():
+def test_AtomRow_get_believeratoms_ReturnsObj_believer_personunit_NSERT_Fails():
     # ESTABLISH
-    x_dimen = believer_acctunit_str()
+    x_dimen = believer_personunit_str()
     x_atomrow = atomrow_shop({x_dimen}, INSERT_str())
 
     # WHEN
@@ -192,13 +192,13 @@ def test_AtomRow_get_believeratoms_ReturnsObj_believer_acctunit_NSERT_Fails():
     assert len(x_believeratoms) == 0
 
 
-def test_AtomRow_get_believeratoms_ReturnsObj_believer_acctunit_INSERT_Scenario2():
+def test_AtomRow_get_believeratoms_ReturnsObj_believer_personunit_INSERT_Scenario2():
     # ESTABLISH
-    x_dimen = believer_acctunit_str()
+    x_dimen = believer_personunit_str()
     x_atomrow = atomrow_shop({x_dimen}, INSERT_str())
-    x_atomrow.acct_name = "Bob"
+    x_atomrow.person_name = "Bob"
     four_str = "4"
-    x_atomrow.acct_cred_points = four_str
+    x_atomrow.person_cred_points = four_str
 
     # WHEN
     x_believeratoms = x_atomrow.get_believeratoms()
@@ -206,26 +206,26 @@ def test_AtomRow_get_believeratoms_ReturnsObj_believer_acctunit_INSERT_Scenario2
     # THEN
     assert len(x_believeratoms) == 1
     static_atom = believeratom_shop(x_dimen, INSERT_str())
-    static_atom.set_arg(acct_name_str(), "Bob")
+    static_atom.set_arg(person_name_str(), "Bob")
     four_int = 4
-    static_atom.set_arg("acct_cred_points", four_int)
+    static_atom.set_arg("person_cred_points", four_int)
     assert x_believeratoms[0] == static_atom
 
 
 def test_AtomRow_get_believeratoms_ReturnsObjIfDimenIsCorrect():
     # ESTABLISH
     x_atomrow = atomrow_shop(set(), INSERT_str())
-    x_atomrow.acct_name = "Bob"
+    x_atomrow.person_name = "Bob"
     four_str = "4"
-    x_atomrow.acct_cred_points = four_str
+    x_atomrow.person_cred_points = four_str
     assert len(x_atomrow.get_believeratoms()) == 0
 
     # WHEN / THEN
-    x_atomrow.set_atom_dimen(believer_acct_membership_str())
+    x_atomrow.set_atom_dimen(believer_person_membership_str())
     assert len(x_atomrow.get_believeratoms()) == 0
 
     # THEN
-    x_atomrow.set_atom_dimen(believer_acctunit_str())
+    x_atomrow.set_atom_dimen(believer_personunit_str())
     assert len(x_atomrow.get_believeratoms()) == 1
 
 

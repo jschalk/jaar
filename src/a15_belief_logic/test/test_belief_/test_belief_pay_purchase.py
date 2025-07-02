@@ -238,8 +238,8 @@ def test_BeliefUnit_set_all_tranbook_SetsAttr():
     bob_bud_net = 445
     sue_x40000_bud = x_belief.get_brokerunit(sue_str).get_bud(x40000_tran_time)
     sue_x70000_bud = x_belief.get_brokerunit(sue_str).get_bud(x70000_tran_time)
-    sue_x40000_bud.set_bud_acct_net(bob_str, bob_bud_net)
-    sue_x70000_bud.set_bud_acct_net(zia_str, zia_bud_net)
+    sue_x40000_bud.set_bud_person_net(bob_str, bob_bud_net)
+    sue_x70000_bud.set_bud_person_net(zia_str, zia_bud_net)
 
     assert x_belief._all_tranbook == tranbook_shop(x_belief.belief_label)
     assert x_belief.paypurchase_exists(sue_str, bob_str, t55_t)
@@ -248,8 +248,8 @@ def test_BeliefUnit_set_all_tranbook_SetsAttr():
     assert x_belief.paypurchase_exists(sue_str, yao_str, t88_t)
     assert x_belief.paypurchase_exists(bob_str, sue_str, t99_t)
 
-    assert sue_x40000_bud.bud_acct_net_exists(bob_str)
-    assert sue_x70000_bud.bud_acct_net_exists(zia_str)
+    assert sue_x40000_bud.bud_person_net_exists(bob_str)
+    assert sue_x70000_bud.bud_person_net_exists(zia_str)
     # x_belief.add_budunit()
 
     # WHEN

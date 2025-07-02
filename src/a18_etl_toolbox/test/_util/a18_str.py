@@ -2,13 +2,13 @@ from src.a17_idea_logic.test._util.a17_str import error_message_str
 from typing import Literal
 
 
-def belief_acct_nets_str() -> Literal["belief_acct_nets"]:
-    """Table name for the account net amounts."""
-    return "belief_acct_nets"
-
-
 def belief_event_time_agg_str() -> Literal["belief_event_time_agg"]:
     return "belief_event_time_agg"
+
+
+def belief_person_nets_str() -> Literal["belief_person_nets"]:
+    """Table name for the account net amounts."""
+    return "belief_person_nets"
 
 
 def believer_net_amount_str() -> Literal["believer_net_amount"]:

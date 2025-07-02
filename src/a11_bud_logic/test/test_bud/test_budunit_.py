@@ -9,7 +9,7 @@ from src.a11_bud_logic.bud import (
     get_budunit_from_json,
 )
 from src.a11_bud_logic.test._util.a11_str import (
-    bud_acct_nets_str,
+    bud_person_nets_str,
     bud_time_str,
     celldepth_str,
     magnitude_str,
@@ -31,7 +31,7 @@ def test_BudUnit_Exists():
     assert not x_budunit.bud_time
     assert not x_budunit.quota
     assert not x_budunit.celldepth
-    assert not x_budunit._bud_acct_nets
+    assert not x_budunit._bud_person_nets
     assert not x_budunit._magnitude
 
 
@@ -48,14 +48,14 @@ def test_budunit_shop_ReturnsObj():
     assert t4_budunit.quota == default_fund_pool()
     assert t4_budunit._magnitude == 0
     assert t4_budunit.celldepth == 2
-    assert not t4_budunit._bud_acct_nets
+    assert not t4_budunit._bud_person_nets
 
 
-def test_budunit_shop_ReturnsObjWith_bud_acct_net():
+def test_budunit_shop_ReturnsObjWith_bud_person_net():
     # ESTABLISH
     t4_bud_time = 4
     t4_quota = 55
-    t4_bud_acct_nets = {"Sue": -4}
+    t4_bud_person_nets = {"Sue": -4}
     t4_magnitude = 677
     t4_celldepth = 88
 
@@ -63,7 +63,7 @@ def test_budunit_shop_ReturnsObjWith_bud_acct_net():
     x_budunit = budunit_shop(
         bud_time=t4_bud_time,
         quota=t4_quota,
-        bud_acct_nets=t4_bud_acct_nets,
+        bud_person_nets=t4_bud_person_nets,
         magnitude=t4_magnitude,
         celldepth=t4_celldepth,
     )
@@ -74,63 +74,63 @@ def test_budunit_shop_ReturnsObjWith_bud_acct_net():
     assert x_budunit.quota == t4_quota
     assert x_budunit.celldepth == t4_celldepth
     assert x_budunit._magnitude == 677
-    assert x_budunit._bud_acct_nets == t4_bud_acct_nets
+    assert x_budunit._bud_person_nets == t4_bud_person_nets
 
 
-def test_BudUnit_set_bud_acct_net_SetsAttr():
+def test_BudUnit_set_bud_person_net_SetsAttr():
     # ESTABLISH
     yao_budunit = budunit_shop("yao", 33)
-    assert yao_budunit._bud_acct_nets == {}
+    assert yao_budunit._bud_person_nets == {}
 
     # WHEN
     sue_str = "Sue"
-    sue_bud_acct_net = -44
-    yao_budunit.set_bud_acct_net(sue_str, sue_bud_acct_net)
+    sue_bud_person_net = -44
+    yao_budunit.set_bud_person_net(sue_str, sue_bud_person_net)
 
     # THEN
-    assert yao_budunit._bud_acct_nets != {}
-    assert yao_budunit._bud_acct_nets.get(sue_str) == sue_bud_acct_net
+    assert yao_budunit._bud_person_nets != {}
+    assert yao_budunit._bud_person_nets.get(sue_str) == sue_bud_person_net
 
 
-def test_BudUnit_bud_acct_net_exists_ReturnsObj():
+def test_BudUnit_bud_person_net_exists_ReturnsObj():
     # ESTABLISH
     yao_budunit = budunit_shop("yao", 33)
     sue_str = "Sue"
-    sue_bud_acct_net = -44
-    assert yao_budunit.bud_acct_net_exists(sue_str) is False
+    sue_bud_person_net = -44
+    assert yao_budunit.bud_person_net_exists(sue_str) is False
 
     # WHEN
-    yao_budunit.set_bud_acct_net(sue_str, sue_bud_acct_net)
+    yao_budunit.set_bud_person_net(sue_str, sue_bud_person_net)
 
     # THEN
-    assert yao_budunit.bud_acct_net_exists(sue_str)
+    assert yao_budunit.bud_person_net_exists(sue_str)
 
 
-def test_BudUnit_get_bud_acct_net_ReturnsObj():
+def test_BudUnit_get_bud_person_net_ReturnsObj():
     # ESTABLISH
     yao_budunit = budunit_shop("yao", 33)
     sue_str = "Sue"
-    sue_bud_acct_net = -44
-    yao_budunit.set_bud_acct_net(sue_str, sue_bud_acct_net)
+    sue_bud_person_net = -44
+    yao_budunit.set_bud_person_net(sue_str, sue_bud_person_net)
 
     # WHEN / THEN
-    assert yao_budunit.get_bud_acct_net(sue_str)
-    assert yao_budunit.get_bud_acct_net(sue_str) == sue_bud_acct_net
+    assert yao_budunit.get_bud_person_net(sue_str)
+    assert yao_budunit.get_bud_person_net(sue_str) == sue_bud_person_net
 
 
-def test_BudUnit_del_bud_acct_net_SetsAttr():
+def test_BudUnit_del_bud_person_net_SetsAttr():
     # ESTABLISH
     yao_budunit = budunit_shop("yao", 33)
     sue_str = "Sue"
-    sue_bud_acct_net = -44
-    yao_budunit.set_bud_acct_net(sue_str, sue_bud_acct_net)
-    assert yao_budunit.bud_acct_net_exists(sue_str)
+    sue_bud_person_net = -44
+    yao_budunit.set_bud_person_net(sue_str, sue_bud_person_net)
+    assert yao_budunit.bud_person_net_exists(sue_str)
 
     # WHEN
-    yao_budunit.del_bud_acct_net(sue_str)
+    yao_budunit.del_bud_person_net(sue_str)
 
     # THEN
-    assert yao_budunit.bud_acct_net_exists(sue_str) is False
+    assert yao_budunit.bud_person_net_exists(sue_str) is False
 
 
 def test_BudUnit_get_dict_ReturnsObj():
@@ -162,9 +162,9 @@ def test_BudUnit_calc_magnitude_SetsAttr_Scenario0():
 def test_BudUnit_calc_magnitude_SetsAttr_Scenario1():
     # ESTABLISH
     t4_bud_time = 4
-    t4_bud_acct_nets = {"Sue": -4, "Yao": 2, "Zia": 2}
+    t4_bud_person_nets = {"Sue": -4, "Yao": 2, "Zia": 2}
 
-    t4_budunit = budunit_shop(t4_bud_time, bud_acct_nets=t4_bud_acct_nets)
+    t4_budunit = budunit_shop(t4_bud_time, bud_person_nets=t4_bud_person_nets)
     assert t4_budunit._magnitude == 0
 
     # WHEN
@@ -177,9 +177,9 @@ def test_BudUnit_calc_magnitude_SetsAttr_Scenario1():
 def test_BudUnit_calc_magnitude_SetsAttr_Scenario2():
     # ESTABLISH
     t4_bud_time = 4
-    t4_bud_acct_nets = {"Bob": -13, "Sue": -7, "Yao": 18, "Zia": 2}
+    t4_bud_person_nets = {"Bob": -13, "Sue": -7, "Yao": 18, "Zia": 2}
 
-    t4_budunit = budunit_shop(t4_bud_time, bud_acct_nets=t4_bud_acct_nets)
+    t4_budunit = budunit_shop(t4_bud_time, bud_person_nets=t4_bud_person_nets)
     assert t4_budunit._magnitude == 0
 
     # WHEN
@@ -192,32 +192,32 @@ def test_BudUnit_calc_magnitude_SetsAttr_Scenario2():
 def test_BudUnit_calc_magnitude_SetsAttr_Scenario3_RaisesError():
     # ESTABLISH
     t4_bud_time = 4
-    bob_bud_acct_net = -13
-    sue_bud_acct_net = -3
-    yao_bud_acct_net = 100
-    t4_bud_acct_nets = {
-        "Bob": bob_bud_acct_net,
-        "Sue": sue_bud_acct_net,
-        "Yao": yao_bud_acct_net,
+    bob_bud_person_net = -13
+    sue_bud_person_net = -3
+    yao_bud_person_net = 100
+    t4_bud_person_nets = {
+        "Bob": bob_bud_person_net,
+        "Sue": sue_bud_person_net,
+        "Yao": yao_bud_person_net,
     }
-    t4_budunit = budunit_shop(t4_bud_time, bud_acct_nets=t4_bud_acct_nets)
+    t4_budunit = budunit_shop(t4_bud_time, bud_person_nets=t4_bud_person_nets)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         t4_budunit.calc_magnitude()
-    exception_str = f"magnitude cannot be calculated: debt_bud_acct_net={bob_bud_acct_net+sue_bud_acct_net}, cred_bud_acct_net={yao_bud_acct_net}"
+    exception_str = f"magnitude cannot be calculated: debt_bud_person_net={bob_bud_person_net+sue_bud_person_net}, cred_bud_person_net={yao_bud_person_net}"
     assert str(excinfo.value) == exception_str
 
 
-def test_BudUnit_get_dict_ReturnsObjWith_bud_acct_net():
+def test_BudUnit_get_dict_ReturnsObjWith_bud_person_net():
     # ESTABLISH
     t4_bud_time = 4
     t4_quota = 55
-    t4_bud_acct_nets = {"Sue": -4}
+    t4_bud_person_nets = {"Sue": -4}
     t4_magnitude = 67
     t4_celldepth = 5
     t4_budunit = budunit_shop(
-        t4_bud_time, t4_quota, t4_bud_acct_nets, t4_magnitude, t4_celldepth
+        t4_bud_time, t4_quota, t4_bud_person_nets, t4_magnitude, t4_celldepth
     )
 
     # WHEN
@@ -228,7 +228,7 @@ def test_BudUnit_get_dict_ReturnsObjWith_bud_acct_net():
         bud_time_str(): t4_bud_time,
         quota_str(): t4_quota,
         magnitude_str(): t4_magnitude,
-        bud_acct_nets_str(): t4_bud_acct_nets,
+        bud_person_nets_str(): t4_bud_person_nets,
         celldepth_str(): t4_celldepth,
     }
 
@@ -238,9 +238,9 @@ def test_BudUnit_get_json_ReturnsObj():
     t4_bud_time = 4
     t4_quota = 55
     t4_celldepth = 11
-    t4_bud_acct_nets = {"Sue": -77}
+    t4_bud_person_nets = {"Sue": -77}
     t4_budunit = budunit_shop(
-        t4_bud_time, t4_quota, t4_bud_acct_nets, celldepth=t4_celldepth
+        t4_bud_time, t4_quota, t4_bud_person_nets, celldepth=t4_celldepth
     )
     t4_budunit._magnitude = 67
 
@@ -249,7 +249,7 @@ def test_BudUnit_get_json_ReturnsObj():
 
     # THEN
     static_t4_json = """{
-  "bud_acct_nets": {
+  "bud_person_nets": {
     "Sue": -77
   },
   "bud_time": 4,
@@ -286,11 +286,11 @@ def test_get_budunit_from_dict_ReturnsObj_Scenario1():
     t4_quota = 55
     t4_magnitude = 65
     t4_celldepth = 33
-    t4_bud_acct_nets = {"Sue": -77}
+    t4_bud_person_nets = {"Sue": -77}
     t4_budunit = budunit_shop(
         t4_bud_time,
         t4_quota,
-        t4_bud_acct_nets,
+        t4_bud_person_nets,
         t4_magnitude,
         celldepth=t4_celldepth,
     )
@@ -304,7 +304,7 @@ def test_get_budunit_from_dict_ReturnsObj_Scenario1():
     assert x_budunit.bud_time == t4_bud_time
     assert x_budunit.quota == t4_quota
     assert x_budunit._magnitude == t4_magnitude
-    assert x_budunit._bud_acct_nets == t4_bud_acct_nets
+    assert x_budunit._bud_person_nets == t4_bud_person_nets
     assert x_budunit.celldepth == t4_celldepth
     assert x_budunit == t4_budunit
 
@@ -313,8 +313,8 @@ def test_get_budunit_from_json_ReturnsObj():
     # ESTABLISH
     t4_bud_time = 4
     t4_quota = 55
-    t4_bud_acct_nets = {"Sue": -57}
-    t4_budunit = budunit_shop(t4_bud_time, t4_quota, t4_bud_acct_nets)
+    t4_bud_person_nets = {"Sue": -57}
+    t4_budunit = budunit_shop(t4_bud_time, t4_quota, t4_bud_person_nets)
     t4_json = t4_budunit.get_json()
 
     # WHEN
@@ -324,5 +324,5 @@ def test_get_budunit_from_json_ReturnsObj():
     assert x_budunit
     assert x_budunit.bud_time == t4_bud_time
     assert x_budunit.quota == t4_quota
-    assert x_budunit._bud_acct_nets == t4_bud_acct_nets
+    assert x_budunit._bud_person_nets == t4_bud_person_nets
     assert x_budunit == t4_budunit

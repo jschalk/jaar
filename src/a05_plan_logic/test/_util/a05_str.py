@@ -7,12 +7,12 @@ def _active_hx_str() -> str:
     return "_active_hx"
 
 
-def _all_acct_cred_str() -> str:
-    return "_all_acct_cred"
+def _all_person_cred_str() -> str:
+    return "_all_person_cred"
 
 
-def _all_acct_debt_str() -> str:
-    return "_all_acct_debt"
+def _all_person_debt_str() -> str:
+    return "_all_person_debt"
 
 
 def _awardheirs_str() -> str:

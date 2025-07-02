@@ -3,16 +3,16 @@ from src.a00_data_toolbox.db_toolbox import create_insert_query
 from src.a10_believer_calc.believer_calc_config import get_believer_calc_dimen_args
 from src.a18_etl_toolbox.db_obj_believer_tool import (
     create_believerunit_metrics_insert_sqlstr,
-    create_onracct_metrics_insert_sqlstr,
-    create_onrawar_metrics_insert_sqlstr,
-    create_onrfact_metrics_insert_sqlstr,
-    create_onrgrou_metrics_insert_sqlstr,
-    create_onrheal_metrics_insert_sqlstr,
-    create_onrlabo_metrics_insert_sqlstr,
-    create_onrmemb_metrics_insert_sqlstr,
-    create_onrplan_metrics_insert_sqlstr,
-    create_onrprem_metrics_insert_sqlstr,
-    create_onrreas_metrics_insert_sqlstr,
+    create_blrawar_metrics_insert_sqlstr,
+    create_blrfact_metrics_insert_sqlstr,
+    create_blrgrou_metrics_insert_sqlstr,
+    create_blrheal_metrics_insert_sqlstr,
+    create_blrlabo_metrics_insert_sqlstr,
+    create_blrmemb_metrics_insert_sqlstr,
+    create_blrpern_metrics_insert_sqlstr,
+    create_blrplan_metrics_insert_sqlstr,
+    create_blrprem_metrics_insert_sqlstr,
+    create_blrreas_metrics_insert_sqlstr,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import create_job_tables
 
@@ -77,7 +77,7 @@ def test_create_believerunit_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_onrplan_metrics_insert_sqlstr_ReturnsObj():
+def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
     x_args = get_believer_calc_dimen_args("believer_planunit")
@@ -94,8 +94,8 @@ def test_create_onrplan_metrics_insert_sqlstr_ReturnsObj():
     x_belief_label = "amy23"
     x_believer_name = "Sue"
     x__active = 1
-    x__all_acct_cred = 2
-    x__all_acct_debt = 3
+    x__all_person_cred = 2
+    x__all_person_debt = 3
     x__descendant_task_count = 4
     x__fund_cease = 5
     x_fund_iota = 6
@@ -123,8 +123,8 @@ def test_create_onrplan_metrics_insert_sqlstr_ReturnsObj():
         "belief_label": x_belief_label,
         "believer_name": x_believer_name,
         "_active": x__active,
-        "_all_acct_cred": x__all_acct_cred,
-        "_all_acct_debt": x__all_acct_debt,
+        "_all_person_cred": x__all_person_cred,
+        "_all_person_debt": x__all_person_debt,
         "_descendant_task_count": x__descendant_task_count,
         "_fund_cease": x__fund_cease,
         "fund_iota": x_fund_iota,
@@ -153,7 +153,7 @@ def test_create_onrplan_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_onrplan_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_blrplan_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
@@ -168,7 +168,7 @@ def test_create_onrplan_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_onrreas_metrics_insert_sqlstr_ReturnsObj():
+def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
     x_args = get_believer_calc_dimen_args("believer_plan_reasonunit")
@@ -213,7 +213,7 @@ def test_create_onrreas_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_onrreas_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_blrreas_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
@@ -228,7 +228,7 @@ def test_create_onrreas_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_onrprem_metrics_insert_sqlstr_ReturnsObj():
+def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
     x_args = get_believer_calc_dimen_args("believer_plan_reason_premiseunit")
@@ -280,7 +280,7 @@ def test_create_onrprem_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_onrprem_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_blrprem_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
@@ -295,7 +295,7 @@ def test_create_onrprem_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_onrawar_metrics_insert_sqlstr_ReturnsObj():
+def test_create_blrawar_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
     x_args = get_believer_calc_dimen_args("believer_plan_awardlink")
@@ -343,7 +343,7 @@ def test_create_onrawar_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_onrawar_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_blrawar_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
@@ -358,7 +358,7 @@ def test_create_onrawar_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_onrfact_metrics_insert_sqlstr_ReturnsObj():
+def test_create_blrfact_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
     x_args = get_believer_calc_dimen_args("believer_plan_factunit")
@@ -404,7 +404,7 @@ def test_create_onrfact_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_onrfact_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_blrfact_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
@@ -419,7 +419,7 @@ def test_create_onrfact_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_onrheal_metrics_insert_sqlstr_ReturnsObj():
+def test_create_blrheal_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
     x_args = get_believer_calc_dimen_args("believer_plan_healerlink")
@@ -459,7 +459,7 @@ def test_create_onrheal_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_onrheal_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_blrheal_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
@@ -474,7 +474,7 @@ def test_create_onrheal_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_onrlabo_metrics_insert_sqlstr_ReturnsObj():
+def test_create_blrlabo_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
     x_args = get_believer_calc_dimen_args("believer_plan_laborlink")
@@ -516,7 +516,7 @@ def test_create_onrlabo_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_onrlabo_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_blrlabo_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
@@ -531,10 +531,10 @@ def test_create_onrlabo_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_onracct_metrics_insert_sqlstr_ReturnsObj():
+def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_believer_calc_dimen_args("believer_acctunit")
+    x_args = get_believer_calc_dimen_args("believer_personunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -559,9 +559,9 @@ def test_create_onracct_metrics_insert_sqlstr_ReturnsObj():
 
     x_belief_label = "amy23"
     x_believer_name = "Sue"
-    x_acct_name = 1
-    x_acct_cred_points = 2
-    x_acct_debt_points = 3
+    x_person_name = 1
+    x_person_cred_points = 2
+    x_person_debt_points = 3
     x__credor_pool = 4
     x__debtor_pool = 5
     x__fund_give = 6
@@ -570,14 +570,14 @@ def test_create_onracct_metrics_insert_sqlstr_ReturnsObj():
     x__fund_agenda_take = 9
     x__fund_agenda_ratio_give = 10
     x__fund_agenda_ratio_take = 11
-    x__inallocable_acct_debt_points = 12
-    x__irrational_acct_debt_points = 13
+    x__inallocable_person_debt_points = 12
+    x__irrational_person_debt_points = 13
     values_dict = {
         "belief_label": x_belief_label,
         "believer_name": x_believer_name,
-        "acct_name": x_acct_name,
-        "acct_cred_points": x_acct_cred_points,
-        "acct_debt_points": x_acct_debt_points,
+        "person_name": x_person_name,
+        "person_cred_points": x_person_cred_points,
+        "person_debt_points": x_person_debt_points,
         "_credor_pool": x__credor_pool,
         "_debtor_pool": x__debtor_pool,
         "_fund_give": x__fund_give,
@@ -586,21 +586,21 @@ def test_create_onracct_metrics_insert_sqlstr_ReturnsObj():
         "_fund_agenda_take": x__fund_agenda_take,
         "_fund_agenda_ratio_give": x__fund_agenda_ratio_give,
         "_fund_agenda_ratio_take": x__fund_agenda_ratio_take,
-        "_inallocable_acct_debt_points": x__inallocable_acct_debt_points,
-        "_irrational_acct_debt_points": x__irrational_acct_debt_points,
+        "_inallocable_person_debt_points": x__inallocable_person_debt_points,
+        "_irrational_person_debt_points": x__irrational_person_debt_points,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_onracct_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_blrpern_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "believer_acctunit_job"
+        table_name = "believer_personunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -608,10 +608,10 @@ def test_create_onracct_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_onrmemb_metrics_insert_sqlstr_ReturnsObj():
+def test_create_blrmemb_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_believer_calc_dimen_args("believer_acct_membership")
+    x_args = get_believer_calc_dimen_args("believer_person_membership")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -636,7 +636,7 @@ def test_create_onrmemb_metrics_insert_sqlstr_ReturnsObj():
 
     x_belief_label = "amy23"
     x_believer_name = "Sue"
-    x_acct_name = 1
+    x_person_name = 1
     x_group_title = 2
     x_group_cred_points = 3
     x_group_debt_points = 4
@@ -651,7 +651,7 @@ def test_create_onrmemb_metrics_insert_sqlstr_ReturnsObj():
     values_dict = {
         "belief_label": x_belief_label,
         "believer_name": x_believer_name,
-        "acct_name": x_acct_name,
+        "person_name": x_person_name,
         "group_title": x_group_title,
         "group_cred_points": x_group_cred_points,
         "group_debt_points": x_group_debt_points,
@@ -668,14 +668,14 @@ def test_create_onrmemb_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_onrmemb_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_blrmemb_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "believer_acct_membership_job"
+        table_name = "believer_person_membership_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -683,7 +683,7 @@ def test_create_onrmemb_metrics_insert_sqlstr_ReturnsObj():
         assert insert_sqlstr == expected_sqlstr
 
 
-def test_create_onrgrou_metrics_insert_sqlstr_ReturnsObj():
+def test_create_blrgrou_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
     x_args = get_believer_calc_dimen_args("believer_groupunit")
@@ -737,7 +737,7 @@ def test_create_onrgrou_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_onrgrou_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_blrgrou_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr

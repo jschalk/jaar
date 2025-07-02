@@ -79,17 +79,17 @@ def test_create_cell_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
     x_cell = cellunit_shop(bob_str, [], event56, x_celldepth, quota=x_quota)
     bob37_dir = cell_dir(belief_mstr_dir, a23_str, bob_str, tp37, [])
     cellunit_save_to_dir(bob37_dir, x_cell)
-    bob_accts = [[yao_str], [bob_str], [zia_str]]
-    yao_accts = [[zia_str]]
-    zia_accts = [[bob_str], [yao_str]]
+    bob_persons = [[yao_str], [bob_str], [zia_str]]
+    yao_persons = [[zia_str]]
+    zia_persons = [[bob_str], [yao_str]]
     bob_e56_path = save_believerevent(
-        belief_mstr_dir, a23_str, bob_str, event56, bob_accts
+        belief_mstr_dir, a23_str, bob_str, event56, bob_persons
     )
     yao_e56_path = save_believerevent(
-        belief_mstr_dir, a23_str, yao_str, event56, yao_accts
+        belief_mstr_dir, a23_str, yao_str, event56, yao_persons
     )
     zia_e56_path = save_believerevent(
-        belief_mstr_dir, a23_str, zia_str, event56, zia_accts
+        belief_mstr_dir, a23_str, zia_str, event56, zia_persons
     )
     assert os_path_exists(bob_e56_path)
     assert os_path_exists(yao_e56_path)
@@ -172,20 +172,20 @@ def test_create_cell_tree_Scenaro3_LedgerDepth1_MostRecentEvent(env_dir_setup_cl
     x_cell = cellunit_shop(bob_str, [], event55, x_celldepth, quota=x_quota)
     bob37_dir = cell_dir(belief_mstr_dir, a23_str, bob_str, tp37, [])
     cellunit_save_to_dir(bob37_dir, x_cell)
-    bob_accts = [[yao_str], [bob_str], [zia_str]]
-    yao_accts = [[zia_str]]
-    zia_accts = [[bob_str], [yao_str]]
+    bob_persons = [[yao_str], [bob_str], [zia_str]]
+    yao_persons = [[zia_str]]
+    zia_persons = [[bob_str], [yao_str]]
     bob_e55_path = save_believerevent(
-        belief_mstr_dir, a23_str, bob_str, event55, bob_accts
+        belief_mstr_dir, a23_str, bob_str, event55, bob_persons
     )
     yao_e44_path = save_believerevent(
-        belief_mstr_dir, a23_str, yao_str, event44, yao_accts
+        belief_mstr_dir, a23_str, yao_str, event44, yao_persons
     )
     yao_e33_path = save_believerevent(
-        belief_mstr_dir, a23_str, yao_str, event33, yao_accts
+        belief_mstr_dir, a23_str, yao_str, event33, yao_persons
     )
     zia_e33_path = save_believerevent(
-        belief_mstr_dir, a23_str, zia_str, event33, zia_accts
+        belief_mstr_dir, a23_str, zia_str, event33, zia_persons
     )
     assert os_path_exists(bob_e55_path)
     assert os_path_exists(yao_e44_path)
@@ -270,20 +270,20 @@ def test_create_cell_tree_Scenaro4_LedgerDepth1_OneBelieverHasNoPast_believereve
     x_cell = cellunit_shop(bob_str, [], event55, x_celldepth, quota=x_quota)
     bob37_dir = cell_dir(belief_mstr_dir, a23_str, bob_str, tp37, [])
     cellunit_save_to_dir(bob37_dir, x_cell)
-    bob_accts = [[yao_str], [bob_str], [zia_str]]
-    yao_accts = [[zia_str]]
-    zia_accts = [[bob_str], [yao_str]]
+    bob_persons = [[yao_str], [bob_str], [zia_str]]
+    yao_persons = [[zia_str]]
+    zia_persons = [[bob_str], [yao_str]]
     bob_e55_path = save_believerevent(
-        belief_mstr_dir, a23_str, bob_str, event55, bob_accts
+        belief_mstr_dir, a23_str, bob_str, event55, bob_persons
     )
     yao_e44_path = save_believerevent(
-        belief_mstr_dir, a23_str, yao_str, event44, yao_accts
+        belief_mstr_dir, a23_str, yao_str, event44, yao_persons
     )
     yao_e33_path = save_believerevent(
-        belief_mstr_dir, a23_str, yao_str, event33, yao_accts
+        belief_mstr_dir, a23_str, yao_str, event33, yao_persons
     )
     zia_e66_path = save_believerevent(
-        belief_mstr_dir, a23_str, zia_str, event66, zia_accts
+        belief_mstr_dir, a23_str, zia_str, event66, zia_persons
     )
     assert os_path_exists(bob_e55_path)
     assert os_path_exists(yao_e44_path)
@@ -352,20 +352,20 @@ def test_create_cell_tree_Scenaro5_LedgerDepth1_ZeroQuotaDoesNotGetCreated(
     x_cell = cellunit_shop(bob_str, [], event55, x_celldepth, quota=x_quota)
     bob37_dir = cell_dir(belief_mstr_dir, a23_str, bob_str, tp37, [])
     cellunit_save_to_dir(bob37_dir, x_cell)
-    bob_accts = [[yao_str], [bob_str], [zia_str]]
-    yao_accts = [[zia_str]]
-    zia_accts = [[bob_str], [yao_str]]
+    bob_persons = [[yao_str], [bob_str], [zia_str]]
+    yao_persons = [[zia_str]]
+    zia_persons = [[bob_str], [yao_str]]
     bob_e55_path = save_believerevent(
-        belief_mstr_dir, a23_str, bob_str, event55, bob_accts
+        belief_mstr_dir, a23_str, bob_str, event55, bob_persons
     )
     yao_e44_path = save_believerevent(
-        belief_mstr_dir, a23_str, yao_str, event44, yao_accts
+        belief_mstr_dir, a23_str, yao_str, event44, yao_persons
     )
     yao_e33_path = save_believerevent(
-        belief_mstr_dir, a23_str, yao_str, event33, yao_accts
+        belief_mstr_dir, a23_str, yao_str, event33, yao_persons
     )
     zia_e33_path = save_believerevent(
-        belief_mstr_dir, a23_str, zia_str, event33, zia_accts
+        belief_mstr_dir, a23_str, zia_str, event33, zia_persons
     )
     assert os_path_exists(bob_e55_path)
     assert os_path_exists(yao_e44_path)

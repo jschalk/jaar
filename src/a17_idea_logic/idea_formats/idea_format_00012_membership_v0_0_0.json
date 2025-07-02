@@ -1,6 +1,6 @@
 {
     "attributes": {
-        "acct_name": {
+        "person_name": {
             "otx_key": true
         },
         "event_int": {
@@ -22,8 +22,8 @@
     "idea_number": "br00012",
     "dimens": [
         "believerunit",
-        "believer_acctunit",
-        "believer_acct_membership",
+        "believer_personunit",
+        "believer_person_membership",
         "beliefunit"
     ]
 }

@@ -41,7 +41,7 @@ def test_BelieverUnit_Exists():
     assert x_believer.belief_label is None
     assert x_believer.believer_name is None
     assert x_believer.tally is None
-    assert x_believer.accts is None
+    assert x_believer.persons is None
     assert x_believer.planroot is None
     assert x_believer.credor_respect is None
     assert x_believer.debtor_respect is None
@@ -81,7 +81,7 @@ def test_BelieverUnit_Exists():
         _reason_rcontexts_str(),
         _sum_healerlink_share_str(),
         _tree_traverse_count_str(),
-        "accts",
+        "persons",
         knot_str(),
         "planroot",
         credor_respect_str(),
@@ -125,7 +125,7 @@ def test_believerunit_shop_ReturnsObjectWithFilledFields():
     assert x_believer.believer_name == sue_str
     assert x_believer.belief_label == iowa_belief_label
     assert x_believer.tally == 1
-    assert x_believer.accts == {}
+    assert x_believer.persons == {}
     assert x_believer.planroot is not None
     assert x_believer.max_tree_traverse == 3
     assert x_believer.knot == slash_knot

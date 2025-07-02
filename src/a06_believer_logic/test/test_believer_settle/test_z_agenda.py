@@ -449,7 +449,7 @@ def test_BelieverUnit_set_fact_Isue116Resolved_correctlySetsChoreAsTrue():
     assert get_chores_count(task_plan_list) == 64
 
 
-def test_BelieverUnit_agenda_IsSetByLaborUnit_1AcctGroup():
+def test_BelieverUnit_agenda_IsSetByLaborUnit_1PersonGroup():
     # ESTABLISH
     yao_str = "Yao"
     yao_believer = believerunit_shop(yao_str)
@@ -459,7 +459,7 @@ def test_BelieverUnit_agenda_IsSetByLaborUnit_1AcctGroup():
     assert len(yao_believer.get_agenda_dict()) == 1
 
     sue_str = "Sue"
-    yao_believer.add_acctunit(sue_str)
+    yao_believer.add_personunit(sue_str)
     laborunit_sue = laborunit_shop()
     laborunit_sue.set_laborlink(labor_title=sue_str)
     assert len(yao_believer.get_agenda_dict()) == 1
@@ -471,7 +471,7 @@ def test_BelieverUnit_agenda_IsSetByLaborUnit_1AcctGroup():
     assert len(yao_believer.get_agenda_dict()) == 0
 
     # WHEN
-    yao_believer.add_acctunit(yao_str)
+    yao_believer.add_personunit(yao_str)
     laborunit_yao = laborunit_shop()
     laborunit_yao.set_laborlink(labor_title=yao_str)
 
@@ -485,20 +485,20 @@ def test_BelieverUnit_agenda_IsSetByLaborUnit_1AcctGroup():
     # print(f"{agenda_dict[0].plan_label=}")
 
 
-def test_BelieverUnit_get_agenda_dict_IsSetByLaborUnit_2AcctGroup():
+def test_BelieverUnit_get_agenda_dict_IsSetByLaborUnit_2PersonGroup():
     # ESTABLISH
     yao_str = "Yao"
     yao_believer = believerunit_shop(yao_str)
-    yao_believer.add_acctunit(yao_str)
+    yao_believer.add_personunit(yao_str)
     casa_str = "casa"
     casa_rope = yao_believer.make_l1_rope(casa_str)
     yao_believer.set_l1_plan(planunit_shop(casa_str, task=True))
 
     sue_str = "Sue"
-    yao_believer.add_acctunit(sue_str)
+    yao_believer.add_personunit(sue_str)
     run_str = ";runners"
-    sue_acctunit = yao_believer.get_acct(sue_str)
-    sue_acctunit.add_membership(run_str)
+    sue_personunit = yao_believer.get_person(sue_str)
+    sue_personunit.add_membership(run_str)
 
     run_laborunit = laborunit_shop()
     run_laborunit.set_laborlink(labor_title=run_str)
@@ -511,8 +511,8 @@ def test_BelieverUnit_get_agenda_dict_IsSetByLaborUnit_2AcctGroup():
     assert len(yao_believer.get_agenda_dict()) == 0
 
     # WHEN
-    yao_acctunit = yao_believer.get_acct(yao_str)
-    yao_acctunit.add_membership(run_str)
+    yao_personunit = yao_believer.get_person(yao_str)
+    yao_personunit.add_membership(run_str)
 
     # THEN
     assert len(yao_believer.get_agenda_dict()) == 1
@@ -535,7 +535,7 @@ def test_BelieverUnit_get_all_tasks_ReturnsObj():
     zia_believer.set_plan(planunit_shop(sweep_str, task=True), clean_rope)
     sweep_plan = zia_believer.get_plan_obj(sweep_rope)
     yao_str = "Yao"
-    zia_believer.add_acctunit(yao_str)
+    zia_believer.add_personunit(yao_str)
     sweep_plan.laborunit.set_laborlink(yao_str)
     print(f"{sweep_plan}")
     agenda_dict = zia_believer.get_agenda_dict()

@@ -50,7 +50,7 @@ def test_BelieverUnit_settle_believer_CorrectlySets_keeps_justified_WhenSinglePr
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     yao_str = "Yao"
-    sue_believer.add_acctunit(yao_str)
+    sue_believer.add_personunit(yao_str)
     yao_healerlink = healerlink_shop({yao_str})
     sue_believer.set_l1_plan(
         planunit_shop("Texas", healerlink=yao_healerlink, problem_bool=True)
@@ -68,7 +68,7 @@ def test_BelieverUnit_settle_believer_CorrectlySets_keeps_justified_WhenKeepIsLe
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     yao_str = "Yao"
-    sue_believer.add_acctunit(yao_str)
+    sue_believer.add_personunit(yao_str)
     yao_healerlink = healerlink_shop({yao_str})
 
     texas_str = "Texas"

@@ -87,34 +87,34 @@ def test_BelieverUnit_settle_believer_ClearsDescendantAttributes():
     mon_rope = sue_believer.make_rope(wk_rope, mon_str)
     mon_plan = sue_believer.get_plan_obj(mon_rope)
     assert sue_believer.planroot._descendant_task_count is None
-    assert sue_believer.planroot._all_acct_cred is None
-    assert sue_believer.planroot._all_acct_debt is None
+    assert sue_believer.planroot._all_person_cred is None
+    assert sue_believer.planroot._all_person_debt is None
     assert casa_plan._descendant_task_count is None
-    assert casa_plan._all_acct_cred is None
-    assert casa_plan._all_acct_debt is None
+    assert casa_plan._all_person_cred is None
+    assert casa_plan._all_person_debt is None
     assert mon_plan._descendant_task_count is None
-    assert mon_plan._all_acct_cred is None
-    assert mon_plan._all_acct_debt is None
+    assert mon_plan._all_person_cred is None
+    assert mon_plan._all_person_debt is None
 
     sue_believer.planroot._descendant_task_count = -2
-    sue_believer.planroot._all_acct_cred = -2
-    sue_believer.planroot._all_acct_debt = -2
+    sue_believer.planroot._all_person_cred = -2
+    sue_believer.planroot._all_person_debt = -2
     casa_plan._descendant_task_count = -2
-    casa_plan._all_acct_cred = -2
-    casa_plan._all_acct_debt = -2
+    casa_plan._all_person_cred = -2
+    casa_plan._all_person_debt = -2
     mon_plan._descendant_task_count = -2
-    mon_plan._all_acct_cred = -2
-    mon_plan._all_acct_debt = -2
+    mon_plan._all_person_cred = -2
+    mon_plan._all_person_debt = -2
 
     assert sue_believer.planroot._descendant_task_count == -2
-    assert sue_believer.planroot._all_acct_cred == -2
-    assert sue_believer.planroot._all_acct_debt == -2
+    assert sue_believer.planroot._all_person_cred == -2
+    assert sue_believer.planroot._all_person_debt == -2
     assert casa_plan._descendant_task_count == -2
-    assert casa_plan._all_acct_cred == -2
-    assert casa_plan._all_acct_debt == -2
+    assert casa_plan._all_person_cred == -2
+    assert casa_plan._all_person_debt == -2
     assert mon_plan._descendant_task_count == -2
-    assert mon_plan._all_acct_cred == -2
-    assert mon_plan._all_acct_debt == -2
+    assert mon_plan._all_person_cred == -2
+    assert mon_plan._all_person_debt == -2
 
     # WHEN
     sue_believer.settle_believer()
@@ -124,28 +124,28 @@ def test_BelieverUnit_settle_believer_ClearsDescendantAttributes():
     assert casa_plan._descendant_task_count == 0
     assert mon_plan._descendant_task_count == 0
 
-    assert mon_plan._all_acct_cred is True
-    assert mon_plan._all_acct_debt is True
-    assert casa_plan._all_acct_cred is True
-    assert casa_plan._all_acct_debt is True
-    assert sue_believer.planroot._all_acct_cred is True
-    assert sue_believer.planroot._all_acct_debt is True
+    assert mon_plan._all_person_cred is True
+    assert mon_plan._all_person_debt is True
+    assert casa_plan._all_person_cred is True
+    assert casa_plan._all_person_debt is True
+    assert sue_believer.planroot._all_person_cred is True
+    assert sue_believer.planroot._all_person_debt is True
 
 
 def test_BelieverUnit_settle_believer_RootOnlyCorrectlySetsDescendantAttributes():
     # ESTABLISH
     yao_believer = believerunit_shop(believer_name="Yao")
     assert yao_believer.planroot._descendant_task_count is None
-    assert yao_believer.planroot._all_acct_cred is None
-    assert yao_believer.planroot._all_acct_debt is None
+    assert yao_believer.planroot._all_person_cred is None
+    assert yao_believer.planroot._all_person_debt is None
 
     # WHEN
     yao_believer.settle_believer()
 
     # THEN
     assert yao_believer.planroot._descendant_task_count == 0
-    assert yao_believer.planroot._all_acct_cred is True
-    assert yao_believer.planroot._all_acct_debt is True
+    assert yao_believer.planroot._all_person_cred is True
+    assert yao_believer.planroot._all_person_debt is True
 
 
 def test_BelieverUnit_settle_believer_NLevelCorrectlySetsDescendantAttributes_1():
@@ -169,14 +169,14 @@ def test_BelieverUnit_settle_believer_NLevelCorrectlySetsDescendantAttributes_1(
     root_rope = to_rope(sue_believer.belief_label)
     x_planroot = sue_believer.get_plan_obj(root_rope)
     assert x_planroot._descendant_task_count is None
-    assert x_planroot._all_acct_cred is None
-    assert x_planroot._all_acct_debt is None
+    assert x_planroot._all_person_cred is None
+    assert x_planroot._all_person_debt is None
     assert casa_plan._descendant_task_count is None
-    assert casa_plan._all_acct_cred is None
-    assert casa_plan._all_acct_debt is None
+    assert casa_plan._all_person_cred is None
+    assert casa_plan._all_person_debt is None
     assert mon_plan._descendant_task_count is None
-    assert mon_plan._all_acct_cred is None
-    assert mon_plan._all_acct_debt is None
+    assert mon_plan._all_person_cred is None
+    assert mon_plan._all_person_debt is None
 
     # WHEN
     sue_believer.settle_believer()
@@ -186,12 +186,12 @@ def test_BelieverUnit_settle_believer_NLevelCorrectlySetsDescendantAttributes_1(
     assert casa_plan._descendant_task_count == 1
     assert casa_plan._kids[email_str]._descendant_task_count == 0
     assert mon_plan._descendant_task_count == 0
-    assert x_planroot._all_acct_cred is True
-    assert x_planroot._all_acct_debt is True
-    assert casa_plan._all_acct_cred is True
-    assert casa_plan._all_acct_debt is True
-    assert mon_plan._all_acct_cred is True
-    assert mon_plan._all_acct_debt is True
+    assert x_planroot._all_person_cred is True
+    assert x_planroot._all_person_debt is True
+    assert casa_plan._all_person_cred is True
+    assert casa_plan._all_person_debt is True
+    assert mon_plan._all_person_cred is True
+    assert mon_plan._all_person_debt is True
 
 
 def test_BelieverUnit_settle_believer_NLevelCorrectlySetsDescendantAttributes_2():
@@ -211,7 +211,7 @@ def test_BelieverUnit_settle_believer_NLevelCorrectlySetsDescendantAttributes_2(
     vacuum_plan = planunit_shop(vacuum_str, task=True)
     sue_believer.set_plan(vacuum_plan, parent_rope=casa_rope)
 
-    sue_believer.add_acctunit(acct_name=sue_str)
+    sue_believer.add_personunit(person_name=sue_str)
     x_awardlink = awardlink_shop(awardee_title=sue_str)
 
     sue_believer.planroot._kids[casa_str]._kids[email_str].set_awardlink(
@@ -226,22 +226,22 @@ def test_BelieverUnit_settle_believer_NLevelCorrectlySetsDescendantAttributes_2(
     # print(sue_believer._kids[casa_str]._kids[email_str]._awardlink)
 
     # THEN
-    assert sue_believer.planroot._all_acct_cred is False
-    assert sue_believer.planroot._all_acct_debt is False
+    assert sue_believer.planroot._all_person_cred is False
+    assert sue_believer.planroot._all_person_debt is False
     casa_plan = sue_believer.planroot._kids[casa_str]
-    assert casa_plan._all_acct_cred is False
-    assert casa_plan._all_acct_debt is False
-    assert casa_plan._kids[email_str]._all_acct_cred is False
-    assert casa_plan._kids[email_str]._all_acct_debt is False
-    assert casa_plan._kids[vacuum_str]._all_acct_cred is True
-    assert casa_plan._kids[vacuum_str]._all_acct_debt is True
+    assert casa_plan._all_person_cred is False
+    assert casa_plan._all_person_debt is False
+    assert casa_plan._kids[email_str]._all_person_cred is False
+    assert casa_plan._kids[email_str]._all_person_debt is False
+    assert casa_plan._kids[vacuum_str]._all_person_cred is True
+    assert casa_plan._kids[vacuum_str]._all_person_debt is True
     wk_plan = sue_believer.planroot._kids[wk_str]
-    assert wk_plan._all_acct_cred is True
-    assert wk_plan._all_acct_debt is True
-    assert wk_plan._kids[mon_str]._all_acct_cred is True
-    assert wk_plan._kids[mon_str]._all_acct_debt is True
-    assert wk_plan._kids[tue_str]._all_acct_cred is True
-    assert wk_plan._kids[tue_str]._all_acct_debt is True
+    assert wk_plan._all_person_cred is True
+    assert wk_plan._all_person_debt is True
+    assert wk_plan._kids[mon_str]._all_person_cred is True
+    assert wk_plan._kids[mon_str]._all_person_debt is True
+    assert wk_plan._kids[tue_str]._all_person_cred is True
+    assert wk_plan._kids[tue_str]._all_person_debt is True
 
 
 def test_BelieverUnit_settle_believer_SetsPlanUnitAttr_awardlinks():
@@ -251,12 +251,12 @@ def test_BelieverUnit_settle_believer_SetsPlanUnitAttr_awardlinks():
     yao_str = "Yao"
     zia_str = "Zia"
     Xio_str = "Xio"
-    sue_believer.add_acctunit(yao_str)
-    sue_believer.add_acctunit(zia_str)
-    sue_believer.add_acctunit(Xio_str)
+    sue_believer.add_personunit(yao_str)
+    sue_believer.add_personunit(zia_str)
+    sue_believer.add_personunit(Xio_str)
 
-    assert len(sue_believer.accts) == 3
-    assert len(sue_believer.get_acctunit_group_titles_dict()) == 3
+    assert len(sue_believer.persons) == 3
+    assert len(sue_believer.get_personunit_group_titles_dict()) == 3
     swim_str = "swim"
     sue_believer.set_l1_plan(planunit_shop(swim_str))
     awardlink_yao = awardlink_shop(yao_str, give_force=10)
@@ -327,9 +327,9 @@ def test_BelieverUnit_settle_believer_DoesNotKeepUnneeded_awardheirs():
     yao_believer = believerunit_shop(yao_str)
     zia_str = "Zia"
     Xio_str = "Xio"
-    yao_believer.add_acctunit(yao_str)
-    yao_believer.add_acctunit(zia_str)
-    yao_believer.add_acctunit(Xio_str)
+    yao_believer.add_personunit(yao_str)
+    yao_believer.add_personunit(zia_str)
+    yao_believer.add_personunit(Xio_str)
 
     swim_str = "swim"
     swim_rope = yao_believer.make_l1_rope(swim_str)
@@ -521,19 +521,19 @@ def test_BelieverUnit_settle_believer_CreatesNewGroupUnitsWhenNeeded_Scenario0()
     yao_str = "Yao"
     yao_believer = believerunit_shop(yao_str)
     zia_str = "Zia"
-    yao_acct_cred_points = 3
-    yao_acct_debt_points = 2
-    zia_acct_cred_points = 4
-    zia_acct_debt_points = 5
-    yao_believer.add_acctunit(yao_str, yao_acct_cred_points, yao_acct_debt_points)
-    yao_believer.add_acctunit(zia_str, zia_acct_cred_points, zia_acct_debt_points)
+    yao_person_cred_points = 3
+    yao_person_debt_points = 2
+    zia_person_cred_points = 4
+    zia_person_debt_points = 5
+    yao_believer.add_personunit(yao_str, yao_person_cred_points, yao_person_debt_points)
+    yao_believer.add_personunit(zia_str, zia_person_cred_points, zia_person_debt_points)
     root_rope = to_rope(yao_believer.belief_label)
     x_planroot = yao_believer.get_plan_obj(root_rope)
     x_planroot.set_awardlink(awardlink_shop(yao_str))
     x_planroot.set_awardlink(awardlink_shop(zia_str))
     xio_str = "Xio"
     x_planroot.set_awardlink(awardlink_shop(xio_str))
-    assert len(yao_believer.get_acctunit_group_titles_dict()) == 2
+    assert len(yao_believer.get_personunit_group_titles_dict()) == 2
     assert not yao_believer.groupunit_exists(yao_str)
     assert not yao_believer.groupunit_exists(zia_str)
     assert not yao_believer.groupunit_exists(xio_str)
@@ -545,8 +545,8 @@ def test_BelieverUnit_settle_believer_CreatesNewGroupUnitsWhenNeeded_Scenario0()
     assert yao_believer.groupunit_exists(yao_str)
     assert yao_believer.groupunit_exists(zia_str)
     assert yao_believer.groupunit_exists(xio_str)
-    assert len(yao_believer.get_acctunit_group_titles_dict()) == 2
-    assert len(yao_believer.get_acctunit_group_titles_dict()) != len(
+    assert len(yao_believer.get_personunit_group_titles_dict()) == 2
+    assert len(yao_believer.get_personunit_group_titles_dict()) != len(
         yao_believer._groupunits
     )
     assert len(yao_believer._groupunits) == 3
@@ -560,10 +560,10 @@ def test_BelieverUnit_settle_believer_CreatesNewGroupUnitsWhenNeeded_Scenario0()
     assert not xio_groupunit.membership_exists(xio_str)
     yao_membership = xio_groupunit.get_membership(yao_str)
     zia_membership = xio_groupunit.get_membership(zia_str)
-    assert yao_membership.group_cred_points == yao_acct_cred_points
-    assert zia_membership.group_cred_points == zia_acct_cred_points
-    assert yao_membership.group_debt_points == yao_acct_debt_points
-    assert zia_membership.group_debt_points == zia_acct_debt_points
+    assert yao_membership.group_cred_points == yao_person_cred_points
+    assert zia_membership.group_cred_points == zia_person_cred_points
+    assert yao_membership.group_debt_points == yao_person_debt_points
+    assert zia_membership.group_debt_points == zia_person_debt_points
 
 
 def test_BelieverUnit_settle_believer_CreatesNewGroupUnitsWhenNeeded_Scenario1():
@@ -574,14 +574,14 @@ def test_BelieverUnit_settle_believer_CreatesNewGroupUnitsWhenNeeded_Scenario1()
     swim_rope = yao_believer.make_l1_rope(swim_str)
     yao_believer.set_l1_plan(planunit_shop(swim_str))
     zia_str = "Zia"
-    yao_believer.add_acctunit(yao_str)
-    yao_believer.add_acctunit(zia_str)
+    yao_believer.add_personunit(yao_str)
+    yao_believer.add_personunit(zia_str)
     swim_plan = yao_believer.get_plan_obj(swim_rope)
     swim_plan.set_awardlink(awardlink_shop(yao_str))
     swim_plan.set_awardlink(awardlink_shop(zia_str))
     xio_str = "Xio"
     swim_plan.set_awardlink(awardlink_shop(xio_str))
-    assert len(yao_believer.get_acctunit_group_titles_dict()) == 2
+    assert len(yao_believer.get_personunit_group_titles_dict()) == 2
     assert not yao_believer.groupunit_exists(yao_str)
     assert not yao_believer.groupunit_exists(zia_str)
     assert not yao_believer.groupunit_exists(xio_str)
@@ -593,8 +593,8 @@ def test_BelieverUnit_settle_believer_CreatesNewGroupUnitsWhenNeeded_Scenario1()
     assert yao_believer.groupunit_exists(yao_str)
     assert yao_believer.groupunit_exists(zia_str)
     assert yao_believer.groupunit_exists(xio_str)
-    assert len(yao_believer.get_acctunit_group_titles_dict()) == 2
-    assert len(yao_believer.get_acctunit_group_titles_dict()) != len(
+    assert len(yao_believer.get_personunit_group_titles_dict()) == 2
+    assert len(yao_believer.get_personunit_group_titles_dict()) != len(
         yao_believer._groupunits
     )
     assert len(yao_believer._groupunits) == 3
@@ -616,8 +616,8 @@ def test_BelieverUnit_get_tree_traverse_generated_groupunits_ReturnsObj():
     swim_rope = yao_believer.make_l1_rope(swim_str)
     yao_believer.set_l1_plan(planunit_shop(swim_str))
     zia_str = "Zia"
-    yao_believer.add_acctunit(yao_str)
-    yao_believer.add_acctunit(zia_str)
+    yao_believer.add_personunit(yao_str)
+    yao_believer.add_personunit(zia_str)
     swim_plan = yao_believer.get_plan_obj(swim_rope)
     swim_plan.set_awardlink(awardlink_shop(yao_str))
     swim_plan.set_awardlink(awardlink_shop(zia_str))
@@ -627,8 +627,8 @@ def test_BelieverUnit_get_tree_traverse_generated_groupunits_ReturnsObj():
     assert yao_believer.groupunit_exists(yao_str)
     assert yao_believer.groupunit_exists(zia_str)
     assert yao_believer.groupunit_exists(xio_str)
-    assert len(yao_believer.get_acctunit_group_titles_dict()) == 2
-    assert len(yao_believer.get_acctunit_group_titles_dict()) != len(
+    assert len(yao_believer.get_personunit_group_titles_dict()) == 2
+    assert len(yao_believer.get_personunit_group_titles_dict()) != len(
         yao_believer._groupunits
     )
 

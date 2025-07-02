@@ -3,8 +3,8 @@ from src.a00_data_toolbox.file_toolbox import open_json, save_json
 from src.a11_bud_logic.bud import tranbook_shop
 from src.a12_hub_toolbox.hub_path import (
     create_belief_json_path,
-    create_bud_acct_mandate_ledger_path as bud_mandate_path,
-    create_cell_acct_mandate_ledger_path as cell_mandate_path,
+    create_bud_person_mandate_ledger_path as bud_mandate_path,
+    create_cell_person_mandate_ledger_path as cell_mandate_path,
 )
 from src.a15_belief_logic.belief import (
     beliefunit_shop,
@@ -54,25 +54,25 @@ def test_create_bud_mandate_ledgers_Scenaro1_BudExists(env_dir_setup_cleanup):
     bob37_bud_mandate_path = bud_mandate_path(mstr_dir, a23_str, bob_str, tp37)
     assert os_path_exists(bob37_bud_mandate_path) is False
     bob37_budunit = amy23_belief.get_budunit(bob_str, tp37)
-    assert bob37_budunit._bud_acct_nets == {}
+    assert bob37_budunit._bud_person_nets == {}
 
     # WHEN
     create_bud_mandate_ledgers(mstr_dir, a23_str)
 
     # THEN
     assert os_path_exists(bob37_bud_mandate_path)
-    expected_bud_acct_nets = {bob_str: bud1_quota}
-    assert open_json(bob37_bud_mandate_path) == expected_bud_acct_nets
+    expected_bud_person_nets = {bob_str: bud1_quota}
+    assert open_json(bob37_bud_mandate_path) == expected_bud_person_nets
     gen_a23_beliefunit = beliefunit_get_from_dict(open_json(a23_json_path))
     gen_a23_beliefunit.set_all_tranbook()
     gen_bob37_budunit = gen_a23_beliefunit.get_budunit(bob_str, tp37)
-    assert gen_bob37_budunit._bud_acct_nets == expected_bud_acct_nets
+    assert gen_bob37_budunit._bud_person_nets == expected_bud_person_nets
     expected_a23_all_tranbook = tranbook_shop(a23_str)
     expected_a23_all_tranbook.add_tranunit(bob_str, bob_str, tp37, 450)
     assert gen_a23_beliefunit._all_tranbook == expected_a23_all_tranbook
 
 
-def test_create_bud_mandate_ledgers_Scenaro2_Mutliple_cell_acct_mandate_ledgers(
+def test_create_bud_mandate_ledgers_Scenaro2_Mutliple_cell_person_mandate_ledgers(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -101,24 +101,24 @@ def test_create_bud_mandate_ledgers_Scenaro2_Mutliple_cell_acct_mandate_ledgers(
     bob37_bud_mandate_path = bud_mandate_path(mstr_dir, a23_str, bob_str, tp37)
     assert os_path_exists(bob37_bud_mandate_path) is False
     bob37_budunit = amy23_belief.get_budunit(bob_str, tp37)
-    assert bob37_budunit._bud_acct_nets == {}
+    assert bob37_budunit._bud_person_nets == {}
 
     # WHEN
     create_bud_mandate_ledgers(mstr_dir, a23_str)
 
     # THEN
     assert os_path_exists(bob37_bud_mandate_path)
-    expected_bud_acct_nets = {
+    expected_bud_person_nets = {
         yao_str: 254,
         xio_str: 84,
         sue_str: 84,
         zia_str: 28,
     }
     print(f"{open_json(bob37_bud_mandate_path)=}")
-    assert open_json(bob37_bud_mandate_path) == expected_bud_acct_nets
+    assert open_json(bob37_bud_mandate_path) == expected_bud_person_nets
     gen_a23_beliefunit = beliefunit_get_from_dict(open_json(a23_json_path))
     gen_bob37_budunit = gen_a23_beliefunit.get_budunit(bob_str, tp37)
-    assert gen_bob37_budunit._bud_acct_nets == expected_bud_acct_nets
+    assert gen_bob37_budunit._bud_person_nets == expected_bud_person_nets
     expected_a23_all_tranbook = tranbook_shop(a23_str)
     expected_a23_all_tranbook.add_tranunit(bob_str, sue_str, tp37, 84)
     expected_a23_all_tranbook.add_tranunit(bob_str, xio_str, tp37, 84)

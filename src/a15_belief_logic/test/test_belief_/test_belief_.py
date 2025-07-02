@@ -301,7 +301,7 @@ def test_BeliefUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario3_FileExists
     sue_str = "Sue"
     bob_str = "Bob"
     sue_gut = believerunit_shop(sue_str, a23_str)
-    sue_gut.add_acctunit(bob_str)
+    sue_gut.add_personunit(bob_str)
     save_gut_file(belief_mstr_dir, sue_gut)
     sue_believer_dir = create_believer_dir_path(belief_mstr_dir, a23_str, sue_str)
     assert os_path_exists(sue_believer_dir)
@@ -362,18 +362,18 @@ def test_BeliefUnit_create_init_job_from_guts_Scenario1_ReplacesFile(
     bob_str = "Bob"
     sue_str = "Sue"
     x0_sue_job = believerunit_shop(sue_str, a23_str)
-    x0_sue_job.add_acctunit(bob_str)
+    x0_sue_job.add_personunit(bob_str)
     save_job_file(belief_mstr_dir, x0_sue_job)
-    assert open_job_file(belief_mstr_dir, a23_str, sue_str).get_acct(bob_str)
+    assert open_job_file(belief_mstr_dir, a23_str, sue_str).get_person(bob_str)
 
     # WHEN
     a23_belief.create_init_job_from_guts(sue_str)
 
     # THEN
-    assert not open_job_file(belief_mstr_dir, a23_str, sue_str).get_acct(bob_str)
+    assert not open_job_file(belief_mstr_dir, a23_str, sue_str).get_person(bob_str)
 
 
-def test_BeliefUnit_create_init_job_from_guts_Scenario2_job_Has_gut_Accts(
+def test_BeliefUnit_create_init_job_from_guts_Scenario2_job_Has_gut_Persons(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -393,15 +393,15 @@ def test_BeliefUnit_create_init_job_from_guts_Scenario2_job_Has_gut_Accts(
     sue_str = "Sue"
     a23_belief.create_init_job_from_guts(sue_str)
     sue_gut = believerunit_shop(sue_str, a23_str)
-    sue_gut.add_acctunit(bob_str)
+    sue_gut.add_personunit(bob_str)
     save_gut_file(belief_mstr_dir, sue_gut)
-    assert not open_job_file(belief_mstr_dir, a23_str, sue_str).get_acct(bob_str)
+    assert not open_job_file(belief_mstr_dir, a23_str, sue_str).get_person(bob_str)
 
     # WHEN
     a23_belief.create_init_job_from_guts(sue_str)
 
     # THEN
-    assert open_job_file(belief_mstr_dir, a23_str, sue_str).get_acct(bob_str)
+    assert open_job_file(belief_mstr_dir, a23_str, sue_str).get_person(bob_str)
 
 
 def test_BeliefUnit_create_init_job_from_guts_Scenario3_gut_FilesAreListenedTo(
@@ -426,11 +426,11 @@ def test_BeliefUnit_create_init_job_from_guts_Scenario3_gut_FilesAreListenedTo(
     # create Sue gut
     bob_str = "Bob"
     sue_gut = believerunit_shop(sue_str, a23_str, knot=slash_str)
-    sue_gut.add_acctunit(bob_str)
+    sue_gut.add_personunit(bob_str)
     save_gut_file(belief_mstr_dir, sue_gut)
     # create Bob gut with agenda plan for Sue
     bob_gut = believerunit_shop(bob_str, a23_str, knot=slash_str)
-    bob_gut.add_acctunit(sue_str)
+    bob_gut.add_personunit(sue_str)
     casa_rope = bob_gut.make_l1_rope("casa")
     clean_rope = bob_gut.make_rope(casa_rope, "clean")
     bob_gut.add_plan(clean_rope, task=True)
@@ -462,10 +462,10 @@ def test_BeliefUnit__set_all_healer_dutys_CorrectlySetsdutys(
     sue_gut_believer = open_gut_file(x_belief_mstr_dir, a23_str, sue_str)
     yao_gut_believer = open_gut_file(x_belief_mstr_dir, a23_str, yao_str)
 
-    sue_gut_believer.add_acctunit(sue_str)
-    sue_gut_believer.add_acctunit(yao_str)
-    yao_gut_believer.add_acctunit(sue_str)
-    yao_gut_believer.add_acctunit(yao_str)
+    sue_gut_believer.add_personunit(sue_str)
+    sue_gut_believer.add_personunit(yao_str)
+    yao_gut_believer.add_personunit(sue_str)
+    yao_gut_believer.add_personunit(yao_str)
     texas_str = "Texas"
     texas_rope = sue_gut_believer.make_l1_rope(texas_str)
     sue_gut_believer.set_l1_plan(planunit_shop(texas_str, problem_bool=True))

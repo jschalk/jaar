@@ -9,8 +9,8 @@ from src.a00_data_toolbox.dict_toolbox import (
     set_in_nested_dict,
 )
 from src.a01_term_logic.term import RopeTerm, TitleTerm
-from src.a03_group_logic.acct import AcctName, AcctUnit, MemberShip
 from src.a03_group_logic.group import MemberShip
+from src.a03_group_logic.person import MemberShip, PersonName, PersonUnit
 from src.a04_reason_logic.reason_plan import FactUnit, ReasonUnit
 from src.a05_plan_logic.plan import PlanUnit
 from src.a06_believer_logic.believer import BelieverUnit, believerunit_shop
@@ -132,7 +132,7 @@ class BelieverDelta:
         self.add_believeratoms_believerunit_simple_attrs(
             before_believer, after_believer
         )
-        self.add_believeratoms_accts(before_believer, after_believer)
+        self.add_believeratoms_persons(before_believer, after_believer)
         self.add_believeratoms_plans(before_believer, after_believer)
 
     def add_believeratoms_believerunit_simple_attrs(
@@ -159,141 +159,149 @@ class BelieverDelta:
             x_believeratom.set_jvalue("respect_bit", after_believer.respect_bit)
         self.set_believeratom(x_believeratom)
 
-    def add_believeratoms_accts(
+    def add_believeratoms_persons(
         self, before_believer: BelieverUnit, after_believer: BelieverUnit
     ):
-        before_acct_names = set(before_believer.accts.keys())
-        after_acct_names = set(after_believer.accts.keys())
+        before_person_names = set(before_believer.persons.keys())
+        after_person_names = set(after_believer.persons.keys())
 
-        self.add_believeratom_acctunit_inserts(
+        self.add_believeratom_personunit_inserts(
             after_believer=after_believer,
-            insert_acct_names=after_acct_names.difference(before_acct_names),
+            insert_person_names=after_person_names.difference(before_person_names),
         )
-        self.add_believeratom_acctunit_deletes(
+        self.add_believeratom_personunit_deletes(
             before_believer=before_believer,
-            delete_acct_names=before_acct_names.difference(after_acct_names),
+            delete_person_names=before_person_names.difference(after_person_names),
         )
-        self.add_believeratom_acctunit_updates(
+        self.add_believeratom_personunit_updates(
             before_believer=before_believer,
             after_believer=after_believer,
-            update_acct_names=before_acct_names.intersection(after_acct_names),
+            update_person_names=before_person_names.intersection(after_person_names),
         )
 
-    def add_believeratom_acctunit_inserts(
-        self, after_believer: BelieverUnit, insert_acct_names: set
+    def add_believeratom_personunit_inserts(
+        self, after_believer: BelieverUnit, insert_person_names: set
     ):
-        for insert_acct_name in insert_acct_names:
-            insert_acctunit = after_believer.get_acct(insert_acct_name)
-            x_believeratom = believeratom_shop("believer_acctunit", "INSERT")
-            x_believeratom.set_jkey("acct_name", insert_acctunit.acct_name)
-            if insert_acctunit.acct_cred_points is not None:
+        for insert_person_name in insert_person_names:
+            insert_personunit = after_believer.get_person(insert_person_name)
+            x_believeratom = believeratom_shop("believer_personunit", "INSERT")
+            x_believeratom.set_jkey("person_name", insert_personunit.person_name)
+            if insert_personunit.person_cred_points is not None:
                 x_believeratom.set_jvalue(
-                    "acct_cred_points", insert_acctunit.acct_cred_points
+                    "person_cred_points", insert_personunit.person_cred_points
                 )
-            if insert_acctunit.acct_debt_points is not None:
+            if insert_personunit.person_debt_points is not None:
                 x_believeratom.set_jvalue(
-                    "acct_debt_points", insert_acctunit.acct_debt_points
+                    "person_debt_points", insert_personunit.person_debt_points
                 )
             self.set_believeratom(x_believeratom)
-            all_group_titles = set(insert_acctunit._memberships.keys())
+            all_group_titles = set(insert_personunit._memberships.keys())
             self.add_believeratom_memberships_inserts(
-                after_acctunit=insert_acctunit,
+                after_personunit=insert_personunit,
                 insert_membership_group_titles=all_group_titles,
             )
 
-    def add_believeratom_acctunit_updates(
+    def add_believeratom_personunit_updates(
         self,
         before_believer: BelieverUnit,
         after_believer: BelieverUnit,
-        update_acct_names: set,
+        update_person_names: set,
     ):
-        for acct_name in update_acct_names:
-            after_acctunit = after_believer.get_acct(acct_name)
-            before_acctunit = before_believer.get_acct(acct_name)
-            if jvalues_different("believer_acctunit", after_acctunit, before_acctunit):
-                x_believeratom = believeratom_shop("believer_acctunit", "UPDATE")
-                x_believeratom.set_jkey("acct_name", after_acctunit.acct_name)
-                if before_acctunit.acct_cred_points != after_acctunit.acct_cred_points:
+        for person_name in update_person_names:
+            after_personunit = after_believer.get_person(person_name)
+            before_personunit = before_believer.get_person(person_name)
+            if jvalues_different(
+                "believer_personunit", after_personunit, before_personunit
+            ):
+                x_believeratom = believeratom_shop("believer_personunit", "UPDATE")
+                x_believeratom.set_jkey("person_name", after_personunit.person_name)
+                if (
+                    before_personunit.person_cred_points
+                    != after_personunit.person_cred_points
+                ):
                     x_believeratom.set_jvalue(
-                        "acct_cred_points", after_acctunit.acct_cred_points
+                        "person_cred_points", after_personunit.person_cred_points
                     )
-                if before_acctunit.acct_debt_points != after_acctunit.acct_debt_points:
+                if (
+                    before_personunit.person_debt_points
+                    != after_personunit.person_debt_points
+                ):
                     x_believeratom.set_jvalue(
-                        "acct_debt_points", after_acctunit.acct_debt_points
+                        "person_debt_points", after_personunit.person_debt_points
                     )
                 self.set_believeratom(x_believeratom)
-            self.add_believeratom_acctunit_update_memberships(
-                after_acctunit=after_acctunit, before_acctunit=before_acctunit
+            self.add_believeratom_personunit_update_memberships(
+                after_personunit=after_personunit, before_personunit=before_personunit
             )
 
-    def add_believeratom_acctunit_deletes(
-        self, before_believer: BelieverUnit, delete_acct_names: set
+    def add_believeratom_personunit_deletes(
+        self, before_believer: BelieverUnit, delete_person_names: set
     ):
-        for delete_acct_name in delete_acct_names:
-            x_believeratom = believeratom_shop("believer_acctunit", "DELETE")
-            x_believeratom.set_jkey("acct_name", delete_acct_name)
+        for delete_person_name in delete_person_names:
+            x_believeratom = believeratom_shop("believer_personunit", "DELETE")
+            x_believeratom.set_jkey("person_name", delete_person_name)
             self.set_believeratom(x_believeratom)
-            delete_acctunit = before_believer.get_acct(delete_acct_name)
+            delete_personunit = before_believer.get_person(delete_person_name)
             non_mirror_group_titles = {
                 x_group_title
-                for x_group_title in delete_acctunit._memberships.keys()
-                if x_group_title != delete_acct_name
+                for x_group_title in delete_personunit._memberships.keys()
+                if x_group_title != delete_person_name
             }
             self.add_believeratom_memberships_delete(
-                delete_acct_name, non_mirror_group_titles
+                delete_person_name, non_mirror_group_titles
             )
 
-    def add_believeratom_acctunit_update_memberships(
-        self, after_acctunit: AcctUnit, before_acctunit: AcctUnit
+    def add_believeratom_personunit_update_memberships(
+        self, after_personunit: PersonUnit, before_personunit: PersonUnit
     ):
         # before_non_mirror_group_titles
         before_group_titles = {
             x_group_title
-            for x_group_title in before_acctunit._memberships.keys()
-            if x_group_title != before_acctunit.acct_name
+            for x_group_title in before_personunit._memberships.keys()
+            if x_group_title != before_personunit.person_name
         }
         # after_non_mirror_group_titles
         after_group_titles = {
             x_group_title
-            for x_group_title in after_acctunit._memberships.keys()
-            if x_group_title != after_acctunit.acct_name
+            for x_group_title in after_personunit._memberships.keys()
+            if x_group_title != after_personunit.person_name
         }
 
         self.add_believeratom_memberships_inserts(
-            after_acctunit=after_acctunit,
+            after_personunit=after_personunit,
             insert_membership_group_titles=after_group_titles.difference(
                 before_group_titles
             ),
         )
 
         self.add_believeratom_memberships_delete(
-            before_acct_name=after_acctunit.acct_name,
+            before_person_name=after_personunit.person_name,
             before_group_titles=before_group_titles.difference(after_group_titles),
         )
 
         update_group_titles = before_group_titles.intersection(after_group_titles)
-        for update_acct_name in update_group_titles:
-            before_membership = before_acctunit.get_membership(update_acct_name)
-            after_membership = after_acctunit.get_membership(update_acct_name)
+        for update_person_name in update_group_titles:
+            before_membership = before_personunit.get_membership(update_person_name)
+            after_membership = after_personunit.get_membership(update_person_name)
             if jvalues_different(
-                "believer_acct_membership", before_membership, after_membership
+                "believer_person_membership", before_membership, after_membership
             ):
                 self.add_believeratom_membership_update(
-                    acct_name=after_acctunit.acct_name,
+                    person_name=after_personunit.person_name,
                     before_membership=before_membership,
                     after_membership=after_membership,
                 )
 
     def add_believeratom_memberships_inserts(
         self,
-        after_acctunit: AcctUnit,
+        after_personunit: PersonUnit,
         insert_membership_group_titles: list[TitleTerm],
     ):
-        after_acct_name = after_acctunit.acct_name
+        after_person_name = after_personunit.person_name
         for insert_group_title in insert_membership_group_titles:
-            after_membership = after_acctunit.get_membership(insert_group_title)
-            x_believeratom = believeratom_shop("believer_acct_membership", "INSERT")
-            x_believeratom.set_jkey("acct_name", after_acct_name)
+            after_membership = after_personunit.get_membership(insert_group_title)
+            x_believeratom = believeratom_shop("believer_person_membership", "INSERT")
+            x_believeratom.set_jkey("person_name", after_person_name)
             x_believeratom.set_jkey("group_title", after_membership.group_title)
             if after_membership.group_cred_points is not None:
                 x_believeratom.set_jvalue(
@@ -307,12 +315,12 @@ class BelieverDelta:
 
     def add_believeratom_membership_update(
         self,
-        acct_name: AcctName,
+        person_name: PersonName,
         before_membership: MemberShip,
         after_membership: MemberShip,
     ):
-        x_believeratom = believeratom_shop("believer_acct_membership", "UPDATE")
-        x_believeratom.set_jkey("acct_name", acct_name)
+        x_believeratom = believeratom_shop("believer_person_membership", "UPDATE")
+        x_believeratom.set_jkey("person_name", person_name)
         x_believeratom.set_jkey("group_title", after_membership.group_title)
         if after_membership.group_cred_points != before_membership.group_cred_points:
             x_believeratom.set_jvalue(
@@ -325,11 +333,11 @@ class BelieverDelta:
         self.set_believeratom(x_believeratom)
 
     def add_believeratom_memberships_delete(
-        self, before_acct_name: AcctName, before_group_titles: TitleTerm
+        self, before_person_name: PersonName, before_group_titles: TitleTerm
     ):
         for delete_group_title in before_group_titles:
-            x_believeratom = believeratom_shop("believer_acct_membership", "DELETE")
-            x_believeratom.set_jkey("acct_name", before_acct_name)
+            x_believeratom = believeratom_shop("believer_person_membership", "DELETE")
+            x_believeratom.set_jkey("person_name", before_person_name)
             x_believeratom.set_jkey("group_title", delete_group_title)
             self.set_believeratom(x_believeratom)
 

@@ -1,14 +1,14 @@
 from src.a01_term_logic.rope import create_rope
 from src.a01_term_logic.term import BeliefLabel
 from src.a06_believer_logic.test._util.a06_str import (
-    acct_name_str,
-    believer_acctunit_str,
+    believer_personunit_str,
     believer_plan_factunit_str,
     believer_planunit_str,
     believerunit_str,
     fcontext_str,
     fnigh_str,
     fopen_str,
+    person_name_str,
     plan_rope_str,
 )
 from src.a08_believer_atom_logic.atom import BelieverAtom, believeratom_shop
@@ -91,9 +91,9 @@ def get_believerdelta_sue_example() -> BelieverDelta:
     pool_believeratom.set_jvalue(pool_attribute, 77)
     sue_believerdelta.set_believeratom(pool_believeratom)
 
-    dimen = believer_acctunit_str()
+    dimen = believer_personunit_str()
     sue_str = "Sue"
     sue_believeratom = believeratom_shop(dimen, DELETE_str())
-    sue_believeratom.set_jkey(acct_name_str(), sue_str)
+    sue_believeratom.set_jkey(person_name_str(), sue_str)
     sue_believerdelta.set_believeratom(sue_believeratom)
     return sue_believerdelta

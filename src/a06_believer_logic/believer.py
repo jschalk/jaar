@@ -25,12 +25,12 @@ from src.a01_term_logic.rope import (
     to_rope,
 )
 from src.a01_term_logic.term import (
-    AcctName,
     BeliefLabel,
     BelieverName,
     GroupTitle,
     HealerName,
     LabelTerm,
+    PersonName,
     RopeTerm,
 )
 from src.a02_finance_logic.allot import allot_scale
@@ -47,12 +47,16 @@ from src.a02_finance_logic.finance_config import (
     validate_fund_pool,
     validate_respect_num,
 )
-from src.a03_group_logic.acct import AcctUnit, acctunit_shop, acctunits_get_from_dict
 from src.a03_group_logic.group import (
     AwardLink,
     GroupUnit,
     groupunit_shop,
     membership_shop,
+)
+from src.a03_group_logic.person import (
+    PersonUnit,
+    personunit_shop,
+    personunits_get_from_dict,
 )
 from src.a04_reason_logic.reason_labor import LaborUnit
 from src.a04_reason_logic.reason_plan import (
@@ -86,11 +90,11 @@ class NewKnotException(Exception):
     pass
 
 
-class AcctUnitsCredorDebtorSumException(Exception):
+class PersonUnitsCredorDebtorSumException(Exception):
     pass
 
 
-class AcctMissingException(Exception):
+class PersonMissingException(Exception):
     pass
 
 
@@ -118,7 +122,7 @@ class _gogo_calc_stop_calc_Exception(Exception):
 class BelieverUnit:
     belief_label: BeliefLabel = None
     believer_name: BelieverName = None
-    accts: dict[AcctName, AcctUnit] = None
+    persons: dict[PersonName, PersonUnit] = None
     planroot: PlanUnit = None
     tally: float = None
     fund_pool: FundNum = None
@@ -162,10 +166,10 @@ class BelieverUnit:
 
         self.fund_pool = validate_fund_pool(x_fund_pool)
 
-    def set_acct_respect(self, x_acct_pool: int):
-        self.set_credor_respect(x_acct_pool)
-        self.set_debtor_respect(x_acct_pool)
-        self.set_fund_pool(x_acct_pool)
+    def set_person_respect(self, x_person_pool: int):
+        self.set_credor_respect(x_person_pool)
+        self.set_debtor_respect(x_person_pool)
+        self.set_fund_pool(x_person_pool)
 
     def set_credor_respect(self, new_credor_respect: int):
         if valid_finance_ratio(new_credor_respect, self.respect_bit) is False:
@@ -313,79 +317,83 @@ class BelieverUnit:
             x_groupunit._fund_agenda_give += awardline_fund_give
             x_groupunit._fund_agenda_take += awardline_fund_take
 
-    def add_to_acctunit_fund_give_take(
+    def add_to_personunit_fund_give_take(
         self,
-        acctunit_acct_name: AcctName,
+        personunit_person_name: PersonName,
         fund_give,
         fund_take: float,
         fund_agenda_give: float,
         fund_agenda_take: float,
     ):
-        x_acctunit = self.get_acct(acctunit_acct_name)
-        x_acctunit.add_fund_give_take(
+        x_personunit = self.get_person(personunit_person_name)
+        x_personunit.add_fund_give_take(
             fund_give=fund_give,
             fund_take=fund_take,
             fund_agenda_give=fund_agenda_give,
             fund_agenda_take=fund_agenda_take,
         )
 
-    def del_acctunit(self, acct_name: str):
-        self.accts.pop(acct_name)
+    def del_personunit(self, person_name: str):
+        self.persons.pop(person_name)
 
-    def add_acctunit(
+    def add_personunit(
         self,
-        acct_name: AcctName,
-        acct_cred_points: int = None,
-        acct_debt_points: int = None,
+        person_name: PersonName,
+        person_cred_points: int = None,
+        person_debt_points: int = None,
     ):
         x_knot = self.knot
-        acctunit = acctunit_shop(acct_name, acct_cred_points, acct_debt_points, x_knot)
-        self.set_acctunit(acctunit)
+        personunit = personunit_shop(
+            person_name, person_cred_points, person_debt_points, x_knot
+        )
+        self.set_personunit(personunit)
 
-    def set_acctunit(self, x_acctunit: AcctUnit, auto_set_membership: bool = True):
-        if x_acctunit.knot != self.knot:
-            x_acctunit.knot = self.knot
-        if x_acctunit.respect_bit != self.respect_bit:
-            x_acctunit.respect_bit = self.respect_bit
-        if auto_set_membership and x_acctunit.memberships_exist() is False:
-            x_acctunit.add_membership(x_acctunit.acct_name)
-        self.accts[x_acctunit.acct_name] = x_acctunit
-
-    def acct_exists(self, acct_name: AcctName) -> bool:
-        return self.get_acct(acct_name) is not None
-
-    def edit_acctunit(
-        self,
-        acct_name: AcctName,
-        acct_cred_points: int = None,
-        acct_debt_points: int = None,
+    def set_personunit(
+        self, x_personunit: PersonUnit, auto_set_membership: bool = True
     ):
-        if self.accts.get(acct_name) is None:
-            raise AcctMissingException(f"AcctUnit '{acct_name}' does not exist.")
-        x_acctunit = self.get_acct(acct_name)
-        if acct_cred_points is not None:
-            x_acctunit.set_acct_cred_points(acct_cred_points)
-        if acct_debt_points is not None:
-            x_acctunit.set_acct_debt_points(acct_debt_points)
-        self.set_acctunit(x_acctunit)
+        if x_personunit.knot != self.knot:
+            x_personunit.knot = self.knot
+        if x_personunit.respect_bit != self.respect_bit:
+            x_personunit.respect_bit = self.respect_bit
+        if auto_set_membership and x_personunit.memberships_exist() is False:
+            x_personunit.add_membership(x_personunit.person_name)
+        self.persons[x_personunit.person_name] = x_personunit
 
-    def clear_acctunits_memberships(self):
-        for x_acctunit in self.accts.values():
-            x_acctunit.clear_memberships()
+    def person_exists(self, person_name: PersonName) -> bool:
+        return self.get_person(person_name) is not None
 
-    def get_acct(self, acct_name: AcctName) -> AcctUnit:
-        return self.accts.get(acct_name)
+    def edit_personunit(
+        self,
+        person_name: PersonName,
+        person_cred_points: int = None,
+        person_debt_points: int = None,
+    ):
+        if self.persons.get(person_name) is None:
+            raise PersonMissingException(f"PersonUnit '{person_name}' does not exist.")
+        x_personunit = self.get_person(person_name)
+        if person_cred_points is not None:
+            x_personunit.set_person_cred_points(person_cred_points)
+        if person_debt_points is not None:
+            x_personunit.set_person_debt_points(person_debt_points)
+        self.set_personunit(x_personunit)
 
-    def get_acctunit_group_titles_dict(self) -> dict[GroupTitle, set[AcctName]]:
+    def clear_personunits_memberships(self):
+        for x_personunit in self.persons.values():
+            x_personunit.clear_memberships()
+
+    def get_person(self, person_name: PersonName) -> PersonUnit:
+        return self.persons.get(person_name)
+
+    def get_personunit_group_titles_dict(self) -> dict[GroupTitle, set[PersonName]]:
         x_dict = {}
-        for x_acctunit in self.accts.values():
-            for x_group_title in x_acctunit._memberships.keys():
-                acct_name_set = x_dict.get(x_group_title)
-                if acct_name_set is None:
-                    x_dict[x_group_title] = {x_acctunit.acct_name}
+        for x_personunit in self.persons.values():
+            for x_group_title in x_personunit._memberships.keys():
+                person_name_set = x_dict.get(x_group_title)
+                if person_name_set is None:
+                    x_dict[x_group_title] = {x_personunit.person_name}
                 else:
-                    acct_name_set.add(x_acctunit.acct_name)
-                    x_dict[x_group_title] = acct_name_set
+                    person_name_set.add(x_personunit.person_name)
+                    x_dict[x_group_title] = person_name_set
         return x_dict
 
     def set_groupunit(self, x_groupunit: GroupUnit):
@@ -400,20 +408,20 @@ class BelieverUnit:
 
     def create_symmetry_groupunit(self, x_group_title: GroupTitle) -> GroupUnit:
         x_groupunit = groupunit_shop(x_group_title)
-        for x_acctunit in self.accts.values():
+        for x_personunit in self.persons.values():
             x_membership = membership_shop(
                 group_title=x_group_title,
-                group_cred_points=x_acctunit.acct_cred_points,
-                group_debt_points=x_acctunit.acct_debt_points,
-                acct_name=x_acctunit.acct_name,
+                group_cred_points=x_personunit.person_cred_points,
+                group_debt_points=x_personunit.person_debt_points,
+                person_name=x_personunit.person_name,
             )
             x_groupunit.set_membership(x_membership)
         return x_groupunit
 
     def get_tree_traverse_generated_groupunits(self) -> set[GroupTitle]:
-        x_acctunit_group_titles = set(self.get_acctunit_group_titles_dict().keys())
+        x_personunit_group_titles = set(self.get_personunit_group_titles_dict().keys())
         all_group_titles = set(self._groupunits.keys())
-        return all_group_titles.difference(x_acctunit_group_titles)
+        return all_group_titles.difference(x_personunit_group_titles)
 
     def _is_plan_rangeroot(self, plan_rope: RopeTerm) -> bool:
         if self.belief_label == plan_rope:
@@ -671,7 +679,7 @@ class BelieverUnit:
         _awardlinks_to_delete = [
             _awardlink_awardee_title
             for _awardlink_awardee_title in x_plan.awardlinks.keys()
-            if self.get_acctunit_group_titles_dict().get(_awardlink_awardee_title)
+            if self.get_personunit_group_titles_dict().get(_awardlink_awardee_title)
             is None
         ]
         for _awardlink_awardee_title in _awardlinks_to_delete:
@@ -680,7 +688,7 @@ class BelieverUnit:
             _laborlinks_to_delete = [
                 _laborlink_labor_title
                 for _laborlink_labor_title in x_plan.laborunit._laborlinks
-                if self.get_acctunit_group_titles_dict().get(_laborlink_labor_title)
+                if self.get_personunit_group_titles_dict().get(_laborlink_labor_title)
                 is None
             ]
             for _laborlink_labor_title in _laborlinks_to_delete:
@@ -821,8 +829,8 @@ class BelieverUnit:
         task: bool = None,
         factunit: FactUnit = None,
         descendant_task_count: int = None,
-        all_acct_cred: bool = None,
-        all_acct_debt: bool = None,
+        all_person_cred: bool = None,
+        all_person_debt: bool = None,
         awardlink: AwardLink = None,
         awardlink_del: GroupTitle = None,
         is_expanded: bool = None,
@@ -830,7 +838,7 @@ class BelieverUnit:
     ):
         if healerlink is not None:
             for x_healer_name in healerlink._healer_names:
-                if self.get_acctunit_group_titles_dict().get(x_healer_name) is None:
+                if self.get_personunit_group_titles_dict().get(x_healer_name) is None:
                     exception_str = f"Plan cannot edit healerlink because group_title '{x_healer_name}' does not exist as group in Believer"
                     raise healerlink_group_title_Exception(exception_str)
 
@@ -857,8 +865,8 @@ class BelieverUnit:
             denom=denom,
             morph=morph,
             descendant_task_count=descendant_task_count,
-            all_acct_cred=all_acct_cred,
-            all_acct_debt=all_acct_debt,
+            all_person_cred=all_person_cred,
+            all_person_debt=all_person_debt,
             awardlink=awardlink,
             awardlink_del=awardlink_del,
             is_expanded=is_expanded,
@@ -895,43 +903,47 @@ class BelieverUnit:
     ) -> tuple[dict[str, float], dict[str, float]]:
         credit_ledger = {}
         debt_ledger = {}
-        for x_acctunit in self.accts.values():
-            credit_ledger[x_acctunit.acct_name] = x_acctunit.acct_cred_points
-            debt_ledger[x_acctunit.acct_name] = x_acctunit.acct_debt_points
+        for x_personunit in self.persons.values():
+            credit_ledger[x_personunit.person_name] = x_personunit.person_cred_points
+            debt_ledger[x_personunit.person_name] = x_personunit.person_debt_points
         return credit_ledger, debt_ledger
 
     def _allot_offtrack_fund(self):
-        self._add_to_acctunits_fund_give_take(self._offtrack_fund)
+        self._add_to_personunits_fund_give_take(self._offtrack_fund)
 
-    def get_acctunits_acct_cred_points_sum(self) -> float:
-        return sum(acctunit.get_acct_cred_points() for acctunit in self.accts.values())
+    def get_personunits_person_cred_points_sum(self) -> float:
+        return sum(
+            personunit.get_person_cred_points() for personunit in self.persons.values()
+        )
 
-    def get_acctunits_acct_debt_points_sum(self) -> float:
-        return sum(acctunit.get_acct_debt_points() for acctunit in self.accts.values())
+    def get_personunits_person_debt_points_sum(self) -> float:
+        return sum(
+            personunit.get_person_debt_points() for personunit in self.persons.values()
+        )
 
-    def _add_to_acctunits_fund_give_take(self, plan_fund_share: float):
+    def _add_to_personunits_fund_give_take(self, plan_fund_share: float):
         credor_ledger, debtor_ledger = self.get_credit_ledger_debt_ledger()
         fund_give_allot = allot_scale(credor_ledger, plan_fund_share, self.fund_iota)
         fund_take_allot = allot_scale(debtor_ledger, plan_fund_share, self.fund_iota)
-        for x_acct_name, acct_fund_give in fund_give_allot.items():
-            self.get_acct(x_acct_name).add_fund_give(acct_fund_give)
+        for x_person_name, person_fund_give in fund_give_allot.items():
+            self.get_person(x_person_name).add_fund_give(person_fund_give)
             # if there is no differentiated agenda (what factunits exist do not change agenda)
             if not self._reason_rcontexts:
-                self.get_acct(x_acct_name).add_fund_agenda_give(acct_fund_give)
-        for x_acct_name, acct_fund_take in fund_take_allot.items():
-            self.get_acct(x_acct_name).add_fund_take(acct_fund_take)
+                self.get_person(x_person_name).add_fund_agenda_give(person_fund_give)
+        for x_person_name, person_fund_take in fund_take_allot.items():
+            self.get_person(x_person_name).add_fund_take(person_fund_take)
             # if there is no differentiated agenda (what factunits exist do not change agenda)
             if not self._reason_rcontexts:
-                self.get_acct(x_acct_name).add_fund_agenda_take(acct_fund_take)
+                self.get_person(x_person_name).add_fund_agenda_take(person_fund_take)
 
-    def _add_to_acctunits_fund_agenda_give_take(self, plan_fund_share: float):
+    def _add_to_personunits_fund_agenda_give_take(self, plan_fund_share: float):
         credor_ledger, debtor_ledger = self.get_credit_ledger_debt_ledger()
         fund_give_allot = allot_scale(credor_ledger, plan_fund_share, self.fund_iota)
         fund_take_allot = allot_scale(debtor_ledger, plan_fund_share, self.fund_iota)
-        for x_acct_name, acct_fund_give in fund_give_allot.items():
-            self.get_acct(x_acct_name).add_fund_agenda_give(acct_fund_give)
-        for x_acct_name, acct_fund_take in fund_take_allot.items():
-            self.get_acct(x_acct_name).add_fund_agenda_take(acct_fund_take)
+        for x_person_name, person_fund_give in fund_give_allot.items():
+            self.get_person(x_person_name).add_fund_agenda_give(person_fund_give)
+        for x_person_name, person_fund_take in fund_take_allot.items():
+            self.get_person(x_person_name).add_fund_agenda_take(person_fund_take)
 
     def _reset_groupunits_fund_give_take(self):
         for groupunit_obj in self._groupunits.values():
@@ -951,7 +963,7 @@ class BelieverUnit:
     def _allot_fund_believer_agenda(self):
         for plan in self._plan_dict.values():
             # If there are no awardlines associated with plan
-            # allot fund_share via general acctunit
+            # allot fund_share via general personunit
             # cred ratio and debt ratio
             # if plan.is_agenda_plan() and plan._awardlines == {}:
             if plan.is_agenda_plan():
@@ -963,40 +975,46 @@ class BelieverUnit:
                             awardline_fund_take=x_awardline._fund_take,
                         )
                 else:
-                    self._add_to_acctunits_fund_agenda_give_take(plan.get_fund_share())
+                    self._add_to_personunits_fund_agenda_give_take(
+                        plan.get_fund_share()
+                    )
 
     def _allot_groupunits_fund(self):
         for x_groupunit in self._groupunits.values():
             x_groupunit._set_membership_fund_give_fund_take()
             for x_membership in x_groupunit._memberships.values():
-                self.add_to_acctunit_fund_give_take(
-                    acctunit_acct_name=x_membership.acct_name,
+                self.add_to_personunit_fund_give_take(
+                    personunit_person_name=x_membership.person_name,
                     fund_give=x_membership._fund_give,
                     fund_take=x_membership._fund_take,
                     fund_agenda_give=x_membership._fund_agenda_give,
                     fund_agenda_take=x_membership._fund_agenda_take,
                 )
 
-    def _set_acctunits_fund_agenda_ratios(self):
+    def _set_personunits_fund_agenda_ratios(self):
         fund_agenda_ratio_give_sum = sum(
-            x_acctunit._fund_agenda_give for x_acctunit in self.accts.values()
+            x_personunit._fund_agenda_give for x_personunit in self.persons.values()
         )
         fund_agenda_ratio_take_sum = sum(
-            x_acctunit._fund_agenda_take for x_acctunit in self.accts.values()
+            x_personunit._fund_agenda_take for x_personunit in self.persons.values()
         )
-        x_acctunits_acct_cred_points_sum = self.get_acctunits_acct_cred_points_sum()
-        x_acctunits_acct_debt_points_sum = self.get_acctunits_acct_debt_points_sum()
-        for x_acctunit in self.accts.values():
-            x_acctunit.set_fund_agenda_ratio_give_take(
+        x_personunits_person_cred_points_sum = (
+            self.get_personunits_person_cred_points_sum()
+        )
+        x_personunits_person_debt_points_sum = (
+            self.get_personunits_person_debt_points_sum()
+        )
+        for x_personunit in self.persons.values():
+            x_personunit.set_fund_agenda_ratio_give_take(
                 fund_agenda_ratio_give_sum=fund_agenda_ratio_give_sum,
                 fund_agenda_ratio_take_sum=fund_agenda_ratio_take_sum,
-                acctunits_acct_cred_points_sum=x_acctunits_acct_cred_points_sum,
-                acctunits_acct_debt_points_sum=x_acctunits_acct_debt_points_sum,
+                personunits_person_cred_points_sum=x_personunits_person_cred_points_sum,
+                personunits_person_debt_points_sum=x_personunits_person_debt_points_sum,
             )
 
-    def _reset_acctunit_fund_give_take(self):
-        for acctunit in self.accts.values():
-            acctunit.clear_fund_give_take()
+    def _reset_personunit_fund_give_take(self):
+        for personunit in self.persons.values():
+            personunit.clear_fund_give_take()
 
     def plan_exists(self, rope: RopeTerm) -> bool:
         if rope in {"", None}:
@@ -1101,7 +1119,7 @@ class BelieverUnit:
             ):
                 self._offtrack_kids_mass_set.add(x_plan.get_plan_rope())
 
-    def _set_groupunit_acctunit_funds(self, keep_exceptions):
+    def _set_groupunit_personunit_funds(self, keep_exceptions):
         for x_plan in self._plan_dict.values():
             x_plan.set_awardheirs_fund_give_fund_take()
             if x_plan.is_kidless():
@@ -1135,19 +1153,19 @@ class BelieverUnit:
 
             if (
                 group_everyone != False
-                and x_plan_obj._all_acct_cred != False
-                and x_plan_obj._all_acct_debt != False
+                and x_plan_obj._all_person_cred != False
+                and x_plan_obj._all_person_debt != False
                 and x_plan_obj._awardheirs != {}
             ) or (
                 group_everyone != False
-                and x_plan_obj._all_acct_cred is False
-                and x_plan_obj._all_acct_debt is False
+                and x_plan_obj._all_person_cred is False
+                and x_plan_obj._all_person_debt is False
             ):
                 group_everyone = False
             elif group_everyone != False:
                 group_everyone = True
-            x_plan_obj._all_acct_cred = group_everyone
-            x_plan_obj._all_acct_debt = group_everyone
+            x_plan_obj._all_person_cred = group_everyone
+            x_plan_obj._all_person_debt = group_everyone
 
             if x_plan_obj.healerlink.any_healer_name_exists():
                 keep_justified_by_problem = False
@@ -1166,7 +1184,7 @@ class BelieverUnit:
         for x_plan in self._plan_dict.values():
             x_plan.clear_awardlines()
             x_plan.clear_descendant_task_count()
-            x_plan.clear_all_acct_cred_debt()
+            x_plan.clear_all_person_cred_debt()
 
     def _set_kids_active_status_attrs(self, x_plan: PlanUnit, parent_plan: PlanUnit):
         x_plan.set_reasonheirs(self._plan_dict, parent_plan._reasonheirs)
@@ -1178,32 +1196,34 @@ class BelieverUnit:
         if plan.awardheir_exists():
             self._set_groupunits_fund_share(plan._awardheirs)
         elif plan.awardheir_exists() is False:
-            self._add_to_acctunits_fund_give_take(plan.get_fund_share())
+            self._add_to_personunits_fund_give_take(plan.get_fund_share())
 
     def _create_groupunits_metrics(self):
         self._groupunits = {}
         for (
             group_title,
-            acct_name_set,
-        ) in self.get_acctunit_group_titles_dict().items():
+            person_name_set,
+        ) in self.get_personunit_group_titles_dict().items():
             x_groupunit = groupunit_shop(group_title, knot=self.knot)
-            for x_acct_name in acct_name_set:
-                x_membership = self.get_acct(x_acct_name).get_membership(group_title)
+            for x_person_name in person_name_set:
+                x_membership = self.get_person(x_person_name).get_membership(
+                    group_title
+                )
                 x_groupunit.set_membership(x_membership)
                 self.set_groupunit(x_groupunit)
 
-    def _set_acctunit_groupunit_respect_ledgers(self):
+    def _set_personunit_groupunit_respect_ledgers(self):
         self.credor_respect = validate_respect_num(self.credor_respect)
         self.debtor_respect = validate_respect_num(self.debtor_respect)
         credor_ledger, debtor_ledger = self.get_credit_ledger_debt_ledger()
         credor_allot = allot_scale(credor_ledger, self.credor_respect, self.respect_bit)
         debtor_allot = allot_scale(debtor_ledger, self.debtor_respect, self.respect_bit)
-        for x_acct_name, acct_credor_pool in credor_allot.items():
-            self.get_acct(x_acct_name).set_credor_pool(acct_credor_pool)
-        for x_acct_name, acct_debtor_pool in debtor_allot.items():
-            self.get_acct(x_acct_name).set_debtor_pool(acct_debtor_pool)
+        for x_person_name, person_credor_pool in credor_allot.items():
+            self.get_person(x_person_name).set_credor_pool(person_credor_pool)
+        for x_person_name, person_debtor_pool in debtor_allot.items():
+            self.get_person(x_person_name).set_debtor_pool(person_debtor_pool)
         self._create_groupunits_metrics()
-        self._reset_acctunit_fund_give_take()
+        self._reset_personunit_fund_give_take()
 
     def _clear_plan_dict_and_believer_obj_settle_attrs(self):
         self._plan_dict = {self.planroot.get_plan_rope(): self.planroot}
@@ -1236,8 +1256,8 @@ class BelieverUnit:
         self._clear_plan_dict_and_believer_obj_settle_attrs()
         self._set_plan_dict()
         self._set_plantree_range_attrs()
-        self._set_acctunit_groupunit_respect_ledgers()
-        self._clear_acctunit_fund_attrs()
+        self._set_personunit_groupunit_respect_ledgers()
+        self._clear_personunit_fund_attrs()
         self._clear_plantree_fund_and_active_status_attrs()
         self._set_plantree_factheirs_laborheirs_awardheirs()
 
@@ -1248,8 +1268,8 @@ class BelieverUnit:
             self._tree_traverse_count += 1
 
         self._set_plantree_fund_attrs(self.planroot)
-        self._set_groupunit_acctunit_funds(keep_exceptions)
-        self._set_acctunit_fund_related_attrs()
+        self._set_groupunit_personunit_funds(keep_exceptions)
+        self._set_personunit_fund_related_attrs()
         self._set_believer_keep_attrs()
 
     def _set_plantree_active_status_attrs(self):
@@ -1296,12 +1316,12 @@ class BelieverUnit:
         if any_plan_active_status_has_altered is False:
             self._rational = True
 
-    def _set_acctunit_fund_related_attrs(self):
+    def _set_personunit_fund_related_attrs(self):
         self.set_offtrack_fund()
         self._allot_offtrack_fund()
         self._allot_fund_believer_agenda()
         self._allot_groupunits_fund()
-        self._set_acctunits_fund_agenda_ratios()
+        self._set_personunits_fund_agenda_ratios()
 
     def _set_believer_keep_attrs(self):
         self._set_keep_dict()
@@ -1325,11 +1345,11 @@ class BelieverUnit:
         for x_keep_rope, x_keep_plan in self._keep_dict.items():
             for x_healer_name in x_keep_plan.healerlink._healer_names:
                 x_groupunit = self.get_groupunit(x_healer_name)
-                for x_acct_name in x_groupunit._memberships.keys():
-                    if _healers_dict.get(x_acct_name) is None:
-                        _healers_dict[x_acct_name] = {x_keep_rope: x_keep_plan}
+                for x_person_name in x_groupunit._memberships.keys():
+                    if _healers_dict.get(x_person_name) is None:
+                        _healers_dict[x_person_name] = {x_keep_rope: x_keep_plan}
                     else:
-                        healer_dict = _healers_dict.get(x_acct_name)
+                        healer_dict = _healers_dict.get(x_person_name)
                         healer_dict[x_keep_rope] = x_keep_plan
         return _healers_dict
 
@@ -1339,9 +1359,9 @@ class BelieverUnit:
             for keep_rope in self._keep_dict.keys()
         )
 
-    def _clear_acctunit_fund_attrs(self):
+    def _clear_personunit_fund_attrs(self):
         self._reset_groupunits_fund_give_take()
-        self._reset_acctunit_fund_give_take()
+        self._reset_personunit_fund_give_take()
 
     def get_plan_tree_ordered_rope_list(
         self, no_range_descendants: bool = False
@@ -1380,16 +1400,16 @@ class BelieverUnit:
                 x_dict[fact_rope] = fact_obj.get_dict()
         return x_dict
 
-    def get_acctunits_dict(self, all_attrs: bool = False) -> dict[str, str]:
+    def get_personunits_dict(self, all_attrs: bool = False) -> dict[str, str]:
         x_dict = {}
-        if self.accts is not None:
-            for acct_name, acct_obj in self.accts.items():
-                x_dict[acct_name] = acct_obj.get_dict(all_attrs)
+        if self.persons is not None:
+            for person_name, person_obj in self.persons.items():
+                x_dict[person_name] = person_obj.get_dict(all_attrs)
         return x_dict
 
     def get_dict(self) -> dict[str, str]:
         x_dict = {
-            "accts": self.get_acctunits_dict(),
+            "persons": self.get_personunits_dict(),
             "tally": self.tally,
             "fund_pool": self.fund_pool,
             "fund_iota": self.fund_iota,
@@ -1445,7 +1465,7 @@ def believerunit_shop(
         believer_name=believer_name,
         tally=get_1_if_None(tally),
         belief_label=belief_label,
-        accts=get_empty_dict_if_None(),
+        persons=get_empty_dict_if_None(),
         _groupunits={},
         knot=default_knot_if_None(knot),
         credor_respect=validate_respect_num(),
@@ -1509,9 +1529,9 @@ def get_from_dict(believer_dict: dict) -> BelieverUnit:
     x_believer.debtor_respect = obj_from_believer_dict(believer_dict, "debtor_respect")
     x_believer.last_pack_id = obj_from_believer_dict(believer_dict, "last_pack_id")
     x_knot = x_believer.knot
-    x_accts = obj_from_believer_dict(believer_dict, "accts", x_knot).values()
-    for x_acctunit in x_accts:
-        x_believer.set_acctunit(x_acctunit)
+    x_persons = obj_from_believer_dict(believer_dict, "persons", x_knot).values()
+    for x_personunit in x_persons:
+        x_believer.set_personunit(x_personunit)
     create_planroot_from_believer_dict(x_believer, believer_dict)
     return x_believer
 
@@ -1590,8 +1610,8 @@ def create_planroot_kids_from_dict(x_believer: BelieverUnit, planroot_dict: dict
 def obj_from_believer_dict(
     x_dict: dict[str, dict], dict_key: str, _knot: str = None
 ) -> any:
-    if dict_key == "accts":
-        return acctunits_get_from_dict(x_dict[dict_key], _knot)
+    if dict_key == "persons":
+        return personunits_get_from_dict(x_dict[dict_key], _knot)
     elif dict_key == "_max_tree_traverse":
         return (
             x_dict[dict_key]

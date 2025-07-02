@@ -6,9 +6,9 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_json_from_dict,
 )
 from src.a01_term_logic.rope import create_rope, get_parent_rope, get_tail_label
-from src.a01_term_logic.term import AcctName, LabelTerm, RopeTerm, TitleTerm
-from src.a03_group_logic.acct import acctunit_shop
+from src.a01_term_logic.term import LabelTerm, PersonName, RopeTerm, TitleTerm
 from src.a03_group_logic.group import awardlink_shop
+from src.a03_group_logic.person import personunit_shop
 from src.a04_reason_logic.reason_plan import factunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer import BelieverUnit
@@ -203,36 +203,36 @@ def _modify_believer_update_believerunit(
         x_believer.penny = x_atom.get_value(x_arg)
 
 
-def _modify_believer_acct_membership_delete(
+def _modify_believer_person_membership_delete(
     x_believer: BelieverUnit, x_atom: BelieverAtom
 ):
-    x_acct_name = x_atom.get_value("acct_name")
+    x_person_name = x_atom.get_value("person_name")
     x_group_title = x_atom.get_value("group_title")
-    x_believer.get_acct(x_acct_name).delete_membership(x_group_title)
+    x_believer.get_person(x_person_name).delete_membership(x_group_title)
 
 
-def _modify_believer_acct_membership_update(
+def _modify_believer_person_membership_update(
     x_believer: BelieverUnit, x_atom: BelieverAtom
 ):
-    x_acct_name = x_atom.get_value("acct_name")
+    x_person_name = x_atom.get_value("person_name")
     x_group_title = x_atom.get_value("group_title")
-    x_acctunit = x_believer.get_acct(x_acct_name)
-    x_membership = x_acctunit.get_membership(x_group_title)
+    x_personunit = x_believer.get_person(x_person_name)
+    x_membership = x_personunit.get_membership(x_group_title)
     x_group_cred_points = x_atom.get_value("group_cred_points")
     x_group_debt_points = x_atom.get_value("group_debt_points")
     x_membership.set_group_cred_points(x_group_cred_points)
     x_membership.set_group_debt_points(x_group_debt_points)
 
 
-def _modify_believer_acct_membership_insert(
+def _modify_believer_person_membership_insert(
     x_believer: BelieverUnit, x_atom: BelieverAtom
 ):
-    x_acct_name = x_atom.get_value("acct_name")
+    x_person_name = x_atom.get_value("person_name")
     x_group_title = x_atom.get_value("group_title")
     x_group_cred_points = x_atom.get_value("group_cred_points")
     x_group_debt_points = x_atom.get_value("group_debt_points")
-    x_acctunit = x_believer.get_acct(x_acct_name)
-    x_acctunit.add_membership(x_group_title, x_group_cred_points, x_group_debt_points)
+    x_personunit = x_believer.get_person(x_person_name)
+    x_personunit.add_membership(x_group_title, x_group_cred_points, x_group_debt_points)
 
 
 def _modify_believer_planunit_delete(x_believer: BelieverUnit, x_atom: BelieverAtom):
@@ -438,24 +438,24 @@ def _modify_believer_plan_healerlink_insert(
     x_planunit.healerlink.set_healer_name(x_atom.get_value("healer_name"))
 
 
-def _modify_believer_acctunit_delete(x_believer: BelieverUnit, x_atom: BelieverAtom):
-    x_believer.del_acctunit(x_atom.get_value("acct_name"))
+def _modify_believer_personunit_delete(x_believer: BelieverUnit, x_atom: BelieverAtom):
+    x_believer.del_personunit(x_atom.get_value("person_name"))
 
 
-def _modify_believer_acctunit_update(x_believer: BelieverUnit, x_atom: BelieverAtom):
-    x_believer.edit_acctunit(
-        acct_name=x_atom.get_value("acct_name"),
-        acct_cred_points=x_atom.get_value("acct_cred_points"),
-        acct_debt_points=x_atom.get_value("acct_debt_points"),
+def _modify_believer_personunit_update(x_believer: BelieverUnit, x_atom: BelieverAtom):
+    x_believer.edit_personunit(
+        person_name=x_atom.get_value("person_name"),
+        person_cred_points=x_atom.get_value("person_cred_points"),
+        person_debt_points=x_atom.get_value("person_debt_points"),
     )
 
 
-def _modify_believer_acctunit_insert(x_believer: BelieverUnit, x_atom: BelieverAtom):
-    x_believer.set_acctunit(
-        acctunit_shop(
-            acct_name=x_atom.get_value("acct_name"),
-            acct_cred_points=x_atom.get_value("acct_cred_points"),
-            acct_debt_points=x_atom.get_value("acct_debt_points"),
+def _modify_believer_personunit_insert(x_believer: BelieverUnit, x_atom: BelieverAtom):
+    x_believer.set_personunit(
+        personunit_shop(
+            person_name=x_atom.get_value("person_name"),
+            person_cred_points=x_atom.get_value("person_cred_points"),
+            person_debt_points=x_atom.get_value("person_debt_points"),
         )
     )
 
@@ -465,13 +465,13 @@ def _modify_believer_believerunit(x_believer: BelieverUnit, x_atom: BelieverAtom
         _modify_believer_update_believerunit(x_believer, x_atom)
 
 
-def _modify_believer_acct_membership(x_believer: BelieverUnit, x_atom: BelieverAtom):
+def _modify_believer_person_membership(x_believer: BelieverUnit, x_atom: BelieverAtom):
     if x_atom.crud_str == "DELETE":
-        _modify_believer_acct_membership_delete(x_believer, x_atom)
+        _modify_believer_person_membership_delete(x_believer, x_atom)
     elif x_atom.crud_str == "UPDATE":
-        _modify_believer_acct_membership_update(x_believer, x_atom)
+        _modify_believer_person_membership_update(x_believer, x_atom)
     elif x_atom.crud_str == "INSERT":
-        _modify_believer_acct_membership_insert(x_believer, x_atom)
+        _modify_believer_person_membership_insert(x_believer, x_atom)
 
 
 def _modify_believer_planunit(x_believer: BelieverUnit, x_atom: BelieverAtom):
@@ -535,20 +535,20 @@ def _modify_believer_plan_healerlink(x_believer: BelieverUnit, x_atom: BelieverA
         _modify_believer_plan_healerlink_insert(x_believer, x_atom)
 
 
-def _modify_believer_acctunit(x_believer: BelieverUnit, x_atom: BelieverAtom):
+def _modify_believer_personunit(x_believer: BelieverUnit, x_atom: BelieverAtom):
     if x_atom.crud_str == "DELETE":
-        _modify_believer_acctunit_delete(x_believer, x_atom)
+        _modify_believer_personunit_delete(x_believer, x_atom)
     elif x_atom.crud_str == "UPDATE":
-        _modify_believer_acctunit_update(x_believer, x_atom)
+        _modify_believer_personunit_update(x_believer, x_atom)
     elif x_atom.crud_str == "INSERT":
-        _modify_believer_acctunit_insert(x_believer, x_atom)
+        _modify_believer_personunit_insert(x_believer, x_atom)
 
 
 def modify_believer_with_believeratom(x_believer: BelieverUnit, x_atom: BelieverAtom):
     if x_atom.dimen == "believerunit":
         _modify_believer_believerunit(x_believer, x_atom)
-    elif x_atom.dimen == "believer_acct_membership":
-        _modify_believer_acct_membership(x_believer, x_atom)
+    elif x_atom.dimen == "believer_person_membership":
+        _modify_believer_person_membership(x_believer, x_atom)
     elif x_atom.dimen == "believer_planunit":
         _modify_believer_planunit(x_believer, x_atom)
     elif x_atom.dimen == "believer_plan_awardlink":
@@ -563,8 +563,8 @@ def modify_believer_with_believeratom(x_believer: BelieverUnit, x_atom: Believer
         _modify_believer_plan_healerlink(x_believer, x_atom)
     elif x_atom.dimen == "believer_plan_laborlink":
         _modify_believer_plan_laborlink(x_believer, x_atom)
-    elif x_atom.dimen == "believer_acctunit":
-        _modify_believer_acctunit(x_believer, x_atom)
+    elif x_atom.dimen == "believer_personunit":
+        _modify_believer_personunit(x_believer, x_atom)
 
 
 def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
@@ -578,7 +578,7 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.fund_pool != y_obj.fund_pool
             or x_obj.fund_iota != y_obj.fund_iota
         )
-    elif dimen in {"believer_acct_membership"}:
+    elif dimen in {"believer_person_membership"}:
         return (x_obj.group_cred_points != y_obj.group_cred_points) or (
             x_obj.group_debt_points != y_obj.group_debt_points
         )
@@ -611,9 +611,9 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.pnigh != y_obj.pnigh
             or x_obj.pdivisor != y_obj.pdivisor
         )
-    elif dimen == "believer_acctunit":
-        return (x_obj.acct_cred_points != y_obj.acct_cred_points) or (
-            x_obj.acct_debt_points != y_obj.acct_debt_points
+    elif dimen == "believer_personunit":
+        return (x_obj.person_cred_points != y_obj.person_cred_points) or (
+            x_obj.person_debt_points != y_obj.person_debt_points
         )
 
 
@@ -635,7 +635,7 @@ def get_believeratom_from_rowdata(x_rowdata: RowData) -> BelieverAtom:
 class AtomRow:
     _atom_dimens: set[str] = None
     _crud_command: CRUD_command = None
-    acct_name: AcctName = None
+    person_name: PersonName = None
     addin: float = None
     awardee_title: TitleTerm = None
     rcontext: RopeTerm = None
@@ -643,10 +643,10 @@ class AtomRow:
     begin: float = None
     respect_bit: float = None
     close: float = None
-    acct_cred_points: int = None
+    person_cred_points: int = None
     group_cred_points: int = None
     credor_respect: int = None
-    acct_debt_points: int = None
+    person_debt_points: int = None
     group_debt_points: int = None
     debtor_respect: int = None
     denom: int = None
@@ -691,7 +691,7 @@ class AtomRow:
             x_value = self.__dict__.get(x_arg)
             if x_value != None:
                 if class_type == "NameTerm":
-                    self.__dict__[x_arg] = AcctName(x_value)
+                    self.__dict__[x_arg] = PersonName(x_value)
                 elif class_type == "TitleTerm":
                     self.__dict__[x_arg] = TitleTerm(x_value)
                 elif class_type == "RopeTerm":

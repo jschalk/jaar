@@ -3,15 +3,15 @@ from src.a00_data_toolbox.file_toolbox import create_path, open_file
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer import believerunit_shop
 from src.a06_believer_logic.test._util.a06_str import (
-    acct_cred_points_str,
-    acct_debt_points_str,
-    acct_name_str,
     belief_label_str,
     believer_name_str,
     group_cred_points_str,
     group_debt_points_str,
     group_title_str,
     mass_str,
+    person_cred_points_str,
+    person_debt_points_str,
+    person_name_str,
     plan_rope_str,
     task_str,
 )
@@ -23,8 +23,8 @@ from src.a17_idea_logic.idea import create_idea_df, get_idearef_obj, save_idea_c
 from src.a17_idea_logic.idea_config import (
     idea_format_00013_planunit_v0_0_0,
     idea_format_00019_planunit_v0_0_0,
-    idea_format_00020_believer_acct_membership_v0_0_0,
-    idea_format_00021_believer_acctunit_v0_0_0,
+    idea_format_00020_believer_person_membership_v0_0_0,
+    idea_format_00021_believer_personunit_v0_0_0,
 )
 from src.a17_idea_logic.test._util.a17_env import (
     env_dir_setup_cleanup,
@@ -32,62 +32,74 @@ from src.a17_idea_logic.test._util.a17_env import (
 )
 
 
-def test_create_idea_df_Arg_idea_format_00021_believer_acctunit_v0_0_0():
+def test_create_idea_df_Arg_idea_format_00021_believer_personunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
     yao_str = "Yao"
-    sue_acct_cred_points = 11
-    bob_acct_cred_points = 13
-    yao_acct_cred_points = 41
-    sue_acct_debt_points = 23
-    bob_acct_debt_points = 29
-    yao_acct_debt_points = 37
+    sue_person_cred_points = 11
+    bob_person_cred_points = 13
+    yao_person_cred_points = 41
+    sue_person_debt_points = 23
+    bob_person_debt_points = 29
+    yao_person_debt_points = 37
     amy_belief_label = "amy56"
     sue_believerunit = believerunit_shop(sue_str, amy_belief_label)
-    sue_believerunit.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
-    sue_believerunit.add_acctunit(bob_str, bob_acct_cred_points, bob_acct_debt_points)
-    sue_believerunit.add_acctunit(yao_str, yao_acct_cred_points, yao_acct_debt_points)
+    sue_believerunit.add_personunit(
+        sue_str, sue_person_cred_points, sue_person_debt_points
+    )
+    sue_believerunit.add_personunit(
+        bob_str, bob_person_cred_points, bob_person_debt_points
+    )
+    sue_believerunit.add_personunit(
+        yao_str, yao_person_cred_points, yao_person_debt_points
+    )
 
     # WHEN
-    x_idea_name = idea_format_00021_believer_acctunit_v0_0_0()
-    acct_dataframe = create_idea_df(sue_believerunit, x_idea_name)
+    x_idea_name = idea_format_00021_believer_personunit_v0_0_0()
+    person_dataframe = create_idea_df(sue_believerunit, x_idea_name)
 
     # THEN
-    array_headers = list(acct_dataframe.columns)
-    acct_idearef = get_idearef_obj(x_idea_name)
-    assert array_headers == acct_idearef.get_headers_list()
-    assert acct_dataframe.loc[0, belief_label_str()] == amy_belief_label
-    assert acct_dataframe.loc[0, believer_name_str()] == sue_believerunit.believer_name
-    assert acct_dataframe.loc[0, acct_name_str()] == bob_str
-    assert acct_dataframe.loc[0, acct_debt_points_str()] == bob_acct_debt_points
-    assert acct_dataframe.loc[0, acct_cred_points_str()] == bob_acct_cred_points
+    array_headers = list(person_dataframe.columns)
+    person_idearef = get_idearef_obj(x_idea_name)
+    assert array_headers == person_idearef.get_headers_list()
+    assert person_dataframe.loc[0, belief_label_str()] == amy_belief_label
+    assert (
+        person_dataframe.loc[0, believer_name_str()] == sue_believerunit.believer_name
+    )
+    assert person_dataframe.loc[0, person_name_str()] == bob_str
+    assert person_dataframe.loc[0, person_debt_points_str()] == bob_person_debt_points
+    assert person_dataframe.loc[0, person_cred_points_str()] == bob_person_cred_points
 
-    assert acct_dataframe.loc[1, belief_label_str()] == amy_belief_label
-    assert acct_dataframe.loc[1, believer_name_str()] == sue_believerunit.believer_name
-    assert acct_dataframe.loc[1, acct_name_str()] == sue_str
-    assert acct_dataframe.loc[1, acct_debt_points_str()] == sue_acct_debt_points
-    assert acct_dataframe.loc[1, acct_cred_points_str()] == sue_acct_cred_points
+    assert person_dataframe.loc[1, belief_label_str()] == amy_belief_label
+    assert (
+        person_dataframe.loc[1, believer_name_str()] == sue_believerunit.believer_name
+    )
+    assert person_dataframe.loc[1, person_name_str()] == sue_str
+    assert person_dataframe.loc[1, person_debt_points_str()] == sue_person_debt_points
+    assert person_dataframe.loc[1, person_cred_points_str()] == sue_person_cred_points
 
-    assert acct_dataframe.loc[2, belief_label_str()] == amy_belief_label
-    assert acct_dataframe.loc[2, believer_name_str()] == sue_believerunit.believer_name
-    assert acct_dataframe.loc[2, acct_name_str()] == yao_str
-    assert acct_dataframe.loc[2, acct_debt_points_str()] == yao_acct_debt_points
-    assert acct_dataframe.loc[2, acct_cred_points_str()] == yao_acct_cred_points
+    assert person_dataframe.loc[2, belief_label_str()] == amy_belief_label
+    assert (
+        person_dataframe.loc[2, believer_name_str()] == sue_believerunit.believer_name
+    )
+    assert person_dataframe.loc[2, person_name_str()] == yao_str
+    assert person_dataframe.loc[2, person_debt_points_str()] == yao_person_debt_points
+    assert person_dataframe.loc[2, person_cred_points_str()] == yao_person_cred_points
 
-    assert len(acct_dataframe) == 3
+    assert len(person_dataframe) == 3
 
 
-def test_create_idea_df_Arg_idea_format_00020_believer_acct_membership_v0_0_0():
+def test_create_idea_df_Arg_idea_format_00020_believer_person_membership_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
     yao_str = "Yao"
     amy_belief_label = "amy56"
     sue_believerunit = believerunit_shop(sue_str, amy_belief_label)
-    sue_believerunit.add_acctunit(sue_str)
-    sue_believerunit.add_acctunit(bob_str)
-    sue_believerunit.add_acctunit(yao_str)
+    sue_believerunit.add_personunit(sue_str)
+    sue_believerunit.add_personunit(bob_str)
+    sue_believerunit.add_personunit(yao_str)
     iowa_str = ";Iowa"
     sue_iowa_credit_w = 37
     bob_iowa_credit_w = 43
@@ -98,30 +110,30 @@ def test_create_idea_df_Arg_idea_format_00020_believer_acct_membership_v0_0_0():
     ohio_str = ";Ohio"
     yao_ohio_credit_w = 73
     yao_ohio_debt_w = 67
-    sue_acctunit = sue_believerunit.get_acct(sue_str)
-    bob_acctunit = sue_believerunit.get_acct(bob_str)
-    yao_acctunit = sue_believerunit.get_acct(yao_str)
-    sue_acctunit.add_membership(iowa_str, sue_iowa_credit_w, sue_iowa_debt_w)
-    bob_acctunit.add_membership(iowa_str, bob_iowa_credit_w, bob_iowa_debt_w)
-    yao_acctunit.add_membership(iowa_str, yao_iowa_credit_w, yao_iowa_debt_w)
-    yao_acctunit.add_membership(ohio_str, yao_ohio_credit_w, yao_ohio_debt_w)
+    sue_personunit = sue_believerunit.get_person(sue_str)
+    bob_personunit = sue_believerunit.get_person(bob_str)
+    yao_personunit = sue_believerunit.get_person(yao_str)
+    sue_personunit.add_membership(iowa_str, sue_iowa_credit_w, sue_iowa_debt_w)
+    bob_personunit.add_membership(iowa_str, bob_iowa_credit_w, bob_iowa_debt_w)
+    yao_personunit.add_membership(iowa_str, yao_iowa_credit_w, yao_iowa_debt_w)
+    yao_personunit.add_membership(ohio_str, yao_ohio_credit_w, yao_ohio_debt_w)
 
     # WHEN
-    x_idea_name = idea_format_00020_believer_acct_membership_v0_0_0()
+    x_idea_name = idea_format_00020_believer_person_membership_v0_0_0()
     membership_dataframe = create_idea_df(sue_believerunit, x_idea_name)
 
     # THEN
     array_headers = list(membership_dataframe.columns)
-    acct_idearef = get_idearef_obj(x_idea_name)
+    person_idearef = get_idearef_obj(x_idea_name)
     print(f"{len(membership_dataframe)=}")
     assert len(membership_dataframe) == 10
-    assert array_headers == acct_idearef.get_headers_list()
+    assert array_headers == person_idearef.get_headers_list()
     assert membership_dataframe.loc[0, belief_label_str()] == amy_belief_label
     assert (
         membership_dataframe.loc[0, believer_name_str()]
         == sue_believerunit.believer_name
     )
-    assert membership_dataframe.loc[0, acct_name_str()] == bob_str
+    assert membership_dataframe.loc[0, person_name_str()] == bob_str
     assert membership_dataframe.loc[0, group_title_str()] == iowa_str
     assert membership_dataframe.loc[0, group_cred_points_str()] == bob_iowa_credit_w
     assert membership_dataframe.loc[0, group_debt_points_str()] == bob_iowa_debt_w
@@ -131,7 +143,7 @@ def test_create_idea_df_Arg_idea_format_00020_believer_acct_membership_v0_0_0():
         membership_dataframe.loc[3, believer_name_str()]
         == sue_believerunit.believer_name
     )
-    assert membership_dataframe.loc[3, acct_name_str()] == sue_str
+    assert membership_dataframe.loc[3, person_name_str()] == sue_str
     assert membership_dataframe.loc[3, group_title_str()] == iowa_str
     assert membership_dataframe.loc[3, group_cred_points_str()] == sue_iowa_credit_w
     assert membership_dataframe.loc[3, group_debt_points_str()] == sue_iowa_debt_w
@@ -141,7 +153,7 @@ def test_create_idea_df_Arg_idea_format_00020_believer_acct_membership_v0_0_0():
         membership_dataframe.loc[4, believer_name_str()]
         == sue_believerunit.believer_name
     )
-    assert membership_dataframe.loc[4, acct_name_str()] == sue_str
+    assert membership_dataframe.loc[4, person_name_str()] == sue_str
     assert membership_dataframe.loc[4, group_title_str()] == sue_str
     assert membership_dataframe.loc[4, group_cred_points_str()] == 1
     assert membership_dataframe.loc[4, group_debt_points_str()] == 1
@@ -151,7 +163,7 @@ def test_create_idea_df_Arg_idea_format_00020_believer_acct_membership_v0_0_0():
         membership_dataframe.loc[7, believer_name_str()]
         == sue_believerunit.believer_name
     )
-    assert membership_dataframe.loc[7, acct_name_str()] == yao_str
+    assert membership_dataframe.loc[7, person_name_str()] == yao_str
     assert membership_dataframe.loc[7, group_title_str()] == ohio_str
     assert membership_dataframe.loc[7, group_cred_points_str()] == yao_ohio_credit_w
     assert membership_dataframe.loc[7, group_debt_points_str()] == yao_ohio_debt_w
@@ -213,26 +225,32 @@ def test_save_idea_csv_Arg_idea_format_00019_planunit_v0_0_0():
     #     print(f"{x_array_header=}")
 
 
-def test_save_idea_csv_Arg_idea_format_00021_believer_acctunit_v0_0_0_SaveToCSV(
+def test_save_idea_csv_Arg_idea_format_00021_believer_personunit_v0_0_0_SaveToCSV(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
     yao_str = "Yao"
-    sue_acct_cred_points = 11
-    bob_acct_cred_points = 13
-    yao_acct_cred_points = 41
-    sue_acct_debt_points = 23
-    bob_acct_debt_points = 29
-    yao_acct_debt_points = 37
+    sue_person_cred_points = 11
+    bob_person_cred_points = 13
+    yao_person_cred_points = 41
+    sue_person_debt_points = 23
+    bob_person_debt_points = 29
+    yao_person_debt_points = 37
     amy_belief_label = "amy56"
     sue_believerunit = believerunit_shop(sue_str, amy_belief_label)
-    sue_believerunit.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
-    sue_believerunit.add_acctunit(bob_str, bob_acct_cred_points, bob_acct_debt_points)
-    sue_believerunit.add_acctunit(yao_str, yao_acct_cred_points, yao_acct_debt_points)
-    j1_ideaname = idea_format_00021_believer_acctunit_v0_0_0()
-    name_filename = f"{sue_str}_acct_example_00.csv"
+    sue_believerunit.add_personunit(
+        sue_str, sue_person_cred_points, sue_person_debt_points
+    )
+    sue_believerunit.add_personunit(
+        bob_str, bob_person_cred_points, bob_person_debt_points
+    )
+    sue_believerunit.add_personunit(
+        yao_str, yao_person_cred_points, yao_person_debt_points
+    )
+    j1_ideaname = idea_format_00021_believer_personunit_v0_0_0()
+    name_filename = f"{sue_str}_person_example_00.csv"
     csv_example_path = create_path(idea_beliefs_dir(), name_filename)
     print(f"{csv_example_path}")
     assert not os_path_exists(csv_example_path)
@@ -242,7 +260,7 @@ def test_save_idea_csv_Arg_idea_format_00021_believer_acctunit_v0_0_0_SaveToCSV(
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue1_name_example_csv = """event_int,face_name,belief_label,believer_name,acct_name,acct_cred_points,acct_debt_points
+    sue1_name_example_csv = """event_int,face_name,belief_label,believer_name,person_name,person_cred_points,person_debt_points
 ,,amy56,Sue,Bob,13,29
 ,,amy56,Sue,Sue,11,23
 ,,amy56,Sue,Yao,41,37
@@ -254,18 +272,18 @@ def test_save_idea_csv_Arg_idea_format_00021_believer_acctunit_v0_0_0_SaveToCSV(
 
     # WHEN
     zia_str = "Zia"
-    sue_believerunit.add_acctunit(zia_str)
+    sue_believerunit.add_personunit(zia_str)
     save_idea_csv(j1_ideaname, sue_believerunit, idea_beliefs_dir(), name_filename)
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue2_acct_example_csv = """event_int,face_name,belief_label,believer_name,acct_name,acct_cred_points,acct_debt_points
+    sue2_person_example_csv = """event_int,face_name,belief_label,believer_name,person_name,person_cred_points,person_debt_points
 ,,amy56,Sue,Bob,13,29
 ,,amy56,Sue,Sue,11,23
 ,,amy56,Sue,Yao,41,37
 ,,amy56,Sue,Zia,1,1
 """
-    assert open_file(idea_beliefs_dir(), name_filename) == sue2_acct_example_csv
+    assert open_file(idea_beliefs_dir(), name_filename) == sue2_person_example_csv
 
 
 def test_save_idea_csv_Arg_idea_format_00013_planunit_v0_0_0(

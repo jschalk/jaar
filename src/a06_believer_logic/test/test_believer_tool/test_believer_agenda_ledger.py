@@ -1,32 +1,32 @@
 from src.a06_believer_logic.believer import believerunit_shop
 from src.a06_believer_logic.believer_tool import (
-    get_acct_agenda_net_ledger,
-    get_acct_mandate_ledger,
-    get_believer_acct_agenda_award_array,
-    get_believer_acct_agenda_award_csv,
+    get_believer_person_agenda_award_array,
+    get_believer_person_agenda_award_csv,
     get_credit_ledger,
+    get_person_agenda_net_ledger,
+    get_person_mandate_ledger,
 )
 
 
-def test_get_believer_acct_agenda_award_array_ReturnsObj_ScenarioZeroAcctUnits():
+def test_get_believer_person_agenda_award_array_ReturnsObj_ScenarioZeroPersonUnits():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
 
     # WHEN / THEN
-    assert get_believer_acct_agenda_award_array(sue_believer) == []
+    assert get_believer_person_agenda_award_array(sue_believer) == []
 
 
-def test_get_believer_acct_agenda_award_array_ReturnsObj_ScenarioSingleAcctUnit():
+def test_get_believer_person_agenda_award_array_ReturnsObj_ScenarioSinglePersonUnit():
     # ESTABLISH
     yao_str = "Yao"
     sue_believer = believerunit_shop("Sue")
-    sue_believer.add_acctunit(yao_str)
+    sue_believer.add_personunit(yao_str)
 
     # WHEN / THEN
-    assert len(get_believer_acct_agenda_award_array(sue_believer)) == 1
+    assert len(get_believer_person_agenda_award_array(sue_believer)) == 1
 
 
-def test_get_believer_acct_agenda_award_array_ReturnsObj_ScenarioMultipleAcctUnit():
+def test_get_believer_person_agenda_award_array_ReturnsObj_ScenarioMultiplePersonUnit():
     # ESTABLISH
     yao_str = "Yao"
     yao_fund_agenda_give = 17
@@ -36,34 +36,34 @@ def test_get_believer_acct_agenda_award_array_ReturnsObj_ScenarioMultipleAcctUni
     bob_fund_agenda_take = 23
     zia_str = "Zia"
     sue_believer = believerunit_shop("Sue")
-    sue_believer.add_acctunit(yao_str)
-    sue_believer.add_acctunit(bob_str)
-    sue_believer.add_acctunit(zia_str)
-    sue_believer.get_acct(yao_str)._fund_agenda_give = yao_fund_agenda_give
-    sue_believer.get_acct(yao_str)._fund_agenda_take = yao_fund_agenda_take
-    sue_believer.get_acct(bob_str)._fund_agenda_give = bob_fund_agenda_give
-    sue_believer.get_acct(bob_str)._fund_agenda_take = bob_fund_agenda_take
+    sue_believer.add_personunit(yao_str)
+    sue_believer.add_personunit(bob_str)
+    sue_believer.add_personunit(zia_str)
+    sue_believer.get_person(yao_str)._fund_agenda_give = yao_fund_agenda_give
+    sue_believer.get_person(yao_str)._fund_agenda_take = yao_fund_agenda_take
+    sue_believer.get_person(bob_str)._fund_agenda_give = bob_fund_agenda_give
+    sue_believer.get_person(bob_str)._fund_agenda_take = bob_fund_agenda_take
 
     # WHEN
-    believer_acct_agenda_award_array = get_believer_acct_agenda_award_array(
+    believer_person_agenda_award_array = get_believer_person_agenda_award_array(
         sue_believer
     )
 
     # THEN
-    assert len(believer_acct_agenda_award_array) == 3
-    assert believer_acct_agenda_award_array[0][0] == bob_str
-    assert believer_acct_agenda_award_array[1][0] == yao_str
-    assert believer_acct_agenda_award_array[2][0] == zia_str
-    assert len(believer_acct_agenda_award_array[0]) == 3
-    assert len(believer_acct_agenda_award_array[1]) == 3
-    assert len(believer_acct_agenda_award_array[2]) == 3
-    assert believer_acct_agenda_award_array[0][1] == bob_fund_agenda_take
-    assert believer_acct_agenda_award_array[0][2] == bob_fund_agenda_give
-    assert believer_acct_agenda_award_array[1][1] == yao_fund_agenda_take
-    assert believer_acct_agenda_award_array[1][2] == yao_fund_agenda_give
+    assert len(believer_person_agenda_award_array) == 3
+    assert believer_person_agenda_award_array[0][0] == bob_str
+    assert believer_person_agenda_award_array[1][0] == yao_str
+    assert believer_person_agenda_award_array[2][0] == zia_str
+    assert len(believer_person_agenda_award_array[0]) == 3
+    assert len(believer_person_agenda_award_array[1]) == 3
+    assert len(believer_person_agenda_award_array[2]) == 3
+    assert believer_person_agenda_award_array[0][1] == bob_fund_agenda_take
+    assert believer_person_agenda_award_array[0][2] == bob_fund_agenda_give
+    assert believer_person_agenda_award_array[1][1] == yao_fund_agenda_take
+    assert believer_person_agenda_award_array[1][2] == yao_fund_agenda_give
 
 
-def test_get_believer_acct_agenda_award_csv_ReturnsObj_ScenarioMultipleAcctUnit():
+def test_get_believer_person_agenda_award_csv_ReturnsObj_ScenarioMultiplePersonUnit():
     # ESTABLISH
     yao_str = "Yao"
     yao_fund_agenda_give = 17
@@ -73,71 +73,73 @@ def test_get_believer_acct_agenda_award_csv_ReturnsObj_ScenarioMultipleAcctUnit(
     bob_fund_agenda_take = 23
     zia_str = "Zia"
     sue_believer = believerunit_shop("Sue")
-    sue_believer.add_acctunit(yao_str)
-    sue_believer.add_acctunit(bob_str)
-    sue_believer.add_acctunit(zia_str)
-    sue_believer.get_acct(yao_str)._fund_agenda_give = yao_fund_agenda_give
-    sue_believer.get_acct(yao_str)._fund_agenda_take = yao_fund_agenda_take
-    sue_believer.get_acct(bob_str)._fund_agenda_give = bob_fund_agenda_give
-    sue_believer.get_acct(bob_str)._fund_agenda_take = bob_fund_agenda_take
+    sue_believer.add_personunit(yao_str)
+    sue_believer.add_personunit(bob_str)
+    sue_believer.add_personunit(zia_str)
+    sue_believer.get_person(yao_str)._fund_agenda_give = yao_fund_agenda_give
+    sue_believer.get_person(yao_str)._fund_agenda_take = yao_fund_agenda_take
+    sue_believer.get_person(bob_str)._fund_agenda_give = bob_fund_agenda_give
+    sue_believer.get_person(bob_str)._fund_agenda_take = bob_fund_agenda_take
 
     # WHEN
-    believer_acct_agenda_award_csv_str = get_believer_acct_agenda_award_csv(
+    believer_person_agenda_award_csv_str = get_believer_person_agenda_award_csv(
         sue_believer
     )
 
     # THEN
-    print(f"{believer_acct_agenda_award_csv_str=}")
+    print(f"{believer_person_agenda_award_csv_str=}")
     print("")
-    example_csv_str = f"""acct_name,fund_agenda_take,fund_agenda_give
+    example_csv_str = f"""person_name,fund_agenda_take,fund_agenda_give
 {bob_str},{bob_fund_agenda_take},{bob_fund_agenda_give}
 {yao_str},{yao_fund_agenda_take},{yao_fund_agenda_give}
 {zia_str},0,0
 """
     print(f"{example_csv_str=}")
-    assert believer_acct_agenda_award_csv_str == example_csv_str
+    assert believer_person_agenda_award_csv_str == example_csv_str
 
 
-def test_get_believer_acct_agenda_award_csv_ReturnsObj_settle_believer_True():
+def test_get_believer_person_agenda_award_csv_ReturnsObj_settle_believer_True():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     yao_str = "Yao"
     bob_str = "Bob"
     xio_str = "Xio"
     zia_str = "Zia"
-    sue_believer.add_acctunit(yao_str)
-    sue_believer.add_acctunit(bob_str)
-    sue_believer.add_acctunit(xio_str)
-    sue_believer.add_acctunit(zia_str)
-    empty_acct_agenda_award = f"""acct_name,fund_agenda_take,fund_agenda_give
+    sue_believer.add_personunit(yao_str)
+    sue_believer.add_personunit(bob_str)
+    sue_believer.add_personunit(xio_str)
+    sue_believer.add_personunit(zia_str)
+    empty_person_agenda_award = f"""person_name,fund_agenda_take,fund_agenda_give
 {bob_str},0,0
 {xio_str},0,0
 {yao_str},0,0
 {zia_str},0,0
 """
-    assert empty_acct_agenda_award == get_believer_acct_agenda_award_csv(sue_believer)
+    assert empty_person_agenda_award == get_believer_person_agenda_award_csv(
+        sue_believer
+    )
 
     # WHEN
-    believer_acct_agenda_award_csv_str = get_believer_acct_agenda_award_csv(
+    believer_person_agenda_award_csv_str = get_believer_person_agenda_award_csv(
         sue_believer, settle_believer=True
     )
 
     # THEN
-    print(f"{believer_acct_agenda_award_csv_str=}")
+    print(f"{believer_person_agenda_award_csv_str=}")
     print("")
     q_fund_agenda_give = int(sue_believer.fund_pool * 0.25)
     q_fund_agenda_take = int(sue_believer.fund_pool * 0.25)
-    example_csv_str = f"""acct_name,fund_agenda_take,fund_agenda_give
+    example_csv_str = f"""person_name,fund_agenda_take,fund_agenda_give
 {bob_str},{q_fund_agenda_take},{q_fund_agenda_give}
 {xio_str},{q_fund_agenda_take},{q_fund_agenda_give}
 {yao_str},{q_fund_agenda_take},{q_fund_agenda_give}
 {zia_str},{q_fund_agenda_take},{q_fund_agenda_give}
 """
     print(f"{example_csv_str=}")
-    assert believer_acct_agenda_award_csv_str == example_csv_str
+    assert believer_person_agenda_award_csv_str == example_csv_str
 
 
-def test_get_acct_mandate_ledger_ReturnsObj_Scenario0_MultipleAcctUnit():
+def test_get_person_mandate_ledger_ReturnsObj_Scenario0_MultiplePersonUnit():
     # ESTABLISH
     yao_str = "Yao"
     yao_fund_agenda_give = 42
@@ -147,16 +149,16 @@ def test_get_acct_mandate_ledger_ReturnsObj_Scenario0_MultipleAcctUnit():
     bob_fund_agenda_take = 23
     zia_str = "Zia"
     sue_believer = believerunit_shop("Sue", fund_pool=200)
-    sue_believer.add_acctunit(yao_str)
-    sue_believer.add_acctunit(bob_str)
-    sue_believer.add_acctunit(zia_str)
-    sue_believer.get_acct(yao_str)._fund_agenda_give = yao_fund_agenda_give
-    sue_believer.get_acct(yao_str)._fund_agenda_take = yao_fund_agenda_take
-    sue_believer.get_acct(bob_str)._fund_agenda_give = bob_fund_agenda_give
-    sue_believer.get_acct(bob_str)._fund_agenda_take = bob_fund_agenda_take
+    sue_believer.add_personunit(yao_str)
+    sue_believer.add_personunit(bob_str)
+    sue_believer.add_personunit(zia_str)
+    sue_believer.get_person(yao_str)._fund_agenda_give = yao_fund_agenda_give
+    sue_believer.get_person(yao_str)._fund_agenda_take = yao_fund_agenda_take
+    sue_believer.get_person(bob_str)._fund_agenda_give = bob_fund_agenda_give
+    sue_believer.get_person(bob_str)._fund_agenda_take = bob_fund_agenda_take
 
     # WHEN
-    believer_bud_net_dict = get_acct_mandate_ledger(sue_believer)
+    believer_bud_net_dict = get_person_mandate_ledger(sue_believer)
 
     # THEN
     print(f"{believer_bud_net_dict=}")
@@ -170,33 +172,33 @@ def test_get_acct_mandate_ledger_ReturnsObj_Scenario0_MultipleAcctUnit():
     assert example_bud_net_dict == believer_bud_net_dict
 
 
-def test_get_acct_mandate_ledger_ReturnsObj_Scenario1_settle_believer_True():
+def test_get_person_mandate_ledger_ReturnsObj_Scenario1_settle_believer_True():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     yao_str = "Yao"
     bob_str = "Bob"
     xio_str = "Xio"
     zia_str = "Zia"
-    sue_believer.add_acctunit(yao_str, 13, 5)
-    sue_believer.add_acctunit(bob_str, 5, 7)
-    sue_believer.add_acctunit(xio_str, 2, 3)
-    sue_believer.add_acctunit(zia_str, 0, 0)
+    sue_believer.add_personunit(yao_str, 13, 5)
+    sue_believer.add_personunit(bob_str, 5, 7)
+    sue_believer.add_personunit(xio_str, 2, 3)
+    sue_believer.add_personunit(zia_str, 0, 0)
     pool4th = sue_believer.fund_pool / 4
-    pre_settle_acct_mandate_ledger = {
+    pre_settle_person_mandate_ledger = {
         bob_str: pool4th,
         xio_str: pool4th,
         yao_str: pool4th,
         zia_str: pool4th,
     }
-    assert get_acct_mandate_ledger(sue_believer) == pre_settle_acct_mandate_ledger
+    assert get_person_mandate_ledger(sue_believer) == pre_settle_person_mandate_ledger
 
     # WHEN
-    sue_believer_settle_net_dict = get_acct_mandate_ledger(
+    sue_believer_settle_net_dict = get_person_mandate_ledger(
         sue_believer, settle_believer=True
     )
 
     # THEN
-    assert sue_believer_settle_net_dict != pre_settle_acct_mandate_ledger
+    assert sue_believer_settle_net_dict != pre_settle_person_mandate_ledger
     print(f"{sue_believer_settle_net_dict=}")
     print("")
     example_bud_net_dict = {
@@ -213,48 +215,48 @@ def test_get_acct_mandate_ledger_ReturnsObj_Scenario1_settle_believer_True():
     assert sue_believer_settle_net_dict == example_bud_net_dict
 
 
-def test_get_acct_mandate_ledger_ReturnsObj_Scenario2_No_acctunits():
+def test_get_person_mandate_ledger_ReturnsObj_Scenario2_No_personunits():
     # ESTABLISH
     sue_str = "Sue"
     sue_believer = believerunit_shop(sue_str)
-    empty_acct_mandate_ledger = {sue_str: sue_believer.fund_pool}
+    empty_person_mandate_ledger = {sue_str: sue_believer.fund_pool}
 
     # WHEN / THEN
-    assert get_acct_mandate_ledger(sue_believer) == empty_acct_mandate_ledger
+    assert get_person_mandate_ledger(sue_believer) == empty_person_mandate_ledger
 
 
-def test_get_acct_mandate_ledger_ReturnsObj_Scenario3_No_believerunit():
+def test_get_person_mandate_ledger_ReturnsObj_Scenario3_No_believerunit():
     # ESTABLISH / WHEN / THEN
-    assert get_acct_mandate_ledger(None) == {}
+    assert get_person_mandate_ledger(None) == {}
 
 
-def test_get_acct_mandate_ledger_ReturnsObj_Scenario4_MandateSumEqual_fund_pool():
+def test_get_person_mandate_ledger_ReturnsObj_Scenario4_MandateSumEqual_fund_pool():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     yao_str = "Yao"
     bob_str = "Bob"
     xio_str = "Xio"
     zia_str = "Zia"
-    sue_believer.add_acctunit(yao_str, 13, 5)
-    sue_believer.add_acctunit(bob_str, 5, 7)
-    sue_believer.add_acctunit(xio_str, 2, 3)
-    sue_believer.add_acctunit(zia_str, 0, 0)
+    sue_believer.add_personunit(yao_str, 13, 5)
+    sue_believer.add_personunit(bob_str, 5, 7)
+    sue_believer.add_personunit(xio_str, 2, 3)
+    sue_believer.add_personunit(zia_str, 0, 0)
     pool4th = sue_believer.fund_pool / 4
-    pre_settle_acct_mandate_ledger = {
+    pre_settle_person_mandate_ledger = {
         bob_str: pool4th,
         xio_str: pool4th,
         yao_str: pool4th,
         zia_str: pool4th,
     }
-    assert get_acct_mandate_ledger(sue_believer) == pre_settle_acct_mandate_ledger
+    assert get_person_mandate_ledger(sue_believer) == pre_settle_person_mandate_ledger
 
     # WHEN
-    sue_believer_settle_net_dict = get_acct_mandate_ledger(
+    sue_believer_settle_net_dict = get_person_mandate_ledger(
         sue_believer, settle_believer=True
     )
 
     # THEN
-    assert sue_believer_settle_net_dict != pre_settle_acct_mandate_ledger
+    assert sue_believer_settle_net_dict != pre_settle_person_mandate_ledger
     print(f"{sue_believer_settle_net_dict=}")
     print("")
     example_bud_net_dict = {
@@ -271,7 +273,7 @@ def test_get_acct_mandate_ledger_ReturnsObj_Scenario4_MandateSumEqual_fund_pool(
     assert sue_believer_settle_net_dict == example_bud_net_dict
 
 
-def test_get_acct_mandate_ledger_ReturnsObj_Scenario5_Zero_fund_agenda_give():
+def test_get_person_mandate_ledger_ReturnsObj_Scenario5_Zero_fund_agenda_give():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     sue_fund_pool = 800
@@ -294,10 +296,10 @@ def test_get_acct_mandate_ledger_ReturnsObj_Scenario5_Zero_fund_agenda_give():
         mop_rope, reason_rcontext=floor_rope, reason_premise=clean_rope
     )
     yao_str = "Yao"
-    sue_believer.add_acctunit(yao_str, 13, 5)
+    sue_believer.add_personunit(yao_str, 13, 5)
 
     # WHEN
-    sue_believer_settle_net_dict = get_acct_mandate_ledger(
+    sue_believer_settle_net_dict = get_person_mandate_ledger(
         sue_believer, settle_believer=True
     )
 
@@ -305,7 +307,7 @@ def test_get_acct_mandate_ledger_ReturnsObj_Scenario5_Zero_fund_agenda_give():
     assert sue_believer_settle_net_dict == {yao_str: sue_fund_pool}
 
 
-def test_get_acct_agenda_net_ledger_ReturnsObj_ScenarioMultipleAcctUnit():
+def test_get_person_agenda_net_ledger_ReturnsObj_ScenarioMultiplePersonUnit():
     # ESTABLISH
     yao_str = "Yao"
     yao_fund_agenda_give = 42
@@ -315,16 +317,16 @@ def test_get_acct_agenda_net_ledger_ReturnsObj_ScenarioMultipleAcctUnit():
     bob_fund_agenda_take = 23
     zia_str = "Zia"
     sue_believer = believerunit_shop("Sue")
-    sue_believer.add_acctunit(yao_str)
-    sue_believer.add_acctunit(bob_str)
-    sue_believer.add_acctunit(zia_str)
-    sue_believer.get_acct(yao_str)._fund_agenda_give = yao_fund_agenda_give
-    sue_believer.get_acct(yao_str)._fund_agenda_take = yao_fund_agenda_take
-    sue_believer.get_acct(bob_str)._fund_agenda_give = bob_fund_agenda_give
-    sue_believer.get_acct(bob_str)._fund_agenda_take = bob_fund_agenda_take
+    sue_believer.add_personunit(yao_str)
+    sue_believer.add_personunit(bob_str)
+    sue_believer.add_personunit(zia_str)
+    sue_believer.get_person(yao_str)._fund_agenda_give = yao_fund_agenda_give
+    sue_believer.get_person(yao_str)._fund_agenda_take = yao_fund_agenda_take
+    sue_believer.get_person(bob_str)._fund_agenda_give = bob_fund_agenda_give
+    sue_believer.get_person(bob_str)._fund_agenda_take = bob_fund_agenda_take
 
     # WHEN
-    believer_bud_net_dict = get_acct_agenda_net_ledger(sue_believer)
+    believer_bud_net_dict = get_person_agenda_net_ledger(sue_believer)
 
     # THEN
     print(f"{believer_bud_net_dict=}")
@@ -337,21 +339,21 @@ def test_get_acct_agenda_net_ledger_ReturnsObj_ScenarioMultipleAcctUnit():
     assert example_bud_net_dict == believer_bud_net_dict
 
 
-def test_get_acct_agenda_net_ledger_ReturnsObj_settle_believer_True():
+def test_get_person_agenda_net_ledger_ReturnsObj_settle_believer_True():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     yao_str = "Yao"
     bob_str = "Bob"
     xio_str = "Xio"
     zia_str = "Zia"
-    sue_believer.add_acctunit(yao_str, 13, 5)
-    sue_believer.add_acctunit(bob_str, 5, 7)
-    sue_believer.add_acctunit(xio_str, 2, 3)
-    sue_believer.add_acctunit(zia_str, 0, 0)
-    assert get_acct_agenda_net_ledger(sue_believer) == {}
+    sue_believer.add_personunit(yao_str, 13, 5)
+    sue_believer.add_personunit(bob_str, 5, 7)
+    sue_believer.add_personunit(xio_str, 2, 3)
+    sue_believer.add_personunit(zia_str, 0, 0)
+    assert get_person_agenda_net_ledger(sue_believer) == {}
 
     # WHEN
-    sue_believer_settle_net_dict = get_acct_agenda_net_ledger(
+    sue_believer_settle_net_dict = get_person_agenda_net_ledger(
         sue_believer, settle_believer=True
     )
 
@@ -371,7 +373,7 @@ def test_get_acct_agenda_net_ledger_ReturnsObj_settle_believer_True():
     assert sue_believer_settle_net_dict == example_bud_net_dict
 
 
-def test_get_credit_ledger_ReturnsObj_Scenario0_No_acctunits():
+def test_get_credit_ledger_ReturnsObj_Scenario0_No_personunits():
     # ESTABLISH
     sue_str = "Sue"
     sue_believer = believerunit_shop(sue_str)
@@ -379,7 +381,7 @@ def test_get_credit_ledger_ReturnsObj_Scenario0_No_acctunits():
     assert get_credit_ledger(sue_believer) == {}
 
 
-def test_get_credit_ledger_ReturnsObj_Scenario1_acctunits_Exist():
+def test_get_credit_ledger_ReturnsObj_Scenario1_personunits_Exist():
     # ESTABLISH
     sue_str = "Sue"
     sue_believer = believerunit_shop(sue_str)
@@ -387,12 +389,12 @@ def test_get_credit_ledger_ReturnsObj_Scenario1_acctunits_Exist():
     bob_str = "Bob"
     xio_str = "Xio"
     zia_str = "Zia"
-    bob_acct_cred_points = 11
-    yao_acct_cred_points = 13
-    xio_acct_cred_points = 17
-    sue_believer.add_acctunit(yao_str, yao_acct_cred_points)
-    sue_believer.add_acctunit(bob_str, bob_acct_cred_points)
-    sue_believer.add_acctunit(xio_str, xio_acct_cred_points)
+    bob_person_cred_points = 11
+    yao_person_cred_points = 13
+    xio_person_cred_points = 17
+    sue_believer.add_personunit(yao_str, yao_person_cred_points)
+    sue_believer.add_personunit(bob_str, bob_person_cred_points)
+    sue_believer.add_personunit(xio_str, xio_person_cred_points)
 
     # WHEN
     sue_credit_ledger = get_credit_ledger(sue_believer)
@@ -401,9 +403,9 @@ def test_get_credit_ledger_ReturnsObj_Scenario1_acctunits_Exist():
     print(f"{sue_credit_ledger=}")
     print("")
     expected_sue_credit_ledger = {
-        bob_str: bob_acct_cred_points,
-        yao_str: yao_acct_cred_points,
-        xio_str: xio_acct_cred_points,
+        bob_str: bob_person_cred_points,
+        yao_str: yao_person_cred_points,
+        xio_str: xio_person_cred_points,
     }
     print(f"{expected_sue_credit_ledger=}")
     assert sue_credit_ledger.get(yao_str) != None

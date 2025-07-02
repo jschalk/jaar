@@ -171,8 +171,8 @@ def test_LaborHeir_set_believer_name_labor_CorrectlySetsAttribute_NonEmptyx_labo
     sue_str = "Sue"
     yao_groupunit = groupunit_shop(yao_str)
     sue_groupunit = groupunit_shop(sue_str)
-    yao_groupunit.set_membership(membership_shop(yao_str, acct_name=yao_str))
-    sue_groupunit.set_membership(membership_shop(sue_str, acct_name=sue_str))
+    yao_groupunit.set_membership(membership_shop(yao_str, person_name=yao_str))
+    sue_groupunit.set_membership(membership_shop(sue_str, person_name=sue_str))
     x_groupunits = {yao_str: yao_groupunit, sue_str: sue_groupunit}
     believer_believer_name = yao_str
 
@@ -193,8 +193,8 @@ def test_LaborHeir_set_believer_name_labor_CorrectlySetsAttribute_NonEmptyx_labo
     sue_str = "Sue"
     yao_groupunit = groupunit_shop(yao_str)
     sue_groupunit = groupunit_shop(sue_str)
-    yao_groupunit.set_membership(membership_shop(yao_str, acct_name=yao_str))
-    sue_groupunit.set_membership(membership_shop(sue_str, acct_name=sue_str))
+    yao_groupunit.set_membership(membership_shop(yao_str, person_name=yao_str))
+    sue_groupunit.set_membership(membership_shop(sue_str, person_name=sue_str))
     x_groupunits = {yao_str: yao_groupunit, sue_str: sue_groupunit}
     x_laborlinks = {sue_str}
     x_laborheir = laborheir_shop(_laborlinks=x_laborlinks)
@@ -216,13 +216,13 @@ def test_LaborHeir_set_believer_name_labor_CorrectlySetsAttribute_NonEmptyx_labo
     yao_groupunit = groupunit_shop(yao_str)
     sue_groupunit = groupunit_shop(sue_str)
     bob_groupunit = groupunit_shop(bob_str)
-    yao_groupunit.set_membership(membership_shop(yao_str, acct_name=yao_str))
-    sue_groupunit.set_membership(membership_shop(sue_str, acct_name=sue_str))
+    yao_groupunit.set_membership(membership_shop(yao_str, person_name=yao_str))
+    sue_groupunit.set_membership(membership_shop(sue_str, person_name=sue_str))
 
     swim_str = ",swim"
     swim_groupunit = groupunit_shop(group_title=swim_str)
-    swim_groupunit.set_membership(membership_shop(swim_str, acct_name=yao_str))
-    swim_groupunit.set_membership(membership_shop(swim_str, acct_name=sue_str))
+    swim_groupunit.set_membership(membership_shop(swim_str, person_name=yao_str))
+    swim_groupunit.set_membership(membership_shop(swim_str, person_name=sue_str))
     x_groupunits = {
         yao_str: yao_groupunit,
         sue_str: sue_groupunit,
@@ -349,19 +349,19 @@ def test_LaborHeir_set_laborlink_LaborUnit_NotEqual_ParentLaborHeir_NonEmpty():
     sue_groupunit = groupunit_shop(sue_str)
     bob_groupunit = groupunit_shop(bob_str)
     bob_groupunit = groupunit_shop(zia_str)
-    yao_groupunit.set_membership(membership_shop(yao_str, acct_name=yao_str))
-    sue_groupunit.set_membership(membership_shop(sue_str, acct_name=sue_str))
+    yao_groupunit.set_membership(membership_shop(yao_str, person_name=yao_str))
+    sue_groupunit.set_membership(membership_shop(sue_str, person_name=sue_str))
 
     swim2_str = ",swim2"
     swim2_groupunit = groupunit_shop(group_title=swim2_str)
-    swim2_groupunit.set_membership(membership_shop(swim2_str, acct_name=yao_str))
-    swim2_groupunit.set_membership(membership_shop(swim2_str, acct_name=sue_str))
+    swim2_groupunit.set_membership(membership_shop(swim2_str, person_name=yao_str))
+    swim2_groupunit.set_membership(membership_shop(swim2_str, person_name=sue_str))
 
     swim3_str = ",swim3"
     swim3_groupunit = groupunit_shop(group_title=swim3_str)
-    swim3_groupunit.set_membership(membership_shop(swim3_str, acct_name=yao_str))
-    swim3_groupunit.set_membership(membership_shop(swim3_str, acct_name=sue_str))
-    swim3_groupunit.set_membership(membership_shop(swim3_str, acct_name=zia_str))
+    swim3_groupunit.set_membership(membership_shop(swim3_str, person_name=yao_str))
+    swim3_groupunit.set_membership(membership_shop(swim3_str, person_name=sue_str))
+    swim3_groupunit.set_membership(membership_shop(swim3_str, person_name=zia_str))
 
     x_groupunits = {
         yao_str: yao_groupunit,
@@ -406,14 +406,14 @@ def test_LaborHeir_set_laborlink_LaborUnit_NotEqual_ParentLaborHeir_NonEmpty():
 
 #     swim2_str = ",swim2"
 #     swim2_groupunit = groupunit_shop(swim2_str)
-#     swim2_groupunit.set_membership(membership_shop(swim2_str, acct_name=yao_str))
-#     swim2_groupunit.set_membership(membership_shop(swim2_str, acct_name=sue_str))
+#     swim2_groupunit.set_membership(membership_shop(swim2_str, person_name=yao_str))
+#     swim2_groupunit.set_membership(membership_shop(swim2_str, person_name=sue_str))
 
 #     swim3_str = ",swim3"
 #     swim3_groupunit = groupunit_shop(labor_title=swim3_str)
-#     swim3_groupunit.set_membership(membership_shop(swim3_str, acct_name=yao_str))
-#     swim3_groupunit.set_membership(membership_shop(swim3_str, acct_name=sue_str))
-#     swim3_groupunit.set_membership(membership_shop(swim3_str, acct_name=zia_str))
+#     swim3_groupunit.set_membership(membership_shop(swim3_str, person_name=yao_str))
+#     swim3_groupunit.set_membership(membership_shop(swim3_str, person_name=sue_str))
+#     swim3_groupunit.set_membership(membership_shop(swim3_str, person_name=zia_str))
 
 #     x_groupunits = {
 #         yao_str: yao_groupunit,
@@ -433,13 +433,13 @@ def test_LaborHeir_set_laborlink_LaborUnit_NotEqual_ParentLaborHeir_NonEmpty():
 
 #     # WHEN / THEN
 #     x_laborheir = laborheir_shop()
-#     all_parent_laborheir_accts = {yao_str, sue_str}
-#     all_laborunit_accts = {yao_str, sue_str, zia_str}
+#     all_parent_laborheir_persons = {yao_str, sue_str}
+#     all_laborunit_persons = {yao_str, sue_str, zia_str}
 #     with pytest_raises(Exception) as excinfo:
 #         x_laborheir.set_laborlinks(parent_laborheir, laborunit_swim3, x_groupunits)
 #     assert (
 #         str(excinfo.value)
-#         == f"parent_laborheir does not contain all accts of the plan's laborunit\n{set(all_parent_laborheir_accts)=}\n\n{set(all_laborunit_accts)=}"
+#         == f"parent_laborheir does not contain all persons of the plan's laborunit\n{set(all_parent_laborheir_persons)=}\n\n{set(all_laborunit_persons)=}"
 #     )
 
 

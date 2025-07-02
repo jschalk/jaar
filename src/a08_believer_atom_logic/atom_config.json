@@ -1,5 +1,5 @@
 {
-    "believer_acct_membership": {
+    "believer_person_membership": {
         "DELETE": {
             "atom_order": 23
         },
@@ -7,7 +7,7 @@
             "atom_order": 1
         },
         "jkeys": {
-            "acct_name": {
+            "person_name": {
                 "class_type": "NameTerm",
                 "column_order": 0,
                 "nesting_order": 0,
@@ -39,7 +39,7 @@
             "atom_order": 10
         }
     },
-    "believer_acctunit": {
+    "believer_personunit": {
         "DELETE": {
             "atom_order": 24
         },
@@ -47,26 +47,26 @@
             "atom_order": 0
         },
         "jkeys": {
-            "acct_name": {
+            "person_name": {
                 "class_type": "NameTerm",
                 "column_order": 0,
                 "sqlite_datatype": "TEXT"
             }
         },
         "jvalues": {
-            "acct_cred_points": {
+            "person_cred_points": {
                 "class_type": "float",
                 "column_order": 2,
                 "sqlite_datatype": "REAL"
             },
-            "acct_debt_points": {
+            "person_debt_points": {
                 "class_type": "float",
                 "column_order": 1,
                 "sqlite_datatype": "REAL"
             }
         },
         "normal_specs": {
-            "normal_table_name": "acctunit"
+            "normal_table_name": "personunit"
         },
         "UPDATE": {
             "atom_order": 9

@@ -1,8 +1,8 @@
 {
-    "believer_acct_membership": {
-        "abbreviation": "onrmemb",
+    "believer_person_membership": {
+        "abbreviation": "blrmemb",
         "jkeys": {
-            "acct_name": {
+            "person_name": {
                 "class_type": "NameTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -64,10 +64,10 @@
             }
         }
     },
-    "believer_acctunit": {
-        "abbreviation": "onracct",
+    "believer_personunit": {
+        "abbreviation": "blrpern",
         "jkeys": {
-            "acct_name": {
+            "person_name": {
                 "class_type": "NameTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -113,28 +113,28 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_inallocable_acct_debt_points": {
+            "_inallocable_person_debt_points": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_irrational_acct_debt_points": {
+            "_irrational_person_debt_points": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }
         },
         "jvalues": {
-            "acct_cred_points": {
+            "person_cred_points": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "acct_debt_points": {
+            "person_debt_points": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }
         }
     },
     "believer_plan_awardlink": {
-        "abbreviation": "onrawar",
+        "abbreviation": "blrawar",
         "jkeys": {
             "awardee_title": {
                 "class_type": "TitleTerm",
@@ -175,7 +175,7 @@
         }
     },
     "believer_plan_factunit": {
-        "abbreviation": "onrfact",
+        "abbreviation": "blrfact",
         "jkeys": {
             "plan_rope": {
                 "class_type": "RopeTerm",
@@ -211,7 +211,7 @@
         }
     },
     "believer_plan_healerlink": {
-        "abbreviation": "onrheal",
+        "abbreviation": "blrheal",
         "jkeys": {
             "plan_rope": {
                 "class_type": "RopeTerm",
@@ -234,7 +234,7 @@
         "jvalues": {}
     },
     "believer_plan_laborlink": {
-        "abbreviation": "onrlabo",
+        "abbreviation": "blrlabo",
         "jkeys": {
             "plan_rope": {
                 "class_type": "RopeTerm",
@@ -262,7 +262,7 @@
         "jvalues": {}
     },
     "believer_plan_reason_premiseunit": {
-        "abbreviation": "onrprem",
+        "abbreviation": "blrprem",
         "jkeys": {
             "plan_rope": {
                 "class_type": "RopeTerm",
@@ -311,7 +311,7 @@
         }
     },
     "believer_plan_reasonunit": {
-        "abbreviation": "onrreas",
+        "abbreviation": "blrreas",
         "jkeys": {
             "plan_rope": {
                 "class_type": "RopeTerm",
@@ -352,7 +352,7 @@
         }
     },
     "believer_planunit": {
-        "abbreviation": "onrplan",
+        "abbreviation": "blrplan",
         "jkeys": {
             "plan_rope": {
                 "class_type": "RopeTerm",
@@ -372,11 +372,11 @@
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "_all_acct_cred": {
+            "_all_person_cred": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "_all_acct_debt": {
+            "_all_person_debt": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
@@ -473,7 +473,7 @@
         }
     },
     "believer_groupunit": {
-        "abbreviation": "onrgrou",
+        "abbreviation": "blrgrou",
         "jkeys": {
             "belief_label": {
                 "class_type": "LabelTerm",
@@ -526,7 +526,7 @@
         }
     },
     "believerunit": {
-        "abbreviation": "onrunit",
+        "abbreviation": "blrunit",
         "jkeys": {
             "belief_label": {
                 "class_type": "LabelTerm",

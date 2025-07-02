@@ -20,19 +20,19 @@ class BelieverTable(Base):
     tally = Column(Integer)
 
 
-class AcctUnitTable(Base):
-    __tablename__ = "acctunit"
+class PersonUnitTable(Base):
+    __tablename__ = "personunit"
     uid = Column(Integer, primary_key=True)
-    acct_name = Column(String)
-    acct_cred_points = Column(Float)
-    acct_debt_points = Column(Float)
+    person_name = Column(String)
+    person_cred_points = Column(Float)
+    person_debt_points = Column(Float)
 
 
 class MemberShipTable(Base):
     __tablename__ = "membership"
     uid = Column(Integer, primary_key=True)
     group_title = Column(String)
-    acct_name = Column(String)
+    person_name = Column(String)
     group_cred_points = Column(Float)
     group_debt_points = Column(Float)
 
