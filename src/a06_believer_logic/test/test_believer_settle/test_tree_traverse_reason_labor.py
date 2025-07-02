@@ -50,7 +50,7 @@ def test_believer_plankid_laborunit_EmptyCorrectlySets_plan_laborheir():
     bob_believer = believerunit_shop(bob_str)
     run_str = "run"
     run_rope = bob_believer.make_l1_rope(run_str)
-    bob_believer.add_acctunit(bob_str)
+    bob_believer.add_personunit(bob_str)
     bob_believer.set_l1_plan(planunit_shop(run_str))
     bob_believer.edit_plan_attr(run_rope, laborunit=x_laborunit)
     run_plan = bob_believer.get_plan_obj(run_rope)
@@ -92,9 +92,9 @@ def test_believer_plankid_laborunit_CorrectlySets_grandchild_plan_laborheir():
     x_laborunit.set_laborlink(labor_title=swimmers_str)
 
     yao_str = "Yao"
-    sue_believer.add_acctunit(yao_str)
-    yao_acctunit = sue_believer.get_acct(yao_str)
-    yao_acctunit.add_membership(swimmers_str)
+    sue_believer.add_personunit(yao_str)
+    yao_personunit = sue_believer.get_person(yao_str)
+    yao_personunit.add_membership(swimmers_str)
 
     sue_believer.set_l1_plan(planunit_shop(swim_str))
     sue_believer.set_plan(planunit_shop(morn_str), parent_rope=swim_rope)
@@ -125,8 +125,8 @@ def test_BelieverUnit__get_filtered_awardlinks_plan_CorrectlyCleansPlan_Laboruni
     sue1_believer = believerunit_shop(sue_str)
     xia_str = "Xia"
     zoa_str = "Zoa"
-    sue1_believer.add_acctunit(xia_str)
-    sue1_believer.add_acctunit(zoa_str)
+    sue1_believer.add_personunit(xia_str)
+    sue1_believer.add_personunit(zoa_str)
 
     casa_str = "casa"
     casa_rope = sue1_believer.make_l1_rope(casa_str)
@@ -148,7 +148,7 @@ def test_BelieverUnit__get_filtered_awardlinks_plan_CorrectlyCleansPlan_Laboruni
 
     # WHEN
     sue2_believer = believerunit_shop(sue_str)
-    sue2_believer.add_acctunit(xia_str)
+    sue2_believer.add_personunit(xia_str)
     cleaned_plan = sue2_believer._get_filtered_awardlinks_plan(sue1_believer_swim_plan)
 
     # THEN
@@ -162,8 +162,8 @@ def test_BelieverUnit_set_plan_CorrectlyCleansPlan_awardlinks():
     sue1_believer = believerunit_shop("Sue")
     xia_str = "Xia"
     zoa_str = "Zoa"
-    sue1_believer.add_acctunit(xia_str)
-    sue1_believer.add_acctunit(zoa_str)
+    sue1_believer.add_personunit(xia_str)
+    sue1_believer.add_personunit(zoa_str)
 
     casa_str = "casa"
     casa_rope = sue1_believer.make_l1_rope(casa_str)
@@ -185,7 +185,7 @@ def test_BelieverUnit_set_plan_CorrectlyCleansPlan_awardlinks():
 
     # WHEN
     sue2_believer = believerunit_shop("Sue")
-    sue2_believer.add_acctunit(xia_str)
+    sue2_believer.add_personunit(xia_str)
     sue2_believer.set_l1_plan(
         sue1_believer_swim_plan, get_rid_of_missing_awardlinks_awardee_titles=False
     )

@@ -23,10 +23,10 @@ from src.a03_group_logic.test._util.a03_str import (
     _fund_agenda_take_str,
     _fund_give_str,
     _fund_take_str,
-    acct_name_str,
     group_cred_points_str,
     group_debt_points_str,
     group_title_str,
+    person_name_str,
 )
 
 
@@ -59,7 +59,7 @@ def test_MemberShip_exists():
     assert not swim_membership._fund_agenda_take
     assert not swim_membership._fund_agenda_ratio_give
     assert not swim_membership._fund_agenda_ratio_take
-    assert not swim_membership.acct_name
+    assert not swim_membership.person_name
     obj_attrs = set(swim_membership.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
@@ -71,7 +71,7 @@ def test_MemberShip_exists():
         _fund_agenda_take_str(),
         _fund_give_str(),
         _fund_take_str(),
-        acct_name_str(),
+        person_name_str(),
         group_cred_points_str(),
         group_debt_points_str(),
         group_title_str(),
@@ -102,22 +102,22 @@ def test_membership_shop_ReturnsObj():
     assert not swim_membership._fund_agenda_take
     assert not swim_membership._fund_agenda_ratio_give
     assert not swim_membership._fund_agenda_ratio_take
-    assert not swim_membership.acct_name
+    assert not swim_membership.person_name
 
 
-def test_membership_shop_ReturnsObjAttr_acct_name():
+def test_membership_shop_ReturnsObjAttr_person_name():
     # ESTABLISH
     swim_str = ",swim"
     yao_str = "Yao"
 
     # WHEN
-    swim_membership = membership_shop(swim_str, acct_name=yao_str)
+    swim_membership = membership_shop(swim_str, person_name=yao_str)
 
     # THEN
-    assert swim_membership.acct_name == yao_str
+    assert swim_membership.person_name == yao_str
 
 
-# def test_MemberShip_set_group_title_RaisesErrorIf_group_title_IsNotAcctNameAndIsLabelTerm():
+# def test_MemberShip_set_group_title_RaisesErrorIf_group_title_IsNotPersonNameAndIsLabelTerm():
 #     # ESTABLISH
 #     slash_str = "/"
 #     # bob_str = f"Bob{slash_str}Texas"
@@ -127,7 +127,7 @@ def test_membership_shop_ReturnsObjAttr_acct_name():
 
 #     # WHEN / THEN
 #     with pytest_raises(Exception) as excinfo:
-#         membership_shop(swim_str, acct_name=bob_str, knot=slash_str)
+#         membership_shop(swim_str, person_name=bob_str, knot=slash_str)
 #     assert (
 #         str(excinfo.value)
 #         == f"'{swim_str}' needs to not be a LabelTerm. Must contain knot: '{slash_str}'"
@@ -247,7 +247,7 @@ def test_membership_get_from_dict_ReturnsObj():
         group_title=swim_str,
         group_cred_points=swim_group_cred_points,
         group_debt_points=swim_group_debt_points,
-        acct_name=yao_str,
+        person_name=yao_str,
     )
     swim_membership_dict = before_swim_membership.get_dict()
 
@@ -269,7 +269,7 @@ def test_memberships_get_from_dict_ReturnsObj():
         group_title=swim_str,
         group_cred_points=swim_group_cred_points,
         group_debt_points=swim_group_debt_points,
-        acct_name=yao_str,
+        person_name=yao_str,
     )
     before_swim_memberships_objs = {swim_str: before_swim_membership}
     swim_memberships_dict = {swim_str: before_swim_membership.get_dict()}

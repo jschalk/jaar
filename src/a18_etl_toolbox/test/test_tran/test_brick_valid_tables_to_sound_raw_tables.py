@@ -1,9 +1,9 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.a06_believer_logic.test._util.a06_str import (
-    acct_name_str,
     belief_label_str,
     believer_name_str,
+    person_name_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic.test._util.a16_str import (
@@ -48,7 +48,7 @@ def test_etl_brick_valid_tables_to_sound_raw_tables_PopulatesValidTable_Scenario
             face_name_str(),
             belief_label_str(),
             believer_name_str(),
-            acct_name_str(),
+            person_name_str(),
             otx_rope_str(),
             inx_rope_str(),
         ]
@@ -58,7 +58,7 @@ def test_etl_brick_valid_tables_to_sound_raw_tables_PopulatesValidTable_Scenario
 , {face_name_str()}
 , {belief_label_str()}
 , {believer_name_str()}
-, {acct_name_str()}
+, {person_name_str()}
 , {otx_rope_str()}
 , {inx_rope_str()}
 )"""
@@ -101,16 +101,16 @@ VALUES
         assert get_row_count(cursor, br00117_valid_tablename) == 2
         assert get_row_count(cursor, br00045_valid_tablename) == 3
         pidrope_s_raw_tablename = create_prime_tablename("PIDROPE", "s", "raw")
-        onracct_s_put_raw_tblname = create_prime_tablename("ONRACCT", "s", "raw", "put")
+        blrpern_s_put_raw_tblname = create_prime_tablename("BLRPERN", "s", "raw", "put")
         assert not db_table_exists(cursor, pidrope_s_raw_tablename)
-        assert not db_table_exists(cursor, onracct_s_put_raw_tblname)
+        assert not db_table_exists(cursor, blrpern_s_put_raw_tblname)
 
         # WHEN
         etl_brick_valid_tables_to_sound_raw_tables(cursor)
 
         # THEN
         assert get_row_count(cursor, pidrope_s_raw_tablename) == 5
-        assert get_row_count(cursor, onracct_s_put_raw_tblname) == 2
+        assert get_row_count(cursor, blrpern_s_put_raw_tblname) == 2
         b117 = "br00117"
         b045 = "br00045"
         ex_rope0 = (b117, event1, sue_str, yao_str, yao_inx, None, None, None, None)
@@ -129,7 +129,7 @@ VALUES
         assert rows[3] == ex_rope0
         assert rows[4] == ex_rope1
 
-        select_agg_sqlstr = f"""SELECT * FROM {onracct_s_put_raw_tblname};"""
+        select_agg_sqlstr = f"""SELECT * FROM {blrpern_s_put_raw_tblname};"""
         cursor.execute(select_agg_sqlstr)
         rows = cursor.fetchall()
         print(rows)

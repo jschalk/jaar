@@ -2,14 +2,14 @@ from src.a01_term_logic.rope import RopeTerm, create_rope, create_rope_from_labe
 from src.a01_term_logic.term import BeliefLabel
 from src.a05_plan_logic.plan import get_default_belief_label
 from src.a06_believer_logic.test._util.a06_str import (
-    acct_name_str,
-    believer_acctunit_str,
+    believer_personunit_str,
     believer_plan_factunit_str,
     believer_planunit_str,
     believerunit_str,
     fcontext_str,
     fnigh_str,
     fopen_str,
+    person_name_str,
     plan_rope_str,
 )
 from src.a08_believer_atom_logic.atom import BelieverAtom, believeratom_shop
@@ -96,10 +96,10 @@ def get_believerdelta_sue_example() -> BelieverDelta:
     pool_believeratom.set_jvalue(pool_attribute, 77)
     sue_believerdelta.set_believeratom(pool_believeratom)
 
-    dimen = believer_acctunit_str()
+    dimen = believer_personunit_str()
     sue_str = "Sue"
     sue_believeratom = believeratom_shop(dimen, DELETE_str())
-    sue_believeratom.set_jkey(acct_name_str(), sue_str)
+    sue_believeratom.set_jkey(person_name_str(), sue_str)
     sue_believerdelta.set_believeratom(sue_believeratom)
     return sue_believerdelta
 
@@ -165,8 +165,8 @@ def get_budunit_55_example() -> BudUnit:
 def get_budunit_66_example() -> BudUnit:
     t66_bud_time = 66
     t66_budunit = budunit_shop(t66_bud_time)
-    t66_budunit.set_bud_acct_net("Sue", -5)
-    t66_budunit.set_bud_acct_net("Bob", 5)
+    t66_budunit.set_bud_person_net("Sue", -5)
+    t66_budunit.set_bud_person_net("Bob", 5)
     return t66_budunit
 
 
@@ -180,6 +180,6 @@ def get_budunit_88_example() -> BudUnit:
 def get_budunit_invalid_example() -> BudUnit:
     t55_bud_time = 55
     t55_budunit = budunit_shop(t55_bud_time)
-    t55_budunit.set_bud_acct_net("Sue", -5)
-    t55_budunit.set_bud_acct_net("Bob", 3)
+    t55_budunit.set_bud_person_net("Sue", -5)
+    t55_budunit.set_bud_person_net("Bob", 3)
     return t55_budunit

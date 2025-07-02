@@ -37,42 +37,50 @@ def test_create_legible_list_ReturnsObjEstablishWithBelieverUpdate_tally():
 def test_create_legible_list_ReturnsObjEstablishWithBelieverUpdate_credor_respect():
     # ESTABLISH
     dimen = believerunit_str()
-    acct_credor_pool_str = "credor_respect"
-    acct_credor_pool_int = 71
-    acct_credor_pool_believeratom = believeratom_shop(dimen, UPDATE_str())
-    acct_credor_pool_believeratom.set_arg(acct_credor_pool_str, acct_credor_pool_int)
+    person_credor_pool_str = "credor_respect"
+    person_credor_pool_int = 71
+    person_credor_pool_believeratom = believeratom_shop(dimen, UPDATE_str())
+    person_credor_pool_believeratom.set_arg(
+        person_credor_pool_str, person_credor_pool_int
+    )
 
-    print(f"{acct_credor_pool_believeratom=}")
+    print(f"{person_credor_pool_believeratom=}")
     x_believerdelta = believerdelta_shop()
-    x_believerdelta.set_believeratom(acct_credor_pool_believeratom)
+    x_believerdelta.set_believeratom(person_credor_pool_believeratom)
     sue_believer = believerunit_shop("Sue")
 
     # WHEN
     legible_list = create_legible_list(x_believerdelta, sue_believer)
 
     # THEN
-    x_str = f"{sue_believer.believer_name}'s credor pool is now {acct_credor_pool_int}"
+    x_str = (
+        f"{sue_believer.believer_name}'s credor pool is now {person_credor_pool_int}"
+    )
     assert legible_list[0] == x_str
 
 
 def test_create_legible_list_ReturnsObjEstablishWithBelieverUpdate_debtor_respect():
     # ESTABLISH
     dimen = believerunit_str()
-    acct_debtor_pool_str = "debtor_respect"
-    acct_debtor_pool_int = 78
-    acct_debtor_pool_believeratom = believeratom_shop(dimen, UPDATE_str())
-    acct_debtor_pool_believeratom.set_arg(acct_debtor_pool_str, acct_debtor_pool_int)
+    person_debtor_pool_str = "debtor_respect"
+    person_debtor_pool_int = 78
+    person_debtor_pool_believeratom = believeratom_shop(dimen, UPDATE_str())
+    person_debtor_pool_believeratom.set_arg(
+        person_debtor_pool_str, person_debtor_pool_int
+    )
 
-    print(f"{acct_debtor_pool_believeratom=}")
+    print(f"{person_debtor_pool_believeratom=}")
     x_believerdelta = believerdelta_shop()
-    x_believerdelta.set_believeratom(acct_debtor_pool_believeratom)
+    x_believerdelta.set_believeratom(person_debtor_pool_believeratom)
     sue_believer = believerunit_shop("Sue")
 
     # WHEN
     legible_list = create_legible_list(x_believerdelta, sue_believer)
 
     # THEN
-    x_str = f"{sue_believer.believer_name}'s debtor pool is now {acct_debtor_pool_int}"
+    x_str = (
+        f"{sue_believer.believer_name}'s debtor pool is now {person_debtor_pool_int}"
+    )
     assert legible_list[0] == x_str
 
 
@@ -80,12 +88,12 @@ def test_create_legible_list_ReturnsObjEstablishWithBelieverUpdate_credor_respec
     # ESTABLISH
     x_believerdelta = believerdelta_shop()
     dimen = believerunit_str()
-    acct_credor_pool_str = "credor_respect"
-    acct_debtor_pool_str = "debtor_respect"
-    acct_pool_int = 83
+    person_credor_pool_str = "credor_respect"
+    person_debtor_pool_str = "debtor_respect"
+    person_pool_int = 83
     believerunit_believeratom = believeratom_shop(dimen, UPDATE_str())
-    believerunit_believeratom.set_arg(acct_credor_pool_str, acct_pool_int)
-    believerunit_believeratom.set_arg(acct_debtor_pool_str, acct_pool_int)
+    believerunit_believeratom.set_arg(person_credor_pool_str, person_pool_int)
+    believerunit_believeratom.set_arg(person_debtor_pool_str, person_pool_int)
     x_believerdelta.set_believeratom(believerunit_believeratom)
     sue_believer = believerunit_shop("Sue")
 
@@ -93,7 +101,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBelieverUpdate_credor_respec
     legible_list = create_legible_list(x_believerdelta, sue_believer)
 
     # THEN
-    x_str = f"{sue_believer.believer_name}'s total pool is now {acct_pool_int}"
+    x_str = f"{sue_believer.believer_name}'s total pool is now {person_pool_int}"
     assert len(legible_list) == 1
     assert legible_list[0] == x_str
 

@@ -22,9 +22,9 @@ from src.a06_believer_logic.believer import (
 )
 from src.a06_believer_logic.believer_tool import (
     clear_factunits_from_believer,
-    get_acct_mandate_ledger,
     get_believer_root_facts_dict as get_facts_dict,
     get_credit_ledger,
+    get_person_mandate_ledger,
 )
 
 CELLNODE_QUOTA_DEFAULT = 1000
@@ -44,7 +44,7 @@ class CellUnit:
     found_facts: dict[RopeTerm, FactUnit] = None
     boss_facts: dict[RopeTerm, FactUnit] = None
     _reason_rcontexts: set[RopeTerm] = None
-    _acct_mandate_ledger: dict[BelieverName, FundNum] = None
+    _person_mandate_ledger: dict[BelieverName, FundNum] = None
 
     def get_cell_believer_name(self) -> BelieverName:
         return self.bud_believer_name if self.ancestors == [] else self.ancestors[-1]
@@ -125,15 +125,17 @@ class CellUnit:
                 fact.fcontext, fact.fstate, fact.fopen, fact.fnigh, True
             )
 
-    def _set_acct_mandate_ledger(self):
+    def _set_person_mandate_ledger(self):
         self.believeradjust.set_fund_pool(self.mandate)
-        self._acct_mandate_ledger = get_acct_mandate_ledger(self.believeradjust, True)
+        self._person_mandate_ledger = get_person_mandate_ledger(
+            self.believeradjust, True
+        )
 
-    def calc_acct_mandate_ledger(self):
+    def calc_person_mandate_ledger(self):
         self._reason_rcontexts = self.believeradjust.get_reason_rcontexts()
         self.filter_facts_by_reason_rcontexts()
         self.set_believeradjust_facts()
-        self._set_acct_mandate_ledger()
+        self._set_person_mandate_ledger()
 
     def get_dict(self) -> dict[str, str | dict]:
         if not self.believeradjust:
@@ -195,7 +197,7 @@ def cellunit_shop(
         found_facts=get_empty_dict_if_None(found_facts),
         boss_facts=get_empty_dict_if_None(boss_facts),
         _reason_rcontexts=reason_rcontexts,
-        _acct_mandate_ledger={},
+        _person_mandate_ledger={},
     )
 
 
@@ -234,10 +236,10 @@ def cellunit_get_from_dict(x_dict: dict) -> CellUnit:
 
 
 def create_child_cellunits(parent_cell: CellUnit) -> list[CellUnit]:
-    parent_cell.calc_acct_mandate_ledger()
+    parent_cell.calc_person_mandate_ledger()
     x_list = []
-    for child_believer_name in sorted(parent_cell._acct_mandate_ledger):
-        child_mandate = parent_cell._acct_mandate_ledger.get(child_believer_name)
+    for child_believer_name in sorted(parent_cell._person_mandate_ledger):
+        child_mandate = parent_cell._person_mandate_ledger.get(child_believer_name)
         if child_mandate > 0 and parent_cell.celldepth > 0:
             child_ancestors = copy_deepcopy(parent_cell.ancestors)
             child_ancestors.append(child_believer_name)

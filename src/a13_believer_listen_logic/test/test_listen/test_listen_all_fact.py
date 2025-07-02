@@ -13,39 +13,39 @@ def test_get_debtors_roll_ReturnsObj():
     yao_str = "Yao"
     yao_duty = believerunit_shop(yao_str)
     zia_str = "Zia"
-    zia_acct_cred_points = 47
-    zia_acct_debt_points = 41
-    yao_duty.add_acctunit(zia_str, zia_acct_cred_points, zia_acct_debt_points)
+    zia_person_cred_points = 47
+    zia_person_debt_points = 41
+    yao_duty.add_personunit(zia_str, zia_person_cred_points, zia_person_debt_points)
     yao_duty.settle_believer()
 
     # WHEN
     yao_roll = get_debtors_roll(yao_duty)
 
     # THEN
-    zia_acctunit = yao_duty.get_acct(zia_str)
-    assert yao_roll == [zia_acctunit]
+    zia_personunit = yao_duty.get_person(zia_str)
+    assert yao_roll == [zia_personunit]
 
 
-def test_get_debtors_roll_ReturnsObjIgnoresZero_acct_debt_points():
+def test_get_debtors_roll_ReturnsObjIgnoresZero_person_debt_points():
     # ESTABLISH
     yao_str = "Yao"
     yao_duty = believerunit_shop(yao_str)
     zia_str = "Zia"
-    zia_acct_cred_points = 47
-    zia_acct_debt_points = 41
+    zia_person_cred_points = 47
+    zia_person_debt_points = 41
     wei_str = "Wei"
-    wei_acct_cred_points = 67
-    wei_acct_debt_points = 0
-    yao_duty.add_acctunit(zia_str, zia_acct_cred_points, zia_acct_debt_points)
-    yao_duty.add_acctunit(wei_str, wei_acct_cred_points, wei_acct_debt_points)
+    wei_person_cred_points = 67
+    wei_person_debt_points = 0
+    yao_duty.add_personunit(zia_str, zia_person_cred_points, zia_person_debt_points)
+    yao_duty.add_personunit(wei_str, wei_person_cred_points, wei_person_debt_points)
     yao_duty.settle_believer()
 
     # WHEN
     yao_roll = get_debtors_roll(yao_duty)
 
     # THEN
-    zia_acctunit = yao_duty.get_acct(zia_str)
-    assert yao_roll == [zia_acctunit]
+    zia_personunit = yao_duty.get_person(zia_str)
+    assert yao_roll == [zia_personunit]
 
 
 def test_get_ordered_debtors_roll_ReturnsObjsInOrder():
@@ -53,68 +53,68 @@ def test_get_ordered_debtors_roll_ReturnsObjsInOrder():
     yao_str = "Yao"
     yao_believer = believerunit_shop(yao_str)
     zia_str = "Zia"
-    zia_acct_cred_points = 47
-    zia_acct_debt_points = 41
+    zia_person_cred_points = 47
+    zia_person_debt_points = 41
     sue_str = "Sue"
-    sue_acct_cred_points = 57
-    sue_acct_debt_points = 51
-    yao_believer.add_acctunit(zia_str, zia_acct_cred_points, zia_acct_debt_points)
-    yao_believer.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
+    sue_person_cred_points = 57
+    sue_person_debt_points = 51
+    yao_believer.add_personunit(zia_str, zia_person_cred_points, zia_person_debt_points)
+    yao_believer.add_personunit(sue_str, sue_person_cred_points, sue_person_debt_points)
     yao_pool = 92
-    yao_believer.set_acct_respect(yao_pool)
+    yao_believer.set_person_respect(yao_pool)
 
     # WHEN
-    ordered_accts1 = get_ordered_debtors_roll(yao_believer)
+    ordered_persons1 = get_ordered_debtors_roll(yao_believer)
 
     # THEN
-    zia_acct = yao_believer.get_acct(zia_str)
-    sue_acct = yao_believer.get_acct(sue_str)
-    assert ordered_accts1[0].get_dict() == sue_acct.get_dict()
-    assert ordered_accts1 == [sue_acct, zia_acct]
+    zia_person = yao_believer.get_person(zia_str)
+    sue_person = yao_believer.get_person(sue_str)
+    assert ordered_persons1[0].get_dict() == sue_person.get_dict()
+    assert ordered_persons1 == [sue_person, zia_person]
 
     # ESTABLISH
     bob_str = "Bob"
-    bob_acct_debt_points = 75
-    yao_believer.add_acctunit(bob_str, 0, bob_acct_debt_points)
-    bob_acct = yao_believer.get_acct(bob_str)
+    bob_person_debt_points = 75
+    yao_believer.add_personunit(bob_str, 0, bob_person_debt_points)
+    bob_person = yao_believer.get_person(bob_str)
 
     # WHEN
-    ordered_accts2 = get_ordered_debtors_roll(yao_believer)
+    ordered_persons2 = get_ordered_debtors_roll(yao_believer)
 
     # THEN
-    assert ordered_accts2[0].get_dict() == bob_acct.get_dict()
-    assert ordered_accts2 == [bob_acct, sue_acct, zia_acct]
+    assert ordered_persons2[0].get_dict() == bob_person.get_dict()
+    assert ordered_persons2 == [bob_person, sue_person, zia_person]
 
 
-def test_get_ordered_debtors_roll_DoesNotReturnZero_acct_debt_points():
+def test_get_ordered_debtors_roll_DoesNotReturnZero_person_debt_points():
     # ESTABLISH
     yao_str = "Yao"
     yao_believer = believerunit_shop(yao_str)
     zia_str = "Zia"
-    zia_acct_debt_points = 41
+    zia_person_debt_points = 41
     sue_str = "Sue"
-    sue_acct_debt_points = 51
+    sue_person_debt_points = 51
     yao_pool = 92
-    yao_believer.set_acct_respect(yao_pool)
+    yao_believer.set_person_respect(yao_pool)
     bob_str = "Bob"
-    bob_acct_debt_points = 75
+    bob_person_debt_points = 75
     xio_str = "Xio"
-    yao_believer.add_acctunit(zia_str, 0, zia_acct_debt_points)
-    yao_believer.add_acctunit(sue_str, 0, sue_acct_debt_points)
-    yao_believer.add_acctunit(bob_str, 0, bob_acct_debt_points)
-    yao_believer.add_acctunit(yao_str, 0, 0)
-    yao_believer.add_acctunit(xio_str, 0, 0)
+    yao_believer.add_personunit(zia_str, 0, zia_person_debt_points)
+    yao_believer.add_personunit(sue_str, 0, sue_person_debt_points)
+    yao_believer.add_personunit(bob_str, 0, bob_person_debt_points)
+    yao_believer.add_personunit(yao_str, 0, 0)
+    yao_believer.add_personunit(xio_str, 0, 0)
 
     # WHEN
-    ordered_accts2 = get_ordered_debtors_roll(yao_believer)
+    ordered_persons2 = get_ordered_debtors_roll(yao_believer)
 
     # THEN
-    assert len(ordered_accts2) == 3
-    zia_acct = yao_believer.get_acct(zia_str)
-    sue_acct = yao_believer.get_acct(sue_str)
-    bob_acct = yao_believer.get_acct(bob_str)
-    assert ordered_accts2[0].get_dict() == bob_acct.get_dict()
-    assert ordered_accts2 == [bob_acct, sue_acct, zia_acct]
+    assert len(ordered_persons2) == 3
+    zia_person = yao_believer.get_person(zia_str)
+    sue_person = yao_believer.get_person(sue_str)
+    bob_person = yao_believer.get_person(bob_str)
+    assert ordered_persons2[0].get_dict() == bob_person.get_dict()
+    assert ordered_persons2 == [bob_person, sue_person, zia_person]
 
 
 def test_set_listen_to_speaker_fact_SetsFact():
@@ -132,8 +132,8 @@ def test_set_listen_to_speaker_fact_SetsFact():
     sweep_str = "sweep"
     sweep_rope = yao_listener.make_rope(casa_rope, sweep_str)
 
-    yao_listener.add_acctunit(yao_str)
-    yao_listener.set_acct_respect(20)
+    yao_listener.add_personunit(yao_str)
+    yao_listener.set_person_respect(20)
     yao_listener.set_plan(planunit_shop(clean_str), status_rope)
     yao_listener.set_plan(planunit_shop(dirty_str), status_rope)
     yao_listener.set_plan(planunit_shop(sweep_str, task=True), casa_rope)
@@ -157,8 +157,8 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     # ESTABLISH
     yao_str = "Yao"
     yao_listener = believerunit_shop(yao_str)
-    yao_listener.add_acctunit(yao_str)
-    yao_listener.set_acct_respect(20)
+    yao_listener.add_personunit(yao_str)
+    yao_listener.set_person_respect(20)
     casa_str = "casa"
     casa_rope = yao_listener.make_l1_rope(casa_str)
     status_str = "status"
@@ -225,8 +225,8 @@ def test_migrate_all_facts_CorrectlyAddsPlanUnitsAndSetsFactUnits():
     snow_str = "snow"
     snow_rope = yao_src.make_rope(weather_rope, snow_str)
 
-    yao_src.add_acctunit(yao_str)
-    yao_src.set_acct_respect(20)
+    yao_src.add_personunit(yao_str)
+    yao_src.set_person_respect(20)
     yao_src.set_plan(planunit_shop(clean_str), status_rope)
     yao_src.set_plan(planunit_shop(dirty_str), status_rope)
     yao_src.set_plan(planunit_shop(sweep_str, task=True), casa_rope)

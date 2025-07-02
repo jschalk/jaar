@@ -2,9 +2,9 @@ from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_create_table_sqlstr
 from src.a06_believer_logic.test._util.a06_str import (
     belief_label_str,
-    believer_acct_membership_str,
-    believer_acctunit_str,
     believer_name_str,
+    believer_person_membership_str,
+    believer_personunit_str,
     believer_plan_awardlink_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
@@ -60,44 +60,46 @@ def test_create_job_tables_CreatesTables():
         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
         assert cursor.fetchone()[0] == 0
 
-        onrmemb_job_table = prime_table(believer_acct_membership_str(), job_str(), None)
-        onracct_job_table = prime_table(believer_acctunit_str(), job_str(), None)
-        onrgrou_job_table = prime_table(believer_groupunit_str(), job_str(), None)
-        onrawar_job_table = prime_table(believer_plan_awardlink_str(), job_str(), None)
-        onrfact_job_table = prime_table(believer_plan_factunit_str(), job_str(), None)
-        onrheal_job_table = prime_table(believer_plan_healerlink_str(), job_str(), None)
-        onrprem_job_table = prime_table(
+        blrmemb_job_table = prime_table(
+            believer_person_membership_str(), job_str(), None
+        )
+        blrpern_job_table = prime_table(believer_personunit_str(), job_str(), None)
+        blrgrou_job_table = prime_table(believer_groupunit_str(), job_str(), None)
+        blrawar_job_table = prime_table(believer_plan_awardlink_str(), job_str(), None)
+        blrfact_job_table = prime_table(believer_plan_factunit_str(), job_str(), None)
+        blrheal_job_table = prime_table(believer_plan_healerlink_str(), job_str(), None)
+        blrprem_job_table = prime_table(
             believer_plan_reason_premiseunit_str(), job_str(), None
         )
         believerares_job_table = prime_table(
             believer_plan_reasonunit_str(), job_str(), None
         )
-        onrlabo_job_table = prime_table(believer_plan_laborlink_str(), job_str(), None)
-        onrplan_job_table = prime_table(believer_planunit_str(), job_str(), None)
-        onrunit_job_table = prime_table(believerunit_str(), job_str(), None)
-        # onrmemb_job_table = f"{believer_acct_membership_str()}_job"
-        # onracct_job_table = f"{believer_acctunit_str()}_job"
-        # onrgrou_job_table = f"{believer_groupunit_str()}_job"
-        # onrawar_job_table = f"{believer_plan_awardlink_str()}_job"
-        # onrfact_job_table = f"{believer_plan_factunit_str()}_job"
-        # onrheal_job_table = f"{believer_plan_healerlink_str()}_job"
-        # onrprem_job_table = f"{believer_plan_reason_premiseunit_str()}_job"
+        blrlabo_job_table = prime_table(believer_plan_laborlink_str(), job_str(), None)
+        blrplan_job_table = prime_table(believer_planunit_str(), job_str(), None)
+        blrunit_job_table = prime_table(believerunit_str(), job_str(), None)
+        # blrmemb_job_table = f"{believer_person_membership_str()}_job"
+        # blrpern_job_table = f"{believer_personunit_str()}_job"
+        # blrgrou_job_table = f"{believer_groupunit_str()}_job"
+        # blrawar_job_table = f"{believer_plan_awardlink_str()}_job"
+        # blrfact_job_table = f"{believer_plan_factunit_str()}_job"
+        # blrheal_job_table = f"{believer_plan_healerlink_str()}_job"
+        # blrprem_job_table = f"{believer_plan_reason_premiseunit_str()}_job"
         # believerares_job_table = f"{believer_plan_reasonunit_str()}_job"
-        # onrlabo_job_table = f"{believer_plan_laborlink_str()}_job"
-        # onrplan_job_table = f"{believer_planunit_str()}_job"
-        # onrunit_job_table = f"{believerunit_str()}_job"
+        # blrlabo_job_table = f"{believer_plan_laborlink_str()}_job"
+        # blrplan_job_table = f"{believer_planunit_str()}_job"
+        # blrunit_job_table = f"{believerunit_str()}_job"
 
-        assert db_table_exists(cursor, onrmemb_job_table) is False
-        assert db_table_exists(cursor, onracct_job_table) is False
-        assert db_table_exists(cursor, onrgrou_job_table) is False
-        assert db_table_exists(cursor, onrawar_job_table) is False
-        assert db_table_exists(cursor, onrfact_job_table) is False
-        assert db_table_exists(cursor, onrheal_job_table) is False
-        assert db_table_exists(cursor, onrprem_job_table) is False
+        assert db_table_exists(cursor, blrmemb_job_table) is False
+        assert db_table_exists(cursor, blrpern_job_table) is False
+        assert db_table_exists(cursor, blrgrou_job_table) is False
+        assert db_table_exists(cursor, blrawar_job_table) is False
+        assert db_table_exists(cursor, blrfact_job_table) is False
+        assert db_table_exists(cursor, blrheal_job_table) is False
+        assert db_table_exists(cursor, blrprem_job_table) is False
         assert db_table_exists(cursor, believerares_job_table) is False
-        assert db_table_exists(cursor, onrlabo_job_table) is False
-        assert db_table_exists(cursor, onrplan_job_table) is False
-        assert db_table_exists(cursor, onrunit_job_table) is False
+        assert db_table_exists(cursor, blrlabo_job_table) is False
+        assert db_table_exists(cursor, blrplan_job_table) is False
+        assert db_table_exists(cursor, blrunit_job_table) is False
 
         # WHEN
         create_job_tables(cursor)
@@ -109,16 +111,16 @@ def test_create_job_tables_CreatesTables():
         # for x_row in cursor.fetchall():
         #     print(f"{x_count} {x_row[1]=}")
         #     x_count += 1
-        assert db_table_exists(cursor, onrmemb_job_table)
-        assert db_table_exists(cursor, onracct_job_table)
-        assert db_table_exists(cursor, onrgrou_job_table)
-        assert db_table_exists(cursor, onrawar_job_table)
-        assert db_table_exists(cursor, onrfact_job_table)
-        assert db_table_exists(cursor, onrheal_job_table)
-        assert db_table_exists(cursor, onrprem_job_table)
+        assert db_table_exists(cursor, blrmemb_job_table)
+        assert db_table_exists(cursor, blrpern_job_table)
+        assert db_table_exists(cursor, blrgrou_job_table)
+        assert db_table_exists(cursor, blrawar_job_table)
+        assert db_table_exists(cursor, blrfact_job_table)
+        assert db_table_exists(cursor, blrheal_job_table)
+        assert db_table_exists(cursor, blrprem_job_table)
         assert db_table_exists(cursor, believerares_job_table)
-        assert db_table_exists(cursor, onrlabo_job_table)
-        assert db_table_exists(cursor, onrplan_job_table)
-        assert db_table_exists(cursor, onrunit_job_table)
+        assert db_table_exists(cursor, blrlabo_job_table)
+        assert db_table_exists(cursor, blrplan_job_table)
+        assert db_table_exists(cursor, blrunit_job_table)
         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
         assert cursor.fetchone()[0] == 11

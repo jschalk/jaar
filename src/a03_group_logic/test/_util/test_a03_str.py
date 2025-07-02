@@ -7,12 +7,9 @@ from src.a03_group_logic.test._util.a03_str import (
     _fund_agenda_take_str,
     _fund_give_str,
     _fund_take_str,
-    _inallocable_acct_debt_points_str,
-    _irrational_acct_debt_points_str,
+    _inallocable_person_debt_points_str,
+    _irrational_person_debt_points_str,
     _memberships_str,
-    acct_cred_points_str,
-    acct_debt_points_str,
-    acct_name_str,
     awardee_title_str,
     believer_name_str,
     fund_give_str,
@@ -21,6 +18,9 @@ from src.a03_group_logic.test._util.a03_str import (
     group_cred_points_str,
     group_debt_points_str,
     group_title_str,
+    person_cred_points_str,
+    person_debt_points_str,
+    person_name_str,
     respect_bit_str,
     take_force_str,
 )
@@ -36,12 +36,12 @@ def test_str_functions_ReturnsObj():
     assert _fund_agenda_take_str() == "_fund_agenda_take"
     assert _fund_give_str() == "_fund_give"
     assert _fund_take_str() == "_fund_take"
-    assert _inallocable_acct_debt_points_str() == "_inallocable_acct_debt_points"
-    assert _irrational_acct_debt_points_str() == "_irrational_acct_debt_points"
+    assert _inallocable_person_debt_points_str() == "_inallocable_person_debt_points"
+    assert _irrational_person_debt_points_str() == "_irrational_person_debt_points"
     assert _memberships_str() == "_memberships"
-    assert acct_name_str() == "acct_name"
-    assert acct_cred_points_str() == "acct_cred_points"
-    assert acct_debt_points_str() == "acct_debt_points"
+    assert person_name_str() == "person_name"
+    assert person_cred_points_str() == "person_cred_points"
+    assert person_debt_points_str() == "person_debt_points"
     assert awardee_title_str() == "awardee_title"
     assert group_cred_points_str() == "group_cred_points"
     assert group_title_str() == "group_title"

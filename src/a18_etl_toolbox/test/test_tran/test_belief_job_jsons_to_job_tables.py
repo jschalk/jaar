@@ -29,9 +29,9 @@ def test_etl_belief_job_jsons_to_job_tables_PopulatesTables_Scenario0(
     bob_str = "Bob"
     run_str = ";run"
     sue_believer = believerunit_shop(sue_str, a23_str)
-    sue_believer.add_acctunit(sue_str)
-    sue_believer.add_acctunit(bob_str)
-    sue_believer.get_acct(bob_str).add_membership(run_str)
+    sue_believer.add_personunit(sue_str)
+    sue_believer.add_personunit(bob_str)
+    sue_believer.get_person(bob_str).add_membership(run_str)
     casa_rope = sue_believer.make_l1_rope("casa")
     status_rope = sue_believer.make_l1_rope("status")
     clean_rope = sue_believer.make_rope(status_rope, "clean")
@@ -52,44 +52,44 @@ def test_etl_belief_job_jsons_to_job_tables_PopulatesTables_Scenario0(
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        onrmemb_job_table = prime_table("onrmemb", job_str(), None)
-        onracct_job_table = prime_table("onracct", job_str(), None)
-        onrgrou_job_table = prime_table("onrgrou", job_str(), None)
-        onrawar_job_table = prime_table("onrawar", job_str(), None)
-        onrfact_job_table = prime_table("onrfact", job_str(), None)
-        onrheal_job_table = prime_table("onrheal", job_str(), None)
-        onrprem_job_table = prime_table("onrprem", job_str(), None)
-        onrreas_job_table = prime_table("onrreas", job_str(), None)
-        onrlabo_job_table = prime_table("onrlabo", job_str(), None)
-        onrplan_job_table = prime_table("onrplan", job_str(), None)
-        onrunit_job_table = prime_table("believerunit", job_str(), None)
-        assert not db_table_exists(cursor, onrunit_job_table)
-        assert not db_table_exists(cursor, onrplan_job_table)
-        assert not db_table_exists(cursor, onracct_job_table)
-        assert not db_table_exists(cursor, onrmemb_job_table)
-        assert not db_table_exists(cursor, onrgrou_job_table)
-        assert not db_table_exists(cursor, onrawar_job_table)
-        assert not db_table_exists(cursor, onrfact_job_table)
-        assert not db_table_exists(cursor, onrheal_job_table)
-        assert not db_table_exists(cursor, onrreas_job_table)
-        assert not db_table_exists(cursor, onrprem_job_table)
-        assert not db_table_exists(cursor, onrlabo_job_table)
+        blrmemb_job_table = prime_table("blrmemb", job_str(), None)
+        blrpern_job_table = prime_table("blrpern", job_str(), None)
+        blrgrou_job_table = prime_table("blrgrou", job_str(), None)
+        blrawar_job_table = prime_table("blrawar", job_str(), None)
+        blrfact_job_table = prime_table("blrfact", job_str(), None)
+        blrheal_job_table = prime_table("blrheal", job_str(), None)
+        blrprem_job_table = prime_table("blrprem", job_str(), None)
+        blrreas_job_table = prime_table("blrreas", job_str(), None)
+        blrlabo_job_table = prime_table("blrlabo", job_str(), None)
+        blrplan_job_table = prime_table("blrplan", job_str(), None)
+        blrunit_job_table = prime_table("believerunit", job_str(), None)
+        assert not db_table_exists(cursor, blrunit_job_table)
+        assert not db_table_exists(cursor, blrplan_job_table)
+        assert not db_table_exists(cursor, blrpern_job_table)
+        assert not db_table_exists(cursor, blrmemb_job_table)
+        assert not db_table_exists(cursor, blrgrou_job_table)
+        assert not db_table_exists(cursor, blrawar_job_table)
+        assert not db_table_exists(cursor, blrfact_job_table)
+        assert not db_table_exists(cursor, blrheal_job_table)
+        assert not db_table_exists(cursor, blrreas_job_table)
+        assert not db_table_exists(cursor, blrprem_job_table)
+        assert not db_table_exists(cursor, blrlabo_job_table)
 
         # WHEN
         etl_belief_job_jsons_to_job_tables(cursor, m23_belief_mstr_dir)
 
         # THEN
-        assert get_row_count(cursor, onrunit_job_table) == 1
-        assert get_row_count(cursor, onrplan_job_table) == 5
-        assert get_row_count(cursor, onracct_job_table) == 2
-        assert get_row_count(cursor, onrmemb_job_table) == 3
-        assert get_row_count(cursor, onrgrou_job_table) == 3
-        assert get_row_count(cursor, onrawar_job_table) == 1
-        assert get_row_count(cursor, onrfact_job_table) == 1
-        assert get_row_count(cursor, onrheal_job_table) == 1
-        assert get_row_count(cursor, onrreas_job_table) == 1
-        assert get_row_count(cursor, onrprem_job_table) == 1
-        assert get_row_count(cursor, onrlabo_job_table) == 1
+        assert get_row_count(cursor, blrunit_job_table) == 1
+        assert get_row_count(cursor, blrplan_job_table) == 5
+        assert get_row_count(cursor, blrpern_job_table) == 2
+        assert get_row_count(cursor, blrmemb_job_table) == 3
+        assert get_row_count(cursor, blrgrou_job_table) == 3
+        assert get_row_count(cursor, blrawar_job_table) == 1
+        assert get_row_count(cursor, blrfact_job_table) == 1
+        assert get_row_count(cursor, blrheal_job_table) == 1
+        assert get_row_count(cursor, blrreas_job_table) == 1
+        assert get_row_count(cursor, blrprem_job_table) == 1
+        assert get_row_count(cursor, blrlabo_job_table) == 1
 
 
 def test_etl_belief_job_jsons_to_job_tables_PopulatesTables_Scenario1(
@@ -105,11 +105,11 @@ def test_etl_belief_job_jsons_to_job_tables_PopulatesTables_Scenario1(
     a23_str = "amy23"
     belief_mstr_dir = get_module_temp_dir()
     bob_job = believerunit_shop(bob_inx, a23_str)
-    bob_job.add_acctunit(bob_inx, credit77)
-    bob_job.add_acctunit(yao_inx, credit44)
-    bob_job.add_acctunit(bob_inx, credit77)
-    bob_job.add_acctunit(sue_inx, credit88)
-    bob_job.add_acctunit(yao_inx, credit44)
+    bob_job.add_personunit(bob_inx, credit77)
+    bob_job.add_personunit(yao_inx, credit44)
+    bob_job.add_personunit(bob_inx, credit77)
+    bob_job.add_personunit(sue_inx, credit88)
+    bob_job.add_personunit(yao_inx, credit44)
     save_job_file(belief_mstr_dir, bob_job)
     belief_json_path = create_belief_json_path(belief_mstr_dir, a23_str)
     save_file(
@@ -120,15 +120,15 @@ def test_etl_belief_job_jsons_to_job_tables_PopulatesTables_Scenario1(
     assert os_path_exists(a23_bob_job_path)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        onracct_job_tablename = prime_table("onracct", job_str(), None)
-        assert not db_table_exists(cursor, onracct_job_tablename)
+        blrpern_job_tablename = prime_table("blrpern", job_str(), None)
+        assert not db_table_exists(cursor, blrpern_job_tablename)
 
         # WHEN
         etl_belief_job_jsons_to_job_tables(cursor, belief_mstr_dir)
 
         # THEN
-        assert get_row_count(cursor, onracct_job_tablename) == 3
-        rows = cursor.execute(f"SELECT * FROM {onracct_job_tablename}").fetchall()
+        assert get_row_count(cursor, blrpern_job_tablename) == 3
+        rows = cursor.execute(f"SELECT * FROM {blrpern_job_tablename}").fetchall()
         print(rows)
         assert rows == [
             (

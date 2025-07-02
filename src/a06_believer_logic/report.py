@@ -3,13 +3,13 @@ from src.a01_term_logic.rope import RopeTerm
 from src.a06_believer_logic.believer import BelieverUnit
 
 
-def get_believer_acctunits_dataframe(x_believer: BelieverUnit) -> DataFrame:
-    if x_believer.accts == {}:
+def get_believer_personunits_dataframe(x_believer: BelieverUnit) -> DataFrame:
+    if x_believer.persons == {}:
         return DataFrame(
             columns=[
-                "acct_name",
-                "acct_cred_points",
-                "acct_debt_points",
+                "person_name",
+                "person_cred_points",
+                "person_debt_points",
                 "_fund_give",
                 "_fund_take",
                 "_fund_agenda_give",
@@ -18,8 +18,8 @@ def get_believer_acctunits_dataframe(x_believer: BelieverUnit) -> DataFrame:
                 "_fund_agenda_ratio_take",
             ]
         )
-    x_acctunits_list = list(x_believer.get_acctunits_dict(all_attrs=True).values())
-    return DataFrame(x_acctunits_list)
+    x_personunits_list = list(x_believer.get_personunits_dict(all_attrs=True).values())
+    return DataFrame(x_personunits_list)
 
 
 def get_believer_agenda_dataframe(

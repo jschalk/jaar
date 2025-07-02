@@ -68,14 +68,14 @@ def get_example_zia_speaker() -> BelieverUnit:
     zia_speaker.set_plan(planunit_shop(hungry_str()), eat_rope())
     zia_speaker.set_plan(planunit_shop(full_str()), eat_rope())
     yao_str = "Yao"
-    zia_speaker.add_acctunit(yao_str, acct_debt_points=12)
+    zia_speaker.add_personunit(yao_str, person_debt_points=12)
     cook_planunit = zia_speaker.get_plan_obj(cook_rope())
     cook_planunit.laborunit.set_laborlink(yao_str)
     zia_speaker.edit_plan_attr(
         cook_rope(), reason_rcontext=eat_rope(), reason_premise=hungry_rope()
     )
     zia_speaker.add_fact(eat_rope(), full_rope())
-    zia_speaker.set_acct_respect(100)
+    zia_speaker.set_person_respect(100)
     return zia_speaker
 
 
@@ -87,14 +87,14 @@ def get_example_bob_speaker() -> BelieverUnit:
     bob_speaker.set_plan(planunit_shop(hungry_str()), eat_rope())
     bob_speaker.set_plan(planunit_shop(full_str()), eat_rope())
     yao_str = "Yao"
-    bob_speaker.add_acctunit(yao_str, acct_debt_points=12)
+    bob_speaker.add_personunit(yao_str, person_debt_points=12)
     cook_planunit = bob_speaker.get_plan_obj(cook_rope())
     cook_planunit.laborunit.set_laborlink(yao_str)
     bob_speaker.edit_plan_attr(
         cook_rope(), reason_rcontext=eat_rope(), reason_premise=hungry_rope()
     )
     bob_speaker.add_fact(eat_rope(), hungry_rope())
-    bob_speaker.set_acct_respect(100)
+    bob_speaker.set_person_respect(100)
     return bob_speaker
 
 
@@ -104,10 +104,10 @@ def get_example_yao_speaker() -> BelieverUnit:
     bob_str = "Bob"
     a23_str = "amy23"
     yao_speaker = believerunit_shop(yao_str, a23_str)
-    yao_speaker.add_acctunit(yao_str, acct_debt_points=12)
-    yao_speaker.add_acctunit(zia_str, acct_debt_points=36)
-    yao_speaker.add_acctunit(bob_str, acct_debt_points=48)
-    yao_speaker.set_acct_respect(100)
+    yao_speaker.add_personunit(yao_str, person_debt_points=12)
+    yao_speaker.add_personunit(zia_str, person_debt_points=36)
+    yao_speaker.add_personunit(bob_str, person_debt_points=48)
+    yao_speaker.set_person_respect(100)
     yao_speaker.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
     yao_speaker.set_plan(planunit_shop(hungry_str()), eat_rope())
     yao_speaker.set_plan(planunit_shop(full_str()), eat_rope())

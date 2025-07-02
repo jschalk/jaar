@@ -23,12 +23,12 @@ def boss_facts_str() -> str:
     return "boss_facts"
 
 
-def bud_acct_nets_str() -> str:
-    return "bud_acct_nets"
-
-
 def bud_believer_name_str() -> str:
     return "bud_believer_name"
+
+
+def bud_person_nets_str() -> str:
+    return "bud_person_nets"
 
 
 def bud_time_str() -> str:

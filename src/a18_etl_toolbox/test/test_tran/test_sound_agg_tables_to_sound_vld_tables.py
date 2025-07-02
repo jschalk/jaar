@@ -1,12 +1,12 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
 from src.a06_believer_logic.test._util.a06_str import (
-    acct_cred_points_str,
-    acct_debt_points_str,
-    acct_name_str,
     belief_label_str,
-    believer_acctunit_str,
     believer_name_str,
+    believer_personunit_str,
+    person_cred_points_str,
+    person_debt_points_str,
+    person_name_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a18_etl_toolbox.test._util.a18_str import error_message_str
@@ -37,18 +37,18 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_PopulatesTable_Scenario0()
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        believeraacct_s_agg_put_tablename = prime_tbl(
-            believer_acctunit_str(), "s", "agg", "put"
+        believeraperson_s_agg_put_tablename = prime_tbl(
+            believer_personunit_str(), "s", "agg", "put"
         )
-        print(f"{get_table_columns(cursor, believeraacct_s_agg_put_tablename)=}")
-        insert_into_clause = f"""INSERT INTO {believeraacct_s_agg_put_tablename} (
+        print(f"{get_table_columns(cursor, believeraperson_s_agg_put_tablename)=}")
+        insert_into_clause = f"""INSERT INTO {believeraperson_s_agg_put_tablename} (
   {event_int_str()}
 , {face_name_str()}
 , {belief_label_str()}
 , {believer_name_str()}
-, {acct_name_str()}
-, {acct_cred_points_str()}
-, {acct_debt_points_str()}
+, {person_name_str()}
+, {person_cred_points_str()}
+, {person_debt_points_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -59,27 +59,27 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        assert get_row_count(cursor, believeraacct_s_agg_put_tablename) == 4
-        onrawar_v_vld_put_tablename = prime_tbl(
-            believer_acctunit_str(), "s", "vld", "put"
+        assert get_row_count(cursor, believeraperson_s_agg_put_tablename) == 4
+        blrawar_v_vld_put_tablename = prime_tbl(
+            believer_personunit_str(), "s", "vld", "put"
         )
-        assert get_row_count(cursor, onrawar_v_vld_put_tablename) == 0
+        assert get_row_count(cursor, blrawar_v_vld_put_tablename) == 0
 
         # WHEN
-        sqlstr = get_insert_into_sound_vld_sqlstrs().get(onrawar_v_vld_put_tablename)
+        sqlstr = get_insert_into_sound_vld_sqlstrs().get(blrawar_v_vld_put_tablename)
         print(sqlstr)
         cursor.execute(sqlstr)
 
         # THEN
-        assert get_row_count(cursor, onrawar_v_vld_put_tablename) == 4
+        assert get_row_count(cursor, blrawar_v_vld_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
 , {belief_label_str()}
 , {believer_name_str()}
-, {acct_name_str()}
-, {acct_cred_points_str()}
-, {acct_debt_points_str()}
-FROM {onrawar_v_vld_put_tablename}
+, {person_name_str()}
+, {person_cred_points_str()}
+, {person_debt_points_str()}
+FROM {blrawar_v_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
@@ -111,18 +111,18 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario0_AddRowsToTable():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        onracct_s_agg_put_tablename = prime_tbl(
-            believer_acctunit_str(), "s", "agg", "put"
+        blrpern_s_agg_put_tablename = prime_tbl(
+            believer_personunit_str(), "s", "agg", "put"
         )
-        print(f"{get_table_columns(cursor, onracct_s_agg_put_tablename)=}")
-        insert_into_clause = f"""INSERT INTO {onracct_s_agg_put_tablename} (
+        print(f"{get_table_columns(cursor, blrpern_s_agg_put_tablename)=}")
+        insert_into_clause = f"""INSERT INTO {blrpern_s_agg_put_tablename} (
   {event_int_str()}
 , {face_name_str()}
 , {belief_label_str()}
 , {believer_name_str()}
-, {acct_name_str()}
-, {acct_cred_points_str()}
-, {acct_debt_points_str()}
+, {person_name_str()}
+, {person_cred_points_str()}
+, {person_debt_points_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -133,25 +133,25 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        assert get_row_count(cursor, onracct_s_agg_put_tablename) == 4
-        onracct_v_vld_put_tablename = prime_tbl(
-            believer_acctunit_str(), "s", "vld", "put"
+        assert get_row_count(cursor, blrpern_s_agg_put_tablename) == 4
+        blrpern_v_vld_put_tablename = prime_tbl(
+            believer_personunit_str(), "s", "vld", "put"
         )
-        assert get_row_count(cursor, onracct_v_vld_put_tablename) == 0
+        assert get_row_count(cursor, blrpern_v_vld_put_tablename) == 0
 
         # WHEN
         etl_sound_agg_tables_to_sound_vld_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, onracct_v_vld_put_tablename) == 4
+        assert get_row_count(cursor, blrpern_v_vld_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
 , {belief_label_str()}
 , {believer_name_str()}
-, {acct_name_str()}
-, {acct_cred_points_str()}
-, {acct_debt_points_str()}
-FROM {onracct_v_vld_put_tablename}
+, {person_name_str()}
+, {person_cred_points_str()}
+, {person_debt_points_str()}
+FROM {blrpern_v_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
@@ -182,18 +182,18 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario1_Populates_Columns():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        onracct_s_agg_put_tablename = prime_tbl(
-            believer_acctunit_str(), "s", "agg", "put"
+        blrpern_s_agg_put_tablename = prime_tbl(
+            believer_personunit_str(), "s", "agg", "put"
         )
-        print(f"{get_table_columns(cursor, onracct_s_agg_put_tablename)=}")
-        insert_into_clause = f"""INSERT INTO {onracct_s_agg_put_tablename} (
+        print(f"{get_table_columns(cursor, blrpern_s_agg_put_tablename)=}")
+        insert_into_clause = f"""INSERT INTO {blrpern_s_agg_put_tablename} (
   {event_int_str()}
 , {face_name_str()}
 , {belief_label_str()}
 , {believer_name_str()}
-, {acct_name_str()}
-, {acct_cred_points_str()}
-, {acct_debt_points_str()}
+, {person_name_str()}
+, {person_cred_points_str()}
+, {person_debt_points_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -204,25 +204,25 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        assert get_row_count(cursor, onracct_s_agg_put_tablename) == 4
-        onracct_v_vld_put_tablename = prime_tbl(
-            believer_acctunit_str(), "s", "vld", "put"
+        assert get_row_count(cursor, blrpern_s_agg_put_tablename) == 4
+        blrpern_v_vld_put_tablename = prime_tbl(
+            believer_personunit_str(), "s", "vld", "put"
         )
-        assert get_row_count(cursor, onracct_v_vld_put_tablename) == 0
+        assert get_row_count(cursor, blrpern_v_vld_put_tablename) == 0
 
         # WHEN
         etl_sound_agg_tables_to_sound_vld_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, onracct_v_vld_put_tablename) == 4
+        assert get_row_count(cursor, blrpern_v_vld_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
 , {belief_label_str()}
 , {believer_name_str()}
-, {acct_name_str()}
-, {acct_cred_points_str()}
-, {acct_debt_points_str()}
-FROM {onracct_v_vld_put_tablename}
+, {person_name_str()}
+, {person_cred_points_str()}
+, {person_debt_points_str()}
+FROM {blrpern_v_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
@@ -253,18 +253,18 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario2_DoesNotSelectWhere_e
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        onracct_s_agg_put_tablename = prime_tbl(
-            believer_acctunit_str(), "s", "agg", "put"
+        blrpern_s_agg_put_tablename = prime_tbl(
+            believer_personunit_str(), "s", "agg", "put"
         )
-        print(f"{get_table_columns(cursor, onracct_s_agg_put_tablename)=}")
-        insert_into_clause = f"""INSERT INTO {onracct_s_agg_put_tablename} (
+        print(f"{get_table_columns(cursor, blrpern_s_agg_put_tablename)=}")
+        insert_into_clause = f"""INSERT INTO {blrpern_s_agg_put_tablename} (
   {event_int_str()}
 , {face_name_str()}
 , {belief_label_str()}
 , {believer_name_str()}
-, {acct_name_str()}
-, {acct_cred_points_str()}
-, {acct_debt_points_str()}
+, {person_name_str()}
+, {person_cred_points_str()}
+, {person_debt_points_str()}
 , {error_message_str()}
 )"""
         values_clause = f"""
@@ -276,25 +276,25 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        assert get_row_count(cursor, onracct_s_agg_put_tablename) == 4
-        onracct_v_vld_put_tablename = prime_tbl(
-            believer_acctunit_str(), "s", "vld", "put"
+        assert get_row_count(cursor, blrpern_s_agg_put_tablename) == 4
+        blrpern_v_vld_put_tablename = prime_tbl(
+            believer_personunit_str(), "s", "vld", "put"
         )
-        assert get_row_count(cursor, onracct_v_vld_put_tablename) == 0
+        assert get_row_count(cursor, blrpern_v_vld_put_tablename) == 0
 
         # WHEN
         etl_sound_agg_tables_to_sound_vld_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, onracct_v_vld_put_tablename) == 3
+        assert get_row_count(cursor, blrpern_v_vld_put_tablename) == 3
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
 , {belief_label_str()}
 , {believer_name_str()}
-, {acct_name_str()}
-, {acct_cred_points_str()}
-, {acct_debt_points_str()}
-FROM {onracct_v_vld_put_tablename}
+, {person_name_str()}
+, {person_cred_points_str()}
+, {person_debt_points_str()}
+FROM {blrpern_v_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()

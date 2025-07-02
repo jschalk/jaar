@@ -9,8 +9,8 @@ from src.a00_data_toolbox.db_toolbox import (
     get_table_columns,
 )
 from src.a06_believer_logic.test._util.a06_str import (
-    believer_acct_membership_str,
-    believer_acctunit_str,
+    believer_person_membership_str,
+    believer_personunit_str,
     believer_plan_awardlink_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
@@ -67,46 +67,46 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
 )
 
 BELIEVER_PRIME_TABLENAMES = {
-    f"{believer_acct_membership_str()}_sound_put_agg": "ONRMEMB_PUT_AGG",
-    f"{believer_acct_membership_str()}_sound_put_raw": "ONRMEMB_PUT_RAW",
-    f"{believer_acctunit_str()}_sound_put_agg": "ONRACCT_PUT_AGG",
-    f"{believer_acctunit_str()}_sound_put_raw": "ONRACCT_PUT_RAW",
-    f"{believer_plan_awardlink_str()}_sound_put_agg": "ONRAWAR_PUT_AGG",
-    f"{believer_plan_awardlink_str()}_sound_put_raw": "ONRAWAR_PUT_RAW",
-    f"{believer_plan_factunit_str()}_sound_put_agg": "ONRFACT_PUT_AGG",
-    f"{believer_plan_factunit_str()}_sound_put_raw": "ONRFACT_PUT_RAW",
-    f"{believer_plan_healerlink_str()}_sound_put_agg": "ONRHEAL_PUT_AGG",
-    f"{believer_plan_healerlink_str()}_sound_put_raw": "ONRHEAL_PUT_RAW",
-    f"{believer_plan_reason_premiseunit_str()}_sound_put_agg": "ONRPREM_PUT_AGG",
-    f"{believer_plan_reason_premiseunit_str()}_sound_put_raw": "ONRPREM_PUT_RAW",
-    f"{believer_plan_reasonunit_str()}_sound_put_agg": "ONRREAS_PUT_AGG",
-    f"{believer_plan_reasonunit_str()}_sound_put_raw": "ONRREAS_PUT_RAW",
-    f"{believer_plan_laborlink_str()}_sound_put_agg": "ONRLABO_PUT_AGG",
-    f"{believer_plan_laborlink_str()}_sound_put_raw": "ONRLABO_PUT_RAW",
-    f"{believer_planunit_str()}_sound_put_agg": "ONRPLAN_PUT_AGG",
-    f"{believer_planunit_str()}_sound_put_raw": "ONRPLAN_PUT_RAW",
-    f"{believerunit_str()}_sound_put_agg": "ONRUNIT_PUT_AGG",
-    f"{believerunit_str()}_sound_put_raw": "ONRUNIT_PUT_RAW",
-    f"{believer_acct_membership_str()}_sound_del_agg": "ONRMEMB_DEL_AGG",
-    f"{believer_acct_membership_str()}_sound_del_raw": "ONRMEMB_DEL_RAW",
-    f"{believer_acctunit_str()}_sound_del_agg": "ONRACCT_DEL_AGG",
-    f"{believer_acctunit_str()}_sound_del_raw": "ONRACCT_DEL_RAW",
-    f"{believer_plan_awardlink_str()}_sound_del_agg": "ONRAWAR_DEL_AGG",
-    f"{believer_plan_awardlink_str()}_sound_del_raw": "ONRAWAR_DEL_RAW",
-    f"{believer_plan_factunit_str()}_sound_del_agg": "ONRFACT_DEL_AGG",
-    f"{believer_plan_factunit_str()}_sound_del_raw": "ONRFACT_DEL_RAW",
-    f"{believer_plan_healerlink_str()}_sound_del_agg": "ONRHEAL_DEL_AGG",
-    f"{believer_plan_healerlink_str()}_sound_del_raw": "ONRHEAL_DEL_RAW",
-    f"{believer_plan_reason_premiseunit_str()}_sound_del_agg": "ONRPREM_DEL_AGG",
-    f"{believer_plan_reason_premiseunit_str()}_sound_del_raw": "ONRPREM_DEL_RAW",
-    f"{believer_plan_reasonunit_str()}_sound_del_agg": "ONRREAS_DEL_AGG",
-    f"{believer_plan_reasonunit_str()}_sound_del_raw": "ONRREAS_DEL_RAW",
-    f"{believer_plan_laborlink_str()}_sound_del_agg": "ONRLABO_DEL_AGG",
-    f"{believer_plan_laborlink_str()}_sound_del_raw": "ONRLABO_DEL_RAW",
-    f"{believer_planunit_str()}_sound_del_agg": "ONRPLAN_DEL_AGG",
-    f"{believer_planunit_str()}_sound_del_raw": "ONRPLAN_DEL_RAW",
-    f"{believerunit_str()}_sound_del_agg": "ONRUNIT_DEL_AGG",
-    f"{believerunit_str()}_sound_del_raw": "ONRUNIT_DEL_RAW",
+    f"{believer_person_membership_str()}_sound_put_agg": "BLRMEMB_PUT_AGG",
+    f"{believer_person_membership_str()}_sound_put_raw": "BLRMEMB_PUT_RAW",
+    f"{believer_personunit_str()}_sound_put_agg": "BLRPERN_PUT_AGG",
+    f"{believer_personunit_str()}_sound_put_raw": "BLRPERN_PUT_RAW",
+    f"{believer_plan_awardlink_str()}_sound_put_agg": "BLRAWAR_PUT_AGG",
+    f"{believer_plan_awardlink_str()}_sound_put_raw": "BLRAWAR_PUT_RAW",
+    f"{believer_plan_factunit_str()}_sound_put_agg": "BLRFACT_PUT_AGG",
+    f"{believer_plan_factunit_str()}_sound_put_raw": "BLRFACT_PUT_RAW",
+    f"{believer_plan_healerlink_str()}_sound_put_agg": "BLRHEAL_PUT_AGG",
+    f"{believer_plan_healerlink_str()}_sound_put_raw": "BLRHEAL_PUT_RAW",
+    f"{believer_plan_reason_premiseunit_str()}_sound_put_agg": "BLRPREM_PUT_AGG",
+    f"{believer_plan_reason_premiseunit_str()}_sound_put_raw": "BLRPREM_PUT_RAW",
+    f"{believer_plan_reasonunit_str()}_sound_put_agg": "BLRREAS_PUT_AGG",
+    f"{believer_plan_reasonunit_str()}_sound_put_raw": "BLRREAS_PUT_RAW",
+    f"{believer_plan_laborlink_str()}_sound_put_agg": "BLRLABO_PUT_AGG",
+    f"{believer_plan_laborlink_str()}_sound_put_raw": "BLRLABO_PUT_RAW",
+    f"{believer_planunit_str()}_sound_put_agg": "BLRPLAN_PUT_AGG",
+    f"{believer_planunit_str()}_sound_put_raw": "BLRPLAN_PUT_RAW",
+    f"{believerunit_str()}_sound_put_agg": "BLRUNIT_PUT_AGG",
+    f"{believerunit_str()}_sound_put_raw": "BLRUNIT_PUT_RAW",
+    f"{believer_person_membership_str()}_sound_del_agg": "BLRMEMB_DEL_AGG",
+    f"{believer_person_membership_str()}_sound_del_raw": "BLRMEMB_DEL_RAW",
+    f"{believer_personunit_str()}_sound_del_agg": "BLRPERN_DEL_AGG",
+    f"{believer_personunit_str()}_sound_del_raw": "BLRPERN_DEL_RAW",
+    f"{believer_plan_awardlink_str()}_sound_del_agg": "BLRAWAR_DEL_AGG",
+    f"{believer_plan_awardlink_str()}_sound_del_raw": "BLRAWAR_DEL_RAW",
+    f"{believer_plan_factunit_str()}_sound_del_agg": "BLRFACT_DEL_AGG",
+    f"{believer_plan_factunit_str()}_sound_del_raw": "BLRFACT_DEL_RAW",
+    f"{believer_plan_healerlink_str()}_sound_del_agg": "BLRHEAL_DEL_AGG",
+    f"{believer_plan_healerlink_str()}_sound_del_raw": "BLRHEAL_DEL_RAW",
+    f"{believer_plan_reason_premiseunit_str()}_sound_del_agg": "BLRPREM_DEL_AGG",
+    f"{believer_plan_reason_premiseunit_str()}_sound_del_raw": "BLRPREM_DEL_RAW",
+    f"{believer_plan_reasonunit_str()}_sound_del_agg": "BLRREAS_DEL_AGG",
+    f"{believer_plan_reasonunit_str()}_sound_del_raw": "BLRREAS_DEL_RAW",
+    f"{believer_plan_laborlink_str()}_sound_del_agg": "BLRLABO_DEL_AGG",
+    f"{believer_plan_laborlink_str()}_sound_del_raw": "BLRLABO_DEL_RAW",
+    f"{believer_planunit_str()}_sound_del_agg": "BLRPLAN_DEL_AGG",
+    f"{believer_planunit_str()}_sound_del_raw": "BLRPLAN_DEL_RAW",
+    f"{believerunit_str()}_sound_del_agg": "BLRUNIT_DEL_AGG",
+    f"{believerunit_str()}_sound_del_raw": "BLRUNIT_DEL_RAW",
 }
 
 
@@ -540,11 +540,11 @@ def test_create_sound_and_voice_tables_CreatesBeliefRawTables():
         vld_str = "vld"
         put_str = "put"
         del_str = "del"
-        onrunit_s_put_agg_table = prime_tbl("believerunit", "s", agg_str, put_str)
-        onracct_s_put_agg_table = prime_tbl("onracct", "s", agg_str, put_str)
-        onrmemb_s_put_agg_table = prime_tbl("onrmemb", "s", agg_str, put_str)
-        onrfact_s_del_agg_table = prime_tbl("onrfact", "s", agg_str, del_str)
-        onrfact_s_del_vld_table = prime_tbl("onrfact", "s", vld_str, del_str)
+        blrunit_s_put_agg_table = prime_tbl("believerunit", "s", agg_str, put_str)
+        blrpern_s_put_agg_table = prime_tbl("blrpern", "s", agg_str, put_str)
+        blrmemb_s_put_agg_table = prime_tbl("blrmemb", "s", agg_str, put_str)
+        blrfact_s_del_agg_table = prime_tbl("blrfact", "s", agg_str, del_str)
+        blrfact_s_del_vld_table = prime_tbl("blrfact", "s", vld_str, del_str)
         beliefunit_s_agg_table = prime_tbl("beliefunit", "s", agg_str)
         beliefunit_s_vld_table = prime_tbl("beliefunit", "s", vld_str)
         pidtitl_s_agg_table = prime_tbl("pidtitl", "s", agg_str)
@@ -554,11 +554,11 @@ def test_create_sound_and_voice_tables_CreatesBeliefRawTables():
         pidcore_s_agg_table = prime_tbl("pidcore", "s", agg_str)
         pidcore_s_vld_table = prime_tbl("pidcore", "s", vld_str)
 
-        assert not db_table_exists(cursor, onrunit_s_put_agg_table)
-        assert not db_table_exists(cursor, onracct_s_put_agg_table)
-        assert not db_table_exists(cursor, onrmemb_s_put_agg_table)
-        assert not db_table_exists(cursor, onrfact_s_del_agg_table)
-        assert not db_table_exists(cursor, onrfact_s_del_vld_table)
+        assert not db_table_exists(cursor, blrunit_s_put_agg_table)
+        assert not db_table_exists(cursor, blrpern_s_put_agg_table)
+        assert not db_table_exists(cursor, blrmemb_s_put_agg_table)
+        assert not db_table_exists(cursor, blrfact_s_del_agg_table)
+        assert not db_table_exists(cursor, blrfact_s_del_vld_table)
         assert not db_table_exists(cursor, beliefunit_s_agg_table)
         assert not db_table_exists(cursor, beliefunit_s_vld_table)
         assert not db_table_exists(cursor, pidtitl_s_agg_table)
@@ -578,11 +578,11 @@ def test_create_sound_and_voice_tables_CreatesBeliefRawTables():
         # for x_row in cursor.fetchall():
         #     print(f"{x_count} {x_row[1]=}")
         #     x_count += 1
-        assert db_table_exists(cursor, onrunit_s_put_agg_table)
-        assert db_table_exists(cursor, onracct_s_put_agg_table)
-        assert db_table_exists(cursor, onrmemb_s_put_agg_table)
-        assert db_table_exists(cursor, onrfact_s_del_agg_table)
-        assert db_table_exists(cursor, onrfact_s_del_vld_table)
+        assert db_table_exists(cursor, blrunit_s_put_agg_table)
+        assert db_table_exists(cursor, blrpern_s_put_agg_table)
+        assert db_table_exists(cursor, blrmemb_s_put_agg_table)
+        assert db_table_exists(cursor, blrfact_s_del_agg_table)
+        assert db_table_exists(cursor, blrfact_s_del_vld_table)
         assert db_table_exists(cursor, beliefunit_s_agg_table)
         assert db_table_exists(cursor, beliefunit_s_vld_table)
         assert db_table_exists(cursor, pidtitl_s_agg_table)
@@ -946,11 +946,11 @@ def test_create_insert_missing_face_name_into_pidgin_core_vld_sqlstr_ReturnsObj(
     # ESTABLISH
     default_knot = "|"
     default_unknown_str = "unknown2"
-    onracct_s_agg_tablename = prime_tbl(believer_acctunit_str(), "s", "agg")
+    blrpern_s_agg_tablename = prime_tbl(believer_personunit_str(), "s", "agg")
 
     # WHEN
     insert_sqlstr = create_insert_missing_face_name_into_pidgin_core_vld_sqlstr(
-        default_knot, default_unknown_str, onracct_s_agg_tablename
+        default_knot, default_unknown_str, blrpern_s_agg_tablename
     )
 
     # THEN
@@ -958,14 +958,14 @@ def test_create_insert_missing_face_name_into_pidgin_core_vld_sqlstr_ReturnsObj(
     pidgin_core_s_vld_tablename = prime_tbl(pidcore_dimen, "s", "vld")
     expected_sqlstr = f"""INSERT INTO {pidgin_core_s_vld_tablename} (face_name, otx_knot, inx_knot, unknown_str)
 SELECT
-  {onracct_s_agg_tablename}.face_name
+  {blrpern_s_agg_tablename}.face_name
 , '{default_knot}'
 , '{default_knot}'
 , '{default_unknown_str}'
-FROM {onracct_s_agg_tablename} 
-LEFT JOIN pidgin_core_s_vld ON pidgin_core_s_vld.face_name = {onracct_s_agg_tablename}.face_name
+FROM {blrpern_s_agg_tablename} 
+LEFT JOIN pidgin_core_s_vld ON pidgin_core_s_vld.face_name = {blrpern_s_agg_tablename}.face_name
 WHERE pidgin_core_s_vld.face_name IS NULL
-GROUP BY {onracct_s_agg_tablename}.face_name
+GROUP BY {blrpern_s_agg_tablename}.face_name
 ;
 """
     print(expected_sqlstr)

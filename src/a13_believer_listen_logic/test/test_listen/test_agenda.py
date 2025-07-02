@@ -20,7 +20,7 @@ def test_listen_to_speaker_agenda_RaisesErrorIfPoolIsNotSet():
         listen_to_speaker_agenda(yao_believerunit, zia_believerunit)
     assert (
         str(excinfo.value)
-        == f"listener '{yao_str}' believer is assumed to have {zia_believerunit.believer_name} acctunit."
+        == f"listener '{yao_str}' believer is assumed to have {zia_believerunit.believer_name} personunit."
     )
 
 
@@ -29,8 +29,8 @@ def test_listen_to_speaker_agenda_ReturnsEqualBeliever():
     yao_str = "Yao"
     yao_believerunit = believerunit_shop(yao_str)
     zia_str = "Zia"
-    yao_believerunit.add_acctunit(zia_str)
-    yao_believerunit.set_acct_respect(100)
+    yao_believerunit.add_personunit(zia_str)
+    yao_believerunit.set_person_respect(100)
     zia_believerunit = believerunit_shop(zia_str)
 
     # WHEN
@@ -47,14 +47,14 @@ def test_listen_to_speaker_agenda_ReturnsSingleChoreBeliever():
     yao_str = "Yao"
     before_yao_believerunit = believerunit_shop(yao_str)
     zia_str = "Zia"
-    before_yao_believerunit.add_acctunit(zia_str)
-    yao_acct_acct_debt_points = 77
-    before_yao_believerunit.set_acct_respect(yao_acct_acct_debt_points)
+    before_yao_believerunit.add_personunit(zia_str)
+    yao_person_person_debt_points = 77
+    before_yao_believerunit.set_person_respect(yao_person_person_debt_points)
     clean_str = "clean"
     zia_clean_planunit = planunit_shop(clean_str, task=True)
     zia_clean_planunit.laborunit.set_laborlink(yao_str)
     zia_believerunit = believerunit_shop(zia_str)
-    zia_believerunit.add_acctunit(yao_str)
+    zia_believerunit.add_personunit(yao_str)
     zia_believerunit.set_l1_plan(zia_clean_planunit)
     assert len(zia_believerunit.get_agenda_dict()) == 0
     zia_yao_believerunit = copy_deepcopy(zia_believerunit)
@@ -72,7 +72,7 @@ def test_listen_to_speaker_agenda_ReturnsSingleChoreBeliever():
     yao_clean_planunit = after_yao_believerunit.get_plan_obj(clean_rope)
     print(f"{yao_clean_planunit.mass=}")
     assert yao_clean_planunit.mass != zia_clean_planunit.mass
-    assert yao_clean_planunit.mass == yao_acct_acct_debt_points
+    assert yao_clean_planunit.mass == yao_person_person_debt_points
     assert after_yao_believerunit == before_yao_believerunit
     assert len(after_yao_believerunit.get_agenda_dict()) == 1
 
@@ -82,11 +82,11 @@ def test_listen_to_speaker_agenda_ReturnsLevel2ChoreBeliever():
     yao_str = "Yao"
     before_yao_believerunit = believerunit_shop(yao_str)
     zia_str = "Zia"
-    before_yao_believerunit.add_acctunit(zia_str)
-    yao_acct_debt_points = 77
-    before_yao_believerunit.set_acct_respect(yao_acct_debt_points)
+    before_yao_believerunit.add_personunit(zia_str)
+    yao_person_debt_points = 77
+    before_yao_believerunit.set_person_respect(yao_person_debt_points)
     zia_believerunit = believerunit_shop(zia_str)
-    zia_believerunit.add_acctunit(yao_str)
+    zia_believerunit.add_personunit(yao_str)
     clean_str = "clean"
     zia_clean_planunit = planunit_shop(clean_str, task=True)
     zia_clean_planunit.laborunit.set_laborlink(yao_str)
@@ -108,11 +108,11 @@ def test_listen_to_speaker_agenda_ReturnsLevel2ChoreBeliever():
     yao_clean_planunit = after_yao_believerunit.get_plan_obj(clean_rope)
     print(f"{yao_clean_planunit.mass=}")
     assert yao_clean_planunit.mass != zia_clean_planunit.mass
-    assert yao_clean_planunit.mass == yao_acct_debt_points
+    assert yao_clean_planunit.mass == yao_person_debt_points
     after_casa_planunit = after_yao_believerunit.get_plan_obj(casa_rope)
     print(f"{after_casa_planunit.mass=}")
     assert after_casa_planunit.mass != 1
-    assert after_casa_planunit.mass == yao_acct_debt_points
+    assert after_casa_planunit.mass == yao_person_debt_points
     assert after_yao_believerunit == before_yao_believerunit
     assert len(after_yao_believerunit.get_agenda_dict()) == 1
 
@@ -122,13 +122,13 @@ def test_listen_to_speaker_agenda_Returns2AgendaPlansLevel2ChoreBeliever():
     yao_str = "Yao"
     before_yao_believerunit = believerunit_shop(yao_str)
     zia_str = "Zia"
-    before_yao_believerunit.add_acctunit(zia_str)
-    yao_acct_debt_points = 55
-    before_yao_believerunit.set_acct_respect(yao_acct_debt_points)
+    before_yao_believerunit.add_personunit(zia_str)
+    yao_person_debt_points = 55
+    before_yao_believerunit.set_person_respect(yao_person_debt_points)
 
     zia_str = "Zia"
     zia_believerunit = believerunit_shop(zia_str)
-    zia_believerunit.add_acctunit(yao_str)
+    zia_believerunit.add_personunit(yao_str)
     clean_str = "clean"
     cook_str = "cook"
     fly_str = "fly"
@@ -180,12 +180,12 @@ def test_listen_to_speaker_agenda_Returns2AgendaPlansLevel2ChoreBelieverWhereAnP
     yao_str = "Yao"
     before_yao_believerunit = believerunit_shop(yao_str)
     zia_str = "Zia"
-    before_yao_believerunit.add_acctunit(zia_str)
-    yao_acct_debt_points = 55
-    before_yao_believerunit.set_acct_respect(yao_acct_debt_points)
+    before_yao_believerunit.add_personunit(zia_str)
+    yao_person_debt_points = 55
+    before_yao_believerunit.set_person_respect(yao_person_debt_points)
     zia_str = "Zia"
     zia_believerunit = believerunit_shop(zia_str)
-    zia_believerunit.add_acctunit(yao_str)
+    zia_believerunit.add_personunit(yao_str)
     dish_str = "dish"
     cook_str = "cook"
     fly_str = "fly"
@@ -241,15 +241,15 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalBeliever():
     yao_str = "Yao"
     yao_duty = believerunit_shop(yao_str)
     zia_str = "Zia"
-    zia_acct_cred_points = 47
-    zia_acct_debt_points = 41
+    zia_person_cred_points = 47
+    zia_person_debt_points = 41
     sue_str = "Sue"
-    sue_acct_cred_points = 57
-    sue_acct_debt_points = 51
-    yao_duty.add_acctunit(zia_str, zia_acct_cred_points, zia_acct_debt_points)
-    yao_duty.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
+    sue_person_cred_points = 57
+    sue_person_debt_points = 51
+    yao_duty.add_personunit(zia_str, zia_person_cred_points, zia_person_debt_points)
+    yao_duty.add_personunit(sue_str, sue_person_cred_points, sue_person_debt_points)
     yao_pool = 92
-    yao_duty.set_acct_respect(yao_pool)
+    yao_duty.set_person_respect(yao_pool)
 
     sue_believerunit = believerunit_shop(sue_str)
     sue_believerunit.set_max_tree_traverse(6)
@@ -285,21 +285,21 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalBeliever():
 
     # WHEN
     yao_vision = create_empty_believer_from_believer(yao_duty, yao_str)
-    yao_vision.add_acctunit(zia_str, zia_acct_cred_points, zia_acct_debt_points)
-    yao_vision.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
-    yao_vision.set_acct_respect(yao_pool)
+    yao_vision.add_personunit(zia_str, zia_person_cred_points, zia_person_debt_points)
+    yao_vision.add_personunit(sue_str, sue_person_cred_points, sue_person_debt_points)
+    yao_vision.set_person_respect(yao_pool)
     yao_vision = listen_to_speaker_agenda(yao_vision, sue_believerunit)
     yao_vision.settle_believer()
 
     # THEN irrational believer is ignored
     assert len(yao_vision.get_agenda_dict()) != 3
     assert len(yao_vision.get_agenda_dict()) == 0
-    zia_acctunit = yao_vision.get_acct(zia_str)
-    sue_acctunit = yao_vision.get_acct(sue_str)
-    print(f"{sue_acctunit.acct_debt_points=}")
-    print(f"{sue_acctunit._irrational_acct_debt_points=}")
-    assert zia_acctunit._irrational_acct_debt_points == 0
-    assert sue_acctunit._irrational_acct_debt_points == 51
+    zia_personunit = yao_vision.get_person(zia_str)
+    sue_personunit = yao_vision.get_person(sue_str)
+    print(f"{sue_personunit.person_debt_points=}")
+    print(f"{sue_personunit._irrational_person_debt_points=}")
+    assert zia_personunit._irrational_person_debt_points == 0
+    assert sue_personunit._irrational_person_debt_points == 51
 
 
 def test_listen_to_speaker_agenda_ProcessesBarrenBeliever():
@@ -307,32 +307,32 @@ def test_listen_to_speaker_agenda_ProcessesBarrenBeliever():
     yao_str = "Yao"
     yao_duty = believerunit_shop(yao_str)
     zia_str = "Zia"
-    zia_acct_cred_points = 47
-    zia_acct_debt_points = 41
+    zia_person_cred_points = 47
+    zia_person_debt_points = 41
     sue_str = "Sue"
-    sue_acct_cred_points = 57
-    sue_acct_debt_points = 51
-    yao_duty.add_acctunit(zia_str, zia_acct_cred_points, zia_acct_debt_points)
-    yao_duty.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
+    sue_person_cred_points = 57
+    sue_person_debt_points = 51
+    yao_duty.add_personunit(zia_str, zia_person_cred_points, zia_person_debt_points)
+    yao_duty.add_personunit(sue_str, sue_person_cred_points, sue_person_debt_points)
     yao_pool = 92
-    yao_duty.set_acct_respect(yao_pool)
+    yao_duty.set_person_respect(yao_pool)
 
     # WHEN
     sue_vision = create_empty_believer_from_believer(yao_duty, sue_str)
     yao_vision = create_empty_believer_from_believer(yao_duty, yao_str)
-    yao_vision.add_acctunit(zia_str, zia_acct_cred_points, zia_acct_debt_points)
-    yao_vision.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
-    yao_vision.set_acct_respect(yao_pool)
+    yao_vision.add_personunit(zia_str, zia_person_cred_points, zia_person_debt_points)
+    yao_vision.add_personunit(sue_str, sue_person_cred_points, sue_person_debt_points)
+    yao_vision.set_person_respect(yao_pool)
     yao_vision = listen_to_speaker_agenda(yao_vision, speaker=sue_vision)
 
     # THEN irrational believer is ignored
     assert len(yao_vision.get_agenda_dict()) != 3
     assert len(yao_vision.get_agenda_dict()) == 0
-    zia_acctunit = yao_vision.get_acct(zia_str)
-    sue_acctunit = yao_vision.get_acct(sue_str)
-    print(f"{sue_acctunit.acct_debt_points=}")
-    print(f"{sue_acctunit._irrational_acct_debt_points=}")
-    assert zia_acctunit._irrational_acct_debt_points == 0
-    assert zia_acctunit._inallocable_acct_debt_points == 0
-    assert sue_acctunit._irrational_acct_debt_points == 0
-    assert sue_acctunit._inallocable_acct_debt_points == 51
+    zia_personunit = yao_vision.get_person(zia_str)
+    sue_personunit = yao_vision.get_person(sue_str)
+    print(f"{sue_personunit.person_debt_points=}")
+    print(f"{sue_personunit._irrational_person_debt_points=}")
+    assert zia_personunit._irrational_person_debt_points == 0
+    assert zia_personunit._inallocable_person_debt_points == 0
+    assert sue_personunit._irrational_person_debt_points == 0
+    assert sue_personunit._inallocable_person_debt_points == 51

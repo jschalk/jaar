@@ -3,7 +3,7 @@ from pandas import DataFrame
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.a00_data_toolbox.file_toolbox import count_dirs_files, create_path, save_file
-from src.a06_believer_logic.test._util.a06_str import acct_name_str
+from src.a06_believer_logic.test._util.a06_str import person_name_str
 from src.a07_timeline_logic.test._util.a07_str import creg_str, time_str
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a11_bud_logic.test._util.a11_str import (
@@ -18,7 +18,7 @@ from src.a11_bud_logic.test._util.a11_str import (
 from src.a12_hub_toolbox.hub_path import (
     create_belief_json_path,
     create_belief_ote1_csv_path,
-    create_bud_acct_mandate_ledger_path as bud_mandate,
+    create_bud_person_mandate_ledger_path as bud_mandate,
     create_event_all_pack_path,
     create_event_expressed_pack_path as expressed_path,
     create_gut_path,
@@ -33,13 +33,13 @@ from src.a15_belief_logic.test._util.a15_str import (
 from src.a16_pidgin_logic.test._util.a16_str import inx_name_str, otx_name_str
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
 from src.a18_etl_toolbox.test._util.a18_str import (
-    belief_acct_nets_str,
     belief_event_time_agg_str,
+    belief_person_nets_str,
     events_brick_agg_str,
     events_brick_valid_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
-from src.a19_kpi_toolbox.test._util.a19_str import belief_kpi001_acct_nets_str
+from src.a19_kpi_toolbox.test._util.a19_str import belief_kpi001_person_nets_str
 from src.a20_world_logic.test._util.a20_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as worlds_dir,
@@ -64,7 +64,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         event_int_str(),
         belief_label_str(),
         believer_name_str(),
-        acct_name_str(),
+        person_name_str(),
         otx_name_str(),
         inx_name_str(),
     ]
@@ -87,25 +87,25 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
     beliefunit_sound_raw = create_prime_tablename("beliefunit", "s", "raw")
     beliefunit_sound_agg = create_prime_tablename("beliefunit", "s", "agg")
     beliefunit_sound_vld = create_prime_tablename("beliefunit", "s", "vld")
-    onrunit_sound_put_raw = create_prime_tablename("believerunit", "s", "raw", "put")
-    onrunit_sound_put_agg = create_prime_tablename("believerunit", "s", "agg", "put")
-    onrunit_sound_put_vld = create_prime_tablename("believerunit", "s", "vld", "put")
-    onracct_sound_put_raw = create_prime_tablename("onracct", "s", "raw", "put")
-    onracct_sound_put_agg = create_prime_tablename("onracct", "s", "agg", "put")
-    onracct_sound_put_vld = create_prime_tablename("onracct", "s", "vld", "put")
+    blrunit_sound_put_raw = create_prime_tablename("believerunit", "s", "raw", "put")
+    blrunit_sound_put_agg = create_prime_tablename("believerunit", "s", "agg", "put")
+    blrunit_sound_put_vld = create_prime_tablename("believerunit", "s", "vld", "put")
+    blrpern_sound_put_raw = create_prime_tablename("blrpern", "s", "raw", "put")
+    blrpern_sound_put_agg = create_prime_tablename("blrpern", "s", "agg", "put")
+    blrpern_sound_put_vld = create_prime_tablename("blrpern", "s", "vld", "put")
     beliefunit_voice_raw = create_prime_tablename("beliefunit", "v", "raw")
     beliefunit_voice_agg = create_prime_tablename("beliefunit", "v", "agg")
-    onrunit_voice_put_raw = create_prime_tablename("believerunit", "v", "raw", "put")
-    onrunit_voice_put_agg = create_prime_tablename("believerunit", "v", "agg", "put")
-    onracct_voice_put_raw = create_prime_tablename("onracct", "v", "raw", "put")
-    onracct_voice_put_agg = create_prime_tablename("onracct", "v", "agg", "put")
+    blrunit_voice_put_raw = create_prime_tablename("believerunit", "v", "raw", "put")
+    blrunit_voice_put_agg = create_prime_tablename("believerunit", "v", "agg", "put")
+    blrpern_voice_put_raw = create_prime_tablename("blrpern", "v", "raw", "put")
+    blrpern_voice_put_agg = create_prime_tablename("blrpern", "v", "agg", "put")
     mstr_dir = fay_world._belief_mstr_dir
     a23_json_path = create_belief_json_path(mstr_dir, a23_str)
     a23_e1_all_pack_path = create_event_all_pack_path(mstr_dir, a23_str, sue_inx, e3)
     a23_e1_expressed_pack_path = expressed_path(mstr_dir, a23_str, sue_inx, e3)
     a23_sue_gut_path = create_gut_path(mstr_dir, a23_str, sue_inx)
     a23_sue_job_path = create_job_path(mstr_dir, a23_str, sue_inx)
-    onracct_job = create_prime_tablename("onracct", "job", None)
+    blrpern_job = create_prime_tablename("blrpern", "job", None)
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -119,19 +119,19 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         assert not db_table_exists(cursor, beliefunit_sound_raw)
         assert not db_table_exists(cursor, beliefunit_sound_agg)
         assert not db_table_exists(cursor, beliefunit_sound_vld)
-        assert not db_table_exists(cursor, onrunit_sound_put_raw)
-        assert not db_table_exists(cursor, onrunit_sound_put_agg)
-        assert not db_table_exists(cursor, onrunit_sound_put_vld)
+        assert not db_table_exists(cursor, blrunit_sound_put_raw)
+        assert not db_table_exists(cursor, blrunit_sound_put_agg)
+        assert not db_table_exists(cursor, blrunit_sound_put_vld)
         assert not db_table_exists(cursor, pidcore_sound_raw)
         assert not db_table_exists(cursor, pidcore_sound_agg)
         assert not db_table_exists(cursor, pidcore_sound_vld)
         assert not db_table_exists(cursor, pidname_sound_vld)
         assert not db_table_exists(cursor, beliefunit_voice_raw)
         assert not db_table_exists(cursor, beliefunit_voice_agg)
-        assert not db_table_exists(cursor, onrunit_voice_put_raw)
-        assert not db_table_exists(cursor, onrunit_voice_put_agg)
-        assert not db_table_exists(cursor, onracct_voice_put_raw)
-        assert not db_table_exists(cursor, onracct_voice_put_agg)
+        assert not db_table_exists(cursor, blrunit_voice_put_raw)
+        assert not db_table_exists(cursor, blrunit_voice_put_agg)
+        assert not db_table_exists(cursor, blrpern_voice_put_raw)
+        assert not db_table_exists(cursor, blrpern_voice_put_agg)
         assert not os_path_exists(a23_json_path)
         assert not os_path_exists(a23_e1_all_pack_path)
         assert not os_path_exists(a23_e1_expressed_pack_path)
@@ -139,28 +139,28 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         assert not os_path_exists(a23_sue_job_path)
         assert not db_table_exists(cursor, belief_event_time_agg_str())
         assert not db_table_exists(cursor, belief_ote1_agg_str())
-        assert not db_table_exists(cursor, onracct_job)
-        assert not db_table_exists(cursor, belief_acct_nets_str())
-        assert not db_table_exists(cursor, belief_kpi001_acct_nets_str())
+        assert not db_table_exists(cursor, blrpern_job)
+        assert not db_table_exists(cursor, belief_person_nets_str())
+        assert not db_table_exists(cursor, belief_kpi001_person_nets_str())
 
         # # create believerunits
         # self.believer_tables_to_event_believer_csvs(cursor)
 
         # # create all belief_job and mandate reports
-        # self.calc_belief_bud_acct_mandate_net_ledgers()
+        # self.calc_belief_bud_person_mandate_net_ledgers()
 
         # WHEN
         fay_world.sheets_input_to_clarity_with_cursor(db_conn, cursor)
 
         # THEN
         # select_pidgin_core = f"SELECT * FROM {pidcore_sound_vld}"
-        # select_believerunit_put = f"SELECT * FROM {onrunit_sound_put_agg}"
-        # select_onracct_put = f"SELECT * FROM {onracct_sound_put_agg}"
+        # select_believerunit_put = f"SELECT * FROM {blrunit_sound_put_agg}"
+        # select_blrpern_put = f"SELECT * FROM {blrpern_sound_put_agg}"
         # select_beliefunit_put_raw = f"SELECT * FROM {beliefunit_sound_raw}"
         # select_beliefunit_put_agg = f"SELECT * FROM {beliefunit_sound_agg}"
         # print(f"{cursor.execute(select_pidgin_core).fetchall()=}")
         # print(f"{cursor.execute(select_believerunit_put).fetchall()=}")
-        # print(f"{cursor.execute(select_onracct_put).fetchall()=}")
+        # print(f"{cursor.execute(select_blrpern_put).fetchall()=}")
         # print(f"{cursor.execute(select_beliefunit_put_raw).fetchall()=}")
         # print(f"{cursor.execute(select_beliefunit_put_agg).fetchall()=}")
 
@@ -171,25 +171,25 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         assert get_row_count(cursor, br00113_valid) == 1
         assert get_row_count(cursor, pidname_sound_raw) == 1
         assert get_row_count(cursor, beliefunit_sound_raw) == 1
-        assert get_row_count(cursor, onrunit_sound_put_raw) == 1
-        assert get_row_count(cursor, onracct_sound_put_raw) == 1
+        assert get_row_count(cursor, blrunit_sound_put_raw) == 1
+        assert get_row_count(cursor, blrpern_sound_put_raw) == 1
         assert get_row_count(cursor, pidname_sound_agg) == 1
         assert get_row_count(cursor, beliefunit_sound_agg) == 1
-        assert get_row_count(cursor, onrunit_sound_put_agg) == 1
-        assert get_row_count(cursor, onracct_sound_put_agg) == 1
+        assert get_row_count(cursor, blrunit_sound_put_agg) == 1
+        assert get_row_count(cursor, blrpern_sound_put_agg) == 1
         assert get_row_count(cursor, pidcore_sound_raw) == 1
         assert get_row_count(cursor, pidcore_sound_agg) == 1
         assert get_row_count(cursor, pidcore_sound_vld) == 1
         assert get_row_count(cursor, pidname_sound_vld) == 1
         assert get_row_count(cursor, beliefunit_sound_vld) == 1
-        assert get_row_count(cursor, onrunit_sound_put_vld) == 1
-        assert get_row_count(cursor, onracct_sound_put_vld) == 1
+        assert get_row_count(cursor, blrunit_sound_put_vld) == 1
+        assert get_row_count(cursor, blrpern_sound_put_vld) == 1
         assert get_row_count(cursor, beliefunit_voice_raw) == 1
-        assert get_row_count(cursor, onrunit_voice_put_raw) == 1
-        assert get_row_count(cursor, onracct_voice_put_raw) == 1
+        assert get_row_count(cursor, blrunit_voice_put_raw) == 1
+        assert get_row_count(cursor, blrpern_voice_put_raw) == 1
         assert get_row_count(cursor, beliefunit_voice_agg) == 1
-        assert get_row_count(cursor, onrunit_voice_put_agg) == 1
-        assert get_row_count(cursor, onracct_voice_put_agg) == 1
+        assert get_row_count(cursor, blrunit_voice_put_agg) == 1
+        assert get_row_count(cursor, blrpern_voice_put_agg) == 1
         assert os_path_exists(a23_json_path)
         print(f"{a23_e1_all_pack_path=}")
         assert os_path_exists(a23_e1_all_pack_path)
@@ -200,11 +200,11 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         creg_rope = sue_gut.make_rope(time_rope, creg_str())
         assert sue_gut.plan_exists(creg_rope)
         assert os_path_exists(a23_sue_job_path)
-        assert get_row_count(cursor, onracct_job) == 1
-        assert get_row_count(cursor, belief_acct_nets_str()) == 0
+        assert get_row_count(cursor, blrpern_job) == 1
+        assert get_row_count(cursor, belief_person_nets_str()) == 0
         # assert get_row_count(cursor, belief_event_time_agg_str()) == 0
         # assert get_row_count(cursor, belief_ote1_agg_tablename) == 0
-        assert get_row_count(cursor, belief_kpi001_acct_nets_str()) == 0
+        assert get_row_count(cursor, belief_kpi001_person_nets_str()) == 0
 
 
 def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
@@ -224,7 +224,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         event_int_str(),
         belief_label_str(),
         believer_name_str(),
-        acct_name_str(),
+        person_name_str(),
         otx_name_str(),
         inx_name_str(),
     ]
@@ -266,16 +266,16 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
     pidcore_sound_vld = create_prime_tablename("pidcore", "s", "vld")
     beliefunit_sound_raw = create_prime_tablename("beliefunit", "s", "raw")
     beliefunit_sound_agg = create_prime_tablename("beliefunit", "s", "agg")
-    onrunit_sound_put_raw = create_prime_tablename("believerunit", "s", "raw", "put")
-    onrunit_sound_put_agg = create_prime_tablename("believerunit", "s", "agg", "put")
-    onracct_sound_put_raw = create_prime_tablename("onracct", "s", "raw", "put")
-    onracct_sound_put_agg = create_prime_tablename("onracct", "s", "agg", "put")
+    blrunit_sound_put_raw = create_prime_tablename("believerunit", "s", "raw", "put")
+    blrunit_sound_put_agg = create_prime_tablename("believerunit", "s", "agg", "put")
+    blrpern_sound_put_raw = create_prime_tablename("blrpern", "s", "raw", "put")
+    blrpern_sound_put_agg = create_prime_tablename("blrpern", "s", "agg", "put")
     beliefunit_voice_raw = create_prime_tablename("beliefunit", "v", "raw")
     beliefunit_voice_agg = create_prime_tablename("beliefunit", "v", "agg")
-    onrunit_voice_put_raw = create_prime_tablename("believerunit", "v", "raw", "put")
-    onrunit_voice_put_agg = create_prime_tablename("believerunit", "v", "agg", "put")
-    onracct_voice_put_raw = create_prime_tablename("onracct", "v", "raw", "put")
-    onracct_voice_put_agg = create_prime_tablename("onracct", "v", "agg", "put")
+    blrunit_voice_put_raw = create_prime_tablename("believerunit", "v", "raw", "put")
+    blrunit_voice_put_agg = create_prime_tablename("believerunit", "v", "agg", "put")
+    blrpern_voice_put_raw = create_prime_tablename("blrpern", "v", "raw", "put")
+    blrpern_voice_put_agg = create_prime_tablename("blrpern", "v", "agg", "put")
     mstr_dir = fay_world._belief_mstr_dir
     a23_json_path = create_belief_json_path(mstr_dir, a23_str)
     a23_e1_all_pack_path = create_event_all_pack_path(mstr_dir, a23_str, sue_inx, e3)
@@ -295,18 +295,18 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         assert not db_table_exists(cursor, pidname_sound_agg)
         assert not db_table_exists(cursor, beliefunit_sound_raw)
         assert not db_table_exists(cursor, beliefunit_sound_agg)
-        assert not db_table_exists(cursor, onrunit_sound_put_raw)
-        assert not db_table_exists(cursor, onrunit_sound_put_agg)
+        assert not db_table_exists(cursor, blrunit_sound_put_raw)
+        assert not db_table_exists(cursor, blrunit_sound_put_agg)
         assert not db_table_exists(cursor, pidcore_sound_raw)
         assert not db_table_exists(cursor, pidcore_sound_agg)
         assert not db_table_exists(cursor, pidcore_sound_vld)
         assert not db_table_exists(cursor, pidname_sound_vld)
         assert not db_table_exists(cursor, beliefunit_voice_raw)
         assert not db_table_exists(cursor, beliefunit_voice_agg)
-        assert not db_table_exists(cursor, onrunit_voice_put_raw)
-        assert not db_table_exists(cursor, onrunit_voice_put_agg)
-        assert not db_table_exists(cursor, onracct_voice_put_raw)
-        assert not db_table_exists(cursor, onracct_voice_put_agg)
+        assert not db_table_exists(cursor, blrunit_voice_put_raw)
+        assert not db_table_exists(cursor, blrunit_voice_put_agg)
+        assert not db_table_exists(cursor, blrpern_voice_put_raw)
+        assert not db_table_exists(cursor, blrpern_voice_put_agg)
         assert not os_path_exists(a23_json_path)
         assert not os_path_exists(a23_e1_all_pack_path)
         assert not os_path_exists(a23_e1_expressed_pack_path)
@@ -314,15 +314,15 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         assert not os_path_exists(a23_sue_job_path)
         assert not db_table_exists(cursor, belief_ote1_agg_str())
         assert not os_path_exists(sue37_mandate_path)
-        assert not db_table_exists(cursor, belief_acct_nets_str())
-        assert not db_table_exists(cursor, belief_kpi001_acct_nets_str())
+        assert not db_table_exists(cursor, belief_person_nets_str())
+        assert not db_table_exists(cursor, belief_kpi001_person_nets_str())
         # self.belief_agg_tables_to_belief_ote1_agg(cursor)
 
         # # create believerunits
         # self.believer_tables_to_event_believer_csvs(cursor)
 
         # # create all belief_job and mandate reports
-        # self.calc_belief_bud_acct_mandate_net_ledgers()
+        # self.calc_belief_bud_person_mandate_net_ledgers()
 
         # WHEN
         fay_world.sheets_input_to_clarity_with_cursor(db_conn, cursor)
@@ -336,22 +336,22 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         assert get_row_count(cursor, br00113_valid) == 2
         assert get_row_count(cursor, pidname_sound_raw) == 2
         assert get_row_count(cursor, beliefunit_sound_raw) == 4
-        assert get_row_count(cursor, onrunit_sound_put_raw) == 4
-        assert get_row_count(cursor, onracct_sound_put_raw) == 2
+        assert get_row_count(cursor, blrunit_sound_put_raw) == 4
+        assert get_row_count(cursor, blrpern_sound_put_raw) == 2
         assert get_row_count(cursor, pidname_sound_agg) == 1
         assert get_row_count(cursor, beliefunit_sound_agg) == 1
-        assert get_row_count(cursor, onrunit_sound_put_agg) == 1
-        assert get_row_count(cursor, onracct_sound_put_agg) == 1
+        assert get_row_count(cursor, blrunit_sound_put_agg) == 1
+        assert get_row_count(cursor, blrpern_sound_put_agg) == 1
         assert get_row_count(cursor, pidcore_sound_raw) == 1
         assert get_row_count(cursor, pidcore_sound_agg) == 1
         assert get_row_count(cursor, pidcore_sound_vld) == 1
         assert get_row_count(cursor, pidname_sound_vld) == 1
         assert get_row_count(cursor, beliefunit_voice_raw) == 1
-        assert get_row_count(cursor, onrunit_voice_put_raw) == 1
-        assert get_row_count(cursor, onracct_voice_put_raw) == 1
+        assert get_row_count(cursor, blrunit_voice_put_raw) == 1
+        assert get_row_count(cursor, blrpern_voice_put_raw) == 1
         assert get_row_count(cursor, beliefunit_voice_agg) == 1
-        assert get_row_count(cursor, onrunit_voice_put_agg) == 1
-        assert get_row_count(cursor, onracct_voice_put_agg) == 1
+        assert get_row_count(cursor, blrunit_voice_put_agg) == 1
+        assert get_row_count(cursor, blrpern_voice_put_agg) == 1
         assert os_path_exists(a23_json_path)
         assert os_path_exists(a23_e1_all_pack_path)
         assert os_path_exists(a23_e1_expressed_pack_path)
@@ -360,8 +360,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         assert get_row_count(cursor, belief_ote1_agg_str()) == 1
         print(f"{sue37_mandate_path=}")
         assert os_path_exists(sue37_mandate_path)
-        assert get_row_count(cursor, belief_acct_nets_str()) == 1
-        assert get_row_count(cursor, belief_kpi001_acct_nets_str()) == 1
+        assert get_row_count(cursor, belief_person_nets_str()) == 1
+        assert get_row_count(cursor, belief_kpi001_person_nets_str()) == 1
 
 
 def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario2_PopulateBeliefTranBook(
@@ -381,7 +381,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario2_PopulateBeliefT
         face_name_str(),
         belief_label_str(),
         believer_name_str(),
-        acct_name_str(),
+        person_name_str(),
         tran_time_str(),
         amount_str(),
     ]
@@ -396,13 +396,13 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario2_PopulateBeliefT
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        assert not db_table_exists(cursor, belief_acct_nets_str())
+        assert not db_table_exists(cursor, belief_person_nets_str())
 
         # WHEN
         fay_world.sheets_input_to_clarity_with_cursor(db_conn, cursor)
 
         # THEN
-        assert get_row_count(cursor, belief_acct_nets_str()) == 1
+        assert get_row_count(cursor, belief_person_nets_str()) == 1
 
 
 def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario3_WhenNoBeliefIdeas_ote1_IsStillCreated(
@@ -421,7 +421,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario3_WhenNoBeliefIde
         face_name_str(),
         belief_label_str(),
         believer_name_str(),
-        acct_name_str(),
+        person_name_str(),
     ]
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
@@ -523,7 +523,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
         face_name_str(),
         belief_label_str(),
         believer_name_str(),
-        acct_name_str(),
+        person_name_str(),
     ]
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
@@ -574,7 +574,7 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         event_int_str(),
         belief_label_str(),
         believer_name_str(),
-        acct_name_str(),
+        person_name_str(),
         otx_name_str(),
         inx_name_str(),
     ]
@@ -623,24 +623,24 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         pidcore_sound_vld = create_prime_tablename("pidcore", "s", "vld")
         beliefunit_sound_raw = create_prime_tablename("beliefunit", "s", "raw")
         beliefunit_sound_agg = create_prime_tablename("beliefunit", "s", "agg")
-        onrunit_sound_put_raw = create_prime_tablename(
+        blrunit_sound_put_raw = create_prime_tablename(
             "believerunit", "s", "raw", "put"
         )
-        onrunit_sound_put_agg = create_prime_tablename(
+        blrunit_sound_put_agg = create_prime_tablename(
             "believerunit", "s", "agg", "put"
         )
-        onracct_sound_put_raw = create_prime_tablename("onracct", "s", "raw", "put")
-        onracct_sound_put_agg = create_prime_tablename("onracct", "s", "agg", "put")
+        blrpern_sound_put_raw = create_prime_tablename("blrpern", "s", "raw", "put")
+        blrpern_sound_put_agg = create_prime_tablename("blrpern", "s", "agg", "put")
         beliefunit_voice_raw = create_prime_tablename("beliefunit", "v", "raw")
         beliefunit_voice_agg = create_prime_tablename("beliefunit", "v", "agg")
-        onrunit_voice_put_raw = create_prime_tablename(
+        blrunit_voice_put_raw = create_prime_tablename(
             "believerunit", "v", "raw", "put"
         )
-        onrunit_voice_put_agg = create_prime_tablename(
+        blrunit_voice_put_agg = create_prime_tablename(
             "believerunit", "v", "agg", "put"
         )
-        onracct_voice_put_raw = create_prime_tablename("onracct", "v", "raw", "put")
-        onracct_voice_put_agg = create_prime_tablename("onracct", "v", "agg", "put")
+        blrpern_voice_put_raw = create_prime_tablename("blrpern", "v", "raw", "put")
+        blrpern_voice_put_agg = create_prime_tablename("blrpern", "v", "agg", "put")
 
         cursor = db_conn.cursor()
         assert get_row_count(cursor, br00113_raw) == 1
@@ -650,21 +650,21 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         assert get_row_count(cursor, br00113_valid) == 2
         assert get_row_count(cursor, pidname_sound_raw) == 2
         assert get_row_count(cursor, beliefunit_sound_raw) == 4
-        assert get_row_count(cursor, onrunit_sound_put_raw) == 4
-        assert get_row_count(cursor, onracct_sound_put_raw) == 2
+        assert get_row_count(cursor, blrunit_sound_put_raw) == 4
+        assert get_row_count(cursor, blrpern_sound_put_raw) == 2
         assert get_row_count(cursor, pidname_sound_agg) == 1
         assert get_row_count(cursor, beliefunit_sound_agg) == 1
-        assert get_row_count(cursor, onrunit_sound_put_agg) == 1
-        assert get_row_count(cursor, onracct_sound_put_agg) == 1
+        assert get_row_count(cursor, blrunit_sound_put_agg) == 1
+        assert get_row_count(cursor, blrpern_sound_put_agg) == 1
         assert get_row_count(cursor, pidcore_sound_raw) == 1
         assert get_row_count(cursor, pidcore_sound_agg) == 1
         assert get_row_count(cursor, pidcore_sound_vld) == 1
         assert get_row_count(cursor, pidname_sound_vld) == 1
         assert get_row_count(cursor, beliefunit_voice_raw) == 1
-        assert get_row_count(cursor, onrunit_voice_put_raw) == 1
-        assert get_row_count(cursor, onracct_voice_put_raw) == 1
+        assert get_row_count(cursor, blrunit_voice_put_raw) == 1
+        assert get_row_count(cursor, blrpern_voice_put_raw) == 1
         assert get_row_count(cursor, beliefunit_voice_agg) == 1
-        assert get_row_count(cursor, onrunit_voice_put_agg) == 1
-        assert get_row_count(cursor, onracct_voice_put_agg) == 1
+        assert get_row_count(cursor, blrunit_voice_put_agg) == 1
+        assert get_row_count(cursor, blrpern_voice_put_agg) == 1
         assert get_row_count(cursor, belief_ote1_agg_str()) == 1
     db_conn.close()

@@ -6,8 +6,8 @@ from src.a00_data_toolbox.db_toolbox import (
     required_columns_exist,
 )
 from src.a06_believer_logic.test._util.a06_str import (
-    believer_acct_membership_str,
-    believer_acctunit_str,
+    believer_person_membership_str,
+    believer_personunit_str,
     believer_plan_awardlink_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
@@ -54,15 +54,15 @@ from src.a17_idea_logic.idea_db_tool import (
 )
 from src.a17_idea_logic.test._util.a17_str import error_message_str, idea_category_str
 from src.a18_etl_toolbox.test._util.a18_str import (
-    belief_acct_nets_str,
     belief_event_time_agg_str,
+    belief_person_nets_str,
     believer_net_amount_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
-    CREATE_BELIEF_ACCT_NETS_SQLSTR,
     CREATE_BELIEF_EVENT_TIME_AGG_SQLSTR,
     CREATE_BELIEF_OTE1_AGG_SQLSTR,
+    CREATE_BELIEF_PERSON_NETS_SQLSTR,
     IDEA_STAGEBLE_DEL_DIMENS,
     INSERT_BELIEF_EVENT_TIME_AGG_SQLSTR,
     INSERT_BELIEF_OTE1_AGG_FROM_VOICE_SQLSTR,
@@ -83,18 +83,18 @@ def test_ALL_DIMEN_ABBV7_has_all_dimens():
 
 def test_create_prime_tablename_ReturnsObj():
     # ESTABLISH
-    believerunit_dimen = believerunit_str()
-    onracct_dimen = believer_acctunit_str()
-    onrmemb_dimen = believer_acct_membership_str()
-    onrgrou_dimen = believer_groupunit_str()
-    onrplan_dimen = believer_planunit_str()
-    onrawar_dimen = believer_plan_awardlink_str()
-    onrreas_dimen = believer_plan_reasonunit_str()
-    onrprem_dimen = believer_plan_reason_premiseunit_str()
-    onrlabo_dimen = believer_plan_laborlink_str()
-    onrheal_dimen = believer_plan_healerlink_str()
-    onrfact_dimen = believer_plan_factunit_str()
-    beliefunit_dimen = beliefunit_str()
+    blrunit_dimen = believerunit_str()
+    blrpern_dimen = believer_personunit_str()
+    blrmemb_dimen = believer_person_membership_str()
+    blrgrou_dimen = believer_groupunit_str()
+    blrplan_dimen = believer_planunit_str()
+    blrawar_dimen = believer_plan_awardlink_str()
+    blrreas_dimen = believer_plan_reasonunit_str()
+    blrprem_dimen = believer_plan_reason_premiseunit_str()
+    blrlabo_dimen = believer_plan_laborlink_str()
+    blrheal_dimen = believer_plan_healerlink_str()
+    blrfact_dimen = believer_plan_factunit_str()
+    blfunit_dimen = beliefunit_str()
     blfpayy_dimen = belief_paybook_str()
     blfbudd_dimen = belief_budunit_str()
     blfhour_dimen = belief_timeline_hour_str()
@@ -113,20 +113,18 @@ def test_create_prime_tablename_ReturnsObj():
     del_str = "del"
 
     # WHEN
-    believerunit_s_agg_table = create_prime_tablename(
-        "believerunit", "s", agg_str, put_str
-    )
-    onracct_s_agg_table = create_prime_tablename("onracct", "s", agg_str, put_str)
-    onrmemb_s_agg_table = create_prime_tablename("onrmemb", "s", agg_str, put_str)
-    onrplan_s_agg_table = create_prime_tablename("onrplan", "s", agg_str, put_str)
-    onrawar_s_agg_table = create_prime_tablename("onrawar", "s", agg_str, put_str)
-    onrreas_s_agg_table = create_prime_tablename("onrreas", "s", agg_str, put_str)
-    onrprem_s_agg_table = create_prime_tablename("onrprem", "s", agg_str, put_str)
-    onrlabo_s_agg_table = create_prime_tablename("ONRLABO", "s", agg_str, put_str)
-    onrheal_s_agg_table = create_prime_tablename("onrheal", "s", agg_str, put_str)
-    onrfact_s_agg_table = create_prime_tablename("onrfact", "s", agg_str, put_str)
-    onrfact_s_del_table = create_prime_tablename("onrfact", "s", agg_str, del_str)
-    beliefunit_s_agg_table = create_prime_tablename("beliefunit", "s", agg_str)
+    blrunit_s_agg_table = create_prime_tablename("believerunit", "s", agg_str, put_str)
+    blrpern_s_agg_table = create_prime_tablename("blrpern", "s", agg_str, put_str)
+    blrmemb_s_agg_table = create_prime_tablename("blrmemb", "s", agg_str, put_str)
+    blrplan_s_agg_table = create_prime_tablename("blrplan", "s", agg_str, put_str)
+    blrawar_s_agg_table = create_prime_tablename("blrawar", "s", agg_str, put_str)
+    blrreas_s_agg_table = create_prime_tablename("blrreas", "s", agg_str, put_str)
+    blrprem_s_agg_table = create_prime_tablename("blrprem", "s", agg_str, put_str)
+    blrlabo_s_agg_table = create_prime_tablename("BLRLABO", "s", agg_str, put_str)
+    blrheal_s_agg_table = create_prime_tablename("blrheal", "s", agg_str, put_str)
+    blrfact_s_agg_table = create_prime_tablename("blrfact", "s", agg_str, put_str)
+    blrfact_s_del_table = create_prime_tablename("blrfact", "s", agg_str, del_str)
+    blfunit_s_agg_table = create_prime_tablename("blfunit", "s", agg_str)
     blfpayy_s_agg_table = create_prime_tablename("blfpayy", "s", agg_str)
     blfbudd_s_agg_table = create_prime_tablename("blfbudd", "s", agg_str)
     blfhour_s_agg_table = create_prime_tablename("blfhour", "s", agg_str)
@@ -142,23 +140,23 @@ def test_create_prime_tablename_ReturnsObj():
     pidtitl_s_val_table = create_prime_tablename("pidtitl", "s", vld_str)
     pidcore_s_raw_table = create_prime_tablename("pidcore", "s", raw_str)
     pidcore_s_agg_table = create_prime_tablename("pidcore", "s", agg_str)
-    onracct_job_table = create_prime_tablename("onracct", job_str(), None)
-    x_onracct_raw = create_prime_tablename("onracct", "k", raw_str)
-    onrgrou_job_table = create_prime_tablename("onrgrou", job_str(), None)
+    blrpern_job_table = create_prime_tablename("blrpern", job_str(), None)
+    x_blrpern_raw = create_prime_tablename("blrpern", "k", raw_str)
+    blrgrou_job_table = create_prime_tablename("blrgrou", job_str(), None)
 
     # THEN
-    assert believerunit_s_agg_table == f"{believerunit_dimen}_s_put_agg"
-    assert onracct_s_agg_table == f"{onracct_dimen}_s_put_agg"
-    assert onrmemb_s_agg_table == f"{onrmemb_dimen}_s_put_agg"
-    assert onrplan_s_agg_table == f"{onrplan_dimen}_s_put_agg"
-    assert onrawar_s_agg_table == f"{onrawar_dimen}_s_put_agg"
-    assert onrreas_s_agg_table == f"{onrreas_dimen}_s_put_agg"
-    assert onrprem_s_agg_table == f"{onrprem_dimen}_s_put_agg"
-    assert onrlabo_s_agg_table == f"{onrlabo_dimen}_s_put_agg"
-    assert onrheal_s_agg_table == f"{onrheal_dimen}_s_put_agg"
-    assert onrfact_s_agg_table == f"{onrfact_dimen}_s_put_agg"
-    assert onrfact_s_del_table == f"{onrfact_dimen}_s_del_agg"
-    assert beliefunit_s_agg_table == f"{beliefunit_dimen}_s_agg"
+    assert blrunit_s_agg_table == f"{blrunit_dimen}_s_put_agg"
+    assert blrpern_s_agg_table == f"{blrpern_dimen}_s_put_agg"
+    assert blrmemb_s_agg_table == f"{blrmemb_dimen}_s_put_agg"
+    assert blrplan_s_agg_table == f"{blrplan_dimen}_s_put_agg"
+    assert blrawar_s_agg_table == f"{blrawar_dimen}_s_put_agg"
+    assert blrreas_s_agg_table == f"{blrreas_dimen}_s_put_agg"
+    assert blrprem_s_agg_table == f"{blrprem_dimen}_s_put_agg"
+    assert blrlabo_s_agg_table == f"{blrlabo_dimen}_s_put_agg"
+    assert blrheal_s_agg_table == f"{blrheal_dimen}_s_put_agg"
+    assert blrfact_s_agg_table == f"{blrfact_dimen}_s_put_agg"
+    assert blrfact_s_del_table == f"{blrfact_dimen}_s_del_agg"
+    assert blfunit_s_agg_table == f"{blfunit_dimen}_s_agg"
     assert blfpayy_s_agg_table == f"{blfpayy_dimen}_s_agg"
     assert blfbudd_s_agg_table == f"{blfbudd_dimen}_s_agg"
     assert blfhour_s_agg_table == f"{blfhour_dimen}_s_agg"
@@ -174,9 +172,9 @@ def test_create_prime_tablename_ReturnsObj():
     assert pidtitl_s_val_table == f"{pidtitl_dimen}_s_vld"
     assert pidcore_s_raw_table == f"{pidcore_dimen}_s_raw"
     assert pidcore_s_agg_table == f"{pidcore_dimen}_s_agg"
-    assert onracct_job_table == f"{onracct_dimen}_job"
-    assert onrgrou_job_table == f"{onrgrou_dimen}_job"
-    assert x_onracct_raw == "believer_acctunit_raw"
+    assert blrpern_job_table == f"{blrpern_dimen}_job"
+    assert blrgrou_job_table == f"{blrgrou_dimen}_job"
+    assert x_blrpern_raw == "believer_personunit_raw"
 
 
 def test_create_all_idea_tables_CreatesBeliefRawTables():
@@ -425,12 +423,12 @@ ORDER BY {belief_label_str()}, {believer_name_str()}, {event_int_str()}, {bud_ti
     assert INSERT_BELIEF_OTE1_AGG_FROM_VOICE_SQLSTR == expected_INSERT_sqlstr
 
 
-def test_CREATE_BELIEF_ACCT_NETS_SQLSTR_Exists():
+def test_CREATE_BELIEF_PERSON_NETS_SQLSTR_Exists():
     # ESTABLISH
     sqlite_types = get_idea_sqlite_types()
     sqlite_types[believer_net_amount_str()] = "REAL"
     expected_create_table_sqlstr = get_create_table_sqlstr(
-        tablename=belief_acct_nets_str(),
+        tablename=belief_person_nets_str(),
         columns_list=[
             belief_label_str(),
             believer_name_str(),
@@ -440,4 +438,4 @@ def test_CREATE_BELIEF_ACCT_NETS_SQLSTR_Exists():
     )
 
     # WHEN / THEN
-    assert CREATE_BELIEF_ACCT_NETS_SQLSTR == expected_create_table_sqlstr
+    assert CREATE_BELIEF_PERSON_NETS_SQLSTR == expected_create_table_sqlstr

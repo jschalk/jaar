@@ -2,7 +2,7 @@ from pandas import DataFrame
 from src.a01_term_logic.rope import create_rope, default_knot_if_None, to_rope
 from src.a06_believer_logic.test._util.a06_str import (
     RopeTerm_str,
-    acct_name_str,
+    person_name_str,
     rcontext_str,
 )
 from src.a16_pidgin_logic.map import (
@@ -67,14 +67,14 @@ def get_suita_namemap() -> NameMap:
     xio_inx = "Xioita"
     sue_inx = "Suita"
     bob_inx = "Bobita"
-    acct_name_mapunit = namemap_shop(face_name="Sue")
-    acct_name_mapunit.set_otx2inx(xio_otx, xio_inx)
-    acct_name_mapunit.set_otx2inx(sue_otx, sue_inx)
-    acct_name_mapunit.set_otx2inx(bob_otx, bob_inx)
-    return acct_name_mapunit
+    person_name_mapunit = namemap_shop(face_name="Sue")
+    person_name_mapunit.set_otx2inx(xio_otx, xio_inx)
+    person_name_mapunit.set_otx2inx(sue_otx, sue_inx)
+    person_name_mapunit.set_otx2inx(bob_otx, bob_inx)
+    return person_name_mapunit
 
 
-# def get_invalid_acct_name_mapunit() -> MapUnit:
+# def get_invalid_person_name_mapunit() -> MapUnit:
 #     sue_otx = f"Xio{default_knot_if_None()}"
 #     sue_inx = "Sue"
 #     zia_otx = "Zia"
@@ -159,16 +159,16 @@ def get_slash_namemap() -> NameMap:
     xio_inx = "Xioita"
     sue_inx = "Suita"
     bob_inx = "Bobita"
-    acct_name_mapunit = namemap_shop(
+    person_name_mapunit = namemap_shop(
         otx_knot=slash_otx_knot,
         inx_knot=colon_inx_knot,
         unknown_str=x_unknown_str,
         face_name="Sue",
     )
-    acct_name_mapunit.set_otx2inx(xio_otx, xio_inx)
-    acct_name_mapunit.set_otx2inx(sue_otx, sue_inx)
-    acct_name_mapunit.set_otx2inx(bob_otx, bob_inx)
-    return acct_name_mapunit
+    person_name_mapunit.set_otx2inx(xio_otx, xio_inx)
+    person_name_mapunit.set_otx2inx(sue_otx, sue_inx)
+    person_name_mapunit.set_otx2inx(bob_otx, bob_inx)
+    return person_name_mapunit
 
 
 def get_sue_pidginunit() -> PidginUnit:
@@ -181,29 +181,29 @@ def get_sue_pidginunit() -> PidginUnit:
     return sue_pidginunit
 
 
-def get_suita_acct_name_otx_dt() -> DataFrame:
+def get_suita_person_name_otx_dt() -> DataFrame:
     xio_otx = "Xio"
     sue_otx = "Sue"
     bob_otx = "Bob"
     zia_otx = "Zia"
-    otx_dt = DataFrame(columns=[acct_name_str()])
-    otx_dt.loc[0, acct_name_str()] = zia_otx
-    otx_dt.loc[1, acct_name_str()] = sue_otx
-    otx_dt.loc[2, acct_name_str()] = bob_otx
-    otx_dt.loc[3, acct_name_str()] = xio_otx
+    otx_dt = DataFrame(columns=[person_name_str()])
+    otx_dt.loc[0, person_name_str()] = zia_otx
+    otx_dt.loc[1, person_name_str()] = sue_otx
+    otx_dt.loc[2, person_name_str()] = bob_otx
+    otx_dt.loc[3, person_name_str()] = xio_otx
     return otx_dt
 
 
-def get_suita_acct_name_inx_dt() -> DataFrame:
+def get_suita_person_name_inx_dt() -> DataFrame:
     xio_inx = "Xioita"
     sue_inx = "Suita"
     bob_inx = "Bobita"
     zia_otx = "Zia"
-    inx_dt = DataFrame(columns=[acct_name_str()])
-    inx_dt.loc[0, acct_name_str()] = xio_inx
-    inx_dt.loc[1, acct_name_str()] = sue_inx
-    inx_dt.loc[2, acct_name_str()] = bob_inx
-    inx_dt.loc[3, acct_name_str()] = zia_otx
+    inx_dt = DataFrame(columns=[person_name_str()])
+    inx_dt.loc[0, person_name_str()] = xio_inx
+    inx_dt.loc[1, person_name_str()] = sue_inx
+    inx_dt.loc[2, person_name_str()] = bob_inx
+    inx_dt.loc[3, person_name_str()] = zia_otx
     return inx_dt
 
 

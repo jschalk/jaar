@@ -2,25 +2,25 @@ from src.a03_group_logic.group import groupunit_shop
 from src.a06_believer_logic.believer import believerunit_shop
 
 
-def test_BelieverUnit_get_acctunit_group_titles_dict_ReturnsObj():
+def test_BelieverUnit_get_personunit_group_titles_dict_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
     zia_str = "Zia"
     bob_believer = believerunit_shop("Bob")
-    bob_believer.add_acctunit(yao_str)
-    bob_believer.add_acctunit(sue_str)
-    bob_believer.add_acctunit(zia_str)
-    sue_acctunit = bob_believer.get_acct(sue_str)
-    zia_acctunit = bob_believer.get_acct(zia_str)
+    bob_believer.add_personunit(yao_str)
+    bob_believer.add_personunit(sue_str)
+    bob_believer.add_personunit(zia_str)
+    sue_personunit = bob_believer.get_person(sue_str)
+    zia_personunit = bob_believer.get_person(zia_str)
     run_str = ";Run"
     swim_str = ";Swim"
-    sue_acctunit.add_membership(run_str)
-    zia_acctunit.add_membership(run_str)
-    zia_acctunit.add_membership(swim_str)
+    sue_personunit.add_membership(run_str)
+    zia_personunit.add_membership(run_str)
+    zia_personunit.add_membership(swim_str)
 
     # WHEN
-    group_titles_dict = bob_believer.get_acctunit_group_titles_dict()
+    group_titles_dict = bob_believer.get_personunit_group_titles_dict()
 
     # THEN
     print(f"{group_titles_dict=}")
@@ -95,8 +95,8 @@ def test_BelieverUnit_create_symmetry_groupunit_ReturnsObj():
     yao_group_debt_points = 2
     zia_group_cred_points = 4
     zia_group_debt_points = 5
-    yao_believer.add_acctunit(yao_str, yao_group_cred_points, yao_group_debt_points)
-    yao_believer.add_acctunit(zia_str, zia_group_cred_points, zia_group_debt_points)
+    yao_believer.add_personunit(yao_str, yao_group_cred_points, yao_group_debt_points)
+    yao_believer.add_personunit(zia_str, zia_group_cred_points, zia_group_debt_points)
 
     # WHEN
     xio_str = "Xio"

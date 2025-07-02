@@ -1,13 +1,7 @@
 {
     "attributes": {
-        "acct_name": {
+        "person_name": {
             "otx_key": true
-        },
-        "group_cred_points": {
-            "otx_key": false
-        },
-        "group_debt_points": {
-            "otx_key": false
         },
         "event_int": {
             "otx_key": true
@@ -18,18 +12,21 @@
         "belief_label": {
             "otx_key": true
         },
-        "group_title": {
+        "inx_name": {
+            "otx_key": false
+        },
+        "otx_name": {
             "otx_key": true
         },
         "believer_name": {
             "otx_key": true
         }
     },
-    "idea_number": "br00020",
+    "idea_number": "br00113",
     "dimens": [
-        "believer_acctunit",
-        "believer_acct_membership",
-        "believerunit",
-        "beliefunit"
+        "pidgin_name",
+        "believer_personunit",
+        "beliefunit",
+        "believerunit"
     ]
 }

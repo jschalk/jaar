@@ -1,7 +1,7 @@
 from src.a05_plan_logic.test._util.a05_str import (
     _active_hx_str,
-    _all_acct_cred_str,
-    _all_acct_debt_str,
+    _all_person_cred_str,
+    _all_person_debt_str,
     _awardheirs_str,
     _awardlines_str,
     _descendant_task_count_str,
@@ -37,8 +37,8 @@ from src.a05_plan_logic.test._util.a05_str import (
 
 def test_str_functions_ReturnsObj():
     assert _active_hx_str() == "_active_hx"
-    assert _all_acct_cred_str() == "_all_acct_cred"
-    assert _all_acct_debt_str() == "_all_acct_debt"
+    assert _all_person_cred_str() == "_all_person_cred"
+    assert _all_person_debt_str() == "_all_person_debt"
     assert _awardheirs_str() == "_awardheirs"
     assert _awardlines_str() == "_awardlines"
     assert _descendant_task_count_str() == "_descendant_task_count"

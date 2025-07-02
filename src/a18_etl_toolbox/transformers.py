@@ -88,8 +88,8 @@ from src.a18_etl_toolbox.db_obj_belief_tool import get_belief_dict_from_voice_ta
 from src.a18_etl_toolbox.db_obj_believer_tool import insert_job_obj
 from src.a18_etl_toolbox.idea_collector import IdeaFileRef, get_all_idea_dataframes
 from src.a18_etl_toolbox.tran_sqlstrs import (
-    CREATE_BELIEF_ACCT_NETS_SQLSTR,
     CREATE_BELIEF_OTE1_AGG_SQLSTR,
+    CREATE_BELIEF_PERSON_NETS_SQLSTR,
     INSERT_BELIEF_OTE1_AGG_FROM_VOICE_SQLSTR,
     create_insert_into_pidgin_core_raw_sqlstr,
     create_insert_missing_face_name_into_pidgin_core_vld_sqlstr,
@@ -894,7 +894,7 @@ def etl_belief_job_jsons_to_job_tables(cursor: sqlite3_Cursor, belief_mstr_dir: 
             insert_job_obj(cursor, job_obj)
 
 
-def insert_tranunit_accts_net(cursor: sqlite3_Cursor, tranbook: TranBook):
+def insert_tranunit_persons_net(cursor: sqlite3_Cursor, tranbook: TranBook):
     """
     Insert the net amounts for each account in the tranbook into the specified table.
 
@@ -902,19 +902,19 @@ def insert_tranunit_accts_net(cursor: sqlite3_Cursor, tranbook: TranBook):
     :param tranbook: TranBook object containing transaction units
     :param dst_tablename: Name of the destination table
     """
-    accts_net_array = tranbook._get_accts_net_array()
+    persons_net_array = tranbook._get_persons_net_array()
     cursor.executemany(
-        f"INSERT INTO belief_acct_nets (belief_label, believer_name, believer_net_amount) VALUES ('{tranbook.belief_label}', ?, ?)",
-        accts_net_array,
+        f"INSERT INTO belief_person_nets (belief_label, believer_name, believer_net_amount) VALUES ('{tranbook.belief_label}', ?, ?)",
+        persons_net_array,
     )
 
 
-def etl_belief_json_acct_nets_to_belief_acct_nets_table(
+def etl_belief_json_person_nets_to_belief_person_nets_table(
     cursor: sqlite3_Cursor, belief_mstr_dir: str
 ):
-    cursor.execute(CREATE_BELIEF_ACCT_NETS_SQLSTR)
+    cursor.execute(CREATE_BELIEF_PERSON_NETS_SQLSTR)
     beliefs_dir = create_path(belief_mstr_dir, "beliefs")
     for belief_label in get_level1_dirs(beliefs_dir):
         x_beliefunit = get_default_path_beliefunit(belief_mstr_dir, belief_label)
         x_beliefunit.set_all_tranbook()
-        insert_tranunit_accts_net(cursor, x_beliefunit._all_tranbook)
+        insert_tranunit_persons_net(cursor, x_beliefunit._all_tranbook)

@@ -1,13 +1,13 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import open_file, save_file
 from src.a06_believer_logic.test._util.a06_str import (
-    acct_cred_points_str,
-    acct_debt_points_str,
-    acct_name_str,
     belief_label_str,
-    believer_acctunit_str,
     believer_name_str,
+    believer_personunit_str,
     believerunit_str,
+    person_cred_points_str,
+    person_debt_points_str,
+    person_name_str,
 )
 from src.a08_believer_atom_logic.test._util.a08_str import INSERT_str
 from src.a09_pack_logic.pack import get_packunit_from_json, packunit_shop
@@ -75,8 +75,8 @@ def test_etl_event_believer_csvs_to_pack_json_CreatesFiles_Scenario1(
     credit88 = 88
     debt_empty = ""
     a23_str = "amy23"
-    onracct_str = believer_acctunit_str()
-    put_agg_tablename = create_prime_tablename(onracct_str, "v", "agg", "put")
+    blrpern_str = believer_personunit_str()
+    put_agg_tablename = create_prime_tablename(blrpern_str, "v", "agg", "put")
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
     belief_mstr_dir = get_module_temp_dir()
     # a23_bob_dir = create_path(a23_dir, bob_inx)
@@ -84,10 +84,10 @@ def test_etl_event_believer_csvs_to_pack_json_CreatesFiles_Scenario1(
     # a23_bob_e7_dir = create_path(a23_bob_dir, event7)
     a23_bob_e3_dir = believer_event_dir(belief_mstr_dir, a23_str, bob_inx, event3)
     a23_bob_e7_dir = believer_event_dir(belief_mstr_dir, a23_str, bob_inx, event7)
-    e3_put_csv = f"""{event_int_str()},{face_name_str()},{belief_label_str()},{believer_name_str()},{acct_name_str()},{acct_cred_points_str()},{acct_debt_points_str()}
+    e3_put_csv = f"""{event_int_str()},{face_name_str()},{belief_label_str()},{believer_name_str()},{person_name_str()},{person_cred_points_str()},{person_debt_points_str()}
 {event3},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debt_empty}
 """
-    e7_put_csv = f"""{event_int_str()},{face_name_str()},{belief_label_str()},{believer_name_str()},{acct_name_str()},{acct_cred_points_str()},{acct_debt_points_str()}
+    e7_put_csv = f"""{event_int_str()},{face_name_str()},{belief_label_str()},{believer_name_str()},{person_name_str()},{person_cred_points_str()},{person_debt_points_str()}
 {event7},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debt_empty}
 {event7},{sue_inx},{a23_str},{bob_inx},{sue_inx},{credit88},{debt_empty}
 """
@@ -116,24 +116,24 @@ def test_etl_event_believer_csvs_to_pack_json_CreatesFiles_Scenario1(
     # e7_pack = packunit_shop(bob_inx, sue_inx, a23_str, packs_dir, atoms_dir, event7)
     expected_e3_pack = packunit_shop(bob_inx, None, a23_str, event_int=event3)
     expected_e7_pack = packunit_shop(bob_inx, None, a23_str, event_int=event7)
-    onracct_dimen = believer_acctunit_str()
+    blrpern_dimen = believer_personunit_str()
     expected_e3_pack._believerdelta.add_believeratom(
-        onracct_dimen,
+        blrpern_dimen,
         INSERT_str(),
-        jkeys={acct_name_str(): bob_inx},
-        jvalues={acct_cred_points_str(): credit77, acct_debt_points_str(): None},
+        jkeys={person_name_str(): bob_inx},
+        jvalues={person_cred_points_str(): credit77, person_debt_points_str(): None},
     )
     expected_e7_pack._believerdelta.add_believeratom(
-        onracct_dimen,
+        blrpern_dimen,
         INSERT_str(),
-        jkeys={acct_name_str(): bob_inx},
-        jvalues={acct_cred_points_str(): credit77, acct_debt_points_str(): None},
+        jkeys={person_name_str(): bob_inx},
+        jvalues={person_cred_points_str(): credit77, person_debt_points_str(): None},
     )
     expected_e7_pack._believerdelta.add_believeratom(
-        onracct_dimen,
+        blrpern_dimen,
         INSERT_str(),
-        jkeys={acct_name_str(): sue_inx},
-        jvalues={acct_cred_points_str(): credit88, acct_debt_points_str(): None},
+        jkeys={person_name_str(): sue_inx},
+        jvalues={person_cred_points_str(): credit88, person_debt_points_str(): None},
     )
     e3_packunit = get_packunit_from_json(open_file(e3_all_pack_path))
     e7_packunit = get_packunit_from_json(open_file(e7_all_pack_path))
@@ -148,11 +148,11 @@ def test_etl_event_believer_csvs_to_pack_json_CreatesFiles_Scenario1(
     assert e3_packunit == expected_e3_pack
     e7_insert = e7_packunit._believerdelta.believeratoms.get("INSERT")
     expected_e7_insert = expected_e7_pack._believerdelta.believeratoms.get("INSERT")
-    # print(e7_insert.get("believer_acctunit").keys())
-    # print(expected_e7_insert.get("believer_acctunit").keys())
-    e7_onracct = e7_insert.get("believer_acctunit")
-    expected_e7_onracct = expected_e7_insert.get("believer_acctunit")
-    assert e7_onracct.keys() == expected_e7_onracct.keys()
+    # print(e7_insert.get("believer_personunit").keys())
+    # print(expected_e7_insert.get("believer_personunit").keys())
+    e7_blrpern = e7_insert.get("believer_personunit")
+    expected_e7_blrpern = expected_e7_insert.get("believer_personunit")
+    assert e7_blrpern.keys() == expected_e7_blrpern.keys()
     # print(f"{expected_e7_insert.keys()=}")
     assert e7_insert == expected_e7_insert
     assert e7_packunit._believerdelta == expected_e7_pack._believerdelta
