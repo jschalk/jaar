@@ -43,7 +43,7 @@
     "idea_number": "br00019",
     "dimens": [
         "beliefunit",
-        "planunit",
-        "plan_conceptunit"
+        "ownerunit",
+        "owner_conceptunit"
     ]
 }

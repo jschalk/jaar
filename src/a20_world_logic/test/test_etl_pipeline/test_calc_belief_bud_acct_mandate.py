@@ -5,13 +5,13 @@ from src.a00_data_toolbox.file_toolbox import (
     save_file,
     save_json,
 )
-from src.a06_plan_logic.plan import planunit_shop
+from src.a06_owner_logic.owner import ownerunit_shop
 from src.a12_hub_toolbox.hub_path import (
     create_belief_json_path,
     create_belief_ote1_json_path,
     create_belief_owners_dir_path,
     create_bud_acct_mandate_ledger_path as bud_mandate_path,
-    create_planevent_path,
+    create_ownerevent_path,
 )
 from src.a15_belief_logic.belief import (
     beliefunit_shop,
@@ -23,7 +23,7 @@ from src.a20_world_logic.test._util.a20_env import (
 )
 from src.a20_world_logic.test._util.example_worlds import (
     example_casa_clean_factunit,
-    get_bob_mop_with_reason_planunit_example,
+    get_bob_mop_with_reason_ownerunit_example,
 )
 from src.a20_world_logic.world import worldunit_shop
 
@@ -108,26 +108,26 @@ def test_WorldUnit_calc_belief_bud_acct_mandate_net_ledgers_Scenaro2_BudExists(
     event33 = 33
     event44 = 44
     event55 = 55
-    bob55_planevent = get_bob_mop_with_reason_planunit_example()
-    bob55_planevent.add_acctunit(sue_str, 1)
-    sue44_planevent = planunit_shop(sue_str, a23_str)
-    sue44_planevent.set_owner_name(sue_str)
-    sue44_planevent.add_acctunit(yao_str, 1)
-    yao44_planevent = get_bob_mop_with_reason_planunit_example()
-    yao44_planevent.set_owner_name(yao_str)
-    yao44_planevent.add_acctunit(zia_str, 1)
+    bob55_ownerevent = get_bob_mop_with_reason_ownerunit_example()
+    bob55_ownerevent.add_acctunit(sue_str, 1)
+    sue44_ownerevent = ownerunit_shop(sue_str, a23_str)
+    sue44_ownerevent.set_owner_name(sue_str)
+    sue44_ownerevent.add_acctunit(yao_str, 1)
+    yao44_ownerevent = get_bob_mop_with_reason_ownerunit_example()
+    yao44_ownerevent.set_owner_name(yao_str)
+    yao44_ownerevent.add_acctunit(zia_str, 1)
     clean_fact = example_casa_clean_factunit()
-    yao44_planevent.add_fact(clean_fact.fcontext, clean_fact.fstate)
-    zia33_planevent = get_bob_mop_with_reason_planunit_example()
-    zia33_planevent.set_owner_name(zia_str)
-    bob55_path = create_planevent_path(mstr_dir, a23_str, bob_str, event55)
-    sue44_path = create_planevent_path(mstr_dir, a23_str, sue_str, event44)
-    yao44_path = create_planevent_path(mstr_dir, a23_str, yao_str, event44)
-    zia33_path = create_planevent_path(mstr_dir, a23_str, zia_str, event33)
-    save_json(bob55_path, None, bob55_planevent.get_dict())
-    save_json(sue44_path, None, sue44_planevent.get_dict())
-    save_json(yao44_path, None, yao44_planevent.get_dict())
-    save_json(zia33_path, None, zia33_planevent.get_dict())
+    yao44_ownerevent.add_fact(clean_fact.fcontext, clean_fact.fstate)
+    zia33_ownerevent = get_bob_mop_with_reason_ownerunit_example()
+    zia33_ownerevent.set_owner_name(zia_str)
+    bob55_path = create_ownerevent_path(mstr_dir, a23_str, bob_str, event55)
+    sue44_path = create_ownerevent_path(mstr_dir, a23_str, sue_str, event44)
+    yao44_path = create_ownerevent_path(mstr_dir, a23_str, yao_str, event44)
+    zia33_path = create_ownerevent_path(mstr_dir, a23_str, zia_str, event33)
+    save_json(bob55_path, None, bob55_ownerevent.get_dict())
+    save_json(sue44_path, None, sue44_ownerevent.get_dict())
+    save_json(yao44_path, None, yao44_ownerevent.get_dict())
+    save_json(zia33_path, None, zia33_ownerevent.get_dict())
 
     # Create empty ote1 file
     a23_ote1_dict = {

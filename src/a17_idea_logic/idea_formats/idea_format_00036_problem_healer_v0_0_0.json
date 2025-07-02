@@ -28,8 +28,8 @@
     "idea_number": "br00036",
     "dimens": [
         "beliefunit",
-        "planunit",
-        "plan_conceptunit",
-        "plan_concept_healerlink"
+        "ownerunit",
+        "owner_conceptunit",
+        "owner_concept_healerlink"
     ]
 }

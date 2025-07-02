@@ -29,10 +29,10 @@ from src.a00_data_toolbox.file_toolbox import (
     save_json,
 )
 from src.a01_term_logic.term import EventInt, FaceName
-from src.a06_plan_logic.plan import PlanUnit, planunit_shop
-from src.a08_plan_atom_logic.atom import planatom_shop
-from src.a08_plan_atom_logic.atom_config import get_plan_dimens
-from src.a09_pack_logic.delta import get_minimal_plandelta
+from src.a06_owner_logic.owner import OwnerUnit, ownerunit_shop
+from src.a08_owner_atom_logic.atom import owneratom_shop
+from src.a08_owner_atom_logic.atom_config import get_owner_dimens
+from src.a09_pack_logic.delta import get_minimal_ownerdelta
 from src.a09_pack_logic.pack import PackUnit, get_packunit_from_json, packunit_shop
 from src.a11_bud_logic.bud import TranBook
 from src.a12_hub_toolbox.hub_path import (
@@ -42,13 +42,13 @@ from src.a12_hub_toolbox.hub_path import (
     create_event_all_pack_path,
     create_gut_path,
     create_owner_event_dir_path,
-    create_planevent_path,
+    create_ownerevent_path,
 )
 from src.a12_hub_toolbox.hub_tool import (
     collect_owner_event_dir_sets,
     get_owners_downhill_event_ints,
     open_job_file,
-    open_plan_file,
+    open_owner_file,
 )
 from src.a15_belief_logic.belief import get_default_path_beliefunit
 from src.a15_belief_logic.belief_cell import (
@@ -85,7 +85,7 @@ from src.a17_idea_logic.idea_db_tool import (
 )
 from src.a17_idea_logic.pidgin_toolbox import init_pidginunit_from_dir
 from src.a18_etl_toolbox.db_obj_belief_tool import get_belief_dict_from_voice_tables
-from src.a18_etl_toolbox.db_obj_plan_tool import insert_job_obj
+from src.a18_etl_toolbox.db_obj_owner_tool import insert_job_obj
 from src.a18_etl_toolbox.idea_collector import IdeaFileRef, get_all_idea_dataframes
 from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_BELIEF_ACCT_NETS_SQLSTR,
@@ -109,11 +109,11 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_update_pidtitl_sound_agg_knot_error_sqlstr,
     create_update_voice_raw_empty_inx_col_sqlstr,
     create_update_voice_raw_existing_inx_col_sqlstr,
-    get_belief_plan_sound_agg_tablenames,
+    get_belief_owner_sound_agg_tablenames,
     get_insert_into_sound_vld_sqlstrs,
     get_insert_into_voice_raw_sqlstrs,
     get_insert_voice_agg_sqlstrs,
-    get_plan_voice_agg_tablenames,
+    get_owner_voice_agg_tablenames,
 )
 
 
@@ -355,12 +355,12 @@ def get_sound_raw_tablenames(
     valid_columns = set(get_table_columns(cursor, brick_valid_tablename))
     s_raw_tables = set()
     for dimen in dimens:
-        if dimen.lower().startswith("plan"):
-            plan_del_tablename = create_prime_tablename(dimen, "s", "raw", "del")
-            plan_del_columns = get_table_columns(cursor, plan_del_tablename)
-            delete_key = plan_del_columns[-1]
+        if dimen.lower().startswith("owner"):
+            owner_del_tablename = create_prime_tablename(dimen, "s", "raw", "del")
+            owner_del_columns = get_table_columns(cursor, owner_del_tablename)
+            delete_key = owner_del_columns[-1]
             if delete_key in valid_columns:
-                s_raw_tables.add(plan_del_tablename)
+                s_raw_tables.add(owner_del_tablename)
             else:
                 s_raw_tables.add(create_prime_tablename(dimen, "s", "raw", "put"))
         else:
@@ -421,7 +421,7 @@ def update_inconsistency_pidgin_core_raw_table(cursor: sqlite3_Cursor):
         focus_columns={"face_name"},
         exclude_columns={"source_dimen"},
         error_holder_column="error_message",
-        error_explanation="Inconsistent data",
+        error_str="Inconsistent data",
     )
 
     cursor.execute(sqlstr)
@@ -457,7 +457,7 @@ def insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor: sqlite3_Cur
         cursor.execute(create_insert_pidgin_sound_vld_table_sqlstr(dimen))
 
 
-def set_belief_plan_sound_agg_knot_errors(cursor: sqlite3_Cursor):
+def set_belief_owner_sound_agg_knot_errors(cursor: sqlite3_Cursor):
     pidgin_label_args = get_pidgin_LabelTerm_args()
     pidgin_name_args = get_pidgin_NameTerm_args()
     pidgin_title_args = get_pidgin_TitleTerm_args()
@@ -466,7 +466,7 @@ def set_belief_plan_sound_agg_knot_errors(cursor: sqlite3_Cursor):
     pidgin_args.update(pidgin_name_args)
     pidgin_args.update(pidgin_title_args)
     pidgin_args.update(pidgin_rope_args)
-    pidginable_tuples = get_belief_plan_sound_agg_pidginable_columns(
+    pidginable_tuples = get_belief_owner_sound_agg_pidginable_columns(
         cursor, pidgin_args
     )
     for voice_raw_tablename, pidginable_columnname in pidginable_tuples:
@@ -483,7 +483,7 @@ def set_belief_plan_sound_agg_knot_errors(cursor: sqlite3_Cursor):
             cursor.execute(error_update_sqlstr)
 
 
-def get_belief_plan_sound_agg_pidginable_columns(
+def get_belief_owner_sound_agg_pidginable_columns(
     cursor: sqlite3_Cursor, pidgin_args: set[str]
 ) -> set[tuple[str, str]]:
     pidgin_columns = set()
@@ -497,11 +497,11 @@ def get_belief_plan_sound_agg_pidginable_columns(
 
 
 def populate_pidgin_core_vld_with_missing_face_names(cursor: sqlite3_Cursor):
-    for agg_tablename in get_belief_plan_sound_agg_tablenames():
+    for agg_tablename in get_belief_owner_sound_agg_tablenames():
         insert_sqlstr = create_insert_missing_face_name_into_pidgin_core_vld_sqlstr(
             default_knot=default_knot_if_None(),
             default_unknown=default_unknown_str_if_None(),
-            belief_plan_sound_agg_tablename=agg_tablename,
+            belief_owner_sound_agg_tablename=agg_tablename,
         )
         cursor.execute(insert_sqlstr)
 
@@ -722,15 +722,15 @@ def etl_create_bud_mandate_ledgers(belief_mstr_dir: str):
         create_bud_mandate_ledgers(belief_mstr_dir, belief_label)
 
 
-def etl_voice_agg_to_event_plan_csvs(
+def etl_voice_agg_to_event_owner_csvs(
     conn_or_cursor: sqlite3_Connection, belief_mstr_dir: str
 ):
     beliefs_dir = create_path(belief_mstr_dir, "beliefs")
-    for plan_table in get_plan_voice_agg_tablenames():
-        if get_row_count(conn_or_cursor, plan_table) > 0:
+    for owner_table in get_owner_voice_agg_tablenames():
+        if get_row_count(conn_or_cursor, owner_table) > 0:
             save_to_split_csvs(
                 conn_or_cursor=conn_or_cursor,
-                tablename=plan_table,
+                tablename=owner_table,
                 key_columns=["belief_label", "owner_name", "event_int"],
                 dst_dir=beliefs_dir,
                 col1_prefix="owners",
@@ -738,7 +738,7 @@ def etl_voice_agg_to_event_plan_csvs(
             )
 
 
-def etl_event_plan_csvs_to_pack_json(belief_mstr_dir: str):
+def etl_event_owner_csvs_to_pack_json(belief_mstr_dir: str):
     beliefs_dir = create_path(belief_mstr_dir, "beliefs")
     for belief_label in get_level1_dirs(beliefs_dir):
         belief_path = create_path(beliefs_dir, belief_label)
@@ -754,29 +754,33 @@ def etl_event_plan_csvs_to_pack_json(belief_mstr_dir: str):
                     event_int=event_int,
                 )
                 event_dir = create_path(events_path, event_int)
-                add_planatoms_from_csv(event_pack, event_dir)
+                add_owneratoms_from_csv(event_pack, event_dir)
                 event_all_pack_path = create_event_all_pack_path(
                     belief_mstr_dir, belief_label, owner_name, event_int
                 )
                 save_file(event_all_pack_path, None, event_pack.get_json())
 
 
-def add_planatoms_from_csv(event_pack: PackUnit, event_dir: str):
+def add_owneratoms_from_csv(event_pack: PackUnit, event_dir: str):
     idea_sqlite_types = get_idea_sqlite_types()
-    plan_dimens = get_plan_dimens()
-    plan_dimens.remove("planunit")
-    for plan_dimen in plan_dimens:
-        plan_dimen_put_tablename = create_prime_tablename(plan_dimen, "v", "agg", "put")
-        plan_dimen_del_tablename = create_prime_tablename(plan_dimen, "v", "agg", "del")
-        plan_dimen_put_csv = f"{plan_dimen_put_tablename}.csv"
-        plan_dimen_del_csv = f"{plan_dimen_del_tablename}.csv"
-        put_path = create_path(event_dir, plan_dimen_put_csv)
-        del_path = create_path(event_dir, plan_dimen_del_csv)
+    owner_dimens = get_owner_dimens()
+    owner_dimens.remove("ownerunit")
+    for owner_dimen in owner_dimens:
+        owner_dimen_put_tablename = create_prime_tablename(
+            owner_dimen, "v", "agg", "put"
+        )
+        owner_dimen_del_tablename = create_prime_tablename(
+            owner_dimen, "v", "agg", "del"
+        )
+        owner_dimen_put_csv = f"{owner_dimen_put_tablename}.csv"
+        owner_dimen_del_csv = f"{owner_dimen_del_tablename}.csv"
+        put_path = create_path(event_dir, owner_dimen_put_csv)
+        del_path = create_path(event_dir, owner_dimen_del_csv)
         if os_path_exists(put_path):
             put_rows = open_csv_with_types(put_path, idea_sqlite_types)
             headers = put_rows.pop(0)
             for put_row in put_rows:
-                x_atom = planatom_shop(plan_dimen, "INSERT")
+                x_atom = owneratom_shop(owner_dimen, "INSERT")
                 for col_name, row_value in zip(headers, put_row):
                     if col_name not in {
                         "face_name",
@@ -785,13 +789,13 @@ def add_planatoms_from_csv(event_pack: PackUnit, event_dir: str):
                         "owner_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
-                event_pack._plandelta.set_planatom(x_atom)
+                event_pack._ownerdelta.set_owneratom(x_atom)
 
         if os_path_exists(del_path):
             del_rows = open_csv_with_types(del_path, idea_sqlite_types)
             headers = del_rows.pop(0)
             for del_row in del_rows:
-                x_atom = planatom_shop(plan_dimen, "DELETE")
+                x_atom = owneratom_shop(owner_dimen, "DELETE")
                 for col_name, row_value in zip(headers, del_row):
                     if col_name not in {
                         "face_name",
@@ -800,10 +804,10 @@ def add_planatoms_from_csv(event_pack: PackUnit, event_dir: str):
                         "owner_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
-                event_pack._plandelta.set_planatom(x_atom)
+                event_pack._ownerdelta.set_owneratom(x_atom)
 
 
-def etl_event_pack_json_to_event_inherited_planunits(belief_mstr_dir: str):
+def etl_event_pack_json_to_event_inherited_ownerunits(belief_mstr_dir: str):
     beliefs_dir = create_path(belief_mstr_dir, "beliefs")
     for belief_label in get_level1_dirs(beliefs_dir):
         belief_path = create_path(beliefs_dir, belief_label)
@@ -813,10 +817,10 @@ def etl_event_pack_json_to_event_inherited_planunits(belief_mstr_dir: str):
             events_dir = create_path(owner_dir, "events")
             prev_event_int = None
             for event_int in get_level1_dirs(events_dir):
-                prev_plan = _get_prev_event_int_planunit(
+                prev_owner = _get_prev_event_int_ownerunit(
                     belief_mstr_dir, belief_label, owner_name, prev_event_int
                 )
-                planevent_path = create_planevent_path(
+                ownerevent_path = create_ownerevent_path(
                     belief_mstr_dir, belief_label, owner_name, event_int
                 )
                 event_dir = create_owner_event_dir_path(
@@ -827,38 +831,38 @@ def etl_event_pack_json_to_event_inherited_planunits(belief_mstr_dir: str):
                     belief_mstr_dir, belief_label, owner_name, event_int
                 )
                 event_pack = get_packunit_from_json(open_file(event_all_pack_path))
-                sift_delta = get_minimal_plandelta(event_pack._plandelta, prev_plan)
-                curr_plan = event_pack.get_edited_plan(prev_plan)
-                save_file(planevent_path, None, curr_plan.get_json())
+                sift_delta = get_minimal_ownerdelta(event_pack._ownerdelta, prev_owner)
+                curr_owner = event_pack.get_edited_owner(prev_owner)
+                save_file(ownerevent_path, None, curr_owner.get_json())
                 expressed_pack = copy_deepcopy(event_pack)
-                expressed_pack.set_plandelta(sift_delta)
+                expressed_pack.set_ownerdelta(sift_delta)
                 save_file(event_dir, "expressed_pack.json", expressed_pack.get_json())
                 prev_event_int = event_int
 
 
-def _get_prev_event_int_planunit(
+def _get_prev_event_int_ownerunit(
     belief_mstr_dir, belief_label, owner_name, prev_event_int
-) -> PlanUnit:
+) -> OwnerUnit:
     if prev_event_int is None:
-        return planunit_shop(owner_name, belief_label)
-    prev_planevent_path = create_planevent_path(
+        return ownerunit_shop(owner_name, belief_label)
+    prev_ownerevent_path = create_ownerevent_path(
         belief_mstr_dir, belief_label, owner_name, prev_event_int
     )
-    return open_plan_file(prev_planevent_path)
+    return open_owner_file(prev_ownerevent_path)
 
 
-def etl_event_inherited_planunits_to_belief_gut(belief_mstr_dir: str):
+def etl_event_inherited_ownerunits_to_belief_gut(belief_mstr_dir: str):
     beliefs_dir = create_path(belief_mstr_dir, "beliefs")
     for belief_label in get_level1_dirs(beliefs_dir):
         owner_events = collect_owner_event_dir_sets(belief_mstr_dir, belief_label)
         owners_max_event_int_dict = get_owners_downhill_event_ints(owner_events)
         for owner_name, max_event_int in owners_max_event_int_dict.items():
-            max_planevent_path = create_planevent_path(
+            max_ownerevent_path = create_ownerevent_path(
                 belief_mstr_dir, belief_label, owner_name, max_event_int
             )
-            max_event_plan_json = open_file(max_planevent_path)
+            max_event_owner_json = open_file(max_ownerevent_path)
             gut_path = create_gut_path(belief_mstr_dir, belief_label, owner_name)
-            save_file(gut_path, None, max_event_plan_json)
+            save_file(gut_path, None, max_event_owner_json)
 
 
 def add_belief_timeline_to_guts(belief_mstr_dir: str):

@@ -58,14 +58,14 @@ class LaborHeir:
         return self._laborlinks == set()
 
     def set_owner_name_labor(
-        self, groupunits: dict[GroupTitle, GroupUnit], plan_owner_name: AcctName
+        self, groupunits: dict[GroupTitle, GroupUnit], owner_owner_name: AcctName
     ):
         self._owner_name_labor = self.get_owner_name_labor_bool(
-            groupunits, plan_owner_name
+            groupunits, owner_owner_name
         )
 
     def get_owner_name_labor_bool(
-        self, groupunits: dict[GroupTitle, GroupUnit], plan_owner_name: AcctName
+        self, groupunits: dict[GroupTitle, GroupUnit], owner_owner_name: AcctName
     ) -> bool:
         if self._laborlinks == set():
             return True
@@ -73,7 +73,7 @@ class LaborHeir:
         for x_labor_title, x_groupunit in groupunits.items():
             if x_labor_title in self._laborlinks:
                 for x_acct_name in x_groupunit._memberships.keys():
-                    if x_acct_name == plan_owner_name:
+                    if x_acct_name == owner_owner_name:
                         return True
         return False
 

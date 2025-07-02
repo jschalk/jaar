@@ -1,79 +1,79 @@
-from src.a06_plan_logic.plan import planunit_shop
-from src.a06_plan_logic.test._util.a06_str import (
+from src.a06_owner_logic.owner import ownerunit_shop
+from src.a06_owner_logic.test._util.a06_str import (
     acct_name_str,
     group_title_str,
-    plan_acct_membership_str,
-    plan_acctunit_str,
+    owner_acct_membership_str,
+    owner_acctunit_str,
 )
-from src.a08_plan_atom_logic.atom import planatom_shop
-from src.a08_plan_atom_logic.test._util.a08_str import INSERT_str
-from src.a09_pack_logic.delta import get_minimal_plandelta, plandelta_shop
+from src.a08_owner_atom_logic.atom import owneratom_shop
+from src.a08_owner_atom_logic.test._util.a08_str import INSERT_str
+from src.a09_pack_logic.delta import get_minimal_ownerdelta, ownerdelta_shop
 
 
-def test_get_minimal_plandelta_ReturnsObjWithoutUnecessaryINSERT_plan_acctunit():
+def test_get_minimal_ownerdelta_ReturnsObjWithoutUnecessaryINSERT_owner_acctunit():
     # ESTABLISH
     bob_str = "Bob"
     yao_str = "Yao"
     zia_str = "Zia"
-    sue_plan = planunit_shop("Sue")
-    sue_plan.add_acctunit(yao_str)
-    sue_plan.add_acctunit(bob_str)
+    sue_owner = ownerunit_shop("Sue")
+    sue_owner.add_acctunit(yao_str)
+    sue_owner.add_acctunit(bob_str)
 
-    accts_plandelta = plandelta_shop()
-    bob_atom = planatom_shop(plan_acctunit_str(), INSERT_str())
+    accts_ownerdelta = ownerdelta_shop()
+    bob_atom = owneratom_shop(owner_acctunit_str(), INSERT_str())
     bob_atom.set_arg(acct_name_str(), bob_str)
-    yao_atom = planatom_shop(plan_acctunit_str(), INSERT_str())
+    yao_atom = owneratom_shop(owner_acctunit_str(), INSERT_str())
     yao_atom.set_arg(acct_name_str(), yao_str)
-    zia_atom = planatom_shop(plan_acctunit_str(), INSERT_str())
+    zia_atom = owneratom_shop(owner_acctunit_str(), INSERT_str())
     zia_atom.set_arg(acct_name_str(), zia_str)
-    accts_plandelta.set_planatom(bob_atom)
-    accts_plandelta.set_planatom(yao_atom)
-    accts_plandelta.set_planatom(zia_atom)
-    assert len(accts_plandelta.get_sorted_planatoms()) == 3
-    assert len(sue_plan.accts) == 2
+    accts_ownerdelta.set_owneratom(bob_atom)
+    accts_ownerdelta.set_owneratom(yao_atom)
+    accts_ownerdelta.set_owneratom(zia_atom)
+    assert len(accts_ownerdelta.get_sorted_owneratoms()) == 3
+    assert len(sue_owner.accts) == 2
 
     # WHEN
-    new_plandelta = get_minimal_plandelta(accts_plandelta, sue_plan)
+    new_ownerdelta = get_minimal_ownerdelta(accts_ownerdelta, sue_owner)
 
     # THEN
-    assert len(new_plandelta.get_sorted_planatoms()) == 1
+    assert len(new_ownerdelta.get_sorted_owneratoms()) == 1
 
 
-def test_sift_ReturnsObjWithoutUnecessaryINSERT_plan_acct_membership():
+def test_sift_ReturnsObjWithoutUnecessaryINSERT_owner_acct_membership():
     # ESTABLISH
     bob_str = "Bob"
     yao_str = "Yao"
     zia_str = "Zia"
-    sue_plan = planunit_shop("Sue")
-    sue_plan.add_acctunit(yao_str)
-    sue_plan.add_acctunit(bob_str)
-    yao_acctunit = sue_plan.get_acct(yao_str)
+    sue_owner = ownerunit_shop("Sue")
+    sue_owner.add_acctunit(yao_str)
+    sue_owner.add_acctunit(bob_str)
+    yao_acctunit = sue_owner.get_acct(yao_str)
     run_str = ";run"
     run_str = ";run"
     yao_acctunit.add_membership(run_str)
     print(f"{yao_acctunit._memberships.keys()=}")
 
-    accts_plandelta = plandelta_shop()
-    bob_run_atom = planatom_shop(plan_acct_membership_str(), INSERT_str())
+    accts_ownerdelta = ownerdelta_shop()
+    bob_run_atom = owneratom_shop(owner_acct_membership_str(), INSERT_str())
     bob_run_atom.set_arg(acct_name_str(), bob_str)
     bob_run_atom.set_arg(group_title_str(), run_str)
-    yao_run_atom = planatom_shop(plan_acct_membership_str(), INSERT_str())
+    yao_run_atom = owneratom_shop(owner_acct_membership_str(), INSERT_str())
     yao_run_atom.set_arg(acct_name_str(), yao_str)
     yao_run_atom.set_arg(group_title_str(), run_str)
-    zia_run_atom = planatom_shop(plan_acct_membership_str(), INSERT_str())
+    zia_run_atom = owneratom_shop(owner_acct_membership_str(), INSERT_str())
     zia_run_atom.set_arg(acct_name_str(), zia_str)
     zia_run_atom.set_arg(group_title_str(), run_str)
-    accts_plandelta.set_planatom(bob_run_atom)
-    accts_plandelta.set_planatom(yao_run_atom)
-    accts_plandelta.set_planatom(zia_run_atom)
-    print(f"{len(accts_plandelta.get_dimen_sorted_planatoms_list())=}")
-    assert len(accts_plandelta.get_dimen_sorted_planatoms_list()) == 3
+    accts_ownerdelta.set_owneratom(bob_run_atom)
+    accts_ownerdelta.set_owneratom(yao_run_atom)
+    accts_ownerdelta.set_owneratom(zia_run_atom)
+    print(f"{len(accts_ownerdelta.get_dimen_sorted_owneratoms_list())=}")
+    assert len(accts_ownerdelta.get_dimen_sorted_owneratoms_list()) == 3
 
     # WHEN
-    new_plandelta = get_minimal_plandelta(accts_plandelta, sue_plan)
+    new_ownerdelta = get_minimal_ownerdelta(accts_ownerdelta, sue_owner)
 
     # THEN
-    assert len(new_plandelta.get_dimen_sorted_planatoms_list()) == 2
+    assert len(new_ownerdelta.get_dimen_sorted_owneratoms_list()) == 2
 
 
 # all atom dimens are covered by "sift_atom" tests

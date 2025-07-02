@@ -1,184 +1,190 @@
 from src.a00_data_toolbox.dict_toolbox import get_from_nested_dict
-from src.a06_plan_logic.plan import PlanUnit
-from src.a08_plan_atom_logic.atom import PlanAtom
-from src.a09_pack_logic.delta import PlanDelta
+from src.a06_owner_logic.owner import OwnerUnit
+from src.a08_owner_atom_logic.atom import OwnerAtom
+from src.a09_pack_logic.delta import OwnerDelta
 
 
 def get_leg_obj(x_dict: dict, x_keylist) -> any:
     return get_from_nested_dict(x_dict, x_keylist, if_missing_return_None=True)
 
 
-def create_legible_list(x_delta: PlanDelta, x_plan: PlanUnit) -> list[str]:
-    atoms_dict = x_delta.planatoms
-    planunit_atom = get_leg_obj(atoms_dict, ["UPDATE", "planunit"])
+def create_legible_list(x_delta: OwnerDelta, x_owner: OwnerUnit) -> list[str]:
+    atoms_dict = x_delta.owneratoms
+    ownerunit_atom = get_leg_obj(atoms_dict, ["UPDATE", "ownerunit"])
 
-    acctunit_insert_dict = get_leg_obj(atoms_dict, ["INSERT", "plan_acctunit"])
-    acctunit_update_dict = get_leg_obj(atoms_dict, ["UPDATE", "plan_acctunit"])
-    acctunit_delete_dict = get_leg_obj(atoms_dict, ["DELETE", "plan_acctunit"])
+    acctunit_insert_dict = get_leg_obj(atoms_dict, ["INSERT", "owner_acctunit"])
+    acctunit_update_dict = get_leg_obj(atoms_dict, ["UPDATE", "owner_acctunit"])
+    acctunit_delete_dict = get_leg_obj(atoms_dict, ["DELETE", "owner_acctunit"])
 
-    x_list = ["INSERT", "plan_acct_membership"]
+    x_list = ["INSERT", "owner_acct_membership"]
     acct_membership_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "plan_acct_membership"]
+    x_list = ["UPDATE", "owner_acct_membership"]
     acct_membership_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "plan_acct_membership"]
+    x_list = ["DELETE", "owner_acct_membership"]
     acct_membership_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "plan_conceptunit"]
-    plan_conceptunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "plan_conceptunit"]
-    plan_conceptunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "plan_conceptunit"]
-    plan_conceptunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "owner_conceptunit"]
+    owner_conceptunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "owner_conceptunit"]
+    owner_conceptunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "owner_conceptunit"]
+    owner_conceptunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "plan_concept_awardlink"]
-    plan_concept_awardlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "plan_concept_awardlink"]
-    plan_concept_awardlink_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "plan_concept_awardlink"]
-    plan_concept_awardlink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "owner_concept_awardlink"]
+    owner_concept_awardlink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "owner_concept_awardlink"]
+    owner_concept_awardlink_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "owner_concept_awardlink"]
+    owner_concept_awardlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "plan_concept_reasonunit"]
-    plan_concept_reasonunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "plan_concept_reasonunit"]
-    plan_concept_reasonunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "plan_concept_reasonunit"]
-    plan_concept_reasonunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "owner_concept_reasonunit"]
+    owner_concept_reasonunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "owner_concept_reasonunit"]
+    owner_concept_reasonunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "owner_concept_reasonunit"]
+    owner_concept_reasonunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "plan_concept_reason_premiseunit"]
-    plan_concept_reason_premiseunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "plan_concept_reason_premiseunit"]
-    plan_concept_reason_premiseunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "plan_concept_reason_premiseunit"]
-    plan_concept_reason_premiseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "owner_concept_reason_premiseunit"]
+    owner_concept_reason_premiseunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "owner_concept_reason_premiseunit"]
+    owner_concept_reason_premiseunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "owner_concept_reason_premiseunit"]
+    owner_concept_reason_premiseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "plan_concept_laborlink"]
-    plan_concept_laborlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "plan_concept_laborlink"]
-    plan_concept_laborlink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "owner_concept_laborlink"]
+    owner_concept_laborlink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "owner_concept_laborlink"]
+    owner_concept_laborlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "plan_concept_healerlink"]
-    plan_concept_healerlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "plan_concept_healerlink"]
-    plan_concept_healerlink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "owner_concept_healerlink"]
+    owner_concept_healerlink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "owner_concept_healerlink"]
+    owner_concept_healerlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "plan_concept_factunit"]
-    plan_concept_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "plan_concept_factunit"]
-    plan_concept_factunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "plan_concept_factunit"]
-    plan_concept_factunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "owner_concept_factunit"]
+    owner_concept_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "owner_concept_factunit"]
+    owner_concept_factunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "owner_concept_factunit"]
+    owner_concept_factunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     leg_list = []
-    if planunit_atom is not None:
-        add_planunit_legible_list(leg_list, planunit_atom, x_plan)
+    if ownerunit_atom is not None:
+        add_ownerunit_legible_list(leg_list, ownerunit_atom, x_owner)
     if acctunit_insert_dict is not None:
-        add_plan_acctunit_insert_to_legible_list(leg_list, acctunit_insert_dict, x_plan)
+        add_owner_acctunit_insert_to_legible_list(
+            leg_list, acctunit_insert_dict, x_owner
+        )
     if acctunit_update_dict is not None:
-        add_plan_acctunit_update_to_legible_list(leg_list, acctunit_update_dict, x_plan)
+        add_owner_acctunit_update_to_legible_list(
+            leg_list, acctunit_update_dict, x_owner
+        )
     if acctunit_delete_dict is not None:
-        add_plan_acctunit_delete_to_legible_list(leg_list, acctunit_delete_dict, x_plan)
+        add_owner_acctunit_delete_to_legible_list(
+            leg_list, acctunit_delete_dict, x_owner
+        )
 
     if acct_membership_insert_dict is not None:
-        add_plan_acct_membership_insert_to_legible_list(
-            leg_list, acct_membership_insert_dict, x_plan
+        add_owner_acct_membership_insert_to_legible_list(
+            leg_list, acct_membership_insert_dict, x_owner
         )
     if acct_membership_update_dict is not None:
-        add_plan_acct_membership_update_to_legible_list(
-            leg_list, acct_membership_update_dict, x_plan
+        add_owner_acct_membership_update_to_legible_list(
+            leg_list, acct_membership_update_dict, x_owner
         )
     if acct_membership_delete_dict is not None:
-        add_plan_acct_membership_delete_to_legible_list(
-            leg_list, acct_membership_delete_dict, x_plan
+        add_owner_acct_membership_delete_to_legible_list(
+            leg_list, acct_membership_delete_dict, x_owner
         )
 
-    if plan_conceptunit_insert_dict is not None:
-        add_plan_conceptunit_insert_to_legible_list(
-            leg_list, plan_conceptunit_insert_dict, x_plan
+    if owner_conceptunit_insert_dict is not None:
+        add_owner_conceptunit_insert_to_legible_list(
+            leg_list, owner_conceptunit_insert_dict, x_owner
         )
-    if plan_conceptunit_update_dict is not None:
-        add_plan_conceptunit_update_to_legible_list(
-            leg_list, plan_conceptunit_update_dict, x_plan
+    if owner_conceptunit_update_dict is not None:
+        add_owner_conceptunit_update_to_legible_list(
+            leg_list, owner_conceptunit_update_dict, x_owner
         )
-    if plan_conceptunit_delete_dict is not None:
-        add_plan_conceptunit_delete_to_legible_list(
-            leg_list, plan_conceptunit_delete_dict, x_plan
-        )
-
-    if plan_concept_awardlink_insert_dict is not None:
-        add_plan_concept_awardlink_insert_to_legible_list(
-            leg_list, plan_concept_awardlink_insert_dict, x_plan
-        )
-    if plan_concept_awardlink_update_dict is not None:
-        add_plan_concept_awardlink_update_to_legible_list(
-            leg_list, plan_concept_awardlink_update_dict, x_plan
-        )
-    if plan_concept_awardlink_delete_dict is not None:
-        add_plan_concept_awardlink_delete_to_legible_list(
-            leg_list, plan_concept_awardlink_delete_dict, x_plan
+    if owner_conceptunit_delete_dict is not None:
+        add_owner_conceptunit_delete_to_legible_list(
+            leg_list, owner_conceptunit_delete_dict, x_owner
         )
 
-    if plan_concept_reasonunit_insert_dict is not None:
-        add_plan_concept_reasonunit_insert_to_legible_list(
-            leg_list, plan_concept_reasonunit_insert_dict, x_plan
+    if owner_concept_awardlink_insert_dict is not None:
+        add_owner_concept_awardlink_insert_to_legible_list(
+            leg_list, owner_concept_awardlink_insert_dict, x_owner
         )
-    if plan_concept_reasonunit_update_dict is not None:
-        add_plan_concept_reasonunit_update_to_legible_list(
-            leg_list, plan_concept_reasonunit_update_dict, x_plan
+    if owner_concept_awardlink_update_dict is not None:
+        add_owner_concept_awardlink_update_to_legible_list(
+            leg_list, owner_concept_awardlink_update_dict, x_owner
         )
-    if plan_concept_reasonunit_delete_dict is not None:
-        add_plan_concept_reasonunit_delete_to_legible_list(
-            leg_list, plan_concept_reasonunit_delete_dict, x_plan
-        )
-
-    if plan_concept_reason_premiseunit_insert_dict is not None:
-        add_plan_reason_premiseunit_insert_to_legible_list(
-            leg_list, plan_concept_reason_premiseunit_insert_dict, x_plan
-        )
-    if plan_concept_reason_premiseunit_update_dict is not None:
-        add_plan_reason_premiseunit_update_to_legible_list(
-            leg_list, plan_concept_reason_premiseunit_update_dict, x_plan
-        )
-    if plan_concept_reason_premiseunit_delete_dict is not None:
-        add_plan_reason_premiseunit_delete_to_legible_list(
-            leg_list, plan_concept_reason_premiseunit_delete_dict, x_plan
+    if owner_concept_awardlink_delete_dict is not None:
+        add_owner_concept_awardlink_delete_to_legible_list(
+            leg_list, owner_concept_awardlink_delete_dict, x_owner
         )
 
-    if plan_concept_laborlink_insert_dict is not None:
-        add_plan_concept_laborlink_insert_to_legible_list(
-            leg_list, plan_concept_laborlink_insert_dict, x_plan
+    if owner_concept_reasonunit_insert_dict is not None:
+        add_owner_concept_reasonunit_insert_to_legible_list(
+            leg_list, owner_concept_reasonunit_insert_dict, x_owner
         )
-    if plan_concept_laborlink_delete_dict is not None:
-        add_plan_concept_laborlink_delete_to_legible_list(
-            leg_list, plan_concept_laborlink_delete_dict, x_plan
+    if owner_concept_reasonunit_update_dict is not None:
+        add_owner_concept_reasonunit_update_to_legible_list(
+            leg_list, owner_concept_reasonunit_update_dict, x_owner
         )
-
-    if plan_concept_healerlink_insert_dict is not None:
-        add_plan_concept_healerlink_insert_to_legible_list(
-            leg_list, plan_concept_healerlink_insert_dict, x_plan
-        )
-    if plan_concept_healerlink_delete_dict is not None:
-        add_plan_concept_healerlink_delete_to_legible_list(
-            leg_list, plan_concept_healerlink_delete_dict, x_plan
+    if owner_concept_reasonunit_delete_dict is not None:
+        add_owner_concept_reasonunit_delete_to_legible_list(
+            leg_list, owner_concept_reasonunit_delete_dict, x_owner
         )
 
-    if plan_concept_factunit_insert_dict is not None:
-        add_plan_concept_factunit_insert_to_legible_list(
-            leg_list, plan_concept_factunit_insert_dict, x_plan
+    if owner_concept_reason_premiseunit_insert_dict is not None:
+        add_owner_reason_premiseunit_insert_to_legible_list(
+            leg_list, owner_concept_reason_premiseunit_insert_dict, x_owner
         )
-    if plan_concept_factunit_update_dict is not None:
-        add_plan_concept_factunit_update_to_legible_list(
-            leg_list, plan_concept_factunit_update_dict, x_plan
+    if owner_concept_reason_premiseunit_update_dict is not None:
+        add_owner_reason_premiseunit_update_to_legible_list(
+            leg_list, owner_concept_reason_premiseunit_update_dict, x_owner
         )
-    if plan_concept_factunit_delete_dict is not None:
-        add_plan_concept_factunit_delete_to_legible_list(
-            leg_list, plan_concept_factunit_delete_dict, x_plan
+    if owner_concept_reason_premiseunit_delete_dict is not None:
+        add_owner_reason_premiseunit_delete_to_legible_list(
+            leg_list, owner_concept_reason_premiseunit_delete_dict, x_owner
+        )
+
+    if owner_concept_laborlink_insert_dict is not None:
+        add_owner_concept_laborlink_insert_to_legible_list(
+            leg_list, owner_concept_laborlink_insert_dict, x_owner
+        )
+    if owner_concept_laborlink_delete_dict is not None:
+        add_owner_concept_laborlink_delete_to_legible_list(
+            leg_list, owner_concept_laborlink_delete_dict, x_owner
+        )
+
+    if owner_concept_healerlink_insert_dict is not None:
+        add_owner_concept_healerlink_insert_to_legible_list(
+            leg_list, owner_concept_healerlink_insert_dict, x_owner
+        )
+    if owner_concept_healerlink_delete_dict is not None:
+        add_owner_concept_healerlink_delete_to_legible_list(
+            leg_list, owner_concept_healerlink_delete_dict, x_owner
+        )
+
+    if owner_concept_factunit_insert_dict is not None:
+        add_owner_concept_factunit_insert_to_legible_list(
+            leg_list, owner_concept_factunit_insert_dict, x_owner
+        )
+    if owner_concept_factunit_update_dict is not None:
+        add_owner_concept_factunit_update_to_legible_list(
+            leg_list, owner_concept_factunit_update_dict, x_owner
+        )
+    if owner_concept_factunit_delete_dict is not None:
+        add_owner_concept_factunit_delete_to_legible_list(
+            leg_list, owner_concept_factunit_delete_dict, x_owner
         )
 
     return leg_list
 
 
-def add_planunit_legible_list(
-    legible_list: list[str], x_atom: PlanAtom, x_plan: PlanUnit
+def add_ownerunit_legible_list(
+    legible_list: list[str], x_atom: OwnerAtom, x_owner: OwnerUnit
 ):
     jvalues = x_atom.jvalues
     _tally_str = "tally"
@@ -189,28 +195,28 @@ def add_planunit_legible_list(
     _tally_value = jvalues.get(_tally_str)
 
     if _max_tree_traverse_value is not None:
-        x_str = f"{x_plan.owner_name}'s maximum number of Plan evaluations set to {_max_tree_traverse_value}"
+        x_str = f"{x_owner.owner_name}'s maximum number of Owner evaluations set to {_max_tree_traverse_value}"
         legible_list.append(x_str)
     if (
         credor_respect_value is not None
         and debtor_respect_value is not None
         and credor_respect_value == debtor_respect_value
     ):
-        x_str = f"{x_plan.owner_name}'s total pool is now {credor_respect_value}"
+        x_str = f"{x_owner.owner_name}'s total pool is now {credor_respect_value}"
         legible_list.append(x_str)
     elif credor_respect_value is not None:
-        x_str = f"{x_plan.owner_name}'s credor pool is now {credor_respect_value}"
+        x_str = f"{x_owner.owner_name}'s credor pool is now {credor_respect_value}"
         legible_list.append(x_str)
     elif debtor_respect_value is not None:
-        x_str = f"{x_plan.owner_name}'s debtor pool is now {debtor_respect_value}"
+        x_str = f"{x_owner.owner_name}'s debtor pool is now {debtor_respect_value}"
         legible_list.append(x_str)
     if _tally_value is not None:
-        x_str = f"{x_plan.owner_name}'s plan tally set to {_tally_value}"
+        x_str = f"{x_owner.owner_name}'s owner tally set to {_tally_value}"
         legible_list.append(x_str)
 
 
-def add_plan_acctunit_insert_to_legible_list(
-    legible_list: list[str], acctunit_dict: PlanAtom, x_plan: PlanUnit
+def add_owner_acctunit_insert_to_legible_list(
+    legible_list: list[str], acctunit_dict: OwnerAtom, x_owner: OwnerUnit
 ):
     for acctunit_atom in acctunit_dict.values():
         acct_name = acctunit_atom.get_value("acct_name")
@@ -220,8 +226,8 @@ def add_plan_acctunit_insert_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_plan_acctunit_update_to_legible_list(
-    legible_list: list[str], acctunit_dict: PlanAtom, x_plan: PlanUnit
+def add_owner_acctunit_update_to_legible_list(
+    legible_list: list[str], acctunit_dict: OwnerAtom, x_owner: OwnerUnit
 ):
     for acctunit_atom in acctunit_dict.values():
         acct_name = acctunit_atom.get_value("acct_name")
@@ -236,8 +242,8 @@ def add_plan_acctunit_update_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_plan_acctunit_delete_to_legible_list(
-    legible_list: list[str], acctunit_dict: PlanAtom, x_plan: PlanUnit
+def add_owner_acctunit_delete_to_legible_list(
+    legible_list: list[str], acctunit_dict: OwnerAtom, x_owner: OwnerUnit
 ):
     for acctunit_atom in acctunit_dict.values():
         acct_name = acctunit_atom.get_value("acct_name")
@@ -245,8 +251,8 @@ def add_plan_acctunit_delete_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_plan_acct_membership_insert_to_legible_list(
-    legible_list: list[str], acct_membership_insert_dict: dict, x_plan: PlanUnit
+def add_owner_acct_membership_insert_to_legible_list(
+    legible_list: list[str], acct_membership_insert_dict: dict, x_owner: OwnerUnit
 ):
     for acct_membership_dict in acct_membership_insert_dict.values():
         for acct_membership_atom in acct_membership_dict.values():
@@ -262,8 +268,8 @@ def add_plan_acct_membership_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_plan_acct_membership_update_to_legible_list(
-    legible_list: list[str], acct_membership_update_dict: dict, x_plan: PlanUnit
+def add_owner_acct_membership_update_to_legible_list(
+    legible_list: list[str], acct_membership_update_dict: dict, x_owner: OwnerUnit
 ):
     for acct_membership_dict in acct_membership_update_dict.values():
         for acct_membership_atom in acct_membership_dict.values():
@@ -287,8 +293,8 @@ def add_plan_acct_membership_update_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_plan_acct_membership_delete_to_legible_list(
-    legible_list: list[str], acct_membership_delete_dict: dict, x_plan: PlanUnit
+def add_owner_acct_membership_delete_to_legible_list(
+    legible_list: list[str], acct_membership_delete_dict: dict, x_owner: OwnerUnit
 ):
     for acct_membership_dict in acct_membership_delete_dict.values():
         for acct_membership_atom in acct_membership_dict.values():
@@ -298,8 +304,8 @@ def add_plan_acct_membership_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_plan_conceptunit_insert_to_legible_list(
-    legible_list: list[str], conceptunit_insert_dict: dict, x_plan: PlanUnit
+def add_owner_conceptunit_insert_to_legible_list(
+    legible_list: list[str], conceptunit_insert_dict: dict, x_owner: OwnerUnit
 ):
     _problem_bool_str = "problem_bool"
     for conceptunit_atom in conceptunit_insert_dict.values():
@@ -336,8 +342,8 @@ def add_plan_conceptunit_insert_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_plan_conceptunit_update_to_legible_list(
-    legible_list: list[str], conceptunit_update_dict: dict, x_plan: PlanUnit
+def add_owner_conceptunit_update_to_legible_list(
+    legible_list: list[str], conceptunit_update_dict: dict, x_owner: OwnerUnit
 ):
     _problem_bool_str = "problem_bool"
     for conceptunit_atom in conceptunit_update_dict.values():
@@ -374,8 +380,8 @@ def add_plan_conceptunit_update_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_plan_conceptunit_delete_to_legible_list(
-    legible_list: list[str], conceptunit_delete_dict: dict, x_plan: PlanUnit
+def add_owner_conceptunit_delete_to_legible_list(
+    legible_list: list[str], conceptunit_delete_dict: dict, x_owner: OwnerUnit
 ):
     for conceptunit_atom in conceptunit_delete_dict.values():
         rope_value = conceptunit_atom.get_value("concept_rope")
@@ -383,8 +389,8 @@ def add_plan_conceptunit_delete_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_plan_concept_awardlink_insert_to_legible_list(
-    legible_list: list[str], concept_awardlink_insert_dict: dict, x_plan: PlanUnit
+def add_owner_concept_awardlink_insert_to_legible_list(
+    legible_list: list[str], concept_awardlink_insert_dict: dict, x_owner: OwnerUnit
 ):
     for rope_dict in concept_awardlink_insert_dict.values():
         for concept_awardlink_atom in rope_dict.values():
@@ -396,8 +402,8 @@ def add_plan_concept_awardlink_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_plan_concept_awardlink_update_to_legible_list(
-    legible_list: list[str], concept_awardlink_update_dict: dict, x_plan: PlanUnit
+def add_owner_concept_awardlink_update_to_legible_list(
+    legible_list: list[str], concept_awardlink_update_dict: dict, x_owner: OwnerUnit
 ):
     for rope_dict in concept_awardlink_update_dict.values():
         for concept_awardlink_atom in rope_dict.values():
@@ -414,8 +420,8 @@ def add_plan_concept_awardlink_update_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_plan_concept_awardlink_delete_to_legible_list(
-    legible_list: list[str], concept_awardlink_delete_dict: dict, x_plan: PlanUnit
+def add_owner_concept_awardlink_delete_to_legible_list(
+    legible_list: list[str], concept_awardlink_delete_dict: dict, x_owner: OwnerUnit
 ):
     for rope_dict in concept_awardlink_delete_dict.values():
         for concept_awardlink_atom in rope_dict.values():
@@ -425,8 +431,8 @@ def add_plan_concept_awardlink_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_plan_concept_reasonunit_insert_to_legible_list(
-    legible_list: list[str], concept_reasonunit_insert_dict: dict, x_plan: PlanUnit
+def add_owner_concept_reasonunit_insert_to_legible_list(
+    legible_list: list[str], concept_reasonunit_insert_dict: dict, x_owner: OwnerUnit
 ):
     for rope_dict in concept_reasonunit_insert_dict.values():
         for concept_reasonunit_atom in rope_dict.values():
@@ -443,8 +449,8 @@ def add_plan_concept_reasonunit_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_plan_concept_reasonunit_update_to_legible_list(
-    legible_list: list[str], concept_reasonunit_update_dict: dict, x_plan: PlanUnit
+def add_owner_concept_reasonunit_update_to_legible_list(
+    legible_list: list[str], concept_reasonunit_update_dict: dict, x_owner: OwnerUnit
 ):
     for rope_dict in concept_reasonunit_update_dict.values():
         for concept_reasonunit_atom in rope_dict.values():
@@ -460,8 +466,8 @@ def add_plan_concept_reasonunit_update_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_plan_concept_reasonunit_delete_to_legible_list(
-    legible_list: list[str], concept_reasonunit_delete_dict: dict, x_plan: PlanUnit
+def add_owner_concept_reasonunit_delete_to_legible_list(
+    legible_list: list[str], concept_reasonunit_delete_dict: dict, x_owner: OwnerUnit
 ):
     for rope_dict in concept_reasonunit_delete_dict.values():
         for concept_reasonunit_atom in rope_dict.values():
@@ -471,10 +477,10 @@ def add_plan_concept_reasonunit_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_plan_reason_premiseunit_insert_to_legible_list(
+def add_owner_reason_premiseunit_insert_to_legible_list(
     legible_list: list[str],
     concept_reason_premiseunit_insert_dict: dict,
-    x_plan: PlanUnit,
+    x_owner: OwnerUnit,
 ):
     for rope_dict in concept_reason_premiseunit_insert_dict.values():
         for rcontext_dict in rope_dict.values():
@@ -495,10 +501,10 @@ def add_plan_reason_premiseunit_insert_to_legible_list(
                 legible_list.append(x_str)
 
 
-def add_plan_reason_premiseunit_update_to_legible_list(
+def add_owner_reason_premiseunit_update_to_legible_list(
     legible_list: list[str],
     concept_reason_premiseunit_update_dict: dict,
-    x_plan: PlanUnit,
+    x_owner: OwnerUnit,
 ):
     for rope_dict in concept_reason_premiseunit_update_dict.values():
         for rcontext_dict in rope_dict.values():
@@ -519,10 +525,10 @@ def add_plan_reason_premiseunit_update_to_legible_list(
                 legible_list.append(x_str)
 
 
-def add_plan_reason_premiseunit_delete_to_legible_list(
+def add_owner_reason_premiseunit_delete_to_legible_list(
     legible_list: list[str],
     concept_reason_premiseunit_delete_dict: dict,
-    x_plan: PlanUnit,
+    x_owner: OwnerUnit,
 ):
     for rope_dict in concept_reason_premiseunit_delete_dict.values():
         for rcontext_dict in rope_dict.values():
@@ -534,8 +540,8 @@ def add_plan_reason_premiseunit_delete_to_legible_list(
                 legible_list.append(x_str)
 
 
-def add_plan_concept_laborlink_insert_to_legible_list(
-    legible_list: list[str], concept_laborlink_insert_dict: dict, x_plan: PlanUnit
+def add_owner_concept_laborlink_insert_to_legible_list(
+    legible_list: list[str], concept_laborlink_insert_dict: dict, x_owner: OwnerUnit
 ):
     for rope_dict in concept_laborlink_insert_dict.values():
         for concept_laborlink_atom in rope_dict.values():
@@ -547,8 +553,8 @@ def add_plan_concept_laborlink_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_plan_concept_laborlink_delete_to_legible_list(
-    legible_list: list[str], concept_laborlink_delete_dict: dict, x_plan: PlanUnit
+def add_owner_concept_laborlink_delete_to_legible_list(
+    legible_list: list[str], concept_laborlink_delete_dict: dict, x_owner: OwnerUnit
 ):
     for rope_dict in concept_laborlink_delete_dict.values():
         for concept_laborlink_atom in rope_dict.values():
@@ -560,8 +566,8 @@ def add_plan_concept_laborlink_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_plan_concept_healerlink_insert_to_legible_list(
-    legible_list: list[str], concept_healerlink_insert_dict: dict, x_plan: PlanUnit
+def add_owner_concept_healerlink_insert_to_legible_list(
+    legible_list: list[str], concept_healerlink_insert_dict: dict, x_owner: OwnerUnit
 ):
     for rope_dict in concept_healerlink_insert_dict.values():
         for concept_healerlink_atom in rope_dict.values():
@@ -573,8 +579,8 @@ def add_plan_concept_healerlink_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_plan_concept_healerlink_delete_to_legible_list(
-    legible_list: list[str], concept_healerlink_delete_dict: dict, x_plan: PlanUnit
+def add_owner_concept_healerlink_delete_to_legible_list(
+    legible_list: list[str], concept_healerlink_delete_dict: dict, x_owner: OwnerUnit
 ):
     for rope_dict in concept_healerlink_delete_dict.values():
         for concept_healerlink_atom in rope_dict.values():
@@ -586,8 +592,8 @@ def add_plan_concept_healerlink_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_plan_concept_factunit_insert_to_legible_list(
-    legible_list: list[str], concept_factunit_insert_dict: dict, x_plan: PlanUnit
+def add_owner_concept_factunit_insert_to_legible_list(
+    legible_list: list[str], concept_factunit_insert_dict: dict, x_owner: OwnerUnit
 ):
     for rope_dict in concept_factunit_insert_dict.values():
         for concept_factunit_atom in rope_dict.values():
@@ -604,8 +610,8 @@ def add_plan_concept_factunit_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_plan_concept_factunit_update_to_legible_list(
-    legible_list: list[str], concept_factunit_update_dict: dict, x_plan: PlanUnit
+def add_owner_concept_factunit_update_to_legible_list(
+    legible_list: list[str], concept_factunit_update_dict: dict, x_owner: OwnerUnit
 ):
     for rope_dict in concept_factunit_update_dict.values():
         for concept_factunit_atom in rope_dict.values():
@@ -622,8 +628,8 @@ def add_plan_concept_factunit_update_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_plan_concept_factunit_delete_to_legible_list(
-    legible_list: list[str], concept_factunit_delete_dict: dict, x_plan: PlanUnit
+def add_owner_concept_factunit_delete_to_legible_list(
+    legible_list: list[str], concept_factunit_delete_dict: dict, x_owner: OwnerUnit
 ):
     for rope_dict in concept_factunit_delete_dict.values():
         for concept_factunit_atom in rope_dict.values():

@@ -8,7 +8,7 @@ from src.a02_finance_logic.finance_config import (
 )
 from src.a05_concept_logic.concept import conceptunit_shop
 from src.a05_concept_logic.healer import healerlink_shop
-from src.a06_plan_logic.plan import planunit_shop
+from src.a06_owner_logic.owner import ownerunit_shop
 from src.a07_timeline_logic.timeline import timelineunit_shop
 from src.a11_bud_logic.bud import tranbook_shop
 from src.a12_hub_toolbox.hub_path import create_owner_dir_path, create_path
@@ -202,7 +202,7 @@ def test_beliefunit_shop_SetsbeliefsDirs(env_dir_setup_cleanup):
     assert a23_belief._owners_dir == create_path(a23_belief._belief_dir, "owners")
 
 
-def test_BeliefUnit_create_empty_plan_from_belief_ReturnsObj_Scenario0(
+def test_BeliefUnit_create_empty_owner_from_belief_ReturnsObj_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -223,13 +223,13 @@ def test_BeliefUnit_create_empty_plan_from_belief_ReturnsObj_Scenario0(
     sue_str = "Sue"
 
     # WHEN
-    generated_plan = a23_belief.create_empty_plan_from_belief(sue_str)
+    generated_owner = a23_belief.create_empty_owner_from_belief(sue_str)
 
     # THEN
-    assert generated_plan.knot == slash_str
-    assert generated_plan.fund_iota == x_fund_iota
-    assert generated_plan.respect_bit == x_respect_bit
-    assert generated_plan.penny == x_penny
+    assert generated_owner.knot == slash_str
+    assert generated_owner.fund_iota == x_fund_iota
+    assert generated_owner.respect_bit == x_respect_bit
+    assert generated_owner.penny == x_penny
 
 
 def test_BeliefUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario1_owner_dir_ExistsNoFile(
@@ -250,7 +250,7 @@ def test_BeliefUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario1_owner_dir_
     # THEN
     print(f"{belief_mstr_dir=}")
     assert gut_file_exists(belief_mstr_dir, a23_str, sue_str)
-    expected_sue_gut = planunit_shop(sue_str, a23_str)
+    expected_sue_gut = ownerunit_shop(sue_str, a23_str)
     assert open_gut_file(belief_mstr_dir, a23_str, sue_str) == expected_sue_gut
 
 
@@ -300,7 +300,7 @@ def test_BeliefUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario3_FileExists
     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
     sue_str = "Sue"
     bob_str = "Bob"
-    sue_gut = planunit_shop(sue_str, a23_str)
+    sue_gut = ownerunit_shop(sue_str, a23_str)
     sue_gut.add_acctunit(bob_str)
     save_gut_file(belief_mstr_dir, sue_gut)
     sue_owner_dir = create_owner_dir_path(belief_mstr_dir, a23_str, sue_str)
@@ -361,7 +361,7 @@ def test_BeliefUnit_create_init_job_from_guts_Scenario1_ReplacesFile(
     )
     bob_str = "Bob"
     sue_str = "Sue"
-    x0_sue_job = planunit_shop(sue_str, a23_str)
+    x0_sue_job = ownerunit_shop(sue_str, a23_str)
     x0_sue_job.add_acctunit(bob_str)
     save_job_file(belief_mstr_dir, x0_sue_job)
     assert open_job_file(belief_mstr_dir, a23_str, sue_str).get_acct(bob_str)
@@ -392,7 +392,7 @@ def test_BeliefUnit_create_init_job_from_guts_Scenario2_job_Has_gut_Accts(
     bob_str = "Bob"
     sue_str = "Sue"
     a23_belief.create_init_job_from_guts(sue_str)
-    sue_gut = planunit_shop(sue_str, a23_str)
+    sue_gut = ownerunit_shop(sue_str, a23_str)
     sue_gut.add_acctunit(bob_str)
     save_gut_file(belief_mstr_dir, sue_gut)
     assert not open_job_file(belief_mstr_dir, a23_str, sue_str).get_acct(bob_str)
@@ -425,11 +425,11 @@ def test_BeliefUnit_create_init_job_from_guts_Scenario3_gut_FilesAreListenedTo(
 
     # create Sue gut
     bob_str = "Bob"
-    sue_gut = planunit_shop(sue_str, a23_str, knot=slash_str)
+    sue_gut = ownerunit_shop(sue_str, a23_str, knot=slash_str)
     sue_gut.add_acctunit(bob_str)
     save_gut_file(belief_mstr_dir, sue_gut)
     # create Bob gut with agenda concept for Sue
-    bob_gut = planunit_shop(bob_str, a23_str, knot=slash_str)
+    bob_gut = ownerunit_shop(bob_str, a23_str, knot=slash_str)
     bob_gut.add_acctunit(sue_str)
     casa_rope = bob_gut.make_l1_rope("casa")
     clean_rope = bob_gut.make_rope(casa_rope, "clean")
@@ -459,33 +459,33 @@ def test_BeliefUnit__set_all_healer_dutys_CorrectlySetsdutys(
     yao_str = "Yao"
     a23_belief.create_init_job_from_guts(sue_str)
     a23_belief.create_init_job_from_guts(yao_str)
-    sue_gut_plan = open_gut_file(x_belief_mstr_dir, a23_str, sue_str)
-    yao_gut_plan = open_gut_file(x_belief_mstr_dir, a23_str, yao_str)
+    sue_gut_owner = open_gut_file(x_belief_mstr_dir, a23_str, sue_str)
+    yao_gut_owner = open_gut_file(x_belief_mstr_dir, a23_str, yao_str)
 
-    sue_gut_plan.add_acctunit(sue_str)
-    sue_gut_plan.add_acctunit(yao_str)
-    yao_gut_plan.add_acctunit(sue_str)
-    yao_gut_plan.add_acctunit(yao_str)
+    sue_gut_owner.add_acctunit(sue_str)
+    sue_gut_owner.add_acctunit(yao_str)
+    yao_gut_owner.add_acctunit(sue_str)
+    yao_gut_owner.add_acctunit(yao_str)
     texas_str = "Texas"
-    texas_rope = sue_gut_plan.make_l1_rope(texas_str)
-    sue_gut_plan.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
-    yao_gut_plan.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
+    texas_rope = sue_gut_owner.make_l1_rope(texas_str)
+    sue_gut_owner.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
+    yao_gut_owner.set_l1_concept(conceptunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
-    dallas_rope = sue_gut_plan.make_rope(texas_rope, dallas_str)
+    dallas_rope = sue_gut_owner.make_rope(texas_rope, dallas_str)
     dallas_healerlink = healerlink_shop({sue_str, yao_str})
     dallas_concept = conceptunit_shop(dallas_str, healerlink=dallas_healerlink)
     elpaso_str = "el paso"
-    elpaso_rope = sue_gut_plan.make_rope(texas_rope, elpaso_str)
+    elpaso_rope = sue_gut_owner.make_rope(texas_rope, elpaso_str)
     elpaso_healerlink = healerlink_shop({sue_str})
     elpaso_concept = conceptunit_shop(elpaso_str, healerlink=elpaso_healerlink)
 
-    sue_gut_plan.set_concept(dallas_concept, texas_rope)
-    sue_gut_plan.set_concept(elpaso_concept, texas_rope)
-    yao_gut_plan.set_concept(dallas_concept, texas_rope)
-    yao_gut_plan.set_concept(elpaso_concept, texas_rope)
+    sue_gut_owner.set_concept(dallas_concept, texas_rope)
+    sue_gut_owner.set_concept(elpaso_concept, texas_rope)
+    yao_gut_owner.set_concept(dallas_concept, texas_rope)
+    yao_gut_owner.set_concept(elpaso_concept, texas_rope)
 
-    save_gut_file(x_belief_mstr_dir, sue_gut_plan)
-    save_gut_file(x_belief_mstr_dir, yao_gut_plan)
+    save_gut_file(x_belief_mstr_dir, sue_gut_owner)
+    save_gut_file(x_belief_mstr_dir, yao_gut_owner)
     sue_filename = get_json_filename(sue_str)
     yao_filename = get_json_filename(yao_str)
     sue_dallas_hubunit = hubunit_shop(x_belief_mstr_dir, a23_str, sue_str, dallas_rope)

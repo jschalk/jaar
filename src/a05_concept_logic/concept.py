@@ -828,10 +828,10 @@ class ConceptUnit:
         self,
         tree_traverse_count: int,
         groupunits: dict[GroupTitle, GroupUnit] = None,
-        plan_owner_name: AcctName = None,
+        owner_owner_name: AcctName = None,
     ):
         prev_to_now_active = deepcopy(self._active)
-        self._active = self._create_active_bool(groupunits, plan_owner_name)
+        self._active = self._create_active_bool(groupunits, owner_owner_name)
         self._set_concept_chore()
         self.record_active_hx(tree_traverse_count, prev_to_now_active, self._active)
 
@@ -847,30 +847,30 @@ class ConceptUnit:
         return any(x_reasonheir._chore for x_reasonheir in self._reasonheirs.values())
 
     def _create_active_bool(
-        self, groupunits: dict[GroupTitle, GroupUnit], plan_owner_name: AcctName
+        self, groupunits: dict[GroupTitle, GroupUnit], owner_owner_name: AcctName
     ) -> bool:
         self.set_reasonheirs_status()
         active_bool = self._are_all_reasonheir_active_true()
         if (
             active_bool
             and groupunits != {}
-            and plan_owner_name is not None
+            and owner_owner_name is not None
             and self._laborheir._laborlinks != {}
         ):
-            self._laborheir.set_owner_name_labor(groupunits, plan_owner_name)
+            self._laborheir.set_owner_name_labor(groupunits, owner_owner_name)
             if self._laborheir._owner_name_labor is False:
                 active_bool = False
         return active_bool
 
     def set_range_factheirs(
         self,
-        plan_concept_dict: dict[RopeTerm,],
+        owner_concept_dict: dict[RopeTerm,],
         range_inheritors: dict[RopeTerm, RopeTerm],
     ):
         for reason_rcontext in self._reasonheirs.keys():
             if range_root_rope := range_inheritors.get(reason_rcontext):
                 all_concepts = all_concepts_between(
-                    plan_concept_dict, range_root_rope, reason_rcontext, self.knot
+                    owner_concept_dict, range_root_rope, reason_rcontext, self.knot
                 )
                 self._create_factheir(all_concepts, range_root_rope, reason_rcontext)
 
@@ -906,7 +906,7 @@ class ConceptUnit:
 
     def set_reasonheirs(
         self,
-        plan_concept_dict: dict[RopeTerm,],
+        owner_concept_dict: dict[RopeTerm,],
         reasonheirs: dict[RopeTerm, ReasonCore],
     ):
         coalesced_reasons = self._coalesce_with_reasonunits(reasonheirs)
@@ -917,7 +917,7 @@ class ConceptUnit:
             new_reasonheir = reasonheir_shop(old_rcontext, None, old_active_requisite)
             new_reasonheir.inherit_from_reasonheir(old_reasonheir)
 
-            if rcontext_concept := plan_concept_dict.get(old_reasonheir.rcontext):
+            if rcontext_concept := owner_concept_dict.get(old_reasonheir.rcontext):
                 new_reasonheir.set_rconcept_active_value(rcontext_concept._active)
             self._reasonheirs[new_reasonheir.rcontext] = new_reasonheir
 
@@ -1169,13 +1169,13 @@ def get_obj_from_concept_dict(x_dict: dict[str, dict], dict_key: str) -> any:
 
 
 def all_concepts_between(
-    plan_concept_dict: dict[RopeTerm, ConceptUnit],
+    owner_concept_dict: dict[RopeTerm, ConceptUnit],
     src_rope: RopeTerm,
     dst_rcontext: RopeTerm,
     knot: str,
 ) -> list[ConceptUnit]:
     all_ropes = all_ropeterms_between(src_rope, dst_rcontext, knot)
-    return [plan_concept_dict.get(x_rope) for x_rope in all_ropes]
+    return [owner_concept_dict.get(x_rope) for x_rope in all_ropes]
 
 
 def concepts_calculated_range(

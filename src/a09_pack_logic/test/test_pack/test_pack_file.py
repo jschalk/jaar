@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, open_json
-from src.a09_pack_logic.delta import plandelta_shop
+from src.a09_pack_logic.delta import ownerdelta_shop
 from src.a09_pack_logic.pack import create_packunit_from_files, packunit_shop
 from src.a09_pack_logic.test._util.a09_env import (
     env_dir_setup_cleanup,
@@ -182,8 +182,8 @@ def test_PackUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
     int5 = 5
     sports_atom = get_atom_example_conceptunit_sports()
     knee_atom = get_atom_example_conceptunit_knee()
-    sue_packunit._plandelta.set_planatom(sports_atom)
-    sue_packunit._plandelta.set_planatom(knee_atom)
+    sue_packunit._ownerdelta.set_owneratom(sports_atom)
+    sue_packunit._ownerdelta.set_owneratom(knee_atom)
     assert sue_packunit.pack_file_exists() is False
     assert sue_packunit.atom_file_exists(int4) is False
     assert sue_packunit.atom_file_exists(int5) is False
@@ -197,7 +197,7 @@ def test_PackUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
     assert sue_packunit.atom_file_exists(int5)
 
 
-def test_PackUnit_create_plandelta_from_atom_files_SetsAttr(env_dir_setup_cleanup):
+def test_PackUnit_create_ownerdelta_from_atom_files_SetsAttr(env_dir_setup_cleanup):
     # ESTABLISH
     x_belief_dir = create_path(beliefs_dir(), "amy23")
     x_owners_dir = create_path(x_belief_dir, "owners")
@@ -215,19 +215,19 @@ def test_PackUnit_create_plandelta_from_atom_files_SetsAttr(env_dir_setup_cleanu
     sue_packunit._save_atom_file(int4, spor_atom)
     sue_packunit._save_atom_file(int5, knee_atom)
     sue_packunit._save_atom_file(int9, ball_atom)
-    assert sue_packunit._plandelta == plandelta_shop()
+    assert sue_packunit._ownerdelta == ownerdelta_shop()
 
     # WHEN
     atoms_list = [int4, int5, int9]
-    sue_packunit._create_plandelta_from_atom_files(atoms_list)
+    sue_packunit._create_ownerdelta_from_atom_files(atoms_list)
 
     # THEN
-    static_plandelta = plandelta_shop()
-    static_plandelta.set_planatom(spor_atom)
-    static_plandelta.set_planatom(knee_atom)
-    static_plandelta.set_planatom(ball_atom)
-    assert sue_packunit._plandelta != plandelta_shop()
-    assert sue_packunit._plandelta == static_plandelta
+    static_ownerdelta = ownerdelta_shop()
+    static_ownerdelta.set_owneratom(spor_atom)
+    static_ownerdelta.set_owneratom(knee_atom)
+    static_ownerdelta.set_owneratom(ball_atom)
+    assert sue_packunit._ownerdelta != ownerdelta_shop()
+    assert sue_packunit._ownerdelta == static_ownerdelta
 
 
 def test_create_packunit_from_files_ReturnsObj(env_dir_setup_cleanup):
@@ -249,9 +249,9 @@ def test_create_packunit_from_files_ReturnsObj(env_dir_setup_cleanup):
     sports_atom = get_atom_example_conceptunit_sports()
     knee_atom = get_atom_example_conceptunit_knee()
     ball_atom = get_atom_example_conceptunit_ball()
-    src_sue_packunit._plandelta.set_planatom(sports_atom)
-    src_sue_packunit._plandelta.set_planatom(knee_atom)
-    src_sue_packunit._plandelta.set_planatom(ball_atom)
+    src_sue_packunit._ownerdelta.set_owneratom(sports_atom)
+    src_sue_packunit._ownerdelta.set_owneratom(knee_atom)
+    src_sue_packunit._ownerdelta.set_owneratom(ball_atom)
     src_sue_packunit.save_files()
 
     # WHEN
@@ -264,4 +264,4 @@ def test_create_packunit_from_files_ReturnsObj(env_dir_setup_cleanup):
     # THEN
     assert src_sue_packunit.owner_name == new_sue_packunit.owner_name
     assert src_sue_packunit.face_name == new_sue_packunit.face_name
-    assert src_sue_packunit._plandelta == new_sue_packunit._plandelta
+    assert src_sue_packunit._ownerdelta == new_sue_packunit._ownerdelta

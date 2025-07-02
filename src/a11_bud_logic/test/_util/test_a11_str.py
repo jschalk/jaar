@@ -9,8 +9,8 @@ from src.a11_bud_logic.test._util.a11_str import (
     found_facts_str,
     mandate_str,
     offi_time_str,
-    planadjust_str,
-    planevent_facts_str,
+    owneradjust_str,
+    ownerevent_facts_str,
     quota_str,
     tran_time_str,
 )
@@ -28,7 +28,7 @@ def test_str_functions_ReturnsObj():
     assert found_facts_str() == "found_facts"
     assert mandate_str() == "mandate"
     assert offi_time_str() == "offi_time"
-    assert planadjust_str() == "planadjust"
-    assert planevent_facts_str() == "planevent_facts"
+    assert owneradjust_str() == "owneradjust"
+    assert ownerevent_facts_str() == "ownerevent_facts"
     assert quota_str() == "quota"
     assert tran_time_str() == "tran_time"

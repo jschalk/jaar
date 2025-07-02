@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import count_dirs_files, open_json, save_file
-from src.a06_plan_logic.test._util.a06_str import penny_str
+from src.a06_owner_logic.test._util.a06_str import penny_str
 from src.a09_pack_logic.test._util.a09_str import event_int_str
 from src.a11_bud_logic.bud import DEFAULT_CELLDEPTH
 from src.a11_bud_logic.test._util.a11_str import (
@@ -93,7 +93,7 @@ def test_BeliefUnit_create_buds_root_cells_Scenaro1_BudExists(
     assert cell_dict.get(event_int_str()) == event3
 
 
-def test_BeliefUnit_create_buds_root_cells_Scenaro2_BudExistsButNoPlanExistsInEventsPast(
+def test_BeliefUnit_create_buds_root_cells_Scenaro2_BudExistsButNoOwnerExistsInEventsPast(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

@@ -1,0 +1,58 @@
+{
+    "attributes": {
+        "addin": {
+            "otx_key": false
+        },
+        "begin": {
+            "otx_key": false
+        },
+        "close": {
+            "otx_key": false
+        },
+        "denom": {
+            "otx_key": false
+        },
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "belief_label": {
+            "otx_key": true
+        },
+        "gogo_want": {
+            "otx_key": false
+        },
+        "concept_rope": {
+            "otx_key": true
+        },
+        "mass": {
+            "otx_key": false
+        },
+        "morph": {
+            "otx_key": false
+        },
+        "numor": {
+            "otx_key": false
+        },
+        "owner_name": {
+            "otx_key": true
+        },
+        "task": {
+            "otx_key": false
+        },
+        "problem_bool": {
+            "otx_key": false
+        },
+        "stop_want": {
+            "otx_key": false
+        }
+    },
+    "idea_number": "br00028",
+    "dimens": [
+        "beliefunit",
+        "ownerunit",
+        "owner_conceptunit"
+    ]
+}

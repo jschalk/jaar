@@ -37,7 +37,7 @@ def test_get_bundles_config_ReturnsObj():
 
 def test_get_kpi_set_from_bundle_ReturnsObj_Scenario0_BundleGiven():
     # ESTABLISH / WHEN
-    kpi_set = get_kpi_set_from_bundle("plan_star_kpis")
+    kpi_set = get_kpi_set_from_bundle("owner_star_kpis")
 
     # THEN
     assert kpi_set == set()

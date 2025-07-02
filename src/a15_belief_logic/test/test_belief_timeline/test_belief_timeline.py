@@ -1,18 +1,18 @@
-from src.a06_plan_logic.plan import planunit_shop
+from src.a06_owner_logic.owner import ownerunit_shop
 from src.a07_timeline_logic.test._util.calendar_examples import (
     add_time_creg_conceptunit,
     get_creg_config,
 )
-from src.a07_timeline_logic.timeline import plantimelinepoint_shop, timelineunit_shop
+from src.a07_timeline_logic.timeline import ownertimelinepoint_shop, timelineunit_shop
 from src.a15_belief_logic.belief import beliefunit_shop
-from src.a15_belief_logic.belief_timeline import get_belief_plantimelinepoint
+from src.a15_belief_logic.belief_timeline import get_belief_ownertimelinepoint
 from src.a15_belief_logic.test._util.a15_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
 
 
-def test_get_belief_plantimelinepoint_ReturnsObj_Scenario0_Empty_offi_time():
+def test_get_belief_ownertimelinepoint_ReturnsObj_Scenario0_Empty_offi_time():
     # ESTABLISH
     fay_str = "Fay"
     fay_beliefunit = beliefunit_shop(fay_str, get_module_temp_dir())
@@ -20,30 +20,30 @@ def test_get_belief_plantimelinepoint_ReturnsObj_Scenario0_Empty_offi_time():
     assert not fay_beliefunit._offi_time_max
 
     # WHEN
-    fay_plantimelinepoint = get_belief_plantimelinepoint(fay_beliefunit)
+    fay_ownertimelinepoint = get_belief_ownertimelinepoint(fay_beliefunit)
 
     # THEN
     assert fay_beliefunit._offi_time_max == 0
-    assert fay_plantimelinepoint.x_min == 0
+    assert fay_ownertimelinepoint.x_min == 0
 
-    assert fay_plantimelinepoint
-    # assert fay_plantimelinepoint.x_min == fay_offi_time_max
-    fay_planunit = fay_plantimelinepoint.x_planunit
-    assert fay_planunit.owner_name == "for_plantimelinepoint_calculation"
-    assert fay_planunit.belief_label == fay_beliefunit.belief_label
-    assert fay_planunit.knot == fay_beliefunit.knot
-    assert fay_planunit.fund_iota == fay_beliefunit.fund_iota
-    assert fay_planunit.respect_bit == fay_beliefunit.respect_bit
-    assert fay_planunit.penny == fay_beliefunit.penny
-    assert fay_plantimelinepoint._month == "March"
-    assert fay_plantimelinepoint._hour == "0-12am"
-    assert fay_plantimelinepoint._minute == 0
-    assert fay_plantimelinepoint._monthday == 1
-    assert fay_plantimelinepoint._c400_number == 0
-    assert fay_plantimelinepoint._year_num == 0
+    assert fay_ownertimelinepoint
+    # assert fay_ownertimelinepoint.x_min == fay_offi_time_max
+    fay_ownerunit = fay_ownertimelinepoint.x_ownerunit
+    assert fay_ownerunit.owner_name == "for_ownertimelinepoint_calculation"
+    assert fay_ownerunit.belief_label == fay_beliefunit.belief_label
+    assert fay_ownerunit.knot == fay_beliefunit.knot
+    assert fay_ownerunit.fund_iota == fay_beliefunit.fund_iota
+    assert fay_ownerunit.respect_bit == fay_beliefunit.respect_bit
+    assert fay_ownerunit.penny == fay_beliefunit.penny
+    assert fay_ownertimelinepoint._month == "March"
+    assert fay_ownertimelinepoint._hour == "0-12am"
+    assert fay_ownertimelinepoint._minute == 0
+    assert fay_ownertimelinepoint._monthday == 1
+    assert fay_ownertimelinepoint._c400_number == 0
+    assert fay_ownertimelinepoint._year_num == 0
 
 
-def test_get_belief_plantimelinepoint_ReturnsObj_Scenario1_BeliefUnit_NonDefaultAttrs():
+def test_get_belief_ownertimelinepoint_ReturnsObj_Scenario1_BeliefUnit_NonDefaultAttrs():
     # ESTABLISH
     fay_str = "Fay"
     slash_str = "/"
@@ -62,26 +62,26 @@ def test_get_belief_plantimelinepoint_ReturnsObj_Scenario1_BeliefUnit_NonDefault
     assert not fay_beliefunit._offi_time_max
 
     # WHEN
-    fay_plantimelinepoint = get_belief_plantimelinepoint(fay_beliefunit)
+    fay_ownertimelinepoint = get_belief_ownertimelinepoint(fay_beliefunit)
 
     # THEN
     assert fay_beliefunit._offi_time_max == 0
-    assert fay_plantimelinepoint.x_min == 0
+    assert fay_ownertimelinepoint.x_min == 0
 
-    assert fay_plantimelinepoint
-    # assert fay_plantimelinepoint.x_min == fay_offi_time_max
-    fay_planunit = fay_plantimelinepoint.x_planunit
-    assert fay_planunit.owner_name == "for_plantimelinepoint_calculation"
-    assert fay_planunit.belief_label == fay_beliefunit.belief_label
-    assert fay_planunit.knot == fay_beliefunit.knot
-    assert fay_planunit.fund_iota == fay_beliefunit.fund_iota
-    assert fay_planunit.respect_bit == fay_beliefunit.respect_bit
-    assert fay_planunit.penny == fay_beliefunit.penny
-    assert fay_plantimelinepoint._month == "March"
-    assert fay_plantimelinepoint._hour == "0-12am"
-    assert fay_plantimelinepoint._minute == 0
-    assert fay_plantimelinepoint._monthday == 1
-    assert fay_plantimelinepoint._c400_number == 0
-    assert fay_plantimelinepoint._year_num == 0
-    #  planunit_shop()
-    #  plantimelinepoint_shop()
+    assert fay_ownertimelinepoint
+    # assert fay_ownertimelinepoint.x_min == fay_offi_time_max
+    fay_ownerunit = fay_ownertimelinepoint.x_ownerunit
+    assert fay_ownerunit.owner_name == "for_ownertimelinepoint_calculation"
+    assert fay_ownerunit.belief_label == fay_beliefunit.belief_label
+    assert fay_ownerunit.knot == fay_beliefunit.knot
+    assert fay_ownerunit.fund_iota == fay_beliefunit.fund_iota
+    assert fay_ownerunit.respect_bit == fay_beliefunit.respect_bit
+    assert fay_ownerunit.penny == fay_beliefunit.penny
+    assert fay_ownertimelinepoint._month == "March"
+    assert fay_ownertimelinepoint._hour == "0-12am"
+    assert fay_ownertimelinepoint._minute == 0
+    assert fay_ownertimelinepoint._monthday == 1
+    assert fay_ownertimelinepoint._c400_number == 0
+    assert fay_ownertimelinepoint._year_num == 0
+    #  ownerunit_shop()
+    #  ownertimelinepoint_shop()

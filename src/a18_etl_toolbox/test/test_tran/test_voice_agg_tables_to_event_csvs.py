@@ -1,12 +1,12 @@
 from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.file_toolbox import create_path, open_file
-from src.a06_plan_logic.test._util.a06_str import (
+from src.a06_owner_logic.test._util.a06_str import (
     acct_cred_points_str,
     acct_name_str,
     belief_label_str,
+    owner_acctunit_str,
     owner_name_str,
-    plan_acctunit_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a12_hub_toolbox.hub_path import create_owner_event_dir_path
@@ -18,10 +18,10 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
     create_sound_and_voice_tables,
 )
-from src.a18_etl_toolbox.transformers import etl_voice_agg_to_event_plan_csvs
+from src.a18_etl_toolbox.transformers import etl_voice_agg_to_event_owner_csvs
 
 
-def test_etl_voice_agg_to_event_plan_csvs_PopulatesPlanPulabelTables(
+def test_etl_voice_agg_to_event_owner_csvs_PopulatesOwnerPulabelTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -33,7 +33,7 @@ def test_etl_voice_agg_to_event_plan_csvs_PopulatesPlanPulabelTables(
     amy23_str = "amy23"
     yao_acct_cred_points5 = 5
     sue_acct_cred_points7 = 7
-    put_agg_tablename = create_prime_tablename(plan_acctunit_str(), "v", "agg", "put")
+    put_agg_tablename = create_prime_tablename(owner_acctunit_str(), "v", "agg", "put")
     put_agg_csv = f"{put_agg_tablename}.csv"
     x_belief_mstr_dir = get_module_temp_dir()
     a23_bob_e3_dir = create_owner_event_dir_path(
@@ -45,8 +45,8 @@ def test_etl_voice_agg_to_event_plan_csvs_PopulatesPlanPulabelTables(
     a23_e3_plnacct_put_path = create_path(a23_bob_e3_dir, put_agg_csv)
     a23_e7_plnacct_put_path = create_path(a23_bob_e7_dir, put_agg_csv)
 
-    with sqlite3_connect(":memory:") as plan_db_conn:
-        cursor = plan_db_conn.cursor()
+    with sqlite3_connect(":memory:") as owner_db_conn:
+        cursor = owner_db_conn.cursor()
         create_sound_and_voice_tables(cursor)
         insert_raw_sqlstr = f"""
 INSERT INTO {put_agg_tablename} ({event_int_str()},{face_name_str()},{belief_label_str()},{owner_name_str()},{acct_name_str()},{acct_cred_points_str()})
@@ -62,7 +62,7 @@ VALUES
         assert os_path_exists(a23_e7_plnacct_put_path) is False
 
         # WHEN
-        etl_voice_agg_to_event_plan_csvs(cursor, x_belief_mstr_dir)
+        etl_voice_agg_to_event_owner_csvs(cursor, x_belief_mstr_dir)
 
         # THEN
         assert os_path_exists(a23_e3_plnacct_put_path)

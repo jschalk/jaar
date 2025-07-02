@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import get_dir_file_strs
-from src.a06_plan_logic.test._util.a06_str import (
+from src.a06_owner_logic.test._util.a06_str import (
     acct_cred_points_str,
     acct_debt_points_str,
     acct_name_str,
@@ -17,9 +17,9 @@ from src.a06_plan_logic.test._util.a06_str import (
     mass_str,
     morph_str,
     numor_str,
+    owner_acctunit_str,
     owner_name_str,
-    plan_acctunit_str,
-    planunit_str,
+    ownerunit_str,
     stop_want_str,
     task_str,
 )
@@ -39,8 +39,8 @@ from src.a17_idea_logic.idea_config import (
     get_idearef_from_file,
     idea_format_00013_conceptunit_v0_0_0,
     idea_format_00019_conceptunit_v0_0_0,
-    idea_format_00020_plan_acct_membership_v0_0_0,
-    idea_format_00021_plan_acctunit_v0_0_0,
+    idea_format_00020_owner_acct_membership_v0_0_0,
+    idea_format_00021_owner_acctunit_v0_0_0,
 )
 from src.a17_idea_logic.test._util.a17_env import src_module_dir
 from src.a17_idea_logic.test._util.a17_str import attributes_str
@@ -53,10 +53,10 @@ def test_config_str_functions_ReturnsObjs():
     assert acct_cred_points_str() == "acct_cred_points"
     assert group_debt_points_str() == "group_debt_points"
     assert group_cred_points_str() == "group_cred_points"
-    x00021_idea = "idea_format_00021_plan_acctunit_v0_0_0"
-    assert idea_format_00021_plan_acctunit_v0_0_0() == x00021_idea
-    x00020_idea = "idea_format_00020_plan_acct_membership_v0_0_0"
-    assert idea_format_00020_plan_acct_membership_v0_0_0() == x00020_idea
+    x00021_idea = "idea_format_00021_owner_acctunit_v0_0_0"
+    assert idea_format_00021_owner_acctunit_v0_0_0() == x00021_idea
+    x00020_idea = "idea_format_00020_owner_acct_membership_v0_0_0"
+    assert idea_format_00020_owner_acct_membership_v0_0_0() == x00020_idea
     x0003_idea = "idea_format_00013_conceptunit_v0_0_0"
     assert idea_format_00013_conceptunit_v0_0_0() == x0003_idea
 
@@ -73,7 +73,7 @@ def test_get_idea_formats_dir_ReturnsObj():
 
 def test_get_idearef_obj_ReturnsObj():
     # ESTABLISH
-    idea_name_00021 = idea_format_00021_plan_acctunit_v0_0_0()
+    idea_name_00021 = idea_format_00021_owner_acctunit_v0_0_0()
 
     # WHEN
     x_idearef = get_idearef_obj(idea_name_00021)
@@ -81,8 +81,8 @@ def test_get_idearef_obj_ReturnsObj():
     # THEN
     assert x_idearef.idea_name == idea_name_00021
     assert set(x_idearef.dimens) == {
-        plan_acctunit_str(),
-        planunit_str(),
+        owner_acctunit_str(),
+        ownerunit_str(),
         beliefunit_str(),
     }
     assert x_idearef._attributes != {}
@@ -91,7 +91,7 @@ def test_get_idearef_obj_ReturnsObj():
 
 def test_get_headers_list_ReturnsObj():
     # ESTABLISH / WHEN
-    format_00021_headers = _get_headers_list(idea_format_00021_plan_acctunit_v0_0_0())
+    format_00021_headers = _get_headers_list(idea_format_00021_owner_acctunit_v0_0_0())
 
     # THEN
     # print(f"{format_00001_headers=}")
@@ -122,7 +122,7 @@ def get_sorted_headers_str(idea_filename):
 
 def test_get_sorted_headers_str_ReturnsObj():
     # ESTABLISH / WHEN
-    br00021_headers = get_sorted_headers_str(idea_format_00021_plan_acctunit_v0_0_0())
+    br00021_headers = get_sorted_headers_str(idea_format_00021_owner_acctunit_v0_0_0())
     # THEN
     assert (
         br00021_headers
@@ -164,9 +164,9 @@ def test__generate_idea_dataframe_ReturnsObj():
     # ESTABLISH
     empty_d2 = []
     # WHEN
-    x_df = _generate_idea_dataframe(empty_d2, idea_format_00021_plan_acctunit_v0_0_0())
+    x_df = _generate_idea_dataframe(empty_d2, idea_format_00021_owner_acctunit_v0_0_0())
     # THEN
-    headers_list = _get_headers_list(idea_format_00021_plan_acctunit_v0_0_0())
+    headers_list = _get_headers_list(idea_format_00021_owner_acctunit_v0_0_0())
     assert list(x_df.columns) == headers_list
 
 
@@ -201,9 +201,9 @@ def test_idea_FilesExist():
     assert len(idea_filenames) == len(get_idea_format_filenames())
 
 
-def test_get_idearef_obj_HasCorrectAttrs_idea_format_00021_plan_acctunit_v0_0_0():
+def test_get_idearef_obj_HasCorrectAttrs_idea_format_00021_owner_acctunit_v0_0_0():
     # ESTABLISH
-    idea_name = idea_format_00021_plan_acctunit_v0_0_0()
+    idea_name = idea_format_00021_owner_acctunit_v0_0_0()
 
     # WHEN
     format_00001_idearef = get_idearef_obj(idea_name)
@@ -229,9 +229,9 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00021_plan_acctunit_v0_0_0(
     assert headers_list[6] == acct_debt_points_str()
 
 
-def test_get_idearef_obj_HasCorrectAttrs_idea_format_00020_plan_acct_membership_v0_0_0():
+def test_get_idearef_obj_HasCorrectAttrs_idea_format_00020_owner_acct_membership_v0_0_0():
     # ESTABLISH
-    idea_name = idea_format_00020_plan_acct_membership_v0_0_0()
+    idea_name = idea_format_00020_owner_acct_membership_v0_0_0()
 
     # WHEN
     format_00021_idearef = get_idearef_obj(idea_name)

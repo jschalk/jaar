@@ -8,7 +8,7 @@ from src.a12_hub_toolbox.hub_path import (
 from src.a12_hub_toolbox.hub_tool import (
     cellunit_get_from_dir,
     cellunit_save_to_dir,
-    save_arbitrary_planevent as save_planevent,
+    save_arbitrary_ownerevent as save_ownerevent,
 )
 from src.a15_belief_logic.belief_cell import create_cell_tree
 from src.a15_belief_logic.test._util.a15_env import (
@@ -48,9 +48,9 @@ def test_create_cell_tree_Scenaro1_LedgerDepth0(env_dir_setup_cleanup):
     x_cell = cellunit_shop(bob_str, [], event56, bud1_celldepth, quota=bud1_quota)
     bob37_root_cell_dir = cell_dir(belief_mstr_dir, a23_str, bob_str, tp37, [])
     cellunit_save_to_dir(bob37_root_cell_dir, x_cell)
-    save_planevent(belief_mstr_dir, a23_str, bob_str, event56, [[yao_str], [bob_str]])
+    save_ownerevent(belief_mstr_dir, a23_str, bob_str, event56, [[yao_str], [bob_str]])
     assert (
-        cellunit_get_from_dir(bob37_root_cell_dir).get_planevents_quota_ledger() == {}
+        cellunit_get_from_dir(bob37_root_cell_dir).get_ownerevents_quota_ledger() == {}
     )
 
     # WHEN
@@ -58,7 +58,7 @@ def test_create_cell_tree_Scenaro1_LedgerDepth0(env_dir_setup_cleanup):
 
     # THEN
     bob37_root_cell = cellunit_get_from_dir(bob37_root_cell_dir)
-    generated_bob37_quota_ledger = bob37_root_cell.get_planevents_quota_ledger()
+    generated_bob37_quota_ledger = bob37_root_cell.get_ownerevents_quota_ledger()
     assert generated_bob37_quota_ledger == {"Bob": 225, yao_str: 225}
 
 
@@ -79,9 +79,15 @@ def test_create_cell_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
     bob_accts = [[yao_str], [bob_str], [zia_str]]
     yao_accts = [[zia_str]]
     zia_accts = [[bob_str], [yao_str]]
-    bob_e56_path = save_planevent(belief_mstr_dir, a23_str, bob_str, event56, bob_accts)
-    yao_e56_path = save_planevent(belief_mstr_dir, a23_str, yao_str, event56, yao_accts)
-    zia_e56_path = save_planevent(belief_mstr_dir, a23_str, zia_str, event56, zia_accts)
+    bob_e56_path = save_ownerevent(
+        belief_mstr_dir, a23_str, bob_str, event56, bob_accts
+    )
+    yao_e56_path = save_ownerevent(
+        belief_mstr_dir, a23_str, yao_str, event56, yao_accts
+    )
+    zia_e56_path = save_ownerevent(
+        belief_mstr_dir, a23_str, zia_str, event56, zia_accts
+    )
     assert os_path_exists(bob_e56_path)
     assert os_path_exists(yao_e56_path)
     assert os_path_exists(zia_e56_path)
@@ -93,7 +99,7 @@ def test_create_cell_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
     assert os_path_exists(bob37_bob_node_path) is False
     assert os_path_exists(bob37_yao_node_path) is False
     assert os_path_exists(bob37_zia_node_path) is False
-    assert cellunit_get_from_dir(bob37_dir).get_planevents_quota_ledger() == {}
+    assert cellunit_get_from_dir(bob37_dir).get_ownerevents_quota_ledger() == {}
 
     # WHEN
     create_cell_tree(belief_mstr_dir, a23_str, bob_str, tp37)
@@ -137,10 +143,10 @@ def test_create_cell_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
     assert bob37_zia_cell.bud_owner_name == bob_str
     assert bob37_zia_cell.penny == 1
     assert bob37_zia_cell.quota == 150
-    gen_bob37_quota_ledger = bob37_cell.get_planevents_quota_ledger()
-    gen_bob37_bob_quota_ledger = bob37_bob_cell.get_planevents_quota_ledger()
-    gen_bob37_yao_quota_ledger = bob37_yao_cell.get_planevents_quota_ledger()
-    gen_bob37_zia_quota_ledger = bob37_zia_cell.get_planevents_quota_ledger()
+    gen_bob37_quota_ledger = bob37_cell.get_ownerevents_quota_ledger()
+    gen_bob37_bob_quota_ledger = bob37_bob_cell.get_ownerevents_quota_ledger()
+    gen_bob37_yao_quota_ledger = bob37_yao_cell.get_ownerevents_quota_ledger()
+    gen_bob37_zia_quota_ledger = bob37_zia_cell.get_ownerevents_quota_ledger()
     assert gen_bob37_quota_ledger == {bob_str: 150, yao_str: 150, zia_str: 150}
     assert gen_bob37_bob_quota_ledger == {bob_str: 50, yao_str: 50, zia_str: 50}
     assert gen_bob37_yao_quota_ledger == {zia_str: 150}
@@ -166,10 +172,18 @@ def test_create_cell_tree_Scenaro3_LedgerDepth1_MostRecentEvent(env_dir_setup_cl
     bob_accts = [[yao_str], [bob_str], [zia_str]]
     yao_accts = [[zia_str]]
     zia_accts = [[bob_str], [yao_str]]
-    bob_e55_path = save_planevent(belief_mstr_dir, a23_str, bob_str, event55, bob_accts)
-    yao_e44_path = save_planevent(belief_mstr_dir, a23_str, yao_str, event44, yao_accts)
-    yao_e33_path = save_planevent(belief_mstr_dir, a23_str, yao_str, event33, yao_accts)
-    zia_e33_path = save_planevent(belief_mstr_dir, a23_str, zia_str, event33, zia_accts)
+    bob_e55_path = save_ownerevent(
+        belief_mstr_dir, a23_str, bob_str, event55, bob_accts
+    )
+    yao_e44_path = save_ownerevent(
+        belief_mstr_dir, a23_str, yao_str, event44, yao_accts
+    )
+    yao_e33_path = save_ownerevent(
+        belief_mstr_dir, a23_str, yao_str, event33, yao_accts
+    )
+    zia_e33_path = save_ownerevent(
+        belief_mstr_dir, a23_str, zia_str, event33, zia_accts
+    )
     assert os_path_exists(bob_e55_path)
     assert os_path_exists(yao_e44_path)
     assert os_path_exists(zia_e33_path)
@@ -224,17 +238,17 @@ def test_create_cell_tree_Scenaro3_LedgerDepth1_MostRecentEvent(env_dir_setup_cl
     assert bob37_zia_cell.bud_owner_name == bob_str
     assert bob37_zia_cell.penny == 1
     assert bob37_zia_cell.quota == 150
-    gen_bob37_quota_ledger = bob37_cell.get_planevents_quota_ledger()
-    gen_bob37_bob_quota_ledger = bob37_bob_cell.get_planevents_quota_ledger()
-    gen_bob37_yao_quota_ledger = bob37_yao_cell.get_planevents_quota_ledger()
-    gen_bob37_zia_quota_ledger = bob37_zia_cell.get_planevents_quota_ledger()
+    gen_bob37_quota_ledger = bob37_cell.get_ownerevents_quota_ledger()
+    gen_bob37_bob_quota_ledger = bob37_bob_cell.get_ownerevents_quota_ledger()
+    gen_bob37_yao_quota_ledger = bob37_yao_cell.get_ownerevents_quota_ledger()
+    gen_bob37_zia_quota_ledger = bob37_zia_cell.get_ownerevents_quota_ledger()
     assert gen_bob37_quota_ledger == {bob_str: 150, yao_str: 150, zia_str: 150}
     assert gen_bob37_bob_quota_ledger == {bob_str: 50, yao_str: 50, zia_str: 50}
     assert gen_bob37_yao_quota_ledger == {zia_str: 150}
     assert gen_bob37_zia_quota_ledger == {bob_str: 75, yao_str: 75}
 
 
-def test_create_cell_tree_Scenaro4_LedgerDepth1_OneOwnerHasNoPast_planevent(
+def test_create_cell_tree_Scenaro4_LedgerDepth1_OneOwnerHasNoPast_ownerevent(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -256,10 +270,18 @@ def test_create_cell_tree_Scenaro4_LedgerDepth1_OneOwnerHasNoPast_planevent(
     bob_accts = [[yao_str], [bob_str], [zia_str]]
     yao_accts = [[zia_str]]
     zia_accts = [[bob_str], [yao_str]]
-    bob_e55_path = save_planevent(belief_mstr_dir, a23_str, bob_str, event55, bob_accts)
-    yao_e44_path = save_planevent(belief_mstr_dir, a23_str, yao_str, event44, yao_accts)
-    yao_e33_path = save_planevent(belief_mstr_dir, a23_str, yao_str, event33, yao_accts)
-    zia_e66_path = save_planevent(belief_mstr_dir, a23_str, zia_str, event66, zia_accts)
+    bob_e55_path = save_ownerevent(
+        belief_mstr_dir, a23_str, bob_str, event55, bob_accts
+    )
+    yao_e44_path = save_ownerevent(
+        belief_mstr_dir, a23_str, yao_str, event44, yao_accts
+    )
+    yao_e33_path = save_ownerevent(
+        belief_mstr_dir, a23_str, yao_str, event33, yao_accts
+    )
+    zia_e66_path = save_ownerevent(
+        belief_mstr_dir, a23_str, zia_str, event66, zia_accts
+    )
     assert os_path_exists(bob_e55_path)
     assert os_path_exists(yao_e44_path)
     assert os_path_exists(zia_e66_path)
@@ -301,9 +323,9 @@ def test_create_cell_tree_Scenaro4_LedgerDepth1_OneOwnerHasNoPast_planevent(
     assert bob37_yao_cell.bud_owner_name == bob_str
     assert bob37_yao_cell.penny == 1
     assert bob37_yao_cell.quota == 150
-    gen_bob37_quota_ledger = bob37_cell.get_planevents_quota_ledger()
-    gen_bob37_bob_quota_ledger = bob37_bob_cell.get_planevents_quota_ledger()
-    gen_bob37_yao_quota_ledger = bob37_yao_cell.get_planevents_quota_ledger()
+    gen_bob37_quota_ledger = bob37_cell.get_ownerevents_quota_ledger()
+    gen_bob37_bob_quota_ledger = bob37_bob_cell.get_ownerevents_quota_ledger()
+    gen_bob37_yao_quota_ledger = bob37_yao_cell.get_ownerevents_quota_ledger()
     assert gen_bob37_quota_ledger == {bob_str: 150, yao_str: 150, zia_str: 150}
     assert gen_bob37_bob_quota_ledger == {bob_str: 50, yao_str: 50, zia_str: 50}
     assert gen_bob37_yao_quota_ledger == {zia_str: 150}
@@ -330,10 +352,18 @@ def test_create_cell_tree_Scenaro5_LedgerDepth1_ZeroQuotaDoesNotGetCreated(
     bob_accts = [[yao_str], [bob_str], [zia_str]]
     yao_accts = [[zia_str]]
     zia_accts = [[bob_str], [yao_str]]
-    bob_e55_path = save_planevent(belief_mstr_dir, a23_str, bob_str, event55, bob_accts)
-    yao_e44_path = save_planevent(belief_mstr_dir, a23_str, yao_str, event44, yao_accts)
-    yao_e33_path = save_planevent(belief_mstr_dir, a23_str, yao_str, event33, yao_accts)
-    zia_e33_path = save_planevent(belief_mstr_dir, a23_str, zia_str, event33, zia_accts)
+    bob_e55_path = save_ownerevent(
+        belief_mstr_dir, a23_str, bob_str, event55, bob_accts
+    )
+    yao_e44_path = save_ownerevent(
+        belief_mstr_dir, a23_str, yao_str, event44, yao_accts
+    )
+    yao_e33_path = save_ownerevent(
+        belief_mstr_dir, a23_str, yao_str, event33, yao_accts
+    )
+    zia_e33_path = save_ownerevent(
+        belief_mstr_dir, a23_str, zia_str, event33, zia_accts
+    )
     assert os_path_exists(bob_e55_path)
     assert os_path_exists(yao_e44_path)
     assert os_path_exists(zia_e33_path)
@@ -364,9 +394,9 @@ def test_create_cell_tree_Scenaro5_LedgerDepth1_ZeroQuotaDoesNotGetCreated(
     bob37_cell = cellunit_get_from_dir(bob37_dir)
     bob37_yao_cell = cellunit_get_from_dir(bob37_yao_dir)
     bob37_zia_cell = cellunit_get_from_dir(bob37_zia_dir)
-    gen_bob37_quota_ledger = bob37_cell.get_planevents_quota_ledger()
-    gen_bob37_yao_quota_ledger = bob37_yao_cell.get_planevents_quota_ledger()
-    gen_bob37_zia_quota_ledger = bob37_zia_cell.get_planevents_quota_ledger()
+    gen_bob37_quota_ledger = bob37_cell.get_ownerevents_quota_ledger()
+    gen_bob37_yao_quota_ledger = bob37_yao_cell.get_ownerevents_quota_ledger()
+    gen_bob37_zia_quota_ledger = bob37_zia_cell.get_ownerevents_quota_ledger()
     assert gen_bob37_quota_ledger == {bob_str: 0, yao_str: 1, zia_str: 1}
     assert gen_bob37_yao_quota_ledger == {zia_str: 1}
     assert gen_bob37_zia_quota_ledger == {bob_str: 1, yao_str: 0}

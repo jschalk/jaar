@@ -1,7 +1,7 @@
 from os import getcwd as os_getcwd
 from src.a00_data_toolbox.dict_toolbox import get_from_nested_dict
 from src.a00_data_toolbox.file_toolbox import create_path, open_json
-from src.a08_plan_atom_logic.atom_config import get_all_plan_dimen_delete_keys
+from src.a08_owner_atom_logic.atom_config import get_all_owner_dimen_delete_keys
 
 
 def config_file_dir() -> str:
@@ -197,7 +197,7 @@ def get_pidginable_args() -> set:
 def find_set_otx_inx_args(args: set) -> set:
     """Receives set of args, returns a set with all "Pidginable" args replaced with "_otx" and "_inx" """
     all_pidginable = get_pidginable_args()
-    all_pidginable.update(get_all_plan_dimen_delete_keys())
+    all_pidginable.update(get_all_owner_dimen_delete_keys())
     all_pidginable.intersection_update(args)
     transformed_args = set()
     for arg in args:

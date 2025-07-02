@@ -9,8 +9,8 @@ BUDUNIT_FILENAME = "budunit.json"
 BUD_MANDATE_FILENAME = "bud_acct_mandate_ledger.json"
 CELLNODE_FILENAME = "cell.json"
 CELL_MANDATE_FILENAME = "cell_acct_mandate_ledger.json"
-PLANPOINT_FILENAME = "planpoint.json"
-PLANEVENT_FILENAME = "plan.json"
+OWNERPOINT_FILENAME = "ownerpoint.json"
+OWNEREVENT_FILENAME = "owner.json"
 EVENT_ALL_PACK_FILENAME = "all_pack.json"
 EVENT_EXPRESSED_PACK_FILENAME = "expressed_pack.json"
 
@@ -145,14 +145,14 @@ def create_bud_acct_mandate_ledger_path(
     return create_path(timepoint_dir, "bud_acct_mandate_ledger.json")
 
 
-def create_planpoint_path(
+def create_ownerpoint_path(
     belief_mstr_dir: str, belief_label: LabelTerm, owner_name: OwnerName, bud_time: int
 ) -> str:
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\owners\\owner_name\\buds\n\\bud_time\\planpoint.json"""
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\owners\\owner_name\\buds\n\\bud_time\\ownerpoint.json"""
     timepoint_dir = create_bud_dir_path(
         belief_mstr_dir, belief_label, owner_name, bud_time
     )
-    return create_path(timepoint_dir, "planpoint.json")
+    return create_path(timepoint_dir, "ownerpoint.json")
 
 
 def create_cell_dir_path(
@@ -213,15 +213,15 @@ def create_owner_event_dir_path(
     return create_path(belief_events_dir, event_int)
 
 
-def create_planevent_path(
+def create_ownerevent_path(
     belief_mstr_dir: str, belief_label: LabelTerm, owner_name: OwnerName, event_int: int
 ):
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\owners\\owner_name\\events\\event_int\\plan.json"""
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\owners\\owner_name\\events\\event_int\\owner.json"""
     owner_event_dir_path = create_owner_event_dir_path(
         belief_mstr_dir, belief_label, owner_name, event_int
     )
-    plan_filename = "plan.json"
-    return create_path(owner_event_dir_path, plan_filename)
+    owner_filename = "owner.json"
+    return create_path(owner_event_dir_path, owner_filename)
 
 
 def create_event_all_pack_path(

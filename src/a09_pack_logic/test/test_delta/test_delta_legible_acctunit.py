@@ -1,34 +1,34 @@
-from src.a06_plan_logic.plan import planunit_shop
-from src.a06_plan_logic.test._util.a06_str import acct_name_str, plan_acctunit_str
-from src.a08_plan_atom_logic.atom import planatom_shop
-from src.a08_plan_atom_logic.test._util.a08_str import (
+from src.a06_owner_logic.owner import ownerunit_shop
+from src.a06_owner_logic.test._util.a06_str import acct_name_str, owner_acctunit_str
+from src.a08_owner_atom_logic.atom import owneratom_shop
+from src.a08_owner_atom_logic.test._util.a08_str import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,
 )
-from src.a09_pack_logic.delta import plandelta_shop
+from src.a09_pack_logic.delta import ownerdelta_shop
 from src.a09_pack_logic.legible import create_legible_list
 
 
 def test_create_legible_list_ReturnsObj_acctunit_INSERT():
     # ESTABLISH
-    dimen = plan_acctunit_str()
+    dimen = owner_acctunit_str()
     acct_cred_points_str = "acct_cred_points"
     acct_debt_points_str = "acct_debt_points"
     acct_cred_points_value = 81
     acct_debt_points_value = 43
     yao_str = "Yao"
-    yao_planatom = planatom_shop(dimen, INSERT_str())
-    yao_planatom.set_arg(acct_name_str(), yao_str)
-    yao_planatom.set_arg(acct_cred_points_str, acct_cred_points_value)
-    yao_planatom.set_arg(acct_debt_points_str, acct_debt_points_value)
-    # print(f"{yao_planatom=}")
-    x_plandelta = plandelta_shop()
-    x_plandelta.set_planatom(yao_planatom)
-    sue_plan = planunit_shop("Sue")
+    yao_owneratom = owneratom_shop(dimen, INSERT_str())
+    yao_owneratom.set_arg(acct_name_str(), yao_str)
+    yao_owneratom.set_arg(acct_cred_points_str, acct_cred_points_value)
+    yao_owneratom.set_arg(acct_debt_points_str, acct_debt_points_value)
+    # print(f"{yao_owneratom=}")
+    x_ownerdelta = ownerdelta_shop()
+    x_ownerdelta.set_owneratom(yao_owneratom)
+    sue_owner = ownerunit_shop("Sue")
 
     # WHEN
-    legible_list = create_legible_list(x_plandelta, sue_plan)
+    legible_list = create_legible_list(x_ownerdelta, sue_owner)
 
     # THEN
     x_str = f"{yao_str} was added with {acct_cred_points_value} score credit and {acct_debt_points_value} score debt"
@@ -38,23 +38,23 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT():
 
 def test_create_legible_list_ReturnsObj_acctunit_INSERT_score():
     # ESTABLISH
-    dimen = plan_acctunit_str()
+    dimen = owner_acctunit_str()
     acct_cred_points_str = "acct_cred_points"
     acct_debt_points_str = "acct_debt_points"
     acct_cred_points_value = 81
     acct_debt_points_value = 43
     yao_str = "Yao"
-    yao_planatom = planatom_shop(dimen, INSERT_str())
-    yao_planatom.set_arg(acct_name_str(), yao_str)
-    yao_planatom.set_arg(acct_cred_points_str, acct_cred_points_value)
-    yao_planatom.set_arg(acct_debt_points_str, acct_debt_points_value)
-    # print(f"{yao_planatom=}")
-    x_plandelta = plandelta_shop()
-    x_plandelta.set_planatom(yao_planatom)
-    sue_plan = planunit_shop("Sue")
+    yao_owneratom = owneratom_shop(dimen, INSERT_str())
+    yao_owneratom.set_arg(acct_name_str(), yao_str)
+    yao_owneratom.set_arg(acct_cred_points_str, acct_cred_points_value)
+    yao_owneratom.set_arg(acct_debt_points_str, acct_debt_points_value)
+    # print(f"{yao_owneratom=}")
+    x_ownerdelta = ownerdelta_shop()
+    x_ownerdelta.set_owneratom(yao_owneratom)
+    sue_owner = ownerunit_shop("Sue")
 
     # WHEN
-    legible_list = create_legible_list(x_plandelta, sue_plan)
+    legible_list = create_legible_list(x_ownerdelta, sue_owner)
 
     # THEN
     x_str = f"{yao_str} was added with {acct_cred_points_value} score credit and {acct_debt_points_value} score debt"
@@ -64,23 +64,23 @@ def test_create_legible_list_ReturnsObj_acctunit_INSERT_score():
 
 def test_create_legible_list_ReturnsObj_acctunit_UPDATE_acct_cred_points_acct_debt_points():
     # ESTABLISH
-    dimen = plan_acctunit_str()
+    dimen = owner_acctunit_str()
     acct_cred_points_str = "acct_cred_points"
     acct_debt_points_str = "acct_debt_points"
     acct_cred_points_value = 81
     acct_debt_points_value = 43
     yao_str = "Yao"
-    yao_planatom = planatom_shop(dimen, UPDATE_str())
-    yao_planatom.set_arg(acct_name_str(), yao_str)
-    yao_planatom.set_arg(acct_cred_points_str, acct_cred_points_value)
-    yao_planatom.set_arg(acct_debt_points_str, acct_debt_points_value)
-    # print(f"{yao_planatom=}")
-    x_plandelta = plandelta_shop()
-    x_plandelta.set_planatom(yao_planatom)
-    sue_plan = planunit_shop("Sue")
+    yao_owneratom = owneratom_shop(dimen, UPDATE_str())
+    yao_owneratom.set_arg(acct_name_str(), yao_str)
+    yao_owneratom.set_arg(acct_cred_points_str, acct_cred_points_value)
+    yao_owneratom.set_arg(acct_debt_points_str, acct_debt_points_value)
+    # print(f"{yao_owneratom=}")
+    x_ownerdelta = ownerdelta_shop()
+    x_ownerdelta.set_owneratom(yao_owneratom)
+    sue_owner = ownerunit_shop("Sue")
 
     # WHEN
-    legible_list = create_legible_list(x_plandelta, sue_plan)
+    legible_list = create_legible_list(x_ownerdelta, sue_owner)
 
     # THEN
     x_str = f"{yao_str} now has {acct_cred_points_value} score credit and {acct_debt_points_value} score debt."
@@ -90,20 +90,20 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_acct_cred_points_acct_de
 
 def test_create_legible_list_ReturnsObj_acctunit_UPDATE_acct_cred_points():
     # ESTABLISH
-    dimen = plan_acctunit_str()
+    dimen = owner_acctunit_str()
     acct_cred_points_str = "acct_cred_points"
     acct_cred_points_value = 81
     yao_str = "Yao"
-    yao_planatom = planatom_shop(dimen, UPDATE_str())
-    yao_planatom.set_arg(acct_name_str(), yao_str)
-    yao_planatom.set_arg(acct_cred_points_str, acct_cred_points_value)
-    # print(f"{yao_planatom=}")
-    x_plandelta = plandelta_shop()
-    x_plandelta.set_planatom(yao_planatom)
-    sue_plan = planunit_shop("Sue")
+    yao_owneratom = owneratom_shop(dimen, UPDATE_str())
+    yao_owneratom.set_arg(acct_name_str(), yao_str)
+    yao_owneratom.set_arg(acct_cred_points_str, acct_cred_points_value)
+    # print(f"{yao_owneratom=}")
+    x_ownerdelta = ownerdelta_shop()
+    x_ownerdelta.set_owneratom(yao_owneratom)
+    sue_owner = ownerunit_shop("Sue")
 
     # WHEN
-    legible_list = create_legible_list(x_plandelta, sue_plan)
+    legible_list = create_legible_list(x_ownerdelta, sue_owner)
 
     # THEN
     x_str = f"{yao_str} now has {acct_cred_points_value} score credit."
@@ -113,20 +113,20 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_acct_cred_points():
 
 def test_create_legible_list_ReturnsObj_acctunit_UPDATE_acct_debt_points():
     # ESTABLISH
-    dimen = plan_acctunit_str()
+    dimen = owner_acctunit_str()
     acct_debt_points_str = "acct_debt_points"
     acct_debt_points_value = 43
     yao_str = "Yao"
-    yao_planatom = planatom_shop(dimen, UPDATE_str())
-    yao_planatom.set_arg(acct_name_str(), yao_str)
-    yao_planatom.set_arg(acct_debt_points_str, acct_debt_points_value)
-    # print(f"{yao_planatom=}")
-    x_plandelta = plandelta_shop()
-    x_plandelta.set_planatom(yao_planatom)
-    sue_plan = planunit_shop("Sue")
+    yao_owneratom = owneratom_shop(dimen, UPDATE_str())
+    yao_owneratom.set_arg(acct_name_str(), yao_str)
+    yao_owneratom.set_arg(acct_debt_points_str, acct_debt_points_value)
+    # print(f"{yao_owneratom=}")
+    x_ownerdelta = ownerdelta_shop()
+    x_ownerdelta.set_owneratom(yao_owneratom)
+    sue_owner = ownerunit_shop("Sue")
 
     # WHEN
-    legible_list = create_legible_list(x_plandelta, sue_plan)
+    legible_list = create_legible_list(x_ownerdelta, sue_owner)
 
     # THEN
     x_str = f"{yao_str} now has {acct_debt_points_value} score debt."
@@ -136,17 +136,17 @@ def test_create_legible_list_ReturnsObj_acctunit_UPDATE_acct_debt_points():
 
 def test_create_legible_list_ReturnsObj_acctunit_DELETE():
     # ESTABLISH
-    dimen = plan_acctunit_str()
+    dimen = owner_acctunit_str()
     yao_str = "Yao"
-    yao_planatom = planatom_shop(dimen, DELETE_str())
-    yao_planatom.set_arg(acct_name_str(), yao_str)
-    # print(f"{yao_planatom=}")
-    x_plandelta = plandelta_shop()
-    x_plandelta.set_planatom(yao_planatom)
-    sue_plan = planunit_shop("Sue")
+    yao_owneratom = owneratom_shop(dimen, DELETE_str())
+    yao_owneratom.set_arg(acct_name_str(), yao_str)
+    # print(f"{yao_owneratom=}")
+    x_ownerdelta = ownerdelta_shop()
+    x_ownerdelta.set_owneratom(yao_owneratom)
+    sue_owner = ownerunit_shop("Sue")
 
     # WHEN
-    legible_list = create_legible_list(x_plandelta, sue_plan)
+    legible_list = create_legible_list(x_ownerdelta, sue_owner)
 
     # THEN
     x_str = f"{yao_str} was removed from score accts."

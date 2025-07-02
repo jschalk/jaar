@@ -10,13 +10,13 @@ from src.a00_data_toolbox.dict_toolbox import (
 )
 from src.a00_data_toolbox.file_toolbox import open_file
 from src.a01_term_logic.term import BeliefLabel, OwnerName
-from src.a06_plan_logic.plan import PlanUnit
+from src.a06_owner_logic.owner import OwnerUnit
 from src.a07_timeline_logic.timeline import timelineunit_shop
-from src.a08_plan_atom_logic.atom import PlanAtom, atomrow_shop
+from src.a08_owner_atom_logic.atom import OwnerAtom, atomrow_shop
 from src.a09_pack_logic.delta import (
-    PlanDelta,
-    get_dimens_cruds_plandelta,
-    plandelta_shop,
+    OwnerDelta,
+    get_dimens_cruds_ownerdelta,
+    ownerdelta_shop,
 )
 from src.a09_pack_logic.pack import packunit_shop
 from src.a12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
@@ -85,37 +85,39 @@ def _generate_idea_dataframe(d2_list: list[list[str]], idea_name: str) -> DataFr
     return DataFrame(d2_list, columns=_get_headers_list(idea_name))
 
 
-def create_idea_df(x_planunit: PlanUnit, idea_name: str) -> DataFrame:
-    x_plandelta = plandelta_shop()
-    x_plandelta.add_all_planatoms(x_planunit)
+def create_idea_df(x_ownerunit: OwnerUnit, idea_name: str) -> DataFrame:
+    x_ownerdelta = ownerdelta_shop()
+    x_ownerdelta.add_all_owneratoms(x_ownerunit)
     x_idearef = get_idearef_obj(idea_name)
-    x_belief_label = x_planunit.belief_label
-    x_owner_name = x_planunit.owner_name
-    sorted_planatoms = _get_sorted_INSERT_str_planatoms(x_plandelta, x_idearef)
-    d2_list = _create_d2_list(sorted_planatoms, x_idearef, x_belief_label, x_owner_name)
+    x_belief_label = x_ownerunit.belief_label
+    x_owner_name = x_ownerunit.owner_name
+    sorted_owneratoms = _get_sorted_INSERT_str_owneratoms(x_ownerdelta, x_idearef)
+    d2_list = _create_d2_list(
+        sorted_owneratoms, x_idearef, x_belief_label, x_owner_name
+    )
     d2_list = _delta_all_task_values(d2_list, x_idearef)
     x_idea = _generate_idea_dataframe(d2_list, idea_name)
     sorting_columns = x_idearef.get_headers_list()
     return _sort_dataframe(x_idea, sorting_columns)
 
 
-def _get_sorted_INSERT_str_planatoms(
-    x_plandelta: PlanDelta, x_idearef: IdeaRef
-) -> list[PlanAtom]:
+def _get_sorted_INSERT_str_owneratoms(
+    x_ownerdelta: OwnerDelta, x_idearef: IdeaRef
+) -> list[OwnerAtom]:
     dimen_set = set(x_idearef.dimens)
     curd_set = {"INSERT"}
-    limited_delta = get_dimens_cruds_plandelta(x_plandelta, dimen_set, curd_set)
-    return limited_delta.get_dimen_sorted_planatoms_list()
+    limited_delta = get_dimens_cruds_ownerdelta(x_ownerdelta, dimen_set, curd_set)
+    return limited_delta.get_dimen_sorted_owneratoms_list()
 
 
 def _create_d2_list(
-    sorted_planatoms: list[PlanAtom],
+    sorted_owneratoms: list[OwnerAtom],
     x_idearef: IdeaRef,
     x_belief_label: BeliefLabel,
     x_owner_name: OwnerName,
 ):
     d2_list = []
-    for x_planatom in sorted_planatoms:
+    for x_owneratom in sorted_owneratoms:
         d1_list = []
         for x_attribute in x_idearef.get_headers_list():
             if x_attribute == "belief_label":
@@ -123,7 +125,7 @@ def _create_d2_list(
             elif x_attribute == "owner_name":
                 d1_list.append(x_owner_name)
             else:
-                d1_list.append(x_planatom.get_value(x_attribute))
+                d1_list.append(x_owneratom.get_value(x_attribute))
         d2_list.append(d1_list)
     return d2_list
 
@@ -149,8 +151,8 @@ def _sort_dataframe(x_idea: DataFrame, sorting_columns: list[str]) -> DataFrame:
     return x_idea
 
 
-def save_idea_csv(x_ideaname: str, x_planunit: PlanUnit, x_dir: str, x_filename: str):
-    x_dataframe = create_idea_df(x_planunit, x_ideaname)
+def save_idea_csv(x_ideaname: str, x_ownerunit: OwnerUnit, x_dir: str, x_filename: str):
+    x_dataframe = create_idea_df(x_ownerunit, x_ideaname)
     save_dataframe_to_csv(x_dataframe, x_dir, x_filename)
 
 
@@ -164,9 +166,9 @@ def get_csv_idearef(header_row: list[str]) -> IdeaRef:
     return get_idearef_obj(x_ideaname)
 
 
-def _remove_non_plan_dimens_from_idearef(x_idearef: IdeaRef) -> IdeaRef:
+def _remove_non_owner_dimens_from_idearef(x_idearef: IdeaRef) -> IdeaRef:
     to_delete_dimen_set = {
-        dimen for dimen in x_idearef.dimens if not dimen.startswith("plan")
+        dimen for dimen in x_idearef.dimens if not dimen.startswith("owner")
     }
     dimens_set = set(x_idearef.dimens)
     for to_delete_dimen in to_delete_dimen_set:
@@ -176,13 +178,13 @@ def _remove_non_plan_dimens_from_idearef(x_idearef: IdeaRef) -> IdeaRef:
     return x_idearef
 
 
-def make_plandelta(x_csv: str) -> PlanDelta:
+def make_ownerdelta(x_csv: str) -> OwnerDelta:
     header_row, headerless_csv = extract_csv_headers(x_csv)
     x_idearef = get_csv_idearef(header_row)
-    _remove_non_plan_dimens_from_idearef(x_idearef)
+    _remove_non_owner_dimens_from_idearef(x_idearef)
     x_reader = csv_reader(headerless_csv.splitlines(), delimiter=",")
     x_dict = get_positional_dict(header_row)
-    x_plandelta = plandelta_shop()
+    x_ownerdelta = ownerdelta_shop()
 
     for row in x_reader:
         x_atomrow = atomrow_shop(x_idearef.dimens, "INSERT")
@@ -190,9 +192,9 @@ def make_plandelta(x_csv: str) -> PlanDelta:
             if header_index := x_dict.get(x_header):
                 x_atomrow.__dict__[x_header] = row[header_index]
 
-        for x_planatom in x_atomrow.get_planatoms():
-            x_plandelta.set_planatom(x_planatom)
-    return x_plandelta
+        for x_owneratom in x_atomrow.get_owneratoms():
+            x_ownerdelta.set_owneratom(x_owneratom)
+    return x_ownerdelta
 
 
 def _load_individual_idea_csv(
@@ -203,10 +205,10 @@ def _load_individual_idea_csv(
 ):
     x_hubunit = hubunit_shop(belief_mstr_dir, x_belief_label, x_owner_name)
     x_hubunit.initialize_pack_gut_files()
-    x_plandelta = make_plandelta(complete_csv)
-    # x_plandelta = get_minimal_plandelta(x_plandelta, x_gut)
+    x_ownerdelta = make_ownerdelta(complete_csv)
+    # x_ownerdelta = get_minimal_ownerdelta(x_ownerdelta, x_gut)
     x_packunit = packunit_shop(x_owner_name, x_belief_label)
-    x_packunit.set_plandelta(x_plandelta)
+    x_packunit.set_ownerdelta(x_ownerdelta)
     x_hubunit.save_pack_file(x_packunit)
     x_hubunit._create_gut_from_packs()
 

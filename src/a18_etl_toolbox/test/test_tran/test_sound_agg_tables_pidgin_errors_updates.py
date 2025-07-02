@@ -1,5 +1,5 @@
 from sqlite3 import connect as sqlite3_connect
-from src.a06_plan_logic.test._util.a06_str import acct_name_str, plan_acctunit_str
+from src.a06_owner_logic.test._util.a06_str import acct_name_str, owner_acctunit_str
 from src.a09_pack_logic.test._util.a09_str import (
     belief_label_str,
     event_int_str,
@@ -19,7 +19,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_knot_exists_in_name_error_update_sqlstr,
     create_prime_tablename,
 )
-from src.a18_etl_toolbox.transformers import set_belief_plan_sound_agg_knot_errors
+from src.a18_etl_toolbox.transformers import set_belief_owner_sound_agg_knot_errors
 
 
 def test_create_knot_exists_in_name_error_update_sqlstr_ReturnsObj_PopulatesTable_Scenario0():
@@ -36,7 +36,7 @@ def test_create_knot_exists_in_name_error_update_sqlstr_ReturnsObj_PopulatesTabl
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         cursor.execute(CREATE_PLNACCT_SOUND_PUT_AGG_STR)
-        plnacct_dimen = plan_acctunit_str()
+        plnacct_dimen = owner_acctunit_str()
         plnacct_s_agg_put = create_prime_tablename(plnacct_dimen, "s", "agg", "put")
         insert_plnacct_sqlstr = f"""INSERT INTO {plnacct_s_agg_put} (
   {event_int_str()}, {face_name_str()}, {belief_label_str()}, {owner_name_str()}, {acct_name_str()})
@@ -92,7 +92,7 @@ def test_create_knot_exists_in_label_error_update_sqlstr_ReturnsObj_PopulatesTab
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         cursor.execute(CREATE_PLNACCT_SOUND_PUT_AGG_STR)
-        plnacct_dimen = plan_acctunit_str()
+        plnacct_dimen = owner_acctunit_str()
         plnacct_s_agg_put = create_prime_tablename(plnacct_dimen, "s", "agg", "put")
         insert_plnacct_sqlstr = f"""INSERT INTO {plnacct_s_agg_put} (
   {event_int_str()}, {face_name_str()}, {belief_label_str()}, {owner_name_str()}, {acct_name_str()})
@@ -135,7 +135,7 @@ VALUES
         ]
 
 
-def test_set_belief_plan_sound_agg_knot_errors_PopulatesTable_Scenario0():
+def test_set_belief_owner_sound_agg_knot_errors_PopulatesTable_Scenario0():
     # ESTABLISH
     sue_str = "Sue"
     yao_str = "Yao"
@@ -151,7 +151,7 @@ def test_set_belief_plan_sound_agg_knot_errors_PopulatesTable_Scenario0():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         cursor.execute(CREATE_PLNACCT_SOUND_PUT_AGG_STR)
-        plnacct_dimen = plan_acctunit_str()
+        plnacct_dimen = owner_acctunit_str()
         plnacct_s_agg_put = create_prime_tablename(plnacct_dimen, "s", "agg", "put")
         insert_plnacct_sqlstr = f"""INSERT INTO {plnacct_s_agg_put} (
   {event_int_str()}, {face_name_str()}, {belief_label_str()}, {owner_name_str()}, {acct_name_str()})
@@ -176,7 +176,7 @@ VALUES
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
-        set_belief_plan_sound_agg_knot_errors(cursor)
+        set_belief_owner_sound_agg_knot_errors(cursor)
 
         # THEN
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 2

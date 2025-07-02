@@ -6,7 +6,7 @@ from src.a02_finance_logic.finance_config import (
     filter_penny,
 )
 from src.a02_finance_logic.test._util.a02_str import knot_str
-from src.a06_plan_logic.test._util.a06_str import (
+from src.a06_owner_logic.test._util.a06_str import (
     belief_label_str,
     fund_iota_str,
     penny_str,

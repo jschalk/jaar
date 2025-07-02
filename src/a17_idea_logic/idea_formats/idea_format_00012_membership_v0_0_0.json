@@ -21,9 +21,9 @@
     },
     "idea_number": "br00012",
     "dimens": [
-        "planunit",
-        "plan_acctunit",
-        "plan_acct_membership",
+        "ownerunit",
+        "owner_acctunit",
+        "owner_acct_membership",
         "beliefunit"
     ]
 }

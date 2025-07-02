@@ -902,7 +902,7 @@ def test_create_update_inconsistency_error_query_ReturnsObj_Scenario0():
         x_tablename = "dark_side"
         x_columns = ["id", "name", "age", "email", "hair"]
         x_error_holder_column = "error_holder2"
-        x_error_explanation = "error_explanation2"
+        x_error_str = "error_str2"
         create_table_from_columns(cursor, x_tablename, x_columns, {})
 
         # WHEN
@@ -912,7 +912,7 @@ def test_create_update_inconsistency_error_query_ReturnsObj_Scenario0():
             {"id"},
             {"email"},
             x_error_holder_column,
-            x_error_explanation,
+            x_error_str,
         )
 
         # THEN
@@ -925,7 +925,7 @@ HAVING MIN(name) != MAX(name)
     OR MIN(hair) != MAX(hair)
 )
 UPDATE dark_side
-SET {x_error_holder_column} = '{x_error_explanation}'
+SET {x_error_holder_column} = '{x_error_str}'
 FROM inconsistency_rows
 WHERE inconsistency_rows.id = dark_side.id
 ;
@@ -941,7 +941,7 @@ def test_create_update_inconsistency_error_query_ReturnsObj_Scenario1():
         x_tablename = "dark_side"
         x_columns = ["id", "name", "age", "email", "hair"]
         x_error_holder_column = "error_holder2"
-        x_error_explanation = "error_explanation2"
+        x_error_str = "error_relevant_elements"
         create_table_from_columns(cursor, x_tablename, x_columns, {})
 
         # WHEN
@@ -951,7 +951,7 @@ def test_create_update_inconsistency_error_query_ReturnsObj_Scenario1():
             {"id", "name"},
             {"email"},
             x_error_holder_column,
-            x_error_explanation,
+            x_error_str,
         )
 
         # THEN
@@ -963,7 +963,7 @@ HAVING MIN(age) != MAX(age)
     OR MIN(hair) != MAX(hair)
 )
 UPDATE dark_side
-SET {x_error_holder_column} = '{x_error_explanation}'
+SET {x_error_holder_column} = '{x_error_str}'
 FROM inconsistency_rows
 WHERE inconsistency_rows.id = dark_side.id
     AND inconsistency_rows.name = dark_side.name

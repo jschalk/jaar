@@ -11,10 +11,10 @@ from src.a00_data_toolbox.file_toolbox import (
     set_dir,
 )
 from src.a01_term_logic.term import EventInt, LabelTerm, OwnerName, RopeTerm
-from src.a06_plan_logic.plan import (
-    PlanUnit,
-    get_from_json as planunit_get_from_json,
-    planunit_shop,
+from src.a06_owner_logic.owner import (
+    OwnerUnit,
+    get_from_json as ownerunit_get_from_json,
+    ownerunit_shop,
 )
 from src.a11_bud_logic.bud import BudUnit, TimeLinePoint, get_budunit_from_dict
 from src.a11_bud_logic.cell import CellUnit, cellunit_get_from_dict, cellunit_shop
@@ -26,32 +26,32 @@ from src.a12_hub_toolbox.hub_path import (
     create_cell_dir_path,
     create_gut_path,
     create_job_path,
-    create_planevent_path,
-    create_planpoint_path,
+    create_ownerevent_path,
+    create_ownerpoint_path,
 )
 
 
-def save_plan_file(dest_dir: str, filename: str = None, planunit: PlanUnit = None):
-    save_file(dest_dir, filename, planunit.get_json())
+def save_owner_file(dest_dir: str, filename: str = None, ownerunit: OwnerUnit = None):
+    save_file(dest_dir, filename, ownerunit.get_json())
 
 
-def open_plan_file(dest_dir: str, filename: str = None) -> PlanUnit:
+def open_owner_file(dest_dir: str, filename: str = None) -> OwnerUnit:
     if os_path_exists(create_path(dest_dir, filename)):
-        return planunit_get_from_json(open_file(dest_dir, filename))
+        return ownerunit_get_from_json(open_file(dest_dir, filename))
 
 
-def save_gut_file(belief_mstr_dir: str, planunit: PlanUnit):
+def save_gut_file(belief_mstr_dir: str, ownerunit: OwnerUnit):
     gut_path = create_gut_path(
-        belief_mstr_dir, planunit.belief_label, planunit.owner_name
+        belief_mstr_dir, ownerunit.belief_label, ownerunit.owner_name
     )
-    save_plan_file(gut_path, None, planunit)
+    save_owner_file(gut_path, None, ownerunit)
 
 
 def open_gut_file(
     belief_mstr_dir: str, belief_label: str, owner_name: OwnerName
-) -> PlanUnit:
+) -> OwnerUnit:
     gut_path = create_gut_path(belief_mstr_dir, belief_label, owner_name)
-    return open_plan_file(gut_path)
+    return open_owner_file(gut_path)
 
 
 def gut_file_exists(
@@ -68,27 +68,27 @@ def job_file_exists(
     return os_path_exists(job_path)
 
 
-def save_job_file(belief_mstr_dir: str, planunit: PlanUnit):
+def save_job_file(belief_mstr_dir: str, ownerunit: OwnerUnit):
     job_path = create_job_path(
-        belief_mstr_dir, planunit.belief_label, planunit.owner_name
+        belief_mstr_dir, ownerunit.belief_label, ownerunit.owner_name
     )
-    save_plan_file(job_path, None, planunit)
+    save_owner_file(job_path, None, ownerunit)
 
 
 def open_job_file(
     belief_mstr_dir: str, belief_label: str, owner_name: OwnerName
-) -> PlanUnit:
+) -> OwnerUnit:
     job_path = create_job_path(belief_mstr_dir, belief_label, owner_name)
-    return open_plan_file(job_path)
+    return open_owner_file(job_path)
 
 
-def get_planevent_obj(
+def get_ownerevent_obj(
     belief_mstr_dir: str, belief_label: LabelTerm, owner_name: OwnerName, event_int: int
-) -> PlanUnit:
-    planevent_json_path = create_planevent_path(
+) -> OwnerUnit:
+    ownerevent_json_path = create_ownerevent_path(
         belief_mstr_dir, belief_label, owner_name, event_int
     )
-    return open_plan_file(planevent_json_path)
+    return open_owner_file(ownerevent_json_path)
 
 
 def collect_owner_event_dir_sets(
@@ -140,7 +140,7 @@ def _add_downhill_event_int(
             x_dict[downhill_owner] = max(event_set)
 
 
-def save_arbitrary_planevent(
+def save_arbitrary_ownerevent(
     belief_mstr_dir: str,
     belief_label: str,
     owner_name: str,
@@ -150,24 +150,24 @@ def save_arbitrary_planevent(
 ) -> str:
     accts = get_empty_list_if_None(accts)
     facts = get_empty_list_if_None(facts)
-    x_planunit = planunit_shop(owner_name, belief_label)
+    x_ownerunit = ownerunit_shop(owner_name, belief_label)
     for acct_list in accts:
         try:
             acct_cred_points = acct_list[1]
         except Exception:
             acct_cred_points = None
-        x_planunit.add_acctunit(acct_list[0], acct_cred_points)
+        x_ownerunit.add_acctunit(acct_list[0], acct_cred_points)
     for fact_tup in facts:
         x_rcontext = fact_tup[0]
         x_fstate = fact_tup[1]
         x_fopen = fact_tup[2]
         x_fnigh = fact_tup[3]
-        x_planunit.add_fact(x_rcontext, x_fstate, x_fopen, x_fnigh, True)
-    x_planevent_path = create_planevent_path(
+        x_ownerunit.add_fact(x_rcontext, x_fstate, x_fopen, x_fnigh, True)
+    x_ownerevent_path = create_ownerevent_path(
         belief_mstr_dir, belief_label, owner_name, event_int
     )
-    save_file(x_planevent_path, None, x_planunit.get_json())
-    return x_planevent_path
+    save_file(x_ownerevent_path, None, x_ownerunit.get_json())
+    return x_ownerevent_path
 
 
 def cellunit_add_json_file(
@@ -244,49 +244,49 @@ def open_bud_file(
         return get_budunit_from_dict(open_json(bud_json_path))
 
 
-class _save_valid_planpoint_Exception(Exception):
+class _save_valid_ownerpoint_Exception(Exception):
     pass
 
 
-def save_planpoint_file(
+def save_ownerpoint_file(
     belief_mstr_dir: str,
-    x_planpoint: PlanUnit,
+    x_ownerpoint: OwnerUnit,
     x_bud_time: TimeLinePoint = None,
 ):
-    x_planpoint.settle_plan()
-    if x_planpoint._rational is False:
-        raise _save_valid_planpoint_Exception(
-            "PlanPoint could not be saved PlanUnit._rational is False"
+    x_ownerpoint.settle_owner()
+    if x_ownerpoint._rational is False:
+        raise _save_valid_ownerpoint_Exception(
+            "OwnerPoint could not be saved OwnerUnit._rational is False"
         )
-    planpoint_json_path = create_planpoint_path(
-        belief_mstr_dir, x_planpoint.belief_label, x_planpoint.owner_name, x_bud_time
+    ownerpoint_json_path = create_ownerpoint_path(
+        belief_mstr_dir, x_ownerpoint.belief_label, x_ownerpoint.owner_name, x_bud_time
     )
-    save_plan_file(planpoint_json_path, None, x_planpoint)
+    save_owner_file(ownerpoint_json_path, None, x_ownerpoint)
 
 
-def planpoint_file_exists(
+def ownerpoint_file_exists(
     belief_mstr_dir: str,
     belief_label: str,
     owner_name: OwnerName,
     x_bud_time: TimeLinePoint = None,
 ) -> bool:
-    planpoint_json_path = create_planpoint_path(
+    ownerpoint_json_path = create_ownerpoint_path(
         belief_mstr_dir, belief_label, owner_name, x_bud_time
     )
-    return os_path_exists(planpoint_json_path)
+    return os_path_exists(ownerpoint_json_path)
 
 
-def open_planpoint_file(
+def open_ownerpoint_file(
     belief_mstr_dir: str,
     belief_label: str,
     owner_name: OwnerName,
     x_bud_time: TimeLinePoint = None,
 ) -> bool:
-    planpoint_json_path = create_planpoint_path(
+    ownerpoint_json_path = create_ownerpoint_path(
         belief_mstr_dir, belief_label, owner_name, x_bud_time
     )
-    # if self.planpoint_file_exists(x_bud_time):
-    return open_plan_file(planpoint_json_path)
+    # if self.ownerpoint_file_exists(x_bud_time):
+    return open_owner_file(ownerpoint_json_path)
 
 
 def get_timepoint_dirs(

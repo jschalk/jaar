@@ -25,8 +25,8 @@
     "idea_number": "br00115",
     "dimens": [
         "pidgin_title",
-        "plan_acctunit",
-        "planunit",
+        "owner_acctunit",
+        "ownerunit",
         "beliefunit"
     ]
 }

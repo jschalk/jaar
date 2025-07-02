@@ -102,31 +102,31 @@ screenshots and elucidatory text.
 <!-- TODO: Add elucidations -->
 base attributes vs reason attributess
 
-PlanUnit objects
+OwnerUnit objects
 
-PlanUnit AcctUnit objects
+OwnerUnit AcctUnit objects
 
-PlanUnit GroupUnit objects
+OwnerUnit GroupUnit objects
 
-PlanUnit ConceptUnit objects
+OwnerUnit ConceptUnit objects
 
-PlanUnit ConceptUnit hierarchical structure
+OwnerUnit ConceptUnit hierarchical structure
 
-PlanUnit ConceptUnit AwardLink objects
+OwnerUnit ConceptUnit AwardLink objects
 
-PlanUnit ConceptUnit AwardLine objects
+OwnerUnit ConceptUnit AwardLine objects
 
-PlanUnit ConceptUnit AwardHeir objects
+OwnerUnit ConceptUnit AwardHeir objects
 
-PlanUnit ConceptUnit AwardHeir objects
+OwnerUnit ConceptUnit AwardHeir objects
 
-PlanUnit ConceptUnit Reason PremiseUnit objects
+OwnerUnit ConceptUnit Reason PremiseUnit objects
 
-PlanUnit ConceptUnit Reason PremiseHeir objects
+OwnerUnit ConceptUnit Reason PremiseHeir objects
 
-PlanUnit ConceptUnit FactUnit objects
+OwnerUnit ConceptUnit FactUnit objects
 
-PlanUnit ConceptUnit FactHeir objects1
+OwnerUnit ConceptUnit FactHeir objects1
 
 
 ## 1.3 Test-Driven-Development

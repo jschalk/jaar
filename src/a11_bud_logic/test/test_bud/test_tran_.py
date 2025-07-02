@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.a06_plan_logic.test._util.a06_str import belief_label_str
+from src.a06_owner_logic.test._util.a06_str import belief_label_str
 from src.a11_bud_logic.bud import (
     TranBook,
     TranUnit,

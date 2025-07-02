@@ -1,4 +1,4 @@
-from src.a06_plan_logic.plan import planunit_shop
+from src.a06_owner_logic.owner import ownerunit_shop
 from src.a12_hub_toolbox.hubunit import hubunit_shop
 from src.a14_keep_logic.rivercycle import get_credorledger, get_debtorledger
 from src.a14_keep_logic.riverrun import riverrun_shop
@@ -14,13 +14,13 @@ def test_get_credorledger_ReturnsObj():
     yao_acct_cred_points = 8
     bob_acct_cred_points = 48
     sue_acct_cred_points = 66
-    yao_plan = planunit_shop(yao_str)
-    yao_plan.add_acctunit(bob_str, yao_acct_cred_points)
-    yao_plan.add_acctunit(sue_str, bob_acct_cred_points)
-    yao_plan.add_acctunit(yao_str, sue_acct_cred_points)
+    yao_owner = ownerunit_shop(yao_str)
+    yao_owner.add_acctunit(bob_str, yao_acct_cred_points)
+    yao_owner.add_acctunit(sue_str, bob_acct_cred_points)
+    yao_owner.add_acctunit(yao_str, sue_acct_cred_points)
 
     # WHEN
-    yao_credorledger = get_credorledger(yao_plan)
+    yao_credorledger = get_credorledger(yao_owner)
 
     # THEN
     assert len(yao_credorledger) == 3
@@ -37,13 +37,13 @@ def test_get_credorledger_ReturnsObjWithNoEmpty_acct_cred_points():
     yao_acct_cred_points = 8
     bob_acct_cred_points = 0
     sue_acct_cred_points = 66
-    yao_plan = planunit_shop(yao_str)
-    yao_plan.add_acctunit(bob_str, bob_acct_cred_points)
-    yao_plan.add_acctunit(sue_str, sue_acct_cred_points)
-    yao_plan.add_acctunit(yao_str, yao_acct_cred_points)
+    yao_owner = ownerunit_shop(yao_str)
+    yao_owner.add_acctunit(bob_str, bob_acct_cred_points)
+    yao_owner.add_acctunit(sue_str, sue_acct_cred_points)
+    yao_owner.add_acctunit(yao_str, yao_acct_cred_points)
 
     # WHEN
-    yao_credorledger = get_credorledger(yao_plan)
+    yao_credorledger = get_credorledger(yao_owner)
 
     # THEN
     assert yao_credorledger.get(bob_str) is None
@@ -60,13 +60,13 @@ def test_get_debtorledger_ReturnsObj():
     yao_acct_debt_points = 8
     bob_acct_debt_points = 48
     sue_acct_debt_points = 66
-    yao_plan = planunit_shop(yao_str)
-    yao_plan.add_acctunit(bob_str, 2, bob_acct_debt_points)
-    yao_plan.add_acctunit(sue_str, 2, sue_acct_debt_points)
-    yao_plan.add_acctunit(yao_str, 2, yao_acct_debt_points)
+    yao_owner = ownerunit_shop(yao_str)
+    yao_owner.add_acctunit(bob_str, 2, bob_acct_debt_points)
+    yao_owner.add_acctunit(sue_str, 2, sue_acct_debt_points)
+    yao_owner.add_acctunit(yao_str, 2, yao_acct_debt_points)
 
     # WHEN
-    yao_debtorledger = get_debtorledger(yao_plan)
+    yao_debtorledger = get_debtorledger(yao_owner)
 
     # THEN
     assert len(yao_debtorledger) == 3
@@ -83,13 +83,13 @@ def test_get_debtorledger_ReturnsObjWithNoEmpty_acct_debt_points():
     yao_acct_debt_points = 8
     bob_acct_debt_points = 48
     sue_acct_debt_points = 0
-    yao_plan = planunit_shop(yao_str)
-    yao_plan.add_acctunit(bob_str, 2, bob_acct_debt_points)
-    yao_plan.add_acctunit(sue_str, 2, sue_acct_debt_points)
-    yao_plan.add_acctunit(yao_str, 2, yao_acct_debt_points)
+    yao_owner = ownerunit_shop(yao_str)
+    yao_owner.add_acctunit(bob_str, 2, bob_acct_debt_points)
+    yao_owner.add_acctunit(sue_str, 2, sue_acct_debt_points)
+    yao_owner.add_acctunit(yao_str, 2, yao_acct_debt_points)
 
     # WHEN
-    yao_debtorledger = get_debtorledger(yao_plan)
+    yao_debtorledger = get_debtorledger(yao_owner)
 
     # THEN
     assert yao_debtorledger.get(bob_str) == bob_acct_debt_points
@@ -161,11 +161,11 @@ def test_RiverRun_set_tax_dues_CorrectlySetsAttr():
     bob_acct_debt_points = 38
     sue_acct_debt_points = 56
     yao_acct_debt_points = 6
-    bob_plan = planunit_shop(bob_str)
-    bob_plan.add_acctunit(bob_str, 2, bob_acct_debt_points)
-    bob_plan.add_acctunit(sue_str, 2, sue_acct_debt_points)
-    bob_plan.add_acctunit(yao_str, 2, yao_acct_debt_points)
-    bob_debtorledger = get_debtorledger(bob_plan)
+    bob_owner = ownerunit_shop(bob_str)
+    bob_owner.add_acctunit(bob_str, 2, bob_acct_debt_points)
+    bob_owner.add_acctunit(sue_str, 2, sue_acct_debt_points)
+    bob_owner.add_acctunit(yao_str, 2, yao_acct_debt_points)
+    bob_debtorledger = get_debtorledger(bob_owner)
     assert bob_riverrun.tax_dues_unpaid() is False
 
     # WHEN
@@ -194,11 +194,11 @@ def test_RiverRun_acct_has_tax_due_ReturnsCorrectBool():
     yao_acct_debt_points = 6
     bob_acct_debt_points = 38
     sue_acct_debt_points = 56
-    bob_plan = planunit_shop(bob_str)
-    bob_plan.add_acctunit(bob_str, 2, bob_acct_debt_points)
-    bob_plan.add_acctunit(sue_str, 2, sue_acct_debt_points)
-    bob_plan.add_acctunit(yao_str, 2, yao_acct_debt_points)
-    bob_debtorledger = get_debtorledger(bob_plan)
+    bob_owner = ownerunit_shop(bob_str)
+    bob_owner.add_acctunit(bob_str, 2, bob_acct_debt_points)
+    bob_owner.add_acctunit(sue_str, 2, sue_acct_debt_points)
+    bob_owner.add_acctunit(yao_str, 2, yao_acct_debt_points)
+    bob_debtorledger = get_debtorledger(bob_owner)
     assert bob_riverrun.acct_has_tax_due(bob_str) is False
     assert bob_riverrun.acct_has_tax_due(sue_str) is False
     assert bob_riverrun.acct_has_tax_due(yao_str) is False
@@ -249,11 +249,11 @@ def test_RiverRun_get_acct_tax_due_ReturnsObj():
     bob_acct_debt_points = 38
     sue_acct_debt_points = 56
     yao_acct_debt_points = 6
-    bob_plan = planunit_shop(bob_str)
-    bob_plan.add_acctunit(bob_str, 2, bob_acct_debt_points)
-    bob_plan.add_acctunit(sue_str, 2, sue_acct_debt_points)
-    bob_plan.add_acctunit(yao_str, 2, yao_acct_debt_points)
-    bob_debtorledger = get_debtorledger(bob_plan)
+    bob_owner = ownerunit_shop(bob_str)
+    bob_owner.add_acctunit(bob_str, 2, bob_acct_debt_points)
+    bob_owner.add_acctunit(sue_str, 2, sue_acct_debt_points)
+    bob_owner.add_acctunit(yao_str, 2, yao_acct_debt_points)
+    bob_debtorledger = get_debtorledger(bob_owner)
     assert bob_riverrun.acct_has_tax_due(bob_str) is False
     assert bob_riverrun.get_acct_tax_due(bob_str) == 0
     assert bob_riverrun.acct_has_tax_due(zia_str) is False
@@ -283,11 +283,11 @@ def test_RiverRun_levy_tax_due_SetsAttr_ScenarioX():
     bob_acct_debt_points = 38
     sue_acct_debt_points = 56
     yao_acct_debt_points = 6
-    bob_plan = planunit_shop(bob_str)
-    bob_plan.add_acctunit(bob_str, 2, bob_acct_debt_points)
-    bob_plan.add_acctunit(sue_str, 2, sue_acct_debt_points)
-    bob_plan.add_acctunit(yao_str, 2, yao_acct_debt_points)
-    bob_debtorledger = get_debtorledger(bob_plan)
+    bob_owner = ownerunit_shop(bob_str)
+    bob_owner.add_acctunit(bob_str, 2, bob_acct_debt_points)
+    bob_owner.add_acctunit(sue_str, 2, sue_acct_debt_points)
+    bob_owner.add_acctunit(yao_str, 2, yao_acct_debt_points)
+    bob_debtorledger = get_debtorledger(bob_owner)
     bob_riverrun.set_tax_dues(bob_debtorledger)
     assert bob_riverrun.get_acct_tax_due(bob_str) == 380, 0
 

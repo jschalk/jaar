@@ -3,7 +3,7 @@ from pandas import DataFrame
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_row_count
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a06_plan_logic.test._util.a06_str import acct_name_str
+from src.a06_owner_logic.test._util.a06_str import acct_name_str
 from src.a09_pack_logic.test._util.a09_str import face_name_str
 from src.a11_bud_logic.test._util.a11_str import (
     belief_label_str,
@@ -90,14 +90,14 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         pidcore_sound_vld = create_prime_tablename("pidcore", "s", "vld")
         beliefunit_sound_raw = create_prime_tablename("beliefunit", "s", "raw")
         beliefunit_sound_agg = create_prime_tablename("beliefunit", "s", "agg")
-        plnunit_sound_put_raw = create_prime_tablename("planunit", "s", "raw", "put")
-        plnunit_sound_put_agg = create_prime_tablename("planunit", "s", "agg", "put")
+        plnunit_sound_put_raw = create_prime_tablename("ownerunit", "s", "raw", "put")
+        plnunit_sound_put_agg = create_prime_tablename("ownerunit", "s", "agg", "put")
         plnacct_sound_put_raw = create_prime_tablename("plnacct", "s", "raw", "put")
         plnacct_sound_put_agg = create_prime_tablename("plnacct", "s", "agg", "put")
         beliefunit_voice_raw = create_prime_tablename("beliefunit", "v", "raw")
         beliefunit_voice_agg = create_prime_tablename("beliefunit", "v", "agg")
-        plnunit_voice_put_raw = create_prime_tablename("planunit", "v", "raw", "put")
-        plnunit_voice_put_agg = create_prime_tablename("planunit", "v", "agg", "put")
+        plnunit_voice_put_raw = create_prime_tablename("ownerunit", "v", "raw", "put")
+        plnunit_voice_put_agg = create_prime_tablename("ownerunit", "v", "agg", "put")
         plnacct_voice_put_raw = create_prime_tablename("plnacct", "v", "raw", "put")
         plnacct_voice_put_agg = create_prime_tablename("plnacct", "v", "agg", "put")
 

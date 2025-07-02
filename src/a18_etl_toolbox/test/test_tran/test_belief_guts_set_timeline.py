@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import save_json
-from src.a06_plan_logic.plan import planunit_shop
+from src.a06_owner_logic.owner import ownerunit_shop
 from src.a07_timeline_logic.test._util.a07_str import time_str
 from src.a07_timeline_logic.test._util.calendar_examples import (
     five_str,
@@ -27,7 +27,7 @@ def test_add_belief_timeline_to_guts_SetsFiles_Scenario0(env_dir_setup_cleanup):
     save_json(belief_json_path, None, a23_belief.get_dict())
     assert os_path_exists(belief_json_path)
     sue_str = "Sue"
-    init_sue_gut = planunit_shop(sue_str, a23_str)
+    init_sue_gut = ownerunit_shop(sue_str, a23_str)
     time_rope = init_sue_gut.make_l1_rope(time_str())
     five_rope = init_sue_gut.make_rope(time_rope, five_str())
     save_gut_file(belief_mstr_dir, init_sue_gut)

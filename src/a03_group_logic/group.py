@@ -180,9 +180,9 @@ def awardline_shop(awardee_title: GroupTitle, _fund_give: float, _fund_take: flo
 
 @dataclass
 class GroupUnit(GroupCore):
-    _memberships: dict[AcctName, MemberShip] = None  # set by PlanUnit.set_acctunit()
-    knot: str = None  # calculated by PlanUnit
-    # calculated by PlanUnit.settle_plan()
+    _memberships: dict[AcctName, MemberShip] = None  # set by OwnerUnit.set_acctunit()
+    knot: str = None  # calculated by OwnerUnit
+    # calculated by OwnerUnit.settle_owner()
     _fund_give: float = None
     _fund_take: float = None
     _fund_agenda_give: float = None

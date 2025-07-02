@@ -1,5 +1,5 @@
 from src.a02_finance_logic.test._util.a02_str import magnitude_str
-from src.a06_plan_logic.test._util.a06_str import (
+from src.a06_owner_logic.test._util.a06_str import (
     ancestors_str,
     belief_label_str,
     mandate_str,
@@ -39,12 +39,12 @@ def offi_time_str() -> str:
     return "offi_time"
 
 
-def planadjust_str() -> str:
-    return "planadjust"
+def owneradjust_str() -> str:
+    return "owneradjust"
 
 
-def planevent_facts_str() -> str:
-    return "planevent_facts"
+def ownerevent_facts_str() -> str:
+    return "ownerevent_facts"
 
 
 def quota_str() -> str:

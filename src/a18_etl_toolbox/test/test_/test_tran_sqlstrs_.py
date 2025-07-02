@@ -5,21 +5,21 @@ from src.a00_data_toolbox.db_toolbox import (
     get_table_columns,
     required_columns_exist,
 )
-from src.a06_plan_logic.test._util.a06_str import (
-    plan_acct_membership_str,
-    plan_acctunit_str,
-    plan_concept_awardlink_str,
-    plan_concept_factunit_str,
-    plan_concept_healerlink_str,
-    plan_concept_laborlink_str,
-    plan_concept_reason_premiseunit_str,
-    plan_concept_reasonunit_str,
-    plan_conceptunit_str,
-    planunit_str,
+from src.a06_owner_logic.test._util.a06_str import (
+    owner_acct_membership_str,
+    owner_acctunit_str,
+    owner_concept_awardlink_str,
+    owner_concept_factunit_str,
+    owner_concept_healerlink_str,
+    owner_concept_laborlink_str,
+    owner_concept_reason_premiseunit_str,
+    owner_concept_reasonunit_str,
+    owner_conceptunit_str,
+    ownerunit_str,
 )
-from src.a08_plan_atom_logic.atom_config import get_delete_key_name
+from src.a08_owner_atom_logic.atom_config import get_delete_key_name
 from src.a09_pack_logic.test._util.a09_str import event_int_str
-from src.a10_plan_calc.test._util.a10_str import plan_groupunit_str
+from src.a10_owner_calc.test._util.a10_str import owner_groupunit_str
 from src.a11_bud_logic.test._util.a11_str import (
     belief_label_str,
     bud_time_str,
@@ -83,17 +83,17 @@ def test_ALL_DIMEN_ABBV7_has_all_dimens():
 
 def test_create_prime_tablename_ReturnsObj():
     # ESTABLISH
-    planunit_dimen = planunit_str()
-    plnacct_dimen = plan_acctunit_str()
-    plnmemb_dimen = plan_acct_membership_str()
-    plngrou_dimen = plan_groupunit_str()
-    plnconc_dimen = plan_conceptunit_str()
-    plnawar_dimen = plan_concept_awardlink_str()
-    plnreas_dimen = plan_concept_reasonunit_str()
-    plnprem_dimen = plan_concept_reason_premiseunit_str()
-    plnlabo_dimen = plan_concept_laborlink_str()
-    plnheal_dimen = plan_concept_healerlink_str()
-    plnfact_dimen = plan_concept_factunit_str()
+    ownerunit_dimen = ownerunit_str()
+    plnacct_dimen = owner_acctunit_str()
+    plnmemb_dimen = owner_acct_membership_str()
+    plngrou_dimen = owner_groupunit_str()
+    plnconc_dimen = owner_conceptunit_str()
+    plnawar_dimen = owner_concept_awardlink_str()
+    plnreas_dimen = owner_concept_reasonunit_str()
+    plnprem_dimen = owner_concept_reason_premiseunit_str()
+    plnlabo_dimen = owner_concept_laborlink_str()
+    plnheal_dimen = owner_concept_healerlink_str()
+    plnfact_dimen = owner_concept_factunit_str()
     beliefunit_dimen = beliefunit_str()
     blfpayy_dimen = belief_paybook_str()
     blfbudd_dimen = belief_budunit_str()
@@ -113,7 +113,7 @@ def test_create_prime_tablename_ReturnsObj():
     del_str = "del"
 
     # WHEN
-    planunit_s_agg_table = create_prime_tablename("planunit", "s", agg_str, put_str)
+    ownerunit_s_agg_table = create_prime_tablename("ownerunit", "s", agg_str, put_str)
     plnacct_s_agg_table = create_prime_tablename("plnacct", "s", agg_str, put_str)
     plnmemb_s_agg_table = create_prime_tablename("plnmemb", "s", agg_str, put_str)
     plnconc_s_agg_table = create_prime_tablename("plnconc", "s", agg_str, put_str)
@@ -145,7 +145,7 @@ def test_create_prime_tablename_ReturnsObj():
     plngrou_job_table = create_prime_tablename("plngrou", job_str(), None)
 
     # THEN
-    assert planunit_s_agg_table == f"{planunit_dimen}_s_put_agg"
+    assert ownerunit_s_agg_table == f"{ownerunit_dimen}_s_put_agg"
     assert plnacct_s_agg_table == f"{plnacct_dimen}_s_put_agg"
     assert plnmemb_s_agg_table == f"{plnmemb_dimen}_s_put_agg"
     assert plnconc_s_agg_table == f"{plnconc_dimen}_s_put_agg"
@@ -174,7 +174,7 @@ def test_create_prime_tablename_ReturnsObj():
     assert pidcore_s_agg_table == f"{pidcore_dimen}_s_agg"
     assert plnacct_job_table == f"{plnacct_dimen}_job"
     assert plngrou_job_table == f"{plngrou_dimen}_job"
-    assert x_plnacct_raw == "plan_acctunit_raw"
+    assert x_plnacct_raw == "owner_acctunit_raw"
 
 
 def test_create_all_idea_tables_CreatesBeliefRawTables():

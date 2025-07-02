@@ -1,4 +1,4 @@
-from src.a06_plan_logic.plan import planunit_shop
+from src.a06_owner_logic.owner import ownerunit_shop
 from src.a12_hub_toolbox.hubunit import hubunit_shop
 from src.a14_keep_logic.rivercycle import get_debtorledger
 from src.a14_keep_logic.riverrun import riverrun_shop
@@ -213,11 +213,11 @@ def test_RiverRun_levy_tax_due_SetsAttr_ScenarioY():
     bob_tax_yield = 38
     sue_tax_yield = 56
     yao_tax_yield = 6
-    bob_plan = planunit_shop(bob_str)
-    bob_plan.add_acctunit(bob_str, 2, bob_tax_yield)
-    bob_plan.add_acctunit(sue_str, 2, sue_tax_yield)
-    bob_plan.add_acctunit(yao_str, 2, yao_tax_yield)
-    bob_debtorledger = get_debtorledger(bob_plan)
+    bob_owner = ownerunit_shop(bob_str)
+    bob_owner.add_acctunit(bob_str, 2, bob_tax_yield)
+    bob_owner.add_acctunit(sue_str, 2, sue_tax_yield)
+    bob_owner.add_acctunit(yao_str, 2, yao_tax_yield)
+    bob_debtorledger = get_debtorledger(bob_owner)
     bob_riverrun.set_tax_dues(bob_debtorledger)
     assert bob_riverrun.get_acct_tax_due(bob_str) == 380
     assert bob_riverrun.get_acct_tax_yield(bob_str) == 0

@@ -1,5 +1,5 @@
 from sqlite3 import connect as sqlite3_connect
-from src.a06_plan_logic.test._util.a06_str import (
+from src.a06_owner_logic.test._util.a06_str import (
     acct_cred_points_str,
     acct_debt_points_str,
     acct_name_str,
@@ -18,7 +18,7 @@ from src.a17_idea_logic.idea_db_tool import (
 )
 
 
-def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_plan_concept_laborlink():
+def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_owner_concept_laborlink():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
@@ -32,7 +32,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_plan_concept_laborli
             acct_name_str(),
             amount_str(),
         ]
-        plnlabo_cat = "plan_concept_laborlink"
+        plnlabo_cat = "owner_concept_laborlink"
         src_table = f"{idea_number}_raw"
         dst_table = f"{plnlabo_cat}_raw"
         idea_config = get_idea_config_dict()
@@ -70,7 +70,7 @@ GROUP BY {columns_str}
         assert gen_sqlstr == expected_sqlstr
 
 
-def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_plan_acctunit():
+def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_owner_acctunit():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
@@ -86,7 +86,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_plan_acctunit():
             acct_debt_points_str(),
             amount_str(),
         ]
-        plnacct_cat = "plan_acctunit"
+        plnacct_cat = "owner_acctunit"
         src_table = f"{idea_number}_raw"
         plnacct_table = f"{plnacct_cat}_raw"
         idea_config = get_idea_config_dict()
@@ -120,7 +120,7 @@ GROUP BY {columns_str}
         assert gen_sqlstr == expected_sqlstr
 
 
-def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_plan_acctunit():
+def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_owner_acctunit():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
@@ -135,7 +135,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_plan_acctunit():
             acct_cred_points_str(),
             amount_str(),
         ]
-        plnacct_cat = "plan_acctunit"
+        plnacct_cat = "owner_acctunit"
         src_table = f"{idea_number}_raw"
         plnacct_table = f"{plnacct_cat}_raw"
         idea_config = get_idea_config_dict()

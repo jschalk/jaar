@@ -1,4 +1,4 @@
-from src.a06_plan_logic.plan import planunit_shop
+from src.a06_owner_logic.owner import ownerunit_shop
 from src.a07_timeline_logic.test._util.a07_str import (
     c100_str,
     c400_clean_str,
@@ -25,89 +25,89 @@ from src.a07_timeline_logic.test._util.calendar_examples import (
 )
 
 
-def test_PlanUnit_set_concept_dict_SetsAll_range_inheritors():
+def test_OwnerUnit_set_concept_dict_SetsAll_range_inheritors():
     # ESTABLISH
-    sue_planunit = planunit_shop("Sue")
-    time_rope = sue_planunit.make_l1_rope(time_str())
-    creg_rope = sue_planunit.make_rope(time_rope, get_cregtime_str())
-    weeks_rope = sue_planunit.make_rope(creg_rope, weeks_str())
-    week_rope = sue_planunit.make_rope(creg_rope, week_str())
-    sun_rope = sue_planunit.make_rope(week_rope, get_sun())
-    day_rope = sue_planunit.make_rope(creg_rope, day_str())
-    c400_leap_rope = sue_planunit.make_rope(creg_rope, c400_leap_str())
-    c400_clean_rope = sue_planunit.make_rope(c400_leap_rope, c400_clean_str())
-    c100_clean_rope = sue_planunit.make_rope(c400_clean_rope, c100_str())
-    yr4_leap_rope = sue_planunit.make_rope(c100_clean_rope, yr4_leap_str())
-    yr4_clean_rope = sue_planunit.make_rope(yr4_leap_rope, yr4_clean_str())
-    year_rope = sue_planunit.make_rope(yr4_clean_rope, year_str())
-    jan_rope = sue_planunit.make_rope(year_rope, "January")
+    sue_ownerunit = ownerunit_shop("Sue")
+    time_rope = sue_ownerunit.make_l1_rope(time_str())
+    creg_rope = sue_ownerunit.make_rope(time_rope, get_cregtime_str())
+    weeks_rope = sue_ownerunit.make_rope(creg_rope, weeks_str())
+    week_rope = sue_ownerunit.make_rope(creg_rope, week_str())
+    sun_rope = sue_ownerunit.make_rope(week_rope, get_sun())
+    day_rope = sue_ownerunit.make_rope(creg_rope, day_str())
+    c400_leap_rope = sue_ownerunit.make_rope(creg_rope, c400_leap_str())
+    c400_clean_rope = sue_ownerunit.make_rope(c400_leap_rope, c400_clean_str())
+    c100_clean_rope = sue_ownerunit.make_rope(c400_clean_rope, c100_str())
+    yr4_leap_rope = sue_ownerunit.make_rope(c100_clean_rope, yr4_leap_str())
+    yr4_clean_rope = sue_ownerunit.make_rope(yr4_leap_rope, yr4_clean_str())
+    year_rope = sue_ownerunit.make_rope(yr4_clean_rope, year_str())
+    jan_rope = sue_ownerunit.make_rope(year_rope, "January")
 
-    sue_planunit = add_time_creg_conceptunit(sue_planunit)
-    assert sue_planunit._range_inheritors == {}
+    sue_ownerunit = add_time_creg_conceptunit(sue_ownerunit)
+    assert sue_ownerunit._range_inheritors == {}
 
     # WHEN
-    sue_planunit._set_concept_dict()
-    sue_planunit._set_concepttree_range_attrs()
+    sue_ownerunit._set_concept_dict()
+    sue_ownerunit._set_concepttree_range_attrs()
 
     # THEN
-    print(f"{sue_planunit._range_inheritors=}")
-    assert sue_planunit._range_inheritors != {}
-    assert day_rope in sue_planunit._range_inheritors
-    assert weeks_rope in sue_planunit._range_inheritors
-    assert week_rope in sue_planunit._range_inheritors
-    assert sun_rope in sue_planunit._range_inheritors
-    assert c400_leap_rope in sue_planunit._range_inheritors
-    assert c400_clean_rope in sue_planunit._range_inheritors
-    assert c100_clean_rope in sue_planunit._range_inheritors
-    assert yr4_leap_rope in sue_planunit._range_inheritors
-    assert yr4_clean_rope in sue_planunit._range_inheritors
-    assert year_rope in sue_planunit._range_inheritors
-    assert jan_rope in sue_planunit._range_inheritors
+    print(f"{sue_ownerunit._range_inheritors=}")
+    assert sue_ownerunit._range_inheritors != {}
+    assert day_rope in sue_ownerunit._range_inheritors
+    assert weeks_rope in sue_ownerunit._range_inheritors
+    assert week_rope in sue_ownerunit._range_inheritors
+    assert sun_rope in sue_ownerunit._range_inheritors
+    assert c400_leap_rope in sue_ownerunit._range_inheritors
+    assert c400_clean_rope in sue_ownerunit._range_inheritors
+    assert c100_clean_rope in sue_ownerunit._range_inheritors
+    assert yr4_leap_rope in sue_ownerunit._range_inheritors
+    assert yr4_clean_rope in sue_ownerunit._range_inheritors
+    assert year_rope in sue_ownerunit._range_inheritors
+    assert jan_rope in sue_ownerunit._range_inheritors
 
 
-def test_PlanUnit_set_concepttree_range_attrs_Sets_day_concept_gogo_calc_stop_calc():
+def test_OwnerUnit_set_concepttree_range_attrs_Sets_day_concept_gogo_calc_stop_calc():
     # ESTABLISH
-    sue_planunit = planunit_shop("Sue")
-    time_rope = sue_planunit.make_l1_rope(time_str())
-    creg_rope = sue_planunit.make_rope(time_rope, get_cregtime_str())
-    day_rope = sue_planunit.make_rope(creg_rope, day_str())
-    sue_planunit = add_time_creg_conceptunit(sue_planunit)
-    sue_planunit._set_concept_dict()
-    assert sue_planunit.concept_exists(time_rope)
-    assert sue_planunit.concept_exists(creg_rope)
-    creg_concept = sue_planunit.get_concept_obj(creg_rope)
+    sue_ownerunit = ownerunit_shop("Sue")
+    time_rope = sue_ownerunit.make_l1_rope(time_str())
+    creg_rope = sue_ownerunit.make_rope(time_rope, get_cregtime_str())
+    day_rope = sue_ownerunit.make_rope(creg_rope, day_str())
+    sue_ownerunit = add_time_creg_conceptunit(sue_ownerunit)
+    sue_ownerunit._set_concept_dict()
+    assert sue_ownerunit.concept_exists(time_rope)
+    assert sue_ownerunit.concept_exists(creg_rope)
+    creg_concept = sue_ownerunit.get_concept_obj(creg_rope)
     assert creg_concept.begin == 0
     assert creg_concept.close == 1472657760
-    assert sue_planunit.concept_exists(day_rope)
-    day_concept = sue_planunit.get_concept_obj(day_rope)
+    assert sue_ownerunit.concept_exists(day_rope)
+    day_concept = sue_ownerunit.get_concept_obj(day_rope)
     assert day_concept.denom == 1440
     assert not day_concept._gogo_calc
     assert not day_concept._stop_calc
 
     # WHEN
-    sue_planunit._set_concepttree_range_attrs()
+    sue_ownerunit._set_concepttree_range_attrs()
 
     # THEN
     assert day_concept._gogo_calc == 0
     assert day_concept._stop_calc == 1440
 
 
-def test_PlanUnit_set_concepttree_range_attrs_Sets_days_concept_gogo_calc_stop_calc():
+def test_OwnerUnit_set_concepttree_range_attrs_Sets_days_concept_gogo_calc_stop_calc():
     # ESTABLISH
-    sue_planunit = planunit_shop("Sue")
-    time_rope = sue_planunit.make_l1_rope(time_str())
-    creg_rope = sue_planunit.make_rope(time_rope, get_cregtime_str())
-    days_rope = sue_planunit.make_rope(creg_rope, days_str())
-    sue_planunit = add_time_creg_conceptunit(sue_planunit)
-    sue_planunit._set_concept_dict()
-    assert sue_planunit.concept_exists(days_rope)
-    days_concept = sue_planunit.get_concept_obj(days_rope)
+    sue_ownerunit = ownerunit_shop("Sue")
+    time_rope = sue_ownerunit.make_l1_rope(time_str())
+    creg_rope = sue_ownerunit.make_rope(time_rope, get_cregtime_str())
+    days_rope = sue_ownerunit.make_rope(creg_rope, days_str())
+    sue_ownerunit = add_time_creg_conceptunit(sue_ownerunit)
+    sue_ownerunit._set_concept_dict()
+    assert sue_ownerunit.concept_exists(days_rope)
+    days_concept = sue_ownerunit.get_concept_obj(days_rope)
     assert days_concept.denom == 1440
     assert not days_concept._gogo_calc
     assert not days_concept._stop_calc
 
     # WHEN
-    sue_planunit._set_concepttree_range_attrs()
+    sue_ownerunit._set_concepttree_range_attrs()
 
     # THEN
     assert days_concept.denom == 1440
@@ -115,42 +115,42 @@ def test_PlanUnit_set_concepttree_range_attrs_Sets_days_concept_gogo_calc_stop_c
     assert days_concept._stop_calc == 1022679
 
 
-def test_PlanUnit_set_concepttree_range_attrs_Sets_weeks_concept_gogo_calc_stop_calc():
+def test_OwnerUnit_set_concepttree_range_attrs_Sets_weeks_concept_gogo_calc_stop_calc():
     # ESTABLISH
-    sue_planunit = planunit_shop("Sue")
-    time_rope = sue_planunit.make_l1_rope(time_str())
-    creg_rope = sue_planunit.make_rope(time_rope, get_cregtime_str())
-    weeks_rope = sue_planunit.make_rope(creg_rope, weeks_str())
-    week_rope = sue_planunit.make_rope(creg_rope, week_str())
-    sun_rope = sue_planunit.make_rope(week_rope, get_sun())
-    mon_rope = sue_planunit.make_rope(week_rope, get_mon())
-    tue_rope = sue_planunit.make_rope(week_rope, get_tue())
-    wed_rope = sue_planunit.make_rope(week_rope, get_wed())
-    thu_rope = sue_planunit.make_rope(week_rope, get_thu())
-    fri_rope = sue_planunit.make_rope(week_rope, get_fri())
-    sat_rope = sue_planunit.make_rope(week_rope, get_sat())
-    sue_planunit = add_time_creg_conceptunit(sue_planunit)
-    sue_planunit._set_concept_dict()
-    assert sue_planunit.concept_exists(weeks_rope)
-    assert sue_planunit.concept_exists(sun_rope)
-    assert sue_planunit.concept_exists(mon_rope)
-    assert sue_planunit.concept_exists(tue_rope)
-    assert sue_planunit.concept_exists(wed_rope)
-    assert sue_planunit.concept_exists(thu_rope)
-    assert sue_planunit.concept_exists(fri_rope)
-    assert sue_planunit.concept_exists(sat_rope)
-    weeks_concept = sue_planunit.get_concept_obj(weeks_rope)
+    sue_ownerunit = ownerunit_shop("Sue")
+    time_rope = sue_ownerunit.make_l1_rope(time_str())
+    creg_rope = sue_ownerunit.make_rope(time_rope, get_cregtime_str())
+    weeks_rope = sue_ownerunit.make_rope(creg_rope, weeks_str())
+    week_rope = sue_ownerunit.make_rope(creg_rope, week_str())
+    sun_rope = sue_ownerunit.make_rope(week_rope, get_sun())
+    mon_rope = sue_ownerunit.make_rope(week_rope, get_mon())
+    tue_rope = sue_ownerunit.make_rope(week_rope, get_tue())
+    wed_rope = sue_ownerunit.make_rope(week_rope, get_wed())
+    thu_rope = sue_ownerunit.make_rope(week_rope, get_thu())
+    fri_rope = sue_ownerunit.make_rope(week_rope, get_fri())
+    sat_rope = sue_ownerunit.make_rope(week_rope, get_sat())
+    sue_ownerunit = add_time_creg_conceptunit(sue_ownerunit)
+    sue_ownerunit._set_concept_dict()
+    assert sue_ownerunit.concept_exists(weeks_rope)
+    assert sue_ownerunit.concept_exists(sun_rope)
+    assert sue_ownerunit.concept_exists(mon_rope)
+    assert sue_ownerunit.concept_exists(tue_rope)
+    assert sue_ownerunit.concept_exists(wed_rope)
+    assert sue_ownerunit.concept_exists(thu_rope)
+    assert sue_ownerunit.concept_exists(fri_rope)
+    assert sue_ownerunit.concept_exists(sat_rope)
+    weeks_concept = sue_ownerunit.get_concept_obj(weeks_rope)
     assert weeks_concept.denom == 10080
     assert not weeks_concept._gogo_calc
     assert not weeks_concept._stop_calc
-    assert sue_planunit.concept_exists(week_rope)
-    week_concept = sue_planunit.get_concept_obj(week_rope)
+    assert sue_ownerunit.concept_exists(week_rope)
+    week_concept = sue_ownerunit.get_concept_obj(week_rope)
     assert week_concept.denom == 10080
     assert not week_concept._gogo_calc
     assert not week_concept._stop_calc
 
     # WHEN
-    sue_planunit._set_concepttree_range_attrs()
+    sue_ownerunit._set_concepttree_range_attrs()
 
     # THEN
     assert weeks_concept.denom == 10080
@@ -158,132 +158,132 @@ def test_PlanUnit_set_concepttree_range_attrs_Sets_weeks_concept_gogo_calc_stop_
     assert weeks_concept._stop_calc == 146097
     assert week_concept._gogo_calc == 0
     assert week_concept._stop_calc == 10080
-    assert sue_planunit.get_concept_obj(sun_rope)._gogo_calc == 5760
-    assert sue_planunit.get_concept_obj(mon_rope)._gogo_calc == 7200
-    assert sue_planunit.get_concept_obj(tue_rope)._gogo_calc == 8640
-    assert sue_planunit.get_concept_obj(wed_rope)._gogo_calc == 0
-    assert sue_planunit.get_concept_obj(thu_rope)._gogo_calc == 1440
-    assert sue_planunit.get_concept_obj(fri_rope)._gogo_calc == 2880
-    assert sue_planunit.get_concept_obj(sat_rope)._gogo_calc == 4320
-    assert sue_planunit.get_concept_obj(sun_rope)._stop_calc == 7200
-    assert sue_planunit.get_concept_obj(mon_rope)._stop_calc == 8640
-    assert sue_planunit.get_concept_obj(tue_rope)._stop_calc == 10080
-    assert sue_planunit.get_concept_obj(wed_rope)._stop_calc == 1440
-    assert sue_planunit.get_concept_obj(thu_rope)._stop_calc == 2880
-    assert sue_planunit.get_concept_obj(fri_rope)._stop_calc == 4320
-    assert sue_planunit.get_concept_obj(sat_rope)._stop_calc == 5760
+    assert sue_ownerunit.get_concept_obj(sun_rope)._gogo_calc == 5760
+    assert sue_ownerunit.get_concept_obj(mon_rope)._gogo_calc == 7200
+    assert sue_ownerunit.get_concept_obj(tue_rope)._gogo_calc == 8640
+    assert sue_ownerunit.get_concept_obj(wed_rope)._gogo_calc == 0
+    assert sue_ownerunit.get_concept_obj(thu_rope)._gogo_calc == 1440
+    assert sue_ownerunit.get_concept_obj(fri_rope)._gogo_calc == 2880
+    assert sue_ownerunit.get_concept_obj(sat_rope)._gogo_calc == 4320
+    assert sue_ownerunit.get_concept_obj(sun_rope)._stop_calc == 7200
+    assert sue_ownerunit.get_concept_obj(mon_rope)._stop_calc == 8640
+    assert sue_ownerunit.get_concept_obj(tue_rope)._stop_calc == 10080
+    assert sue_ownerunit.get_concept_obj(wed_rope)._stop_calc == 1440
+    assert sue_ownerunit.get_concept_obj(thu_rope)._stop_calc == 2880
+    assert sue_ownerunit.get_concept_obj(fri_rope)._stop_calc == 4320
+    assert sue_ownerunit.get_concept_obj(sat_rope)._stop_calc == 5760
 
 
-def test_PlanUnit_set_concepttree_range_attrs_Sets_c400_concept_gogo_calc_stop_calc():
+def test_OwnerUnit_set_concepttree_range_attrs_Sets_c400_concept_gogo_calc_stop_calc():
     # ESTABLISH
-    sue_planunit = planunit_shop("Sue")
-    time_rope = sue_planunit.make_l1_rope(time_str())
-    creg_rope = sue_planunit.make_rope(time_rope, get_cregtime_str())
-    c400_leap_rope = sue_planunit.make_rope(creg_rope, c400_leap_str())
-    # c400_clean_rope = sue_planunit.make_rope(c400_leap_rope, c400_clean_str())
-    # c100_clean_rope = sue_planunit.make_rope(c400_clean_rope, c100_str())
-    # yr4_leap_rope = sue_planunit.make_rope(c100_clean_rope, yr4_leap_str())
-    # yr4_clean_rope = sue_planunit.make_rope(yr4_leap_rope, yr4_clean_str())
-    # year_rope = sue_planunit.make_rope(yr4_clean_rope, year_str())
-    sue_planunit = add_time_creg_conceptunit(sue_planunit)
-    sue_planunit._set_concept_dict()
+    sue_ownerunit = ownerunit_shop("Sue")
+    time_rope = sue_ownerunit.make_l1_rope(time_str())
+    creg_rope = sue_ownerunit.make_rope(time_rope, get_cregtime_str())
+    c400_leap_rope = sue_ownerunit.make_rope(creg_rope, c400_leap_str())
+    # c400_clean_rope = sue_ownerunit.make_rope(c400_leap_rope, c400_clean_str())
+    # c100_clean_rope = sue_ownerunit.make_rope(c400_clean_rope, c100_str())
+    # yr4_leap_rope = sue_ownerunit.make_rope(c100_clean_rope, yr4_leap_str())
+    # yr4_clean_rope = sue_ownerunit.make_rope(yr4_leap_rope, yr4_clean_str())
+    # year_rope = sue_ownerunit.make_rope(yr4_clean_rope, year_str())
+    sue_ownerunit = add_time_creg_conceptunit(sue_ownerunit)
+    sue_ownerunit._set_concept_dict()
     print(f"    {c400_leap_rope=}")
-    assert sue_planunit.concept_exists(c400_leap_rope)
-    c400_leap_concept = sue_planunit.get_concept_obj(c400_leap_rope)
+    assert sue_ownerunit.concept_exists(c400_leap_rope)
+    c400_leap_concept = sue_ownerunit.get_concept_obj(c400_leap_rope)
     # assert year_concept.morph
     assert not c400_leap_concept._gogo_calc
     assert not c400_leap_concept._stop_calc
 
     # WHEN
-    sue_planunit._set_concepttree_range_attrs()
+    sue_ownerunit._set_concepttree_range_attrs()
 
     # THEN
     # assert year_concept.denom == 525600
     # assert year_concept._gogo_calc == 0
     # assert year_concept._stop_calc == 525600
     difference_between_mar1_jan1 = 86400
-    assert sue_planunit.get_concept_obj(c400_leap_rope)._gogo_calc == 0
-    assert sue_planunit.get_concept_obj(c400_leap_rope)._stop_calc == 210379680
-    assert 1472657760 % sue_planunit.get_concept_obj(c400_leap_rope)._stop_calc == 0
+    assert sue_ownerunit.get_concept_obj(c400_leap_rope)._gogo_calc == 0
+    assert sue_ownerunit.get_concept_obj(c400_leap_rope)._stop_calc == 210379680
+    assert 1472657760 % sue_ownerunit.get_concept_obj(c400_leap_rope)._stop_calc == 0
 
 
-def test_PlanUnit_set_concepttree_range_attrs_Sets_years_concept_gogo_calc_stop_calc():
+def test_OwnerUnit_set_concepttree_range_attrs_Sets_years_concept_gogo_calc_stop_calc():
     # ESTABLISH
-    sue_planunit = planunit_shop("Sue")
-    time_rope = sue_planunit.make_l1_rope(time_str())
-    creg_rope = sue_planunit.make_rope(time_rope, get_cregtime_str())
-    c400_leap_rope = sue_planunit.make_rope(creg_rope, c400_leap_str())
-    c400_clean_rope = sue_planunit.make_rope(c400_leap_rope, c400_clean_str())
-    c100_clean_rope = sue_planunit.make_rope(c400_clean_rope, c100_str())
-    yr4_leap_rope = sue_planunit.make_rope(c100_clean_rope, yr4_leap_str())
-    yr4_clean_rope = sue_planunit.make_rope(yr4_leap_rope, yr4_clean_str())
-    year_rope = sue_planunit.make_rope(yr4_clean_rope, year_str())
-    sue_planunit = add_time_creg_conceptunit(sue_planunit)
-    sue_planunit._set_concept_dict()
+    sue_ownerunit = ownerunit_shop("Sue")
+    time_rope = sue_ownerunit.make_l1_rope(time_str())
+    creg_rope = sue_ownerunit.make_rope(time_rope, get_cregtime_str())
+    c400_leap_rope = sue_ownerunit.make_rope(creg_rope, c400_leap_str())
+    c400_clean_rope = sue_ownerunit.make_rope(c400_leap_rope, c400_clean_str())
+    c100_clean_rope = sue_ownerunit.make_rope(c400_clean_rope, c100_str())
+    yr4_leap_rope = sue_ownerunit.make_rope(c100_clean_rope, yr4_leap_str())
+    yr4_clean_rope = sue_ownerunit.make_rope(yr4_leap_rope, yr4_clean_str())
+    year_rope = sue_ownerunit.make_rope(yr4_clean_rope, year_str())
+    sue_ownerunit = add_time_creg_conceptunit(sue_ownerunit)
+    sue_ownerunit._set_concept_dict()
     print(f"    {year_rope=}")
-    assert sue_planunit.concept_exists(year_rope)
-    year_concept = sue_planunit.get_concept_obj(year_rope)
+    assert sue_ownerunit.concept_exists(year_rope)
+    year_concept = sue_ownerunit.get_concept_obj(year_rope)
     # assert year_concept.morph
     assert not year_concept._gogo_calc
     assert not year_concept._stop_calc
 
     # WHEN
-    sue_planunit._set_concepttree_range_attrs()
+    sue_ownerunit._set_concepttree_range_attrs()
 
     # THEN
-    assert sue_planunit.get_concept_obj(creg_rope)._gogo_calc == 0
-    assert sue_planunit.get_concept_obj(c400_leap_rope)._gogo_calc == 0
-    assert sue_planunit.get_concept_obj(c400_clean_rope)._gogo_calc == 0
-    assert sue_planunit.get_concept_obj(c100_clean_rope)._gogo_calc == 0
-    assert sue_planunit.get_concept_obj(yr4_leap_rope)._gogo_calc == 0
-    assert sue_planunit.get_concept_obj(yr4_clean_rope)._gogo_calc == 0
-    assert sue_planunit.get_concept_obj(year_rope)._gogo_calc == 0
-    assert sue_planunit.get_concept_obj(creg_rope)._stop_calc == 1472657760
-    assert sue_planunit.get_concept_obj(c400_leap_rope)._stop_calc == 210379680
-    assert sue_planunit.get_concept_obj(c400_clean_rope)._stop_calc == 210378240
-    assert sue_planunit.get_concept_obj(c100_clean_rope)._stop_calc == 52594560
-    assert sue_planunit.get_concept_obj(yr4_leap_rope)._stop_calc == 2103840
-    assert sue_planunit.get_concept_obj(yr4_clean_rope)._stop_calc == 2102400
-    assert sue_planunit.get_concept_obj(year_rope)._stop_calc == 525600
+    assert sue_ownerunit.get_concept_obj(creg_rope)._gogo_calc == 0
+    assert sue_ownerunit.get_concept_obj(c400_leap_rope)._gogo_calc == 0
+    assert sue_ownerunit.get_concept_obj(c400_clean_rope)._gogo_calc == 0
+    assert sue_ownerunit.get_concept_obj(c100_clean_rope)._gogo_calc == 0
+    assert sue_ownerunit.get_concept_obj(yr4_leap_rope)._gogo_calc == 0
+    assert sue_ownerunit.get_concept_obj(yr4_clean_rope)._gogo_calc == 0
+    assert sue_ownerunit.get_concept_obj(year_rope)._gogo_calc == 0
+    assert sue_ownerunit.get_concept_obj(creg_rope)._stop_calc == 1472657760
+    assert sue_ownerunit.get_concept_obj(c400_leap_rope)._stop_calc == 210379680
+    assert sue_ownerunit.get_concept_obj(c400_clean_rope)._stop_calc == 210378240
+    assert sue_ownerunit.get_concept_obj(c100_clean_rope)._stop_calc == 52594560
+    assert sue_ownerunit.get_concept_obj(yr4_leap_rope)._stop_calc == 2103840
+    assert sue_ownerunit.get_concept_obj(yr4_clean_rope)._stop_calc == 2102400
+    assert sue_ownerunit.get_concept_obj(year_rope)._stop_calc == 525600
 
     assert year_concept.denom == 525600
     assert year_concept._gogo_calc == 0
     assert year_concept._stop_calc == 525600
 
-    jan_rope = sue_planunit.make_rope(year_rope, "January")
-    feb_rope = sue_planunit.make_rope(year_rope, "February")
-    mar_rope = sue_planunit.make_rope(year_rope, "March")
-    apr_rope = sue_planunit.make_rope(year_rope, "April")
-    may_rope = sue_planunit.make_rope(year_rope, "May")
-    jun_rope = sue_planunit.make_rope(year_rope, "June")
-    jul_rope = sue_planunit.make_rope(year_rope, "July")
-    aug_rope = sue_planunit.make_rope(year_rope, "August")
-    sep_rope = sue_planunit.make_rope(year_rope, "September")
-    oct_rope = sue_planunit.make_rope(year_rope, "October")
-    nov_rope = sue_planunit.make_rope(year_rope, "November")
-    dec_rope = sue_planunit.make_rope(year_rope, "December")
-    assert sue_planunit.get_concept_obj(jan_rope)._gogo_calc == 440640
-    assert sue_planunit.get_concept_obj(feb_rope)._gogo_calc == 485280
-    assert sue_planunit.get_concept_obj(mar_rope)._gogo_calc == 0
-    assert sue_planunit.get_concept_obj(apr_rope)._gogo_calc == 44640
-    assert sue_planunit.get_concept_obj(may_rope)._gogo_calc == 87840
-    assert sue_planunit.get_concept_obj(jun_rope)._gogo_calc == 132480
-    assert sue_planunit.get_concept_obj(jul_rope)._gogo_calc == 175680
-    assert sue_planunit.get_concept_obj(aug_rope)._gogo_calc == 220320
-    assert sue_planunit.get_concept_obj(sep_rope)._gogo_calc == 264960
-    assert sue_planunit.get_concept_obj(oct_rope)._gogo_calc == 308160
-    assert sue_planunit.get_concept_obj(nov_rope)._gogo_calc == 352800
-    assert sue_planunit.get_concept_obj(dec_rope)._gogo_calc == 396000
+    jan_rope = sue_ownerunit.make_rope(year_rope, "January")
+    feb_rope = sue_ownerunit.make_rope(year_rope, "February")
+    mar_rope = sue_ownerunit.make_rope(year_rope, "March")
+    apr_rope = sue_ownerunit.make_rope(year_rope, "April")
+    may_rope = sue_ownerunit.make_rope(year_rope, "May")
+    jun_rope = sue_ownerunit.make_rope(year_rope, "June")
+    jul_rope = sue_ownerunit.make_rope(year_rope, "July")
+    aug_rope = sue_ownerunit.make_rope(year_rope, "August")
+    sep_rope = sue_ownerunit.make_rope(year_rope, "September")
+    oct_rope = sue_ownerunit.make_rope(year_rope, "October")
+    nov_rope = sue_ownerunit.make_rope(year_rope, "November")
+    dec_rope = sue_ownerunit.make_rope(year_rope, "December")
+    assert sue_ownerunit.get_concept_obj(jan_rope)._gogo_calc == 440640
+    assert sue_ownerunit.get_concept_obj(feb_rope)._gogo_calc == 485280
+    assert sue_ownerunit.get_concept_obj(mar_rope)._gogo_calc == 0
+    assert sue_ownerunit.get_concept_obj(apr_rope)._gogo_calc == 44640
+    assert sue_ownerunit.get_concept_obj(may_rope)._gogo_calc == 87840
+    assert sue_ownerunit.get_concept_obj(jun_rope)._gogo_calc == 132480
+    assert sue_ownerunit.get_concept_obj(jul_rope)._gogo_calc == 175680
+    assert sue_ownerunit.get_concept_obj(aug_rope)._gogo_calc == 220320
+    assert sue_ownerunit.get_concept_obj(sep_rope)._gogo_calc == 264960
+    assert sue_ownerunit.get_concept_obj(oct_rope)._gogo_calc == 308160
+    assert sue_ownerunit.get_concept_obj(nov_rope)._gogo_calc == 352800
+    assert sue_ownerunit.get_concept_obj(dec_rope)._gogo_calc == 396000
 
-    assert sue_planunit.get_concept_obj(jan_rope)._stop_calc == 485280
-    assert sue_planunit.get_concept_obj(feb_rope)._stop_calc == 525600
-    assert sue_planunit.get_concept_obj(mar_rope)._stop_calc == 44640
-    assert sue_planunit.get_concept_obj(apr_rope)._stop_calc == 87840
-    assert sue_planunit.get_concept_obj(may_rope)._stop_calc == 132480
-    assert sue_planunit.get_concept_obj(jun_rope)._stop_calc == 175680
-    assert sue_planunit.get_concept_obj(jul_rope)._stop_calc == 220320
-    assert sue_planunit.get_concept_obj(aug_rope)._stop_calc == 264960
-    assert sue_planunit.get_concept_obj(sep_rope)._stop_calc == 308160
-    assert sue_planunit.get_concept_obj(oct_rope)._stop_calc == 352800
-    assert sue_planunit.get_concept_obj(nov_rope)._stop_calc == 396000
-    assert sue_planunit.get_concept_obj(dec_rope)._stop_calc == 440640
+    assert sue_ownerunit.get_concept_obj(jan_rope)._stop_calc == 485280
+    assert sue_ownerunit.get_concept_obj(feb_rope)._stop_calc == 525600
+    assert sue_ownerunit.get_concept_obj(mar_rope)._stop_calc == 44640
+    assert sue_ownerunit.get_concept_obj(apr_rope)._stop_calc == 87840
+    assert sue_ownerunit.get_concept_obj(may_rope)._stop_calc == 132480
+    assert sue_ownerunit.get_concept_obj(jun_rope)._stop_calc == 175680
+    assert sue_ownerunit.get_concept_obj(jul_rope)._stop_calc == 220320
+    assert sue_ownerunit.get_concept_obj(aug_rope)._stop_calc == 264960
+    assert sue_ownerunit.get_concept_obj(sep_rope)._stop_calc == 308160
+    assert sue_ownerunit.get_concept_obj(oct_rope)._stop_calc == 352800
+    assert sue_ownerunit.get_concept_obj(nov_rope)._stop_calc == 396000
+    assert sue_ownerunit.get_concept_obj(dec_rope)._stop_calc == 440640

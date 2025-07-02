@@ -1,6 +1,6 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_table_columns
-from src.a06_plan_logic.test._util.a06_str import plan_concept_awardlink_str
+from src.a06_owner_logic.test._util.a06_str import owner_concept_awardlink_str
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic.test._util.a16_str import (
     inx_name_str,
@@ -33,7 +33,7 @@ def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario0_
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        plnawar_dimen = plan_concept_awardlink_str()
+        plnawar_dimen = owner_concept_awardlink_str()
         plnawar_v_raw_put_tablename = prime_tbl(plnawar_dimen, "v", "raw", "put")
         # print(f"{get_table_columns(cursor, plnawar_v_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {plnawar_v_raw_put_tablename} 
@@ -98,7 +98,7 @@ def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario1_
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        plnawar_dimen = plan_concept_awardlink_str()
+        plnawar_dimen = owner_concept_awardlink_str()
         plnawar_v_raw_put_tablename = prime_tbl(plnawar_dimen, "v", "raw", "put")
         insert_face_name_only_sqlstr = f"""INSERT INTO {plnawar_v_raw_put_tablename}
         ({event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx)
@@ -165,7 +165,7 @@ def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario2_
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        plnawar_dimen = plan_concept_awardlink_str()
+        plnawar_dimen = owner_concept_awardlink_str()
         plnawar_v_raw_put_tablename = prime_tbl(plnawar_dimen, "v", "raw", "put")
         print(f"{get_table_columns(cursor, plnawar_v_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {plnawar_v_raw_put_tablename}
@@ -241,7 +241,7 @@ def test_create_update_voice_raw_empty_inx_col_sqlstr_UpdatesTable_Scenario0_Emp
         print(f"{pidname_s_vld_tablename=}")
         print(f"{get_table_columns(cursor, pidname_s_vld_tablename)=}")
 
-        plnawar_dimen = plan_concept_awardlink_str()
+        plnawar_dimen = owner_concept_awardlink_str()
         plnawar_v_raw_put_tablename = prime_tbl(plnawar_dimen, "v", "raw", "put")
         print(f"{get_table_columns(cursor, plnawar_v_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {plnawar_v_raw_put_tablename} ({event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx)
@@ -298,7 +298,7 @@ def test_set_all_voice_raw_inx_columns_Scenario0_empty_tables():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        plnawar_dimen = plan_concept_awardlink_str()
+        plnawar_dimen = owner_concept_awardlink_str()
         plnawar_v_raw_put_tablename = prime_tbl(plnawar_dimen, "v", "raw", "put")
         print(f"{get_table_columns(cursor, plnawar_v_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {plnawar_v_raw_put_tablename}
