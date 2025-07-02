@@ -61,31 +61,6 @@ def test_open_csv_with_types(env_dir_setup_cleanup):
     assert generated_rows == expected_rows
 
 
-def test_database_connection_not_closing1(env_dir_setup_cleanup):
-    # 1. Create temporary SQLite DB
-    temp_dir = get_module_temp_dir()
-    set_dir(temp_dir)
-    db_path = create_path(temp_dir, "test.db")
-    print(f"{db_path=}")
-    with sqlite3_connect(":memory:") as conn:
-
-        pass
-    time.sleep(0.1)
-
-
-def test_database_connection_not_closing2(env_dir_setup_cleanup):
-    # 1. Create temporary SQLite DB
-    temp_dir = get_module_temp_dir()
-    set_dir(temp_dir)
-    db_path = create_path(temp_dir, "test998.db")
-    print(f"{db_path=}")
-    with sqlite3_connect(db_path) as conn:
-
-        pass
-    time.sleep(0.1)
-    conn.close()
-
-
 def test_export_sqlite_tables_to_csv(env_dir_setup_cleanup):
     # 1. Create temporary SQLite DB
     temp_dir = get_module_temp_dir()
