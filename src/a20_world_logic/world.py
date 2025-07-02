@@ -25,9 +25,9 @@ from src.a18_etl_toolbox.transformers import (
     etl_create_belief_cell_trees,
     etl_create_bud_mandate_ledgers,
     etl_create_buds_root_cells,
-    etl_event_inherited_ownerunits_to_belief_gut,
-    etl_event_owner_csvs_to_pack_json,
-    etl_event_pack_json_to_event_inherited_ownerunits,
+    etl_event_believer_csvs_to_pack_json,
+    etl_event_inherited_believerunits_to_belief_gut,
+    etl_event_pack_json_to_event_inherited_believerunits,
     etl_events_brick_agg_table_to_events_brick_valid_table,
     etl_input_dfs_to_brick_raw_tables,
     etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables,
@@ -38,7 +38,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_sound_raw_tables_to_sound_agg_tables,
     etl_sound_vld_tables_to_voice_raw_tables,
     etl_voice_agg_tables_to_belief_jsons,
-    etl_voice_agg_to_event_owner_csvs,
+    etl_voice_agg_to_event_believer_csvs,
     etl_voice_raw_tables_to_belief_ote1_agg,
     etl_voice_raw_tables_to_voice_agg_tables,
 )
@@ -94,8 +94,8 @@ class WorldUnit:
     def input_dfs_to_brick_raw_tables(self, conn: sqlite3_Connection):
         etl_input_dfs_to_brick_raw_tables(conn, self._input_dir)
 
-    def event_pack_json_to_event_inherited_ownerunits(self):
-        etl_event_pack_json_to_event_inherited_ownerunits(self._belief_mstr_dir)
+    def event_pack_json_to_event_inherited_believerunits(self):
+        etl_event_pack_json_to_event_inherited_believerunits(self._belief_mstr_dir)
 
     def calc_belief_bud_acct_mandate_net_ledgers(self):
         mstr_dir = self._belief_mstr_dir
@@ -137,13 +137,13 @@ class WorldUnit:
         etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor)
         etl_sound_agg_tables_to_sound_vld_tables(cursor)
         etl_sound_vld_tables_to_voice_raw_tables(cursor)
-        # voice raw to belief/owner jsons
+        # voice raw to belief/believer jsons
         etl_voice_raw_tables_to_voice_agg_tables(cursor)
         etl_voice_agg_tables_to_belief_jsons(cursor, self._belief_mstr_dir)
-        etl_voice_agg_to_event_owner_csvs(cursor, self._belief_mstr_dir)
-        etl_event_owner_csvs_to_pack_json(self._belief_mstr_dir)
-        etl_event_pack_json_to_event_inherited_ownerunits(self._belief_mstr_dir)
-        etl_event_inherited_ownerunits_to_belief_gut(self._belief_mstr_dir)
+        etl_voice_agg_to_event_believer_csvs(cursor, self._belief_mstr_dir)
+        etl_event_believer_csvs_to_pack_json(self._belief_mstr_dir)
+        etl_event_pack_json_to_event_inherited_believerunits(self._belief_mstr_dir)
+        etl_event_inherited_believerunits_to_belief_gut(self._belief_mstr_dir)
         add_belief_timeline_to_guts(self._belief_mstr_dir)
         etl_belief_guts_to_belief_jobs(self._belief_mstr_dir)
         etl_voice_raw_tables_to_belief_ote1_agg(cursor)

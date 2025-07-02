@@ -1,11 +1,11 @@
 from sqlite3 import connect as sqlite3_connect
-from src.a06_owner_logic.test._util.a06_str import (
+from src.a06_believer_logic.test._util.a06_str import (
     acct_cred_points_str,
     acct_debt_points_str,
     acct_name_str,
     belief_label_str,
+    believer_name_str,
     labor_title_str,
-    owner_name_str,
     plan_rope_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
@@ -18,7 +18,7 @@ from src.a17_idea_logic.idea_db_tool import (
 )
 
 
-def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_owner_plan_laborlink():
+def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_believer_plan_laborlink():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
@@ -28,11 +28,11 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_owner_plan_laborlink
             belief_label_str(),
             plan_rope_str(),
             labor_title_str(),
-            owner_name_str(),
+            believer_name_str(),
             acct_name_str(),
             amount_str(),
         ]
-        onrlabo_cat = "owner_plan_laborlink"
+        onrlabo_cat = "believer_plan_laborlink"
         src_table = f"{idea_number}_raw"
         dst_table = f"{onrlabo_cat}_raw"
         idea_config = get_idea_config_dict()
@@ -55,12 +55,12 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_owner_plan_laborlink
 
         # THEN
         columns_str = (
-            "event_int, face_name, belief_label, owner_name, plan_rope, labor_title"
+            "event_int, face_name, belief_label, believer_name, plan_rope, labor_title"
         )
         expected_sqlstr = f"""INSERT INTO {onrlabo_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
-WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND belief_label IS NOT NULL AND owner_name IS NOT NULL AND plan_rope IS NOT NULL AND labor_title IS NOT NULL
+WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND belief_label IS NOT NULL AND believer_name IS NOT NULL AND plan_rope IS NOT NULL AND labor_title IS NOT NULL
 GROUP BY {columns_str}
 ;
 """
@@ -70,7 +70,7 @@ GROUP BY {columns_str}
         assert gen_sqlstr == expected_sqlstr
 
 
-def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_owner_acctunit():
+def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_believer_acctunit():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
@@ -80,13 +80,13 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_owner_acctunit():
             belief_label_str(),
             plan_rope_str(),
             labor_title_str(),
-            owner_name_str(),
+            believer_name_str(),
             acct_name_str(),
             acct_cred_points_str(),
             acct_debt_points_str(),
             amount_str(),
         ]
-        onracct_cat = "owner_acctunit"
+        onracct_cat = "believer_acctunit"
         src_table = f"{idea_number}_raw"
         onracct_table = f"{onracct_cat}_raw"
         idea_config = get_idea_config_dict()
@@ -105,11 +105,11 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_owner_acctunit():
         )
 
         # THEN
-        columns_str = "event_int, face_name, belief_label, owner_name, acct_name, acct_cred_points, acct_debt_points"
+        columns_str = "event_int, face_name, belief_label, believer_name, acct_name, acct_cred_points, acct_debt_points"
         expected_sqlstr = f"""INSERT INTO {onracct_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
-WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND belief_label IS NOT NULL AND owner_name IS NOT NULL AND acct_name IS NOT NULL
+WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND belief_label IS NOT NULL AND believer_name IS NOT NULL AND acct_name IS NOT NULL
 GROUP BY {columns_str}
 ;
 """
@@ -120,7 +120,7 @@ GROUP BY {columns_str}
         assert gen_sqlstr == expected_sqlstr
 
 
-def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_owner_acctunit():
+def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_believer_acctunit():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
@@ -130,12 +130,12 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_owner_acctunit():
             belief_label_str(),
             plan_rope_str(),
             labor_title_str(),
-            owner_name_str(),
+            believer_name_str(),
             acct_name_str(),
             acct_cred_points_str(),
             amount_str(),
         ]
-        onracct_cat = "owner_acctunit"
+        onracct_cat = "believer_acctunit"
         src_table = f"{idea_number}_raw"
         onracct_table = f"{onracct_cat}_raw"
         idea_config = get_idea_config_dict()
@@ -154,11 +154,11 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_owner_acctunit():
         )
 
         # THEN
-        columns_str = "event_int, face_name, belief_label, owner_name, acct_name, acct_cred_points"
+        columns_str = "event_int, face_name, belief_label, believer_name, acct_name, acct_cred_points"
         expected_sqlstr = f"""INSERT INTO {onracct_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
-WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND belief_label IS NOT NULL AND owner_name IS NOT NULL AND acct_name IS NOT NULL
+WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND belief_label IS NOT NULL AND believer_name IS NOT NULL AND acct_name IS NOT NULL
 GROUP BY {columns_str}
 ;
 """

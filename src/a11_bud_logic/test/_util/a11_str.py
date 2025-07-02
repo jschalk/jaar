@@ -1,14 +1,22 @@
 from src.a02_finance_logic.test._util.a02_str import magnitude_str
-from src.a06_owner_logic.test._util.a06_str import (
+from src.a06_believer_logic.test._util.a06_str import (
     ancestors_str,
     belief_label_str,
+    believer_name_str,
     mandate_str,
-    owner_name_str,
 )
 
 
 def amount_str() -> str:
     return "amount"
+
+
+def believeradjust_str() -> str:
+    return "believeradjust"
+
+
+def believerevent_facts_str() -> str:
+    return "believerevent_facts"
 
 
 def boss_facts_str() -> str:
@@ -19,8 +27,8 @@ def bud_acct_nets_str() -> str:
     return "bud_acct_nets"
 
 
-def bud_owner_name_str() -> str:
-    return "bud_owner_name"
+def bud_believer_name_str() -> str:
+    return "bud_believer_name"
 
 
 def bud_time_str() -> str:
@@ -37,14 +45,6 @@ def found_facts_str() -> str:
 
 def offi_time_str() -> str:
     return "offi_time"
-
-
-def owneradjust_str() -> str:
-    return "owneradjust"
-
-
-def ownerevent_facts_str() -> str:
-    return "ownerevent_facts"
 
 
 def quota_str() -> str:

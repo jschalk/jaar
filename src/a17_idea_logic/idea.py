@@ -9,14 +9,14 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_positional_dict,
 )
 from src.a00_data_toolbox.file_toolbox import open_file
-from src.a01_term_logic.term import BeliefLabel, OwnerName
-from src.a06_owner_logic.owner import OwnerUnit
+from src.a01_term_logic.term import BeliefLabel, BelieverName
+from src.a06_believer_logic.believer import BelieverUnit
 from src.a07_timeline_logic.timeline import timelineunit_shop
-from src.a08_owner_atom_logic.atom import OwnerAtom, atomrow_shop
+from src.a08_believer_atom_logic.atom import BelieverAtom, atomrow_shop
 from src.a09_pack_logic.delta import (
-    OwnerDelta,
-    get_dimens_cruds_ownerdelta,
-    ownerdelta_shop,
+    BelieverDelta,
+    believerdelta_shop,
+    get_dimens_cruds_believerdelta,
 )
 from src.a09_pack_logic.pack import packunit_shop
 from src.a12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
@@ -85,15 +85,17 @@ def _generate_idea_dataframe(d2_list: list[list[str]], idea_name: str) -> DataFr
     return DataFrame(d2_list, columns=_get_headers_list(idea_name))
 
 
-def create_idea_df(x_ownerunit: OwnerUnit, idea_name: str) -> DataFrame:
-    x_ownerdelta = ownerdelta_shop()
-    x_ownerdelta.add_all_owneratoms(x_ownerunit)
+def create_idea_df(x_believerunit: BelieverUnit, idea_name: str) -> DataFrame:
+    x_believerdelta = believerdelta_shop()
+    x_believerdelta.add_all_believeratoms(x_believerunit)
     x_idearef = get_idearef_obj(idea_name)
-    x_belief_label = x_ownerunit.belief_label
-    x_owner_name = x_ownerunit.owner_name
-    sorted_owneratoms = _get_sorted_INSERT_str_owneratoms(x_ownerdelta, x_idearef)
+    x_belief_label = x_believerunit.belief_label
+    x_believer_name = x_believerunit.believer_name
+    sorted_believeratoms = _get_sorted_INSERT_str_believeratoms(
+        x_believerdelta, x_idearef
+    )
     d2_list = _create_d2_list(
-        sorted_owneratoms, x_idearef, x_belief_label, x_owner_name
+        sorted_believeratoms, x_idearef, x_belief_label, x_believer_name
     )
     d2_list = _delta_all_task_values(d2_list, x_idearef)
     x_idea = _generate_idea_dataframe(d2_list, idea_name)
@@ -101,31 +103,31 @@ def create_idea_df(x_ownerunit: OwnerUnit, idea_name: str) -> DataFrame:
     return _sort_dataframe(x_idea, sorting_columns)
 
 
-def _get_sorted_INSERT_str_owneratoms(
-    x_ownerdelta: OwnerDelta, x_idearef: IdeaRef
-) -> list[OwnerAtom]:
+def _get_sorted_INSERT_str_believeratoms(
+    x_believerdelta: BelieverDelta, x_idearef: IdeaRef
+) -> list[BelieverAtom]:
     dimen_set = set(x_idearef.dimens)
     curd_set = {"INSERT"}
-    limited_delta = get_dimens_cruds_ownerdelta(x_ownerdelta, dimen_set, curd_set)
-    return limited_delta.get_dimen_sorted_owneratoms_list()
+    limited_delta = get_dimens_cruds_believerdelta(x_believerdelta, dimen_set, curd_set)
+    return limited_delta.get_dimen_sorted_believeratoms_list()
 
 
 def _create_d2_list(
-    sorted_owneratoms: list[OwnerAtom],
+    sorted_believeratoms: list[BelieverAtom],
     x_idearef: IdeaRef,
     x_belief_label: BeliefLabel,
-    x_owner_name: OwnerName,
+    x_believer_name: BelieverName,
 ):
     d2_list = []
-    for x_owneratom in sorted_owneratoms:
+    for x_believeratom in sorted_believeratoms:
         d1_list = []
         for x_attribute in x_idearef.get_headers_list():
             if x_attribute == "belief_label":
                 d1_list.append(x_belief_label)
-            elif x_attribute == "owner_name":
-                d1_list.append(x_owner_name)
+            elif x_attribute == "believer_name":
+                d1_list.append(x_believer_name)
             else:
-                d1_list.append(x_owneratom.get_value(x_attribute))
+                d1_list.append(x_believeratom.get_value(x_attribute))
         d2_list.append(d1_list)
     return d2_list
 
@@ -151,8 +153,10 @@ def _sort_dataframe(x_idea: DataFrame, sorting_columns: list[str]) -> DataFrame:
     return x_idea
 
 
-def save_idea_csv(x_ideaname: str, x_ownerunit: OwnerUnit, x_dir: str, x_filename: str):
-    x_dataframe = create_idea_df(x_ownerunit, x_ideaname)
+def save_idea_csv(
+    x_ideaname: str, x_believerunit: BelieverUnit, x_dir: str, x_filename: str
+):
+    x_dataframe = create_idea_df(x_believerunit, x_ideaname)
     save_dataframe_to_csv(x_dataframe, x_dir, x_filename)
 
 
@@ -166,9 +170,9 @@ def get_csv_idearef(header_row: list[str]) -> IdeaRef:
     return get_idearef_obj(x_ideaname)
 
 
-def _remove_non_owner_dimens_from_idearef(x_idearef: IdeaRef) -> IdeaRef:
+def _remove_non_believer_dimens_from_idearef(x_idearef: IdeaRef) -> IdeaRef:
     to_delete_dimen_set = {
-        dimen for dimen in x_idearef.dimens if not dimen.startswith("owner")
+        dimen for dimen in x_idearef.dimens if not dimen.startswith("believer")
     }
     dimens_set = set(x_idearef.dimens)
     for to_delete_dimen in to_delete_dimen_set:
@@ -178,13 +182,13 @@ def _remove_non_owner_dimens_from_idearef(x_idearef: IdeaRef) -> IdeaRef:
     return x_idearef
 
 
-def make_ownerdelta(x_csv: str) -> OwnerDelta:
+def make_believerdelta(x_csv: str) -> BelieverDelta:
     header_row, headerless_csv = extract_csv_headers(x_csv)
     x_idearef = get_csv_idearef(header_row)
-    _remove_non_owner_dimens_from_idearef(x_idearef)
+    _remove_non_believer_dimens_from_idearef(x_idearef)
     x_reader = csv_reader(headerless_csv.splitlines(), delimiter=",")
     x_dict = get_positional_dict(header_row)
-    x_ownerdelta = ownerdelta_shop()
+    x_believerdelta = believerdelta_shop()
 
     for row in x_reader:
         x_atomrow = atomrow_shop(x_idearef.dimens, "INSERT")
@@ -192,23 +196,23 @@ def make_ownerdelta(x_csv: str) -> OwnerDelta:
             if header_index := x_dict.get(x_header):
                 x_atomrow.__dict__[x_header] = row[header_index]
 
-        for x_owneratom in x_atomrow.get_owneratoms():
-            x_ownerdelta.set_owneratom(x_owneratom)
-    return x_ownerdelta
+        for x_believeratom in x_atomrow.get_believeratoms():
+            x_believerdelta.set_believeratom(x_believeratom)
+    return x_believerdelta
 
 
 def _load_individual_idea_csv(
     complete_csv: str,
     belief_mstr_dir: str,
     x_belief_label: BeliefLabel,
-    x_owner_name: OwnerName,
+    x_believer_name: BelieverName,
 ):
-    x_hubunit = hubunit_shop(belief_mstr_dir, x_belief_label, x_owner_name)
+    x_hubunit = hubunit_shop(belief_mstr_dir, x_belief_label, x_believer_name)
     x_hubunit.initialize_pack_gut_files()
-    x_ownerdelta = make_ownerdelta(complete_csv)
-    # x_ownerdelta = get_minimal_ownerdelta(x_ownerdelta, x_gut)
-    x_packunit = packunit_shop(x_owner_name, x_belief_label)
-    x_packunit.set_ownerdelta(x_ownerdelta)
+    x_believerdelta = make_believerdelta(complete_csv)
+    # x_believerdelta = get_minimal_believerdelta(x_believerdelta, x_gut)
+    x_packunit = packunit_shop(x_believer_name, x_belief_label)
+    x_packunit.set_believerdelta(x_believerdelta)
     x_hubunit.save_pack_file(x_packunit)
     x_hubunit._create_gut_from_packs()
 
@@ -216,24 +220,26 @@ def _load_individual_idea_csv(
 def load_idea_csv(belief_mstr_dir: str, x_file_dir: str, x_filename: str):
     x_csv = open_file(x_file_dir, x_filename)
     headers_list, headerless_csv = extract_csv_headers(x_csv)
-    nested_csv = belief_label_owner_name_nested_csv_dict(headerless_csv, delimiter=",")
+    nested_csv = belief_label_believer_name_nested_csv_dict(
+        headerless_csv, delimiter=","
+    )
     for x_belief_label, belief_dict in nested_csv.items():
-        for x_owner_name, owner_csv in belief_dict.items():
-            complete_csv = add_headers_to_csv(headers_list, owner_csv)
+        for x_believer_name, believer_csv in belief_dict.items():
+            complete_csv = add_headers_to_csv(headers_list, believer_csv)
             _load_individual_idea_csv(
-                complete_csv, belief_mstr_dir, x_belief_label, x_owner_name
+                complete_csv, belief_mstr_dir, x_belief_label, x_believer_name
             )
 
 
-def get_csv_belief_label_owner_name_metrics(
+def get_csv_belief_label_believer_name_metrics(
     headerless_csv: str, delimiter: str = None
-) -> dict[BeliefLabel, dict[OwnerName, int]]:
+) -> dict[BeliefLabel, dict[BelieverName, int]]:
     return get_csv_column1_column2_metrics(headerless_csv, delimiter)
 
 
-def belief_label_owner_name_nested_csv_dict(
+def belief_label_believer_name_nested_csv_dict(
     headerless_csv: str, delimiter: str = None
-) -> dict[BeliefLabel, dict[OwnerName, str]]:
+) -> dict[BeliefLabel, dict[BelieverName, str]]:
     return create_l2nested_csv_dict(headerless_csv, delimiter)
 
 
@@ -322,7 +328,7 @@ def _add_budunits_from_df(x_beliefunit: BeliefUnit, br00001_df: DataFrame):
     query_str = f"belief_label == '{x_beliefunit.belief_label}'"
     for index, row in br00001_df.query(query_str).iterrows():
         x_beliefunit.add_budunit(
-            owner_name=row["owner_name"],
+            believer_name=row["believer_name"],
             bud_time=row["bud_time"],
             quota=row["quota"],
             celldepth=if_nan_return_None(row["celldepth"]),
@@ -334,7 +340,7 @@ def _add_paypurchases_from_df(x_beliefunit: BeliefUnit, br00002_df: DataFrame):
     query_str = f"belief_label == '{x_beliefunit.belief_label}'"
     for index, row in br00002_df.query(query_str).iterrows():
         x_beliefunit.add_paypurchase(
-            owner_name=row["owner_name"],
+            believer_name=row["believer_name"],
             acct_name=row["acct_name"],
             tran_time=row["tran_time"],
             amount=row["amount"],

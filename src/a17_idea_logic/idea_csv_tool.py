@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.dict_toolbox import get_empty_str_if_None as if_none_str
 from src.a01_term_logic.term import BeliefLabel, FaceName
-from src.a06_owner_logic.owner import OwnerUnit
+from src.a06_believer_logic.believer import BelieverUnit
 from src.a09_pack_logic.pack import PackUnit
 from src.a15_belief_logic.belief import BeliefUnit
 from src.a16_pidgin_logic.pidgin import PidginUnit
@@ -116,13 +116,13 @@ def _add_budunit_to_br00001_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for broker_owner_name, brokerunits in x_belief.brokerunits.items():
+    for broker_believer_name, brokerunits in x_belief.brokerunits.items():
         for bud_time, budunit in brokerunits.buds.items():
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
                 x_belief.belief_label,
-                broker_owner_name,
+                broker_believer_name,
                 str(bud_time),
                 str(budunit.quota),
                 str(budunit.celldepth),
@@ -139,7 +139,7 @@ def _add_paybook_to_br00002_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for owner_name, tranunit in x_belief.paybook.tranunits.items():
+    for believer_name, tranunit in x_belief.paybook.tranunits.items():
         for acct_name, time_dict in tranunit.items():
             for tran_time, amount in time_dict.items():
                 belief_label = x_belief.belief_label
@@ -147,7 +147,7 @@ def _add_paybook_to_br00002_csv(
                     if_none_str(face_name),
                     if_none_str(event_int),
                     belief_label,
-                    owner_name,
+                    believer_name,
                     acct_name,
                     str(tran_time),
                     str(amount),
@@ -217,20 +217,20 @@ def _add_weekdays_to_br00005_csv(
     return x_csv
 
 
-def add_owner_to_br00020_csv(
+def add_believer_to_br00020_csv(
     x_csv: str,
-    x_owner: OwnerUnit,
+    x_believer: BelieverUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for acctunit in x_owner.accts.values():
+    for acctunit in x_believer.accts.values():
         for membership in acctunit._memberships.values():
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
-                x_owner.belief_label,
-                x_owner.owner_name,
+                x_believer.belief_label,
+                x_believer.believer_name,
                 acctunit.acct_name,
                 membership.group_title,
                 if_none_str(membership.group_cred_points),
@@ -241,19 +241,19 @@ def add_owner_to_br00020_csv(
     return x_csv
 
 
-def add_owner_to_br00021_csv(
+def add_believer_to_br00021_csv(
     x_csv: str,
-    x_owner: OwnerUnit,
+    x_believer: BelieverUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for acctunit in x_owner.accts.values():
+    for acctunit in x_believer.accts.values():
         x_row = [
             if_none_str(face_name),
             if_none_str(event_int),
-            x_owner.belief_label,
-            x_owner.owner_name,
+            x_believer.belief_label,
+            x_believer.believer_name,
             acctunit.acct_name,
             if_none_str(acctunit.acct_cred_points),
             if_none_str(acctunit.acct_debt_points),
@@ -263,20 +263,20 @@ def add_owner_to_br00021_csv(
     return x_csv
 
 
-def add_owner_to_br00022_csv(
+def add_believer_to_br00022_csv(
     x_csv: str,
-    x_owner: OwnerUnit,
+    x_believer: BelieverUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for planunit in x_owner._plan_dict.values():
+    for planunit in x_believer._plan_dict.values():
         for awardlink in planunit.awardlinks.values():
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
-                x_owner.belief_label,
-                x_owner.owner_name,
+                x_believer.belief_label,
+                x_believer.believer_name,
                 planunit.get_plan_rope(),
                 awardlink.awardee_title,
                 if_none_str(awardlink.give_force),
@@ -287,20 +287,20 @@ def add_owner_to_br00022_csv(
     return x_csv
 
 
-def add_owner_to_br00023_csv(
+def add_believer_to_br00023_csv(
     x_csv: str,
-    x_owner: OwnerUnit,
+    x_believer: BelieverUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for factunit in x_owner.planroot.factunits.values():
+    for factunit in x_believer.planroot.factunits.values():
         x_row = [
             if_none_str(face_name),
             if_none_str(event_int),
-            x_owner.belief_label,
-            x_owner.owner_name,
-            x_owner.planroot.get_plan_rope(),
+            x_believer.belief_label,
+            x_believer.believer_name,
+            x_believer.planroot.get_plan_rope(),
             factunit.fcontext,
             factunit.fstate,
             if_none_str(factunit.fopen),
@@ -311,20 +311,20 @@ def add_owner_to_br00023_csv(
     return x_csv
 
 
-def add_owner_to_br00024_csv(
+def add_believer_to_br00024_csv(
     x_csv: str,
-    x_owner: OwnerUnit,
+    x_believer: BelieverUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for planunit in x_owner._plan_dict.values():
+    for planunit in x_believer._plan_dict.values():
         for group_title in planunit.laborunit._laborlinks:
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
-                x_owner.belief_label,
-                x_owner.owner_name,
+                x_believer.belief_label,
+                x_believer.believer_name,
                 planunit.get_plan_rope(),
                 group_title,
             ]
@@ -333,20 +333,20 @@ def add_owner_to_br00024_csv(
     return x_csv
 
 
-def add_owner_to_br00025_csv(
+def add_believer_to_br00025_csv(
     x_csv: str,
-    x_owner: OwnerUnit,
+    x_believer: BelieverUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for planunit in x_owner._plan_dict.values():
+    for planunit in x_believer._plan_dict.values():
         for group_title in planunit.healerlink._healer_names:
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
-                x_owner.belief_label,
-                x_owner.owner_name,
+                x_believer.belief_label,
+                x_believer.believer_name,
                 planunit.get_plan_rope(),
                 group_title,
             ]
@@ -355,21 +355,21 @@ def add_owner_to_br00025_csv(
     return x_csv
 
 
-def add_owner_to_br00026_csv(
+def add_believer_to_br00026_csv(
     x_csv: str,
-    x_owner: OwnerUnit,
+    x_believer: BelieverUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for planunit in x_owner._plan_dict.values():
+    for planunit in x_believer._plan_dict.values():
         for reasonunit in planunit.reasonunits.values():
             for premiseunit in reasonunit.premises.values():
                 x_row = [
                     if_none_str(face_name),
                     if_none_str(event_int),
-                    x_owner.belief_label,
-                    x_owner.owner_name,
+                    x_believer.belief_label,
+                    x_believer.believer_name,
                     planunit.get_plan_rope(),
                     reasonunit.rcontext,
                     premiseunit.pstate,
@@ -382,20 +382,20 @@ def add_owner_to_br00026_csv(
     return x_csv
 
 
-def add_owner_to_br00027_csv(
+def add_believer_to_br00027_csv(
     x_csv: str,
-    x_owner: OwnerUnit,
+    x_believer: BelieverUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for planunit in x_owner._plan_dict.values():
+    for planunit in x_believer._plan_dict.values():
         for reasonunit in planunit.reasonunits.values():
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
-                x_owner.belief_label,
-                x_owner.owner_name,
+                x_believer.belief_label,
+                x_believer.believer_name,
                 planunit.get_plan_rope(),
                 reasonunit.rcontext,
                 if_none_str(reasonunit.rplan_active_requisite),
@@ -405,20 +405,20 @@ def add_owner_to_br00027_csv(
     return x_csv
 
 
-def add_owner_to_br00028_csv(
+def add_believer_to_br00028_csv(
     x_csv: str,
-    x_owner: OwnerUnit,
+    x_believer: BelieverUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for planunit in x_owner._plan_dict.values():
-        if planunit != x_owner.planroot:
+    for planunit in x_believer._plan_dict.values():
+        if planunit != x_believer.planroot:
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
-                x_owner.belief_label,
-                x_owner.owner_name,
+                x_believer.belief_label,
+                x_believer.believer_name,
                 planunit.get_plan_rope(),
                 if_none_str(planunit.begin),
                 if_none_str(planunit.close),
@@ -437,9 +437,9 @@ def add_owner_to_br00028_csv(
     return x_csv
 
 
-def add_owner_to_br00029_csv(
+def add_believer_to_br00029_csv(
     x_csv: str,
-    x_owner: OwnerUnit,
+    x_believer: BelieverUnit,
     csv_delimiter: str,
     face_name: FaceName = None,
     event_int: int = None,
@@ -447,24 +447,24 @@ def add_owner_to_br00029_csv(
     x_row = [
         if_none_str(face_name),
         if_none_str(event_int),
-        x_owner.belief_label,
-        x_owner.owner_name,
-        if_none_str(x_owner.credor_respect),
-        if_none_str(x_owner.debtor_respect),
-        if_none_str(x_owner.fund_pool),
-        if_none_str(x_owner.max_tree_traverse),
-        if_none_str(x_owner.tally),
-        if_none_str(x_owner.fund_iota),
-        if_none_str(x_owner.penny),
-        if_none_str(x_owner.respect_bit),
+        x_believer.belief_label,
+        x_believer.believer_name,
+        if_none_str(x_believer.credor_respect),
+        if_none_str(x_believer.debtor_respect),
+        if_none_str(x_believer.fund_pool),
+        if_none_str(x_believer.max_tree_traverse),
+        if_none_str(x_believer.tally),
+        if_none_str(x_believer.fund_iota),
+        if_none_str(x_believer.penny),
+        if_none_str(x_believer.respect_bit),
     ]
     x_csv += csv_delimiter.join(x_row)
     x_csv += "\n"
     return x_csv
 
 
-def add_ownerunit_to_stance_csv_strs(
-    x_owner: OwnerUnit, belief_csv_strs: dict[str, str], csv_delimiter: str
+def add_believerunit_to_stance_csv_strs(
+    x_believer: BelieverUnit, belief_csv_strs: dict[str, str], csv_delimiter: str
 ) -> str:
     br00020_csv = belief_csv_strs.get("br00020")
     br00021_csv = belief_csv_strs.get("br00021")
@@ -476,16 +476,16 @@ def add_ownerunit_to_stance_csv_strs(
     br00027_csv = belief_csv_strs.get("br00027")
     br00028_csv = belief_csv_strs.get("br00028")
     br00029_csv = belief_csv_strs.get("br00029")
-    br00020_csv = add_owner_to_br00020_csv(br00020_csv, x_owner, csv_delimiter)
-    br00021_csv = add_owner_to_br00021_csv(br00021_csv, x_owner, csv_delimiter)
-    br00022_csv = add_owner_to_br00022_csv(br00022_csv, x_owner, csv_delimiter)
-    br00023_csv = add_owner_to_br00023_csv(br00023_csv, x_owner, csv_delimiter)
-    br00024_csv = add_owner_to_br00024_csv(br00024_csv, x_owner, csv_delimiter)
-    br00025_csv = add_owner_to_br00025_csv(br00025_csv, x_owner, csv_delimiter)
-    br00026_csv = add_owner_to_br00026_csv(br00026_csv, x_owner, csv_delimiter)
-    br00027_csv = add_owner_to_br00027_csv(br00027_csv, x_owner, csv_delimiter)
-    br00028_csv = add_owner_to_br00028_csv(br00028_csv, x_owner, csv_delimiter)
-    br00029_csv = add_owner_to_br00029_csv(br00029_csv, x_owner, csv_delimiter)
+    br00020_csv = add_believer_to_br00020_csv(br00020_csv, x_believer, csv_delimiter)
+    br00021_csv = add_believer_to_br00021_csv(br00021_csv, x_believer, csv_delimiter)
+    br00022_csv = add_believer_to_br00022_csv(br00022_csv, x_believer, csv_delimiter)
+    br00023_csv = add_believer_to_br00023_csv(br00023_csv, x_believer, csv_delimiter)
+    br00024_csv = add_believer_to_br00024_csv(br00024_csv, x_believer, csv_delimiter)
+    br00025_csv = add_believer_to_br00025_csv(br00025_csv, x_believer, csv_delimiter)
+    br00026_csv = add_believer_to_br00026_csv(br00026_csv, x_believer, csv_delimiter)
+    br00027_csv = add_believer_to_br00027_csv(br00027_csv, x_believer, csv_delimiter)
+    br00028_csv = add_believer_to_br00028_csv(br00028_csv, x_believer, csv_delimiter)
+    br00029_csv = add_believer_to_br00029_csv(br00029_csv, x_believer, csv_delimiter)
     belief_csv_strs["br00020"] = br00020_csv
     belief_csv_strs["br00021"] = br00021_csv
     belief_csv_strs["br00022"] = br00022_csv
@@ -582,17 +582,17 @@ def add_pidginunit_to_stance_csv_strs(
 def add_pack_to_br00020_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
-    for owneratom in x_packunit._ownerdelta.get_ordered_owneratoms().values():
-        if owneratom.dimen == "owner_acct_membership":
+    for believeratom in x_packunit._believerdelta.get_ordered_believeratoms().values():
+        if believeratom.dimen == "believer_acct_membership":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.belief_label,
-                x_packunit.owner_name,
-                owneratom.jkeys.get("acct_name"),
-                owneratom.jkeys.get("group_title"),
-                if_none_str(owneratom.jvalues.get("group_cred_points")),
-                if_none_str(owneratom.jvalues.get("group_debt_points")),
+                x_packunit.believer_name,
+                believeratom.jkeys.get("acct_name"),
+                believeratom.jkeys.get("group_title"),
+                if_none_str(believeratom.jvalues.get("group_cred_points")),
+                if_none_str(believeratom.jvalues.get("group_debt_points")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -602,16 +602,16 @@ def add_pack_to_br00020_csv(
 def add_pack_to_br00021_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
-    for owneratom in x_packunit._ownerdelta.get_ordered_owneratoms().values():
-        if owneratom.dimen == "owner_acctunit":
+    for believeratom in x_packunit._believerdelta.get_ordered_believeratoms().values():
+        if believeratom.dimen == "believer_acctunit":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.belief_label,
-                x_packunit.owner_name,
-                owneratom.jkeys.get("acct_name"),
-                if_none_str(owneratom.jvalues.get("acct_cred_points")),
-                if_none_str(owneratom.jvalues.get("acct_debt_points")),
+                x_packunit.believer_name,
+                believeratom.jkeys.get("acct_name"),
+                if_none_str(believeratom.jvalues.get("acct_cred_points")),
+                if_none_str(believeratom.jvalues.get("acct_debt_points")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -621,17 +621,17 @@ def add_pack_to_br00021_csv(
 def add_pack_to_br00022_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
-    for owneratom in x_packunit._ownerdelta.get_ordered_owneratoms().values():
-        if owneratom.dimen == "owner_plan_awardlink":
+    for believeratom in x_packunit._believerdelta.get_ordered_believeratoms().values():
+        if believeratom.dimen == "believer_plan_awardlink":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.belief_label,
-                x_packunit.owner_name,
-                owneratom.jkeys.get("plan_rope"),
-                owneratom.jkeys.get("awardee_title"),
-                if_none_str(owneratom.jvalues.get("give_force")),
-                if_none_str(owneratom.jvalues.get("take_force")),
+                x_packunit.believer_name,
+                believeratom.jkeys.get("plan_rope"),
+                believeratom.jkeys.get("awardee_title"),
+                if_none_str(believeratom.jvalues.get("give_force")),
+                if_none_str(believeratom.jvalues.get("take_force")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -641,18 +641,18 @@ def add_pack_to_br00022_csv(
 def add_pack_to_br00023_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
-    for owneratom in x_packunit._ownerdelta.get_ordered_owneratoms().values():
-        if owneratom.dimen == "owner_plan_factunit":
+    for believeratom in x_packunit._believerdelta.get_ordered_believeratoms().values():
+        if believeratom.dimen == "believer_plan_factunit":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.belief_label,
-                x_packunit.owner_name,
-                owneratom.jkeys.get("plan_rope"),
-                owneratom.jkeys.get("fcontext"),
-                if_none_str(owneratom.jvalues.get("fstate")),
-                if_none_str(owneratom.jvalues.get("fopen")),
-                if_none_str(owneratom.jvalues.get("fnigh")),
+                x_packunit.believer_name,
+                believeratom.jkeys.get("plan_rope"),
+                believeratom.jkeys.get("fcontext"),
+                if_none_str(believeratom.jvalues.get("fstate")),
+                if_none_str(believeratom.jvalues.get("fopen")),
+                if_none_str(believeratom.jvalues.get("fnigh")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -662,15 +662,15 @@ def add_pack_to_br00023_csv(
 def add_pack_to_br00024_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
-    for owneratom in x_packunit._ownerdelta.get_ordered_owneratoms().values():
-        if owneratom.dimen == "owner_plan_laborlink":
+    for believeratom in x_packunit._believerdelta.get_ordered_believeratoms().values():
+        if believeratom.dimen == "believer_plan_laborlink":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.belief_label,
-                x_packunit.owner_name,
-                owneratom.jkeys.get("plan_rope"),
-                owneratom.jkeys.get("labor_title"),
+                x_packunit.believer_name,
+                believeratom.jkeys.get("plan_rope"),
+                believeratom.jkeys.get("labor_title"),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -680,15 +680,15 @@ def add_pack_to_br00024_csv(
 def add_pack_to_br00025_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
-    for owneratom in x_packunit._ownerdelta.get_ordered_owneratoms().values():
-        if owneratom.dimen == "owner_plan_healerlink":
+    for believeratom in x_packunit._believerdelta.get_ordered_believeratoms().values():
+        if believeratom.dimen == "believer_plan_healerlink":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.belief_label,
-                x_packunit.owner_name,
-                owneratom.jkeys.get("plan_rope"),
-                owneratom.jkeys.get("healer_name"),
+                x_packunit.believer_name,
+                believeratom.jkeys.get("plan_rope"),
+                believeratom.jkeys.get("healer_name"),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -698,19 +698,19 @@ def add_pack_to_br00025_csv(
 def add_pack_to_br00026_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
-    for owneratom in x_packunit._ownerdelta.get_ordered_owneratoms().values():
-        if owneratom.dimen == "owner_plan_reason_premiseunit":
+    for believeratom in x_packunit._believerdelta.get_ordered_believeratoms().values():
+        if believeratom.dimen == "believer_plan_reason_premiseunit":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.belief_label,
-                x_packunit.owner_name,
-                owneratom.jkeys.get("plan_rope"),
-                owneratom.jkeys.get("rcontext"),
-                owneratom.jkeys.get("pstate"),
-                if_none_str(owneratom.jvalues.get("popen")),
-                if_none_str(owneratom.jvalues.get("pnigh")),
-                if_none_str(owneratom.jvalues.get("pdivisor")),
+                x_packunit.believer_name,
+                believeratom.jkeys.get("plan_rope"),
+                believeratom.jkeys.get("rcontext"),
+                believeratom.jkeys.get("pstate"),
+                if_none_str(believeratom.jvalues.get("popen")),
+                if_none_str(believeratom.jvalues.get("pnigh")),
+                if_none_str(believeratom.jvalues.get("pdivisor")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -720,16 +720,16 @@ def add_pack_to_br00026_csv(
 def add_pack_to_br00027_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
-    for owneratom in x_packunit._ownerdelta.get_ordered_owneratoms().values():
-        if owneratom.dimen == "owner_plan_reasonunit":
+    for believeratom in x_packunit._believerdelta.get_ordered_believeratoms().values():
+        if believeratom.dimen == "believer_plan_reasonunit":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.belief_label,
-                x_packunit.owner_name,
-                owneratom.jkeys.get("plan_rope"),
-                owneratom.jkeys.get("rcontext"),
-                if_none_str(owneratom.jvalues.get("rplan_active_requisite")),
+                x_packunit.believer_name,
+                believeratom.jkeys.get("plan_rope"),
+                believeratom.jkeys.get("rcontext"),
+                if_none_str(believeratom.jvalues.get("rplan_active_requisite")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -739,25 +739,25 @@ def add_pack_to_br00027_csv(
 def add_pack_to_br00028_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
-    for owneratom in x_packunit._ownerdelta.get_ordered_owneratoms().values():
-        if owneratom.dimen == "owner_planunit":
+    for believeratom in x_packunit._believerdelta.get_ordered_believeratoms().values():
+        if believeratom.dimen == "believer_planunit":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.belief_label,
-                x_packunit.owner_name,
-                owneratom.jkeys.get("plan_rope"),
-                if_none_str(owneratom.jvalues.get("begin")),
-                if_none_str(owneratom.jvalues.get("close")),
-                if_none_str(owneratom.jvalues.get("addin")),
-                if_none_str(owneratom.jvalues.get("numor")),
-                if_none_str(owneratom.jvalues.get("denom")),
-                if_none_str(owneratom.jvalues.get("morph")),
-                if_none_str(owneratom.jvalues.get("gogo_want")),
-                if_none_str(owneratom.jvalues.get("stop_want")),
-                if_none_str(owneratom.jvalues.get("mass")),
-                if_none_str(owneratom.jvalues.get("task")),
-                if_none_str(owneratom.jvalues.get("problem_bool")),
+                x_packunit.believer_name,
+                believeratom.jkeys.get("plan_rope"),
+                if_none_str(believeratom.jvalues.get("begin")),
+                if_none_str(believeratom.jvalues.get("close")),
+                if_none_str(believeratom.jvalues.get("addin")),
+                if_none_str(believeratom.jvalues.get("numor")),
+                if_none_str(believeratom.jvalues.get("denom")),
+                if_none_str(believeratom.jvalues.get("morph")),
+                if_none_str(believeratom.jvalues.get("gogo_want")),
+                if_none_str(believeratom.jvalues.get("stop_want")),
+                if_none_str(believeratom.jvalues.get("mass")),
+                if_none_str(believeratom.jvalues.get("task")),
+                if_none_str(believeratom.jvalues.get("problem_bool")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -767,21 +767,21 @@ def add_pack_to_br00028_csv(
 def add_pack_to_br00029_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
-    for owneratom in x_packunit._ownerdelta.get_ordered_owneratoms().values():
-        if owneratom.dimen == "ownerunit":
+    for believeratom in x_packunit._believerdelta.get_ordered_believeratoms().values():
+        if believeratom.dimen == "believerunit":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.belief_label,
-                x_packunit.owner_name,
-                if_none_str(owneratom.jvalues.get("credor_respect")),
-                if_none_str(owneratom.jvalues.get("debtor_respect")),
-                if_none_str(owneratom.jvalues.get("fund_pool")),
-                if_none_str(owneratom.jvalues.get("max_tree_traverse")),
-                if_none_str(owneratom.jvalues.get("tally")),
-                if_none_str(owneratom.jvalues.get("fund_iota")),
-                if_none_str(owneratom.jvalues.get("penny")),
-                if_none_str(owneratom.jvalues.get("respect_bit")),
+                x_packunit.believer_name,
+                if_none_str(believeratom.jvalues.get("credor_respect")),
+                if_none_str(believeratom.jvalues.get("debtor_respect")),
+                if_none_str(believeratom.jvalues.get("fund_pool")),
+                if_none_str(believeratom.jvalues.get("max_tree_traverse")),
+                if_none_str(believeratom.jvalues.get("tally")),
+                if_none_str(believeratom.jvalues.get("fund_iota")),
+                if_none_str(believeratom.jvalues.get("penny")),
+                if_none_str(believeratom.jvalues.get("respect_bit")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"

@@ -61,6 +61,10 @@ def awardee_title_str() -> str:
     return "awardee_title"
 
 
+def believer_name_str() -> str:
+    return "believer_name"
+
+
 def fund_give_str() -> str:
     return "fund_give"
 
@@ -83,10 +87,6 @@ def group_debt_points_str() -> str:
 
 def group_title_str() -> str:
     return "group_title"
-
-
-def owner_name_str() -> str:
-    return "owner_name"
 
 
 def respect_bit_str() -> str:

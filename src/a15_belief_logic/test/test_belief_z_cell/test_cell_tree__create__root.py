@@ -1,17 +1,17 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import count_dirs_files, open_json, save_file
-from src.a06_owner_logic.test._util.a06_str import penny_str
+from src.a06_believer_logic.test._util.a06_str import penny_str
 from src.a09_pack_logic.test._util.a09_str import event_int_str
 from src.a11_bud_logic.bud import DEFAULT_CELLDEPTH
 from src.a11_bud_logic.test._util.a11_str import (
     ancestors_str,
-    bud_owner_name_str,
+    bud_believer_name_str,
     celldepth_str,
     quota_str,
 )
 from src.a12_hub_toolbox.hub_path import (
+    create_belief_believers_dir_path,
     create_belief_json_path,
-    create_belief_owners_dir_path,
     create_cell_json_path,
 )
 from src.a15_belief_logic.belief import _get_ote1_max_past_event_int, beliefunit_shop
@@ -43,14 +43,14 @@ def test_BeliefUnit_create_buds_root_cells_Scenaro0_BudEmpty(
     a23_json_path = create_belief_json_path(belief_mstr_dir, a23_str)
     save_file(a23_json_path, None, amy23_belief.get_json())
     print(f"{a23_json_path=}")
-    a23_owners_path = create_belief_owners_dir_path(belief_mstr_dir, a23_str)
-    assert count_dirs_files(a23_owners_path) == 0
+    a23_believers_path = create_belief_believers_dir_path(belief_mstr_dir, a23_str)
+    assert count_dirs_files(a23_believers_path) == 0
 
     # WHEN
     amy23_belief.create_buds_root_cells({})
 
     # THEN
-    assert count_dirs_files(a23_owners_path) == 0
+    assert count_dirs_files(a23_believers_path) == 0
 
 
 def test_BeliefUnit_create_buds_root_cells_Scenaro1_BudExists(
@@ -70,7 +70,7 @@ def test_BeliefUnit_create_buds_root_cells_Scenaro1_BudExists(
     save_file(a23_json_path, None, amy23_belief.get_json())
     assert os_path_exists(a23_json_path)
 
-    # Create event time mapping owner_time_agg for time 37
+    # Create event time mapping believer_time_agg for time 37
     event3 = 3
     event7 = 7
     timepoint66 = 66
@@ -88,12 +88,12 @@ def test_BeliefUnit_create_buds_root_cells_Scenaro1_BudExists(
     cell_dict = open_json(tp37_cell_json_path)
     print(f"{cell_dict=}")
     assert cell_dict.get(celldepth_str()) == DEFAULT_CELLDEPTH
-    assert cell_dict.get(bud_owner_name_str()) == bob_str
+    assert cell_dict.get(bud_believer_name_str()) == bob_str
     assert cell_dict.get(quota_str()) == bud1_quota
     assert cell_dict.get(event_int_str()) == event3
 
 
-def test_BeliefUnit_create_buds_root_cells_Scenaro2_BudExistsButNoOwnerExistsInEventsPast(
+def test_BeliefUnit_create_buds_root_cells_Scenaro2_BudExistsButNoBelieverExistsInEventsPast(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -110,7 +110,7 @@ def test_BeliefUnit_create_buds_root_cells_Scenaro2_BudExistsButNoOwnerExistsInE
     save_file(a23_json_path, None, amy23_belief.get_json())
     assert os_path_exists(a23_json_path)
 
-    # Create event time mapping owner_time_agg for time 37
+    # Create event time mapping believer_time_agg for time 37
     event3 = 3
     event7 = 7
     timepoint40 = 40
@@ -129,7 +129,7 @@ def test_BeliefUnit_create_buds_root_cells_Scenaro2_BudExistsButNoOwnerExistsInE
     assert cell_dict.get(ancestors_str()) == []
     assert not cell_dict.get(event_int_str())
     assert cell_dict.get(celldepth_str()) == DEFAULT_CELLDEPTH
-    assert cell_dict.get(bud_owner_name_str()) == bob_str
+    assert cell_dict.get(bud_believer_name_str()) == bob_str
     assert cell_dict.get(quota_str()) == bud1_quota
 
 
@@ -153,7 +153,7 @@ def test_BeliefUnit_create_buds_root_cells_Scenaro3_BudExistsNotPerfectMatch_bud
     save_file(a23_json_path, None, amy23_belief.get_json())
     assert os_path_exists(a23_json_path)
 
-    # Create event time mapping owner_time_agg for time 37
+    # Create event time mapping believer_time_agg for time 37
     event3 = 3
     event7 = 7
     timepoint30 = 30
@@ -173,6 +173,6 @@ def test_BeliefUnit_create_buds_root_cells_Scenaro3_BudExistsNotPerfectMatch_bud
     assert cell_dict.get(ancestors_str()) == []
     assert cell_dict.get(event_int_str()) == event3
     assert cell_dict.get(celldepth_str()) == bud1_celldepth
-    assert cell_dict.get(bud_owner_name_str()) == bob_str
+    assert cell_dict.get(bud_believer_name_str()) == bob_str
     assert cell_dict.get(penny_str()) == a23_penny
     assert cell_dict.get(quota_str()) == bud1_quota

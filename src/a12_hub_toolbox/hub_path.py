@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a01_term_logic.term import LabelTerm, OwnerName
+from src.a01_term_logic.term import BelieverName, LabelTerm
 
 BELIEF_FILENAME = "belief.json"
 BELIEF_OTE1_AGG_CSV_FILENAME = "belief_ote1_agg.csv"
@@ -9,8 +9,8 @@ BUDUNIT_FILENAME = "budunit.json"
 BUD_MANDATE_FILENAME = "bud_acct_mandate_ledger.json"
 CELLNODE_FILENAME = "cell.json"
 CELL_MANDATE_FILENAME = "cell_acct_mandate_ledger.json"
-OWNERPOINT_FILENAME = "ownerpoint.json"
-OWNEREVENT_FILENAME = "owner.json"
+BELIEVERPOINT_FILENAME = "believerpoint.json"
+BELIEVEREVENT_FILENAME = "believer.json"
 EVENT_ALL_PACK_FILENAME = "all_pack.json"
 EVENT_EXPRESSED_PACK_FILENAME = "expressed_pack.json"
 
@@ -55,134 +55,148 @@ def belief_agenda_list_report_path(
     return create_path(belief_path, "agenda_full_listing.csv")
 
 
-def create_belief_owners_dir_path(belief_mstr_dir: str, belief_label: LabelTerm) -> str:
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\owners"""
-    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
-    belief_dir = create_path(beliefs_dir, belief_label)
-    return create_path(belief_dir, "owners")
-
-
-def create_owner_dir_path(
-    belief_mstr_dir: str, belief_label: LabelTerm, owner_name: OwnerName
+def create_belief_believers_dir_path(
+    belief_mstr_dir: str, belief_label: LabelTerm
 ) -> str:
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\owners\\owner_name"""
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers"""
+    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
+    belief_dir = create_path(beliefs_dir, belief_label)
+    return create_path(belief_dir, "believers")
+
+
+def create_believer_dir_path(
+    belief_mstr_dir: str, belief_label: LabelTerm, believer_name: BelieverName
+) -> str:
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name"""
 
     beliefs_dir = create_path(belief_mstr_dir, "beliefs")
     belief_dir = create_path(beliefs_dir, belief_label)
-    owners_dir = create_path(belief_dir, "owners")
-    return create_path(owners_dir, owner_name)
+    believers_dir = create_path(belief_dir, "believers")
+    return create_path(believers_dir, believer_name)
 
 
 def create_keeps_dir_path(
-    belief_mstr_dir: str, belief_label: LabelTerm, owner_name: OwnerName
+    belief_mstr_dir: str, belief_label: LabelTerm, believer_name: BelieverName
 ) -> str:
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\owners\\owner_name\\keeps"""
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\keeps"""
     beliefs_dir = create_path(belief_mstr_dir, "beliefs")
     belief_dir = create_path(beliefs_dir, belief_label)
-    owners_dir = create_path(belief_dir, "owners")
-    owner_dir = create_path(owners_dir, owner_name)
-    return create_path(owner_dir, "keeps")
+    believers_dir = create_path(belief_dir, "believers")
+    believer_dir = create_path(believers_dir, believer_name)
+    return create_path(believer_dir, "keeps")
 
 
 def create_atoms_dir_path(
-    belief_mstr_dir: str, belief_label: LabelTerm, owner_name: OwnerName
+    belief_mstr_dir: str, belief_label: LabelTerm, believer_name: BelieverName
 ) -> str:
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\owners\\owner_name\\atoms"""
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\atoms"""
     beliefs_dir = create_path(belief_mstr_dir, "beliefs")
     belief_dir = create_path(beliefs_dir, belief_label)
-    owners_dir = create_path(belief_dir, "owners")
-    owner_dir = create_path(owners_dir, owner_name)
-    return create_path(owner_dir, "atoms")
+    believers_dir = create_path(belief_dir, "believers")
+    believer_dir = create_path(believers_dir, believer_name)
+    return create_path(believer_dir, "atoms")
 
 
 def create_packs_dir_path(
-    belief_mstr_dir: str, belief_label: LabelTerm, owner_name: OwnerName
+    belief_mstr_dir: str, belief_label: LabelTerm, believer_name: BelieverName
 ) -> str:
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\owners\\owner_name\\packs"""
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\packs"""
     beliefs_dir = create_path(belief_mstr_dir, "beliefs")
     belief_dir = create_path(beliefs_dir, belief_label)
-    owners_dir = create_path(belief_dir, "owners")
-    owner_dir = create_path(owners_dir, owner_name)
-    return create_path(owner_dir, "packs")
+    believers_dir = create_path(belief_dir, "believers")
+    believer_dir = create_path(believers_dir, believer_name)
+    return create_path(believer_dir, "packs")
 
 
 def create_buds_dir_path(
-    belief_mstr_dir: str, belief_label: LabelTerm, owner_name: OwnerName
+    belief_mstr_dir: str, belief_label: LabelTerm, believer_name: BelieverName
 ) -> str:
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\owners\\owner_name\\buds"""
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\buds"""
     beliefs_dir = create_path(belief_mstr_dir, "beliefs")
     belief_dir = create_path(beliefs_dir, belief_label)
-    owners_dir = create_path(belief_dir, "owners")
-    owner_dir = create_path(owners_dir, owner_name)
-    return create_path(owner_dir, "buds")
+    believers_dir = create_path(belief_dir, "believers")
+    believer_dir = create_path(believers_dir, believer_name)
+    return create_path(believer_dir, "buds")
 
 
 def create_bud_dir_path(
-    belief_mstr_dir: str, belief_label: LabelTerm, owner_name: OwnerName, bud_time: int
+    belief_mstr_dir: str,
+    belief_label: LabelTerm,
+    believer_name: BelieverName,
+    bud_time: int,
 ):
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\owners\\owner_name\\buds\n\\bud_time"""
-    timeline_dir = create_buds_dir_path(belief_mstr_dir, belief_label, owner_name)
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\buds\n\\bud_time"""
+    timeline_dir = create_buds_dir_path(belief_mstr_dir, belief_label, believer_name)
     return create_path(timeline_dir, bud_time)
 
 
 def create_budunit_json_path(
-    belief_mstr_dir: str, belief_label: LabelTerm, owner_name: OwnerName, bud_time: int
+    belief_mstr_dir: str,
+    belief_label: LabelTerm,
+    believer_name: BelieverName,
+    bud_time: int,
 ) -> str:
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\owners\\owner_name\\buds\n\\bud_time\\budunit.json"""
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\buds\n\\bud_time\\budunit.json"""
     timepoint_dir = create_bud_dir_path(
-        belief_mstr_dir, belief_label, owner_name, bud_time
+        belief_mstr_dir, belief_label, believer_name, bud_time
     )
     return create_path(timepoint_dir, "budunit.json")
 
 
 def create_bud_acct_mandate_ledger_path(
-    belief_mstr_dir: str, belief_label: LabelTerm, owner_name: OwnerName, bud_time: int
+    belief_mstr_dir: str,
+    belief_label: LabelTerm,
+    believer_name: BelieverName,
+    bud_time: int,
 ) -> str:
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\owners\\owner_name\\buds\n\\bud_time\\bud_acct_mandate_ledger.json"""
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\buds\n\\bud_time\\bud_acct_mandate_ledger.json"""
     timepoint_dir = create_bud_dir_path(
-        belief_mstr_dir, belief_label, owner_name, bud_time
+        belief_mstr_dir, belief_label, believer_name, bud_time
     )
     return create_path(timepoint_dir, "bud_acct_mandate_ledger.json")
 
 
-def create_ownerpoint_path(
-    belief_mstr_dir: str, belief_label: LabelTerm, owner_name: OwnerName, bud_time: int
+def create_believerpoint_path(
+    belief_mstr_dir: str,
+    belief_label: LabelTerm,
+    believer_name: BelieverName,
+    bud_time: int,
 ) -> str:
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\owners\\owner_name\\buds\n\\bud_time\\ownerpoint.json"""
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\buds\n\\bud_time\\believerpoint.json"""
     timepoint_dir = create_bud_dir_path(
-        belief_mstr_dir, belief_label, owner_name, bud_time
+        belief_mstr_dir, belief_label, believer_name, bud_time
     )
-    return create_path(timepoint_dir, "ownerpoint.json")
+    return create_path(timepoint_dir, "believerpoint.json")
 
 
 def create_cell_dir_path(
     belief_mstr_dir: str,
     belief_label: LabelTerm,
-    owner_name: OwnerName,
+    believer_name: BelieverName,
     bud_time: int,
-    bud_ancestors: list[OwnerName],
+    bud_ancestors: list[BelieverName],
 ):
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\owners\\owner_name\\buds\n\\bud_time\\ledger_owner1\\ledger_owner2\\ledger_owner3"""
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\buds\n\\bud_time\\ledger_believer1\\ledger_believer2\\ledger_believer3"""
     bud_celldepth_dir = create_bud_dir_path(
-        belief_mstr_dir, belief_label, owner_name, bud_time
+        belief_mstr_dir, belief_label, believer_name, bud_time
     )
     if bud_ancestors is None:
         bud_ancestors = []
-    for ledger_owner in bud_ancestors:
-        bud_celldepth_dir = create_path(bud_celldepth_dir, ledger_owner)
+    for ledger_believer in bud_ancestors:
+        bud_celldepth_dir = create_path(bud_celldepth_dir, ledger_believer)
     return bud_celldepth_dir
 
 
 def create_cell_json_path(
     belief_mstr_dir: str,
     belief_label: LabelTerm,
-    owner_name: OwnerName,
+    believer_name: BelieverName,
     bud_time: int,
-    bud_ancestors: list[OwnerName] = None,
+    bud_ancestors: list[BelieverName] = None,
 ):
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\owners\\owner_name\\buds\n\\bud_time\\ledger_owner1\\ledger_owner2\\ledger_owner3\\cell.json"""
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\buds\n\\bud_time\\ledger_believer1\\ledger_believer2\\ledger_believer3\\cell.json"""
     cell_dir = create_cell_dir_path(
-        belief_mstr_dir, belief_label, owner_name, bud_time, bud_ancestors
+        belief_mstr_dir, belief_label, believer_name, bud_time, bud_ancestors
     )
     return create_path(cell_dir, "cell.json")
 
@@ -190,81 +204,93 @@ def create_cell_json_path(
 def create_cell_acct_mandate_ledger_path(
     belief_mstr_dir: str,
     belief_label: LabelTerm,
-    owner_name: OwnerName,
+    believer_name: BelieverName,
     bud_time: int,
-    bud_ancestors: list[OwnerName] = None,
+    bud_ancestors: list[BelieverName] = None,
 ):
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\owners\\owner_name\\buds\n\\bud_time\\ledger_owner1\\ledger_owner2\\ledger_owner3\\cell_acct_mandate_ledger.json"""
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\buds\n\\bud_time\\ledger_believer1\\ledger_believer2\\ledger_believer3\\cell_acct_mandate_ledger.json"""
     cell_dir = create_cell_dir_path(
-        belief_mstr_dir, belief_label, owner_name, bud_time, bud_ancestors
+        belief_mstr_dir, belief_label, believer_name, bud_time, bud_ancestors
     )
     return create_path(cell_dir, "cell_acct_mandate_ledger.json")
 
 
-def create_owner_event_dir_path(
-    belief_mstr_dir: str, belief_label: LabelTerm, owner_name: OwnerName, event_int: int
+def create_believer_event_dir_path(
+    belief_mstr_dir: str,
+    belief_label: LabelTerm,
+    believer_name: BelieverName,
+    event_int: int,
 ):
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\owners\\owner_name\\events\\event_int"""
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\events\\event_int"""
     beliefs_dir = create_path(belief_mstr_dir, "beliefs")
     belief_dir = create_path(beliefs_dir, belief_label)
-    owners_dir = create_path(belief_dir, "owners")
-    belief_owner_dir = create_path(owners_dir, owner_name)
-    belief_events_dir = create_path(belief_owner_dir, "events")
+    believers_dir = create_path(belief_dir, "believers")
+    belief_believer_dir = create_path(believers_dir, believer_name)
+    belief_events_dir = create_path(belief_believer_dir, "events")
     return create_path(belief_events_dir, event_int)
 
 
-def create_ownerevent_path(
-    belief_mstr_dir: str, belief_label: LabelTerm, owner_name: OwnerName, event_int: int
+def create_believerevent_path(
+    belief_mstr_dir: str,
+    belief_label: LabelTerm,
+    believer_name: BelieverName,
+    event_int: int,
 ):
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\owners\\owner_name\\events\\event_int\\owner.json"""
-    owner_event_dir_path = create_owner_event_dir_path(
-        belief_mstr_dir, belief_label, owner_name, event_int
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\events\\event_int\\believer.json"""
+    believer_event_dir_path = create_believer_event_dir_path(
+        belief_mstr_dir, belief_label, believer_name, event_int
     )
-    owner_filename = "owner.json"
-    return create_path(owner_event_dir_path, owner_filename)
+    believer_filename = "believer.json"
+    return create_path(believer_event_dir_path, believer_filename)
 
 
 def create_event_all_pack_path(
-    belief_mstr_dir: str, belief_label: LabelTerm, owner_name: OwnerName, event_int: int
+    belief_mstr_dir: str,
+    belief_label: LabelTerm,
+    believer_name: BelieverName,
+    event_int: int,
 ):
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\owners\\owner_name\\events\\event_int\\all_pack.json"""
-    owner_event_dir_path = create_owner_event_dir_path(
-        belief_mstr_dir, belief_label, owner_name, event_int
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\events\\event_int\\all_pack.json"""
+    believer_event_dir_path = create_believer_event_dir_path(
+        belief_mstr_dir, belief_label, believer_name, event_int
     )
     all_pack_filename = "all_pack.json"
-    return create_path(owner_event_dir_path, all_pack_filename)
+    return create_path(believer_event_dir_path, all_pack_filename)
 
 
 def create_event_expressed_pack_path(
-    belief_mstr_dir: str, belief_label: LabelTerm, owner_name: OwnerName, event_int: int
+    belief_mstr_dir: str,
+    belief_label: LabelTerm,
+    believer_name: BelieverName,
+    event_int: int,
 ):
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\owners\\owner_name\\events\\event_int\\expressed_pack.json"""
-    owner_event_dir_path = create_owner_event_dir_path(
-        belief_mstr_dir, belief_label, owner_name, event_int
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\events\\event_int\\expressed_pack.json"""
+    believer_event_dir_path = create_believer_event_dir_path(
+        belief_mstr_dir, belief_label, believer_name, event_int
     )
     expressed_pack_filename = "expressed_pack.json"
-    return create_path(owner_event_dir_path, expressed_pack_filename)
+    return create_path(believer_event_dir_path, expressed_pack_filename)
 
 
 def create_gut_path(
-    belief_mstr_dir: str, belief_label: LabelTerm, owner_name: OwnerName
+    belief_mstr_dir: str, belief_label: LabelTerm, believer_name: BelieverName
 ):
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\owners\\owner_name\\gut\\owner_name.json"""
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\gut\\believer_name.json"""
     beliefs_dir = create_path(belief_mstr_dir, "beliefs")
     belief_dir = create_path(beliefs_dir, belief_label)
-    owners_dir = create_path(belief_dir, "owners")
-    owner_dir = create_path(owners_dir, owner_name)
-    gut_dir = create_path(owner_dir, "gut")
-    return create_path(gut_dir, f"{owner_name}.json")
+    believers_dir = create_path(belief_dir, "believers")
+    believer_dir = create_path(believers_dir, believer_name)
+    gut_dir = create_path(believer_dir, "gut")
+    return create_path(gut_dir, f"{believer_name}.json")
 
 
 def create_job_path(
-    belief_mstr_dir: str, belief_label: LabelTerm, owner_name: OwnerName
+    belief_mstr_dir: str, belief_label: LabelTerm, believer_name: BelieverName
 ):
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\owners\\owner_name\\job\\owner_name.json"""
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\job\\believer_name.json"""
     beliefs_dir = create_path(belief_mstr_dir, "beliefs")
     belief_dir = create_path(beliefs_dir, belief_label)
-    owners_dir = create_path(belief_dir, "owners")
-    owner_dir = create_path(owners_dir, owner_name)
-    job_dir = create_path(owner_dir, "job")
-    return create_path(job_dir, f"{owner_name}.json")
+    believers_dir = create_path(belief_dir, "believers")
+    believer_dir = create_path(believers_dir, believer_name)
+    job_dir = create_path(believer_dir, "job")
+    return create_path(job_dir, f"{believer_name}.json")

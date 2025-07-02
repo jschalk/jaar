@@ -5,25 +5,25 @@ from src.a00_data_toolbox.db_toolbox import (
     get_table_columns,
     required_columns_exist,
 )
-from src.a06_owner_logic.test._util.a06_str import (
-    owner_acct_membership_str,
-    owner_acctunit_str,
-    owner_plan_awardlink_str,
-    owner_plan_factunit_str,
-    owner_plan_healerlink_str,
-    owner_plan_laborlink_str,
-    owner_plan_reason_premiseunit_str,
-    owner_plan_reasonunit_str,
-    owner_planunit_str,
-    ownerunit_str,
+from src.a06_believer_logic.test._util.a06_str import (
+    believer_acct_membership_str,
+    believer_acctunit_str,
+    believer_plan_awardlink_str,
+    believer_plan_factunit_str,
+    believer_plan_healerlink_str,
+    believer_plan_laborlink_str,
+    believer_plan_reason_premiseunit_str,
+    believer_plan_reasonunit_str,
+    believer_planunit_str,
+    believerunit_str,
 )
-from src.a08_owner_atom_logic.atom_config import get_delete_key_name
+from src.a08_believer_atom_logic.atom_config import get_delete_key_name
 from src.a09_pack_logic.test._util.a09_str import event_int_str
-from src.a10_owner_calc.test._util.a10_str import owner_groupunit_str
+from src.a10_believer_calc.test._util.a10_str import believer_groupunit_str
 from src.a11_bud_logic.test._util.a11_str import (
     belief_label_str,
+    believer_name_str,
     bud_time_str,
-    owner_name_str,
     tran_time_str,
 )
 from src.a12_hub_toolbox.test._util.a12_str import belief_ote1_agg_str, job_str
@@ -56,7 +56,7 @@ from src.a17_idea_logic.test._util.a17_str import error_message_str, idea_catego
 from src.a18_etl_toolbox.test._util.a18_str import (
     belief_acct_nets_str,
     belief_event_time_agg_str,
-    owner_net_amount_str,
+    believer_net_amount_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
@@ -83,17 +83,17 @@ def test_ALL_DIMEN_ABBV7_has_all_dimens():
 
 def test_create_prime_tablename_ReturnsObj():
     # ESTABLISH
-    ownerunit_dimen = ownerunit_str()
-    onracct_dimen = owner_acctunit_str()
-    onrmemb_dimen = owner_acct_membership_str()
-    onrgrou_dimen = owner_groupunit_str()
-    onrplan_dimen = owner_planunit_str()
-    onrawar_dimen = owner_plan_awardlink_str()
-    onrreas_dimen = owner_plan_reasonunit_str()
-    onrprem_dimen = owner_plan_reason_premiseunit_str()
-    onrlabo_dimen = owner_plan_laborlink_str()
-    onrheal_dimen = owner_plan_healerlink_str()
-    onrfact_dimen = owner_plan_factunit_str()
+    believerunit_dimen = believerunit_str()
+    onracct_dimen = believer_acctunit_str()
+    onrmemb_dimen = believer_acct_membership_str()
+    onrgrou_dimen = believer_groupunit_str()
+    onrplan_dimen = believer_planunit_str()
+    onrawar_dimen = believer_plan_awardlink_str()
+    onrreas_dimen = believer_plan_reasonunit_str()
+    onrprem_dimen = believer_plan_reason_premiseunit_str()
+    onrlabo_dimen = believer_plan_laborlink_str()
+    onrheal_dimen = believer_plan_healerlink_str()
+    onrfact_dimen = believer_plan_factunit_str()
     beliefunit_dimen = beliefunit_str()
     blfpayy_dimen = belief_paybook_str()
     blfbudd_dimen = belief_budunit_str()
@@ -113,7 +113,9 @@ def test_create_prime_tablename_ReturnsObj():
     del_str = "del"
 
     # WHEN
-    ownerunit_s_agg_table = create_prime_tablename("ownerunit", "s", agg_str, put_str)
+    believerunit_s_agg_table = create_prime_tablename(
+        "believerunit", "s", agg_str, put_str
+    )
     onracct_s_agg_table = create_prime_tablename("onracct", "s", agg_str, put_str)
     onrmemb_s_agg_table = create_prime_tablename("onrmemb", "s", agg_str, put_str)
     onrplan_s_agg_table = create_prime_tablename("onrplan", "s", agg_str, put_str)
@@ -145,7 +147,7 @@ def test_create_prime_tablename_ReturnsObj():
     onrgrou_job_table = create_prime_tablename("onrgrou", job_str(), None)
 
     # THEN
-    assert ownerunit_s_agg_table == f"{ownerunit_dimen}_s_put_agg"
+    assert believerunit_s_agg_table == f"{believerunit_dimen}_s_put_agg"
     assert onracct_s_agg_table == f"{onracct_dimen}_s_put_agg"
     assert onrmemb_s_agg_table == f"{onrmemb_dimen}_s_put_agg"
     assert onrplan_s_agg_table == f"{onrplan_dimen}_s_put_agg"
@@ -174,7 +176,7 @@ def test_create_prime_tablename_ReturnsObj():
     assert pidcore_s_agg_table == f"{pidcore_dimen}_s_agg"
     assert onracct_job_table == f"{onracct_dimen}_job"
     assert onrgrou_job_table == f"{onrgrou_dimen}_job"
-    assert x_onracct_raw == "owner_acctunit_raw"
+    assert x_onracct_raw == "believer_acctunit_raw"
 
 
 def test_create_all_idea_tables_CreatesBeliefRawTables():
@@ -388,7 +390,7 @@ def test_CREATE_BELIEF_OTE1_AGG_SQLSTR_Exists():
     expected_create_table_sqlstr = f"""
 CREATE TABLE IF NOT EXISTS {belief_ote1_agg_str()} (
   {belief_label_str()} TEXT
-, {owner_name_str()} TEXT
+, {believer_name_str()} TEXT
 , {event_int_str()} INTEGER
 , {bud_time_str()} INTEGER
 , error_message TEXT
@@ -405,18 +407,18 @@ def test_INSERT_BELIEF_OTE1_AGG_FROM_VOICE_SQLSTR_Exists():
     # ESTABLISH
     beliefbud_v_raw_tablename = create_prime_tablename(belief_budunit_str(), "v", "raw")
     expected_INSERT_sqlstr = f"""
-INSERT INTO {belief_ote1_agg_str()} ({belief_label_str()}, {owner_name_str()}, {event_int_str()}, {bud_time_str()})
-SELECT {belief_label_str()}, {owner_name_str()}, {event_int_str()}, {bud_time_str()}
+INSERT INTO {belief_ote1_agg_str()} ({belief_label_str()}, {believer_name_str()}, {event_int_str()}, {bud_time_str()})
+SELECT {belief_label_str()}, {believer_name_str()}, {event_int_str()}, {bud_time_str()}
 FROM (
     SELECT 
       {belief_label_str()}_inx {belief_label_str()}
-    , {owner_name_str()}_inx {owner_name_str()}
+    , {believer_name_str()}_inx {believer_name_str()}
     , {event_int_str()}
     , {bud_time_str()}
     FROM {beliefbud_v_raw_tablename}
-    GROUP BY {belief_label_str()}_inx, {owner_name_str()}_inx, {event_int_str()}, {bud_time_str()}
+    GROUP BY {belief_label_str()}_inx, {believer_name_str()}_inx, {event_int_str()}, {bud_time_str()}
 )
-ORDER BY {belief_label_str()}, {owner_name_str()}, {event_int_str()}, {bud_time_str()}
+ORDER BY {belief_label_str()}, {believer_name_str()}, {event_int_str()}, {bud_time_str()}
 ;
 """
     # WHEN / THEN
@@ -426,10 +428,14 @@ ORDER BY {belief_label_str()}, {owner_name_str()}, {event_int_str()}, {bud_time_
 def test_CREATE_BELIEF_ACCT_NETS_SQLSTR_Exists():
     # ESTABLISH
     sqlite_types = get_idea_sqlite_types()
-    sqlite_types[owner_net_amount_str()] = "REAL"
+    sqlite_types[believer_net_amount_str()] = "REAL"
     expected_create_table_sqlstr = get_create_table_sqlstr(
         tablename=belief_acct_nets_str(),
-        columns_list=[belief_label_str(), owner_name_str(), owner_net_amount_str()],
+        columns_list=[
+            belief_label_str(),
+            believer_name_str(),
+            believer_net_amount_str(),
+        ],
         column_types=sqlite_types,
     )
 

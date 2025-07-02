@@ -63,9 +63,9 @@ def test_open_csv_with_types(env_dir_setup_cleanup):
 
 def test_database_connection_not_closing1(env_dir_setup_cleanup):
     # 1. Create temporary SQLite DB
-    tmp_path = get_module_temp_dir()
-    set_dir(tmp_path)
-    db_path = create_path(tmp_path, "test.db")
+    temp_dir = get_module_temp_dir()
+    set_dir(temp_dir)
+    db_path = create_path(temp_dir, "test.db")
     print(f"{db_path=}")
     with sqlite3_connect(":memory:") as conn:
 
@@ -75,9 +75,9 @@ def test_database_connection_not_closing1(env_dir_setup_cleanup):
 
 def test_database_connection_not_closing2(env_dir_setup_cleanup):
     # 1. Create temporary SQLite DB
-    tmp_path = get_module_temp_dir()
-    set_dir(tmp_path)
-    db_path = create_path(tmp_path, "test998.db")
+    temp_dir = get_module_temp_dir()
+    set_dir(temp_dir)
+    db_path = create_path(temp_dir, "test998.db")
     print(f"{db_path=}")
     with sqlite3_connect(db_path) as conn:
 
@@ -88,9 +88,9 @@ def test_database_connection_not_closing2(env_dir_setup_cleanup):
 
 def test_export_sqlite_tables_to_csv(env_dir_setup_cleanup):
     # 1. Create temporary SQLite DB
-    tmp_path = get_module_temp_dir()
-    set_dir(tmp_path)
-    db_path = create_path(tmp_path, "test555.db")
+    temp_dir = get_module_temp_dir()
+    set_dir(temp_dir)
+    db_path = create_path(temp_dir, "test555.db")
     print(f"{db_path=}")
     conn = sqlite3_connect(db_path)
     cursor = conn.cursor()
@@ -106,11 +106,11 @@ def test_export_sqlite_tables_to_csv(env_dir_setup_cleanup):
     conn.close()
 
     # 3. Run export function
-    export_sqlite_tables_to_csv(str(db_path), str(tmp_path))
+    export_sqlite_tables_to_csv(str(db_path), str(temp_dir))
 
     # 4. Check output files
-    user_csv = create_path(tmp_path, "users_2.csv")
-    product_csv = create_path(tmp_path, "products_1.csv")
+    user_csv = create_path(temp_dir, "users_2.csv")
+    product_csv = create_path(temp_dir, "products_1.csv")
 
     assert os_path_exists(user_csv)
     assert os_path_exists(product_csv)

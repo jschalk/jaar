@@ -37,7 +37,7 @@ def get_idea_formats_dir() -> str:
 
 
 def get_idea_elements_sort_order() -> list[str]:
-    """Contains the standard sort order for all idea and owner_calc columns"""
+    """Contains the standard sort order for all idea and believer_calc columns"""
     return [
         "world_name",
         "idea_number",
@@ -69,12 +69,12 @@ def get_idea_elements_sort_order() -> list[str]:
         "weekday_label",
         "weekday_label_otx",
         "weekday_label_inx",
-        "owner_name",
-        "owner_name_otx",
-        "owner_name_inx",
-        "owner_name_ERASE",
-        "owner_name_ERASE_otx",
-        "owner_name_ERASE_inx",
+        "believer_name",
+        "believer_name_otx",
+        "believer_name_inx",
+        "believer_name_ERASE",
+        "believer_name_ERASE_otx",
+        "believer_name_ERASE_inx",
         "acct_name",
         "acct_name_otx",
         "acct_name_inx",
@@ -182,7 +182,7 @@ def get_idea_elements_sort_order() -> list[str]:
         "celldepth",
         "job_listen_rotations",
         "error_message",
-        "_owner_name_labor",
+        "_believer_name_labor",
         "_active",
         "_chore",
         "_status",
@@ -243,12 +243,12 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "belief_label": "TEXT",
         "belief_label_otx": "TEXT",
         "belief_label_inx": "TEXT",
-        "owner_name": "TEXT",
-        "owner_name_otx": "TEXT",
-        "owner_name_inx": "TEXT",
-        "owner_name_ERASE": "TEXT",
-        "owner_name_ERASE_otx": "TEXT",
-        "owner_name_ERASE_inx": "TEXT",
+        "believer_name": "TEXT",
+        "believer_name_otx": "TEXT",
+        "believer_name_inx": "TEXT",
+        "believer_name_ERASE": "TEXT",
+        "believer_name_ERASE_otx": "TEXT",
+        "believer_name_ERASE_inx": "TEXT",
         "acct_name": "TEXT",
         "acct_name_otx": "TEXT",
         "acct_name_inx": "TEXT",
@@ -395,7 +395,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "_irrational_acct_debt_points": "REAL",
         "_status": "INTEGER",
         "_chore": "INTEGER",
-        "_owner_name_labor": "INTEGER",
+        "_believer_name_labor": "INTEGER",
         "_active": "INTEGER",
         "_descendant_task_count": "INTEGER",
         "_healerlink_ratio": "REAL",
@@ -465,56 +465,56 @@ def idea_format_00019_planunit_v0_0_0() -> str:
     return "idea_format_00019_planunit_v0_0_0"
 
 
-# def idea_format_00020_owner_acct_membership_v0_0_0()-> str: return "idea_format_00020_owner_acct_membership_v0_0_0"
-# def idea_format_00021_owner_acctunit_v0_0_0()-> str: return "idea_format_00021_owner_acctunit_v0_0_0"
-# def idea_format_00022_owner_plan_awardlink_v0_0_0()-> str: return "idea_format_00022_owner_plan_awardlink_v0_0_0"
-# def idea_format_00023_owner_plan_factunit_v0_0_0()-> str: return "idea_format_00023_owner_plan_factunit_v0_0_0"
-# def idea_format_00024_owner_plan_laborlink_v0_0_0()-> str: return "idea_format_00024_owner_plan_laborlink_v0_0_0"
-# def idea_format_00025_owner_plan_healerlink_v0_0_0()-> str: return "idea_format_00025_owner_plan_healerlink_v0_0_0"
-# def idea_format_00026_owner_plan_reason_premiseunit_v0_0_0()-> str: return "idea_format_00026_owner_plan_reason_premiseunit_v0_0_0"
-# def idea_format_00027_owner_plan_reasonunit_v0_0_0()-> str: return "idea_format_00027_owner_plan_reasonunit_v0_0_0"
-# def idea_format_00028_owner_planunit_v0_0_0()-> str: return "idea_format_00028_owner_planunit_v0_0_0"
-# def idea_format_00029_ownerunit_v0_0_0()-> str: return "idea_format_00029_ownerunit_v0_0_0"
+# def idea_format_00020_believer_acct_membership_v0_0_0()-> str: return "idea_format_00020_believer_acct_membership_v0_0_0"
+# def idea_format_00021_believer_acctunit_v0_0_0()-> str: return "idea_format_00021_believer_acctunit_v0_0_0"
+# def idea_format_00022_believer_plan_awardlink_v0_0_0()-> str: return "idea_format_00022_believer_plan_awardlink_v0_0_0"
+# def idea_format_00023_believer_plan_factunit_v0_0_0()-> str: return "idea_format_00023_believer_plan_factunit_v0_0_0"
+# def idea_format_00024_believer_plan_laborlink_v0_0_0()-> str: return "idea_format_00024_believer_plan_laborlink_v0_0_0"
+# def idea_format_00025_believer_plan_healerlink_v0_0_0()-> str: return "idea_format_00025_believer_plan_healerlink_v0_0_0"
+# def idea_format_00026_believer_plan_reason_premiseunit_v0_0_0()-> str: return "idea_format_00026_believer_plan_reason_premiseunit_v0_0_0"
+# def idea_format_00027_believer_plan_reasonunit_v0_0_0()-> str: return "idea_format_00027_believer_plan_reasonunit_v0_0_0"
+# def idea_format_00028_believer_planunit_v0_0_0()-> str: return "idea_format_00028_believer_planunit_v0_0_0"
+# def idea_format_00029_believerunit_v0_0_0()-> str: return "idea_format_00029_believerunit_v0_0_0"
 
 
-def idea_format_00020_owner_acct_membership_v0_0_0() -> str:
-    return "idea_format_00020_owner_acct_membership_v0_0_0"
+def idea_format_00020_believer_acct_membership_v0_0_0() -> str:
+    return "idea_format_00020_believer_acct_membership_v0_0_0"
 
 
-def idea_format_00021_owner_acctunit_v0_0_0() -> str:
-    return "idea_format_00021_owner_acctunit_v0_0_0"
+def idea_format_00021_believer_acctunit_v0_0_0() -> str:
+    return "idea_format_00021_believer_acctunit_v0_0_0"
 
 
-def idea_format_00022_owner_plan_awardlink_v0_0_0() -> str:
-    return "idea_format_00022_owner_plan_awardlink_v0_0_0"
+def idea_format_00022_believer_plan_awardlink_v0_0_0() -> str:
+    return "idea_format_00022_believer_plan_awardlink_v0_0_0"
 
 
-def idea_format_00023_owner_plan_factunit_v0_0_0() -> str:
-    return "idea_format_00023_owner_plan_factunit_v0_0_0"
+def idea_format_00023_believer_plan_factunit_v0_0_0() -> str:
+    return "idea_format_00023_believer_plan_factunit_v0_0_0"
 
 
-def idea_format_00024_owner_plan_laborlink_v0_0_0() -> str:
-    return "idea_format_00024_owner_plan_laborlink_v0_0_0"
+def idea_format_00024_believer_plan_laborlink_v0_0_0() -> str:
+    return "idea_format_00024_believer_plan_laborlink_v0_0_0"
 
 
-def idea_format_00025_owner_plan_healerlink_v0_0_0() -> str:
-    return "idea_format_00025_owner_plan_healerlink_v0_0_0"
+def idea_format_00025_believer_plan_healerlink_v0_0_0() -> str:
+    return "idea_format_00025_believer_plan_healerlink_v0_0_0"
 
 
-def idea_format_00026_owner_plan_reason_premiseunit_v0_0_0() -> str:
-    return "idea_format_00026_owner_plan_reason_premiseunit_v0_0_0"
+def idea_format_00026_believer_plan_reason_premiseunit_v0_0_0() -> str:
+    return "idea_format_00026_believer_plan_reason_premiseunit_v0_0_0"
 
 
-def idea_format_00027_owner_plan_reasonunit_v0_0_0() -> str:
-    return "idea_format_00027_owner_plan_reasonunit_v0_0_0"
+def idea_format_00027_believer_plan_reasonunit_v0_0_0() -> str:
+    return "idea_format_00027_believer_plan_reasonunit_v0_0_0"
 
 
-def idea_format_00028_owner_planunit_v0_0_0() -> str:
-    return "idea_format_00028_owner_planunit_v0_0_0"
+def idea_format_00028_believer_planunit_v0_0_0() -> str:
+    return "idea_format_00028_believer_planunit_v0_0_0"
 
 
-def idea_format_00029_ownerunit_v0_0_0() -> str:
-    return "idea_format_00029_ownerunit_v0_0_0"
+def idea_format_00029_believerunit_v0_0_0() -> str:
+    return "idea_format_00029_believerunit_v0_0_0"
 
 
 def idea_format_00036_problem_healer_v0_0_0() -> str:
@@ -541,48 +541,48 @@ def idea_format_00045_pidgin_rope_v0_0_0() -> str:
     return "idea_format_00045_pidgin_rope_v0_0_0"
 
 
-def idea_format_00050_delete_owner_acct_membership_v0_0_0() -> str:
-    return "idea_format_00050_delete_owner_acct_membership_v0_0_0"
+def idea_format_00050_delete_believer_acct_membership_v0_0_0() -> str:
+    return "idea_format_00050_delete_believer_acct_membership_v0_0_0"
 
 
-def idea_format_00051_delete_owner_acctunit_v0_0_0() -> str:
-    return "idea_format_00051_delete_owner_acctunit_v0_0_0"
+def idea_format_00051_delete_believer_acctunit_v0_0_0() -> str:
+    return "idea_format_00051_delete_believer_acctunit_v0_0_0"
 
 
-def idea_format_00052_delete_owner_plan_awardlink_v0_0_0() -> str:
-    return "idea_format_00052_delete_owner_plan_awardlink_v0_0_0"
+def idea_format_00052_delete_believer_plan_awardlink_v0_0_0() -> str:
+    return "idea_format_00052_delete_believer_plan_awardlink_v0_0_0"
 
 
-def idea_format_00053_delete_owner_plan_factunit_v0_0_0() -> str:
-    return "idea_format_00053_delete_owner_plan_factunit_v0_0_0"
+def idea_format_00053_delete_believer_plan_factunit_v0_0_0() -> str:
+    return "idea_format_00053_delete_believer_plan_factunit_v0_0_0"
 
 
-def idea_format_00054_delete_owner_plan_laborlink_v0_0_0() -> str:
-    return "idea_format_00054_delete_owner_plan_laborlink_v0_0_0"
+def idea_format_00054_delete_believer_plan_laborlink_v0_0_0() -> str:
+    return "idea_format_00054_delete_believer_plan_laborlink_v0_0_0"
 
 
-def idea_format_00055_delete_owner_plan_healerlink_v0_0_0() -> str:
-    return "idea_format_00055_delete_owner_plan_healerlink_v0_0_0"
+def idea_format_00055_delete_believer_plan_healerlink_v0_0_0() -> str:
+    return "idea_format_00055_delete_believer_plan_healerlink_v0_0_0"
 
 
-def idea_format_00056_delete_owner_plan_reason_premiseunit_v0_0_0() -> str:
-    return "idea_format_00056_delete_owner_plan_reason_premiseunit_v0_0_0"
+def idea_format_00056_delete_believer_plan_reason_premiseunit_v0_0_0() -> str:
+    return "idea_format_00056_delete_believer_plan_reason_premiseunit_v0_0_0"
 
 
-def idea_format_00057_delete_owner_plan_reasonunit_v0_0_0() -> str:
-    return "idea_format_00057_delete_owner_plan_reasonunit_v0_0_0"
+def idea_format_00057_delete_believer_plan_reasonunit_v0_0_0() -> str:
+    return "idea_format_00057_delete_believer_plan_reasonunit_v0_0_0"
 
 
-def idea_format_00058_delete_owner_planunit_v0_0_0() -> str:
-    return "idea_format_00058_delete_owner_planunit_v0_0_0"
+def idea_format_00058_delete_believer_planunit_v0_0_0() -> str:
+    return "idea_format_00058_delete_believer_planunit_v0_0_0"
 
 
-def idea_format_00059_delete_ownerunit_v0_0_0() -> str:
-    return "idea_format_00059_delete_ownerunit_v0_0_0"
+def idea_format_00059_delete_believerunit_v0_0_0() -> str:
+    return "idea_format_00059_delete_believerunit_v0_0_0"
 
 
-def idea_format_00050_delete_owner_acct_membership_v0_0_0() -> str:
-    return "idea_format_00050_delete_owner_acct_membership_v0_0_0"
+def idea_format_00050_delete_believer_acct_membership_v0_0_0() -> str:
+    return "idea_format_00050_delete_believer_acct_membership_v0_0_0"
 
 
 def idea_format_00113_acct_map1_v0_0_0() -> str:
@@ -614,31 +614,31 @@ def get_idea_format_filenames() -> set[str]:
         idea_format_00012_membership_v0_0_0(),
         idea_format_00013_planunit_v0_0_0(),
         idea_format_00019_planunit_v0_0_0(),
-        idea_format_00020_owner_acct_membership_v0_0_0(),
-        idea_format_00021_owner_acctunit_v0_0_0(),
-        idea_format_00022_owner_plan_awardlink_v0_0_0(),
-        idea_format_00023_owner_plan_factunit_v0_0_0(),
-        idea_format_00024_owner_plan_laborlink_v0_0_0(),
-        idea_format_00025_owner_plan_healerlink_v0_0_0(),
-        idea_format_00026_owner_plan_reason_premiseunit_v0_0_0(),
-        idea_format_00027_owner_plan_reasonunit_v0_0_0(),
-        idea_format_00028_owner_planunit_v0_0_0(),
-        idea_format_00029_ownerunit_v0_0_0(),
+        idea_format_00020_believer_acct_membership_v0_0_0(),
+        idea_format_00021_believer_acctunit_v0_0_0(),
+        idea_format_00022_believer_plan_awardlink_v0_0_0(),
+        idea_format_00023_believer_plan_factunit_v0_0_0(),
+        idea_format_00024_believer_plan_laborlink_v0_0_0(),
+        idea_format_00025_believer_plan_healerlink_v0_0_0(),
+        idea_format_00026_believer_plan_reason_premiseunit_v0_0_0(),
+        idea_format_00027_believer_plan_reasonunit_v0_0_0(),
+        idea_format_00028_believer_planunit_v0_0_0(),
+        idea_format_00029_believerunit_v0_0_0(),
         idea_format_00036_problem_healer_v0_0_0(),
         idea_format_00042_pidgin_title_v0_0_0(),
         idea_format_00043_pidgin_name_v0_0_0(),
         idea_format_00044_pidgin_label_v0_0_0(),
         idea_format_00045_pidgin_rope_v0_0_0(),
-        idea_format_00050_delete_owner_acct_membership_v0_0_0(),
-        idea_format_00051_delete_owner_acctunit_v0_0_0(),
-        idea_format_00052_delete_owner_plan_awardlink_v0_0_0(),
-        idea_format_00053_delete_owner_plan_factunit_v0_0_0(),
-        idea_format_00054_delete_owner_plan_laborlink_v0_0_0(),
-        idea_format_00055_delete_owner_plan_healerlink_v0_0_0(),
-        idea_format_00056_delete_owner_plan_reason_premiseunit_v0_0_0(),
-        idea_format_00057_delete_owner_plan_reasonunit_v0_0_0(),
-        idea_format_00058_delete_owner_planunit_v0_0_0(),
-        idea_format_00059_delete_ownerunit_v0_0_0(),
+        idea_format_00050_delete_believer_acct_membership_v0_0_0(),
+        idea_format_00051_delete_believer_acctunit_v0_0_0(),
+        idea_format_00052_delete_believer_plan_awardlink_v0_0_0(),
+        idea_format_00053_delete_believer_plan_factunit_v0_0_0(),
+        idea_format_00054_delete_believer_plan_laborlink_v0_0_0(),
+        idea_format_00055_delete_believer_plan_healerlink_v0_0_0(),
+        idea_format_00056_delete_believer_plan_reason_premiseunit_v0_0_0(),
+        idea_format_00057_delete_believer_plan_reasonunit_v0_0_0(),
+        idea_format_00058_delete_believer_planunit_v0_0_0(),
+        idea_format_00059_delete_believerunit_v0_0_0(),
         idea_format_00113_acct_map1_v0_0_0(),
         idea_format_00115_group_map1_v0_0_0(),
         idea_format_00116_label_map1_v0_0_0(),
@@ -701,45 +701,45 @@ def get_idea_format_filename(idea_number: str) -> str:
 def get_idea_format_headers() -> dict[str, list[str]]:
     return {
         "belief_label,timeline_label,c400_number,yr1_jan1_offset,monthday_distortion,fund_iota,penny,respect_bit,knot,job_listen_rotations": idea_format_00000_beliefunit_v0_0_0(),
-        "belief_label,owner_name,bud_time,quota,celldepth": idea_format_00001_belief_budunit_v0_0_0(),
-        "belief_label,owner_name,acct_name,tran_time,amount": idea_format_00002_belief_paybook_v0_0_0(),
+        "belief_label,believer_name,bud_time,quota,celldepth": idea_format_00001_belief_budunit_v0_0_0(),
+        "belief_label,believer_name,acct_name,tran_time,amount": idea_format_00002_belief_paybook_v0_0_0(),
         "belief_label,cumulative_minute,hour_label": idea_format_00003_belief_timeline_hour_v0_0_0(),
         "belief_label,cumulative_day,month_label": idea_format_00004_belief_timeline_month_v0_0_0(),
         "belief_label,weekday_order,weekday_label": idea_format_00005_belief_timeline_weekday_v0_0_0(),
         "belief_label,offi_time": idea_format_00006_belief_timeoffi_v0_0_0(),
-        "belief_label,owner_name,acct_name": idea_format_00011_acct_v0_0_0(),
-        "belief_label,owner_name,acct_name,group_title": idea_format_00012_membership_v0_0_0(),
-        "belief_label,owner_name,plan_rope,mass,task": idea_format_00013_planunit_v0_0_0(),
-        "belief_label,owner_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want": idea_format_00019_planunit_v0_0_0(),
-        "belief_label,owner_name,acct_name,group_title,group_cred_points,group_debt_points": idea_format_00020_owner_acct_membership_v0_0_0(),
-        "belief_label,owner_name,acct_name,acct_cred_points,acct_debt_points": idea_format_00021_owner_acctunit_v0_0_0(),
-        "belief_label,owner_name,plan_rope,awardee_title,give_force,take_force": idea_format_00022_owner_plan_awardlink_v0_0_0(),
-        "belief_label,owner_name,plan_rope,fcontext,fstate,fopen,fnigh": idea_format_00023_owner_plan_factunit_v0_0_0(),
-        "belief_label,owner_name,plan_rope,labor_title": idea_format_00024_owner_plan_laborlink_v0_0_0(),
-        "belief_label,owner_name,plan_rope,healer_name": idea_format_00025_owner_plan_healerlink_v0_0_0(),
-        "belief_label,owner_name,plan_rope,rcontext,pstate,pnigh,popen,pdivisor": idea_format_00026_owner_plan_reason_premiseunit_v0_0_0(),
-        "belief_label,owner_name,plan_rope,rcontext,rplan_active_requisite": idea_format_00027_owner_plan_reasonunit_v0_0_0(),
-        "belief_label,owner_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,task,problem_bool": idea_format_00028_owner_planunit_v0_0_0(),
-        "belief_label,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_iota,penny,respect_bit": idea_format_00029_ownerunit_v0_0_0(),
-        "belief_label,owner_name,plan_rope,healer_name,problem_bool": idea_format_00036_problem_healer_v0_0_0(),
+        "belief_label,believer_name,acct_name": idea_format_00011_acct_v0_0_0(),
+        "belief_label,believer_name,acct_name,group_title": idea_format_00012_membership_v0_0_0(),
+        "belief_label,believer_name,plan_rope,mass,task": idea_format_00013_planunit_v0_0_0(),
+        "belief_label,believer_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want": idea_format_00019_planunit_v0_0_0(),
+        "belief_label,believer_name,acct_name,group_title,group_cred_points,group_debt_points": idea_format_00020_believer_acct_membership_v0_0_0(),
+        "belief_label,believer_name,acct_name,acct_cred_points,acct_debt_points": idea_format_00021_believer_acctunit_v0_0_0(),
+        "belief_label,believer_name,plan_rope,awardee_title,give_force,take_force": idea_format_00022_believer_plan_awardlink_v0_0_0(),
+        "belief_label,believer_name,plan_rope,fcontext,fstate,fopen,fnigh": idea_format_00023_believer_plan_factunit_v0_0_0(),
+        "belief_label,believer_name,plan_rope,labor_title": idea_format_00024_believer_plan_laborlink_v0_0_0(),
+        "belief_label,believer_name,plan_rope,healer_name": idea_format_00025_believer_plan_healerlink_v0_0_0(),
+        "belief_label,believer_name,plan_rope,rcontext,pstate,pnigh,popen,pdivisor": idea_format_00026_believer_plan_reason_premiseunit_v0_0_0(),
+        "belief_label,believer_name,plan_rope,rcontext,rplan_active_requisite": idea_format_00027_believer_plan_reasonunit_v0_0_0(),
+        "belief_label,believer_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,task,problem_bool": idea_format_00028_believer_planunit_v0_0_0(),
+        "belief_label,believer_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_iota,penny,respect_bit": idea_format_00029_believerunit_v0_0_0(),
+        "belief_label,believer_name,plan_rope,healer_name,problem_bool": idea_format_00036_problem_healer_v0_0_0(),
         "otx_title,inx_title,otx_knot,inx_knot,unknown_str": idea_format_00042_pidgin_title_v0_0_0(),
         "otx_name,inx_name,otx_knot,inx_knot,unknown_str": idea_format_00043_pidgin_name_v0_0_0(),
         "otx_label,inx_label,otx_knot,inx_knot,unknown_str": idea_format_00044_pidgin_label_v0_0_0(),
         "otx_rope,inx_rope,otx_knot,inx_knot,unknown_str": idea_format_00045_pidgin_rope_v0_0_0(),
-        "belief_label,owner_name,acct_name,group_title_ERASE": idea_format_00050_delete_owner_acct_membership_v0_0_0(),
-        "belief_label,owner_name,acct_name_ERASE": idea_format_00051_delete_owner_acctunit_v0_0_0(),
-        "belief_label,owner_name,plan_rope,awardee_title_ERASE": idea_format_00052_delete_owner_plan_awardlink_v0_0_0(),
-        "belief_label,owner_name,plan_rope,fcontext_ERASE": idea_format_00053_delete_owner_plan_factunit_v0_0_0(),
-        "belief_label,owner_name,plan_rope,labor_title_ERASE": idea_format_00054_delete_owner_plan_laborlink_v0_0_0(),
-        "belief_label,owner_name,plan_rope,healer_name_ERASE": idea_format_00055_delete_owner_plan_healerlink_v0_0_0(),
-        "belief_label,owner_name,plan_rope,rcontext,pstate_ERASE": idea_format_00056_delete_owner_plan_reason_premiseunit_v0_0_0(),
-        "belief_label,owner_name,plan_rope,rcontext_ERASE": idea_format_00057_delete_owner_plan_reasonunit_v0_0_0(),
-        "belief_label,owner_name,plan_rope_ERASE": idea_format_00058_delete_owner_planunit_v0_0_0(),
-        "belief_label,owner_name_ERASE": idea_format_00059_delete_ownerunit_v0_0_0(),
-        "belief_label,owner_name,acct_name,otx_name,inx_name": idea_format_00113_acct_map1_v0_0_0(),
-        "belief_label,owner_name,acct_name,otx_title,inx_title": idea_format_00115_group_map1_v0_0_0(),
-        "belief_label,owner_name,acct_name,otx_label,inx_label": idea_format_00116_label_map1_v0_0_0(),
-        "belief_label,owner_name,acct_name,otx_rope,inx_rope": idea_format_00117_rope_map1_v0_0_0(),
+        "belief_label,believer_name,acct_name,group_title_ERASE": idea_format_00050_delete_believer_acct_membership_v0_0_0(),
+        "belief_label,believer_name,acct_name_ERASE": idea_format_00051_delete_believer_acctunit_v0_0_0(),
+        "belief_label,believer_name,plan_rope,awardee_title_ERASE": idea_format_00052_delete_believer_plan_awardlink_v0_0_0(),
+        "belief_label,believer_name,plan_rope,fcontext_ERASE": idea_format_00053_delete_believer_plan_factunit_v0_0_0(),
+        "belief_label,believer_name,plan_rope,labor_title_ERASE": idea_format_00054_delete_believer_plan_laborlink_v0_0_0(),
+        "belief_label,believer_name,plan_rope,healer_name_ERASE": idea_format_00055_delete_believer_plan_healerlink_v0_0_0(),
+        "belief_label,believer_name,plan_rope,rcontext,pstate_ERASE": idea_format_00056_delete_believer_plan_reason_premiseunit_v0_0_0(),
+        "belief_label,believer_name,plan_rope,rcontext_ERASE": idea_format_00057_delete_believer_plan_reasonunit_v0_0_0(),
+        "belief_label,believer_name,plan_rope_ERASE": idea_format_00058_delete_believer_planunit_v0_0_0(),
+        "belief_label,believer_name_ERASE": idea_format_00059_delete_believerunit_v0_0_0(),
+        "belief_label,believer_name,acct_name,otx_name,inx_name": idea_format_00113_acct_map1_v0_0_0(),
+        "belief_label,believer_name,acct_name,otx_title,inx_title": idea_format_00115_group_map1_v0_0_0(),
+        "belief_label,believer_name,acct_name,otx_label,inx_label": idea_format_00116_label_map1_v0_0_0(),
+        "belief_label,believer_name,acct_name,otx_rope,inx_rope": idea_format_00117_rope_map1_v0_0_0(),
     }
 
 
@@ -760,8 +760,8 @@ def get_quick_ideas_column_ref() -> dict[str, set[str]]:
 def get_idea_dimen_ref() -> dict[str, set[str]]:
     """dictionary with key=dimen and value=set of all idea_numbers with that dimen's data"""
     return {
-        "owner_acct_membership": {"br00012", "br00020", "br00050"},
-        "owner_acctunit": {
+        "believer_acct_membership": {"br00012", "br00020", "br00050"},
+        "believer_acctunit": {
             "br00002",
             "br00011",
             "br00012",
@@ -774,13 +774,13 @@ def get_idea_dimen_ref() -> dict[str, set[str]]:
             "br00116",
             "br00117",
         },
-        "owner_plan_awardlink": {"br00022", "br00052"},
-        "owner_plan_factunit": {"br00023", "br00053"},
-        "owner_plan_healerlink": {"br00025", "br00036", "br00055"},
-        "owner_plan_reason_premiseunit": {"br00026", "br00056"},
-        "owner_plan_reasonunit": {"br00026", "br00027", "br00056", "br00057"},
-        "owner_plan_laborlink": {"br00024", "br00054"},
-        "owner_planunit": {
+        "believer_plan_awardlink": {"br00022", "br00052"},
+        "believer_plan_factunit": {"br00023", "br00053"},
+        "believer_plan_healerlink": {"br00025", "br00036", "br00055"},
+        "believer_plan_reason_premiseunit": {"br00026", "br00056"},
+        "believer_plan_reasonunit": {"br00026", "br00027", "br00056", "br00057"},
+        "believer_plan_laborlink": {"br00024", "br00054"},
+        "believer_planunit": {
             "br00013",
             "br00019",
             "br00022",
@@ -799,7 +799,7 @@ def get_idea_dimen_ref() -> dict[str, set[str]]:
             "br00057",
             "br00058",
         },
-        "ownerunit": {
+        "believerunit": {
             "br00001",
             "br00002",
             "br00011",

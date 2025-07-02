@@ -24,8 +24,8 @@ from src.a01_term_logic.rope import (
 )
 from src.a01_term_logic.term import (
     BeliefLabel,
+    BelieverName,
     LabelTerm,
-    OwnerName,
     RopeTerm,
     default_knot_if_None,
 )
@@ -36,15 +36,15 @@ from src.a02_finance_logic.finance_config import (
     filter_penny,
     validate_fund_pool,
 )
-from src.a06_owner_logic.owner import (
-    OwnerUnit,
-    get_from_json as ownerunit_get_from_json,
-    ownerunit_shop,
+from src.a06_believer_logic.believer import (
+    BelieverUnit,
+    believerunit_shop,
+    get_from_json as believerunit_get_from_json,
 )
-from src.a08_owner_atom_logic.atom import (
-    OwnerAtom,
-    get_from_json as owneratom_get_from_json,
-    modify_owner_with_owneratom,
+from src.a08_believer_atom_logic.atom import (
+    BelieverAtom,
+    get_from_json as believeratom_get_from_json,
+    modify_believer_with_believeratom,
 )
 from src.a09_pack_logic.pack import (
     PackUnit,
@@ -53,7 +53,7 @@ from src.a09_pack_logic.pack import (
     init_pack_id,
     packunit_shop,
 )
-from src.a12_hub_toolbox.basis_owners import get_default_job
+from src.a12_hub_toolbox.basis_believers import get_default_job
 from src.a12_hub_toolbox.hub_path import (
     create_atoms_dir_path,
     create_keeps_dir_path,
@@ -99,7 +99,7 @@ def get_keep_grades_dir(x_keep_dir: str) -> str:
 
 @dataclass
 class HubUnit:
-    owner_name: OwnerName = None
+    believer_name: BelieverName = None
     belief_mstr_dir: str = None
     belief_label: str = None
     keep_rope: RopeTerm = None
@@ -116,14 +116,14 @@ class HubUnit:
     def set_dir_attrs(self):
         mstr_dir = self.belief_mstr_dir
         belief_label = self.belief_label
-        owner_name = self.owner_name
-        self._keeps_dir = create_keeps_dir_path(mstr_dir, belief_label, owner_name)
-        self._atoms_dir = create_atoms_dir_path(mstr_dir, belief_label, owner_name)
-        self._packs_dir = create_packs_dir_path(mstr_dir, belief_label, owner_name)
+        believer_name = self.believer_name
+        self._keeps_dir = create_keeps_dir_path(mstr_dir, belief_label, believer_name)
+        self._atoms_dir = create_atoms_dir_path(mstr_dir, belief_label, believer_name)
+        self._packs_dir = create_packs_dir_path(mstr_dir, belief_label, believer_name)
 
-    def default_gut_owner(self) -> OwnerUnit:
-        x_ownerunit = ownerunit_shop(
-            owner_name=self.owner_name,
+    def default_gut_believer(self) -> BelieverUnit:
+        x_believerunit = believerunit_shop(
+            believer_name=self.believer_name,
             belief_label=self.belief_label,
             knot=self.knot,
             fund_pool=self.fund_pool,
@@ -131,8 +131,8 @@ class HubUnit:
             respect_bit=self.respect_bit,
             penny=self.penny,
         )
-        x_ownerunit.last_pack_id = init_pack_id()
-        return x_ownerunit
+        x_believerunit.last_pack_id = init_pack_id()
+        return x_believerunit
 
     # pack methods
     def get_max_atom_file_number(self) -> int:
@@ -148,7 +148,7 @@ class HubUnit:
     def atom_file_path(self, atom_number: int) -> str:
         return create_path(self._atoms_dir, self.atom_filename(atom_number))
 
-    def _save_valid_atom_file(self, x_atom: OwnerAtom, file_number: int):
+    def _save_valid_atom_file(self, x_atom: BelieverAtom, file_number: int):
         save_file(
             self._atoms_dir,
             self.atom_filename(file_number),
@@ -157,7 +157,7 @@ class HubUnit:
         )
         return file_number
 
-    def save_atom_file(self, x_atom: OwnerAtom):
+    def save_atom_file(self, x_atom: BelieverAtom):
         x_atom_filename = self._get_next_atom_file_number()
         return self._save_valid_atom_file(x_atom, x_atom_filename)
 
@@ -167,17 +167,17 @@ class HubUnit:
     def delete_atom_file(self, atom_number: int):
         delete_dir(self.atom_file_path(atom_number))
 
-    def _get_owner_from_atom_files(self) -> OwnerUnit:
-        x_owner = ownerunit_shop(self.owner_name, self.belief_label)
+    def _get_believer_from_atom_files(self) -> BelieverUnit:
+        x_believer = believerunit_shop(self.believer_name, self.belief_label)
         if self.atom_file_exists(self.get_max_atom_file_number()):
             x_atom_files = get_dir_file_strs(self._atoms_dir, delete_extensions=True)
             sorted_atom_filenames = sorted(list(x_atom_files.keys()))
 
             for x_atom_filename in sorted_atom_filenames:
                 x_file_str = x_atom_files.get(x_atom_filename)
-                x_atom = owneratom_get_from_json(x_file_str)
-                modify_owner_with_owneratom(x_owner, x_atom)
-        return x_owner
+                x_atom = believeratom_get_from_json(x_file_str)
+                modify_believer_with_believeratom(x_believer, x_atom)
+        return x_believer
 
     def get_max_pack_file_number(self) -> int:
         return get_max_file_number(self._packs_dir)
@@ -204,8 +204,8 @@ class HubUnit:
             x_packunit._packs_dir = self._packs_dir
         if x_packunit._pack_id != self._get_next_pack_file_number():
             x_packunit._pack_id = self._get_next_pack_file_number()
-        if x_packunit.owner_name != self.owner_name:
-            x_packunit.owner_name = self.owner_name
+        if x_packunit.believer_name != self.believer_name:
+            x_packunit.believer_name = self.believer_name
         if x_packunit._delta_start != self._get_next_atom_file_number():
             x_packunit._delta_start = self._get_next_atom_file_number()
         return x_packunit
@@ -227,9 +227,9 @@ class HubUnit:
             raise SavePackFileException(
                 f"PackUnit file cannot be saved because packunit._packs_dir is incorrect: {x_pack._packs_dir}. It must be {self._packs_dir}."
             )
-        if x_pack.owner_name != self.owner_name:
+        if x_pack.believer_name != self.believer_name:
             raise SavePackFileException(
-                f"PackUnit file cannot be saved because packunit.owner_name is incorrect: {x_pack.owner_name}. It must be {self.owner_name}."
+                f"PackUnit file cannot be saved because packunit.believer_name is incorrect: {x_pack.believer_name}. It must be {self.believer_name}."
             )
         pack_filename = self.pack_filename(x_pack._pack_id)
         if not replace and self.pack_file_exists(x_pack._pack_id):
@@ -244,16 +244,20 @@ class HubUnit:
 
     def _default_packunit(self) -> PackUnit:
         return packunit_shop(
-            owner_name=self.owner_name,
+            believer_name=self.believer_name,
             _pack_id=self._get_next_pack_file_number(),
             _atoms_dir=self._atoms_dir,
             _packs_dir=self._packs_dir,
         )
 
-    def create_save_pack_file(self, before_owner: OwnerUnit, after_owner: OwnerUnit):
+    def create_save_pack_file(
+        self, before_believer: BelieverUnit, after_believer: BelieverUnit
+    ):
         new_packunit = self._default_packunit()
-        new_ownerdelta = new_packunit._ownerdelta
-        new_ownerdelta.add_all_different_owneratoms(before_owner, after_owner)
+        new_believerdelta = new_packunit._believerdelta
+        new_believerdelta.add_all_different_believeratoms(
+            before_believer, after_believer
+        )
         self.save_pack_file(new_packunit)
 
     def get_packunit(self, pack_id: int) -> PackUnit:
@@ -265,33 +269,33 @@ class HubUnit:
         x_atoms_dir = self._atoms_dir
         return create_packunit_from_files(x_packs_dir, pack_id, x_atoms_dir)
 
-    def _merge_any_packs(self, x_owner: OwnerUnit) -> OwnerUnit:
+    def _merge_any_packs(self, x_believer: BelieverUnit) -> BelieverUnit:
         packs_dir = self._packs_dir
-        pack_ints = get_integer_filenames(packs_dir, x_owner.last_pack_id)
+        pack_ints = get_integer_filenames(packs_dir, x_believer.last_pack_id)
         if len(pack_ints) == 0:
-            return copy_deepcopy(x_owner)
+            return copy_deepcopy(x_believer)
 
         for pack_int in pack_ints:
             x_pack = self.get_packunit(pack_int)
-            new_owner = x_pack._ownerdelta.get_edited_owner(x_owner)
-        return new_owner
+            new_believer = x_pack._believerdelta.get_edited_believer(x_believer)
+        return new_believer
 
     def _create_initial_pack_files_from_default(self):
         x_packunit = packunit_shop(
-            owner_name=self.owner_name,
+            believer_name=self.believer_name,
             _pack_id=get_init_pack_id_if_None(),
             _packs_dir=self._packs_dir,
             _atoms_dir=self._atoms_dir,
         )
-        x_packunit._ownerdelta.add_all_different_owneratoms(
-            before_owner=self.default_gut_owner(),
-            after_owner=self.default_gut_owner(),
+        x_packunit._believerdelta.add_all_different_believeratoms(
+            before_believer=self.default_gut_believer(),
+            after_believer=self.default_gut_believer(),
         )
         x_packunit.save_files()
 
     def _create_gut_from_packs(self):
-        x_owner = self._merge_any_packs(self.default_gut_owner())
-        save_gut_file(self.belief_mstr_dir, x_owner)
+        x_believer = self._merge_any_packs(self.default_gut_believer())
+        save_gut_file(self.belief_mstr_dir, x_believer)
 
     def _create_initial_pack_and_gut_files(self):
         self._create_initial_pack_files_from_default()
@@ -299,17 +303,17 @@ class HubUnit:
 
     def _create_initial_pack_files_from_gut(self):
         x_packunit = self._default_packunit()
-        x_packunit._ownerdelta.add_all_different_owneratoms(
-            before_owner=self.default_gut_owner(),
-            after_owner=open_gut_file(
-                self.belief_mstr_dir, self.belief_label, self.owner_name
+        x_packunit._believerdelta.add_all_different_believeratoms(
+            before_believer=self.default_gut_believer(),
+            after_believer=open_gut_file(
+                self.belief_mstr_dir, self.belief_label, self.believer_name
             ),
         )
         x_packunit.save_files()
 
     def initialize_pack_gut_files(self):
         x_gut_file_exists = gut_file_exists(
-            self.belief_mstr_dir, self.belief_label, self.owner_name
+            self.belief_mstr_dir, self.belief_label, self.believer_name
         )
         pack_file_exists = self.pack_file_exists(init_pack_id())
         if x_gut_file_exists is False and pack_file_exists is False:
@@ -319,19 +323,19 @@ class HubUnit:
         elif x_gut_file_exists and pack_file_exists is False:
             self._create_initial_pack_files_from_gut()
 
-    def append_packs_to_gut_file(self) -> OwnerUnit:
-        gut_owner = open_gut_file(
-            self.belief_mstr_dir, self.belief_label, self.owner_name
+    def append_packs_to_gut_file(self) -> BelieverUnit:
+        gut_believer = open_gut_file(
+            self.belief_mstr_dir, self.belief_label, self.believer_name
         )
-        gut_owner = self._merge_any_packs(gut_owner)
-        save_gut_file(self.belief_mstr_dir, gut_owner)
-        return gut_owner
+        gut_believer = self._merge_any_packs(gut_believer)
+        save_gut_file(self.belief_mstr_dir, gut_believer)
+        return gut_believer
 
     # keep management
     def keep_dir(self) -> str:
         if self.keep_rope is None:
             raise _keep_ropeMissingException(
-                f"HubUnit '{self.owner_name}' cannot save to keep_dir because it does not have keep_rope."
+                f"HubUnit '{self.believer_name}' cannot save to keep_dir because it does not have keep_rope."
             )
         return get_keep_path(self, self.keep_rope)
 
@@ -341,14 +345,14 @@ class HubUnit:
     def treasury_db_path(self) -> str:
         return create_path(self.keep_dir(), treasury_filename())
 
-    def duty_path(self, owner_name: OwnerName) -> str:
-        return create_path(self.dutys_dir(), get_json_filename(owner_name))
+    def duty_path(self, believer_name: BelieverName) -> str:
+        return create_path(self.dutys_dir(), get_json_filename(believer_name))
 
-    def vision_path(self, owner_name: OwnerName) -> str:
-        return create_path(self.visions_dir(), get_json_filename(owner_name))
+    def vision_path(self, believer_name: BelieverName) -> str:
+        return create_path(self.visions_dir(), get_json_filename(believer_name))
 
-    def grade_path(self, owner_name: OwnerName) -> str:
-        return create_path(self.grades_dir(), get_json_filename(owner_name))
+    def grade_path(self, believer_name: BelieverName) -> str:
+        return create_path(self.grades_dir(), get_json_filename(believer_name))
 
     def dutys_dir(self) -> str:
         return get_keep_dutys_dir(self.keep_dir())
@@ -365,96 +369,96 @@ class HubUnit:
         except Exception:
             return []
 
-    def save_duty_owner(self, x_owner: OwnerUnit) -> None:
-        x_filename = get_json_filename(x_owner.owner_name)
-        save_file(self.dutys_dir(), x_filename, x_owner.get_json())
+    def save_duty_believer(self, x_believer: BelieverUnit) -> None:
+        x_filename = get_json_filename(x_believer.believer_name)
+        save_file(self.dutys_dir(), x_filename, x_believer.get_json())
 
-    def save_vision_owner(self, x_owner: OwnerUnit) -> None:
-        x_filename = get_json_filename(x_owner.owner_name)
-        save_file(self.visions_dir(), x_filename, x_owner.get_json())
+    def save_vision_believer(self, x_believer: BelieverUnit) -> None:
+        x_filename = get_json_filename(x_believer.believer_name)
+        save_file(self.visions_dir(), x_filename, x_believer.get_json())
 
-    def initialize_job_file(self, gut: OwnerUnit) -> None:
+    def initialize_job_file(self, gut: BelieverUnit) -> None:
         save_job_file(self.belief_mstr_dir, get_default_job(gut))
 
-    def duty_file_exists(self, owner_name: OwnerName) -> bool:
-        return os_path_exists(self.duty_path(owner_name))
+    def duty_file_exists(self, believer_name: BelieverName) -> bool:
+        return os_path_exists(self.duty_path(believer_name))
 
-    def vision_file_exists(self, owner_name: OwnerName) -> bool:
-        return os_path_exists(self.vision_path(owner_name))
+    def vision_file_exists(self, believer_name: BelieverName) -> bool:
+        return os_path_exists(self.vision_path(believer_name))
 
-    def get_duty_owner(self, owner_name: OwnerName) -> OwnerUnit:
-        if self.duty_file_exists(owner_name) is False:
+    def get_duty_believer(self, believer_name: BelieverName) -> BelieverUnit:
+        if self.duty_file_exists(believer_name) is False:
             return None
-        file_content = open_file(self.dutys_dir(), get_json_filename(owner_name))
-        return ownerunit_get_from_json(file_content)
+        file_content = open_file(self.dutys_dir(), get_json_filename(believer_name))
+        return believerunit_get_from_json(file_content)
 
-    def get_vision_owner(self, owner_name: OwnerName) -> OwnerUnit:
-        if self.vision_file_exists(owner_name) is False:
+    def get_vision_believer(self, believer_name: BelieverName) -> BelieverUnit:
+        if self.vision_file_exists(believer_name) is False:
             return None
-        file_content = open_file(self.visions_dir(), get_json_filename(owner_name))
-        return ownerunit_get_from_json(file_content)
+        file_content = open_file(self.visions_dir(), get_json_filename(believer_name))
+        return believerunit_get_from_json(file_content)
 
-    def delete_duty_file(self, owner_name: OwnerName) -> None:
-        delete_dir(self.duty_path(owner_name))
+    def delete_duty_file(self, believer_name: BelieverName) -> None:
+        delete_dir(self.duty_path(believer_name))
 
-    def delete_vision_file(self, owner_name: OwnerName) -> None:
-        delete_dir(self.vision_path(owner_name))
+    def delete_vision_file(self, believer_name: BelieverName) -> None:
+        delete_dir(self.vision_path(believer_name))
 
     def delete_treasury_db_file(self) -> None:
         delete_dir(self.treasury_db_path())
 
-    def get_perspective_owner(self, speaker: OwnerUnit) -> OwnerUnit:
-        # get copy of owner without any metrics
-        perspective_owner = ownerunit_get_from_json(speaker.get_json())
-        perspective_owner.set_owner_name(self.owner_name)
-        perspective_owner.settle_owner()
-        return perspective_owner
+    def get_perspective_believer(self, speaker: BelieverUnit) -> BelieverUnit:
+        # get copy of believer without any metrics
+        perspective_believer = believerunit_get_from_json(speaker.get_json())
+        perspective_believer.set_believer_name(self.believer_name)
+        perspective_believer.settle_believer()
+        return perspective_believer
 
-    def get_dw_perspective_owner(self, speaker_id: OwnerName) -> OwnerUnit:
+    def get_dw_perspective_believer(self, speaker_id: BelieverName) -> BelieverUnit:
         speaker_job = open_job_file(self.belief_mstr_dir, self.belief_label, speaker_id)
-        return self.get_perspective_owner(speaker_job)
+        return self.get_perspective_believer(speaker_job)
 
-    def rj_speaker_owner(
-        self, healer_name: OwnerName, speaker_id: OwnerName
-    ) -> OwnerUnit:
+    def rj_speaker_believer(
+        self, healer_name: BelieverName, speaker_id: BelieverName
+    ) -> BelieverUnit:
         speaker_hubunit = hubunit_shop(
             belief_mstr_dir=self.belief_mstr_dir,
             belief_label=self.belief_label,
-            owner_name=healer_name,
+            believer_name=healer_name,
             keep_rope=self.keep_rope,
             knot=self.knot,
             respect_bit=self.respect_bit,
         )
-        return speaker_hubunit.get_vision_owner(speaker_id)
+        return speaker_hubunit.get_vision_believer(speaker_id)
 
-    def rj_perspective_owner(
-        self, healer_name: OwnerName, speaker_id: OwnerName
-    ) -> OwnerUnit:
-        speaker_vision = self.rj_speaker_owner(healer_name, speaker_id)
-        return self.get_perspective_owner(speaker_vision)
+    def rj_perspective_believer(
+        self, healer_name: BelieverName, speaker_id: BelieverName
+    ) -> BelieverUnit:
+        speaker_vision = self.rj_speaker_believer(healer_name, speaker_id)
+        return self.get_perspective_believer(speaker_vision)
 
     def get_keep_ropes(self) -> set[RopeTerm]:
-        x_gut_owner = open_gut_file(
-            self.belief_mstr_dir, self.belief_label, self.owner_name
+        x_gut_believer = open_gut_file(
+            self.belief_mstr_dir, self.belief_label, self.believer_name
         )
-        x_gut_owner.settle_owner()
-        if x_gut_owner._keeps_justified is False:
-            x_str = f"Cannot get_keep_ropes from '{self.owner_name}' gut owner because 'OwnerUnit._keeps_justified' is False."
+        x_gut_believer.settle_believer()
+        if x_gut_believer._keeps_justified is False:
+            x_str = f"Cannot get_keep_ropes from '{self.believer_name}' gut believer because 'BelieverUnit._keeps_justified' is False."
             raise get_keep_ropesException(x_str)
-        if x_gut_owner._keeps_buildable is False:
-            x_str = f"Cannot get_keep_ropes from '{self.owner_name}' gut owner because 'OwnerUnit._keeps_buildable' is False."
+        if x_gut_believer._keeps_buildable is False:
+            x_str = f"Cannot get_keep_ropes from '{self.believer_name}' gut believer because 'BelieverUnit._keeps_buildable' is False."
             raise get_keep_ropesException(x_str)
-        owner_healer_dict = x_gut_owner._healers_dict.get(self.owner_name)
-        if owner_healer_dict is None:
+        believer_healer_dict = x_gut_believer._healers_dict.get(self.believer_name)
+        if believer_healer_dict is None:
             return get_empty_set_if_None()
-        keep_ropes = x_gut_owner._healers_dict.get(self.owner_name).keys()
+        keep_ropes = x_gut_believer._healers_dict.get(self.believer_name).keys()
         return get_empty_set_if_None(keep_ropes)
 
     def save_all_gut_dutys(self):
-        gut = open_gut_file(self.belief_mstr_dir, self.belief_label, self.owner_name)
+        gut = open_gut_file(self.belief_mstr_dir, self.belief_label, self.believer_name)
         for x_keep_rope in self.get_keep_ropes():
             self.keep_rope = x_keep_rope
-            self.save_duty_owner(gut)
+            self.save_duty_believer(gut)
         self.keep_rope = None
 
     def create_treasury_db_file(self) -> None:
@@ -476,7 +480,7 @@ class HubUnit:
 def hubunit_shop(
     belief_mstr_dir: str,
     belief_label: BeliefLabel,
-    owner_name: OwnerName = None,
+    believer_name: BelieverName = None,
     keep_rope: RopeTerm = None,
     knot: str = None,
     fund_pool: float = None,
@@ -488,7 +492,7 @@ def hubunit_shop(
     x_hubunit = HubUnit(
         belief_mstr_dir=belief_mstr_dir,
         belief_label=belief_label,
-        owner_name=validate_labelterm(owner_name, knot),
+        believer_name=validate_labelterm(believer_name, knot),
         keep_rope=keep_rope,
         knot=default_knot_if_None(knot),
         fund_pool=validate_fund_pool(fund_pool),

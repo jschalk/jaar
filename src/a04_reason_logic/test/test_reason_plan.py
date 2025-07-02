@@ -173,7 +173,7 @@ def test_ReasonHeir_set_rplan_active_value_Correctly():
     assert day_reason._rplan_active_value
 
 
-def test_ReasonHeir_set_status_OwnerTrueCorrectlySetsStatusTrue():
+def test_ReasonHeir_set_status_BelieverTrueCorrectlySetsStatusTrue():
     # ESTABLISH
     wkday_str = "wkday"
     wkday_rope = create_rope(root_label(), wkday_str)
@@ -188,7 +188,7 @@ def test_ReasonHeir_set_status_OwnerTrueCorrectlySetsStatusTrue():
     assert wk_reason._status is True
 
 
-def test_ReasonHeir_set_status_OwnerFalseCorrectlySetsStatusTrue():
+def test_ReasonHeir_set_status_BelieverFalseCorrectlySetsStatusTrue():
     # ESTABLISH
     wkday_str = "wkday"
     wkday_rope = create_rope(root_label(), wkday_str)
@@ -203,7 +203,7 @@ def test_ReasonHeir_set_status_OwnerFalseCorrectlySetsStatusTrue():
     assert wkday_reason._status is True
 
 
-def test_ReasonHeir_set_status_OwnerTrueCorrectlySetsStatusFalse():
+def test_ReasonHeir_set_status_BelieverTrueCorrectlySetsStatusFalse():
     # ESTABLISH
     wkday_str = "wkday"
     wkday_rope = create_rope(root_label(), wkday_str)
@@ -218,7 +218,7 @@ def test_ReasonHeir_set_status_OwnerTrueCorrectlySetsStatusFalse():
     assert wkday_reason._status is False
 
 
-def test_ReasonHeir_set_status_OwnerNoneCorrectlySetsStatusFalse():
+def test_ReasonHeir_set_status_BelieverNoneCorrectlySetsStatusFalse():
     # ESTABLISH
     wkday_str = "wkday"
     wkday_rope = create_rope(root_label(), wkday_str)

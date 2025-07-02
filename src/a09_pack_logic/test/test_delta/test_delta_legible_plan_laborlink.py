@@ -1,31 +1,31 @@
-from src.a06_owner_logic.owner import ownerunit_shop
-from src.a06_owner_logic.test._util.a06_str import (
+from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.test._util.a06_str import (
+    believer_plan_laborlink_str,
     labor_title_str,
-    owner_plan_laborlink_str,
     plan_rope_str,
 )
-from src.a08_owner_atom_logic.atom import owneratom_shop
-from src.a08_owner_atom_logic.test._util.a08_str import DELETE_str, INSERT_str
-from src.a09_pack_logic.delta import ownerdelta_shop
+from src.a08_believer_atom_logic.atom import believeratom_shop
+from src.a08_believer_atom_logic.test._util.a08_str import DELETE_str, INSERT_str
+from src.a09_pack_logic.delta import believerdelta_shop
 from src.a09_pack_logic.legible import create_legible_list
 
 
 def test_create_legible_list_ReturnsObj_plan_laborlink_INSERT():
     # ESTABLISH
-    sue_owner = ownerunit_shop("Sue")
-    dimen = owner_plan_laborlink_str()
-    casa_rope = sue_owner.make_l1_rope("casa")
-    rope_value = sue_owner.make_rope(casa_rope, "clean fridge")
-    labor_title_value = f"{sue_owner.knot}Swimmers"
-    swim_owneratom = owneratom_shop(dimen, INSERT_str())
-    swim_owneratom.set_arg(plan_rope_str(), rope_value)
-    swim_owneratom.set_arg(labor_title_str(), labor_title_value)
-    # print(f"{swim_owneratom=}")
-    x_ownerdelta = ownerdelta_shop()
-    x_ownerdelta.set_owneratom(swim_owneratom)
+    sue_believer = believerunit_shop("Sue")
+    dimen = believer_plan_laborlink_str()
+    casa_rope = sue_believer.make_l1_rope("casa")
+    rope_value = sue_believer.make_rope(casa_rope, "clean fridge")
+    labor_title_value = f"{sue_believer.knot}Swimmers"
+    swim_believeratom = believeratom_shop(dimen, INSERT_str())
+    swim_believeratom.set_arg(plan_rope_str(), rope_value)
+    swim_believeratom.set_arg(labor_title_str(), labor_title_value)
+    # print(f"{swim_believeratom=}")
+    x_believerdelta = believerdelta_shop()
+    x_believerdelta.set_believeratom(swim_believeratom)
 
     # WHEN
-    legible_list = create_legible_list(x_ownerdelta, sue_owner)
+    legible_list = create_legible_list(x_believerdelta, sue_believer)
 
     # THEN
     x_str = f"laborlink '{labor_title_value}' created for plan '{rope_value}'."
@@ -35,20 +35,20 @@ def test_create_legible_list_ReturnsObj_plan_laborlink_INSERT():
 
 def test_create_legible_list_ReturnsObj_plan_laborlink_DELETE():
     # ESTABLISH
-    sue_owner = ownerunit_shop("Sue")
-    dimen = owner_plan_laborlink_str()
-    casa_rope = sue_owner.make_l1_rope("casa")
-    rope_value = sue_owner.make_rope(casa_rope, "clean fridge")
-    labor_title_value = f"{sue_owner.knot}Swimmers"
-    swim_owneratom = owneratom_shop(dimen, DELETE_str())
-    swim_owneratom.set_arg(plan_rope_str(), rope_value)
-    swim_owneratom.set_arg(labor_title_str(), labor_title_value)
-    # print(f"{swim_owneratom=}")
-    x_ownerdelta = ownerdelta_shop()
-    x_ownerdelta.set_owneratom(swim_owneratom)
+    sue_believer = believerunit_shop("Sue")
+    dimen = believer_plan_laborlink_str()
+    casa_rope = sue_believer.make_l1_rope("casa")
+    rope_value = sue_believer.make_rope(casa_rope, "clean fridge")
+    labor_title_value = f"{sue_believer.knot}Swimmers"
+    swim_believeratom = believeratom_shop(dimen, DELETE_str())
+    swim_believeratom.set_arg(plan_rope_str(), rope_value)
+    swim_believeratom.set_arg(labor_title_str(), labor_title_value)
+    # print(f"{swim_believeratom=}")
+    x_believerdelta = believerdelta_shop()
+    x_believerdelta.set_believeratom(swim_believeratom)
 
     # WHEN
-    legible_list = create_legible_list(x_ownerdelta, sue_owner)
+    legible_list = create_legible_list(x_believerdelta, sue_believer)
 
     # THEN
     x_str = f"laborlink '{labor_title_value}' deleted for plan '{rope_value}'."

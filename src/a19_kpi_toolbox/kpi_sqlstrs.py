@@ -6,14 +6,14 @@ def get_belief_kpi001_acct_nets_sqlstr() -> str:
 CREATE TABLE belief_kpi001_acct_nets AS
 SELECT
   belief_acct_nets.belief_label
-, belief_acct_nets.owner_name
-, owner_net_amount AS funds
-, RANK() OVER (ORDER BY owner_net_amount DESC) AS fund_rank
-, IFNULL(SUM(owner_planunit_job.task), 0) AS tasks_count
+, belief_acct_nets.believer_name
+, believer_net_amount AS funds
+, RANK() OVER (ORDER BY believer_net_amount DESC) AS fund_rank
+, IFNULL(SUM(believer_planunit_job.task), 0) AS tasks_count
 FROM belief_acct_nets
-LEFT JOIN owner_planunit_job ON
-  owner_planunit_job.belief_label = belief_acct_nets.belief_label
-  AND owner_planunit_job.owner_name = belief_acct_nets.owner_name
-GROUP BY belief_acct_nets.belief_label, belief_acct_nets.owner_name
+LEFT JOIN believer_planunit_job ON
+  believer_planunit_job.belief_label = belief_acct_nets.belief_label
+  AND believer_planunit_job.believer_name = belief_acct_nets.believer_name
+GROUP BY belief_acct_nets.belief_label, belief_acct_nets.believer_name
 ;
 """

@@ -8,10 +8,10 @@ from src.a02_finance_logic.finance_config import (
 )
 from src.a05_plan_logic.healer import healerlink_shop
 from src.a05_plan_logic.plan import planunit_shop
-from src.a06_owner_logic.owner import ownerunit_shop
+from src.a06_believer_logic.believer import believerunit_shop
 from src.a07_timeline_logic.timeline import timelineunit_shop
 from src.a11_bud_logic.bud import tranbook_shop
-from src.a12_hub_toolbox.hub_path import create_owner_dir_path, create_path
+from src.a12_hub_toolbox.hub_path import create_believer_dir_path, create_path
 from src.a12_hub_toolbox.hub_tool import (
     gut_file_exists,
     job_file_exists,
@@ -65,7 +65,7 @@ def test_BeliefUnit_Exists():
     assert not amy_belief.belief_mstr_dir
     # Calculated fields
     assert not amy_belief._offi_time_max
-    assert not amy_belief._owners_dir
+    assert not amy_belief._believers_dir
     assert not amy_belief._packs_dir
     assert not amy_belief._all_tranbook
     assert set(amy_belief.__dict__) == {
@@ -83,7 +83,7 @@ def test_BeliefUnit_Exists():
         "belief_mstr_dir",
         "_all_tranbook",
         "_offi_time_max",
-        "_owners_dir",
+        "_believers_dir",
         "_packs_dir",
     }
 
@@ -108,7 +108,7 @@ def test_beliefunit_shop_ReturnsBeliefUnit():
     assert a23_belief.belief_mstr_dir == get_module_temp_dir()
     assert a23_belief.job_listen_rotations == get_default_job_listen_count()
     # Calculated fields
-    assert a23_belief._owners_dir != None
+    assert a23_belief._believers_dir != None
     assert a23_belief._packs_dir != None
     assert a23_belief._all_tranbook == tranbook_shop(a23_str)
 
@@ -123,7 +123,7 @@ def test_beliefunit_shop_ReturnsBeliefUnitWith_beliefs_dir(env_dir_setup_cleanup
     # THEN
     assert a23_belief.belief_label == a23_str
     assert a23_belief.belief_mstr_dir == get_module_temp_dir()
-    assert a23_belief._owners_dir is not None
+    assert a23_belief._believers_dir is not None
     assert a23_belief._packs_dir is not None
 
 
@@ -164,15 +164,15 @@ def test_BeliefUnit_set_belief_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanu
     amy_belief = BeliefUnit(a23_str, get_module_temp_dir())
     x_beliefs_dir = create_path(get_module_temp_dir(), "beliefs")
     x_belief_dir = create_path(x_beliefs_dir, a23_str)
-    x_owners_dir = create_path(x_belief_dir, "owners")
+    x_believers_dir = create_path(x_belief_dir, "believers")
     x_packs_dir = create_path(x_belief_dir, "packs")
 
     assert not amy_belief._belief_dir
-    assert not amy_belief._owners_dir
+    assert not amy_belief._believers_dir
     assert not amy_belief._packs_dir
     assert os_path_exists(x_belief_dir) is False
     assert os_path_isdir(x_belief_dir) is False
-    assert os_path_exists(x_owners_dir) is False
+    assert os_path_exists(x_believers_dir) is False
     assert os_path_exists(x_packs_dir) is False
 
     # WHEN
@@ -180,11 +180,11 @@ def test_BeliefUnit_set_belief_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanu
 
     # THEN
     assert amy_belief._belief_dir == x_belief_dir
-    assert amy_belief._owners_dir == x_owners_dir
+    assert amy_belief._believers_dir == x_believers_dir
     assert amy_belief._packs_dir == x_packs_dir
     assert os_path_exists(x_belief_dir)
     assert os_path_isdir(x_belief_dir)
-    assert os_path_exists(x_owners_dir)
+    assert os_path_exists(x_believers_dir)
     assert os_path_exists(x_packs_dir)
 
 
@@ -199,10 +199,10 @@ def test_beliefunit_shop_SetsbeliefsDirs(env_dir_setup_cleanup):
     assert a23_belief.belief_label == a23_str
     x_beliefs_dir = create_path(get_module_temp_dir(), "beliefs")
     assert a23_belief._belief_dir == create_path(x_beliefs_dir, a23_str)
-    assert a23_belief._owners_dir == create_path(a23_belief._belief_dir, "owners")
+    assert a23_belief._believers_dir == create_path(a23_belief._belief_dir, "believers")
 
 
-def test_BeliefUnit_create_empty_owner_from_belief_ReturnsObj_Scenario0(
+def test_BeliefUnit_create_empty_believer_from_belief_ReturnsObj_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -223,16 +223,16 @@ def test_BeliefUnit_create_empty_owner_from_belief_ReturnsObj_Scenario0(
     sue_str = "Sue"
 
     # WHEN
-    generated_owner = a23_belief.create_empty_owner_from_belief(sue_str)
+    generated_believer = a23_belief.create_empty_believer_from_belief(sue_str)
 
     # THEN
-    assert generated_owner.knot == slash_str
-    assert generated_owner.fund_iota == x_fund_iota
-    assert generated_owner.respect_bit == x_respect_bit
-    assert generated_owner.penny == x_penny
+    assert generated_believer.knot == slash_str
+    assert generated_believer.fund_iota == x_fund_iota
+    assert generated_believer.respect_bit == x_respect_bit
+    assert generated_believer.penny == x_penny
 
 
-def test_BeliefUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario1_owner_dir_ExistsNoFile(
+def test_BeliefUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario1_believer_dir_ExistsNoFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -240,8 +240,8 @@ def test_BeliefUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario1_owner_dir_
     a23_str = "amy23"
     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
     sue_str = "Sue"
-    sue_owner_dir = create_owner_dir_path(belief_mstr_dir, a23_str, sue_str)
-    assert not os_path_exists(sue_owner_dir)
+    sue_believer_dir = create_believer_dir_path(belief_mstr_dir, a23_str, sue_str)
+    assert not os_path_exists(sue_believer_dir)
     assert not gut_file_exists(belief_mstr_dir, a23_str, sue_str)
 
     # WHEN
@@ -250,11 +250,11 @@ def test_BeliefUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario1_owner_dir_
     # THEN
     print(f"{belief_mstr_dir=}")
     assert gut_file_exists(belief_mstr_dir, a23_str, sue_str)
-    expected_sue_gut = ownerunit_shop(sue_str, a23_str)
+    expected_sue_gut = believerunit_shop(sue_str, a23_str)
     assert open_gut_file(belief_mstr_dir, a23_str, sue_str) == expected_sue_gut
 
 
-def test_BeliefUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario2_owner_dir_ExistsNoFile_Create_gut_AndConfirmBeliefAttributesPassed(
+def test_BeliefUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario2_believer_dir_ExistsNoFile_Create_gut_AndConfirmBeliefAttributesPassed(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -273,9 +273,9 @@ def test_BeliefUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario2_owner_dir_
         penny=x_penny,
     )
     sue_str = "Sue"
-    sue_owner_dir = create_owner_dir_path(belief_mstr_dir, a23_str, sue_str)
-    set_dir(sue_owner_dir)
-    assert os_path_exists(sue_owner_dir)
+    sue_believer_dir = create_believer_dir_path(belief_mstr_dir, a23_str, sue_str)
+    set_dir(sue_believer_dir)
+    assert os_path_exists(sue_believer_dir)
     assert not gut_file_exists(belief_mstr_dir, a23_str, sue_str)
 
     # WHEN
@@ -300,11 +300,11 @@ def test_BeliefUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario3_FileExists
     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
     sue_str = "Sue"
     bob_str = "Bob"
-    sue_gut = ownerunit_shop(sue_str, a23_str)
+    sue_gut = believerunit_shop(sue_str, a23_str)
     sue_gut.add_acctunit(bob_str)
     save_gut_file(belief_mstr_dir, sue_gut)
-    sue_owner_dir = create_owner_dir_path(belief_mstr_dir, a23_str, sue_str)
-    assert os_path_exists(sue_owner_dir)
+    sue_believer_dir = create_believer_dir_path(belief_mstr_dir, a23_str, sue_str)
+    assert os_path_exists(sue_believer_dir)
     assert gut_file_exists(belief_mstr_dir, a23_str, sue_str)
 
     # WHEN
@@ -361,7 +361,7 @@ def test_BeliefUnit_create_init_job_from_guts_Scenario1_ReplacesFile(
     )
     bob_str = "Bob"
     sue_str = "Sue"
-    x0_sue_job = ownerunit_shop(sue_str, a23_str)
+    x0_sue_job = believerunit_shop(sue_str, a23_str)
     x0_sue_job.add_acctunit(bob_str)
     save_job_file(belief_mstr_dir, x0_sue_job)
     assert open_job_file(belief_mstr_dir, a23_str, sue_str).get_acct(bob_str)
@@ -392,7 +392,7 @@ def test_BeliefUnit_create_init_job_from_guts_Scenario2_job_Has_gut_Accts(
     bob_str = "Bob"
     sue_str = "Sue"
     a23_belief.create_init_job_from_guts(sue_str)
-    sue_gut = ownerunit_shop(sue_str, a23_str)
+    sue_gut = believerunit_shop(sue_str, a23_str)
     sue_gut.add_acctunit(bob_str)
     save_gut_file(belief_mstr_dir, sue_gut)
     assert not open_job_file(belief_mstr_dir, a23_str, sue_str).get_acct(bob_str)
@@ -425,11 +425,11 @@ def test_BeliefUnit_create_init_job_from_guts_Scenario3_gut_FilesAreListenedTo(
 
     # create Sue gut
     bob_str = "Bob"
-    sue_gut = ownerunit_shop(sue_str, a23_str, knot=slash_str)
+    sue_gut = believerunit_shop(sue_str, a23_str, knot=slash_str)
     sue_gut.add_acctunit(bob_str)
     save_gut_file(belief_mstr_dir, sue_gut)
     # create Bob gut with agenda plan for Sue
-    bob_gut = ownerunit_shop(bob_str, a23_str, knot=slash_str)
+    bob_gut = believerunit_shop(bob_str, a23_str, knot=slash_str)
     bob_gut.add_acctunit(sue_str)
     casa_rope = bob_gut.make_l1_rope("casa")
     clean_rope = bob_gut.make_rope(casa_rope, "clean")
@@ -459,33 +459,33 @@ def test_BeliefUnit__set_all_healer_dutys_CorrectlySetsdutys(
     yao_str = "Yao"
     a23_belief.create_init_job_from_guts(sue_str)
     a23_belief.create_init_job_from_guts(yao_str)
-    sue_gut_owner = open_gut_file(x_belief_mstr_dir, a23_str, sue_str)
-    yao_gut_owner = open_gut_file(x_belief_mstr_dir, a23_str, yao_str)
+    sue_gut_believer = open_gut_file(x_belief_mstr_dir, a23_str, sue_str)
+    yao_gut_believer = open_gut_file(x_belief_mstr_dir, a23_str, yao_str)
 
-    sue_gut_owner.add_acctunit(sue_str)
-    sue_gut_owner.add_acctunit(yao_str)
-    yao_gut_owner.add_acctunit(sue_str)
-    yao_gut_owner.add_acctunit(yao_str)
+    sue_gut_believer.add_acctunit(sue_str)
+    sue_gut_believer.add_acctunit(yao_str)
+    yao_gut_believer.add_acctunit(sue_str)
+    yao_gut_believer.add_acctunit(yao_str)
     texas_str = "Texas"
-    texas_rope = sue_gut_owner.make_l1_rope(texas_str)
-    sue_gut_owner.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
-    yao_gut_owner.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
+    texas_rope = sue_gut_believer.make_l1_rope(texas_str)
+    sue_gut_believer.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
+    yao_gut_believer.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
-    dallas_rope = sue_gut_owner.make_rope(texas_rope, dallas_str)
+    dallas_rope = sue_gut_believer.make_rope(texas_rope, dallas_str)
     dallas_healerlink = healerlink_shop({sue_str, yao_str})
     dallas_plan = planunit_shop(dallas_str, healerlink=dallas_healerlink)
     elpaso_str = "el paso"
-    elpaso_rope = sue_gut_owner.make_rope(texas_rope, elpaso_str)
+    elpaso_rope = sue_gut_believer.make_rope(texas_rope, elpaso_str)
     elpaso_healerlink = healerlink_shop({sue_str})
     elpaso_plan = planunit_shop(elpaso_str, healerlink=elpaso_healerlink)
 
-    sue_gut_owner.set_plan(dallas_plan, texas_rope)
-    sue_gut_owner.set_plan(elpaso_plan, texas_rope)
-    yao_gut_owner.set_plan(dallas_plan, texas_rope)
-    yao_gut_owner.set_plan(elpaso_plan, texas_rope)
+    sue_gut_believer.set_plan(dallas_plan, texas_rope)
+    sue_gut_believer.set_plan(elpaso_plan, texas_rope)
+    yao_gut_believer.set_plan(dallas_plan, texas_rope)
+    yao_gut_believer.set_plan(elpaso_plan, texas_rope)
 
-    save_gut_file(x_belief_mstr_dir, sue_gut_owner)
-    save_gut_file(x_belief_mstr_dir, yao_gut_owner)
+    save_gut_file(x_belief_mstr_dir, sue_gut_believer)
+    save_gut_file(x_belief_mstr_dir, yao_gut_believer)
     sue_filename = get_json_filename(sue_str)
     yao_filename = get_json_filename(yao_str)
     sue_dallas_hubunit = hubunit_shop(x_belief_mstr_dir, a23_str, sue_str, dallas_rope)

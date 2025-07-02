@@ -328,11 +328,11 @@ def test_PremiseUnitUnit_set_status_SetsAttr_status_WhenFactUnitIsNull():
     after_str = "afternoon"
     after_rope = create_rope(wkday_rope, after_str)
     premise_2 = premiseunit_shop(pstate=after_rope)
-    owner_fact_2 = None
+    believer_fact_2 = None
     assert premise_2._status is None
 
     # WHEN
-    premise_2.set_status(x_factheir=owner_fact_2)
+    premise_2.set_status(x_factheir=believer_fact_2)
 
     # ESTABLISH
     assert premise_2._status is False
@@ -345,11 +345,11 @@ def test_PremiseUnitUnit_set_status_SetsAttr_status_OfSimple():
     wed_str = "wednesday"
     wed_rope = create_rope(wkday_rope, wed_str)
     wed_premise = premiseunit_shop(pstate=wed_rope)
-    owner_fact = factheir_shop(fcontext=wkday_rope, fstate=wed_rope)
+    believer_fact = factheir_shop(fcontext=wkday_rope, fstate=wed_rope)
     assert wed_premise._status is None
 
     # WHEN
-    wed_premise.set_status(x_factheir=owner_fact)
+    wed_premise.set_status(x_factheir=believer_fact)
 
     # THEN
     assert wed_premise._status
@@ -610,8 +610,10 @@ def test_PremiseUnit_set_status_SetsAttrs_Scenario03():
     assert hr24_premise._status is None
 
     # WHEN
-    owner_fact = factheir_shop(fcontext=hr24_rope, fstate=hr24_rope, fopen=8, fnigh=10)
-    hr24_premise.set_status(x_factheir=owner_fact)
+    believer_fact = factheir_shop(
+        fcontext=hr24_rope, fstate=hr24_rope, fopen=8, fnigh=10
+    )
+    hr24_premise.set_status(x_factheir=believer_fact)
 
     # THEN
     assert hr24_premise._status is False
@@ -641,11 +643,11 @@ def test_PremiseUnit_set_status_CorrectlySetCEDWeekStatusTrue():
     wk_str = "ced_wk"
     wk_rope = create_rope(timetech_rope, wk_str)
     wk_premise = premiseunit_shop(pstate=wk_rope, pdivisor=6, popen=1, pnigh=1)
-    owner_fact = factheir_shop(fcontext=wk_rope, fstate=wk_rope, fopen=7, fnigh=7)
+    believer_fact = factheir_shop(fcontext=wk_rope, fstate=wk_rope, fopen=7, fnigh=7)
     assert wk_premise._status is None
 
     # WHEN
-    wk_premise.set_status(x_factheir=owner_fact)
+    wk_premise.set_status(x_factheir=believer_fact)
 
     # THEN
     assert wk_premise._status

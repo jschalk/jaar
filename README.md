@@ -30,25 +30,25 @@ For jaar all data must have *event_int*, *face_name*, *belief_label*. These are 
 `jaar` is a python library for listening to the needs of my neighbors and in turn letting them know what I need. Needs can be expressed in Excel sheets that range in complexity from a simple five column single row (example below) to 10+ columns that include configuration options that are usually set to defaults. Each row is interpreted and used to build the "clarity" data set. Even sheet with a single row like the example 0.1.0 below can be processed by jaar. 
 
 # Input Example Excel file 0.1.0: fizz0.xlsx with sheet "br00000_buzz" 
-| event_int | face_name | belief_label | owner_name | acct_name | tran_time | amount |
+| event_int | face_name | belief_label | believer_name | acct_name | tran_time | amount |
 |-----------|-----------|-----------|------------|-----------|-----------|--------|
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |    Dean   |    891    |  7000  |
 
-When jaar processes example 0.1.0 it creates a Belief labeled "OxboxDean" that contains owners Emmanuel and Dean and a single transaction of 7000 OxboxDean coins from Emmanuel to Dean. Here's the status metrics:
-| belief_label | owner_name | belief_fund_amount | belief_fund_rank | belief_tasks |
+When jaar processes example 0.1.0 it creates a Belief labeled "OxboxDean" that contains believers Emmanuel and Dean and a single transaction of 7000 OxboxDean coins from Emmanuel to Dean. Here's the status metrics:
+| belief_label | believer_name | belief_fund_amount | belief_fund_rank | belief_tasks |
 |-----------|------------|-----------------|---------------|-----------|
 | OxboxDean |  Emmanuel  |     -7000       |       2       |     0     |
 | OxboxDean |    Dean    |      7000       |       1       |     0     |
 
 
 Output stance: emmanuel_stance.xlsx, sheet "br00000"
-| event_int | face_name | belief_label | owner_name | acct_name | tran_time | amount |
+| event_int | face_name | belief_label | believer_name | acct_name | tran_time | amount |
 |-----------|-----------|-----------|------------|-----------|-----------|--------|
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |    Dean   |    891    |  7000  |
 
 
 <!-- # Input Example Excel file 0.1.2: fizz2.xlsx with sheet "br00000_buzz2" 
-| event_int | face_name | belief_label | owner_name | acct_name | acct_cred_points | acct_debt_points |
+| event_int | face_name | belief_label | believer_name | acct_name | acct_cred_points | acct_debt_points |
 |-----------|-----------|-----------|------------|-----------|---------------|---------------|
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |    Dean   |      100      |      15       |
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |  Emmanuel |       50      |      75       |
@@ -102,31 +102,31 @@ screenshots and elucidatory text.
 <!-- TODO: Add elucidations -->
 base attributes vs reason attributess
 
-OwnerUnit objects
+BelieverUnit objects
 
-OwnerUnit AcctUnit objects
+BelieverUnit AcctUnit objects
 
-OwnerUnit GroupUnit objects
+BelieverUnit GroupUnit objects
 
-OwnerUnit PlanUnit objects
+BelieverUnit PlanUnit objects
 
-OwnerUnit PlanUnit hierarchical structure
+BelieverUnit PlanUnit hierarchical structure
 
-OwnerUnit PlanUnit AwardLink objects
+BelieverUnit PlanUnit AwardLink objects
 
-OwnerUnit PlanUnit AwardLine objects
+BelieverUnit PlanUnit AwardLine objects
 
-OwnerUnit PlanUnit AwardHeir objects
+BelieverUnit PlanUnit AwardHeir objects
 
-OwnerUnit PlanUnit AwardHeir objects
+BelieverUnit PlanUnit AwardHeir objects
 
-OwnerUnit PlanUnit Reason PremiseUnit objects
+BelieverUnit PlanUnit Reason PremiseUnit objects
 
-OwnerUnit PlanUnit Reason PremiseHeir objects
+BelieverUnit PlanUnit Reason PremiseHeir objects
 
-OwnerUnit PlanUnit FactUnit objects
+BelieverUnit PlanUnit FactUnit objects
 
-OwnerUnit PlanUnit FactHeir objects1
+BelieverUnit PlanUnit FactHeir objects1
 
 
 ## 1.3 Test-Driven-Development

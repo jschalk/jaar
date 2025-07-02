@@ -6,8 +6,8 @@ from src.a18_etl_toolbox.test._util.a18_env import (
 from src.a18_etl_toolbox.tran_path import (
     STANCE0001_FILENAME,
     create_stance0001_path,
+    create_stances_believer_dir_path,
     create_stances_dir_path,
-    create_stances_owner_dir_path,
 )
 
 
@@ -28,13 +28,13 @@ def test_create_stances_dir_path_ReturnsObj():
     assert gen_bob_stance_dir == expected_stances_dir
 
 
-def test_create_stances_owner_dir_path_ReturnsObj():
+def test_create_stances_believer_dir_path_ReturnsObj():
     # ESTABLISH
     x_belief_mstr_dir = get_module_temp_dir()
     bob_str = "Bob"
 
     # WHEN
-    gen_bob_stance_dir = create_stances_owner_dir_path(x_belief_mstr_dir, bob_str)
+    gen_bob_stance_dir = create_stances_believer_dir_path(x_belief_mstr_dir, bob_str)
 
     # THEN
     stances_dir = create_stances_dir_path(x_belief_mstr_dir)

@@ -4,10 +4,10 @@ from src.a00_data_toolbox.db_toolbox import (
     get_db_tables,
     get_row_count,
 )
-from src.a04_reason_logic.test._util.a04_str import belief_label_str, owner_name_str
+from src.a04_reason_logic.test._util.a04_str import belief_label_str, believer_name_str
 from src.a18_etl_toolbox.test._util.a18_str import (
     belief_acct_nets_str,
-    owner_net_amount_str,
+    believer_net_amount_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_BELIEF_ACCT_NETS_SQLSTR,
@@ -31,7 +31,7 @@ def test_populate_kpi_bundle_PopulatesTable_Scenario0_GivenDefaultBundleID():
         cursor.execute(CREATE_JOB_ONRPLAN_SQLSTR)
         cursor.execute(CREATE_BELIEF_ACCT_NETS_SQLSTR)
         belief_acct_nets_tablename = belief_acct_nets_str()
-        insert_sqlstr = f"""INSERT INTO {belief_acct_nets_tablename} ({belief_label_str()}, {owner_name_str()}, {owner_net_amount_str()})
+        insert_sqlstr = f"""INSERT INTO {belief_acct_nets_tablename} ({belief_label_str()}, {believer_name_str()}, {believer_net_amount_str()})
 VALUES
   ('{a23_str}', '{bob_str}', {bob_acct_net})
 , ('{a23_str}', '{yao_str}', {yao_acct_net})
@@ -67,7 +67,7 @@ def test_populate_kpi_bundle_PopulatesTable_Scenario1_GivenNoBundleID():
         cursor.execute(CREATE_JOB_ONRPLAN_SQLSTR)
         cursor.execute(CREATE_BELIEF_ACCT_NETS_SQLSTR)
         belief_acct_nets_tablename = belief_acct_nets_str()
-        insert_sqlstr = f"""INSERT INTO {belief_acct_nets_tablename} ({belief_label_str()}, {owner_name_str()}, {owner_net_amount_str()})
+        insert_sqlstr = f"""INSERT INTO {belief_acct_nets_tablename} ({belief_label_str()}, {believer_name_str()}, {believer_net_amount_str()})
 VALUES
   ('{a23_str}', '{bob_str}', {bob_acct_net})
 , ('{a23_str}', '{yao_str}', {yao_acct_net})

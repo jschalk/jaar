@@ -42,7 +42,7 @@ def create_laborunit(laborlink: GroupTitle):
 @dataclass
 class LaborHeir:
     _laborlinks: set[GroupTitle]
-    _owner_name_labor: bool
+    _believer_name_labor: bool
 
     def _get_all_accts(
         self,
@@ -57,15 +57,15 @@ class LaborHeir:
     def is_empty(self) -> bool:
         return self._laborlinks == set()
 
-    def set_owner_name_labor(
-        self, groupunits: dict[GroupTitle, GroupUnit], owner_owner_name: AcctName
+    def set_believer_name_labor(
+        self, groupunits: dict[GroupTitle, GroupUnit], believer_believer_name: AcctName
     ):
-        self._owner_name_labor = self.get_owner_name_labor_bool(
-            groupunits, owner_owner_name
+        self._believer_name_labor = self.get_believer_name_labor_bool(
+            groupunits, believer_believer_name
         )
 
-    def get_owner_name_labor_bool(
-        self, groupunits: dict[GroupTitle, GroupUnit], owner_owner_name: AcctName
+    def get_believer_name_labor_bool(
+        self, groupunits: dict[GroupTitle, GroupUnit], believer_believer_name: AcctName
     ) -> bool:
         if self._laborlinks == set():
             return True
@@ -73,7 +73,7 @@ class LaborHeir:
         for x_labor_title, x_groupunit in groupunits.items():
             if x_labor_title in self._laborlinks:
                 for x_acct_name in x_groupunit._memberships.keys():
-                    if x_acct_name == owner_owner_name:
+                    if x_acct_name == believer_believer_name:
                         return True
         return False
 
@@ -119,13 +119,13 @@ class LaborHeir:
 
 
 def laborheir_shop(
-    _laborlinks: set[GroupTitle] = None, _owner_name_labor: bool = None
+    _laborlinks: set[GroupTitle] = None, _believer_name_labor: bool = None
 ) -> LaborHeir:
     _laborlinks = get_empty_set_if_None(_laborlinks)
-    if _owner_name_labor is None:
-        _owner_name_labor = False
+    if _believer_name_labor is None:
+        _believer_name_labor = False
 
-    return LaborHeir(_laborlinks=_laborlinks, _owner_name_labor=_owner_name_labor)
+    return LaborHeir(_laborlinks=_laborlinks, _believer_name_labor=_believer_name_labor)
 
 
 def laborunit_get_from_dict(laborunit_dict: dict) -> LaborUnit:

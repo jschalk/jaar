@@ -1,15 +1,15 @@
 from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
-from src.a06_owner_logic.test._util.a06_str import (
+from src.a06_believer_logic.test._util.a06_str import (
     acct_cred_points_str,
     acct_debt_points_str,
     acct_name_str,
     addin_str,
     begin_str,
+    believer_name_str,
     close_str,
     denom_str,
     morph_str,
     numor_str,
-    owner_name_str,
     parent_rope_str,
     plan_label_str,
 )
@@ -42,7 +42,7 @@ def test_get_belief_guts_accts_dataframe_ReturnsObj(
 
     # THEN
     acctunit_colums = {
-        owner_name_str(),
+        believer_name_str(),
         acct_name_str(),
         acct_cred_points_str(),
         acct_debt_points_str(),
@@ -86,7 +86,7 @@ def test_get_belief_jobs_accts_dataframe_ReturnsObj(
 
     # THEN
     acctunit_colums = {
-        owner_name_str(),
+        believer_name_str(),
         acct_name_str(),
         acct_cred_points_str(),
         acct_debt_points_str(),
@@ -131,7 +131,7 @@ def test_get_belief_guts_agenda_dataframe_ReturnsObj(
 
     # THEN
     agenda_colums = {
-        owner_name_str(),
+        believer_name_str(),
         "fund_ratio",
         plan_label_str(),
         parent_rope_str(),
@@ -172,7 +172,7 @@ def test_get_belief_jobs_agenda_dataframe_ReturnsObj(env_dir_setup_cleanup):
 
     # THEN
     agenda_colums = {
-        owner_name_str(),
+        believer_name_str(),
         "fund_ratio",
         "plan_label",
         parent_rope_str(),

@@ -1,32 +1,32 @@
 from pandas import DataFrame, concat as pandas_concat
 from plotly.graph_objects import Figure as plotly_Figure, Table as plotly_Table
-from src.a06_owner_logic.report import (
-    get_owner_acctunits_dataframe,
-    get_owner_agenda_dataframe,
+from src.a06_believer_logic.report import (
+    get_believer_acctunits_dataframe,
+    get_believer_agenda_dataframe,
 )
 from src.a12_hub_toolbox.hub_tool import open_gut_file, open_job_file
 from src.a15_belief_logic.belief import BeliefUnit
 
 
 def get_belief_guts_accts_dataframe(x_belief: BeliefUnit) -> DataFrame:
-    # get list of all owner paths
-    belief_owner_names = x_belief._get_owner_folder_names()
-    # for all owners get gut
+    # get list of all believer paths
+    belief_believer_names = x_belief._get_believer_folder_names()
+    # for all believers get gut
     gut_dfs = []
-    for owner_name in belief_owner_names:
-        gut_owner = open_gut_file(
-            x_belief.belief_mstr_dir, x_belief.belief_label, owner_name
+    for believer_name in belief_believer_names:
+        gut_believer = open_gut_file(
+            x_belief.belief_mstr_dir, x_belief.belief_label, believer_name
         )
-        gut_owner.settle_owner()
-        df = get_owner_acctunits_dataframe(gut_owner)
-        df.insert(0, "owner_name", gut_owner.owner_name)
+        gut_believer.settle_believer()
+        df = get_believer_acctunits_dataframe(gut_believer)
+        df.insert(0, "believer_name", gut_believer.believer_name)
         gut_dfs.append(df)
     return pandas_concat(gut_dfs, ignore_index=True)
 
 
 def get_belief_guts_accts_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
     column_header_list = [
-        "owner_name",
+        "believer_name",
         "acct_name",
         "acct_cred_points",
         "acct_debt_points",
@@ -43,7 +43,7 @@ def get_belief_guts_accts_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
         header=header_dict,
         cells=dict(
             values=[
-                df.owner_name,
+                df.believer_name,
                 df.acct_name,
                 df.acct_cred_points,
                 df.acct_debt_points,
@@ -67,22 +67,24 @@ def get_belief_guts_accts_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
 
 
 def get_belief_jobs_accts_dataframe(x_belief: BeliefUnit) -> DataFrame:
-    # get list of all owner paths
-    belief_owner_names = x_belief._get_owner_folder_names()
-    # for all owners get gut
+    # get list of all believer paths
+    belief_believer_names = x_belief._get_believer_folder_names()
+    # for all believers get gut
     job_dfs = []
-    for owner_name in belief_owner_names:
-        job = open_job_file(x_belief.belief_mstr_dir, x_belief.belief_label, owner_name)
-        job.settle_owner()
-        job_df = get_owner_acctunits_dataframe(job)
-        job_df.insert(0, "owner_name", job.owner_name)
+    for believer_name in belief_believer_names:
+        job = open_job_file(
+            x_belief.belief_mstr_dir, x_belief.belief_label, believer_name
+        )
+        job.settle_believer()
+        job_df = get_believer_acctunits_dataframe(job)
+        job_df.insert(0, "believer_name", job.believer_name)
         job_dfs.append(job_df)
     return pandas_concat(job_dfs, ignore_index=True)
 
 
 def get_belief_jobs_accts_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
     column_header_list = [
-        "owner_name",
+        "believer_name",
         "acct_name",
         "acct_cred_points",
         "acct_debt_points",
@@ -99,7 +101,7 @@ def get_belief_jobs_accts_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
         header=header_dict,
         cells=dict(
             values=[
-                df.owner_name,
+                df.believer_name,
                 df.acct_name,
                 df.acct_cred_points,
                 df.acct_debt_points,
@@ -122,23 +124,23 @@ def get_belief_jobs_accts_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
 
 
 def get_belief_guts_agenda_dataframe(x_belief: BeliefUnit) -> DataFrame:
-    # get list of all owner paths
-    belief_owner_names = x_belief._get_owner_folder_names()
-    # for all owners get gut
+    # get list of all believer paths
+    belief_believer_names = x_belief._get_believer_folder_names()
+    # for all believers get gut
     gut_dfs = []
-    for owner_name in belief_owner_names:
-        gut_owner = open_gut_file(
-            x_belief.belief_mstr_dir, x_belief.belief_label, owner_name
+    for believer_name in belief_believer_names:
+        gut_believer = open_gut_file(
+            x_belief.belief_mstr_dir, x_belief.belief_label, believer_name
         )
-        gut_owner.settle_owner()
-        df = get_owner_agenda_dataframe(gut_owner)
+        gut_believer.settle_believer()
+        df = get_believer_agenda_dataframe(gut_believer)
         gut_dfs.append(df)
     return pandas_concat(gut_dfs, ignore_index=True)
 
 
 def get_belief_guts_agenda_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
     column_header_list = [
-        "owner_name",
+        "believer_name",
         "fund_ratio",
         "plan_label",
         "parent_rope",
@@ -157,7 +159,7 @@ def get_belief_guts_agenda_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
         header=header_dict,
         cells=dict(
             values=[
-                df.owner_name,
+                df.believer_name,
                 df.fund_ratio,
                 df.plan_label,
                 df.parent_rope,
@@ -182,22 +184,22 @@ def get_belief_guts_agenda_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
 
 
 def get_belief_jobs_agenda_dataframe(x_belief: BeliefUnit) -> DataFrame:
-    # get list of all owner paths
+    # get list of all believer paths
     job_dfs = []
-    for x_owner_name in x_belief._get_owner_folder_names():
+    for x_believer_name in x_belief._get_believer_folder_names():
 
         job = open_job_file(
-            x_belief.belief_mstr_dir, x_belief.belief_label, x_owner_name
+            x_belief.belief_mstr_dir, x_belief.belief_label, x_believer_name
         )
-        job.settle_owner()
-        job_df = get_owner_agenda_dataframe(job)
+        job.settle_believer()
+        job_df = get_believer_agenda_dataframe(job)
         job_dfs.append(job_df)
     return pandas_concat(job_dfs, ignore_index=True)
 
 
 def get_belief_jobs_agenda_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
     column_header_list = [
-        "owner_name",
+        "believer_name",
         "fund_ratio",
         "plan_label",
         "parent_rope",
@@ -216,7 +218,7 @@ def get_belief_jobs_agenda_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
         header=header_dict,
         cells=dict(
             values=[
-                df.owner_name,
+                df.believer_name,
                 df.fund_ratio,
                 df.plan_label,
                 df.parent_rope,

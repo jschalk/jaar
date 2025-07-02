@@ -74,14 +74,14 @@ def test_belief_build_from_df_ReturnsObj_Scenario0_OneBeliefLabel(
         job_listen_rotations=x_job_listen_rotations,
     )
     expected_amy23_beliefunit.add_budunit(
-        owner_name="Sue",
+        believer_name="Sue",
         bud_time=777,
         quota=445,
         allow_prev_to_offi_time_max_entry=True,
         celldepth=5,
     )
     expected_amy23_beliefunit.add_paypurchase(
-        owner_name="Zia",
+        believer_name="Zia",
         acct_name="Bob",
         tran_time=777,
         amount=888,

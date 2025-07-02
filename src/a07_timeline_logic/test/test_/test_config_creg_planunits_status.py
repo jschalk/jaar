@@ -1,6 +1,6 @@
 from datetime import datetime
 from src.a05_plan_logic.plan import planunit_shop
-from src.a06_owner_logic.owner import ownerunit_shop
+from src.a06_believer_logic.believer import believerunit_shop
 from src.a07_timeline_logic.test._util.a07_str import (
     day_str,
     days_str,
@@ -19,47 +19,47 @@ from src.a07_timeline_logic.test._util.calendar_examples import (
 from src.a07_timeline_logic.timeline import get_year_rope
 
 
-def test_OwnerUnit_get_agenda_dict_ReturnsDictWith_day_plan_Scenario0():
+def test_BelieverUnit_get_agenda_dict_ReturnsDictWith_day_plan_Scenario0():
     # ESTABLISH
-    sue_ownerunit = ownerunit_shop("Sue")
-    time_rope = sue_ownerunit.make_l1_rope(time_str())
-    creg_rope = sue_ownerunit.make_rope(time_rope, get_cregtime_str())
-    day_rope = sue_ownerunit.make_rope(creg_rope, day_str())
-    sue_ownerunit = add_time_creg_planunit(sue_ownerunit)
-    # creg_plan = sue_ownerunit.get_plan_obj(creg_rope)
-    # day_plan = sue_ownerunit.get_plan_obj(day_rope)
-    sue_ownerunit._set_plantree_range_attrs()
+    sue_believerunit = believerunit_shop("Sue")
+    time_rope = sue_believerunit.make_l1_rope(time_str())
+    creg_rope = sue_believerunit.make_rope(time_rope, get_cregtime_str())
+    day_rope = sue_believerunit.make_rope(creg_rope, day_str())
+    sue_believerunit = add_time_creg_planunit(sue_believerunit)
+    # creg_plan = sue_believerunit.get_plan_obj(creg_rope)
+    # day_plan = sue_believerunit.get_plan_obj(day_rope)
+    sue_believerunit._set_plantree_range_attrs()
     casa_str = "casa"
-    casa_rope = sue_ownerunit.make_l1_rope(casa_str)
+    casa_rope = sue_believerunit.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_rope = sue_ownerunit.make_rope(casa_rope, clean_str)
-    sue_ownerunit.set_l1_plan(planunit_shop(casa_str))
-    sue_ownerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
+    clean_rope = sue_believerunit.make_rope(casa_rope, clean_str)
+    sue_believerunit.set_l1_plan(planunit_shop(casa_str))
+    sue_believerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
 
     # WHEN
-    sue_agenda = sue_ownerunit.get_agenda_dict()
+    sue_agenda = sue_believerunit.get_agenda_dict()
 
     # THEN
     assert sue_agenda.get(clean_rope)
 
 
-def test_OwnerUnit_get_agenda_dict_ReturnsDictWith_day_plan_Scenario1():
+def test_BelieverUnit_get_agenda_dict_ReturnsDictWith_day_plan_Scenario1():
     # ESTABLISH
-    sue_ownerunit = ownerunit_shop("Sue")
-    time_rope = sue_ownerunit.make_l1_rope(time_str())
-    creg_rope = sue_ownerunit.make_rope(time_rope, get_cregtime_str())
-    day_rope = sue_ownerunit.make_rope(creg_rope, day_str())
-    sue_ownerunit = add_time_creg_planunit(sue_ownerunit)
-    # creg_plan = sue_ownerunit.get_plan_obj(creg_rope)
-    # day_plan = sue_ownerunit.get_plan_obj(day_rope)
-    sue_ownerunit._set_plantree_range_attrs()
+    sue_believerunit = believerunit_shop("Sue")
+    time_rope = sue_believerunit.make_l1_rope(time_str())
+    creg_rope = sue_believerunit.make_rope(time_rope, get_cregtime_str())
+    day_rope = sue_believerunit.make_rope(creg_rope, day_str())
+    sue_believerunit = add_time_creg_planunit(sue_believerunit)
+    # creg_plan = sue_believerunit.get_plan_obj(creg_rope)
+    # day_plan = sue_believerunit.get_plan_obj(day_rope)
+    sue_believerunit._set_plantree_range_attrs()
     casa_str = "casa"
-    casa_rope = sue_ownerunit.make_l1_rope(casa_str)
+    casa_rope = sue_believerunit.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_rope = sue_ownerunit.make_rope(casa_rope, clean_str)
-    sue_ownerunit.set_l1_plan(planunit_shop(casa_str))
-    sue_ownerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
-    sue_ownerunit.edit_plan_attr(
+    clean_rope = sue_believerunit.make_rope(casa_rope, clean_str)
+    sue_believerunit.set_l1_plan(planunit_shop(casa_str))
+    sue_believerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
+    sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_rcontext=day_rope,
         reason_premise=day_rope,
@@ -67,33 +67,33 @@ def test_OwnerUnit_get_agenda_dict_ReturnsDictWith_day_plan_Scenario1():
         reason_pnigh=1,
         pdivisor=1,
     )
-    sue_ownerunit.add_fact(creg_rope, creg_rope, 0, 1440)
+    sue_believerunit.add_fact(creg_rope, creg_rope, 0, 1440)
 
     # WHEN
-    sue_agenda = sue_ownerunit.get_agenda_dict()
+    sue_agenda = sue_believerunit.get_agenda_dict()
     print(f"{sue_agenda=}")
 
     # THEN
     assert sue_agenda.get(clean_rope)
 
 
-def test_OwnerUnit_get_agenda_dict_ReturnsDictWith_day_plan_Scenario2():
+def test_BelieverUnit_get_agenda_dict_ReturnsDictWith_day_plan_Scenario2():
     # ESTABLISH
-    sue_ownerunit = ownerunit_shop("Sue")
-    time_rope = sue_ownerunit.make_l1_rope(time_str())
-    creg_rope = sue_ownerunit.make_rope(time_rope, get_cregtime_str())
-    day_rope = sue_ownerunit.make_rope(creg_rope, day_str())
-    sue_ownerunit = add_time_creg_planunit(sue_ownerunit)
-    # creg_plan = sue_ownerunit.get_plan_obj(creg_rope)
-    # day_plan = sue_ownerunit.get_plan_obj(day_rope)
-    sue_ownerunit._set_plantree_range_attrs()
+    sue_believerunit = believerunit_shop("Sue")
+    time_rope = sue_believerunit.make_l1_rope(time_str())
+    creg_rope = sue_believerunit.make_rope(time_rope, get_cregtime_str())
+    day_rope = sue_believerunit.make_rope(creg_rope, day_str())
+    sue_believerunit = add_time_creg_planunit(sue_believerunit)
+    # creg_plan = sue_believerunit.get_plan_obj(creg_rope)
+    # day_plan = sue_believerunit.get_plan_obj(day_rope)
+    sue_believerunit._set_plantree_range_attrs()
     casa_str = "casa"
-    casa_rope = sue_ownerunit.make_l1_rope(casa_str)
+    casa_rope = sue_believerunit.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_rope = sue_ownerunit.make_rope(casa_rope, clean_str)
-    sue_ownerunit.set_l1_plan(planunit_shop(casa_str))
-    sue_ownerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
-    sue_ownerunit.edit_plan_attr(
+    clean_rope = sue_believerunit.make_rope(casa_rope, clean_str)
+    sue_believerunit.set_l1_plan(planunit_shop(casa_str))
+    sue_believerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
+    sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_rcontext=day_rope,
         reason_premise=day_rope,
@@ -101,32 +101,32 @@ def test_OwnerUnit_get_agenda_dict_ReturnsDictWith_day_plan_Scenario2():
         reason_pnigh=420,
         pdivisor=1440,
     )
-    sue_ownerunit.add_fact(creg_rope, creg_rope, 14400300, 14400480)
+    sue_believerunit.add_fact(creg_rope, creg_rope, 14400300, 14400480)
 
     # WHEN
-    sue_agenda = sue_ownerunit.get_agenda_dict()
+    sue_agenda = sue_believerunit.get_agenda_dict()
 
     # THEN
     assert sue_agenda.get(clean_rope) != None
 
 
-def test_OwnerUnit_get_agenda_dict_ReturnsDictWith_days_plan_Scenario0():
+def test_BelieverUnit_get_agenda_dict_ReturnsDictWith_days_plan_Scenario0():
     # ESTABLISH
-    sue_ownerunit = ownerunit_shop("Sue")
-    time_rope = sue_ownerunit.make_l1_rope(time_str())
-    creg_rope = sue_ownerunit.make_rope(time_rope, get_cregtime_str())
-    days_rope = sue_ownerunit.make_rope(creg_rope, days_str())
-    sue_ownerunit = add_time_creg_planunit(sue_ownerunit)
-    # creg_plan = sue_ownerunit.get_plan_obj(creg_rope)
-    # days_plan = sue_ownerunit.get_plan_obj(days_rope)
-    sue_ownerunit._set_plantree_range_attrs()
+    sue_believerunit = believerunit_shop("Sue")
+    time_rope = sue_believerunit.make_l1_rope(time_str())
+    creg_rope = sue_believerunit.make_rope(time_rope, get_cregtime_str())
+    days_rope = sue_believerunit.make_rope(creg_rope, days_str())
+    sue_believerunit = add_time_creg_planunit(sue_believerunit)
+    # creg_plan = sue_believerunit.get_plan_obj(creg_rope)
+    # days_plan = sue_believerunit.get_plan_obj(days_rope)
+    sue_believerunit._set_plantree_range_attrs()
     casa_str = "casa"
-    casa_rope = sue_ownerunit.make_l1_rope(casa_str)
+    casa_rope = sue_believerunit.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_rope = sue_ownerunit.make_rope(casa_rope, clean_str)
-    sue_ownerunit.set_l1_plan(planunit_shop(casa_str))
-    sue_ownerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
-    sue_ownerunit.edit_plan_attr(
+    clean_rope = sue_believerunit.make_rope(casa_rope, clean_str)
+    sue_believerunit.set_l1_plan(planunit_shop(casa_str))
+    sue_believerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
+    sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_rcontext=days_rope,
         reason_premise=days_rope,
@@ -134,35 +134,35 @@ def test_OwnerUnit_get_agenda_dict_ReturnsDictWith_days_plan_Scenario0():
         reason_pnigh=5,
         pdivisor=7,
     )
-    sue_ownerunit.add_fact(creg_rope, creg_rope, 11 * 1400, 12 * 1400)
+    sue_believerunit.add_fact(creg_rope, creg_rope, 11 * 1400, 12 * 1400)
 
     # WHEN
-    sue_agenda = sue_ownerunit.get_agenda_dict()
+    sue_agenda = sue_believerunit.get_agenda_dict()
 
     # THEN
-    clean_plan = sue_ownerunit.get_plan_obj(clean_rope)
+    clean_plan = sue_believerunit.get_plan_obj(clean_rope)
     print(f"{clean_plan._factheirs.keys()=}")
     print(f"{clean_plan._factheirs.get(days_rope)=}")
     assert sue_agenda.get(clean_rope)
 
 
-def test_OwnerUnit_get_agenda_dict_ReturnsDictWith_week_plan_Scenario0():
+def test_BelieverUnit_get_agenda_dict_ReturnsDictWith_week_plan_Scenario0():
     # ESTABLISH
-    sue_ownerunit = ownerunit_shop("Sue")
-    time_rope = sue_ownerunit.make_l1_rope(time_str())
-    creg_rope = sue_ownerunit.make_rope(time_rope, get_cregtime_str())
-    week_rope = sue_ownerunit.make_rope(creg_rope, week_str())
-    sue_ownerunit = add_time_creg_planunit(sue_ownerunit)
-    # creg_plan = sue_ownerunit.get_plan_obj(creg_rope)
-    # week_plan = sue_ownerunit.get_plan_obj(week_rope)
-    sue_ownerunit._set_plantree_range_attrs()
+    sue_believerunit = believerunit_shop("Sue")
+    time_rope = sue_believerunit.make_l1_rope(time_str())
+    creg_rope = sue_believerunit.make_rope(time_rope, get_cregtime_str())
+    week_rope = sue_believerunit.make_rope(creg_rope, week_str())
+    sue_believerunit = add_time_creg_planunit(sue_believerunit)
+    # creg_plan = sue_believerunit.get_plan_obj(creg_rope)
+    # week_plan = sue_believerunit.get_plan_obj(week_rope)
+    sue_believerunit._set_plantree_range_attrs()
     casa_str = "casa"
-    casa_rope = sue_ownerunit.make_l1_rope(casa_str)
+    casa_rope = sue_believerunit.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_rope = sue_ownerunit.make_rope(casa_rope, clean_str)
-    sue_ownerunit.set_l1_plan(planunit_shop(casa_str))
-    sue_ownerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
-    sue_ownerunit.edit_plan_attr(
+    clean_rope = sue_believerunit.make_rope(casa_rope, clean_str)
+    sue_believerunit.set_l1_plan(planunit_shop(casa_str))
+    sue_believerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
+    sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_rcontext=week_rope,
         reason_premise=week_rope,
@@ -170,33 +170,33 @@ def test_OwnerUnit_get_agenda_dict_ReturnsDictWith_week_plan_Scenario0():
         reason_pnigh=1440,
         pdivisor=10080,
     )
-    sue_ownerunit.add_fact(creg_rope, creg_rope, 0, 1440)
+    sue_believerunit.add_fact(creg_rope, creg_rope, 0, 1440)
 
     # WHEN
-    sue_agenda = sue_ownerunit.get_agenda_dict()
+    sue_agenda = sue_believerunit.get_agenda_dict()
     print(f"{sue_agenda=}")
 
     # THEN
     assert sue_agenda.get(clean_rope)
 
 
-def test_OwnerUnit_get_agenda_dict_ReturnsDictWith_week_plan_Scenario1():
+def test_BelieverUnit_get_agenda_dict_ReturnsDictWith_week_plan_Scenario1():
     # ESTABLISH
-    sue_ownerunit = ownerunit_shop("Sue")
-    time_rope = sue_ownerunit.make_l1_rope(time_str())
-    creg_rope = sue_ownerunit.make_rope(time_rope, get_cregtime_str())
-    week_rope = sue_ownerunit.make_rope(creg_rope, week_str())
-    sue_ownerunit = add_time_creg_planunit(sue_ownerunit)
-    # creg_plan = sue_ownerunit.get_plan_obj(creg_rope)
-    # week_plan = sue_ownerunit.get_plan_obj(week_rope)
-    sue_ownerunit._set_plantree_range_attrs()
+    sue_believerunit = believerunit_shop("Sue")
+    time_rope = sue_believerunit.make_l1_rope(time_str())
+    creg_rope = sue_believerunit.make_rope(time_rope, get_cregtime_str())
+    week_rope = sue_believerunit.make_rope(creg_rope, week_str())
+    sue_believerunit = add_time_creg_planunit(sue_believerunit)
+    # creg_plan = sue_believerunit.get_plan_obj(creg_rope)
+    # week_plan = sue_believerunit.get_plan_obj(week_rope)
+    sue_believerunit._set_plantree_range_attrs()
     casa_str = "casa"
-    casa_rope = sue_ownerunit.make_l1_rope(casa_str)
+    casa_rope = sue_believerunit.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_rope = sue_ownerunit.make_rope(casa_rope, clean_str)
-    sue_ownerunit.set_l1_plan(planunit_shop(casa_str))
-    sue_ownerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
-    sue_ownerunit.edit_plan_attr(
+    clean_rope = sue_believerunit.make_rope(casa_rope, clean_str)
+    sue_believerunit.set_l1_plan(planunit_shop(casa_str))
+    sue_believerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
+    sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_rcontext=week_rope,
         reason_premise=week_rope,
@@ -204,33 +204,33 @@ def test_OwnerUnit_get_agenda_dict_ReturnsDictWith_week_plan_Scenario1():
         reason_pnigh=4220,
         pdivisor=10080,
     )
-    sue_ownerunit.add_fact(creg_rope, creg_rope, 100802880, 100804220)
+    sue_believerunit.add_fact(creg_rope, creg_rope, 100802880, 100804220)
 
     # WHEN
-    sue_agenda = sue_ownerunit.get_agenda_dict()
+    sue_agenda = sue_believerunit.get_agenda_dict()
 
     # THEN
     assert sue_agenda.get(clean_rope) != None
 
 
-def test_OwnerUnit_get_agenda_dict_ReturnsDictWith_weeks_plan_Scenario0():
+def test_BelieverUnit_get_agenda_dict_ReturnsDictWith_weeks_plan_Scenario0():
     # ESTABLISH
-    sue_ownerunit = ownerunit_shop("Sue")
-    time_rope = sue_ownerunit.make_l1_rope(time_str())
-    creg_rope = sue_ownerunit.make_rope(time_rope, get_cregtime_str())
-    weeks_rope = sue_ownerunit.make_rope(creg_rope, weeks_str())
-    sue_ownerunit = add_time_creg_planunit(sue_ownerunit)
-    creg_plan = sue_ownerunit.get_plan_obj(creg_rope)
+    sue_believerunit = believerunit_shop("Sue")
+    time_rope = sue_believerunit.make_l1_rope(time_str())
+    creg_rope = sue_believerunit.make_rope(time_rope, get_cregtime_str())
+    weeks_rope = sue_believerunit.make_rope(creg_rope, weeks_str())
+    sue_believerunit = add_time_creg_planunit(sue_believerunit)
+    creg_plan = sue_believerunit.get_plan_obj(creg_rope)
     print(f"{creg_plan.begin=} {creg_plan.close=}")
-    # weeks_plan = sue_ownerunit.get_plan_obj(weeks_rope)
-    sue_ownerunit._set_plantree_range_attrs()
+    # weeks_plan = sue_believerunit.get_plan_obj(weeks_rope)
+    sue_believerunit._set_plantree_range_attrs()
     casa_str = "casa"
-    casa_rope = sue_ownerunit.make_l1_rope(casa_str)
+    casa_rope = sue_believerunit.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_rope = sue_ownerunit.make_rope(casa_rope, clean_str)
-    sue_ownerunit.set_l1_plan(planunit_shop(casa_str))
-    sue_ownerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
-    sue_ownerunit.edit_plan_attr(
+    clean_rope = sue_believerunit.make_rope(casa_rope, clean_str)
+    sue_believerunit.set_l1_plan(planunit_shop(casa_str))
+    sue_believerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
+    sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_rcontext=weeks_rope,
         reason_premise=weeks_rope,
@@ -238,32 +238,32 @@ def test_OwnerUnit_get_agenda_dict_ReturnsDictWith_weeks_plan_Scenario0():
         reason_pnigh=5,
         pdivisor=7,
     )
-    sue_ownerunit.add_fact(creg_rope, creg_rope, 11 * 10080, 12 * 10080)
+    sue_believerunit.add_fact(creg_rope, creg_rope, 11 * 10080, 12 * 10080)
 
     # WHEN
-    sue_agenda = sue_ownerunit.get_agenda_dict()
+    sue_agenda = sue_believerunit.get_agenda_dict()
 
     # THEN
     assert sue_agenda.get(clean_rope)
 
 
-def test_OwnerUnit_get_agenda_dict_ReturnsDictWith_year_plan_Scenario0():
+def test_BelieverUnit_get_agenda_dict_ReturnsDictWith_year_plan_Scenario0():
     # ESTABLISH
-    sue_ownerunit = ownerunit_shop("Sue")
-    time_rope = sue_ownerunit.make_l1_rope(time_str())
-    creg_rope = sue_ownerunit.make_rope(time_rope, get_cregtime_str())
-    year_rope = get_year_rope(sue_ownerunit, creg_rope)
-    sue_ownerunit = add_time_creg_planunit(sue_ownerunit)
-    # creg_plan = sue_ownerunit.get_plan_obj(creg_rope)
-    # year_plan = sue_ownerunit.get_plan_obj(year_rope)
-    sue_ownerunit._set_plantree_range_attrs()
+    sue_believerunit = believerunit_shop("Sue")
+    time_rope = sue_believerunit.make_l1_rope(time_str())
+    creg_rope = sue_believerunit.make_rope(time_rope, get_cregtime_str())
+    year_rope = get_year_rope(sue_believerunit, creg_rope)
+    sue_believerunit = add_time_creg_planunit(sue_believerunit)
+    # creg_plan = sue_believerunit.get_plan_obj(creg_rope)
+    # year_plan = sue_believerunit.get_plan_obj(year_rope)
+    sue_believerunit._set_plantree_range_attrs()
     casa_str = "casa"
-    casa_rope = sue_ownerunit.make_l1_rope(casa_str)
+    casa_rope = sue_believerunit.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_rope = sue_ownerunit.make_rope(casa_rope, clean_str)
-    sue_ownerunit.set_l1_plan(planunit_shop(casa_str))
-    sue_ownerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
-    sue_ownerunit.edit_plan_attr(
+    clean_rope = sue_believerunit.make_rope(casa_rope, clean_str)
+    sue_believerunit.set_l1_plan(planunit_shop(casa_str))
+    sue_believerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
+    sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_rcontext=year_rope,
         reason_premise=year_rope,
@@ -271,42 +271,42 @@ def test_OwnerUnit_get_agenda_dict_ReturnsDictWith_year_plan_Scenario0():
         reason_pnigh=1440,
         pdivisor=525600,
     )
-    sue_ownerunit.add_fact(creg_rope, creg_rope, 0, 1440)
+    sue_believerunit.add_fact(creg_rope, creg_rope, 0, 1440)
 
     # WHEN
-    sue_agenda = sue_ownerunit.get_agenda_dict()
+    sue_agenda = sue_believerunit.get_agenda_dict()
     print(f"{sue_agenda=}")
 
     # THEN
     assert sue_agenda.get(clean_rope)
 
     # WHEN
-    sue_ownerunit.add_fact(creg_rope, creg_rope, 1444, 2880)
-    sue_agenda = sue_ownerunit.get_agenda_dict()
+    sue_believerunit.add_fact(creg_rope, creg_rope, 1444, 2880)
+    sue_agenda = sue_believerunit.get_agenda_dict()
     print(f"{sue_agenda=}")
 
     # THEN
     assert not sue_agenda.get(clean_rope)
 
 
-def test_OwnerUnit_get_agenda_dict_ReturnsDictWith_year_plan_Scenario1():
+def test_BelieverUnit_get_agenda_dict_ReturnsDictWith_year_plan_Scenario1():
     # ESTABLISH
-    sue_ownerunit = ownerunit_shop("Sue")
-    time_rope = sue_ownerunit.make_l1_rope(time_str())
-    creg_rope = sue_ownerunit.make_rope(time_rope, get_cregtime_str())
-    year_rope = get_year_rope(sue_ownerunit, creg_rope)
+    sue_believerunit = believerunit_shop("Sue")
+    time_rope = sue_believerunit.make_l1_rope(time_str())
+    creg_rope = sue_believerunit.make_rope(time_rope, get_cregtime_str())
+    year_rope = get_year_rope(sue_believerunit, creg_rope)
 
-    sue_ownerunit = add_time_creg_planunit(sue_ownerunit)
-    # creg_plan = sue_ownerunit.get_plan_obj(creg_rope)
-    # year_plan = sue_ownerunit.get_plan_obj(year_rope)
-    sue_ownerunit._set_plantree_range_attrs()
+    sue_believerunit = add_time_creg_planunit(sue_believerunit)
+    # creg_plan = sue_believerunit.get_plan_obj(creg_rope)
+    # year_plan = sue_believerunit.get_plan_obj(year_rope)
+    sue_believerunit._set_plantree_range_attrs()
     casa_str = "casa"
-    casa_rope = sue_ownerunit.make_l1_rope(casa_str)
+    casa_rope = sue_believerunit.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_rope = sue_ownerunit.make_rope(casa_rope, clean_str)
-    sue_ownerunit.set_l1_plan(planunit_shop(casa_str))
-    sue_ownerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
-    sue_ownerunit.edit_plan_attr(
+    clean_rope = sue_believerunit.make_rope(casa_rope, clean_str)
+    sue_believerunit.set_l1_plan(planunit_shop(casa_str))
+    sue_believerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
+    sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_rcontext=year_rope,
         reason_premise=year_rope,
@@ -314,34 +314,34 @@ def test_OwnerUnit_get_agenda_dict_ReturnsDictWith_year_plan_Scenario1():
         reason_pnigh=1440,
         pdivisor=525600,
     )
-    sue_ownerunit.add_fact(creg_rope, creg_rope, 525600, 525600 + 1440)
+    sue_believerunit.add_fact(creg_rope, creg_rope, 525600, 525600 + 1440)
 
     # WHEN
-    sue_agenda = sue_ownerunit.get_agenda_dict()
+    sue_agenda = sue_believerunit.get_agenda_dict()
     print(f"{sue_agenda=}")
 
     # THEN
     assert sue_agenda.get(clean_rope)
 
 
-def test_OwnerUnit_get_agenda_dict_ReturnsDictWith_year_plan_Scenario2():
+def test_BelieverUnit_get_agenda_dict_ReturnsDictWith_year_plan_Scenario2():
     # ESTABLISH
-    sue_ownerunit = ownerunit_shop("Sue")
-    time_rope = sue_ownerunit.make_l1_rope(time_str())
-    creg_rope = sue_ownerunit.make_rope(time_rope, get_cregtime_str())
-    year_rope = get_year_rope(sue_ownerunit, creg_rope)
+    sue_believerunit = believerunit_shop("Sue")
+    time_rope = sue_believerunit.make_l1_rope(time_str())
+    creg_rope = sue_believerunit.make_rope(time_rope, get_cregtime_str())
+    year_rope = get_year_rope(sue_believerunit, creg_rope)
 
-    sue_ownerunit = add_time_creg_planunit(sue_ownerunit)
-    creg_plan = sue_ownerunit.get_plan_obj(creg_rope)
-    # year_plan = sue_ownerunit.get_plan_obj(year_rope)
-    sue_ownerunit._set_plantree_range_attrs()
+    sue_believerunit = add_time_creg_planunit(sue_believerunit)
+    creg_plan = sue_believerunit.get_plan_obj(creg_rope)
+    # year_plan = sue_believerunit.get_plan_obj(year_rope)
+    sue_believerunit._set_plantree_range_attrs()
     casa_str = "casa"
-    casa_rope = sue_ownerunit.make_l1_rope(casa_str)
+    casa_rope = sue_believerunit.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_rope = sue_ownerunit.make_rope(casa_rope, clean_str)
-    sue_ownerunit.set_l1_plan(planunit_shop(casa_str))
-    sue_ownerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
-    sue_ownerunit.edit_plan_attr(
+    clean_rope = sue_believerunit.make_rope(casa_rope, clean_str)
+    sue_believerunit.set_l1_plan(planunit_shop(casa_str))
+    sue_believerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
+    sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_rcontext=year_rope,
         reason_premise=year_rope,
@@ -349,10 +349,10 @@ def test_OwnerUnit_get_agenda_dict_ReturnsDictWith_year_plan_Scenario2():
         reason_pnigh=1440,
         pdivisor=525600,
     )
-    sue_ownerunit.add_fact(creg_rope, creg_rope, 525600, 525600 + 1440)
+    sue_believerunit.add_fact(creg_rope, creg_rope, 525600, 525600 + 1440)
 
     # WHEN
-    sue_agenda = sue_ownerunit.get_agenda_dict()
+    sue_agenda = sue_believerunit.get_agenda_dict()
     print(f"{sue_agenda=}")
 
     # THEN
@@ -366,14 +366,14 @@ def test_OwnerUnit_get_agenda_dict_ReturnsDictWith_year_plan_Scenario2():
     yr2004mar1 = get_creg_min_from_dt(dt=datetime(2004, 3, 1, 0, 0))
     yr2004mar2 = get_creg_min_from_dt(dt=datetime(2004, 3, 2, 0, 0))
 
-    sue_ownerunit.add_fact(creg_rope, creg_rope, yr2000mar1, yr2000mar1 + 1440)
-    assert len(sue_ownerunit.get_agenda_dict()) == 1
-    sue_ownerunit.add_fact(creg_rope, creg_rope, yr2000mar2, yr2000mar2 + 1440)
-    assert len(sue_ownerunit.get_agenda_dict()) == 0
-    sue_ownerunit.add_fact(creg_rope, creg_rope, yr2004mar1, yr2004mar1 + 1440)
-    assert len(sue_ownerunit.get_agenda_dict()) == 1
-    sue_ownerunit.add_fact(creg_rope, creg_rope, yr2000mar2, yr2004mar2 + 1440)
-    assert len(sue_ownerunit.get_agenda_dict()) == 1
+    sue_believerunit.add_fact(creg_rope, creg_rope, yr2000mar1, yr2000mar1 + 1440)
+    assert len(sue_believerunit.get_agenda_dict()) == 1
+    sue_believerunit.add_fact(creg_rope, creg_rope, yr2000mar2, yr2000mar2 + 1440)
+    assert len(sue_believerunit.get_agenda_dict()) == 0
+    sue_believerunit.add_fact(creg_rope, creg_rope, yr2004mar1, yr2004mar1 + 1440)
+    assert len(sue_believerunit.get_agenda_dict()) == 1
+    sue_believerunit.add_fact(creg_rope, creg_rope, yr2000mar2, yr2004mar2 + 1440)
+    assert len(sue_believerunit.get_agenda_dict()) == 1
 
 
 def wed_gogo_want():
@@ -384,38 +384,38 @@ def thu_gogo_want():
     return creg_weekday_planunits().get(get_thu()).gogo_want
 
 
-def test_OwnerUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Wednesday_March1_2000():
+def test_BelieverUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Wednesday_March1_2000():
     # ESTABLISH
-    sue_ownerunit = ownerunit_shop("Sue")
-    time_rope = sue_ownerunit.make_l1_rope(time_str())
-    creg_rope = sue_ownerunit.make_rope(time_rope, get_cregtime_str())
-    year_rope = get_year_rope(sue_ownerunit, creg_rope)
-    week_rope = sue_ownerunit.make_rope(creg_rope, week_str())
-    # sun_rope = sue_ownerunit.make_rope(week_rope, get_sun())
-    # mon_rope = sue_ownerunit.make_rope(week_rope, get_mon())
-    # tue_rope = sue_ownerunit.make_rope(week_rope, get_tue())
-    wed_rope = sue_ownerunit.make_rope(week_rope, get_wed())
-    # thu_rope = sue_ownerunit.make_rope(week_rope, get_thu())
-    # fri_rope = sue_ownerunit.make_rope(week_rope, get_fri())
-    # sat_rope = sue_ownerunit.make_rope(week_rope, get_sat())
-    sue_ownerunit = add_time_creg_planunit(sue_ownerunit)
-    # creg_plan = sue_ownerunit.get_plan_obj(creg_rope)
-    # week_plan = sue_ownerunit.get_plan_obj(week_rope)
-    sue_ownerunit._set_plantree_range_attrs()
+    sue_believerunit = believerunit_shop("Sue")
+    time_rope = sue_believerunit.make_l1_rope(time_str())
+    creg_rope = sue_believerunit.make_rope(time_rope, get_cregtime_str())
+    year_rope = get_year_rope(sue_believerunit, creg_rope)
+    week_rope = sue_believerunit.make_rope(creg_rope, week_str())
+    # sun_rope = sue_believerunit.make_rope(week_rope, get_sun())
+    # mon_rope = sue_believerunit.make_rope(week_rope, get_mon())
+    # tue_rope = sue_believerunit.make_rope(week_rope, get_tue())
+    wed_rope = sue_believerunit.make_rope(week_rope, get_wed())
+    # thu_rope = sue_believerunit.make_rope(week_rope, get_thu())
+    # fri_rope = sue_believerunit.make_rope(week_rope, get_fri())
+    # sat_rope = sue_believerunit.make_rope(week_rope, get_sat())
+    sue_believerunit = add_time_creg_planunit(sue_believerunit)
+    # creg_plan = sue_believerunit.get_plan_obj(creg_rope)
+    # week_plan = sue_believerunit.get_plan_obj(week_rope)
+    sue_believerunit._set_plantree_range_attrs()
     casa_str = "casa"
-    casa_rope = sue_ownerunit.make_l1_rope(casa_str)
+    casa_rope = sue_believerunit.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_rope = sue_ownerunit.make_rope(casa_rope, clean_str)
-    sue_ownerunit.set_l1_plan(planunit_shop(casa_str))
-    sue_ownerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
-    sue_ownerunit.edit_plan_attr(
+    clean_rope = sue_believerunit.make_rope(casa_rope, clean_str)
+    sue_believerunit.set_l1_plan(planunit_shop(casa_str))
+    sue_believerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
+    sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_rcontext=wed_rope,
         reason_premise=wed_rope,
         popen=wed_gogo_want(),
         reason_pnigh=wed_gogo_want() + 1440,
     )
-    sue_ownerunit.edit_plan_attr(
+    sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_rcontext=year_rope,
         reason_premise=year_rope,
@@ -433,116 +433,116 @@ def test_OwnerUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Wednesday_March1_2
     yr2000_mar8day = get_creg_min_from_dt(datetime(2000, 3, 8, 0, 0))
     print(f"{wed_gogo_want()=}")
     print(f"{wed_gogo_want()+1440=}")
-    clean_plan = sue_ownerunit.get_plan_obj(clean_rope)
-    sue_ownerunit.add_fact(creg_rope, creg_rope, yr2000_mar6day, yr2000_mar7day)
-    sue_ownerunit.settle_owner()
+    clean_plan = sue_believerunit.get_plan_obj(clean_rope)
+    sue_believerunit.add_fact(creg_rope, creg_rope, yr2000_mar6day, yr2000_mar7day)
+    sue_believerunit.settle_believer()
     print(f"{clean_plan._factheirs.get(year_rope).fopen=}")
     print(f"{clean_plan._factheirs.get(year_rope).fnigh=}")
     print(f"{clean_plan.get_reasonheir(year_rope)._status=} \n")
 
     # WHEN / THEN
-    sue_ownerunit.add_fact(creg_rope, creg_rope, yr2000_mar6day, yr2000_mar7day)
-    sue_ownerunit.settle_owner()
+    sue_believerunit.add_fact(creg_rope, creg_rope, yr2000_mar6day, yr2000_mar7day)
+    sue_believerunit.settle_believer()
     print(f"{clean_plan._factheirs.get(wed_rope).fopen=}")
     print(f"{clean_plan._factheirs.get(wed_rope).fnigh=}")
     print(f"{clean_plan.get_reasonheir(wed_rope)._status=}")
-    print(f"{len(sue_ownerunit.get_agenda_dict())=} {yr2000_mar6day=}")
+    print(f"{len(sue_believerunit.get_agenda_dict())=} {yr2000_mar6day=}")
     print(f"{clean_plan.get_reasonheir(year_rope)._status=} \n")
-    assert len(sue_ownerunit.get_agenda_dict()) == 0
+    assert len(sue_believerunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
-    sue_ownerunit.add_fact(creg_rope, creg_rope, yr2000_mar7day, yr2000_mar8day)
-    sue_ownerunit.settle_owner()
+    sue_believerunit.add_fact(creg_rope, creg_rope, yr2000_mar7day, yr2000_mar8day)
+    sue_believerunit.settle_believer()
     print(f"{clean_plan._factheirs.get(wed_rope).fopen=}")
     print(f"{clean_plan._factheirs.get(wed_rope).fnigh=}")
     print(f"{clean_plan.get_reasonheir(wed_rope)._status=}")
-    print(f"{len(sue_ownerunit.get_agenda_dict())=} {yr2000_mar7day=}")
+    print(f"{len(sue_believerunit.get_agenda_dict())=} {yr2000_mar7day=}")
     print(f"{clean_plan.get_reasonheir(year_rope)._status=} \n")
-    assert len(sue_ownerunit.get_agenda_dict()) == 0
+    assert len(sue_believerunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
-    sue_ownerunit.add_fact(creg_rope, creg_rope, yr2000_mar1day, yr2000_mar2day)
-    sue_ownerunit.settle_owner()
+    sue_believerunit.add_fact(creg_rope, creg_rope, yr2000_mar1day, yr2000_mar2day)
+    sue_believerunit.settle_believer()
     print(f"{clean_plan._factheirs.get(wed_rope).fopen=}")
     print(f"{clean_plan._factheirs.get(wed_rope).fnigh=}")
     print(f"{clean_plan.get_reasonheir(wed_rope)._status=}")
-    print(f"{len(sue_ownerunit.get_agenda_dict())=} {yr2000_mar1day=}")
+    print(f"{len(sue_believerunit.get_agenda_dict())=} {yr2000_mar1day=}")
     print(f"{clean_plan.get_reasonheir(year_rope)._status=} \n")
-    assert len(sue_ownerunit.get_agenda_dict()) == 1
+    assert len(sue_believerunit.get_agenda_dict()) == 1
 
     # WHEN / THEN
-    sue_ownerunit.add_fact(creg_rope, creg_rope, yr2000_mar2day, yr2000_mar3day)
-    sue_ownerunit.settle_owner()
+    sue_believerunit.add_fact(creg_rope, creg_rope, yr2000_mar2day, yr2000_mar3day)
+    sue_believerunit.settle_believer()
     print(f"{clean_plan._factheirs.get(wed_rope).fopen=}")
     print(f"{clean_plan._factheirs.get(wed_rope).fnigh=}")
     print(f"{clean_plan.get_reasonheir(wed_rope)._status=}")
-    print(f"{len(sue_ownerunit.get_agenda_dict())=} {yr2000_mar2day=}")
+    print(f"{len(sue_believerunit.get_agenda_dict())=} {yr2000_mar2day=}")
     print(f"{clean_plan.get_reasonheir(year_rope)._status=} \n")
-    assert len(sue_ownerunit.get_agenda_dict()) == 0
+    assert len(sue_believerunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
-    sue_ownerunit.add_fact(creg_rope, creg_rope, yr2000_mar3day, yr2000_mar4day)
-    sue_ownerunit.settle_owner()
+    sue_believerunit.add_fact(creg_rope, creg_rope, yr2000_mar3day, yr2000_mar4day)
+    sue_believerunit.settle_believer()
     print(f"{clean_plan._factheirs.get(wed_rope).fopen=}")
     print(f"{clean_plan._factheirs.get(wed_rope).fnigh=}")
     print(f"{clean_plan.get_reasonheir(wed_rope)._status=}")
-    print(f"{len(sue_ownerunit.get_agenda_dict())=} {yr2000_mar3day=}")
+    print(f"{len(sue_believerunit.get_agenda_dict())=} {yr2000_mar3day=}")
     print(f"{clean_plan.get_reasonheir(year_rope)._status=} \n")
-    assert len(sue_ownerunit.get_agenda_dict()) == 0
+    assert len(sue_believerunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
-    sue_ownerunit.add_fact(creg_rope, creg_rope, yr2000_mar4day, yr2000_mar5day)
-    sue_ownerunit.settle_owner()
+    sue_believerunit.add_fact(creg_rope, creg_rope, yr2000_mar4day, yr2000_mar5day)
+    sue_believerunit.settle_believer()
     print(f"{clean_plan._factheirs.get(wed_rope).fopen=}")
     print(f"{clean_plan._factheirs.get(wed_rope).fnigh=}")
     print(f"{clean_plan.get_reasonheir(wed_rope)._status=}")
-    print(f"{len(sue_ownerunit.get_agenda_dict())=} {yr2000_mar4day=}")
+    print(f"{len(sue_believerunit.get_agenda_dict())=} {yr2000_mar4day=}")
     print(f"{clean_plan.get_reasonheir(year_rope)._status=} \n")
-    assert len(sue_ownerunit.get_agenda_dict()) == 0
+    assert len(sue_believerunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
-    sue_ownerunit.add_fact(creg_rope, creg_rope, yr2000_mar5day, yr2000_mar6day)
-    sue_ownerunit.settle_owner()
+    sue_believerunit.add_fact(creg_rope, creg_rope, yr2000_mar5day, yr2000_mar6day)
+    sue_believerunit.settle_believer()
     print(f"{clean_plan._factheirs.get(wed_rope).fopen=}")
     print(f"{clean_plan._factheirs.get(wed_rope).fnigh=}")
     print(f"{clean_plan.get_reasonheir(wed_rope)._status=}")
-    print(f"{len(sue_ownerunit.get_agenda_dict())=} {yr2000_mar5day=}")
+    print(f"{len(sue_believerunit.get_agenda_dict())=} {yr2000_mar5day=}")
     print(f"{clean_plan.get_reasonheir(year_rope)._status=} \n")
-    assert len(sue_ownerunit.get_agenda_dict()) == 0
+    assert len(sue_believerunit.get_agenda_dict()) == 0
 
 
-def test_OwnerUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Thursday_March2_2000():
+def test_BelieverUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Thursday_March2_2000():
     # ESTABLISH
-    sue_ownerunit = ownerunit_shop("Sue")
-    time_rope = sue_ownerunit.make_l1_rope(time_str())
-    creg_rope = sue_ownerunit.make_rope(time_rope, get_cregtime_str())
-    year_rope = get_year_rope(sue_ownerunit, creg_rope)
-    week_rope = sue_ownerunit.make_rope(creg_rope, week_str())
-    # sun_rope = sue_ownerunit.make_rope(week_rope, get_sun())
-    # mon_rope = sue_ownerunit.make_rope(week_rope, get_mon())
-    # tue_rope = sue_ownerunit.make_rope(week_rope, get_tue())
-    wed_rope = sue_ownerunit.make_rope(week_rope, get_wed())
-    # thu_rope = sue_ownerunit.make_rope(week_rope, get_thu())
-    # fri_rope = sue_ownerunit.make_rope(week_rope, get_fri())
-    # sat_rope = sue_ownerunit.make_rope(week_rope, get_sat())
-    sue_ownerunit = add_time_creg_planunit(sue_ownerunit)
-    # creg_plan = sue_ownerunit.get_plan_obj(creg_rope)
-    # week_plan = sue_ownerunit.get_plan_obj(week_rope)
-    sue_ownerunit._set_plantree_range_attrs()
+    sue_believerunit = believerunit_shop("Sue")
+    time_rope = sue_believerunit.make_l1_rope(time_str())
+    creg_rope = sue_believerunit.make_rope(time_rope, get_cregtime_str())
+    year_rope = get_year_rope(sue_believerunit, creg_rope)
+    week_rope = sue_believerunit.make_rope(creg_rope, week_str())
+    # sun_rope = sue_believerunit.make_rope(week_rope, get_sun())
+    # mon_rope = sue_believerunit.make_rope(week_rope, get_mon())
+    # tue_rope = sue_believerunit.make_rope(week_rope, get_tue())
+    wed_rope = sue_believerunit.make_rope(week_rope, get_wed())
+    # thu_rope = sue_believerunit.make_rope(week_rope, get_thu())
+    # fri_rope = sue_believerunit.make_rope(week_rope, get_fri())
+    # sat_rope = sue_believerunit.make_rope(week_rope, get_sat())
+    sue_believerunit = add_time_creg_planunit(sue_believerunit)
+    # creg_plan = sue_believerunit.get_plan_obj(creg_rope)
+    # week_plan = sue_believerunit.get_plan_obj(week_rope)
+    sue_believerunit._set_plantree_range_attrs()
     casa_str = "casa"
-    casa_rope = sue_ownerunit.make_l1_rope(casa_str)
+    casa_rope = sue_believerunit.make_l1_rope(casa_str)
     clean_str = "clean"
-    clean_rope = sue_ownerunit.make_rope(casa_rope, clean_str)
-    sue_ownerunit.set_l1_plan(planunit_shop(casa_str))
-    sue_ownerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
-    sue_ownerunit.edit_plan_attr(
+    clean_rope = sue_believerunit.make_rope(casa_rope, clean_str)
+    sue_believerunit.set_l1_plan(planunit_shop(casa_str))
+    sue_believerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
+    sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_rcontext=wed_rope,
         reason_premise=wed_rope,
         popen=thu_gogo_want(),
         reason_pnigh=thu_gogo_want() + 1440,
     )
-    sue_ownerunit.edit_plan_attr(
+    sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_rcontext=year_rope,
         reason_premise=year_rope,
@@ -560,80 +560,80 @@ def test_OwnerUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Thursday_March2_20
     yr2000_mar8day = get_creg_min_from_dt(datetime(2000, 3, 8, 0, 0))
     print(f"{wed_gogo_want()=}")
     print(f"{wed_gogo_want()+1440=}")
-    clean_plan = sue_ownerunit.get_plan_obj(clean_rope)
-    sue_ownerunit.add_fact(creg_rope, creg_rope, yr2000_mar6day, yr2000_mar7day)
-    sue_ownerunit.settle_owner()
+    clean_plan = sue_believerunit.get_plan_obj(clean_rope)
+    sue_believerunit.add_fact(creg_rope, creg_rope, yr2000_mar6day, yr2000_mar7day)
+    sue_believerunit.settle_believer()
     print(f"{clean_plan._factheirs.get(year_rope).fopen=}")
     print(f"{clean_plan._factheirs.get(year_rope).fnigh=}")
     print(f"{clean_plan.get_reasonheir(year_rope)._status=} \n")
 
     # WHEN / THEN
-    sue_ownerunit.add_fact(creg_rope, creg_rope, yr2000_mar6day, yr2000_mar7day)
-    sue_ownerunit.settle_owner()
+    sue_believerunit.add_fact(creg_rope, creg_rope, yr2000_mar6day, yr2000_mar7day)
+    sue_believerunit.settle_believer()
     print(f"{clean_plan._factheirs.get(wed_rope).fopen=}")
     print(f"{clean_plan._factheirs.get(wed_rope).fnigh=}")
     print(f"{clean_plan.get_reasonheir(wed_rope)._status=}")
-    print(f"{len(sue_ownerunit.get_agenda_dict())=} {yr2000_mar6day=}")
+    print(f"{len(sue_believerunit.get_agenda_dict())=} {yr2000_mar6day=}")
     print(f"{clean_plan.get_reasonheir(year_rope)._status=} \n")
-    assert len(sue_ownerunit.get_agenda_dict()) == 0
+    assert len(sue_believerunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
-    sue_ownerunit.add_fact(creg_rope, creg_rope, yr2000_mar7day, yr2000_mar8day)
-    sue_ownerunit.settle_owner()
+    sue_believerunit.add_fact(creg_rope, creg_rope, yr2000_mar7day, yr2000_mar8day)
+    sue_believerunit.settle_believer()
     print(f"{clean_plan._factheirs.get(wed_rope).fopen=}")
     print(f"{clean_plan._factheirs.get(wed_rope).fnigh=}")
     print(f"{clean_plan.get_reasonheir(wed_rope)._status=}")
-    print(f"{len(sue_ownerunit.get_agenda_dict())=} {yr2000_mar7day=}")
+    print(f"{len(sue_believerunit.get_agenda_dict())=} {yr2000_mar7day=}")
     print(f"{clean_plan.get_reasonheir(year_rope)._status=} \n")
-    assert len(sue_ownerunit.get_agenda_dict()) == 0
+    assert len(sue_believerunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
-    sue_ownerunit.add_fact(creg_rope, creg_rope, yr2000_mar1day, yr2000_mar2day)
-    sue_ownerunit.settle_owner()
+    sue_believerunit.add_fact(creg_rope, creg_rope, yr2000_mar1day, yr2000_mar2day)
+    sue_believerunit.settle_believer()
     print(f"{clean_plan._factheirs.get(wed_rope).fopen=}")
     print(f"{clean_plan._factheirs.get(wed_rope).fnigh=}")
     print(f"{clean_plan.get_reasonheir(wed_rope)._status=}")
-    print(f"{len(sue_ownerunit.get_agenda_dict())=} {yr2000_mar1day=}")
+    print(f"{len(sue_believerunit.get_agenda_dict())=} {yr2000_mar1day=}")
     print(f"{clean_plan.get_reasonheir(year_rope)._status=} \n")
     # TODO This should be zero but it comes back as 1
-    # assert len(sue_ownerunit.get_agenda_dict()) == 0
+    # assert len(sue_believerunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
-    sue_ownerunit.add_fact(creg_rope, creg_rope, yr2000_mar2day, yr2000_mar3day)
-    sue_ownerunit.settle_owner()
+    sue_believerunit.add_fact(creg_rope, creg_rope, yr2000_mar2day, yr2000_mar3day)
+    sue_believerunit.settle_believer()
     print(f"{clean_plan._factheirs.get(wed_rope).fopen=}")
     print(f"{clean_plan._factheirs.get(wed_rope).fnigh=}")
     print(f"{clean_plan.get_reasonheir(wed_rope)._status=}")
-    print(f"{len(sue_ownerunit.get_agenda_dict())=} {yr2000_mar2day=}")
+    print(f"{len(sue_believerunit.get_agenda_dict())=} {yr2000_mar2day=}")
     print(f"{clean_plan.get_reasonheir(year_rope)._status=} \n")
-    assert len(sue_ownerunit.get_agenda_dict()) == 1
+    assert len(sue_believerunit.get_agenda_dict()) == 1
 
     # WHEN / THEN
-    sue_ownerunit.add_fact(creg_rope, creg_rope, yr2000_mar3day, yr2000_mar4day)
-    sue_ownerunit.settle_owner()
+    sue_believerunit.add_fact(creg_rope, creg_rope, yr2000_mar3day, yr2000_mar4day)
+    sue_believerunit.settle_believer()
     print(f"{clean_plan._factheirs.get(wed_rope).fopen=}")
     print(f"{clean_plan._factheirs.get(wed_rope).fnigh=}")
     print(f"{clean_plan.get_reasonheir(wed_rope)._status=}")
-    print(f"{len(sue_ownerunit.get_agenda_dict())=} {yr2000_mar3day=}")
+    print(f"{len(sue_believerunit.get_agenda_dict())=} {yr2000_mar3day=}")
     print(f"{clean_plan.get_reasonheir(year_rope)._status=} \n")
-    assert len(sue_ownerunit.get_agenda_dict()) == 0
+    assert len(sue_believerunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
-    sue_ownerunit.add_fact(creg_rope, creg_rope, yr2000_mar4day, yr2000_mar5day)
-    sue_ownerunit.settle_owner()
+    sue_believerunit.add_fact(creg_rope, creg_rope, yr2000_mar4day, yr2000_mar5day)
+    sue_believerunit.settle_believer()
     print(f"{clean_plan._factheirs.get(wed_rope).fopen=}")
     print(f"{clean_plan._factheirs.get(wed_rope).fnigh=}")
     print(f"{clean_plan.get_reasonheir(wed_rope)._status=}")
-    print(f"{len(sue_ownerunit.get_agenda_dict())=} {yr2000_mar4day=}")
+    print(f"{len(sue_believerunit.get_agenda_dict())=} {yr2000_mar4day=}")
     print(f"{clean_plan.get_reasonheir(year_rope)._status=} \n")
-    assert len(sue_ownerunit.get_agenda_dict()) == 0
+    assert len(sue_believerunit.get_agenda_dict()) == 0
 
     # WHEN / THEN
-    sue_ownerunit.add_fact(creg_rope, creg_rope, yr2000_mar5day, yr2000_mar6day)
-    sue_ownerunit.settle_owner()
+    sue_believerunit.add_fact(creg_rope, creg_rope, yr2000_mar5day, yr2000_mar6day)
+    sue_believerunit.settle_believer()
     print(f"{clean_plan._factheirs.get(wed_rope).fopen=}")
     print(f"{clean_plan._factheirs.get(wed_rope).fnigh=}")
     print(f"{clean_plan.get_reasonheir(wed_rope)._status=}")
-    print(f"{len(sue_ownerunit.get_agenda_dict())=} {yr2000_mar5day=}")
+    print(f"{len(sue_believerunit.get_agenda_dict())=} {yr2000_mar5day=}")
     print(f"{clean_plan.get_reasonheir(year_rope)._status=} \n")
-    assert len(sue_ownerunit.get_agenda_dict()) == 0
+    assert len(sue_believerunit.get_agenda_dict()) == 0

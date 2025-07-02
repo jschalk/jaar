@@ -7,7 +7,7 @@
             "belief_label": {
                 "class_type": "LabelTerm"
             },
-            "owner_name": {
+            "believer_name": {
                 "class_type": "NameTerm"
             },
             "tran_time": {
@@ -29,7 +29,7 @@
             "belief_label": {
                 "class_type": "LabelTerm"
             },
-            "owner_name": {
+            "believer_name": {
                 "class_type": "NameTerm"
             }
         },

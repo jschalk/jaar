@@ -1,0 +1,5432 @@
+{
+  "accts": {
+    "A a ron Jones": {
+      "_memberships": {
+        ";Everyone": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Everyone"
+        },
+        ";MerVista Apt": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";MerVista Apt"
+        },
+        "A a ron Jones": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": "A a ron Jones"
+        }
+      },
+      "acct_name": "A a ron Jones",
+      "acct_cred_points": 1,
+      "acct_debt_points": 1
+    },
+    "America": {
+      "_memberships": {
+        ";Everyone": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Everyone"
+        },
+        ";Family": {
+          "group_cred_points": 6.45,
+          "group_debt_points": 1,
+          "group_title": ";Family"
+        },
+        ";Friends": {
+          "group_cred_points": 6.1,
+          "group_debt_points": 1,
+          "group_title": ";Friends"
+        },
+        "America": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": "America"
+        }
+      },
+      "acct_name": "America",
+      "acct_cred_points": 1,
+      "acct_debt_points": 1
+    },
+    "Anna": {
+      "_memberships": {
+        ";Everyone": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Everyone"
+        },
+        ";Family": {
+          "group_cred_points": 6.2,
+          "group_debt_points": 1,
+          "group_title": ";Family"
+        },
+        "Anna": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": "Anna"
+        }
+      },
+      "acct_name": "Anna",
+      "acct_cred_points": 1,
+      "acct_debt_points": 1
+    },
+    "Benjamin Stoddert": {
+      "_memberships": {
+        ";ACME DevOps": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";ACME DevOps"
+        },
+        ";ACME General": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";ACME General"
+        },
+        ";Everyone": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Everyone"
+        },
+        "Benjamin Stoddert": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": "Benjamin Stoddert"
+        }
+      },
+      "acct_name": "Benjamin Stoddert",
+      "acct_cred_points": 1,
+      "acct_debt_points": 1
+    },
+    "Bob302": {
+      "_memberships": {
+        ";ACME DevOps": {
+          "group_cred_points": 6.25,
+          "group_debt_points": 1,
+          "group_title": ";ACME DevOps"
+        },
+        ";appreciates US DOLLAR": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";appreciates US DOLLAR"
+        },
+        ";Everyone": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Everyone"
+        },
+        "Bob302": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": "Bob302"
+        }
+      },
+      "acct_name": "Bob302",
+      "acct_cred_points": 1,
+      "acct_debt_points": 1
+    },
+    "Chuck Lee": {
+      "_memberships": {
+        ";ACME DevOps": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";ACME DevOps"
+        },
+        ";ACME General": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";ACME General"
+        },
+        ";Everyone": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Everyone"
+        },
+        "Chuck Lee": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": "Chuck Lee"
+        }
+      },
+      "acct_name": "Chuck Lee",
+      "acct_cred_points": 1,
+      "acct_debt_points": 1
+    },
+    "Ernesto Chavez": {
+      "_memberships": {
+        ";Everyone": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Everyone"
+        },
+        ";Philosophy": {
+          "group_cred_points": 6.5,
+          "group_debt_points": 1,
+          "group_title": ";Philosophy"
+        },
+        "Ernesto Chavez": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": "Ernesto Chavez"
+        }
+      },
+      "acct_name": "Ernesto Chavez",
+      "acct_cred_points": 1,
+      "acct_debt_points": 1
+    },
+    "Jacque Chirac": {
+      "_memberships": {
+        ";Everyone": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Everyone"
+        },
+        ";MerVista Apt": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";MerVista Apt"
+        },
+        "Jacque Chirac": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": "Jacque Chirac"
+        }
+      },
+      "acct_name": "Jacque Chirac",
+      "acct_cred_points": 1,
+      "acct_debt_points": 1
+    },
+    "Jane Randolph": {
+      "_memberships": {
+        ";ACME DevOps": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";ACME DevOps"
+        },
+        ";Everyone": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Everyone"
+        },
+        "Jane Randolph": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": "Jane Randolph"
+        }
+      },
+      "acct_name": "Jane Randolph",
+      "acct_cred_points": 1,
+      "acct_debt_points": 1
+    },
+    "Maria Reynolds": {
+      "_memberships": {
+        ";ACME DevOps": {
+          "group_cred_points": 6.75,
+          "group_debt_points": 1,
+          "group_title": ";ACME DevOps"
+        },
+        ";Everyone": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Everyone"
+        },
+        "Maria Reynolds": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": "Maria Reynolds"
+        }
+      },
+      "acct_name": "Maria Reynolds",
+      "acct_cred_points": 1,
+      "acct_debt_points": 1
+    },
+    "Martha Doubs": {
+      "_memberships": {
+        ";ACME DevOps": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";ACME DevOps"
+        },
+        ";ACME General": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";ACME General"
+        },
+        ";Everyone": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Everyone"
+        },
+        "Martha Doubs": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": "Martha Doubs"
+        }
+      },
+      "acct_name": "Martha Doubs",
+      "acct_cred_points": 1,
+      "acct_debt_points": 1
+    },
+    "Mikayla": {
+      "_memberships": {
+        ";ACME DevOps": {
+          "group_cred_points": 10,
+          "group_debt_points": 1,
+          "group_title": ";ACME DevOps"
+        },
+        ";Everyone": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Everyone"
+        },
+        ";Philosophy": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Philosophy"
+        },
+        "Mikayla": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": "Mikayla"
+        }
+      },
+      "acct_name": "Mikayla",
+      "acct_cred_points": 1,
+      "acct_debt_points": 1
+    },
+    "Norberto": {
+      "_memberships": {
+        ";Everyone": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Everyone"
+        },
+        ";MerVista Apt": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";MerVista Apt"
+        },
+        "Norberto": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": "Norberto"
+        }
+      },
+      "acct_name": "Norberto",
+      "acct_cred_points": 1,
+      "acct_debt_points": 1
+    },
+    "Perrison": {
+      "_memberships": {
+        ";appreciates US DOLLAR": {
+          "group_cred_points": 5,
+          "group_debt_points": 1,
+          "group_title": ";appreciates US DOLLAR"
+        },
+        ";Everyone": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Everyone"
+        },
+        ";Friends": {
+          "group_cred_points": 6.4,
+          "group_debt_points": 1,
+          "group_title": ";Friends"
+        },
+        "Perrison": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": "Perrison"
+        }
+      },
+      "acct_name": "Perrison",
+      "acct_cred_points": 1,
+      "acct_debt_points": 1
+    },
+    "Philipa": {
+      "_memberships": {
+        ";Climate Death": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Climate Death"
+        },
+        ";Everyone": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Everyone"
+        },
+        ";Philosophy": {
+          "group_cred_points": 52,
+          "group_debt_points": 1,
+          "group_title": ";Philosophy"
+        },
+        "Philipa": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": "Philipa"
+        }
+      },
+      "acct_name": "Philipa",
+      "acct_cred_points": 1,
+      "acct_debt_points": 1
+    },
+    "Prashant": {
+      "_memberships": {
+        ";appreciates US DOLLAR": {
+          "group_cred_points": 2,
+          "group_debt_points": 1,
+          "group_title": ";appreciates US DOLLAR"
+        },
+        ";Everyone": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Everyone"
+        },
+        "Prashant": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": "Prashant"
+        }
+      },
+      "acct_name": "Prashant",
+      "acct_cred_points": 1,
+      "acct_debt_points": 1
+    },
+    "Renee Elise Goldsberry": {
+      "_memberships": {
+        ";appreciates US DOLLAR": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";appreciates US DOLLAR"
+        },
+        ";Climate Death": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Climate Death"
+        },
+        ";Everyone": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Everyone"
+        },
+        ";Friends": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Friends"
+        },
+        ";hurt by us dollar": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";hurt by us dollar"
+        },
+        ";People who identify by UTEP": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";People who identify by UTEP"
+        },
+        ";Philosophy": {
+          "group_cred_points": 3,
+          "group_debt_points": 1,
+          "group_title": ";Philosophy"
+        },
+        ";SHOW ME2": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";SHOW ME2"
+        },
+        "Renee Elise Goldsberry": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": "Renee Elise Goldsberry"
+        }
+      },
+      "acct_name": "Renee Elise Goldsberry",
+      "acct_cred_points": 1,
+      "acct_debt_points": 1
+    },
+    "Sam zamora": {
+      "_memberships": {
+        ";ACME DevOps": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";ACME DevOps"
+        },
+        ";ACME General": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";ACME General"
+        },
+        ";Everyone": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Everyone"
+        },
+        "Sam zamora": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": "Sam zamora"
+        }
+      },
+      "acct_name": "Sam zamora",
+      "acct_cred_points": 1,
+      "acct_debt_points": 1
+    },
+    "Shadwell Harris": {
+      "_memberships": {
+        ";ACME DevOps": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";ACME DevOps"
+        },
+        ";Everyone": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Everyone"
+        },
+        "Shadwell Harris": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": "Shadwell Harris"
+        }
+      },
+      "acct_name": "Shadwell Harris",
+      "acct_cred_points": 1,
+      "acct_debt_points": 1
+    },
+    "Thomas OSU": {
+      "_memberships": {
+        ";Climate Death": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Climate Death"
+        },
+        ";Everyone": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Everyone"
+        },
+        "Thomas OSU": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": "Thomas OSU"
+        }
+      },
+      "acct_name": "Thomas OSU",
+      "acct_cred_points": 1,
+      "acct_debt_points": 1
+    },
+    "Travis Fox": {
+      "_memberships": {
+        ";Everyone": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Everyone"
+        },
+        ";Family": {
+          "group_cred_points": 6.35,
+          "group_debt_points": 1,
+          "group_title": ";Family"
+        },
+        "Travis Fox": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": "Travis Fox"
+        }
+      },
+      "acct_name": "Travis Fox",
+      "acct_cred_points": 1,
+      "acct_debt_points": 1
+    },
+    "WIlliam Wellace": {
+      "_memberships": {
+        ";ACME DevOps": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";ACME DevOps"
+        },
+        ";Everyone": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": ";Everyone"
+        },
+        "WIlliam Wellace": {
+          "group_cred_points": 1,
+          "group_debt_points": 1,
+          "group_title": "WIlliam Wellace"
+        }
+      },
+      "acct_name": "WIlliam Wellace",
+      "acct_cred_points": 1,
+      "acct_debt_points": 1
+    }
+  },
+  "knot": ";",
+  "planroot": {
+    "_kids": {
+      "Aaron Donald objects effected by him": {
+        "_is_expanded": false,
+        "_kids": {
+          "interesting": {
+            "_uid": 262,
+            "plan_label": "interesting",
+            "mass": 1
+          },
+          "not interesting": {
+            "_uid": 263,
+            "plan_label": "not interesting",
+            "mass": 1
+          }
+        },
+        "_uid": 261,
+        "plan_label": "Aaron Donald objects effected by him",
+        "mass": 1
+      },
+      "ACME": {
+        "_is_expanded": false,
+        "_kids": {
+          "ACME Employee Responsiblities": {
+            "_is_expanded": false,
+            "_kids": {
+              "Abuse Deterrence and Reporting guildlines": {
+                "_kids": {
+                  "Accomplish Fall 2021 traaining": {
+                    "_uid": 116,
+                    "plan_label": "Accomplish Fall 2021 traaining",
+                    "mass": 1,
+                    "task": true,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;x;Sept 4th 2023 9am": {
+                            "pnigh": 1064350680.0,
+                            "popen": 1064350680.0,
+                            "pstate": ";A;time;gregtime;x;Sept 4th 2023 9am"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  }
+                },
+                "_uid": 106,
+                "plan_label": "Abuse Deterrence and Reporting guildlines",
+                "mass": 1
+              },
+              "Know ACME Staff  and Safety #2 guildlines": {
+                "_kids": {
+                  "Accomplish Fall 2021 traaining": {
+                    "_uid": 115,
+                    "plan_label": "Accomplish Fall 2021 traaining",
+                    "mass": 1,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;x;Sept 4th 2023 9am": {
+                            "pnigh": 1064350680.0,
+                            "popen": 1064350680.0,
+                            "pstate": ";A;time;gregtime;x;Sept 4th 2023 9am"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  }
+                },
+                "_uid": 105,
+                "plan_label": "Know ACME Staff  and Safety #2 guildlines",
+                "mass": 1
+              },
+              "Know Adult Sexual Misconduct guildlines": {
+                "_kids": {
+                  "Accomplish Fall 2021 traaining": {
+                    "_uid": 118,
+                    "plan_label": "Accomplish Fall 2021 traaining",
+                    "mass": 1,
+                    "task": true,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;x;Sept 4th 2023 9am": {
+                            "pnigh": 1064350680.0,
+                            "popen": 1064350680.0,
+                            "pstate": ";A;time;gregtime;x;Sept 4th 2023 9am"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  }
+                },
+                "_uid": 108,
+                "plan_label": "Know Adult Sexual Misconduct guildlines",
+                "mass": 1
+              },
+              "Know Employee Intruction manuel.": {
+                "_uid": 123,
+                "plan_label": "Know Employee Intruction manuel.",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;x2;Sept 4th 2023 9am": {
+                        "pnigh": 1064350680.0,
+                        "popen": 1064350680.0,
+                        "pstate": ";A;time;gregtime;x2;Sept 4th 2023 9am"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "Know Identifying and Supporting Houseless Youth guildlines": {
+                "_kids": {
+                  "Accomplish Fall 2021 traaining": {
+                    "_uid": 119,
+                    "plan_label": "Accomplish Fall 2021 traaining",
+                    "mass": 1,
+                    "task": true,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;x;Sept 4th 2023 9am": {
+                            "pnigh": 1064350680.0,
+                            "popen": 1064350680.0,
+                            "pstate": ";A;time;gregtime;x;Sept 4th 2023 9am"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  }
+                },
+                "_uid": 109,
+                "plan_label": "Know Identifying and Supporting Houseless Youth guildlines",
+                "mass": 1
+              },
+              "Know Information Security Awareness guildlines": {
+                "_kids": {
+                  "Accomplish Fall 2021 traaining": {
+                    "_uid": 121,
+                    "plan_label": "Accomplish Fall 2021 traaining",
+                    "mass": 1,
+                    "task": true,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;x;Sept 4th 2023 9am": {
+                            "pnigh": 1064350680.0,
+                            "popen": 1064350680.0,
+                            "pstate": ";A;time;gregtime;x;Sept 4th 2023 9am"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  }
+                },
+                "_uid": 111,
+                "plan_label": "Know Information Security Awareness guildlines",
+                "mass": 1
+              },
+              "Know Interbody retaliation guildlines": {
+                "_kids": {
+                  "Accomplish Fall 2021 traaining": {
+                    "_uid": 117,
+                    "plan_label": "Accomplish Fall 2021 traaining",
+                    "mass": 1,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;x;Sept 4th 2023 9am": {
+                            "pnigh": 1064350680.0,
+                            "popen": 1064350680.0,
+                            "pstate": ";A;time;gregtime;x;Sept 4th 2023 9am"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  }
+                },
+                "_uid": 107,
+                "plan_label": "Know Interbody retaliation guildlines",
+                "mass": 1
+              },
+              "know OSHA COVID-19 Rick Reduction guildlines": {
+                "_kids": {
+                  "Accomplish Fall 2021 traaining": {
+                    "_uid": 120,
+                    "plan_label": "Accomplish Fall 2021 traaining",
+                    "mass": 1,
+                    "task": true,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;x;Sept 4th 2023 9am": {
+                            "pnigh": 1064350680.0,
+                            "popen": 1064350680.0,
+                            "pstate": ";A;time;gregtime;x;Sept 4th 2023 9am"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  }
+                },
+                "_uid": 110,
+                "plan_label": "know OSHA COVID-19 Rick Reduction guildlines",
+                "mass": 1
+              },
+              "Rick Management and Hazard Analysis": {
+                "_kids": {
+                  "Accomplish Fall 2021 traaining": {
+                    "_uid": 122,
+                    "plan_label": "Accomplish Fall 2021 traaining",
+                    "mass": 1,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;x;Sept 4th 2023 9am": {
+                            "pnigh": 1064350680.0,
+                            "popen": 1064350680.0,
+                            "pstate": ";A;time;gregtime;x;Sept 4th 2023 9am"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  }
+                },
+                "_uid": 112,
+                "plan_label": "Rick Management and Hazard Analysis",
+                "mass": 1
+              }
+            },
+            "_uid": 102,
+            "plan_label": "ACME Employee Responsiblities",
+            "mass": 1
+          },
+          "IT DEPT": {
+            "_is_expanded": false,
+            "_kids": {
+              "IT DEPT off-hrs responsiblities": {
+                "_kids": {
+                  "check ETLs ran correctly": {
+                    "_kids": {
+                      "check emails": {
+                        "_uid": 138,
+                        "plan_label": "check emails",
+                        "mass": 1,
+                        "task": true,
+                        "reasonunits": {
+                          "A;time;gregtime;": {
+                            "premises": {
+                              "A;time;gregtime;day": {
+                                "pdivisor": 1440,
+                                "pnigh": 360,
+                                "popen": 360,
+                                "pstate": ";A;time;gregtime;day"
+                              }
+                            },
+                            "rcontext": ";A;time;gregtime;"
+                          }
+                        }
+                      },
+                      "check mechanisms": {
+                        "_kids": {
+                          "MECHANISM1": {
+                            "_uid": 170,
+                            "plan_label": "MECHANISM1",
+                            "mass": 1
+                          },
+                          "MECHANISM2": {
+                            "_uid": 171,
+                            "plan_label": "MECHANISM2",
+                            "mass": 1
+                          },
+                          "MECHANISM3": {
+                            "_uid": 172,
+                            "plan_label": "MECHANISM3",
+                            "mass": 1
+                          },
+                          "MECHANISM4": {
+                            "_uid": 173,
+                            "plan_label": "MECHANISM4",
+                            "mass": 1
+                          }
+                        },
+                        "_uid": 139,
+                        "plan_label": "check mechanisms",
+                        "mass": 1,
+                        "task": true,
+                        "reasonunits": {
+                          "A;time;gregtime;": {
+                            "premises": {
+                              "A;time;gregtime;day": {
+                                "pdivisor": 1440,
+                                "pnigh": 360,
+                                "popen": 360,
+                                "pstate": ";A;time;gregtime;day"
+                              }
+                            },
+                            "rcontext": ";A;time;gregtime;"
+                          }
+                        }
+                      }
+                    },
+                    "_uid": 137,
+                    "plan_label": "check ETLs ran correctly",
+                    "mass": 1,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;day": {
+                            "pdivisor": 1440,
+                            "pnigh": 360,
+                            "popen": 360,
+                            "pstate": ";A;time;gregtime;day"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  },
+                  "dress to slightly impress": {
+                    "_uid": 158,
+                    "plan_label": "dress to slightly impress",
+                    "mass": 1,
+                    "task": true,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;day": {
+                            "pdivisor": 1440,
+                            "pnigh": 450,
+                            "popen": 450,
+                            "pstate": ";A;time;gregtime;day"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  },
+                  "go to employment": {
+                    "_uid": 231,
+                    "plan_label": "go to employment",
+                    "mass": 1,
+                    "task": true,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;day": {
+                            "pdivisor": 1440,
+                            "pnigh": 525,
+                            "popen": 525,
+                            "pstate": ";A;time;gregtime;day"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  }
+                },
+                "_uid": 136,
+                "plan_label": "IT DEPT off-hrs responsiblities",
+                "mass": 1,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;day": {
+                        "pdivisor": 1440,
+                        "pnigh": 360,
+                        "popen": 360,
+                        "pstate": ";A;time;gregtime;day"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "IT DEPT regular hrs responsiblities": {
+                "_kids": {
+                  "Add to Azure DevOps": {
+                    "_uid": 156,
+                    "plan_label": "Add to Azure DevOps",
+                    "mass": 1,
+                    "task": true,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;day": {
+                            "pdivisor": 1440,
+                            "pnigh": 540,
+                            "popen": 540,
+                            "pstate": ";A;time;gregtime;day"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  },
+                  "consider management perspective": {
+                    "_uid": 155,
+                    "plan_label": "consider management perspective",
+                    "mass": 1,
+                    "task": true,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;day": {
+                            "pdivisor": 1440,
+                            "pnigh": 540,
+                            "popen": 540,
+                            "pstate": ";A;time;gregtime;day"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  },
+                  "Datawarehouse": {
+                    "_kids": {
+                      "Datawarehouse Expertise acquisition": {
+                        "_uid": 142,
+                        "plan_label": "Datawarehouse Expertise acquisition",
+                        "mass": 1,
+                        "task": true,
+                        "reasonunits": {
+                          "A;time;gregtime;": {
+                            "premises": {
+                              "A;time;gregtime;day": {
+                                "pdivisor": 1440,
+                                "pnigh": 540,
+                                "popen": 540,
+                                "pstate": ";A;time;gregtime;day"
+                              }
+                            },
+                            "rcontext": ";A;time;gregtime;"
+                          }
+                        }
+                      },
+                      "dev quantification script \"T2R8\"": {
+                        "_kids": {
+                          "MECHANISM1": {
+                            "_uid": 175,
+                            "plan_label": "MECHANISM1",
+                            "mass": 1
+                          },
+                          "MECHANISM2": {
+                            "_uid": 176,
+                            "plan_label": "MECHANISM2",
+                            "mass": 1
+                          },
+                          "MECHANISM4D": {
+                            "_uid": 177,
+                            "plan_label": "MECHANISM4D",
+                            "mass": 1
+                          },
+                          "MECHANISM4DD": {
+                            "_uid": 174,
+                            "plan_label": "MECHANISM4DD",
+                            "mass": 1
+                          }
+                        },
+                        "_uid": 157,
+                        "plan_label": "dev quantification script \"T2R8\"",
+                        "mass": 1,
+                        "task": true,
+                        "reasonunits": {
+                          "A;time;gregtime;": {
+                            "premises": {
+                              "A;time;gregtime;day": {
+                                "pdivisor": 1440,
+                                "pnigh": 480,
+                                "popen": 480,
+                                "pstate": ";A;time;gregtime;day"
+                              }
+                            },
+                            "rcontext": ";A;time;gregtime;"
+                          }
+                        }
+                      },
+                      "go to daily meeting ": {
+                        "_uid": 232,
+                        "plan_label": "go to daily meeting ",
+                        "mass": 1,
+                        "task": true,
+                        "reasonunits": {
+                          "A;time;gregtime;": {
+                            "premises": {
+                              "A;time;gregtime;day": {
+                                "pdivisor": 1440,
+                                "pnigh": 540,
+                                "popen": 540,
+                                "pstate": ";A;time;gregtime;day"
+                              }
+                            },
+                            "rcontext": ";A;time;gregtime;"
+                          }
+                        }
+                      }
+                    },
+                    "_uid": 135,
+                    "plan_label": "Datawarehouse",
+                    "mass": 1
+                  },
+                  "IT DEPT general": {
+                    "_uid": 141,
+                    "plan_label": "IT DEPT general",
+                    "mass": 1,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;day": {
+                            "pdivisor": 1440,
+                            "pnigh": 1020,
+                            "popen": 1020,
+                            "pstate": ";A;time;gregtime;day"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  },
+                  "Keep track of Chatroom conversations": {
+                    "_uid": 151,
+                    "plan_label": "Keep track of Chatroom conversations",
+                    "mass": 1,
+                    "task": true,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;day": {
+                            "pdivisor": 1440,
+                            "pnigh": 540,
+                            "popen": 540,
+                            "pstate": ";A;time;gregtime;day"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  },
+                  "SQLIte": {
+                    "_kids": {
+                      "check for access": {
+                        "_uid": 143,
+                        "plan_label": "check for access",
+                        "mass": 1,
+                        "reasonunits": {
+                          "A;time;gregtime;": {
+                            "premises": {
+                              "A;time;gregtime;day": {
+                                "pdivisor": 1440,
+                                "pnigh": 540,
+                                "popen": 540,
+                                "pstate": ";A;time;gregtime;day"
+                              }
+                            },
+                            "rcontext": ";A;time;gregtime;"
+                          }
+                        }
+                      }
+                    },
+                    "_uid": 140,
+                    "plan_label": "SQLIte",
+                    "mass": 1,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;day": {
+                            "pdivisor": 1440,
+                            "pnigh": 540,
+                            "popen": 540,
+                            "pstate": ";A;time;gregtime;day"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  }
+                },
+                "_uid": 133,
+                "plan_label": "IT DEPT regular hrs responsiblities",
+                "mass": 1,
+                "morph": false,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;day": {
+                        "pdivisor": 1440.0,
+                        "pnigh": 1080.0,
+                        "popen": 540.0,
+                        "pstate": ";A;time;gregtime;day"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              }
+            },
+            "_uid": 101,
+            "plan_label": "IT DEPT",
+            "mass": 1,
+            "reasonunits": {
+              "A;time;gregtime;": {
+                "premises": {
+                  "A;time;gregtime;day": {
+                    "pdivisor": 1440,
+                    "pnigh": 360,
+                    "popen": 360,
+                    "pstate": ";A;time;gregtime;day"
+                  }
+                },
+                "rcontext": ";A;time;gregtime;"
+              }
+            }
+          }
+        },
+        "_uid": 100,
+        "plan_label": "ACME",
+        "mass": 1
+      },
+      "Asset management": {
+        "_is_expanded": false,
+        "_kids": {
+          "American sovereignty": {
+            "_kids": {
+              "portland sovereignty": {
+                "_kids": {
+                  "downtown": {
+                    "_kids": {
+                      "flats": {
+                        "_kids": {
+                          "be reponsible for rent": {
+                            "_uid": 209,
+                            "plan_label": "be reponsible for rent",
+                            "mass": 1,
+                            "reasonunits": {
+                              "A;Nation-States;": {
+                                "premises": {
+                                  "A;Nation-States;USA;Portland OR;Downtown;Flats;workspace;": {
+                                    "pstate": ";A;Nation-States;USA;Portland OR;Downtown;Flats;workspace;"
+                                  }
+                                },
+                                "rcontext": ";A;Nation-States;"
+                              }
+                            }
+                          },
+                          "enjoy silent time": {
+                            "_kids": {
+                              "maybe watch a video": {
+                                "_uid": 218,
+                                "plan_label": "maybe watch a video",
+                                "mass": 1,
+                                "reasonunits": {
+                                  "A;Interweb;": {
+                                    "premises": {
+                                      "A;Interweb,YahooVideo": {
+                                        "pstate": ";A;Interweb,YahooVideo"
+                                      }
+                                    },
+                                    "rcontext": ";A;Interweb;"
+                                  }
+                                }
+                              }
+                            },
+                            "_uid": 214,
+                            "plan_label": "enjoy silent time",
+                            "mass": 1,
+                            "reasonunits": {
+                              "A;Nation-States;": {
+                                "premises": {
+                                  "A;Nation-States;USA;Portland OR;Downtown;Flats;10th floor gaarden;": {
+                                    "pstate": ";A;Nation-States;USA;Portland OR;Downtown;Flats;10th floor gaarden;"
+                                  }
+                                },
+                                "rcontext": ";A;Nation-States;"
+                              }
+                            }
+                          },
+                          "flat": {
+                            "_uid": 211,
+                            "plan_label": "flat",
+                            "mass": 1,
+                            "reasonunits": {
+                              "A;Nation-States;": {
+                                "premises": {
+                                  "A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450": {
+                                    "pstate": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"
+                                  }
+                                },
+                                "rcontext": ";A;Nation-States;"
+                              }
+                            }
+                          },
+                          "gym time": {
+                            "_uid": 215,
+                            "plan_label": "gym time",
+                            "mass": 1,
+                            "reasonunits": {
+                              "A;Moods;": {
+                                "premises": {
+                                  "A;Moods;hungry;": {
+                                    "pstate": ";A;Moods;hungry;"
+                                  }
+                                },
+                                "rcontext": ";A;Moods;"
+                              }
+                            }
+                          }
+                        },
+                        "_uid": 208,
+                        "plan_label": "flats",
+                        "mass": 1,
+                        "reasonunits": {
+                          "A;Nation-States;": {
+                            "premises": {
+                              "A;Nation-States;USA;Portland OR;Downtown;Flats": {
+                                "pstate": ";A;Nation-States;USA;Portland OR;Downtown;Flats"
+                              }
+                            },
+                            "rcontext": ";A;Nation-States;"
+                          }
+                        }
+                      },
+                      "Local college": {
+                        "_kids": {
+                          "browsing": {
+                            "_uid": 217,
+                            "plan_label": "browsing",
+                            "mass": 1,
+                            "reasonunits": {
+                              "A;Nation-States;": {
+                                "premises": {
+                                  "A;Nation-States;USA;Portland OR;Downtown;PSU;library": {
+                                    "pstate": ";A;Nation-States;USA;Portland OR;Downtown;PSU;library"
+                                  }
+                                },
+                                "rcontext": ";A;Nation-States;"
+                              }
+                            }
+                          },
+                          "picnic": {
+                            "_uid": 216,
+                            "plan_label": "picnic",
+                            "mass": 1,
+                            "reasonunits": {
+                              "A;Seasons;": {
+                                "premises": {
+                                  "A;Seasons;Summer;": {
+                                    "pstate": ";A;Seasons;Summer;"
+                                  }
+                                },
+                                "rcontext": ";A;Seasons;"
+                              }
+                            }
+                          },
+                          "street soccer": {
+                            "_uid": 213,
+                            "plan_label": "street soccer",
+                            "mass": 1,
+                            "reasonunits": {
+                              "A;Nation-States;": {
+                                "premises": {
+                                  "A;Nation-States;USA;Portland OR;Downtown;PSU;Stott Field": {
+                                    "pstate": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Stott Field"
+                                  }
+                                },
+                                "rcontext": ";A;Nation-States;"
+                              }
+                            }
+                          },
+                          "swimming": {
+                            "_uid": 212,
+                            "plan_label": "swimming",
+                            "mass": 1,
+                            "reasonunits": {
+                              "A;Nation-States;": {
+                                "premises": {
+                                  "A;Nation-States;USA;Portland OR;Downtown;PSU;Pool": {
+                                    "pstate": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Pool"
+                                  }
+                                },
+                                "rcontext": ";A;Nation-States;"
+                              }
+                            }
+                          }
+                        },
+                        "_uid": 210,
+                        "plan_label": "Local college",
+                        "mass": 1,
+                        "reasonunits": {
+                          "A;Nation-States;": {
+                            "premises": {
+                              "A;Nation-States;USA;Portland OR;Downtown;PSU": {
+                                "pstate": ";A;Nation-States;USA;Portland OR;Downtown;PSU"
+                              }
+                            },
+                            "rcontext": ";A;Nation-States;"
+                          }
+                        }
+                      }
+                    },
+                    "_uid": 207,
+                    "plan_label": "downtown",
+                    "mass": 1,
+                    "reasonunits": {
+                      "A;Nation-States;": {
+                        "premises": {
+                          "A;Nation-States;USA;Portland OR;Downtown": {
+                            "pstate": ";A;Nation-States;USA;Portland OR;Downtown"
+                          }
+                        },
+                        "rcontext": ";A;Nation-States;"
+                      }
+                    }
+                  }
+                },
+                "_uid": 206,
+                "plan_label": "portland sovereignty",
+                "mass": 1,
+                "reasonunits": {
+                  "A;Nation-States;": {
+                    "premises": {
+                      "A;Nation-States;USA;Portland OR": {
+                        "pstate": ";A;Nation-States;USA;Portland OR"
+                      }
+                    },
+                    "rcontext": ";A;Nation-States;"
+                  }
+                }
+              },
+              "texas sovereignty": {
+                "_uid": 205,
+                "plan_label": "texas sovereignty",
+                "mass": 1,
+                "reasonunits": {
+                  "A;Nation-States;": {
+                    "premises": {
+                      "A;Nation-States;USA;Texas": {
+                        "pstate": ";A;Nation-States;USA;Texas"
+                      }
+                    },
+                    "rcontext": ";A;Nation-States;"
+                  }
+                }
+              }
+            },
+            "_uid": 204,
+            "plan_label": "American sovereignty",
+            "mass": 1,
+            "reasonunits": {
+              "A;Nation-States;": {
+                "premises": {
+                  "A;Nation-States;USA": {
+                    "pstate": ";A;Nation-States;USA"
+                  }
+                },
+                "rcontext": ";A;Nation-States;"
+              }
+            }
+          },
+          "French sovereignty": {
+            "_uid": 203,
+            "plan_label": "French sovereignty",
+            "mass": 1,
+            "reasonunits": {
+              "A;Nation-States;": {
+                "premises": {
+                  "A;Nation-States;France2": {
+                    "pstate": ";A;Nation-States;France2"
+                  }
+                },
+                "rcontext": ";A;Nation-States;"
+              }
+            }
+          }
+        },
+        "_uid": 199,
+        "plan_label": "Asset management",
+        "mass": 1
+      },
+      "Better Stuff Proposal": {
+        "_is_expanded": false,
+        "_kids": {
+          "decrease carbon footprint": {
+            "_kids": {
+              "never fly a private G5": {
+                "plan_label": "never fly a private G5",
+                "mass": 1,
+                "morph": false,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pnigh": 1472657760,
+                        "popen": 0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              }
+            },
+            "plan_label": "decrease carbon footprint",
+            "mass": 1,
+            "morph": false
+          }
+        },
+        "plan_label": "Better Stuff Proposal",
+        "mass": 1,
+        "morph": false
+      },
+      "Bob Dylan Root": {
+        "_kids": {
+          "Aint me Babe": {
+            "_uid": 270,
+            "plan_label": "Aint me Babe",
+            "mass": 1
+          },
+          "tangled up in blue": {
+            "_uid": 271,
+            "plan_label": "tangled up in blue",
+            "mass": 1
+          }
+        },
+        "_uid": 269,
+        "plan_label": "Bob Dylan Root",
+        "mass": 1
+      },
+      "casa": {
+        "_is_expanded": false,
+        "_kids": {
+          "call Crazy pete to say hi": {
+            "_uid": 35,
+            "awardlinks": {
+              "Perrison": {
+                "awardee_title": "Perrison",
+                "give_force": 1.0,
+                "take_force": 1
+              }
+            },
+            "plan_label": "call Crazy pete to say hi",
+            "mass": 30,
+            "morph": false,
+            "task": true,
+            "reasonunits": {
+              "A;time;gregtime;": {
+                "premises": {
+                  "A;time;gregtime;": {
+                    "pdivisor": 10080.0,
+                    "pnigh": 480.0,
+                    "popen": 480.0,
+                    "pstate": ";A;time;gregtime;"
+                  }
+                },
+                "rcontext": ";A;time;gregtime;"
+              }
+            }
+          },
+          "check up on old family friends": {
+            "_uid": 222,
+            "plan_label": "check up on old family friends",
+            "mass": 1,
+            "reasonunits": {
+              "A;Moods;": {
+                "premises": {
+                  "A;Moods;Happy;Happy - angerish": {
+                    "pstate": ";A;Moods;Happy;Happy - angerish"
+                  }
+                },
+                "rcontext": ";A;Moods;"
+              }
+            }
+          },
+          "cleaning": {
+            "_kids": {
+              "check cat water": {
+                "_uid": 33,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "check cat water",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 10080.0,
+                        "pnigh": 3360.0,
+                        "popen": 3360.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "check humidifer": {
+                "_uid": 159,
+                "plan_label": "check humidifer",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 1440.0,
+                        "pnigh": 420.0,
+                        "popen": 420.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "clean baby seats": {
+                "_uid": 49,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "clean baby seats",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 60480.0,
+                        "pnigh": 660.0,
+                        "popen": 660.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "clean bathroom": {
+                "_uid": 65,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "clean bathroom",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 1440.0,
+                        "pnigh": 600.0,
+                        "popen": 600.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "clean cat poo": {
+                "_uid": 9,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "clean cat poo",
+                "mass": 1,
+                "morph": false,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 10080.0,
+                        "pnigh": 3420.0,
+                        "popen": 3420.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "clean humidifiers": {
+                "_uid": 55,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "clean humidifiers",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 10080.0,
+                        "pnigh": 3420.0,
+                        "popen": 3420.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "clean sheets couch blankets": {
+                "_uid": 41,
+                "awardlinks": {
+                  "Perrison": {
+                    "awardee_title": "Perrison",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "clean sheets couch blankets",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 30240.0,
+                        "pnigh": 3420.0,
+                        "popen": 3420.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "clean table": {
+                "_uid": 53,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "clean table",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 10080.0,
+                        "pnigh": 1200.0,
+                        "popen": 1200.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "deep clean play mat": {
+                "_uid": 71,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "deep clean play mat",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 40320.0,
+                        "pnigh": 3420.0,
+                        "popen": 3420.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "empty roomba": {
+                "_uid": 11,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "empty roomba",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 10080.0,
+                        "pnigh": 4800.0,
+                        "popen": 4800.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "empty roomba Friday": {
+                "_uid": 13,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "empty roomba Friday",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 10080.0,
+                        "pnigh": 9120.0,
+                        "popen": 9120.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "laundry basket status": {
+                "_kids": {
+                  "full": {
+                    "plan_label": "full",
+                    "mass": 1,
+                    "morph": false
+                  },
+                  "not full": {
+                    "plan_label": "not full",
+                    "mass": 1,
+                    "morph": false
+                  }
+                },
+                "plan_label": "laundry basket status",
+                "mass": 1,
+                "morph": false
+              },
+              "laundry monday": {
+                "_uid": 25,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "laundry monday",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;casa;cleaning;laundry basket status;": {
+                    "premises": {
+                      "A;casa;cleaning;laundry basket status;full": {
+                        "pstate": ";A;casa;cleaning;laundry basket status;full"
+                      }
+                    },
+                    "rcontext": ";A;casa;cleaning;laundry basket status;"
+                  },
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 10080.0,
+                        "pnigh": 3420.0,
+                        "popen": 3420.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "laundry saturday": {
+                "_uid": 29,
+                "awardlinks": {
+                  "Travis Fox": {
+                    "awardee_title": "Travis Fox",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "laundry saturday",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;casa;cleaning;laundry basket status;": {
+                    "premises": {
+                      "A;casa;cleaning;laundry basket status;full": {
+                        "pstate": ";A;casa;cleaning;laundry basket status;full"
+                      }
+                    },
+                    "rcontext": ";A;casa;cleaning;laundry basket status;"
+                  },
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 10080.0,
+                        "pnigh": 420.0,
+                        "popen": 420.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "laundry thursday": {
+                "plan_label": "laundry thursday",
+                "mass": 1,
+                "morph": false,
+                "task": true,
+                "reasonunits": {
+                  "A;casa;cleaning;laundry basket status;": {
+                    "premises": {
+                      "A;casa;cleaning;laundry basket status;full": {
+                        "pstate": ";A;casa;cleaning;laundry basket status;full"
+                      }
+                    },
+                    "rcontext": ";A;casa;cleaning;laundry basket status;"
+                  },
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 10080.0,
+                        "pnigh": 7740.0,
+                        "popen": 7740.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "laundry wednesday": {
+                "_uid": 27,
+                "awardlinks": {
+                  "America": {
+                    "awardee_title": "America",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "laundry wednesday",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;casa;cleaning;laundry basket status;": {
+                    "premises": {
+                      "A;casa;cleaning;laundry basket status;full": {
+                        "pstate": ";A;casa;cleaning;laundry basket status;full"
+                      }
+                    },
+                    "rcontext": ";A;casa;cleaning;laundry basket status;"
+                  },
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 10080.0,
+                        "pnigh": 6300.0,
+                        "popen": 6300.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "morning cookery clean-up": {
+                "_uid": 150,
+                "plan_label": "morning cookery clean-up",
+                "mass": 1,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 1440.0,
+                        "pnigh": 480.0,
+                        "popen": 480.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "prepare_bed clean bedroom": {
+                "_uid": 63,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "prepare_bed clean bedroom",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 1440.0,
+                        "pnigh": 480.0,
+                        "popen": 480.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "roomba bedroom": {
+                "_uid": 15,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "roomba bedroom",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 10080.0,
+                        "pnigh": 4740.0,
+                        "popen": 4740.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "roomba bedroom Friday": {
+                "_uid": 17,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "roomba bedroom Friday",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 10080.0,
+                        "pnigh": 9060.0,
+                        "popen": 9060.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "roomba living area": {
+                "_uid": 19,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "roomba living area",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 10080.0,
+                        "pnigh": 3420.0,
+                        "popen": 3420.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "roomba living area thur": {
+                "_uid": 21,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "roomba living area thur",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 10080.0,
+                        "pnigh": 7620.0,
+                        "popen": 7620.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "roomba maintenance": {
+                "_uid": 51,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "roomba maintenance",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 10080.0,
+                        "pnigh": 3420.0,
+                        "popen": 3420.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "wipe down play mat2": {
+                "_uid": 69,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "wipe down play mat2",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 10080.0,
+                        "pnigh": 3420.0,
+                        "popen": 3420.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              }
+            },
+            "_uid": 146,
+            "plan_label": "cleaning",
+            "mass": 1,
+            "reasonunits": {
+              "A;Nation-States;": {
+                "premises": {
+                  "A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450": {
+                    "pstate": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"
+                  }
+                },
+                "rcontext": ";A;Nation-States;"
+              }
+            }
+          },
+          "exercise": {
+            "_is_expanded": false,
+            "_kids": {
+              "5 push-ups": {
+                "_uid": 5,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "5 push-ups",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;day": {
+                        "pdivisor": 1440,
+                        "pnigh": 420,
+                        "popen": 420,
+                        "pstate": ";A;time;gregtime;day"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "check protein for wk is adequate": {
+                "_uid": 61,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "check protein for wk is adequate",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 1440.0,
+                        "pnigh": 420.0,
+                        "popen": 420.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "clean ears": {
+                "_uid": 79,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "clean ears",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 80640.0,
+                        "pnigh": 4860.0,
+                        "popen": 4860.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "clip body nails": {
+                "_uid": 77,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "clip body nails",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 10080.0,
+                        "pnigh": 3420.0,
+                        "popen": 3420.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "cook veggies every morning": {
+                "_uid": 59,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "cook veggies every morning",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 1440.0,
+                        "pnigh": 420.0,
+                        "popen": 420.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "evening multivitamin": {
+                "_uid": 230,
+                "plan_label": "evening multivitamin",
+                "mass": 1,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 1440.0,
+                        "pnigh": 1080.0,
+                        "popen": 1080.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "flossing teeth": {
+                "_uid": 47,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "flossing teeth",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 80640.0,
+                        "pnigh": 3420.0,
+                        "popen": 3420.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "mass traaining": {
+                "_kids": {
+                  "bike or stuff": {
+                    "_uid": 92,
+                    "awardlinks": {
+                      ";Family": {
+                        "awardee_title": ";Family",
+                        "give_force": 1.0,
+                        "take_force": 1
+                      }
+                    },
+                    "plan_label": "bike or stuff",
+                    "mass": 1,
+                    "task": true,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;": {
+                            "pdivisor": 10080.0,
+                            "pnigh": 9600.0,
+                            "popen": 9600.0,
+                            "pstate": ";A;time;gregtime;"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  },
+                  "chest and arms (mon)": {
+                    "_kids": {
+                      "bi and triceps exercises": {
+                        "_uid": 130,
+                        "plan_label": "bi and triceps exercises",
+                        "mass": 1
+                      },
+                      "chest  exercises": {
+                        "_uid": 129,
+                        "plan_label": "chest  exercises",
+                        "mass": 1
+                      }
+                    },
+                    "_uid": 84,
+                    "awardlinks": {
+                      ";Family": {
+                        "awardee_title": ";Family",
+                        "give_force": 1.0,
+                        "take_force": 1
+                      }
+                    },
+                    "plan_label": "chest and arms (mon)",
+                    "mass": 1,
+                    "task": true,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;": {
+                            "pdivisor": 10080.0,
+                            "pnigh": 3360.0,
+                            "popen": 3360.0,
+                            "pstate": ";A;time;gregtime;"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  },
+                  "core and squats": {
+                    "_uid": 179,
+                    "plan_label": "core and squats",
+                    "mass": 1,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;": {
+                            "pdivisor": 10080.0,
+                            "pnigh": 6242.0,
+                            "popen": 6242.0,
+                            "pstate": ";A;time;gregtime;"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  },
+                  "core lower back": {
+                    "_uid": 86,
+                    "awardlinks": {
+                      ";Family": {
+                        "awardee_title": ";Family",
+                        "give_force": 1.0,
+                        "take_force": 1
+                      }
+                    },
+                    "plan_label": "core lower back",
+                    "mass": 1,
+                    "task": true,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;": {
+                            "pdivisor": 10080.0,
+                            "pnigh": 3420.0,
+                            "popen": 3420.0,
+                            "pstate": ";A;time;gregtime;"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  },
+                  "rest": {
+                    "_uid": 94,
+                    "awardlinks": {
+                      ";Family": {
+                        "awardee_title": ";Family",
+                        "give_force": 1.0,
+                        "take_force": 1
+                      }
+                    },
+                    "plan_label": "rest",
+                    "mass": 1,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;": {
+                            "pdivisor": 10080.0,
+                            "pnigh": 7200.0,
+                            "popen": 7200.0,
+                            "pstate": ";A;time;gregtime;"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  },
+                  "shoulders and upper back": {
+                    "_kids": {
+                      "shoulder exercises": {
+                        "_uid": 131,
+                        "plan_label": "shoulder exercises",
+                        "mass": 1,
+                        "morph": false,
+                        "task": true
+                      },
+                      "upper back exercises": {
+                        "_uid": 132,
+                        "plan_label": "upper back exercises",
+                        "mass": 1,
+                        "morph": false,
+                        "task": true
+                      }
+                    },
+                    "_uid": 82,
+                    "awardlinks": {
+                      ";Family": {
+                        "awardee_title": ";Family",
+                        "give_force": 1.0,
+                        "take_force": 1
+                      }
+                    },
+                    "plan_label": "shoulders and upper back",
+                    "mass": 1,
+                    "task": true,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;": {
+                            "pdivisor": 10080.0,
+                            "pnigh": 4800.0,
+                            "popen": 4800.0,
+                            "pstate": ";A;time;gregtime;"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  },
+                  "squats hamstrings and calves": {
+                    "_uid": 90,
+                    "awardlinks": {
+                      ";Family": {
+                        "awardee_title": ";Family",
+                        "give_force": 1.0,
+                        "take_force": 1
+                      }
+                    },
+                    "plan_label": "squats hamstrings and calves",
+                    "mass": 1,
+                    "task": true,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;": {
+                            "pdivisor": 10080.0,
+                            "pnigh": 6240.0,
+                            "popen": 6240.0,
+                            "pstate": ";A;time;gregtime;"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  }
+                },
+                "_uid": 81,
+                "plan_label": "mass traaining",
+                "mass": 1
+              },
+              "morning multivitamin": {
+                "_uid": 3,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "morning multivitamin",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 1440.0,
+                        "pnigh": 420.0,
+                        "popen": 420.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "shampooing": {
+                "_uid": 39,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "shampooing",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 10080.0,
+                        "pnigh": 3420.0,
+                        "popen": 3420.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "straight back for 45 secs": {
+                "_uid": 57,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "straight back for 45 secs",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 1440.0,
+                        "pnigh": 420.0,
+                        "popen": 420.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "stretch": {
+                "_is_expanded": false,
+                "_kids": {
+                  "back": {
+                    "plan_label": "back",
+                    "mass": 30,
+                    "morph": false,
+                    "task": true,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;": {
+                            "pdivisor": 10080.0,
+                            "pnigh": 9180.0,
+                            "popen": 9180.0,
+                            "pstate": ";A;time;gregtime;"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  },
+                  "legs": {
+                    "plan_label": "legs",
+                    "mass": 30,
+                    "morph": false,
+                    "task": true,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;": {
+                            "pdivisor": 10080.0,
+                            "pnigh": 9180.0,
+                            "popen": 9180.0,
+                            "pstate": ";A;time;gregtime;"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  },
+                  "waist": {
+                    "plan_label": "waist",
+                    "mass": 30,
+                    "morph": false,
+                    "task": true
+                  }
+                },
+                "plan_label": "stretch",
+                "mass": 30,
+                "morph": false,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 10080.0,
+                        "pnigh": 9180.0,
+                        "popen": 9180.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "trim beard": {
+                "_uid": 73,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "trim beard",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 10080.0,
+                        "pnigh": 3420.0,
+                        "popen": 3420.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              }
+            },
+            "_uid": 147,
+            "plan_label": "exercise",
+            "mass": 1
+          },
+          "Financial Ops": {
+            "_is_expanded": false,
+            "_kids": {
+              "be reponsible for rent": {
+                "_uid": 45,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "be reponsible for rent",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
+                        "pnigh": 1064041020.0,
+                        "popen": 1064041020.0,
+                        "pstate": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "be responsible for expenses card": {
+                "_uid": 31,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "be responsible for expenses card",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
+                        "pnigh": 1064041020.0,
+                        "popen": 1064041020.0,
+                        "pstate": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "be responsible for utilities": {
+                "_uid": 37,
+                "awardlinks": {
+                  "Perrison": {
+                    "awardee_title": "Perrison",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "be responsible for utilities",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
+                        "pnigh": 1064041020.0,
+                        "popen": 1064041020.0,
+                        "pstate": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "set aside a little bucks for fun the wk": {
+                "_uid": 75,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "set aside a little bucks for fun the wk",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
+                        "pnigh": 1064041020.0,
+                        "popen": 1064041020.0,
+                        "pstate": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              }
+            },
+            "_uid": 148,
+            "plan_label": "Financial Ops",
+            "mass": 1
+          },
+          "Housing": {
+            "_is_expanded": false,
+            "_kids": {
+              "Bike Garage": {
+                "_uid": 185,
+                "plan_label": "Bike Garage",
+                "mass": 1
+              },
+              "Bike Gym": {
+                "_uid": 184,
+                "plan_label": "Bike Gym",
+                "mass": 1
+              },
+              "Flat": {
+                "_kids": {
+                  "bathroom #2": {
+                    "_uid": 196,
+                    "plan_label": "bathroom #2",
+                    "mass": 1
+                  },
+                  "bedroom #1": {
+                    "_kids": {
+                      "big bathroom": {
+                        "_uid": 195,
+                        "plan_label": "big bathroom",
+                        "mass": 1
+                      },
+                      "closet": {
+                        "_uid": 194,
+                        "plan_label": "closet",
+                        "mass": 1
+                      }
+                    },
+                    "_uid": 191,
+                    "plan_label": "bedroom #1",
+                    "mass": 1
+                  },
+                  "bedroom #2": {
+                    "_kids": {
+                      "bed area": {
+                        "_kids": {
+                          "heater maintenance": {
+                            "_uid": 198,
+                            "awardlinks": {
+                              "Norberto": {
+                                "awardee_title": "Norberto",
+                                "give_force": 1.0,
+                                "take_force": 1
+                              }
+                            },
+                            "plan_label": "heater maintenance",
+                            "mass": 1
+                          }
+                        },
+                        "_uid": 197,
+                        "plan_label": "bed area",
+                        "mass": 1
+                      },
+                      "closet": {
+                        "_uid": 193,
+                        "plan_label": "closet",
+                        "mass": 1
+                      }
+                    },
+                    "_uid": 192,
+                    "plan_label": "bedroom #2",
+                    "mass": 1
+                  },
+                  "cookery": {
+                    "_uid": 189,
+                    "plan_label": "cookery",
+                    "mass": 1
+                  },
+                  "dining area": {
+                    "_uid": 190,
+                    "plan_label": "dining area",
+                    "mass": 1
+                  },
+                  "maintenance": {
+                    "_uid": 187,
+                    "plan_label": "maintenance",
+                    "mass": 1
+                  },
+                  "nursery": {
+                    "_uid": 188,
+                    "plan_label": "nursery",
+                    "mass": 1
+                  }
+                },
+                "_uid": 181,
+                "plan_label": "Flat",
+                "mass": 1
+              },
+              "Lifting Gym": {
+                "_uid": 183,
+                "plan_label": "Lifting Gym",
+                "mass": 1
+              },
+              "Playing in nurserys": {
+                "_uid": 186,
+                "plan_label": "Playing in nurserys",
+                "mass": 1
+              },
+              "Pool": {
+                "_uid": 182,
+                "plan_label": "Pool",
+                "mass": 1
+              }
+            },
+            "_uid": 180,
+            "awardlinks": {
+              ";MerVista Apt": {
+                "awardee_title": ";MerVista Apt",
+                "give_force": 1.0,
+                "take_force": 1
+              }
+            },
+            "plan_label": "Housing",
+            "mass": 1
+          },
+          "keep up with friends": {
+            "_uid": 220,
+            "plan_label": "keep up with friends",
+            "mass": 1,
+            "reasonunits": {
+              "A;Interweb;": {
+                "premises": {
+                  "A;Interweb,Faaceboook": {
+                    "pstate": ";A;Interweb,Faaceboook"
+                  }
+                },
+                "rcontext": ";A;Interweb;"
+              }
+            }
+          },
+          "responsible for kids": {
+            "_is_expanded": false,
+            "_kids": {
+              "clip oldest nails": {
+                "_uid": 23,
+                "awardlinks": {
+                  "America": {
+                    "awardee_title": "America",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "clip oldest nails",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;Nation-States;": {
+                    "premises": {
+                      "A;Nation-States;USA;Portland OR": {
+                        "pstate": ";A;Nation-States;USA;Portland OR"
+                      }
+                    },
+                    "rcontext": ";A;Nation-States;"
+                  },
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 10080.0,
+                        "pnigh": 5340.0,
+                        "popen": 5340.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "get rid of toy get new toy": {
+                "_uid": 43,
+                "awardlinks": {
+                  ";Family": {
+                    "awardee_title": ";Family",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "get rid of toy get new toy",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;Nation-States;": {
+                    "premises": {
+                      "A;Nation-States;USA;Portland OR": {
+                        "pstate": ";A;Nation-States;USA;Portland OR"
+                      }
+                    },
+                    "rcontext": ";A;Nation-States;"
+                  },
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 60480.0,
+                        "pnigh": 840.0,
+                        "popen": 840.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              }
+            },
+            "_uid": 144,
+            "plan_label": "responsible for kids",
+            "mass": 1,
+            "reasonunits": {
+              "A;Nation-States;": {
+                "premises": {
+                  "A;Nation-States;USA;Portland OR": {
+                    "pstate": ";A;Nation-States;USA;Portland OR"
+                  }
+                },
+                "rcontext": ";A;Nation-States;"
+              }
+            }
+          },
+          "say double hi to birds": {
+            "plan_label": "say double hi to birds",
+            "mass": 25,
+            "morph": false,
+            "task": true,
+            "reasonunits": {
+              "A;time;gregtime;": {
+                "premises": {
+                  "A;time;gregtime;day": {
+                    "pdivisor": 1440.0,
+                    "pnigh": 480.0,
+                    "popen": 480.0,
+                    "pstate": ";A;time;gregtime;day"
+                  }
+                },
+                "rcontext": ";A;time;gregtime;"
+              }
+            }
+          },
+          "say hi to birds": {
+            "_uid": 7,
+            "awardlinks": {
+              ";Family": {
+                "awardee_title": ";Family",
+                "give_force": 1.0,
+                "take_force": 1
+              }
+            },
+            "plan_label": "say hi to birds",
+            "mass": 1,
+            "task": true,
+            "reasonunits": {
+              "A;time;gregtime;": {
+                "premises": {
+                  "A;time;gregtime;": {
+                    "pdivisor": 1440.0,
+                    "pnigh": 480.0,
+                    "popen": 480.0,
+                    "pstate": ";A;time;gregtime;"
+                  }
+                },
+                "rcontext": ";A;time;gregtime;"
+              }
+            }
+          }
+        },
+        "_uid": 2,
+        "plan_label": "casa",
+        "mass": 20,
+        "morph": false
+      },
+      "D&B": {
+        "_is_expanded": false,
+        "_kids": {
+          "bens friends be desperate for of housing support": {
+            "_kids": {
+              "Ask Aaron monthly what I can do": {
+                "_uid": 160,
+                "awardlinks": {
+                  "Renee Elise Goldsberry": {
+                    "awardee_title": "Renee Elise Goldsberry",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "Ask Aaron monthly what I can do",
+                "mass": 1,
+                "reasonunits": {
+                  "A;Aaron Donald objects effected by him;": {
+                    "premises": {
+                      "A;Aaron Donald objects effected by him;interesting": {
+                        "pstate": ";A;Aaron Donald objects effected by him;interesting"
+                      }
+                    },
+                    "rcontext": ";A;Aaron Donald objects effected by him;"
+                  }
+                }
+              }
+            },
+            "_uid": 99,
+            "awardlinks": {
+              "Renee Elise Goldsberry": {
+                "awardee_title": "Renee Elise Goldsberry",
+                "give_force": 1.0,
+                "take_force": 1
+              }
+            },
+            "plan_label": "bens friends be desperate for of housing support",
+            "mass": 1,
+            "reasonunits": {
+              "A;Aaron Donald objects effected by him;": {
+                "premises": {
+                  "A;Aaron Donald objects effected by him;interesting": {
+                    "pstate": ";A;Aaron Donald objects effected by him;interesting"
+                  }
+                },
+                "rcontext": ";A;Aaron Donald objects effected by him;"
+              }
+            }
+          },
+          "develop D&B software": {
+            "_kids": {
+              "test program": {
+                "_uid": 178,
+                "plan_label": "test program",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;Aaron Donald objects effected by him;": {
+                    "premises": {
+                      "A;Aaron Donald objects effected by him;interesting": {
+                        "pstate": ";A;Aaron Donald objects effected by him;interesting"
+                      }
+                    },
+                    "rcontext": ";A;Aaron Donald objects effected by him;"
+                  },
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;day": {
+                        "pdivisor": 1440,
+                        "pnigh": 660,
+                        "popen": 660,
+                        "pstate": ";A;time;gregtime;day"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              }
+            },
+            "_uid": 169,
+            "awardlinks": {
+              ";hurt by us dollar": {
+                "awardee_title": ";hurt by us dollar",
+                "give_force": 1.0,
+                "take_force": 1
+              }
+            },
+            "plan_label": "develop D&B software",
+            "mass": 1,
+            "reasonunits": {
+              "A;Aaron Donald objects effected by him;": {
+                "premises": {
+                  "A;Aaron Donald objects effected by him;interesting": {
+                    "pstate": ";A;Aaron Donald objects effected by him;interesting"
+                  }
+                },
+                "rcontext": ";A;Aaron Donald objects effected by him;"
+              }
+            }
+          },
+          "donate to pro-climate committees": {
+            "_kids": {
+              "donate to influential people that are pro-Climate Death": {
+                "_uid": 168,
+                "awardlinks": {
+                  ";Climate Death": {
+                    "awardee_title": ";Climate Death",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "donate to influential people that are pro-Climate Death",
+                "mass": 1,
+                "task": true,
+                "reasonunits": {
+                  "A;Aaron Donald objects effected by him;": {
+                    "premises": {
+                      "A;Aaron Donald objects effected by him;interesting": {
+                        "pstate": ";A;Aaron Donald objects effected by him;interesting"
+                      }
+                    },
+                    "rcontext": ";A;Aaron Donald objects effected by him;"
+                  },
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 20160.0,
+                        "pnigh": 4920.0,
+                        "popen": 4920.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              }
+            },
+            "_uid": 167,
+            "plan_label": "donate to pro-climate committees",
+            "mass": 1,
+            "reasonunits": {
+              "A;Aaron Donald objects effected by him;": {
+                "premises": {
+                  "A;Aaron Donald objects effected by him;interesting": {
+                    "pstate": ";A;Aaron Donald objects effected by him;interesting"
+                  }
+                },
+                "rcontext": ";A;Aaron Donald objects effected by him;"
+              }
+            }
+          },
+          "late_evening_go_to_sleep": {
+            "_uid": 149,
+            "plan_label": "late_evening_go_to_sleep",
+            "mass": 1,
+            "task": true,
+            "reasonunits": {
+              "A;Aaron Donald objects effected by him;": {
+                "premises": {
+                  "A;Aaron Donald objects effected by him;interesting": {
+                    "pstate": ";A;Aaron Donald objects effected by him;interesting"
+                  }
+                },
+                "rcontext": ";A;Aaron Donald objects effected by him;"
+              },
+              "A;time;gregtime;": {
+                "premises": {
+                  "A;time;gregtime;": {
+                    "pdivisor": 1440.0,
+                    "pnigh": 1305.0,
+                    "popen": 1305.0,
+                    "pstate": ";A;time;gregtime;"
+                  }
+                },
+                "rcontext": ";A;time;gregtime;"
+              }
+            }
+          },
+          "sympathetic receptive": {
+            "_kids": {
+              "Ernesto Chavez": {
+                "_kids": {
+                  "available for phone call": {
+                    "plan_label": "available for phone call",
+                    "mass": 4,
+                    "morph": false,
+                    "task": true,
+                    "reasonunits": {
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;": {
+                            "pdivisor": 10080.0,
+                            "pnigh": 6495.0,
+                            "popen": 6480.0,
+                            "pstate": ";A;time;gregtime;"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  }
+                },
+                "plan_label": "Ernesto Chavez",
+                "mass": 4,
+                "morph": false,
+                "reasonunits": {
+                  "A;time;gregtime;": {
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              },
+              "sympathetic receptive to Aaron": {
+                "_kids": {
+                  "be available for phone call": {
+                    "_uid": 163,
+                    "awardlinks": {
+                      "Renee Elise Goldsberry": {
+                        "awardee_title": "Renee Elise Goldsberry",
+                        "give_force": 1.0,
+                        "take_force": 1
+                      }
+                    },
+                    "plan_label": "be available for phone call",
+                    "mass": 1,
+                    "task": true,
+                    "reasonunits": {
+                      "A;Aaron Donald objects effected by him;": {
+                        "premises": {
+                          "A;Aaron Donald objects effected by him;interesting": {
+                            "pstate": ";A;Aaron Donald objects effected by him;interesting"
+                          }
+                        },
+                        "rcontext": ";A;Aaron Donald objects effected by him;"
+                      },
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;": {
+                            "pdivisor": 10080.0,
+                            "pnigh": 6540.0,
+                            "popen": 6480.0,
+                            "pstate": ";A;time;gregtime;"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  },
+                  "call Aaron and discuss methodology": {
+                    "_uid": 164,
+                    "awardlinks": {
+                      ";Climate Death": {
+                        "awardee_title": ";Climate Death",
+                        "give_force": 1.0,
+                        "take_force": 1
+                      },
+                      "Renee Elise Goldsberry": {
+                        "awardee_title": "Renee Elise Goldsberry",
+                        "give_force": 1.0,
+                        "take_force": 1
+                      }
+                    },
+                    "plan_label": "call Aaron and discuss methodology",
+                    "mass": 1,
+                    "task": true,
+                    "reasonunits": {
+                      "A;Aaron Donald objects effected by him;": {
+                        "premises": {
+                          "A;Aaron Donald objects effected by him;interesting": {
+                            "pstate": ";A;Aaron Donald objects effected by him;interesting"
+                          }
+                        },
+                        "rcontext": ";A;Aaron Donald objects effected by him;"
+                      },
+                      "A;time;gregtime;": {
+                        "premises": {
+                          "A;time;gregtime;": {
+                            "pdivisor": 20160.0,
+                            "pnigh": 600.0,
+                            "popen": 600.0,
+                            "pstate": ";A;time;gregtime;"
+                          }
+                        },
+                        "rcontext": ";A;time;gregtime;"
+                      }
+                    }
+                  }
+                },
+                "_uid": 162,
+                "awardlinks": {
+                  "Renee Elise Goldsberry": {
+                    "awardee_title": "Renee Elise Goldsberry",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "sympathetic receptive to Aaron",
+                "mass": 1,
+                "reasonunits": {
+                  "A;Aaron Donald objects effected by him;": {
+                    "premises": {
+                      "A;Aaron Donald objects effected by him;interesting": {
+                        "pstate": ";A;Aaron Donald objects effected by him;interesting"
+                      }
+                    },
+                    "rcontext": ";A;Aaron Donald objects effected by him;"
+                  }
+                }
+              }
+            },
+            "_uid": 161,
+            "plan_label": "sympathetic receptive",
+            "mass": 1,
+            "reasonunits": {
+              "A;Aaron Donald objects effected by him;": {
+                "premises": {
+                  "A;Aaron Donald objects effected by him;interesting": {
+                    "pstate": ";A;Aaron Donald objects effected by him;interesting"
+                  }
+                },
+                "rcontext": ";A;Aaron Donald objects effected by him;"
+              }
+            }
+          },
+          "write letters to reps": {
+            "_kids": {
+              "write letters about Climate Death to congressman": {
+                "_uid": 166,
+                "awardlinks": {
+                  ";Climate Death": {
+                    "awardee_title": ";Climate Death",
+                    "give_force": 1.0,
+                    "take_force": 1
+                  }
+                },
+                "plan_label": "write letters about Climate Death to congressman",
+                "mass": 1,
+                "reasonunits": {
+                  "A;Aaron Donald objects effected by him;": {
+                    "premises": {
+                      "A;Aaron Donald objects effected by him;interesting": {
+                        "pstate": ";A;Aaron Donald objects effected by him;interesting"
+                      }
+                    },
+                    "rcontext": ";A;Aaron Donald objects effected by him;"
+                  },
+                  "A;time;gregtime;": {
+                    "premises": {
+                      "A;time;gregtime;": {
+                        "pdivisor": 20160.0,
+                        "pnigh": 600.0,
+                        "popen": 600.0,
+                        "pstate": ";A;time;gregtime;"
+                      }
+                    },
+                    "rcontext": ";A;time;gregtime;"
+                  }
+                }
+              }
+            },
+            "_uid": 165,
+            "plan_label": "write letters to reps",
+            "mass": 1,
+            "reasonunits": {
+              "A;Aaron Donald objects effected by him;": {
+                "premises": {
+                  "A;Aaron Donald objects effected by him;interesting": {
+                    "pstate": ";A;Aaron Donald objects effected by him;interesting"
+                  }
+                },
+                "rcontext": ";A;Aaron Donald objects effected by him;"
+              }
+            }
+          }
+        },
+        "_uid": 96,
+        "awardlinks": {
+          ";Climate Death": {
+            "awardee_title": ";Climate Death",
+            "give_force": 1.0,
+            "take_force": 1
+          },
+          ";Family": {
+            "awardee_title": ";Family",
+            "give_force": 1.0,
+            "take_force": 1
+          },
+          "America": {
+            "awardee_title": "America",
+            "give_force": 1.0,
+            "take_force": 1
+          }
+        },
+        "plan_label": "D&B",
+        "mass": 1,
+        "reasonunits": {
+          "A;Aaron Donald objects effected by him;": {
+            "premises": {
+              "A;Aaron Donald objects effected by him;interesting": {
+                "pstate": ";A;Aaron Donald objects effected by him;interesting"
+              }
+            },
+            "rcontext": ";A;Aaron Donald objects effected by him;"
+          }
+        }
+      },
+      "Interweb": {
+        "_is_expanded": false,
+        "_kids": {
+          "AOL AIM": {
+            "_kids": {
+              "PSU Ultimate": {
+                "_uid": 254,
+                "plan_label": "PSU Ultimate",
+                "mass": 1
+              }
+            },
+            "_uid": 253,
+            "plan_label": "AOL AIM",
+            "mass": 1
+          },
+          "Faaceboook": {
+            "_uid": 251,
+            "plan_label": "Faaceboook",
+            "mass": 1
+          },
+          "Github": {
+            "_uid": 252,
+            "plan_label": "Github",
+            "mass": 1
+          },
+          "YahooVideo": {
+            "_uid": 255,
+            "plan_label": "YahooVideo",
+            "mass": 1
+          }
+        },
+        "_uid": 250,
+        "plan_label": "Interweb",
+        "mass": 1
+      },
+      "Moods": {
+        "_kids": {
+          "Bllod Meridan by Cormac": {
+            "_uid": 265,
+            "plan_label": "Bllod Meridan by Cormac",
+            "mass": 1
+          },
+          "Happy": {
+            "_kids": {
+              "Happy - angerish": {
+                "_uid": 267,
+                "plan_label": "Happy - angerish",
+                "mass": 1
+              }
+            },
+            "_uid": 266,
+            "plan_label": "Happy",
+            "mass": 1
+          },
+          "hungry": {
+            "_uid": 268,
+            "plan_label": "hungry",
+            "mass": 1
+          },
+          "I will waste time": {
+            "plan_label": "I will waste time",
+            "mass": 1,
+            "morph": false
+          }
+        },
+        "_uid": 264,
+        "plan_label": "Moods",
+        "mass": 1
+      },
+      "Nation-States": {
+        "_is_expanded": false,
+        "_kids": {
+          "France2": {
+            "_uid": 235,
+            "plan_label": "France2",
+            "mass": 1
+          },
+          "USA": {
+            "_kids": {
+              "Portland OR": {
+                "_kids": {
+                  "Downtown": {
+                    "_kids": {
+                      "Flats": {
+                        "_kids": {
+                          "10th floor gaarden": {
+                            "_uid": 246,
+                            "plan_label": "10th floor gaarden",
+                            "mass": 1
+                          },
+                          "Apt 450": {
+                            "_uid": 247,
+                            "plan_label": "Apt 450",
+                            "mass": 1
+                          },
+                          "Gym": {
+                            "_uid": 248,
+                            "plan_label": "Gym",
+                            "mass": 1
+                          },
+                          "workspace": {
+                            "_uid": 249,
+                            "plan_label": "workspace",
+                            "mass": 1
+                          }
+                        },
+                        "_uid": 245,
+                        "plan_label": "Flats",
+                        "mass": 1
+                      },
+                      "PSU": {
+                        "_kids": {
+                          "library": {
+                            "_uid": 244,
+                            "plan_label": "library",
+                            "mass": 1
+                          },
+                          "Park Squares": {
+                            "_uid": 241,
+                            "plan_label": "Park Squares",
+                            "mass": 1
+                          },
+                          "Pool": {
+                            "_uid": 242,
+                            "plan_label": "Pool",
+                            "mass": 1
+                          },
+                          "Stott Field": {
+                            "_uid": 243,
+                            "plan_label": "Stott Field",
+                            "mass": 1
+                          }
+                        },
+                        "_uid": 240,
+                        "plan_label": "PSU",
+                        "mass": 1
+                      }
+                    },
+                    "_uid": 239,
+                    "plan_label": "Downtown",
+                    "mass": 1
+                  }
+                },
+                "_uid": 237,
+                "plan_label": "Portland OR",
+                "mass": 1
+              },
+              "Texas": {
+                "_uid": 238,
+                "plan_label": "Texas",
+                "mass": 1
+              }
+            },
+            "_uid": 236,
+            "plan_label": "USA",
+            "mass": 1
+          }
+        },
+        "_uid": 234,
+        "plan_label": "Nation-States",
+        "mass": 1
+      },
+      "No Movie playing": {
+        "_is_expanded": false,
+        "_kids": {
+          "Big Lewbwski": {
+            "_uid": 273,
+            "plan_label": "Big Lewbwski",
+            "mass": 1
+          },
+          "Star Wars eps IV": {
+            "_uid": 274,
+            "plan_label": "Star Wars eps IV",
+            "mass": 1
+          }
+        },
+        "_uid": 272,
+        "plan_label": "No Movie playing",
+        "mass": 1
+      },
+      "Seasons": {
+        "_is_expanded": false,
+        "_kids": {
+          "Summer": {
+            "_uid": 276,
+            "plan_label": "Summer",
+            "mass": 1
+          }
+        },
+        "_uid": 275,
+        "plan_label": "Seasons",
+        "mass": 1
+      },
+      "time": {
+        "_is_expanded": false,
+        "_kids": {
+          "gregtime": {
+            "_kids": {
+              "400 yr segment": {
+                "_is_expanded": false,
+                "plan_label": "400 yr segment",
+                "denom": 7,
+                "gogo_want": 0.0,
+                "mass": 1,
+                "morph": true,
+                "numor": 1,
+                "stop_want": 210379680.0
+              },
+              "400 yr segments": {
+                "_is_expanded": false,
+                "plan_label": "400 yr segments",
+                "denom": 210379680,
+                "gogo_want": 0.0,
+                "mass": 1,
+                "morph": false,
+                "numor": 1,
+                "stop_want": 7.0
+              },
+              "day": {
+                "_is_expanded": false,
+                "plan_label": "day",
+                "denom": 1022679.0,
+                "gogo_want": 0.0,
+                "mass": 1,
+                "morph": true,
+                "numor": 1,
+                "stop_want": 1440.0
+              },
+              "days": {
+                "_is_expanded": false,
+                "plan_label": "days",
+                "denom": 1440,
+                "gogo_want": 0.0,
+                "mass": 1,
+                "morph": false,
+                "numor": 1,
+                "stop_want": 1022679.0
+              },
+              "wk": {
+                "_is_expanded": false,
+                "plan_label": "wk",
+                "denom": 146097.0,
+                "gogo_want": 0.0,
+                "mass": 1,
+                "morph": true,
+                "numor": 1,
+                "stop_want": 10080.0
+              },
+              "wks": {
+                "_is_expanded": false,
+                "plan_label": "wks",
+                "denom": 10080,
+                "gogo_want": 0.0,
+                "mass": 1,
+                "morph": false,
+                "numor": 1,
+                "stop_want": 146097.0
+              },
+              "x2": {
+                "_kids": {
+                  "monthly 1st business day": {
+                    "_kids": {
+                      "2023 Feb 9am": {
+                        "plan_label": "2023 Feb 9am",
+                        "gogo_want": 1064041020.0,
+                        "mass": 1,
+                        "morph": false,
+                        "stop_want": 1064041020.0
+                      }
+                    },
+                    "plan_label": "monthly 1st business day",
+                    "gogo_want": 0.0,
+                    "mass": 1,
+                    "morph": false,
+                    "stop_want": 1472657760.0
+                  },
+                  "Sept 4th 2023 9am": {
+                    "plan_label": "Sept 4th 2023 9am",
+                    "gogo_want": 1064350680.0,
+                    "mass": 1,
+                    "morph": false,
+                    "stop_want": 1064350680.0
+                  }
+                },
+                "plan_label": "x2",
+                "gogo_want": 0.0,
+                "mass": 1,
+                "morph": false,
+                "stop_want": 1472657760.0
+              }
+            },
+            "begin": 0,
+            "close": 1472657760,
+            "plan_label": "gregtime",
+            "mass": 1
+          },
+          "tech": {
+            "_kids": {
+              "365 yr": {
+                "_is_expanded": false,
+                "_kids": {
+                  "1-Jan": {
+                    "_is_expanded": false,
+                    "plan_label": "1-Jan",
+                    "gogo_want": 0,
+                    "mass": 1,
+                    "stop_want": 44640
+                  },
+                  "10-Oct": {
+                    "_is_expanded": false,
+                    "plan_label": "10-Oct",
+                    "gogo_want": 393120,
+                    "mass": 1,
+                    "stop_want": 437760
+                  },
+                  "11-Nov": {
+                    "_is_expanded": false,
+                    "plan_label": "11-Nov",
+                    "gogo_want": 437760,
+                    "mass": 1,
+                    "stop_want": 480960
+                  },
+                  "12-Dec": {
+                    "_is_expanded": false,
+                    "plan_label": "12-Dec",
+                    "gogo_want": 480960,
+                    "mass": 1,
+                    "stop_want": 525600
+                  },
+                  "2-Feb28": {
+                    "_is_expanded": false,
+                    "plan_label": "2-Feb28",
+                    "gogo_want": 44640,
+                    "mass": 1,
+                    "stop_want": 84960
+                  },
+                  "3-Mar": {
+                    "_is_expanded": false,
+                    "plan_label": "3-Mar",
+                    "gogo_want": 84960,
+                    "mass": 1,
+                    "stop_want": 129600
+                  },
+                  "4-Apr": {
+                    "_is_expanded": false,
+                    "plan_label": "4-Apr",
+                    "gogo_want": 129600,
+                    "mass": 1,
+                    "stop_want": 172800
+                  },
+                  "5-May": {
+                    "_is_expanded": false,
+                    "plan_label": "5-May",
+                    "gogo_want": 172800,
+                    "mass": 1,
+                    "stop_want": 217440
+                  },
+                  "6-Jun": {
+                    "_is_expanded": false,
+                    "plan_label": "6-Jun",
+                    "gogo_want": 217440,
+                    "mass": 1,
+                    "stop_want": 260640
+                  },
+                  "7-Jul": {
+                    "_is_expanded": false,
+                    "plan_label": "7-Jul",
+                    "gogo_want": 260640,
+                    "mass": 1,
+                    "stop_want": 305280
+                  },
+                  "8-Aug": {
+                    "_is_expanded": false,
+                    "plan_label": "8-Aug",
+                    "gogo_want": 305280,
+                    "mass": 1,
+                    "stop_want": 349920
+                  },
+                  "9-Sep": {
+                    "_is_expanded": false,
+                    "plan_label": "9-Sep",
+                    "gogo_want": 349920,
+                    "mass": 1,
+                    "stop_want": 393120
+                  }
+                },
+                "begin": 0,
+                "close": 525600,
+                "plan_label": "365 yr",
+                "mass": 1
+              },
+              "366 yr": {
+                "_is_expanded": false,
+                "_kids": {
+                  "1-Jan": {
+                    "_is_expanded": false,
+                    "plan_label": "1-Jan",
+                    "gogo_want": 0,
+                    "mass": 1,
+                    "stop_want": 44640
+                  },
+                  "10-Oct": {
+                    "_is_expanded": false,
+                    "plan_label": "10-Oct",
+                    "gogo_want": 394560,
+                    "mass": 1,
+                    "stop_want": 439200
+                  },
+                  "11-Nov": {
+                    "_is_expanded": false,
+                    "plan_label": "11-Nov",
+                    "gogo_want": 439200,
+                    "mass": 1,
+                    "stop_want": 482400
+                  },
+                  "12-Dec": {
+                    "_is_expanded": false,
+                    "plan_label": "12-Dec",
+                    "gogo_want": 482400,
+                    "mass": 1,
+                    "stop_want": 527040
+                  },
+                  "2-Feb29": {
+                    "_is_expanded": false,
+                    "plan_label": "2-Feb29",
+                    "gogo_want": 44640,
+                    "mass": 1,
+                    "stop_want": 86400
+                  },
+                  "3-Mar": {
+                    "_is_expanded": false,
+                    "plan_label": "3-Mar",
+                    "gogo_want": 86400,
+                    "mass": 1,
+                    "stop_want": 131040
+                  },
+                  "4-Apr": {
+                    "_is_expanded": false,
+                    "plan_label": "4-Apr",
+                    "gogo_want": 131040,
+                    "mass": 1,
+                    "stop_want": 174240
+                  },
+                  "5-May": {
+                    "_is_expanded": false,
+                    "plan_label": "5-May",
+                    "gogo_want": 174240,
+                    "mass": 1,
+                    "stop_want": 218880
+                  },
+                  "6-Jun": {
+                    "_is_expanded": false,
+                    "plan_label": "6-Jun",
+                    "gogo_want": 218880,
+                    "mass": 1,
+                    "stop_want": 262080
+                  },
+                  "7-Jul": {
+                    "_is_expanded": false,
+                    "plan_label": "7-Jul",
+                    "gogo_want": 262080,
+                    "mass": 1,
+                    "stop_want": 306720
+                  },
+                  "8-Aug": {
+                    "_is_expanded": false,
+                    "plan_label": "8-Aug",
+                    "gogo_want": 306720,
+                    "mass": 1,
+                    "stop_want": 351360
+                  },
+                  "9-Sep": {
+                    "_is_expanded": false,
+                    "plan_label": "9-Sep",
+                    "gogo_want": 351360,
+                    "mass": 1,
+                    "stop_want": 394560
+                  }
+                },
+                "begin": 0,
+                "close": 527040,
+                "plan_label": "366 yr",
+                "mass": 1
+              },
+              "400 yr segment": {
+                "_is_expanded": false,
+                "_kids": {
+                  "0-100-25 leap yrs": {
+                    "_is_expanded": false,
+                    "_kids": {
+                      "4yr with leap": {
+                        "_is_expanded": false,
+                        "plan_label": "4yr with leap",
+                        "denom": 25,
+                        "gogo_want": 0.0,
+                        "mass": 1,
+                        "morph": true,
+                        "numor": 1,
+                        "stop_want": 2103840.0
+                      }
+                    },
+                    "plan_label": "0-100-25 leap yrs",
+                    "gogo_want": 0,
+                    "mass": 1,
+                    "stop_want": 52596000
+                  },
+                  "100-104-0 leap yrs": {
+                    "_is_expanded": false,
+                    "_kids": {
+                      "4yr wo leap": {
+                        "_is_expanded": false,
+                        "plan_label": "4yr wo leap",
+                        "denom": 1,
+                        "gogo_want": 52596000.0,
+                        "mass": 1,
+                        "morph": true,
+                        "numor": 1,
+                        "stop_want": 54698400.0
+                      }
+                    },
+                    "plan_label": "100-104-0 leap yrs",
+                    "gogo_want": 52596000,
+                    "mass": 1,
+                    "stop_want": 54698400
+                  },
+                  "104-200-24 leap yrs": {
+                    "_is_expanded": false,
+                    "_kids": {
+                      "4yr with leap": {
+                        "_is_expanded": false,
+                        "plan_label": "4yr with leap",
+                        "denom": 24,
+                        "gogo_want": 2279100.0,
+                        "mass": 1,
+                        "morph": true,
+                        "numor": 1,
+                        "stop_want": 4382940.0
+                      }
+                    },
+                    "plan_label": "104-200-24 leap yrs",
+                    "gogo_want": 54698400,
+                    "mass": 1,
+                    "stop_want": 105190560
+                  },
+                  "200-204-0 leap yrs": {
+                    "_is_expanded": false,
+                    "_kids": {
+                      "4yr wo leap": {
+                        "_is_expanded": false,
+                        "plan_label": "4yr wo leap",
+                        "denom": 1,
+                        "gogo_want": 105190560.0,
+                        "mass": 1,
+                        "morph": true,
+                        "numor": 1,
+                        "stop_want": 107292960.0
+                      }
+                    },
+                    "plan_label": "200-204-0 leap yrs",
+                    "gogo_want": 105190560,
+                    "mass": 1,
+                    "stop_want": 107292960
+                  },
+                  "204-300-24 leap yrs": {
+                    "_is_expanded": false,
+                    "_kids": {
+                      "4yr with leap": {
+                        "_is_expanded": false,
+                        "plan_label": "4yr with leap",
+                        "denom": 24,
+                        "gogo_want": 4470540.0,
+                        "mass": 1,
+                        "morph": true,
+                        "numor": 1,
+                        "stop_want": 6574380.0
+                      }
+                    },
+                    "plan_label": "204-300-24 leap yrs",
+                    "gogo_want": 107292960,
+                    "mass": 1,
+                    "stop_want": 157785120
+                  },
+                  "300-304-0 leap yrs": {
+                    "_is_expanded": false,
+                    "_kids": {
+                      "4yr wo leap": {
+                        "_is_expanded": false,
+                        "plan_label": "4yr wo leap",
+                        "denom": 1,
+                        "gogo_want": 157785120.0,
+                        "mass": 1,
+                        "morph": true,
+                        "numor": 1,
+                        "stop_want": 159887520.0
+                      }
+                    },
+                    "plan_label": "300-304-0 leap yrs",
+                    "gogo_want": 157785120,
+                    "mass": 1,
+                    "stop_want": 159887520
+                  },
+                  "304-400-24 leap yrs": {
+                    "_is_expanded": false,
+                    "_kids": {
+                      "4yr with leap": {
+                        "_is_expanded": false,
+                        "plan_label": "4yr with leap",
+                        "denom": 24,
+                        "gogo_want": 6661980.0,
+                        "mass": 1,
+                        "morph": true,
+                        "numor": 1,
+                        "stop_want": 8765820.0
+                      }
+                    },
+                    "plan_label": "304-400-24 leap yrs",
+                    "gogo_want": 159887520,
+                    "mass": 1,
+                    "stop_want": 210379680
+                  }
+                },
+                "begin": 0.0,
+                "close": 210379680.0,
+                "plan_label": "400 yr segment",
+                "mass": 1
+              },
+              "4yr with leap": {
+                "_is_expanded": false,
+                "_kids": {
+                  "1-yr": {
+                    "_is_expanded": false,
+                    "plan_label": "1-yr",
+                    "gogo_want": 0,
+                    "mass": 1,
+                    "stop_want": 527040
+                  },
+                  "2-yr": {
+                    "_is_expanded": false,
+                    "plan_label": "2-yr",
+                    "gogo_want": 527040,
+                    "mass": 1,
+                    "stop_want": 1052640
+                  },
+                  "3-yr": {
+                    "_is_expanded": false,
+                    "plan_label": "3-yr",
+                    "gogo_want": 1052640,
+                    "mass": 1,
+                    "stop_want": 1578240
+                  },
+                  "4-yr": {
+                    "_is_expanded": false,
+                    "plan_label": "4-yr",
+                    "gogo_want": 1578240,
+                    "mass": 1,
+                    "stop_want": 2103840
+                  }
+                },
+                "begin": 0.0,
+                "close": 2103840.0,
+                "plan_label": "4yr with leap",
+                "mass": 1
+              },
+              "4yr wo leap": {
+                "_is_expanded": false,
+                "_kids": {
+                  "1-yr": {
+                    "_is_expanded": false,
+                    "plan_label": "1-yr",
+                    "gogo_want": 0,
+                    "mass": 1,
+                    "stop_want": 525600
+                  },
+                  "2-yr": {
+                    "_is_expanded": false,
+                    "plan_label": "2-yr",
+                    "gogo_want": 525600,
+                    "mass": 1,
+                    "stop_want": 1051200
+                  },
+                  "3-yr": {
+                    "_is_expanded": false,
+                    "plan_label": "3-yr",
+                    "gogo_want": 1051200,
+                    "mass": 1,
+                    "stop_want": 1576800
+                  },
+                  "4-yr": {
+                    "_is_expanded": false,
+                    "plan_label": "4-yr",
+                    "gogo_want": 1576800,
+                    "mass": 1,
+                    "stop_want": 2102400
+                  }
+                },
+                "begin": 0,
+                "close": 2102400,
+                "plan_label": "4yr wo leap",
+                "mass": 1
+              },
+              "day": {
+                "_is_expanded": false,
+                "_kids": {
+                  "0-12am": {
+                    "_is_expanded": false,
+                    "plan_label": "0-12am",
+                    "gogo_want": 0,
+                    "mass": 1,
+                    "stop_want": 60
+                  },
+                  "1-1am": {
+                    "_is_expanded": false,
+                    "plan_label": "1-1am",
+                    "gogo_want": 60,
+                    "mass": 1,
+                    "stop_want": 120
+                  },
+                  "10-10am": {
+                    "_is_expanded": false,
+                    "plan_label": "10-10am",
+                    "gogo_want": 600,
+                    "mass": 1,
+                    "stop_want": 660
+                  },
+                  "11-11am": {
+                    "_is_expanded": false,
+                    "plan_label": "11-11am",
+                    "gogo_want": 660,
+                    "mass": 1,
+                    "stop_want": 720
+                  },
+                  "12-12pm": {
+                    "_is_expanded": false,
+                    "plan_label": "12-12pm",
+                    "gogo_want": 720,
+                    "mass": 1,
+                    "stop_want": 780
+                  },
+                  "13-1pm": {
+                    "_is_expanded": false,
+                    "plan_label": "13-1pm",
+                    "gogo_want": 780,
+                    "mass": 1,
+                    "stop_want": 840
+                  },
+                  "14-2pm": {
+                    "_is_expanded": false,
+                    "plan_label": "14-2pm",
+                    "gogo_want": 840,
+                    "mass": 1,
+                    "stop_want": 900
+                  },
+                  "15-3pm": {
+                    "_is_expanded": false,
+                    "plan_label": "15-3pm",
+                    "gogo_want": 900,
+                    "mass": 1,
+                    "stop_want": 960
+                  },
+                  "16-4pm": {
+                    "_is_expanded": false,
+                    "plan_label": "16-4pm",
+                    "gogo_want": 960,
+                    "mass": 1,
+                    "stop_want": 1020
+                  },
+                  "17-5pm": {
+                    "_is_expanded": false,
+                    "plan_label": "17-5pm",
+                    "gogo_want": 1020,
+                    "mass": 1,
+                    "stop_want": 1080
+                  },
+                  "18-6pm": {
+                    "_is_expanded": false,
+                    "plan_label": "18-6pm",
+                    "gogo_want": 1080,
+                    "mass": 1,
+                    "stop_want": 1140
+                  },
+                  "19-7pm": {
+                    "_is_expanded": false,
+                    "plan_label": "19-7pm",
+                    "gogo_want": 1140,
+                    "mass": 1,
+                    "stop_want": 1200
+                  },
+                  "2-2am": {
+                    "_is_expanded": false,
+                    "plan_label": "2-2am",
+                    "gogo_want": 120,
+                    "mass": 1,
+                    "stop_want": 180
+                  },
+                  "20-8pm": {
+                    "_is_expanded": false,
+                    "plan_label": "20-8pm",
+                    "gogo_want": 1200,
+                    "mass": 1,
+                    "stop_want": 1260
+                  },
+                  "21-9pm": {
+                    "_is_expanded": false,
+                    "plan_label": "21-9pm",
+                    "gogo_want": 1260,
+                    "mass": 1,
+                    "stop_want": 1320
+                  },
+                  "22-10pm": {
+                    "_is_expanded": false,
+                    "plan_label": "22-10pm",
+                    "gogo_want": 1320,
+                    "mass": 1,
+                    "stop_want": 1380
+                  },
+                  "23-11pm": {
+                    "_is_expanded": false,
+                    "plan_label": "23-11pm",
+                    "gogo_want": 1380,
+                    "mass": 1,
+                    "stop_want": 1440
+                  },
+                  "3-3am": {
+                    "_is_expanded": false,
+                    "plan_label": "3-3am",
+                    "gogo_want": 180,
+                    "mass": 1,
+                    "stop_want": 240
+                  },
+                  "4-4am": {
+                    "_is_expanded": false,
+                    "plan_label": "4-4am",
+                    "gogo_want": 240,
+                    "mass": 1,
+                    "stop_want": 300
+                  },
+                  "5-5am": {
+                    "_is_expanded": false,
+                    "plan_label": "5-5am",
+                    "gogo_want": 300,
+                    "mass": 1,
+                    "stop_want": 360
+                  },
+                  "6-6am": {
+                    "_is_expanded": false,
+                    "plan_label": "6-6am",
+                    "gogo_want": 360,
+                    "mass": 1,
+                    "stop_want": 420
+                  },
+                  "7-7am": {
+                    "_is_expanded": false,
+                    "plan_label": "7-7am",
+                    "gogo_want": 420,
+                    "mass": 1,
+                    "stop_want": 480
+                  },
+                  "8-8am": {
+                    "_is_expanded": false,
+                    "plan_label": "8-8am",
+                    "gogo_want": 480,
+                    "mass": 1,
+                    "stop_want": 540
+                  },
+                  "9-9am": {
+                    "_is_expanded": false,
+                    "plan_label": "9-9am",
+                    "gogo_want": 540,
+                    "mass": 1,
+                    "stop_want": 600
+                  }
+                },
+                "begin": 0,
+                "close": 1440,
+                "plan_label": "day",
+                "mass": 1
+              },
+              "hr": {
+                "_is_expanded": false,
+                "_kids": {
+                  "0-:00": {
+                    "_is_expanded": false,
+                    "plan_label": "0-:00",
+                    "gogo_want": 0,
+                    "mass": 1,
+                    "stop_want": 1
+                  },
+                  "1-:01": {
+                    "_is_expanded": false,
+                    "plan_label": "1-:01",
+                    "gogo_want": 1,
+                    "mass": 1,
+                    "stop_want": 2
+                  },
+                  "10-:10": {
+                    "_is_expanded": false,
+                    "plan_label": "10-:10",
+                    "gogo_want": 10,
+                    "mass": 1,
+                    "stop_want": 11
+                  },
+                  "11-:11": {
+                    "_is_expanded": false,
+                    "plan_label": "11-:11",
+                    "gogo_want": 11,
+                    "mass": 1,
+                    "stop_want": 12
+                  },
+                  "12-:12": {
+                    "_is_expanded": false,
+                    "plan_label": "12-:12",
+                    "gogo_want": 12,
+                    "mass": 1,
+                    "stop_want": 13
+                  },
+                  "13-:13": {
+                    "_is_expanded": false,
+                    "plan_label": "13-:13",
+                    "gogo_want": 13,
+                    "mass": 1,
+                    "stop_want": 14
+                  },
+                  "14-:14": {
+                    "_is_expanded": false,
+                    "plan_label": "14-:14",
+                    "gogo_want": 14,
+                    "mass": 1,
+                    "stop_want": 15
+                  },
+                  "15-:15": {
+                    "_is_expanded": false,
+                    "plan_label": "15-:15",
+                    "gogo_want": 15,
+                    "mass": 1,
+                    "stop_want": 16
+                  },
+                  "16-:16": {
+                    "_is_expanded": false,
+                    "plan_label": "16-:16",
+                    "gogo_want": 16,
+                    "mass": 1,
+                    "stop_want": 17
+                  },
+                  "17-:17": {
+                    "_is_expanded": false,
+                    "plan_label": "17-:17",
+                    "gogo_want": 17,
+                    "mass": 1,
+                    "stop_want": 18
+                  },
+                  "18-:18": {
+                    "_is_expanded": false,
+                    "plan_label": "18-:18",
+                    "gogo_want": 18,
+                    "mass": 1,
+                    "stop_want": 19
+                  },
+                  "19-:19": {
+                    "_is_expanded": false,
+                    "plan_label": "19-:19",
+                    "gogo_want": 19,
+                    "mass": 1,
+                    "stop_want": 20
+                  },
+                  "2-:02": {
+                    "_is_expanded": false,
+                    "plan_label": "2-:02",
+                    "gogo_want": 2,
+                    "mass": 1,
+                    "stop_want": 3
+                  },
+                  "20-:20": {
+                    "_is_expanded": false,
+                    "plan_label": "20-:20",
+                    "gogo_want": 20,
+                    "mass": 1,
+                    "stop_want": 21
+                  },
+                  "21-:21": {
+                    "_is_expanded": false,
+                    "plan_label": "21-:21",
+                    "gogo_want": 21,
+                    "mass": 1,
+                    "stop_want": 22
+                  },
+                  "22-:22": {
+                    "_is_expanded": false,
+                    "plan_label": "22-:22",
+                    "gogo_want": 22,
+                    "mass": 1,
+                    "stop_want": 23
+                  },
+                  "23-:23": {
+                    "_is_expanded": false,
+                    "plan_label": "23-:23",
+                    "gogo_want": 23,
+                    "mass": 1,
+                    "stop_want": 24
+                  },
+                  "24-:24": {
+                    "_is_expanded": false,
+                    "plan_label": "24-:24",
+                    "gogo_want": 24,
+                    "mass": 1,
+                    "stop_want": 25
+                  },
+                  "25-:25": {
+                    "_is_expanded": false,
+                    "plan_label": "25-:25",
+                    "gogo_want": 25,
+                    "mass": 1,
+                    "stop_want": 26
+                  },
+                  "26-:26": {
+                    "_is_expanded": false,
+                    "plan_label": "26-:26",
+                    "gogo_want": 26,
+                    "mass": 1,
+                    "stop_want": 27
+                  },
+                  "27-:27": {
+                    "_is_expanded": false,
+                    "plan_label": "27-:27",
+                    "gogo_want": 27,
+                    "mass": 1,
+                    "stop_want": 28
+                  },
+                  "28-:28": {
+                    "_is_expanded": false,
+                    "plan_label": "28-:28",
+                    "gogo_want": 28,
+                    "mass": 1,
+                    "stop_want": 29
+                  },
+                  "29-:29": {
+                    "_is_expanded": false,
+                    "plan_label": "29-:29",
+                    "gogo_want": 29,
+                    "mass": 1,
+                    "stop_want": 30
+                  },
+                  "3-:03": {
+                    "_is_expanded": false,
+                    "plan_label": "3-:03",
+                    "gogo_want": 3,
+                    "mass": 1,
+                    "stop_want": 4
+                  },
+                  "30-:30": {
+                    "_is_expanded": false,
+                    "plan_label": "30-:30",
+                    "gogo_want": 30,
+                    "mass": 1,
+                    "stop_want": 31
+                  },
+                  "31-:31": {
+                    "_is_expanded": false,
+                    "plan_label": "31-:31",
+                    "gogo_want": 31,
+                    "mass": 1,
+                    "stop_want": 32
+                  },
+                  "32-:32": {
+                    "_is_expanded": false,
+                    "plan_label": "32-:32",
+                    "gogo_want": 32,
+                    "mass": 1,
+                    "stop_want": 33
+                  },
+                  "33-:33": {
+                    "_is_expanded": false,
+                    "plan_label": "33-:33",
+                    "gogo_want": 33,
+                    "mass": 1,
+                    "stop_want": 34
+                  },
+                  "34-:34": {
+                    "_is_expanded": false,
+                    "plan_label": "34-:34",
+                    "gogo_want": 34,
+                    "mass": 1,
+                    "stop_want": 35
+                  },
+                  "35-:35": {
+                    "_is_expanded": false,
+                    "plan_label": "35-:35",
+                    "gogo_want": 35,
+                    "mass": 1,
+                    "stop_want": 36
+                  },
+                  "36-:36": {
+                    "_is_expanded": false,
+                    "plan_label": "36-:36",
+                    "gogo_want": 36,
+                    "mass": 1,
+                    "stop_want": 37
+                  },
+                  "37-:37": {
+                    "_is_expanded": false,
+                    "plan_label": "37-:37",
+                    "gogo_want": 37,
+                    "mass": 1,
+                    "stop_want": 38
+                  },
+                  "38-:38": {
+                    "_is_expanded": false,
+                    "plan_label": "38-:38",
+                    "gogo_want": 38,
+                    "mass": 1,
+                    "stop_want": 39
+                  },
+                  "39-:39": {
+                    "_is_expanded": false,
+                    "plan_label": "39-:39",
+                    "gogo_want": 39,
+                    "mass": 1,
+                    "stop_want": 40
+                  },
+                  "4-:04": {
+                    "_is_expanded": false,
+                    "plan_label": "4-:04",
+                    "gogo_want": 4,
+                    "mass": 1,
+                    "stop_want": 5
+                  },
+                  "40-:40": {
+                    "_is_expanded": false,
+                    "plan_label": "40-:40",
+                    "gogo_want": 40,
+                    "mass": 1,
+                    "stop_want": 41
+                  },
+                  "41-:41": {
+                    "_is_expanded": false,
+                    "plan_label": "41-:41",
+                    "gogo_want": 41,
+                    "mass": 1,
+                    "stop_want": 42
+                  },
+                  "42-:42": {
+                    "_is_expanded": false,
+                    "plan_label": "42-:42",
+                    "gogo_want": 42,
+                    "mass": 1,
+                    "stop_want": 43
+                  },
+                  "43-:43": {
+                    "_is_expanded": false,
+                    "plan_label": "43-:43",
+                    "gogo_want": 43,
+                    "mass": 1,
+                    "stop_want": 44
+                  },
+                  "44-:44": {
+                    "_is_expanded": false,
+                    "plan_label": "44-:44",
+                    "gogo_want": 44,
+                    "mass": 1,
+                    "stop_want": 45
+                  },
+                  "45-:45": {
+                    "_is_expanded": false,
+                    "plan_label": "45-:45",
+                    "gogo_want": 45,
+                    "mass": 1,
+                    "stop_want": 46
+                  },
+                  "46-:46": {
+                    "_is_expanded": false,
+                    "plan_label": "46-:46",
+                    "gogo_want": 46,
+                    "mass": 1,
+                    "stop_want": 47
+                  },
+                  "47-:47": {
+                    "_is_expanded": false,
+                    "plan_label": "47-:47",
+                    "gogo_want": 47,
+                    "mass": 1,
+                    "stop_want": 48
+                  },
+                  "48-:48": {
+                    "_is_expanded": false,
+                    "plan_label": "48-:48",
+                    "gogo_want": 48,
+                    "mass": 1,
+                    "stop_want": 49
+                  },
+                  "49-:49": {
+                    "_is_expanded": false,
+                    "plan_label": "49-:49",
+                    "gogo_want": 49,
+                    "mass": 1,
+                    "stop_want": 50
+                  },
+                  "5-:05": {
+                    "_is_expanded": false,
+                    "plan_label": "5-:05",
+                    "gogo_want": 5,
+                    "mass": 1,
+                    "stop_want": 6
+                  },
+                  "50-:50": {
+                    "_is_expanded": false,
+                    "plan_label": "50-:50",
+                    "gogo_want": 50,
+                    "mass": 1,
+                    "stop_want": 51
+                  },
+                  "51-:51": {
+                    "_is_expanded": false,
+                    "plan_label": "51-:51",
+                    "gogo_want": 51,
+                    "mass": 1,
+                    "stop_want": 52
+                  },
+                  "52-:52": {
+                    "_is_expanded": false,
+                    "plan_label": "52-:52",
+                    "gogo_want": 52,
+                    "mass": 1,
+                    "stop_want": 53
+                  },
+                  "53-:53": {
+                    "_is_expanded": false,
+                    "plan_label": "53-:53",
+                    "gogo_want": 53,
+                    "mass": 1,
+                    "stop_want": 54
+                  },
+                  "54-:54": {
+                    "_is_expanded": false,
+                    "plan_label": "54-:54",
+                    "gogo_want": 54,
+                    "mass": 1,
+                    "stop_want": 55
+                  },
+                  "55-:55": {
+                    "_is_expanded": false,
+                    "plan_label": "55-:55",
+                    "gogo_want": 55,
+                    "mass": 1,
+                    "stop_want": 56
+                  },
+                  "56-:56": {
+                    "_is_expanded": false,
+                    "plan_label": "56-:56",
+                    "gogo_want": 56,
+                    "mass": 1,
+                    "stop_want": 57
+                  },
+                  "57-:57": {
+                    "_is_expanded": false,
+                    "plan_label": "57-:57",
+                    "gogo_want": 57,
+                    "mass": 1,
+                    "stop_want": 58
+                  },
+                  "58-:58": {
+                    "_is_expanded": false,
+                    "plan_label": "58-:58",
+                    "gogo_want": 58,
+                    "mass": 1,
+                    "stop_want": 59
+                  },
+                  "59-59": {
+                    "_is_expanded": false,
+                    "plan_label": "59-59",
+                    "gogo_want": 59,
+                    "mass": 1,
+                    "stop_want": 60
+                  },
+                  "6-:06": {
+                    "_is_expanded": false,
+                    "plan_label": "6-:06",
+                    "gogo_want": 6,
+                    "mass": 1,
+                    "stop_want": 7
+                  },
+                  "7-:07": {
+                    "_is_expanded": false,
+                    "plan_label": "7-:07",
+                    "gogo_want": 7,
+                    "mass": 1,
+                    "stop_want": 8
+                  },
+                  "8-:08": {
+                    "_is_expanded": false,
+                    "plan_label": "8-:08",
+                    "gogo_want": 8,
+                    "mass": 1,
+                    "stop_want": 9
+                  },
+                  "9-:09": {
+                    "_is_expanded": false,
+                    "plan_label": "9-:09",
+                    "gogo_want": 9,
+                    "mass": 1,
+                    "stop_want": 10
+                  }
+                },
+                "begin": 0,
+                "close": 60,
+                "plan_label": "hr",
+                "mass": 1
+              },
+              "month": {
+                "_is_expanded": false,
+                "_kids": {
+                  "Apr": {
+                    "_is_expanded": false,
+                    "_kids": {
+                      "days": {
+                        "_is_expanded": false,
+                        "plan_label": "days",
+                        "denom": 1440,
+                        "gogo_want": 0.0,
+                        "mass": 1,
+                        "morph": true,
+                        "numor": 1,
+                        "stop_want": 30.0
+                      }
+                    },
+                    "begin": 0,
+                    "close": 43200,
+                    "plan_label": "Apr",
+                    "mass": 1
+                  },
+                  "Aug": {
+                    "_is_expanded": false,
+                    "_kids": {
+                      "days": {
+                        "_is_expanded": false,
+                        "plan_label": "days",
+                        "denom": 1440,
+                        "gogo_want": 0.0,
+                        "mass": 1,
+                        "morph": true,
+                        "numor": 1,
+                        "stop_want": 31.0
+                      }
+                    },
+                    "begin": 0,
+                    "close": 44640,
+                    "plan_label": "Aug",
+                    "mass": 1
+                  },
+                  "Dec": {
+                    "_is_expanded": false,
+                    "_kids": {
+                      "days": {
+                        "_is_expanded": false,
+                        "plan_label": "days",
+                        "denom": 1440,
+                        "gogo_want": 0.0,
+                        "mass": 1,
+                        "morph": true,
+                        "numor": 1,
+                        "stop_want": 31.0
+                      }
+                    },
+                    "begin": 0,
+                    "close": 44640,
+                    "plan_label": "Dec",
+                    "mass": 1
+                  },
+                  "Feb28": {
+                    "_is_expanded": false,
+                    "_kids": {
+                      "days": {
+                        "_is_expanded": false,
+                        "plan_label": "days",
+                        "denom": 1440,
+                        "gogo_want": 0.0,
+                        "mass": 1,
+                        "morph": true,
+                        "numor": 1,
+                        "stop_want": 28.0
+                      }
+                    },
+                    "begin": 0,
+                    "close": 40320,
+                    "plan_label": "Feb28",
+                    "mass": 1
+                  },
+                  "Feb29": {
+                    "_is_expanded": false,
+                    "_kids": {
+                      "days": {
+                        "_is_expanded": false,
+                        "plan_label": "days",
+                        "denom": 1440,
+                        "gogo_want": 0.0,
+                        "mass": 1,
+                        "morph": true,
+                        "numor": 1,
+                        "stop_want": 29.0
+                      }
+                    },
+                    "begin": 0,
+                    "close": 41760,
+                    "plan_label": "Feb29",
+                    "mass": 1
+                  },
+                  "Jan": {
+                    "_is_expanded": false,
+                    "_kids": {
+                      "days": {
+                        "_is_expanded": false,
+                        "plan_label": "days",
+                        "denom": 1440,
+                        "gogo_want": 0.0,
+                        "mass": 1,
+                        "morph": true,
+                        "numor": 1,
+                        "stop_want": 31.0
+                      }
+                    },
+                    "begin": 0,
+                    "close": 44640,
+                    "plan_label": "Jan",
+                    "mass": 1
+                  },
+                  "Jul": {
+                    "_is_expanded": false,
+                    "_kids": {
+                      "days": {
+                        "_is_expanded": false,
+                        "plan_label": "days",
+                        "denom": 1440,
+                        "gogo_want": 0.0,
+                        "mass": 1,
+                        "morph": true,
+                        "numor": 1,
+                        "stop_want": 31.0
+                      }
+                    },
+                    "begin": 0,
+                    "close": 44640,
+                    "plan_label": "Jul",
+                    "mass": 1
+                  },
+                  "Jun": {
+                    "_is_expanded": false,
+                    "_kids": {
+                      "days": {
+                        "_is_expanded": false,
+                        "plan_label": "days",
+                        "denom": 1440,
+                        "gogo_want": 0.0,
+                        "mass": 1,
+                        "morph": true,
+                        "numor": 1,
+                        "stop_want": 30.0
+                      }
+                    },
+                    "begin": 0,
+                    "close": 43200,
+                    "plan_label": "Jun",
+                    "mass": 1
+                  },
+                  "Mar": {
+                    "_is_expanded": false,
+                    "_kids": {
+                      "days": {
+                        "_is_expanded": false,
+                        "plan_label": "days",
+                        "denom": 1440,
+                        "gogo_want": 0.0,
+                        "mass": 1,
+                        "morph": true,
+                        "numor": 1,
+                        "stop_want": 31.0
+                      }
+                    },
+                    "begin": 0,
+                    "close": 44640,
+                    "plan_label": "Mar",
+                    "mass": 1
+                  },
+                  "May": {
+                    "_is_expanded": false,
+                    "_kids": {
+                      "days": {
+                        "_is_expanded": false,
+                        "plan_label": "days",
+                        "denom": 1440,
+                        "gogo_want": 0.0,
+                        "mass": 1,
+                        "morph": true,
+                        "numor": 1,
+                        "stop_want": 31.0
+                      }
+                    },
+                    "begin": 0,
+                    "close": 44640,
+                    "plan_label": "May",
+                    "mass": 1
+                  },
+                  "Nov": {
+                    "_is_expanded": false,
+                    "_kids": {
+                      "days": {
+                        "_is_expanded": false,
+                        "plan_label": "days",
+                        "denom": 1440,
+                        "gogo_want": 0.0,
+                        "mass": 1,
+                        "morph": true,
+                        "numor": 1,
+                        "stop_want": 30.0
+                      }
+                    },
+                    "begin": 0,
+                    "close": 43200,
+                    "plan_label": "Nov",
+                    "mass": 1
+                  },
+                  "Oct": {
+                    "_is_expanded": false,
+                    "_kids": {
+                      "days": {
+                        "_is_expanded": false,
+                        "plan_label": "days",
+                        "denom": 1440,
+                        "gogo_want": 0.0,
+                        "mass": 1,
+                        "morph": true,
+                        "numor": 1,
+                        "stop_want": 31.0
+                      }
+                    },
+                    "begin": 0,
+                    "close": 44640,
+                    "plan_label": "Oct",
+                    "mass": 1
+                  },
+                  "Sep": {
+                    "_is_expanded": false,
+                    "_kids": {
+                      "days": {
+                        "_is_expanded": false,
+                        "plan_label": "days",
+                        "denom": 1440,
+                        "gogo_want": 0.0,
+                        "mass": 1,
+                        "morph": true,
+                        "numor": 1,
+                        "stop_want": 30.0
+                      }
+                    },
+                    "begin": 0,
+                    "close": 43200,
+                    "plan_label": "Sep",
+                    "mass": 1
+                  }
+                },
+                "plan_label": "month",
+                "mass": 1
+              },
+              "wk": {
+                "_is_expanded": false,
+                "_kids": {
+                  "Friday": {
+                    "_is_expanded": false,
+                    "plan_label": "Friday",
+                    "gogo_want": 8640,
+                    "mass": 1,
+                    "stop_want": 10080
+                  },
+                  "Monday": {
+                    "_is_expanded": false,
+                    "plan_label": "Monday",
+                    "gogo_want": 2880,
+                    "mass": 1,
+                    "stop_want": 4320
+                  },
+                  "Saturday": {
+                    "_is_expanded": false,
+                    "plan_label": "Saturday",
+                    "gogo_want": 0,
+                    "mass": 1,
+                    "stop_want": 1440
+                  },
+                  "Sunday": {
+                    "_is_expanded": false,
+                    "plan_label": "Sunday",
+                    "gogo_want": 1440,
+                    "mass": 1,
+                    "stop_want": 2880
+                  },
+                  "Thursday": {
+                    "_is_expanded": false,
+                    "plan_label": "Thursday",
+                    "gogo_want": 7200,
+                    "mass": 1,
+                    "stop_want": 8640
+                  },
+                  "Tuesday": {
+                    "_is_expanded": false,
+                    "plan_label": "Tuesday",
+                    "gogo_want": 4320,
+                    "mass": 1,
+                    "stop_want": 5760
+                  },
+                  "Wednesday": {
+                    "_is_expanded": false,
+                    "plan_label": "Wednesday",
+                    "gogo_want": 5760,
+                    "mass": 1,
+                    "stop_want": 7200
+                  }
+                },
+                "begin": 0.0,
+                "close": 10080.0,
+                "plan_label": "wk",
+                "mass": 1
+              }
+            },
+            "plan_label": "tech",
+            "mass": 1
+          }
+        },
+        "plan_label": "time",
+        "mass": 1
+      },
+      "Tired Status": {
+        "_is_expanded": false,
+        "_kids": {
+          "Not tired": {
+            "_uid": 278,
+            "plan_label": "Not tired",
+            "mass": 1
+          },
+          "Tired": {
+            "_uid": 279,
+            "plan_label": "Tired",
+            "mass": 1
+          }
+        },
+        "_uid": 277,
+        "plan_label": "Tired Status",
+        "mass": 1
+      },
+      "Ultimate Frisbee": {
+        "_is_expanded": false,
+        "_kids": {
+          "check on m33": {
+            "_uid": 221,
+            "plan_label": "check on m33",
+            "mass": 1,
+            "reasonunits": {
+              "A;Moods;": {
+                "premises": {
+                  "A;Moods;Happy": {
+                    "pstate": ";A;Moods;Happy"
+                  }
+                },
+                "rcontext": ";A;Moods;"
+              }
+            }
+          },
+          "contemplate the disc": {
+            "_uid": 229,
+            "plan_label": "contemplate the disc",
+            "mass": 1,
+            "reasonunits": {
+              "A;No Movie playing;": {
+                "premises": {
+                  "A;No Movie playing;Big Lewbwski": {
+                    "pstate": ";A;No Movie playing;Big Lewbwski"
+                  }
+                },
+                "rcontext": ";A;No Movie playing;"
+              }
+            }
+          },
+          "playing ultimate": {
+            "_kids": {
+              "check for mini ultimate at park": {
+                "_uid": 219,
+                "plan_label": "check for mini ultimate at park",
+                "mass": 1,
+                "reasonunits": {
+                  "A;Moods;": {
+                    "premises": {
+                      "A;Moods;Happy": {
+                        "pstate": ";A;Moods;Happy"
+                      }
+                    },
+                    "rcontext": ";A;Moods;"
+                  }
+                }
+              }
+            },
+            "_uid": 201,
+            "plan_label": "playing ultimate",
+            "mass": 1,
+            "reasonunits": {
+              "A;Moods;": {
+                "premises": {
+                  "A;Moods;Happy": {
+                    "pstate": ";A;Moods;Happy"
+                  }
+                },
+                "rcontext": ";A;Moods;"
+              }
+            }
+          },
+          "relaxing": {
+            "_uid": 202,
+            "plan_label": "relaxing",
+            "mass": 1,
+            "reasonunits": {
+              "A;No Movie playing;": {
+                "premises": {
+                  "A;No Movie playing;Star Wars eps IV": {
+                    "pstate": ";A;No Movie playing;Star Wars eps IV"
+                  }
+                },
+                "rcontext": ";A;No Movie playing;"
+              }
+            }
+          }
+        },
+        "_uid": 200,
+        "plan_label": "Ultimate Frisbee",
+        "mass": 1,
+        "reasonunits": {
+          "A;Moods;": {
+            "premises": {
+              "A;Moods;Happy": {
+                "pstate": ";A;Moods;Happy"
+              }
+            },
+            "rcontext": ";A;Moods;"
+          }
+        }
+      },
+      "Water Living": {
+        "_is_expanded": false,
+        "_kids": {
+          "Swimming in Williamette watershed": {
+            "_kids": {
+              "bike around": {
+                "_uid": 227,
+                "plan_label": "bike around",
+                "mass": 1,
+                "reasonunits": {
+                  "A;WaterExistence;": {
+                    "premises": {
+                      "A;WaterExistence;Williamette WaterShed;East Side of Watershed": {
+                        "pstate": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed"
+                      }
+                    },
+                    "rcontext": ";A;WaterExistence;"
+                  }
+                }
+              },
+              "Go climbing at east Circuit": {
+                "_uid": 226,
+                "plan_label": "Go climbing at east Circuit",
+                "mass": 1,
+                "reasonunits": {
+                  "A;WaterExistence;": {
+                    "premises": {
+                      "A;WaterExistence;Williamette WaterShed;West side of Watershed": {
+                        "pstate": ";A;WaterExistence;Williamette WaterShed;West side of Watershed"
+                      }
+                    },
+                    "rcontext": ";A;WaterExistence;"
+                  }
+                }
+              },
+              "trout": {
+                "_uid": 228,
+                "plan_label": "trout",
+                "mass": 1,
+                "reasonunits": {
+                  "A;WaterExistence;": {
+                    "premises": {
+                      "A;WaterExistence;Williamette WaterShed;East Side of Watershed;flat": {
+                        "pstate": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed;flat"
+                      }
+                    },
+                    "rcontext": ";A;WaterExistence;"
+                  }
+                }
+              }
+            },
+            "_uid": 225,
+            "plan_label": "Swimming in Williamette watershed",
+            "mass": 1,
+            "reasonunits": {
+              "A;WaterExistence;": {
+                "premises": {
+                  "A;WaterExistence;Williamette WaterShed": {
+                    "pstate": ";A;WaterExistence;Williamette WaterShed"
+                  }
+                },
+                "rcontext": ";A;WaterExistence;"
+              }
+            }
+          }
+        },
+        "_uid": 223,
+        "plan_label": "Water Living",
+        "mass": 1
+      },
+      "WaterExistence": {
+        "_is_expanded": false,
+        "_kids": {
+          "Williamette WaterShed": {
+            "_kids": {
+              "East Side of Watershed": {
+                "_kids": {
+                  "flat": {
+                    "_uid": 260,
+                    "plan_label": "flat",
+                    "mass": 1
+                  }
+                },
+                "_uid": 258,
+                "plan_label": "East Side of Watershed",
+                "mass": 1
+              },
+              "West side of Watershed": {
+                "_uid": 259,
+                "plan_label": "West side of Watershed",
+                "mass": 1
+              }
+            },
+            "_uid": 257,
+            "plan_label": "Williamette WaterShed",
+            "mass": 1
+          }
+        },
+        "_uid": 256,
+        "plan_label": "WaterExistence",
+        "mass": 1
+      }
+    },
+    "_uid": 1,
+    "plan_label": "A",
+    "factunits": {
+      "A;Aaron Donald objects effected by him;": {
+        "fcontext": ";A;Aaron Donald objects effected by him;",
+        "fstate": ";A;Aaron Donald objects effected by him;"
+      },
+      "A;casa;cleaning;laundry basket status;": {
+        "fcontext": ";A;casa;cleaning;laundry basket status;",
+        "fstate": ";A;casa;cleaning;laundry basket status;not full"
+      },
+      "A;Interweb;": {
+        "fcontext": ";A;Interweb;",
+        "fstate": ";A;Interweb;"
+      },
+      "A;Moods;": {
+        "fcontext": ";A;Moods;",
+        "fstate": ";A;Moods;"
+      },
+      "A;Nation-States;": {
+        "fcontext": ";A;Nation-States;",
+        "fstate": ";A;Nation-States;"
+      },
+      "A;No Movie playing;": {
+        "fcontext": ";A;No Movie playing;",
+        "fstate": ";A;No Movie playing;"
+      },
+      "A;Seasons;": {
+        "fcontext": ";A;Seasons;",
+        "fstate": ";A;Seasons;"
+      },
+      "A;time;gregtime;": {
+        "fcontext": ";A;time;gregtime;",
+        "fnigh": 1064130373,
+        "fopen": 1064128320,
+        "fstate": ";A;time;gregtime;"
+      },
+      "A;WaterExistence;": {
+        "fcontext": ";A;WaterExistence;",
+        "fstate": ";A;WaterExistence;"
+      }
+    },
+    "mass": 1
+  },
+  "belief_label": "A",
+  "fund_iota": 1,
+  "fund_pool": 1000000000.0,
+  "max_tree_traverse": 20,
+  "believer_name": "Bob",
+  "penny": 1,
+  "respect_bit": 1,
+  "tally": null
+}

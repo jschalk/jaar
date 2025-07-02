@@ -16,8 +16,8 @@ from src.a04_reason_logic.reason_plan import (
 )
 from src.a05_plan_logic.healer import healerlink_shop
 from src.a05_plan_logic.plan import planunit_shop
-from src.a06_owner_logic.owner import ownerunit_shop
-from src.a18_etl_toolbox.db_obj_owner_tool import (
+from src.a06_believer_logic.believer import believerunit_shop
+from src.a18_etl_toolbox.db_obj_believer_tool import (
     ObjKeysHolder,
     insert_job_obj,
     insert_job_onracct,
@@ -42,7 +42,7 @@ def test_ObjKeysHolder_Exists():
 
     # THEN
     assert not x_objkeyholder.belief_label
-    assert not x_objkeyholder.owner_name
+    assert not x_objkeyholder.believer_name
     assert not x_objkeyholder.rope
     assert not x_objkeyholder.rcontext
     assert not x_objkeyholder.acct_name
@@ -51,11 +51,11 @@ def test_ObjKeysHolder_Exists():
     assert not x_objkeyholder.fact_rope
 
 
-def test_insert_job_onrunit_CreatesTableRowsFor_ownerunit_job():
+def test_insert_job_onrunit_CreatesTableRowsFor_believerunit_job():
     # sourcery skip: extract-method
     # ESTABLISH
     x_belief_label = "amy23"
-    x_owner_name = "Sue"
+    x_believer_name = "Sue"
     x__keeps_buildable = 99
     x__keeps_justified = 77
     x__offtrack_fund = 55.5
@@ -70,31 +70,33 @@ def test_insert_job_onrunit_CreatesTableRowsFor_ownerunit_job():
     x_penny = 4.0
     x_respect_bit = 0.2
     x_tally = 6
-    sue_owner = ownerunit_shop(owner_name=x_owner_name, belief_label=x_belief_label)
-    sue_owner.fund_pool = x_fund_pool
-    sue_owner.fund_iota = x_fund_iota
-    sue_owner.penny = x_penny
-    sue_owner.tally = x_tally
-    sue_owner.respect_bit = x_respect_bit
-    sue_owner.max_tree_traverse = x_max_tree_traverse
-    sue_owner._keeps_buildable = x__keeps_buildable
-    sue_owner._keeps_justified = x__keeps_justified
-    sue_owner._offtrack_fund = x__offtrack_fund
-    sue_owner._rational = x__rational
-    sue_owner._sum_healerlink_share = x__sum_healerlink_share
-    sue_owner._tree_traverse_count = x__tree_traverse_count
-    sue_owner.credor_respect = x_credor_respect
-    sue_owner.debtor_respect = x_debtor_respect
+    sue_believer = believerunit_shop(
+        believer_name=x_believer_name, belief_label=x_belief_label
+    )
+    sue_believer.fund_pool = x_fund_pool
+    sue_believer.fund_iota = x_fund_iota
+    sue_believer.penny = x_penny
+    sue_believer.tally = x_tally
+    sue_believer.respect_bit = x_respect_bit
+    sue_believer.max_tree_traverse = x_max_tree_traverse
+    sue_believer._keeps_buildable = x__keeps_buildable
+    sue_believer._keeps_justified = x__keeps_justified
+    sue_believer._offtrack_fund = x__offtrack_fund
+    sue_believer._rational = x__rational
+    sue_believer._sum_healerlink_share = x__sum_healerlink_share
+    sue_believer._tree_traverse_count = x__tree_traverse_count
+    sue_believer.credor_respect = x_credor_respect
+    sue_believer.debtor_respect = x_debtor_respect
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "ownerunit_job"
+        x_table_name = "believerunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         objkeysholder = ObjKeysHolder()
 
         # WHEN
-        insert_job_onrunit(cursor, objkeysholder, sue_owner)
+        insert_job_onrunit(cursor, objkeysholder, sue_believer)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -103,7 +105,7 @@ def test_insert_job_onrunit_CreatesTableRowsFor_ownerunit_job():
         rows = cursor.fetchall()
         expected_row1 = (
             x_belief_label,
-            x_owner_name,
+            x_believer_name,
             x_credor_respect,
             x_debtor_respect,
             x_fund_pool,
@@ -126,7 +128,7 @@ def test_insert_job_onrunit_CreatesTableRowsFor_ownerunit_job():
 def test_insert_job_onrplan_CreatesTableRowsFor_onrplan_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_owner_calc_dimen_args("owner_planunit")
+    # x_args = get_believer_calc_dimen_args("believer_planunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -139,7 +141,7 @@ def test_insert_job_onrplan_CreatesTableRowsFor_onrplan_job():
     #     print(f"""            x_{x_arg},""")
     # print("")
     x_belief_label = "amy23"
-    x_owner_name = 2
+    x_believer_name = 2
     casa_rope = create_rope(x_belief_label, "casa")
     x_parent_rope = casa_rope
     x_plan_label = "clean"
@@ -226,9 +228,9 @@ def test_insert_job_onrplan_CreatesTableRowsFor_onrplan_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "owner_planunit_job"
+        x_table_name = "believer_planunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name)
+        x_objkeysholder = ObjKeysHolder(x_belief_label, x_believer_name)
 
         # WHEN
         insert_job_onrplan(cursor, x_objkeysholder, x_plan)
@@ -241,7 +243,7 @@ def test_insert_job_onrplan_CreatesTableRowsFor_onrplan_job():
         rows = cursor.fetchall()
         expected_row1 = (
             x_belief_label,
-            str(x_owner_name),
+            str(x_believer_name),
             clean_rope,
             x_begin,
             x_close,
@@ -276,7 +278,7 @@ def test_insert_job_onrplan_CreatesTableRowsFor_onrplan_job():
 def test_insert_job_onrreas_CreatesTableRowsFor_onrreas_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_owner_calc_dimen_args("owner_plan_reasonunit")
+    # x_args = get_believer_calc_dimen_args("believer_plan_reasonunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -290,7 +292,7 @@ def test_insert_job_onrreas_CreatesTableRowsFor_onrreas_job():
     # print("")
 
     x_belief_label = 1
-    x_owner_name = 2
+    x_believer_name = 2
     x_rope = 3
     x_rcontext = 4
     x_rplan_active_requisite = 5
@@ -307,9 +309,9 @@ def test_insert_job_onrreas_CreatesTableRowsFor_onrreas_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "owner_plan_reasonunit_job"
+        x_table_name = "believer_plan_reasonunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name, x_rope)
+        x_objkeysholder = ObjKeysHolder(x_belief_label, x_believer_name, x_rope)
 
         # WHEN
         insert_job_onrreas(cursor, x_objkeysholder, x_reasonheir)
@@ -321,7 +323,7 @@ def test_insert_job_onrreas_CreatesTableRowsFor_onrreas_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_belief_label),
-            str(x_owner_name),
+            str(x_believer_name),
             str(x_rope),
             str(x_rcontext),
             x_rplan_active_requisite,
@@ -336,7 +338,7 @@ def test_insert_job_onrreas_CreatesTableRowsFor_onrreas_job():
 def test_insert_job_onrprem_CreatesTableRowsFor_onrprem_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_owner_calc_dimen_args("owner_plan_reason_premiseunit")
+    # x_args = get_believer_calc_dimen_args("believer_plan_reason_premiseunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -349,7 +351,7 @@ def test_insert_job_onrprem_CreatesTableRowsFor_onrprem_job():
     #     print(f"""            x_{x_arg},""")
 
     x_belief_label = 1
-    x_owner_name = 2
+    x_believer_name = 2
     x_rope = 3
     x_rcontext = 4
     x_pstate = 5
@@ -369,10 +371,10 @@ def test_insert_job_onrprem_CreatesTableRowsFor_onrprem_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "owner_plan_reason_premiseunit_job"
+        x_table_name = "believer_plan_reason_premiseunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(
-            x_belief_label, x_owner_name, x_rope, x_rcontext
+            x_belief_label, x_believer_name, x_rope, x_rcontext
         )
 
         # WHEN
@@ -385,7 +387,7 @@ def test_insert_job_onrprem_CreatesTableRowsFor_onrprem_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_belief_label),
-            str(x_owner_name),
+            str(x_believer_name),
             str(x_rope),
             str(x_rcontext),
             str(x_pstate),
@@ -402,7 +404,7 @@ def test_insert_job_onrprem_CreatesTableRowsFor_onrprem_job():
 def test_insert_job_onrmemb_CreatesTableRowsFor_onrmemb_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_owner_calc_dimen_args("owner_acct_membership")
+    # x_args = get_believer_calc_dimen_args("believer_acct_membership")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -415,7 +417,7 @@ def test_insert_job_onrmemb_CreatesTableRowsFor_onrmemb_job():
     #     print(f"""            x_{x_arg},""")
 
     x_belief_label = 1
-    x_owner_name = 2
+    x_believer_name = 2
     x_acct_name = 3
     x_group_title = 4
     x_group_cred_points = 5.0
@@ -444,9 +446,9 @@ def test_insert_job_onrmemb_CreatesTableRowsFor_onrmemb_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "owner_acct_membership_job"
+        x_table_name = "believer_acct_membership_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name)
+        x_objkeysholder = ObjKeysHolder(x_belief_label, x_believer_name)
 
         # WHEN
         insert_job_onrmemb(cursor, x_objkeysholder, x_membership)
@@ -458,7 +460,7 @@ def test_insert_job_onrmemb_CreatesTableRowsFor_onrmemb_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_belief_label),
-            str(x_owner_name),
+            str(x_believer_name),
             str(x_acct_name),
             str(x_group_title),
             x_group_cred_points,
@@ -479,7 +481,7 @@ def test_insert_job_onrmemb_CreatesTableRowsFor_onrmemb_job():
 def test_insert_job_onracct_CreatesTableRowsFor_onracct_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_owner_calc_dimen_args("owner_acctunit")
+    # x_args = get_believer_calc_dimen_args("believer_acctunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -492,7 +494,7 @@ def test_insert_job_onracct_CreatesTableRowsFor_onracct_job():
     #     print(f"""            x_{x_arg},""")
 
     x_belief_label = 1
-    x_owner_name = 2
+    x_believer_name = 2
     x_acct_name = 3
     x_acct_cred_points = 4
     x_acct_debt_points = 5
@@ -524,9 +526,9 @@ def test_insert_job_onracct_CreatesTableRowsFor_onracct_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "owner_acctunit_job"
+        x_table_name = "believer_acctunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name)
+        x_objkeysholder = ObjKeysHolder(x_belief_label, x_believer_name)
 
         # WHEN
         insert_job_onracct(cursor, x_objkeysholder, x_acct)
@@ -538,7 +540,7 @@ def test_insert_job_onracct_CreatesTableRowsFor_onracct_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_belief_label),
-            str(x_owner_name),
+            str(x_believer_name),
             str(x_acct_name),
             x_acct_cred_points,
             x_acct_debt_points,
@@ -560,7 +562,7 @@ def test_insert_job_onracct_CreatesTableRowsFor_onracct_job():
 def test_insert_job_onrgrou_CreatesTableRowsFor_onrgrou_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_owner_calc_dimen_args("owner_groupunit")
+    # x_args = get_believer_calc_dimen_args("believer_groupunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -573,7 +575,7 @@ def test_insert_job_onrgrou_CreatesTableRowsFor_onrgrou_job():
     #     print(f"""            x_{x_arg},""")
 
     x_belief_label = 1
-    x_owner_name = 2
+    x_believer_name = 2
     x_group_title = 3
     x_fund_iota = 4
     x_knot = 5
@@ -597,9 +599,9 @@ def test_insert_job_onrgrou_CreatesTableRowsFor_onrgrou_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "owner_groupunit_job"
+        x_table_name = "believer_groupunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name)
+        x_objkeysholder = ObjKeysHolder(x_belief_label, x_believer_name)
 
         # WHEN
         insert_job_onrgrou(cursor, x_objkeysholder, x_group)
@@ -611,7 +613,7 @@ def test_insert_job_onrgrou_CreatesTableRowsFor_onrgrou_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_belief_label),
-            str(x_owner_name),
+            str(x_believer_name),
             str(x_group_title),
             x_fund_iota,
             str(x_knot),
@@ -629,7 +631,7 @@ def test_insert_job_onrgrou_CreatesTableRowsFor_onrgrou_job():
 def test_insert_job_onrawar_CreatesTableRowsFor_onrawar_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_owner_calc_dimen_args("owner_plan_awardlink")
+    # x_args = get_believer_calc_dimen_args("believer_plan_awardlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -642,7 +644,7 @@ def test_insert_job_onrawar_CreatesTableRowsFor_onrawar_job():
     #     print(f"""            x_{x_arg},""")
 
     x_belief_label = 1
-    x_owner_name = 2
+    x_believer_name = 2
     x_rope = 3
     x_awardee_title = 4
     x_give_force = 5
@@ -659,9 +661,9 @@ def test_insert_job_onrawar_CreatesTableRowsFor_onrawar_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "owner_plan_awardlink_job"
+        x_table_name = "believer_plan_awardlink_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name, x_rope)
+        x_objkeysholder = ObjKeysHolder(x_belief_label, x_believer_name, x_rope)
 
         # WHEN
         insert_job_onrawar(cursor, x_objkeysholder, x_awardheir)
@@ -673,7 +675,7 @@ def test_insert_job_onrawar_CreatesTableRowsFor_onrawar_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_belief_label),
-            str(x_owner_name),
+            str(x_believer_name),
             str(x_rope),
             str(x_awardee_title),
             x_give_force,
@@ -688,7 +690,7 @@ def test_insert_job_onrawar_CreatesTableRowsFor_onrawar_job():
 def test_insert_job_onrfact_CreatesTableRowsFor_onrfact_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_owner_calc_dimen_args("owner_plan_factunit")
+    # x_args = get_believer_calc_dimen_args("believer_plan_factunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -701,7 +703,7 @@ def test_insert_job_onrfact_CreatesTableRowsFor_onrfact_job():
     #     print(f"""            x_{x_arg},""")
 
     x_belief_label = 1
-    x_owner_name = 2
+    x_believer_name = 2
     x_rope = 3
     x_rcontext = 4
     x_fstate = 5
@@ -716,9 +718,9 @@ def test_insert_job_onrfact_CreatesTableRowsFor_onrfact_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "owner_plan_factunit_job"
+        x_table_name = "believer_plan_factunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name, x_rope)
+        x_objkeysholder = ObjKeysHolder(x_belief_label, x_believer_name, x_rope)
 
         # WHEN
         insert_job_onrfact(cursor, x_objkeysholder, x_factheir)
@@ -730,7 +732,7 @@ def test_insert_job_onrfact_CreatesTableRowsFor_onrfact_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_belief_label),
-            str(x_owner_name),
+            str(x_believer_name),
             str(x_rope),
             str(x_rcontext),
             str(x_fstate),
@@ -744,7 +746,7 @@ def test_insert_job_onrfact_CreatesTableRowsFor_onrfact_job():
 def test_insert_job_onrheal_CreatesTableRowsFor_onrheal_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_owner_calc_dimen_args("owner_plan_healerlink")
+    # x_args = get_believer_calc_dimen_args("believer_plan_healerlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -757,7 +759,7 @@ def test_insert_job_onrheal_CreatesTableRowsFor_onrheal_job():
     #     print(f"""            x_{x_arg},""")
 
     x_belief_label = 1
-    x_owner_name = 2
+    x_believer_name = 2
     x_rope = 3
     bob_str = "Bob"
     sue_str = "Sue"
@@ -768,9 +770,9 @@ def test_insert_job_onrheal_CreatesTableRowsFor_onrheal_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "owner_plan_healerlink_job"
+        x_table_name = "believer_plan_healerlink_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name, x_rope)
+        x_objkeysholder = ObjKeysHolder(x_belief_label, x_believer_name, x_rope)
 
         # WHEN
         insert_job_onrheal(cursor, x_objkeysholder, x_healerlink)
@@ -782,13 +784,13 @@ def test_insert_job_onrheal_CreatesTableRowsFor_onrheal_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_belief_label),
-            str(x_owner_name),
+            str(x_believer_name),
             str(x_rope),
             bob_str,
         )
         expected_row2 = (
             str(x_belief_label),
-            str(x_owner_name),
+            str(x_believer_name),
             str(x_rope),
             sue_str,
         )
@@ -799,7 +801,7 @@ def test_insert_job_onrheal_CreatesTableRowsFor_onrheal_job():
 def test_insert_job_onrlabo_CreatesTableRowsFor_onrlabo_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_owner_calc_dimen_args("owner_plan_laborlink")
+    # x_args = get_believer_calc_dimen_args("believer_plan_laborlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -812,11 +814,11 @@ def test_insert_job_onrlabo_CreatesTableRowsFor_onrlabo_job():
     #     print(f"""            x_{x_arg},""")
 
     x_belief_label = 1
-    x_owner_name = 2
+    x_believer_name = 2
     x_rope = 3
-    x__owner_name_labor = 5
+    x__believer_name_labor = 5
     x_laborheir = laborheir_shop()
-    x_laborheir._owner_name_labor = x__owner_name_labor
+    x_laborheir._believer_name_labor = x__believer_name_labor
     bob_str = "Bob"
     sue_str = "Sue"
     x_laborheir._laborlinks = {bob_str, sue_str}
@@ -824,9 +826,9 @@ def test_insert_job_onrlabo_CreatesTableRowsFor_onrlabo_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "owner_plan_laborlink_job"
+        x_table_name = "believer_plan_laborlink_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name, x_rope)
+        x_objkeysholder = ObjKeysHolder(x_belief_label, x_believer_name, x_rope)
 
         # WHEN
         insert_job_onrlabo(cursor, x_objkeysholder, x_laborheir)
@@ -838,17 +840,17 @@ def test_insert_job_onrlabo_CreatesTableRowsFor_onrlabo_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_belief_label),
-            str(x_owner_name),
+            str(x_believer_name),
             str(x_rope),
             bob_str,
-            x__owner_name_labor,
+            x__believer_name_labor,
         )
         expected_row2 = (
             str(x_belief_label),
-            str(x_owner_name),
+            str(x_believer_name),
             str(x_rope),
             sue_str,
-            x__owner_name_labor,
+            x__believer_name_labor,
         )
         expected_data = [expected_row1, expected_row2]
         assert rows == expected_data
@@ -861,39 +863,39 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
     sue_str = "Sue"
     bob_str = "Bob"
     run_str = ";run"
-    sue_owner = ownerunit_shop(sue_str, a23_str)
-    sue_owner.add_acctunit(sue_str)
-    sue_owner.add_acctunit(bob_str)
-    sue_owner.get_acct(bob_str).add_membership(run_str)
-    casa_rope = sue_owner.make_l1_rope("casa")
-    status_rope = sue_owner.make_l1_rope("status")
-    clean_rope = sue_owner.make_rope(status_rope, "clean")
-    dirty_rope = sue_owner.make_rope(status_rope, "dirty")
-    sue_owner.add_plan(casa_rope)
-    sue_owner.add_plan(clean_rope)
-    sue_owner.add_plan(dirty_rope)
-    sue_owner.edit_plan_attr(
+    sue_believer = believerunit_shop(sue_str, a23_str)
+    sue_believer.add_acctunit(sue_str)
+    sue_believer.add_acctunit(bob_str)
+    sue_believer.get_acct(bob_str).add_membership(run_str)
+    casa_rope = sue_believer.make_l1_rope("casa")
+    status_rope = sue_believer.make_l1_rope("status")
+    clean_rope = sue_believer.make_rope(status_rope, "clean")
+    dirty_rope = sue_believer.make_rope(status_rope, "dirty")
+    sue_believer.add_plan(casa_rope)
+    sue_believer.add_plan(clean_rope)
+    sue_believer.add_plan(dirty_rope)
+    sue_believer.edit_plan_attr(
         casa_rope, reason_rcontext=status_rope, reason_premise=dirty_rope
     )
-    sue_owner.edit_plan_attr(casa_rope, awardlink=awardlink_shop(run_str))
-    sue_owner.edit_plan_attr(casa_rope, healerlink=healerlink_shop({bob_str}))
-    sue_owner.edit_plan_attr(casa_rope, laborunit=laborunit_shop({sue_str}))
-    sue_owner.add_fact(status_rope, clean_rope)
+    sue_believer.edit_plan_attr(casa_rope, awardlink=awardlink_shop(run_str))
+    sue_believer.edit_plan_attr(casa_rope, healerlink=healerlink_shop({bob_str}))
+    sue_believer.edit_plan_attr(casa_rope, laborunit=laborunit_shop({sue_str}))
+    sue_believer.add_fact(status_rope, clean_rope)
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        onrmemb_job_table = "owner_acct_membership_job"
-        onracct_job_table = "owner_acctunit_job"
-        onrgrou_job_table = "owner_groupunit_job"
-        onrawar_job_table = "owner_plan_awardlink_job"
-        onrfact_job_table = "owner_plan_factunit_job"
-        onrheal_job_table = "owner_plan_healerlink_job"
-        onrprem_job_table = "owner_plan_reason_premiseunit_job"
-        onrreas_job_table = "owner_plan_reasonunit_job"
-        onrlabo_job_table = "owner_plan_laborlink_job"
-        onrplan_job_table = "owner_planunit_job"
-        onrunit_job_table = "ownerunit_job"
+        onrmemb_job_table = "believer_acct_membership_job"
+        onracct_job_table = "believer_acctunit_job"
+        onrgrou_job_table = "believer_groupunit_job"
+        onrawar_job_table = "believer_plan_awardlink_job"
+        onrfact_job_table = "believer_plan_factunit_job"
+        onrheal_job_table = "believer_plan_healerlink_job"
+        onrprem_job_table = "believer_plan_reason_premiseunit_job"
+        onrreas_job_table = "believer_plan_reasonunit_job"
+        onrlabo_job_table = "believer_plan_laborlink_job"
+        onrplan_job_table = "believer_planunit_job"
+        onrunit_job_table = "believerunit_job"
         assert get_row_count(cursor, onrunit_job_table) == 0
         assert get_row_count(cursor, onrplan_job_table) == 0
         assert get_row_count(cursor, onracct_job_table) == 0
@@ -907,7 +909,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         assert get_row_count(cursor, onrlabo_job_table) == 0
 
         # WHEN
-        insert_job_obj(cursor, sue_owner)
+        insert_job_obj(cursor, sue_believer)
 
         # THEN
         assert get_row_count(cursor, onrunit_job_table) == 1
