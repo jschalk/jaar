@@ -90,16 +90,16 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         pidcore_sound_vld = create_prime_tablename("pidcore", "s", "vld")
         beliefunit_sound_raw = create_prime_tablename("beliefunit", "s", "raw")
         beliefunit_sound_agg = create_prime_tablename("beliefunit", "s", "agg")
-        plnunit_sound_put_raw = create_prime_tablename("ownerunit", "s", "raw", "put")
-        plnunit_sound_put_agg = create_prime_tablename("ownerunit", "s", "agg", "put")
-        plnacct_sound_put_raw = create_prime_tablename("plnacct", "s", "raw", "put")
-        plnacct_sound_put_agg = create_prime_tablename("plnacct", "s", "agg", "put")
+        onrunit_sound_put_raw = create_prime_tablename("ownerunit", "s", "raw", "put")
+        onrunit_sound_put_agg = create_prime_tablename("ownerunit", "s", "agg", "put")
+        onracct_sound_put_raw = create_prime_tablename("onracct", "s", "raw", "put")
+        onracct_sound_put_agg = create_prime_tablename("onracct", "s", "agg", "put")
         beliefunit_voice_raw = create_prime_tablename("beliefunit", "v", "raw")
         beliefunit_voice_agg = create_prime_tablename("beliefunit", "v", "agg")
-        plnunit_voice_put_raw = create_prime_tablename("ownerunit", "v", "raw", "put")
-        plnunit_voice_put_agg = create_prime_tablename("ownerunit", "v", "agg", "put")
-        plnacct_voice_put_raw = create_prime_tablename("plnacct", "v", "raw", "put")
-        plnacct_voice_put_agg = create_prime_tablename("plnacct", "v", "agg", "put")
+        onrunit_voice_put_raw = create_prime_tablename("ownerunit", "v", "raw", "put")
+        onrunit_voice_put_agg = create_prime_tablename("ownerunit", "v", "agg", "put")
+        onracct_voice_put_raw = create_prime_tablename("onracct", "v", "raw", "put")
+        onracct_voice_put_agg = create_prime_tablename("onracct", "v", "agg", "put")
 
         cursor = db_conn.cursor()
         assert get_row_count(cursor, br00113_raw) == 1
@@ -109,21 +109,21 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         assert get_row_count(cursor, br00113_valid) == 2
         assert get_row_count(cursor, pidname_sound_raw) == 2
         assert get_row_count(cursor, beliefunit_sound_raw) == 4
-        assert get_row_count(cursor, plnunit_sound_put_raw) == 4
-        assert get_row_count(cursor, plnacct_sound_put_raw) == 2
+        assert get_row_count(cursor, onrunit_sound_put_raw) == 4
+        assert get_row_count(cursor, onracct_sound_put_raw) == 2
         assert get_row_count(cursor, pidname_sound_agg) == 1
         assert get_row_count(cursor, beliefunit_sound_agg) == 1
-        assert get_row_count(cursor, plnunit_sound_put_agg) == 1
-        assert get_row_count(cursor, plnacct_sound_put_agg) == 1
+        assert get_row_count(cursor, onrunit_sound_put_agg) == 1
+        assert get_row_count(cursor, onracct_sound_put_agg) == 1
         assert get_row_count(cursor, pidcore_sound_raw) == 1
         assert get_row_count(cursor, pidcore_sound_agg) == 1
         assert get_row_count(cursor, pidcore_sound_vld) == 1
         assert get_row_count(cursor, pidname_sound_vld) == 1
         assert get_row_count(cursor, beliefunit_voice_raw) == 1
-        assert get_row_count(cursor, plnunit_voice_put_raw) == 1
-        assert get_row_count(cursor, plnacct_voice_put_raw) == 1
+        assert get_row_count(cursor, onrunit_voice_put_raw) == 1
+        assert get_row_count(cursor, onracct_voice_put_raw) == 1
         assert get_row_count(cursor, beliefunit_voice_agg) == 1
-        assert get_row_count(cursor, plnunit_voice_put_agg) == 1
-        assert get_row_count(cursor, plnacct_voice_put_agg) == 1
+        assert get_row_count(cursor, onrunit_voice_put_agg) == 1
+        assert get_row_count(cursor, onracct_voice_put_agg) == 1
         assert get_row_count(cursor, belief_ote1_agg_str()) == 1
     db_conn.close()

@@ -32,32 +32,32 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_owner_plan_laborlink
             acct_name_str(),
             amount_str(),
         ]
-        plnlabo_cat = "owner_plan_laborlink"
+        onrlabo_cat = "owner_plan_laborlink"
         src_table = f"{idea_number}_raw"
-        dst_table = f"{plnlabo_cat}_raw"
+        dst_table = f"{onrlabo_cat}_raw"
         idea_config = get_idea_config_dict()
-        plnlabo_config = idea_config.get(plnlabo_cat)
-        print(f"{plnlabo_cat=}")
-        print(f"{plnlabo_config=}")
-        plnlabo_jkeys = plnlabo_config.get("jkeys")
-        plnlabo_jvals = plnlabo_config.get("jvalues")
-        plnlabo_args = set(plnlabo_jkeys.keys()).union(set(plnlabo_jvals.keys()))
-        plnlabo_args = get_default_sorted_list(plnlabo_args)
-        print(f"{plnlabo_jkeys=}")
-        print(f"{plnlabo_jvals=}")
+        onrlabo_config = idea_config.get(onrlabo_cat)
+        print(f"{onrlabo_cat=}")
+        print(f"{onrlabo_config=}")
+        onrlabo_jkeys = onrlabo_config.get("jkeys")
+        onrlabo_jvals = onrlabo_config.get("jvalues")
+        onrlabo_args = set(onrlabo_jkeys.keys()).union(set(onrlabo_jvals.keys()))
+        onrlabo_args = get_default_sorted_list(onrlabo_args)
+        print(f"{onrlabo_jkeys=}")
+        print(f"{onrlabo_jvals=}")
         create_idea_sorted_table(conn, src_table, idea_cols)
-        create_idea_sorted_table(conn, dst_table, plnlabo_args)
+        create_idea_sorted_table(conn, dst_table, onrlabo_args)
 
         # WHEN
         gen_sqlstr = get_idea_into_dimen_raw_query(
-            conn, idea_number, plnlabo_cat, plnlabo_jkeys
+            conn, idea_number, onrlabo_cat, onrlabo_jkeys
         )
 
         # THEN
         columns_str = (
             "event_int, face_name, belief_label, owner_name, plan_rope, labor_title"
         )
-        expected_sqlstr = f"""INSERT INTO {plnlabo_cat}_raw (idea_number, {columns_str})
+        expected_sqlstr = f"""INSERT INTO {onrlabo_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
 WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND belief_label IS NOT NULL AND owner_name IS NOT NULL AND plan_rope IS NOT NULL AND labor_title IS NOT NULL
@@ -86,27 +86,27 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_owner_acctunit():
             acct_debt_points_str(),
             amount_str(),
         ]
-        plnacct_cat = "owner_acctunit"
+        onracct_cat = "owner_acctunit"
         src_table = f"{idea_number}_raw"
-        plnacct_table = f"{plnacct_cat}_raw"
+        onracct_table = f"{onracct_cat}_raw"
         idea_config = get_idea_config_dict()
-        plnacct_config = idea_config.get(plnacct_cat)
-        plnacct_jkeys = plnacct_config.get("jkeys")
-        plnacct_jvals = plnacct_config.get("jvalues")
-        plnacct_args = set(plnacct_jkeys.keys()).union(set(plnacct_jvals.keys()))
-        print(f"{plnacct_jkeys=}")
-        print(f"{plnacct_jvals=}")
+        onracct_config = idea_config.get(onracct_cat)
+        onracct_jkeys = onracct_config.get("jkeys")
+        onracct_jvals = onracct_config.get("jvalues")
+        onracct_args = set(onracct_jkeys.keys()).union(set(onracct_jvals.keys()))
+        print(f"{onracct_jkeys=}")
+        print(f"{onracct_jvals=}")
         create_idea_sorted_table(conn, src_table, idea_cols)
-        create_idea_sorted_table(conn, plnacct_table, list(plnacct_args))
+        create_idea_sorted_table(conn, onracct_table, list(onracct_args))
 
         # WHEN
         gen_sqlstr = get_idea_into_dimen_raw_query(
-            conn, idea_number, plnacct_cat, plnacct_jkeys
+            conn, idea_number, onracct_cat, onracct_jkeys
         )
 
         # THEN
         columns_str = "event_int, face_name, belief_label, owner_name, acct_name, acct_cred_points, acct_debt_points"
-        expected_sqlstr = f"""INSERT INTO {plnacct_cat}_raw (idea_number, {columns_str})
+        expected_sqlstr = f"""INSERT INTO {onracct_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
 WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND belief_label IS NOT NULL AND owner_name IS NOT NULL AND acct_name IS NOT NULL
@@ -135,27 +135,27 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_owner_acctunit():
             acct_cred_points_str(),
             amount_str(),
         ]
-        plnacct_cat = "owner_acctunit"
+        onracct_cat = "owner_acctunit"
         src_table = f"{idea_number}_raw"
-        plnacct_table = f"{plnacct_cat}_raw"
+        onracct_table = f"{onracct_cat}_raw"
         idea_config = get_idea_config_dict()
-        plnacct_config = idea_config.get(plnacct_cat)
-        plnacct_jkeys = plnacct_config.get("jkeys")
-        plnacct_jvals = plnacct_config.get("jvalues")
-        plnacct_args = set(plnacct_jkeys.keys()).union(set(plnacct_jvals.keys()))
-        print(f"{plnacct_jkeys=}")
-        print(f"{plnacct_jvals=}")
+        onracct_config = idea_config.get(onracct_cat)
+        onracct_jkeys = onracct_config.get("jkeys")
+        onracct_jvals = onracct_config.get("jvalues")
+        onracct_args = set(onracct_jkeys.keys()).union(set(onracct_jvals.keys()))
+        print(f"{onracct_jkeys=}")
+        print(f"{onracct_jvals=}")
         create_idea_sorted_table(conn, src_table, idea_cols)
-        create_idea_sorted_table(conn, plnacct_table, list(plnacct_args))
+        create_idea_sorted_table(conn, onracct_table, list(onracct_args))
 
         # WHEN
         gen_sqlstr = get_idea_into_dimen_raw_query(
-            conn, idea_number, plnacct_cat, plnacct_jkeys
+            conn, idea_number, onracct_cat, onracct_jkeys
         )
 
         # THEN
         columns_str = "event_int, face_name, belief_label, owner_name, acct_name, acct_cred_points"
-        expected_sqlstr = f"""INSERT INTO {plnacct_cat}_raw (idea_number, {columns_str})
+        expected_sqlstr = f"""INSERT INTO {onracct_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
 WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND belief_label IS NOT NULL AND owner_name IS NOT NULL AND acct_name IS NOT NULL

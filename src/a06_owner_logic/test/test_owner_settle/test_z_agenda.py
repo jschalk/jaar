@@ -224,7 +224,7 @@ def test_OwnerUnit_get_agenda_dict_OwnerUnitHasCorrectAttributes_ownerunit_v001(
     print(len(plan_task_list))
 
 
-def test_OwnerUnit_get_agenda_dict_OwnerUnitCanCleanOnRcontext_ownerunit_v001_with_large_agenda():
+def test_OwnerUnit_get_agenda_dict_OwnerUnitCanCleanOn_Rcontext_ownerunit_v001_with_large_agenda():
     # ESTABLISH
     yao_owner = ownerunit_v001_with_large_agenda()
     wk_str = "wkdays"

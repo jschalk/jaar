@@ -211,31 +211,31 @@ def test_get_owner_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
                     fm_aspect_keys = set(fm_aspect_dict.keys())
                     assert fm_aspect_keys == dimen_keys
 
-    plnunit_aspect = owner_calc_config.get(ownerunit_str())
-    plnacct_aspect = owner_calc_config.get(owner_acctunit_str())
-    plnmemb_aspect = owner_calc_config.get(owner_acct_membership_str())
-    plnconc_aspect = owner_calc_config.get(owner_planunit_str())
-    plnawar_aspect = owner_calc_config.get(owner_plan_awardlink_str())
-    plnreas_aspect = owner_calc_config.get(owner_plan_reasonunit_str())
-    plnprem_aspect = owner_calc_config.get(owner_plan_reason_premiseunit_str())
-    plnlabo_aspect = owner_calc_config.get(owner_plan_laborlink_str())
-    plnheal_aspect = owner_calc_config.get(owner_plan_healerlink_str())
-    plnfact_aspect = owner_calc_config.get(owner_plan_factunit_str())
-    plngrou_aspect = owner_calc_config.get(owner_groupunit_str())
+    onrunit_aspect = owner_calc_config.get(ownerunit_str())
+    onracct_aspect = owner_calc_config.get(owner_acctunit_str())
+    onrmemb_aspect = owner_calc_config.get(owner_acct_membership_str())
+    onrplan_aspect = owner_calc_config.get(owner_planunit_str())
+    onrawar_aspect = owner_calc_config.get(owner_plan_awardlink_str())
+    onrreas_aspect = owner_calc_config.get(owner_plan_reasonunit_str())
+    onrprem_aspect = owner_calc_config.get(owner_plan_reason_premiseunit_str())
+    onrlabo_aspect = owner_calc_config.get(owner_plan_laborlink_str())
+    onrheal_aspect = owner_calc_config.get(owner_plan_healerlink_str())
+    onrfact_aspect = owner_calc_config.get(owner_plan_factunit_str())
+    onrgrou_aspect = owner_calc_config.get(owner_groupunit_str())
 
-    plnunit_jmetrics_keys = set(plnunit_aspect.get(jmetrics_str()))
-    plnacct_jmetrics_keys = set(plnacct_aspect.get(jmetrics_str()))
-    plnmemb_jmetrics_keys = set(plnmemb_aspect.get(jmetrics_str()))
-    plnconc_jmetrics_keys = set(plnconc_aspect.get(jmetrics_str()))
-    plnawar_jmetrics_keys = set(plnawar_aspect.get(jmetrics_str()))
-    plnreas_jmetrics_keys = set(plnreas_aspect.get(jmetrics_str()))
-    plnprem_jmetrics_keys = set(plnprem_aspect.get(jmetrics_str()))
-    plnlabo_jmetrics_keys = set(plnlabo_aspect.get(jmetrics_str()))
-    plnheal_jmetrics_keys = set(plnheal_aspect.get(jmetrics_str()))
-    plnfact_jmetrics_keys = set(plnfact_aspect.get(jmetrics_str()))
-    plngrou_jmetrics_keys = set(plngrou_aspect.get(jmetrics_str()))
+    onrunit_jmetrics_keys = set(onrunit_aspect.get(jmetrics_str()))
+    onracct_jmetrics_keys = set(onracct_aspect.get(jmetrics_str()))
+    onrmemb_jmetrics_keys = set(onrmemb_aspect.get(jmetrics_str()))
+    onrplan_jmetrics_keys = set(onrplan_aspect.get(jmetrics_str()))
+    onrawar_jmetrics_keys = set(onrawar_aspect.get(jmetrics_str()))
+    onrreas_jmetrics_keys = set(onrreas_aspect.get(jmetrics_str()))
+    onrprem_jmetrics_keys = set(onrprem_aspect.get(jmetrics_str()))
+    onrlabo_jmetrics_keys = set(onrlabo_aspect.get(jmetrics_str()))
+    onrheal_jmetrics_keys = set(onrheal_aspect.get(jmetrics_str()))
+    onrfact_jmetrics_keys = set(onrfact_aspect.get(jmetrics_str()))
+    onrgrou_jmetrics_keys = set(onrgrou_aspect.get(jmetrics_str()))
 
-    expected_plnunit_jmetrics_keys = {
+    expected_onrunit_jmetrics_keys = {
         "_tree_traverse_count",
         "_rational",
         "_keeps_justified",
@@ -243,8 +243,8 @@ def test_get_owner_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
         "_sum_healerlink_share",
         "_offtrack_fund",
     }
-    assert expected_plnunit_jmetrics_keys == plnunit_jmetrics_keys
-    expected_plnacct_jmetrics_keys = {
+    assert expected_onrunit_jmetrics_keys == onrunit_jmetrics_keys
+    expected_onracct_jmetrics_keys = {
         "_credor_pool",
         "_debtor_pool",
         "_irrational_acct_debt_points",
@@ -256,8 +256,8 @@ def test_get_owner_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
         "_fund_agenda_ratio_give",
         "_fund_agenda_ratio_take",
     }
-    assert expected_plnacct_jmetrics_keys == plnacct_jmetrics_keys
-    expected_plnmemb_jmetrics_keys = {
+    assert expected_onracct_jmetrics_keys == onracct_jmetrics_keys
+    expected_onrmemb_jmetrics_keys = {
         "_credor_pool",
         "_debtor_pool",
         "_fund_give",
@@ -267,8 +267,8 @@ def test_get_owner_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
         "_fund_agenda_ratio_give",
         "_fund_agenda_ratio_take",
     }
-    assert expected_plnmemb_jmetrics_keys == plnmemb_jmetrics_keys
-    expected_plnconc_jmetrics_keys = {
+    assert expected_onrmemb_jmetrics_keys == onrmemb_jmetrics_keys
+    expected_onrplan_jmetrics_keys = {
         "_active",
         "_all_acct_cred",
         "_all_acct_debt",
@@ -284,20 +284,20 @@ def test_get_owner_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
         "_gogo_calc",
         "_stop_calc",
     }
-    assert expected_plnconc_jmetrics_keys == plnconc_jmetrics_keys
-    expected_plnawar_jmetrics_keys = {"_fund_give", "_fund_take"}
-    assert expected_plnawar_jmetrics_keys == plnawar_jmetrics_keys
-    expected_plnreas_jmetrics_keys = {
+    assert expected_onrplan_jmetrics_keys == onrplan_jmetrics_keys
+    expected_onrawar_jmetrics_keys = {"_fund_give", "_fund_take"}
+    assert expected_onrawar_jmetrics_keys == onrawar_jmetrics_keys
+    expected_onrreas_jmetrics_keys = {
         "_status",
         "_chore",
         "_rplan_active_value",
     }
-    assert expected_plnreas_jmetrics_keys == plnreas_jmetrics_keys
-    expected_plnprem_jmetrics_keys = {"_status", "_chore"}
-    assert expected_plnprem_jmetrics_keys == plnprem_jmetrics_keys
-    expected_plnlabo_jmetrics_keys = {"_owner_name_labor"}
-    assert expected_plnlabo_jmetrics_keys == plnlabo_jmetrics_keys
-    expected_plngrou_jmetrics_keys = {
+    assert expected_onrreas_jmetrics_keys == onrreas_jmetrics_keys
+    expected_onrprem_jmetrics_keys = {"_status", "_chore"}
+    assert expected_onrprem_jmetrics_keys == onrprem_jmetrics_keys
+    expected_onrlabo_jmetrics_keys = {"_owner_name_labor"}
+    assert expected_onrlabo_jmetrics_keys == onrlabo_jmetrics_keys
+    expected_onrgrou_jmetrics_keys = {
         "_fund_give",
         "_fund_take",
         "_fund_agenda_give",
@@ -306,19 +306,19 @@ def test_get_owner_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
         "_debtor_pool",
         "fund_iota",
     }
-    assert expected_plngrou_jmetrics_keys == plngrou_jmetrics_keys
+    assert expected_onrgrou_jmetrics_keys == onrgrou_jmetrics_keys
 
-    assert plnunit_jmetrics_keys  # Non-empty
-    assert plnacct_jmetrics_keys  # Non-empty
-    assert plnmemb_jmetrics_keys  # Non-empty
-    assert plnconc_jmetrics_keys  # Non-empty
-    assert plnawar_jmetrics_keys  # Non-empty
-    assert plnreas_jmetrics_keys  # Non-empty
-    assert plnprem_jmetrics_keys  # Non-empty
-    assert plnlabo_jmetrics_keys  # Non-empty
-    assert not plnheal_jmetrics_keys  # empty
-    assert not plnfact_jmetrics_keys  # empty
-    assert plngrou_jmetrics_keys  # Non-empty
+    assert onrunit_jmetrics_keys  # Non-empty
+    assert onracct_jmetrics_keys  # Non-empty
+    assert onrmemb_jmetrics_keys  # Non-empty
+    assert onrplan_jmetrics_keys  # Non-empty
+    assert onrawar_jmetrics_keys  # Non-empty
+    assert onrreas_jmetrics_keys  # Non-empty
+    assert onrprem_jmetrics_keys  # Non-empty
+    assert onrlabo_jmetrics_keys  # Non-empty
+    assert not onrheal_jmetrics_keys  # empty
+    assert not onrfact_jmetrics_keys  # empty
+    assert onrgrou_jmetrics_keys  # Non-empty
 
 
 def test_get_owner_calc_config_dict_ReturnsObj_CheckAbbreviations():
@@ -326,29 +326,29 @@ def test_get_owner_calc_config_dict_ReturnsObj_CheckAbbreviations():
     owner_calc_config = get_owner_calc_config_dict()
 
     # THEN
-    plnunit_aspect = owner_calc_config.get(ownerunit_str())
-    plnacct_aspect = owner_calc_config.get(owner_acctunit_str())
-    plnmemb_aspect = owner_calc_config.get(owner_acct_membership_str())
-    plnconc_aspect = owner_calc_config.get(owner_planunit_str())
-    plnawar_aspect = owner_calc_config.get(owner_plan_awardlink_str())
-    plnreas_aspect = owner_calc_config.get(owner_plan_reasonunit_str())
-    plnprem_aspect = owner_calc_config.get(owner_plan_reason_premiseunit_str())
-    plnlabo_aspect = owner_calc_config.get(owner_plan_laborlink_str())
-    plnheal_aspect = owner_calc_config.get(owner_plan_healerlink_str())
-    plnfact_aspect = owner_calc_config.get(owner_plan_factunit_str())
-    plngrou_aspect = owner_calc_config.get(owner_groupunit_str())
+    onrunit_aspect = owner_calc_config.get(ownerunit_str())
+    onracct_aspect = owner_calc_config.get(owner_acctunit_str())
+    onrmemb_aspect = owner_calc_config.get(owner_acct_membership_str())
+    onrplan_aspect = owner_calc_config.get(owner_planunit_str())
+    onrawar_aspect = owner_calc_config.get(owner_plan_awardlink_str())
+    onrreas_aspect = owner_calc_config.get(owner_plan_reasonunit_str())
+    onrprem_aspect = owner_calc_config.get(owner_plan_reason_premiseunit_str())
+    onrlabo_aspect = owner_calc_config.get(owner_plan_laborlink_str())
+    onrheal_aspect = owner_calc_config.get(owner_plan_healerlink_str())
+    onrfact_aspect = owner_calc_config.get(owner_plan_factunit_str())
+    onrgrou_aspect = owner_calc_config.get(owner_groupunit_str())
     abbr_str = "abbreviation"
-    assert plnunit_aspect.get(abbr_str) == "plnunit"
-    assert plnacct_aspect.get(abbr_str) == "plnacct"
-    assert plnmemb_aspect.get(abbr_str) == "plnmemb"
-    assert plnconc_aspect.get(abbr_str) == "plnconc"
-    assert plnawar_aspect.get(abbr_str) == "plnawar"
-    assert plnreas_aspect.get(abbr_str) == "plnreas"
-    assert plnprem_aspect.get(abbr_str) == "plnprem"
-    assert plnlabo_aspect.get(abbr_str) == "plnlabo"
-    assert plnheal_aspect.get(abbr_str) == "plnheal"
-    assert plnfact_aspect.get(abbr_str) == "plnfact"
-    assert plngrou_aspect.get(abbr_str) == "plngrou"
+    assert onrunit_aspect.get(abbr_str) == "onrunit"
+    assert onracct_aspect.get(abbr_str) == "onracct"
+    assert onrmemb_aspect.get(abbr_str) == "onrmemb"
+    assert onrplan_aspect.get(abbr_str) == "onrplan"
+    assert onrawar_aspect.get(abbr_str) == "onrawar"
+    assert onrreas_aspect.get(abbr_str) == "onrreas"
+    assert onrprem_aspect.get(abbr_str) == "onrprem"
+    assert onrlabo_aspect.get(abbr_str) == "onrlabo"
+    assert onrheal_aspect.get(abbr_str) == "onrheal"
+    assert onrfact_aspect.get(abbr_str) == "onrfact"
+    assert onrgrou_aspect.get(abbr_str) == "onrgrou"
 
 
 def test_get_all_owner_calc_args_ReturnsObj():
@@ -369,8 +369,8 @@ def test_get_all_owner_calc_args_ReturnsObj():
 
     # owner_calc_config = get_owner_calc_config_dict()
     # owner_acctunit_aspects = owner_calc_config.get("owner_acctunit")
-    # plnacct_jmetrics_dict = owner_acctunit_aspects.get("jmetrics")
-    # rope_owner_calc_aspects = plnacct_jmetrics_dict.get("_fund_give")
+    # onracct_jmetrics_dict = owner_acctunit_aspects.get("jmetrics")
+    # rope_owner_calc_aspects = onracct_jmetrics_dict.get("_fund_give")
     # assert owner_plan_factunit_str() in rope_owner_calc_aspects
     # assert owner_plan_laborlink_str() in rope_owner_calc_aspects
     # assert len(rope_owner_calc_aspects) == 6
@@ -528,202 +528,202 @@ def test_get_owner_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     jv = "jvalues"
     jm = "jmetrics"
     ownerunit = ownerunit_str()
-    plnacct = owner_acctunit_str()
-    plnmemb = owner_acct_membership_str()
-    plnconc = owner_planunit_str()
-    plnawar = owner_plan_awardlink_str()
-    plnreas = owner_plan_reasonunit_str()
-    plnprem = owner_plan_reason_premiseunit_str()
-    plnlabo = owner_plan_laborlink_str()
-    plnheal = owner_plan_healerlink_str()
-    plnfact = owner_plan_factunit_str()
-    plngrou = owner_groupunit_str()
-    assert g_class_type(cfig, plnmemb, jk, acct_name_str()) == NameTerm_str()
-    assert g_sqlitetype(cfig, plnmemb, jk, acct_name_str()) == "TEXT"
-    assert g_class_type(cfig, plnmemb, jk, group_title_str()) == TitleTerm_str()
-    assert g_sqlitetype(cfig, plnmemb, jk, group_title_str()) == "TEXT"
-    assert g_class_type(cfig, plnmemb, jm, _credor_pool_str()) == "float"
-    assert g_sqlitetype(cfig, plnmemb, jm, _credor_pool_str()) == "REAL"
-    assert g_class_type(cfig, plnmemb, jm, _debtor_pool_str()) == "float"
-    assert g_sqlitetype(cfig, plnmemb, jm, _debtor_pool_str()) == "REAL"
-    assert g_class_type(cfig, plnmemb, jm, _fund_agenda_give_str()) == "float"
-    assert g_sqlitetype(cfig, plnmemb, jm, _fund_agenda_give_str()) == "REAL"
-    assert g_class_type(cfig, plnmemb, jm, _fund_agenda_ratio_give_str()) == "float"
-    assert g_sqlitetype(cfig, plnmemb, jm, _fund_agenda_ratio_give_str()) == "REAL"
-    assert g_class_type(cfig, plnmemb, jm, _fund_agenda_ratio_take_str()) == "float"
-    assert g_sqlitetype(cfig, plnmemb, jm, _fund_agenda_ratio_take_str()) == "REAL"
-    assert g_class_type(cfig, plnmemb, jm, _fund_agenda_take_str()) == "float"
-    assert g_sqlitetype(cfig, plnmemb, jm, _fund_agenda_take_str()) == "REAL"
-    assert g_class_type(cfig, plnmemb, jm, _fund_give_str()) == "float"
-    assert g_sqlitetype(cfig, plnmemb, jm, _fund_give_str()) == "REAL"
-    assert g_class_type(cfig, plnmemb, jm, _fund_take_str()) == "float"
-    assert g_sqlitetype(cfig, plnmemb, jm, _fund_take_str()) == "REAL"
-    assert g_class_type(cfig, plnmemb, jv, group_cred_points_str()) == "float"
-    assert g_sqlitetype(cfig, plnmemb, jv, group_cred_points_str()) == "REAL"
-    assert g_class_type(cfig, plnmemb, jv, group_debt_points_str()) == "float"
-    assert g_sqlitetype(cfig, plnmemb, jv, group_debt_points_str()) == "REAL"
-    assert g_class_type(cfig, plnacct, jk, acct_name_str()) == NameTerm_str()
-    assert g_sqlitetype(cfig, plnacct, jk, acct_name_str()) == "TEXT"
-    assert g_class_type(cfig, plnacct, jm, _credor_pool_str()) == "float"
-    assert g_sqlitetype(cfig, plnacct, jm, _credor_pool_str()) == "REAL"
-    assert g_class_type(cfig, plnacct, jm, _debtor_pool_str()) == "float"
-    assert g_sqlitetype(cfig, plnacct, jm, _debtor_pool_str()) == "REAL"
-    assert g_class_type(cfig, plnacct, jm, _fund_agenda_give_str()) == "float"
-    assert g_sqlitetype(cfig, plnacct, jm, _fund_agenda_give_str()) == "REAL"
-    assert g_class_type(cfig, plnacct, jm, _fund_agenda_ratio_give_str()) == "float"
-    assert g_sqlitetype(cfig, plnacct, jm, _fund_agenda_ratio_give_str()) == "REAL"
-    assert g_class_type(cfig, plnacct, jm, _fund_agenda_ratio_take_str()) == "float"
-    assert g_sqlitetype(cfig, plnacct, jm, _fund_agenda_ratio_take_str()) == "REAL"
-    assert g_class_type(cfig, plnacct, jm, _fund_agenda_take_str()) == "float"
-    assert g_sqlitetype(cfig, plnacct, jm, _fund_agenda_take_str()) == "REAL"
-    assert g_class_type(cfig, plnacct, jm, _fund_give_str()) == "float"
-    assert g_sqlitetype(cfig, plnacct, jm, _fund_give_str()) == "REAL"
-    assert g_class_type(cfig, plnacct, jm, _fund_take_str()) == "float"
-    assert g_sqlitetype(cfig, plnacct, jm, _fund_take_str()) == "REAL"
+    onracct = owner_acctunit_str()
+    onrmemb = owner_acct_membership_str()
+    onrplan = owner_planunit_str()
+    onrawar = owner_plan_awardlink_str()
+    onrreas = owner_plan_reasonunit_str()
+    onrprem = owner_plan_reason_premiseunit_str()
+    onrlabo = owner_plan_laborlink_str()
+    onrheal = owner_plan_healerlink_str()
+    onrfact = owner_plan_factunit_str()
+    onrgrou = owner_groupunit_str()
+    assert g_class_type(cfig, onrmemb, jk, acct_name_str()) == NameTerm_str()
+    assert g_sqlitetype(cfig, onrmemb, jk, acct_name_str()) == "TEXT"
+    assert g_class_type(cfig, onrmemb, jk, group_title_str()) == TitleTerm_str()
+    assert g_sqlitetype(cfig, onrmemb, jk, group_title_str()) == "TEXT"
+    assert g_class_type(cfig, onrmemb, jm, _credor_pool_str()) == "float"
+    assert g_sqlitetype(cfig, onrmemb, jm, _credor_pool_str()) == "REAL"
+    assert g_class_type(cfig, onrmemb, jm, _debtor_pool_str()) == "float"
+    assert g_sqlitetype(cfig, onrmemb, jm, _debtor_pool_str()) == "REAL"
+    assert g_class_type(cfig, onrmemb, jm, _fund_agenda_give_str()) == "float"
+    assert g_sqlitetype(cfig, onrmemb, jm, _fund_agenda_give_str()) == "REAL"
+    assert g_class_type(cfig, onrmemb, jm, _fund_agenda_ratio_give_str()) == "float"
+    assert g_sqlitetype(cfig, onrmemb, jm, _fund_agenda_ratio_give_str()) == "REAL"
+    assert g_class_type(cfig, onrmemb, jm, _fund_agenda_ratio_take_str()) == "float"
+    assert g_sqlitetype(cfig, onrmemb, jm, _fund_agenda_ratio_take_str()) == "REAL"
+    assert g_class_type(cfig, onrmemb, jm, _fund_agenda_take_str()) == "float"
+    assert g_sqlitetype(cfig, onrmemb, jm, _fund_agenda_take_str()) == "REAL"
+    assert g_class_type(cfig, onrmemb, jm, _fund_give_str()) == "float"
+    assert g_sqlitetype(cfig, onrmemb, jm, _fund_give_str()) == "REAL"
+    assert g_class_type(cfig, onrmemb, jm, _fund_take_str()) == "float"
+    assert g_sqlitetype(cfig, onrmemb, jm, _fund_take_str()) == "REAL"
+    assert g_class_type(cfig, onrmemb, jv, group_cred_points_str()) == "float"
+    assert g_sqlitetype(cfig, onrmemb, jv, group_cred_points_str()) == "REAL"
+    assert g_class_type(cfig, onrmemb, jv, group_debt_points_str()) == "float"
+    assert g_sqlitetype(cfig, onrmemb, jv, group_debt_points_str()) == "REAL"
+    assert g_class_type(cfig, onracct, jk, acct_name_str()) == NameTerm_str()
+    assert g_sqlitetype(cfig, onracct, jk, acct_name_str()) == "TEXT"
+    assert g_class_type(cfig, onracct, jm, _credor_pool_str()) == "float"
+    assert g_sqlitetype(cfig, onracct, jm, _credor_pool_str()) == "REAL"
+    assert g_class_type(cfig, onracct, jm, _debtor_pool_str()) == "float"
+    assert g_sqlitetype(cfig, onracct, jm, _debtor_pool_str()) == "REAL"
+    assert g_class_type(cfig, onracct, jm, _fund_agenda_give_str()) == "float"
+    assert g_sqlitetype(cfig, onracct, jm, _fund_agenda_give_str()) == "REAL"
+    assert g_class_type(cfig, onracct, jm, _fund_agenda_ratio_give_str()) == "float"
+    assert g_sqlitetype(cfig, onracct, jm, _fund_agenda_ratio_give_str()) == "REAL"
+    assert g_class_type(cfig, onracct, jm, _fund_agenda_ratio_take_str()) == "float"
+    assert g_sqlitetype(cfig, onracct, jm, _fund_agenda_ratio_take_str()) == "REAL"
+    assert g_class_type(cfig, onracct, jm, _fund_agenda_take_str()) == "float"
+    assert g_sqlitetype(cfig, onracct, jm, _fund_agenda_take_str()) == "REAL"
+    assert g_class_type(cfig, onracct, jm, _fund_give_str()) == "float"
+    assert g_sqlitetype(cfig, onracct, jm, _fund_give_str()) == "REAL"
+    assert g_class_type(cfig, onracct, jm, _fund_take_str()) == "float"
+    assert g_sqlitetype(cfig, onracct, jm, _fund_take_str()) == "REAL"
     assert (
-        g_class_type(cfig, plnacct, jm, _inallocable_acct_debt_points_str()) == "float"
+        g_class_type(cfig, onracct, jm, _inallocable_acct_debt_points_str()) == "float"
     )
     assert (
-        g_sqlitetype(cfig, plnacct, jm, _inallocable_acct_debt_points_str()) == "REAL"
+        g_sqlitetype(cfig, onracct, jm, _inallocable_acct_debt_points_str()) == "REAL"
     )
     assert (
-        g_class_type(cfig, plnacct, jm, _irrational_acct_debt_points_str()) == "float"
+        g_class_type(cfig, onracct, jm, _irrational_acct_debt_points_str()) == "float"
     )
-    assert g_sqlitetype(cfig, plnacct, jm, _irrational_acct_debt_points_str()) == "REAL"
-    assert g_class_type(cfig, plnacct, jv, acct_cred_points_str()) == "float"
-    assert g_sqlitetype(cfig, plnacct, jv, acct_cred_points_str()) == "REAL"
-    assert g_class_type(cfig, plnacct, jv, acct_debt_points_str()) == "float"
-    assert g_sqlitetype(cfig, plnacct, jv, acct_debt_points_str()) == "REAL"
+    assert g_sqlitetype(cfig, onracct, jm, _irrational_acct_debt_points_str()) == "REAL"
+    assert g_class_type(cfig, onracct, jv, acct_cred_points_str()) == "float"
+    assert g_sqlitetype(cfig, onracct, jv, acct_cred_points_str()) == "REAL"
+    assert g_class_type(cfig, onracct, jv, acct_debt_points_str()) == "float"
+    assert g_sqlitetype(cfig, onracct, jv, acct_debt_points_str()) == "REAL"
 
-    assert g_class_type(cfig, plngrou, jk, group_title_str()) == "TitleTerm"
-    assert g_sqlitetype(cfig, plngrou, jk, group_title_str()) == "TEXT"
-    assert g_class_type(cfig, plngrou, jv, knot_str()) == "str"
-    assert g_sqlitetype(cfig, plngrou, jv, knot_str()) == "TEXT"
-    assert g_class_type(cfig, plngrou, jm, _debtor_pool_str()) == "float"
-    assert g_sqlitetype(cfig, plngrou, jm, _debtor_pool_str()) == "REAL"
-    assert g_class_type(cfig, plngrou, jm, _credor_pool_str()) == "float"
-    assert g_sqlitetype(cfig, plngrou, jm, _credor_pool_str()) == "REAL"
-    assert g_class_type(cfig, plngrou, jm, _fund_give_str()) == "float"
-    assert g_sqlitetype(cfig, plngrou, jm, _fund_give_str()) == "REAL"
-    assert g_class_type(cfig, plngrou, jm, _fund_agenda_give_str()) == "float"
-    assert g_sqlitetype(cfig, plngrou, jm, _fund_agenda_give_str()) == "REAL"
-    assert g_class_type(cfig, plngrou, jm, _fund_agenda_take_str()) == "float"
-    assert g_sqlitetype(cfig, plngrou, jm, _fund_agenda_take_str()) == "REAL"
-    assert g_class_type(cfig, plngrou, jm, _fund_take_str()) == "float"
-    assert g_sqlitetype(cfig, plngrou, jm, _fund_take_str()) == "REAL"
-    assert g_class_type(cfig, plngrou, jm, fund_iota_str()) == "float"
-    assert g_sqlitetype(cfig, plngrou, jm, fund_iota_str()) == "REAL"
+    assert g_class_type(cfig, onrgrou, jk, group_title_str()) == "TitleTerm"
+    assert g_sqlitetype(cfig, onrgrou, jk, group_title_str()) == "TEXT"
+    assert g_class_type(cfig, onrgrou, jv, knot_str()) == "str"
+    assert g_sqlitetype(cfig, onrgrou, jv, knot_str()) == "TEXT"
+    assert g_class_type(cfig, onrgrou, jm, _debtor_pool_str()) == "float"
+    assert g_sqlitetype(cfig, onrgrou, jm, _debtor_pool_str()) == "REAL"
+    assert g_class_type(cfig, onrgrou, jm, _credor_pool_str()) == "float"
+    assert g_sqlitetype(cfig, onrgrou, jm, _credor_pool_str()) == "REAL"
+    assert g_class_type(cfig, onrgrou, jm, _fund_give_str()) == "float"
+    assert g_sqlitetype(cfig, onrgrou, jm, _fund_give_str()) == "REAL"
+    assert g_class_type(cfig, onrgrou, jm, _fund_agenda_give_str()) == "float"
+    assert g_sqlitetype(cfig, onrgrou, jm, _fund_agenda_give_str()) == "REAL"
+    assert g_class_type(cfig, onrgrou, jm, _fund_agenda_take_str()) == "float"
+    assert g_sqlitetype(cfig, onrgrou, jm, _fund_agenda_take_str()) == "REAL"
+    assert g_class_type(cfig, onrgrou, jm, _fund_take_str()) == "float"
+    assert g_sqlitetype(cfig, onrgrou, jm, _fund_take_str()) == "REAL"
+    assert g_class_type(cfig, onrgrou, jm, fund_iota_str()) == "float"
+    assert g_sqlitetype(cfig, onrgrou, jm, fund_iota_str()) == "REAL"
 
-    assert g_class_type(cfig, plnawar, jk, awardee_title_str()) == TitleTerm_str()
-    assert g_sqlitetype(cfig, plnawar, jk, awardee_title_str()) == "TEXT"
-    assert g_class_type(cfig, plnawar, jk, plan_rope_str()) == RopeTerm_str()
-    assert g_sqlitetype(cfig, plnawar, jk, plan_rope_str()) == "TEXT"
-    assert g_class_type(cfig, plnawar, jm, _fund_give_str()) == "float"
-    assert g_sqlitetype(cfig, plnawar, jm, _fund_give_str()) == "REAL"
-    assert g_class_type(cfig, plnawar, jm, _fund_take_str()) == "float"
-    assert g_sqlitetype(cfig, plnawar, jm, _fund_take_str()) == "REAL"
-    assert g_class_type(cfig, plnawar, jv, give_force_str()) == "float"
-    assert g_sqlitetype(cfig, plnawar, jv, give_force_str()) == "REAL"
-    assert g_class_type(cfig, plnawar, jv, take_force_str()) == "float"
-    assert g_sqlitetype(cfig, plnawar, jv, take_force_str()) == "REAL"
-    assert g_class_type(cfig, plnfact, jk, fcontext_str()) == RopeTerm_str()
-    assert g_sqlitetype(cfig, plnfact, jk, fcontext_str()) == "TEXT"
-    assert g_class_type(cfig, plnfact, jk, plan_rope_str()) == RopeTerm_str()
-    assert g_sqlitetype(cfig, plnfact, jk, plan_rope_str()) == "TEXT"
-    assert g_class_type(cfig, plnfact, jv, fnigh_str()) == "float"
-    assert g_sqlitetype(cfig, plnfact, jv, fnigh_str()) == "REAL"
-    assert g_class_type(cfig, plnfact, jv, fopen_str()) == "float"
-    assert g_sqlitetype(cfig, plnfact, jv, fopen_str()) == "REAL"
-    assert g_class_type(cfig, plnfact, jv, fstate_str()) == RopeTerm_str()
-    assert g_sqlitetype(cfig, plnfact, jv, fstate_str()) == "TEXT"
-    assert g_class_type(cfig, plnheal, jk, healer_name_str()) == NameTerm_str()
-    assert g_sqlitetype(cfig, plnheal, jk, healer_name_str()) == "TEXT"
-    assert g_class_type(cfig, plnheal, jk, plan_rope_str()) == RopeTerm_str()
-    assert g_sqlitetype(cfig, plnheal, jk, plan_rope_str()) == "TEXT"
-    assert g_class_type(cfig, plnprem, jk, rcontext_str()) == RopeTerm_str()
-    assert g_sqlitetype(cfig, plnprem, jk, rcontext_str()) == "TEXT"
-    assert g_class_type(cfig, plnprem, jk, pstate_str()) == RopeTerm_str()
-    assert g_sqlitetype(cfig, plnprem, jk, pstate_str()) == "TEXT"
-    assert g_class_type(cfig, plnprem, jk, plan_rope_str()) == RopeTerm_str()
-    assert g_sqlitetype(cfig, plnprem, jk, plan_rope_str()) == "TEXT"
-    assert g_class_type(cfig, plnprem, jm, _status_str()) == "int"
-    assert g_sqlitetype(cfig, plnprem, jm, _status_str()) == "INTEGER"
-    assert g_class_type(cfig, plnprem, jm, _chore_str()) == "int"
-    assert g_sqlitetype(cfig, plnprem, jm, _chore_str()) == "INTEGER"
-    assert g_class_type(cfig, plnprem, jv, pdivisor_str()) == "int"
-    assert g_sqlitetype(cfig, plnprem, jv, pdivisor_str()) == "INTEGER"
-    assert g_class_type(cfig, plnprem, jv, pnigh_str()) == "float"
-    assert g_sqlitetype(cfig, plnprem, jv, pnigh_str()) == "REAL"
-    assert g_class_type(cfig, plnprem, jv, popen_str()) == "float"
-    assert g_sqlitetype(cfig, plnprem, jv, popen_str()) == "REAL"
-    assert g_class_type(cfig, plnreas, jk, rcontext_str()) == RopeTerm_str()
-    assert g_sqlitetype(cfig, plnreas, jk, rcontext_str()) == "TEXT"
-    assert g_class_type(cfig, plnreas, jk, plan_rope_str()) == RopeTerm_str()
-    assert g_sqlitetype(cfig, plnreas, jk, plan_rope_str()) == "TEXT"
-    assert g_class_type(cfig, plnreas, jm, "_rplan_active_value") == "int"
-    assert g_sqlitetype(cfig, plnreas, jm, "_rplan_active_value") == "INTEGER"
-    assert g_class_type(cfig, plnreas, jm, _status_str()) == "int"
-    assert g_sqlitetype(cfig, plnreas, jm, _status_str()) == "INTEGER"
-    assert g_class_type(cfig, plnreas, jm, _chore_str()) == "int"
-    assert g_sqlitetype(cfig, plnreas, jm, _chore_str()) == "INTEGER"
-    assert g_class_type(cfig, plnreas, jv, rplan_active_requisite_str()) == "bool"
-    assert g_sqlitetype(cfig, plnreas, jv, rplan_active_requisite_str()) == "INTEGER"
-    assert g_class_type(cfig, plnlabo, jk, plan_rope_str()) == RopeTerm_str()
-    assert g_sqlitetype(cfig, plnlabo, jk, plan_rope_str()) == "TEXT"
-    assert g_class_type(cfig, plnlabo, jk, labor_title_str()) == TitleTerm_str()
-    assert g_sqlitetype(cfig, plnlabo, jk, labor_title_str()) == "TEXT"
-    assert g_class_type(cfig, plnlabo, jm, "_owner_name_labor") == "int"
-    assert g_sqlitetype(cfig, plnlabo, jm, "_owner_name_labor") == "INTEGER"
-    assert g_class_type(cfig, plnconc, jm, "_active") == "int"
-    assert g_sqlitetype(cfig, plnconc, jm, "_active") == "INTEGER"
-    assert g_class_type(cfig, plnconc, jm, _all_acct_cred_str()) == "int"
-    assert g_sqlitetype(cfig, plnconc, jm, _all_acct_cred_str()) == "INTEGER"
-    assert g_class_type(cfig, plnconc, jm, _all_acct_debt_str()) == "int"
-    assert g_sqlitetype(cfig, plnconc, jm, _all_acct_debt_str()) == "INTEGER"
-    assert g_class_type(cfig, plnconc, jm, _descendant_task_count_str()) == "int"
-    assert g_sqlitetype(cfig, plnconc, jm, _descendant_task_count_str()) == "INTEGER"
-    assert g_class_type(cfig, plnconc, jm, _fund_cease_str()) == "float"
-    assert g_sqlitetype(cfig, plnconc, jm, _fund_cease_str()) == "REAL"
-    assert g_class_type(cfig, plnconc, jm, fund_iota_str()) == "float"
-    assert g_sqlitetype(cfig, plnconc, jm, fund_iota_str()) == "REAL"
-    assert g_class_type(cfig, plnconc, jm, _fund_onset_str()) == "float"
-    assert g_sqlitetype(cfig, plnconc, jm, _fund_onset_str()) == "REAL"
-    assert g_class_type(cfig, plnconc, jm, _fund_ratio_str()) == "float"
-    assert g_sqlitetype(cfig, plnconc, jm, _fund_ratio_str()) == "REAL"
-    assert g_class_type(cfig, plnconc, jm, _gogo_calc_str()) == "float"
-    assert g_sqlitetype(cfig, plnconc, jm, _gogo_calc_str()) == "REAL"
-    assert g_class_type(cfig, plnconc, jm, _healerlink_ratio_str()) == "float"
-    assert g_sqlitetype(cfig, plnconc, jm, _healerlink_ratio_str()) == "REAL"
-    assert g_class_type(cfig, plnconc, jm, "_level") == "int"
-    assert g_sqlitetype(cfig, plnconc, jm, "_level") == "INTEGER"
-    assert g_class_type(cfig, plnconc, jm, _range_evaluated_str()) == "int"
-    assert g_sqlitetype(cfig, plnconc, jm, _range_evaluated_str()) == "INTEGER"
-    assert g_class_type(cfig, plnconc, jm, _stop_calc_str()) == "float"
-    assert g_sqlitetype(cfig, plnconc, jm, _stop_calc_str()) == "REAL"
-    assert g_class_type(cfig, plnconc, jm, _chore_str()) == "int"
-    assert g_sqlitetype(cfig, plnconc, jm, _chore_str()) == "INTEGER"
-    assert g_class_type(cfig, plnconc, jv, addin_str()) == "float"
-    assert g_sqlitetype(cfig, plnconc, jv, addin_str()) == "REAL"
-    assert g_class_type(cfig, plnconc, jv, begin_str()) == "float"
-    assert g_sqlitetype(cfig, plnconc, jv, begin_str()) == "REAL"
-    assert g_class_type(cfig, plnconc, jv, close_str()) == "float"
-    assert g_sqlitetype(cfig, plnconc, jv, close_str()) == "REAL"
-    assert g_class_type(cfig, plnconc, jv, denom_str()) == "int"
-    assert g_sqlitetype(cfig, plnconc, jv, denom_str()) == "INTEGER"
-    assert g_class_type(cfig, plnconc, jv, gogo_want_str()) == "float"
-    assert g_sqlitetype(cfig, plnconc, jv, gogo_want_str()) == "REAL"
-    assert g_class_type(cfig, plnconc, jv, mass_str()) == "int"
-    assert g_sqlitetype(cfig, plnconc, jv, mass_str()) == "INTEGER"
-    assert g_class_type(cfig, plnconc, jv, morph_str()) == "bool"
-    assert g_sqlitetype(cfig, plnconc, jv, morph_str()) == "INTEGER"
-    assert g_class_type(cfig, plnconc, jv, numor_str()) == "int"
-    assert g_sqlitetype(cfig, plnconc, jv, numor_str()) == "INTEGER"
-    assert g_class_type(cfig, plnconc, jv, task_str()) == "bool"
-    assert g_sqlitetype(cfig, plnconc, jv, task_str()) == "INTEGER"
-    assert g_class_type(cfig, plnconc, jv, problem_bool_str()) == "bool"
-    assert g_sqlitetype(cfig, plnconc, jv, problem_bool_str()) == "INTEGER"
-    assert g_class_type(cfig, plnconc, jv, stop_want_str()) == "float"
-    assert g_sqlitetype(cfig, plnconc, jv, stop_want_str()) == "REAL"
+    assert g_class_type(cfig, onrawar, jk, awardee_title_str()) == TitleTerm_str()
+    assert g_sqlitetype(cfig, onrawar, jk, awardee_title_str()) == "TEXT"
+    assert g_class_type(cfig, onrawar, jk, plan_rope_str()) == RopeTerm_str()
+    assert g_sqlitetype(cfig, onrawar, jk, plan_rope_str()) == "TEXT"
+    assert g_class_type(cfig, onrawar, jm, _fund_give_str()) == "float"
+    assert g_sqlitetype(cfig, onrawar, jm, _fund_give_str()) == "REAL"
+    assert g_class_type(cfig, onrawar, jm, _fund_take_str()) == "float"
+    assert g_sqlitetype(cfig, onrawar, jm, _fund_take_str()) == "REAL"
+    assert g_class_type(cfig, onrawar, jv, give_force_str()) == "float"
+    assert g_sqlitetype(cfig, onrawar, jv, give_force_str()) == "REAL"
+    assert g_class_type(cfig, onrawar, jv, take_force_str()) == "float"
+    assert g_sqlitetype(cfig, onrawar, jv, take_force_str()) == "REAL"
+    assert g_class_type(cfig, onrfact, jk, fcontext_str()) == RopeTerm_str()
+    assert g_sqlitetype(cfig, onrfact, jk, fcontext_str()) == "TEXT"
+    assert g_class_type(cfig, onrfact, jk, plan_rope_str()) == RopeTerm_str()
+    assert g_sqlitetype(cfig, onrfact, jk, plan_rope_str()) == "TEXT"
+    assert g_class_type(cfig, onrfact, jv, fnigh_str()) == "float"
+    assert g_sqlitetype(cfig, onrfact, jv, fnigh_str()) == "REAL"
+    assert g_class_type(cfig, onrfact, jv, fopen_str()) == "float"
+    assert g_sqlitetype(cfig, onrfact, jv, fopen_str()) == "REAL"
+    assert g_class_type(cfig, onrfact, jv, fstate_str()) == RopeTerm_str()
+    assert g_sqlitetype(cfig, onrfact, jv, fstate_str()) == "TEXT"
+    assert g_class_type(cfig, onrheal, jk, healer_name_str()) == NameTerm_str()
+    assert g_sqlitetype(cfig, onrheal, jk, healer_name_str()) == "TEXT"
+    assert g_class_type(cfig, onrheal, jk, plan_rope_str()) == RopeTerm_str()
+    assert g_sqlitetype(cfig, onrheal, jk, plan_rope_str()) == "TEXT"
+    assert g_class_type(cfig, onrprem, jk, rcontext_str()) == RopeTerm_str()
+    assert g_sqlitetype(cfig, onrprem, jk, rcontext_str()) == "TEXT"
+    assert g_class_type(cfig, onrprem, jk, pstate_str()) == RopeTerm_str()
+    assert g_sqlitetype(cfig, onrprem, jk, pstate_str()) == "TEXT"
+    assert g_class_type(cfig, onrprem, jk, plan_rope_str()) == RopeTerm_str()
+    assert g_sqlitetype(cfig, onrprem, jk, plan_rope_str()) == "TEXT"
+    assert g_class_type(cfig, onrprem, jm, _status_str()) == "int"
+    assert g_sqlitetype(cfig, onrprem, jm, _status_str()) == "INTEGER"
+    assert g_class_type(cfig, onrprem, jm, _chore_str()) == "int"
+    assert g_sqlitetype(cfig, onrprem, jm, _chore_str()) == "INTEGER"
+    assert g_class_type(cfig, onrprem, jv, pdivisor_str()) == "int"
+    assert g_sqlitetype(cfig, onrprem, jv, pdivisor_str()) == "INTEGER"
+    assert g_class_type(cfig, onrprem, jv, pnigh_str()) == "float"
+    assert g_sqlitetype(cfig, onrprem, jv, pnigh_str()) == "REAL"
+    assert g_class_type(cfig, onrprem, jv, popen_str()) == "float"
+    assert g_sqlitetype(cfig, onrprem, jv, popen_str()) == "REAL"
+    assert g_class_type(cfig, onrreas, jk, rcontext_str()) == RopeTerm_str()
+    assert g_sqlitetype(cfig, onrreas, jk, rcontext_str()) == "TEXT"
+    assert g_class_type(cfig, onrreas, jk, plan_rope_str()) == RopeTerm_str()
+    assert g_sqlitetype(cfig, onrreas, jk, plan_rope_str()) == "TEXT"
+    assert g_class_type(cfig, onrreas, jm, "_rplan_active_value") == "int"
+    assert g_sqlitetype(cfig, onrreas, jm, "_rplan_active_value") == "INTEGER"
+    assert g_class_type(cfig, onrreas, jm, _status_str()) == "int"
+    assert g_sqlitetype(cfig, onrreas, jm, _status_str()) == "INTEGER"
+    assert g_class_type(cfig, onrreas, jm, _chore_str()) == "int"
+    assert g_sqlitetype(cfig, onrreas, jm, _chore_str()) == "INTEGER"
+    assert g_class_type(cfig, onrreas, jv, rplan_active_requisite_str()) == "bool"
+    assert g_sqlitetype(cfig, onrreas, jv, rplan_active_requisite_str()) == "INTEGER"
+    assert g_class_type(cfig, onrlabo, jk, plan_rope_str()) == RopeTerm_str()
+    assert g_sqlitetype(cfig, onrlabo, jk, plan_rope_str()) == "TEXT"
+    assert g_class_type(cfig, onrlabo, jk, labor_title_str()) == TitleTerm_str()
+    assert g_sqlitetype(cfig, onrlabo, jk, labor_title_str()) == "TEXT"
+    assert g_class_type(cfig, onrlabo, jm, "_owner_name_labor") == "int"
+    assert g_sqlitetype(cfig, onrlabo, jm, "_owner_name_labor") == "INTEGER"
+    assert g_class_type(cfig, onrplan, jm, "_active") == "int"
+    assert g_sqlitetype(cfig, onrplan, jm, "_active") == "INTEGER"
+    assert g_class_type(cfig, onrplan, jm, _all_acct_cred_str()) == "int"
+    assert g_sqlitetype(cfig, onrplan, jm, _all_acct_cred_str()) == "INTEGER"
+    assert g_class_type(cfig, onrplan, jm, _all_acct_debt_str()) == "int"
+    assert g_sqlitetype(cfig, onrplan, jm, _all_acct_debt_str()) == "INTEGER"
+    assert g_class_type(cfig, onrplan, jm, _descendant_task_count_str()) == "int"
+    assert g_sqlitetype(cfig, onrplan, jm, _descendant_task_count_str()) == "INTEGER"
+    assert g_class_type(cfig, onrplan, jm, _fund_cease_str()) == "float"
+    assert g_sqlitetype(cfig, onrplan, jm, _fund_cease_str()) == "REAL"
+    assert g_class_type(cfig, onrplan, jm, fund_iota_str()) == "float"
+    assert g_sqlitetype(cfig, onrplan, jm, fund_iota_str()) == "REAL"
+    assert g_class_type(cfig, onrplan, jm, _fund_onset_str()) == "float"
+    assert g_sqlitetype(cfig, onrplan, jm, _fund_onset_str()) == "REAL"
+    assert g_class_type(cfig, onrplan, jm, _fund_ratio_str()) == "float"
+    assert g_sqlitetype(cfig, onrplan, jm, _fund_ratio_str()) == "REAL"
+    assert g_class_type(cfig, onrplan, jm, _gogo_calc_str()) == "float"
+    assert g_sqlitetype(cfig, onrplan, jm, _gogo_calc_str()) == "REAL"
+    assert g_class_type(cfig, onrplan, jm, _healerlink_ratio_str()) == "float"
+    assert g_sqlitetype(cfig, onrplan, jm, _healerlink_ratio_str()) == "REAL"
+    assert g_class_type(cfig, onrplan, jm, "_level") == "int"
+    assert g_sqlitetype(cfig, onrplan, jm, "_level") == "INTEGER"
+    assert g_class_type(cfig, onrplan, jm, _range_evaluated_str()) == "int"
+    assert g_sqlitetype(cfig, onrplan, jm, _range_evaluated_str()) == "INTEGER"
+    assert g_class_type(cfig, onrplan, jm, _stop_calc_str()) == "float"
+    assert g_sqlitetype(cfig, onrplan, jm, _stop_calc_str()) == "REAL"
+    assert g_class_type(cfig, onrplan, jm, _chore_str()) == "int"
+    assert g_sqlitetype(cfig, onrplan, jm, _chore_str()) == "INTEGER"
+    assert g_class_type(cfig, onrplan, jv, addin_str()) == "float"
+    assert g_sqlitetype(cfig, onrplan, jv, addin_str()) == "REAL"
+    assert g_class_type(cfig, onrplan, jv, begin_str()) == "float"
+    assert g_sqlitetype(cfig, onrplan, jv, begin_str()) == "REAL"
+    assert g_class_type(cfig, onrplan, jv, close_str()) == "float"
+    assert g_sqlitetype(cfig, onrplan, jv, close_str()) == "REAL"
+    assert g_class_type(cfig, onrplan, jv, denom_str()) == "int"
+    assert g_sqlitetype(cfig, onrplan, jv, denom_str()) == "INTEGER"
+    assert g_class_type(cfig, onrplan, jv, gogo_want_str()) == "float"
+    assert g_sqlitetype(cfig, onrplan, jv, gogo_want_str()) == "REAL"
+    assert g_class_type(cfig, onrplan, jv, mass_str()) == "int"
+    assert g_sqlitetype(cfig, onrplan, jv, mass_str()) == "INTEGER"
+    assert g_class_type(cfig, onrplan, jv, morph_str()) == "bool"
+    assert g_sqlitetype(cfig, onrplan, jv, morph_str()) == "INTEGER"
+    assert g_class_type(cfig, onrplan, jv, numor_str()) == "int"
+    assert g_sqlitetype(cfig, onrplan, jv, numor_str()) == "INTEGER"
+    assert g_class_type(cfig, onrplan, jv, task_str()) == "bool"
+    assert g_sqlitetype(cfig, onrplan, jv, task_str()) == "INTEGER"
+    assert g_class_type(cfig, onrplan, jv, problem_bool_str()) == "bool"
+    assert g_sqlitetype(cfig, onrplan, jv, problem_bool_str()) == "INTEGER"
+    assert g_class_type(cfig, onrplan, jv, stop_want_str()) == "float"
+    assert g_sqlitetype(cfig, onrplan, jv, stop_want_str()) == "REAL"
     assert g_class_type(cfig, ownerunit, jm, "_keeps_buildable") == "int"
     assert g_sqlitetype(cfig, ownerunit, jm, "_keeps_buildable") == "INTEGER"
     assert g_class_type(cfig, ownerunit, jm, "_keeps_justified") == "int"

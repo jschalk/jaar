@@ -64,46 +64,46 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
 )
 
 OWNER_PRIME_TABLENAMES = {
-    f"{owner_acct_membership_str()}_sound_put_agg": "PLNMEMB_PUT_AGG",
-    f"{owner_acct_membership_str()}_sound_put_raw": "PLNMEMB_PUT_RAW",
-    f"{owner_acctunit_str()}_sound_put_agg": "PLNACCT_PUT_AGG",
-    f"{owner_acctunit_str()}_sound_put_raw": "PLNACCT_PUT_RAW",
-    f"{owner_plan_awardlink_str()}_sound_put_agg": "PLNAWAR_PUT_AGG",
-    f"{owner_plan_awardlink_str()}_sound_put_raw": "PLNAWAR_PUT_RAW",
-    f"{owner_plan_factunit_str()}_sound_put_agg": "PLNFACT_PUT_AGG",
-    f"{owner_plan_factunit_str()}_sound_put_raw": "PLNFACT_PUT_RAW",
-    f"{owner_plan_healerlink_str()}_sound_put_agg": "PLNHEAL_PUT_AGG",
-    f"{owner_plan_healerlink_str()}_sound_put_raw": "PLNHEAL_PUT_RAW",
-    f"{owner_plan_reason_premiseunit_str()}_sound_put_agg": "PLNPREM_PUT_AGG",
-    f"{owner_plan_reason_premiseunit_str()}_sound_put_raw": "PLNPREM_PUT_RAW",
-    f"{owner_plan_reasonunit_str()}_sound_put_agg": "PLNREAS_PUT_AGG",
-    f"{owner_plan_reasonunit_str()}_sound_put_raw": "PLNREAS_PUT_RAW",
-    f"{owner_plan_laborlink_str()}_sound_put_agg": "PLNLABO_PUT_AGG",
-    f"{owner_plan_laborlink_str()}_sound_put_raw": "PLNLABO_PUT_RAW",
-    f"{owner_planunit_str()}_sound_put_agg": "PLNCONC_PUT_AGG",
-    f"{owner_planunit_str()}_sound_put_raw": "PLNCONC_PUT_RAW",
-    f"{ownerunit_str()}_sound_put_agg": "PLNUNIT_PUT_AGG",
-    f"{ownerunit_str()}_sound_put_raw": "PLNUNIT_PUT_RAW",
-    f"{owner_acct_membership_str()}_sound_del_agg": "PLNMEMB_DEL_AGG",
-    f"{owner_acct_membership_str()}_sound_del_raw": "PLNMEMB_DEL_RAW",
-    f"{owner_acctunit_str()}_sound_del_agg": "PLNACCT_DEL_AGG",
-    f"{owner_acctunit_str()}_sound_del_raw": "PLNACCT_DEL_RAW",
-    f"{owner_plan_awardlink_str()}_sound_del_agg": "PLNAWAR_DEL_AGG",
-    f"{owner_plan_awardlink_str()}_sound_del_raw": "PLNAWAR_DEL_RAW",
-    f"{owner_plan_factunit_str()}_sound_del_agg": "PLNFACT_DEL_AGG",
-    f"{owner_plan_factunit_str()}_sound_del_raw": "PLNFACT_DEL_RAW",
-    f"{owner_plan_healerlink_str()}_sound_del_agg": "PLNHEAL_DEL_AGG",
-    f"{owner_plan_healerlink_str()}_sound_del_raw": "PLNHEAL_DEL_RAW",
-    f"{owner_plan_reason_premiseunit_str()}_sound_del_agg": "PLNPREM_DEL_AGG",
-    f"{owner_plan_reason_premiseunit_str()}_sound_del_raw": "PLNPREM_DEL_RAW",
-    f"{owner_plan_reasonunit_str()}_sound_del_agg": "PLNREAS_DEL_AGG",
-    f"{owner_plan_reasonunit_str()}_sound_del_raw": "PLNREAS_DEL_RAW",
-    f"{owner_plan_laborlink_str()}_sound_del_agg": "PLNLABO_DEL_AGG",
-    f"{owner_plan_laborlink_str()}_sound_del_raw": "PLNLABO_DEL_RAW",
-    f"{owner_planunit_str()}_sound_del_agg": "PLNCONC_DEL_AGG",
-    f"{owner_planunit_str()}_sound_del_raw": "PLNCONC_DEL_RAW",
-    f"{ownerunit_str()}_sound_del_agg": "PLNUNIT_DEL_AGG",
-    f"{ownerunit_str()}_sound_del_raw": "PLNUNIT_DEL_RAW",
+    f"{owner_acct_membership_str()}_sound_put_agg": "ONRMEMB_PUT_AGG",
+    f"{owner_acct_membership_str()}_sound_put_raw": "ONRMEMB_PUT_RAW",
+    f"{owner_acctunit_str()}_sound_put_agg": "ONRACCT_PUT_AGG",
+    f"{owner_acctunit_str()}_sound_put_raw": "ONRACCT_PUT_RAW",
+    f"{owner_plan_awardlink_str()}_sound_put_agg": "ONRAWAR_PUT_AGG",
+    f"{owner_plan_awardlink_str()}_sound_put_raw": "ONRAWAR_PUT_RAW",
+    f"{owner_plan_factunit_str()}_sound_put_agg": "ONRFACT_PUT_AGG",
+    f"{owner_plan_factunit_str()}_sound_put_raw": "ONRFACT_PUT_RAW",
+    f"{owner_plan_healerlink_str()}_sound_put_agg": "ONRHEAL_PUT_AGG",
+    f"{owner_plan_healerlink_str()}_sound_put_raw": "ONRHEAL_PUT_RAW",
+    f"{owner_plan_reason_premiseunit_str()}_sound_put_agg": "ONRPREM_PUT_AGG",
+    f"{owner_plan_reason_premiseunit_str()}_sound_put_raw": "ONRPREM_PUT_RAW",
+    f"{owner_plan_reasonunit_str()}_sound_put_agg": "ONRREAS_PUT_AGG",
+    f"{owner_plan_reasonunit_str()}_sound_put_raw": "ONRREAS_PUT_RAW",
+    f"{owner_plan_laborlink_str()}_sound_put_agg": "ONRLABO_PUT_AGG",
+    f"{owner_plan_laborlink_str()}_sound_put_raw": "ONRLABO_PUT_RAW",
+    f"{owner_planunit_str()}_sound_put_agg": "ONRPLAN_PUT_AGG",
+    f"{owner_planunit_str()}_sound_put_raw": "ONRPLAN_PUT_RAW",
+    f"{ownerunit_str()}_sound_put_agg": "ONRUNIT_PUT_AGG",
+    f"{ownerunit_str()}_sound_put_raw": "ONRUNIT_PUT_RAW",
+    f"{owner_acct_membership_str()}_sound_del_agg": "ONRMEMB_DEL_AGG",
+    f"{owner_acct_membership_str()}_sound_del_raw": "ONRMEMB_DEL_RAW",
+    f"{owner_acctunit_str()}_sound_del_agg": "ONRACCT_DEL_AGG",
+    f"{owner_acctunit_str()}_sound_del_raw": "ONRACCT_DEL_RAW",
+    f"{owner_plan_awardlink_str()}_sound_del_agg": "ONRAWAR_DEL_AGG",
+    f"{owner_plan_awardlink_str()}_sound_del_raw": "ONRAWAR_DEL_RAW",
+    f"{owner_plan_factunit_str()}_sound_del_agg": "ONRFACT_DEL_AGG",
+    f"{owner_plan_factunit_str()}_sound_del_raw": "ONRFACT_DEL_RAW",
+    f"{owner_plan_healerlink_str()}_sound_del_agg": "ONRHEAL_DEL_AGG",
+    f"{owner_plan_healerlink_str()}_sound_del_raw": "ONRHEAL_DEL_RAW",
+    f"{owner_plan_reason_premiseunit_str()}_sound_del_agg": "ONRPREM_DEL_AGG",
+    f"{owner_plan_reason_premiseunit_str()}_sound_del_raw": "ONRPREM_DEL_RAW",
+    f"{owner_plan_reasonunit_str()}_sound_del_agg": "ONRREAS_DEL_AGG",
+    f"{owner_plan_reasonunit_str()}_sound_del_raw": "ONRREAS_DEL_RAW",
+    f"{owner_plan_laborlink_str()}_sound_del_agg": "ONRLABO_DEL_AGG",
+    f"{owner_plan_laborlink_str()}_sound_del_raw": "ONRLABO_DEL_RAW",
+    f"{owner_planunit_str()}_sound_del_agg": "ONRPLAN_DEL_AGG",
+    f"{owner_planunit_str()}_sound_del_raw": "ONRPLAN_DEL_RAW",
+    f"{ownerunit_str()}_sound_del_agg": "ONRUNIT_DEL_AGG",
+    f"{ownerunit_str()}_sound_del_raw": "ONRUNIT_DEL_RAW",
 }
 
 
@@ -534,11 +534,11 @@ def test_create_sound_and_voice_tables_CreatesBeliefRawTables():
         vld_str = "vld"
         put_str = "put"
         del_str = "del"
-        plnunit_s_put_agg_table = prime_tbl("ownerunit", "s", agg_str, put_str)
-        plnacct_s_put_agg_table = prime_tbl("plnacct", "s", agg_str, put_str)
-        plnmemb_s_put_agg_table = prime_tbl("plnmemb", "s", agg_str, put_str)
-        plnfact_s_del_agg_table = prime_tbl("plnfact", "s", agg_str, del_str)
-        plnfact_s_del_vld_table = prime_tbl("plnfact", "s", vld_str, del_str)
+        onrunit_s_put_agg_table = prime_tbl("ownerunit", "s", agg_str, put_str)
+        onracct_s_put_agg_table = prime_tbl("onracct", "s", agg_str, put_str)
+        onrmemb_s_put_agg_table = prime_tbl("onrmemb", "s", agg_str, put_str)
+        onrfact_s_del_agg_table = prime_tbl("onrfact", "s", agg_str, del_str)
+        onrfact_s_del_vld_table = prime_tbl("onrfact", "s", vld_str, del_str)
         beliefunit_s_agg_table = prime_tbl("beliefunit", "s", agg_str)
         beliefunit_s_vld_table = prime_tbl("beliefunit", "s", vld_str)
         pidtitl_s_agg_table = prime_tbl("pidtitl", "s", agg_str)
@@ -548,11 +548,11 @@ def test_create_sound_and_voice_tables_CreatesBeliefRawTables():
         pidcore_s_agg_table = prime_tbl("pidcore", "s", agg_str)
         pidcore_s_vld_table = prime_tbl("pidcore", "s", vld_str)
 
-        assert not db_table_exists(cursor, plnunit_s_put_agg_table)
-        assert not db_table_exists(cursor, plnacct_s_put_agg_table)
-        assert not db_table_exists(cursor, plnmemb_s_put_agg_table)
-        assert not db_table_exists(cursor, plnfact_s_del_agg_table)
-        assert not db_table_exists(cursor, plnfact_s_del_vld_table)
+        assert not db_table_exists(cursor, onrunit_s_put_agg_table)
+        assert not db_table_exists(cursor, onracct_s_put_agg_table)
+        assert not db_table_exists(cursor, onrmemb_s_put_agg_table)
+        assert not db_table_exists(cursor, onrfact_s_del_agg_table)
+        assert not db_table_exists(cursor, onrfact_s_del_vld_table)
         assert not db_table_exists(cursor, beliefunit_s_agg_table)
         assert not db_table_exists(cursor, beliefunit_s_vld_table)
         assert not db_table_exists(cursor, pidtitl_s_agg_table)
@@ -572,11 +572,11 @@ def test_create_sound_and_voice_tables_CreatesBeliefRawTables():
         # for x_row in cursor.fetchall():
         #     print(f"{x_count} {x_row[1]=}")
         #     x_count += 1
-        assert db_table_exists(cursor, plnunit_s_put_agg_table)
-        assert db_table_exists(cursor, plnacct_s_put_agg_table)
-        assert db_table_exists(cursor, plnmemb_s_put_agg_table)
-        assert db_table_exists(cursor, plnfact_s_del_agg_table)
-        assert db_table_exists(cursor, plnfact_s_del_vld_table)
+        assert db_table_exists(cursor, onrunit_s_put_agg_table)
+        assert db_table_exists(cursor, onracct_s_put_agg_table)
+        assert db_table_exists(cursor, onrmemb_s_put_agg_table)
+        assert db_table_exists(cursor, onrfact_s_del_agg_table)
+        assert db_table_exists(cursor, onrfact_s_del_vld_table)
         assert db_table_exists(cursor, beliefunit_s_agg_table)
         assert db_table_exists(cursor, beliefunit_s_vld_table)
         assert db_table_exists(cursor, pidtitl_s_agg_table)
@@ -940,11 +940,11 @@ def test_create_insert_missing_face_name_into_pidgin_core_vld_sqlstr_ReturnsObj(
     # ESTABLISH
     default_knot = "|"
     default_unknown_str = "unknown2"
-    plnacct_s_agg_tablename = prime_tbl(owner_acctunit_str(), "s", "agg")
+    onracct_s_agg_tablename = prime_tbl(owner_acctunit_str(), "s", "agg")
 
     # WHEN
     insert_sqlstr = create_insert_missing_face_name_into_pidgin_core_vld_sqlstr(
-        default_knot, default_unknown_str, plnacct_s_agg_tablename
+        default_knot, default_unknown_str, onracct_s_agg_tablename
     )
 
     # THEN
@@ -952,14 +952,14 @@ def test_create_insert_missing_face_name_into_pidgin_core_vld_sqlstr_ReturnsObj(
     pidgin_core_s_vld_tablename = prime_tbl(pidcore_dimen, "s", "vld")
     expected_sqlstr = f"""INSERT INTO {pidgin_core_s_vld_tablename} (face_name, otx_knot, inx_knot, unknown_str)
 SELECT
-  {plnacct_s_agg_tablename}.face_name
+  {onracct_s_agg_tablename}.face_name
 , '{default_knot}'
 , '{default_knot}'
 , '{default_unknown_str}'
-FROM {plnacct_s_agg_tablename} 
-LEFT JOIN pidgin_core_s_vld ON pidgin_core_s_vld.face_name = {plnacct_s_agg_tablename}.face_name
+FROM {onracct_s_agg_tablename} 
+LEFT JOIN pidgin_core_s_vld ON pidgin_core_s_vld.face_name = {onracct_s_agg_tablename}.face_name
 WHERE pidgin_core_s_vld.face_name IS NULL
-GROUP BY {plnacct_s_agg_tablename}.face_name
+GROUP BY {onracct_s_agg_tablename}.face_name
 ;
 """
     print(expected_sqlstr)

@@ -122,7 +122,7 @@ def test_cellunit_shop_ReturnsObj_Scenario1_WithParameters():
     assert x_cellunit.boss_facts == bob_sue_boss_factunits
 
 
-def test_cellunit_shop_ReturnsObj_Scenario2_WithReasonRcontexts():
+def test_cellunit_shop_ReturnsObj_Scenario2_WithReason_Rcontexts():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"

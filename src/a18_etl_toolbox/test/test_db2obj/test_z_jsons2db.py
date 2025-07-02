@@ -20,17 +20,17 @@ from src.a06_owner_logic.owner import ownerunit_shop
 from src.a18_etl_toolbox.db_obj_owner_tool import (
     ObjKeysHolder,
     insert_job_obj,
-    insert_job_plnacct,
-    insert_job_plnawar,
-    insert_job_plnconc,
-    insert_job_plnfact,
-    insert_job_plngrou,
-    insert_job_plnheal,
-    insert_job_plnlabo,
-    insert_job_plnmemb,
-    insert_job_plnprem,
-    insert_job_plnreas,
-    insert_job_plnunit,
+    insert_job_onracct,
+    insert_job_onrawar,
+    insert_job_onrfact,
+    insert_job_onrgrou,
+    insert_job_onrheal,
+    insert_job_onrlabo,
+    insert_job_onrmemb,
+    insert_job_onrplan,
+    insert_job_onrprem,
+    insert_job_onrreas,
+    insert_job_onrunit,
 )
 from src.a18_etl_toolbox.test._util.a18_env import env_dir_setup_cleanup
 from src.a18_etl_toolbox.tran_sqlstrs import create_job_tables
@@ -51,7 +51,7 @@ def test_ObjKeysHolder_Exists():
     assert not x_objkeyholder.fact_rope
 
 
-def test_insert_job_plnunit_CreatesTableRowsFor_ownerunit_job():
+def test_insert_job_onrunit_CreatesTableRowsFor_ownerunit_job():
     # sourcery skip: extract-method
     # ESTABLISH
     x_belief_label = "amy23"
@@ -94,7 +94,7 @@ def test_insert_job_plnunit_CreatesTableRowsFor_ownerunit_job():
         objkeysholder = ObjKeysHolder()
 
         # WHEN
-        insert_job_plnunit(cursor, objkeysholder, sue_owner)
+        insert_job_onrunit(cursor, objkeysholder, sue_owner)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -123,7 +123,7 @@ def test_insert_job_plnunit_CreatesTableRowsFor_ownerunit_job():
         assert rows == expected_data
 
 
-def test_insert_job_plnconc_CreatesTableRowsFor_plnconc_job():
+def test_insert_job_onrplan_CreatesTableRowsFor_onrplan_job():
     # sourcery skip: extract-method
     # ESTABLISH
     # x_args = get_owner_calc_dimen_args("owner_planunit")
@@ -231,7 +231,7 @@ def test_insert_job_plnconc_CreatesTableRowsFor_plnconc_job():
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name)
 
         # WHEN
-        insert_job_plnconc(cursor, x_objkeysholder, x_plan)
+        insert_job_onrplan(cursor, x_objkeysholder, x_plan)
 
         # THEN
         clean_rope = create_rope(casa_rope, "clean")
@@ -273,7 +273,7 @@ def test_insert_job_plnconc_CreatesTableRowsFor_plnconc_job():
         assert rows == expected_data
 
 
-def test_insert_job_plnreas_CreatesTableRowsFor_plnreas_job():
+def test_insert_job_onrreas_CreatesTableRowsFor_onrreas_job():
     # sourcery skip: extract-method
     # ESTABLISH
     # x_args = get_owner_calc_dimen_args("owner_plan_reasonunit")
@@ -312,7 +312,7 @@ def test_insert_job_plnreas_CreatesTableRowsFor_plnreas_job():
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name, x_rope)
 
         # WHEN
-        insert_job_plnreas(cursor, x_objkeysholder, x_reasonheir)
+        insert_job_onrreas(cursor, x_objkeysholder, x_reasonheir)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -333,7 +333,7 @@ def test_insert_job_plnreas_CreatesTableRowsFor_plnreas_job():
         assert rows == expected_data
 
 
-def test_insert_job_plnprem_CreatesTableRowsFor_plnprem_job():
+def test_insert_job_onrprem_CreatesTableRowsFor_onrprem_job():
     # sourcery skip: extract-method
     # ESTABLISH
     # x_args = get_owner_calc_dimen_args("owner_plan_reason_premiseunit")
@@ -376,7 +376,7 @@ def test_insert_job_plnprem_CreatesTableRowsFor_plnprem_job():
         )
 
         # WHEN
-        insert_job_plnprem(cursor, x_objkeysholder, x_premiseunit)
+        insert_job_onrprem(cursor, x_objkeysholder, x_premiseunit)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -399,7 +399,7 @@ def test_insert_job_plnprem_CreatesTableRowsFor_plnprem_job():
         assert rows == expected_data
 
 
-def test_insert_job_plnmemb_CreatesTableRowsFor_plnmemb_job():
+def test_insert_job_onrmemb_CreatesTableRowsFor_onrmemb_job():
     # sourcery skip: extract-method
     # ESTABLISH
     # x_args = get_owner_calc_dimen_args("owner_acct_membership")
@@ -449,7 +449,7 @@ def test_insert_job_plnmemb_CreatesTableRowsFor_plnmemb_job():
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name)
 
         # WHEN
-        insert_job_plnmemb(cursor, x_objkeysholder, x_membership)
+        insert_job_onrmemb(cursor, x_objkeysholder, x_membership)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -476,7 +476,7 @@ def test_insert_job_plnmemb_CreatesTableRowsFor_plnmemb_job():
         assert rows == expected_data
 
 
-def test_insert_job_plnacct_CreatesTableRowsFor_plnacct_job():
+def test_insert_job_onracct_CreatesTableRowsFor_onracct_job():
     # sourcery skip: extract-method
     # ESTABLISH
     # x_args = get_owner_calc_dimen_args("owner_acctunit")
@@ -529,7 +529,7 @@ def test_insert_job_plnacct_CreatesTableRowsFor_plnacct_job():
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name)
 
         # WHEN
-        insert_job_plnacct(cursor, x_objkeysholder, x_acct)
+        insert_job_onracct(cursor, x_objkeysholder, x_acct)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -557,7 +557,7 @@ def test_insert_job_plnacct_CreatesTableRowsFor_plnacct_job():
         assert rows == expected_data
 
 
-def test_insert_job_plngrou_CreatesTableRowsFor_plngrou_job():
+def test_insert_job_onrgrou_CreatesTableRowsFor_onrgrou_job():
     # sourcery skip: extract-method
     # ESTABLISH
     # x_args = get_owner_calc_dimen_args("owner_groupunit")
@@ -602,7 +602,7 @@ def test_insert_job_plngrou_CreatesTableRowsFor_plngrou_job():
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name)
 
         # WHEN
-        insert_job_plngrou(cursor, x_objkeysholder, x_group)
+        insert_job_onrgrou(cursor, x_objkeysholder, x_group)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -626,7 +626,7 @@ def test_insert_job_plngrou_CreatesTableRowsFor_plngrou_job():
         assert rows == expected_data
 
 
-def test_insert_job_plnawar_CreatesTableRowsFor_plnawar_job():
+def test_insert_job_onrawar_CreatesTableRowsFor_onrawar_job():
     # sourcery skip: extract-method
     # ESTABLISH
     # x_args = get_owner_calc_dimen_args("owner_plan_awardlink")
@@ -664,7 +664,7 @@ def test_insert_job_plnawar_CreatesTableRowsFor_plnawar_job():
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name, x_rope)
 
         # WHEN
-        insert_job_plnawar(cursor, x_objkeysholder, x_awardheir)
+        insert_job_onrawar(cursor, x_objkeysholder, x_awardheir)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -685,7 +685,7 @@ def test_insert_job_plnawar_CreatesTableRowsFor_plnawar_job():
         assert rows == expected_data
 
 
-def test_insert_job_plnfact_CreatesTableRowsFor_plnfact_job():
+def test_insert_job_onrfact_CreatesTableRowsFor_onrfact_job():
     # sourcery skip: extract-method
     # ESTABLISH
     # x_args = get_owner_calc_dimen_args("owner_plan_factunit")
@@ -721,7 +721,7 @@ def test_insert_job_plnfact_CreatesTableRowsFor_plnfact_job():
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name, x_rope)
 
         # WHEN
-        insert_job_plnfact(cursor, x_objkeysholder, x_factheir)
+        insert_job_onrfact(cursor, x_objkeysholder, x_factheir)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -741,7 +741,7 @@ def test_insert_job_plnfact_CreatesTableRowsFor_plnfact_job():
         assert rows == expected_data
 
 
-def test_insert_job_plnheal_CreatesTableRowsFor_plnheal_job():
+def test_insert_job_onrheal_CreatesTableRowsFor_onrheal_job():
     # sourcery skip: extract-method
     # ESTABLISH
     # x_args = get_owner_calc_dimen_args("owner_plan_healerlink")
@@ -773,7 +773,7 @@ def test_insert_job_plnheal_CreatesTableRowsFor_plnheal_job():
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name, x_rope)
 
         # WHEN
-        insert_job_plnheal(cursor, x_objkeysholder, x_healerlink)
+        insert_job_onrheal(cursor, x_objkeysholder, x_healerlink)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 2
@@ -796,7 +796,7 @@ def test_insert_job_plnheal_CreatesTableRowsFor_plnheal_job():
         assert rows == expected_data
 
 
-def test_insert_job_plnlabo_CreatesTableRowsFor_plnlabo_job():
+def test_insert_job_onrlabo_CreatesTableRowsFor_onrlabo_job():
     # sourcery skip: extract-method
     # ESTABLISH
     # x_args = get_owner_calc_dimen_args("owner_plan_laborlink")
@@ -829,7 +829,7 @@ def test_insert_job_plnlabo_CreatesTableRowsFor_plnlabo_job():
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_owner_name, x_rope)
 
         # WHEN
-        insert_job_plnlabo(cursor, x_objkeysholder, x_laborheir)
+        insert_job_onrlabo(cursor, x_objkeysholder, x_laborheir)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 2
@@ -883,41 +883,41 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        plnmemb_job_table = "owner_acct_membership_job"
-        plnacct_job_table = "owner_acctunit_job"
-        plngrou_job_table = "owner_groupunit_job"
-        plnawar_job_table = "owner_plan_awardlink_job"
-        plnfact_job_table = "owner_plan_factunit_job"
-        plnheal_job_table = "owner_plan_healerlink_job"
-        plnprem_job_table = "owner_plan_reason_premiseunit_job"
-        plnreas_job_table = "owner_plan_reasonunit_job"
-        plnlabo_job_table = "owner_plan_laborlink_job"
-        plnconc_job_table = "owner_planunit_job"
-        plnunit_job_table = "ownerunit_job"
-        assert get_row_count(cursor, plnunit_job_table) == 0
-        assert get_row_count(cursor, plnconc_job_table) == 0
-        assert get_row_count(cursor, plnacct_job_table) == 0
-        assert get_row_count(cursor, plnmemb_job_table) == 0
-        assert get_row_count(cursor, plngrou_job_table) == 0
-        assert get_row_count(cursor, plnawar_job_table) == 0
-        assert get_row_count(cursor, plnfact_job_table) == 0
-        assert get_row_count(cursor, plnheal_job_table) == 0
-        assert get_row_count(cursor, plnreas_job_table) == 0
-        assert get_row_count(cursor, plnprem_job_table) == 0
-        assert get_row_count(cursor, plnlabo_job_table) == 0
+        onrmemb_job_table = "owner_acct_membership_job"
+        onracct_job_table = "owner_acctunit_job"
+        onrgrou_job_table = "owner_groupunit_job"
+        onrawar_job_table = "owner_plan_awardlink_job"
+        onrfact_job_table = "owner_plan_factunit_job"
+        onrheal_job_table = "owner_plan_healerlink_job"
+        onrprem_job_table = "owner_plan_reason_premiseunit_job"
+        onrreas_job_table = "owner_plan_reasonunit_job"
+        onrlabo_job_table = "owner_plan_laborlink_job"
+        onrplan_job_table = "owner_planunit_job"
+        onrunit_job_table = "ownerunit_job"
+        assert get_row_count(cursor, onrunit_job_table) == 0
+        assert get_row_count(cursor, onrplan_job_table) == 0
+        assert get_row_count(cursor, onracct_job_table) == 0
+        assert get_row_count(cursor, onrmemb_job_table) == 0
+        assert get_row_count(cursor, onrgrou_job_table) == 0
+        assert get_row_count(cursor, onrawar_job_table) == 0
+        assert get_row_count(cursor, onrfact_job_table) == 0
+        assert get_row_count(cursor, onrheal_job_table) == 0
+        assert get_row_count(cursor, onrreas_job_table) == 0
+        assert get_row_count(cursor, onrprem_job_table) == 0
+        assert get_row_count(cursor, onrlabo_job_table) == 0
 
         # WHEN
         insert_job_obj(cursor, sue_owner)
 
         # THEN
-        assert get_row_count(cursor, plnunit_job_table) == 1
-        assert get_row_count(cursor, plnconc_job_table) == 5
-        assert get_row_count(cursor, plnacct_job_table) == 2
-        assert get_row_count(cursor, plnmemb_job_table) == 3
-        assert get_row_count(cursor, plngrou_job_table) == 3
-        assert get_row_count(cursor, plnawar_job_table) == 1
-        assert get_row_count(cursor, plnfact_job_table) == 1
-        assert get_row_count(cursor, plnheal_job_table) == 1
-        assert get_row_count(cursor, plnreas_job_table) == 1
-        assert get_row_count(cursor, plnprem_job_table) == 1
-        assert get_row_count(cursor, plnlabo_job_table) == 1
+        assert get_row_count(cursor, onrunit_job_table) == 1
+        assert get_row_count(cursor, onrplan_job_table) == 5
+        assert get_row_count(cursor, onracct_job_table) == 2
+        assert get_row_count(cursor, onrmemb_job_table) == 3
+        assert get_row_count(cursor, onrgrou_job_table) == 3
+        assert get_row_count(cursor, onrawar_job_table) == 1
+        assert get_row_count(cursor, onrfact_job_table) == 1
+        assert get_row_count(cursor, onrheal_job_table) == 1
+        assert get_row_count(cursor, onrreas_job_table) == 1
+        assert get_row_count(cursor, onrprem_job_table) == 1
+        assert get_row_count(cursor, onrlabo_job_table) == 1

@@ -117,7 +117,7 @@ def get_sorted_headers_str(idea_filename):
     print(f"{idea_attributes=}")
     header_str = "".join(f",{x_header}" for x_header in idea_attributes)
     return header_str[1:]
-    # return create_sorted_concatenated_str(list(idea_attributes))
+    # return create_sorted_planatenated_str(list(idea_attributes))
 
 
 def test_get_sorted_headers_str_ReturnsObj():

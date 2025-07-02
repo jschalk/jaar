@@ -42,8 +42,8 @@ def test_etl_voice_agg_to_event_owner_csvs_PopulatesOwnerPulabelTables(
     a23_bob_e7_dir = create_owner_event_dir_path(
         x_belief_mstr_dir, amy23_str, bob_inx, event7
     )
-    a23_e3_plnacct_put_path = create_path(a23_bob_e3_dir, put_agg_csv)
-    a23_e7_plnacct_put_path = create_path(a23_bob_e7_dir, put_agg_csv)
+    a23_e3_onracct_put_path = create_path(a23_bob_e3_dir, put_agg_csv)
+    a23_e7_onracct_put_path = create_path(a23_bob_e7_dir, put_agg_csv)
 
     with sqlite3_connect(":memory:") as owner_db_conn:
         cursor = owner_db_conn.cursor()
@@ -58,17 +58,17 @@ VALUES
 """
         print(insert_raw_sqlstr)
         cursor.execute(insert_raw_sqlstr)
-        assert os_path_exists(a23_e3_plnacct_put_path) is False
-        assert os_path_exists(a23_e7_plnacct_put_path) is False
+        assert os_path_exists(a23_e3_onracct_put_path) is False
+        assert os_path_exists(a23_e7_onracct_put_path) is False
 
         # WHEN
         etl_voice_agg_to_event_owner_csvs(cursor, x_belief_mstr_dir)
 
         # THEN
-        assert os_path_exists(a23_e3_plnacct_put_path)
-        assert os_path_exists(a23_e7_plnacct_put_path)
-        e3_put_csv = open_file(a23_e3_plnacct_put_path)
-        e7_put_csv = open_file(a23_e7_plnacct_put_path)
+        assert os_path_exists(a23_e3_onracct_put_path)
+        assert os_path_exists(a23_e7_onracct_put_path)
+        e3_put_csv = open_file(a23_e3_onracct_put_path)
+        e7_put_csv = open_file(a23_e7_onracct_put_path)
         print(f"{e3_put_csv=}")
         print(f"{e7_put_csv=}")
         expected_e3_put_csv = """event_int,face_name,belief_label,owner_name,acct_name,acct_cred_points,acct_debt_points

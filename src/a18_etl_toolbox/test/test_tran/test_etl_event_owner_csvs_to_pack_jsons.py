@@ -73,8 +73,8 @@ def test_etl_event_owner_csvs_to_pack_json_CreatesFiles_Scenario1(
     credit88 = 88
     debt_empty = ""
     a23_str = "amy23"
-    plnacct_str = owner_acctunit_str()
-    put_agg_tablename = create_prime_tablename(plnacct_str, "v", "agg", "put")
+    onracct_str = owner_acctunit_str()
+    put_agg_tablename = create_prime_tablename(onracct_str, "v", "agg", "put")
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
     belief_mstr_dir = get_module_temp_dir()
     # a23_bob_dir = create_path(a23_dir, bob_inx)
@@ -114,21 +114,21 @@ def test_etl_event_owner_csvs_to_pack_json_CreatesFiles_Scenario1(
     # e7_pack = packunit_shop(bob_inx, sue_inx, a23_str, packs_dir, atoms_dir, event7)
     expected_e3_pack = packunit_shop(bob_inx, None, a23_str, event_int=event3)
     expected_e7_pack = packunit_shop(bob_inx, None, a23_str, event_int=event7)
-    plnacct_dimen = owner_acctunit_str()
+    onracct_dimen = owner_acctunit_str()
     expected_e3_pack._ownerdelta.add_owneratom(
-        plnacct_dimen,
+        onracct_dimen,
         INSERT_str(),
         jkeys={acct_name_str(): bob_inx},
         jvalues={acct_cred_points_str(): credit77, acct_debt_points_str(): None},
     )
     expected_e7_pack._ownerdelta.add_owneratom(
-        plnacct_dimen,
+        onracct_dimen,
         INSERT_str(),
         jkeys={acct_name_str(): bob_inx},
         jvalues={acct_cred_points_str(): credit77, acct_debt_points_str(): None},
     )
     expected_e7_pack._ownerdelta.add_owneratom(
-        plnacct_dimen,
+        onracct_dimen,
         INSERT_str(),
         jkeys={acct_name_str(): sue_inx},
         jvalues={acct_cred_points_str(): credit88, acct_debt_points_str(): None},
@@ -146,9 +146,9 @@ def test_etl_event_owner_csvs_to_pack_json_CreatesFiles_Scenario1(
     expected_e7_insert = expected_e7_pack._ownerdelta.owneratoms.get("INSERT")
     # print(e7_insert.get("owner_acctunit").keys())
     # print(expected_e7_insert.get("owner_acctunit").keys())
-    e7_plnacct = e7_insert.get("owner_acctunit")
-    expected_e7_plnacct = expected_e7_insert.get("owner_acctunit")
-    assert e7_plnacct.keys() == expected_e7_plnacct.keys()
+    e7_onracct = e7_insert.get("owner_acctunit")
+    expected_e7_onracct = expected_e7_insert.get("owner_acctunit")
+    assert e7_onracct.keys() == expected_e7_onracct.keys()
     # print(f"{expected_e7_insert.keys()=}")
     assert e7_insert == expected_e7_insert
     assert e7_packunit._ownerdelta == expected_e7_pack._ownerdelta

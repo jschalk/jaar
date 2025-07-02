@@ -1,6 +1,6 @@
 {
     "owner_acct_membership": {
-        "abbreviation": "plnmemb",
+        "abbreviation": "onrmemb",
         "jkeys": {
             "acct_name": {
                 "class_type": "NameTerm",
@@ -65,7 +65,7 @@
         }
     },
     "owner_acctunit": {
-        "abbreviation": "plnacct",
+        "abbreviation": "onracct",
         "jkeys": {
             "acct_name": {
                 "class_type": "NameTerm",
@@ -134,7 +134,7 @@
         }
     },
     "owner_plan_awardlink": {
-        "abbreviation": "plnawar",
+        "abbreviation": "onrawar",
         "jkeys": {
             "awardee_title": {
                 "class_type": "TitleTerm",
@@ -175,7 +175,7 @@
         }
     },
     "owner_plan_factunit": {
-        "abbreviation": "plnfact",
+        "abbreviation": "onrfact",
         "jkeys": {
             "plan_rope": {
                 "class_type": "RopeTerm",
@@ -211,7 +211,7 @@
         }
     },
     "owner_plan_healerlink": {
-        "abbreviation": "plnheal",
+        "abbreviation": "onrheal",
         "jkeys": {
             "plan_rope": {
                 "class_type": "RopeTerm",
@@ -234,7 +234,7 @@
         "jvalues": {}
     },
     "owner_plan_laborlink": {
-        "abbreviation": "plnlabo",
+        "abbreviation": "onrlabo",
         "jkeys": {
             "plan_rope": {
                 "class_type": "RopeTerm",
@@ -262,7 +262,7 @@
         "jvalues": {}
     },
     "owner_plan_reason_premiseunit": {
-        "abbreviation": "plnprem",
+        "abbreviation": "onrprem",
         "jkeys": {
             "plan_rope": {
                 "class_type": "RopeTerm",
@@ -311,7 +311,7 @@
         }
     },
     "owner_plan_reasonunit": {
-        "abbreviation": "plnreas",
+        "abbreviation": "onrreas",
         "jkeys": {
             "plan_rope": {
                 "class_type": "RopeTerm",
@@ -352,7 +352,7 @@
         }
     },
     "owner_planunit": {
-        "abbreviation": "plnconc",
+        "abbreviation": "onrplan",
         "jkeys": {
             "plan_rope": {
                 "class_type": "RopeTerm",
@@ -473,7 +473,7 @@
         }
     },
     "owner_groupunit": {
-        "abbreviation": "plngrou",
+        "abbreviation": "onrgrou",
         "jkeys": {
             "belief_label": {
                 "class_type": "LabelTerm",
@@ -526,7 +526,7 @@
         }
     },
     "ownerunit": {
-        "abbreviation": "plnunit",
+        "abbreviation": "onrunit",
         "jkeys": {
             "belief_label": {
                 "class_type": "LabelTerm",

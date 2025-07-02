@@ -12,7 +12,7 @@ from src.a06_owner_logic.owner import OwnerUnit
 from src.a11_bud_logic.bud import BeliefLabel
 
 
-def create_plnmemb_metrics_insert_sqlstr(values_dict: dict[str,]):
+def create_onrmemb_metrics_insert_sqlstr(values_dict: dict[str,]):
     belief_label = values_dict.get("belief_label")
     owner_name = values_dict.get("owner_name")
     acct_name = values_dict.get("acct_name")
@@ -49,7 +49,7 @@ VALUES (
 """
 
 
-def create_plnacct_metrics_insert_sqlstr(values_dict: dict[str,]):
+def create_onracct_metrics_insert_sqlstr(values_dict: dict[str,]):
     belief_label = values_dict.get("belief_label")
     owner_name = values_dict.get("owner_name")
     acct_name = values_dict.get("acct_name")
@@ -88,7 +88,7 @@ VALUES (
 """
 
 
-def create_plngrou_metrics_insert_sqlstr(values_dict: dict[str,]):
+def create_onrgrou_metrics_insert_sqlstr(values_dict: dict[str,]):
     belief_label = values_dict.get("belief_label")
     owner_name = values_dict.get("owner_name")
     group_title = values_dict.get("group_title")
@@ -119,7 +119,7 @@ VALUES (
 """
 
 
-def create_plnawar_metrics_insert_sqlstr(values_dict: dict[str,]):
+def create_onrawar_metrics_insert_sqlstr(values_dict: dict[str,]):
     belief_label = values_dict.get("belief_label")
     owner_name = values_dict.get("owner_name")
     rope = values_dict.get("plan_rope")
@@ -143,7 +143,7 @@ VALUES (
 """
 
 
-def create_plnfact_metrics_insert_sqlstr(values_dict: dict[str,]):
+def create_onrfact_metrics_insert_sqlstr(values_dict: dict[str,]):
     belief_label = values_dict.get("belief_label")
     owner_name = values_dict.get("owner_name")
     rope = values_dict.get("plan_rope")
@@ -165,7 +165,7 @@ VALUES (
 """
 
 
-def create_plnheal_metrics_insert_sqlstr(values_dict: dict[str,]):
+def create_onrheal_metrics_insert_sqlstr(values_dict: dict[str,]):
     belief_label = values_dict.get("belief_label")
     owner_name = values_dict.get("owner_name")
     rope = values_dict.get("plan_rope")
@@ -181,7 +181,7 @@ VALUES (
 """
 
 
-def create_plnprem_metrics_insert_sqlstr(values_dict: dict[str,]):
+def create_onrprem_metrics_insert_sqlstr(values_dict: dict[str,]):
     belief_label = values_dict.get("belief_label")
     owner_name = values_dict.get("owner_name")
     rope = values_dict.get("plan_rope")
@@ -209,7 +209,7 @@ VALUES (
 """
 
 
-def create_plnreas_metrics_insert_sqlstr(values_dict: dict[str,]):
+def create_onrreas_metrics_insert_sqlstr(values_dict: dict[str,]):
     belief_label = values_dict.get("belief_label")
     owner_name = values_dict.get("owner_name")
     rope = values_dict.get("plan_rope")
@@ -233,7 +233,7 @@ VALUES (
 """
 
 
-def create_plnlabo_metrics_insert_sqlstr(values_dict: dict[str,]):
+def create_onrlabo_metrics_insert_sqlstr(values_dict: dict[str,]):
     belief_label = values_dict.get("belief_label")
     owner_name = values_dict.get("owner_name")
     rope = values_dict.get("plan_rope")
@@ -251,7 +251,7 @@ VALUES (
 """
 
 
-def create_plnconc_metrics_insert_sqlstr(values_dict: dict[str,]):
+def create_onrplan_metrics_insert_sqlstr(values_dict: dict[str,]):
     belief_label = values_dict.get("belief_label")
     owner_name = values_dict.get("owner_name")
     rope = values_dict.get("plan_rope")
@@ -373,7 +373,7 @@ class ObjKeysHolder:
     fact_rope: RopeTerm = None
 
 
-def insert_job_plnmemb(
+def insert_job_onrmemb(
     cursor: sqlite3_Cursor,
     x_objkeysholder: ObjKeysHolder,
     x_membership: MemberShip,
@@ -381,11 +381,11 @@ def insert_job_plnmemb(
     x_dict = copy_deepcopy(x_membership.__dict__)
     x_dict["belief_label"] = x_objkeysholder.belief_label
     x_dict["owner_name"] = x_objkeysholder.owner_name
-    insert_sqlstr = create_plnmemb_metrics_insert_sqlstr(x_dict)
+    insert_sqlstr = create_onrmemb_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
-def insert_job_plnacct(
+def insert_job_onracct(
     cursor: sqlite3_Cursor,
     x_objkeysholder: ObjKeysHolder,
     x_acct: AcctUnit,
@@ -393,11 +393,11 @@ def insert_job_plnacct(
     x_dict = copy_deepcopy(x_acct.__dict__)
     x_dict["belief_label"] = x_objkeysholder.belief_label
     x_dict["owner_name"] = x_objkeysholder.owner_name
-    insert_sqlstr = create_plnacct_metrics_insert_sqlstr(x_dict)
+    insert_sqlstr = create_onracct_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
-def insert_job_plngrou(
+def insert_job_onrgrou(
     cursor: sqlite3_Cursor,
     x_objkeysholder: ObjKeysHolder,
     x_groupunit: GroupUnit,
@@ -405,11 +405,11 @@ def insert_job_plngrou(
     x_dict = copy_deepcopy(x_groupunit.__dict__)
     x_dict["belief_label"] = x_objkeysholder.belief_label
     x_dict["owner_name"] = x_objkeysholder.owner_name
-    insert_sqlstr = create_plngrou_metrics_insert_sqlstr(x_dict)
+    insert_sqlstr = create_onrgrou_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
-def insert_job_plnawar(
+def insert_job_onrawar(
     cursor: sqlite3_Cursor,
     x_objkeysholder: ObjKeysHolder,
     x_awardheir: AwardHeir,
@@ -418,11 +418,11 @@ def insert_job_plnawar(
     x_dict["belief_label"] = x_objkeysholder.belief_label
     x_dict["owner_name"] = x_objkeysholder.owner_name
     x_dict["plan_rope"] = x_objkeysholder.rope
-    insert_sqlstr = create_plnawar_metrics_insert_sqlstr(x_dict)
+    insert_sqlstr = create_onrawar_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
-def insert_job_plnfact(
+def insert_job_onrfact(
     cursor: sqlite3_Cursor,
     x_objkeysholder: ObjKeysHolder,
     x_factheir: FactHeir,
@@ -431,11 +431,11 @@ def insert_job_plnfact(
     x_dict["belief_label"] = x_objkeysholder.belief_label
     x_dict["owner_name"] = x_objkeysholder.owner_name
     x_dict["plan_rope"] = x_objkeysholder.rope
-    insert_sqlstr = create_plnfact_metrics_insert_sqlstr(x_dict)
+    insert_sqlstr = create_onrfact_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
-def insert_job_plnheal(
+def insert_job_onrheal(
     cursor: sqlite3_Cursor,
     x_objkeysholder: ObjKeysHolder,
     x_healer: HealerLink,
@@ -447,11 +447,11 @@ def insert_job_plnheal(
     }
     for healer_name in sorted(x_healer._healer_names):
         x_dict["healer_name"] = healer_name
-        insert_sqlstr = create_plnheal_metrics_insert_sqlstr(x_dict)
+        insert_sqlstr = create_onrheal_metrics_insert_sqlstr(x_dict)
         cursor.execute(insert_sqlstr)
 
 
-def insert_job_plnprem(
+def insert_job_onrprem(
     cursor: sqlite3_Cursor,
     x_objkeysholder: ObjKeysHolder,
     x_premiseunit: PremiseUnit,
@@ -461,11 +461,11 @@ def insert_job_plnprem(
     x_dict["owner_name"] = x_objkeysholder.owner_name
     x_dict["plan_rope"] = x_objkeysholder.rope
     x_dict["rcontext"] = x_objkeysholder.rcontext
-    insert_sqlstr = create_plnprem_metrics_insert_sqlstr(x_dict)
+    insert_sqlstr = create_onrprem_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
-def insert_job_plnreas(
+def insert_job_onrreas(
     cursor: sqlite3_Cursor,
     x_objkeysholder: ObjKeysHolder,
     x_reasonheir: ReasonHeir,
@@ -474,11 +474,11 @@ def insert_job_plnreas(
     x_dict["belief_label"] = x_objkeysholder.belief_label
     x_dict["owner_name"] = x_objkeysholder.owner_name
     x_dict["plan_rope"] = x_objkeysholder.rope
-    insert_sqlstr = create_plnreas_metrics_insert_sqlstr(x_dict)
+    insert_sqlstr = create_onrreas_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
-def insert_job_plnlabo(
+def insert_job_onrlabo(
     cursor: sqlite3_Cursor,
     x_objkeysholder: ObjKeysHolder,
     x_laborheir: LaborHeir,
@@ -489,21 +489,21 @@ def insert_job_plnlabo(
     x_dict["plan_rope"] = x_objkeysholder.rope
     for labor_title in sorted(x_laborheir._laborlinks):
         x_dict["labor_title"] = labor_title
-        insert_sqlstr = create_plnlabo_metrics_insert_sqlstr(x_dict)
+        insert_sqlstr = create_onrlabo_metrics_insert_sqlstr(x_dict)
         cursor.execute(insert_sqlstr)
 
 
-def insert_job_plnconc(
+def insert_job_onrplan(
     cursor: sqlite3_Cursor, x_objkeysholder: ObjKeysHolder, x_plan: PlanUnit
 ):
     x_dict = copy_deepcopy(x_plan.__dict__)
     x_dict["plan_rope"] = x_plan.get_plan_rope()
     x_dict["owner_name"] = x_objkeysholder.owner_name
-    insert_sqlstr = create_plnconc_metrics_insert_sqlstr(x_dict)
+    insert_sqlstr = create_onrplan_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
 
-def insert_job_plnunit(
+def insert_job_onrunit(
     cursor: sqlite3_Cursor, x_objkeysholder: ObjKeysHolder, x_owner: OwnerUnit
 ):
     x_dict = copy_deepcopy(x_owner.__dict__)
@@ -514,30 +514,30 @@ def insert_job_plnunit(
 def insert_job_obj(cursor: sqlite3_Cursor, job_owner: OwnerUnit):
     job_owner.settle_owner()
     x_objkeysholder = ObjKeysHolder(job_owner.belief_label, job_owner.owner_name)
-    insert_job_plnunit(cursor, x_objkeysholder, job_owner)
+    insert_job_onrunit(cursor, x_objkeysholder, job_owner)
     for x_plan in job_owner.get_plan_dict().values():
         x_objkeysholder.rope = x_plan.get_plan_rope()
         healerlink = x_plan.healerlink
         laborheir = x_plan._laborheir
-        insert_job_plnconc(cursor, x_objkeysholder, x_plan)
-        insert_job_plnheal(cursor, x_objkeysholder, healerlink)
-        insert_job_plnlabo(cursor, x_objkeysholder, laborheir)
+        insert_job_onrplan(cursor, x_objkeysholder, x_plan)
+        insert_job_onrheal(cursor, x_objkeysholder, healerlink)
+        insert_job_onrlabo(cursor, x_objkeysholder, laborheir)
         for x_awardheir in x_plan._awardheirs.values():
-            insert_job_plnawar(cursor, x_objkeysholder, x_awardheir)
+            insert_job_onrawar(cursor, x_objkeysholder, x_awardheir)
         for rcontext, reasonheir in x_plan._reasonheirs.items():
-            insert_job_plnreas(cursor, x_objkeysholder, reasonheir)
+            insert_job_onrreas(cursor, x_objkeysholder, reasonheir)
             x_objkeysholder.rcontext = rcontext
             for prem in reasonheir.premises.values():
-                insert_job_plnprem(cursor, x_objkeysholder, prem)
+                insert_job_onrprem(cursor, x_objkeysholder, prem)
 
     for x_acct in job_owner.accts.values():
-        insert_job_plnacct(cursor, x_objkeysholder, x_acct)
+        insert_job_onracct(cursor, x_objkeysholder, x_acct)
         for x_membership in x_acct._memberships.values():
-            insert_job_plnmemb(cursor, x_objkeysholder, x_membership)
+            insert_job_onrmemb(cursor, x_objkeysholder, x_membership)
 
     for x_groupunit in job_owner._groupunits.values():
-        insert_job_plngrou(cursor, x_objkeysholder, x_groupunit)
+        insert_job_onrgrou(cursor, x_objkeysholder, x_groupunit)
 
     for x_factheir in job_owner.planroot._factheirs.values():
         x_objkeysholder.fact_rope = job_owner.planroot.get_plan_rope()
-        insert_job_plnfact(cursor, x_objkeysholder, x_factheir)
+        insert_job_onrfact(cursor, x_objkeysholder, x_factheir)

@@ -15,8 +15,8 @@ from src.a19_kpi_toolbox.test._util.a19_str import belief_kpi001_acct_nets_str
 
 def test_get_belief_kpi001_acct_nets_sqlstr_ReturnsObj():
     # ESTABLISH
-    plnconc_str = owner_planunit_str()
-    plnconc_job = create_prime_tablename(plnconc_str, "job", None)
+    onrplan_str = owner_planunit_str()
+    onrplan_job = create_prime_tablename(onrplan_str, "job", None)
 
     # WHEN
     kpi001_sqlstr = get_belief_kpi001_acct_nets_sqlstr()
@@ -29,11 +29,11 @@ SELECT
 , {belief_acct_nets_str()}.{owner_name_str()}
 , {owner_net_amount_str()} AS funds
 , RANK() OVER (ORDER BY {owner_net_amount_str()} DESC) AS fund_rank
-, IFNULL(SUM({plnconc_job}.{task_str()}), 0) AS tasks_count
+, IFNULL(SUM({onrplan_job}.{task_str()}), 0) AS tasks_count
 FROM {belief_acct_nets_str()}
-LEFT JOIN {plnconc_job} ON
-  {plnconc_job}.{belief_label_str()} = {belief_acct_nets_str()}.{belief_label_str()}
-  AND {plnconc_job}.{owner_name_str()} = {belief_acct_nets_str()}.{owner_name_str()}
+LEFT JOIN {onrplan_job} ON
+  {onrplan_job}.{belief_label_str()} = {belief_acct_nets_str()}.{belief_label_str()}
+  AND {onrplan_job}.{owner_name_str()} = {belief_acct_nets_str()}.{owner_name_str()}
 GROUP BY {belief_acct_nets_str()}.{belief_label_str()}, {belief_acct_nets_str()}.{owner_name_str()}
 ;
 """

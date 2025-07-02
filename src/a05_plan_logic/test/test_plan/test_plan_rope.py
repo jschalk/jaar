@@ -136,7 +136,7 @@ def test_PlanUnit_get_obj_key_ReturnsCorrectInfo():
     assert red_plan.get_obj_key() == red_str
 
 
-def test_PlanUnit_set_knot_CorrectlyModifiesReasonRopeTerms():
+def test_PlanUnit_set_knot_CorrectlyModifiesReason_RopeTerms():
     # ESTABLISH
     casa_str = "casa"
     casa_plan = planunit_shop(casa_str)

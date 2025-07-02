@@ -62,7 +62,7 @@ def test_OwnerUnit_settle_owner_ExecutesWithRangeRootFacts():
     assert zia_owner.planroot._factheirs == {clean_factheir.fcontext: clean_factheir}
 
 
-def test_OwnerUnit_settle_owner_RaisesErrorIfNonRangeRootHasFactUnit():
+def test_OwnerUnit_settle_owner_RaisesErrorIfNon_RangeRootHasFactUnit():
     # ESTABLISH
     zia_owner = ownerunit_shop("Zia")
     casa_str = "casa"

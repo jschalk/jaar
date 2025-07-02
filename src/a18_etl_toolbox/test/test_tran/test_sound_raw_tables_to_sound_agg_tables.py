@@ -255,8 +255,8 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        plnacct_s_put_raw_tblname = create_prime_tablename("PLNACCT", "s", "raw", "put")
-        insert_into_clause = f"""INSERT INTO {plnacct_s_put_raw_tblname} (
+        onracct_s_put_raw_tblname = create_prime_tablename("ONRACCT", "s", "raw", "put")
+        insert_into_clause = f"""INSERT INTO {onracct_s_put_raw_tblname} (
   {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
@@ -279,18 +279,18 @@ VALUES
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
         pidrope_s_agg_tablename = create_prime_tablename("PIDROPE", "s", "agg")
-        plnacct_s_put_agg_tblname = create_prime_tablename("PLNACCT", "s", "agg", "put")
+        onracct_s_put_agg_tblname = create_prime_tablename("ONRACCT", "s", "agg", "put")
         assert get_row_count(cursor, pidrope_s_raw_tablename) == 7
-        assert get_row_count(cursor, plnacct_s_put_raw_tblname) == 6
+        assert get_row_count(cursor, onracct_s_put_raw_tblname) == 6
         assert get_row_count(cursor, pidrope_s_agg_tablename) == 0
-        assert get_row_count(cursor, plnacct_s_put_agg_tblname) == 0
+        assert get_row_count(cursor, onracct_s_put_agg_tblname) == 0
 
         # WHEN
         insert_sound_raw_selects_into_sound_agg_tables(cursor)
 
         # THEN
         assert get_row_count(cursor, pidrope_s_agg_tablename) == 2
-        assert get_row_count(cursor, plnacct_s_put_agg_tblname) == 2
+        assert get_row_count(cursor, onracct_s_put_agg_tblname) == 2
 
         select_agg_sqlstr = f"""SELECT * FROM {pidrope_s_agg_tablename};"""
         cursor.execute(select_agg_sqlstr)
@@ -302,7 +302,7 @@ VALUES
             (event2, sue_str, sue_str, sue_str, rdx, rdx, ukx, None),
         ]
 
-        select_agg_sqlstr = f"""SELECT * FROM {plnacct_s_put_agg_tblname};"""
+        select_agg_sqlstr = f"""SELECT * FROM {onracct_s_put_agg_tblname};"""
         cursor.execute(select_agg_sqlstr)
         rows = cursor.fetchall()
         print(rows)
@@ -335,8 +335,8 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        plnacct_s_del_raw_tblname = create_prime_tablename("PLNACCT", "s", "raw", "del")
-        insert_into_clause = f"""INSERT INTO {plnacct_s_del_raw_tblname} (
+        onracct_s_del_raw_tblname = create_prime_tablename("ONRACCT", "s", "raw", "del")
+        insert_into_clause = f"""INSERT INTO {onracct_s_del_raw_tblname} (
   {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
@@ -355,17 +355,17 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        plnacct_s_del_agg_tblname = create_prime_tablename("PLNACCT", "s", "agg", "del")
-        assert get_row_count(cursor, plnacct_s_del_raw_tblname) == 6
-        assert get_row_count(cursor, plnacct_s_del_agg_tblname) == 0
+        onracct_s_del_agg_tblname = create_prime_tablename("ONRACCT", "s", "agg", "del")
+        assert get_row_count(cursor, onracct_s_del_raw_tblname) == 6
+        assert get_row_count(cursor, onracct_s_del_agg_tblname) == 0
 
         # WHEN
         insert_sound_raw_selects_into_sound_agg_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, plnacct_s_del_agg_tblname) == 3
+        assert get_row_count(cursor, onracct_s_del_agg_tblname) == 3
 
-        select_agg_sqlstr = f"""SELECT * FROM {plnacct_s_del_agg_tblname};"""
+        select_agg_sqlstr = f"""SELECT * FROM {onracct_s_del_agg_tblname};"""
         cursor.execute(select_agg_sqlstr)
         rows = cursor.fetchall()
         print(rows)
@@ -423,8 +423,8 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        plnacct_s_put_raw_tblname = create_prime_tablename("PLNACCT", "s", "raw", "put")
-        insert_into_clause = f"""INSERT INTO {plnacct_s_put_raw_tblname} (
+        onracct_s_put_raw_tblname = create_prime_tablename("ONRACCT", "s", "raw", "put")
+        insert_into_clause = f"""INSERT INTO {onracct_s_put_raw_tblname} (
   {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
@@ -448,18 +448,18 @@ VALUES
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
         pidrope_s_agg_tablename = create_prime_tablename("PIDROPE", "s", "agg")
-        plnacct_s_put_agg_tblname = create_prime_tablename("PLNACCT", "s", "agg", "put")
+        onracct_s_put_agg_tblname = create_prime_tablename("ONRACCT", "s", "agg", "put")
         assert get_row_count(cursor, pidrope_s_raw_tablename) == 8
-        assert get_row_count(cursor, plnacct_s_put_raw_tblname) == 7
+        assert get_row_count(cursor, onracct_s_put_raw_tblname) == 7
         assert get_row_count(cursor, pidrope_s_agg_tablename) == 0
-        assert get_row_count(cursor, plnacct_s_put_agg_tblname) == 0
+        assert get_row_count(cursor, onracct_s_put_agg_tblname) == 0
 
         # WHEN
         etl_sound_raw_tables_to_sound_agg_tables(cursor)
 
         # THEN
         assert get_row_count(cursor, pidrope_s_agg_tablename) == 4
-        assert get_row_count(cursor, plnacct_s_put_agg_tblname) == 3
+        assert get_row_count(cursor, onracct_s_put_agg_tblname) == 3
 
         select_agg_sqlstr = f"""SELECT * FROM {pidrope_s_agg_tablename};"""
         cursor.execute(select_agg_sqlstr)
@@ -472,7 +472,7 @@ VALUES
             (event7, yao_str, bob_str, yao_inx, rdx, rdx, ukx, None),
         ]
 
-        select_agg_sqlstr = f"""SELECT * FROM {plnacct_s_put_agg_tblname};"""
+        select_agg_sqlstr = f"""SELECT * FROM {onracct_s_put_agg_tblname};"""
         cursor.execute(select_agg_sqlstr)
         rows = cursor.fetchall()
         print(rows)

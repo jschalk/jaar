@@ -11,7 +11,7 @@ from src.a18_etl_toolbox.test._util.a18_str import (
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_BELIEF_ACCT_NETS_SQLSTR,
-    CREATE_JOB_PLNCONC_SQLSTR,
+    CREATE_JOB_ONRPLAN_SQLSTR,
     create_prime_tablename,
 )
 from src.a19_kpi_toolbox.kpi_mstr import get_default_kpi_bundle, populate_kpi_bundle
@@ -28,7 +28,7 @@ def test_populate_kpi_bundle_PopulatesTable_Scenario0_GivenDefaultBundleID():
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        cursor.execute(CREATE_JOB_PLNCONC_SQLSTR)
+        cursor.execute(CREATE_JOB_ONRPLAN_SQLSTR)
         cursor.execute(CREATE_BELIEF_ACCT_NETS_SQLSTR)
         belief_acct_nets_tablename = belief_acct_nets_str()
         insert_sqlstr = f"""INSERT INTO {belief_acct_nets_tablename} ({belief_label_str()}, {owner_name_str()}, {owner_net_amount_str()})
@@ -46,11 +46,11 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, belief_kpi001_acct_nets_tablename) == 2
-        plnconc_job_tablename = create_prime_tablename("PLNCONC", "job", None)
+        onrplan_job_tablename = create_prime_tablename("ONRPLAN", "job", None)
         assert set(get_db_tables(db_conn).keys()) == {
             belief_kpi001_acct_nets_str(),
             belief_acct_nets_tablename,
-            plnconc_job_tablename,
+            onrplan_job_tablename,
         }
 
 
@@ -64,7 +64,7 @@ def test_populate_kpi_bundle_PopulatesTable_Scenario1_GivenNoBundleID():
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        cursor.execute(CREATE_JOB_PLNCONC_SQLSTR)
+        cursor.execute(CREATE_JOB_ONRPLAN_SQLSTR)
         cursor.execute(CREATE_BELIEF_ACCT_NETS_SQLSTR)
         belief_acct_nets_tablename = belief_acct_nets_str()
         insert_sqlstr = f"""INSERT INTO {belief_acct_nets_tablename} ({belief_label_str()}, {owner_name_str()}, {owner_net_amount_str()})
@@ -82,9 +82,9 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, belief_kpi001_acct_nets_tablename) == 2
-        plnconc_job_tablename = create_prime_tablename("PLNCONC", "job", None)
+        onrplan_job_tablename = create_prime_tablename("ONRPLAN", "job", None)
         assert set(get_db_tables(db_conn).keys()) == {
             belief_kpi001_acct_nets_str(),
             belief_acct_nets_tablename,
-            plnconc_job_tablename,
+            onrplan_job_tablename,
         }

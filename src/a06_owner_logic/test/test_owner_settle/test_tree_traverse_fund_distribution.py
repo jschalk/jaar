@@ -409,7 +409,7 @@ def test_OwnerUnit_settle_owner_TreeTraverseSetsAwardLine_fundFromRootCorrectly(
     assert sue_owner.planroot._awardlines == {x_awardline.awardee_title: x_awardline}
 
 
-def test_OwnerUnit_settle_owner_TreeTraverseSets_awardlines_ToRootPlanUnitFromNonRootPlanUnit():
+def test_OwnerUnit_settle_owner_TreeTraverseSets_awardlines_ToRootPlanUnitFromNon_RootPlanUnit():
     # ESTABLISH
     sue_owner = get_ownerunit_with_4_levels()
     sue_owner.settle_owner()
