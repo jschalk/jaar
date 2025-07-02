@@ -29,6 +29,7 @@ def test_create_kpi_csvs_Scenario0_NotCreateFileWhenNoKPITables(env_dir_setup_cl
 
     # THEN
     assert count_files(temp_dir) == 1
+    db_conn.close()
 
 
 def test_create_kpi_csvs_Scenario1_CreateFile(env_dir_setup_cleanup):
@@ -51,3 +52,4 @@ def test_create_kpi_csvs_Scenario1_CreateFile(env_dir_setup_cleanup):
     assert os_path_exists(kpi_csv_path)
     expected_df = DataFrame(["Fay"], columns=["belief_label"])
     assert_frame_equal(open_csv(kpi_csv_path), expected_df)
+    db_conn.close()

@@ -659,3 +659,4 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         assert get_row_count(cursor, plnunit_voice_put_agg) == 1
         assert get_row_count(cursor, plnacct_voice_put_agg) == 1
         assert get_row_count(cursor, belief_ote1_agg_str()) == 1
+    db_conn.close()

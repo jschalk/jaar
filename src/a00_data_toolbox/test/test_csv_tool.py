@@ -1,6 +1,6 @@
 from csv import DictReader as csv_DictReader, reader as csv_reader
 from io import StringIO as io_StringIO
-from pathlib import Path
+from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.csv_toolbox import (
     delete_column_from_csv_string,
@@ -13,7 +13,7 @@ from src.a00_data_toolbox.test._util.a00_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
-import tempfile
+import time
 
 
 def test_open_csv_with_types(env_dir_setup_cleanup):
@@ -61,32 +61,59 @@ def test_open_csv_with_types(env_dir_setup_cleanup):
     assert generated_rows == expected_rows
 
 
-def test_export_sqlite_tables_to_csv(env_dir_setup_cleanup):
+def test_database_connection_not_closing1(env_dir_setup_cleanup):
     # 1. Create temporary SQLite DB
-    tmp_path = Path(get_module_temp_dir())
+    tmp_path = get_module_temp_dir()
     set_dir(tmp_path)
-    db_path = tmp_path / "test.db"
+    db_path = create_path(tmp_path, "test.db")
+    print(f"{db_path=}")
+    with sqlite3_connect(":memory:") as conn:
+
+        pass
+    time.sleep(0.1)
+
+
+def test_database_connection_not_closing2(env_dir_setup_cleanup):
+    # 1. Create temporary SQLite DB
+    tmp_path = get_module_temp_dir()
+    set_dir(tmp_path)
+    db_path = create_path(tmp_path, "test998.db")
     print(f"{db_path=}")
     with sqlite3_connect(db_path) as conn:
-        cursor = conn.cursor()
 
-        # 2. Create tables and insert data
-        cursor.execute("CREATE TABLE users (id INTEGER, name TEXT)")
-        cursor.execute("INSERT INTO users VALUES (1, 'Alice'), (2, 'Bob')")
+        pass
+    time.sleep(0.1)
+    conn.close()
 
-        cursor.execute("CREATE TABLE products (sku TEXT, price REAL)")
-        cursor.execute("INSERT INTO products VALUES ('ABC', 9.99)")
-        conn.commit()
+
+def test_export_sqlite_tables_to_csv(env_dir_setup_cleanup):
+    # 1. Create temporary SQLite DB
+    tmp_path = get_module_temp_dir()
+    set_dir(tmp_path)
+    db_path = create_path(tmp_path, "test555.db")
+    print(f"{db_path=}")
+    conn = sqlite3_connect(db_path)
+    cursor = conn.cursor()
+
+    # 2. Create tables and insert data
+    cursor.execute("CREATE TABLE users (id INTEGER, name TEXT)")
+    cursor.execute("INSERT INTO users VALUES (1, 'Alice'), (2, 'Bob')")
+
+    cursor.execute("CREATE TABLE products (sku TEXT, price REAL)")
+    cursor.execute("INSERT INTO products VALUES ('ABC', 9.99)")
+    cursor.close()
+    conn.commit()
+    conn.close()
 
     # 3. Run export function
     export_sqlite_tables_to_csv(str(db_path), str(tmp_path))
 
     # 4. Check output files
-    user_csv = tmp_path / "users_2.csv"
-    product_csv = tmp_path / "products_1.csv"
+    user_csv = create_path(tmp_path, "users_2.csv")
+    product_csv = create_path(tmp_path, "products_1.csv")
 
-    assert user_csv.exists()
-    assert product_csv.exists()
+    assert os_path_exists(user_csv)
+    assert os_path_exists(product_csv)
 
     # 5. Check CSV contents (users table)
     with open(user_csv, newline="", encoding="utf-8") as f:

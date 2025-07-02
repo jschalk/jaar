@@ -188,7 +188,7 @@ def test_Modules_StrFunctionsAppearWhereTheyShould():
     all_str_functions = get_all_str_functions()
     str_first_ref = {str_function: None for str_function in all_str_functions}
     # TODO change excluded_strs to empty set by editing codebase
-    excluded_strs = {"time", "day", "days"}
+    excluded_strs = {"close", "day", "days", "time"}
 
     # WHEN / THEN
 

@@ -111,6 +111,7 @@ class WorldUnit:
             cursor = db_conn.cursor()
             self.sheets_input_to_clarity_with_cursor(db_conn, cursor)
             db_conn.commit()
+        db_conn.close()
 
     def stance_sheets_to_clarity_mstr(self):
         update_event_int_in_excel_files(self._input_dir, 1)

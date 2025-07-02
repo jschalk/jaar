@@ -63,6 +63,7 @@ def create_kpi_csvs(db_path: str, dst_dir: str):
         kpi_tables = get_db_tables(db_conn, "kpi")
         for kpi_table in kpi_tables:
             save_table_to_csv(cursor, dst_dir, kpi_table)
+    db_conn.close()
 
 
 def create_calendar_markdown_files(belief_mstr_dir: str, output_dir: str):

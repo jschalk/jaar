@@ -96,6 +96,7 @@ def export_sqlite_tables_to_csv(db_path, output_dir="."):
                 writer = csv_writer(f)
                 writer.writerow(column_names)
                 writer.writerows(rows)
+    conn.close()
 
 
 def replace_csv_column_from_string(
