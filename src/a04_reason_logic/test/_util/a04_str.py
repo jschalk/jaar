@@ -1,5 +1,5 @@
 from src.a01_term_logic.test._util.a01_str import knot_str
-from src.a03_group_logic.test._util.a03_str import owner_name_str
+from src.a03_group_logic.test._util.a03_str import believer_name_str
 
 
 def _active_str() -> str:

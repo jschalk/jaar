@@ -1,4 +1,4 @@
-from src.a06_owner_logic.test._util.a06_str import attributes_str, dimens_str
+from src.a06_believer_logic.test._util.a06_str import attributes_str, dimens_str
 
 
 def allowed_crud_str() -> str:

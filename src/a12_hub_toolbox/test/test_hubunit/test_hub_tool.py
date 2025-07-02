@@ -2,17 +2,17 @@ from os.path import exists as os_path_exists
 from pytest import raises as pytest_raises
 from src.a00_data_toolbox.file_toolbox import create_path, open_json, set_dir
 from src.a01_term_logic.rope import create_rope
-from src.a06_owner_logic.owner import ownerunit_shop
-from src.a06_owner_logic.test._util.a06_str import penny_str
-from src.a06_owner_logic.test._util.example_owners import (
-    get_ownerunit_irrational_example,
-    get_ownerunit_with_4_levels,
+from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.test._util.a06_str import penny_str
+from src.a06_believer_logic.test._util.example_believers import (
+    get_believerunit_irrational_example,
+    get_believerunit_with_4_levels,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str
 from src.a11_bud_logic.cell import CELLNODE_QUOTA_DEFAULT, cellunit_shop
 from src.a11_bud_logic.test._util.a11_str import (
     ancestors_str,
-    bud_owner_name_str,
+    bud_believer_name_str,
     celldepth_str,
     quota_str,
 )
@@ -23,40 +23,40 @@ from src.a11_bud_logic.test._util.example_factunits import (
     example_sky_blue_factunit as sky_blue_factunit,
 )
 from src.a12_hub_toolbox.hub_path import (
+    create_believer_event_dir_path,
+    create_believerevent_path,
+    create_believerpoint_path,
     create_budunit_json_path,
     create_cell_acct_mandate_ledger_path,
     create_cell_dir_path,
     create_cell_json_path as node_path,
     create_gut_path,
     create_job_path,
-    create_owner_event_dir_path,
-    create_ownerevent_path,
-    create_ownerpoint_path,
 )
 from src.a12_hub_toolbox.hub_tool import (
+    believerpoint_file_exists,
     bud_file_exists,
     cellunit_add_json_file,
     cellunit_get_from_dir,
     cellunit_save_to_dir,
-    collect_owner_event_dir_sets,
+    collect_believer_event_dir_sets,
     create_cell_acct_mandate_ledger_json,
-    get_ownerevent_obj,
-    get_owners_downhill_event_ints,
+    get_believerevent_obj,
+    get_believers_downhill_event_ints,
     get_timepoint_dirs,
     gut_file_exists,
     job_file_exists,
+    open_believer_file,
+    open_believerpoint_file,
     open_bud_file,
     open_gut_file,
     open_job_file,
-    open_owner_file,
-    open_ownerpoint_file,
-    ownerpoint_file_exists,
-    save_arbitrary_ownerevent,
+    save_arbitrary_believerevent,
+    save_believer_file,
+    save_believerpoint_file,
     save_bud_file,
     save_gut_file,
     save_job_file,
-    save_owner_file,
-    save_ownerpoint_file,
 )
 from src.a12_hub_toolbox.test._util.a12_env import (
     env_dir_setup_cleanup,
@@ -68,51 +68,51 @@ from src.a12_hub_toolbox.test._util.example_hub_atoms import (
 )
 
 
-def test_save_owner_file_SetsFile(env_dir_setup_cleanup):
+def test_save_believer_file_SetsFile(env_dir_setup_cleanup):
     # ESTABLISH
     temp_dir = get_module_temp_dir()
-    owner_filename = "owner.json"
-    owner_path = create_path(temp_dir, owner_filename)
+    believer_filename = "believer.json"
+    believer_path = create_path(temp_dir, believer_filename)
     sue_str = "Sue"
-    sue_owner = ownerunit_shop(sue_str)
-    assert os_path_exists(owner_path) is False
+    sue_believer = believerunit_shop(sue_str)
+    assert os_path_exists(believer_path) is False
 
     # WHEN
-    save_owner_file(owner_path, None, sue_owner)
+    save_believer_file(believer_path, None, sue_believer)
 
     # THEN
-    assert os_path_exists(owner_path)
+    assert os_path_exists(believer_path)
 
 
-def test_open_owner_file_ReturnsObj_Scenario0_NoFile():
+def test_open_believer_file_ReturnsObj_Scenario0_NoFile():
     # ESTABLISH
     temp_dir = get_module_temp_dir()
-    owner_filename = "owner.json"
-    owner_path = create_path(temp_dir, owner_filename)
-    assert os_path_exists(owner_path) is False
+    believer_filename = "believer.json"
+    believer_path = create_path(temp_dir, believer_filename)
+    assert os_path_exists(believer_path) is False
 
     # WHEN
-    gen_sue_owner = open_owner_file(owner_path)
+    gen_sue_believer = open_believer_file(believer_path)
 
     # THEN
-    assert not gen_sue_owner
+    assert not gen_sue_believer
 
 
-def test_open_owner_file_ReturnsObj_Scenario1_FileExists():
+def test_open_believer_file_ReturnsObj_Scenario1_FileExists():
     # ESTABLISH
     temp_dir = get_module_temp_dir()
-    owner_filename = "owner.json"
-    owner_path = create_path(temp_dir, owner_filename)
+    believer_filename = "believer.json"
+    believer_path = create_path(temp_dir, believer_filename)
     sue_str = "Sue"
-    expected_sue_owner = ownerunit_shop(sue_str)
-    save_owner_file(owner_path, None, expected_sue_owner)
-    assert os_path_exists(owner_path)
+    expected_sue_believer = believerunit_shop(sue_str)
+    save_believer_file(believer_path, None, expected_sue_believer)
+    assert os_path_exists(believer_path)
 
     # WHEN
-    gen_sue_owner = open_owner_file(owner_path)
+    gen_sue_believer = open_believer_file(believer_path)
 
     # THEN
-    assert gen_sue_owner == expected_sue_owner
+    assert gen_sue_believer == expected_sue_believer
 
 
 def test_save_gut_file_SetsFile(env_dir_setup_cleanup):
@@ -121,11 +121,11 @@ def test_save_gut_file_SetsFile(env_dir_setup_cleanup):
     a23_str = "amy23"
     sue_str = "Sue"
     sue_gut_path = create_gut_path(belief_mstr_dir, a23_str, sue_str)
-    sue_owner = ownerunit_shop(sue_str, a23_str)
+    sue_believer = believerunit_shop(sue_str, a23_str)
     assert os_path_exists(sue_gut_path) is False
 
     # WHEN
-    save_gut_file(belief_mstr_dir, sue_owner)
+    save_gut_file(belief_mstr_dir, sue_believer)
 
     # THEN
     assert os_path_exists(sue_gut_path)
@@ -136,11 +136,11 @@ def test_gut_file_exists_ReturnsObj(env_dir_setup_cleanup):
     belief_mstr_dir = get_module_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
-    sue_owner = ownerunit_shop(sue_str, a23_str)
+    sue_believer = believerunit_shop(sue_str, a23_str)
     assert gut_file_exists(belief_mstr_dir, a23_str, sue_str) is False
 
     # WHEN
-    save_gut_file(belief_mstr_dir, sue_owner)
+    save_gut_file(belief_mstr_dir, sue_believer)
 
     # THEN
     assert gut_file_exists(belief_mstr_dir, a23_str, sue_str)
@@ -164,12 +164,12 @@ def test_open_gut_file_ReturnsObj_Scenario1_FileExists():
     a23_str = "amy23"
     sue_str = "Sue"
     sue_gut_path = create_gut_path(belief_mstr_dir, a23_str, sue_str)
-    sue_owner = ownerunit_shop(sue_str, a23_str)
-    save_gut_file(belief_mstr_dir, sue_owner)
+    sue_believer = believerunit_shop(sue_str, a23_str)
+    save_gut_file(belief_mstr_dir, sue_believer)
     assert os_path_exists(sue_gut_path)
 
     # WHEN / THEN
-    assert sue_owner == open_gut_file(belief_mstr_dir, a23_str, sue_str)
+    assert sue_believer == open_gut_file(belief_mstr_dir, a23_str, sue_str)
 
 
 def test_save_job_file_SetsFile(env_dir_setup_cleanup):
@@ -178,11 +178,11 @@ def test_save_job_file_SetsFile(env_dir_setup_cleanup):
     a23_str = "amy23"
     sue_str = "Sue"
     sue_job_path = create_job_path(belief_mstr_dir, a23_str, sue_str)
-    sue_owner = ownerunit_shop(sue_str, a23_str)
+    sue_believer = believerunit_shop(sue_str, a23_str)
     assert os_path_exists(sue_job_path) is False
 
     # WHEN
-    save_job_file(belief_mstr_dir, sue_owner)
+    save_job_file(belief_mstr_dir, sue_believer)
 
     # THEN
     assert os_path_exists(sue_job_path)
@@ -193,11 +193,11 @@ def test_job_file_exists_ReturnsObj(env_dir_setup_cleanup):
     belief_mstr_dir = get_module_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
-    sue_owner = ownerunit_shop(sue_str, a23_str)
+    sue_believer = believerunit_shop(sue_str, a23_str)
     assert job_file_exists(belief_mstr_dir, a23_str, sue_str) is False
 
     # WHEN
-    save_job_file(belief_mstr_dir, sue_owner)
+    save_job_file(belief_mstr_dir, sue_believer)
 
     # THEN
     assert job_file_exists(belief_mstr_dir, a23_str, sue_str)
@@ -221,33 +221,38 @@ def test_open_job_file_ReturnsObj_Scenario1_FileExists():
     a23_str = "amy23"
     sue_str = "Sue"
     sue_job_path = create_job_path(belief_mstr_dir, a23_str, sue_str)
-    sue_owner = ownerunit_shop(sue_str, a23_str)
-    save_job_file(belief_mstr_dir, sue_owner)
+    sue_believer = believerunit_shop(sue_str, a23_str)
+    save_job_file(belief_mstr_dir, sue_believer)
     assert os_path_exists(sue_job_path)
 
     # WHEN / THEN
-    assert sue_owner == open_job_file(belief_mstr_dir, a23_str, sue_str)
+    assert sue_believer == open_job_file(belief_mstr_dir, a23_str, sue_str)
 
 
-def test_save_arbitrary_ownerevent_SetsFile_Scenario0(env_dir_setup_cleanup):
+def test_save_arbitrary_believerevent_SetsFile_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
     belief_mstr_dir = get_module_temp_dir()
     a23_str = "amy23"
     event5 = 5
     sue_str = "Sue"
-    ownerevent_path = create_ownerevent_path(belief_mstr_dir, a23_str, sue_str, event5)
-    assert os_path_exists(ownerevent_path) is False
+    believerevent_path = create_believerevent_path(
+        belief_mstr_dir, a23_str, sue_str, event5
+    )
+    assert os_path_exists(believerevent_path) is False
 
     # WHEN
-    save_arbitrary_ownerevent(belief_mstr_dir, a23_str, sue_str, event5)
+    save_arbitrary_believerevent(belief_mstr_dir, a23_str, sue_str, event5)
 
     # THEN
-    assert os_path_exists(ownerevent_path)
-    expected_sue_owner = ownerunit_shop(sue_str, a23_str)
-    assert open_owner_file(ownerevent_path).get_dict() == expected_sue_owner.get_dict()
+    assert os_path_exists(believerevent_path)
+    expected_sue_believer = believerunit_shop(sue_str, a23_str)
+    assert (
+        open_believer_file(believerevent_path).get_dict()
+        == expected_sue_believer.get_dict()
+    )
 
 
-def test_save_arbitrary_ownerevent_SetsFile_Scenario1_includes_facts(
+def test_save_arbitrary_believerevent_SetsFile_Scenario1_includes_facts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -255,27 +260,36 @@ def test_save_arbitrary_ownerevent_SetsFile_Scenario1_includes_facts(
     a23_str = "amy23"
     event5 = 5
     sue_str = "Sue"
-    ownerevent_path = create_ownerevent_path(belief_mstr_dir, a23_str, sue_str, event5)
+    believerevent_path = create_believerevent_path(
+        belief_mstr_dir, a23_str, sue_str, event5
+    )
     casa_rope = create_rope(a23_str, "casa")
     clean_rope = create_rope(casa_rope, "clean")
     clean_fopen = 11
     clean_fnigh = 16
     x_facts = [(casa_rope, clean_rope, clean_fopen, clean_fnigh)]
-    assert os_path_exists(ownerevent_path) is False
+    assert os_path_exists(believerevent_path) is False
 
     # WHEN
-    save_arbitrary_ownerevent(belief_mstr_dir, a23_str, sue_str, event5, facts=x_facts)
+    save_arbitrary_believerevent(
+        belief_mstr_dir, a23_str, sue_str, event5, facts=x_facts
+    )
 
     # THEN
-    assert os_path_exists(ownerevent_path)
-    expected_sue_owner = ownerunit_shop(sue_str, a23_str)
-    expected_sue_owner.add_fact(casa_rope, clean_rope, clean_fopen, clean_fnigh, True)
-    gen_sue_owner = open_owner_file(ownerevent_path)
-    assert gen_sue_owner.get_factunits_dict() == expected_sue_owner.get_factunits_dict()
-    assert gen_sue_owner.get_dict() == expected_sue_owner.get_dict()
+    assert os_path_exists(believerevent_path)
+    expected_sue_believer = believerunit_shop(sue_str, a23_str)
+    expected_sue_believer.add_fact(
+        casa_rope, clean_rope, clean_fopen, clean_fnigh, True
+    )
+    gen_sue_believer = open_believer_file(believerevent_path)
+    assert (
+        gen_sue_believer.get_factunits_dict()
+        == expected_sue_believer.get_factunits_dict()
+    )
+    assert gen_sue_believer.get_dict() == expected_sue_believer.get_dict()
 
 
-def test_get_ownerevent_obj_ReturnsObj_Scenario0_NoFile(env_dir_setup_cleanup):
+def test_get_believerevent_obj_ReturnsObj_Scenario0_NoFile(env_dir_setup_cleanup):
     # ESTABLISH
     belief_mstr_dir = get_module_temp_dir()
     a23_str = "amy"
@@ -283,43 +297,43 @@ def test_get_ownerevent_obj_ReturnsObj_Scenario0_NoFile(env_dir_setup_cleanup):
     t3 = 3
 
     # WHEN / THEN
-    assert get_ownerevent_obj(belief_mstr_dir, a23_str, sue_str, t3) is None
+    assert get_believerevent_obj(belief_mstr_dir, a23_str, sue_str, t3) is None
 
 
-def test_get_ownerevent_obj_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
+def test_get_believerevent_obj_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
     # ESTABLISH
     belief_mstr_dir = get_module_temp_dir()
     a23_str = "amy"
     sue_str = "Sue"
     t3 = 3
-    t3_json_path = create_ownerevent_path(belief_mstr_dir, a23_str, sue_str, t3)
-    sue_owner = ownerunit_shop(sue_str, a23_str)
-    casa_rope = sue_owner.make_l1_rope("case")
-    clean_rope = sue_owner.make_l1_rope("clean")
-    dirty_rope = sue_owner.make_l1_rope("dirty")
-    sue_owner.add_fact(casa_rope, dirty_rope, create_missing_plans=True)
-    save_owner_file(t3_json_path, None, sue_owner)
+    t3_json_path = create_believerevent_path(belief_mstr_dir, a23_str, sue_str, t3)
+    sue_believer = believerunit_shop(sue_str, a23_str)
+    casa_rope = sue_believer.make_l1_rope("case")
+    clean_rope = sue_believer.make_l1_rope("clean")
+    dirty_rope = sue_believer.make_l1_rope("dirty")
+    sue_believer.add_fact(casa_rope, dirty_rope, create_missing_plans=True)
+    save_believer_file(t3_json_path, None, sue_believer)
 
     # WHEN
-    gen_a3_ownerevent = get_ownerevent_obj(belief_mstr_dir, a23_str, sue_str, t3)
+    gen_a3_believerevent = get_believerevent_obj(belief_mstr_dir, a23_str, sue_str, t3)
 
     # THEN
-    assert gen_a3_ownerevent == sue_owner
+    assert gen_a3_believerevent == sue_believer
 
 
-def test_collect_owner_event_dir_sets_ReturnsObj_Scenario0_none(
+def test_collect_believer_event_dir_sets_ReturnsObj_Scenario0_none(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     belief_mstr_dir = get_module_temp_dir()
     a23_str = "amy23"
     # WHEN
-    owner_events_sets = collect_owner_event_dir_sets(belief_mstr_dir, a23_str)
+    believer_events_sets = collect_believer_event_dir_sets(belief_mstr_dir, a23_str)
     # THEN
-    assert owner_events_sets == {}
+    assert believer_events_sets == {}
 
 
-def test_collect_owner_event_dir_sets_ReturnsObj_Scenario1_DirsExist(
+def test_collect_believer_event_dir_sets_ReturnsObj_Scenario1_DirsExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -328,21 +342,21 @@ def test_collect_owner_event_dir_sets_ReturnsObj_Scenario1_DirsExist(
     bob_str = "Bob"
     event1 = 1
     event2 = 2
-    bob1_dir = create_owner_event_dir_path(belief_mstr_dir, a23_str, bob_str, event1)
-    bob2_dir = create_owner_event_dir_path(belief_mstr_dir, a23_str, bob_str, event2)
+    bob1_dir = create_believer_event_dir_path(belief_mstr_dir, a23_str, bob_str, event1)
+    bob2_dir = create_believer_event_dir_path(belief_mstr_dir, a23_str, bob_str, event2)
     print(f"  {bob1_dir=}")
     print(f"  {bob2_dir=}")
     set_dir(bob1_dir)
     set_dir(bob2_dir)
 
     # WHEN
-    owner_events_sets = collect_owner_event_dir_sets(belief_mstr_dir, a23_str)
+    believer_events_sets = collect_believer_event_dir_sets(belief_mstr_dir, a23_str)
 
     # THEN
-    assert owner_events_sets == {bob_str: {event1, event2}}
+    assert believer_events_sets == {bob_str: {event1, event2}}
 
 
-def test_collect_owner_event_dir_sets_ReturnsObj_Scenario2_DirsExist(
+def test_collect_believer_event_dir_sets_ReturnsObj_Scenario2_DirsExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -353,61 +367,64 @@ def test_collect_owner_event_dir_sets_ReturnsObj_Scenario2_DirsExist(
     event1 = 1
     event2 = 2
     event7 = 7
-    bob1_dir = create_owner_event_dir_path(belief_mstr_dir, a23_str, bob_str, event1)
-    bob2_dir = create_owner_event_dir_path(belief_mstr_dir, a23_str, bob_str, event2)
-    sue2_dir = create_owner_event_dir_path(belief_mstr_dir, a23_str, sue_str, event2)
-    sue7_dir = create_owner_event_dir_path(belief_mstr_dir, a23_str, sue_str, event7)
+    bob1_dir = create_believer_event_dir_path(belief_mstr_dir, a23_str, bob_str, event1)
+    bob2_dir = create_believer_event_dir_path(belief_mstr_dir, a23_str, bob_str, event2)
+    sue2_dir = create_believer_event_dir_path(belief_mstr_dir, a23_str, sue_str, event2)
+    sue7_dir = create_believer_event_dir_path(belief_mstr_dir, a23_str, sue_str, event7)
     set_dir(bob1_dir)
     set_dir(bob2_dir)
     set_dir(sue2_dir)
     set_dir(sue7_dir)
 
     # WHEN
-    owner_events_sets = collect_owner_event_dir_sets(belief_mstr_dir, a23_str)
+    believer_events_sets = collect_believer_event_dir_sets(belief_mstr_dir, a23_str)
 
     # THEN
-    assert owner_events_sets == {bob_str: {event1, event2}, sue_str: {event2, event7}}
+    assert believer_events_sets == {
+        bob_str: {event1, event2},
+        sue_str: {event2, event7},
+    }
 
 
-def test_get_owners_downhill_event_ints_ReturnsObj_Scenario0_Empty():
+def test_get_believers_downhill_event_ints_ReturnsObj_Scenario0_Empty():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
     event2 = 2
-    owner_events_sets = {}
+    believer_events_sets = {}
     downhill_event_int = event2
-    downhill_owners = {bob_str, sue_str}
+    downhill_believers = {bob_str, sue_str}
 
     # WHEN
-    owners_downhill_event_ints = get_owners_downhill_event_ints(
-        owner_events_sets, downhill_owners, downhill_event_int
+    believers_downhill_event_ints = get_believers_downhill_event_ints(
+        believer_events_sets, downhill_believers, downhill_event_int
     )
 
     # THEN
-    assert owners_downhill_event_ints == {}
+    assert believers_downhill_event_ints == {}
 
 
-def test_get_owners_downhill_event_ints_ReturnsObj_Scenario1_simple():
+def test_get_believers_downhill_event_ints_ReturnsObj_Scenario1_simple():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
     event1 = 1
     event2 = 2
     event7 = 7
-    owner_events_sets = {bob_str: {event1, event2}, sue_str: {event2, event7}}
+    believer_events_sets = {bob_str: {event1, event2}, sue_str: {event2, event7}}
     downhill_event_int = event2
-    downhill_owners = {bob_str, sue_str}
+    downhill_believers = {bob_str, sue_str}
 
     # WHEN
-    owners_downhill_event_ints = get_owners_downhill_event_ints(
-        owner_events_sets, downhill_owners, downhill_event_int
+    believers_downhill_event_ints = get_believers_downhill_event_ints(
+        believer_events_sets, downhill_believers, downhill_event_int
     )
 
     # THEN
-    assert owners_downhill_event_ints == {bob_str: event2, sue_str: event2}
+    assert believers_downhill_event_ints == {bob_str: event2, sue_str: event2}
 
 
-def test_get_owners_downhill_event_ints_ReturnsObj_Scenario2Empty_downhill_event_int():
+def test_get_believers_downhill_event_ints_ReturnsObj_Scenario2Empty_downhill_event_int():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
@@ -415,23 +432,23 @@ def test_get_owners_downhill_event_ints_ReturnsObj_Scenario2Empty_downhill_event
     event1 = 1
     event2 = 2
     event7 = 7
-    owner_events_sets = {
+    believer_events_sets = {
         bob_str: {event1, event2},
         sue_str: {event2, event7},
         yao_str: {event1, event2, event7},
     }
-    downhill_owners = {bob_str, sue_str}
+    downhill_believers = {bob_str, sue_str}
 
     # WHEN
-    owners_downhill_event_ints = get_owners_downhill_event_ints(
-        owner_events_sets, downhill_owners
+    believers_downhill_event_ints = get_believers_downhill_event_ints(
+        believer_events_sets, downhill_believers
     )
 
     # THEN
-    assert owners_downhill_event_ints == {bob_str: event2, sue_str: event7}
+    assert believers_downhill_event_ints == {bob_str: event2, sue_str: event7}
 
 
-def test_get_owners_downhill_event_ints_ReturnsObj_Scenario3Empty_downhill_owners():
+def test_get_believers_downhill_event_ints_ReturnsObj_Scenario3Empty_downhill_believers():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
@@ -439,24 +456,26 @@ def test_get_owners_downhill_event_ints_ReturnsObj_Scenario3Empty_downhill_owner
     event1 = 1
     event2 = 2
     event7 = 7
-    owner_events_sets = {
+    believer_events_sets = {
         bob_str: {event1, event2},
         sue_str: {event2, event7},
         yao_str: {event1, event2, event7},
     }
 
     # WHEN
-    owners_downhill_event_ints = get_owners_downhill_event_ints(owner_events_sets)
+    believers_downhill_event_ints = get_believers_downhill_event_ints(
+        believer_events_sets
+    )
 
     # THEN
-    assert owners_downhill_event_ints == {
+    assert believers_downhill_event_ints == {
         bob_str: event2,
         sue_str: event7,
         yao_str: event7,
     }
 
 
-def test_get_owners_downhill_event_ints_ReturnsObj_Scenario4Empty_downhill_owners_Withdownhill_event_int():
+def test_get_believers_downhill_event_ints_ReturnsObj_Scenario4Empty_downhill_believers_Withdownhill_event_int():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
@@ -464,7 +483,7 @@ def test_get_owners_downhill_event_ints_ReturnsObj_Scenario4Empty_downhill_owner
     event1 = 1
     event2 = 2
     event7 = 7
-    owner_events_sets = {
+    believer_events_sets = {
         bob_str: {event1, event2},
         sue_str: {event2, event7},
         yao_str: {event7},
@@ -472,12 +491,12 @@ def test_get_owners_downhill_event_ints_ReturnsObj_Scenario4Empty_downhill_owner
     downhill_event_int = 2
 
     # WHEN
-    owners_downhill_event_ints = get_owners_downhill_event_ints(
-        owner_events_sets, ref_event_int=downhill_event_int
+    believers_downhill_event_ints = get_believers_downhill_event_ints(
+        believer_events_sets, ref_event_int=downhill_event_int
     )
 
     # THEN
-    assert owners_downhill_event_ints == {bob_str: event2, sue_str: event2}
+    assert believers_downhill_event_ints == {bob_str: event2, sue_str: event2}
 
 
 def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
@@ -498,7 +517,7 @@ def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
     cellunit_add_json_file(
         belief_mstr_dir=belief_mstr_dir,
         belief_label=a23_str,
-        time_owner_name=sue_str,
+        time_believer_name=sue_str,
         bud_time=time7,
         quota=quota500,
         event_int=event3,
@@ -514,7 +533,7 @@ def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
     assert generated_cell_dict.get(ancestors_str()) == das
     assert generated_cell_dict.get(event_int_str()) == event3
     assert generated_cell_dict.get(celldepth_str()) == celldepth4
-    assert generated_cell_dict.get(bud_owner_name_str()) == sue_str
+    assert generated_cell_dict.get(bud_believer_name_str()) == sue_str
     assert generated_cell_dict.get(penny_str()) == penny6
     assert generated_cell_dict.get(quota_str()) == quota500
 
@@ -545,7 +564,7 @@ def test_cellunit_add_json_file_SetsFile_Scenario1_ManyParametersEmpty(
     assert generated_cell_dict.get(ancestors_str()) == das
     assert generated_cell_dict.get(event_int_str()) == event3
     assert generated_cell_dict.get(celldepth_str()) == 0
-    assert generated_cell_dict.get(bud_owner_name_str()) == sue_str
+    assert generated_cell_dict.get(bud_believer_name_str()) == sue_str
     assert generated_cell_dict.get(penny_str()) == 1
     assert generated_cell_dict.get(quota_str()) == CELLNODE_QUOTA_DEFAULT
 
@@ -654,33 +673,33 @@ def test_create_cell_acct_mandate_ledger_json_CreatesFile_Scenario1(
     sue_quota300 = 300
     sue_mandate = 444
     a23_str = "amy23"
-    sue_owner = ownerunit_shop(sue_str, a23_str)
-    sue_owner.add_acctunit(sue_str, 3, 5)
-    sue_owner.add_acctunit(yao_str, 7, 2)
+    sue_believer = believerunit_shop(sue_str, a23_str)
+    sue_believer.add_acctunit(sue_str, 3, 5)
+    sue_believer.add_acctunit(yao_str, 7, 2)
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
-    sue_owner.add_plan(clean_fact.fstate)
-    sue_owner.add_plan(dirty_fact.fstate)
-    casa_rope = sue_owner.make_l1_rope("casa")
-    mop_rope = sue_owner.make_rope(casa_rope, "mop")
-    sue_owner.add_plan(mop_rope, 1, task=True)
-    sue_owner.edit_reason(mop_rope, dirty_fact.fcontext, dirty_fact.fstate)
-    sue_owner.add_fact(
+    sue_believer.add_plan(clean_fact.fstate)
+    sue_believer.add_plan(dirty_fact.fstate)
+    casa_rope = sue_believer.make_l1_rope("casa")
+    mop_rope = sue_believer.make_rope(casa_rope, "mop")
+    sue_believer.add_plan(mop_rope, 1, task=True)
+    sue_believer.edit_reason(mop_rope, dirty_fact.fcontext, dirty_fact.fstate)
+    sue_believer.add_fact(
         dirty_fact.fcontext, dirty_fact.fstate, create_missing_plans=True
     )
     sky_blue_fact = sky_blue_factunit()
-    sue_ownerevent_factunits = {clean_fact.fcontext: clean_fact}
+    sue_believerevent_factunits = {clean_fact.fcontext: clean_fact}
     sue_found_factunits = {dirty_fact.fcontext: dirty_fact}
     sue_boss_factunits = {sky_blue_fact.fcontext: sky_blue_fact}
     sue_cell = cellunit_shop(
-        bud_owner_name=yao_str,
+        bud_believer_name=yao_str,
         ancestors=sue_ancestors,
         event_int=sue_event7,
         celldepth=sue_celldepth3,
         penny=sue_penny2,
         quota=sue_quota300,
-        owneradjust=sue_owner,
-        ownerevent_facts=sue_ownerevent_factunits,
+        believeradjust=sue_believer,
+        believerevent_facts=sue_believerevent_factunits,
         found_facts=sue_found_factunits,
         boss_facts=sue_boss_factunits,
         mandate=sue_mandate,
@@ -778,84 +797,88 @@ def test_open_bud_file_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
     assert open_bud_file(mstr_dir, a23_str, yao_str, t55_bud_time) == t55_bud
 
 
-def test_save_ownerpoint_file_SavesFile(env_dir_setup_cleanup):
+def test_save_believerpoint_file_SavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     mstr_dir = get_module_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
-    t55_ownerpoint = get_ownerunit_with_4_levels()
+    t55_believerpoint = get_believerunit_with_4_levels()
     t55_bud_time = 55
-    t55_ownerpoint_path = create_ownerpoint_path(
+    t55_believerpoint_path = create_believerpoint_path(
         mstr_dir, a23_str, sue_str, t55_bud_time
     )
-    print(f"{t55_ownerpoint.belief_label=}")
+    print(f"{t55_believerpoint.belief_label=}")
     print(f"               {mstr_dir=}")
-    print(f"      {t55_ownerpoint_path=}")
-    assert os_path_exists(t55_ownerpoint_path) is False
+    print(f"      {t55_believerpoint_path=}")
+    assert os_path_exists(t55_believerpoint_path) is False
 
     # WHEN
-    save_ownerpoint_file(mstr_dir, t55_ownerpoint, t55_bud_time)
+    save_believerpoint_file(mstr_dir, t55_believerpoint, t55_bud_time)
 
     # THEN
-    assert os_path_exists(t55_ownerpoint_path)
+    assert os_path_exists(t55_believerpoint_path)
 
 
-def test_save_ownerpoint_file_RaisesError(env_dir_setup_cleanup):
+def test_save_believerpoint_file_RaisesError(env_dir_setup_cleanup):
     # ESTABLISH
     mstr_dir = get_module_temp_dir()
-    irrational_ownerpoint = get_ownerunit_irrational_example()
+    irrational_believerpoint = get_believerunit_irrational_example()
     t55_bud_time = 55
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        save_ownerpoint_file(mstr_dir, irrational_ownerpoint, t55_bud_time)
-    exception_str = "OwnerPoint could not be saved OwnerUnit._rational is False"
+        save_believerpoint_file(mstr_dir, irrational_believerpoint, t55_bud_time)
+    exception_str = "BelieverPoint could not be saved BelieverUnit._rational is False"
     assert str(excinfo.value) == exception_str
 
 
-def test_ownerpoint_file_exists_ReturnsObj(env_dir_setup_cleanup):
+def test_believerpoint_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     mstr_dir = get_module_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     t55_bud_time = 55
-    assert ownerpoint_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time) is False
+    assert believerpoint_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time) is False
 
     # WHEN
-    t55_ownerpoint = get_ownerunit_with_4_levels()
-    save_ownerpoint_file(mstr_dir, t55_ownerpoint, t55_bud_time)
+    t55_believerpoint = get_believerunit_with_4_levels()
+    save_believerpoint_file(mstr_dir, t55_believerpoint, t55_bud_time)
 
     # THEN
-    assert ownerpoint_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time)
+    assert believerpoint_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time)
 
 
-def test_open_ownerpoint_file_ReturnsObj_Scenario0_NoFileExists(env_dir_setup_cleanup):
+def test_open_believerpoint_file_ReturnsObj_Scenario0_NoFileExists(
+    env_dir_setup_cleanup,
+):
     # ESTABLISH
     mstr_dir = get_module_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     t55_bud_time = 55
-    assert not ownerpoint_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time)
+    assert not believerpoint_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time)
 
     # WHEN / THEN
-    assert not open_ownerpoint_file(mstr_dir, a23_str, sue_str, t55_bud_time)
+    assert not open_believerpoint_file(mstr_dir, a23_str, sue_str, t55_bud_time)
 
 
-def test_open_ownerpoint_file_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
+def test_open_believerpoint_file_ReturnsObj_Scenario1_FileExists(env_dir_setup_cleanup):
     # ESTABLISH
     mstr_dir = get_module_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     t55_bud_time = 55
-    t55_ownerpoint = get_ownerunit_with_4_levels()
-    save_ownerpoint_file(mstr_dir, t55_ownerpoint, t55_bud_time)
-    assert ownerpoint_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time)
+    t55_believerpoint = get_believerunit_with_4_levels()
+    save_believerpoint_file(mstr_dir, t55_believerpoint, t55_bud_time)
+    assert believerpoint_file_exists(mstr_dir, a23_str, sue_str, t55_bud_time)
 
     # WHEN
-    file_ownerpoint = open_ownerpoint_file(mstr_dir, a23_str, sue_str, t55_bud_time)
+    file_believerpoint = open_believerpoint_file(
+        mstr_dir, a23_str, sue_str, t55_bud_time
+    )
 
     # THEN
-    assert file_ownerpoint.get_dict() == t55_ownerpoint.get_dict()
+    assert file_believerpoint.get_dict() == t55_believerpoint.get_dict()
 
 
 def test_get_timepoint_dirs_ReturnsObj_Scenario0(env_dir_setup_cleanup):
@@ -865,9 +888,9 @@ def test_get_timepoint_dirs_ReturnsObj_Scenario0(env_dir_setup_cleanup):
     sue_str = "Sue"
     t55_bud_time = 55
     t77_bud_time = 77
-    ownerpoint = get_ownerunit_with_4_levels()
-    save_ownerpoint_file(mstr_dir, ownerpoint, t55_bud_time)
-    save_ownerpoint_file(mstr_dir, ownerpoint, t77_bud_time)
+    believerpoint = get_believerunit_with_4_levels()
+    save_believerpoint_file(mstr_dir, believerpoint, t55_bud_time)
+    save_believerpoint_file(mstr_dir, believerpoint, t77_bud_time)
 
     # WHEN
     timepoint_dirs = get_timepoint_dirs(mstr_dir, a23_str, sue_str)

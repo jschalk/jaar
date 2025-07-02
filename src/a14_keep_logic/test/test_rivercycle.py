@@ -1,4 +1,4 @@
-from src.a06_owner_logic.owner import ownerunit_shop
+from src.a06_believer_logic.believer import believerunit_shop
 from src.a12_hub_toolbox.hubunit import hubunit_shop
 from src.a14_keep_logic.rivercycle import (
     RiverCycle,
@@ -133,9 +133,9 @@ def test_create_init_rivercycle_ReturnsObjScenarioOne_acctunit():
     yao_str = "Yao"
     x_belief_mstr_dir = temp_belief_mstr_dir()
     yao_hubunit = hubunit_shop(x_belief_mstr_dir, None, yao_str)
-    yao_owner = ownerunit_shop(yao_str)
-    yao_owner.add_acctunit(yao_str)
-    yao_credorledger = get_credorledger(yao_owner)
+    yao_believer = believerunit_shop(yao_str)
+    yao_believer.add_acctunit(yao_str)
+    yao_credorledger = get_credorledger(yao_believer)
     keep_credorledgers = {yao_str: yao_credorledger}
 
     # WHEN
@@ -157,11 +157,11 @@ def test_create_init_rivercycle_ReturnsObjScenarioThree_acctunit():
     zia_acct_cred_points = 10
     x_belief_mstr_dir = temp_belief_mstr_dir()
     yao_hubunit = hubunit_shop(x_belief_mstr_dir, None, yao_str)
-    yao_owner = ownerunit_shop(yao_str)
-    yao_owner.add_acctunit(yao_str, yao_acct_cred_points)
-    yao_owner.add_acctunit(bob_str, bob_acct_cred_points)
-    yao_owner.add_acctunit(zia_str, zia_acct_cred_points)
-    yao_credorledger = get_credorledger(yao_owner)
+    yao_believer = believerunit_shop(yao_str)
+    yao_believer.add_acctunit(yao_str, yao_acct_cred_points)
+    yao_believer.add_acctunit(bob_str, bob_acct_cred_points)
+    yao_believer.add_acctunit(zia_str, zia_acct_cred_points)
+    yao_credorledger = get_credorledger(yao_believer)
     keep_credorledgers = {yao_str: yao_credorledger}
     print(f"{keep_credorledgers=}")
 

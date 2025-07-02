@@ -1,5 +1,5 @@
-from src.a01_term_logic.term import AcctName, OwnerName
-from src.a06_owner_logic.owner import ownerunit_shop
+from src.a01_term_logic.term import AcctName, BelieverName
+from src.a06_believer_logic.believer import believerunit_shop
 from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.a14_keep_logic.rivercycle import get_credorledger
 from src.a14_keep_logic.test._util.a14_env import (
@@ -25,11 +25,11 @@ def example_yao_credorledger() -> dict[str, float]:
     yao_acct_cred_points = 7
     bob_acct_cred_points = 3
     zia_acct_cred_points = 10
-    yao_owner = ownerunit_shop(yao_str)
-    yao_owner.add_acctunit(yao_str, yao_acct_cred_points)
-    yao_owner.add_acctunit(bob_str, bob_acct_cred_points)
-    yao_owner.add_acctunit(zia_str, zia_acct_cred_points)
-    return get_credorledger(yao_owner)
+    yao_believer = believerunit_shop(yao_str)
+    yao_believer.add_acctunit(yao_str, yao_acct_cred_points)
+    yao_believer.add_acctunit(bob_str, bob_acct_cred_points)
+    yao_believer.add_acctunit(zia_str, zia_acct_cred_points)
+    return get_credorledger(yao_believer)
 
 
 def example_bob_credorledger() -> dict[str, float]:
@@ -39,11 +39,11 @@ def example_bob_credorledger() -> dict[str, float]:
     yao_acct_cred_points = 1
     bob_acct_cred_points = 7
     zia_acct_cred_points = 42
-    bob_owner = ownerunit_shop(bob_str)
-    bob_owner.add_acctunit(yao_str, yao_acct_cred_points)
-    bob_owner.add_acctunit(bob_str, bob_acct_cred_points)
-    bob_owner.add_acctunit(zia_str, zia_acct_cred_points)
-    return get_credorledger(bob_owner)
+    bob_believer = believerunit_shop(bob_str)
+    bob_believer.add_acctunit(yao_str, yao_acct_cred_points)
+    bob_believer.add_acctunit(bob_str, bob_acct_cred_points)
+    bob_believer.add_acctunit(zia_str, zia_acct_cred_points)
+    return get_credorledger(bob_believer)
 
 
 def example_zia_credorledger() -> dict[str, float]:
@@ -53,14 +53,14 @@ def example_zia_credorledger() -> dict[str, float]:
     yao_acct_cred_points = 89
     bob_acct_cred_points = 150
     zia_acct_cred_points = 61
-    zia_owner = ownerunit_shop(zia_str)
-    zia_owner.add_acctunit(yao_str, yao_acct_cred_points)
-    zia_owner.add_acctunit(bob_str, bob_acct_cred_points)
-    zia_owner.add_acctunit(zia_str, zia_acct_cred_points)
-    return get_credorledger(zia_owner)
+    zia_believer = believerunit_shop(zia_str)
+    zia_believer.add_acctunit(yao_str, yao_acct_cred_points)
+    zia_believer.add_acctunit(bob_str, bob_acct_cred_points)
+    zia_believer.add_acctunit(zia_str, zia_acct_cred_points)
+    return get_credorledger(zia_believer)
 
 
-def example_yao_bob_zia_credorledgers() -> dict[OwnerName : dict[AcctName, float]]:
+def example_yao_bob_zia_credorledgers() -> dict[BelieverName : dict[AcctName, float]]:
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"

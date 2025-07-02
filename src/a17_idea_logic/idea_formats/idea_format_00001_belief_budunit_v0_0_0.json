@@ -15,7 +15,7 @@
         "belief_label": {
             "otx_key": true
         },
-        "owner_name": {
+        "believer_name": {
             "otx_key": true
         },
         "quota": {
@@ -26,6 +26,6 @@
     "dimens": [
         "belief_budunit",
         "beliefunit",
-        "ownerunit"
+        "believerunit"
     ]
 }

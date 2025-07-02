@@ -1,9 +1,9 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import count_files, create_path, save_json
-from src.a06_owner_logic.test._util.a06_str import (
+from src.a06_believer_logic.test._util.a06_str import (
     acct_name_str,
     belief_label_str,
-    owner_name_str,
+    believer_name_str,
 )
 from src.a07_timeline_logic.test._util.calendar_examples import (
     get_creg_config,
@@ -79,7 +79,7 @@ def test_create_calendar_markdown_files_Senario1_CreatesFileFromBeliefUnitJSON(
 #         event_int_str(),
 #         face_name_str(),
 #         belief_label_str(),
-#         owner_name_str(),
+#         believer_name_str(),
 #         acct_name_str()
 #     ]
 #     br00011_rows = [[event2, sue_str, a23_str, sue_str, sue_str]]
@@ -96,5 +96,5 @@ def test_create_calendar_markdown_files_Senario1_CreatesFileFromBeliefUnitJSON(
 
 #     # THEN
 #     assert os_path_exists(a23_calendar_md_path)
-#     expected_csv_str = "belief_label,owner_name,funds,fund_rank,tasks_count\n"
+#     expected_csv_str = "belief_label,believer_name,funds,fund_rank,tasks_count\n"
 #     assert open(a23_calendar_md_path).read() == expected_csv_str

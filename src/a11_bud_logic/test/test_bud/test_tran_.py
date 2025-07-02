@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.a06_owner_logic.test._util.a06_str import belief_label_str
+from src.a06_believer_logic.test._util.a06_str import belief_label_str
 from src.a11_bud_logic.bud import (
     TranBook,
     TranUnit,
@@ -405,7 +405,7 @@ def test_TranBook_get_tran_times_ReturnsObj():
     assert amy23_tran_times == {t55_tran_time, t66_tran_time, t77_tran_time}
 
 
-def test_TranBook_get_owners_accts_net_ReturnsObj_Scenario0():
+def test_TranBook_get_believers_accts_net_ReturnsObj_Scenario0():
     # ESTABLISH
     amy23_str = "amy23"
     amy23_tranbook = tranbook_shop(amy23_str)
@@ -419,14 +419,14 @@ def test_TranBook_get_owners_accts_net_ReturnsObj_Scenario0():
     }
 
     # WHEN
-    amy23_accts_net_dict = amy23_tranbook.get_owners_accts_net()
+    amy23_accts_net_dict = amy23_tranbook.get_believers_accts_net()
 
     # THEN
     assert amy23_accts_net_dict
     assert amy23_accts_net_dict == {sue_str: {bob_str: t55_bob_amount}}
 
 
-def test_TranBook_get_owners_accts_net_ReturnsObj_Scenario1():
+def test_TranBook_get_believers_accts_net_ReturnsObj_Scenario1():
     # ESTABLISH
     amy23_str = "amy23"
     amy23_tranbook = tranbook_shop(amy23_str)
@@ -449,7 +449,7 @@ def test_TranBook_get_owners_accts_net_ReturnsObj_Scenario1():
     }
 
     # WHEN
-    amy23_accts_net_dict = amy23_tranbook.get_owners_accts_net()
+    amy23_accts_net_dict = amy23_tranbook.get_believers_accts_net()
 
     # THEN
     assert amy23_accts_net_dict

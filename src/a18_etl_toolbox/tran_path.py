@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a01_term_logic.term import OwnerName
+from src.a01_term_logic.term import BelieverName
 
 STANCE0001_FILENAME = "stance0001.xlsx"
 
@@ -9,10 +9,12 @@ def create_stances_dir_path(belief_mstr_dir: str) -> str:
     return create_path(belief_mstr_dir, "stances")
 
 
-def create_stances_owner_dir_path(belief_mstr_dir: str, owner_name: OwnerName) -> str:
-    """Returns path: belief_mstr_dir\\stances\\owner_name"""
+def create_stances_believer_dir_path(
+    belief_mstr_dir: str, believer_name: BelieverName
+) -> str:
+    """Returns path: belief_mstr_dir\\stances\\believer_name"""
     stances_dir = create_path(belief_mstr_dir, "stances")
-    return create_path(stances_dir, owner_name)
+    return create_path(stances_dir, believer_name)
 
 
 def create_stance0001_path(output_dir: str) -> str:

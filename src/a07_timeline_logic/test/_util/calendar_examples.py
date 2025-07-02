@@ -3,7 +3,7 @@ from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scat
 from src.a00_data_toolbox.file_toolbox import open_json
 from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
 from src.a05_plan_logic.plan import PlanUnit
-from src.a06_owner_logic.owner import OwnerUnit, ownerunit_shop
+from src.a06_believer_logic.believer import BelieverUnit, believerunit_shop
 from src.a07_timeline_logic.test._util.a07_str import (
     c400_number_str,
     creg_str,
@@ -15,10 +15,10 @@ from src.a07_timeline_logic.test._util.a07_str import (
 )
 from src.a07_timeline_logic.timeline import (
     add_newtimeline_planunit,
+    believertimelinepoint_shop,
     create_weekday_planunits,
     get_min_from_dt_offset,
     new_timeline_planunit,
-    ownertimelinepoint_shop,
 )
 
 
@@ -93,19 +93,19 @@ def creg_hour_int_label(x_int: int) -> str:
     return creg_hours_list()[x_int][0]
 
 
-def add_time_creg_planunit(x_ownerunit: OwnerUnit) -> OwnerUnit:
-    """Add creg timeline planunit to ownerunit"""
-    return add_newtimeline_planunit(x_ownerunit, get_creg_config())
+def add_time_creg_planunit(x_believerunit: BelieverUnit) -> BelieverUnit:
+    """Add creg timeline planunit to believerunit"""
+    return add_newtimeline_planunit(x_believerunit, get_creg_config())
 
 
-def add_time_five_planunit(x_ownerunit: OwnerUnit) -> OwnerUnit:
-    """Add five timeline planunit to ownerunit"""
-    return add_newtimeline_planunit(x_ownerunit, get_five_config())
+def add_time_five_planunit(x_believerunit: BelieverUnit) -> BelieverUnit:
+    """Add five timeline planunit to believerunit"""
+    return add_newtimeline_planunit(x_believerunit, get_five_config())
 
 
-def add_time_squirt_planunit(x_ownerunit: OwnerUnit) -> OwnerUnit:
-    """Add squirt timeline planunit to ownerunit"""
-    return add_newtimeline_planunit(x_ownerunit, get_squirt_config())
+def add_time_squirt_planunit(x_believerunit: BelieverUnit) -> BelieverUnit:
+    """Add squirt timeline planunit to believerunit"""
+    return add_newtimeline_planunit(x_believerunit, get_squirt_config())
 
 
 def get_creg_min_from_dt(dt: datetime) -> int:
@@ -151,16 +151,20 @@ def display_current_creg_five_min(graphics_bool: bool):
 def display_current_creg_five_time_attrs(graphics_bool: bool):
     if graphics_bool:
         current_datetime = datetime.now()
-        sue_owner = ownerunit_shop("Sue")
-        sue_owner = add_time_creg_planunit(sue_owner)
-        sue_owner = add_time_five_planunit(sue_owner)
-        time_rope = sue_owner.make_l1_rope("time")
-        creg_rope = sue_owner.make_rope(time_rope, creg_str())
-        five_rope = sue_owner.make_rope(time_rope, five_str())
+        sue_believer = believerunit_shop("Sue")
+        sue_believer = add_time_creg_planunit(sue_believer)
+        sue_believer = add_time_five_planunit(sue_believer)
+        time_rope = sue_believer.make_l1_rope("time")
+        creg_rope = sue_believer.make_rope(time_rope, creg_str())
+        five_rope = sue_believer.make_rope(time_rope, five_str())
         creg_min = get_creg_min_from_dt(current_datetime)
         five_min = get_five_min_from_dt(current_datetime)
-        creg_timelinepoint = ownertimelinepoint_shop(sue_owner, creg_rope, creg_min)
-        five_timelinepoint = ownertimelinepoint_shop(sue_owner, five_rope, five_min)
+        creg_timelinepoint = believertimelinepoint_shop(
+            sue_believer, creg_rope, creg_min
+        )
+        five_timelinepoint = believertimelinepoint_shop(
+            sue_believer, five_rope, five_min
+        )
         creg_timelinepoint.calc_timeline()
         five_timelinepoint.calc_timeline()
         creg_blurb = f"<b>{creg_timelinepoint.get_blurb()}</b>"
@@ -188,21 +192,25 @@ def display_current_creg_five_time_attrs(graphics_bool: bool):
 def display_creg_five_squirt_time_attrs(graphics_bool: bool):
     if graphics_bool:
         current_datetime = datetime(2031, 2, 17, 7, 47)
-        sue_owner = ownerunit_shop("Sue")
-        sue_owner = add_time_creg_planunit(sue_owner)
-        sue_owner = add_time_five_planunit(sue_owner)
-        sue_owner = add_time_squirt_planunit(sue_owner)
-        time_rope = sue_owner.make_l1_rope("time")
-        creg_rope = sue_owner.make_rope(time_rope, creg_str())
-        five_rope = sue_owner.make_rope(time_rope, five_str())
-        squirt_rope = sue_owner.make_rope(time_rope, "squirt")
+        sue_believer = believerunit_shop("Sue")
+        sue_believer = add_time_creg_planunit(sue_believer)
+        sue_believer = add_time_five_planunit(sue_believer)
+        sue_believer = add_time_squirt_planunit(sue_believer)
+        time_rope = sue_believer.make_l1_rope("time")
+        creg_rope = sue_believer.make_rope(time_rope, creg_str())
+        five_rope = sue_believer.make_rope(time_rope, five_str())
+        squirt_rope = sue_believer.make_rope(time_rope, "squirt")
         creg_min = get_creg_min_from_dt(current_datetime)
         five_min = get_five_min_from_dt(current_datetime)
         squirt_min = get_squirt_min_from_dt(current_datetime)
-        creg_timelinepoint = ownertimelinepoint_shop(sue_owner, creg_rope, creg_min)
-        five_timelinepoint = ownertimelinepoint_shop(sue_owner, five_rope, five_min)
-        squirt_timelinepoint = ownertimelinepoint_shop(
-            sue_owner, squirt_rope, squirt_min
+        creg_timelinepoint = believertimelinepoint_shop(
+            sue_believer, creg_rope, creg_min
+        )
+        five_timelinepoint = believertimelinepoint_shop(
+            sue_believer, five_rope, five_min
+        )
+        squirt_timelinepoint = believertimelinepoint_shop(
+            sue_believer, squirt_rope, squirt_min
         )
         creg_timelinepoint.calc_timeline()
         five_timelinepoint.calc_timeline()

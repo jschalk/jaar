@@ -1,12 +1,12 @@
-from src.a06_owner_logic.test._util.a06_str import (
+from src.a06_believer_logic.test._util.a06_str import (
     belief_label_str,
-    owner_name_str,
-    owner_planunit_str,
+    believer_name_str,
+    believer_planunit_str,
     task_str,
 )
 from src.a18_etl_toolbox.test._util.a18_str import (
     belief_acct_nets_str,
-    owner_net_amount_str,
+    believer_net_amount_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a19_kpi_toolbox.kpi_sqlstrs import get_belief_kpi001_acct_nets_sqlstr
@@ -15,7 +15,7 @@ from src.a19_kpi_toolbox.test._util.a19_str import belief_kpi001_acct_nets_str
 
 def test_get_belief_kpi001_acct_nets_sqlstr_ReturnsObj():
     # ESTABLISH
-    onrplan_str = owner_planunit_str()
+    onrplan_str = believer_planunit_str()
     onrplan_job = create_prime_tablename(onrplan_str, "job", None)
 
     # WHEN
@@ -26,15 +26,15 @@ def test_get_belief_kpi001_acct_nets_sqlstr_ReturnsObj():
 CREATE TABLE {belief_kpi001_acct_nets_str()} AS
 SELECT
   {belief_acct_nets_str()}.{belief_label_str()}
-, {belief_acct_nets_str()}.{owner_name_str()}
-, {owner_net_amount_str()} AS funds
-, RANK() OVER (ORDER BY {owner_net_amount_str()} DESC) AS fund_rank
+, {belief_acct_nets_str()}.{believer_name_str()}
+, {believer_net_amount_str()} AS funds
+, RANK() OVER (ORDER BY {believer_net_amount_str()} DESC) AS fund_rank
 , IFNULL(SUM({onrplan_job}.{task_str()}), 0) AS tasks_count
 FROM {belief_acct_nets_str()}
 LEFT JOIN {onrplan_job} ON
   {onrplan_job}.{belief_label_str()} = {belief_acct_nets_str()}.{belief_label_str()}
-  AND {onrplan_job}.{owner_name_str()} = {belief_acct_nets_str()}.{owner_name_str()}
-GROUP BY {belief_acct_nets_str()}.{belief_label_str()}, {belief_acct_nets_str()}.{owner_name_str()}
+  AND {onrplan_job}.{believer_name_str()} = {belief_acct_nets_str()}.{believer_name_str()}
+GROUP BY {belief_acct_nets_str()}.{belief_label_str()}, {belief_acct_nets_str()}.{believer_name_str()}
 ;
 """
     assert kpi001_sqlstr == expected_kpi001_sqlstr

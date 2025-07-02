@@ -1,18 +1,18 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a06_owner_logic.owner import ownerunit_shop
-from src.a06_owner_logic.test._util.a06_str import (
+from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.test._util.a06_str import (
     acct_cred_points_str,
     acct_debt_points_str,
     acct_name_str,
     belief_label_str,
-    owner_name_str,
+    believer_name_str,
 )
 from src.a12_hub_toolbox.hub_tool import gut_file_exists, open_gut_file
 from src.a17_idea_logic.idea import get_idearef_obj, load_idea_csv, save_idea_csv
 from src.a17_idea_logic.idea_config import (
     idea_format_00012_membership_v0_0_0,
     idea_format_00013_planunit_v0_0_0,
-    idea_format_00021_owner_acctunit_v0_0_0,
+    idea_format_00021_believer_acctunit_v0_0_0,
 )
 from src.a17_idea_logic.idea_db_tool import open_csv
 from src.a17_idea_logic.test._util.a17_env import (
@@ -33,13 +33,13 @@ def test_open_csv_ReturnsObjWhenFileExists(env_dir_setup_cleanup):
     bob_acct_debt_points = 29
     yao_acct_debt_points = 37
     amy_belief_label = "amy56"
-    sue_ownerunit = ownerunit_shop(sue_str, amy_belief_label)
-    sue_ownerunit.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
-    sue_ownerunit.add_acctunit(bob_str, bob_acct_cred_points, bob_acct_debt_points)
-    sue_ownerunit.add_acctunit(yao_str, yao_acct_cred_points, yao_acct_debt_points)
-    j1_ideaname = idea_format_00021_owner_acctunit_v0_0_0()
+    sue_believerunit = believerunit_shop(sue_str, amy_belief_label)
+    sue_believerunit.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
+    sue_believerunit.add_acctunit(bob_str, bob_acct_cred_points, bob_acct_debt_points)
+    sue_believerunit.add_acctunit(yao_str, yao_acct_cred_points, yao_acct_debt_points)
+    j1_ideaname = idea_format_00021_believer_acctunit_v0_0_0()
     name_filename = f"{sue_str}_acct_example_01.csv"
-    save_idea_csv(j1_ideaname, sue_ownerunit, get_module_temp_dir(), name_filename)
+    save_idea_csv(j1_ideaname, sue_believerunit, get_module_temp_dir(), name_filename)
 
     # WHEN
     acct_dataframe = open_csv(get_module_temp_dir(), name_filename)
@@ -49,19 +49,19 @@ def test_open_csv_ReturnsObjWhenFileExists(env_dir_setup_cleanup):
     acct_idearef = get_idearef_obj(j1_ideaname)
     assert array_headers == acct_idearef.get_headers_list()
     assert acct_dataframe.loc[0, belief_label_str()] == amy_belief_label
-    assert acct_dataframe.loc[0, owner_name_str()] == sue_ownerunit.owner_name
+    assert acct_dataframe.loc[0, believer_name_str()] == sue_believerunit.believer_name
     assert acct_dataframe.loc[0, acct_name_str()] == bob_str
     assert acct_dataframe.loc[0, acct_cred_points_str()] == bob_acct_cred_points
     assert acct_dataframe.loc[0, acct_debt_points_str()] == bob_acct_debt_points
 
     assert acct_dataframe.loc[1, belief_label_str()] == amy_belief_label
-    assert acct_dataframe.loc[1, owner_name_str()] == sue_ownerunit.owner_name
+    assert acct_dataframe.loc[1, believer_name_str()] == sue_believerunit.believer_name
     assert acct_dataframe.loc[1, acct_name_str()] == sue_str
     assert acct_dataframe.loc[1, acct_cred_points_str()] == sue_acct_cred_points
     assert acct_dataframe.loc[1, acct_debt_points_str()] == sue_acct_debt_points
 
     assert acct_dataframe.loc[2, belief_label_str()] == amy_belief_label
-    assert acct_dataframe.loc[2, owner_name_str()] == sue_ownerunit.owner_name
+    assert acct_dataframe.loc[2, believer_name_str()] == sue_believerunit.believer_name
     assert acct_dataframe.loc[2, acct_name_str()] == yao_str
     assert acct_dataframe.loc[2, acct_cred_points_str()] == yao_acct_cred_points
     assert acct_dataframe.loc[2, acct_debt_points_str()] == yao_acct_debt_points
@@ -81,7 +81,7 @@ def test_open_csv_ReturnsObjWhenNoFileExists(env_dir_setup_cleanup):
     assert acct_dataframe is None
 
 
-def test_load_idea_csv_Arg_idea_format_00021_owner_acctunit_v0_0_0_csvTo_job(
+def test_load_idea_csv_Arg_idea_format_00021_believer_acctunit_v0_0_0_csvTo_job(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -95,36 +95,36 @@ def test_load_idea_csv_Arg_idea_format_00021_owner_acctunit_v0_0_0_csvTo_job(
     bob_acct_debt_points = 29
     yao_acct_debt_points = 37
     amy_belief_label = "amy56"
-    sue_ownerunit = ownerunit_shop(sue_str, amy_belief_label)
-    sue_ownerunit.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
-    sue_ownerunit.add_acctunit(bob_str, bob_acct_cred_points, bob_acct_debt_points)
-    sue_ownerunit.add_acctunit(yao_str, yao_acct_cred_points, yao_acct_debt_points)
-    j1_ideaname = idea_format_00021_owner_acctunit_v0_0_0()
+    sue_believerunit = believerunit_shop(sue_str, amy_belief_label)
+    sue_believerunit.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
+    sue_believerunit.add_acctunit(bob_str, bob_acct_cred_points, bob_acct_debt_points)
+    sue_believerunit.add_acctunit(yao_str, yao_acct_cred_points, yao_acct_debt_points)
+    j1_ideaname = idea_format_00021_believer_acctunit_v0_0_0()
     name_filename = f"{sue_str}_acct_example_02.csv"
     belief_mstr_dir = get_module_temp_dir()
     csv_example_path = create_path(belief_mstr_dir, name_filename)
     print(f"{csv_example_path}")
-    save_idea_csv(j1_ideaname, sue_ownerunit, belief_mstr_dir, name_filename)
-    # Popen BeliefUnit and confirm gut OwnerUnit does not exist
+    save_idea_csv(j1_ideaname, sue_believerunit, belief_mstr_dir, name_filename)
+    # Popen BeliefUnit and confirm gut BelieverUnit does not exist
     assert not gut_file_exists(belief_mstr_dir, amy_belief_label, sue_str)
 
     # WHEN
     load_idea_csv(belief_mstr_dir, get_module_temp_dir(), name_filename)
 
     # THEN
-    # assert gut Ownerunit now exists
+    # assert gut Believerunit now exists
     assert gut_file_exists(get_module_temp_dir(), amy_belief_label, sue_str)
-    # assert gut Ownerunit acctunit now exists
+    # assert gut Believerunit acctunit now exists
     sue_gut = open_gut_file(get_module_temp_dir(), amy_belief_label, sue_str)
 
     assert sue_gut.acct_exists(sue_str)
     assert sue_gut.acct_exists(bob_str)
     assert sue_gut.acct_exists(yao_str)
-    # assert gut Ownerunit acctunit.acct_cred_points is correct
+    # assert gut Believerunit acctunit.acct_cred_points is correct
     sue_acctunit = sue_gut.get_acct(sue_str)
     bob_acctunit = sue_gut.get_acct(bob_str)
     yao_acctunit = sue_gut.get_acct(yao_str)
-    # assert gut Ownerunit acctunit.acct_cred_points is correct
+    # assert gut Believerunit acctunit.acct_cred_points is correct
     assert sue_acctunit.acct_cred_points == sue_acct_cred_points
     assert bob_acctunit.acct_cred_points == bob_acct_cred_points
     assert yao_acctunit.acct_cred_points == yao_acct_cred_points
@@ -147,35 +147,35 @@ def test_load_idea_csv_csvTo_job(
     bob_acct_debt_points = 29
     yao_acct_debt_points = 37
     amy_belief_label = "amy56"
-    sue_ownerunit = ownerunit_shop(sue_str, amy_belief_label)
-    sue_ownerunit.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
-    sue_ownerunit.add_acctunit(bob_str, bob_acct_cred_points, bob_acct_debt_points)
-    sue_ownerunit.add_acctunit(yao_str, yao_acct_cred_points, yao_acct_debt_points)
-    j1_ideaname = idea_format_00021_owner_acctunit_v0_0_0()
+    sue_believerunit = believerunit_shop(sue_str, amy_belief_label)
+    sue_believerunit.add_acctunit(sue_str, sue_acct_cred_points, sue_acct_debt_points)
+    sue_believerunit.add_acctunit(bob_str, bob_acct_cred_points, bob_acct_debt_points)
+    sue_believerunit.add_acctunit(yao_str, yao_acct_cred_points, yao_acct_debt_points)
+    j1_ideaname = idea_format_00021_believer_acctunit_v0_0_0()
     name_filename = f"{sue_str}_acct_example_02.csv"
     csv_example_path = create_path(get_module_temp_dir(), name_filename)
     print(f"{csv_example_path}")
-    save_idea_csv(j1_ideaname, sue_ownerunit, get_module_temp_dir(), name_filename)
+    save_idea_csv(j1_ideaname, sue_believerunit, get_module_temp_dir(), name_filename)
     belief_mstr_dir = get_module_temp_dir()
-    # Popen BeliefUnit and confirm gut OwnerUnit does not exist
+    # Popen BeliefUnit and confirm gut BelieverUnit does not exist
     assert not gut_file_exists(belief_mstr_dir, amy_belief_label, sue_str)
 
     # WHEN
     load_idea_csv(belief_mstr_dir, get_module_temp_dir(), name_filename)
 
     # THEN
-    # assert gut Ownerunit now exists
+    # assert gut Believerunit now exists
     assert gut_file_exists(get_module_temp_dir(), amy_belief_label, sue_str)
-    # assert gut Ownerunit acctunit now exists
+    # assert gut Believerunit acctunit now exists
     sue_gut = open_gut_file(get_module_temp_dir(), amy_belief_label, sue_str)
     assert sue_gut.acct_exists(sue_str)
     assert sue_gut.acct_exists(bob_str)
     assert sue_gut.acct_exists(yao_str)
-    # assert gut Ownerunit acctunit.acct_cred_points is correct
+    # assert gut Believerunit acctunit.acct_cred_points is correct
     sue_acctunit = sue_gut.get_acct(sue_str)
     bob_acctunit = sue_gut.get_acct(bob_str)
     yao_acctunit = sue_gut.get_acct(yao_str)
-    # assert gut Ownerunit acctunit.acct_cred_points is correct
+    # assert gut Believerunit acctunit.acct_cred_points is correct
     assert sue_acctunit.acct_cred_points == sue_acct_cred_points
     assert bob_acctunit.acct_cred_points == bob_acct_cred_points
     assert yao_acctunit.acct_cred_points == yao_acct_cred_points

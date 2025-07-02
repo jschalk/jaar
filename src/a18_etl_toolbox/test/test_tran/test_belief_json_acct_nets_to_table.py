@@ -10,7 +10,7 @@ from src.a18_etl_toolbox.test._util.a18_env import (
 )
 from src.a18_etl_toolbox.test._util.a18_str import (
     belief_acct_nets_str,
-    owner_net_amount_str,
+    believer_net_amount_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import CREATE_BELIEF_ACCT_NETS_SQLSTR
 from src.a18_etl_toolbox.transformers import (
@@ -48,7 +48,7 @@ def test_insert_tranunit_accts_net_PopulatesDatabase():
 
         # THEN
         assert get_row_count(cursor, belief_acct_nets_tablename) == 2
-        select_sqlstr = f"SELECT belief_label, owner_name, {owner_net_amount_str()} FROM {belief_acct_nets_tablename}"
+        select_sqlstr = f"SELECT belief_label, believer_name, {believer_net_amount_str()} FROM {belief_acct_nets_tablename}"
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         assert rows == [
@@ -91,7 +91,7 @@ def test_etl_belief_json_acct_nets_to_belief_acct_nets_table_PopulatesDatabase(
 
         # THEN
         assert get_row_count(cursor, belief_acct_nets_tablename) == 2
-        select_sqlstr = f"SELECT belief_label, owner_name, {owner_net_amount_str()} FROM {belief_acct_nets_tablename}"
+        select_sqlstr = f"SELECT belief_label, believer_name, {believer_net_amount_str()} FROM {belief_acct_nets_tablename}"
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         assert rows == [

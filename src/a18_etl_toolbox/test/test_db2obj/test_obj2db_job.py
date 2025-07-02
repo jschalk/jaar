@@ -1,7 +1,8 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import create_insert_query
-from src.a10_owner_calc.owner_calc_config import get_owner_calc_dimen_args
-from src.a18_etl_toolbox.db_obj_owner_tool import (
+from src.a10_believer_calc.believer_calc_config import get_believer_calc_dimen_args
+from src.a18_etl_toolbox.db_obj_believer_tool import (
+    create_believerunit_metrics_insert_sqlstr,
     create_onracct_metrics_insert_sqlstr,
     create_onrawar_metrics_insert_sqlstr,
     create_onrfact_metrics_insert_sqlstr,
@@ -12,20 +13,19 @@ from src.a18_etl_toolbox.db_obj_owner_tool import (
     create_onrplan_metrics_insert_sqlstr,
     create_onrprem_metrics_insert_sqlstr,
     create_onrreas_metrics_insert_sqlstr,
-    create_ownerunit_metrics_insert_sqlstr,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import create_job_tables
 
 
-def test_create_ownerunit_metrics_insert_sqlstr_ReturnsObj():
+def test_create_believerunit_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_owner_calc_dimen_args("ownerunit")
+    x_args = get_believer_calc_dimen_args("believerunit")
     # for x_arg in sorted(x_args):
     #     print(f"{x_arg=}")
 
     x_belief_label = "amy23"
-    x_owner_name = "Sue"
+    x_believer_name = "Sue"
     x__keeps_buildable = True
     x__keeps_justified = False
     x__offtrack_fund = 55.5
@@ -42,7 +42,7 @@ def test_create_ownerunit_metrics_insert_sqlstr_ReturnsObj():
     x_tally = 6
     values_dict = {
         "belief_label": x_belief_label,
-        "owner_name": x_owner_name,
+        "believer_name": x_believer_name,
         "_keeps_buildable": x__keeps_buildable,
         "_keeps_justified": x__keeps_justified,
         "_offtrack_fund": x__offtrack_fund,
@@ -62,14 +62,14 @@ def test_create_ownerunit_metrics_insert_sqlstr_ReturnsObj():
     assert x_args == set(values_dict.keys())
 
     # WHEN
-    insert_sqlstr = create_ownerunit_metrics_insert_sqlstr(values_dict)
+    insert_sqlstr = create_believerunit_metrics_insert_sqlstr(values_dict)
 
     # THEN
     assert insert_sqlstr
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "ownerunit_job"
+        table_name = "believerunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print(expected_sqlstr)
         print("")
@@ -80,7 +80,7 @@ def test_create_ownerunit_metrics_insert_sqlstr_ReturnsObj():
 def test_create_onrplan_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_owner_calc_dimen_args("owner_planunit")
+    x_args = get_believer_calc_dimen_args("believer_planunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -92,7 +92,7 @@ def test_create_onrplan_metrics_insert_sqlstr_ReturnsObj():
     #     # print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
 
     x_belief_label = "amy23"
-    x_owner_name = "Sue"
+    x_believer_name = "Sue"
     x__active = 1
     x__all_acct_cred = 2
     x__all_acct_debt = 3
@@ -121,7 +121,7 @@ def test_create_onrplan_metrics_insert_sqlstr_ReturnsObj():
     x_stop_want = 27
     values_dict = {
         "belief_label": x_belief_label,
-        "owner_name": x_owner_name,
+        "believer_name": x_believer_name,
         "_active": x__active,
         "_all_acct_cred": x__all_acct_cred,
         "_all_acct_debt": x__all_acct_debt,
@@ -160,7 +160,7 @@ def test_create_onrplan_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "owner_planunit_job"
+        table_name = "believer_planunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print(expected_sqlstr)
         print("")
@@ -171,7 +171,7 @@ def test_create_onrplan_metrics_insert_sqlstr_ReturnsObj():
 def test_create_onrreas_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_owner_calc_dimen_args("owner_plan_reasonunit")
+    x_args = get_believer_calc_dimen_args("believer_plan_reasonunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -192,7 +192,7 @@ def test_create_onrreas_metrics_insert_sqlstr_ReturnsObj():
     #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
 
     x_belief_label = "amy23"
-    x_owner_name = "Sue"
+    x_believer_name = "Sue"
     x_rope = 1
     x_rcontext = 2
     x_rplan_active_requisite = 3
@@ -201,7 +201,7 @@ def test_create_onrreas_metrics_insert_sqlstr_ReturnsObj():
     x__rplan_active_value = 6
     values_dict = {
         "belief_label": x_belief_label,
-        "owner_name": x_owner_name,
+        "believer_name": x_believer_name,
         "plan_rope": x_rope,
         "rcontext": x_rcontext,
         "rplan_active_requisite": x_rplan_active_requisite,
@@ -220,7 +220,7 @@ def test_create_onrreas_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "owner_plan_reasonunit_job"
+        table_name = "believer_plan_reasonunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print(expected_sqlstr)
         print("")
@@ -231,7 +231,7 @@ def test_create_onrreas_metrics_insert_sqlstr_ReturnsObj():
 def test_create_onrprem_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_owner_calc_dimen_args("owner_plan_reason_premiseunit")
+    x_args = get_believer_calc_dimen_args("believer_plan_reason_premiseunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -255,7 +255,7 @@ def test_create_onrprem_metrics_insert_sqlstr_ReturnsObj():
     # print(";")
 
     x_belief_label = "amy23"
-    x_owner_name = "Sue"
+    x_believer_name = "Sue"
     x_rope = 1
     x_rcontext = 2
     x_pstate = 3
@@ -266,7 +266,7 @@ def test_create_onrprem_metrics_insert_sqlstr_ReturnsObj():
     x__status = 8
     values_dict = {
         "belief_label": x_belief_label,
-        "owner_name": x_owner_name,
+        "believer_name": x_believer_name,
         "plan_rope": x_rope,
         "rcontext": x_rcontext,
         "pstate": x_pstate,
@@ -287,7 +287,7 @@ def test_create_onrprem_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "owner_plan_reason_premiseunit_job"
+        table_name = "believer_plan_reason_premiseunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         # print(expected_sqlstr)
         print("")
@@ -298,7 +298,7 @@ def test_create_onrprem_metrics_insert_sqlstr_ReturnsObj():
 def test_create_onrawar_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_owner_calc_dimen_args("owner_plan_awardlink")
+    x_args = get_believer_calc_dimen_args("believer_plan_awardlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -322,7 +322,7 @@ def test_create_onrawar_metrics_insert_sqlstr_ReturnsObj():
     # print(";")
 
     x_belief_label = "amy23"
-    x_owner_name = "Sue"
+    x_believer_name = "Sue"
     x_rope = 1
     x_awardee_title = 2
     x_give_force = 3
@@ -331,7 +331,7 @@ def test_create_onrawar_metrics_insert_sqlstr_ReturnsObj():
     x__fund_take = 6
     values_dict = {
         "belief_label": x_belief_label,
-        "owner_name": x_owner_name,
+        "believer_name": x_believer_name,
         "plan_rope": x_rope,
         "awardee_title": x_awardee_title,
         "give_force": x_give_force,
@@ -350,7 +350,7 @@ def test_create_onrawar_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "owner_plan_awardlink_job"
+        table_name = "believer_plan_awardlink_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -361,7 +361,7 @@ def test_create_onrawar_metrics_insert_sqlstr_ReturnsObj():
 def test_create_onrfact_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_owner_calc_dimen_args("owner_plan_factunit")
+    x_args = get_believer_calc_dimen_args("believer_plan_factunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -385,7 +385,7 @@ def test_create_onrfact_metrics_insert_sqlstr_ReturnsObj():
     # print(";")
 
     x_belief_label = "amy23"
-    x_owner_name = "Sue"
+    x_believer_name = "Sue"
     x_rope = 1
     x_fcontext = 2
     x_fstate = 3
@@ -393,7 +393,7 @@ def test_create_onrfact_metrics_insert_sqlstr_ReturnsObj():
     x_fnigh = 5
     values_dict = {
         "belief_label": x_belief_label,
-        "owner_name": x_owner_name,
+        "believer_name": x_believer_name,
         "plan_rope": x_rope,
         "fcontext": x_fcontext,
         "fstate": x_fstate,
@@ -411,7 +411,7 @@ def test_create_onrfact_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "owner_plan_factunit_job"
+        table_name = "believer_plan_factunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -422,7 +422,7 @@ def test_create_onrfact_metrics_insert_sqlstr_ReturnsObj():
 def test_create_onrheal_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_owner_calc_dimen_args("owner_plan_healerlink")
+    x_args = get_believer_calc_dimen_args("believer_plan_healerlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -446,12 +446,12 @@ def test_create_onrheal_metrics_insert_sqlstr_ReturnsObj():
     # print(";")
 
     x_belief_label = "amy23"
-    x_owner_name = "Sue"
+    x_believer_name = "Sue"
     x_rope = 1
     x_healer_name = 2
     values_dict = {
         "belief_label": x_belief_label,
-        "owner_name": x_owner_name,
+        "believer_name": x_believer_name,
         "plan_rope": x_rope,
         "healer_name": x_healer_name,
     }
@@ -466,7 +466,7 @@ def test_create_onrheal_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "owner_plan_healerlink_job"
+        table_name = "believer_plan_healerlink_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -477,7 +477,7 @@ def test_create_onrheal_metrics_insert_sqlstr_ReturnsObj():
 def test_create_onrlabo_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_owner_calc_dimen_args("owner_plan_laborlink")
+    x_args = get_believer_calc_dimen_args("believer_plan_laborlink")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -501,16 +501,16 @@ def test_create_onrlabo_metrics_insert_sqlstr_ReturnsObj():
     # print(";")
 
     x_belief_label = "amy23"
-    x_owner_name = "Sue"
+    x_believer_name = "Sue"
     x_rope = 1
     x_labor_title = 2
-    x__owner_name_labor = 3
+    x__believer_name_labor = 3
     values_dict = {
         "belief_label": x_belief_label,
-        "owner_name": x_owner_name,
+        "believer_name": x_believer_name,
         "plan_rope": x_rope,
         "labor_title": x_labor_title,
-        "_owner_name_labor": x__owner_name_labor,
+        "_believer_name_labor": x__believer_name_labor,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())
@@ -523,7 +523,7 @@ def test_create_onrlabo_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "owner_plan_laborlink_job"
+        table_name = "believer_plan_laborlink_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -534,7 +534,7 @@ def test_create_onrlabo_metrics_insert_sqlstr_ReturnsObj():
 def test_create_onracct_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_owner_calc_dimen_args("owner_acctunit")
+    x_args = get_believer_calc_dimen_args("believer_acctunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -558,7 +558,7 @@ def test_create_onracct_metrics_insert_sqlstr_ReturnsObj():
     # print(";")
 
     x_belief_label = "amy23"
-    x_owner_name = "Sue"
+    x_believer_name = "Sue"
     x_acct_name = 1
     x_acct_cred_points = 2
     x_acct_debt_points = 3
@@ -574,7 +574,7 @@ def test_create_onracct_metrics_insert_sqlstr_ReturnsObj():
     x__irrational_acct_debt_points = 13
     values_dict = {
         "belief_label": x_belief_label,
-        "owner_name": x_owner_name,
+        "believer_name": x_believer_name,
         "acct_name": x_acct_name,
         "acct_cred_points": x_acct_cred_points,
         "acct_debt_points": x_acct_debt_points,
@@ -600,7 +600,7 @@ def test_create_onracct_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "owner_acctunit_job"
+        table_name = "believer_acctunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -611,7 +611,7 @@ def test_create_onracct_metrics_insert_sqlstr_ReturnsObj():
 def test_create_onrmemb_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_owner_calc_dimen_args("owner_acct_membership")
+    x_args = get_believer_calc_dimen_args("believer_acct_membership")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -635,7 +635,7 @@ def test_create_onrmemb_metrics_insert_sqlstr_ReturnsObj():
     # print(";")
 
     x_belief_label = "amy23"
-    x_owner_name = "Sue"
+    x_believer_name = "Sue"
     x_acct_name = 1
     x_group_title = 2
     x_group_cred_points = 3
@@ -650,7 +650,7 @@ def test_create_onrmemb_metrics_insert_sqlstr_ReturnsObj():
     x__fund_agenda_ratio_take = 12
     values_dict = {
         "belief_label": x_belief_label,
-        "owner_name": x_owner_name,
+        "believer_name": x_believer_name,
         "acct_name": x_acct_name,
         "group_title": x_group_title,
         "group_cred_points": x_group_cred_points,
@@ -675,7 +675,7 @@ def test_create_onrmemb_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "owner_acct_membership_job"
+        table_name = "believer_acct_membership_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -686,7 +686,7 @@ def test_create_onrmemb_metrics_insert_sqlstr_ReturnsObj():
 def test_create_onrgrou_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_owner_calc_dimen_args("owner_groupunit")
+    x_args = get_believer_calc_dimen_args("believer_groupunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -710,7 +710,7 @@ def test_create_onrgrou_metrics_insert_sqlstr_ReturnsObj():
     # print(";")
 
     x_belief_label = "amy23"
-    x_owner_name = "Sue"
+    x_believer_name = "Sue"
     x_group_title = 1
     x__credor_pool = 2
     x__debtor_pool = 3
@@ -722,7 +722,7 @@ def test_create_onrgrou_metrics_insert_sqlstr_ReturnsObj():
     x_knot = 9
     values_dict = {
         "belief_label": x_belief_label,
-        "owner_name": x_owner_name,
+        "believer_name": x_believer_name,
         "group_title": x_group_title,
         "_credor_pool": x__credor_pool,
         "_debtor_pool": x__debtor_pool,
@@ -744,7 +744,7 @@ def test_create_onrgrou_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "owner_groupunit_job"
+        table_name = "believer_groupunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)

@@ -1,12 +1,12 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
-from src.a06_owner_logic.test._util.a06_str import (
+from src.a06_believer_logic.test._util.a06_str import (
     acct_cred_points_str,
     acct_debt_points_str,
     acct_name_str,
     belief_label_str,
-    owner_acctunit_str,
-    owner_name_str,
+    believer_acctunit_str,
+    believer_name_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic.test._util.a16_str import (
@@ -146,7 +146,7 @@ VALUES
         assert cursor.fetchall() == [("br00117", 1), ("br00077", 1)]
 
 
-def test_set_sound_raw_tables_error_message_UpdatesTableCorrectly_Scenario1_owner_raw_del():
+def test_set_sound_raw_tables_error_message_UpdatesTableCorrectly_Scenario1_believer_raw_del():
     # ESTABLISH
     a23_str = "amy23"
     bob_str = "Bob"
@@ -164,15 +164,15 @@ def test_set_sound_raw_tables_error_message_UpdatesTableCorrectly_Scenario1_owne
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        ownera_s_raw_del = create_prime_tablename(
-            owner_acctunit_str(), "s", "raw", "del"
+        believera_s_raw_del = create_prime_tablename(
+            believer_acctunit_str(), "s", "raw", "del"
         )
-        insert_into_clause = f"""INSERT INTO {ownera_s_raw_del} (
+        insert_into_clause = f"""INSERT INTO {believera_s_raw_del} (
   {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
 , {belief_label_str()}
-, {owner_name_str()}
+, {believer_name_str()}
 , {acct_name_str()}_ERASE
 )"""
         b117 = "br00117"
@@ -187,16 +187,16 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        error_count_sqlstr = f"SELECT COUNT(*) FROM {ownera_s_raw_del}"
+        error_count_sqlstr = f"SELECT COUNT(*) FROM {believera_s_raw_del}"
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 4
-        assert error_message_str() not in get_table_columns(cursor, ownera_s_raw_del)
+        assert error_message_str() not in get_table_columns(cursor, believera_s_raw_del)
 
         # WHEN
         set_sound_raw_tables_error_message(cursor)
 
         # THEN No Error message is added and updated
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 4
-        assert error_message_str() not in get_table_columns(cursor, ownera_s_raw_del)
+        assert error_message_str() not in get_table_columns(cursor, believera_s_raw_del)
 
 
 # TODO copy over and use these tests?
@@ -261,7 +261,7 @@ VALUES
 , {event_int_str()}
 , {face_name_str()}
 , {belief_label_str()}
-, {owner_name_str()}
+, {believer_name_str()}
 , {acct_name_str()}
 , {acct_cred_points_str()}
 , {acct_debt_points_str()}
@@ -341,7 +341,7 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
 , {event_int_str()}
 , {face_name_str()}
 , {belief_label_str()}
-, {owner_name_str()}
+, {believer_name_str()}
 , {acct_name_str()}_ERASE
 )"""
         values_clause = f"""
@@ -429,7 +429,7 @@ VALUES
 , {event_int_str()}
 , {face_name_str()}
 , {belief_label_str()}
-, {owner_name_str()}
+, {believer_name_str()}
 , {acct_name_str()}
 , {acct_cred_points_str()}
 , {acct_debt_points_str()}

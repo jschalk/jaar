@@ -822,10 +822,10 @@ class PlanUnit:
         self,
         tree_traverse_count: int,
         groupunits: dict[GroupTitle, GroupUnit] = None,
-        owner_owner_name: AcctName = None,
+        believer_believer_name: AcctName = None,
     ):
         prev_to_now_active = deepcopy(self._active)
-        self._active = self._create_active_bool(groupunits, owner_owner_name)
+        self._active = self._create_active_bool(groupunits, believer_believer_name)
         self._set_plan_chore()
         self.record_active_hx(tree_traverse_count, prev_to_now_active, self._active)
 
@@ -841,30 +841,30 @@ class PlanUnit:
         return any(x_reasonheir._chore for x_reasonheir in self._reasonheirs.values())
 
     def _create_active_bool(
-        self, groupunits: dict[GroupTitle, GroupUnit], owner_owner_name: AcctName
+        self, groupunits: dict[GroupTitle, GroupUnit], believer_believer_name: AcctName
     ) -> bool:
         self.set_reasonheirs_status()
         active_bool = self._are_all_reasonheir_active_true()
         if (
             active_bool
             and groupunits != {}
-            and owner_owner_name is not None
+            and believer_believer_name is not None
             and self._laborheir._laborlinks != {}
         ):
-            self._laborheir.set_owner_name_labor(groupunits, owner_owner_name)
-            if self._laborheir._owner_name_labor is False:
+            self._laborheir.set_believer_name_labor(groupunits, believer_believer_name)
+            if self._laborheir._believer_name_labor is False:
                 active_bool = False
         return active_bool
 
     def set_range_factheirs(
         self,
-        owner_plan_dict: dict[RopeTerm,],
+        believer_plan_dict: dict[RopeTerm,],
         range_inheritors: dict[RopeTerm, RopeTerm],
     ):
         for reason_rcontext in self._reasonheirs.keys():
             if range_root_rope := range_inheritors.get(reason_rcontext):
                 all_plans = all_plans_between(
-                    owner_plan_dict, range_root_rope, reason_rcontext, self.knot
+                    believer_plan_dict, range_root_rope, reason_rcontext, self.knot
                 )
                 self._create_factheir(all_plans, range_root_rope, reason_rcontext)
 
@@ -900,7 +900,7 @@ class PlanUnit:
 
     def set_reasonheirs(
         self,
-        owner_plan_dict: dict[RopeTerm,],
+        believer_plan_dict: dict[RopeTerm,],
         reasonheirs: dict[RopeTerm, ReasonCore],
     ):
         coalesced_reasons = self._coalesce_with_reasonunits(reasonheirs)
@@ -911,7 +911,7 @@ class PlanUnit:
             new_reasonheir = reasonheir_shop(old_rcontext, None, old_active_requisite)
             new_reasonheir.inherit_from_reasonheir(old_reasonheir)
 
-            if rcontext_plan := owner_plan_dict.get(old_reasonheir.rcontext):
+            if rcontext_plan := believer_plan_dict.get(old_reasonheir.rcontext):
                 new_reasonheir.set_rplan_active_value(rcontext_plan._active)
             self._reasonheirs[new_reasonheir.rcontext] = new_reasonheir
 
@@ -1163,13 +1163,13 @@ def get_obj_from_plan_dict(x_dict: dict[str, dict], dict_key: str) -> any:
 
 
 def all_plans_between(
-    owner_plan_dict: dict[RopeTerm, PlanUnit],
+    believer_plan_dict: dict[RopeTerm, PlanUnit],
     src_rope: RopeTerm,
     dst_rcontext: RopeTerm,
     knot: str,
 ) -> list[PlanUnit]:
     all_ropes = all_ropeterms_between(src_rope, dst_rcontext, knot)
-    return [owner_plan_dict.get(x_rope) for x_rope in all_ropes]
+    return [believer_plan_dict.get(x_rope) for x_rope in all_ropes]
 
 
 def plans_calculated_range(

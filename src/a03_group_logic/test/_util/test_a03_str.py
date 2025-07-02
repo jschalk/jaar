@@ -14,13 +14,13 @@ from src.a03_group_logic.test._util.a03_str import (
     acct_debt_points_str,
     acct_name_str,
     awardee_title_str,
+    believer_name_str,
     fund_give_str,
     fund_take_str,
     give_force_str,
     group_cred_points_str,
     group_debt_points_str,
     group_title_str,
-    owner_name_str,
     respect_bit_str,
     take_force_str,
 )
@@ -50,5 +50,5 @@ def test_str_functions_ReturnsObj():
     assert fund_give_str() == "fund_give"
     assert group_debt_points_str() == "group_debt_points"
     assert give_force_str() == "give_force"
-    assert owner_name_str() == "owner_name"
+    assert believer_name_str() == "believer_name"
     assert take_force_str() == "take_force"

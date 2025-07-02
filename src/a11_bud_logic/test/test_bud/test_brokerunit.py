@@ -5,10 +5,10 @@ from src.a11_bud_logic.bud import (
     get_brokerunit_from_dict,
 )
 from src.a11_bud_logic.test._util.a11_str import (
+    believer_name_str,
     bud_acct_nets_str,
     bud_time_str,
     celldepth_str,
-    owner_name_str,
     quota_str,
 )
 
@@ -19,7 +19,7 @@ def test_BrokerUnit_Exists():
 
     # THEN
     assert x_brokerunit
-    assert not x_brokerunit.owner_name
+    assert not x_brokerunit.believer_name
     assert not x_brokerunit.buds
     assert not x_brokerunit._sum_budunit_quota
     assert not x_brokerunit._sum_acct_bud_nets
@@ -36,7 +36,7 @@ def test_brokerunit_shop_ReturnsObj():
 
     # THEN
     assert x_brokerunit
-    assert x_brokerunit.owner_name == sue_str
+    assert x_brokerunit.believer_name == sue_str
     assert x_brokerunit.buds == {}
     assert not x_brokerunit._sum_budunit_quota
     assert x_brokerunit._sum_acct_bud_nets == {}
@@ -202,7 +202,7 @@ def test_BrokerUnit_get_headers_ReturnsObj():
     sue_headers_list = sue_brokerunit.get_headers()
 
     # THEN
-    assert sue_headers_list == [owner_name_str(), bud_time_str(), quota_str()]
+    assert sue_headers_list == [believer_name_str(), bud_time_str(), quota_str()]
 
 
 def test_BrokerUnit_get_dict_ReturnsObj_Scenario0():
@@ -222,7 +222,7 @@ def test_BrokerUnit_get_dict_ReturnsObj_Scenario0():
 
     # THEN
     assert sue_buds_dict == {
-        owner_name_str(): sue_str,
+        believer_name_str(): sue_str,
         "buds": {
             x4_bud_time: {quota_str(): x4_quota, bud_time_str(): x4_bud_time},
             x7_bud_time: {
@@ -239,14 +239,14 @@ def test_get_brokerunit_from_dict_ReturnsObj_Scenario0():
     sue_str = "Sue"
     sue_brokerunit = brokerunit_shop(sue_str)
     sue_buds_dict = sue_brokerunit.get_dict()
-    assert sue_buds_dict == {owner_name_str(): sue_str, "buds": {}}
+    assert sue_buds_dict == {believer_name_str(): sue_str, "buds": {}}
 
     # WHEN
     x_brokerunit = get_brokerunit_from_dict(sue_buds_dict)
 
     # THEN
     assert x_brokerunit
-    assert x_brokerunit.owner_name == sue_str
+    assert x_brokerunit.believer_name == sue_str
     assert x_brokerunit.buds == {}
     assert x_brokerunit.buds == sue_brokerunit.buds
     assert x_brokerunit == sue_brokerunit
@@ -264,7 +264,7 @@ def test_get_brokerunit_from_dict_ReturnsObj_Scenario1():
     sue_brokerunit.add_bud(x7_bud_time, x7_quota)
     sue_buds_dict = sue_brokerunit.get_dict()
     assert sue_buds_dict == {
-        owner_name_str(): sue_str,
+        believer_name_str(): sue_str,
         "buds": {
             x4_bud_time: {bud_time_str(): x4_bud_time, quota_str(): x4_quota},
             x7_bud_time: {bud_time_str(): x7_bud_time, quota_str(): x7_quota},
@@ -276,7 +276,7 @@ def test_get_brokerunit_from_dict_ReturnsObj_Scenario1():
 
     # THEN
     assert x_brokerunit
-    assert x_brokerunit.owner_name == sue_str
+    assert x_brokerunit.believer_name == sue_str
     assert x_brokerunit.get_bud(x4_bud_time) != None
     assert x_brokerunit.get_bud(x7_bud_time) != None
     assert x_brokerunit.buds == sue_brokerunit.buds
@@ -300,7 +300,7 @@ def test_get_brokerunit_from_dict_ReturnsObj_Scenario2():
     sue_brokerunit.get_bud(x7_bud_time).set_bud_acct_net(zia_str, zia_bud_acct_net)
     sue_buds_dict = sue_brokerunit.get_dict()
     assert sue_buds_dict == {
-        owner_name_str(): sue_str,
+        believer_name_str(): sue_str,
         "buds": {
             x4_bud_time: {bud_time_str(): x4_bud_time, quota_str(): x4_quota},
             x7_bud_time: {
@@ -319,7 +319,7 @@ def test_get_brokerunit_from_dict_ReturnsObj_Scenario2():
 
     # THEN
     assert x_brokerunit
-    assert x_brokerunit.owner_name == sue_str
+    assert x_brokerunit.believer_name == sue_str
     assert x_brokerunit.get_bud(x4_bud_time) != None
     assert x_brokerunit.get_bud(x7_bud_time) != None
     assert x_brokerunit.get_bud(x7_bud_time)._bud_acct_nets != {}
@@ -346,7 +346,7 @@ def test_BrokerUnit_get_tranbook_ReturnsObj():
     sue_brokerunit.get_bud(x7_bud_time).set_bud_acct_net(zia_str, zia_bud_acct_net)
     sue_buds_dict = sue_brokerunit.get_dict()
     assert sue_buds_dict == {
-        owner_name_str(): sue_str,
+        believer_name_str(): sue_str,
         "buds": {
             x4_bud_time: {
                 bud_time_str(): x4_bud_time,

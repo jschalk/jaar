@@ -18,7 +18,7 @@
         "plan_rope": {
             "otx_key": true
         },
-        "owner_name": {
+        "believer_name": {
             "otx_key": true
         },
         "problem_bool": {
@@ -28,8 +28,8 @@
     "idea_number": "br00036",
     "dimens": [
         "beliefunit",
-        "ownerunit",
-        "owner_planunit",
-        "owner_plan_healerlink"
+        "believerunit",
+        "believer_planunit",
+        "believer_plan_healerlink"
     ]
 }

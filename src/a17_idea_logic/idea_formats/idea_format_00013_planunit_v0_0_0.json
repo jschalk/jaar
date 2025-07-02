@@ -15,7 +15,7 @@
         "mass": {
             "otx_key": false
         },
-        "owner_name": {
+        "believer_name": {
             "otx_key": true
         },
         "task": {
@@ -25,7 +25,7 @@
     "idea_number": "br00013",
     "dimens": [
         "beliefunit",
-        "ownerunit",
-        "owner_planunit"
+        "believerunit",
+        "believer_planunit"
     ]
 }

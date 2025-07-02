@@ -11,6 +11,11 @@ def belief_event_time_agg_str() -> Literal["belief_event_time_agg"]:
     return "belief_event_time_agg"
 
 
+def believer_net_amount_str() -> Literal["believer_net_amount"]:
+    """Column name for the believer net amounts."""
+    return "believer_net_amount"
+
+
 def brick_agg_str() -> str:
     return "brick_agg"
 
@@ -29,11 +34,6 @@ def events_brick_agg_str() -> Literal["events_brick_agg"]:
 
 def events_brick_valid_str() -> Literal["events_brick_valid"]:
     return "events_brick_valid"
-
-
-def owner_net_amount_str() -> Literal["owner_net_amount"]:
-    """Column name for the owner net amounts."""
-    return "owner_net_amount"
 
 
 def sound_agg_str() -> str:

@@ -4,7 +4,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_dict_from_json,
     get_json_from_dict,
 )
-from src.a01_term_logic.term import EventInt, OwnerName, default_knot_if_None
+from src.a01_term_logic.term import BelieverName, EventInt, default_knot_if_None
 from src.a16_pidgin_logic.map import (
     LabelMap,
     MapCore,
@@ -40,7 +40,7 @@ class PidginUnit:
     """
 
     event_int: EventInt = None
-    face_name: OwnerName = None
+    face_name: BelieverName = None
     titlemap: TitleMap = None
     namemap: NameMap = None
     labelmap: LabelMap = None
@@ -235,7 +235,7 @@ class PidginUnit:
 
 
 def pidginunit_shop(
-    face_name: OwnerName,
+    face_name: BelieverName,
     event_int: EventInt = None,
     otx_knot: str = None,
     inx_knot: str = None,

@@ -1,9 +1,9 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
-from src.a06_owner_logic.test._util.a06_str import (
+from src.a06_believer_logic.test._util.a06_str import (
     acct_name_str,
     belief_label_str,
-    owner_name_str,
+    believer_name_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic.test._util.a16_str import (
@@ -47,7 +47,7 @@ def test_etl_brick_valid_tables_to_sound_raw_tables_PopulatesValidTable_Scenario
             event_int_str(),
             face_name_str(),
             belief_label_str(),
-            owner_name_str(),
+            believer_name_str(),
             acct_name_str(),
             otx_rope_str(),
             inx_rope_str(),
@@ -57,7 +57,7 @@ def test_etl_brick_valid_tables_to_sound_raw_tables_PopulatesValidTable_Scenario
   {event_int_str()}
 , {face_name_str()}
 , {belief_label_str()}
-, {owner_name_str()}
+, {believer_name_str()}
 , {acct_name_str()}
 , {otx_rope_str()}
 , {inx_rope_str()}

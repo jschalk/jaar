@@ -5,7 +5,7 @@ from src.a00_data_toolbox.file_toolbox import save_file
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a05_plan_logic.healer import healerlink_shop
-from src.a06_owner_logic.owner import ownerunit_shop
+from src.a06_believer_logic.believer import believerunit_shop
 from src.a12_hub_toolbox.hub_path import create_belief_json_path, create_job_path
 from src.a12_hub_toolbox.hub_tool import save_job_file
 from src.a12_hub_toolbox.test._util.a12_str import job_str
@@ -28,27 +28,27 @@ def test_etl_belief_job_jsons_to_job_tables_PopulatesTables_Scenario0(
     sue_str = "Sue"
     bob_str = "Bob"
     run_str = ";run"
-    sue_owner = ownerunit_shop(sue_str, a23_str)
-    sue_owner.add_acctunit(sue_str)
-    sue_owner.add_acctunit(bob_str)
-    sue_owner.get_acct(bob_str).add_membership(run_str)
-    casa_rope = sue_owner.make_l1_rope("casa")
-    status_rope = sue_owner.make_l1_rope("status")
-    clean_rope = sue_owner.make_rope(status_rope, "clean")
-    dirty_rope = sue_owner.make_rope(status_rope, "dirty")
-    sue_owner.add_plan(casa_rope)
-    sue_owner.add_plan(clean_rope)
-    sue_owner.add_plan(dirty_rope)
-    sue_owner.edit_plan_attr(
+    sue_believer = believerunit_shop(sue_str, a23_str)
+    sue_believer.add_acctunit(sue_str)
+    sue_believer.add_acctunit(bob_str)
+    sue_believer.get_acct(bob_str).add_membership(run_str)
+    casa_rope = sue_believer.make_l1_rope("casa")
+    status_rope = sue_believer.make_l1_rope("status")
+    clean_rope = sue_believer.make_rope(status_rope, "clean")
+    dirty_rope = sue_believer.make_rope(status_rope, "dirty")
+    sue_believer.add_plan(casa_rope)
+    sue_believer.add_plan(clean_rope)
+    sue_believer.add_plan(dirty_rope)
+    sue_believer.edit_plan_attr(
         casa_rope, reason_rcontext=status_rope, reason_premise=dirty_rope
     )
-    sue_owner.edit_plan_attr(casa_rope, awardlink=awardlink_shop(run_str))
-    sue_owner.edit_plan_attr(casa_rope, healerlink=healerlink_shop({bob_str}))
-    sue_owner.edit_plan_attr(casa_rope, laborunit=laborunit_shop({sue_str}))
-    sue_owner.add_fact(status_rope, clean_rope)
-    print(f"{sue_owner.get_plan_obj(casa_rope).laborunit=}")
-    print(f"{sue_owner.get_plan_obj(casa_rope).get_dict()=}")
-    save_job_file(m23_belief_mstr_dir, sue_owner)
+    sue_believer.edit_plan_attr(casa_rope, awardlink=awardlink_shop(run_str))
+    sue_believer.edit_plan_attr(casa_rope, healerlink=healerlink_shop({bob_str}))
+    sue_believer.edit_plan_attr(casa_rope, laborunit=laborunit_shop({sue_str}))
+    sue_believer.add_fact(status_rope, clean_rope)
+    print(f"{sue_believer.get_plan_obj(casa_rope).laborunit=}")
+    print(f"{sue_believer.get_plan_obj(casa_rope).get_dict()=}")
+    save_job_file(m23_belief_mstr_dir, sue_believer)
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -62,7 +62,7 @@ def test_etl_belief_job_jsons_to_job_tables_PopulatesTables_Scenario0(
         onrreas_job_table = prime_table("onrreas", job_str(), None)
         onrlabo_job_table = prime_table("onrlabo", job_str(), None)
         onrplan_job_table = prime_table("onrplan", job_str(), None)
-        onrunit_job_table = prime_table("ownerunit", job_str(), None)
+        onrunit_job_table = prime_table("believerunit", job_str(), None)
         assert not db_table_exists(cursor, onrunit_job_table)
         assert not db_table_exists(cursor, onrplan_job_table)
         assert not db_table_exists(cursor, onracct_job_table)
@@ -104,7 +104,7 @@ def test_etl_belief_job_jsons_to_job_tables_PopulatesTables_Scenario1(
     credit88 = 88
     a23_str = "amy23"
     belief_mstr_dir = get_module_temp_dir()
-    bob_job = ownerunit_shop(bob_inx, a23_str)
+    bob_job = believerunit_shop(bob_inx, a23_str)
     bob_job.add_acctunit(bob_inx, credit77)
     bob_job.add_acctunit(yao_inx, credit44)
     bob_job.add_acctunit(bob_inx, credit77)

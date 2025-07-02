@@ -1,14 +1,14 @@
 from json import loads as json_loads
 from pathlib import Path
 from src.a00_data_toolbox.file_toolbox import count_files, save_json
-from src.a06_owner_logic.test._util.a06_str import (
+from src.a06_believer_logic.test._util.a06_str import (
     belief_label_str,
+    believer_name_str,
+    believer_planunit_str,
     gogo_want_str,
-    owner_name_str,
-    owner_planunit_str,
     plan_rope_str,
 )
-from src.a08_owner_atom_logic.atom_config import get_atom_config_args
+from src.a08_believer_atom_logic.atom_config import get_atom_config_args
 from src.a17_idea_logic.idea_config import (
     get_default_sorted_list,
     get_idea_config_dict,
@@ -22,9 +22,9 @@ def create_dimens_idea_format_dict() -> dict:
     idea_format_files_dict = {}
     x_count = 20
     for idea_dimen, dimen_dict in get_idea_config_dict().items():
-        if dimen_dict.get("idea_category") == "owner":
+        if dimen_dict.get("idea_category") == "believer":
             idea_filename = f"idea_format_{x_count:05}_{idea_dimen}_v0_0_0.json"
-            attributes_set = {belief_label_str(), owner_name_str()}
+            attributes_set = {belief_label_str(), believer_name_str()}
             args_dict = get_atom_config_args(idea_dimen)
             attributes_set.update(set(args_dict.keys()))
 
@@ -41,16 +41,18 @@ def test_create_dimens_idea_format_dict_ReturnsObj(rebuild_bool):
 
     # THEN
     assert len(dimens_idea_format_dict) == 10
-    owner_planunit_filename = f"idea_format_00028_{owner_planunit_str()}_v0_0_0.json"
-    assert dimens_idea_format_dict.get(owner_planunit_filename)
-    owner_planunit_dict = dimens_idea_format_dict.get(owner_planunit_filename)
-    assert owner_planunit_dict.get(dimens_str()) == [owner_planunit_str()]
-    assert owner_planunit_dict.get(attributes_str())
-    owner_planunit_attributes = owner_planunit_dict.get(attributes_str())
-    assert belief_label_str() in owner_planunit_attributes
-    assert owner_name_str() in owner_planunit_attributes
-    assert plan_rope_str() in owner_planunit_attributes
-    assert gogo_want_str() in owner_planunit_attributes
+    believer_planunit_filename = (
+        f"idea_format_00028_{believer_planunit_str()}_v0_0_0.json"
+    )
+    assert dimens_idea_format_dict.get(believer_planunit_filename)
+    believer_planunit_dict = dimens_idea_format_dict.get(believer_planunit_filename)
+    assert believer_planunit_dict.get(dimens_str()) == [believer_planunit_str()]
+    assert believer_planunit_dict.get(attributes_str())
+    believer_planunit_attributes = believer_planunit_dict.get(attributes_str())
+    assert belief_label_str() in believer_planunit_attributes
+    assert believer_name_str() in believer_planunit_attributes
+    assert plan_rope_str() in believer_planunit_attributes
+    assert gogo_want_str() in believer_planunit_attributes
 
     rebuild_format_jsons(rebuild_bool)
 

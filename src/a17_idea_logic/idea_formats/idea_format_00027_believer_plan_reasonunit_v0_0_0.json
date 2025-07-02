@@ -1,0 +1,32 @@
+{
+    "attributes": {
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "belief_label": {
+            "otx_key": true
+        },
+        "plan_rope": {
+            "otx_key": true
+        },
+        "believer_name": {
+            "otx_key": true
+        },
+        "rcontext": {
+            "otx_key": true
+        },
+        "rplan_active_requisite": {
+            "otx_key": false
+        }
+    },
+    "idea_number": "br00027",
+    "dimens": [
+        "beliefunit",
+        "believerunit",
+        "believer_planunit",
+        "believer_plan_reasonunit"
+    ]
+}

@@ -4,21 +4,25 @@ from src.a12_hub_toolbox.hub_path import (
     BELIEF_FILENAME,
     BELIEF_OTE1_AGG_CSV_FILENAME,
     BELIEF_OTE1_AGG_JSON_FILENAME,
+    BELIEVEREVENT_FILENAME,
+    BELIEVERPOINT_FILENAME,
     BUD_MANDATE_FILENAME,
     BUDUNIT_FILENAME,
     CELL_MANDATE_FILENAME,
     CELLNODE_FILENAME,
     EVENT_ALL_PACK_FILENAME,
     EVENT_EXPRESSED_PACK_FILENAME,
-    OWNEREVENT_FILENAME,
-    OWNERPOINT_FILENAME,
     belief_agenda_list_report_path,
     create_atoms_dir_path,
+    create_belief_believers_dir_path,
     create_belief_dir_path,
     create_belief_json_path,
     create_belief_ote1_csv_path,
     create_belief_ote1_json_path,
-    create_belief_owners_dir_path,
+    create_believer_dir_path,
+    create_believer_event_dir_path,
+    create_believerevent_path,
+    create_believerpoint_path,
     create_bud_acct_mandate_ledger_path,
     create_bud_dir_path,
     create_buds_dir_path,
@@ -31,10 +35,6 @@ from src.a12_hub_toolbox.hub_path import (
     create_gut_path,
     create_job_path,
     create_keeps_dir_path,
-    create_owner_dir_path,
-    create_owner_event_dir_path,
-    create_ownerevent_path,
-    create_ownerpoint_path,
     create_packs_dir_path,
     treasury_filename,
 )
@@ -122,35 +122,35 @@ def test_belief_agenda_list_report_path_ReturnsObj():
     assert gen_a23_full_report_path == expected_a23_agenda_full_path
 
 
-def test_create_belief_owners_dir_path_ReturnsObj():
+def test_create_belief_believers_dir_path_ReturnsObj():
     # ESTABLISH
     x_belief_mstr_dir = get_module_temp_dir()
     amy23_str = "amy23"
 
     # WHEN
-    gen_owners_dir = create_belief_owners_dir_path(x_belief_mstr_dir, amy23_str)
+    gen_believers_dir = create_belief_believers_dir_path(x_belief_mstr_dir, amy23_str)
 
     # THEN
     x_beliefs_dir = create_path(x_belief_mstr_dir, "beliefs")
     amy23_dir = create_path(x_beliefs_dir, amy23_str)
-    expected_owners_dir = create_path(amy23_dir, "owners")
-    assert gen_owners_dir == expected_owners_dir
+    expected_believers_dir = create_path(amy23_dir, "believers")
+    assert gen_believers_dir == expected_believers_dir
 
 
-def test_create_owner_dir_path_ReturnsObj():
+def test_create_believer_dir_path_ReturnsObj():
     # ESTABLISH
     x_belief_mstr_dir = get_module_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
 
     # WHEN
-    sue_dir = create_owner_dir_path(x_belief_mstr_dir, amy23_str, sue_str)
+    sue_dir = create_believer_dir_path(x_belief_mstr_dir, amy23_str, sue_str)
 
     # THEN
     x_beliefs_dir = create_path(x_belief_mstr_dir, "beliefs")
     amy23_dir = create_path(x_beliefs_dir, amy23_str)
-    owners_dir = create_path(amy23_dir, "owners")
-    expected_sue_dir = create_path(owners_dir, sue_str)
+    believers_dir = create_path(amy23_dir, "believers")
+    expected_sue_dir = create_path(believers_dir, sue_str)
     assert sue_dir == expected_sue_dir
 
 
@@ -166,8 +166,8 @@ def test_create_keeps_dir_path_ReturnsObj():
     # THEN
     x_beliefs_dir = create_path(x_belief_mstr_dir, "beliefs")
     amy23_dir = create_path(x_beliefs_dir, amy23_str)
-    owners_dir = create_path(amy23_dir, "owners")
-    sue_dir = create_path(owners_dir, sue_str)
+    believers_dir = create_path(amy23_dir, "believers")
+    sue_dir = create_path(believers_dir, sue_str)
     expected_keeps_dir = create_path(sue_dir, "keeps")
     assert keeps_dir == expected_keeps_dir
 
@@ -184,8 +184,8 @@ def test_create_atoms_dir_path_ReturnsObj():
     # THEN
     x_beliefs_dir = create_path(x_belief_mstr_dir, "beliefs")
     amy23_dir = create_path(x_beliefs_dir, amy23_str)
-    owners_dir = create_path(amy23_dir, "owners")
-    sue_dir = create_path(owners_dir, sue_str)
+    believers_dir = create_path(amy23_dir, "believers")
+    sue_dir = create_path(believers_dir, sue_str)
     expected_atoms_dir = create_path(sue_dir, "atoms")
     assert atoms_dir == expected_atoms_dir
 
@@ -202,8 +202,8 @@ def test_create_packs_dir_path_ReturnsObj():
     # THEN
     x_beliefs_dir = create_path(x_belief_mstr_dir, "beliefs")
     amy23_dir = create_path(x_beliefs_dir, amy23_str)
-    owners_dir = create_path(amy23_dir, "owners")
-    sue_dir = create_path(owners_dir, sue_str)
+    believers_dir = create_path(amy23_dir, "believers")
+    sue_dir = create_path(believers_dir, sue_str)
     expected_packs_dir = create_path(sue_dir, "packs")
     assert packs_dir == expected_packs_dir
 
@@ -220,8 +220,8 @@ def test_create_buds_dir_path_ReturnsObj():
     # THEN
     x_beliefs_dir = create_path(x_belief_mstr_dir, "beliefs")
     amy23_dir = create_path(x_beliefs_dir, amy23_str)
-    owners_dir = create_path(amy23_dir, "owners")
-    sue_dir = create_path(owners_dir, sue_str)
+    believers_dir = create_path(amy23_dir, "believers")
+    sue_dir = create_path(believers_dir, sue_str)
     expected_buds_dir = create_path(sue_dir, "buds")
     assert buds_dir == expected_buds_dir
 
@@ -241,8 +241,8 @@ def test_create_bud_dir_path_ReturnsObj():
     # THEN
     x_beliefs_dir = create_path(x_belief_mstr_dir, "beliefs")
     amy23_dir = create_path(x_beliefs_dir, amy23_str)
-    owners_dir = create_path(amy23_dir, "owners")
-    sue_dir = create_path(owners_dir, sue_str)
+    believers_dir = create_path(amy23_dir, "believers")
+    sue_dir = create_path(believers_dir, sue_str)
     buds_dir = create_path(sue_dir, "buds")
     expected_timepoint_dir = create_path(buds_dir, timepoint7)
     assert generated_timepoint_dir == expected_timepoint_dir
@@ -263,8 +263,8 @@ def test_create_budunit_json_path_ReturnsObj():
     # THEN
     x_beliefs_dir = create_path(x_belief_mstr_dir, "beliefs")
     amy23_dir = create_path(x_beliefs_dir, a23_str)
-    owners_dir = create_path(amy23_dir, "owners")
-    sue_dir = create_path(owners_dir, sue_str)
+    believers_dir = create_path(amy23_dir, "believers")
+    sue_dir = create_path(believers_dir, sue_str)
     buds_dir = create_path(sue_dir, "buds")
     timepoint_dir = create_path(buds_dir, timepoint7)
     expected_bud_path_dir = create_path(timepoint_dir, BUDUNIT_FILENAME)
@@ -286,15 +286,15 @@ def test_create_bud_acct_mandate_ledger_path_ReturnsObj():
     # THEN
     x_beliefs_dir = create_path(x_belief_mstr_dir, "beliefs")
     amy23_dir = create_path(x_beliefs_dir, a23_str)
-    owners_dir = create_path(amy23_dir, "owners")
-    sue_dir = create_path(owners_dir, sue_str)
+    believers_dir = create_path(amy23_dir, "believers")
+    sue_dir = create_path(believers_dir, sue_str)
     buds_dir = create_path(sue_dir, "buds")
     timepoint_dir = create_path(buds_dir, timepoint7)
     expected_bud_path_dir = create_path(timepoint_dir, BUD_MANDATE_FILENAME)
     assert gen_bud_path == expected_bud_path_dir
 
 
-def test_create_ownerpoint_path_ReturnsObj():
+def test_create_believerpoint_path_ReturnsObj():
     # ESTABLISH
     x_belief_mstr_dir = get_module_temp_dir()
     a23_str = "amy23"
@@ -302,19 +302,19 @@ def test_create_ownerpoint_path_ReturnsObj():
     timepoint7 = 7
 
     # WHEN
-    gen_ownerpoint_path = create_ownerpoint_path(
+    gen_believerpoint_path = create_believerpoint_path(
         x_belief_mstr_dir, a23_str, sue_str, timepoint7
     )
 
     # THEN
     x_beliefs_dir = create_path(x_belief_mstr_dir, "beliefs")
     amy23_dir = create_path(x_beliefs_dir, a23_str)
-    owners_dir = create_path(amy23_dir, "owners")
-    sue_dir = create_path(owners_dir, sue_str)
+    believers_dir = create_path(amy23_dir, "believers")
+    sue_dir = create_path(believers_dir, sue_str)
     buds_dir = create_path(sue_dir, "buds")
     timepoint_dir = create_path(buds_dir, timepoint7)
-    expected_ownerpoint_path_dir = create_path(timepoint_dir, OWNERPOINT_FILENAME)
-    assert gen_ownerpoint_path == expected_ownerpoint_path_dir
+    expected_believerpoint_path_dir = create_path(timepoint_dir, BELIEVERPOINT_FILENAME)
+    assert gen_believerpoint_path == expected_believerpoint_path_dir
 
 
 def test_create_cell_dir_path_ReturnsObj_Scenario0_No_bud_ancestors():
@@ -391,8 +391,8 @@ def test_create_cell_json_path_ReturnsObj_Scenario0_Empty_bud_ancestors():
     # THEN
     x_beliefs_dir = create_path(x_belief_mstr_dir, "beliefs")
     amy23_dir = create_path(x_beliefs_dir, a23_str)
-    owners_dir = create_path(amy23_dir, "owners")
-    sue_dir = create_path(owners_dir, sue_str)
+    believers_dir = create_path(amy23_dir, "believers")
+    sue_dir = create_path(believers_dir, sue_str)
     buds_dir = create_path(sue_dir, "buds")
     timepoint_dir = create_path(buds_dir, timepoint7)
     expected_cell_json_path = create_path(timepoint_dir, CELLNODE_FILENAME)
@@ -445,7 +445,7 @@ def test_create_cell_acct_mandate_ledger_path_ReturnsObj_Scenario1_Three_bud_anc
     assert gen_cell_json_path == expected_cell_json_path
 
 
-def test_create_owner_event_dir_path_ReturnsObj():
+def test_create_believer_event_dir_path_ReturnsObj():
     # ESTABLISH
     x_belief_mstr_dir = get_module_temp_dir()
     amy23_str = "amy23"
@@ -453,21 +453,21 @@ def test_create_owner_event_dir_path_ReturnsObj():
     event3 = 3
 
     # WHEN
-    gen_a23_e3_dir_path = create_owner_event_dir_path(
+    gen_a23_e3_dir_path = create_believer_event_dir_path(
         x_belief_mstr_dir, amy23_str, bob_str, event3
     )
 
     # THEN
     x_beliefs_dir = create_path(x_belief_mstr_dir, "beliefs")
     a23_dir = create_path(x_beliefs_dir, amy23_str)
-    a23_owners_dir = create_path(a23_dir, "owners")
-    a23_bob_dir = create_path(a23_owners_dir, bob_str)
+    a23_believers_dir = create_path(a23_dir, "believers")
+    a23_bob_dir = create_path(a23_believers_dir, bob_str)
     a23_events_dir = create_path(a23_bob_dir, "events")
     expected_a23_bob_e3_dir = create_path(a23_events_dir, event3)
     assert gen_a23_e3_dir_path == expected_a23_bob_e3_dir
 
 
-def test_create_ownerevent_path_ReturnsObj():
+def test_create_believerevent_path_ReturnsObj():
     # ESTABLISH
     x_belief_mstr_dir = get_module_temp_dir()
     amy23_str = "amy23"
@@ -475,19 +475,21 @@ def test_create_ownerevent_path_ReturnsObj():
     event3 = 3
 
     # WHEN
-    gen_a23_e3_owner_path = create_ownerevent_path(
+    gen_a23_e3_believer_path = create_believerevent_path(
         x_belief_mstr_dir, amy23_str, bob_str, event3
     )
 
     # THEN
     x_beliefs_dir = create_path(x_belief_mstr_dir, "beliefs")
     a23_dir = create_path(x_beliefs_dir, amy23_str)
-    a23_owners_dir = create_path(a23_dir, "owners")
-    a23_bob_dir = create_path(a23_owners_dir, bob_str)
+    a23_believers_dir = create_path(a23_dir, "believers")
+    a23_bob_dir = create_path(a23_believers_dir, bob_str)
     a23_events_dir = create_path(a23_bob_dir, "events")
     a23_bob_e3_dir = create_path(a23_events_dir, event3)
-    expected_a23_bob_e3_owner_path = create_path(a23_bob_e3_dir, OWNEREVENT_FILENAME)
-    assert gen_a23_e3_owner_path == expected_a23_bob_e3_owner_path
+    expected_a23_bob_e3_believer_path = create_path(
+        a23_bob_e3_dir, BELIEVEREVENT_FILENAME
+    )
+    assert gen_a23_e3_believer_path == expected_a23_bob_e3_believer_path
 
 
 def test_create_event_all_pack_path_ReturnsObj():
@@ -498,21 +500,21 @@ def test_create_event_all_pack_path_ReturnsObj():
     event3 = 3
 
     # WHEN
-    gen_a23_e3_owner_path = create_event_all_pack_path(
+    gen_a23_e3_believer_path = create_event_all_pack_path(
         x_belief_mstr_dir, amy23_str, bob_str, event3
     )
 
     # THEN
     x_beliefs_dir = create_path(x_belief_mstr_dir, "beliefs")
     a23_dir = create_path(x_beliefs_dir, amy23_str)
-    a23_owners_dir = create_path(a23_dir, "owners")
-    a23_bob_dir = create_path(a23_owners_dir, bob_str)
+    a23_believers_dir = create_path(a23_dir, "believers")
+    a23_bob_dir = create_path(a23_believers_dir, bob_str)
     a23_events_dir = create_path(a23_bob_dir, "events")
     a23_bob_e3_dir = create_path(a23_events_dir, event3)
     expected_a23_bob_e3_all_pack_path = create_path(
         a23_bob_e3_dir, EVENT_ALL_PACK_FILENAME
     )
-    assert gen_a23_e3_owner_path == expected_a23_bob_e3_all_pack_path
+    assert gen_a23_e3_believer_path == expected_a23_bob_e3_all_pack_path
 
 
 def test_create_event_expressed_pack_path_ReturnsObj():
@@ -523,21 +525,21 @@ def test_create_event_expressed_pack_path_ReturnsObj():
     event3 = 3
 
     # WHEN
-    gen_a23_e3_owner_path = create_event_expressed_pack_path(
+    gen_a23_e3_believer_path = create_event_expressed_pack_path(
         x_belief_mstr_dir, amy23_str, bob_str, event3
     )
 
     # THEN
     x_beliefs_dir = create_path(x_belief_mstr_dir, "beliefs")
     a23_dir = create_path(x_beliefs_dir, amy23_str)
-    a23_owners_dir = create_path(a23_dir, "owners")
-    a23_bob_dir = create_path(a23_owners_dir, bob_str)
+    a23_believers_dir = create_path(a23_dir, "believers")
+    a23_bob_dir = create_path(a23_believers_dir, bob_str)
     a23_events_dir = create_path(a23_bob_dir, "events")
     a23_bob_e3_dir = create_path(a23_events_dir, event3)
     expected_a23_bob_e3_expressed_pack_path = create_path(
         a23_bob_e3_dir, EVENT_EXPRESSED_PACK_FILENAME
     )
-    assert gen_a23_e3_owner_path == expected_a23_bob_e3_expressed_pack_path
+    assert gen_a23_e3_believer_path == expected_a23_bob_e3_expressed_pack_path
 
 
 def test_create_gut_path_ReturnsObj():
@@ -547,18 +549,18 @@ def test_create_gut_path_ReturnsObj():
     bob_str = "Bob"
 
     # WHEN
-    gen_a23_e3_owner_path = create_gut_path(x_belief_mstr_dir, a23_str, bob_str)
+    gen_a23_e3_believer_path = create_gut_path(x_belief_mstr_dir, a23_str, bob_str)
 
     # THEN
     x_beliefs_dir = create_path(x_belief_mstr_dir, "beliefs")
     a23_dir = create_path(x_beliefs_dir, a23_str)
-    a23_owners_dir = create_path(a23_dir, "owners")
-    a23_bob_dir = create_path(a23_owners_dir, bob_str)
+    a23_believers_dir = create_path(a23_dir, "believers")
+    a23_bob_dir = create_path(a23_believers_dir, bob_str)
     a23_bob_gut_dir = create_path(a23_bob_dir, gut_str())
     expected_a23_bob_gut_json_path = create_path(a23_bob_gut_dir, f"{bob_str}.json")
-    # owner_filename = "owner.json"
-    # expected_a23_e3_owner_path = create_path(a23_bob_e3_dir, owner_filename)
-    assert gen_a23_e3_owner_path == expected_a23_bob_gut_json_path
+    # believer_filename = "believer.json"
+    # expected_a23_e3_believer_path = create_path(a23_bob_e3_dir, believer_filename)
+    assert gen_a23_e3_believer_path == expected_a23_bob_gut_json_path
 
 
 def test_create_job_path_ReturnsObj():
@@ -568,15 +570,15 @@ def test_create_job_path_ReturnsObj():
     bob_str = "Bob"
 
     # WHEN
-    gen_a23_e3_owner_path = create_job_path(x_belief_mstr_dir, a23_str, bob_str)
+    gen_a23_e3_believer_path = create_job_path(x_belief_mstr_dir, a23_str, bob_str)
 
     # THEN
     x_beliefs_dir = create_path(x_belief_mstr_dir, "beliefs")
     a23_dir = create_path(x_beliefs_dir, a23_str)
-    a23_owners_dir = create_path(a23_dir, "owners")
-    a23_bob_dir = create_path(a23_owners_dir, bob_str)
+    a23_believers_dir = create_path(a23_dir, "believers")
+    a23_bob_dir = create_path(a23_believers_dir, bob_str)
     a23_bob_job_dir = create_path(a23_bob_dir, job_str())
     expected_a23_bob_job_json_path = create_path(a23_bob_job_dir, f"{bob_str}.json")
-    # owner_filename = "owner.json"
-    # expected_a23_e3_owner_path = create_path(a23_bob_e3_dir, owner_filename)
-    assert gen_a23_e3_owner_path == expected_a23_bob_job_json_path
+    # believer_filename = "believer.json"
+    # expected_a23_e3_believer_path = create_path(a23_bob_e3_dir, believer_filename)
+    assert gen_a23_e3_believer_path == expected_a23_bob_job_json_path

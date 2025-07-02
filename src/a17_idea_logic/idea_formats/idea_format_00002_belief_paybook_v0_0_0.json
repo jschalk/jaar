@@ -15,7 +15,7 @@
         "belief_label": {
             "otx_key": true
         },
-        "owner_name": {
+        "believer_name": {
             "otx_key": true
         },
         "tran_time": {
@@ -26,7 +26,7 @@
     "dimens": [
         "beliefunit",
         "belief_paybook",
-        "owner_acctunit",
-        "ownerunit"
+        "believer_acctunit",
+        "believerunit"
     ]
 }

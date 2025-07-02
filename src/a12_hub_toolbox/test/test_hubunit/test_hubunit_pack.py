@@ -19,10 +19,10 @@ from src.a12_hub_toolbox.test._util.a12_env import (
 from src.a12_hub_toolbox.test._util.example_hub_atoms import (
     get_atom_example_planunit_knee,
     get_sue_packunit,
-    sue_1owneratoms_packunit,
-    sue_2owneratoms_packunit,
-    sue_3owneratoms_packunit,
-    sue_4owneratoms_packunit,
+    sue_1believeratoms_packunit,
+    sue_2believeratoms_packunit,
+    sue_3believeratoms_packunit,
+    sue_4believeratoms_packunit,
 )
 
 
@@ -77,7 +77,7 @@ def test_HubUnit_save_pack_file_SaveCorrectObj(env_dir_setup_cleanup):
     print(f"{sue_pack2_path=}")
     print(f"{sue_pack6_path=}")
     sue_packunit = packunit_shop(
-        owner_name=sue_str,
+        believer_name=sue_str,
         _pack_id=two_int,
         _atoms_dir=sue_hubunit._atoms_dir,
         _packs_dir=sue_hubunit._packs_dir,
@@ -105,7 +105,7 @@ def test_HubUnit_save_pack_file_RaisesErrorIfPackUnit_atoms_dir_IsWrong(
     sue_pack0_path = create_path(sue_hubunit._packs_dir, six_filename)
     print(f"{sue_pack0_path=}")
     sue_packunit = packunit_shop(
-        owner_name=sue_str,
+        believer_name=sue_str,
         _pack_id=x_pack_id,
         _atoms_dir="src\\incorrect_directory",
         _packs_dir=sue_hubunit._packs_dir,
@@ -130,7 +130,7 @@ def test_HubUnit_save_pack_file_RaisesErrorIfPackUnit_packs_dir_IsWrong(
     sue_pack0_path = create_path(sue_hubunit._packs_dir, six_filename)
     print(f"{sue_pack0_path=}")
     sue_packunit = packunit_shop(
-        owner_name=sue_str,
+        believer_name=sue_str,
         _pack_id=x_pack_id,
         _atoms_dir=sue_hubunit._atoms_dir,
         _packs_dir="src\\incorrect_directory",
@@ -145,7 +145,7 @@ def test_HubUnit_save_pack_file_RaisesErrorIfPackUnit_packs_dir_IsWrong(
     )
 
 
-def test_HubUnit_save_pack_file_RaisesErrorIfPackUnit_owner_name_IsWrong(
+def test_HubUnit_save_pack_file_RaisesErrorIfPackUnit_believer_name_IsWrong(
     env_dir_setup_cleanup,
 ):
     sue_str = "Sue"
@@ -156,7 +156,7 @@ def test_HubUnit_save_pack_file_RaisesErrorIfPackUnit_owner_name_IsWrong(
     print(f"{sue_pack0_path=}")
     bob_str = "Bob"
     sue_packunit = packunit_shop(
-        owner_name=bob_str,
+        believer_name=bob_str,
         _pack_id=x_pack_id,
         _atoms_dir=sue_hubunit._atoms_dir,
         _packs_dir=sue_hubunit._packs_dir,
@@ -167,7 +167,7 @@ def test_HubUnit_save_pack_file_RaisesErrorIfPackUnit_owner_name_IsWrong(
         sue_hubunit.save_pack_file(sue_packunit, correct_invalid_attrs=False)
     assert (
         str(excinfo.value)
-        == f"PackUnit file cannot be saved because packunit.owner_name is incorrect: {sue_packunit.owner_name}. It must be {sue_str}."
+        == f"PackUnit file cannot be saved because packunit.believer_name is incorrect: {sue_packunit.believer_name}. It must be {sue_str}."
     )
 
 
@@ -180,7 +180,7 @@ def test_HubUnit_save_pack_file_RaisesErrorIf_replace_IsFalse(
     x_pack_id = 0
     six_filename = get_json_filename(x_pack_id)
     sue_packunit = packunit_shop(
-        owner_name=sue_str,
+        believer_name=sue_str,
         _pack_id=x_pack_id,
         _atoms_dir=sue_hubunit._atoms_dir,
         _packs_dir=sue_hubunit._packs_dir,
@@ -213,7 +213,7 @@ def test_HubUnit_validate_packunit_ReturnsObjWithAttributesFixed(
 
     # WHEN
     invalid_sue_packunit = packunit_shop(
-        owner_name="Bob",
+        believer_name="Bob",
         _pack_id=sue_hubunit._get_next_pack_file_number() - 5,
         _atoms_dir=create_path(sue_hubunit._keeps_dir, "swimming"),
         _packs_dir=create_path(sue_hubunit._keeps_dir, "swimming"),
@@ -225,7 +225,7 @@ def test_HubUnit_validate_packunit_ReturnsObjWithAttributesFixed(
     assert valid_packunit._packs_dir == sue_hubunit._packs_dir
     assert valid_packunit._pack_id == sue_hubunit._get_next_pack_file_number()
     correct_sue_packunit = packunit_shop(
-        owner_name=sue_str,
+        believer_name=sue_str,
         _pack_id=sue_hubunit._get_next_pack_file_number(),
         _atoms_dir=sue_hubunit._atoms_dir,
         _packs_dir=sue_hubunit._packs_dir,
@@ -247,7 +247,7 @@ def test_HubUnit_save_pack_file_SaveCorrectObj_correct_invalid_attrs_IsTrue(
 
     # WHEN
     invalid_sue_packunit = packunit_shop(
-        owner_name="Bob",
+        believer_name="Bob",
         _pack_id=sue_hubunit._get_next_pack_file_number() - 5,
         _atoms_dir=create_path(sue_hubunit._keeps_dir, "swimming"),
         _packs_dir=create_path(sue_hubunit._keeps_dir, "swimming"),
@@ -271,7 +271,7 @@ def test_HubUnit_default_packunit_ReturnsObjWithCorrect_pack_id_WhenNoPackFilesE
     sue_packunit = sue_hubunit._default_packunit()
 
     # THEN
-    assert sue_packunit.owner_name == sue_str
+    assert sue_packunit.believer_name == sue_str
     assert sue_packunit._pack_id == init_pack_id()
     assert sue_packunit._pack_id == 0
     assert sue_packunit._pack_id == sue_hubunit._get_next_pack_file_number()
@@ -298,7 +298,7 @@ def test_HubUnit_default_packunit_ReturnsObjWithCorrect_pack_id_WhenPackFilesExi
     sue_packunit = sue_hubunit._default_packunit()
 
     # THEN
-    assert sue_packunit.owner_name == sue_str
+    assert sue_packunit.believer_name == sue_str
     assert sue_packunit._pack_id == init_pack_id() + 1
     assert sue_packunit._pack_id == 1
     assert sue_packunit._pack_id == sue_hubunit._get_next_pack_file_number()
@@ -358,7 +358,7 @@ def test_HubUnit_get_packunit_RaisesExceptionWhenFileDoesNotExist(
     )
 
 
-def test_HubUnit_del_pack_file_DeletespackjsonAndNotOwnerAtomjsons(
+def test_HubUnit_del_pack_file_DeletespackjsonAndNotBelieverAtomjsons(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -366,12 +366,12 @@ def test_HubUnit_del_pack_file_DeletespackjsonAndNotOwnerAtomjsons(
     sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str)
     six_int = 6
     sue_packunit = packunit_shop(
-        owner_name=sue_str,
+        believer_name=sue_str,
         _pack_id=six_int,
         _atoms_dir=sue_hubunit._atoms_dir,
         _packs_dir=sue_hubunit._packs_dir,
     )
-    sue_packunit._ownerdelta.set_owneratom(get_atom_example_planunit_knee())
+    sue_packunit._believerdelta.set_believeratom(get_atom_example_planunit_knee())
     zero_int = 0
     assert sue_hubunit.pack_file_exists(six_int) is False
     assert sue_hubunit.atom_file_exists(zero_int) is False
@@ -405,9 +405,9 @@ def test_HubUnit_save_pack_file_CanCreateAndModify3packunits(
     assert len(get_dir_file_strs(sue_hubunit._atoms_dir)) == 0
 
     # WHEN
-    sue_hubunit.save_pack_file(sue_2owneratoms_packunit())
-    sue_hubunit.save_pack_file(sue_3owneratoms_packunit())
-    sue_hubunit.save_pack_file(sue_4owneratoms_packunit())
+    sue_hubunit.save_pack_file(sue_2believeratoms_packunit())
+    sue_hubunit.save_pack_file(sue_3believeratoms_packunit())
+    sue_hubunit.save_pack_file(sue_4believeratoms_packunit())
 
     # THEN
     assert len(get_dir_file_strs(sue_hubunit._packs_dir)) == 3
@@ -418,10 +418,10 @@ def test_HubUnit_save_pack_file_ReturnsValidObj(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str)
-    sue2_packunit = sue_2owneratoms_packunit()
+    sue2_packunit = sue_2believeratoms_packunit()
     sue2_packunit._atoms_dir = create_path(sue_hubunit._keeps_dir, "swimming")
     sue2_packunit._packs_dir = create_path(sue_hubunit._keeps_dir, "swimming")
-    sue2_packunit.owner_name = "Bob"
+    sue2_packunit.believer_name = "Bob"
     sue2_packunit._pack_id = sue_hubunit._get_next_pack_file_number() - 5
     prev_sue2_packunit = copy_deepcopy(sue2_packunit)
 
@@ -444,7 +444,7 @@ def test_HubUnit_create_save_pack_file_SaveCorrectObj(env_dir_setup_cleanup):
     print(f"{sue_hubunit.pack_file_path(two_int)=}")
     print(f"{sue_hubunit.pack_file_path(three_int)=}")
     sue_packunit = packunit_shop(
-        owner_name=sue_str,
+        believer_name=sue_str,
         _pack_id=two_int,
         _atoms_dir=sue_hubunit._atoms_dir,
         _packs_dir=sue_hubunit._packs_dir,
@@ -455,11 +455,11 @@ def test_HubUnit_create_save_pack_file_SaveCorrectObj(env_dir_setup_cleanup):
     assert sue_hubunit.pack_file_exists(three_int) is False
 
     # WHEN
-    before_owner = sue_hubunit.default_gut_owner()
+    before_believer = sue_hubunit.default_gut_believer()
     bob_str = "Bob"
-    after_owner = copy_deepcopy(before_owner)
-    after_owner.add_acctunit(bob_str)
-    sue_hubunit.create_save_pack_file(before_owner, after_owner)
+    after_believer = copy_deepcopy(before_believer)
+    after_believer.add_acctunit(bob_str)
+    sue_hubunit.create_save_pack_file(before_believer, after_believer)
 
     # THEN
     assert sue_hubunit.pack_file_exists(three_int)
@@ -469,15 +469,15 @@ def test_HubUnit_merge_any_packs_ReturnsObjThatIsEqual(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str)
-    save_gut_file(env_dir(), sue_hubunit.default_gut_owner())
-    gut_owner = open_gut_file(env_dir(), "amy23", sue_str)
-    gut_owner.last_pack_id is None
+    save_gut_file(env_dir(), sue_hubunit.default_gut_believer())
+    gut_believer = open_gut_file(env_dir(), "amy23", sue_str)
+    gut_believer.last_pack_id is None
 
     # WHEN
-    new_owner = sue_hubunit._merge_any_packs(gut_owner)
+    new_believer = sue_hubunit._merge_any_packs(gut_believer)
 
     # THEN
-    assert new_owner == gut_owner
+    assert new_believer == gut_believer
 
 
 def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_1atom(
@@ -486,23 +486,23 @@ def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_1atom(
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str)
-    sue_hubunit.save_pack_file(sue_1owneratoms_packunit())
-    save_gut_file(env_dir(), sue_hubunit.default_gut_owner())
-    gut_owner = open_gut_file(env_dir(), "amy23", sue_str)
-    print(f"{gut_owner.belief_label=}")
+    sue_hubunit.save_pack_file(sue_1believeratoms_packunit())
+    save_gut_file(env_dir(), sue_hubunit.default_gut_believer())
+    gut_believer = open_gut_file(env_dir(), "amy23", sue_str)
+    print(f"{gut_believer.belief_label=}")
     print(f"{sue_hubunit.belief_label=}")
     sports_str = "sports"
-    sports_rope = gut_owner.make_l1_rope(sports_str)
+    sports_rope = gut_believer.make_l1_rope(sports_str)
     knee_str = "knee"
-    knee_rope = gut_owner.make_rope(sports_rope, knee_str)
-    assert gut_owner.plan_exists(sports_rope) is False
+    knee_rope = gut_believer.make_rope(sports_rope, knee_str)
+    assert gut_believer.plan_exists(sports_rope) is False
 
     # WHEN
-    new_owner = sue_hubunit._merge_any_packs(gut_owner)
+    new_believer = sue_hubunit._merge_any_packs(gut_believer)
 
     # THEN
-    assert new_owner != gut_owner
-    assert new_owner.plan_exists(sports_rope)
+    assert new_believer != gut_believer
+    assert new_believer.plan_exists(sports_rope)
 
 
 def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_2atoms(
@@ -511,21 +511,21 @@ def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_2atoms(
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str)
-    sue_hubunit.save_pack_file(sue_2owneratoms_packunit())
-    save_gut_file(env_dir(), sue_hubunit.default_gut_owner())
-    gut_owner = open_gut_file(env_dir(), "amy23", sue_str)
-    print(f"{gut_owner.belief_label=}")
+    sue_hubunit.save_pack_file(sue_2believeratoms_packunit())
+    save_gut_file(env_dir(), sue_hubunit.default_gut_believer())
+    gut_believer = open_gut_file(env_dir(), "amy23", sue_str)
+    print(f"{gut_believer.belief_label=}")
     sports_str = "sports"
-    sports_rope = gut_owner.make_l1_rope(sports_str)
+    sports_rope = gut_believer.make_l1_rope(sports_str)
     knee_str = "knee"
-    knee_rope = gut_owner.make_rope(sports_rope, knee_str)
-    assert gut_owner.plan_exists(sports_rope) is False
-    assert gut_owner.plan_exists(knee_rope) is False
+    knee_rope = gut_believer.make_rope(sports_rope, knee_str)
+    assert gut_believer.plan_exists(sports_rope) is False
+    assert gut_believer.plan_exists(knee_rope) is False
 
     # WHEN
-    new_owner = sue_hubunit._merge_any_packs(gut_owner)
+    new_believer = sue_hubunit._merge_any_packs(gut_believer)
 
     # THEN
-    assert new_owner != gut_owner
-    assert new_owner.plan_exists(sports_rope)
-    assert new_owner.plan_exists(knee_rope)
+    assert new_believer != gut_believer
+    assert new_believer.plan_exists(sports_rope)
+    assert new_believer.plan_exists(knee_rope)

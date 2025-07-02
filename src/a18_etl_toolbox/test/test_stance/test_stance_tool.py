@@ -1,8 +1,8 @@
 from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.file_toolbox import create_path, open_file, save_file, set_dir
-from src.a06_owner_logic.owner import ownerunit_shop
-from src.a06_owner_logic.test._util.a06_str import owner_plan_awardlink_str
+from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.test._util.a06_str import believer_plan_awardlink_str
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a12_hub_toolbox.hub_path import create_belief_json_path, create_gut_path
 from src.a15_belief_logic.belief import beliefunit_shop
@@ -13,7 +13,7 @@ from src.a16_pidgin_logic.test._util.a16_str import (
 )
 from src.a17_idea_logic.idea_csv_tool import (
     add_beliefunit_to_stance_csv_strs,
-    add_ownerunit_to_stance_csv_strs,
+    add_believerunit_to_stance_csv_strs,
     create_init_stance_idea_csv_strs,
 )
 from src.a17_idea_logic.idea_db_tool import (  # add_pidginunits_to_stance_csv_strs,
@@ -51,7 +51,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario0_NoBeliefUnits(
     assert gen_stance_csv_strs == expected_stance_csv_strs
 
 
-def test_collect_stance_csv_strs_ReturnsObj_Scenario1_SingleBeliefUnit_NoOwnerUnits(
+def test_collect_stance_csv_strs_ReturnsObj_Scenario1_SingleBeliefUnit_NoBelieverUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -70,7 +70,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario1_SingleBeliefUnit_NoOwnerUn
     assert gen_stance_csv_strs == expected_stance_csv_strs
 
 
-def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_OwnerUnits(
+def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BelieverUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -80,8 +80,8 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_OwnerUnits(
     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
     belief_json_path = create_belief_json_path(belief_mstr_dir, a23_str)
     save_file(belief_json_path, None, a23_belief.get_json())
-    # create owner gut file
-    bob_gut = ownerunit_shop(bob_str, a23_str)
+    # create believer gut file
+    bob_gut = believerunit_shop(bob_str, a23_str)
     bob_gut.add_acctunit("Yao", 44, 55)
     a23_bob_gut_path = create_gut_path(belief_mstr_dir, a23_str, bob_str)
     save_file(a23_bob_gut_path, None, bob_gut.get_json())
@@ -92,12 +92,12 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_OwnerUnits(
     # THEN
     expected_stance_csv_strs = create_init_stance_idea_csv_strs()
     add_beliefunit_to_stance_csv_strs(a23_belief, expected_stance_csv_strs, ",")
-    add_ownerunit_to_stance_csv_strs(bob_gut, expected_stance_csv_strs, ",")
+    add_believerunit_to_stance_csv_strs(bob_gut, expected_stance_csv_strs, ",")
     assert gen_stance_csv_strs == expected_stance_csv_strs
 
 
 # # TODO #834
-# # def test_collect_stance_csv_strs_ReturnsObj_Scenario3_gut_OwnerUnits(
+# # def test_collect_stance_csv_strs_ReturnsObj_Scenario3_gut_BelieverUnits(
 # #     env_dir_setup_cleanup,
 # # ):
 # #     # ESTABLISH
@@ -107,8 +107,8 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_OwnerUnits(
 # #     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
 # #     belief_json_path = create_belief_json_path(belief_mstr_dir, a23_str)
 # #     save_file(belief_json_path, None, a23_belief.get_json())
-# #     # create owner gut file
-# #     bob_gut = ownerunit_shop(bob_str, a23_str)
+# #     # create believer gut file
+# #     bob_gut = believerunit_shop(bob_str, a23_str)
 # #     bob_gut.add_acctunit("Yao", 44, 55)
 # #     a23_bob_gut_path = create_gut_path(belief_mstr_dir, a23_str, bob_str)
 # #     save_file(a23_bob_gut_path, None, bob_gut.get_json())
@@ -119,7 +119,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_OwnerUnits(
 # #     # THEN
 # #     expected_stance_csv_strs = create_init_stance_idea_csv_strs()
 # #     add_beliefunit_to_stance_csv_strs(a23_belief, expected_stance_csv_strs, ",")
-# #     add_ownerunit_to_stance_csv_strs(bob_gut, expected_stance_csv_strs, ",")
+# #     add_believerunit_to_stance_csv_strs(bob_gut, expected_stance_csv_strs, ",")
 # #     assert gen_stance_csv_strs == expected_stance_csv_strs
 
 

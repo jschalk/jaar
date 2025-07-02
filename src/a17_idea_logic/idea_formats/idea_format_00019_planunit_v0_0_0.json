@@ -33,7 +33,7 @@
         "numor": {
             "otx_key": false
         },
-        "owner_name": {
+        "believer_name": {
             "otx_key": true
         },
         "stop_want": {
@@ -43,7 +43,7 @@
     "idea_number": "br00019",
     "dimens": [
         "beliefunit",
-        "ownerunit",
-        "owner_planunit"
+        "believerunit",
+        "believer_planunit"
     ]
 }

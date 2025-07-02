@@ -18,15 +18,15 @@
         "otx_title": {
             "otx_key": true
         },
-        "owner_name": {
+        "believer_name": {
             "otx_key": true
         }
     },
     "idea_number": "br00115",
     "dimens": [
         "pidgin_title",
-        "owner_acctunit",
-        "ownerunit",
+        "believer_acctunit",
+        "believerunit",
         "beliefunit"
     ]
 }

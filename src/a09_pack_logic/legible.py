@@ -1,190 +1,190 @@
 from src.a00_data_toolbox.dict_toolbox import get_from_nested_dict
-from src.a06_owner_logic.owner import OwnerUnit
-from src.a08_owner_atom_logic.atom import OwnerAtom
-from src.a09_pack_logic.delta import OwnerDelta
+from src.a06_believer_logic.believer import BelieverUnit
+from src.a08_believer_atom_logic.atom import BelieverAtom
+from src.a09_pack_logic.delta import BelieverDelta
 
 
 def get_leg_obj(x_dict: dict, x_keylist) -> any:
     return get_from_nested_dict(x_dict, x_keylist, if_missing_return_None=True)
 
 
-def create_legible_list(x_delta: OwnerDelta, x_owner: OwnerUnit) -> list[str]:
-    atoms_dict = x_delta.owneratoms
-    ownerunit_atom = get_leg_obj(atoms_dict, ["UPDATE", "ownerunit"])
+def create_legible_list(x_delta: BelieverDelta, x_believer: BelieverUnit) -> list[str]:
+    atoms_dict = x_delta.believeratoms
+    believerunit_atom = get_leg_obj(atoms_dict, ["UPDATE", "believerunit"])
 
-    acctunit_insert_dict = get_leg_obj(atoms_dict, ["INSERT", "owner_acctunit"])
-    acctunit_update_dict = get_leg_obj(atoms_dict, ["UPDATE", "owner_acctunit"])
-    acctunit_delete_dict = get_leg_obj(atoms_dict, ["DELETE", "owner_acctunit"])
+    acctunit_insert_dict = get_leg_obj(atoms_dict, ["INSERT", "believer_acctunit"])
+    acctunit_update_dict = get_leg_obj(atoms_dict, ["UPDATE", "believer_acctunit"])
+    acctunit_delete_dict = get_leg_obj(atoms_dict, ["DELETE", "believer_acctunit"])
 
-    x_list = ["INSERT", "owner_acct_membership"]
+    x_list = ["INSERT", "believer_acct_membership"]
     acct_membership_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "owner_acct_membership"]
+    x_list = ["UPDATE", "believer_acct_membership"]
     acct_membership_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "owner_acct_membership"]
+    x_list = ["DELETE", "believer_acct_membership"]
     acct_membership_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "owner_planunit"]
-    owner_planunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "owner_planunit"]
-    owner_planunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "owner_planunit"]
-    owner_planunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "believer_planunit"]
+    believer_planunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "believer_planunit"]
+    believer_planunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "believer_planunit"]
+    believer_planunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "owner_plan_awardlink"]
-    owner_plan_awardlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "owner_plan_awardlink"]
-    owner_plan_awardlink_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "owner_plan_awardlink"]
-    owner_plan_awardlink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "believer_plan_awardlink"]
+    believer_plan_awardlink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "believer_plan_awardlink"]
+    believer_plan_awardlink_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "believer_plan_awardlink"]
+    believer_plan_awardlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "owner_plan_reasonunit"]
-    owner_plan_reasonunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "owner_plan_reasonunit"]
-    owner_plan_reasonunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "owner_plan_reasonunit"]
-    owner_plan_reasonunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "believer_plan_reasonunit"]
+    believer_plan_reasonunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "believer_plan_reasonunit"]
+    believer_plan_reasonunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "believer_plan_reasonunit"]
+    believer_plan_reasonunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "owner_plan_reason_premiseunit"]
-    owner_plan_reason_premiseunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "owner_plan_reason_premiseunit"]
-    owner_plan_reason_premiseunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "owner_plan_reason_premiseunit"]
-    owner_plan_reason_premiseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "believer_plan_reason_premiseunit"]
+    believer_plan_reason_premiseunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "believer_plan_reason_premiseunit"]
+    believer_plan_reason_premiseunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "believer_plan_reason_premiseunit"]
+    believer_plan_reason_premiseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "owner_plan_laborlink"]
-    owner_plan_laborlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "owner_plan_laborlink"]
-    owner_plan_laborlink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "believer_plan_laborlink"]
+    believer_plan_laborlink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "believer_plan_laborlink"]
+    believer_plan_laborlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "owner_plan_healerlink"]
-    owner_plan_healerlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "owner_plan_healerlink"]
-    owner_plan_healerlink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "believer_plan_healerlink"]
+    believer_plan_healerlink_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "believer_plan_healerlink"]
+    believer_plan_healerlink_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "owner_plan_factunit"]
-    owner_plan_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "owner_plan_factunit"]
-    owner_plan_factunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "owner_plan_factunit"]
-    owner_plan_factunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "believer_plan_factunit"]
+    believer_plan_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "believer_plan_factunit"]
+    believer_plan_factunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "believer_plan_factunit"]
+    believer_plan_factunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     leg_list = []
-    if ownerunit_atom is not None:
-        add_ownerunit_legible_list(leg_list, ownerunit_atom, x_owner)
+    if believerunit_atom is not None:
+        add_believerunit_legible_list(leg_list, believerunit_atom, x_believer)
     if acctunit_insert_dict is not None:
-        add_owner_acctunit_insert_to_legible_list(
-            leg_list, acctunit_insert_dict, x_owner
+        add_believer_acctunit_insert_to_legible_list(
+            leg_list, acctunit_insert_dict, x_believer
         )
     if acctunit_update_dict is not None:
-        add_owner_acctunit_update_to_legible_list(
-            leg_list, acctunit_update_dict, x_owner
+        add_believer_acctunit_update_to_legible_list(
+            leg_list, acctunit_update_dict, x_believer
         )
     if acctunit_delete_dict is not None:
-        add_owner_acctunit_delete_to_legible_list(
-            leg_list, acctunit_delete_dict, x_owner
+        add_believer_acctunit_delete_to_legible_list(
+            leg_list, acctunit_delete_dict, x_believer
         )
 
     if acct_membership_insert_dict is not None:
-        add_owner_acct_membership_insert_to_legible_list(
-            leg_list, acct_membership_insert_dict, x_owner
+        add_believer_acct_membership_insert_to_legible_list(
+            leg_list, acct_membership_insert_dict, x_believer
         )
     if acct_membership_update_dict is not None:
-        add_owner_acct_membership_update_to_legible_list(
-            leg_list, acct_membership_update_dict, x_owner
+        add_believer_acct_membership_update_to_legible_list(
+            leg_list, acct_membership_update_dict, x_believer
         )
     if acct_membership_delete_dict is not None:
-        add_owner_acct_membership_delete_to_legible_list(
-            leg_list, acct_membership_delete_dict, x_owner
+        add_believer_acct_membership_delete_to_legible_list(
+            leg_list, acct_membership_delete_dict, x_believer
         )
 
-    if owner_planunit_insert_dict is not None:
-        add_owner_planunit_insert_to_legible_list(
-            leg_list, owner_planunit_insert_dict, x_owner
+    if believer_planunit_insert_dict is not None:
+        add_believer_planunit_insert_to_legible_list(
+            leg_list, believer_planunit_insert_dict, x_believer
         )
-    if owner_planunit_update_dict is not None:
-        add_owner_planunit_update_to_legible_list(
-            leg_list, owner_planunit_update_dict, x_owner
+    if believer_planunit_update_dict is not None:
+        add_believer_planunit_update_to_legible_list(
+            leg_list, believer_planunit_update_dict, x_believer
         )
-    if owner_planunit_delete_dict is not None:
-        add_owner_planunit_delete_to_legible_list(
-            leg_list, owner_planunit_delete_dict, x_owner
-        )
-
-    if owner_plan_awardlink_insert_dict is not None:
-        add_owner_plan_awardlink_insert_to_legible_list(
-            leg_list, owner_plan_awardlink_insert_dict, x_owner
-        )
-    if owner_plan_awardlink_update_dict is not None:
-        add_owner_plan_awardlink_update_to_legible_list(
-            leg_list, owner_plan_awardlink_update_dict, x_owner
-        )
-    if owner_plan_awardlink_delete_dict is not None:
-        add_owner_plan_awardlink_delete_to_legible_list(
-            leg_list, owner_plan_awardlink_delete_dict, x_owner
+    if believer_planunit_delete_dict is not None:
+        add_believer_planunit_delete_to_legible_list(
+            leg_list, believer_planunit_delete_dict, x_believer
         )
 
-    if owner_plan_reasonunit_insert_dict is not None:
-        add_owner_plan_reasonunit_insert_to_legible_list(
-            leg_list, owner_plan_reasonunit_insert_dict, x_owner
+    if believer_plan_awardlink_insert_dict is not None:
+        add_believer_plan_awardlink_insert_to_legible_list(
+            leg_list, believer_plan_awardlink_insert_dict, x_believer
         )
-    if owner_plan_reasonunit_update_dict is not None:
-        add_owner_plan_reasonunit_update_to_legible_list(
-            leg_list, owner_plan_reasonunit_update_dict, x_owner
+    if believer_plan_awardlink_update_dict is not None:
+        add_believer_plan_awardlink_update_to_legible_list(
+            leg_list, believer_plan_awardlink_update_dict, x_believer
         )
-    if owner_plan_reasonunit_delete_dict is not None:
-        add_owner_plan_reasonunit_delete_to_legible_list(
-            leg_list, owner_plan_reasonunit_delete_dict, x_owner
-        )
-
-    if owner_plan_reason_premiseunit_insert_dict is not None:
-        add_owner_reason_premiseunit_insert_to_legible_list(
-            leg_list, owner_plan_reason_premiseunit_insert_dict, x_owner
-        )
-    if owner_plan_reason_premiseunit_update_dict is not None:
-        add_owner_reason_premiseunit_update_to_legible_list(
-            leg_list, owner_plan_reason_premiseunit_update_dict, x_owner
-        )
-    if owner_plan_reason_premiseunit_delete_dict is not None:
-        add_owner_reason_premiseunit_delete_to_legible_list(
-            leg_list, owner_plan_reason_premiseunit_delete_dict, x_owner
+    if believer_plan_awardlink_delete_dict is not None:
+        add_believer_plan_awardlink_delete_to_legible_list(
+            leg_list, believer_plan_awardlink_delete_dict, x_believer
         )
 
-    if owner_plan_laborlink_insert_dict is not None:
-        add_owner_plan_laborlink_insert_to_legible_list(
-            leg_list, owner_plan_laborlink_insert_dict, x_owner
+    if believer_plan_reasonunit_insert_dict is not None:
+        add_believer_plan_reasonunit_insert_to_legible_list(
+            leg_list, believer_plan_reasonunit_insert_dict, x_believer
         )
-    if owner_plan_laborlink_delete_dict is not None:
-        add_owner_plan_laborlink_delete_to_legible_list(
-            leg_list, owner_plan_laborlink_delete_dict, x_owner
+    if believer_plan_reasonunit_update_dict is not None:
+        add_believer_plan_reasonunit_update_to_legible_list(
+            leg_list, believer_plan_reasonunit_update_dict, x_believer
         )
-
-    if owner_plan_healerlink_insert_dict is not None:
-        add_owner_plan_healerlink_insert_to_legible_list(
-            leg_list, owner_plan_healerlink_insert_dict, x_owner
-        )
-    if owner_plan_healerlink_delete_dict is not None:
-        add_owner_plan_healerlink_delete_to_legible_list(
-            leg_list, owner_plan_healerlink_delete_dict, x_owner
+    if believer_plan_reasonunit_delete_dict is not None:
+        add_believer_plan_reasonunit_delete_to_legible_list(
+            leg_list, believer_plan_reasonunit_delete_dict, x_believer
         )
 
-    if owner_plan_factunit_insert_dict is not None:
-        add_owner_plan_factunit_insert_to_legible_list(
-            leg_list, owner_plan_factunit_insert_dict, x_owner
+    if believer_plan_reason_premiseunit_insert_dict is not None:
+        add_believer_reason_premiseunit_insert_to_legible_list(
+            leg_list, believer_plan_reason_premiseunit_insert_dict, x_believer
         )
-    if owner_plan_factunit_update_dict is not None:
-        add_owner_plan_factunit_update_to_legible_list(
-            leg_list, owner_plan_factunit_update_dict, x_owner
+    if believer_plan_reason_premiseunit_update_dict is not None:
+        add_believer_reason_premiseunit_update_to_legible_list(
+            leg_list, believer_plan_reason_premiseunit_update_dict, x_believer
         )
-    if owner_plan_factunit_delete_dict is not None:
-        add_owner_plan_factunit_delete_to_legible_list(
-            leg_list, owner_plan_factunit_delete_dict, x_owner
+    if believer_plan_reason_premiseunit_delete_dict is not None:
+        add_believer_reason_premiseunit_delete_to_legible_list(
+            leg_list, believer_plan_reason_premiseunit_delete_dict, x_believer
+        )
+
+    if believer_plan_laborlink_insert_dict is not None:
+        add_believer_plan_laborlink_insert_to_legible_list(
+            leg_list, believer_plan_laborlink_insert_dict, x_believer
+        )
+    if believer_plan_laborlink_delete_dict is not None:
+        add_believer_plan_laborlink_delete_to_legible_list(
+            leg_list, believer_plan_laborlink_delete_dict, x_believer
+        )
+
+    if believer_plan_healerlink_insert_dict is not None:
+        add_believer_plan_healerlink_insert_to_legible_list(
+            leg_list, believer_plan_healerlink_insert_dict, x_believer
+        )
+    if believer_plan_healerlink_delete_dict is not None:
+        add_believer_plan_healerlink_delete_to_legible_list(
+            leg_list, believer_plan_healerlink_delete_dict, x_believer
+        )
+
+    if believer_plan_factunit_insert_dict is not None:
+        add_believer_plan_factunit_insert_to_legible_list(
+            leg_list, believer_plan_factunit_insert_dict, x_believer
+        )
+    if believer_plan_factunit_update_dict is not None:
+        add_believer_plan_factunit_update_to_legible_list(
+            leg_list, believer_plan_factunit_update_dict, x_believer
+        )
+    if believer_plan_factunit_delete_dict is not None:
+        add_believer_plan_factunit_delete_to_legible_list(
+            leg_list, believer_plan_factunit_delete_dict, x_believer
         )
 
     return leg_list
 
 
-def add_ownerunit_legible_list(
-    legible_list: list[str], x_atom: OwnerAtom, x_owner: OwnerUnit
+def add_believerunit_legible_list(
+    legible_list: list[str], x_atom: BelieverAtom, x_believer: BelieverUnit
 ):
     jvalues = x_atom.jvalues
     _tally_str = "tally"
@@ -195,28 +195,32 @@ def add_ownerunit_legible_list(
     _tally_value = jvalues.get(_tally_str)
 
     if _max_tree_traverse_value is not None:
-        x_str = f"{x_owner.owner_name}'s maximum number of Owner evaluations set to {_max_tree_traverse_value}"
+        x_str = f"{x_believer.believer_name}'s maximum number of Believer evaluations set to {_max_tree_traverse_value}"
         legible_list.append(x_str)
     if (
         credor_respect_value is not None
         and debtor_respect_value is not None
         and credor_respect_value == debtor_respect_value
     ):
-        x_str = f"{x_owner.owner_name}'s total pool is now {credor_respect_value}"
+        x_str = f"{x_believer.believer_name}'s total pool is now {credor_respect_value}"
         legible_list.append(x_str)
     elif credor_respect_value is not None:
-        x_str = f"{x_owner.owner_name}'s credor pool is now {credor_respect_value}"
+        x_str = (
+            f"{x_believer.believer_name}'s credor pool is now {credor_respect_value}"
+        )
         legible_list.append(x_str)
     elif debtor_respect_value is not None:
-        x_str = f"{x_owner.owner_name}'s debtor pool is now {debtor_respect_value}"
+        x_str = (
+            f"{x_believer.believer_name}'s debtor pool is now {debtor_respect_value}"
+        )
         legible_list.append(x_str)
     if _tally_value is not None:
-        x_str = f"{x_owner.owner_name}'s owner tally set to {_tally_value}"
+        x_str = f"{x_believer.believer_name}'s believer tally set to {_tally_value}"
         legible_list.append(x_str)
 
 
-def add_owner_acctunit_insert_to_legible_list(
-    legible_list: list[str], acctunit_dict: OwnerAtom, x_owner: OwnerUnit
+def add_believer_acctunit_insert_to_legible_list(
+    legible_list: list[str], acctunit_dict: BelieverAtom, x_believer: BelieverUnit
 ):
     for acctunit_atom in acctunit_dict.values():
         acct_name = acctunit_atom.get_value("acct_name")
@@ -226,8 +230,8 @@ def add_owner_acctunit_insert_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_owner_acctunit_update_to_legible_list(
-    legible_list: list[str], acctunit_dict: OwnerAtom, x_owner: OwnerUnit
+def add_believer_acctunit_update_to_legible_list(
+    legible_list: list[str], acctunit_dict: BelieverAtom, x_believer: BelieverUnit
 ):
     for acctunit_atom in acctunit_dict.values():
         acct_name = acctunit_atom.get_value("acct_name")
@@ -242,8 +246,8 @@ def add_owner_acctunit_update_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_owner_acctunit_delete_to_legible_list(
-    legible_list: list[str], acctunit_dict: OwnerAtom, x_owner: OwnerUnit
+def add_believer_acctunit_delete_to_legible_list(
+    legible_list: list[str], acctunit_dict: BelieverAtom, x_believer: BelieverUnit
 ):
     for acctunit_atom in acctunit_dict.values():
         acct_name = acctunit_atom.get_value("acct_name")
@@ -251,8 +255,8 @@ def add_owner_acctunit_delete_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_owner_acct_membership_insert_to_legible_list(
-    legible_list: list[str], acct_membership_insert_dict: dict, x_owner: OwnerUnit
+def add_believer_acct_membership_insert_to_legible_list(
+    legible_list: list[str], acct_membership_insert_dict: dict, x_believer: BelieverUnit
 ):
     for acct_membership_dict in acct_membership_insert_dict.values():
         for acct_membership_atom in acct_membership_dict.values():
@@ -268,8 +272,8 @@ def add_owner_acct_membership_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_owner_acct_membership_update_to_legible_list(
-    legible_list: list[str], acct_membership_update_dict: dict, x_owner: OwnerUnit
+def add_believer_acct_membership_update_to_legible_list(
+    legible_list: list[str], acct_membership_update_dict: dict, x_believer: BelieverUnit
 ):
     for acct_membership_dict in acct_membership_update_dict.values():
         for acct_membership_atom in acct_membership_dict.values():
@@ -293,8 +297,8 @@ def add_owner_acct_membership_update_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_owner_acct_membership_delete_to_legible_list(
-    legible_list: list[str], acct_membership_delete_dict: dict, x_owner: OwnerUnit
+def add_believer_acct_membership_delete_to_legible_list(
+    legible_list: list[str], acct_membership_delete_dict: dict, x_believer: BelieverUnit
 ):
     for acct_membership_dict in acct_membership_delete_dict.values():
         for acct_membership_atom in acct_membership_dict.values():
@@ -304,8 +308,8 @@ def add_owner_acct_membership_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_owner_planunit_insert_to_legible_list(
-    legible_list: list[str], planunit_insert_dict: dict, x_owner: OwnerUnit
+def add_believer_planunit_insert_to_legible_list(
+    legible_list: list[str], planunit_insert_dict: dict, x_believer: BelieverUnit
 ):
     _problem_bool_str = "problem_bool"
     for planunit_atom in planunit_insert_dict.values():
@@ -342,8 +346,8 @@ def add_owner_planunit_insert_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_owner_planunit_update_to_legible_list(
-    legible_list: list[str], planunit_update_dict: dict, x_owner: OwnerUnit
+def add_believer_planunit_update_to_legible_list(
+    legible_list: list[str], planunit_update_dict: dict, x_believer: BelieverUnit
 ):
     _problem_bool_str = "problem_bool"
     for planunit_atom in planunit_update_dict.values():
@@ -380,8 +384,8 @@ def add_owner_planunit_update_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_owner_planunit_delete_to_legible_list(
-    legible_list: list[str], planunit_delete_dict: dict, x_owner: OwnerUnit
+def add_believer_planunit_delete_to_legible_list(
+    legible_list: list[str], planunit_delete_dict: dict, x_believer: BelieverUnit
 ):
     for planunit_atom in planunit_delete_dict.values():
         rope_value = planunit_atom.get_value("plan_rope")
@@ -389,8 +393,8 @@ def add_owner_planunit_delete_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_owner_plan_awardlink_insert_to_legible_list(
-    legible_list: list[str], plan_awardlink_insert_dict: dict, x_owner: OwnerUnit
+def add_believer_plan_awardlink_insert_to_legible_list(
+    legible_list: list[str], plan_awardlink_insert_dict: dict, x_believer: BelieverUnit
 ):
     for rope_dict in plan_awardlink_insert_dict.values():
         for plan_awardlink_atom in rope_dict.values():
@@ -402,8 +406,8 @@ def add_owner_plan_awardlink_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_owner_plan_awardlink_update_to_legible_list(
-    legible_list: list[str], plan_awardlink_update_dict: dict, x_owner: OwnerUnit
+def add_believer_plan_awardlink_update_to_legible_list(
+    legible_list: list[str], plan_awardlink_update_dict: dict, x_believer: BelieverUnit
 ):
     for rope_dict in plan_awardlink_update_dict.values():
         for plan_awardlink_atom in rope_dict.values():
@@ -420,8 +424,8 @@ def add_owner_plan_awardlink_update_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_owner_plan_awardlink_delete_to_legible_list(
-    legible_list: list[str], plan_awardlink_delete_dict: dict, x_owner: OwnerUnit
+def add_believer_plan_awardlink_delete_to_legible_list(
+    legible_list: list[str], plan_awardlink_delete_dict: dict, x_believer: BelieverUnit
 ):
     for rope_dict in plan_awardlink_delete_dict.values():
         for plan_awardlink_atom in rope_dict.values():
@@ -431,8 +435,8 @@ def add_owner_plan_awardlink_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_owner_plan_reasonunit_insert_to_legible_list(
-    legible_list: list[str], plan_reasonunit_insert_dict: dict, x_owner: OwnerUnit
+def add_believer_plan_reasonunit_insert_to_legible_list(
+    legible_list: list[str], plan_reasonunit_insert_dict: dict, x_believer: BelieverUnit
 ):
     for rope_dict in plan_reasonunit_insert_dict.values():
         for plan_reasonunit_atom in rope_dict.values():
@@ -447,8 +451,8 @@ def add_owner_plan_reasonunit_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_owner_plan_reasonunit_update_to_legible_list(
-    legible_list: list[str], plan_reasonunit_update_dict: dict, x_owner: OwnerUnit
+def add_believer_plan_reasonunit_update_to_legible_list(
+    legible_list: list[str], plan_reasonunit_update_dict: dict, x_believer: BelieverUnit
 ):
     for rope_dict in plan_reasonunit_update_dict.values():
         for plan_reasonunit_atom in rope_dict.values():
@@ -464,8 +468,8 @@ def add_owner_plan_reasonunit_update_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_owner_plan_reasonunit_delete_to_legible_list(
-    legible_list: list[str], plan_reasonunit_delete_dict: dict, x_owner: OwnerUnit
+def add_believer_plan_reasonunit_delete_to_legible_list(
+    legible_list: list[str], plan_reasonunit_delete_dict: dict, x_believer: BelieverUnit
 ):
     for rope_dict in plan_reasonunit_delete_dict.values():
         for plan_reasonunit_atom in rope_dict.values():
@@ -475,10 +479,10 @@ def add_owner_plan_reasonunit_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_owner_reason_premiseunit_insert_to_legible_list(
+def add_believer_reason_premiseunit_insert_to_legible_list(
     legible_list: list[str],
     plan_reason_premiseunit_insert_dict: dict,
-    x_owner: OwnerUnit,
+    x_believer: BelieverUnit,
 ):
     for rope_dict in plan_reason_premiseunit_insert_dict.values():
         for rcontext_dict in rope_dict.values():
@@ -499,10 +503,10 @@ def add_owner_reason_premiseunit_insert_to_legible_list(
                 legible_list.append(x_str)
 
 
-def add_owner_reason_premiseunit_update_to_legible_list(
+def add_believer_reason_premiseunit_update_to_legible_list(
     legible_list: list[str],
     plan_reason_premiseunit_update_dict: dict,
-    x_owner: OwnerUnit,
+    x_believer: BelieverUnit,
 ):
     for rope_dict in plan_reason_premiseunit_update_dict.values():
         for rcontext_dict in rope_dict.values():
@@ -523,10 +527,10 @@ def add_owner_reason_premiseunit_update_to_legible_list(
                 legible_list.append(x_str)
 
 
-def add_owner_reason_premiseunit_delete_to_legible_list(
+def add_believer_reason_premiseunit_delete_to_legible_list(
     legible_list: list[str],
     plan_reason_premiseunit_delete_dict: dict,
-    x_owner: OwnerUnit,
+    x_believer: BelieverUnit,
 ):
     for rope_dict in plan_reason_premiseunit_delete_dict.values():
         for rcontext_dict in rope_dict.values():
@@ -538,8 +542,8 @@ def add_owner_reason_premiseunit_delete_to_legible_list(
                 legible_list.append(x_str)
 
 
-def add_owner_plan_laborlink_insert_to_legible_list(
-    legible_list: list[str], plan_laborlink_insert_dict: dict, x_owner: OwnerUnit
+def add_believer_plan_laborlink_insert_to_legible_list(
+    legible_list: list[str], plan_laborlink_insert_dict: dict, x_believer: BelieverUnit
 ):
     for rope_dict in plan_laborlink_insert_dict.values():
         for plan_laborlink_atom in rope_dict.values():
@@ -549,8 +553,8 @@ def add_owner_plan_laborlink_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_owner_plan_laborlink_delete_to_legible_list(
-    legible_list: list[str], plan_laborlink_delete_dict: dict, x_owner: OwnerUnit
+def add_believer_plan_laborlink_delete_to_legible_list(
+    legible_list: list[str], plan_laborlink_delete_dict: dict, x_believer: BelieverUnit
 ):
     for rope_dict in plan_laborlink_delete_dict.values():
         for plan_laborlink_atom in rope_dict.values():
@@ -560,8 +564,8 @@ def add_owner_plan_laborlink_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_owner_plan_healerlink_insert_to_legible_list(
-    legible_list: list[str], plan_healerlink_insert_dict: dict, x_owner: OwnerUnit
+def add_believer_plan_healerlink_insert_to_legible_list(
+    legible_list: list[str], plan_healerlink_insert_dict: dict, x_believer: BelieverUnit
 ):
     for rope_dict in plan_healerlink_insert_dict.values():
         for plan_healerlink_atom in rope_dict.values():
@@ -571,8 +575,8 @@ def add_owner_plan_healerlink_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_owner_plan_healerlink_delete_to_legible_list(
-    legible_list: list[str], plan_healerlink_delete_dict: dict, x_owner: OwnerUnit
+def add_believer_plan_healerlink_delete_to_legible_list(
+    legible_list: list[str], plan_healerlink_delete_dict: dict, x_believer: BelieverUnit
 ):
     for rope_dict in plan_healerlink_delete_dict.values():
         for plan_healerlink_atom in rope_dict.values():
@@ -582,8 +586,8 @@ def add_owner_plan_healerlink_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_owner_plan_factunit_insert_to_legible_list(
-    legible_list: list[str], plan_factunit_insert_dict: dict, x_owner: OwnerUnit
+def add_believer_plan_factunit_insert_to_legible_list(
+    legible_list: list[str], plan_factunit_insert_dict: dict, x_believer: BelieverUnit
 ):
     for rope_dict in plan_factunit_insert_dict.values():
         for plan_factunit_atom in rope_dict.values():
@@ -600,8 +604,8 @@ def add_owner_plan_factunit_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_owner_plan_factunit_update_to_legible_list(
-    legible_list: list[str], plan_factunit_update_dict: dict, x_owner: OwnerUnit
+def add_believer_plan_factunit_update_to_legible_list(
+    legible_list: list[str], plan_factunit_update_dict: dict, x_believer: BelieverUnit
 ):
     for rope_dict in plan_factunit_update_dict.values():
         for plan_factunit_atom in rope_dict.values():
@@ -618,8 +622,8 @@ def add_owner_plan_factunit_update_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_owner_plan_factunit_delete_to_legible_list(
-    legible_list: list[str], plan_factunit_delete_dict: dict, x_owner: OwnerUnit
+def add_believer_plan_factunit_delete_to_legible_list(
+    legible_list: list[str], plan_factunit_delete_dict: dict, x_believer: BelieverUnit
 ):
     for rope_dict in plan_factunit_delete_dict.values():
         for plan_factunit_atom in rope_dict.values():

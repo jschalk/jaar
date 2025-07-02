@@ -17,8 +17,8 @@ def get_module_temp_dir():
     return "src\\a14_keep_logic\\test\\_util\\belief_mstr\\beliefs"
 
 
-def temp_owner_name():
-    return "ex_owner04"
+def temp_believer_name():
+    return "ex_believer04"
 
 
 @pytest_fixture()
@@ -38,7 +38,10 @@ def get_texas_rope() -> RopeTerm:
 
 def get_texas_hubunit() -> HubUnit:
     return hubunit_shop(
-        get_module_temp_dir(), temp_belief_label(), temp_owner_name(), get_texas_rope()
+        get_module_temp_dir(),
+        temp_belief_label(),
+        temp_believer_name(),
+        get_texas_rope(),
     )
 
 

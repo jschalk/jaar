@@ -3,6 +3,7 @@ from src.a01_term_logic.term import (
     AcctName,
     AxiomLabel,
     BeliefLabel,
+    BelieverName,
     EporTerm,
     EventInt,
     FaceName,
@@ -11,7 +12,6 @@ from src.a01_term_logic.term import (
     KnotTerm,
     LabelTerm,
     NameTerm,
-    OwnerName,
     RopeTerm,
     TitleTerm,
     default_knot_if_None,
@@ -88,15 +88,15 @@ def test_HealerName_exists():
     assert inspect_getdoc(bob_healer_str) == doc_str
 
 
-def test_OwnerName_exists():
+def test_BelieverName_exists():
     # ESTABLISH
     bob_str = "Bob"
     # WHEN
-    bob_OwnerName_str = OwnerName(bob_str)
+    bob_BelieverName_str = BelieverName(bob_str)
     # THEN
-    assert bob_OwnerName_str == bob_str
-    doc_str = "A NameTerm used to identify a OwnerUnit's owner"
-    assert inspect_getdoc(bob_OwnerName_str) == doc_str
+    assert bob_BelieverName_str == bob_str
+    doc_str = "A NameTerm used to identify a BelieverUnit's believer"
+    assert inspect_getdoc(bob_BelieverName_str) == doc_str
 
 
 def test_AcctName_exists():
@@ -106,7 +106,7 @@ def test_AcctName_exists():
     bob_AcctName = AcctName(bob_str)
     # THEN
     assert bob_AcctName == bob_str
-    doc_str = "Every AcctName object is OwnerName, must follow OwnerName format."
+    doc_str = "Every AcctName object is BelieverName, must follow BelieverName format."
     assert inspect_getdoc(bob_AcctName) == doc_str
 
 

@@ -3,15 +3,15 @@ from pandas import DataFrame
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.a00_data_toolbox.file_toolbox import count_dirs_files, create_path, save_file
-from src.a06_owner_logic.test._util.a06_str import acct_name_str
+from src.a06_believer_logic.test._util.a06_str import acct_name_str
 from src.a07_timeline_logic.test._util.a07_str import creg_str, time_str
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a11_bud_logic.test._util.a11_str import (
     amount_str,
     belief_label_str,
+    believer_name_str,
     bud_time_str,
     celldepth_str,
-    owner_name_str,
     quota_str,
     tran_time_str,
 )
@@ -63,7 +63,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         face_name_str(),
         event_int_str(),
         belief_label_str(),
-        owner_name_str(),
+        believer_name_str(),
         acct_name_str(),
         otx_name_str(),
         inx_name_str(),
@@ -87,16 +87,16 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
     beliefunit_sound_raw = create_prime_tablename("beliefunit", "s", "raw")
     beliefunit_sound_agg = create_prime_tablename("beliefunit", "s", "agg")
     beliefunit_sound_vld = create_prime_tablename("beliefunit", "s", "vld")
-    onrunit_sound_put_raw = create_prime_tablename("ownerunit", "s", "raw", "put")
-    onrunit_sound_put_agg = create_prime_tablename("ownerunit", "s", "agg", "put")
-    onrunit_sound_put_vld = create_prime_tablename("ownerunit", "s", "vld", "put")
+    onrunit_sound_put_raw = create_prime_tablename("believerunit", "s", "raw", "put")
+    onrunit_sound_put_agg = create_prime_tablename("believerunit", "s", "agg", "put")
+    onrunit_sound_put_vld = create_prime_tablename("believerunit", "s", "vld", "put")
     onracct_sound_put_raw = create_prime_tablename("onracct", "s", "raw", "put")
     onracct_sound_put_agg = create_prime_tablename("onracct", "s", "agg", "put")
     onracct_sound_put_vld = create_prime_tablename("onracct", "s", "vld", "put")
     beliefunit_voice_raw = create_prime_tablename("beliefunit", "v", "raw")
     beliefunit_voice_agg = create_prime_tablename("beliefunit", "v", "agg")
-    onrunit_voice_put_raw = create_prime_tablename("ownerunit", "v", "raw", "put")
-    onrunit_voice_put_agg = create_prime_tablename("ownerunit", "v", "agg", "put")
+    onrunit_voice_put_raw = create_prime_tablename("believerunit", "v", "raw", "put")
+    onrunit_voice_put_agg = create_prime_tablename("believerunit", "v", "agg", "put")
     onracct_voice_put_raw = create_prime_tablename("onracct", "v", "raw", "put")
     onracct_voice_put_agg = create_prime_tablename("onracct", "v", "agg", "put")
     mstr_dir = fay_world._belief_mstr_dir
@@ -143,8 +143,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         assert not db_table_exists(cursor, belief_acct_nets_str())
         assert not db_table_exists(cursor, belief_kpi001_acct_nets_str())
 
-        # # create ownerunits
-        # self.owner_tables_to_event_owner_csvs(cursor)
+        # # create believerunits
+        # self.believer_tables_to_event_believer_csvs(cursor)
 
         # # create all belief_job and mandate reports
         # self.calc_belief_bud_acct_mandate_net_ledgers()
@@ -154,12 +154,12 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
 
         # THEN
         # select_pidgin_core = f"SELECT * FROM {pidcore_sound_vld}"
-        # select_ownerunit_put = f"SELECT * FROM {onrunit_sound_put_agg}"
+        # select_believerunit_put = f"SELECT * FROM {onrunit_sound_put_agg}"
         # select_onracct_put = f"SELECT * FROM {onracct_sound_put_agg}"
         # select_beliefunit_put_raw = f"SELECT * FROM {beliefunit_sound_raw}"
         # select_beliefunit_put_agg = f"SELECT * FROM {beliefunit_sound_agg}"
         # print(f"{cursor.execute(select_pidgin_core).fetchall()=}")
-        # print(f"{cursor.execute(select_ownerunit_put).fetchall()=}")
+        # print(f"{cursor.execute(select_believerunit_put).fetchall()=}")
         # print(f"{cursor.execute(select_onracct_put).fetchall()=}")
         # print(f"{cursor.execute(select_beliefunit_put_raw).fetchall()=}")
         # print(f"{cursor.execute(select_beliefunit_put_agg).fetchall()=}")
@@ -223,7 +223,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         face_name_str(),
         event_int_str(),
         belief_label_str(),
-        owner_name_str(),
+        believer_name_str(),
         acct_name_str(),
         otx_name_str(),
         inx_name_str(),
@@ -240,7 +240,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         event_int_str(),
         face_name_str(),
         belief_label_str(),
-        owner_name_str(),
+        believer_name_str(),
         bud_time_str(),
         quota_str(),
         celldepth_str(),
@@ -266,14 +266,14 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
     pidcore_sound_vld = create_prime_tablename("pidcore", "s", "vld")
     beliefunit_sound_raw = create_prime_tablename("beliefunit", "s", "raw")
     beliefunit_sound_agg = create_prime_tablename("beliefunit", "s", "agg")
-    onrunit_sound_put_raw = create_prime_tablename("ownerunit", "s", "raw", "put")
-    onrunit_sound_put_agg = create_prime_tablename("ownerunit", "s", "agg", "put")
+    onrunit_sound_put_raw = create_prime_tablename("believerunit", "s", "raw", "put")
+    onrunit_sound_put_agg = create_prime_tablename("believerunit", "s", "agg", "put")
     onracct_sound_put_raw = create_prime_tablename("onracct", "s", "raw", "put")
     onracct_sound_put_agg = create_prime_tablename("onracct", "s", "agg", "put")
     beliefunit_voice_raw = create_prime_tablename("beliefunit", "v", "raw")
     beliefunit_voice_agg = create_prime_tablename("beliefunit", "v", "agg")
-    onrunit_voice_put_raw = create_prime_tablename("ownerunit", "v", "raw", "put")
-    onrunit_voice_put_agg = create_prime_tablename("ownerunit", "v", "agg", "put")
+    onrunit_voice_put_raw = create_prime_tablename("believerunit", "v", "raw", "put")
+    onrunit_voice_put_agg = create_prime_tablename("believerunit", "v", "agg", "put")
     onracct_voice_put_raw = create_prime_tablename("onracct", "v", "raw", "put")
     onracct_voice_put_agg = create_prime_tablename("onracct", "v", "agg", "put")
     mstr_dir = fay_world._belief_mstr_dir
@@ -318,8 +318,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         assert not db_table_exists(cursor, belief_kpi001_acct_nets_str())
         # self.belief_agg_tables_to_belief_ote1_agg(cursor)
 
-        # # create ownerunits
-        # self.owner_tables_to_event_owner_csvs(cursor)
+        # # create believerunits
+        # self.believer_tables_to_event_believer_csvs(cursor)
 
         # # create all belief_job and mandate reports
         # self.calc_belief_bud_acct_mandate_net_ledgers()
@@ -380,7 +380,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario2_PopulateBeliefT
         event_int_str(),
         face_name_str(),
         belief_label_str(),
-        owner_name_str(),
+        believer_name_str(),
         acct_name_str(),
         tran_time_str(),
         amount_str(),
@@ -420,7 +420,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario3_WhenNoBeliefIde
         event_int_str(),
         face_name_str(),
         belief_label_str(),
-        owner_name_str(),
+        believer_name_str(),
         acct_name_str(),
     ]
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
@@ -495,7 +495,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
         event_int_str(),
         face_name_str(),
         belief_label_str(),
-        owner_name_str(),
+        believer_name_str(),
         bud_time_str(),
         quota_str(),
         celldepth_str(),
@@ -522,7 +522,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
         event_int_str(),
         face_name_str(),
         belief_label_str(),
-        owner_name_str(),
+        believer_name_str(),
         acct_name_str(),
     ]
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
@@ -573,7 +573,7 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         face_name_str(),
         event_int_str(),
         belief_label_str(),
-        owner_name_str(),
+        believer_name_str(),
         acct_name_str(),
         otx_name_str(),
         inx_name_str(),
@@ -590,7 +590,7 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         event_int_str(),
         face_name_str(),
         belief_label_str(),
-        owner_name_str(),
+        believer_name_str(),
         bud_time_str(),
         quota_str(),
         celldepth_str(),
@@ -623,14 +623,22 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         pidcore_sound_vld = create_prime_tablename("pidcore", "s", "vld")
         beliefunit_sound_raw = create_prime_tablename("beliefunit", "s", "raw")
         beliefunit_sound_agg = create_prime_tablename("beliefunit", "s", "agg")
-        onrunit_sound_put_raw = create_prime_tablename("ownerunit", "s", "raw", "put")
-        onrunit_sound_put_agg = create_prime_tablename("ownerunit", "s", "agg", "put")
+        onrunit_sound_put_raw = create_prime_tablename(
+            "believerunit", "s", "raw", "put"
+        )
+        onrunit_sound_put_agg = create_prime_tablename(
+            "believerunit", "s", "agg", "put"
+        )
         onracct_sound_put_raw = create_prime_tablename("onracct", "s", "raw", "put")
         onracct_sound_put_agg = create_prime_tablename("onracct", "s", "agg", "put")
         beliefunit_voice_raw = create_prime_tablename("beliefunit", "v", "raw")
         beliefunit_voice_agg = create_prime_tablename("beliefunit", "v", "agg")
-        onrunit_voice_put_raw = create_prime_tablename("ownerunit", "v", "raw", "put")
-        onrunit_voice_put_agg = create_prime_tablename("ownerunit", "v", "agg", "put")
+        onrunit_voice_put_raw = create_prime_tablename(
+            "believerunit", "v", "raw", "put"
+        )
+        onrunit_voice_put_agg = create_prime_tablename(
+            "believerunit", "v", "agg", "put"
+        )
         onracct_voice_put_raw = create_prime_tablename("onracct", "v", "raw", "put")
         onracct_voice_put_agg = create_prime_tablename("onracct", "v", "agg", "put")
 
