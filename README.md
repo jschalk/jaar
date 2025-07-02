@@ -13,14 +13,14 @@ JAAR Version 0.0.0
 
 'jaar' is a tool that helps me listen to the people important to me in my life.  I hope it can help you too. Let's assume I want to listen to you. If you give me a list of things that are important to you I want to be able to take your list, combine it with the lists of all the others I care about and get a output of a list of things I should do and metrics that describe my ability to do things . jaar does this for all   
 
-'jaar' is based on the philosohpy of Emmanuel Levinas (1906-1995) as expressed in his book "Totality and Infinity: An Essay on Exteriority" (translated by Lingis, 1969) and taught to me by Jules Simon PhD (born 1959) Professor at The University of Texas at El Paso (UTEP). I took Jules's course "Levinas: Phenomenology of the Ethical" in 2014 and am still working through the implications. The most important idea that motivated jaar was how Levinas describes murder as the act of not listening. It is painful to really listen, to listen in such a rope as to not know what is going to be said. To take in the suffering of the other person and bring them into myself and change myself in ropes that are by definition imaginable. Because if I could imagine them then they would not be a change. By definition I'm only listening if it changes me in ropes I can't predict. 
+'jaar' is based on the philosohpy of Emmanuel Levinas (1906-1995) as expressed in his book "Totality and Infinity: An Essay on Exteriority" (translated by Lingis, 1969) and taught to me by Jules Simon PhD (born 1959) Professor at The University of Texas at El Paso (UTEP). I took Jules's course "Levinas: Phenomenology of the Ethical" in 2014 and am still working through the implications. The most important idea that motivated jaar was how Levinas describes murder as the act of not listening. It is painful to really listen, to listen in such a rope as to not know what is going to be said. To take in the suffering of the Other and bring them into myself and change myself in ropes that are by definition imaginable. Because if I could imagine them then they would not be a change. By definition I'm only listening if it changes me in ropes I can't predict. 
 
 So how do I listen? jaar has an engine for converting the declarations (as data) into task lists. How to input the data? The most accessible method is using excel sheets. 
 
 # 0.0.1 "Beliefs" The foundation of jaar
-For Levinas all of reality is born from the face to face encounter. The same (me) welcomes the other person through the Face. The Face of the other tells me it's suffering and it's suffering becomes my suffering. I then BELIEF to change who I am to ease that suffering. The suffering is infinitly deep and beyond my complete understanding so when I belief to respond to that suffering I am acting with confidence that I understand what the suffering is and that I know how to respond. That confidence stops the listening process, the Belief cuts the infinite into the finite and is the foundation for a world. When that Belief is created it can create a world. Worlds can hold a infinite amount of human experience. A small subset of that is logical systems. jaar is uses computers to build logic.
+For Levinas all of reality is born from the face to face encounter. The same (me) welcomes the Other through the Face. The Face of the other tells me it's suffering and it's suffering becomes my suffering. I then BELIEF to change who I am to ease that suffering. The suffering is infinitly deep and beyond my complete understanding so when I belief to respond to that suffering I am acting with confidence that I understand what the suffering is and that I know how to respond. That confidence stops the listening process, the Belief cuts the infinite into the finite and is the foundation for a world. When that Belief is created it can create a world. Worlds can hold a infinite amount of human experience. A small subset of that is logical systems. jaar is uses computers to build logic.
 
-A Belief can create a world or change a current world. Each person can only make one belief at a time so a world that has been built by multiple beliefs implies each belief is from a different time. jaar describes the passage of time by *event_ints*. *event_int* is alropes an integer. 
+A Belief can create a world or change a current world. Each believer can only make one belief at a time so a world that has been built by multiple beliefs implies each belief is from a different time. jaar describes the passage of time by *event_ints*. *event_int* is alropes an integer. 
 
 For jaar all data must have *event_int*, *face_name*, *belief_label*. These are the required keys.
 
@@ -36,15 +36,15 @@ For jaar all data must have *event_int*, *face_name*, *belief_label*. These are 
 
 When jaar processes example 0.1.0 it creates a Belief labeled "OxboxDean" that contains believers Emmanuel and Dean and a single transaction of 7000 OxboxDean coins from Emmanuel to Dean. Here's the status metrics:
 | belief_label | believer_name | belief_fund_amount | belief_fund_rank | belief_tasks |
-|-----------|------------|-----------------|---------------|-----------|
-| OxboxDean |  Emmanuel  |     -7000       |       2       |     0     |
-| OxboxDean |    Dean    |      7000       |       1       |     0     |
+|--------------|---------------|--------------------|------------------|--------------|
+|  OxboxDean   |    Emmanuel   |       -7000        |         2        |       0      |
+|  OxboxDean   |      Dean     |        7000        |         1        |       0      |
 
 
 Output stance: emmanuel_stance.xlsx, sheet "br00000"
 | event_int | face_name | belief_label | believer_name | acct_name | tran_time | amount |
-|-----------|-----------|-----------|------------|-----------|-----------|--------|
-|    77     | Emmanuel  | OxboxDean |  Emmanuel  |    Dean   |    891    |  7000  |
+|-----------|-----------|--------------|---------------|-----------|-----------|--------|
+|    77     | Emmanuel  |   OxboxDean  |    Emmanuel   |    Dean   |    891    |  7000  |
 
 
 <!-- # Input Example Excel file 0.1.2: fizz2.xlsx with sheet "br00000_buzz2" 
