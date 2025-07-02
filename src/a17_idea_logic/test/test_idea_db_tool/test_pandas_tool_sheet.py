@@ -260,11 +260,11 @@ def dst_dir(tmp_path):
     return tmp_path / "destination"
 
 
-def test_split_excel_into_dirs_RaisesErrorWhenColumnIsInvalid(
-    sample_excel_file, dst_dir
-):
+def test_split_excel_into_dirs_RaisesErrorWhenColumnIsInvalid(sample_excel_file):
     """Test handling of an invalid column."""
-    # ESTABLISH / WHEN / THEN
+    # ESTABLISH
+    dst_dir = create_path(get_module_temp_dir(), "dst")
+    # WHEN / THEN
     with pytest_raises(ValueError, match="Column 'InvalidColumn' does not exist"):
         split_excel_into_dirs(
             sample_excel_file, dst_dir, "InvalidColumn", "filename", "sheet5"
@@ -272,10 +272,11 @@ def test_split_excel_into_dirs_RaisesErrorWhenColumnIsInvalid(
 
 
 def test_split_excel_into_dirs_CreatesFilesWhenColumnIsValid(
-    sample_excel_file, dst_dir
+    env_dir_setup_cleanup, sample_excel_file
 ):
     """Test splitting an Excel file by a valid column."""
     # ESTABLISH
+    dst_dir = create_path(get_module_temp_dir(), "dst")
     x_filename = "Fay"
     a_dir = create_path(dst_dir, "A")
     b_dir = create_path(dst_dir, "B")
@@ -309,9 +310,13 @@ def test_split_excel_into_dirs_CreatesFilesWhenColumnIsValid(
     pandas_testing_assert_frame_equal(c_df, c_expected)
 
 
-def test_split_excel_into_dirs_DoesNotChangeIfColumnIsEmpty(dst_dir):
+def test_split_excel_into_dirs_DoesNotChangeIfColumnIsEmpty(env_dir_setup_cleanup):
     """Test handling of an empty column."""
     # ESTABLISH Create an Excel file with an empty column
+    temp_dir = get_module_temp_dir()
+    dst_dir = create_path(temp_dir, "dst")
+    set_dir(dst_dir)
+    set_dir(temp_dir)
     data = {
         "ID": [1, 2, 3],
         "Dimen": [None, None, None],
@@ -326,6 +331,7 @@ def test_split_excel_into_dirs_DoesNotChangeIfColumnIsEmpty(dst_dir):
     split_excel_into_dirs(file_path, dst_dir, "Dimen", x_filename, "sheet5")
 
     # THEN Verify that no files are created
+    dst_dir = Path(dst_dir)
     created_files = list(dst_dir.iterdir())
     print(f"{created_files=}")
     assert not created_files
@@ -349,8 +355,9 @@ def test_split_excel_into_dirs_DoesCreateDirectoryIfColumnEmpty(sample_excel_fil
     assert list(nonexistent_dir.iterdir())
 
 
-def test_split_excel_into_dirs_SavesToCorrectFileNames(dst_dir):
+def test_split_excel_into_dirs_SavesToCorrectFileNames(env_dir_setup_cleanup):
     """Test handling of invalid characters in unique values for filenames."""
+    dst_dir = create_path(get_module_temp_dir(), "dst")
     # ESTABLISH Create a DataFrame with special characters in the splitting column
     data = {
         "ID": [1, 2],
