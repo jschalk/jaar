@@ -14,6 +14,87 @@ from src.a17_idea_logic.idea_csv_tool import (
 from src.a17_idea_logic.idea_db_tool import csv_dict_to_excel, prettify_excel
 from src.a18_etl_toolbox.tran_path import STANCE0001_FILENAME, create_stance0001_path
 
+# TODO #842
+# def add_to_br00042_csv(x_csv: str, cursor: sqlite3_Cursor, csv_delimiter: str) -> str:
+#     for x_otx, x_inx in x_pidginunit.titlemap.otx2inx.items():
+#         x_row = [
+#             x_pidginunit.face_name,
+#             str(x_pidginunit.event_int),
+#             x_otx,
+#             x_pidginunit.otx_knot,
+#             x_inx,
+#             x_pidginunit.inx_knot,
+#             x_pidginunit.unknown_str,
+#         ]
+#         x_csv += csv_delimiter.join(x_row)
+#         x_csv += "\n"
+#     return x_csv
+
+
+# def add_to_br00043_csv(x_csv: str, cursor: sqlite3_Cursor, csv_delimiter: str) -> str:
+#     for x_otx, x_inx in x_pidginunit.namemap.otx2inx.items():
+#         x_row = [
+#             x_pidginunit.face_name,
+#             str(x_pidginunit.event_int),
+#             x_otx,
+#             x_pidginunit.otx_knot,
+#             x_inx,
+#             x_pidginunit.inx_knot,
+#             x_pidginunit.unknown_str,
+#         ]
+#         x_csv += csv_delimiter.join(x_row)
+#         x_csv += "\n"
+#     return x_csv
+
+
+# def add_to_br00044_csv(x_csv: str, cursor: sqlite3_Cursor, csv_delimiter: str) -> str:
+#     for x_otx, x_inx in x_pidginunit.labelmap.otx2inx.items():
+#         x_row = [
+#             x_pidginunit.face_name,
+#             str(x_pidginunit.event_int),
+#             x_otx,
+#             x_pidginunit.otx_knot,
+#             x_inx,
+#             x_pidginunit.inx_knot,
+#             x_pidginunit.unknown_str,
+#         ]
+#         x_csv += csv_delimiter.join(x_row)
+#         x_csv += "\n"
+#     return x_csv
+
+
+# def add_to_br00045_csv(x_csv: str, cursor: sqlite3_Cursor, csv_delimiter: str) -> str:
+#     for x_otx, x_inx in x_pidginunit.ropemap.otx2inx.items():
+#         x_row = [
+#             x_pidginunit.face_name,
+#             str(x_pidginunit.event_int),
+#             x_otx,
+#             x_pidginunit.otx_knot,
+#             x_inx,
+#             x_pidginunit.inx_knot,
+#             x_pidginunit.unknown_str,
+#         ]
+#         x_csv += csv_delimiter.join(x_row)
+#         x_csv += "\n"
+#     return x_csv
+
+
+# def add_pidginunit_to_stance_csv_strs(
+#     x_pidgin: PidginUnit, belief_csv_strs: dict[str, str], csv_delimiter: str
+# ) -> str:
+#     br00042_csv = belief_csv_strs.get("br00042")
+#     br00043_csv = belief_csv_strs.get("br00043")
+#     br00044_csv = belief_csv_strs.get("br00044")
+#     br00045_csv = belief_csv_strs.get("br00045")
+#     br00042_csv = add_to_br00042_csv(br00042_csv, x_pidgin, csv_delimiter)
+#     br00043_csv = add_to_br00043_csv(br00043_csv, x_pidgin, csv_delimiter)
+#     br00044_csv = add_to_br00044_csv(br00044_csv, x_pidgin, csv_delimiter)
+#     br00045_csv = add_to_br00045_csv(br00045_csv, x_pidgin, csv_delimiter)
+#     belief_csv_strs["br00042"] = br00042_csv
+#     belief_csv_strs["br00043"] = br00043_csv
+#     belief_csv_strs["br00044"] = br00044_csv
+#     belief_csv_strs["br00045"] = br00045_csv
+
 
 def collect_stance_csv_strs(belief_mstr_dir: str) -> dict[str, str]:
     x_csv_strs = create_init_stance_idea_csv_strs()
