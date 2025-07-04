@@ -182,18 +182,18 @@ def test_HubUnit_create_treasury_db_DoesNotOverWriteDBIfExists(
     x_file_str = "Texas Dallas ElPaso"
     db_file = treasury_filename()
     save_file(
-        sue_hubunit.keep_dir(),
+        sue_hubunit.keep_path(),
         filename=db_file,
         file_str=x_file_str,
         replace=True,
     )
     assert os_path_exists(sue_hubunit.treasury_db_path())
-    assert open_file(sue_hubunit.keep_dir(), filename=db_file) == x_file_str
+    assert open_file(sue_hubunit.keep_path(), filename=db_file) == x_file_str
 
     # WHEN
     sue_hubunit.create_treasury_db_file()
     # THEN
-    assert open_file(sue_hubunit.keep_dir(), filename=db_file) == x_file_str
+    assert open_file(sue_hubunit.keep_path(), filename=db_file) == x_file_str
 
 
 def test_HubUnit_treasury_db_file_exists_ReturnsObj(env_dir_setup_cleanup):

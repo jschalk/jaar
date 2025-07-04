@@ -12,7 +12,7 @@ from src.a12_hub_toolbox.test._util.a12_env import (
 from src.a12_hub_toolbox.test._util.example_hub_atoms import get_texas_hubunit
 
 
-def test_HubUnit_create_keep_dir_if_missing_CreatesDirectory(env_dir_setup_cleanup):
+def test_HubUnit_create_keep_path_if_missing_CreatesDirectory(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
@@ -23,13 +23,13 @@ def test_HubUnit_create_keep_dir_if_missing_CreatesDirectory(env_dir_setup_clean
     texas_rope = create_rope(usa_rope, texas_str)
     a23_str = "amy23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_rope)
-    assert os_path_exists(sue_hubunit.keep_dir()) is False
+    assert os_path_exists(sue_hubunit.keep_path()) is False
 
     # WHEN
-    sue_hubunit.create_keep_dir_if_missing()
+    sue_hubunit.create_keep_path_if_missing()
 
     # THEN
-    assert os_path_exists(sue_hubunit.keep_dir())
+    assert os_path_exists(sue_hubunit.keep_path())
 
 
 def test_HubUnit_save_duty_believer_CorrectlySavesFile(env_dir_setup_cleanup):

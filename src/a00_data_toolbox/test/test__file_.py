@@ -6,11 +6,11 @@ from src.a00_data_toolbox.dict_toolbox import get_dict_from_json
 from src.a00_data_toolbox.file_toolbox import (
     can_usser_edit_paths,
     count_files,
+    create_directory_path,
     create_path,
     get_all_dirs_with_file,
     get_dir_file_strs,
     get_dir_filenames,
-    get_directory_path,
     get_immediate_subdir,
     get_integer_filenames,
     get_max_file_number,
@@ -463,7 +463,7 @@ def test_count_files_ReturnsNoneIfDirectoryDoesNotExist(
     assert dir_count is None
 
 
-def test_get_directory_path_ReturnsObj():
+def test_create_directory_path_ReturnsObj():
     # ESTABLISH
     texas_str = "texas"
     dallas_str = "dallas"
@@ -471,13 +471,13 @@ def test_get_directory_path_ReturnsObj():
     kern_str = "kern"
 
     # WHEN
-    texas_path = get_directory_path([texas_str])
-    dallas_path = get_directory_path([texas_str, dallas_str])
-    elpaso_path = get_directory_path([texas_str, elpaso_str])
-    kern_path = get_directory_path([texas_str, elpaso_str, kern_str])
+    texas_path = create_directory_path([texas_str])
+    dallas_path = create_directory_path([texas_str, dallas_str])
+    elpaso_path = create_directory_path([texas_str, elpaso_str])
+    kern_path = create_directory_path([texas_str, elpaso_str, kern_str])
 
     # THEN
-    assert "" == get_directory_path()
+    assert "" == create_directory_path()
     assert texas_path == f"{texas_str}"
     assert dallas_path == create_path(texas_str, dallas_str)
     assert elpaso_path == create_path(texas_str, elpaso_str)

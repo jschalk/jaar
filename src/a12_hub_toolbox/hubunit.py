@@ -4,10 +4,10 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.dict_toolbox import get_empty_set_if_None
 from src.a00_data_toolbox.file_toolbox import (
+    create_directory_path,
     create_path,
     delete_dir,
     get_dir_file_strs,
-    get_directory_path,
     get_integer_filenames,
     get_json_filename,
     get_max_file_number,
@@ -85,16 +85,16 @@ class _keep_ropeMissingException(Exception):
     pass
 
 
-def get_keep_dutys_dir(x_keep_dir: str) -> str:
-    return create_path(x_keep_dir, "dutys")
+def get_keep_dutys_dir(x_keep_path: str) -> str:
+    return create_path(x_keep_path, "dutys")
 
 
-def get_keep_visions_dir(x_keep_dir: str) -> str:
-    return create_path(x_keep_dir, "visions")
+def get_keep_visions_dir(x_keep_path: str) -> str:
+    return create_path(x_keep_path, "visions")
 
 
-def get_keep_grades_dir(x_keep_dir: str) -> str:
-    return create_path(x_keep_dir, "grades")
+def get_keep_grades_dir(x_keep_path: str) -> str:
+    return create_path(x_keep_path, "grades")
 
 
 @dataclass
@@ -146,6 +146,7 @@ class HubUnit:
         return f"{atom_number}.json"
 
     def atom_file_path(self, atom_number: int) -> str:
+        "Returns path: _atoms_dir/atom_number.json"
         return create_path(self._atoms_dir, self.atom_filename(atom_number))
 
     def _save_valid_atom_file(self, x_atom: BelieverAtom, file_number: int):
@@ -191,6 +192,8 @@ class HubUnit:
         return get_json_filename(pack_id)
 
     def pack_file_path(self, pack_id: int) -> str:
+        """Returns path: _packs/pack_id.json"""
+
         pack_filename = self.pack_filename(pack_id)
         return create_path(self._packs_dir, pack_filename)
 
@@ -332,36 +335,46 @@ class HubUnit:
         return gut_believer
 
     # keep management
-    def keep_dir(self) -> str:
+    def keep_path(self) -> str:
+        """Returns path: belief_label/planroot/keep_rope_dirs."""
+
         if self.keep_rope is None:
             raise _keep_ropeMissingException(
-                f"HubUnit '{self.believer_name}' cannot save to keep_dir because it does not have keep_rope."
+                f"HubUnit '{self.believer_name}' cannot save to keep_path because it does not have keep_rope."
             )
-        return get_keep_path(self, self.keep_rope)
+        return get_keep_rope_path(self, self.keep_rope)
 
-    def create_keep_dir_if_missing(self):
-        set_dir(self.keep_dir())
+    def create_keep_path_if_missing(self):
+        set_dir(self.keep_path())
 
     def treasury_db_path(self) -> str:
-        return create_path(self.keep_dir(), treasury_filename())
+        "Returns path: keep_path/treasury.db" ""
+
+        return create_path(self.keep_path(), treasury_filename())
 
     def duty_path(self, believer_name: BelieverName) -> str:
+        "Returns path: dutys_dir/believer_name"
+
         return create_path(self.dutys_dir(), get_json_filename(believer_name))
 
     def vision_path(self, believer_name: BelieverName) -> str:
+        "Returns path: visions_dir/believer_name.json"
+
         return create_path(self.visions_dir(), get_json_filename(believer_name))
 
     def grade_path(self, believer_name: BelieverName) -> str:
+        "Returns path: grades_dir/believer_name.json"
+
         return create_path(self.grades_dir(), get_json_filename(believer_name))
 
     def dutys_dir(self) -> str:
-        return get_keep_dutys_dir(self.keep_dir())
+        return get_keep_dutys_dir(self.keep_path())
 
     def visions_dir(self) -> str:
-        return get_keep_visions_dir(self.keep_dir())
+        return get_keep_visions_dir(self.keep_path())
 
     def grades_dir(self) -> str:
-        return get_keep_grades_dir(self.keep_dir())
+        return get_keep_grades_dir(self.keep_path())
 
     def get_visions_dir_filenames_list(self) -> list[str]:
         try:
@@ -462,7 +475,7 @@ class HubUnit:
         self.keep_rope = None
 
     def create_treasury_db_file(self) -> None:
-        self.create_keep_dir_if_missing()
+        self.create_keep_path_if_missing()
         db_path = self.treasury_db_path()
         conn = sqlite3_connect(db_path)
         conn.close()
@@ -505,10 +518,10 @@ def hubunit_shop(
     return x_hubunit
 
 
-def get_keep_path(x_hubunit: HubUnit, x_rope: LabelTerm) -> str:
-    """Get the path to the keep directory based on rope and belief_label."""
+def get_keep_rope_path(x_hubunit: HubUnit, x_rope: LabelTerm) -> str:
+    """Returns path: belief_label/planroot/keep_rope_dirs."""
     keep_root = "planroot"
     x_rope = rebuild_rope(x_rope, x_hubunit.belief_label, keep_root)
     x_list = get_all_rope_labels(x_rope, x_hubunit.knot)
-    keep_sub_path = get_directory_path(x_list=[*x_list])
+    keep_sub_path = create_directory_path(x_list=[*x_list])
     return create_path(x_hubunit._keeps_dir, keep_sub_path)

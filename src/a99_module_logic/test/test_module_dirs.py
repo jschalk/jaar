@@ -388,18 +388,7 @@ def test_Modules_MostFunctionsAreUniquelyNamed():
 
 
 def test_Modules_path_FunctionStructureAndFormat():
-    # ESTABLISH
-    excluded_functions = {
-        "atom_file_path",
-        "duty_path",
-        "get_db_path",
-        "grade_path",
-        "pack_file_path",
-        "treasury_db_path",
-        "vision_path",
-    }
-
-    # WHEN
+    # ESTABLISH / WHEN
     x_count = 0
     path_functions = {}
     for module_desc, module_dir in get_module_descs().items():
@@ -418,9 +407,8 @@ def test_Modules_path_FunctionStructureAndFormat():
 
     print(f"Total path functions found: {len(path_functions)}")
     for function_name, file_path in path_functions.items():
-        if function_name not in excluded_functions:
-            func_docstring = get_docstring(file_path, function_name)
-            print(f"docstring for {function_name}: \t{func_docstring}")
-            assert func_docstring is not None
+        func_docstring = get_docstring(file_path, function_name).replace("\n", "")
+        print(f"docstring for {function_name}: \t{func_docstring}")
+        assert func_docstring is not None
 
     print(f"Path functions: {path_functions.keys()=}")
