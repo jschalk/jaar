@@ -217,8 +217,8 @@ def _load_individual_idea_csv(
     x_hubunit._create_gut_from_packs()
 
 
-def load_idea_csv(belief_mstr_dir: str, x_file_dir: str, x_filename: str):
-    x_csv = open_file(x_file_dir, x_filename)
+def load_idea_csv(belief_mstr_dir: str, x_dir: str, x_filename: str):
+    x_csv = open_file(x_dir, x_filename)
     headers_list, headerless_csv = extract_csv_headers(x_csv)
     nested_csv = belief_label_believer_name_nested_csv_dict(
         headerless_csv, delimiter=","

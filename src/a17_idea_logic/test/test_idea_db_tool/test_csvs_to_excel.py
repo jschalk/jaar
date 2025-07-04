@@ -21,13 +21,13 @@ from src.a17_idea_logic.test._util.a17_env import (
 def test_csv_dict_to_excel_SavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     test_data = {"TestSheet": "A,B\n5,6\n7,8"}
-    x_file_dir = get_module_temp_dir()
+    x_dir = get_module_temp_dir()
     x_filename = "test_data.xlsx"
-    file_path = f"{x_file_dir}/{x_filename}"
+    file_path = f"{x_dir}/{x_filename}"
     assert os_path_exists(file_path) is False
 
     # WHEN
-    csv_dict_to_excel(test_data, x_file_dir, x_filename)
+    csv_dict_to_excel(test_data, x_dir, x_filename)
 
     # THEN
     assert os_path_exists(file_path)

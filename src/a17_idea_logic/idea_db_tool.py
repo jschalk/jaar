@@ -59,10 +59,10 @@ def get_ordered_csv(x_df: DataFrame, sorting_columns: list[str] = None) -> str:
     return x_df.to_csv(index=False).replace("\r", "")
 
 
-def open_csv(x_file_dir: str, x_filename: str = None) -> DataFrame:
-    if os_path_exists(create_path(x_file_dir, x_filename)) is False:
+def open_csv(x_dir: str, x_filename: str = None) -> DataFrame:
+    if os_path_exists(create_path(x_dir, x_filename)) is False:
         return None
-    return pandas_read_csv(create_path(x_file_dir, x_filename))
+    return pandas_read_csv(create_path(x_dir, x_filename))
 
 
 def get_sheet_names(x_path: str) -> list[str]:
