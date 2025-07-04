@@ -5,7 +5,6 @@ from src.a03_group_logic.group import awardlink_shop
 from src.a06_believer_logic.believer import believerunit_shop
 from src.a09_pack_logic.delta import believerdelta_shop
 from src.a09_pack_logic.pack import packunit_shop
-from src.a16_pidgin_logic.pidgin import pidginunit_shop
 from src.a17_idea_logic.idea import belief_build_from_df
 from src.a17_idea_logic.idea_csv_tool import (
     add_beliefunit_to_stance_csv_strs,
@@ -32,11 +31,6 @@ from src.a17_idea_logic.idea_csv_tool import (
     add_pack_to_br00028_csv,
     add_pack_to_br00029_csv,
     add_packunit_to_stance_csv_strs,
-    add_pidginunit_to_stance_csv_strs,
-    add_to_br00042_csv,
-    add_to_br00043_csv,
-    add_to_br00044_csv,
-    add_to_br00045_csv,
     create_init_stance_idea_csv_strs,
 )
 from src.a17_idea_logic.idea_db_tool import get_ordered_csv
@@ -624,149 +618,6 @@ def test_add_believerunit_to_stance_csv_strs_ReturnsObj():
     assert x_ideas.get("br00027") != br00027_header
     assert x_ideas.get("br00028") != br00028_header
     assert x_ideas.get("br00029") != br00029_header
-
-
-def test_add_to_br00042_csv_ReturnsObj():
-    # ESTABLISH
-    csv_delimiter = ","
-    x_ideas = create_init_stance_idea_csv_strs()
-    bob_str = "Bob"
-    event7 = 7
-    bob_otx_knot = ";"
-    bob_inx_knot = "/"
-    bob_unknown_str = "UNKNOWN"
-    bob7_pidginunit = pidginunit_shop(
-        bob_str, event7, bob_otx_knot, bob_inx_knot, bob_unknown_str
-    )
-    run_otx = "run"
-    run_inx = "cours"
-    bob7_pidginunit.set_otx2inx("TitleTerm", run_otx, run_inx)
-    csv_header = x_ideas.get("br00042")
-    print(f"{csv_header=}")
-
-    # WHEN
-    x_csv = add_to_br00042_csv(csv_header, bob7_pidginunit, csv_delimiter)
-
-    # THEN
-    run_row = f"{bob_str},{event7},{run_otx},{bob_otx_knot},{run_inx},{bob_inx_knot},{bob_unknown_str}\n"
-    assert x_csv == f"{csv_header}{run_row}"
-
-
-def test_add_to_br00043_csv_ReturnsObj():
-    # ESTABLISH
-    csv_delimiter = ","
-    x_ideas = create_init_stance_idea_csv_strs()
-    bob_str = "Bob"
-    event7 = 7
-    bob_otx_knot = ";"
-    bob_inx_knot = "/"
-    bob_unknown_str = "UNKNOWN"
-    bob7_pidginunit = pidginunit_shop(
-        bob_str, event7, bob_otx_knot, bob_inx_knot, bob_unknown_str
-    )
-    yao_otx = "Yao"
-    yao_inx = "YaoMing"
-    bob7_pidginunit.set_otx2inx("NameTerm", yao_otx, yao_inx)
-    csv_header = x_ideas.get("br00043")
-    print(f"{csv_header=}")
-
-    # WHEN
-    x_csv = add_to_br00043_csv(csv_header, bob7_pidginunit, csv_delimiter)
-
-    # THEN
-    bob_row = f"{bob_str},{event7},{yao_otx},{bob_otx_knot},{yao_inx},{bob_inx_knot},{bob_unknown_str}\n"
-    assert x_csv == f"{csv_header}{bob_row}"
-
-
-def test_add_to_br00044_csv_ReturnsObj():
-    # ESTABLISH
-    csv_delimiter = ","
-    x_ideas = create_init_stance_idea_csv_strs()
-    bob_str = "Bob"
-    event7 = 7
-    bob_otx_knot = ";"
-    bob_inx_knot = "/"
-    bob_unknown_str = "UNKNOWN"
-    bob7_pidginunit = pidginunit_shop(
-        bob_str, event7, bob_otx_knot, bob_inx_knot, bob_unknown_str
-    )
-    clean_otx = "clean"
-    clean_inx = "limpia"
-    bob7_pidginunit.set_otx2inx("LabelTerm", clean_otx, clean_inx)
-    csv_header = x_ideas.get("br00044")
-    print(f"{csv_header=}")
-
-    # WHEN
-    x_csv = add_to_br00044_csv(csv_header, bob7_pidginunit, csv_delimiter)
-
-    # THEN
-    bob_row = f"{bob_str},{event7},{clean_otx},{bob_otx_knot},{clean_inx},{bob_inx_knot},{bob_unknown_str}\n"
-    assert x_csv == f"{csv_header}{bob_row}"
-
-
-def test_add_to_br00045_csv_ReturnsObj():
-    # ESTABLISH
-    csv_delimiter = ","
-    x_ideas = create_init_stance_idea_csv_strs()
-    bob_str = "Bob"
-    event7 = 7
-    bob_otx_knot = ";"
-    bob_inx_knot = "/"
-    bob_unknown_str = "UNKNOWN"
-    bob7_pidginunit = pidginunit_shop(
-        bob_str, event7, bob_otx_knot, bob_inx_knot, bob_unknown_str
-    )
-    clean_otx = "clean"
-    clean_inx = "limpia"
-    bob7_pidginunit.set_otx2inx("RopeTerm", clean_otx, clean_inx)
-    csv_header = x_ideas.get("br00045")
-    print(f"{csv_header=}")
-
-    # WHEN
-    x_csv = add_to_br00045_csv(csv_header, bob7_pidginunit, csv_delimiter)
-
-    # THEN
-    bob_row = f"{bob_str},{event7},{clean_otx},{bob_otx_knot},{clean_inx},{bob_inx_knot},{bob_unknown_str}\n"
-    assert x_csv == f"{csv_header}{bob_row}"
-
-
-def test_add_pidginunit_to_stance_csv_strs_ReturnsObj():
-    # ESTABLISH
-    csv_delimiter = ","
-    x_ideas = create_init_stance_idea_csv_strs()
-    bob_str = "Bob"
-    event7 = 7
-    bob_otx_knot = ";"
-    bob_inx_knot = "/"
-    bob_unknown_str = "UNKNOWN"
-    bob7_pidginunit = pidginunit_shop(
-        bob_str, event7, bob_otx_knot, bob_inx_knot, bob_unknown_str
-    )
-    clean_otx = "clean"
-    clean_inx = "limpia"
-    bob7_pidginunit.set_otx2inx("RopeTerm", clean_otx, clean_inx)
-    yao_otx = "Yao"
-    yao_inx = "YaoMing"
-    bob7_pidginunit.set_otx2inx("NameTerm", yao_otx, yao_inx)
-    run_otx = "run"
-    run_inx = "cours"
-    bob7_pidginunit.set_otx2inx("TitleTerm", run_otx, run_inx)
-    clean_otx = "clean"
-    clean_inx = "limpia"
-    bob7_pidginunit.set_otx2inx("LabelTerm", clean_otx, clean_inx)
-    br00042_header = x_ideas.get("br00042")
-    br00043_header = x_ideas.get("br00043")
-    br00044_header = x_ideas.get("br00044")
-    br00045_header = x_ideas.get("br00045")
-
-    # WHEN
-    add_pidginunit_to_stance_csv_strs(bob7_pidginunit, x_ideas, csv_delimiter)
-
-    # THEN
-    assert x_ideas.get("br00042") != br00042_header
-    assert x_ideas.get("br00043") != br00043_header
-    assert x_ideas.get("br00044") != br00044_header
-    assert x_ideas.get("br00045") != br00045_header
 
 
 def test_add_pack_to_br00020_csv_ReturnsObj():

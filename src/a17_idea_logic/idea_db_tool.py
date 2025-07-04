@@ -328,7 +328,7 @@ def get_pragma_table_fetchall(table_columns):
 
 
 def save_table_to_csv(conn_or_cursor: sqlite3_Connection, dst_dir: str, tablename: str):
-    """given a cursor object, a directory, a tablename create csv of tablename"""
+    """given a cursor object, a directory, a tablename create tablename.csv file"""
 
     select_sqlstr = f"""SELECT * FROM {tablename};"""
     tables_rows = conn_or_cursor.execute(select_sqlstr).fetchall()
@@ -574,8 +574,3 @@ def update_event_int_in_excel_files(directory: str, value) -> None:
             with ExcelWriter(filepath, engine="xlsxwriter") as writer:
                 for sheet_name, df in updated_sheets.items():
                     df.to_excel(writer, sheet_name=sheet_name, index=False)
-
-
-# # TODO #834
-# def add_pidginunits_to_stance_csv_strs(csv_strs: dict[str, str], db_path: str):
-#     pass

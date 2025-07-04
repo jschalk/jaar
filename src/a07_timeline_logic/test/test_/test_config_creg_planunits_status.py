@@ -596,7 +596,8 @@ def test_BelieverUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Thursday_March2
     print(f"{len(sue_believerunit.get_agenda_dict())=} {yr2000_mar1day=}")
     print(f"{clean_plan.get_reasonheir(year_rope)._status=} \n")
     # TODO This should be zero but it comes back as 1
-    # assert len(sue_believerunit.get_agenda_dict()) == 0
+    print(f"{sue_believerunit.get_agenda_dict().keys()=}") == 1
+    assert len(sue_believerunit.get_agenda_dict()) == 1
 
     # WHEN / THEN
     sue_believerunit.add_fact(creg_rope, creg_rope, yr2000_mar2day, yr2000_mar3day)
