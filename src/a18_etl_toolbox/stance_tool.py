@@ -19,7 +19,6 @@ from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_tbl
 
 # TODO #842
 def add_to_br00042_csv(x_csv: str, cursor: sqlite3_Cursor, csv_delimiter: str) -> str:
-    # - [`br00042`](ideas/br00042.md): event_int, face_name, otx_title, inx_title, otx_knot, inx_knot, unknown_str
     pidtitl_s_vld_tablename = prime_tbl("PIDTITL", "s", "vld")
     pidcore_s_vld_tablename = prime_tbl("PIDCORE", "s", "vld")
 
@@ -51,18 +50,33 @@ ORDER BY
 
 
 def add_to_br00043_csv(x_csv: str, cursor: sqlite3_Cursor, csv_delimiter: str) -> str:
-    for x_otx, x_inx in x_pidginunit.namemap.otx2inx.items():
-        x_row = [
-            x_pidginunit.face_name,
-            str(x_pidginunit.event_int),
-            x_otx,
-            x_pidginunit.otx_knot,
-            x_inx,
-            x_pidginunit.inx_knot,
-            x_pidginunit.unknown_str,
-        ]
-        x_csv += csv_delimiter.join(x_row)
-        x_csv += "\n"
+    pidname_s_vld_tablename = prime_tbl("PIDNAME", "s", "vld")
+    pidcore_s_vld_tablename = prime_tbl("PIDCORE", "s", "vld")
+
+    select_sqlstr = f"""
+SELECT
+  "" event_int
+, pidname.face_name
+, pidname.otx_name
+, pidname.inx_name
+, pidcore.otx_knot
+, pidcore.inx_knot
+, pidcore.unknown_str
+FROM {pidname_s_vld_tablename} pidname
+JOIN {pidcore_s_vld_tablename} pidcore ON pidcore.face_name = pidname.face_name
+ORDER BY 
+  pidname.face_name
+, pidname.otx_name
+, pidname.inx_name
+, pidcore.otx_knot
+, pidcore.inx_knot
+, pidcore.unknown_str
+;
+"""
+    cursor.execute(select_sqlstr)
+    rows = cursor.fetchall()
+    for row in rows:
+        x_csv += f"{csv_delimiter.join(row)}\n"
     return x_csv
 
 

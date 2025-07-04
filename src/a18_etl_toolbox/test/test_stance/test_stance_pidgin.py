@@ -20,20 +20,13 @@ from src.a18_etl_toolbox.stance_tool import (
     collect_stance_csv_strs,
     create_stance0001_file,
 )
-from src.a18_etl_toolbox.test._util.a18_env import (
-    env_dir_setup_cleanup,
-    get_module_temp_dir,
-)
 from src.a18_etl_toolbox.tran_path import create_stance0001_path
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
     create_sound_and_voice_tables,
-    create_update_voice_raw_empty_inx_col_sqlstr,
-    create_update_voice_raw_existing_inx_col_sqlstr,
 )
 
 
-# TODO #842
 def test_add_to_br00042_csv_ReturnsObj():
     # ESTABLISH database with pidgin data
     # - [`br00042`](ideas/br00042.md): event_int, face_name, otx_title, inx_title, otx_knot, inx_knot, unknown_str
@@ -79,16 +72,13 @@ def test_add_to_br00042_csv_ReturnsObj():
         x_ideas = create_init_stance_idea_csv_strs()
         header_only_csv = x_ideas.get("br00042")
         print(f"{header_only_csv=}")
-        expected_header_only_csv = (
-            "event_int,face_name,otx_title,inx_title,otx_knot,inx_knot,unknown_str\n"
-        )
+        expected_header_only_csv = f"{event_int_str()},{face_name_str()},{otx_title_str()},{inx_title_str()},{otx_knot_str()},{inx_knot_str()},{unknown_str_str()}\n"
         assert header_only_csv == expected_header_only_csv
 
         # WHEN
         gen_csv = add_to_br00042_csv(header_only_csv, cursor, csv_delimiter)
 
         # THEN
-        # event_int, face_name, otx_title, inx_title, otx_knot, inx_knot, unknown_str
         sue_row = f",{sue_otx},{sue_otx},{sue_inx},{sue_otx_knot},{sue_inx_knot},{sue_unknown_str}\n"
         bob_row = f",{bob_otx},{bob_otx},{bob_inx},{bob_otx_knot},{bob_inx_knot},{bob_unknown_str}\n"
         expected_csv = f"{header_only_csv}{bob_row}{sue_row}"
@@ -97,9 +87,71 @@ def test_add_to_br00042_csv_ReturnsObj():
         assert gen_csv == expected_csv
 
 
+def test_add_to_br00043_csv_ReturnsObj():
+    # ESTABLISH database with pidgin data
+    # - [`br00043`](ideas/br00043.md): event_int, face_name, otx_name, inx_name, otx_knot, inx_knot, unknown_str
+    bob_otx = "Bob"
+    bob_inx = "Bobby"
+    sue_otx = "Sue"
+    sue_inx = "Suzy"
+    bob_otx_knot = ";"
+    bob_inx_knot = "/"
+    sue_otx_knot = "?"
+    sue_inx_knot = "."
+    sue_unknown_str = "Unknown3"
+    bob_unknown_str = "UNKNOWN4"
+    event1 = 1
+    event7 = 7
+
+    # Create database with manually entered pidgin data in the validated tables
+    with sqlite3_connect(":memory:") as db_conn:
+        cursor = db_conn.cursor()
+        create_sound_and_voice_tables(cursor)
+        pidname_dimen = pidgin_name_str()
+        pidname_s_vld_tablename = prime_tbl(pidname_dimen, "s", "vld")
+        insert_pidname_sqlstr = f"""
+INSERT INTO {pidname_s_vld_tablename}
+({event_int_str()}, {face_name_str()}, {otx_name_str()}, {inx_name_str()})
+VALUES
+  ({event1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
+, ({event7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
+;
+"""
+        cursor.execute(insert_pidname_sqlstr)
+
+        pidcore_s_vld_tablename = prime_tbl("pidcore", "s", "vld")
+        insert_pidcore_sqlstr = f"""
+INSERT INTO {pidcore_s_vld_tablename}
+({face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()})
+VALUES
+  ('{sue_otx}', '{sue_otx_knot}', '{sue_inx_knot}', '{sue_unknown_str}')
+, ('{bob_otx}', '{bob_otx_knot}', '{bob_inx_knot}', '{bob_unknown_str}')
+;
+"""
+        cursor.execute(insert_pidcore_sqlstr)
+
+        csv_delimiter = ","
+        x_ideas = create_init_stance_idea_csv_strs()
+        header_only_csv = x_ideas.get("br00043")
+        print(f"{header_only_csv=}")
+        expected_header_only_csv = f"{event_int_str()},{face_name_str()},{otx_name_str()},{inx_name_str()},{otx_knot_str()},{inx_knot_str()},{unknown_str_str()}\n"
+        assert header_only_csv == expected_header_only_csv
+
+        # WHEN
+        gen_csv = add_to_br00043_csv(header_only_csv, cursor, csv_delimiter)
+
+        # THEN
+        sue_row = f",{sue_otx},{sue_otx},{sue_inx},{sue_otx_knot},{sue_inx_knot},{sue_unknown_str}\n"
+        bob_row = f",{bob_otx},{bob_otx},{bob_inx},{bob_otx_knot},{bob_inx_knot},{bob_unknown_str}\n"
+        expected_csv = f"{header_only_csv}{bob_row}{sue_row}"
+        print(f"     {gen_csv=}")
+        print(f"{expected_csv=}")
+        assert gen_csv == expected_csv
+
+
+# TODO #842
 # def test_add_to_br00043_csv_ReturnsObj():
 #     # ESTABLISH
-#     # - [`br00043`](ideas/br00043.md): event_int, face_name, otx_name, inx_name, otx_knot, inx_knot, unknown_str
 
 #     csv_delimiter = ","
 #     x_ideas = create_init_stance_idea_csv_strs()
