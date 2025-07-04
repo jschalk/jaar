@@ -118,7 +118,7 @@ from src.a08_believer_atom_logic.test._util.a08_str import (
     sqlite_datatype_str,
 )
 from src.a10_believer_calc.believer_calc_config import (
-    config_believer_calc_file_path,
+    config_believer_calc_path,
     get_all_believer_calc_args,
     get_believer_calc_args_sqlite_datatype_dict,
     get_believer_calc_args_type_dict,
@@ -138,11 +138,11 @@ def test_get_believer_calc_config_dict_Exists():
     expected_dir = create_path(src_dir, "a10_believer_calc")
 
     # WHEN
-    config_path = config_believer_calc_file_path()
+    config_path = config_believer_calc_path()
     # THEN
     expected_path = create_path(expected_dir, "believer_calc_config.json")
     assert config_path == expected_path
-    assert os_path_exists(config_believer_calc_file_path())
+    assert os_path_exists(config_believer_calc_path())
 
 
 def test_get_believer_calc_config_dict_ReturnsObj_CheckLevel0Keys():

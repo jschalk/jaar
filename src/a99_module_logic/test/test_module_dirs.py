@@ -407,8 +407,13 @@ def test_Modules_path_FunctionStructureAndFormat():
 
     print(f"Total path functions found: {len(path_functions)}")
     for function_name, file_path in path_functions.items():
-        func_docstring = get_docstring(file_path, function_name).replace("\n", "")
-        print(f"docstring for {function_name}: \t{func_docstring}")
+        func_docstring = get_docstring(file_path, function_name)
+        if not func_docstring:
+            print(f"docstring for {function_name} is None")
+        else:
+            print(
+                f"docstring for {function_name}: \t{func_docstring.replace("\n", "")}"
+            )
         assert func_docstring is not None
 
     print(f"Path functions: {path_functions.keys()=}")

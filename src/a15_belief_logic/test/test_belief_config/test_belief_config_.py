@@ -32,12 +32,11 @@ from src.a11_bud_logic.test._util.a11_str import (
     tran_time_str,
 )
 from src.a15_belief_logic.belief_config import (
-    config_file_dir,
+    belief_config_path,
     get_belief_args_class_types,
     get_belief_args_dimen_mapping,
     get_belief_args_set,
     get_belief_config_dict,
-    get_belief_config_filename,
     get_belief_dimens,
 )
 from src.a15_belief_logic.test._util.a15_str import (
@@ -59,14 +58,10 @@ from src.a15_belief_logic.test._util.a15_str import (
 )
 
 
-def test_get_belief_config_filename_ReturnsObj():
-    # ESTABLISH / WHEN / THEN
-    assert get_belief_config_filename() == "belief_config.json"
-
-
 def test_config_file_dir_ReturnsObj_Belief() -> str:
     src_dir = create_path(os_getcwd(), "src")
-    assert config_file_dir() == create_path(src_dir, "a15_belief_logic")
+    module_dir = create_path(src_dir, "a15_belief_logic")
+    assert belief_config_path() == create_path(module_dir, "belief_config.json")
 
 
 def test_get_belief_config_dict_ReturnsObj():
