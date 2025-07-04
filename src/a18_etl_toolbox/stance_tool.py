@@ -142,21 +142,21 @@ ORDER BY
     return x_csv
 
 
-# def add_pidginunit_to_stance_csv_strs(
-#     cursor: sqlite3_Cursor, belief_csv_strs: dict[str, str], csv_delimiter: str
-# ) -> str:
-#     br00042_csv = belief_csv_strs.get("br00042")
-#     br00043_csv = belief_csv_strs.get("br00043")
-#     br00044_csv = belief_csv_strs.get("br00044")
-#     br00045_csv = belief_csv_strs.get("br00045")
-#     br00042_csv = add_to_br00042_csv(br00042_csv, x_pidgin, csv_delimiter)
-#     br00043_csv = add_to_br00043_csv(br00043_csv, x_pidgin, csv_delimiter)
-#     br00044_csv = add_to_br00044_csv(br00044_csv, x_pidgin, csv_delimiter)
-#     br00045_csv = add_to_br00045_csv(br00045_csv, x_pidgin, csv_delimiter)
-#     belief_csv_strs["br00042"] = br00042_csv
-#     belief_csv_strs["br00043"] = br00043_csv
-#     belief_csv_strs["br00044"] = br00044_csv
-#     belief_csv_strs["br00045"] = br00045_csv
+def add_pidgin_rows_to_stance_csv_strs(
+    cursor: sqlite3_Cursor, belief_csv_strs: dict[str, str], csv_delimiter: str
+) -> str:
+    br00042_csv = belief_csv_strs.get("br00042")
+    br00043_csv = belief_csv_strs.get("br00043")
+    br00044_csv = belief_csv_strs.get("br00044")
+    br00045_csv = belief_csv_strs.get("br00045")
+    br00042_csv = add_to_br00042_csv(br00042_csv, cursor, csv_delimiter)
+    br00043_csv = add_to_br00043_csv(br00043_csv, cursor, csv_delimiter)
+    br00044_csv = add_to_br00044_csv(br00044_csv, cursor, csv_delimiter)
+    br00045_csv = add_to_br00045_csv(br00045_csv, cursor, csv_delimiter)
+    belief_csv_strs["br00042"] = br00042_csv
+    belief_csv_strs["br00043"] = br00043_csv
+    belief_csv_strs["br00044"] = br00044_csv
+    belief_csv_strs["br00045"] = br00045_csv
 
 
 def collect_stance_csv_strs(belief_mstr_dir: str) -> dict[str, str]:
