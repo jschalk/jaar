@@ -58,7 +58,7 @@ from src.a15_belief_logic.test._util.a15_str import (
 )
 
 
-def test_config_file_dir_ReturnsObj_Belief() -> str:
+def test_belief_config_path_ReturnsObj_Belief() -> str:
     src_dir = create_path(os_getcwd(), "src")
     module_dir = create_path(src_dir, "a15_belief_logic")
     assert belief_config_path() == create_path(module_dir, "belief_config.json")
