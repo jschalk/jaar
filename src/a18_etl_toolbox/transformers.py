@@ -21,7 +21,6 @@ from src.a00_data_toolbox.db_toolbox import (
 )
 from src.a00_data_toolbox.file_toolbox import (
     create_path,
-    get_dir_file_strs,
     get_level1_dirs,
     open_file,
     open_json,
@@ -83,7 +82,6 @@ from src.a17_idea_logic.idea_db_tool import (
     get_default_sorted_list,
     split_excel_into_dirs,
 )
-from src.a17_idea_logic.pidgin_toolbox import init_pidginunit_from_dir
 from src.a18_etl_toolbox.db_obj_belief_tool import get_belief_dict_from_voice_tables
 from src.a18_etl_toolbox.db_obj_believer_tool import insert_job_obj
 from src.a18_etl_toolbox.idea_collector import IdeaFileRef, get_all_idea_dataframes
