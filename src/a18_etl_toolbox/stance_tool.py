@@ -81,18 +81,33 @@ ORDER BY
 
 
 def add_to_br00044_csv(x_csv: str, cursor: sqlite3_Cursor, csv_delimiter: str) -> str:
-    for x_otx, x_inx in x_pidginunit.labelmap.otx2inx.items():
-        x_row = [
-            x_pidginunit.face_name,
-            str(x_pidginunit.event_int),
-            x_otx,
-            x_pidginunit.otx_knot,
-            x_inx,
-            x_pidginunit.inx_knot,
-            x_pidginunit.unknown_str,
-        ]
-        x_csv += csv_delimiter.join(x_row)
-        x_csv += "\n"
+    pidlabe_s_vld_tablename = prime_tbl("PIDLABE", "s", "vld")
+    pidcore_s_vld_tablename = prime_tbl("PIDCORE", "s", "vld")
+
+    select_sqlstr = f"""
+SELECT
+  "" event_int
+, pidlabe.face_name
+, pidlabe.otx_label
+, pidlabe.inx_label
+, pidcore.otx_knot
+, pidcore.inx_knot
+, pidcore.unknown_str
+FROM {pidlabe_s_vld_tablename} pidlabe
+JOIN {pidcore_s_vld_tablename} pidcore ON pidcore.face_name = pidlabe.face_name
+ORDER BY 
+  pidlabe.face_name
+, pidlabe.otx_label
+, pidlabe.inx_label
+, pidcore.otx_knot
+, pidcore.inx_knot
+, pidcore.unknown_str
+;
+"""
+    cursor.execute(select_sqlstr)
+    rows = cursor.fetchall()
+    for row in rows:
+        x_csv += f"{csv_delimiter.join(row)}\n"
     return x_csv
 
 
